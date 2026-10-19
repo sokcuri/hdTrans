@@ -42,7 +42,7 @@ node web/build.mjs
 | `HDTRANS_DICTS` | 올릴 사전 폴더 (기본 `dicts`) |
 | `HDTRANS_WASM` | 엔진 빌드 폴더 (기본 `build/wasm`) |
 | `HDTRANS_CLI` | 사전을 컴파일할 CLI (기본 `build/mac/hdtrans`, 없으면 `build/linux/hdtrans`) |
-| `HDTRANS_WEB_EXAMPLES` | 저장소에 없는 예제 텍스트 폴더. `examples.tsv`에 적힌 파일 중 `web/examples/`에 없는 것을 여기서 찾음 |
+| `HDTRANS_WEB_EXAMPLES` | 저장소에 없는 예제 텍스트 폴더. `examples.tsv`에 적힌 파일 중 `web/examples/`에 없는 것을 여기서 찾음. 예제가 하나라도 없으면 빌드 실패 |
 
 `build/web/dist`에는 `index.html`, `js/`, `examples/`, `manifest.json`과 내용 해시 폴더
 `assets/<sha256 앞 16자>/`(`hdtrans_engine.js`, `hdtrans_engine.wasm`, `dicts.hdsnap`)가 생기고, 텍스트, wasm, `.hdsnap`
