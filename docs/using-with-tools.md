@@ -107,9 +107,28 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 
 ## 투컨트롤, TwoControl
 
-공식 2024.08.30 배포판은 자체 `Ehnd` 폴더의 엔진을 사용합니다.
-`J2KEngine.dll`을 복사하거나 위 레지스트리만 바꾸는 방식으로는 연결되지 않습니다.
-이 버전의 하드트랜스 직접 연결 절차는 아직 제공하지 않습니다.
+공식 2024.08.30 배포판 기준입니다.
+
+1. 투컨트롤을 끕니다.
+2. 투컨트롤의 `Ehnd` 폴더에 있는 `Ehnd.dll`과 `Ehnd.dlx`를 백업합니다.
+3. 하드트랜스 배포본의 **32비트 `J2KEngine.dll`을 두 개 복사**하고, 각각 `Ehnd.dll`과 `Ehnd.dlx`로 이름을 바꿔 기존 두 파일을 교체합니다.
+4. 하드트랜스 배포본의 **`hdTrans` 폴더를 투컨트롤의 `Ehnd` 폴더 안에** 복사합니다.
+5. 나머지 투컨트롤 동봉 파일은 그대로 둡니다.
+6. 투컨트롤을 다시 실행하고 이지트랜스 번역을 사용합니다.
+
+```text
+TwoControl\
+  TwoControl.exe
+  Ehnd\
+    Ehnd.dll
+    Ehnd.dlx
+    hdTrans\
+      dicts.hdsnap
+      dicts.txt
+      user\
+```
+
+`Ehnd.dll`과 `Ehnd.dlx`는 둘 다 하드트랜스 DLL의 복사본입니다. 원본 Ehnd DLL을 다시 덮어쓰지 마세요.
 
 ## VNR, Visual Novel Reader
 

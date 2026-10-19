@@ -183,10 +183,12 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 - [공식 GitHub][twocontrol-repo]는 배포 저장소이며 엔진 로더 소스는 공개되어 있지 않습니다. 아래 내용은 [2024.08.30 릴리스][twocontrol-release]의 `TwoControl.rar`에 한정한 정적 분석입니다. 다른 버전의 동작으로 일반화하지 않습니다.
 - `TwoControl.exe`와 `dll/CustomData/ezTransXP.dll`은 x86 PE입니다. 엔진은 자체 `Ehnd/Ehnd.dll`을 로드하며, `[Option] EhndUnload`가 켜져 있거나 NTLEA 모듈이 로드된 조건에서는 `Ehnd/Ehnd.dlx`를 선택합니다. 이 로더의 선택 대상은 `J2KEngineH.dll`이 아닙니다.
 - `Ehnd/Dat/JisJK.Inf`, `Ehnd/Dat/JisJK.da`의 존재와 내용을 검사합니다. 사전이 없으면 `HKCU\Software\ChangShin\ezTrans`의 `FilePath` 또는 폴더 선택 창에서 원본 사전을 가져옵니다. 공개 RAR에는 이 파일들과 `Ehnd.dll`, `Ehnd.dlx`가 포함되어 있습니다.
-- 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. 번들 Ehnd가 W 함수를 export하더라도 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않습니다.
+- 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. hdTrans는 이 export와 호출 규약을 제공합니다. 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않으므로 hdTrans의 W 함수 지원과 별개로 클라이언트의 번역 경로는 ANSI입니다.
 - 번역 호출은 `char* __stdcall J2K_TranslateMMNT(int, const char*)` 형태로 두 인자를 전달하고 원래 결과 포인터를 `J2K_FreeMem`에 넘깁니다. export 조회는 플러그인 RVA `0x17ce8a`, 번역 호출은 `0x17dfd7`, 결과 해제는 `0x17e3cb`에서 시작합니다.
-- 원본 Ehnd는 함께 쓰는 원본 엔진의 내부 코드를 패치합니다. `J2KEngine.dll` 복사나 레지스트리 변경만으로 이 번들 엔진을 hdTrans로 바꿀 수 없습니다. 원본 파일 검사와 두 DLL 선택을 모두 처리하는 직접 연결 절차는 아직 정리되지 않았습니다.
-- 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다. 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
+- `Ehnd/Ehnd.dll`과 `Ehnd/Ehnd.dlx`를 모두 x86 hdTrans DLL의 복사본으로 교체합니다. 원본 Ehnd 래퍼 자체를 교체하므로 원본 엔진에 대한 내부 코드 패치는 거치지 않습니다. 나머지 동봉 파일은 유지해 로더의 사전 검사를 통과시킵니다.
+- hdTrans는 파일명과 무관하게 로드된 DLL 옆에서 데이터를 찾으므로 사전과 사용자 파일은 `Ehnd/hdTrans/`에 둡니다. 두 파일을 교체하면 `EhndUnload`와 NTLEA 조건의 어느 분기에서도 hdTrans를 읽습니다. [설치 순서](using-with-tools.md#투컨트롤-twocontrol)
+- 이 교체 방식의 근거는 정적 로더와 호출 계약입니다. 실제 TwoControl GUI는 실행하지 않았고 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
+- 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다.
 
 ### 연결 방법이 정리되지 않은 도구
 
