@@ -71,3 +71,9 @@ sense:年代	幼稚園に通う年代だ。	유치원에 다니는 나이대다.
 sense:年代	古い年代の品だ。	오래된 연대의 물건이다.	keep	senses
 sense:才	経営の才がある。	경영의 재능이 있다.	fix	senses
 sense:才	十才だ。	열살이다.	keep	senses
+dict:高ぶり	高ぶりを抑えた。	흥분을 억제했다.	fix	defaults
+dict:高ぶり	試合前の高ぶりを落ち着かせた。	시합전의 흥분을 침착하게 했다.	fix	defaults
+dict:高ぶり	気持ちが高ぶる。	기분이 흥분된다.	keep	defaults
+dict:高ぶり	気持ちが高ぶりました。	기분이 흥분되었습니다.	keep	defaults
+dict:高ぶり	気持ちが高ぶりながらも、冷静に答えた。	기분이 흥분되면서도, 냉정하게 대답했다.	keep	defaults
+dict:高ぶり	久しぶりに会った。	오랜만에 만났다.	keep	defaults
