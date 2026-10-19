@@ -522,7 +522,21 @@ HD_TEST(SnapshotCompiledPlainDictionaries) {
     HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{1942});
     HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{1946});
     HD_CHECK(s.Senses().contains("腕"));
-    HD_CHECK_EQ(s.GeneratedFamilies().Size(), size_t{32});
+    const auto better = s.Senses().find("マシ");
+    HD_REQUIRE(better != s.Senses().end());
+    HD_REQUIRE(!better->second.empty());
+    const std::string& betterTarget = better->second[0].target;
+    bool betterFamily = false;
+    for (const auto& [id, rows] : s.GeneratedFamilies().GeneratedFamilies()) {
+        HD_CHECK(id.front() != '&' || rows[1] != "많");
+        if (id != betterTarget) continue;
+        betterFamily = true;
+        HD_CHECK_EQ(rows[1], std::string("낫"));
+        HD_CHECK_EQ(rows[5], std::string("나았"));
+        HD_CHECK_EQ(rows[6], std::string("나아"));
+    }
+    HD_CHECK(betterFamily);
+    HD_CHECK_EQ(std::string(s.GeneratedFamilies().PercentRow(betterTarget + "5")), std::string("나았"));
 
     // The later file wins on an equal key and part code.
     LookupContext ctx;
