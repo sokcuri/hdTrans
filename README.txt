@@ -1,32 +1,54 @@
-hdTrans
+하드트랜스 (hdTrans)
 
-1. 원하는 폴더에 압축을 풀면 바로 쓸 수 있습니다. 설치는 필요 없습니다.
+일본어를 한국어로 번역하는 오프라인 번역 프로그램입니다.
+제작자: 소쿠릿
+홈페이지: https://sokcuri.neko.kr/
+X: https://x.com/sokcuri
+웹에서 써 보기: https://trans.kuri.kr
 
-2. 텍스트나 파일은 hdTransGUI.exe 또는 hdtrans.exe로 번역합니다.
-   Linux와 macOS에서는 ./hdtrans를 씁니다.
-   예: hdtrans.exe -in input.txt > output.txt
-   버전 확인: hdtrans.exe -version
+시작하기
 
-3. 이지트랜스용 도구(LunaTranslator, XUnity.AutoTranslator, 아랄트랜스,
-   VNR, 아네모네)에서는 J2KEngine.dll을 불러오는 위치에 J2KEngine.dll과
-   hdTrans 폴더를 함께 둡니다. J2KEngine.dll은 32비트입니다.
-   아랄트랜스와 VNR은 레지스트리 HKCU\Software\ChangShin\ezTrans의
-   FilePath 값을 읽습니다. 이 값은 DLL이 있는 폴더로 지정합니다.
-   도구별 안내: https://github.com/sokcuri/hdTrans/blob/main/docs/using-with-tools.md
+1. 원하는 폴더에 압축을 풉니다. 별도 설치나 소스 빌드는 필요 없습니다.
+2. Windows에서는 hdTransGUI.exe를 실행합니다.
+   일본어를 넣고 "번역하기"를 누릅니다. 파일은 "문서 번역"에서 고릅니다.
+3. CLI는 터미널에서 압축을 푼 폴더로 이동해 실행합니다.
+   입력과 출력은 UTF-8입니다.
 
-4. 사용자 사전과 설정은 hdTrans\user\에 둡니다.
-   Linux와 macOS에서는 프로그램 옆 user/에 둡니다.
-   userdict.example.txt를 참고해 userdict.txt를 만드세요.
-   여러 파일로 나누려면 userdict로 시작하는 .txt 이름을 씁니다.
-   설정은 hdtrans.config.example.yaml을 hdtrans.config.yaml로 복사해 고칩니다.
-   업데이트는 같은 폴더에 덮어 풀면 됩니다. 사용자 파일은 유지됩니다.
-   배포본의 견본 파일은 수정하지 마세요. 업데이트 때 교체됩니다.
+   Windows:
+   .\hdtrans.exe --in input.ja.txt --out output.ko.txt
 
-5. Ehnd(꿀도르)는 기본으로 꺼져 있습니다. 켜면 번역 품질이 낮아질 수 있습니다.
+   Linux, macOS:
+   ./hdtrans --in input.ja.txt --out output.ko.txt
 
-Windows의 hdtrans.exe와 hdTransGUI.exe는 64비트입니다.
-32비트 환경에서는 hdtrans_x86.exe를 씁니다.
-hdTransEngine.dll과 hdTransEngine_x86.dll은 다른 프로그램에 넣어 쓰는 개발자용 파일입니다.
+Windows의 GUI와 hdtrans.exe는 64비트입니다.
+32비트 CLI는 hdtrans_x86.exe, 이지트랜스 연결용 J2KEngine.dll은 32비트입니다.
+hdTransEngine.dll과 hdTransEngine_x86.dll은 개발자용 C API입니다.
 
-소스와 안내: https://github.com/sokcuri/hdTrans
-라이선스: AGPL-3.0-or-later, 외부 라이브러리는 THIRD-PARTY-NOTICES.txt를 확인하세요.
+다른 번역 도구에 연결하기
+
+도구가 읽는 위치에 J2KEngine.dll과 hdTrans 폴더를 함께 둡니다.
+기존 DLL은 먼저 백업하세요. 도구에 엔진 경로를 지정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
+XUnity는 기존 J2KEngineH.dll을 먼저 읽으므로 남아 있는지 확인하세요.
+도구별 설정: https://github.com/sokcuri/hdTrans/blob/main/docs/using-with-tools.md
+
+사전과 설정
+
+기본 사전은 Windows에서 hdTrans\dicts.hdsnap, Linux와 macOS에서 프로그램 옆 dicts.hdsnap입니다.
+같은 폴더의 dicts.txt는 사전 버전입니다. 원본 TSV는 필요 없습니다.
+
+사용자 사전은 Windows에서 hdTrans\user\userdict.txt,
+Linux와 macOS에서 user/userdict.txt에 만듭니다.
+UTF-8로 저장하고 일본어와 한국어를 탭으로 구분합니다.
+userdict로 시작하는 .txt 파일로 나누어도 됩니다.
+
+설정은 같은 user 폴더의 hdtrans.config.example.yaml을 hdtrans.config.yaml로 복사해 고칩니다.
+Ehnd 사전은 기본으로 꺼져 있으며 필요할 때 설정에서 켭니다. 번역 품질이 낮아질 수 있습니다.
+원본 Ehnd DLL을 덮어쓰지 마세요.
+
+업데이트할 때는 실행 중인 번역 창과 연결 도구를 끄고 같은 폴더에 덮어 풉니다.
+직접 만든 사용자 사전과 설정은 유지됩니다. *.example.* 견본은 교체되니 복사해서 쓰세요.
+
+다운로드와 안내: https://github.com/sokcuri/hdTrans
+오류, 오역 신고: https://github.com/sokcuri/hdTrans/issues/new/choose
+라이선스: AGPL-3.0-or-later (LICENSE)
+외부 라이브러리 라이선스: THIRD-PARTY-NOTICES.txt
