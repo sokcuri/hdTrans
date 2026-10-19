@@ -1,6 +1,6 @@
 # 사전
 
-사전은 UTF-8 TSV 파일을 담은 폴더입니다. 저장소의 `dicts/`가 기본 사전입니다.
+원본 사전은 UTF-8 TSV 파일을 담은 폴더입니다. 저장소의 `dicts/`가 기본 사전입니다.
 
 ## 배포판과 git의 사전
 
@@ -100,10 +100,11 @@ TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파�
 - 사전 폴더 목록을 차례로 불러오며, 뒤 폴더가 앞 폴더를 덮어씁니다.
 - 각 폴더에서는 최상위의 `*.tsv` 파일만 이름 순서로 읽습니다. 하위 폴더는 읽지 않습니다.
 - 프로그램 폴더에 `hdTrans/` 디렉터리가 있으면 데이터 루트로 쓰고, 없으면 프로그램 폴더 자체를 씁니다.
-  이름은 대소문자를 가리지 않습니다. 사전은 `dicts/`, 설정과 사용자 사전은 `user/`에 둡니다.
-  Windows 배포는 `hdTrans/` 아래, macOS와 Linux CLI 배포는 최상위에 이 폴더들을 둡니다.
-- CLI는 `-dicts DIR,DIR`(기본값: 데이터 루트의 `dicts`, 없으면 현재 폴더의 `dicts`), C API는
-  `hdTrans_Initialize`에 폴더 목록을 줍니다. `J2KEngine.dll`은 데이터 루트의 `dicts/`를 씁니다.
+  이름은 대소문자를 가리지 않습니다. 기본 사전은 `dicts.hdsnap` 또는 `dicts/`, 설정과 사용자 사전은 `user/`에 둡니다.
+  Windows 배포는 `hdTrans/` 아래, macOS와 Linux CLI 배포는 프로그램 옆에 둡니다.
+- CLI, C API, GUI와 `J2KEngine.dll`은 사전을 따로 지정하지 않으면 데이터 루트의 `dicts.hdsnap`, `dicts/`
+  순서로 찾습니다. CLI는 둘 다 없으면 현재 폴더의 `dicts`를 씁니다. 설정의 `dicts`나 명시한 사전 목록이 우선합니다.
+  선택한 `.hdsnap`이 잘못되었으면 TSV로 바꾸지 않고 실패합니다.
 - 폴더 다음에 [사용자 사전 파일](#사용자-사전-파일)를 불러옵니다.
 - 목록의 첫 항목이 `.hdsnap` 파일이면 [컴파일한 사전](#컴파일한-사전-hdsnap)입니다.
 
@@ -283,21 +284,20 @@ Ehnd(이지트랜스 확장)의 전처리, 후처리 필터, SkipLayer, 사용�
 
 ## 컴파일한 사전 (.hdsnap)
 
-사전 폴더의 열 파일을 캐시와 같은 형식의 파일 하나로 컴파일해 두고 TSV 대신 불러올 수 있습니다. 배포판과 웹
-데모가 이렇게 씁니다([web.md](web.md)). 불러오는 데 TSV를 컴파일하는 메모리와 시간이 들지 않습니다.
+기본 사전을 `dicts.hdsnap` 하나로 묶어 원본 TSV 폴더 없이 불러올 수 있습니다. 열 사전은 미리 컴파일하고,
+일반 사전, 가나 표기, 이름 읽기와 기본 전후처리 필터도 함께 담습니다. 배포판과 [웹 데모](web.md)가 이 파일을 씁니다.
 
 ```sh
-hdtrans -dicts dicts -compile-snapshot "$PWD/build/dicts.hdsnap"
-hdtrans -dicts "$PWD/build/dicts.hdsnap",dicts -in in.txt
+hdtrans --dicts dicts --compile-snapshot "$PWD/build/dicts.hdsnap"
+hdtrans --dicts "$PWD/build/dicts.hdsnap" --in in.txt
 ```
 
-- `-compile-snapshot FILE`은 폴더의 열 파일을 FILE에 컴파일하고 종료합니다. 별도 사용자 사전 파일은 넣지 않습니다.
+- `--compile-snapshot FILE`은 기본 사전을 FILE에 컴파일하고 종료합니다. 별도 사용자 사전 파일은 넣지 않습니다.
   FILE이 있는 폴더는 심볼릭 링크가 아니어야 합니다.
-- 폴더 목록(`-dicts`, `hdTrans_Initialize`)의 첫 항목이 `.hdsnap`으로 끝나면 그 파일의 열 사전이 나머지
-  폴더의 열 파일을 대신합니다. 나머지 폴더의 열 파일은 읽지 않고, 열 파일이 아닌 파일(`kana.tsv` 등)과
-  사용자 사전만 그 위에 불러옵니다. 캐시는 쓰지 않습니다.
-- 나머지 폴더는 컴파일할 때 준 폴더 수 이상이어야 합니다. 오류와 경고의 파일 이름은 같은 순서의 폴더로
-  나타납니다.
+- 사전 목록(`--dicts`, `hdTrans_Initialize`)에 `.hdsnap` 파일 하나만 넘기면 내장된 기본 사전을 읽습니다.
+  원본 TSV나 폴더는 필요 없고 사전 캐시도 쓰지 않습니다. 사용자 사전은 별도로 읽습니다.
+- 기존 호출과의 호환을 위해 `.hdsnap` 뒤에 폴더를 지정할 수도 있습니다. 이때 열 사전은 스냅샷에서 읽고,
+  일반 사전과 필터는 내장 내용 대신 지정한 폴더에서 다시 읽습니다.
 - 형식은 고정 폭 리틀 엔디언이라 포인터 크기나 컴파일러와 관계없이 같은 엔진 데이터(같은 `src/core/`)로
   빌드한 엔진이면 읽습니다. 64비트 CLI로 컴파일한 파일을 32비트 DLL이나 WebAssembly가 읽을 수 있습니다.
   엔진 데이터가 다르면 불러오기가 실패합니다.

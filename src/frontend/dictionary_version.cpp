@@ -23,7 +23,11 @@ std::string DictionaryVersion(const std::vector<std::string>& directories) {
     const auto& utf8 = directories.front();
     std::filesystem::path base(std::u8string(reinterpret_cast<const char8_t*>(utf8.data()), utf8.size()));
     if (base.filename().empty()) base = base.parent_path();
-    if (base.extension() != ".hdsnap") {
+    auto extension = base.extension().u8string();
+    for (char8_t& c : extension) {
+        if (c >= u8'A' && c <= u8'Z') c = static_cast<char8_t>(c - u8'A' + u8'a');
+    }
+    if (extension != u8".hdsnap") {
         const std::string version = ReadVersion(base / "dicts.txt");
         if (!version.empty()) return version;
     }

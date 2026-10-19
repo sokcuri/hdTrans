@@ -1,4 +1,5 @@
 #include "core/hdtrans.h"
+#include "core/dict/snapshot.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -47,6 +48,77 @@ std::string Errors() {
     return result;
 }
 
+template<class Initialize, class Reload, class Terminate, class Translation>
+void CheckDefaultLayouts(const std::filesystem::path& folder, Initialize initialize, Reload reload,
+                         Terminate terminate, Translation translation) {
+    std::error_code error;
+    const auto oldCwd = std::filesystem::current_path(error);
+    const auto cwd = folder / "fixtures/unrelated-cwd";
+    std::filesystem::create_directories(cwd, error);
+    std::filesystem::current_path(cwd, error);
+    Check(!error, "use unrelated working directory for default discovery");
+    for (const bool nested : {false, true}) {
+        const auto data = nested ? folder / "HDTRANS" : folder;
+        const auto dicts = data / "DiCtS";
+        const auto user = data / "USER";
+        const auto snapshot = data / "DiCtS.HdSnAp";
+        const auto source = folder / "fixtures/snapshot-source";
+        const auto config = user / "HDTRANS.CONFIG.YAML";
+        std::filesystem::create_directories(dicts, error);
+        std::filesystem::create_directories(user, error);
+        Write(dicts / "base.tsv", "key\tko\tpos\tid\n猫\t야옹이\tN110\t1\n");
+        Write(user / "USERDICT.TSV", "犬\t새사전\n");
+        Check(initialize(), "initialize default TSV fallback");
+        translation("猫", "야옹이", "default TSV fallback translation");
+        translation("犬", "새사전", "default user discovery with TSV fallback");
+        Write(snapshot, "damaged snapshot\n");
+        reload(false);
+        translation("猫", "야옹이", "bad default snapshot reload retains dictionary");
+        terminate();
+        Check(!initialize(), "bad default snapshot does not fall back to TSV");
+        terminate();
+        std::filesystem::remove(snapshot, error);
+
+        std::filesystem::create_directories(source, error);
+        Write(source / "base.tsv", "key\tko\tpos\tid\n猫\t고양이\tN110\t1\n");
+        Check(hdTrans::dict::CompileSnapshot({Utf8(source)}, Utf8(snapshot)), "compile standalone default snapshot");
+        std::filesystem::remove_all(source, error);
+        Check(initialize(), "initialize default snapshot without source TSV");
+        translation("猫", "고양이", "default snapshot takes precedence over TSV");
+        translation("犬", "새사전", "snapshot keeps independent user discovery");
+        reload(true);
+        translation("猫", "고양이", "reload default snapshot without source TSV");
+        Write(user / "USERDICT.TSV", "犬\t뒤파일\n");
+        reload(true);
+        translation("犬", "뒤파일", "snapshot reload reads independent user dictionaries");
+        terminate();
+
+        Write(config, "dicts: ../DiCtS\ncache: off\n");
+        Check(initialize(), "configured TSV overrides adjacent snapshot");
+        translation("猫", "야옹이", "configured dictionary precedence over snapshot");
+        Write(data / "bad.hdsnap", "damaged snapshot\n");
+        Write(config, "dicts: ../bad.hdsnap\ncache: off\n");
+        reload(false);
+        translation("猫", "야옹이", "bad configured snapshot reload retains dictionary");
+        terminate();
+        Check(!initialize(), "bad configured snapshot does not fall back");
+        terminate();
+        std::filesystem::remove(config, error);
+        std::filesystem::remove(data / "bad.hdsnap", error);
+
+        std::filesystem::remove_all(dicts, error);
+        Check(initialize(), "initialize snapshot-only default layout");
+        reload(true);
+        translation("猫", "고양이", "snapshot-only default reload");
+        translation("犬", "뒤파일", "snapshot-only default user discovery");
+        terminate();
+        std::filesystem::remove(snapshot, error);
+        std::filesystem::remove_all(user, error);
+        if (nested) std::filesystem::remove_all(data, error);
+    }
+    std::filesystem::current_path(oldCwd, error);
+    Check(!error, "restore working directory");
+}
 
 #ifdef _WIN32
 template<class Function>
@@ -123,6 +195,17 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         checkTranslation(L"猫", L"검은고양이", "J2K nested config keeps outer Ehnd location");
         terminate();
         std::filesystem::remove_all(data, error);
+        auto wide = [](const std::string& text) {
+            const int size = MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0);
+            std::wstring result(static_cast<std::size_t>(size), L'\0');
+            MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), result.data(), size);
+            return result;
+        };
+        CheckDefaultLayouts(folder, [&] { return initialize(nullptr) == 1; },
+            [&](bool) { reload(); }, [&] { terminate(); },
+            [&](const std::string& input, const std::string& expected, const char* message) {
+                checkTranslation(wide(input).c_str(), wide(expected).c_str(), message);
+            });
     }
     FreeLibrary(module);
     std::filesystem::remove(dll, error);
@@ -213,6 +296,12 @@ int main(int argc, char** argv) {
     Check(Translate("犬") == "새사전", "flat user dictionary");
     hdTrans_Terminate();
     std::filesystem::remove_all(folder / "user", error);
+    CheckDefaultLayouts(folder, [] { return hdTrans_Initialize(nullptr) == 0; },
+        [](bool expected) { Check((hdTrans_Reload() == 0) == expected, "C API default reload status"); },
+        [] { hdTrans_Terminate(); },
+        [](const std::string& input, const std::string& expected, const char* message) {
+            Check(Translate(input) == expected, message);
+        });
 #ifdef _WIN32
     CheckJ2K(argv[1], folder);
 #endif

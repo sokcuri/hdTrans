@@ -675,19 +675,31 @@ LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::ve
 
 LoadResult LoadPlainFolders(std::shared_ptr<Snapshot> snapshot, const std::vector<std::string>& folders,
                            std::vector<LoadError> errors, const std::vector<std::string>& userFiles) {
-    SnapshotLoader loader(std::move(snapshot));
+    std::vector<File> files;
     std::vector<LoadError> readErrors;
-    if (!ReadFolderFiles(folders, true, loader.files, readErrors)) return {nullptr, std::move(readErrors)};
+    if (!ReadFolderFiles(folders, true, files, readErrors)) return {nullptr, std::move(readErrors)};
+    return LoadPlainFiles(std::move(snapshot), std::move(files), folders.size(), std::move(errors), userFiles);
+}
+
+LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> files, std::size_t folders,
+                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles) {
+    SnapshotLoader loader(std::move(snapshot));
+    loader.files = std::move(files);
+    std::vector<LoadError> readErrors;
     bool read = true;
     for (const std::string& userFile : userFiles) {
-        read = ReadUserFile(userFile, folders.size(), true, loader.files, readErrors) && read;
+        read = ReadUserFile(userFile, folders, true, loader.files, readErrors) && read;
     }
     if (!read) return {nullptr, std::move(readErrors)};
     loader.errors = std::move(errors);
     if (!loader.ReadLayers()) return {nullptr, std::move(loader.errors)};
     std::vector<std::size_t> rest;
     rest.reserve(loader.files.size());
-    for (std::size_t i = 0; i < loader.files.size(); i++) rest.push_back(i);
+    for (std::size_t i = 0; i < loader.files.size(); i++) {
+        if (Column(loader.files[i])) return {nullptr, {{loader.files[i].name, LoadErrorKind::Header, 1,
+                                                       TsvErrorKind::Read, "expected a plain dictionary file"}}};
+        rest.push_back(i);
+    }
     return loader.FinishPlain(rest);
 }
 

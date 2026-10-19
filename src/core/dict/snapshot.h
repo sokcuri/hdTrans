@@ -176,9 +176,9 @@ struct LoadResult {
 
 // Lists the *.tsv files of the folders in order, those of each folder in name order,
 // and reads them, then the user dictionary file userFile (none when empty or missing).
-// A first entry ending in .hdsnap is a snapshot compiled by CompileSnapshot from as many
-// folders or fewer: its column layers stand for the column files of the other entries,
-// which are not read, and no cache is used. A column userFile fails such a load.
+// A first entry ending in .hdsnap loads a compiled snapshot without a cache. With no
+// other entries, its embedded plain files are used. Otherwise, the entries supply the
+// current plain files instead of the embedded ones. A column userFile fails such a load.
 LoadResult LoadFolders(const std::vector<std::string>& folders, std::string_view cacheDir = {}, bool verify = false,
                        bool cacheWrite = true, std::string_view userFile = {});
 // Loads explicit user files in order.
@@ -191,8 +191,11 @@ LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::ve
 // plain userFile.
 LoadResult LoadPlainFolders(std::shared_ptr<Snapshot> snapshot, const std::vector<std::string>& folders,
                            std::vector<LoadError> errors, const std::vector<std::string>& userFiles);
-// Compiles the column files of the folders to an immutable resource; publishes only a
-// fully validated file. Any build of the same engine data reads it (LoadFolders).
+// Finishes a new column-only snapshot with ordered plain files and external user files.
+LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> files, std::size_t folders,
+                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles);
+// Compiles all dictionary files to a standalone resource; publishes only a fully
+// validated file. Any build of the same engine data reads it (LoadFolders).
 bool CompileSnapshot(const std::vector<std::string>& folders, std::string_view outPath);
 // Loads files in load order.
 LoadResult Load(std::vector<File> files);

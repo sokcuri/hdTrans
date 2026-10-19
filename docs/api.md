@@ -17,13 +17,13 @@ hdTrans는 하나의 정적 라이브러리(`hdTransCore`)와 그 위의 얇은 
 각 줄 뒤에 `\n`을 붙입니다.
 
 ```
-hdtrans [--json] [--version] [--config FILE] [--dicts DIR,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
+hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
 ```
 
 | 옵션 | 설명 |
 |---|---|
 | `--config FILE` | 기본 `user/hdtrans.config.yaml` 대신 읽을 설정 파일 |
-| `--dicts DIR[,DIR...]` | 불러올 사전 폴더 (순서대로, 뒤가 앞을 덮어씀). 기본값은 데이터 루트의 `dicts`, 없으면 현재 폴더의 `dicts`. 첫 항목이 `FILE.hdsnap`이면 폴더의 열 파일 대신 그 [컴파일한 사전](dictionary-files.md#컴파일한-사전-hdsnap)을 씀 |
+| `--dicts PATH[,PATH...]` | 사전 폴더 목록 또는 [컴파일한 사전](dictionary-files.md#컴파일한-사전-hdsnap) `.hdsnap` 파일. 스냅샷 하나면 원본 폴더 없이 읽음. 기본값은 데이터 루트의 `dicts.hdsnap`, `dicts/`, 현재 폴더의 `dicts` 순서 |
 | `--userdict PATH` | 사용자 사전 파일이나 폴더. 여러 번 지정 가능. 기본값은 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`. 빈 값이면 끔. 명시한 파일이 하나뿐이면 오류 때 실패 |
 | `--in FILE`, `--file FILE` | 표준 입력 대신 UTF-8 파일을 읽음 |
 | `--out FILE` | 결과를 UTF-8 파일로 저장. 생략하면 표준 출력. `--json`과 함께 쓰면 JSON 저장 |
@@ -36,8 +36,8 @@ hdtrans [--json] [--version] [--config FILE] [--dicts DIR,...] [--userdict PATH]
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
 | `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사 |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
-| `--compile-snapshot FILE` | 폴더의 열 파일을 FILE(`.hdsnap`)에 컴파일하고 종료. FILE을 출력 |
-| `--no-cache` | 캐시 없이 TSV만 읽음 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음) |
+| `--compile-snapshot FILE` | 기본 사전 전체를 FILE(`.hdsnap`)에 컴파일하고 종료. FILE을 출력 |
+| `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |
 | `--why` | 단어와 어미 선택, shadow 점수, 처리 단계와 Ehnd 필터 실행 로그를 표준 오류에 씀 |
 | `--select-shadow` | 번역은 바꾸지 않고 가장 짧은 대상(`shortest-target`)으로 점수를 매김. `--why`에 나타남 |
 | `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
@@ -66,9 +66,10 @@ hdtrans [--json] [--version] [--config FILE] [--dicts DIR,...] [--userdict PATH]
 
 ### 설정 파일
 
-프로그램 폴더에 `hdTrans/` 디렉터리가 있으면 그곳이 데이터 루트이고, 없으면 프로그램 폴더 자체입니다.
-이름은 대소문자를 가리지 않습니다. 사전은 `dicts/`, 사용자 파일은 `user/`에 두며, 옛 배치의 프로그램 옆
-`userdict.tsv`와 `hdtrans.config.yaml`도 지원합니다.
+실행 파일이나 DLL 옆에 `hdTrans/` 디렉터리가 있으면 그곳이 데이터 루트이고, 없으면 실행 파일이나 DLL이 있는 폴더입니다.
+이름은 대소문자를 가리지 않습니다. 기본 사전은 `dicts.hdsnap`, 없으면 `dicts/`를 읽습니다.
+선택한 스냅샷을 읽지 못하면 TSV로 바꾸지 않고 실패합니다. 사용자 파일은 `user/`에 두며,
+옛 배치의 프로그램 옆 `userdict.tsv`와 `hdtrans.config.yaml`도 지원합니다.
 
 데이터 루트의 `user/hdtrans.config.yaml`을 시작할 때 읽습니다. DLL은 `hdTrans_Reload`나
 `J2K_ReloadUserDict`에서도 다시 읽습니다. 파일이 없으면 기본값을 쓰며 Ehnd는 자동으로 켜지지 않습니다.
@@ -116,7 +117,7 @@ UTF-8 BOM으로 저장합니다. 문서 전체를 한 번에 번역하므로 문
 
 | 함수 | 설명 |
 |---|---|
-| `int hdTrans_Initialize(const char* dirs)` | 사전 폴더를 불러옴. `dirs`는 NUL로 구분하고 NUL 두 개로 끝나는 목록이며 뒤 폴더가 앞을 덮어씀. 첫 항목은 [컴파일한 사전](dictionary-files.md#컴파일한-사전-hdsnap) `.hdsnap`일 수 있음. 0 성공, -1은 사전을 하나도 못 불러왔거나 동시에 진행된 Terminate, Initialize, Reload가 이 불러오기를 취소함 |
+| `int hdTrans_Initialize(const char* dirs)` | 사전 목록을 불러옴. `dirs`는 NUL로 구분하고 NUL 두 개로 끝나며 뒤 폴더가 앞을 덮어씀. `.hdsnap` 하나만 넘겨도 됨. NULL이나 빈 목록이면 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾음. 0 성공, -1은 불러오기 실패 또는 동시에 진행된 Terminate, Initialize, Reload가 이 불러오기를 취소함 |
 | `void hdTrans_Terminate(void)` | 세션과 사전 해제. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
 | `int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn)` | `text[0..n)`(`\n`으로 구분한 한 줄 이상)을 프로세스 세션에서 번역. `*out`에 NUL로 끝나는 버퍼, `*outn`에 길이(NUL 제외). 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reset(void)` | 세션이 앞선 텍스트에서 배운 이름과 문맥을 잊어 다음 번역이 처음처럼 시작함. 0 성공, -1 초기화 전, 종료 후 |
@@ -130,7 +131,7 @@ UTF-8 BOM으로 저장합니다. 문서 전체를 한 번에 번역하므로 문
 ```c
 #include "core/hdtrans.h"
 
-if (hdTrans_Initialize("dicts\0user\0") != 0) return 1;
+if (hdTrans_Initialize(NULL) != 0) return 1;
 const char* text = "猫が好きです。";
 char* out = NULL;
 size_t outn = 0;
@@ -148,7 +149,8 @@ C API는 사전 캐시를 읽기만 하고 새로 저장하지 않습니다([dic
 이지트랜스의 `J2KEngine.dll`과 같은 이름의 함수를 `__stdcall`로 내보냅니다(`src/j2kengine/j2kengine.def`).
 Windows 전용이며, 이지트랜스를 불러오는 도구는 대부분 32비트이므로 x86 빌드를 씁니다.
 
-- 사전은 데이터 루트의 `dicts/`와 `user/`의 `userdict*.txt`, `userdict*.tsv`에서 읽습니다. 호스트가 넘기는 사전 경로는 무시합니다.
+- 기본 사전은 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾습니다.
+  사용자 사전은 `user/`의 `userdict*.txt`, `userdict*.tsv`에서 따로 읽습니다. 호스트가 넘기는 사전 경로는 무시합니다.
   사용자 사전의 추가, 변경, 삭제는 자동 반영됩니다([dictionary-files.md](dictionary-files.md#사용자-사전-파일)). 불러오지 못하면
   빼고 시작하며 이유를 디버거 출력(`OutputDebugString`)에 씁니다.
 - Ehnd는 설정 파일의 `ehnd`로 켭니다. 켠 폴더가 바뀌면 함께 다시 읽으며 건너뛴 줄은
@@ -179,7 +181,7 @@ Windows 전용이며, 이지트랜스를 불러오는 도구는 대부분 32비�
 
 ## WebAssembly
 
-`emcmake cmake --preset wasm`으로 `hdTransEngine.js`(ES6 모듈)와 `hdTransEngine.wasm`을 만듭니다.
+`emcmake cmake --preset wasm`으로 `hdtrans_engine.js`(ES6 모듈)와 `hdtrans_engine.wasm`을 만듭니다.
 C++ 엔진은 Embind로 연결하고, TypeScript에서는 `HdTrans.init()`, `translate()`, 사용자 사전과
 Ehnd 설정 메서드를 씁니다. C API 포인터나 `ccall`, `FreeMem`을 직접 다루지 않습니다.
 네이티브 C API와 J2K 함수의 사용법은 바뀌지 않습니다.

@@ -109,6 +109,9 @@ int hdTrans_Initialize(const char* dirs) {
     const auto& settings = config.settings;
     const auto requestedPaths = paths;
     if (paths.empty() && settings.dicts) paths = *settings.dicts;
+#if !defined(__EMSCRIPTEN__)
+    else if (paths.empty()) paths = {hdTrans::dict::ShippedFolder(dir)};
+#endif
     const auto userPaths = settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
     const std::string ehnd = settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "";
     {
@@ -172,6 +175,9 @@ int hdTrans_Reload(void) {
     const auto config = hdTrans::internal::LoadConfig(configPath);
     const auto& settings = config.settings;
     if (dirs.empty() && settings.dicts) dirs = *settings.dicts;
+#if !defined(__EMSCRIPTEN__)
+    else if (dirs.empty()) dirs = {hdTrans::dict::ShippedFolder(dir)};
+#endif
     const auto userPaths = settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
     const std::string configuredEhnd = settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "";
     const std::string ehnd = ehndOverride.value_or(configuredEhnd);

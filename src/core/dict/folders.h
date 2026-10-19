@@ -12,8 +12,9 @@ std::string FindChild(std::string_view folder, std::string_view name, bool direc
 std::string DataFolder(std::string_view programDir);
 // The user directory of the data root.
 std::string UserFolder(std::string_view programDir);
+// Data root's dicts.hdsnap when present, otherwise its dicts folder.
 std::string ShippedFolder(std::string_view programDir);
-// ShippedFolder(programDir) when it is a folder, else dicts in the current directory.
+// ShippedFolder(programDir) when it exists, else dicts in the current directory.
 std::string DefaultFolder(std::string_view programDir);
 // Default user sources; the legacy file precedes the user folder in a flat layout.
 std::vector<std::string> UserPaths(std::string_view programDir);

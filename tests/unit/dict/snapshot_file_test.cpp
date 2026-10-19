@@ -163,7 +163,7 @@ HD_TEST(SnapshotFileWriter) {
     HD_REQUIRE(bytes.size() > 256);
     HD_CHECK(std::memcmp(bytes.data(), "HDSNAP\r\n", 8) == 0);
     HD_CHECK(bytes[8] == std::byte{1});
-    HD_CHECK(bytes[12] == std::byte{1});
+    HD_CHECK(bytes[12] == std::byte{2});
     HD_CHECK(!hdTrans::dict::CompileSnapshot({temp.File("absent")}, temp.File("bad.hdsnap")));
     HD_CHECK(!std::filesystem::exists(temp.path / "bad.hdsnap"));
     const auto cache = hdTrans::dict::internal::SnapshotPath({FixtureFolder()}, temp.File("cache"));
@@ -755,14 +755,24 @@ void CheckLoadErrors(const std::vector<hdTrans::dict::LoadError>& actual,
     }
 }
 
-void CheckPlainCompilation(const hdTrans::dict::Snapshot& actual, const hdTrans::dict::Snapshot& expected) {
+void CheckPlainCompilation(const hdTrans::dict::Snapshot& actual, const hdTrans::dict::Snapshot& expected, bool portable = false) {
     HD_CHECK_EQ(actual.HasDictionary(), expected.HasDictionary());
-    HD_CHECK(actual.Warnings() == expected.Warnings());
+    HD_REQUIRE(actual.Warnings().size() == expected.Warnings().size());
+    for (size_t i = 0; i < actual.Warnings().size(); i++) {
+        if (portable) {
+            HD_CHECK(Utf8Path(actual.Warnings()[i]).is_relative());
+            HD_CHECK(Utf8Path(actual.Warnings()[i]).filename() == Utf8Path(expected.Warnings()[i]).filename());
+        } else HD_CHECK_EQ(actual.Warnings()[i], expected.Warnings()[i]);
+    }
     HD_REQUIRE(actual.PlainFiles().size() == expected.PlainFiles().size());
     for (size_t i = 0; i < actual.PlainFiles().size(); i++) {
         const auto& a = actual.PlainFiles()[i];
         const auto& b = expected.PlainFiles()[i];
-        HD_CHECK(std::tie(a.folder, a.name, a.text) == std::tie(b.folder, b.name, b.text));
+        HD_CHECK(std::tie(a.folder, a.text, a.layer, a.user, a.head) == std::tie(b.folder, b.text, b.layer, b.user, b.head));
+        if (portable) {
+            HD_CHECK(Utf8Path(a.name).is_relative());
+            HD_CHECK(Utf8Path(a.name).filename() == Utf8Path(b.name).filename());
+        } else HD_CHECK_EQ(a.name, b.name);
     }
     for (bool extra : {false, true}) {
         for (const auto& pair : {std::pair{&actual.Plain(extra), &expected.Plain(extra)},
@@ -2180,14 +2190,20 @@ HD_TEST(SnapshotCompiledFile) {
     HD_REQUIRE(hdTrans::dict::CompileSnapshot(folders, file));
     const auto editable = hdTrans::dict::LoadFoldersTsv(folders);
     HD_REQUIRE(editable.snapshot != nullptr);
-    std::vector<std::string> entries{file};
-    entries.insert(entries.end(), folders.begin(), folders.end());
+    const std::vector<std::string> entries{file};
 
-    // The compiled layers stand for the column files; the folders give the plain files.
+    // The snapshot contains both the columns and the plain files.
     const auto compiled = hdTrans::dict::LoadFolders(entries, temp.File("cache"));
     HD_REQUIRE(compiled.snapshot != nullptr && compiled.snapshot->Mapped() && compiled.snapshot->Healthy());
-    CheckLoadErrors(compiled.errors, editable.errors);
-    CheckPlainCompilation(*compiled.snapshot, *editable.snapshot);
+    HD_REQUIRE(compiled.errors.size() == editable.errors.size());
+    for (size_t i = 0; i < compiled.errors.size(); i++) {
+        const auto& a = compiled.errors[i];
+        const auto& b = editable.errors[i];
+        HD_CHECK(std::tie(a.kind, a.line, a.tsv, a.message) == std::tie(b.kind, b.line, b.tsv, b.message));
+        HD_CHECK(Utf8Path(a.file).is_relative());
+        HD_CHECK(Utf8Path(a.file).filename() == Utf8Path(b.file).filename());
+    }
+    CheckPlainCompilation(*compiled.snapshot, *editable.snapshot, true);
     CheckDictEncoding(compiled.snapshot->Base(), editable.snapshot->Base());
     HD_REQUIRE(compiled.snapshot->User() && compiled.snapshot->Names());
     CheckDictEncoding(*compiled.snapshot->User(), *editable.snapshot->User());
@@ -2205,7 +2221,7 @@ HD_TEST(SnapshotCompiledFile) {
     HD_REQUIRE(columnUser.errors.size() == 1);
     HD_CHECK(columnUser.errors[0].kind == hdTrans::dict::LoadErrorKind::Header);
 
-    // A compiled file needs as many folders as it was compiled from, and must exist.
+    // Explicit replacement folders cannot omit a source folder; the snapshot must exist.
     HD_CHECK(hdTrans::dict::LoadFolders({file, folders[0]}).snapshot == nullptr);
     const auto missing = hdTrans::dict::LoadFolders({temp.File("absent.hdsnap"), folders[0], folders[1]});
     HD_CHECK(missing.snapshot == nullptr);
@@ -2216,20 +2232,20 @@ HD_TEST(SnapshotCompiledFile) {
     // to a copy: Windows does not let a file be rewritten while the snapshots above map it.
     const auto good = ReadBytes(file);
     const auto copy = temp.File("copy.hdsnap");
-    std::vector<std::string> copyEntries{copy};
-    copyEntries.insert(copyEntries.end(), folders.begin(), folders.end());
-    for (int variant = 0; variant < 3; variant++) {
+    const std::vector<std::string> copyEntries{copy};
+    for (int variant = 0; variant < 4; variant++) {
         auto bytes = good;
         switch (variant) {
         case 0: SetField(bytes, 204, sizeof(void*) == 8 ? 4 : 8, 4); break;
         case 1: bytes[208] ^= std::byte{1}; break;
         case 2: bytes[128] ^= std::byte{1}; break;
+        case 3: bytes[96] ^= std::byte{1}; break;
         }
         FixDirectories(bytes);
         HD_REQUIRE(WriteBytes(copy, bytes));
         const auto loaded = hdTrans::dict::LoadFolders(copyEntries);
         HD_CHECK_EQ(loaded.snapshot != nullptr, variant < 2);
-        if (variant == 2) HD_CHECK(!loaded.errors.empty() && loaded.errors[0].file == copy);
+        if (variant >= 2) HD_CHECK(!loaded.errors.empty() && loaded.errors[0].file == copy);
     }
 
     // A damaged compiled file fails the load and is left where it is.
@@ -2237,8 +2253,172 @@ HD_TEST(SnapshotCompiledFile) {
     const size_t blob = FindSection(bytes, 17, 0);
     bytes[static_cast<size_t>(Field(bytes, blob + 8, 8))] ^= std::byte{1};
     HD_REQUIRE(WriteBytes(copy, bytes));
-    const auto damaged = hdTrans::dict::LoadFolders(copyEntries, {}, true);
+    const auto damaged = hdTrans::dict::LoadFolders(copyEntries);
     HD_CHECK(damaged.snapshot == nullptr);
     HD_CHECK(std::filesystem::exists(Utf8Path(copy)));
     HD_CHECK(!std::filesystem::exists(Utf8Path(copy + ".bad")));
+}
+
+HD_TEST(SnapshotCompiledStandaloneAfterSourceRemoval) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    std::error_code ec;
+    for (const char* name : {"first", "second", "empty"}) {
+        HD_REQUIRE(std::filesystem::create_directory(temp.path / name, ec) && !ec);
+    }
+    const std::vector<std::string> folders{temp.File("first"), temp.File("second"), temp.File("empty")};
+    HD_REQUIRE(WriteText(temp.path / "first" / "base.tsv", "key\tko\tpos\tid\n愛\t사랑\tN110\t1\n犬\t개\tN110\t2\n謎\t수수께끼\tunknown-tag\t3\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "names.tsv", "#! layer=names\nkey\tko\tpos\tsem\tid\n難、名\t이름\tN130\tQPN\t1\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "a.tsv", "猫\t냥이\tn\n帰る\t돌아가다\tv5\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "kana.tsv", "#! layer=kana\nあい\t愛\t\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "readings.tsv", "#! layer=readings\n風音\t카자네\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "pre.tsv", "#! layer=prefilter\n猫\t犬\t1\t0\n"));
+    HD_REQUIRE(WriteText(temp.path / "first" / "post.tsv", "#! layer=postfilter\n개\t멍멍이\t1\t0\n"));
+    HD_REQUIRE(WriteText(temp.path / "second" / "a.tsv", "猫\t야옹이\tn\n称える\t일컫다\tv1:ㄷ\n"));
+    HD_REQUIRE(WriteText(temp.path / "second" / "readings.tsv", "#! layer=readings\n風音\t카논\n"));
+    const auto editable = hdTrans::dict::LoadFoldersTsv(folders);
+    HD_REQUIRE(editable.snapshot != nullptr);
+    HD_REQUIRE(editable.errors.size() == 1 && editable.snapshot->Warnings().size() == 1);
+    const auto path = temp.File("DiCtS.HdSnAp");
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot(folders, path));
+    for (const auto& folder : folders) {
+        HD_REQUIRE(std::filesystem::remove_all(Utf8Path(folder), ec) > 0 && !ec);
+    }
+    const auto loaded = hdTrans::dict::LoadFolders({path});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.snapshot->Mapped() && loaded.snapshot->Healthy());
+    CheckPlainCompilation(*loaded.snapshot, *editable.snapshot, true);
+    HD_REQUIRE(loaded.errors.size() == 1);
+    HD_CHECK_EQ(loaded.errors[0].file, (std::filesystem::path("dicts") / "0" / "base.tsv").string());
+    HD_CHECK(std::tie(loaded.errors[0].kind, loaded.errors[0].line, loaded.errors[0].tsv, loaded.errors[0].message) ==
+             std::tie(editable.errors[0].kind, editable.errors[0].line, editable.errors[0].tsv, editable.errors[0].message));
+    CheckDictEncoding(loaded.snapshot->Base(), editable.snapshot->Base());
+    const auto cat = loaded.snapshot->Plain().Search("猫", hdTrans::dict::LookupMode::General);
+    HD_REQUIRE(cat.size() == 1);
+    HD_CHECK_EQ(cat[0]->target, "야옹이");
+    const auto kana = loaded.snapshot->TextPlain().Search("あい", hdTrans::dict::LookupMode::General);
+    HD_REQUIRE(kana.size() == 1);
+    HD_CHECK(kana[0]->kana);
+    HD_CHECK_EQ(kana[0]->target, "사랑");
+    const std::vector<std::string> lines{"風音「こんにちは」", "風音「ありがとう」"};
+    const auto document = hdTrans::pipeline::BuildDocument(*loaded.snapshot, lines);
+    HD_REQUIRE(document != nullptr && document->registry != nullptr);
+    HD_CHECK_EQ(document->registry->Render("風音"), "카논");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.Open({path}));
+    hdTrans::Session session(engine);
+    HD_CHECK_EQ(session.Translate("猫"), "멍멍이");
+
+    HD_REQUIRE(WriteText(temp.path / "user.tsv", "鳥\t새\n"));
+    const auto user = hdTrans::dict::LoadFolders({path}, {}, false, false, temp.File("user.tsv"));
+    HD_REQUIRE(user.snapshot != nullptr && !user.snapshot->PlainFiles().empty());
+    HD_CHECK(user.snapshot->PlainFiles().back().user);
+    HD_CHECK_EQ(user.snapshot->PlainFiles().back().folder, 3);
+    HD_CHECK_EQ(PlainTarget(*user.snapshot, "鳥"), "새");
+    HD_CHECK_EQ(user.snapshot->PlainFiles().size(), editable.snapshot->PlainFiles().size() + 1);
+}
+
+HD_TEST(SnapshotCompiledCurrentPlainFoldersReplaceEmbedded) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    std::error_code ec;
+    HD_REQUIRE(std::filesystem::create_directory(temp.path / "source", ec) && !ec);
+    const auto source = temp.File("source");
+    HD_REQUIRE(WriteText(temp.path / "source" / "base.tsv", "key\tko\tpos\tid\n愛\t사랑\tN110\t1\n"));
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\t고양이\n犬\t개\n"));
+    const auto path = temp.File("dicts.hdsnap");
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot({source}, path));
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\t냥이\n"));
+    const auto current = hdTrans::dict::LoadFoldersTsv({source});
+    const auto legacy = hdTrans::dict::LoadFolders({path, source});
+    HD_REQUIRE(current.snapshot != nullptr && legacy.snapshot != nullptr);
+    CheckPlainCompilation(*legacy.snapshot, *current.snapshot);
+    HD_CHECK_EQ(PlainTarget(*legacy.snapshot, "猫"), "냥이");
+    HD_CHECK(PlainTarget(*legacy.snapshot, "犬").empty());
+    const auto standalone = hdTrans::dict::LoadFolders({path});
+    HD_REQUIRE(standalone.snapshot != nullptr);
+    HD_CHECK_EQ(PlainTarget(*standalone.snapshot, "猫"), "고양이");
+    HD_CHECK_EQ(PlainTarget(*standalone.snapshot, "犬"), "개");
+}
+
+HD_TEST(SnapshotCompiledMalformedPlainSection) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    std::error_code ec;
+    HD_REQUIRE(std::filesystem::create_directory(temp.path / "source", ec) && !ec);
+    const auto source = temp.File("source");
+    HD_REQUIRE(WriteText(temp.path / "source" / "base.tsv", "key\tko\tpos\tid\n愛\t사랑\tN110\t1\n"));
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\t냥이\n"));
+    const auto path = temp.File("dicts.hdsnap");
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot({source}, path));
+    const auto good = ReadBytes(path);
+    const auto plain = FindSection(good, 4, 3);
+    HD_REQUIRE(plain < good.size());
+    const auto start = static_cast<size_t>(Field(good, plain + 8, 8));
+    const auto name = start + 16;
+    const auto nameLength = static_cast<size_t>(Field(good, start + 12, 4));
+    const auto layer = name + nameLength;
+    const auto copy = temp.File("bad.HdSnAp");
+    for (int variant = 0; variant < 16; variant++) {
+        auto bytes = good;
+        switch (variant) {
+        case 0: SetField(bytes, start, 0, 4); break;
+        case 1: SetField(bytes, start, UINT32_MAX, 4); break;
+        case 2: SetField(bytes, start + 4, 0, 4); break;
+        case 3: SetField(bytes, start + 4, UINT32_MAX, 4); break;
+        case 4: SetField(bytes, start + 8, 1, 4); break;
+        case 5: SetField(bytes, start + 8, UINT32_MAX, 4); break;
+        case 6: SetField(bytes, start + 12, UINT32_MAX, 4); break;
+        case 7: bytes[name] = std::byte{'/'}; break;
+        case 8: bytes[name] = std::byte{'\\'}; break;
+        case 9: bytes[name] = std::byte{'.'}; bytes[name + 1] = std::byte{'.'}; bytes[name + 2] = std::byte{'/'}; break;
+        case 10: bytes[name + 1] = std::byte{':'}; break;
+        case 11: bytes[name] = std::byte{0}; break;
+        case 12: SetField(bytes, layer, static_cast<unsigned>(hdTrans::dict::FileLayer::Words), 4); break;
+        case 13: SetField(bytes, layer + 4, UINT32_MAX, 4); break;
+        case 14: bytes[layer + 8] ^= std::byte{1}; break;
+        case 15: SetField(bytes, layer, static_cast<unsigned>(hdTrans::dict::FileLayer::Kana), 4); break;
+        }
+        const auto first = static_cast<size_t>(Field(bytes, plain + 40, 4));
+        const auto segments = static_cast<size_t>(Field(bytes, plain + 44, 4));
+        const auto segmentDirectory = static_cast<size_t>(Field(bytes, 48, 8));
+        for (size_t i = first; i < first + segments; i++) {
+            const auto segment = segmentDirectory + 64 * i;
+            const auto offset = start + static_cast<size_t>(Field(bytes, segment + 8, 8));
+            const auto length = static_cast<size_t>(Field(bytes, segment + 16, 8));
+            SetField(bytes, segment + 24, hdTrans::dict::internal::Crc32c(std::span(bytes).subspan(offset, length)), 4);
+        }
+        FixDirectories(bytes);
+        HD_REQUIRE(WriteBytes(copy, bytes));
+        const auto damaged = hdTrans::dict::LoadFolders({copy, source});
+        HD_CHECK(damaged.snapshot == nullptr);
+        HD_REQUIRE(damaged.errors.size() == 1);
+        HD_CHECK(damaged.errors[0].kind == hdTrans::dict::LoadErrorKind::Read);
+        HD_CHECK(std::filesystem::exists(Utf8Path(copy)));
+        HD_CHECK(!std::filesystem::exists(Utf8Path(copy + ".bad")));
+    }
+}
+
+
+HD_TEST(SnapshotCompiledPlainContentIdentity) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    std::error_code ec;
+    HD_REQUIRE(std::filesystem::create_directory(temp.path / "source", ec) && !ec);
+    const auto source = temp.File("source");
+    HD_REQUIRE(WriteText(temp.path / "source" / "base.tsv", "key\tko\tpos\tid\n愛\t사랑\tN110\t1\n"));
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\t냥이\n"));
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot({source}, temp.File("before.hdsnap")));
+    const auto before = ReadBytes(temp.File("before.hdsnap"));
+    const auto stamp = std::filesystem::last_write_time(temp.path / "source" / "plain.tsv", ec);
+    HD_REQUIRE(!ec);
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\t야옹\n"));
+    std::filesystem::last_write_time(temp.path / "source" / "plain.tsv", stamp, ec);
+    HD_REQUIRE(!ec);
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot({source}, temp.File("after.hdsnap")));
+    const auto after = ReadBytes(temp.File("after.hdsnap"));
+    HD_REQUIRE(before.size() >= 256 && after.size() >= 256);
+    HD_CHECK(!std::equal(before.begin() + 64, before.begin() + 96, after.begin() + 64));
+    const auto loaded = hdTrans::dict::LoadFolders({temp.File("after.hdsnap")});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    HD_CHECK_EQ(PlainTarget(*loaded.snapshot, "猫"), "야옹");
 }

@@ -88,6 +88,7 @@ HD_TEST(DictDataLayouts) {
         HD_CHECK(Path(FindChild(path, "missing")) == program / "missing");
         if (test.data[0]) {
             std::filesystem::create_directory(program / "dicts", error);
+            std::ofstream(program / "dicts.hdsnap") << "outer snapshot\n";
             std::ofstream(program / "userdict.tsv") << "# legacy\n";
             std::ofstream(program / "hdtrans.config.yaml") << "cg: false\n";
             HD_CHECK(Path(ShippedFolder(path)) == data / test.dicts);
@@ -95,6 +96,20 @@ HD_TEST(DictDataLayouts) {
             HD_CHECK(Path(UserFiles(UserPaths(path)).front()) == user / test.userdict);
             HD_CHECK(Path(ConfigFile(path)) == user / test.config);
         }
+        const auto snapshot = data / "DiCtS.HdSnAp";
+        std::ofstream(snapshot) << "damaged snapshot\n";
+        HD_CHECK(Path(ShippedFolder(path)) == snapshot);
+        HD_CHECK(Path(DefaultFolder(path)) == snapshot);
+        HD_CHECK(Path(UserFolder(path)) == (test.user[0] ? user : data / "user"));
+        HD_CHECK(Path(UserFiles(UserPaths(path)).front()) == user / test.userdict);
+        HD_CHECK(Path(ConfigFile(path)) == user / test.config);
+        std::filesystem::remove_all(data / test.dicts, error);
+        HD_CHECK(Path(ShippedFolder(path)) == snapshot);
+        HD_CHECK(Path(DefaultFolder(path)) == snapshot);
+        std::filesystem::remove(snapshot, error);
+        std::filesystem::create_directory(snapshot, error);
+        HD_CHECK(Path(ShippedFolder(path)) == data / "dicts");
+        HD_CHECK_EQ(DefaultFolder(path), "dicts");
     }
     std::filesystem::remove_all(root, error);
 }

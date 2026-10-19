@@ -57,12 +57,19 @@ std::string UserFolder(std::string_view programDir) {
     return FindChild(DataFolder(programDir), "user", true);
 }
 
-std::string ShippedFolder(std::string_view programDir) { return FindChild(DataFolder(programDir), "dicts", true); }
+std::string ShippedFolder(std::string_view programDir) {
+    const auto data = DataFolder(programDir);
+    const auto snapshot = FindChild(data, "dicts.hdsnap");
+    std::error_code error;
+    if (std::filesystem::is_regular_file(PathOf(snapshot), error)) return snapshot;
+    return FindChild(data, "dicts", true);
+}
 
 std::string DefaultFolder(std::string_view programDir) {
     if (programDir.empty()) return "dicts";
     const auto folder = ShippedFolder(programDir);
     std::error_code error;
+    if (std::filesystem::is_regular_file(PathOf(folder), error)) return folder;
     return std::filesystem::is_directory(PathOf(folder), error) ? folder : "dicts";
 }
 

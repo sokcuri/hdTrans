@@ -669,7 +669,10 @@ HD_TEST(dictionary_version_follows_base_data_path) {
     std::ofstream(child / "dicts.txt", std::ios::binary) << "\xEF\xBB\xBF" "child-v2\n";
     HD_CHECK_EQ(version(child), "child-v2");
     HD_CHECK_EQ(hdTrans::frontend::DictionaryVersion({utf8(child) + "/"}), "child-v2");
-    HD_CHECK_EQ(version(root.path / "bundle.hdsnap"), "parent-v1");
+    for (const char* name : {"bundle.hdsnap", "bundle.HdSnAp", "bundle.HDSNAP"}) {
+        std::ofstream(root.path / name, std::ios::binary) << "snapshot";
+        HD_CHECK_EQ(version(root.path / name), "parent-v1");
+    }
     HD_CHECK_EQ(version(other), "parent-v1");
     HD_CHECK_EQ(hdTrans::frontend::DictionaryVersion({utf8(child), utf8(other)}), "child-v2");
     HD_CHECK_EQ(hdTrans::frontend::DictionaryVersion({}), "development (unversioned)");

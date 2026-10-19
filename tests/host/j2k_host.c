@@ -145,6 +145,26 @@ static int DirExists(const wchar_t* path) {
     return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY) != 0;
 }
 
+static int FileExists(const wchar_t* path) {
+    DWORD attr = GetFileAttributesW(path);
+    return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY) == 0;
+}
+
+static int ShippedPath(const wchar_t* module, wchar_t* out, size_t cap) {
+    wchar_t data[MAX_PATH];
+    SiblingPath(module, L"hdTrans", data, MAX_PATH);
+    if (DirExists(data)) {
+        SiblingPath(module, L"hdTrans\\dicts.hdsnap", out, cap);
+        if (FileExists(out)) return 1;
+        SiblingPath(module, L"hdTrans\\dicts", out, cap);
+    } else {
+        SiblingPath(module, L"dicts.hdsnap", out, cap);
+        if (FileExists(out)) return 1;
+        SiblingPath(module, L"dicts", out, cap);
+    }
+    return DirExists(out);
+}
+
 /* Prints a translation to stdout and to the output file, one line per translation. */
 static void Emit(const char* label, const wchar_t* w) {
     int n = WideCharToMultiByte(CP_UTF8, 0, w, -1, NULL, 0, NULL, NULL);
@@ -299,15 +319,19 @@ static void RunCApi(const wchar_t* j2kPath, const wchar_t* dictsPath, int hasDic
             e.terminate();
             CheckCTerminated(&e);
         }
-        ret = e.initialize(dirs);
-        if (hasDicts) Check(ret == 0, "C API Initialize loads dictionaries");
-        if (ret == 0) CheckCTranslation(&e);
+        ret = e.initialize(round % 2 == 0 ? dirs : NULL);
+        if (hasDicts) Check(ret == 0, "C API Initialize loads explicit and default dictionaries");
+        if (ret == 0) {
+            CheckCTranslation(&e);
+            Check(e.reload() == 0, "C API reloads explicit and default dictionaries");
+            CheckCTranslation(&e);
+        }
         if (round == 0) {
             e.terminate();
             e.terminate();
             CheckCTerminated(&e);
-            ret = e.initialize(dirs);
-            if (hasDicts) Check(ret == 0, "C API reinitializes in the same load");
+            ret = e.initialize(NULL);
+            if (hasDicts) Check(ret == 0, "C API reinitializes default dictionaries in the same load");
             if (ret == 0) CheckCTranslation(&e);
         }
         if (round % 2 == 0) {
@@ -371,7 +395,7 @@ int wmain(int argc, wchar_t** argv) {
     wchar_t exePath[MAX_PATH], outPath[MAX_PATH], dictsPath[MAX_PATH];
     wchar_t* results[RESULT_COUNT];
     size_t i;
-    int missing = 0, round, ret;
+    int missing = 0, round, ret, hasDicts;
     if (argc < 2) {
         printf("usage: j2k_host <J2KEngine.dll>\n");
         return 2;
@@ -381,8 +405,7 @@ int wmain(int argc, wchar_t** argv) {
     QueryPerformanceFrequency(&g_freq);
     GetModuleFileNameW(NULL, exePath, MAX_PATH);
     SiblingPath(exePath, L"j2k_host.out.txt", outPath, MAX_PATH);
-    SiblingPath(argv[1], L"hdTrans\\dicts", dictsPath, MAX_PATH);
-    if (!DirExists(dictsPath)) SiblingPath(argv[1], L"dicts", dictsPath, MAX_PATH);
+    hasDicts = ShippedPath(argv[1], dictsPath, MAX_PATH);
     g_out = _wfopen(outPath, L"wb");
     Check(g_out != NULL, "open j2k_host.out.txt next to the executable");
 
@@ -401,20 +424,23 @@ int wmain(int argc, wchar_t** argv) {
     printf("  J2K_InitializeEx returned %d\n", ret);
     printf("memory after first init:\n");
     PrintMemory();
-    Check(!DirExists(dictsPath) || ret == 1, "J2K_InitializeEx loads dictionaries when present");
+    Check(!hasDicts || ret == 1, "J2K_InitializeEx loads dictionaries when present");
     timing.calls = 0;
     timing.ms = 0.0;
     TranslateAll(&e, &timing, results);
     PrintTiming(&timing);
     Check(1, "translate Shift-JIS and UTF-16 lines");
-    if (DirExists(dictsPath)) {
+    if (hasDicts) {
         Check(AllContainHangul(results), "every translation is non-empty and contains Hangul");
     } else {
-        printf("SKIP translation content check: no dicts next to the DLL\n");
+        printf("SKIP translation content check: no dictionary next to the DLL\n");
     }
     FreeResults(results);
     e.reloadUserDict();
     Check(1, "J2K_ReloadUserDict returns");
+    TranslateAll(&e, &timing, results);
+    if (hasDicts) Check(AllContainHangul(results), "translations work after reloading dictionaries");
+    FreeResults(results);
     Check(e.stop(NULL) || 1, "J2K_StopTranslation(NULL) returns");
     ret = e.terminate();
     printf("  J2K_Terminate returned %d\n", ret);
@@ -422,11 +448,11 @@ int wmain(int argc, wchar_t** argv) {
     Check(e.terminate() == 1, "J2K_Terminate succeeds twice");
     CheckTerminated(&e);
     ret = InitEngine(&e);
-    if (DirExists(dictsPath)) Check(ret == 1, "reinitialize in the same DLL load");
+    if (hasDicts) Check(ret == 1, "reinitialize in the same DLL load");
     timing.calls = 0;
     timing.ms = 0.0;
     TranslateAll(&e, &timing, results);
-    if (DirExists(dictsPath)) Check(AllContainHangul(results), "translations work after reinitializing");
+    if (hasDicts) Check(AllContainHangul(results), "translations work after reinitializing");
     FreeResults(results);
     Check(FreeLibrary(e.module) != 0, "FreeLibrary after reinitializing (no Terminate)");
 
@@ -435,7 +461,7 @@ int wmain(int argc, wchar_t** argv) {
         Check(LoadEngine(&e, argv[1]), "load DLL for lifecycle cycle");
         if (!e.module) return 1;
         ret = InitEngine(&e);
-        if (DirExists(dictsPath)) Check(ret == 1, "lifecycle Initialize loads dictionaries");
+        if (hasDicts) Check(ret == 1, "lifecycle Initialize loads dictionaries");
         result = e.translateW(NULL, kWideLine);
         if (ret == 1) Check(ContainsHangul(result), "lifecycle translation succeeds");
         e.freeMem(result);
@@ -460,7 +486,7 @@ int wmain(int argc, wchar_t** argv) {
         Check(FreeLibrary(e.module) != 0, "FreeLibrary after the concurrent run");
     }
 
-    RunCApi(argv[1], dictsPath, DirExists(dictsPath));
+    RunCApi(argv[1], dictsPath, hasDicts);
 
     printf("memory at end:\n");
     PrintMemory();
