@@ -1,4 +1,6 @@
 rule	input	expected	kind	layer
+sound:ではでは	ではでは、また来週。	그럼, 또 다음주.	fix	lookup
+sound:ではでは	会議では質問しない。	회의에서는 질문하지 않는다.	keep	lookup
 L2317	父そっくりの顔だ。	아버지를 빼닮은 얼굴이다.	fix	local
 L2317	荷物をそっくり渡す。	짐을 전부 건네준다.	keep	local
 phrase:かしこま	かしこま！	알았어요!	fix	phrases
