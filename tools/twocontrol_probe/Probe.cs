@@ -91,12 +91,15 @@ class Probe {
         IntPtr module=LoadLibrary(Path.Combine(app,"dll","CustomData","ezTransXP.dll"));
         Console.WriteLine("LoadLibrary=" + module + " error=" + Marshal.GetLastWin32Error());
         if(module==IntPtr.Zero) return 2;
+        Console.WriteLine("INIT wait/pump 3 seconds for normal native initialization; caller buffers retained until process exit");
+        for(int i=0;i<30;++i) { Application.DoEvents(); Thread.Sleep(100); }
         Modules(Process.GetCurrentProcess().Id);
         IntPtr address=GetProcAddress(module,"TranslateW");
         Console.WriteLine("Actual plugin TranslateW=" + address);
         if(address==IntPtr.Zero) return 3;
         var translate=(TranslateWide)Marshal.GetDelegateForFunctionPointer(address,typeof(TranslateWide));
         Console.WriteLine("SYSTEM_ACP="+GetACP());
+        var expected=new Dictionary<string,string> { {"猫です。","고양이입니다."}, {"水です。","물입니다."}, {"こんにちは。","안녕하세요."} };
         bool passed=true;
         foreach(string input in new[]{"猫です。", "水です。", "こんにちは。"}) {
             IntPtr buffer=Marshal.AllocHGlobal(65536);
@@ -105,20 +108,25 @@ class Probe {
             IntPtr returned=translate(buffer);
             string output=Marshal.PtrToStringUni(buffer);
             Console.WriteLine("RESULT return="+returned+" output="+output+" utf16="+BitConverter.ToString(Encoding.Unicode.GetBytes(output)));
-            if(output==input || String.IsNullOrEmpty(output)) passed=false;
-            Marshal.FreeHGlobal(buffer);
+            Console.WriteLine("WIDE_EXPECTED="+expected[input]);
+            passed &= returned!=IntPtr.Zero && output==expected[input];
+            Application.DoEvents(); Thread.Sleep(500);
         }
         Modules(Process.GetCurrentProcess().Id);
         IntPtr narrowAddress=GetProcAddress(module,"TranslateDll");
         var narrow=(TranslateNarrow)Marshal.GetDelegateForFunctionPointer(narrowAddress,typeof(TranslateNarrow));
+        bool narrowPassed=true;
         foreach(string input in new[]{"猫です。", "水です。", "こんにちは。"}) {
             IntPtr buffer=Marshal.AllocHGlobal(65536);
             byte[] bytes=Encoding.GetEncoding(932).GetBytes(input+"\0"); Marshal.Copy(bytes,0,buffer,bytes.Length);
             Console.WriteLine("CALL actual-plugin TranslateDll CP932 input="+input+" bytes="+BitConverter.ToString(bytes));
             int returned=narrow(buffer);
             var result=new List<byte>(); for(int i=0;i<65536;++i) { byte b=Marshal.ReadByte(buffer,i); if(b==0) break; result.Add(b); }
-            Console.WriteLine("NARROW_RESULT return="+returned+" CP949="+Encoding.GetEncoding(949).GetString(result.ToArray())+" raw="+BitConverter.ToString(result.ToArray()));
-            Marshal.FreeHGlobal(buffer);
+            string actual=Encoding.GetEncoding(949).GetString(result.ToArray());
+            Console.WriteLine("NARROW_RESULT return="+returned+" CP949="+actual+" raw="+BitConverter.ToString(result.ToArray()));
+            Console.WriteLine("NARROW_EXPECTED="+expected[input]);
+            narrowPassed &= returned!=0 && actual==expected[input];
+            Application.DoEvents(); Thread.Sleep(500);
         }
         IntPtr engine=GetModuleHandle("Ehnd.dll");
         if(engine!=IntPtr.Zero) {
@@ -132,17 +140,21 @@ class Probe {
                 if(result!=IntPtr.Zero) free(result); Marshal.FreeHGlobal(text);
             }
         }
-        Console.WriteLine("PLUGIN_RESULT " + (passed?"OUTPUT_CHANGED_NOT_YET_VERIFIED":"FAIL"));
-        return passed?0:4;
+        Console.WriteLine("PLUGIN_WIDE_RESULT " + (passed?"PASS":"FAIL"));
+        Console.WriteLine("PLUGIN_NARROW_RESULT " + (narrowPassed?"PASS":"FAIL"));
+        return passed && narrowPassed?0:4;
     }
     static int Gui() {
         var start=new ProcessStartInfo(Path.Combine(app,"TwoControl.exe")); start.WorkingDirectory=app; start.UseShellExecute=false;
         var process=Process.Start(start);
         Console.WriteLine("GUI actual TwoControl.exe pid="+process.Id+" sha256="+Hash(start.FileName));
-        Thread.Sleep(12000);
-        if(process.HasExited) { Console.WriteLine("GUI exited="+process.ExitCode); return 5; }
-        foreach(var window in Windows(process.Id)) if(Text(window)=="TwoControl") { ShowWindow(window,9); SetForegroundWindow(window); }
+        for(int i=0;i<30 && !process.HasExited;++i) {
+            foreach(var window in Windows(process.Id)) if(Text(window)=="TwoControl") { ShowWindow(window,9); SetForegroundWindow(window); }
+            Thread.Sleep(100);
+        }
+        if(process.HasExited) { Console.WriteLine("GUI exited="+process.ExitCode+" hex="+process.ExitCode.ToString("X8")); return 5; }
         Thread.Sleep(2000);
+        if(process.HasExited) { Console.WriteLine("GUI exited="+process.ExitCode+" hex="+process.ExitCode.ToString("X8")); return 5; }
         Dump(process.Id,"gui-start"); Modules(process.Id);
         Clipboard.SetText("こんにちは。");
         Console.WriteLine("GUI clipboard authored input=こんにちは。");

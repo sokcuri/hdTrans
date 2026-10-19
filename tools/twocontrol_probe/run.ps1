@@ -1,5 +1,6 @@
 param([Parameter(Mandatory=$true)][string]$Root)
 $ErrorActionPreference = 'Stop'
+$probeStarted = Get-Date
 $Root = [IO.Path]::GetFullPath($Root)
 $harness = Join-Path $Root 'authored-harness'
 $homeDir = Join-Path $Root 'disposable-home'
@@ -54,3 +55,15 @@ foreach ($mode in @('gui','plugin')) {
     Get-Content -Encoding utf8 (Join-Path $Root "evidence/$mode.log")
     if (Test-Path (Join-Path $Root "evidence/$mode-blocked.log")) { Get-Content -Encoding utf8 (Join-Path $Root "evidence/$mode-blocked.log") }
 }
+Start-Sleep -Seconds 3
+$faults = @()
+$events = Get-WinEvent -FilterHashtable @{LogName='Application'; Id=1000; StartTime=$probeStarted} -ErrorAction SilentlyContinue
+foreach ($event in $events) {
+    [xml]$xml = $event.ToXml()
+    $fields = @{}
+    foreach ($entry in $xml.Event.EventData.Data) { $fields[$entry.Name] = $entry.'#text' }
+    if ($fields.AppName -notin @('TwoControl.exe','Probe.exe')) { continue }
+    $faults += @{ AppName=$fields.AppName; ModuleName=$fields.ModuleName; ExceptionCode=$fields.ExceptionCode; FaultingOffset=$fields.FaultingOffset }
+}
+ConvertTo-Json -InputObject @($faults) -Depth 3 | Set-Content -Encoding utf8 (Join-Path $Root 'evidence/native-crash-events.json')
+Get-Content -Encoding utf8 (Join-Path $Root 'evidence/native-crash-events.json')

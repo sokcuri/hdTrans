@@ -41,14 +41,14 @@ def safe_path(name):
 rar = download('TwoControl.rar',
     'https://github.com/twocomet/TwoControl/releases/download/Releases/TwoControl.rar',
     '7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232')
-release = download('hdTrans-0.1.1-windows.zip',
-    'https://github.com/sokcuri/hdTrans/releases/download/v0.1.1/hdTrans-0.1.1-windows.zip',
-    '347c72a82c78449492205e13da477d90590ba03e474fdb9c05c573e1ce3cb8b8')
+release = download('hdTrans-0.2.0-windows.zip',
+    'https://github.com/sokcuri/hdTrans/releases/download/v0.2.0/hdTrans-0.2.0-windows.zip',
+    '6f076abc859b5542ef9fe889c4f9923fbf68fb900bc0129ec273b01ae38bbcd0')
 sums = download('SHA256SUMS.txt',
-    'https://github.com/sokcuri/hdTrans/releases/download/v0.1.1/SHA256SUMS.txt',
-    'dadd6db1a6354bddbe453f16ce4b990965e16dce6d23ff618c540365e6054fcd')
-if ('347c72a82c78449492205e13da477d90590ba03e474fdb9c05c573e1ce3cb8b8  '
-        'hdTrans-0.1.1-windows.zip') not in sums.read_text():
+    'https://github.com/sokcuri/hdTrans/releases/download/v0.2.0/SHA256SUMS.txt',
+    'b03f2fa6d303687f4a0d75790852e69f2224e4eedc4c142a96d678466b43a301')
+if ('6f076abc859b5542ef9fe889c4f9923fbf68fb900bc0129ec273b01ae38bbcd0  '
+        'hdTrans-0.2.0-windows.zip') not in sums.read_text():
     raise RuntimeError('Published checksum missing')
 
 seven = shutil.which('7z') or str(pathlib.Path('C:/Program Files/7-Zip/7z.exe'))
