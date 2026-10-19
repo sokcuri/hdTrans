@@ -24,7 +24,7 @@ C:\hdTrans\
 ```
 
 - `dicts.hdsnap`은 기본 사전, `dicts.txt`는 사전 버전입니다. `dicts/` 폴더나 원본 TSV는 배포하지 않으며 따로 받을 필요도 없습니다.
-- DLL을 다른 폴더로 옮기면 **`hdTrans` 폴더도 함께** 옮깁니다. 빈 `Dat` 폴더나 이지트랜스 원본 파일을 추가할 필요는 없습니다.
+- DLL을 다른 폴더로 옮기면 **`hdTrans` 폴더도 함께** 옮깁니다.
 - 기존 이지트랜스 폴더를 쓴다면 원래 DLL을 먼저 백업합니다. 원본 Ehnd DLL을 hdTrans 위에 덮어쓰지 마세요.
 
 ## LunaTranslator
@@ -81,23 +81,35 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 
 ## 아랄트랜스, AralTrans
 
-1. **EzTransXP** 번역 플러그인을 선택합니다.
-2. 엔진 폴더 선택 창이 나오면 `C:\hdTrans`를 지정합니다. 한글이 없는 경로를 쓰세요.
+먼저 레지스트리를 설정합니다.
 
-### 자동 탐색용 레지스트리 등록, 선택 사항
+1. 아랄트랜스를 끕니다.
+2. `Win+R`을 누르고 `regedit`을 실행합니다.
+3. `HKEY_CURRENT_USER\Software\ChangShin\ezTrans`로 이동합니다.
+4. 기존 `FilePath` 값을 기록해 두고 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
+5. 아랄트랜스를 실행하고 **EzTransXP** 번역 플러그인을 선택합니다.
 
-폴더를 자동으로 찾게 하려면 아래 내용을 `.reg` 파일로 저장해 가져옵니다.
-기존 `FilePath` 값은 먼저 백업하세요. 이 값을 쓰는 다른 번역 도구의 경로도 바뀝니다.
-
-```reg
-Windows Registry Editor Version 5.00
-
-[HKEY_CURRENT_USER\Software\ChangShin\ezTrans]
-"FilePath"="C:\\hdTrans"
-```
-
-값은 DLL 파일이나 `Dat`가 아닌 **설치 루트 폴더**입니다. `Wow6432Node`는 넣지 않습니다.
 게임 후킹과 ATCode는 아랄트랜스에서 별도로 설정합니다.
+
+## 에그헤드, EggHead
+
+먼저 레지스트리를 설정합니다.
+
+1. 에그헤드를 끕니다.
+2. `Win+R`을 누르고 `regedit`을 실행합니다.
+3. `HKEY_CURRENT_USER\Software\ChangShin\ezTrans`로 이동합니다.
+4. 기존 `FilePath` 값을 기록해 두고 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
+5. 에그헤드 실행 파일 옆에 기존 `J2KEngine.dll`이 있으면 백업 후 다른 이름으로 옮깁니다.
+6. 에그헤드를 다시 실행합니다.
+
+에그헤드 0.73new와 0.73rev.E_BETA2 기준입니다. 레지스트리 경로보다 실행 파일 옆 DLL을 먼저 읽습니다.
+같은 레지스트리를 쓰는 다른 도구의 엔진 경로도 바뀝니다.
+
+## 투컨트롤, TwoControl
+
+공식 2024.08.30 배포판은 자체 `Ehnd` 폴더의 엔진을 사용합니다.
+`J2KEngine.dll`을 복사하거나 위 레지스트리만 바꾸는 방식으로는 연결되지 않습니다.
+이 버전의 하드트랜스 직접 연결 절차는 아직 제공하지 않습니다.
 
 ## VNR, Visual Novel Reader
 
@@ -119,7 +131,7 @@ terminal 버전과 **x86 .NET 6 런타임**을 설치한 뒤 서버 폴더에서
 
 ## 그 밖의 도구
 
-투컨트롤(TwoControl), 에그헤드(EggHead), Translator++, MTool은 hdTrans 연결 방법이 아직 정리되지 않았습니다.
+Translator++와 MTool은 하드트랜스 연결 방법이 아직 정리되지 않았습니다.
 
 ## CLI로 텍스트 파일 번역
 

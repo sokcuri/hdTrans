@@ -27,7 +27,7 @@ Linux와 macOS는 사전 두 파일과 `user/`를 실행 파일 옆에 둡니다
 
 J2K DLL은 초기화 인자의 `Dat`, 현재 폴더, 레지스트리와 무관하게 DLL 옆 `hdTrans/`를 데이터 루트로 씁니다.
 그 폴더가 없으면 DLL이 있는 폴더를 씁니다. 기본 사전은 데이터 루트의 `dicts.hdsnap`, 없으면 `dicts/`입니다.
-아래 로더는 `Dat` 폴더나 이지트랜스 실행 파일의 존재를 필수 검사하지 않습니다.
+TwoControl 2024.08.30은 별도로 원본 사전 파일을 검사합니다. 다른 아래 로더는 `Dat` 폴더나 이지트랜스 실행 파일의 존재를 필수 검사하지 않습니다.
 도구의 ANSI 변환 문제를 피하려면 영문 경로를 씁니다.
 
 사용자 사전 파일 이름은 대소문자를 구별하지 않습니다. 소문자 이름의 바이트 순서로 읽고 같은 항목은 뒤 파일이 우선합니다.
@@ -40,8 +40,8 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 
 ## 설치 경로와 레지스트리
 
-자동 탐색용 `FilePath` 값에는 `C:\hdTrans` 같은 **설치 루트 폴더**를 `REG_SZ`로 기록합니다. `Dat`나 DLL 파일 경로가 아닙니다.
-이 표의 키는 실제 소스로 확인한 값만 적었습니다. 미확인 도구를 위해 같은 키를 쓸 것이라고 가정하지 않습니다.
+레지스트리를 편집하기 전에 기존 `FilePath` 값을 기록합니다.
+표는 공개 소스와 배포 파일의 로더를 구분해 적었습니다. 미확인 도구의 키를 다른 도구에서 유추하지 않습니다.
 
 | 도구 | 확인된 레지스트리 키와 값 | 경로 선택 우선순위 |
 |---|---|---|
@@ -53,10 +53,12 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 | [VNR][vnr-registry] | `HKCU\Software\ChangShin\ezTrans` / `FilePath`, 명시 WOW64 플래그 없음 | [위치 설정][vnr-location]은 유효한 `ezTransLocation` → 유효한 레지스트리 경로. 실제 DLL 로드는 기존 검색 경로 뒤에 이 폴더들을 PATH로 추가하므로 설정 우선이 보장되지는 않음 |
 | [nanikit 서버][server-interop] | `HKCU\Software\ChangShin\ezTrans` / `FilePath`, 명시 `Registry32` | 명시 DLL 경로 → 레지스트리 → 기본 설치 경로 → 서버 폴더와 상위 폴더 |
 | [HelloKS 서버][eztransweb] | 사용하지 않음 | 소스에 하드코딩한 H DLL 전체 경로 |
-| 투컨트롤, 에그헤드, Translator++, MTool | 직접 확인 못 함 | 투컨트롤의 과거 폴더 선택 안내 외에는 확정하지 않음 |
+| [에그헤드 0.73new, 0.73rev.E_BETA2][egghead-release] | `HKCU\Software\ChangShin\ezTrans` / `FilePath`, `KEY_QUERY_VALUE`, 명시 WOW64 플래그 없음 | 레지스트리 조회에 성공해야 로더 진행. 실행 파일 옆 `J2KEngine.dll` → 레지스트리 경로의 `J2KEngine.dll` |
+| [TwoControl 2024.08.30][twocontrol-release] | `HKCU\Software\ChangShin\ezTrans` / `FilePath` | 자체 `Ehnd/Dat` 사전이 없으면 레지스트리와 폴더 선택을 통해 원본 사전을 복사. 실제 DLL은 자체 `Ehnd/Ehnd.dll` 또는 `Ehnd/Ehnd.dlx` |
+| Translator++, MTool | 직접 확인 못 함 | 연결 방법 미정 |
 
 `HKCU\Software`의 이 키는 [32비트와 64비트가 공유][registry-view]합니다. `Wow6432Node`에 복제하거나 HKLM 키로 바꾸지 않습니다.
-등록용 `.reg` 견본은 아래 아랄트랜스 항목에 있습니다. 도구의 탐색 순서와 hdTrans DLL 자체의 사전 탐색은 별개입니다.
+`regedit` 설정은 [사용 안내](using-with-tools.md#아랄트랜스-araltrans)를 보세요. 도구의 탐색 순서와 hdTrans DLL 자체의 사전 탐색은 별개입니다.
 
 ## 도구별 연결
 
@@ -117,15 +119,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 - 위 배포 구성으로 준비한 뒤 EzTransXP 번역 플러그인을 선택합니다. [0.2 소스][aral02]는
   **`HKCU\Software\ChangShin\ezTrans`의 `FilePath`**에서 엔진 폴더를 읽습니다. 값을 얻지 못하면 폴더 선택 창에서 `C:\hdTrans`를 지정할 수 있습니다.
   한글 경로에는 경고를 띄우므로 영문 경로를 씁니다. ATCode는 엔진 로더가 아니라 별도 후킹 플러그인입니다.
-- 이지트랜스 없이 레지스트리 자동 탐색을 쓰려면 아래를 `.reg` 파일로 저장해 가져옵니다. 기존 값은 먼저 백업하세요.
-  다른 도구의 자동 탐색에도 영향을 줍니다. 이 키는 [32비트와 64비트가 공유][registry-view]하므로 **`Wow6432Node`를 넣지 않습니다**.
-
-  ```reg
-  Windows Registry Editor Version 5.00
-
-  [HKEY_CURRENT_USER\Software\ChangShin\ezTrans]
-  "FilePath"="C:\\hdTrans"
-  ```
+- `regedit`에서 `FilePath`를 바꾸는 순서는 [사용 안내](using-with-tools.md#아랄트랜스-araltrans)에 있습니다.
 
 - 로드 경로는 `<폴더>\Dat\..\J2KEngine.dll`입니다. InitializeEx, TranslateMMNT, FreeMem, StopTranslation, Terminate 순으로
   5개 export를 모두 확인한 뒤 `InitializeEx("CSUSER123455", "<폴더>\\Dat")`를 부릅니다. 경로는 시스템 ANSI입니다.
@@ -176,12 +170,28 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 - **CI:** `host.eztransweb`는 hdTrans의 H 이름 복사본을 로드하고, 두 스레드의 동시 호출과 원본처럼 해제하지 않는 순서를 재현합니다.
   XUnity와 마찬가지로 **결과 버퍼 누수는 남습니다**. Python ctypes, Flask HTTP와 자체 전후처리는 수동 검증 대상입니다.
 
+### 에그헤드, EggHead
+
+- [공개 배포 글][egghead-release]의 `egghead073_new.rar`, `egghead073_rev.E_BETA2.rar`를 기준으로 합니다. 두 실행 파일은 x86 PE입니다. 아래 내용은 실행 결과가 아닌 배포 파일의 정적 분석입니다.
+- `RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\ChangShin\\ezTrans", 0, KEY_QUERY_VALUE, ...)`와 `RegQueryValueExA(..., "FilePath", ...)`를 호출합니다. 접근 플래그는 `1`이며 별도 WOW64 플래그는 없습니다. 레지스트리 조회가 실패하면 DLL 로더로 진행하지 않습니다.
+- 실행 파일 옆 `J2KEngine.dll`을 먼저 로드하고, 실패하면 `FilePath`에서 얻은 경로의 `Dat\\..\\J2KEngine.dll`을 로드합니다. `J2KEngineH.dll`을 우선하는 분기는 없습니다.
+- 필수 export는 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`입니다. 이 두 배포본의 로더는 W 함수를 조회하지 않습니다.
+- 원본 0.73new의 레지스트리 함수는 RVA `0x1e100`, DLL 로더는 RVA `0x1dfa0`입니다. 원본 실행 파일 SHA-256은 `97a0a5b31e6a6bf60db3c36ef15211fe9da32ac61015df5574a080d6c83aa366`입니다.
+
+### 투컨트롤, TwoControl
+
+- [공식 GitHub][twocontrol-repo]는 배포 저장소이며 엔진 로더 소스는 공개되어 있지 않습니다. 아래 내용은 [2024.08.30 릴리스][twocontrol-release]의 `TwoControl.rar`에 한정한 정적 분석입니다. 다른 버전의 동작으로 일반화하지 않습니다.
+- `TwoControl.exe`와 `dll/CustomData/ezTransXP.dll`은 x86 PE입니다. 엔진은 자체 `Ehnd/Ehnd.dll`을 로드하며, `[Option] EhndUnload`가 켜져 있거나 NTLEA 모듈이 로드된 조건에서는 `Ehnd/Ehnd.dlx`를 선택합니다. 이 로더의 선택 대상은 `J2KEngineH.dll`이 아닙니다.
+- `Ehnd/Dat/JisJK.Inf`, `Ehnd/Dat/JisJK.da`의 존재와 내용을 검사합니다. 사전이 없으면 `HKCU\Software\ChangShin\ezTrans`의 `FilePath` 또는 폴더 선택 창에서 원본 사전을 가져옵니다. 공개 RAR에는 이 파일들과 `Ehnd.dll`, `Ehnd.dlx`가 포함되어 있습니다.
+- 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. 번들 Ehnd가 W 함수를 export하더라도 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않습니다.
+- 번역 호출은 `char* __stdcall J2K_TranslateMMNT(int, const char*)` 형태로 두 인자를 전달하고 원래 결과 포인터를 `J2K_FreeMem`에 넘깁니다. export 조회는 플러그인 RVA `0x17ce8a`, 번역 호출은 `0x17dfd7`, 결과 해제는 `0x17e3cb`에서 시작합니다.
+- 원본 Ehnd는 함께 쓰는 원본 엔진의 내부 코드를 패치합니다. `J2KEngine.dll` 복사나 레지스트리 변경만으로 이 번들 엔진을 hdTrans로 바꿀 수 없습니다. 원본 파일 검사와 두 DLL 선택을 모두 처리하는 직접 연결 절차는 아직 정리되지 않았습니다.
+- 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다. 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
+
 ### 연결 방법이 정리되지 않은 도구
 
 | 도구 | 자료와 한계 |
 |---|---|
-| 투컨트롤, TwoControl | [2018년 안내][twocontrol-guide]에 폴더 선택 절차는 있으나 공개 로더 구현은 확보하지 못했습니다. DLL 이름, 자동 탐색과 추가 파일 검사는 알 수 없습니다. |
-| 에그헤드, EggHead | [보존 자료][egghead-guide]는 원본 0.73new와 ezTrans 사용을 설명합니다. 비공식 0.73rev는 별개이며 로더 구현과 설정 경로는 알 수 없습니다. |
 | [Translator++ transEz][translatorez] | ezTransXP 지원 공지는 있으나 플러그인 구현과 hdTrans 연결 방법은 정리되지 않았습니다. |
 | [MTool][mtool] | 공개 ezTrans 연동 구현과 hdTrans 연결 방법은 확인되지 않았습니다. |
 
@@ -262,6 +272,9 @@ x86 CI가 실제 엔진 ABI 검증이며 x64 실행은 같은 인터페이스의
 [translatorez]: https://dreamsavior.net/update-info-translator-ver-5-11-15/
 [mtool]: https://trstest.mtool.app/release.php?lang=en
 [twocontrol-guide]: https://umthink.tistory.com/117
+[twocontrol-repo]: https://github.com/twocomet/TwoControl
+[twocontrol-release]: https://github.com/twocomet/TwoControl/releases/tag/Releases
+[egghead-release]: https://blog.naver.com/foolmaker/30164894153
 [aral02]: https://github.com/sokcuri/araltrans02/blob/d5128e3c112e234f2bef532fbd2e51c4e3e73b6d/Translator/ezTransXP/ezTransXP.cpp
 [aral03]: https://github.com/sokcuri/araltrans03/blob/6aa944d1829006a59d0f7e4cf2fef83e3f256481/Translator/ezTransXP/ezTransXP.cpp
 [aral-encoding]: https://github.com/sokcuri/araltrans02/blob/d5128e3c112e234f2bef532fbd2e51c4e3e73b6d/Algorithm/ATCode/HookPoint.cpp#L1558-L1593
