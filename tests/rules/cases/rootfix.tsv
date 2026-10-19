@@ -37,3 +37,6 @@ dict:hortative	次の試合も頑張ろっ。	다음의 시합도 힘내자.	fix
 dict:hortative	明日も頑張る。	내일도 노력한다.	keep	lookup
 dict:hortative	頑張れ！	힘내라!	keep	lookup
 dict:hortative	がんばろ！	힘내자!	keep	lookup
+dict:hortative-question	次も頑張ろっか。	다음도 힘내볼까.	fix	lookup
+dict:hortative-question	明日の練習も頑張ろっか？	내일의 연습도 힘내볼까?	fix	lookup
+dict:hortative-question	頑張ろっ！	힘내자!	keep	lookup
