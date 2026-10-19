@@ -17,6 +17,22 @@ namespace {
 
 int g_failures = 0;
 
+struct UnicodeSample {
+    const char* input;
+    const char* expected;
+    const char* message;
+};
+
+constexpr UnicodeSample kUnicodeSamples[] = {
+    {"", "", "Unicode empty string"},
+    {"猫", "고양이", "Unicode Japanese translation"},
+    {"㐂", "㐂", "Unicode Japanese outside CP932"},
+    {"ᄓꥠ", "ᄓꥠ", "Unicode Hangul outside CP949"},
+    {"\U00020bb7\U0001f642", "\U00020bb7\U0001f642", "Unicode supplementary CJK and emoji"},
+    {"猫\U0001f642", "고양이 \U0001f642", "Unicode translation next to a surrogate pair"},
+    {"�A�", "�A�", "Unicode replacement characters preserved"},
+};
+
 void Check(bool ok, const char* message) {
     if (!ok) { std::fprintf(stderr, "FAIL %s\n", message); ++g_failures; }
 }
@@ -121,6 +137,64 @@ void CheckDefaultLayouts(const std::filesystem::path& folder, Initialize initial
 }
 
 #ifdef _WIN32
+using InitializeFn = int (__stdcall*)(char*);
+using TerminateFn = int (__stdcall*)();
+using TranslateWFn = wchar_t* (__stdcall*)(HWND, const wchar_t*);
+using FreeMemFn = void (__stdcall*)(void*);
+
+std::wstring Wide(const std::string& text) {
+    const int size = MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0);
+    std::wstring result(static_cast<std::size_t>(size), L'\0');
+    if (size) MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), result.data(), size);
+    return result;
+}
+
+void CheckJ2KUnicode(InitializeFn initialize, TerminateFn terminate, TranslateWFn translate, FreeMemFn freeMem) {
+    static_assert(sizeof(wchar_t) == 2);
+    wchar_t* output = translate(nullptr, L"猫");
+    Check(output == nullptr, "J2K W returns NULL before initialization");
+    freeMem(output);
+    Check(initialize(nullptr) == 1, "J2K Unicode fixture initialize");
+    for (const auto& sample : kUnicodeSamples) {
+        std::wstring input = Wide(sample.input);
+        const std::wstring original = input;
+        const std::wstring expected = Wide(sample.expected);
+        output = translate(nullptr, input.c_str());
+        Check(output && std::wstring(output) == expected, sample.message);
+        Check(input == original, "J2K W does not modify the input");
+        if (output) {
+            Check(output != input.data() && HeapValidate(GetProcessHeap(), 0, output), "J2K W returns a process-heap block");
+            freeMem(output);
+        }
+    }
+    output = translate(nullptr, nullptr);
+    Check(output == nullptr, "J2K W rejects NULL input");
+    freeMem(output);
+    constexpr const wchar_t* invalid[] = {L"\xd800", L"\xdc00", L"\xd800" L"A" L"\xdc00"};
+    constexpr const wchar_t* replaced[] = {L"\xfffd", L"\xfffd", L"\xfffd" L"A" L"\xfffd"};
+    for (std::size_t index = 0; index < 3; ++index) {
+        output = translate(nullptr, invalid[index]);
+        Check(output && std::wstring(output) == replaced[index], "J2K W replaces unpaired surrogates with U+FFFD");
+        freeMem(output);
+    }
+    constexpr wchar_t terminated[] = {L'猫', 0, L'犬', 0};
+    output = translate(nullptr, terminated);
+    Check(output && std::wstring(output) == L"고양이", "J2K W input ends at the first NUL");
+    freeMem(output);
+    wchar_t* first = translate(nullptr, L"猫");
+    wchar_t* second = translate(nullptr, L"猫");
+    Check(first && second && first != second, "J2K W returns independent allocations");
+    Check(terminate() == 1, "J2K Unicode fixture terminate");
+    Check(first && std::wstring(first) == L"고양이" && second && std::wstring(second) == L"고양이",
+          "J2K W buffers remain host-owned after another call and Terminate");
+    freeMem(first);
+    if (second != first) freeMem(second);
+    output = translate(nullptr, L"猫");
+    Check(output == nullptr, "J2K W returns NULL after Terminate");
+    freeMem(output);
+    freeMem(nullptr);
+}
+
 template<class Function>
 Function Procedure(HMODULE module, const char* name) {
     const FARPROC address = GetProcAddress(module, name);
@@ -139,11 +213,11 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
     const HMODULE module = LoadLibraryW(dll.c_str());
     Check(module != nullptr, "load J2K config fixture");
     if (!module) return;
-    const auto initialize = Procedure<int (__stdcall*)(char*)>(module, "J2K_Initialize");
+    const auto initialize = Procedure<InitializeFn>(module, "J2K_Initialize");
     const auto reload = Procedure<void (__stdcall*)()>(module, "J2K_ReloadUserDict");
-    const auto terminate = Procedure<int (__stdcall*)()>(module, "J2K_Terminate");
-    const auto translate = Procedure<wchar_t* (__stdcall*)(HWND, const wchar_t*)>(module, "J2K_TranslateMMNTW");
-    const auto freeMem = Procedure<void (__stdcall*)(void*)>(module, "J2K_FreeMem");
+    const auto terminate = Procedure<TerminateFn>(module, "J2K_Terminate");
+    const auto translate = Procedure<TranslateWFn>(module, "J2K_TranslateMMNTW");
+    const auto freeMem = Procedure<FreeMemFn>(module, "J2K_FreeMem");
     Check(initialize && reload && terminate && translate && freeMem, "J2K config exports");
     if (initialize && reload && terminate && translate && freeMem) {
         const auto config = folder / "hdtrans.config.yaml";
@@ -154,6 +228,7 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
             freeMem(output);
         };
         Write(config, base);
+        CheckJ2KUnicode(initialize, terminate, translate, freeMem);
         Check(initialize(nullptr) == 1, "J2K config initialize");
         checkTranslation(L"猫", L"고양이", "J2K ignores sibling Ehnd by default");
         Write(config, base + "ehnd: true\n");
@@ -195,16 +270,10 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         checkTranslation(L"猫", L"검은고양이", "J2K nested config keeps outer Ehnd location");
         terminate();
         std::filesystem::remove_all(data, error);
-        auto wide = [](const std::string& text) {
-            const int size = MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), nullptr, 0);
-            std::wstring result(static_cast<std::size_t>(size), L'\0');
-            MultiByteToWideChar(CP_UTF8, 0, text.data(), static_cast<int>(text.size()), result.data(), size);
-            return result;
-        };
         CheckDefaultLayouts(folder, [&] { return initialize(nullptr) == 1; },
             [&](bool) { reload(); }, [&] { terminate(); },
             [&](const std::string& input, const std::string& expected, const char* message) {
-                checkTranslation(wide(input).c_str(), wide(expected).c_str(), message);
+                checkTranslation(Wide(input).c_str(), Wide(expected).c_str(), message);
             });
     }
     FreeLibrary(module);
@@ -240,6 +309,13 @@ int main(int argc, char** argv) {
                   "cg: false\nmisread: true\nreference: false\n");
     Check(hdTrans_Initialize(nullptr) == 0, "initialize with config dictionaries");
     Check(Translate("猫") == "고양이", "configured dictionary");
+    for (const auto& sample : kUnicodeSamples) {
+        const std::string result = Translate(sample.input);
+        if (result != sample.expected) {
+            std::fprintf(stderr, "UTF-8 expected [%s], got [%s]\n", sample.expected, result.c_str());
+        }
+        Check(result == sample.expected, sample.message);
+    }
     Check(Translate("犬") == "멍멍이", "configured user dictionary");
     Check(Translate("タマ") == "나비", "configured Ehnd dictionary");
     Check(Errors().empty(), "valid config diagnostics");
