@@ -6,6 +6,10 @@ ending:ないんす	ここでは話しかけられないんすよ。	여기에�
 ending:ないんす	この字は読めないんすか？	이 글자는 읽을 수 없나요?	fix	builtin-ending
 ending:ないんす	今日は出かけないっす。	오늘은 나가지 않아요.	keep	builtin-ending
 ending:ないんす	今日は書かないっす。	오늘은 쓰지 않아요.	keep	builtin-ending
+ending:ないんす	そうなんよ。	그런 이야.	keep	builtin-ending
+ending:ないんす	好きなんよ。	좋아하는 이야.	keep	builtin-ending
+ending:ないんす	本当なんよ。	사실이야.	keep	builtin-ending
+ending:ないんす	たくさんよ。	많아요.	keep	builtin-ending
 L3302	彼は掃除するよ。	그는 청소해.	fix	local-ending
 L3302	私は掃除するよ。	나는 청소할게.	keep	local-ending
 L3302	君が助けるよ。	네가 도와.	fix	local-ending
