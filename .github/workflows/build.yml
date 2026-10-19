@@ -1,4 +1,5 @@
 name: Build
+run-name: ${{ github.event_name == 'workflow_dispatch' && !inputs.dry_run && format('Release {0}', github.ref_name) || '' }}
 
 on:
   push:
@@ -28,6 +29,17 @@ env:
   HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt
 
 jobs:
+  release-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - run: npm --prefix tools/release ci --ignore-scripts --no-audit --no-fund
+      - run: npm --prefix tools/release test
+
   build:
     name: ${{ matrix.preset }}
     strategy:
@@ -163,8 +175,20 @@ jobs:
           if [[ "${{ matrix.preset }}" != wasm ]]; then
             data="$root"
             if [[ "$RUNNER_OS" == Windows ]]; then data="$root/hdTrans"; fi
-            mkdir -p "$data/dicts" "$data/user"
-            cp -R dicts/. "$data/dicts/"
+            mkdir -p "$data/user"
+            home="$(mktemp -d)"
+            HOME="$home" USERPROFILE="$home" HDTRANS_CACHE_DIR=off \
+              "$PWD/$root/hdtrans${{ runner.os == 'Windows' && '.exe' || '' }}" \
+              --dicts "$PWD/dicts" --compile-snapshot "$PWD/$data/dicts.hdsnap"
+            rm -rf "$home"
+            python3 -I - "$data/dicts.txt" <<'PY'
+          import hashlib, json, pathlib, sys
+          digest = hashlib.sha256()
+          for path in sorted(pathlib.Path('dicts').glob('*.tsv'), key=lambda path: path.name.encode('utf-8')):
+              digest.update(path.name.encode('utf-8') + b'\0' + path.read_bytes() + b'\0')
+          version = json.loads(pathlib.Path('npm/package.json').read_text(encoding='utf-8'))['version']
+          pathlib.Path(sys.argv[1]).write_text(f'{version}+{digest.hexdigest()[:12]}\n', encoding='utf-8')
+          PY
             read -r -a userFiles <<< "$HDTRANS_USER_FILES"
             cp "${userFiles[@]}" "$data/user/"
           fi
@@ -174,10 +198,13 @@ jobs:
           if [[ "${{ matrix.preset }}" == wasm ]]; then
             HDTRANS_WASM_WRAPPER=build/wasm/translator.js \
               node --experimental-default-type=module tools/wasm_smoke.mjs \
-              build/wasm/hdTransEngine.js tests/unit/dict/testdata/folder/base.tsv \
+              build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv \
               2>&1 | tee build/wasm/ctest.log
           else
-            export HDTRANS_DICTS="$GITHUB_WORKSPACE/dicts"
+            export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/dicts.hdsnap"
+            if [[ "$RUNNER_OS" == Windows ]]; then
+              export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/hdTrans/dicts.hdsnap"
+            fi
             ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose \
               2>&1 | tee "build/${{ matrix.preset }}/ctest.log"
           fi
@@ -222,12 +249,13 @@ jobs:
             build/${{ matrix.preset }}/hdTransEngine.lib
             build/${{ matrix.preset }}/J2KEngine.dll
             build/${{ matrix.preset }}/J2KEngine.lib
-            build/${{ matrix.preset }}/hdTransEngine.js
-            build/${{ matrix.preset }}/hdTransEngine.wasm
+            build/${{ matrix.preset }}/hdtrans_engine.js
+            build/${{ matrix.preset }}/hdtrans_engine.wasm
             build/${{ matrix.preset }}/translator.js
             build/${{ matrix.preset }}/translator.d.ts
             build/${{ matrix.preset }}/hdTrans/
-            build/${{ matrix.preset }}/dicts/
+            build/${{ matrix.preset }}/dicts.hdsnap
+            build/${{ matrix.preset }}/dicts.txt
             build/${{ matrix.preset }}/user/
             build/${{ matrix.preset }}/THIRD-PARTY-NOTICES.txt
             build/${{ matrix.preset }}/third_party/
@@ -244,7 +272,7 @@ jobs:
             build/${{ matrix.preset }}/ccache.log
 
   release:
-    needs: build
+    needs: [build, release-tools]
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'push' &&

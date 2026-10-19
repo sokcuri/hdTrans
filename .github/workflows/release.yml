@@ -20,16 +20,25 @@ jobs:
         with:
           pattern: hdtrans-*
           path: build/artifacts
+      - name: Compile the shared standalone dictionary
+        run: |
+          chmod +x build/artifacts/hdtrans-linux/hdtrans
+          mkdir -p build/shared
+          home="$(mktemp -d)"
+          HOME="$home" HDTRANS_CACHE_DIR=off "$PWD/build/artifacts/hdtrans-linux/hdtrans" \
+            --dicts "$PWD/dicts" --compile-snapshot "$PWD/build/shared/dicts.hdsnap"
+          rm -rf "$home"
       - name: Make portable packages and checksums
-        run: python3 -I tools/package-release.py --artifacts build/artifacts --output build/release
+        run: >-
+          python3 -I tools/package-release.py --artifacts build/artifacts --output build/release
+          --snapshot build/shared/dicts.hdsnap
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
       - name: Build and test npm package
         run: |
           npm --prefix npm ci
-          chmod +x build/artifacts/hdtrans-linux/hdtrans
-          node tools/package-npm.mjs --cli build/artifacts/hdtrans-linux/hdtrans \
+          node tools/package-npm.mjs --snapshot build/shared/dicts.hdsnap \
             --wasm build/artifacts/hdtrans-wasm --wrapper build/artifacts/hdtrans-wasm/translator.js
           npm --prefix npm test
           npm pack ./npm --pack-destination build/release

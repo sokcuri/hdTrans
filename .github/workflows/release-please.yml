@@ -1,41 +1,61 @@
-name: Release PR
+name: Release main
 
 on:
-  push:
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Successful main push Build run ID to retry
+        type: string
+        required: true
 
 permissions:
   contents: write
-  issues: write
-  pull-requests: write
   actions: write
+  pull-requests: read
 
 concurrency:
-  group: release-please-main
+  group: release-main
   cancel-in-progress: false
 
 jobs:
   release:
-    if: github.ref == 'refs/heads/main'
+    if: >-
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_repository.full_name == github.repository) ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
+      - name: Require the release deploy key
+        env:
+          RELEASE_PUSH_KEY: ${{ secrets.HDTRANS_RELEASE_PUSH_KEY }}
+        run: test -n "$RELEASE_PUSH_KEY"
+      - uses: actions/checkout@v7
         with:
-          target-branch: main
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
-      - name: Build packages for the new release
-        if: steps.release.outputs.release_created == 'true'
+          ref: main
+          fetch-depth: 0
+          ssh-key: ${{ secrets.HDTRANS_RELEASE_PUSH_KEY }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Install release tooling
+        run: npm --prefix tools/release ci --ignore-scripts --no-audit --no-fund
+      - name: Persist the version and publish the release
         uses: actions/github-script@v8
         env:
-          RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
+          BUILD_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.build_run_id }}
+          GH_TOKEN: ${{ github.token }}
         with:
           script: |
-            await github.rest.actions.createWorkflowDispatch({
-              ...context.repo,
-              workflow_id: 'build.yml',
-              ref: process.env.RELEASE_TAG,
-              inputs: { dry_run: 'false' }
+            const { releaseMain } = await import(`${process.env.GITHUB_WORKSPACE}/tools/release/release.mjs`);
+            await releaseMain({
+              github, repo: context.repo, runId: process.env.BUILD_RUN_ID,
+              token: process.env.GH_TOKEN, log: core.info
             });

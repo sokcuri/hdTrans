@@ -6,9 +6,10 @@
     ".": {
       "release-type": "simple",
       "version-file": "release-version.txt",
-      "initial-version": "0.1.1",
       "extra-files": [
-        { "type": "json", "path": "npm/package.json", "jsonpath": "$.version" }
+        { "type": "json", "path": "npm/package.json", "jsonpath": "$.version" },
+        { "type": "json", "path": "npm/package-lock.json", "jsonpath": "$.version" },
+        { "type": "json", "path": "npm/package-lock.json", "jsonpath": "$.packages[''].version" }
       ],
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
