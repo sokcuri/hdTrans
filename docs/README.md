@@ -7,7 +7,7 @@
 
 | 문서 | 내용 |
 |---|---|
-| [using-with-tools.md](using-with-tools.md) | LunaTranslator, XUnity.AutoTranslator, 아랄트랜스, VNR, 아네모네 같은 도구에 끼워 쓰기 |
+| [using-with-tools.md](using-with-tools.md) | 배포판 설치, 번역 도구별 연결 설정, CLI 사용법 |
 | [dictionary-files.md](dictionary-files.md#사용자-사전) | 사용자 사전 형식과 품사 |
 | [api.md](api.md#명령줄-hdtrans) | 명령줄 프로그램과 번역 창 |
 
@@ -27,7 +27,7 @@
 | [ehnd-compat.md](ehnd-compat.md) | Ehnd 필터, SkipLayer, 사용자 사전 형식과 적용 순서, hdTrans 필터 파일 |
 | [api.md](api.md) | CLI 옵션, C API, J2K 함수, WebAssembly, C++ API |
 | [typescript-api.md](typescript-api.md) | TypeScript와 JavaScript: 초기화, 번역과 JSON/WHY, 사용자 사전, 실행 중 Ehnd 필터 변경 |
-| [using-with-tools.md](using-with-tools.md) | 번역 도구 연결과 검증 범위, CLI, Python ctypes, 웹 |
+| [tool-compatibility.md](tool-compatibility.md) | 도구 로더와 레지스트리, ABI와 인코딩, 호스트 테스트 범위, Python ctypes |
 | [web.md](web.md) | 웹 데모(`web/`) 빌드, 확인, 배포 |
 
 ## 저장소 구성
