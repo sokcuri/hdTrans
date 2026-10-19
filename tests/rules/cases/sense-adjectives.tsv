@@ -1,4 +1,9 @@
 rule	input	expected	kind	layer
+dict:打たれ強	打たれ強い人だ。	맷집이 좋은 사람이다.	fix	defaults
+dict:打たれ強	打たれ強くない。	맷집이 좋지 않다.	fix	defaults
+dict:打たれ強	打たれ強かった。	맷집이 좋았다.	fix	defaults
+dict:打たれ強	打たれ強くなった。	맷집이 좋아졌다.	fix	defaults
+dict:打たれ強	強い衝撃に耐える。	강한 충격에 참는다.	keep	defaults
 L2571	大根を薄く切る。	무를 얇게 자른다.	fix	local
 L2571	味が薄い。	싱겁다.	keep	local
 L2571	薄いスープを飲む。	싱거운 스프를 먹는다.	keep	local
