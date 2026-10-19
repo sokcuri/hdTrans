@@ -25,3 +25,15 @@ dict:Tu	二人分の食事。	두 사람분의 식사.	fix	compose
 L727	パンを焼いた。	빵을 구웠다.	keep	senses
 L2568	皆様にご意見をさせていただいた。	여러분에게 의견을 했다.	keep	local
 L1961	全てが元へ戻った。	모두가 원래로 돌아왔다.	fix	local
+dict:presumed	係員とおぼしき人が入口に立っている。	관계자로 보이는 사람이 입구에 서 있다.	fix	lookup
+dict:presumed	犯人とおぼしき男を見た。	범인으로 보이는 남자를 보았다.	fix	lookup
+dict:presumed	係員と話した。	관계자와 이야기했다.	keep	lookup
+dict:reading	休日は読書漬けだ。	휴일은 독서 삼매경이다.	fix	lookup
+dict:reading	最近は読書漬けです。	최근에는 독서 삼매경입니다.	fix	lookup
+dict:reading	豆を水に漬けた。	콩을 물에 담그었다.	keep	lookup
+dict:reading	漬け物を食べた。	절임을 먹었다.	keep	lookup
+dict:hortative	明日の練習も頑張ろっ！	내일의 연습도 힘내자!	fix	lookup
+dict:hortative	次の試合も頑張ろっ。	다음의 시합도 힘내자.	fix	lookup
+dict:hortative	明日も頑張る。	내일도 노력한다.	keep	lookup
+dict:hortative	頑張れ！	힘내라!	keep	lookup
+dict:hortative	がんばろ！	힘내자!	keep	lookup
