@@ -28,6 +28,67 @@ const goodRun = {
   head_repository: { full_name: 'example/hdTrans' },
 };
 
+const publishWorkflow = readFileSync(fileURLToPath(new URL('../../.github/workflows/publish-npm.yml', import.meta.url)), 'utf8');
+const dispatchScript = publishWorkflow.match(/      - name: Start npm publication after Build completes\n[\s\S]*?          script: \|\n([\s\S]*?)\n  publish:/)?.[1];
+assert.ok(dispatchScript, 'The completed-Build dispatcher script is present.');
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+const runDispatch = new AsyncFunction('github', 'context', 'core', dispatchScript.replace(/^ {12}/gm, ''));
+
+async function dispatchFixture(overrides = {}, jobs = [{ name: 'release / release', conclusion: 'success' }]) {
+  const calls = [];
+  const run = { ...goodRun, id: Number(runId), head_branch: 'v0.2.0', ...overrides };
+  const listJobs = () => {};
+  await runDispatch({
+    rest: { actions: { listJobsForWorkflowRun: listJobs, createWorkflowDispatch: async args => calls.push(args) } },
+    paginate: async (method, args) => {
+      assert.equal(method, listJobs);
+      assert.deepEqual(args, { ...repo, run_id: Number(runId), filter: 'latest', per_page: 100 });
+      return jobs;
+    },
+  }, { repo, payload: { workflow_run: run } }, { info() {} });
+  return calls;
+}
+
+for (const event of ['push', 'workflow_dispatch']) {
+  test(`completed stable ${event} Build dispatches the immutable tag`, async () => {
+    assert.deepEqual(await dispatchFixture({ event }), [{
+      ...repo, workflow_id: 'publish-npm.yml', ref: 'v0.2.0', inputs: { build_run_id: runId },
+    }]);
+  });
+}
+
+for (const [name, overrides] of [
+  ['running Build', { status: 'in_progress' }],
+  ['failed Build', { conclusion: 'failure' }],
+  ['other workflow', { path: '.github/workflows/probe.yml' }],
+  ['pull request', { event: 'pull_request' }],
+  ['foreign repository', { head_repository: { full_name: 'other/hdTrans' } }],
+  ['main branch', { head_branch: 'main' }],
+  ['nightly', { head_branch: 'nightly' }],
+  ['prerelease', { head_branch: 'v0.2.0-rc.1' }],
+]) {
+  test(`npm dispatcher ignores ${name}`, async () => {
+    assert.deepEqual(await dispatchFixture(overrides), []);
+  });
+}
+
+for (const conclusion of ['skipped', 'failure', null]) {
+  test(`npm dispatcher ignores ${conclusion ?? 'pending'} release job`, async () => {
+    assert.deepEqual(await dispatchFixture({}, [{ name: 'release / release', conclusion }]), []);
+  });
+}
+
+test('npm dispatcher does not publish a dry-run with only packaged artifacts', async () => {
+  assert.deepEqual(await dispatchFixture({}, [{ name: 'release / package', conclusion: 'success' }]), []);
+});
+
+test('npm publication runs only after Build completion or an explicit retry', () => {
+  const buildWorkflow = readFileSync(fileURLToPath(new URL('../../.github/workflows/build.yml', import.meta.url)), 'utf8');
+  assert.doesNotMatch(buildWorkflow, /createWorkflowDispatch|  publish-npm:/);
+  assert.match(publishWorkflow, /workflow_run:\n    workflows: \[Build\]\n    types: \[completed\]/);
+  assert.match(publishWorkflow, /  publish:\n    if: github.event_name == 'workflow_dispatch'/);
+});
+
 function fixture(messages, baseline, persisted = baseline ?? '0.1.0') {
   const files = {
     'release-please-config.json': JSON.stringify(config),

@@ -1,6 +1,9 @@
 name: Publish npm
 
 on:
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
   workflow_dispatch:
     inputs:
       build_run_id:
@@ -17,7 +20,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  dispatch:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Start npm publication after Build completes
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            if (run.status !== 'completed' || run.conclusion !== 'success' ||
+                run.path !== '.github/workflows/build.yml' ||
+                !['push', 'workflow_dispatch'].includes(run.event) ||
+                run.head_repository.full_name !== `${context.repo.owner}/${context.repo.repo}` ||
+                !/^v\d+\.\d+\.\d+$/.test(run.head_branch)) {
+              core.info('No completed stable release Build to publish.');
+              return;
+            }
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              ...context.repo, run_id: run.id, filter: 'latest', per_page: 100
+            });
+            if (!jobs.some(job => job.name === 'release / release' && job.conclusion === 'success')) {
+              core.info('The Build did not publish a release; skipping npm publication.');
+              return;
+            }
+            await github.rest.actions.createWorkflowDispatch({
+              ...context.repo, workflow_id: 'publish-npm.yml', ref: run.head_branch,
+              inputs: { build_run_id: String(run.id) }
+            });
+
   publish:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: npm
