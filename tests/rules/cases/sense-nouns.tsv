@@ -1,4 +1,7 @@
 rule	input	expected	kind	layer
+dict:わんぴーす	わんぴーすを買った。	원피스를 샀다.	fix	defaults
+dict:わんぴーす	新しい服はわんぴーすっ！	새로운 옷은 원피스!	fix	defaults
+dict:わんぴーす	ワンピースを洗った。	원피스를 씻었다.	keep	defaults
 L3395	夜は更ける。	밤은 깊어진다.	fix	local
 L3395	夜は続いた。	밤은 계속되었다.	fix	local
 L3395	夜は歩いた。	밤에는 걸었다.	keep	local

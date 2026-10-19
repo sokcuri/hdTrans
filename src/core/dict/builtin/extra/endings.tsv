@@ -246,6 +246,10 @@
 書くっすよ	쓸게요	end	prio=-1
 書いたっすよ	썼어요	end	prio=-1
 書かないっす	쓰지 않아요	end	prio=-1
+書かないんすよ	쓰지 않아요	end	prio=-1
+書かないんすか	쓰지 않나요	end	prio=-1
+書けないんすよ	쓸 수 없어요	end	prio=-1
+書けないんすか	쓸 수 없나요	end	prio=-1
 書きたいっす	쓰고 싶어요	end	prio=-1
 学生ッス	학생이에요	end	prio=-1
 学生ッスか	학생인가요	end	prio=-1
