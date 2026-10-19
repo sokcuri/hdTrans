@@ -84,11 +84,14 @@ with zipfile.ZipFile(release) as archive:
             raise RuntimeError('ZIP link rejected')
     archive.extractall(package)
 
-engines = [path for path in package.rglob('J2KEngine.dll')
-           if 'x86' in str(path.relative_to(package)).lower()]
+engines = list(package.rglob('J2KEngine.dll'))
 if len(engines) != 1:
     raise RuntimeError('Expected one released x86 engine: ' + str([str(p.relative_to(package)) for p in engines]))
 engine = engines[0]
+pe = engine.read_bytes()
+pe_offset = int.from_bytes(pe[0x3c:0x40], 'little')
+if pe[pe_offset:pe_offset + 6] != b'PE\0\0\x4c\x01':
+    raise RuntimeError('Released J2K engine is not x86 PE')
 data = engine.parent / 'hdTrans'
 if not data.is_dir():
     raise RuntimeError('Shipped hdTrans directory missing')
