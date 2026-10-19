@@ -1,6 +1,6 @@
 {
   "name": "hdtrans",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Japanese to Korean translation with a bundled WebAssembly engine and dictionary",
   "type": "module",
   "main": "./dist/index.js",
@@ -32,7 +32,12 @@
     "directory": "npm"
   },
   "homepage": "https://github.com/sokcuri/hdTrans/tree/develop/npm",
-  "keywords": ["japanese", "korean", "translation", "wasm"],
+  "keywords": [
+    "japanese",
+    "korean",
+    "translation",
+    "wasm"
+  ],
   "devDependencies": {
     "@types/node": "^22.0.0",
     "typescript": "^7.0.2"

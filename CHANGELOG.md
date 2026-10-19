@@ -1,0 +1,54 @@
+# Changelog
+
+## 0.1.1 (2026-10-19)
+
+
+### Features
+
+* integrate TypeScript API and npm nightly packages ([cd9c2cf](https://github.com/sokcuri/hdTrans/commit/cd9c2cfa45dceac7330ca343a63aca111acce045))
+* **wasm:** add typed API, npm CLI and Ehnd execution traces ([aca2bbf](https://github.com/sokcuri/hdTrans/commit/aca2bbfdbf02142aa07296a74f82a0a9bc2ae678))
+
+
+### Bug Fixes
+
+* **build:** pass native Windows paths to the Framework compiler ([05de687](https://github.com/sokcuri/hdTrans/commit/05de687d38fa84acba0a124fb2a1fb30f54561de))
+* ezTrans 오역 사례의 어휘와 좁은 문맥 조립 교정 ([6598f79](https://github.com/sokcuri/hdTrans/commit/6598f7975e7a3b76482d57c84f5e798c130082cb))
+* **release:** start GitHub releases above the published npm version ([3f3fcf5](https://github.com/sokcuri/hdTrans/commit/3f3fcf59c463a2269c9a4cfaa6bd1b40e305f8a2))
+* **rules:** clean unreachable numeric-theme branches and ending pattern ([c9bce18](https://github.com/sokcuri/hdTrans/commit/c9bce187583036abcba42144aa9d3260544f0909))
+* **rules:** constrain arithmetic, body and counter senses ([fbf98fd](https://github.com/sokcuri/hdTrans/commit/fbf98fd0b3f45831e270bda5acc2f114fb207e8b))
+* **rules:** constrain food, kindness, quoted-name and limit senses ([8357dda](https://github.com/sokcuri/hdTrans/commit/8357ddaf8aae095bfd0b10337e52f1dee185ff08))
+* **rules:** correct ending fields and remove inert alternatives ([bd8a5d0](https://github.com/sokcuri/hdTrans/commit/bd8a5d0e6cb24d081c979a914574f78a0d167d73))
+* **rules:** correct frequent sense and colloquial negation choices ([e4eddd2](https://github.com/sokcuri/hdTrans/commit/e4eddd2f8a14ad56871fdab1f76aff89924dd2a8))
+* **rules:** correct numeric fields, spelling and country counter ([c00e8b9](https://github.com/sokcuri/hdTrans/commit/c00e8b96886109666985b293a601804770daf7c6))
+* **rules:** correct particle context checks and remove dead alternatives ([666db37](https://github.com/sokcuri/hdTrans/commit/666db376f55d3379f0222d4450ac3e8dda3f9283))
+* **rules:** correct quotation, noun offsets and grammar fields ([ba8bb97](https://github.com/sokcuri/hdTrans/commit/ba8bb978ef57f7ba5a4c067147c251200e2312cc))
+* **rules:** correct quoted endings and explicit subject promises ([e3249d8](https://github.com/sokcuri/hdTrans/commit/e3249d8ffaaa4a94f62eb8f91d8e168b7d2500e0))
+* **rules:** distinguish discourse cues from referents and places ([5bf3969](https://github.com/sokcuri/hdTrans/commit/5bf3969ebbea4d63dd49dee1ef6a9e13451126a1))
+* **rules:** distinguish extra quantities from times and connectors ([2b2caea](https://github.com/sokcuri/hdTrans/commit/2b2caea10a81e859eb9b8d3d18e40eb5e174d7bd))
+* **rules:** distinguish home, spatial, deictic and lexical senses ([34c4f1e](https://github.com/sokcuri/hdTrans/commit/34c4f1eb5eb6f42d64a6af9eec2d61326a144f97))
+* **rules:** distinguish literal objects, destinations and means ([1dfbd4f](https://github.com/sokcuri/hdTrans/commit/1dfbd4ff56bf4206282dc264d829eb1194197677))
+* **rules:** guard invitation and greeting choices by context ([6a469eb](https://github.com/sokcuri/hdTrans/commit/6a469eb98b81fc03dae8c62cc372df3af451eb3c))
+* **rules:** keep sightseeing and glance expressions nominal ([863a013](https://github.com/sokcuri/hdTrans/commit/863a013b1a0a0e565827385052b161359c3f8b01))
+* **rules:** keep the provider as subject across benefactive objects ([c19c79a](https://github.com/sokcuri/hdTrans/commit/c19c79a1a42063fe56cd10e02546cafe2149994e))
+* **rules:** narrow benefactive requests and repair honorific endings ([05a76df](https://github.com/sokcuri/hdTrans/commit/05a76df27fd933ed4b5340a15f68c363732752d6))
+* **rules:** preserve concessive links and conditional connectives ([a9881b7](https://github.com/sokcuri/hdTrans/commit/a9881b7a905ff9846163f328d318b2c072152c03))
+* **rules:** preserve contrast, subset and upward movement meanings ([84cd4b7](https://github.com/sokcuri/hdTrans/commit/84cd4b7cceada7854ba8f4eaa47a58cd4377b0f2))
+* **rules:** preserve inclusive pronouns and relative-time particles ([b68a8d5](https://github.com/sokcuri/hdTrans/commit/b68a8d5ba59cf83bd8cfd43b3e8e2f7b6d484fba))
+* **rules:** preserve pronouns, spatial gaps and following actions ([e15eb85](https://github.com/sokcuri/hdTrans/commit/e15eb850e906e922b87625eef560dc2a8549a051))
+* **rules:** preserve species-specific flower counters ([523c820](https://github.com/sokcuri/hdTrans/commit/523c82053bef801c251cd1b9d50e777efc85555f))
+* **rules:** preserve the noun before auxiliary のみ ([afbad96](https://github.com/sokcuri/hdTrans/commit/afbad96ba21311bb2242b2cceeb7d8a97b8183d1))
+* **rules:** remove inert honorific checks and match the gozaru stem ([432d49f](https://github.com/sokcuri/hdTrans/commit/432d49fc50d1aa5beba2bcc71a9d472f2005c127))
+* **rules:** repair low-frequency senses and redundant branches ([9abb041](https://github.com/sokcuri/hdTrans/commit/9abb041c30984f092bede548eb8f41e8404c0c40))
+* **rules:** repair remaining kana-theme comparisons and dead conditions ([44c7404](https://github.com/sokcuri/hdTrans/commit/44c7404d4efea24549347d6cc4e3c9aabefd9a16))
+* **rules:** retain negation, concessives and literal predicate senses ([5ce8e62](https://github.com/sokcuri/hdTrans/commit/5ce8e6213d9943be2177249886b7e4d46b55a00e))
+* **rules:** retain transitive and contextual noun senses ([7e3e170](https://github.com/sokcuri/hdTrans/commit/7e3e17061e5a607a953eb73aad1a9b28ddb63ad2))
+* **rules:** revert broad emotion sense activation after e2e review ([2cddb6e](https://github.com/sokcuri/hdTrans/commit/2cddb6e7145969e28c6302fd9a36baa94f9c3b6e))
+* **rules:** revert jointly regressed quantity and age restrictions ([d538e1a](https://github.com/sokcuri/hdTrans/commit/d538e1ad5425b2013e10cfa80aa743b5e70cdf52))
+* **rules:** revert particle changes rejected by both e2e judges ([c7b6409](https://github.com/sokcuri/hdTrans/commit/c7b640985203c777bb09d8073ef374c23ed886a3))
+* **rules:** separate particle means, companions and conditions ([e7d9aa1](https://github.com/sokcuri/hdTrans/commit/e7d9aa1f800b1a0fc939c53e46d7de8c18ee0062))
+
+
+### Reverts
+
+* **rules:** preserve ellipsis-separated あれ interjections ([e2b3c12](https://github.com/sokcuri/hdTrans/commit/e2b3c12e42f0c215b7eab1f713707e74f7e40856))
+* **rules:** withdraw benefactive and destination restrictions after e2e review ([511c957](https://github.com/sokcuri/hdTrans/commit/511c95798509ed8b88eedd913fc3a8855dcd1340))
