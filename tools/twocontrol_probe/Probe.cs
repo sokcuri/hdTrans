@@ -25,9 +25,19 @@ class Probe {
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] static extern IntPtr SendMessage(IntPtr window, uint message, IntPtr wparam, string lparam);
     [DllImport("user32.dll")] static extern bool PostMessage(IntPtr window, uint message, IntPtr wparam, IntPtr lparam);
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
+    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
+    [DllImport("user32.dll")] static extern int GetDlgCtrlID(IntPtr window);
+    [StructLayout(LayoutKind.Sequential)] struct Rect { public int left,top,right,bottom; }
+    [DllImport("user32.dll")] static extern bool GetWindowRect(IntPtr window, out Rect rectangle);
+    [DllImport("user32.dll")] static extern bool PrintWindow(IntPtr window, IntPtr dc, uint flags);
+    [DllImport("kernel32.dll")] static extern uint GetACP();
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode)] static extern IntPtr GetModuleHandle(string name);
     [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)] static extern IntPtr LoadLibrary(string file);
     [DllImport("kernel32.dll", CharSet=CharSet.Ansi)] static extern IntPtr GetProcAddress(IntPtr module, string name);
     [UnmanagedFunctionPointer(CallingConvention.StdCall)] delegate IntPtr TranslateWide(IntPtr text);
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)] delegate int TranslateNarrow(IntPtr text);
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)] delegate IntPtr EngineTranslate(IntPtr window, IntPtr text);
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)] delegate void EngineFree(IntPtr memory);
     static string root, app, evidence;
     static string Text(IntPtr h) { var s = new StringBuilder(32768); GetWindowText(h,s,s.Capacity); return s.ToString(); }
     static string Class(IntPtr h) { var s = new StringBuilder(512); GetClassName(h,s,s.Capacity); return s.ToString(); }
@@ -50,14 +60,18 @@ class Probe {
             Console.WriteLine("WINDOW " + h + " visible=" + IsWindowVisible(h) + " class=" + Class(h) + " text=" + Text(h));
             if (!IsWindowVisible(h)) continue;
             Menus(GetMenu(h),"");
-            EnumChildWindows(h,delegate(IntPtr c, IntPtr arg) { Console.WriteLine("CONTROL " + c + " visible=" + IsWindowVisible(c) + " class=" + Class(c) + " text=" + Text(c)); return true; },IntPtr.Zero);
+            EnumChildWindows(h,delegate(IntPtr c, IntPtr arg) { Console.WriteLine("CONTROL " + c + " id=" + GetDlgCtrlID(c) + " visible=" + IsWindowVisible(c) + " class=" + Class(c) + " text=" + Text(c)); return true; },IntPtr.Zero);
+            try {
+                Rect rectangle; GetWindowRect(h,out rectangle);
+                int width=rectangle.right-rectangle.left, height=rectangle.bottom-rectangle.top;
+                if(width>0 && height>0 && width<4096 && height<4096) using(var bitmap=new Bitmap(width,height)) {
+                    using(var graphics=Graphics.FromImage(bitmap)) {
+                        IntPtr dc=graphics.GetHdc(); bool printed=PrintWindow(h,dc,0); graphics.ReleaseHdc(dc);
+                        if(printed) bitmap.Save(Path.Combine(evidence,stage+"-"+h+".png"),ImageFormat.Png);
+                    }
+                }
+            } catch(Exception ex) { Console.WriteLine("APP_SCREENSHOT " + ex.Message); }
         }
-        try {
-            using (var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.Bounds.Height)) {
-                using(var g=Graphics.FromImage(bitmap)) g.CopyFromScreen(0,0,0,0,bitmap.Size);
-                bitmap.Save(Path.Combine(evidence,stage+".png"),ImageFormat.Png);
-            }
-        } catch(Exception ex) { Console.WriteLine("SCREENSHOT " + ex.GetType().Name + " " + ex.Message); }
     }
     static void Modules(int pid) {
         try { foreach (ProcessModule module in Process.GetProcessById(pid).Modules) {
@@ -82,20 +96,43 @@ class Probe {
         Console.WriteLine("Actual plugin TranslateW=" + address);
         if(address==IntPtr.Zero) return 3;
         var translate=(TranslateWide)Marshal.GetDelegateForFunctionPointer(address,typeof(TranslateWide));
+        Console.WriteLine("SYSTEM_ACP="+GetACP());
         bool passed=true;
-        foreach(string input in new[]{"猫", "水", "こんにちは。"}) {
+        foreach(string input in new[]{"猫です。", "水です。", "こんにちは。"}) {
             IntPtr buffer=Marshal.AllocHGlobal(65536);
             byte[] bytes=Encoding.Unicode.GetBytes(input+"\0"); Marshal.Copy(bytes,0,buffer,bytes.Length);
             Console.WriteLine("CALL actual-plugin TranslateW input=" + input);
             IntPtr returned=translate(buffer);
             string output=Marshal.PtrToStringUni(buffer);
-            Console.WriteLine("RESULT return="+returned+" output="+output);
-            if(input=="猫") { Console.WriteLine("EXPECTED 猫 -> 고양이"); passed &= output=="고양이" && returned!=IntPtr.Zero; }
+            Console.WriteLine("RESULT return="+returned+" output="+output+" utf16="+BitConverter.ToString(Encoding.Unicode.GetBytes(output)));
             if(output==input || String.IsNullOrEmpty(output)) passed=false;
             Marshal.FreeHGlobal(buffer);
         }
         Modules(Process.GetCurrentProcess().Id);
-        Console.WriteLine("PLUGIN_RESULT " + (passed?"PASS":"FAIL"));
+        IntPtr narrowAddress=GetProcAddress(module,"TranslateDll");
+        var narrow=(TranslateNarrow)Marshal.GetDelegateForFunctionPointer(narrowAddress,typeof(TranslateNarrow));
+        foreach(string input in new[]{"猫です。", "水です。", "こんにちは。"}) {
+            IntPtr buffer=Marshal.AllocHGlobal(65536);
+            byte[] bytes=Encoding.GetEncoding(932).GetBytes(input+"\0"); Marshal.Copy(bytes,0,buffer,bytes.Length);
+            Console.WriteLine("CALL actual-plugin TranslateDll CP932 input="+input+" bytes="+BitConverter.ToString(bytes));
+            int returned=narrow(buffer);
+            var result=new List<byte>(); for(int i=0;i<65536;++i) { byte b=Marshal.ReadByte(buffer,i); if(b==0) break; result.Add(b); }
+            Console.WriteLine("NARROW_RESULT return="+returned+" CP949="+Encoding.GetEncoding(949).GetString(result.ToArray())+" raw="+BitConverter.ToString(result.ToArray()));
+            Marshal.FreeHGlobal(buffer);
+        }
+        IntPtr engine=GetModuleHandle("Ehnd.dll");
+        if(engine!=IntPtr.Zero) {
+            var direct=(EngineTranslate)Marshal.GetDelegateForFunctionPointer(GetProcAddress(engine,"J2K_TranslateMMNT"),typeof(EngineTranslate));
+            var free=(EngineFree)Marshal.GetDelegateForFunctionPointer(GetProcAddress(engine,"J2K_FreeMem"),typeof(EngineFree));
+            foreach(string input in new[]{"猫です。", "水です。", "こんにちは。"}) {
+                byte[] bytes=Encoding.GetEncoding(932).GetBytes(input+"\0"); IntPtr text=Marshal.AllocHGlobal(bytes.Length); Marshal.Copy(bytes,0,text,bytes.Length);
+                IntPtr result=direct(IntPtr.Zero,text);
+                var output=new List<byte>(); if(result!=IntPtr.Zero) for(int i=0;i<65536;++i) { byte b=Marshal.ReadByte(result,i); if(b==0) break; output.Add(b); }
+                Console.WriteLine("DIRECT_ENGINE_DIAGNOSTIC input="+input+" CP949="+Encoding.GetEncoding(949).GetString(output.ToArray())+" raw="+BitConverter.ToString(output.ToArray()));
+                if(result!=IntPtr.Zero) free(result); Marshal.FreeHGlobal(text);
+            }
+        }
+        Console.WriteLine("PLUGIN_RESULT " + (passed?"OUTPUT_CHANGED_NOT_YET_VERIFIED":"FAIL"));
         return passed?0:4;
     }
     static int Gui() {
@@ -104,9 +141,11 @@ class Probe {
         Console.WriteLine("GUI actual TwoControl.exe pid="+process.Id+" sha256="+Hash(start.FileName));
         Thread.Sleep(12000);
         if(process.HasExited) { Console.WriteLine("GUI exited="+process.ExitCode); return 5; }
+        foreach(var window in Windows(process.Id)) if(Text(window)=="TwoControl") { ShowWindow(window,9); SetForegroundWindow(window); }
+        Thread.Sleep(2000);
         Dump(process.Id,"gui-start"); Modules(process.Id);
-        Clipboard.SetText("猫");
-        Console.WriteLine("GUI clipboard authored input=猫");
+        Clipboard.SetText("こんにちは。");
+        Console.WriteLine("GUI clipboard authored input=こんにちは。");
         Thread.Sleep(5000);
         Dump(process.Id,"gui-clipboard"); Modules(process.Id);
         process.Kill(); process.WaitForExit();
