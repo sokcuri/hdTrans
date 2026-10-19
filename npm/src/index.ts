@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import createEngine, { type EngineModule } from './hdTransEngine.js';
+import createEngine, { type EngineModule } from './hdtrans_engine.js';
 import { HdTrans as RuntimeHdTrans, type InitOptions as RuntimeInitOptions } from './runtime.js';
 
 export type {
@@ -17,13 +17,9 @@ export type HdTrans = RuntimeHdTrans;
 let modulePromise: Promise<EngineModule> | undefined;
 
 async function loadModule(): Promise<EngineModule> {
-  const [wasmBinary, manifest] = await Promise.all([
-    readFile(new URL('./hdTransEngine.wasm', import.meta.url)),
-    readFile(new URL('./dictionary.json', import.meta.url), 'utf8').then(JSON.parse),
-  ]);
+  const wasmBinary = await readFile(new URL('./hdtrans_engine.wasm', import.meta.url));
   const module = await createEngine({ wasmBinary });
-  module.FS.mkdir('/dicts');
-  for (const file of ['dicts.hdsnap', 'dicts.txt', ...manifest.files]) {
+  for (const file of ['dicts.hdsnap', 'dicts.txt']) {
     module.FS.writeFile(`/${file}`, await readFile(new URL(file, import.meta.url)));
   }
   return module;
@@ -38,7 +34,7 @@ export const HdTrans = Object.freeze({
     });
     return RuntimeHdTrans.init({
       module: await modulePromise,
-      directories: ['/dicts.hdsnap', '/dicts'],
+      directories: ['/dicts.hdsnap'],
       ehnd: options.ehnd,
     });
   },

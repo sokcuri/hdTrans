@@ -1,6 +1,6 @@
 # hdtrans
 
-Japanese to Korean translation for Node.js 22 or newer. The package includes the WebAssembly engine and base dictionary. No compiler, dictionary download or filesystem setup is needed. Translation runs locally.
+Japanese to Korean translation for Node.js 22 or newer. The package includes the WebAssembly engine and a self-contained `dicts.hdsnap` base dictionary, with no TSV dictionary tree. No compiler, dictionary download or filesystem setup is needed. Translation runs locally.
 
 ## Install
 
@@ -99,4 +99,10 @@ npm --prefix npm test
 npm pack ./npm
 ```
 
-`--cli` and `--wasm` also accept `HDTRANS_CLI` and `HDTRANS_WASM`. `--wrapper` defaults to `build/web/translator.js` and accepts `HDTRANS_NPM_WRAPPER`. The tool compiles a fresh snapshot from repository `dicts/` and copies the still-needed plain dictionaries. It verifies that the bundled WASM can open that snapshot. It does not publish anything.
+`--cli` and `--wasm` also accept `HDTRANS_CLI` and `HDTRANS_WASM`. `--wrapper` defaults to `build/web/translator.js` and accepts `HDTRANS_NPM_WRAPPER`. The tool compiles a fresh standalone snapshot from repository `dicts/`. To reuse the snapshot made for native archives, replace `--cli CLI` with `--snapshot FILE`:
+
+```sh
+node tools/package-npm.mjs --snapshot build/dicts.hdsnap --wasm build/wasm
+```
+
+Both modes verify that the bundled WASM can open the snapshot. `dictionary.json` records its checksum and builtin/data fingerprints, with an empty `files` list. The dictionary version is the npm version plus a hash of every source `dicts/*.tsv`, including `kana.tsv`, using sorted UTF-8 basenames and original file bytes. Source TSVs are never rewritten or packed. The tool does not publish anything.

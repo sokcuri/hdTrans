@@ -1,5 +1,5 @@
 // The engine runs here, off the page's thread.
-// in: init with engine URL, compiled module, snapshot, names and file buffers;
+// in: init with engine URL, compiled module and snapshot;
 //     translate with id, mode, lines and userdict.
 // out: ready/fatal, result/error. A failed userdict update keeps the prior overlay.
 import { HdTrans, type WasmModule } from './translator.js';
@@ -26,10 +26,8 @@ self.onmessage = async (ev: MessageEvent) => {
         },
       });
       e.FS.writeFile('/dicts.hdsnap', new Uint8Array(msg.snapshot));
-      e.FS.mkdir('/dicts');
-      msg.names.forEach((n: string, i: number) => e.FS.writeFile('/dicts/' + n, new Uint8Array(msg.files[i])));
       translator?.close();
-      translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap', '/dicts'] });
+      translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap'] });
       loaded = '';
       m = e;
       postMessage({ type: 'ready', ms: performance.now() - t0, memory: e.HEAPU8.length });

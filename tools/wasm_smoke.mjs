@@ -11,10 +11,11 @@ const wrapper = process.env.HDTRANS_WASM_WRAPPER
 const { HdTrans } = await import(wrapper);
 const { default: createEngine } = await import(pathToFileURL(resolve(modulePath)));
 const engine = await createEngine({
-    wasmBinary: await readFile(join(dirname(resolve(modulePath)), 'hdTransEngine.wasm')),
+    wasmBinary: await readFile(join(dirname(resolve(modulePath)), 'hdtrans_engine.wasm')),
 });
+const fixtureBytes = await readFile(fixturePath);
 engine.FS.mkdir('/dicts');
-engine.FS.writeFile('/dicts/base.tsv', await readFile(fixturePath));
+engine.FS.writeFile('/dicts/base.tsv', fixtureBytes);
 const init = (options = {}) => HdTrans.init({ module: engine, directories: ['/dicts'], ...options });
 await assert.rejects(init({ directories: ['/missing'] }), /dictionaries do not load/);
 await assert.rejects(init({ directories: [42] }), TypeError);
@@ -229,7 +230,9 @@ try {
 
     if (snapshotPath) {
         engine.FS.writeFile('/dicts.hdsnap', await readFile(snapshotPath));
-        const compiled = await init({ directories: ['/dicts.hdsnap', '/dicts'] });
+        engine.FS.unlink('/dicts/base.tsv');
+        engine.FS.rmdir('/dicts');
+        const compiled = await init({ directories: ['/dicts.hdsnap'] });
         try {
             assert.equal(compiled.translate(text), base);
             assert.equal(compiled.dictionaryVersion, 'fixture-v1');
@@ -239,8 +242,10 @@ try {
             assert.equal(compiled.translate(text), base);
         } finally {
             compiled.close();
+            engine.FS.mkdir('/dicts');
+            engine.FS.writeFile('/dicts/base.tsv', fixtureBytes);
         }
-        console.log(`PASS wasm smoke: compiled snapshot, ${text} -> ${base}`);
+        console.log(`PASS wasm smoke: standalone snapshot without source TSVs, ${text} -> ${base}`);
     }
 } finally {
     translator.close();

@@ -229,7 +229,7 @@ if(EMSCRIPTEN)
     target_compile_definitions(hdtrans_wasm PRIVATE HDTRANS_VERSION="${HDTRANS_VERSION}")
     # Embind needs type information only in the binding translation unit.
     set_source_files_properties(src/wasm/main.cpp PROPERTIES COMPILE_OPTIONS -frtti)
-    set_target_properties(hdtrans_wasm PROPERTIES OUTPUT_NAME hdTransEngine)
+    set_target_properties(hdtrans_wasm PROPERTIES OUTPUT_NAME hdtrans_engine)
     target_link_libraries(hdtrans_wasm PRIVATE hdtrans)
     target_link_options(hdtrans_wasm PRIVATE
         --bind --no-entry -sMODULARIZE=1 -sEXPORT_ES6=1 -sALLOW_MEMORY_GROWTH=1 -sFORCE_FILESYSTEM=1

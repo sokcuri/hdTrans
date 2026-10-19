@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { copyFile, mkdir, mkdtemp, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -105,11 +105,22 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     'package.json', 'README.md', 'LICENSE', 'THIRD-PARTY-NOTICES.txt',
     'dist/index.js', 'dist/index.d.ts', 'dist/cli.js', 'dist/cli.d.ts',
     'dist/runtime.js', 'dist/runtime.d.ts', 'dist/dictionary.json',
-    'dist/hdTransEngine.js', 'dist/hdTransEngine.wasm', 'dist/dicts.hdsnap', 'dist/dicts.txt',
-    ...dictionary.files.map((file) => `dist/${file}`),
+    'dist/hdtrans_engine.js', 'dist/hdtrans_engine.wasm', 'dist/dicts.hdsnap', 'dist/dicts.txt',
   ].sort();
+  assert.deepEqual(dictionary.files, []);
   assert.deepEqual(dry.files.map((file) => file.path).sort(), expected);
+  assert(!dry.files.some((file) => /\.tsv$/i.test(file.path) || file.path.startsWith('dist/dicts/')));
+  const sourceHash = createHash('sha256');
+  const sourceNames = (await readdir(join(root, 'dicts'))).filter((name) => name.endsWith('.tsv'))
+    .sort((a, b) => Buffer.compare(Buffer.from(a), Buffer.from(b)));
+  assert(sourceNames.includes('kana.tsv'));
+  for (const name of sourceNames) {
+    sourceHash.update(name).update('\0').update(await readFile(join(root, 'dicts', name))).update('\0');
+  }
+  const { version } = JSON.parse(await readFile(join(packageDir, 'package.json'), 'utf8'));
+  assert.equal(dictionary.version, `${version}+${sourceHash.digest('hex').slice(0, 12)}`);
   const [packed] = JSON.parse(npm(['pack', '--json', '--pack-destination', output], { cwd: packageDir }));
+  assert.deepEqual(packed.files.map((file) => file.path).sort(), expected);
   const tarball = join(output, packed.filename);
   const home = await mkdtemp(join(tmpdir(), 'hdtrans-npm-test-'));
   try {
@@ -129,18 +140,25 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     for (const file of ['LICENSE', 'THIRD-PARTY-NOTICES.txt']) {
       assert.deepEqual(await readFile(join(installed, file)), await readFile(join(root, file)));
     }
+    assert.deepEqual(JSON.parse(await readFile(join(installed, 'dist/dictionary.json'), 'utf8')), dictionary);
     const snapshot = await readFile(join(installed, 'dist/dicts.hdsnap'));
     assert.equal(createHash('sha256').update(snapshot).digest('hex'), dictionary.snapshot.sha256);
     assert.equal(snapshot.subarray(96, 128).toString('hex'), dictionary.snapshot.builtinFingerprint);
     assert.equal(snapshot.subarray(128, 160).toString('hex'), dictionary.snapshot.dataFingerprint);
-    for (const file of dictionary.files) {
-      assert.deepEqual(await readFile(join(installed, 'dist', file)), await readFile(join(root, file)));
-    }
-    // Import through package exports from the fresh project, not a source-tree path.
+    assert.equal(await readFile(join(installed, 'dist/dicts.txt'), 'utf8'), `${dictionary.version}\n`);
+    assert(!(await readdir(join(installed, 'dist'))).includes('dicts'));
+    // Import through package exports from the fresh project, with an unrelated working directory.
     const probe = join(project, 'probe.mjs');
     await writeFile(probe, "export { HdTrans } from 'hdtrans';\n");
-    const { HdTrans } = await import(pathToFileURL(probe));
-    const { translated, engineVersion } = await checkRuntime(HdTrans, dictionary.version);
+    const previousCwd = process.cwd();
+    let translated, engineVersion;
+    try {
+      process.chdir(cwd);
+      const { HdTrans } = await import(pathToFileURL(probe));
+      ({ translated, engineVersion } = await checkRuntime(HdTrans, dictionary.version));
+    } finally {
+      process.chdir(previousCwd);
+    }
 
     await copyFile(join(packageDir, 'test/types.ts'), join(project, 'types.ts'));
     execFileSync(process.execPath, [

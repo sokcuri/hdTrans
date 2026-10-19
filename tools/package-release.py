@@ -4,9 +4,11 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import tarfile
 import tempfile
 import zipfile
@@ -33,7 +35,7 @@ def common_files(source, destination):
 
 def dictionary_version(source):
     digest = hashlib.sha256()
-    for path in sorted((source / "dicts").glob("*.tsv")):
+    for path in sorted((source / "dicts").glob("*.tsv"), key=lambda path: path.name.encode("utf-8")):
         digest.update(path.name.encode("utf-8"))
         digest.update(b"\0")
         digest.update(path.read_bytes())
@@ -62,6 +64,9 @@ def main():
     parser.add_argument("--artifacts", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parent.parent)
+    dictionary = parser.add_mutually_exclusive_group(required=True)
+    dictionary.add_argument("--cli", type=Path, help="compile checkout dicts/ with this native CLI")
+    dictionary.add_argument("--snapshot", type=Path, help="reuse a snapshot compiled from checkout dicts/")
     args = parser.parse_args()
     builds = {preset: args.artifacts / f"hdtrans-{preset}"
               for preset in ("windows-x64", "windows-x86", "linux", "mac", "wasm")}
@@ -76,6 +81,20 @@ def main():
     dict_version = dictionary_version(args.source)
     with tempfile.TemporaryDirectory(prefix="hdtrans-package-") as temporary:
         staging = Path(temporary)
+        snapshot = args.snapshot
+        if snapshot is None:
+            snapshot = staging / "dicts.hdsnap"
+            home = staging / "home"
+            home.mkdir()
+            subprocess.run(
+                [str(args.cli.resolve()), "-dicts", str((args.source / "dicts").resolve()),
+                 "-compile-snapshot", str(snapshot)],
+                cwd=home,
+                env={**os.environ, "HOME": str(home), "USERPROFILE": str(home), "HDTRANS_CACHE_DIR": "off"},
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                check=True,
+            )
         windows = staging / "windows"
         windows.mkdir()
         for name in ("hdtrans.exe", "hdTransGUI.exe", "hdTransEngine.dll"):
@@ -86,7 +105,8 @@ def main():
             ("hdtrans.exe", "hdtrans_x86.exe"),
         ):
             copy_file(builds["windows-x86"] / name, windows / renamed)
-        shutil.copytree(builds["windows-x64"] / "hdTrans", windows / "hdTrans")
+        shutil.copytree(builds["windows-x64"] / "hdTrans/user", windows / "hdTrans/user")
+        copy_file(snapshot, windows / "hdTrans/dicts.hdsnap")
         (windows / "hdTrans/dicts.txt").write_text(dict_version, encoding="utf-8")
         common_files(args.source, windows)
         package = args.output / f"hdTrans-{version}-windows.zip"
@@ -104,8 +124,8 @@ def main():
             for name in ("hdtrans", library):
                 copy_file(builds[preset] / name, folder / name)
             (folder / "hdtrans").chmod(0o755)
-            for name in ("dicts", "user"):
-                shutil.copytree(builds[preset] / name, folder / name)
+            shutil.copytree(builds[preset] / "user", folder / "user")
+            copy_file(snapshot, folder / "dicts.hdsnap")
             (folder / "dicts.txt").write_text(dict_version, encoding="utf-8")
             common_files(args.source, folder)
             package = args.output / f"hdTrans-{version}-{platform}-{arch_names[architecture]}.tar.gz"

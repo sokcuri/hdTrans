@@ -14,7 +14,17 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/cli.js",
+    "dist/cli.d.ts",
+    "dist/runtime.js",
+    "dist/runtime.d.ts",
+    "dist/hdtrans_engine.js",
+    "dist/hdtrans_engine.wasm",
+    "dist/dicts.hdsnap",
+    "dist/dicts.txt",
+    "dist/dictionary.json",
     "LICENSE",
     "THIRD-PARTY-NOTICES.txt",
     "README.md"

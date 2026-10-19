@@ -93,7 +93,7 @@ export class HdTrans {
     }
     let module = await options.module;
     if (!module) {
-      const engine = './hdTransEngine.js';
+      const engine = './hdtrans_engine.js';
       const { default: create } = await import(engine);
       module = await create() as WasmModule;
     }

@@ -1,7 +1,7 @@
 # 웹 데모
 
 https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두 브라우저 안에서 하며, 서버는 정적
-파일(페이지, WebAssembly 엔진, `dicts/`의 열 사전을 컴파일한 `dicts.hdsnap`과 나머지 사전 파일)만 내려 줍니다.
+파일(페이지, WebAssembly 엔진과 기본 사전 전체를 담은 `dicts.hdsnap`)만 내려 줍니다.
 
 ## 구성
 
@@ -26,7 +26,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 ## 빌드
 
 Node 22 이상과 Emscripten, 그리고 같은 소스로 빌드한 네이티브 CLI가 필요합니다. CLI가
-`hdtrans -dicts dicts -compile-snapshot build/web/dicts.hdsnap`으로 열 사전을 컴파일하고, build.mjs는 그 파일을
+`hdtrans -dicts dicts -compile-snapshot build/web/dicts.hdsnap`으로 기본 사전 전체를 컴파일하고, build.mjs는 그 파일을
 WebAssembly 엔진이 불러오는지 확인한 뒤 올립니다. 엔진 데이터(`src/core/`)가 다른 빌드끼리는 맞지 않습니다.
 
 ```sh
@@ -45,7 +45,7 @@ node web/build.mjs
 | `HDTRANS_WEB_EXAMPLES` | 저장소에 없는 예제 텍스트 폴더. `examples.tsv`에 적힌 파일 중 `web/examples/`에 없는 것을 여기서 찾음 |
 
 `build/web/dist`에는 `index.html`, `js/`, `examples/`, `manifest.json`과 내용 해시 폴더
-`assets/<sha256 앞 16자>/`(엔진, `dicts.hdsnap`, 열 파일이 아닌 사전 파일)가 생기고, 텍스트, wasm, `.hdsnap`
+`assets/<sha256 앞 16자>/`(`hdtrans_engine.js`, `hdtrans_engine.wasm`, `dicts.hdsnap`)가 생기고, 텍스트, wasm, `.hdsnap`
 파일마다 `.br`, `.gz` 압축본이 붙습니다. 서버는 브라우저가 받는 인코딩의 압축본을 보내고, `assets/`는 오래 캐시하게 합니다.
 
 ## 확인

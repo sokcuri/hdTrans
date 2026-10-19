@@ -2,8 +2,8 @@
 //
 // Builds the site into build/web/dist from the WebAssembly engine in
 // build/wasm (emcmake cmake --preset wasm && cmake --build --preset wasm)
-// and the dictionary folder dicts/, whose column files the native CLI of the
-// same sources compiles into dicts.hdsnap (hdtrans -compile-snapshot):
+// and the dictionary folder dicts/, which the native CLI of the same sources
+// compiles into dicts.hdsnap (hdtrans --compile-snapshot):
 //   index.html   its version line filled with the date and short hash of the
 //                commit the tree is at (Asia/Seoul)
 //   js/<hash>/   the page scripts (tsc), in a folder named by their content hash
@@ -11,9 +11,8 @@
 //   examples/    the example texts listed in examples.tsv, read from
 //                web/examples/ or HDTRANS_WEB_EXAMPLES; list.json names those
 //                found, in the order of examples.tsv
-//   assets/<sha256 prefix>/  the engine (hdTransEngine.js, hdTransEngine.wasm),
-//                dicts.hdsnap and the other dictionary files, listed with sizes
-//                and hashes in manifest.json
+//   assets/<sha256 prefix>/  the engine (hdtrans_engine.js, hdtrans_engine.wasm),
+//                dicts.hdsnap, listed with sizes and hashes in manifest.json
 // Text and wasm files get .br and .gz copies next to them.
 //
 // Environment: HDTRANS_DICTS (default dicts), HDTRANS_WASM (default
@@ -37,7 +36,7 @@ const extraExamples = process.env.HDTRANS_WEB_EXAMPLES ? resolve(process.env.HDT
 const out = join(root, 'build/web');
 const dist = join(out, 'dist');
 
-for (const f of ['hdTransEngine.js', 'hdTransEngine.wasm']) {
+for (const f of ['hdtrans_engine.js', 'hdtrans_engine.wasm']) {
   if (!existsSync(join(wasmDir, f))) throw new Error(`${join(wasmDir, f)} is missing: build the wasm preset first`);
 }
 if (!existsSync(cli)) throw new Error(`${cli} is missing: build a native preset first (HDTRANS_CLI)`);
@@ -70,7 +69,7 @@ const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8'
 const commit = git('rev-parse', '--short', 'HEAD');
 const date = new Date(Number(git('log', '-1', '--format=%ct')) * 1000).toLocaleString('sv-SE', { timeZone: 'Asia/Seoul' });
 const page = readFileSync(join(here, 'index.html'), 'utf8');
-const stamp = `<p class="contact" id="version">업데이트 ${date} · ${commit}</p>`;
+const stamp = `<p class="contact" id="version">업데이트 ${date}, ${commit}</p>`;
 if (!page.includes('<p class="contact" id="version">dev</p>')) throw new Error('index.html has no version line');
 if (!page.includes('src="js/app.js"') || !page.includes('href="style.css"')) throw new Error('index.html script or style link moved');
 writeFileSync(join(dist, 'index.html'), page
@@ -88,45 +87,28 @@ function asset(file, name) {
   return { name, path, size: b.length, sha256: hash };
 }
 
-// Whether text is a column file: its first line that is neither blank nor a #
-// comment has the first field key.
-function columnFile(text) {
-  for (const [i, raw] of text.split('\n').entries()) {
-    const line = (i === 0 ? raw.replace(/^\uFEFF/, '') : raw).replace(/\r$/, '');
-    if (line !== '' && !line.startsWith('#')) return line.split('\t')[0] === 'key';
-  }
-  return false;
-}
-
-const dictNames = readdirSync(dictDir).filter((n) => n.endsWith('.tsv')).sort();
-const plainNames = dictNames.filter((n) => !columnFile(readFileSync(join(dictDir, n), 'utf8')));
-if (plainNames.length === dictNames.length) throw new Error(`no column dictionary in ${dictDir}`);
 const snapshot = join(out, 'dicts.hdsnap');
 rmSync(snapshot, { force: true });
 execFileSync(cli, ['-dicts', dictDir, '-compile-snapshot', snapshot], { stdio: ['ignore', 'ignore', 'inherit'] });
 
 // The engine must load what the page will give it.
 {
-  const { default: create } = await import(pathToFileURL(join(wasmDir, 'hdTransEngine.js')).href);
-  const e = await create({ wasmBinary: readFileSync(join(wasmDir, 'hdTransEngine.wasm')) });
+  const { default: create } = await import(pathToFileURL(join(wasmDir, 'hdtrans_engine.js')).href);
+  const e = await create({ wasmBinary: readFileSync(join(wasmDir, 'hdtrans_engine.wasm')) });
   e.FS.writeFile('/dicts.hdsnap', readFileSync(snapshot));
-  e.FS.mkdir('/dicts');
-  for (const n of plainNames) e.FS.writeFile('/dicts/' + n, readFileSync(join(dictDir, n)));
   const t0 = performance.now();
   const { HdTrans } = await import(pathToFileURL(join(out, 'translator.js')).href);
-  const translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap', '/dicts'] });
+  const translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap'] });
   console.log(`engine: loads in ${(performance.now() - t0).toFixed(0)} ms, ${(e.HEAPU8.length / 1e6).toFixed(1)} MB of wasm memory`);
   translator.close();
 }
 
 const manifest = {
-  format: 3,
-  engine: asset(join(wasmDir, 'hdTransEngine.js'), 'hdTransEngine.js'),
-  wasm: asset(join(wasmDir, 'hdTransEngine.wasm'), 'hdTransEngine.wasm'),
+  format: 4,
+  engine: asset(join(wasmDir, 'hdtrans_engine.js'), 'hdtrans_engine.js'),
+  wasm: asset(join(wasmDir, 'hdtrans_engine.wasm'), 'hdtrans_engine.wasm'),
   dict: {
-    license: 'CC-BY-SA-4.0',
     snapshot: asset(snapshot, 'dicts.hdsnap'),
-    files: plainNames.map((n) => asset(join(dictDir, n), n)),
   },
 };
 writeFileSync(join(dist, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
@@ -162,7 +144,7 @@ await Promise.all(
 );
 
 let raw = 0, brotli = 0;
-for (const a of [manifest.engine, manifest.wasm, manifest.dict.snapshot, ...manifest.dict.files]) {
+for (const a of [manifest.engine, manifest.wasm, manifest.dict.snapshot]) {
   const c = statSync(join(dist, a.path + '.br')).size;
   raw += a.size;
   brotli += c;

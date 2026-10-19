@@ -5,16 +5,16 @@ WASM 엔진을 TypeScript와 JavaScript에서 쓰는 인터페이스입니다. �
 
 ## 설치
 
-Node.js 22 이상에서 사용합니다. 패키지에는 빌드한 WASM 엔진, 기본 사전, JavaScript와 `.d.ts`가 들어갑니다.
+Node.js 22 이상에서 사용합니다. 패키지에는 빌드한 WASM 엔진, 기본 사전(`dicts.hdsnap`), JavaScript와 `.d.ts`가 들어갑니다.
 사용자가 C++이나 TypeScript를 직접 빌드할 필요는 없습니다.
 
-npm 레지스트리 게시는 아직 완료되지 않았습니다. 게시 후에는 다음 명령으로 설치합니다.
+npm에서 설치합니다.
 
 ```sh
 npm install hdtrans
 ```
 
-게시 전의 패키지를 시험하려면 `.tgz` 파일을 설치합니다.
+`.tgz` 파일을 직접 설치할 수도 있습니다.
 
 ```sh
 npm install ./hdtrans-<version>.tgz
@@ -57,7 +57,7 @@ hdtrans "今日はいい天気ですね。"
 npx hdtrans "今日はいい天気ですね。"
 ```
 
-명령줄에서도 패키지에 포함된 엔진과 기본 사전을 씁니다. 위 명령은 npm 레지스트리에 게시한 뒤 사용할 수 있습니다.
+명령줄에서도 패키지에 포함된 엔진과 기본 사전을 씁니다.
 
 ```sh
 hdtrans --version
@@ -250,14 +250,14 @@ npm --prefix web run test:types
 emcmake cmake --preset wasm
 cmake --build --preset wasm --parallel
 HDTRANS_WASM_WRAPPER=build/web/translator.js node --experimental-default-type=module tools/wasm_smoke.mjs \
-  build/wasm/hdTransEngine.js tests/unit/dict/testdata/folder/base.tsv
+  build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv
 ```
 
 PowerShell의 마지막 명령은 다음과 같습니다.
 
 ```powershell
 $env:HDTRANS_WASM_WRAPPER = "build/web/translator.js"
-node --experimental-default-type=module tools/wasm_smoke.mjs build/wasm/hdTransEngine.js tests/unit/dict/testdata/folder/base.tsv
+node --experimental-default-type=module tools/wasm_smoke.mjs build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv
 ```
 컴파일한 `translator.js`와 `translator.d.ts`는 `build/web/`에 생깁니다. CI의 WASM 아티팩트에도 둘을 포함합니다.
 
