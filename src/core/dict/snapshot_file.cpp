@@ -815,14 +815,14 @@ public:
         const auto bytes = Raw(*section);
         return {reinterpret_cast<const T*>(bytes.data()), static_cast<std::size_t>(section->count)};
     }
-    bool Open(std::string_view name, const std::vector<std::string>& dirs) {
+    bool Open(std::string_view fileName, const std::vector<std::string>& dirs) {
         if constexpr (std::endian::native != std::endian::little) return false;
-        path = name; folders = dirs;
-        if (!ReadStamp(name, stamp) || (!compiled && IsBad(name, stamp))) return false;
+        path = fileName; folders = dirs;
+        if (!ReadStamp(fileName, stamp) || (!compiled && IsBad(fileName, stamp))) return false;
         if (stamp.size < kHeaderSize) { Fail(); return false; }
-        mapped = MappedFile::Open(name);
+        mapped = MappedFile::Open(fileName);
         FileStamp after;
-        if (!mapped || !ReadStamp(name, after) || stamp != after) return false;
+        if (!mapped || !ReadStamp(fileName, after) || stamp != after) return false;
         const auto bytes = mapped->Bytes();
         if (bytes.size() < kHeaderSize || std::memcmp(bytes.data(), kMagic.data(), 8) != 0) { Fail(); return false; }
         auto header = std::array<std::byte, kHeaderSize>{};
