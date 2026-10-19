@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:compound	部活動は楽しい。	동아리 활동은 즐겁다.	fix	lookup
+dict:compound	部活動を続ける。	동아리 활동을 계속한다.	fix	lookup
+dict:compound	部活は楽しい。	동아리는 즐겁다.	keep	lookup
+dict:compound	活動は続く。	활동은 계속된다.	keep	lookup
+dict:idiom	もったいつけずに話す。	젠 체하지 않고 이야기한다.	fix	lookup
+dict:idiom	もったいつけた。	젠 체했다.	fix	lookup
+dict:idiom	もったいつける。	젠 체한다.	fix	lookup
+dict:idiom	勿体を付けずに話す。	젠 체하지 않고 이야기한다.	keep	lookup
+dict:idiom	紙を付けずに話す。	종이를 붙이지 않고 이야기한다.	keep	lookup
+dict:idiom	もったいない。	아깝다.	keep	lookup
+dict:compound	辻立ち演説を聞く。	가두연설을 듣는다.	fix	lookup
+dict:compound	辻立ち演説をする。	가두연설을 한다.	fix	lookup
+dict:compound	街頭演説を聞く。	가두연설을 듣는다.	keep	lookup
+dict:compound	辻立ちがいる。	거리 행상인이 있다.	keep	lookup
