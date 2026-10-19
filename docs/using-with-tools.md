@@ -6,10 +6,6 @@
 2. `C:\hdTrans`처럼 영문 경로에 압축을 풉니다. 별도 설치 프로그램은 없습니다.
 3. 연결할 도구를 끄고 아래 도구별 설정을 적용합니다.
 
-Windows ZIP 하나에 32비트와 64비트 프로그램이 함께 들어 있습니다.
-이지트랜스 연결에는 **32비트(x86) `J2KEngine.dll`**을 씁니다. LunaTranslator 같은 도구의 본체가 64비트여도 같습니다.
-CLI는 `hdtrans.exe`가 64비트, `hdtrans_x86.exe`가 32비트입니다.
-
 연결에 필요한 파일은 다음과 같습니다.
 
 ```text
@@ -24,13 +20,12 @@ C:\hdTrans\
 ```
 
 - `dicts.hdsnap`은 기본 사전, `dicts.txt`는 사전 버전입니다. `dicts/` 폴더나 원본 TSV는 배포하지 않으며 따로 받을 필요도 없습니다.
-- DLL을 다른 폴더로 옮기면 **`hdTrans` 폴더도 함께** 옮깁니다.
-- 기존 이지트랜스 폴더를 쓴다면 원래 DLL을 먼저 백업합니다. 원본 Ehnd DLL을 hdTrans 위에 덮어쓰지 마세요.
+- DLL을 다른 폴더로 옮기면 `hdTrans` 폴더도 함께 옮깁니다.
 
 ## LunaTranslator
 
 1. 이지트랜스 번역 설정에서 DLL 경로를 지정합니다.
-2. `C:\hdTrans\J2KEngine.dll` **파일**을 선택합니다. 폴더를 선택하는 설정이 아닙니다.
+2. `C:\hdTrans\J2KEngine.dll` 파일을 선택합니다.
 3. 이지트랜스 번역을 켜고 일본어를 번역합니다.
 
 ## 아네모네, Anemone
@@ -43,7 +38,7 @@ C:\hdTrans\
    EZTRANS_PATH=C:\hdTrans
    ```
 
-3. 아네모네를 다시 실행합니다. 값은 DLL 파일이 아닌 **폴더**입니다.
+3. 아네모네를 다시 실행합니다.
 
 사용자 사전은 `C:\hdTrans\hdTrans\user\userdict.txt`에 작성합니다. 아네모네의 구형 `AneDic.txt` 대신 이 파일을 씁니다.
 형식은 [사용자 사전](dictionary-files.md#사용자-사전)을 보세요.
@@ -56,7 +51,6 @@ C:\hdTrans\
 4. Textractor에서 게임에 연결하고 번역할 텍스트 스레드를 선택합니다.
 
 Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합니다. Textractor에 DLL 경로를 지정하지 않습니다.
-게임에 맞는 Textractor 비트수를 고르면 되며 아네모네와 비트수가 같을 필요는 없습니다.
 
 ## XUnity.AutoTranslator의 ezTransXP
 
@@ -74,7 +68,7 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
    InstallationPath=C:\hdTrans
    ```
 
-2. 지정한 폴더에 기존 `J2KEngineH.dll`이 있으면 백업 후 다른 이름으로 옮깁니다. **H DLL이 `J2KEngine.dll`보다 먼저 선택됩니다.**
+2. 지정한 폴더에 `J2KEngineH.dll`이 있으면 제거합니다. 이 파일이 `J2KEngine.dll`보다 먼저 선택됩니다.
 3. 게임을 다시 실행합니다. `InstallationPath`를 지정하면 레지스트리 등록은 필요 없습니다.
 
 장시간 사용하면 중개 프로그램의 결과 버퍼 미해제로 메모리 사용량이 늘 수 있습니다.
@@ -86,7 +80,7 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 1. 아랄트랜스를 끕니다.
 2. `Win+R`을 누르고 `regedit`을 실행합니다.
 3. `HKEY_CURRENT_USER\Software\ChangShin\ezTrans`로 이동합니다.
-4. 기존 `FilePath` 값을 기록해 두고 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
+4. `FilePath` 값을 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
 5. 아랄트랜스를 실행하고 **EzTransXP** 번역 플러그인을 선택합니다.
 
 게임 후킹과 ATCode는 아랄트랜스에서 별도로 설정합니다.
@@ -98,8 +92,8 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 1. 에그헤드를 끕니다.
 2. `Win+R`을 누르고 `regedit`을 실행합니다.
 3. `HKEY_CURRENT_USER\Software\ChangShin\ezTrans`로 이동합니다.
-4. 기존 `FilePath` 값을 기록해 두고 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
-5. 에그헤드 실행 파일 옆에 기존 `J2KEngine.dll`이 있으면 백업 후 다른 이름으로 옮깁니다.
+4. `FilePath` 값을 `C:\hdTrans`로 바꿉니다. 키나 값이 없으면 키와 문자열 값 `FilePath`를 만듭니다.
+5. 에그헤드 실행 파일 옆에 기존 `J2KEngine.dll`이 있으면 제거합니다.
 6. 에그헤드를 다시 실행합니다.
 
 에그헤드 0.73new와 0.73rev.E_BETA2 기준입니다. 레지스트리 경로보다 실행 파일 옆 DLL을 먼저 읽습니다.
@@ -110,11 +104,10 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 공식 2024.08.30 배포판 기준입니다.
 
 1. 투컨트롤을 끕니다.
-2. 투컨트롤의 `Ehnd` 폴더에 있는 `Ehnd.dll`과 `Ehnd.dlx`를 백업합니다.
-3. 하드트랜스 배포본의 **32비트 `J2KEngine.dll`을 두 개 복사**하고, 각각 `Ehnd.dll`과 `Ehnd.dlx`로 이름을 바꿔 기존 두 파일을 교체합니다.
-4. 하드트랜스 배포본의 **`hdTrans` 폴더를 투컨트롤의 `Ehnd` 폴더 안에** 복사합니다.
-5. 나머지 투컨트롤 동봉 파일은 그대로 둡니다.
-6. 투컨트롤을 다시 실행하고 이지트랜스 번역을 사용합니다.
+2. 하드트랜스 배포본의 `J2KEngine.dll`을 두 개 복사하고, 각각 `Ehnd.dll`과 `Ehnd.dlx`로 이름을 바꿔 투컨트롤의 `Ehnd` 폴더에 덮어씁니다.
+3. 하드트랜스 배포본의 `hdTrans` 폴더를 투컨트롤의 `Ehnd` 폴더 안에 복사합니다.
+4. 나머지 투컨트롤 동봉 파일은 그대로 둡니다.
+5. 투컨트롤을 다시 실행하고 이지트랜스 번역을 사용합니다.
 
 ```text
 TwoControl\
@@ -128,7 +121,7 @@ TwoControl\
       user\
 ```
 
-`Ehnd.dll`과 `Ehnd.dlx`는 둘 다 하드트랜스 DLL의 복사본입니다. 원본 Ehnd DLL을 다시 덮어쓰지 마세요.
+`Ehnd.dll`과 `Ehnd.dlx`는 둘 다 하드트랜스 DLL의 복사본입니다.
 
 ## VNR, Visual Novel Reader
 
@@ -136,11 +129,11 @@ TwoControl\
 2. `Preferences > Translation > Translators`의 **Enable built-in Ehnd translation script**를 끕니다.
 3. **VNR을 재시작**합니다.
 
-다른 엔진이 계속 사용되면 VNR 폴더나 PATH에 남아 있는 기존 `J2KEngine.dll`, `J2KEngine.dlx`를 확인하고 백업 후 옮깁니다.
+다른 엔진이 계속 사용되면 VNR 폴더나 PATH에 남아 있는 기존 `J2KEngine.dll`, `J2KEngine.dlx`를 제거합니다.
 
 ## HTTP 서버, nanikit/eztrans-server
 
-terminal 버전과 **x86 .NET 6 런타임**을 설치한 뒤 서버 폴더에서 실행합니다.
+terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행합니다.
 
 ```powershell
 .\EztransServer.exe --dll-path "C:\hdTrans\J2KEngine.dll"

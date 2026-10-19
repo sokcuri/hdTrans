@@ -25,10 +25,6 @@ Windows 번역 창, 명령줄 프로그램, 이지트랜스용 도구 연결을 
 2. Windows에서는 `hdTransGUI.exe`를 실행합니다. Linux와 macOS에서는 아래 CLI 사용법을 따릅니다.
 3. 다른 도구에 연결하려면 [도구별 설치 안내](docs/using-with-tools.md)를 보세요.
 
-Windows ZIP 하나에 64비트 GUI와 CLI, **32비트 `J2KEngine.dll`**이 함께 들어 있습니다.
-32비트 CLI는 `hdtrans_x86.exe`입니다. 개발자용 C API는 `hdTransEngine.dll`과 `hdTransEngine_x86.dll`입니다.
-Linux와 macOS는 CPU에 맞는 배포 파일을 고릅니다. `x64`는 Intel/AMD 64비트, `arm64`는 Apple Silicon 등의 ARM 64비트입니다.
-
 기본 사전은 Windows에서 `hdTrans\dicts.hdsnap`, Linux와 macOS에서 프로그램 옆 `dicts.hdsnap`입니다.
 같은 폴더의 `dicts.txt`는 사전 버전입니다. 원본 TSV나 `dicts/` 폴더를 따로 받을 필요가 없습니다.
 
@@ -64,8 +60,7 @@ Linux, macOS:
 LunaTranslator, 아네모네, XUnity.AutoTranslator, 아랄트랜스, VNR 등의 엔진 경로를 하드트랜스 폴더로 지정합니다.
 도구에 엔진 경로를 설정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
 
-- `J2KEngine.dll`과 **`hdTrans` 폴더를 함께** 둡니다.
-- 기존 이지트랜스 폴더에 복사한다면 원래 DLL부터 백업합니다.
+- `J2KEngine.dll`과 `hdTrans` 폴더를 함께 둡니다.
 - 도구에 따라 DLL 파일이나 폴더를 선택합니다. [도구별 설치 안내](docs/using-with-tools.md)의 설정을 따르세요.
 
 ## 사용자 사전
@@ -94,7 +89,7 @@ Windows는 `hdTrans\user\hdtrans.config.example.yaml`, Linux와 macOS는 `user/h
 같은 폴더의 `hdtrans.config.yaml`로 복사해 수정합니다.
 
 꿀도르 같은 Ehnd 사전은 **기본으로 꺼져 있습니다**. 필요할 때 설정에서 켤 수 있지만 번역 품질이 낮아질 수 있습니다.
-원본 Ehnd DLL을 덮어쓰는 방식은 쓰지 않습니다. [Ehnd 설정 안내](docs/ehnd-compat.md)
+[Ehnd 설정 안내](docs/ehnd-compat.md)
 
 ## 업데이트
 
@@ -104,9 +99,9 @@ Windows는 `hdTrans\user\hdtrans.config.example.yaml`, Linux와 macOS는 `user/h
 
 ## 문제 해결
 
-- **DLL을 불러오지 못함:** 이지트랜스 연결용 `J2KEngine.dll`은 32비트입니다. 도구 본체가 64비트여도 32비트 엔진을 사용하는 설정을 따르세요.
+- **DLL을 불러오지 못함:** 도구에 지정한 경로에 `J2KEngine.dll`이 있는지 확인합니다.
 - **사전을 찾지 못함:** Windows에서는 DLL이나 실행 파일 옆 `hdTrans\dicts.hdsnap`이 있는지 확인합니다. Linux와 macOS는 실행 파일 옆에 사전을 둡니다. DLL만 복사했다면 `hdTrans` 폴더도 복사하세요.
-- **계속 예전 엔진으로 번역됨:** 도구의 엔진 경로를 확인합니다. XUnity는 기존 `J2KEngineH.dll`을 먼저 읽으므로 백업 후 다른 이름으로 옮깁니다.
+- **계속 예전 엔진으로 번역됨:** 도구의 엔진 경로를 확인합니다. XUnity는 `J2KEngineH.dll`을 먼저 읽으므로 기존 파일이 있으면 제거합니다.
 - **사용자 사전이 적용되지 않음:** 파일 경로와 `userdict`로 시작하는 이름, UTF-8 인코딩, 항목 사이의 탭을 확인합니다.
 
 ## 문의와 오역 신고

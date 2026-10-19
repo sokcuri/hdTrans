@@ -20,15 +20,11 @@ X: https://x.com/sokcuri
    Linux, macOS:
    ./hdtrans --in input.ja.txt --out output.ko.txt
 
-Windows의 GUI와 hdtrans.exe는 64비트입니다.
-32비트 CLI는 hdtrans_x86.exe, 이지트랜스 연결용 J2KEngine.dll은 32비트입니다.
-hdTransEngine.dll과 hdTransEngine_x86.dll은 개발자용 C API입니다.
-
 다른 번역 도구에 연결하기
 
 도구가 읽는 위치에 J2KEngine.dll과 hdTrans 폴더를 함께 둡니다.
-기존 DLL은 먼저 백업하세요. 도구에 엔진 경로를 지정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
-XUnity는 기존 J2KEngineH.dll을 먼저 읽으므로 남아 있는지 확인하세요.
+도구에 엔진 경로를 지정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
+XUnity는 J2KEngineH.dll을 먼저 읽으므로 기존 파일이 있으면 제거합니다.
 도구별 설정: https://github.com/sokcuri/hdTrans/blob/main/docs/using-with-tools.md
 
 사전과 설정
@@ -43,7 +39,6 @@ userdict로 시작하는 .txt 파일로 나누어도 됩니다.
 
 설정은 같은 user 폴더의 hdtrans.config.example.yaml을 hdtrans.config.yaml로 복사해 고칩니다.
 Ehnd 사전은 기본으로 꺼져 있으며 필요할 때 설정에서 켭니다. 번역 품질이 낮아질 수 있습니다.
-원본 Ehnd DLL을 덮어쓰지 마세요.
 
 업데이트할 때는 실행 중인 번역 창과 연결 도구를 끄고 같은 폴더에 덮어 풉니다.
 직접 만든 사용자 사전과 설정은 유지됩니다. *.example.* 견본은 교체되니 복사해서 쓰세요.

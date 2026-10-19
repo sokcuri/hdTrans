@@ -227,7 +227,7 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
      `ANTHROPIC_API_KEY`(`x-api-key`)를 환경에서 읽습니다. 둘 다 있으면 Bearer를 씁니다. 키, 토큰을 파일에 넣지 않습니다.
      GPT 모델은 해당 모델을 제공하는 Anthropic Messages 호환 게이트웨이가 필요합니다.
 
-5. **같은 줄을 두 모델이 모두 `worse`로 판정하면 원인 변경을 되돌립니다.** 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다.
+5. 같은 줄을 두 모델이 모두 `worse`로 판정하면 원인 변경을 되돌립니다. 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다.
 6. held-out에도 3~5를 별도로 실행하고, 개발 세트와 held-out의 변경 줄, 개선, 동률, 악화 및 쌍방 악화 수를 **분리 보고**합니다.
    held-out을 보고 규칙을 맞췄으면 더는 held-out이 아니므로 새 평가 세트가 필요합니다.
 
