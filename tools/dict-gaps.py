@@ -40,6 +40,7 @@ import sys
 import tempfile
 
 MARKER = re.compile(r"[&$%][A-Za-z][0-9A-Za-z]@")
+HANGUL = re.compile(r"[\uac00-\ud7a3]")
 KANJI = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 PART_CLASSES = {"0": "determiner", "1": "noun", "2": "particle", "3": "adverb",
                 "4": "verb-stem", "5": "ending", "6": "symbol", "7": "adjective-stem",
@@ -144,7 +145,11 @@ def defect_of(choice, rows, part, output, fix):
     if not korean:
         # A row with no word at all: a kanji word should read something, while an
         # empty row for a one-character prefix (御) is a filler.
-        return "missing" if KANJI.search(choice.get("surface", "")) and len(surface) > 1 else ""
+        return "missing" if KANJI.search(surface) and len(surface) > 1 else ""
+    # A stem of one syllable (苦手 서%C2@) is part of a word that the ending completes.
+    if len(HANGUL.findall(korean)) < 2:
+        return ""
+
     if korean in MARKER.sub("", fix):
         return ""
     return "choice" if len(rows) > 1 else "content"
