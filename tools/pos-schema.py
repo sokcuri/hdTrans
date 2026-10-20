@@ -118,8 +118,32 @@ def main():
              "std::span<const PartName> PartSchema() { return kParts; }", "",
              "}  // namespace hdTrans::dict::internal", ""]
     out.write_text("\n".join(body), encoding="utf-8")
-    print(f"{len(rows)} codes, {named} named, {len(rows) - named} unnamed", file=sys.stderr)
+
+    patterns = read_patterns(root / "src/core/dict/part_patterns.tsv")
+    generated = root / "src/core/dict/part_patterns_gen.cpp"
+    table = ["// Generated table; do not edit.", '#include "core/dict/codes.h"', "",
+             "namespace hdTrans::dict::internal {", "", "namespace {", "",
+             "constexpr PartPattern kPatterns[] = {"]
+    for field, pattern, name in patterns:
+        table.append("    {%s, %s, %s}," % (cpp_string(field), cpp_string(name), cpp_string(pattern)))
+    table += ["};", "", "}  // namespace", "",
+              "std::span<const PartPattern> PartPatternTable() { return kPatterns; }", "",
+              "}  // namespace hdTrans::dict::internal", ""]
+    generated.write_text("\n".join(table), encoding="utf-8")
+    print(f"{len(rows)} codes, {named} named, {len(rows) - named} unnamed; "
+          f"{len(patterns)} pattern names", file=sys.stderr)
     return 0
+
+
+def read_patterns(path):
+    """The field, name and pattern of each row, sorted by field then name."""
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line or line.startswith("#"):
+            continue
+        field, pattern, name = line.split("\t")
+        rows.append((field, pattern, name))
+    return sorted(rows, key=lambda r: (r[0], r[2]))
 
 
 if __name__ == "__main__":

@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <algorithm>
 #include <cstring>
+#include <string>
+#include <utility>
 
 namespace hdTrans::dict {
 
@@ -63,6 +65,32 @@ bool PosCodes(std::string_view pos, std::string_view& partText, std::string_view
     sem = {};
     gram = {};
     return true;
+}
+
+std::string PartPatternOf(char field, std::string_view value) {
+    const auto table = internal::PartPatternTable();
+    auto lookup = [&](std::string_view name) -> std::string_view {
+        const auto it = std::lower_bound(table.begin(), table.end(), std::pair<char, std::string_view>(field, name),
+                                         [](const internal::PartPattern& p, const std::pair<char, std::string_view>& key) {
+                                             return p.field[0] < key.first ||
+                                                    (p.field[0] == key.first && std::string_view(p.name) < key.second);
+                                         });
+        return it != table.end() && it->field[0] == field && it->name == name ? std::string_view(it->pattern)
+                                                                             : std::string_view();
+    };
+    if (const std::string_view pattern = lookup(value); !pattern.empty()) return std::string(pattern);
+    if (value.find('+') == std::string_view::npos) return std::string(value);
+    std::string joined;
+    for (std::size_t start = 0;;) {
+        const std::size_t plus = value.find('+', start);
+        const std::string_view part = value.substr(start, plus == std::string_view::npos ? std::string_view::npos
+                                                                                        : plus - start);
+        const std::string_view pattern = lookup(part);
+        if (pattern.empty()) return std::string(value);
+        joined += pattern;
+        if (plus == std::string_view::npos) return joined;
+        start = plus + 1;
+    }
 }
 
 std::string_view PartNameOf(std::string_view code) {
