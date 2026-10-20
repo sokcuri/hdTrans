@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/text/unicode.h"
+#include "core/tokenizer/token.h"
 #include "core/word/strings.h"
 #include "core/word/worker.h"
 
@@ -121,6 +123,17 @@ bool Item::RunKeiyoTrieQuery() {
             g = w->NewGroup(rest, ' ');
         }
     }
+    if (g == nullptr && second.empty() && StandsAlone()) {
+        Record* r = w->NewRecord();
+        r->target = PlainEnding();
+        r->partCode = "T500";
+        g = w->NewGroup(r, ' ');
+        base.ResetDirect(g->entries.size(), false);
+        base.enabled[0] = true;
+        base.group = g;
+        base.resultCount = 0;
+        return true;
+    }
     if (g == nullptr) {
         base.group = nullptr;
         return false;
@@ -177,6 +190,10 @@ bool Item::RunDakeiyoCase8Query() {
         return true;
     }
     if (second.empty()) {
+        if (StandsAlone()) {
+            pseudo(PlainEnding(), "");
+            return true;
+        }
         base.group = nullptr;
         return false;
     }
@@ -231,6 +248,47 @@ bool Item::RunDakeiyoCase8Query() {
     base.group = nullptr;
     return false;
 }
+
+// A stem that is a sentence of its own (厳し。, 静か。): nothing but punctuation or
+// spaces before it, the end of a sentence right after it, and no other word of its
+// length in the dictionary (出た。 is 出 and た). It then reads in its plain form.
+// Of the adjectives only the し stems qualify, which are also the old terminal form;
+// the others are cut-off forms whose last kana is a verb ending or a particle
+// (試してみた, ではな). An adjectival-noun stem ending in な is a cut-off ない; one
+// ending in みたい is left to MitaiLike.
+bool Item::StandsAlone() const {
+    const std::string_view surface = group->surface;
+    if (detail->cls == kDetailKeiyo ? !surface.ends_with(kJaShi)
+                                    : surface.ends_with(kJaNa) || surface.ends_with(kJaMitai)) {
+        return false;
+    }
+    if (start + group->length != static_cast<int>(text.size())) return false;
+    if (const int n = detail->nextType; n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
+    if (const int p = detail->ClassifyTrailingPunctuation({}); p < 2 || p > 4) return false;
+    if (start > 0) {
+        if (!text::IsPunct(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return false;
+    } else if (tokenIndex > 0) {
+        const tokenizer::TokenView before = w->Tok(tokenIndex - 1);
+        switch (before.type) {
+        case tokenizer::kTypeAsciiPunct:
+        case tokenizer::kTypeAsciiOpen:
+        case tokenizer::kTypeNewline:
+        case tokenizer::kTypeAsciiSpace:
+        case tokenizer::kTypeSentenceEnd:
+        case tokenizer::kTypeBracket:
+        case tokenizer::kTypeWideSpace: break;
+        case tokenizer::kTypeJapanese:
+            if (text::IsPunct(DecodeLastRune(before.text).cp)) break;
+            return false;
+        default: return false;
+        }
+    }
+    const Item* other = w->InsertLateCandidate(text, start, tokenIndex, group->records);
+    return other == nullptr || other->length < group->length;
+}
+
+// The ending of a stem that stands alone: 어렵다, 어려워 before a question mark.
+std::string_view Item::PlainEnding() const { return detail->ClassifyTrailingPunctuation({}) == 3 ? "6" : "1다"; }
 
 // A word ending in みたい that reads "like" (같다): みたい after a word, possibly across
 // … or ‥, but not after the て/で of a verb (見てみたい, try to see), an object

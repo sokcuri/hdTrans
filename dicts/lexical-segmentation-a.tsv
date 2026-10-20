@@ -1,4 +1,4 @@
 #! layer=base
 # 말의 연속 동작을 나타내는 복합동사
-key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
-まくし立て	쏘아붙&AJ@	M437			GN					segmentation-a:2
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+まくし立て	쏘아붙&AJ@	M437			GN							segmentation-a:2

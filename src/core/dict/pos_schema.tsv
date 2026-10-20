@@ -1,0 +1,496 @@
+code	class	universal	name	standard	status
+1110	1	NOUN	명사		unnamed
+A0D1	0	DET	연체사		unnamed
+A0H1	0	DET	연체사		unnamed
+A110	1	NOUN	명사		unnamed
+A130	1	NOUN	명사		unnamed
+A411	4	VERB	동사 어간		unnamed
+A420	4	VERB	동사 어간		unnamed
+A427	4	VERB	동사 어간		unnamed
+A428	4	VERB	동사 어간		unnamed
+A500	5	AUX	어미		unnamed
+A7U0	7	ADJ	い형용사		unnamed
+A8U0	8	ADJ	형용동사		unnamed
+A9D0	9	X	구, 관용 표현(세부 부류 추정)		named
+A9D1	9	X	구		unnamed
+A9H0	9	X	구		unnamed
+A9H1	9	X	구		unnamed
+B9H0	9	X	구		unnamed
+C0D0	0	DET	연체사		unnamed
+C0D1	0	DET	연체사		unnamed
+C0H0	0	DET	연체사		unnamed
+C0H1	0	DET	연체사		unnamed
+C110	1	NOUN	명사		unnamed
+C130	1	NOUN	명사		unnamed
+C1H0	1	NOUN	명사		unnamed
+C200	2	ADP	조사		unnamed
+C250	2	ADP	조사		unnamed
+C300	3	ADV	부사		unnamed
+C301	3	ADV	부사		unnamed
+C310	3	ADV	부사		unnamed
+C311	3	ADV	부사		unnamed
+C330	3	CCONJ	부사		unnamed
+C331	3	CCONJ	부사		unnamed
+C411	4	VERB	동사 어간		unnamed
+C418	4	VERB	동사 어간		unnamed
+C424	4	VERB	동사 어간		unnamed
+C426	4	VERB	동사 어간		unnamed
+C427	4	VERB	동사 어간		unnamed
+C428	4	VERB	동사 어간		unnamed
+C429	4	VERB	동사 어간		unnamed
+C433	4	VERB	동사 어간		unnamed
+C445	4	VERB	동사 어간		unnamed
+C447	4	VERB	동사 어간		unnamed
+C448	4	VERB	동사 어간		unnamed
+C449	4	VERB	동사 어간		unnamed
+C4U7	4	VERB	동사 어간		unnamed
+C7N0	7	ADJ	い형용사		unnamed
+C7U0	7	ADJ	い형용사		unnamed
+C8U0	8	ADJ	형용동사		unnamed
+C9D0	9	X	구		unnamed
+D110	1	NOUN	명사		unnamed
+D120	1	NOUN	명사		unnamed
+D200	2	ADP	조사		unnamed
+D411	4	VERB	동사 어간		unnamed
+D419	4	VERB	동사 어간		unnamed
+D420	4	VERB	동사 어간		unnamed
+D421	4	VERB	동사 어간		unnamed
+D423	4	VERB	동사 어간		unnamed
+D427	4	VERB	동사 어간		unnamed
+D428	4	VERB	동사 어간		unnamed
+D429	4	VERB	동사 어간		unnamed
+D441	4	VERB	동사 어간		unnamed
+D443	4	VERB	동사 어간		unnamed
+D449	4	VERB	동사 어간		unnamed
+D469	4	VERB	동사 어간		unnamed
+D4U8	4	VERB	동사 어간		unnamed
+D7N0	7	ADJ	い형용사		unnamed
+D8U0	8	ADJ	형용동사		unnamed
+E010	0	DET	연체사		unnamed
+E0H0	0	DET	연체사	adnominal,連体詞	named
+E0H1	0	DET	연체사(세부 부류 추정)		named
+E100	1	NOUN	명사		unnamed
+E110	1	NOUN	명사		unnamed
+E120	1	NOUN	명사		unnamed
+E130	1	NOUN	명사		unnamed
+E1H0	1	NOUN	명사		unnamed
+E200	2	ADP	조사		unnamed
+E210	2	ADP	조사		unnamed
+E250	2	ADP	조사		unnamed
+E300	3	ADV	부사	adverb,副詞,副詞-一般,副詞-助詞類接続	named
+E301	3	ADV	부사		unnamed
+E310	3	ADV	부사		unnamed
+E311	3	ADV	부사		unnamed
+E320	3	INTJ	감탄사	interjection-filler,interjection-general,フィラー,感動詞,感動詞-フィラー,感動詞-一般	named
+E321	3	ADV	부사		unnamed
+E330	3	ADV	부사		unnamed
+E331	3	CCONJ	접속사	conjunction,接続詞	named
+E411	4	VERB	동사 어간		unnamed
+E413	4	VERB	동사 어간		unnamed
+E419	4	VERB	동사 어간		unnamed
+E41=	4	VERB	동사 어간		unnamed
+E420	4	VERB	동사 어간		unnamed
+E421	4	VERB	동사 어간		unnamed
+E425	4	VERB	동사 어간		unnamed
+E427	4	VERB	동사 어간		unnamed
+E428	4	VERB	동사 어간		unnamed
+E429	4	VERB	동사 어간		unnamed
+E42;	4	VERB	동사 어간		unnamed
+E431	4	VERB	동사 어간		unnamed
+E441	4	VERB	동사 어간		unnamed
+E447	4	VERB	동사 어간		unnamed
+E449	4	VERB	동사 어간		unnamed
+E44;	4	VERB	동사 어간		unnamed
+E467	4	VERB	동사 어간		unnamed
+E468	4	VERB	동사 어간		unnamed
+E469	4	VERB	동사 어간		unnamed
+E4U3	4	VERB	동사 어간		unnamed
+E4U7	4	VERB	동사 어간		unnamed
+E4U8	4	VERB	동사 어간		unnamed
+E4U9	4	VERB	동사 어간		unnamed
+E4U;	4	VERB	동사 어간		unnamed
+E7M0	7	ADJ	い형용사		unnamed
+E7N0	7	ADJ	い형용사		unnamed
+E7NU	7	ADJ	い형용사		unnamed
+E7U0	7	ADJ	い형용사		unnamed
+E8L0	8	ADJ	형용동사		unnamed
+E8U0	8	ADJ	형용동사		unnamed
+E9D0	9	X	구		unnamed
+F311	3	ADV	부사		unnamed
+G0H0	0	DET	연체사		unnamed
+G110	1	NOUN	명사		unnamed
+G300	3	ADV	부사		unnamed
+G301	3	ADV	부사		unnamed
+G311	3	ADV	부사		unnamed
+G418	4	VERB	동사 어간		unnamed
+G420	4	VERB	동사 어간		unnamed
+G421	4	VERB	동사 어간		unnamed
+G423	4	VERB	동사 어간		unnamed
+G426	4	VERB	동사 어간		unnamed
+G427	4	VERB	동사 어간		unnamed
+G428	4	VERB	동사 어간		unnamed
+G429	4	VERB	동사 어간		unnamed
+G439	4	VERB	동사 어간		unnamed
+G440	4	VERB	동사 어간		unnamed
+G443	4	VERB	동사 어간		unnamed
+G445	4	VERB	동사 어간		unnamed
+G447	4	VERB	동사 어간		unnamed
+G448	4	VERB	동사 어간		unnamed
+G4U0	4	VERB	동사 어간		unnamed
+G4U8	4	VERB	동사 어간		unnamed
+G4U9	4	VERB	동사 어간		unnamed
+G7N0	7	ADJ	い형용사		unnamed
+G7U0	7	ADJ	い형용사		unnamed
+G880	8	ADJ	형용동사		unnamed
+G8H0	8	ADJ	형용동사		unnamed
+G8L0	8	ADJ	형용동사 어간(세부 부류 추정)		named
+G8M0	8	ADJ	형용동사		unnamed
+G8N0	8	ADJ	형용동사		unnamed
+G8U0	8	ADJ	형용동사 어간	na_adjective-general,名詞-形容動詞語幹,形状詞-一般	named
+G9D0	9	X	구		unnamed
+H110	1	NOUN	명사		unnamed
+H130	1	NOUN	명사		unnamed
+H200	2	ADP	조사		unnamed
+H300	3	ADV	부사		unnamed
+H410	4	VERB	동사 어간		unnamed
+H417	4	VERB	동사 어간		unnamed
+H418	4	VERB	동사 어간		unnamed
+H419	4	VERB	동사 어간		unnamed
+H420	4	VERB	동사 어간		unnamed
+H425	4	VERB	동사 어간		unnamed
+H427	4	VERB	동사 어간		unnamed
+H428	4	VERB	동사 어간		unnamed
+H429	4	VERB	동사 어간		unnamed
+H430	4	VERB	동사 어간		unnamed
+H433	4	VERB	동사 어간		unnamed
+H437	4	VERB	동사 어간		unnamed
+H440	4	VERB	동사 어간		unnamed
+H443	4	VERB	동사 어간		unnamed
+H445	4	VERB	동사 어간		unnamed
+H447	4	VERB	동사 어간		unnamed
+H449	4	VERB	동사 어간		unnamed
+H460	4	VERB	동사 어간		unnamed
+H467	4	VERB	동사 어간		unnamed
+H469	4	VERB	동사 어간		unnamed
+H4U1	4	VERB	동사 어간		unnamed
+H4U7	4	VERB	동사 어간		unnamed
+H4U9	4	VERB	동사 어간		unnamed
+H7M0	7	ADJ	い형용사		unnamed
+H7MO	7	ADJ	い형용사		unnamed
+H7N0	7	ADJ	い형용사 어간	adjective-bound_possible,adjective,adjective-general,adjective,形容詞-一般,形容詞,形容詞-自立,形容詞・アウオ段,形容詞-自立,形容詞・イイ,形容詞-自立,形容詞・イ段,形容詞-非自立,形容詞・アウオ段,形容詞-非自立,形容詞・イイ,形容詞-非自立,形容詞・イ段,形容詞-非自立可能,形容詞	named
+H7NO	7	ADJ	い형용사		unnamed
+H7U)	7	ADJ	い형용사		unnamed
+H7U0	7	ADJ	い형용사 어간(세부 부류 추정)		named
+H7U2	7	ADJ	い형용사		unnamed
+H7U8	7	ADJ	い형용사		unnamed
+H8D0	8	ADJ	형용동사		unnamed
+H8L0	8	ADJ	형용동사		unnamed
+H8U0	8	ADJ	형용동사		unnamed
+I100	1	NOUN	명사		unnamed
+I110	1	NOUN	명사(세부 태그 추정)		named
+I111	1	NOUN	명사		unnamed
+I113	1	NOUN	명사		unnamed
+I11O	1	NOUN	명사		unnamed
+I120	1	NOUN	명사		unnamed
+I121	1	NOUN	명사		unnamed
+I130	1	PROPN	단체명 등 고유 명사(세부 태그 추정)	名詞-固有名詞-組織	named
+I200	2	ADP	조사		unnamed
+I210	2	ADP	조사		unnamed
+I300	3	ADV	부사		unnamed
+I419	4	VERB	동사 어간		unnamed
+I420	4	VERB	동사 어간		unnamed
+I421	4	VERB	동사 어간		unnamed
+I427	4	VERB	동사 어간		unnamed
+I428	4	VERB	동사 어간		unnamed
+I429	4	VERB	동사 어간		unnamed
+I437	4	VERB	동사 어간		unnamed
+I438	4	VERB	동사 어간		unnamed
+I442	4	VERB	동사 어간		unnamed
+I443	4	VERB	동사 어간		unnamed
+I447	4	VERB	동사 어간		unnamed
+I467	4	VERB	동사 어간		unnamed
+I469	4	VERB	동사 어간		unnamed
+I4U1	4	VERB	동사 어간		unnamed
+I8L0	8	ADJ	형용동사		unnamed
+I8U0	8	ADJ	형용동사		unnamed
+J110	1	NOUN	명사		unnamed
+J130	1	NOUN	명사		unnamed
+K100	1	NOUN	명사		unnamed
+K110	1	NOUN	명사		unnamed
+K111	1	NOUN	명사		unnamed
+K120	1	NOUN	명사		unnamed
+K130	1	NOUN	명사		unnamed
+K200	2	ADP	조사		unnamed
+K300	3	ADV	부사		unnamed
+K311	3	ADV	부사		unnamed
+K424	4	VERB	동사 어간		unnamed
+K428	4	VERB	동사 어간		unnamed
+K437	4	VERB	동사 어간		unnamed
+K448	4	VERB	동사 어간		unnamed
+L210	2	ADP	조사		unnamed
+M110	1	NOUN	명사		unnamed
+M120	1	NOUN	명사		unnamed
+M130	1	NOUN	명사		unnamed
+M200	2	ADP	조사		unnamed
+M210	2	ADP	조사		unnamed
+M220	2	ADP	조사		unnamed
+M300	3	ADV	부사		unnamed
+M301	3	ADV	부사		unnamed
+M310	3	ADV	부사		unnamed
+M311	3	ADV	부사		unnamed
+M410	4	VERB	동사 어간		unnamed
+M411	4	VERB	동사 어간		unnamed
+M412	4	VERB	동사 어간		unnamed
+M413	4	VERB	동사 어간		unnamed
+M414	4	VERB	동사 어간		unnamed
+M415	4	VERB	동사 어간		unnamed
+M416	4	VERB	동사 어간		unnamed
+M417	4	VERB	동사 어간		unnamed
+M418	4	VERB	동사 어간		unnamed
+M419	4	VERB	동사 어간		unnamed
+M41:	4	VERB	동사 어간		unnamed
+M41;	4	VERB	来る 계열 변격 동사 어간	verb-bound_possible,ka_irregular,verb-general,ka_irregular,動詞-一般,カ行変格,動詞-自立,カ変・クル,動詞-非自立,カ変・クル,動詞-非自立可能,カ行変格	named
+M41<	4	VERB	나행 5단 동사 어간	verb-bound_possible,godan-na,verb-general,godan-na,動詞-一般,五段-ナ行,動詞-自立,五段・ナ行,動詞-非自立,五段・ナ行,動詞-非自立可能,五段-ナ行	named
+M41=	4	VERB	동사 어간	動詞-自立,カ変・来ル,動詞-非自立,カ変・来ル	unnamed
+M420	4	VERB	와행 5단 동사 어간	verb-bound_possible,godan-wa,verb-general,godan-wa,動詞-一般,五段-ワア行,動詞-自立,五段・ワ行ウ音便,動詞-自立,五段・ワ行促音便,動詞-非自立,五段・ワ行ウ音便,動詞-非自立,五段・ワ行促音便,動詞-非自立可能,五段-ワア行	named
+M421	4	VERB	카행 5단 동사 어간	verb-bound_possible,godan-ka,verb-general,godan-ka,動詞-一般,五段-カ行,動詞-自立,五段・カ行イ音便,動詞-自立,五段・カ行促音便,動詞-自立,五段・カ行促音便ユク,動詞-非自立,五段・カ行イ音便,動詞-非自立,五段・カ行促音便,動詞-非自立,五段・カ行促音便ユク,動詞-非自立可能,五段-カ行	named
+M422	4	VERB	동사 어간		unnamed
+M423	4	VERB	동사 어간		unnamed
+M424	4	VERB	타행 5단 동사 어간	verb-bound_possible,godan-ta,verb-general,godan-ta,動詞-一般,五段-タ行,動詞-自立,五段・タ行,動詞-非自立,五段・タ行,動詞-非自立可能,五段-タ行	named
+M425	4	VERB	마행 5단 동사 어간	verb-bound_possible,godan-ma,verb-general,godan-ma,動詞-一般,五段-マ行,動詞-自立,五段・マ行,動詞-非自立,五段・マ行,動詞-非自立可能,五段-マ行	named
+M426	4	VERB	바행 5단 동사 어간	verb-bound_possible,godan-ba,verb-general,godan-ba,動詞-一般,五段-バ行,動詞-自立,五段・バ行,動詞-非自立,五段・バ行,動詞-非自立可能,五段-バ行	named
+M427	4	VERB	1단 동사 어간	verb-bound_possible,kami_ichidan-a,verb-bound_possible,kami_ichidan-ba,verb-bound_possible,kami_ichidan-ga,verb-bound_possible,kami_ichidan-ha,verb-bound_possible,kami_ichidan-ka,verb-bound_possible,kami_ichidan-ma,verb-bound_possible,kami_ichidan-na,verb-bound_possible,kami_ichidan-ra,verb-bound_possible,kami_ichidan-ta,verb-bound_possible,kami_ichidan-za,verb-bound_possible,shimo_ichidan-a,verb-bound_possible,shimo_ichidan-ba,verb-bound_possible,shimo_ichidan-da,verb-bound_possible,shimo_ichidan-ga,verb-bound_possible,shimo_ichidan-ha,verb-bound_possible,shimo_ichidan-ka,verb-bound_possible,shimo_ichidan-ma,verb-bound_possible,shimo_ichidan-na,verb-bound_possible,shimo_ichidan-ra,verb-bound_possible,shimo_ichidan-sa,verb-bound_possible,shimo_ichidan-ta,verb-bound_possible,shimo_ichidan-za,verb-general,kami_ichidan-a,verb-general,kami_ichidan-ba,verb-general,kami_ichidan-ga,verb-general,kami_ichidan-ha,verb-general,kami_ichidan-ka,verb-general,kami_ichidan-ma,verb-general,kami_ichidan-na,verb-general,kami_ichidan-ra,verb-general,kami_ichidan-ta,verb-general,kami_ichidan-za,verb-general,shimo_ichidan-a,verb-general,shimo_ichidan-ba,verb-general,shimo_ichidan-da,verb-general,shimo_ichidan-ga,verb-general,shimo_ichidan-ha,verb-general,shimo_ichidan-ka,verb-general,shimo_ichidan-ma,verb-general,shimo_ichidan-na,verb-general,shimo_ichidan-ra,verb-general,shimo_ichidan-sa,verb-general,shimo_ichidan-ta,verb-general,shimo_ichidan-za,動詞-一般,上一段-ア行,動詞-一般,上一段-カ行,動詞-一般,上一段-ガ行,動詞-一般,上一段-ザ行,動詞-一般,上一段-タ行,動詞-一般,上一段-ナ行,動詞-一般,上一段-ハ行,動詞-一般,上一段-バ行,動詞-一般,上一段-マ行,動詞-一般,上一段-ラ行,動詞-一般,下一段-ア行,動詞-一般,下一段-カ行,動詞-一般,下一段-ガ行,動詞-一般,下一段-サ行,動詞-一般,下一段-ザ行,動詞-一般,下一段-タ行,動詞-一般,下一段-ダ行,動詞-一般,下一段-ナ行,動詞-一般,下一段-ハ行,動詞-一般,下一段-バ行,動詞-一般,下一段-マ行,動詞-一般,下一段-ラ行,動詞-自立,一段,動詞-自立,一段・クレル,動詞-自立,一段・得ル,動詞-非自立,一段,動詞-非自立,一段・クレル,動詞-非自立,一段・得ル,動詞-非自立可能,上一段-ア行,動詞-非自立可能,上一段-カ行,動詞-非自立可能,上一段-ガ行,動詞-非自立可能,上一段-ザ行,動詞-非自立可能,上一段-タ行,動詞-非自立可能,上一段-ナ行,動詞-非自立可能,上一段-ハ行,動詞-非自立可能,上一段-バ行,動詞-非自立可能,上一段-マ行,動詞-非自立可能,上一段-ラ行,動詞-非自立可能,下一段-ア行,動詞-非自立可能,下一段-カ行,動詞-非自立可能,下一段-ガ行,動詞-非自立可能,下一段-サ行,動詞-非自立可能,下一段-ザ行,動詞-非自立可能,下一段-タ行,動詞-非自立可能,下一段-ダ行,動詞-非自立可能,下一段-ナ行,動詞-非自立可能,下一段-ハ行,動詞-非自立可能,下一段-バ行,動詞-非自立可能,下一段-マ行,動詞-非自立可能,下一段-ラ行	named
+M428	4	VERB	라행 5단 동사 어간	verb-bound_possible,godan-ra,verb-general,godan-ra,動詞-一般,五段-ラ行,動詞-自立,五段・ラ行,動詞-自立,五段・ラ行特殊,動詞-非自立,五段・ラ行,動詞-非自立,五段・ラ行特殊,動詞-非自立可能,五段-ラ行	named
+M429	4	VERB	する 계열 동사 어간	verb-bound_possible,sa_irregular,verb-general,sa_irregular,動詞-一般,サ行変格,動詞-自立,サ変・−スル,動詞-自立,サ変・スル,動詞-非自立,サ変・−スル,動詞-非自立,サ変・スル,動詞-非自立可能,サ行変格	named
+M42:	4	VERB	동사 어간		unnamed
+M42;	4	VERB	동사 어간		unnamed
+M42<	4	VERB	동사 어간		unnamed
+M42=	4	VERB	동사 어간		unnamed
+M42?	4	VERB	동사 어간		unnamed
+M430	4	VERB	동사 어간		unnamed
+M431	4	VERB	동사 어간		unnamed
+M432	4	VERB	동사 어간		unnamed
+M433	4	VERB	동사 어간		unnamed
+M434	4	VERB	동사 어간		unnamed
+M435	4	VERB	동사 어간		unnamed
+M436	4	VERB	동사 어간		unnamed
+M437	4	VERB	동사 어간		unnamed
+M438	4	VERB	동사 어간		unnamed
+M439	4	VERB	동사 어간		unnamed
+M43:	4	VERB	ずる 계열 변격 동사 어간	動詞-自立,サ変・−ズル,動詞-非自立,サ変・−ズル	named
+M440	4	VERB	동사 어간		unnamed
+M441	4	VERB	동사 어간		unnamed
+M442	4	VERB	가행 5단 동사 어간	verb-bound_possible,godan-ga,verb-general,godan-ga,動詞-一般,五段-ガ行,動詞-自立,五段・ガ行,動詞-非自立,五段・ガ行,動詞-非自立可能,五段-ガ行	named
+M443	4	VERB	사행 5단 동사 어간	verb-bound_possible,godan-sa,verb-general,godan-sa,動詞-一般,五段-サ行,動詞-自立,五段・サ行,動詞-非自立,五段・サ行,動詞-非自立可能,五段-サ行	named
+M444	4	VERB	동사 어간		unnamed
+M445	4	VERB	동사 어간		unnamed
+M446	4	VERB	동사 어간		unnamed
+M447	4	VERB	동사 어간		unnamed
+M448	4	VERB	동사 어간		unnamed
+M449	4	VERB	동사 어간		unnamed
+M44:	4	VERB	동사 어간		unnamed
+M44;	4	VERB	동사 어간		unnamed
+M450	4	VERB	동사 어간		unnamed
+M451	4	VERB	동사 어간		unnamed
+M452	4	VERB	동사 어간		unnamed
+M453	4	VERB	동사 어간		unnamed
+M454	4	VERB	동사 어간		unnamed
+M455	4	VERB	동사 어간		unnamed
+M456	4	VERB	동사 어간		unnamed
+M457	4	VERB	동사 어간		unnamed
+M458	4	VERB	동사 어간		unnamed
+M459	4	VERB	동사 어간		unnamed
+M45:	4	VERB	동사 어간		unnamed
+M460	4	VERB	동사 어간		unnamed
+M461	4	VERB	동사 어간		unnamed
+M462	4	VERB	동사 어간		unnamed
+M463	4	VERB	동사 어간		unnamed
+M465	4	VERB	동사 어간		unnamed
+M466	4	VERB	동사 어간		unnamed
+M467	4	VERB	동사 어간		unnamed
+M468	4	VERB	동사 어간		unnamed
+M469	4	VERB	동사 어간		unnamed
+M4N7	4	VERB	동사 어간		unnamed
+M4U0	4	VERB	동사 어간		unnamed
+M4U1	4	VERB	동사 어간		unnamed
+M4U2	4	VERB	동사 어간		unnamed
+M4U3	4	VERB	동사 어간		unnamed
+M4U4	4	VERB	동사 어간		unnamed
+M4U5	4	VERB	동사 어간		unnamed
+M4U6	4	VERB	동사 어간		unnamed
+M4U7	4	VERB	동사 어간		unnamed
+M4U8	4	VERB	동사 어간		unnamed
+M4U9	4	VERB	동사 어간		unnamed
+M4U:	4	VERB	동사 어간		unnamed
+M4U;	4	VERB	동사 어간		unnamed
+M4U=	4	VERB	동사 어간		unnamed
+M7M0	7	ADJ	い형용사		unnamed
+M7N0	7	ADJ	い형용사		unnamed
+M7U0	7	ADJ	い형용사		unnamed
+M8L0	8	ADJ	형용동사		unnamed
+M8U0	8	ADJ	형용동사		unnamed
+M9D0	9	X	구		unnamed
+N000	0	DET	연체사		unnamed
+N0D1	0	DET	연체사		unnamed
+N0H0	0	DET	연체사		unnamed
+N0H1	0	DET	연체사		unnamed
+N100	1	NOUN	명사		unnamed
+N110	1	NOUN	일반 명사	noun-common-adverb_possible,noun-common-counter_possible,noun-common-general,noun-common-na_possible,noun-common-suru_na_possible,noun-common-suru_possible,prefix,suffix-nominal-counter,suffix-nominal-general,名詞-サ変接続,名詞-一般,名詞-副詞可能,名詞-接尾-一般,名詞-接尾-助数詞,名詞-普通名詞-サ変可能,名詞-普通名詞-サ変形状詞可能,名詞-普通名詞-一般,名詞-普通名詞-副詞可能,名詞-普通名詞-助数詞可能,名詞-普通名詞-形状詞可能,接尾辞-名詞的-一般,接尾辞-名詞的-助数詞,接頭詞-名詞接続,接頭辞	named
+N111	1	NOUN	명사형 연결 표현(추정: 分の 등)		named
+N112	1	NUM	수사(数詞)	noun-numeral,名詞-数詞	named
+N119	1	NOUN	명사		unnamed
+N120	1	PRON	대명사	pronoun,代名詞,名詞-代名詞-一般,名詞-代名詞-縮約	named
+N121	1	NOUN	명사		unnamed
+N130	1	PROPN	고유 명사	noun-proper-general,noun-proper-name-general,noun-proper-name-given,noun-proper-name-surname,noun-proper-place-country,noun-proper-place-general,名詞-固有名詞-一般,名詞-固有名詞-人名-一般,名詞-固有名詞-人名-名,名詞-固有名詞-人名-姓,名詞-固有名詞-地名-一般,名詞-固有名詞-地名-国,名詞-固有名詞-地域-一般,名詞-固有名詞-地域-国	named
+N131	1	NOUN	명사		unnamed
+N139	1	NOUN	명사		unnamed
+N1O0	1	NOUN	명사		unnamed
+N200	2	ADP	조사		unnamed
+N201	2	ADP	조사		unnamed
+N300	3	ADV	부사		unnamed
+N301	3	ADV	부사		unnamed
+N310	3	ADV	부사		unnamed
+N311	3	ADV	부사		unnamed
+N320	3	ADV	부사		unnamed
+N321	3	ADV	부사		unnamed
+N330	3	ADV	부사		unnamed
+N331	3	ADV	부사		unnamed
+N351	3	ADV	부사		unnamed
+N417	4	VERB	동사 어간		unnamed
+N418	4	VERB	동사 어간		unnamed
+N423	4	VERB	동사 어간		unnamed
+N428	4	VERB	동사 어간		unnamed
+N4U3	4	VERB	동사 어간		unnamed
+N600	6	PUNCT	기호	aux_symbol-bracket_close,aux_symbol-bracket_open,aux_symbol-comma,aux_symbol-general,aux_symbol-period,whitespace,空白,補助記号-一般,補助記号-句点,補助記号-括弧閉,補助記号-括弧開,補助記号-読点,記号-一般,記号-括弧閉,記号-括弧開	named
+N601	6	SYM	기호(문자·아스키아트·얼굴문자)	aux_symbol-ascii_art-emoticon,aux_symbol-ascii_art-general,symbol-letter,補助記号-ＡＡ-一般,補助記号-ＡＡ-顔文字,記号-文字	named
+N7U0	7	ADJ	い형용사		unnamed
+N8L0	8	ADJ	형용동사		unnamed
+N8U0	8	ADJ	형용동사		unnamed
+N9D0	9	X	구		unnamed
+N9H0	9	X	구, 관용 표현(세부 부류 추정)		named
+N9H1	9	X	구		unnamed
+O110	1	NOUN	명사		unnamed
+O130	1	NOUN	명사		unnamed
+O300	3	ADV	부사		unnamed
+O427	4	VERB	동사 어간		unnamed
+O8U0	8	ADJ	형용동사		unnamed
+P0D1	0	DET	연체사		unnamed
+P110	1	NOUN	명사		unnamed
+P130	1	NOUN	명사		unnamed
+P200	2	ADP	조사(세부 부류 추정)		named
+P201	2	ADP	조사		unnamed
+P202	2	ADP	격조사(が·を·に·へ·と·から·より·で)	particle-case,助詞-格助詞	named
+P203	2	PART	계조사(は·も·こそ·さえ·しか)	particle-binding,助詞-係助詞	named
+P204	2	PART	부조사(だけ·ほど·くらい·ばかり·など·まで)	particle-adverbial,助詞-副助詞	named
+P205	2	SCONJ	접속조사(て·ば·けれど·ので)	particle-conjunctive,助詞-接続助詞	named
+P206	2	PART	종조사(か·ね·よ·な·わ·ぞ·ぜ·さ)	particle-final,助詞-終助詞	named
+P207	2	PART	준체조사(の)	particle-nominal,助詞-準体助詞	named
+P210	2	ADP	조사		unnamed
+P211	2	ADP	조사		unnamed
+P220	2	ADP	조사(세부 부류 추정)		named
+P221	2	ADP	조사		unnamed
+P230	2	ADP	조사		unnamed
+P231	2	ADP	조사		unnamed
+P240	2	ADP	조사		unnamed
+P250	2	ADP	조사		unnamed
+P251	2	ADP	조사		unnamed
+P300	3	ADV	부사		unnamed
+P311	3	ADV	부사		unnamed
+P320	3	ADV	부사		unnamed
+P351	3	ADV	부사		unnamed
+P428	4	VERB	동사 어간		unnamed
+P468	4	VERB	동사 어간		unnamed
+P5:0	5	AUX	어미		unnamed
+P600	6	PUNCT	기호(세부 태그 추정)		named
+P8U0	8	ADJ	형용동사		unnamed
+Q110	1	NOUN	명사		unnamed
+Q120	1	NOUN	명사		unnamed
+Q130	1	NOUN	명사		unnamed
+Q427	4	VERB	동사 어간		unnamed
+S110	1	NOUN	명사		unnamed
+S500	5	AUX	어미		unnamed
+S501	5	AUX	어미		unnamed
+S510	5	AUX	어미		unnamed
+S520	5	AUX	어미		unnamed
+S530	5	AUX	어미		unnamed
+S540	5	AUX	어미		unnamed
+S541	5	AUX	어미		unnamed
+S550	5	AUX	어미		unnamed
+S551	5	AUX	어미		unnamed
+S560	5	AUX	어미		unnamed
+S561	5	AUX	어미		unnamed
+S570	5	AUX	어미		unnamed
+S571	5	AUX	어미		unnamed
+S580	5	AUX	어미		unnamed
+S581	5	AUX	어미		unnamed
+S590	5	AUX	어미		unnamed
+S5:0	5	AUX	어미		unnamed
+S5:1	5	AUX	어미		unnamed
+S5;0	5	AUX	어미		unnamed
+S5<0	5	AUX	어미		unnamed
+S5>0	5	AUX	어미		unnamed
+S5>1	5	AUX	어미		unnamed
+S5@0	5	AUX	어미		unnamed
+S5A0	5	AUX	어미		unnamed
+T500	5	AUX	어미		unnamed
+T501	5	AUX	어미		unnamed
+T5A0	5	AUX	어미		unnamed
+T5B0	5	AUX	어미		unnamed
+T5C0	5	AUX	어미		unnamed
+T5D0	5	AUX	어미		unnamed
+T5E0	5	AUX	어미		unnamed
+T5F0	5	AUX	어미		unnamed
+T5G0	5	AUX	어미		unnamed
+T5H0	5	AUX	어미		unnamed
+T5a0	5	AUX	어미		unnamed
+T5a1	5	AUX	어미		unnamed
+T5b0	5	AUX	어미		unnamed
+T5b1	5	AUX	어미		unnamed
+T5c0	5	AUX	어미		unnamed
+T5c1	5	AUX	어미		unnamed
+T5d1	5	AUX	어미		unnamed
+T5e1	5	AUX	어미		unnamed
+T5f0	5	AUX	어미		unnamed
+T5g0	5	AUX	어미		unnamed
+T5p0	5	AUX	어미		unnamed
+T5q0	5	AUX	어미		unnamed
+T5r0	5	AUX	어미		unnamed
+T5s0	5	AUX	어미		unnamed
+T5y0	5	AUX	어미		unnamed
+T5z0	5	AUX	어미		unnamed
+U500	5	AUX	어미		unnamed
+U501	5	AUX	어미		unnamed
+U510	5	AUX	어미		unnamed
+U520	5	AUX	어미		unnamed
+U5B0	5	AUX	어미		unnamed
+U5C0	5	AUX	어미		unnamed
+U5D0	5	AUX	어미		unnamed
+U5E0	5	AUX	어미		unnamed
+U5F0	5	AUX	어미		unnamed
+U5H0	5	AUX	어미		unnamed
+U5I0	5	AUX	어미		unnamed
+U5I1	5	AUX	어미		unnamed
+U5J1	5	AUX	어미		unnamed
+U5L0	5	AUX	어미		unnamed
+U5M1	5	AUX	어미		unnamed
+U5Y0	5	AUX	어미		unnamed
+U5a0	5	AUX	어미		unnamed
+U5b0	5	AUX	어미		unnamed
+U5c0	5	AUX	어미		unnamed
+U5d0	5	AUX	어미		unnamed
+U5e0	5	AUX	어미		unnamed
+U5f0	5	AUX	어미		unnamed
+U5g0	5	AUX	어미		unnamed
+U5h0	5	AUX	어미		unnamed
+U5i0	5	AUX	어미		unnamed
+U5j0	5	AUX	어미		unnamed
+U5k0	5	AUX	어미		unnamed
+U5l0	5	AUX	어미		unnamed
+U5m0	5	AUX	어미		unnamed
+U5n0	5	AUX	어미		unnamed
+U5y0	5	AUX	어미		unnamed
+V0H1	0	DET	연체사		unnamed
+V41;	4	VERB	동사 어간		unnamed
+V41=	4	VERB	동사 어간		unnamed
+V42;	4	VERB	동사 어간		unnamed
+V44;	4	VERB	동사 어간		unnamed

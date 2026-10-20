@@ -2,6 +2,7 @@
 
 #include "core/engine/driver.h"
 #include "hdtest.h"
+#include "rule_fixture.h"
 
 namespace {
 
@@ -21,10 +22,10 @@ void CountShadows(void* context, int, int, const hdTrans::word::Chain& chain) {
 
 HD_TEST(engine_reference_disables_selection_options) {
     using namespace hdTrans;
-    const auto loaded = dict::Load({{0, "base.tsv",
+    const auto loaded = dict::Load({{0, "base.tsv", fixture::WithRuleBodies(
         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
         "東京\t동경\tN130\tQPNXXX\t\tGN\t0\t1\n"
-        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n"}});
+        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n")}});
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     const word::Scorer scorers[] = {{"first", PreferFirst}};
@@ -86,7 +87,7 @@ HD_TEST(engine_individual_improvement_outputs) {
     };
     for (const auto& c : cases) {
         const auto loaded = dict::Load({
-            {0, "base.tsv", std::string("key\tko\tpos\tsem\tgram\tdict\trule\tid\n") + c.rows},
+            {0, "base.tsv", fixture::WithRuleBodies(std::string("key\tko\tpos\tsem\tgram\tdict\trule\tid\n") + c.rows)},
             {0, "plain.tsv", c.plain},
         });
         HD_REQUIRE(loaded.errors.empty());

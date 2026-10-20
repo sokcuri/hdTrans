@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cstdint>
 
+#include "core/dict/codes.h"
 #include "core/rules/rules.h"
 
 namespace hdTrans::rules {
@@ -153,7 +154,7 @@ private:
         const bool wordOperand = arg[0] == '@';
         if (wordOperand) {
             if (!ParseDelta(arg.substr(1), n.rightDelta)) return Fail("bad word operand");
-        } else if (!Literal(arg, n)) {
+        } else if (!Literal(arg, field, n)) {
             return false;
         }
         for (const OpSpelling& o : kOps) {
@@ -166,21 +167,28 @@ private:
         return Fail("unknown operator");
     }
 
-    bool Literal(std::string_view t, Node& n) {
+    // A part condition may name its pattern ("명사") instead of writing it ("1**").
+    bool Literal(std::string_view t, char field, Node& n) {
         if (t.size() < 2 || t.front() != '"' || t.back() != '"') return Fail("bad operand");
+        std::string named;
+        std::string_view body = t.substr(1, t.size() - 2);
+        if (field == 'P' || field == 'M') {
+            named = dict::PartPatternOf(field, body);
+            body = named;
+        }
         std::string& pool = program_.literals;
         const std::size_t start = pool.size();
-        for (std::size_t i = 1; i + 1 < t.size(); i++) {
-            if (t[i] != '\\') {
-                pool += t[i];
+        for (std::size_t i = 0; i < body.size(); i++) {
+            if (body[i] != '\\') {
+                pool += body[i];
                 continue;
             }
-            const char e = t[i + 1];
+            const char e = i + 1 < body.size() ? body[i + 1] : '\0';
             if (e == '\\' || e == '"') {
                 pool += e;
                 i++;
-            } else if (e == 'x' && i + 3 < t.size() && HexDigit(t[i + 2]) >= 0 && HexDigit(t[i + 3]) >= 0) {
-                pool += static_cast<char>(HexDigit(t[i + 2]) * 16 + HexDigit(t[i + 3]));
+            } else if (e == 'x' && i + 3 < body.size() && HexDigit(body[i + 2]) >= 0 && HexDigit(body[i + 3]) >= 0) {
+                pool += static_cast<char>(HexDigit(body[i + 2]) * 16 + HexDigit(body[i + 3]));
                 i += 3;
             } else {
                 return Fail("bad escape in string literal");

@@ -97,14 +97,37 @@ const Loaded& Load() {
 
 }  // namespace
 
+void AttachCompiled(rules::Program& program, std::string_view text) {
+#ifndef HDTRANS_INTERPRET_RULES
+    std::vector<Record> records;
+    for (std::size_t start = 0; start < text.size();) {
+        std::size_t end = text.find('\n', start);
+        if (end == std::string_view::npos) end = text.size();
+        std::string_view line = text.substr(start, end - start);
+        start = end + 1;
+        if (!line.starts_with("L ") && !line.starts_with("G ")) continue;
+        long long id = 0;
+        std::size_t k = 2;
+        for (; k < line.size() && line[k] >= '0' && line[k] <= '9' && id < (1LL << 31); k++) id = id * 10 + (line[k] - '0');
+        records.push_back({line[0], static_cast<int>(id), 0, line});
+    }
+    AttachCompiled(program, records);
+#else
+    (void)program;
+    (void)text;
+#endif
+}
+
 const rules::Program& RulesProgram() { return Load().program; }
 
 bool RulesLoaded() { return Load().ok; }
 
 std::string RuleSource(char kind, int id) {
+    // A local rule lives in a dictionary row, not in a file; its number names it until a
+    // row id replaces the number.
+    if (kind == 'L') return "L" + std::to_string(id);
     const Loaded& l = Load();
     std::size_t file = SIZE_MAX;
-    if (kind == 'L' && id >= 0 && static_cast<std::size_t>(id) < l.localFile.size()) file = l.localFile[static_cast<std::size_t>(id)];
     if (kind == 'G') {
         if (const auto it = l.globalFile.find(id); it != l.globalFile.end()) file = it->second;
     }

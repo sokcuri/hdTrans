@@ -871,13 +871,20 @@ HD_TEST(word_selected_assignment_rule_provenance) {
         HD_CHECK_EQ(affected.selected, c.selected);
         const auto layer = c.global ? word::Provenance::GlobalRule : word::Provenance::LocalRule;
         const int id = c.global ? 50 : 0;
-        CheckChoice(affected.choice, layer, id);
-        CheckChoice(affected.group->At(c.selected)->targetChoice, layer, id);
+        // A rule that fails writes nothing: the assignment before its false condition
+        // is taken back, so the word reads as it did before the rule ran.
+        const bool wrote = c.succeeds;
+        CheckChoice(affected.choice, wrote ? layer : word::Provenance::FirstXxx, wrote ? id : 17);
+        // The selected entry was given targets, not a target choice.
+        CheckChoice(affected.group->At(c.selected)->targetChoice, wrote ? layer : word::Provenance::None,
+                    wrote ? id : -1);
         CheckChoice(affected.group->At(1 - c.selected)->targetChoice, word::Provenance::None);
         CheckChoice(line.worker.ruleChoice, word::Provenance::None);
-        HD_CHECK_EQ(std::string(affected.EntryText(c.selected)), std::string("수도"));
         const char* untouched = c.neighbour ? (c.selected == 0 ? "오사카" : "대판")
                                            : (c.selected == 0 ? "도쿄" : "동경");
+        const char* chosen = c.neighbour ? (c.selected == 0 ? "대판" : "오사카")
+                                        : (c.selected == 0 ? "동경" : "도쿄");
+        HD_CHECK_EQ(std::string(affected.EntryText(c.selected)), std::string(wrote ? "수도" : chosen));
         HD_CHECK_EQ(std::string(affected.EntryText(1 - c.selected)), std::string(untouched));
         HD_CHECK_EQ(std::string(affected.Code(0)), std::string("130"));
         HD_CHECK_EQ(std::string(affected.Code(1)), std::string("110"));

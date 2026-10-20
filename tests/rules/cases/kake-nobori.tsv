@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:kake-nobori	駆け上る	뛰어 오른다	fix	lookup
+dict:kake-nobori	駆け上った	뛰어 올랐다	fix	lookup
+dict:kake-nobori	駆け登る	뛰어 오른다	fix	lookup
+dict:kake-nobori	駆け登った	뛰어 올랐다	fix	lookup
+dict:kake-nobori	駆け上がる	뛰어 오른다	keep	lookup
+dict:kake-nobori	駆け上がった	뛰어 올랐다	keep	lookup
+dict:kake-nobori	登る	오른다	keep	lookup
+dict:kake-nobori	のぼる	오른다	keep	lookup
+dict:kake-nobori	駆け寄る	달려간다	keep	lookup
+dict:kake-nobori	駆け込む	뛰어든다	keep	lookup

@@ -8,6 +8,7 @@
 
 #include "core/word/analyze.h"
 #include "core/word/item.h"
+#include "core/word/journal.h"
 #include "core/word/util.h"
 
 namespace hdTrans::word {
@@ -41,6 +42,7 @@ public:
     std::vector<uint8_t> spaced;  // Analysis::spaced
     Chain chain;
     Selection ruleChoice;  // active rule, including assignments to neighbouring items
+    Journal journal;       // the writes of the rule running now
     const void* ruleItem = nullptr;  // the item whose rule is running
     int current = -1;  // the token being processed
     int insertedLength = 0;

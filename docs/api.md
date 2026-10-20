@@ -90,7 +90,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--each` | 줄마다 새 세션 |
 | `--raw` | 줄마다 단어 파이프라인만으로 번역 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
-| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사 |
+| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사. 표지 문자가 품사 코드의 부류와 맞지 않는 사전 줄이 있으면 나열하고 실패 ([rule-language.md](rule-language.md#번역-안의-표지-d-y)) |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
 | `--compile-snapshot FILE` | 기본 사전 전체를 FILE(`.hdsnap`)에 컴파일하고 종료. FILE을 출력 |
 | `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |
@@ -110,8 +110,8 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 `--why`의 표준 오류 출력은 탭으로 구분한 줄입니다. `WHY-LINE <줄>`이 입력 줄마다 나오고, 단어마다
 `WHY <줄> <청크> <문장> <토큰>:<시작> <표면형> <선택> <출처> <id> <번역> <직접 선택> <출처> <id> <층> <규칙> <어미 층> <어미 규칙>`,
 그 아래에 `SHADOW` 줄이 붙습니다. Ehnd 필터 실행 로그도 함께 나오며, 번역문은 표준 출력에만 씁니다.
-층과 규칙은 후보와 어미를 정한 실행 층과 규칙 파일:규칙(`local`
-`particles.txt:L925`, 전역 규칙은 `파일:GPRIO`)입니다([pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)). 탭, 줄바꿈, 백슬래시는 `\t`, `\n`, `\\`로 이스케이프합니다.
+층과 규칙은 후보와 어미를 정한 실행 층과 규칙(`local`
+`L925`, 전역 규칙은 `파일:GPRIO`)입니다([pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)). 탭, 줄바꿈, 백슬래시는 `\t`, `\n`, `\\`로 이스케이프합니다.
 
 | 환경 변수 | 설명 |
 |---|---|

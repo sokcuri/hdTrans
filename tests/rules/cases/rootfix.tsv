@@ -1,12 +1,12 @@
 rule	input	expected	kind	layer
-L4567	彼に本を読んでもらった。	그가 책을 읽어 주었다.	fix	local
-L4567	友達に宿題を教えてもらった。	친구가 숙제를 가르쳐 주었다.	fix	senses
-L4567	方々に相談をさせてもらった。	분들에게 상담을 시켜 주었다.	keep	local
-L4567	先生に読んでもらった。	선생님이 읽어 주었다.	keep	local
-L3723	おい、ガキが、なめた口をきいているんじゃないわよ	어이, 녀석이, 얕본 말을 하고 있지 않아요	fix	senses
-L975	愕然とする二人。	아연실색하는 두 사람.	fix	local
-L975	彼女を妻とする男。	그녀를 아내로 하는 남자.	keep	local
-L975	彼女を王太子妃とする。	그녀를 왕태자비로 한다.	keep	local
+dict:jisjk:365756	彼に本を読んでもらった。	그가 책을 읽어 주었다.	fix	local
+dict:jisjk:365756	友達に宿題を教えてもらった。	친구가 숙제를 가르쳐 주었다.	fix	senses
+dict:jisjk:365756	方々に相談をさせてもらった。	분들에게 상담을 시켜 주었다.	keep	local
+dict:jisjk:365756	先生に読んでもらった。	선생님이 읽어 주었다.	keep	local
+dict:jisjk:346302	おい、ガキが、なめた口をきいているんじゃないわよ	어이, 녀석이, 얕본 말을 하고 있지 않아요	fix	senses
+dict:jisjk:114918	愕然とする二人。	아연실색하는 두 사람.	fix	local
+dict:jisjk:114918	彼女を妻とする男。	그녀를 아내로 하는 남자.	keep	local
+dict:jisjk:114918	彼女を王太子妃とする。	그녀를 왕태자비로 한다.	keep	local
 dict:Tu	成果が得られていない。	성과를 얻지 못하고 있다.	fix	compose
 dict:Tu	時間があってもいい。	시간이 있어도 된다.	fix	compose
 dict:Tu	料理が分からない。	요리를 모른다.	keep	compose
@@ -17,14 +17,14 @@ dict:idiom	なにかに使う。	무엇인가에 사용한다.	keep	lookup
 dict:slang	奴をしばきあげる。	놈을 두들겨 팬다.	fix	lookup
 compose:action	研究し続けるのみだ。	계속 연구할 뿐 이다.	fix	compose
 compose:action	研究し続ける。	계속 연구한다.	keep	compose
-L1116	同じ年の友達だ。	같은 나이의 친구다.	keep	local
-L3093	目なんか分からない。	눈은 모른다.	fix	local
-L3093	なんか静かだ。	어쩐지 조용하다.	keep	local
+dict:jisjk:116128	同じ年の友達だ。	같은 나이의 친구다.	keep	local
+dict:jisjk:341464	目なんか分からない。	눈은 모른다.	fix	local
+dict:jisjk:341464	なんか静かだ。	어쩐지 조용하다.	keep	local
 senses	病の重さというより東宮だからであろう。	병의 심함이라고 하는 것보다 동궁이니까일 것이다.	keep	senses
 dict:Tu	二人分の食事。	두 사람분의 식사.	fix	compose
-L727	パンを焼いた。	빵을 구웠다.	keep	senses
-L2568	皆様にご意見をさせていただいた。	여러분에게 의견을 했다.	keep	local
-L1961	全てが元へ戻った。	모두가 원래로 돌아왔다.	fix	local
+dict:jisjk:93606	パンを焼いた。	빵을 구웠다.	keep	senses
+dict:jisjk:266529	皆様にご意見をさせていただいた。	여러분에게 의견을 했다.	keep	local
+dict:jisjk:260378	全てが元へ戻った。	모두가 원래로 돌아왔다.	fix	local
 dict:presumed	係員とおぼしき人が入口に立っている。	관계자로 보이는 사람이 입구에 서 있다.	fix	lookup
 dict:presumed	犯人とおぼしき男を見た。	범인으로 보이는 남자를 보았다.	fix	lookup
 dict:presumed	係員と話した。	관계자와 이야기했다.	keep	lookup

@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <algorithm>
 #include <cstring>
+#include <string>
+#include <utility>
 
 namespace hdTrans::dict {
 
@@ -63,6 +65,59 @@ bool PosCodes(std::string_view pos, std::string_view& partText, std::string_view
     sem = {};
     gram = {};
     return true;
+}
+
+std::string PartPatternOf(char field, std::string_view value) {
+    const auto table = internal::PartPatternTable();
+    auto lookup = [&](std::string_view name) -> std::string_view {
+        const auto it = std::lower_bound(table.begin(), table.end(), std::pair<char, std::string_view>(field, name),
+                                         [](const internal::PartPattern& p, const std::pair<char, std::string_view>& key) {
+                                             return p.field[0] < key.first ||
+                                                    (p.field[0] == key.first && std::string_view(p.name) < key.second);
+                                         });
+        return it != table.end() && it->field[0] == field && it->name == name ? std::string_view(it->pattern)
+                                                                             : std::string_view();
+    };
+    if (const std::string_view pattern = lookup(value); !pattern.empty()) return std::string(pattern);
+    if (value.find('+') == std::string_view::npos) return std::string(value);
+    std::string joined;
+    for (std::size_t start = 0;;) {
+        const std::size_t plus = value.find('+', start);
+        const std::string_view part = value.substr(start, plus == std::string_view::npos ? std::string_view::npos
+                                                                                        : plus - start);
+        const std::string_view pattern = lookup(part);
+        if (pattern.empty()) return std::string(value);
+        joined += pattern;
+        if (plus == std::string_view::npos) return joined;
+        start = plus + 1;
+    }
+}
+
+std::string_view PartNameOf(std::string_view code) {
+    const auto schema = internal::PartSchema();
+    const auto it = std::lower_bound(schema.begin(), schema.end(), code,
+                                     [](const internal::PartName& p, std::string_view key) {
+                                         return std::string_view(p.code) < key;
+                                     });
+    if (it != schema.end() && it->code == code) return it->name;
+    return {};
+}
+
+std::string MarkerClassError(std::string_view target, PartCode part) {
+    const std::size_t n = target.size();
+    if (n < 4 || target[n - 1] != '@') return {};
+    const char marker = target[n - 4];
+    WordClass want;
+    std::string_view name;
+    switch (marker) {
+    case '&': want = WordClass::Verb; name = "4 (verb)"; break;
+    case '$': want = WordClass::Adjective; name = "7 (adjective)"; break;
+    case '%': want = WordClass::AdjectivalNoun; name = "8 (adjectival noun)"; break;
+    default: return {};
+    }
+    if (part.Class() == want) return {};
+    return "the marker family " + std::string(target.substr(n - 4)) + " conjugates class " + std::string(name) +
+           " stems, not the part code " + std::string(part.Text());
 }
 
 }  // namespace hdTrans::dict

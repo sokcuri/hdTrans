@@ -82,6 +82,10 @@ def main():
         if len(sample) > 8:
             del sample[max(sample, key=lambda k: sample[k][0])]
 
+    rules = []
+    # A local rule's body lives in the ctx column of the rows that name it; the same
+    # number repeats on the rows of one rule, so distinct bodies are the rules.
+    bodies = set()
     for path in sorted((root / "dicts").glob("*.tsv")):
         with path.open(encoding="utf-8", newline="") as source:
             reader = csv.DictReader((line for line in source if not line.startswith(("#", "//"))),
@@ -90,6 +94,9 @@ def main():
             if not {"key", "ko", "pos", "sem", "gram"} <= set(reader.fieldnames or []):
                 continue
             for row in reader:
+                if row.get("ctx") and row["ctx"] not in bodies:
+                    bodies.add(row["ctx"])
+                    rules.append(((path.name, reader.line_num), OPERAND.findall(row["ctx"])))
                 rows_read += 1
                 key, ko = row["key"], row["ko"]
                 rank = (len(key) > 12, hashlib.sha256(key.encode()).digest(), key)
@@ -105,10 +112,9 @@ def main():
                     if pattern.sub("", value) or any(c[0].islower() for c in pattern.findall(value)):
                         irregular[kind][value] += 1
                         add("irregular-" + kind, value, key, ko, rank)
-    rules = []
     for path in sorted((root / "src/core/rules").glob("*.txt")):
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            if re.match(r"^[LG]\s+\d+", line):
+            if re.match(r"^G\s+\d+", line):
                 rules.append(((path.name, number), OPERAND.findall(line)))
     # These runtime conditions need documenting even when no dictionary row has them.
     for kind, code in meanings:
@@ -130,7 +136,7 @@ def main():
         "## 읽는 법", "",
         "- **행 수**는 `dicts/*.tsv`에서 그 코드가 적힌 행 수입니다. 같은 행에 같은 코드가 두 번 있어도 한 번 셉니다. "
         "빈 열의 기본값, `flags=xxx`로 더하는 `XXX`, 내장 표는 합산하지 않습니다. `kana.tsv`는 읽기 표라 제외합니다.",
-        "- **규칙 수**는 `src/core/rules/*.txt`의 서로 다른 L/G 줄 수입니다. 주석, 예시를 빼고 P/M(품사), "
+        "- **규칙 수**는 서로 다른 규칙 본문의 수입니다(사전 행의 `ctx` 열과 `src/core/rules/globals.txt`의 G 줄). 주석, 예시를 빼고 P/M(품사), "
         "A/T(의미), G/W(문법)의 따옴표 인자를 셉니다. 품사는 `1**` 같은 와일드카드를 포함하며, "
         "의미, 문법은 리터럴 참조만 셉니다(상위 의미 계열 확장은 제외). 실행 횟수나 발동 보장은 아닙니다.",
         "- 예시는 키가 다른 최대 8개를 재현 가능한 순서로 뽑았습니다. 키가 적으면 전부이며, `—`는 사전 예시가 없음입니다. "

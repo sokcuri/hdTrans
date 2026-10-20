@@ -163,7 +163,7 @@ HD_TEST(SnapshotFileWriter) {
     HD_REQUIRE(bytes.size() > 256);
     HD_CHECK(std::memcmp(bytes.data(), "HDSNAP\r\n", 8) == 0);
     HD_CHECK(bytes[8] == std::byte{1});
-    HD_CHECK(bytes[12] == std::byte{2});
+    HD_CHECK(bytes[12] == std::byte{4});
     HD_CHECK(!hdTrans::dict::CompileSnapshot({temp.File("absent")}, temp.File("bad.hdsnap")));
     HD_CHECK(!std::filesystem::exists(temp.path / "bad.hdsnap"));
     const auto cache = hdTrans::dict::internal::SnapshotPath({FixtureFolder()}, temp.File("cache"));
@@ -1005,6 +1005,24 @@ HD_TEST(SnapshotWarmPlainColumnMembershipChanges) {
         const auto mappedPlain = hdTrans::dict::LoadFolders(folders, cache, true);
         HD_REQUIRE(mappedPlain.snapshot != nullptr && mappedPlain.snapshot->Mapped());
     }
+}
+
+HD_TEST(SnapshotCachedMarkerClassLines) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    const auto dicts = temp.path / "dicts";
+    std::error_code ec;
+    HD_REQUIRE(std::filesystem::create_directory(dicts, ec) && !ec);
+    const auto cache = temp.File("cache");
+    const std::vector<std::string> folders{temp.File("dicts")};
+    HD_REQUIRE(WriteText(dicts / "base.tsv", "key\tko\tpos\tid\n行\t가&AA@\tM428\t1\n下卑\t천&AV@\tN110\t2\n"));
+    HD_REQUIRE(hdTrans::dict::LoadFolders(folders, cache).snapshot != nullptr);
+    const auto cached = hdTrans::dict::LoadFolders(folders, cache, true);
+    HD_REQUIRE(cached.snapshot != nullptr && cached.snapshot->Mapped());
+    CheckLoadErrors(cached.errors, hdTrans::dict::LoadFoldersTsv(folders).errors);
+    HD_REQUIRE(cached.errors.size() == 1);
+    HD_CHECK(cached.errors[0].kind == hdTrans::dict::LoadErrorKind::MarkerClass);
+    HD_CHECK_EQ(cached.errors[0].line, 3);
 }
 
 HD_TEST(SnapshotWarmPlainErrorsKeepOrder) {

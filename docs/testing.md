@@ -10,7 +10,7 @@
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
-| `rules.cases.themes` | `tests/rules/cases/<규칙 파일>.tsv`(규칙 파일 이름, 같은 열. 없으면 머리줄을 복사해 만듦)의 사례를 함께 확인 |
+| `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
@@ -42,7 +42,7 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
 
 ## 규칙 사례 (tests/rules/cases.tsv)
 
-규칙 프로그램(`src/core/rules/*.txt`)의 단어 선택을 고정하는 표입니다. 열은 `rule input expected kind layer`이고
+규칙 프로그램의 단어 선택을 고정하는 표입니다. 열은 `rule input expected kind layer`이고
 입력 한 줄을 한 세션으로 번역합니다(`-each -why`). 실패는 `layer`별로 묶어 보입니다.
 
 - `rule`: 사례가 겨냥하는 규칙(`L1276`, 전역 규칙은 PRIO로 `G330`)

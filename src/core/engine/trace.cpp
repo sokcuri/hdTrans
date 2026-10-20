@@ -12,6 +12,9 @@ namespace {
 std::string RuleLocation(char kind, int id) {
     const std::string source = RuleSource(kind, id);
     if (source.empty()) return {};
+    // A local rule is the body of the dictionary row that names it, not a line of a
+    // rule file; its number is the location the reader can follow.
+    if (kind == 'L') return source;
     const auto filename = source.substr(0, source.rfind(':'));
     const std::string prefix = std::string(1, kind) + " " + std::to_string(id) + " ";
     const auto lines = RuleLines();
