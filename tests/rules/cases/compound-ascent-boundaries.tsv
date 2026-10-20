@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+dict:compound-ascent	崖を這い上がる。	벼랑을 기어오른다.	fix	lookup
+dict:compound-ascent	穴から這い上がった。	구멍에서 기어올랐다.	fix	lookup
+dict:compound-ascent	坂を這い上がっている。	비탈을 기어오르고 있다.	fix	lookup
+dict:compound-ascent	崖を這い上がらない。	벼랑을 기어오르지 않는다.	fix	lookup
+dict:compound-ascent	崖を這い上がらなかった。	벼랑을 기어오르지 않았다.	fix	lookup
+dict:compound-ascent	這い上がる虫を見た。	기어오르는 벌레를 보았다.	fix	lookup
+dict:compound-ascent	「崖を這い上がった」と言った。	「벼랑을 기어올랐다」라고 했다.	fix	lookup
+dict:compound-ascent	貧困から這い上がる。	빈곤으로부터 기어오른다.	fix	lookup
+dict:compound-ascent	もう一度這い上がりたい。	한번 더 기어오르고 싶다.	fix	lookup
+dict:compound-ascent	崖を這い上がれない。	벼랑을 기어오를 수 없다.	fix	lookup
+dict:compound-ascent	崖を這い上がれる。	벼랑을 기어오를 수 있다.	fix	lookup
+dict:compound-ascent	這い上がれば助かる。	기어오르면 살아난다.	fix	lookup
+dict:compound-ascent	赤ん坊が床を這う。	갓난아기가 바닥을 긴다.	keep	lookup
+dict:compound-ascent	階段を上がった。	계단을 올라갔다.	keep	lookup
+dict:compound-ascent	穴に這い込む。	구멍에 기어든다.	keep	lookup
+dict:compound-ascent	物価が上がる。	물가가 오른다.	keep	lookup
+dict:compound-ascent	はい上がる。	기어 오른다.	keep	lookup
+dict:compound-ascent	予想が当たった。	예상이 맞았다.	keep	lookup

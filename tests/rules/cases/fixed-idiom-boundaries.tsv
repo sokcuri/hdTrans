@@ -1,0 +1,33 @@
+rule	input	expected	kind	layer
+dict:fixed-idiom	人をコケにするな。	사람을 우습게 여기지 말아라.	fix	lookup
+dict:fixed-idiom	彼をコケにした。	그를 우습게 여겼다.	fix	lookup
+dict:fixed-idiom	彼女は私をコケにしている。	그녀는 나를 우습게 여기고 있다.	fix	lookup
+dict:fixed-idiom	庭のコケを取る。	뜰의 이끼를 취한다.	keep	lookup
+dict:fixed-idiom	夕食はパンにする。	저녁식사는 빵으로 한다.	keep	lookup
+dict:fixed-idiom	コケにされた。	우습게 여겨졌다.	fix	lookup
+dict:fixed-idiom	猫がにじり寄ってくる。	고양이가 조금씩 접근해 온다.	fix	lookup
+dict:fixed-idiom	店に寄る。	가게에 들른다.	keep	lookup
+dict:fixed-idiom	強く踏みにじる。	강하게 유린한다.	keep	lookup
+dict:fixed-idiom	にじり寄らないで。	조금씩 접근하지 마.	fix	lookup
+dict:fixed-idiom	人の気持ちを無下にする。	사람의 기분을 매몰차게 무시한다.	fix	lookup
+dict:fixed-idiom	親切を無下にした。	친절을 매몰차게 무시했다.	fix	lookup
+dict:fixed-idiom	好意を無下にしたくない。	호의를 매몰차게 무시하고 싶지 않다.	fix	lookup
+dict:fixed-idiom	下に置く。	아래에 둔다.	keep	lookup
+dict:fixed-idiom	無下にされる。	매몰차게 무시된다.	fix	lookup
+dict:fixed-idiom	無下にするな。	매몰차게 무시하지 말아라.	fix	lookup
+dict:fixed-idiom	揃いも揃って遅刻した。	하나같이 지각했다.	fix	lookup
+dict:fixed-idiom	皆、揃いも揃って同じ顔だ。	모두, 하나같이 같은 얼굴이다.	fix	lookup
+dict:fixed-idiom	道具が揃っている。	도구가 갖추어져 있다.	keep	lookup
+dict:fixed-idiom	セットを揃える。	세트를 맞춘다.	keep	lookup
+dict:fixed-idiom	場所を確かめる。	장소를 확인한다.	keep	lookup
+dict:fixed-idiom	あれを見る。	저것을 본다.	keep	lookup
+dict:fixed-idiom	男がにじり寄ってきた。	남자가 조금씩 접근해 왔다.	fix	lookup
+dict:fixed-idiom	彼にコケにされた。	그에게 우습게 여겨졌다.	fix	lookup
+dict:fixed-idiom	学校はどうあればよいのか。	학교는 어떻게 있으면 좋은 것인지.	keep	lookup
+dict:fixed-idiom	コケにする人を許さない。	우습게 여기는 사람을 용서하지 않는다.	fix	lookup
+dict:fixed-idiom	コケにされても怒らない。	우습게 여겨져도 화내지 않는다.	fix	lookup
+dict:fixed-idiom	無下にしたのは私だ。	매몰차게 무시한 것은 나다.	fix	lookup
+dict:fixed-idiom	無下にしなかった。	매몰차게 무시하지 않았다.	fix	lookup
+dict:fixed-idiom	全員、揃いも揃って欠席した。	전원, 하나같이 결석했다.	fix	lookup
+dict:fixed-idiom	にじり寄れば見える。	조금씩 접근하면 보인다.	fix	lookup
+dict:fixed-idiom	にじり寄るな。	조금씩 접근하지 말아라.	fix	lookup

@@ -1,0 +1,67 @@
+id	group	kind	input	expected	actual	matched
+x01	famous-short	example	肉がジュージューと焼ける	고기가 지글지글 구워진다	고기가 지글지글 구워진다	1
+x02	famous-short	example	バイトに行く	아르바이트에 간다	아르바이트에 간다	1
+x03	famous-short	example	おっと、すまんね	어이쿠, 미안	어이쿠, 미안	1
+x04	famous-short	example	夢みたい	꿈같다	꿈같다	1
+x05	famous-short	example	くそっ！	젠장!	젠장!	1
+x06	famous-short	example	やったー！	해냈다!	해냈다!	1
+q01	quoted-command	fix	「箱を出せ」と言った。	「상자를 내라」라고 말했다.	「상자를 내라」라고 말했다.	1
+q02	quoted-command	fix	「紙に書け」って言った。	「종이에 써라」라고 말했다.	「종이에 써라」라고 말했다.	1
+q03	quoted-command	fix	「本を読め」と言った。	「책을 읽어라」라고 말했다.	「책을 읽어라」라고 말했다.	1
+q04	quoted-command	keep	箱を出せ。	상자를 내라.	상자를 내라.	1
+q05	quoted-command	keep	「本を読める」と言った。	「책을 읽을 수 있다」라고 말했다.	「책을 읽을 수 있다」라고 말했다.	1
+q06	quoted-command	keep	本を読めない。	책을 읽을 수 없다.	책을 읽을 수 없다.	1
+a01	compound-ascent	fix	崖を這い上がる。	벼랑을 기어오른다.	벼랑을 기어오른다.	1
+a02	compound-ascent	fix	穴から這い上がった。	구멍에서 기어올랐다.	구멍에서 기어올랐다.	1
+a03	compound-ascent	fix	崖を這い上がらない。	벼랑을 기어오르지 않는다.	벼랑을 기어오르지 않는다.	1
+a04	compound-ascent	keep	赤ん坊が床を這う。	갓난아기가 바닥을 긴다.	갓난아기가 바닥을 긴다.	1
+a05	compound-ascent	keep	階段を上がった。	계단을 올라갔다.	계단을 올라갔다.	1
+a06	compound-ascent	keep	物価が上がる。	물가가 오른다.	물가가 오른다.	1
+p01	past-progressive	fix	本を読んでいただけだ。	책을 읽고 있었을 뿐이다.	책을 읽고 있었을 뿐이다.	1
+p02	past-progressive	fix	手紙を書いていただけです。	편지를 쓰고 있었을 뿐입니다.	편지를 쓰고 있었을 뿐입니다.	1
+p03	past-progressive	fix	水を飲んでいただけだ。	물을 마시고 있었을 뿐이다.	물을 마시고 있었을 뿐이다.	1
+p04	past-progressive	keep	読んでいただけますか。	읽어 주시겠습니까.	읽어 주시겠습니까.	1
+p05	past-progressive	keep	確認していただければ。	확인해 주시면.	확인해 주시면.	1
+p06	past-progressive	keep	本を読んだだけだ。	책을 읽었을 뿐이다.	책을 읽었을 뿐이다.	1
+n01	passive-desire	fix	気づかれたくない。	들키고 싶지 않다.	들키고 싶지 않다.	1
+n02	passive-desire	fix	先生に気づかれたくなかった。	선생님에게 들키고 싶지 않았다.	선생님에게 들키고 싶지 않았다.	1
+n03	passive-desire	fix	気づかれたくないので、隠れる。	들키고 싶지 않기 때문에, 숨는다.	들키고 싶지 않기 때문에, 숨는다.	1
+n04	passive-desire	keep	気疲れで休む。	심로로 쉰다.	심로로 쉰다.	1
+n05	passive-desire	keep	私は間違いに気づく。	나는 실수를 눈치챈다.	나는 실수를 눈치챈다.	1
+n06	passive-desire	keep	私は間違いに気づかない。	나는 실수를 눈치채지 않는다.	나는 실수를 눈치채지 않는다.	1
+c01	past-cause	fix	静かだったため、眠れた。	조용했기 때문에, 잘 수 있었다.	조용했기 때문에, 잘 수 있었다.	1
+c02	past-cause	fix	必要だったため、買った。	필요했기 때문에, 샀다.	필요했기 때문에, 샀다.	1
+c03	past-cause	fix	便利だったため、使っていた。	편리했기 때문에, 사용하고 있었다.	편리했기 때문에, 사용하고 있었다.	1
+c04	past-cause	keep	静かなため、眠れる。	조용하기 때문에, 잘 수 있다.	조용하기 때문에, 잘 수 있다.	1
+c05	past-cause	keep	水をためた。	물을 모아 두었다.	물을 모아 두었다.	1
+c06	past-cause	keep	本を買うために働いた。	책을 사기 위해 일했다.	책을 사기 위해 일했다.	1
+b01	benefactive	fix	私は友人からパンを分けてもらった。	나는 친구로부터 빵을 나누어 받았다.	나는 친구로부터 빵을 나누어 받았다.	1
+b02	benefactive	fix	友人からパンを分けてもらっている。	친구로부터 빵을 나누어 받고 있다.	친구로부터 빵을 나누어 받고 있다.	1
+b03	benefactive	fix	友人からパンを分けてもらったら、帰る。	친구로부터 빵을 나누어 받으면, 돌아간다.	친구로부터 빵을 나누어 받으면, 돌아간다.	1
+b04	benefactive	keep	パンを分けてもらえますか。	빵을 나누어 줄 수 있습니까.	빵을 나누어 줄 수 있습니까.	1
+b05	benefactive	keep	友人がパンを分けてくれた。	친구가 빵을 나누어 주었다.	친구가 빵을 나누어 주었다.	1
+b06	benefactive	keep	友人から本をもらった。	친구로부터 책을 받았다.	친구로부터 책을 받았다.	1
+e01	polite-negative	fix	短い番号は登録できませんね。	짧은 번호는 등록할 수 없겠네요.	짧은 번호는 등록할 수 없겠네요.	1
+e02	polite-negative	fix	安全を無視するわけにはいきませんし。	안전을 무시할 수는 없고.	안전을 무시할 수는 없고.	1
+e03	polite-negative	fix	短い番号は登録できませんでしたか。	짧은 번호는 등록할 수 없었습니까.	짧은 번호는 등록할 수 없었습니까.	1
+e04	polite-negative	keep	短い番号は登録できません。	짧은 번호는 등록할 수 없습니다.	짧은 번호는 등록할 수 없습니다.	1
+e05	polite-negative	keep	短い番号は登録できない。	짧은 번호는 등록할 수 없다.	짧은 번호는 등록할 수 없다.	1
+e06	polite-negative	keep	明日は港にいきます。	내일은 항구에 갑니다.	내일은 항구에 갑니다.	1
+k01	kana-words	fix	小麦粉がだまになった。	소맥분이 뭉쳤다.	소맥분이 뭉쳤다.	1
+k02	kana-words	fix	ご飯をよそる。	밥을 담아낸다.	밥을 담아낸다.	1
+k03	kana-words	fix	まんまるです。	동그랗습니다.	동그랗습니다.	1
+k04	kana-words	keep	だましてはいけない。	속여선 안 된다.	속여선 안 된다.	1
+k05	kana-words	keep	よその家で休む。	다른 집에서 쉰다.	다른 집에서 쉰다.	1
+k06	kana-words	keep	まるで夢のようだ。	마치 꿈과 같다.	마치 꿈과 같다.	1
+i01	idioms	fix	示しがつかない。	체면이 서지 않는다.	체면이 서지 않는다.	1
+i02	idioms	fix	一目も二目も置かれる。	높이 평가받는다.	높이 평가받는다.	1
+i03	idioms	fix	手を振り返した。	손을 흔들어 답했다.	손을 흔들어 답했다.	1
+i04	idioms	keep	手本を示した。	모범을 보였다.	모범을 보였다.	1
+i05	idioms	keep	箱を二つ置いた。	상자를 2개 두었다.	상자를 2개 두었다.	1
+i06	idioms	keep	後ろを振り返った。	뒤를 돌아보았다.	뒤를 돌아보았다.	1
+d01	casual-adjective	fix	坂は危ねぇ。	비탈은 위험하다.	비탈은 위험하다.	1
+d02	casual-adjective	fix	危ねえ坂！	위험한 비탈!	위험한 비탈!	1
+d03	casual-adjective	fix	危ねぇ岩。	위험한 바위.	위험한 바위.	1
+d04	casual-adjective	keep	坂は危ない。	비탈은 위험하다.	비탈은 위험하다.	1
+d05	casual-adjective	keep	坂は危なくない。	비탈은 위험하지 않다.	비탈은 위험하지 않다.	1
+d06	casual-adjective	keep	危なければ帰る。	위험하면 돌아간다.	위험하면 돌아간다.	1

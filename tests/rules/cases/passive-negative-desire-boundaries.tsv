@@ -1,0 +1,28 @@
+rule	input	expected	kind	layer
+dict:passive-negative-desire	気づかれたくない。	들키고 싶지 않다.	fix	lookup
+dict:passive-negative-desire	気づかれたくなかった。	들키고 싶지 않았다.	fix	lookup
+dict:passive-observer	先生に気づかれたくない。	선생님에게 들키고 싶지 않다.	fix	lookup
+dict:passive-observer	先生に気づかれたくなかった。	선생님에게 들키고 싶지 않았다.	fix	lookup
+dict:passive-cause	気づかれたくないので、隠れる。	들키고 싶지 않기 때문에, 숨는다.	fix	lookup
+dict:passive-cause	気づかれたくなかったから、隠れた。	들키고 싶지 않았으니까, 숨었다.	fix	lookup
+dict:passive-connective	気づかれたくなくて、隠れた。	들키고 싶지 않아서, 숨었다.	fix	lookup
+dict:passive-quotation	「気づかれたくない」と言った。	「들키고 싶지 않다」라고 말했다.	fix	lookup
+dict:passive-quotation	「気づかれたくなかった」と言った。	「들키고 싶지 않았다」라고 말했다.	fix	lookup
+dict:passive-condition	気づかれたくなければ、隠れる。	들키고 싶지 않으면, 숨는다.	fix	lookup
+dict:passive-attributive	気づかれたくない人は隠れる。	들키고 싶지 않은 사람은 숨는다.	fix	lookup
+dict:passive-polite	気づかれたくないです。	들키고 싶지 않습니다.	fix	lookup
+dict:passive-question	気づかれたくない？	들키고 싶지 않아?	fix	lookup
+dict:passive-double-negative	気づかれたくないわけではない。	들키고 싶지 않은 것은 아니다.	fix	lookup
+dict:passive-double-negative	気づかれたくなかったわけではない。	들키고 싶지 않았던 것은 아니다.	fix	lookup
+dict:passive-double-negative	気づかれたくないとは言わない。	들키고 싶지 않다고는 말하지 않는다.	fix	lookup
+dict:passive-negative-onset	気づかれたくなくなった。	들키고 싶지 않게 되었다.	fix	lookup
+dict:passive-double-negative	気づかれたくなくはない。	들키고 싶지 않지는 않다.	fix	lookup
+dict:fatigue-noun	気づかれで休む。	정신적 피로로 쉰다.	keep	lookup
+dict:fatigue-noun	気疲れで休む。	심로로 쉰다.	keep	lookup
+dict:fatigue-noun	きづかれで休む。	심로로 쉰다.	keep	lookup
+dict:fatigue-noun	気づかれがひどい。	정신적 피로가 심하다.	keep	lookup
+dict:fatigue-noun	気疲れがひどい。	심로가 심하다.	keep	lookup
+dict:active-noticing	私は間違いに気づく。	나는 실수를 눈치챈다.	keep	lookup
+dict:active-noticing	私は間違いに気づいた。	나는 실수를 눈치챘다.	keep	lookup
+dict:active-noticing	私は間違いに気づかない。	나는 실수를 눈치채지 않는다.	keep	lookup
+dict:active-noticing	私は間違いに気づきたくない。	나는 실수를 눈치채고 싶지 않다.	keep	lookup

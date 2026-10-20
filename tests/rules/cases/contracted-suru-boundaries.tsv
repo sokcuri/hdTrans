@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+verb:contracted-suru	その時は相談でもすりゃいい。	그 때는 상담이라도 하면 된다.	fix	conjugation
+verb:contracted-suru	勉強すりゃ分かる。	공부하면 안다.	fix	conjugation
+verb:contracted-suru	確認すりゃ分かる。	확인하면 안다.	fix	conjugation
+verb:contracted-suru	何もしなければ、結果は変わらない。	아무것도 하지 않으면, 결과는 변함없다.	keep	conjugation
+verb:contracted-suru	その時は相談すればいい。	그 때는 상담하면 된다.	keep	conjugation
+verb:contracted-suru	箱に砂糖を入れた。	상자에 설탕을 넣었다.	keep	conjugation
+verb:contracted-suru	仕事をしろ。	일을 해라.	keep	conjugation
+verb:contracted-suru	仕事をするな。	일을 하지 말아라.	keep	conjugation
+verb:contracted-suru	彼は仕事をしていた。	그는 일을 하고 있었다.	keep	conjugation
+verb:contracted-suru	彼は仕事をしなかった。	그는 일을 하지 않았다.	keep	conjugation
+verb:contracted-suru	彼は仕事をしない。	그는 일을 하지 않는다.	keep	conjugation
+verb:contracted-suru	薬をすりつぶした。	약을 갈아서 으깨었다.	keep	conjugation
+verb:contracted-suru	そりゃそうだ。	그야 그렇다.	keep	conjugation
+verb:contracted-suru	ありゃ何だ。	어라 뭐냐.	keep	conjugation
+verb:contracted-suru	この手すりは丈夫だ。	이 난간은 튼튼하다.	keep	conjugation

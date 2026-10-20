@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+segmentation:nikujaga	夕飯に肉じゃがを作った。	저녁밥에 고기감자조림을 만들었다.	fix	lookup
+segmentation:nikujaga	肉じゃがは食べなかった。	고기감자조림은 먹지 않았다.	fix	lookup
+segmentation:nikujaga	肉じゃが定食を注文した。	고기감자조림 정식을 주문했다.	fix	lookup
+segmentation:nikujaga	肉がじゃがいもより多い。	고기가 감자보다 많다.	keep	lookup
+segmentation:nikujaga	肉じゃ、がまんできない。	고기는, 참을 수 없다.	keep	lookup
+segmentation:nikujaga	肉 じゃがいも 玉ねぎを買った。	고기 감자 양파를 샀다.	keep	lookup
+segmentation:nikujaga	肉じゃがいもを切る。	고기 감자를 자른다.	keep	lookup
+segmentation:kakubeya	各部屋に鍵がある。	각 방에 열쇠가 있다.	fix	lookup
+segmentation:kakubeya	各部屋には窓がない。	각 방에는 창이 없다.	fix	lookup
+segmentation:kakubeya	各部屋番号を確認した。	각 방 번호를 확인했다.	fix	lookup
+segmentation:kakubeya	各部屋のドアを閉めた。	각 방의 문을 닫았다.	fix	lookup
+segmentation:kakubeya	各部は屋外で練習した。	각부는 옥외에서 연습했다.	keep	lookup
+segmentation:kakubeya	各部 屋根 壁を調べた。	각부 지붕벽을 조사했다.	keep	lookup
+segmentation:kakubeya	部屋着を洗った。	실내복을 씻었다.	keep	lookup
+segmentation:kakubeya	各部の屋台を見た。	각부의 포장마차를 보았다.	keep	lookup
+segmentation:hanikamu	彼女ははにかむ。	그녀는 수줍어한다.	fix	lookup
+segmentation:hanikamu	少年ははにかんだ。	소년은 수줍어했다.	fix	lookup
+segmentation:hanikamu	彼ははにかまなかった。	그는 수줍어하지 않았다.	fix	lookup
+segmentation:hanikamu	彼女ははにかみながら答えた。	그녀는 수줍어하면서 대답했다.	fix	lookup
+segmentation:hanikamu	はにかみ屋の少年だった。	부끄럼쟁이의 소년이었다.	keep	lookup
+segmentation:hanikamu	彼は肉にかむ力を加えた。	그는 고기에 무는 힘을 가했다.	keep	lookup
+segmentation:hanikamu	母は にかっと笑った。	어머니는 씩 웃었다.	keep	lookup
+segmentation:hanikamu	はにかめば顔が赤くなる。	수줍어하면 얼굴이 붉어진다.	fix	lookup
+segmentation:hanikamu	はにかもうとした。	수줍어하려고 했다.	fix	lookup

@@ -145,32 +145,10 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
 
 Translator++와 MTool은 하드트랜스 연결 방법이 아직 정리되지 않았습니다.
 
-## CLI로 텍스트 파일 번역
+## 다른 사용 방법
 
-Windows는 ZIP, Linux와 macOS는 OS와 CPU에 맞는 `tar.gz`를 받아 압축을 풉니다.
-터미널에서 압축을 푼 폴더로 이동해 실행합니다. 입력과 출력은 UTF-8입니다.
-
-Windows:
-
-```powershell
-.\hdtrans.exe --in script.ja.txt --out script.ko.txt
-.\hdtrans.exe --each --in lines.ja.txt --out lines.ko.txt
-```
-
-Linux, macOS:
-
-```sh
-./hdtrans --in script.ja.txt --out script.ko.txt
-./hdtrans --each --in lines.ja.txt --out lines.ko.txt
-```
-
-기본 사전 스냅샷을 자동으로 읽으므로 `--dicts`는 필요 없습니다.
-Windows는 `hdTrans\dicts.hdsnap`, Linux와 macOS는 프로그램 옆 `dicts.hdsnap`을 씁니다.
-기본은 파일 전체가 한 문서이며 `--each`는 줄마다 문맥을 새로 시작합니다. [전체 CLI 옵션](api.md#명령줄-hdtrans).
-
-## 웹과 npm
-
+- [CLI 안내](api.md#명령줄-hdtrans): 명령줄 설치, 파일 번역과 옵션
+- [JavaScript와 TypeScript API](typescript-api.md): npm 라이브러리 사용법
 - 설치 없이 번역: https://trans.kuri.kr
-- JavaScript, TypeScript와 npm 사용법: [TypeScript API](typescript-api.md)
 
 직접 프로그램에 연결할 때의 호출 규약과 제한은 [도구 호환성 개발 참고](tool-compatibility.md)를 보세요.

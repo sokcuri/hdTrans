@@ -52,10 +52,17 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     for (int branch = 0; branch < kConjugationBranches; branch++) {
         if (branch == 13) continue;
         const std::string_view entry = Conjugation(kind, branch);
-        if ((kind != 7 && entry.empty()) || !Starts(tail, entry)) continue;
+        const bool contractedConditional = kind == 9 && branch == 3 && Starts(tail, "すりゃ");
+        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional)) continue;
         if (branch == 4 || branch == 11) {
             const std::size_t n = entry.size();
             const std::string_view rest = tail.substr(n);
+            if (branch == 4 && entry == Conjugation(kind, 11) &&
+                (Starts(rest, "だの") || Starts(rest, "」と") || Starts(rest, "』と") ||
+                 Starts(rest, "」って") || Starts(rest, "』って") || Starts(rest, "」だの") ||
+                 Starts(rest, "』だの"))) {
+                continue;
+            }
             if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) continue;
             if (n < tail.size()) {
                 const char next = tail[n];

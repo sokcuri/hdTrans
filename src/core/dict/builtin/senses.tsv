@@ -1217,7 +1217,7 @@
 乙女	오토메	ゲー	after	n
 卵	알	ドラゴン	before	n
 片方	다른 한쪽	もう	before	n
-埋める	묻다	顔	before	v1
+埋める	묻다	顔	before	v1:규칙
 身につける	몸에 걸치다	鎧	before	v1
 入り	진입	唐	before	n
 杯	배	アギルメスタ	before	n
@@ -1386,3 +1386,5 @@
 只	그저	驚く,哀しい,悲しい,嬉しい,泣く,笑う,思う	after	n
 ついている	붙어 있다	機能,鍵,ボタン,装置,設備,札,タグ,印	before	v1
 鍵	열쇠	扉,ドア,錠	before	n
+仕込む	설치하다	gram:Oi@を	before	v5
+仕込む	넣다	gram:Il@に	before	v5

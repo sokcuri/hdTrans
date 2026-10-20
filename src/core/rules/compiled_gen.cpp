@@ -4666,6 +4666,20 @@ bool RuleL499([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "13*"sv) && AttrEq(p, -1, "QCT"sv));
 }
 
+// # 각부와 독립된 옥호 접미사를 각 방으로 묶는다.
+// global 997 stem pos 1 prio 1
+//     src == "屋" and src[-1] == "各部" and ko[-1] := "" and ko := "각 방"
+bool RuleG1([[maybe_unused]] Item* p) {
+    return (SrcEq(p, 0, "屋"sv) && SrcEq(p, -1, "各部"sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "각 방"sv));
+}
+
+// # 고기 뒤 조사로 나뉜 요리명을 복원한다.
+// global 998 stem pos 2 prio 2
+//     src == "が" and src[-1] == "じゃ" and src[-2] == "肉" and ko[-2] := "" and ko[-1] := "" and ko := "고기감자조림"
+bool RuleG2([[maybe_unused]] Item* p) {
+    return (SrcEq(p, 0, "が"sv) && SrcEq(p, -1, "じゃ"sv) && SrcEq(p, -2, "肉"sv) && DstSet(p, -2, ""sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "고기감자조림"sv));
+}
+
 // # 현재 후보가 13* 품사의 QPN 인명이고 다음 명사가 様·氏·君·さん·ちゃん·ちゃーん이면 그 인명 후보를 고른다.
 // global 1002 stem pos 1 prio 10
 //     pos is 13* and sem has QPN and (src[+1] == "様" or src[+1] == "氏" or src[+1] == "君" or src[+1] == "さん" or src[+1] == "ちゃん" or src[+1] == "ちゃーん") and pos[+1] is 1**
@@ -5455,6 +5469,8 @@ constexpr CompiledRule kLocal[] = {
 };
 
 constexpr CompiledRule kGlobal[] = {
+    {RuleG1, 0xa9ccc36b32988a2aull},
+    {RuleG2, 0x80a377d931160ae0ull},
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
     {RuleG30, 0x689e9ee7a39de957ull},

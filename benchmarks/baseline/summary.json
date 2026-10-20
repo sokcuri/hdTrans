@@ -1,0 +1,101 @@
+{
+  "label": "baseline-0.2.0-source",
+  "source_revision": "95716099b83a49a6b0b3e2d176778600fd1b40d7",
+  "source_sha256": "835d0671af7bf75cb10c58f283ebbb2ff3b4278afc7f04f16f483e33ca3e137c",
+  "source_hash_scope": "src/**, include/**, cmake/**, CMakeLists.txt, release-version.txt; sorted path TAB SHA256 LF",
+  "cli_sha256": "d26db1763facf9897c7c12685a9ba47d6f4673d81f7633f036b963eb17a9dcd8",
+  "dictionary": {
+    "mode": "tsv",
+    "sha256": "d09bfc43cebc2baaebd5df829990ec8dffc1635af491bdbafbce27205f567cd1",
+    "files": {
+      "base.tsv": "2cfe83cca242ea30710e090248c6ab10b47ad0d770cabc0f1e50f48162b8eaf1",
+      "kana.tsv": "8510cbc271f91f667f88c1bac562f6ea957960393c855d95e5e2bb6e917cf065",
+      "names-places.tsv": "37acf02cd0020d1bde13bfa6820b197f9d376a69c2fffbd03682a10d7cc9daaa",
+      "names.00.tsv": "21481e71540703a5aabd463e407f6fefce3ce773e5ef1a5e08a3a4cc587210d6",
+      "names.01.tsv": "647e78adff905b0aa3ee5735e3e8706a28706d15b748195f795dcb292fbc72fc",
+      "names.02.tsv": "6bdba48fa66b769869bd3c8f4f5238e07d5b44e60264acf1e332b1a2ac8e1c3d",
+      "words-idioms.tsv": "33d41f7742b11a9884d5c56e9430fca8911c25e28ff67018b34864517afc3c04",
+      "words-slang.tsv": "f605b22a7fa0fedd44ccdfc146e8d83539f7912c17deaa358d5dda788fd2df14",
+      "words-variants.tsv": "2456e7089d3c2bb1ff681c8c0c66f1b51a09529874d2293132003e267809e2e4",
+      "words.tsv": "c3c603efb91418a5d576100e45e83f9050cbec5731275d943649262bb8b612d8"
+    }
+  },
+  "version": "hdTrans v0.2.0 (native) / dict development (unversioned)",
+  "runtime": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "fixture_sha256": "273da39e88edc312ce25836233cf71ceef7d8a6d8bbd8bab18cb87243c467245",
+  "runner_sha256": "24ed65eb863c7dfb1f507cfa4b95bd297b0af92480cd46342d202e0af97f391f",
+  "translation_options": [
+    "--each",
+    "--no-cache",
+    "--config EMPTY",
+    "--userdict EMPTY"
+  ],
+  "score": {
+    "matched": 36,
+    "total": 66
+  },
+  "by_kind": {
+    "example": {
+      "matched": 6,
+      "total": 6
+    },
+    "fix": {
+      "matched": 0,
+      "total": 30
+    },
+    "keep": {
+      "matched": 30,
+      "total": 30
+    }
+  },
+  "by_group": {
+    "famous-short": {
+      "matched": 6,
+      "total": 6
+    },
+    "quoted-command": {
+      "matched": 3,
+      "total": 6
+    },
+    "compound-ascent": {
+      "matched": 3,
+      "total": 6
+    },
+    "past-progressive": {
+      "matched": 3,
+      "total": 6
+    },
+    "passive-desire": {
+      "matched": 3,
+      "total": 6
+    },
+    "past-cause": {
+      "matched": 3,
+      "total": 6
+    },
+    "benefactive": {
+      "matched": 3,
+      "total": 6
+    },
+    "polite-negative": {
+      "matched": 3,
+      "total": 6
+    },
+    "kana-words": {
+      "matched": 3,
+      "total": 6
+    },
+    "idioms": {
+      "matched": 3,
+      "total": 6
+    },
+    "casual-adjective": {
+      "matched": 3,
+      "total": 6
+    }
+  },
+  "stdout_sha256": "425d976817159572ba453dfaa739742e9c09c24a927bd0db2bab259871677bc4"
+}

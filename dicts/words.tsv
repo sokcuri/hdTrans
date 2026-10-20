@@ -13155,7 +13155,7 @@ key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
 半ズボン	반바지	N110			GN				はんズボン	w:13143
 半化石	반화석	N110			GN				はんかせき	w:13144
 半合成	반합성	N110			GN				はんごうせい	w:13145
-半周	반원	N110			GN		llm		はんしゅう	w:13146
+半周	반 바퀴	N110			GN		llm		はんしゅう	w:13146
 半周	반 바퀴 &K9@	M429			GN		llm		はんしゅう	w:13147
 半地下	반지하	N110			GN				はんちか	w:13148
 半壊	반파	N110		Hd	GN				はんかい	w:13149
@@ -26709,3 +26709,11 @@ key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
 わんぴーす	원피스	N110	VCp		GN				わんぴーす	w:26711
 打たれ強	맷집이 $DE@	H7U0			GN				うたれづよい	w:26712
 頑張ろっか	힘내볼까	E320			GN					w:26713
+初回限定特装版	초회 한정 특장판	N110			GN					edition:first-limited-special
+特装版	특장판	N110			GN					edition:special
+撮り下ろし	신규 촬영	N110							とりおろし	commerce:photography:n1
+撮り下ろ	새로 촬영&AV@	M443							とりおろ	commerce:photography:v1
+撮りおろし	신규 촬영	N110							とりおろし	commerce:photography:n2
+撮りおろ	새로 촬영&AV@	M443							とりおろ	commerce:photography:v2
+録り下ろし音源	신규 녹음 음원	N110							とりおろしおんげん	commerce:recording-audio:n1
+録りおろし音源	신규 녹음 음원	N110							とりおろしおんげん	commerce:recording-audio:n2
