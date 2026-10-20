@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/sokcuri/hdTrans/compare/v0.3.0...v0.3.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* **cli:** show the engine version in the help header ([5226127](https://github.com/sokcuri/hdTrans/commit/522612701b93606b939cc386301bf2bf51088ba8))
+* **cli:** show the engine version in the help header ([#17](https://github.com/sokcuri/hdTrans/issues/17)) ([dd1ebd4](https://github.com/sokcuri/hdTrans/commit/dd1ebd4cdc0b53c54e46a32fbef72ae65fae65f3))
+
 ## [0.3.0](https://github.com/sokcuri/hdTrans/compare/v0.2.1...v0.3.0) (2026-10-20)
 
 
