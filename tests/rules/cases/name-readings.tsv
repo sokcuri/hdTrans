@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:names	クロード様。	클로드님.	fix	lookup
+dict:names	あのクロード様が来た。	그 클로드님이 왔다.	fix	lookup
+dict:names	クロードは剣を取った。	클로드는 검을 잡았다.	keep	lookup
+dict:names	シルクロード。	실크 로드.	keep	lookup
