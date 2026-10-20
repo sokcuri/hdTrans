@@ -1,15 +1,15 @@
 rule	input	expected	kind	layer
-L4222	その気持ちはちょっとわかる。	그 마음은 조금 안다.	fix	local
-L4222	鍵がちょっと見当たらない。	열쇠가 잘 눈에 띄지 않는다.	keep	local
-L4110	今日だけでも休む。	오늘만이라도 쉰다.	fix	local
-L4110	明日だけでも手伝って。	내일만이라도 도와줘.	fix	local
-L4110	一日だけでも十分だ。	하루만으로도 충분하다.	fix	local
-L4110	話を聞くだけでも十分だ。	이야기를 듣는 것만으로도 충분하다.	keep	local
-L4110	見るだけでも楽しい。	보는 것만으로도 즐겁다.	keep	local
-L2142	これでずっと簡単だ。	이것으로 훨씬 간단하다.	fix	local
-L2142	これでずっと楽だ。	이것으로 훨씬 편하다.	fix	local
-L2142	ここでずっと静かに暮らす。	여기서 쭉 조용하게 산다.	keep	local
-L2142	これでずっと幸せだ。	이것으로 쭉 행복하다.	keep	local
+dict:jisjk:362192	その気持ちはちょっとわかる。	그 마음은 조금 안다.	fix	local
+dict:jisjk:362192	鍵がちょっと見当たらない。	열쇠가 잘 눈에 띄지 않는다.	keep	local
+dict:jisjk:358633	今日だけでも休む。	오늘만이라도 쉰다.	fix	local
+dict:jisjk:358633	明日だけでも手伝って。	내일만이라도 도와줘.	fix	local
+dict:jisjk:358633	一日だけでも十分だ。	하루만으로도 충분하다.	fix	local
+dict:jisjk:358633	話を聞くだけでも十分だ。	이야기를 듣는 것만으로도 충분하다.	keep	local
+dict:jisjk:358633	見るだけでも楽しい。	보는 것만으로도 즐겁다.	keep	local
+dict:jisjk:263983	これでずっと簡単だ。	이것으로 훨씬 간단하다.	fix	local
+dict:jisjk:263983	これでずっと楽だ。	이것으로 훨씬 편하다.	fix	local
+dict:jisjk:263983	ここでずっと静かに暮らす。	여기서 쭉 조용하게 산다.	keep	local
+dict:jisjk:263983	これでずっと幸せだ。	이것으로 쭉 행복하다.	keep	local
 dict:とびっきり	とびっきり美しい。	대단히 아름답다.	fix	defaults
 dict:とびっきり	とびきりの美人だ。	특출의 미인이다.	keep	defaults
 dict:ボタッボタ	血がボタッボタと落ちた。	피가 뚝뚝 떨어졌다.	fix	defaults

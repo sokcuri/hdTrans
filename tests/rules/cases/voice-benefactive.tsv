@@ -1,3 +1,3 @@
 rule	input	expected	kind	layer
-L4475	少しもしてくれんかった。	조금도 해 주지 않았다.	fix	local
-L4475	静かにしてくれ。	조용하게 해 줘.	keep	local
+dict:jisjk:364773	少しもしてくれんかった。	조금도 해 주지 않았다.	fix	local
+dict:jisjk:364773	静かにしてくれ。	조용하게 해 줘.	keep	local
