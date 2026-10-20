@@ -12,6 +12,62 @@ hdTrans는 하나의 정적 라이브러리(`hdTransCore`)와 그 위의 얇은 
 
 ## 명령줄 (hdtrans)
 
+### 배포판으로 시작하기
+
+[배포 파일](../README.md#다운로드와-설치)을 받아 압축을 푼 폴더에서 실행합니다. 입력과 출력은 UTF-8입니다.
+
+Windows:
+
+```powershell
+.\hdtrans.exe --in script.ja.txt --out script.ko.txt
+.\hdtrans.exe --each --in lines.ja.txt --out lines.ko.txt
+```
+
+Linux, macOS:
+
+```sh
+./hdtrans --in script.ja.txt --out script.ko.txt
+./hdtrans --each --in lines.ja.txt --out lines.ko.txt
+```
+
+기본 사전 스냅샷을 자동으로 읽으므로 `--dicts`는 필요 없습니다.
+Windows는 `hdTrans\dicts.hdsnap`, Linux와 macOS는 프로그램 옆 `dicts.hdsnap`을 씁니다.
+기본은 파일 전체가 한 문서이며 `--each`는 줄마다 문맥을 새로 시작합니다.
+
+### npm CLI
+
+Node.js 22 이상에서 전역 설치하거나 `npx`로 실행합니다. 패키지의 WASM 엔진과 기본 사전을 씁니다.
+
+```sh
+npm install -g hdtrans
+hdtrans "今日は本を読みます。"
+
+npx hdtrans "今日は本を読みます。"
+```
+
+```sh
+hdtrans --version
+hdtrans --json "競走で勝った。"
+hdtrans --in input.txt --out output.txt
+hdtrans --json --file input.txt --out result.json
+hdtrans --why --userdict userdict.txt "蒼月は学生です。"
+```
+
+지원 옵션은 `--in`(`--file`), `--out`, `--json`, `--why`, `--userdict`, `--ehnd`, `--version`, `--help`입니다.
+입력은 UTF-8 파일, 문장 인자나 표준 입력입니다. `--json`은 `{ text, choices, logs }` 객체를 출력하고,
+`--out`과 함께 쓰면 JSON을 파일에 저장합니다. 로그와 오류는 표준 오류로 보냅니다.
+`--in`과 직접 문장을 함께 지정할 수 없으며 `--` 뒤의 인자는 옵션으로 해석하지 않습니다.
+
+npm CLI의 `--userdict`는 파일 하나를 받으며 중복 지정은 오류입니다.
+`--ehnd DIR`로 Ehnd 파일 묶음을 명시적으로 적용합니다. 현재 폴더의 사전이나 설정 파일은 자동으로 읽지 않습니다.
+사전 컴파일, `--each` 등 아래 네이티브 전용 옵션은 npm CLI에서 지원하지 않습니다.
+
+`--version`은 양쪽 CLI에서 사전을 실제로 로드한 뒤 `hdTrans v<엔진> (<실행 방식>) / dict <사전>`을 출력합니다.
+실행 방식은 배포판이 `native`, npm판이 `wasm`입니다.
+버전 정보가 없는 직접 편집한 사전은 `development (unversioned)`로 표시합니다.
+
+### 네이티브 CLI 옵션
+
 표준 입력(또는 `--in FILE`)의 UTF-8을 읽어 번역을 표준 출력에 씁니다. 기본으로 입력 전체가 한 세션,
 한 문서이며, 출력 줄은 `\n`으로 잇고 끝에 줄바꿈을 붙이지 않습니다. `--each`와 `--raw`는 줄마다 번역하고
 각 줄 뒤에 `\n`을 붙입니다.

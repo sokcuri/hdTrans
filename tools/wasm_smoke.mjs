@@ -20,10 +20,23 @@ const init = (options = {}) => HdTrans.init({ module: engine, directories: ['/di
 await assert.rejects(init({ directories: ['/missing'] }), /dictionaries do not load/);
 await assert.rejects(init({ directories: [42] }), TypeError);
 await assert.rejects(init({ directories: ['/dicts\0hidden'] }), TypeError);
+const inspect = (options = {}) => HdTrans.getInfo({ module: engine, directories: ['/dicts'], ...options });
+await assert.rejects(inspect({ directories: ['/missing'] }), /dictionaries do not load/);
+await assert.rejects(inspect({ directories: [42] }), TypeError);
+assert.deepEqual(await inspect(), {
+    version: engine.version(), dictionaryVersion: 'development (unversioned)', runtime: 'wasm',
+});
+assert.deepEqual(engine.FS.readdir('/').filter((name) => name.startsWith('hdtrans-userdict-')), []);
 const unversioned = await init();
 assert.equal(unversioned.dictionaryVersion, 'development (unversioned)');
 unversioned.close();
 engine.FS.writeFile('/dicts.txt', 'fixture-v1\r\nignored\n');
+const info = await inspect();
+assert.deepEqual(info, { version: engine.version(), dictionaryVersion: 'fixture-v1', runtime: 'wasm' });
+assert.deepEqual(await inspect({ module: Promise.resolve(engine) }), info);
+assert.deepEqual(await inspect({ ehnd: { 'PostFilter_info.txt': '^.+$\t정보조회\t1\t1\n' } }), info);
+await assert.rejects(inspect({ ehnd: { 'bad/name.txt': '' } }), TypeError);
+assert.deepEqual(engine.FS.readdir('/').filter((name) => name.startsWith('hdtrans-userdict-')), []);
 const translator = await init();
 const independent = await init();
 const text = '学生';
@@ -34,6 +47,14 @@ try {
     assert(translator.version.length > 0);
     assert.equal(translator.dictionaryVersion, 'fixture-v1');
     assert.equal(translator.runtime, 'wasm');
+    assert.deepEqual(translator.getInfo(), info);
+    translator.getInfo().dictionaryVersion = 'changed copy';
+    assert.deepEqual(translator.getInfo(), info);
+    engine.FS.writeFile('/dicts.txt', 'fixture-v2\n');
+    assert.equal((await inspect()).dictionaryVersion, 'fixture-v2');
+    assert.deepEqual(translator.getInfo(), info, 'metadata belongs to the dictionary loaded by this instance');
+    assert.deepEqual(independent.getInfo(), info);
+    engine.FS.writeFile('/dicts.txt', 'fixture-v1\n');
     assert.deepEqual(translator.getUserDict(), []);
     assert.deepEqual(translator.filterErrors, []);
     assert.equal(translator.translate(''), '');
@@ -232,8 +253,10 @@ try {
         engine.FS.writeFile('/dicts.hdsnap', await readFile(snapshotPath));
         engine.FS.unlink('/dicts/base.tsv');
         engine.FS.rmdir('/dicts');
+        assert.deepEqual(await inspect({ directories: ['/dicts.hdsnap'] }), info);
         const compiled = await init({ directories: ['/dicts.hdsnap'] });
         try {
+            assert.deepEqual(compiled.getInfo(), info);
             assert.equal(compiled.translate(text), base);
             assert.equal(compiled.dictionaryVersion, 'fixture-v1');
             compiled.setUserDict([{ ja: text, ko: '학우' }]);
@@ -252,6 +275,9 @@ try {
     independent.close();
 }
 translator.close();
+assert.deepEqual(translator.getInfo(), info);
+assert.equal(translator.version, info.version);
+assert.equal(translator.dictionaryVersion, info.dictionaryVersion);
 for (const call of [() => translator.translate(text), () => translator.translate(text, { json: true }),
     () => translator.reset(), () => translator.setUserDict([]), () => translator.getUserDict(),
     () => translator.getUserDictRaw(), () => translator.clearUserDict(), () => translator.setEhnd({}),

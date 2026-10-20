@@ -66,6 +66,12 @@ export interface WasmModule {
   version(): string;
 }
 
+export interface HdTransInfo {
+  readonly version: string;
+  readonly dictionaryVersion: string;
+  readonly runtime: 'wasm';
+}
+
 export interface InitOptions {
   /** Supply an instantiated module with its dictionary files already staged. */
   module?: WasmModule | Promise<WasmModule>;
@@ -109,6 +115,25 @@ export class HdTrans {
       translator.close();
       throw error;
     }
+  }
+
+  /** Loads the engine and dictionaries, reads their metadata, then closes the temporary translator. */
+  static async getInfo(options: InitOptions = {}): Promise<HdTransInfo> {
+    const translator = await HdTrans.init(options);
+    try {
+      return translator.getInfo();
+    } finally {
+      translator.close();
+    }
+  }
+
+  /** Metadata captured at initialization, also available after close(). */
+  getInfo(): HdTransInfo {
+    return {
+      version: this.version,
+      dictionaryVersion: this.dictionaryVersion,
+      runtime: this.runtime,
+    };
   }
 
   translate(text: string): string;

@@ -19,6 +19,19 @@ try {
 }
 ```
 
+## Version information
+
+```js
+const info = await HdTrans.getInfo();
+console.log(info.version);           // Actual engine build version
+console.log(info.dictionaryVersion); // Loaded base dictionary version
+console.log(info.runtime);           // 'wasm'
+```
+
+`HdTrans.getInfo(options)` accepts the same options as `init()`. It loads the engine and dictionary, then closes its temporary translator; it does not just read package metadata. If loading fails, it rejects. Importing the package alone does not load the engine.
+
+For an existing translator, `translator.getInfo()` returns the same fields synchronously. The existing `version`, `dictionaryVersion` and `runtime` properties remain available. Instance metadata is captured at initialization and remains readable after `close()`. User dictionary and Ehnd changes do not change the base dictionary version. TypeScript users can import the `HdTransInfo` type.
+
 ## Options and JSON
 
 ```js

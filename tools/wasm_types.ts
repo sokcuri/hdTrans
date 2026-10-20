@@ -1,4 +1,4 @@
-import { HdTrans, type EhndFiles, type InitOptions, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
+import { HdTrans, type EhndFiles, type HdTransInfo, type InitOptions, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
 
 declare const translator: HdTrans;
 declare const enabled: boolean;
@@ -45,6 +45,19 @@ HdTrans.init({ misread: true });
 // @ts-expect-error Selection settings are not public initialization options.
 HdTrans.init({ reference: true });
 const initialized: Promise<HdTrans> = HdTrans.init(options);
+const inspected: Promise<HdTransInfo> = HdTrans.getInfo({ ...options, directories: ['/custom.hdsnap'] });
+const info: HdTransInfo = translator.getInfo();
+const infoVersion: string = info.version;
+const infoDictionary: string = info.dictionaryVersion;
+const infoRuntime: 'wasm' = info.runtime;
+// @ts-expect-error Metadata fields are read-only.
+info.version = 'other';
+// @ts-expect-error Metadata fields are read-only.
+info.dictionaryVersion = 'other';
+// @ts-expect-error The runtime is WASM.
+const native: 'native' = info.runtime;
+// @ts-expect-error Dictionary paths must be strings.
+HdTrans.getInfo({ directories: [42] });
 const version: string = translator.version;
 const dictionaryVersion: string = translator.dictionaryVersion;
 const runtime: 'wasm' = translator.runtime;
@@ -59,4 +72,5 @@ translator.dictionaryVersion = 'other';
 translator.runtime = 'native';
 
 void [ordinary, disabled, omitted, structured, conditional, notString, notStructured, notAlwaysStructured,
-  raw, initialized, version, dictionaryVersion, runtime, diagnostics, userError, choices];
+  raw, initialized, inspected, info, infoVersion, infoDictionary, infoRuntime, native,
+  version, dictionaryVersion, runtime, diagnostics, userError, choices];

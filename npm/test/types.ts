@@ -7,11 +7,23 @@ import {
   type TranslationChoice,
   type TranslationResult,
   type EhndFiles,
+  type HdTransInfo,
 } from 'hdtrans';
 
 async function check() {
   const options: InitOptions = { ehnd: { 'PreFilter_test.txt': '' } };
+  const inspected: HdTransInfo = await HdTrans.getInfo(options);
   const translator: HdTrans = await HdTrans.init(options);
+  const info: HdTransInfo = translator.getInfo();
+  const version: string = info.version;
+  const infoDictionary: string = info.dictionaryVersion;
+  const infoRuntime: 'wasm' = info.runtime;
+  // @ts-expect-error Metadata fields are read-only.
+  info.version = 'other';
+  // @ts-expect-error Metadata fields are read-only.
+  info.dictionaryVersion = 'other';
+  // @ts-expect-error The runtime is WASM.
+  const native: 'native' = info.runtime;
   const plain: string = translator.translate('学生');
   const explained: TranslationResult = translator.translate('学生', { json: true });
   const explicitPlain: string = translator.translate('学生', { json: false });
@@ -35,7 +47,8 @@ async function check() {
   const choice: TranslationChoice | undefined = explained.choices[0];
   const selection: ChoiceSelection | undefined = choice?.choice;
   const logs: string[] = explained.logs;
-  void [plain, explicitPlain, dynamic, active, raw, dictionaryVersion, runtime, error, errors, selection, logs];
+  void [inspected, info, version, infoDictionary, infoRuntime, native,
+    plain, explicitPlain, dynamic, active, raw, dictionaryVersion, runtime, error, errors, selection, logs];
 
   // @ts-expect-error Engine implementation switches are not public npm options.
   await HdTrans.init({ reference: true });
@@ -45,6 +58,8 @@ async function check() {
   await HdTrans.init({ misread: true });
   // @ts-expect-error The package stages its own module and dictionaries.
   await HdTrans.init({ directories: ['/dicts'] });
+  // @ts-expect-error Metadata inspection uses the package's bundled dictionaries too.
+  await HdTrans.getInfo({ directories: ['/dicts'] });
   // @ts-expect-error JSON mode returns a structured result.
   const wrong: string = translator.translate('学生', { json: true });
   void wrong;
