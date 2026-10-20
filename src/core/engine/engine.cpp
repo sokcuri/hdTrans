@@ -70,10 +70,21 @@ void CopyGenerated(const userdict::Families& from, output::Families& out) {
 
 // The rules program from the bodies the dictionary rows carry, with the global rules of
 // the built-in program. A number no row names gets an empty rule, which is never true.
+std::string RuleText(const std::vector<std::string>& bodies, const rules::Program& builtin);
+
 bool AssembleRules(const dict::Snapshot& snap, rules::Program& program) {
     const std::vector<std::string>& bodies = snap.RuleBodies();
     if (bodies.empty()) return false;
-    const rules::Program& builtin = RulesProgram();
+    const std::string text = RuleText(bodies, RulesProgram());
+    rules::LoadError error{};
+    if (!rules::Load(text, program, error)) return false;
+    internal::AttachCompiled(program, text);
+    return true;
+}
+
+// The program text the assembly loads, so the rule compiler can be given the same
+// lines the compiled code is matched against.
+std::string RuleText(const std::vector<std::string>& bodies, const rules::Program& builtin) {
     std::string text = "rules 1 " + std::to_string(bodies.size()) + " " +
                        std::to_string(builtin.globalRules.size()) + "\n";
     for (std::size_t n = 0; n < bodies.size(); n++) {
@@ -84,10 +95,12 @@ bool AssembleRules(const dict::Snapshot& snap, rules::Program& program) {
     for (const std::string_view line : RuleLines()) {
         if (line.starts_with("G ")) text += line;
     }
-    rules::LoadError error{};
-    if (!rules::Load(text, program, error)) return false;
-    internal::AttachCompiled(program, text);
-    return true;
+    return text;
+}
+
+std::string RuleProgramText(const dict::Snapshot& snap) {
+    if (snap.RuleBodies().empty()) return {};
+    return RuleText(snap.RuleBodies(), RulesProgram());
 }
 
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {

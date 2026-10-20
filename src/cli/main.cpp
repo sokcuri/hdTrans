@@ -95,7 +95,7 @@ void Usage(std::FILE* file) {
                "  --each, --raw          independent lines, or word-pipeline-only lines\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
-               "  --stages DIR, --rule-counts FILE\n"
+               "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
                "Legacy single-hyphen options are also accepted. Use -- before literal text starting with '-'.\n", file);
 }
 
@@ -227,6 +227,13 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
     }
 }
 
+bool WriteText(const std::string& path, const std::string& text) {
+    std::FILE* f = std::fopen(path.c_str(), "wb");
+    if (!f) return false;
+    const bool ok = std::fwrite(text.data(), 1, text.size(), f) == text.size();
+    return std::fclose(f) == 0 && ok;
+}
+
 bool WriteRuleCounts(const std::string& path, const hdTrans::rules::Program& program,
                      const hdTrans::rules::Tally& tally) {
     std::FILE* f = std::fopen(path.c_str(), "wb");
@@ -265,6 +272,7 @@ int RunMain(int argc, char** argv) {
     bool version = false;
     bool literal = false;
     std::string ruleCountsPath;
+    std::string dumpRulesPath;
     const char* dump = std::getenv("HDTRANS_DRIVER_DUMP");
     std::string stagesDir = dump ? dump : "";
     bool raw = false;
@@ -306,7 +314,8 @@ int RunMain(int argc, char** argv) {
         if (option == "-h") option = "-help";
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
-            || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace";
+            || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
+            || option == "-dump-rules";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -331,6 +340,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-ehnd") ehndArg = *value;
         else if (option == "-stages") stagesDir = *value;
         else if (option == "-rule-counts") ruleCountsPath = *value;
+        else if (option == "-dump-rules") dumpRulesPath = *value;
         else if (option == "-raw") raw = true;
         else if (option == "-each") each = true;
         else if (option == "-reference") reference = true;
@@ -534,6 +544,13 @@ int RunMain(int argc, char** argv) {
     };
     auto finish = [&] {
         if (stages && !stagerecords::Dump(stagesDir, collector)) return 1;
+        if (!dumpRulesPath.empty()) {
+            const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
+            if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
+                std::fprintf(stderr, "hdtrans: cannot write %s\n", dumpRulesPath.c_str());
+                return 1;
+            }
+        }
         if (!ruleCountsPath.empty() && !WriteRuleCounts(ruleCountsPath, program, tally)) {
             std::fprintf(stderr, "hdtrans: cannot write %s\n", ruleCountsPath.c_str());
             return 1;
