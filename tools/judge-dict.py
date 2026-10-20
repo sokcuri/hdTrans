@@ -116,32 +116,43 @@ def main():
     decoys = [r["ko"] for r in judgeable(read_rows(args.dicts, args.file))]
     picked = []
     headers = {"content-type": "application/json", "authorization": "Bearer " + key}
+    # A row is reported only when two runs with different random decoys both reject
+    # it: one run rejects correct rows too when a decoy happens to fit better.
     for start in range(0, len(rows), BATCH):
         chunk = rows[start:start + BATCH]
-        rng = random.Random(start)
-        state, questions, options = [], {}, {}
-        for i, row in enumerate(chunk):
-            chosen = set()
-            while len(chosen) < 2:
-                candidate = rng.choice(decoys)
-                if candidate != row["ko"]:
-                    chosen.add(candidate)
-            labels = ["A", "B", "C"]
-            values = [row["ko"], *sorted(chosen)]
-            rng.shuffle(values)
-            options[i] = dict(zip(labels, values))
-            state.append(f"[{i}] 日本語: {row['key']}")
-            state.extend(f"[{i}] {label}: {options[i][label]}" for label in labels)
-            questions[f"i{i}"] = {
-                "type": "choice",
-                "instructions": f"Item [{i}]: Which Korean word is the correct translation of the Japanese word?",
-                "criteria": {label: "a Korean word" for label in labels}}
-        answer = ask({"model": "jev-latest", "state": "\n".join(state), "questions": questions}, headers)
-        for i, row in enumerate(chunk):
-            got = answer["answers"][f"i{i}"]
-            if options[i][got["choice"]] != row["ko"]:
-                picked.append({**row, "pick": options[i][got["choice"]],
-                               "confidence": got["confidence"]})
+        rejected = []
+        for attempt in range(2):
+            rng = random.Random(start * 2 + attempt)
+            state, questions, options = [], {}, {}
+            for i, row in enumerate(chunk):
+                chosen = set()
+                while len(chosen) < 2:
+                    candidate = rng.choice(decoys)
+                    if candidate != row["ko"]:
+                        chosen.add(candidate)
+                labels = ["A", "B", "C"]
+                values = [row["ko"], *sorted(chosen)]
+                rng.shuffle(values)
+                options[i] = dict(zip(labels, values))
+                state.append(f"[{i}] 日本語: {row['key']}")
+                state.extend(f"[{i}] {label}: {options[i][label]}" for label in labels)
+                questions[f"i{i}"] = {
+                    "type": "choice",
+                    "instructions": f"Item [{i}]: Which Korean word is the correct translation of the Japanese word?",
+                    "criteria": {label: "a Korean word" for label in labels}}
+            answer = ask({"model": "jev-latest", "state": "\n".join(state), "questions": questions}, headers)
+            run = {}
+            for i, row in enumerate(chunk):
+                got = answer["answers"][f"i{i}"]
+                if options[i][got["choice"]] != row["ko"]:
+                    run[row["key"]] = (options[i][got["choice"]], got["confidence"])
+            rejected.append(run)
+        for row in chunk:
+            first, second = rejected[0].get(row["key"]), rejected[1].get(row["key"])
+            if first is None or second is None:
+                continue
+            picked.append({**row, "pick": first[0],
+                           "confidence": min(first[1], second[1])})
         print(f"  {min(start + BATCH, len(rows))}/{len(rows)}", file=sys.stderr)
 
     mode = "a" if args.resume else "w"
@@ -152,7 +163,7 @@ def main():
         for row in picked:
             writer.writerow([row["key"], row["ko"], row["pos"], row["pick"],
                              f"{row['confidence']:.2f}", row["source"]])
-    print(f"{len(picked)} of {len(rows)} rows not preferred; wrote {args.out}", file=sys.stderr)
+    print(f"{len(picked)} of {len(rows)} rows rejected in both runs; wrote {args.out}", file=sys.stderr)
 
 
 if __name__ == "__main__":
