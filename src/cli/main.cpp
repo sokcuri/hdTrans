@@ -549,7 +549,10 @@ int RunMain(int argc, char** argv) {
     const bool stages = !stagesDir.empty();
     collector.families = &generated->families;
     if (stages) observer = stagerecords::ObserverFor(collector, observer);
-    const hdTrans::rules::Program& program = hdTrans::internal::RulesProgram();
+    // The local rules are the dictionary rows' bodies, so the tally counts them only
+    // against the program the dictionary assembled.
+    const hdTrans::rules::Program& program =
+        generated->hasRules ? generated->rules : hdTrans::internal::RulesProgram();
     hdTrans::rules::Tally tally(program);
     if (!ruleCountsPath.empty()) options.ruleTally = &tally;
     std::string output;
