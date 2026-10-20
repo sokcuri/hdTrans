@@ -1,0 +1,4 @@
+#! layer=words
+# 얽히는 상태를 나타내는 자동사
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+こんがらが	얽&AW@	M418			GN							kongaragaru:1
