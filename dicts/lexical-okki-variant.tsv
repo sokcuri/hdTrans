@@ -1,0 +1,4 @@
+#! layer=words
+# 大きい의 구어 어간
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+おっき	$A9@	H7M0			GN							lex-okki:colloquial-adjective-stem
