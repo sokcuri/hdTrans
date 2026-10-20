@@ -1,0 +1,80 @@
+rule	input	expected	kind	layer
+dict:jisjk:848	左へどうぞ歩いてください。	왼쪽으로 부디 걸어 주세요.	fix	local
+dict:jisjk:848	あちらへどうぞ。	저쪽에 오세요.	fix	local
+dict:jisjk:349900	パンは食べねぇ。	빵은 먹지 않는다.	fix	local
+dict:jisjk:349900	鳥は飛べねぇよ。	새는 날 수 없다.	fix	local
+dict:jisjk:349900	本当にねぇ。	정말로.	fix	local
+dict:jisjk:349900	よく走るねぇ。	잘 달리는군.	fix	local
+dict:jisjk:364240	天気が良い限り遊ぶ。	날씨가 좋은 한 논다.	fix	local
+dict:jisjk:364240	うれしい限りだ。	기쁠 따름이다.	fix	local
+dict:jisjk:343572	行くって見抜いた。	간다 라고 간파했다.	keep	local
+dict:jisjk:343572	来るって思った。	온다 라고 생각했다.	keep	local
+dict:jisjk:359476	お詫びの申し上げもございませんが、失礼します。	뭐라 사과의 말씀을 드려야 할지 모르겠습니다만, 실례합니다.	fix	local
+dict:jisjk:359476	お詫びの申し上げもございませんでした。	뭐라 사과의 말씀을 드려야 할지 없었습니다.	keep	local
+dict:jisjk:367846	ここにいるわけでございますか。	여기에 있는 것입니까.	keep	local
+dict:jisjk:367846	ここにいるわけで歩く。	여기에 있는 것으로 걷는다.	keep	local
+dict:jisjk:354322	３つ子が来た。	3쌍둥이가 왔다.	keep	local
+dict:jisjk:354322	三つ子が来た。	세쌍둥이가 왔다.	fix	local
+dict:jisjk:266039	苦労は一時です。	고생은 한때입니다.	keep	local
+dict:jisjk:266039	今は一時です。	지금은 1시입니다.	fix	local
+dict:jisjk:265247	一通り数えた。	한 차례 세었다.	fix	local
+dict:jisjk:265247	一通りの方法だ。	보통의 방법이다.	fix	local
+dict:jisjk:341027	二本のバラを買う。	두 송이의 장미를 산다.	fix	local
+dict:jisjk:341027	二本のチューリップを買う。	두 송이의 튤립을 산다.	fix	local
+dict:jisjk:363213	少しでも役に立てればと思います。	조금이라도 도움이 될 수 있으면 하고 생각합니다.	fix	local
+dict:jisjk:363213	食べればと思う。	먹으면 하고 생각한다.	fix	local
+dict:jisjk:363213	彼が来ると思う。	그가 온다고 생각한다.	fix	local
+dict:jisjk:149402	顔なんか見えない。	얼굴은 안보인다.	keep	local
+dict:jisjk:149402	まぁなんか可愛い。	아무튼 어쩐지 귀엽다.	keep	local
+dict:jisjk:373967	元気でなによりです。	건강해서 다행입니다.	fix	local
+dict:jisjk:373967	なによりも大事だ。	무엇보다도 소중하다.	fix	local
+dict:jisjk:4986	勉強はもうきつい。	공부는 이제 힘들다.	fix	local
+dict:jisjk:4986	この靴はきつい。	이 구두는 꼭 낀다.	fix	local
+dict:jisjk:265360	私は私が好きです。	나는 나를 좋아합니다.	fix	local
+dict:jisjk:265360	猫が好きです。	고양이를 좋아합니다.	fix	local
+dict:jisjk:114739	安く高い品質を得る。	싸고 높은 품질을 얻는다.	fix	local
+dict:jisjk:114739	高い服を買う。	비싼 옷을 산다.	fix	local
+dict:jisjk:114739	安く高く売る。	싸고 비싸게 판다.	fix	local
+dict:jisjk:266186	いずれか選んでください。	어느 하나를 선택해 주세요.	fix	local
+dict:jisjk:266186	いずれかの道を選ぶ。	몇개의 길을 선택한다.	fix	local
+dict:jisjk:345252	そのときどきの気分で決める。	그때그때의 기분으로 결정한다.	fix	local
+dict:jisjk:345252	ときどき泳ぐ。	가끔 헤엄친다.	fix	local
+dict:jisjk:263220	とても遠くまで泳いだ。	매우 먼 곳까지 헤엄쳤다.	fix	local
+dict:jisjk:263220	とても遠くまでは泳げない。	도저히 먼 곳까지는 헤엄칠 수 없다.	fix	local
+dict:jisjk:342042	はやく、起きなさい。	빠르게, 일어나 주세요.	fix	local
+dict:jisjk:342042	足がはやく、丈夫だ。	다리가 빠르고, 튼튼하다.	fix	local
+dict:jisjk:373843	私は何かと忙しい。	나는 이래저래 바쁘다.	fix	local
+dict:jisjk:373843	何かと便利だ。	무엇인가 편리하다.	fix	local
+dict:jisjk:359208	社長おろしが始まった。	사장 끌어내리기가 시작되었다.	fix	local
+dict:jisjk:359208	荷をおろした。	짐을 내렸다.	fix	local
+dict:jisjk:149315	このつきの光は明るい。	이 달의 빛은 밝다.	fix	local
+dict:jisjk:149315	つきの良い紙だ。	인화성이 좋은 종이다.	fix	local
+dict:jisjk:345283	ひと通り読んだ。	한 차례 읽었다.	fix	local
+dict:jisjk:345283	ひと通りの知識だ。	보통의 지식이다.	fix	local
+dict:jisjk:359215	まとまりのある話だ。	짜임새가 있는 이야기다.	fix	local
+dict:jisjk:359215	まとまりがない。	정리가 없다.	fix	local
+dict:jisjk:345596	水に不足はない。	물에 부족은 없다.	keep	local
+dict:jisjk:345596	相手に不足はない。	상대에게 불만은 없다.	fix	local
+dict:jisjk:115606	箱の内には紙がある。	상자의 안에는 종이가 있다.	fix	local
+dict:jisjk:115606	三人の内から選ぶ。	세 명중에서 선택한다.	fix	local
+dict:jisjk:267788	日経記者が来た。	닛케이 기자가 왔다.	fix	local
+dict:jisjk:267788	日経新聞を読む。	니혼케이자이 신문을 읽는다.	fix	local
+dict:jisjk:346354	汚れ対策を考えた。	오염 대책을 생각했다.	fix	local
+dict:jisjk:346354	汚れた靴を洗った。	더러워진 구두를 씻었다.	fix	local
+dict:jisjk:116987	一緒に友達になろう。	함께 친구가 되자.	fix	local
+dict:jisjk:116987	彼は医者になろう。	그는 의사가 될 것이다.	fix	local
+dict:jisjk:265495	その建物は図書館に当たる。	그 건물은 도서관에 해당된다.	fix	local
+dict:jisjk:265495	出発の時に当たる。	출발때에 이른다.	fix	local
+dict:jisjk:117069	損失を招きました。	손실을 초래했습니다.	fix	local
+dict:jisjk:117069	友達を招きました。	친구를 불렀습니다.	fix	local
+dict:jisjk:116539	思いどおりに行かない。	생각대로 되지 않는다.	keep	local
+dict:jisjk:116539	うまく行かない。	잘 되지 않는다.	fix	local
+dict:jisjk:356900	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	fix	local
+dict:jisjk:356900	掃除をさせた。	청소를 시켰다.	fix	local
+dict:jisjk:365603	昨日、告白をされた。	어제, 고백을 받았다.	fix	local
+dict:jisjk:365603	注目された。	주목받았다.	fix	local
+dict:jisjk:365603	先生が挨拶をされた。	선생님이 인사를 하셨다.	fix	local
+dict:jisjk:267706	今日は出てこられません。	오늘은 나올 수 없습니다.	fix	local
+dict:jisjk:267706	明日は出てこられる。	내일은 나올 수 있다.	fix	local
+dict:jisjk:340554	学生が受けられる授業だ。	학생이 받을 수 있는 수업이다.	fix	local
+dict:jisjk:340554	罰が受けられた。	벌을 받게 되었다.	fix	local

@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+dict:jisjk:143837	日程のどれを選んだ。	일정의 어느 것을 선택했다.	fix	local
+dict:jisjk:143837	どれを買った。	어떤 것을 샀다.	fix	local
+dict:jisjk:2281	安いようだ。	싼 것 같다.	keep	local
+dict:jisjk:2281	悲しかったようだ。	슬펐던 것 같다.	keep	local
+dict:jisjk:2430	彼は感情を露わにした。	그는 감정을 드러냈다.	fix	local
+dict:jisjk:2430	彼女は怒りを露わに叫んだ。	그녀는 분노를 드러내며 외쳤다.	fix	local
+dict:jisjk:2430	肌が露わになった。	피부가 드러나게 되었다.	keep	local
+dict:jisjk:2430	露わな肌を隠した。	드러나는 피부를 숨겼다.	keep	local
+dict:jisjk:266860	どうか静かに。	제발 조용하게.	keep	local
+dict:jisjk:266860	どうか静かに。	제발 조용하게.	fix	local
+dict:jisjk:266860	どうか助けてください。	제발 도와 주세요.	fix	local
+dict:jisjk:362845	私の条件にかなう。	나의 조건에 부합한다.	fix	local
+dict:jisjk:362845	彼にかなう人はいない。	그에게 필적하는 사람은 없다.	fix	local
+dict:jisjk:92227	私は毎日気をつけます。	나는 매일 조심합니다.	fix	local
+dict:jisjk:92227	これから気をつけます。	지금부터 조심하겠습니다.	fix	local
+dict:jisjk:354863	彼は交流を深める。	그는 교류를 깊게 한다.	fix	local
+dict:jisjk:354863	関係を深める。	관계를 깊게 한다.	fix	local
+dict:jisjk:365485	歌を十分に聞かせた。	노래를 충분히 들려주었다.	fix	local
+dict:jisjk:365485	話を聞かせた。	이야기를 들려주었다.	fix	local

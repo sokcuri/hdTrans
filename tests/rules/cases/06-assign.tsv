@@ -1,0 +1,96 @@
+rule	input	expected	kind	layer
+dict:jisjk:341089	どうもすみませんが、待ってください。	정말로 죄송합니다만, 기다려 주세요.	fix	local
+dict:jisjk:341089	どうも雨が降りそうだ。	아무래도 비가 올 것 같다.	fix	local
+dict:jisjk:341089	どうもありがとうございます。	대단히 고맙습니다.	fix	local
+dict:jisjk:346800	まさかの成功だ。	뜻밖의 성공이다.	fix	local
+dict:jisjk:346800	まさか忘れないだろう。	설마 잊지 않을 것이다.	fix	local
+dict:jisjk:340827	静かにしないでください。	조용하게 하지 말아 주세요.	keep	local
+dict:jisjk:340827	話しをしないでください。	이야기를 하지 말아 주세요.	fix	local
+dict:jisjk:375160	無理だとは思わない。	무리라고는 생각하지 않는다.	keep	local
+dict:jisjk:267083	今日はお子さんがいらっしゃる。	오늘은 자녀분이 계신다.	fix	local
+dict:jisjk:267083	お子さんと学校へいらっしゃる。	자녀분과 학교에 가신다.	fix	local
+dict:jisjk:364145	書いており、読んでいる。	쓰고 있어 읽고 있다.	fix	local
+dict:jisjk:364145	読んでおりません。	읽고 있지 않습니다.	keep	local
+dict:jisjk:115361	あと二人必要だ。	더 두 사람 필요하다.	keep	local
+dict:jisjk:115361	あと、窓も閉める。	그리고, 창도 닫는다.	fix	local
+dict:jisjk:115361	あと本を読む。	그리고책을 읽는다.	fix	local
+dict:jisjk:375256	４人の国を見た。	4명의 나라를 보았다.	keep	local
+dict:jisjk:375256	人の国を旅した。	외국을 여행했다.	fix	local
+dict:jisjk:116130	二〇二五年末に会う。	2025년말에 만난다.	keep	local
+dict:jisjk:116130	今年の年末に会う。	금년의 연말에 만난다.	fix	local
+dict:jisjk:6114	だが、それは違う。	하지만, 그것은 다르다.	keep	local
+dict:jisjk:6114	雨だが、行く。	비이지만, 간다.	keep	local
+dict:jisjk:258808	嘘なんかじゃない。	거짓말 같은 것이 아니다.	fix	local
+dict:jisjk:359256	三日前も寒かった。	3일전에도 추웠다.	fix	local
+dict:jisjk:359256	３発も命中させた。	3발이나 명중시켰다.	keep	local
+dict:jisjk:35	いかがあそばしますか。	어떻게 하십니까.	fix	local
+dict:jisjk:35	いかがあそばしますか。	어떻게 하십니까.	keep	local
+dict:jisjk:35	いかがですか。	어떻습니까.	keep	local
+dict:jisjk:362803	そのときどきの気分で決める。	그때그때의 기분으로 결정한다.	fix	local
+dict:jisjk:362803	ときどき泳ぐ。	가끔 헤엄친다.	fix	local
+dict:jisjk:265405	恐怖なくしては語れない。	공포없이는 말할 수 없다.	fix	local
+dict:jisjk:265405	愛なくしては生きられない。	사랑없이는 살 수 없다.	fix	local
+dict:jisjk:345005	もう大丈夫です。	이제 괜찮습니다.	fix	local
+dict:jisjk:345005	もう安心だ。	이제 안심이다.	fix	local
+dict:jisjk:343388	先生のうちで寝た。	선생님의 집에서 잤다.	fix	local
+dict:jisjk:343388	姉のうちで食べた。	언니의 집에서 먹었다.	fix	local
+dict:jisjk:343388	二人のうちで一人が笑った。	두 사람 가운데로 한 사람이 웃었다.	fix	local
+dict:jisjk:343388	友人のうちで食べたのは彼だ。	친구 가운데로 먹은 것은 그다.	fix	local
+dict:jisjk:259052	中には古い本もある。	안에는 오래된 책도 있다.	keep	local
+dict:jisjk:259052	箱の中を見た。	상자안을 보았다.	keep	local
+dict:jisjk:68525	売り方が分かりました。	판매 방법이 알 수 있었습니다.	fix	local
+dict:jisjk:68525	売り方が負担します。	파는 편이 부담합니다.	fix	local
+dict:jisjk:29079	二日かかると計算した。	이틀 걸린다고 계산했다.	fix	local
+dict:jisjk:29079	代金を計算する。	대금을 계산한다.	fix	local
+dict:jisjk:262308	電話越しに歌った。	전화 너머로 노래했다.	fix	local
+dict:jisjk:262308	窓越しに話した。	창문 너머에 이야기했다.	fix	local
+dict:jisjk:355883	彼が読んだお手紙だ。	그가 읽은 편지다.	keep	local
+dict:jisjk:355883	手紙を読んでおいた。	편지를 읽어 두었다.	fix	local
+dict:jisjk:342596	お読みしますか。	읽습니까.	fix	local
+dict:jisjk:342596	お読みする本です。	읽는 책입니다.	fix	local
+dict:jisjk:267277	兄について行く。	형을 따라 간다.	fix	local
+dict:jisjk:267277	兄について話す。	형에 대해 이야기한다.	fix	local
+dict:jisjk:264571	ご飯できたよ。	밥 다 됐어.	fix	local
+dict:jisjk:264571	友達ができたよ。	친구가 생겼어.	keep	local
+dict:jisjk:264571	木でできた箱だ。	나무로 완성된 상자다.	fix	local
+dict:jisjk:341433	子どもができた。	아이가 생겼다.	fix	local
+dict:jisjk:341433	恋人ができた。	애인이 생겼다.	fix	local
+dict:jisjk:340597	これはあってはならぬ事故だ。	이것은 있어서는 안되는 사고다.	fix	local
+dict:jisjk:340597	これはあってはならぬ。	이것은 있어서는 되지 않는다.	keep	local
+dict:jisjk:361956	会議において話した。	회의에서 이야기했다.	fix	local
+dict:jisjk:361956	花がにおう。	꽃이 향기난다.	fix	local
+dict:jisjk:91240	規則に従って申し込む。	규칙을 따르고 신청한다.	fix	local
+dict:jisjk:91240	規則に従って歩く。	규칙을 따라 걷는다.	fix	local
+dict:jisjk:13812	６割る２は３だ。	6나누는 2는 3이다.	keep	local
+dict:jisjk:13812	ガラスを割る。	유리를 깬다.	fix	local
+dict:jisjk:91750	旗を壁に掲げる。	기를 벽에 내건다.	fix	local
+dict:jisjk:91750	目標に平和を掲げる。	목표로 평화를 내건다.	fix	local
+dict:jisjk:138259	彼が笑える日は来る。	그가 웃을 수 있는 날은 온다.	fix	local
+dict:jisjk:138259	笑える話を読んだ。	웃기는 이야기를 읽었다.	fix	local
+dict:jisjk:361304	バスに間に合いません。	버스에 시간에 맞지 않습니다.	keep	local
+dict:jisjk:258548	友達に嫌がらせをされた。	친구에게 괴롭힘을 당했다.	fix	local
+dict:jisjk:258548	先生が挨拶をされた。	선생님이 인사를 하셨다.	fix	local
+dict:jisjk:262875	壁を薄くされた。	벽이 얇게 만들어졌다.	fix	local
+dict:jisjk:262875	安いとされた。	싸다고 여겨졌다.	fix	local
+dict:jisjk:342927	母に説明してもらえませんか。	어머니에게 설명 해 주실 수 있습니까.	fix	local
+dict:jisjk:342927	母に説明してもらえますか。	어머니에게 설명 해 주실 수 있습니까.	fix	local
+dict:jisjk:342927	母に説明してもらえます。	어머니에게 설명 받을 수 있습니다.	fix	local
+dict:jisjk:342927	母に説明してもらえません。	어머니에게 설명 받을 수 없습니다.	keep	local
+dict:jisjk:362190	調節してもらえますか。	조절 해 주실 수 있습니까.	fix	local
+dict:jisjk:362190	支援してもらえると安心だ。	지원 받을 수 있으면 안심이다.	fix	local
+dict:jisjk:362190	本をもらえますか。	책을 받을 수 있습니까.	fix	local
+dict:jisjk:350747	鞄がとられた。	가방이 빼앗겼다.	fix	local
+dict:jisjk:350747	対策がとられた。	대책이 취해졌다.	fix	local
+dict:jisjk:350747	写真がとられた。	사진이 촬영되었다.	fix	local
+dict:jisjk:148145	約束がまもられません。	약속이 지켜지지 않습니다.	fix	local
+dict:jisjk:148145	約束がまもられませんでした。	약속이 지켜지지 않았습니다.	fix	local
+dict:jisjk:148145	約束がまもられた。	약속이 지켜졌다.	fix	local
+dict:jisjk:148145	約束をまもれません。	약속을 지킬 수 없습니다.	fix	local
+dict:jisjk:94123	薬を与えられる能力がある。	약을 줄 수 있는 능력이 있다.	fix	local
+dict:jisjk:94123	賞を与えられた。	상이 주어졌다.	fix	local
+dict:jisjk:95044	この村で知られている。	이 마을에서 알려져 있다.	fix	local
+dict:jisjk:95044	名前で知られている。	이름으로 알려져 있다.	fix	local
+dict:jisjk:95044	この村でも知られている。	이 마을에서도 알려져 있다.	fix	local
+dict:jisjk:95044	名前でも知られている。	이름으로도 알려져 있다.	fix	local
+dict:jisjk:355860	罰が課せられていない。	벌이 부과되어 있지 않다.	fix	local
+dict:jisjk:355860	罰が課せられた。	벌이 부과되었다.	fix	local

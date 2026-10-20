@@ -1,0 +1,55 @@
+rule	input	expected	kind	layer
+dict:jisjk:112872	お茶をどうぞ。	차를 드세요.	fix	local
+dict:jisjk:112872	ご協力をどうぞ。	협력을 부탁합니다.	fix	local
+dict:jisjk:112872	よろしくどうぞ。	잘 부탁합니다.	fix	local
+dict:jisjk:363278	強い覚悟を込めた。	강한 각오를 담았다.	fix	local
+dict:jisjk:363278	責任を取る覚悟がある。	책임을 질 각오가 있다.	fix	local
+dict:jisjk:363278	足りない可能性がある。	부족할 가능성이 있다.	fix	local
+dict:jisjk:363278	習得できない可能性がある。	습득할 수 없을 가능성이 있다.	fix	local
+dict:jisjk:363278	ひどい可能性がある。	심할 가능성이 있다.	fix	local
+dict:jisjk:116587	いただきます、明日返します。	받습니다, 내일 돌려줍니다.	fix	local
+dict:jisjk:116587	いただきます。	잘 먹겠습니다.	fix	local
+dict:jisjk:116587	「いただきます」と言った。	「잘 먹겠습니다」라고 말했다.	fix	local
+dict:jisjk:201988	彼の驚きぶりを見た。	그의 놀라움 모습을 보았다.	fix	local
+dict:jisjk:201988	二日ぶりに会った。	이틀만에 만났다.	fix	local
+dict:jisjk:31506	一目彼女の姿を見たい。	한 눈 그녀의 모습을 보고 싶다.	fix	local
+dict:jisjk:31506	一目瞭然だ。	일목 요연하다.	fix	local
+dict:jisjk:116274	三万売れた。	3만 팔렸다.	keep	local
+dict:jisjk:116274	万が一に備える。	만일에 대비한다.	fix	local
+dict:jisjk:114690	君の分のお菓子	너의 몫의 과자	fix	local
+dict:jisjk:114690	5回分の料金	5회분의 요금	fix	local
+dict:jisjk:115938	彼の分の席はない。	그의 몫의 자리는 없다.	fix	local
+dict:jisjk:115938	三人分の席はない。	세 명분의 자리는 없다.	fix	local
+dict:jisjk:115938	三席ある。	3석 있다.	keep	local
+dict:jisjk:258977	同じ年の友達だ。	같은 나이의 친구다.	fix	local
+dict:jisjk:258977	同じ年の末の息子だ。	같은 나이의 끝의 아들이다.	keep	local
+dict:jisjk:258977	同じ年に生まれた。	같은 해에 태어났다.	fix	local
+dict:jisjk:115791	学生の時よく泳いだ。	학생때 잘 헤엄쳤다.	keep	local
+dict:jisjk:115791	５時すぐ帰る。	5시 바로 돌아간다.	fix	local
+dict:jisjk:116268	毎ばん読んだ。	매일 밤 읽었다.	fix	local
+dict:jisjk:116268	毎朝走った。	매일 아침 달렸다.	fix	local
+dict:jisjk:4014	愕然とした。	아연실색했다.	fix	local
+dict:jisjk:4014	鬱蒼とした森林。	울창한 삼림.	fix	local
+dict:jisjk:4014	鬱蒼と茂る。	울창하게 무성하다.	keep	local
+dict:jisjk:4014	友人とする相談です。	친구와 하는 상담입니다.	fix	local
+dict:jisjk:4014	やがて妻としたという。	이윽고 아내로 했다고 한다.	keep	local
+dict:jisjk:340799	明日はとても行けない。	내일은 도저히 갈 수 없다.	fix	local
+dict:jisjk:340799	とても寒い。	매우 춥다.	fix	local
+dict:jisjk:365532	はるかさんが来た。	하루카씨가 왔다.	keep	local
+dict:jisjk:365532	はるか上空を飛ぶ。	아득한 상공을 난다.	keep	local
+dict:jisjk:367255	はるかさんが来た。	하루카씨가 왔다.	fix	local
+dict:jisjk:367255	はるか遠くに見える。	아득한 멀리 보인다.	keep	local
+dict:jisjk:364338	着いたさいに話した。	도착한 때 이야기했다.	fix	local
+dict:jisjk:364338	サイが寝た。	코뿔소가 잤다.	fix	local
+dict:jisjk:6399	レベルの切り下げを行う。	레벨의 인하를 실시한다.	fix	local
+dict:jisjk:6399	円の切り下げを行う。	엔의 평가절하를 실시한다.	fix	local
+dict:jisjk:364685	国にとどまる問題だ。	나라에 머무르는 문제다.	fix	local
+dict:jisjk:364685	国へ帰った。	나라로 돌아갔다.	fix	local
+dict:jisjk:364564	裏の通りを走った。	뒤의 거리를 달렸다.	fix	local
+dict:jisjk:364564	説明の通りに書いた。	설명대로에 썼다.	fix	local
+dict:jisjk:116613	百円を割った。	백엔미만으로 하락했다.	fix	local
+dict:jisjk:116613	ガラスを割った。	유리를 깨었다.	fix	local
+dict:jisjk:11363	寺へ参って行く。	절에 간다.	keep	local
+dict:jisjk:11363	病気で皆参っている。	병으로 모두 약해지고 있다.	keep	local
+dict:jisjk:364773	よくしてもらいました。	잘 대접받았습니다.	fix	local
+dict:jisjk:364773	治療を十分にしてもらった。	치료를 충분히 받았다.	fix	local
