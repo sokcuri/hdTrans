@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.1](https://github.com/sokcuri/hdTrans/compare/v0.2.0...v0.2.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* **release:** finish publication after immutable tag creation ([d999452](https://github.com/sokcuri/hdTrans/commit/d9994524d5823980bf0cd54c49e823465dfbed0d))
+* **release:** promote translation quality and JavaScript metadata fixes ([54d3deb](https://github.com/sokcuri/hdTrans/commit/54d3debfa007d1fd6fb4c63db6aa0f00ba82c7ed))
+* **release:** publish stable tags through one automatic pipeline ([e8aa575](https://github.com/sokcuri/hdTrans/commit/e8aa575c44d1784b9f333004c4b03ddb60d299f6))
+* **release:** skip direct main pushes without promotion PRs ([9c6a676](https://github.com/sokcuri/hdTrans/commit/9c6a676b7014b8e511223eb009ff9705b3b5d3bc))
+* **translation:** integrate reviewed translation fixes and benchmarks ([#14](https://github.com/sokcuri/hdTrans/issues/14)) ([4187a08](https://github.com/sokcuri/hdTrans/commit/4187a08c5995336b6db75344003ea5a6e6b27761))
+* **web:** add six existing Narou examples ([e35e566](https://github.com/sokcuri/hdTrans/commit/e35e566db37482fb55a140bd69219e50ca8e8bf1))
+* **web:** restore example catalog and reject missing payloads ([1a32fa3](https://github.com/sokcuri/hdTrans/commit/1a32fa39919ba97ec0b9d4b7c75379fe78e1c164))
+
 ## [0.2.0](https://github.com/sokcuri/hdTrans/compare/v0.1.1...v0.2.0) (2026-10-19)
 
 
