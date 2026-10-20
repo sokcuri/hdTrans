@@ -97,6 +97,27 @@ const Loaded& Load() {
 
 }  // namespace
 
+void AttachCompiled(rules::Program& program, std::string_view text) {
+#ifndef HDTRANS_INTERPRET_RULES
+    std::vector<Record> records;
+    for (std::size_t start = 0; start < text.size();) {
+        std::size_t end = text.find('\n', start);
+        if (end == std::string_view::npos) end = text.size();
+        std::string_view line = text.substr(start, end - start);
+        start = end + 1;
+        if (!line.starts_with("L ") && !line.starts_with("G ")) continue;
+        long long id = 0;
+        std::size_t k = 2;
+        for (; k < line.size() && line[k] >= '0' && line[k] <= '9' && id < (1LL << 31); k++) id = id * 10 + (line[k] - '0');
+        records.push_back({line[0], static_cast<int>(id), 0, line});
+    }
+    AttachCompiled(program, records);
+#else
+    (void)program;
+    (void)text;
+#endif
+}
+
 const rules::Program& RulesProgram() { return Load().program; }
 
 bool RulesLoaded() { return Load().ok; }

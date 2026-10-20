@@ -163,7 +163,7 @@ HD_TEST(SnapshotFileWriter) {
     HD_REQUIRE(bytes.size() > 256);
     HD_CHECK(std::memcmp(bytes.data(), "HDSNAP\r\n", 8) == 0);
     HD_CHECK(bytes[8] == std::byte{1});
-    HD_CHECK(bytes[12] == std::byte{2});
+    HD_CHECK(bytes[12] == std::byte{4});
     HD_CHECK(!hdTrans::dict::CompileSnapshot({temp.File("absent")}, temp.File("bad.hdsnap")));
     HD_CHECK(!std::filesystem::exists(temp.path / "bad.hdsnap"));
     const auto cache = hdTrans::dict::internal::SnapshotPath({FixtureFolder()}, temp.File("cache"));

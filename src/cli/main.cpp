@@ -433,6 +433,9 @@ int RunMain(int argc, char** argv) {
     hdTrans::Engine engine(reference);
     if (!engine.OpenUserDicts(folders, verifyDicts, userPaths)) {
         std::fprintf(stderr, "hdtrans: no dictionary loaded from %s\n", dicts.c_str());
+        // The reason a folder or a snapshot file did not load, one line per file.
+        const std::string reason = engine.UserFileError();
+        if (!reason.empty()) std::fprintf(stderr, "%s\n", reason.c_str());
         return 1;
     }
     if (const std::string error = engine.UserFileError(); !error.empty()) {

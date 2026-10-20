@@ -68,9 +68,32 @@ void CopyGenerated(const userdict::Families& from, output::Families& out) {
     for (const auto& [id, rows] : from.GeneratedFamilies()) out.Insert(id[0], id, rows);
 }
 
+// The rules program from the bodies the dictionary rows carry, with the global rules of
+// the built-in program. A number no row names gets an empty rule, which is never true.
+bool AssembleRules(const dict::Snapshot& snap, rules::Program& program) {
+    const std::vector<std::string>& bodies = snap.RuleBodies();
+    if (bodies.empty()) return false;
+    const rules::Program& builtin = RulesProgram();
+    std::string text = "rules 1 " + std::to_string(bodies.size()) + " " +
+                       std::to_string(builtin.globalRules.size()) + "\n";
+    for (std::size_t n = 0; n < bodies.size(); n++) {
+        text += "L " + std::to_string(n) + " " + (bodies[n].empty() ? "||0" : bodies[n]) + "\n";
+    }
+    // The global rules keep the text they were compiled from; a dictionary row never
+    // names one, so they stay in the rule files.
+    for (const std::string_view line : RuleLines()) {
+        if (line.starts_with("G ")) text += line;
+    }
+    rules::LoadError error{};
+    if (!rules::Load(text, program, error)) return false;
+    internal::AttachCompiled(program, text);
+    return true;
+}
+
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
     auto generated = std::make_shared<Generated>();
     CopyGenerated(snap.GeneratedFamilies(), generated->families);
+    generated->hasRules = AssembleRules(snap, generated->rules);
     return generated;
 }
 

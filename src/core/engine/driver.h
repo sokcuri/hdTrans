@@ -61,6 +61,11 @@ std::string TranslateObserved(Session& session, std::string_view text, const Sta
 struct Generated {
     std::mutex mu;
     output::Families families;
+    // The rules program assembled from the rule bodies the dictionary rows carry and the
+    // global rules of the rule files; empty when no row carries a body, in which case the
+    // built-in program runs.
+    rules::Program rules;
+    bool hasRules = false;
 };
 
 // The marker families of a loaded dictionary, with the families the dictionaries made at load.

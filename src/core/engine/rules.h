@@ -24,6 +24,10 @@ std::span<const RuleFile> RuleFiles();
 // empty when there is no such rule.
 std::string RuleSource(char kind, int id);
 
+// Gives program the compiled code (compiled_gen.cpp) of each rule whose record line in
+// text matches the one the code was generated from. text holds L and G record lines.
+void AttachCompiled(rules::Program& program, std::string_view text);
+
 // The loaded program, with the compiled code (compiled_gen.cpp) of the rules whose record
 // lines it was generated from; loaded on first use and immutable afterwards.
 const rules::Program& RulesProgram();

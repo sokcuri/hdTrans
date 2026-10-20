@@ -212,6 +212,10 @@ public:
     const Dict* Names() const { return names_.Len() > 0 ? &names_ : nullptr; }
     // The files that are not column files, in load order.
     const std::vector<File>& PlainFiles() const { return plain_; }
+    // The body of each local rule a dictionary row carries, by rule number; an entry is
+    // empty for a number no row names. The engine assembles the rules program from these
+    // and the global rules of the rule files.
+    const std::vector<std::string>& RuleBodies() const { return ruleBodies_; }
     // The plain entries of the word pipeline: the builtin endings, then the entries
     // of the plain dictionaries.
     const UserText& Plain(bool extra = false) const { return *(extra ? rawExtraPlain_ : rawPlain_); }
@@ -314,6 +318,7 @@ private:
     std::unordered_map<std::string, Respelling, StringHash, std::equal_to<>> places_;
     std::vector<std::string> warnings_;
     std::vector<File> plain_;
+    std::vector<std::string> ruleBodies_;
     userdict::Families families_;
     mutable output::Families outputFamilies_;
     std::unique_ptr<const UserText> rawPlain_, textPlain_, rawExtraPlain_, textExtraPlain_;
