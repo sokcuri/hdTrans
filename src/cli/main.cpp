@@ -85,6 +85,7 @@ void Usage(std::FILE* file) {
                "  --out FILE             write UTF-8 output (default: stdout)\n"
                "  --json                 return text, choices and logs as JSON\n"
                "  --why                  write selection and filter logs to stderr\n"
+               "  --trace FILE           write every candidate of every word to FILE\n"
                "  --version              load dictionaries and show engine, runtime and dictionary versions\n"
                "  --help                 show this help\n"
                "  --config FILE          settings file\n"
@@ -116,17 +117,19 @@ bool ReadAll(std::FILE* f, std::string& out) {
     }
 }
 
-void PrintEscaped(std::string_view text) {
+void WriteEscaped(std::FILE* out, std::string_view text) {
     for (char c : text) {
         switch (c) {
-        case '\t': std::fputs("\\t", stderr); break;
-        case '\n': std::fputs("\\n", stderr); break;
-        case '\r': std::fputs("\\r", stderr); break;
-        case '\\': std::fputs("\\\\", stderr); break;
-        default: std::fputc(static_cast<unsigned char>(c), stderr); break;
+        case '\t': std::fputs("\\t", out); break;
+        case '\n': std::fputs("\\n", out); break;
+        case '\r': std::fputs("\\r", out); break;
+        case '\\': std::fputs("\\\\", out); break;
+        default: std::fputc(static_cast<unsigned char>(c), out); break;
         }
     }
 }
+
+void PrintEscaped(std::string_view text) { WriteEscaped(stderr, text); }
 
 void WhyFilterLog(void*, std::string_view message) {
     std::fwrite(message.data(), 1, message.size(), stderr);
@@ -135,6 +138,10 @@ void WhyFilterLog(void*, std::string_view message) {
 struct WhyContext {
     std::size_t lineBase = 0;
     std::size_t line = 1;
+    // The candidate dump: every candidate of every word, with the one chosen. Each
+    // line is line, chunk, sentence, token, start, surface, index, chosen, class
+    // digit, part code, semantic codes, grammar codes, rule id, target.
+    std::FILE* trace = nullptr;
 };
 
 void WhyLine(void* context, int line) {
@@ -185,6 +192,23 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
         std::fprintf(stderr, "\t%d\t%s\t%d\t%s\t%s\n", it->DirectIndex(),
                      hdTrans::word::ProvenanceName(it->directChoice.layer), it->directChoice.id,
                      Decided(it->choice, false).c_str(), Decided(it->directChoice, true).c_str());
+        if (why.trace && it->group) {
+            for (std::size_t c = 0; c < it->group->entries.size(); c++) {
+                const hdTrans::word::Entry& e = *it->group->entries[c];
+                std::fprintf(why.trace, "CAND\t%zu\t%d\t%d\t%d\t%d\t",
+                             why.line, chunk, sentence, it->tokenIndex, it->start);
+                WriteEscaped(why.trace, it->group->surface);
+                std::fprintf(why.trace, "\t%zu\t%d\t%c\t", c,
+                             static_cast<int>(c) == it->selected, e.cls ? e.cls : '-');
+                WriteEscaped(why.trace, e.code);
+                std::fputc('\t', why.trace);
+                WriteEscaped(why.trace, e.attr);
+                std::fputc('\t', why.trace);
+                WriteEscaped(why.trace, e.gattr);
+                std::fprintf(why.trace, "\t%d\t%s\t%s\n", e.ruleId,
+                             e.fixed ? "fixed" : "", e.field.empty() ? "" : std::string(e.field).c_str());
+            }
+        }
         for (const hdTrans::word::ShadowChoice& shadow : it->shadowChoices) {
             std::fprintf(stderr, "SHADOW\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex,
                          it->start);
@@ -240,6 +264,7 @@ int RunMain(int argc, char** argv) {
     bool raw = false;
     bool each = false;
     bool why = false;
+    std::string tracePath;
     bool selectShadow = false;
     bool misread = false;
     bool noCg = false;
@@ -275,7 +300,7 @@ int RunMain(int argc, char** argv) {
         if (option == "-h") option = "-help";
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
-            || option == "-rule-counts" || option == "-compile-snapshot";
+            || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -308,6 +333,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-compile-snapshot") snapshotOut = *value;
         else if (option == "-no-cache") noCache = true;
         else if (option == "-why") why = true;
+        else if (option == "-trace") tracePath = *value;
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-no-cg") noCg = true;
@@ -459,6 +485,24 @@ int RunMain(int argc, char** argv) {
     }
     WhyContext whyContext;
     hdTrans::internal::StageObserver observer;
+    std::FILE* traceFile = nullptr;
+    struct TraceCloser {
+        std::FILE* file = nullptr;
+        ~TraceCloser() { if (file) std::fclose(file); }
+    } traceCloser;
+    if (!tracePath.empty()) {
+        traceFile = std::fopen(tracePath.c_str(), "wb");
+        if (!traceFile) {
+            std::fprintf(stderr, "cannot write %s\n", tracePath.c_str());
+            return 2;
+        }
+        traceCloser.file = traceFile;
+        std::setvbuf(traceFile, nullptr, _IOFBF, 1 << 16);
+        whyContext.trace = traceFile;
+        observer.context = &whyContext;
+        observer.line = WhyLine;
+        observer.resolved = WhyResolved;
+    }
     if (why) {
         observer.context = &whyContext;
         observer.line = WhyLine;
