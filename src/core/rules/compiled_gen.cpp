@@ -4754,11 +4754,12 @@ bool RuleG90([[maybe_unused]] Item* p) {
     return (AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 문장에 홀로 쓰이고 문법 코드 On이 있는 명사 후보를 선택한다.
+// # 문장에 홀로 쓰이고 문법 코드 On이 있는 명사 후보를 선택한다. 私, 俺, 僕, 君, 誰는
+// # 대명사를 읽는 글자라 홀로 와도 한자음이 아니라 그 뜻으로 읽는다.
 // global 1015 stem pos 1 prio 100
-//     all(gram has Td, gram has On)
+//     gram has Td and gram has On and src != "私" and src != "俺" and src != "僕" and src != "君" and src != "誰"
 bool RuleG100([[maybe_unused]] Item* p) {
-    return [&] { const bool a0 = GramEq(p, 0, "Td"sv); const bool a1 = GramEq(p, 0, "On"sv); return a0 && a1; }();
+    return (GramEq(p, 0, "Td"sv) && GramEq(p, 0, "On"sv) && SrcNe(p, 0, "私"sv) && SrcNe(p, 0, "俺"sv) && SrcNe(p, 0, "僕"sv) && SrcNe(p, 0, "君"sv) && SrcNe(p, 0, "誰"sv));
 }
 
 // # 현재 명사가 접미사이고 바로 앞말에 숫자 문법 코드가 있으면 그 접미사 후보를 고른다. (미발동: other)
@@ -5483,7 +5484,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
     {RuleG90, 0xf785d9c5b40f546dull},
-    {RuleG100, 0x3069c872ac4b68a8ull},
+    {RuleG100, 0xeaa3e9e8d980283eull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},
     {RuleG130, 0x60209eb785257c06ull},
