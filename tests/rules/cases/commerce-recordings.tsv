@@ -1,0 +1,75 @@
+rule	input	expected	kind	layer
+dict:commerce-roots	書き下ろし	신작	keep	lookup
+dict:commerce-roots	描き下ろし	신작	keep	lookup
+dict:commerce-roots	書き下ろしブックレット	신작 소책자	keep	lookup
+dict:commerce-roots	描き下ろしA3クリアポスター	신작 A3클리어 포스터	keep	lookup
+dict:commerce-roots	書き下ろし小説	신작 소설	keep	lookup
+dict:commerce-roots	描き下ろしイラスト	신작 일러스트	keep	lookup
+dict:commerce-roots	書き下ろし脚本	신작 각본	keep	lookup
+dict:commerce-roots	書き下ろしではない。	신작이 아니다.	keep	lookup
+dict:commerce-roots	描き下ろしではない。	신작이 아니다.	keep	lookup
+dict:commerce-roots	書き下ろした。	새로 썼다.	keep	lookup
+dict:commerce-roots	描き下ろした。	새로 그렸다.	keep	lookup
+dict:commerce-roots	書く。	쓴다.	keep	lookup
+dict:commerce-roots	描く。	그린다.	keep	lookup
+dict:commerce-roots	録音する。	녹음한다.	keep	lookup
+dict:commerce-roots	下ろす。	내린다.	keep	lookup
+dict:commerce-roots	予約特典	예약 특전	keep	lookup
+dict:commerce-roots	購入特典	구입 특전	keep	lookup
+dict:commerce-roots	店舗特典	점포 특전	keep	lookup
+dict:commerce-roots	メーカー特典	메이커 특전	keep	lookup
+dict:commerce-roots	書き下ろし原作	신작 원작	keep	lookup
+dict:commerce-roots	描き下ろしジャケット	신작 재킷	keep	lookup
+dict:recording-audio	録り下ろし音源	신규 녹음 음원	fix	lookup
+dict:commerce-roots	再販	재판매	keep	lookup
+dict:commerce-roots	受注生産	수주 생산	keep	lookup
+dict:commerce-roots	初回生産特典	첫회 생산 특전	keep	lookup
+dict:commerce-roots	数量限定	수량 한정	keep	lookup
+dict:photography	撮り下ろし	신규 촬영	fix	lookup
+dict:photography	撮り下ろしフォトブック	신규 촬영 포토 북	fix	lookup
+dict:photography	撮り下ろした。	새로 촬영했다.	fix	lookup
+dict:photography	撮り下ろす。	새로 촬영한다.	fix	lookup
+dict:photography	撮り下ろしている。	새로 촬영하고 있다.	fix	lookup
+dict:commerce-roots	封入特典	봉입 특전	keep	lookup
+dict:commerce-roots	同梱特典	동봉 특전	keep	lookup
+dict:photography	撮りおろし	신규 촬영	fix	lookup
+dict:photography	撮りおろしフォトブック	신규 촬영 포토 북	fix	lookup
+dict:photography	撮りおろした。	새로 촬영했다.	fix	lookup
+dict:photography	撮り下ろします。	새로 촬영합니다.	fix	lookup
+dict:photography	撮り下ろさない。	새로 촬영하지 않는다.	fix	lookup
+dict:recording-audio	録り下ろし音源を収録。	신규 녹음 음원을 수록.	fix	lookup
+dict:photography	撮り下ろし写真を収録。	신규 촬영 사진을 수록.	fix	lookup
+dict:photography	撮り下ろしではありません。	신규 촬영이 아닙니다.	fix	lookup
+dict:photography	撮り下ろしの特典	신규 촬영의 특전	fix	lookup
+dict:commerce-roots	撮った。	찍었다.	keep	lookup
+dict:commerce-roots	荷物を下ろした。	짐을 내렸다.	keep	lookup
+dict:commerce-roots	預金を下ろした。	예금을 인출했다.	keep	lookup
+dict:commerce-roots	書き下ろしの小説	신작의 소설	keep	lookup
+dict:commerce-roots	描き下ろしの絵	신작의 그림	keep	lookup
+dict:commerce-roots	録音済み	녹음이 끝난 상태	keep	lookup
+dict:commerce-roots	撮影済み	촬영이 끝난 상태	keep	lookup
+dict:commerce-roots	特典なし	특전 없음	keep	lookup
+dict:commerce-roots	受注締切	수주 마감	keep	lookup
+dict:commerce-roots	出荷予定	출하 예정	keep	lookup
+dict:commerce-roots	再入荷	재입하	keep	lookup
+dict:commerce-roots	通常盤	통상반	keep	lookup
+dict:commerce-roots	同時購入特典	동시 구입 특전	keep	lookup
+dict:photography	撮り下ろし映像	신규 촬영 영상	fix	lookup
+dict:photography	撮りおろし映像	신규 촬영 영상	fix	lookup
+dict:photography	インタビュー映像を撮り下ろした。	인터뷰 영상을 새로 촬영했다.	fix	lookup
+dict:photography	撮り下ろし動画	신규 촬영 동영상	fix	lookup
+dict:recording-audio	録りおろし音源	신규 녹음 음원	fix	lookup
+dict:recording-audio	録りおろし音源を収録。	신규 녹음 음원을 수록.	fix	lookup
+dict:recording-audio	録り下ろし音源ではない。	신규 녹음 음원이 아니다.	fix	lookup
+dict:recording-audio	録りおろし音源ではありません。	신규 녹음 음원이 아닙니다.	fix	lookup
+dict:recording-audio	録り下ろし音源の特典	신규 녹음 음원의 특전	fix	lookup
+dict:recording-audio	録りおろし音源の特典	신규 녹음 음원의 특전	fix	lookup
+dict:recording-audio	録り下ろし音源を使わない。	신규 녹음 음원을 사용하지 않는다.	fix	lookup
+dict:commerce-roots	既存の音源	기존의 음원	keep	lookup
+dict:commerce-roots	音源を録音した。	음원을 녹음했다.	keep	lookup
+dict:photography	撮りおろさない。	새로 촬영하지 않는다.	fix	lookup
+dict:photography	撮りおろしています。	새로 촬영하고 있습니다.	fix	lookup
+dict:photography	撮り下ろした写真	새로 촬영한 사진	fix	lookup
+dict:photography	撮りおろした映像	새로 촬영한 영상	fix	lookup
+dict:photography	撮り下ろす予定はない。	새로 촬영할 예정은 없다.	fix	lookup
+dict:recording-audio	録り下ろし音源集	신규 녹음 음원집	fix	lookup
