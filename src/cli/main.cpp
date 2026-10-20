@@ -79,7 +79,8 @@ std::string ExecutableDir() {
 }
 
 void Usage(std::FILE* file) {
-    std::fputs("hdTrans\nAuthor: Sokcuri (https://sokcuri.neko.kr/)\n\n"
+    std::fprintf(file, "hdTrans v%s\n", HDTRANS_VERSION);
+    std::fputs("Author: Sokcuri (https://sokcuri.neko.kr/)\n\n"
                "usage: hdtrans [options] [text]\n"
                "  --in FILE, --file FILE  read UTF-8 input (default: stdin)\n"
                "  --out FILE             write UTF-8 output (default: stdout)\n"
