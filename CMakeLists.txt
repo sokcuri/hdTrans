@@ -147,6 +147,8 @@ if(NOT EMSCRIPTEN)
     set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
     add_test(NAME unit COMMAND hdtrans_tests)
+    set_tests_properties(unit PROPERTIES ENVIRONMENT
+        "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache")
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
@@ -202,15 +204,24 @@ if(NOT EMSCRIPTEN)
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
             src/core/dict/pos_tags_gen.cpp)
         target_include_directories(hdrulec PRIVATE src)
-        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DIR}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        # The local rules live in the dictionary rows, so the checks read the program the
+        # engine assembles from them; the CLI writes it once for the tests below.
+        set(HDTRANS_RULE_DUMP "${CMAKE_CURRENT_BINARY_DIR}/rules-program.txt")
+        add_test(NAME rules.dump COMMAND hdtrans_cli -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+            --dump-rules "${HDTRANS_RULE_DUMP}" -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
+        set_tests_properties(rules.dump PROPERTIES FIXTURES_SETUP ruledump
+            ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/rules-cache")
+        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         add_test(NAME rules.unknown-codes COMMAND "${CMAKE_COMMAND}"
             -DRULEC=$<TARGET_FILE:hdrulec> -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts
             -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-unknown-codes
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_unknown_codes.cmake")
-        add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DIR}" -paths 4096)
-        add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DIR}" -check "${HDTRANS_RULE_DIR}/program.hash")
-        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DIR}" -local 0-499 -globals
+        add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
+        add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
+        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals
             -check "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules/compiled_gen.cpp")
+        set_tests_properties(rules.lint rules.verify rules.identity rules.generated PROPERTIES
+            FIXTURES_REQUIRED ruledump)
         # The rule tests are rows of tests/rules/cases/, run by rules.cases.themes.
     endif()
 

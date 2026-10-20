@@ -6,39 +6,29 @@ namespace hdTrans::rules::compiled {
 
 using namespace std::string_view_literals;
 
-// # 참조 없는 규칙: 사전(dicts/*.tsv)의 rule 열이 가리키지 않아 실행되지 않는 지역 규칙과, rule 열이 비었거나 0인 행이 가리키는 빈 규칙 L 0. 형식: docs/rule-language.md, 실행 순서: docs/pipeline-layers.md.
-// # 사전 행이 이 번호를 가리키게 되면 그 머리 단어의 파일로 옮긴다.
-// # 규칙 번호가 비어 있거나 0인 모든 사전어에 적용되어 어떤 후보도 고르지 않는다. (미발동: impossible)
 // local 0
 bool RuleL0([[maybe_unused]] Item* p) {
     return false;
 }
 
-// # 규칙 레이어: 조건이 무엇을 보는지로 나눈 파일. 번호는 그대로라 사전의 rule 열과
-// # 전역 규칙의 PRIO가 가리키는 대상이 바뀌지 않는다.
-// # 품사로 고르는 규칙: 품사 코드만 보고 후보를 고른다.
-// # 뒤에 부사·감탄사로 분석되는 あら가 또 오면 앞의 あら를 감탄사 '어머나'로 고른다. (미발동: rare-context)
 // local 1
 //     src[+1] == "あら" and pos[+1] is 3**
 bool RuleL1([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "あら"sv) && PumsaEq(p, 1, "3**"sv));
 }
 
-// # 문장 끝의 あんまり를 '별로'로 고른다.
 // local 2
 //     gram has Ow
 bool RuleL2([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # 다음 동사가 「あそば」이고 ‘하시다’라는 번역 후보가 있으면 「いかが」를 ‘어떻게’로 고른다. (미발동: rare-context)
 // local 3
 //     src[+1] == "あそば" and ko[+1] == "하&AE@" and pos[+1] is 4**
 bool RuleL3([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "あそば"sv) && DstEq(p, 1, "하&AE@"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # いかに는 세 단어 뒤 동사의 も·でも·くても 또는 바로 뒤의 であろうと가 만드는 양보 문맥에서 아무리로 고른다. (미발동: rare-context)
 // local 4
 //     pos[+3] is 4** and end.src[+3] == "も" and end.pos[+3] is 57*
 //     src[+3] == "でも"
@@ -51,7 +41,6 @@ bool RuleL4([[maybe_unused]] Item* p) {
            GobiSrcEq(p, 1, "であろうと"sv);
 }
 
-// # いくら는 가격·구매·비용·보유량을 묻는 구문에서 의문 수량 표현 ‘얼마’로 고른다.
 // local 5
 //     src[+1] == "で" and pos[+1] is 2** and src[+2] == "買" and pos[+2] is 4**
 //     pos[-1] is 2** and sem[-2] has VMo
@@ -70,14 +59,12 @@ bool RuleL5([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "あ"sv) && DstEq(p, 1, "&HN@"sv) && PumsaEq(p, 1, "4**"sv) && GobiSrcEq(p, 1, "か"sv));
 }
 
-// # 뒤에 にも가 오면 いずれ의 어느 것 후보를 고른다. (미발동: rare-context)
 // local 6
 //     src[+1] == "にも"
 bool RuleL6([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "にも"sv);
 }
 
-// # いつも를 '언제나'로 고르고 바로 앞이나 쉼표 앞의 동사 어미 と를 조건형 '-면'으로 바꾼다.
 // local 7
 //     src[-1] == "、" and pos[-2] is 4** and end.src[-2] == "と" and end.pos[-2] is 50* and end.ko[-2] := "2면"
 //     pos[-1] is 4** and end.src[-1] == "と" and end.pos[-1] is 50* and end.ko[-1] := "2면"
@@ -86,7 +73,6 @@ bool RuleL7([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "と"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "2면"sv));
 }
 
-// # いや를 뒤에 です나 だ가 있을 때 싫다는 뜻으로 고른다. (미발동: rare-context)
 // local 8
 //     (src[+1] == "です" or src[+1] == "だ")
 bool RuleL8([[maybe_unused]] Item* p) {
@@ -94,21 +80,18 @@ bool RuleL8([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "だ"sv));
 }
 
-// # 일본어 쉼표 앞의 おい를 이봐로 고른다.
 // local 9
 //     src[+1] == "、"
 bool RuleL9([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "、"sv);
 }
 
-// # かつ를 명사와 명사 사이에서 '또한'으로 선택한다.
 // local 10
 //     pos[-1] is 1** and pos[+1] is 1**
 bool RuleL10([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # からから를 못·목재·우물의 건조나 뒤따르는 마름 표현에 맞추어 바싹바싹으로 고른다. (미발동: rare-word)
 // local 11
 //     pos[-1] is 2** and (src[-2] == "池" or src[-2] == "材木" or src[-2] == "井戸")
 //     (src[+1] == "乾" or src[+1] == "干上が")
@@ -120,35 +103,30 @@ bool RuleL11([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "干上が"sv));
 }
 
-// # このまま는 に로 시작하는 조사 앞에서 ‘이대로’를 ‘이대’로 바꾼다.
 // local 12
 //     src[+1] starts "に" and gram[+1] has Pj and ko := "이대"
 bool RuleL12([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "Lに"sv) && GramEq(p, 1, "Pj"sv) && DstSet(p, 0, "이대"sv));
 }
 
-// # こら를 쉼표로 번역되는 단어 앞에서 '이거 참'으로 선택한다.
 // local 13
 //     ko[+1] == ","
 bool RuleL13([[maybe_unused]] Item* p) {
     return DstEq(p, 1, ","sv);
 }
 
-// # い형용사와 명사가 이어지는 さらに를 '한층 더'로 고른다.
 // local 14
 //     pos[+1] is 7** and pos[+2] is 1**
 bool RuleL14([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "7**"sv) && PumsaEq(p, 2, "1**"sv));
 }
 
-// # しばらく는 바로 뒤에 구 표현 お待ちください가 오면 대기 시간을 나타내는 ‘잠깐’으로 고른다.
 // local 15
 //     src[+1] == "お待ちください" and pos[+1] is 9H1
 bool RuleL15([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "お待ちください"sv) && PumsaEq(p, 1, "9H1"sv));
 }
 
-// # すべて는 を・が・は 같은 조사나 닫는 인용부호·마침표 앞에서 '모든 것'을 고른다.
 // local 16
 //     (src[+1] == "を" or src[+1] == "が" or src[+1] == "は") and pos[+1] is 2**
 //     (src[+1] starts "」" or src[+1] == "。")
@@ -160,21 +138,18 @@ bool RuleL16([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "。"sv));
 }
 
-// # せいぜい는 뒤에 頑張 동사가 오면 힘껏으로 고른다.
 // local 17
 //     src[+1] == "頑張" and pos[+1] is 4**
 bool RuleL17([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "頑張"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # それから 앞에 と가 있으면 그리고라는 번역을 고른다. (미발동: rare-context)
 // local 18
 //     src[-1] == "と"
 bool RuleL18([[maybe_unused]] Item* p) {
     return SrcEq(p, -1, "と"sv);
 }
 
-// # それに를 비교·대응 동사나 조사 は 앞에서 '거기에'로 선택한다.
 // local 19
 //     (src[+1] == "応じ" or src[+1] == "反" or src[+1] == "比べ" or src[+1] == "くらべ" or src[+1] == "かこつけ") and pos[+1] is 4**
 //     src[+1] == "は" and pos[+1] is 2**
@@ -187,14 +162,12 @@ bool RuleL19([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "は"sv) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # ちゃんと가 연결형으로 명사 앞에 오면 제대로 되다는 뜻을 고른다. (미발동: rare-word)
 // local 20
 //     end.pos is 56* and pos[+1] is 1**
 bool RuleL20([[maybe_unused]] Item* p) {
     return (GobiPumsaEq(p, 0, "56*"sv) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # ちょうど는 뒤에 동사가 직접 오거나 -려는 참의 명사·조사·동사 구문이 이어지면 막으로 고른다.
 // local 21
 //     pos[+1] is 1** and pos[+2] is 2** and pos[+3] is 4** and end.src[+3] == "ところ" and end.ko[+3] == "1려는 참"
 //     pos[+1] is 4**
@@ -203,14 +176,12 @@ bool RuleL21([[maybe_unused]] Item* p) {
            PumsaEq(p, 1, "4**"sv);
 }
 
-// # 앞 동사가 기본형이고 뒤에 조사가 오면 ついで를 기회로 바꾸고 앞 동사를 관형형으로 만든다. (미발동: rare-context)
 // local 22
 //     pos[-1] is 4** and end.pos[-1] is 50* and pos[+1] is 2** and ko := "기회" and end.ko[-1] := "3"
 bool RuleL22([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "50*"sv) && PumsaEq(p, 1, "2**"sv) && DstSet(p, 0, "기회"sv) && GobiDstSet(p, -1, "3"sv));
 }
 
-// # として는 지정된 사람 명사와 当로 시작하는 명사 사이 또는 사람·역할·中心 뒤에서 자격의 ‘(으)로서’를 고른다.
 // local 23
 //     (src[-1] == "学生" or src[-1] == "男" or src[-1] == "女" or src[-1] == "親" or src[-1] == "息子" or src[-1] == "娘") and pos[-1] is 1** and src[+1] starts "当" and pos[+1] is 1**
 //     sem[-1] has VHn|UQf
@@ -226,14 +197,12 @@ bool RuleL23([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "中心"sv);
 }
 
-// # 앞 동사가 501 또는 561 어미를 가지면 として를 것으로서로 고른다. (미발동: rare-context)
 // local 24
 //     pos[-1] is 4** and end.pos[-1] is 501|561
 bool RuleL24([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "501561"sv));
 }
 
-// # まで 앞의 とても는 뒤 동사가 긍정 과거형이면 매우로 옮기고, 그 밖에는 도저히로 고른다.
 // local 25
 //     src[+2] starts "まで" and (end.src[+3] == "た" or end.src[+3] == "だ" or end.src[+3] == "いた" or end.src[+3] == "いだ" or end.src[+3] == "った" or end.src[+3] == "んだ" or end.src[+3] == "ました") and ko := "매우"
 //     src[+2] starts "まで"
@@ -248,14 +217,12 @@ bool RuleL25([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "Lまで"sv);
 }
 
-// # とても는 뒤에 楽し 형용사가 오면 정말로 고른다.
 // local 26
 //     src[+1] == "楽し" and pos[+1] is 7**
 bool RuleL26([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "楽し"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # 'と' 앞이나 'は' 뒤 문장 끝의 'どうか'를 '어떨까'로 고른다.
 // local 27
 //     src[+1] == "と"
 //     gram has Ow and src[-1] == "は"
@@ -264,14 +231,12 @@ bool RuleL27([[maybe_unused]] Item* p) {
            (GramEq(p, 0, "Ow"sv) && SrcEq(p, -1, "は"sv));
 }
 
-// # どうぞ를 부사·접속 표현이나 구 앞에서 '아무쪼록'으로 선택한다.
 // local 28
 //     pos[+1] is 3**|9**
 bool RuleL28([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "3**9**"sv);
 }
 
-// # どうも를 뒤의 세 단어 안에 정해진 부정 표현이 있을 때 '아무래도'로 선택한다.
 // local 29
 //     src[+1] ends "な" and pos[+1] is 7**
 //     src[+3] ends "な" and pos[+3] is 7**
@@ -284,14 +249,12 @@ bool RuleL29([[maybe_unused]] Item* p) {
            (SrcEq(p, 2, "Rな"sv) && PumsaEq(p, 2, "7**"sv));
 }
 
-// # 뒤의 형용동사에 「でも」가 붙으면 「どれほど」를 ‘아무리’로 고른다. (미발동: rare-context)
 // local 30
 //     pos[+1] is 8** and end.src[+1] == "でも"
 bool RuleL30([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "8**"sv) && GobiSrcEq(p, 1, "でも"sv));
 }
 
-// # どんなには 뒤 절이 でしょう·だろう 계열, 형용사류의 의문 어미·に 문맥이거나 앞말이 一体이면 ‘얼마나’를 고른다.
 // local 31
 //     pos[+1] is 1** and src[+2] == "でしょう"
 //     pos[+1] is 4** and (end.src[+1] starts "でしょう" or end.src[+1] starts "だろう" or end.src[+1] ends "だろう")
@@ -316,35 +279,30 @@ bool RuleL31([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "8**"sv) && GobiSrcEq(p, 1, "に"sv));
 }
 
-// # なかなか는 뒤에 く형 い형용사·명사·부정 문법 코드 Xn의 い형용사가 차례로 오면 좀처럼으로 고른다. (미발동: rare-context)
 // local 32
 //     pos[+1] is 7** and end.src[+1] == "く" and pos[+2] is 1** and pos[+3] is 7** and gram[+3] has Xn
 bool RuleL32([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "7**"sv) && GobiSrcEq(p, 1, "く"sv) && PumsaEq(p, 2, "1**"sv) && PumsaEq(p, 3, "7**"sv) && GramEq(p, 3, "Xn"sv));
 }
 
-// # 문장 첫머리의 'なんで'를 이유를 묻는 '어째서'로 고른다.
 // local 33
 //     gram has Hz
 bool RuleL33([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Hz"sv);
 }
 
-// # 사람을 뜻하는 명사 바로 뒤에서 においては를 에게 있어서는으로 고른다. (미발동: rare-word)
 // local 34
 //     pos[-1] is 1** and sem[-1] has VHn
 bool RuleL34([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "VHn"sv));
 }
 
-// # はっきり는 뒤 단어가 사고·언어 또는 시각 의미 코드이면 분명히로 고른다.
 // local 35
 //     sem[+1] has UTs|USe
 bool RuleL35([[maybe_unused]] Item* p) {
     return AttrEq(p, 1, "UTsUSe"sv);
 }
 
-// # ばったり 뒤에 あ·会 동사가 오면 우연히를 고른다. (미발동: rare-word)
 // local 36
 //     (src[+1] == "あ" or src[+1] == "会") and pos[+1] is 4**
 bool RuleL36([[maybe_unused]] Item* p) {
@@ -352,7 +310,6 @@ bool RuleL36([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "会"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # ほとんど는 다음 단어가 조사이거나 문장 오른쪽 경계이면 ‘대부분’으로 고른다.
 // local 37
 //     pos[+1] is 2**
 //     gram has Ow
@@ -361,14 +318,12 @@ bool RuleL37([[maybe_unused]] Item* p) {
            GramEq(p, 0, "Ow"sv);
 }
 
-// # まったく 뒤에 する형 명사와 せずに가 이어지면 전혀라는 번역을 고른다. (미발동: rare-context)
 // local 38
 //     pos[+1] is 1** and gram[+1] has Hd and src[+2] == "せずに"
 bool RuleL38([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "Hd"sv) && SrcEq(p, 2, "せずに"sv));
 }
 
-// # だめ·違う·違っている 앞의 まるで를 '전혀'로 고른다.
 // local 39
 //     src[+1] == "だめ" and pos[+1] is 8**
 //     (src[+1] == "違" or src[+1] == "違ってい") and pos[+1] is 4**
@@ -378,7 +333,6 @@ bool RuleL39([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "違ってい"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # もちろんのこと가 오른쪽 경계에 있고 뒤에 쉼표가 오면 물론이거니와를 고른다. (미발동: rare-word)
 // local 40
 //     src[+1] == "、"
 //     gram has Ow
@@ -387,21 +341,18 @@ bool RuleL40([[maybe_unused]] Item* p) {
            GramEq(p, 0, "Ow"sv);
 }
 
-// # ゆえに는 문장 처음에서 인과 접속 표현 '그러므로'를 고른다.
 // local 41
 //     gram has Hz
 bool RuleL41([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Hz"sv);
 }
 
-// # 共に는 앞말이 명사이면 복수 대상을 함께 가리키는 ‘모두’로 고른다.
 // local 42
 //     pos[-1] is 1**
 bool RuleL42([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # 当面을 동사 앞이나 명사와 する가 이어지는 문맥에서 '당분간'으로 선택한다.
 // local 43
 //     pos[+1] is 4**
 //     pos[+1] is 1** and ko[+2] == "&AV@"
@@ -410,14 +361,12 @@ bool RuleL43([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "1**"sv) && DstEq(p, 2, "&AV@"sv));
 }
 
-// # 앞에 명사가 오면 同様를 그 명사와 같다는 뜻으로 고른다. (미발동: rare-context)
 // local 44
 //     pos[-1] is 1**
 bool RuleL44([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # 뒤에 め나 目가 오면 一番을 1번으로 고른다. (미발동: rare-context)
 // local 45
 //     (src[+1] == "め" or src[+1] == "目")
 bool RuleL45([[maybe_unused]] Item* p) {
@@ -425,21 +374,18 @@ bool RuleL45([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "目"sv));
 }
 
-// # 바로 뒤에 ございません이 오면 全く를 부정 강조 부사 '전혀'로 고른다. (미발동: rare-context)
 // local 46
 //     src[+1] == "ございません"
 bool RuleL46([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "ございません"sv);
 }
 
-// # 뒤에 동사 「ちゃんと座」가 오면 「前向きに」를 ‘정면으로’로 고른다. (미발동: rare-context)
 // local 47
 //     src[+1] == "ちゃんと座" and pos[+1] is 4**
 bool RuleL47([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "ちゃんと座"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 前向きに는 뒤에 生き 동사나 사고 의미 계열 UTh의 동사가 오면 적극적으로로 고른다. (미발동: rare-context)
 // local 48
 //     src[+1] == "生き" and pos[+1] is 4**
 //     pos[+1] is 4** and sem[+1] under UTh
@@ -448,7 +394,6 @@ bool RuleL48([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "4**"sv) && AttrMinusEq(p, 1, "UTh"sv));
 }
 
-// # 명사에 붙은 に 뒤에서 終始가 する나 관련 동사와 결합하면 시종을 고르고 に를 으로로 바꾼다. (미발동: rare-word)
 // local 49
 //     src[-1] == "に" and src[+1] == "する" and pos[+1] is 4** and ko[-1] := "(으)로"
 //     src[-1] == "に" and pos[+1] is 4** and gram[+1] has Sk and ko[-1] := "(으)로"
@@ -457,21 +402,18 @@ bool RuleL49([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "に"sv) && PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Sk"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 中心には 앞말이 조사 を이면 ‘중심으로’를 고른다.
 // local 50
 //     src[-1] == "を" and pos[-1] is 2**
 bool RuleL50([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 앞 동사가 '-て/で'형인 初めて를 '처음으로'로 고르고 앞 동사의 어미를 '-고'로 바꾼다.
 // local 51
 //     pos[-1] is 4** and end.pos[-1] is 57* and end.ko[-1] := "1고"
 bool RuleL51([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv) && GobiDstSet(p, -1, "1고"sv));
 }
 
-// # 初めて를 문장 오른쪽 경계나 조사 앞에서 '처음'으로 선택한다.
 // local 52
 //     gram has Ow
 //     pos[+1] is 2**
@@ -480,7 +422,6 @@ bool RuleL52([[maybe_unused]] Item* p) {
            PumsaEq(p, 1, "2**"sv);
 }
 
-// # 最後に는 바로 앞이 を이거나 바로 뒤 번역이 쉼표이면 마지막으로로 고른다.
 // local 53
 //     src[-1] == "を"
 //     ko[+1] == ","
@@ -489,49 +430,42 @@ bool RuleL53([[maybe_unused]] Item* p) {
            DstEq(p, 1, ","sv);
 }
 
-// # 「丸で」 뒤에 명사가 오면 비유 부사 ‘마치’를 고른다.
 // local 54
 //     pos[+1] is 1**
 bool RuleL54([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**"sv);
 }
 
-// # いっぱい가 시간 조수사 뒤에서 で로 활용되면 번역을 까지로로 바꾸고 어미를 지운다. (미발동: rare-context)
 // local 55
 //     end.src == "で" and pos[-1] is 1** and sem[-1] has UMe and gram[-1] has Ct and ko := "까지로    " and end.ko := ""
 bool RuleL55([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "で"sv) && PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "UMe"sv) && GramEq(p, -1, "Ct"sv) && DstSet(p, 0, "까지로    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # が大好き는 다음 말이 명사이면 현재 어미를 ‘1는’으로 바꾸고 ‘(을)를 아주 좋아하다’를 고른다.
 // local 56
 //     pos[+1] is 1** and end.ko := "1는"
 bool RuleL56([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && GobiDstSet(p, 0, "1는"sv));
 }
 
-// # きらい를 싫어하다로 고르고 앞의 비인간 명사에 붙은 が를 목적격으로 바꾼다. (미발동: rare-context)
 // local 57
 //     src[-1] == "が" and pos[-2] is 1** and sem[-2] lacks VHn and ko[-1] := "(을)를"
 bool RuleL57([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "が"sv) && PumsaEq(p, -2, "1**"sv) && AttrNe(p, -2, "VHn"sv) && DstSet(p, -1, "(을)를"sv));
 }
 
-// # きれい 뒤에 花로 끝나는 단어가 오면 예쁘다라는 번역을 고른다. (미발동: rare-context)
 // local 58
 //     src[+1] ends "花"
 bool RuleL58([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "R花"sv);
 }
 
-// # そう 앞에 いた가 있고 그 앞 동사가 연결형이면 하다는 서술 표현을 고른다. (미발동: rare-context)
 // local 59
 //     src[-1] == "いた" and pos[-2] is 4** and end.pos[-2] is 57*
 bool RuleL59([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "いた"sv) && PumsaEq(p, -2, "4**"sv) && GobiPumsaEq(p, -2, "57*"sv));
 }
 
-// # 동사·형용사 뒤의 'そう'를 추정 표현 '것 같다'로 고르고 필요하면 앞말의 어미를 관형형이나 평서형으로 바꾼다.
 // local 60
 //     pos[-1] is 4** and end.pos[-1] is 5:0|54*
 //     src[-1] == "い" and pos[-1] is 4** and end.pos[-1] is 5:0
@@ -548,7 +482,6 @@ bool RuleL60([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "い"sv) && GobiPumsaEq(p, -1, "5A0"sv));
 }
 
-// # なさそう는 명사·元気 뒤나 동사의 사역형 뒤에서 ‘없을 것 같다’를 고르고 사역 어미를 ‘-을 수’로 바꾼다.
 // local 61
 //     src[-1] == "が" and src[-2] == "元気" and ko[-2] == "기운이"
 //     src[-1] == "元気" and pos[-1] is 1**
@@ -561,7 +494,6 @@ bool RuleL61([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "54*"sv) && GobiDstSet(p, -1, "3 수"sv));
 }
 
-// # 뒤에 町·ところ 또는 街로 끝나는 말이 오면 にぎやか를 번화하다로 고른다. (미발동: rare-context)
 // local 62
 //     (src[+1] == "町" or src[+1] == "ところ" or src[+1] ends "街")
 bool RuleL62([[maybe_unused]] Item* p) {
@@ -570,42 +502,36 @@ bool RuleL62([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "R街"sv));
 }
 
-// # 앞말이 명사이면 の通り를 대로로 고른다. (미발동: rare-context)
 // local 63
 //     pos[-1] is 1**
 bool RuleL63([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # に로 활용되고 형용사·형용동사가 뒤따르는 はるか를 훨씬으로 바꾸고 어미 번역을 지운다.
 // local 64
 //     end.src == "に" and pos[+1] is 7**|8** and ko := "훨씬    " and end.ko := ""
 bool RuleL64([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "に"sv) && PumsaEq(p, 1, "7**8**"sv) && DstSet(p, 0, "훨씬    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # ばか는 바로 앞말이 そんな이면 바보이다로 고른다.
 // local 65
 //     src[-1] == "そんな"
 bool RuleL65([[maybe_unused]] Item* p) {
     return SrcEq(p, -1, "そんな"sv);
 }
 
-// # べき는 기본형 동사·형용동사 뒤에서 ‘하다’ 계열을 고르고 앞 어미를 ‘-아야’로 바꾼다.
 // local 66
 //     pos[-1] is 4**|8** and end.pos[-1] is 50* and end.ko[-1] := "6야"
 bool RuleL66([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**8**"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "6야"sv));
 }
 
-// # する 명사인 複雑 뒤의 みたい를 '한 것 같다'로 옮기는 후보로 고른다. (미발동: rare-context)
 // local 67
 //     src[-1] == "複雑" and pos[-1] is 1** and gram[-1] has Hd
 bool RuleL67([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "複雑"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Hd"sv));
 }
 
-// # 명사 뒤의 みたい를 '같다'로 고르고 に형이면 '같이'가 되도록 어미를 바꾼다.
 // local 68
 //     end.src == "に" and pos[-1] is 1** and end.ko := "1이"
 //     pos[-1] is 1**
@@ -614,7 +540,6 @@ bool RuleL68([[maybe_unused]] Item* p) {
            PumsaEq(p, -1, "1**"sv);
 }
 
-// # よう의 같다 후보를 지정된 형용사·형용동사 어미나 동사 어미 뒤에서 고른다.
 // local 69
 //     pos[-1] is 8** and end.src[-1] == "だった" and end.ko[-1] == "5던 것"
 //     pos[-1] is 7** and end.src[-1] == "かった" and end.ko[-1] == "5던 것"
@@ -629,7 +554,6 @@ bool RuleL69([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "まいりました"sv));
 }
 
-// # 「オーバー」의 어미가 「で」이고 뒤에 する형 명사나 동사·형용사가 오면 그 어미를 ‘로’로 바꾼다. (미발동: rare-context)
 // local 70
 //     end.src == "で" and pos[+1] is 1** and gram[+1] has Hd and end.ko := " 로"
 //     end.src == "で" and pos[+1] is 4**|7**|8** and end.ko := " 로"
@@ -638,28 +562,24 @@ bool RuleL70([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "で"sv) && PumsaEq(p, 1, "4**7**8**"sv) && GobiDstSet(p, 0, " 로"sv));
 }
 
-// # ソフト는 바로 앞이 명사 メール이면 소프트로 고른다. (미발동: rare-context)
 // local 71
 //     src[-1] == "メール" and pos[-1] is 1**
 bool RuleL71([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "メール"sv) && PumsaEq(p, -1, "1**"sv));
 }
 
-// # 동사의 だけ와 の 뒤에서 簡単な가 명사를 꾸미면 の를 지우고 앞 동사를 기만 하면 되는으로 바꾼다. (미발동: rare-context)
 // local 72
 //     end.src == "な" and src[-1] == "の" and pos[-2] is 4** and end.src[-2] == "だけ" and end.pos[-2] is 500 and pos[+1] is 1** and ko[-1] := " " and end.ko[-2] := "1기만 하면 되는"
 bool RuleL72([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "な"sv) && SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "4**"sv) && GobiSrcEq(p, -2, "だけ"sv) && GobiPumsaEq(p, -2, "500"sv) && PumsaEq(p, 1, "1**"sv) && DstSet(p, -1, " "sv) && GobiDstSet(p, -2, "1기만 하면 되는"sv));
 }
 
-// # 間近가 に로 활용되고 어미 품사가 500이면 한국어 어미를 비운다. (미발동: rare-word)
 // local 73
 //     end.src == "に" and end.pos is 500 and end.ko := ""
 bool RuleL73([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "に"sv) && GobiPumsaEq(p, 0, "500"sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # 甘やか 뒤에 だ·で·です·に가 오면 달짝지근하다를 고른다. (미발동: rare-word)
 // local 74
 //     (src[+1] == "だ" or src[+1] == "で" or src[+1] == "です" or src[+1] == "に")
 bool RuleL74([[maybe_unused]] Item* p) {
@@ -669,21 +589,18 @@ bool RuleL74([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "に"sv));
 }
 
-// # 동작성 명사와 동사가 뒤따르는 見事를 '훌륭히'로 고른다.
 // local 75
 //     pos[+1] is 1** and gram[+1] has Hd and pos[+2] is 4**
 bool RuleL75([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "Hd"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 困難이 に로 활용되고 뒤에 満ち가 오면 어미를 으로로 바꿔 곤란으로 가득 차다는 표현을 만든다. (미발동: rare-context)
 // local 76
 //     end.src == "に" and src[+1] == "満ち" and pos[+1] is 4** and end.ko := " 으로"
 bool RuleL76([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "に"sv) && SrcEq(p, 1, "満ち"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, 0, " 으로"sv));
 }
 
-// # 気の毒는 です로 활용되면 어미를 '-었습니다'로 바꾸고 だ로 활용되면 전체를 '안 됐다'로 바꾼다.
 // local 77
 //     end.src == "です" and end.ko := "5습니다"
 //     end.src == "だ" and ko := "안    " and end.ko := " 됐다"
@@ -692,7 +609,6 @@ bool RuleL77([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "だ"sv) && DstSet(p, 0, "안    "sv) && GobiDstSet(p, 0, " 됐다"sv));
 }
 
-// # 綺麗는 사람 명사를 꾸미거나 사람을 나타내는 명사와 조사 뒤에 오면 ‘예쁘다’로 고른다.
 // local 78
 //     pos[+1] is 1** and sem[+1] has VHn
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VHn
@@ -701,21 +617,18 @@ bool RuleL78([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VHn"sv));
 }
 
-// # 当然은 앞말이 57* 어미를 가진 동사이면 그 어미를 ‘0 것이’로 바꾸고 ‘당연하다’를 고른다.
 // local 79
 //     pos[-1] is 4** and end.pos[-1] is 57* and end.ko[-1] := "0 것이"
 bool RuleL79([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv) && GobiDstSet(p, -1, "0 것이"sv));
 }
 
-// # 大き가 く형이고 세 단어 뒤에 に分かれ 동사가 있으면 어미를 게로 바꾼다. (미발동: rare-context)
 // local 80
 //     end.src == "く" and src[+3] == "に分かれ" and pos[+3] is 4** and end.ko := "1게"
 bool RuleL80([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "く"sv) && SrcEq(p, 3, "に分かれ"sv) && PumsaEq(p, 3, "4**"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # が가 목적격으로 번역되거나 앞 동사에 のが가 붙으면 大好き를 정말 좋아하다로 고르고 필요한 목적어 어미를 맞춘다. (미발동: rare-context)
 // local 81
 //     src[-1] == "が" and ko[-1] == "(을)를"
 //     pos[-1] is 4** and end.src[-1] == "のが" and end.pos[-1] is 50* and end.ko[-1] := "0 것을"
@@ -724,7 +637,6 @@ bool RuleL81([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "のが"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "0 것을"sv));
 }
 
-// # 無理는 일본어 어미가 な이면 한으로 바꾸고 だよ이면 야로 바꾸어 무리한·무리야 형태를 만든다.
 // local 82
 //     end.src == "な" and end.ko := " 한"
 //     end.src == "だよ" and end.ko := " 야"
@@ -733,91 +645,78 @@ bool RuleL82([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "だよ"sv) && GobiDstSet(p, 0, " 야"sv));
 }
 
-// # 뒤말이 조사로 취급되는 문법코드를 가지면 無事를 무사로 고른다. (미발동: rare-context)
 // local 83
 //     gram[+1] has Pj
 bool RuleL83([[maybe_unused]] Item* p) {
     return GramEq(p, 1, "Pj"sv);
 }
 
-// # 迷惑에 なのですが가 붙으면 번역을 '귀찮다'에서 명사 서술형 '폐이다'로 바꾼다. (미발동: rare-context)
 // local 84
 //     end.src == "なのですが" and ko := "폐%D4@"
 bool RuleL84([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "なのですが"sv) && DstSet(p, 0, "폐%D4@"sv));
 }
 
-// # 不足은 뒤에 조사와 동사·형용사·형용동사가 이어지면 ‘부족’으로 고른다.
 // local 85
 //     pos[+1] is 2** and pos[+2] is 4**
 bool RuleL85([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 수사나 조수사 뒤의 「で」에 이어지는 「十分」을 ‘충분하다’로 고르고 앞 조사를 ‘(으)로’로 바꾼다. (미발동: rare-context)
 // local 86
 //     src[-1] == "で" and gram[-2] has Ct|Nj|Nd and ko[-1] := "(으)로"
 bool RuleL86([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && GramEq(p, -2, "CtNjNd"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 悪質은 현재 어미 표기가 な이면 그 번역을 ‘ 적인’으로 바꾸고 해당 형용동사 후보를 고른다.
 // local 87
 //     end.src == "な" and end.ko := " 적인"
 bool RuleL87([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "な"sv) && GobiDstSet(p, 0, " 적인"sv));
 }
 
-// # 安価는 어미가 に이면 번역을 염가로로 바꾸고 어미 번역을 지운다. (미발동: rare-word)
 // local 88
 //     end.src == "に" and ko := "염가로    " and end.ko := ""
 bool RuleL88([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "に"sv) && DstSet(p, 0, "염가로    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # 有名은 앞에 으로로 번역된 조사 で가 있으면 유명하다로 고른다.
 // local 89
 //     src[-1] == "で" and ko[-1] == "(으)로" and pos[-1] is 2**
 bool RuleL89([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && DstEq(p, -1, "(으)로"sv) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 음식이나 음료를 뜻하는 말 뒤에서 一杯를 한 잔으로 고른다. (미발동: rare-context)
 // local 90
 //     sem[-1] has VFd
 bool RuleL90([[maybe_unused]] Item* p) {
     return AttrEq(p, -1, "VFd"sv);
 }
 
-// # 自然に 다음에 동사 恵まれ가 오면 어미를 이로 바꾸어 자연이 되게 한다. (미발동: rare-context)
 // local 91
 //     end.src == "に" and src[+1] == "恵まれ" and pos[+1] is 4** and end.ko := " 이"
 bool RuleL91([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "に"sv) && SrcEq(p, 1, "恵まれ"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, 0, " 이"sv));
 }
 
-// # 自由가 수 뒤에서 で로 활용되면 자유형으로 바꾸고 어미를 에서로 바꾼다. (미발동: rare-context)
 // local 92
 //     end.src == "で" and gram[-1] has Nj|Nd and ko := "자유형    " and end.ko := " 에서"
 bool RuleL92([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "で"sv) && GramEq(p, -1, "NjNd"sv) && DstSet(p, 0, "자유형    "sv) && GobiDstSet(p, 0, " 에서"sv));
 }
 
-// # 中途半端의 '어중간하다' 후보가 で형으로 동사 앞에 오면 연결어미를 '-게'로 바꾼다.
 // local 93
 //     end.src == "で" and pos[+1] is 4** and end.ko := "1게"
 bool RuleL93([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "で"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 徹底는 과거형으로 명사를 꾸밀 때 번역을 ‘철저한’으로 바꾸고 기존 어미를 지운다.
 // local 94
 //     end.pos is 56* and pos[+1] is 1** and ko := "철저한    " and end.ko := ""
 bool RuleL94([[maybe_unused]] Item* p) {
     return (GobiPumsaEq(p, 0, "56*"sv) && PumsaEq(p, 1, "1**"sv) && DstSet(p, 0, "철저한    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # 장소 명사와 の 뒤의 通り는 거리로, 그 밖의 명사와 の 뒤에서는 대로로 고르고 の를 지운다.
 // local 95
 //     src[-1] == "の" and sem[-2] has VPl and ko := "거리"
 //     src[-1] == "の" and pos[-2] is 1** and ko[-1] := ""
@@ -826,7 +725,6 @@ bool RuleL95([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, ""sv));
 }
 
-// # 平気는 현재 어미가 で이면 뒤에 형용사류가 있을 때 ‘-고’, 그 밖에는 ‘-게’로 어미를 바꾸고 ‘아무렇지도 않다’를 고른다.
 // local 96
 //     end.src == "で" and pos[+1] is 7**|8** and end.ko := "1고"
 //     end.src == "で" and end.ko := "1게"
@@ -835,7 +733,6 @@ bool RuleL96([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "で"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 好き를 ‘좋아하다’로 고르며 주격을 목적격으로 옮길 때 ‘내’를 ‘나’로 되돌리거나 앞 동사구를 ‘-는 것을’로 바꾼다.
 // local 97
 //     (src == "好き" or src == "すき" or src == "嫌い") and pos is 8** and src[-1] == "の" and ko[-1] == "(이)가" and pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VHn
 //     pos[-1] is 4** and end.src[-1] == "のが" and end.pos[-1] is 50* and end.ko[-1] := "0 것을"
@@ -852,7 +749,6 @@ bool RuleL97([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:0"sv) && GobiDstSet(p, -1, "0 것을"sv));
 }
 
-// # 希 뒤에 명사가 아닌 だ·な·に가 오면 드물다라는 형용사 번역을 고른다. (미발동: rare-word)
 // local 98
 //     (src[+1] == "だ" or src[+1] == "な" or src[+1] == "に") and pos[+1] is not 1**
 bool RuleL98([[maybe_unused]] Item* p) {
@@ -861,7 +757,6 @@ bool RuleL98([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "に"sv)) && PumsaNe(p, 1, "1**"sv));
 }
 
-// # 「か」가 목적격 조사·듣기 동사·어느 쪽인지 묻는 표현 및 명사 간 선택 의문 문맥에 오면 ‘인지’를 고른다.
 // local 99
 //     src[+1] == "を"
 //     src[+1] == "聞" and pos[+1] is 4**
@@ -878,14 +773,12 @@ bool RuleL99([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "どちら"sv);
 }
 
-// # 어미 か 뒤에 を와 する형 명사가 차례로 오면 지를 고른다. (미발동: rare-context)
 // local 100
 //     src[+1] == "を" and pos[+2] is 1** and gram[+2] has Hd
 bool RuleL100([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "を"sv) && PumsaEq(p, 2, "1**"sv) && GramEq(p, 2, "Hd"sv));
 }
 
-// # 또는·あるいは·병렬 동작 등 지정 문맥의 동사 어미 か를 선택을 나타내는 '-든가'로 고른다.
 // local 101
 //     (src[+1] == "または" or src[+1] == "あるいは")
 //     src[+1] == "、" and pos[+2] is 4** and src[+3] == "な" and pos[+3] is 7** and end.src[+3] == "いか"
@@ -901,7 +794,6 @@ bool RuleL101([[maybe_unused]] Item* p) {
            (DstEq(p, 1, ","sv) && SrcEq(p, 2, "あるいは"sv));
 }
 
-// # か를 知らない·分からない·표현 동사·쉼표·とか 또는 명사와 する가 이어지는 문맥에서 간접 의문을 나타내는 '-는지'로 고른다.
 // local 102
 //     (src[+1] == "知らな" or src[+1] == "分からな") and pos[+1] is 7**
 //     src[+1] == "、" and src[+2] == "知" and pos[+2] is 4**
@@ -920,7 +812,6 @@ bool RuleL102([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "1**"sv) && SrcEq(p, 2, "する"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # か는 뒤에 조사 が나 부정 동사 わからなが 오면 간접 의문의 -을지로 고른다.
 // local 103
 //     src[+1] == "が" and pos[+1] is 2**
 //     src[+1] == "わからな" and pos[+1] is 7**
@@ -929,7 +820,6 @@ bool RuleL103([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "わからな"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # 뒤의 가까운 동사에 ましょう 계열 어미가 붙으면 から를 테니까로 고른다. (미발동: rare-context)
 // local 104
 //     src[+1] == "、" and pos[+3] is 4** and end.src[+3] starts "ましょう" and end.pos[+3] is 5:0
 //     pos[+2] is 4** and end.src[+2] starts "ましょう"
@@ -940,7 +830,6 @@ bool RuleL104([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "4**"sv) && GobiSrcEq(p, 1, "Lましょう"sv));
 }
 
-// # から는 두 단어 뒤가 조사 を이고 세 단어 뒤가 守·まも 동사이면 ‘(으)로부터’를 고른다.
 // local 105
 //     src[+2] == "を" and pos[+2] is 2** and (src[+3] == "守" or src[+3] == "まも") and pos[+3] is 4**
 bool RuleL105([[maybe_unused]] Item* p) {
@@ -948,7 +837,6 @@ bool RuleL105([[maybe_unused]] Item* p) {
            SrcEq(p, 3, "まも"sv)) && PumsaEq(p, 3, "4**"sv));
 }
 
-// # から는 시간·나이·頃 계열 표현 뒤에서 시작점을 나타내는 ‘부터’로 고른다.
 // local 106
 //     pos[-1] is 1**|3** and sem[-1] has UMe
 //     (src[-1] == "歳" or src[-1] == "才") and pos[-1] is 1**
@@ -966,8 +854,6 @@ bool RuleL106([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "っ"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UMe"sv));
 }
 
-// # から는 앞뒤의 장소·숫자 명사, 장소·시간 명사 뒤의 降り·おり·出 동사, QNN 또는 VFn 의미 명사 뒤의 동사 등 출발점 조건에서 ‘에서’를 고른다.
-// # 사람이 아닌 명사에서 무언가가 날아·뿜어·새어·넘쳐 나오는 문맥(石から火線が飛び, 傷から血が溢れ)도 ‘에서’다.
 // local 107
 //     pos[-1] is 1** and sem[-1] lacks VHn and pos[+1] is 4** and (src[+1] starts "飛" or src[+1] starts "噴" or src[+1] starts "漏" or src[+1] starts "溢" or src[+1] starts "湧" or src[+1] starts "零")
 //     pos[-1] is 1** and sem[-1] lacks VHn and pos[+1] is 1** and src[+2] == "が" and pos[+3] is 4** and (src[+3] starts "飛" or src[+3] starts "噴" or src[+3] starts "漏" or src[+3] starts "溢" or src[+3] starts "湧" or src[+3] starts "零" or src[+3] == "出")
@@ -1001,7 +887,6 @@ bool RuleL107([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && GramEq(p, -2, "NjNd"sv) && GramEq(p, 1, "NjNd"sv) && PumsaEq(p, 2, "1**"sv));
 }
 
-// # が는 좋아함·싫어함이나 비인간 대상의 희망 표현 등 특정 뒤 문맥에서 주격 번역을 을/를로 바꾼다.
 // local 108
 //     pos[-1] is 1** and src[+1] == "好" and pos[+1] is 4** and end.pos[+1] is 5:* and ko := "(을)를"
 //     src[+1] == "何より" and (src[+2] == "好き" or src[+2] == "嫌い" or src[+2] == "すき") and pos[+2] is 8** and ko := "(을)를"
@@ -1017,7 +902,6 @@ bool RuleL108([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "大好"sv)) && PumsaEq(p, 2, "4**"sv) && DstSet(p, 0, "(을)를"sv));
 }
 
-// # できる·わかる 등의 목적어 문맥이나 일부 など 문맥에서 が를 를로 고르고 특정 분기에서는 다시 가로 바꾼다.
 // local 109
 //     pos[-1] is 1** and gram[-1] lacks Hd and (src[+1] == "でき" or src[+1] == "出来") and ko[+1] == "생&A2@" and pos[+1] is 4** and gram[+1] lacks Ke and ko := "(이)가"
 //     pos[-1] is 1** and sem[-1] under VHn and (src[+1] == "わか" or src[+1] == "分か") and pos[+1] is 4** and ko := "(이)가"
@@ -1031,7 +915,6 @@ bool RuleL109([[maybe_unused]] Item* p) {
            GramEq(p, 1, "Ka"sv)));
 }
 
-// # 어미 「くらい」 뒤에 조사 「だ」·「です」가 오면 정도를 나타내는 ‘-을 정도’를 고른다.
 // local 110
 //     (src[+1] == "だ" or src[+1] == "です") and pos[+1] is 2**
 bool RuleL110([[maybe_unused]] Item* p) {
@@ -1039,7 +922,6 @@ bool RuleL110([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "です"sv)) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # 뒤 세 단어 안에 말하기·생각하기·알리기 관련 표현이 있는 과거 인용 어미 って를 '-었다고' 계열로 고른다.
 // local 111
 //     sem[+3] has UTs|UTh|USe
 //     sem[+2] has UTs|UTh|USe
@@ -1052,7 +934,6 @@ bool RuleL111([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UThUFl"sv));
 }
 
-// # を와 수량 표현이 양쪽에 놓이는 열거 문맥에서 と를 와·과로 고른다. (미발동: rare-context)
 // local 112
 //     gram[-1] has Ct and gram[-2] has Nj|Nd and src[-3] == "を" and src[+3] == "を"
 //     gram[-1] has Nj|Nd|Ct and src[-2] == "を" and src[+2] == "を" and gram[+3] has Nj|Nd|Ct
@@ -1061,7 +942,6 @@ bool RuleL112([[maybe_unused]] Item* p) {
            (GramEq(p, -1, "NjNdCt"sv) && SrcEq(p, -2, "を"sv) && SrcEq(p, 2, "を"sv) && GramEq(p, 3, "NjNdCt"sv));
 }
 
-// # 「と」가 숫자·조수사 뒤에서 서술어로 이어지거나 「作用してい」 앞에 오면 ‘(으)로’를 고른다.
 // local 113
 //     gram[-1] has Nj|Nd|Ct and pos[+1] is 4**|7**|8**
 //     gram[-1] has Nj|Nd|Ct and pos[+1] is 1**|3** and pos[+2] is 4**|7**|8**
@@ -1074,7 +954,6 @@ bool RuleL113([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "作用"sv) && SrcEq(p, 2, "してい"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 명사 연결·命名する·개월 수 뒤의 させていただく·賜 문맥에서 と를 고르고 일부 문맥에서는 번역을 '(이)라고'나 '(으)로'로 바꾼다. (미발동: rare-context)
 // local 114
 //     pos[-1] is 1** and sem[-1] lacks VHn and pos[+1] is 1** and sem[+1] under UFl
 //     pos[-1] is 1** and (sem[-1] under VHn or sem[-1] under QPN) and src[+1] == "命名" and pos[+1] is 1** and (src[+2] == "する" or src[+2] == "いた") and pos[+2] is 4** and ko := "(이)라고"
@@ -1089,14 +968,12 @@ bool RuleL114([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "賜"sv) && PumsaEq(p, -1, "1**"sv) && DstSet(p, 0, "(이)라고"sv));
 }
 
-// # 수사 문법 코드를 가진 앞말 뒤의 조사 'と'를 '(으)로'로 고른다.
 // local 115
 //     gram[-1] has Nj|Nd
 bool RuleL115([[maybe_unused]] Item* p) {
     return GramEq(p, -1, "NjNd"sv);
 }
 
-// # 「すぐ」 뒤의 「わか・分か・分」 또는 연결형 동사와 사고 동사 사이의 「しま」에 붙은 「と」를 ‘것이라고’로 고른다. (미발동: rare-context)
 // local 116
 //     (src == "わか" or src == "分か" or src == "分") and src[-1] == "すぐ"
 //     src == "しま" and pos[-1] is 4** and end.pos[-1] is 57* and pos[+1] is 4** and sem[+1] has UTh
@@ -1107,7 +984,6 @@ bool RuleL116([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "しま"sv) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv) && PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UTh"sv));
 }
 
-// # 어미 「と」는 어간이 「によ」·「行」이고 뒤에 생각·발언 등 특정 의미 계열의 동사가 오면 ‘-다고’를 고른다.
 // local 117
 //     (src == "によ" or src == "行") and pos[+1] is 4** and (sem[+1] has UTh or sem[+1] has UTs or sem[+1] has USe)
 bool RuleL117([[maybe_unused]] Item* p) {
@@ -1117,7 +993,6 @@ bool RuleL117([[maybe_unused]] Item* p) {
            AttrEq(p, 1, "USe"sv)));
 }
 
-// # と는 一人 또는 숫자·人 뒤의 부정문에서 ‘도’를 고르고, 그 인원수 뒤의 集ま·あつま 앞에서는 ‘씩’으로 바꾼다.
 // local 118
 //     (src[-1] == "一人" or src[-1] == "人" and gram[-2] has Nj|Nd) and pos[+1] is 4** and pos[+2] is 7** and gram[+2] has Xn
 //     (src[-1] == "一人" or src[-1] == "人" and gram[-2] has Nj|Nd) and (src[+1] == "集ま" or src[+1] == "あつま") and pos[+1] is 4** and ko := "씩"
@@ -1129,7 +1004,6 @@ bool RuleL118([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "あつま"sv)) && PumsaEq(p, 1, "4**"sv) && DstSet(p, 0, "씩"sv));
 }
 
-// # 기록·인용이나 명사·발화 관련 문맥의 'と'를 '(이)라고'로 고른다.
 // local 119
 //     src[+1] == "心の中"
 //     pos[+1] is 3** and pos[+2] is 3** and pos[+3] is 4** and sem[+3] under UTh
@@ -1144,7 +1018,6 @@ bool RuleL119([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "1**"sv) && AttrEq(p, 1, "VGtVHnUQfUAq"sv) && PumsaEq(p, 2, "1**"sv) && AttrEq(p, 2, "UTsUThUSe"sv));
 }
 
-// # と는 뒤에 발화·사고·감각 계열의 する형 명사가 오거나 앞 명사와 뒤 お 및 특정 동사가 호응하면 이라고로 고른다.
 // local 120
 //     pos[+1] is 1** and (sem[+1] has UTh or sem[+1] has UTs or sem[+1] has USe) and gram[+1] has Hd and pos[+2] is 4**
 //     pos[-1] is 1** and src[+1] == "お" and pos[+2] is 4** and (sem[+2] has VSw or sem[+2] has UTs or sem[+2] has UTh or sem[+2] has USe or sem[+2] has UFl)
@@ -1159,14 +1032,12 @@ bool RuleL120([[maybe_unused]] Item* p) {
            AttrEq(p, 2, "UFl"sv)));
 }
 
-// # と는 뒤에 はぐれ 동사가 오면 목적격 조사 (을)를로 고른다. (미발동: rare-context)
 // local 121
 //     src[+1] == "はぐれ" and pos[+1] is 4**
 bool RuleL121([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "はぐれ"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 夕食を 뒤이거나 앞쪽에 連絡이 있으면 동사 と의 하다 후보를 고른다. (미발동: rare-context)
 // local 122
 //     src[-1] == "を" and src[-2] == "夕食"
 //     src[-3] == "連絡"
@@ -1177,7 +1048,6 @@ bool RuleL122([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "連絡"sv);
 }
 
-// # と를 두 단어 앞이 賞으로 끝나거나 ビザ일 때 받다로 고른다. (미발동: rare-context)
 // local 123
 //     src[-2] ends "賞"
 //     src[-2] == "ビザ"
@@ -1186,7 +1056,6 @@ bool RuleL123([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "ビザ"sv);
 }
 
-// # と를 제도·형식·대응 등을 취하거나 법제 대상을 취하는 문맥에서 취하다로 고른다. (미발동: rare-context)
 // local 124
 //     pos[-1] is 2** and (src[-2] ends "行動" or src[-2] ends "制" or src[-2] == "書式" or src[-2] == "形式" or src[-2] ends "策" or src[-2] ends "制度" or src[-2] == "対応" or src[-2] == "歩調" or src[-2] == "形態") and pos[-2] is 1**
 //     src[-1] == "を" and sem[-2] has ULw
@@ -1203,7 +1072,6 @@ bool RuleL124([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "を"sv) && AttrEq(p, -2, "ULw"sv));
 }
 
-// # 사람 사이·대화·채팅 등의 명사 앞이나 두 명사가 참여하는 구성에서 'との'를 '(와)과의'로 고르고 'せよ' 뒤에서는 '(이)라는'으로 바꾼다.
 // local 125
 //     src[+1] == "間" and ko[+1] == "사이" and pos[+1] is 1**
 //     src[+1] ends "話" and pos[+1] is 1**
@@ -1222,7 +1090,6 @@ bool RuleL125([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "が"sv)));
 }
 
-// # 용언이나 인용·판단·사실 관련 문맥에서 との를 이라는으로 고른다.
 // local 126
 //     pos[-1] is 4**|7**|8**
 //     src[-1] == "できるように" and pos[-1] is 1**
@@ -1242,7 +1109,6 @@ bool RuleL126([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "UMe"sv) && SrcEq(p, 1, "こと"sv) && SrcEq(p, 2, "から"sv));
 }
 
-// # な는 では·でも·どちらでも·とでは·後で 등 부정 계사 문맥에서 ‘아니다’를 고르며 일부 앞어미와 현재 어미를 함께 고친다.
 // local 127
 //     pos[-1] is 4** and (end.src[-1] ends "では" or end.src[-1] ends "でも")
 //     (src[-1] == "どちらでも" or src[-1] == "とでは" or src[-1] == "後で")
@@ -1264,7 +1130,6 @@ bool RuleL127([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "いの"sv) && PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "いんじゃ"sv) && GobiDstSet(p, 0, "1야"sv));
 }
 
-// # な의 두 단어 앞이 ベール로 끝나거나 かみなり·雷·笛이면 울리다라는 번역을 고른다. (미발동: rare-context)
 // local 128
 //     (src[-2] ends "ベール" or src[-2] == "かみなり" or src[-2] == "雷" or src[-2] == "笛")
 bool RuleL128([[maybe_unused]] Item* p) {
@@ -1274,21 +1139,18 @@ bool RuleL128([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "笛"sv));
 }
 
-// # な 앞의 お가 동사이고 그 어미가 ないでは로 시작하면 못하다는 뜻을 고른다. (미발동: rare-context)
 // local 129
 //     src[-1] == "お" and pos[-1] is 4** and end.src[-1] == "ないでは"
 bool RuleL129([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "お"sv) && PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "ないでは"sv));
 }
 
-// # 앞말의 'では' 어미가 '-지'로 번역된 경우 'な'를 부정 보조형용사 '않다'로 고른다.
 // local 130
 //     end.src[-1] == "では" and end.ko[-1] == "1지" and end.pos[-1] is 50*
 bool RuleL130([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, -1, "では"sv) && GobiDstEq(p, -1, "1지"sv) && GobiPumsaEq(p, -1, "50*"sv));
 }
 
-// # 가능·경험의 부정이나 이중 부정 등의 문맥에서 'な'를 '없다'로 고르고 'わけには行かない'류에서는 앞의 이동 동사 번역을 지운다.
 // local 131
 //     ko[-1] ends " 수 &HN@" and pos[-1] is 4** and end.pos[-1] is 58*
 //     (end.src[-1] == "ためしが" or end.src[-1] == "ことが" or end.src[-1] == "いことは")
@@ -1305,7 +1167,6 @@ bool RuleL131([[maybe_unused]] Item* p) {
            GobiSrcEq(p, -2, "わけにも"sv)) && DstSet(p, -1, ""sv));
 }
 
-// # 일부 부정 동사 뒤의 ながら를 '(이)면서'로 고르고 형용사와 ことながら가 결합한 경우에는 두 말을 지워 '-게도'로 바꾼다.
 // local 132
 //     pos[-1] is 4*9 and end.pos[-1] is 58*
 //     src[-1] == "こと" and pos[-2] is 7** and ko := "" and ko[-1] := "" and end.ko[-2] := "1게도"
@@ -1314,14 +1175,12 @@ bool RuleL132([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "こと"sv) && PumsaEq(p, -2, "7**"sv) && DstSet(p, 0, ""sv) && DstSet(p, -1, ""sv) && GobiDstSet(p, -2, "1게도"sv));
 }
 
-// # 현재 동사 표기가 てもら로 끝나면 ね 어미를 게로 고른다. (미발동: rare-context)
 // local 133
 //     src ends "てもら"
 bool RuleL133([[maybe_unused]] Item* p) {
     return SrcEq(p, 0, "Rてもら"sv);
 }
 
-// # ね 어미는 문장 끝에서 ‘-는군’을 고르고 Va 문법 후보에서는 ‘-군요’로 바꾼다.
 // local 134
 //     gram has Va and end.ko := "1군요"
 //     end.gram has Ow
@@ -1330,21 +1189,18 @@ bool RuleL134([[maybe_unused]] Item* p) {
            GobiGramEq(p, 0, "Ow"sv);
 }
 
-// # 문장 오른쪽 경계에서 ね를 -었군요로 고른다. (미발동: rare-context)
 // local 135
 //     gram has Ow
 bool RuleL135([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # 어미 「ね」는 한국어 어간이 ‘주다’ 활용 표지로 끝나고 문장 끝에 놓이면 특수 어미 C를 고른다.
 // local 136
 //     ko ends "&CJ@" and gram has Ow
 bool RuleL136([[maybe_unused]] Item* p) {
     return (DstEq(p, 0, "R&CJ@"sv) && GramEq(p, 0, "Ow"sv));
 }
 
-// # ね는 문장 처음이거나 여는 인용부호와 쉼표 사이이면 말 걸기 표현 '그런데'를 고른다.
 // local 137
 //     gram has Hz
 //     ko[-1] == "「" and src[+1] == "、"
@@ -1353,7 +1209,6 @@ bool RuleL137([[maybe_unused]] Item* p) {
            (DstEq(p, -1, "「"sv) && SrcEq(p, 1, "、"sv));
 }
 
-// # の는 서술어 뒤 조사 앞이나 こんな류 뒤의 명사화 문맥에서 ‘것’을 고른다.
 // local 138
 //     src[-1] == "とい" and pos[-1] is 4** and end.ko[-1] == "0" and end.pos[-1] is 500 and (src[+1] == "を" or src[+1] == "が" or src[+1] == "は") and pos[+1] is 2**
 //     pos[-1] is 4**|7**|8** and pos[+1] is 2**
@@ -1371,7 +1226,6 @@ bool RuleL138([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "という"sv) && PumsaEq(p, -1, "2**"sv) && SrcEq(p, 1, "は"sv) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # 명사 수식이나 명사화된 동사 앞 등의 문맥에서 の를 의로 고르고 특정 형용사 인용 뒤에서는 생략한다.
 // local 139
 //     pos[-1] is 1** and src[-2] == "が" and pos[+1] is 4**|7**|8** and pos[+2] is 1**
 //     src[-1] == "今日" and pos[+1] is 1**|4**|7**|8**
@@ -1392,7 +1246,6 @@ bool RuleL139([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "わる"sv)) && GobiSrcEq(p, 1, "さ"sv));
 }
 
-// # 「の」는 「迷惑をかける」에 해당하는 표현이나 일부 목적어 문맥에서 ‘(을)를’를 고르고 사람 뒤의 「分か」·「わか」 앞에서는 ‘(이)가’로 바꾼다.
 // local 140
 //     (src[-1] ends "迷惑" or src[-1] ends "めいわく") and src[+1] == "かけ" and pos[+1] is 4**
 //     pos[-1] is 1** and sem[-1] under VHn and (src[+1] == "わか" or src[+1] == "分か") and pos[+1] is 4** and ko := "(이)가"
@@ -1405,7 +1258,6 @@ bool RuleL140([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && AttrNe(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**7**"sv) && GramEq(p, 1, "KeKa"sv));
 }
 
-// # の를 이해·돌봄 동사 앞이나 비인간 명사와 好き·嫌い 등의 관형 표현 사이에서 목적격 조사로 선택한다.
 // local 141
 //     src[+1] == "面倒を見" and pos[+1] is 4**
 //     (src[+1] == "わか" or src[+1] == "分か") and pos[+1] is 4**
@@ -1426,7 +1278,6 @@ bool RuleL141([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "嫌い"sv)) && PumsaEq(p, 1, "8**"sv) && PumsaEq(p, 2, "1**"sv));
 }
 
-// # の는 명사와 方 어미 동사 사이에서 ‘의’를 고르며 …経験과 형용사류 사이에서는 ‘(이)가’로 바꾼다.
 // local 142
 //     pos[-1] is 1** and pos[+1] is 4** and end.src[+1] == "方"
 //     src[-1] ends "経験" and pos[+1] is 7**|8** and ko := "(이)가"
@@ -1435,42 +1286,36 @@ bool RuleL142([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "R経験"sv) && PumsaEq(p, 1, "7**8**"sv) && DstSet(p, 0, "(이)가"sv));
 }
 
-// # 어미 のか는 문장 오른쪽 끝에서 과거 의문형 '-었는가'를 고른다.
 // local 143
 //     gram has Ow
 bool RuleL143([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # のに 바로 뒤에 よ가 오면 어미 번역을 '-는 것에'로 바꾼다. (미발동: rare-context)
 // local 144
 //     src[+1] == "よ" and end.ko := "0 것에"
 bool RuleL144([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "よ"sv) && GobiDstSet(p, 0, "0 것에"sv));
 }
 
-// # いつも 뒤의 は 번역을 공백으로 바꾼다.
 // local 145
 //     src[-1] == "いつも" and ko := " "
 bool RuleL145([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "いつも"sv) && DstSet(p, 0, " "sv));
 }
 
-// # 명사와 조사 「の」 뒤에서 「ほか」를 ‘외’로 고른다. (미발동: rare-context)
 // local 146
 //     src[-1] == "の" and pos[-1] is 2** and pos[-2] is 1**
 bool RuleL146([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # も 어미는 붙은 단어의 표기가 に向け이면 어미 번역을 어서도로 바꾼다. (미발동: rare-context)
 // local 147
 //     src == "に向け" and end.ko := "6서도"
 bool RuleL147([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "に向け"sv) && GobiDstSet(p, 0, "6서도"sv));
 }
 
-// # 특정 수량 병렬·選ばれる 문맥이나 세 단어 뒤 동사에 54 계열 어미가 있는 문맥에서 も를 도로 고른다.
 // local 148
 //     gram[-1] has Ct and gram[-2] has Nj|Nd and src[-3] == "も" and ko[-3] == "도"
 //     ko == "도" and gram[-1] has Ct and gram[-2] has Nj|Nd and gram[+1] has Nj|Nd and gram[+2] has Ct
@@ -1483,7 +1328,6 @@ bool RuleL148([[maybe_unused]] Item* p) {
            (PumsaEq(p, 3, "4**"sv) && GobiPumsaEq(p, 3, "54*"sv));
 }
 
-// # 수량 뒤 부정문이나 명사와 부사 사이에서 조사 'も'를 '도'로 고른다.
 // local 149
 //     gram[-1] has Ct and gram[-2] has Nj|Nd and pos[+1] is 4** and end.src[+1] starts "ません"
 //     gram[-1] has Ct and gram[-2] has Nj|Nd and pos[+1] is 4** and (src[+2] == "な" or src[+2] == "いな") and pos[+2] is 7**
@@ -1497,7 +1341,6 @@ bool RuleL149([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "3**"sv));
 }
 
-// # 体 또는 いつまで 바로 뒤에서 동사 も를 지탱하다로 고른다. (미발동: rare-context)
 // local 150
 //     src[-1] == "体" and pos[-1] is 1**
 //     src[-1] == "いつまで"
@@ -1506,7 +1349,6 @@ bool RuleL150([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "いつまで"sv);
 }
 
-// # よ는 동사의 ても형 뒤나 かったら가 붙었을 때 ‘괜찮다’를 고른다.
 // local 151
 //     pos[-1] is 4** and end.src[-1] == "も" and end.pos[-1] is 57*
 //     end.src == "かったら"
@@ -1515,7 +1357,6 @@ bool RuleL151([[maybe_unused]] Item* p) {
            GobiSrcEq(p, 0, "かったら"sv);
 }
 
-// # 앞 용언에 ことに·事に·のに·などに가 붙거나 앞말이 それに인 よ를 '따르다'로 고르고 문장 첫머리 연결형은 '-아서/어서'로 바꾼다.
 // local 152
 //     gram has Hz and end.pos is 57* and end.ko := "6서"
 //     (end.src[-1] ends "ことに" or end.src[-1] ends "事に" or end.src[-1] ends "のに" or end.src[-1] ends "などに")
@@ -1529,14 +1370,12 @@ bool RuleL152([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "それに"sv) && PumsaEq(p, -1, "3**"sv) && DstSet(p, -1, "거기에"sv));
 }
 
-// # よ를 사람 의미의 목적어 뒤에서 부르다로 고른다. (미발동: rare-context)
 // local 153
 //     src[-1] == "を" and sem[-2] has VHn
 bool RuleL153([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && AttrEq(p, -2, "VHn"sv));
 }
 
-// # 어미 ように는 뒤에 동사 な 또는 なって가 오면 결과 변화를 연결하는 '-게'를 고른다.
 // local 154
 //     (src[+1] == "な" or src[+1] == "なって") and pos[+1] is 4**
 bool RuleL154([[maybe_unused]] Item* p) {
@@ -1544,7 +1383,6 @@ bool RuleL154([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "なって"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # ら 어미는 いい·どう류의 조건절이나 もし·さえ 등이 있는 문맥에서 ‘-면’을 고른다.
 // local 155
 //     src[+1] == "い" and ko[+1] == "$DE@" and pos[+1] is 7**
 //     pos[+1] is 7** and gram[+1] has Ow
@@ -1567,7 +1405,6 @@ bool RuleL155([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "さえ"sv);
 }
 
-// # 과거 조건 어미 「ら」 뒤에 형용사의 「く」형과 과거형 「な」가 이어지면 계기를 나타내는 ‘-자’를 고른다.
 // local 156
 //     pos[+1] is 7** and end.src[+1] == "く" and src[+2] == "な" and pos[+2] is 4** and end.src[+2] == "ました"
 //     pos[+1] is 7** and end.src[+1] == "く" and src[+2] == "な" and pos[+2] is 4** and end.pos[+2] is 560
@@ -1576,21 +1413,18 @@ bool RuleL156([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "7**"sv) && GobiSrcEq(p, 1, "く"sv) && SrcEq(p, 2, "な"sv) && PumsaEq(p, 2, "4**"sv) && GobiPumsaEq(p, 2, "560"sv));
 }
 
-// # わ는 문장 오른쪽 경계에서 과거형에 붙는 ‘-었어요’ 어미로 고른다.
 // local 157
 //     gram has Ow
 bool RuleL157([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # わ 앞의 조사 너머에 액체 계열 명사가 있으면 끓다를 고른다. (미발동: rare-context)
 // local 158
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VLq
 bool RuleL158([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VLq"sv));
 }
 
-// # 숫자와 기간 단위 뒤의 '間'을 '간'으로 고르고 사이의 'の'를 지우며 'との' 뒤에서는 '사이'로 바꾼다.
 // local 159
 //     src[-1] == "の" and (src[-2] == "年" or src[-2] == "日" or src[-2] == "ヶ月") and gram[-3] has Nj|Nd and ko[-1] := ""
 //     src[-1] == "との" and pos[-1] is 2** and ko := "사이"
@@ -1601,21 +1435,18 @@ bool RuleL159([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "との"sv) && PumsaEq(p, -1, "2**"sv) && DstSet(p, 0, "사이"sv));
 }
 
-// # 어미용 I 뒤에 되다로 번역되는 동사 な가 오면 게라는 연결 어미를 고른다. (미발동: other)
 // local 160
 //     src[+1] == "な" and ko[+1] == "&C6@" and pos[+1] is 4**
 bool RuleL160([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "な"sv) && DstEq(p, 1, "&C6@"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 가상 어미 I가 붙은 말이 오른쪽 경계에 있으면 다로 끝내는 어미를 고른다. (미발동: other)
 // local 161
 //     gram has Ow
 bool RuleL161([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # 뒤에 종결형 な 형용사나 あ 동사가 오면 I 어미 후보를 지로 고른다. (미발동: rare-context)
 // local 162
 //     src[+1] == "な" and pos[+1] is 7** and end.pos[+1] is 5a0|5b0
 //     src[+1] == "あ" and pos[+1] is 4**
@@ -1624,14 +1455,12 @@ bool RuleL162([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "あ"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 문장 오른쪽 경계에서 어미 I를 -었다로 고른다. (미발동: rare-word)
 // local 163
 //     gram has Ow
 bool RuleL163([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # かも는 知れな·しれな 또는 知れ·しれ 동사 앞에서 과거 추측형 ‘-었을지도’로 고른다.
 // local 164
 //     (src[+1] == "知れな" or src[+1] == "しれな") and pos[+1] is 7**
 //     (src[+1] == "知れ" or src[+1] == "しれ") and pos[+1] is 4**
@@ -1642,7 +1471,6 @@ bool RuleL164([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "しれ"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # かも는 다음 말이 い형용사 知れな·しれな이면 ‘일지도’를 고른다.
 // local 165
 //     (src[+1] == "知れな" or src[+1] == "しれな") and pos[+1] is 7**
 bool RuleL165([[maybe_unused]] Item* p) {
@@ -1650,14 +1478,12 @@ bool RuleL165([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "しれな"sv)) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # こと 뒤에 조사가 있고 그다음 동사가 スムーズに運이면 '일' 번역을 고른다. (미발동: rare-context)
 // local 166
 //     pos[+1] is 2** and src[+2] == "スムーズに運" and pos[+2] is 4** and ko := "일"
 bool RuleL166([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "スムーズに運"sv) && PumsaEq(p, 2, "4**"sv) && DstSet(p, 0, "일"sv));
 }
 
-// # だけ는 특정 に 연결이나 数·分 뒤 및 닫는 인용부호 뒤에서 양을 나타내는 ‘만큼’으로 고른다.
 // local 167
 //     src[+1] == "に" and pos[+1] is 2** and src[+2] == "な" and pos[+2] is 2**
 //     (src[-1] == "数" or src[-1] ends "分") and gram[-2] lacks Nj|Nd
@@ -1669,7 +1495,6 @@ bool RuleL167([[maybe_unused]] Item* p) {
            DstEq(p, -1, "」"sv);
 }
 
-// # だけ는 명사 뒤에 용언이 이어지거나 동사와 명사 뒤에 놓인 특정 문맥에서 만으로 고른다.
 // local 168
 //     pos[-1] is 1** and src[+1] != "であ" and pos[+1] is 4**|7**|8**
 //     pos[-1] is 1** and pos[-2] is 4**
@@ -1678,7 +1503,6 @@ bool RuleL168([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "4**"sv));
 }
 
-// # だけ를 특정 문법 코드가 있는 단어나 です 앞에서 '뿐'으로 선택한다.
 // local 169
 //     gram[+1] has Z2
 //     src[+1] == "です" and pos[+1] is 2**
@@ -1691,21 +1515,18 @@ bool RuleL169([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "それ"sv)) && SrcEq(p, 1, "Lです"sv) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # だろう는 다음 단어의 번역이 물음표이면 추정 어미 ‘-겠지’로 고른다.
 // local 170
 //     ko[+1] == "?"
 bool RuleL170([[maybe_unused]] Item* p) {
     return DstEq(p, 1, "\077"sv);
 }
 
-// # 바로 앞이 「どうして」이면 「だろう」를 ‘까’로 고른다. (미발동: rare-context)
 // local 171
 //     src[-1] == "どうして"
 bool RuleL171([[maybe_unused]] Item* p) {
     return SrcEq(p, -1, "どうして"sv);
 }
 
-// # 명사 뒤 부정형·合意·潤う 문맥이나 全員·皆 뒤의 で를 이·가로 고른다.
 // local 172
 //     src[+1] == "な" and pos[+1] is 7**
 //     pos[-1] is 1** and src[-2] == "と" and pos[-2] is 2** and pos[-3] is 1** and src[+1] == "合意" and ko[+1] == "합의&AV@" and pos[+1] is 4**
@@ -1719,7 +1540,6 @@ bool RuleL172([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "皆"sv));
 }
 
-// # 「で」가 연속·일방·부착 표현이나 일부 시간 표현 및 돈·카드 뒤에 오면 ‘(으)로’를 고른다.
 // local 173
 //     (src[-1] ends "連続" or src[-1] == "一方" or src[-1] ends "付き")
 //     sem[-1] has UMe and src[+1] == "、"
@@ -1733,14 +1553,12 @@ bool RuleL173([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "Rカード"sv));
 }
 
-// # ところ는 앞 단어가 い로 적히고 좋다 번역 표지를 가진 い형용사이면 곳으로 고른다. (미발동: rare-context)
 // local 174
 //     src[-1] == "い" and ko[-1] == "$DE@" and pos[-1] is 7**
 bool RuleL174([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "い"sv) && DstEq(p, -1, "$DE@"sv) && PumsaEq(p, -1, "7**"sv));
 }
 
-// # 뒤에 할 수 있다로 번역되는 でき 또는 出来 동사가 있으면 なら를 이라면으로 고른다. (미발동: rare-context)
 // local 175
 //     (src[+1] == "でき" or src[+1] == "出来") and ko[+1] == "할 수 &HN@" and pos[+1] is 4**
 bool RuleL175([[maybe_unused]] Item* p) {
@@ -1748,7 +1566,6 @@ bool RuleL175([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "出来"sv)) && DstEq(p, 1, "할 수 &HN@"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # に는 특정 사람·변화·선택·이동 동사 구문이나 こと 뒤 등에서 방향·결과를 나타내는 ‘(으)로’로 고른다.
 // local 176
 //     pos[-1] is 1** and sem[-1] has UAq and src[-2] == "を" and pos[-2] is 2** and pos[-3] is 1** and sem[-3] has VHn|UAq
 //     pos[-1] is not 4** and sem[-1] lacks UMe and (src[+1] == "決ま" or src[+1] == "決め" or src[+1] == "迎え" or src[+1] == "直" or src[+1] == "割" or src[+1] == "つなが" or src[+1] ends "する" or src[+1] == "飛" or src[+1] == "乗り換え" or src[+1] == "選ばれ" or src[+1] == "思" or src[+1] == "思ってい") and pos[+1] is 4**
@@ -1774,7 +1591,6 @@ bool RuleL176([[maybe_unused]] Item* p) {
            (SrcEq(p, 2, "飛"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # には 사람 뒤의 似てい·似·追いつ·会·待たされ, 명사 뒤의 代わ·踏み切·遭う·会·憧れ, 사람과 부사를 거친 遭·会·憧れ 또는 固執 앞에서 ‘(을)를’을 고른다.
 // local 177
 //     pos[-1] is 1** and sem[-1] has VHn|VAm and (src[+1] == "似てい" or src[+1] == "似" or src[+1] == "追いつ" or src[+1] == "会" or src[+1] == "待たされ") and pos[+1] is 4**
 //     pos[-1] is 1** and (src[+1] == "代わ" or src[+1] == "踏み切" or src[+1] == "遭う" or src[+1] == "会" or src[+1] == "憧れ") and pos[+1] is 4**
@@ -1797,7 +1613,6 @@ bool RuleL177([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "固執"sv);
 }
 
-// # に는 な로 되는 구문이나 사람에게 동작을 받는 표현 및 일부 가능·결과 구문에서 주격 ‘(이)가’로 고른다.
 // local 178
 //     src[+1] == "な" and ko[+1] == "&C6@" and pos[+1] is 4**
 //     sem[-1] under VHn and pos[+1] is 4** and end.pos[+1] is 57* and (src[+2] == "もら" or src[+2] == "いただ") and ko[+2] == "&CJ@" and pos[+2] is 4**
@@ -1811,14 +1626,12 @@ bool RuleL178([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Ka"sv));
 }
 
-// # に를 대명사 は 명사 に 명사 を 사역동사 배열에서 주격으로 고르고 앞의 は를 에게로 바꾼다. (미발동: rare-context)
 // local 179
 //     pos[-1] is 1** and src[-2] == "は" and pos[-3] is 12* and pos[+1] is 1** and src[+2] == "を" and ko[+3] ends "게 &AV@" and pos[+3] is 4** and ko[-2] := "에게"
 bool RuleL179([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && SrcEq(p, -2, "は"sv) && PumsaEq(p, -3, "12*"sv) && PumsaEq(p, 1, "1**"sv) && SrcEq(p, 2, "を"sv) && DstEq(p, 3, "R게 &AV@"sv) && PumsaEq(p, 3, "4**"sv) && DstSet(p, -2, "에게"sv));
 }
 
-// # ほど는 凌駕する의 어미이거나 뒤에 계사·부정 계사·조건형 동사가 오면 -을 정도로 고른다.
 // local 180
 //     src == "する" and src[-1] == "凌駕"
 //     (src[+1] == "ではな" or src[+1] == "では無" or src[+1] == "じゃな" or src[+1] == "ではあ" or src[+1] == "です" or src[+1] == "だ" or src[+1] == "だった" or src[+1] == "でした")
@@ -1836,7 +1649,6 @@ bool RuleL180([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "4**"sv) && GobiPumsaEq(p, 1, "53*"sv));
 }
 
-// # ほど는 맛있다·어렵다·좋다·재미있다 등의 형용사 앞이나 조건형 뒤의 특정 문맥에서 -을수록으로 고른다.
 // local 181
 //     end.pos[-1] is 53* and (src[+1] == "美味し" or src[+1] == "おいし" or src[+1] == "難し" or src[+1] == "い" or src[+1] == "おもしろ" or src[+1] == "面白") and pos[+1] is 7**
 //     pos[-1] is 4** and end.ko[-1] == "2면" and end.pos[-1] is 53*
@@ -1862,7 +1674,6 @@ bool RuleL181([[maybe_unused]] Item* p) {
            GobiSrcEq(p, 3, "く"sv);
 }
 
-// # まま의 '-은 채로' 어미를 に 앞에서 '-은 채'로 바꾸거나 だ·です·だった 앞에서 '-은 채 그대로'로 바꿔 선택한다.
 // local 182
 //     src[+1] starts "に" and gram[+1] has Pj and end.ko := "8 채"
 //     (src[+1] == "だ" or src[+1] == "です" or src[+1] == "だった") and pos[+1] is 2** and end.ko := "8 채 그대로"
@@ -1873,14 +1684,12 @@ bool RuleL182([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "だった"sv)) && PumsaEq(p, 1, "2**"sv) && GobiDstSet(p, 0, "8 채 그대로"sv));
 }
 
-// # まま 뒤에 번역이 비어 있는 を가 오면 대로 어미를 고른다. (미발동: rare-context)
 // local 183
 //     src[+1] == "を" and ko[+1] == ""
 bool RuleL183([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "を"sv) && DstEq(p, 1, ""sv));
 }
 
-// # 쉼표 앞이거나 현재 어간이 してい인 문맥의 ものの를 지만으로 고른다.
 // local 184
 //     ko[+1] == ","
 //     src == "してい"
@@ -1889,14 +1698,12 @@ bool RuleL184([[maybe_unused]] Item* p) {
            SrcEq(p, 0, "してい"sv);
 }
 
-// # より 뒤에 お早めに와 どうぞ가 차례로 오면 으로라는 조사 번역을 고른다. (미발동: rare-context)
 // local 185
 //     src[+1] == "お早めに" and src[+2] == "どうぞ"
 bool RuleL185([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "お早めに"sv) && SrcEq(p, 2, "どうぞ"sv));
 }
 
-// # より는 비교 대상 뒤에서 형용사·부사 등이 이어지거나 명사 뒤에 の方が가 이어지면 비교 조사 '보다'를 고른다.
 // local 186
 //     pos[-1] is 2** and pos[+1] is 3**|7**|8**
 //     pos[-1] is 1** and pos[+1] is 1** and (src[+2] == "の方が" or src[+2] == "のほうが")
@@ -1908,7 +1715,6 @@ bool RuleL186([[maybe_unused]] Item* p) {
            PumsaEq(p, -1, "2**"sv);
 }
 
-// # 형용사나 형용사를 동반한 명사·부사 앞 등의 비교 문맥에서 'より'를 '보다'로 고른다.
 // local 187
 //     src[+1] == "前" and pos[+1] is 1**
 //     src[+1] == "簡単" and pos[+1] is 8**
@@ -1923,7 +1729,6 @@ bool RuleL187([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "3**"sv) && PumsaEq(p, 2, "7**8**"sv));
 }
 
-// # わけ 앞에 その·あの·この·どの가 오면 이유라는 뜻을 고른다. (미발동: rare-context)
 // local 188
 //     (src[-1] == "その" or src[-1] == "あの" or src[-1] == "この" or src[-1] == "どの")
 bool RuleL188([[maybe_unused]] Item* p) {
@@ -1933,7 +1738,6 @@ bool RuleL188([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "どの"sv));
 }
 
-// # 「時間」은 앞 동사가 기본형이고 뒤에 존재·부정·소망 표현이 오거나 앞 동사가 이동 의미이면 그 앞 동사의 어미를 ‘-을’로 바꾼다.
 // local 189
 //     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "があ" and pos[+1] is 4** and end.ko[-1] := "3"
 //     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "が" and (src[+2] ends "な" or src[+2] == "無" or src[+2] == "") and end.ko[-1] := "3"
@@ -1949,14 +1753,12 @@ bool RuleL189([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && AttrEq(p, -1, "UMv"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "3"sv));
 }
 
-// # いつの 뒤의 時代를 고르면서 いつ를 어느로 바꾸고 の를 지운다.
 // local 190
 //     src[-1] == "の" and src[-2] == "いつ" and ko[-1] := "" and ko[-2] := "어느"
 bool RuleL190([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && SrcEq(p, -2, "いつ"sv) && DstSet(p, -1, ""sv) && DstSet(p, -2, "어느"sv));
 }
 
-// # 연결 어미 V는 忘れ＋くる, 住·付け＋いらっしゃ 및 같은 동사의 반복 등에서 '-고'로 잇는다.
 // local 191
 //     src == "忘れ" and src[+1] == "くる" and pos[+1] is 4**
 //     (src == "住" or src == "付け") and src[+1] == "いらっしゃ" and pos[+1] is 4**
@@ -1978,7 +1780,6 @@ bool RuleL191([[maybe_unused]] Item* p) {
            SrcEqW(p, 0, 1);
 }
 
-// # 공통 어미 V는 희망의 たい나 つつある 등이 뒤따르는 문맥에서 연결형 -고를 고른다.
 // local 192
 //     src[+1] == "た" and pos[+1] is 7**
 //     src[+1] == "つつあ" and pos[+1] is 4**
@@ -1993,7 +1794,6 @@ bool RuleL192([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "した"sv) && DstEq(p, 1, "$F9@"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # やすい·にくい·始める·がち 등의 앞에서 동사 어미 V를 기로 고른다.
 // local 193
 //     src[+1] == "やす" and ko[+1] == "$GF@" and pos[+1] is 7**
 //     src[+1] == "にく" and ko[+1] == "어$G8@" and pos[+1] is 7**
@@ -2012,14 +1812,12 @@ bool RuleL193([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "づら"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # 뒤에 もございません이 이어지면 V의 권유형 어미를 방법이라는 명사 표현으로 바꾼다. (미발동: rare-context)
 // local 194
 //     src[+1] == "も" and src[+2] == "ござ" and pos[+2] is 4** and end.src[+2] == "ません" and end.ko := "3 방법"
 bool RuleL194([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "も"sv) && SrcEq(p, 2, "ござ"sv) && PumsaEq(p, 2, "4**"sv) && GobiSrcEq(p, 2, "ません"sv) && GobiDstSet(p, 0, "3 방법"sv));
 }
 
-// # と·とは 뒤이거나 気づく·知る·禁じ得る 계열 동사에 붙은 공통 어미 V를 '-지 못하고'로 고른다.
 // local 195
 //     (src[-1] == "とは" or src[-1] == "と") and pos[-1] is 2**
 //     (src == "に気づ" or src == "気づ" or src == "知" or src == "禁じ得")
@@ -2032,7 +1830,6 @@ bool RuleL195([[maybe_unused]] Item* p) {
            SrcEq(p, 0, "禁じ得"sv));
 }
 
-// # 공통 어미 V는 お…する나 お·ご…あそばせ 경어 구문에서 으 계열 어간을 고르고 뒤 동사를 높임 표현으로 정리한다.
 // local 196
 //     src[-1] == "お" and src[+1] == "する" and pos[+1] is 4**
 //     pos is 4** and (src[-1] == "お" or src[-1] == "ご") and pos[-1] is 1** and (src[+1] == "あそば" or src[+1] == "にあそばせ") and ko[+1] == "&AE@" and pos[+1] is 4**
@@ -2043,7 +1840,6 @@ bool RuleL196([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "にあそばせ"sv)) && DstEq(p, 1, "&AE@"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # V 어미는 다음 말이 형용동사 そう 또는 い형용사 そうもな이면 관형형 3(-(으)ㄹ)을 고른다.
 // local 197
 //     src[+1] == "そう" and pos[+1] is 8**
 //     src[+1] == "そうもな" and pos[+1] is 7**
@@ -2052,7 +1848,6 @@ bool RuleL197([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "そうもな"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # V 어미는 현재 동사가 であ이거나 동사의 ことに 뒤에 온 な이면 ‘-ㄹ 것이다’를 고른다.
 // local 198
 //     src == "であ"
 //     src == "な" and pos[-1] is 4** and end.src[-1] == "ことに"
@@ -2061,7 +1856,6 @@ bool RuleL198([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "な"sv) && PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "ことに"sv));
 }
 
-// # 공통 동사 어미 V는 しまう·気がつく·行く 앞이나 정해진 연결 문맥에서 ‘-아/어’를 고른다.
 // local 199
 //     (src[+1] == "しま" or src[+1] == "気がつ") and pos[+1] is 4**
 //     src == "に限"
@@ -2086,7 +1880,6 @@ bool RuleL199([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "1**"sv) && PumsaEq(p, 2, "2**"sv));
 }
 
-// # 공통 동사 어미 V는 よい류 앞에서 ‘-아/어도’를 고르고 특정 의문 문맥에서는 ‘-아/어야’로 바꾼다.
 // local 200
 //     gram lacks Va and (src[-3] starts "どう" or src[-3] == "どんな") and (src[+1] == "よ" or src[+1] == "い" or src[+1] == "良") and pos[+1] is 7** and end.ko := "6야"
 //     gram lacks Va and (src[+1] == "よ" or src[+1] == "い" or src[+1] == "良い") and pos[+1] is 7**
@@ -2100,21 +1893,18 @@ bool RuleL200([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "良い"sv)) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # 어간이 だけであ이면 어미 V를 -아서·-어서로 고른다. (미발동: rare-context)
 // local 201
 //     src == "だけであ"
 bool RuleL201([[maybe_unused]] Item* p) {
     return SrcEq(p, 0, "だけであ"sv);
 }
 
-// # 공통 어미 항목 「V」는 형용동사 「べき」 앞에서 ‘-아/어야’를 고른다.
 // local 202
 //     src[+1] == "べき" and pos[+1] is 8**
 bool RuleL202([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "べき"sv) && PumsaEq(p, 1, "8**"sv));
 }
 
-// # 명사와 の 뒤이거나 追う 계열 동사 앞의 あと를 '뒤'로 고르고 앞 명사가 동작성 명사이면 の의 번역을 지운다.
 // local 203
 //     src[-1] == "の" and pos[-2] is 1** and gram[-2] has Hd and ko[-1] := ""
 //     src[-1] == "の" and pos[-2] is 1**
@@ -2126,28 +1916,24 @@ bool RuleL203([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "L追い"sv)) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 어미 うる는 다음 단어가 명사이면 가능 관형 표현 '-을 수 있는'을 고른다.
 // local 204
 //     pos[+1] is 1**
 bool RuleL204([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**"sv);
 }
 
-// # 문장 오른쪽 경계에 있는 어미 うる를 '-을 수 있다'로 고른다. (미발동: rare-context)
 // local 205
 //     gram has Ow
 bool RuleL205([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # かねる는 다음 말이 명사·い형용사·형용동사이면 ‘-기 어려운’ 어미를 고른다.
 // local 206
 //     pos[+1] is 1**|7**|8**
 bool RuleL206([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**7**8**"sv);
 }
 
-// # 「ことを」 또는 「状況を」 뒤에서 「さ」를 ‘가리키다’로 고른다. (미발동: rare-context)
 // local 207
 //     src[-1] == "を" and pos[-1] is 2** and pos[-2] is 4** and end.src[-2] == "こと"
 //     src[-1] == "を" and pos[-1] is 2** and src[-2] == "こと" and pos[-2] is 1** and src[-3] == "の" and pos[-3] is 2**
@@ -2158,21 +1944,18 @@ bool RuleL207([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "を"sv) && PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "状況"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # しか는 다음 단어가 부정 형용사 な이면 ‘-ㄹ 수 밖에’ 어미로 고른다.
 // local 208
 //     src[+1] == "な" and pos[+1] is 7**
 bool RuleL208([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "な"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # でしょうか는 앞말이 명사이면 ‘입니까’를 고른다.
 // local 209
 //     pos[-1] is 1**
 bool RuleL209([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # でも는 証拠·一度·언어·UQf 뒤, 何でも 앞, どんな·たとえ 양보 문맥, た로 끝나는 い형용사 앞 및 何か問題 뒤에서 ‘(이)라도’를 고른다.
 // local 210
 //     (src[-1] == "証拠" or src[-1] == "一度")
 //     (sem[-1] has QLG or sem[-1] has UQf)
@@ -2194,7 +1977,6 @@ bool RuleL210([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "7**8**"sv) && SrcEq(p, -3, "たとえ"sv));
 }
 
-// # でも는 以外・現在 뒤나 동사의 とき・時 어미 뒤에서 '에도'를 고른다.
 // local 211
 //     src[-1] == "以外"
 //     pos[-1] is 4** and (end.src[-1] == "とき" or end.src[-1] == "時")
@@ -2206,15 +1988,12 @@ bool RuleL211([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "現在"sv);
 }
 
-// # 장소 의미의 앞말 뒤에 붙은 でも를 '에서도'로 고른다.
-// # [의심] 앞 명사가 장소라는 조건만으로 でも를 처소격으로 바꾸어 목적어의 예시·선택 의미를 잃는다; 자작문 家でも買うか。 → CLI 「집에서도 살까.」, WHY でも LocalRule 212 에서도; 집이라도 살까라는 뜻이다.
 // local 212
 //     sem[-1] under VPl
 bool RuleL212([[maybe_unused]] Item* p) {
     return AttrMinusEq(p, -1, "VPl"sv);
 }
 
-// # でも는 바로 뒤에 부정 형용사 な가 오거나 명사와 でも를 거쳐 な가 오면 '도'를 고른다.
 // local 213
 //     src[+1] == "な" and pos[+1] is 7**
 //     pos[+1] is 1** and src[+2] == "でも" and pos[+2] is 2** and src[+3] == "な" and pos[+3] is 7**
@@ -2223,7 +2002,6 @@ bool RuleL213([[maybe_unused]] Item* p) {
            (PumsaEq(p, 1, "1**"sv) && SrcEq(p, 2, "でも"sv) && PumsaEq(p, 2, "2**"sv) && SrcEq(p, 3, "な"sv) && PumsaEq(p, 3, "7**"sv));
 }
 
-// # でも는 사람·눈·팔 의미의 명사 뒤, いくら가 앞선 양보 문맥, い·よ 형용사나 何でも 앞, する·お願いする 등의 문맥에서 ‘(이)라도’를 고른다.
 // local 214
 //     src[+1] == "する" and ko[+1] == "&AV@" and pos[+1] is 4**
 //     pos[-1] is 1** and pos[-2] is 4**|7**|8** and src[-3] == "いくら"
@@ -2243,7 +2021,6 @@ bool RuleL214([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "お願い"sv) && SrcEq(p, 2, "する"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # でも는 운송·수단·재료·금전·도구 등의 의미 코드가 있는 말이나 的으로 끝나는 말 뒤에서 ‘(으)로도’를 고른다.
 // local 215
 //     sem[-1] has VTp|QAA|VPa|VCp|VTw|VMo|UCl|VPe
 //     src[-1] ends "的"
@@ -2252,14 +2029,12 @@ bool RuleL215([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "R的"sv);
 }
 
-// # など는 다음 말이 조사이고 문장 오른쪽 경계에 있으면 ‘등’으로 고른다.
 // local 216
 //     pos[+1] is 2** and gram[+1] has Ow
 bool RuleL216([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && GramEq(p, 1, "Ow"sv));
 }
 
-// # など는 명사 뒤의 조사·부사·동사 연결이나 장소에서의 열거 구문에서 ‘등’으로 고른다.
 // local 217
 //     pos[-1] is 1** and sem[-1] has VPl and src[+1] == "で" and ko[+1] == "에서" and pos[+1] is 2**
 //     pos[-1] is 1** and pos[+1] is 2**|3**|4**
@@ -2268,7 +2043,6 @@ bool RuleL217([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "2**3**4**"sv));
 }
 
-// # なの를 물음표 앞이나 문장 오른쪽 경계에서 '-이야'로 선택한다.
 // local 218
 //     ko[+1] == "?"
 //     gram has Ow
@@ -2277,7 +2051,6 @@ bool RuleL218([[maybe_unused]] Item* p) {
            GramEq(p, 0, "Ow"sv);
 }
 
-// # にも는 명사 뒤의 변화 동사 な 또는 동사 뒤의 가능 표현 なれ 앞에서 '(으)로도'를 고른다.
 // local 219
 //     pos[-1] is 1** and src[+1] == "な" and ko[+1] == "&C6@"
 //     pos[-1] is 4** and src[+1] == "なれ" and ko[+1] == "될 수 &HN@"
@@ -2286,22 +2059,18 @@ bool RuleL219([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && SrcEq(p, 1, "なれ"sv) && DstEq(p, 1, "될 수 &HN@"sv));
 }
 
-// # 명사와 동사 뒤의 のみ는 앞 명사의 뜻을 유지하며 관형형 '-ㄹ 뿐'을 고른다.
 // local 220
 //     pos[-1] is 4** and pos[-2] is 1**
 bool RuleL220([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # のみ는 명사 뒤에서 であ 동사에 이어지면 한정 표현 ‘뿐’으로 고른다.
 // local 221
 //     pos[-1] is 1** and src[+1] == "であ" and pos[+1] is 4**
 bool RuleL221([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && SrcEq(p, 1, "であ"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 시간·명사·수량 등의 뒤나 지정된 조사 앞에서 'ばかり'를 '만'으로 고르고 형용사 인용형 뒤에서는 '-다고만'으로 연결한다.
-// # [의심] 시간·수량 뒤의 ばかり에는 대략이라는 흔한 용법도 있는데 시간 명사라는 이유만으로 만을 강제한다. 자작 예 三十分ばかり待った。 → 30분만 기다렸다.; -why: ばかり LocalRule 222 만. 문맥 없는 수량 표현에서는 30분쯤이라는 독해를 놓친다.
 // local 222
 //     pos[-1] is 1** and sem[-1] has UMe
 //     pos[-1] is 1** and pos[+1] is 4**
@@ -2318,7 +2087,6 @@ bool RuleL222([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "を"sv));
 }
 
-// # ばかり는 조수사 뒤의 조사이거나 でない 앞일 때 ‘(뿐)만’을 고른다.
 // local 223
 //     pos is 2** and pos[-1] is 1** and gram[-1] has Ct
 //     src[+1] == "でな" and ko[+1] == "(은)는 아$A3@" and pos[+1] is 7**
@@ -2327,21 +2095,18 @@ bool RuleL223([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "でな"sv) && DstEq(p, 1, "(은)는 아$A3@"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # ばかりの는 현재 어간이 する이고 앞에 する형 명사와 시간 의미의 말이 있으면 -은지 얼마 안된으로 고른다.
 // local 224
 //     src == "する" and pos[-1] is 1** and gram[-1] has Hd and sem[-2] has UMe
 bool RuleL224([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "する"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Hd"sv) && AttrEq(p, -2, "UMe"sv));
 }
 
-// # 문장 오른쪽 경계에서 어미 ますから의 을 테니까 후보를 고른다. (미발동: other)
 // local 225
 //     gram has Ow
 bool RuleL225([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ow"sv);
 }
 
-// # 지정된 겸양·질문 동사의 'ますが' 어미를 의향을 나타내는 '-겠습니다만'으로 고른다.
 // local 226
 //     (src == "ご不審のことと拝察いた" or src == "お伺い" or src == "いた" or src ends "伺") and pos is 4**
 //     src == "する" and src[-1] == "おたずね"
@@ -2353,7 +2118,6 @@ bool RuleL226([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "する"sv) && SrcEq(p, -1, "おたずね"sv));
 }
 
-// # ますね는 またくる나 동사 뒤의 おく 및 する형 명사와 しておく 구문에서 약속 어미 ‘-ㄹ게요’로 고른다.
 // local 227
 //     (src == "くる" or src == "来る") and pos is 4** and src[-1] == "また"
 //     (src == "お" or src == "置") and pos is 4** and pos[-1] is 4**
@@ -2366,14 +2130,12 @@ bool RuleL227([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "してお"sv) && PumsaEq(p, 0, "4**"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Hd"sv));
 }
 
-// # 어미 ませんね는 현재 단어에 Ma 문법 코드가 있으면 추측형 '-겠네요'를 고른다.
 // local 228
 //     gram has Ma
 bool RuleL228([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Ma"sv);
 }
 
-// # もの는 현재 동사 어간이 たべ·食べ이면 현재 어미를 관형형 3을 쓰는 ‘3 것’으로 바꾸고 해당 후보를 고른다.
 // local 229
 //     (src == "たべ" or src == "食べ") and pos is 4** and end.ko := "3 것"
 bool RuleL229([[maybe_unused]] Item* p) {
@@ -2381,35 +2143,30 @@ bool RuleL229([[maybe_unused]] Item* p) {
            SrcEq(p, 0, "食べ"sv)) && PumsaEq(p, 0, "4**"sv) && GobiDstSet(p, 0, "3 것"sv));
 }
 
-// # ものか를 동사 によ의 어미이고 다음 번역이 물음표일 때 것일까로 고른다. (미발동: other)
 // local 230
 //     src == "によ" and pos is 4** and ko[+1] == "?"
 bool RuleL230([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "によ"sv) && PumsaEq(p, 0, "4**"sv) && DstEq(p, 1, "\077"sv));
 }
 
-// # 「前」가 동사의 기본 명사수식형 뒤에 오면 ‘전’을 고르고 앞 동사의 어미를 ‘-기’로 바꾼다.
 // local 231
 //     pos[-1] is 4** and end.pos[-1] is 500 and end.ko[-1] := "1기"
 bool RuleL231([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && GobiDstSet(p, -1, "1기"sv));
 }
 
-// # なじみの 뒤에 동사나 い형용사가 오면 번역을 친숙함이로 바꾼다. (미발동: rare-word)
 // local 232
 //     pos[+1] is 4**|7** and ko := "친숙함이"
 bool RuleL232([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "4**7**"sv) && DstSet(p, 0, "친숙함이"sv));
 }
 
-// # 同様の 앞에 など와 と가 차례로 오면 같은을 고르고 と를 와·과로 바꾼다. (미발동: rare-context)
 // local 233
 //     src[-1] == "と" and src[-2] == "など" and ko[-1] := "(와)과"
 bool RuleL233([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && SrcEq(p, -2, "など"sv) && DstSet(p, -1, "(와)과"sv));
 }
 
-// # くる는 な로 끝나는 동사나 ひんやりと의 연결형 뒤에서 -지다로 고른다.
 // local 234
 //     src[-1] ends "な" and pos[-1] is 4** and end.pos[-1] is 57*
 //     src[-1] == "ひんやりと" and pos[-1] is 4** and end.pos[-1] is 57*
@@ -2418,7 +2175,6 @@ bool RuleL234([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "ひんやりと"sv) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv));
 }
 
-// # い 뒤에 곳으로 번역되는 명사 ところ·所·とこ가 오면 좋다는 뜻을 고른다. (미발동: rare-context)
 // local 235
 //     (src[+1] == "ところ" or src[+1] == "所" or src[+1] == "とこ") and ko[+1] == "곳" and pos[+1] is 1**
 bool RuleL235([[maybe_unused]] Item* p) {
@@ -2427,7 +2183,6 @@ bool RuleL235([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "とこ"sv)) && DstEq(p, 1, "곳"sv) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # い는 동사 연결형 뒤나 장소를 나타내는 へ・に 등의 뒤에서 '가다'를 고른다.
 // local 236
 //     pos[-1] is 4** and end.pos[-1] is 57*
 //     end.src[-1] == "" and end.pos[-1] is 571
@@ -2443,7 +2198,6 @@ bool RuleL236([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "に"sv)) && AttrMinusEq(p, -2, "VPl"sv));
 }
 
-// # 보조동사 「い」는 앞 동사가 57계열 연결 어미를 취할 때 ‘있다’ 후보를 고른다.
 // local 237
 //     end.src starts "ません" and pos[-1] is 4** and end.pos[-1] is 570
 //     pos[-1] is 4** and end.pos[-1] is 57*
@@ -2452,7 +2206,6 @@ bool RuleL237([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv));
 }
 
-// # 사람 관련 가정형·ません형 또는 지정된 そう 문맥의 い를 '있다'로 고르고 ません형에서는 '없다'로 바꾼다.
 // local 238
 //     end.src == "ば" and end.pos is 53* and pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VHn
 //     end.src starts "ません" and ko := "&M9@"
@@ -2463,7 +2216,6 @@ bool RuleL238([[maybe_unused]] Item* p) {
            (GobiPumsaEq(p, 0, "5:0"sv) && SrcEq(p, 1, "そう"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 인용 조사나 동사·형용사의 인용형 뒤 또는 言葉 앞의 い를 하다로 고른다.
 // local 239
 //     pos[-1] is 4** and end.src[-1] == "からと" and end.pos[-1] is 56*
 //     (src[-1] == "へと" or src[-1] == "なんて" or src[-1] == "だと" or src[-1] == "」と") and pos[-1] is 2**
@@ -2488,7 +2240,6 @@ bool RuleL239([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "とか"sv);
 }
 
-// # いけな의 '안 되다' 후보를 앞 동사의 연결형 뒤에서 고르면서 앞 어미를 '-어선' 또는 '-어서는'으로 바꾼다.
 // local 240
 //     pos[-1] is 4** and end.pos[-1] is 57* and end.ko[-1] := "6선"
 //     pos[-1] is 4** and end.src[-1] == "わけには" and end.ko[-1] := "6서는"
@@ -2497,7 +2248,6 @@ bool RuleL240([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "わけには"sv) && GobiDstSet(p, -1, "6서는"sv));
 }
 
-// # うま는 음식 문맥에서 ‘맛있다’를 고르되, 뒤의 비음식 명사를 꾸미는 경우는 제외한다.
 // local 241
 //     (gram has Ow or pos[+1] is not 1** or sem[+1] under VFd) and (sem[+1] under VFd|VFd or sem[-1] under VFd|VFd or sem[-2] under VFd|VFd or src[-1] == "すご" and pos[-1] is 7** or sem[+3] has VFd or sem[+2] has VFd)
 bool RuleL241([[maybe_unused]] Item* p) {
@@ -2511,14 +2261,12 @@ bool RuleL241([[maybe_unused]] Item* p) {
            AttrEq(p, 2, "VFd"sv)));
 }
 
-// # がた는 동사의 연용형 뒤에서 ‘어렵다’를 고른다.
 // local 242
 //     pos[-1] is 4** and end.pos[-1] is 5:*
 bool RuleL242([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:*"sv));
 }
 
-// # 앞의 み 동사와 지정된 활용 조건이 맞거나 뒤에 所存이 오면 た의 희망·비유 표현과 어미를 조정한다. (미발동: rare-context)
 // local 243
 //     src[-1] == "み" and pos[-1] is 4** and end.pos[-1] is 5:* and pos[-2] is 4** and end.src[-2] == "る" and end.pos[-2] is 57* and ko := "$DF@"
 //     src[+1] == "所存" and end.ko := "4"
@@ -2529,7 +2277,6 @@ bool RuleL243([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "み"sv) && PumsaEq(p, -2, "1**"sv) && SrcEq(p, -3, "まるで"sv) && DstSet(p, 0, "$DF@"sv));
 }
 
-// # た가 정해진 관형 어미와 수량 표현을 가질 때 '단'을 만드는 어간으로 바꾸거나 だけ 앞에서 '단지'로 바꾸며 어미를 조정한다.
 // local 244
 //     end.pos is 56* and pos[+1] is 1** and gram[+1] has Nj|Nd and pos[+2] is 1** and gram[+2] has Ct and ko := "&K4@" and end.ko := "4"
 //     end.pos is 56* and pos[+1] is 1** and gram[+1] has Ct and ko := "&K4@" and end.ko := "4"
@@ -2540,7 +2287,6 @@ bool RuleL244([[maybe_unused]] Item* p) {
            (GobiPumsaEq(p, 0, "56*"sv) && SrcEq(p, 1, "Rだけ"sv) && DstSet(p, 0, "단지    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # 장소에서 떠나거나 수량으로 나타낸 시간이 지나가는 문맥에서 た를 떠나다로 고른다. (미발동: rare-context)
 // local 245
 //     (src[-1] == "を" or src[-1] == "から" or src[-1] == "に") and sem[-2] has VPl
 //     src[-1] == "に" and sem[-2] has UMe and gram[-2] has Ct and gram[-3] has Nj|Nd
@@ -2551,21 +2297,18 @@ bool RuleL245([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "に"sv) && AttrEq(p, -2, "UMe"sv) && GramEq(p, -2, "Ct"sv) && GramEq(p, -3, "NjNd"sv));
 }
 
-// # 바로 앞이 も이고 그 앞이 年이면 동사 た를 '지나다'로 고른다. (미발동: rare-context)
 // local 246
 //     src[-1] == "も" and src[-2] == "年"
 bool RuleL246([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "も"sv) && SrcEq(p, -2, "年"sv));
 }
 
-// # 동사의 「ことの」 뒤에서 「できな」를 고르고 앞의 명사화 어미를 ‘수’로 바꾸며 「の」의 번역을 지운다. (미발동: rare-context)
 // local 247
 //     src[-1] == "の" and pos[-2] is 4** and end.src[-2] == "こと" and end.pos[-2] is 50* and ko := " $FA@" and ko[-1] := "" and end.ko[-2] := "3 수"
 bool RuleL247([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "4**"sv) && GobiSrcEq(p, -2, "こと"sv) && GobiPumsaEq(p, -2, "50*"sv) && DstSet(p, 0, " $FA@"sv) && DstSet(p, -1, ""sv) && GobiDstSet(p, -2, "3 수"sv));
 }
 
-// # なくな는 '-지'로 끝난 동사나 く형 형용사 또는 じゃ・で형 형용동사 뒤에서 '않게 되다'를 고른다.
 // local 248
 //     pos[-1] is 4** and end.ko[-1] == "1지"
 //     pos[-1] is 7** and end.src[-1] == "く"
@@ -2577,7 +2320,6 @@ bool RuleL248([[maybe_unused]] Item* p) {
            GobiSrcEq(p, -1, "で"sv)));
 }
 
-// # なくな는 비인칭 명사와 조사 뒤나 가능 동사 뒤에서 ‘없어지다’로 고르고 특정 부정 형용사 뒤에서는 ‘없게 되다’로 바꾼다.
 // local 249
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] lacks VHn
 //     pos[-1] is 7** and gram[-1] has Yn and ko := "없게 &C6@"
@@ -2589,21 +2331,18 @@ bool RuleL249([[maybe_unused]] Item* p) {
            GramEq(p, -1, "Ka"sv)));
 }
 
-// # にく는 앞 동사 어미가 5:* 계열이면 어렵다로 고른다.
 // local 250
 //     pos[-1] is 4** and end.pos[-1] is 5:*
 bool RuleL250([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:*"sv));
 }
 
-// # ぬぐえな는 앞 조사가 が이면 지울 수 없다를 고르면서 그 조사를 (을)를로 바꾼다. (미발동: rare-word)
 // local 251
 //     src[-1] == "が" and ko[-1] := "(을)를"
 bool RuleL251([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "が"sv) && DstSet(p, -1, "(을)를"sv));
 }
 
-// # やさし는 体·からだ·身体·肌와 に 뒤에서 신체에 이롭다는 ‘좋다’를 고른다.
 // local 252
 //     src[-1] == "に" and (src[-2] == "体" or src[-2] == "からだ" or src[-2] == "身体" or src[-2] == "肌")
 bool RuleL252([[maybe_unused]] Item* p) {
@@ -2613,21 +2352,18 @@ bool RuleL252([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "肌"sv)));
 }
 
-// # やす는 연용형 동사 뒤에서 용이함을 나타내는 ‘쉽다’로 고른다.
 // local 253
 //     pos[-1] is 4** and end.pos[-1] is 5:*
 bool RuleL253([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:*"sv));
 }
 
-// # 문장 첫머리의 よろし가 かったら로 활용되면 좋다 대신 괜찮다로 바꾼다. (미발동: rare-context)
 // local 254
 //     gram has Hz and end.src == "かったら" and ko := "괜$DC@"
 bool RuleL254([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Hz"sv) && GobiSrcEq(p, 0, "かったら"sv) && DstSet(p, 0, "괜$DC@"sv));
 }
 
-// # らし를 사람·고유명사·クリスマス나 특정 의미의 명사 뒤에서 '-답다'로 고르고 뒤에 な·なって가 오면 연결어미를 '-어'로 바꾼다.
 // local 255
 //     pos[-1] is 1** and sem[-1] under VHn
 //     src[-1] == "クリスマス"
@@ -2645,7 +2381,6 @@ bool RuleL255([[maybe_unused]] Item* p) {
            (AttrEq(p, -1, "UAq"sv) && SrcEq(p, -2, "いかにも"sv));
 }
 
-// # 「らし」는 형용사·동사의 종결형이나 사람의 소유 표현 뒤에서 ‘같다’를 고르고 필요한 앞말을 ‘의 것’ 또는 ‘것’ 형태로 바꾼다.
 // local 256
 //     pos[-1] is 7** and (end.src[-1] == "い" or end.src[-1] == "かった")
 //     src[-1] == "の" and sem[-2] has VHn and ko[-1] := "의 것"
@@ -2659,21 +2394,18 @@ bool RuleL256([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, ""sv) && GobiDstSet(p, -1, "4 것"sv));
 }
 
-// # 強은 く로 활용되고 뒤에 명사와 쉼표가 이어지면 어미 번역을 부사형 '-게'로 바꾼다.
 // local 257
 //     end.src == "く" and pos[+1] is 1** and src[+2] == "、" and end.ko := "1게"
 bool RuleL257([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "く"sv) && PumsaEq(p, 1, "1**"sv) && SrcEq(p, 2, "、"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 古가 くは로 활용되고 다음 어간이 な가 아니면 옛날에는으로 바꾸고 어미를 지운다. (미발동: rare-context)
 // local 258
 //     end.src == "くは" and src[+1] != "な" and ko := "옛날에는    " and end.ko := ""
 bool RuleL258([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "くは"sv) && SrcNe(p, 1, "な"sv) && DstSet(p, 0, "옛날에는    "sv) && GobiDstSet(p, 0, ""sv));
 }
 
-// # 高는 나무·격·위험·칼로리 등 지정 대상이나 의미 문맥에서 ‘높다’를 고른다.
 // local 259
 //     (src[+1] == "木" or src[+1] starts "格" or src[+1] ends "格" or src[+1] == "リスク" or src[+1] == "カロリー")
 //     pos[-1] is 2** and sem[-2] has VFn|VBl
@@ -2698,7 +2430,6 @@ bool RuleL259([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "が"sv) && SrcEq(p, -2, "R率"sv));
 }
 
-// # 조사나 지정된 문법 표지 앞의 '近'을 '가깝다'로 고르고 문장 첫머리의 '歳·年'이 앞쪽에 있으면 그 번역을 '나이'로 바꾼다.
 // local 260
 //     gram[+1] within Z2
 //     pos[+1] is 2**
@@ -2710,7 +2441,6 @@ bool RuleL260([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "年"sv)) && GramEq(p, -2, "Hz"sv) && DstSet(p, -2, "나이"sv));
 }
 
-// # 多는 바로 앞말이 も이거나 앞의 数え切れなが いほど 어미와 ‘3 정도로’ 번역을 가지면 ‘많다’를 고른다.
 // local 261
 //     src[-1] == "数え切れな" and pos[-1] is 7** and end.src[-1] == "いほど" and end.ko[-1] == "3 정도로"
 //     src[-1] == "も"
@@ -2719,14 +2449,12 @@ bool RuleL261([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "も"sv);
 }
 
-// # 無 앞에 조사 후보로 선택된 なのでは가 있으면 아니다를 고른다. (미발동: rare-context)
 // local 262
 //     src[-1] == "なのでは" and pos[-1] is 2**
 bool RuleL262([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "なのでは"sv) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 分からな의 '모르다' 후보를 목적격으로 번역된 が나 사람 뒤의 には 다음에서 고르고 후자의 조사는 주제 조사로 바꾼다.
 // local 263
 //     src[-1] == "が" and ko[-1] == "(을)를" and pos[-1] is 2**
 //     src[-1] == "には" and pos[-2] is 1** and sem[-2] under VHn and ko[-1] := "(은)는"
@@ -2735,28 +2463,24 @@ bool RuleL263([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "には"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VHn"sv) && DstSet(p, -1, "(은)는"sv));
 }
 
-// # 思わし의 두 단어 앞이 状態이면 번역을 좋다로 바꾼다. (미발동: rare-word)
 // local 264
 //     src[-2] == "状態" and ko := "$DE@"
 bool RuleL264([[maybe_unused]] Item* p) {
     return (SrcEq(p, -2, "状態"sv) && DstSet(p, 0, "$DE@"sv));
 }
 
-// # 手っ取り早가 く형이면 민첩하게로 번역하도록 어미를 바꾼다. (미발동: rare-context)
 // local 265
 //     end.src == "く" and end.ko := "1게"
 bool RuleL265([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "く"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 申し訳な의 어미가 くて이면 한국어 어미를 서로 바꿔 미안해서로 잇는다. (미발동: rare-context)
 // local 266
 //     end.src == "くて" and end.ko := "6서"
 bool RuleL266([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "くて"sv) && GobiDstSet(p, 0, "6서"sv));
 }
 
-// # 辛는 음식·관련 대상 의미가 주변에 있을 때 맛을 나타내는 ‘맵다’로 고른다.
 // local 267
 //     pos[-1] is 2** and sem[-2] has VPt|VFd
 //     sem[-3] under VFd
@@ -2765,21 +2489,18 @@ bool RuleL267([[maybe_unused]] Item* p) {
            AttrMinusEq(p, -3, "VFd"sv);
 }
 
-// # 사람 일반 의미코드가 없는 명사와 とは 뒤에서 言い難를 말하기 어렵다로 고르고 とは를 이라고는으로 바꾼다. (미발동: rare-context)
 // local 268
 //     src[-1] == "とは" and pos[-2] is 1** and sem[-2] lacks VHn and ko[-1] := "(이)라고는"
 bool RuleL268([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "とは"sv) && PumsaEq(p, -2, "1**"sv) && AttrNe(p, -2, "VHn"sv) && DstSet(p, -1, "(이)라고는"sv));
 }
 
-// # 易는 앞 동사가 5:0 활용형이면 '쉽다'를 고르고 앞 어미를 명사형 '-기'로 바꾼다.
 // local 269
 //     pos[-1] is 4** and end.pos[-1] is 5:0 and end.ko[-1] := "1기"
 bool RuleL269([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:0"sv) && GobiDstSet(p, -1, "1기"sv));
 }
 
-// # 遠는 특정 관형형이나 -く 뒤 조사 및 だから·ですから 앞에서 먼 곳을 나타내도록 어미를 고르거나 바꾼다.
 // local 270
 //     end.pos is 5c1 and end.src == "" and pos[+1] is 1**
 //     end.src == "く" and pos[+1] is 2** and end.ko := "4 곳"
@@ -2791,14 +2512,12 @@ bool RuleL270([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "ですから"sv)) && GobiDstSet(p, 0, "4 곳"sv));
 }
 
-// # 長에 いですから가 붙으면 어미를 '-으니까'로 바꾸어 '기니까'로 옮긴다. (미발동: rare-context)
 // local 271
 //     end.src == "いですから" and end.ko := "2으니까"
 bool RuleL271([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "いですから"sv) && GobiDstSet(p, 0, "2으니까"sv));
 }
 
-// # 「著し」의 어미가 「く」이고 뒤에 많고 적음·높고 낮음·쌈을 나타내는 지정 형용사가 오면 ‘현저하게’로 잇는다. (미발동: rare-context)
 // local 272
 //     end.src == "く" and (src[+1] == "多" or src[+1] == "少な" or src[+1] == "高" or src[+1] == "低" or src[+1] == "安") and pos[+1] is 7** and end.ko := "1게"
 bool RuleL272([[maybe_unused]] Item* p) {
@@ -2809,14 +2528,12 @@ bool RuleL272([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "安"sv)) && PumsaEq(p, 1, "7**"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 「重」의 어미가 명사화형 「さ」이면 어간 번역을 ‘무게’로 바꾼다.
 // local 273
 //     end.src == "さ" and ko := "무게    "
 bool RuleL273([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, 0, "さ"sv) && DstSet(p, 0, "무게    "sv));
 }
 
-// # 「珍し」가 「く」형으로 동사나 동작명사와 「する」 앞에 오면 어미를 ‘-게’로 바꿔 ‘드물게’를 만든다.
 // local 274
 //     end.src == "く" and pos[+1] is 1** and gram[+1] has Hd and src[+2] == "する" and pos[+2] is 4** and end.ko := "1게"
 //     end.src == "く" and pos[+1] is 4** and end.ko := "1게"
@@ -2825,14 +2542,12 @@ bool RuleL274([[maybe_unused]] Item* p) {
            (GobiSrcEq(p, 0, "く"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, 0, "1게"sv));
 }
 
-// # 出来な는 앞이 の이고 그 앞 동사에 こと 어미가 있으면 할 수 없다 구조로 번역을 조정하고 の를 지운다. (미발동: rare-context)
 // local 275
 //     src[-1] == "の" and pos[-2] is 4** and end.src[-2] == "こと" and ko := " $FA@" and ko[-1] := "" and end.ko[-2] := "3 수"
 bool RuleL275([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "4**"sv) && GobiSrcEq(p, -2, "こと"sv) && DstSet(p, 0, " $FA@"sv) && DstSet(p, -1, ""sv) && GobiDstSet(p, -2, "3 수"sv));
 }
 
-// # 부사 뒤나 신체 부위 명사와 조사 뒤의 '痛'을 '아프다'로 고른다.
 // local 276
 //     pos[-1] is 3**
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] has VBp
@@ -2841,35 +2556,30 @@ bool RuleL276([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "VBp"sv));
 }
 
-// # ずつ를 조수사 명사 뒤에서 '씩'으로 선택한다.
 // local 277
 //     pos[-1] is 1** and gram[-1] has Ct
 bool RuleL277([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Ct"sv));
 }
 
-// # そのため는 쉼표 앞에서 ‘그 때문에’를 고른다.
 // local 278
 //     src[+1] == "、"
 bool RuleL278([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "、"sv);
 }
 
-// # 조사가 뒤따르는 そのため를 '그 때문'으로 고른다.
 // local 279
 //     pos[+1] is 2**
 bool RuleL279([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "2**"sv);
 }
 
-// # たち는 사람 명사 뒤에서 복수 접미사 ‘들’을 고른다.
 // local 280
 //     pos[-1] is 1** and sem[-1] under VHn
 bool RuleL280([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv));
 }
 
-// # だから는 문장 처음이나 여는 인용부호 뒤에서 접속 표현 '그러니까'를 고른다.
 // local 281
 //     gram has Hz
 //     ko[-1] == "「"
@@ -2878,28 +2588,24 @@ bool RuleL281([[maybe_unused]] Item* p) {
            DstEq(p, -1, "「"sv);
 }
 
-// # だから는 せっかく 뒤에서 앞말의 이유를 잇는 '이니까'를 고른다.
 // local 282
 //     src[-1] == "せっかく"
 bool RuleL282([[maybe_unused]] Item* p) {
     return SrcEq(p, -1, "せっかく"sv);
 }
 
-// # 문장 첫머리의 だからこそ를 그러니까로 고른다. (미발동: rare-word)
 // local 283
 //     gram has Hz
 bool RuleL283([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Hz"sv);
 }
 
-// # だからこそ를 명사 뒤에서 이기 때문에 더욱으로 고른다. (미발동: other)
 // local 284
 //     pos[-1] is 1**
 bool RuleL284([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # 「だが」가 문장 첫머리나 여는 인용부호 뒤에 오면 ‘하지만’을 고른다.
 // local 285
 //     gram has Hz
 //     src[-1] == "「"
@@ -2908,28 +2614,24 @@ bool RuleL285([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "「"sv);
 }
 
-// # だけど는 문장 처음에서 역접 접속 표현 '그렇지만'을 고른다.
 // local 286
 //     gram has Hz
 bool RuleL286([[maybe_unused]] Item* p) {
     return GramEq(p, 0, "Hz"sv);
 }
 
-// # だし는 쉼표 앞에서 나열 표현 ‘이고’를 고른다.
 // local 287
 //     ko[+1] == ","
 bool RuleL287([[maybe_unused]] Item* p) {
     return DstEq(p, 1, ","sv);
 }
 
-// # だった 다음에 쉼표와 との가 차례로 오면 이었였다 계열 번역을 고른다. (미발동: rare-context)
 // local 288
 //     src[+1] == "、" and src[+2] == "との"
 bool RuleL288([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "、"sv) && SrcEq(p, 2, "との"sv));
 }
 
-// # 명사나 추정·설명 표현 앞의 'だった'를 과거 관형형 '(이었)였던'으로 고른다.
 // local 289
 //     pos[+1] is 1**
 //     (src[+1] == "ことが分か" or src[+1] == "ことがわか") and pos[+1] is 4**
@@ -2949,21 +2651,18 @@ bool RuleL289([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "だけに"sv);
 }
 
-// # だったか는 동사·형용사·형용동사 앞에서 ‘(이었)였는지’를 고른다.
 // local 290
 //     pos[+1] is 4**|7**|8**
 bool RuleL290([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "4**7**8**"sv);
 }
 
-// # 문장 끝의 だって는 대명사 뒤의 첨가·강조를 제외하고 전언 표현 ‘(이)래’를 고른다.
 // local 291
 //     gram has Ow and pos[-1] is not 12*
 bool RuleL291([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Ow"sv) && PumsaNe(p, -1, "12*"sv));
 }
 
-// # だとは 발화·인식 등의 문맥에서 ‘(이)라고’를 고르되, 바로 뒤의 困る·助かる는 조건형으로 남긴다.
 // local 292
 //     pos[+1] is 4** and src[+1] != "困" and src[+1] != "助か"
 //     src[+1] == "指摘" and pos[+1] is 1**
@@ -2990,21 +2689,18 @@ bool RuleL292([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "言えなくもな"sv)) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # だよ 앞 동사의 어미가 はず이고 품사가 560이면 그 어미를 과거형에 을 거를 붙이는 형태로 바꾼다. (미발동: rare-context)
 // local 293
 //     pos[-1] is 4** and end.src[-1] == "はず" and end.pos[-1] is 560 and end.ko[-1] := "5을 거"
 bool RuleL293([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "はず"sv) && GobiPumsaEq(p, -1, "560"sv) && GobiDstSet(p, -1, "5을 거"sv));
 }
 
-// # つい 뒤에 형용사 어간 遅가 오면 그만이라는 뜻을 고른다. (미발동: rare-context)
 // local 294
 //     src[+1] == "遅" and pos[+1] is 7**
 bool RuleL294([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "遅"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # では는 앞 명사가 특정 장소·시설 계열 코드를 지니거나 市場로 끝나면 에서는으로 고른다.
 // local 295
 //     pos[-1] is 1** and sem[-1] has QCT|VPl|VSw
 //     src[-1] ends "市場"
@@ -3013,7 +2709,6 @@ bool RuleL295([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "R市場"sv);
 }
 
-// # 앞말이 年·月·間·分으로 끝나거나 쉼표이면 ないし를 내지로 고른다. (미발동: rare-context)
 // local 296
 //     (src[-1] ends "年" or src[-1] ends "月" or src[-1] ends "間" or src[-1] ends "分")
 //     ko[-1] == ","
@@ -3025,15 +2720,12 @@ bool RuleL296([[maybe_unused]] Item* p) {
            DstEq(p, -1, ","sv);
 }
 
-// # 명사 앞의 などの를 '등의'로 고른다.
 // local 297
 //     pos[+1] is 1**
 bool RuleL297([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**"sv);
 }
 
-// # などの는 사람 명사 뒤 말하기 동사 앞이나 형용사·형용동사 앞에서 주격 표현 ‘등이’를 고른다.
-// # [의심] 뒤가 형용사라는 이유만으로 소유·분류 수식도 주격 등이로 바꾼다; 자작문 犬などの小さい動物がいる。 → CLI 개등이 작은 동물이 있다.; -why などの LocalRule 298이며 개 등의 작은 동물이 맞다.
 // local 298
 //     pos[-1] is 1** and sem[-1] under VHn and pos[+1] is 4** and sem[+1] has UTs
 //     pos[+1] is 7**|8**
@@ -3042,49 +2734,42 @@ bool RuleL298([[maybe_unused]] Item* p) {
            PumsaEq(p, 1, "7**8**"sv);
 }
 
-// # なり는 사람 명사 뒤이면서 の 앞이면 '나름'을 고른다.
 // local 299
 //     sem[-1] has VHn and src[+1] == "の"
 bool RuleL299([[maybe_unused]] Item* p) {
     return (AttrEq(p, -1, "VHn"sv) && SrcEq(p, 1, "の"sv));
 }
 
-// # なんだ는 앞말이 명사이면 구어체 서술 조사 ‘(이)야’로 고른다.
 // local 300
 //     pos[-1] is 1**
 bool RuleL300([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # 앞말이 사람 의미 계열에 속하면 にこそ를 에게야말로로 고른다. (미발동: rare-context)
 // local 301
 //     sem[-1] under VHn
 bool RuleL301([[maybe_unused]] Item* p) {
     return AttrMinusEq(p, -1, "VHn"sv);
 }
 
-// # 시간 의미의 말 뒤에 오는 にこそ를 '에야말로'로 고른다. (미발동: rare-context)
 // local 302
 //     sem[-1] under UMe
 bool RuleL302([[maybe_unused]] Item* p) {
     return AttrMinusEq(p, -1, "UMe"sv);
 }
 
-// # にでも는 바로 앞 명사에 사람 의미 코드 VHn이 있으면 에게라도로 고른다.
 // local 303
 //     pos[-1] is 1** and sem[-1] has VHn
 bool RuleL303([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "VHn"sv));
 }
 
-// # にでも는 앞명사에 VTp·VPl·UDr·UXg·UMe 중 하나의 의미 코드가 있으면 ‘에라도’를 고른다.
 // local 304
 //     pos[-1] is 1** and sem[-1] has VTp|VPl|UDr|UXg|UMe
 bool RuleL304([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "VTpVPlUDrUXgUMe"sv));
 }
 
-// # 명사 「雨・あめ・雪」 뒤나 강수 의미의 말 뒤에서 「のなか」를 ‘속’으로 고른다. (미발동: rare-context)
 // local 305
 //     (src[-1] == "雨" or src[-1] == "あめ" or src[-1] == "雪") and pos[-1] is 1**
 //     sem[-1] has VSw
@@ -3095,28 +2780,24 @@ bool RuleL305([[maybe_unused]] Item* p) {
            AttrEq(p, -1, "VSw"sv);
 }
 
-// # のなか는 앞말이 장소 의미이면 내부를 나타내는 ‘안’으로 고른다.
 // local 306
 //     sem[-1] has VPl
 bool RuleL306([[maybe_unused]] Item* p) {
     return AttrEq(p, -1, "VPl"sv);
 }
 
-// # はじめ는 앞이 の이고 두 단어 앞에 시간 의미 코드 UMe가 있으면 초로 고른다. (미발동: rare-context)
 // local 307
 //     src[-1] == "の" and sem[-2] has UMe
 bool RuleL307([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && AttrEq(p, -2, "UMe"sv));
 }
 
-// # 부정 어미를 가진 동사 바로 뒤에서 はじめ를 시작하다로 고른다. (미발동: rare-context)
 // local 308
 //     pos[-1] is 4** and end.pos[-1] is 58*
 bool RuleL308([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "58*"sv));
 }
 
-// # へ는 도착·이동 동사 앞에서 목적지 조사 ‘에’로 고르되 移住する 앞에서는 ‘(으)로’로 바꾼다.
 // local 309
 //     (src[+1] == "着" or src[+1] == "たどり着")
 //     src[+1] == "やって" and ko[+1] == "&AH@"
@@ -3130,7 +2811,6 @@ bool RuleL309([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "移住"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "Hd"sv) && DstSet(p, 0, "(으)로"sv));
 }
 
-// # へ를 사람 명사 뒤나 사람의 ところ를 나타내는 표현 뒤에서 '-에게'로 선택한다.
 // local 310
 //     pos[-1] is 1** and sem[-1] has VHn|UAq
 //     src[-1] == "ところ" and src[-2] == "の" and pos[-3] is 1** and sem[-3] under VHn
@@ -3139,35 +2819,30 @@ bool RuleL310([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "ところ"sv) && SrcEq(p, -2, "の"sv) && PumsaEq(p, -3, "1**"sv) && AttrMinusEq(p, -3, "VHn"sv));
 }
 
-// # 장소 의미의 명사 뒤에 오는 'への'를 '에의'로 고른다.
 // local 311
 //     sem[-1] has VPl
 bool RuleL311([[maybe_unused]] Item* p) {
     return AttrEq(p, -1, "VPl"sv);
 }
 
-// # 「への」가 사람 의미 계열의 명사 뒤에 오면 ‘에게로의’를 고른다.
 // local 312
 //     pos[-1] is 1** and sem[-1] under VHn
 bool RuleL312([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv));
 }
 
-// # 사람을 나타내는 명사와 조사 뒤의 へは를 에게는으로 고른다.
 // local 313
 //     pos[-1] is 1** and sem[-1] has VHn
 bool RuleL313([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "VHn"sv));
 }
 
-// # まだ를 다음 단어의 어미가 いとは일 때 아직으로 고른다. (미발동: rare-context)
 // local 314
 //     end.src[+1] == "いとは"
 bool RuleL314([[maybe_unused]] Item* p) {
     return GobiSrcEq(p, 1, "いとは"sv);
 }
 
-// # 사람·법·조직 등 지정 의미의 명사나 管理에 붙은 の 뒤의 もと를 '아래'로 고른다.
 // local 315
 //     src[-1] == "の" and pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VHn|UTs|ULw|VMo|UYs
 //     src[-1] == "の" and pos[-1] is 2** and src[-2] == "管理" and pos[-2] is 1**
@@ -3176,7 +2851,6 @@ bool RuleL315([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "管理"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 「や」는 「一杯」 뒤나 동사 연결형의 「など」 뒤에서 ‘하다’를 고르고 「やることがある」 구문에서는 자신의 명사화 어미를 ‘-을 일이’로 바꾼다.
 // local 316
 //     src[-1] == "一杯"
 //     end.src == "ことが" and end.pos is 500 and src[+1] == "あ" and pos[+1] is 4** and end.ko := "3일이"
@@ -3187,7 +2861,6 @@ bool RuleL316([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "など"sv) && GobiPumsaEq(p, -1, "57*"sv));
 }
 
-// # 음식·물 등을 목적어로 받거나 동사의 연결형 뒤에 오는 'や'를 '주다'로 고른다.
 // local 317
 //     src[-1] == "を" and pos[-1] is 2** and (src[-2] == "水" or src[-2] == "食べ物" or src[-2] == "牛乳" or src[-2] == "ミルク" or src[-2] == "餌") and sem[-2] has VFd
 //     pos[-1] is 4** and end.pos[-1] is 57*
@@ -3200,71 +2873,60 @@ bool RuleL317([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "57*"sv));
 }
 
-// # 大の 뒤에 好き로 끝나는 말이 오면 대단한을 고른다. (미발동: rare-context)
 // local 318
 //     src[+1] ends "好き"
 bool RuleL318([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "R好き"sv);
 }
 
-// # 思わず는 다음 단어가 발화 의미 코드 UTs를 지니면 무심코로 고른다.
 // local 319
 //     sem[+1] has UTs
 bool RuleL319([[maybe_unused]] Item* p) {
     return AttrEq(p, 1, "UTs"sv);
 }
 
-// # 時に 바로 앞에 조사가 있으면 때에라는 조사형 번역을 고른다. (미발동: rare-word)
 // local 320
 //     pos[-1] is 2**
 bool RuleL320([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "2**"sv);
 }
 
-// # 元に 앞말의 문법 코드에서 VHn을 찾아 앞으로라는 뜻을 고른다. (미발동: impossible)
-// # [오류] VHn은 3바이트 의미 코드인데 G는 2바이트 문법 코드를 검사하므로 이 조건은 맞을 수 없다.
 // local 321
 //     gram[-1] has "VHn"
 bool RuleL321([[maybe_unused]] Item* p) {
     return GramEq(p, -1, "VHn"sv);
 }
 
-// # 何の는 뒤에 명사·조사·부정 형용사 な가 차례로 오면 부정문용 ‘아무’를 고른다.
 // local 322
 //     pos[+1] is 1** and pos[+2] is 2** and src[+3] == "な" and pos[+3] is 7**
 bool RuleL322([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && PumsaEq(p, 2, "2**"sv) && SrcEq(p, 3, "な"sv) && PumsaEq(p, 3, "7**"sv));
 }
 
-// # 何の는 뒤에 명사와 조사 も가 오면 ‘어떤’을 고른다.
 // local 323
 //     pos[+1] is 1** and src[+2] == "も" and pos[+2] is 2**
 bool RuleL323([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && SrcEq(p, 2, "も"sv) && PumsaEq(p, 2, "2**"sv));
 }
 
-// # 向け는 명사 뒤에서 대상을 나타내는 ‘전용’으로 고른다.
 // local 324
 //     pos[-1] is 1**
 bool RuleL324([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "1**"sv);
 }
 
-// # あたり는 바로 앞 명사가 장소 계열이면 근처로 고른다.
 // local 325
 //     pos[-1] is 1** and sem[-1] under VPl
 bool RuleL325([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VPl"sv));
 }
 
-// # 앞 조사 앞에 争い 명사가 있으면 さけ를 피하다로 고른다. (미발동: rare-word)
 // local 326
 //     pos[-1] is 2** and src[-2] == "争い" and pos[-2] is 1**
 bool RuleL326([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "争い"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 앞말의 사람 의미나 인명 표지를 검사해 호칭 さん을 ‘씨’로 고른다.
 // local 327
 //     sem[-1] under VHn
 //     pos[-1] is 13* and gram[-1] has Wa|Wb
@@ -3273,7 +2935,6 @@ bool RuleL327([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "13*"sv) && GramEq(p, -1, "WaWb"sv));
 }
 
-// # 바로 앞말이 どろ나 血이면 だらけ를 투성이로 고른다. (미발동: rare-context)
 // local 328
 //     (src[-1] == "どろ" or src[-1] == "血")
 bool RuleL328([[maybe_unused]] Item* p) {
@@ -3281,28 +2942,24 @@ bool RuleL328([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "血"sv));
 }
 
-// # どちら 뒤에 조사로 분석되는 のほう가 오면 '어느 쪽'을 '어느'로 줄인다. (미발동: rare-context)
 // local 329
 //     src[+1] == "のほう" and pos[+1] is 2** and ko := "어느"
 bool RuleL329([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "のほう"sv) && PumsaEq(p, 1, "2**"sv) && DstSet(p, 0, "어느"sv));
 }
 
-// # 「い」 어미의 형용사 뒤에서 「なか」를 ‘가운데’로 고른다. (미발동: rare-context)
 // local 330
 //     pos[-1] is 7** and end.src[-1] == "い"
 bool RuleL330([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "い"sv));
 }
 
-// # なか는 앞 단어가 형용동사이면 중으로 고른다. (미발동: rare-context)
 // local 331
 //     pos[-1] is 8**
 bool RuleL331([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "8**"sv);
 }
 
-// # 鼻を突 또는 鼻をつ 동사 바로 뒤에서 におい를 냄새로 고른다. (미발동: rare-context)
 // local 332
 //     (src[-1] == "鼻を突" or src[-1] == "鼻をつ") and pos[-1] is 4**
 bool RuleL332([[maybe_unused]] Item* p) {
@@ -3310,14 +2967,12 @@ bool RuleL332([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "鼻をつ"sv)) && PumsaEq(p, -1, "4**"sv));
 }
 
-// # わし는 다음 단어가 조사 の이면 '나'를 고른다.
 // local 333
 //     src[+1] == "の" and pos[+1] is 2**
 bool RuleL333([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "の"sv) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # わし는 주격·선호 표현 앞이나 특정 の 소유 구문에서 '내'를 고른다.
 // local 334
 //     ko[+1] == "(이)가" and pos[+1] is 2** and (pos[+2] is 4** or pos[+2] is 8**)
 //     (src[+1] == "が好き" or src[+1] == "の好き")
@@ -3331,7 +2986,6 @@ bool RuleL334([[maybe_unused]] Item* p) {
            PumsaEq(p, 2, "7**"sv)));
 }
 
-// # 感じ는 どんな 뒤나 い로 끝나는 형용사 뒤에서 '느낌'을 고른다.
 // local 335
 //     src[-1] == "どんな"
 //     pos[-1] is 7** and end.src[-1] == "い"
@@ -3340,42 +2994,36 @@ bool RuleL335([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "い"sv));
 }
 
-// # 感じ를 どんな와 なんでしょうか 사이에서 느낌으로 활용하도록 어미를 명사형으로 바꾼다. (미발동: rare-context)
 // local 336
 //     src[-1] == "どんな" and src[+1] == "なんでしょうか" and ko[+1] == "입니까" and end.ko := "B"
 bool RuleL336([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "どんな"sv) && SrcEq(p, 1, "なんでしょうか"sv) && DstEq(p, 1, "입니까"sv) && GobiDstSet(p, 0, "B"sv));
 }
 
-// # 改め는 뒤에 동사가 오면 개정하다로 고른다.
 // local 337
 //     pos[+1] is 4**
 bool RuleL337([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "4**"sv);
 }
 
-// # 第一に 뒤의 考え를 생각하다로 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 338
 //     src[-1] == "に" and src[-2] == "第一" and ko[-1] := "(으)로"
 bool RuleL338([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && SrcEq(p, -2, "第一"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 苦しみ 뒤에 こそあれ가 오면 괴로움이라는 번역을 고른다. (미발동: rare-context)
 // local 339
 //     src[+1] == "こそあれ"
 bool RuleL339([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "こそあれ"sv);
 }
 
-// # 高さ를 수량 표현 約와 숫자가 이어지는 문맥에서 '높이'로 선택한다.
 // local 340
 //     src[+1] == "約" and pos[+1] is 1** and gram[+1] has On and gram[+2] has Nj|Nd
 bool RuleL340([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "約"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv) && GramEq(p, 2, "NjNd"sv));
 }
 
-// # 教え에 Ka 활용 표지가 있고 앞에 から나 に가 오면 배우다로 바꾼다. (미발동: rare-context)
 // local 341
 //     gram has Ka and (src[-1] == "から" or src[-1] == "に") and ko := "배&AI@"
 bool RuleL341([[maybe_unused]] Item* p) {
@@ -3383,35 +3031,30 @@ bool RuleL341([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "に"sv)) && DstSet(p, 0, "배&AI@"sv));
 }
 
-// # 群れ는 앞말이 조사이면 명사 ‘무리’를 고른다.
 // local 342
 //     pos[-1] is 2**
 bool RuleL342([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "2**"sv);
 }
 
-// # 뒤 동사가 조사 기능도 가지면 群れ를 무리라는 명사 표현으로 바꾸고 자체 어미를 비운다. (미발동: rare-word)
 // local 343
 //     pos[+1] is 4** and gram[+1] has Pj and ko := "무리    " and end.ko := " "
 bool RuleL343([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Pj"sv) && DstSet(p, 0, "무리    "sv) && GobiDstSet(p, 0, " "sv));
 }
 
-// # 두 칸 앞 명사에 말이나 내용 의미코드가 있으면 寄せ를 보내다로 고른다. (미발동: rare-context)
 // local 344
 //     pos[-2] is 1** and sem[-2] has UTh|USe
 bool RuleL344([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UThUSe"sv));
 }
 
-// # 바로 뒤가 쉼표인 連れ에서 동사 '따르다' 후보를 고른다. (미발동: rare-context)
 // local 345
 //     end.src == "、"
 bool RuleL345([[maybe_unused]] Item* p) {
     return GobiSrcEq(p, 0, "、"sv);
 }
 
-// # 連れ는 へ 뒤나 특정 동사·형용사 앞의 て형 구문 및 帰 앞에서 ‘데리다’로 고른다.
 // local 346
 //     src[-1] == "へ" and pos[-1] is 2**
 //     end.pos is 57* and pos[-1] is 2** and sem[-2] has VHn and pos[+1] is 4** and sem[+1] has UMv
@@ -3424,7 +3067,6 @@ bool RuleL346([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "帰"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 앞뒤 두 단어 안에 식물·액체·약품 의미의 말이 있으면 「漏れ」를 ‘새다’로 고른다. (미발동: rare-context)
 // local 347
 //     sem[-2] has VPt|VLq|VMd
 //     sem[-1] has VPt|VLq|VMd
@@ -3437,7 +3079,6 @@ bool RuleL347([[maybe_unused]] Item* p) {
            AttrEq(p, 2, "VPtVLqVMd"sv);
 }
 
-// # から 바로 뒤이거나 から와 부사 뒤의 漏れ를 '빠지다'로 고른다.
 // local 348
 //     src[-1] == "から"
 //     pos[-1] is 3** and src[-2] == "から"
@@ -3446,35 +3087,30 @@ bool RuleL348([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "3**"sv) && SrcEq(p, -2, "から"sv));
 }
 
-// # 名付け는 앞이 と이고 그 앞이 명사이면 이름 붙이다를 고르면서 と를 (이)라고로 바꾼다. (미발동: rare-word)
 // local 349
 //     src[-1] == "と" and pos[-2] is 1** and ko[-1] := "(이)라고"
 bool RuleL349([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "(이)라고"sv));
 }
 
-// # 色로 끝나는 명사와 조사 뒤에서 薄め를 엷게 하다로 고른다. (미발동: rare-word)
 // local 350
 //     pos[-1] is 2** and src[-2] ends "色" and pos[-2] is 1**
 bool RuleL350([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "R色"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 「付き」가 특정 물체·설비 계열 명사 뒤에 오면 ‘부착’을 고른다.
 // local 351
 //     pos[-1] is 1** and sem[-1] has VPe|VEl|VCm
 bool RuleL351([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "VPeVElVCm"sv));
 }
 
-// # 備え를 조사 に 뒤에서 '대비하다'로 선택한다.
 // local 352
 //     src[-1] == "に" and pos[-1] is 2**
 bool RuleL352([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 仕切り를 두세 단어 앞에 시설 의미 코드가 있을 때 칸막이로 고른다. (미발동: rare-context)
 // local 353
 //     sem[-3] has VFn
 //     sem[-2] has VFn
@@ -3483,28 +3119,24 @@ bool RuleL353([[maybe_unused]] Item* p) {
            AttrEq(p, -2, "VFn"sv);
 }
 
-// # 生まれ 앞에 지역·장소·시간 계열 말이 있고 뒤에 쉼표 번역이 있으면 태생을 고른다. (미발동: rare-context)
 // local 354
 //     sem[-1] under QCT|VPl|UMe and ko[+1] == ","
 bool RuleL354([[maybe_unused]] Item* p) {
     return (AttrMinusEq(p, -1, "QCTVPlUMe"sv) && DstEq(p, 1, ","sv));
 }
 
-// # 生まれ는 앞말이 조사 で이고 두 단어 앞이 QCT·VPl 의미 계열이면 で를 ‘에서’로 바꾸고 ‘태어나다’를 고른다.
 // local 355
 //     src[-1] == "で" and pos[-1] is 2** and sem[-2] under QCT|VPl and ko[-1] := "에서"
 bool RuleL355([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && PumsaEq(p, -1, "2**"sv) && AttrMinusEq(p, -2, "QCTVPl"sv) && DstSet(p, -1, "에서"sv));
 }
 
-// # 暑さ 뒤에 형용사 厳し가 오면 더위라는 번역을 고른다. (미발동: rare-context)
 // local 356
 //     src[+1] == "厳し" and pos[+1] is 7**
 bool RuleL356([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "厳し"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # 盛り 앞에 女·男·暑·寒·代가 오면 한창때라는 뜻을 고른다. (미발동: rare-context)
 // local 357
 //     (src[-1] == "女" or src[-1] == "男" or src[-1] == "暑" or src[-1] == "寒" or src[-1] == "代")
 bool RuleL357([[maybe_unused]] Item* p) {
@@ -3515,7 +3147,6 @@ bool RuleL357([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "代"sv));
 }
 
-// # 駅 앞이나 장소 의미의 말 앞에서 新宿를 신쥬쿠로 고른다.
 // local 358
 //     src[+1] == "駅" and pos[+1] is 1**
 //     sem[+1] has VPl
@@ -3524,35 +3155,30 @@ bool RuleL358([[maybe_unused]] Item* p) {
            AttrEq(p, 1, "VPl"sv);
 }
 
-// # 影響에 연결형 어미가 붙고 뒤에 いるかもしれな 형용사가 오면 자체 어미를 고로 바꾼다. (미발동: rare-context)
 // local 359
 //     end.pos is 57* and src[+1] == "いるかもしれな" and pos[+1] is 7** and end.ko := "1고"
 bool RuleL359([[maybe_unused]] Item* p) {
     return (GobiPumsaEq(p, 0, "57*"sv) && SrcEq(p, 1, "いるかもしれな"sv) && PumsaEq(p, 1, "7**"sv) && GobiDstSet(p, 0, "1고"sv));
 }
 
-// # 迎え는 사람 명사에 붙은 に가 ‘(으)로’로 번역되어 있으면 ‘맞이하다’로 고른다.
 // local 360
 //     src[-1] == "に" and ko[-1] == "(으)로" and pos[-1] is 2** and sem[-2] has VHn|UQf
 bool RuleL360([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstEq(p, -1, "(으)로"sv) && PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VHnUQf"sv));
 }
 
-// # 位置는 앞말이 に이고 두 단어 앞의 의미 코드가 UDr·VPl이면 に를 ‘에’로 고치고 명사 ‘위치’를 고른다.
 // local 361
 //     src[-1] == "に" and sem[-2] has UDr|VPl and ko[-1] := "에"
 bool RuleL361([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && AttrEq(p, -2, "UDrVPl"sv) && DstSet(p, -1, "에"sv));
 }
 
-// # 두 칸 앞 명사에 질병 의미코드가 있으면 疑い를 의혹으로 고른다. (미발동: rare-context)
 // local 362
 //     pos[-2] is 1** and sem[-2] has UTi
 bool RuleL362([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UTi"sv));
 }
 
-// # 바로 앞이 부사이거나 두 단어 앞 표기가 感으로 끝나면 引き立て를 '북돋우다'로 고른다. (미발동: rare-context)
 // local 363
 //     pos[-1] is 3**
 //     src[-2] ends "感"
@@ -3561,7 +3187,6 @@ bool RuleL363([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "R感"sv);
 }
 
-// # 수량의 「で」 뒤나 지명·수치 고유명사의 「と・に」 뒤에서 「引き分け」를 ‘비기다’로 고른다. (미발동: rare-word)
 // local 364
 //     src[-1] == "で" and gram[-2] has Nj|Nd
 //     (src[-1] == "と" or src[-1] == "に") and pos[-2] is 13* and sem[-2] has QCT|QNN
@@ -3571,42 +3196,36 @@ bool RuleL364([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "に"sv)) && PumsaEq(p, -2, "13*"sv) && AttrEq(p, -2, "QCTQNN"sv));
 }
 
-// # 引き上げ를 장소 의미 계열의 명사와 조사 뒤에서 '끌어올리다'로 선택한다.
 // local 365
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VPl
 bool RuleL365([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VPl"sv));
 }
 
-// # 引き受け는 두 단어 앞 표기가 店으로 끝나면 인수하다로 고른다. (미발동: rare-context)
 // local 366
 //     src[-2] ends "店"
 bool RuleL366([[maybe_unused]] Item* p) {
     return SrcEq(p, -2, "R店"sv);
 }
 
-// # 가구를 뜻하는 명사와 조사 뒤에서 引き下げ를 내리다로 고른다. (미발동: rare-word)
 // local 367
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VFn
 bool RuleL367([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VFn"sv));
 }
 
-// # 任せ를 お와 문장 끝의 を 사이에서 맡겨 주세요로 바꾼다. (미발동: rare-context)
 // local 368
 //     src[-1] == "お" and src[+1] == "を" and gram[+1] has Ow and ko := "맡겨 주세요"
 bool RuleL368([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "お"sv) && SrcEq(p, 1, "を"sv) && GramEq(p, 1, "Ow"sv) && DstSet(p, 0, "맡겨 주세요"sv));
 }
 
-// # 狙い 앞의 동사가 품사 코드 501 어미를 가지면 목적을 고른다. (미발동: rare-context)
 // local 369
 //     pos[-1] is 4** and end.pos[-1] is 501
 bool RuleL369([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "501"sv));
 }
 
-// # 通貨·円·ドル의 切り下げ를 평가절하로 고른다.
 // local 370
 //     (src[-2] == "通貨" or src[-2] == "円" or src[-2] == "ドル")
 bool RuleL370([[maybe_unused]] Item* p) {
@@ -3615,7 +3234,6 @@ bool RuleL370([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "ドル"sv));
 }
 
-// # 助け는 다음 말이 조사이고 그다음 말이 부정 형용사 な·無이면 명사 ‘도움’을 고른다.
 // local 371
 //     pos[+1] is 2** and (src[+2] == "な" or src[+2] == "無") and pos[+2] is 7**
 bool RuleL371([[maybe_unused]] Item* p) {
@@ -3623,28 +3241,24 @@ bool RuleL371([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "無"sv)) && PumsaEq(p, 2, "7**"sv));
 }
 
-// # 助け는 문장에 홀로 있는 て형 동사이면 ‘돕다’를 고르고 어미를 ‘-어 줘’로 바꾼다.
 // local 372
 //     all(gram has Hz, gram has Ow) and end.pos is 57* and end.ko := "6줘"
 bool RuleL372([[maybe_unused]] Item* p) {
     return ([&] { const bool a0 = GramEq(p, 0, "Hz"sv); const bool a1 = GramEq(p, 0, "Ow"sv); return a0 && a1; }() && GobiPumsaEq(p, 0, "57*"sv) && GobiDstSet(p, 0, "6줘"sv));
 }
 
-// # 釣り 뒤에 하러로 번역되는 に와 가다 동사가 오면 낚시를 고른다. (미발동: rare-context)
 // local 373
 //     src[+1] == "に" and ko[+1] == "하러" and pos[+1] is 2** and src[+2] == "行" and ko[+2] == "&A1@" and pos[+2] is 4**
 bool RuleL373([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "に"sv) && DstEq(p, 1, "하러"sv) && PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "行"sv) && DstEq(p, 2, "&A1@"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 뒤에 いただ 동사가 오면 支払い를 지불이라는 명사로 고른다. (미발동: rare-context)
 // local 374
 //     src[+1] == "いただ" and pos[+1] is 4**
 bool RuleL374([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "いただ"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 담배나 술을 뜻하는 명사와 조사 뒤에서 止め를 끊다로 고른다. (미발동: rare-context)
 // local 375
 //     pos[-1] is 2** and (src[-2] == "タバコ" or src[-2] == "たばこ" or src[-2] == "煙草" or src[-2] == "酒" or src[-2] == "お酒") and pos[-2] is 1**
 bool RuleL375([[maybe_unused]] Item* p) {
@@ -3655,14 +3269,12 @@ bool RuleL375([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "お酒"sv)) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # の와 인명이 뒤따르는 知り合い를 '아는 사이'로 고른다. (미발동: rare-context)
 // local 376
 //     src[+1] == "の" and pos[+2] is 13* and sem[+2] has QPN
 bool RuleL376([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "の"sv) && PumsaEq(p, 2, "13*"sv) && AttrEq(p, 2, "QPN"sv));
 }
 
-// # 뒤에 동사 「にそえ・に対」가 오면 「祝い」를 ‘축하’로 고른다. (미발동: rare-context)
 // local 377
 //     (src[+1] == "にそえ" or src[+1] == "に対") and pos[+1] is 4**
 bool RuleL377([[maybe_unused]] Item* p) {
@@ -3670,7 +3282,6 @@ bool RuleL377([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "に対"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 取り付け는 契約·約束 뒤 조사 문맥이나 두 단어 앞에 성향·법률·사상·사고·상태 의미 코드가 있으면 얻어내다로 고른다. (미발동: rare-context)
 // local 378
 //     pos[-1] is 2** and (src[-2] == "契約" or src[-2] == "約束") and pos[-2] is 1**
 //     sem[-2] has UYi|ULw|USm|UTh|USe
@@ -3680,14 +3291,12 @@ bool RuleL378([[maybe_unused]] Item* p) {
            AttrEq(p, -2, "UYiULwUSmUThUSe"sv);
 }
 
-// # 두 단어 앞이 도구·전기 기기·주방 기구·정보 계열이면 取り付け를 설치하다로 고른다. (미발동: rare-context)
 // local 379
 //     sem[-2] has VPe|VEl|VCk|VCm
 bool RuleL379([[maybe_unused]] Item* p) {
     return AttrEq(p, -2, "VPeVElVCkVCm"sv);
 }
 
-// # 取り入れ를 説·政策·意見·論·文化와 조사 뒤에서 받아들이다로 고른다. (미발동: rare-context)
 // local 380
 //     pos[-1] is 2** and (src[-2] == "説" or src[-2] == "政策" or src[-2] == "意見" or src[-2] == "論" or src[-2] == "文化") and pos[-2] is 1**
 bool RuleL380([[maybe_unused]] Item* p) {
@@ -3698,7 +3307,6 @@ bool RuleL380([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "文化"sv)) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 打ち合わせ가 について 뒤나 시간 명사에 붙은 に 뒤에 오면 협의하다를 고른다. (미발동: rare-word)
 // local 381
 //     src[-1] == "について" and pos[-1] is 2**
 //     src[-1] == "に" and pos[-1] is 2** and pos[-2] is 1** and sem[-2] under UMe
@@ -3707,14 +3315,12 @@ bool RuleL381([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "に"sv) && PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "UMe"sv));
 }
 
-// # 疲れ 뒤에 명사 様子가 오면 지치다라는 번역을 고른다. (미발동: rare-context)
 // local 382
 //     src[+1] == "様子" and pos[+1] is 1**
 bool RuleL382([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "様子"sv) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # 割れ 앞의 조사 너머에 ガラス·コップ·ガラスのコップ이 있으면 깨지다를 고른다. (미발동: rare-context)
 // local 383
 //     pos[-1] is 2** and (src[-2] == "ガラス" or src[-2] == "コップ" or src[-2] == "ガラスのコップ")
 bool RuleL383([[maybe_unused]] Item* p) {
@@ -3723,7 +3329,6 @@ bool RuleL383([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "ガラスのコップ"sv)));
 }
 
-// # 앞 조사 앞에 党·意見·地面이 있거나 に 앞에 수량 표현이 있으면 割れ를 갈라지다로 고르고 수량의 조사를 로로 바꾼다. (미발동: rare-context)
 // local 384
 //     pos[-1] is 2** and (src[-2] == "党" or src[-2] == "意見" or src[-2] == "地面")
 //     src[-1] == "に" and gram[-2] has Ct|Nj|Nd and ko[-1] := "(으)로"
@@ -3734,35 +3339,30 @@ bool RuleL384([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "に"sv) && GramEq(p, -2, "CtNjNd"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # えりを 뒤에서 合わせ를 여미다로 고른다. (미발동: rare-context)
 // local 385
 //     src[-1] == "を" and src[-2] == "えり"
 bool RuleL385([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && SrcEq(p, -2, "えり"sv));
 }
 
-// # 換え 앞의 に를 '(으)로'로 바꾸고 '바꾸다' 후보를 고른다. (미발동: rare-word)
 // local 386
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL386([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 回り를 사람·장소의 소유격 の 뒤에서 '주위'로 선택한다.
 // local 387
 //     src[-1] == "の" and pos[-1] is 2** and sem[-2] has VHn|VPl
 bool RuleL387([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VHnVPl"sv));
 }
 
-// # 뒤에 「の」와 발화 의미 계열의 명사가 오면 「詰め」를 ‘최종’으로 고른다. (미발동: rare-context)
 // local 388
 //     src[+1] == "の" and pos[+1] is 2** and pos[+2] is 1** and sem[+2] under UTs
 bool RuleL388([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "の"sv) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "1**"sv) && AttrMinusEq(p, 2, "UTs"sv));
 }
 
-// # あて는 건물 의미의 앞말이 있거나 사람 뒤에서 편지·엽서·서류·메시지를 수식하면 수신인을 나타내는 앞으로 고른다. (미발동: rare-context)
 // local 389
 //     sem[-1] has VHn and src[+1] == "の" and (src[+2] ends "手紙" or src[+2] ends "葉書き" or src[+2] ends "書" or src[+2] == "メッセージ")
 //     sem[-1] has VBl
@@ -3774,7 +3374,6 @@ bool RuleL389([[maybe_unused]] Item* p) {
            AttrEq(p, -1, "VBl"sv);
 }
 
-// # 뒤에 来る나 行 또는 い가 오면 동사 つ의 따르다 후보를 고른다. (미발동: rare-context)
 // local 390
 //     (src[+1] == "来る" or src[+1] == "行" or src[+1] == "い")
 bool RuleL390([[maybe_unused]] Item* p) {
@@ -3783,7 +3382,6 @@ bool RuleL390([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "い"sv));
 }
 
-// # つ를 기능·건강·가격 문맥에서 붙다로 고르고 健康に 뒤에서는 대하다로 바꾼다. (미발동: rare-context)
 // local 391
 //     (src[-1] == "機能" or src[-1] == "ファンクション") and pos[-1] is 1**
 //     src[-1] == "健康に" and ko := "대&AV@"
@@ -3795,14 +3393,12 @@ bool RuleL391([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "値段"sv);
 }
 
-// # つ의 두 단어 앞에 スイッチ가 있으면 켜지다를 고른다. (미발동: rare-context)
 // local 392
 //     src[-2] == "スイッチ"
 bool RuleL392([[maybe_unused]] Item* p) {
     return SrcEq(p, -2, "スイッチ"sv);
 }
 
-// # 対는 빈 5:1 어미 뒤에 명사가 오면 대하다를 고르고 앞의 死 동사에 5:0 어미가 있으면 에 대하다로 번역을 바꾼다. (미발동: rare-word)
 // local 393
 //     end.src == "" and end.pos is 5:1 and pos[+1] is 1**
 //     src[-1] == "死" and pos[-1] is 4** and end.pos[-1] is 5:0 and ko := "에 대&AV@"
@@ -3811,14 +3407,12 @@ bool RuleL393([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "死"sv) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:0"sv) && DstSet(p, 0, "에 대&AV@"sv));
 }
 
-// # 富 앞에 조사 に가 있으면 이를 이가로 바꾸고 풍부하다는 뜻을 고른다. (미발동: rare-word)
 // local 394
 //     src[-1] == "に" and pos[-1] is 2** and ko[-1] := "(이)가"
 bool RuleL394([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -1, "2**"sv) && DstSet(p, -1, "(이)가"sv));
 }
 
-// # 앞말이 が 이외의 조사이면 分를 나누다로 고른다. (미발동: rare-word)
 // local 395
 //     src[-1] == "を" and pos[-1] is 2**
 //     src[-1] != "が" and pos[-1] is 2**
@@ -3827,7 +3421,6 @@ bool RuleL395([[maybe_unused]] Item* p) {
            (SrcNe(p, -1, "が"sv) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 형용사 인용과 명사 및 に 뒤에서 書를 쓰다로 고르며 인용 어미를 -다고로 바꾸거나 언어명 뒤의 では를 으로는으로 바꾼다. (미발동: rare-context)
 // local 396
 //     src[-1] == "に" and pos[-2] is 1** and pos[-3] is 7** and end.src[-3] == "いと" and end.ko[-3] := "1다고"
 //     src[-1] == "では" and src[-2] ends "語" and ko[-1] := "(으)로는"
@@ -3836,28 +3429,24 @@ bool RuleL396([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "では"sv) && SrcEq(p, -2, "R語"sv) && DstSet(p, -1, "(으)로는"sv));
 }
 
-// # 음식 의미 코드가 있는 부사 뒤의 食을 '먹다'로 고른다. (미발동: rare-context)
 // local 397
 //     pos[-1] is 3** and sem[-1] has VFd
 bool RuleL397([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "3**"sv) && AttrEq(p, -1, "VFd"sv));
 }
 
-// # 「に」 뒤의 「訳」을 ‘번역하다’로 고르고 앞 조사를 ‘(으)로’로 바꾼다. (미발동: rare-word)
 // local 398
 //     src[-1] == "に" and pos[-1] is 2** and ko[-1] := "(으)로"
 bool RuleL398([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -1, "2**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 外는 看板 명사와 조사 뒤에서 동사 후보 떼다를 고른다. (미발동: rare-context)
 // local 399
 //     pos is 4** and pos[-1] is 2** and src[-2] == "看板" and pos[-2] is 1**
 bool RuleL399([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "4**"sv) && PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "看板"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # ごと나 事로 끝나는 명사에 は 또는 が가 붙으면 運을 진행되다로 고른다. (미발동: rare-context)
 // local 400
 //     (src[-1] == "は" or src[-1] == "が") and pos[-1] is 2** and (src[-2] ends "ごと" or src[-2] ends "事") and pos[-2] is 1**
 bool RuleL400([[maybe_unused]] Item* p) {
@@ -3866,14 +3455,12 @@ bool RuleL400([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "R事"sv)) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 偽를 と 뒤에서 속이다로 고르고 앞 조사를 이라고로 바꾼다. (미발동: rare-word)
 // local 401
 //     src[-1] == "と" and ko[-1] := "(이)라고"
 bool RuleL401([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && DstSet(p, -1, "(이)라고"sv));
 }
 
-// # 在는 조사 が・に 뒤에서 '있다'를 고르고 일부 ません 활용에서는 어간을 '없다'로 바꾼다.
 // local 402
 //     end.src starts "ません" and (src[-1] == "が" or src[-1] == "に") and pos[-1] is 2** and ko := "&M9@"
 //     (src[-1] == "が" or src[-1] == "に") and pos[-1] is 2**
@@ -3884,7 +3471,6 @@ bool RuleL402([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "に"sv)) && PumsaEq(p, -1, "2**"sv));
 }
 
-// # 制가 一騎打ち나 대회·경기 표현의 を 뒤에 오면 제압하다를 고른다. (미발동: rare-context)
 // local 403
 //     src[-1] == "を" and src[-2] == "一騎打ち"
 //     src[-1] == "を" and (src[-2] ends "権" or src[-2] ends "期" or src[-2] ends "カップ" or src[-2] ends "杯" or src[-2] ends "戦" or src[-2] ends "対決" or src[-2] ends "シリーズ")
@@ -3899,7 +3485,6 @@ bool RuleL403([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "Rシリーズ"sv)));
 }
 
-// # 組의 두 단어 앞에 うで·腕 명사가 있고 그 사이에 조사가 있으면 끼다라는 번역을 고른다. (미발동: rare-context)
 // local 404
 //     pos[-1] is 2** and (src[-2] == "うで" or src[-2] == "腕") and pos[-2] is 1**
 bool RuleL404([[maybe_unused]] Item* p) {
@@ -3907,14 +3492,12 @@ bool RuleL404([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "腕"sv)) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 組는 현재 후보에 Pi 문법 코드가 있으면 번역을 ‘짜다’로 바꾸고 고른다.
 // local 405
 //     gram has Pi and ko := "짜&AJ@"
 bool RuleL405([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Pi"sv) && DstSet(p, 0, "짜&AJ@"sv));
 }
 
-// # 弾 앞의 조사나 부사를 건너 ギター가 있으면 연주하다를 고른다. (미발동: rare-context)
 // local 406
 //     pos[-1] is 2** and src[-2] == "ギター"
 //     pos[-1] is 3** and pos[-2] is 2** and src[-3] == "ギター"
@@ -3923,21 +3506,18 @@ bool RuleL406([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "3**"sv) && PumsaEq(p, -2, "2**"sv) && SrcEq(p, -3, "ギター"sv));
 }
 
-// # 사람을 나타내는 명사와 조사 뒤의 通을 다니다로 고른다.
 // local 407
 //     pos[-1] is 2** and pos[-2] is 1** and sem[-2] under VHn
 bool RuleL407([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VHn"sv));
 }
 
-// # 앞에 法案を가 오면 通를 통과시키다로 고른다. (미발동: rare-context)
 // local 408
 //     src[-1] == "を" and src[-2] == "法案"
 bool RuleL408([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && SrcEq(p, -2, "法案"sv));
 }
 
-// # 수치로 나누거나 가격선이 무너지거나 금액으로 나누는 문맥에서 割의 번역과 앞 조사를 조정한다. (미발동: rare-context)
 // local 409
 //     (src[-1] == "に" or src[-1] == "で") and pos[-1] is 2** and pos[-2] is 1** and gram[-2] has Nj|Nd and ko[-1] := "(으)로"
 //     gram has Ow and (src[-1] == "ポイント" or src[-1] == "円") and gram[-2] has Nj|Nd and ko := "붕괴    " and end.ko := ""
@@ -3950,14 +3530,12 @@ bool RuleL409([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "で"sv) && SrcEq(p, -2, "R額"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # ポイント를 목적어로 받는 割을 '밑돌다'로 고른다. (미발동: rare-context)
 // local 410
 //     src[-1] == "を" and src[-2] == "ポイント"
 bool RuleL410([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && SrcEq(p, -2, "ポイント"sv));
 }
 
-// # 行의 '가다' 후보를 목적·이동 연결형이나 지명 뒤에서 선택하고 앞 이동 동사의 연결어미를 '-어'로 바꾼다.
 // local 411
 //     pos[-1] is 4** and end.src[-1] == "に" and end.ko[-1] == "2러" and end.pos[-1] is 5**
 //     pos[-1] is 4** and sem[-1] has UMv and end.pos[-1] is 57* and end.ko[-1] := "6"
@@ -3971,21 +3549,18 @@ bool RuleL411([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "へ"sv)) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VPl"sv));
 }
 
-// # 回는 앞 표기가 に이면 ‘돌다’로 고르고 그 に를 방향 조사 ‘(으)로’로 바꾼다.
 // local 412
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL412([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 앞에 「と」가 있고 뒤에 「くる」가 오는 연결형 「会」를 ‘만나다’로 고르며 어미를 ‘고’로 바꾼다. (미발동: rare-context)
 // local 413
 //     end.pos is 57* and src[-1] == "と" and src[+1] == "くる" and end.ko := "1고"
 bool RuleL413([[maybe_unused]] Item* p) {
     return (GobiPumsaEq(p, 0, "57*"sv) && SrcEq(p, -1, "と"sv) && SrcEq(p, 1, "くる"sv) && GobiDstSet(p, 0, "1고"sv));
 }
 
-// # おれ는 다음 말이 조사 も·の·は·と·に이면 대명사 ‘나’를 고른다.
 // local 414
 //     (src[+1] == "も" or src[+1] == "の" or src[+1] == "は" or src[+1] == "と" or src[+1] == "に") and pos[+1] is 2**
 bool RuleL414([[maybe_unused]] Item* p) {
@@ -3996,28 +3571,24 @@ bool RuleL414([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "に"sv)) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # 「おれ」 뒤에 「が」가 오면 주격 조사와 결합할 대명사형 ‘내’를 고른다.
 // local 415
 //     src[+1] == "が"
 bool RuleL415([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "が"sv);
 }
 
-// # お供는 사람 명사 뒤 の가 오면 수행으로 고르면서 の를 의로 바꾼다. (미발동: rare-context)
 // local 416
 //     src[-1] == "の" and pos[-2] is 1** and sem[-2] has VHn and ko[-1] := "의"
 bool RuleL416([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "VHn"sv) && DstSet(p, -1, "의"sv));
 }
 
-// # 조사 뒤에 打 동사가 이어지면 そば를 메밀국수로 고른다. (미발동: rare-context)
 // local 417
 //     pos[+1] is 2** and src[+2] == "打" and pos[+2] is 4**
 bool RuleL417([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "打"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # が 앞의 だれ는 누로 고른다. に＋동사＋수혜 구문도 누로 고르되 話す의 상대는 누구 후보를 남긴다.
 // local 418
 //     src[+1] == "が" and pos[+1] is 2**
 //     src[+1] == "に" and pos[+2] is 4** and src[+2] != "話" and end.pos[+2] is 57* and (src[+3] == "もら" or src[+3] == "いただ")
@@ -4027,21 +3598,18 @@ bool RuleL418([[maybe_unused]] Item* p) {
            SrcEq(p, 3, "いただ"sv)));
 }
 
-// # 뒤 단어가 が가 아닌 だれ를 '누구'로 고른다.
 // local 419
 //     src[+1] != "が"
 bool RuleL419([[maybe_unused]] Item* p) {
     return SrcNe(p, 1, "が"sv);
 }
 
-// # とこ를 い형용사 뒤에서 곳으로 고른다. (미발동: rare-context)
 // local 420
 //     pos[-1] is 7*
 bool RuleL420([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "7*"sv);
 }
 
-// # ぼく는 주격·선호·부탁 희망 표현이나 じゃな 앞에서 '내'를 고른다.
 // local 421
 //     src[+1] == "が" and pos[+1] is 2**
 //     src[+1] == "の" and ko[+1] == "(이)가" and pos[+1] is 2** and (pos[+2] is 4** or pos[+2] is 8**) and gram[+2] lacks Pn
@@ -4060,21 +3628,18 @@ bool RuleL421([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "じゃな"sv) && PumsaEq(p, 1, "7**"sv));
 }
 
-// # サボ가 仕事を 뒤에 오면 게으름 피우다를 고른다. (미발동: rare-word)
 // local 422
 //     src[-1] == "を" and src[-2] == "仕事"
 bool RuleL422([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "を"sv) && SrcEq(p, -2, "仕事"sv));
 }
 
-// # ツナ 후보 자체가 음식 의미 계열에 속하면 참치라는 번역을 고른다. (미발동: rare-word)
 // local 423
 //     sem under VFd|VFd
 bool RuleL423([[maybe_unused]] Item* p) {
     return AttrMinusEq(p, 0, "VFdVFd"sv);
 }
 
-// # 価値를 み나 특정 형태의 検討 뒤에서 '가치'로 고르면서 앞 동사의 어미를 '-을'로 바꾼다.
 // local 424
 //     src[-1] == "み" and end.ko[-1] := "3"
 //     src[-1] == "検討" and pos[-1] is 4** and end.pos[-1] is 50* and end.ko[-1] := "3"
@@ -4083,28 +3648,24 @@ bool RuleL424([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "検討"sv) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "3"sv));
 }
 
-// # 感謝 앞에 厚く가 있으면 이를 진심으로로 바꾸고 기존 어미 번역을 지운다. (미발동: rare-context)
 // local 425
 //     src[-1] == "厚" and end.src[-1] == "く" and ko[-1] := "진심으로    " and end.ko[-1] := " "
 bool RuleL425([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "厚"sv) && GobiSrcEq(p, -1, "く"sv) && DstSet(p, -1, "진심으로    "sv) && GobiDstSet(p, -1, " "sv));
 }
 
-// # 앞에 に가 오면 改称을 개칭으로 고르고 그 조사를 로로 바꾼다. (미발동: rare-word)
 // local 426
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL426([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 뒤에 조사와 遅れ 동사가 오면 開発을 개발로 고른다. (미발동: rare-context)
 // local 427
 //     pos[+1] is 2** and src[+2] == "遅れ" and pos[+2] is 4**
 bool RuleL427([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "遅れ"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 앞이나 뒤에 명사가 있는 係員을 '계원'으로 고른다. (미발동: rare-context)
 // local 428
 //     pos[-1] is 1**
 //     pos[+1] is 1**
@@ -4113,7 +3674,6 @@ bool RuleL428([[maybe_unused]] Item* p) {
            PumsaEq(p, 1, "1**"sv);
 }
 
-// # 契約은 명사＋と·との 뒤에서 ‘계약’을 고르고 앞 조사를 ‘(와)과’ 또는 ‘(와)과의’로 바꾼다.
 // local 429
 //     src[-1] == "と" and pos[-2] is 1** and ko[-1] := "(와)과"
 //     src[-1] == "との" and pos[-2] is 1** and ko[-1] := "(와)과의"
@@ -4122,63 +3682,54 @@ bool RuleL429([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "との"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "(와)과의"sv));
 }
 
-// # 어미가 と인 동사 뒤에서 計算을 고르고 그 동사의 평서 인용 어미를 ‘-다고’로 바꾼다.
 // local 430
 //     pos[-1] is 4** and end.src[-1] == "と" and end.pos[-1] is 5** and src[+1] == "する" and pos[+1] is 4** and end.ko[-1] := "4다고"
 bool RuleL430([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "と"sv) && GobiPumsaEq(p, -1, "5**"sv) && SrcEq(p, 1, "する"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, -1, "4다고"sv));
 }
 
-// # に와 する 사이의 関係를 고르면서 앞의 に를 에로 바꾼다.
 // local 431
 //     src[-1] == "に" and src[+1] == "する" and pos[+1] is 4** and ko[-1] := "에"
 bool RuleL431([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && SrcEq(p, 1, "する"sv) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "에"sv));
 }
 
-// # 関連은 명사·に·부사 뒤이면서 다음이 동사이면 관련으로 고르고 に를 에로 바꾼다. (미발동: rare-context)
 // local 432
 //     pos[-1] is 3** and src[-2] == "に" and pos[-3] is 1** and pos[+1] is 4** and ko[-2] := "에"
 bool RuleL432([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "3**"sv) && SrcEq(p, -2, "に"sv) && PumsaEq(p, -3, "1**"sv) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -2, "에"sv));
 }
 
-// # 交際는 と 뒤에서 ‘교제’로 고르고 앞 조사를 동반 조사 ‘(와)과’로 바꾼다.
 // local 433
 //     src[-1] == "と" and ko[-1] := "(와)과"
 bool RuleL433([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && DstSet(p, -1, "(와)과"sv));
 }
 
-// # 명사와 に 뒤에서 交換을 교환으로 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 434
 //     src[-1] == "に" and pos[-2] is 1** and ko[-1] := "(으)로"
 bool RuleL434([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 区別를 と 뒤에서 구별로 고르고 앞 조사를 와·과로 바꾼다. (미발동: rare-context)
 // local 435
 //     src[-1] == "と" and ko[-1] := "(와)과"
 bool RuleL435([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && DstSet(p, -1, "(와)과"sv));
 }
 
-// # 'で'와 수동형 'され' 사이의 '構成'을 '구성'으로 고르고 앞의 'で'를 '(으)로'로 바꾼다.
 // local 436
 //     src[-1] == "で" and src[+1] == "され" and pos[+1] is 4** and ko[-1] := "(으)로"
 bool RuleL436([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && SrcEq(p, 1, "され"sv) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 規定 앞말의 어미가 いと이면 그 번역을 다고로 바꾸고 규정을 고른다. (미발동: rare-context)
 // local 437
 //     end.src[-1] == "いと" and end.ko[-1] := "1다고"
 bool RuleL437([[maybe_unused]] Item* p) {
     return (GobiSrcEq(p, -1, "いと"sv) && GobiDstSet(p, -1, "1다고"sv));
 }
 
-// # 바로 앞이나 두 단어 앞에 장소 의미가 있으면 近く를 근처로 고른다.
 // local 438
 //     sem[-2] has VPl
 //     sem[-1] has VPl
@@ -4187,7 +3738,6 @@ bool RuleL438([[maybe_unused]] Item* p) {
            AttrEq(p, -1, "VPl"sv);
 }
 
-// # 近所는 앞에 장소 명사가 직접 또는 の를 사이에 두고 있으면 부근으로 고른다.
 // local 439
 //     pos[-1] is 1** and sem[-1] has VPl
 //     src[-1] == "の" and pos[-2] is 1** and sem[-2] has VPl
@@ -4196,21 +3746,18 @@ bool RuleL439([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "の"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "VPl"sv));
 }
 
-// # 今頃 앞에 시간 명사와 の가 차례로 오면 이맘때라는 번역을 고른다. (미발동: rare-context)
 // local 440
 //     src[-1] == "の" and sem[-2] has UMe
 bool RuleL440([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && AttrEq(p, -2, "UMe"sv));
 }
 
-// # 「今度」 뒤에 조사 「から」가 오면 ‘이번’을 고른다.
 // local 441
 //     src[+1] == "から" and pos[+1] is 2**
 bool RuleL441([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "から"sv) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # 急増 앞의 と가 수사나 수사·조수사 뒤에 있으면 と를 으로로 바꾼다. (미발동: rare-context)
 // local 442
 //     src[-1] == "と" and pos[-1] is 2** and pos[-2] is 1** and gram[-2] has Ct and pos[-3] is 1** and gram[-3] has Nj|Nd and ko[-1] := "으로"
 //     src[-1] == "と" and pos[-1] is 2** and pos[-2] is 1** and gram[-2] has Nj|Nd and ko[-1] := "으로"
@@ -4219,21 +3766,18 @@ bool RuleL442([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "と"sv) && PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv) && GramEq(p, -2, "NjNd"sv) && DstSet(p, -1, "으로"sv));
 }
 
-// # 조사 뒤의 新た가 생생하다인 형용동사이면 記憶을 기억으로 고른다. (미발동: rare-context)
 // local 443
 //     pos[+1] is 2** and src[+2] == "新た" and ko[+2] == "생생%A1@" and pos[+2] is 8**
 bool RuleL443([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "新た"sv) && DstEq(p, 2, "생생%A1@"sv) && PumsaEq(p, 2, "8**"sv));
 }
 
-// # 사람의 관계나 직업을 나타내는 명사와 に 뒤에서 起用을 기용으로 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 444
 //     src[-1] == "に" and pos[-2] is 1** and sem[-2] has UQf|UAq and ko[-1] := "(으)로"
 bool RuleL444([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UQfUAq"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 年間은 앞말이 숫자 문법 코드 Nj·Nd가 아니거나 자신이 문장 첫 단어이면 번역을 ‘연간’으로 바꾼다.
 // local 445
 //     gram[-1] lacks Nj|Nd and ko := "연간"
 //     gram has Hz and ko := "연간"
@@ -4242,7 +3786,6 @@ bool RuleL445([[maybe_unused]] Item* p) {
            (GramEq(p, 0, "Hz"sv) && DstSet(p, 0, "연간"sv));
 }
 
-// # 早·遅 형용사 뒤나 특정 동사·어미가 겹친 자리의 段階를 '단계'로 고르면서 앞말 어미를 조정한다. (미발동: rare-context)
 // local 446
 //     (src[-1] == "早" or src[-1] == "遅") and pos[-1] is 7** and end.ko[-1] := "4"
 //     src[-1] == "い" and pos[-1] is 4** and end.pos[-1] is 50* and pos[-2] is 4** and end.ko[-1] := "0"
@@ -4252,21 +3795,18 @@ bool RuleL446([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "い"sv) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "50*"sv) && PumsaEq(p, -2, "4**"sv) && GobiDstSet(p, -1, "0"sv));
 }
 
-// # 선거·직무 의미의 명사와 「に」 뒤에서 「当選」을 고르고 앞 조사를 ‘(으)로’로 바꾼다. (미발동: rare-context)
 // local 447
 //     src[-1] == "に" and pos[-2] is 1** and sem[-2] has UQf|UAq and ko[-1] := "(으)로"
 bool RuleL447([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UQfUAq"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 代表는 に와 され 동사 사이에 있으면 대표로 고르고 に를 (으)로로 바꾼다. (미발동: rare-context)
 // local 448
 //     src[-1] == "に" and src[+1] == "され" and pos[+1] is 4** and ko[-1] := "(으)로"
 bool RuleL448([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && SrcEq(p, 1, "され"sv) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 大物은 뒤 단어의 의미 코드가 친족·직업 계열이면 인물 평가인 '거물'을 고른다.
 // local 449
 //     (sem[+1] has UQf or sem[+1] has UAq)
 bool RuleL449([[maybe_unused]] Item* p) {
@@ -4274,21 +3814,18 @@ bool RuleL449([[maybe_unused]] Item* p) {
            AttrEq(p, 1, "UAq"sv));
 }
 
-// # 同日은 뒤에 명사가 오면 같은 날을 뜻하는 ‘동일’로 고른다.
 // local 450
 //     pos[+1] is 1**
 bool RuleL450([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**"sv);
 }
 
-// # 뒤에 조사가 오면 来春을 내년 봄으로 고른다. (미발동: rare-context)
 // local 451
 //     pos[+1] is 2**
 bool RuleL451([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "2**"sv);
 }
 
-// # 略称를 と 뒤이면서 する·され 앞일 때 약칭으로 고르고 と를 으로로 바꾼다. (미발동: rare-context)
 // local 452
 //     src[-1] == "と" and (src[+1] == "する" or src[+1] == "され") and pos[+1] is 4** and ko[-1] := "(으)로"
 bool RuleL452([[maybe_unused]] Item* p) {
@@ -4296,7 +3833,6 @@ bool RuleL452([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "され"sv)) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 両替가 札·玉에 붙은 に 뒤에 오면 환전을 고르고 に를 으로로 바꾼다. (미발동: rare-word)
 // local 453
 //     src[-1] == "に" and (src[-2] == "札" or src[-2] == "玉") and ko[-1] := "(으)로"
 bool RuleL453([[maybe_unused]] Item* p) {
@@ -4304,14 +3840,12 @@ bool RuleL453([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "玉"sv)) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 目下는 뒤에 명사와 조사가 이어지면 시간 부사 ‘지금’을 고른다.
 // local 454
 //     pos[+1] is 1** and pos[+2] is 2**
 bool RuleL454([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "1**"sv) && PumsaEq(p, 2, "2**"sv));
 }
 
-// # 조사를 사이에 두고 付ける·つける가 뒤따르는 文句를 불평으로 고른다.
 // local 455
 //     pos[+1] is 2** and (src[+2] == "付け" or src[+2] == "つけ") and pos[+2] is 4**
 bool RuleL455([[maybe_unused]] Item* p) {
@@ -4319,7 +3853,6 @@ bool RuleL455([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "つけ"sv)) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 白星 뒤에 発進·スタート가 오면 승리라는 번역을 고른다. (미발동: rare-word)
 // local 456
 //     (src[+1] == "発進" or src[+1] == "スタート")
 bool RuleL456([[maybe_unused]] Item* p) {
@@ -4327,7 +3860,6 @@ bool RuleL456([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "スタート"sv));
 }
 
-// # 変更은 앞에 있는 に를 바로 앞 조사, 명사 앞 조사 또는 세 단어 앞 조사 자리에서 찾아 ‘(으)로’로 바꾸고 ‘변경’을 고른다.
 // local 457
 //     src[-1] == "に" and ko[-1] := "(으)로"
 //     pos[-1] is 2** and pos[-2] is 1** and src[-3] == "に" and pos[-3] is 2** and ko[-3] := "(으)로"
@@ -4338,50 +3870,42 @@ bool RuleL457([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && SrcEq(p, -2, "に"sv) && DstSet(p, -2, "(으)로"sv));
 }
 
-// # 報告 앞에 と가 있고 뒤에 동사가 오면 と를 이라고로 바꾼다. (미발동: rare-context)
 // local 458
 //     src[-1] == "と" and pos[+1] is 4** and ko[-1] := "(이)라고"
 bool RuleL458([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "(이)라고"sv));
 }
 
-// # 앞의 명사와 に가 이어지면 分類를 분류로 고르고 に를 로로 바꾼다. (미발동: rare-context)
 // local 459
 //     src[-1] == "に" and pos[-2] is 1** and ko[-1] := "(으)로"
 bool RuleL459([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 조수사와 に 뒤의 分割를 '분할'로 고르고 に를 '(으)로'로 바꾼다.
 // local 460
 //     src[-1] == "に" and gram[-2] has Ct and ko[-1] := "(으)로"
 bool RuleL460([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && GramEq(p, -2, "Ct"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 바로 앞말이 に이면 上昇을 상승으로 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 461
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL461([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 명사와 と 뒤의 相殺을 '상쇄'로 고르고 と를 '(으)로'로 바꾼다. (미발동: rare-context)
 // local 462
 //     src[-1] == "と" and pos[-2] is 1** and ko[-1] := "(으)로"
 bool RuleL462([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "と"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 「テレビで」 뒤에서 「宣伝」을 고르고 「で」를 ‘에서’로 바꾼다. (미발동: rare-context)
 // local 463
 //     src[-1] == "で" and src[-2] == "テレビ" and ko[-1] := "에서"
 bool RuleL463([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && SrcEq(p, -2, "テレビ"sv) && DstSet(p, -1, "에서"sv));
 }
 
-// # 選出에 연결된 이 규칙은 현재 단어가 に 조사이고 앞 명사가 직업·지위 의미이면 그 조사를 (으)로로 바꾸도록 되어 있다. (미발동: impossible)
-// # [오류] 유일한 참조 행은 選出/N110인데 현재 표기 に와 P+0 2**를 요구하므로 이 행에서는 참이 될 수 없다.
 // local 464
 //     src == "に" and pos is 2** and pos[-1] is 1** and (sem[-1] has UAq or sem[-1] has UQf) and ko := "(으)로"
 bool RuleL464([[maybe_unused]] Item* p) {
@@ -4389,15 +3913,12 @@ bool RuleL464([[maybe_unused]] Item* p) {
            AttrEq(p, -1, "UQf"sv)) && DstSet(p, 0, "(으)로"sv));
 }
 
-// # に 뒤의 設定을 고르면서 앞의 に를 로로 바꾼다.
 // local 465
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL465([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 인사하러 찾아뵙는다는 동사 뒤나 동사와 でござ 사이에서 所在의 생각 후보를 고른다. (미발동: rare-context)
-// # [의심] 所在는 소재·행방인데 所存의 의향·생각 문맥을 잘못 연결한 사전 후보이다.
 // local 466
 //     (src[-1] == "ごあいさつ申しあげ" or src[-1] == "伺") and pos[-1] is 4**
 //     pos[-1] is 4** and end.pos[-1] is 50* and src[+1] == "でござ"
@@ -4409,28 +3930,24 @@ bool RuleL466([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "ごあいさつに伺"sv) && PumsaEq(p, -1, "4**"sv));
 }
 
-// # 手配를 指名 뒤에서 수배로 고른다. (미발동: rare-context)
 // local 467
 //     src[-1] == "指名" and pos[-1] is 1**
 bool RuleL467([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "指名"sv) && PumsaEq(p, -1, "1**"sv));
 }
 
-// # 勝訴가 裁判で 뒤에 오면 승소를 고르고 で를 에서로 바꾼다. (미발동: rare-word)
 // local 468
 //     src[-1] == "で" and src[-2] == "裁判" and ko[-1] := "에서"
 bool RuleL468([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "で"sv) && SrcEq(p, -2, "裁判"sv) && DstSet(p, -1, "에서"sv));
 }
 
-// # 昇格 앞에 사람 의미 계열의 명사와 に가 오면 승격을 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 469
 //     src[-1] == "に" and pos[-2] is 1** and sem[-2] under VHn and ko[-1] := "(으)로"
 bool RuleL469([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && AttrMinusEq(p, -2, "VHn"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 是非는 다음 말이 조사 を·が·は·の·など·などについて·に이면 명사 ‘시비’를 고른다.
 // local 470
 //     (src[+1] == "を" or src[+1] == "が" or src[+1] == "は" or src[+1] == "の" or src[+1] == "など" or src[+1] == "などについて" or src[+1] == "に") and pos[+1] is 2**
 bool RuleL470([[maybe_unused]] Item* p) {
@@ -4443,21 +3960,18 @@ bool RuleL470([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "に"sv)) && PumsaEq(p, 1, "2**"sv));
 }
 
-// # 試合 바로 앞에 何가 오면 何를 몇으로 바꾼다. (미발동: rare-context)
 // local 471
 //     src[-1] == "何" and ko[-1] := "몇"
 bool RuleL471([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "何"sv) && DstSet(p, -1, "몇"sv));
 }
 
-// # 言葉를 '하다'로 번역된 동사 い 뒤에서 '말'로 선택한다.
 // local 472
 //     src[-1] == "い" and ko[-1] == "&AV@" and pos[-1] is 4**
 bool RuleL472([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "い"sv) && DstEq(p, -1, "&AV@"sv) && PumsaEq(p, -1, "4**"sv));
 }
 
-// # 앞쪽에 企業로 끝나는 말이 있거나 뒤에 평판 형용사 또는 を伸ば가 오면 業績을 실적으로 고른다. (미발동: rare-word)
 // local 473
 //     src[-2] ends "企業"
 //     src[+1] == "の" and (src[+2] == "い" or src[+2] == "わる" or src[+2] == "悪") and pos[+2] is 7**
@@ -4470,14 +3984,12 @@ bool RuleL473([[maybe_unused]] Item* p) {
            (SrcEq(p, 1, "を"sv) && SrcEq(p, 2, "伸ば"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 바로 앞말이 に이면 延長을 연장으로 고르고 に를 으로로 바꾼다. (미발동: rare-context)
 // local 474
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL474([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 映画 뒤의 に가 빈 번역인 조사이고 그다음 동사가 行 또는 い이면 映画를 '영화 보러'로 바꾼다. (미발동: rare-context)
 // local 475
 //     src[+1] == "に" and ko[+1] == "" and pos[+1] is 2** and (src[+2] == "行" or src[+2] == "い") and pos[+2] is 4** and ko := "영화 보러"
 bool RuleL475([[maybe_unused]] Item* p) {
@@ -4485,28 +3997,24 @@ bool RuleL475([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "い"sv)) && PumsaEq(p, 2, "4**"sv) && DstSet(p, 0, "영화 보러"sv));
 }
 
-// # 기본형 동사 뒤에서 「容疑」를 고르고 앞 동사의 어미 번역을 활용형 8로 바꾼다. (미발동: rare-word)
 // local 476
 //     pos[-1] is 4** and end.pos[-1] is 500 and end.ko[-1] := "8"
 bool RuleL476([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && GobiDstSet(p, -1, "8"sv));
 }
 
-// # 原野는 두 단어 뒤 동사가 발화·사고·지각 계열이면 하라노로 고른다.
 // local 477
 //     pos[+2] is 4** and sem[+2] under UTs|UTh|URc
 bool RuleL477([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 2, "4**"sv) && AttrMinusEq(p, 2, "UTsUThURc"sv));
 }
 
-// # 조사 に 바로 뒤에서 応募를 응모로 고르고 に를 에로 바꾼다. (미발동: rare-context)
 // local 478
 //     src[-1] == "に" and pos[-1] is 2** and ko[-1] := "에"
 bool RuleL478([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -1, "2**"sv) && DstSet(p, -1, "에"sv));
 }
 
-// # 一時는 분·오전·오후·반시각 또는 현재 시각을 말하는 今は·時刻は 뒤의 です 앞에서 1시로 고른다.
 // local 479
 //     pos[+1] is 1** and gram[+1] has Nj|Nd and src[+2] == "分"
 //     (src[-1] == "午前" or src[-1] == "午後")
@@ -4521,63 +4029,54 @@ bool RuleL479([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "半"sv);
 }
 
-// # 一人를 でも 앞에서 한사람으로 고른다. (미발동: rare-context)
 // local 480
 //     src[+1] == "でも"
 bool RuleL480([[maybe_unused]] Item* p) {
     return SrcEq(p, 1, "でも"sv);
 }
 
-// # 一体는 何를 제외한 수사 앞에서 일체로 고르고 의문 수량 강조에는 적용하지 않는다.
 // local 481
 //     gram[+1] has Nj|Nd and src[+1] != "何"
 bool RuleL481([[maybe_unused]] Item* p) {
     return (GramEq(p, 1, "NjNd"sv) && SrcNe(p, 1, "何"sv));
 }
 
-// # 日新 앞말이 숫자 문법 코드를 갖지 않으면 닛신을 고른다. (미발동: rare-word)
 // local 482
 //     gram[-1] lacks Nj|Nd
 bool RuleL482([[maybe_unused]] Item* p) {
     return GramNe(p, -1, "NjNd"sv);
 }
 
-// # 日中 바로 앞이 숫자 문법 코드를 가진 명사이면 일중이라는 번역을 고른다. (미발동: rare-context)
 // local 483
 //     pos[-1] is 1** and gram[-1] has Nj|Nd
 bool RuleL483([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "NjNd"sv));
 }
 
-// # 日中 뒤에 명사가 오면 일본과 중국을 뜻하는 일중을 고른다. (미발동: rare-context)
 // local 484
 //     pos[+1] is 1**
 bool RuleL484([[maybe_unused]] Item* p) {
     return PumsaEq(p, 1, "1**"sv);
 }
 
-// # 뒤에 で가 오면 自分의 번역을 스스로의 어간인 스스로 바꾼다. (미발동: rare-context)
 // local 485
 //     src[+1] == "で" and ko := "스스"
 bool RuleL485([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "で"sv) && DstSet(p, 0, "스스"sv));
 }
 
-// # 바로 앞말이 まったく이면 残念을 유감으로 고르고 まったく를 정말로 바꾼다. (미발동: rare-context)
 // local 486
 //     src[-1] == "まったく" and ko[-1] := "정말"
 bool RuleL486([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "まったく"sv) && DstSet(p, -1, "정말"sv));
 }
 
-// # 場合는 앞 동사가 과거형이면 ‘경우’로 고르고 그 동사의 어미를 ‘-었을’로 바꾼다.
 // local 487
 //     pos[-1] is 4** and end.pos[-1] is 56* and end.ko[-1] := "5을"
 bool RuleL487([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "56*"sv) && GobiDstSet(p, -1, "5을"sv));
 }
 
-// # 일본을 제외한 나라 이름의 の 뒤나 나라 이름 바로 뒤의 蔵相을 '재정부 장관'으로 고른다. (미발동: rare-word)
 // local 488
 //     src[-1] == "の" and pos[-1] is 2** and src[-2] != "日本" and pos[-2] is 1** and sem[-2] has QNN
 //     pos[-1] is 1** and sem[-1] has QNN
@@ -4586,14 +4085,12 @@ bool RuleL488([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "1**"sv) && AttrEq(p, -1, "QNN"sv));
 }
 
-// # 「日本の」 뒤에서 「蔵相」를 ‘대장성 장관’으로 고른다. (미발동: rare-word)
 // local 489
 //     src[-1] == "の" and pos[-1] is 2** and src[-2] == "日本" and pos[-2] is 1**
 bool RuleL489([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && SrcEq(p, -2, "日本"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 抵触은 法으로 끝나는 말 뒤 に와 する·すると 동사 사이에 있으면 저촉으로 고르고 に를 에로 바꾼다. (미발동: rare-word)
 // local 490
 //     src[-1] == "に" and src[-2] ends "法" and (src[+1] == "する" or src[+1] == "すると") and pos[+1] is 4** and ko[-1] := "에"
 bool RuleL490([[maybe_unused]] Item* p) {
@@ -4601,7 +4098,6 @@ bool RuleL490([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "すると"sv)) && PumsaEq(p, 1, "4**"sv) && DstSet(p, -1, "에"sv));
 }
 
-// # に 또는 へ 바로 뒤에서 転換을 전환으로 고르고 앞 조사를 으로로 바꾼다. (미발동: rare-context)
 // local 491
 //     (src[-1] == "に" or src[-1] == "へ") and ko[-1] := "(으)로"
 bool RuleL491([[maybe_unused]] Item* p) {
@@ -4609,14 +4105,12 @@ bool RuleL491([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "へ"sv)) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 電車를 뒤에 で가 있고 세 단어 뒤에 を가 있을 때 전철로 고른다. (미발동: rare-context)
 // local 492
 //     src[+1] == "で" and src[+3] == "を"
 bool RuleL492([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "で"sv) && SrcEq(p, 3, "を"sv));
 }
 
-// # 朝日 앞쪽이나 다음 말이 집필물 계열이거나 바로 앞 표기가 BS이면 아사히를 고른다. (미발동: rare-context)
 // local 493
 //     pos[-2] is 1** and sem[-2] under VSw
 //     sem[+1] under VSw
@@ -4627,63 +4121,54 @@ bool RuleL493([[maybe_unused]] Item* p) {
            SrcEq(p, -1, "BS"sv);
 }
 
-// # 注目 앞에 명사와 に가 오면 주목을 고르고 に를 에로 바꾼다. (미발동: rare-context)
 // local 494
 //     src[-1] == "に" and pos[-2] is 1** and ko[-1] := "에"
 bool RuleL494([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && PumsaEq(p, -2, "1**"sv) && DstSet(p, -1, "에"sv));
 }
 
-// # 注意 뒤의 조사 다음에 기울이다로 번역되는 払 동사가 오면 주의를 고른다. (미발동: rare-context)
 // local 495
 //     pos[+1] is 2** and src[+2] == "払" and ko[+2] == "기울&AJ@" and pos[+2] is 4**
 bool RuleL495([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 1, "2**"sv) && SrcEq(p, 2, "払"sv) && DstEq(p, 2, "기울&AJ@"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 뒤말이 도시·장소 의미 코드에 해당하지 않으면 増毛를 증모라는 보통명사로 고른다. (미발동: rare-word)
 // local 496
 //     sem[+1] lacks QCT|VPl
 bool RuleL496([[maybe_unused]] Item* p) {
     return AttrNe(p, 1, "QCTVPl"sv);
 }
 
-// # と 뒤의 문장 오른쪽 경계에서 指摘을 지적으로 고르고 と를 이라고로 바꾼다. (미발동: rare-context)
 // local 497
 //     gram has Ow and src[-1] == "と" and ko[-1] := "(이)라고"
 bool RuleL497([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Ow"sv) && SrcEq(p, -1, "と"sv) && DstSet(p, -1, "(이)라고"sv));
 }
 
-// # 指定 앞의 に를 '(으)로'로 바꾸고 '지정' 후보를 고른다. (미발동: rare-context)
 // local 498
 //     src[-1] == "に" and ko[-1] := "(으)로"
 bool RuleL498([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "に"sv) && DstSet(p, -1, "(으)로"sv));
 }
 
-// # 도시 의미의 고유명사 뒤에서 「支店」을 ‘지점’으로 고른다. (미발동: rare-word)
 // local 499
 //     pos[-1] is 13* and sem[-1] has QCT
 bool RuleL499([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "13*"sv) && AttrEq(p, -1, "QCT"sv));
 }
 
-// # 각부와 독립된 옥호 접미사를 각 방으로 묶는다.
 // global 997 stem pos 1 prio 1
 //     src == "屋" and src[-1] == "各部" and ko[-1] := "" and ko := "각 방"
 bool RuleG1([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "屋"sv) && SrcEq(p, -1, "各部"sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "각 방"sv));
 }
 
-// # 고기 뒤 조사로 나뉜 요리명을 복원한다.
 // global 998 stem pos 2 prio 2
 //     src == "が" and src[-1] == "じゃ" and src[-2] == "肉" and ko[-2] := "" and ko[-1] := "" and ko := "고기감자조림"
 bool RuleG2([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "が"sv) && SrcEq(p, -1, "じゃ"sv) && SrcEq(p, -2, "肉"sv) && DstSet(p, -2, ""sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "고기감자조림"sv));
 }
 
-// # 현재 후보가 13* 품사의 QPN 인명이고 다음 명사가 様·氏·君·さん·ちゃん·ちゃーん이면 그 인명 후보를 고른다.
 // global 1002 stem pos 1 prio 10
 //     pos is 13* and sem has QPN and (src[+1] == "様" or src[+1] == "氏" or src[+1] == "君" or src[+1] == "さん" or src[+1] == "ちゃん" or src[+1] == "ちゃーん") and pos[+1] is 1**
 bool RuleG10([[maybe_unused]] Item* p) {
@@ -4695,7 +4180,6 @@ bool RuleG10([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "ちゃーん"sv)) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # 뒤에 직함·인물 관련 명사가 오는 고유명사 후보 중 인명 의미 코드 QPN을 가진 후보를 고른다.
 // global 1002 stem pos 1 prio 20
 //     pos is 13* and sem has QPN and pos[+1] is 1** and (sem[+1] has UAq or sem[+1] has UQf)
 bool RuleG20([[maybe_unused]] Item* p) {
@@ -4703,35 +4187,30 @@ bool RuleG20([[maybe_unused]] Item* p) {
            AttrEq(p, 1, "UQf"sv)));
 }
 
-// # 앞말이 명사이고 명사화 코드가 없으면 현재 명사의 접미사 후보를 선택한다.
 // global 1003 stem pos 1 prio 30
 //     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn
 bool RuleG30([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "Pn"sv));
 }
 
-// # 명사 전역 규칙은 접두사 문법 코드 Z6가 있는 후보를 다음 명사 앞에서 고른다.
 // global 1004 stem pos 1 prio 40
 //     gram has Z6 and pos[+1] is 1**
 bool RuleG40([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Z6"sv) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # 바로 뒤에 이름 문법 코드 Wb를 가진 고유명사가 있으면 성 문법 코드 Wa를 가진 명사 후보를 고른다.
 // global 1006 stem pos 1 prio 50
 //     gram has Wa and pos[+1] is 130 and gram[+1] has Wb
 bool RuleG50([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Wa"sv) && PumsaEq(p, 1, "130"sv) && GramEq(p, 1, "Wb"sv));
 }
 
-// # 바로 앞에 성 문법 코드 Wa를 가진 고유명사가 있으면 이름 문법 코드 Wb를 가진 명사 후보를 고른다.
 // global 1006 stem pos 1 prio 60
 //     gram has Wb and pos[-1] is 130 and gram[-1] has Wa
 bool RuleG60([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Wb"sv) && PumsaEq(p, -1, "130"sv) && GramEq(p, -1, "Wa"sv));
 }
 
-// # 현재 명사 후보에 Mo 문법 코드가 있고 쉼표를 건너 앞이나 뒤의 단어에도 Mo 코드가 있으면 그 후보를 고른다.
 // global 1007 stem pos 1 prio 70
 //     gram has Mo and ko[+1] == "," and gram[+2] has Mo
 //     gram has Mo and ko[-1] == "," and gram[-2] has Mo
@@ -4740,36 +4219,30 @@ bool RuleG70([[maybe_unused]] Item* p) {
            (GramEq(p, 0, "Mo"sv) && DstEq(p, -1, ","sv) && GramEq(p, -2, "Mo"sv));
 }
 
-// # 수사 문법 코드가 있는 단어 바로 뒤에서는 명사의 조수사 후보를 고른다.
 // global 1009 stem pos 1 prio 80
 //     gram has Ct and gram[-1] has Nj|Nd
 bool RuleG80([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Ct"sv) && GramEq(p, -1, "NjNd"sv));
 }
 
-// # 명사 뒤에 조사와 동사가 이어질 때 뒤 동사와 의미 계열이 맞는 명사 후보를 선택한다.
 // global 1010 stem pos 1 prio 90
 //     sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4**
 bool RuleG90([[maybe_unused]] Item* p) {
     return (AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv));
 }
 
-// # 문장에 홀로 쓰이고 문법 코드 On이 있는 명사 후보를 선택한다. 私, 俺, 僕, 君, 誰는
-// # 대명사를 읽는 글자라 홀로 와도 한자음이 아니라 그 뜻으로 읽는다.
 // global 1015 stem pos 1 prio 100
 //     gram has Td and gram has On and src != "私" and src != "俺" and src != "僕" and src != "君" and src != "誰"
 bool RuleG100([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Td"sv) && GramEq(p, 0, "On"sv) && SrcNe(p, 0, "私"sv) && SrcNe(p, 0, "俺"sv) && SrcNe(p, 0, "僕"sv) && SrcNe(p, 0, "君"sv) && SrcNe(p, 0, "誰"sv));
 }
 
-// # 현재 명사가 접미사이고 바로 앞말에 숫자 문법 코드가 있으면 그 접미사 후보를 고른다. (미발동: other)
 // global 1020 stem pos 1 prio 110
 //     pos is 1** and gram within Z7 and gram[-1] within Nd|Nj
 bool RuleG110([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && GramMinusEq(p, -1, "NdNj"sv));
 }
 
-// # 쉼표로 나열된 이름 목록에서 앞뒤 이름과 쉼표를 확인하여 이름용 명사 후보를 고른다.
 // global 1030 stem pos 1 prio 120
 //     gram has On and ko[-1] == "," and gram[-2] has On and ko[-3] == ","
 //     gram has On and ko[+1] == "," and gram[+2] has On and ko[+3] == ","
@@ -4778,7 +4251,6 @@ bool RuleG120([[maybe_unused]] Item* p) {
            (GramEq(p, 0, "On"sv) && DstEq(p, 1, ","sv) && GramEq(p, 2, "On"sv) && DstEq(p, 3, ","sv));
 }
 
-// # 가운뎃점 「・」으로 연결된 명사들이 모두 On 코드를 가진 한자음 후보를 포함하면 현재 명사의 한자음 후보를 고른다.
 // global 2000 stem pos 1 prio 130
 //     pos is 1** and gram has On and src[-1] == "・" and pos[-2] is 1** and gram[-2] has On
 //     pos is 1** and gram has On and src[+1] == "・" and pos[+2] is 1** and gram[+2] has On
@@ -4787,14 +4259,12 @@ bool RuleG130([[maybe_unused]] Item* p) {
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && SrcEq(p, 1, "・"sv) && PumsaEq(p, 2, "1**"sv) && GramEq(p, 2, "On"sv));
 }
 
-// # 현재 명사 후보의 의미 코드가 UDr이고 다음 명사의 의미 코드가 QCT이면 그 후보를 고른다.
 // global 3121 stem pos 1 prio 140
 //     sem has UDr and pos[+1] is 1** and sem[+1] has QCT
 bool RuleG140([[maybe_unused]] Item* p) {
     return (AttrEq(p, 0, "UDr"sv) && PumsaEq(p, 1, "1**"sv) && AttrEq(p, 1, "QCT"sv));
 }
 
-// # 도시 의미의 고유명사 뒤에 都·市·県·区·駅이 명사로 오면 그 지명 후보를 고른다.
 // global 3500 stem pos 1 prio 150
 //     pos is 13* and sem has QCT and (src[+1] == "都" or src[+1] == "市" or src[+1] == "県" or src[+1] == "区" or src[+1] == "駅") and pos[+1] is 1**
 bool RuleG150([[maybe_unused]] Item* p) {
@@ -4805,43 +4275,36 @@ bool RuleG150([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "駅"sv)) && PumsaEq(p, 1, "1**"sv));
 }
 
-// # 현재 명사와 바로 뒤 명사가 모두 On 문법 코드를 지니면 현재 명사의 해당 후보를 고른다.
 // global 4000 stem pos 1 prio 160
 //     pos is 1** and gram has On and pos[+1] is 1** and gram[+1] has On
 bool RuleG160([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv));
 }
 
-// # 문법 코드 On인 명사가 같은 코드의 명사 뒤에 오면 현재 명사 후보를 고른다.
 // global 4001 stem pos 1 prio 170
 //     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has On
 bool RuleG170([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "On"sv));
 }
 
-// # 명사 후보에 On 코드가 있고 앞말이 별표로 시작하는 Mk 기호이면 그 명사 후보를 고른다. (미발동: rare-context)
 // global 4100 stem pos 1 prio 180
 //     gram has On and ko[-1] starts "*" and gram[-1] has Mk
 bool RuleG180([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "On"sv) && DstEq(p, -1, "L*"sv) && GramEq(p, -1, "Mk"sv));
 }
 
-// # 현재 조사 후보의 번역이 해 주세요이고 앞말이 명사이면 그 후보를 고른다. (미발동: impossible)
-// # [오류] 해 주세요 번역은 ください·下さい의 N300과 しなさい의 A9D0에만 있고 품사키 2인 조사 후보에는 없다.
 // global 2101 stem pos 2 prio 190
 //     ko == "해 주세요" and pos[-1] is 1**
 bool RuleG190([[maybe_unused]] Item* p) {
     return (DstEq(p, 0, "해 주세요"sv) && PumsaEq(p, -1, "1**"sv));
 }
 
-// # 현재 조사 후보에 Z0 문법 코드가 있고 바로 앞말의 번역이 쉼표이면 그 후보를 고른다.
 // global 2201 stem pos 2 prio 200
 //     gram has Z0 and ko[-1] == ","
 bool RuleG200([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Z0"sv) && DstEq(p, -1, ","sv));
 }
 
-// # お를 이용한 특정 겸양 동사 구성에서 する를 지우고 그 어미 번역을 앞 동사의 어미로 복사한다.
 // global 1 stem pos 4 prio 210
 //     src == "する" and pos[-1] is 4** and (end.pos[-1] is 5:0 or end.pos[-1] is 58*) and src[-2] == "お" and ko := "" and end.ko[-1] := end.ko
 //     src == "する" and src[-1] starts "お" and end.pos[-1] is 5:0 and ko := "" and end.ko[-1] := end.ko
@@ -4851,7 +4314,6 @@ bool RuleG210([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "する"sv) && SrcEq(p, -1, "Lお"sv) && GobiPumsaEq(p, -1, "5:0"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
 }
 
-// # お와 동사의 뒤에 오는 いた·致 또는 형용동사의 で 뒤에 오는 あ를 생략하고 그 어미 번역을 앞말로 옮긴다.
 // global 2 stem pos 4 prio 220
 //     (src == "いた" or src == "致") and pos[-1] is 4** and end.pos[-1] is 58* and src[-2] == "お" and ko := "" and end.ko[-1] := end.ko
 //     src == "あ" and pos[-1] is 8** and end.src[-1] == "で" and ko := "" and end.ko[-1] := end.ko
@@ -4861,7 +4323,6 @@ bool RuleG220([[maybe_unused]] Item* p) {
            (SrcEq(p, 0, "あ"sv) && PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, "で"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
 }
 
-// # 이동 의미가 아닌 동사의 연용형 뒤에서는 あが·上が·あげ·上げ를 생략하고 어미를 앞 동사로 옮긴다. 이동 동사 뒤에는 상승 방향을 남긴다.
 // global 3 stem pos 4 prio 230
 //     (src == "あが" or src == "上が" or src == "あげ" or src == "上げ") and pos[-1] is 4** and end.pos[-1] is 58*|5:0 and sem[-1] lacks UMv and ko := "" and end.ko[-1] := end.ko
 bool RuleG230([[maybe_unused]] Item* p) {
@@ -4871,7 +4332,6 @@ bool RuleG230([[maybe_unused]] Item* p) {
            SrcEq(p, 0, "上げ"sv)) && PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "58*5:0"sv) && AttrNe(p, -1, "UMv"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
 }
 
-// # 현재 동사가 い·お이고 앞동사에 Xj 문법 코드와 57* 어미가 있으면 현재 어간 번역을 지우고 그 어미 번역을 앞동사로 복사한다.
 // global 4 stem pos 4 prio 240
 //     (src == "い" or src == "お") and pos[-1] is 4** and gram[-1] has Xj and end.pos[-1] is 57* and ko := "" and end.ko[-1] := end.ko
 bool RuleG240([[maybe_unused]] Item* p) {
@@ -4879,35 +4339,30 @@ bool RuleG240([[maybe_unused]] Item* p) {
            SrcEq(p, 0, "お"sv)) && PumsaEq(p, -1, "4**"sv) && GramEq(p, -1, "Xj"sv) && GobiPumsaEq(p, -1, "57*"sv) && DstSet(p, 0, ""sv) && GobiDstSetW(p, -1, 0));
 }
 
-// # 바로 앞말이 명사이고 그 명사의 의미 코드와 현재 동사 후보의 의미 계열이 맞으면 해당 동사 후보를 고른다.
 // global 4990 stem pos 4 prio 250
 //     sem under sem[-1] and pos[-1] is 1**
 bool RuleG250([[maybe_unused]] Item* p) {
     return (AttrMinusEqW(p, 0, -1) && PumsaEq(p, -1, "1**"sv));
 }
 
-// # 명사와 조사가 앞에 놓이면 그 명사의 의미 코드와 계열이 맞는 동사 후보를 고른다.
 // global 4997 stem pos 4 prio 260
 //     sem under sem[-2] and pos[-1] is 2** and pos[-2] is 1**
 bool RuleG260([[maybe_unused]] Item* p) {
     return (AttrMinusEqW(p, 0, -2) && PumsaEq(p, -1, "2**"sv) && PumsaEq(p, -2, "1**"sv));
 }
 
-// # 명사와 조사와 부사가 차례로 앞에 있으면 그 명사의 의미 계열에 맞는 동사 후보를 고른다.
 // global 4998 stem pos 4 prio 270
 //     sem under sem[-3] and pos[-1] is 3** and pos[-2] is 2** and pos[-3] is 1**
 bool RuleG270([[maybe_unused]] Item* p) {
     return (AttrMinusEqW(p, 0, -3) && PumsaEq(p, -1, "3**"sv) && PumsaEq(p, -2, "2**"sv) && PumsaEq(p, -3, "1**"sv));
 }
 
-// # 뒤에 보조동사 코드가 있는 동사가 오면 앞 동사의 연결어미를 '-어·아'로 선택한다.
 // global 5200 ending pos 4 prio 280
 //     end.ko == "6" and end.pos is 57* and pos[+1] is 4** and gram[+1] has Ds
 bool RuleG280([[maybe_unused]] Item* p) {
     return (GobiDstEq(p, 0, "6"sv) && GobiPumsaEq(p, 0, "57*"sv) && PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Ds"sv));
 }
 
-// # 현재 동사가 Dx 문법코드와 57 계열 어미를 가지며 앞에 빈도 부사와 사변명사 및 뒤에 Da 보조동사가 있으면 현재 어미를 -고로 바꾼다. (미발동: rare-context)
 // global 5501 ending pos 4 prio 290
 //     pos is 4** and gram has Dx and end.pos is 57* and pos[-1] is 1** and gram[-1] has Hd and (src[-2] == "だんだん" or src[-2] == "ますます" or src[-2] == "しばしば" or src[-2] == "たまに") and pos[-2] is 3** and pos[+1] is 4** and gram[+1] has Da and end.ko := "1고"
 bool RuleG290([[maybe_unused]] Item* p) {
@@ -4917,14 +4372,12 @@ bool RuleG290([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "たまに"sv)) && PumsaEq(p, -2, "3**"sv) && PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Da"sv) && GobiDstSet(p, 0, "1고"sv));
 }
 
-// # 문법 코드 Dx가 있는 동사의 て형 뒤에 동사가 오면 현재 어미를 어·아 연결형으로 고른다.
 // global 5502 ending pos 4 prio 300
 //     gram has Dx and end.ko == "6" and end.pos is 57* and pos[+1] is 4**
 bool RuleG300([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Dx"sv) && GobiDstEq(p, 0, "6"sv) && GobiPumsaEq(p, 0, "57*"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 현재 동사가 상태형이 아니고 뒤에 보조동사 코드 Da가 있는 동사나 형용사가 오면 571계열 연결 어미를 ‘-고’로 고른다.
 // global 5515 ending pos 4 prio 310
 //     gram lacks Dx and end.ko == "1고" and end.pos is 571 and (pos[+1] is 4** or pos[+1] is 7**) and gram[+1] has Da
 bool RuleG310([[maybe_unused]] Item* p) {
@@ -4932,35 +4385,30 @@ bool RuleG310([[maybe_unused]] Item* p) {
            PumsaEq(p, 1, "7**"sv)) && GramEq(p, 1, "Da"sv));
 }
 
-// # 동사의 て형 어미 후보가 '-어서'이고 뒤 동사 번역이 '되다' 활용 표지로 끝나면 그 '-어서' 후보를 고른다. (미발동: rare-context)
 // global 9980 ending pos 4 prio 320
 //     end.ko == "6서" and end.pos is 57* and ko[+1] ends "&C6@" and pos[+1] is 4**
 bool RuleG320([[maybe_unused]] Item* p) {
     return (GobiDstEq(p, 0, "6서"sv) && GobiPumsaEq(p, 0, "57*"sv) && DstEq(p, 1, "R&C6@"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
-// # 동사 어미 후보의 번역이 활용형 6(-어/아) 하나이고 품사가 57*이면 그 어미를 고른다.
 // global 9991 ending pos 4 prio 330
 //     end.ko == "6" and end.pos is 57*
 bool RuleG330([[maybe_unused]] Item* p) {
     return (GobiDstEq(p, 0, "6"sv) && GobiPumsaEq(p, 0, "57*"sv));
 }
 
-// # 연속한 두 い형용사가 모두 くて형이고 각각 '-고'와 '-아서/어서' 어미 후보를 가지면 앞 형용사의 어간 후보를 고른다.
 // global 1001 stem pos 7 prio 340
 //     pos is 7** and end.src == "くて" and end.ko == "1고" and pos[+1] is 7** and end.src[+1] == "くて" and end.ko[+1] == "6서"
 bool RuleG340([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "7**"sv) && GobiSrcEq(p, 0, "くて"sv) && GobiDstEq(p, 0, "1고"sv) && PumsaEq(p, 1, "7**"sv) && GobiSrcEq(p, 1, "くて"sv) && GobiDstEq(p, 1, "6서"sv));
 }
 
-// # で형 형용동사가 연속되고 뒤쪽이 원인형으로 번역되면 앞쪽 형용동사의 ‘-고’ 연결 후보를 고른다.
 // global 1001 stem pos 8 prio 350
 //     pos is 8** and end.src == "で" and end.ko == "1고" and pos[+1] is 8** and end.src[+1] == "で" and end.ko[+1] == "6서"
 bool RuleG350([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "8**"sv) && GobiSrcEq(p, 0, "で"sv) && GobiDstEq(p, 0, "1고"sv) && PumsaEq(p, 1, "8**"sv) && GobiSrcEq(p, 1, "で"sv) && GobiDstEq(p, 1, "6서"sv));
 }
 
-// # 형용동사 후보에 문법 코드 Gk가 있고 어미가 「に」이며 앞이 조사 「の」이면 그 어미 번역을 ‘에’로 바꾼다. (미발동: rare-context)
 // global 2001 stem pos 8 prio 360
 //     gram has Gk and end.src == "に" and src[-1] == "の" and pos[-1] is 2** and end.ko := " 에"
 bool RuleG360([[maybe_unused]] Item* p) {

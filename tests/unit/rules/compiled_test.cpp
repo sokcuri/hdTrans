@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <string>
 
+#include "core/dict/snapshot.h"
+#include "core/engine/driver.h"
 #include "core/engine/rules.h"
 #include "core/rules/compiled.h"
 #include "hdtest.h"
@@ -33,8 +35,17 @@ void Compare(const rules::Program& p, uint32_t root, rules::compiled::RuleCode c
 
 }  // namespace
 
+// The compiled code attaches to the program the dictionary assembles, since a local rule
+// is a row's condition. The shipped dictionaries are needed, so the test skips without
+// HDTRANS_DICTS.
 HD_TEST(rules_compiled_attached) {
-    const rules::Program& p = internal::RulesProgram();
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    const auto loaded = dict::LoadFoldersTsv({dicts});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const auto generated = internal::NewGenerated(*loaded.snapshot);
+    HD_REQUIRE(generated->hasRules);
+    const rules::Program& p = generated->rules;
     HD_REQUIRE(internal::RulesLoaded());
     std::size_t local = 0, global = 0;
     for (const auto code : p.localCode) local += code != nullptr;

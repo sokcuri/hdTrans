@@ -123,9 +123,11 @@ const rules::Program& RulesProgram() { return Load().program; }
 bool RulesLoaded() { return Load().ok; }
 
 std::string RuleSource(char kind, int id) {
+    // A local rule lives in a dictionary row, not in a file; its number names it until a
+    // row id replaces the number.
+    if (kind == 'L') return "L" + std::to_string(id);
     const Loaded& l = Load();
     std::size_t file = SIZE_MAX;
-    if (kind == 'L' && id >= 0 && static_cast<std::size_t>(id) < l.localFile.size()) file = l.localFile[static_cast<std::size_t>(id)];
     if (kind == 'G') {
         if (const auto it = l.globalFile.find(id); it != l.globalFile.end()) file = it->second;
     }

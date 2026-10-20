@@ -5,12 +5,14 @@
 #include <vector>
 
 #include "core/dict/snapshot.h"
+#include "core/engine/driver.h"
 #include "core/engine/rules.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/word/analyze.h"
 #include "core/word/flush.h"
 #include "core/word/worker.h"
 #include "hdtest.h"
+#include "rule_fixture.h"
 
 using namespace hdTrans;
 
@@ -18,11 +20,20 @@ namespace {
 
 std::shared_ptr<const dict::Snapshot> Dictionary(std::string_view rows, std::string_view plain = {}) {
     std::vector<dict::File> files{{0, "base.tsv",
-        "key\tko\tpos\tsem\tgram\tdict\trule\tid\n" + std::string(rows)}};
+        fixture::WithRuleBodies("key\tko\tpos\tsem\tgram\tdict\trule\tid\n" + std::string(rows))}};
     if (!plain.empty()) files.push_back({0, "terms.tsv", std::string(plain)});
     const dict::LoadResult loaded = dict::Load(std::move(files));
     HD_CHECK(loaded.errors.empty());
     return loaded.snapshot;
+}
+
+// The rules program the snapshot's rows assemble; the built-in one holds the global
+// rules only, since a local rule is a row's condition.
+const rules::Program& Rules(const dict::Snapshot& snapshot) {
+    static std::vector<std::shared_ptr<internal::Generated>> kept;
+    kept.push_back(internal::NewGenerated(snapshot));
+    // A fixture whose rows carry no body runs the built-in program, as the engine does.
+    return kept.back()->hasRules ? kept.back()->rules : internal::RulesProgram();
 }
 
 struct AnalyzedLine {
@@ -91,7 +102,7 @@ HD_TEST(word_provenance_defaults) {
             CheckSelection(it->choice, word::Provenance::None);
             CheckSelection(it->directChoice, word::Provenance::None);
             for (const word::Entry* e : it->group->entries) CheckSelection(e->targetChoice, word::Provenance::None);
-            word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+            word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
             if (full) word::Flush(f);
             else word::CleanupSelectors(f);
             HD_REQUIRE(line.Find("人気") == it);
@@ -117,7 +128,7 @@ HD_TEST(word_provenance_local_rule) {
         HD_REQUIRE(it != nullptr);
         HD_REQUIRE(it->group->entries.size() == 2);
         HD_CHECK_EQ(it->RuleID(1), 2);
-        word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+        word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else word::CleanupSelectors(f);
         HD_CHECK_EQ(it->selected, 1);
@@ -140,7 +151,7 @@ HD_TEST(word_provenance_global_rule) {
         word::Item* it = line.Find("東京");
         HD_REQUIRE(it != nullptr);
         HD_REQUIRE(it->group->entries.size() == 2);
-        word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+        word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else word::CleanupSelectors(f);
         HD_CHECK_EQ(it->selected, 1);
@@ -181,7 +192,7 @@ HD_TEST(word_provenance_senses_override_rule) {
             HD_REQUIRE(line.Analyze(c.text, *snapshot, settings));
             word::Item* it = line.Find("声");
             HD_REQUIRE(it != nullptr);
-            word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+            word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
             if (full) {
                 word::Flush(f);
             } else {
@@ -216,7 +227,7 @@ HD_TEST(word_provenance_fixed_ignores_senses) {
         word::Item* it = line.Find("声");
         HD_REQUIRE(it != nullptr);
         HD_REQUIRE(it->Fixed());
-        word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+        word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else {
             word::CleanupSelectors(f);
@@ -262,7 +273,7 @@ HD_TEST(word_provenance_direct_selection) {
             HD_REQUIRE(it->detail->Yougo());
             HD_CHECK_EQ(it->DirectIndex(), -1);
             CheckSelection(it->directChoice, word::Provenance::None);
-            word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+            word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
             if (full) word::Flush(f);
             else word::CleanupSelectors(f);
             HD_CHECK_EQ(it->selected, 0);
@@ -293,7 +304,7 @@ HD_TEST(word_provenance_pool_reuse) {
     word::Item* first = line.Find("声");
     HD_REQUIRE(first != nullptr);
     word::Entry* firstEntry = first->group->At(0);
-    word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+    word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
     word::Flush(f);
     CheckSelection(first->choice, word::Provenance::SenseDefault, 922);
     CheckSelection(firstEntry->targetChoice, word::Provenance::SenseDefault, 922);
@@ -311,7 +322,7 @@ HD_TEST(word_provenance_pool_reuse) {
     HD_REQUIRE(line.Analyze("書いている。", *snapshot));
     word::Item* stem = line.Find("書");
     HD_REQUIRE(stem != nullptr);
-    word::Flusher verbs{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+    word::Flusher verbs{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
     word::Flush(verbs);
     CheckSelection(stem->directChoice, word::Provenance::GlobalRule, 240);
     HD_REQUIRE(stem->DirectEntry(stem->DirectIndex()) != nullptr);
@@ -345,7 +356,7 @@ HD_TEST(word_provenance_failed_local_assignment) {
         word::Item* it = line.Find("時");
         HD_REQUIRE(it != nullptr);
         HD_REQUIRE(it->prev != nullptr && word::OwnedGroup(it->prev->DirectGroup()));
-        word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+        word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else word::CleanupSelectors(f);
         HD_CHECK_EQ(it->selected, 0);
@@ -354,7 +365,7 @@ HD_TEST(word_provenance_failed_local_assignment) {
         CheckSelection(it->group->At(0)->targetChoice, word::Provenance::LocalRule, 22);
         CheckSelection(it->prev->directChoice, word::Provenance::Fixed);
         it->compDI = it->selected;
-        HD_CHECK(!rules::RunLocal(internal::RulesProgram(), it, 22));
+        HD_CHECK(!rules::RunLocal(Rules(*snapshot), it, 22));
         CheckSelection(line.analysis.worker->ruleChoice, word::Provenance::None);
     }
 }
@@ -377,7 +388,7 @@ HD_TEST(word_provenance_late_global_rule) {
         int fired = 123;
         HD_CHECK(!rules::RunGlobal(internal::RulesProgram(), auxiliary, true, '4', false, &fired));
         HD_CHECK_EQ(fired, -1);
-        word::Flusher f{*line.analysis.worker, internal::RulesProgram(), snapshot->OutputFamilies()};
+        word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else word::CleanupSelectors(f);
         HD_CHECK_EQ(auxiliary->selected, 0);
