@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:audit-senses	夢追い人	꿈을 쫓는 사람	fix	lookup
+dict:audit-senses	夢追い人だった。	꿈을 쫓는 사람이었다.	fix	lookup
+dict:audit-senses	キャソック	성직복	fix	lookup
+dict:audit-senses	キャソックを着る。	성직복을 입는다.	fix	lookup
+dict:audit-senses	差込	삽입	keep	lookup
+dict:audit-senses	コンセントの差込が甘い。	콘센트의 삽입이 달다.	keep	lookup

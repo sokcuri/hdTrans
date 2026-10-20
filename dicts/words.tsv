@@ -15643,7 +15643,7 @@ key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
 差当り	당분간	E300			GN		llm		さしあたり	w:15627
 差込	삽입	N110			GN		xxx llm		さしこみ	w:15628
 差込	콘센트	N110	VPe		GN		llm		さしこみ	w:15629
-差込	복통	N110	UTi		GN		llm		さしこみ	w:15630
+差込	복통	N110	UTi		GN		xxx llm		さしこみ	w:15630
 差込	&E9@	M425			GN		xxx		さしこむ	w:15631
 差込	비쳐 &L4@	M425			GN		llm		さしこむ	w:15632
 差込	쑤&AE@	M425			GN		llm		さしこむ	w:15633
