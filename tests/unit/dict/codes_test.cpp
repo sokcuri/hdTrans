@@ -189,8 +189,16 @@ HD_TEST(PosTags) {
     HD_CHECK_EQ(Pos("verb-general,godan-ra,連用形-一般"), "unknown");
     // A cType of "*" is no cType.
     HD_CHECK_EQ(Pos("adverb,*"), "E300||");
+    // A closed class carries its fine class in the grammar codes.
+    HD_CHECK_EQ(Pos("助詞-格助詞"), "P200||Gc");
+    HD_CHECK_EQ(Pos("particle-case"), "P200||Gc");
+    HD_CHECK_EQ(Pos("particle-binding"), "P200||Gb");
+    HD_CHECK_EQ(Pos("particle-final"), "P200||Ge");
+    HD_CHECK_EQ(Pos("名詞-数詞"), "N110||Nj");
+    HD_CHECK_EQ(Pos("aux_symbol-comma"), "N600||");
+    HD_CHECK_EQ(Pos("空白"), "N600||");
     // Tags without a part code, unknown tags and lower-case values are unknown.
-    HD_CHECK_EQ(Pos("aux_symbol-comma"), "unknown");
+    HD_CHECK_EQ(Pos("助動詞"), "unknown");
     HD_CHECK_EQ(Pos("foo-bar"), "unknown");
     HD_CHECK_EQ(Pos("n110"), "unknown");
     HD_CHECK_EQ(Pos("N1,10"), "unknown");
