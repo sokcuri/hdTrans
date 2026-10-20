@@ -2,11 +2,14 @@
 """Check dictionary rows against JEV, which decides what a word means.
 
 Usage: tools/judge-dict.py DICTS OUT.tsv [--sample N] [--file NAME] [--resume]
+                         [--progress FILE.json] [--jobs N]
 JEV is a choice model, not a translator: it picks the correct reading from the
 candidates it is given. Each sampled row is put in a three-way choice with two
 same-pos decoys from the dictionary; a row whose Korean is not the highest
 probability is written to OUT.tsv as key, ko, pos, pick, confidence, source.
 Rows already in OUT.tsv for the same dictionaries are skipped on restart.
+--progress writes a JSON report as the run goes (rows, rejected, rate, file) for
+tools/audit-dashboard.py. --jobs sends batches in parallel; the default is one.
 Credentials: JEV_KEY, else the first existing line of $HDTRANS_JEV_KEY_FILE,
 $XDG_CONFIG_HOME/hdtrans/jev.key, or ~/.config/hdtrans/jev.key.
 """
@@ -18,6 +21,7 @@ from pathlib import Path
 import random
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -94,7 +98,12 @@ def main():
     parser.add_argument("--sample", type=int, metavar="N", help="check N random rows instead of all")
     parser.add_argument("--file", action="append", metavar="NAME", help="read only this file (repeatable)")
     parser.add_argument("--resume", action="store_true", help="keep the rows already in OUT.tsv")
+    parser.add_argument("--progress", type=Path, metavar="FILE.json",
+                        help="write the run's progress here for tools/audit-dashboard.py")
+    parser.add_argument("--jobs", type=int, default=1, metavar="N", help="batches to send in parallel")
     args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error("--jobs must be at least one")
     key = credential()
     if not key:
         parser.error("set JEV_KEY or put the key in ~/.config/hdtrans/jev.key")
@@ -114,11 +123,35 @@ def main():
     print(f"{len(rows)} rows to check", file=sys.stderr)
 
     decoys = [r["ko"] for r in judgeable(read_rows(args.dicts, args.file))]
-    picked = []
     headers = {"content-type": "application/json", "authorization": "Bearer " + key}
+    started = time.monotonic()
+    doneRun = 0
+    picked = 0
+    lock = threading.Lock()
+
+    def report(finished):
+        if args.progress is None:
+            return
+        elapsed = max(time.monotonic() - started, 0.001)
+        state = {"total": len(rows), "done": finished, "rejected": picked, "elapsed": round(elapsed, 1),
+                 "rate": round(finished / elapsed, 2),
+                 "eta": round((len(rows) - finished) / (finished / elapsed), 0) if finished else None,
+                 "updated": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        temporary = args.progress.with_suffix(".tmp")
+        temporary.write_text(json.dumps(state), encoding="utf-8")
+        os.replace(temporary, args.progress)
+
+    mode = "a" if args.resume else "w"
+    sink = args.out.open(mode, encoding="utf-8", newline="")
+    writer = csv.writer(sink, delimiter="\t", lineterminator="\n")
+    if mode == "w":
+        writer.writerow(["key", "ko", "pos", "pick", "confidence", "source"])
+        sink.flush()
+    report(0)
+
     # A row is reported only when two runs with different random decoys both reject
     # it: one run rejects correct rows too when a decoy happens to fit better.
-    for start in range(0, len(rows), BATCH):
+    def judge(start):
         chunk = rows[start:start + BATCH]
         rejected = []
         for attempt in range(2):
@@ -147,23 +180,42 @@ def main():
                 if options[i][got["choice"]] != row["ko"]:
                     run[row["key"]] = (options[i][got["choice"]], got["confidence"])
             rejected.append(run)
+        found = []
         for row in chunk:
             first, second = rejected[0].get(row["key"]), rejected[1].get(row["key"])
             if first is None or second is None:
                 continue
-            picked.append({**row, "pick": first[0],
-                           "confidence": min(first[1], second[1])})
-        print(f"  {min(start + BATCH, len(rows))}/{len(rows)}", file=sys.stderr)
+            found.append({**row, "pick": first[0], "confidence": min(first[1], second[1])})
+        return found
 
-    mode = "a" if args.resume else "w"
-    with args.out.open(mode, encoding="utf-8", newline="") as sink:
-        writer = csv.writer(sink, delimiter="\t", lineterminator="\n")
-        if mode == "w":
-            writer.writerow(["key", "ko", "pos", "pick", "confidence", "source"])
-        for row in picked:
-            writer.writerow([row["key"], row["ko"], row["pos"], row["pick"],
-                             f"{row['confidence']:.2f}", row["source"]])
-    print(f"{len(picked)} of {len(rows)} rows rejected in both runs; wrote {args.out}", file=sys.stderr)
+    starts = list(range(0, len(rows), BATCH))
+    if args.jobs == 1:
+        for start in starts:
+            found = judge(start)
+            with lock:
+                for row in found:
+                    writer.writerow([row["key"], row["ko"], row["pos"], row["pick"],
+                                     f"{row['confidence']:.2f}", row["source"]])
+                sink.flush()
+                picked += len(found)
+                doneRun = min(start + BATCH, len(rows))
+                report(doneRun)
+            print(f"  {doneRun}/{len(rows)}", file=sys.stderr)
+    else:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            for found in pool.map(judge, starts):
+                with lock:
+                    for row in found:
+                        writer.writerow([row["key"], row["ko"], row["pos"], row["pick"],
+                                         f"{row['confidence']:.2f}", row["source"]])
+                    sink.flush()
+                    picked += len(found)
+                    doneRun = min(doneRun + BATCH, len(rows))
+                    report(doneRun)
+                print(f"  {doneRun}/{len(rows)}", file=sys.stderr)
+    sink.close()
+    print(f"{picked} of {len(rows)} rows rejected in both runs; wrote {args.out}", file=sys.stderr)
 
 
 if __name__ == "__main__":
