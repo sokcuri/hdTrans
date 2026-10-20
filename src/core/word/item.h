@@ -225,6 +225,8 @@ public:
     bool RunKeiyoTrieQuery();
     bool RunDakeiyoCase8Query();
     bool MitaiLike() const;
+    bool StandsAlone() const;
+    std::string_view PlainEnding() const;
     // The two width units before the word, looking past tokens of … and ‥; "" when
     // there are fewer.
     std::string CharBefore() const;
