@@ -1,0 +1,4 @@
+#! layer=words
+# 계사 앞 인사 표현
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+お久しぶり	오랜만	A9D0			GN	5095	||1 &&2 S+1== "です" P+1== "2**"	お久しぶり는 바로 뒤의 です 조사 앞에서 오랜만을 고른다.		-1		greeting:polite-copula
