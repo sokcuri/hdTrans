@@ -82,7 +82,11 @@ def parse_body(tokens, index, depth, path, out, rule, file_name, line, comment):
         raise ValueError(f"cannot parse token {token!r}")
     field, position, operator, literal, ref = match.groups()
     if literal is None and ref is None and index + 1 < len(tokens):
-        literal = tokens[index + 1].strip('"')
+        operand = tokens[index + 1]
+        if operand.startswith("@"):
+            ref = operand
+        else:
+            literal = operand.strip('"')
         index += 1
     out.append(dict(rule, depth=depth, path=path, op=field, count="",
                     field=field, position=position, operator=operator or "",
