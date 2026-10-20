@@ -80,3 +80,24 @@ dict:高ぶり	気持ちが高ぶる。	기분이 흥분된다.	keep	defaults
 dict:高ぶり	気持ちが高ぶりました。	기분이 흥분되었습니다.	keep	defaults
 dict:高ぶり	気持ちが高ぶりながらも、冷静に答えた。	기분이 흥분되면서도, 냉정하게 대답했다.	keep	defaults
 dict:高ぶり	久しぶりに会った。	오랜만에 만났다.	keep	defaults
+dict:mezamashi:1	めざましが鳴る。	자명종이 울린다.	fix	local
+dict:mezamashi:1	めざましが鳴った。	자명종이 울렸다.	fix	local
+dict:mezamashi:1	めざましが鳴っている。	자명종이 울리고 있다.	fix	local
+dict:mezamashi:1	めざましが鳴らない。	자명종이 울리지 않는다.	fix	local
+dict:mezamashi:1	めざましも鳴った。	자명종도 울렸다.	fix	local
+dict:mezamashi:1	めざましは鳴ってる。	자명종은 울리고 있다.	fix	local
+dict:mezamashi:1	めざましがずっと鳴っていた。	자명종이 쭉 울리고 있었다.	fix	local
+dict:mezamashi:1	めざましもゆっくり鳴っている。	자명종도 천천히 울리고 있다.	fix	local
+dict:mezamashi:1	めざましはすぐ鳴った。	자명종은 바로 울렸다.	fix	local
+dict:mezamashi:1	めざましに冷たい水で顔を洗う。	자각에 차가운 물로 얼굴을 씻는다.	keep	local
+dict:mezamashi:1	めざましに窓を開けた。	자각에 창을 열었다.	keep	local
+dict:mezamashi:1	めざましい進歩だ。	눈부신 진보다.	keep	local
+dict:mezamashi:1	めざましかった。	눈부셨다.	keep	local
+dict:mezamashi:1	技術がめざましく進歩した。	기술이 눈부시게 진보했다.	keep	local
+dict:mezamashi:1	目覚ましが鳴った。	자명종이 울렸다.	keep	local
+dict:mezamashi:1	めざましどけいが鳴った。	자명종이 울렸다.	keep	local
+dict:mezamashi:1	めざましにベルを鳴らした。	자각에 벨을 울렸다.	keep	local
+dict:mezamashi:1	めざましが鳴った。	rule:dict:mezamashi:1=자명종	fix	local
+dict:mezamashi:1	めざましもゆっくり鳴っている。	rule:dict:mezamashi:1=자명종	fix	local
+dict:mezamashi:1	めざましが鳴いた。	!rule:dict:mezamashi:1	keep	local
+dict:mezamashi:1	めざましもゆっくり鳴いている。	!rule:dict:mezamashi:1	keep	local
