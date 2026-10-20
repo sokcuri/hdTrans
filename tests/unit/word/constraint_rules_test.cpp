@@ -54,7 +54,10 @@ const dict::Snapshot* Dictionary() {
          "先に\t곳에\tM300\t\t\tGN\t34\n"
          "先に\t앞에\tM300\t\t\tGN\t35\n"
          "こう\t이렇게\tN311\t\t\tGN\t36\n"
-         "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"},
+         "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
+         "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
+         "一人\t한 사람\tN110\t\t\tGN\t41\n"
+         "上が\t&E6@\tM428\tXXX\t\tGN\t39\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -100,7 +103,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{13});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{14});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -213,5 +216,16 @@ HD_TEST(constraint_kou_naru) {
         {"こうなるんだ", "こうなるんだ", "こう", "이렇게"},
         {"こうなのだ", "こうなのだ", "こう", "이러%A1@ 이렇게"},
         {"こうなるほど", "こうなるほど", "こう", "이러%A1@ 이렇게"},
+    });
+}
+
+// 一人立ち before 上が is 一人 and 立ち上がり, so its own sense goes; without 上が it stays.
+HD_TEST(constraint_tachidachi_before_agaru) {
+    CheckCases({
+        {"一人立ち上がり、", "一人立ち上がり、", "一人立ち", ""},
+        {"一人立ち上がる", "一人立ち上がる", "一人立ち", ""},
+        {"一人立ちする", "一人立ちする", "一人立ち", "독립"},
+        {"一人立ち", "一人立ち", "一人立ち", "독립"},
+        {"一人立ち、", "一人立ち、", "一人立ち", "독립"},
     });
 }

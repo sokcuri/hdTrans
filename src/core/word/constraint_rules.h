@@ -27,6 +27,7 @@ enum class ConstraintContext : uint8_t {
     AfterVerbEnding,    // right after a verb in た, だ or る (行った先, 見やる先), not after まだ
     AfterDemonstrative, // right after この, その or あの
     BeforeNaru,         // なる follows (こうなる), not the old attributive of an adjective (こうなるべく)
+    BeforeAgaru,        // 上が follows (一人立ち上がり), so the shorter word ends inside a longer one
 };
 
 // The senses a rule rejects.
@@ -52,6 +53,8 @@ enum class ConstraintReject : uint8_t {
     Adverb,
     // The senses whose Korean is not the rule's target, when one is.
     OtherTargets,
+    // Every sense of the word, when a candidate with a longer source remains.
+    Word,
 };
 
 struct ConstraintRule {

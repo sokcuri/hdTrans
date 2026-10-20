@@ -45,6 +45,8 @@ constexpr ConstraintRule kRules[] = {
      "なる 앞의 こう는 부사 이렇게 (こうなるんだ 이러한 이다 → 이렇게 되는 거야). こうなのだ는 그대로", "이렇게"},
     {"sakini-after-demonstrative", ConstraintWord::Source, "先に", ConstraintContext::AfterDemonstrative,
      ConstraintReject::OtherTargets, "この·その·あの 뒤의 先に는 앞에 (この先に 이 먼저 → 이 앞에). 先に行く는 그대로 먼저", "앞에"},
+    {"tachisagari-before-agaru", ConstraintWord::Source, "一人立ち", ConstraintContext::BeforeAgaru,
+     ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
 };
 
 struct HonorificSuffix {
@@ -174,6 +176,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return preceding.ends_with("この") || preceding.ends_with("その") || preceding.ends_with("あの");
     case ConstraintContext::BeforeNaru:
         return after.starts_with("なる") && !after.starts_with("なるべく") && !after.starts_with("なるほど");
+    case ConstraintContext::BeforeAgaru:
+        return after.starts_with("上が");
     case ConstraintContext::LineOpening:
     case ConstraintContext::Elsewhere:
         return ((previous.empty() || StartsWithAny(previous, kOpeningBrackets)) &&
@@ -311,6 +315,15 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 }
                 if (rejected.size() == same.size()) rejected.clear();
                 break;
+            case ConstraintReject::Word: {
+                // Only when a shorter source can take the word's place; otherwise every
+                // sense would go and the rule would cancel itself.
+                const bool shorter = std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                    return c.source.size() < source.size() && source.starts_with(c.source);
+                });
+                if (shorter) rejected = same;
+                break;
+            }
             case ConstraintReject::NonQuote:
                 for (const std::size_t k : same) {
                     const std::string_view t = list[k].target;
