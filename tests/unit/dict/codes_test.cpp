@@ -190,12 +190,13 @@ HD_TEST(PosTags) {
     // A cType of "*" is no cType.
     HD_CHECK_EQ(Pos("adverb,*"), "E300||");
     // A closed class carries its fine class in the grammar codes.
-    HD_CHECK_EQ(Pos("助詞-格助詞"), "P200||Gc");
-    HD_CHECK_EQ(Pos("particle-case"), "P200||Gc");
-    HD_CHECK_EQ(Pos("particle-binding"), "P200||Gb");
-    HD_CHECK_EQ(Pos("particle-final"), "P200||Ge");
-    HD_CHECK_EQ(Pos("名詞-数詞"), "N110||Nj");
+    HD_CHECK_EQ(Pos("助詞-格助詞"), "P202||");
+    HD_CHECK_EQ(Pos("particle-case"), "P202||");
+    HD_CHECK_EQ(Pos("particle-binding"), "P203||");
+    HD_CHECK_EQ(Pos("particle-final"), "P206||");
+    HD_CHECK_EQ(Pos("名詞-数詞"), "N112||");
     HD_CHECK_EQ(Pos("aux_symbol-comma"), "N600||");
+    HD_CHECK_EQ(Pos("記号-文字"), "N601||");
     HD_CHECK_EQ(Pos("空白"), "N600||");
     // Tags without a part code, unknown tags and lower-case values are unknown.
     HD_CHECK_EQ(Pos("助動詞"), "unknown");

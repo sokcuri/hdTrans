@@ -216,6 +216,7 @@ struct PosTag {
 struct PartName {
     const char* code;
     const char* klass;
+    const char* universal;  // the Universal Dependencies class the code belongs to
     const char* name;
     const char* standard;
 };

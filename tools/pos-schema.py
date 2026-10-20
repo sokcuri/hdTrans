@@ -8,8 +8,11 @@ and the standard-tag table src/core/dict/pos_tags_gen.cpp, and writes
   src/core/dict/pos_schema.tsv        the schema, one row per pos code
   src/core/dict/pos_schema_gen.cpp    the same rows as a table the engine reads
 
-Columns: code, class, name, standard, status.
+Columns: code, class, universal, name, standard, status.
   class     the first digit of the code (docs/dictionary-codes.md)
+  universal the Universal Dependencies class the code belongs to (UPOS), or the one
+            it refines where the class alone is too coarse (N130 is PROPN, P203 is
+            PART); PART, PROPN and NUM are the refinements a coarse class cannot say
   name      the Korean name of the code
   standard  the standard analyzer tags that map to the code, comma separated
   status    named, or unnamed when no name is known yet, with the class name as the
@@ -28,7 +31,7 @@ CLASS_NAMES = {
     "0": "연체사", "1": "명사", "2": "조사", "3": "부사", "4": "동사 어간", "5": "어미",
     "6": "기호", "7": "い형용사", "8": "형용동사", "9": "구",
 }
-HEADER = ["code", "class", "name", "standard", "status"]
+HEADER = ["code", "class", "universal", "name", "standard", "status"]
 
 
 def dictionary_codes(root):
@@ -45,13 +48,38 @@ def dictionary_codes(root):
     return codes
 
 
+def mapped_codes(root):
+    """The part codes the standard-tag table maps to, even when no row uses one yet."""
+    codes = set()
+    for line in (root / "src/core/dict/pos_tags_gen.cpp").read_text(encoding="utf-8").splitlines():
+        match = re.match(r'\s*\{"([^"]*)",\s*"([^"]*)",\s*"([^"]*)",\s*"([^"]*)"\}', line)
+        if match and match.group(2):
+            codes.add(match.group(2))
+    return codes
+
+
 def standard_tags(root):
+    """The standard tags of each part code, and every part code a tag maps to."""
     tags = collections.defaultdict(list)
     for line in (root / "src/core/dict/pos_tags_gen.cpp").read_text(encoding="utf-8").splitlines():
         match = re.match(r'\s*\{"([^"]*)",\s*"([^"]*)",\s*"([^"]*)",\s*"([^"]*)"\}', line)
         if match and match.group(2):
             tags[match.group(2)].append(match.group(1))
     return tags
+
+
+def universal_class(code):
+    """The Universal Dependencies class of a part code, by its first digit."""
+    return {"0": "DET", "1": "NOUN", "2": "ADP", "3": "ADV", "4": "VERB",
+            "5": "AUX", "6": "PUNCT", "7": "ADJ", "8": "ADJ", "9": "X"}.get(code[1:2], "")
+
+
+def universal_of(code):
+    """The Unified class a part code refines, where the class alone is too coarse."""
+    return {"N112": "NUM", "N120": "PRON", "N130": "PROPN", "I130": "PROPN",
+            "P203": "PART", "P204": "PART", "P206": "PART", "P207": "PART",
+            "P205": "SCONJ", "E331": "CCONJ", "E320": "INTJ", "N601": "SYM",
+            "C330": "CCONJ", "C331": "CCONJ", "C320": "INTJ"}.get(code)
 
 
 def edited_names(root):
@@ -80,7 +108,7 @@ def main():
     args = parser.parse_args()
     root = args.root.resolve()
 
-    codes = dictionary_codes(root)
+    codes = dictionary_codes(root) | mapped_codes(root)
     standard = standard_tags(root)
     edited = edited_names(root)
     schema_path = root / "src/core/dict/pos_schema.tsv"
@@ -99,8 +127,8 @@ def main():
             named += 1
         else:
             name = CLASS_NAMES.get(code[1:2], "기타")
-        rows.append({"code": code, "class": code[1:2], "name": name,
-                     "standard": ",".join(standard.get(code, [])), "status": status})
+        rows.append({"code": code, "class": code[1:2], "universal": universal_of(code) or universal_class(code),
+                     "name": name, "standard": ",".join(standard.get(code, [])), "status": status})
 
     with schema_path.open("w", encoding="utf-8", newline="") as sink:
         writer = csv.DictWriter(sink, fieldnames=HEADER, delimiter="\t", lineterminator="\n")
@@ -112,8 +140,9 @@ def main():
             "namespace hdTrans::dict::internal {", "", "namespace {", "",
             "constexpr PartName kParts[] = {"]
     for row in rows:
-        body.append("    {%s, %s, %s, %s}," % (cpp_string(row["code"]), cpp_string(row["class"]),
-                                               cpp_string(row["name"]), cpp_string(row["standard"])))
+        body.append("    {%s, %s, %s, %s, %s}," % (cpp_string(row["code"]), cpp_string(row["class"]),
+                                                   cpp_string(row["universal"]), cpp_string(row["name"]),
+                                                   cpp_string(row["standard"])))
     body += ["};", "", "}  // namespace", "",
              "std::span<const PartName> PartSchema() { return kParts; }", "",
              "}  // namespace hdTrans::dict::internal", ""]
