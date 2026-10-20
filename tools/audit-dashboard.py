@@ -38,12 +38,17 @@ PAGE = """<!doctype html>
  <div class="tile"><span>검사 행</span><strong id="done">–</strong></div>
  <div class="tile"><span>전체</span><strong id="total">–</strong></div>
  <div class="tile"><span>오류 의심</span><strong id="rejected">–</strong></div>
+ <div class="tile"><span>그중 신뢰 0.6+</span><strong id="strong">–</strong></div>
  <div class="tile"><span>남은 시간</span><strong id="eta">–</strong></div>
 </div>
 <p class="muted" id="rate"></p>
 <table><thead><tr><th>키</th><th>사전 한국어</th><th>JEV 선택</th><th>신뢰도</th><th>위치</th></tr></thead>
 <tbody id="rows"></tbody></table>
 <script>
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
 function duration(s) {
   if (s === null || s === undefined) return '–';
   s = Math.round(s);
@@ -54,24 +59,29 @@ function duration(s) {
 async function tick() {
   try {
     const state = await (await fetch('/state.json')).json();
-    document.getElementById('done').textContent = state.done.toLocaleString();
-    document.getElementById('total').textContent = state.total.toLocaleString();
-    document.getElementById('rejected').textContent = state.rejected.toLocaleString();
-    document.getElementById('strong').textContent = state.strong.toLocaleString();
-    document.getElementById('eta').textContent = duration(state.eta);
+    const put = (id, value) => {
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    };
+    put('done', state.done.toLocaleString());
+    put('total', state.total.toLocaleString());
+    put('rejected', state.rejected.toLocaleString());
+    put('strong', state.strong.toLocaleString());
+    put('eta', duration(state.eta));
     const pct = state.total ? 100 * state.done / state.total : 0;
     document.getElementById('fill').style.width = pct.toFixed(1) + '%';
-    document.getElementById('line').textContent = pct.toFixed(1) + '%';
-    document.getElementById('rate').textContent =
+    put('line', pct.toFixed(1) + '%');
+    put('rate',
       state.rate.toLocaleString() + '행/초 · ' + duration(state.elapsed) + ' 경과 · ' +
-      state.updated + ' 갱신';
+        state.updated + ' 갱신');
     const body = document.getElementById('rows');
     body.innerHTML = state.last.map(r =>
-      '<tr><td>' + r.key + '</td><td>' + r.ko + '</td><td>' + r.pick + '</td><td' +
+      '<tr><td>' + esc(r.key) + '</td><td>' + esc(r.ko) + '</td><td>' + esc(r.pick) + '</td><td' +
       (parseFloat(r.confidence) >= 0.6 ? ' class="strong"' : ' class="muted"') + '>' +
-      r.confidence + '</td><td class="muted">' + r.source + '</td></tr>').join('');
+      esc(r.confidence) + '</td><td class="muted">' + esc(r.source) + '</td></tr>').join('');
   } catch (e) {
-    document.getElementById('line').textContent = '감사 실행을 기다리는 중';
+    const line = document.getElementById('line');
+    if (line) line.textContent = '감사 실행을 기다리는 중';
   }
 }
 tick();
