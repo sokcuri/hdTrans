@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/sokcuri/hdTrans/compare/v0.2.1...v0.3.0) (2026-10-20)
+
+
+### Features
+
+* **rules:** carry each local rule in the dictionary row that names it ([68de569](https://github.com/sokcuri/hdTrans/commit/68de569bc2146487639dc75a4c9490ceb2371158))
+* **rules:** carry each local rule in the dictionary row that names it ([#15](https://github.com/sokcuri/hdTrans/issues/15)) ([e64f0c1](https://github.com/sokcuri/hdTrans/commit/e64f0c1f28f0c828350503f22932127837e1751d))
+
 ## [0.2.1](https://github.com/sokcuri/hdTrans/compare/v0.2.0...v0.2.1) (2026-10-20)
 
 
