@@ -85,6 +85,9 @@ struct Sense {
     std::string_view sem;  // empty: the codes of pos
     std::string_view gram; // empty: the codes of pos
     std::string_view dict;
+    // The body of the local rule the row names, when the row carries it. Empty for a row
+    // that only names the rule, which the program then reads from the rule files.
+    std::string_view ctx;
     int32_t rule = 0;
     int32_t prio = 0;
     // The number the id column ends in (1234 for 1234 or jisjk:1234), otherwise the
@@ -106,7 +109,7 @@ public:
     const std::vector<TsvError>& Errors() const { return errors_; }
 
 private:
-    enum Column { kKey, kKo, kPos, kSem, kGram, kDict, kRule, kFlags, kPrio, kReading, kId, kColumnCount };
+    enum Column { kKey, kKo, kPos, kSem, kGram, kDict, kRule, kCtx, kFlags, kPrio, kReading, kId, kColumnCount };
 
     bool ReadHeader();
 

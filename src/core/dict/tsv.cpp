@@ -157,7 +157,7 @@ bool TsvReader::Next() {
 
 bool SenseReader::ReadHeader() {
     static constexpr std::string_view kNames[kColumnCount] = {
-        "key", "ko", "pos", "sem", "gram", "dict", "rule", "flags", "prio", "reading", "id",
+        "key", "ko", "pos", "sem", "gram", "dict", "rule", "ctx", "flags", "prio", "reading", "id",
     };
     const auto& fields = rows_.Fields();
     width_ = fields.size();
@@ -222,6 +222,7 @@ bool SenseReader::Next(Sense& out) {
         bool failed = false;
         TsvErrorKind kind = TsvErrorKind::BadNumber;
         if (!col[kRule].empty() && !internal::ParseInt32(col[kRule], s.rule)) failed = true;
+        s.ctx = col[kCtx];
         if (!col[kPrio].empty() && !failed && !internal::ParseInt32(col[kPrio], s.prio)) failed = true;
         bool hidden = false;
         std::string_view flags = col[kFlags];
