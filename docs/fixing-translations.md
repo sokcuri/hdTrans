@@ -40,7 +40,7 @@ echo 競走で勝った。 | hdtrans -dicts dicts -why
 ```
 
 `defaults`는 어떤 규칙도 이 단어를 고르지 않아 사전의 기본 후보가 쓰였다는 뜻입니다. 규칙이 골랐으면
-`local particles.txt:L1276`처럼 규칙 파일과 번호가 나옵니다(열 설명: [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)).
+`local 02-part.txt:L1276`처럼 규칙 파일과 번호가 나옵니다(열 설명: [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)).
 
 **2. 같은 단어의 다른 후보를 봅니다.**
 

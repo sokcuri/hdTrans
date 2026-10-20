@@ -111,7 +111,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 `WHY <줄> <청크> <문장> <토큰>:<시작> <표면형> <선택> <출처> <id> <번역> <직접 선택> <출처> <id> <층> <규칙> <어미 층> <어미 규칙>`,
 그 아래에 `SHADOW` 줄이 붙습니다. Ehnd 필터 실행 로그도 함께 나오며, 번역문은 표준 출력에만 씁니다.
 층과 규칙은 후보와 어미를 정한 실행 층과 규칙 파일:규칙(`local`
-`particles.txt:L925`, 전역 규칙은 `파일:GPRIO`)입니다([pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)). 탭, 줄바꿈, 백슬래시는 `\t`, `\n`, `\\`로 이스케이프합니다.
+`02-part.txt:L925`, 전역 규칙은 `파일:GPRIO`)입니다([pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)). 탭, 줄바꿈, 백슬래시는 `\t`, `\n`, `\\`로 이스케이프합니다.
 
 | 환경 변수 | 설명 |
 |---|---|

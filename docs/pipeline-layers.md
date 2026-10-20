@@ -75,7 +75,7 @@
 `-why`의 `WHY` 줄 끝에 네 열이 있습니다: 단어 후보를 정한 층과 규칙, 어미를 정한 층과 규칙.
 
 ```
-WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  particles.txt:L285
+WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  02-part.txt:L285
 ```
 
 - 층 이름은 위 표의 이름입니다(`local`, `global-stem`, `global-last`, `defaults`, `local-ending`,
