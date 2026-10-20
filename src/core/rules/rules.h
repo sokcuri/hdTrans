@@ -28,7 +28,8 @@
 // Fields: S source surface, D target text, P pumsa code, A semantic attributes,
 // G grammar attributes, and for the ending (gobi) U source, Y target, M pumsa,
 // T attributes, W grammar attributes. Atoms on D and Y with = assign the target
-// text; the assignment stays when the rest of the rule is false.
+// text as they are evaluated; the word stage takes the writes back when the rule is
+// false (word::Journal).
 #include <cstdint>
 #include <string>
 #include <string_view>
