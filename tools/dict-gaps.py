@@ -13,8 +13,9 @@ ending or a symbol: fix is a corrected span, so a particle that differs from it
 says nothing about the dictionary. Comparing words with the span as text is what
 lets the tool work without offsets, which the dumps count per sentence.
 
-OUT.tsv columns: word, korean, class, candidates, source, cause, defect, count, ja,
-fix. class is the part class of the chosen row, candidates is how many rows read
+OUT.tsv columns: word, korean, class, candidates, rule, source, cause, defect,
+count, ja, fix. rule is the rule that chose the word, L<number> or G<number>, empty
+for a default reading. class is the part class of the chosen row, candidates is how many rows read
 the word there, and defect is what to change:
 - assembly: the chosen text keeps a marker (&AV@, $FA@, %A1@) in the output, so the
   ending did not expand it.
@@ -169,7 +170,8 @@ def main():
         if not path.exists():
             parser.error(f"no {kind} at {path}")
 
-    header = ["word", "korean", "class", "candidates", "source", "cause", "defect", "count", "ja", "fix"]
+    header = ["word", "korean", "class", "candidates", "rule", "source", "cause", "defect", "count",
+              "ja", "fix"]
     rows = read_verdicts(args.verdicts)
     bad = [r for r in rows if r["verdict"] != "ok" and r["span"].strip() and r["fix"].strip()]
     print(f"{len(rows)} judged lines, {len(bad)} with a span", file=sys.stderr)
@@ -198,9 +200,15 @@ def main():
             defect = defect_of(choice, candidates, part, translated, row["fix"])
             if not defect:
                 continue
-            source = choice.get("choice", {}).get("source", "") or (choice.get("ending") or {}).get("source", "")
-            wrong.append({"word": choice["surface"], "korean": choice.get("choice", {}).get("text", ""),
-                          "class": part, "candidates": len(candidates),
+            chosen = choice.get("choice", {})
+            source = chosen.get("source", "") or (choice.get("ending") or {}).get("source", "")
+            rule = ""
+            if chosen.get("layer") == "local":
+                rule = f"L{chosen.get('id')}"
+            elif chosen.get("layer") == "global":
+                rule = f"G{chosen.get('id')}"
+            wrong.append({"word": choice["surface"], "korean": chosen.get("text", ""),
+                          "class": part, "candidates": len(candidates), "rule": rule,
                           "source": source, "cause": row["cause"], "defect": defect,
                           "ja": row["ja"], "fix": row["fix"]})
 
@@ -218,7 +226,7 @@ def main():
             defect = max(common[word], key=lambda d: (common[word][d], d))
             entry = next(w for w in wrong if w["word"] == word and w["defect"] == defect)
             writer.writerow([word, entry["korean"], entry["class"], entry["candidates"],
-                             entry["source"], entry["cause"], defect, total[word],
+                             entry["rule"], entry["source"], entry["cause"], defect, total[word],
                              entry["ja"], entry["fix"]])
             written += 1
     summary = collections.Counter(w["defect"] for w in wrong)
