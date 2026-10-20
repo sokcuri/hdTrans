@@ -211,7 +211,14 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DIR}" -check "${HDTRANS_RULE_DIR}/program.hash")
         add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DIR}" -local 0-499 -globals
             -check "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules/compiled_gen.cpp")
-        # The rule tests are rows of tests/rules/cases/, run by rules.cases.themes.
+        # The test lines of the rules, one unit test each (ruletest_L3_1, ...), run with dicts/.
+        add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/rule_tests_gen.cpp"
+            COMMAND hdrulec tests "${HDTRANS_RULE_DIR}" -o "${CMAKE_CURRENT_BINARY_DIR}/rule_tests_gen.cpp"
+            DEPENDS hdrulec ${HDTRANS_RULES} VERBATIM)
+        target_sources(hdtrans_tests PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/rule_tests_gen.cpp")
+        add_test(NAME rules.tests COMMAND hdtrans_tests ruletest_)
+        set_tests_properties(rules.tests PROPERTIES ENVIRONMENT
+            "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/rules-cache")
     endif()
 
     # Dumps compiled dictionary entries and lookups over input lines.
