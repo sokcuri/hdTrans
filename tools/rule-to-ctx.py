@@ -44,6 +44,9 @@ def add_column(path, bodies, name):
         fields = stripped.split("\t")
         if fields[0] == "key":
             header = fields
+            if name in header:
+                out.append(line)
+                continue
             at = header.index("rule") + 1 if "rule" in header else len(header)
             header.insert(at, name)
             out.append("\t".join(header) + ("\n" if line.endswith("\n") else ""))

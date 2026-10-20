@@ -1,6 +1,6 @@
 #! layer=names
 # 인명·캐릭터·지명·단체·작품 이름 (Wikidata·JMnedict·pixiv백과·나무위키, 키 순 3/3)
-key	ko	pos	sem	gram	dict	rule	ctx	ctx	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 沖野眞已	오키노 마사미	N130	QPNVHn		GN							names.626325
 沖野真夜子	오키노 마요코	N130	QPNVHn		GN						おきのまよこ	names.626326
 沖野等	오키노 히토시	N130	QPNVHn		GN							names.626327

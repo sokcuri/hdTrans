@@ -31,6 +31,7 @@ enum class TsvErrorKind : uint8_t {
     BadNumber,       // rule or prio is not a decimal number
     BadFlag,         // flags holds an unknown flag
     EmptyKeyOrId,
+    DuplicateColumn,  // the header names one column twice; the second would be ignored
 };
 
 struct TsvError {

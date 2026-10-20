@@ -1,6 +1,6 @@
 #! layer=words
 # 속어·구어·인터넷 용어 (JMdict, pixiv백과 용어)
-key	ko	pos	sem	gram	dict	rule	ctx	ctx	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あかえい	노랑가오리	N110			GN							s:1
 あかんべ	메롱	N110			GN				llm			s:2
 あかんべえ	메롱	N110			GN				llm			s:3

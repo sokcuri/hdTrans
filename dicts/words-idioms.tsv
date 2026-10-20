@@ -1,6 +1,6 @@
 #! layer=words
 # 관용구·숙어·사자성어 (JMdict 표현 항목)
-key	ko	pos	sem	gram	dict	rule	ctx	ctx	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いい加減にしなさい	작작 좀 해	A9D0			GN				llm			i:1
 いかなる場合でも	어떤 경우에도	A9D0			GN				llm			i:2
 お湯を沸か	물을 끓&AJ@	M443		Pn	GN							i:7766

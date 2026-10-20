@@ -1,5 +1,5 @@
 #! layer=base
 # 물품을 나누어 받는 동사의 음편형
-key	ko	pos	sem	gram	dict	rule	ctx	ctx	id	raw	prio
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
 パンを分けてもらっ	빵을 나누어 &FD@	M437			GN				benefactive:1
 銃を分けてもらっ	총을 나누어 &FD@	M437			GN				benefactive:2

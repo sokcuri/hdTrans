@@ -1,6 +1,6 @@
 #! layer=names
 # 인명·캐릭터·지명·단체·작품 이름 (Wikidata·JMnedict·pixiv백과·나무위키, 키 순 2/3)
-key	ko	pos	sem	gram	dict	rule	ctx	ctx	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ピーターバラ	피터버러	N130	QCTVPl		GN							names.297756
 ピーターバラ・ユナイテッドFC	피터버러 유나이티드 FC	N130	VGt		GN							names.297757
 ピーターバラ駅	피터버러	N130	QCTVPl		GN							names.297758

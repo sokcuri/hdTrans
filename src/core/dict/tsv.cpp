@@ -161,6 +161,15 @@ bool SenseReader::ReadHeader() {
     };
     const auto& fields = rows_.Fields();
     width_ = fields.size();
+    // A copied column would be read once and ignored; say so rather than let it rot.
+    for (std::size_t i = 0; i < fields.size(); i++) {
+        for (std::size_t j = i + 1; j < fields.size(); j++) {
+            if (fields[i] == fields[j]) {
+                errors_.push_back({rows_.Line(), TsvErrorKind::DuplicateColumn});
+                return false;
+            }
+        }
+    }
     for (int c = 0; c < kColumnCount; c++) {
         index_[c] = -1;
         for (std::size_t i = 0; i < fields.size(); i++) {
