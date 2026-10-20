@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:common-nouns	彼が会議のまとめ役だ。	그가 회의의 조정 담당자다.	fix	lookup
+dict:common-nouns	まとめ役を任せる。	조정 담당자를 맡긴다.	fix	lookup
+dict:common-nouns	新しいまとめ役を選ぶ。	새로운 조정 담당자를 선택한다.	fix	lookup
+dict:common-nouns	まとめ役として参加する。	조정 담당자로서 참가한다.	fix	lookup
+dict:common-nouns	取りまとめ役を決める。	정리역을 결정한다.	keep	lookup
+dict:common-nouns	資料をまとめる。	자료를 정리한다.	keep	lookup
+dict:common-nouns	彼は役者だ。	그는 배우다.	keep	lookup
+dict:common-nouns	会議が始まる。	회의가 시작된다.	keep	lookup
+dict:common-nouns	悪人を成敗する。	악인을 처벌 한다.	fix	lookup
+dict:common-nouns	悪人を成敗してください。	악인을 처벌 해 주세요.	fix	lookup
+dict:common-nouns	成敗された悪人。	처벌 된 악인.	fix	lookup
+dict:common-nouns	成敗しなかった。	처벌 하지 않았다.	fix	lookup
+dict:common-nouns	御成敗式目を読む。	고세이바이시키모쿠를 읽는다.	keep	lookup
+dict:common-nouns	成功と失敗を比べる。	성공과 실패를 비교한다.	keep	lookup
+dict:common-nouns	処罰してください。	처벌해 주세요.	keep	lookup
+dict:common-nouns	勝敗が決まる。	승패가 정해진다.	keep	lookup
+dict:common-nouns	これが私の流儀だ。	이것이 나의 방식이다.	fix	lookup
+dict:common-nouns	彼の流儀に従う。	그의 방식에 따른다.	fix	lookup
+dict:common-nouns	古い流儀を守る。	낡은 방식을 지킨다.	fix	lookup
+dict:common-nouns	流儀は人それぞれだ。	방식은 사람 각자다.	fix	lookup
+dict:common-nouns	剣術の流儀を学ぶ。	검술의 방식을 배운다.	fix	lookup
+dict:common-nouns	自己流で描く。	자기류로 그린다.	keep	lookup
+dict:common-nouns	儀式が始まる。	의식이 시작된다.	keep	lookup
+dict:common-nouns	流派が違う。	유파가 다르다.	keep	lookup
+dict:common-nouns	水が流れる。	물이 흐른다.	keep	lookup

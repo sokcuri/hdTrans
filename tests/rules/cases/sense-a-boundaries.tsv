@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:sense-a-半周	半周の距離を測る。	반 바퀴의 거리를 측정한다.	fix	lookup
+dict:sense-a-半周	池を半周した。	연못을 반 바퀴 돌았다.	keep	lookup
+dict:sense-a-半周	半円の形だ。	반원의 형태다.	keep	lookup
+dict:sense-a-正体が割れる	友人の正体が割れた。	친구의 정체가 드러났다.	fix	lookup
+dict:sense-a-正体が割れる	正体が割れなければ安全だ。	정체가 드러나지 않으면 안전하다.	fix	lookup
+dict:sense-a-正体が割れる	彼の正体を調べる。	그의 정체를 조사한다.	keep	lookup
+dict:sense-a-正体が割れる	皿が割れた。	접시가 깨졌다.	keep	lookup
+dict:sense-a-どれどれ	どれどれ、これは何だ。	어디 보자, 이것은 뭐냐.	fix	lookup
+dict:sense-a-どれどれ	この中のどれが好き？	이 안의 어떤 것을 좋아해?	keep	lookup
+dict:sense-a-どちらさん	どちらさんですか。	누구입니까.	fix	lookup
+dict:sense-a-どちらさん	どちらさんの荷物ですか。	누구의 짐입니까.	fix	lookup
+dict:sense-a-どちらさん	道はどちらですか。	길은 어느 쪽입니까.	keep	lookup
+dict:sense-a-格好もつく	店の格好もついた。	가게의 모양새도 났다.	fix	lookup
+dict:sense-a-格好もつく	会長の格好もつかない。	회장의 모양새도 나지 않는다.	fix	lookup
+dict:sense-a-格好もつく	格好もつきました。	모양새도 났습니다.	fix	lookup
+dict:sense-a-格好もつく	格好もつけば安心だ。	모양새도 나면 안심이다.	fix	lookup
+dict:sense-a-格好もつく	格好を変えた。	모습을 바꾸었다.	keep	lookup
+dict:sense-a-何とでも言う	私には何とでも言え。	나에게는 뭐라고든 말해라.	fix	lookup
+dict:sense-a-何とでも言う	何とでも言うつもりはない。	뭐라고든 말할 생각은 없다.	fix	lookup
+dict:sense-a-何とでも言う	何とでも言ってください。	뭐라고든 말해 주세요.	fix	lookup
+dict:sense-a-excluded-choice	どちらにしろと先生は言った。	어느 쪽으로 하라고 선생님은 말했다.	keep	lookup
+dict:sense-a-どれどれ	「どれどれ」と言った。	「어디 보자」라고 말했다.	fix	lookup
+dict:sense-a-何とでも言う	工夫すれば何とでもなる。	궁리하면 어떻게든 된다.	keep	lookup
+dict:sense-a-excluded-choice	色を黒か白のどっちにしろ。	색을 흑이나 흰색의 어느 쪽으로 해라.	keep	lookup
+dict:sense-a-excluded-approval	彼がここに来なければ困る。	그가 여기에 오지 않으면 곤란하다.	keep	lookup
