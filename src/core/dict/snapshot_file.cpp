@@ -35,11 +35,13 @@ using internal::FileStamp;
 using Digest = std::array<std::byte, 32>;
 using Bytes = std::span<const std::byte>;
 constexpr uint32_t kFormatVersion = 1;
-constexpr uint32_t kDataVersion = 2;
+constexpr uint32_t kDataVersion = 4;
 constexpr std::size_t kHeaderSize = 256;
 constexpr std::size_t kDescriptorSize = 64;
 constexpr std::size_t kSegmentSize = 256 * 1024;
-constexpr uint32_t kManifest = 1, kCodes = 2, kAux = 3, kPlain = 4;
+constexpr uint32_t kManifest = 1, kCodes = 2, kAux = 3, kPlain = 4, kRuleBodies = 5;
+// The sections a written image has: five metadata sections and eight per layer.
+constexpr uint32_t kExpectedSections = 5 + 3 * 8;
 constexpr uint32_t kTree = 10, kZeros = 11, kLabel = 12, kTerminal = 13, kRank = 14;
 constexpr uint32_t kStarts = 15, kCodeRefs = 16, kBlob = 17;
 constexpr uint32_t kNoLayer = 3;
@@ -464,6 +466,7 @@ struct SnapshotStorage {
     // which is never quarantined.
     static Columns Read(const std::vector<std::string>& folders, std::string_view path, bool full,
                         bool compiled = false);
+
     static bool Matches(const Snapshot& expected, const std::vector<LoadError>& errors,
                         const Columns& actual, const std::vector<std::string>& folders);
     static bool RestoreAux(Reader& r, Snapshot& s, std::vector<LoadError>& errors, const std::vector<std::string>& folders, std::size_t sourceFolders);
@@ -545,6 +548,14 @@ bool SnapshotStorage::Write(const Snapshot& s, const std::vector<LoadError>& err
         plain.Text(f.text);
     }
     writer.Add(kPlain, std::move(plain));
+    // The body of each local rule a row carries, by rule number; a dictionary whose rows
+    // carry none (a fixture, an older user dictionary) writes no section.
+    {
+        Buffer bodies;
+        bodies.Number(s.ruleBodies_.size());
+        for (const std::string& body : s.ruleBodies_) bodies.Text(body);
+        writer.Add(kRuleBodies, std::move(bodies));
+    }
     const Dict* layers[] = {&s.base_, &s.user_, &s.names_};
     for (uint32_t layer = 0; layer < 3; layer++) {
         const auto view = layers[layer]->View();
@@ -732,8 +743,13 @@ public:
     std::vector<Source> sources;
     std::size_t sourceFolders = 0;
     std::vector<File> plainFiles;
+    std::vector<std::string> ruleBodies;  // by rule number
     bool compiled = false;  // a compiled snapshot (CompileSnapshot), not a cache generation
     std::atomic<bool> bad{false};
+    // Why the image did not read, for the error the caller reports; a fixed set of short
+    // reasons, so a changed layout says which check failed.
+    const char* failure = nullptr;
+    void FailWith(const char* why) { failure = why; Fail(); }
     std::once_flag fallbackOnce;
     std::shared_ptr<const Snapshot> fallback;
 
@@ -824,12 +840,15 @@ public:
         FileStamp after;
         if (!mapped || !ReadStamp(fileName, after) || stamp != after) return false;
         const auto bytes = mapped->Bytes();
-        if (bytes.size() < kHeaderSize || std::memcmp(bytes.data(), kMagic.data(), 8) != 0) { Fail(); return false; }
+        if (bytes.size() < kHeaderSize || std::memcmp(bytes.data(), kMagic.data(), 8) != 0) { FailWith("not a snapshot file"); return false; }
         auto header = std::array<std::byte, kHeaderSize>{};
         std::copy_n(bytes.begin(), kHeaderSize, header.begin());
         Put(header, 192, 0, 4);
-        if (Crc32c(header) != Get(bytes, 192, 4)) { Fail(); return false; }
-        if (Get(bytes, 8, 4) != kFormatVersion || Get(bytes, 12, 4) != kDataVersion || Get(bytes, 200, 4) != 1) return false;
+        if (Crc32c(header) != Get(bytes, 192, 4)) { FailWith("header checksum"); return false; }
+        if (Get(bytes, 8, 4) != kFormatVersion || Get(bytes, 12, 4) != kDataVersion || Get(bytes, 200, 4) != 1) {
+            FailWith("snapshot version differs from this build");
+            return false;
+        }
         if (Get(bytes, 16, 4) != kHeaderSize || Get(bytes, 20, 4) != 0 ||
             Get(bytes, 24, 8) != bytes.size() || Get(bytes, 32, 8) != kHeaderSize) { Fail(); return false; }
         const auto builtin = HexDigest(HDTRANS_BUILTIN_ID), rules = HexDigest(HDTRANS_DATA_ID);
@@ -840,8 +859,12 @@ public:
         if (!compiled && (Get(bytes, 204, 4) != sizeof(void*) ||
                           !std::equal(compiler.begin(), compiler.end(), bytes.begin() + 208))) return false;
         const auto sectionCount = Get(bytes, 40, 4), segmentCount = Get(bytes, 44, 4);
-        if (sectionCount != 28 || segmentCount > (bytes.size() - kHeaderSize) / kDescriptorSize ||
-            sectionCount > (bytes.size() - kHeaderSize) / kDescriptorSize - segmentCount) { Fail(); return false; }
+        if (sectionCount != kExpectedSections ||
+            segmentCount > (bytes.size() - kHeaderSize) / kDescriptorSize ||
+            sectionCount > (bytes.size() - kHeaderSize) / kDescriptorSize - segmentCount) {
+            FailWith("snapshot section count differs from this build");
+            return false;
+        }
         const auto directorySize = static_cast<std::size_t>((sectionCount + segmentCount) * kDescriptorSize);
         if (Get(bytes, 48, 8) != kHeaderSize + sectionCount * kDescriptorSize ||
             Crc32c(bytes.subspan(kHeaderSize, directorySize)) != Get(bytes, 196, 4)) { Fail(); return false; }
@@ -854,11 +877,13 @@ public:
             s.offset = Get(bytes, at + 8, 8); s.length = Get(bytes, at + 16, 8); s.count = Get(bytes, at + 24, 8);
             s.width = static_cast<uint32_t>(Get(bytes, at + 32, 4)); s.alignment = static_cast<uint32_t>(Get(bytes, at + 36, 4));
             s.first = static_cast<uint32_t>(Get(bytes, at + 40, 4)); s.segments = static_cast<uint32_t>(Get(bytes, at + 44, 4));
-            const bool metadata = s.kind >= kManifest && s.kind <= kPlain && s.layer == kNoLayer;
+            const bool metadata = s.kind >= kManifest && s.kind <= kRuleBodies && s.layer == kNoLayer;
             const bool layer = s.kind >= kTree && s.kind <= kBlob && s.layer < 3;
             const uint32_t width = s.kind == kTree || s.kind == kTerminal ? 8 : s.kind == kLabel ? 2 :
                                    s.kind == kZeros || s.kind == kRank || s.kind == kStarts || s.kind == kCodeRefs ? 4 : 1;
-            if ((!metadata && !layer) || Find(s.kind, s.layer) || s.width != width || s.alignment != 8 ||
+            if ((!metadata && !layer)) { FailWith("snapshot section kind"); return false; }
+            if (Find(s.kind, s.layer)) { FailWith("snapshot section appears twice"); return false; }
+            if (s.width != width || s.alignment != 8 ||
                 s.offset % 8 != 0 || s.offset < end || s.offset > bytes.size() || s.length > bytes.size() - s.offset ||
                 s.count > std::numeric_limits<std::size_t>::max() / width || s.count * width != s.length ||
                 s.first != nextSegment || s.segments > segmentCount - nextSegment ||
@@ -868,7 +893,7 @@ public:
             end = s.offset + s.length;
             sections.push_back(s);
         }
-        if (nextSegment != segmentCount || end != bytes.size()) { Fail(); return false; }
+        if (nextSegment != segmentCount || end != bytes.size()) { FailWith("snapshot directory size"); return false; }
         for (std::size_t i = 0; i < segmentCount; i++) {
             const auto at = kHeaderSize + (static_cast<std::size_t>(sectionCount) + i) * kDescriptorSize;
             Segment segment;
@@ -893,6 +918,22 @@ public:
         }
         const auto* plain = Find(kPlain);
         if (!plain || !Ensure(*plain)) { Fail(); return false; }
+        // A name of its own: the class has a member of the same name, and a local one
+        // that hides it is a warning MSVC treats as an error.
+        if (const auto* section = Find(kRuleBodies); section) {
+            if (!Ensure(*section)) { Fail(); return false; }
+            Reader bodies{Raw(*section)};
+            const auto bodyCount = bodies.Count(1);
+            if (bodyCount > (uint64_t{1} << 20)) { Fail(); return false; }
+            std::vector<std::string>& out = this->ruleBodies;
+            for (std::size_t i = 0; i < bodyCount && bodies.ok; i++) {
+                const auto n = bodies.Number();
+                const auto text = bodies.Take(static_cast<std::size_t>(n));
+                if (!bodies.ok) break;
+                out.emplace_back(reinterpret_cast<const char*>(text.data()), text.size());
+            }
+            if (!bodies.ok || !bodies.Done()) { FailWith("snapshot rule body section"); return false; }
+        }
         Reader records{Raw(*plain)};
         const auto recordedFolders = records.Number();
         const auto count = records.Count(16);
@@ -945,7 +986,8 @@ bool SnapshotStorage::RestoreAux(Reader& r, Snapshot& s, std::vector<LoadError>&
         LoadError e;
         e.file = RestorePath(r, folders, sourceFolders);
         const auto kind = r.Number(); e.line = r.Signed(); const auto tsv = r.Number(); e.message = r.Text();
-        if (kind > static_cast<unsigned>(LoadErrorKind::Plain) || tsv > static_cast<unsigned>(TsvErrorKind::EmptyKeyOrId)) return false;
+        if (kind > static_cast<unsigned>(LoadErrorKind::MissingRuleBodies) ||
+            tsv > static_cast<unsigned>(TsvErrorKind::EmptyKeyOrId)) return false;
         e.kind = static_cast<LoadErrorKind>(kind); e.tsv = static_cast<TsvErrorKind>(tsv);
         errors.push_back(std::move(e));
     }
@@ -967,7 +1009,13 @@ SnapshotStorage::Columns SnapshotStorage::Read(const std::vector<std::string>& f
                                                bool compiled) {
     auto file = std::make_shared<internal::SnapshotFile>();
     file->compiled = compiled;
-    if (!file->Open(path, folders)) return {};
+    if (!file->Open(path, folders)) {
+        Columns out;
+        if (file->failure != nullptr) {
+            out.errors.push_back({std::string(path), LoadErrorKind::Read, 0, TsvErrorKind::Read, file->failure});
+        }
+        return out;
+    }
     auto snap = std::shared_ptr<Snapshot>(new Snapshot());
     snap->backing_ = file;
     const auto* codeSection = file->Find(kCodes);
@@ -1006,6 +1054,7 @@ SnapshotStorage::Columns SnapshotStorage::Read(const std::vector<std::string>& f
         data.keys.guard = data.guard;
         *layers[layer] = Dict::FromView(data);
     }
+    snap->ruleBodies_ = file->ruleBodies;
     const auto* auxSection = file->Find(kAux);
     if (!file->Ensure(*auxSection)) { file->Fail(); return {}; }
     Reader aux{file->Raw(*auxSection)};
@@ -1121,9 +1170,13 @@ bool Compile(const std::vector<std::string>& folders, std::string_view outPath, 
     std::vector<Source> sources;
     if (!ListSources(folders, sources, true, !cache)) return false;
     const auto loaded = LoadFoldersTsv(folders);
-    if (!loaded.snapshot || !loaded.snapshot->HasDictionary()) return false;
+    if (!loaded.snapshot || !loaded.snapshot->HasDictionary()) {
+        return false;
+    }
     std::vector<Source> after;
-    if (!ListSources(folders, after, !cache, !cache) || after.size() != sources.size()) return false;
+    if (!ListSources(folders, after, !cache, !cache) || after.size() != sources.size()) {
+        return false;
+    }
     for (std::size_t i = 0; i < sources.size(); i++) {
         if (sources[i].folder != after[i].folder || sources[i].relative != after[i].relative || sources[i].stamp != after[i].stamp ||
             (!cache && sources[i].hash != after[i].hash)) return false;
@@ -1206,6 +1259,8 @@ LoadResult LoadCompiled(const std::string& path, const std::vector<std::string>&
     }
     auto compiled = SnapshotStorage::Read(folders, path, true, true);
     if (!compiled.snapshot) {
+        // The reader says which check the image failed; keep that over a general message.
+        if (!compiled.errors.empty()) return {nullptr, std::move(compiled.errors)};
         std::error_code ec;
         const bool exists = std::filesystem::exists(PathOf(path), ec);
         return {nullptr, {{path, LoadErrorKind::Read, 0, TsvErrorKind::Read,

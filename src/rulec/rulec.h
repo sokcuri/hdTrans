@@ -195,6 +195,5 @@ void Check(const File& file, const Inventory& inventory, const CheckOptions& opt
 std::string EmitCpp(const File& file, const Source& source, int first, int last, bool globals);
 
 // C++ source registering each test line of the rules as a unit test of tests/unit.
-std::string EmitTests(const File& file, const Source& source);
 
 }  // namespace hdTrans::rulec

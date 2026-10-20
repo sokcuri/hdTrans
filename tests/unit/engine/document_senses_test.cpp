@@ -11,6 +11,7 @@
 #include "core/word/document_senses.h"
 #include "core/word/item.h"
 #include "hdtest.h"
+#include "rule_fixture.h"
 
 using namespace hdTrans;
 
@@ -23,7 +24,7 @@ const std::string kRows =
     "市\t시\tN110\tXXX\t\tGN\t0\t3\n";
 
 std::shared_ptr<const dict::Snapshot> Dictionary() {
-    const auto loaded = dict::Load({{0, "base.tsv", kRows}});
+    const auto loaded = dict::Load({{0, "base.tsv", fixture::WithRuleBodies(kRows)}});
     HD_CHECK(loaded.errors.empty());
     return loaded.snapshot;
 }
@@ -75,7 +76,7 @@ struct DictionaryFolder {
             return;
         }
         std::ofstream file(path / "base.tsv", std::ios::binary);
-        file << kRows;
+        file << fixture::WithRuleBodies(kRows);
         HD_CHECK(file.good());
     }
 

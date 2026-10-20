@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+adjective:stem-alone	厳し。	어렵다.	fix	conjugation
+adjective:stem-alone	厳し？	어려워?	fix	conjugation
+adjective:stem-alone	そして、厳し。	그리고, 어렵다.	fix	conjugation
+adjective:stem-alone	美し。	아름답다.	fix	conjugation
+adjective:stem-alone	静か。	조용하다.	fix	conjugation
+adjective:stem-alone	厳しい。	어렵다.	keep	conjugation
+adjective:stem-alone	開催した。	개최했다.	keep	conjugation
+adjective:stem-alone	出た。	나왔다.	keep	conjugation
+adjective:stem-alone	大変。	큰 일.	keep	conjugation
+adjective:stem-alone	試してみた。	시험해 보았다.	keep	conjugation
+adjective:stem-alone	ではな。	그럼.	keep	conjugation
+adjective:stem-alone	がっかりした。	실망했다.	keep	conjugation
+adjective:stem-alone	彼は厳しい人だ。	그는 엄한 사람이다.	keep	conjugation
+adjective:stem-alone	静かな部屋だ。	조용한 방이다.	keep	conjugation

@@ -85,6 +85,7 @@ void Usage(std::FILE* file) {
                "  --out FILE             write UTF-8 output (default: stdout)\n"
                "  --json                 return text, choices and logs as JSON\n"
                "  --why                  write selection and filter logs to stderr\n"
+               "  --trace FILE           write every candidate of every word to FILE\n"
                "  --version              load dictionaries and show engine, runtime and dictionary versions\n"
                "  --help                 show this help\n"
                "  --config FILE          settings file\n"
@@ -94,7 +95,7 @@ void Usage(std::FILE* file) {
                "  --each, --raw          independent lines, or word-pipeline-only lines\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
-               "  --stages DIR, --rule-counts FILE\n"
+               "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
                "Legacy single-hyphen options are also accepted. Use -- before literal text starting with '-'.\n", file);
 }
 
@@ -116,17 +117,19 @@ bool ReadAll(std::FILE* f, std::string& out) {
     }
 }
 
-void PrintEscaped(std::string_view text) {
+void WriteEscaped(std::FILE* out, std::string_view text) {
     for (char c : text) {
         switch (c) {
-        case '\t': std::fputs("\\t", stderr); break;
-        case '\n': std::fputs("\\n", stderr); break;
-        case '\r': std::fputs("\\r", stderr); break;
-        case '\\': std::fputs("\\\\", stderr); break;
-        default: std::fputc(static_cast<unsigned char>(c), stderr); break;
+        case '\t': std::fputs("\\t", out); break;
+        case '\n': std::fputs("\\n", out); break;
+        case '\r': std::fputs("\\r", out); break;
+        case '\\': std::fputs("\\\\", out); break;
+        default: std::fputc(static_cast<unsigned char>(c), out); break;
         }
     }
 }
+
+void PrintEscaped(std::string_view text) { WriteEscaped(stderr, text); }
 
 void WhyFilterLog(void*, std::string_view message) {
     std::fwrite(message.data(), 1, message.size(), stderr);
@@ -135,6 +138,10 @@ void WhyFilterLog(void*, std::string_view message) {
 struct WhyContext {
     std::size_t lineBase = 0;
     std::size_t line = 1;
+    // The candidate dump: every candidate of every word, with the one chosen. Each
+    // line is line, chunk, sentence, token, start, surface, index, chosen, class
+    // digit, part code, semantic codes, grammar codes, rule id, target.
+    std::FILE* trace = nullptr;
 };
 
 void WhyLine(void* context, int line) {
@@ -182,9 +189,32 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
         std::fprintf(stderr, "\t%d\t%s\t%d\t", it->selected, hdTrans::word::ProvenanceName(it->choice.layer),
                      it->choice.id);
         PrintEscaped(it->EntryText(it->selected));
-        std::fprintf(stderr, "\t%d\t%s\t%d\t%s\t%s\n", it->DirectIndex(),
+        std::fprintf(stderr, "\t%d\t%s\t%d\t%s\t%s", it->DirectIndex(),
                      hdTrans::word::ProvenanceName(it->directChoice.layer), it->directChoice.id,
                      Decided(it->choice, false).c_str(), Decided(it->directChoice, true).c_str());
+        // The text of the chosen ending, which the rule checks need; empty without one.
+        std::fputc('\t', stderr);
+        if (const hdTrans::word::Group* ending = it->DirectGroup()) {
+            if (const hdTrans::word::Entry* e = ending->At(it->DirectIndex())) PrintEscaped(e->dst);
+        }
+        std::fputc('\n', stderr);
+        if (why.trace && it->group) {
+            for (std::size_t c = 0; c < it->group->entries.size(); c++) {
+                const hdTrans::word::Entry& e = *it->group->entries[c];
+                std::fprintf(why.trace, "CAND\t%zu\t%d\t%d\t%d\t%d\t",
+                             why.line, chunk, sentence, it->tokenIndex, it->start);
+                WriteEscaped(why.trace, it->group->surface);
+                std::fprintf(why.trace, "\t%zu\t%d\t%c\t", c,
+                             static_cast<int>(c) == it->selected, e.cls ? e.cls : '-');
+                WriteEscaped(why.trace, e.code);
+                std::fputc('\t', why.trace);
+                WriteEscaped(why.trace, e.attr);
+                std::fputc('\t', why.trace);
+                WriteEscaped(why.trace, e.gattr);
+                std::fprintf(why.trace, "\t%d\t%s\t%s\n", e.ruleId,
+                             e.fixed ? "fixed" : "", e.field.empty() ? "" : std::string(e.field).c_str());
+            }
+        }
         for (const hdTrans::word::ShadowChoice& shadow : it->shadowChoices) {
             std::fprintf(stderr, "SHADOW\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex,
                          it->start);
@@ -195,6 +225,13 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
             std::fputc('\n', stderr);
         }
     }
+}
+
+bool WriteText(const std::string& path, const std::string& text) {
+    std::FILE* f = std::fopen(path.c_str(), "wb");
+    if (!f) return false;
+    const bool ok = std::fwrite(text.data(), 1, text.size(), f) == text.size();
+    return std::fclose(f) == 0 && ok;
 }
 
 bool WriteRuleCounts(const std::string& path, const hdTrans::rules::Program& program,
@@ -235,11 +272,13 @@ int RunMain(int argc, char** argv) {
     bool version = false;
     bool literal = false;
     std::string ruleCountsPath;
+    std::string dumpRulesPath;
     const char* dump = std::getenv("HDTRANS_DRIVER_DUMP");
     std::string stagesDir = dump ? dump : "";
     bool raw = false;
     bool each = false;
     bool why = false;
+    std::string tracePath;
     bool selectShadow = false;
     bool misread = false;
     bool noCg = false;
@@ -275,7 +314,8 @@ int RunMain(int argc, char** argv) {
         if (option == "-h") option = "-help";
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
-            || option == "-rule-counts" || option == "-compile-snapshot";
+            || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
+            || option == "-dump-rules";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -300,6 +340,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-ehnd") ehndArg = *value;
         else if (option == "-stages") stagesDir = *value;
         else if (option == "-rule-counts") ruleCountsPath = *value;
+        else if (option == "-dump-rules") dumpRulesPath = *value;
         else if (option == "-raw") raw = true;
         else if (option == "-each") each = true;
         else if (option == "-reference") reference = true;
@@ -308,6 +349,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-compile-snapshot") snapshotOut = *value;
         else if (option == "-no-cache") noCache = true;
         else if (option == "-why") why = true;
+        else if (option == "-trace") tracePath = *value;
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-no-cg") noCg = true;
@@ -407,6 +449,9 @@ int RunMain(int argc, char** argv) {
     hdTrans::Engine engine(reference);
     if (!engine.OpenUserDicts(folders, verifyDicts, userPaths)) {
         std::fprintf(stderr, "hdtrans: no dictionary loaded from %s\n", dicts.c_str());
+        // The reason a folder or a snapshot file did not load, one line per file.
+        const std::string reason = engine.UserFileError();
+        if (!reason.empty()) std::fprintf(stderr, "%s\n", reason.c_str());
         return 1;
     }
     if (const std::string error = engine.UserFileError(); !error.empty()) {
@@ -414,6 +459,23 @@ int RunMain(int argc, char** argv) {
         std::fprintf(stderr, "hdtrans: %suser dictionary not loaded:\n%s\n", single ? "" : "warning: ",
                      error.c_str());
         if (single) return 1;
+    }
+    const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
+    if (verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1")) {
+        // Verification also fails on loaded lines whose marker family does not fit their part code.
+        const auto checked = hdTrans::dict::LoadFolders(folders, {}, true, false, hdTrans::dict::UserFiles(userPaths));
+        std::size_t failed = 0;
+        for (const hdTrans::dict::LoadError& e : checked.errors) {
+            if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass &&
+                e.kind != hdTrans::dict::LoadErrorKind::MissingRuleBodies)
+                continue;
+            std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
+            failed++;
+        }
+        if (failed > 0) {
+            std::fprintf(stderr, "hdtrans: %zu dictionary lines fail verification\n", failed);
+            return 1;
+        }
     }
     const std::string ehnd = ehndArg ? *ehndArg : config.settings.useEhnd ? hdTrans::dict::EhndFolder(programDir) : "";
     if (!ehnd.empty() && !engine.OpenEhnd(ehnd)) {
@@ -459,6 +521,24 @@ int RunMain(int argc, char** argv) {
     }
     WhyContext whyContext;
     hdTrans::internal::StageObserver observer;
+    std::FILE* traceFile = nullptr;
+    struct TraceCloser {
+        std::FILE* file = nullptr;
+        ~TraceCloser() { if (file) std::fclose(file); }
+    } traceCloser;
+    if (!tracePath.empty()) {
+        traceFile = std::fopen(tracePath.c_str(), "wb");
+        if (!traceFile) {
+            std::fprintf(stderr, "cannot write %s\n", tracePath.c_str());
+            return 2;
+        }
+        traceCloser.file = traceFile;
+        std::setvbuf(traceFile, nullptr, _IOFBF, 1 << 16);
+        whyContext.trace = traceFile;
+        observer.context = &whyContext;
+        observer.line = WhyLine;
+        observer.resolved = WhyResolved;
+    }
     if (why) {
         observer.context = &whyContext;
         observer.line = WhyLine;
@@ -471,7 +551,10 @@ int RunMain(int argc, char** argv) {
     const bool stages = !stagesDir.empty();
     collector.families = &generated->families;
     if (stages) observer = stagerecords::ObserverFor(collector, observer);
-    const hdTrans::rules::Program& program = hdTrans::internal::RulesProgram();
+    // The local rules are the dictionary rows' bodies, so the tally counts them only
+    // against the program the dictionary assembled.
+    const hdTrans::rules::Program& program =
+        generated->hasRules ? generated->rules : hdTrans::internal::RulesProgram();
     hdTrans::rules::Tally tally(program);
     if (!ruleCountsPath.empty()) options.ruleTally = &tally;
     std::string output;
@@ -481,6 +564,13 @@ int RunMain(int argc, char** argv) {
     };
     auto finish = [&] {
         if (stages && !stagerecords::Dump(stagesDir, collector)) return 1;
+        if (!dumpRulesPath.empty()) {
+            const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
+            if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
+                std::fprintf(stderr, "hdtrans: cannot write %s\n", dumpRulesPath.c_str());
+                return 1;
+            }
+        }
         if (!ruleCountsPath.empty() && !WriteRuleCounts(ruleCountsPath, program, tally)) {
             std::fprintf(stderr, "hdtrans: cannot write %s\n", ruleCountsPath.c_str());
             return 1;

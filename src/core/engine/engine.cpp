@@ -68,9 +68,45 @@ void CopyGenerated(const userdict::Families& from, output::Families& out) {
     for (const auto& [id, rows] : from.GeneratedFamilies()) out.Insert(id[0], id, rows);
 }
 
+// The rules program from the bodies the dictionary rows carry, with the global rules of
+// the built-in program. A number no row names gets an empty rule, which is never true.
+std::string RuleText(const std::vector<std::string>& bodies, const rules::Program& builtin);
+
+bool AssembleRules(const dict::Snapshot& snap, rules::Program& program) {
+    const std::vector<std::string>& bodies = snap.RuleBodies();
+    if (bodies.empty()) return false;
+    const std::string text = RuleText(bodies, RulesProgram());
+    rules::LoadError error{};
+    if (!rules::Load(text, program, error)) return false;
+    internal::AttachCompiled(program, text);
+    return true;
+}
+
+// The program text the assembly loads, so the rule compiler can be given the same
+// lines the compiled code is matched against.
+std::string RuleText(const std::vector<std::string>& bodies, const rules::Program& builtin) {
+    std::string text = "rules 1 " + std::to_string(bodies.size()) + " " +
+                       std::to_string(builtin.globalRules.size()) + "\n";
+    for (std::size_t n = 0; n < bodies.size(); n++) {
+        text += "L " + std::to_string(n) + " " + (bodies[n].empty() ? "||0" : bodies[n]) + "\n";
+    }
+    // The global rules keep the text they were compiled from; a dictionary row never
+    // names one, so they stay in the rule files.
+    for (const std::string_view line : RuleLines()) {
+        if (line.starts_with("G ")) text += line;
+    }
+    return text;
+}
+
+std::string RuleProgramText(const dict::Snapshot& snap) {
+    if (snap.RuleBodies().empty()) return {};
+    return RuleText(snap.RuleBodies(), RulesProgram());
+}
+
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
     auto generated = std::make_shared<Generated>();
     CopyGenerated(snap.GeneratedFamilies(), generated->families);
+    generated->hasRules = AssembleRules(snap, generated->rules);
     return generated;
 }
 
@@ -98,7 +134,7 @@ struct Access {
             w.watch.failed = version;
             w.watch.hasFailed = true;
             for (dict::LoadError& error : r.errors) {
-                if (error.kind != dict::LoadErrorKind::UnknownPos) w.errors.push_back(std::move(error));
+                if (dict::FailsLoad(error.kind)) w.errors.push_back(std::move(error));
             }
             return false;
         }
@@ -126,12 +162,12 @@ struct Access {
             const auto count = files.size();
             std::erase_if(files, [&result](const std::string& path) {
                 return std::any_of(result.errors.begin(), result.errors.end(), [&path](const dict::LoadError& error) {
-                    return error.file == path && error.kind != dict::LoadErrorKind::UnknownPos;
+                    return error.file == path && dict::FailsLoad(error.kind);
                 });
             });
             if (files.size() == count) return result;
             for (auto& error : result.errors) {
-                if (error.kind != dict::LoadErrorKind::UnknownPos &&
+                if (dict::FailsLoad(error.kind) &&
                     std::find(attempted.begin(), attempted.end(), error.file) != attempted.end() &&
                     std::find(files.begin(), files.end(), error.file) == files.end()) {
                     userErrors.push_back(std::move(error));

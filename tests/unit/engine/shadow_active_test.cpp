@@ -3,6 +3,7 @@
 
 #include "core/engine/driver.h"
 #include "hdtest.h"
+#include "rule_fixture.h"
 
 namespace {
 
@@ -23,10 +24,10 @@ void Observe(void* context, int, int, const hdTrans::word::Chain& chain) {
 
 HD_TEST(engine_shadow_preserves_active_document_senses) {
     using namespace hdTrans;
-    const auto loaded = dict::Load({{0, "base.tsv",
+    const auto loaded = dict::Load({{0, "base.tsv", fixture::WithRuleBodies(
         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
         "東京\t동경\tN130\tQPNXXX\t\tGN\t0\t1\n"
-        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n"}});
+        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n")}});
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     const std::string input[] = {"東京、", "東京。"};
@@ -53,10 +54,10 @@ HD_TEST(engine_shadow_preserves_active_document_senses) {
 
 HD_TEST(engine_shadow_preserves_active_scorer_ids) {
     using namespace hdTrans;
-    const auto loaded = dict::Load({{0, "base.tsv",
+    const auto loaded = dict::Load({{0, "base.tsv", fixture::WithRuleBodies(
         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
         "東京\t동경\tN130\tQPNXXX\t\tGN\t0\t1\n"
-        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n"}});
+        "東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n")}});
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     const word::Scorer active[] = {{"first", [](const word::Item&, int candidate, const word::SelectContext&) {

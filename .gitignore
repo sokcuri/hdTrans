@@ -9,3 +9,5 @@ build/
 .DS_Store
 .hdsnap/
 node_modules/
+# Local agent worktrees and session state
+.claude/

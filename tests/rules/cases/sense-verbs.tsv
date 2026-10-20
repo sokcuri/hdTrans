@@ -2,44 +2,44 @@ rule	input	expected	kind	layer
 sense:モテる	あの人はモテる。	그 사람은 인기를 끈다.	fix	senses
 sense:モテる	あの人はモテない。	그 사람은 인기없다.	keep	senses
 sense:モテる	この箱なら持てる。	이 상자라면 가질 수 있다.	keep	senses
-L817	振り返っても姿は見えない。	돌아봐도 모습은 안보인다.	fix	local
-L817	振り返ってから歩いた。	돌아보고 나서 걸었다.	fix	local
-L817	振り返って走った。	되돌아 보고 달렸다.	keep	local
-L737	競走で勝った。	경주에서 이겼다.	fix	local
-L737	力で勝る。	힘으로 우수하다.	keep	local
-L2918	風が吹いたことに加え、雨も降った。	바람이 불었던 것에 더해 비도 내렸다.	fix	local
-L2918	仲間に加えた。	동료에 가세했다.	keep	local
-L2692	作業にかかった。	작업에 착수했다.	fix	local
-L2692	風邪にかかった。	감기에 걸렸다.	keep	local
-L777	子供を引き取った。	아이를 맡았다.	fix	local
-L777	商品を引き取った。	상품을 인수했다.	keep	local
-L777	債権を引き取った。	채권을 인수했다.	keep	local
-L4191	始発に間に合った。	시발에 늦지 않았다.	fix	local
-L4191	時間に間に合った。	시간에 맞게 도착했다.	keep	local
-L4378	今日をもって退職する。	오늘로써 퇴직한다.	fix	local
-L2692	私は病院にかかった。	나는 병원에서 진료받았다.	fix	local
-L4378	責任をもって対応する。	책임을 져 대응한다.	keep	local
-L4378	時価をもって計算する。	시가로써 계산한다.	fix	local
-L4727	パスタを茹でる。	파스타를 삶는다.	fix	local
-L4727	中華麺を茹でる。	중화면을 삶는다.	keep	local
-L1024	式典がすんだ。	식전이 끝났다.	fix	local
-L1024	試験がすんだ。	시험이 끝났다.	keep	local
-L2716	私にできる仕事だ。	내가 할 수 있는 일이다.	fix	local
-L2716	彼にできる仕事だ。	그가 할 수 있는 일이다.	keep	local
-L2716	君にできる仕事だ。	네가 할 수 있는 일이다.	fix	local
-L2716	私にできません。	내가 할 수 없습니다.	fix	local
-L3138	友人について来る。	친구를 따라 온다.	fix	local
-L3138	計画について話す。	계획에 대해 이야기한다.	keep	local
-L3138	友人について話す。	친구에 대해 이야기한다.	keep	local
-L565	パンにソースをかけた。	빵에 소스를 끼얹었다.	fix	local
-L565	壁に時計をかけた。	벽에 시계를 걸었다.	keep	local
-L728	パンを焼いた。	빵을 구웠다.	fix	local
-L728	鍋で焼いた。	냄비로 구웠다.	keep	local
-L5088	昨日はお腹すいた。	어제는 배 고팠다.	fix	local
-L5088	お腹すいた。	배 고프다.	keep	local
-L5088	昨夜もお腹すいた。	어젯밤도 배 고팠다.	fix	local
-L4346	金が受け取れる。	돈을 받을 수 있다.	fix	local
-L4346	利益が受け取れる。	이익을 받을 수 있다.	keep	local
+dict:jisjk:95081	振り返っても姿は見えない。	돌아봐도 모습은 안보인다.	fix	local
+dict:jisjk:95081	振り返ってから歩いた。	돌아보고 나서 걸었다.	fix	local
+dict:jisjk:95081	振り返って走った。	되돌아 보고 달렸다.	keep	local
+dict:jisjk:93767	競走で勝った。	경주에서 이겼다.	fix	local
+dict:jisjk:93767	力で勝る。	힘으로 우수하다.	keep	local
+dict:jisjk:340555	風が吹いたことに加え、雨も降った。	바람이 불었던 것에 더해 비도 내렸다.	fix	local
+dict:jisjk:340555	仲間に加えた。	동료에 가세했다.	keep	local
+dict:jisjk:267312	作業にかかった。	작업에 착수했다.	fix	local
+dict:jisjk:267312	風邪にかかった。	감기에 걸렸다.	keep	local
+dict:jisjk:94471	子供を引き取った。	아이를 맡았다.	fix	local
+dict:jisjk:94471	商品を引き取った。	상품을 인수했다.	keep	local
+dict:jisjk:94471	債権を引き取った。	채권을 인수했다.	keep	local
+dict:jisjk:361304	始発に間に合った。	시발에 늦지 않았다.	fix	local
+dict:jisjk:361304	時間に間に合った。	시간에 맞게 도착했다.	keep	local
+dict:jisjk:364119	今日をもって退職する。	오늘로써 퇴직한다.	fix	local
+dict:jisjk:267312	私は病院にかかった。	나는 병원에서 진료받았다.	fix	local
+dict:jisjk:364119	責任をもって対応する。	책임을 져 대응한다.	keep	local
+dict:jisjk:364119	時価をもって計算する。	시가로써 계산한다.	fix	local
+dict:jisjk:373295	パスタを茹でる。	파스타를 삶는다.	fix	local
+dict:jisjk:373295	中華麺を茹でる。	중화면을 삶는다.	keep	local
+dict:jisjk:115307	式典がすんだ。	식전이 끝났다.	fix	local
+dict:jisjk:115307	試験がすんだ。	시험이 끝났다.	keep	local
+dict:jisjk:267484	私にできる仕事だ。	내가 할 수 있는 일이다.	fix	local
+dict:jisjk:267484	彼にできる仕事だ。	그가 할 수 있는 일이다.	keep	local
+dict:jisjk:267484	君にできる仕事だ。	네가 할 수 있는 일이다.	fix	local
+dict:jisjk:267484	私にできません。	내가 할 수 없습니다.	fix	local
+dict:jisjk:341799	友人について来る。	친구를 따라 온다.	fix	local
+dict:jisjk:341799	計画について話す。	계획에 대해 이야기한다.	keep	local
+dict:jisjk:341799	友人について話す。	친구에 대해 이야기한다.	keep	local
+dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 끼얹었다.	fix	local
+dict:jisjk:90581	壁に時計をかけた。	벽에 시계를 걸었다.	keep	local
+dict:jisjk:93609	パンを焼いた。	빵을 구웠다.	fix	local
+dict:jisjk:93609	鍋で焼いた。	냄비로 구웠다.	keep	local
+dict:jisjk:375916	昨日はお腹すいた。	어제는 배 고팠다.	fix	local
+dict:jisjk:375916	お腹すいた。	배 고프다.	keep	local
+dict:jisjk:375916	昨夜もお腹すいた。	어젯밤도 배 고팠다.	fix	local
+dict:jisjk:363814	金が受け取れる。	돈을 받을 수 있다.	fix	local
+dict:jisjk:363814	利益が受け取れる。	이익을 받을 수 있다.	keep	local
 dict:思案	思案していた。	궁리하고 있었다.	fix	defaults
 dict:思案	思案投げ首だった。	어찌할 바를 모르는 모습이었다.	keep	defaults
 dict:ブチ切れ	ブチ切れて帰った。	폭발해 돌아갔다.	fix	defaults

@@ -3,6 +3,7 @@
 
 #include "core/engine/driver.h"
 #include "hdtest.h"
+#include "rule_fixture.h"
 
 using namespace hdTrans;
 
@@ -35,7 +36,7 @@ std::string Translate(const dict::Snapshot& snap, const std::string& line) {
 // A mask that stands for an unknown number or name is written as itself, spaced like a
 // number before a counter; a symbol that is no numeral keeps no space.
 HD_TEST(engine_placeholder_masks) {
-    const auto loaded = dict::Load({{0, "base.tsv", kRows}});
+    const auto loaded = dict::Load({{0, "base.tsv", fixture::WithRuleBodies(kRows)}});
     HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
     const dict::Snapshot& snap = *loaded.snapshot;
     HD_CHECK_EQ(Translate(snap, "○月○日"), std::string("○월 ○일"));

@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:jisjk:367846	ここにいるわけでございますか。	여기에 있는 것입니까.	keep	local
+dict:jisjk:367846	ここにいるわけで歩く。	!rule:dict:jisjk:367846	keep	local
+dict:jisjk:116128	同じ年の友達だ。	같은 나이의 친구다.	fix	local
+dict:jisjk:116128	同じ年の末の息子だ。	rule:dict:jisjk:116128=나이	keep	local
+dict:jisjk:116128	同じ年に生まれた。	같은 해에 태어났다.	fix	local
+dict:jisjk:13902	だれに話してもらいますか。	누구에게 이야기해 줍니까.	fix	local
+dict:jisjk:13902	だれが走った。	누가 달렸다.	fix	local
+dict:jisjk:13902	だれに読んでもらう。	누가 읽어 준다.	fix	local
+dict:jisjk:118110	はるかさんが来た。	!rule:dict:jisjk:118110	keep	local
+dict:jisjk:118110	はるか上空を飛ぶ。	rule:dict:jisjk:118110=아득한	keep	local
+dict:jisjk:345596	水に不足はない。	!rule:dict:jisjk:345596	keep	local
+dict:jisjk:345596	相手に不足はない。	상대에게 불만은 없다.	fix	local
+dict:jisjk:115818	手を？	!rule:dict:jisjk:115818	keep	local
+dict:jisjk:115818	手を打つ。	!rule:dict:jisjk:115818	keep	local
+dict:jisjk:115818	手を見た。	손을 보았다.	fix	local
+dict:jisjk:375136	帽子に星がついた。	모자에 별이 붙었다.	fix	local
+dict:jisjk:375136	区別がついた。	구별이 되었다.	fix	local
+dict:jisjk:265495	その建物は図書館に当たる。	그 건물은 도서관에 해당된다.	fix	local
+dict:jisjk:265495	出発の時に当たる。	출발때에 이른다.	fix	local
+dict:jisjk:363300	規則に従って申し込む。	규칙을 따르고 신청한다.	fix	local
+dict:jisjk:363300	規則に従って歩く。	규칙을 따라 걷는다.	fix	local
+dict:jisjk:265331	粉を払った。	가루를 털어 냈다.	keep	local
+dict:jisjk:265331	泥を払った。	진흙을 털었다.	fix	local
+dict:jisjk:117087	彼が笑える日は来る。	그가 웃을 수 있는 날은 온다.	fix	local
+dict:jisjk:117087	笑える話を読んだ。	웃기는 이야기를 읽었다.	fix	local

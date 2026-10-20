@@ -28,7 +28,8 @@
 // Fields: S source surface, D target text, P pumsa code, A semantic attributes,
 // G grammar attributes, and for the ending (gobi) U source, Y target, M pumsa,
 // T attributes, W grammar attributes. Atoms on D and Y with = assign the target
-// text; the assignment stays when the rest of the rule is false.
+// text as they are evaluated; the word stage takes the writes back when the rule is
+// false (word::Journal).
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -49,8 +50,12 @@ namespace hdTrans::rules {
 class Item {
 public:
     // number (a local rule index or a global rule PRIO) is -1 when evaluation ends.
-    // Assignments may survive a false rule.
     virtual void SetRuleContext(bool, int) {}
+    // Called around the body of each rule, EndRule with whether the rule fired. An
+    // assignment takes effect as it is evaluated, so a word stage that records them
+    // takes back the writes of a rule that did not fire here.
+    virtual void BeginRule() {}
+    virtual void EndRule(bool) {}
     virtual Item* GetObject(int delta) = 0;
     virtual int GetCurrentCompDI() = 0;
     virtual int GetCurrentCompUmiDI() = 0;

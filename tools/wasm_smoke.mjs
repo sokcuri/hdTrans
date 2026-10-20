@@ -205,10 +205,11 @@ try {
     assert.equal(independent.translate(text), base);
 
     engine.FS.mkdir('/trace');
-    engine.FS.writeFile('/trace/base.tsv', 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n'
-        + '東京\t동경\tN130\tQPNXXX\t\tGN\t0\t1\n東京\t도쿄\tN130\tQCT\t\tGN\t9\t2\n'
-        + '犬\t개\tN110\tXXX\t\tGN\t0\t3\n書\t쓰\tM421\tXXX\t\tGN\t0\t4\n'
-        + 'V\t4다\tS500\tXXX\t\tGN\t0\t5\nV\t4는다\tS500\t\t\tGN\t2\t6\n');
+    engine.FS.writeFile('/trace/base.tsv', 'key\tko\tpos\tsem\tgram\tdict\trule\tctx\tid\n'
+        + '東京\t동경\tN130\tQPNXXX\t\tGN\t0\t\t1\n'
+        + '東京\t도쿄\tN130\tQCT\t\tGN\t9\t||1 S+1== "、"\t2\n'
+        + '犬\t개\tN110\tXXX\t\tGN\t0\t\t3\n書\t쓰\tM421\tXXX\t\tGN\t0\t\t4\n'
+        + 'V\t4다\tS500\tXXX\t\tGN\t0\t\t5\nV\t4는다\tS500\t\t\tGN\t2\t||1 G+0== "Ow"\t6\n');
     engine.FS.writeFile('/trace/pre.tsv', '#! layer=prefilter\n道具\t東京\t1\t0\n');
     engine.FS.writeFile('/trace/post.tsv', '#! layer=postfilter\n도쿄\t도시\t1\t0\n');
     const traced = await init({ directories: ['/trace'] });
@@ -221,7 +222,8 @@ try {
         assert.equal(tokyo.provenance, 'LocalRule');
         assert.equal(tokyo.id, 9);
         assert.equal(tokyo.layer, 'local');
-        assert.match(tokyo.source, /^discourse\.txt:\d+$/);
+        // A local rule lives in the row that names it, so its number is its source.
+        assert.equal(tokyo.source, 'L9');
         const ending = traced.translate('書く。', { json: true }).choices.find((choice) => choice.ending)?.ending;
         assert(ending);
         assert.equal(ending.index, 1);
@@ -229,7 +231,7 @@ try {
         assert.equal(ending.provenance, 'LocalRule');
         assert.equal(ending.id, 2);
         assert.equal(ending.layer, 'local-ending');
-        assert.match(ending.source, /\.txt:\d+$/);
+        assert.equal(ending.source, 'L2');
         assert.equal(traced.translate('道具、'), '도시,');
         traced.setEhnd({ 'PostFilter_extra.txt': '도시\t확장\t1\t0\n' });
         assert.equal(traced.translate('道具、'), '확장,');

@@ -157,10 +157,19 @@ bool TsvReader::Next() {
 
 bool SenseReader::ReadHeader() {
     static constexpr std::string_view kNames[kColumnCount] = {
-        "key", "ko", "pos", "sem", "gram", "dict", "rule", "flags", "prio", "reading", "id",
+        "key", "ko", "pos", "sem", "gram", "dict", "rule", "ctx", "flags", "prio", "reading", "id",
     };
     const auto& fields = rows_.Fields();
     width_ = fields.size();
+    // A copied column would be read once and ignored; say so rather than let it rot.
+    for (std::size_t i = 0; i < fields.size(); i++) {
+        for (std::size_t j = i + 1; j < fields.size(); j++) {
+            if (fields[i] == fields[j]) {
+                errors_.push_back({rows_.Line(), TsvErrorKind::DuplicateColumn});
+                return false;
+            }
+        }
+    }
     for (int c = 0; c < kColumnCount; c++) {
         index_[c] = -1;
         for (std::size_t i = 0; i < fields.size(); i++) {
@@ -222,6 +231,7 @@ bool SenseReader::Next(Sense& out) {
         bool failed = false;
         TsvErrorKind kind = TsvErrorKind::BadNumber;
         if (!col[kRule].empty() && !internal::ParseInt32(col[kRule], s.rule)) failed = true;
+        s.ctx = col[kCtx];
         if (!col[kPrio].empty() && !failed && !internal::ParseInt32(col[kPrio], s.prio)) failed = true;
         bool hidden = false;
         std::string_view flags = col[kFlags];

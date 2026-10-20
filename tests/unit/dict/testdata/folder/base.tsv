@@ -1,5 +1,5 @@
 # Base senses: prio order, tags from the part-of-speech table, special codes.
-key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id	ctx
 学生	학도	N110			GN			-1		1
 学生	학생	N110	VHn		GN					2
 行	가&AA@	M428			GN					3
@@ -9,8 +9,8 @@ key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
 東京	도쿄	N130	QCTVPl		GN					jisjk:7
 霧島	기리시마	N130	QCTVPl		GN					8
 霧島	키리시마	N130	QPN		GN					9
-の	한	P200			GN	5089				10
-の	의	P200			GN	12				11
+の	한	P200			GN	5089				10	||1 S-1== "x"
+の	의	P200			GN	12				11	||1 S-1== "x"
 D	1고	U5I1			GN					12
 走	달리&AD@	verb-general,godan-ra			GN					13
 山田	야마다	名詞-固有名詞-人名-姓			GN					14

@@ -186,6 +186,21 @@ using RuleNumber = int32_t;
 // kept as written. Returns false for an unknown tag or a tag without part code.
 bool PosCodes(std::string_view pos, std::string_view& partText, std::string_view& sem, std::string_view& gram);
 
+// The Korean name of a part code ("N110" is 일반 명사), or an empty view for a code the
+// schema does not carry.
+std::string_view PartNameOf(std::string_view code);
+
+// The pattern a rule condition value stands for in part field ('P' or 'M'). A name is
+// looked up in the pattern table, and names joined by '+' are joined patterns
+// ("명사+부사" is "1**3**"); any other value comes back as it is. The result is longer
+// than value only for joined names, so it goes into a string the caller holds.
+std::string PartPatternOf(char field, std::string_view value);
+
+// Why a target that ends in a marker family ("먹&AA@") cannot take the form codes of
+// part: '&' families conjugate verb stems (class 4), '$' adjective stems (class 7) and
+// '%' adjectival nouns (class 8). Empty for a target without a family and for a match.
+std::string MarkerClassError(std::string_view target, PartCode part);
+
 namespace internal {
 
 struct PosTag {
@@ -194,6 +209,31 @@ struct PosTag {
     const char* sem;
     const char* gram;
 };
+
+// One row of the part-of-speech schema (src/core/dict/pos_schema.tsv): the code, its
+// class digit, its Korean name, and the standard analyzer tags that map to it, comma
+// separated.
+struct PartName {
+    const char* code;
+    const char* klass;
+    const char* universal;  // the Universal Dependencies class the code belongs to
+    const char* name;
+    const char* standard;
+};
+
+// The schema of every part code the dictionaries use, sorted by code.
+std::span<const PartName> PartSchema();
+
+// A named part condition: field is P or M, name is the Korean name a rule may
+// write in place of the pattern, pattern is the code form it stands for.
+struct PartPattern {
+    const char* field;
+    const char* name;
+    const char* pattern;
+};
+
+// The named part conditions, sorted by field then name.
+std::span<const PartPattern> PartPatternTable();
 
 // The tags with the codes of the first table row carrying them, sorted by tag
 // bytes; an empty part code marks a tag without engine counterpart.

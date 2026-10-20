@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+dict:jisjk:2281	安いようだ。	!rule:dict:jisjk:2281	keep	local
+dict:jisjk:2281	悲しかったようだ。	rule:dict:jisjk:2281=%B3@	keep	local
+dict:w:26677	この服はきつきつだ。	이 옷은 꽉 낀다.	fix	local
+dict:w:26677	きつきつの服だ。	!rule:dict:w:26677	keep	local
+dict:jisjk:374149	もう大丈夫です。	이제 괜찮습니다.	fix	local
+dict:jisjk:374149	もう安心だ。	이제 안심이다.	fix	local
+dict:jisjk:15619	二日かかると計算した。	이틀 걸린다고 계산했다.	fix	local
+dict:jisjk:15619	代金を計算する。	대금을 계산한다.	fix	local
+dict:jisjk:342767	これはあってはならぬ事故だ。	이것은 있어서는 안되는 사고다.	fix	local
+dict:jisjk:342767	これはあってはならぬ。	!rule:dict:jisjk:342767	keep	local
+dict:jisjk:92227	私は毎日気をつけます。	나는 매일 조심합니다.	fix	local
+dict:jisjk:92227	これから気をつけます。	지금부터 조심하겠습니다.	fix	local

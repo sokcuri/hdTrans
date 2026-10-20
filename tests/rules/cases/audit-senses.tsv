@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+dict:audit-senses	夢追い人	꿈을 쫓는 사람	fix	lookup
+dict:audit-senses	夢追い人だった。	꿈을 쫓는 사람이었다.	fix	lookup
+dict:audit-senses	キャソック	성직복	fix	lookup
+dict:audit-senses	キャソックを着る。	성직복을 입는다.	fix	lookup
+dict:audit-senses	差込	삽입	keep	lookup
+dict:audit-senses	コンセントの差込が甘い。	콘센트의 삽입이 달다.	keep	lookup
+dict:pronoun-standalone	私	나	fix	lookup
+dict:pronoun-standalone	俺	나	fix	lookup
+dict:pronoun-standalone	僕	나	fix	lookup
+dict:pronoun-standalone	君	너	fix	lookup
+dict:pronoun-standalone	誰	누구	fix	lookup
+dict:pronoun-standalone	私の本	나의 책	keep	lookup
+dict:pronoun-standalone	俺は行く。	나는 간다.	keep	lookup
+dict:pronoun-standalone	一	일	keep	lookup
+dict:pronoun-standalone	員	원	keep	lookup
+dict:pronoun-standalone	世	세	keep	lookup

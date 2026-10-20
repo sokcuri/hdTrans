@@ -17,7 +17,8 @@ export interface ChoiceSelection {
   provenance: string;
   layer: string;
   id: number;
-  /** Rule filename:line, sense table:row, or empty when no source is recorded. */
+  /** Local rule number, global rule file:line, sense table:row, or empty when no
+   *  source is recorded. */
   source: string;
 }
 

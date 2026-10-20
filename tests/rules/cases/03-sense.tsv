@@ -1,0 +1,46 @@
+rule	input	expected	kind	layer
+dict:jisjk:341470	リンゴを、どうぞ包んでください。	사과를, 어서 감싸 주세요.	fix	local
+dict:jisjk:341470	リンゴを、どうぞ。	사과를, 드세요.	fix	local
+dict:jisjk:343546	行くって見抜いた。	간다 라고 간파했다.	keep	local
+dict:jisjk:343546	来るって思った。	온다 라고 생각했다.	keep	local
+dict:jisjk:6506	田中さんと話す。	rule:dict:jisjk:6506=씨	keep	local
+dict:jisjk:6506	店員さんを呼ぶ。	!rule:dict:jisjk:6506	keep	local
+dict:jisjk:267272	書いており、読んでいる。	쓰고 있어 읽고 있다.	fix	local
+dict:jisjk:267272	読んでおりません。	rule:dict:jisjk:267272=&HN@	keep	local
+dict:jisjk:265218	あと二人必要だ。	!rule:dict:jisjk:265218	keep	local
+dict:jisjk:265218	あと、窓も閉める。	그리고, 창도 닫는다.	fix	local
+dict:jisjk:265218	あと本を読む。	그리고책을 읽는다.	fix	local
+dict:jisjk:370773	二本のバラを買う。	두 송이의 장미를 산다.	fix	local
+dict:jisjk:370773	二本のチューリップを買う。	두 송이의 튤립을 산다.	fix	local
+dict:jisjk:3994	石から火線が飛んだ。	rule:dict:jisjk:3994=에서	keep	local
+dict:jisjk:3994	傷から血が溢れた。	rule:dict:jisjk:3994=에서	keep	local
+dict:jisjk:3994	友達から手紙が来た。	친구로부터 편지가 왔다.	fix	local
+dict:jisjk:365922	彼女はそういうのを買った。	그녀는 그러한 것을 샀다.	fix	local
+dict:jisjk:365922	そういうのは大事だ。	그러한 것은 소중하다.	fix	local
+dict:jisjk:4904	料理をうまい方法で作る。	요리를 능숙한 방법으로 만든다.	fix	local
+dict:jisjk:4904	うまい料理を食べる。	맛있는 요리를 먹는다.	fix	local
+dict:jisjk:120856	勉強はもうきつい。	공부는 이제 힘들다.	fix	local
+dict:jisjk:120856	この靴はきつい。	이 구두는 꼭 낀다.	fix	local
+dict:jisjk:263007	恐怖なくしては語れない。	공포없이는 말할 수 없다.	fix	local
+dict:jisjk:263007	愛なくしては生きられない。	사랑없이는 살 수 없다.	fix	local
+dict:jisjk:313018	中には古い本もある。	!rule:dict:jisjk:313018	keep	local
+dict:jisjk:313018	箱の中を見た。	rule:dict:jisjk:313018=안	keep	local
+dict:jisjk:30397	原野に移った。	원야로 옮겼다.	fix	local
+dict:jisjk:30397	原野が語った。	하라노가 말했다.	fix	local
+dict:jisjk:340882	寺巡りツアーに参加する。	절순회 투어에 참가한다.	fix	local
+dict:jisjk:340882	事件巡り議論が続く。	사건 둘러싸고 논의가 계속된다.	fix	local
+dict:jisjk:354759	日本店頭で買いました。	일본 매장에서 샀습니다.	fix	local
+dict:jisjk:354759	日本店頭市場で売った。	일본 장외시장에서 팔았다.	fix	local
+dict:jisjk:354975	その案が候補にあがった。	그 안이 후보에 올랐다.	fix	local
+dict:jisjk:354975	話題にあがる。	화제에 오른다.	fix	local
+dict:jisjk:354975	お迎えにあがりました。	맞이하러 갔습니다.	fix	local
+dict:jisjk:354975	屋上にあがった。	옥상에 갔다.	fix	local
+dict:jisjk:119195	上着からはみだす。	윗도리로부터 삐어져 나온다.	fix	local
+dict:jisjk:119195	はみだす布を切る。	삐어져 나오는 옷감을 자른다.	fix	local
+dict:jisjk:267431	寺へ参って行く。	!rule:dict:jisjk:267431	keep	local
+dict:jisjk:267431	病気で皆参っている。	rule:dict:jisjk:267431=약해&AL@	keep	local
+dict:jisjk:140862	深い苦痛を抱いている。	!rule:dict:jisjk:140862	keep	local
+dict:jisjk:358621	酒を控えた。	술을 줄였다.	fix	local
+dict:jisjk:358621	海を控えた町だ。	바다를 가까이 둔 마을이다.	fix	local
+dict:jisjk:1051	はっきり言う。	rule:dict:jisjk:1051=분명히	keep	local
+dict:jisjk:1051	はっきり聞こえる。	분명히 들린다.	fix	local

@@ -1,0 +1,38 @@
+rule	input	expected	kind	layer
+dict:jisjk:374826	左へどうぞ歩いてください。	왼쪽으로 부디 걸어 주세요.	fix	local
+dict:jisjk:374826	あちらへどうぞ。	저쪽에 오세요.	fix	local
+dict:jisjk:363278	強い覚悟を込めた。	강한 각오를 담았다.	fix	local
+dict:jisjk:363278	責任を取る覚悟がある。	책임을 질 각오가 있다.	fix	local
+dict:jisjk:363278	足りない可能性がある。	부족할 가능성이 있다.	fix	local
+dict:jisjk:363278	習得できない可能性がある。	습득할 수 없을 가능성이 있다.	fix	local
+dict:jisjk:363278	ひどい可能性がある。	심할 가능성이 있다.	fix	local
+dict:jisjk:262887	天気が良い限り遊ぶ。	날씨가 좋은 한 논다.	fix	local
+dict:jisjk:262887	うれしい限りだ。	기쁠 따름이다.	fix	local
+dict:jisjk:364078	３つ子が来た。	rule:dict:jisjk:364078=쌍둥이	keep	local
+dict:jisjk:364078	三つ子が来た。	세쌍둥이가 왔다.	fix	local
+dict:jisjk:31506	苦労は一時です。	!rule:dict:jisjk:31506	keep	local
+dict:jisjk:31506	今は一時です。	지금은 1시입니다.	fix	local
+dict:jisjk:116274	三万売れた。	rule:dict:jisjk:116274=만	keep	local
+dict:jisjk:116274	万が一に備える。	만일에 대비한다.	fix	local
+dict:jisjk:115938	彼の分の席はない。	그의 몫의 자리는 없다.	fix	local
+dict:jisjk:115938	三人分の席はない。	세 명분의 자리는 없다.	fix	local
+dict:jisjk:115938	三席ある。	!rule:dict:jisjk:115938	keep	local
+dict:jisjk:354463	二〇二五年末に会う。	rule:dict:jisjk:354463=년말	keep	local
+dict:jisjk:354463	今年の年末に会う。	금년의 연말에 만난다.	fix	local
+dict:jisjk:115791	学生の時よく泳いだ。	!rule:dict:jisjk:115791	keep	local
+dict:jisjk:115791	５時すぐ帰る。	5시 바로 돌아간다.	fix	local
+dict:jisjk:6120	だが、それは違う。	rule:dict:jisjk:6120=하지만	keep	local
+dict:jisjk:6120	雨だが、行く。	!rule:dict:jisjk:6120	keep	local
+dict:jisjk:374208	どうか静かに。	rule:dict:jisjk:374208=제발	keep	local
+dict:jisjk:374208	どうか静かに。	제발 조용하게.	fix	local
+dict:jisjk:374208	どうか助けてください。	제발 도와 주세요.	fix	local
+dict:jisjk:367255	はるかさんが来た。	하루카씨가 왔다.	fix	local
+dict:jisjk:367255	はるか遠くに見える。	!rule:dict:jisjk:367255	keep	local
+dict:jisjk:31546	一体何匹来た。	도대체 몇 마리 왔다.	fix	local
+dict:jisjk:31546	一体何人来た。	도대체 몇 사람 왔다.	fix	local
+dict:jisjk:260378	元へもどる。	원래로 돌아온다.	fix	local
+dict:jisjk:260378	彼の元へ戻る。	!rule:dict:jisjk:260378	keep	local
+dict:jisjk:347780	一緒に友達になろう。	함께 친구가 되자.	fix	local
+dict:jisjk:347780	彼は医者になろう。	그는 의사가 될 것이다.	fix	local
+dict:jisjk:116613	６割る２は３だ。	!rule:dict:jisjk:116613	keep	local
+dict:jisjk:116613	ガラスを割る。	유리를 깬다.	fix	local

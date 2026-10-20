@@ -114,15 +114,30 @@ void Item::SetRuleContext(bool global, int number) {
     w->ruleItem = number < 0 ? nullptr : this;
 }
 
+void Item::BeginRule() {
+    if (w) w->journal.Begin();
+}
+
+void Item::EndRule(bool fired) {
+    if (!w) return;
+    if (fired) w->journal.Commit();
+    else w->journal.Rollback();
+}
+
 void Item::AssignEntrySurface(int i, std::string_view s, Selection source) {
     if (Entry* e = group->At(i)) {
+        // A rule's write is recorded so that a rule that fails can take it back.
+        if (w) w->journal.BeforeEntryWrite(e);
         if (e->dst != s) {
             if (w && w->ruleChoice.layer != Provenance::None) {
                 source = w->ruleChoice;
                 e->neighbourAssigned = w->ruleItem != this;
             }
             e->targetChoice = source;
-            if (i == selected) choice = source;
+            if (i == selected) {
+                if (w) w->journal.BeforeChoiceWrite(this, false);
+                choice = source;
+            }
         }
         e->dst.assign(s);
     }
@@ -160,10 +175,14 @@ int Item::DirectClassifier(int i) const {
 
 void Item::AssignDirectSlot(int i, std::string_view s, Selection source) {
     if (Entry* e = DirectEntry(i)) {
+        if (w) w->journal.BeforeEntryWrite(e);
         if (e->dst != s) {
             if (w && w->ruleChoice.layer != Provenance::None) source = w->ruleChoice;
             e->targetChoice = source;
-            if (i == DirectIndex()) directChoice = source;
+            if (i == DirectIndex()) {
+                if (w) w->journal.BeforeChoiceWrite(this, true);
+                directChoice = source;
+            }
         }
         e->dst.assign(s);
     }

@@ -10,59 +10,59 @@ ending:ないんす	そうなんよ。	그런 이야.	keep	builtin-ending
 ending:ないんす	好きなんよ。	좋아하는 이야.	keep	builtin-ending
 ending:ないんす	本当なんよ。	사실이야.	keep	builtin-ending
 ending:ないんす	たくさんよ。	많아요.	keep	builtin-ending
-L3302	彼は掃除するよ。	그는 청소해.	fix	local-ending
-L3302	私は掃除するよ。	나는 청소할게.	keep	local-ending
-L3302	君が助けるよ。	네가 도와.	fix	local-ending
-L3302	僕が助けるよ。	내가 도울게.	keep	local-ending
-L2252	帰るって話だ。	돌아간다는 이야기다.	fix	local-ending
-L2252	帰るって思った。	돌아간다 라고 생각했다.	keep	local-ending
-L2073	泳ぐなんて噂だ。	헤엄친다는 소문이다.	fix	local-ending
-L2073	泳ぐなんて変だ。	헤엄치다니 이상하다.	keep	local-ending
-L4470	ダメなの？	안 돼?	fix	local-ending
-L4470	静かなの。	조용해.	keep	local-ending
-L2947	無理なのよ。	무리야.	fix	local-ending
-L2947	一般的なのよ。	일반적이야.	keep	local-ending
-L2947	簡単なのよ。	간단해.	keep	local-ending
-L4308	値段は安いものの味は悪い。	가격은 싸기는 하지만 맛은 나쁘다.	fix	local-ending
-L4308	値段は安いものの。	가격은 싸기는 하지만.	keep	local-ending
-L1744	泣き出さんばかりの声だ。	울기 시작할 듯한 목소리다.	fix	local-ending
-L1744	泣き出さんばかりに笑う。	울기 시작하듯이 웃는다.	keep	local-ending
-L2787	食べるように準備する。	먹도록 준비한다.	fix	local-ending
-L2787	教わったように準備する。	배운 것처럼 준비한다.	keep	local-ending
-L3950	確認したうえで、出発する。	확인한 후에, 출발한다.	fix	local-ending
-L3950	読んだうえでの判断だ。	읽은 후의 판단이다.	keep	local-ending
-L3452	一般的だと困る。	일반적이라면 곤란하다.	fix	local-ending
-L3452	一般的だと思う。	일반적이라고 생각한다.	keep	local-ending
-L3453	静かだと困る。	조용하다면 곤란하다.	fix	local-ending
-L3453	無理だと困る。	무리라면 곤란하다.	fix	local-ending
-L3453	静かだと知った。	조용하다고 알았다.	keep	local-ending
-L3453	静かだとしたら嬉しい。	조용하다고 하면 기쁘다.	keep	local-ending
-L3453	静かだとして話す。	조용하다고 해 이야기한다.	keep	local-ending
-L3598	涙が出る程面白い。	눈물이 나올 정도로 재미있다.	fix	local-ending
-L3598	声が出る程面白い。	목소리가 나올 정도로 재미있다.	fix	local-ending
-L3598	読めば読む程面白い。	읽으면 읽을수록 재미있다.	keep	local-ending
-L3598	読む程面白い。	읽을수록 재미있다.	keep	local-ending
-L2082	運びきれなかった。	옮기지 못했다.	fix	local-ending
-L2082	運びきれなかった荷物だ。	옮기지 못했던 짐이다.	keep	local-ending
-L2596	参加しないと見た。	참가하지 않는다고 보았다.	fix	local-ending
-L2596	参加しないと思う。	참가하지 않는다고 생각한다.	keep	local-ending
-L5024	無理だとは思わない。	무리라고는 생각하지 않는다.	fix	local-ending
-L5024	一般的だとは思わない。	일반적이라고는 생각하지 않는다.	keep	local-ending
-L5024	静かだとは思わない。	조용하다고는 생각하지 않는다.	keep	local-ending
-L3238	短い時間だ。	짧은 시간이다.	fix	local-ending
-L3238	私は嘘をつかないことを誓う。	나는 거짓말하지 않을 것을 맹세한다.	keep	local-ending
-L1327	何を待つの。	무엇을 기다려.	fix	local-ending
-L1327	ここで待つの。	여기서 기다려.	keep	local-ending
-L220	確認してみるのみだ。	확인해 볼 뿐이다.	fix	local-ending
-L220	待つのみだ。	기다릴 뿐이다.	keep	local-ending
-L191	考えてない。	생각하지 않았다.	fix	local-ending
-L191	歩いて歩いて、町に着いた。	걷고 걸어, 마을에 도착했다.	keep	local-ending
-L3132	今食べていない。	지금 먹지 않는다.	fix	local-ending
-L3132	まだ食べていない。	아직 먹지 않았다.	keep	local-ending
-L3132	今食べてない。	지금 먹지 않는다.	fix	local-ending
-L3318	今は走っていないのに暑い。	지금은 달리지 않는데 덥다.	fix	local-ending
-L3318	まだ終わっていないのに帰った。	아직 끝나지 않았는데 돌아갔다.	keep	local-ending
-L4541	終わったって感じだ。	끝났다는 느낌이다.	fix	local-ending
-L4541	終わったって言った。	끝났다고 했다.	keep	local-ending
-L3230	寒いと鳥が鳴く。	추우면 새가 운다.	fix	local-ending
-L3230	悪いとされる。	나쁘다고 여겨진다.	keep	local-ending
+dict:jisjk:342620	彼は掃除するよ。	그는 청소해.	fix	local-ending
+dict:jisjk:342620	私は掃除するよ。	나는 청소할게.	keep	local-ending
+dict:jisjk:342620	君が助けるよ。	네가 도와.	fix	local-ending
+dict:jisjk:342620	僕が助けるよ。	내가 도울게.	keep	local-ending
+dict:jisjk:265166	帰るって話だ。	돌아간다는 이야기다.	fix	local-ending
+dict:jisjk:265166	帰るって思った。	돌아간다 라고 생각했다.	keep	local-ending
+dict:jisjk:263175	泳ぐなんて噂だ。	헤엄친다는 소문이다.	fix	local-ending
+dict:jisjk:263175	泳ぐなんて変だ。	헤엄치다니 이상하다.	keep	local-ending
+dict:jisjk:364677	ダメなの？	안 돼?	fix	local-ending
+dict:jisjk:364677	静かなの。	조용해.	keep	local-ending
+dict:jisjk:340817	無理なのよ。	무리야.	fix	local-ending
+dict:jisjk:340817	一般的なのよ。	일반적이야.	keep	local-ending
+dict:jisjk:340817	簡単なのよ。	간단해.	keep	local-ending
+dict:jisjk:363414	値段は安いものの味は悪い。	가격은 싸기는 하지만 맛은 나쁘다.	fix	local-ending
+dict:jisjk:363414	値段は安いものの。	가격은 싸기는 하지만.	keep	local-ending
+dict:jisjk:202060	泣き出さんばかりの声だ。	울기 시작할 듯한 목소리다.	fix	local-ending
+dict:jisjk:202060	泣き出さんばかりに笑う。	울기 시작하듯이 웃는다.	keep	local-ending
+dict:jisjk:267738	食べるように準備する。	먹도록 준비한다.	fix	local-ending
+dict:jisjk:267738	教わったように準備する。	배운 것처럼 준비한다.	keep	local-ending
+dict:jisjk:353383	確認したうえで、出発する。	확인한 후에, 출발한다.	fix	local-ending
+dict:jisjk:353383	読んだうえでの判断だ。	읽은 후의 판단이다.	keep	local-ending
+dict:jisjk:343476	一般的だと困る。	일반적이라면 곤란하다.	fix	local-ending
+dict:jisjk:343476	一般的だと思う。	일반적이라고 생각한다.	keep	local-ending
+dict:jisjk:343477	静かだと困る。	조용하다면 곤란하다.	fix	local-ending
+dict:jisjk:343477	無理だと困る。	무리라면 곤란하다.	fix	local-ending
+dict:jisjk:343477	静かだと知った。	조용하다고 알았다.	keep	local-ending
+dict:jisjk:343477	静かだとしたら嬉しい。	조용하다고 하면 기쁘다.	keep	local-ending
+dict:jisjk:343477	静かだとして話す。	조용하다고 해 이야기한다.	keep	local-ending
+dict:jisjk:344516	涙が出る程面白い。	눈물이 나올 정도로 재미있다.	fix	local-ending
+dict:jisjk:344516	声が出る程面白い。	목소리가 나올 정도로 재미있다.	fix	local-ending
+dict:jisjk:344516	読めば読む程面白い。	읽으면 읽을수록 재미있다.	keep	local-ending
+dict:jisjk:344516	読む程面白い。	읽을수록 재미있다.	keep	local-ending
+dict:jisjk:263212	運びきれなかった。	옮기지 못했다.	fix	local-ending
+dict:jisjk:263212	運びきれなかった荷物だ。	옮기지 못했던 짐이다.	keep	local-ending
+dict:jisjk:266652	参加しないと見た。	참가하지 않는다고 보았다.	fix	local-ending
+dict:jisjk:266652	参加しないと思う。	참가하지 않는다고 생각한다.	keep	local-ending
+dict:jisjk:375160	無理だとは思わない。	무리라고는 생각하지 않는다.	fix	local-ending
+dict:jisjk:375160	一般的だとは思わない。	일반적이라고는 생각하지 않는다.	keep	local-ending
+dict:jisjk:375160	静かだとは思わない。	조용하다고는 생각하지 않는다.	keep	local-ending
+dict:jisjk:342368	短い時間だ。	짧은 시간이다.	fix	local-ending
+dict:jisjk:342368	私は嘘をつかないことを誓う。	나는 거짓말하지 않을 것을 맹세한다.	keep	local-ending
+dict:jisjk:117698	何を待つの。	무엇을 기다려.	fix	local-ending
+dict:jisjk:117698	ここで待つの。	여기서 기다려.	keep	local-ending
+dict:jisjk:4395	確認してみるのみだ。	확인해 볼 뿐이다.	fix	local-ending
+dict:jisjk:4395	待つのみだ。	기다릴 뿐이다.	keep	local-ending
+dict:jisjk:4231	考えてない。	생각하지 않았다.	fix	local-ending
+dict:jisjk:4231	歩いて歩いて、町に着いた。	걷고 걸어, 마을에 도착했다.	keep	local-ending
+dict:jisjk:341739	今食べていない。	지금 먹지 않는다.	fix	local-ending
+dict:jisjk:341739	まだ食べていない。	아직 먹지 않았다.	keep	local-ending
+dict:jisjk:341739	今食べてない。	지금 먹지 않는다.	fix	local-ending
+dict:jisjk:342708	今は走っていないのに暑い。	지금은 달리지 않는데 덥다.	fix	local-ending
+dict:jisjk:342708	まだ終わっていないのに帰った。	아직 끝나지 않았는데 돌아갔다.	keep	local-ending
+dict:jisjk:365539	終わったって感じだ。	끝났다는 느낌이다.	fix	local-ending
+dict:jisjk:365539	終わったって言った。	끝났다고 했다.	keep	local-ending
+dict:jisjk:342293	寒いと鳥が鳴く。	추우면 새가 운다.	fix	local-ending
+dict:jisjk:342293	悪いとされる。	나쁘다고 여겨진다.	keep	local-ending

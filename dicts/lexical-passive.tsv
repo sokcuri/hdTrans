@@ -1,4 +1,4 @@
 #! layer=words
 # 수동형 알아차림 동사의 부정 희망형
-key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
-気づかれたくな	들키고 싶지 $D7@	H7U0			GN					passive:1
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+気づかれたくな	들키고 싶지 $D7@	H7U0			GN							passive:1

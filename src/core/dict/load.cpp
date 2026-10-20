@@ -14,6 +14,7 @@
 #include "core/dict/names.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/snapshot_file.h"
+#include "core/rules/rules.h"
 #include "core/text/hangul.h"
 #include "core/text/utf8.h"
 #include "core/userdict/userdict.h"
@@ -266,23 +267,71 @@ private:
     int32_t lastCode_ = -1;
 };
 
+// The bodies of the local rules the rows of every column file carry, by rule number;
+// empty entries stand for numbers no row names. One table per load, since a rule number
+// means the same thing in every file and every layer.
+struct RuleBodyTable {
+    std::vector<std::string> bodies;
+    // Rows whose rule column names a local rule, whether or not the row carries its body.
+    std::size_t named = 0;
+
+    // Keeps the first body of a number and reports a second, different one. A body the
+    // rule parser rejects is reported at its line and left out, as a bad row elsewhere is.
+    bool Add(int32_t rule, std::string_view body, const std::string& file, int line,
+             std::vector<LoadError>& errors) {
+        if (rule < 0 || body.empty()) return true;
+        const auto at = static_cast<std::size_t>(rule);
+        if (bodies.size() <= at) bodies.resize(at + 1);
+        if (bodies[at].empty()) {
+            // A body names no other rule, so it stands on its own in a one-rule program.
+            const std::string text = "rules 1 1 0\nL 0 " + std::string(body) + "\n";
+            rules::Program probe;
+            rules::LoadError error{};
+            if (!rules::Load(text, probe, error)) {
+                errors.push_back({file, LoadErrorKind::Tsv, line, TsvErrorKind::Read,
+                                  "the rule body does not parse"});
+                return false;
+            }
+            bodies[at] = std::string(body);
+            return true;
+        }
+        if (bodies[at] == body) return true;
+        errors.push_back({file, LoadErrorKind::Tsv, line, TsvErrorKind::Read,
+                          "a second body for the local rule"});
+        return false;
+    }
+};
+
 // Parses the column file f into layer, interning its codes in codes; adds the indexes
-// of its rows with the flag replace to replacing. false on an error other than unknown
-// pos: a file with malformed lines fails the load, and its unknown pos lines are not
-// listed.
-bool ReadColumnFile(const File& f, CodeTable& codes, internal::Layer& layer, std::vector<uint32_t>* replacing,
-                    std::vector<LoadError>& errors) {
+// of its rows with the flag replace to replacing. false on an error that FailsLoad: a
+// file with malformed lines fails the load, and its unknown pos and marker class lines
+// are not listed.
+bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, internal::Layer& layer,
+                    std::vector<uint32_t>* replacing, std::vector<LoadError>& errors) {
     layer.Rows().reserve(layer.Rows().size() + static_cast<std::size_t>(std::count(f.text.begin(), f.text.end(), '\n')) + 1);
     CodeReader reader(codes);
     TsvReader rows(f.text);
     SenseReader senses(rows);
-    std::vector<LoadError> unknown;
+    std::vector<LoadError> notices;
+    bool bodyFailed = false;
     Sense s;
     while (senses.Next(s)) {
         int32_t code;
         if (!reader.Code(s, code)) {
-            unknown.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
+            notices.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
             continue;
+        }
+        if (std::string why = MarkerClassError(s.ko, codes.At(code)->part); !why.empty()) {
+            notices.push_back({f.name, LoadErrorKind::MarkerClass, rows.Line(), TsvErrorKind::Read, std::move(why)});
+        }
+
+        if (s.rule > 0) bodies.named++;
+        if (!s.ctx.empty() && s.rule <= 0) {
+            errors.push_back({f.name, LoadErrorKind::Tsv, rows.Line(), TsvErrorKind::Read,
+                              "a rule body without a rule number"});
+            bodyFailed = true;
+        } else if (!bodies.Add(s.rule, s.ctx, f.name, rows.Line(), errors)) {
+            bodyFailed = true;
         }
         for (const std::string_view key : {s.key, s.reading}) {
             if (key.empty()) continue;
@@ -291,8 +340,8 @@ bool ReadColumnFile(const File& f, CodeTable& codes, internal::Layer& layer, std
         }
     }
     if (senses.Errors().empty()) {
-        errors.insert(errors.end(), unknown.begin(), unknown.end());
-        return true;
+        errors.insert(errors.end(), notices.begin(), notices.end());
+        return !bodyFailed;
     }
     for (const TsvError& e : senses.Errors()) {
         const LoadErrorKind kind = e.kind == TsvErrorKind::Read ? LoadErrorKind::Read : LoadErrorKind::Tsv;
@@ -385,6 +434,7 @@ bool internal::ReadColumnHeader(std::string_view utf8Path, bool& column) {
 struct SnapshotLoader {
     std::vector<File> files;
     std::vector<LoadError> errors;
+    RuleBodyTable ruleBodies;
     std::shared_ptr<Snapshot> snap{new Snapshot()};
 
     SnapshotLoader() = default;
@@ -545,7 +595,7 @@ bool SnapshotLoader::ReadColumns(std::size_t i, internal::Layer& layer, std::vec
             return false;
         }
     }
-    const bool ok = ReadColumnFile(f, snap->codes_, layer, replacing, errors);
+    const bool ok = ReadColumnFile(f, snap->codes_, ruleBodies, layer, replacing, errors);
     std::string().swap(f.text);
     return ok;
 }
@@ -578,6 +628,17 @@ bool SnapshotLoader::BuildBase(const std::vector<std::size_t>& baseFiles) {
         s.user_ = user.Build(s.codes_);
         s.base_ = base.Build(s.codes_);
     }
+    // A dictionary from before the rule bodies moved into the rows names rules that no
+    // row carries: the engine would run an empty program and translate without them.
+    if (ruleBodies.bodies.empty() && ruleBodies.named > 0) {
+        const std::string where = baseFiles.empty() ? std::string() : files[baseFiles.front()].name;
+        errors.push_back({where, LoadErrorKind::MissingRuleBodies, 0, TsvErrorKind::Read,
+                          "the rows name local rules and none carries a body; this dictionary "
+                          "predates the ctx column"});
+    }
+    // The rule bodies travel with the rows; the engine assembles the rules program from
+    // them and the global rules of the rule files.
+    s.ruleBodies_ = std::move(ruleBodies.bodies);
     return true;
 }
 

@@ -99,9 +99,18 @@ enum class LoadErrorKind : uint8_t {
     Read,        // the file cannot be read
     Tsv,         // a malformed line or header of a column file (tsv says which)
     UnknownPos,  // a line skipped for a pos that is neither a part code nor a known tag
+    MarkerClass, // a line loaded whose marker family does not fit its part code (MarkerClassError)
     Plain,       // a line of a plain dictionary or sense table that does not compile
     Header,      // a "#!" first line that is not a header or a layer the file cannot have
+    MissingRuleBodies,  // rows name local rules and no row carries a body (an older dictionary)
 };
+
+// Whether an error of kind fails the load of its file; the other kinds list lines of a
+// load that takes place.
+constexpr bool FailsLoad(LoadErrorKind kind) {
+    return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass &&
+           kind != LoadErrorKind::MissingRuleBodies;
+}
 
 struct LoadError {
     std::string file;
@@ -212,6 +221,10 @@ public:
     const Dict* Names() const { return names_.Len() > 0 ? &names_ : nullptr; }
     // The files that are not column files, in load order.
     const std::vector<File>& PlainFiles() const { return plain_; }
+    // The body of each local rule a dictionary row carries, by rule number; an entry is
+    // empty for a number no row names. The engine assembles the rules program from these
+    // and the global rules of the rule files.
+    const std::vector<std::string>& RuleBodies() const { return ruleBodies_; }
     // The plain entries of the word pipeline: the builtin endings, then the entries
     // of the plain dictionaries.
     const UserText& Plain(bool extra = false) const { return *(extra ? rawExtraPlain_ : rawPlain_); }
@@ -314,6 +327,7 @@ private:
     std::unordered_map<std::string, Respelling, StringHash, std::equal_to<>> places_;
     std::vector<std::string> warnings_;
     std::vector<File> plain_;
+    std::vector<std::string> ruleBodies_;
     userdict::Families families_;
     mutable output::Families outputFamilies_;
     std::unique_ptr<const UserText> rawPlain_, textPlain_, rawExtraPlain_, textExtraPlain_;
