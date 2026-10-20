@@ -39,6 +39,26 @@ try {
 초기화는 비동기입니다. 별도 사전 경로를 주지 않으면 패키지에 포함된 기본 사전을 씁니다.
 `version`은 실제 엔진의 빌드 버전이며, 임의로 지정하는 값이 아닙니다.
 
+번역 인스턴스를 직접 관리하지 않고 버전만 확인할 수도 있습니다.
+
+```ts
+import { HdTrans, type HdTransInfo } from "hdtrans";
+
+const info: HdTransInfo = await HdTrans.getInfo();
+console.log(info.version, info.dictionaryVersion, info.runtime);
+```
+
+`HdTrans.getInfo(options)`는 `init()`과 같은 옵션으로 엔진과 사전을 실제로 로드하고,
+정보를 읽은 뒤 임시 인스턴스를 닫습니다. 로드에 실패하면 예외가 발생합니다.
+패키지를 import하는 것만으로는 엔진을 로드하지 않습니다.
+공용 브라우저 인터페이스에서도 같은 메서드를 쓰며 `module`, `directories`로 로드할 사전을 지정할 수 있습니다.
+
+이미 초기화한 인스턴스에서는 동기 메서드 `hdTrans.getInfo()`로 같은 필드를 조회합니다.
+기존 `version`, `dictionaryVersion`, `runtime` 속성도 그대로 쓸 수 있습니다.
+인스턴스 정보는 초기화할 때 읽은 값이며 `close()` 뒤에도 조회할 수 있습니다.
+사용자 사전이나 Ehnd를 바꿔도 기본 사전 버전은 바뀌지 않습니다.
+버전 정보가 없는 직접 편집한 사전은 `development (unversioned)`로 표시합니다.
+
 Ehnd 파일 묶음은 초기화할 때 `HdTrans.init({ ehnd: files })`로 넘기거나,
 초기화 뒤 `setEhnd(files)`로 적용할 수 있습니다. 생략하면 Ehnd는 꺼져 있습니다.
 
@@ -46,50 +66,7 @@ Ehnd 파일 묶음은 초기화할 때 `HdTrans.init({ ehnd: files })`로 넘기
 `close()`는 인스턴스 사용을 마칠 때 호출합니다. 번역 결과마다 호출할 필요는 없습니다.
 WASM의 선형 메모리 크기는 해제 후에도 줄지 않을 수 있지만, 해제한 공간은 다음 호출에서 재사용합니다.
 
-## 명령줄
-
-`bin`으로 등록된 `hdtrans` 명령을 제공합니다. 전역 설치하거나 `npx`로 실행합니다.
-
-```sh
-npm install -g hdtrans
-hdtrans "今日はいい天気ですね。"
-
-npx hdtrans "今日はいい天気ですね。"
-```
-
-명령줄에서도 패키지에 포함된 엔진과 기본 사전을 씁니다.
-
-```sh
-hdtrans --version
-hdtrans --json "競走で勝った。"
-hdtrans --in input.txt --out output.txt
-hdtrans --json --file input.txt --out result.json
-hdtrans --why --userdict userdict.txt "蒼月は学生です。"
-```
-
-| 옵션 | 동작 |
-|---|---|
-| `--in FILE`, `--file FILE` | UTF-8 파일 입력. 생략하면 문장 인자나 표준 입력 사용 |
-| `--out FILE` | UTF-8 파일 출력. 생략하면 표준 출력 |
-| `--json` | API의 `{ text, choices, logs }`를 JSON으로 출력 |
-| `--why` | 단어 선택과 Ehnd 실행 로그를 표준 오류로 출력 |
-| `--userdict FILE` | 사용자 사전 파일. npm CLI는 한 파일을 받으며 중복 지정은 오류 |
-| `--ehnd DIR` | Ehnd 폴더의 파일 묶음을 명시적으로 적용 |
-| `--version` | 사전을 실제로 로드하고 엔진, 실행 방식, 사전 버전을 출력 |
-| `--help` | 프로그램과 작성자 정보, 사용법 출력 |
-
-`--version`의 형식은 양쪽 CLI에서 같습니다.
-
-```text
-hdTrans v0.1.0 (native) / dict 0.1.0+abc123
-hdTrans v0.1.0 (wasm) / dict 0.1.0+abc123
-```
-
-네이티브 CLI는 `native`, npm CLI는 `wasm`입니다. 버전 정보가 없는 직접 편집한 사전은 `development (unversioned)`로 표시합니다.
-`--file`은 `--in`의 별칭입니다. `--json --out`은 JSON만 파일에 저장하고, 로그와 오류는 표준 오류로 보냅니다.
-`--in`과 직접 문장을 함께 지정할 수 없습니다. `--` 뒤의 인자는 옵션으로 해석하지 않습니다.
-
-네이티브 CLI의 사전 컴파일 옵션 등은 npm판에 없으며, 네이티브 `--userdict`는 여러 파일과 폴더를 지원합니다.
+명령줄 설치와 옵션은 [CLI 안내](api.md#명령줄-hdtrans)에 있습니다.
 현재 npm판은 기본 사전이 동봉된 Node.js용 패키지입니다. 웹 데모는 공용 WASM 인터페이스를 직접 연결합니다.
 
 ## 번역과 JSON
@@ -249,7 +226,7 @@ npm --prefix web run compile
 npm --prefix web run test:types
 emcmake cmake --preset wasm
 cmake --build --preset wasm --parallel
-HDTRANS_WASM_WRAPPER=build/web/translator.js node --experimental-default-type=module tools/wasm_smoke.mjs \
+HDTRANS_WASM_WRAPPER=build/web/translator.js node tools/wasm_smoke.mjs \
   build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv
 ```
 
@@ -257,7 +234,7 @@ PowerShell의 마지막 명령은 다음과 같습니다.
 
 ```powershell
 $env:HDTRANS_WASM_WRAPPER = "build/web/translator.js"
-node --experimental-default-type=module tools/wasm_smoke.mjs build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv
+node tools/wasm_smoke.mjs build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv
 ```
 컴파일한 `translator.js`와 `translator.d.ts`는 `build/web/`에 생깁니다. CI의 WASM 아티팩트에도 둘을 포함합니다.
 

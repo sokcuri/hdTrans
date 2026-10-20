@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+segmentation:makushitateru	彼女は一気にまくし立てた。	그녀는 단번에 쏘아붙였다.	fix	lookup
+segmentation:makushitateru	そんなにまくし立てないで。	그렇게 쏘아붙이지 마.	fix	lookup
+segmentation:makushitateru	まくし立てれば伝わるわけではない。	쏘아붙이면 전해지는 것은 아니다.	fix	lookup
+segmentation:makushitateru	種をまく。	씨를 뿌린다.	keep	lookup
+segmentation:makushitateru	旗を立てる。	기를 세운다.	keep	lookup
+segmentation:makushitateru	巻き紙を買った。	두루마리 종이를 샀다.	keep	lookup
+segmentation:makushitateru	彼は駆けだしの職人だ。	그는 신출내기의 장인이다.	keep	lookup
+segmentation:makushitateru	駆けだし記者が来た。	신출내기 기자가 왔다.	keep	lookup
+segmentation:makushitateru	まだ駆けだしだ。	아직 신출내기다.	keep	lookup
+segmentation:makushitateru	ジップラインとカッターを買った。	집라인과 커터를 샀다.	keep	lookup
+segmentation:makushitateru	ランニングシューズを買った。	러닝화를 샀다.	keep	lookup
+segmentation:makushitateru	宿題をださない。	숙제를 내지 않는다.	keep	lookup
+segmentation:makushitateru	宿題をださないで。	숙제를 내지 마.	keep	lookup
+segmentation:makushitateru	宿題をださなかった。	숙제를 내지 않았다.	keep	lookup
+segmentation:makushitateru	まだ答えをださない。	아직 대답을 내지 않는다.	keep	lookup
+segmentation:makushitateru	彼は宿題をださない人だ。	그는 숙제를 내지 않는 사람이다.	keep	lookup
+segmentation:makushitateru	柱を立てる。	기둥을 세운다.	keep	lookup
+segmentation:makushitateru	マキさんはカッターを買った。	마키씨는 커터를 샀다.	keep	lookup
+segmentation:makushitateru	フリオさんはジップラインを見た。	후리오씨는 집라인을 보았다.	keep	lookup

@@ -211,20 +211,22 @@ int main(int argc, char** argv) {
     for (const auto& t : hdtest::Registry()) {
         if (filter && !std::strstr(t.name, filter)) continue;
         hdtest::Cur() = {};
+        const auto started = std::chrono::steady_clock::now();
         if (excluded.find("," + std::string(t.name) + ",") != std::string::npos)
             hdtest::Skip("excluded by HDTRANS_TEST_EXCLUDE");
         else
             t.fn();
+        const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - started).count();
         run++;
         if (hdtest::Cur().skipped) {
             skipped++;
-            std::printf("SKIP %s: %s\n", t.name, hdtest::Cur().skipReason.c_str());
+            std::printf("SKIP %s: %s (%.3fs)\n", t.name, hdtest::Cur().skipReason.c_str(), elapsed);
         }
         if (hdtest::Cur().failures) {
             failed++;
-            std::printf("FAIL %s\n", t.name);
+            std::printf("FAIL %s (%.3fs)\n", t.name, elapsed);
         } else if (!hdtest::Cur().skipped) {
-            std::printf("ok   %s\n", t.name);
+            std::printf("ok   %s (%.3fs)\n", t.name, elapsed);
         }
     }
     if (!cacheGuard->Unchanged()) {

@@ -59,7 +59,7 @@ for (const line of readFileSync(join(here, 'examples.tsv'), 'utf8').split('\n'))
   const [file, label] = line.split('\t');
   if (!label) continue;
   const from = [join(here, 'examples', file), extraExamples && join(extraExamples, file)].find((p) => p && existsSync(p));
-  if (!from) continue;
+  if (!from) throw new Error(`${file} is missing: set HDTRANS_WEB_EXAMPLES to the example text folder`);
   copyFileSync(from, join(dist, 'examples', file));
   list.push([label, file]);
 }

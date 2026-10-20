@@ -831,7 +831,8 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
     for (int tableGroup = 1; tableGroup < 4; tableGroup++) {
         for (int entry = 0; entry < kConjugationBranches; entry++) {
             const std::string_view prefix = PrefixForm(50 * tableGroup + entry);
-            if (prefix.empty() || !tail.starts_with(prefix)) continue;
+            const bool contractedConditional = tableGroup == 1 && entry == 3 && tail.starts_with("すりゃ");
+            if (prefix.empty() || (!tail.starts_with(prefix) && !contractedConditional)) continue;
             const std::size_t pl = prefix.size();
             if (tableGroup == 1) {
                 if (entry == 6) {

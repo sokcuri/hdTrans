@@ -1,0 +1,89 @@
+{
+  "label": "improved-cpp-snapshot",
+  "source_revision": "9668adc493919de5fd33e45e8ea6fa542ae5c51a",
+  "source_sha256": "94e0378e7ce2b9d283cfc9db25fe4694a38bfcf337e715f990fdda889454c8fe",
+  "source_hash_scope": "src/**, include/**, cmake/**, CMakeLists.txt, release-version.txt; sorted path TAB SHA256 LF",
+  "cli_sha256": "0f15302387617484c8e10cca587e0a0bb277b89079ffd2be2450c45b80e01628",
+  "dictionary": {
+    "mode": "snapshot",
+    "sha256": "010514a83b4eef80aa5cbe54cb7d390965801846a6c7e92407caeaec217dc61a"
+  },
+  "version": "hdTrans v0.0.0-bf5145d (native) / dict development (unversioned)",
+  "runtime": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "fixture_sha256": "273da39e88edc312ce25836233cf71ceef7d8a6d8bbd8bab18cb87243c467245",
+  "runner_sha256": "24ed65eb863c7dfb1f507cfa4b95bd297b0af92480cd46342d202e0af97f391f",
+  "translation_options": [
+    "--each",
+    "--no-cache",
+    "--config EMPTY",
+    "--userdict EMPTY"
+  ],
+  "score": {
+    "matched": 66,
+    "total": 66
+  },
+  "by_kind": {
+    "example": {
+      "matched": 6,
+      "total": 6
+    },
+    "fix": {
+      "matched": 30,
+      "total": 30
+    },
+    "keep": {
+      "matched": 30,
+      "total": 30
+    }
+  },
+  "by_group": {
+    "famous-short": {
+      "matched": 6,
+      "total": 6
+    },
+    "quoted-command": {
+      "matched": 6,
+      "total": 6
+    },
+    "compound-ascent": {
+      "matched": 6,
+      "total": 6
+    },
+    "past-progressive": {
+      "matched": 6,
+      "total": 6
+    },
+    "passive-desire": {
+      "matched": 6,
+      "total": 6
+    },
+    "past-cause": {
+      "matched": 6,
+      "total": 6
+    },
+    "benefactive": {
+      "matched": 6,
+      "total": 6
+    },
+    "polite-negative": {
+      "matched": 6,
+      "total": 6
+    },
+    "kana-words": {
+      "matched": 6,
+      "total": 6
+    },
+    "idioms": {
+      "matched": 6,
+      "total": 6
+    },
+    "casual-adjective": {
+      "matched": 6,
+      "total": 6
+    }
+  },
+  "stdout_sha256": "b79b3888ded2458803d9def474672d2c2ea193de67bf6504304719cb2fd9dcb2"
+}

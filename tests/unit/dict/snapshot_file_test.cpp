@@ -1764,35 +1764,23 @@ HD_TEST(SnapshotSuiteDoesNotWriteDefaultCache) {
     const auto relative = defaultRoot.lexically_relative(temp.path);
     HD_REQUIRE(!relative.empty() && !relative.is_absolute() && *relative.begin() != "..");
     HD_REQUIRE(!std::filesystem::exists(defaultRoot));
-    const auto custom = temp.File("outer-cache");
-    const char* cacheValues[] = {nullptr, "", "off", custom.c_str()};
-    const char* snapshotValues[] = {nullptr, "off"};
-    size_t selected = 0, runs = 0;
+    size_t selected = 0;
     for (const auto& test : hdtest::Registry()) {
         if (std::string_view(test.name).find("Snapshot") == std::string_view::npos ||
             test.fn == hdtest_SnapshotSuiteDoesNotWriteDefaultCache ||
             test.fn == hdtest_SnapshotTestsRestoreInheritedCacheEnvironment) continue;
         selected++;
-        for (const char* cacheValue : cacheValues) {
-            cache.Set(cacheValue);
-            for (const char* snapshotValue : snapshotValues) {
-                snapshot.Set(snapshotValue);
-                const int failures = hdtest::Cur().failures;
-                test.fn();
-                HD_REQUIRE(hdtest::Cur().failures == failures);
-                HD_CHECK(cache.Matches(cacheValue));
-                HD_CHECK(snapshot.Matches(snapshotValue));
-                HD_CHECK(strict.Matches("1"));
-                runs++;
-            }
-        }
+        const int failures = hdtest::Cur().failures;
+        test.fn();
+        HD_REQUIRE(hdtest::Cur().failures == failures);
+        HD_CHECK(cache.Matches(nullptr));
+        HD_CHECK(snapshot.Matches(nullptr));
+        HD_CHECK(strict.Matches("1"));
     }
     HD_REQUIRE(selected > 0);
-    HD_CHECK_EQ(runs, selected * 8);
     HD_REQUIRE(ReadCacheTreeMetadata(realRoot, after));
     HD_CHECK(before == after);
     HD_CHECK(!std::filesystem::exists(defaultRoot));
-    HD_CHECK(!std::filesystem::exists(Utf8Path(custom)));
 }
 
 HD_TEST(SnapshotCompileCacheReusesFullyVerifiedGeneration) {

@@ -2680,7 +2680,7 @@ ttt	ttt-exam-data	K110			GN		jisjk:201744
 いき	삶	N110			GN		jisjk:125227		
 いき	숨	N110	QHP		GN		jisjk:125229		
 いき	&A1@	M427	UMv		GN	2762	jisjk:267658		
-いき	&M9@	M427			GN	2763	jisjk:267659		
+いき	&M9@	M427		Ma	GN	2763	jisjk:267659		
 いき	&K5@	M427	XXX		GN		jisjk:268150		
 いき	&C6@	M427			GN	4338	jisjk:363740		
 いきあいとうじ	의기 투합&AV@	M427			GN		jisjk:143828		
@@ -33248,7 +33248,7 @@ ttt	ttt-exam-data	K110			GN		jisjk:201744
 でき	생&A2@	M427			GN	2678	jisjk:267227		
 でき	생&A2@	M427			GN	3083	jisjk:341433		
 でき	&HN@	M427		Ma	GN	3207	jisjk:342132		
-でき	할 수 &HN@	M417		TuKe	GN	3209	jisjk:342138		
+でき	할 수 &HN@	M417		TuKeMa	GN	3209	jisjk:342138		
 でき	할 수 &HN@	M417	XXX	XnKeMaPj	GN	3545	jisjk:344230		
 でき	성과	N110			GN		jisjk:344737		
 でき	잘 &AV@	M427			GN	4581	jisjk:366031		

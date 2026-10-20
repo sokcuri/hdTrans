@@ -1,0 +1,34 @@
+rule	input	expected	kind	layer
+dict:burial-stiffness	両肩が強ばった。	양어깨가 굳어졌다.	fix	lookup
+dict:burial-stiffness	両肩が強張った。	양어깨가 굳어졌다.	keep	lookup
+dict:burial-stiffness	生徒は枕に顔を埋めた。	학생은 베개에 얼굴을 묻었다.	fix	senses
+dict:burial-stiffness	顔を見て先生に理由を尋ねた。	얼굴을 보고 선생님에게 이유를 물었다.	keep	senses
+dict:burial-regular	枕に顔を埋めた。	베개에 얼굴을 묻었다.	fix	senses
+dict:burial-regular	枕に顔を埋めなかった。	베개에 얼굴을 묻지 않았다.	keep	senses
+dict:burial-regular	枕に顔を埋めてください。	베개에 얼굴을 묻어 주세요.	fix	senses
+dict:burial-regular	枕に顔を埋めよう。	베개에 얼굴을 묻자.	keep	senses
+dict:burial-regular	枕に顔を埋められる。	베개에 얼굴을 묻을 수 있다.	fix	senses
+dict:burial-regular	枕に顔を埋めたら、眠った。	베개에 얼굴을 묻었더니, 잤다.	fix	senses
+dict:burial-regular	枕に顔を埋めろ。	베개에 얼굴을 묻어라.	fix	senses
+dict:burial-regular	顔を見て理由を聞いた。	얼굴을 보고 이유를 물었다.	keep	senses
+dict:stiffness-variant	顔が強ばらない。	얼굴이 굳어지지 않는다.	fix	lookup
+dict:stiffness-variant	顔が強ばれば、休む。	얼굴이 굳어지면, 쉰다.	fix	lookup
+dict:stiffness-variant	顔が強ばりました。	얼굴이 굳어졌습니다.	fix	lookup
+dict:stiffness-variant	顔が強張らない。	얼굴이 굳어지지 않는다.	keep	lookup
+dict:stiffness-variant	強そうな人だ。	강해 보이는 사람이다.	keep	lookup
+dict:stiffness-variant	顔が強張れば、休む。	얼굴이 굳어지면, 쉰다.	keep	lookup
+dict:stiffness-variant	顔が強張りました。	얼굴이 굳어졌습니다.	keep	lookup
+dict:stop-other-lemmas	雨が止んだ。	비가 그쳤다.	keep	lookup
+dict:stop-other-lemmas	雨が止みません。	비가 그치지 않습니다.	keep	lookup
+dict:stop-other-lemmas	仕事を止した。	일을 중지했다.	keep	lookup
+dict:stop-other-lemmas	もう止そう。	이제 중지하자.	keep	lookup
+dict:canonical-stop	時計が止まる。	시계가 멈춘다.	keep	lookup
+dict:canonical-stop	車を止めた。	차를 세웠다.	keep	lookup
+dict:canonical-stop	仕事を止める。	일을 멈춘다.	keep	lookup
+dict:canonical-stop	止血が必要だ。	지혈이 필요하다.	keep	lookup
+dict:canonical-stop	車が止まらない。	차가 멈추지 않는다.	keep	lookup
+dict:adjective-boundaries	まぶしくない。	눈부시지 않다.	keep	lookup
+dict:adjective-boundaries	まぶしそうだ。	눈부신 것 같다.	keep	lookup
+dict:adjective-boundaries	おいしくない。	맛있지 않다.	keep	lookup
+dict:adjective-boundaries	おいしかった。	맛있었다.	keep	lookup
+dict:burial-regular	枕に顔を埋めれば、暗くなる。	베개에 얼굴을 묻으면, 어두워진다.	fix	senses

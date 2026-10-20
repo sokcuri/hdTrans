@@ -1,0 +1,31 @@
+rule	input	expected	kind	layer
+dict:gattsuri-tannou	休日をがっつり堪能した。	휴일을 실컷 만끽했다.	fix	lookup
+dict:gattsuri-tannou	休日をがっつり堪能する。	휴일을 실컷 만끽한다.	fix	lookup
+dict:gattsuri-tannou	休日をがっつり堪能している。	휴일을 실컷 만끽하고 있다.	fix	lookup
+dict:gattsuri-tannou	休日をがっつり堪能したい。	휴일을 실컷 만끽하고 싶다.	fix	lookup
+dict:gattsuri-tannou	休日をがっつり堪能しなかった。	휴일을 실컷 만끽하지 않았다.	fix	lookup
+dict:taiiku-zuwari	床で体育座りをした。	바닥에서 무릎을 끌어안고 앉았다.	fix	lookup
+dict:taiiku-zuwari	床で体育座りになった。	바닥에서 무릎을 끌어안고 앉았다.	fix	lookup
+dict:taiiku-zuwari	体育座りで待った。	무릎을 끌어안고 앉는 자세로 기다렸다.	fix	lookup
+dict:taiiku-zuwari	体育座りが苦手だ。	무릎을 끌어안고 앉는 자세에 약하다.	fix	lookup
+dict:taiiku-zuwari	体育座りをしなかった。	무릎을 끌어안고 앉지 않았다.	fix	lookup
+dict:taiiku-zuwari	体育座りになる。	무릎을 끌어안고 앉는다.	fix	lookup
+dict:chintara-to	彼はちんたらと歩いた。	그는 느릿느릿 걸었다.	fix	lookup
+dict:chintara-to	彼はちんたらと走る。	그는 느릿느릿 달린다.	fix	lookup
+dict:chintara-to	ちんたらと歩かないで。	느릿느릿 걷지 마.	keep	lookup
+dict:chintara-to	ちんたらと話していた。	느릿느릿 이야기하고 있었다.	keep	lookup
+dict:hisshi-to	子供は母の手をひっしと握った。	아이는 어머니의 손을 꼭 잡았다.	fix	lookup
+dict:hisshi-to	彼は荷物をひっしと抱いた。	그는 짐을 꼭 안았다.	fix	lookup
+dict:hisshi-to	彼女は手をひっしとつかんだ。	그녀는 손을 꼭 잡았다.	fix	lookup
+dict:fishing-and-degree	川で釣りを楽しんだ。	강에서 낚시를 즐겼다.	keep	lookup
+dict:fishing-and-degree	休日を堪能した。	휴일을 즐겼다.	keep	lookup
+dict:fishing-and-degree	たっぷり食べた。	듬뿍 먹었다.	keep	lookup
+dict:fishing-and-degree	彼は急いで走った。	그는 서둘러 달렸다.	keep	lookup
+dict:fishing-and-degree	ゆっくり歩いた。	천천히 걸었다.	keep	lookup
+dict:posture-and-school	体育の授業が始まった。	체육의 수업이 시작되었다.	keep	lookup
+dict:posture-and-school	体育館で待った。	체육관에서 기다렸다.	keep	lookup
+dict:posture-and-school	椅子に座った。	의자에 앉았다.	keep	lookup
+dict:posture-and-school	正座をした。	정좌를 했다.	keep	lookup
+dict:desperate-and-copied	必死に手を伸ばした。	필사적으로 손을 뻗었다.	keep	lookup
+dict:desperate-and-copied	筆者が答えた。	필자가 대답했다.	keep	lookup
+dict:desperate-and-copied	先手必勝だ。	선수 필승이다.	keep	lookup

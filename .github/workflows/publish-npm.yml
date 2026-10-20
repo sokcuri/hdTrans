@@ -1,120 +1,70 @@
 name: Publish npm
 
 on:
-  workflow_run:
-    workflows: [Build]
-    types: [completed]
+  push:
+    tags: ['v*']
   workflow_dispatch:
     inputs:
-      build_run_id:
-        description: Successful Build run for this release tag
-        type: string
+      dry_run:
+        description: Rebuild packages without publishing the release or npm package
+        type: boolean
+        default: true
         required: true
 
 permissions:
   contents: read
-  actions: read
-
-concurrency:
-  group: ${{ github.event_name == 'workflow_run' && format('publish-npm-dispatch-{0}', github.event.workflow_run.id) || 'publish-npm' }}
-  cancel-in-progress: false
 
 jobs:
-  dispatch:
-    if: >-
-      github.event_name == 'workflow_run' &&
-      github.event.workflow_run.status == 'completed' &&
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.path == '.github/workflows/build.yml' &&
-      (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
-      github.event.workflow_run.head_repository.full_name == github.repository &&
-      startsWith(github.event.workflow_run.head_branch, 'v') &&
-      contains(github.event.workflow_run.head_branch, '.') &&
-      !contains(github.event.workflow_run.head_branch, '-') &&
-      !contains(github.event.workflow_run.head_branch, '+') &&
-      !contains(github.event.workflow_run.head_branch, '/')
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-      actions: write
     steps:
-      - name: Start npm publication after Build completes
+      - name: Require a stable release tag
         uses: actions/github-script@v8
         with:
           script: |
-            const run = context.payload.workflow_run;
-            if (run.status !== 'completed' || run.conclusion !== 'success' ||
-                run.path !== '.github/workflows/build.yml' ||
-                !['push', 'workflow_dispatch'].includes(run.event) ||
-                run.head_repository.full_name !== `${context.repo.owner}/${context.repo.repo}` ||
-                !/^v\d+\.\d+\.\d+$/.test(run.head_branch)) {
-              core.info('No completed stable release Build to publish.');
-              return;
+            if (!/^refs\/tags\/v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(context.ref)) {
+              throw new Error('Select a v<major>.<minor>.<patch> release tag.');
             }
-            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
-              ...context.repo, run_id: run.id, filter: 'latest', per_page: 100
-            });
-            if (!jobs.some(job => job.name === 'release / release' && job.conclusion === 'success')) {
-              core.info('The Build did not publish a release; skipping npm publication.');
-              return;
-            }
-            await github.rest.actions.createWorkflowDispatch({
-              ...context.repo, workflow_id: 'publish-npm.yml', ref: run.head_branch,
-              inputs: { build_run_id: String(run.id) }
-            });
+
+  build:
+    needs: validate
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+    secrets:
+      HDTRANS_TESTDATA_KEY: ${{ secrets.HDTRANS_TESTDATA_KEY }}
 
   publish:
-    if: github.event_name == 'workflow_dispatch'
+    needs: build
+    if: needs.build.result == 'success' && needs.build.outputs.release_published == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: npm
     permissions:
       contents: read
-      actions: read
       id-token: write
+    concurrency:
+      group: publish-npm
+      queue: max
+      cancel-in-progress: false
     env:
       PACKAGE_DIR: build/npm-publish
     steps:
-      - name: Verify release build
-        uses: actions/github-script@v8
-        env:
-          BUILD_RUN_ID: ${{ inputs.build_run_id }}
-        with:
-          script: |
-            if (!/^refs\/tags\/v\d+\.\d+\.\d+$/.test(context.ref)) {
-              throw new Error('Select a v<major>.<minor>.<patch> release tag.');
-            }
-            if (!/^[1-9]\d*$/.test(process.env.BUILD_RUN_ID)) {
-              throw new Error('A Build run ID is required.');
-            }
-            let run;
-            for (let attempt = 0; attempt < 13; attempt++) {
-              run = (await github.rest.actions.getWorkflowRun({
-                ...context.repo, run_id: Number(process.env.BUILD_RUN_ID)
-              })).data;
-              if (run.status === 'completed') break;
-              if (attempt < 12) await new Promise(resolve => setTimeout(resolve, 5000));
-            }
-            if (run.status !== 'completed' || run.conclusion !== 'success' ||
-                run.path !== '.github/workflows/build.yml' ||
-                !['push', 'workflow_dispatch'].includes(run.event) ||
-                run.head_repository.full_name !== `${context.repo.owner}/${context.repo.repo}` ||
-                run.head_sha !== context.sha) {
-              throw new Error('The Build run must succeed for this repository and release commit.');
-            }
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Verify release is on main
-        run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - name: Verify release source is on main
+        run: |
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "$GITHUB_SHA^{commit}")"
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "$GITHUB_REF^{commit}")"
+          git merge-base --is-ancestor HEAD origin/main
       - uses: actions/download-artifact@v8
         with:
           name: release-packages
           path: ${{ env.PACKAGE_DIR }}
-          run-id: ${{ inputs.build_run_id }}
-          github-token: ${{ github.token }}
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
@@ -122,37 +72,31 @@ jobs:
           package-manager-cache: false
       - name: Install npm with trusted publishing support
         run: npm install --global npm@11.21.0
-      - name: Verify npm package
+      - name: Verify package and registry state
         id: package
         run: |
           node --input-type=module <<'JS'
-          import { readFileSync, appendFileSync } from 'node:fs';
-          import { join } from 'node:path';
-          import { createHash } from 'node:crypto';
-          import { execFileSync } from 'node:child_process';
-          const expected = JSON.parse(readFileSync('npm/package.json', 'utf8'));
-          if (expected.name !== 'hdtrans' || `v${expected.version}` !== process.env.GITHUB_REF_NAME) {
-            throw new Error('The npm package version must match the release tag.');
-          }
-          const name = `hdtrans-${expected.version}.tgz`;
-          const path = join(process.env.PACKAGE_DIR, name);
-          const hash = createHash('sha256').update(readFileSync(path)).digest('hex');
-          const sums = readFileSync(join(process.env.PACKAGE_DIR, 'SHA256SUMS.txt'), 'utf8');
-          if (!sums.split(/\r?\n/).includes(`${hash}  ${name}`)) {
-            throw new Error('The npm package checksum does not match.');
-          }
-          const packed = JSON.parse(execFileSync('tar', ['-xOf', path, 'package/package.json'], { encoding: 'utf8' }));
-          if (packed.name !== expected.name || packed.version !== expected.version ||
-              packed.repository?.url !== expected.repository.url) {
-            throw new Error('The packed npm metadata does not match the release source.');
-          }
-          appendFileSync(process.env.GITHUB_OUTPUT, `path=${path}\nversion=${packed.version}\n`);
+          import { appendFileSync } from 'node:fs';
+          import { verifyNpmPackage, npmPublication } from './tools/release/publication.mjs';
+          const pkg = verifyNpmPackage({ packageDir: process.env.PACKAGE_DIR, ref: process.env.GITHUB_REF });
+          const publication = await npmPublication(pkg);
+          appendFileSync(process.env.GITHUB_OUTPUT,
+            `path=${pkg.path}\nversion=${pkg.version}\nskip=${publication.skip}\ntag=${publication.tag}\n`);
           JS
       - name: Publish to npm with OIDC
+        if: steps.package.outputs.skip != 'true'
         env:
           PACKAGE: ${{ steps.package.outputs.path }}
-        run: npm publish "$PACKAGE" --access public --provenance
+          DIST_TAG: ${{ steps.package.outputs.tag }}
+        run: npm publish "$PACKAGE" --access public --provenance --tag "$DIST_TAG"
       - name: Report npm release
         env:
           VERSION: ${{ steps.package.outputs.version }}
-        run: echo "Published hdtrans@$VERSION using OIDC." >> "$GITHUB_STEP_SUMMARY"
+          SKIPPED: ${{ steps.package.outputs.skip }}
+          DIST_TAG: ${{ steps.package.outputs.tag }}
+        run: |
+          if [[ "$SKIPPED" == true ]]; then
+            echo "hdtrans@$VERSION already matches the validated package; publication skipped." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Published hdtrans@$VERSION using OIDC with dist-tag $DIST_TAG." >> "$GITHUB_STEP_SUMMARY"
+          fi

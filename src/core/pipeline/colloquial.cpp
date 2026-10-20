@@ -200,9 +200,10 @@ bool InCasualStem(char32_t r) { return IsHiraganaRune(r) || (r >= U'一' && r <=
 bool CasualAdjectiveAt(std::u32string_view rs, size_t s, size_t& stemLen, size_t& runEnd, size_t& end) {
     for (size_t k = 0; k <= 4 && s + k < rs.size(); k++) {
         if (k > 0 && !InCasualStem(rs[s + k - 1])) return false;
-        if (!In(rs[s + k], U"えけげせぜてでべめれりきち")) continue;
+        const bool recovered = rs[s + k] == U'ね' && rs.substr(s, k) == U"危";
+        if (!In(rs[s + k], U"えけげせぜてでべめれりきち") && !recovered) continue;
         size_t q = s + k + 1;
-        while (q < rs.size() && In(rs[q], U"ぇぃー～")) q++;
+        while (q < rs.size() && In(rs[q], recovered ? U"ぇぃー～え" : U"ぇぃー～")) q++;
         if (q == s + k + 1) continue;
         if (q < rs.size() && !In(rs[q], U"なよぞしかぜわっ") && (IsHiraganaRune(rs[q]) || rs[q] == U'ー' || rs[q] == U'～')) {
             continue;

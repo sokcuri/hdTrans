@@ -21,6 +21,9 @@ function npm(args, options = {}) {
 }
 
 async function checkRuntime(HdTrans, dictionaryVersion) {
+  const inspected = await HdTrans.getInfo();
+  assert.equal(inspected.dictionaryVersion, dictionaryVersion);
+  assert.equal(inspected.runtime, 'wasm');
   const translator = await HdTrans.init();
   const independent = await HdTrans.init();
   const sentence = '今日は本を読みます。';
@@ -28,6 +31,14 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
     assert.match(translator.version, /\S/);
     assert.equal(translator.dictionaryVersion, dictionaryVersion);
     assert.equal(translator.runtime, 'wasm');
+    assert.deepEqual(inspected, {
+      version: translator.version,
+      dictionaryVersion: translator.dictionaryVersion,
+      runtime: translator.runtime,
+    });
+    assert.deepEqual(translator.getInfo(), inspected);
+    translator.getInfo().version = 'changed copy';
+    assert.deepEqual(translator.getInfo(), inspected);
     const translated = translator.translate(sentence);
     assert.match(translated, /[가-힣]/);
     assert.notEqual(translated, sentence);
@@ -57,7 +68,10 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
       'PostFilter_npm.txt': `${base}\t필터값\t1\t0\n`,
       'UserDict_npm.txt': 'ポチ\t바둑이\t1\n',
     };
+    assert.deepEqual(await HdTrans.getInfo({ ehnd }), inspected);
+    assert.notEqual(independent.translate('魔導具'), '필터값');
     translator.setEhnd(ehnd);
+    assert.deepEqual(translator.getInfo(), inspected);
     assert.equal(translator.translate('魔導具'), '필터값');
     assert.equal(translator.translate('ポチ'), '바둑이');
     assert.equal(translator.dictionaryVersion, dictionaryVersion);
@@ -94,6 +108,9 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
     translator.close();
     independent.close();
     translator.close();
+    assert.deepEqual(translator.getInfo(), inspected);
+    assert.equal(translator.version, inspected.version);
+    assert.equal(translator.dictionaryVersion, inspected.dictionaryVersion);
   }
 }
 
@@ -136,6 +153,11 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     assert.equal(manifest.license, 'AGPL-3.0-or-later');
     assert.equal(manifest.engines.node, '>=22');
     assert.equal(manifest.bin.hdtrans, './dist/cli.js');
+    assert.deepEqual(manifest.exports['.'], {
+      types: './dist/index.d.ts', import: './dist/index.js', default: './dist/index.js',
+    });
+    assert.equal(manifest.main, './dist/index.js');
+    assert.equal(manifest.types, './dist/index.d.ts');
     assert.match(await readFile(join(installed, 'dist/cli.js'), 'utf8'), /^#!\/usr\/bin\/env node\n/);
     for (const file of ['LICENSE', 'THIRD-PARTY-NOTICES.txt']) {
       assert.deepEqual(await readFile(join(installed, file)), await readFile(join(root, file)));
@@ -149,13 +171,14 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     assert(!(await readdir(join(installed, 'dist'))).includes('dicts'));
     // Import through package exports from the fresh project, with an unrelated working directory.
     const probe = join(project, 'probe.mjs');
-    await writeFile(probe, "export { HdTrans } from 'hdtrans';\n");
+    await writeFile(probe, "export * from 'hdtrans';\n");
     const previousCwd = process.cwd();
     let translated, engineVersion;
     try {
       process.chdir(cwd);
-      const { HdTrans } = await import(pathToFileURL(probe));
-      ({ translated, engineVersion } = await checkRuntime(HdTrans, dictionary.version));
+      const exports = await import(pathToFileURL(probe));
+      assert.deepEqual(Object.keys(exports), ['HdTrans']);
+      ({ translated, engineVersion } = await checkRuntime(exports.HdTrans, dictionary.version));
     } finally {
       process.chdir(previousCwd);
     }
@@ -219,6 +242,15 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
       const versionWithoutData = spawnSync(bin, ['--version'], { cwd, encoding: 'utf8', timeout: 90_000 });
       assert.notEqual(versionWithoutData.status, 0, '--version must actually load the dictionary');
       assert.equal(versionWithoutData.stdout, '');
+      const probeUrl = JSON.stringify(pathToFileURL(probe).href);
+      const importOnly = spawnSync(process.execPath, ['--input-type=module', '-e',
+        `await import(${probeUrl});`], { cwd, encoding: 'utf8', timeout: 90_000 });
+      assert.equal(importOnly.status, 0, 'import must not load missing engine data');
+      const infoWithoutData = spawnSync(process.execPath, ['--input-type=module', '-e',
+        `const { HdTrans } = await import(${probeUrl}); console.log(await HdTrans.getInfo());`],
+      { cwd, encoding: 'utf8', timeout: 90_000 });
+      assert.notEqual(infoWithoutData.status, 0, 'getInfo must actually load the dictionary');
+      assert.equal(infoWithoutData.stdout, '');
     } finally {
       await rename(`${snapshotFile}.hidden`, snapshotFile);
     }

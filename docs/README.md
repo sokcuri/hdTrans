@@ -6,11 +6,13 @@
 
 | 문서 | 내용 |
 |---|---|
-| [도구와 함께 쓰기](using-with-tools.md) | 배포판 설치, 번역 도구별 연결 설정, CLI 사용법 |
+| [도구와 함께 쓰기](using-with-tools.md) | 배포판 설치, 번역 도구별 연결 설정 |
+| [JavaScript와 TypeScript API](typescript-api.md) | npm 설치, 초기화, 버전 조회와 번역 |
 | [사용자 사전](dictionary-files.md#사용자-사전) | 사용자 사전 경로, 파일 형식과 품사 |
 | [CLI 옵션](api.md#명령줄-hdtrans) | 파일 입력과 출력, 줄별 번역, 명령줄 옵션 |
 | [설정 파일](api.md#설정-파일) | 사용자 설정 경로와 옵션 |
 | [Ehnd 호환 안내](ehnd-compat.md) | Ehnd 사전과 필터를 켜는 방법, 지원 형식 |
+| [번역 품질 벤치마크](benchmarks.md) | 오역 개선 전후, 공개 테스트 결과와 재현 방법 |
 
 ## 개발 참고
 

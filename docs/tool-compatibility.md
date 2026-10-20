@@ -68,7 +68,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 ### LunaTranslator
 
 - 이지트랜스 번역 설정에서 위 배포 구성의 `J2KEngine.dll` 파일을 선택합니다. 설치 폴더 선택이 아닙니다.
-- [Python 경로 처리][luna-python]는 선택 파일의 부모를 **32비트 `LunaSubProcess32.exe`**에 넘깁니다. 메인 앱은 64비트여도 됩니다.
+- [Python 경로 처리][luna-python]는 선택 파일의 부모를 32비트 `LunaSubProcess32.exe`에 넘깁니다. 메인 앱은 64비트여도 됩니다.
 - [네이티브 호출][luna-native]: DLL 로드 → 필수 export 19개 검사 → `InitializeEx("CSUSER123455", "<폴더>\\Dat")`
   → `TranslateMMNTW(0, text)` → 복사 → `FreeMem(pointer)`. `Dat`는 시스템 ANSI, 번역은 UTF-16입니다.
   W export 존재를 Ehnd 지원으로 판단하며, 별도 Ehnd DLL을 찾지는 않습니다. 요청은 직렬 처리하고 Terminate와 unload는 하지 않습니다.
@@ -78,12 +78,12 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 ### XUnity.AutoTranslator의 ezTransXP
 
 - 위 배포 구성으로 준비한 뒤 `Config.ini`에 `[Service] Endpoint=ezTransXP`, `[ezTrans] InstallationPath=C:\hdTrans`를 설정합니다.
-  언어는 `[General] Language=ko`, `FromLanguage=ja`입니다. 기존 `J2KEngineH.dll`이 있으면 백업 후 다른 이름으로 옮기세요.
+  언어는 `[General] Language=ko`, `FromLanguage=ja`입니다. 기존 `J2KEngineH.dll`이 있으면 제거합니다.
   이 도구는 **H 파일을 우선** 읽습니다.
 - [설정 소스][xunity-endpoint]: InstallationPath 기본값은 `HKCU\SOFTWARE\ChangShin\ezTrans`의 `FilePath`입니다.
   경로를 명시하면 레지스트리를 만들 필요가 없습니다. 별도 `FullNET\ezTransXP.ExtProtocol.exe`가 엔진을 부릅니다.
 - [호출 소스][xunity-native]: Stop, TranslateW, InitializeEx 주소 조회 → 같은 키와 `Dat`로 초기화
-  → `TranslateMMNTW(0, UTF-16)` → `PtrToStringAuto`. 직렬 처리하며 종료는 **인자 없는 `StopTranslation()` → FreeLibrary**, Terminate는 없습니다.
+  → `TranslateMMNTW(0, UTF-16)` → `PtrToStringAuto`. 직렬 처리하며 종료는 인자 없는 `StopTranslation()` → FreeLibrary, Terminate는 없습니다.
 - **CI:** `host.xunity`는 원래의 **Cdecl C# delegate**를 사용합니다. DLL의 stdcall과 선언이 달라 원본 net35 helper의
   스택 복구 동작을 .NET Framework 4의 `NetFx40_PInvokeStackResilience` 설정으로 재현합니다. 최신 .NET이나 Mono까지 검증한 것은 아닙니다.
 - **제한:** 원본 호출자는 `FreeMem`을 전혀 부르지 않아 **매 번역마다 결과 버퍼가 누수**됩니다. 원본 Ehnd도 매번 새 버퍼를
@@ -117,14 +117,14 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 ### 아랄트랜스, AralTrans의 EzTransXP 플러그인
 
 - 위 배포 구성으로 준비한 뒤 EzTransXP 번역 플러그인을 선택합니다. [0.2 소스][aral02]는
-  **`HKCU\Software\ChangShin\ezTrans`의 `FilePath`**에서 엔진 폴더를 읽습니다. 값을 얻지 못하면 폴더 선택 창에서 `C:\hdTrans`를 지정할 수 있습니다.
+  `HKCU\Software\ChangShin\ezTrans`의 `FilePath`에서 엔진 폴더를 읽습니다. 값을 얻지 못하면 폴더 선택 창에서 `C:\hdTrans`를 지정할 수 있습니다.
   한글 경로에는 경고를 띄우므로 영문 경로를 씁니다. ATCode는 엔진 로더가 아니라 별도 후킹 플러그인입니다.
 - `regedit`에서 `FilePath`를 바꾸는 순서는 [사용 안내](using-with-tools.md#아랄트랜스-araltrans)에 있습니다.
 
 - 로드 경로는 `<폴더>\Dat\..\J2KEngine.dll`입니다. InitializeEx, TranslateMMNT, FreeMem, StopTranslation, Terminate 순으로
   5개 export를 모두 확인한 뒤 `InitializeEx("CSUSER123455", "<폴더>\\Dat")`를 부릅니다. 경로는 시스템 ANSI입니다.
   [ATCode 경계][aral-encoding]의 CP932 입력을 `TranslateMMNT(0, text)`에 넘기고 CP949 출력을 처리한 뒤 `FreeMem(pointer)`으로 해제합니다.
-  종료는 **`StopTranslation(0)`**이며 Terminate와 FreeLibrary는 호출하지 않습니다. W export를 탐지하거나 별도 Ehnd를 읽지는 않습니다.
+  종료는 `StopTranslation(0)`이며 Terminate와 FreeLibrary는 호출하지 않습니다. W export를 탐지하거나 별도 Ehnd를 읽지는 않습니다.
 - **CI:** `host.aral02`는 로드부터 Stop까지 같은 작업 스레드에서 재현합니다. [0.3 소스][aral03]에 맞춘 `host.aral03`은
   호출 측에서 로드와 export 조회, 작업 스레드에서 초기화와 번역, 다시 호출 측에서 Stop을 수행합니다.
   없는 `Dat`를 거치는 로드 경로도 검사합니다. 레지스트리 UI, 실제 게임 주입, 필터와 ATCode 적용은 수동 검증 대상입니다.
@@ -140,8 +140,8 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
   VNR 폴더나 앞선 PATH의 다른 엔진이 먼저 선택될 수 있습니다. 같은 폴더의 기존 `.dlx`도 별도로 확인해야 합니다.
 - 호출은 `InitializeEx("CSUSER123455", "<로드된 원본 DLL 폴더>\\Dat")`, 성공값은 정확히 1입니다.
   내장 Ehnd를 끈 상태에서 W export가 있으면 `TranslateMMNTW(0, UTF-16)` → 복사 → `FreeMem(originalPointer)`입니다.
-  A fallback은 Python **`sjis`**, 출력 **`uhc`(CP949)**이며 변환 오류를 무시합니다. `sjis`는 CP932 확장 전체와 같지 않습니다.
-- **CI:** x86 전용 `host.vnr`, `host.vnr-ansi`. 원본처럼 WinDLL 기본 반환형인 **32비트 `c_int` 포인터**를 유지하고,
+  A fallback은 Python `sjis`, 출력 `uhc`(CP949)이며 변환 오류를 무시합니다. `sjis`는 CP932 확장 전체와 같지 않습니다.
+- **CI:** x86 전용 `host.vnr`, `host.vnr-ansi`. 원본처럼 WinDLL 기본 반환형인 32비트 `c_int` 포인터를 유지하고,
   main 초기화 → main의 `あ` warmup → worker 번역 → 명시적 Loader.destroy의 Terminate를 재현합니다.
   ANSI 경로는 W 미지원 조건을 강제로 선택합니다. Stop은 호출하지 않으며 정상 destroy에서는 unload도 하지 않습니다.
   VNR 전체는 종료 시 프로세스를 강제 종료할 수 있으므로 Terminate가 항상 불린다는 뜻은 아닙니다.
@@ -162,7 +162,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 ### HTTP 중개: HelloKS/ezTransWeb
 
 - 위 배포 구성의 파일을 소스에 지정된 `C:\Program Files (x86)\ChangShinSoft\ezTrans XP`에 두고,
-  기존 H 파일을 백업한 뒤 hdTrans의 `J2KEngine.dll`을 **`J2KEngineH.dll`** 이름으로도 복사합니다.
+  hdTrans의 `J2KEngine.dll`을 `J2KEngineH.dll` 이름으로도 복사해 기존 파일을 교체합니다.
   다른 폴더라면 [eztrans.py][eztransweb]의 DLL과 `Dat` 경로를 함께 수정합니다. x86 Python과 Flask를 사용합니다.
 - 소스는 WinDLL로 로드 → InitializeEx, TranslateW 조회 → 같은 키와 하드코딩한 ANSI `Dat`로 초기화
   → `TranslateMMNTW(0, UTF-16)`입니다. `c_wchar_p`가 결과를 복사하며 **FreeMem, Terminate, unload는 없습니다**.
@@ -183,10 +183,12 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 - [공식 GitHub][twocontrol-repo]는 배포 저장소이며 엔진 로더 소스는 공개되어 있지 않습니다. 아래 내용은 [2024.08.30 릴리스][twocontrol-release]의 `TwoControl.rar`에 한정한 정적 분석입니다. 다른 버전의 동작으로 일반화하지 않습니다.
 - `TwoControl.exe`와 `dll/CustomData/ezTransXP.dll`은 x86 PE입니다. 엔진은 자체 `Ehnd/Ehnd.dll`을 로드하며, `[Option] EhndUnload`가 켜져 있거나 NTLEA 모듈이 로드된 조건에서는 `Ehnd/Ehnd.dlx`를 선택합니다. 이 로더의 선택 대상은 `J2KEngineH.dll`이 아닙니다.
 - `Ehnd/Dat/JisJK.Inf`, `Ehnd/Dat/JisJK.da`의 존재와 내용을 검사합니다. 사전이 없으면 `HKCU\Software\ChangShin\ezTrans`의 `FilePath` 또는 폴더 선택 창에서 원본 사전을 가져옵니다. 공개 RAR에는 이 파일들과 `Ehnd.dll`, `Ehnd.dlx`가 포함되어 있습니다.
-- 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. 번들 Ehnd가 W 함수를 export하더라도 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않습니다.
+- 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. hdTrans는 이 export와 호출 규약을 제공합니다. 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않으므로 hdTrans의 W 함수 지원과 별개로 클라이언트의 번역 경로는 ANSI입니다.
 - 번역 호출은 `char* __stdcall J2K_TranslateMMNT(int, const char*)` 형태로 두 인자를 전달하고 원래 결과 포인터를 `J2K_FreeMem`에 넘깁니다. export 조회는 플러그인 RVA `0x17ce8a`, 번역 호출은 `0x17dfd7`, 결과 해제는 `0x17e3cb`에서 시작합니다.
-- 원본 Ehnd는 함께 쓰는 원본 엔진의 내부 코드를 패치합니다. `J2KEngine.dll` 복사나 레지스트리 변경만으로 이 번들 엔진을 hdTrans로 바꿀 수 없습니다. 원본 파일 검사와 두 DLL 선택을 모두 처리하는 직접 연결 절차는 아직 정리되지 않았습니다.
-- 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다. 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
+- `Ehnd/Ehnd.dll`과 `Ehnd/Ehnd.dlx`를 모두 x86 hdTrans DLL의 복사본으로 교체합니다. 원본 Ehnd 래퍼 자체를 교체하므로 원본 엔진에 대한 내부 코드 패치는 거치지 않습니다. 나머지 동봉 파일은 유지해 로더의 사전 검사를 통과시킵니다.
+- hdTrans는 파일명과 무관하게 로드된 DLL 옆에서 데이터를 찾으므로 사전과 사용자 파일은 `Ehnd/hdTrans/`에 둡니다. 두 파일을 교체하면 `EhndUnload`와 NTLEA 조건의 어느 분기에서도 hdTrans를 읽습니다. [설치 순서](using-with-tools.md#투컨트롤-twocontrol)
+- 이 교체 방식의 근거는 정적 로더와 호출 계약입니다. 실제 TwoControl GUI는 실행하지 않았고 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
+- 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다.
 
 ### 연결 방법이 정리되지 않은 도구
 
@@ -200,7 +202,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 ## C API와 Python ctypes
 
 직접 연결할 때는 `J2KEngine.dll`이 아닌 C API DLL을 씁니다. Windows Python이 64비트면
-**`hdTransEngine.dll`**, 32비트면 **`hdTransEngine_x86.dll`**을 고릅니다.
+`hdTransEngine.dll`, 32비트면 `hdTransEngine_x86.dll`을 고릅니다.
 macOS는 `libhdTransEngine.dylib`, Linux는 `libhdTransEngine.so`이며 문자열은 모두 UTF-8, 호출 규약은 Cdecl입니다.
 
 아래를 `translate.py`로 저장하고 `python translate.py C:\hdTrans\hdTransEngine.dll C:\hdTrans\hdTrans\dicts.hdsnap`로 실행합니다.

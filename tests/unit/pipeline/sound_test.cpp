@@ -58,6 +58,42 @@ HD_TEST(pipeline_lengthen) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
 
+HD_TEST(pipeline_casual_danger_boundaries) {
+    const struct {
+        const char* tag;
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"H7N0", "坂は危ねぇ。", "坂は危ない。"},
+        {"H7N0", "危ねえ坂！", "危ない坂！"},
+        {"H7N0", "危ねぇ岩。", "危ない岩。"},
+        {"H7N0", "危ねえぞ。", "危ないぞ。"},
+        {"H7N0", "坂は危ない。", "坂は危ない。"},
+        {"H7N0", "坂は危なくない。", "坂は危なくない。"},
+        {"H7N0", "危なければ帰る。", "危なければ帰る。"},
+        {"", "危ねぇ岩。", "危ねぇ岩。"},
+        {"N110", "危ねぇ岩。", "危ねぇ岩。"},
+        {"M100", "危ねぇ岩。", "危ねぇ岩。"},
+        {"H7N0", "しねぇ。", "しねぇ。"},
+        {"H7N0", "危ねええ岩。", "危ない岩。"},
+        {"H7N0", "危ねぇに。", "危ねぇに。"},
+        {"H7N0", "かてぇ岩。", "かてぇ岩。"},
+        {"H7N0", "試合にかてえ！", "試合にかてえ！"},
+        {"H7N0", "危ねぇ島。", "危ない島。"},
+    };
+    for (const auto& c : cases) {
+        std::string tsv = "key\tko\tpos\tid\n"
+                          "かた\t딱딱$AB@\tH7N0\t1\n"
+                          "しな\t하지 $DH@\tH7N0\t2\n";
+        if (c.tag[0] != '\0') tsv += "危な\t위험$AB@\t" + std::string(c.tag) + "\t3\n";
+        const auto loaded = dict::Load({{0, "base.tsv", tsv}});
+        HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+        LineContext ctx;
+        ctx.lookup.plain = &loaded.snapshot->TextPlain();
+        HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_sound_lexicon) {
     HD_CHECK(internal::IsSoundKey(U"ドキドキ"));
     HD_CHECK(!internal::IsSoundKey(U"ドキ"));

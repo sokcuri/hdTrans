@@ -4,8 +4,20 @@ run-name: ${{ github.event_name == 'workflow_dispatch' && !inputs.dry_run && for
 on:
   push:
     branches: [main, develop, 'ci/**']
-    tags: ['v*']
   pull_request:
+  workflow_call:
+    inputs:
+      dry_run:
+        description: Package artifacts without publishing a release
+        type: boolean
+        required: true
+    secrets:
+      HDTRANS_TESTDATA_KEY:
+        required: false
+    outputs:
+      release_published:
+        description: A stable GitHub release was published successfully
+        value: ${{ jobs.release.outputs.release_published }}
   workflow_dispatch:
     inputs:
       dry_run:
@@ -18,7 +30,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: build-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/ci/') }}
 
 env:
@@ -51,6 +63,8 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      HAS_TESTDATA_KEY: ${{ matrix.preset == 'linux' && secrets.HDTRANS_TESTDATA_KEY != '' }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -115,6 +129,8 @@ jobs:
       - name: Set up sccache
         if: matrix.preset != 'wasm'
         uses: mozilla-actions/sccache-action@v0.0.11
+        with:
+          disable_annotations: true
       - name: Restore native compiler cache
         if: matrix.preset != 'wasm'
         uses: actions/cache@v6
@@ -151,7 +167,8 @@ jobs:
             cmake --preset "${{ matrix.preset }}" -G Ninja -A "" -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
           else
-            cmake --preset "${{ matrix.preset }}" -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+            cmake --preset "${{ matrix.preset }}" -G Ninja \
+              -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
           fi
       - name: Build CLI, libraries and tests
         env:
@@ -208,6 +225,32 @@ jobs:
             ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose \
               2>&1 | tee "build/${{ matrix.preset }}/ctest.log"
           fi
+      - name: Check out the test data
+        if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY == 'true'
+        uses: actions/checkout@v7
+        with:
+          repository: sokcuri/hdTrans-data
+          ssh-key: ${{ secrets.HDTRANS_TESTDATA_KEY }}
+          persist-credentials: false
+          path: testdata
+      - name: Skip unavailable expected data
+        if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY != 'true'
+        run: echo "::notice::HDTRANS_TESTDATA_KEY is not available; the expected-data comparison is skipped."
+      - name: Compare with the expected outputs
+        if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY == 'true'
+        run: |
+          home="$(mktemp -d "$RUNNER_TEMP/hdtrans-e2e-home.XXXXXX")"
+          trap 'rm -rf "$home"' EXIT
+          set +e
+          HOME="$home" USERPROFILE="$home" tools/e2e.sh --expected testdata build/linux/hdtrans "$GITHUB_WORKSPACE/dicts" > "$RUNNER_TEMP/e2e.log" 2>&1
+          status=$?
+          grep -E '^[^ ]+: [0-9]+ changed lines?$|^e2e: ' "$RUNNER_TEMP/e2e.log"
+          tail -n 1 "$RUNNER_TEMP/e2e.log" | grep '^e2e: ' >> "$GITHUB_STEP_SUMMARY"
+          case $status in
+            0) echo 'No translation changed.' >> "$GITHUB_STEP_SUMMARY" ;;
+            1) echo 'Translations changed; accept them in the test data once this is on main.' >> "$GITHUB_STEP_SUMMARY" ;;
+          esac
+          [ "$status" -le 1 ]
       - name: Report fixture skips and test results
         if: always()
         run: |
@@ -228,6 +271,12 @@ jobs:
             ccache --show-stats --verbose 2>&1 | tee "build/wasm/ccache.log"
           else
             sccache --show-stats 2>&1 | tee "build/${{ matrix.preset }}/sccache.log"
+            {
+              echo '### ${{ matrix.preset }} compiler cache'
+              echo '```text'
+              cat "build/${{ matrix.preset }}/sccache.log"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
             sccache --stop-server
           fi
       - name: Upload CLI, GUI and libraries
@@ -281,4 +330,4 @@ jobs:
       contents: write
     uses: ./.github/workflows/release.yml
     with:
-      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      dry_run: ${{ inputs.dry_run || false }}

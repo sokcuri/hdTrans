@@ -7,6 +7,10 @@ on:
         description: Upload packages without publishing
         type: boolean
         required: true
+    outputs:
+      release_published:
+        description: A stable GitHub release was published successfully
+        value: ${{ jobs.release.outputs.release_published }}
 
 permissions:
   contents: read
@@ -70,12 +74,25 @@ jobs:
        ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
         startsWith(github.ref, 'refs/tags/v')))
     runs-on: ubuntu-latest
+    outputs:
+      release_published: ${{ steps.publish.outputs.release_published }}
+    concurrency:
+      group: github-release-${{ github.ref == 'refs/heads/develop' && 'nightly' || 'stable' }}
+      queue: max
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Verify stable release source
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          [[ "$GITHUB_REF" =~ ^refs/tags/v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "$GITHUB_SHA^{commit}")"
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "$GITHUB_REF^{commit}")"
+          git merge-base --is-ancestor HEAD origin/main
       - uses: actions/download-artifact@v8
         with:
           name: release-packages
@@ -86,14 +103,11 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            try {
-              const release = await github.rest.repos.getReleaseByTag({
-                ...context.repo, tag: context.ref.replace('refs/tags/', '')
-              });
-              require('fs').writeFileSync('build/release-notes.txt', release.data.body || '');
+            const { findRelease } = await import(`${process.env.GITHUB_WORKSPACE}/tools/release/publication.mjs`);
+            const release = await findRelease(github, context.repo, context.ref.replace('refs/tags/', ''));
+            if (release) {
+              require('fs').writeFileSync('build/release-notes.txt', release.body || '');
               core.setOutput('exists', 'true');
-            } catch (error) {
-              if (error.status !== 404) throw error;
             }
       - name: List changes since the previous tag
         if: steps.notes.outputs.exists != 'true'
@@ -105,40 +119,14 @@ jobs:
             git log --merges --format='- %s' "$range"
             git log --no-merges --format='- %s' "$range"
           } > build/release-notes.txt
-      - name: Move nightly and remove its old assets
-        if: github.ref == 'refs/heads/develop'
+      - name: Upload assets and publish release
+        id: publish
         uses: actions/github-script@v8
         with:
           script: |
-            const repo = context.repo;
-            try {
-              await github.rest.git.updateRef({ ...repo, ref: 'tags/nightly', sha: context.sha, force: true });
-            } catch (error) {
-              if (error.status !== 404 && error.status !== 422) throw error;
-              await github.rest.git.createRef({ ...repo, ref: 'refs/tags/nightly', sha: context.sha });
-            }
-            let release;
-            try {
-              release = (await github.rest.repos.getReleaseByTag({ ...repo, tag: 'nightly' })).data;
-            } catch (error) {
-              if (error.status !== 404) throw error;
-            }
-            if (release) {
-              const assets = await github.paginate(github.rest.repos.listReleaseAssets, {
-                ...repo, release_id: release.id, per_page: 100
-              });
-              for (const asset of assets) {
-                await github.rest.repos.deleteReleaseAsset({ ...repo, asset_id: asset.id });
-              }
-            }
-      - name: Publish release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref == 'refs/heads/develop' && 'nightly' || github.ref_name }}
-          name: ${{ github.ref == 'refs/heads/develop' && 'nightly' || github.ref_name }}
-          target_commitish: ${{ github.sha }}
-          prerelease: ${{ github.ref == 'refs/heads/develop' }}
-          make_latest: ${{ github.ref == 'refs/heads/develop' && 'false' || 'true' }}
-          body_path: build/release-notes.txt
-          files: build/release/*
-          fail_on_unmatched_files: true
+            const { publishRelease } = await import(`${process.env.GITHUB_WORKSPACE}/tools/release/publication.mjs`);
+            const published = await publishRelease({
+              github, repo: context.repo, ref: context.ref, sha: context.sha,
+              packageDir: 'build/release', notes: require('fs').readFileSync('build/release-notes.txt', 'utf8')
+            });
+            core.setOutput('release_published', String(published));

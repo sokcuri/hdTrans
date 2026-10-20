@@ -5,6 +5,7 @@ import { GitHub, Manifest } from 'release-please';
 import { Version } from 'release-please/build/src/version.js';
 import { parseConventionalCommits } from 'release-please/build/src/commit.js';
 import { DefaultVersioningStrategy } from 'release-please/build/src/versioning-strategies/default.js';
+import { findRelease } from './publication.mjs';
 
 export const releaseFiles = [
   'CHANGELOG.md', '.release-please-manifest.json', 'release-version.txt',
@@ -99,7 +100,7 @@ export function applyCandidate(root, candidate) {
 }
 
 export function commitMessage(version, source, runId) {
-  return `chore(main): release ${version} [skip ci]\n\nRelease-Source: ${source}\nRelease-Build: ${runId}`;
+  return `chore(main): release ${version}\n\nRelease-Source: ${source}\nRelease-Build: ${runId}`;
 }
 
 function changelogEntries(changelog) {
@@ -157,7 +158,10 @@ export async function releaseMain({ github, repo, runId, token, root = process.c
       return;
     }
     version = readVersion(root);
-    if (message !== commitMessage(version, source, runId)) throw new Error('Not this Build\'s release commit.');
+    const expectedMessage = commitMessage(version, source, runId);
+    if (message !== expectedMessage && message !== expectedMessage.replace('\n\n', ' [skip ci]\n\n')) {
+      throw new Error('Not this Build\'s release commit.');
+    }
     log(`Resuming v${version} at ${head}.`);
   } else {
     const baseline = git('tag', '--merged', source, '--list', 'v*', '--sort=-version:refname')
@@ -188,36 +192,44 @@ export async function releaseMain({ github, repo, runId, token, root = process.c
 
   const tag = `v${version}`;
   if (!await isCurrent(releaseSha)) return;
-  const existingTag = await optional(() => github.rest.git.getRef({ ...repo, ref: `tags/${tag}` }));
-  if (existingTag) {
-    let target = existingTag.object;
+  const tagRef = () => optional(() => github.rest.git.getRef({ ...repo, ref: `tags/${tag}` }));
+  const verifyTag = async existing => {
+    let target = existing.object;
     while (target.type === 'tag') {
       target = (await github.rest.git.getTag({ ...repo, tag_sha: target.sha })).data.object;
     }
     if (target.type !== 'commit' || target.sha !== releaseSha) throw new Error(`${tag} already targets another commit.`);
+  };
+  let pushed = false;
+  const existingTag = await tagRef();
+  if (existingTag) {
+    await verifyTag(existingTag);
   } else {
-    const annotation = (await github.rest.git.createTag({
-      ...repo, tag, message: `Release ${tag}`, object: releaseSha, type: 'commit',
-    })).data;
+    if (git('tag', '--list', tag)) {
+      if (git('rev-parse', `${tag}^{commit}`) !== releaseSha || git('cat-file', '-t', `refs/tags/${tag}`) !== 'tag') {
+        throw new Error(`${tag} is not the expected local annotated tag.`);
+      }
+    } else {
+      git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
+        'tag', '-a', tag, releaseSha, '-m', `Release ${tag}`);
+    }
     if (!await isCurrent(releaseSha)) return;
-    await github.rest.git.createRef({ ...repo, ref: `refs/tags/${tag}`, sha: annotation.sha });
+    try {
+      git('push', 'origin', `refs/tags/${tag}:refs/tags/${tag}`);
+      pushed = true;
+    } catch (error) {
+      const remote = await tagRef();
+      if (!remote) throw error;
+      await verifyTag(remote);
+    }
   }
-  const existingRelease = await optional(() => github.rest.repos.getReleaseByTag({ ...repo, tag }));
+  const existingRelease = await findRelease(github, repo, tag);
   if (!existingRelease) {
     await github.rest.repos.createRelease({
       ...repo, tag_name: tag, target_commitish: releaseSha, name: tag,
-      body: releaseNotes(root, version), draft: false, prerelease: false, make_latest: 'true',
+      body: releaseNotes(root, version), draft: true, prerelease: false, make_latest: 'false',
     });
   }
-  const builds = (await github.rest.actions.listWorkflowRuns({
-    ...repo, workflow_id: 'build.yml', head_sha: releaseSha, event: 'workflow_dispatch', per_page: 100,
-  })).data.workflow_runs;
-  if (!builds.some(build => build.head_sha === releaseSha && build.head_branch === tag &&
-      build.display_title === `Release ${tag}` &&
-      (build.status !== 'completed' || build.conclusion === 'success'))) {
-    await github.rest.actions.createWorkflowDispatch({
-      ...repo, workflow_id: 'build.yml', ref: tag, inputs: { dry_run: 'false' },
-    });
-  }
-  log(`Released ${tag}; stable Build publishes its packages and dispatches npm publication.`);
+  log(pushed ? `Pushed ${tag}; its tag pipeline builds and publishes the release and npm package.` :
+    `${tag} already exists; recover publication by running Publish npm manually at this tag with dry_run=false.`);
 }
