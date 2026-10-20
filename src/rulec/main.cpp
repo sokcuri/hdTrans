@@ -7,7 +7,6 @@
 //                                        conversion round trip on every rule (at most N
 //                                        evaluation paths per rule, default 2^20)
 //   hdrulec cpp RULES -local FIRST-LAST [-globals] [-o OUT | -check FILE]
-//   hdrulec tests RULES -o OUT           the test lines as unit tests
 //   hdrulec dump RULES [-hash] [-o OUT | -check FILE]
 //                                        the program rules::Load builds, in run order, or the
 //                                        FNV-1a 64 of that dump; -check fails unless FILE holds it
@@ -227,7 +226,6 @@ int main(int argc, char** argv) {
         }
         return 0;
     }
-    if (command == "tests") return WriteFile(out, EmitTests(file, source)) ? 0 : 2;
     if (command == "cpp") {
         if (Readable(path)) {
             std::fprintf(stderr, "hdrulec: cpp needs the flat rules, whose record lines it hashes\n");

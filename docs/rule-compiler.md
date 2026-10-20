@@ -6,12 +6,11 @@
 
 ```sh
 hdrulec lint src/core/rules -dicts dicts [-tsv]     # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
-hdrulec convert src/core/rules -o rules.hdr          # 읽기 쉬운 문법으로 (설명 주석, #test 줄 포함)
+hdrulec convert src/core/rules -o rules.hdr          # 읽기 쉬운 문법으로 (설명 주석 포함)
 hdrulec flat rules.hdr -o rules.txt                  # 되돌리기
 hdrulec verify src/core/rules [-paths N]             # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
 hdrulec dump src/core/rules [-hash]                  # 불러온 프로그램을 실행 순서로 (rules.identity)
 hdrulec cpp src/core/rules -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
-hdrulec tests src/core/rules -o rule_tests_gen.cpp   # #test 줄을 단위 테스트로
 ```
 
 ## 사용법
@@ -25,7 +24,7 @@ hdrulec tests src/core/rules -o rule_tests_gen.cpp   # #test 줄을 단위 테�
 | 늘 | `hdrulec cpp src/core/rules -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
 | 큰 변환 뒤 | `hdrulec verify src/core/rules -paths 4096` | `rules.verify` |
 
-`#test` 줄은 빌드가 단위 테스트로 만듭니다(`rules.tests`). 해시는 주석과 `#test`를 보지 않습니다. 동작을 바꿀 생각이
+해시는 주석을 보지 않습니다. 동작을 바꿀 생각이
 없었는데 `rules.identity`가 깨지면 `hdrulec dump src/core/rules` 출력을 이전 커밋과 비교합니다.
 
 | 진단 | 고치기 |
@@ -110,7 +109,7 @@ local 3
   `gram has`, `lacks`, `within`(G-=), `end.sem isa`(T==). 코드는 `|`로 나눈 대안이고 따옴표가 없습니다.
 - 대입은 `:=`, 다른 단어의 값은 `end.ko[-1] := end.ko`처럼 같은 필드를 씁니다. `&N`(모두 평가하는 그리고)은
   `all(a, b)`, 빈 목록은 `true`/`false`.
-- 옛 문법과 새 문법은 같은 트리로 읽히고, 서로 기계적으로 바뀝니다(`convert`, `flat`). 설명 주석과 `#test` 줄도 옮깁니다.
+- 옛 문법과 새 문법은 같은 트리로 읽히고, 서로 기계적으로 바뀝니다(`convert`, `flat`). 설명 주석도 옮깁니다.
 
 ## 파이프라인
 
@@ -196,7 +195,6 @@ bool RuleL3([[maybe_unused]] Item* p) {
 |---|---|---|
 | 규칙 텍스트 → 라이브러리 | `cmake/builtin_tables.cmake`(CMake 스크립트) | 같음 |
 | 생성 코드 `compiled_gen.cpp` | 커밋된 파일을 컴파일, ctest `rules.generated`가 다시 만들어 비교 | 커밋된 파일 |
-| `#test` → 단위 테스트 | 빌드가 `hdrulec tests`로 만듦 | 테스트를 빌드하지 않음 |
 | 검사 | ctest `rules.lint`(오류만 실패), `rules.verify`, `rules.identity` | 없음 |
 
 `hdrulec`는 라이브러리에 링크하지 않고 규칙, 코드 소스(`load.cpp`, `eval.cpp`, `match.cpp`, `codes.cpp` …)만으로
@@ -211,7 +209,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 | 옛 → 새 → 옛 변환 | 5,125개 모두 정규화한 트리가 같음. 모든 응답 대본에 대한 호출 순서 비교(번역 검증): 5,594만 경로, 0개 다름(33개는 2^20 경로에서 멈춤). 1개(`L 1211`의 `"22주의"`→`"R주의"`)는 같은 뜻의 다른 철자 |
 | 생성 코드 대 인터프리터 | 5,125개 모두 생성한 빌드에서 5,594만 경로, 0개 다름. 커밋한 536개는 996만 경로(ctest는 규칙당 2^14 경로). 원자 순서를 바꾼 돌연변이를 잡음 |
 | 번역 동일성 | 인터프리터, 536개, 5,125개 빌드가 웹소설 51장(`tools/e2e.sh` 0줄)과 `examples/` 18개에서 같은 출력 |
-| 규칙 테스트 | `#test` 8줄, `tests/rules/cases.tsv` 750행 |
+| 규칙 테스트 | `tests/rules/cases/*.tsv` |
 
 호출 순서 비교(`src/rulec/oracle.h`)는 `Item`을 대본으로 대신합니다. `GetObject`의 단어 유무와 모든 `Check…`, `Assign…`의
 참거짓을 대본에서 꺼내고, 모든 호출과 인자를 기록하며, 깊이 우선으로 모든 경로를 엽니다. 두 구현이 모든 대본에서 같은
@@ -221,10 +219,9 @@ bool RuleL3([[maybe_unused]] Item* p) {
 
 규칙 하나가 클래스 하나처럼 따로 고치고 따로 시험할 수 있어야 합니다. 클래스를 손으로 5천 개 쓰는 대신:
 
-- **테스트**: 규칙 아래의 `test` 줄(옛 형식은 `#test`)이 각각 단위 테스트가 됩니다(`ruletest_L3_1`). 실패는 규칙 파일의
-  그 줄을 가리키고 기대값과 실제값을 보입니다. 형식은 [rule-language.md](rule-language.md#규칙-테스트). 규칙 검토에서 쓴 문장(검토 표의 이유 열, `tests/rules/cases.tsv`)은
-  `rule` 열로 그 규칙 아래에 `test` 줄로 옮깁니다:
-  번역 전체 기대값은 `->`, `rule:L<n>=<번역>`은 `picks`, 고치기 전 동작을 지키는 문장은 `-> unchanged`.
+- **테스트**: `tests/rules/cases/`의 행이 규칙 하나를 이름합니다. `rule` 열에 그 규칙을 이름한 사전 행의 id를 적고,
+  번역 전체는 `expected`에, 그 규칙이 고른 번역은 `rule:dict:<id>=<번역>`에, 규칙이 손대지 않아야 하는 줄은
+  `!rule:dict:<id>`에 적습니다. 실패는 케이스 행과 기대값, 실제값을 보입니다([rule-language.md](rule-language.md#규칙-테스트)).
 - **디버깅**: 생성 코드의 함수 `RuleL3`에 중단점을 겁니다. `-why`는 결정한 층과 `파일:규칙`을 적습니다([pipeline-layers.md](pipeline-layers.md)).
 - **손으로 쓴 조건(설계만)**: 문법으로 쓰기 어려운 드문 경우를 위해 원자 `call 이름[위치]`를 둡니다(옛 형식
   `N+1== "이름"`). 이름은 `src/core/word/` 안의 표(`이름 → bool (*)(const Item&)`)에서 찾고, 없는 이름은 `hdrulec`와
@@ -253,6 +250,6 @@ bool RuleL3([[maybe_unused]] Item* p) {
 ## 상태
 
 - 된 것: 두 문법의 파서와 출력기, 검사 21종, 변환기, 덤프, 해시, L 0–499와 전역 36개의 생성 코드(커밋),
-  규칙 테스트 생성, 주제 파일, PRIO, `-why`의 층, 규칙 열, ctest `rules.lint`, `rules.verify`, `rules.identity`, `rules.generated`, `rules.tests`.
+  규칙 테스트, 주제 파일, PRIO, `-why`의 층, 규칙 열, ctest `rules.lint`, `rules.verify`, `rules.identity`, `rules.generated`.
 - 남은 것: 나머지 규칙의 생성 코드(측정은 끝남), Windows MSVC x86에서 생성 코드 빌드 확인(CI), 읽기 쉬운 문법을
   원본으로 바꾸기(그때는 `.txt`를 생성물로), `call` 원자, 다른 층의 이전.

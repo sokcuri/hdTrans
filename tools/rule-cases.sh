@@ -39,7 +39,7 @@ tail -n +2 "$cases" | cut -f 2 > "$tmp/in.txt"
 "$cli" -dicts "$dicts" -each -why -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
     { echo "CLI failed" >&2; exit 2; }
 # The dictionary row id names the rule a row carries; a case may use either.
-awk -F '\t' '!/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"
+awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"
 awk -F '\t' -v OFS='\t' -v accept="$accept" -v fixed="$tmp/fixed.tsv" \
     -f "$here/tools/rule-cases.awk" \
  "$tmp/why.txt" "$tmp/out.txt" "$tmp/rule-by-id.tsv" "$cases" || status=$?

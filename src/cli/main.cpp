@@ -189,9 +189,15 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
         std::fprintf(stderr, "\t%d\t%s\t%d\t", it->selected, hdTrans::word::ProvenanceName(it->choice.layer),
                      it->choice.id);
         PrintEscaped(it->EntryText(it->selected));
-        std::fprintf(stderr, "\t%d\t%s\t%d\t%s\t%s\n", it->DirectIndex(),
+        std::fprintf(stderr, "\t%d\t%s\t%d\t%s\t%s", it->DirectIndex(),
                      hdTrans::word::ProvenanceName(it->directChoice.layer), it->directChoice.id,
                      Decided(it->choice, false).c_str(), Decided(it->directChoice, true).c_str());
+        // The text of the chosen ending, which the rule checks need; empty without one.
+        std::fputc('\t', stderr);
+        if (const hdTrans::word::Group* ending = it->DirectGroup()) {
+            if (const hdTrans::word::Entry* e = ending->At(it->DirectIndex())) PrintEscaped(e->dst);
+        }
+        std::fputc('\n', stderr);
         if (why.trace && it->group) {
             for (std::size_t c = 0; c < it->group->entries.size(); c++) {
                 const hdTrans::word::Entry& e = *it->group->entries[c];

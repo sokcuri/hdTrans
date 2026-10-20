@@ -11,15 +11,26 @@ FILENAME == ARGV[1] {
             printf "line %d: malformed row\n", FNR; bad++; print > fixed; next
         }
         if (!($5 in failed)) { failed[$5] = 0; order[++layers] = $5 }
+        negate = 0
+        if ($3 ~ /^!rule:dict:/) { negate = 1; $3 = substr($3, 2) }
         if ($3 ~ /^rule:dict:/) {
             rest = substr($3, 11)
             at = index(rest, "=")
-            if (at == 0 || !(substr(rest, 1, at - 1) in rule_of)) {
+            id = at == 0 ? rest : substr(rest, 1, at - 1)
+            if (!(id in rule_of)) {
                 printf "line %d: unknown row id\n", FNR; bad++; print > fixed; next
             }
-            $3 = "rule:" rule_of[substr(rest, 1, at - 1)] "=" substr(rest, at + 1)
+            $3 = "rule:" rule_of[id] (at == 0 ? "" : "=" substr(rest, at + 1))
         }
-        if ($3 ~ /^rule:L[0-9]+=/) {
+        if (negate) {
+            # !rule: the rule must not choose anything in this line.
+            target = substr($3, 6)
+            if (index(why[n] "\n", "\n" target) != 0) {
+                got = substr(why[n], 2); gsub(/\n/, "; ", got)
+                report[$5] = report[$5] sprintf("%s: %s\n  expected no %s\n  actual   %s\n", $1, $2, target, got)
+                failed[$5]++; bad++
+            }
+        } else if ($3 ~ /^rule:L[0-9]+=/) {
             want = substr($3, 6)
             if (index(why[n] "\n", "\n" want "\n") == 0) {
                 got = substr(why[n], 2); gsub(/\n/, "; ", got)

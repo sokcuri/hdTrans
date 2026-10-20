@@ -98,49 +98,64 @@ def main():
             print(f"cannot read: {text}", file=sys.stderr)
             continue
         text_in = match.group(1) if match.group(1) is not None else match.group(3) if match.group(3) is not None else match.group(5)
-        # A picks line names the target the rule selects, not the whole output; the
-        # case table holds whole outputs, so the current output is what to keep.
+        # A picks line names the target the rule selects, not the whole output.
         expected = match.group(2)
-        parsed.append((rule, file_name, text_in, expected, None))
+        match_picks = quote(match.group(4)[1:-1]) if match.group(4) is not None else None
+        parsed.append((rule, file_name, text_in, expected, match_picks))
 
     # picks, silent and unchanged have no expected output of their own; the line the CLI
     # makes now stands in, so a later change still shows. One run for all of them, in
     # order.
-    need = [i for i, p in enumerate(parsed) if p[3] is None or p[3] == "unchanged"]
-    current = {}
-    if need:
-        sources = [quote(parsed[i][2]) for i in need]
-        result = subprocess.run([args.cli, "-dicts", str(args.dicts), "--each"],
-                                input="\n".join(sources) + "\n", capture_output=True,
-                                text=True, encoding="utf-8", check=True)
-        outputs = result.stdout.splitlines()
-        if len(outputs) != len(sources):
-            print(f"{len(sources)} inputs gave {len(outputs)} lines", file=sys.stderr)
-            return 2
-        for i, text in zip(need, outputs):
-            current[i] = text
+    # One run with -why for every line: the output, and the rules that chose.
+    sources = [quote(p[2]) for p in parsed]
+    result = subprocess.run([args.cli, "-dicts", str(args.dicts), "--each", "-why"],
+                            input="\n".join(sources) + "\n", capture_output=True,
+                            text=True, encoding="utf-8", check=True)
+    outputs = result.stdout.splitlines()
+    if len(outputs) != len(sources):
+        print(f"{len(sources)} inputs gave {len(outputs)} lines", file=sys.stderr)
+        return 2
+    current = dict(enumerate(outputs))
+    chose = collections.defaultdict(set)
+    line = 0
+    for row in result.stderr.splitlines():
+        if row.startswith("WHY-LINE\t"):
+            line = int(row.split("\t")[1]) - 1
+            continue
+        if not row.startswith("WHY\t"):
+            continue
+        fields = row.split("\t")
+        if len(fields) > 9 and fields[7] == "LocalRule":
+            chose[line].add("L" + fields[8] + "=" + fields[9])
+        if len(fields) > 17 and fields[11] == "LocalRule":
+            chose[line].add("L" + fields[12] + "=" + fields[17])
     skipped = 0
 
     by_file = collections.defaultdict(list)
     wrote = 0
-    for index, (rule, file_name, raw_in, expected, _) in enumerate(parsed):
+    for index, (rule, file_name, raw_in, expected, match_picks) in enumerate(parsed):
         text_in = quote(raw_in)
         if rule not in rows:
             print(f"L {rule} has no row", file=sys.stderr)
             continue
-        if expected is None or expected == "unchanged":
-            # picks, silent and unchanged say that the rule runs (or that it changes
-            # nothing); the case table can only pin what the line reads, so the output
-            # the CLI makes now becomes the expectation. A later change still shows.
-            want = current.get(index, "")
-            kind = "keep"
-            if not want:
-                print(f"no output for: {text_in}", file=sys.stderr)
-                skipped += 1
-                continue
-        else:
+        if expected is not None and expected != "unchanged":
             want = quote(expected[1:-1])
             kind = "fix"
+        elif (match_picks is not None and " " not in match_picks
+              and ("L" + rule + "=" + match_picks) in chose[index]):
+            # The rule must choose this target, which is what -why prints.
+            want = "rule:dict:" + rows[rule] + "=" + match_picks
+            kind = "keep"
+        elif match_picks is not None:
+            # The chosen target carries markers or is composed, so -why does not show
+            # this text; pin the whole line instead.
+            want = current[index]
+            kind = "keep"
+        else:
+            # silent, or unchanged: the rule must choose nothing here (a rule that
+            # changes nothing and one that does not run read the same).
+            want = "!rule:dict:" + rows[rule]
+            kind = "keep"
         by_file[file_name.replace(".txt", ".tsv")].append(
             ["dict:" + rows[rule], text_in, want, kind, "local"])
         wrote += 1

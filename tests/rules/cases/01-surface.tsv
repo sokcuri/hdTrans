@@ -1,48 +1,16 @@
 rule	input	expected	kind	layer
-dict:jisjk:619	ねえ、ところで今日は休み？	있잖아, 그런데 오늘은 휴일?	fix	local
-dict:jisjk:619	静かなところで話す。	조용한 곳에서 이야기한다.	fix	local
-dict:jisjk:375288	リンゴを、どうぞ包んでください。	사과를, 어서 감싸 주세요.	fix	local
-dict:jisjk:375288	リンゴを、どうぞ。	사과를, 드세요.	fix	local
-dict:jisjk:13840	このままにしておいてください。	이대로 해 두어 주세요.	fix	local
-dict:jisjk:13840	このままにしておいてください。	이대로 해 두어 주세요.	keep	local
-dict:jisjk:13840	このままでいい。	이대로 좋다.	keep	local
-dict:jisjk:115387	だれに話してもらいますか。	누구에게 이야기해 줍니까.	fix	local
-dict:jisjk:115387	だれが走った。	누가 달렸다.	fix	local
-dict:jisjk:115387	だれに読んでもらう。	누가 읽어 준다.	fix	local
-dict:jisjk:107	料理をうまい方法で作る。	요리를 능숙한 방법으로 만든다.	fix	local
-dict:jisjk:107	うまい料理を食べる。	맛있는 요리를 먹는다.	fix	local
+dict:jisjk:341111	今日はお子さんがいらっしゃる。	오늘은 자녀분이 계신다.	fix	local
+dict:jisjk:341111	お子さんと学校へいらっしゃる。	자녀분과 학교에 가신다.	fix	local
+dict:bun-no:1	君の分のお菓子	너의 몫의 과자	fix	local
+dict:bun-no:1	5回分の料金	5회분의 요금	fix	local
+dict:jisjk:344419	毎ばん読んだ。	매일 밤 읽었다.	fix	local
+dict:jisjk:344419	毎朝走った。	매일 아침 달렸다.	fix	local
+dict:jisjk:5289	子供にやさしい母だ。	아이에게 상냥한 어머니다.	fix	local
+dict:jisjk:5289	体にやさしい料理だ。	몸에 좋은 요리다.	fix	local
+dict:jisjk:5289	肌にやさしい石鹸だ。	피부에 좋은 비누다.	fix	local
 dict:jisjk:266527	固い飴を買った。	단단한 엿을 샀다.	fix	local
 dict:jisjk:266527	固い肉を食べた。	질긴 고기를 먹었다.	fix	local
-dict:jisjk:355181	一体何匹来た。	도대체 몇 마리 왔다.	fix	local
-dict:jisjk:355181	一体何人来た。	도대체 몇 사람 왔다.	fix	local
-dict:jisjk:374166	三人の先に進んだ。	세 명의 앞에 나아갔다.	fix	local
-dict:jisjk:374166	棒の先に触れた。	봉의 끝에 접했다.	fix	local
-dict:jisjk:346355	近く見えた。	가깝게 보였다.	fix	local
-dict:jisjk:346355	近く引っ越します。	가까운 시일내에 이사합니다.	fix	local
-dict:jisjk:365662	五日先の話だ。	닷새 후의 이야기다.	fix	local
-dict:jisjk:365662	この先に店がある。	이 앞에 가게가 있다.	fix	local
-dict:jisjk:343575	原野に移った。	원야로 옮겼다.	fix	local
-dict:jisjk:343575	原野が語った。	하라노가 말했다.	fix	local
-dict:jisjk:344778	寺巡りツアーに参加する。	절순회 투어에 참가한다.	fix	local
-dict:jisjk:344778	事件巡り議論が続く。	사건 둘러싸고 논의가 계속된다.	fix	local
-dict:jisjk:375293	諸原先生が来た。	모로하라 선생님이 왔다.	fix	local
-dict:jisjk:375293	諸原は来た。	모로하라는 왔다.	fix	local
-dict:jisjk:341125	話しておいた。	이야기해 두었다.	fix	local
-dict:jisjk:341125	読んでおいた。	읽어 두었다.	fix	local
-dict:jisjk:375276	かまってくれる。	상대해 준다.	fix	local
-dict:jisjk:375276	かまわない。	상관없다.	fix	local
-dict:jisjk:369479	古い歌が歌われません。	낡은 노래가 불리지 않습니다.	fix	local
-dict:jisjk:369479	歌が歌われませんでした。	노래가 불리지 않았습니다.	fix	local
-dict:jisjk:369479	歌が歌われた。	노래가 불렸다.	fix	local
-dict:jisjk:369479	歌を歌えません。	노래를 부를 수 없습니다.	fix	local
-dict:jisjk:373985	帽子に星がついた。	모자에 별이 붙었다.	fix	local
-dict:jisjk:373985	区別がついた。	구별이 되었다.	fix	local
-dict:jisjk:266181	大学を受けました。	대학 시험을 치렀습니다.	fix	local
-dict:jisjk:266181	大学で授業を受けました。	대학에서 수업을 받았습니다.	fix	local
-dict:jisjk:342092	深い苦痛を抱いている。	깊은 고통을 안고 있다.	keep	local
-dict:jisjk:95235	酒を控えた。	술을 줄였다.	fix	local
-dict:jisjk:95235	海を控えた町だ。	바다를 가까이 둔 마을이다.	fix	local
-dict:jisjk:374819	私に聞かれた。	내가 물었다.	fix	local
-dict:jisjk:374819	彼に聞かれた。	그가 물었다.	fix	local
-dict:jisjk:374763	テレビに取り上げられた。	텔레비젼에서 다루어졌다.	fix	local
-dict:jisjk:374763	議題に取り上げられた。	의제로 다루어졌다.	fix	local
+dict:jisjk:342043	はやく、起きなさい。	빠르게, 일어나 주세요.	fix	local
+dict:jisjk:342043	足がはやく、丈夫だ。	다리가 빠르고, 튼튼하다.	fix	local
+dict:jisjk:11025	レベルの切り下げを行う。	레벨의 인하를 실시한다.	fix	local
+dict:jisjk:11025	円の切り下げを行う。	엔의 평가절하를 실시한다.	fix	local

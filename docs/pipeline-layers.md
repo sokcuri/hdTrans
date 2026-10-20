@@ -96,6 +96,6 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  02
 
 ## 층별 테스트
 
-- 규칙마다: 규칙 파일의 `#test` 줄(`hdrulec tests`가 단위 테스트 `ruletest_L3_1` …로 만듦, [rule-compiler.md](rule-compiler.md)).
+- 규칙마다: `tests/rules/cases/`의 행(`rule` 열이 그 규칙을 이름한 사전 행의 id, [rule-language.md](rule-language.md#규칙-테스트)).
 - 층마다: `tests/rules/cases.tsv`의 `layer` 열. `tools/rule-cases.sh`(ctest `rules.cases`)는 실패를 층별로 묶어
   보여 주므로, 한 층을 고쳐 다른 층의 행이 깨지면 그렇게 보입니다.
