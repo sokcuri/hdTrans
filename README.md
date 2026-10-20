@@ -10,7 +10,30 @@ Windows 번역 창, 명령줄 프로그램, 이지트랜스용 도구 연결을 
 
 설치 전에 [웹 번역기](https://trans.kuri.kr)에서 문장을 번역해 볼 수 있습니다.
 
+## 번역 개선 예시
+
+원본 ezTrans 열은 [공개 비교 글](https://x.com/sokcuri/status/2111443062698451143/photo/1)에서 인용했고, hdTrans 열은 아래 벤치마크의 고정 C++ 엔진으로 직접 번역한 결과입니다.
+
+| 일본어 | 원본 ezTrans | hdTrans |
+|---|---|---|
+| 肉がジュージューと焼ける | 고기가 유태인 유태인과 탄다 | 고기가 지글지글 구워진다 |
+| バイトに行く | 바이트에 간다 | 아르바이트에 간다 |
+| おっと、すまんね | 남편, 미안 | 어이쿠, 미안 |
+| 夢みたい | 꿈 보고 싶다 | 꿈같다 |
+| くそっ！ | 똥! | 젠장! |
+| やったー！ | 했다-! | 해냈다! |
+
+## 벤치마크
+
+공개 회귀 벤치마크 66문장에서 기대 출력 일치는 0.2.0 소스 빌드의 36/66에서 개선 C++ 엔진의 66/66으로 늘었습니다.
+수정 대상 30문장을 고쳤고, 유지 대상 30문장과 위 6개 예시는 같은 출력을 유지했습니다.
+수정 사례와 주변 표현을 골라 만든 테스트이며 일반 번역 정확도를 뜻하지 않습니다.
+
+[전체 결과, 사전과 규칙 개선 내용, 재현 방법](docs/benchmarks.md)
+
 ## 다운로드와 설치
+
+Windows 번역 창이나 네이티브 엔진을 쓰는 도구에 연결하려면 배포판을 사용합니다.
 
 [Releases](https://github.com/sokcuri/hdTrans/releases)에서 운영체제에 맞는 파일을 받습니다.
 `Source code`가 아니라 아래 배포 파일을 고르세요.
@@ -28,17 +51,45 @@ Windows 번역 창, 명령줄 프로그램, 이지트랜스용 도구 연결을 
 기본 사전은 Windows에서 `hdTrans\dicts.hdsnap`, Linux와 macOS에서 프로그램 옆 `dicts.hdsnap`입니다.
 같은 폴더의 `dicts.txt`는 사전 버전입니다. 원본 TSV나 `dicts/` 폴더를 따로 받을 필요가 없습니다.
 
-## 사용법
+## 시작하기
 
-### Windows 번역 창
+### npm으로 시작하기
 
-`hdTransGUI.exe`를 실행하고 위 칸에 일본어를 넣은 뒤 **번역하기**를 누릅니다.
-텍스트 파일은 **문서 번역**에서 파일을 골라 번역합니다.
+Node.js 22 이상에서 설치합니다. WASM 엔진과 기본 사전이 패키지에 포함되어 있습니다.
 
-### CLI로 파일 번역
+```sh
+npm install hdtrans
+```
 
-터미널에서 압축을 푼 폴더로 이동합니다. 입력 파일 `input.ja.txt`를 읽어 번역 결과를 `output.ko.txt`에 저장합니다.
-입력과 출력은 **UTF-8**입니다.
+JavaScript와 TypeScript에서 같은 API를 씁니다.
+
+```js
+import { HdTrans } from 'hdtrans';
+
+const translator = await HdTrans.init();
+try {
+  console.log(translator.getInfo()); // 엔진 버전, 사전 버전, 실행 방식
+  console.log(translator.translate('今日は本を読みます。'));
+} finally {
+  translator.close();
+}
+```
+
+버전만 확인하려면 `await HdTrans.getInfo()`를 씁니다. 엔진과 사전을 실제로 로드해 확인하고 임시 인스턴스를 닫습니다.
+[사용자 사전 등록](docs/typescript-api.md#사용자-사전), [JSON 결과](docs/typescript-api.md#번역과-json)와 자세한 사용법은 [JavaScript와 TypeScript API](docs/typescript-api.md)를 보세요.
+
+### 명령줄로 시작하기
+
+npm으로 명령을 설치할 수 있습니다.
+
+```sh
+npm install -g hdtrans
+hdtrans --version
+hdtrans --in input.ja.txt --out output.ko.txt
+```
+
+배포판을 받았다면 터미널에서 압축을 푼 폴더로 이동합니다.
+입력 파일 `input.ja.txt`를 읽어 번역 결과를 `output.ko.txt`에 저장합니다. 입력과 출력은 **UTF-8**입니다.
 
 Windows:
 
@@ -52,12 +103,19 @@ Linux, macOS:
 ./hdtrans --in input.ja.txt --out output.ko.txt
 ```
 
-기본 사전은 자동으로 읽습니다. 줄마다 독립적으로 번역하려면 `--each`를 추가합니다.
-[전체 CLI 옵션](docs/api.md#명령줄-hdtrans)
+기본 사전은 자동으로 읽습니다. 배포판에서 줄마다 독립적으로 번역하려면 `--each`를 추가합니다.
+[npm CLI와 배포판 CLI 사용법](docs/api.md#명령줄-hdtrans)
+
+## 도구로 사용하기
+
+### Windows 번역 창
+
+`hdTransGUI.exe`를 실행하고 위 칸에 일본어를 넣은 뒤 **번역하기**를 누릅니다.
+텍스트 파일은 **문서 번역**에서 파일을 골라 번역합니다.
 
 ### 이지트랜스용 도구에 연결
 
-LunaTranslator, 아네모네, XUnity.AutoTranslator, 아랄트랜스, VNR 등의 엔진 경로를 하드트랜스 폴더로 지정합니다.
+Windows 배포판의 네이티브 엔진을 LunaTranslator, 투컨트롤, 아네모네, XUnity.AutoTranslator, 아랄트랜스, VNR 등에 연결할 수 있습니다.
 도구에 엔진 경로를 설정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
 
 - `J2KEngine.dll`과 `hdTrans` 폴더를 함께 둡니다.

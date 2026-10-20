@@ -1,0 +1,107 @@
+{
+  "label": "improved-cpp-tsv",
+  "source_revision": "9668adc493919de5fd33e45e8ea6fa542ae5c51a",
+  "source_sha256": "94e0378e7ce2b9d283cfc9db25fe4694a38bfcf337e715f990fdda889454c8fe",
+  "source_hash_scope": "src/**, include/**, cmake/**, CMakeLists.txt, release-version.txt; sorted path TAB SHA256 LF",
+  "cli_sha256": "0f15302387617484c8e10cca587e0a0bb277b89079ffd2be2450c45b80e01628",
+  "dictionary": {
+    "mode": "tsv",
+    "sha256": "fb4155f27e198c992cb185f4bdfdae3da1df316f10b7eea45a73de5044aeb1fa",
+    "files": {
+      "base.tsv": "1786643789ec85d5a56336043b6af2730d10f3e3caa8ef35eaca82df7c0f7158",
+      "grammar-causal.tsv": "74e4cbaba2d43a4f59bd0c253e088ebfa6b64b984545e8eba5648e879126e249",
+      "grammar-past-progressive-only.tsv": "cf221ac3e20563490a0915c7e1442e699bb47cc0e2e169a21e33af103306f3d7",
+      "kana.tsv": "8510cbc271f91f667f88c1bac562f6ea957960393c855d95e5e2bb6e917cf065",
+      "lexical-benefactive.tsv": "9a20fe317ccebb353562469d39c42109ec0de48712404caca47c60694de01b8d",
+      "lexical-compound-ascent.tsv": "4833cedeafd287e7b21066d65e2c084e31cc91a041ba60aa1746d8fabfcd8f1d",
+      "lexical-kana.tsv": "f88ce7a847e09afac1b6f3be48ae4a39f9bbcbce2454bb97840b0e25726ef308",
+      "lexical-passive.tsv": "911c587fcee025f784470d2ca1ee06585eb16d50f8f9c39da3288efdb900afa3",
+      "names-places.tsv": "37acf02cd0020d1bde13bfa6820b197f9d376a69c2fffbd03682a10d7cc9daaa",
+      "names.00.tsv": "21481e71540703a5aabd463e407f6fefce3ce773e5ef1a5e08a3a4cc587210d6",
+      "names.01.tsv": "647e78adff905b0aa3ee5735e3e8706a28706d15b748195f795dcb292fbc72fc",
+      "names.02.tsv": "6bdba48fa66b769869bd3c8f4f5238e07d5b44e60264acf1e332b1a2ac8e1c3d",
+      "words-idioms.tsv": "33d41f7742b11a9884d5c56e9430fca8911c25e28ff67018b34864517afc3c04",
+      "words-slang.tsv": "f605b22a7fa0fedd44ccdfc146e8d83539f7912c17deaa358d5dda788fd2df14",
+      "words-variants.tsv": "2456e7089d3c2bb1ff681c8c0c66f1b51a09529874d2293132003e267809e2e4",
+      "words.tsv": "c3c603efb91418a5d576100e45e83f9050cbec5731275d943649262bb8b612d8"
+    }
+  },
+  "version": "hdTrans v0.0.0-bf5145d (native) / dict development (unversioned)",
+  "runtime": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "fixture_sha256": "273da39e88edc312ce25836233cf71ceef7d8a6d8bbd8bab18cb87243c467245",
+  "runner_sha256": "24ed65eb863c7dfb1f507cfa4b95bd297b0af92480cd46342d202e0af97f391f",
+  "translation_options": [
+    "--each",
+    "--no-cache",
+    "--config EMPTY",
+    "--userdict EMPTY"
+  ],
+  "score": {
+    "matched": 66,
+    "total": 66
+  },
+  "by_kind": {
+    "example": {
+      "matched": 6,
+      "total": 6
+    },
+    "fix": {
+      "matched": 30,
+      "total": 30
+    },
+    "keep": {
+      "matched": 30,
+      "total": 30
+    }
+  },
+  "by_group": {
+    "famous-short": {
+      "matched": 6,
+      "total": 6
+    },
+    "quoted-command": {
+      "matched": 6,
+      "total": 6
+    },
+    "compound-ascent": {
+      "matched": 6,
+      "total": 6
+    },
+    "past-progressive": {
+      "matched": 6,
+      "total": 6
+    },
+    "passive-desire": {
+      "matched": 6,
+      "total": 6
+    },
+    "past-cause": {
+      "matched": 6,
+      "total": 6
+    },
+    "benefactive": {
+      "matched": 6,
+      "total": 6
+    },
+    "polite-negative": {
+      "matched": 6,
+      "total": 6
+    },
+    "kana-words": {
+      "matched": 6,
+      "total": 6
+    },
+    "idioms": {
+      "matched": 6,
+      "total": 6
+    },
+    "casual-adjective": {
+      "matched": 6,
+      "total": 6
+    }
+  },
+  "stdout_sha256": "b79b3888ded2458803d9def474672d2c2ea193de67bf6504304719cb2fd9dcb2"
+}
