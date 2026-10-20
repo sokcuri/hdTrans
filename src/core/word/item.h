@@ -196,6 +196,8 @@ public:
 
     // rules::Item
     void SetRuleContext(bool global, int number) override;
+    void BeginRule() override;
+    void EndRule(bool fired) override;
     rules::Item* GetObject(int delta) override;
     int GetCurrentCompDI() override { return compDI; }
     int GetCurrentCompUmiDI() override { return compUmiDI; }

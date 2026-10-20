@@ -70,15 +70,23 @@ bool Run(const Program& program, uint32_t i, Item* pwi) {
 
 }  // namespace
 
-bool RunRule(const Program& program, uint32_t root, Item* pwi) { return Run(program, root, pwi); }
+bool RunRule(const Program& program, uint32_t root, Item* pwi) {
+    if (pwi == nullptr) return Run(program, root, pwi);
+    pwi->BeginRule();
+    const bool result = Run(program, root, pwi);
+    pwi->EndRule(result);
+    return result;
+}
 
 bool RunLocal(const Program& program, Item* pwi, int ruleIndex, Tally* tally) {
     if (ruleIndex < 0 || static_cast<std::size_t>(ruleIndex) >= program.localRules.size()) return false;
     const std::size_t index = static_cast<std::size_t>(ruleIndex);
     if (pwi) pwi->SetRuleContext(false, ruleIndex);
+    if (pwi) pwi->BeginRule();
     const bool result = index < program.localCode.size() && program.localCode[index]
                             ? program.localCode[index](pwi)
                             : Run(program, program.localRules[index], pwi);
+    if (pwi) pwi->EndRule(result);
     if (pwi) pwi->SetRuleContext(false, -1);
     if (tally && index < tally->localRuns.size()) {
         tally->localRuns[index]++;
@@ -97,8 +105,10 @@ bool RunGlobal(const Program& program, Item* pwi, bool uganRule, unsigned char p
         if (r.uganRule != uganRule || r.pumsa != pumsa) continue;
         if (uganRule && (r.number <= lo || r.number >= hi)) continue;
         if (pwi) pwi->SetRuleContext(true, r.prio);
+        if (pwi) pwi->BeginRule();
         const bool result = i < program.globalCode.size() && program.globalCode[i] ? program.globalCode[i](pwi)
                                                                                      : Run(program, r.root, pwi);
+        if (pwi) pwi->EndRule(result);
         if (pwi) pwi->SetRuleContext(true, -1);
         if (tally && i < tally->globalRuns.size()) {
             tally->globalRuns[i]++;

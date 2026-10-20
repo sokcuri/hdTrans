@@ -341,7 +341,7 @@ HD_TEST(word_provenance_pool_reuse) {
     HD_CHECK_EQ(std::string(reused->DirectText(0)), std::string("1고"));
 }
 
-HD_TEST(word_provenance_failed_local_assignment) {
+HD_TEST(word_provenance_failed_local_assignment_is_undone) {
     const auto snapshot = Dictionary(
         "書\t쓰\tM421\tXXX\t\tGN\t0\t1\n"
         "時\t때\tN110\tXXX\t\tGN\t22\t2\n"
@@ -359,14 +359,18 @@ HD_TEST(word_provenance_failed_local_assignment) {
         word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
         if (full) word::Flush(f);
         else word::CleanupSelectors(f);
+        // The rule assigns 기회 and then fails on its last condition, so nothing it
+        // wrote stays: the word reads as the default candidate and its selection is
+        // the default one.
         HD_CHECK_EQ(it->selected, 0);
-        HD_CHECK_EQ(std::string(it->EntryText(it->selected)), std::string("기회"));
-        CheckSelection(it->choice, word::Provenance::LocalRule, 22);
-        CheckSelection(it->group->At(0)->targetChoice, word::Provenance::LocalRule, 22);
+        HD_CHECK_EQ(std::string(it->EntryText(it->selected)), std::string("때"));
+        CheckSelection(it->choice, word::Provenance::Single);
+        CheckSelection(it->group->At(0)->targetChoice, word::Provenance::None);
         CheckSelection(it->prev->directChoice, word::Provenance::Fixed);
         it->compDI = it->selected;
         HD_CHECK(!rules::RunLocal(Rules(*snapshot), it, 22));
         CheckSelection(line.analysis.worker->ruleChoice, word::Provenance::None);
+        HD_CHECK_EQ(std::string(it->EntryText(it->selected)), std::string("때"));
     }
 }
 
