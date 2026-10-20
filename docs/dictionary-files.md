@@ -157,6 +157,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 - `ctx`: 그 지역 규칙의 본문(`||1 &&3 S+1== "あそば" …`). 엔진이 `ctx` 열과 전역 규칙으로 규칙 프로그램을 조립합니다.
   `rule` 없는 본문, 해석되지 않는 본문, 같은 번호의 다른 본문은 `파일:줄`과 함께 불러오기를 실패시킵니다.
 - `note`: 그 규칙의 설명. 읽지 않습니다.
+- 품사 이름 표(`src/core/dict/pos_schema.tsv`)와 조건 이름 표(`src/core/dict/part_patterns.tsv`)는
+  `python3 tools/pos-schema.py`가 각각 `pos_schema_gen.cpp`와 `part_patterns_gen.cpp`로 씁니다.
 - 사전의 행이 규칙 번호를 가리키는데 그 본문을 가진 행이 하나도 없으면(예전 사전) 불러오기가 그 사실을 알립니다.
   엔진은 빈 프로그램을 조립해 지역 규칙 없이 번역하므로, `--verify-dicts`는 이것을 실패로 봅니다.
 - `raw`: 원본 사전 레코드(16진수). 읽지 않습니다.
