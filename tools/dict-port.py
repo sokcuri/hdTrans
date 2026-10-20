@@ -15,6 +15,8 @@ OUT.tsv columns:
   pos       the part-of-speech code
   sem       the semantic codes
   gram      the grammar codes
+  dict      the dictionary code the row belongs to (GN, BZ, PN, ...)
+  prio      the priority column, when the file has one
   rule      the local rule number the row points at, empty for none
   flags     the space-separated flags as written
   reading   the reading column, when the file has one
@@ -57,7 +59,8 @@ def read_column(path, layer, out):
             return fields[at] if at is not None and at < len(fields) else ""
         out.append(dict(layer=layer, file=path.name, line=number, key=fields[0],
                         ko=field("ko"), pos=field("pos"), sem=field("sem"),
-                        gram=field("gram"), rule=field("rule"), flags=field("flags"),
+                        gram=field("gram"), dict=field("dict"), prio=field("prio"),
+                        rule=field("rule"), flags=field("flags"),
                         reading=field("reading"), id=field("id"), shape="column",
                         extra=""))
 
@@ -71,7 +74,7 @@ def read_kana(path, out):
             if len(fields) < 2:
                 continue
             out.append(dict(layer="kana", file=path.name, line=number, key=fields[1],
-                            ko="", pos="", sem="", gram="", rule="", flags="",
+                            ko="", pos="", sem="", gram="", dict="", prio="", rule="", flags="",
                             reading=fields[0], id="", shape="kana",
                             extra=fields[2] if len(fields) > 2 else ""))
 
@@ -87,7 +90,8 @@ def read_builtin(path, out):
                 continue
             shape = "sense" if name == "senses.tsv" else "plain"
             out.append(dict(layer="builtin", file=name, line=number, key=fields[0],
-                            ko=fields[1], pos="", sem="", gram="", rule="", flags="",
+                            ko=fields[1], pos="", sem="", gram="", dict="", prio="",
+                            rule="", flags="",
                             reading="", id="", shape=shape,
                             extra="\t".join(fields[2:])))
 
@@ -126,14 +130,15 @@ def main():
                     continue
                 out.append(dict(layer=layer or "base", file=path.name, line=number,
                                 key=fields[0], ko=fields[1], pos="", sem="", gram="",
-                                rule="", flags="", reading="", id="", shape="plain",
+                                dict="", prio="", rule="", flags="", reading="", id="",
+                                shape="plain",
                                 extra="\t".join(fields[2:])))
     if args.builtin:
         for path in sorted(args.builtin.glob("*.tsv")):
             read_builtin(path, out)
 
-    columns = ["layer", "file", "line", "key", "ko", "pos", "sem", "gram", "rule",
-               "flags", "reading", "id", "shape", "extra"]
+    columns = ["layer", "file", "line", "key", "ko", "pos", "sem", "gram", "dict",
+               "prio", "rule", "flags", "reading", "id", "shape", "extra"]
     with args.out.open("w", encoding="utf-8", newline="") as sink:
         writer = csv.writer(sink, delimiter="\t", lineterminator="\n")
         writer.writerow(columns)

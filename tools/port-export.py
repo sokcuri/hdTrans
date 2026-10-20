@@ -123,7 +123,10 @@ def export_dict(port, out_dir, builtin_dir):
                           "flags": row["flags"], "reading": row["reading"], "id": row["id"]}
                 for name in ("dict", "prio", "raw"):
                     at = header.index(name) if name in header else -1
-                    values[name] = src[at] if 0 <= at < len(src) else ""
+                    # A ported column wins; raw has no table column and comes from the
+                    # source line.
+                    ported = row.get(name, "") if name != "raw" else ""
+                    values[name] = ported if ported else (src[at] if 0 <= at < len(src) else "")
                 # A row may carry fewer fields than the header names; the loader fills
                 # the rest, and the file keeps the short form.
                 fields = [values.get(name, "") for name in header][:max(len(src), 2)]
