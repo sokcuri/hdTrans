@@ -69,6 +69,24 @@ UserEntry Entry(CodeTable& table, std::string key, std::string target, std::stri
 
 }  // namespace
 
+// A dictionary from before the rule bodies moved into the rows names rules that no row
+// carries. It loads, because the rows are valid, but the load reports it: the engine
+// would assemble an empty program and translate as if no local rule existed.
+HD_TEST(SnapshotRowsWithoutRuleBodiesAreReported) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\trule\tid\n";
+    const LoadResult r = Load({MakeFile("base.tsv", header + "の\t의\tP200\t\t\tGN\t12\t1\n")});
+    HD_REQUIRE(r.snapshot != nullptr);
+    HD_REQUIRE(r.errors.size() == 1);
+    HD_CHECK(r.errors[0].kind == LoadErrorKind::MissingRuleBodies);
+    HD_CHECK(r.errors[0].message.find("ctx") != std::string::npos);
+    // A dictionary whose rows carry the bodies has nothing to report.
+    const std::string withCtx = "key\tko\tpos\tsem\tgram\tdict\trule\tctx\tid\n";
+    const LoadResult carried =
+        Load({MakeFile("base.tsv", withCtx + "の\t의\tP200\t\t\tGN\t12\t||1 S-1== \"x\"\t1\n")});
+    HD_REQUIRE(carried.snapshot != nullptr);
+    HD_CHECK(carried.errors.empty());
+}
+
 HD_TEST(SnapshotFolderLayers) {
     const LoadResult r = LoadFoldersTsv({Folder(), Folder() + "/over"});
     HD_REQUIRE(r.snapshot != nullptr);

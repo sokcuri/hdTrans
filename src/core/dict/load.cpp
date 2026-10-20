@@ -272,6 +272,8 @@ private:
 // means the same thing in every file and every layer.
 struct RuleBodyTable {
     std::vector<std::string> bodies;
+    // Rows whose rule column names a local rule, whether or not the row carries its body.
+    std::size_t named = 0;
 
     // Keeps the first body of a number and reports a second, different one. A body the
     // rule parser rejects is reported at its line and left out, as a bad row elsewhere is.
@@ -323,6 +325,7 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
             notices.push_back({f.name, LoadErrorKind::MarkerClass, rows.Line(), TsvErrorKind::Read, std::move(why)});
         }
 
+        if (s.rule > 0) bodies.named++;
         if (!s.ctx.empty() && s.rule <= 0) {
             errors.push_back({f.name, LoadErrorKind::Tsv, rows.Line(), TsvErrorKind::Read,
                               "a rule body without a rule number"});
@@ -624,6 +627,14 @@ bool SnapshotLoader::BuildBase(const std::vector<std::size_t>& baseFiles) {
     if (s.hasDictionary_) {
         s.user_ = user.Build(s.codes_);
         s.base_ = base.Build(s.codes_);
+    }
+    // A dictionary from before the rule bodies moved into the rows names rules that no
+    // row carries: the engine would run an empty program and translate without them.
+    if (ruleBodies.bodies.empty() && ruleBodies.named > 0) {
+        const std::string where = baseFiles.empty() ? std::string() : files[baseFiles.front()].name;
+        errors.push_back({where, LoadErrorKind::MissingRuleBodies, 0, TsvErrorKind::Read,
+                          "the rows name local rules and none carries a body; this dictionary "
+                          "predates the ctx column"});
     }
     // The rule bodies travel with the rows; the engine assembles the rules program from
     // them and the global rules of the rule files.
