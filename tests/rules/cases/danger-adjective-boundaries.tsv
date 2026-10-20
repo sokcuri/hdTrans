@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+pipeline:casual-danger	坂は危ねぇ。	비탈은 위험하다.	fix	sound
+pipeline:casual-danger	危ねえ坂！	위험한 비탈!	fix	sound
+pipeline:casual-danger	危ねぇ岩。	위험한 바위.	fix	sound
+pipeline:casual-danger	危ねえぞ。	위험해.	fix	sound
+pipeline:casual-danger	坂は危ない。	비탈은 위험하다.	keep	sound
+pipeline:casual-danger	坂は危なくない。	비탈은 위험하지 않다.	keep	sound
+pipeline:casual-danger	危なければ帰る。	위험하면 돌아간다.	keep	sound
+pipeline:casual-danger	危ねええ岩。	위험한 바위.	fix	sound
+pipeline:casual-danger	危ねぇ島。	위험한 섬.	fix	sound

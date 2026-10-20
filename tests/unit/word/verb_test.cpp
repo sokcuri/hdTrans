@@ -6,6 +6,7 @@
 
 #include "core/word/worker.h"
 #include "core/word/flush.h"
+#include "core/tokenizer/tokenize.h"
 #include "hdtest.h"
 
 using namespace hdTrans;
@@ -60,6 +61,66 @@ HD_TEST(verb_analyse_tail) {
             HD_CHECK_EQ(length, c.length);
         }
     }
+}
+
+HD_TEST(verb_bare_command_boundaries) {
+    struct Row {
+        std::string_view key;
+        char kind;
+        std::string_view e;
+    };
+    const Row rows[] = {
+        {"買", '0', "え"}, {"書", '1', "け"}, {"泳", '2', "げ"},
+        {"出", '3', "せ"}, {"待", '4', "て"}, {"読", '5', "め"},
+        {"遊", '6', "べ"}, {"帰", '8', "れ"}, {"行", '?', "け"},
+    };
+    for (const Row& row : rows) {
+        for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの"}) {
+            int branch = -1, length = -1;
+            HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(boundary), branch, length));
+            HD_CHECK_EQ(branch, 11);
+            HD_CHECK_EQ(length, 3);
+        }
+        for (const std::string_view continuation : {"る", "ない", "た", "れば", "ます", "本", "の", "よ", "」の", "』か"}) {
+            int branch = -1, length = -1;
+            HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(continuation), branch, length));
+            HD_CHECK_EQ(branch, 4);
+            HD_CHECK_EQ(length, 3);
+        }
+    }
+    struct Case {
+        std::string_view key;
+        char kind;
+        std::string_view tail;
+        int branch, length;
+    };
+    const Case cases[] = {
+        {"書", '1', "け", 11, 3},
+        {"書", '1', "けば", 3, 6}, {"書", '1', "かれた", 1, 6},
+        {"書", '1', "いて", 7, 6}, {"読", '5', "んで", 7, 6},
+        {"待", '4', "って", 7, 6}, {"見", '7', "ろ」と", 11, 3},
+        {"見", '7', "て」と", 7, 3}, {"する", '9', "しろ』って", 11, 6},
+        {"する", '9', "できる」と", 4, 6},
+    };
+    for (const Case& c : cases) {
+        int branch = -1, length = -1;
+        HD_CHECK(word::AnalyseVerbTail(c.key, c.kind, c.tail, branch, length));
+        HD_CHECK_EQ(branch, c.branch);
+        HD_CHECK_EQ(length, c.length);
+    }
+}
+
+HD_TEST(verb_bare_command_token_boundary) {
+    tokenizer::Tokens tokens;
+    tokenizer::Tokenize("書け。", tokens);
+    HD_REQUIRE(tokens.size() >= 2);
+    const std::string_view verb = tokens.Raw(0);
+    HD_REQUIRE(verb == "書け");
+    HD_CHECK(tokens.Raw(1) == "。");
+    int branch = -1, length = -1;
+    HD_CHECK(word::AnalyseVerbTail("書", '1', verb.substr(std::string_view("書").size()), branch, length));
+    HD_CHECK_EQ(branch, 11);
+    HD_CHECK_EQ(length, 3);
 }
 
 // The branch, the pattern kind of the last record tried, and the record the walk stopped at

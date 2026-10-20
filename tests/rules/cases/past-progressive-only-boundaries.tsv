@@ -1,0 +1,40 @@
+rule	input	expected	kind	layer
+dict:past-progressive-only	本を読んでいただけだ。	책을 읽고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	本を読んでいただけです。	책을 읽고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	手紙を書いていただけだ。	편지를 쓰고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	手紙を書いていただけです。	편지를 쓰고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	地図を見ていただけだ。	지도를 보고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	地図を見ていただけです。	지도를 보고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	水を飲んでいただけだ。	물을 마시고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	水を飲んでいただけです。	물을 마시고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	道を歩いていただけだ。	길을 걷고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	道を歩いていただけです。	길을 걷고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	ここで待っていただけだ。	여기서 기다리고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	ここで待っていただけです。	여기서 기다리고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	部屋で話していただけだ。	방에서 이야기하고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	部屋で話していただけです。	방에서 이야기하고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	確認していただけだ。	확인하고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	確認していただけです。	확인하고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	勉強していただけだ。	공부하고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	勉強していただけです。	공부하고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	ただ遊んでいただけだ。	다만 놀고 있었을 뿐이다.	fix	lookup
+dict:past-progressive-only	ただ遊んでいただけです。	다만 놀고 있었을 뿐입니다.	fix	lookup
+dict:past-progressive-only	読んでいただけますか。	읽어 주시겠습니까.	keep	lookup
+dict:past-progressive-only	確認していただけますか。	확인해 주실 수 있습니까.	keep	lookup
+dict:past-progressive-only	書いていただけますか。	써 주시겠습니까.	keep	lookup
+dict:past-progressive-only	食べていただけますか。	먹어 주시겠습니까.	keep	lookup
+dict:past-progressive-only	確認していただける。	확인해 주실 수 있다.	keep	lookup
+dict:past-progressive-only	読んでいただければ。	읽어 주시면.	keep	lookup
+dict:past-progressive-only	確認していただければ。	확인해 주시면.	keep	lookup
+dict:past-progressive-only	読んでいただけなかった。	읽어 주실 수 없었다.	keep	lookup
+dict:past-progressive-only	確認していただけなかった。	확인해 주실 수 없었다.	keep	lookup
+dict:past-progressive-only	確認して頂けますか。	확인 해 주실 수 있습니까.	keep	lookup
+dict:past-progressive-only	食事をいただける。	식사를 받을 수 있다.	keep	lookup
+dict:past-progressive-only	水をいただけますか。	물을 받을 수 있습니까.	keep	lookup
+dict:past-progressive-only	水だけ飲んだ。	물만 마셨다.	keep	lookup
+dict:past-progressive-only	一つだけだ。	하나 뿐이다.	keep	lookup
+dict:past-progressive-only	本を読んだだけだ。	책을 읽었을 뿐이다.	keep	lookup
+dict:past-progressive-only	本を読んでいるだけだ。	책을 읽고 있을 뿐이다.	keep	lookup
+dict:past-progressive-only	勉強しているだけです。	공부하고 있을 뿐입니다.	keep	lookup
+dict:past-progressive-only	何もしなかっただけだ。	아무것도 하지 않았던 것 뿐이다.	keep	lookup
+dict:past-progressive-only	ここにいるだけだ。	여기에 있을 뿐이다.	keep	lookup

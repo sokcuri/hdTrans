@@ -1,0 +1,39 @@
+rule	input	expected	kind	layer
+dict:dama-ninaru	小麦粉がだまになった。	소맥분이 뭉쳤다.	fix	lookup
+dict:dama-ninaru	小麦粉がだまになりにくい。	소맥분이 뭉치기 어렵다.	fix	lookup
+dict:dama-ninaru	小麦粉がだまになる。	소맥분이 뭉친다.	fix	lookup
+dict:dama-ninaru	だまって。	가만히 있어.	keep	lookup
+dict:dama-ninaru	だましてはいけない。	속여선 안 된다.	keep	lookup
+dict:dama-ninaru	だましながら話した。	속이면서 이야기했다.	keep	lookup
+dict:dama-ninaru	友人にだまされた。	친구에게 속았다.	keep	lookup
+dict:kami-osage	髪をおさげにする。	머리를 땋아 늘어뜨린다.	fix	lookup
+dict:kami-osage	朝、髪をおさげにした。	아침, 머리를 땋아 늘어뜨렸다.	fix	lookup
+dict:kami-osage	髪をおさげにして出かけた。	머리를 땋아 늘어뜨려 나갔다.	fix	lookup
+dict:kami-osage	荷物をおさげください。	짐을 낮추어 주세요.	keep	lookup
+dict:kami-osage	皿をおさげします。	접시를 낮추겠습니다.	keep	lookup
+dict:kami-osage	その箱をおさげになる。	그 상자를 낮추신다.	keep	lookup
+dict:kami-osage	お下げの人が来た。	땋은 머리의 사람이 왔다.	keep	lookup
+dict:yosoru	ご飯をよそる。	밥을 담아낸다.	fix	lookup
+dict:yosoru	ご飯をよそらない。	밥을 담아내지 않는다.	fix	lookup
+dict:yosoru	ご飯をよそりながら話す。	밥을 담아내면서 이야기한다.	fix	lookup
+dict:yosoru	ご飯をよそってください。	밥을 담아내 주세요.	fix	lookup
+dict:yosoru	スープをよそった。	스프를 담아냈다.	fix	lookup
+dict:yosoru	よその家で休む。	다른 집에서 쉰다.	keep	lookup
+dict:yosoru	嘘でよそおった。	거짓말로 가장했다.	keep	lookup
+dict:yosoru	もう、よそう。	이제, 그만두자.	keep	lookup
+dict:manmaru	まんまるで白い石だ。	동그랗고 흰 돌이다.	fix	lookup
+dict:manmaru	まんまるです。	동그랗습니다.	fix	lookup
+dict:manmaru	まんまるではない。	동그랗지 않다.	fix	lookup
+dict:manmaru	まんまるだった。	동그랬다.	fix	lookup
+dict:manmaru	まるで夢のようだ。	마치 꿈과 같다.	keep	lookup
+dict:manmaru	真ん丸な池だ。	동그란 연못이다.	keep	lookup
+dict:hyokkori	隣のおばさんがひょっこり現れた。	옆의 아줌마가 불쑥 나타났다.	fix	lookup
+dict:hyokkori	あのおばさんがひょっこり店に来た。	그 아줌마가 불쑥 가게에 왔다.	fix	lookup
+dict:hyokkori	猫がひょっこり現れた。	고양이가 불쑥 나타났다.	keep	lookup
+dict:hyokkori	ひょっこりと現れた。	불쑥 나타났다.	keep	lookup
+dict:hyokkori	ひょいっと顔を出す。	불쑥 얼굴을 내민다.	keep	lookup
+dict:gokeiyaku	件名：ご契約の確認	건명：계약의 확인	fix	lookup
+dict:gokeiyaku	件名：ご契約のお知らせ	건명：계약의 알림	fix	lookup
+dict:gokeiyaku	ご契約を取り消した。	계약을 취소했다.	keep	lookup
+dict:gokeiyaku	ご契約いただきありがとうございます。	계약해 주셔 감사합니다.	keep	lookup
+dict:gokeiyaku	契約後に帰った。	계약후에 돌아갔다.	keep	lookup

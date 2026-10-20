@@ -1,0 +1,38 @@
+rule	input	expected	kind	layer
+dict:oyasashii	先生はおやさしい。	선생님은 다정하다.	fix	lookup
+dict:oyasashii	先生はおやさしくて、親切です。	선생님은 다정하고, 친절합니다.	fix	lookup
+dict:oyasashii	先生はとてもおやさしいんです。	선생님은 매우 다정합니다.	fix	lookup
+dict:oyasashii	先生はおやさしかった。	선생님은 다정했다.	fix	lookup
+dict:oyasashii	先生はおやさしくない。	선생님은 다정하지 않다.	fix	lookup
+dict:oyasashii	先生はやさしい。	선생님은 상냥하다.	keep	lookup
+dict:oyasashii	先生は優しい。	선생님은 상냥하다.	keep	lookup
+dict:oyasashii	先生のおやつです。	선생님의 간식입니다.	keep	lookup
+dict:oyasashii	おや、ここにあった。	어라, 여기에 있었다.	keep	lookup
+dict:oyasashii	この問題は易しい。	이 문제는 쉽다.	keep	lookup
+dict:shimeshi-ga-tsuku	示しがつかん。	체면이 서지 않아.	fix	lookup
+dict:shimeshi-ga-tsuku	示しがつかない。	체면이 서지 않는다.	fix	lookup
+dict:shimeshi-ga-tsuku	それでは示しがつかない。	그러면 체면이 서지 않는다.	fix	lookup
+dict:shimeshi-ga-tsuku	示しがつかなかった。	체면이 서지 않았다.	fix	lookup
+dict:shimeshi-ga-tsuku	示しがつく。	체면이 선다.	fix	lookup
+dict:shimeshi-ga-tsuku	手本を示した。	모범을 보였다.	keep	lookup
+dict:shimeshi-ga-tsuku	日程を示す。	일정을 나타낸다.	keep	lookup
+dict:shimeshi-ga-tsuku	紙に印をつけた。	종이에 표를 붙였다.	keep	lookup
+dict:shimeshi-ga-tsuku	値段がつく。	가격이 붙는다.	keep	lookup
+dict:ichimoku-nimoku-passive	一目も二目も置かれていた。	높이 평가받고 있었다.	fix	lookup
+dict:ichimoku-nimoku-passive	一目も二目も置かれる。	높이 평가받는다.	fix	lookup
+dict:ichimoku-nimoku-passive	委員会で一目も二目も置かれている。	위원회에서 높이 평가받고 있다.	fix	lookup
+dict:ichimoku-nimoku-passive	一目も二目も置かれなかった。	높이 평가받지 않았다.	fix	lookup
+dict:ichimoku-nimoku-passive	一目も二目も置かれています。	높이 평가받고 있습니다.	fix	lookup
+dict:ichimoku-nimoku-passive	先輩には一目置く。	선배에게는 한 수 접어준다.	keep	lookup
+dict:ichimoku-nimoku-passive	一目で分かった。	한눈에 알았다.	keep	lookup
+dict:ichimoku-nimoku-passive	箱を二つ置いた。	상자를 2개 두었다.	keep	lookup
+dict:ichimoku-nimoku-passive	手紙が置かれていた。	편지가 놓여져 있었다.	keep	lookup
+dict:te-wo-furikaesu	手を振り返した。	손을 흔들어 답했다.	fix	lookup
+dict:te-wo-furikaesu	手を振り返す。	손을 흔들어 답한다.	fix	lookup
+dict:te-wo-furikaesu	手を振り返してくれた。	손을 흔들어 답해 주었다.	fix	lookup
+dict:te-wo-furikaesu	手を振り返さなかった。	손을 흔들어 답하지 않았다.	fix	lookup
+dict:te-wo-furikaesu	彼も手を振り返した。	그도 손을 흔들어 답했다.	fix	lookup
+dict:te-wo-furikaesu	後ろを振り返った。	뒤를 돌아보았다.	keep	lookup
+dict:te-wo-furikaesu	過去を振り返る。	과거를 되돌아본다.	keep	lookup
+dict:te-wo-furikaesu	手を振った。	손을 흔들었다.	keep	lookup
+dict:te-wo-furikaesu	病状が悪化した。	병세가 악화되었다.	keep	lookup

@@ -56,6 +56,12 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if (branch == 4 || branch == 11) {
             const std::size_t n = entry.size();
             const std::string_view rest = tail.substr(n);
+            if (branch == 4 && entry == Conjugation(kind, 11) &&
+                (Starts(rest, "だの") || Starts(rest, "」と") || Starts(rest, "』と") ||
+                 Starts(rest, "」って") || Starts(rest, "』って") || Starts(rest, "」だの") ||
+                 Starts(rest, "』だの"))) {
+                continue;
+            }
             if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) continue;
             if (n < tail.size()) {
                 const char next = tail[n];
