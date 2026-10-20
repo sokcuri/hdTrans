@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:202443	庭を三周した。	뜰을 3바퀴 돌았다.	fix	lookup
+dict:jisjk:202443	庭を三周する。	뜰을 3바퀴 돈다.	fix	lookup
+dict:jisjk:202443	庭を一周した。	뜰을 일주했다.	keep	lookup
+dict:jisjk:202443	池を半周した。	연못을 반 바퀴 돌았다.	keep	lookup
