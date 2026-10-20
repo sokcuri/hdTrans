@@ -918,9 +918,11 @@ public:
         }
         const auto* plain = Find(kPlain);
         if (!plain || !Ensure(*plain)) { Fail(); return false; }
-        if (const auto* ruleBodies = Find(kRuleBodies); ruleBodies) {
-            if (!Ensure(*ruleBodies)) { Fail(); return false; }
-            Reader bodies{Raw(*ruleBodies)};
+        // A name of its own: the class has a member of the same name, and a local one
+        // that hides it is a warning MSVC treats as an error.
+        if (const auto* section = Find(kRuleBodies); section) {
+            if (!Ensure(*section)) { Fail(); return false; }
+            Reader bodies{Raw(*section)};
             const auto bodyCount = bodies.Count(1);
             if (bodyCount > (uint64_t{1} << 20)) { Fail(); return false; }
             std::vector<std::string>& out = this->ruleBodies;
