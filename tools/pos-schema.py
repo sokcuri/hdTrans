@@ -90,15 +90,15 @@ def main():
     named = 0
     for code in sorted(codes):
         old = previous.get(code)
-        name = (old or {}).get("name") or edited.get(code) or ""
-        status = "named"
-        if not name:
-            name = CLASS_NAMES.get(code[1:2], "기타")
-            status = "unnamed"
-        else:
+        # Only a row the schema marks named holds a name an editor chose; a row that
+        # still shows its class name is a gap.
+        name = (old or {}).get("name", "") if (old or {}).get("status") == "named" else ""
+        name = name or edited.get(code, "")
+        status = "named" if name else "unnamed"
+        if name:
             named += 1
-        if old and old.get("status") == "named" and status != "named":
-            status = "named"
+        else:
+            name = CLASS_NAMES.get(code[1:2], "기타")
         rows.append({"code": code, "class": code[1:2], "name": name,
                      "standard": ",".join(standard.get(code, [])), "status": status})
 
