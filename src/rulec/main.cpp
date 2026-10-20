@@ -151,7 +151,7 @@ int Verify(const Source& source, const File& file, long long cap) {
 
 int main(int argc, char** argv) {
     if (argc < 3) {
-        std::fprintf(stderr, "usage: hdrulec lint|convert|flat|verify|cpp|tests RULES [options]\n");
+        std::fprintf(stderr, "usage: hdrulec lint|convert|flat|verify|cpp RULES [options]\n");
         return 2;
     }
     const std::string command = argv[1], path = argv[2];
