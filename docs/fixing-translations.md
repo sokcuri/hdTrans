@@ -40,7 +40,7 @@ echo 競走で勝った。 | hdtrans -dicts dicts -why
 ```
 
 `defaults`는 어떤 규칙도 이 단어를 고르지 않아 사전의 기본 후보가 쓰였다는 뜻입니다. 규칙이 골랐으면
-`local 02-part.txt:L1276`처럼 규칙 파일과 번호가 나옵니다(열 설명: [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)).
+`local L1276`처럼 규칙이 나옵니다(열 설명: [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)).
 
 **2. 같은 단어의 다른 후보를 봅니다.**
 
@@ -48,8 +48,8 @@ echo 競走で勝った。 | hdtrans -dicts dicts -why
 grep -P '^で\t' dicts/base.tsv
 ```
 
-`에서` 후보 행의 `rule` 열이 1276이면, 지역 규칙 L1276이 조건이 맞을 때 그 후보를 고릅니다. 규칙 파일에서
-`L 1276`을 찾아 조건을 읽어 보면, 앞 명사가 경기(`VRw`) 뜻일 때만 `에서`를 고르게 되어 있습니다. 그런데
+`에서` 후보 행의 `rule` 열이 1276이면, 지역 규칙 L1276이 조건이 맞을 때 그 후보를 고릅니다. 그 행의
+`ctx` 열이 조건이고, 읽어 보면 앞 명사가 경기(`VRw`) 뜻일 때만 `에서`를 고르게 되어 있습니다. 그런데
 `grep -P '^競走\t' dicts/base.tsv`로 보면 競走에는 그 의미 코드가 없습니다.
 
 **3. 고칩니다.** 규칙을 넓히는 대신 사전 행에 빠진 코드를 넣습니다. `dicts/base.tsv`의 競走 행 `sem` 열에 `VRw`를 적습니다.
@@ -110,9 +110,10 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 
 ## 규칙 고치기
 
-- 규칙은 `src/core/rules/`에 있고, 고르는 단어의 종류별로 파일이 나뉩니다([rule-language.md](rule-language.md#주제-파일)).
-- 규칙 위에 무엇을 언제 고르는지 한 줄로 적습니다. 위 규칙을 지우면 아래 규칙이 대신 동작할 수 있습니다.
-- 새 지역 규칙은 가장 큰 번호 다음 번호를 쓰고, 사전 행의 `rule` 열에 그 번호를 적습니다.
+- 지역 규칙의 본문은 그 규칙을 부르는 사전 행의 `ctx` 열에, 전역 규칙은 `src/core/rules/globals.txt`에 있습니다.
+  `rule` 번호가 같은 행이 여럿이면 `ctx`도 모두 같아야 합니다.
+- 무엇을 언제 고르는지 한 줄로 적습니다(지역 규칙은 `note` 열, 전역 규칙은 위 주석). 앞 규칙을 지우면 뒤 규칙이 대신 동작할 수 있습니다.
+- 새 지역 규칙은 가장 큰 번호 다음 번호를 쓰고, 사전 행의 `rule` 열에 그 번호를, `ctx` 열에 본문을 적습니다.
 - `&&N`, `||N`의 N은 그 묶음 안의 문장 수입니다. 대입(`D+0= "..."`)도 하나로 셉니다.
 - 동사 어간은 `"L溢"`(그것으로 시작)처럼 비교합니다. `"R戦"`는 그것으로 끝남입니다.
 - 규칙 언어 전체: [rule-language.md](rule-language.md), 컴파일러 진단: [rule-compiler.md](rule-compiler.md#사용법)
@@ -129,12 +130,13 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 
 ## 다시 만들기와 테스트
 
-규칙 파일을 고쳤으면 생성 파일 두 개를 다시 만듭니다.
+규칙을 고쳤으면 생성 파일 두 개를 다시 만듭니다. 전역 규칙을 고쳤으면 먼저 빌드합니다.
 
 ```sh
-hdrulec lint src/core/rules -dicts dicts                     # 마지막 줄이 0 error(s)
-hdrulec dump src/core/rules -hash > src/core/rules/program.hash
-hdrulec cpp src/core/rules -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in   # 엔진이 조립한 규칙 프로그램
+hdrulec lint build/rules.txt -dicts dicts                     # 마지막 줄이 0 error(s)
+hdrulec dump build/rules.txt -hash > src/core/rules/program.hash
+hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
 ```
 
 빌드하고 전체 테스트를 돌립니다. 사전을 쓰는 테스트는 `HDTRANS_DICTS`가 있어야 돕니다.
@@ -171,7 +173,7 @@ ctest --preset <preset>
 1. 측정: 모델이 줄마다 맞고 틀림, 틀린 부분, 고칠 말을 적은 판정 파일을 만듭니다(비공개 저장소).
 2. 원인 추적: `tools/attribute.py`가 틀린 부분의 단어를 어느 층, 어느 규칙이 골랐는지 붙입니다.
 3. 분류: 위 [어디를 고칠까](#어디를-고칠까) 표의 갈래로 나눕니다. 받아들일 만한 번역은 뺍니다.
-4. 고치기: 갈래나 규칙 파일별로 브랜치를 나눠 동시에 고칩니다. 각자 자기 파일과 자기 규칙의 테스트만 고칩니다.
+4. 고치기: 갈래별로 브랜치를 나눠 동시에 고칩니다. 각자 자기 행과 자기 규칙의 테스트만 고칩니다.
 5. 확인: 묶음마다 테스트와 판정을 한 번씩 합니다.
 6. 합치기: 하나씩 합치며 생성 파일을 다시 만들고 테스트합니다. 다 합친 결과도 한 번 판정합니다.
 7. 되돌린 수정은 원인별로 모아 다음 바퀴에 먼저 고칩니다. 코드 누락, 규칙이 보는 범위가 좁음, 뒤 단계가 앞 결정을 덮음이 흔합니다.

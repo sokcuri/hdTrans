@@ -141,16 +141,23 @@ TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파�
 
 ### 열 파일
 
-탭으로 구분하며 따옴표나 이스케이프는 없습니다. 첫 줄(머리줄, 주석 제외)은 열 이름입니다.
+탭으로 구분하며 따옴표나 이스케이프는 없습니다. 첫 줄(머리줄, 주석 제외)은 열 이름이고, 열은 이름으로 찾으므로
+순서는 자유입니다. `dicts/`의 열 파일은 다음 순서이고, `base.tsv`와 `lexical-benefactive.tsv`는
+`key ko pos sem gram dict rule ctx note id raw prio` 순서입니다.
 
 ```
-key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ```
 
 - 필수 열: `key`(일본어), `ko`(한국어), `pos`(품사 코드, 예: `N110`), `id`
-- 선택 열: `sem`(의미 코드), `gram`(문법 코드), `dict`(사전 코드), `rule`, `flags`, `prio`, `reading`.
-  그 밖의 열은 무시합니다.
+- 선택 열: `sem`(의미 코드), `gram`(문법 코드), `dict`(사전 코드), `rule`, `ctx`, `flags`, `prio`, `reading`.
+  그 밖의 열은 무시합니다. 같은 이름의 열이 둘이면 오류입니다.
 - 행의 필드가 머리글보다 적으면 나머지는 빈 값이고, 많으면 오류입니다. `rule`과 `prio`는 10진수입니다.
+- `rule`: 이 행의 후보를 고를 때 실행하는 지역 규칙의 번호([rule-language.md](rule-language.md#지역-규칙l-사전-rule-열))
+- `ctx`: 그 지역 규칙의 본문(`||1 &&3 S+1== "あそば" …`). 엔진이 `ctx` 열과 전역 규칙으로 규칙 프로그램을 조립합니다.
+  `rule` 없는 본문, 해석되지 않는 본문, 같은 번호의 다른 본문은 `파일:줄`과 함께 불러오기를 실패시킵니다.
+- `note`: 그 규칙의 설명. 읽지 않습니다.
+- `raw`: 원본 사전 레코드(16진수). 읽지 않습니다.
 - `flags`: 공백으로 구분한 `xxx`, `kana`, `hidden`, `replace`, `llm`(효과 없음)
 
 ## 사용자 사전

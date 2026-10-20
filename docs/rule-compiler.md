@@ -1,41 +1,41 @@
 # 규칙 컴파일러 hdrulec
 
-`src/rulec/`의 `hdrulec`는 단어 선택 규칙(`src/core/rules/*.txt`, [rule-language.md](rule-language.md))을 읽어 진단하고,
-읽기 쉬운 문법으로 바꾸고, C++ 코드와 규칙 테스트를 만드는 빌드 호스트 도구입니다. 규칙은 계속 데이터입니다.
+`src/rulec/`의 `hdrulec`는 단어 선택 규칙([rule-language.md](rule-language.md))을 읽어 진단하고,
+읽기 쉬운 문법으로 바꾸고, C++ 코드를 만드는 빌드 호스트 도구입니다. 지역 규칙은 사전 행의 `ctx` 열에 있으므로
+`hdtrans --dump-rules FILE`이 엔진이 조립한 프로그램을 쓰고, `hdrulec`는 그 파일을 읽습니다. 규칙은 계속 데이터입니다.
 도구가 읽고 쓰고 세고(학습 규칙도) 고칠 수 있어야 하고, 엔진은 같은 데이터를 인터프리터로도 돌릴 수 있습니다.
 
 ```sh
-hdrulec lint src/core/rules -dicts dicts [-tsv]     # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
-hdrulec convert src/core/rules -o rules.hdr          # 읽기 쉬운 문법으로 (설명 주석 포함)
-hdrulec flat rules.hdr -o rules.txt                  # 되돌리기
-hdrulec verify src/core/rules [-paths N]             # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
-hdrulec dump src/core/rules [-hash]                  # 불러온 프로그램을 실행 순서로 (rules.identity)
-hdrulec cpp src/core/rules -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in   # 조립한 프로그램 (rules.dump)
+hdrulec lint build/rules.txt -dicts dicts [-tsv]   # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
+hdrulec convert build/rules.txt -o build/rules.hdr # 읽기 쉬운 문법으로 (설명 주석 포함)
+hdrulec flat build/rules.hdr -o build/rules.txt    # 되돌리기
+hdrulec verify build/rules.txt [-paths N]          # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
+hdrulec dump build/rules.txt [-hash]               # 불러온 프로그램을 실행 순서로 (rules.identity)
+hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
 ```
 
 ## 사용법
 
-규칙을 고칠 때 쓰는 명령입니다. 저장소 루트에서 `build/mac/hdrulec`로 돌립니다.
+규칙을 고칠 때 쓰는 명령입니다. 저장소 루트에서 `build/mac/hdrulec`로 돌리고, `build/rules.txt`는 먼저
+`build/mac/hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in`으로 씁니다.
 
 | 언제 | 명령 | 같은 것을 보는 ctest |
 |---|---|---|
-| 고친 직후 | `hdrulec lint src/core/rules -dicts dicts 2>&1 \| tail -1` | `rules.lint` |
-| 동작을 바꿨을 때 | `hdrulec dump src/core/rules -hash > src/core/rules/program.hash` | `rules.identity` |
-| 늘 | `hdrulec cpp src/core/rules -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
-| 큰 변환 뒤 | `hdrulec verify src/core/rules -paths 4096` | `rules.verify` |
+| 고친 직후 | `hdrulec lint build/rules.txt -dicts dicts 2>&1 \| tail -1` | `rules.lint` |
+| 동작을 바꿨을 때 | `hdrulec dump build/rules.txt -hash > src/core/rules/program.hash` | `rules.identity` |
+| 늘 | `hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
+| 큰 변환 뒤 | `hdrulec verify build/rules.txt -paths 4096` | `rules.verify` |
 
 해시는 주석을 보지 않습니다. 동작을 바꿀 생각이
-없었는데 `rules.identity`가 깨지면 `hdrulec dump src/core/rules` 출력을 이전 커밋과 비교합니다.
+없었는데 `rules.identity`가 깨지면 `hdrulec dump build/rules.txt` 출력을 이전 커밋과 비교합니다.
 
 | 진단 | 고치기 |
 |---|---|
 | `trailing tokens after the rule body` | `&&N`, `\|\|N`의 N이 문장 수보다 작음. 대입도 하나로 셈 |
 | `[-Wlone-test]` | 옛 규칙에 많음. 고친 규칙에서 새로 났으면 N을 확인 |
-| `is not the code of src/core/rules` | `cpp` 명령으로 다시 만듦 |
+| `is not the code of …` | `cpp` 명령으로 다시 만듦 |
 | `rules::Load rejects the program at line N` | 그 줄의 따옴표, 연산자 |
-
-규칙을 파일 사이에서 옮기는 것은 `tools/rules-reorg/`가 합니다(`classify.py`가 파일을 정하고 `generate.py`가 다시 씀,
-동작은 그대로). 예전 배치에서 고친 파일은 `python3 tools/rules-reorg/generate.py . -map tools/rules-reorg/map.tsv`로 옮깁니다.
 
 ## 제약
 
@@ -117,7 +117,6 @@ local 3
 파일들 ──ReadRuleDir──> Source(파일별 위치) ──ParseFlat / ParseReadable──> AST(File, Rule, Expr)
    ──Normalize──> 검사(Check) ──> 진단
    ──Lower──> rules::Program(노드 배열, 인터프리터)     ──EmitCpp──> 규칙마다 C++ 함수
-                                                        ──EmitTests──> 규칙 테스트
 ```
 
 - **어휘, 구문**: 두 문법 모두 손으로 쓴 재귀 하강 파서입니다(`flat.cpp`, `syntax.cpp`). 옛 형식은 레코드가 한 줄이므로
@@ -169,7 +168,7 @@ local 3
 
 결정: **데이터와 인터프리터가 기준**입니다. 생성 코드는 속도가 아니라 *규칙마다 이름 있는 함수*(`RuleL3`,
 `RuleG210`)가 필요해서 둡니다. 디버거에서 규칙 하나에 중단점을 걸 수 있고, 손으로 쓴 C++ 조건(아래)을 같은 자리에
-넣을 수 있습니다. 생성 코드는 그 레코드 줄의 해시가 맞을 때만 쓰이므로(`compiled.h`의 `RecordHash`), 규칙 파일을
+넣을 수 있습니다. 생성 코드는 그 레코드 줄의 해시가 맞을 때만 쓰이므로(`compiled.h`의 `RecordHash`), 규칙을
 고치고 다시 생성하지 않아도 그 규칙만 인터프리터로 돌고 결과는 같습니다. 크기가 중요한 빌드(WebAssembly)는
 `HDTRANS_INTERPRET_RULES=ON`으로 끌 수 있습니다.
 
@@ -193,9 +192,9 @@ bool RuleL3([[maybe_unused]] Item* p) {
 
 | 단계 | 네이티브(macOS, Linux, Windows x86/x64) | 크로스(WebAssembly) |
 |---|---|---|
-| 규칙 텍스트 → 라이브러리 | `cmake/builtin_tables.cmake`(CMake 스크립트) | 같음 |
+| 전역 규칙 텍스트 → 라이브러리 | `cmake/builtin_tables.cmake`(CMake 스크립트) | 같음 |
 | 생성 코드 `compiled_gen.cpp` | 커밋된 파일을 컴파일, ctest `rules.generated`가 다시 만들어 비교 | 커밋된 파일 |
-| 검사 | ctest `rules.lint`(오류만 실패), `rules.verify`, `rules.identity` | 없음 |
+| 검사 | ctest `rules.dump`가 쓴 프로그램에 `rules.lint`(오류만 실패), `rules.verify`, `rules.identity` | 없음 |
 
 `hdrulec`는 라이브러리에 링크하지 않고 규칙, 코드 소스(`load.cpp`, `eval.cpp`, `match.cpp`, `codes.cpp` …)만으로
 빌드합니다. 그래서 생성 코드가 깨져도 생성기는 빌드됩니다. Windows의 x86 빌드도 x64 호스트에서 그대로 돌릴 수 있지만,
@@ -222,7 +221,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 - **테스트**: `tests/rules/cases/`의 행이 규칙 하나를 이름합니다. `rule` 열에 그 규칙을 이름한 사전 행의 id를 적고,
   번역 전체는 `expected`에, 그 규칙이 고른 번역은 `rule:dict:<id>=<번역>`에, 규칙이 손대지 않아야 하는 줄은
   `!rule:dict:<id>`에 적습니다. 실패는 케이스 행과 기대값, 실제값을 보입니다([rule-language.md](rule-language.md#규칙-테스트)).
-- **디버깅**: 생성 코드의 함수 `RuleL3`에 중단점을 겁니다. `-why`는 결정한 층과 `파일:규칙`을 적습니다([pipeline-layers.md](pipeline-layers.md)).
+- **디버깅**: 생성 코드의 함수 `RuleL3`에 중단점을 겁니다. `-why`는 결정한 층과 규칙(`L3`, `globals.txt:G10`)을 적습니다([pipeline-layers.md](pipeline-layers.md)).
 - **손으로 쓴 조건(설계만)**: 문법으로 쓰기 어려운 드문 경우를 위해 원자 `call 이름[위치]`를 둡니다(옛 형식
   `N+1== "이름"`). 이름은 `src/core/word/` 안의 표(`이름 → bool (*)(const Item&)`)에서 찾고, 없는 이름은 `hdrulec`와
   `rules::Load`가 모두 오류로 냅니다. 인터프리터는 표로, 생성 코드는 그 함수를 바로 부릅니다. 순수 함수(검사만)여야
@@ -230,9 +229,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 
 ## 층과 하나의 규칙 언어
 
-실행 층의 순서는 [pipeline-layers.md](pipeline-layers.md)에 있고, 이번 단계에서는 바꾸지 않았습니다. 지역 규칙은 번호로,
-전역 규칙은 PRIO로 순서가 정해지므로 주제 파일로 나누는 것은 동작과 무관합니다(`rules.identity`). 나누는 기준은
-[rule-language.md](rule-language.md#주제-파일)에 있습니다.
+실행 층의 순서는 [pipeline-layers.md](pipeline-layers.md)에 있고, 이번 단계에서는 바꾸지 않았습니다.
 
 나중에 다른 규칙 층도 같은 언어로 옮길 수 있습니다. 조건(창 안의 필드 검사)은 같고, 층마다 *의미*와 *동작*만 다릅니다.
 
@@ -249,7 +246,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 
 ## 상태
 
-- 된 것: 두 문법의 파서와 출력기, 검사 21종, 변환기, 덤프, 해시, L 0–499와 전역 36개의 생성 코드(커밋),
-  규칙 테스트, 주제 파일, PRIO, `-why`의 층, 규칙 열, ctest `rules.lint`, `rules.verify`, `rules.identity`, `rules.generated`.
+- 된 것: 두 문법의 파서와 출력기, 검사 21종, 변환기, 덤프, 해시, L 0–499와 전역 38개의 생성 코드(커밋),
+  규칙 테스트, PRIO, `-why`의 층, 규칙 열, ctest `rules.lint`, `rules.verify`, `rules.identity`, `rules.generated`.
 - 남은 것: 나머지 규칙의 생성 코드(측정은 끝남), Windows MSVC x86에서 생성 코드 빌드 확인(CI), 읽기 쉬운 문법을
   원본으로 바꾸기(그때는 `.txt`를 생성물로), `call` 원자, 다른 층의 이전.
