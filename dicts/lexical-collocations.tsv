@@ -1,8 +1,8 @@
 #! layer=base
 # 표정과 장치 배치의 고정 결합
-key	ko	pos	sem	gram	dict	rule	flags	prio	reading	id
-ぶすっとした顔	뾰로통한 얼굴	N110			GN					collocation:1
-ぶすっとした表情	뾰로통한 표정	N110			GN					collocation:2
-盗聴器	도청기	N110	VPe	Oi	GN					collocation:4
-カメラ	카메라	N110	VPeUAr	Oi	GN					collocation:5
-爆弾	폭탄	N110	VTw	Il	GN					collocation:6
+key	ko	pos	sem	gram	dict	rule	ctx	flags	prio	reading	id
+ぶすっとした顔	뾰로통한 얼굴	N110			GN						collocation:1
+ぶすっとした表情	뾰로통한 표정	N110			GN						collocation:2
+盗聴器	도청기	N110	VPe	Oi	GN						collocation:4
+カメラ	카메라	N110	VPeUAr	Oi	GN						collocation:5
+爆弾	폭탄	N110	VTw	Il	GN						collocation:6
