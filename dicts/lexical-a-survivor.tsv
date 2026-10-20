@@ -1,5 +1,5 @@
 #! layer=words
 # 복합 명사와 인사 표현
-key	ko	pos	sem	gram	dict	rule	ctx	flags	prio	reading	id
-BB弾	BB탄	N110			GN			xxx replace	1		lexa:bb-pellets
-のど元	목	I110	VPl		GN			xxx replace	1		lexa:throat-base
+key	ko	pos	sem	gram	dict	rule	ctx	ctx	flags	prio	reading	id
+BB弾	BB탄	N110			GN				xxx replace	1		lexa:bb-pellets
+のど元	목	I110	VPl		GN				xxx replace	1		lexa:throat-base
