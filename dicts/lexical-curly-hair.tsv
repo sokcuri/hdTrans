@@ -1,0 +1,4 @@
+#! layer=words
+# 곱슬머리의 다른 표기
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+くせっ毛	곱슬 머리	N110	VBp		GN							curly-hair:1
