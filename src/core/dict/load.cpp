@@ -301,23 +301,26 @@ struct RuleBodyTable {
 };
 
 // Parses the column file f into layer, interning its codes in codes; adds the indexes
-// of its rows with the flag replace to replacing. false on an error other than unknown
-// pos: a file with malformed lines fails the load, and its unknown pos lines are not
-// listed.
+// of its rows with the flag replace to replacing. false on an error that FailsLoad: a
+// file with malformed lines fails the load, and its unknown pos and marker class lines
+// are not listed.
 bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, internal::Layer& layer,
                     std::vector<uint32_t>* replacing, std::vector<LoadError>& errors) {
     layer.Rows().reserve(layer.Rows().size() + static_cast<std::size_t>(std::count(f.text.begin(), f.text.end(), '\n')) + 1);
     CodeReader reader(codes);
     TsvReader rows(f.text);
     SenseReader senses(rows);
-    std::vector<LoadError> unknown;
+    std::vector<LoadError> notices;
     bool bodyFailed = false;
     Sense s;
     while (senses.Next(s)) {
         int32_t code;
         if (!reader.Code(s, code)) {
-            unknown.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
+            notices.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
             continue;
+        }
+        if (std::string why = MarkerClassError(s.ko, codes.At(code)->part); !why.empty()) {
+            notices.push_back({f.name, LoadErrorKind::MarkerClass, rows.Line(), TsvErrorKind::Read, std::move(why)});
         }
 
         if (!s.ctx.empty() && s.rule <= 0) {
@@ -334,7 +337,7 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
         }
     }
     if (senses.Errors().empty()) {
-        errors.insert(errors.end(), unknown.begin(), unknown.end());
+        errors.insert(errors.end(), notices.begin(), notices.end());
         return !bodyFailed;
     }
     for (const TsvError& e : senses.Errors()) {

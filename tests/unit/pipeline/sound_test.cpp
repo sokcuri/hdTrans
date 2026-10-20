@@ -87,7 +87,9 @@ HD_TEST(pipeline_casual_danger_boundaries) {
                           "しな\t하지 $DH@\tH7N0\t2\n";
         if (c.tag[0] != '\0') tsv += "危な\t위험$AB@\t" + std::string(c.tag) + "\t3\n";
         const auto loaded = dict::Load({{0, "base.tsv", tsv}});
-        HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+        // The N110 and M100 lines are listed for their marker family and still load.
+        HD_REQUIRE(loaded.snapshot != nullptr);
+        for (const dict::LoadError& e : loaded.errors) HD_REQUIRE(e.kind == dict::LoadErrorKind::MarkerClass);
         LineContext ctx;
         ctx.lookup.plain = &loaded.snapshot->TextPlain();
         HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *loaded.snapshot), std::string(c.want));

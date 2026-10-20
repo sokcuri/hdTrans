@@ -65,4 +65,31 @@ bool PosCodes(std::string_view pos, std::string_view& partText, std::string_view
     return true;
 }
 
+std::string_view PartNameOf(std::string_view code) {
+    const auto schema = internal::PartSchema();
+    const auto it = std::lower_bound(schema.begin(), schema.end(), code,
+                                     [](const internal::PartName& p, std::string_view key) {
+                                         return std::string_view(p.code) < key;
+                                     });
+    if (it != schema.end() && it->code == code) return it->name;
+    return {};
+}
+
+std::string MarkerClassError(std::string_view target, PartCode part) {
+    const std::size_t n = target.size();
+    if (n < 4 || target[n - 1] != '@') return {};
+    const char marker = target[n - 4];
+    WordClass want;
+    std::string_view name;
+    switch (marker) {
+    case '&': want = WordClass::Verb; name = "4 (verb)"; break;
+    case '$': want = WordClass::Adjective; name = "7 (adjective)"; break;
+    case '%': want = WordClass::AdjectivalNoun; name = "8 (adjectival noun)"; break;
+    default: return {};
+    }
+    if (part.Class() == want) return {};
+    return "the marker family " + std::string(target.substr(n - 4)) + " conjugates class " + std::string(name) +
+           " stems, not the part code " + std::string(part.Text());
+}
+
 }  // namespace hdTrans::dict

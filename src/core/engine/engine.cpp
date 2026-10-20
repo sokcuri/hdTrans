@@ -134,7 +134,7 @@ struct Access {
             w.watch.failed = version;
             w.watch.hasFailed = true;
             for (dict::LoadError& error : r.errors) {
-                if (error.kind != dict::LoadErrorKind::UnknownPos) w.errors.push_back(std::move(error));
+                if (dict::FailsLoad(error.kind)) w.errors.push_back(std::move(error));
             }
             return false;
         }
@@ -162,12 +162,12 @@ struct Access {
             const auto count = files.size();
             std::erase_if(files, [&result](const std::string& path) {
                 return std::any_of(result.errors.begin(), result.errors.end(), [&path](const dict::LoadError& error) {
-                    return error.file == path && error.kind != dict::LoadErrorKind::UnknownPos;
+                    return error.file == path && dict::FailsLoad(error.kind);
                 });
             });
             if (files.size() == count) return result;
             for (auto& error : result.errors) {
-                if (error.kind != dict::LoadErrorKind::UnknownPos &&
+                if (dict::FailsLoad(error.kind) &&
                     std::find(attempted.begin(), attempted.end(), error.file) != attempted.end() &&
                     std::find(files.begin(), files.end(), error.file) == files.end()) {
                     userErrors.push_back(std::move(error));

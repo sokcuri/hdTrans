@@ -99,9 +99,16 @@ enum class LoadErrorKind : uint8_t {
     Read,        // the file cannot be read
     Tsv,         // a malformed line or header of a column file (tsv says which)
     UnknownPos,  // a line skipped for a pos that is neither a part code nor a known tag
+    MarkerClass, // a line loaded whose marker family does not fit its part code (MarkerClassError)
     Plain,       // a line of a plain dictionary or sense table that does not compile
     Header,      // a "#!" first line that is not a header or a layer the file cannot have
 };
+
+// Whether an error of kind fails the load of its file; the other kinds list lines of a
+// load that takes place.
+constexpr bool FailsLoad(LoadErrorKind kind) {
+    return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass;
+}
 
 struct LoadError {
     std::string file;

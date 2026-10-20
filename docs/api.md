@@ -90,7 +90,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--each` | 줄마다 새 세션 |
 | `--raw` | 줄마다 단어 파이프라인만으로 번역 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
-| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사 |
+| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사. 표지 문자가 품사 코드의 부류와 맞지 않는 사전 줄이 있으면 나열하고 실패 ([rule-language.md](rule-language.md#번역-안의-표지-d-y)) |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
 | `--compile-snapshot FILE` | 기본 사전 전체를 FILE(`.hdsnap`)에 컴파일하고 종료. FILE을 출력 |
 | `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |

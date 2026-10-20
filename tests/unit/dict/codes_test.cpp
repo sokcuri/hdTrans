@@ -15,6 +15,7 @@ using hdTrans::dict::Codes;
 using hdTrans::dict::CodeTable;
 using hdTrans::dict::DictCode;
 using hdTrans::dict::GramCodes;
+using hdTrans::dict::MarkerClassError;
 using hdTrans::dict::PartCode;
 using hdTrans::dict::PosCodes;
 using hdTrans::dict::SemCodes;
@@ -193,6 +194,27 @@ HD_TEST(PosTags) {
     HD_CHECK_EQ(Pos("foo-bar"), "unknown");
     HD_CHECK_EQ(Pos("n110"), "unknown");
     HD_CHECK_EQ(Pos("N1,10"), "unknown");
+}
+
+HD_TEST(MarkerClassErrors) {
+    struct Case {
+        std::string_view target, part, error;
+    };
+    const Case cases[] = {
+        {"마음에 걸&AA@", "M428", ""},
+        {"노골적%D4@", "G8U0", ""},
+        {"높$D3@", "H7U0", ""},
+        {"학생", "N110", ""},
+        {"@", "N110", ""},
+        {"마침 $FB@", "M420", "the marker family $FB@ conjugates class 7 (adjective) stems, not the part code M420"},
+        {"끝이 $FA@", "K110", "the marker family $FA@ conjugates class 7 (adjective) stems, not the part code K110"},
+        {"천&AV@", "N110", "the marker family &AV@ conjugates class 4 (verb) stems, not the part code N110"},
+        {"부족&Mf@", "H7U0", "the marker family &Mf@ conjugates class 4 (verb) stems, not the part code H7U0"},
+        {"새%CC@", "H7N0", "the marker family %CC@ conjugates class 8 (adjectival noun) stems, not the part code H7N0"},
+        {"아주 기$A5@", "H8U0", "the marker family $A5@ conjugates class 7 (adjective) stems, not the part code H8U0"},
+        {"&AA@", "", "the marker family &AA@ conjugates class 4 (verb) stems, not the part code "},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(MarkerClassError(c.target, PartCode(c.part)), std::string(c.error));
 }
 
 HD_TEST(CodeTablePrefixTupleIdentity) {

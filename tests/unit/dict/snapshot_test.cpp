@@ -233,6 +233,32 @@ HD_TEST(SnapshotFileErrors) {
     HD_CHECK_EQ(r.snapshot->PlainFiles().size(), size_t{1});
 }
 
+HD_TEST(SnapshotMarkerClassLines) {
+    // Lines whose marker family does not fit the part code are listed; the load takes
+    // place with them.
+    const LoadResult r = LoadFoldersTsv({SourceDir() + "/testdata/marker_class"});
+    HD_REQUIRE(r.snapshot != nullptr);
+    struct Want {
+        int line;
+        std::string_view message;
+    };
+    const Want want[] = {
+        {6, "the marker family $FA@ conjugates class 7 (adjective) stems, not the part code K110"},
+        {7, "the marker family &AV@ conjugates class 4 (verb) stems, not the part code N110"},
+        {8, "the marker family &A5@ conjugates class 4 (verb) stems, not the part code H7U0"},
+    };
+    HD_REQUIRE(r.errors.size() == std::size(want));
+    for (std::size_t i = 0; i < std::size(want); i++) {
+        HD_CHECK(r.errors[i].kind == LoadErrorKind::MarkerClass);
+        HD_CHECK(!FailsLoad(r.errors[i].kind));
+        HD_CHECK(r.errors[i].file.ends_with("base.tsv"));
+        HD_CHECK_EQ(r.errors[i].line, want[i].line);
+        HD_CHECK_EQ(r.errors[i].message, std::string(want[i].message));
+    }
+    HD_CHECK_EQ(Targets(r.snapshot->Base().Records("下卑")), "천&AV@");
+    HD_CHECK_EQ(Targets(r.snapshot->Base().Records("あけすけ")), "노골적%D4@");
+}
+
 HD_TEST(SnapshotKeysAndUserDictionary) {
     std::vector<File> files;
     files.push_back(MakeFile("base.tsv", "\xEF\xBB\xBF# comment\n" + kHeader +

@@ -460,6 +460,21 @@ int RunMain(int argc, char** argv) {
                      error.c_str());
         if (single) return 1;
     }
+    const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
+    if (verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1")) {
+        // Verification also fails on loaded lines whose marker family does not fit their part code.
+        const auto checked = hdTrans::dict::LoadFolders(folders, {}, true, false, hdTrans::dict::UserFiles(userPaths));
+        std::size_t failed = 0;
+        for (const hdTrans::dict::LoadError& e : checked.errors) {
+            if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass) continue;
+            std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
+            failed++;
+        }
+        if (failed > 0) {
+            std::fprintf(stderr, "hdtrans: %zu dictionary lines fail verification\n", failed);
+            return 1;
+        }
+    }
     const std::string ehnd = ehndArg ? *ehndArg : config.settings.useEhnd ? hdTrans::dict::EhndFolder(programDir) : "";
     if (!ehnd.empty() && !engine.OpenEhnd(ehnd)) {
         std::fprintf(stderr, "hdtrans: cannot read the Ehnd folder %s\n", ehnd.c_str());

@@ -1007,6 +1007,24 @@ HD_TEST(SnapshotWarmPlainColumnMembershipChanges) {
     }
 }
 
+HD_TEST(SnapshotCachedMarkerClassLines) {
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    const auto dicts = temp.path / "dicts";
+    std::error_code ec;
+    HD_REQUIRE(std::filesystem::create_directory(dicts, ec) && !ec);
+    const auto cache = temp.File("cache");
+    const std::vector<std::string> folders{temp.File("dicts")};
+    HD_REQUIRE(WriteText(dicts / "base.tsv", "key\tko\tpos\tid\n行\t가&AA@\tM428\t1\n下卑\t천&AV@\tN110\t2\n"));
+    HD_REQUIRE(hdTrans::dict::LoadFolders(folders, cache).snapshot != nullptr);
+    const auto cached = hdTrans::dict::LoadFolders(folders, cache, true);
+    HD_REQUIRE(cached.snapshot != nullptr && cached.snapshot->Mapped());
+    CheckLoadErrors(cached.errors, hdTrans::dict::LoadFoldersTsv(folders).errors);
+    HD_REQUIRE(cached.errors.size() == 1);
+    HD_CHECK(cached.errors[0].kind == hdTrans::dict::LoadErrorKind::MarkerClass);
+    HD_CHECK_EQ(cached.errors[0].line, 3);
+}
+
 HD_TEST(SnapshotWarmPlainErrorsKeepOrder) {
     CacheTestEnvironment environment;
     TempFolder temp;
