@@ -1,0 +1,31 @@
+rule	input	expected	kind	layer
+dict:face-collocation	彼はぶすっとした顔で答えた。	그는 뾰로통한 얼굴로 대답했다.	fix	lookup
+dict:face-collocation	少女はぶすっとした顔をしなかった。	소녀는 뾰로통한 얼굴을 하지 않았다.	fix	lookup
+dict:face-collocation	昨日はぶすっとした顔だった。	어제는 뾰로통한 얼굴이었다.	fix	lookup
+dict:face-collocation	彼女はぶすっとした表情で立っていた。	그녀는 뾰로통한 표정으로 서 있었다.	fix	lookup
+dict:face-collocation	針をぶすっと刺した。	바늘을 푹 찔렀다.	keep	lookup
+dict:face-collocation	ぶすっと針を刺さないで。	푹 바늘을 찌르지 마.	keep	lookup
+dict:face-collocation	彼は笑顔で答えた。	그는 웃는 얼굴로 대답했다.	keep	lookup
+sense:device-implant	部屋に盗聴器を仕込む。	방에 도청기를 설치한다.	fix	senses
+sense:device-implant	盗聴器を仕込めなかった。	도청기를 설치할 수 없었다.	fix	senses
+sense:device-implant	鞄にカメラを仕込んでいる。	가방에 카메라를 설치하고 있다.	fix	senses
+sense:device-implant	カメラを仕込むな。	카메라를 설치하지 말아라.	fix	senses
+sense:device-implant	爆弾に仕込んだ装置が動いた。	폭탄에 넣은 장치가 움직였다.	fix	senses
+sense:device-implant	爆弾に仕込まれた装置を調べる。	폭탄에 넣어진 장치를 조사한다.	fix	senses
+sense:device-implant	弟子に礼儀を仕込んだ。	제자에게 예의를 가르쳤다.	keep	senses
+sense:device-implant	犬に芸を仕込む。	개에게 재주를 가르친다.	keep	senses
+sense:device-implant	弟子にカメラの使い方を仕込んだ。	제자에게 카메라의 사용법을 가르쳤다.	keep	senses
+sense:device-implant	発信機の作り方を弟子に仕込んだ。	발신기를 만드는 방법을 제자에게 가르쳤다.	keep	senses
+sense:device-implant	部屋にカメラがある。	방에 카메라가 있다.	keep	senses
+sense:device-implant	カメラで弟子に技を仕込んだ。	카메라로 제자에게 기술을 가르쳤다.	keep	senses
+sense:device-implant	私のカメラを仕込まなかった。	나의 카메라를 설치하지 않았다.	fix	senses
+sense:device-implant	敵の爆弾に仕込んだ装置を調べた。	적의 폭탄에 넣은 장치를 조사했다.	fix	senses
+sense:device-implant	カメラで弟子を仕込んだ。	카메라로 제자를 가르쳤다.	keep	senses
+sense:device-implant	カメラに操作方法を仕込んだ。	카메라에 조작 방법을 가르쳤다.	keep	senses
+sense:device-implant	爆弾の作り方を教えた。	폭탄을 만드는 방법을 가르쳤다.	keep	senses
+sense:device-implant	発信機の作り方を仕込んだ。	발신기를 만드는 방법을 가르쳤다.	keep	senses
+sense:device-implant	爆弾で部屋を壊した。	폭탄으로 방을 부수었다.	keep	senses
+dict:face-collocation	彼のぶすっとした顔を見た。	그의 뾰로통한 얼굴을 보았다.	fix	lookup
+dict:transmitter-boundary	発信機能を確認する。	발신 기능을 확인한다.	keep	lookup
+dict:transmitter-boundary	発信機能がない。	발신 기능이 없다.	keep	lookup
+dict:transmitter-boundary	発信機を確認する。	발신기를 확인한다.	keep	lookup

@@ -115,6 +115,9 @@ HD_TEST(rules_attribute_operators) {
         bool want;
     };
     const Case cases[] = {
+        {AttrChunksIn, "UQf", "UAqUQF", false}, {AttrChunksIn, "UQf", "UAqUQf", true},
+        {AttrChunksIn, "UAq", "UAqUQF", true},  {AttrChunksIn, "UAq", "UAqUQf", true},
+        {AttrChunksIn, "QCT", "UAqUQf", false}, {AttrChunksIn, "UQF", "UAqUQf", false},
         {AttrChunksIn, "UDrQPN", "VHnQPN", true}, {AttrChunksIn, "UDrQPN", "VHnQCT", false},
         {AttrChunksIn, "UDrQPN", "rQP", true},    {MinAttrValues, "UDrQPN", "VHn", true},
         {MinAttrValues, "UDrQPN", "QCT", false},  {MinAttrValues, "VPl", "QCT", true},

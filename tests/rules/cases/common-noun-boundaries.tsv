@@ -1,0 +1,36 @@
+rule	input	expected	kind	layer
+dict:common-nouns	私はあがり症だ。	나는 무대 공포증이다.	fix	lookup
+dict:common-nouns	あがり症ではない。	무대 공포증이 아니다.	fix	lookup
+dict:common-nouns	値段が上がる。	가격이 오른다.	keep	lookup
+dict:common-nouns	雨上がりの空。	비가 갠 뒤의 하늘.	keep	lookup
+dict:common-nouns	三つ編みの髪。	세 가닥 땋기의 머리카락.	fix	lookup
+dict:common-nouns	三つ編みをほどく。	세 가닥 땋기를 푼다.	fix	lookup
+dict:common-nouns	三つの箱。	세 개의 상자.	keep	lookup
+dict:common-nouns	編み物をする。	뜨개질을 한다.	keep	lookup
+dict:common-nouns	バラにはトゲがある。	장미에는 가시가 있다.	fix	lookup
+dict:common-nouns	言葉にトゲがある。	말에 가시가 있다.	fix	lookup
+dict:common-nouns	トゲを抜く。	가시를 뽑는다.	fix	lookup
+dict:common-nouns	刺のある言葉。	가시 돋친 말.	keep	lookup
+dict:common-nouns	トゲウオを観察する。	큰가시고기를 관찰한다.	keep	lookup
+dict:common-nouns	早押しクイズ。	빠른 버튼 누르기 퀴즈.	fix	lookup
+dict:common-nouns	早押しで勝った。	빠른 버튼 누르기로 이겼다.	fix	lookup
+dict:common-nouns	早起きした。	일찍 일어났다.	keep	lookup
+dict:common-nouns	押し花を作る。	눌러 말린 꽃을 만든다.	keep	lookup
+dict:common-nouns	ボタンを押した。	버튼을 눌렀다.	keep	lookup
+dict:common-nouns	部室で会う。	동아리방에서 만난다.	fix	lookup
+dict:common-nouns	部室へ行く。	동아리방에 간다.	fix	lookup
+dict:common-nouns	部屋で待つ。	방에서 기다린다.	keep	lookup
+dict:common-nouns	部活に行く。	동아리에 간다.	keep	lookup
+dict:common-nouns	ハンバーグを食べる。	함박스테이크를 먹는다.	fix	lookup
+dict:common-nouns	ハンバーグはない。	함박스테이크는 없다.	fix	lookup
+dict:common-nouns	ハンバーガーを食べる。	햄버거를 먹는다.	keep	lookup
+dict:common-nouns	チーズバーガー。	치즈버거.	keep	lookup
+dict:common-nouns	舞台袖に下がる。	무대 옆에 내려간다.	fix	lookup
+dict:common-nouns	舞台袖で待つ。	무대 옆에서 기다린다.	fix	lookup
+dict:common-nouns	舞台袖の照明。	무대 옆의 조명.	fix	lookup
+dict:common-nouns	舞台に上がる。	무대에 오른다.	keep	lookup
+dict:common-nouns	着物の袖を引く。	기모노의 소매를 당긴다.	keep	lookup
+dict:common-nouns	袖口が汚れた。	소맷부리가 더러워졌다.	keep	lookup
+dict:common-nouns	三つ編みの革紐。	세 가닥 땋기의 가죽 끈.	fix	lookup
+dict:common-nouns	幹部室で待つ。	간부실에서 기다린다.	keep	lookup
+dict:common-nouns	部室ではない。	동아리방이 아니다.	fix	lookup

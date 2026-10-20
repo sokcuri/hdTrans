@@ -63,6 +63,15 @@ HD_TEST(verb_analyse_tail) {
     }
 }
 
+HD_TEST(verb_contracted_suru_conditional) {
+    for (const std::string_view tail : {"すりゃ", "すりゃ分かる", "すれば", "すれば分かる"}) {
+        int branch = -1, length = -1;
+        HD_CHECK(word::AnalyseVerbTail("する", '9', tail, branch, length));
+        HD_CHECK_EQ(branch, 3);
+        HD_CHECK_EQ(length, 9);
+    }
+}
+
 HD_TEST(verb_bare_command_boundaries) {
     struct Row {
         std::string_view key;
