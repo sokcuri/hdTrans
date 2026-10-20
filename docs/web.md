@@ -21,7 +21,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 - 사용자 사전 표와 이름 표를 합쳐 `setUserDictRaw()`로 넣습니다. 잘못된 내용은 오류를 보여 주고 이전에 적용한 사전을 유지합니다.
 - 문서 방식은 입력 전체를 한 세션으로(`hdtrans`와 같음), 줄 단위는 줄마다 새 세션으로(`hdtrans -each`와
   같음) 번역합니다. 번역 전에 `reset()`으로 세션을 비웁니다.
-- 페이지 아래 버전 줄은 빌드한 커밋의 날짜(Asia/Seoul, `yyyy-MM-dd HH:mm:ss`)와 짧은 해시입니다.
+- 페이지 아래 버전 줄은 엔진 버전(`release-version.txt`), 사전 버전(엔진 버전과 사전 TSV의 sha256 앞 12자), 빌드한 커밋의 날짜(Asia/Seoul, `yyyy-MM-dd HH:mm:ss`)와 짧은 해시입니다.
 
 ## 빌드
 
