@@ -281,11 +281,8 @@ struct RuleBodyTable {
         const auto at = static_cast<std::size_t>(rule);
         if (bodies.size() <= at) bodies.resize(at + 1);
         if (bodies[at].empty()) {
-            // The parser wants a program whose local numbers are all present; the body is
-            // checked on its own with the numbers before it empty.
-            std::string text = "rules 1 " + std::to_string(at + 1) + " 0\n";
-            for (std::size_t n = 0; n < at; n++) text += "L " + std::to_string(n) + " ||0\n";
-            text += "L " + std::to_string(at) + " " + std::string(body) + "\n";
+            // A body names no other rule, so it stands on its own in a one-rule program.
+            const std::string text = "rules 1 1 0\nL 0 " + std::string(body) + "\n";
             rules::Program probe;
             rules::LoadError error{};
             if (!rules::Load(text, probe, error)) {
@@ -322,7 +319,14 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
             unknown.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
             continue;
         }
-        if (!bodies.Add(s.rule, s.ctx, f.name, rows.Line(), errors)) bodyFailed = true;
+
+        if (!s.ctx.empty() && s.rule <= 0) {
+            errors.push_back({f.name, LoadErrorKind::Tsv, rows.Line(), TsvErrorKind::Read,
+                              "a rule body without a rule number"});
+            bodyFailed = true;
+        } else if (!bodies.Add(s.rule, s.ctx, f.name, rows.Line(), errors)) {
+            bodyFailed = true;
+        }
         for (const std::string_view key : {s.key, s.reading}) {
             if (key.empty()) continue;
             if (s.replace && replacing) replacing->push_back(static_cast<uint32_t>(layer.Rows().size()));

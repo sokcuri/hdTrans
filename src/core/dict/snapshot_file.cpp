@@ -550,7 +550,7 @@ bool SnapshotStorage::Write(const Snapshot& s, const std::vector<LoadError>& err
     writer.Add(kPlain, std::move(plain));
     // The body of each local rule a row carries, by rule number; a dictionary whose rows
     // carry none (a fixture, an older user dictionary) writes no section.
-    if (!s.ruleBodies_.empty()) {
+    {
         Buffer bodies;
         bodies.Number(s.ruleBodies_.size());
         for (const std::string& body : s.ruleBodies_) bodies.Text(body);
@@ -859,7 +859,7 @@ public:
         if (!compiled && (Get(bytes, 204, 4) != sizeof(void*) ||
                           !std::equal(compiler.begin(), compiler.end(), bytes.begin() + 208))) return false;
         const auto sectionCount = Get(bytes, 40, 4), segmentCount = Get(bytes, 44, 4);
-        if ((sectionCount != kExpectedSections && sectionCount != kExpectedSections - 1) ||
+        if (sectionCount != kExpectedSections ||
             segmentCount > (bytes.size() - kHeaderSize) / kDescriptorSize ||
             sectionCount > (bytes.size() - kHeaderSize) / kDescriptorSize - segmentCount) {
             FailWith("snapshot section count differs from this build");
@@ -1256,6 +1256,8 @@ LoadResult LoadCompiled(const std::string& path, const std::vector<std::string>&
     }
     auto compiled = SnapshotStorage::Read(folders, path, true, true);
     if (!compiled.snapshot) {
+        // The reader says which check the image failed; keep that over a general message.
+        if (!compiled.errors.empty()) return {nullptr, std::move(compiled.errors)};
         std::error_code ec;
         const bool exists = std::filesystem::exists(PathOf(path), ec);
         return {nullptr, {{path, LoadErrorKind::Read, 0, TsvErrorKind::Read,
