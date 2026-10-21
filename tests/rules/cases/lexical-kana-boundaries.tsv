@@ -25,7 +25,7 @@ dict:manmaru	まんまるで白い石だ。	동그랗고 흰 돌이다.	fix	look
 dict:manmaru	まんまるです。	동그랗습니다.	fix	lookup
 dict:manmaru	まんまるではない。	동그랗지 않다.	fix	lookup
 dict:manmaru	まんまるだった。	동그랬다.	fix	lookup
-dict:manmaru	まるで夢のようだ。	마치 꿈과 같다.	keep	lookup
+dict:manmaru	まるで夢のようだ。	마치 꿈 같다.	keep	lookup
 dict:manmaru	真ん丸な池だ。	동그란 연못이다.	keep	lookup
 dict:hyokkori	隣のおばさんがひょっこり現れた。	옆의 아줌마가 불쑥 나타났다.	fix	lookup
 dict:hyokkori	あのおばさんがひょっこり店に来た。	그 아줌마가 불쑥 가게에 왔다.	fix	lookup
