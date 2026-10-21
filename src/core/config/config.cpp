@@ -143,6 +143,15 @@ public:
                 result_.settings.useEhnd = !result_.settings.ehnd->empty();
             }
             else result_.settings.cache = std::move(path);
+        } else if (key == "soften") {
+            const bool scalar = Type() == YAML_SCALAR_EVENT;
+            const std::string value = scalar ? Lower(Scalar(event_)) : std::string();
+            if (scalar && ScalarKind(event_) == Kind::Bool && (value == "true" || value == "false")) {
+                result_.settings.soften = value == "true" ? Soften::Quotes : Soften::Off;
+            } else if (!scalar || ScalarKind(event_) != Kind::String || !SoftenOf(value, result_.settings.soften)) {
+                Error("soften: expected off, quotes or a boolean");
+                return Skip();
+            }
         } else if (key == "cg" || key == "misread" || key == "reference") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
@@ -193,6 +202,16 @@ private:
 };
 
 }  // namespace
+
+bool SoftenOf(std::string_view name, Soften& out) {
+    constexpr std::pair<std::string_view, Soften> kModes[] = {{"off", Soften::Off}, {"quotes", Soften::Quotes}};
+    for (const auto& [n, mode] : kModes) {
+        if (n != name) continue;
+        out = mode;
+        return true;
+    }
+    return false;
+}
 
 ConfigResult LoadConfig(std::string_view path) {
     ConfigResult result;

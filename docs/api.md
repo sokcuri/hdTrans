@@ -73,7 +73,7 @@ npm CLI의 `--userdict`는 파일 하나를 받으며 중복 지정은 오류입
 각 줄 뒤에 `\n`을 붙입니다.
 
 ```
-hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
+hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--soften MODE] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
 ```
 
 | 옵션 | 설명 |
@@ -99,6 +99,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
 | `--no-cg` | CG-lite 손 규칙(`cgRules`, 기본 켬)을 끔: 오독 결정의 후보를 지우거나 고르는 규칙표 |
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
+| `--soften MODE` | 대사의 문장 끝 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). `quotes`(기본): 「」 안, `off`: 끔. 공손체(です, ます)와 고풍 말투(ておる, じゃ)의 대사, 『』 안, 인용한 말(「…」という)은 그대로 둠. `--reference`에서는 꺼짐 |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G), `index`(전역 규칙은 PRIO), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
 
@@ -142,6 +143,7 @@ CLI 플래그가 파일보다 우선합니다.
 | `cg` | bool, 기본 `true`. `false`는 `--no-cg` |
 | `misread` | bool, 기본 `false`. `true`는 `--misread` |
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
+| `soften` | `off`, `quotes`(기본), `--soften`과 같음. `true`는 `quotes`, `false`는 `off` |
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
 알 수 없는 키와 잘못된 값은 건너뛰고, 문법 오류 앞의 정상 항목은 유지합니다. 진단은 CLI의 표준 오류,
@@ -288,6 +290,7 @@ std::string ko = session.Translate("今日はいい天気ですね。");
 |---|---|
 | `Translate(text)` | `\n`으로 나눈 줄을 번역(`\r`은 유지). 앞에서 번역한 문맥을 기억함. 64 KiB가 넘는 줄은 16 KiB 이하로 나눠 번역 |
 | `Reset()` | 기억을 지우고 엔진의 지금 사전을 가져옴 |
+| `SetSoften(Soften)` | 다음 번역부터 대사로 볼 범위(`Off`, `Quotes`(기본), `--soften`과 같음). 기준 모드에서는 효과 없음 |
 
 `UserReload::Auto` 엔진의 세션은 엔진에 새 사전이 생기면 다음 번역에서 기억을 지우고 그 사전으로 바꿉니다.
 필터와 Ehnd 형식은 [ehnd-compat.md](ehnd-compat.md)에 있습니다.

@@ -80,6 +80,14 @@ console.log(result.text);
 console.log(result.choices);
 ```
 
+대사의 문장 끝은 기본으로 해체로 씁니다(「明日行く」 → 「내일 갈 거야」). 대사로 볼 범위는 `Soften` 값
+`'off'`, `'quotes'`(기본, 「」 안)이며 CLI의 `--soften`과 같습니다. `HdTrans.init({ soften })`나
+`setSoften(mode)`는 다음 번역부터, `translate(text, { soften })`는 그 호출에만 적용합니다.
+
+```ts
+const plain = hdTrans.translate("「明日行く」", { soften: "off" });  // 「내일 간다」
+```
+
 `json: true`는 JSON 문자열이 아니라 타입이 있는 객체를 반환합니다.
 직렬화할 때는 `JSON.stringify(result)`를 씁니다. 생략하거나 `false`이면 문자열을 반환합니다.
 

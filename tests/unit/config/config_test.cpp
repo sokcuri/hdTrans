@@ -48,7 +48,7 @@ HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(
         "# settings\ndicts: [dicts, '../extra']\nuserdict: user.tsv\nehnd: Ehnd\n"
-        "cache: cache\ncg: false\nmisread: true\nreference: true\n");
+        "cache: cache\ncg: false\nmisread: true\nreference: true\nsoften: off\n");
     HD_CHECK(result.found);
     HD_REQUIRE(result.diagnostics.empty());
     const auto& settings = result.settings;
@@ -63,6 +63,20 @@ HD_TEST(ConfigAllKeys) {
     HD_CHECK(!settings.cg);
     HD_CHECK(settings.misread);
     HD_CHECK(settings.reference);
+    HD_CHECK(settings.soften == hdTrans::Soften::Off);
+}
+
+HD_TEST(ConfigSoften) {
+    TempConfig file;
+    const struct Case { const char* yaml; hdTrans::Soften want; } cases[] = {
+        {"soften: off\n", hdTrans::Soften::Off},   {"soften: quotes\n", hdTrans::Soften::Quotes},
+        {"soften: false\n", hdTrans::Soften::Off}, {"soften: true\n", hdTrans::Soften::Quotes},
+    };
+    for (const auto& test : cases) {
+        const auto result = file.Load(test.yaml);
+        HD_CHECK(result.diagnostics.empty());
+        HD_CHECK(result.settings.soften == test.want);
+    }
 }
 
 HD_TEST(ConfigPaths) {
@@ -106,6 +120,7 @@ HD_TEST(ConfigEmptyAndMissing) {
         HD_CHECK(result.settings.cg);
         HD_CHECK(!result.settings.misread);
         HD_CHECK(!result.settings.reference);
+        HD_CHECK(result.settings.soften == hdTrans::Soften::Quotes);
     }
 }
 
@@ -123,6 +138,8 @@ HD_TEST(ConfigInvalidEntries) {
         "misread: yes\n",
         "misread: null\n",
         "reference: []\n",
+        "soften: always\n",
+        "soften: 1\n",
         "userdict: 123\n",
         "userdict: !!int 42\n",
         "userdict: \"a\\0b\"\n",

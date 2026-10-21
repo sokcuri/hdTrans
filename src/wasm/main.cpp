@@ -8,6 +8,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/config/config.h"
 #include "core/engine.h"
 #include "core/engine/driver.h"
 #include "core/engine/trace.h"
@@ -76,6 +77,7 @@ public:
             return false;
         }
         session_ = std::make_unique<hdTrans::Session>(*engine_);
+        session_->SetSoften(soften_);
         dictionaryVersion_ = hdTrans::frontend::DictionaryVersion(directories_);
         error_.clear();
         return true;
@@ -97,6 +99,16 @@ public:
     bool Reset() {
         if (!Ready()) return false;
         session_->Reset();
+        return true;
+    }
+
+    // off or quotes: the speech of later translations.
+    bool SetSoften(const std::string& mode) {
+        if (!hdTrans::internal::SoftenOf(mode, soften_)) {
+            error_ = "hdtrans: soften takes off or quotes";
+            return false;
+        }
+        if (session_) session_->SetSoften(soften_);
         return true;
     }
 
@@ -246,6 +258,7 @@ private:
     std::vector<hdTrans::userdict::SourceEntry> userEntries_;
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
+    hdTrans::Soften soften_ = hdTrans::Soften::Quotes;
     std::string error_;
     std::string dictionaryVersion_;
 };
@@ -261,6 +274,7 @@ EMSCRIPTEN_BINDINGS(hdtrans) {
         .function("translate", &Translator::Translate)
         .function("translateJson", &Translator::TranslateJson)
         .function("reset", &Translator::Reset)
+        .function("setSoften", &Translator::SetSoften)
         .function("setUserDictRaw", &Translator::SetUserDictRaw)
         .function("getUserDict", &Translator::GetUserDict)
         .function("setEhnd", &Translator::SetEhnd)

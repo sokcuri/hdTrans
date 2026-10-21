@@ -1,0 +1,33 @@
+rule	input	expected	kind	layer
+compose:soften-quoted	「それは本当に違う」	「그것은 정말로 달라」	fix	compose
+compose:soften-quoted	「明日、海に行く」	「내일, 바다에 갈 거야」	fix	compose
+compose:soften-quoted	「冷蔵庫にプリンがある」	「냉장고에 푸딩이 있어」	fix	compose
+compose:soften-quoted	「今日は朝から雨だ」	「오늘은 아침부터 비야」	fix	compose
+compose:soften-quoted	「君のことが好きだ」	「너를 좋아해」	fix	compose
+compose:soften-quoted	「宿題はもう終わった」	「숙제는 벌써 끝났어」	fix	compose
+compose:soften-quoted	「もういい、一人でやる」	「이제 됐어, 혼자서 할 거야」	fix	compose
+compose:soften-quoted	「よく分からない」	「잘 몰라」	fix	compose
+compose:soften-quoted	「後で返す」	「나중에 돌려줄 거야」	fix	compose
+compose:soften-quoted	「手伝ってやる」	「도와 줄 거야」	fix	compose
+compose:soften-quoted	「わかる！」	「알아!」	fix	compose
+compose:soften-quoted	「終わった終わった」	「끝났어 끝났어」	fix	compose
+compose:soften-quoted	「雨が降っている。もう帰る」	「비가 오고 있어. 이제 돌아갈 거야」	fix	compose
+compose:soften-quoted	「何を謝る」	「무엇을 사과해」	fix	compose
+compose:soften-quoted	「これをカバンという」	「이것을 가방이라고 해」	fix	compose
+compose:soften-quoted	「ちょっと手伝ってくれる？」	「조금 도와 줄래?」	keep	compose
+compose:soften-quoted	「どうしよう、鍵がない」	「어떻게 하지, 열쇠가 없어」	keep	compose
+compose:soften-quoted	「助かった……」	「살아났다……」	keep	compose
+compose:soften-quoted	「来る！」	「온다!」	keep	compose
+compose:soften-quoted	「敵の右翼が優勢である」	「적의 우익이 우세하다」	keep	compose
+compose:soften-quoted	「わしはここで待っておる」	「나는 여기서 기다리고 있다」	keep	compose
+compose:soften-quoted	「ありがとうございます。それは違う」	「감사합니다. 그것은 다르다」	keep	compose
+compose:soften-quoted	『雨が降る』	『비가 온다』	keep	compose
+compose:soften-quoted	彼は「雨が降る」ということを知った。	그는 「비가 온다」라고 하는 것을 알았다.	keep	compose
+compose:soften-quoted	「すぐ消える」魔法を使った。	「바로 사라진다」마법을 사용했다.	keep	compose
+compose:soften-quoted	「ここに婚約の破棄を宣言する」	「여기에 약혼의 파기를 선언한다」	keep	compose
+compose:soften-quoted	「お前もだ！」	「너도다!」	keep	compose
+compose:soften-quoted	「しかし、だ。それは違う」	「그러나, 다. 그것은 달라」	fix	compose
+compose:soften-quoted	彼女は窓の外を見た。	그녀는 창 밖을 보았다.	keep	compose
+compose:soften-quoted	彼のモットーは「従う」だ。	그의 모토는 「따른다」다.	keep	compose
+compose:soften-quoted	想「おも」い出	구상 「도」있고 출	keep	compose
+compose:soften-quoted	「やらねばならない」	「해야 한다」	keep	compose

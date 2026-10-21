@@ -6,6 +6,8 @@
 #include <string_view>
 #include <vector>
 
+#include "core/engine.h"
+
 namespace hdTrans::internal {
 
 struct Config {
@@ -17,6 +19,7 @@ struct Config {
     bool cg = true;
     bool misread = false;
     bool reference = false;
+    Soften soften = Soften::Quotes;
 };
 
 struct ConfigDiagnostic {
@@ -29,6 +32,9 @@ struct ConfigResult {
     std::vector<ConfigDiagnostic> diagnostics;
     bool found = false;
 };
+
+// The mode named off or quotes; false for another name.
+bool SoftenOf(std::string_view name, Soften& out);
 
 // Missing files are optional. Invalid entries are skipped; earlier valid entries survive syntax errors.
 ConfigResult LoadConfig(std::string_view path);

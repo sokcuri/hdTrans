@@ -206,11 +206,13 @@ bool SentenceEndAfter(std::string_view after) {
 // Whether the form of key with suffix ends a clause in speech: the 아/어 form alone or with
 // 요, or the past stem with 어 or 어요 (갔어), before the punctuation of SentenceEndAfter, or
 // before a comma after a Japanese ending in a terminal form (いい、 됐어,), which a
-// connective form (なり、 되어,) is not.
-bool SpokenEnd(std::string_view key, std::string_view suffix, std::string_view after, std::string_view ending) {
+// connective form (なり、 되어,) is not; or anywhere when ended (a softened sentence end).
+bool SpokenEnd(std::string_view key, std::string_view suffix, std::string_view after, std::string_view ending,
+               bool ended) {
     const bool infinitive = key.ends_with("6") && (suffix.empty() || suffix == "요");
     const bool past = key.ends_with("5") && (suffix == "어" || suffix == "어요");
     if (!infinitive && !past) return false;
+    if (ended) return true;
     if (SentenceEndAfter(after)) return true;
     if (!after.starts_with(",")) return false;
     for (const std::string_view t : {"う", "く", "ぐ", "す", "つ", "ぬ", "ぶ", "む", "る", "い", "た", "だ"}) {
@@ -505,7 +507,7 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 replacement = NormalizeDakeiyoText(i, replacement);
             }
             if (settings_.text && !it.endingSurface.ends_with("て") && !it.endingSurface.ends_with("で") &&
-                SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface)) {
+                SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
                 replacement = SpokenInfinitive(replacement);
             }
             break;
@@ -632,7 +634,7 @@ void Composer::BuildAdjective(int i) {
             suffix.clear();
         }
         // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
-        if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface)) {
+        if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
             if (replacement == "니어" && stem.ends_with("아")) {
                 replacement = suffix.empty() ? "니야" : "니에";
             } else {

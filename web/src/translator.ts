@@ -42,6 +42,10 @@ export interface TranslationResult {
   logs: string[];
 }
 
+/** The speech whose plain sentence ends (간다) become 해체 (갈 거야): none, or the text
+ *  inside 「」 (the default). */
+export type Soften = 'off' | 'quotes';
+
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
 export type EhndFiles = Readonly<Record<string, string>>;
 
@@ -50,6 +54,7 @@ interface Binding {
   translate(text: string): string;
   translateJson(text: string): TranslationResult;
   reset(): boolean;
+  setSoften(mode: Soften): boolean;
   setUserDictRaw(text: string): boolean;
   getUserDict(): UserDictEntry[];
   setEhnd(files: EhndFiles): boolean;
@@ -79,6 +84,7 @@ export interface InitOptions {
   /** Virtual filesystem paths, optionally starting with a compiled .hdsnap. */
   directories?: readonly string[];
   ehnd?: EhndFiles;
+  soften?: Soften;
 }
 
 export class HdTrans {
@@ -87,6 +93,7 @@ export class HdTrans {
   private binding_: Binding | undefined;
   private dictionaryVersion_ = '';
   private userDictRaw_ = '';
+  private soften_: Soften = 'quotes';
 
   private constructor(binding: Binding, version: string) {
     this.binding_ = binding;
@@ -111,6 +118,7 @@ export class HdTrans {
       if (!binding.open(directories)) throw new Error(binding.error);
       translator.dictionaryVersion_ = binding.dictionaryVersion;
       if (options.ehnd) translator.setEhnd(options.ehnd);
+      if (options.soften) translator.setSoften(options.soften);
       return translator;
     } catch (error) {
       translator.close();
@@ -137,14 +145,29 @@ export class HdTrans {
     };
   }
 
+  /** options.soften applies to this call only; setSoften() sets it for later calls. */
   translate(text: string): string;
-  translate(text: string, options: { json: true }): TranslationResult;
-  translate(text: string, options: { json?: false }): string;
-  translate(text: string, options: { json?: boolean }): string | TranslationResult;
-  translate(text: string, options: { json?: boolean } = {}): string | TranslationResult {
+  translate(text: string, options: { json: true; soften?: Soften }): TranslationResult;
+  translate(text: string, options: { json?: false; soften?: Soften }): string;
+  translate(text: string, options: { json?: boolean; soften?: Soften }): string | TranslationResult;
+  translate(text: string, options: { json?: boolean; soften?: Soften } = {}): string | TranslationResult {
     const binding = this.binding();
     if (typeof text !== 'string') throw new TypeError('hdtrans: text must be a string');
-    return options.json ? binding.translateJson(text) : binding.translate(text);
+    if (options.soften === undefined) return options.json ? binding.translateJson(text) : binding.translate(text);
+    const previous = this.soften_;
+    this.setSoften(options.soften);
+    try {
+      return options.json ? binding.translateJson(text) : binding.translate(text);
+    } finally {
+      this.setSoften(previous);
+    }
+  }
+
+  /** The speech of later translations; 'quotes' until set. */
+  setSoften(mode: Soften): void {
+    const binding = this.binding();
+    if (!binding.setSoften(mode)) throw new Error(binding.error);
+    this.soften_ = mode;
   }
 
   reset(): void {

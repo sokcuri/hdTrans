@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <utility>
@@ -19,6 +20,7 @@
 #include "core/pipeline/restore.h"
 #include "core/pipeline/segment.h"
 #include "core/pipeline/sound.h"
+#include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/lines.h"
 #include "core/word/util.h"
@@ -89,6 +91,14 @@ output::Settings ComposeSettings(bool text) {
     return s;
 }
 
+// The speech of a line for the compose stage: whether its plain sentence ends soften, its
+// quotes at the start of the next chunk and the styles of its quotes.
+struct Speech {
+    bool soften = false;
+    output::QuoteState quotes;
+    std::vector<std::uint8_t> styles;
+};
+
 word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions& options,
                                 word::SessionSenses* sessionSenses) {
     word::Settings s = options.reference ? word::Settings::Reference() : word::Settings{};
@@ -110,9 +120,11 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
 
 // Translates one chunk: its tokens, the word analysis, then per sentence the resolve stage
 // and the compose stage. The sentences are appended to out with the chunk index.
+// speech is read from the start of the chunk.
 void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& lookup, const output::Pieces& chunk,
-                    int index, bool text, bool verse, std::string_view before, Scratch& s, Generated& generated,
-                    const StageObserver& observer, const TranslationOptions& options, std::vector<output::Sentence>& out) {
+                    int index, bool text, bool verse, std::string_view before, const Speech& speech, Scratch& s,
+                    Generated& generated, const StageObserver& observer, const TranslationOptions& options,
+                    std::vector<output::Sentence>& out) {
     s.texts.clear();
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
     tokenizer::TokenizeSpans(pieces, text, s.tokens);
@@ -124,9 +136,17 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
 
-    const output::Settings composeSettings = ComposeSettings(text);
+    output::Settings composeSettings = ComposeSettings(text);
+    composeSettings.soften = text && speech.soften;
+    composeSettings.quotes = speech.quotes;
+    composeSettings.quoteStyles = &speech.styles;
+    std::size_t counted = 0;  // tokens read into composeSettings.quotes
     for (std::size_t k = 0; k < analysis.sentences.size(); k++) {
         const word::Sentence& sentence = analysis.sentences[k];
+        const std::size_t start = std::min(static_cast<std::size_t>(sentence.first), s.tokens.size());
+        for (; composeSettings.soften && counted < start; counted++) {
+            composeSettings.quotes = output::QuotesAfter(composeSettings.quotes, s.tokens.Raw(counted));
+        }
         output::Sentence done;
         done.chunk = index;
         {
@@ -171,11 +191,15 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked);
     std::vector<output::Sentence> sentences;
     std::string before;
+    Speech speech;
+    speech.soften = !options.reference && options.soften != Soften::Off;
+    if (speech.soften) speech.styles = pipeline::QuoteStyles(output::String(marked));
     for (std::size_t i = 0; i < chunks.size(); i++) {
         if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
-        TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, s, generated, observer,
-                       options, sentences);
+        TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, speech, s,
+                       generated, observer, options, sentences);
         const std::string chunkText = output::String(chunks[i]);
+        speech.quotes = output::QuotesAfter(speech.quotes, chunkText);
         if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
     }
     const output::Pieces cleaned = output::Cleanup(sentences);
@@ -261,7 +285,7 @@ std::string RawLine(const dict::Snapshot& snap, Generated& generated, std::strin
         output::Pieces chunk;
         if (!piece.empty()) chunk.push_back({std::string(piece), output::SpanText});
         std::vector<output::Sentence> sentences;
-        TranslateChunk(snap, lookup, chunk, 0, false, false, {}, s, generated, observer, options, sentences);
+        TranslateChunk(snap, lookup, chunk, 0, false, false, {}, Speech{}, s, generated, observer, options, sentences);
         output::Pieces composed;
         for (const output::Sentence& sentence : sentences) output::Append(composed, sentence.pieces);
         result += output::String(composed);

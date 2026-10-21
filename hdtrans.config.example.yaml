@@ -10,3 +10,4 @@ dicts:
 cg: true
 misread: false
 reference: false
+soften: quotes  # 「」 안 대사의 -다를 해체로, off면 끔

@@ -239,6 +239,7 @@ void Composer::Start(std::vector<ResolvedItem>& items, const Settings& settings,
     for (auto& s : state_) {
         s.text.clear();
         s.saved.clear();
+        s.spoken = false;
     }
     written_.clear();
     inflected.clear();
@@ -261,6 +262,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
+        if (settings.soften) Soften(first, last);
     }
     for (int n = static_cast<int>(nodes.size()) - 1; n >= 0; n--) {
         const int begin = n > 0 ? nodes[n - 1] : 0;

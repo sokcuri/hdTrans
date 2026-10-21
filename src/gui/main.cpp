@@ -206,6 +206,7 @@ bool LoadEngine(App& app, std::string dir = {}) {
 gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOptions options) {
     options.cg = app.settings.cg;
     options.misread = app.settings.misread;
+    options.soften = app.settings.soften;
     return options;
 }
 

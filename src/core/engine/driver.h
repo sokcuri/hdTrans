@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "core/dict/snapshot.h"
+#include "core/engine.h"
 #include "core/output/families.h"
 #include "core/names/document.h"
 #include "core/output/pieces.h"
@@ -95,6 +96,8 @@ struct TranslationOptions {
     // The pre-filter rewrites each line before translation and the post-filter its
     // translation; their user dictionary joins the lookups. Null for none.
     const filter::Filters* filters = nullptr;
+    // The lines whose plain sentence ends are written in 해체; Off with reference.
+    Soften soften = Soften::Quotes;
 };
 
 // Translates the lines of one call as one document: the registry and the document context

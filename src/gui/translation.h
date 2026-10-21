@@ -4,9 +4,7 @@
 #include <string>
 #include <string_view>
 
-namespace hdTrans {
-class Engine;
-}
+#include "core/engine.h"
 
 namespace hdTrans::gui {
 
@@ -18,6 +16,7 @@ struct TranslationOptions {
     bool wholeDocument = true;
     bool cg = true;
     bool misread = false;
+    Soften soften = Soften::Quotes;
 };
 
 // Input is UTF-8 with LF line endings. Translation keeps blank lines; in mixed modes,

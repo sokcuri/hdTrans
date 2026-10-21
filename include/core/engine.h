@@ -34,6 +34,13 @@ enum class CacheWrite { Off, Sync };
 // their versions change again.
 enum class UserReload { Off, Auto };
 
+// The speech whose plain sentence ends (간다, 학생이다) are written in 해체 (갈 거야,
+// 학생이야). Narration keeps its 다.
+enum class Soften {
+    Off,
+    Quotes,  // the text inside 「」
+};
+
 // The loaded dictionaries. Shared by any number of sessions and threads.
 class Engine {
 public:
@@ -127,6 +134,10 @@ public:
     // dictionaries.
     void Reset();
 
+    // The lines that later translations write as speech; Soften::Quotes until set.
+    // Without effect in reference mode.
+    void SetSoften(Soften soften) { soften_ = soften; }
+
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer);
@@ -135,6 +146,7 @@ private:
     const bool reference_;
     const bool cg_;
     const bool misread_;
+    Soften soften_ = Soften::Quotes;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;
