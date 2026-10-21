@@ -93,6 +93,10 @@
 静かだった	조용했습니다	end	register=formal prio=-1
 静かだった	조용했소	end	register=archaic prio=-1
 
+// 筈 at the end: 터
+書く筈	쓸 터	end
+書いた筈	썼을 터	end
+
 // じゃん
 書くじゃん	쓰잖아(요)	end	prio=-1
 書いたじゃん	썼잖아(요)	end	prio=-1
