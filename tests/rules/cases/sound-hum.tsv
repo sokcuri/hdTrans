@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:hum	「ふぅん、そうなんだ」	「흐응, 그렇구나」	fix	sound
+sound:hum	「んっ……ふぅんっ……」	「읏……흐응……」	fix	sound
+sound:hum	「ふぅ……疲れた」	「후우……지쳤다」	keep	sound

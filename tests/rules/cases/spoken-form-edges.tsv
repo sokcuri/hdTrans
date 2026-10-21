@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-normalize:question-n	「ふうん？」	「후웅?」	keep	normalize
+normalize:question-n	「ふうん？」	「흐응?」	keep	normalize
 normalize:question-n	「ミクたん？」	「미쿠짱?」	keep	normalize
 normalize:question-n	「どうすん？」	「어떻게 하는 거야?」	fix	normalize
 normalize:question-n	「試験に落ちたん？」	「시험에 떨어졌어?」	keep	normalize
