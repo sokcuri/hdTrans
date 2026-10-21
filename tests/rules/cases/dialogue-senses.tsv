@@ -11,3 +11,12 @@ sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
 sound:lead-naa	そうだなあ、うん。	그렇다, 응.	keep	sound
 phrase:なんていうか	なんていうか、変だね。	뭐랄까, 이상하네.	fix	builtin-phrase
 phrase:なんていうか	うん……なんていうかね……すごかった。	응……뭐랄까……대단했다.	fix	builtin-phrase
+dict:jisjk:103790	あっという間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
+phrase:わずかに	今朝はわずかに寒い。	오늘 아침은 조금 춥다.	fix	lookup
+phrase:最低でも	最低でも一週間はかかる。	최소한 일주일간은 걸린다.	fix	lookup
+phrase:何倍も	こっちの方が何倍も楽だ。	여기가 몇 배나 편하다.	fix	lookup
+dict:word:ayauku:narrowly	危うく転ぶところだった。	rule:dict:word:ayauku:narrowly=하마터면	fix	local
+dict:word:ayauku:narrowly	計画が危うくなった。	!rule:dict:word:ayauku:narrowly	keep	local
+dict:word:ayauku:narrowly	彼の嘘が立場を危うくする。	!rule:dict:word:ayauku:narrowly	keep	local
+dict:word:shizento:nature	気づけば自然と笑っていた。	정신을 차려 보니 자연스럽게 웃고 있었다.	fix	local
+dict:word:shizento:nature	自然と人間の関係を考える。	rule:dict:word:shizento:nature=자연과	keep	local

@@ -26730,3 +26730,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一行	한 줄	N110			GN	5103	||2 S-1== "あと" S-1== "もう"	あと·もう 뒤의 一行을 한 줄로 고른다.				word:ichigyou:line
 完全に	완전히	E300			GN							w:26715
 ちゃん	짱	N110	VHn	Tu	GN			가타카나 명사 바로 뒤의 빈 ちゃん을 바꿀 때 쓰는 짱.				word:chan:name
+危うく	위태롭게	E300			GN							word:ayauku:adverb
+危うく	하마터면	E300			GN	5200	||1 &&5 S+1!= "Lな" S+1!= "L見" S+1!= "Lす" S+1!= "Lし" S+1!= "Lさ"	なる, 見える, する가 뒤따르지 않는 危うく를 하마터면으로 고른다.				word:ayauku:narrowly
+自然と	자연스럽게	E300			GN							word:shizento:adverb
+自然と	자연과	E300			GN	5201	||4 S+1== "共に" S+1== "ともに" S+1== "一体" S+1== "人間"	共に, 一体, 人間 앞의 自然と는 명사와 조사 자연과로 고른다.				word:shizento:nature
