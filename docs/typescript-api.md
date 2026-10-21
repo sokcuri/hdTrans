@@ -82,7 +82,8 @@ console.log(result.choices);
 
 대사(「」 안)의 말투는 `Speech` 값 `'strict'`(기본)와 `'soft'`이며 CLI의 `--speech`와 같습니다. `'soft'`는
 딱딱한 문장 끝 `-다`를 해체로 부드럽게 쓰고(「明日行く」 → 「내일 갈 거야」), `'strict'`는 번역의 `-다`를
-그대로 둡니다(「내일 간다」). `HdTrans.init({ speech })`나 `setSpeech(speech)`는 다음 번역부터,
+그대로 두고(「내일 간다」), 반말 표지가 있는 대사의 상태와 과거만 해체로 씁니다(「違うよ。もう終わった」 →
+「달라. 벌써 끝났어」). `HdTrans.init({ speech })`나 `setSpeech(speech)`는 다음 번역부터,
 `translate(text, { speech })`는 그 호출에만 적용합니다.
 
 ```ts

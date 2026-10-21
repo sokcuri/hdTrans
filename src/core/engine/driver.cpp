@@ -156,6 +156,7 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
 // its quotes at the start of the next chunk and the styles of its quotes.
 struct LineSpeech {
     bool casual = false;
+    bool markedOnly = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -199,6 +200,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
     output::Settings composeSettings = ComposeSettings(text);
     composeSettings.casual = text && speech.casual;
+    composeSettings.casualMarkedOnly = speech.markedOnly;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes
@@ -228,6 +230,12 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     }
 }
 
+// Whether observer takes any stage of a line.
+bool Observes(const StageObserver& o) {
+    return o.text || o.pieces || o.tokens || o.analysis || o.resolved || o.composed || o.cleaned || o.restored ||
+           o.filterLog;
+}
+
 // One line through every stage of the text path; the line's trailing "\r" is written
 // back by the caller.
 // carry is the quote an earlier line left open for this one.
@@ -252,28 +260,56 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (observer.pieces) observer.pieces(observer.context, "P", -1, marked);
 
     const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked);
-    std::vector<output::Sentence> sentences;
-    std::string before;
     LineSpeech speech;
-    speech.casual = !options.reference && options.speech == Speech::Soft;
-    if (speech.casual) {
+    if (!options.reference) {
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
+        speech.casual = options.speech == Speech::Soft;
+        if (!speech.casual) {
+            // Strict: the quotes whose Japanese is casual speech, read before normalizing
+            // (知らねえ, 言っとく).
+            const std::vector<bool> casual = pipeline::CasualQuotes(facts.text, carry.depth);
+            if (casual.size() == speech.styles.size()) {
+                for (std::size_t k = 0; k < casual.size(); k++) {
+                    if (!casual[k] || speech.styles[k] != 0) continue;
+                    speech.styles[k] = output::kCasualSpeech;
+                    speech.casual = speech.markedOnly = true;
+                }
+            }
+        }
     }
-    for (std::size_t i = 0; i < chunks.size(); i++) {
-        if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
-        TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, speech, s,
-                       generated, observer, options, sentences);
-        const std::string chunkText = output::String(chunks[i]);
-        speech.quotes = output::QuotesAfter(speech.quotes, chunkText);
-        if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
+    const auto compose = [&](LineSpeech speech, const StageObserver& observer) {
+        std::vector<output::Sentence> sentences;
+        std::string before;
+        for (std::size_t i = 0; i < chunks.size(); i++) {
+            if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
+            TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, speech, s,
+                           generated, observer, options, sentences);
+            const std::string chunkText = output::String(chunks[i]);
+            speech.quotes = output::QuotesAfter(speech.quotes, chunkText);
+            if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
+        }
+        const output::Pieces cleaned = output::Cleanup(sentences);
+        if (observer.cleaned) observer.cleaned(observer.context, cleaned);
+        const pipeline::RestoreSteps steps = pipeline::RestoreAll(
+            cleaned, typed, /*keepBrackets=*/true, !options.reference && options.wordImprovements.literalCleanup);
+        if (observer.restored) observer.restored(observer.context, steps);
+        return steps.line;
+    };
+    if (!speech.markedOnly) return compose(speech, observer);
+    // A casual quote whose Korean keeps a polite end (고마워요, 좋네요) keeps its plain ends:
+    // 해체 next to 해요체 reads as two speakers. The line is composed again without it, or
+    // for an observer, which the first pass does not report to.
+    const std::string first = compose(speech, StageObserver{});
+    const std::vector<bool> polite = output::PoliteQuotes(first, carry.depth);
+    bool again = Observes(observer);
+    for (std::size_t k = 0; k < speech.styles.size(); k++) {
+        if (speech.styles[k] != output::kCasualSpeech) continue;
+        if (polite.size() == speech.styles.size() && !polite[k]) continue;
+        speech.styles[k] = 0;
+        again = true;
     }
-    const output::Pieces cleaned = output::Cleanup(sentences);
-    if (observer.cleaned) observer.cleaned(observer.context, cleaned);
-    const pipeline::RestoreSteps steps = pipeline::RestoreAll(cleaned, typed, /*keepBrackets=*/true,
-                                                              !options.reference && options.wordImprovements.literalCleanup);
-    if (observer.restored) observer.restored(observer.context, steps);
-    return steps.line;
+    return again ? compose(speech, observer) : first;
 }
 
 std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Generated& generated,

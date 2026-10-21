@@ -26,6 +26,49 @@ QuoteState QuotesAfter(QuoteState state, std::string_view text) {
     return state;
 }
 
+std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
+    std::vector<bool> polite(depth > 0 ? 2 : 1, false);
+    std::size_t own = depth > 0 ? 1 : 0;  // the quote whose own text is read
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        at += r.size == 0 ? 1 : r.size;
+        if (r.cp == U'「' || r.cp == U'『') {
+            if (depth++ == 0) {
+                polite.push_back(false);
+                own = polite.size() - 1;
+            }
+            continue;
+        }
+        if ((r.cp == U'」' || r.cp == U'』') && depth > 0) {
+            if (--depth == 0) own = 0;
+            continue;
+        }
+        if (depth > 1 || polite[own]) continue;
+        for (const std::string_view end : {"요", "죠", "니다", "시오"}) {
+            if (!line.substr(0, at).ends_with(end)) continue;
+            std::string_view after = line.substr(at);
+            for (text::Rune d = text::DecodeRune(after);
+                 d.size > 0 && std::u32string_view(U"~～―ー─-♪").find(d.cp) != std::u32string_view::npos;
+                 d = text::DecodeRune(after)) {
+                after.remove_prefix(d.size);
+            }
+            const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
+            // Nouns that end in 요 (필요, 중요).
+            const std::string_view head = line.substr(0, at - end.size());
+            bool noun = false;
+            for (const std::string_view n :
+                 {"필", "중", "주", "수", "강", "소", "월", "화", "목", "금", "토", "일", "동", "요"}) {
+                noun = noun || (end == "요" && head.ends_with(n));
+            }
+            if (!noun && (next == 0 || text::IsSpace(next) ||
+                          std::u32string_view(U".,!?…‥」』。、！？").find(next) != std::u32string_view::npos)) {
+                polite[own] = true;
+            }
+        }
+    }
+    return polite;
+}
+
 namespace {
 
 using internal::First;
@@ -265,10 +308,12 @@ void Composer::WriteCasual(int first, int last) {
         const QuoteState at = QuotesAfter(settings_.quotes, before);
         if (at.depth == 0 || QuotesAfter(at, own).depth == 0) continue;
         const std::size_t quote = static_cast<std::size_t>(at.count);
-        if (settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size() &&
-            (*settings_.quoteStyles)[quote] != 0) {
-            continue;
-        }
+        const std::uint8_t style = settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size()
+                                       ? (*settings_.quoteStyles)[quote]
+                                       : 0;
+        if ((style & ~kCasualSpeech) != 0) continue;
+        // Marked casual quotes: their own text only, not a quote inside them (『書いた』って).
+        if (settings_.casualMarkedOnly && ((style & kCasualSpeech) == 0 || at.depth > 1)) continue;
         const char32_t close = QuotedEnd(i, last, at.depth > 1);
         // である reports (優勢である) and declarations (破棄する) keep their style.
         if (close == 0 || own.find("であ") != std::string_view::npos ||
@@ -313,6 +358,16 @@ void Composer::WriteCasual(int first, int last) {
         // 온다!).
         if (!marker.empty() && Lookup(marker[0], std::string(marker) + "6").ends_with("이어")) continue;
         if (alone && First(it.ending.text) == '5' && (exclaimed || close == U'…' || close == U'‥')) continue;
+        // Marked casual quotes keep 너무 X다 (露骨すぎだ, 握りすぎだ), whose 해체 is no word,
+        // and 待った (잠깐!), whose past would be read.
+        if (settings_.casualMarkedOnly) {
+            const std::string_view surface = it.surface;
+            if ((First(it.ending.text) != '5' &&
+                 (surface.find("すぎ") != std::string_view::npos || surface.find("過ぎ") != std::string_view::npos)) ||
+                (surface.starts_with("待") && First(it.ending.text) == '5' && close != U'？' && close != U'?')) {
+                continue;
+            }
+        }
         const std::string present = PresentWord(it.ending.text, stem);
         // 말한다 in 해체 (말해) reads as an order; a name (虹輝と言う) or a promise keeps it.
         if (present.ends_with("말한다")) continue;
@@ -320,6 +375,11 @@ void Composer::WriteCasual(int first, int last) {
         for (const std::string_view v : kStateSurfaces) {
             stative = stative || std::string_view(it.surface).starts_with(v);
         }
+        bool state = false;
+        for (const std::string_view s : kStates) state = state || present.ends_with(s);
+        // A present action in 해체 reads as a plan, a promise or an order; only soft speech
+        // chooses one.
+        if (settings_.casualMarkedOnly && !present.empty() && !state) continue;
         const bool planned = !present.empty() && !stative && close != U'？' && close != U'?' &&
                              Planned(present, Clause(before + std::string(own)));
         // 주다 in 해체 (줘) reads as a request.

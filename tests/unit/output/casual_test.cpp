@@ -1,4 +1,6 @@
+#include <cstdint>
 #include <string>
+#include <vector>
 
 #include "core/output/compose.h"
 #include "hdtest.h"
@@ -30,4 +32,18 @@ HD_TEST(output_quotes_after) {
     HD_CHECK_EQ(at({}, "」閉じるだけ"), "0/0");
     HD_CHECK_EQ(at({1, 1}, "続き」「次"), "1/2");
     HD_CHECK_EQ(at({2, 1}, "』」"), "0/1");
+}
+
+HD_TEST(output_polite_quotes) {
+    const auto show = [](const std::vector<bool>& v) {
+        std::string s;
+        for (const bool b : v) s += b ? '1' : '0';
+        return s;
+    };
+    HD_CHECK_EQ(show(PoliteQuotes("「고마워요. 살았어」", 0)), "01");
+    HD_CHECK_EQ(show(PoliteQuotes("「달라. 그렇지 않아」「좋네요~!」", 0)), "001");
+    HD_CHECK_EQ(show(PoliteQuotes("「필요. 중요!」", 0)), "00");
+    HD_CHECK_EQ(show(PoliteQuotes("「『알겠습니다』라고 했어」", 0)), "00");
+    HD_CHECK_EQ(show(PoliteQuotes("그는 웃었어요. 「몰라」", 0)), "10");
+    HD_CHECK_EQ(show(PoliteQuotes("갑니다」라고 했다", 1)), "01");
 }

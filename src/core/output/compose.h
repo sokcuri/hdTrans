@@ -23,6 +23,10 @@ struct QuoteState {
     int count = 0;
 };
 
+// A quote style besides those of pipeline::QuoteStyles: the Japanese of the quote is
+// casual speech (pipeline::CasualQuotes).
+constexpr std::uint8_t kCasualSpeech = 32;
+
 // The switches of the stage.
 struct Settings {
     int hanjaToHangul = 1;  // 1: kanji left in the text are written as their Hangul reading
@@ -35,9 +39,16 @@ struct Settings {
     // sentence, and the quoteStyles of the line (pipeline::QuoteStyles) keep polite and old
     // speech.
     bool casual = false;
+    // Only the quotes whose style has kCasualSpeech.
+    bool casualMarkedOnly = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
+
+// For each quote of the Korean line (indexed as pipeline::QuoteStyles, depth the quote
+// an earlier line left open), whether its own text ends a sentence politely (고마워요,
+// 좋네요, 합니다).
+std::vector<bool> PoliteQuotes(std::string_view line, int depth);
 
 // The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing
 // bracket outside a quote is ignored), and count counts the quotes opened outside any.
