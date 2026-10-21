@@ -527,6 +527,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 if ((nd(GAttr(items[previous])) && Contains(tags, "Ct")) || nd(tags)) return Result(std::move(t), true);
             }
             if (tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana) return Result(std::move(t), true);
+            // A pronoun forms no compound with the noun after it (私無し 나 없이, not 나없음).
+            if (Code(item).starts_with("12") && nextKind == '1') return Result(std::move(t), true);
             const bool spaced = !converted && (WidthOf(t) > 2 || nextKind != kind);
             if (Contains(nextEntry, "&AV@") || Contains(nextEntry, "&C6@") || Contains(nextEntry, "%A1@") ||
                 Contains(nextEntry, "%D5@") || Contains(nextEntry, "$AB@") || Contains(nextEntry, "$AE@")) {
