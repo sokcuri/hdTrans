@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:teitai:1	今日は一日中ここで本を読んでいたい。	오늘은 하루종일 여기서 책을 읽고 있고 싶다.	fix	local
 dict:teitai:1	もう少しだけ海を眺めていたかった。	좀 더만 바다를 바라보고 있고 싶었다.	fix	local
 dict:teitai:1	彼女と話していたいが、時間がない。	그녀와 이야기하고 있고 싶지만, 시간이 없다.	fix	local
-dict:teitai:1	ずっと君の隣に座っていたいな。	쭉 네 옆에 앉아 있고 싶은데.	fix	local
+dict:teitai:1	ずっと君の隣に座っていたいな。	쭉 네 옆에 앉아 있고 싶은데.	keep	local
 dict:teitai:1	家で休んでいたくて、断った。	집에서 쉬고 있고 싶어서, 끊었다.	fix	local
 dict:teitai:1	朝はずっと寝てたい。	아침은 쭉 자고 있고 싶다.	fix	local
 dict:teitai:1	彼は家で本を読んでいた。	그는 집에서 책을 읽고 있었다.	keep	local
