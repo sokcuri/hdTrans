@@ -3483,7 +3483,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いつか	언젠가	E311			GN				jisjk:75		
 いつかしら	모르는 사이에	E311			GN				jisjk:76		
 いつかは	언젠가는	E311			GN				jisjk:77		
-いつかはと存じてお	언젠가는 잘 될거라고 생각&AV@	E428		Pe	GN				jisjk:268214		
+いつかはと存じてお	언젠가는 잘 될 거라고 생각&AV@	E428		Pe	GN				jisjk:268214		
 いつから	언제부터	E300			GN				jisjk:263867		
 いつからか	언제부턴가	E311			GN				jisjk:78		
 いつき	이츠키	N130	QPN	Wb	GN				jisjk:341137		
@@ -4619,7 +4619,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 うそを放	거짓말을 지껄&AJ@	M441			GN				jisjk:145600		
 うそ寒	으시시$AB@	H7U0			GN				jisjk:4895		
 うそ発見器	거짓말탐지기	I110	VPe		GN				jisjk:40421		
-うぞ	1버릴거야	S5A0		Sh	GN				jisjk:343245		
+うぞ	1버릴 거야	S5A0		Sh	GN				jisjk:343245		
 うぞうむぞう	유상 무상	I110	UTs		GN				jisjk:126779		
 うた	노래	N110	USo		GN				jisjk:13837		
 うた	노래&AV@	H430	USo		GN				jisjk:13838		
@@ -13771,7 +13771,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 くださいませ	6 주십시오	S5:0			GN				jisjk:358011		
 くださいません	6 주시지 않습니다	S570			GN				jisjk:4283		
 くださいませんか	6 주시지 않겠습니까	S570			GN				jisjk:340833		
-くださると	6 주실거라고	S570			GN				jisjk:265728		
+くださると	6 주실 거라고	S570			GN				jisjk:265728		
 くださるよう	해 주시도록	I110		Tu	GN				jisjk:262863		
 くださるよう	6 주시도록	S570			GN				jisjk:262871		
 くださるよう	6 주시도록	S580			GN				jisjk:262898		
@@ -25163,7 +25163,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 じゃないの	1지 않아	U500			GN				jisjk:340832		
 じゃないので	1지 않아서	U500			GN				jisjk:342369		
 じゃないのに	도 아니면서	C0H0		Tu	GN	1842	||1 P-1== "1**"	じゃないのに는 앞말이 명사이면 '도 아니면서'를 고른다.	jisjk:257577		
-じゃないのよ	(은)는 아닌거예요 	E310		Tu	GN				jisjk:264266		
+じゃないのよ	(은)는 아닌 거예요 	E310		Tu	GN				jisjk:264266		
 じゃね	그럼	P200			GN				jisjk:342964		
 じゃねん	사념	N110	SFl		GN				jisjk:194211		-1
 じゃのめ	굵은 고리 모양	N110			GN				jisjk:194213		-1
@@ -31629,8 +31629,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 だろうぞ	1겠지	U500			GN				jisjk:258460		
 だろうと	5을 것이라고	T5b1			GN				jisjk:4145		
 だろうと	3 것이라고	S501			GN				jisjk:4146		
-だろうと	일거라고	P201		Z2	GN				jisjk:4147		
-だろうと	일거라고	P200		J1Z2	GN				jisjk:4148		
+だろうと	일 거라고	P201		Z2	GN				jisjk:4147		
+だろうと	일 거라고	P200		J1Z2	GN				jisjk:4148		
 だろうに	5을 텐데	S560			GN				jisjk:341811		
 だろうね	1겠지	U500			GN				jisjk:258455		
 だろうね	1겠지	S560			GN				jisjk:265372		
@@ -33489,7 +33489,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ですぜ	6요	U500			GN				jisjk:258480		
 ですぞ	(이)지	P210		Z2J2	GN				jisjk:6233		
 ですぞ	6요	U500			GN				jisjk:258479		
-ですだい。	인거야	P210		Z2	GN				jisjk:6234		
+ですだい。	인 거야	P210		Z2	GN				jisjk:6234		
 ですって	(이)라고	P211		Z2	GN				jisjk:6235		
 ですって	(이)래	P210		Z2J2	GN				jisjk:6236		
 ですと	이라면	P200			GN				jisjk:264414		
@@ -33508,8 +33508,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ですので	1므로	U500			GN				jisjk:264523		
 ですので	그러므로	P200		Z0	GN	3246	||1 G+0== "Hz"	ですので가 문장 첫 단어이면 그러므로를 고른다. (미발동: rare-context)	jisjk:342412		
 ですべりやすくなって	(로) 미끄러워지기 쉽게 &C6@	M427			GN				jisjk:142392		
-ですもの	인거야	P210		Z2J2	GN				jisjk:6241		
-ですもん	인거야	P210		Z2J2	GN				jisjk:6242		
+ですもの	인 거야	P210		Z2J2	GN				jisjk:6241		
+ですもん	인 거야	P210		Z2J2	GN				jisjk:6242		
 ですもんね	이지요	P200			GN				jisjk:264756		
 ですもんね	1네요	U500			GN				jisjk:343407		
 ですよ	(이에)예요	P200		Z2	GN				jisjk:6243		
@@ -33519,7 +33519,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ですわ	(이)예요	P200		Z2	GN				jisjk:6245		
 ですわ	1네요	U500			GN				jisjk:258463		
 ですんじゃない	(이)지 않아요	P210		Z2J2	GN				jisjk:6246		
-ですんだい。	인거야	P210		Z2	GN				jisjk:6247		
+ですんだい。	인 거야	P210		Z2	GN				jisjk:6247		
 でずき	외출을 좋아%D1@	G8U0		Av	GN				jisjk:142287		
 でずっぱりとな	계속 출연하게 &C6@	M428		Dx	GN				jisjk:144675		
 でそろ	전부 나&AH@	M420			GN				jisjk:144681		
@@ -44692,7 +44692,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 んだ	0 거야	S500			GN	3467	||2 &&2 S+0== "言" U-1== "って" ||2 S-3== "何" S-3== "なに"	言う의 って형 뒤나 세 단어 앞에 何·なに가 있는 문맥의 んだ를 는 거야로 고른다.	jisjk:343548		
 んだい	8 거야	S560			GN				jisjk:342056		
 んだい	0 거야	S500			GN				jisjk:364776		
-んだか	1고 있는건지	S570			GN				jisjk:343570		
+んだか	1고 있는 건지	S570			GN				jisjk:343570		
 んだから	1기 때문에	S500			GN				jisjk:117827		
 んだから	5으니까	S560			GN				jisjk:268389		
 んだが	1지만	S500			GN				jisjk:202116		
