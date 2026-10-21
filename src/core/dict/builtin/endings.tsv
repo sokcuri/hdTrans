@@ -307,6 +307,18 @@
 書くのかもしれませんわ	쓰는 것일지도 몰라요	end	prio=-1
 書いちゃったか	써 버렸나	end	prio=-1
 書いてしまったか	써 버렸나	end	prio=-1
+// のか ending a question: 는 건가
+書くのか	쓰는 건가	end	prio=-1
+書いたのか	쓴 건가	end	prio=-1
+書かないのか	쓰지 않는 건가	end	prio=-1
+書かなかったのか	쓰지 않은 건가	end	prio=-1
+高いのか	높은 건가	end	prio=-1
+高かったのか	높았던 건가	end	prio=-1
+高くないのか	높지 않은 건가	end	prio=-1
+// た + か ending a question: 썼나
+書いたか	썼나	end	prio=-1
+書かなかったか	쓰지 않았나	end	prio=-1
+高かったか	높았나	end	prio=-1
 // てくれよ, ておくれ: a request
 書いてくれよ	써 줘	end	prio=-1
 書いておいてくれよ	써 둬	end	prio=-1

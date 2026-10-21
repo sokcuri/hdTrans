@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+ending:書くのか	本当に行くのか？	정말로 가는 건가?	fix	builtin-ending
+ending:書くのか	そこで何をしているのか？	거기서 무엇을 하고 있는 건가?	fix	builtin-ending
+ending:書いたのか	もう食べたのか。	벌써 먹은 건가.	fix	builtin-ending
+ending:書いたのか	そこにいたのか。	거기에 있던 건가.	fix	builtin-ending
+ending:書かないのか	まだ帰らないのか？	아직 돌아가지 않는 건가?	fix	builtin-ending
+ending:高いのか	そんなに寒いのか？	그렇게 추운 건가?	fix	builtin-ending
+ending:高かったのか	昨日は暑かったのか。	어제는 더웠던 건가.	fix	builtin-ending
+ending:書いたか	手紙を読んだか？	편지를 읽었나?	fix	builtin-ending
+ending:書くのか	彼は来るのかもしれない。	그는 올지도 모른다.	keep	builtin-ending
+ending:書くのか	それは本当なのか？	그것은 사실인가?	keep	builtin-ending
+ending:書いたか	読んだかどうか分からない。	읽었는지 어떠했는지 모른다.	keep	builtin-ending

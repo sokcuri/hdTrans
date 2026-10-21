@@ -23,7 +23,7 @@ dict:fixed-idiom	場所を確かめる。	장소를 확인한다.	keep	lookup
 dict:fixed-idiom	あれを見る。	저것을 본다.	keep	lookup
 dict:fixed-idiom	男がにじり寄ってきた。	남자가 조금씩 접근해 왔다.	fix	lookup
 dict:fixed-idiom	彼にコケにされた。	그에게 우습게 여겨졌다.	fix	lookup
-dict:fixed-idiom	学校はどうあればよいのか。	학교는 어떻게 있으면 좋은 것인지.	keep	lookup
+dict:fixed-idiom	学校はどうあればよいのか。	학교는 어떻게 있으면 좋은 건가.	keep	lookup
 dict:fixed-idiom	コケにする人を許さない。	우습게 여기는 사람을 용서하지 않는다.	fix	lookup
 dict:fixed-idiom	コケにされても怒らない。	우습게 여겨져도 화내지 않는다.	fix	lookup
 dict:fixed-idiom	無下にしたのは私だ。	매몰차게 무시한 것은 나다.	fix	lookup
