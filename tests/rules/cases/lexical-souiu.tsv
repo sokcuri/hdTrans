@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:4570	そういう話は聞いたことがない。	그런 이야기는 들은 적이 없다.	fix	lookup
