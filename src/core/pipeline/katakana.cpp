@@ -854,7 +854,7 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         }
         if (animal) continue;
         // A verb before んだ, んで or んな (叩くんじゃねえ, しとくんで, 狙ってくんな), not a name
-        // in っ (たっくん).
+        // in っ (あっくん).
         if (honorific == "くん") {
             const bool predicate = rest.starts_with("じゃ") || rest.starts_with("だ") || rest.starts_with("で") ||
                                    rest.starts_with("な") || rest.starts_with("の");

@@ -266,7 +266,7 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
         }
         if (opens) {
             depth++;
-        } else if ((r.cp == U'」' || r.cp == U'』') && depth > 0 && --depth == 0) {
+        } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0 && --depth == 0) {
             texts.back() += c;
             // A word quoted inside a sentence (モットーは「従う」だ) is cited too.
             const bool word = embedded && text::RuneCount(texts.back()) <= 6;

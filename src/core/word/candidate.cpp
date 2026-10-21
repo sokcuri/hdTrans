@@ -745,9 +745,9 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     other = other->child;
                 }
                 const std::string_view afterStem = From(text, offset + static_cast<long>(stop->source.size()));
-                if (word->patternKind == 0 && word->kind == 10 && afterStem.starts_with("い") &&
-                    TeAfterWaStem(stop->source, afterStem.substr(std::string_view("い").size())) && other != nullptr &&
-                    other->source == stop->source && At(other->partCode, 1) == '4') {
+                if (word->patternKind == 0 && word->kind == 10 && afterStem.starts_with("い") && other != nullptr &&
+                    other->source == stop->source && At(other->partCode, 1) == '4' &&
+                    TeAfterWaStem(stop->source, afterStem.substr(std::string_view("い").size()))) {
                     rec = other;
                     group->records = nullptr;
                     continue;

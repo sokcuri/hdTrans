@@ -99,10 +99,13 @@ constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い"
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};
+// The rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the
+// first kana of まで, なら or たくさん after 今年.
+constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "なけ", "なきゃ", "なくちゃ", "なさ", "ねえ",
+                                           "ねー", "ます", "ませ", "まし", "て", "ちゃ", "ちま", "たら",
+                                           "たり", "たい", "たく", "よう", "つつ", "ながら"};
 // What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
 // ていただく).
-// The rest of a form of する after its stem し (しない, してる, しちゃう, しよう).
-constexpr std::string_view kSuruTails[] = {"な", "て", "た", "ま", "ろ", "よう", "ちゃ", "そう", "つつ", "ながら"};
 constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
 constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
@@ -259,6 +262,13 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return next != kClassKanji && next != kClassKatakana;
     }
     case ConstraintContext::BeforeSuruForm:
+        // した, but not たくさん: the past ends there or a particle or mark follows it.
+        if (after.starts_with("たくさん")) return false;
+        if (after.starts_with("た") && !after.starts_with("たく")) {
+            const std::string_view rest = after.substr(std::string_view("た").size());
+            const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+            return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
+        }
         return StartsWithAny(after, kSuruTails);
     case ConstraintContext::Detached:
         return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||

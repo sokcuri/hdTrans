@@ -61,7 +61,7 @@ std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
                 noun = noun || (end == "요" && head.ends_with(n));
             }
             if (!noun && (next == 0 || text::IsSpace(next) ||
-                          std::u32string_view(U".,!?…‥」』。、！？").find(next) != std::u32string_view::npos)) {
+                          std::u32string_view(U".,!?…‥」』｣。、！？").find(next) != std::u32string_view::npos)) {
                 polite[own] = true;
             }
         }
@@ -83,7 +83,7 @@ bool WordEnds(std::string_view s) {
     if (s.empty()) return true;
     const char32_t c = text::DecodeRune(s).cp;
     return text::IsSpace(c) ||
-           std::u32string_view(U".,!?…‥~～―ー─-「『」』。、！？♪").find(c) != std::u32string_view::npos;
+           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪").find(c) != std::u32string_view::npos;
 }
 
 // The spoken form of the written word at the start of s (것은 건, 무엇을 뭘) and the bytes it
@@ -469,11 +469,12 @@ void Composer::WriteCasual(int first, int last) {
             AskConjecture(i, Clause(before + std::string(own)), own, quoted && !styled)) {
             continue;
         }
-        // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라); not in
-        // polite or old speech (何でしたっけ).
-        if (close != 0 && !styled && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
+        // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라), in
+        // polite or old speech with 던가 (どこでしたっけ 어디서 했던가).
+        if (close != 0 && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
             QuestionWord(Clause(before + std::string(own)))) {
-            it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(), "더라");
+            it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(),
+                                   styled ? "던가" : "더라");
             continue;
         }
         // ？ after ぞ, ぜ, よ, わ, さ or ね presses a statement (結婚するつもりなんだぞ？), it

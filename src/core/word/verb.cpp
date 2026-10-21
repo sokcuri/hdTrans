@@ -209,9 +209,9 @@ bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const 
         if (Starts(after, "てえ") || Starts(after, "てぇ") || Starts(after, "てー") || Starts(after, "てェ")) return false;
     } else {
         if (!Starts(after, "た")) return false;
-        // The たい family, the honorific たまえ (言いたまえ) and the compounds in ため and たて
-        // (買いため, 言いたて) go on from the stem of the わ verb.
-        for (const std::string_view rest : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ", "たま", "ため", "たて"}) {
+        // The たい family, the honorific たまえ (言いたまえ) and the compounds in ため, たて and
+        // たっ (買いため, 言いたて, 思いたった) go on from the stem of the わ verb.
+        for (const std::string_view rest : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ", "たま", "ため", "たて", "たっ"}) {
             if (Starts(after, rest)) return false;
         }
     }
