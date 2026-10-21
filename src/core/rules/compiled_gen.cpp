@@ -632,9 +632,11 @@ bool RuleL80([[maybe_unused]] Item* p) {
 // local 81
 //     src[-1] == "が" and ko[-1] == "(을)를"
 //     pos[-1] is 4** and end.src[-1] == "のが" and end.pos[-1] is 50* and end.ko[-1] := "0 것을"
+//     pos[-1] is 8** and end.src[-1] == "なのが" and end.pos[-1] is 50* and end.ko[-1] := "4 것을"
 bool RuleL81([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "が"sv) && DstEq(p, -1, "(을)를"sv)) ||
-           (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "のが"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "0 것을"sv));
+           (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "のが"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "0 것을"sv)) ||
+           (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, "なのが"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "4 것을"sv));
 }
 
 // local 82
@@ -738,6 +740,7 @@ bool RuleL96([[maybe_unused]] Item* p) {
 //     pos[-1] is 4** and end.src[-1] == "のが" and end.pos[-1] is 50* and end.ko[-1] := "0 것을"
 //     (end.src == "です" or end.src == "だ") and src[-1] == "が" and pos[-1] is 2** and (ko[-2] != "내" or ko[-2] := "나") and ko[-1] := "(을)를"
 //     pos[-1] is 4** and end.pos[-1] is 5:0 and end.ko[-1] := "0 것을"
+//     pos[-1] is 8** and end.src[-1] == "なのが" and end.pos[-1] is 50* and end.ko[-1] := "4 것을"
 bool RuleL97([[maybe_unused]] Item* p) {
     return ((SrcEq(p, 0, "好き"sv) ||
            SrcEq(p, 0, "すき"sv) ||
@@ -746,7 +749,8 @@ bool RuleL97([[maybe_unused]] Item* p) {
            ((GobiSrcEq(p, 0, "です"sv) ||
            GobiSrcEq(p, 0, "だ"sv)) && SrcEq(p, -1, "が"sv) && PumsaEq(p, -1, "2**"sv) && (DstNe(p, -2, "내"sv) ||
            DstSet(p, -2, "나"sv)) && DstSet(p, -1, "(을)를"sv)) ||
-           (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:0"sv) && GobiDstSet(p, -1, "0 것을"sv));
+           (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "5:0"sv) && GobiDstSet(p, -1, "0 것을"sv)) ||
+           (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, "なのが"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "4 것을"sv));
 }
 
 // local 98
@@ -4499,7 +4503,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL78, 0x1f14960a7d4949c5ull},
     {RuleL79, 0x9c322b99f5e6a5d4ull},
     {RuleL80, 0x8cc7c5c1f459ee86ull},
-    {RuleL81, 0x919a8554063b7dceull},
+    {RuleL81, 0xde69bc97ec477844ull},
     {RuleL82, 0x275b1fe093e78207ull},
     {RuleL83, 0xb6c68d8b4a65c8daull},
     {RuleL84, 0xde9ef9cd1e43c7cbull},
@@ -4515,7 +4519,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL94, 0xf2bd933a4c5e2df2ull},
     {RuleL95, 0x958e4b0425de092eull},
     {RuleL96, 0x948ed32288ec23f3ull},
-    {RuleL97, 0xcd235febb449b331ull},
+    {RuleL97, 0xe0fb90beddf39075ull},
     {RuleL98, 0x7d85fc8c08ac4ef5ull},
     {RuleL99, 0xc61fb05c3c3b734aull},
     {RuleL100, 0x8aea83a40bc764a2ull},

@@ -336,6 +336,19 @@
 書いちゃってる	써 버렸다	end	prio=-1
 書いてしまっている	써 버렸다	end	prio=-1
 書いてしまってる	써 버렸다	end	prio=-1
+書いちゃってるわ	써 버렸어	end	prio=-1
+書いちゃってるわよ	써 버렸어	end	prio=-1
+書いちゃってるよ	써 버렸어	end	prio=-1
+書いちゃってるね	써 버렸네	end	prio=-1
+書いてしまってるわ	써 버렸어	end	prio=-1
+書いてしまってるわよ	써 버렸어	end	prio=-1
+// わ, わよ, わね after ちゃう and a plain past.
+書いちゃうわ	써 버려	end	prio=-1
+書いちゃうわよ	써 버릴 거야	end	prio=-1
+書いちゃったわ	써 버렸어	end	prio=-1
+書いちゃったわよ	써 버렸어	end	prio=-1
+書いちゃったわね	써 버렸네	end	prio=-1
+書いたわね	썼네	end	prio=-1
 
 // ってよ, ってさ: hearsay at the end of an utterance (婚約破棄したってよ！ 파혼했대!).
 書いたってよ	썼대	end	prio=-1
