@@ -311,11 +311,18 @@ bool Worker::TrailsOff(std::string_view rest) const {
 // it, and a pattern whose Korean ends in the terminal 다 needs the end of the sentence
 // or a comma after it.
 bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const {
+    const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    // A key ending in からって does not take the quotation of a verb of saying or
+    // thinking (だからって思う).
+    if (u.key.ends_with("からって")) {
+        for (const std::string_view s : {"言", "いう", "いっ", "いわ", "思", "おも", "聞"}) {
+            if (rest.starts_with(s)) return false;
+        }
+    }
     const char tag = At(u.codes->partText, 0);
     if (!AnyOf("PSTU", tag) || query.empty() || current < 0) return true;
     // A key ending in で does not split です, でしょう, でございます or でも (もんで).
     if (u.key.ends_with("で")) {
-        const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
         for (const std::string_view s : {"す", "し", "ご", "も"}) {
             if (rest.starts_with(s)) return false;
         }
@@ -326,9 +333,8 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
         if (!NounBefore(left.substr(0, static_cast<std::size_t>(before)))) return false;
     }
     if (!u.target.ends_with(kKoDa)) return true;
-    const std::string_view after = query.substr(std::min(u.key.size(), query.size()));
-    return SentenceFinal(after, current, false) || after.starts_with(kJaComma) || after.starts_with(kJaFullComma) ||
-           after.starts_with(",");
+    return SentenceFinal(rest, current, false) || rest.starts_with(kJaComma) || rest.starts_with(kJaFullComma) ||
+           rest.starts_with(",");
 }
 
 // A name-layer key, matched at query (the rest of the surface being split), fills its
