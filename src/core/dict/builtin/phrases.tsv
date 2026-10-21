@@ -1123,6 +1123,11 @@
 どうしてだ	어째서지	intj
 なぜだろう	왜일까	intj
 どうしてだろう	어째서일까	intj
+// はず after a pause, with nothing before it in the sentence
+はず	그럴 것	intj
+はずだ	그럴 것이다	intj
+はずです	그럴 것입니다	intj
+はずだった	그럴 것이었다	intj
 って何だよ	라니 뭐야	phrase
 ってなんだよ	라니 뭐야	phrase
 マジかよ	진짜냐	intj
