@@ -28,3 +28,5 @@ dict:jisjk:95067	彼女は腰を振って踊った。	rule:dict:jisjk:95067=흔&
 dict:jisjk:95067	手を振って別れた。	손을 흔들어 헤어졌다.	keep	local
 dict:jisjk:95067	首を振って断った。	!rule:dict:jisjk:95067	keep	local
 dict:jisjk:4875	いやらしい目で見ないで。	야한 눈으로 보지 마.	fix	lookup
+phrase:こっちこそ	いや、こっちこそごめんね。	아니, 나야말로 미안해.	fix	lookup
+phrase:こっちこそ	こっちこそありがとう。	나야말로 고마워.	fix	lookup
