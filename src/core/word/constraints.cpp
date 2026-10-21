@@ -60,7 +60,7 @@ constexpr ConstraintRule kRules[] = {
     {"wa-won-without-number", ConstraintWord::Source, "わ", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 わ는 원이 아님 (だったわ 이었던 원, おわっ 원)", "원"},
     {"wa-after-predicate", ConstraintWord::Source, "わ", ConstraintContext::AfterPredicate, ConstraintReject::Target,
-     "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요). うわ, おわ는 그대로 와", "와"},
+     "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요, 知らねーわ). うわ, おわ는 그대로 와", "와"},
     {"n-after-verb", ConstraintWord::Source, "ん", ConstraintContext::AfterVerbEnding, ConstraintReject::Target,
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
     {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
@@ -89,8 +89,9 @@ constexpr std::string_view kOpeningBrackets[] = {"「", "『", "（", "(", "“"
 // The characters that mask a name (○○君, △△さん).
 constexpr std::u32string_view kMasks = U"○●◯〇◎×✕＊*■□△▲◇◆";
 
-// The last characters of a predicate that a sentence-final particle follows.
-constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん"};
+// The last characters of a predicate that a sentence-final particle follows; え, ー and
+// the like end a drawn-out slang predicate (痛えわ, 知らねーわ).
+constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん", "え", "ぇ", "ー", "エ", "ェ"};
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};

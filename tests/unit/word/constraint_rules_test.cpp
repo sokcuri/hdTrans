@@ -321,7 +321,8 @@ HD_TEST(constraint_sou_itta_predicate) {
 
 // め and わ with no numeral among the three characters before them are not the ordinal 째 and
 // the 원 of a sum (化け物め, おわっ); after a quantity (三回め, 5人め) they keep every sense.
-// わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ).
+// わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ,
+// 知らねーわ).
 HD_TEST(constraint_counter_without_number) {
     CheckCases({
         {"化け物め", "め", "め", "녀석"},
@@ -333,6 +334,8 @@ HD_TEST(constraint_counter_without_number) {
         {"五わ", "わ", "わ", "원 와 "},
         {"誤算だったわ", "わ", "わ", ""},
         {"よろしいですわ", "わ", "わ", ""},
+        {"知らねーわ", "わ", "わ", ""},
+        {"痛えわ", "わ", "わ", ""},
     });
 }
 

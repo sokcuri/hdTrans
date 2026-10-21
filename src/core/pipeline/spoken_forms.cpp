@@ -1,5 +1,6 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
+#include "core/pipeline/runes.h"
 #include "core/pipeline/spoken_forms_gen.h"
 
 namespace hdTrans::pipeline::internal {
@@ -337,6 +338,108 @@ std::string ReplaceExclamationNa(const Match& m) {
     return Cat({g.group[1], "なあ", g.group[2].substr(trim), g.group[3]});
 }
 
+struct SlangAdjective {
+    std::string_view stem;   // the spelling before the drawn-out え
+    std::string_view plain;  // the dictionary form
+    bool afterWord;          // also right after kana or kanji (なんかすげえ); a short stem
+                             // is not, so that 書いてー and 見ようぜえ stay
+    bool alone = false;      // also standing alone, where the interjection rows read it
+                             // (すげえ！ 대박, うるせえ。 시끄러)
+};
+
+// Adjectives spelled with a drawn-out え (すげえ すごい, うるせー うるさい); a stem that
+// starts another comes after it.
+constexpr SlangAdjective kSlangAdjectives[] = {
+    {"めんどくせ", "面倒くさい", true, true}, {"すっげ", "すごい", true}, {"すげ", "すごい", true},
+    {"うるせ", "うるさい", true},             {"うっせ", "うるさい", true}, {"かっけ", "カッコいい", true, true},
+    {"あぶね", "危ない", true, true},         {"危ね", "危ない", true, true}, {"やべ", "やばい", true},
+    {"こえ", "怖い", true, true},             {"怖", "怖い", true, true},   {"ちげ", "違う", true, true},
+    {"パネ", "ハンパない", true, true},       {"ぱね", "ハンパない", false, true}, {"いて", "痛い", false, true},
+    {"うめ", "美味い", false, true},          {"でけ", "でかい", false, true}, {"つえ", "強い", false, true},
+    {"よえ", "弱い", false, true},            {"くせ", "臭い", false, true}, {"うぜ", "うざい", false, true},
+    {"きめ", "きもい", false, true},          {"はえ", "早い", false, true},
+};
+
+// What may follow a slang adjective: a mark, a space, the end, or a particle.
+constexpr std::u32string_view kSlangMarks = U"ｗw～〜 　！!？?。、…‥」』）)";
+constexpr std::u32string_view kSlangParticles = U"よなねぞぜしっとだじかけの";
+
+// Whether s continues at p with the stem of a slang adjective (すげえすげえ).
+bool SlangStemAt(std::string_view s, size_t p) {
+    for (const SlangAdjective& a : kSlangAdjectives) {
+        if (s.substr(p).starts_with(a.stem)) return true;
+    }
+    return false;
+}
+
+// (すげ|うるせ|…)[えぇーェエ]+ before a particle, a mark, another of them or the end; a
+// sentence-final わ after it goes as well (すげえわ すごい, こええよ 怖いよ). Group 1 the
+// plain form. 違いねえ (ちげえね) stays.
+bool SlangAdjectivePattern(std::string_view s, size_t pos, Match& m) {
+    const char32_t before = pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp;
+    const bool afterWord = IsHiraganaClass(before) || IsKanjiClass(before) || before == U'ー';
+    const bool opens = pos == 0 || In(before, U" 　、。！!？?…‥「『（(");
+    for (const SlangAdjective& a : kSlangAdjectives) {
+        size_t p = pos;
+        if (!Lit(s, p, a.stem) || (afterWord && !a.afterWord)) continue;
+        const bool ok = Repeat(s, p, InSet(U"えぇーェエ"), 1, kUnbounded, [&](size_t q) {
+            if (a.stem == "ちげ" && s.substr(q).starts_with("ね")) return false;
+            if (SlangStemAt(s, q)) {
+                m.end = q;
+                return true;
+            }
+            size_t r = q;
+            if (Lit(s, r, "わ")) {
+                while (Lit(s, r, "ー") || Lit(s, r, "ぁ") || Lit(s, r, "～")) {}
+                size_t t = r;
+                if (r == s.size() || !Take(s, t, IsHiraganaClass)) {
+                    m.end = r;
+                    return true;
+                }
+            }
+            r = q;
+            if (q != s.size() && !OneOf(s, r, kSlangMarks) && !OneOf(s, r, kSlangParticles)) return false;
+            r = q;
+            if (opens && !a.alone && (q == s.size() || OneOf(s, r, kSlangMarks))) return false;
+            m.end = q;
+            return true;
+        });
+        if (ok) {
+            m.group[1] = a.plain;
+            return true;
+        }
+    }
+    return false;
+}
+
+// The pronouns after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
+constexpr std::string_view kTopicWaWords[] = {
+    "こっち", "そっち", "あっち", "どっち", "こちら", "そちら", "あちら", "お前", "おまえ", "オマエ", "てめえ",
+    "あんた", "アンタ", "あなた", "貴方", "君", "きみ", "キミ", "私", "わたし", "あたし", "アタシ", "俺", "おれ",
+    "オレ", "僕", "ぼく", "ボク", "うち", "これ", "それ", "あれ", "今日", "明日", "昨日", "みんな", "皆",
+};
+
+// (こっち|お前|…)わ before a mark, a space, kanji, katakana or the end: group 1 the
+// pronoun (こっちわ大丈夫 こっちは). わ before hiragana stays (お前わかってる).
+bool TopicWa(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0) {
+        const char32_t before = LastRune(s.substr(0, pos)).cp;
+        if (IsHiraganaClass(before) || IsKanjiClass(before) || (before >= U'ァ' && before <= U'ヺ') || before == U'ー') {
+            return false;
+        }
+    }
+    for (std::string_view w : kTopicWaWords) {
+        size_t p = pos;
+        if (!Lit(s, p, w) || !Lit(s, p, "わ")) continue;
+        size_t q = p;
+        if (p != s.size() && (Take(s, q, IsHiraganaClass) || OneOf(s, q, U"ーぁぃぅぇぉっ"))) continue;
+        m.group[1] = Span(s, pos, p - std::string_view("わ").size());
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 bool ContainsAny(std::string_view s, std::u32string_view set) {
     for (size_t i = 0; i < s.size();) {
         const text::Rune r = At(s, i);
@@ -394,6 +497,12 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (Contains(text, "ん")) {
         text = ReplaceAll(text, NegativeN, [](const Match& m) { return Group1Plus(m, "ない"); });
         text = ReplaceAll(text, NegativeE, [](const Match& m) { return Group1Plus(m, "ない"); });
+    }
+    if (dialectForms && Contains(text, "わ")) {
+        text = ReplaceAll(text, TopicWa, [](const Match& m) { return Cat({m.group[1], "は"}); });
+    }
+    if (dialectForms && ContainsAny(text, U"えぇーェエ")) {
+        text = ReplaceAll(text, SlangAdjectivePattern, [](const Match& m) { return std::string(m.group[1]); });
     }
     if (exclamationNa && Contains(text, "な")) text = ReplaceAll(text, ExclamationNa, ReplaceExclamationNa);
     return ReplaceAll(text, Dekinu, [](const Match&) { return std::string("できない"); });

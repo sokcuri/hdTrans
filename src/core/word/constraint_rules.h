@@ -30,7 +30,8 @@ enum class ConstraintContext : uint8_t {
     AfterDemonstrative, // right after この, その or あの
     BeforeNaru,         // なる follows (こうなる), not the old attributive of an adjective (こうなるべく)
     BeforeAgaru,        // 上が follows (一人立ち上がり), so the shorter word ends inside a longer one
-    AfterPredicate,     // right after た, だ, る, う, い, す or ん in the token or the token before (だったわ, ですわ)
+    AfterPredicate,     // right after た, だ, る, う, い, す, ん or a drawn-out え, ー in the token or the
+                        // token before (だったわ, ですわ, 知らねーわ)
     NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
     NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)

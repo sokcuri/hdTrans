@@ -446,6 +446,15 @@ HD_TEST(pipeline_dialect_forms) {
         {"まだ食べてへん。"sv, "まだ食べてない。"sv},
         {"読んどれよ"sv, "読んでいろよ"sv},
         {"読んどる、待っとる。"sv, "読んでいる、待っている。"sv},
+        {"このラーメンうめえわ。"sv, "このラーメン美味い。"sv},
+        {"マジでうるせえよ"sv, "マジでうるさいよ"sv},
+        {"すげえ！"sv, "すげえ！"sv},
+        {"すげえすげえ"sv, "すごいすごい"sv},
+        {"肉を焼いてー！"sv, "肉を焼いてー！"sv},
+        {"会うぜぇ！"sv, "会うぜぇ！"sv},
+        {"ちげぇねえ"sv, "ちげぇねえ"sv},
+        {"こっちわ大丈夫"sv, "こっちは大丈夫"sv},
+        {"お前わかってる"sv, "お前わかってる"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
