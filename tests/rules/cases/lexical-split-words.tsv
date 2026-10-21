@@ -22,3 +22,5 @@ pattern:書くに従って	時間が経つに従って寒くなった。	시간�
 pattern:学生だってこと	彼が犯人だってことは秘密だ。	그가 범인이라는 것은 비밀이다.	fix	builtin-pattern
 pattern:学生だってこと	彼だって、ことの重さは分かる。	그도, 일의 무게는 안다.	keep	builtin-pattern
 dict:lexical-split-words	有り得ぬ天文学的確率だ。	있을 수 있지 않는 천문학적 확률이다.	fix	lookup
+dict:jisjk:56441	銀のペンダントをもらった。	은의 펜던트를 받았다.	fix	lookup
+dict:lexical-split-words	魔法使いはアイスランスを放った。	마법사는 아이스 랜스를 발했다.	fix	lookup
