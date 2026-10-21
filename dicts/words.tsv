@@ -15925,7 +15925,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 建艦	건함	N110		Hd	GN						けんかん	w:15909
 建艦	건함&AV@	M429			GN						けんかん	w:15910
 建議案	건의안	N110			GN						けんぎあん	w:15911
-廻し	마와시	N110	VCp		GN				xxx llm		まわし	w:15912
+廻し	돌리기	N110	VCp		GN				xxx llm		まわし	w:15912
 廻し	집단 강간	N110			GN				llm		まわし	w:15913
 廻向	회향	N110	UCl	Hd	GN				llm		えこう	w:15914
 廻向	회향&AV@	M429			GN				llm		えこう	w:15915
