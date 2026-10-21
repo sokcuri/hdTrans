@@ -3541,7 +3541,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 依估贔屓	연고주의&AV@	M429			GN							w:12001
 偉觀	장관	N110	VPl		GN							jisjk:125209
 意張	잘난체 &AV@	M418			GN							jisjk:94302
-意張	뽐&A6@  	M428	SFl		GN							jisjk:140996
+意張	뽐&A6@	M428	SFl		GN							jisjk:140996
 威伏	위복	N110		Hd	GN							jisjk:126147
 意氣	기개	N110			GN							jisjk:31030
 意気軒昻	의기충천	N110	VHn		GN							jisjk:227994
@@ -5364,7 +5364,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 描き写	베껴&AF@	M443			GN							jisjk:363444
 書きうつ	베껴&AF@	M443			GN							jisjk:363444
 書送	써서 보&A6@	M438	VSwVSw		GN							jisjk:93477
-書送	써 보&A6@  	M448			GN							jisjk:142304
+書送	써 보&A6@	M448			GN							jisjk:142304
 書きつけ	써 &C7@	M447			GN							jisjk:8452
 諸候	제후	N110	VHn		GN							jisjk:33460
 諸行無情	제행 무상	N110			GN							jisjk:191466
@@ -6395,7 +6395,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 湯沸かし機	약탕기	I110			GN							jisjk:116489
 灯台下暗し	전등밑이 어둡다	A9D0			GN							jisjk:342256
 灯明	등명	N110			GN							jisjk:19817
-あたり散ら	화를 &A6@  	M423	SFl		GN							jisjk:140146
+あたり散ら	화를 &A6@	M423	SFl		GN							jisjk:140146
 あたり前	당연%A1@	G8L0			GN							jisjk:2650
 あたり前	당연	I110			GN							jisjk:2651
 当りまえ	당연%A1@	G8L0			GN							jisjk:2650
@@ -6551,7 +6551,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 函れ	&H5@	M437			GN	786	||5 &&2 S-1== "に" S-3== "を" &&2 S-1== "に" S-2== "中" &&2 P-2== "1**" ||2 A-2== "VFd" A-2== "VPe" A-3== "VFd" &&2 ||2 S+1== "すぎ" S+1== "過ぎ" P+1== "4**"	음식·용기·안쪽 위치 또는 過ぎる와 관련된 지정 문맥에서 入れ를 '넣다'로 고른다.				jisjk:94559
 函れ	고용&AV@	M437			GN							jisjk:94560
 函れ	들&AJ@	M437	UFl		GN							jisjk:94561
-函れ	&A6@  	M447	VMy		GN							jisjk:141170
+函れ	&A6@	M447	VMy		GN							jisjk:141170
 函れ	던&AL@	M447	ULw		GN							jisjk:141171
 函れ	입금시&AQ@	M447	VMo		GN							jisjk:141174
 函れ	들어갈 수 &HN@	M447	VPl	Ma	GN	2946	||4 &&4 U+0== "Lません" S-1== "に" A-2== "QIDVGt" D+0= "들어갈 수 &M9@" &&4 U+0== "Lません" ||3 S-1== "が" S-1== "は" S-1== "でも" A-2== "VHn" D+0= "들어갈 수 &M9@" &&4 U+0== "Lません" P-1== "4**" M-1== "53*" D+0= "들어갈 수 &M9@" &&3 U+0== "Lません" S-2== "R保険" D+0= "들어갈 수 &M9@"	入れ는 자신의 어미가 ません으로 시작하면서 조직 관련 に, 사람 뒤의 が·は·でも, 53* 어미 동사 뒤 또는 …保険 관련 문맥이면 어간을 ‘들어갈 수 없다’로 바꾼다.				jisjk:340814
