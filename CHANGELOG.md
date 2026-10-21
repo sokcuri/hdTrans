@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.2](https://github.com/sokcuri/hdTrans/compare/v0.4.1...v0.4.2) (2026-10-21)
+
+
+### Bug Fixes
+
+* **release:** read casual dialogue and Japanese grammar more naturally ([cea0f4a](https://github.com/sokcuri/hdTrans/commit/cea0f4a5cbfb6b55559d4273cd11c573766c4a7b))
+* **translation:** read casual speech, imperatives and grammar patterns the Korean way ([#25](https://github.com/sokcuri/hdTrans/issues/25)) ([27c25fa](https://github.com/sokcuri/hdTrans/commit/27c25fae4629ca919d4d755a3862de1df69ef212))
+
 ## [0.4.1](https://github.com/sokcuri/hdTrans/compare/v0.4.0...v0.4.1) (2026-10-21)
 
 
