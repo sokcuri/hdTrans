@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:jisjk:94210	窓ガラスが歪んでいる。	유리창이 비뚤어져 있다.	fix	lookup
+dict:jisjk:94210	歪んで見える。	비뚤어져 보인다.	keep	lookup
+dict:jisjk:96003	砂糖が混ざっている。	설탕이 섞여 있다.	fix	lookup
+dict:jisjk:138793	空が赤く染まっていた。	하늘이 붉게 물들어 있었다.	fix	lookup
+dict:w:26714	門の前に佇んでいた。	문 앞에 우두커니 서 있었다.	fix	local
+dict:w:26714	門の前に佇む少年。	문 앞에 우두커니 서 있는 소년.	keep	local
+phrase:呆気に取られる	彼は呆気に取られていた。	그는 어안이 벙벙해져 있었다.	fix	builtin-phrase
+rewrite:result-state	道が行き止まりになってるんだ。	길이 막다른 곳이 되어 있어.	fix	rewrites
+rewrite:result-state	町で話題になってるんだ。	마을에서 화제가 되고 있어.	keep	rewrites

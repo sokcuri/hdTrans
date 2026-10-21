@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+ending:高いかい	「おい、大丈夫かい？」	「어이, 괜찮아?」	fix	builtin-ending
+ending:高いかい	「寒いかい？」	「추워?」	fix	builtin-ending
+ending:高いかい	「これでいいかい？」	「이것으로 좋아?」	fix	builtin-ending
+ending:高くないかい	「痛くないかい？」	「아프지 않아?」	fix	builtin-ending
+ending:書いてくれないかい	「手伝ってくれないかい？」	「도와 주지 않을래?」	fix	builtin-ending
+ending:書かないかい	「お菓子、食べないかい？」	「과자, 먹지 않을래?」	fix	builtin-ending
+ending:書いてるかい	「名前を知ってるかい？」	「이름을 알고 있어?」	fix	builtin-ending
+ending:書いたかい	「誰か呼んだかい？」	「누군가 불렀어?」	fix	builtin-ending
+ending:書いたのかい	「お前さんが考えたのかい？」	「당신이 생각한 거야?」	fix	builtin-ending
+ending:書くのかい	「どれくらい私を愛してくれるのかい？」	「어느 정도 나를 사랑해 주는 거야?」	fix	builtin-ending
+ending:学生なのかい	「彼は学生なのかい？」	「그는 학생인 거야?」	fix	builtin-ending
+ending:書いたんじゃないのかい	「買い物に来たんじゃないのかい？」	「쇼핑하러 온 거 아니야?」	fix	builtin-ending
+ending:書くかい	「一緒に行くかい？」	「함께 갈까?」	keep	builtin-ending
+ending:書くかい	「理由を聞かせてくれるかい？」	「이유를 들려줄래?」	keep	builtin-ending
+phrase:しないかい	「少し話をしないかい？」	「조금 이야기를 하지 않을래?」	keep	builtin-phrase
+phrase:なんだい	「なんだい、それ？」	「뭐야, 그것?」	fix	sound

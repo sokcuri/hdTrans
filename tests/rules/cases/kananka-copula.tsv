@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+pattern:学生かなんかでしょ	あの人、歌手かなんかでしょ？	그 사람, 가수나 뭐 그런 거지?	fix	builtin-pattern
+pattern:学生か何かだろう	医者か何かだろう。	의사나 뭐 그런 거겠지.	fix	builtin-pattern
+pattern:学生か何かか	事故か何かか？	사고나 뭐 그런 건가?	fix	builtin-pattern
+pattern:学生か何か	雑誌か何かを読んだ。	잡지나 뭔가를 읽었다.	keep	builtin-pattern

@@ -31,6 +31,8 @@ void Flush(Flusher& f) {
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);
+        TeThanks(f);
+        TeObjectComma(f);
         PastSequence(f);
         QuoteTo(f);
         NodaTo(f);
@@ -48,9 +50,14 @@ void Flush(Flusher& f) {
         YounaBeforeModifier(f);
         ParticleInNext(f);
         JiBeforeJiman(f);
+        ParallelNoka(f);
+        OfferPromise(f);
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);
+        HumbleFirstPerson(f);
+        ChanAfterKatakana(f);
+        InitialSoundRule(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);

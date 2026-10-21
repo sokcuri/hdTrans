@@ -17,18 +17,18 @@ HD_TEST(conjugation_fingerprints) {
     for (int kind = 0; kind < kConjugationKinds; kind++) {
         for (const char* c : internal::ConjugationRow(kind)) cells.Str(c);
     }
-    HD_CHECK_EQ(cells.h, uint64_t{0xdfaa802e92689e7aull});
+    HD_CHECK_EQ(cells.h, uint64_t{0xa0fd56fdb4eae901ull});
 
     hdtest::Fnv lookups;
     for (int kind = -2; kind <= 20; kind++) {
         for (int branch = -2; branch <= 20; branch++) lookups.Str(Conjugation(kind, branch));
     }
-    HD_CHECK_EQ(lookups.h, uint64_t{0x1497fa98657948e4ull});
+    HD_CHECK_EQ(lookups.h, uint64_t{0x1ffca4cb6945f929ull});
 
     hdtest::Fnv prefix;
     prefix.U32(kPrefixForms);
     for (int i = 0; i < kPrefixForms; i++) prefix.Str(PrefixForm(i));
-    HD_CHECK_EQ(prefix.h, uint64_t{0x5d66f2d7348c3f9dull});
+    HD_CHECK_EQ(prefix.h, uint64_t{0xe80fe7b978ef1d4bull});
 
     hdtest::Fnv gate;
     gate.U32(kPrefixGates);

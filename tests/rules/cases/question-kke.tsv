@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+ending:書いてたっけ	「番号、教えてたっけ？」	「번호, 가르치고 있었나?」	fix	builtin-ending
+ending:書いてたっけ	「変なもの食べてたっけ？」	「이상한 것 먹고 있었나?」	fix	builtin-ending
+ending:書いたっけ	「いや、あったっけ？」	「아니, 있었나?」	fix	builtin-ending
+ending:書いたっけ	「言ったっけ？」	「말했나?」	fix	builtin-ending
+ending:書かなかったっけ	「傘持ってなかったっけ」	「우산 가지지 않았나」	fix	builtin-ending
+ending:高いんだっけ	「携帯ないんだっけ」	「휴대폰 없는 거였지」	fix	builtin-ending
+ending:高いんだっけ	「あそこの卵屋、安いんだっけ？」	「저기의 계란 가게, 싼 거였지?」	fix	builtin-ending
+ending:書かないんだっけ	「お前も知らないんだっけ」	「너도 모르는 거였지」	fix	builtin-ending
+ending:書くんだっけ	「彼はゲームとかやるんだっけ？」	「그는 게임이라든지 하는 거였지?」	fix	builtin-ending
+ending:書くっけ	「そんな店、あるっけ？」	「그런 가게, 있더라?」	fix	builtin-ending
+ending:静かなんだっけ	「あの子、話すのが苦手なんだっけ」	「그 아이, 이야기하는 것이 서투른 거였지」	fix	builtin-ending
+ending:静かだったっけ	「静かだったっけ？」	「조용했나?」	fix	builtin-ending
+ending:学生だっけ	「鈴木さんだっけ？」	「스즈키씨였나?」	fix	builtin-ending
+ending:学生だっけ	「次は来週だっけ？」	「다음은 다음주였나?」	fix	builtin-ending
+ending:学生なんだっけ	「推進力は逆向きなんだっけ？」	「추진력은 역방향이었나?」	fix	builtin-ending
+ending:学生だったっけ	「私も一緒だったっけ？」	「나도 함께였지?」	keep	builtin-ending
+ending:書いたんだっけ	「ポスターはもうできたんだっけ？」	「포스터는 벌써 끝난 거지?」	keep	builtin-ending
+phrase:なんだっけ	「あれ、なんだっけ？」	「어라, 뭐였더라?」	fix	sound
+phrase:何だっけ	「えっと、何だっけ……」	「음, 뭐였더라……」	fix	builtin-phrase
+phrase:どうだったっけ	「どうだったっけ？」	「어땠더라?」	fix	builtin-phrase
+phrase:誰だっけ	「あの人、誰だっけ？」	「그 사람, 누구였더라?」	fix	builtin-phrase
+phrase:どこだっけ	「あの店、どこだっけ？」	「그 가게, 어디였더라?」	fix	builtin-phrase
+phrase:いつだっけ	「試験っていつだっけ？」	「시험은 언제였더라?」	fix	builtin-phrase
+phrase:そうだっけ	「あれ、そうだったっけ？」	「어라, 그랬나?」	fix	builtin-phrase

@@ -16,8 +16,11 @@ namespace hdTrans::pipeline {
 // The pieces the line is translated from, in this order:
 //   - the protected-span cut (internal::CutSpans);
 //   - a line of speech written in katakana read as hiragana (internal::KataSpeech);
+//   - a katakana honorific after a katakana name, written in hiragana (internal::KataHonorifics);
 //   - a pronoun, demonstrative or adjective written in katakana for emphasis read as
 //     hiragana unless it may be a name (internal::KataWordsToHiragana);
+//   - a hiragana nickname before ちゃん or くん written in Hangul
+//     (internal::NicknamesToHangul);
 //   - a conjunction cut from its clause at the start of a sentence written with its
 //     pronoun (internal::RewriteConjunctions);
 //   - ｢ and ｣ written as 「 and 」.
@@ -64,6 +67,11 @@ bool IsForeign(char32_t r);
 // counts as a sound already written.
 output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// A katakana honorific (サマ サン クン チャン ドノ) that ends a katakana run in the text
+// pieces written in hiragana when the run before it is a name or no dictionary word
+// and the whole run is no dictionary word (ヨウタサマ ヨウタさま); not after オ (オジサン).
+output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // Each word of a short list (アレ, ドコ, アタシ, ダメ, ヤバイ, ...) in the text pieces
 // written in hiragana where it reads as the word rather than a name: it fills its
 // katakana run, does not follow ・ ＝ の or a span, is followed by a particle or
@@ -71,6 +79,14 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
 // text around it into a dictionary word, has no plain or name sense and is not one of
 // ctx.named.
 output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// A nickname of two to four hiragana before ちゃん or くん in the text pieces written as a
+// Hangul word span, its long vowels dropped (ゆうくん 유くん, みーちゃん 미ちゃん). It follows
+// a character that is neither kana nor a kanji, or a one-kana particle after a kanji or
+// katakana (私はゆうくん). It is not a dictionary word with its honorific and what follows
+// (どんちゃん騒ぎ), a kin word (ねえちゃん), a word with お or ご, the adverb ちゃんと or a
+// verb before くんだ or くんな (叩くんじゃねえ, 狙ってくんな).
+output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // ならば なら ですから であれば にも関わらず にも拘らず にもかかわらず 対して at the
 // start of a sentence or utterance written with their pronoun (それなら, だから,

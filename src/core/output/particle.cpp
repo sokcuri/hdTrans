@@ -36,6 +36,7 @@ constexpr JosaForms kJosaTable[kJosaRows] = {
     {"(이)서", "이", "서"},
     {"(이)던가", "이던가", "던가"},
     {"(이)랍", "이랍", "랍"},
+    {"(이)네", "이네", "네"},
 };
 
 // The text a piece reads as in a TextBefore.
@@ -87,7 +88,6 @@ bool IsLowerLatin(char32_t r) { return (r >= U'a' && r <= U'z') || (r >= U'ａ' 
 bool EndsSearch(char32_t r) {
     switch (r) {
         case U'\n': case U',': case U'、': case U'，': case U'.': case U'。': case U'．':
-        case U'!': case U'?': case U'！': case U'？':
             return true;
     }
     return IsOpening(r);
@@ -246,10 +246,15 @@ text::Rune DecodeLastRune(const TextBefore& t, size_t end) {
 }
 
 char ParticleClass(const TextBefore& text) {
+    bool spaced = false;  // a space stands between the character and the particle
     for (size_t i = text.Size(); i > 0;) {
         const auto rune = DecodeLastRune(text, i);
         const char32_t r = rune.cp;
         if (EndsSearch(r)) return 0;
+        // ! and ? end the search where a space follows them: 돈!으로 and 「빵!」이라고 read
+        // 돈 and 빵, 했어!? 라는 reads nothing.
+        if ((r == U'!' || r == U'?' || r == U'！' || r == U'？') && spaced) return 0;
+        if (r == U' ' || r == U'　') spaced = true;
         if (const int f = text::Final(r); f >= 0) return HangulClass(f);
         if (r == U'ㄹ') return 'l';
         if (r >= U'ㄱ' && r <= U'ㅎ') return 'c';

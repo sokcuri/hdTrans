@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 normalize:drawl	明日も頑張り…ます。	내일도 노력하겠…습니다.	fix	normalize
 normalize:drawl	駅まで歩きま―した。	역까지 걸었―습니다.	fix	normalize
-normalize:drawl	私にはわかりま……せん。	나에게는 모릅……니다.	fix	normalize
+normalize:drawl	私にはわかりま……せん。	저에게는 모릅……니다.	fix	normalize
 normalize:drawl	もう休み……ましょう。	이제 쉽……시다.	fix	normalize
 normalize:drawl	一緒に行きま…しょうか？	함께 갈…까요?	fix	normalize
 normalize:drawl	本当に来ま……すか？	정말로 옵……니까?	fix	normalize
@@ -17,7 +17,7 @@ normalize:copula-pause	あの人は先生…でした。	그 사람은 선생님
 normalize:copula-pause	もう少し食べたい…です。	좀 더 먹고 싶…습니다.	fix	normalize
 normalize:copula-pause	今日はいい天気…ですね。	오늘은 좋은 날씨…군요.	keep	normalize
 normalize:copula-pause	学生、です。	학생, 입니다.	keep	normalize
-normalize:copula-pause	私が…ですか？	내가… 말입니까?	keep	normalize
+normalize:copula-pause	私が…ですか？	제가… 말입니까?	keep	normalize
 normalize:copula-pause	早く来てください……です。	빨리 와 주세요……입니다.	keep	normalize
 normalize:copula-pause	明日は雨…ですって。	내일은 비…래.	keep	normalize
 normalize:copula-pause	……ですが、今は違う。	……그렇지만, 지금은 다르다.	keep	normalize

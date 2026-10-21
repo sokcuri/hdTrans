@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+compose:particle-after-exclamation	マフィアのドン！と呼ばれた。	마피아의 돈!으로 불렸다.	fix	compose
+compose:particle-after-exclamation	彼は「行くぞ！」と叫んだ。	그는 「가겠어!」라고 외쳤다.	keep	compose
+compose:particle-after-exclamation	「本当？」って聞いた。	「정말?」이라고 들었다.	fix	compose
+compose:particle-after-exclamation	やった！と思った。	해냈다!라고 생각했다.	fix	compose
+compose:particle-after-exclamation	まだ？はい。	아직? 네.	keep	compose

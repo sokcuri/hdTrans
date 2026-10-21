@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+sound:katakana-mimetic	ギシッギシッと階段が軋む。	기싯기싯 계단이 삐걱거린다.	fix	sound
+sound:katakana-mimetic	ボゴッと壁が割れた。	보곳 벽이 깨졌다.	fix	sound
+sound:katakana-mimetic	彼はジッと私を見つめた。	그는 가만히 나를 응시했다.	fix	sound
+sound:katakana-mimetic	ドン！っと扉が開いた。	쾅!이라고 문이 열렸다.	fix	sound
+sound:katakana-mimetic	バン！と机を叩いた。	쾅!이라고 책상을 두드렸다.	fix	sound
+sound:katakana-mimetic	マフィアのドン！と呼ばれた男。	마피아의 돈!으로 불린 남자.	keep	sound
+sound:katakana-mimetic	ママと買い物に行った。	엄마와 쇼핑하러 갔다.	keep	sound
+sound:katakana-mimetic	ホッとした。	마음이 놓였다.	keep	sound
+sound:katakana-mimetic	メキメキという音がした。	메키메키라는 소리가 났다.	keep	sound
+sound:katakana-mimetic	メキメキと看板を引きはがす。	메키메키 간판을 뜯어낸다.	fix	sound
+constraint:quote-comma-after-exclamation	ドン！っと、扉が開いた。	쾅! 라고 문이 열렸다.	fix	lookup
+constraint:quote-comma-after-exclamation	猫と、犬がいる。	고양이와 개가 있다.	keep	lookup

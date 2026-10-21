@@ -44,9 +44,9 @@ text::Rune DecodeLastRune(const TextBefore& t, size_t end);
 //   - a digit: the number it ends, read in Korean;
 //   - a Latin letter: the word it ends, read in English;
 //   - % (퍼센트), kana, and a kanji, read by its hanja reading ('v' without one).
-// A line break, a comma, a full stop, ! and ? and an opening bracket end the search.
-// Other characters (spaces, closing brackets and quotes, …, symbols) are passed
-// over: 「그」 is read as 그, 3… as 3.
+// A line break, a comma, a full stop, an opening bracket, and ! or ? before a space end
+// the search. Other characters (spaces, closing brackets and quotes, …, ! and ? right
+// before the particle, symbols) are passed over: 「그」 is read as 그, 3… as 3, 「빵!」 as 빵.
 char ParticleClass(const TextBefore& text);
 char ParticleClass(std::string_view text);
 
@@ -58,7 +58,7 @@ struct JosaForms {
     std::string_view vowel;
 };
 
-constexpr int kJosaRows = 27;
+constexpr int kJosaRows = 28;
 
 // Two rows are equal; the first one matches.
 std::span<const JosaForms, kJosaRows> JosaTable();

@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:gram:nakereba:ya	毎日走らなければならない。	매일 달려야 한다.	fix	local-ending
+dict:gram:nakereba:ya	明日までに返さなければいけない。	내일까지 돌려주어야 한다.	fix	local-ending
+dict:gram:nakereba:ya	急がなければ間に合わない。	서두르지 않으면 늦는다.	keep	local-ending
+dict:gram:nakereba:なければなりません	書類を出さなければなりません。	서류를 보내야 합니다.	fix	lookup
+dict:gram:nakereba:なければいけませんでした	昨日は早く帰らなければいけませんでした。	어제는 빨리 돌아가야 했습니다.	fix	lookup
+dict:gram:nakereba:end	早く覚えなければ。	빨리 기억해야 한다.	fix	local-ending
+dict:jisjk:259887	もう行かなきゃ。	이제 가야 한다.	fix	local-ending

@@ -173,10 +173,13 @@
 書かなきゃっぽい	써야 할 것 같아	end	prio=-1
 書いてっぽい	써 포이	end	prio=-1
 書いててっぽい	쓰고 있어 포이	end	prio=-1
+書かないでっぽい	쓰지 마 포이	end	prio=-1
 書こうっぽい	쓰자 포이	end	prio=-1
 高いっぽい	높은 것 같아	end	prio=-1
 高かったっぽい	높았던 것 같아	end	prio=-1
 静かっぽい	조용한 것 같아	end	prio=-1
+静かだっぽい	조용한 것 같아	end	prio=-1
+静かなのっぽい	조용한 것 같아	end	prio=-1
 静かだったっぽい	조용했던 것 같아	end	prio=-1
 // ぽい, the tic spelled without っ
 書くぽい	쓰는 것 같아	end	prio=-1
@@ -243,6 +246,23 @@
 // から, かしら, ものか, ね/よね/わ in casual speech
 書いたって	썼대	end	prio=-1
 書くって	쓴다니까	end	prio=-1
+// っての: insistence at the end of an utterance (違うっての 다르다니까)
+学生だっての	학생이라니까	end	prio=-1
+書けっての	쓰라니까	end	prio=-1
+書くなっての	쓰지 말라니까	end	prio=-1
+書くっての	쓴다니까	end	prio=-1
+書いたっての	썼다니까	end	prio=-1
+書かないっての	쓰지 않는다니까	end	prio=-1
+書いてるっての	쓰고 있다니까	end	prio=-1
+高いっての	높다니까	end	prio=-1
+書くかっての	쓰겠냐고	end	prio=-1
+// だっけか, もんでね
+学生だっけか	학생이었던가	end	prio=-1
+書くんだっけか	쓰는 거였던가	end	prio=-1
+書いたっけか	썼던가	end	prio=-1
+高いもんでね	높아서 말이야	end	prio=-1
+書いたもんでね	써서 말이야	end	prio=-1
+学生なもんでね	학생이라서 말이야	end	prio=-1
 書いてなさい	쓰고 있어	end	prio=-1
 書いていなさい	쓰고 있어	end	prio=-1
 書いてなさいって	쓰고 있으라니까	end	prio=-1
@@ -430,3 +450,45 @@
 // 〜たばかり at the end of a sentence (なったばかり 된 지 얼마 안 됐다).
 書いたばかり	쓴 지 얼마 안 됐다	end	prio=-1
 書いたばかりだ	쓴 지 얼마 안 됐다	end	prio=-1
+// っけ: asking what one half remembers, in the spoken forms (言ったっけ 말했나,
+// 行くんだっけ 가는 거였지, 鈴木さんだっけ 스즈키 씨였나).
+書いたっけ	썼나	end	prio=-1
+書いてたっけ	쓰고 있었나	end	prio=-1
+書いてたんだっけ	쓰고 있었나	end	prio=-1
+書くっけ	쓰더라	end	prio=-1
+書くんだっけ	쓰는 거였지	end	prio=-1
+書かないんだっけ	쓰지 않는 거였지	end	prio=-1
+書かなかったっけ	쓰지 않았나	end	prio=-1
+高いんだっけ	높은 거였지	end	prio=-1
+高かったっけ	높았나	end	prio=-1
+静かなんだっけ	조용한 거였지	end	prio=-1
+静かだったっけ	조용했나	end	prio=-1
+学生だっけ	학생이었나	end	prio=-1
+学生なんだっけ	학생이었나	end	prio=-1
+// かい, だい: a plain question (大丈夫かい 괜찮아, 行くのかい 가는 거야).
+書いたかい	썼어	end	prio=-1
+書いてるかい	쓰고 있어	end	prio=-1
+書いているかい	쓰고 있어	end	prio=-1
+書かないかい	쓰지 않을래	end	prio=-1
+高いかい	높아	end	prio=-1
+高くないかい	높지 않아	end	prio=-1
+書いてくれないかい	써 주지 않을래	end	prio=-1
+静かかい	조용해	end	prio=-1
+学生かい	학생이야	end	prio=-1
+書くのかい	쓰는 거야	end	prio=-1
+書いたのかい	쓴 거야	end	prio=-1
+書いてるのかい	쓰고 있는 거야	end	prio=-1
+書いているのかい	쓰고 있는 거야	end	prio=-1
+書かないのかい	쓰지 않는 거야	end	prio=-1
+書かなかったのかい	쓰지 않은 거야	end	prio=-1
+高いのかい	높은 거야	end	prio=-1
+静かなのかい	조용한 거야	end	prio=-1
+学生なのかい	학생인 거야	end	prio=-1
+書いたんじゃないのかい	쓴 거 아니야	end	prio=-1
+書くんじゃないのかい	쓰는 거 아니야	end	prio=-1
+学生じゃないのかい	학생 아니야	end	prio=-1
+書くのだい	쓰는 거야	end	prio=-1
+書いたのだい	쓴 거야	end	prio=-1
+書くんだい	쓰는 거야	end	prio=-1
+書いたんだい	쓴 거야	end	prio=-1
+学生なんだい	학생인 거야	end	prio=-1

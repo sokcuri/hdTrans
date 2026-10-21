@@ -84,13 +84,13 @@ HD_TEST(verb_bare_command_boundaries) {
         {"遊", '6', "べ"}, {"帰", '8', "れ"}, {"行", '?', "け"},
     };
     for (const Row& row : rows) {
-        for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの"}) {
+        for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの", "」", "」の", "』か", "。", "！"}) {
             int branch = -1, length = -1;
             HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(boundary), branch, length));
             HD_CHECK_EQ(branch, 11);
             HD_CHECK_EQ(length, 3);
         }
-        for (const std::string_view continuation : {"る", "ない", "た", "れば", "ます", "本", "の", "よ", "」の", "』か"}) {
+        for (const std::string_view continuation : {"る", "ない", "た", "れば", "ます", "本", "の", "よ"}) {
             int branch = -1, length = -1;
             HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(continuation), branch, length));
             HD_CHECK_EQ(branch, 4);

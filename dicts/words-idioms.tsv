@@ -30,7 +30,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 まず隗より始めよ	먼저 외부터 시작하라	A9D0			GN				llm			i:25
 儘ならぬ	뜻대로 되지 않는	A9D0			GN				llm			i:26
 侭ならぬ	뜻대로 되지 않는	A9D0			GN				llm			i:27
-様にな	하게 &C6@	M428			GN				llm			i:28
+様にな	하게 &C6@	M428		Dx	GN				llm			i:28
 アウトオブファッション	유행에 뒤떨어짐	N110			GN				llm			i:29
 アウト・オブ・ファッション	유행에 뒤떨어짐	N110			GN				llm			i:30
 エバーオンワード	영원히 앞으로	A9D0			GN				llm			i:31
@@ -83,7 +83,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 運が良い	운이 좋아	A9D0			GN				llm			i:78
 影響を及ぼ	영향을 미&AO@	M423		Pn	GN				llm			i:79
 永世中立	영세중립	N110			GN				llm			i:80
-延期にな	연기&C6@	M428			GN				llm			i:81
+延期にな	연기&C6@	M428		Dx	GN				llm			i:81
 猿ぐつわをかま	재갈을 물&AA@	M423		Pn	GN				llm			i:82
 猿轡をかま	재갈을 물&AA@	M423		Pn	GN				llm			i:83
 遠慮会釈	사양과 배려	N110			GN				llm			i:84
@@ -107,7 +107,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 我を通	고집을 관철&AV@	M423		Pn	GN				llm			i:102
 我が意を得	뜻에 부합&AV@	M427		Pn	GN				llm			i:103
 怪力乱神	괴력난신	N110			GN				llm			i:104
-灰にな	재가 &C6@	M428			GN				llm			i:105
+灰にな	재가 &C6@	M428		Dx	GN				llm			i:105
 該博な知識	해박한 지식	N110			GN				llm			i:106
 格好の良い	멋있는	A9D0			GN				llm			i:107
 格好のいい	멋있는	A9D0			GN				llm			i:108
@@ -130,7 +130,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 簡単に言うと	간단히 말하면	A9D0			GN				llm			i:125
 簡単に言えば	간단히 말하자면	A9D0			GN				llm			i:126
 間にある	사이에 있는	A9D0			GN				llm			i:127
-丸裸にな	알몸이 &C6@	M428			GN				llm			i:128
+丸裸にな	알몸이 &C6@	M428		Dx	GN				llm			i:128
 顔をしかめ	얼굴을 찡그&AA@	M427		Pn	GN				llm			i:129
 顔を顰め	얼굴을 찡그&AA@	M427		Pn	GN				llm			i:130
 喜色満面	희색만면	A9D0			GN				llm			i:131
@@ -309,7 +309,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大まかに言えば	대충 말하자면	A9D0			GN				llm			i:304
 大詰めを迎え	막바지를 맞이&AV@	M427		Pn	GN				llm			i:305
 大詰を迎え	막바지를 맞이&AV@	M427		Pn	GN				llm			i:306
-大好きにな	아주 좋아하게 &C6@	M428			GN				llm			i:307
+大好きにな	아주 좋아하게 &C6@	M428		Dx	GN				llm			i:307
 単純に言えば	간단히 말하면	A9D0			GN				llm			i:308
 どんぐりの背比べ	도토리 키 재기	N110			GN							i:309
 ドングリの背比べ	도토리 키 재기	N110			GN				llm			i:310
@@ -409,8 +409,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 聞き分けのいい	말을 잘 듣는	A9D0			GN				llm			i:404
 聞き分けの良い	말을 잘 듣는	A9D0			GN				llm			i:405
 平穏無事	평온무사	N110			GN				llm			i:406
-癖にな	버릇이 &C6@	M428			GN				llm			i:407
-クセにな	중독&C6@	M428			GN				llm			i:408
+癖にな	버릇이 &C6@	M428		Dx	GN				llm			i:407
+クセにな	중독&C6@	M428		Dx	GN				llm			i:408
 癖のある	개성이 강한	A9D0			GN				llm			i:409
 別言すれば	달리 말하면	A9D0			GN				llm			i:410
 変幻自在	변화무쌍	N110			GN				llm			i:411
@@ -444,7 +444,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 夜明けの明星	샛별	N110			GN				llm			i:439
 矢面に立	비난의 표적이 &C6@	M424			GN				llm			i:440
 藪をつついて蛇を出	긁어 부스럼을 만&L4@	M423		Pn	GN				llm			i:441
-薮蛇にな	긁어 부스럼이 &C6@	M428			GN				llm			i:442
+薮蛇にな	긁어 부스럼이 &C6@	M428		Dx	GN				llm			i:442
 薮蛇に成	긁어 부스럼이 &C6@	M428			GN				llm			i:443
 勇往邁進	용왕매진	N110			GN				llm			i:444
 うさを晴らしに	기분 전환 삼아	E300			GN				llm			i:445
@@ -525,7 +525,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気にとめ	신경 &AF@	M427			GN				llm			i:520
 心が通	마음이 통&AV@	M420			GN				llm			i:521
 言葉に詰ま	말이 막&AW@	M428			GN							i:522
-薬にな	약이 &C6@	M428			GN				llm			i:523
+薬にな	약이 &C6@	M428		Dx	GN				llm			i:523
 窮すれば通ず	궁하면 통하는 법	A9D0			GN				llm			i:524
 幕が下り	막이 내&AA@	M427			GN				llm			i:525
 学びの庭	배움터	N110			GN				llm			i:526
@@ -1028,7 +1028,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 欠を補	부족한 부분을 메&AI@	M420		Pn	GN				llm			i:1023
 決を採	표결을 &AV@	M428		Pn	GN				llm			i:1024
 決をと	표결을 &AV@	M428		Pn	GN				llm			i:1025
-煙にな	연기가 &C6@	M428			GN				llm			i:1026
+煙にな	연기가 &C6@	M428		Dx	GN				llm			i:1026
 煙を吐	연기를 내&HZ@	M421		Pn	GN				llm			i:1027
 険しい山	험준한 산	N110			GN				llm			i:1028
 健康を損な	건강을 해&AO@	M420		Pn	GN				llm			i:1029
@@ -1296,7 +1296,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 空を覆	하늘을 뒤&Hj@	M420		Pn	GN				llm			i:1291
 空を蓋	하늘을 뒤&Hj@	M420		Pn	GN				llm			i:1292
 損失を償	손실을 보상&AV@	M420		Pn	GN				llm			i:1293
-損にな	손해&C6@	M428			GN							i:1294
+損にな	손해&C6@	M428		Dx	GN							i:1294
 造作なく	손쉽게	E300			GN				llm			i:1295
 造作無く	손쉽게	E300			GN				llm			i:1296
 大衆に阿	대중에게 아첨&AV@	M428			GN				llm			i:1297
@@ -1327,7 +1327,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大学を出	대학을 졸업&AV@	M427		Pn	GN				llm			i:1322
 大事に至	큰일로 번&AL@	M428			GN				llm			i:1323
 台無しにな	결딴&A5@	M428			GN							i:1324
-台なしにな	엉망이 &C6@	M428			GN				llm			i:1325
+台なしにな	엉망이 &C6@	M428		Dx	GN				llm			i:1325
 駄々をこね	떼를 &AF@	M427		Pn	GN				llm			i:1326
 駄々を捏ね	떼를 &AF@	M427		Pn	GN				llm			i:1327
 地位を得	지위를 &HH@	M427		Pn	GN				llm			i:1328
@@ -1353,7 +1353,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 珍中の珍	희귀 중의 희귀	N110			GN				llm			i:1348
 序でがあ	기회가 &HN@	M428			GN				llm			i:1349
 序でが有	기회가 &HN@	M428			GN				llm			i:1350
-対にな	짝이 &C6@	M428			GN				llm			i:1351
+対にな	짝이 &C6@	M428		Dx	GN				llm			i:1351
 通勤の足	출근 수단	N110			GN				llm			i:1352
 通を気取	전문가인 척&AV@	M428		Pn	GN				llm			i:1353
 杖を携え	지팡이를 &L4@	M427		Pn	GN				llm			i:1354
@@ -1410,7 +1410,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 等を分け	등급을 나&C4@	M427		Pn	GN				llm			i:1405
 都会を離れ	도시를 떠&A5@	M427		Pn	GN				llm			i:1406
 時を待	때를 기다&AA@	M424		Pn	GN				llm			i:1407
-得にな	득이 &C6@	M428			GN				llm			i:1408
+得にな	득이 &C6@	M428		Dx	GN				llm			i:1408
 徳を行	덕을 행&AV@	M420		Pn	GN				llm			i:1409
 刺のある言葉	가시 돋친 말	N110			GN				llm			i:1410
 刺の有る言葉	가시 돋친 말	N110			GN				llm			i:1411
@@ -1459,7 +1459,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 熱を伝え	열을 전도&AV@	M427		Pn	GN				llm			i:1454
 寝る時間	잘 시간	N110			GN				llm			i:1455
 根を生じ	뿌리를 내&AA@	M427		Pn	GN				llm			i:1456
-懇ろにな	깊은 사이가 &C6@	M428			GN				llm			i:1457
+懇ろにな	깊은 사이가 &C6@	M428		Dx	GN				llm			i:1457
 望みが適	소원이 이루어&AL@	M420			GN				llm			i:1458
 杯を重ね	술잔을 거듭&AV@	M427		Pn	GN				llm			i:1459
 肺を病	폐를 &FW@	M425		Pn	GN				llm			i:1460
@@ -1741,7 +1741,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山道に掛か	산길에 접어&L4@	M428			GN				llm			i:1736
 山を越	고비를 넘&A2@	M423		Pn	GN				llm			i:1737
 闇を透か	어둠 속을 응시&AV@	M423		Pn	GN				llm			i:1738
-止めにな	중지&C6@	M428			GN				llm			i:1739
+止めにな	중지&C6@	M428		Dx	GN				llm			i:1739
 槍を振る	창을 휘&E1@	M420		Pn	GN				llm			i:1740
 有為の材	유능한 인재	N110			GN				llm			i:1741
 勇気を奮い起こ	용기를 &A6@	M423		Pn	GN				llm			i:1742
@@ -1976,7 +1976,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 恐れがあ	우려가 &HN@	M428			GN				llm			i:1971
 希望に添	희망에 부응&AV@	M420			GN				llm			i:1972
 希望に沿	희망에 부응&AV@	M420			GN				llm			i:1973
-中心とな	주&C6@	M428			GN							i:1974
+中心とな	주&C6@	M428		Dx	GN							i:1974
 心を込め	마음을 &LR@	M427		Pn	GN				llm			i:1975
 心をこめ	마음을 &LR@	M427		Pn	GN				llm			i:1976
 盗人根性	도둑 근성	N110			GN				llm			i:1977
@@ -2614,8 +2614,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 痘痕も靨	제 눈에 안경	A9D0			GN				llm			i:2609
 お上手を言	아첨&AV@	M420		Pn	GN				llm			i:2610
 屠所の羊	도살장에 끌려가는 양	A9D0			GN				llm			i:2611
-鍵がかか	잠&A2@	M428			GN				llm			i:2612
-鍵が掛か	잠&A2@	M428			GN				llm			i:2613
+鍵がかか	잠&A2@	M428		Dx	GN				llm			i:2612
+鍵が掛か	잠&A2@	M428		Dx	GN				llm			i:2613
 戻って来る	돌아와	A9D0			GN				llm			i:2614
 胡麻を擂	아부&AV@	M428		Pn	GN				llm			i:2615
 釈迦に説法	공자 앞에서 문자 쓰기	A9D0			GN				llm			i:2616
@@ -2817,7 +2817,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お預けを食ら	기다리게 &C6@	M420		Pn	GN				llm			i:2812
 御預けを食ら	기다리게 &C6@	M420		Pn	GN				llm			i:2813
 冷や飯を食	찬밥 신세가 &C6@	M420		Pn	GN				llm			i:2814
-フイにな	허사가 &C6@	M428			GN				llm			i:2815
+フイにな	허사가 &C6@	M428		Dx	GN				llm			i:2815
 不興を買	벗어&A5@	M420		Pn	GN							i:2816
 やらずの雨	손님을 붙잡는 비	N110			GN				llm			i:2817
 遣らずの雨	손님을 붙잡는 비	N110			GN				llm			i:2818
@@ -3087,7 +3087,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 見る間に	순식간에	A9D0			GN				llm			i:3082
 参加を呼びかけ	참가를 호소&AV@	M427		Pn	GN				llm			i:3083
 参加を呼び掛け	참가를 호소&AV@	M427		Pn	GN				llm			i:3084
-議論にな	논쟁이 &C6@	M428			GN				llm			i:3085
+議論にな	논쟁이 &C6@	M428		Dx	GN				llm			i:3085
 然ればこそ	아니나 다를까	A9D0			GN				llm			i:3086
 子宝に恵まれ	자식 복이 &HN@	M427			GN				llm			i:3087
 隠された意図	숨겨진 의도	N110			GN				llm			i:3088
@@ -3208,7 +3208,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 対を成	짝을 이&CB@	M423		Pn	GN				llm			i:3203
 対をな	짝을 이&CB@	M423		Pn	GN				llm			i:3204
 空気を読	분위기를 &HK@	M425		Pn	GN				llm			i:3205
-仇にな	독이 &C6@	M428			GN				llm			i:3206
+仇にな	독이 &C6@	M428		Dx	GN				llm			i:3206
 仁王立ちにな	버티고 &AD@	M428			GN				llm			i:3207
 嫌いなく	가리지 않고	E300			GN				llm			i:3208
 早かれ遅かれ	조만간	E300			GN				llm			i:3209
@@ -3240,7 +3240,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 許可を与え	허가를 내&CJ@	M427		Pn	GN				llm			i:3235
 担任の先生	담임 교사	N110			GN							i:3236
 息がつま	숨이 막&AW@	M428			GN				llm			i:3237
-船乗りにな	선원이 &C6@	M428			GN				llm			i:3238
+船乗りにな	선원이 &C6@	M428		Dx	GN				llm			i:3238
 責任を問われ	책임을 추궁당&AV@	M427		Pn	GN				llm			i:3239
 幕が開	막이 &E6@	M421			GN							i:3240
 連絡を取り合	서로 연락&AV@	M420		Pn	GN				llm			i:3241
@@ -3349,8 +3349,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お腹が減	배가 고&Aa@	M428			GN				llm			i:3344
 お腹がへ	배가 고&Aa@	M428			GN				llm			i:3345
 不徳の致すところ	제 부덕의 소치입니다	A9D0			GN				llm			i:3346
-仇とな	화가 &C6@	M428			GN				llm			i:3347
-徒とな	화가 &C6@	M428			GN				llm			i:3348
+仇とな	화가 &C6@	M428		Dx	GN				llm			i:3347
+徒とな	화가 &C6@	M428		Dx	GN				llm			i:3348
 厳密に言うと	엄밀히 말하면	A9D0			GN				llm			i:3349
 厳密にいうと	엄밀히 말하면	A9D0			GN				llm			i:3350
 該当なし	해당 없음	A9D0			GN				llm			i:3351
@@ -3368,7 +3368,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儲かりまっか	돈 좀 법니까	A9D0			GN				llm			i:3363
 腸が煮えくり返	뒤틀&AA@	M428			GN							i:3364
 強い相互作用	강한 상호작용	N110			GN							i:3365
-絵にな	그림이 &C6@	M428			GN				llm			i:3366
+絵にな	그림이 &C6@	M428		Dx	GN				llm			i:3366
 スネルの法則	스넬의 법칙	N110			GN							i:3367
 グリムの法則	그림의 법칙	N110			GN							i:3368
 ジュールの法則	줄의 법칙	N110			GN							i:3369
@@ -3431,7 +3431,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気の小さ	소심$AB@	H7N0			GN				llm			i:3426
 気の長	느긋$AB@	H7N0			GN				llm			i:3427
 芸のな	재미$FA@	H7N0			GN				llm			i:3428
-架け橋とな	가교가 &C6@	M428			GN				llm			i:3429
+架け橋とな	가교가 &C6@	M428		Dx	GN				llm			i:3429
 腰を上げ	몸을 일으&AQ@	M427		Pn	GN				llm			i:3430
 腰をあげ	몸을 일으&AQ@	M427		Pn	GN				llm			i:3431
 意味が通じ	말이 통&AV@	M427			GN				llm			i:3432
@@ -3541,7 +3541,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成ろう事なら	가능하다면	A9D0			GN				llm			i:3536
 けじめを付け	매듭을 &JA@	M427		Pn	GN				llm			i:3537
 サムズ・アップ	엄지 척	A9D0			GN				llm			i:3538
-参考にな	참고&C6@	M428			GN							i:3539
+参考にな	참고&C6@	M428		Dx	GN							i:3539
 バランスを取	균형을 &FK@	M428		Pn	GN				llm			i:3540
 手をこまね	팔짱을 끼고 &AY@	M421		Pn	GN				llm			i:3541
 手を拱	팔짱을 끼고 &AY@	M421		Pn	GN				llm			i:3542
@@ -3641,8 +3641,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 暇を潰	시간을 때&AI@	M423		Pn	GN				llm			i:3636
 暇をつぶ	시간을 때&AI@	M423		Pn	GN				llm			i:3637
 コマンタレブー	코망 탈레부	A9D0			GN				llm			i:3638
-いい薬にな	약이 &C6@	M428			GN				llm			i:3639
-良い薬にな	약이 &C6@	M428			GN				llm			i:3640
+いい薬にな	약이 &C6@	M428		Dx	GN				llm			i:3639
+良い薬にな	약이 &C6@	M428		Dx	GN				llm			i:3640
 契約を交わ	계약을 &FV@	M423		Pn	GN				llm			i:3641
 口の減らない	말대꾸를 잘하는	A9D0			GN				llm			i:3642
 手を煩わせ	수고를 끼&AO@	M427		Pn	GN				llm			i:3643
@@ -3872,7 +3872,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蛇の道は蛇	도둑은 도둑이 잡는 법	A9D0			GN				llm			i:3867
 弱き者よ汝の名は女なり	약한 자여 그대 이름은 여자니라	A9D0			GN				llm			i:3868
 弱き者よ汝の名は女也	약한 자여 그대 이름은 여자니라	A9D0			GN				llm			i:3869
-習い性とな	습관이 천성이 &C6@	M428			GN				llm			i:3870
+習い性とな	습관이 천성이 &C6@	M428		Dx	GN				llm			i:3870
 習い性と成	습관이 천성이 &C6@	M428			GN				llm			i:3871
 出物腫れ物所嫌わず	생리현상은 장소를 가리지 않아	A9D0			GN				llm			i:3872
 盾の両面を見よ	방패의 양면을 보라	A9D0			GN				llm			i:3873
@@ -3920,7 +3920,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 人生行路難し	인생길은 험난한 법	A9D0			GN				llm			i:3915
 人木石に非ず	사람은 목석이 아니야	A9D0			GN				llm			i:3916
 人木石にあらず	사람은 목석이 아니야	A9D0			GN				llm			i:3917
-ちりも積もれば山とな	티끌 모아 태산이 &C6@	M428			GN				llm			i:3918
+ちりも積もれば山とな	티끌 모아 태산이 &C6@	M428		Dx	GN				llm			i:3918
 水の低きに就くが如し	물이 아래로 흐르듯이	A9D0			GN				llm			i:3919
 水の低きにつくが如し	물이 아래로 흐르듯이	A9D0			GN				llm			i:3920
 水の流れと人の行方	물의 흐름과 사람의 앞날은 알 수 없는 법	A9D0			GN				llm			i:3921
@@ -4214,8 +4214,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 義を見てせざるは勇なきなり	의를 보고도 행하지 않는 것은 용기 없는 일	A9D0			GN				llm			i:4209
 くの字に曲げ	기역자로 구부&AA@	M427			GN				llm			i:4210
 鎌首をもたげ	고개를 쳐&L4@	M427		Pn	GN				llm			i:4211
-海の藻屑とな	바다의 물귀신이 &C6@	M428			GN				llm			i:4212
-海の藻くずとな	바다의 물귀신이 &C6@	M428			GN				llm			i:4213
+海の藻屑とな	바다의 물귀신이 &C6@	M428		Dx	GN				llm			i:4212
+海の藻くずとな	바다의 물귀신이 &C6@	M428		Dx	GN				llm			i:4213
 海の藻屑と消え	바다의 물귀신이 &C6@	M427			GN				llm			i:4214
 海の藻くずと消え	바다의 물귀신이 &C6@	M427			GN				llm			i:4215
 名が泣	이름값을 못&AV@	M421			GN				llm			i:4216
@@ -4301,7 +4301,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 土足厳禁	신발 착용 엄금	A9D0			GN				llm			i:4296
 腕のいい	솜씨 좋은	A9D0			GN				llm			i:4297
 腕の良い	솜씨 좋은	A9D0			GN				llm			i:4298
-負け投手にな	패전 투수가 &C6@	M428			GN				llm			i:4299
+負け投手にな	패전 투수가 &C6@	M428		Dx	GN				llm			i:4299
 先に立	앞장&AD@	M424			GN				llm			i:4300
 養子に行	양자로 &A1@	M42?			GN				llm			i:4301
 養子に出	양자로 보&A6@	M423			GN				llm			i:4302
@@ -4318,8 +4318,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 理の当然	당연한 이치	A9D0			GN				llm			i:4313
 聞き覚えがあ	귀에 &He@	M428			GN				llm			i:4314
 聞きおぼえがあ	들은 적이 &HN@	M428			GN				llm			i:4315
-過去の物にな	과거의 일이 &C6@	M428			GN				llm			i:4316
-過去のものにな	과거의 일이 &C6@	M428			GN				llm			i:4317
+過去の物にな	과거의 일이 &C6@	M428		Dx	GN				llm			i:4316
+過去のものにな	과거의 일이 &C6@	M428		Dx	GN				llm			i:4317
 終戦直後	종전 직후	A9D0			GN				llm			i:4318
 考えれば考えるほど	생각하면 할수록	A9D0			GN				llm			i:4319
 持続可能な開発	지속 가능한 발전	N110			GN							i:4320
@@ -4419,7 +4419,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 甘い言葉	달콤한 말	A9D0			GN				llm			i:4415
 うれしい悲鳴	기쁜 비명	N110			GN				llm			i:4416
 嬉しい悲鳴	기쁜 비명	N110			GN				llm			i:4417
-新年にな	새해가 &C6@	M428			GN				llm			i:4418
+新年にな	새해가 &C6@	M428		Dx	GN				llm			i:4418
 大の虫を生かして小の虫を殺せ	작은 것을 희생해 큰 것을 살려라	A9D0			GN				llm			i:4419
 櫛の歯が抜けたよう	군데군데 빠진 듯한	A9D0			GN				llm			i:4420
 語呂のよさ	어감이 좋음	A9D0			GN				llm			i:4421
@@ -4496,8 +4496,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 社交界の花	사교계의 꽃	N110			GN				llm			i:4492
 釣りに行	낚시하러 &A1@	M42?			GN				llm			i:4493
 槍が降っても	창이 쏟아져도	A9D0			GN				llm			i:4494
-土にな	흙이 &C6@	M428			GN				llm			i:4495
-土とな	흙이 &C6@	M428			GN				llm			i:4496
+土にな	흙이 &C6@	M428		Dx	GN				llm			i:4495
+土とな	흙이 &C6@	M428		Dx	GN				llm			i:4496
 立場を取	입장을 취&AV@	M428		Pn	GN				llm			i:4497
 身を焦が	몸을 불태&AI@	M423		Pn	GN				llm			i:4498
 意味するもの	의미하는 것	N110			GN				llm			i:4499
@@ -4552,7 +4552,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 秋波を送	곁눈을 &CJ@	M428		Pn	GN							i:4548
 罪のない嘘	악의 없는 거짓말	A9D0			GN				llm			i:4549
 罪のないうそ	악의 없는 거짓말	A9D0			GN				llm			i:4550
-勉強にな	공부가 &C6@	M428			GN				llm			i:4551
+勉強にな	공부가 &C6@	M428		Dx	GN				llm			i:4551
 飛べない鳥	날지 못하는 새	N110			GN							i:4552
 種を宿	아이를 가&AL@	M423		Pn	GN				llm			i:4553
 上下にな	위아래가 뒤집&AW@	M428			GN				llm			i:4554
@@ -4875,8 +4875,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 失われた世代	잃어버린 세대	N110			GN							i:4871
 右へならえ	우로 나란히	A9D0			GN				llm			i:4872
 右へ倣え	우로 나란히	A9D0			GN				llm			i:4873
-受け皿とな	수용처가 &C6@	M428			GN				llm			i:4874
-受皿とな	수용처가 &C6@	M428			GN				llm			i:4875
+受け皿とな	수용처가 &C6@	M428		Dx	GN				llm			i:4874
+受皿とな	수용처가 &C6@	M428		Dx	GN				llm			i:4875
 見てろよ	두고 봐	A9D0			GN				llm			i:4876
 傷心旅行	상심 여행	N110			GN				llm			i:4877
 お客様は神様	손님은 왕	A9D0			GN				llm			i:4878
@@ -5001,7 +5001,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どんな犠牲を払っても	어떤 희생을 치르더라도	A9D0			GN				llm			i:4997
 見られたものじゃな	볼썽사$G3@	H7N0			GN				llm			i:4998
 品の無	천박$AB@	H7N0			GN				llm			i:4999
-迷子にな	미아가 &C6@	M428			GN				llm			i:5000
+迷子にな	미아가 &C6@	M428		Dx	GN				llm			i:5000
 控えめに言	조심스럽게 말&AV@	M420			GN				llm			i:5001
 控え目に言	조심스럽게 말&AV@	M420			GN				llm			i:5002
 目を走らせ	훑어&AY@	M427		Pn	GN				llm			i:5003
@@ -5316,7 +5316,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヘドが出	구역질이 &A5@	M427			GN				llm			i:5312
 痩せの大食い	마른 대식가	N110			GN				llm			i:5313
 ヤセの大食い	마른 대식가	N110			GN				llm			i:5314
-無駄にな	헛수고가 &C6@	M428			GN				llm			i:5315
+無駄にな	헛수고가 &C6@	M428		Dx	GN				llm			i:5315
 身に覚えの無い	짚이는 데가 없는	A9D0			GN				llm			i:5316
 身に覚えのない	짚이는 데가 없는	A9D0			GN				llm			i:5317
 自他共に認め	누구나 인정&AV@	M427			GN				llm			i:5318
@@ -5469,7 +5469,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 石にしがみついても	무슨 일이 있어도	A9D0			GN				llm			i:5465
 藁をもすが	지푸라기라도 &FK@	M428		Pn	GN				llm			i:5466
 藁をも縋	지푸라기라도 &FK@	M428		Pn	GN				llm			i:5467
-星にな	별이 &C6@	M428			GN				llm			i:5468
+星にな	별이 &C6@	M428		Dx	GN				llm			i:5468
 話し合いがつ	합의가 이루어&AL@	M421			GN				llm			i:5469
 話し合いが付	합의가 이루어&AL@	M421			GN				llm			i:5470
 雲の上の存在	구름 위의 존재	N110			GN				llm			i:5471
@@ -6345,7 +6345,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スポーツの日	스포츠의 날	N110			GN							i:6341
 自己の意思	자기 의사	N110			GN				llm			i:6342
 翻筋斗を打	공중제비를 &K9@	M424		Pn	GN				llm			i:6343
-大人にな	어른이 &C6@	M428			GN				llm			i:6344
+大人にな	어른이 &C6@	M428		Dx	GN				llm			i:6344
 要領よく	눈치껏	E300			GN							i:6345
 要領良く	요령 있게	E300			GN				llm			i:6346
 線香をあげ	향을 &MA@	M427		Pn	GN				llm			i:6347
@@ -6366,8 +6366,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 よろしくお付き合いください	잘 부탁드립니다	A9D0			GN				llm			i:6362
 よろしくお付き合い下さい	잘 부탁드립니다	A9D0			GN				llm			i:6363
 時間を作	시간을 &A6@	M428		Pn	GN				llm			i:6364
-凄い事にな	엄청난 일이 &C6@	M428			GN				llm			i:6365
-すごい事にな	엄청난 일이 &C6@	M428			GN				llm			i:6366
+凄い事にな	엄청난 일이 &C6@	M428		Dx	GN				llm			i:6365
+すごい事にな	엄청난 일이 &C6@	M428		Dx	GN				llm			i:6366
 穴を穿	약점을 &E9@	M424		Pn	GN				llm			i:6367
 穴をうが	약점을 &E9@	M424		Pn	GN				llm			i:6368
 鍵の穴から天を覗	좁은 시야로 &AY@	M421		Pn	GN				llm			i:6369
@@ -6706,7 +6706,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 膝を落と	무릎을 &NE@	M423		Pn	GN				llm			i:6702
 ひざを落と	무릎을 &NE@	M423		Pn	GN				llm			i:6703
 夢幻泡影	몽환포영	N110			GN				llm			i:6704
-不帰の客とな	불귀의 객이 &C6@	M428			GN				llm			i:6705
+不帰の客とな	불귀의 객이 &C6@	M428		Dx	GN				llm			i:6705
 老いたる馬は路を忘れず	노마지지	A9D0			GN				llm			i:6706
 いい子にする	착하게 있어	A9D0			GN				llm			i:6707
 良い子にする	착하게 있어	A9D0			GN				llm			i:6708
@@ -6807,7 +6807,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ジフの法則	지프의 법칙	N110			GN				llm			i:6803
 ほっとひと息	한숨 돌림	N110			GN				llm			i:6804
 ホッとひと息	한숨 돌림	N110			GN				llm			i:6805
-パーにな	물거품이 &C6@	M428			GN				llm			i:6806
+パーにな	물거품이 &C6@	M428		Dx	GN				llm			i:6806
 疑問符がつ	의문이 &F4@	M421			GN				llm			i:6807
 疑問符が付	의문이 &F4@	M421			GN				llm			i:6808
 他を当た	다른 곳을 알아&AY@	M428		Pn	GN				llm			i:6809
@@ -6933,7 +6933,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツッコミどころ満載	태클 걸 곳 투성이	N110			GN				llm			i:6929
 天国から地獄	천국에서 지옥으로	A9D0			GN				llm			i:6930
 腹に落ち	납득이 &A1@	M427			GN				llm			i:6931
-商売にな	장사가 &C6@	M428			GN				llm			i:6932
+商売にな	장사가 &C6@	M428		Dx	GN				llm			i:6932
 それが何か	머	A9D0			GN							i:6933
 年の差カップル	나이 차이 커플	N110			GN				llm			i:6934
 夜が更け	밤이 깊어&AL@	M427			GN				llm			i:6935
@@ -7024,7 +7024,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 月夜のカニ	속 빈 게	N110			GN				llm			i:7020
 虎を画きて狗に類す	호랑이를 그리려다 개를 그린 꼴	A9D0			GN				llm			i:7021
 虎を描きて犬に類す	호랑이를 그리려다 개를 그린 꼴	A9D0			GN				llm			i:7022
-毒薬変じて薬とな	독이 약이 &C6@	M428			GN				llm			i:7023
+毒薬変じて薬とな	독이 약이 &C6@	M428		Dx	GN				llm			i:7023
 まな板の上の鯉	도마 위의 잉어	N110			GN				llm			i:7024
 俎板の上の鯉	도마 위의 잉어	N110			GN				llm			i:7025
 レジを打	계산대에서 계산&AV@	M424		Pn	GN				llm			i:7026
@@ -7093,7 +7093,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気をそそ	흥미를 자극&AV@	M428		Pn	GN				llm			i:7089
 勘定合って銭足らず	계산은 맞는데 돈이 모자라	A9D0			GN				llm			i:7090
 勘定あって銭足らず	계산은 맞는데 돈이 모자라	A9D0			GN				llm			i:7091
-女にな	여자가 &C6@	M428			GN				llm			i:7092
+女にな	여자가 &C6@	M428		Dx	GN				llm			i:7092
 男を知	남자를 &K6@	M428		Pn	GN				llm			i:7093
 オブ・ザ・イヤー	오브 더 이어	A9D0			GN				llm			i:7094
 オブザイヤー	오브 더 이어	A9D0			GN				llm			i:7095
@@ -7305,7 +7305,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 外堀が埋ま	외곽이 메워&AL@	M428			GN				llm			i:7301
 やさしい日本語	쉬운 일본어	N110			GN							i:7302
 歓喜雀躍	환희작약	N110			GN				llm			i:7303
-手足とな	수족이 &C6@	M428			GN				llm			i:7304
+手足とな	수족이 &C6@	M428		Dx	GN				llm			i:7304
 足の引っ張り合い	서로 발목을 잡기	N110			GN				llm			i:7305
 国家の犬	국가의 개	N110			GN				llm			i:7306
 ご迷惑をおかけいたします	불편을 끼쳐 죄송합니다	A9D0			GN				llm			i:7307
@@ -7452,7 +7452,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 厄介なことに	골치 아프게도	A9D0			GN				llm			i:7448
 厄介な事に	골치 아프게도	A9D0			GN				llm			i:7449
 頭上注意	머리 조심	A9D0			GN				llm			i:7450
-無にな	물거품이 &C6@	M428			GN				llm			i:7451
+無にな	물거품이 &C6@	M428		Dx	GN				llm			i:7451
 如何によらず	여하에 관계없이	A9D0			GN				llm			i:7452
 如何を問わず	여하를 막론하고	A9D0			GN				llm			i:7453
 いかんを問わず	여하를 막론하고	A9D0			GN				llm			i:7454

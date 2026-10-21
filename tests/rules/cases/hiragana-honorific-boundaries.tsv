@@ -16,7 +16,7 @@ constraint:honorific-hiragana	花のさくらが咲いた。	꽃의 벚꽃이 �
 constraint:honorific-hiragana	話はまだつづくんだ。	이야기는 아직 계속되는 거야.	keep	lookup
 constraint:honorific-hiragana	まだあるくんだ。	아직 걷는 거야.	keep	lookup
 constraint:honorific-hiragana	あかちゃんが眠っている。	갓난 아기가 자고 있다.	keep	lookup
-constraint:honorific-hiragana	あにくんが来た。	형군이 왔다.	keep	lookup
+constraint:honorific-hiragana	あにくんが来た。	아니군이 왔다.	fix	lookup
 constraint:honorific-hiragana	あおくない。	푸르지 않다.	keep	lookup
 constraint:honorific-hiragana	しろくなった。	희어졌다.	keep	lookup
 constraint:honorific-hiragana	しろちゃんと。	해라 제대로.	keep	lookup

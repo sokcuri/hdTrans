@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:jisjk:104503	何か飲む？	뭔가 마셔?	fix	lookup
+dict:jisjk:104503	箱の中で何かが動いた。	상자 중에서 뭔가가 움직였다.	fix	lookup
+dict:jisjk:104503	何かを忘れている気がする。	뭔가를 잊고 있는 것 같다.	fix	lookup
+dict:jisjk:41395	なにか手伝おうか。	뭔가 도울까.	fix	lookup
+dict:gram:naniga:okiru	外で何が起きているの？	밖에서 무슨 일이 일어나고 있는 거야?	fix	local
+dict:gram:naniga:okiru	何が起こったのか分からない。	무슨 일이 일어났는지 모른다.	fix	local
+dict:gram:naniga:okiru	何が好き？	무엇을 좋아해?	keep	local

@@ -20,6 +20,7 @@ enum class ConstraintContext : uint8_t {
     Honorific,          // an honorific suffix follows, and no longer word starts with the word
     FamiliarHonorific,  // the same with くん, 君, ちゃん or たん, a name rather than a role before it
     AfterKatakana,      // the word follows katakana in its token
+    AfterMask,          // the word follows a mask character such as ○ or △ (past spaces)
     AfterExclamation,   // the word follows ！ or ？ (past spaces) and is not drawn out (とっ, とぉ)
     AfterPause,         // the same with 、 and … as well, before 奴, こと, 話 and like nouns
     LineOpening,        // only spaces and opening brackets before the word in its line, 、 after it
@@ -29,8 +30,13 @@ enum class ConstraintContext : uint8_t {
     AfterDemonstrative, // right after この, その or あの
     BeforeNaru,         // なる follows (こうなる), not the old attributive of an adjective (こうなるべく)
     BeforeAgaru,        // 上が follows (一人立ち上がり), so the shorter word ends inside a longer one
-    AfterPredicate,     // right after た, だ, る, う, い, す or ん in the token or the token before (だったわ, ですわ)
+    AfterPredicate,     // right after た, だ, る, う, い, す, ん or a drawn-out え, ー in the token or the
+                        // token before (だったわ, ですわ, 知らねーわ)
     NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
+    NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
+    AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
+    Detached,           // nothing, a space or punctuation right before the word (名前: め)
+    BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
 };
 
 // The senses a rule rejects.

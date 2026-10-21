@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+ending:学生だっての	それは俺の役目だっての！	그것은 내 역할이라니까!	fix	builtin-ending
+ending:書くっての	だから行くっての。	그러니까 간다니까.	fix	builtin-ending
+ending:書くなっての	勝手に触るなっての！	마음대로 만지지 말라니까!	fix	builtin-ending
+ending:書かないっての	そんなの知らないっての。	그런 것 모른다니까.	fix	builtin-ending
+ending:高いっての	本当に重いっての！	정말로 무겁다니까!	fix	builtin-ending
+ending:書くかっての	こんな所で眠れるかっての！	이런 곳에서 잘 수 있겠냐고!	fix	builtin-ending
+ending:書くって	だから行くって。	그러니까 간다니까.	keep	builtin-ending
+ending:学生だっけか	あれは去年だっけか。	저것은 작년이었던가.	fix	builtin-ending
+ending:書くんだっけか	彼は明日来るんだっけか。	그는 내일 오는 거였던가.	fix	builtin-ending
+phrase:そうだっけか	そうだっけか。	그랬던가.	fix	builtin-pattern
+ending:高いもんでね	朝は弱いもんでね。	아침은 약해서 말이야.	fix	builtin-ending
+pattern:書いたもんで	寝坊したもんで、遅刻した。	늦잠잤기 때문에, 지각했다.	fix	builtin-pattern
+pattern:書いたもんで	昔はよく遊んだもんです。	옛날은 잘 논 것입니다.	keep	builtin-pattern
+pattern:書くのもなんだし	立ち話するのもなんだし、中に入ろう。	서서 이야기 하는 것도 좀 그러니, 안에 들어오자.	fix	builtin-pattern
+pattern:学生なもんで	今は仕事中なもんで、電話に出られない。	지금은 업무중이라서, 전화를 받을 수 없다.	fix	builtin-pattern

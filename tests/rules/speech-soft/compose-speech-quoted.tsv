@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:speech-quoted	「それは本当に違う」	「그것은 정말로 달라」	fix	compose
+compose:speech-quoted	「それは本当に違う」	「그건 정말로 달라」	fix	compose
 compose:speech-quoted	「明日、海に行く」	「내일, 바다에 갈 거야」	fix	compose
 compose:speech-quoted	「冷蔵庫にプリンがある」	「냉장고에 푸딩이 있어」	fix	compose
 compose:speech-quoted	「今日は朝から雨だ」	「오늘은 아침부터 비야」	fix	compose
@@ -8,12 +8,12 @@ compose:speech-quoted	「宿題はもう終わった」	「숙제는 벌써 끝�
 compose:speech-quoted	「もういい、一人でやる」	「이제 됐어, 혼자서 할 거야」	fix	compose
 compose:speech-quoted	「よく分からない」	「잘 몰라」	fix	compose
 compose:speech-quoted	「後で返す」	「나중에 돌려줄 거야」	fix	compose
-compose:speech-quoted	「手伝ってやる」	「도와 줄 거야」	fix	compose
+compose:speech-quoted	「手伝ってやる」	「도와 줄게」	fix	compose
 compose:speech-quoted	「わかる！」	「알아!」	fix	compose
 compose:speech-quoted	「終わった終わった」	「끝났어 끝났어」	fix	compose
 compose:speech-quoted	「雨が降っている。もう帰る」	「비가 오고 있어. 이제 돌아갈 거야」	fix	compose
-compose:speech-quoted	「何を謝る」	「무엇을 사과해」	fix	compose
-compose:speech-quoted	「これをカバンという」	「이것을 가방이라고 해」	fix	compose
+compose:speech-quoted	「何を謝る」	「뭘 사과해」	fix	compose
+compose:speech-quoted	「これをカバンという」	「이걸 가방이라고 해」	fix	compose
 compose:speech-quoted	「ちょっと手伝ってくれる？」	「조금 도와 줄래?」	keep	compose
 compose:speech-quoted	「どうしよう、鍵がない」	「어떻게 하지, 열쇠가 없어」	keep	compose
 compose:speech-quoted	「助かった……」	「살았다……」	keep	compose
@@ -26,7 +26,7 @@ compose:speech-quoted	彼は「雨が降る」ということを知った。	그
 compose:speech-quoted	「すぐ消える」魔法を使った。	「바로 사라진다」마법을 사용했다.	keep	compose
 compose:speech-quoted	「ここに婚約の破棄を宣言する」	「여기에 약혼의 파기를 선언한다」	keep	compose
 compose:speech-quoted	「お前もだ！」	「너도다!」	keep	compose
-compose:speech-quoted	「しかし、だ。それは違う」	「그러나, 다. 그것은 달라」	fix	compose
+compose:speech-quoted	「しかし、だ。それは違う」	「그러나, 다. 그건 달라」	fix	compose
 compose:speech-quoted	彼女は窓の外を見た。	그녀는 창 밖을 보았다.	keep	compose
 compose:speech-quoted	彼のモットーは「従う」だ。	그의 모토는 「따른다」다.	keep	compose
 compose:speech-quoted	想「おも」い出	구상 「도」있고 출	keep	compose
@@ -34,3 +34,6 @@ compose:speech-quoted	「やらねばならない」	「해야 한다」	keep	co
 compose:speech-quoted	「俺が行く」	「내가 갈게」	fix	compose
 compose:speech-quoted	「私は断る」	「나는 거절할게」	fix	compose
 compose:speech-quoted	「あの人は来る」	「그 사람은 올 거야」	keep	compose
+compose:speech-quoted	「あの子は来ない、と言ってた」	「그 아이는 오지 않는다, 라고 말했어」	fix	compose
+compose:speech-quoted	「『走らない』『騒がない』を守ってる」	「『달리지 않는다』 『떠들지 않는다』를 지키고 있어」	fix	compose
+compose:speech-quoted	「父が待っておってな。もう帰った」	「아버지가 기다리고 있어서 말이야. 벌써 돌아갔다」	fix	compose

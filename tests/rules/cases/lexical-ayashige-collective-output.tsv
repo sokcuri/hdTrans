@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:ayashige:collective	あやしげな集団を見た。	수상한 집단을 보았다.	fix	local
 dict:ayashige:collective	あやしげな集団が勧誘していた。	수상한 집단이 권유하고 있었다.	fix	local
-dict:ayashige:collective	あやしげな集団から勧誘の電話が来た。	수상한 집단으로부터 권유의 전화가 왔다.	fix	local
+dict:ayashige:collective	あやしげな集団から勧誘の電話が来た。	수상한 집단으로부터 권유 전화가 왔다.	fix	local
 dict:ayashige:collective	あやしげな集団だった。	수상한 집단이었다.	fix	local
 dict:ayashige:collective	あやしげな集団ではない。	수상한 집단이 아니다.	fix	local
 dict:ayashige:collective	あやしげな集団に近づくな。	수상한 집단에 가까워지지 말아라.	fix	local

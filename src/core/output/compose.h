@@ -23,6 +23,10 @@ struct QuoteState {
     int count = 0;
 };
 
+// A quote style besides those of pipeline::QuoteStyles: the Japanese of the quote is
+// casual speech (pipeline::CasualQuotes).
+constexpr std::uint8_t kCasualSpeech = 32;
+
 // The switches of the stage.
 struct Settings {
     int hanjaToHangul = 1;  // 1: kanji left in the text are written as their Hangul reading
@@ -35,9 +39,24 @@ struct Settings {
     // sentence, and the quoteStyles of the line (pipeline::QuoteStyles) keep polite and old
     // speech.
     bool casual = false;
+    // Only the quotes whose style has kCasualSpeech.
+    bool casualMarkedOnly = false;
+    // Text path: the questions of speech (WriteCasual) in their spoken forms without casual
+    // too: a plain question in a quote of no style in 해체 (大丈夫か？ 괜찮아?), だろう before
+    // ？ as agreement asked or a wonder.
+    bool asked = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
+
+// For each quote of the Korean line (indexed as pipeline::QuoteStyles, depth the quote
+// an earlier line left open), whether its own text ends a sentence politely (고마워요,
+// 좋네요, 합니다).
+std::vector<bool> PoliteQuotes(std::string_view line, int depth);
+
+// line with the written words of its quotes styled kCasualSpeech in their spoken form (것은
+// 건, 그것을 그걸, 무엇을 뭘, 무엇인가 뭔가); quotes and depth as for PoliteQuotes.
+std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles);
 
 // The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing
 // bracket outside a quote is ignored), and count counts the quotes opened outside any.
@@ -116,7 +135,11 @@ private:
 
     std::string Build(int i, int action, std::string_view mode);
     void WriteCasual(int first, int last);
-    char32_t QuotedEnd(int i, int last, bool nested) const;
+    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr) const;
+    bool AskConjecture(int i, std::string_view clause, std::string_view own, bool casual);
+    bool AskPlain(int i, std::string_view own);
+    void AskWord(int i, int last);
+    bool Stative(std::string_view marker) const;
     std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);
     void BuildAction(int i, int action, std::string_view mode);

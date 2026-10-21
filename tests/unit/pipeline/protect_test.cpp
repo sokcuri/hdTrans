@@ -152,6 +152,52 @@ HD_TEST(pipeline_lines_and_brackets) {
                 std::string("「a」〖2｢〗"));
 }
 
+HD_TEST(pipeline_kata_honorifics) {
+    const auto snap = Snapshot("タン\t혀\tN110\t\t\tGN\t1\nたくさん\t많이\tN311\t\t\tGN\t2\n");
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ヨウタサマ", "ヨウタさま"},
+        {"「ヨウタサン、ドウゾ」", "「ヨウタさん、ドウゾ」"},
+        {"タンサン", "タンサン"},
+        {"タクサン", "タクサン"},
+        {"オジサン", "オジサン"},
+        {"サマ", "サマ"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::KataHonorifics(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
+HD_TEST(pipeline_nicknames_to_hangul) {
+    const auto snap = Snapshot("おばちゃん\t아줌마\tN110\t\t\tGN\t1\nどんちゃん騒ぎ\t법석\tN110\t\t\tGN\t2\n");
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ゆうくん、おはよう。", "〖1유〗くん、おはよう。"},
+        {"おやすみ、ふみちゃん", "おやすみ、〖1후미〗ちゃん"},
+        {"「みーちゃん！」", "「〖1미〗ちゃん！」"},
+        {"私はゆうくんが好き。", "私は〖1유〗くんが好き。"},
+        {"あにくんが来た。", "〖1아니〗くんが来た。"},
+        {"群がるおばちゃん", "群がるおばちゃん"},
+        {"ねえちゃん、待って", "ねえちゃん、待って"},
+        {"ここにちゃんと書いた。", "ここにちゃんと書いた。"},
+        {"皆がどんちゃん騒ぎだ。", "皆がどんちゃん騒ぎだ。"},
+        {"内容にしとくんで。", "内容にしとくんで。"},
+        {"なんでゆうくんまで", "なんでゆうくんまで"},  // a nickname inside a longer hiragana run
+        {"ぼくんち", "ぼくんち"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::NicknamesToHangul(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_kata_words) {
     const auto snap = Snapshot("からだ\t몸\tN110\t\t\tGN\t1\n");
     HD_REQUIRE(snap != nullptr);
@@ -171,7 +217,7 @@ HD_TEST(pipeline_kata_words) {
         {"ひょっとしてアレ？", "ひょっとしてアレ？"},
         {"せまいからダメ？", "せまいからダメ？"},  // からだ joins the text around it
         {"アレックスは来た。", "アレックスは来た。"},
-        {"スゴイね。", "スゴイね。"},
+        {"スゴイね。", "すごいね。"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
@@ -219,6 +265,11 @@ HD_TEST(pipeline_kata_speech) {
         {"アハハハハ！", "アハハハハ！"},
         {"ネバネバ", "ネバネバ"},
         {"猫はネコデス、と言った。", "猫はネコデス、と言った。"},  // mostly not katakana
+        // Particles and okurigana after a kanji word, and お before one.
+        {"猫ハ、ワタシノ、ネコデス", "猫は、わたしの、ねこです"},
+        {"音声ヲ、解析シマス。発信源ハ、内部", "音声を、解析します。発信源は、内部"},
+        {"ワタシノ、猫ヲ、オ貸シ、シマス", "わたしの、猫を、お貸し、します"},
+        {"音声ロボット、内部ロボット", "音声ロボット、内部ロボット"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(internal::KataSpeech(Text(c.in), ctx, *snap)), std::string(c.want));
     // Spans are passed over.
@@ -291,6 +342,9 @@ HD_TEST(pipeline_katakana_dictionary) {
         {"アレだけは苦手。", "アレだけは苦手。"},  // あれだけ is another word
         {"せまいからダメ？", "せまいからダメ？"},
         {"ダメですよ。", "ダメですよ。"},  // the base word conjugates already
+        {"ウルサイぞ。", "うるさいぞ。"},
+        {"ヒドイよ！", "ひどいよ！"},
+        {"ダメよ。", "ダメよ。"},  // only an i-adjective before a sentence-final particle
         {"オレは行く。", "オレは行く。"},
         {"ドレスを着た。", "ドレスを着た。"},
     };

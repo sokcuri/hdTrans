@@ -737,6 +737,21 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     }
                     return candidate;
                 }
+                // A く verb of the same stem reads the て or た that the stem in い of a わ-row
+                // verb cannot take (彷徨いて: 彷徨く in て, not 彷徨う + て).
+                Record* other = stop->child;
+                while (other != nullptr && other->source == stop->source && At(other->partCode, 1) == '4' &&
+                       At(other->partCode, 3) == At(stop->partCode, 3)) {
+                    other = other->child;
+                }
+                const std::string_view afterStem = From(text, offset + static_cast<long>(stop->source.size()));
+                if (word->patternKind == 0 && word->kind == 10 && afterStem.starts_with("い") && other != nullptr &&
+                    other->source == stop->source && At(other->partCode, 1) == '4' &&
+                    TeAfterWaStem(stop->source, afterStem.substr(std::string_view("い").size()))) {
+                    rec = other;
+                    group->records = nullptr;
+                    continue;
+                }
                 rec = group->records;
                 group->records = nullptr;
             }
@@ -852,6 +867,15 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
                     if (tailAt(0, 6) == PrefixForm(67)) entry = 17;
                     else if (tailAt(0, 4) == PrefixForm(61)) entry = 11;
                 }
+            } else if (tableGroup == 3 && entry == 6) {
+                // As for する: 来た before い, かった, く, ければ or き is the 来たい family, not the past.
+                const Window two = tailAt(pl, 2), six = tailAt(pl, 6);
+                if (two == PrefixGate(0) || six == PrefixGate(1) || two == PrefixGate(2) || six == PrefixGate(3) ||
+                    two == PrefixGate(4)) {
+                    continue;
+                }
+            } else if (tableGroup == 3 && (entry == 8 || entry == 10) && tail.starts_with(PrefixForm(50 * 3 + 17))) {
+                entry = 17;  // as for する: 来ちゃ is one form, not 来 and ちゃ
             } else if (tableGroup == 3 && (entry == 8 || entry == 10)) {
                 const Window two = tailAt(pl, 2), four = tailAt(pl, 4), eight = tailAt(pl, 8), ten = tailAt(pl, 10);
                 if (two == PrefixGate(0) || two == PrefixGate(5) || four == PrefixGate(6) || four == PrefixGate(7) ||

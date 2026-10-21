@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:jisjk:341889	郵便局の前で待っている。	우체국 앞에서 기다리고 있다.	fix	local
+dict:jisjk:341889	本棚の隣に机を置いた。	책장 옆에 책상을 두었다.	fix	local
+dict:jisjk:341889	倉庫の奥に箱がある。	창고 안쪽에 상자가 있다.	fix	local
+dict:jisjk:341889	母のおかげで助かった。	어머니 덕분에 살아났다.	fix	local
+dict:jisjk:341889	寝不足のせいで頭が痛い。	수면 부족 탓으로 머리가 아프다.	fix	local
+dict:jisjk:341889	来週の金曜日に会おう。	다음주 금요일에 만나자.	fix	local
+dict:jisjk:341889	冬の朝は寒い。	겨울 아침은 춥다.	fix	local
+dict:jisjk:341889	次の駅で降りる。	다음 역에서 내린다.	fix	local
+dict:jisjk:341889	灰色の上着を着た。	회색 윗도리를 입었다.	fix	local
+dict:jisjk:341889	叔父の店の看板を直した。	숙부 가게의 간판을 고쳤다.	fix	local
+dict:jisjk:341889	部屋の掃除を終えた。	방 청소를 끝냈다.	fix	local
+dict:jisjk:341889	会議の準備をする。	회의 준비를 한다.	fix	local
+dict:jisjk:341889	説明会のご案内	설명회 안내	fix	local
+dict:jisjk:341889	私の前に座った。	내 앞에 앉았다.	keep	local
+dict:jisjk:341889	自分の部屋の机を片付けた。	자신의 방의 책상을 정리했다.	keep	local
+dict:jisjk:341889	二年の時間が流れた。	2년의 시간이 흘렀다.	keep	local
+dict:jisjk:341889	景色の美しさに驚いた。	경치의 아름다움에 놀랐다.	keep	local
+dict:jisjk:341889	緑色のものが落ちている。	녹색의 것이 떨어져 있다.	keep	local
+dict:jisjk:341889	彼女の前に立った。	그녀 앞에 섰다.	keep	local
+dict:jisjk:341889	最善の努力をした。	최선의 노력을 했다.	keep	local
+dict:jisjk:341889	兄の説明を聞いた。	형의 설명을 들었다.	keep	local
+dict:jisjk:4733	銀色の鈴が鳴った。	은빛 방울이 울렸다.	fix	lookup
+dict:jisjk:4742	日曜の夜は早く寝る。	일요일 밤은 빨리 잔다.	fix	lookup
+dict:jisjk:201693	近くの公園を歩いた。	근처 공원을 걸었다.	fix	lookup
+dict:jisjk:4765	初めての旅行に出た。	첫 여행을 떠났다.	fix	lookup

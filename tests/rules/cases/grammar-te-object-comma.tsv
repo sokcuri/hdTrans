@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+rewrite:te-object-comma	本を開いて、読み始めた。	책을 펴고, 읽기 시작했다.	fix	rewrites
+rewrite:te-object-comma	窓を閉めて、鍵をかけた。	창을 닫고, 열쇠를 잠갔다.	fix	rewrites
+rewrite:te-object-comma	道具を使って、棚を直した。	도구를 사용해, 선반을 고쳤다.	keep	rewrites
+rewrite:te-object-comma	疲れて、眠った。	지쳐, 잤다.	keep	rewrites

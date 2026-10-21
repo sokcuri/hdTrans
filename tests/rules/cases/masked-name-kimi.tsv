@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+constraint:kimito-after-mask	○○君と映画を見た。	○○군과 영화를 보았다.	fix	lookup
+constraint:kimi-after-mask	××君が手を振った。	××군이 손을 흔들었다.	fix	lookup
+constraint:kimito-after-mask	君と映画を見た。	너와 영화를 보았다.	keep	lookup
+constraint:kimito-after-mask	△△さんと君と三人で行った。	△△씨와 너와 세 명으로 갔다.	keep	lookup

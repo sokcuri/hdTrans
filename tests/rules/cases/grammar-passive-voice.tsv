@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:gram:sareru:receive	先輩に会社を案内された。	선배에게 회사를 안내받았다.	fix	local
+dict:gram:sareru:receive	友人から店を紹介された。	친구에게서 가게를 소개받았다.	fix	lookup
+dict:gram:sareru:suffer	挨拶を無視された。	인사를 무시당했다.	fix	local
+dict:gram:sareru:suffer	要求を拒否された。	요구를 거부당했다.	fix	local
+dict:gram:sareru:suffer	道が整備された。	길이 정비되었다.	keep	local
+dict:gram:sareru:receive	新しい法律が承認された。	새로운 법률이 승인되었다.	keep	local
+dict:jisjk:344911	言われた通りに片付けた。	들은 대로 정리했다.	fix	local-ending

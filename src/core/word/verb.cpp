@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
 #include "core/word/strings.h"
@@ -54,6 +55,15 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         const std::string_view entry = Conjugation(kind, branch);
         const bool contractedConditional = kind == 9 && branch == 3 && Starts(tail, "すりゃ");
         if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional)) continue;
+        // A bare ichidan stem is no form the quoting って or と follows (行けって, 言えと are the
+        // godan imperatives 行け, 言え, not potential stems); と after it only begins the
+        // ておく contraction (食べとく, 食べとけ, 食べといて, 食べとかない, 食べとこう, 食べとった).
+        if (kind == 7 && entry.empty() &&
+            (Starts(tail, "って") ||
+             (Starts(tail, "と") && !Starts(tail, "とく") && !Starts(tail, "とけ") && !Starts(tail, "とい") &&
+              !Starts(tail, "とか") && !Starts(tail, "とこ") && !Starts(tail, "とっ") && !Starts(tail, "ときゃ")))) {
+            continue;
+        }
         if (branch == 4 || branch == 11) {
             const std::size_t n = entry.size();
             const std::string_view rest = tail.substr(n);
@@ -64,6 +74,14 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
                 continue;
             }
             if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) continue;
+            // A bare e-row form before a closing bracket, a full-width sentence mark or the
+            // quoting って or と is the imperative (「撃て」, 「書け」の一点張り, 言えって言った):
+            // a potential stem cannot end there without its る.
+            if (branch == 4 && (Starts(rest, "」") || Starts(rest, "』") || Starts(rest, "）") || Starts(rest, "。") ||
+                                Starts(rest, "…") || Starts(rest, "‥") || Starts(rest, "！") || Starts(rest, "？") ||
+                                Starts(rest, "って") || Starts(rest, "と"))) {
+                continue;
+            }
             if (n < tail.size()) {
                 const char next = tail[n];
                 if ((branch == 4 && Byte(next) < 0x80 && IsPunct(next)) || (branch == 11 && next == ',')) continue;
@@ -73,7 +91,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         }
         d.kind = branch;
         if (d.kind == 4 && Starts(tail, Conjugation(kind, 16))) d.kind = 16;
-        if (kind == 7 && d.kind == 1) d.kind = 4;
+        if ((kind == 7 || kind == 11 || kind == 13) && d.kind == 1) d.kind = 4;  // られ: the potential before the passive
         if (d.patternMatched == 0) {
             if (kind == 7 && d.kind == 6) {
                 if (Starts(tail, kJaTai) || Starts(tail, kJaTakatta) || Starts(tail, kJaTaku) || Starts(tail, kJaTakereba) ||
@@ -99,13 +117,32 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
             if (Starts(tail, Conjugation(kind, 15))) d.kind = 15;
             else if (Starts(tail, Conjugation(kind, 14))) d.kind = 14;
         }
-        if (kind == 7 && (d.kind == 8 || d.kind == 10)) {
+        // くる and 来る write their stems (こ, き, 来) apart from the forms built on them, so a
+        // stem match takes the 来たい family over the past 来た (as for ichidan stems) ...
+        if ((kind == 11 || kind == 13) && d.kind == 6 && d.patternMatched == 0) {
+            const std::string stem(Conjugation(kind, 10));
+            for (const std::string_view t : {kJaTai, kJaTakatta, kJaTaku, kJaTakereba, kJaTaki}) {
+                if (Starts(tail, stem + std::string(t))) {
+                    d.kind = 10;
+                    break;
+                }
+            }
+        }
+        // ... and a stem form gives way to a longer form that begins with it (来い, 来ちゃ).
+        if ((kind == 7 || kind == 11 || kind == 13) && (d.kind == 8 || d.kind == 10)) {
             const int old = d.kind;
+            std::size_t longest = Conjugation(kind, old).size();
             for (int next = old + 1; next <= 17; next++) {
                 if (next == 13) continue;
-                if (const std::string_view e = Conjugation(kind, next); !e.empty() && Starts(tail, e)) {
+                const std::string_view e = Conjugation(kind, next);
+                if (e.empty() || !Starts(tail, e)) continue;
+                if (kind == 7) {  // ichidan: the first later form (its stem forms are empty)
                     d.kind = next;
                     break;
+                }
+                if (e.size() > longest) {  // くる, 来る: the longest form that begins with the stem
+                    d.kind = next;
+                    longest = e.size();
                 }
             }
             if (old == d.kind && (Starts(tail, kJaKudasaKanji) || Starts(tail, kJaKudasa))) d.kind = 10;
@@ -156,6 +193,38 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     return false;
 }
 
+bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const {
+    if (stem.empty()) return false;
+    for (std::string_view t = stem; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!text::IsKanji(r.cp)) return false;
+        t.remove_prefix(r.size);
+    }
+    if (after == kJaTe && current + 1 < TokenCount()) {
+        const std::string_view next = Tok(current + 1).text;
+        if (Starts(next, kJaEllipsis) || Starts(next, "‥")) return false;
+    }
+    if (Starts(after, kJaTe)) {
+        // 言いてえ, 会いてぇ: the spoken たい.
+        if (Starts(after, "てえ") || Starts(after, "てぇ") || Starts(after, "てー") || Starts(after, "てェ")) return false;
+    } else {
+        if (!Starts(after, "た")) return false;
+        // The たい family, the honorific たまえ (言いたまえ) and the compounds in ため, たて and
+        // たっ (買いため, 言いたて, 思いたった) go on from the stem of the わ verb.
+        for (const std::string_view rest : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ", "たま", "ため", "たて", "たっ"}) {
+            if (Starts(after, rest)) return false;
+        }
+    }
+    // Only where the stem is also a く verb, whose て and た forms these are (彷徨いて, 拭いた).
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
+        const int kind = pc[3] - '0';
+        if (kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 6) == "いた") return true;
+    }
+    return false;
+}
+
 bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int& branch, int& length) {
     Detail d;
     d.patternKind = Byte(kind) - '0';
@@ -196,12 +265,24 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // The byte length of the pattern in tail, and the text after it.
     auto pattern = [&]() { return static_cast<int>(UnitOffset(tail, patternWidth).offset); };
     auto after = [&]() { return tail.substr(static_cast<std::size_t>(pattern())); };
+    // A bare ichidan stem ends no utterance where its last kana also makes the imperative
+    // of a godan verb: before a closing bracket or a full-width sentence mark that is the
+    // reading (「立て」 서라, not 세우고). The mark may start the next token.
+    if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
+        const std::string_view ahead = tail.empty() ? base.nextText : tail;
+        if ((Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
+             Starts(ahead, "？")) &&
+            w->GodanImperative(surface)) {
+            return false;
+        }
+    }
     if (!w->MatchDictionary(tail, surface, '4', 'X')) return false;
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
     if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
 
+    if (!matched && base.kind == 10 && base.patternKind == 0 && w->TeAfterWaStem(surface, after())) return false;
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
@@ -342,7 +423,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
                 if ((Has(e.gattr, "Sh") && Classify(next) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
                     !w->EndingApplies(e, next, tokenIndex) ||
-                    w->CutsWord(rest.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), rest.size())), next)) {
+                    w->CutsWord(tail.substr(0, tail.size() - rest.size()), rest.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), rest.size())), next)) {
                     base.enabled[index] = false;
                     continue;
                 }

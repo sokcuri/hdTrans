@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+dict:teitai:1	今日は一日中ここで本を読んでいたい。	오늘은 하루종일 여기서 책을 읽고 있고 싶다.	fix	local
+dict:teitai:1	もう少しだけ海を眺めていたかった。	좀 더만 바다를 바라보고 있고 싶었다.	fix	local
+dict:teitai:1	彼女と話していたいが、時間がない。	그녀와 이야기하고 있고 싶지만, 시간이 없다.	fix	local
+dict:teitai:1	ずっと君の隣に座っていたいな。	쭉 네 옆에 앉아 있고 싶은데.	keep	local
+dict:teitai:1	家で休んでいたくて、断った。	집에서 쉬고 있고 싶어서, 끊었다.	fix	local
+dict:teitai:1	朝はずっと寝てたい。	아침은 쭉 자고 있고 싶다.	fix	local
+dict:teitai:1	彼は家で本を読んでいた。	그는 집에서 책을 읽고 있었다.	keep	local
+dict:teitai:1	本を読んでいたから、気付かなかった。	책을 읽고 있었기 때문에, 깨닫지 못했다.	keep	local
+dict:teitai:1	肩をぶつけて痛い。	어깨를 부딪쳐 아프다.	keep	local
+dict:teitai:1	早く帰りたい。	빨리 돌아가고 싶다.	keep	local
+constraint:ita-after-te	鍵は机の上に置かれていたんです。	열쇠는 책상 위에 놓여져 있었습니다.	keep	lookup
+constraint:ita-after-te	彼はずっと待っていたな。	그는 쭉 기다리고 있었군.	fix	lookup
+constraint:ita-after-te	心の中では悲しんでいたんじゃないか。	마음 속에서는 슬퍼하고 있었지 않은가.	fix	lookup
+constraint:ita-after-te	こちらでいたしましょう。	이쪽에서 합시다.	keep	lookup
+constraint:ita-after-te	犬が捨てられていたんですね。	개를 버려지고 있었군요.	fix	lookup

@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+pattern:書くに決まってる	あいつなら来るに決まってる。	저녀석이라면 올 게 뻔하다.	keep	lookup
+pattern:高いに決まってる	手作りのケーキは美味しいに決まってるじゃん。	손수 만든 케이크는 맛있을 게 뻔하잖아.	fix	lookup
+pattern:書いてるに決まってる	今ごろ寝てるに決まってる。	지금 쯤 자고 있을 게 뻔하다.	fix	lookup
+pattern:学生に決まってる	一番人気はカレーに決まってるでしょ。	제일 인기는 카레일 게 뻔하잖아.	fix	lookup
+phrase:無理に決まってる	そんなの無理に決まってる。	그런 것 무리일 게 뻔하다.	fix	lookup
+phrase:無理に決まってる	無理に笑わなくていい。	무리하게 웃지 않아도 된다.	keep	lookup
+pattern:学生に決まってる	試合の日は来週に決まった。	시합의 날은 다음주에 정해졌다.	keep	lookup
+pattern:書いたに決まってる	犯人が盗んだに決まっているだろう。	범인이 훔쳤을 게 뻔하잖아.	fix	lookup

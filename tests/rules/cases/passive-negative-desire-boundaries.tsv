@@ -24,5 +24,5 @@ dict:fatigue-noun	気づかれがひどい。	정신적 피로가 심하다.	kee
 dict:fatigue-noun	気疲れがひどい。	심로가 심하다.	keep	lookup
 dict:active-noticing	私は間違いに気づく。	나는 실수를 눈치챈다.	keep	lookup
 dict:active-noticing	私は間違いに気づいた。	나는 실수를 눈치챘다.	keep	lookup
-dict:active-noticing	私は間違いに気づかない。	나는 실수를 눈치채지 않는다.	keep	lookup
+dict:active-noticing	私は間違いに気づかない。	나는 실수를 눈치채지 못한다.	keep	lookup
 dict:active-noticing	私は間違いに気づきたくない。	나는 실수를 눈치채고 싶지 않다.	keep	lookup

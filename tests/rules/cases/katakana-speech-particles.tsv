@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+katakana:okurigana-speech	「依頼者ハ、アナタノ、母上、デス」	「의뢰자는, 당신의, 어머님, 입니다」	fix	normalize
+katakana:okurigana-speech	「隣町ノ、工場カラ、来マシタ」	「이웃마을의, 공장에서, 왔습니다」	fix	normalize
+katakana:okurigana-speech	「困ッタ時ハ、オタガイサマ、デス」	「곤란했을 때는, 피차 일반, 입니다」	fix	normalize
+katakana:okurigana-speech	新型エンジンを搭載した。	신형 엔진을 탑재했다.	keep	normalize
+katakana:okurigana-speech	東京タワーの下で会おう。	도쿄 타워아래에서 만나자.	keep	normalize
+dict:lexical-split-words	「……ワレハ……ココニ、イル……」	「……나는……여기에, 일……」	fix	lookup
+katakana:okurigana-speech	「音声ヲ、解析シマス。原因ハ、物置ノ、内部」	「음성을, 해석합니다. 원인은, 창고의, 내부」	fix	normalize
