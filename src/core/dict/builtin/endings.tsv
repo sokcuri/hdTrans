@@ -150,6 +150,19 @@
 書いてるにゃ	쓰고 있다냥	end	prio=-1
 静かだにゃ	조용하다냥	end	prio=-1
 学生だにゃ	학생이다냥	end	prio=-1
+// でしょ: casual agreement sought (晴れるでしょ？ 개겠지?, 言ったでしょ 말했잖아).
+書くでしょ	쓰겠지	end	prio=-1
+書いたでしょ	썼잖아	end	prio=-1
+高いでしょ	높지	end	prio=-1
+静かでしょ	조용하지	end	prio=-1
+学生でしょ	학생이지	end	prio=-1
+書くんでしょ	쓰는 거지	end	prio=-1
+書いたんでしょ	쓴 거지	end	prio=-1
+書いちゃうでしょ	써버리잖아	end	prio=-1
+高いんでしょ	높은 거지	end	prio=-1
+// ばいいでしょ, ばいいんでしょ: a retort (쓰면 되잖아).
+書けばいいでしょ	쓰면 되잖아	end	prio=-1
+書けばいいんでしょ	쓰면 되잖아	end	prio=-1
 // っぽい
 書くっぽい	쓰는 것 같아	end	prio=-1
 静かっぽい	조용한 것 같아	end	prio=-1
