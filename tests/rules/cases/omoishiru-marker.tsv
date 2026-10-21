@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:jisjk:93320	現実を思い知った。	현실을 깨달았다.	fix	lookup
+dict:jisjk:93320	現実を思い知った人だ。	현실을 깨달은 사람이다.	fix	lookup
+dict:jisjk:93320	現実を思い知ればいい。	현실을 깨달으면 된다.	fix	lookup
+dict:jisjk:93320	現実を思い知って。	현실을 깨달아.	fix	lookup
+dict:jisjk:93320	現実を思い知ってください。	현실을 깨달아 주세요.	fix	lookup
+dict:jisjk:93320	現実を思い知れ。	현실을 깨달아라.	fix	lookup
+dict:jisjk:93320	現実を思い知りなさい。	현실을 깨달으세요.	fix	lookup
+dict:jisjk:93320	現実を思い知ります。	현실을 깨닫습니다.	keep	lookup
+dict:jisjk:93320	現実を思い知りました。	현실을 깨달았습니다.	fix	lookup
+dict:jisjk:93320	現実を思い知る。	현실을 깨닫는다.	keep	lookup
+dict:jisjk:93320	現実を思い知っている。	현실을 깨닫고 있다.	keep	lookup
+dict:jisjk:93320	現実を思い知らない。	현실을 깨닫지 않는다.	keep	lookup
+dict:jisjk:93320	現実を思い知ったと言った。	현실을 깨달았다고 했다.	fix	lookup
+dict:jisjk:93320	現実を思い知る人だ。	현실을 깨닫는 사람이다.	keep	lookup
+dict:jisjk:93320	現実を思い知ってから帰った。	현실을 깨닫고 나서 돌아갔다.	keep	lookup
+dict:jisjk:93320	現実を思い知ったから帰った。	현실을 깨달았기 때문에 돌아갔다.	fix	lookup
+dict:jisjk:93320	現実を思い知ってよかった。	현실을 깨달아서 좋았다.	fix	lookup
+dict:jisjk:93320	扉を閉じた。	문을 닫았다.	keep	lookup
+dict:jisjk:93320	扉を閉じて。	문을 닫아.	keep	lookup
+dict:jisjk:93320	扉を閉じてください。	문을 닫아 주세요.	keep	lookup
+dict:jisjk:93320	扉を閉じればいい。	문을 닫으면 된다.	keep	lookup
+dict:jisjk:93320	事実に気がついた。	사실을 깨달았다.	keep	lookup
+dict:jisjk:93320	事実に気がついて。	사실을 깨달아.	keep	lookup
+dict:jisjk:93320	事実に気がついてください。	사실을 깨달아 주세요.	keep	lookup
+dict:jisjk:93320	彼に現実を思い知らせた。	그에게 현실을 깨닫게 했다.	keep	lookup

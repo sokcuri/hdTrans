@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+dict:lex-okki:colloquial-adjective-stem	おっきい箱を運んだ。	큰 상자를 옮겼다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	おっきくて白い犬だ。	크고 흰 개다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	文字をおっきく書いた。	문자를 크게 썼다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	その箱はおっきかった。	그 상자는 컸다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	その箱はおっきくない。	그 상자는 크지 않다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	箱がおっきければ困る。	상자가 크면 곤란하다.	fix	lookup
+dict:lex-okki:colloquial-adjective-stem	大きい箱を運んだ。	큰 상자를 옮겼다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	大きくて白い犬だ。	크고 흰 개다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	文字を大きく書いた。	문자를 크게 썼다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	その箱は大きかった。	그 상자는 컸다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	その箱は大きくない。	그 상자는 크지 않다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	箱が大きければ困る。	상자가 크면 곤란하다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	おおきい箱を運んだ。	큰 상자를 옮겼다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	菊が咲いた。	국화가 피었다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	白いきくを見た。	흰 국화를 보았다.	keep	lookup
+dict:lex-okki:colloquial-adjective-stem	きくを花瓶に入れた。	국화를 꽃병에 넣었다.	keep	lookup

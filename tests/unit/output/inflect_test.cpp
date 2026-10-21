@@ -147,6 +147,33 @@ void CheckRow(std::string_view key, std::string_view actual, std::string_view ex
 
 }  // namespace
 
+HD_TEST(inflect_grill_polite_slot_and_hardening_keeps) {
+    const auto* grill = FindKoreanFamily("&J2@");
+    HD_REQUIRE(grill != nullptr);
+    const struct { char code; const char* suffix; const char* expected; } cases[] = {
+        {'7', "니다", "굽습니다"},
+        {'7', "니까", "굽습니까"},
+        {'7', "니다만", "굽습니다만"},
+        {'1', "다", "굽다"},
+        {'5', "다", "구웠다"},
+        {'6', "", "구워"},
+        {'1', "고", "굽고"},
+        {'1', "지", "굽지"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Inflect(*grill, c.code) + c.suffix, std::string(c.expected));
+    }
+    HD_CHECK_EQ(std::string(SourceMarkerRow("&J2@7")), std::string("굽습"));
+
+    const auto* hard = FindKoreanFamily("$F2@");
+    HD_REQUIRE(hard != nullptr);
+    HD_CHECK_EQ(Inflect(*hard, '1') + "다", std::string("굳다"));
+    HD_CHECK_EQ(Inflect(*hard, '7') + "니다", std::string("굳습니다"));
+    const auto* other = FindKoreanFamily("&CS@");
+    HD_REQUIRE(other != nullptr);
+    HD_CHECK_EQ(Inflect(*other, '7'), std::string("굽"));
+}
+
 HD_TEST(inflect_all_marker_rows_consistency) {
     const std::array tables = {SourceMarkerTable(), DollarMarkerTable(), PercentMarkerTable()};
     std::set<std::string_view> keys;

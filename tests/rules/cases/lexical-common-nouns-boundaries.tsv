@@ -24,3 +24,7 @@ dict:common-nouns	自己流で描く。	자기류로 그린다.	keep	lookup
 dict:common-nouns	儀式が始まる。	의식이 시작된다.	keep	lookup
 dict:common-nouns	流派が違う。	유파가 다르다.	keep	lookup
 dict:common-nouns	水が流れる。	물이 흐른다.	keep	lookup
+dict:w:25018	丁寧さが彼の長所だ。	정중함이 그의 장점이다.	fix	lookup
+dict:w:25018	長所がある。	장점이 있다.	fix	lookup
+dict:w:25018	彼の短所も知っている。	그의 단점도 알고 있다.	keep	lookup
+dict:w:25018	長短所を比べる。	장단점을 비교한다.	keep	lookup

@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:lex-herikutsu:katakana-noun	それはヘリクツだ。	그것은 억지 이론이다.	fix	lookup
+dict:lex-herikutsu:katakana-noun	新しいクツを買った。	새로운 신발을 샀다.	keep	lookup
+dict:lex-herikutsu:katakana-noun	ヘリで山へ向かった。	헬리콥터로 산으로 향했다.	keep	lookup
+dict:lex-herikutsu:katakana-noun	それは屁理屈だ。	그것은 억지 이론이다.	keep	lookup

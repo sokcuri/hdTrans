@@ -70,6 +70,15 @@ HD_TEST(output_cleanup_text) {
         {{Tag("<b>"), Text(" 「 ,, 아")}, "<b> 「 아"},
         {{Text("아, 그")}, "아, 그"},
         {{Text("아\n, 그")}, "아\n그"},
+        {{Text("정답(이)고 뭐고")}, "정답이고 뭐고"},
+        {{Text("이유(이)고 뭐고")}, "이유고 뭐고"},
+        {{Text("길(이)고 뭐고")}, "길이고 뭐고"},
+        {{Word("정답"), Text("(이)고 뭐고")}, "정답이고 뭐고"},
+        {{Word("이유"), Text("(이)고 뭐고")}, "이유고 뭐고"},
+        {{Word("길"), Text("(이)고 뭐고")}, "길이고 뭐고"},
+        {{Text("(이)고")}, "고"},
+        {{Text("정답! (이)고")}, "정답! 고"},
+        {{Text("정답이고 이유고")}, "정답이고 이유고"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(String(CleanupText(c.in)), std::string(c.want));
 }
@@ -138,6 +147,13 @@ HD_TEST(output_alternate_particles) {
         {"」(이)라고", "「그", "」라고"},
         {"(은)는", "", "(은)는"},  // left for CleanupText
         {"사람(이)가", "", "사람이"},
+        {"(이)고 뭐고", "정답", "이고 뭐고"},
+        {"(이)고 뭐고", "이유", "고 뭐고"},
+        {"(이)고 뭐고", "길", "이고 뭐고"},
+        {"정답(이)고 이유(이)고", "", "정답이고 이유고"},
+        {"(이)고", "", "(이)고"},
+        {"(이)고", "정답! ", "(이)고"},
+        {"정답이고 이유고", "", "정답이고 이유고"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::AlternateParticles(c.in, c.context), std::string(c.want));
 }

@@ -10,6 +10,7 @@ namespace hdTrans::word {
 // The word a rule applies to.
 enum class ConstraintWord : uint8_t {
     Katakana,  // a whole katakana run of two or more characters
+    Hiragana,  // a hiragana run of two or more characters outside a kana or kanji word
     Kanji,     // a kanji word not after another kanji or the prefixes お and ご
     Source,    // the word whose source is the rule's source
 };

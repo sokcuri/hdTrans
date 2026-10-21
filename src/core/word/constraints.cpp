@@ -19,6 +19,8 @@ namespace {
 constexpr ConstraintRule kRules[] = {
     {"honorific-katakana", ConstraintWord::Katakana, "", ConstraintContext::Honorific, ConstraintReject::NonPerson,
      "가타카나 단어 + 경칭(さん·くん·様 등): 사람·동물·직함 뜻이 없으면 일반 뜻을 버리고 인명 읽기 (ハル君 헐군 → 하루군)", {}},
+    {"honorific-hiragana", ConstraintWord::Hiragana, "", ConstraintContext::FamiliarHonorific, ConstraintReject::NonPerson,
+     "히라가나 형용사 어간과 くん, 君, ちゃん: 같은 음가의 기존 인명을 읽되 동사 활용은 보존", {}},
     {"honorific-kanji-name", ConstraintWord::Kanji, "", ConstraintContext::FamiliarHonorific,
      ConstraintReject::NonName,
      "한자 단어 + くん·君·ちゃん·たん: 사전에 인명 뜻이 있고 사람 명사 뜻이 없으면 인명 뜻만 (翼くん 날개 군 → 츠바사군)", {}},
@@ -98,6 +100,20 @@ bool HonorificAt(std::string_view s, bool familiarOnly) {
     return false;
 }
 
+bool HiraganaHonorificAt(std::string_view s) {
+    if (s.starts_with("ちゃんと")) return false;
+    for (const std::string_view suffix : {"くん", "君", "ちゃん"}) {
+        if (!s.starts_with(suffix)) continue;
+        const std::string_view after = s.substr(suffix.size());
+        if (after.empty() || kQuantityBreaks.find(text::DecodeRune(after).cp) != std::u32string_view::npos) return true;
+        for (const std::string_view follower : {"は", "が", "を", "の", "に", "へ", "と", "も", "で", "だ", "か",
+                                               "よ", "ね", "から", "まで", "って", "なら"}) {
+            if (after.starts_with(follower)) return true;
+        }
+    }
+    return false;
+}
+
 bool NameSense(const dict::Codes& c) {
     return c.sem.HasPrefix("QPN") || c.gram.HasPrefix("Wa") || c.gram.HasPrefix("Wb");
 }
@@ -123,6 +139,9 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
     case ConstraintWord::Katakana:
         return text::RuneCount(source) >= 2 && AllOfClass(source, kClassKatakana) &&
                NameClassOf(before) != kClassKatakana;
+    case ConstraintWord::Hiragana:
+        return text::RuneCount(source) >= 2 && AllOfClass(source, kClassHiragana) &&
+               NameClassOf(before) != kClassHiragana && NameClassOf(before) != kClassKanji;
     case ConstraintWord::Kanji:
         return AllOfClass(source, kClassKanji) && NameClassOf(before) != kClassKanji && FindHonorificPrefix(before) == -1;
     case ConstraintWord::Source:
@@ -159,6 +178,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::Honorific:
     case ConstraintContext::FamiliarHonorific:
         return HonorificAt(after, rule.context == ConstraintContext::FamiliarHonorific) &&
+               (rule.word != ConstraintWord::Hiragana || HiraganaHonorificAt(after)) &&
                std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return c.source.size() > source.size(); });
     case ConstraintContext::AfterKatakana:
         return NameClassOf(before) == kClassKatakana;
@@ -278,6 +298,23 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             std::vector<dict::Record> records;
             switch (rule.reject) {
             case ConstraintReject::NonPerson:
+                if (rule.word == ConstraintWord::Hiragana) {
+                    if (std::none_of(same.begin(), same.end(), [&](std::size_t k) {
+                            return list[k].codes->part.Tag() == 'H';
+                        })) {
+                        break;
+                    }
+                    const bool verb = std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                        if (c.codes == nullptr || c.codes->part.Tag() != 'M' || c.codes->partText.size() < 4 ||
+                            c.source.size() < source.size()) {
+                            return false;
+                        }
+                        int branch = 0, length = 0;
+                        return AnalyseVerbTail(c.source, c.codes->partText[3], query.substr(c.source.size()), branch, length) &&
+                               length > 0;
+                    });
+                    if (verb) break;
+                }
                 if (const dict::Record* r = PersonReading(snapshot, list, same, source, records)) {
                     nameCodes = r->codes->asPlain, nameTarget = r->target, nameId = r->id;
                     rejected = same;

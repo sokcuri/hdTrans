@@ -1,0 +1,4 @@
+#! layer=words
+# 屁理屈의 가타카나 표기
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ヘリクツ	억지 이론	I110			GN							lex-herikutsu:katakana-noun
