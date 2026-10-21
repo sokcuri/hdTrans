@@ -4,4 +4,4 @@ compose:soften-dialogue	明日は雨だ。	내일은 비야.	fix	compose
 compose:soften-dialogue	もう帰る	이제 돌아갈 거야	fix	compose
 compose:soften-dialogue	ありがとうございます。それは違う。	감사합니다. 그것은 다르다.	keep	compose
 compose:soften-dialogue	わしはここで待っておる	나는 여기서 기다리고 있다	keep	compose
-compose:soften-dialogue	助かった……	살아났다……	keep	compose
+compose:soften-dialogue	助かった……	살았다……	keep	compose

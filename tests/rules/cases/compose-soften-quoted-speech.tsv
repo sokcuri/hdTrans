@@ -16,13 +16,13 @@ compose:soften-quoted	「何を謝る」	「무엇을 사과해」	fix	compose
 compose:soften-quoted	「これをカバンという」	「이것을 가방이라고 해」	fix	compose
 compose:soften-quoted	「ちょっと手伝ってくれる？」	「조금 도와 줄래?」	keep	compose
 compose:soften-quoted	「どうしよう、鍵がない」	「어떻게 하지, 열쇠가 없어」	keep	compose
-compose:soften-quoted	「助かった……」	「살아났다……」	keep	compose
+compose:soften-quoted	「助かった……」	「살았다……」	keep	compose
 compose:soften-quoted	「来る！」	「온다!」	keep	compose
 compose:soften-quoted	「敵の右翼が優勢である」	「적의 우익이 우세하다」	keep	compose
 compose:soften-quoted	「わしはここで待っておる」	「나는 여기서 기다리고 있다」	keep	compose
 compose:soften-quoted	「ありがとうございます。それは違う」	「감사합니다. 그것은 다르다」	keep	compose
 compose:soften-quoted	『雨が降る』	『비가 온다』	keep	compose
-compose:soften-quoted	彼は「雨が降る」ということを知った。	그는 「비가 온다」라고 하는 것을 알았다.	keep	compose
+compose:soften-quoted	彼は「雨が降る」ということを知った。	그는 「비가 온다」라는 것을 알았다.	keep	compose
 compose:soften-quoted	「すぐ消える」魔法を使った。	「바로 사라진다」마법을 사용했다.	keep	compose
 compose:soften-quoted	「ここに婚約の破棄を宣言する」	「여기에 약혼의 파기를 선언한다」	keep	compose
 compose:soften-quoted	「お前もだ！」	「너도다!」	keep	compose
