@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:breath-su	「すぅ……はぁ……」	「스으……하아……」	fix	sound
+sound:breath-su	「すうぅ――……はあぁ――……」	「스으으――……하아아――……」	fix	sound
+sound:breath-su	空気を吸う	공기를 들이마신다	keep	sound
