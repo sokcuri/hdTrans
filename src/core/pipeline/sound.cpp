@@ -405,7 +405,9 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                           f.substr(p, kAbabUnit) == f.substr(p + kAbabUnit, kAbabUnit) &&
                           f.substr(p, kAbabUnit) == f.substr(p + 2 * kAbabUnit, kAbabUnit);
     bool skipped = false;  // a shorter key was passed over; only a run may follow
-    for (const SoundRow& s : SoundRows(f_[p], ctx_.extraBuiltin)) {
+    // A small vowel that starts a word looks up the rows of its plain vowel (ぅあっ).
+    const char32_t first = p == 0 || !text::IsLetter(f_[p - 1]) ? PlainVowel(f_[p]) : 0;
+    for (const SoundRow& s : SoundRows(first != 0 ? first : f_[p], ctx_.extraBuiltin)) {
         const bool abab = AbabKey(s);
         if (chosen != nullptr && s.key.size() < chosen->key.size() && !abab) {
             if (!ababText) break;
@@ -1160,7 +1162,10 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
             tilde = true;
             continue;
         }
-        if (f[p + k] != r && (row.key.size() < 3 || PlainVowel(r) == 0 || PlainVowel(f[p + k]) != PlainVowel(r))) {
+        // A small vowel that starts a word stands for the plain one (ぅあっ as うあっ).
+        const bool weakOnset = k == 0 && In(f[p], kSmallVowels) && PlainVowel(f[p]) == r && (p == 0 || !text::IsLetter(f[p - 1]));
+        if (f[p + k] != r && !weakOnset &&
+            (row.key.size() < 3 || PlainVowel(r) == 0 || PlainVowel(f[p + k]) != PlainVowel(r))) {
             return false;
         }
     }

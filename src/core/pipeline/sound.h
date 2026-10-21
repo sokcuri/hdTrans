@@ -177,7 +177,8 @@ std::u32string ToKatakana(std::u32string_view rs);
 
 // The end of a match of row at f[p:] (f in katakana) and its elongation units (see
 // Lengthen), or false. In a key of three or more characters a small vowel also matches
-// the plain one (ふわぁ, ふわあ). A key that ends in a doubled syllable, with or without
+// the plain one (ふわぁ, ふわあ), and a small vowel at p after no letter the key's first
+// vowel (ぅあっ). A key that ends in a doubled syllable, with or without
 // ッ, whose Korean ends in a doubled syllable, continues over more of that syllable
 // (あははは+はは, あっはっは+っはっ) with a unit 'r' for each, or 'h' when the syllable holds
 // ッ: such a match is written as heard, each syllable with its ㅅ (앗핫핫핫). Elongation may follow the key, or come before its last
