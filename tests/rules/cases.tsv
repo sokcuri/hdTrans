@@ -390,8 +390,8 @@ L2580	明日は来なくてもいいよ。	내일은 오지 않아도 괜찮아.
 L2581	冷蔵庫には何もなかった。	냉장고에는 아무것도 없었다.	current	local
 L2581	財布の中にお金がなかった。	지갑안에 돈이 없었다.	current	local
 L2593	昔ここに城があったとされている。	옛날 여기에 성이 있었다고 여겨지고 있다.	current	local-ending
-L2599	なんて日だ。	정말 날이다.	current	local
-L2599	なんて男だ。	정말 남자다.	current	local
+L5110	なんて日だ。	이 무슨 날이다.	current	local
+L5110	なんて男だ。	이 무슨 남자다.	current	local
 L2606	肉か魚、どちらがいいですか。	고기나 물고기, 어느 쪽이 좋습니까.	current	local
 L2608	まるで夢を見たような気分だった。	마치 꿈을 꾼 것 같은 기분이었다.	current	local-ending
 L2608	鍵を落としたような気がして探した。	열쇠를 떨어뜨린 것 같은 생각이 들어 찾았다.	current	local-ending

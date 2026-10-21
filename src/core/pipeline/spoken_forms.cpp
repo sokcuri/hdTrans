@@ -463,6 +463,23 @@ bool QuestionN(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// (なんて|何て|なんという|何という)こと(だ)? standing as an exclamation: before a mark or
+// the end, after a mark, a space or the start (なんてこと！, 「なんということだ」). It is
+// written as なんてこった, the interjection 이럴 수가.
+bool WhatAThing(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && !In(LastRune(s.substr(0, pos)).cp, U" 　、。！!？?…‥「『（(―ー")) return false;
+    for (std::string_view lead : {"なんて", "何て", "なんという", "何という"}) {
+        size_t p = pos;
+        if (!Lit(s, p, lead) || !Lit(s, p, "こと")) continue;
+        Lit(s, p, "だ");
+        size_t q = p;
+        if (p != s.size() && !OneOf(s, q, U"！!？?。、…‥」』）)ー～〜 　")) continue;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 bool ContainsAny(std::string_view s, std::u32string_view set) {
     for (size_t i = 0; i < s.size();) {
         const text::Rune r = At(s, i);
@@ -520,6 +537,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (Contains(text, "ん")) {
         text = ReplaceAll(text, NegativeN, [](const Match& m) { return Group1Plus(m, "ない"); });
         text = ReplaceAll(text, NegativeE, [](const Match& m) { return Group1Plus(m, "ない"); });
+    }
+    if (dialectForms && Contains(text, "こと")) {
+        text = ReplaceAll(text, WhatAThing, [](const Match&) { return std::string("なんてこった"); });
     }
     if (dialectForms && Contains(text, "ん")) {
         text = ReplaceAll(text, QuestionN, [](const Match& m) { return Cat({m.group[1], "の", m.group[2]}); });

@@ -462,6 +462,10 @@ HD_TEST(pipeline_dialect_forms) {
         {"ううん？"sv, "ううん？"sv},
         {"コウジくん？"sv, "コウジくん？"sv},
         {"たぶん？"sv, "たぶん？"sv},
+        {"なんてことだ！"sv, "なんてこった！"sv},
+        {"「なんということ」"sv, "「なんてこった」"sv},
+        {"なんてことを言う"sv, "なんてことを言う"sv},
+        {"嘘だ、なんてことはない"sv, "嘘だ、なんてことはない"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
