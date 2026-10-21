@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+sound:ya-cry	「あっ、やっ、ふぁっ」	「앗, 얏, 후앗」	fix	sound
+sound:ya-cry	「やぁっ、だめぇ」	「야앗, 안 돼」	fix	sound
+sound:ya-cry	「んっ、やっ……そこは」	「읏, 얏……거기는」	fix	sound
+sound:ya-cry	やっと終わった	드디어 끝났다	keep	sound
+sound:ya-cry	「あの子、やっぱり来た」	「그 아이, 역시 왔다」	keep	sound
