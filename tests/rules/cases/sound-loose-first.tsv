@@ -1,0 +1,24 @@
+rule	input	expected	kind	layer
+sound:loose-first	はぎいっくしゅん	하기잇 에취	fix	sound
+sound:loose-first	「はぎいっくしゅん」	「하기잇 에취」	fix	sound
+sound:loose-first	はぎいっはひひっ	하기잇 하히힉	fix	sound
+sound:loose-first	はぎいっ	하기잇	keep	sound
+sound:loose-first	はっきりして	확실해	keep	sound
+sound:loose-first	はっきり	분명히	keep	sound
+sound:loose-first	ぶっ飛ぶ	난다	keep	sound
+sound:loose-first	ぶっこわす	깨뜨린다	keep	sound
+sound:loose-first	いっしょに行く。	함께 간다.	keep	sound
+sound:loose-first	けっこうだ。	훌륭하다.	keep	sound
+sound:loose-first	まっすぐ帰る。	똑바로 돌아간다.	keep	sound
+sound:loose-first	ゆっくり休む。	천천히 쉰다.	keep	sound
+sound:loose-first	はっくしゅん	에취	fix	sound
+sound:loose-first	はっくしょん	에취	fix	sound
+sound:loose-first	ぎゃっはっ	걋핫	keep	sound
+sound:loose-first	あっはっ	앗핫	keep	sound
+sound:loose-first	げっほっ	겟홋	keep	sound
+sound:loose-first	うっふっ	웃훗	keep	sound
+sound:loose-first	くっはっ	쿳핫	keep	sound
+sound:loose-first	あっクシュンが	아쿠술이	keep	sound
+sound:loose-first	うっかり	무심코	keep	sound
+sound:loose-first	ぶっちゃけ	솔직히 말해서	keep	sound
+sound:loose-first	あっという間	순식간	keep	sound

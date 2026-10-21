@@ -532,13 +532,29 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
     afterParticle = afterParticle && IsHiraganaRune(r);
     std::vector<SoundMatch> chain;
     if (!katakana && !runStart && !afterParticle) return chain;
+    bool loose = false;  // the first sound took a ッ that the next sound starts from
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
         if (!MatchAt(i, m, i > p)) break;
         i = m.end;
         chain.push_back(std::move(m));
     }
-    if (chain.empty()) return chain;
+    if (chain.empty()) {
+        // A run whose first sound ends in a ッ that the next sound starts from
+        // (はぎいっくしゅん): retry with the end rule of a chain's later sounds. A
+        // single sound still has to end by itself, so the ッ of a word that follows
+        // (はっきり) stays with its word. A burst of breath said as one syllable is
+        // written as heard (ぎゃっはっ, げっほっ), so it is not a run of sounds.
+        if (Burst(p) > 0) return {};
+        loose = true;
+        for (size_t i = p; i < rs.size();) {
+            SoundMatch m;
+            if (!MatchAt(i, m, true)) break;
+            i = m.end;
+            chain.push_back(std::move(m));
+        }
+        if (chain.size() < 2) return {};
+    }
     const SoundMatch& first = chain[0];
     if (katakana && IsKanjiRune(prev) && first.keyLen < 3) return {};
     if (katakana) {
@@ -557,6 +573,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
         if (!last.intj) end += Adverbial(end);
         if (!last.intj || end == rs.size() || !IsKana(rs[end]) || (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end]))) {
             last.end = end;
+            if (loose && chain.size() < 2) return {};
             return chain;
         }
         chain.pop_back();
