@@ -3,3 +3,8 @@ dict:gram:youni:manner	囁くように話した。	속삭이듯이 이야기했�
 dict:gram:youni:manner	逃げるように部屋を出た。	도망치듯이 방을 나왔다.	fix	local-ending
 dict:gram:youni:manner	忘れないようにメモした。	잊지 않도록 메모했다.	keep	local-ending
 dict:gram:youni:manner	聞こえるように大きな声で話した。	들리도록 큰 목소리로 이야기했다.	keep	local-ending
+dict:gram:youni:manner-comma	彼の声に応えるように、彼女も微笑んだ。	그의 목소리에 응하듯이, 그녀도 미소지었다.	fix	local-ending
+dict:gram:youni:manner-comma	風に押されるように、船が進んだ。	바람으로 밀리듯이, 배가 나아갔다.	fix	local-ending
+dict:gram:youni:manner-comma	試合に出られるように、毎日練習する。	시합에 나올 수 있도록, 매일 연습한다.	keep	local-ending
+dict:gram:youni:purpose-subject	声が届くように、大きく叫んだ。	목소리가 닿도록, 크게 외쳤다.	keep	local-ending
+dict:gram:youni:manner-comma	遅れないように、急いだ。	늦지 않도록, 서둘렀다.	keep	local-ending

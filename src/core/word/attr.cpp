@@ -188,6 +188,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
+        // Vp: a verb in the potential voice (頑張れる, 食べられる).
+        if (c == "Vp") return detail != nullptr && detail->record == 4;
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {
