@@ -6,7 +6,7 @@ dict:jisjk:263984	ずっと一緒にいたい。	쭉 함께 있고 싶다.	fix	l
 dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	keep	local
 dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
 dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local
-dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 말아라」	fix	local
+dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 마」	fix	local
 dict:variant:atashi:2	「アタシが行く」	「내가 간다」	fix	local
 dict:jisjk:1204	「あたしを見て」	「나를 봐」	fix	local
 dict:jisjk:1204	「あたしに任せて」	「나에게 맡겨」	fix	local

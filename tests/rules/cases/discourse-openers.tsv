@@ -16,7 +16,7 @@ local:2822	昨日買った、赤い靴を履いた。	어제 산, 붉은 구두�
 local:2822	彼が書いた本を読んだ。	그가 쓴 책을 읽었다.	keep	local-ending
 sound:lead-teka	てかてかの床。	번들번들의 바닥.	keep	sound
 sound:lead-ttaku	ったく、また遅刻か。	참나, 또 지각인가.	fix	sound
-sound:lead-ttaku	たく、仕方ないな。	참나, 어쩔 수 없는데.	fix	sound
+sound:lead-ttaku	たく、仕方ないな。	참나, 어쩔 수 없네.	fix	sound
 sound:lead-ttaku	早く帰りたくて走った。	빨리 돌아가고 싶어서 달렸다.	keep	sound
 sound:lead-domo	ども、はじめまして。	안녕, 처음 뵙겠습니다.	fix	sound
 sound:lead-domo	子どもたちが遊んでいる。	아이들이 놀고 있다.	keep	sound

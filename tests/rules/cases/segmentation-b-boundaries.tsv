@@ -16,7 +16,7 @@ dict:segmentation-b	何のかんの言いながら片付けた。	이러니저�
 dict:segmentation-b	何の缶を開けた。	무슨캔을 땄다.	keep	lookup
 dict:segmentation-b	何の管を調べた。	무슨관을 조사했다.	keep	lookup
 dict:segmentation-b	夫婦がいちゃついていた。	부부가 시시덕거리고 있었다.	fix	lookup
-dict:segmentation-b	いちゃつくな。	시시덕거리지 말아라.	fix	lookup
+dict:segmentation-b	いちゃつくな。	시시덕거리지 마.	fix	lookup
 dict:segmentation-b	ここにいちゃいけない。	여기에 있으면 안 된다.	keep	lookup
 dict:segmentation-b	資料をださない。	자료를 내지 않는다.	keep	lookup
 dict:segmentation-b	荷物をださないで。	짐을 내지 마.	keep	lookup

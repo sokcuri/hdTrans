@@ -405,6 +405,36 @@
 静かでしてよ	조용해요	end	prio=-1
 高くってよ	높아요	end	prio=-1
 高くてよ	높아요	end	prio=-1
+// な, よな, んだな ending a sentence: 네, 지, 구나
+書いたんだな	썼구나	end	prio=-1
+書いてるんだな	쓰고 있구나	end	prio=-1
+書いてたんだな	쓰고 있었구나	end	prio=-1
+書かないんだな	쓰지 않는구나	end	prio=-1
+書かなかったんだな	쓰지 않았구나	end	prio=-1
+高いんだな	높구나	end	prio=-1
+高かったんだな	높았구나	end	prio=-1
+静かなんだな	조용하구나	end	prio=-1
+学生なんだな	학생이구나	end	prio=-1
+学生だったんだな	학생이었구나	end	prio=-1
+書くよな	쓰지	end	prio=-1
+書いたよな	썼지	end	prio=-1
+書いてるよな	쓰고 있지	end	prio=-1
+書いてたよな	쓰고 있었지	end	prio=-1
+書かないよな	쓰지 않지	end	prio=-1
+高いよな	높지	end	prio=-1
+高かったよな	높았지	end	prio=-1
+静かだよな	조용하지	end	prio=-1
+静かだったよな	조용했지	end	prio=-1
+学生だよな	학생이지	end	prio=-1
+学生だったよな	학생이었지	end	prio=-1
+書くんだよな	쓰는 거지	end	prio=-1
+書いたんだよな	쓴 거지	end	prio=-1
+書いてたな	쓰고 있었네	end	prio=-1
+高かったな	높았네	end	prio=-1
+静かだな	조용하네	end	prio=-1
+学生だな	학생이네	end	prio=-1
+静かだったな	조용했네	end	prio=-1
+学生だったな	학생이었네	end	prio=-1
 // ますよね, ませんよね: polite agreement
 書きますよね	쓰지요	end	prio=-1
 書きましたよね	썼지요	end	prio=-1

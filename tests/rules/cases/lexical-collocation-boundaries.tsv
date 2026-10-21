@@ -9,7 +9,7 @@ dict:face-collocation	彼は笑顔で答えた。	그는 웃는 얼굴로 대답
 sense:device-implant	部屋に盗聴器を仕込む。	방에 도청기를 설치한다.	fix	senses
 sense:device-implant	盗聴器を仕込めなかった。	도청기를 설치할 수 없었다.	fix	senses
 sense:device-implant	鞄にカメラを仕込んでいる。	가방에 카메라를 설치하고 있다.	fix	senses
-sense:device-implant	カメラを仕込むな。	카메라를 설치하지 말아라.	fix	senses
+sense:device-implant	カメラを仕込むな。	카메라를 설치하지 마.	fix	senses
 sense:device-implant	爆弾に仕込んだ装置が動いた。	폭탄에 넣은 장치가 움직였다.	fix	senses
 sense:device-implant	爆弾に仕込まれた装置を調べる。	폭탄에 넣어진 장치를 조사한다.	fix	senses
 sense:device-implant	弟子に礼儀を仕込んだ。	제자에게 예의를 가르쳤다.	keep	senses

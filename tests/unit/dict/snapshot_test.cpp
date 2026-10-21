@@ -555,16 +555,16 @@ HD_TEST(SnapshotCompiledPlainDictionaries) {
     HD_CHECK_EQ(s.PlainFiles().size(), size_t{4});
     // The builtin endings come first, then the plain files numbered in order; the
     // base dictionary resolves the る-verb 帰る as godan.
-    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{495});
+    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{524});
     HD_CHECK_EQ(EntriesOf(s.Plain(), 0), "帰 돌아&A1@ M428 @1.0 | 猫 냥이 N110 @2.0");
     HD_CHECK_EQ(EntriesOf(s.Plain(), 1), "猫 고양이 N110 @1.0");
-    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{498});
+    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{527});
     HD_CHECK(s.Plain().Entries()[0].end);
     // The text path adds the kana spellings, the phrases but the 343 interjections in
     // kana, and the patterns.
     HD_CHECK_EQ(EntriesOf(s.TextPlain(), -2), "あい 사랑 N110 @3.0");
-    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2229});
-    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2233});
+    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2258});
+    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2262});
     HD_CHECK(s.Senses().contains("腕"));
     const auto better = s.Senses().find("マシ");
     HD_REQUIRE(better != s.Senses().end());

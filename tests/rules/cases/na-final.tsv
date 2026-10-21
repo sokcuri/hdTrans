@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:jisjk:344556	「そこに座るな」	「거기에 앉지 마」	fix	local-ending
+L4919	「今日は風が冷たいな」	「오늘은 바람이 차갑네」	fix	local-ending
+L4919	「この問題は解けないな」	「이 문제는 풀 수 없네」	fix	local-ending
+dict:na-final:1	「新しい靴が欲しいな」	「새로운 구두를 갖고 싶은데」	keep	local-ending
+ending:静かだな	「ここは静かだな」	「여기는 조용하네」	fix	builtin-ending
+ending:学生だったな	「あの人、昔は先生だったな」	「그 사람, 옛날은 선생님이었네」	fix	builtin-ending
+ending:書いてたな	「あいつ、ずっと待ってたな」	「저녀석, 쭉 기다리고 있었네」	fix	builtin-ending
+ending:書いてたんだな	「みんな知ってたんだな」	「모두 알고 있었구나」	fix	builtin-ending
+ending:高いんだな	「お前も眠いんだな」	「너도 졸리구나」	fix	builtin-ending
+ending:学生だよな	「明日は雨だよな」	「내일은 비지」	fix	builtin-ending
+ending:書いてたよな	「昨日の店、混んでたよな」	「어제의 가게, 혼잡하고 있었지」	fix	builtin-ending
+phrase:そうだな	「そうだな」	「그래」	fix	builtin-phrase
+dict:jisjk:346446	「きれいだなって思った」	「예쁘다라고 생각했다」	keep	lookup

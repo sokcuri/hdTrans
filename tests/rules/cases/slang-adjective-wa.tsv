@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 normalize:slang-adjective	この店のラーメン、うめえわ。	이 가게의 라면, 맛있다.	fix	normalize
-normalize:slang-adjective	お前の剣、かっけえな。	네 검, 근사한데.	fix	normalize
+normalize:slang-adjective	お前の剣、かっけえな。	네 검, 근사하네.	fix	normalize
 normalize:slang-adjective	あいつ、マジでうるせえよ。	저녀석, 진짜로 시끄러워.	fix	normalize
 normalize:slang-adjective	すげえ！	대박!	keep	normalize
 normalize:slang-adjective	肉を焼いてー！	고기를 구워―！	keep	normalize

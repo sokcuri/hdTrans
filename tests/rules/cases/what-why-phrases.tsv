@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-phrase:何だこれ	何だこれ、変だな。	뭐야 이게, 이상하다.	fix	builtin-phrase
+phrase:何だこれ	何だこれ、変だな。	뭐야 이게, 이상하네.	fix	builtin-phrase
 phrase:何だこれ	「お、何だあれは！」	「오, 뭐야 저건!」	fix	builtin-phrase
 phrase:何だこれ	なんだこれ、すごい。	뭐야 이게, 대단해.	fix	builtin-phrase
 phrase:何だこれ	何だこれは	이게 대체 뭐야	keep	builtin-phrase
