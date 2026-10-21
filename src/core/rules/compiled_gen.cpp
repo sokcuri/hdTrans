@@ -204,7 +204,7 @@ bool RuleL24([[maybe_unused]] Item* p) {
 }
 
 // local 25
-//     src[+2] starts "まで" and (end.src[+3] == "た" or end.src[+3] == "だ" or end.src[+3] == "いた" or end.src[+3] == "いだ" or end.src[+3] == "った" or end.src[+3] == "んだ" or end.src[+3] == "ました") and ko := "매우"
+//     src[+2] starts "まで" and (end.src[+3] == "た" or end.src[+3] == "だ" or end.src[+3] == "いた" or end.src[+3] == "いだ" or end.src[+3] == "った" or end.src[+3] == "んだ" or end.src[+3] == "ました") and ko := "무척"
 //     src[+2] starts "まで"
 bool RuleL25([[maybe_unused]] Item* p) {
     return (SrcEq(p, 2, "Lまで"sv) && (GobiSrcEq(p, 3, "た"sv) ||
@@ -213,7 +213,7 @@ bool RuleL25([[maybe_unused]] Item* p) {
            GobiSrcEq(p, 3, "いだ"sv) ||
            GobiSrcEq(p, 3, "った"sv) ||
            GobiSrcEq(p, 3, "んだ"sv) ||
-           GobiSrcEq(p, 3, "ました"sv)) && DstSet(p, 0, "매우"sv)) ||
+           GobiSrcEq(p, 3, "ました"sv)) && DstSet(p, 0, "무척"sv)) ||
            SrcEq(p, 2, "Lまで"sv);
 }
 
@@ -4456,7 +4456,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL22, 0x63fee27b17126605ull},
     {RuleL23, 0xc779e017097dad25ull},
     {RuleL24, 0x997bd6d403455375ull},
-    {RuleL25, 0x7487fb2bd36b6d41ull},
+    {RuleL25, 0xd3acb9f0b452dfa7ull},
     {RuleL26, 0x3585dfd78286f36full},
     {RuleL27, 0x4bec2880dc8f978bull},
     {RuleL28, 0x76d0ff42f7b2666aull},

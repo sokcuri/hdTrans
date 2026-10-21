@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:263983	朝からずっと雨が降っている。	아침부터 계속 비가 오고 있다.	fix	defaults
+dict:jisjk:375205	この花はとても綺麗だ。	이 꽃은 무척 예쁘다.	fix	local
+dict:jisjk:263984	昨日よりずっと寒い。	어제보다 훨씬 춥다.	keep	local

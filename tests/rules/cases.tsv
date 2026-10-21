@@ -9,7 +9,7 @@ L60	彼は少し疲れていそうに見える。	그는 조금 피곤할 것 �
 L68	彼女は子供みたいに笑う。	그녀는 아이같이 웃는다.	current	local
 L68	あの人は先生みたいです。	그 사람은 선생님 같습니다.	current	local
 L69	外は雨が降っているようだ。	밖은 비가 오고 있는 것 같다.	current	local
-L69	あの人はとても元気なようだ。	그 사람은 매우 건강한 것 같다.	current	local
+L69	あの人はとても元気なようだ。	그 사람은 무척 건강한 것 같다.	current	local
 L69	彼は美しいようだ。	그는 아름다운 것 같다.	current	local
 L95	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local
 L97	私が好きです。	저를 좋아합니다.	current	local
@@ -31,9 +31,9 @@ L134	彼はいつも早く来るね。	그는 언제나 빨리 오는군.	curren
 L138	どんなのが好きなの？	어떤 것을 좋아해?	current	local
 L138	そんなの私には無理だよ。	그런 것 나에게는 무리야.	current	local
 L139	天気の悪さに少し驚いた。	날씨의 나쁨에 조금 놀랐다.	current	local
-L139	今日の天気はとても良いです。	오늘의 날씨는 매우 좋습니다.	current	local
+L139	今日の天気はとても良いです。	오늘의 날씨는 무척 좋습니다.	current	local
 L149	私もすぐ行きます。	저도 바로 갑니다.	current	local
-L149	弟もとても元気です。	남동생도 매우 건강합니다.	current	local
+L149	弟もとても元気です。	남동생도 무척 건강합니다.	current	local
 L154	毎日練習して泳げるようになった。	매일 연습해 헤엄칠 수 있게 되었다.	current	local-ending
 L154	子供が一人で歩けるようになった。	아이가 혼자서 걸을 수 있게 되었다.	current	local-ending
 L155	早く寝たらいいよ。	빨리 자면 좋아.	current	local-ending
@@ -152,7 +152,7 @@ L975	来月の一日を休みとします。	내달 하루를 휴일로 합니�
 L975	友人とする相談です。	친구와 하는 상담입니다.	current	local
 L975	象徴とされる	상징으로 여겨진다	current	local
 L1007	今日は早く帰りたいです。	오늘은 빨리 돌아가고 싶습니다.	current	local
-L1007	今日は天気がとても良いですね。	오늘은 날씨가 매우 좋네요.	current	local
+L1007	今日は天気がとても良いですね。	오늘은 날씨가 무척 좋네요.	current	local
 L1009	私にも少し時間があります。	저에게도 조금 시간이 있습니다.	current	local-ending
 L1009	この店には安い服があります。	이 가게에는 싼 옷이 있습니다.	current	local-ending
 L1012	バスは学校へ進む。	버스는 학교에 진학한다.	current	local
@@ -303,7 +303,7 @@ L2087	私に連絡をください。	저에게 연락을 주세요.	current	loca
 L2090	彼が歌うのを聞いて、感動した。	그가 노래하는 것을 듣고, 감동했다.	current	local-ending
 L2090	雨が降るのを待ってから出かけた。	비가 오는 것을 기다리고 나서 나갔다.	current	local-ending
 L2096	彼にはよくしてもらった。	그에게는 잘 대접받았다.	current	local
-L2098	祖父はとても親切だった。	조부는 매우 친절했다.	current	local-ending
+L2098	祖父はとても親切だった。	조부는 무척 친절했다.	current	local-ending
 L2098	昨日の試験は意外と簡単だった。	어제 시험은 의외로 간단했다.	current	local-ending
 L2103	三日先の予定です。	3일 후의 예정입니다.	fix	local
 L2125	私は泳ぐことができます。	저는 헤엄칠 수가 있습니다.	current	local-ending
@@ -485,7 +485,7 @@ L3180	続きね。	계속이네.	current	local
 L3182	はやく、寝なさい。	빠르게, 자세요.	fix	local
 L3190	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
 L3190	ここは学校じゃないよ。	여기는 학교가 아니야.	current	local-ending
-L3205	今日はとても寒い。	오늘은 매우 춥다.	current	local-ending
+L3205	今日はとても寒い。	오늘은 무척 춥다.	current	local-ending
 L3205	この道は夜になると暗い。	이 길은 밤이 되면 어둡다.	current	local-ending
 L3209	ここで簡単に注文できます。	여기서 간단하게 주문할 수 있습니다.	current	local
 L3209	この部屋は予約できません。	이 방은 예약할 수 없습니다.	current	local
@@ -504,7 +504,7 @@ L3255	お前なんか知るかっ！	너 같은 것 안다!	current	local
 L3258	私が待ってた電車はまだ来ない。	내가 기다리고 있었던 전철은 아직 오지 않는다.	current	local-ending
 L3258	さっき読んでた本を貸してください。	조금 전 읽고 있었던 책을 빌려 주세요.	current	local-ending
 L3261	この仕事は今日中に終わりそう。	이 일은 오늘중에 끝날 것 같다.	current	local
-L3261	あのケーキ、とても美味しそう。	그 케이크, 매우 맛있을 것 같다.	current	local
+L3261	あのケーキ、とても美味しそう。	그 케이크, 무척 맛있을 것 같다.	current	local
 L3263	嫌がらせをされた。	괴롭힘을 당했다.	current	local
 L3263	告白をされた。	고백을 받았다.	current	local
 L3263	先生が挨拶をされた。	선생님이 인사를 하셨다.	current	local
@@ -533,7 +533,7 @@ L3384	食べねぇよ。	먹지 않는다.	fix	local
 L3384	そうだねぇ。	그렇네.	current	local
 L3390	すごい人が来たね。	대단한 사람이 왔네.	current	local
 L3390	すごい力で扉を開けた。	대단한 힘으로 문을 열었다.	current	local
-L3391	朝からずっと待っていたの？	아침부터 쭉 기다리고 있었어?	current	local-ending
+L3391	朝からずっと待っていたの？	아침부터 계속 기다리고 있었어?	current	local-ending
 L3391	昨日の夜は何を食べていたの？	어제 밤은 무엇을 먹고 있었어?	current	local-ending
 L3395	夜は深まった。	밤은 깊어졌다.	current	local
 L3400	お送りしました資料をご確認ください。	보내 드렸던 자료를 확인해 주십시오.	current	local-ending
@@ -572,7 +572,7 @@ L3606	私は来月、京都へ引っ越す。	나는 내달, 교토에 이사한
 L3651	彼は強く扉を叩いた。	그는 강하게 문을 두드렸다.	current	local-ending
 L3651	母は私に優しく話しかけた。	어머니는 나에게 상냥하게 말을 걸었다.	current	local-ending
 L3666	明日は雨が降るそうだ。	내일은 비가 온다고 한다.	current	local
-L3666	この辺りはとても静かだそうだ。	이 주위는 매우 조용하다고 한다.	current	local
+L3666	この辺りはとても静かだそうだ。	이 주위는 무척 조용하다고 한다.	current	local
 L3675	試験に合格するには努力が必要だ。	시험에 합격하려면 노력이 필요하다.	current	local
 L3675	駅まで歩いて行くには三十分かかる。	역까지 걸어 가려면 30분 걸린다.	current	local
 L3697	水に不足はない。	물에 부족은 없다.	current	local
@@ -713,7 +713,7 @@ L4990	うちの猫だ。	우리 고양이다.	current	local
 L4993	ステンレス流しを買う。	스텐레스 흘려 보내기를 산다.	current	local
 L5015	星がついた。	별이 붙었다.	current	local
 L5031	彼はとても行けない。	그는 도저히 갈 수 없다.	current	local
-L5031	とても高い。	매우 높다.	current	local
+L5031	とても高い。	무척 높다.	current	local
 L5034	健康のため歩く。	건강이기 때문에 걷는다.	current	local
 L5067	毎日の残業にうんざりと息をついた。	매일 잔업에 지긋지긋 한숨을 쉬었다.	current	local
 L5067	彼は何だかんだと理由をつけて断った。	그는 이러니저러니 이유를 붙여 끊었다.	current	local

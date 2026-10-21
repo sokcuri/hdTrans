@@ -86,7 +86,7 @@ dict:mezamashi:1	めざましが鳴っている。	자명종이 울리고 있다
 dict:mezamashi:1	めざましが鳴らない。	자명종이 울리지 않는다.	fix	local
 dict:mezamashi:1	めざましも鳴った。	자명종도 울렸다.	fix	local
 dict:mezamashi:1	めざましは鳴ってる。	자명종은 울리고 있다.	fix	local
-dict:mezamashi:1	めざましがずっと鳴っていた。	자명종이 쭉 울리고 있었다.	fix	local
+dict:mezamashi:1	めざましがずっと鳴っていた。	자명종이 계속 울리고 있었다.	fix	local
 dict:mezamashi:1	めざましもゆっくり鳴っている。	자명종도 천천히 울리고 있다.	fix	local
 dict:mezamashi:1	めざましはすぐ鳴った。	자명종은 바로 울렸다.	fix	local
 dict:mezamashi:1	めざましに冷たい水で顔を洗う。	자각에 차가운 물로 얼굴을 씻는다.	keep	local

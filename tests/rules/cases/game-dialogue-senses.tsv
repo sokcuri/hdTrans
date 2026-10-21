@@ -1,8 +1,8 @@
 rule	input	expected	kind	layer
 dict:jisjk:90167	「ありがとう」	「고마워」	fix	defaults
 dict:jisjk:90167	「ありがとうございます」	「감사합니다」	keep	defaults
-dict:jisjk:263984	ずっと辛かった。	쭉 괴로웠다.	fix	local
-dict:jisjk:263984	ずっと一緒にいたい。	쭉 함께 있고 싶다.	fix	local
+dict:jisjk:263984	ずっと辛かった。	계속 괴로웠다.	fix	local
+dict:jisjk:263984	ずっと一緒にいたい。	계속 함께 있고 싶다.	fix	local
 dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	keep	local
 dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
 dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local

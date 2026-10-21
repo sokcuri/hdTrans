@@ -8,8 +8,8 @@ dict:jisjk:358633	話を聞くだけでも十分だ。	이야기를 듣는 것�
 dict:jisjk:358633	見るだけでも楽しい。	보는 것만으로도 즐겁다.	keep	local
 dict:jisjk:263983	これでずっと簡単だ。	이것으로 훨씬 간단하다.	fix	local
 dict:jisjk:263983	これでずっと楽だ。	이것으로 훨씬 편하다.	fix	local
-dict:jisjk:263983	ここでずっと静かに暮らす。	여기서 쭉 조용하게 산다.	keep	local
-dict:jisjk:263983	これでずっと幸せだ。	이것으로 쭉 행복하다.	keep	local
+dict:jisjk:263983	ここでずっと静かに暮らす。	여기서 계속 조용하게 산다.	keep	local
+dict:jisjk:263983	これでずっと幸せだ。	이것으로 계속 행복하다.	keep	local
 dict:とびっきり	とびっきり美しい。	대단히 아름답다.	fix	defaults
 dict:とびっきり	とびきりの美人だ。	특출의 미인이다.	keep	defaults
 dict:ボタッボタ	血がボタッボタと落ちた。	피가 뚝뚝 떨어졌다.	fix	defaults

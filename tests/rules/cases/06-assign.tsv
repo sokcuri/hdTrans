@@ -73,10 +73,10 @@ dict:jisjk:265596	いずれか選んでください。	어느 하나를 선택�
 dict:jisjk:265596	いずれかの道を選ぶ。	몇개의 길을 선택한다.	fix	local
 dict:jisjk:362803	そのときどきの気分で決める。	그때그때의 기분으로 결정한다.	fix	local
 dict:jisjk:362803	ときどき泳ぐ。	가끔 헤엄친다.	fix	local
-dict:jisjk:818	とても遠くまで泳いだ。	매우 먼 곳까지 헤엄쳤다.	fix	local
+dict:jisjk:818	とても遠くまで泳いだ。	무척 먼 곳까지 헤엄쳤다.	fix	local
 dict:jisjk:818	とても遠くまでは泳げない。	도저히 먼 곳까지는 헤엄칠 수 없다.	fix	local
 dict:jisjk:375205	明日はとても行けない。	내일은 도저히 갈 수 없다.	fix	local
-dict:jisjk:375205	とても寒い。	매우 춥다.	fix	local
+dict:jisjk:375205	とても寒い。	무척 춥다.	fix	local
 dict:jisjk:374780	もう２個ください。	rule:dict:jisjk:374780=더	keep	local
 dict:jisjk:374780	もうこうなると困る。	이제 이렇게 되면 곤란하다.	fix	local
 dict:jisjk:267653	私は何かと忙しい。	나는 이래저래 바쁘다.	fix	local
