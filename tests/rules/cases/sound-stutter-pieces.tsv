@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+sound:stutter-pieces	「さ、さ、最低」	「최, 최, 최저」	fix	sound
+sound:stutter-pieces	「ご、ごめ、ごめんなさい」	「미, 미안, 미안해요」	fix	sound
+sound:stutter-pieces	「あ、あり、ありがとう」	「고, 고마, 고마워요」	fix	sound
+sound:stutter-pieces	「ぃ―――いやぁぁぁッ!?」	「시―――싫어어엇!?」	fix	sound
+sound:stutter-pieces	「わ、わ、わたし……」	「나, 나, 나……」	keep	sound
+sound:stutter-pieces	「あ――本当に？」	「아――정말로?」	keep	sound
+sound:stutter-pieces	「い、いや、大丈夫です」	「아, 아니, 괜찮습니다」	keep	sound
+sound:stutter-pieces	「は、はい、仰る通りです！」	「네, 네, 말씀하신 대로입니다!」	keep	sound
+sound:stutter-pieces	「お、おのれ、おのれぇーっ！」	「다, 당신, 당신-!」	keep	sound
+sound:stutter-pieces	「そ、そんな……嘘でしょ？」	「그, 그런……거짓말이겠지?」	keep	sound
+sound:stutter-pieces	「で、でも、本当」	「그래서, 그렇지만, 사실」	keep	sound
+sound:stutter-pieces	「う――痛い」	「우――아프다」	keep	sound
+sound:stutter-pieces	「あ、あと、三分」	「그, 그리고, 3 분」	keep	sound
+sound:stutter-pieces	「ご、ごめ、ごめんなさいいいい」	「미, 미안, 미안해요 좋은 있고」	current	sound

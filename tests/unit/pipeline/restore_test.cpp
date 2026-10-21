@@ -172,6 +172,12 @@ HD_TEST(pipeline_write_stutters) {
         {"\uE000・어", "・어"},
         {"\uE000、!", "!"},
         {"\uE000、", ""},
+        // A dash run is a separator.
+        {"「\uE000―――싫어어엇」", "「시―――싫어어엇」"},
+        // A longer piece writes its share of the word's syllables with their finals, short of
+        // the whole word: 2 kana of 6 is 2 of 4 syllables, 2 of 3 is 1 of 2.
+        {"「\uE000、\uE000\uE000\uE004\uE004\uE004\uE004、미안해요」", "「미, 미안, 미안해요」"},
+        {"\uE000、\uE000\uE000\uE004、싫어", "시, 싫, 싫어"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteStutters(c.in), std::string(c.want));
 }

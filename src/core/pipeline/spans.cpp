@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "core/pipeline/protect.h"
+#include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -13,7 +14,6 @@ namespace {
 
 using output::SpanKind;
 
-constexpr char32_t kStutterMark = 0xE000;
 
 struct Match {
     size_t length = 0;
@@ -100,8 +100,8 @@ Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
     return {n, output::SpanOpen};
 }
 
-// The length in characters of a stutter separator at rs[i]: 、 ， or a run of … ‥ or of
-// two or more ・.
+// The length in characters of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or
+// of two or more ・.
 size_t StutterSeparator(const std::vector<text::Rune>& rs, size_t i) {
     if (i >= rs.size()) return 0;
     const char32_t c = rs[i].cp;
@@ -111,6 +111,9 @@ size_t StutterSeparator(const std::vector<text::Rune>& rs, size_t i) {
             return 1;
         case U'…':
         case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
         case U'・': {
             size_t n = i;
             while (n < rs.size() && rs[n].cp == c) n++;
@@ -130,7 +133,7 @@ Match StutterSpan(std::string_view s) {
         w.remove_prefix(rs.back().size);
     }
     size_t n = 0;
-    while (n < rs.size() && rs[n].cp == kStutterMark) n += 1 + StutterSeparator(rs, n + 1);
+    while (n < rs.size() && (rs[n].cp == kStutterMark || rs[n].cp == kStutterRest)) n += 1 + StutterSeparator(rs, n + 1);
     size_t bytes = 0;
     for (size_t k = 0; k < n; k++) bytes += rs[k].size;
     return {bytes, output::SpanOpen};

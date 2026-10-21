@@ -51,9 +51,11 @@ std::string KoreanCleanup(std::string_view s);
 // not render) written in Hangul as heard (internal::ReadKana).
 std::string WriteDropped(std::string_view s);
 
-// Each stutter mark U+E000 and the separator after it (、 ， or a run of … ‥ or of two or
-// more ・) written as the next syllable of the text without its final and the
-// separator, 、 and ， as ", " (U+E000、어이 -> 어, 어이). Spaces before a mark at the
+// Each stutter mark U+E000 and the separator after it (、 ， or a run of … ‥ ― ─ — or of
+// two or more ・) written as the next syllable of the text without its final and the
+// separator, 、 and ， as ", " (U+E000、어이 -> 어, 어이). A run of k marks and r
+// kStutterRest marks writes the share k/(k+r) of the next word's syllables, at least one
+// and short of the whole word, with their finals (ごめ、 미안, of 미안해요). Spaces before a mark at the
 // start of the line or after an opening bracket are dropped; a mark with no syllable
 // after it (past spaces, marks and separators) is dropped with its separator.
 std::string WriteStutters(std::string_view s);
@@ -65,6 +67,9 @@ std::string DropParticleMarks(std::string_view s);
 constexpr char32_t kDropShift = 0xC000;
 // The stutter mark of the sound stage.
 constexpr char32_t kStutterMark = 0xE000;
+// After the marks of a longer stutter piece, one mark for each kana of the word the piece
+// does not reach (ごめ、 of ごめんなさい: 2 kStutterMark, 4 kStutterRest).
+constexpr char32_t kStutterRest = 0xE004;
 
 namespace internal {
 

@@ -40,9 +40,9 @@
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
-// A stutter (な、なにを, だっ、だめ, べ…別に) becomes a stutter mark U+E000 before each
-// separator; the restore stage writes it as the first syllable of the next Korean word
-// (WriteStutters).
+// A stutter (な、なにを, だっ、だめ, べ…別に, ご、ごめ、ごめんなさい) becomes stutter marks
+// before each separator; the restore stage writes them as the start of the next Korean
+// word (WriteStutters).
 #include <cstddef>
 #include <span>
 #include <string>

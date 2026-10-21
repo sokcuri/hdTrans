@@ -103,12 +103,25 @@ bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
 constexpr std::u32string_view kNotStutters[] = {U"ア", U"ウ", U"エ", U"オ", U"ン", U"ネ", U"デ", U"マ", U"サ",
                                                 U"ヤ", U"ヨ", U"ム", U"ガ", U"ヲ", U"ト", U"ジャ", U"チョ"};
 
+// A kanji numeral or an ASCII or full-width digit.
+bool NumeralRune(char32_t r) {
+    return In(r, U"〇一二三四五六七八九十百千万億") || (r >= U'0' && r <= U'9') || (r >= U'０' && r <= U'９');
+}
+
+// Words that start like a stutter but say something of their own (あ、あれ、何;
+// は、はい、仰る).
+constexpr std::u32string_view kStandalonePieces[] = {U"コレ", U"ソレ", U"アレ", U"ドレ", U"コノ", U"ソノ", U"アノ",
+                                                     U"ドノ", U"ココ", U"ソコ", U"ドコ", U"コウ", U"ソウ", U"アア",
+                                                     U"ドウ", U"ナニ", U"ナン", U"アナタ", U"アノネ", U"ソンナ", U"コンナ",
+                                                     U"アンナ", U"ドンナ", U"ハイ", U"イエ", U"イヤ", U"ウン", U"エエ",
+                                                     U"ネエ", U"マア", U"サア", U"ヨシ", U"ホラ"};
+
 // The kana whose syllable with ッ stands alone before a kanji (あっ提督, えっ本当,
 // ぶっ殺す); for other kana the syllable and ッ directly before a kanji are a stutter
 // (ちっ違う, しっ司令官), written as if a comma followed.
 constexpr std::u32string_view kSoundsBeforeKanji = U"アウエオクケゲグサナネハヒフブヘホマムヤヨワン";
 
-// The length of a stutter separator at rs[i:]: 、 ， or a run of … ‥ or of two or more ・.
+// The length of a stutter separator at rs[i:]: 、 ， or a run of … ‥ ― ─ — or of two or more ・.
 size_t StutterSeparator(std::u32string_view rs, size_t i) {
     if (i >= rs.size()) return 0;
     switch (rs[i]) {
@@ -117,6 +130,9 @@ size_t StutterSeparator(std::u32string_view rs, size_t i) {
             return 1;
         case U'…':
         case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
         case U'・': {
             size_t n = i;
             while (n < rs.size() && rs[n] == rs[i]) n++;
@@ -136,6 +152,15 @@ size_t KatakanaEnd(std::u32string_view rs, size_t p) {
     while (p < rs.size() && IsKatakanaRune(rs[p])) p++;
     return p;
 }
+
+// One piece of a stutter and the separator after it. A piece of one syllable repeats
+// the first syllable of the word (さ、 in さ、最低); a longer one is kana characters of a
+// word of word characters (ごめ、 of ごめんなさい: 2 of 6) and repeats that share of it.
+struct StutterPiece {
+    std::u32string_view separator;
+    size_t kana = 1;
+    size_t word = 0;
+};
 
 // A sound found in the text: the characters [start, end) are written as korean.
 struct SoundMatch {
@@ -279,6 +304,7 @@ private:
     bool PauseAt(size_t p) const;
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) const;
     bool LongerWordAt(size_t p, size_t n) const;
+    bool WordAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PresentTime(size_t end) const;
@@ -293,7 +319,7 @@ private:
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
     size_t Adverbial(size_t i) const;
-    size_t Stutter(size_t p, std::vector<std::u32string_view>& seps) const;
+    size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
 
     std::string_view text_;
@@ -333,6 +359,17 @@ void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) 
             base = std::max(base, n);
         }
     }
+}
+
+// Whether a dictionary word other than a kana spelling or a name is exactly the n
+// characters at p.
+bool SoundText::WordAt(size_t p, size_t n) const {
+    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.user != nullptr && (c.user->kana || c.user->nameLayer)) continue;
+        if (text::RuneCount(c.source) == n) return true;
+    }
+    return false;
 }
 
 // Whether a dictionary word longer than n characters, and longer than any sound read
@@ -658,23 +695,27 @@ size_t SoundText::Adverbial(size_t i) const {
     return 1;
 }
 
-// The end of the stutter at character p and its separators, or 0: a kana syllable
-// (with small ゃゅょ and ッ, but not a sound of sound.tsv such as あっ; phrases.tsv words
-// such as おっ stutter) at the start of a phrase, then a separator, repeated, before a
-// word that starts with the same kana (but not で、 or じゃ、) or with a kanji (after a
-// comma not for kNotStutters, and with ッ not for kSoundsBeforeKanji: えっ……本当); or a
-// syllable with ッ directly before a kanji, unless kSoundsBeforeKanji holds it, with the
-// separator 、.
-size_t SoundText::Stutter(size_t p, std::vector<std::u32string_view>& seps) const {
+// The end of the stutter at character p and its pieces, or 0: a kana syllable (with
+// small ゃゅょ and ッ, but not a sound of sound.tsv such as あっ; phrases.tsv words such
+// as おっ stutter; a small vowel stutters its plain vowel, ぃ――いや) at the start of a
+// phrase, then a separator, repeated, then longer pieces that each begin the next (see
+// the loops), before a word that starts with the same kana (but not で、 or じゃ、) or with
+// a kanji that is no numeral (after a comma or a dash not for kNotStutters, after a dash
+// not for a sigh, unless the syllable is said twice; with ッ not for kSoundsBeforeKanji:
+// えっ……本当); or a syllable with ッ directly before a kanji, unless kSoundsBeforeKanji
+// holds it, with the separator 、.
+size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const std::u32string_view rs = rs_, f = f_;
-    seps.clear();
-    if (p > 0 && !text::IsSpace(rs[p - 1]) && !In(rs[p - 1], U"「『（(“‘〈《【。、！？!?…‥―")) return 0;
-    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーァィゥェォャュョヮ")) return 0;
+    pieces.clear();
+    if (p > 0 && !text::IsSpace(rs[p - 1]) && !In(rs[p - 1], U"「『（(“‘〈《【。、，！？!?…‥―─—")) return 0;
+    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーャュョヮ")) return 0;
+    // A small vowel stutters only the plain vowel that starts the word (ぃ――いや).
+    const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : 0;
     size_t n = 1;
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
     if (f[p + n - 1] == U'ッ' && p + n < rs.size() && IsKanjiRune(rs[p + n]) && !In(f[p], kSoundsBeforeKanji)) {
-        seps.push_back(U"、");
+        pieces.push_back({U"、"});
         return p + n;
     }
     const std::u32string_view x = f.substr(p, n);
@@ -683,22 +724,103 @@ size_t SoundText::Stutter(size_t p, std::vector<std::u32string_view>& seps) cons
     while (f.substr(i, n) == x) {
         const size_t k = StutterSeparator(rs, i + n);
         if (k == 0) break;
-        seps.push_back(rs.substr(i + n, k));
+        pieces.push_back({rs.substr(i + n, k)});
         i += n + k;
     }
-    if (seps.empty() || i >= rs.size()) {
-        seps.clear();
+    if (pieces.empty() || i >= rs.size()) {
+        pieces.clear();
         return 0;
+    }
+    // Longer pieces that each begin the next (ご、ごめ、ごめんなさい): a piece is up to four
+    // kana before a separator. The pieces are taken only as far as each begins the next
+    // and the last begins the kana word after it, so a piece is never read as a word of
+    // its own; a piece that does not chain is the word itself (わ、わ、わたし……).
+    std::vector<std::pair<size_t, size_t>> longer;  // start and length of each longer piece
+    for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
+        size_t e = j + n;
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
+        const size_t k = StutterSeparator(rs, e);
+        if (k == 0 || e == j + n) break;
+        longer.push_back({j, e - j});
+        j = e + k;
+    }
+    // The kana word at character a.
+    const auto kanaWord = [&](size_t a) {
+        size_t z = a;
+        while (z < rs.size() && IsKana(rs[z])) z++;
+        return f.substr(a, z - a);
+    };
+    while (!longer.empty()) {
+        const auto& [lastStart, lastLength] = longer.back();
+        const size_t after = lastStart + lastLength + StutterSeparator(rs, lastStart + lastLength);
+        const std::u32string_view word = kanaWord(after);
+        // The word without its lengthening, and without an ending the dictionary does not
+        // hold in the word (すきです: すき). A word said again is no piece of it
+        // (おのれ、おのれぇーっ; すき、すきです).
+        std::u32string_view stem = word;
+        while (!stem.empty() && In(stem.back(), U"ァィゥェォッー～")) stem.remove_suffix(1);
+        size_t base = 0, user = 0, name = 0;
+        LongestKeys(after, base, user, name);
+        if (const size_t key = std::max(base, user); key > lastLength && key < stem.size()) stem = stem.substr(0, key);
+        bool chained = stem.size() > lastLength && word.starts_with(f.substr(lastStart, lastLength));
+        for (size_t k = 0; chained && k + 1 < longer.size(); k++) {
+            const std::u32string_view next = f.substr(longer[k + 1].first, longer[k + 1].second);
+            chained = next.size() > longer[k].second && next.starts_with(f.substr(longer[k].first, longer[k].second));
+        }
+        if (chained) {
+            for (const auto& [start, length] : longer) {
+                const size_t e = start + length;
+                pieces.push_back({rs.substr(e, StutterSeparator(rs, e)), length, stem.size()});
+            }
+            return after;
+        }
+        longer.pop_back();
+    }
+    // Before a kanji word the kana cannot be compared: a speaker who starts the word again
+    // after a restart (、 or a dash) says a piece of two kana at most (ち、ちが、違う), so the
+    // piece is never translated. A dictionary word, a sound or a demonstrative says
+    // something of its own (で、でも、本当; お、おい、魅; あ、あれ、何), and a pause after
+    // a word keeps the word (そ、そんな……嘘).
+    for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
+        size_t e = j + n;
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
+        const size_t k = StutterSeparator(rs, e);
+        if (k == 0 || e == j + n || e - j > 2 || !In(rs[e], U"、，―─—") || e + k >= rs.size() ||
+            !IsKanjiRune(rs[e + k]) || NumeralRune(rs[e + k])) {
+            break;
+        }
+        const std::u32string_view piece = f.substr(j, e - j);
+        bool word = IsSoundKey(piece, ctx_.extraBuiltin) || WordAt(j, e - j);
+        for (const std::u32string_view w : kStandalonePieces) word = word || w == piece;
+        if (word) break;
+        pieces.push_back({rs.substr(e, k)});
+        j = e + k;
+        i = j;
     }
     const bool comma = In(rs[p + n], U"、，");
     std::u32string_view bare = x;
     if (bare.ends_with(U'ッ')) bare.remove_suffix(1);
     bool notStutter = false;
     for (const auto s : kNotStutters) notStutter = notStutter || s == bare;
+    // Before a dash a sigh or groan stands alone too (う――痛い, ふ――危なかった).
+    const bool dash = In(rs[p + n], U"―─—");
+    if (dash && bare.size() == 1 && In(bare[0], U"ハヒフヘホ")) notStutter = true;
+    // A syllable said twice is a stutter whatever it is (さ、さ、最低).
+    if (pieces.size() > 1) notStutter = false;
+    // The restore stage copies the next Korean syllable, which a numeral does not give.
+    if (NumeralRune(rs[i])) {
+        pieces.clear();
+        return 0;
+    }
+    if (smallOf != 0) {
+        if (f[i] == smallOf) return i;
+        pieces.clear();
+        return 0;
+    }
     if (f[i] == f[p] && x != U"デ" && x != U"ジャ") return i;
     const bool sound = x.ends_with(U'ッ') && In(f[p], kSoundsBeforeKanji);
-    if (IsKanjiRune(rs[i]) && !(comma && notStutter) && !sound) return i;
-    seps.clear();
+    if (IsKanjiRune(rs[i]) && !((comma || dash) && notStutter) && !sound) return i;
+    pieces.clear();
     return 0;
 }
 
@@ -745,7 +867,7 @@ std::string SoundText::Write() {
     std::string b;
     b.reserve(text_.size() + text_.size() / 2);
     bool afterParticle = false;  // the token before rs[i] is a lone particle
-    std::vector<std::u32string_view> seps;
+    std::vector<StutterPiece> pieces;
     for (size_t i = 0; i < rs.size();) {
         if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), ctx_.markers); skip > 0) {
             afterParticle = false;
@@ -757,10 +879,14 @@ std::string SoundText::Write() {
         size_t next = i + 1;
         bool particle = false;
         std::vector<SoundMatch> chain;
-        if (const size_t end = Stutter(i, seps); end > 0) {
-            for (const auto sep : seps) {
+        if (const size_t end = Stutter(i, pieces); end > 0) {
+            for (const StutterPiece& piece : pieces) {
                 text::AppendRune(b, kStutterMark);
-                b += EncodeText(sep);
+                if (piece.word > 0) {
+                    for (size_t k = 1; k < piece.kana; k++) text::AppendRune(b, kStutterMark);
+                    for (size_t k = piece.kana; k < piece.word; k++) text::AppendRune(b, kStutterRest);
+                }
+                b += EncodeText(piece.separator);
             }
             next = end;
             stutterEnd_ = end;
