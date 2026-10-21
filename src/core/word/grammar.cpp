@@ -997,6 +997,54 @@ constexpr std::string_view kHumblePronouns[] = {"私", "わたし", "わたく�
 
 }  // namespace
 
+namespace {
+
+bool OnReading(const Item* it) {
+    return it != nullptr && it->selected >= 0 && Has(it->GAttr(it->selected), "On");
+}
+
+// s with the initial sound rule on its first syllable: ㄹ before ㅑ ㅕ ㅖ ㅛ ㅠ ㅣ and ㄴ before
+// those vowels become ㅇ, another ㄹ becomes ㄴ (륭 융, 녀 여, 로 노).
+std::string InitialSound(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (r.cp < 0xAC00 || r.cp > 0xD7A3) return std::string(s);
+    const char32_t index = r.cp - 0xAC00;
+    char32_t lead = index / (21 * 28);
+    const char32_t vowel = index / 28 % 21, tail = index % 28;
+    const bool palatal = vowel == 2 || vowel == 6 || vowel == 7 || vowel == 12 || vowel == 17 || vowel == 20;
+    if (lead == 5) lead = palatal ? 11 : 2;
+    else if (lead == 2 && palatal) lead = 11;
+    else return std::string(s);
+    std::string out;
+    text::AppendRune(out, 0xAC00 + (lead * 21 + vowel) * 28 + tail);
+    out.append(s.substr(r.size));
+    return out;
+}
+
+}  // namespace
+
+// The Sino-Korean reading that starts a word follows the initial sound rule (隆書 륭서 →
+// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading stays (興隆 흥륭).
+void InitialSoundRule(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!OnReading(it)) continue;
+        // A word starts after punctuation, a particle or the start of its token, but not
+        // after the ・ of a word spelled out (謹・賀・新・年).
+        if (it->start > 0 && std::string_view(it->text).substr(0, static_cast<size_t>(it->start)).ends_with("・")) continue;
+        const Item* p = it->prev;
+        if (p != nullptr && p->tokenIndex == it->tokenIndex && p->start + p->length == it->start) {
+            const std::string_view ps = p->group->surface;
+            const char32_t last = ps.empty() ? 0 : DecodeLastRune(ps).cp;
+            const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
+            if (!particle && (text::IsLetter(last) || text::IsDigit(last))) continue;
+        }
+        const std::string target(it->EntryText(it->selected));
+        if (const std::string ruled = InitialSound(target); ruled != target) {
+            TakeTarget(it, At(it->Code(it->selected), 0), ruled);
+        }
+    }
+}
+
 // ちゃん right after a katakana noun as 짱 where it was left empty (ナッちゃん 낫짱); the
 // empty ちゃん of a kin word (お姉ちゃん 언니) stays.
 void ChanAfterKatakana(Flusher& f) {

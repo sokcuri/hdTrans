@@ -60,6 +60,7 @@ void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
 void ChanAfterKatakana(Flusher& f);
+void InitialSoundRule(Flusher& f);
 void SubjectNo(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end

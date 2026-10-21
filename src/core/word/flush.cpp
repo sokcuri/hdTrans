@@ -57,6 +57,7 @@ void Flush(Flusher& f) {
         NounTo(f);
         HumbleFirstPerson(f);
         ChanAfterKatakana(f);
+        InitialSoundRule(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);
