@@ -336,7 +336,10 @@ int main(int argc, char** argv) {
     Write(fixtures / "speech/base.tsv", header + "高\t$D3@\tH7N0\t\t\tGN\t\t\t\t\t1\nい\t1다\tT500\t\t\tGN\t\t\t\t\t2\n");
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\n");
     Check(hdTrans_Reload() == 0, "reload speech dictionary");
-    Check(Translate("「高い」") == "「높아」", "quoted speech is soft by default");
+    Check(Translate("「高い」") == "「높다」", "quoted speech is strict by default");
+    Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: soft\n");
+    Check(hdTrans_Reload() == 0, "reload soft speech");
+    Check(Translate("「高い」") == "「높아」", "configured soft speech");
     Check(Translate("「高い。") == "「높아." && Translate("高い」") == "높아」", "a quote carries to the next call");
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: strict\n");
     Check(hdTrans_Reload() == 0, "reload strict speech");

@@ -42,8 +42,8 @@ export interface TranslationResult {
   logs: string[];
 }
 
-/** The speech level of the text inside 「」: 'soft' (the default) writes its plain sentence
- *  ends (간다) in 해체 (갈 거야), 'strict' keeps them. */
+/** The speech level of the text inside 「」: 'strict' (the default) keeps its plain sentence
+ *  ends (간다), 'soft' writes them in 해체 (갈 거야). */
 export type Speech = 'soft' | 'strict';
 
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
@@ -93,7 +93,7 @@ export class HdTrans {
   private binding_: Binding | undefined;
   private dictionaryVersion_ = '';
   private userDictRaw_ = '';
-  private speech_: Speech = 'soft';
+  private speech_: Speech = 'strict';
 
   private constructor(binding: Binding, version: string) {
     this.binding_ = binding;

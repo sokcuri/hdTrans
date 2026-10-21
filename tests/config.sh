@@ -126,12 +126,12 @@ printf 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n高\t$D3@\tH7N0\t\t\tGN\t0\t1\n
 printf '「高い」' > "$tmp/quoted"
 printf 'dicts: speech\nuserdict: ""\ncache: off\n' > "$tmp/settings/custom.yaml"
 "$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 「높아」 ]
-printf 'speech: strict\n' >> "$tmp/settings/custom.yaml"
-"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 「높다」 ]
-"$cli" -config "$tmp/settings/custom.yaml" --speech soft -in "$tmp/quoted" > "$tmp/out"
+printf 'speech: soft\n' >> "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 「높아」 ]
+"$cli" -config "$tmp/settings/custom.yaml" --speech strict -in "$tmp/quoted" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 「높다」 ]
 "$cli" -config "$tmp/settings/custom.yaml" --speech=soft -reference -in "$tmp/quoted" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 「높다」 ]
 status=0
@@ -140,6 +140,6 @@ status=0
 grep -F -- '--speech takes soft or strict' "$tmp/errors" > /dev/null
 printf 'dicts: speech\nuserdict: ""\ncache: off\nspeech: always\n' > "$tmp/settings/custom.yaml"
 "$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out" 2> "$tmp/errors"
-[ "$(cat "$tmp/out")" = 「높아」 ]
+[ "$(cat "$tmp/out")" = 「높다」 ]
 grep -F 'custom.yaml:4: speech: expected soft or strict' "$tmp/errors" > /dev/null
 echo 'CLI config: PASS'

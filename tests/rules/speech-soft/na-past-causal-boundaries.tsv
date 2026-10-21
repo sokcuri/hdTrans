@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:na-past-cause	「静かだったため、眠れた。」	「조용했기 때문에, 잘 수 있었어.」	fix	lookup
