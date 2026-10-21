@@ -482,6 +482,24 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
+    // A noun of degree, time or listing read as a free noun after a word stands apart
+    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등); 等 after a number is a rank (1등).
+    struct FreeNoun {
+        std::string_view surface;
+        std::string_view korean;
+    };
+    constexpr FreeNoun kFreeNouns[] = {{"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"},
+                                       {"ほど", "정도"}, {"程", "정도"},   {"等", "등"},     {"など", "등"},
+                                       {"前", "전"},     {"後", "후"},     {"前", "앞"},     {"後", "뒤"}};
+    if (kind == '1' && !t.ends_with(' ') && Contains(GAttr(next), "Tu") == false) {
+        for (const FreeNoun& f : kFreeNouns) {
+            const std::string_view ns = next.surface;
+            const bool same = ns == f.surface || (ns.starts_with(f.surface) && ns.substr(f.surface.size()) == "の");
+            if (!same || !nextEntry.starts_with(f.korean)) continue;
+            if (f.korean == "등" && (IsDigit(First(t)) || nd(tags))) break;
+            return Result(std::move(t), true);
+        }
+    }
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
     } else if (t != ",") {
