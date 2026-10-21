@@ -26,8 +26,9 @@ std::string JoinNasai(std::string_view text);
 // A verb stem joined to ます, ました, ません, ましょう cut off by 、，…‥ (ござい、ます); ます,
 // ました, ません, ましょう, です, でしょう cut inside by 、，…‥・―─ (いただきま…す, 好き……で……す)
 // or spelled まっす, まス, でっす joined; both when no kana or ー ～ follows, or after a cut
-// by …‥・―─ only, when か ね よ わ かね よね わね わよ and no kana follow. Marks of …‥・―─
-// only are written after the ending as a drawl span (kDrawlMark), others are dropped.
+// by …‥・―─ only, when か ね よ わ かね よね わね わよ and no kana follow. Not for the word
+// いま or 今ま, nor before 、 or ， and a restart (ここで…す、すみません). Marks of …‥・―─ only
+// are written after the ending as a drawl span (kDrawlMark), others are dropped.
 std::string JoinMasu(std::string_view text);
 
 // A word joined to です, でした, でしょう cut off by …‥・―─ when no kana or ー ～ follows,

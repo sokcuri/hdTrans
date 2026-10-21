@@ -94,6 +94,14 @@ HD_TEST(pipeline_join_masu) {
         {"そうで……すよね"sv, "そうですよね\uE005……\uE005"sv},
         {"行き…ましょう！"sv, "行きましょう\uE005…\uE005！"sv},
         {"行きま…すかな"sv, "行きま…すかな"sv},
+        // A restarted word after 、 (a stutter or the particle で), and the word いま or 今ま.
+        {"ここで…す、すみません！"sv, "ここで…す、すみません！"sv},
+        {"学校で……す、すごい"sv, "学校で……す、すごい"sv},
+        {"家で…す、好き"sv, "家で…す、好き"sv},
+        {"今ま…す、すぐに"sv, "今ま…す、すぐに"sv},
+        {"いま、した。"sv, "いま、した。"sv},
+        {"そうで…す、はい。"sv, "そうです\uE005…\uE005、はい。"sv},
+        {"していま…す。"sv, "しています\uE005…\uE005。"sv},
         {"そうで…すねた"sv, "そうで…すねた"sv},
     };
     Check(JoinMasu, cases);

@@ -23,3 +23,9 @@ normalize:copula-pause	明日は雨…ですって。	내일은 비…래.	keep	
 normalize:copula-pause	……ですが、今は違う。	……그렇지만, 지금은 다르다.	keep	normalize
 normalize:copula-pause	ねこ・です。	고양이·입니다.	keep	normalize
 normalize:copula-pause	フタサンマルマル…です。	2300…입니다.	keep	normalize
+normalize:drawl	ここで…す、すみません！	여기서…죄, 죄송합니다!	keep	normalize
+normalize:drawl	学校で……す、すごい	학교에서……대, 대단해	keep	normalize
+normalize:drawl	家で…す、好き	집에서…조, 좋아해	keep	normalize
+normalize:drawl	今ま…す、すぐに	지금 …고, 곧바로	keep	normalize
+normalize:drawl	いま、した。	지금, 했다.	keep	normalize
+normalize:drawl	そうで…す、はい。	그렇…습니다, 네.	keep	normalize

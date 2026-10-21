@@ -15,6 +15,7 @@
 
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
+#include "core/pipeline/runes.h"
 #include "core/tokenizer/canonical.h"
 
 namespace hdTrans::pipeline {
@@ -140,13 +141,19 @@ bool SplitMasu(std::string_view s, size_t pos, Match& m) {
 //   (で) (す|ス|しょう)
 // with marks [、，…‥・―─ー～]*; した, せん and しょう only after a mark other than ー ～
 // and without っ, and す only after such a mark or っ (ー ～ alone are left as they are).
-// After marks of DrawlMarks the particles of EndingEnd may follow the tail. Group 1 is
-// the head, group 2 the tail (ス as す), group 3 the character after, group 4 the marks,
-// group 5 the particles.
+// After marks of DrawlMarks the particles of EndingEnd may follow the tail. Not for the
+// word いま or 今ま (今ま…す、すぐ), nor before 、 or ， and a kanji or the tail's first kana,
+// a restarted word (ここで…す、すみません). Group 1 is the head, group 2 the tail (ス as す),
+// group 3 the character after, group 4 the marks, group 5 the particles.
 bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     bool masu = false;
     if (OneOf(s, p, U"いきぎしじちにひびみりえけげせぜてでねへべめれ") || Take(s, p, IsKanjiClass)) masu = Lit(s, p, "ま");
+    if (masu && s.substr(pos).starts_with("今")) return false;
+    if (masu && s.substr(pos).starts_with("い")) {
+        const char32_t prev = LastRune(s.substr(0, pos)).cp;
+        if (!IsHiraganaClass(prev) && !IsKanjiClass(prev) && !(prev >= U'ァ' && prev <= U'ヺ')) return false;
+    }
     if (!masu) {
         p = pos;
         if (!Lit(s, p, "で")) return false;
@@ -170,6 +177,11 @@ bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
         const bool su = w == "す" || w == "ス";
         if (w == "す" ? !marked && !tsu : !su && (!marked || tsu)) continue;
         if (!EndingEnd(s, r, particles, e, t)) continue;
+        if (const text::Rune comma = At(s, e); comma.size > 0 && (comma.cp == U'、' || comma.cp == U'，')) {
+            const text::Rune next = At(s, t);
+            const std::string_view first = su ? std::string_view("す") : w.substr(0, std::string_view("し").size());
+            if (next.size > 0 && (IsKanjiClass(next.cp) || s.substr(t).starts_with(first))) continue;
+        }
         m.group[1] = Span(s, pos, cut);
         m.group[2] = su ? std::string_view("す") : Span(s, p, r);
         m.group[3] = Span(s, e, t);
