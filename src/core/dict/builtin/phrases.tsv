@@ -1243,3 +1243,8 @@
 そうだっけ	그랬나	phrase
 そうだったっけ	그랬나	phrase
 そーだっけ	그랬나	phrase
+// しないかい: an invitation (少し話をしないかい 이야기를 하지 않을래); なんだい: 뭐야, as an
+// utterance of its own, not the copula of a noun before it (つもりなんだい).
+しないかい	하지 않을래	phrase
+なんだい	뭐야	intj
+何だい	뭐야	phrase
