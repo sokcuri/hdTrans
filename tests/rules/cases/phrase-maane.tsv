@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+phrase:まあね	まぁね、そういう日もあるよ。	뭐 그렇지, 그러한 날도 있어.	fix	builtin-phrase
+phrase:まあね	まぁな！ 俺に任せとけ。	뭐 그렇지! 나에게 나한테 맡겨라.	fix	builtin-phrase
+phrase:まあね	まぁねぇ、仕方ないよ。	뭐 그렇지~, 어쩔 수 없어.	fix	builtin-phrase
+phrase:まあね	まあね、知ってたよ。	뭐 그렇지, 알았어.	keep	builtin-phrase
+phrase:まあね	まあ、いいか。	뭐, 좋은가.	keep	builtin-phrase
