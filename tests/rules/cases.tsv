@@ -55,8 +55,8 @@ L199	財布を落としてしまった。	지갑을 잃어버려 버렸다.	curr
 L199	疲れて家に帰り、すぐ寝た。	지쳐 집에 돌아가, 바로 잤다.	current	local-ending
 L200	先に寝ていいからね。	먼저 자도 좋으니까.	current	local-ending
 L200	このペンを使っていいよ。	이 펜을 사용해도 좋아.	current	local-ending
-L208	もうこうなったらやるしかない。	이제 이렇게 되면 할 수 밖에 없다.	current	local-ending
-L208	約束したのだから、行くしかない。	약속했으니까, 갈 수 밖에 없다.	current	local-ending
+L208	もうこうなったらやるしかない。	이제 이렇게 되면 할 수밖에 없다.	current	local-ending
+L208	約束したのだから、行くしかない。	약속했으니까, 갈 수밖에 없다.	current	local-ending
 L212	東京でも雪が降ったそうです。	도쿄에서도 눈이 내렸다고 합니다.	current	local
 L212	駅の近くでも買い物ができます。	역의 근처에서도 쇼핑을 할 수 있습니다.	current	local
 L212	家でも買うか。	집에서도 살까.	current	local
