@@ -38,6 +38,15 @@
 //     entry at least as long as the sound's key (without a final と), win; the ending
 //     of an end row does not win over an intj row before a pause or an ellipsis.
 //
+// A katakana word that starts an utterance or follows 、 or an ellipsis, before ！と or
+// ！っと, that an ono row reads alone or with ッ is that sound even where a dictionary word
+// reads it (ドン！っと 쾅!).
+//
+// A katakana mimetic the lexicon lacks before と or っと (a run ending in ッ, or a unit of two
+// to four characters said twice, that no dictionary key reads) is written in hiragana when
+// a dictionary word reads it so (ジッと じっと), otherwise as heard with the と dropped
+// (メキメキと 메키메키).
+//
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //

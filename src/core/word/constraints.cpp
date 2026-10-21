@@ -34,7 +34,7 @@ constexpr ConstraintRule kRules[] = {
     {"kimi-after-mask", ConstraintWord::Source, "君", ConstraintContext::AfterMask, ConstraintReject::Pronoun,
      "가린 이름(○○, △△) 바로 뒤의 君은 대명사가 아니라 접미사 군 (××君が 너가 → ××군이)", {}},
     {"quote-after-exclamation", ConstraintWord::Source, "と", ConstraintContext::AfterExclamation,
-     ConstraintReject::NonQuote, "！·？ 바로 뒤의 と는 인용 조사 라고 (ドン！と 돈! 와 → 돈! 라고)", {}},
+     ConstraintReject::NonQuote, "！·？ 바로 뒤나 ！っ 뒤의 と는 인용 조사 라고 (ドン！と 돈! 와 → 쾅! 라고)", {}},
     {"quote-tte-after-pause", ConstraintWord::Source, "って", ConstraintContext::AfterPause,
      ConstraintReject::NonQuote, "！·？·、·… 뒤에서 명사(奴·こと·話 등)를 꾸미는 って는 인용 (休暇、って奴 휴가, 는 녀석 → 휴가, 라는 녀석)", {}},
     {"iwaku-line-opening", ConstraintWord::Source, "曰く", ConstraintContext::LineOpening, ConstraintReject::NonAdverb,
@@ -212,7 +212,8 @@ bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
 bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>& list, std::string_view source,
                  std::string_view after, std::string_view before, std::string_view previous,
                  std::string_view adjacent, std::string_view preceding, std::string_view lead) {
-    const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?";
+    const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?" ||
+                             (previous == "っ" && (lead.ends_with("！っ") || lead.ends_with("!っ")));
     switch (rule.context) {
     case ConstraintContext::Honorific:
     case ConstraintContext::FamiliarHonorific:
