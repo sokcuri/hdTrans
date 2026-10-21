@@ -8,7 +8,7 @@ dict:jisjk:264885	駅まで遠いわね。	역까지 머네.	fix	lookup
 dict:jisjk:4186	雨が降り出したのね。	비가 오기 시작했구나.	fix	lookup
 dict:jisjk:6176	今日は休みだよね？	오늘은 휴일이지?	fix	lookup
 dict:jisjk:201703	僕はね、犬が好きだよ。	나는 말이야, 개를 좋아해.	fix	lookup
-ending:書いてますよね	約束、覚えてますよね？	약속, 기억하고 있지요?	fix	builtin-ending
-ending:書いてませんよね	まだ誰にも話してませんよね？	아직 누구에게도 이야기하지 않았지요?	fix	builtin-ending
+ending:書いてますよね	約束、覚えてますよね？	약속, 기억하고 있죠?	fix	builtin-ending
+ending:書いてませんよね	まだ誰にも話してませんよね？	아직 누구에게도 이야기하지 않았죠?	fix	builtin-ending
 ending:学生ですわ	これは妹のものですわ。	이것은 여동생의 것이에요.	keep	builtin-ending
 dict:jisjk:4082	あとで電話しますよ。	나중에 전화해요.	keep	lookup

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+cleanup:jiyo	「あの店、前にも行きましたよね」	「그 가게, 앞에도 갔죠」	fix	restore
+cleanup:jiyo	「もう遅いですよね、帰りましょう」	「이미 늦죠, 돌아갑시다」	fix	restore
+cleanup:jiyo	「彼は来ないでしょうね」	「그는 오지 않겠죠」	fix	restore
