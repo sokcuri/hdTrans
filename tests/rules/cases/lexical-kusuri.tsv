@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:100153	クスリを飲む時間だよ。	약을 먹는 시간이야.	fix	lookup
+dict:jisjk:100153	クスリがないと眠れない。	약이 없으면 잘 수 없다.	fix	lookup
+sound:くすりと	彼女はくすりと笑った。	그녀는 피식 웃었다.	keep	sound
