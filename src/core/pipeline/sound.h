@@ -122,6 +122,7 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
 // phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
+// The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
 // dropped (ていとくぅ, ないでぇ, なのぉ). A run with ー that ends a phrase after a word is
 // written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those
