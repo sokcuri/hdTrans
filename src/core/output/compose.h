@@ -30,12 +30,11 @@ struct Settings {
     bool cleanup = false;   // drop dictionary glosses and doubled generated spaces
     bool text = false;      // input of the text path: kana runs the items drop are kept, particles
                             // alternate by ParticleClass
-    // Text path: the plain sentence ends (간다, 다르다, 학생이다) of speech in 해체 (갈 거야,
-    // 달라, 학생이야). Speech is the text inside 「」 and 『』, and with spoken the text of the
-    // line outside them; quotes is the state at the first token of the sentence, and the
-    // quoteStyles of the line (pipeline::QuoteStyles) keep polite and old speech.
-    bool soften = false;
-    bool spoken = false;
+    // Text path: the plain sentence ends (간다, 다르다, 학생이다) of the text inside 「」 and
+    // 『』 in 해체 (갈 거야, 달라, 학생이야); quotes is the state at the first token of the
+    // sentence, and the quoteStyles of the line (pipeline::QuoteStyles) keep polite and old
+    // speech.
+    bool casual = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
@@ -105,7 +104,7 @@ private:
     struct Scratch {
         std::string text;   // composed text, " " once consumed
         std::string saved;  // text of a kanji item replaced by its surface
-        bool spoken = false;  // Soften gave the item a casual sentence end
+        bool spoken = false;  // WriteCasual gave the item a casual sentence end
     };
     struct Written {
         int token;
@@ -116,7 +115,7 @@ private:
     };
 
     std::string Build(int i, int action, std::string_view mode);
-    void Soften(int first, int last);
+    void WriteCasual(int first, int last);
     char32_t QuotedEnd(int i, int last, bool nested) const;
     std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);

@@ -152,12 +152,10 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
     return closed;
 }
 
-// The speech of a line for the compose stage: whether its plain sentence ends soften,
-// whether the line is spoken as a whole, its quotes at the start of the next chunk and the
-// styles of its quotes.
-struct Speech {
-    bool soften = false;
-    bool spoken = false;
+// The speech of a line for the compose stage: whether its plain sentence ends become 해체,
+// its quotes at the start of the next chunk and the styles of its quotes.
+struct LineSpeech {
+    bool casual = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -185,7 +183,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
 // and the compose stage. The sentences are appended to out with the chunk index.
 // speech is read from the start of the chunk.
 void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& lookup, const output::Pieces& chunk,
-                    int index, bool text, bool verse, std::string_view before, const Speech& speech, Scratch& s,
+                    int index, bool text, bool verse, std::string_view before, const LineSpeech& speech, Scratch& s,
                     Generated& generated, const StageObserver& observer, const TranslationOptions& options,
                     std::vector<output::Sentence>& out) {
     s.texts.clear();
@@ -200,15 +198,14 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
 
     output::Settings composeSettings = ComposeSettings(text);
-    composeSettings.soften = text && speech.soften;
-    composeSettings.spoken = speech.spoken;
+    composeSettings.casual = text && speech.casual;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes
     for (std::size_t k = 0; k < analysis.sentences.size(); k++) {
         const word::Sentence& sentence = analysis.sentences[k];
         const std::size_t start = std::min(static_cast<std::size_t>(sentence.first), s.tokens.size());
-        for (; composeSettings.soften && counted < start; counted++) {
+        for (; composeSettings.casual && counted < start; counted++) {
             composeSettings.quotes = output::QuotesAfter(composeSettings.quotes, s.tokens.Raw(counted));
         }
         output::Sentence done;
@@ -257,12 +254,9 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked);
     std::vector<output::Sentence> sentences;
     std::string before;
-    Speech speech;
-    speech.soften = !options.reference && options.soften != Soften::Off;
-    if (speech.soften) {
-        speech.spoken = options.soften == Soften::Dialogue ||
-                        (options.soften == Soften::Marked &&
-                         (pipeline::SpeakerLine(facts.text) || pipeline::MarkedSpeech(facts.text)));
+    LineSpeech speech;
+    speech.casual = !options.reference && options.speech == Speech::Soft;
+    if (speech.casual) {
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
     }
@@ -364,7 +358,7 @@ std::string RawLine(const dict::Snapshot& snap, Generated& generated, std::strin
         output::Pieces chunk;
         if (!piece.empty()) chunk.push_back({std::string(piece), output::SpanText});
         std::vector<output::Sentence> sentences;
-        TranslateChunk(snap, lookup, chunk, 0, false, false, {}, Speech{}, s, generated, observer, options, sentences);
+        TranslateChunk(snap, lookup, chunk, 0, false, false, {}, LineSpeech{}, s, generated, observer, options, sentences);
         output::Pieces composed;
         for (const output::Sentence& sentence : sentences) output::Append(composed, sentence.pieces);
         result += output::String(composed);

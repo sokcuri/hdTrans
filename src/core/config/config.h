@@ -19,7 +19,7 @@ struct Config {
     bool cg = true;
     bool misread = false;
     bool reference = false;
-    Soften soften = Soften::Quotes;
+    Speech speech = Speech::Soft;
 };
 
 struct ConfigDiagnostic {
@@ -33,8 +33,8 @@ struct ConfigResult {
     bool found = false;
 };
 
-// The mode named off, quotes, marked or dialogue; false for another name.
-bool SoftenOf(std::string_view name, Soften& out);
+// The speech level named soft or strict; false for another name.
+bool SpeechOf(std::string_view name, Speech& out);
 
 // Missing files are optional. Invalid entries are skipped; earlier valid entries survive syntax errors.
 ConfigResult LoadConfig(std::string_view path);

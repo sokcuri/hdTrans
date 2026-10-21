@@ -429,7 +429,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.reference = reference_;
     options.wordImprovements.cgRules = cg_;
     options.wordImprovements.misreadFilter = misread_;
-    options.soften = soften_;
+    options.speech = speech_;
     options.filters = filters_.get();
     const std::vector<std::string> translated =
         internal::TranslateDocument(*snapshot_, *generated_, lines, state_->memory, observer, options);

@@ -42,10 +42,9 @@ export interface TranslationResult {
   logs: string[];
 }
 
-/** The speech whose plain sentence ends (간다) become 해체 (갈 거야): none, the text inside
- *  「」 (the default), also lines after a speaker name and lines without brackets that end
- *  like speech, or every line. */
-export type Soften = 'off' | 'quotes' | 'marked' | 'dialogue';
+/** The speech level of the text inside 「」: 'soft' (the default) writes its plain sentence
+ *  ends (간다) in 해체 (갈 거야), 'strict' keeps them. */
+export type Speech = 'soft' | 'strict';
 
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
 export type EhndFiles = Readonly<Record<string, string>>;
@@ -55,7 +54,7 @@ interface Binding {
   translate(text: string): string;
   translateJson(text: string): TranslationResult;
   reset(): boolean;
-  setSoften(mode: Soften): boolean;
+  setSpeech(speech: Speech): boolean;
   setUserDictRaw(text: string): boolean;
   getUserDict(): UserDictEntry[];
   setEhnd(files: EhndFiles): boolean;
@@ -85,7 +84,7 @@ export interface InitOptions {
   /** Virtual filesystem paths, optionally starting with a compiled .hdsnap. */
   directories?: readonly string[];
   ehnd?: EhndFiles;
-  soften?: Soften;
+  speech?: Speech;
 }
 
 export class HdTrans {
@@ -94,7 +93,7 @@ export class HdTrans {
   private binding_: Binding | undefined;
   private dictionaryVersion_ = '';
   private userDictRaw_ = '';
-  private soften_: Soften = 'quotes';
+  private speech_: Speech = 'soft';
 
   private constructor(binding: Binding, version: string) {
     this.binding_ = binding;
@@ -119,7 +118,7 @@ export class HdTrans {
       if (!binding.open(directories)) throw new Error(binding.error);
       translator.dictionaryVersion_ = binding.dictionaryVersion;
       if (options.ehnd) translator.setEhnd(options.ehnd);
-      if (options.soften) translator.setSoften(options.soften);
+      if (options.speech) translator.setSpeech(options.speech);
       return translator;
     } catch (error) {
       translator.close();
@@ -146,29 +145,29 @@ export class HdTrans {
     };
   }
 
-  /** options.soften applies to this call only; setSoften() sets it for later calls. */
+  /** options.speech applies to this call only; setSpeech() sets it for later calls. */
   translate(text: string): string;
-  translate(text: string, options: { json: true; soften?: Soften }): TranslationResult;
-  translate(text: string, options: { json?: false; soften?: Soften }): string;
-  translate(text: string, options: { json?: boolean; soften?: Soften }): string | TranslationResult;
-  translate(text: string, options: { json?: boolean; soften?: Soften } = {}): string | TranslationResult {
+  translate(text: string, options: { json: true; speech?: Speech }): TranslationResult;
+  translate(text: string, options: { json?: false; speech?: Speech }): string;
+  translate(text: string, options: { json?: boolean; speech?: Speech }): string | TranslationResult;
+  translate(text: string, options: { json?: boolean; speech?: Speech } = {}): string | TranslationResult {
     const binding = this.binding();
     if (typeof text !== 'string') throw new TypeError('hdtrans: text must be a string');
-    if (options.soften === undefined) return options.json ? binding.translateJson(text) : binding.translate(text);
-    const previous = this.soften_;
-    this.setSoften(options.soften);
+    if (options.speech === undefined) return options.json ? binding.translateJson(text) : binding.translate(text);
+    const previous = this.speech_;
+    this.setSpeech(options.speech);
     try {
       return options.json ? binding.translateJson(text) : binding.translate(text);
     } finally {
-      this.setSoften(previous);
+      this.setSpeech(previous);
     }
   }
 
-  /** The speech of later translations; 'quotes' until set. */
-  setSoften(mode: Soften): void {
+  /** The speech level of later translations; 'soft' until set. */
+  setSpeech(speech: Speech): void {
     const binding = this.binding();
-    if (!binding.setSoften(mode)) throw new Error(binding.error);
-    this.soften_ = mode;
+    if (!binding.setSpeech(speech)) throw new Error(binding.error);
+    this.speech_ = speech;
   }
 
   reset(): void {

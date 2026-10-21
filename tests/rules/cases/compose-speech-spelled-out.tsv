@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+compose:speech-spelled-out	「わ・か・る！」	「알·아!」	fix	compose
+compose:speech-spelled-out	「し・ら・な・い！」	「몰·라!」	fix	compose
+compose:speech-spelled-out	「わかる！」	「알아!」	keep	compose

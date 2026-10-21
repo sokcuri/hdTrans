@@ -10,4 +10,4 @@ dicts:
 cg: true
 misread: false
 reference: false
-soften: quotes  # 「」 안 대사의 -다를 해체로. off: 끔, marked: 화자 이름 줄과 말투로 끝나는 줄도, dialogue: 모든 줄
+speech: soft  # 「」 안 대사의 딱딱한 -다를 해체로 부드럽게. strict: 번역의 -다를 그대로

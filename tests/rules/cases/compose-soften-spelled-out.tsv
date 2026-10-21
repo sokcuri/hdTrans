@@ -1,4 +1,0 @@
-rule	input	expected	kind	layer
-compose:soften-spelled-out	「わ・か・る！」	「알·아!」	fix	compose
-compose:soften-spelled-out	「し・ら・な・い！」	「몰·라!」	fix	compose
-compose:soften-spelled-out	「わかる！」	「알아!」	keep	compose

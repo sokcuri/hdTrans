@@ -1,8 +1,0 @@
-rule	input	expected	kind	layer
-compose:soften-marked	明日は海に行くよ。それは違う。	내일은 바다에 가. 그것은 달라.	fix	compose
-compose:soften-marked	母: もう遅い。寝る時間だ	어머니: 이미 늦어. 잘 시간이야	fix	compose
-compose:soften-marked	寒いなぁ。今日は雨だ。	추워. 오늘은 비야.	fix	compose
-compose:soften-marked	彼は窓の外を見た。	그는 창 밖을 보았다.	keep	compose
-compose:soften-marked	　窓を閉めた。寒いからさ。	 창을 닫았다. 춥기 때문에.	keep	compose
-compose:soften-marked	設定：音量を上げる	설정：음량을 올린다	keep	compose
-compose:soften-marked	「行くよ」と彼は言った。	「가」라고 그는 말했다.	keep	compose

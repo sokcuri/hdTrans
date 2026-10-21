@@ -12,7 +12,7 @@ using namespace hdTrans;
 
 namespace {
 
-// 高い as 높다: a plain sentence end that softens to 높아.
+// 高い as 높다: a plain sentence end whose casual form is 높아.
 const std::string kRows =
     "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
     "高\t$D3@\tH7N0\t\t\tGN\t0\t1\n"
@@ -51,23 +51,18 @@ std::string Translate(const std::vector<std::string>& lines, const internal::Tra
 
 }  // namespace
 
-HD_TEST(engine_soften_modes) {
+HD_TEST(engine_speech_levels) {
     HD_CHECK_EQ(Translate({"「高い」", "高い。"}), "「높아」|높다.");
-    internal::TranslationOptions off;
-    off.soften = Soften::Off;
-    HD_CHECK_EQ(Translate({"「高い」", "高い。"}, off), "「높다」|높다.");
+    internal::TranslationOptions strict;
+    strict.speech = Speech::Strict;
+    HD_CHECK_EQ(Translate({"「高い」", "高い。"}, strict), "「높다」|높다.");
     internal::TranslationOptions reference;
     reference.reference = true;
     HD_CHECK_EQ(Translate({"「高い」"}, reference), "「높다」");
-    internal::TranslationOptions dialogue;
-    dialogue.soften = Soften::Dialogue;
-    HD_CHECK_EQ(Translate({"高い。"}, dialogue), "높아.");
-    dialogue.reference = true;
-    HD_CHECK_EQ(Translate({"高い。"}, dialogue), "높다.");
 }
 
-HD_TEST(engine_soften_quote_across_lines) {
-    // A quote closed on a later line softens every line it covers.
+HD_TEST(engine_speech_quote_across_lines) {
+    // A quote closed on a later line is speech on every line it covers.
     HD_CHECK_EQ(Translate({"「高い。", "高い。", "高い」", "高い。"}), "「높아.|높아.|높아」|높다.");
     // An unclosed quote leaves the lines after it alone, and so does a blank line or a line
     // that opens its own quote.
@@ -84,19 +79,19 @@ HD_TEST(engine_soften_quote_across_lines) {
     HD_CHECK_EQ(Joined(Translate({"高い。"}, memory)), "높다.");
 }
 
-HD_TEST(engine_soften_session) {
-    const auto folder = std::filesystem::temp_directory_path() / "hdtrans-soften-session";
+HD_TEST(engine_speech_session) {
+    const auto folder = std::filesystem::temp_directory_path() / "hdtrans-speech-session";
     std::filesystem::create_directories(folder);
     std::ofstream(folder / "base.tsv") << kRows;
     Engine engine(false, CacheWrite::Off);
     HD_REQUIRE(engine.Open({folder.string()}));
     Session session(engine);
     HD_CHECK_EQ(session.Translate("「高い」"), "「높아」");
-    session.SetSoften(Soften::Off);
+    session.SetSpeech(Speech::Strict);
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
     session.Reset();
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
-    session.SetSoften(Soften::Quotes);
+    session.SetSpeech(Speech::Soft);
     HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
     HD_CHECK_EQ(session.Translate("高い」"), "높아」");
     HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");

@@ -34,14 +34,11 @@ enum class CacheWrite { Off, Sync };
 // their versions change again.
 enum class UserReload { Off, Auto };
 
-// The speech whose plain sentence ends (간다, 학생이다) are written in 해체 (갈 거야,
-// 학생이야). Narration keeps its 다.
-enum class Soften {
-    Off,
-    Quotes,    // the text inside 「」
-    Marked,    // also a line after a speaker name (名前: …) and a line without brackets
-               // whose sentences end like speech (〜よ, 〜だろ, 〜ちゃう)
-    Dialogue,  // every line
+// The speech level of the sentence ends of speech: the text inside 「」, with a quote an
+// earlier line left open. Narration keeps its 다.
+enum class Speech {
+    Soft,    // the plain sentence ends (간다, 학생이다) in 해체 (갈 거야, 학생이야)
+    Strict,  // the sentence ends of the translation (간다, 학생이다)
 };
 
 // The loaded dictionaries. Shared by any number of sessions and threads.
@@ -137,9 +134,9 @@ public:
     // dictionaries.
     void Reset();
 
-    // The lines that later translations write as speech; Soften::Quotes until set.
-    // Without effect in reference mode.
-    void SetSoften(Soften soften) { soften_ = soften; }
+    // The speech level of later translations; Speech::Soft until set. Reference mode
+    // writes Speech::Strict.
+    void SetSpeech(Speech speech) { speech_ = speech; }
 
 private:
     friend struct internal::Access;
@@ -149,7 +146,7 @@ private:
     const bool reference_;
     const bool cg_;
     const bool misread_;
-    Soften soften_ = Soften::Quotes;
+    Speech speech_ = Speech::Soft;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

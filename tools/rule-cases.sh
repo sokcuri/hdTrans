@@ -9,7 +9,7 @@
 # Failing rows are reported grouped by layer, each with its rule, input, expected and actual
 # value, so that a change in one layer that breaks another layer's rows shows as such.
 # --accept rewrites the expected value of every full-output row whose kind is current. The words
-# after -- are passed to the CLI (--soften dialogue).
+# after -- are passed to the CLI (--speech strict).
 # Exit: 0 all rows pass, 1 a row fails, 2 invalid arguments or failed CLI.
 set -eu
 LC_ALL=C; export LC_ALL

@@ -104,8 +104,8 @@ struct TranslationOptions {
     // The pre-filter rewrites each line before translation and the post-filter its
     // translation; their user dictionary joins the lookups. Null for none.
     const filter::Filters* filters = nullptr;
-    // The lines whose plain sentence ends are written in 해체; Off with reference.
-    Soften soften = Soften::Quotes;
+    // The speech level of the text inside 「」; Strict with reference.
+    Speech speech = Speech::Soft;
 };
 
 // Translates the lines of one call as one document: the registry and the document context

@@ -94,7 +94,7 @@ void Usage(std::FILE* file) {
                "  --userdict PATH        user dictionary file or folder (repeatable)\n"
                "  --ehnd DIR             opt-in Ehnd folder\n"
                "  --each, --raw          independent lines, or word-pipeline-only lines\n"
-               "  --soften MODE          speech in 해체: off, quotes (default), marked or dialogue\n"
+               "  --speech LEVEL         speech in 「」: soft (해체, default) or strict (-다)\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -283,7 +283,7 @@ int RunMain(int argc, char** argv) {
     std::string tracePath;
     bool selectShadow = false;
     bool misread = false;
-    std::optional<std::string> softenArg;
+    std::optional<std::string> speechArg;
     bool noCg = false;
     bool cgLearned = false;
     bool reference = false;
@@ -318,7 +318,7 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-soften";
+            || option == "-dump-rules" || option == "-speech";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -355,7 +355,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-trace") tracePath = *value;
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
-        else if (option == "-soften") softenArg = *value;
+        else if (option == "-speech") speechArg = *value;
         else if (option == "-no-cg") noCg = true;
         else if (option == "-cg-learned") cgLearned = true;
         else {
@@ -383,9 +383,9 @@ int RunMain(int argc, char** argv) {
     if (!ehndArg && config.settings.ehnd) ehndArg = config.settings.ehnd;
     reference = reference || config.settings.reference;
     misread = misread || config.settings.misread;
-    hdTrans::Soften soften = config.settings.soften;
-    if (softenArg && !hdTrans::internal::SoftenOf(*softenArg, soften)) {
-        std::fprintf(stderr, "hdtrans: --soften takes off, quotes, marked or dialogue\n");
+    hdTrans::Speech speech = config.settings.speech;
+    if (speechArg && !hdTrans::internal::SpeechOf(*speechArg, speech)) {
+        std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
         return 2;
     }
     noCg = noCg || !config.settings.cg;
@@ -522,7 +522,7 @@ int RunMain(int argc, char** argv) {
     options.reference = reference;
     options.filters = filters.get();
     options.wordImprovements.misreadFilter = misread;
-    options.soften = soften;
+    options.speech = speech;
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {

@@ -143,13 +143,10 @@ public:
                 result_.settings.useEhnd = !result_.settings.ehnd->empty();
             }
             else result_.settings.cache = std::move(path);
-        } else if (key == "soften") {
-            const bool scalar = Type() == YAML_SCALAR_EVENT;
-            const std::string value = scalar ? Lower(Scalar(event_)) : std::string();
-            if (scalar && ScalarKind(event_) == Kind::Bool && (value == "true" || value == "false")) {
-                result_.settings.soften = value == "true" ? Soften::Quotes : Soften::Off;
-            } else if (!scalar || ScalarKind(event_) != Kind::String || !SoftenOf(value, result_.settings.soften)) {
-                Error("soften: expected off, quotes, marked, dialogue or a boolean");
+        } else if (key == "speech") {
+            if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::String ||
+                !SpeechOf(Lower(Scalar(event_)), result_.settings.speech)) {
+                Error("speech: expected soft or strict");
                 return Skip();
             }
         } else if (key == "cg" || key == "misread" || key == "reference") {
@@ -203,12 +200,11 @@ private:
 
 }  // namespace
 
-bool SoftenOf(std::string_view name, Soften& out) {
-    constexpr std::pair<std::string_view, Soften> kModes[] = {
-        {"off", Soften::Off}, {"quotes", Soften::Quotes}, {"marked", Soften::Marked}, {"dialogue", Soften::Dialogue}};
-    for (const auto& [n, mode] : kModes) {
+bool SpeechOf(std::string_view name, Speech& out) {
+    constexpr std::pair<std::string_view, Speech> kLevels[] = {{"soft", Speech::Soft}, {"strict", Speech::Strict}};
+    for (const auto& [n, level] : kLevels) {
         if (n != name) continue;
-        out = mode;
+        out = level;
         return true;
     }
     return false;

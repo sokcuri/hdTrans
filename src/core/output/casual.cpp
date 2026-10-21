@@ -1,4 +1,4 @@
-// Softened speech: the plain sentence ends (다) that the rules chose for the predicates of
+// Casual speech: the plain sentence ends (다) that the rules chose for the predicates of
 // speech, mapped to the casual style (해체) so that the tense and mood the rules chose are
 // kept.
 #include <string>
@@ -170,7 +170,7 @@ std::string PastWord(std::string_view word) {
 }
 
 // The casual form of an ending text (form class and Korean), or "" when it keeps its form.
-std::string SoftEnding(std::string_view ending, bool planned, bool promised) {
+std::string CasualEnding(std::string_view ending, bool planned, bool promised) {
     if (planned && (ending == "4다" || ending == "1는다")) return promised ? "3게" : "3 거야";
     if (const std::string_view to = Find(kEndings, ending); !to.empty()) return std::string(to);
     const char c = First(ending);
@@ -246,7 +246,7 @@ char32_t Composer::QuotedEnd(int i, int last, bool nested) const {
     return U'\n';
 }
 
-void Composer::Soften(int first, int last) {
+void Composer::WriteCasual(int first, int last) {
     std::vector<ResolvedItem>& items = *items_;
     for (int i = 0; i < static_cast<int>(items.size()); i++) {
         ResolvedItem& it = items[i];
@@ -258,13 +258,11 @@ void Composer::Soften(int first, int last) {
         std::string before;
         for (int t = first; t < it.tokenIndex; t++) before += source_[t];
         before += src.substr(0, start);
-        // Speech: inside a quote at the start and at the end of the item, or a spoken line
-        // outside its quotes; not polite or old speech.
+        // Speech: inside a quote at the start and at the end of the item; not polite or old
+        // speech.
         const QuoteState at = QuotesAfter(settings_.quotes, before);
-        const int after = QuotesAfter(at, own).depth;
-        const bool quoted = at.depth > 0 && after > 0;
-        if (!quoted && !(settings_.spoken && at.depth == 0 && after == 0)) continue;
-        const std::size_t quote = quoted ? static_cast<std::size_t>(at.count) : 0;
+        if (at.depth == 0 || QuotesAfter(at, own).depth == 0) continue;
+        const std::size_t quote = static_cast<std::size_t>(at.count);
         if (settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size() &&
             (*settings_.quoteStyles)[quote] != 0) {
             continue;
@@ -325,7 +323,7 @@ void Composer::Soften(int first, int last) {
         // 주다 in 해체 (줘) reads as a request.
         if ((planned && exclaimed) || (!planned && marker == "&CJ@")) continue;
         const std::string original = it.ending.text;
-        std::string soft = SoftEnding(original, planned, planned && Promised(Clause(before + std::string(own))));
+        std::string soft = CasualEnding(original, planned, planned && Promised(Clause(before + std::string(own))));
         if (soft.empty()) continue;
         // A repeated predicate (終わった終わった) takes the same end.
         for (int j = i - 1;

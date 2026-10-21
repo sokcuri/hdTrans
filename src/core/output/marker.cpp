@@ -206,7 +206,7 @@ bool SentenceEndAfter(std::string_view after) {
 // Whether the form of key with suffix ends a clause in speech: the 아/어 form alone or with
 // 요, or the past stem with 어 or 어요 (갔어), before the punctuation of SentenceEndAfter, or
 // before a comma after a Japanese ending in a terminal form (いい、 됐어,), which a
-// connective form (なり、 되어,) is not; or anywhere when ended (a softened sentence end).
+// connective form (なり、 되어,) is not; or anywhere when ended (a casual sentence end).
 bool SpokenEnd(std::string_view key, std::string_view suffix, std::string_view after, std::string_view ending,
                bool ended) {
     const bool infinitive = key.ends_with("6") && (suffix.empty() || suffix == "요");
