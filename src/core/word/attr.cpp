@@ -4,6 +4,8 @@
 #include <algorithm>
 
 #include "core/rules/match.h"
+#include "core/text/unicode.h"
+#include "core/text/utf8.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
 #include "core/word/util.h"
@@ -171,6 +173,13 @@ bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
 
+bool Item::ClosingTsu() const {
+    if (group->surface != "っ" || !EntryText(0).empty()) return false;
+    if (next == nullptr) return true;
+    const char32_t c = text::DecodeRune(next->group->surface).cp;
+    return !text::IsLetter(c) && !text::IsDigit(c);
+}
+
 bool Item::CheckGAttr(std::string_view s, int di) {
     auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly) {
         if (c == "Ow") return IsRuleRightBoundary();
@@ -206,6 +215,8 @@ bool Item::IsRuleRightBoundary() const {
         while (n != nullptr && n->EntryText(0) != ")") n = n->next;
         if (n != nullptr) n = n->next;
     }
+    // A small っ closing the word (行くっ」) is part of its sound, not a word after it.
+    while (n != nullptr && n->ClosingTsu()) n = n->next;
     if (n == nullptr) return true;
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),

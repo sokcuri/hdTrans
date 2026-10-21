@@ -213,6 +213,9 @@ public:
     // Whether the word starts its sentence: no word before it, or only an opening bracket.
     bool StartsSentence() const;
     bool JoinsNext() const;
+    // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
+    // word or only punctuation follows.
+    bool ClosingTsu() const;
     bool CheckGAttr(std::string_view s, int di) override;
     bool MinGAttrOperation(int di, std::string_view s) override;
     bool CheckGobiSrc(std::string_view s) override;
