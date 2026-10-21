@@ -20,6 +20,7 @@ enum class ConstraintContext : uint8_t {
     Honorific,          // an honorific suffix follows, and no longer word starts with the word
     FamiliarHonorific,  // the same with くん, 君, ちゃん or たん, a name rather than a role before it
     AfterKatakana,      // the word follows katakana in its token
+    AfterMask,          // the word follows a mask character such as ○ or △ (past spaces)
     AfterExclamation,   // the word follows ！ or ？ (past spaces) and is not drawn out (とっ, とぉ)
     AfterPause,         // the same with 、 and … as well, before 奴, こと, 話 and like nouns
     LineOpening,        // only spaces and opening brackets before the word in its line, 、 after it

@@ -29,6 +29,10 @@ constexpr ConstraintRule kRules[] = {
      "한자 단어 + 경칭: 인명 뜻 말고는 지명 뜻뿐이면 인명 뜻만 (太郎殿 타로전 → 타로님)", {}},
     {"kimi-after-katakana", ConstraintWord::Source, "君", ConstraintContext::AfterKatakana, ConstraintReject::Pronoun,
      "가타카나 바로 뒤의 君은 대명사(너·네)가 아니라 접미사 군 (バカ君が 바보네가 → 바보군이)", {}},
+    {"kimito-after-mask", ConstraintWord::Source, "君と", ConstraintContext::AfterMask, ConstraintReject::OtherTargets,
+     "가린 이름(○○, △△) 바로 뒤의 君と는 너와가 아니라 군과 (△△君と 너와 → △△군과)", "군과"},
+    {"kimi-after-mask", ConstraintWord::Source, "君", ConstraintContext::AfterMask, ConstraintReject::Pronoun,
+     "가린 이름(○○, △△) 바로 뒤의 君은 대명사가 아니라 접미사 군 (××君が 너가 → ××군이)", {}},
     {"quote-after-exclamation", ConstraintWord::Source, "と", ConstraintContext::AfterExclamation,
      ConstraintReject::NonQuote, "！·？ 바로 뒤의 と는 인용 조사 라고 (ドン！と 돈! 와 → 돈! 라고)", {}},
     {"quote-tte-after-pause", ConstraintWord::Source, "って", ConstraintContext::AfterPause,
@@ -79,6 +83,9 @@ constexpr std::u32string_view kNumerals = U"0123456789０１２３４５６７�
 constexpr std::u32string_view kQuantityBreaks = U"、。，．！？!?…「」『』（）() 　";
 
 constexpr std::string_view kOpeningBrackets[] = {"「", "『", "（", "(", "“", "‘", "【", "〈", "《", "［", "["};
+
+// The characters that mask a name (○○君, △△さん).
+constexpr std::u32string_view kMasks = U"○●◯〇◎×✕＊*■□△▲◇◆";
 
 // The last characters of a predicate that a sentence-final particle follows.
 constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん"};
@@ -210,6 +217,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return c.source.size() > source.size(); });
     case ConstraintContext::AfterKatakana:
         return NameClassOf(before) == kClassKatakana;
+    case ConstraintContext::AfterMask:
+        return !previous.empty() && kMasks.find(text::DecodeRune(previous).cp) != std::u32string_view::npos;
     case ConstraintContext::AfterExclamation:
         return exclamation && !StartsWithAny(after, kDrawls);
     case ConstraintContext::AfterPause:

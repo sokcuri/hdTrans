@@ -57,6 +57,8 @@ const dict::Snapshot* Dictionary() {
          "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
          "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
          "一人\t한 사람\tN110\t\t\tGN\t41\n"
+         "君と\t군과\tN110\tQPN\t\tGN\t42\n"
+         "君と\t너와\tN110\t\t\tGN\t43\n"
          "上が\t&E6@\tM428\tXXX\t\tGN\t39\n"
          "あお\t$C2@\tH7U0\t\t\tGN\t60\n"
          "しろ\t$AD@\tH7U0\t\t\tGN\t61\n"
@@ -207,6 +209,14 @@ HD_TEST(constraint_kimi_after_katakana) {
         {"君が", "君が", "君", "너 군"},
         {"空君が", "君が", "君", "너 군"},
     });
+}
+
+// 君 and 君と right after a mask character (a masked name) are the suffix 군, not the pronoun;
+// after other text they keep both.
+HD_TEST(constraint_kimi_after_mask) {
+    CheckCases({{"君が", "君が", "君", "군"}, {"君と", "君と", "君と", "군과"}}, "△");
+    CheckCases({{"君が", "君が", "君", "군"}, {"君と", "君と", "君と", "군과"}}, "○");
+    CheckCases({{"君が", "君が", "君", "너 군"}, {"君と", "君と", "君と", "군과 너와"}}, "、");
 }
 
 // と after ！ or ？ quotes, also past a space or at the start of a chunk after one; と
