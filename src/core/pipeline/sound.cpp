@@ -144,6 +144,7 @@ struct SoundMatch {
     std::string korean;
     std::string_view root;
     bool intj = false, lead = false;
+    bool spaceAfter = false;  // a word that starts inside the match took its end
 };
 
 // Whether two sounds in a row are written apart: both have two or more syllables, and
@@ -244,32 +245,14 @@ bool AbabKey(const SoundRow& row) {
     return ko.size() >= 2 && ko.size() % 2 == 0 && ko.substr(0, ko.size() / 2) == ko.substr(ko.size() / 2);
 }
 
-// Whether the sound rows read f[at:] as exactly one AB unit.
-bool UnitIsSound(std::u32string_view f, size_t at, std::u32string_view unit, bool extra) {
-    std::string units;
-    for (const SoundRow& row : SoundRows(f[at], extra)) {
-        size_t end = 0;
-        if (MatchSound(row, f, at, end, units) && end - at == unit.size()) return true;
-    }
-    return false;
-}
-
-// The length in characters of the run of AB units at f[p:] when a plain chain of
-// sounds cannot read it: the lengthening after a unit takes the vowel that starts the
-// next (うずうずうず), an odd last unit has no sound row of its own (ドキドキドキ), or a
-// longer key splits the run (はあはあはあはあ). 0 otherwise. Pairs of units are
-// written as one block each, so no half unit is left.
-size_t AbabRun(const SoundRow& row, std::u32string_view f, size_t p, bool extra) {
+// The length in characters of the run of three or more AB units at f[p:], 0 for a
+// shorter one. Each unit is written as one half of the row's Korean (うずうずうず
+// 근질근질근질).
+size_t AbabRun(const SoundRow& row, std::u32string_view f, size_t p) {
     const std::u32string_view unit = std::u32string_view(row.key).substr(0, kAbabUnit);
     size_t n = 0;
     while (p + n + unit.size() <= f.size() && f.substr(p + n, unit.size()) == unit) n += unit.size();
-    if (n < 3 * unit.size()) return 0;
-    const size_t count = n / unit.size();
-    if (!Lengthens(unit[0], unit[1])) {
-        if (count % 2 == 0) return 0;
-        if (UnitIsSound(f, p + n - unit.size(), unit, extra)) return 0;
-    }
-    return n;
+    return n >= 3 * unit.size() ? n : 0;
 }
 
 // Scans one text for sounds and stutters.
@@ -352,8 +335,14 @@ void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) 
     }
 }
 
-// Whether a dictionary word longer than n characters starts at character p.
+// Whether a dictionary word longer than n characters, and longer than any sound read
+// there, starts at character p (うずら, not がくっ or ざっと).
 bool SoundText::LongerWordAt(size_t p, size_t n) const {
+    std::string units;
+    for (const SoundRow& s : SoundRows(f_[p], ctx_.extraBuiltin)) {
+        size_t end = 0;
+        if (MatchSound(s, f_, p, end, units)) n = std::max(n, end - p);
+    }
     size_t base = 0, user = 0, name = 0;
     LongestKeys(p, base, user, name);
     return base > n || user > n;
@@ -365,29 +354,65 @@ bool SoundText::LongerWordAt(size_t p, size_t n) const {
 bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     const SoundRow* chosen = nullptr;
     std::string units;
+    const std::u32string_view f = f_;
+    const bool ababText = p + 3 * kAbabUnit <= f.size() && f[p] != f[p + 1] &&
+                          f.substr(p, kAbabUnit) == f.substr(p + kAbabUnit, kAbabUnit) &&
+                          f.substr(p, kAbabUnit) == f.substr(p + 2 * kAbabUnit, kAbabUnit);
+    bool skipped = false;  // a shorter key was passed over; only a run may follow
     for (const SoundRow& s : SoundRows(f_[p], ctx_.extraBuiltin)) {
         const bool abab = AbabKey(s);
-        if (chosen != nullptr && s.key.size() < chosen->key.size() && !abab) break;
+        if (chosen != nullptr && s.key.size() < chosen->key.size() && !abab) {
+            if (!ababText) break;
+            skipped = true;  // a run of AB units may still outrun the key (はあはあはあはあ)
+            continue;
+        }
         size_t end = 0;
         bool ok = MatchSound(s, f_, p, end, units);
         std::string runKorean;
+        bool spaceAfter = false;
         if (ok && abab) {
-            size_t n = AbabRun(s, f_, p, ctx_.extraBuiltin);
+            const size_t plainEnd = end;
+            size_t n = AbabRun(s, f_, p);
+            // The end of a run at character e with the ー, ～ and ッ that close it
+            // (ドキドキドキドキッ, ドキドキドキドキーッ, ドキドキドキドキー).
+            const auto closed = [&](size_t e) {
+                size_t j = e;
+                while (j < f_.size() && In(f_[j], U"～ー")) j++;
+                while (j < f_.size() && f_[j] == U'ッ') j++;
+                if (j == e || (j < f_.size() && IsKana(f_[j]) && !In(f_[j], U"トテ～ー"))) return e;
+                while (j < f_.size() && In(f_[j], U"～ー")) j++;
+                return j;
+            };
             // A word that starts in the last unit and runs past it (うずら in
-            // うずうずうずら) takes that unit: the run ends before it.
-            while (n >= 3 * kAbabUnit && LongerWordAt(p + n - kAbabUnit, kAbabUnit)) n -= kAbabUnit;
+            // うずうずうずら) takes that unit: the run ends before it and the word is
+            // written apart from the run.
+            while (n >= 3 * kAbabUnit && LongerWordAt(p + n - kAbabUnit, closed(p + n) - (p + n - kAbabUnit))) {
+                n -= kAbabUnit;
+                spaceAfter = true;
+            }
             if (n >= 2 * kAbabUnit) {
-                end = p + n;
-                const size_t copies = (n / kAbabUnit + 1) / 2;
-                runKorean.assign(s.korean);
-                for (size_t i = 1; i < copies; i++) runKorean += ' ' + s.korean;
+                end = spaceAfter ? p + n : closed(p + n);
+                const std::string_view half = std::string_view(s.korean).substr(0, s.korean.size() / 2);
+                for (size_t i = 0; i < n / kAbabUnit; i++) runKorean += half;
+                const std::u32string_view tail = f.substr(p + n, end - (p + n));
+                if (tail.find_first_of(U"ー～") != std::u32string_view::npos) runKorean += '~';
+            }
+            // A run that does not end by itself is not one (タッタッタッする: タッタッタ + っする).
+            SoundMatch run;
+            run.start = p;
+            run.end = end;
+            if (runKorean.empty() || !Stopped(run)) {
+                end = plainEnd;
+                runKorean.clear();
+                spaceAfter = false;
             }
         }
+        if (skipped && runKorean.empty()) continue;
         if (ok && s.lead) {
             if (!UtteranceStart(p) || !PauseAt(end) || IsKatakanaRune(rs_[p])) continue;
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
         }
-        if (ok && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
+        if (ok && runKorean.empty() && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
             ok = false;  // a final と is the particle, not katakana ト
         }
         if (ok && (chosen == nullptr || end > best.end)) {
@@ -397,7 +422,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                                            ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)),
                                                             text::Preset::Fan)
                                            : Lengthen(Reading(s, p, end), units);
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead};
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, spaceAfter};
             chosen = &s;
         }
     }
@@ -751,7 +776,7 @@ std::string SoundText::Write() {
                     b += m.korean;
                 }
             }
-            if (Spaced(next)) b += ' ';
+            if (Spaced(next) || chain.back().spaceAfter) b += ' ';
         } else if (const size_t burst = Burst(i); burst > 0) {
             b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, burst - i)), text::Preset::Fan);
             next = burst;

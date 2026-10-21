@@ -180,17 +180,33 @@ HD_TEST(pipeline_sound) {
         {"うふふっ", "우후훗"},
         {"ぐおおおおっ", "크오오오옷"},
         // An ABAB mimetic repeated over more than its two units is read as one run and
-        // written a block for each pair of units; a single AB unit is not.
+        // written half its Korean for each unit, with no space; a single AB unit is not.
+        // A ッ that closes the run goes with it.
         {"ドキドキ", "두근두근"},
-        {"ドキドキドキ", "두근두근 두근두근"},
-        {"ドキドキドキドキ", "두근두근 두근두근"},
-        {"うずうずうず", "근질근질 근질근질"},
-        {"うずうずうずうずうず", "근질근질 근질근질 근질근질"},
-        {"わくわくわく", "두근두근 두근두근"},
+        {"ドキドキドキ", "두근두근두근"},
+        {"ドキドキドキドキ", "두근두근두근두근"},
+        {"ドキドキドキドキッ", "두근두근두근두근"},
+        {"うずうずうず", "근질근질근질"},
+        {"うずうずうずうず", "근질근질근질근질"},
+        {"うずうずうずうずうず", "근질근질근질근질근질"},
+        {"わくわくわく", "두근두근두근"},
         {"あんあんあん", "앙앙앙"},
-        {"あんあんあんあん", "앙앙 앙앙"},
-        {"はあはあはあはあ", "하아하아하아 하아"},
-        {"うずうずうずらを見る。", "근질근질 근질근질らを見る。"},
+        {"あんあんあんあん", "앙앙앙앙"},
+        {"はあはあはあ", "하아하아하아"},
+        {"はあはあはあはあ", "하아하아하아하아"},
+        {"ぶーぶーぶー", "꿀꿀꿀"},
+        {"がくがくがくがくっ", "후들후들후들후들"},
+        {"うずうずうずらを見る。", "근질근질근질らを見る。"},
+        // The first sound of a run reads on through the ッ that the next sound starts
+        // from; a sound alone still ends before the ッ of the word that follows.
+        {"はぎいっくしゅん", "하기잇 에취"},
+        {"はぎいっ", "하기잇"},
+        {"はっきりして", "はっきりして"},
+        {"ぶっ飛ぶ", "ぶっ飛ぶ"},
+        // A burst of breath said as one syllable is not a run of sounds.
+        {"ぎゃっはっ", "걋핫"},
+        {"げっほっ", "겟홋"},
+        {"くっはっ", "쿳핫"},
         // Bursts of breath stand alone; in a word they stay.
         {"かはっ……", "카핫……"},
         {"「かッハ……！」", "「캇하……！」"},

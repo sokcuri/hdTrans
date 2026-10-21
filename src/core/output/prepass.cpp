@@ -81,6 +81,15 @@ int ClassifySelected(const ResolvedItem& it) {
 
 char32_t FirstRune(std::string_view s) { return text::DecodeRune(s).cp; }
 
+// Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
+// same surface and Korean, a Korean of two equal halves (부슬부슬).
+bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
+    const std::string_view ko = EntryText(a);
+    const size_t half = ko.size() / 2;
+    return First(Code(a)) == '3' && First(Code(b)) == '3' && a.surface == b.surface && ko == EntryText(b) &&
+           half > 0 && ko.size() % 2 == 0 && ko.substr(0, half) == ko.substr(half);
+}
+
 bool HasRune(std::u32string_view set, char32_t r) { return set.find(r) != std::u32string_view::npos; }
 
 // A character after which a word may start: a space, punctuation other than a closing
@@ -439,6 +448,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (!allowSpacing) return Result(std::move(t), false);
     }
     const std::string_view nextEntry = EntryText(next);
+    if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
     if (!Contains(nextTags, "Tu")) {
