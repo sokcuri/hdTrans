@@ -40,6 +40,8 @@ const dict::Snapshot* Dictionary() {
          "さん\t씨\tN110\t\t\tGN\t20\n"
          "と\t(와)과\tP200\t\t\tGN\t21\n"
          "と\t(이)라고\tP200\t\t\tGN\t22\n"
+         "と、\t(와)과\tP201\t\t\tGN\t85\n"
+         "と、\t라고\tP200\t\t\tGN\t86\n"
          "が\t(이)가\tP200\t\t\tGN\t23\n"
          "ドン\t쾅\tN110\t\t\tGN\t24\n"
          "音\t소리\tN110\t\t\tGN\t25\n"
@@ -135,7 +137,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{24});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{25});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -231,6 +233,7 @@ HD_TEST(constraint_quote_after_exclamation) {
         {"うわ！ととと", "ととと", "と", "(와)과 (이)라고"},
     });
     CheckCases({{"と音が", "と音が", "と", "(이)라고"}}, "！");
+    CheckCases({{"ドン！と、音が", "と、音が", "と、", "라고"}, {"ドンと、音が", "と、音が", "と、", "(와)과 라고"}});
     CheckCases({{"と音が", "と音が", "と", "(와)과 (이)라고"}}, "、");
 }
 
