@@ -89,8 +89,9 @@ void ParticleInNext(Flusher& f);
 void JiBeforeJiman(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
-// A quoted offer that ends its sentence (教えてやるよ, 手伝ってあげます) reads as a promise
-// (가르쳐 줄게, 도와 드릴게요), or 주마 in old or haughty speech.
+// An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
+// 手伝ってあげます), reads as a promise (가르쳐 줄게, 도와 드릴게요), or 주마 in old or
+// haughty speech.
 void OfferPromise(Flusher& f);
 void ComitativeTo(Flusher& f);
 void NounTo(Flusher& f);

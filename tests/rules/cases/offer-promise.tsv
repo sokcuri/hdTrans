@@ -7,3 +7,6 @@ rewrite:offer-promise	「褒美をくれてやる」	「포상을 주마」	fix	
 rewrite:offer-promise	「わしが稽古をつけてやろう」	「내가 가르침을 주마」	fix	rewrites
 rewrite:offer-promise	「昨日、教えてやったよ」	「어제, 가르쳐 줬어」	keep	rewrites
 rewrite:offer-promise	毎晩、弟に本を読んでやる。	매일 밤, 남동생에게 책을 읽어 준다.	keep	rewrites
+rewrite:offer-promise	宿題なら教えてやるよ。	숙제라면 가르쳐 줄게.	fix	rewrites
+rewrite:offer-promise	仕方ない、手伝ってやるわ。	어쩔 수 없다, 도와 줄게.	fix	rewrites
+rewrite:offer-promise	妹にも分けてあげてね。	여동생에게도 나누어 줘.	keep	rewrites

@@ -1151,8 +1151,19 @@ void OfferPromise(Flusher& f) {
                             (humble && ending == "ましょう");
         const bool plain = ending == "る" || ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" ||
                            ending == "ぜ" || ending == "ぞ" || ending == "ろう" || ending == "よう" || ending == "のじゃ";
+        // The verb itself ends in る, ろう, よう or ます: not the request あげてね, やってよ.
+        const std::string_view tail = it->text.substr(
+            std::min(it->text.size(), static_cast<std::size_t>(it->start) + it->group->surface.size()));
+        if (!tail.starts_with("る") && !tail.starts_with("ろう") && !tail.starts_with("よう") && !tail.starts_with("ま") &&
+            !tail.starts_with("のじゃ")) {
+            continue;
+        }
+        // A final particle marks speech outside brackets too (a line of dialogue).
+        const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
+                            ending == "ぞ";
         int open = 0, close = 0;
-        if ((!polite && !plain) || !QuoteAround(f.w, it->tokenIndex, open, close)) continue;
+        if (!polite && !plain) continue;
+        if (!QuoteAround(f.w, it->tokenIndex, open, close) && !spoken) continue;
         if (polite && humble) {
             it->AssignDirectSlot(it->DirectIndex(), "1겠습니다");
             continue;
