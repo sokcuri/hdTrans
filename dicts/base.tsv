@@ -34947,8 +34947,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 どうきが	가슴이 두근거&AA@	M429			GN				jisjk:146614		
 どうけ	익살을 부&AA@	M427			GN				jisjk:146621		
 どうけいのまと	동경의 대상	N110	VHn		GN				jisjk:153812		
-どうこう	동공	N110			GN				jisjk:265313		
-どうこう	동공	E110			GN				jisjk:265314		
+どうこう	이러쿵저러쿵	N110			GN				jisjk:265313		
+どうこう	이러쿵저러쿵	E110			GN	5204	||1 &&2 ||2 ||4 S+1== "Lし" S+1== "Lす" S+1== "Lで" S+1== "Lさ" &&2 ||2 S+1== "は" S+1== "も" ||4 S+2== "Lし" S+2== "Lす" S+2== "Lで" S+2== "Lさ" D+0= "어떻게"	する, できる, させる(앞에 は, も가 끼어도) 앞의 どうこう를 어떻게로 바꾼다.	jisjk:265314		
 どうこうしよう	이렇게 저렇게 하자	A9D0			GN				jisjk:263804		
 どうこう言	이러니저러니 말&AV@	M420			GN				jisjk:143829		
 どうこく	통곡	I110			GN				jisjk:112858		
@@ -113576,7 +113576,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 予備借金対照表	예비차금 대조표	N110			BZ				jisjk:360442		
 予備学生	예비 학생	N110	VHn		GN				jisjk:255392		
 予備役	예비역	I110	VHnUQf		GN				jisjk:78476		
-予備校	예비학교	I110	VGt		GN				jisjk:78475		
+予備校	입시학원	I110	VGt		GN				jisjk:78475		
 予備株券	예비주권	N110			BZ				jisjk:360443		
 予備的	예비적	N110			GN				jisjk:156223		
 予備知識	예비 지식	N110	UTh		GN				jisjk:156221		
@@ -277171,7 +277171,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 画期	획기	N110	UMe		GN				jisjk:39512		
 画期的	획기적%D4@	G8U0			GN				jisjk:119575		
 画期的に	획기적으로	E300			GN				jisjk:263005		
-画材	소재	N110			GN				jisjk:171364		
+画材	화구	N110			GN				jisjk:171364		
 画板	화판	N110	VSpVPl		GN				jisjk:39532		
 画架	화가	N110			GN				jisjk:39509		
 画業	화가의 업적	N110			GN				jisjk:171205		

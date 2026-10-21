@@ -52,3 +52,10 @@ dict:jisjk:964	なんとなく窓の外を眺めた。	왠지 창 밖을 바라�
 dict:word:nantonaku:vaguely	なんとなくわかる気がする。	rule:dict:word:nantonaku:vaguely=어렴풋이	fix	local
 dict:word:nantonaku:vaguely	なんとなく嫌な予感がする。	!rule:dict:word:nantonaku:vaguely	keep	local
 dict:word:nantonaku:vaguely-kanji	何となく分かっていた。	rule:dict:word:nantonaku:vaguely-kanji=어렴풋이	fix	local
+phrase:なぞる	指で地図をなぞった。	손가락으로 지도를 더듬었다.	fix	lookup
+phrase:なぞる	昔の記憶をなぞる。	옛 기억을 더듬는다.	fix	lookup
+phrase:秘所	彼女の秘所に触れる。	그녀의 은밀한 곳에 접한다.	fix	lookup
+dict:jisjk:265314	僕にどうこうできる話じゃない。	나에게 어떻게 할 수 있는 이야기가 아니다.	fix	local
+dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 말아라.	keep	local
+dict:jisjk:78475	兄は予備校に通っている。	형은 입시학원에 다니고 있다.	fix	lookup
+dict:jisjk:171364	画材を買いに行く。	화구를 사러 간다.	fix	lookup
