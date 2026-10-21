@@ -14,3 +14,9 @@ dict:san-role:1	店員さんを呼んだ。	점원을 불렀다.	keep	local
 dict:san-role:1	先生さん	선생님	fix	local
 dict:san-role:1	田中さん	타나카씨	keep	local
 phrase:今のは	「……！　……今のは」	「……! ……방금 그건」	fix	builtin-phrase
+names:name-line	高峰	타카미네	fix	normalize
+names:name-line	小太刀	코다치	fix	normalize
+names:name-line	慶	케이	fix	normalize
+names:name-line	愛	애	keep	normalize
+names:name-line	クマ	곰	keep	normalize
+names:name-line	糸	실	keep	normalize

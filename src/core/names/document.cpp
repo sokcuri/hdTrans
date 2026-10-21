@@ -17,6 +17,8 @@
 #include "core/names/registry.h"
 #include "core/pipeline/normalize.h"
 #include "core/dict/builtin.h"
+#include "core/dict/char_readings.h"
+#include "core/text/utf8.h"
 #include "core/text/lines.h"
 #include "core/userdict/userdict.h"
 
@@ -347,6 +349,59 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     return doc;
 }
 
+namespace {
+
+std::string Utf8Of(char32_t c) {
+    std::string out;
+    text::AppendRune(out, c);
+    return out;
+}
+
+// A line that is one name and nothing else, as a game's name box writes the speaker: a run
+// of kanji with a person reading, read as that person (筧 카케이).
+std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line) {
+    const std::string_view t = names::internal::TrimLineSpace(line);
+    const std::size_t runes = names::internal::RuneCount(t);
+    if (runes == 0 || runes > 6) return std::nullopt;
+    if (!names::internal::AllRunes(t, names::internal::IsKanji)) return std::nullopt;
+    std::string surname, given;  // the first person readings of each kind
+    bool word = false;           // a noun of its own beyond the kanji's Sino-Korean reading
+    auto person = [&](const dict::Codes* codes, std::string_view target) {
+        if (codes == nullptr || !codes->sem.Text().starts_with("QPN") || !names::internal::IsHangulText(target)) return;
+        std::string& slot = codes->gram.Text().starts_with("Wa") ? surname : given;
+        if (slot.empty()) slot = std::string(target);
+    };
+    auto noun = [&](const dict::Codes* codes, std::string_view target) {
+        if (codes == nullptr || codes->sem.Text().starts_with("QPN") || codes->sem.Text().starts_with("QCT")) return;
+        const char tag = codes->partText.empty() ? 0 : codes->partText[0];
+        if (tag != 'N' && tag != 'I') return;
+        if (runes == 1) {
+            const std::optional<char32_t> sino = dict::Written(text::DecodeRune(t).cp);
+            if (sino && target == Utf8Of(*sino)) return;
+        }
+        word = true;
+    };
+    for (const dict::Candidate& c : snap.RetrieveRecords(t, dict::LookupMode::General)) {
+        person(c.codes, c.target);
+        noun(c.codes, c.target);
+    }
+    for (const dict::Record& rec : snap.NameRecords(t)) person(rec.codes, rec.target);
+    for (const dict::UserEntry* e : snap.TextPlain().Search(t, dict::LookupMode::General)) {
+        if (e->key == t && !e->nameLayer) noun(e->codes, e->target);
+    }
+    // A surname of two kanji or more names the speaker though it is a word too (高峰
+    // 타카미네); a given name or a single kanji only where it is no word (朔夜, 慶; 未来,
+    // 輪廻 and 愛 stay words).
+    std::string name;
+    if (!surname.empty() && (runes > 1 || !word)) name = surname;
+    else if (!given.empty() && !word) name = given;
+    if (name.empty()) return std::nullopt;
+    const std::size_t at = line.find(t);
+    return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
+}
+
+}  // namespace
+
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
@@ -367,6 +422,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.persons = internal::PersonPlaces(*doc.snap, facts.text, doc.registry.get(), &doc.persons_);
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
+    if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     return facts;
 }
