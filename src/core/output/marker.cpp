@@ -2,6 +2,7 @@
 // neighbours.
 #include <cstdint>
 #include "core/output/compose.h"
+#include "core/output/inflect.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
@@ -201,6 +202,22 @@ std::string DropRieulBefore(std::string form, std::string_view suffix) {
     form.resize(form.size() - 3);
     text::AppendRune(form, text::SetFinal(last.cp, 0));
     return form;
+}
+
+// 구나 and 군 follow a verb's 는 form (가는구나, 모르는구나) but an adjective's stem (다르구나),
+// whichever part of speech the Japanese word has. key is a family marker and a form code:
+// '&' families use the verb codes ('0' 는, '1' stem), '$' and '%' the adjective codes ('4'
+// 는, '1' stem). 있다, 없다 and the copula keep the form their row gives.
+void ExclamationForm(std::string& key, std::string_view suffix) {
+    if (key.size() != 5 || !(suffix.starts_with("구나") || suffix.starts_with("군"))) return;
+    const auto* family = internal::FindKoreanFamily(std::string_view(key).substr(0, 4));
+    if (!family || family->inflectionClass == internal::InflectionClass::Existential ||
+        family->inflectionClass == internal::InflectionClass::Copula || (family->flags & internal::kBareDeclarative)) {
+        return;
+    }
+    const char neun = key[0] == '&' ? '0' : '4';
+    if (key[4] != neun && key[4] != '1') return;
+    key[4] = family->partOfSpeech == internal::KoreanPartOfSpeech::Verb ? neun : '1';
 }
 
 // The text of the first item after item i that has one (a dropped ぉ has none); "." after the
@@ -513,6 +530,7 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 key += c.head;
                 suffix = std::string(c.tail);
             }
+            ExclamationForm(key, suffix);
             if (!Contains(key, "&CJ@") || !Contains(suffix, kKoJuseyo)) {
                 replacement = LookupSource(key, *generated_);
             } else {
@@ -616,6 +634,7 @@ void Composer::BuildAdjective(int i) {
     const auto [cls, rest] = FirstByte(suffixView);
     key += cls;
     std::string suffix(rest);
+    ExclamationForm(key, suffix);
     switch (selectedClass) {
         case '7': replacement = LookupDollar(key, *generated_); break;
         case '8': replacement = LookupPercent(key, *generated_); break;

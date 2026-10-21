@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+compose:kuna-adjective	本当は違うのね。	사실은 다르구나.	fix	compose
+compose:kuna-adjective	答えが違うんだな。	대답이 다르구나.	fix	compose
+compose:kuna-verb	何も知らないのね。	아무것도 모르는구나.	fix	compose
+compose:kuna-verb	もう帰るのね。	이제 돌아가는구나.	fix	compose
+compose:kuna-existential	まだいるのね。	아직 있는구나.	keep	compose
+builtin-ending:nanone	ずいぶん静かなのね。	꽤 조용하구나.	fix	builtin-ending
+builtin-ending:nanone	あなた、学生なのね。	당신, 학생이구나.	fix	builtin-ending
+builtin-ending:nanone	甘いものが好きなのね。	단 것을 좋아하는구나.	fix	builtin-ending
+builtin-ending:none	もう見たのね。	벌써 보았구나.	fix	builtin-ending
+builtin-ending:none	まだ覚えてるのね。	아직 기억하고 있구나.	fix	builtin-ending
+builtin-ending:none	そうだったのね。	그랬구나.	fix	builtin-ending
+builtin-ending:ze	俺も行くぜ！	나도 간다!	fix	builtin-ending
+builtin-ending:ze	ここで待ってるぜ。	여기서 기다리고 있다.	fix	builtin-ending
+builtin-ending:ze	こいつは最高だぜ！	이 녀석은 최고다!	fix	builtin-ending
+lookup:ze-question	そろそろ茹でるぜ？	슬슬 데치지?	fix	lookup
+lookup:nee	よく食べるねえ。	잘 먹네.	fix	lookup

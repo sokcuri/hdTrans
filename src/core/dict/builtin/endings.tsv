@@ -437,6 +437,29 @@
 静かなんだな	조용하구나	end	prio=-1
 学生なんだな	학생이구나	end	prio=-1
 学生だったんだな	학생이었구나	end	prio=-1
+// のね ending a sentence: 구나
+書くのね	쓰는구나	end	prio=-1
+書いたのね	썼구나	end	prio=-1
+書いてるのね	쓰고 있구나	end	prio=-1
+書いてたのね	쓰고 있었구나	end	prio=-1
+書かないのね	쓰지 않는구나	end	prio=-1
+書かなかったのね	쓰지 않았구나	end	prio=-1
+高いのね	높구나	end	prio=-1
+高かったのね	높았구나	end	prio=-1
+高くないのね	높지 않구나	end	prio=-1
+静かなのね	조용하구나	end	prio=-1
+静かだったのね	조용했구나	end	prio=-1
+学生なのね	학생이구나	end	prio=-1
+学生だったのね	학생이었구나	end	prio=-1
+// ぜ ending a sentence: the plain declarative
+書くぜ	쓴다	end	prio=-1
+書いたぜ	썼다	end	prio=-1
+書いてるぜ	쓰고 있다	end	prio=-1
+書いてたぜ	쓰고 있었다	end	prio=-1
+書かないぜ	쓰지 않는다	end	prio=-1
+高いぜ	높다	end	prio=-1
+静かだぜ	조용하다	end	prio=-1
+学生だぜ	학생이다	end	prio=-1
 書くよな	쓰지	end	prio=-1
 書いたよな	썼지	end	prio=-1
 書いてるよな	쓰고 있지	end	prio=-1
