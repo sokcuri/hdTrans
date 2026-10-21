@@ -332,6 +332,14 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/missing\ncache: off\n");
     Check(hdTrans_Reload() == -1, "failed reload");
     Check(Translate("猫") == "야옹이", "failed reload retains dictionaries");
+    std::filesystem::create_directories(fixtures / "soft", error);
+    Write(fixtures / "soft/base.tsv", header + "高\t$D3@\tH7N0\t\t\tGN\t\t\t\t\t1\nい\t1다\tT500\t\t\tGN\t\t\t\t\t2\n");
+    Write(config, "dicts: fixtures/soft\nuserdict: ''\nehnd: ''\ncache: off\n");
+    Check(hdTrans_Reload() == 0, "reload soften dictionary");
+    Check(Translate("「高い」") == "「높아」", "quoted speech softens by default");
+    Write(config, "dicts: fixtures/soft\nuserdict: ''\nehnd: ''\ncache: off\nsoften: off\n");
+    Check(hdTrans_Reload() == 0, "reload soften off");
+    Check(Translate("「高い」") == "「높다」", "configured soften off");
     hdTrans_Terminate();
 
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: cache\n");

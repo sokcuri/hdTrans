@@ -169,12 +169,13 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.cases.themes COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases")
         # The speech modes other than the default: tests/rules/soften-<mode>/<theme>.tsv.
-        foreach(mode marked dialogue)
+        foreach(mode off marked dialogue)
             add_test(NAME rules.cases.soften-${mode} COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/soften-${mode}" -- --soften ${mode})
         endforeach()
-        set_tests_properties(rules.cases rules.cases.themes rules.cases.soften-marked rules.cases.soften-dialogue
+        set_tests_properties(rules.cases rules.cases.themes rules.cases.soften-off rules.cases.soften-marked
+            rules.cases.soften-dialogue
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""

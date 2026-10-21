@@ -276,6 +276,29 @@ try {
     translator.close();
     independent.close();
 }
+{
+    // 高い as 높다: quoted speech softens to 높아 unless soften is off.
+    engine.FS.mkdir('/soft');
+    engine.FS.writeFile('/soft/base.tsv', 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n'
+        + '高\t$D3@\tH7N0\t\t\tGN\t0\t1\nい\t1다\tT500\t\t\tGN\t0\t2\n');
+    const soft = await HdTrans.init({ module: engine, directories: ['/soft'] });
+    const plain = await HdTrans.init({ module: engine, directories: ['/soft'], soften: 'off' });
+    try {
+        assert.equal(soft.translate('「高い」'), '「높아」');
+        assert.equal(soft.translate('「高い」', { soften: 'off' }), '「높다」');
+        assert.equal(soft.translate('「高い」'), '「높아」', 'a per-call mode applies to that call only');
+        assert.equal(soft.translate('高い。', { soften: 'dialogue' }), '높아.');
+        soft.setSoften('off');
+        assert.equal(soft.translate('「高い」'), '「높다」');
+        assert.throws(() => soft.setSoften('always'), /soften takes off, quotes, marked or dialogue/);
+        assert.equal(soft.translate('「高い」'), '「높다」', 'a rejected mode keeps the current one');
+        assert.equal(plain.translate('「高い」'), '「높다」');
+    } finally {
+        soft.close();
+        plain.close();
+    }
+    console.log('PASS wasm smoke: soften modes, per-call option');
+}
 translator.close();
 assert.deepEqual(translator.getInfo(), info);
 assert.equal(translator.version, info.version);

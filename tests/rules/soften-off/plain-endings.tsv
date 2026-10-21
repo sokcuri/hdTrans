@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+compose:soften-off	「それは本当に違う」	「그것은 정말로 다르다」	keep	compose
+compose:soften-off	「明日、海に行く」	「내일, 바다에 간다」	keep	compose
+compose:soften-off	「今日は朝から雨だ」	「오늘은 아침부터 비다」	keep	compose
+compose:soften-off	「窓を開けておいてよ」	「창을 열어 둬」	keep	compose
+compose:soften-off	「何だ？」	「뭐야?」	keep	compose
+compose:soften-off	「手紙を書いてくれと頼んだ」	「편지를 써 달라고 부탁했다」	keep	compose
+compose:soften-off	行くんですよ。	가는 거예요.	keep	compose
+compose:soften-off	彼は窓の外を見た。	그는 창 밖을 보았다.	keep	compose
