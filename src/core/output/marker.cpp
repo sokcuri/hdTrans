@@ -186,6 +186,23 @@ std::string NotForm(std::string_view s) {
     return std::string(s);
 }
 
+// Form 2 keeps a final ㄹ for 면, 러 and 려; before ㄴ, ㅂ, ㅅ and 오 the ㄹ drops (길니까 → 기니까).
+std::string DropRieulBefore(std::string form, std::string_view suffix) {
+    constexpr int kRieulFinal = 8, kNieunInitial = 2, kBieupInitial = 7, kSiotInitial = 9;
+    if (form.size() < 3 || suffix.empty()) return form;
+    const text::Rune last = text::DecodeRune(std::string_view(form).substr(form.size() - 3));
+    const auto stem = text::Split(last.cp);
+    const auto next = text::Split(text::DecodeRune(suffix).cp);
+    if (last.size != 3 || !stem || !next || stem->final != kRieulFinal) return form;
+    if (next->initial != kNieunInitial && next->initial != kBieupInitial && next->initial != kSiotInitial &&
+        text::DecodeRune(suffix).cp != U'오') {
+        return form;
+    }
+    form.resize(form.size() - 3);
+    text::AppendRune(form, text::SetFinal(last.cp, 0));
+    return form;
+}
+
 // The text of the first item after item i that has one (a dropped ぉ has none); "." after the
 // last item.
 std::string_view TextAfter(const std::vector<ResolvedItem>& items, int i) {
@@ -643,6 +660,7 @@ void Composer::BuildAdjective(int i) {
             }
         }
     }
+    if (key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
     sc.text = Cat({stem, replacement, suffix});
 }
 

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+compose:rieul-drop	この坂は長いから。	이 비탈은 기니까.	fix	compose
+compose:rieul-drop	あの店は遠いから。	그 가게는 머니까.	fix	compose
+compose:rieul-drop	この坂は長ければ休もう。	이 비탈은 길면 쉬자.	keep	compose
