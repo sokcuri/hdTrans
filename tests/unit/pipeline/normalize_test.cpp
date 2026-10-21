@@ -39,6 +39,7 @@ HD_TEST(pipeline_normalize_forms) {
         {"ﾍﾟﾎﾞﾍﾞ"sv, "ペボベ"sv},
         {"x\xffy"sv, "x\xffy"sv},
         {"ｶ"sv, "カ"sv},
+        {"待って‼ えっ⁉ 何⁈ うっ‼\uFE0E"sv, "待って！！ えっ！？ 何？！ うっ！！"sv},
     };
     Check(NormalizeForms, cases);
 }
@@ -56,9 +57,10 @@ HD_TEST(pipeline_join_nasai) {
 }
 
 HD_TEST(pipeline_join_masu) {
+    // \uE005 encloses the pause marks written back after the ending (kDrawlMark).
     const Case cases[] = {
         {"ござい、ます"sv, "ございます"sv},
-        {"頑張り…ます！"sv, "頑張ります！"sv},
+        {"頑張り…ます！"sv, "頑張ります\uE005…\uE005！"sv},
         {"い、ました。"sv, "いました。"sv},
         {"い、ますか"sv, "い、ますか"sv},
         {"し、ません"sv, "しません"sv},
@@ -66,8 +68,81 @@ HD_TEST(pipeline_join_masu) {
         {"い、ますー"sv, "い、ますー"sv},
         {"い、ますッ"sv, "い、ますッ"sv},
         {"み、、ましたね"sv, "み、、ましたね"sv},
+        {"いただきま…す。"sv, "いただきます\uE005…\uE005。"sv},
+        {"いただきま・・・す"sv, "いただきます\uE005・・・\uE005"sv},
+        {"いただきま・す"sv, "いただきます"sv},
+        {"行きま―した！"sv, "行きました\uE005―\uE005！"sv},
+        {"寝ま‥せん"sv, "寝ません\uE005‥\uE005"sv},
+        {"行きまっす！"sv, "行きます！"sv},
+        {"頑張りまーっす"sv, "頑張ります"sv},
+        {"いただきまス"sv, "いただきます"sv},
+        {"いただきまーす"sv, "いただきまーす"sv},
+        {"行きまっした"sv, "行きまっした"sv},
+        {"まっすぐ"sv, "まっすぐ"sv},
+        {"いま…すぐ"sv, "いま…すぐ"sv},
+        {"最低……で……す"sv, "最低……です\uE005……\uE005"sv},
+        {"好き・・・で・・・す！"sv, "好き・・・です\uE005・・・\uE005！"sv},
+        {"元気でっす"sv, "元気です"sv},
+        {"そうで…しょう？"sv, "そうでしょう\uE005…\uE005？"sv},
+        {"ここで…した"sv, "ここで…した"sv},
+        {"で、すぐ"sv, "で、すぐ"sv},
+        {"雨でーす"sv, "雨でーす"sv},
+        // After a pause of …‥・―─ only, a sentence particle may follow the ending.
+        {"行きま…すか？"sv, "行きますか\uE005…\uE005？"sv},
+        {"鳴いて…ますね。"sv, "鳴いてますね\uE005…\uE005。"sv},
+        {"守れ……ましたか？"sv, "守れましたか\uE005……\uE005？"sv},
+        {"運びま…しょうか？"sv, "運びましょうか\uE005…\uE005？"sv},
+        {"そうで……すよね"sv, "そうですよね\uE005……\uE005"sv},
+        {"行き…ましょう！"sv, "行きましょう\uE005…\uE005！"sv},
+        {"行きま…すかな"sv, "行きま…すかな"sv},
+        // A restarted word after 、 (a stutter or the particle で), and the word いま or 今ま.
+        {"ここで…す、すみません！"sv, "ここで…す、すみません！"sv},
+        {"学校で……す、すごい"sv, "学校で……す、すごい"sv},
+        {"家で…す、好き"sv, "家で…す、好き"sv},
+        {"今ま…す、すぐに"sv, "今ま…す、すぐに"sv},
+        {"いま、した。"sv, "いま、した。"sv},
+        {"そうで…す、はい。"sv, "そうです\uE005…\uE005、はい。"sv},
+        {"していま…す。"sv, "しています\uE005…\uE005。"sv},
+        {"そうで…すねた"sv, "そうで…すねた"sv},
     };
     Check(JoinMasu, cases);
+}
+
+HD_TEST(pipeline_join_paused_copula) {
+    // \uE006 encloses the marks of a pause before です or でしょう, \uE007 before でした.
+    const Case cases[] = {
+        {"好き……です"sv, "好きです\uE006……\uE006"sv},
+        {"静か…ですね。"sv, "静かですね\uE006…\uE006。"sv},
+        {"いい…ですか？"sv, "いいですか\uE006…\uE006？"sv},
+        {"二度寝…でしょうか？"sv, "二度寝でしょうか\uE006…\uE006？"sv},
+        {"静か――でした。"sv, "静かでした\uE007――\uE007。"sv},
+        {"カレー・・・です"sv, "カレーです\uE006・・・\uE006"sv},
+        {"好き……です\uE005……\uE005"sv, "好きです\uE006……\uE006\uE005……\uE005"sv},
+        // Other marks, a following kana, no word before, a case particle or a request form.
+        {"元気、ですね"sv, "元気、ですね"sv},
+        {"かい・です"sv, "かい・です"sv},
+        {"そう…ですって"sv, "そう…ですって"sv},
+        {"……ですが"sv, "……ですが"sv},
+        {"私が…ですか？"sv, "私が…ですか？"sv},
+        {"お任せください……です。"sv, "お任せください……です。"sv},
+        {"2300…です"sv, "2300…です"sv},
+        // A particle, filler or conjunction before the pause.
+        {"えっと……ですね"sv, "えっと……ですね"sv},
+        {"つまり……ですね"sv, "つまり……ですね"sv},
+        {"それは……ですね"sv, "それは……ですね"sv},
+        {"今日は……ですね、雨です"sv, "今日は……ですね、雨です"sv},
+        {"うーん……ですね"sv, "うーん……ですね"sv},
+        {"だから……です"sv, "だから……です"sv},
+        {"学校から…です"sv, "学校から…です"sv},
+        {"私の…です"sv, "私の…です"sv},
+        {"はい……です"sv, "はい……です"sv},
+        // Kana after a kanji, an adjective in い or a predicate word in kana.
+        {"頑張ったの…です"sv, "頑張ったのです\uE006…\uE006"sv},
+        {"沈むん……ですか？"sv, "沈むんですか\uE006……\uE006？"sv},
+        {"すごい…ですね"sv, "すごいですね\uE006…\uE006"sv},
+        {"そう……ですか"sv, "そうですか\uE006……\uE006"sv},
+    };
+    Check(JoinPausedCopula, cases);
 }
 
 HD_TEST(pipeline_spoken_forms) {
@@ -122,10 +197,23 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"「えー…？」"sv, "「えっ…？」"sv},
         {"じゃあどっち"sv, "じゃあ、どっち"sv},
         {"じゃあね"sv, "じゃあね"sv},
-        {"あれ！あれ、"sv, "あれっ！あれ、"sv},
+        {"あれ！あれ、"sv, "あれっ！あれっ、"sv},
+        {"「え？…え？」"sv, "「えっ？…えっ？」"sv},
+        {"「へ……え？」"sv, "「へ……えっ？」"sv},
+        {"「……て、…ええ…？」"sv, "「……て、…えっ…？」"sv},
+        {"そうですね…え、"sv, "そうですね…え、"sv},
+        {"考え？"sv, "考え？"sv},
         {"。　あれ…"sv, "。　あれっ…"sv},
         {"\x0aえ、"sv, "\x0aえっ、"sv},
         {"じゃあ"sv, "じゃあ"sv},
+        {"「え――本当？」"sv, "「えっ――本当？」"sv},
+        {"あれ─"sv, "あれっ─"sv},
+        {"「ええ――」"sv, "「ええ――」"sv},
+        // The pronoun あれ before a particle.
+        {"あれ――は何だ？"sv, "あれ――は何だ？"sv},
+        {"あれ―は誰？"sv, "あれ―は誰？"sv},
+        {"あれ……が欲しい"sv, "あれ……が欲しい"sv},
+        {"え――はい"sv, "えっ――はい"sv},
     };
     Check(RewriteInterjections, cases);
 }
@@ -150,6 +238,27 @@ HD_TEST(pipeline_rewrite_casual) {
         {"みんなよ"sv, "みんなよ"sv},
         {"見てねぇな"sv, "見ていないな"sv},
         {"わかんねぇ"sv, "わからない"sv},
+        {"やらねぇよ"sv, "やらないよ"sv},
+        {"やらねー"sv, "やらない"sv},
+        {"聞き捨てならねぇな"sv, "聞き捨てならないな"sv},
+        {"しなきゃならねえんだ"sv, "しなきゃならないんだ"sv},
+        {"気にならねえ相手"sv, "気にならない相手"sv},
+        {"やらねぇ。"sv, "やらない。"sv},
+        {"君ならねぇ、"sv, "君ならねぇ、"sv},
+        {"君ならねぇかな"sv, "君ならねぇかな"sv},
+        {"よくならねぇ。"sv, "よくならない。"sv},
+        {"行くならねぇ、俺も行く"sv, "行くならねぇ、俺も行く"sv},
+        {"お前とならねぇ、どこへでも"sv, "お前とならねぇ、どこへでも"sv},
+        {"君にならねぇ、話せる"sv, "君にならねぇ、話せる"sv},
+        {"田中にならねぇ、話せる"sv, "田中にならねぇ、話せる"sv},
+        {"気にならねぇ、そんなの"sv, "気にならない、そんなの"sv},
+        {"何やらねぇ、変な音"sv, "何やらねぇ、変な音"sv},
+        {"どうやらねぇ、雨"sv, "どうやらねぇ、雨"sv},
+        {"しなきゃならねぇ、"sv, "しなきゃならない、"sv},
+        {"やらなきゃならねぇ…"sv, "やらなきゃならない…"sv},
+        {"話にならねぇ、帰れ"sv, "話にならない、帰れ"sv},
+        {"よくならねぇ、全然"sv, "よくならない、全然"sv},
+        {"しなきゃならねぇ　"sv, "しなきゃならない　"sv},
         {"渡しちまった"sv, "渡しちゃった"sv},
         {"飲んじまえ"sv, "飲んじゃえ"sv},
         {"どうしろっつーんだよ"sv, "どうしろというんだよ"sv},
@@ -258,6 +367,12 @@ HD_TEST(pipeline_normalize_sequence) {
     const Case text[] = {
         {"|お兄様《おにいさま》、ｺﾞﾒﾝ、なさい"sv, "|お兄様《おにいさま》、ゴメンなさい"sv},
         {"ごめん…なさい、ござい、ます"sv, "ごめんなさい、ございます"sv},
+        // The time is read before a pause before です is joined.
+        {"マルフタマルマル…です"sv, "0200…です"sv},
+        {"好き……で……す"sv, "好きです\uE006……\uE006\uE005……\uE005"sv},
+        // Private use characters of the input are escaped and so never read as marks.
+        {"ボタン\uE005を押す"sv, "ボタン\U000F0005を押す"sv},
+        {"a\uE005…\uE005"sv, "a\U000F0005…\U000F0005"sv},
     };
     for (const Case& c : text) HD_CHECK_EQ(Normalize(c.in, LineContext{.document = false, .female = false}), std::string(c.want));
 }

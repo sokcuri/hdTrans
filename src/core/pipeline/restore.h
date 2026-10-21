@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // DropParticleMarks(WriteStutters(WriteDropped(String(korean))))
+    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteLengthening(WriteEmphasis(...))))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -51,12 +51,38 @@ std::string KoreanCleanup(std::string_view s);
 // not render) written in Hangul as heard (internal::ReadKana).
 std::string WriteDropped(std::string_view s);
 
-// Each stutter mark U+E000 and the separator after it (、 ， or a run of … ‥ or of two or
-// more ・) written as the next syllable of the text without its final and the
-// separator, 、 and ， as ", " (U+E000、어이 -> 어, 어이). Spaces before a mark at the
+// Each stutter mark U+E000 and the separator after it (、 ， or a run of … ‥ ― ─ — or of
+// two or more ・) written as the next syllable of the text without its final and the
+// separator, 、 and ， as ", " (U+E000、어이 -> 어, 어이). A run of k marks and r
+// kStutterRest marks writes the share k/(k+r) of the next word's syllables, at least one
+// and short of the whole word, with their finals (ごめ、 미안, of 미안해요). Spaces before a mark at the
 // start of the line or after an opening bracket are dropped; a mark with no syllable
 // after it (past spaces, marks and separators) is dropped with its separator.
 std::string WriteStutters(std::string_view s);
+
+// Each drawl span (a drawl mark, pause marks, the same mark) after a Hangul word written as
+// its marks, in the Korean form of the tokenizer (・ ·), inside the word. For kDrawlMark
+// they go before the polite ending: before 습니다 습니까 읍시다, else 니다 니까 시다 (먹겠…습니다,
+// 입…니다), before 지요 까요 네요 군요, else before the last syllable (고마워…요), at the
+// end of a one-syllable word. For kLeadDrawlMark they go before 입 or 합 of 입니다 합니다
+// (좋아…합니다), for kPastLeadDrawlMark also before 이었 였 했 of 습니다 (조용…했습니다).
+// Spaces between the word and the span go unless a word follows. A span with no Hangul
+// word before it is dropped.
+std::string WriteDrawls(std::string_view s);
+
+// The engine keeps its in-band marks in the private use area U+E000..U+F8FF. Normalize
+// moves those characters of the input to U+F0000..U+F18FF, where the stages carry them as
+// foreign characters, and restore moves them back; input in U+F0000..U+F18FF comes out in
+// U+E000..U+F8FF.
+std::string EscapePrivateUse(std::string_view s);
+std::string UnescapePrivateUse(std::string_view s);
+
+// The Korean between each kEmphasisOpen and the next kEmphasisClose with · between its
+// syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
+std::string WriteEmphasis(std::string_view s);
+
+// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!).
+std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);
@@ -65,6 +91,21 @@ std::string DropParticleMarks(std::string_view s);
 constexpr char32_t kDropShift = 0xC000;
 // The stutter mark of the sound stage.
 constexpr char32_t kStutterMark = 0xE000;
+// After the marks of a longer stutter piece, one mark for each kana of the word the piece
+// does not reach (ごめ、 of ごめんなさい: 2 kStutterMark, 4 kStutterRest).
+constexpr char32_t kStutterRest = 0xE004;
+// Enclose the pause marks normalize cut out of a polite ending (いただきま…す), from
+// before です or でしょう (好き…です) and from before でした, written after the ending
+// (WriteDrawls).
+constexpr char32_t kDrawlMark = 0xE005;
+constexpr char32_t kLeadDrawlMark = 0xE006;
+constexpr char32_t kPastLeadDrawlMark = 0xE007;
+// The marks around a word spelled out with ・ for emphasis (さ・い・て・い), which the
+// restore stage writes back as · between the syllables of its Korean (WriteEmphasis).
+using output::kEmphasisClose;
+using output::kEmphasisOpen;
+// The lengthening mark of the sound stage (WriteLengthening).
+using output::kLengthenMark;
 
 namespace internal {
 

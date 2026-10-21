@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:341111	今日はお子さんがいらっしゃる。	오늘은 자녀분이 계신다.	fix	local
 dict:jisjk:341111	お子さんと学校へいらっしゃる。	자녀분과 학교에 가신다.	fix	local
-dict:bun-no:1	君の分のお菓子	너의 몫의 과자	fix	local
+dict:bun-no:1	君の分のお菓子	네 몫의 과자	fix	local
 dict:bun-no:1	5回分の料金	5회분의 요금	fix	local
 dict:jisjk:344419	毎ばん読んだ。	매일 밤 읽었다.	fix	local
 dict:jisjk:344419	毎朝走った。	매일 아침 달렸다.	fix	local

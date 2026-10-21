@@ -196,9 +196,10 @@ std::string_view PartNameOf(std::string_view code);
 // than value only for joined names, so it goes into a string the caller holds.
 std::string PartPatternOf(char field, std::string_view value);
 
-// Why a target that ends in a marker family ("먹&AA@") cannot take the form codes of
-// part: '&' families conjugate verb stems (class 4), '$' adjective stems (class 7) and
-// '%' adjectival nouns (class 8). Empty for a target without a family and for a match.
+// Why a target with a marker family cannot be loaded: a family ("먹&AA@") must end the
+// target, and its marker must fit the class of part ('&' families conjugate verb stems,
+// class 4, '$' adjective stems, class 7, '%' adjectival nouns, class 8). Empty for a
+// target without a family and for a match.
 std::string MarkerClassError(std::string_view target, PartCode part);
 
 namespace internal {

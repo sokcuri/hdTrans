@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+pattern:ないうちに	暗くならないうちに帰ろう。	어두워지기 전에 돌아가자.	fix	builtin-phrase
+pattern:ないうちに	静かにならないうちに話そう。	조용해지기 전에 이야기하자.	fix	builtin-phrase
+pattern:ないうちに	気づかないうちに眠っていた。	깨닫지 못하는 사이에 자고 있었다.	keep	builtin-phrase

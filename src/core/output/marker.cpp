@@ -5,6 +5,7 @@
 #include "core/output/particle.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
+#include "core/text/utf8.h"
 #include "core/tokenizer/charsets.h"
 
 namespace hdTrans::output {
@@ -18,6 +19,7 @@ using internal::CutLast;
 using internal::First;
 using internal::FirstByte;
 using internal::Selected;
+using internal::SpokenInfinitive;
 using internal::WidthOf;
 
 // Japanese sources compared with item surfaces.
@@ -184,6 +186,41 @@ std::string NotForm(std::string_view s) {
     return std::string(s);
 }
 
+// The text of the first item after item i that has one (a dropped ぉ has none); "." after the
+// last item.
+std::string_view TextAfter(const std::vector<ResolvedItem>& items, int i) {
+    for (std::size_t k = static_cast<std::size_t>(i) + 1; k < items.size(); k++) {
+        if (const std::string_view t = EntryText(items[k]); !t.empty()) return t;
+    }
+    return ".";
+}
+
+// Whether text after a predicate starts with the punctuation that ends a sentence.
+bool SentenceEndAfter(std::string_view after) {
+    for (const std::string_view end : {"!", "?", ".", "…", "」", "』", "~", "～"}) {
+        if (after.starts_with(end)) return true;
+    }
+    return false;
+}
+
+// Whether the form of key with suffix ends a clause in speech: the 아/어 form alone or with
+// 요, or the past stem with 어 or 어요 (갔어), before the punctuation of SentenceEndAfter, or
+// before a comma after a Japanese ending in a terminal form (いい、 됐어,), which a
+// connective form (なり、 되어,) is not; or anywhere when ended (a casual sentence end).
+bool SpokenEnd(std::string_view key, std::string_view suffix, std::string_view after, std::string_view ending,
+               bool ended) {
+    const bool infinitive = key.ends_with("6") && (suffix.empty() || suffix == "요");
+    const bool past = key.ends_with("5") && (suffix == "어" || suffix == "어요");
+    if (!infinitive && !past) return false;
+    if (ended) return true;
+    if (SentenceEndAfter(after)) return true;
+    if (!after.starts_with(",")) return false;
+    for (const std::string_view t : {"う", "く", "ぐ", "す", "つ", "ぬ", "ぶ", "む", "る", "い", "た", "だ"}) {
+        if (ending.ends_with(t)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool HighLeadPair(std::string_view s) {
@@ -207,6 +244,35 @@ const ResolvedEntry& EntryAt(const ResolvedItem& it, int i) {
     if (i == it.selected) return it.entry;
     if (i == 0) return it.first;
     return kEmpty;
+}
+
+
+std::string SpokenInfinitive(std::string_view form) {
+    std::u32string r;
+    for (std::string_view s = form; !s.empty();) {
+        const text::Rune rune = text::DecodeRune(s);
+        if (rune.size == 0) return std::string(form);
+        r += rune.cp;
+        s.remove_prefix(rune.size);
+    }
+    if (r.size() < 2) return std::string(form);
+    const auto stem = text::Split(r[r.size() - 2]);
+    if (!stem || stem->final != 0) return std::string(form);
+    const bool past = r.back() == U'었' || r.back() == U'았';
+    const char32_t open = past ? (r.back() == U'었' ? U'어' : U'아') : r.back();
+    int vowel = -1;
+    if (open == U'어') {
+        if (stem->vowel == 13) vowel = 14;                           // ㅜ ㅝ
+        if (stem->vowel == 11) vowel = 10;                           // ㅚ ㅙ
+    } else if (open == U'아' && stem->vowel == 8 && (stem->initial == 1 || stem->initial == 7 || stem->initial == 10)) {
+        vowel = 9;  // 꼬 보 쏘: ㅗ ㅘ; 모아 (모으다) keeps its form
+    }
+    if (vowel < 0) return std::string(form);
+    r.pop_back();
+    r.back() = text::Join(stem->initial, vowel, past ? 20 : 0);  // 20: ㅆ
+    std::string out;
+    for (const char32_t c : r) text::AppendRune(out, c);
+    return out;
 }
 
 }  // namespace internal
@@ -440,6 +506,10 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 suffix == "다") {
                 replacement = NormalizeDakeiyoText(i, replacement);
             }
+            if (settings_.text && !it.endingSurface.ends_with("て") && !it.endingSurface.ends_with("で") &&
+                SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
+                replacement = SpokenInfinitive(replacement);
+            }
             break;
         }
     }
@@ -562,6 +632,14 @@ void Composer::BuildAdjective(int i) {
         if (linked >= 0 && negates(i) && aniNoun(linked) && DirectText(items[linked]) == "1지") {
             replacement = NotForm(Cat({replacement, suffix}));
             suffix.clear();
+        }
+        // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
+        if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
+            if (replacement == "니어" && stem.ends_with("아")) {
+                replacement = suffix.empty() ? "니야" : "니에";
+            } else {
+                replacement = SpokenInfinitive(replacement);
+            }
         }
     }
     sc.text = Cat({stem, replacement, suffix});

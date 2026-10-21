@@ -332,6 +332,15 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/missing\ncache: off\n");
     Check(hdTrans_Reload() == -1, "failed reload");
     Check(Translate("猫") == "야옹이", "failed reload retains dictionaries");
+    std::filesystem::create_directories(fixtures / "speech", error);
+    Write(fixtures / "speech/base.tsv", header + "高\t$D3@\tH7N0\t\t\tGN\t\t\t\t\t1\nい\t1다\tT500\t\t\tGN\t\t\t\t\t2\n");
+    Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\n");
+    Check(hdTrans_Reload() == 0, "reload speech dictionary");
+    Check(Translate("「高い」") == "「높아」", "quoted speech is soft by default");
+    Check(Translate("「高い。") == "「높아." && Translate("高い」") == "높아」", "a quote carries to the next call");
+    Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: strict\n");
+    Check(hdTrans_Reload() == 0, "reload strict speech");
+    Check(Translate("「高い」") == "「높다」", "configured strict speech");
     hdTrans_Terminate();
 
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: cache\n");

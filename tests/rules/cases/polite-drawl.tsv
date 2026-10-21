@@ -1,0 +1,41 @@
+rule	input	expected	kind	layer
+normalize:drawl	明日も頑張り…ます。	내일도 노력하겠…습니다.	fix	normalize
+normalize:drawl	駅まで歩きま―した。	역까지 걸었―습니다.	fix	normalize
+normalize:drawl	私にはわかりま……せん。	나에게는 모릅……니다.	fix	normalize
+normalize:drawl	もう休み……ましょう。	이제 쉽……시다.	fix	normalize
+normalize:drawl	一緒に行きま…しょうか？	함께 갈…까요?	fix	normalize
+normalize:drawl	本当に来ま……すか？	정말로 옵……니까?	fix	normalize
+normalize:drawl	あれは鳥で……す。	저것은 새입……니다.	fix	normalize
+normalize:drawl	いま…すぐ来て。	지금…바로 와.	keep	normalize
+normalize:drawl	ここで…した。	여기서…했다.	keep	normalize
+normalize:copula-pause	猫が好き……で……す。	고양이를 좋아……합……니다.	fix	normalize
+normalize:copula-pause	この時間は静か…ですね。	이 시간은 조용하…네요.	fix	normalize
+normalize:copula-pause	その話は嬉しい……です。	그 이야기는 기쁩……니다.	fix	normalize
+normalize:copula-pause	こちらの席はどう…ですか？	이쪽의 자리는 어떻…습니까?	fix	normalize
+normalize:copula-pause	昨日の海は静か……でした。	어제의 바다는 조용……했습니다.	fix	normalize
+normalize:copula-pause	あの人は先生…でした。	그 사람은 선생님…이었습니다.	keep	normalize
+normalize:copula-pause	もう少し食べたい…です。	좀 더 먹고 싶…습니다.	fix	normalize
+normalize:copula-pause	今日はいい天気…ですね。	오늘은 좋은 날씨…군요.	keep	normalize
+normalize:copula-pause	学生、です。	학생, 입니다.	keep	normalize
+normalize:copula-pause	私が…ですか？	내가… 말입니까?	keep	normalize
+normalize:copula-pause	早く来てください……です。	빨리 와 주세요……입니다.	keep	normalize
+normalize:copula-pause	明日は雨…ですって。	내일은 비…래.	keep	normalize
+normalize:copula-pause	……ですが、今は違う。	……그렇지만, 지금은 다르다.	keep	normalize
+normalize:copula-pause	ねこ・です。	고양이·입니다.	keep	normalize
+normalize:copula-pause	フタサンマルマル…です。	2300…입니다.	keep	normalize
+normalize:drawl	ここで…す、すみません！	여기서…죄, 죄송합니다!	keep	normalize
+normalize:drawl	学校で……す、すごい	학교에서……대, 대단해	keep	normalize
+normalize:drawl	家で…す、好き	집에서…조, 좋아해	keep	normalize
+normalize:drawl	今ま…す、すぐに	지금 …고, 곧바로	keep	normalize
+normalize:drawl	いま、した。	지금, 했다.	keep	normalize
+normalize:drawl	そうで…す、はい。	그렇…습니다, 네.	keep	normalize
+normalize:copula-pause	えっと……ですね	음……이군요	keep	normalize
+normalize:copula-pause	つまり……ですね	즉……이군요	keep	normalize
+normalize:copula-pause	それは……ですね	그것은……이군요	keep	normalize
+normalize:copula-pause	今日は……ですね、雨です	오늘은……이군요, 비입니다	keep	normalize
+normalize:copula-pause	うーん……ですね	으음……이군요	keep	normalize
+normalize:copula-pause	だから……です	그러니까……입니다	keep	normalize
+normalize:private-use	ボタンを押す	버튼 을 누른다	keep	normalize
+normalize:private-use	abc	abc	keep	normalize
+normalize:private-use	行く	간다	keep	normalize
+normalize:private-use	、あ	, 아	keep	normalize

@@ -15,7 +15,7 @@ dict:common-nouns	御成敗式目を読む。	고세이바이시키모쿠를 읽
 dict:common-nouns	成功と失敗を比べる。	성공과 실패를 비교한다.	keep	lookup
 dict:common-nouns	処罰してください。	처벌해 주세요.	keep	lookup
 dict:common-nouns	勝敗が決まる。	승패가 정해진다.	keep	lookup
-dict:common-nouns	これが私の流儀だ。	이것이 나의 방식이다.	fix	lookup
+dict:common-nouns	これが私の流儀だ。	이것이 내 방식이다.	fix	lookup
 dict:common-nouns	彼の流儀に従う。	그의 방식에 따른다.	fix	lookup
 dict:common-nouns	古い流儀を守る。	낡은 방식을 지킨다.	fix	lookup
 dict:common-nouns	流儀は人それぞれだ。	방식은 사람 각자다.	fix	lookup
@@ -28,3 +28,6 @@ dict:w:25018	丁寧さが彼の長所だ。	정중함이 그의 장점이다.	fi
 dict:w:25018	長所がある。	장점이 있다.	fix	lookup
 dict:w:25018	彼の短所も知っている。	그의 단점도 알고 있다.	keep	lookup
 dict:w:25018	長短所を比べる。	장단점을 비교한다.	keep	lookup
+dict:common-nouns	妾候補の話だ。	첩 후보의 이야기다.	fix	lookup
+dict:common-nouns	妾の子だ。	첩의 자식이다.	keep	lookup
+dict:common-nouns	姫候補の話だ。	공주 후보의 이야기다.	keep	lookup

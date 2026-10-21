@@ -10,7 +10,8 @@
 // them without the final newline, so one trailing newline of EXPECTED is
 // dropped); then it drives the user dictionary and names table editors
 // with key events and a clipboard paste, checks that the entries change the
-// translation, and that POST /api/translate is 404. It also checks that
+// translation, and that POST /api/translate is 404. It checks that the
+// 대사 말투 select changes quoted speech and is saved. It also checks that
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
@@ -218,6 +219,22 @@ async function progressCheck() {
   console.log(`progress: ${ok ? 'ok    ' : 'FAILED'} bar shown during a ${all.split('\n').length}-line translation and hidden after (${r.info})`);
 }
 
+// speechCheck sets 대사 말투 to 엄격하게 and back, and checks that quoted speech
+// keeps its plain -다 only while strict and that the choice is saved.
+async function speechCheck() {
+  const pick = (value) => evaluate(`(() => { const s = document.getElementById('speech');
+    s.value = '${value}'; s.dispatchEvent(new Event('change')); })()`);
+  const soft = (await translate('「明日、海に行く」')).out;
+  await pick('strict');
+  const strict = (await settled()).out;
+  const saved = await evaluate(`localStorage.getItem('hdtrans.speech')`);
+  await pick('soft');
+  const back = (await settled()).out;
+  const ok = soft !== strict && back === soft && saved === 'strict';
+  failed ||= !ok;
+  console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
+}
+
 let failed = false;
 try {
   let wasReady;
@@ -233,6 +250,7 @@ try {
     console.log(`  first difference at line ${i + 1}:\n  got:  ${a[i]}\n  want: ${b[i]}`);
   }
   await progressCheck();
+  await speechCheck();
   const version = await evaluate(`document.getElementById('version').textContent`);
   const versionOk = /^업데이트 \d{4}-\d\d-\d\d \d\d:\d\d:\d\d · [0-9a-f]{7,}$/.test(version);
   failed ||= !versionOk;

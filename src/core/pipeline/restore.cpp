@@ -1,5 +1,6 @@
 #include "core/pipeline/restore.h"
 
+#include <algorithm>
 #include <map>
 #include <string>
 #include <string_view>
@@ -10,6 +11,7 @@
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/canonical.h"
 
 namespace hdTrans::pipeline {
 
@@ -140,8 +142,8 @@ Pieces RestoreLineBrackets(const Pieces& in, const Pieces& out) {
 
 bool IsSyllable(char32_t r) { return r >= text::kBase && r <= text::kLast; }
 
-// The length in runes of a stutter separator at rs[i]: 、 ， or a run of … ‥ or of two
-// or more ・.
+// The length in runes of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or of
+// two or more ・.
 size_t StutterSeparator(std::u32string_view rs, size_t i) {
     if (i >= rs.size()) return 0;
     switch (rs[i]) {
@@ -150,6 +152,9 @@ size_t StutterSeparator(std::u32string_view rs, size_t i) {
             return 1;
         case U'…':
         case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
         case U'・': {
             size_t n = i;
             while (n < rs.size() && rs[n] == rs[i]) n++;
@@ -206,6 +211,39 @@ bool AfterAttributive(std::string_view text) {
     if (!text.ends_with(' ')) return false;
     const int final = LastFinal(text.substr(0, text.size() - 1));
     return final == text::kFinalNieun || final == text::kFinalRieul;
+}
+
+// Where the pause of a drawl goes in the syllables w that end a polite predicate: before
+// 습니다 습니까 읍시다 (with 습 or 읍), else before 니다 니까 시다; before 지요 까요 네요 군요;
+// else before the last syllable; at the end of a one-syllable word.
+size_t DrawlPoint(std::u32string_view w) {
+    const size_t n = w.size();
+    size_t tail = 1;
+    if (w.ends_with(U"니다") || w.ends_with(U"니까") || w.ends_with(U"시다")) {
+        tail = n >= 3 && (w[n - 3] == U'습' || w[n - 3] == U'읍') ? 3 : 2;
+    } else if (w.ends_with(U"지요") || w.ends_with(U"까요") || w.ends_with(U"네요") || w.ends_with(U"군요")) {
+        tail = 2;
+    }
+    return tail < n ? n - tail : n;
+}
+
+// DrawlPoint moved before the copula or 하다 the ending starts with: 입 or 합 before 니다
+// 니까 (최저……입니다); with past, also 이었, 였 or 했 before 습니다 습니까 (학교……였습니다).
+size_t LeadDrawlPoint(std::u32string_view w, bool past) {
+    const size_t p = DrawlPoint(w);
+    if (p == w.size()) return p;
+    if (w[p] == U'니' && (w[p - 1] == U'입' || w[p - 1] == U'합')) return p - 1;
+    if (!past || w[p] != U'습') return p;
+    if (p >= 2 && w[p - 1] == U'었' && w[p - 2] == U'이') return p - 2;
+    if (w[p - 1] == U'였' || w[p - 1] == U'했') return p - 1;
+    return p;
+}
+
+bool IsDrawlMark(char32_t r) { return r == kDrawlMark || r == kLeadDrawlMark || r == kPastLeadDrawlMark; }
+
+// Whether r ends a word: white space, punctuation or a closing bracket.
+bool EndsWord(char32_t r) {
+    return r == U' ' || r == U'\t' || r == U'\n' || Contains(U"、。，．！？!?,.:;…‥・―─—～ー」』）)］]】〕〉》\"'", r);
 }
 
 }  // namespace
@@ -322,9 +360,10 @@ std::string WriteDropped(std::string_view s) {
 
 std::string WriteStutters(std::string_view s) {
     const std::u32string rs = Runes(s);
-    if (!Contains(rs, kStutterMark)) return std::string(s);
+    if (!Contains(rs, kStutterMark) && !Contains(rs, kStutterRest)) return std::string(s);
     std::u32string out;
     for (size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] == kStutterRest) continue;  // only after a mark, where the run below takes it
         if (rs[i] != kStutterMark) {
             out.push_back(rs[i]);
             continue;
@@ -332,15 +371,140 @@ std::string WriteStutters(std::string_view s) {
         size_t trimmed = out.size();
         while (trimmed > 0 && out[trimmed - 1] == U' ') trimmed--;
         if (trimmed == 0 || Contains(U"「『（(“‘〈《【[\n", out[trimmed - 1])) out.resize(trimmed);
+        size_t marks = 1, rest = 0;
+        while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
+        while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
+        i += marks + rest - 1;
         const size_t k = StutterSeparator(rs, i + 1);
         std::u32string sep = rs.substr(i + 1, k);
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
         size_t j = i + 1;
-        while (j < rs.size() && (rs[j] == U' ' || rs[j] == kStutterMark || StutterSeparator(rs, j) > 0)) j++;
-        if (j < rs.size() && IsSyllable(rs[j])) {
+        while (j < rs.size() && (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest ||
+                                 StutterSeparator(rs, j) > 0)) {
+            j++;
+        }
+        size_t word = 0;
+        while (j + word < rs.size() && IsSyllable(rs[j + word])) word++;
+        if (word == 0) continue;
+        if (rest == 0) {
             out.push_back(rs[j] - (rs[j] - text::kBase) % text::kFinalsCount);
-            out += sep;
+        } else {
+            const size_t share = (marks * word + marks + rest - 1) / (marks + rest);
+            out += rs.substr(j, std::max<size_t>(1, std::min(share, word - 1)));
+        }
+        out += sep;
+    }
+    return Utf8(out);
+}
+
+std::string WriteDrawls(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (std::none_of(rs.begin(), rs.end(), IsDrawlMark)) return std::string(s);
+    std::u32string out;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (!IsDrawlMark(rs[i])) {
+            out.push_back(rs[i]);
+            continue;
+        }
+        const char32_t mark = rs[i];
+        size_t close = i + 1;
+        while (close < rs.size() && Contains(U"…‥・―─", rs[close])) close++;
+        if (close == i + 1 || close == rs.size() || rs[close] != mark) {
+            out.push_back(mark);
+            continue;
+        }
+        std::u32string marks;
+        for (size_t k = i + 1; k < close; k++) {
+            const auto form = tokenizer::CanonicalForm(rs[k]);
+            if (form) {
+                marks += Runes(*form);
+            } else {
+                marks.push_back(rs[k]);
+            }
+        }
+        i = close;
+        size_t spaces = 0;  // spaced from the word as if a word followed the span
+        while (spaces < out.size() && out[out.size() - 1 - spaces] == U' ') spaces++;
+        const size_t end = out.size() - spaces;
+        size_t start = end;
+        while (start > 0 && IsSyllable(out[start - 1])) start--;
+        if (start == end) continue;
+        if (close + 1 == rs.size() || EndsWord(rs[close + 1])) out.resize(end);
+        const std::u32string_view word = std::u32string_view(out).substr(start, end - start);
+        out.insert(start + (mark == kDrawlMark ? DrawlPoint(word) : LeadDrawlPoint(word, mark == kPastLeadDrawlMark)),
+                   marks);
+    }
+    return Utf8(out);
+}
+
+namespace {
+
+constexpr char32_t kPrivateFirst = 0xE000;
+constexpr char32_t kPrivateLast = 0xF8FF;
+constexpr char32_t kPrivateEscape = 0xF0000;
+
+template <class F>
+std::string MapRunes(std::string_view s, F f) {
+    std::string out;
+    out.reserve(s.size());
+    for (std::string_view rest = s; !rest.empty();) {
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.cp == text::kReplacement && r.size == 1) {
+            out += rest.front();
+        } else {
+            text::AppendRune(out, f(r.cp));
+        }
+        rest.remove_prefix(r.size);
+    }
+    return out;
+}
+
+}  // namespace
+
+std::string EscapePrivateUse(std::string_view s) {
+    return MapRunes(s, [](char32_t r) {
+        return r >= kPrivateFirst && r <= kPrivateLast ? r - kPrivateFirst + kPrivateEscape : r;
+    });
+}
+
+std::string UnescapePrivateUse(std::string_view s) {
+    return MapRunes(s, [](char32_t r) {
+        return r >= kPrivateEscape && r <= kPrivateEscape + (kPrivateLast - kPrivateFirst) ? r - kPrivateEscape + kPrivateFirst
+                                                                                             : r;
+    });
+}
+
+std::string WriteEmphasis(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kEmphasisOpen) && !Contains(rs, kEmphasisClose)) return std::string(s);
+    std::u32string out;
+    bool inside = false, joined = false;  // joined: the last character written is a syllable of the word
+    for (const char32_t r : rs) {
+        if (r == kEmphasisOpen || r == kEmphasisClose) {
+            inside = r == kEmphasisOpen;
+            joined = false;
+            continue;
+        }
+        if (inside && IsSyllable(r) && joined) {
+            while (out.back() == U' ') out.pop_back();
+            out += U'·';
+        }
+        out.push_back(r);
+        if (r != U' ') joined = inside && IsSyllable(r);
+    }
+    return Utf8(out);
+}
+
+std::string WriteLengthening(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kLengthenMark)) return std::string(s);
+    std::u32string out;
+    for (const char32_t r : rs) {
+        if (r != kLengthenMark) {
+            out.push_back(r);
+        } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
+            out.push_back(U'~');
         }
     }
     return Utf8(out);
@@ -367,7 +531,8 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = DropParticleMarks(WriteStutters(WriteDropped(output::String(st.korean))));
+    st.line = UnescapePrivateUse(DropParticleMarks(
+        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean))))))));
     return st;
 }
 

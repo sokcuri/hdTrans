@@ -33,4 +33,9 @@ bool CanonicalType(int type);
 // or the concatenated canonical forms of its characters; trailing spaces dropped.
 void AppendCanonicalText(std::string& out, std::string_view s);
 
+// The leading run of exclamation and question marks of s in ASCII, one for one (！！ !!,
+// ！？ !?, ‼ !!, ⁉ !?, ⁈ ?!); "" when s does not start with one. The canonical text keeps
+// only the first mark; the output writes the whole run.
+std::string MarkRun(std::string_view s);
+
 }  // namespace hdTrans::tokenizer

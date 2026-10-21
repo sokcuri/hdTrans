@@ -148,6 +148,7 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     if (generation != g_generation) return 0;
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
+    g_session->SetSpeech(settings.speech);
     ++g_generation;
     return 1;
 }
@@ -220,6 +221,7 @@ void __stdcall J2K_ReloadUserDict() {
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
+    g_session->SetSpeech(settings.speech);
     ++g_generation;
 }
 void __stdcall J2K_SetField(int) {}

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+cleanup:spoken-geo	何だ？	뭐야?	fix	compose
+cleanup:spoken-geo	それは違うものだよ。	그것은 다른 거야.	fix	compose
+cleanup:spoken-geo	それは私のものだ。	그것은 내 것이다.	keep	compose

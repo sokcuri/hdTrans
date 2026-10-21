@@ -121,4 +121,25 @@ printf 'dicts: first\nuserdict: [first-user.txt, users]\ncache: off\n' > "$tmp/s
 "$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/dog" > "$tmp/out" 2> "$tmp/errors"
 [ "$(cat "$tmp/out")" = 폴더파일 ]
 grep -F 'userdict-bad.tsv:1: empty KR' "$tmp/errors" > /dev/null
+mkdir -p "$tmp/settings/speech"
+printf 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n高\t$D3@\tH7N0\t\t\tGN\t0\t1\nい\t1다\tT500\t\t\tGN\t0\t2\n' > "$tmp/settings/speech/base.tsv"
+printf '「高い」' > "$tmp/quoted"
+printf 'dicts: speech\nuserdict: ""\ncache: off\n' > "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 「높아」 ]
+printf 'speech: strict\n' >> "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 「높다」 ]
+"$cli" -config "$tmp/settings/custom.yaml" --speech soft -in "$tmp/quoted" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 「높아」 ]
+"$cli" -config "$tmp/settings/custom.yaml" --speech=soft -reference -in "$tmp/quoted" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 「높다」 ]
+status=0
+"$cli" -config "$tmp/settings/custom.yaml" --speech always -in "$tmp/quoted" > /dev/null 2> "$tmp/errors" || status=$?
+[ "$status" -eq 2 ]
+grep -F -- '--speech takes soft or strict' "$tmp/errors" > /dev/null
+printf 'dicts: speech\nuserdict: ""\ncache: off\nspeech: always\n' > "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out" 2> "$tmp/errors"
+[ "$(cat "$tmp/out")" = 「높아」 ]
+grep -F 'custom.yaml:4: speech: expected soft or strict' "$tmp/errors" > /dev/null
 echo 'CLI config: PASS'

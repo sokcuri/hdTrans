@@ -65,6 +65,17 @@ HD_TEST(pipeline_cut_spans) {
         // Stutter marks with their separators.
         {"\xEE\x80\x80、\xEE\x80\x80、あ", "〖2\xEE\x80\x80、\xEE\x80\x80、〗あ"},
         {"\xEE\x80\x80……あ\xEE\x80\x80・あ", "〖2\xEE\x80\x80……〗あ〖2\xEE\x80\x80〗・あ"},
+        // Drawl spans from mark to the same mark; an unclosed mark is foreign.
+        {"です\uE005……\uE005。", "です〖2\uE005……\uE005〗。"},
+        {"です\uE006…\uE006\uE005…\uE005", "です〖2\uE006…\uE006〗〖2\uE005…\uE005〗"},
+        {"です\uE007―\uE007", "です〖2\uE007―\uE007〗"},
+        {"です\uE005…", "です〖1\uE005〗…"},
+        {"a\uE005b\uE005", "a〖1\uE005〗b〖1\uE005〗"},
+        {"a\uE005\uE005", "a〖1\uE005\uE005〗"},
+        // Emphasis marks open and close a span each.
+        {"\uE008さいてい\uE009！", "〖2\uE008〗さいてい〖3\uE009〗！"},
+        // The lengthening mark closes a span.
+        {"せんぱい\uE00A！", "せんぱい〖3\uE00A〗！"},
         // Foreign runs end at white space; ASCII, half-width forms and CP932 symbols are
         // not foreign; invalid bytes are.
         {"Ωé αβ☆ｱ ไทย", "Ω〖1é〗 αβ☆ｱ 〖1ไทย〗"},

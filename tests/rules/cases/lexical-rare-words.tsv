@@ -1,0 +1,107 @@
+rule	input	expected	kind	layer
+dict:rare-words	赤ん坊が床を這いずる。	갓난아기가 바닥을 기어다닌다.	fix	lookup
+dict:rare-words	蛇が庭を這いずり回っていた。	뱀이 뜰을 기어 돌아다니고 있었다.	fix	lookup
+dict:rare-words	虫が壁を這い回る。	벌레가 벽을 기어다닌다.	fix	lookup
+dict:rare-words	粘土を揉みしだく。	점토를 마구 주무른다.	fix	lookup
+dict:rare-words	風が枝をしならせる。	바람이 가지를 휘게 한다.	fix	lookup
+dict:rare-words	門はびくともしていない。	문은 꿈쩍도 하고 있지 않다.	fix	lookup
+dict:rare-words	門はビクともせず立っていた。	문은 꿈쩍도 하지 않고 서 있었다.	fix	lookup
+dict:jisjk:360104	門はビクともしない。	문은 꿈쩍도 하지 않는다.	fix	lookup
+dict:rare-words	日焼けで皮剥けた。	썬탠으로 껍질이 벗겨졌다.	fix	lookup
+dict:rare-words	崖を這い上がる。	벼랑을 기어오른다.	keep	lookup
+dict:rare-words	門はびくともしない。	문은 꿈쩍도 하지 않는다.	keep	lookup
+dict:rare-words	皮剥ぎを釣った。	쥐치를 낚시했다.	keep	lookup
+dict:rare-words	りんごの皮が剥けた。	사과의 껍질이 벗겨졌다.	keep	lookup
+ending:ちゃってるわ	靴が汚れちゃってるわよ。	구두가 더러워져 버렸어.	fix	builtin-ending
+ending:ちゃってるわ	ケーキを食べちゃったわ。	케이크를 먹어 버렸어.	fix	builtin-ending
+ending:ちゃってるわ	もう寝ちゃってるね。	이제 자 버렸네.	fix	builtin-ending
+ending:ちゃってるわ	全部忘れちゃうわよ。	전부 잊어 버릴 거야.	fix	builtin-ending
+ending:ちゃってるわ	彼は帰ったわね。	그는 돌아갔네.	fix	builtin-ending
+ending:ちゃってるわ	ケーキを食べちゃった。	케이크를 먹어 버렸다.	keep	builtin-ending
+ending:ちゃってるわ	本を読んでるわよ。	책을 읽고 있어.	keep	builtin-ending
+ending:ちゃってるわ	私が行くわよ。	내가 갈 거야.	keep	builtin-ending
+dict:rare-words	竿が大きくしなった。	장대가 크게 휘었다.	keep	lookup
+dict:jisjk:2158	妹は犬が大好きだ。	여동생은 개를 아주 좋아한다.	fix	lookup
+dict:jisjk:2158	妹は犬が大好きじゃない。	여동생은 개를 아주 좋아하지 않는다.	fix	lookup
+dict:jisjk:2158	妹は犬が大好きな子だ。	여동생은 개를 아주 좋아하는 아이다.	keep	lookup
+dict:jisjk:2158	妹は犬が大好きでした。	여동생은 개를 아주 좋아했습니다.	keep	lookup
+dict:jisjk:143709	兄は人嫌いだ。	형은 사람을 싫어한다.	fix	lookup
+dict:jisjk:144616	兄は筆まめな人だ。	형은 글쓰기를 좋아하는 사람이다.	fix	lookup
+dict:jisjk:2690	祖母は泳ぐのが大好きだ。	할머니는 헤엄치는 것을 정말 좋아한다.	fix	local
+dict:jisjk:2690	祖母は静かなのが大好きだ。	할머니는 조용한 것을 정말 좋아한다.	fix	local
+dict:jisjk:3926	祖母は静かなのが好きだ。	할머니는 조용한 것을 좋아한다.	fix	local
+dict:jisjk:3926	祖母は賑やかなのが好きだ。	할머니는 떠들썩한 것을 좋아한다.	fix	local
+dict:jisjk:3926	祖母は泳ぐのが好きだ。	할머니는 헤엄치는 것을 좋아한다.	keep	local
+dict:jisjk:3926	祖母は甘いのが好きだ。	할머니는 단 것을 좋아한다.	keep	local
+dict:jisjk:3926	祖母は静かなのが嫌いだ。	할머니는 조용한 것이 싫다.	keep	local
+dict:rare-words	第三章を開いた。	제3장을 열었다.	keep	lookup
+dict:rare-words	三章を開いた。	3장을 열었다.	fix	lookup
+dict:rare-words	一章が短い。	1장이 짧다.	fix	lookup
+dict:rare-words	竹をしならせた。	대나무를 휘게 했다.	fix	lookup
+dict:rare-words	何も言わないで。	아무것도 말하지 마.	keep	lookup
+dict:rare-words	木を揺さ振る。	나무를 흔든다.	fix	lookup
+dict:rare-words	小舟に揺られて眠った。	작은 배에 흔들려 잤다.	fix	lookup
+dict:rare-words	彼は体を反らせた。	그는 몸을 뒤로 젖혔다.	fix	lookup
+dict:rare-words	揺るぎない友情。	확고한 우정.	fix	lookup
+dict:rare-words	叔父は鼻の下が長い。	숙부는 여자에게 약하다.	fix	lookup
+dict:rare-words	姉は頑張り屋だ。	언니는 노력가다.	fix	lookup
+dict:rare-words	お茶目な姉。	장난스러운 언니.	fix	lookup
+dict:rare-words	赤ん坊を揺すり上げる。	갓난아기를 추스른다.	fix	lookup
+dict:rare-words	机が揺れる。	책상이 흔들린다.	keep	lookup
+dict:rare-words	鼻の下を伸ばす。	인중을 편다.	keep	lookup
+dict:rare-words	茶目っ気がある。	장난기가 있다.	keep	lookup
+dict:jisjk:363278	兄は強い決意を見せた。	형은 강한 결의를 보였다.	fix	local-ending
+dict:jisjk:363278	明日は楽しい予定がある。	내일은 즐거운 예정이 있다.	fix	local-ending
+dict:jisjk:363278	兄は良いチャンスを逃した。	형은 좋은 찬스를 놓쳤다.	fix	local-ending
+dict:jisjk:363278	兄は東京へ行く予定だ。	형은 도쿄에 갈 예정이다.	keep	local-ending
+dict:jisjk:363278	電車が遅れるおそれがある。	전철이 늦을 우려가 있다.	keep	local-ending
+dict:jisjk:363278	兄は強い覚悟を見せた。	형은 강한 각오를 보였다.	keep	local-ending
+dict:particle-joins:2	それを私にください。	그것을 나에게 주세요.	fix	lookup
+dict:particle-joins:2	あの本を彼にください。	그 책을 그에게 주세요.	fix	lookup
+dict:particle-joins:1	先生が私にくださった。	선생님이 나에게 주셨다.	fix	lookup
+dict:particle-joins:2	水をください。	물을 주세요.	keep	lookup
+dict:particle-joins:2	肉が食べにくい。	고기를 먹기 어렵다.	keep	lookup
+dict:particle-joins:2	私にくれ。	나에게 줘.	keep	lookup
+dict:jisjk:262134	妹が急に泣きだした。	여동생이 갑자기 울기 시작했다.	fix	lookup
+dict:rare-words	妹が急に笑いだした。	여동생이 갑자기 웃기 시작했다.	fix	lookup
+dict:rare-words	妹が急に笑い出した。	여동생이 갑자기 웃기 시작했다.	keep	lookup
+dict:rare-words	ある種類の鳥を見た。	어떤 종류의 새를 보았다.	fix	lookup
+dict:rare-words	この種類の鳥を見た。	이 종류의 새를 보았다.	keep	lookup
+dict:jisjk:364685	僕は君と歩いた。	나는 너와 걸었다.	fix	local
+dict:jisjk:364685	昨日、君と話した。	어제, 너와 이야기했다.	fix	local
+dict:jisjk:364685	あの日の君との約束。	그 날의 너와의 약속.	fix	local
+dict:jisjk:364685	田中君と歩いた。	타나카 군과 걸었다.	keep	local
+dict:jisjk:364685	君と歩いた。	너와 걸었다.	keep	local
+dict:rare-words	肩が痛い。	어깨가 아프다.	keep	lookup
+dict:rare-words	氷を砕いた。	얼음을 부수었다.	fix	lookup
+dict:rare-words	力を出し切って勝った。	힘을 다 쏟아 내 이겼다.	fix	lookup
+dict:rare-words	鳥が空へ翔け上がる。	새가 하늘에 날아오른다.	fix	lookup
+dict:rare-words	壁を白く塗り潰した。	벽을 희게 덧칠했다.	fix	lookup
+dict:rare-words	夜の街を彷徨う。	밤의 거리를 헤맨다.	fix	lookup
+dict:rare-words	躰が冷たい。	몸이 차갑다.	fix	lookup
+dict:rare-words	ココロが痛い。	마음이 아프다.	fix	lookup
+dict:rare-words	ガラスのカケラを拾う。	유리의 조각을 줍는다.	fix	lookup
+dict:rare-words	オトメの夢。	소녀의 꿈.	fix	lookup
+dict:rare-words	刺さった侭の棘。	박힌 그대로의 가시.	fix	lookup
+dict:rare-words	夜空に咲く華。	밤하늘에 피는 꽃.	fix	lookup
+dict:rare-words	中華料理を食べた。	중화 요리를 먹었다.	keep	lookup
+dict:rare-words	華やかな服。	화려한 옷.	keep	lookup
+dict:rare-words	冬が近くなった。	겨울이 가까워졌다.	fix	lookup
+dict:rare-words	駅の近くに住む。	역의 근처에 산다.	keep	lookup
+dict:rare-words	近く結婚する。	가까운 시일내에 결혼한다.	keep	lookup
+dict:rare-words	もう逃げられない。	이제 도망칠 수 없다.	fix	lookup
+dict:rare-words	彼女に逃げられた。	그녀에게 차였다.	keep	lookup
+dict:rare-words	弱気な兄。	마음이 약한 형.	fix	lookup
+dict:rare-words	鍵を探しだす。	열쇠를 찾아낸다.	fix	lookup
+dict:rare-words	風車が回りだした。	풍차가 돌기 시작했다.	fix	lookup
+dict:particle-joins:3	驚くくらいに速い。	놀랄 정도로 빠르다.	fix	lookup
+dict:particle-joins:3	驚くくらい速い。	놀랄 정도로 빠르다.	keep	lookup
+sense:だけに	君だけに話す。	너에게만 이야기한다.	fix	senses
+sense:だけに	兄は医者だけに詳しい。	형은 의사인 만큼 자세하다.	keep	senses
+sense:だけに	子供だけに無理だ。	아이인 만큼 무리이다.	keep	senses
+sense:いたい	ずっと君と一緒にいたい。	쭉 너와 함께 있고 싶다.	fix	senses
+sense:いたい	もっとそばにいたいな。	좀 더 곁에 있고 싶은데.	keep	senses
+sense:いたい	一緒にいかがですか。	함께 어떻습니까.	keep	senses
+sense:いたい	お腹がいたい。	배가 아프다.	keep	senses
+dict:rare-words	朝から頭がいたい。	아침부터 머리가 아프다.	fix	lookup
+dict:rare-words	彷徨える騎士に会った。	떠도는 기사를 만났다.	fix	lookup

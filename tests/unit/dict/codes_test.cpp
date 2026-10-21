@@ -222,6 +222,14 @@ HD_TEST(MarkerClassErrors) {
         {"새%CC@", "H7N0", "the marker family %CC@ conjugates class 8 (adjectival noun) stems, not the part code H7N0"},
         {"아주 기$A5@", "H8U0", "the marker family $A5@ conjugates class 7 (adjective) stems, not the part code H8U0"},
         {"&AA@", "", "the marker family &AA@ conjugates class 4 (verb) stems, not the part code "},
+        {"마음에 걸&AA@ ", "M428",
+         "the marker family &AA@ does not end the target (followed by \" \")"},
+        {"예감이 &L4@0", "M428",
+         "the marker family &L4@ does not end the target (followed by \"0\")"},
+        {"장마가 개&AJ@\"", "M427",
+         "the marker family &AJ@ does not end the target (followed by \"\\\"\")"},
+        {"21 & 오버", "N110", ""},
+        {"1%의 어떤 것", "N110", ""},
     };
     for (const Case& c : cases) HD_CHECK_EQ(MarkerClassError(c.target, PartCode(c.part)), std::string(c.error));
 }

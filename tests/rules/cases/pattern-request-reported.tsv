@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+pattern:te-kure-to	手紙を書いてくれと頼んだ。	편지를 써 달라고 부탁했다.	fix	builtin-phrase
+pattern:te-kure-to	早く来てくれと言った。	빨리 와 달라고 했다.	fix	builtin-phrase
+pattern:te-kure-to	「手紙を書いてくれ」と言った。	「편지를 써 줘」라고 말했다.	keep	builtin-phrase

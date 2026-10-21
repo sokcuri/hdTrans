@@ -172,8 +172,97 @@ HD_TEST(pipeline_write_stutters) {
         {"\uE000・어", "・어"},
         {"\uE000、!", "!"},
         {"\uE000、", ""},
+        // A dash run is a separator.
+        {"「\uE000―――싫어어엇」", "「시―――싫어어엇」"},
+        // A longer piece writes its share of the word's syllables with their finals, short of
+        // the whole word: 2 kana of 6 is 2 of 4 syllables, 2 of 3 is 1 of 2.
+        {"「\uE000、\uE000\uE000\uE004\uE004\uE004\uE004、미안해요」", "「미, 미안, 미안해요」"},
+        {"\uE000、\uE000\uE000\uE004、싫어", "시, 싫, 싫어"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteStutters(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_write_drawls) {
+    struct Case {
+        std::string_view in, want;
+    };
+    const Case cases[] = {
+        // In a polite ending: before 습니다 습니까, before 니다 니까 시다 after ㅂ, before 지요 까요
+        // 네요 군요, else before the last syllable.
+        {"잘 먹겠습니다\uE005…\uE005.", "잘 먹겠…습니다."},
+        {"갔습니까\uE005―\uE005?", "갔―습니까?"},
+        {"최저……입니다\uE005……\uE005", "최저……입……니다"},
+        {"갑시다\uE005…\uE005!", "갑…시다!"},
+        {"그렇겠지요\uE005…\uE005", "그렇겠…지요"},
+        {"고마워요\uE005…\uE005", "고마워…요"},
+        // Before the copula or 하다: 입 합 before 니다, and for でした 이었 였 했 before 습니다.
+        {"좋아합니다\uE006……\uE006\uE005……\uE005", "좋아……합……니다"},
+        {"어떻습니까\uE006…\uE006?", "어떻…습니까?"},
+        {"노력했습니다\uE006…\uE006", "노력했…습니다"},
+        {"조용했습니다\uE007…\uE007", "조용…했습니다"},
+        {"화객선이었습니다\uE007…\uE007", "화객선…이었습니다"},
+        {"조용하네요\uE006…\uE006", "조용하…네요"},
+        // ・ in its Korean form; the space written as if a word followed the span goes before
+        // punctuation and stays before a word.
+        {"받습니다\uE005・・・\uE005", "받···습니다"},
+        {"갑니까 \uE005…\uE005?", "갑…니까?"},
+        {"갑니까 \uE005…\uE005그는", "갑…니까 그는"},
+        // One syllable or no Hangul word before.
+        {"네\uE005…\uE005", "네…"},
+        {"\uE005…\uE005. 아", ". 아"},
+        {"abc\uE005…\uE005", "abc"},
+        // A mark without a closing mark or with other text or nothing before it stays.
+        {"갑니다\uE005…", "갑니다\uE005…"},
+        {"가\uE005나\uE005다", "가\uE005나\uE005다"},
+        {"가\uE006\uE006", "가\uE006\uE006"},
+        {"가\uE007…\uE005", "가\uE007…\uE005"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteDrawls(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_escape_private_use) {
+    struct Case {
+        std::string_view in, escaped;
+    };
+    const Case cases[] = {
+        {"ボタン\uE005を押す", "ボタン\U000F0005を押す"},
+        {"\uE000、あ\uE001\uF8FF", "\U000F0000、あ\U000F0001\U000F18FF"},
+        {"a\uF900b", "a\uF900b"},
+        {"x\xFFy", "x\xFFy"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(pipeline::EscapePrivateUse(c.in), std::string(c.escaped));
+        HD_CHECK_EQ(pipeline::UnescapePrivateUse(c.escaped), std::string(c.in));
+    }
+    // Restore writes the escaped input back.
+    const Pieces typed = {{"ボタン"}, {"\U000F0005", SpanWord}, {"を押す"}};
+    const Pieces cleaned = {{"버튼 "}, {"\U000F0005", SpanWord}, {"을 누른다"}};
+    HD_CHECK_EQ(pipeline::Restore(cleaned, typed, true), std::string("버튼 \uE005을 누른다"));
+}
+
+HD_TEST(pipeline_write_emphasis) {
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"당신 같은 건, \uE008최저\uE009!", "당신 같은 건, 최·저!"},
+        // Spaces between the syllables go; the syllables before the word are not joined to it.
+        {"들어 오면, \uE008안 돼\uE009?", "들어 오면, 안·돼?"},
+        {"제독 \uE008제독\uE009♪", "제독 제·독♪"},
+        {"\uE008돈\uE009, 마니", "돈, 마니"},
+        // A mark without its pair is dropped.
+        {"\uE008사·실", "사·실"},
+        {"그만\uE009", "그만"},
+        {"그만", "그만"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteEmphasis(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_write_lengthening) {
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
 }
 
 HD_TEST(pipeline_drop_particle_marks) {

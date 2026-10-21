@@ -334,7 +334,14 @@ void Worker::BuildTokenTransformText(int i) {
 
 void Worker::BuildSyntheticTransform(std::string_view surface, int token, int offset, bool emptyTarget) {
     Record* record = CreateSyntheticRecord(token, surface, emptyTarget);
-    Insert(InsertLateCandidate(transformSurface, offset, token, record));
+    Item* item = InsertLateCandidate(transformSurface, offset, token, record);
+    if (item == nullptr) {
+        // The validity rules reject a synthetic word when a longer dictionary word starts
+        // here, even when that longer word did not fit the sentence. The span still needs
+        // an item: without one the compose stage writes its source text as it is.
+        item = NewItem(NewDetail(kDetailInfo, token), NewGroup(record, ' '), transformSurface, offset, token);
+    }
+    Insert(item);
 }
 
 // A record for text the dictionary does not know: kana and kanji get a transliterated

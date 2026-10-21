@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:jisjk:147422	予感が当たる	예감이 맞는다	fix	lookup
+dict:jisjk:147422	予感が当たった	예감이 맞았다	fix	lookup
+dict:jisjk:140965	いなす	돌려보낸다	fix	lookup
+dict:jisjk:144900	うろぬく	솎아 낸다	fix	lookup
+dict:jisjk:144899	疎抜く	솎아 낸다	fix	lookup
+dict:jisjk:142278	見い出す	찾아낸다	fix	lookup
+dict:jisjk:91837	見出す	찾아낸다	fix	lookup
+dict:jisjk:141481	もちだす	꺼낸다	fix	lookup
+dict:jisjk:144108	写しだす	나타낸다	fix	lookup
+dict:jisjk:147422	予感が確かに当たる	예감이 확실히 맞는다	keep	lookup
+dict:jisjk:91837	見出だす	발견한다	keep	lookup
+dict:jisjk:144090	うつし出す	비춘다	keep	lookup
+dict:jisjk:141481	持ち出す	꺼낸다	keep	lookup
+dict:jisjk:344046	金をかける	돈을 들인다	keep	lookup

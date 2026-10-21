@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:jisjk:4367	本や雑誌などを読む。	책이나 잡지 등을 읽는다.	fix	lookup
+dict:jisjk:262236	東京などから来た人	도쿄 등에서 온 사람	fix	lookup
+dict:jisjk:365540	本や雑誌などが好きだ。	책이나 잡지 등을 좋아한다.	fix	lookup
+dict:jisjk:114920	公園などで遊ぶ。	공원 등에서 논다.	fix	lookup
+dict:jisjk:6284	通勤時間などの制限	통근 시간 등의 제한	fix	lookup
+dict:jisjk:202269	肉や魚などについて話した。	고기나 물고기 등에 대해서 이야기했다.	fix	lookup
+dict:jisjk:346903	パンなどは食べない。	빵 등은 먹지 않는다.	keep	lookup

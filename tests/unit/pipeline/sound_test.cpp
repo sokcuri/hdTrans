@@ -29,7 +29,8 @@ const dict::LoadResult& SoundDictionary() {
         "とは\t(이)란\tP200\t11\n"
         "かは\t1는가는\tS561\t12\n"
         "では\t그럼\tP250\t13\n"
-        "キー\t키\tN110\t14\n",
+        "キー\t키\tN110\t14\n"
+        "でも\t그렇지만\tE300\t15\n",
     }});
     return result;
 }
@@ -141,6 +142,27 @@ HD_TEST(pipeline_sound) {
         {"だっ……大丈夫", "\xEE\x80\x80" "……大丈夫"},
         {"えっ……本当", "えっ……本当"},
         {"「わ、わ、私は……」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、私は……」"},
+        // A syllable said twice is a stutter even where it alone is a word (さ、 well).
+        {"「さ、さ、最低」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、最低」"},
+        {"「さ、最低」", "「자、最低」"},
+        // A dash run separates; a small vowel stutters its plain vowel; before a dash a lone
+        // vowel stands alone.
+        {"「ぃ―――いやぁッ」", "「\xEE\x80\x80" "―――싫엇」"},
+        {"「あ――本当に」", "「あ――本当に」"},
+        {"「う――痛い」", "「う――痛い」"},
+        // Longer pieces that each begin the next: a kana mark for each kana of the piece and
+        // a rest mark for each kana of the word it does not reach.
+        {"「ご、ごめ、ごめんなさい」",
+         "「\xEE\x80\x80" "、\xEE\x80\x80\xEE\x80\x80\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84" "、ごめんなさい」"},
+        // A dictionary word, a demonstrative, an answer or a sound is a word of its own; a
+        // pause after a word keeps the word; no stutter before a numeral.
+        {"「で、でも、本当」", "「그래서、でも、本当」"},
+        {"「さ、さ、三分」", "「자、さ、三分」"},
+        {"「あ、あれ、何」", "「\xEE\x80\x80" "、あれ、何」"},
+        {"「は、はい、行く」", "「\xEE\x80\x80" "、はい、行く」"},
+        {"「そ、そんな……嘘」", "「\xEE\x80\x80" "、そんな……嘘」"},
+        // A word said again is no piece of it.
+        {"「お、おのれ、おのれぇ」", "「\xEE\x80\x80" "、おのれ、おのれぇ」"},
         {"ドキドキしてきた", "두근두근してきた"},
         {"ぼーっとしてない？", "멍してない？"},
         {"くすくす笑う", "くすくす笑う"},
@@ -150,11 +172,22 @@ HD_TEST(pipeline_sound) {
         {"まっかせてよ！", "まかせてよ！"},
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
-        {"うるさ～い！", "うるさい！"},
+        {"うるさ～い！", "うるさい\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
+        // after a て form is dropped; the lengthening of the last syllable of a phrase inside
+        // a word is marked after it.
+        {"まかせてー！", "まかせて～！"},
+        {"まかせてぇ！", "まかせて！"},
+        {"もっとー！", "もっと～！"},
+        {"冷たいねー", "冷たいね～"},
+        {"やーめーて！", "やめて\uE00A！"},
+        // Unchanged: the casual negative ね, a lone kana, a sound.
+        {"知らねー", "知らねー"},
+        {"よー！", "よー！"},
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},
         {"うーちゃん！", "うーちゃん！"},
@@ -179,7 +212,34 @@ HD_TEST(pipeline_sound) {
         {"あっはっはっ", "아하하"},
         {"うふふっ", "우후훗"},
         {"ぐおおおおっ", "크오오오옷"},
-        {"ドキドキドキ", "ドキドキドキ"},
+        // An ABAB mimetic repeated over more than its two units is read as one run and
+        // written half its Korean for each unit, with no space; a single AB unit is not.
+        // A ッ that closes the run goes with it.
+        {"ドキドキ", "두근두근"},
+        {"ドキドキドキ", "두근두근두근"},
+        {"ドキドキドキドキ", "두근두근두근두근"},
+        {"ドキドキドキドキッ", "두근두근두근두근"},
+        {"うずうずうず", "근질근질근질"},
+        {"うずうずうずうず", "근질근질근질근질"},
+        {"うずうずうずうずうず", "근질근질근질근질근질"},
+        {"わくわくわく", "두근두근두근"},
+        {"あんあんあん", "앙앙앙"},
+        {"あんあんあんあん", "앙앙앙앙"},
+        {"はあはあはあ", "하아하아하아"},
+        {"はあはあはあはあ", "하아하아하아하아"},
+        {"ぶーぶーぶー", "꿀꿀꿀"},
+        {"がくがくがくがくっ", "후들후들후들후들"},
+        {"うずうずうずらを見る。", "근질근질근질らを見る。"},
+        // The first sound of a run reads on through the ッ that the next sound starts
+        // from; a sound alone still ends before the ッ of the word that follows.
+        {"はぎいっくしゅん", "하기잇 에취"},
+        {"はぎいっ", "하기잇"},
+        {"はっきりして", "はっきりして"},
+        {"ぶっ飛ぶ", "ぶっ飛ぶ"},
+        // A burst of breath said as one syllable is not a run of sounds.
+        {"ぎゃっはっ", "걋핫"},
+        {"げっほっ", "겟홋"},
+        {"くっはっ", "쿳핫"},
         // Bursts of breath stand alone; in a word they stay.
         {"かはっ……", "카핫……"},
         {"「かッハ……！」", "「캇하……！」"},
@@ -323,11 +383,22 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"まっかせてよ！", "まかせてよ！"},
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
-        {"うるさ～い！", "うるさい！"},
+        {"うるさ～い！", "うるさい\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
+        // after a て form is dropped; the lengthening of the last syllable of a phrase inside
+        // a word is marked after it.
+        {"まかせてー！", "まかせて～！"},
+        {"まかせてぇ！", "まかせて！"},
+        {"もっとー！", "もっと～！"},
+        {"冷たいねー", "冷たいね～"},
+        {"やーめーて！", "やめて\uE00A！"},
+        // Unchanged: the casual negative ね, a lone kana, a sound.
+        {"知らねー", "知らねー"},
+        {"よー！", "よー！"},
         // Unchanged: a word holds the mark, a sound, a nickname, an ending.
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},
@@ -337,6 +408,73 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"日曜日じゃなかったっけ", "日曜日じゃなかったっけ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
+}
+
+HD_TEST(pipeline_join_spelled_out) {
+    const auto loaded = dict::Load({{
+        0, "base.tsv",
+        "key\tko\tpos\tid\n"
+        "さいてい\t최저\tN110\t1\n"
+        "ダメ\t안 돼\tN110\t2\n"
+        "ば\t1면\tS590\t3\n"
+        "大好き\t너무 좋아\tN110\t4\n"
+        "あげ\t주\tM100\t5\n"
+        "ちょっと\t조금\tE300\t6\n"
+        "うそ\t거짓말\tN110\t7\n"
+        "はる\t봄\tN110\t8\n"
+        "あい\t사랑\tN110\t9\n",
+    }});
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"あなたなんて、さ・い・て・い！", "あなたなんて、\uE008さいてい\uE009！"},
+        {"大・好・き", "\uE008大好き\uE009"},
+        {"ダ・メ・よ？", "\uE008ダメよ\uE009？"},
+        {"あ・げ・る・ねー♪", "\uE008あげるねー\uE009♪"},
+        {"ちょ・っ・と", "\uE008ちょっと\uE009"},
+        {"さ・い・て・いです", "\uE008さいてい\uE009です"},
+        {"う・そ。", "\uE008うそ\uE009。"},
+        // Kana that are no word, a list in the order of the kana table or the iroha and the
+        // choices after a label are read kana by kana.
+        {"そ・ふ・ゆ", "\uE008소후유\uE009"},
+        {"は・ひ・ふ・へ・ほ", "\uE008하히후헤호\uE009"},
+        {"い・ろ・は・に", "\uE008이로하니\uE009"},
+        {"①あ・い", "①\uE008아이\uE009"},
+        {"問１　あ・い", "問１　\uE008아이\uE009"},
+        {"(1) あ・い", "(1) \uE008아이\uE009"},
+        {"あ・イ・う", "\uE008아이우\uE009"},
+        {"き・ゃ・あ", "\uE008きゃあ\uE009"},
+        {"ド・きゅ・う！", "\uE008도큐우\uE009！"},
+        // A word before punctuation, after a bracket that is no label or in katakana and
+        // hiragana.
+        {"は・る！", "\uE008はる\uE009！"},
+        {"(笑) さ・い・て・い！", "(笑) \uE008さいてい\uE009！"},
+        {"答え：さ・い・て・い", "答え：\uE008さいてい\uE009"},
+        {"さ・イ・テ・い", "\uE008さいてい\uE009"},
+        {"さ・ー・い・て・い", "사・ー・이・테・이"},
+        // Two pieces at the end of a line or two particles: kana by kana; a lone ー or small kana
+        // piece: piece by piece, every piece kept.
+        {"う・そ", "\uE008우소\uE009"},
+        {"て・を！", "\uE008테오\uE009！"},
+        {"あ・ー", "아・ー"},
+        {"あ・ゃ", "아・야"},
+        {"）あ・い", "）\uE008아이\uE009"},
+        // Unchanged: names, lists, kanji read one by one, katakana that is no word, a piece
+        // of more than one kana, a run next to other characters, a lone piece.
+        {"ジョン・スミス", "ジョン・スミス"},
+        {"赤・青・黄の三色", "赤・青・黄の三色"},
+        {"謹・賀・新・年", "謹・賀・新・年"},
+        {"ケ・ロ", "ケ・ロ"},
+        {"スー・チー", "スー・チー"},
+        {"愛・たそがれ", "愛・たそがれ"},
+        {"元・帝国軍", "元・帝国軍"},
+        {"君が・ば・か", "君が・ば・か"},
+        {"さ・いてい", "さ・いてい"},
+        {"ば・", "ば・"},
+        {"っ・ば", "っ・ば"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpelledOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
 HD_TEST(pipeline_rewrite_casual_adjectives) {
@@ -360,4 +498,23 @@ HD_TEST(pipeline_sound_extra_isolation) {
     HD_CHECK(!internal::IsSoundKey(U"ガボッ"));
     HD_CHECK(internal::IsSoundKey(U"ガボッ", true));
     HD_CHECK(!internal::IsSoundKey(U"ガボッ"));
+}
+
+// An interjection before a pause or an ellipsis is read as a sound although an end row
+// has the same key; before other text the end row's key still rules it out.
+HD_TEST(pipeline_sound_before_pause_over_end_row) {
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"見て！ぽい～！", "見て！포이~！"},
+        {"…ぽい。", "…포이。"},
+        {"ぽい…", "포이…"},
+        {"ぽいぽい。", "포이포이。"},
+        {"ぽい捨て", "ぽい捨て"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

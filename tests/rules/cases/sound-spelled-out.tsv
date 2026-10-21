@@ -1,0 +1,59 @@
+rule	input	expected	kind	layer
+sound:spelled-out	あなたなんて、さ・い・て・い！	당신 같은 건, 최·저!	fix	sound
+sound:spelled-out	もう、ば・か！	이제, 바·보!	fix	sound
+sound:spelled-out	先生のこと、大・好・き。	선생님, 너·무·좋·아.	fix	sound
+sound:spelled-out	それ、ほ・ん・と・う？	그것, 사·실?	fix	sound
+sound:spelled-out	入っちゃ、ダ・メ・よ？	들어가면, 안·돼?	fix	sound
+sound:spelled-out	後で、あ・げ・る♪	나중에, 준·다♪	fix	sound
+sound:spelled-out	答えは、ひ・み・つ。	대답은, 비·밀.	fix	sound
+sound:spelled-out	ジョン・スミスが来た。	존 스미스가 왔다.	keep	sound
+sound:spelled-out	赤・青・黄の三色。	적·청·황의 삼색.	keep	sound
+sound:spelled-out	謹・賀・新・年。	근·하·신·년.	keep	sound
+sound:spelled-out	ア・イが来た。	아·이가 왔다.	keep	sound
+sound:spelled-out	コーヒー・ショップに行く。	커피숍에 간다.	keep	sound
+sound:spelled-out	もう、さ・い・て・い……です。	이제, 최·저……입니다.	fix	sound
+sound:spelled-out	①あ・い	①아·이	fix	sound
+sound:spelled-out	問１　あ・い・う	문 1 아·이·우	fix	sound
+sound:spelled-out	い・ろ・は・に・ほ・へ・と	이·로·하·니·호·헤·토	fix	sound
+sound:spelled-out	は・ひ・ふ・へ・ほ	하·히·후·헤·호	fix	sound
+sound:spelled-out	か・ん・こ・れ！	칸·코·레!	fix	sound
+sound:spelled-out	ユ・リ	유·리	keep	sound
+sound:spelled-out	お・は・よ～！	안·녕~!	fix	sound
+sound:spelled-out	ば・か	바·카	fix	sound
+sound:spelled-out	う・そ	우·소	fix	sound
+sound:spelled-out	す・き	스·키	fix	sound
+sound:spelled-out	い・く！	간·다!	fix	sound
+sound:spelled-out	し・ね！	죽·어·라!	fix	sound
+sound:spelled-out	「や・だ」	「싫·어」	fix	sound
+sound:spelled-out	（小声）だ・い・す・き	(작은 소리) 너·무·좋·아	fix	sound
+sound:spelled-out	(笑) さ・い・て・い！	(웃음) 최·저!	fix	sound
+sound:spelled-out	答え：ひ・み・つ	대답：비·밀	fix	sound
+sound:spelled-out	マ・ジ？	진·짜?	fix	sound
+sound:spelled-out	ゴ・ミ！	쓰·레·기!	fix	sound
+sound:spelled-out	チ・ビ！	꼬·마!	fix	sound
+sound:spelled-out	(1) あ・い	(1) 아·이	fix	sound
+sound:spelled-out	あ・イ・う	아·이·우	keep	sound
+sound:spelled-out	さ・イ・テ・い！	최·저!	fix	sound
+sound:spelled-out	き・ゃ・あ	꺄·아	fix	sound
+sound:spelled-out	す・ー・ご・い	스·-·고·이	fix	sound
+sound:spelled-out	ば・か！	바·보!	fix	sound
+sound:spelled-out	て・を	테·오	fix	sound
+sound:spelled-out	の・に	노·니	fix	sound
+sound:spelled-out	は・が	하·가	fix	sound
+sound:spelled-out	か・き	카·키	fix	sound
+sound:spelled-out	さ・し	사·시	fix	sound
+sound:spelled-out	た・ち	타·치	fix	sound
+sound:spelled-out	あ・か	아·카	fix	sound
+sound:spelled-out	あ・い	아·이	fix	sound
+sound:spelled-out	い・ろ	이·로	fix	sound
+sound:spelled-out	バ・ン	바·응	keep	sound
+sound:spelled-out	問　あ・い	문 아·이	fix	sound
+sound:spelled-out	第１問 あ・い	제1문 아·이	fix	sound
+sound:spelled-out	問題ア．あ・い	문제아. 아·이	fix	sound
+sound:spelled-out	）あ・い	) 아·이	fix	sound
+sound:spelled-out	あ・ー	아·-	keep	sound
+sound:spelled-out	あ・ー・ー	아·-·-	keep	sound
+sound:spelled-out	は・ー	하·-	fix	sound
+sound:spelled-out	え・ー	에·-	fix	sound
+sound:spelled-out	そ・ー・だ	소·-·다	fix	sound
+sound:spelled-out	あ・ゃ	아·야	keep	sound

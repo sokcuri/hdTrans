@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "core/pipeline/protect.h"
+#include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -13,7 +14,6 @@ namespace {
 
 using output::SpanKind;
 
-constexpr char32_t kStutterMark = 0xE000;
 
 struct Match {
     size_t length = 0;
@@ -100,8 +100,8 @@ Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
     return {n, output::SpanOpen};
 }
 
-// The length in characters of a stutter separator at rs[i]: 、 ， or a run of … ‥ or of
-// two or more ・.
+// The length in characters of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or
+// of two or more ・.
 size_t StutterSeparator(const std::vector<text::Rune>& rs, size_t i) {
     if (i >= rs.size()) return 0;
     const char32_t c = rs[i].cp;
@@ -111,6 +111,9 @@ size_t StutterSeparator(const std::vector<text::Rune>& rs, size_t i) {
             return 1;
         case U'…':
         case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
         case U'・': {
             size_t n = i;
             while (n < rs.size() && rs[n].cp == c) n++;
@@ -130,10 +133,33 @@ Match StutterSpan(std::string_view s) {
         w.remove_prefix(rs.back().size);
     }
     size_t n = 0;
-    while (n < rs.size() && rs[n].cp == kStutterMark) n += 1 + StutterSeparator(rs, n + 1);
+    while (n < rs.size() && (rs[n].cp == kStutterMark || rs[n].cp == kStutterRest)) n += 1 + StutterSeparator(rs, n + 1);
     size_t bytes = 0;
     for (size_t k = 0; k < n; k++) bytes += rs[k].size;
     return {bytes, output::SpanOpen};
+}
+
+// A drawl span: kDrawlMark, kLeadDrawlMark or kPastLeadDrawlMark, one or more pause marks
+// (…‥・―─) and the same mark.
+Match DrawlSpan(std::string_view s) {
+    const text::Rune open = text::DecodeRune(s);
+    if (open.cp != kDrawlMark && open.cp != kLeadDrawlMark && open.cp != kPastLeadDrawlMark) return {};
+    for (size_t n = open.size; n < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(n));
+        n += r.size;
+        if (r.cp == open.cp) return {n > 2 * open.size ? n : 0, output::SpanOpen};
+        if (!RuneIn(r.cp, U"…‥・―─")) return {};
+    }
+    return {};
+}
+
+// An emphasis mark: kEmphasisOpen opens a span, kEmphasisClose and kLengthenMark close
+// one.
+Match EmphasisSpan(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (r.cp == kEmphasisOpen) return {r.size, output::SpanOpen};
+    if (r.cp == kEmphasisClose || r.cp == kLengthenMark) return {r.size, output::SpanClose};
+    return {};
 }
 
 bool IsHangul(char32_t r) {
@@ -175,10 +201,11 @@ Match ForeignSpan(std::string_view s) {
     return {n, output::SpanWord};
 }
 
-enum class SpanClass { Tag, BbCode, Entity, Marker, Stutter, Hangul, Foreign };
+enum class SpanClass { Tag, BbCode, Entity, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign };
 
-constexpr SpanClass kClasses[] = {SpanClass::Tag,     SpanClass::BbCode, SpanClass::Entity, SpanClass::Marker,
-                                  SpanClass::Stutter, SpanClass::Hangul, SpanClass::Foreign};
+constexpr SpanClass kClasses[] = {SpanClass::Tag,    SpanClass::BbCode,   SpanClass::Entity,
+                                  SpanClass::Marker, SpanClass::Stutter,  SpanClass::Drawl,
+                                  SpanClass::Emphasis, SpanClass::Hangul, SpanClass::Foreign};
 
 Match MatchClass(SpanClass c, std::string_view s, std::span<const std::string> markers) {
     switch (c) {
@@ -187,6 +214,8 @@ Match MatchClass(SpanClass c, std::string_view s, std::span<const std::string> m
         case SpanClass::Entity: return EntitySpan(s);
         case SpanClass::Marker: return MarkerSpan(s, markers);
         case SpanClass::Stutter: return StutterSpan(s);
+        case SpanClass::Drawl: return DrawlSpan(s);
+        case SpanClass::Emphasis: return EmphasisSpan(s);
         case SpanClass::Hangul: return HangulSpan(s);
         case SpanClass::Foreign: return ForeignSpan(s);
     }

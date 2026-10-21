@@ -103,10 +103,50 @@ std::string_view PartNameOf(std::string_view code) {
     return {};
 }
 
+namespace {
+
+bool FamilyChar(char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+
+// s in quotes, with its backslashes, quotes and white space escaped.
+std::string Quoted(std::string_view s) {
+    std::string out(1, '"');
+    for (const char c : s) {
+        switch (c) {
+            case '\\': out += "\\\\"; break;
+            case '"': out += "\\\""; break;
+            case '\t': out += "\\t"; break;
+            case '\n': out += "\\n"; break;
+            case '\r': out += "\\r"; break;
+            default: out += c; break;
+        }
+    }
+    out += '"';
+    return out;
+}
+
+// The start of the last marker family ("&A6@") of target, or npos.
+std::size_t LastMarker(std::string_view target) {
+    std::size_t at = std::string_view::npos;
+    for (std::size_t i = 0; i + 4 <= target.size(); i++) {
+        const char c = target[i];
+        if ((c == '&' || c == '$' || c == '%') && FamilyChar(target[i + 1]) && FamilyChar(target[i + 2]) &&
+            target[i + 3] == '@') {
+            at = i;
+        }
+    }
+    return at;
+}
+
+}  // namespace
+
 std::string MarkerClassError(std::string_view target, PartCode part) {
-    const std::size_t n = target.size();
-    if (n < 4 || target[n - 1] != '@') return {};
-    const char marker = target[n - 4];
+    const std::size_t at = LastMarker(target);
+    if (at == std::string_view::npos) return {};
+    if (at + 4 != target.size()) {
+        return "the marker family " + std::string(target.substr(at, 4)) + " does not end the target (followed by " +
+               Quoted(target.substr(at + 4)) + ")";
+    }
+    const char marker = target[at];
     WordClass want;
     std::string_view name;
     switch (marker) {
@@ -116,7 +156,7 @@ std::string MarkerClassError(std::string_view target, PartCode part) {
     default: return {};
     }
     if (part.Class() == want) return {};
-    return "the marker family " + std::string(target.substr(n - 4)) + " conjugates class " + std::string(name) +
+    return "the marker family " + std::string(target.substr(at, 4)) + " conjugates class " + std::string(name) +
            " stems, not the part code " + std::string(part.Text());
 }
 

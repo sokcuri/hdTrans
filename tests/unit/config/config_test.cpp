@@ -48,7 +48,7 @@ HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(
         "# settings\ndicts: [dicts, '../extra']\nuserdict: user.tsv\nehnd: Ehnd\n"
-        "cache: cache\ncg: false\nmisread: true\nreference: true\n");
+        "cache: cache\ncg: false\nmisread: true\nreference: true\nspeech: strict\n");
     HD_CHECK(result.found);
     HD_REQUIRE(result.diagnostics.empty());
     const auto& settings = result.settings;
@@ -63,6 +63,21 @@ HD_TEST(ConfigAllKeys) {
     HD_CHECK(!settings.cg);
     HD_CHECK(settings.misread);
     HD_CHECK(settings.reference);
+    HD_CHECK(settings.speech == hdTrans::Speech::Strict);
+}
+
+HD_TEST(ConfigSpeech) {
+    TempConfig file;
+    const struct Case { const char* yaml; hdTrans::Speech want; } cases[] = {
+        {"speech: soft\n", hdTrans::Speech::Soft},
+        {"speech: strict\n", hdTrans::Speech::Strict},
+        {"speech: Strict\n", hdTrans::Speech::Strict},
+    };
+    for (const auto& test : cases) {
+        const auto result = file.Load(test.yaml);
+        HD_CHECK(result.diagnostics.empty());
+        HD_CHECK(result.settings.speech == test.want);
+    }
 }
 
 HD_TEST(ConfigPaths) {
@@ -106,6 +121,7 @@ HD_TEST(ConfigEmptyAndMissing) {
         HD_CHECK(result.settings.cg);
         HD_CHECK(!result.settings.misread);
         HD_CHECK(!result.settings.reference);
+        HD_CHECK(result.settings.speech == hdTrans::Speech::Soft);
     }
 }
 
@@ -123,6 +139,10 @@ HD_TEST(ConfigInvalidEntries) {
         "misread: yes\n",
         "misread: null\n",
         "reference: []\n",
+        "speech: always\n",
+        "speech: true\n",
+        "speech: 1\n",
+        "speech: [soft]\n",
         "userdict: 123\n",
         "userdict: !!int 42\n",
         "userdict: \"a\\0b\"\n",

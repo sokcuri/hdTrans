@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:jisjk:257479	犬でなし	개가 아님	fix	lookup
+dict:jisjk:257479	人でなし	사람이 아님	keep	lookup
+dict:jisjk:145349	悪役になりきって	악역이 되어	fix	global-ending
+dict:jisjk:145349	主人公になりきる	주인공이 된다	keep	global-ending
+dict:jisjk:104095	「本」とともに歩む。	「본」과 함께 걷는다.	fix	lookup
+dict:jisjk:104095	「希望」とともに生きる。	「희망」과 함께 산다.	keep	lookup

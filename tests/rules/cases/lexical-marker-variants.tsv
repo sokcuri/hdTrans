@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:ina-nasu:1	往なす	돌려보낸다	fix	lookup
+dict:ina-nasu:1	往なした	돌려보냈다	fix	lookup
+dict:midasu-variants:1	見だす	찾아낸다	fix	lookup
+dict:midasu-variants:1	見だした	찾아냈다	fix	lookup
+dict:jisjk:91837	見出す	찾아낸다	keep	lookup
+dict:jisjk:140965	いなす	돌려보낸다	keep	lookup
+dict:jisjk:141481	持ち出す	꺼낸다	keep	lookup
+dict:jisjk:142278	見いだす	발견한다	keep	lookup

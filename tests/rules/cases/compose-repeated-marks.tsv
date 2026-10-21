@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+compose:repeated-marks	「行くよ！！」	「가!!」	fix	compose
+compose:repeated-marks	「本当！？」	「정말!?」	fix	compose
+compose:repeated-marks	「誰？？」	「누구??」	fix	compose
+compose:repeated-marks	「やった！！！」	「해냈다!!!」	fix	compose
+compose:repeated-marks	「嘘でしょ！？！？」	「거짓말이지!?!?」	fix	compose
+compose:repeated-marks	「すごい～！！」	「대단해~!!」	fix	compose
+compose:repeated-marks	「待って‼」	「기다려!!」	fix	compose
+compose:repeated-marks	「えっ⁉」	「어!?」	fix	compose
+compose:repeated-marks	……！！	……!!	fix	compose
+compose:repeated-marks	行くよ！！手柄は	가!! 공훈은	fix	compose
+compose:repeated-marks	マジで!!	진짜로!!	keep	compose
+compose:repeated-marks	行くよ！	가!	keep	compose
+compose:repeated-marks	「え？」	「어?」	keep	compose

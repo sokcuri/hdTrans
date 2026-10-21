@@ -22,6 +22,17 @@ constexpr char32_t kVowelMark = 0xE001;
 constexpr char32_t kConsonantMark = 0xE002;
 constexpr char32_t kRieulMark = 0xE003;
 
+// The marks the sound stage writes around a word spelled out with ・ for emphasis
+// (さ・い・て・い), an opening and a closing span that the restore stage writes as · between
+// the syllables of the word; the closing mark does not hide the sentence end after it.
+constexpr char32_t kEmphasisOpen = 0xE008;
+constexpr char32_t kEmphasisClose = 0xE009;
+
+// The mark the sound stage writes after a word whose last syllable is lengthened
+// (せんぱーい), a closing span that the restore stage writes as ~; a sentence end after it
+// is still the end of the word's sentence.
+constexpr char32_t kLengthenMark = 0xE00A;
+
 struct Piece {
     std::string text;
     SpanKind span = SpanText;

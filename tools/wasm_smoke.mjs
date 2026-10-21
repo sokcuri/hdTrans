@@ -276,6 +276,33 @@ try {
     translator.close();
     independent.close();
 }
+{
+    // 高い as 높다: quoted speech is 높아 unless speech is strict.
+    engine.FS.mkdir('/speech');
+    engine.FS.writeFile('/speech/base.tsv', 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n'
+        + '高\t$D3@\tH7N0\t\t\tGN\t0\t1\nい\t1다\tT500\t\t\tGN\t0\t2\n');
+    const soft = await HdTrans.init({ module: engine, directories: ['/speech'] });
+    const strict = await HdTrans.init({ module: engine, directories: ['/speech'], speech: 'strict' });
+    try {
+        assert.equal(soft.translate('「高い」'), '「높아」');
+        assert.equal(soft.translate('「高い」', { speech: 'strict' }), '「높다」');
+        assert.equal(soft.translate('「高い」'), '「높아」', 'a per-call level applies to that call only');
+        assert.equal(soft.translate('高い。'), '높다.', 'narration keeps its plain end');
+        assert.equal(soft.translate('「高い。'), '「높아.');
+        assert.equal(soft.translate('高い」'), '높아」', 'a quote carries to the next call');
+        soft.reset();
+        assert.equal(soft.translate('高い」'), '높다」', 'reset forgets the open quote');
+        soft.setSpeech('strict');
+        assert.equal(soft.translate('「高い」'), '「높다」');
+        assert.throws(() => soft.setSpeech('always'), /speech takes soft or strict/);
+        assert.equal(soft.translate('「高い」'), '「높다」', 'a rejected level keeps the current one');
+        assert.equal(strict.translate('「高い」'), '「높다」');
+    } finally {
+        soft.close();
+        strict.close();
+    }
+    console.log('PASS wasm smoke: speech levels, per-call option, quote carry');
+}
 translator.close();
 assert.deepEqual(translator.getInfo(), info);
 assert.equal(translator.version, info.version);

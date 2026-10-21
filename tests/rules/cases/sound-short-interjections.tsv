@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:uowa	うっ、うあ、うはあ、うひょ、うおわ、うおおっ	윽, 우아, 우하아, 우효, 우오와, 우오옷	fix	sound
+sound:uhara	あん、はあん、ああん、はああん、はあ、あんはああん、	앙, 하앙, 아앙, 하아앙, 하아, 앙하아앙,	keep	sound
+sound:uowa	うおっ！	우옷!	keep	sound
+sound:uhara	はあ、そうですか。	하아, 그렇습니까.	keep	sound

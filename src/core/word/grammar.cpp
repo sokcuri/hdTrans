@@ -882,6 +882,43 @@ void NiAfterAdverb(Flusher& f) {
     }
 }
 
+// Pronouns whose genitive takes the short form: 나의 -> 내, 저의 -> 제, 너의 -> 네.
+constexpr std::string_view kFirstPersonPronouns[] = {"私", "僕", "俺", "わたし", "わたくし", "あたし", "ぼく", "おれ", "ボク", "オレ"};
+constexpr std::string_view kSecondPersonPronouns[] = {"君", "お前", "おまえ", "きみ"};
+
+// A pronoun and the genitive の right before a word (a letter or digit, in the same token
+// or at the start of the next) read as the short possessive (내 책); before punctuation,
+// a particle or a gap they stay 나의.
+void ShortPossessive(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        Item* n = it->next;
+        if (n == nullptr || n->group->surface != "の" || it->selected < 0 || n->selected < 0 || it->detail->Yougo() ||
+            ItemLemma(f, n, n->selected) != "의") {
+            continue;
+        }
+        const Item* m = n->next;
+        const int end = n->start + n->length;
+        const bool adjacent =
+            m != nullptr && ((m->tokenIndex == n->tokenIndex && m->start == end) ||
+                             (m->tokenIndex == n->tokenIndex + 1 && end == static_cast<int>(n->text.size()) && m->start == 0));
+        if (!adjacent || m->selected < 0 || At(m->Code(m->selected), 0) == '2' || At(m->Code(m->selected), 0) == '6') continue;
+        if (const char32_t r = text::DecodeRune(m->group->surface).cp; !text::IsLetter(r) && !text::IsDigit(r)) continue;
+        const std::string lemma = ItemLemma(f, it, it->selected);
+        const std::string_view s = it->group->surface;
+        std::string_view target;
+        if ((lemma == "나" || lemma == "저") && InSet(kFirstPersonPronouns, s)) {
+            target = lemma == "나" ? "내 " : "제 ";
+        } else if (lemma == "너" && InSet(kSecondPersonPronouns, s)) {
+            target = "네 ";
+        } else {
+            continue;
+        }
+        // The pronoun carries the space; the empty の adds none.
+        TakeTarget(n, At(n->Code(n->selected), 0), "");
+        TakeTarget(it, At(it->Code(it->selected), 0), target);
+    }
+}
+
 void NoAfterNa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;

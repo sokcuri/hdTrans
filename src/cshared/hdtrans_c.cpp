@@ -126,6 +126,7 @@ int hdTrans_Initialize(const char* dirs) {
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
+    g_session->SetSpeech(settings.speech);
     g_dirs = requestedPaths;
     g_ehnd.reset();
     g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
@@ -194,6 +195,7 @@ int hdTrans_Reload(void) {
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
+    g_session->SetSpeech(settings.speech);
     g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
     ++g_generation;
     return 0;

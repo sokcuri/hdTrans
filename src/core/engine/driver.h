@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "core/dict/snapshot.h"
+#include "core/engine.h"
 #include "core/output/families.h"
 #include "core/names/document.h"
 #include "core/output/pieces.h"
@@ -77,9 +78,17 @@ std::string RuleProgramText(const dict::Snapshot& snap);
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap);
 
 // What a session keeps between its calls.
+// The quotes a line leaves open for the lines after it (「明日行く。 then 明後日も行く」), and
+// how many lines in a row have ended inside them.
+struct QuoteCarry {
+    int depth = 0;
+    int lines = 0;
+};
+
 struct Memory {
     std::shared_ptr<pipeline::DocumentHistory> document;
     word::SessionSenses senses;
+    QuoteCarry quotes;
 };
 
 struct TranslationOptions {
@@ -95,6 +104,8 @@ struct TranslationOptions {
     // The pre-filter rewrites each line before translation and the post-filter its
     // translation; their user dictionary joins the lookups. Null for none.
     const filter::Filters* filters = nullptr;
+    // The speech level of the text inside 「」; Strict with reference.
+    Speech speech = Speech::Soft;
 };
 
 // Translates the lines of one call as one document: the registry and the document context
