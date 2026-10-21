@@ -440,6 +440,29 @@ bool TopicWa(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// A word, then ([たるうすつむぐぬだな])ん(か)?[？?]: the spoken の of a question after a
+// predicate (落ちたん？ 落ちたの？, 言うんか？ 言うのか？). Group 1 the predicate's last
+// kana, group 2 か. うん？ and ううん？ stay, and so do くん and ぶん (コウジくん？, たぶん？).
+bool QuestionN(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0) return false;
+    const char32_t before = LastRune(s.substr(0, pos)).cp;
+    if (!IsHiraganaClass(before) && !IsKanjiClass(before) && !(before >= U'ァ' && before <= U'ヺ')) return false;
+    size_t p = pos;
+    if (!OneOf(s, p, U"たるうすつむぐぬだな")) return false;
+    if (Span(s, pos, p) == "う" && (before == U'う' || before == U'ぅ')) return false;
+    // …しちょるん？ and …てくれてるん？ stay.
+    if (Span(s, pos, p) == "る" && (before == U'ょ' || s.substr(0, pos).ends_with("くれて"))) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ん")) return false;
+    const size_t k = p;
+    Lit(s, p, "か");
+    m.group[2] = Span(s, k, p);
+    size_t q = p;
+    if (!OneOf(s, q, U"？?")) return false;
+    m.end = p;
+    return true;
+}
+
 bool ContainsAny(std::string_view s, std::u32string_view set) {
     for (size_t i = 0; i < s.size();) {
         const text::Rune r = At(s, i);
@@ -497,6 +520,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (Contains(text, "ん")) {
         text = ReplaceAll(text, NegativeN, [](const Match& m) { return Group1Plus(m, "ない"); });
         text = ReplaceAll(text, NegativeE, [](const Match& m) { return Group1Plus(m, "ない"); });
+    }
+    if (dialectForms && Contains(text, "ん")) {
+        text = ReplaceAll(text, QuestionN, [](const Match& m) { return Cat({m.group[1], "の", m.group[2]}); });
     }
     if (dialectForms && Contains(text, "わ")) {
         text = ReplaceAll(text, TopicWa, [](const Match& m) { return Cat({m.group[1], "は"}); });

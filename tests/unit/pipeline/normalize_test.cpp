@@ -455,6 +455,13 @@ HD_TEST(pipeline_dialect_forms) {
         {"ちげぇねえ"sv, "ちげぇねえ"sv},
         {"こっちわ大丈夫"sv, "こっちは大丈夫"sv},
         {"お前わかってる"sv, "お前わかってる"sv},
+        {"試験に落ちたん？"sv, "試験に落ちたの？"sv},
+        {"もう行ったんか？"sv, "もう行ったのか？"sv},
+        {"そうなん？"sv, "そうなの？"sv},
+        {"うん？"sv, "うん？"sv},
+        {"ううん？"sv, "ううん？"sv},
+        {"コウジくん？"sv, "コウジくん？"sv},
+        {"たぶん？"sv, "たぶん？"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));

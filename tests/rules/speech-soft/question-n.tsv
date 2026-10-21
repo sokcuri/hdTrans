@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+normalize:question-n	「試験に落ちたん？」	「시험에 떨어졌어?」	fix	normalize
