@@ -55,3 +55,7 @@ dict:jisjk:90200	「本当にごめんね、遅れて」	「정말로 미안해,
 dict:jisjk:201961	「誕生日おめでとう！」	「생일 축하해!」	fix	defaults
 dict:jisjk:201961	「おめでとうございます」	「축하합니다」	keep	defaults
 dict:onegai-ne:1	「お願いね」	「부탁해」	fix	defaults
+constraint:kotoshi-suru	「そんなことしないもん！」	「그런 일 하지 않는 걸!」	fix	lookup
+constraint:kotoshi-suru	「ことしの夏は暑い」	「금년 여름은 덥다」	keep	lookup
+dict:chikushou:1	ああちくしょう	아 젠장	fix	defaults
+dict:jisjk:2304	「エッチな本」	「야한 책」	fix	defaults

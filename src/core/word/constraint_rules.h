@@ -36,6 +36,7 @@ enum class ConstraintContext : uint8_t {
     NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
     Detached,           // nothing, a space or punctuation right before the word (名前: め)
+    BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
 };
 
 // The senses a rule rejects.
