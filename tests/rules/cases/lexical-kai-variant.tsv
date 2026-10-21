@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+dict:kai-variant:1	廻る	돈다	fix	lookup
+dict:kai-variant:2	廻った	돌았다	fix	lookup
+dict:kai-variant:3	廻す	돌린다	fix	lookup
+dict:kai-variant:4	飛び廻る	날아다닌다	fix	lookup
+dict:kai-variant:5	逃げ廻る	도망 다닌다	fix	lookup
+dict:kai-variant:6	押し廻す	대처해 나간다	fix	lookup
+dict:kai-variant:7	取り廻す	잘 처리한다	fix	lookup
+dict:kai-variant:10	手廻し	수동식	fix	lookup
+dict:kai-variant:13	大廻し	대돌리기	fix	lookup
+dict:kai-variant:14	磯廻	후미	fix	lookup
+dict:kai-variant:1	廻し飲み	돌려 마시는 것	fix	lookup
+dict:jisjk:142699	廻り込む	돌아 들어간다	fix	lookup
+dict:jisjk:365250	廻し	돌리기	fix	lookup
+dict:jisjk:13823	回る	돈다	keep	lookup
+dict:jisjk:365250	回し	돌리기	keep	lookup
+dict:jisjk:161710	廻転	회전	keep	lookup
+dict:jisjk:115519	輪廻	윤회	keep	lookup
+dict:jisjk:13824	出廻る	나돈다	keep	lookup
