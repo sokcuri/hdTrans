@@ -47,8 +47,8 @@ dict:jisjk:342047	どこでしょう。	어디일까요.	fix	local
 dict:jisjk:342047	何でしょう。	무엇일까요.	keep	local
 dict:jisjk:341042	水のみ飲んだ。	물만 마셨다.	fix	local
 dict:jisjk:341042	残るのは一人のみだ。	남는 것은 한 사람만이다.	keep	local
-dict:jisjk:354116	でも、行く。	그렇지만, 간다.	fix	local
-dict:jisjk:354116	まあでも大丈夫だ。	뭐 그렇지만 괜찮다.	keep	local
+dict:jisjk:354116	でも、行く。	하지만, 간다.	fix	local
+dict:jisjk:354116	まあでも大丈夫だ。	뭐 하지만 괜찮다.	keep	local
 dict:jisjk:260869	村で亡くなった。	마을에서 죽었다.	fix	local
 dict:jisjk:260869	町で流行する。	마을에서 유행한다.	keep	local
 dict:jisjk:342120	どんなのが好きですか。	어떤 것을 좋아합니까.	fix	local

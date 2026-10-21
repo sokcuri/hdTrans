@@ -23,3 +23,5 @@ sound:lead-domo	子どもたちが遊んでいる。	아이들이 놀고 있다.
 sound:lead-teka	てか、もう帰ろう。	그보다, 이제 돌아가자.	fix	sound
 sound:lead-nandato	なんだと！？	뭐라고!?	fix	sound
 sound:lead-nandato	なんだと、もう一度言ってみろ。	뭐라고, 한번 더 말해 봐라.	fix	sound
+dict:jisjk:461	しかし、誰も来なかった。	하지만, 아무도 오지 않았다.	fix	defaults
+dict:jisjk:6124	「だけど、もう遅いよ」	「하지만, 이미 늦어」	fix	local
