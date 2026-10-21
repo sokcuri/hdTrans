@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:lead-horane	ほらね？ さ、行こう。	거봐? 자, 가자.	fix	sound
+sound:lead-horane	ほらな、言った通りだろ。	거봐, 말한 대로지.	fix	sound
+sound:lead-horane	ほ～らねっ、ここにあった。	거봐, 여기에 있었다.	fix	sound
+sound:lead-horane	ほら、見て！	자, 봐!	keep	sound
