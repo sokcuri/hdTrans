@@ -326,7 +326,7 @@ L2186	つきの光が明るい。	달의 빛이 밝다.	fix	local
 L2193	調子はどう？	상태는 어때?	current	local
 L2193	この服、どう？	이 옷, 어때?	current	local
 L2198	って、それ本当なの？	라고, 그것 사실이야?	current	local
-L2198	って、さっきから何を言ってるの？	라고, 조금 전부터 무슨 말을 해?	current	local
+L2198	って、さっきから何を言ってるの？	라고, 조금 전부터 무슨 소리야?	current	local
 L2213	私が悪い。	내가 나쁘다.	current	local
 L2213	最近は私が忙しい。	최근에는 내가 바쁘다.	current	local
 L2218	寿司を自分で握ったこともあるんだ。	스시를 스스로 만든 적도 있는 거야.	current	local-ending
