@@ -14,3 +14,5 @@ constraint:sou-itta-predicate	確かにそう言ったが、本気ではない�
 constraint:sou-itta-predicate	そう言った意味では正しい。	그런 의미에서는 올바르다.	keep	lookup
 constraint:sou-itta-predicate	そう言った問題はよくある。	그런 문제는 자주 있다.	keep	lookup
 dict:jisjk:5239	薬を飲むと眠くなるそうです。	약을 먹으면 졸려진다고 합니다.	fix	lookup
+dict:nitotte-koitsu:1	僕にとってこいつは相棒だ。	나에게 이 녀석은 파트너다.	fix	lookup
+dict:nitotte-koitsu:1	ボールを取ってこい。	공을 취하고 와.	keep	lookup
