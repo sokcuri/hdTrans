@@ -29,6 +29,8 @@ enum class ConstraintContext : uint8_t {
     AfterDemonstrative, // right after この, その or あの
     BeforeNaru,         // なる follows (こうなる), not the old attributive of an adjective (こうなるべく)
     BeforeAgaru,        // 上が follows (一人立ち上がり), so the shorter word ends inside a longer one
+    AfterPredicate,     // right after た, だ, る, う, い, す or ん in the token or the token before (だったわ, ですわ)
+    NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
 };
 
 // The senses a rule rejects.
@@ -54,6 +56,8 @@ enum class ConstraintReject : uint8_t {
     Adverb,
     // The senses whose Korean is not the rule's target, when one is.
     OtherTargets,
+    // The senses whose Korean is the rule's target, when another sense remains.
+    Target,
     // Every sense of the word, when a candidate with a longer source remains.
     Word,
 };
@@ -65,7 +69,7 @@ struct ConstraintRule {
     ConstraintContext context;
     ConstraintReject reject;
     std::string_view note;    // the rule in Korean
-    std::string_view target;  // ConstraintReject::OtherTargets only
+    std::string_view target;  // ConstraintReject::OtherTargets and Target only
 };
 
 // In table order; each rule runs on the candidates the earlier ones left.

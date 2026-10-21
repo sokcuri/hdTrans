@@ -41890,6 +41890,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 め	4	T500			GN				jisjk:264590		
 め	4	U500			GN				jisjk:264593		
 め	째	Q110			GN				jisjk:341527		
+め		Q110			GN			수 없이 홀로 선 め는 옮기지 않음 (化け物め 괴물, ごめ의 조각)	me-empty:1		
 めあたらし	진기$AB@	H7U0			GN				jisjk:5277		
 めあたらし	새$G9@	H7N0	SFl		GN				jisjk:136681		
 めいかくさ	명확함	N110			GN				jisjk:161591		
@@ -44173,6 +44174,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 わ	&C2@	M438			GN				jisjk:343693		
 わ	나&C4@	M438			GN	3503	||2 &&5 M+0== "50*" G-1== "NjNd" G+1== "NjNd" S+2== "は" Y+0= "1기" &&5 ||2 S-1== "で" S-1== "に" P-1== "2**" P-2== "1**" G-2== "NjNd" D-1= "(으)로"	숫자 사이의 명사화 문맥이면 わ의 어미를 -기로 바꾸거나 수치 표현과 で·に 뒤이면 나누다를 고르고 조사를 으로로 바꾼다. (미발동: rare-context)	jisjk:343708		
 わ	와	Q110			GN				jisjk:368457		
+わ		Q110			GN			술어 뒤 말끝의 わ는 옮기지 않음 (だったわ, ですわ)	wa-empty:1		
 わ	3래요	S500			GN				jisjk:368458		
 わぁー	우와~	E320			GN				jisjk:265000		
 わあ,	우와,	A9D0			GN				jisjk:264000		
