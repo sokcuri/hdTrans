@@ -384,7 +384,7 @@ constexpr std::string_view kGradualAdverbs[] = {
     "次第", "徐々", "どんどん", "だんだん", "段々", "ますます", "益々", "日に日に", "少しずつ", "みるみる",
 };
 
-// Stems of the verbs of noticing or remembering that take 못하다 (notYet).
+// Stems of the verbs of noticing or remembering whose negative takes 못하다 (notYet).
 constexpr std::string_view kNotYetVerbs[] = {"気づ", "気付", "気がつ", "気が付", "覚え"};
 
 // Whether an adverb of gradual change stands before it in its sentence.
@@ -430,14 +430,16 @@ void NotYet(Flusher& f) {
         Item* n = it->next;
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());
-        if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || n->group->surface != "いな" ||
+        if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || (n->group->surface != "いな" && n->group->surface != "な") ||
             ItemLemma(f, n, n->selected) != "않다" || !std::any_of(std::begin(kNotYetVerbs), std::end(kNotYetVerbs),
                                                                     [&](std::string_view v) { return it->group->surface.ends_with(v); })) {
             continue;
         }
+        Entry* d = n->DirectEntry(n->DirectIndex());
+        // A plain ない (気付かない) changes only before a terminal ending; its attributive keeps 않다.
+        if (n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
         output::Conjugated target = output::Conjugating("못하다", '$', "", f.families);
         if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, target.target);
-        Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr) continue;
         for (const std::string_view form : {std::string_view("1는다"), std::string_view("1다")}) {
             if (d->dst.starts_with(form)) {

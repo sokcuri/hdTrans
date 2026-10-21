@@ -26727,3 +26727,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 以来	만	N110			GN	5101	||1 &&2 S-1== "いつ" D-1= "얼마"	いつ 뒤의 以来를 만으로 고르고 いつ를 얼마로 바꾼다.				word:irai:itsu
 助か	&K5@	M418			GN	5102	||1 &&4 G+0== "Hz" U+0== "った" ||2 G+0== "Ow" S+1== "、" Y+0= "5다"	문장 첫머리에서 홀로 끝나는 助かった를 살았다로 고른다.				word:tasukaru:relief
 一行	한 줄	N110			GN	5103	||2 S-1== "あと" S-1== "もう"	あと·もう 뒤의 一行을 한 줄로 고른다.				word:ichigyou:line
+完全に	완전히	E300			GN							w:26715
