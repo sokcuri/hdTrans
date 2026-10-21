@@ -181,11 +181,11 @@ dict:jisjk:267293	昨日、告白をされた。	어제, 고백을 받았다.	fi
 dict:jisjk:267293	注目された。	주목받았다.	fix	local
 dict:jisjk:263565	よくしてもらいました。	잘 대접받았습니다.	fix	local
 dict:jisjk:263565	治療を十分にしてもらった。	치료를 충분히 받았다.	fix	local
-dict:jisjk:342927	母に説明してもらえませんか。	어머니에게 설명 해 주실 수 있습니까.	fix	local
-dict:jisjk:342927	母に説明してもらえますか。	어머니에게 설명 해 주실 수 있습니까.	fix	local
+dict:jisjk:342927	母に説明してもらえませんか。	어머니에게 설명해 주실 수 있습니까.	fix	local
+dict:jisjk:342927	母に説明してもらえますか。	어머니에게 설명해 주실 수 있습니까.	fix	local
 dict:jisjk:342927	母に説明してもらえます。	어머니에게 설명 받을 수 있습니다.	fix	local
 dict:jisjk:342927	母に説明してもらえません。	!rule:dict:jisjk:342927	keep	local
-dict:jisjk:362190	調節してもらえますか。	조절 해 주실 수 있습니까.	fix	local
+dict:jisjk:362190	調節してもらえますか。	조절해 주실 수 있습니까.	fix	local
 dict:jisjk:362190	支援してもらえると安心だ。	지원 받을 수 있으면 안심이다.	fix	local
 dict:jisjk:362190	本をもらえますか。	책을 받을 수 있습니까.	fix	local
 dict:jisjk:374192	親切にしてもらえる。	친절하게 대접받을 수 있다.	fix	local

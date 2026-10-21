@@ -525,12 +525,32 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
-            // A verbal noun (Hd, or a katakana word) joins the する after it (マスターする 마스터하다).
+            // A verbal noun (Hd, a kanji compound or a katakana word) joins the する or できる after it
+            // read with 하다 or 되다 (即答する 즉답하다, キスしたい 키스하고 싶다, 我慢できない
+            // 자제할 수 없다).
             constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
-            const bool verbalNoun =
-                Contains(tags, "Hd") || tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana;
+            constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
+            constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
+            auto kanjiCompound = [](std::string_view s) {
+                int n = 0;
+                for (std::size_t k = 0; k < s.size(); n++) {
+                    const text::Rune r = text::DecodeRune(s.substr(k));
+                    if (r.size == 0 || !text::IsKanji(r.cp)) return false;
+                    k += r.size;
+                }
+                return n >= 2;
+            };
+            const bool verbalNoun = Contains(tags, "Hd") ||
+                                    tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
+                                    kanjiCompound(item.surface);
+            auto startsWithAny = [](std::string_view s, std::span<const std::string_view> list) {
+                return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
+            };
             if (verbalNoun && nextEntry == "&AV@" &&
                 std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
+                return Result(std::move(t), false);
+            }
+            if (verbalNoun && startsWithAny(next.surface, kSuruStarts) && startsWithAny(nextEntry, kDoing)) {
                 return Result(std::move(t), false);
             }
             if (nextFirst == ")") return Result(std::move(t), false);
