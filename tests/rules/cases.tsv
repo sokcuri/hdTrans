@@ -62,8 +62,8 @@ L212	駅の近くでも買い物ができます。	역의 근처에서도 쇼핑
 L212	家でも買うか。	집에서도 살까.	current	local
 L214	お茶でも飲みませんか。	차라도 마시지 않습니까.	current	local
 L214	子どもでもできる簡単な仕事だ。	아이라도 할 수 있는 간단한 일이다.	current	local
-L217	そんなことなど気にしない。	그런 일등 신경쓰지 않는다.	current	local
-L217	駅前の店で服や靴などを買った。	역 앞의 가게에서 옷이나 구두등을 샀다.	current	local
+L217	そんなことなど気にしない。	그런 일 등 신경쓰지 않는다.	current	local
+L217	駅前の店で服や靴などを買った。	역 앞의 가게에서 옷이나 구두 등을 샀다.	current	local
 L218	「あの人は誰なの？」	「그 사람은 누구야?」	current	local
 L218	「どういうことなの？」	「무슨 일이야?」	current	local
 L222	三十分ばかり待った。	30분만 기다렸다.	current	local
@@ -96,7 +96,7 @@ L292	それだと困る。	그것이라면 곤란하다.	current	local
 L292	だとしたら	라고 하면	current	local
 L295	図書館では静かにしてください。	도서관에서는 조용하게 해 주세요.	current	local
 L295	この市場では新鮮な魚が安く買える。	이 시장에서는 신선한 생선을 싸게 살 수 있다.	current	local
-L298	犬などの小さい動物がいる。	개등이 작은 동물이 있다.	current	local
+L298	犬などの小さい動物がいる。	개 등이 작은 동물이 있다.	current	local
 L300	彼は医者なんだ。	그는 의사야.	current	local
 L300	明日は休みなんだ。	내일은 휴일이야.	current	local
 L317	庭の鳥に餌をやった。	뜰의 새에게 먹이를 주었다.	current	local
