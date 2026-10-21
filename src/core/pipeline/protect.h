@@ -16,7 +16,7 @@ namespace hdTrans::pipeline {
 // The pieces the line is translated from, in this order:
 //   - the protected-span cut (internal::CutSpans);
 //   - a line of speech written in katakana read as hiragana (internal::KataSpeech);
-//   - a katakana honorific after a name written in hiragana (internal::KataHonorifics);
+//   - a katakana honorific after a katakana name, written in hiragana (internal::KataHonorifics);
 //   - a pronoun, demonstrative or adjective written in katakana for emphasis read as
 //     hiragana unless it may be a name (internal::KataWordsToHiragana);
 //   - a hiragana nickname before ちゃん or くん written in Hangul

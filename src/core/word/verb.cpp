@@ -64,8 +64,6 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
               !Starts(tail, "とか") && !Starts(tail, "とこ") && !Starts(tail, "とっ") && !Starts(tail, "ときゃ")))) {
             continue;
         }
-        // Nor does a bare ichidan stem end an utterance: before a closing bracket or a
-        // full-width ！ or ？ the e-row kana is a godan imperative (「立て」 서라, not 세우고).
         if (branch == 4 || branch == 11) {
             const std::size_t n = entry.size();
             const std::string_view rest = tail.substr(n);
@@ -208,13 +206,23 @@ bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const 
     }
     if (Starts(after, kJaTe)) {
         // 言いてえ, 会いてぇ: the spoken たい.
-        return !Starts(after, "てえ") && !Starts(after, "てぇ") && !Starts(after, "てー") && !Starts(after, "てェ");
+        if (Starts(after, "てえ") || Starts(after, "てぇ") || Starts(after, "てー") || Starts(after, "てェ")) return false;
+    } else {
+        if (!Starts(after, "た")) return false;
+        // The たい family, the honorific たまえ (言いたまえ) and the compounds in ため and たて
+        // (買いため, 言いたて) go on from the stem of the わ verb.
+        for (const std::string_view rest : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ", "たま", "ため", "たて"}) {
+            if (Starts(after, rest)) return false;
+        }
     }
-    if (!Starts(after, "た")) return false;
-    for (const std::string_view desire : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ"}) {
-        if (Starts(after, desire)) return false;
+    // Only where the stem is also a く verb, whose て and た forms these are (彷徨いて, 拭いた).
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
+        const int kind = pc[3] - '0';
+        if (kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 6) == "いた") return true;
     }
-    return true;
+    return false;
 }
 
 bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int& branch, int& length) {

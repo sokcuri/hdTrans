@@ -416,7 +416,7 @@ bool SlangAdjectivePattern(std::string_view s, size_t pos, Match& m) {
 constexpr std::string_view kTopicWaWords[] = {
     "こっち", "そっち", "あっち", "どっち", "こちら", "そちら", "あちら", "お前", "おまえ", "オマエ", "てめえ",
     "あんた", "アンタ", "あなた", "貴方", "君", "きみ", "キミ", "私", "わたし", "あたし", "アタシ", "俺", "おれ",
-    "オレ", "僕", "ぼく", "ボク", "うち", "これ", "それ", "あれ", "今日", "明日", "昨日", "みんな", "皆",
+    "オレ", "僕", "ぼく", "ボク", "これ", "それ", "あれ", "今日", "明日", "昨日", "みんな", "皆",
 };
 
 // (こっち|お前|…)わ before a mark, a space, kanji, katakana or the end: group 1 the
@@ -442,17 +442,22 @@ bool TopicWa(std::string_view s, size_t pos, Match& m) {
 
 // A word, then ([たるうすつむぐぬだな])ん(か)?[？?]: the spoken の of a question after a
 // predicate (落ちたん？ 落ちたの？, 言うんか？ 言うのか？). Group 1 the predicate's last
-// kana, group 2 か. うん？ and ううん？ stay, and so do くん and ぶん (コウジくん？, たぶん？).
+// kana, group 2 か. うん？, ううん？ and ふうん？ stay, and so do くん and ぶん (コウジくん？,
+// たぶん？) and たん after katakana (ミクたん？); すん after どう or 何 is する (どうするの？).
 bool QuestionN(std::string_view s, size_t pos, Match& m) {
     if (pos == 0) return false;
     const char32_t before = LastRune(s.substr(0, pos)).cp;
     if (!IsHiraganaClass(before) && !IsKanjiClass(before) && !(before >= U'ァ' && before <= U'ヺ')) return false;
     size_t p = pos;
     if (!OneOf(s, p, U"たるうすつむぐぬだな")) return false;
-    if (Span(s, pos, p) == "う" && (before == U'う' || before == U'ぅ')) return false;
+    // うん, ううん and ふうん answer; ミクたん is a name with たん.
+    if (Span(s, pos, p) == "う" && (before == U'う' || before == U'ぅ' || before == U'ふ')) return false;
+    if (Span(s, pos, p) == "た" && ((before >= U'ァ' && before <= U'ヺ') || before == U'ー')) return false;
     // …しちょるん？ and …てくれてるん？ stay.
     if (Span(s, pos, p) == "る" && (before == U'ょ' || s.substr(0, pos).ends_with("くれて"))) return false;
     m.group[1] = Span(s, pos, p);
+    // どうすん？ and 何すん？ are する (どうするの？).
+    if (m.group[1] == "す" && (before == U'う' || before == U'に' || before == U'何')) m.group[1] = "する";
     if (!Lit(s, p, "ん")) return false;
     const size_t k = p;
     Lit(s, p, "か");

@@ -386,14 +386,6 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
     return pieces;
 }
 
-// kana read as Japanese words; empty when it does not. A katakana word of the base
-// dictionary reads as words only when its hiragana is a word too or reads as a stem and
-// its conjugation (コロス); one of a plain dictionary or a name registry never does,
-// nor do laughter (アハハ, ウフフッ), doubled sounds (ネバネバ, バシッバシッ) and runs
-// that end in ー, as loanwords do (スカイライナー). A run that starts with a katakana
-// word reads as words only when its other words have three or more morae and do not
-// conjugate (アリスデス, not ウルトラマンネクサス). One kana reads only as a particle
-// (ハ, ヲ).
 // The length of the katakana name that kana ends in an honorific after (ヨウタサマ: 3), or
 // 0: a name of the name layer only or no dictionary word, not after オ (オジサン), before
 // サマ サン クン チャン or ドノ, the whole run no dictionary word in katakana or hiragana.
@@ -415,6 +407,14 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
     return 0;
 }
 
+// kana read as Japanese words; empty when it does not. A katakana word of the base
+// dictionary reads as words only when its hiragana is a word too or reads as a stem and
+// its conjugation (コロス); one of a plain dictionary or a name registry never does,
+// nor do laughter (アハハ, ウフフッ), doubled sounds (ネバネバ, バシッバシッ) and runs
+// that end in ー, as loanwords do (スカイライナー). A run that starts with a katakana
+// word reads as words only when its other words have three or more morae and do not
+// conjugate (アリスデス, not ウルトラマンネクサス). One kana reads only as a particle
+// (ハ, ヲ).
 std::vector<KataPiece> ReadRun(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string h;
     std::vector<size_t> at;
@@ -691,7 +691,7 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
 
 namespace {
 
-// text with the katakana honorific that ends a katakana run after a name written in
+// text with the katakana honorific that ends a katakana run after a name, written in
 // hiragana (ヨウタサマ ヨウタさま).
 std::string KataHonorificsIn(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::string b;
@@ -847,13 +847,19 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         bool kin = false;
         for (const std::string_view k : kKinHeads) kin = kin || name == k;
         if (kin || (honorific == "ちゃん" && rest.starts_with("と"))) continue;  // ここにちゃんと
-        // A verb before んだ or んじゃ (叩くんじゃねえ, しとくんだ).
-        // A verb before んだ, んで or んな (叩くんじゃねえ, しとくんで, 狙ってくんな).
+        // An animal called with the honorific is the animal (ねこちゃん 고양이).
+        bool animal = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
+            animal = animal || (c.codes != nullptr && c.codes->sem.Text().find("QAA") != std::string_view::npos);
+        }
+        if (animal) continue;
+        // A verb before んだ, んで or んな (叩くんじゃねえ, しとくんで, 狙ってくんな), not a name
+        // in っ (たっくん).
         if (honorific == "くん") {
             const bool predicate = rest.starts_with("じゃ") || rest.starts_with("だ") || rest.starts_with("で") ||
                                    rest.starts_with("な") || rest.starts_with("の");
             const char32_t last = LastRune(name).cp;
-            bool verb = RuneIn(last, U"てでとっ");
+            bool verb = predicate && RuneIn(last, U"てでとっ");
             // A verb stem of two kana or more at the end of the name (まだあるくんだ).
             for (size_t from = 0; predicate && !verb && from < name.size();
                  from += std::max<size_t>(1, text::DecodeRune(name.substr(from)).size)) {
