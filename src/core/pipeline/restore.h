@@ -102,8 +102,8 @@ constexpr char32_t kLeadDrawlMark = 0xE006;
 constexpr char32_t kPastLeadDrawlMark = 0xE007;
 // The marks around a word spelled out with ・ for emphasis (さ・い・て・い), which the
 // restore stage writes back as · between the syllables of its Korean (WriteEmphasis).
-constexpr char32_t kEmphasisOpen = 0xE008;
-constexpr char32_t kEmphasisClose = 0xE009;
+using output::kEmphasisClose;
+using output::kEmphasisOpen;
 // The lengthening mark of the sound stage (WriteLengthening).
 using output::kLengthenMark;
 

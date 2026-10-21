@@ -189,15 +189,16 @@ std::string SoftEnding(std::string_view ending, bool planned, bool promised) {
 // Characters that end a sentence of speech after its predicate, and those passed over
 // before them (a stretched or cut-off end).
 constexpr std::u32string_view kEnds = U"」』！？!?。．.…‥、，,～~〜∼―─♪☆★♥♡";
-constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE00A";  // kLengthenMark
+// With the closing marks of the sound stage (kEmphasisClose, kLengthenMark).
+constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE009\uE00A";
 
-// The last character of s that is not a space, 0 for none.
+// The last character of s that is not a space or an emphasis open mark, 0 for none.
 char32_t LastNonSpace(std::string_view s) {
     char32_t last = 0;
     while (!s.empty()) {
         const text::Rune r = text::DecodeRune(s);
         if (r.size == 0) return last;
-        if (!text::IsSpace(r.cp)) last = r.cp;
+        if (!text::IsSpace(r.cp) && r.cp != kEmphasisOpen) last = r.cp;
         s.remove_prefix(r.size);
     }
     return last;
