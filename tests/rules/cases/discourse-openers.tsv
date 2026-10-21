@@ -10,7 +10,7 @@ dict:jisjk:341448	……なんだよ？	……뭐야?	fix	local
 dict:jisjk:341448	それは秘密なんだよ。	그것은 비밀이야.	keep	local
 dict:jisjk:341448	あれは何なんだよ。	저것은 뭐야.	keep	local
 local:2822	わかった、すぐ行く。	알았다, 바로 간다.	fix	local-ending
-local:2822	そうか、分かった、ありがとう。	그런가, 알았다, 고마워요.	fix	local-ending
+local:2822	そうか、分かった、ありがとう。	그런가, 알았다, 고마워.	fix	local-ending
 local:2822	了解した、隊長。	이해했다, 대장.	fix	local-ending
 local:2822	昨日買った、赤い靴を履いた。	어제 산, 붉은 구두를 신었다.	keep	local-ending
 local:2822	彼が書いた本を読んだ。	그가 쓴 책을 읽었다.	keep	local-ending
