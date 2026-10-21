@@ -296,14 +296,17 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
     });
 }
 
-// start (あれ|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a particle
-// (あれ――は何だ, the pronoun).
+// start (あれ[～ー]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
+// particle (あれ――は何だ, the pronoun).
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
     return SentenceStart(s, pos, m, [&](size_t q) {
         for (std::string_view w : {"あれ", "え"}) {
             size_t r = q;
             if (!Lit(s, r, w)) continue;
             size_t t = r;
+            if (w == "あれ") {
+                while (OneOf(s, t, U"～ー")) continue;  // あれ～？
+            }
             if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
             size_t after = t;
             while (OneOf(s, after, U"…‥―─—")) continue;

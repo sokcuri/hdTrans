@@ -323,6 +323,7 @@ private:
     size_t Burst(size_t p) const;
     size_t MimeticTo(size_t p, size_t end, bool& hiragana) const;
     std::string ExclaimedSound(size_t p, size_t end) const;
+    size_t LoneCatch(size_t p) const;
 
     std::string_view text_;
     const LineContext& ctx_;
@@ -882,6 +883,21 @@ size_t SoundText::Burst(size_t p) const {
     return i;
 }
 
+// The end of a lone っ or ッ run at p that an utterance holds after nothing but an
+// ellipsis or a dash, before a pause, an ellipsis, a dash or the end (……ッ！, ――っ、), or 0:
+// a caught breath, written 읏.
+size_t SoundText::LoneCatch(size_t p) const {
+    const std::u32string_view rs = rs_;
+    if (rs[p] != U'っ' && rs[p] != U'ッ') return 0;
+    size_t q = p;
+    while (q > 0 && In(rs[q - 1], U"…‥―─")) q--;
+    if (!UtteranceStart(q)) return 0;
+    size_t end = p;
+    while (end < rs.size() && (rs[end] == U'っ' || rs[end] == U'ッ')) end++;
+    if (end < rs.size() && !In(rs[end], U"、。！？!?…‥」』）―─")) return 0;
+    return end;
+}
+
 // The Korean of the ono row read by the katakana run [p, end) (or the run with ッ) when the
 // run starts an utterance or follows 、 or an ellipsis and an exclamation mark and と or っと
 // follow it (ドン！っと 쾅!), where a dictionary word would read it otherwise (ドン 돈); ""
@@ -985,6 +1001,9 @@ std::string SoundText::Write() {
                 }
             }
             if (Spaced(next) || chain.back().spaceAfter) b += ' ';
+        } else if (const size_t lone = LoneCatch(i); lone > 0) {
+            b += "읏";
+            next = lone;
         } else if (const size_t burst = Burst(i); burst > 0) {
             b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, burst - i)), text::Preset::Fan);
             next = burst;

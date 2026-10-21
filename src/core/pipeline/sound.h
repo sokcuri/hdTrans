@@ -47,6 +47,9 @@
 // a dictionary word reads it so (ジッと じっと), otherwise as heard with the と dropped
 // (メキメキと 메키메키).
 //
+// A lone っ or ッ that an utterance holds after nothing but an ellipsis or a dash, before
+// a pause, an ellipsis, a dash or the end, is a caught breath (……ッ、 ……읏,).
+//
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
