@@ -43,3 +43,4 @@ compose:spoken-what	「なによりおかしいのは」	「무엇보다도 이�
 dict:nanika:atta	「何かあったの？」	「무슨 일 있었어?」	fix	local
 dict:naniga:atta	「何があったんですか？」	「무슨 일이 있었습니까?」	fix	local
 phrase:何でもありません	「何でもありません」	「아무것도 아니에요」	fix	builtin-phrase
+dict:nani-iu:3	「なに言ってんだよ」	「무슨 말을 하는거야」	fix	lookup
