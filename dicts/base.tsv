@@ -76305,7 +76305,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 パノラマ	파노라마	N110			GN				jisjk:53795		
 パノラマカメラ	파노라마 카메라	N110	VPe		GN				jisjk:363301		
 パノラミック	파노라믹	N110			GN				jisjk:53796		
-パパ	파파	N110			GN				jisjk:105356		
+パパ	파파	N110	VHn		GN				jisjk:105356		
 パパイヤ	파파야	N110	VPt		GN				jisjk:132831		
 パパラッツオ	파파랏츠오	N110			GN				jisjk:114070		
 パパン	파판	N130	QPN		GN				jisjk:366977		
@@ -176745,7 +176745,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 姪島	메이지마	N110	QCT		GN				jisjk:35037		
 姪浜	메이노하마	N110	QCT		GN				jisjk:35038		
 姪浜町	메이노하마마치	N130	QCTVPl		GN				jisjk:334207		
-姫	공주	N110	XXXUAq		GN				jisjk:116185		
+姫	공주	N110	XXXUAqVHn		GN				jisjk:116185		
 姫	히메	N130	QCTVPl		GN				jisjk:259181		
 姫	희	N110		On	GN				jisjk:324724		
 姫ゆり	산단	I110			GN				jisjk:90147		
@@ -214505,7 +214505,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 担ぎ出	추대&AV@	M433			GN				jisjk:92300		
 担ぎ屋	미신가	N110	VHn		GN				jisjk:168854		
 担げ	어깨에 짊어&AL@	M437			GN				jisjk:92301		
-担任	담임	N110	UAq	Hd	GN				jisjk:18674		
+担任	담임	N110	UAqVHn	Hd	GN				jisjk:18674		
 担体	담체	N110			GN				jisjk:18675		
 担係医師	담당 의사	N110	VHn		GN				jisjk:159927		
 担保	담보	N110		Hd	BZ				jisjk:18673		
@@ -360808,7 +360808,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 魔法師	마법사	N110	UAq		GN				jisjk:202972		
 魔法瓶	보온병	I110	VCk		GN				jisjk:68346		
 魔物	마귀	N110	QAB		GN				jisjk:21235		
-魔王	마왕	N110			GN				jisjk:99390		
+魔王	마왕	N110	VHn		GN				jisjk:99390		
 魔球	마구	N110	VRw		GN				jisjk:251629		
 魔界	악마의 세계	N110			GN				jisjk:99378		
 魔神	악마	N110	VHnUCl		GN				jisjk:251706		

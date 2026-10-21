@@ -5,7 +5,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 〆切	마감&AV@	M428			GN						しめきる	w:2
 〆切日	마감일	N110	UMe	Tm	GN				llm		しめきりび	w:3
 ああ言う	그런	A9D0			GN				llm		ああいう	w:4
-あいつら	저 녀석들	I110			GN				xxx llm	1		w:5
+あいつら	저 녀석들	I110	VHn		GN				xxx llm	1		w:5
 あいつ等	저놈들	N120	VHn		GN				llm		あいつら	w:6
 あいづちを打	맞장구&AO@	M424		Pn	GN				llm		あいづちをうつ	w:7
 あいまい検索	퍼지 검색	I110			GN				xxx llm	1		w:8
@@ -33,7 +33,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あと少しで	곧	E300			GN				xxx llm	1		w:30
 あのまま	그대로	N110			GN				llm			w:31
 あの世に旅立	저세상으로 떠&A5@	M424			GN				llm			w:32
-あの人	저이	N120			GN				xxx	1	あのひと	w:33
+あの人	저이	N120	VHn		GN				xxx	1	あのひと	w:33
 あの娘	쟤	N120			GN						あのこ	w:34
 あの子	쟤	N120			GN						あのこ	w:35
 あの方	저이	N120			GN						あのかた	w:36
@@ -226,7 +226,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お側	측근	N110	VHn		GN				llm		おそば	w:222
 お傍	곁	N110			GN				xxx llm		おそば	w:223
 お傍	측근	N110	VHn		GN				llm		おそば	w:224
-お兄さん	오빠	I110			GN				xxx	1	おにいさん	w:225
+お兄さん	오빠	I110	VHn		GN				xxx	1	おにいさん	w:225
 お冷や	냉수	I110			GN				xxx	1	おひや	w:226
 お出掛け	외출	N110			GN				xxx llm		おでかけ	w:227
 お出掛け	나들이	N110			GN				llm		おでかけ	w:228
@@ -241,9 +241,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お姫様抱き	공주님 안기	N110			GN				llm			w:237
 お姫様抱っこ	공주님 안기	N110			GN				llm			w:238
 お婿さん	신랑	N110			GN						おむこさん	w:239
-お嬢さま	아가씨	I110			GN				xxx llm	1		w:240
+お嬢さま	아가씨	I110	VHn		GN				xxx llm	1		w:240
 お子ちゃま	어린애	N110			GN				llm			w:241
-お子様	어린애	I110			GN				xxx llm	1		w:242
+お子様	어린애	I110	VHn		GN				xxx llm	1		w:242
 お守	아이를 돌&AY@	M429			GN				xxx llm		おもり	w:243
 お守	돌&AY@	M429			GN				llm		おもり	w:244
 お帰り	귀가	N110		Hd	GN				llm		おかえり	w:245
@@ -266,7 +266,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お替り	리필	N110		Hd	GN						おかわり	w:262
 お替わり	리필	N110		Hd	GN						おかわり	w:263
 お楽しみください	즐겨 주세요	A9D0			GN				xxx llm	1		w:264
-お母ちゃん	엄마	N110			GN				xxx llm	1		w:265
+お母ちゃん	엄마	N110	VHn		GN				xxx llm	1		w:265
 お気になさ	신경 쓰&AE@	M428			GN				llm			w:266
 お気に入り	마음에 드는 것	N110			GN				xxx llm	1		w:267
 お湯	뜨거운 물	N110			GN				xxx llm	1		w:268
@@ -466,7 +466,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 けん制球	견제구	N110			GN						けんせいきゅう	w:462
 げっ歯目	설치목	N110			GN						げっしもく	w:463
 げっ歯類	설치류	N110			GN						げっしるい	w:464
-こいつら	이 녀석들	I110			GN				xxx llm	1		w:465
+こいつら	이 녀석들	I110	VHn		GN				xxx llm	1		w:465
 こいつ等	이 녀석들	N120	VHn		GN				llm		こいつら	w:466
 こうきゅうホテル	고급 호텔	N110	VBl		GN				llm		こうきゅうホテル	w:467
 こうしきサイト	공식 사이트	N110			GN				llm		こうしきサイト	w:468
@@ -1208,7 +1208,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 むしり取	잡아&Hd@	M428			GN						むしりとる	w:1200
 むしパン	찐빵	N110	VFd		GN				llm		むしパン	w:1201
 むし暑	무$G5@	H7U0			GN				xxx	1	むしあつい	w:1202
-むすめさん	따님	I110			GN				xxx llm	1		w:1203
+むすめさん	따님	I110	VHn		GN				xxx llm	1		w:1203
 むせ	사레들&AA@	M427			GN				xxx llm		むせる	w:1204
 むせ	목&CY@	M426			GN				llm		むせぶ	w:1205
 むせんラン	무선랜	N110	UTt		GN				llm		むせんラン	w:1206
@@ -4578,7 +4578,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 シェトランド・ポニー	셰틀랜드포니	N110			GN						シェトランド・ポニー	w:4570
 シェパーズパイ	셰퍼드 파이	N110	VFd		GN						シェパーズパイ	w:4571
 シェパーズ・パイ	셰퍼드 파이	N110	VFd		GN						シェパーズ・パイ	w:4572
-シェフ	셰프	N110			GN				xxx llm	1		w:4573
+シェフ	셰프	N110	VHn		GN				xxx llm	1		w:4573
 シェリフ	보안관	N110			GN				xxx llm	1		w:4574
 シェルパ	셰르파	N110			GN				xxx llm	1		w:4575
 シェルピンスキーのガスケット	시에르핀스키 삼각형	N110			GN						シェルピンスキーのガスケット	w:4576
@@ -5520,7 +5520,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ソフト・ロック	소프트 록	N110	QMU		GN						ソフト・ロック	w:5512
 ソホーズ	솝호스	N110			GN						ソホーズ	w:5513
 ソマトスタチン	소마토스타틴	N110			GN						ソマトスタチン	w:5514
-ソムリエ	소믈리에	N110			GN				xxx llm	1		w:5515
+ソムリエ	소믈리에	N110	VHn		GN				xxx llm	1		w:5515
 ソラリス	솔라리스	N110			GN				xxx llm	1		w:5516
 ソリッドステートドライブ	솔리드 스테이트 드라이브	N110	UTt		GN						ソリッドステートドライブ	w:5517
 ソリッド・ステート・ドライブ	솔리드 스테이트 드라이브	N110	UTt		GN						ソリッド・ステート・ドライブ	w:5518
@@ -8771,7 +8771,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ペテン師	타짜꾼	N110			GN						ぺてんし	w:8764
 ペディメント	페디먼트	N110			GN				xxx llm	1		w:8765
 ペトリコール	페트리코르	N110			GN						ペトリコール	w:8766
-ペドファイル	소아성애자	N110			GN				xxx llm	1		w:8767
+ペドファイル	소아성애자	N110	VHn		GN				xxx llm	1		w:8767
 ペドロヒメネス	페드로 히메네스	N110			GN						ペドロヒメネス	w:8768
 ペドロ・ヒメネス	페드로 히메네스	N110			GN						ペドロ・ヒメネス	w:8769
 ペナルティ	페널티	N110			GN				xxx llm	1		w:8770
@@ -9329,7 +9329,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マハラージャ	마하라자	N110	UAqVHn		GN				llm		マハラージャ	w:9322
 マハーラージャ	마하라자	N110	UAqVHn		GN				llm		マハーラージャ	w:9323
 マフィア	마피아	N110			GN				xxx llm	1		w:9324
-ママ	엄마	N110			GN				xxx llm	1		w:9325
+ママ	엄마	N110	VHn		GN				xxx llm	1		w:9325
 ママレード	마멀레이드	N110			GN						ママレード	w:9326
 マムルーク	맘루크	N110			GN						マムルーク	w:9327
 マメ目	콩목	N110			GN						マメもく	w:9328
@@ -9606,7 +9606,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 メイジャー	메이저리그	N110	VGt		GN				xxx llm		メイジャー	w:9599
 メイジャー	석유 메이저	N110	VGt		GN				llm		メイジャー	w:9600
 メイジャー	메이저 레이블	N110	VGt		GN				llm		メイジャー	w:9601
-メイドさん	메이드	N110			GN				xxx llm	1		w:9602
+メイドさん	메이드	N110	VHn		GN				xxx llm	1		w:9602
 メイドカフェ	메이드 카페	N110			GN						メイドカフェ	w:9603
 メイド・カフェ	메이드 카페	N110			GN						メイド・カフェ	w:9604
 メイド喫茶	메이드 카페	N110			GN						メイドきっさ	w:9605
@@ -9885,7 +9885,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヤマ場	고비	N110			GN						やまば	w:9878
 ヤミ市	암시장	N110			GN						やみいち	w:9879
 ヤムスクロ	야무수크로	N110			GN						ヤムスクロ	w:9880
-ヤンキー	불량배	N110			GN				xxx llm	1		w:9881
+ヤンキー	불량배	N110	VHn		GN				xxx llm	1		w:9881
 ヤンゴン	양곤	N110			GN						ヤンゴン	w:9882
 ヤンチャ	장난	N110	UYi	Hd	GN				xxx llm		ヤンチャ	w:9883
 ヤンチャ	개구쟁이	N110	VHn		GN				llm		ヤンチャ	w:9884
@@ -10802,7 +10802,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一五日	십오 일	N110	UMe	Tm	GN				llm		じゅうごにち	w:10795
 一人	한 사람	N110			GN				xxx llm	1		w:10796
 一人あたり	매인당	E300			GN						ひとりあたり	w:10797
-一人ぼっち	외톨이	I110			GN				xxx llm	1		w:10798
+一人ぼっち	외톨이	I110	VHn		GN				xxx llm	1		w:10798
 一人切り	혼자	N110			GN				llm		ひとりきり	w:10799
 一人切り	혼자	E300			GN				llm		ひとりきり	w:10800
 一人占め	독차지	N110		Hd	GN				llm		ひとりじめ	w:10801
@@ -11158,7 +11158,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 世界樹	세계수	N110			GN						せかいじゅ	w:11151
 世界線	세계선	N110			GN						せかいせん	w:11152
 世界都市	세계도시	N110			GN						せかいとし	w:11153
-世継ぎ	후계자	I110			GN				xxx llm	1		w:11154
+世継ぎ	후계자	I110	VHn		GN				xxx llm	1		w:11154
 世話	보살핌	N110			GN				xxx llm	1		w:11155
 世話をしてくれ	돌봐 &CJ@	M427			GN				xxx llm	1		w:11156
 世話役	간사	N110	UAqVHn		GN				llm		せわやく	w:11157
@@ -11328,7 +11328,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 乙丑	을축	N110			GN						きのとうし	w:11321
 乙亥	을해	N110			GN						きのとい	w:11322
 乙卯	을묘	N110			GN						きのとう	w:11323
-乙女	소녀	N110			GN				xxx llm	1		w:11324
+乙女	소녀	N110	VHn		GN				xxx llm	1		w:11324
 乙女ゲーム	여성향 게임	N110			GN				llm			w:11325
 乙姫海老	청소새우	N110			GN						おとひめえび	w:11326
 乙姫蝦	청소새우	N110			GN						おとひめえび	w:11327
@@ -11354,7 +11354,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 乱捕	란도리	N110	UTt		GN				llm		らんどり	w:11347
 乱捕り	란도리	N110	UTt		GN				llm		らんどり	w:11348
 乱数発生	난수 생성	I110			GN				xxx llm	1		w:11349
-乱暴者	난폭한 사람	N110			GN				xxx llm	1		w:11350
+乱暴者	난폭한 사람	N110	VHn		GN				xxx llm	1		w:11350
 乱泥流	저탁류	N110			GN				xxx llm	1		w:11351
 乱獲	남획	N110			GN				xxx llm	1		w:11352
 乱離	난리	N110			GN				xxx llm	1		w:11353
@@ -11590,7 +11590,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 交通警察	교통경찰	N110			GN						こうつうけいさつ	w:11582
 享禄	교로쿠	N110			GN				llm			w:11583
 京女鷸	꼬까도요	N110			GN						きょうじょしぎ	w:11584
-亭主	남편	N110			GN				xxx llm	1		w:11585
+亭主	남편	N110	VHn		GN				xxx llm	1		w:11585
 人あたり	사람을 대하는 태도	N110	UYi		GN				llm		ひとあたり	w:11586
 人かげ	사람 그림자	N110	USeVHn		GN				llm		ひとかげ	w:11587
 人だかり	사람들 무리	I110			GN				xxx llm	1		w:11588
@@ -11767,8 +11767,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 代理者	대리자	N110			GN						だいりしゃ	w:11759
 代謝物質	대사물질	N110			GN						たいしゃぶっしつ	w:11760
 令和	레이와	N110			GN						れいわ	w:11761
-令嬢	영애	N110			GN				xxx llm	1		w:11762
-令息	영식	N110			GN				xxx llm	1		w:11763
+令嬢	영애	N110	VHn		GN				xxx llm	1		w:11762
+令息	영식	N110	VHn		GN				xxx llm	1		w:11763
 以って	가지고	A9D0			GN				xxx		もって	w:11764
 以って	때문에	A9D0			GN				llm		もって	w:11765
 以って	부로	A9D0	UMe		GN				llm		もって	w:11766
@@ -11892,7 +11892,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 住ま	&K5@	M420			GN				xxx llm	1		w:11883
 住み込み	입주	N110			GN				xxx llm	1		w:11884
 住めば都	정들면 고향	A9D0			GN						すめばみやこ	w:11885
-住人	주민	N110			GN				xxx llm	1		w:11886
+住人	주민	N110	VHn		GN				xxx llm	1		w:11886
 住処	주택	N110			GN				xxx		すみか	w:11887
 住処	주가	N110			GN						すみか	w:11888
 住居地	주거지	N110			GN						じゅうきょち	w:11889
@@ -12014,7 +12014,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 作法	예법	N110			GN				xxx llm	1		w:12005
 作為的	작위적%D4@	G8U0			GN				llm		さくいてき	w:12006
 作絵	쓰쿠리에	N110	UTt		GN				llm		つくりえ	w:12007
-作者	작가	N110			GN				xxx llm	1		w:12008
+作者	작가	N110	VHn		GN				xxx llm	1		w:12008
 作詞家	작사가	N110			GN						さくしか	w:12009
 作詞者	작사자	N110			GN						さくししゃ	w:12010
 佝僂	구루병	N110	UTi		GN				xxx llm		くる	w:12011
@@ -12037,7 +12037,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 使丁	사환	N110			GN				xxx llm	1		w:12028
 使分け	구분 사용	N110		Hd	GN				llm		つかいわけ	w:12029
 使役動物	사역동물	N110			GN						しえきどうぶつ	w:12030
-使用人	하인	N110			GN				xxx llm	1		w:12031
+使用人	하인	N110	VHn		GN				xxx llm	1		w:12031
 使用総資本利益率	사용총자본이익률	N110			GN				xxx llm	1		w:12032
 例し	전례	N110			GN				llm		ためし	w:12033
 例に洩れず	예외 없이	A9D0			GN				llm		れいにもれず	w:12034
@@ -13404,7 +13404,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 取り出したるは	꺼낸 것은	A9D0			GN				llm			w:13392
 取り口	스모 기술	N110	UTt		GN				llm		とりくち	w:13393
 取り回	다&CB@	M423			GN				xxx llm	1		w:13394
-取り巻き	측근	N110			GN				xxx llm	1		w:13395
+取り巻き	측근	N110	VHn		GN				xxx llm	1		w:13395
 取り払	제거&AV@	M420			GN				xxx llm	1		w:13396
 取り扱い注意	취급 주의	N110	UTs		GN				llm		とりあつかいちゅうい	w:13397
 取り敢えず	우선	E300			GN				xxx	1	とりあえず	w:13398
@@ -13636,7 +13636,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 同室	같은 방	N110			GN				xxx llm	1		w:13624
 同属	동족	N110			GN				xxx llm	1		w:13625
 同店	같은 가게	N110	VBl		GN				llm		どうてん	w:13626
-同性愛者	동성애자	N110			GN				xxx	1	どうせいあいしゃ	w:13627
+同性愛者	동성애자	N110	VHn		GN				xxx	1	どうせいあいしゃ	w:13627
 同性結婚	동성결혼	N110			GN						どうせいけっこん	w:13628
 同情心	동정심	N110			GN						どうじょうしん	w:13629
 同意書	동의서	N110			GN						どういしょ	w:13630
@@ -13701,7 +13701,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 君主主義	군주주의	N110			GN						くんしゅしゅぎ	w:13689
 君主政	군주제	N110			GN						くんしゅせい	w:13690
 君等	너희	N120			GN						きみら	w:13691
-君達	너희들	N110			GN				xxx llm	1		w:13692
+君達	너희들	N110	VHn		GN				xxx llm	1		w:13692
 吝嗇ん坊	자린고비	N110			GN						けちんぼう	w:13693
 吟誦	영창	N110		Hd	GN						ぎんしょう	w:13694
 吟誦	읊조&AA@	M429			GN						ぎんしょう	w:13695
@@ -14469,7 +14469,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 夜鷹そば	야타카 소바	N110	VFd		GN				llm		よたかそば	w:14456
 夢にも	꿈에도	E300		Zn	GN				llm		ゆめにも	w:14457
 夢巨頭	들고양이고래	N110			GN						ゆめごんどう	w:14458
-夢想家	몽상가	I110			GN				xxx	1	むそうか	w:14459
+夢想家	몽상가	I110	VHn		GN				xxx	1	むそうか	w:14459
 夥し	수$D4@	H7U0			GN						おびただしい	w:14460
 大々神楽	다이다이카구라	N110	UCl		GN				llm		だいだいかぐら	w:14461
 大いに	크게	E300			GN				xxx llm	1		w:14462
@@ -14540,7 +14540,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大学者	대학자	N110			GN						だいがくしゃ	w:14527
 大学進学	대학 진학	N110			GN				llm		だいがくしんがく	w:14528
 大実椰子	바다야자나무	N110			GN						おおみやし	w:14529
-大家	집주인	N110			GN				xxx llm	1		w:14530
+大家	집주인	N110	VHn		GN				xxx llm	1		w:14530
 大寿林	검은머리쑥새	N110			GN						おおじゅりん	w:14531
 大尺鷸	마도요	N110			GN						だいしゃくしぎ	w:14532
 大山木	태산목	N110			GN						たいさんぼく	w:14533
@@ -14770,15 +14770,15 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奢り	한턱	N110			GN				xxx llm	1		w:14757
 奢侈品	사치품	N110			GN						しゃしひん	w:14758
 奥儀	오의	N110	UTt		GN				llm		おうぎ	w:14759
-奥方	부인	N110			GN				xxx llm	1		w:14760
-奥方様	마님	I110			GN				xxx llm	1		w:14761
+奥方	부인	N110	VHn		GN				xxx llm	1		w:14760
+奥方様	마님	I110	VHn		GN				xxx llm	1		w:14761
 奪三振	탈삼진	N110			GN				llm		だつさんしん	w:14762
 奪格	탈격	N110			GN						だっかく	w:14763
 奮い立たせ	분발시&AQ@	M427			GN				llm			w:14764
 女たらし	오입쟁이	N110			GN						おんなたらし	w:14765
 女やもめ	홀어미	N110			GN						おんなやもめ	w:14766
 女主人	여주인	N110			GN						おんなしゅじん	w:14767
-女医	여의사	N110			GN				xxx llm	1		w:14768
+女医	여의사	N110	VHn		GN				xxx llm	1		w:14768
 女友だち	여자 친구	N110	VHn		GN				llm		おんなともだち	w:14769
 女墻	성가퀴	N110			GN						ひめがき	w:14770
 女声	여자 목소리	N110			GN				xxx llm	1		w:14771
@@ -14789,7 +14789,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 女宿	여수	N110			GN						うるきぼし	w:14776
 女寡	홀어미	N110			GN						おんなやもめ	w:14777
 女寡婦	홀어미	N110			GN						おんなやもめ	w:14778
-女将	여주인	N110			GN				xxx llm	1		w:14779
+女将	여주인	N110	VHn		GN				xxx llm	1		w:14779
 女性化	여성화	N110		Hd	GN						じょせいか	w:14780
 女性化	여성화&AV@	M429			GN						じょせいか	w:14781
 女性史	여성사	N110	VHn		GN						じょせいし	w:14782
@@ -14803,7 +14803,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 女滝	암폭포	N110			GN				llm		めだき	w:14790
 女王アリ	여왕개미	N110	VHn		GN						じょおうアリ	w:14791
 女王バチ	여왕벌	N110	VHn		GN						じょおうばち	w:14792
-女王様	여왕님	N110			GN				xxx llm	1		w:14793
+女王様	여왕님	N110	VHn		GN				xxx llm	1		w:14793
 女真語	여진어	N110			GN						じょしんご	w:14794
 女臈	유녀	N110	VHn		GN				llm		じょろう	w:14795
 女郎	유녀	N110	VHn		GN				llm		じょろう	w:14796
@@ -14866,7 +14866,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 姦臣	간신	N110			GN						かんしん	w:14853
 姦通罪	간통죄	N110			GN						かんつうざい	w:14854
 姦邪	사악한 자	N110	VHn		GN				llm		かんじゃ	w:14855
-姪	조카딸	N110			GN				xxx	1	めい	w:14856
+姪	조카딸	N110	VHn		GN				xxx	1	めい	w:14856
 姪子	조카딸	N110			GN						めいっこ	w:14857
 姫コンドル	터키콘도르	N110			GN						ひめコンドル	w:14858
 姫マーラ	차코마라	N110			GN						ひめマーラ	w:14859
@@ -14913,7 +14913,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 婦人警官	여경	N110			GN						ふじんけいかん	w:14900
 婦人雑誌	여성지	N110			GN						ふじんざっし	w:14901
 婦女暴行	성폭행	N110			GN				llm		ふじょぼうこう	w:14902
-婦警	여경	N110			GN				xxx	1	ふけい	w:14903
+婦警	여경	N110	VHn		GN				xxx	1	ふけい	w:14903
 婦選	여성 참정권	N110	ULwVHn		GN				llm		ふせん	w:14904
 婿	사위	N110	VHn		GN						むこ	w:14905
 婿入	데릴사위로 들어&A1@	M429			GN				llm		むこいり	w:14906
@@ -14928,7 +14928,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 媽祖	마조	N110			GN						まそ	w:14915
 媾合	교합	N110		Hd	GN						こうごう	w:14916
 媾合	교합&AV@	M429			GN						こうごう	w:14917
-嫁	아내	N110			GN				xxx llm	1		w:14918
+嫁	아내	N110	VHn		GN				xxx llm	1		w:14918
 嫁ぎ先	시집갈 곳	N110			GN				xxx llm			w:14919
 嫁ぎ先	시가	N110			GN						とつぎさき	w:14920
 嫁入道中	신부 행렬	N110			GN				llm		よめいりどうちゅう	w:14921
@@ -14945,7 +14945,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 嫌悪感	혐오감	N110			GN						けんおかん	w:14932
 嫌気	싫증&AV@	M429			GN				xxx	1	いやき	w:14933
 嫌疑者	혐의자	N110			GN						けんぎしゃ	w:14934
-嫡男	적장자	N110			GN				xxx llm	1		w:14935
+嫡男	적장자	N110	VHn		GN				xxx llm	1		w:14935
 嫩葉	속잎	N110			GN						わかば	w:14936
 嬉々として	신나서	E300			GN				llm			w:14937
 嬉しが	반&A2@	M428			GN				xxx	1	うれしがる	w:14938
@@ -14964,7 +14964,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 子宮ガン	자궁암	N110	UTi		GN						しきゅうがん	w:14951
 子宮破裂	자궁파열	N110	UTi		GN						しきゅうはれつ	w:14952
 子宮頸部	자궁경부	N110	VBp		GN						しきゅうけいぶ	w:14953
-子息	자제	N110			GN				xxx llm	1		w:14954
+子息	자제	N110	VHn		GN				xxx llm	1		w:14954
 子規	두견이	N110			GN				xxx	1	ホトトギス	w:14955
 子離れ	자식으로부터의 독립	N110			GN				xxx llm	1		w:14956
 子音	닿소리	N110	QLG		GN				xxx	1	しいん	w:14957
@@ -15032,7 +15032,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宇宙空間	우주공간	N110			GN						うちゅうくうかん	w:15019
 宇宙軍	우주군	N110			GN						うちゅうぐん	w:15020
 宇宙開発	우주 개발	N110			GN				llm		うちゅうかいはつ	w:15021
-宇宙飛行士	우주인	N110			GN				xxx	1	うちゅうひこうし	w:15022
+宇宙飛行士	우주인	N110	VHn		GN				xxx	1	うちゅうひこうし	w:15022
 宇宙食	우주식	N110			GN						うちゅうしょく	w:15023
 守られ	지켜&AL@	M427			GN				xxx llm	1		w:15024
 守り抜	끝까지 지&AQ@	M421			GN				llm		まもりぬく	w:15025
@@ -15284,7 +15284,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 小人猪	애기멧돼지	N110			GN						こびといのしし	w:15271
 小便	오줌	N110		Hd	GN				xxx	1	しょうべん	w:15272
 小便器	소변기	N110			GN						しょうべんき	w:15273
-小僧	애송이	N110			GN				xxx llm	1		w:15274
+小僧	애송이	N110	VHn		GN				xxx llm	1		w:15274
 小僧共	애송이들	N110			GN				llm			w:15275
 小児ガン	소아암	N110	UTi		GN						しょうにがん	w:15276
 小児マヒ	소아마비	N110	UTi		GN						しょうにまひ	w:15277
@@ -16160,7 +16160,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 彼女持ち	여자친구 있는 사람	N110	VHn		GN				llm			w:16145
 彼岸花	석산	N110			GN						ひがんばな	w:16146
 彼岸花科	수선화과	N110			GN						ヒガンバナか	w:16147
-彼氏	남자친구	N110			GN				xxx llm	1		w:16148
+彼氏	남자친구	N110	VHn		GN				xxx llm	1		w:16148
 往き	가는 길	N110			GN				xxx llm		いき	w:16149
 往き	행	N110		Z7	GN				llm		いき	w:16150
 往き	가는 표	N110	VSw		GN				llm		いき	w:16151
@@ -16230,7 +16230,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 従え	거느&AA@	M427			GN				xxx llm	1		w:16215
 従って	따라서	E330			GN						したがって	w:16216
 従事者	종사자	N110			GN						じゅうじしゃ	w:16217
-従兄弟	사촌	I110			GN				xxx	1	いとこ	w:16218
+従兄弟	사촌	I110	VHn		GN				xxx	1	いとこ	w:16218
 従祖父	작은할아버지	N110			GN						おおおじ	w:16219
 得体の知れない	정체를 알 수 없는	E010			GN				llm			w:16220
 得意	특기	N110			GN				xxx llm	1		w:16221
@@ -16264,7 +16264,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御御御付	된장국	N110	VFd		GN				llm		おみおつけ	w:16249
 御御御付け	된장국	N110	VFd		GN				llm		おみおつけ	w:16250
 御心配なく	걱정하지 마세요	A9D0			GN				llm		ごしんぱいなく	w:16251
-御曹司	도련님	I110			GN				xxx llm	1		w:16252
+御曹司	도련님	I110	VHn		GN				xxx llm	1		w:16252
 御殻	비지	N110			GN						おから	w:16253
 御用金	어용금	N110			GN				xxx llm	1		w:16254
 御神燈	신전 등불	N110	UClVPe		GN				xxx llm		ごしんとう	w:16255
@@ -16575,7 +16575,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 意志表示	의사표시	N110		Hd	GN						いしひょうじ	w:16560
 意志表示	의사표시&AV@	M429			GN						いしひょうじ	w:16561
 意気地のない	용기 없는	E010			GN				llm			w:16562
-意気地無し	겁쟁이	N110			GN				xxx llm	1		w:16563
+意気地無し	겁쟁이	N110	VHn		GN				xxx llm	1		w:16563
 意気沮喪	의기소침&AV@	M429			GN						いきそそう	w:16564
 意気盛ん	의기양양	N110	UYi		GN				llm		いきさかん	w:16565
 意気盛ん	의기양양%A1@	G8U0			GN				llm		いきさかん	w:16566
@@ -16597,7 +16597,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 愛唱歌	애창가	N110			GN						あいしょうか	w:16582
 愛国主義	애국주의	N110			GN						あいこくしゅぎ	w:16583
 愛女	쥐노래미	N110			GN						あいなめ	w:16584
-愛娘	사랑하는 딸	N110			GN				xxx llm	1		w:16585
+愛娘	사랑하는 딸	N110	VHn		GN				xxx llm	1		w:16585
 愛想笑い	억지웃음	I110			GN				xxx llm	1		w:16586
 愛斯蘭	아이슬란드	N110			GN						アイスランド	w:16587
 愛機	자기 기체	N110			GN				xxx llm	1		w:16588
@@ -17109,7 +17109,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 捕逸	포일	N110			GN				llm		ほいつ	w:17094
 捕食寄生	포식기생	N110			GN						ほしょくきせい	w:17095
 捜し回	찾아다&A7@	M428			GN				llm		さがしまわる	w:17096
-捜査員	수사관	N110			GN				xxx llm	1		w:17097
+捜査員	수사관	N110	VHn		GN				xxx llm	1		w:17097
 捜査本部	수사본부	N110			GN						そうさほんぶ	w:17098
 捨場	쓰레기장	N110	VPl		GN				llm		すてば	w:17099
 捩れ曲が	뒤틀려 &CP@	M428			GN				llm			w:17100
@@ -17594,7 +17594,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新穀	햇곡식	N110			GN				xxx llm	1		w:17579
 新篇	신편	N110	VSw		GN				llm		しんぺん	w:17580
 新築マンション	신축 아파트	N110	VBl		GN				llm		しんちくマンション	w:17581
-新米	신참	N110			GN				xxx llm	1		w:17582
+新米	신참	N110	VHn		GN				xxx llm	1		w:17582
 新聞記事	신문 기사	N110	VSw		GN				llm		しんぶんきじ	w:17583
 新茶	햇차	N110	VFd		GN				llm		しんちゃ	w:17584
 新西蘭扇歯鯨	헥토르부리고래	N110			GN						ニュージーランドおうぎはくじら	w:17585
@@ -17703,7 +17703,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日韓	한일	N110			GN				xxx	1	にっかん	w:17688
 旦那さん	남편	I110			GN				xxx llm	1		w:17689
 旦那寺	보리사	N110	VBl		GN				llm		だんなでら	w:17690
-旦那様	주인님	I110			GN				xxx llm	1		w:17691
+旦那様	주인님	I110	VHn		GN				xxx llm	1		w:17691
 旧刊	구간	N110			GN						きゅうかん	w:17692
 旧北区	구북구	N110			GN						きゅうほっく	w:17693
 旧名	옛 이름	N110			GN				xxx llm	1		w:17694
@@ -18520,7 +18520,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 欠缺	흠결	N110			GN						けんけつ	w:18503
 欠除	결여	N110			GN				xxx llm	1		w:18504
 次代	차기	N110			GN				xxx llm	1		w:18505
-次兄	둘째 형	N110			GN				xxx llm	1		w:18506
+次兄	둘째 형	N110	VHn		GN				xxx llm	1		w:18506
 次点者	차점자	N110			GN						じてんしゃ	w:18507
 次第では	하기에 따라서는	N110			GN				xxx llm	1		w:18508
 欧化主義	구화주의	N110			GN						おうかしゅぎ	w:18509
@@ -18653,14 +18653,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 殺人光線	살인광선	N110			GN						さつじんこうせん	w:18636
 殺人未遂	살인미수	N110			GN						さつじんみすい	w:18637
 殺人者	살인자	N110			GN						さつじんしゃ	w:18638
-殺人鬼	살인마	I110			GN				xxx	1	さつじんき	w:18639
+殺人鬼	살인마	I110	VHn		GN				xxx	1	さつじんき	w:18639
 殺戮	살육	N110		Hd	GN				xxx	1	さつりく	w:18640
 殿様バッタ	풀무치	N110			GN						トノサマバッタ	w:18641
 殿部	볼기	N110			GN						でんぶ	w:18642
 毀誉	훼예	N110			GN						きよ	w:18643
-母君	어머님	N110			GN				xxx llm	1		w:18644
+母君	어머님	N110	VHn		GN				xxx llm	1		w:18644
 母屋	본채	N110			GN				xxx llm	1		w:18645
-母親	어머니	N110			GN				xxx llm	1		w:18646
+母親	어머니	N110	VHn		GN				xxx llm	1		w:18646
 母音	홀소리	N110	QLG		GN				xxx	1	ぼいん	w:18647
 毎回	매번	N110			GN				xxx llm	1		w:18648
 毎日のように	거의 매일	A9D0			GN				llm		まいにちのように	w:18649
@@ -19158,7 +19158,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 消失点	소실점	N110			GN						しょうしつてん	w:19141
 消滅時効	소멸시효	N110	ULw		GN						しょうめつじこう	w:19142
 消費主義	소비주의	N110			GN						しょうひしゅぎ	w:19143
-消防士	소방관	N110			GN				xxx	1	しょうぼうし	w:19144
+消防士	소방관	N110	VHn		GN				xxx	1	しょうぼうし	w:19144
 消防庁	소방청	N110	VGt		GN				llm		しょうぼうちょう	w:19145
 消防自動車	소방차	I110			GN				xxx	1	しょうぼうじどうしゃ	w:19146
 涌き出	피어&A5@	M427			GN						わきでる	w:19147
@@ -19763,7 +19763,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 父娘	부녀	N110			GN				llm			w:19745
 父称	부칭	N110			GN						ふしょう	w:19746
 父系制	부계제	N110			GN						ふけいせい	w:19747
-父親	아버지	N110			GN				xxx llm	1		w:19748
+父親	아버지	N110	VHn		GN				xxx llm	1		w:19748
 爺が背	딱지조개	N110			GN						じいがせ	w:19749
 片すみ	한구석	N110			GN						かたすみ	w:19750
 片づ	정리&C6@	M421			GN				xxx		かたづく	w:19751
@@ -19851,7 +19851,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 特別配当金	특별 배당금	N110	VMo		GN				llm		とくべつはいとうきん	w:19833
 特務機関	특무기관	N110			GN						とくむきかん	w:19834
 特待	특별 대우	N110			GN				xxx llm	1		w:19835
-特待生	특대생	N110			GN				xxx llm	1		w:19836
+特待生	특대생	N110	VHn		GN				xxx llm	1		w:19836
 特技兵	특기병	N110	VHn		GN						とくぎへい	w:19837
 特捜	특별 수사	N110			GN				xxx llm	1		w:19838
 特撰	특선	N110		Hd	GN						とくせん	w:19839
@@ -19960,7 +19960,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猛攻撃	맹공격	N110			GN						もうこうげき	w:19942
 猛毒吹矢蛙	황금독화살개구리	N110			GN						モウドクフキヤガエル	w:19943
 猛省	깊은 반성	N110			GN				xxx llm	1		w:19944
-猛者	강자	N110			GN				xxx llm	1		w:19945
+猛者	강자	N110	VHn		GN				xxx llm	1		w:19945
 猛訓練	맹훈련	N110			GN						もうくんれん	w:19946
 猜	질투&AV@	M425			GN				llm		そねむ	w:19947
 猜疑	의심	N110			GN				xxx llm	1		w:19948
@@ -19989,7 +19989,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猿目	영장목	N110			GN						さるもく	w:19971
 猿酒	원숭이 술	N110			GN				xxx llm	1		w:19972
 猿頬貝	새꼬막	N110			GN						さるぼうがい	w:19973
-獄囚	죄수	N110			GN				xxx llm	1		w:19974
+獄囚	죄수	N110	VHn		GN				xxx llm	1		w:19974
 獅子座	사자자리	N110			GN				xxx	1	ししざ	w:19975
 獅子舞	사자춤	N110			GN				llm		ししまい	w:19976
 獣亜綱	수아강	N110			GN						じゅうあこう	w:19977
@@ -20070,7 +20070,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 球面幾何学	구면기하학	N110			GN						きゅうめんきかがく	w:20052
 理り	이치	N110	UTh		GN				llm		ことわり	w:20053
 理学療法	물리 치료	N110			GN				xxx llm	1		w:20054
-理学療法士	물리치료사	N110			GN				xxx llm	1		w:20055
+理学療法士	물리치료사	N110	VHn		GN				xxx llm	1		w:20055
 理容所	이발소	N110			GN						りようしょ	w:20056
 理屈	이치	N110			GN				xxx llm	1		w:20057
 理屈っぽ	따지기 좋아$AB@	H7U0			GN				xxx llm	1		w:20058
@@ -20237,7 +20237,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 申訳	변명&AV@	M429			GN						もうしわけ	w:20219
 申請者	신청자	N110			GN						しんせいしゃ	w:20220
 男っぽ	남자$G4@	H7U0			GN				llm		おとこっぽい	w:20221
-男の子	남자아이	I110			GN				xxx llm	1		w:20222
+男の子	남자아이	I110	VHn		GN				xxx llm	1		w:20222
 男勝り	남자 못지않음	N110			GN				xxx llm	1		w:20223
 男女平等	남녀평등	N110			GN						だんじょびょうどう	w:20224
 男子学生	남학생	N110			GN						だんしがくせい	w:20225
@@ -20287,7 +20287,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 畦道	논두렁	N110			GN						あぜみち	w:20269
 番い	쌍	N110			GN						つがい	w:20270
 番い目	이음매	N110			GN				llm		つがいめ	w:20271
-番人	파수꾼	N110			GN				xxx	1	ばんにん	w:20272
+番人	파수꾼	N110	VHn		GN				xxx	1	ばんにん	w:20272
 番外	번외	N110			GN				xxx llm	1		w:20273
 番組表	프로그램	N110			GN						ばんぐみひょう	w:20274
 番附	순위표	N110	VSw		GN				xxx llm		ばんづけ	w:20275
@@ -20295,7 +20295,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 異世界	이세계	N110			GN						いせかい	w:20277
 異世界もの	이세계물	N110			GN				llm			w:20278
 異世界転移	이세계 전이	N110			GN				llm			w:20279
-異人	외국인	N110			GN				xxx llm	1		w:20280
+異人	외국인	N110	VHn		GN				xxx llm	1		w:20280
 異人館	이인관	N110			GN						いじんかん	w:20281
 異国人	이방인	N110			GN						いこくじん	w:20282
 異存	이의	N110			GN				xxx llm	1		w:20283
@@ -20669,7 +20669,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 相律	상률	N110			GN				xxx llm	1		w:20651
 相応し	걸$KS@	H7U0			GN				xxx llm	1		w:20652
 相思相愛	서로 사랑함	N110			GN				xxx llm	1		w:20653
-相方	파트너	N110			GN				xxx llm	1		w:20654
+相方	파트너	N110	VHn		GN				xxx llm	1		w:20654
 相次	연&K4@	M422			GN				xxx	1	あいつぐ	w:20655
 相殺関税	상계관세	N110			GN				xxx llm	1		w:20656
 相続権	상속권	N110			GN						そうぞくけん	w:20657
@@ -20686,7 +20686,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 看	&AY@	M427			GN						みる	w:20668
 看客	관객	N110			GN				xxx llm	1		w:20669
 看看踊り	간칸오도리	N110			GN				xxx llm	1		w:20670
-看護師	간호사	N110			GN						かんごし	w:20671
+看護師	간호사	N110	VHn		GN						かんごし	w:20671
 看護師長	수간호사	N110			GN						かんごしちょう	w:20672
 県会	현의회	N110	VGt		GN				llm		けんかい	w:20673
 県知事	현 지사	N110	UAqVHn		GN				llm		けんちじ	w:20674
@@ -20968,7 +20968,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 祈祷書	기도서	N110			GN						きとうしょ	w:20949
 祓	정화&AV@	M420			GN				llm		はらう	w:20950
 祖師	조사	N110			GN						そし	w:20951
-祖母	할머니	N110			GN				xxx llm	1		w:20952
+祖母	할머니	N110	VHn		GN				xxx llm	1		w:20952
 祗管打坐	지관타좌	N110	UCl		GN				llm		しかんたざ	w:20953
 祝いごと	경사	N110			GN				llm		いわいごと	w:20954
 祝事	경사	N110			GN				llm		いわいごと	w:20955
@@ -21703,8 +21703,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 継当て	땜질	N110			GN				llm		つぎあて	w:21684
 継木	접붙이기	N110	UTt	Hd	GN				llm		つぎき	w:21685
 継木	접붙&AJ@	M429			GN				llm		つぎき	w:21686
-継母	의붓어머니	N110			GN				xxx	1	ままはは	w:21687
-継父	의붓아버지	N110			GN				xxx	1	けいふ	w:21688
+継母	의붓어머니	N110	VHn		GN				xxx	1	ままはは	w:21687
+継父	의붓아버지	N110	VHn		GN				xxx	1	けいふ	w:21688
 継続性	계속성	N110			GN						けいぞくせい	w:21689
 続続	속속	E300			GN				xxx	1	ぞくぞく	w:21690
 続開	속개	N110		Hd	GN				xxx	1	ぞっかい	w:21691
@@ -21955,7 +21955,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 群雨	소나기	N110	VFr		GN				llm		むらさめ	w:21934
 義勇軍	의용군	N110			GN						ぎゆうぐん	w:21935
 義務付けられ	의무화&C6@	M427			GN				xxx llm	1		w:21936
-義妹	의붓동생	N110			GN				xxx llm	1		w:21937
+義妹	의붓동생	N110	VHn		GN				xxx llm	1		w:21937
 義母	새어머니	N110			GN				xxx llm			w:21938
 義母	양어머니	N110	VHn		GN				llm		ぎぼ	w:21939
 羯磨	갈마	N110			GN						かつま	w:21940
@@ -22104,7 +22104,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 聴取率	청취율	N110			GN						ちょうしゅりつ	w:22083
 聴解	청해	N110		Hd	GN						ちょうかい	w:22084
 聴解	청해&AV@	M429			GN						ちょうかい	w:22085
-職人	장인	N110			GN				xxx llm	1		w:22086
+職人	장인	N110	VHn		GN				xxx llm	1		w:22086
 職員室	교무실	I110			GN				xxx llm	1		w:22087
 職長	작업반장	N110			GN				xxx llm	1		w:22088
 職階	직급	N110			GN				xxx llm	1		w:22089
@@ -23435,7 +23435,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 親征	친정	N110		Hd	GN						しんせい	w:23414
 親征	친정&AV@	M429			GN						しんせい	w:23415
 親指の爪	엄지손톱	N110			GN						おやゆびのつめ	w:23416
-親方	우두머리	N110			GN				xxx llm	1		w:23417
+親方	우두머리	N110	VHn		GN				xxx llm	1		w:23417
 親父ギャグ	아재 개그	N110			GN						おやじギャグ	w:23418
 親王妃	친왕비	N110			GN						しんのうひ	w:23419
 親睨	꺽저기	N110			GN						おやにらみ	w:23420
@@ -23898,8 +23898,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 責立て	다그&AO@	M427			GN						せめたてる	w:23877
 貯め込	모아 &C7@	M425			GN				llm		ためこむ	w:23878
 貴ガス	희가스	N110			GN						きガス	w:23879
-貴女	당신	N110			GN				xxx llm	1		w:23880
-貴様	네놈	N110			GN				xxx llm	1		w:23881
+貴女	당신	N110	VHn		GN				xxx llm	1		w:23880
+貴様	네놈	N110	VHn		GN				xxx llm	1		w:23881
 貴男	당신	N120			GN						あなた	w:23882
 貴翰	귀하의 편지	N110			GN				xxx llm	1		w:23883
 貴賤	귀천	N110			GN						きせん	w:23884
@@ -24115,7 +24115,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 距骨	목말뼈	N110	VBp		GN						きょこつ	w:24094
 跡々	훗날	N110	UMe	Tm	GN				llm		あとあと	w:24095
 跡を追	쫓아다&A7@	M420		Pn	GN						あとをおう	w:24096
-跡継ぎ	후계자	I110			GN				xxx llm	1		w:24097
+跡継ぎ	후계자	I110	VHn		GN				xxx llm	1		w:24097
 跡跡	훗날	N110	UMe	Tm	GN				llm		あとあと	w:24098
 路線図	노선도	N110			GN						ろせんず	w:24099
 路頭に迷	길거리에 나&FI@	M420			GN				llm			w:24100
@@ -24220,7 +24220,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 軍事訓練	군사훈련	N110			GN						ぐんじくんれん	w:24199
 軍令部	군령부	N110			GN						ぐんれいぶ	w:24200
 軍刑法	군형법	N110			GN						ぐんけいほう	w:24201
-軍師	군사	N110			GN				xxx llm	1		w:24202
+軍師	군사	N110	VHn		GN				xxx llm	1		w:24202
 軍曹	중사	N110			GN				xxx llm	1		w:24203
 軍略方	군략 담당	N110			GN				llm			w:24204
 軍種	군종	N110			GN						ぐんしゅ	w:24205
@@ -24808,7 +24808,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 野茨	찔레꽃	N110			GN						のいばら	w:24787
 野菜畑	채소밭	N110			GN						やさいばたけ	w:24788
 野遊び	소풍	N110			GN						のあそび	w:24789
-野郎	놈	N110			GN				xxx llm	1		w:24790
+野郎	놈	N110	VHn		GN				xxx llm	1		w:24790
 野鵐	무당새	N110			GN						のじこ	w:24791
 量子もつれ	양자 얽힘	N110			GN						りょうしもつれ	w:24792
 量子情報科学	양자정보과학	N110			GN						りょうしじょうほうかがく	w:24793
@@ -25047,7 +25047,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長辛螺	긴고둥	N110			GN						ながにし	w:25026
 長逝	서거	N110			GN				xxx llm	1		w:25027
 長髪	긴 머리	N110			GN				xxx llm	1		w:25028
-門人	문하생	N110			GN				xxx llm	1		w:25029
+門人	문하생	N110	VHn		GN				xxx llm	1		w:25029
 門前払	문전박대&AV@	M429			GN				llm		もんぜんばらい	w:25030
 門表	명패	N110			GN						もんぴょう	w:25031
 閃	너풀&C5@	M421			GN						ひらめく	w:25032
@@ -25096,7 +25096,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 間柄	사이	N110			GN				xxx	1	あいだがら	w:25075
 間歇泉	간헐천	N110			GN						かんけつせん	w:25076
 間男	샛서방	N110			GN				xxx llm	1		w:25077
-間者	첩자	N110			GN				xxx	1	かんじゃ	w:25078
+間者	첩자	N110	VHn		GN				xxx	1	かんじゃ	w:25078
 間違い無	어련$AB@	H7U0			GN				xxx		まちがいない	w:25079
 間違い無	믿음직$AB@	H7U0			GN				llm		まちがいない	w:25080
 間違い無く	어련히	E300			GN						まちがいなく	w:25081
@@ -25748,10 +25748,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 養成所	양성소	N110			GN						ようせいじょ	w:25727
 養方	양가	N110			GN						ようかた	w:25728
 養殖業	양식업	N110			GN						ようしょくぎょう	w:25729
-養母	양어머니	N110			GN				xxx	1	ようぼ	w:25730
+養母	양어머니	N110	VHn		GN				xxx	1	ようぼ	w:25730
 養父	양아버지	N110			GN						ようふ	w:25731
 養蚕業	양잠	N110			GN						ようさんぎょう	w:25732
-養親	양부모	N110			GN				xxx llm	1		w:25733
+養親	양부모	N110	VHn		GN				xxx llm	1		w:25733
 養魚池	양어지	N110			GN						ようぎょち	w:25734
 餓え死に	아사	N110		Hd	GN				llm		うえじに	w:25735
 餡かけ	앙카케	N110	VFd		GN				llm		あんかけ	w:25736
