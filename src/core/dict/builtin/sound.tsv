@@ -563,6 +563,7 @@
 えっと	음	intj
 えーと	음	intj
 えーっと	으음	intj
+ええっと	음	intj
 ええと	음	intj
 んー	음	intj
 んーっ	으읏	intj
@@ -684,6 +685,9 @@
 くちゅり	찌걱	ono
 くっちゅり	찌거억	ono
 くちゅん	찌걱	ono
+ぴちゅ	피츄	ono
+ぴちゅっ	피츗	ono
+ぴちゅり	피츄리	ono
 ぐちょ	질퍽	ono
 ぐちょっ	질퍽	ono
 ぐちょぐちょ	질퍽질퍽	ono
@@ -2994,6 +2998,12 @@
 さて	자	lead
 なぁに	뭐야	intj
 よっと	영차	intj
+よいしょっと	영차	intj
+よっこらしょっと	영차	intj
+よこらしょっと	영차	intj
+よっこいしょっと	영차	intj
+あらよっと	영차	intj
+よしっと	좋아	intj
 やっばい	큰일이다	intj
 やっばーい	큰일이다	intj
 えい	에잇	intj

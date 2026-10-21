@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+sound:effort-calls	「よいしょっと」	「영차」	fix	sound
+sound:effort-calls	「よっこらしょっと、ふう」	「영차, 후우」	fix	sound
+sound:effort-calls	「ええっと……」	「음……」	fix	sound
+sound:effort-calls	「荷物は全部……よしっと」	「짐은 전부……좋아」	fix	sound
+sound:effort-calls	先端をぴちゅりとつける。	끝을 피츄리 붙인다.	fix	sound
+sound:effort-calls	「よっと」	「영차」	keep	sound
