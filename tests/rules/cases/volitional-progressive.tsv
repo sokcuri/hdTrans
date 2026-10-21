@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+normalize:utoshite	彼は窓を開けようとしてる。	그는 창을 열려 하고 있다.	fix	normalize
+normalize:utoshite	どこかに行こうとしてるけど、止めない。	어디엔가 가려 하고 있지만, 멈추지 않는다.	fix	normalize
+normalize:utoshite	何を言おうとしてるの？	무슨 말을 하려 하고 있는 거야?	fix	normalize
+normalize:utoshite	帰ろうとしてたら、電話が鳴った。	돌아가려 하고 있었더니, 전화가 울렸다.	fix	normalize
+normalize:utoshite	彼は窓を開けようとしている。	그는 창을 열려 하고 있다.	keep	normalize

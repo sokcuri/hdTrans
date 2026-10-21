@@ -265,6 +265,17 @@ bool Tondemo(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// うとして([るた]): the progressive after a volitional, contracted (書こうとしてる)
+bool UtoShite(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "うとして")) return false;
+    const size_t q = p;
+    if (!OneOf(s, p, U"るた")) return false;
+    m.group[1] = Span(s, q, p);
+    m.end = p;
+    return true;
+}
+
 // ([まで])しょ[ー～]+
 bool Mashou(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -408,6 +419,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Ikka, [](const Match& m) { return Cat({"いいか", m.group[1]}); });
     text = ReplaceAll(text, Tondemo, [](const Match&) { return std::string("とんでもない"); });
     text = ReplaceAll(text, Mashou, [](const Match& m) { return Cat({m.group[1], "しょう"}); });
+    text = ReplaceAll(text, UtoShite, [](const Match& m) { return Cat({"うとしてい", m.group[1]}); });
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
     text = ReplaceAll(text, Toku, [](const Match& m) {
