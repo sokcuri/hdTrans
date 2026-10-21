@@ -45,8 +45,9 @@ bool Shiren(std::string_view s, size_t pos, Match& m) {
 }
 
 // (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
-// or (やら|[くにとゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a character other
-// than kana; なら after a noun is the conditional (君ならねぇ、).
+// or (やら|[くにゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a kanji or a sentence
+// end (for やら also a comma or a pause); not the particle やら after a kanji, なに or どう, nor
+// the conditional なら after a noun or before a comma (君ならねぇ, 行くならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
     auto tail = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -69,15 +70,20 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     }
     for (std::string_view w : {"やら", "なら"}) {
         p = pos;
-        if (w == "なら" && !OneOf(s, p, U"くにとゃばて")) continue;  // not after a noun: 君ならねぇ、
+        const std::string_view before = s.substr(0, pos);
+        if (w == "やら" && (before.ends_with("どう") || before.ends_with("なに") ||
+                           (pos >= 3 && IsKanjiClass(At(s, pos - 3).cp)))) {
+            continue;  // the particle やら: 何やらねぇ, どうやら
+        }
+        if (w == "なら" && !OneOf(s, p, U"くにゃばて")) continue;  // not after a noun: 君ならねぇ
         if (!Lit(s, p, w)) continue;
         m.group[1] = Span(s, pos, p);
         if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー")) continue;
         if (CharOrEnd(s, p, U"なよぜぞしんかけだっ", m, 2)) return true;
-        size_t q = p;
-        if (Take(s, q, [](char32_t c) { return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～'; })) {
-            return Done(s, m, p, p, 2);  // before a kanji or punctuation: ならねえ相手, やらねぇ。
-        }
+        // Before a kanji or a sentence end (ならねえ相手, やらねぇ。); なら before a comma or
+        // a pause is the conditional with the particle ねぇ (行くならねぇ、俺も).
+        const std::u32string_view ends = w == "なら" ? U"。！？!?」』）)\n" : U"。！？!?」』）)\n、，…‥ 　";
+        if (p < s.size() && (IsKanjiClass(At(s, p).cp) || In(At(s, p).cp, ends))) return Done(s, m, p, p, 2);
     }
     return false;
 }
