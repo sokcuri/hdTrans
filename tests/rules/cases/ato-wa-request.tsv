@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:w:26716	後は任せた。	뒷일은 맡겼다.	fix	local
+dict:w:26716	じゃあ、後はお前に頼む。	그럼, 뒷일은 너에게 부탁한다.	fix	local
+dict:w:26716	食事の後は散歩する。	식사 뒤는 산책한다.	keep	local
