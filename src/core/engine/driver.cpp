@@ -282,22 +282,22 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             }
         }
     }
-    const auto compose = [&](LineSpeech speech, const StageObserver& observer, const TranslationOptions& options) {
+    const auto compose = [&](LineSpeech pass, const StageObserver& watch, const TranslationOptions& opts) {
         std::vector<output::Sentence> sentences;
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
-            if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
-            TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, speech, s,
-                           generated, observer, options, sentences);
+            if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
+            TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
+                           generated, watch, opts, sentences);
             const std::string chunkText = output::String(chunks[i]);
-            speech.quotes = output::QuotesAfter(speech.quotes, chunkText);
+            pass.quotes = output::QuotesAfter(pass.quotes, chunkText);
             if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
         }
         const output::Pieces cleaned = output::Cleanup(sentences);
-        if (observer.cleaned) observer.cleaned(observer.context, cleaned);
+        if (watch.cleaned) watch.cleaned(watch.context, cleaned);
         const pipeline::RestoreSteps steps = pipeline::RestoreAll(
-            cleaned, typed, /*keepBrackets=*/true, !options.reference && options.wordImprovements.literalCleanup);
-        if (observer.restored) observer.restored(observer.context, steps);
+            cleaned, typed, /*keepBrackets=*/true, !opts.reference && opts.wordImprovements.literalCleanup);
+        if (watch.restored) watch.restored(watch.context, steps);
         return steps.line;
     };
     if (!speech.markedOnly) {

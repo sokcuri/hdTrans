@@ -269,9 +269,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // of a godan verb: before a closing bracket or a full-width sentence mark that is the
     // reading (「立て」 서라, not 세우고). The mark may start the next token.
     if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
-        const std::string_view next = tail.empty() ? base.nextText : tail;
-        if ((Starts(next, "」") || Starts(next, "』") || Starts(next, "。") || Starts(next, "！") ||
-             Starts(next, "？")) &&
+        const std::string_view ahead = tail.empty() ? base.nextText : tail;
+        if ((Starts(ahead, "」") || Starts(ahead, "』") || Starts(ahead, "。") || Starts(ahead, "！") ||
+             Starts(ahead, "？")) &&
             w->GodanImperative(surface)) {
             return false;
         }

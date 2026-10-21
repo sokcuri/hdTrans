@@ -759,9 +759,9 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             size_t at = 0;
             for (const KataRun& r : runs[k]) {
                 std::string h;
-                const std::string_view text = TextOf(line[k]);
-                const bool afterKanji = IsKanjiRune(LastRune(text.substr(0, r.start)).cp);
-                const bool honorific = (r.kana == U"オ" || r.kana == U"ゴ") && IsKanjiRune(text::DecodeRune(text.substr(r.end)).cp);
+                const std::string_view piece = TextOf(line[k]);
+                const bool afterKanji = IsKanjiRune(LastRune(piece.substr(0, r.start)).cp);
+                const bool honorific = (r.kana == U"オ" || r.kana == U"ゴ") && IsKanjiRune(text::DecodeRune(piece.substr(r.end)).cp);
                 if (!r.pieces.empty()) {
                     h = RunHiragana(r);
                 } else if ((okurigana && KeyTags(Utf8(r.kana), ctx, snap).empty()) ||

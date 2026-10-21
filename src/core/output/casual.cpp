@@ -481,10 +481,10 @@ void Composer::WriteCasual(int first, int last) {
         // does not ask.
         if (asked) {
             std::size_t kept = 0;  // the end of the last character that is not a lengthening mark
-            for (std::size_t at = 0; at < own.size();) {
-                const text::Rune r = text::DecodeRune(own.substr(at));
-                at += r.size == 0 ? 1 : r.size;
-                if (kSkipped.find(r.cp) == std::u32string_view::npos) kept = at;
+            for (std::size_t pos = 0; pos < own.size();) {
+                const text::Rune r = text::DecodeRune(own.substr(pos));
+                pos += r.size == 0 ? 1 : r.size;
+                if (kSkipped.find(r.cp) == std::u32string_view::npos) kept = pos;
             }
             const std::string_view tail = own.substr(0, kept);
             for (const std::string_view p : {"ぞ", "ぜ", "よ", "わ", "さ", "ね"}) asked = asked && !tail.ends_with(p);
