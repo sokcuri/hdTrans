@@ -19,6 +19,11 @@ constexpr char32_t kSpanMark = 0x01;
 
 bool IsDigit(char32_t c) { return c >= '0' && c <= '9'; }
 bool IsAlpha(char32_t c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+bool IsWideDigit(char32_t c) { return c >= U'０' && c <= U'９'; }
+bool IsWideAlpha(char32_t c) { return (c >= U'Ａ' && c <= U'Ｚ') || (c >= U'ａ' && c <= U'ｚ'); }
+// An ASCII or full-width digit or letter, as the scanner folds them to ASCII.
+bool IsDigitRune(char32_t c) { return IsDigit(c) || IsWideDigit(c); }
+bool IsAlphaRune(char32_t c) { return IsAlpha(c) || IsWideAlpha(c); }
 bool IsHalfWidth(char32_t c) { return c >= 0xFF61 && c <= 0xFF9F; }
 
 // A non-ASCII punctuation, symbol or space character.
@@ -30,7 +35,7 @@ bool IsWideSymbol(char32_t c) {
 bool IsUnicodeSpace(char32_t c) { return c >= 0x80 && c != U'　' && text::IsSpace(c); }
 
 // A full-width digit or letter folded to ASCII.
-char32_t Fold(char32_t c) { return c - 0xFEE0; }
+char32_t Fold(char32_t c) { return c >= 0xFF01 && c <= 0xFF5E ? c - 0xFEE0 : c; }
 
 bool OneOf(char32_t c, std::u32string_view set) { return c != 0 && set.find(c) != std::u32string_view::npos; }
 
@@ -179,11 +184,13 @@ private:
     void AsciiBoundary(int type) {
         const char32_t c = s_[p_];
         if (c == ',') {
+            // A comma between digits is a thousands separator and stays in the run,
+            // even when a letter or symbol precedes the digits (HP4,867, 4,867/4,867).
+            if (IsDigitRune(Before(p_)) && IsDigitRune(At(p_ + 1))) {
+                Add(c);
+                return;
+            }
             if (cur_ != kTypeJapanese) {
-                if (cur_ == kTypeNumber && IsDigit(At(p_ + 1))) {
-                    Add(c);
-                    return;
-                }
                 if (BufSize() > 0) Emit(cur_);
             }
             cur_ = kTypeJapanese;
@@ -198,10 +205,12 @@ private:
                 cur_ = kTypeJapanese;
             }
             Add(U'ー');
-        } else if (c == '.' && cur_ == kTypeAlpha && IsAlpha(At(p_ + 1))) {
+        } else if (c == '.' && IsDigitRune(At(p_ + 1)) &&
+                   (IsDigitRune(Before(p_)) || IsAlphaRune(Before(p_)))) {
+            // A decimal point or version dot stays in the run (1.5, 4.5/4.5, Lv.2).
+            if (cur_ == kTypeNumber) cur_ = kTypeAlpha;
             Add(c);
-        } else if (c == '.' && cur_ == kTypeNumber && IsDigit(At(p_ + 1))) {
-            cur_ = kTypeAlpha;
+        } else if (c == '.' && cur_ == kTypeAlpha && IsAlpha(At(p_ + 1))) {
             Add(c);
         } else {
             if (BufSize() > 0) Emit(cur_);
@@ -286,6 +295,22 @@ private:
     }
 
     void Wide() {
+        // A full-width comma or period inside a number is a thousands separator or a
+        // decimal point and folds to ASCII in the run (４，８６７, Ｌｖ．２).
+        const char32_t wide = s_[p_];
+        if (wide == U'，' && IsDigitRune(Before(p_)) && IsDigitRune(At(p_ + 1))) {
+            Add(U',');
+            prev_ = 0;
+            p_++;
+            return;
+        }
+        if (wide == U'．' && IsDigitRune(At(p_ + 1)) && (IsDigitRune(Before(p_)) || IsAlphaRune(Before(p_)))) {
+            if (cur_ == kTypeNumber) cur_ = kTypeAlpha;
+            Add(U'.');
+            prev_ = 0;
+            p_++;
+            return;
+        }
         bool halfWidth = false;
         const int type = WideType(halfWidth);
         const char32_t c = s_[p_];
