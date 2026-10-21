@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:104100	それはダメです。	그것은 안 됩니다.	fix	defaults
+dict:jisjk:2986	不機嫌な顔をした。	기분이 안 좋은 표정을 했다.	fix	defaults
+phrase:お気の毒に	お気の毒に。	안됐군요.	keep	lookup

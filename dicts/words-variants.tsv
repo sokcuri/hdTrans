@@ -4013,8 +4013,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蛙の子はカエル	부전자전	A9D0			GN							w:23109
 蛙のコはカエル	부전자전	A9D0			GN							w:23109
 劃時代的	획기적	I110			GN							jisjk:89820
-かっこ悪	보기 안$DE@	H7U0			GN							jisjk:263531
-恰好悪	보기 안$DE@	H7U0			GN							jisjk:263531
+かっこ悪	보기 안 $DE@	H7U0			GN							jisjk:263531
+恰好悪	보기 안 $DE@	H7U0			GN							jisjk:263531
 格鬪	격투	N110		Hd	GN							jisjk:15205
 隔靴搔痒	격화소양	I110			GN							jisjk:60831
 學園	학원	N110	VBl		GN							jisjk:38409
@@ -6795,8 +6795,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 びん詰	병조림	I110			GN							jisjk:70150
 不恰好	꼴%BD@	G8L0			GN							jisjk:2970
 不恰好	꼴사나운 모양	I110			GN							jisjk:2971
-不きげん	기분이 안%B8@	G8U0			GN							jisjk:2986
-不気嫌	기분이 안%B8@	G8U0			GN							jisjk:2986
+不きげん	기분이 안 %B8@	G8U0			GN							jisjk:2986
+不気嫌	기분이 안 %B8@	G8U0			GN							jisjk:2986
 不俱戴天	불구대천	I110			GN							jisjk:71332
 不工合	불편	I110			GN							jisjk:71334
 不工合	결함	I110			GN				xxx llm	1		w:11028
@@ -13917,10 +13917,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 痛くも痒くも無	아무렇지도 $D7@	H7N0			GN							jisjk:121692
 痛くもかゆくも無	아무렇지도 $D7@	H7N0			GN							jisjk:121692
 譲り受け人	양수인	N110	VHnUQfUAq		BZ							jisjk:159939
-ひと筋縄ではいかな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄では行かな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄じゃいかな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄じゃ行かな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄ではいかな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄では行かな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄じゃいかな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄じゃ行かな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
 シャーリア	샤리아	N110			GN							w:4666
 シャリーヤ	샤리아	N110			GN							w:4666
 シャリヤ	샤리아	N110			GN							w:4666
@@ -14497,9 +14497,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 インナー・シティ	도회 중심지	N110	VPl		GN							jisjk:157441
 ダーク・エージ	암흑시대	N110			GN							jisjk:50174
 目が眩	눈이 &LU@	M425			GN							jisjk:118027
-開いた口がふさがらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
-あいた口がふさがらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
-あいた口が塞がらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
+開いた口がふさがらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
+あいた口がふさがらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
+あいた口が塞がらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
 アーチチョーク	아티초크	N110			GN							w:1956
 考え合わせ	아울러 생각&AV@	M447			GN							jisjk:141479
 考えあわせ	아울러 생각&AV@	M447			GN							jisjk:141479
@@ -15125,8 +15125,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 瓢箪から独楽	표주박에서 망아지	A110			GN							jisjk:90314
 ひょうたんから独楽	표주박에서 망아지	A110			GN							jisjk:90314
 瓢簞から駒	표주박에서 망아지	A110			GN							jisjk:90314
-犬も喰わな	아무도 상대 안$AB@	H7U0		Pn	GN							jisjk:117134
-犬もくわな	아무도 상대 안$AB@	H7U0		Pn	GN							jisjk:117134
+犬も喰わな	아무도 상대 안 $AB@	H7U0		Pn	GN							jisjk:117134
+犬もくわな	아무도 상대 안 $AB@	H7U0		Pn	GN							jisjk:117134
 屁のカッパ	개뿔도 아님	K110			GN							jisjk:118028
 明つ神	천황	N110	VHn		GN							jisjk:227028
 虎の門事件	토라노몬사건	N110			GN							jisjk:246186
@@ -15150,7 +15150,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 白へび	흰뱀	N110	VAm		GN							jisjk:235898
 シガレット・ケース	시가렛 케이스	N110	VPe		GN							jisjk:129179
 アコースティック・エミッション	acoustic emission	N110			GN							jisjk:42405
-都合が悪	사정이 안$DE@	H7U0			GN							jisjk:267229
+都合が悪	사정이 안 $DE@	H7U0			GN							jisjk:267229
 ブリニ	블리니	N110	VFd		GN				llm			w:8269
 冬薯蕷葛	도꼬로마	N110	VPt		GN							jisjk:245854
 御津柏	떡갈나무 잎	N110			GN							jisjk:252477
@@ -18504,7 +18504,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 とんぼ玉	둥근 유리 구슬	N110			GN							jisjk:246293
 トンボ玉	둥근 유리 구슬	N110			GN							jisjk:246293
 釣りあげ	끌어 올&AA@	M447			GN							jisjk:143934
-わらじ銭	몇 푼 안되는 노자	N110	VMy		GN							jisjk:257060
+わらじ銭	몇 푼 안 되는 노자	N110	VMy		GN							jisjk:257060
 動機づけ	동기마련	I110			GN							jisjk:66281
 女松	적송	N110	VPt		GN							jisjk:253498
 虫こぶ	충영	N110	VPtVAm		GN							jisjk:253059
