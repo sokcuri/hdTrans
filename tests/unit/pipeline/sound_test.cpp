@@ -254,6 +254,7 @@ HD_TEST(pipeline_sound) {
         // A lone ん or small vowel between punctuation is a voice of its own.
         {"「あっ、ん、くぁっ」", "「앗、응、크앗」"},
         {"……ぅ……", "……우……"},
+        {"あっ、く、うぅ", "앗、크、우우"},
         {"な ん", "な ん"},
         {"君ん家", "君ん家"},
         {"「おい、誰か！！」", "「어이、誰か！！」"},
