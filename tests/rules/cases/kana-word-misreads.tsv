@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+dict:jisjk:5239	走ると体が熱くなるそうだ。	달리면 몸이 뜨거워진다고 한다.	fix	lookup
+dict:jisjk:5239	この先は道が細くなる。	이 앞은 길이 좁아진다.	keep	lookup
+local:3604	夏は海に行きたくなるな。	여름은 바다에 가고 싶어지는군.	fix	local-ending
+local:3604	そこへ行くな。	거기에 가지 말아라.	keep	local-ending
+local:3604	それは困るな。	그것은 곤란하구나.	keep	local-ending
+dict:aredake:1	犬があれだけ大きいとは思わなかった。	개가 그토록 크다고는 생각하지 않았다.	fix	lookup
+dict:aredake:2	家もあれだけ古いと危ない。	집도 그토록 낡으면 위험하다.	fix	lookup
+dict:aredake:3	彼にあれだけ言われたのに。	그에게 그토록 말해졌는데.	fix	lookup
+dict:aredake:1	お金があれば買える。	돈이 있으면 살 수 있다.	keep	lookup
+dict:aredake:2	時間もあれば終わる。	시간도 있으면 끝난다.	keep	lookup
+constraint:sou-itta-predicate	彼女は笑ってそう言った。	그녀는 웃어 그렇게 말했다.	fix	lookup
+constraint:sou-itta-predicate	確かにそう言ったが、本気ではない。	확실히 그렇게 말했지만, 진심이 아니다.	fix	lookup
+constraint:sou-itta-predicate	そう言った意味では正しい。	그런 의미에서는 올바르다.	keep	lookup
+constraint:sou-itta-predicate	そう言った問題はよくある。	그런 문제는 자주 있다.	keep	lookup
+dict:jisjk:5239	薬を飲むと眠くなるそうです。	약을 먹으면 졸려진다고 합니다.	fix	lookup

@@ -31,6 +31,7 @@ enum class ConstraintContext : uint8_t {
     BeforeAgaru,        // 上が follows (一人立ち上がり), so the shorter word ends inside a longer one
     AfterPredicate,     // right after た, だ, る, う, い, す or ん in the token or the token before (だったわ, ですわ)
     NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
+    NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
 };
 
 // The senses a rule rejects.

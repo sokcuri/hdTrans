@@ -74,7 +74,9 @@ const dict::Snapshot* Dictionary() {
          "わ\t와\tQ110\t\t\tGN\t81\n"
          "わ\t\tQ110\t\t\tGN\t82\n"
          "ん\t응\tQ110\t\t\tGN\t83\n"
-         "ん\t\tQ110\t\t\tGN\t84\n"},
+         "ん\t\tQ110\t\t\tGN\t84\n"
+         "そう言った\t그런\tA9D0\t\t\tGN\t85\n"
+         "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -127,7 +129,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{19});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{20});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -276,6 +278,18 @@ HD_TEST(constraint_tachidachi_before_agaru) {
         {"一人立ちする", "一人立ちする", "一人立ち", "독립"},
         {"一人立ち", "一人立ち", "一人立ち", "독립"},
         {"一人立ち、", "一人立ち、", "一人立ち", "독립"},
+    });
+}
+
+// そう言った before a kanji or katakana word is the adnominal 그런 (そう言った意味); elsewhere
+// its sense goes so that the verb そう言 and its ending read it (そう言った。, そう言ったが).
+HD_TEST(constraint_sou_itta_predicate) {
+    CheckCases({
+        {"そう言った意味", "そう言った意味", "そう言った", "그런"},
+        {"そう言ったミス", "そう言ったミス", "そう言った", "그런"},
+        {"そう言った。", "そう言った。", "そう言った", ""},
+        {"そう言ったが", "そう言ったが", "そう言った", ""},
+        {"そう言った、", "そう言った、", "そう言った", ""},
     });
 }
 
