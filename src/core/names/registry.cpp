@@ -340,9 +340,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         const bool numeral = AllRunes(x, [](char32_t c) {
             return std::u32string_view(U"〇一二三四五六七八九十百千万億零").find(c) != std::u32string_view::npos;
         });
-        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && !numeral && (f.surname || f.records == 0);
+        // A single kanji no dictionary knows (改) is no surname without a surname reading.
+        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && !numeral &&
+               (f.surname || f.layerSurname || (f.records == 0 && k >= 2));
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
+        // A common word is no full name (沢山 is 沢 + 山 only as a name).
+        const DictFlags fj = Flags(joined);
+        if (fj.common && !fj.person) return;
         // The surname stands for the person alone too, but a common word (北, 上) reads as
         // that word wherever the full name is not written.
         if (!Flags(x).common) {
