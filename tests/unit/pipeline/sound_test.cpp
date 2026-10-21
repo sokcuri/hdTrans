@@ -410,3 +410,22 @@ HD_TEST(pipeline_sound_extra_isolation) {
     HD_CHECK(internal::IsSoundKey(U"ガボッ", true));
     HD_CHECK(!internal::IsSoundKey(U"ガボッ"));
 }
+
+// An interjection before a pause or an ellipsis is read as a sound although an end row
+// has the same key; before other text the end row's key still rules it out.
+HD_TEST(pipeline_sound_before_pause_over_end_row) {
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"見て！ぽい～！", "見て！포이~！"},
+        {"…ぽい。", "…포이。"},
+        {"ぽい…", "포이…"},
+        {"ぽいぽい。", "포이포이。"},
+        {"ぽい捨て", "ぽい捨て"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}

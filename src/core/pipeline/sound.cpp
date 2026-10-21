@@ -302,7 +302,7 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
-    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) const;
+    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
@@ -343,13 +343,14 @@ bool SoundText::UtteranceStart(size_t p) const {
 bool SoundText::PauseAt(size_t p) const { return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n"); }
 
 // The length in characters of the longest base key, plain-dictionary key and name-layer
-// key that start at character p; kana spellings do not count.
-void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) const {
+// key that start at character p; kana spellings do not count, nor with skipEnds the
+// endings of end rows.
+void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds) const {
     base = user = name = 0;
     const size_t end = std::min(rs_.size(), p + 24);
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && c.user->kana) continue;
+        if (c.user != nullptr && (c.user->kana || (skipEnds && c.user->end))) continue;
         const size_t n = text::RuneCount(c.source);
         if (c.user != nullptr && c.user->nameLayer) {
             name = std::max(name, n);
@@ -478,8 +479,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (chosen == nullptr) return false;
     if (!Stopped(best) && !(inChain && best.intj && !chosen->phrase)) return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
+    // An interjection before a pause or an ellipsis is not the ending of an end row there
+    // (見て！ぽい～！ 포이~!).
+    const bool beforePause = PauseAt(best.end) || (best.end < rs_.size() && In(rs_[best.end], U"…‥"));
     size_t base = 0, user = 0, name = 0;
-    LongestKeys(p, base, user, name);
+    LongestKeys(p, base, user, name, best.intj && beforePause);
     size_t keyLen = chosen->key.size();
     if (chosen->key.back() == U'ト') keyLen--;
     const size_t surface = best.end - p;

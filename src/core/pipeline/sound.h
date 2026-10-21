@@ -35,7 +35,8 @@
 //     and before a pause, and then wins over the dictionary words;
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
-//     entry at least as long as the sound's key (without a final と), win.
+//     entry at least as long as the sound's key (without a final と), win; the ending
+//     of an end row does not win over an intj row before a pause or an ellipsis.
 //
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.

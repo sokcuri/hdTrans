@@ -26722,6 +26722,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 よりどりみどり	골라잡기	N110			GN							word:yoridori:3
 本当	정말	N110		J3	GN							word:hontou:question
 本当	정말	N110		J4	GN							word:hontou:exclamation
+っぽ	것 $DF@	H7U0			GN	5100	||2 &&2 P-1== "4**" ||4 Y-1== "L0" Y-1== "L8" Y-1== "R는" Y-1== "R던" &&2 P-1== "7**" Y-1== "L4"	っぽ는 관형형 동사나 형용사 뒤에서 것 같다를 고른다.				word:ppoi:predicate
 でしょ	그렇지	P200			GN	3173	||1 G+0== "Hz"	문장 첫머리에서 「でしょう」, 「でしょ」를 ‘그렇지’로 고른다.				word:desho:opening
 以来	만	N110			GN	5101	||1 &&2 S-1== "いつ" D-1= "얼마"	いつ 뒤의 以来를 만으로 고르고 いつ를 얼마로 바꾼다.				word:irai:itsu
 助か	&K5@	M418			GN	5102	||1 &&4 G+0== "Hz" U+0== "った" ||2 G+0== "Ow" S+1== "、" Y+0= "5다"	문장 첫머리에서 홀로 끝나는 助かった를 살았다로 고른다.				word:tasukaru:relief

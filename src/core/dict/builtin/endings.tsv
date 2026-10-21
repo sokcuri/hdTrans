@@ -163,9 +163,27 @@
 // ばいいでしょ, ばいいんでしょ: a retort (쓰면 되잖아).
 書けばいいでしょ	쓰면 되잖아	end	prio=-1
 書けばいいんでしょ	쓰면 되잖아	end	prio=-1
-// っぽい
+// っぽい after a predicate: it seems (것 같아). After a form that asks, invites or
+// must, the tic adds 포이.
 書くっぽい	쓰는 것 같아	end	prio=-1
+書いたっぽい	쓴 것 같아	end	prio=-1
+書かないっぽい	쓰지 않는 것 같아	end	prio=-1
+書いちゃうっぽい	써버릴 것 같아	end	prio=-1
+書いちゃったっぽい	써버린 것 같아	end	prio=-1
+書かなきゃっぽい	써야 할 것 같아	end	prio=-1
+書いてっぽい	써 포이	end	prio=-1
+書いててっぽい	쓰고 있어 포이	end	prio=-1
+書こうっぽい	쓰자 포이	end	prio=-1
+高いっぽい	높은 것 같아	end	prio=-1
+高かったっぽい	높았던 것 같아	end	prio=-1
 静かっぽい	조용한 것 같아	end	prio=-1
+静かだったっぽい	조용했던 것 같아	end	prio=-1
+// ぽい, the tic spelled without っ
+書くぽい	쓰는 것 같아	end	prio=-1
+書くぽーい	쓰는 것 같아	end	prio=-1
+書いたぽい	쓴 것 같아	end	prio=-1
+高いぽい	높은 것 같아	end	prio=-1
+学生ぽい	학생 같아	end	prio=-1
 // ないで with a particle
 書かないでね	쓰지 마	end	prio=-1
 書かないでよ	쓰지 마	end	prio=-1
