@@ -34,7 +34,8 @@ std::string JoinMasu(std::string_view text);
 // A word joined to です, でした, でしょう cut off by …‥・―─ when no kana or ー ～ follows,
 // or the particles of JoinMasu and no kana (好き…です 好きです, 静か…ですね). The marks are
 // written after the ending as a drawl span (kLeadDrawlMark, for でした kPastLeadDrawlMark).
-// Not after が, を or a request form (ください, なさい).
+// Only after a word that can be a predicate: not after a particle, a filler or a
+// conjunction (それは, えっと, つまり, だから) or a request form (ください, なさい).
 std::string JoinPausedCopula(std::string_view text);
 
 // The spoken and old-fashioned spellings the dictionary does not read in their plain

@@ -193,9 +193,51 @@ bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// Whether the kana run is a predicate by itself: an adjective in い other than はい, a run
+// ending in そう どう こう ありがとう おめでとう よろしく だめ, or one of those with の or ん,
+// or なの なん (そうなの).
+bool PredicateKana(std::string_view run) {
+    for (std::string_view w : {"なの", "なん", "の", "ん"}) {
+        if (run.ends_with(w) && run.size() > w.size()) return PredicateKana(run.substr(0, run.size() - w.size()));
+    }
+    if (run.ends_with("い")) return run != "はい";
+    for (std::string_view w : {"そう", "どう", "こう", "ありがとう", "おめでとう", "よろしく", "だめ"}) {
+        if (run.ends_with(w)) return true;
+    }
+    return false;
+}
+
+// Whether the text before ends in a word that can take a pause before the copula: a kanji,
+// a katakana (or ー after one), or kana after such a word (嬉しい, 好き, 静か, 沈むん)
+// that are no particle (は も に へ と で が を や ね よ から まで より って けど, の right
+// after the kanji) nor a request form (ください, なさい); or kana alone that PredicateKana
+// takes. Fillers and conjunctions (えっと, つまり, だから, うーん) are none of these.
+bool PredicateBefore(std::string_view before) {
+    const text::Rune last = LastRune(before);
+    if (IsKanjiClass(last.cp) || (last.cp >= U'ァ' && last.cp <= U'ヺ')) return true;
+    if (last.cp == U'ー') {
+        const text::Rune prev = LastRune(before.substr(0, before.size() - last.size));
+        return prev.cp >= U'ァ' && prev.cp <= U'ヺ';
+    }
+    if (!IsHiraganaClass(last.cp)) return false;
+    size_t start = before.size();
+    while (start > 0) {
+        const text::Rune r = LastRune(before.substr(0, start));
+        if (!IsHiraganaClass(r.cp)) break;
+        start -= r.size;
+    }
+    const std::string_view run = before.substr(start);
+    for (std::string_view w : {"は", "も", "に", "へ", "と", "で", "が", "を", "や", "ね", "よ", "から",
+                               "まで", "より", "って", "けど", "ください", "なさい"}) {
+        if (run.ends_with(w)) return false;
+    }
+    if (start > 0 && PredicateBefore(before.substr(0, start))) return run != "の";
+    return PredicateKana(run);
+}
+
 // A word cut from the copula by a pause: ([ぁ-ゖァ-ヺー一-龥々])([…‥・―─]+)(です|でした|でしょう)
-// (P?)([^ぁ-ゖァ-ヺー～]|$) as groups 1, 4, 2, 5 and 3, with P the particles of EndingEnd;
-// not after が, を, ください, 下さい or なさい.
+// (P?)([^ぁ-ゖァ-ヺー～]|$) as groups 1, 4, 2, 5 and 3, with P the particles of EndingEnd,
+// when PredicateBefore holds for the text up to the marks.
 bool SplitPausedCopula(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     const auto wordChar = [](char32_t c) {
@@ -203,11 +245,7 @@ bool SplitPausedCopula(std::string_view s, size_t pos, Match& m) {
     };
     if (!Take(s, p, wordChar)) return false;
     const size_t word = p;
-    const std::string_view before = s.substr(0, word);
-    if (before.ends_with("が") || before.ends_with("を") || before.ends_with("ください") ||
-        before.ends_with("下さい") || before.ends_with("なさい")) {
-        return false;
-    }
+    if (!PredicateBefore(s.substr(0, word))) return false;
     while (OneOf(s, p, U"…‥・―─")) continue;
     if (!DrawlMarks(Span(s, word, p))) return false;
     for (std::string_view w : {"です", "でした", "でしょう"}) {

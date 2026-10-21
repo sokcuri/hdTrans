@@ -125,6 +125,21 @@ HD_TEST(pipeline_join_paused_copula) {
         {"私が…ですか？"sv, "私が…ですか？"sv},
         {"お任せください……です。"sv, "お任せください……です。"sv},
         {"2300…です"sv, "2300…です"sv},
+        // A particle, filler or conjunction before the pause.
+        {"えっと……ですね"sv, "えっと……ですね"sv},
+        {"つまり……ですね"sv, "つまり……ですね"sv},
+        {"それは……ですね"sv, "それは……ですね"sv},
+        {"今日は……ですね、雨です"sv, "今日は……ですね、雨です"sv},
+        {"うーん……ですね"sv, "うーん……ですね"sv},
+        {"だから……です"sv, "だから……です"sv},
+        {"学校から…です"sv, "学校から…です"sv},
+        {"私の…です"sv, "私の…です"sv},
+        {"はい……です"sv, "はい……です"sv},
+        // Kana after a kanji, an adjective in い or a predicate word in kana.
+        {"頑張ったの…です"sv, "頑張ったのです\uE006…\uE006"sv},
+        {"沈むん……ですか？"sv, "沈むんですか\uE006……\uE006？"sv},
+        {"すごい…ですね"sv, "すごいですね\uE006…\uE006"sv},
+        {"そう……ですか"sv, "そうですか\uE006……\uE006"sv},
     };
     Check(JoinPausedCopula, cases);
 }
