@@ -34,3 +34,6 @@ compose:speech-quoted	「やらねばならない」	「해야 한다」	keep	co
 compose:speech-quoted	「俺が行く」	「내가 갈게」	fix	compose
 compose:speech-quoted	「私は断る」	「나는 거절할게」	fix	compose
 compose:speech-quoted	「あの人は来る」	「그 사람은 올 거야」	keep	compose
+compose:speech-quoted	「あの子は来ない、と言ってた」	「그 아이는 오지 않는다, 라고 말했어」	fix	compose
+compose:speech-quoted	「『走らない』『騒がない』を守ってる」	「『달리지 않는다』 『떠들지 않는다』를 지키고 있어」	fix	compose
+compose:speech-quoted	「父が待っておってな。もう帰った」	「아버지가 기다리고 있어서 말이야. 벌써 돌아갔다」	fix	compose

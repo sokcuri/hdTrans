@@ -228,15 +228,17 @@ char32_t Composer::QuotedEnd(int i, int last, bool nested) const {
         s.remove_prefix(r.size);
         if (kSkipped.find(r.cp) != std::u32string_view::npos || text::IsSpace(r.cp)) continue;
         if (kEnds.find(r.cp) == std::u32string_view::npos) return 0;
-        // A quote inside speech that a noun or a particle follows (『書いた』もの) is cited;
-        // a report (逃げた……とある) is no speech.
+        // A quote inside speech that a noun, a particle or another quote follows (『書いた』もの,
+        // 『言わない』『聞かない』) is cited; a report (逃げた……とある) is no speech.
         if (nested && (r.cp == U'」' || r.cp == U'』') && !s.empty()) {
             const char32_t next = text::DecodeRune(s).cp;
-            if (text::IsKanji(next) || (next >= U'ァ' && next <= U'ヺ') ||
+            if (text::IsKanji(next) || (next >= U'ァ' && next <= U'ヺ') || next == U'「' || next == U'『' ||
                 (next >= U'ぁ' && next <= U'ゖ' && !s.starts_with("と") && !s.starts_with("っ"))) {
                 return 0;
             }
         }
+        // A clause quoted in speech (探してほしい、と).
+        if ((r.cp == U'、' || r.cp == U'，' || r.cp == U',') && (s.starts_with("と") || s.starts_with("って"))) return 0;
         if (r.cp == U'…' || r.cp == U'‥') {
             while (s.starts_with("…") || s.starts_with("‥")) s.remove_prefix(std::string_view("…").size());
             if (s.starts_with("と") || s.starts_with("って")) return 0;
