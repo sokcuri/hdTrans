@@ -8,3 +8,10 @@ normalize:casual-negative-nee	君ならねぇ、できるよ。	너라면, 할 �
 normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
 normalize:casual-negative-nee	何やらねぇ、変な音がする	무엇인가, 이상한 소리가 난다	keep	normalize
 normalize:casual-negative-nee	これじゃよくならねぇ。	이래서야 좋게 안 된다.	fix	normalize
+normalize:casual-negative-nee	しなきゃならねぇ、	하지 않으면 안 된다,	fix	normalize
+normalize:casual-negative-nee	やらなきゃならねぇ…	하지 않으면 안 된다…	fix	normalize
+normalize:casual-negative-nee	話にならねぇ、帰れ	이야기가 되지 않는다, 돌아가라	fix	normalize
+normalize:casual-negative-nee	よくならねぇ、全然	좋게 안 되는, 전혀	fix	normalize
+normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
+normalize:casual-negative-nee	君にならねぇ、話せる	너에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	お前とならねぇ、どこへでも行ける	너와라면, 어디든지 갈 수 있다	keep	normalize

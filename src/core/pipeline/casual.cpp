@@ -44,10 +44,22 @@ bool Shiren(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// Whether なら after before and the kana at (く, に, ゃ, ば or て) is a conditional when a pause
+// follows its ねぇ: after the く of a verb's dictionary form (行く, not なく, よく, しく) or after a
+// pronoun with に (君に, お前に); after ゃ, ば and て (なきゃ, ねば, 聞き捨て) it is the negative.
+bool PausedConditional(std::string_view before, std::string_view at) {
+    if (at == "く") return !before.ends_with("な") && !before.ends_with("よ") && !before.ends_with("し");
+    if (at != "に") return false;
+    for (std::string_view w : {"君", "お前", "あなた", "貴方", "あんた", "俺", "私", "僕", "彼", "彼女", "あいつ", "てめえ"}) {
+        if (before.ends_with(w)) return true;
+    }
+    return false;
+}
+
 // (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
 // or (やら|[くにゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a kanji or a sentence
-// end (for やら also a comma or a pause); not the particle やら after a kanji, なに or どう, nor
-// the conditional なら after a noun or before a comma (君ならねぇ, 行くならねぇ、).
+// end or a pause; not the particle やら after a kanji, なに or どう, nor the conditional なら
+// after a noun (君ならねぇ) or before a pause where PausedConditional holds (行くならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
     auto tail = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -80,9 +92,11 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
         m.group[1] = Span(s, pos, p);
         if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー")) continue;
         if (CharOrEnd(s, p, U"なよぜぞしんかけだっ", m, 2)) return true;
-        // Before a kanji or a sentence end (ならねえ相手, やらねぇ。); なら before a comma or
-        // a pause is the conditional with the particle ねぇ (行くならねぇ、俺も).
-        const std::u32string_view ends = w == "なら" ? U"。！？!?」』）)\n" : U"。！？!?」』）)\n、，…‥ 　";
+        // Before a kanji, a sentence end or a pause (ならねえ相手, やらねぇ。, なきゃならねぇ、);
+        // なら before a pause after a verb's dictionary form or after a pronoun with に is
+        // the conditional with the particle ねぇ (行くならねぇ、俺も, 君にならねぇ、).
+        const bool conditional = w == "なら" && PausedConditional(before, s.substr(pos, 3));
+        const std::u32string_view ends = conditional ? U"。！？!?」』）)\n" : U"。！？!?」』）)\n、，…‥ 　";
         if (p < s.size() && (IsKanjiClass(At(s, p).cp) || In(At(s, p).cp, ends))) return Done(s, m, p, p, 2);
     }
     return false;
