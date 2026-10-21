@@ -7496,7 +7496,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 パンちら	판치라	N110			GN						パンちら	w:7488
 パンとサーカス	빵과 서커스	N110			GN						パンとサーカス	w:7489
 パンの木	빵나무	N110			GN						パンのき	w:7490
-パンや	빵집	N110			GN						パンや	w:7491
 パンアメリカンハイウェイ	팬아메리칸 하이웨이	N110			GN						パンアメリカンハイウェイ	w:7492
 パンアメリカンハイウェー	팬아메리칸 하이웨이	N110			GN						パンアメリカンハイウェー	w:7493
 パンアメリカン・ハイウェイ	팬아메리칸 하이웨이	N110			GN						パンアメリカン・ハイウェイ	w:7494
@@ -15795,7 +15794,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 平鱸	넙치농어	N110			GN						ひらすずき	w:15779
 年の差	나이 차	N110			GN				llm			w:15780
 年の離れた	나이 차이가 나는	E010			GN				llm			w:15781
-年より	늙은이	N110	VHn		GN						としより	w:15782
 年余	여 년	N110			GN				xxx llm			w:15783
 年余	일 년 남짓	N110	UMe	Tm	GN				llm		ねんよ	w:15784
 年始状	연하장	N110			GN						ねんしじょう	w:15785
@@ -25312,7 +25310,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 難事	어려운 일	N110			GN				xxx llm	1		w:25289
 難曲	어려운 곡	N110	VSw		GN				llm		なんきょく	w:25290
 雨がさ	우산	N110			GN						あまがさ	w:25291
-雨が降	비가 &AH@	M428			GN				llm		あめがふる	w:25292
+雨が降	비가 &AH@	M428		Pn	GN				llm		あめがふる	w:25292
 雨じまい	방수	N110	UTt		GN				llm		あまじまい	w:25293
 雨やどり	비 피하기	N110		Hd	GN				llm		あまやどり	w:25294
 雨ガッパ	비옷	N110			GN						あまガッパ	w:25295

@@ -16,8 +16,8 @@ dict:jisjk:90306	練習に持って来いの場所だ。	연습에 안성마춤�
 dict:jisjk:90306	練習に持って来いだ。	연습에 안성마춤이다.	keep	local
 G120	山田、田中、鈴木が来た。	야마다, 타나카, 스즈키가 왔다.	fix	global-stem
 G120	太郎が来た。	타로가 왔다.	keep	global-stem
-dict:木犀	木犀の花が咲いた。	목서가 꽃이 피었다.	fix	defaults
-dict:木犀	銀木犀の花が咲いた。	은목서가 꽃이 피었다.	keep	defaults
+dict:木犀	木犀の花が咲いた。	목서의 꽃이 피었다.	fix	defaults
+dict:木犀	銀木犀の花が咲いた。	은목서의 꽃이 피었다.	keep	defaults
 dict:ジェム	ガーネットジェムがある。	가닛 젬이 있다.	fix	defaults
 dict:ジェム	ジェムストーンがある。	보석이 있다.	keep	defaults
 dict:喧噪	町は喧噪に包まれた。	마을은 소란에 싸였다.	fix	defaults
@@ -36,8 +36,8 @@ dict:かさご	かさごを釣る。	쏨뱅이를 낚시한다.	fix	defaults
 dict:かさご	かさを買う。	우산을 산다.	keep	defaults
 dict:めばる	めばるを釣る。	볼락을 낚시한다.	fix	defaults
 dict:めばる	眼鏡を買う。	안경을 산다.	keep	defaults
-dict:金木犀	金木犀の花が咲いた。	금목서가 꽃이 피었다.	fix	defaults
-dict:金木犀	銀木犀の花が咲いた。	은목서가 꽃이 피었다.	keep	defaults
+dict:金木犀	金木犀の花が咲いた。	금목서의 꽃이 피었다.	fix	defaults
+dict:金木犀	銀木犀の花が咲いた。	은목서의 꽃이 피었다.	keep	defaults
 dict:詫び	詫びとして金を置く。	사과로서 돈을 둔다.	fix	defaults
 dict:詫び	詫びて謝る。	사과해 사과한다.	keep	defaults
 dict:王族付き	王族付きのメイドだ。	왕족 전속의 메이드다.	fix	defaults

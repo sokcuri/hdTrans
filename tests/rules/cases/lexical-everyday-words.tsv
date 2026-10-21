@@ -1,0 +1,58 @@
+rule	input	expected	kind	layer
+dict:jisjk:115735	庭で砂を取った。	뜰에서 모래를 취했다.	fix	lookup
+dict:jisjk:115735	砂で山を作る。	모래로 산을 만든다.	keep	lookup
+dict:jisjk:115995	パンを袋に入れた。	빵을 봉투에 넣었다.	fix	lookup
+dict:jisjk:115995	紙の袋を開けた。	종이의 봉투를 열었다.	keep	lookup
+dict:w:7491	パンや卵を買った。	빵이나 알을 샀다.	fix	lookup
+dict:w:7491	パン屋で買った。	빵가게에서 샀다.	keep	lookup
+dict:w:15782	いつもの年より寒い。	평소의 해보다 춥다.	fix	lookup
+dict:w:15782	お年寄りに席をゆずった。	노인에게 자리를 양보했다.	keep	lookup
+dict:jisjk:260483	1990年ごろの話だ。	1990년경의 이야기다.	fix	lookup
+dict:jisjk:260483	年ごろの娘がいる。	적령기의 딸이 있다.	keep	lookup
+dict:jisjk:141605	友だちが遊びに来た。	친구가 놀러 왔다.	fix	lookup
+dict:jisjk:141605	友だちと遊びに行った。	친구와 놀러 갔다.	keep	lookup
+dict:everyday-words:1	祭りを見に来た人が多い。	축제를 보러 온 사람이 많다.	fix	lookup
+dict:everyday-words:1	見にくい字だ。	보기 어려운 글자다.	keep	lookup
+dict:everyday-words:1	映画を見に行った。	영화를 보러 갔다.	keep	lookup
+dict:everyday-words:2	兄が会いに来ました。	형이 만나러 왔습니다.	fix	lookup
+dict:everyday-words:3	客が野菜を買いに来た。	손님이 야채를 사러 왔다.	fix	lookup
+dict:everyday-words:4	妹がケーキを食べに来た。	여동생이 케이크를 먹으러 왔다.	fix	lookup
+dict:everyday-words:4	あいにく雨だった。	공교롭게도 비였다.	keep	lookup
+dict:everyday-words:5	頭にはちまきをした。	머리에 머리띠를 했다.	fix	lookup
+dict:everyday-words:5	鉢巻きをしめた。	머리띠를 매었다.	keep	lookup
+dict:everyday-words:6	昼ごろ雨がやんだ。	낮쯤 비가 그쳤다.	fix	lookup
+dict:everyday-words:6	3時ごろ家に帰った。	3시경 집에 돌아갔다.	keep	lookup
+dict:jisjk:40426	うちわを二つ買った。	부채를 2개 샀다.	fix	lookup
+dict:jisjk:40426	内輪の話をした。	집안의 이야기를 했다.	keep	lookup
+dict:names.110332	ガザ地区で水を配った。	가자 지구에서 물을 나눠주었다.	fix	lookup
+dict:names.110332	ガザ地区の子どもたち。	가자 지구의 아이들.	keep	lookup
+dict:jisjk:116220	本を読んだり物を作ったりした。	책을 읽거나 물건을 만들거나 했다.	fix	local
+dict:jisjk:116220	家を出て物を買った。	집을 나가 물건을 샀다.	fix	local
+dict:jisjk:116220	大きい物を運ぶ。	큰 것을 옮긴다.	keep	local
+dict:jisjk:116220	食べる物がない。	먹는 것이 없다.	keep	local
+dict:jisjk:259217	日本の米はおいしい。	일본의 쌀은 맛있다.	fix	local
+dict:jisjk:259217	米を送りました。	쌀을 보냈습니다.	fix	local
+dict:jisjk:259217	米の値段が上がった。	쌀의 가격이 올랐다.	fix	local
+dict:jisjk:116233	米大統領が話した。	미 대통령이 이야기했다.	keep	local
+dict:jisjk:116233	米と日本の会議。	미와 일본의 회의.	keep	local
+dict:jisjk:363622	震度6弱の地震があった。	진도 6약의 지진이 있었다.	fix	local
+dict:jisjk:363622	震度5強の地震があった。	진도 5강의 지진이 있었다.	keep	local
+dict:jisjk:363622	1万人弱が集まった。	1만명미만이 모였다.	keep	local
+dict:i:6256	庭の花が咲いた。	뜰의 꽃이 피었다.	fix	lookup
+dict:i:6256	花が咲いた。	꽃이 피었다.	keep	lookup
+dict:w:25292	夜の雨が降った。	밤의 비가 왔다.	fix	lookup
+dict:w:25292	雨が降っている。	비가 오고 있다.	keep	lookup
+dict:jisjk:359484	弟は練習していませんでした。	남동생은 연습하고 있지 않았습니다.	fix	local-ending
+dict:jisjk:359484	彼は結婚していませんでした。	그는 결혼하지 않았었습니다.	keep	local-ending
+dict:everyday-words:12	アジアのほかの国に行く。	아시아의 다른 나라에 간다.	fix	lookup
+dict:everyday-words:12	東京のほか、大阪でも売る。	도쿄외, 오사카에서도 판다.	keep	lookup
+dict:everyday-words:13	もくずがにを食べた。	참게를 먹었다.	fix	lookup
+dict:everyday-words:13	かにを食べた。	게를 먹었다.	keep	lookup
+dict:everyday-words:14	名前がかいてあります。	이름이 쓰여 있습니다.	fix	lookup
+dict:everyday-words:14	名前が書いてあります。	이름이 써 두었습니다.	keep	lookup
+dict:jisjk:266359	空に向かってボールを投げた。	하늘을 향해 공을 던졌다.	fix	local
+dict:jisjk:266359	東京に向かった。	도쿄로 향했다.	keep	local
+dict:jisjk:114687	選挙で勝った。	선거에서 이겼다.	fix	local
+dict:jisjk:114687	電話で話した。	전화로 이야기했다.	keep	local
+dict:jisjk:267832	いつもの年より咲くのが遅い。	평소의 해보다 피는 것이 늦다.	fix	local
+dict:jisjk:267832	2020年より始まった。	2020년부터 시작되었다.	keep	local

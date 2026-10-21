@@ -6258,7 +6258,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハードルを下げ	허들을 낮&CL@	M427		Pn	GN				llm			i:6253
 合流注意	합류 주의	A9D0			GN				llm			i:6254
 車間確認	차간 거리 확인	A9D0			GN				llm			i:6255
-花が咲	꽃이 &CM@	M421			GN				llm			i:6256
+花が咲	꽃이 &CM@	M421		Pn	GN				llm			i:6256
 観測可能な宇宙	관측 가능한 우주	N110			GN							i:6257
 紙の辞書	종이 사전	N110			GN				llm			i:6258
 少ししか	조금밖에	A9D0			GN				llm			i:6259
