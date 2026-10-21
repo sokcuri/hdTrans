@@ -446,7 +446,19 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
         }
         if (skipped && runKorean.empty()) continue;
         if (ok && s.lead) {
-            if (!UtteranceStart(p) || !PauseAt(end) || IsKatakanaRune(rs_[p])) continue;
+            bool start = UtteranceStart(p), pause = PauseAt(end);
+            if (s.key == U"ハ" || s.key == U"ヘ") {
+                // A bare は or へ is the particle after a word, a dash or a space ((人形) は、,
+                // 私――は――) and before a closing bracket (「は」); it is a lead only where it
+                // opens a line or a quote, and there a dash or an ellipsis after it is a pause
+                // too (へ――面白い).
+                size_t q = p;
+                while (q > 0 && text::IsSpace(rs_[q - 1])) q--;
+                start = q == 0 || In(rs_[q - 1], U"\n「『（(");
+                pause = (pause && (end == rs_.size() || !In(rs_[end], U"」』）)"))) ||
+                        (end == p + 1 && end < rs_.size() && In(rs_[end], U"―─—…‥"));
+            }
+            if (!start || !pause || IsKatakanaRune(rs_[p])) continue;
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
         }
         if (ok && runKorean.empty() && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
