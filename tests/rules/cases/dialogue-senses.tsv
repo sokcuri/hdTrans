@@ -38,3 +38,10 @@ dict:word:tanoshimi:alone	明日のデート、楽しみ？	내일의 데이트,
 dict:word:tanoshimi:alone	楽しみ！	기대돼!	fix	local
 dict:word:tanoshimi:alone	散歩が唯一の楽しみ。	!rule:dict:word:tanoshimi:alone	keep	local
 dict:word:tanoshimi:alone	人生の楽しみが増えた。	인생의 즐거움이 늘어났다.	keep	local
+dict:jisjk:374181	悪い、遅くなった。	미안하다, 늦어졌다.	fix	local
+dict:jisjk:374181	ごめん、悪かった。	미안, 미안했다.	fix	local
+dict:jisjk:374181	悪かったな、急に呼んで。	rule:dict:jisjk:374181=미안$AB@	fix	local
+dict:jisjk:374181	天気が悪いな。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374181	悪いのは私だ。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374181	悪い人じゃない。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374182	わるい、忘れてた。	rule:dict:jisjk:374182=미안$AB@	fix	local
