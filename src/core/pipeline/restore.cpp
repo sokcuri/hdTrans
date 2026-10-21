@@ -10,6 +10,7 @@
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/canonical.h"
 
 namespace hdTrans::pipeline {
 
@@ -211,6 +212,25 @@ bool AfterAttributive(std::string_view text) {
     return final == text::kFinalNieun || final == text::kFinalRieul;
 }
 
+// Where the pause of a drawl goes in the syllables w that end a polite predicate: before
+// 습니다 습니까 읍시다 (with 습 or 읍), else before 니다 니까 시다; before 지요 까요 네요 군요;
+// else before the last syllable; at the end of a one-syllable word.
+size_t DrawlPoint(std::u32string_view w) {
+    const size_t n = w.size();
+    size_t tail = 1;
+    if (w.ends_with(U"니다") || w.ends_with(U"니까") || w.ends_with(U"시다")) {
+        tail = n >= 3 && (w[n - 3] == U'습' || w[n - 3] == U'읍') ? 3 : 2;
+    } else if (w.ends_with(U"지요") || w.ends_with(U"까요") || w.ends_with(U"네요") || w.ends_with(U"군요")) {
+        tail = 2;
+    }
+    return tail < n ? n - tail : n;
+}
+
+// Whether r ends a word: white space, punctuation or a closing bracket.
+bool EndsWord(char32_t r) {
+    return r == U' ' || r == U'\t' || r == U'\n' || Contains(U"、。，．！？!?,.:;…‥・―─—～ー」』）)］]】〕〉》\"'", r);
+}
+
 }  // namespace
 
 Pieces DropAddedSpaces(const Pieces& typed, const Pieces& out) {
@@ -363,6 +383,40 @@ std::string WriteStutters(std::string_view s) {
     return Utf8(out);
 }
 
+std::string WriteDrawls(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kDrawlMark)) return std::string(s);
+    std::u32string out;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != kDrawlMark) {
+            out.push_back(rs[i]);
+            continue;
+        }
+        const size_t close = rs.find(kDrawlMark, i + 1);
+        if (close == std::u32string::npos) continue;
+        std::u32string marks;
+        for (size_t k = i + 1; k < close; k++) {
+            const auto form = tokenizer::CanonicalForm(rs[k]);
+            if (form) {
+                marks += Runes(*form);
+            } else {
+                marks.push_back(rs[k]);
+            }
+        }
+        i = close;
+        size_t spaces = 0;  // spaced from the word as if a word followed the span
+        while (spaces < out.size() && out[out.size() - 1 - spaces] == U' ') spaces++;
+        const size_t end = out.size() - spaces;
+        size_t start = end;
+        while (start > 0 && IsSyllable(out[start - 1])) start--;
+        if (start == end) continue;
+        if (close + 1 == rs.size() || EndsWord(rs[close + 1])) out.resize(end);
+        const std::u32string_view word = std::u32string_view(out).substr(start, end - start);
+        out.insert(start + DrawlPoint(word), marks);
+    }
+    return Utf8(out);
+}
+
 std::string DropParticleMarks(std::string_view s) {
     std::string out;
     out.reserve(s.size());
@@ -384,7 +438,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = DropParticleMarks(WriteStutters(WriteDropped(output::String(st.korean))));
+    st.line = DropParticleMarks(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))));
     return st;
 }
 

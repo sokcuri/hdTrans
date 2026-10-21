@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // DropParticleMarks(WriteStutters(WriteDropped(String(korean))))
+    std::string line;          // DropParticleMarks(WriteDrawls(WriteStutters(WriteDropped(String(korean)))))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -60,6 +60,14 @@ std::string WriteDropped(std::string_view s);
 // after it (past spaces, marks and separators) is dropped with its separator.
 std::string WriteStutters(std::string_view s);
 
+// Each drawl span (kDrawlMark, pause marks, kDrawlMark) after a Hangul word written as its
+// marks, in the Korean form of the tokenizer (・ ·), inside the word before the polite
+// ending: before 습니다 습니까 읍시다, else 니다 니까 시다 (먹겠…습니다, 입…니다), before 지요
+// 까요 네요 군요, else before the last syllable (고마워…요), at the end of a one-syllable
+// word. Spaces between the word and the span go unless a word follows. A span with no
+// Hangul word before it is dropped.
+std::string WriteDrawls(std::string_view s);
+
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);
 
@@ -70,6 +78,9 @@ constexpr char32_t kStutterMark = 0xE000;
 // After the marks of a longer stutter piece, one mark for each kana of the word the piece
 // does not reach (ごめ、 of ごめんなさい: 2 kStutterMark, 4 kStutterRest).
 constexpr char32_t kStutterRest = 0xE004;
+// Encloses the pause marks normalize cut out of a polite ending (いただきま…す), written
+// after the ending (WriteDrawls).
+constexpr char32_t kDrawlMark = 0xE005;
 
 namespace internal {
 

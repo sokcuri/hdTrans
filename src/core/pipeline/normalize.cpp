@@ -4,7 +4,7 @@
 //   2. character forms: half-width katakana, CP932 mapping differences, kanji forms
 //      (NormalizeForms);
 //   3. an apology or greeting cut before なさい joined (JoinNasai);
-//   4. a verb stem cut before ます joined (JoinMasu);
+//   4. a polite ending cut off or inside joined (JoinMasu);
 //   5. spoken and old-fashioned spellings (SpokenForms);
 //   6. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
 //   7. casual contractions (RewriteCasual);
@@ -13,6 +13,7 @@
 #include "core/pipeline/normalize.h"
 
 #include "core/pipeline/pattern.h"
+#include "core/pipeline/restore.h"
 #include "core/tokenizer/canonical.h"
 
 namespace hdTrans::pipeline {
@@ -79,22 +80,52 @@ bool SplitNasai(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// ([いきぎしじちにひびみりえけげせぜてでねへべめれ])[、，…‥]+(ます|ました|ません)([^ぁ-ゖァ-ヺー～]|$)
+// Whether marks is a run of pause marks a drawl span carries: …‥―─ and runs of two or
+// more ・ (one ・ separates words).
+bool DrawlMarks(std::string_view marks) {
+    if (marks.empty()) return false;
+    size_t dots = 0;
+    for (size_t i = 0; i < marks.size();) {
+        const text::Rune r = At(marks, i);
+        if (!In(r.cp, U"…‥・―─")) return false;
+        if (r.cp != U'・' && dots == 1) return false;
+        dots = r.cp == U'・' ? dots + 1 : 0;
+        i += r.size;
+    }
+    return dots != 1;
+}
+
+// The end of a polite ending that ends at r: with particles an optional かね よね わね わよ
+// か ね よ わ, then ([^ぁ-ゖァ-ヺー～]|$). e is set after the particles, t after the
+// character that follows.
+bool EndingEnd(std::string_view s, size_t r, bool particles, size_t& e, size_t& t) {
+    e = r;
+    if (particles) {
+        for (std::string_view w : {"かね", "よね", "わね", "わよ", "か", "ね", "よ", "わ"}) {
+            if (Lit(s, e, w)) break;
+        }
+    }
+    t = e;
+    const bool tail = Take(s, t, [](char32_t c) {
+        return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～';
+    });
+    return tail || e == s.size();
+}
+
+// ([いきぎしじちにひびみりえけげせぜてでねへべめれ])([、，…‥]+)(ます|ました|ません|ましょう)(P?)([^ぁ-ゖァ-ヺー～]|$)
+// as groups 1, 4, 2, 5 and 3, with P the particles of EndingEnd after marks of DrawlMarks.
 bool SplitMasu(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"いきぎしじちにひびみりえけげせぜてでねへべめれ")) return false;
     return Repeat(s, p, InSet(U"、，…‥"), 1, kUnbounded, [&](size_t q) {
-        for (std::string_view w : {"ます", "ました", "ません"}) {
-            size_t r = q;
-            if (!Lit(s, r, w)) continue;
-            size_t t = r;
-            const bool tail = Take(s, t, [](char32_t c) {
-                return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～';
-            });
-            if (!tail && r != s.size()) continue;
+        for (std::string_view w : {"ます", "ました", "ません", "ましょう"}) {
+            size_t r = q, e = 0, t = 0;
+            if (!Lit(s, r, w) || !EndingEnd(s, r, DrawlMarks(Span(s, p, q)), e, t)) continue;
             m.group[1] = Span(s, pos, p);
             m.group[2] = Span(s, q, r);
-            m.group[3] = Span(s, r, t);
+            m.group[3] = Span(s, e, t);
+            m.group[4] = Span(s, p, q);
+            m.group[5] = Span(s, r, e);
             m.end = t;
             return true;
         }
@@ -104,11 +135,13 @@ bool SplitMasu(std::string_view s, size_t pos, Match& m) {
 
 // A polite ending cut inside or spelled with っ or ス: a head, a run of marks, an
 // optional っ and a tail, then ([^ぁ-ゖァ-ヺー～]|$). The heads and tails are
-//   ([いきぎしじちにひびみりえけげせぜてでねへべめれ一-龥々]ま) (す|ス|した|せん)
+//   ([いきぎしじちにひびみりえけげせぜてでねへべめれ一-龥々]ま) (す|ス|した|せん|しょう)
 //   (で) (す|ス|しょう)
 // with marks [、，…‥・―─ー～]*; した, せん and しょう only after a mark other than ー ～
 // and without っ, and す only after such a mark or っ (ー ～ alone are left as they are).
-// Group 1 is the head, group 2 the tail (ス as す), group 3 the character after.
+// After marks of DrawlMarks the particles of EndingEnd may follow the tail. Group 1 is
+// the head, group 2 the tail (ス as す), group 3 the character after, group 4 the marks,
+// group 5 the particles.
 bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     bool masu = false;
@@ -125,26 +158,37 @@ bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
         if (r.cp != U'ー' && r.cp != U'～') marked = true;
         p += r.size;
     }
+    const size_t marks = p;
     const bool tsu = OneOf(s, p, U"っッ");
-    const std::initializer_list<std::string_view> masuTails = {"す", "ス", "した", "せん"};
+    const bool particles = !tsu && DrawlMarks(Span(s, cut, marks));
+    const std::initializer_list<std::string_view> masuTails = {"す", "ス", "した", "せん", "しょう"};
     const std::initializer_list<std::string_view> desuTails = {"す", "ス", "しょう"};
     for (std::string_view w : masu ? masuTails : desuTails) {
-        size_t r = p;
+        size_t r = p, e = 0, t = 0;
         if (!Lit(s, r, w)) continue;
         const bool su = w == "す" || w == "ス";
         if (w == "す" ? !marked && !tsu : !su && (!marked || tsu)) continue;
-        size_t t = r;
-        const bool tail = Take(s, t, [](char32_t c) {
-            return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～';
-        });
-        if (!tail && r != s.size()) continue;
+        if (!EndingEnd(s, r, particles, e, t)) continue;
         m.group[1] = Span(s, pos, cut);
         m.group[2] = su ? std::string_view("す") : Span(s, p, r);
-        m.group[3] = Span(s, r, t);
+        m.group[3] = Span(s, e, t);
+        m.group[4] = Span(s, cut, marks);
+        m.group[5] = Span(s, r, e);
         m.end = t;
         return true;
     }
     return false;
+}
+
+// marks as a drawl span (kDrawlMark, marks, kDrawlMark) when DrawlMarks holds; nothing
+// for other marks (、 ー).
+std::string DrawlSpan(std::string_view marks) {
+    if (!DrawlMarks(marks)) return {};
+    std::string out;
+    text::AppendRune(out, kDrawlMark);
+    out += marks;
+    text::AppendRune(out, kDrawlMark);
+    return out;
 }
 
 // (^|[\n「『（。！？!?])([ 　―…‥]*) as groups 1 and 2, then rest(end of group 2).
@@ -304,7 +348,9 @@ std::string JoinNasai(std::string_view text) {
 }
 
 std::string JoinMasu(std::string_view text) {
-    const auto join = [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); };
+    const auto join = [](const Match& m) {
+        return Cat({m.group[1], m.group[2], m.group[5], DrawlSpan(m.group[4]), m.group[3]});
+    };
     return ReplaceAll(ReplaceAll(text, SplitMasu, join), SplitCutPolite, join);
 }
 

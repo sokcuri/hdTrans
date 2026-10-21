@@ -182,6 +182,33 @@ HD_TEST(pipeline_write_stutters) {
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteStutters(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_write_drawls) {
+    struct Case {
+        std::string_view in, want;
+    };
+    const Case cases[] = {
+        // In a polite ending: before 습니다 습니까, before 니다 니까 시다 after ㅂ, before 지요 까요
+        // 네요 군요, else before the last syllable.
+        {"잘 먹겠습니다\uE005…\uE005.", "잘 먹겠…습니다."},
+        {"갔습니까\uE005―\uE005?", "갔―습니까?"},
+        {"최저……입니다\uE005……\uE005", "최저……입……니다"},
+        {"갑시다\uE005…\uE005!", "갑…시다!"},
+        {"그렇겠지요\uE005…\uE005", "그렇겠…지요"},
+        {"고마워요\uE005…\uE005", "고마워…요"},
+        // ・ in its Korean form; the space written as if a word followed the span goes before
+        // punctuation and stays before a word.
+        {"받습니다\uE005・・・\uE005", "받···습니다"},
+        {"갑니까 \uE005…\uE005?", "갑…니까?"},
+        {"갑니까 \uE005…\uE005그는", "갑…니까 그는"},
+        // One syllable, no Hangul word before, or no closing mark.
+        {"네\uE005…\uE005", "네…"},
+        {"\uE005…\uE005. 아", ". 아"},
+        {"abc\uE005…\uE005", "abc"},
+        {"갑니다\uE005…", "갑니다…"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteDrawls(c.in), std::string(c.want));
+}
+
 HD_TEST(pipeline_drop_particle_marks) {
     HD_CHECK_EQ(pipeline::DropParticleMarks("섹○\uE001를 가○\uE002을 애○\uE003을"), std::string("섹○를 가○을 애○을"));
     HD_CHECK_EQ(pipeline::DropParticleMarks("\uE000、아"), std::string("\uE000、아"));
