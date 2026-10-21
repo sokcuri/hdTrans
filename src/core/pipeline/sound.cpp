@@ -920,7 +920,7 @@ std::string SoundText::ExclaimedSound(size_t p, size_t end) const {
 // or a unit of two to four characters said twice (メキメキと, ガッシャガッシャと), after a
 // character other than katakana, that no dictionary or name-layer key reads whole, before
 // と or っと that does not quote (メキメキという) or start する. hiragana is set when a
-// dictionary word reads the run with と in hiragana (ジッと じっと).
+// dictionary word reads a run ending in ッ with と in hiragana (ジッと じっと).
 size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     hiragana = false;
     const std::u32string_view f = f_;
@@ -951,8 +951,10 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     for (char32_t& r : h) {
         if (r >= U'ァ' && r <= U'ヶ') r -= 0x60;
     }
-    // An adverb with と in hiragana (じっと), but not before する (じっとして).
+    // An adverb with と in hiragana (じっと), but not before する (じっとして); a doubled
+    // katakana unit is the sound rather than the hiragana adverb (メキメキと, not めきめきと).
     if (i < rs_.size() && In(rs_[i], U"しすさせ")) return 0;
+    if (!tsu) return i;
     const dict::Candidates kana = snap_.GetWordInfo(EncodeText(h), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : kana.list) {
         if (text::RuneCount(c.source) == i - p) hiragana = true;

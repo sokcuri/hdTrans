@@ -44,8 +44,8 @@
 //
 // A katakana mimetic the lexicon lacks before と or っと (a run ending in ッ, or a unit of two
 // to four characters said twice, that no dictionary key reads) is written in hiragana when
-// a dictionary word reads it so (ジッと じっと), otherwise as heard with the と dropped
-// (メキメキと 메키메키).
+// it ends in ッ and a dictionary word reads it so (ジッと じっと), otherwise as heard with
+// the と dropped (メキメキと 메키메키).
 //
 // A lone っ or ッ that an utterance holds after nothing but an ellipsis or a dash, before
 // a pause, an ellipsis, a dash or the end, is a caught breath (……ッ、 ……읏,).
