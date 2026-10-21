@@ -523,6 +523,25 @@ std::string DropParticleMarks(std::string_view s) {
     return out;
 }
 
+// line without a gloss in parentheses that only repeats the word before it, as a kana gloss
+// of a reading or a name reads once translated (저(저) 저, 미카(미카) 미카).
+std::string DropEchoedGlosses(std::string_view line) {
+    std::u32string rs = Runes(line);
+    auto hangul = [](char32_t r) { return r >= U'가' && r <= U'힣'; };
+    for (std::size_t i = 1; i < rs.size(); i++) {
+        if (rs[i] != U'(' || !hangul(rs[i - 1])) continue;
+        std::size_t j = i + 1;
+        while (j < rs.size() && hangul(rs[j])) j++;
+        if (j == i + 1 || j >= rs.size() || rs[j] != U')') continue;
+        const std::size_t n = j - i - 1;
+        std::size_t word = i;  // the start of the Hangul run before (
+        while (word > 0 && hangul(rs[word - 1])) word--;
+        if (i - word < n || rs.compare(i - n, n, rs, i + 1, n) != 0) continue;
+        rs.erase(i, n + 2);
+    }
+    return Utf8(rs);
+}
+
 RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBrackets, bool literalCleanup) {
     RestoreSteps st;
     st.spaced = DropAddedSpaces(typed, cleaned);
@@ -531,8 +550,8 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = UnescapePrivateUse(DropParticleMarks(
-        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean))))))));
+    st.line = UnescapePrivateUse(DropEchoedGlosses(DropParticleMarks(
+        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))));
     return st;
 }
 

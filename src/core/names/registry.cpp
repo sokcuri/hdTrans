@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "core/names/chars.h"
+#include "core/text/utf8.h"
 #include "core/names/labels.h"
 #include "core/names/readings.h"
 #include "core/names/ruby.h"
@@ -149,6 +150,22 @@ void Registry::Forget(const Evidence& evidence) {
     scoresValid_ = false;
 }
 
+// Whether a gloss or ruby reading marks a word's reading, not a name: the base is a common
+// word, or ends in one, and the reading is one too: its own reading (私（わたくし）,
+// 夾叉（きょうさ）) or another word read in its place (提督（あなた）, 各艦（ふね）). A
+// reading that is no word still names (三日（みか）, 千里（ちさと）).
+bool Registry::Gikun(std::string_view base, std::string_view reading) {
+    const DictFlags r = Flags(reading);
+    if (!r.common || r.person) return false;
+    // The base, or the word that ends it (各艦（ふね）).
+    for (std::string_view b = base; !b.empty(); b.remove_prefix(text::DecodeRune(b).size)) {
+        const DictFlags f = Flags(b);
+        if (f.common && !f.person) return true;
+        if (text::DecodeRune(b).size == 0) break;
+    }
+    return false;
+}
+
 void Registry::Add(std::string_view rawLine, Evidence* evidence) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;
@@ -167,7 +184,7 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         RubyMatch m;
         if (!FindRuby(line, from, m)) break;
         const std::string base(m.base), kana(m.reading);
-        if (IsKanaText(kana)) {
+        if (IsKanaText(kana) && !Gikun(base, kana)) {
             count(gloss_, base, 3);
             SetReading(base, kana);
         }
@@ -218,6 +235,10 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         RubyMatch m;
         if (!FindGloss(line, from, m)) break;
         const std::string base(m.base);
+        if (Gikun(base, m.reading)) {
+            from = m.end;
+            continue;
+        }
         count(gloss_, base, 3);
         if (recording_ != nullptr || reading_[base].empty()) {
             std::string r;
