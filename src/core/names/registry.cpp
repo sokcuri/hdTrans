@@ -370,6 +370,9 @@ const std::map<std::string, Name>& Registry::Accepted() {
         const auto [x, y] = GivenSplit(t);
         if (y.empty()) continue;
         full(x, y, t, c);
+        // The given name stands for the person alone too, but a common word (大森海: 海)
+        // reads as that word wherever the full name is not written.
+        if (Flags(y).common) continue;
         Name& g = all[y];
         g.score = std::max(g.score, kSingleThreshold);
         g.person = true;

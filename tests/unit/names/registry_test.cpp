@@ -136,6 +136,10 @@ HD_TEST(names_labels) {
     }
     const std::vector<std::string> mika = Scan(snap, Repeat("三日(みか)が来た。", 3)).Names();
     HD_CHECK(std::find(mika.begin(), mika.end(), "三日") != mika.end());
+    // A given name split from a full name that is a common word does not stand for the
+    // person elsewhere (前原光: 光 stays the word).
+    const std::vector<std::string> hikaru = Scan(snap, Repeat("前原光は来た。", 3)).Names();
+    HD_CHECK(std::find(hikaru.begin(), hikaru.end(), "光") == hikaru.end());
     // A numeral is no surname before a name (二美咲).
     const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
     HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
