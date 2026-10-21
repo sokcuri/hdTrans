@@ -324,6 +324,7 @@ private:
     size_t MimeticTo(size_t p, size_t end, bool& hiragana) const;
     std::string ExclaimedSound(size_t p, size_t end) const;
     size_t LoneCatch(size_t p) const;
+    std::string_view LoneVoice(size_t p) const;
 
     std::string_view text_;
     const LineContext& ctx_;
@@ -914,6 +915,19 @@ size_t SoundText::LoneCatch(size_t p) const {
     return end;
 }
 
+// The Korean of a lone ん or small vowel at p that stands between punctuation as a voice of
+// its own (んっ、ん、んくっ; ……ぅ……), or "".
+std::string_view SoundText::LoneVoice(size_t p) const {
+    const std::u32string_view rs = rs_;
+    constexpr std::u32string_view kVoices = U"ンァィゥェォ";
+    constexpr std::string_view kKorean[] = {"응", "아", "이", "우", "에", "오"};
+    const size_t v = kVoices.find(f_[p]);
+    if (v == std::u32string_view::npos) return {};
+    if (p > 0 && !In(rs[p - 1], U"「『（(、，…‥―─—\n！？!?。")) return {};
+    if (p + 1 < rs.size() && !In(rs[p + 1], U"、，…‥―─—」』）)！？!?。\n")) return {};
+    return kKorean[v];
+}
+
 // The Korean of the ono row read by the katakana run [p, end) (or the run with ッ) when the
 // run starts an utterance or follows 、 or an ellipsis and an exclamation mark and と or っと
 // follow it (ドン！っと 쾅!), where a dictionary word would read it otherwise (ドン 돈); ""
@@ -1022,6 +1036,8 @@ std::string SoundText::Write() {
         } else if (const size_t lone = LoneCatch(i); lone > 0) {
             b += "읏";
             next = lone;
+        } else if (const std::string_view voice = LoneVoice(i); !voice.empty()) {
+            b += voice;
         } else if (const size_t burst = Burst(i); burst > 0) {
             b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, burst - i)), text::Preset::Fan);
             next = burst;
