@@ -15,3 +15,12 @@ normalize:casual-negative-nee	よくならねぇ、全然	좋게 안 되는, 전
 normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
 normalize:casual-negative-nee	君にならねぇ、話せる	너에게라면, 이야기할 수 있다	keep	normalize
 normalize:casual-negative-nee	お前とならねぇ、どこへでも行ける	너와라면, 어디든지 갈 수 있다	keep	normalize
+normalize:casual-negative-nee	田中にならねぇ、話せる	타나카에라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	先生にならねぇ、話せる	선생님에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	あの人にならねぇ、話せる	그 사람에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	山田さんにならねぇ、話せる	야마다씨에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	お前らにならねぇ、話せる	너희들에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	僕たちにならねぇ、話せる	우리들에게라면, 이야기할 수 있다	keep	normalize
+normalize:casual-negative-nee	ここにならねぇ、住める	여기에라면, 살 수 있다	keep	normalize
+normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않는다…	fix	normalize
+normalize:casual-negative-nee	気にならねぇ、そんなの	신경이 쓰이지 않는, 그런 것	fix	normalize
