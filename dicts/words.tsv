@@ -22180,7 +22180,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 背信者	배신자	N110			GN						はいしんしゃ	w:22160
 背広	양복	N110			GN				xxx	1	せびろ	w:22161
 背張海豚	헥토르돌고래	N110			GN						せっぱりいるか	w:22162
-背後	뒤	N110			GN				xxx llm	1		w:22163
+背後	뒤	N110	VPl		GN				xxx llm	1		w:22163
 背教者	배교자	N110			GN						はいきょうしゃ	w:22164
 背景音楽	배경 음악	N110			GN						はいけいおんがく	w:22165
 背甲	등딱지	N110			GN						はいこう	w:22166

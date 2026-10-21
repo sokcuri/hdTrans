@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:w:22163	背後から足音が聞こえた。	뒤에서 발소리가 들렸다.	fix	local
+dict:w:22163	彼の背後に立つ。	그의 뒤에 선다.	keep	defaults
