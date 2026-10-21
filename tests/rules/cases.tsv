@@ -277,7 +277,7 @@ L2001	今回は俺が払う。	이번에는 내가 지불한다.	current	local
 L2001	俺が全部やっておくよ。	내가 전부 해 둬.	current	local
 L2009	こんなに食べちゃ体に悪いよ。	이렇게 먹으면 몸에 안 좋아.	current	local-ending
 L2009	あいつにとっちゃ簡単な仕事だよ。	저녀석에 있으면 간단한 일이야.	current	local-ending
-L2010	彼がそんなことを言うなんてあり得ない。	그가 그런 일을 말한다고 있을 수 없다.	current	local-ending
+L2010	彼がそんなことを言うなんてあり得ない。	그가 그런 말을 한다고 있을 수 없다.	current	local-ending
 L2014	夜はあまりコーヒーを飲まない。	밤은 그다지 커피를 마시지 않는다.	current	local-ending
 L2014	急な話で、断らざるを得なかった。	갑작스러운 이야기로, 거절하지 않을 수 없었다.	current	local-ending
 L2015	明日は雨が降ると思う？	내일은 비가 온다고 생각해?	current	local-ending
@@ -378,7 +378,7 @@ L2441	私は夜に電話はしない。	나는 밤에 전화는 하지 않는다
 L2468	意味がよく分からない。	의미를 잘 모른다.	current	local
 L2468	話の内容がまだわからない。	이야기의 내용을 아직 모른다.	current	local
 L2475	静かなことが好きな人です。	조용한 일을 좋아하는 사람입니다.	current	local
-L2475	そんなことを言わないでください。	그런 일을 말하지 말아 주세요.	current	local
+L2475	そんなことを言わないでください。	그런 말을 하지 말아 주세요.	current	local
 L2476	おかしなことを言うね。	이상한 것을 말하는군.	current	local
 L2486	私の姉は看護師です。	제 언니는 간호사입니다.	current	local
 L2486	あちらが駅の入口です。	저쪽이 역의 입구입니다.	current	local

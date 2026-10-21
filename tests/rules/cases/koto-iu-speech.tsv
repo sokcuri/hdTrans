@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:264717	怖いこと言うなよ。	무서운 말 하지 마.	fix	local
+dict:jisjk:264717	こんなことを言っていた。	이런 말을 했다.	fix	local
+dict:jisjk:266135	そんなことがあった。	그런 일이 있었다.	keep	local
