@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+compose:lengthening-punctuation	朝ですよー！！	아침이에요~!	fix	compose
+compose:lengthening-punctuation	はぁっはーー！！手柄は頂きぃー	후~하~! 공훈은 받아~	fix	compose
+compose:lengthening-punctuation	さぁさぁ続けて行くよーー！！	자자 계속해 가~!	fix	compose
+compose:lengthening-punctuation	いいよ～？	좋아~?	fix	compose
+compose:lengthening-punctuation	待ってよ～！！	기다려~!	fix	compose
+compose:lengthening-punctuation	行くよ！！	가!	keep	compose

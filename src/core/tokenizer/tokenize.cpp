@@ -321,7 +321,10 @@ private:
             } else if (halfWidth) {
                 Add(WidenHalfWidth(c));
             } else {
-                if (c == U'。' && BufSize() > 0) Emit(cur_);  // 。 starts a new token
+                // 。 starts a new token, and so does ！ or ？ after a lengthening ～ (行くよ～！！),
+                // which then reads like a sentence end anywhere else.
+                const bool afterLength = (c == U'！' || c == U'？') && p_ > 0 && s_[p_ - 1] == U'～';
+                if ((c == U'。' || afterLength) && BufSize() > 0) Emit(cur_);
                 Add(c);
             }
         } else if ((cur_ == kTypeNumber && type == kTypeAlpha) || (cur_ == kTypeAlpha && type == kTypeNumber)) {

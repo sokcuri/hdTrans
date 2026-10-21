@@ -183,6 +183,9 @@ const ScanCase kScanCases[] = {
     {"あー"sv, "24/0:あ 17/0:ー 9/0:", nullptr},
     {"あーい"sv, "24/0:あーい 9/0:", nullptr},
     {"すごいー！"sv, "24/0:すごい 17/0:ー！ 9/0:", nullptr},
+    // ！ or ？ after a lengthening ～ starts a token of its own, a sentence end like any other.
+    {"すごい～！！"sv, "24/0:すごい 17/0:～ 17/0:！！ 9/0:", nullptr},
+    {"すごい～？"sv, "24/0:すごい 17/0:～ 17/0:？ 9/0:", nullptr},
     {"あ～"sv, "24/0:あ 17/0:～ 9/0:", nullptr},
     {"あ～a"sv, "24/0:あ 17/0:～ 2/0:a 9/0:", nullptr},
     {"あ-a"sv, "24/0:あ 17/0:ー 2/0:a 9/0:", nullptr},
