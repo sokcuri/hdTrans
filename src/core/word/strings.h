@@ -96,6 +96,7 @@ inline constexpr std::string_view kJaTakatta = "たかった";
 inline constexpr std::string_view kJaTakereba = "たければ";
 inline constexpr std::string_view kJaTaki = "たき";
 inline constexpr std::string_view kJaTaku = "たく";
+inline constexpr std::string_view kJaTakuseni = "たくせに";
 inline constexpr std::string_view kJaTanomuKanji = "頼";
 inline constexpr std::string_view kJaTe = "て";
 inline constexpr std::string_view kJaTo = "と";
