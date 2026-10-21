@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないでしょ。	그럴 리 없지요.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけない。	그럴 리 없다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないだろ。	그럴 리 없지.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけなかった。	그럴 리 없었다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないよ。	그럴 리 없어.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないと思う。	그럴 리 없다고 생각한다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないのに。	그럴 리 없는데.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないです。	그럴 리 없습니다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけなくはない。	그럴 리 없지는 않다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないこともない。	그럴 리 없는 것도 아니다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないし、気にしない。	그럴 리 없고, 신경쓰지 않는다.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけないでしょ。	그럴 리 없지요.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけなかった。	그럴 리 없었다.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけないと思う。	그럴 리 없다고 생각한다.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	これはわけない仕事だ。	이것은 수월한 일이다.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	りんごを分けた。	사과를 나누었다.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	どんなわけなのか説明して。	어떤 이유인가 설명해.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	彼女は食べない。	그녀는 먹지 않는다.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	彼はそんなことを言わない。	그는 그런 일을 말하지 않는다.	keep	lookup

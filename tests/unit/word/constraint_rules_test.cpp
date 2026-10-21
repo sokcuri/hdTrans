@@ -57,14 +57,31 @@ const dict::Snapshot* Dictionary() {
          "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
          "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
          "一人\t한 사람\tN110\t\t\tGN\t41\n"
-         "上が\t&E6@\tM428\tXXX\t\tGN\t39\n"},
+         "上が\t&E6@\tM428\tXXX\t\tGN\t39\n"
+         "あお\t$C2@\tH7U0\t\t\tGN\t60\n"
+         "しろ\t$AD@\tH7U0\t\t\tGN\t61\n"
+         "そら\t하늘\tN110\tVPl\t\tGN\t62\n"
+         "つづ\t계속되&AA@\tM421\t\t\tGN\t64\n"
+         "あに\t형\tN110\tVHn\t\tGN\t65\n"
+         "ねこ\t고양이\tN110\tQAA\t\tGN\t66\n"
+         "うみ\t바다\tN110\tVPl\t\tGN\t67\n"
+         "りん\t린\tN110\t\t\tGN\t68\n"
+         "あお\t우러러&AY@\tM452\t\t\tGN\t69\n"
+         "し\t&HT@\tM41<\t\t\tGN\t77\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
          "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t31\n"
          "アヤメ\t아야메\tN130\tQPNVHn\tWb\tGN\t32\n"
          "ネコ\t네코\tN130\tQPNVHn\tWb\tGN\t33\n"
-         "猫\t네코\tN130\tQPNVHn\tWb\tGN\t35\n"},
+         "猫\t네코\tN130\tQPNVHn\tWb\tGN\t35\n"
+         "あお\t아오\tN130\tQPNVHn\tWb\tGN\t70\n"
+         "しろ\t시로\tN130\tQPNVHn\tWb\tGN\t71\n"
+         "そら\t소라\tN130\tQPNVHn\tWb\tGN\t72\n"
+         "つづ\t츠즈\tN130\tQPNVHn\tWb\tGN\t73\n"
+         "あに\t아니\tN130\tQPNVHn\tWb\tGN\t74\n"
+         "ねこ\t네코\tN130\tQPNVHn\tWb\tGN\t75\n"
+         "りん\t린\tN130\tQPNVHn\tWb\tGN\t76\n"},
     });
     return loaded.snapshot.get();
 }
@@ -103,7 +120,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{14});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{15});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -125,6 +142,30 @@ HD_TEST(constraint_honorific_katakana) {
         {"ネコさんが", "ネコさんが", "ネコ", "고양이"},
         {"バカさんが", "バカさんが", "バカ", "바보"},
         {"ミハルさん", "ハルさん", "ハル", "헐"},
+    });
+}
+
+HD_TEST(constraint_honorific_hiragana) {
+    CheckCases({
+        {"あおくんが", "あおくんが", "あお", "아오!"},
+        {"しろちゃん、", "しろちゃん、", "しろ", "시로!"},
+        {"あお君は", "あお君は", "あお", "아오!"},
+        {"そら君は", "そら君は", "そら", "하늘"},
+        {"あおちゃんと", "あおちゃんと", "あお", "$C2@ 우러러&AY@"},
+        {"あおくんない", "あおくんない", "あお", "$C2@ 우러러&AY@"},
+        {"あおくんくん", "あおくんくん", "あお", "$C2@ 우러러&AY@"},
+        {"しろたん", "しろたん", "しろ", "$AD@"},
+        {"しろちゃんと", "しろちゃんと", "しろ", "$AD@"},
+        {"あおく染まる", "あおく染まる", "あお", "$C2@ 우러러&AY@"},
+        {"あおさんが", "あおさんが", "あお", "$C2@ 우러러&AY@"},
+        {"あおたん", "あおたん", "あお", "$C2@ 우러러&AY@"},
+        {"みあおくん", "あおくん", "あお", "$C2@ 우러러&AY@"},
+        {"真あおくん", "あおくん", "あお", "$C2@ 우러러&AY@"},
+        {"つづくんだ", "つづくんだ", "つづ", "계속되&AA@"},
+        {"あにくん", "あにくん", "あに", "형"},
+        {"ねこちゃん", "ねこちゃん", "ねこ", "고양이"},
+        {"うみくん", "うみくん", "うみ", "바다"},
+        {"りんくん", "りんくん", "りん", "린"},
     });
 }
 

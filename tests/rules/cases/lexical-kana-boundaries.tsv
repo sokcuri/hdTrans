@@ -37,3 +37,13 @@ dict:gokeiyaku	件名：ご契約のお知らせ	건명：계약의 알림	fix	l
 dict:gokeiyaku	ご契約を取り消した。	계약을 취소했다.	keep	lookup
 dict:gokeiyaku	ご契約いただきありがとうございます。	계약해 주셔 감사합니다.	keep	lookup
 dict:gokeiyaku	契約後に帰った。	계약후에 돌아갔다.	keep	lookup
+dict:curly-hair:1	くせっ毛を直した。	곱슬 머리를 고쳤다.	fix	lookup
+dict:curly-hair:1	くせっ毛を切った。	곱슬 머리를 잘랐다.	fix	lookup
+dict:curly-hair:1	くせっ毛がある。	곱슬 머리가 있다.	fix	lookup
+dict:curly-hair:1	くせ毛を直した。	곱슬 머리를 고쳤다.	keep	lookup
+dict:curly-hair:1	癖毛を直した。	곱슬 머리를 고쳤다.	keep	lookup
+dict:curly-hair:1	クセ毛を直した。	곱슬 머리를 고쳤다.	keep	lookup
+dict:curly-hair:1	くせを直した。	버릇을 고쳤다.	keep	lookup
+dict:curly-hair:1	悪いくせを直した。	나쁜 버릇을 고쳤다.	keep	lookup
+dict:curly-hair:1	毛を切った。	털을 잘랐다.	keep	lookup
+dict:curly-hair:1	猫の毛を切った。	고양이의 털을 잘랐다.	keep	lookup

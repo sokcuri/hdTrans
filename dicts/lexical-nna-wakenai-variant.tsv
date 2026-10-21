@@ -1,0 +1,4 @@
+#! layer=words
+# そんなわけない의 구어 축약형
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+んなわけな	그럴 리 $FA@	H7N0			GN							lex-nna-wakenai:contracted-adjective-stem

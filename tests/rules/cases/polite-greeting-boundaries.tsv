@@ -1,0 +1,31 @@
+rule	input	expected	kind	layer
+dict:greeting:polite-copula	先生、お久しぶりです。	선생님, 오랜만입니다.	fix	local
+dict:greeting:polite-copula	お久しぶりです。	오랜만입니다.	fix	local
+dict:greeting:polite-copula	お久しぶりです！	오랜만입니다!	fix	local
+dict:greeting:polite-copula	「お久しぶりです」	「오랜만입니다」	fix	local
+dict:greeting:polite-copula	お久しぶりです123。	오랜만입니다 123.	fix	local
+dict:greeting:polite-copula	お久しぶりですABC。	오랜만입니다 ABC.	fix	local
+dict:greeting:polite-copula	お久しぶりです１２３。	오랜만입니다 123.	fix	local
+dict:greeting:polite-copula	お久しぶりです？	오랜만입니까?	fix	local
+dict:greeting:polite-copula	「お久しぶりです？」と聞いた。	「오랜만입니까?」라고 물었다.	fix	local
+dict:greeting:polite-copula	1お久しぶりです。	1오랜만입니다.	fix	local
+dict:greeting:polite-copula	ABCお久しぶりです。	ABC 오랜만입니다.	fix	local
+dict:greeting:polite-copula	お久しぶりです。123	오랜만입니다. 123	fix	local
+dict:greeting:polite-copula	お久しぶり。	오랜만이에요.	keep	local
+dict:greeting:polite-copula	久しぶりに走った。	오랜만에 달렸다.	keep	local
+dict:greeting:polite-copula	お久しぶりでした。	오랜만이에요였습니다.	keep	local
+dict:greeting:polite-copula	お久しぶりですね。	오랜만이에요군요.	keep	local
+dict:greeting:polite-copula	お久しぶりですよ。	오랜만이에요예요.	keep	local
+dict:greeting:polite-copula	お久しぶりですか。	오랜만이에요입니까.	keep	local
+dict:greeting:polite-copula	お久しぶりではありません。	오랜만이에요가 아닙니다.	keep	local
+dict:greeting:polite-copula	お久しぶりではない。	오랜만이에요는 아니다.	keep	local
+dict:greeting:polite-copula	久しぶりです。	오래간만입니다.	keep	local
+dict:greeting:polite-copula	久しぶりでした。	오래간만이었습니다.	keep	local
+dict:greeting:polite-copula	久しぶりですね。	오래간만이군요.	keep	local
+dict:greeting:polite-copula	御久しぶりです。	오랜만이에요입니다.	keep	local
+dict:greeting:polite-copula	お久しぶりですけど。	오랜만이에요이지만.	keep	local
+dict:greeting:polite-copula	お久しぶりですから。	오랜만이에요이기 때문에.	keep	local
+dict:greeting:polite-copula	お久しぶりですよね。	오랜만이에요군요.	keep	local
+dict:greeting:polite-copula	お久しぶりですが、元気ですか。	오랜만이에요입니다만, 건강합니까.	keep	local
+dict:greeting:polite-copula	お久しぶり。	!rule:dict:greeting:polite-copula	keep	local
+dict:greeting:polite-copula	お久しぶりですね。	!rule:dict:greeting:polite-copula	keep	local

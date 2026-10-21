@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+dict:kongaragaru:1	配線がこんがらがった。	배선이 얽혔다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがる。	배선이 얽힌다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがっている。	배선이 얽히고 있다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがらない。	배선이 얽히지 않는다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがります。	배선이 얽힙니다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがりすぎた。	배선이 너무 얽혔다.	fix	lookup
+dict:kongaragaru:1	こんがらがった配線を直す。	얽힌 배선을 고친다.	fix	lookup
+dict:kongaragaru:1	配線がこんがらがれば困る。	배선이 얽히면 곤란하다.	fix	lookup
+dict:kongaragaru:1	糸がこんがらがった。	실이 얽혔다.	fix	lookup
+dict:kongaragaru:1	配線が絡まった。	배선이 얽혔다.	keep	lookup
+dict:kongaragaru:1	配線が絡まる。	배선이 얽힌다.	keep	lookup
+dict:kongaragaru:1	配線が絡まらない。	배선이 얽히지 않는다.	keep	lookup
+dict:kongaragaru:1	配線をこんがらかす。	배선이들 빌려준다.	keep	lookup
+dict:kongaragaru:1	配線をこんがらかした。	배선이들인가 했다.	keep	lookup
+dict:kongaragaru:1	配線をこんがらかさない。	배선이들이나 없다.	keep	lookup

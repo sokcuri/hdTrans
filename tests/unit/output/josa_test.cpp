@@ -19,3 +19,16 @@ HD_TEST(output_josa_closing_brackets) {
         }
     }
 }
+
+HD_TEST(output_josa_copula_go) {
+    const struct { const char* word; const char* form; } cases[] = {
+        {"정답", "이고"}, {"이유", "고"}, {"길", "이고"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation(std::string(c.word) + "(이)고 뭐고", {}, false),
+                    std::string(c.word) + c.form + " 뭐고");
+        HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation("(이)고 뭐고", c.word, true), std::string(c.form) + " 뭐고");
+    }
+    HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation("(이)고", {}, false), std::string("(이)고"));
+    HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation("정답이고 이유고", {}, false), std::string("정답이고 이유고"));
+}

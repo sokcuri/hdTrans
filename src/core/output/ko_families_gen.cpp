@@ -626,7 +626,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&Hn@", "식", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&Ho@", "뻗", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&J1@", "걷", Pos::Verb, Class::Digeut, kFormalHortative, 0x0fff, {}},
-    {"&J2@", "굽", Pos::Verb, Class::Bieup, 0, 0x0fff, std::span{kExceptions}.subspan(98, 1)},
+    {"&J2@", "굽", Pos::Verb, Class::Bieup, 0, 0x0fff, std::span{kExceptions}.subspan(98, 0)},
     {"&J3@", "긋", Pos::Verb, Class::Siot, 0, 0x0fff, {}},
     {"&J4@", "눕", Pos::Verb, Class::Bieup, 0, 0x0fff, {}},
     {"&J5@", "돕", Pos::Verb, Class::Bieup, kBieupWa, 0x0fff, {}},
