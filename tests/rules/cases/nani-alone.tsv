@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:jisjk:373370	「何だって？」	「뭐라고?」	fix	local
+dict:jisjk:373370	何だって！？	뭐라고!?	fix	local
+dict:jisjk:373370	「何だって」と彼は言った。	「뭐라고」라고 그는 말했다.	fix	local
+dict:jisjk:373369	何だってできる。	뭐든지 할 수 있다.	keep	local
+dict:jisjk:264553	何！	뭐!	fix	local
+dict:jisjk:264553	「何！？」	「뭐!?」	fix	local
+dict:jisjk:264553	何？	뭐?	fix	local
+dict:jisjk:264553	あんた何？	너 뭐?	fix	local
+dict:jisjk:264553	何、それ？	뭐, 그것?	fix	local
+dict:jisjk:264313	何ですか？	무엇입니까?	keep	local

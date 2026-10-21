@@ -4236,9 +4236,9 @@ bool RuleG90([[maybe_unused]] Item* p) {
 }
 
 // global 1015 stem pos 1 prio 100
-//     gram has Td and gram has On and src != "私" and src != "俺" and src != "僕" and src != "君" and src != "誰"
+//     gram has Td and gram has On and src != "私" and src != "俺" and src != "僕" and src != "君" and src != "誰" and src != "何"
 bool RuleG100([[maybe_unused]] Item* p) {
-    return (GramEq(p, 0, "Td"sv) && GramEq(p, 0, "On"sv) && SrcNe(p, 0, "私"sv) && SrcNe(p, 0, "俺"sv) && SrcNe(p, 0, "僕"sv) && SrcNe(p, 0, "君"sv) && SrcNe(p, 0, "誰"sv));
+    return (GramEq(p, 0, "Td"sv) && GramEq(p, 0, "On"sv) && SrcNe(p, 0, "私"sv) && SrcNe(p, 0, "俺"sv) && SrcNe(p, 0, "僕"sv) && SrcNe(p, 0, "君"sv) && SrcNe(p, 0, "誰"sv) && SrcNe(p, 0, "何"sv));
 }
 
 // global 1020 stem pos 1 prio 110
@@ -4936,7 +4936,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
     {RuleG90, 0xf785d9c5b40f546dull},
-    {RuleG100, 0xeaa3e9e8d980283eull},
+    {RuleG100, 0x02cb2c354852c2f1ull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},
     {RuleG130, 0x60209eb785257c06ull},
