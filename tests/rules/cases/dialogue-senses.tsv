@@ -5,3 +5,7 @@ sound:open-tteka	ていうか、もう帰ろうよ。	그보다, 이제 돌아�
 sound:open-tteka	……っていうか、誰？	……그보다, 누구?	fix	sound
 sound:open-tteka	っていうかさ、それ本当？	그보다, 그것 정말?	fix	sound
 sound:open-tteka	てかてかに光る。	번들번들에 빛난다.	keep	sound
+sound:lead-naa	なあ、ちょっと来て。	저기, 조금 와.	fix	sound
+sound:lead-naa	大事なことだ。なあ？	소중한 일이다. 그렇지?	fix	sound
+sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
+sound:lead-naa	そうだなあ、うん。	그렇다, 응.	keep	sound
