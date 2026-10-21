@@ -8,7 +8,7 @@ sound:open-tteka	てかてかに光る。	번들번들에 빛난다.	keep	sound
 sound:lead-naa	なあ、ちょっと来て。	저기, 조금 와.	fix	sound
 sound:lead-naa	大事なことだ。なあ？	소중한 일이다. 그렇지?	fix	sound
 sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
-sound:lead-naa	そうだなあ、うん。	그렇다, 응.	keep	sound
+sound:lead-naa	そうだなあ、うん。	그래~, 응.	keep	sound
 phrase:なんていうか	なんていうか、変だね。	뭐랄까, 이상하네.	fix	builtin-phrase
 phrase:なんていうか	うん……なんていうかね……すごかった。	응……뭐랄까……대단했다.	fix	builtin-phrase
 dict:jisjk:103790	あっという間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
@@ -56,7 +56,7 @@ phrase:なぞる	指で地図をなぞった。	손가락으로 지도를 더듬
 phrase:なぞる	昔の記憶をなぞる。	옛 기억을 더듬는다.	fix	lookup
 phrase:秘所	彼女の秘所に触れる。	그녀의 은밀한 곳에 접한다.	fix	lookup
 dict:jisjk:265314	僕にどうこうできる話じゃない。	나에게 어떻게 할 수 있는 이야기가 아니다.	fix	local
-dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 말아라.	keep	local
+dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 마.	keep	local
 dict:jisjk:78475	兄は予備校に通っている。	형은 입시학원에 다니고 있다.	fix	lookup
 dict:jisjk:171364	画材を買いに行く。	화구를 사러 간다.	fix	lookup
 dict:jisjk:94308	違う、そうじゃない。	아니다, 그렇지 않다.	fix	local
