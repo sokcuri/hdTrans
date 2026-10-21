@@ -471,11 +471,13 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (next.surface == p) return Result(std::move(t), true);
         }
     }
+    if (Contains(nextEntry, "」") || (!nextEntry.empty() && Closes(FirstRune(nextEntry)))) {
+        return Result(std::move(t), false);
+    }
     if (nextKind != '2') {
         if (Contains(tags, "Bt")) return Result(std::move(t), false);
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
-    if (Contains(nextEntry, "」")) return Result(std::move(t), false);
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
     if (!isLast) {
         if (kind != '1' || WidthOf(t) != 2) return Result(std::move(t), false);
