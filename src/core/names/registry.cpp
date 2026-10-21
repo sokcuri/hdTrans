@@ -406,7 +406,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
             for (const std::string& p : parts) any = any || att.count(p) > 0;
             if (!any) continue;
         }
+        // A common word in the chain (ギア・バーラー) stays a word on its own.
         for (const std::string& p : parts) {
+            const DictFlags f = Flags(p);
+            if (f.common && !f.person) continue;
             all[p].score += score;
             all[p].person = true;
         }

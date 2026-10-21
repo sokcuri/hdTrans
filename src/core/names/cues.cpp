@@ -268,23 +268,13 @@ bool QuoteName(std::string_view line, std::string& label) {
     if (after >= line.size()) return false;
     const std::string_view rest = line.substr(after);
     if (!(rest.starts_with("「") || rest.starts_with("『") || rest.starts_with(":") || rest.starts_with("："))) return false;
-    // A reading in brackets that the word goes on after is ruby, not a quote (全「すべ」て).
+    // A speaker's quote ends the line; text after its closing bracket makes the bracket a
+    // title or ruby, not speech (精鋭「第八駆逐隊」、出撃せよ, 全「すべ」て).
     if (rest.starts_with("「") || rest.starts_with("『")) {
-        const std::size_t open = std::string_view("「").size();
-        const std::size_t close = rest.find(rest.starts_with("「") ? "」" : "』", open);
-        if (close != std::string_view::npos) {
-            const std::string_view inside = rest.substr(open, close - open);
+        const std::size_t close = rest.rfind(rest.starts_with("「") ? "」" : "』");
+        if (close != std::string_view::npos && close > 0) {
             const std::string_view tail = rest.substr(close + std::string_view("」").size());
-            bool kana = !inside.empty();
-            for (std::size_t i = 0; i < inside.size() && kana;) {
-                const text::Rune r = RuneAt(inside, i);
-                kana = (r.cp >= U'ぁ' && r.cp <= U'ゖ') || (r.cp >= U'ァ' && r.cp <= U'ヺ') || r.cp == U'ー';
-                i += r.size == 0 ? 1 : r.size;
-            }
-            if (kana && !tail.empty() && !IsPatternSpace(RuneAt(tail, 0).cp) &&
-                kExcluded.find(RuneAt(tail, 0).cp) == std::u32string_view::npos) {
-                return false;
-            }
+            if (SkipSpace(tail, 0) < tail.size()) return false;
         }
     }
     label = std::string(line.substr(p, q - p));
@@ -554,7 +544,9 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
-                if (!Has(attr, "On") && (Has(sem, "VHn") || Has(sem, "UAq") || Has(sem, "QAA") || Has(sem, "QAB"))) {
+                // A person, profession or animal noun, or a pronoun (オレ, 俺).
+                if (!Has(attr, "On") && (Has(sem, "VHn") || Has(sem, "UAq") || Has(sem, "QAA") || Has(sem, "QAB") ||
+                                         rec.codes->partText.starts_with("N12"))) {
                     roleSem = true;
                 }
             }
@@ -573,6 +565,7 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
+                if (e->codes->partText.starts_with("N12")) roleSem = true;
             }
         }
         f.role = roleSem && !f.person && !f.city;

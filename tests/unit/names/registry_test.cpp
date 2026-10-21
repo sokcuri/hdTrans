@@ -144,6 +144,8 @@ HD_TEST(names_labels) {
     // elsewhere (梨花, a word in the fixture: 梨花圭一 keeps 梨花 the word).
     const std::vector<std::string> rika = Scan(snap, Repeat("圭一さん、おはよう。", 3) + Repeat("梨花圭一が来た。", 3)).Names();
     HD_CHECK(std::find(rika.begin(), rika.end(), "梨花") == rika.end());
+    // A bracket that the line goes on after is a title, not a speaker's quote.
+    HD_CHECK(Scan(snap, Repeat("梨花「第二部隊」、出撃せよ！", 3)).Names().empty());
     // A numeral is no surname before a name (二美咲).
     const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
     HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
