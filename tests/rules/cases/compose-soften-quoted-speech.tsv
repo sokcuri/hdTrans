@@ -31,3 +31,6 @@ compose:soften-quoted	彼女は窓の外を見た。	그녀는 창 밖을 보았
 compose:soften-quoted	彼のモットーは「従う」だ。	그의 모토는 「따른다」다.	keep	compose
 compose:soften-quoted	想「おも」い出	구상 「도」있고 출	keep	compose
 compose:soften-quoted	「やらねばならない」	「해야 한다」	keep	compose
+compose:soften-quoted	「俺が行く」	「내가 갈게」	fix	compose
+compose:soften-quoted	「私は断る」	「나는 거절할게」	fix	compose
+compose:soften-quoted	「あの人は来る」	「그 사람은 올 거야」	keep	compose

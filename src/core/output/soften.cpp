@@ -55,7 +55,8 @@ constexpr Rewrite kWords[] = {
 };
 
 // The present of an action said in speech is mostly a plan (後で返す 나중에 돌려줄 거야,
-// 手伝ってやる 도와 줄 거야); in 해체 it would read as an order or a request (돌려줘).
+// 手伝ってやる 도와 줄 거야), a promise when the speaker is its subject (俺が行く 내가 갈게);
+// in 해체 it would read as an order or a request (돌려줘).
 constexpr Rewrite kPlannedWords[] = {
     {"한다", "할 거야"}, {"본다", "볼 거야"}, {"둔다", "둘 거야"}, {"버린다", "버릴 거야"},
     {"간다", "갈 거야"}, {"온다", "올 거야"}, {"준다", "줄 거야"}, {"드린다", "드릴 거야"},
@@ -135,6 +136,18 @@ bool Planned(std::string_view word, std::string_view clause) {
     return true;
 }
 
+// Whether clause names the speaker as the subject (俺が, 私は), whose planned action is a
+// promise (내가 할게).
+bool Promised(std::string_view clause) {
+    for (const std::string_view p : {"私", "俺", "僕", "わたし", "あたし", "自分", "オレ", "ボク"}) {
+        for (std::size_t at = clause.find(p); at != std::string_view::npos; at = clause.find(p, at + 1)) {
+            const std::string_view rest = clause.substr(at + p.size());
+            if (rest.starts_with("は") || rest.starts_with("が") || rest.starts_with("も")) return true;
+        }
+    }
+    return false;
+}
+
 char32_t LastRune(std::string_view s) {
     char32_t last = 0;
     while (!s.empty()) {
@@ -157,8 +170,8 @@ std::string PastWord(std::string_view word) {
 }
 
 // The casual form of an ending text (form class and Korean), or "" when it keeps its form.
-std::string SoftEnding(std::string_view ending, bool planned) {
-    if (planned && (ending == "4다" || ending == "1는다")) return "3 거야";
+std::string SoftEnding(std::string_view ending, bool planned, bool promised) {
+    if (planned && (ending == "4다" || ending == "1는다")) return promised ? "3게" : "3 거야";
     if (const std::string_view to = Find(kEndings, ending); !to.empty()) return std::string(to);
     const char c = First(ending);
     if (c < '0' || c > '9') return {};
@@ -166,6 +179,7 @@ std::string SoftEnding(std::string_view ending, bool planned) {
     const std::size_t at = space == std::string_view::npos ? 1 : space + 1;
     const std::string_view word = ending.substr(at);
     std::string soft(planned ? Find(kPlannedWords, word) : std::string_view());
+    if (promised && soft.ends_with(" 거야")) soft = soft.substr(0, soft.size() - std::string_view(" 거야").size()) + "게";
     if (soft.empty()) soft = Find(kWords, word);
     if (soft.empty()) soft = PastWord(word);
     if (soft.empty()) return {};
@@ -310,7 +324,7 @@ void Composer::Soften(int first, int last) {
         // 주다 in 해체 (줘) reads as a request.
         if ((planned && exclaimed) || (!planned && marker == "&CJ@")) continue;
         const std::string original = it.ending.text;
-        std::string soft = SoftEnding(original, planned);
+        std::string soft = SoftEnding(original, planned, planned && Promised(Clause(before + std::string(own))));
         if (soft.empty()) continue;
         // A repeated predicate (終わった終わった) takes the same end.
         for (int j = i - 1;
