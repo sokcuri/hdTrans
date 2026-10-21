@@ -163,7 +163,7 @@ export class HdTrans {
     }
   }
 
-  /** The speech level of later translations; 'soft' until set. */
+  /** The speech level of later translations; 'strict' until set. */
   setSpeech(speech: Speech): void {
     const binding = this.binding();
     if (!binding.setSpeech(speech)) throw new Error(binding.error);
