@@ -131,6 +131,7 @@ bool HangulText(std::string_view s) {
 }
 
 bool HonorificAt(std::string_view s, bool familiarOnly) {
+    if (s.starts_with("くんだり")) return false;  // 千里くんだり: all the way to a place
     for (const HonorificSuffix& h : kHonorifics) {
         if ((h.familiar || !familiarOnly) && s.starts_with(h.text)) return true;
     }
@@ -403,6 +404,25 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 if (const auto name = NameAmong(rule, list, same, source); name != same.end()) {
                     nameCodes = list[*name].codes->asPlain, nameTarget = list[*name].target, nameId = list[*name].id;
                     rejected = same;
+                } else if (rule.reject == ConstraintReject::NonName) {
+                    // No name sense among the candidates: the name layer's person reading of
+                    // the word (千里ちゃん 치사토짱, not 천리), unless a person noun, a user
+                    // entry or a verb or adjective as long reads it.
+                    const bool blocked =
+                        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) && c.source.size() >= source.size();
+                        }) ||
+                        std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+                            return PersonNoun(*list[k].codes) || PersonSense(*list[k].codes) || list[k].user != nullptr;
+                        });
+                    if (blocked) break;
+                    records = snapshot.NameRecords(source);
+                    for (const dict::Record& r : records) {
+                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target)) continue;
+                        nameCodes = r.codes->asPlain, nameTarget = r.target, nameId = r.id;
+                        rejected = same;
+                        break;
+                    }
                 }
                 break;
             case ConstraintReject::Pronoun:

@@ -30,3 +30,5 @@ grammar:subject-pronoun	あたしが好き	나를 좋아해	fix	rewrites
 dict:jisjk:355685	あんたが沢山仕事できる	네가 많이 일할 수 있다	fix	local
 dict:jisjk:9157	あたしが一番わかってる	내가 제일 알고 있다	fix	local
 dict:jisjk:9157	英語が少しわかる	영어를 조금 안다	keep	local
+constraint:honorific-kanji-name	千里ちゃん、待って	치사토짱, 기다려	fix	lookup
+constraint:honorific-kanji-name	翼くん	츠바사군	keep	lookup

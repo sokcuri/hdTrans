@@ -22,4 +22,4 @@ constraint:honorific-hiragana	しろくなった。	희어졌다.	keep	lookup
 constraint:honorific-hiragana	しろちゃんと。	해라 제대로.	keep	lookup
 constraint:honorific-hiragana	ほらちゃんと見て。	자 제대로 봐.	keep	lookup
 constraint:honorific-hiragana	仕事をちゃんとしろ。	일을 제대로 해라.	keep	lookup
-constraint:honorific-hiragana	葵くんを呼んだ。	아오이 군을 불렀다.	keep	lookup
+constraint:honorific-hiragana	葵くんを呼んだ。	아오이군을 불렀다.	keep	lookup
