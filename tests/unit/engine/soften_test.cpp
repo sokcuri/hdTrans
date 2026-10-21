@@ -66,6 +66,24 @@ HD_TEST(engine_soften_modes) {
     HD_CHECK_EQ(Translate({"高い。"}, dialogue), "높다.");
 }
 
+HD_TEST(engine_soften_quote_across_lines) {
+    // A quote closed on a later line softens every line it covers.
+    HD_CHECK_EQ(Translate({"「高い。", "高い。", "高い」", "高い。"}), "「높아.|높아.|높아」|높다.");
+    // An unclosed quote leaves the lines after it alone, and so does a blank line or a line
+    // that opens its own quote.
+    HD_CHECK_EQ(Translate({"「高い。", "高い。"}), "「높아.|높다.");
+    HD_CHECK_EQ(Translate({"「高い。", "", "高い」"}), "「높아.||높다」");
+    HD_CHECK_EQ(Translate({"「高い。", "「高い」", "高い。"}), "「높아.|「높아」|높다.");
+    // A quote runs for at most five lines.
+    HD_CHECK_EQ(Translate({"「高い。", "高い。", "高い。", "高い。", "高い。", "高い。", "高い」"}),
+                "「높아.|높다.|높다.|높다.|높다.|높다.|높다」");
+    // The quote carries from one call to the next of the same memory.
+    internal::Memory memory;
+    HD_CHECK_EQ(Joined(Translate({"「高い。"}, memory)), "「높아.");
+    HD_CHECK_EQ(Joined(Translate({"高い」"}, memory)), "높아」");
+    HD_CHECK_EQ(Joined(Translate({"高い。"}, memory)), "높다.");
+}
+
 HD_TEST(engine_soften_session) {
     const auto folder = std::filesystem::temp_directory_path() / "hdtrans-soften-session";
     std::filesystem::create_directories(folder);
@@ -79,7 +97,11 @@ HD_TEST(engine_soften_session) {
     session.Reset();
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
     session.SetSoften(Soften::Quotes);
-    HD_CHECK_EQ(session.Translate("「高い」"), "「높아」");
+    HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
+    HD_CHECK_EQ(session.Translate("高い」"), "높아」");
+    HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
+    session.Reset();
+    HD_CHECK_EQ(session.Translate("高い」"), "높다」");
     Session reference(engine, true);
     HD_CHECK_EQ(reference.Translate("「高い」"), "「높다」");
     std::error_code ec;

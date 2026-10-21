@@ -288,6 +288,10 @@ try {
         assert.equal(soft.translate('「高い」', { soften: 'off' }), '「높다」');
         assert.equal(soft.translate('「高い」'), '「높아」', 'a per-call mode applies to that call only');
         assert.equal(soft.translate('高い。', { soften: 'dialogue' }), '높아.');
+        assert.equal(soft.translate('「高い。'), '「높아.');
+        assert.equal(soft.translate('高い」'), '높아」', 'a quote carries to the next call');
+        soft.reset();
+        assert.equal(soft.translate('高い」'), '높다」', 'reset forgets the open quote');
         soft.setSoften('off');
         assert.equal(soft.translate('「高い」'), '「높다」');
         assert.throws(() => soft.setSoften('always'), /soften takes off, quotes, marked or dialogue/);
@@ -297,7 +301,7 @@ try {
         soft.close();
         plain.close();
     }
-    console.log('PASS wasm smoke: soften modes, per-call option');
+    console.log('PASS wasm smoke: soften modes, per-call option, quote carry');
 }
 translator.close();
 assert.deepEqual(translator.getInfo(), info);

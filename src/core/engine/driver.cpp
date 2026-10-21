@@ -23,6 +23,7 @@
 #include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/lines.h"
+#include "core/text/utf8.h"
 #include "core/word/util.h"
 
 namespace hdTrans::internal {
@@ -89,6 +90,60 @@ output::Settings ComposeSettings(bool text) {
     s.cleanup = text;
     s.text = text;
     return s;
+}
+
+// The lines a quote may run on without a closing bracket before it is taken as unclosed.
+constexpr int kCarryLines = 5;
+
+// Whether a line ends every quote (a blank line).
+bool Blank(std::string_view line) { return word::TrimRunes(line, " 　\r\t").empty(); }
+
+// The quotes of a line that starts after carry: the carry it starts in (a blank line, a
+// line that opens its own quote at its start and a quote that ran for kCarryLines end the
+// carried one), the carry it leaves and whether it closes the quote it starts in.
+struct LineQuotes {
+    QuoteCarry start;
+    QuoteCarry end;
+    bool closes = false;
+};
+
+LineQuotes QuotesOf(std::string_view line, QuoteCarry carry) {
+    const std::string_view head = word::TrimRunes(line, " 　");
+    if (Blank(line) || head.starts_with("「") || head.starts_with("『") || head.starts_with("｢") ||
+        carry.lines >= kCarryLines) {
+        carry = {};
+    }
+    LineQuotes q{carry, {}, false};
+    int depth = carry.depth;
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        at += r.size == 0 ? 1 : r.size;
+        if (r.cp == U'「' || r.cp == U'『' || r.cp == U'｢') {
+            depth++;
+        } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0 && --depth == 0) {
+            q.closes = q.closes || carry.depth > 0;
+        }
+    }
+    q.end = {depth, depth > 0 ? (carry.depth > 0 && !q.closes ? carry.lines + 1 : 1) : 0};
+    return q;
+}
+
+// For each line, whether the quote it starts in (from carry and the lines before it) is
+// closed by it or a later line of lines; a quote that none of them closes is taken as
+// unclosed and leaves the lines it reaches as they are.
+std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry carry) {
+    std::vector<LineQuotes> q(lines.size());
+    for (std::size_t i = 0; i < lines.size(); i++) {
+        q[i] = QuotesOf(lines[i], carry);
+        carry = q[i].end;
+    }
+    std::vector<bool> closed(lines.size(), false);
+    bool later = false;  // the quote the line after i starts in is closed
+    for (std::size_t i = lines.size(); i-- > 0;) {
+        closed[i] = q[i].start.depth > 0 && (q[i].closes || (q[i].end.depth > 0 && later));
+        later = q[i].start.depth > 0 && (q[i].closes || later);
+    }
+    return closed;
 }
 
 // The speech of a line for the compose stage: whether its plain sentence ends soften,
@@ -172,8 +227,10 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
 // One line through every stage of the text path; the line's trailing "\r" is written
 // back by the caller.
+// carry is the quote an earlier line left open for this one.
 std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
-                          Scratch& s, Generated& generated, const StageObserver& observer, const TranslationOptions& options) {
+                          QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
+                          const TranslationOptions& options) {
     const pipeline::LineFacts facts = pipeline::ReadLine(doc, body);
     if (facts.wholeLine) return *facts.wholeLine;
     const pipeline::LineLookup lookup = pipeline::LookupOf(doc, facts);
@@ -200,7 +257,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.spoken = options.soften == Soften::Dialogue ||
                         (options.soften == Soften::Marked &&
                          (pipeline::SpeakerLine(facts.text) || pipeline::MarkedSpeech(facts.text)));
-        speech.styles = pipeline::QuoteStyles(output::String(marked));
+        speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
+        speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
     }
     for (std::size_t i = 0; i < chunks.size(); i++) {
         if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
@@ -255,11 +313,17 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     }
     std::vector<std::string> out;
     out.reserve(lines.size());
+    QuoteCarry carry = memory.quotes;
+    const std::vector<bool> closed = ClosedCarries(lines, carry);
     for (std::size_t i = 0; i < lines.size(); i++) {
         if (observer.line) observer.line(observer.context, static_cast<int>(i));
         // ReadLine takes the line without its one trailing "\r"; the "\r" is written back.
         const bool cr = !lines[i].empty() && lines[i].back() == '\r';
-        std::string translated = TranslateBody(snap, *doc, lines[i], s, generated, observer, options);
+        // A quote left open counts on a line only when the line or a later one closes it.
+        const LineQuotes quotes = QuotesOf(lines[i], carry);
+        const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
+        std::string translated = TranslateBody(snap, *doc, lines[i], used, s, generated, observer, options);
+        carry = quotes.end;
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         if (cr) translated += '\r';
         out.push_back(std::move(translated));
@@ -271,6 +335,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     }
     if (s.sessionSenses == &pending) memory.senses = std::move(pending);
     memory.senses.Trim();
+    memory.quotes = carry;
     pipeline::RememberDocument(snap, sourceLines, memory.document);
     return out;
 }

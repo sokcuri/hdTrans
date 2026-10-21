@@ -337,6 +337,7 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/soft\nuserdict: ''\nehnd: ''\ncache: off\n");
     Check(hdTrans_Reload() == 0, "reload soften dictionary");
     Check(Translate("「高い」") == "「높아」", "quoted speech softens by default");
+    Check(Translate("「高い。") == "「높아." && Translate("高い」") == "높아」", "a quote carries to the next call");
     Write(config, "dicts: fixtures/soft\nuserdict: ''\nehnd: ''\ncache: off\nsoften: off\n");
     Check(hdTrans_Reload() == 0, "reload soften off");
     Check(Translate("「高い」") == "「높다」", "configured soften off");

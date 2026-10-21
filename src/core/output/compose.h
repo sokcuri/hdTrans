@@ -17,7 +17,7 @@
 namespace hdTrans::output {
 
 // The 「」 and 『』 open at a point of a line, and the number of quotes opened outside any
-// quote before it.
+// quote before it (with the one an earlier line left open).
 struct QuoteState {
     int depth = 0;
     int count = 0;

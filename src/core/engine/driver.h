@@ -78,9 +78,17 @@ std::string RuleProgramText(const dict::Snapshot& snap);
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap);
 
 // What a session keeps between its calls.
+// The quotes a line leaves open for the lines after it (「明日行く。 then 明後日も行く」), and
+// how many lines in a row have ended inside them.
+struct QuoteCarry {
+    int depth = 0;
+    int lines = 0;
+};
+
 struct Memory {
     std::shared_ptr<pipeline::DocumentHistory> document;
     word::SessionSenses senses;
+    QuoteCarry quotes;
 };
 
 struct TranslationOptions {

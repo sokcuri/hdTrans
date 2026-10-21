@@ -33,7 +33,8 @@ constexpr std::uint8_t kCited = 16;
 
 // The styles of line: element 0 for its text outside 「」 and 『』, element k for its k-th
 // quote (a 「 or 『 outside any quote, with the quotes inside it); 「 and 『 open a quote,
-// 」 and 』 close one, and a closing bracket outside a quote is ignored.
-std::vector<std::uint8_t> QuoteStyles(std::string_view line);
+// 」 and 』 close one, and a closing bracket outside a quote is ignored. With depth, the
+// line starts inside a quote an earlier line opened, which is its first quote.
+std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth = 0);
 
 }  // namespace hdTrans::pipeline

@@ -138,13 +138,12 @@ bool CitedBefore(std::string_view after, bool embedded) {
 
 }  // namespace
 
-std::vector<std::uint8_t> QuoteStyles(std::string_view line) {
-    std::vector<std::string> texts(1);
-    std::vector<std::uint8_t> styles(1, 0);
-    int depth = 0;
+std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
+    std::vector<std::string> texts(depth > 0 ? 2 : 1);
+    std::vector<std::uint8_t> styles(texts.size(), 0);
     char32_t previous = 0;  // the last character outside quotes that is not a space
     bool embedded = false;
-    std::vector<bool> chained(1, false);  // the quote is followed by another
+    std::vector<bool> chained(texts.size(), false);  // the quote is followed by another
     for (std::size_t at = 0; at < line.size();) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::string_view c = line.substr(at, r.size == 0 ? 1 : r.size);

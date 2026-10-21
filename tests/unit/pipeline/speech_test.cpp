@@ -71,4 +71,8 @@ HD_TEST(pipeline_quote_styles) {
         return s;
     };
     for (const auto& c : cases) HD_CHECK_EQ(show(QuoteStyles(c.line)), show(c.want));
+    // A line inside a quote an earlier line opened: that quote is the first one.
+    HD_CHECK_EQ(show(QuoteStyles("明日も行く」と言った。「次", 1)), show({0, 0, 0}));
+    HD_CHECK_EQ(show(QuoteStyles("ございます」", 1)), show({0, kPoliteSpeech}));
+    HD_CHECK_EQ(show(QuoteStyles("すぐ消える」魔法", 1)), show({0, kCited}));
 }
