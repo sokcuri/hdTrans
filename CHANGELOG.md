@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/sokcuri/hdTrans/compare/v0.3.2...v0.4.0) (2026-10-21)
+
+
+### Features
+
+* **release:** soften dialogue and keep the spoken style of Japanese text ([2d9f16b](https://github.com/sokcuri/hdTrans/commit/2d9f16b3848c835dcf3f5db5f00c3d12bc27cfa9))
+* **speech:** soften spoken lines and read stutters, drawls and spelled-out words ([#21](https://github.com/sokcuri/hdTrans/issues/21)) ([d7fec1b](https://github.com/sokcuri/hdTrans/commit/d7fec1bfb68fb343650edb8bf816892dbe597fc2))
+
 ## [0.3.2](https://github.com/sokcuri/hdTrans/compare/v0.3.1...v0.3.2) (2026-10-21)
 
 
