@@ -416,7 +416,13 @@ HD_TEST(pipeline_join_spelled_out) {
         "key\tko\tpos\tid\n"
         "さいてい\t최저\tN110\t1\n"
         "ダメ\t안 돼\tN110\t2\n"
-        "ば\t1면\tS590\t3\n",
+        "ば\t1면\tS590\t3\n"
+        "大好き\t너무 좋아\tN110\t4\n"
+        "あげ\t주\tM100\t5\n"
+        "ちょっと\t조금\tE300\t6\n"
+        "うそ\t거짓말\tN110\t7\n"
+        "はる\t봄\tN110\t8\n"
+        "あい\t사랑\tN110\t9\n",
     }});
     HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
     LineContext ctx;
@@ -428,12 +434,21 @@ HD_TEST(pipeline_join_spelled_out) {
         {"あ・げ・る・ねー♪", "\uE008あげるねー\uE009♪"},
         {"ちょ・っ・と", "\uE008ちょっと\uE009"},
         {"さ・い・て・いです", "\uE008さいてい\uE009です"},
+        {"う・そ。", "\uE008うそ\uE009。"},
+        // Kana that are no word, a list in the order of the kana table or the iroha, the
+        // choices after a label and two kana without a pause after them are read kana by kana.
+        {"そ・ふ・ゆ", "\uE008소후유\uE009"},
+        {"は・ひ・ふ・へ・ほ", "\uE008하히후헤호\uE009"},
+        {"い・ろ・は・に", "\uE008이로하니\uE009"},
+        {"①あ・い", "①\uE008아이\uE009"},
+        {"問１　あ・い", "問１　\uE008아이\uE009"},
+        {"は・る", "\uE008하루\uE009"},
         // Unchanged: names, lists, kanji read one by one, katakana that is no word, a piece
         // of more than one kana, a run next to other characters, a lone piece.
         {"ジョン・スミス", "ジョン・スミス"},
         {"赤・青・黄の三色", "赤・青・黄の三色"},
         {"謹・賀・新・年", "謹・賀・新・年"},
-        {"ア・イ", "ア・イ"},
+        {"ケ・ロ", "ケ・ロ"},
         {"ド・きゅ・う！", "ド・きゅ・う！"},
         {"スー・チー", "スー・チー"},
         {"愛・たそがれ", "愛・たそがれ"},

@@ -66,9 +66,14 @@ namespace internal {
 // Each word spelled out with ・ between its characters for emphasis (さ・い・て・い, 大・好・き,
 // ダ・メ) joined and put between kEmphasisOpen and kEmphasisClose: two or more pieces of one
 // kana or kanji each (with a small kana and one ー, ～ or っ after it), not next to other kana,
-// kanji or ・ but for a copula or particle after it (さ・い・て・いです). A run of kanji only (赤・青・黄, 謹・賀・新・年) stays, and so does a run that starts
-// with katakana unless they are a dictionary key of two or more characters without ー (ア・イ,
-// ド・きゅ・う, スー・チー).
+// kanji or ・ but for a copula or particle after it (さ・い・て・いです). A run of kanji only
+// (赤・青・黄, 謹・賀・新・年) stays. A run that starts with katakana is joined only when it is a
+// dictionary key of two or more characters without ー, of three pieces or more when it is
+// also a person's name (ア・イ, ド・きゅ・う, スー・チー, ユ・リ). Other runs are joined when the
+// dictionary reads them as words, two kana pieces only as a whole key before a pause; a run
+// of kana that is not, a list in the order of the kana table or the iroha (あ・い・う,
+// は・ひ・ふ・へ・ほ), the choices after a label (①あ・い) or a name (か・ん・こ・れ) is written
+// kana by kana as heard (아·이·우).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).

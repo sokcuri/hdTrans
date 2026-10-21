@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <initializer_list>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -17,6 +18,16 @@ bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32str
 bool IsSmallVowel(char32_t r) { return In(r, U"ぁぃぅぇぉ"); }
 
 bool HasKanji(std::u32string_view s) { return std::any_of(s.begin(), s.end(), IsKanjiRune); }
+
+bool SpelledTail(std::u32string_view text);
+
+// Whether text is one of words.
+bool In(std::u32string_view text, std::initializer_list<std::u32string_view> words) {
+    for (const std::u32string_view w : words) {
+        if (text == w) return true;
+    }
+    return false;
+}
 
 constexpr std::u32string_view kVowelRows[5] = {
     U"アァカガサザタダナハバパマヤャラワ",
@@ -149,6 +160,74 @@ public:
             for (const dict::Candidate& c : rd.list) far = std::max(far, j + text::RuneCount(c.source));
         }
         return far;
+    }
+
+    // Whether key is a name: a record of the name layer with a person's sense (QPN), with
+    // anyName any record of the name layer, or a candidate of the name layer or with a
+    // person's sense that is exactly key.
+    bool NameKey(std::u32string_view key, bool anyName = false) const {
+        const std::string text = EncodeText(key);
+        for (const dict::Record& r : snap_.NameRecords(text)) {
+            if (anyName || (r.codes != nullptr && r.codes->sem.Contains("QPN"))) return true;
+        }
+        const dict::Candidates rd = snap_.GetWordInfo(text, dict::LookupMode::General, ctx_.lookup);
+        for (const dict::Candidate& c : rd.list) {
+            if (c.source.size() != text.size()) continue;
+            if ((c.user != nullptr && c.user->nameLayer) || (c.codes != nullptr && c.codes->sem.Contains("QPN"))) return true;
+        }
+        return false;
+    }
+
+    // The longest key at rs[p:] other than a name, kana spellings included, in characters,
+    // and whether a key of that length is a verb or adjective stem.
+    size_t WordAt(std::u32string_view rs, size_t p, bool& stem) const {
+        const std::string text = EncodeText(rs.substr(p, std::min(rs.size() - p, kMaxKeyRunes)));
+        const dict::Candidates rd = snap_.GetWordInfo(text, dict::LookupMode::General, ctx_.lookup);
+        size_t best = 0;
+        stem = false;
+        for (const dict::Candidate& c : rd.list) {
+            if (c.user != nullptr && c.user->nameLayer) continue;
+            if (c.codes != nullptr && c.codes->sem.Contains("QPN")) continue;
+            const size_t n = text::RuneCount(c.source);
+            const bool s = c.codes != nullptr && (c.codes->part.Tag() == 'M' || c.codes->part.Tag() == 'H');
+            if (n > best) {
+                best = n;
+                stem = s;
+            } else if (n == best) {
+                stem = stem || s;
+            }
+        }
+        return best;
+    }
+
+    // Whether the dictionary reads all of w as words: keys other than names and single
+    // particles one after the other, the last of them a verb or adjective stem before its
+    // ending or followed by a particle (どんなかんじ, あげる, ふざけないで, いいけど); a
+    // lengthening at the end is left out (しゅつげきぃ).
+    bool ReadsAll(std::u32string_view w) const {
+        while (!w.empty() && In(w.back(), U"ぁぃぅぇぉっーッ～")) w.remove_suffix(1);  // しゅつげきぃ, おはよ～
+        for (size_t p = 0; p < w.size();) {
+            bool stem = false;
+            const size_t n = WordAt(w, p, stem);
+            if (n >= 2 || (n == 1 && IsKanjiRune(w[p]))) {
+                if (stem) return true;
+                p += n;
+                continue;
+            }
+            if (n == 1 && stem) return true;  // し + てたら, し + よっか
+            if (In(w[p], U"にをがはもでとのへや")) {  // a particle: 誰にしよっか
+                p++;
+                continue;
+            }
+            return SpelledTail(w.substr(p)) || In(w.substr(p), {U"けど", U"な", U"わ", U"ぞ", U"さ"});
+        }
+        return true;
+    }
+
+    // Whether a key other than a name, kana spellings included, is exactly w.
+    bool WordKey(std::u32string_view w) const {
+        bool stem = false;
+        return WordAt(w, 0, stem) == w.size();
     }
 
     static bool LexiconKey(std::u32string_view key, bool extra) {
@@ -330,6 +409,42 @@ bool SpelledTail(std::u32string_view text) {
         if (text.starts_with(t)) return true;
     }
     return false;
+}
+
+// Whether the run of single kana pieces at rs[i:end] (・ between them) follows the order of
+// the kana table or of the iroha, three pieces or more: a list (あ・い・う, は・ひ・ふ・へ・ほ,
+// い・ろ・は).
+bool KanaOrder(std::u32string_view rs, size_t i, size_t end) {
+    std::u32string kana;
+    for (size_t k = i; k < end; k++) {
+        if (rs[k] == U'・') continue;
+        if (k + 1 < end && rs[k + 1] != U'・') return false;  // a piece of more than one character
+        kana.push_back(rs[k]);
+    }
+    if (kana.size() < 3) return false;
+    for (const std::u32string_view order :
+         {std::u32string_view(U"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"),
+          std::u32string_view(U"あかさたなはまやらわ"),
+          std::u32string_view(U"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす")}) {
+        bool follows = true;
+        for (size_t k = 0; k + 1 < kana.size() && follows; k++) {
+            const size_t at = order.find(kana[k]);
+            follows = at != std::u32string_view::npos && at + 1 < order.size() && order[at + 1] == kana[k + 1];
+        }
+        if (follows) return true;
+    }
+    return false;
+}
+
+// Whether the run at rs[i] follows a label of a list or a question (①あ・い, 問１　あ・い・う,
+// (1) あ・い): a digit, a circled number, 問 or a closing bracket or period after a number.
+bool AfterLabel(std::u32string_view rs, size_t i) {
+    size_t k = i;
+    while (k > 0 && (rs[k - 1] == U' ' || rs[k - 1] == U'　')) k--;
+    if (k == 0) return false;
+    const char32_t c = rs[k - 1];
+    return (c >= U'0' && c <= U'9') || (c >= U'０' && c <= U'９') || (c >= 0x2460 && c <= 0x24FF) ||
+           (c >= 0x3220 && c <= 0x3243) || c == U'問' || In(c, U")）.．:：");
 }
 
 bool IsWordRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r) || r == U'・'; }
@@ -650,6 +765,28 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
             std::u32string key = joined.substr(0, kata);
             while (!key.empty() && In(key.back(), U"ーッ")) key.pop_back();
             if (key.size() < 2 || (e.Tags(key).empty() && e.Tags(ToHiragana(key)).empty())) continue;  // a name (ア・イ)
+            if (ends.size() == 2 && e.NameKey(key)) continue;  // a name that is also a word: ユ・リ, モ・モ
+        } else {
+            const bool kana = std::all_of(joined.begin(), joined.end(), [](char32_t c) { return IsHiraganaRune(c); });
+            // A word the dictionary reads whole; two kana pieces only as a word before a
+            // pause. A list, a label's choices or a name are read kana by kana (あ・い・う 아·이·우).
+            const bool beforePause =
+                end < rs.size() && (IsPause(rs[end]) || SpelledTail(std::u32string_view(rs).substr(end)));
+            const bool word = !AfterLabel(rs, i) && !KanaOrder(rs, i, end) && !(kana && e.NameKey(joined, true) && !e.WordKey(joined)) &&
+                              e.ReadsAll(joined) &&
+                              (!kana || ends.size() > 2 || (e.WordWithEnds(joined, 0, joined.size(), U"") && beforePause));
+            if (!word) {
+                if (!kana) continue;
+                const std::string heard = ReadKana(EncodeText(joined));
+                out.append(rs, at, i - at);
+                out.push_back(kEmphasisOpen);
+                out += DecodeText(heard);
+                out.push_back(kEmphasisClose);
+                at = end;
+                i = end - 1;
+                changed = true;
+                continue;
+            }
         }
         out.append(rs, at, i - at);
         out.push_back(kEmphasisOpen);
