@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:145037	机の上に掛けられた服	책상 위에 걸린 옷	fix	lookup
+dict:jisjk:152695	先生によってだけ決まる。	선생님에 의해서만 정해진다.	fix	lookup

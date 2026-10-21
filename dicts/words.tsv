@@ -864,7 +864,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ともあろう	씩이나 되는	E010			GN				llm			w:857
 とも言われ	라고도 불&AA@	M427			GN				xxx llm	1		w:858
 とりな	무마&AV@	M423			GN				xxx llm	1		w:859
-と聞かれ	라고 물어&AY@	M427			GN				xxx llm	1		w:860
+と聞かれ	라고 물어&AY@	M427		Tu	GN				xxx llm	1		w:860
 どういう訳か	왠지	A9D0			GN				llm		どういうわけか	w:861
 どうかしましたか	무슨 일 있으세요	A9D0			GN				llm			w:862
 どうこう	이러쿵저러쿵	E300			GN				llm		どうこう	w:863
@@ -931,7 +931,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なんと言うか	뭐랄까	A9D0			GN				llm		なんというか	w:924
 なんにせよ	어쨌든	E300			GN				llm			w:925
 にしては	치고는	I110			GN				xxx llm	1		w:926
-にも及	에 달&AV@	M426			GN				xxx llm	1		w:927
+にも及	에 달&AV@	M426		Tu	GN				xxx llm	1		w:927
 にも関わらず	에도 불구하고	A9D0			GN						にもかかわらず	w:928
 にやけ	히죽거&AA@	M427			GN				llm			w:929
 にやにや	히죽히죽	E300			GN				xxx llm	1		w:930
@@ -940,7 +940,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 に困	곤란&AV@	M428			GN				xxx llm	1		w:933
 に寄り添	곁에 &HN@	M420			GN				xxx llm	1		w:934
 に尽く	헌신&AV@	M423			GN				xxx llm	1		w:935
-に適	에 적합&AV@	M429			GN				xxx llm	1		w:936
+に適	에 적합&AV@	M429		Tu	GN				xxx llm	1		w:936
 ぬか雨	이슬비	N110			GN						ぬかあめ	w:937
 ぬき出	발췌&AV@	M423			GN						ぬきだす	w:938
 ぬき足	도둑걸음	N110			GN				llm		ぬきあし	w:939

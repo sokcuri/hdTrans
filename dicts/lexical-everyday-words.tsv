@@ -7,6 +7,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 食べに	먹으러 &AH@	M41=			GN							everyday-words:4
 はちまき	머리띠	N110			GN						はちまき	everyday-words:5
 昼ごろ	낮쯤	N110	UMe	Tm	GN						ひるごろ	everyday-words:6
-のほかの	의 다른	P200			GN						のほかの	everyday-words:12
+のほかの	의 다른	P200		Tu	GN						のほかの	everyday-words:12
 もくずがに	참게	N110	QAAQAC		GN						もくずがに	everyday-words:13
 かいてあ	쓰여 &HN@	M428			GN						かいてあ	everyday-words:14
