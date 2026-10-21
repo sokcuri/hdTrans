@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:word:kinoseika:final	今の音、気のせいか？	지금의 소리, 기분 탓인가?	fix	local
+dict:word:kinoseika:final	うん、気のせいか。	rule:dict:word:kinoseika:final=기분 탓인가	fix	local
+dict:word:kinoseika:final	気のせいか、空が暗い。	!rule:dict:word:kinoseika:final	keep	local
+dict:seika-final:1	俺のせいか？	내 탓인가?	fix	local
+dict:seika-final:1	雨のせいか、少し寒い。	비의 탓인지, 조금 춥다.	keep	local
