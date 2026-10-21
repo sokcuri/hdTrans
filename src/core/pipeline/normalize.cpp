@@ -163,14 +163,14 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
     return false;
 }
 
-// start (あれ|え)([、，！？…‥])
+// start (あれ|え)([、，！？…‥―─—])
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
     return SentenceStart(s, pos, m, [&](size_t q) {
         for (std::string_view w : {"あれ", "え"}) {
             size_t r = q;
             if (!Lit(s, r, w)) continue;
             size_t t = r;
-            if (!OneOf(s, t, U"、，！？…‥")) continue;
+            if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
             m.group[3] = Span(s, q, r);
             m.group[4] = Span(s, r, t);
             m.end = t;

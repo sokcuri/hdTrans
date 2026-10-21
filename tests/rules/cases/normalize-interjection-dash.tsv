@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+normalize:interjection	「え――本当？」	「어――사실?」	fix	normalize
+normalize:interjection	あれ――おかしいな。	어라――이상한데.	fix	normalize
+normalize:interjection	「え、本当？」	「어, 사실?」	keep	normalize
+normalize:interjection	「ええ――そうよ」	「예――그래요」	keep	normalize

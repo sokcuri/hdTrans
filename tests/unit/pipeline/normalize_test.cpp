@@ -145,6 +145,9 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"。　あれ…"sv, "。　あれっ…"sv},
         {"\x0aえ、"sv, "\x0aえっ、"sv},
         {"じゃあ"sv, "じゃあ"sv},
+        {"「え――本当？」"sv, "「えっ――本当？」"sv},
+        {"あれ─"sv, "あれっ─"sv},
+        {"「ええ――」"sv, "「ええ――」"sv},
     };
     Check(RewriteInterjections, cases);
 }

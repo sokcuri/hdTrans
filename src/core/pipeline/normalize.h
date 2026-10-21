@@ -35,7 +35,8 @@ std::string JoinMasu(std::string_view text);
 // できぬ.
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
 
-// あれ and え at the start of a sentence with a small っ (あれ、 あれっ、, えぇ？ えっ？),
+// あれ and え at the start of a sentence before 、，！？…‥ or a dash with a small っ (あれ、 あれっ、,
+// え―― えっ――, えぇ？ えっ？),
 // じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
 std::string RewriteInterjections(std::string_view text);
 
