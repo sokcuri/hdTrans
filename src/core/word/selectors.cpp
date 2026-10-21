@@ -12,8 +12,8 @@
 namespace hdTrans::word {
 namespace {
 
-// The polite speech level of Settings::registers (0 automatic, 1 plain, 2 polite).
-constexpr uint8_t kPoliteRegister = 2;
+// The polite register of Settings::registers (userdict::Register::Polite; 2 is casual).
+constexpr uint8_t kPoliteRegister = 3;
 
 // The byte at i as an unsigned value; 0 outside s.
 int ByteAt(std::string_view s, long i) { return static_cast<unsigned char>(At(s, i)); }
