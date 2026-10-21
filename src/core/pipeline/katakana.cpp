@@ -549,6 +549,7 @@ constexpr KataWord kKataWords[] = {
     {"アレ", false}, {"ソレ", false}, {"コレ", false}, {"ドレ", false}, {"ナニ", false},
     {"ダレ", false}, {"ココ", false}, {"ソコ", false}, {"ドコ", false}, {"アタシ", false},
     {"アンタ", false}, {"ダメ", true}, {"ヤバイ", true}, {"スゴイ", true}, {"カワイイ", true},
+    {"ウルサイ", true}, {"ヒドイ", true}, {"コワイ", true}, {"ウザイ", true},
 };
 
 // The particles and predicates after which a word of kKataWords reads as the word; an
@@ -556,6 +557,8 @@ constexpr KataWord kKataWords[] = {
 // interjection "huh?", so アレ does not take ？.
 constexpr std::string_view kPronounNext[] = {"は", "が", "を", "も", "じゃ", "だ", "です", "って", "か", "？", "?"};
 constexpr std::string_view kAdjectiveNext[] = {"だ", "じゃ", "って", "か"};
+// The sentence-final particles after which an i-adjective of kKataWords reads as one.
+constexpr std::string_view kAdjectiveFinal[] = {"ぞ", "よ", "な", "ね", "わ"};
 
 constexpr std::u32string_view kSentenceEnd = U"。！？!?…‥」』";
 
@@ -635,7 +638,8 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         std::string_view follower;
         bool ok;
         if (kw->adjective) {
-            ok = PrefixIn(rest, kAdjectiveNext, follower);
+            ok = PrefixIn(rest, kAdjectiveNext, follower) ||
+                 (word.ends_with("イ") && PrefixIn(rest, kAdjectiveFinal, follower));
             ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd);
         } else {
             ok = PrefixIn(rest, kPronounNext, follower);

@@ -171,7 +171,7 @@ HD_TEST(pipeline_kata_words) {
         {"ひょっとしてアレ？", "ひょっとしてアレ？"},
         {"せまいからダメ？", "せまいからダメ？"},  // からだ joins the text around it
         {"アレックスは来た。", "アレックスは来た。"},
-        {"スゴイね。", "スゴイね。"},
+        {"スゴイね。", "すごいね。"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
@@ -296,6 +296,9 @@ HD_TEST(pipeline_katakana_dictionary) {
         {"アレだけは苦手。", "アレだけは苦手。"},  // あれだけ is another word
         {"せまいからダメ？", "せまいからダメ？"},
         {"ダメですよ。", "ダメですよ。"},  // the base word conjugates already
+        {"ウルサイぞ。", "うるさいぞ。"},
+        {"ヒドイよ！", "ひどいよ！"},
+        {"ダメよ。", "ダメよ。"},  // only an i-adjective before a sentence-final particle
         {"オレは行く。", "オレは行く。"},
         {"ドレスを着た。", "ドレスを着た。"},
     };
