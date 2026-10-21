@@ -1,8 +1,8 @@
 rule	input	expected	kind	layer
 dict:jisjk:341470	リンゴを、どうぞ包んでください。	사과를, 어서 감싸 주세요.	fix	local
 dict:jisjk:341470	リンゴを、どうぞ。	사과를, 드세요.	fix	local
-dict:jisjk:343546	行くって見抜いた。	간다 라고 간파했다.	keep	local
-dict:jisjk:343546	来るって思った。	온다 라고 생각했다.	keep	local
+dict:jisjk:343546	行くって見抜いた。	간다고 간파했다.	keep	local
+dict:jisjk:343546	来るって思った。	온다고 생각했다.	keep	local
 dict:jisjk:6506	田中さんと話す。	rule:dict:jisjk:6506=씨	keep	local
 dict:jisjk:6506	店員さんを呼ぶ。	!rule:dict:jisjk:6506	keep	local
 dict:jisjk:267272	書いており、読んでいる。	쓰고 있어 읽고 있다.	fix	local

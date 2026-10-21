@@ -1,0 +1,37 @@
+rule	input	expected	kind	layer
+dict:jisjk:90167	「ありがとう」	「고마워」	fix	defaults
+dict:jisjk:90167	「ありがとうございます」	「감사합니다」	keep	defaults
+dict:jisjk:263984	ずっと辛かった。	쭉 괴로웠다.	fix	local
+dict:jisjk:263984	ずっと一緒にいたい。	쭉 함께 있고 싶다.	fix	local
+dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	keep	local
+dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
+dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local
+dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 말아라」	fix	local
+dict:variant:atashi:2	「アタシが行く」	「내가 간다」	fix	local
+dict:jisjk:1204	「あたしを見て」	「나를 봐」	fix	local
+dict:jisjk:1204	「あたしに任せて」	「나에게 맡겨」	fix	local
+dict:jisjk:1204	「あたしが行く」	「내가 간다」	keep	local
+dict:variant:atashitachi:1	「あたしたちの家だよ」	「우리의 집이야」	fix	lookup
+dict:jisjk:144074	敵を撃った。	적을 쏘았다.	fix	lookup
+dict:jisjk:144074	「撃って」	「쏘아」	fix	lookup
+conj:kuru	「来い」	「와라」	fix	conjugation
+conj:kuru	「早く来い！」	「빨리 와라!」	fix	conjugation
+conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안된다」	keep	conjugation
+conj:kuru	来たかった。	오고 싶었다.	keep	conjugation
+conj:kuru	友達が来た。	친구가 왔다.	keep	conjugation
+conj:kuru	誰も来ない。	아무도 오지 않는다.	keep	conjugation
+conj:kuru	彼を来させる。	그를 오게 한다.	fix	conjugation
+conj:kuru	来させない。	오게 하지 않는다.	fix	conjugation
+conj:kuru	早く見に来い。	빨리 보러 와라.	fix	conjugation
+conj:kuru	入って来い。	들어와라.	fix	conjugation
+conj:kuru	友達が遊びに来た。	친구가 놀러 왔다.	keep	conjugation
+conj:kuru	ついて来い。	따라 와라.	fix	conjugation
+conj:kuru	俺について来い！	나를 따라 와라!	keep	conjugation
+conj:imperative	「子供を撃て」	「아이를 쏘아라」	fix	conjugation
+conj:imperative	「打て」	「쳐라」	fix	conjugation
+conj:imperative	「書け」の一点張り	「써라」의 시종일관	fix	conjugation
+conj:imperative	「本が読める」	「책을 읽을 수 있다」	keep	conjugation
+conj:imperative	撃てない。	쏠 수 없다.	keep	conjugation
+cut:noun-head	揺れるしっぽを見た。	흔들리는 꼬리를 보았다.	fix	lookup
+cut:noun-head	行くし、食べるし。	가고, 먹고.	keep	lookup
+cut:noun-head	どこかにないかなって	어디엔가 없을까는	keep	lookup

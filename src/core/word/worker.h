@@ -81,7 +81,7 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
-    bool CutsWord(std::string_view ending, std::string_view after) const;
+    bool CutsWord(std::string_view before, std::string_view ending, std::string_view after) const;
     uint8_t Register(const dict::UserEntry& u) const;
     Record* CreateSyntheticRecord(int token, std::string_view source, bool emptyTarget);
     bool Transliterate(std::string_view s, std::string& out);

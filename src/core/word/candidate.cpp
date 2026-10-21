@@ -852,6 +852,15 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
                     if (tailAt(0, 6) == PrefixForm(67)) entry = 17;
                     else if (tailAt(0, 4) == PrefixForm(61)) entry = 11;
                 }
+            } else if (tableGroup == 3 && entry == 6) {
+                // As for する: 来た before い, かった, く, ければ or き is the 来たい family, not the past.
+                const Window two = tailAt(pl, 2), six = tailAt(pl, 6);
+                if (two == PrefixGate(0) || six == PrefixGate(1) || two == PrefixGate(2) || six == PrefixGate(3) ||
+                    two == PrefixGate(4)) {
+                    continue;
+                }
+            } else if (tableGroup == 3 && (entry == 8 || entry == 10) && tail.starts_with(PrefixForm(50 * 3 + 17))) {
+                entry = 17;  // as for する: 来ちゃ is one form, not 来 and ちゃ
             } else if (tableGroup == 3 && (entry == 8 || entry == 10)) {
                 const Window two = tailAt(pl, 2), four = tailAt(pl, 4), eight = tailAt(pl, 8), ten = tailAt(pl, 10);
                 if (two == PrefixGate(0) || two == PrefixGate(5) || four == PrefixGate(6) || four == PrefixGate(7) ||

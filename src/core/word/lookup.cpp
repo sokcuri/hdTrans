@@ -506,9 +506,49 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 }
 
 // Text input: an ending that would take the head of the word after it, ため before 息
-// (長いため息 긴 한숨).
-bool Worker::CutsWord(std::string_view ending, std::string_view after) const {
-    return settings.text && ending.ends_with("ため") && after.starts_with("息");
+// (長いため息 긴 한숨), or a sentence particle that is really the head of a noun
+// (揺れるしっぽ: not 揺れる + し + っぽ but 揺れる + しっぽ). The particle moves to the noun
+// only when all of these hold:
+//   - the ending's last kana is a particle that follows a terminal form (し な か わ ね
+//     よ さ ぞ ぜ), and the word up to it, before, is still a terminal form without it
+//     (揺れる, not the bare stem 良 of 良いっしゅ);
+//   - the text after the ending starts with a small kana or ー, which no free word starts
+//     with, and is no particle or ending of the dictionary (って, っけ, っす);
+//   - that kana and the text after it are a dictionary noun of three or more characters.
+bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
+    if (!settings.text) return false;
+    if (ending.ends_with("ため") && after.starts_with("息")) return true;
+    const text::Rune next = text::DecodeRune(after);
+    if (next.size == 0 || ending.empty() ||
+        std::u32string_view(U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー").find(next.cp) == std::u32string_view::npos) {
+        return false;
+    }
+    const text::Rune last = DecodeLastRune(ending);
+    if (std::u32string_view(U"しなかわねよさぞぜ").find(last.cp) == std::u32string_view::npos) return false;
+    const std::string whole = std::string(before) + std::string(ending);
+    const std::string_view shortened = std::string_view(whole).substr(0, whole.size() - last.size);
+    if (shortened.empty() ||
+        std::u32string_view(U"るたうくぐすつぬぶむいだ").find(DecodeLastRune(shortened).cp) == std::u32string_view::npos) {
+        return false;
+    }
+    const auto partOf = [](const dict::Candidate& c) {
+        return c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+    };
+    const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+    for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+        const std::string_view part = partOf(c);
+        if (text::RuneCount(c.source) >= 2 && !part.empty() && part[0] != 'N' && part[0] != 'M' && part[0] != 'H') {
+            return false;  // a particle or an ending in its own right
+        }
+    }
+    std::string query(ending.substr(ending.size() - last.size));
+    query += rest;
+    for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+        if ((c.user == nullptr || !c.user->nameLayer) && partOf(c).starts_with("N1") && text::RuneCount(c.source) >= 3) {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool OwnedGroup(const Group* g) { return g != nullptr && !g->entries.empty() && g->entries[0]->user != nullptr; }

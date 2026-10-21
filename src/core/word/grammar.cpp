@@ -883,7 +883,7 @@ void NiAfterAdverb(Flusher& f) {
 }
 
 // Pronouns whose genitive takes the short form: 나의 -> 내, 저의 -> 제, 너의 -> 네.
-constexpr std::string_view kFirstPersonPronouns[] = {"私", "僕", "俺", "わたし", "わたくし", "あたし", "ぼく", "おれ", "ボク", "オレ"};
+constexpr std::string_view kFirstPersonPronouns[] = {"私", "僕", "俺", "わたし", "わたくし", "あたし", "アタシ", "ぼく", "おれ", "ボク", "オレ"};
 constexpr std::string_view kSecondPersonPronouns[] = {"君", "お前", "おまえ", "きみ"};
 
 // A pronoun and the genitive の right before a word (a letter or digit, in the same token

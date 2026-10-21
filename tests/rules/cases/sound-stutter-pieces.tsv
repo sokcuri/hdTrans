@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 sound:stutter-pieces	「さ、さ、最低」	「최, 최, 최저」	fix	sound
 sound:stutter-pieces	「ご、ごめ、ごめんなさい」	「미, 미안, 미안해요」	fix	sound
-sound:stutter-pieces	「あ、あり、ありがとう」	「고, 고마, 고마워요」	fix	sound
+sound:stutter-pieces	「あ、あり、ありがとう」	「고, 고마, 고마워」	fix	sound
 sound:stutter-pieces	「ぃ―――いやぁぁぁッ!?」	「시―――싫어어엇!?」	fix	sound
 sound:stutter-pieces	「わ、わ、わたし……」	「나, 나, 나……」	keep	sound
 sound:stutter-pieces	「あ――本当に？」	「아――정말로?」	keep	sound

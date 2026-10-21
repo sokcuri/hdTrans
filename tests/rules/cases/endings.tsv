@@ -15,7 +15,7 @@ dict:jisjk:342620	私は掃除するよ。	나는 청소할게.	keep	local-endin
 dict:jisjk:342620	君が助けるよ。	네가 도와.	fix	local-ending
 dict:jisjk:342620	僕が助けるよ。	내가 도울게.	keep	local-ending
 dict:jisjk:265166	帰るって話だ。	돌아간다는 이야기다.	fix	local-ending
-dict:jisjk:265166	帰るって思った。	돌아간다 라고 생각했다.	keep	local-ending
+dict:jisjk:265166	帰るって思った。	돌아간다고 생각했다.	keep	local-ending
 dict:jisjk:263175	泳ぐなんて噂だ。	헤엄친다는 소문이다.	fix	local-ending
 dict:jisjk:263175	泳ぐなんて変だ。	헤엄치다니 이상하다.	keep	local-ending
 dict:jisjk:364677	ダメなの？	안 돼?	fix	local-ending
