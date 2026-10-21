@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+sound:abab	うずうずうず	근질근질근질	fix	sound
+sound:abab	うずうずうずうず	근질근질근질근질	keep	sound
+sound:abab	うずうずうずうずうず	근질근질근질근질근질	fix	sound
+sound:abab	ウズウズウズ！	근질근질근질!	fix	sound
+sound:abab	うずうずうずと待つ。	근질근질근질 기다린다.	fix	sound
+sound:abab	胸がどきどきどきする。	가슴이 두근두근두근한다.	fix	sound
+sound:abab	ドキドキドキ	두근두근두근	fix	sound
+sound:abab	ドキドキドキドキッ	두근두근두근두근	fix	sound
+sound:abab	わくわくわく	두근두근두근	fix	sound
+sound:abab	はあはあはあはあ	하아하아하아하아	fix	sound
+sound:abab	ぶーぶーぶー	꿀꿀꿀	fix	sound
+sound:abab	がくがくがくがくっ	후들후들후들후들	fix	sound
+sound:abab	うずうずする。	근질근질한다.	keep	sound
+sound:abab	うずうず	근질근질	keep	sound
+sound:abab	うずうずうずらを見る。	근질근질 메추라기를 본다.	keep	sound
+sound:abab	あんあんあん	앙앙앙	keep	sound
+sound:abab	あんあんあんあん	앙앙앙앙	keep	sound
+sound:abab	はあはあはあ	하아하아하아	keep	sound
+sound:abab	うずらを見る。	메추라기를 본다.	keep	sound
+compose:repeated-mimetic	そぼそぼそぼそぼ	부슬부슬부슬부슬	fix	compose
+compose:repeated-mimetic	雨がそぼそぼそぼそぼ降る。	비가 부슬부슬부슬부슬 내린다.	fix	compose
+compose:repeated-mimetic	雨がそぼそぼ降る。	비가 부슬부슬 내린다.	keep	compose
+sound:abab	ドキドキドキドキーッ	두근두근두근두근~	fix	sound
+sound:abab	ドキドキドキドキー	두근두근두근두근~	fix	sound

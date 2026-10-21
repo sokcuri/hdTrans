@@ -80,6 +80,16 @@ console.log(result.text);
 console.log(result.choices);
 ```
 
+대사(「」 안)의 말투는 `Speech` 값 `'soft'`(기본)와 `'strict'`이며 CLI의 `--speech`와 같습니다. `'soft'`는
+딱딱한 문장 끝 `-다`를 해체로 부드럽게 쓰고(「明日行く」 → 「내일 갈 거야」), `'strict'`는 번역의 `-다`를
+그대로 둡니다(「내일 간다」). `HdTrans.init({ speech })`나 `setSpeech(speech)`는 다음 번역부터,
+`translate(text, { speech })`는 그 호출에만 적용합니다.
+
+```ts
+hdTrans.setSpeech("strict");
+const soft = hdTrans.translate("「明日行く」", { speech: "soft" });  // 「내일 갈 거야」
+```
+
 `json: true`는 JSON 문자열이 아니라 타입이 있는 객체를 반환합니다.
 직렬화할 때는 `JSON.stringify(result)`를 씁니다. 생략하거나 `false`이면 문자열을 반환합니다.
 

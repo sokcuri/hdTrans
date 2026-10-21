@@ -18,7 +18,7 @@ sense:device-implant	弟子にカメラの使い方を仕込んだ。	제자에�
 sense:device-implant	発信機の作り方を弟子に仕込んだ。	발신기를 만드는 방법을 제자에게 가르쳤다.	keep	senses
 sense:device-implant	部屋にカメラがある。	방에 카메라가 있다.	keep	senses
 sense:device-implant	カメラで弟子に技を仕込んだ。	카메라로 제자에게 기술을 가르쳤다.	keep	senses
-sense:device-implant	私のカメラを仕込まなかった。	나의 카메라를 설치하지 않았다.	fix	senses
+sense:device-implant	私のカメラを仕込まなかった。	내 카메라를 설치하지 않았다.	fix	senses
 sense:device-implant	敵の爆弾に仕込んだ装置を調べた。	적의 폭탄에 넣은 장치를 조사했다.	fix	senses
 sense:device-implant	カメラで弟子を仕込んだ。	카메라로 제자를 가르쳤다.	keep	senses
 sense:device-implant	カメラに操作方法を仕込んだ。	카메라에 조작 방법을 가르쳤다.	keep	senses

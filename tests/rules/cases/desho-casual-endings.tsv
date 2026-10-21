@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:word:desho:opening	「でしょ？」	「그렇지?」	fix	local
+dict:word:desho:opening	「でしょでしょ？」	「그렇지 그렇지?」	fix	builtin-phrase
+ending:でしょ	「明日は晴れるでしょ？」	「내일은 개이겠지?」	fix	builtin-ending
+ending:でしょ	「だから言ったでしょ」	「그러니까 말했잖아」	fix	builtin-ending
+ending:でしょ	「この本、高いでしょ？」	「이 책, 높지?」	fix	builtin-ending
+ending:でしょ	「あなたも学生でしょ？」	「당신도 학생이지?」	fix	builtin-ending
+ending:でしょ	「君が行くんでしょ？」	「네가 가는 거지?」	fix	builtin-ending
+ending:でしょ	「書けばいいんでしょ」	「쓰면 되잖아」	fix	builtin-ending
+ending:でしょ	「謝ればいいでしょ？」	「사과하면 되잖아?」	fix	builtin-ending
+ending:でしょ	「どうすればいいんでしょうか」	「어떻게 하면 좋을까요」	keep	builtin-ending
+ending:でしょ	「その日に会えばいいでしょう」	「그 날에 만나면 좋을 거예요」	keep	builtin-ending
+ending:でしょ	「明日は晴れるでしょう」	「내일은 개이겠지요」	keep	builtin-ending
+ending:でしょ	「そんなの笑っちゃうでしょ」	「그런 것 웃어버리잖아」	fix	builtin-ending
+phrase:どうでしょ	ケーキを焼いてみたの。どうでしょ？	케이크를 구워 봤어. 어때?	fix	builtin-phrase

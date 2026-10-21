@@ -34,6 +34,13 @@ enum class CacheWrite { Off, Sync };
 // their versions change again.
 enum class UserReload { Off, Auto };
 
+// The speech level of the sentence ends of speech: the text inside 「」, with a quote an
+// earlier line left open. Narration keeps its 다.
+enum class Speech {
+    Soft,    // the plain sentence ends (간다, 학생이다) in 해체 (갈 거야, 학생이야)
+    Strict,  // the sentence ends of the translation (간다, 학생이다)
+};
+
 // The loaded dictionaries. Shared by any number of sessions and threads.
 class Engine {
 public:
@@ -127,6 +134,10 @@ public:
     // dictionaries.
     void Reset();
 
+    // The speech level of later translations; Speech::Soft until set. Reference mode
+    // writes Speech::Strict.
+    void SetSpeech(Speech speech) { speech_ = speech; }
+
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer);
@@ -135,6 +146,7 @@ private:
     const bool reference_;
     const bool cg_;
     const bool misread_;
+    Speech speech_ = Speech::Soft;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

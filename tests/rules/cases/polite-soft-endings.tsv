@@ -1,0 +1,18 @@
+rule	input	expected	kind	layer
+dict:polite-soft-ending	行くんですよ。	가는 거예요.	fix	lookup
+dict:polite-soft-ending	行ったんですよ。	간 거예요.	fix	lookup
+dict:polite-soft-ending	行くんですね。	가는군요.	fix	lookup
+dict:polite-soft-ending	行くんですよね。	가는 거죠.	fix	lookup
+dict:polite-soft-ending	静かなんですよ。	조용해요.	fix	lookup
+dict:polite-soft-ending	静かなんですけど。	조용한데요.	fix	lookup
+dict:polite-soft-ending	学生なんですけど。	학생인데요.	fix	lookup
+dict:polite-soft-ending	行きますけど。	가는데요.	fix	lookup
+dict:polite-soft-ending	行きましたけど。	갔는데요.	fix	lookup
+dict:polite-soft-ending	高いんですけれど。	비싼데요.	fix	lookup
+dict:polite-soft-ending	高いでしょう。	비쌀 거예요.	fix	lookup
+dict:polite-soft-ending	だめですよ。	안 돼요.	fix	lookup
+dict:polite-soft-ending	どうでしょう？	어떨까요?	fix	lookup
+dict:polite-soft-ending	明日行きます。	내일 갑니다.	keep	lookup
+dict:polite-soft-ending	学生です。	학생입니다.	keep	lookup
+dict:polite-soft-ending	昨日行きました。	어제 갔습니다.	keep	lookup
+dict:polite-soft-ending	本当にそうです。	정말로 그렇습니다.	keep	lookup

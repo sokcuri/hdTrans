@@ -1,0 +1,7 @@
+#! layer=words
+# 앞뒤 말과 붙여 읽어야 바로 나뉘는 조사 표현
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+にくださ	에게 주&AE@	M428		DsTu	GN							particle-joins:1
+にください	에게 주세요	N300		Tu	GN							particle-joins:2
+くらいに	3 정도로	S500			GN							particle-joins:3
+ぐらいに	3 정도로	S500			GN							particle-joins:4

@@ -67,7 +67,14 @@ const dict::Snapshot* Dictionary() {
          "うみ\t바다\tN110\tVPl\t\tGN\t67\n"
          "りん\t린\tN110\t\t\tGN\t68\n"
          "あお\t우러러&AY@\tM452\t\t\tGN\t69\n"
-         "し\t&HT@\tM41<\t\t\tGN\t77\n"},
+         "し\t&HT@\tM41<\t\t\tGN\t77\n"
+         "め\t째\tQ110\t\t\tGN\t78\n"
+         "め\t\tQ110\t\t\tGN\t79\n"
+         "わ\t원\tQ110\t\t\tGN\t80\n"
+         "わ\t와\tQ110\t\t\tGN\t81\n"
+         "わ\t\tQ110\t\t\tGN\t82\n"
+         "ん\t응\tQ110\t\t\tGN\t83\n"
+         "ん\t\tQ110\t\t\tGN\t84\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -120,12 +127,13 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{15});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{19});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
         HD_CHECK((r.word == word::ConstraintWord::Source) == !r.source.empty());
-        HD_CHECK((r.reject == word::ConstraintReject::OtherTargets) == !r.target.empty());
+        HD_CHECK((r.reject == word::ConstraintReject::OtherTargets || r.reject == word::ConstraintReject::Target) ==
+                 !r.target.empty());
     }
 }
 
@@ -268,5 +276,32 @@ HD_TEST(constraint_tachidachi_before_agaru) {
         {"一人立ちする", "一人立ちする", "一人立ち", "독립"},
         {"一人立ち", "一人立ち", "一人立ち", "독립"},
         {"一人立ち、", "一人立ち、", "一人立ち", "독립"},
+    });
+}
+
+// め and わ with no numeral among the three characters before them are not the ordinal 째 and
+// the 원 of a sum (化け物め, おわっ); after a quantity (三回め, 5人め) they keep every sense.
+// わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ).
+HD_TEST(constraint_counter_without_number) {
+    CheckCases({
+        {"化け物め", "め", "め", ""},
+        {"ごめ", "め", "め", ""},
+        {"三回め", "め", "め", "째 "},
+        {"5人め", "め", "め", "째 "},
+        {"何度め", "め", "め", "째 "},
+        {"おわ", "わ", "わ", "와 "},
+        {"五わ", "わ", "わ", "원 와 "},
+        {"誤算だったわ", "わ", "わ", ""},
+        {"よろしいですわ", "わ", "わ", ""},
+    });
+}
+
+// ん right after a verb in た, だ or る is not the interjection 응 (終わったん？); ん opening a
+// line keeps it.
+HD_TEST(constraint_n_after_verb) {
+    CheckCases({
+        {"終わったん", "ん", "ん", ""},
+        {"しとるん", "ん", "ん", ""},
+        {"ん", "ん", "ん", "응 "},
     });
 }

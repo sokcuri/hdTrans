@@ -2,6 +2,7 @@
 // The compose stage: the resolved items of a sentence become Korean text written into
 // the texts of their tokens, which are then joined into the output pieces of the
 // sentence.
+#include <cstdint>
 #include <span>
 #include <string>
 #include <string_view>
@@ -15,6 +16,13 @@
 
 namespace hdTrans::output {
 
+// The 「」 and 『』 open at a point of a line, and the number of quotes opened outside any
+// quote before it (with the one an earlier line left open).
+struct QuoteState {
+    int depth = 0;
+    int count = 0;
+};
+
 // The switches of the stage.
 struct Settings {
     int hanjaToHangul = 1;  // 1: kanji left in the text are written as their Hangul reading
@@ -22,7 +30,18 @@ struct Settings {
     bool cleanup = false;   // drop dictionary glosses and doubled generated spaces
     bool text = false;      // input of the text path: kana runs the items drop are kept, particles
                             // alternate by ParticleClass
+    // Text path: the plain sentence ends (간다, 다르다, 학생이다) of the text inside 「」 and
+    // 『』 in 해체 (갈 거야, 달라, 학생이야); quotes is the state at the first token of the
+    // sentence, and the quoteStyles of the line (pipeline::QuoteStyles) keep polite and old
+    // speech.
+    bool casual = false;
+    QuoteState quotes;
+    const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
+
+// The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing
+// bracket outside a quote is ignored), and count counts the quotes opened outside any.
+QuoteState QuotesAfter(QuoteState state, std::string_view text);
 
 // A token of the chunk as the compose stage reads and writes it: its type and text
 // after the per-token stage (the text receives the Korean of the items), its span kind
@@ -85,6 +104,7 @@ private:
     struct Scratch {
         std::string text;   // composed text, " " once consumed
         std::string saved;  // text of a kanji item replaced by its surface
+        bool spoken = false;  // WriteCasual gave the item a casual sentence end
     };
     struct Written {
         int token;
@@ -95,6 +115,9 @@ private:
     };
 
     std::string Build(int i, int action, std::string_view mode);
+    void WriteCasual(int first, int last);
+    char32_t QuotedEnd(int i, int last, bool nested) const;
+    std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);
     void BuildAction(int i, int action, std::string_view mode);
     bool TextGate(int i, std::string_view key);
@@ -168,6 +191,11 @@ namespace internal {
 // index.
 const ResolvedEntry& EntryAt(const ResolvedItem& it, int i);
 inline const ResolvedEntry& Selected(const ResolvedItem& it) { return EntryAt(it, it.selected); }
+
+// The spoken contraction of an 아/어 form that ends a sentence (주어 줘, 되어 돼, 보아 봐)
+// or of a past stem (되었 됐, 주었 줬). Other forms, ㅣ with 어 among them (피어, 아니어),
+// are returned unchanged.
+std::string SpokenInfinitive(std::string_view form);
 
 }  // namespace internal
 

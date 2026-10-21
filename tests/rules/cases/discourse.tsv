@@ -5,3 +5,6 @@ phrase:どしたの	制度を調べた。	제도를 조사했다.	keep	builtin-p
 dict:jisjk:265116	もっとも、雨なら休む。	다만, 비라면 쉰다.	fix	local
 dict:jisjk:265116	もっとも大事な話だ。	무엇보다 소중한 이야기다.	keep	local
 dict:jisjk:265116	もっとも急ぐ必要がある。	무엇보다 서두를 필요가 있다.	keep	local
+phrase:よろしくです	今年も宜しくです！	금년도 잘 부탁해요!	fix	builtin-phrase
+phrase:よろしくです	今年もよろしくどうぞです。	금년도 잘 부탁해요.	fix	builtin-phrase
+phrase:よろしくです	宜しくお願いします。	잘 부탁드립니다.	keep	builtin-phrase

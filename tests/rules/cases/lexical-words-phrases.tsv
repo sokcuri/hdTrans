@@ -1,0 +1,80 @@
+rule	input	expected	kind	layer
+dict:words-phrases:1	風が頬を擽った。	바람이 뺨을 간질였다.	fix	lookup
+dict:words-phrases:2	旅立ちを報せる。	여행을 알린다.	fix	lookup
+dict:words-phrases:3	耳ざわりな音がした。	귀에 거슬리는 소리가 났다.	fix	lookup
+dict:words-phrases:4	耳障りな笑い声だ。	귀에 거슬리는 웃음소리다.	fix	lookup
+dict:words-phrases:5	諒解しました。	양해했습니다.	fix	lookup
+dict:words-phrases:6	全員、左向け左。	전원, 좌향좌.	fix	lookup
+dict:words-phrases:7	右向け右。	우향우.	fix	lookup
+dict:words-phrases:8	彼女のつぶらな瞳が好きだ。	그녀의 둥근 눈동자를 좋아한다.	fix	lookup
+dict:words-phrases:16	敵の前でひるまず立った。	적의 앞에서 기가 죽지 않고 섰다.	fix	lookup
+dict:words-phrases:15	弾を受けてひるんだ。	총알을 받아 기가 죽었다.	fix	lookup
+dict:words-phrases:9	家ん中は暗い。	집안은 어둡다.	fix	lookup
+dict:words-phrases:10	三方向に分かれた。	세 방향으로 나누어졌다.	fix	lookup
+dict:words-phrases:11	仰向けのまま眠る。	위를 보고 누운 채 잔다.	fix	lookup
+dict:words-phrases:12	てことは、行くんだな。	라는 것은, 가는구나.	fix	lookup
+dict:words-phrases:13	窪んだ道を歩く。	움푹 패인 길을 걷는다.	fix	lookup
+dict:words-phrases:14	剣を振りかぶった。	검을 치켜들었다.	fix	lookup
+dict:words-phrases:17	髪型をマッチさせる。	머리 모양을 매치시킨다.	fix	lookup
+dict:words-phrases:18	悶悶と悩む。	번민스럽게 고민한다.	fix	lookup
+dict:words-phrases:19	よーやく終わった。	겨우 끝났다.	fix	lookup
+dict:words-phrases:20	朧げに見える。	희미하게 보인다.	fix	lookup
+dict:words-phrases:21	恙無く終わった。	무사히 끝났다.	fix	lookup
+dict:words-phrases:64	御構いなしに進む。	상관없이 나아간다.	fix	lookup
+dict:words-phrases:23	肉が黒焦げになった。	고기가 숯덩이가 되었다.	fix	lookup
+dict:words-phrases:24	ここら辺は静かだ。	이 근처는 조용하다.	fix	lookup
+dict:words-phrases:25	禁じ手を使う。	금지된 수를 사용한다.	fix	lookup
+dict:words-phrases:26	牛達が鳴く。	소들이 운다.	fix	lookup
+dict:words-phrases:27	らんぼうな人だ。	난폭한 사람이다.	fix	lookup
+dict:words-phrases:28	ちいちゃな手。	작은 손.	fix	lookup
+dict:words-phrases:29	両の眼を閉じた。	두 눈을 닫았다.	fix	lookup
+dict:words-phrases:30	マッタリと過ごす。	느긋하게 보낸다.	fix	lookup
+dict:words-phrases:31	芋畑を耕す。	감자밭을 경작한다.	fix	lookup
+dict:words-phrases:32	傲然と立つ。	오만하게 선다.	fix	lookup
+dict:words-phrases:65	夜毎に泣いた。	밤마다 울었다.	fix	lookup
+dict:words-phrases:34	庭に水だまりができた。	뜰에 웅덩이가 생겼다.	fix	lookup
+dict:words-phrases:35	お前んちに行く。	너희 집에 간다.	fix	lookup
+dict:words-phrases:36	お前ん家に泊まる。	너희 집에 묵는다.	fix	lookup
+dict:words-phrases:37	ここは一か所だけだ。	여기는 한 곳 뿐이다.	fix	lookup
+dict:words-phrases:38	大き目なシャツ。	다소 큰 셔츠.	fix	lookup
+dict:words-phrases:39	乾燥わかめを入れる。	마른 미역을 넣는다.	fix	lookup
+dict:words-phrases:40	古い佇まいの店。	낡은 분위기의 가게.	fix	lookup
+dict:words-phrases:41	今日は一仕事ある。	오늘은 한 가지 일 있다.	fix	lookup
+dict:words-phrases:61	稽古中は静かに。	연습중은 조용하게.	fix	lookup
+dict:words-phrases:62	本調子に戻った。	정상 컨디션에 돌아왔다.	fix	lookup
+dict:words-phrases:42	やばんな風習だ。	야만스러운 풍습이다.	fix	lookup
+dict:words-phrases:43	あるばいとを探す。	아르바이트를 찾는다.	fix	lookup
+dict:words-phrases:44	悩みどころだ。	고민거리다.	fix	lookup
+dict:words-phrases:45	出来レースだった。	짜고 치는 경주였다.	fix	lookup
+dict:words-phrases:46	承知致しました。	알겠습니다.	fix	lookup
+dict:words-phrases:47	お引取り下さい。	돌아가 주세요.	fix	lookup
+dict:words-phrases:48	お越し下さいませ。	와 주십시오.	fix	lookup
+dict:words-phrases:49	呪われろ。	저주 받아라.	fix	lookup
+dict:words-phrases:50	古来より伝わる。	예로부터 전해진다.	fix	lookup
+dict:words-phrases:51	肉を食さず野菜を食べる。	고기를 먹지 않고 야채를 먹는다.	fix	lookup
+dict:words-phrases:52	目も合わせずに通り過ぎた。	눈도 맞추지 않고 지나갔다.	fix	lookup
+dict:words-phrases:53	出掛けに雨が降った。	나가려는 참에 비가 왔다.	fix	lookup
+dict:words-phrases:54	時を追うごとに強くなる。	시간이 지날수록 강해진다.	fix	lookup
+dict:words-phrases:55	日を追って増える。	나날이 늘어난다.	fix	lookup
+dict:words-phrases:56	出会いがしらにぶつかった。	만나자마자 부딪쳤다.	fix	lookup
+dict:words-phrases:57	然るのち出発した。	그런 후 출발했다.	fix	lookup
+dict:words-phrases:58	淫らを知る。	음란함을 안다.	fix	lookup
+dict:words-phrases:59	いわずと知れた名店だ。	말할 것도 없는 유명한 상점이다.	fix	lookup
+dict:words-phrases:60	見た目に寄らず強い。	겉모습과는 다르게 강하다.	fix	lookup
+dict:words-phrases:63	仕置きを受ける。	벌을 받는다.	fix	lookup
+dict:words-phrases:1	擽ったい。	간지럽다.	keep	lookup
+dict:words-phrases:2	報せが届いた。	소식이 도착했다.	keep	lookup
+dict:words-phrases:17	マッチを擦った。	성냥을 문질렀다.	keep	lookup
+dict:words-phrases:15	昼間は暑い。	낮은 덥다.	keep	lookup
+dict:words-phrases:26	私は牛を飼う。	나는 소를 기른다.	keep	lookup
+dict:words-phrases:65	夜に泣いた。	밤에 울었다.	keep	lookup
+dict:words-phrases:34	水たまりを避けた。	웅덩이를 피했다.	keep	lookup
+dict:words-phrases:35	お前は誰だ。	너는 누구냐.	keep	lookup
+dict:words-phrases:23	焦げた匂いがする。	탄 냄새가 난다.	keep	lookup
+dict:words-phrases:61	稽古場に行く。	연습장에 간다.	keep	lookup
+dict:words-phrases:62	調子が悪い。	상태가 안 좋다.	keep	lookup
+dict:words-phrases:51	食べさせる。	먹인다.	keep	lookup
+dict:words-phrases:50	古来の風習。	고래의 풍습.	keep	lookup
+dict:words-phrases:13	窪地に降りた。	허방에 내렸다.	keep	lookup
+dict:words-phrases:21	恙虫病。	쓰쓰가무시병.	keep	lookup
+dict:words-phrases:7	右に曲がる。	오른쪽으로 돈다.	keep	lookup

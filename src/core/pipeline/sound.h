@@ -35,14 +35,15 @@
 //     and before a pause, and then wins over the dictionary words;
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
-//     entry at least as long as the sound's key (without a final と), win.
+//     entry at least as long as the sound's key (without a final と), win; the ending
+//     of an end row does not win over an intj row before a pause or an ellipsis.
 //
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
-// A stutter (な、なにを, だっ、だめ, べ…別に) becomes a stutter mark U+E000 before each
-// separator; the restore stage writes it as the first syllable of the next Korean word
-// (WriteStutters).
+// A stutter (な、なにを, だっ、だめ, べ…別に, ご、ごめ、ごめんなさい) becomes stutter marks
+// before each separator; the restore stage writes them as the start of the next Korean
+// word (WriteStutters).
 #include <cstddef>
 #include <span>
 #include <string>
@@ -53,13 +54,30 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: WriteMasked, CompleteCutOffs, WriteSounds, then RewriteCasualAdjectives;
+// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs, WriteSounds, then
+// RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
 // use ctx.lookup.
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap);
 
 namespace internal {
+
+// Each word spelled out with ・ between its characters for emphasis (さ・い・て・い, 大・好・き,
+// ダ・メ) joined and put between kEmphasisOpen and kEmphasisClose: two or more pieces of one
+// kana or kanji each (with a small kana and one ー, ～ or っ after it; after the first piece
+// also a lone small kana, っ or ー), not next to other kana, kanji or ・ but for a copula or
+// particle after it (さ・い・て・いです). A run of kanji only (赤・青・黄, 謹・賀・新・年) stays.
+// Two pieces are joined only before ！？!?…‥、。」』） and not when both are particles (て・を).
+// A run that starts with katakana is joined only when it is a dictionary key of two or more
+// characters without ー, and two pieces not when the key is a person's name and no common
+// word (ア・イ, スー・チー, ユ・リ; but マ・ジ？). Other runs, their kana in hiragana, are joined
+// when the dictionary or the sound lexicon reads them as words. A run of kana that is not, a
+// list in the order of the kana table or the iroha (あ・い・う, は・ひ・ふ・へ・ほ), the choices
+// after a label (①あ・い, 問１　あ・い), a name (か・ん・こ・れ) or a run with a lone ー or small
+// kana piece is written piece by piece as heard, ・ between the pieces and a lone ー kept
+// (아・이・우, あ・ー 아・ー).
+std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
@@ -86,14 +104,22 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // reads the word: a っ before a kana that does not start a て or た form (まっかせて,
 // いっくぞ, 負っける), and a run of ー, ～ or small vowels that lengthens the kana before
 // it (やーめーて, うるさ～い, 見ぃつけた, 勝ぁああつ), dropped or written as the long vowel
-// (どーだ どうだ, おにーちゃん); a run of two or more with a small vowel after a
-// dictionary word before a shout's ッ, ！ or ？ is dropped (なんだそりゃああぁあッ). A
-// lengthened vowel kana (あぁ) or particle (か～, なぁー), a mark that a word or a sound
-// holds (もっと, せーの, おーい) and a lengthened nickname (うーちゃん) are left alone. The
-// rewrite is kept when a dictionary key then reaches further past the mark than before
-// or, when no key reached past it, after a kanji or, for a lengthening mark, a verb or
-// adjective stem. A ー or ～ that ends a volitional form after a verb stem is written う
-// (いこー いこう). Returns text itself when nothing changes.
+// (どーだ どうだ, おにーちゃん, おねーさん, てーとく ていとく); a run of two or more with a
+// small vowel after a dictionary word before a shout's ッ, ！ or ？ is dropped
+// (なんだそりゃああぁあッ). A lengthened vowel kana (あぁ) or particle (か～, なぁー), a mark
+// that a word or a sound holds (もっと, せーの, おーい) and a lengthened nickname (うーちゃん)
+// are left alone. The rewrite is kept when a dictionary key then reaches further past the
+// mark than before or, when no key reached past it, after a kanji or, for a lengthening
+// mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
+// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
+// A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
+// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
+// dropped (ていとくぅ, ないでぇ, なのぉ). A run with ー that ends a phrase after a word is
+// written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those
+// kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
+// that makes a word of four or more characters (せんせー せんせい). Neither touches a
+// lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
+// after る or て. Returns text itself when nothing changes.
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // korean with the elongation units of a sound match: 'r' for each repeat of the

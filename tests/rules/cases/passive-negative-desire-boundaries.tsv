@@ -6,8 +6,8 @@ dict:passive-observer	先生に気づかれたくなかった。	선생님에게
 dict:passive-cause	気づかれたくないので、隠れる。	들키고 싶지 않기 때문에, 숨는다.	fix	lookup
 dict:passive-cause	気づかれたくなかったから、隠れた。	들키고 싶지 않았으니까, 숨었다.	fix	lookup
 dict:passive-connective	気づかれたくなくて、隠れた。	들키고 싶지 않아서, 숨었다.	fix	lookup
-dict:passive-quotation	「気づかれたくない」と言った。	「들키고 싶지 않다」라고 말했다.	fix	lookup
-dict:passive-quotation	「気づかれたくなかった」と言った。	「들키고 싶지 않았다」라고 말했다.	fix	lookup
+dict:passive-quotation	「気づかれたくない」と言った。	「들키고 싶지 않아」라고 말했다.	fix	lookup
+dict:passive-quotation	「気づかれたくなかった」と言った。	「들키고 싶지 않았어」라고 말했다.	fix	lookup
 dict:passive-condition	気づかれたくなければ、隠れる。	들키고 싶지 않으면, 숨는다.	fix	lookup
 dict:passive-attributive	気づかれたくない人は隠れる。	들키고 싶지 않은 사람은 숨는다.	fix	lookup
 dict:passive-polite	気づかれたくないです。	들키고 싶지 않습니다.	fix	lookup

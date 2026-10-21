@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+pattern:書く筈だ	明日には届く筈だ。	내일에는 닿을 터이다.	fix	builtin-pattern
+pattern:書く筈だ	もう読んだ筈です。	벌써 읽었을 터입니다.	fix	builtin-pattern
+pattern:書く筈だ	彼も来る筈だった。	그도 올 터였다.	fix	builtin-pattern
+pattern:書く筈だ	この道で合っている筈である。	이 길에서 맞고 있을 터이다.	fix	builtin-pattern
+pattern:書く筈だ	そこは静かな筈だ。	거기는 조용할 터이다.	fix	builtin-pattern
+pattern:書く筈だ	彼が来る筈の日	그가 올 터인 날	keep	builtin-pattern
+pattern:高い筈がない	そんな安物がいい筈がない。	그런 싸구려가 좋을 리가 없다.	fix	builtin-pattern
+pattern:高い筈がない	あの部屋が静かな筈もない。	그 방이 조용할 리도 없다.	fix	builtin-pattern
+pattern:高い筈がない	彼が犯人の筈がない。	그가 범인일 리가 없다.	fix	builtin-pattern
+pattern:高い筈がない	そんな筈はない。	그럴 리가 없다.	fix	builtin-pattern
+dict:jisjk:364164	彼が来る筈がない。	그가 올 리가 없다.	fix	lookup
+ending:書く筈	これで終わる筈。	이것으로 끝날 터.	fix	builtin-ending
+ending:書く筈	たしか、その筈だった。	분명히, 그럴 터였다.	keep	builtin-ending

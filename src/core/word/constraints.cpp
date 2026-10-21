@@ -49,6 +49,14 @@ constexpr ConstraintRule kRules[] = {
      ConstraintReject::OtherTargets, "この·その·あの 뒤의 先に는 앞에 (この先に 이 먼저 → 이 앞에). 先に行く는 그대로 먼저", "앞에"},
     {"tachisagari-before-agaru", ConstraintWord::Source, "一人立ち", ConstraintContext::BeforeAgaru,
      ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
+    {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
+     ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
+    {"wa-won-without-number", ConstraintWord::Source, "わ", ConstraintContext::NotAfterQuantity,
+     ConstraintReject::Target, "수 없이 홀로 선 わ는 원이 아님 (だったわ 이었던 원, おわっ 원)", "원"},
+    {"wa-after-predicate", ConstraintWord::Source, "わ", ConstraintContext::AfterPredicate, ConstraintReject::Target,
+     "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요). うわ, おわ는 그대로 와", "와"},
+    {"n-after-verb", ConstraintWord::Source, "ん", ConstraintContext::AfterVerbEnding, ConstraintReject::Target,
+     "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
 };
 
 struct HonorificSuffix {
@@ -67,6 +75,9 @@ constexpr std::u32string_view kNumerals = U"0123456789０１２３４５６７�
 constexpr std::u32string_view kQuantityBreaks = U"、。，．！？!?…「」『』（）() 　";
 
 constexpr std::string_view kOpeningBrackets[] = {"「", "『", "（", "(", "“", "‘", "【", "〈", "《", "［", "["};
+
+// The last characters of a predicate that a sentence-final particle follows.
+constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん"};
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};
@@ -162,6 +173,16 @@ bool NumeralAgo(std::string_view s) {
     return false;
 }
 
+// Whether one of the last three characters of s is a numeral.
+bool EndsInQuantity(std::string_view s) {
+    for (int n = 0; n < 3 && !s.empty(); n++) {
+        const text::Rune r = DecodeLastRune(s);
+        if (kNumerals.find(r.cp) != std::u32string_view::npos) return true;
+        s.remove_suffix(r.size);
+    }
+    return false;
+}
+
 bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
     return std::any_of(list.begin(), list.end(), [s](std::string_view p) { return s.starts_with(p); });
 }
@@ -169,10 +190,10 @@ bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
 // Whether the context of rule holds for the word source of the candidates list: after is
 // the text after it, before the character before it in its token, previous the character
 // before it past spaces and token ends, preceding the text right before it (its token's
-// head, else the token before).
+// head, else the token before), lead the token before and the head.
 bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>& list, std::string_view source,
                  std::string_view after, std::string_view before, std::string_view previous,
-                 std::string_view preceding) {
+                 std::string_view preceding, std::string_view lead) {
     const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?";
     switch (rule.context) {
     case ConstraintContext::Honorific:
@@ -198,6 +219,11 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なる") && !after.starts_with("なるべく") && !after.starts_with("なるほど");
     case ConstraintContext::BeforeAgaru:
         return after.starts_with("上が");
+    case ConstraintContext::AfterPredicate:
+        return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
+                           [&](std::string_view e) { return lead.ends_with(e); });
+    case ConstraintContext::NotAfterQuantity:
+        return !EndsInQuantity(lead);
     case ConstraintContext::LineOpening:
     case ConstraintContext::Elsewhere:
         return ((previous.empty() || StartsWithAny(previous, kOpeningBrackets)) &&
@@ -272,6 +298,8 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     std::string following;
     for (int j = current + 1; j < TokenCount() && following.size() < 32; j++) following += Tok(j).text;
     const std::string_view preceding = !head.empty() || current <= 0 ? head : Tok(current - 1).text;
+    std::string lead(current > 0 ? Tok(current - 1).text : std::string_view());
+    lead += head;
     std::vector<dict::Candidate>& list = found.list;
     for (const ConstraintRule& rule : kRules) {
         std::size_t i = 0;
@@ -283,7 +311,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 !ContextFits(rule, list, source,
                              query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                           : std::string_view(following),
-                             before, previous, preceding)) {
+                             before, previous, preceding, lead)) {
                 i++;
                 continue;
             }
@@ -349,6 +377,12 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             case ConstraintReject::OtherTargets:
                 for (const std::size_t k : same) {
                     if (list[k].target != rule.target) rejected.push_back(k);
+                }
+                if (rejected.size() == same.size()) rejected.clear();
+                break;
+            case ConstraintReject::Target:
+                for (const std::size_t k : same) {
+                    if (list[k].target == rule.target) rejected.push_back(k);
                 }
                 if (rejected.size() == same.size()) rejected.clear();
                 break;

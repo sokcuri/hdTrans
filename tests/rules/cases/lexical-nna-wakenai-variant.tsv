@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないでしょ。	그럴 리 없지요.	fix	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないでしょ。	그럴 리 없지.	fix	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけない。	그럴 리 없다.	fix	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないだろ。	그럴 리 없지.	fix	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけなかった。	그럴 리 없었다.	fix	lookup
@@ -10,7 +10,7 @@ dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないです。	그�
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけなくはない。	그럴 리 없지는 않다.	fix	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないこともない。	그럴 리 없는 것도 아니다.	fix	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	んなわけないし、気にしない。	그럴 리 없고, 신경쓰지 않는다.	fix	lookup
-dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけないでしょ。	그럴 리 없지요.	keep	lookup
+dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけないでしょ。	그럴 리 없지.	keep	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけなかった。	그럴 리 없었다.	keep	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	そんなわけないと思う。	그럴 리 없다고 생각한다.	keep	lookup
 dict:lex-nna-wakenai:contracted-adjective-stem	これはわけない仕事だ。	이것은 수월한 일이다.	keep	lookup

@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+normalize:masu	今から歩きま…す。	지금부터 걷…습니다.	fix	normalize
+normalize:masu	もう寝ま…す！	이제 잡…니다!	fix	normalize
+normalize:masu	昨日は行きま…した。	어제는 갔…습니다.	fix	normalize
+normalize:masu	肉は食べま…せん。	고기는 먹지 않…습니다.	fix	normalize
+normalize:masu	一緒に行きまっす！	함께 갑니다!	fix	normalize
+normalize:masu	いただきまス！	잘 먹겠습니다!	fix	normalize
+normalize:masu	ごちそうになりま・・・す。	대접받···습니다.	fix	normalize
+normalize:masu	水が沸きま―す。	물이 끓―습니다.	fix	normalize
+normalize:masu	まっすぐ歩きます。	똑바로 걷습니다.	keep	normalize
+normalize:masu	いま…すぐ行く。	지금…바로 간다.	keep	normalize
+normalize:masu	いただきまーす。	잘 먹겠습니다.	keep	normalize
+normalize:masu	もう寝ます。	이제 잡니다.	keep	normalize
+normalize:masu	おはようございまーっす！	안녕하세요!	fix	normalize
+normalize:desu	今日は雨で……す。	오늘은 비입……니다.	fix	normalize
+normalize:desu	元気でっす！	건강합니다!	keep	normalize
+normalize:desu	たぶん明日で…しょう。	아마 내일이…지요.	fix	normalize
+normalize:desu	ここで…した。	여기서…했다.	keep	normalize
+normalize:desu	今日は雨です。	오늘은 비입니다.	keep	normalize

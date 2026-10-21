@@ -1,0 +1,68 @@
+#! layer=words
+# 잘못 읽히던 낱말, 한 덩어리로 읽는 복합어와 고정 표현
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+擽	간질&AJ@	M448			GN							words-phrases:1
+報せ	알&AA@	M437	UTs		GN							words-phrases:2
+耳ざわりな	귀에 거슬리는	E0H0			GN							words-phrases:3
+耳障りな	귀에 거슬리는	E0H0			GN							words-phrases:4
+諒解	양해	N110		Hd	GN							words-phrases:5
+左向け左	좌향좌	N110			GN							words-phrases:6
+右向け右	우향우	N110			GN							words-phrases:7
+つぶらな	둥근	E0H0			GN							words-phrases:8
+家ん中	집안	N110	VPl		GN							words-phrases:9
+三方向	세 방향	N110			GN							words-phrases:10
+仰向けのまま	위를 보고 누운 채	N110			GN							words-phrases:11
+てことは	라는 것은	I110			GN							words-phrases:12
+窪	움푹 패&AJ@	M445			GN							words-phrases:13
+振りかぶ	치켜&L4@	M448			GN							words-phrases:14
+ひる	기가 &HT@	M435			GN							words-phrases:15
+ひるまず	기가 죽지 않고	E311			GN							words-phrases:16
+マッチ	매치	N110		Hd	GN	5097	||4 S+1== "させ" S+1== "さ" S+1== "し" S+1== "する"	マッチ는 뒤에 さ·し·する가 오면 매치로 고른다.				words-phrases:17
+悶悶と	번민스럽게	E311			GN							words-phrases:18
+よーやく	겨우	E311			GN							words-phrases:19
+朧げに	희미하게	E311			GN							words-phrases:20
+恙無く	무사히	E311			GN							words-phrases:21
+御構いなし	상관없음	N110			GN							words-phrases:22
+黒焦げ	숯덩이	N110			GN							words-phrases:23
+ここら辺	이 근처	N110			GN							words-phrases:24
+禁じ手	금지된 수	N110			GN							words-phrases:25
+牛達	소들	N110			GN							words-phrases:26
+らんぼうな	난폭한	E0H0			GN							words-phrases:27
+ちいちゃな	작은	E0H0			GN							words-phrases:28
+両の眼	두 눈	N110			GN							words-phrases:29
+マッタリと	느긋하게	E311			GN							words-phrases:30
+芋畑	감자밭	N110			GN							words-phrases:31
+傲然と	오만하게	E311			GN							words-phrases:32
+夜毎	밤마다	E311			GN							words-phrases:33
+水だまり	웅덩이	N110			GN							words-phrases:34
+お前んち	너희 집	N110			GN							words-phrases:35
+お前ん家	너희 집	N110			GN							words-phrases:36
+一か所	한 곳	N110			GN							words-phrases:37
+大き目な	다소 큰	E0H0			GN							words-phrases:38
+乾燥わかめ	마른 미역	N110			GN							words-phrases:39
+佇まい	분위기	N110			GN							words-phrases:40
+一仕事	한 가지 일	N110			GN							words-phrases:41
+やばんな	야만스러운	E0H0			GN							words-phrases:42
+あるばいと	아르바이트	N110			GN							words-phrases:43
+悩みどころ	고민거리	N110			GN							words-phrases:44
+出来レース	짜고 치는 경주	N110			GN							words-phrases:45
+承知致しました	알겠습니다	I110			GN							words-phrases:46
+お引取り下さい	돌아가 주세요	I110			GN							words-phrases:47
+お越し下さいませ	와 주십시오	I110			GN							words-phrases:48
+呪われろ	저주 받아라	I110			GN							words-phrases:49
+古来より	예로부터	E311			GN							words-phrases:50
+食さず	먹지 않고	E311			GN							words-phrases:51
+目も合わせずに	눈도 맞추지 않고	E311			GN							words-phrases:52
+出掛けに	나가려는 참에	E311			GN							words-phrases:53
+時を追うごとに	시간이 지날수록	E311			GN							words-phrases:54
+日を追って	나날이	E311			GN							words-phrases:55
+出会いがしらに	만나자마자	E311			GN							words-phrases:56
+然るのち	그런 후	E311			GN							words-phrases:57
+淫らを	음란함을	E311			GN							words-phrases:58
+いわずと知れた	말할 것도 없는	E0H0			GN							words-phrases:59
+見た目に寄らず	겉모습과는 다르게	E311			GN							words-phrases:60
+稽古中	연습중	I110			GN				replace			words-phrases:61
+本調子	정상 컨디션	I110			GN				replace			words-phrases:62
+仕置き	벌	N110		Hd	GN				replace			words-phrases:63
+御構いなしに	상관없이	E311			GN							words-phrases:64
+夜毎に	밤마다	E311			GN							words-phrases:65

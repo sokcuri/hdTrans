@@ -7496,7 +7496,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 パンちら	판치라	N110			GN						パンちら	w:7488
 パンとサーカス	빵과 서커스	N110			GN						パンとサーカス	w:7489
 パンの木	빵나무	N110			GN						パンのき	w:7490
-パンや	빵집	N110			GN						パンや	w:7491
 パンアメリカンハイウェイ	팬아메리칸 하이웨이	N110			GN						パンアメリカンハイウェイ	w:7492
 パンアメリカンハイウェー	팬아메리칸 하이웨이	N110			GN						パンアメリカンハイウェー	w:7493
 パンアメリカン・ハイウェイ	팬아메리칸 하이웨이	N110			GN						パンアメリカン・ハイウェイ	w:7494
@@ -15795,7 +15794,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 平鱸	넙치농어	N110			GN						ひらすずき	w:15779
 年の差	나이 차	N110			GN				llm			w:15780
 年の離れた	나이 차이가 나는	E010			GN				llm			w:15781
-年より	늙은이	N110	VHn		GN						としより	w:15782
 年余	여 년	N110			GN				xxx llm			w:15783
 年余	일 년 남짓	N110	UMe	Tm	GN				llm		ねんよ	w:15784
 年始状	연하장	N110			GN						ねんしじょう	w:15785
@@ -15925,7 +15923,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 建艦	건함	N110		Hd	GN						けんかん	w:15909
 建艦	건함&AV@	M429			GN						けんかん	w:15910
 建議案	건의안	N110			GN						けんぎあん	w:15911
-廻し	마와시	N110	VCp		GN				xxx llm		まわし	w:15912
+廻し	돌리기	N110	VCp		GN				xxx llm		まわし	w:15912
 廻し	집단 강간	N110			GN				llm		まわし	w:15913
 廻向	회향	N110	UCl	Hd	GN				llm		えこう	w:15914
 廻向	회향&AV@	M429			GN				llm		えこう	w:15915
@@ -25312,7 +25310,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 難事	어려운 일	N110			GN				xxx llm	1		w:25289
 難曲	어려운 곡	N110	VSw		GN				llm		なんきょく	w:25290
 雨がさ	우산	N110			GN						あまがさ	w:25291
-雨が降	비가 &AH@	M428			GN				llm		あめがふる	w:25292
+雨が降	비가 &AH@	M428		Pn	GN				llm		あめがふる	w:25292
 雨じまい	방수	N110	UTt		GN				llm		あまじまい	w:25293
 雨やどり	비 피하기	N110		Hd	GN				llm		あまやどり	w:25294
 雨ガッパ	비옷	N110			GN						あまガッパ	w:25295
@@ -25825,7 +25823,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 駄目人間	한심한 인간	N110			GN				llm			w:25802
 駄菓子屋	과자 가게	N110	VBl		GN				llm		だがしや	w:25803
 駄駄	응석	N110			GN						だだ	w:25804
-駅前	역 앞	N110			GN				xxx llm	1		w:25805
+駅前	역 앞	N110	VPl		GN				xxx llm	1		w:25805
 駆けつけ	달려&AH@	M427			GN				xxx llm	1		w:25806
 駆けつけ三杯	벌주 세 잔	N110	VFd		GN				llm		かけつけさんばい	w:25807
 駆け付け三杯	벌주 세 잔	N110	VFd		GN				llm		かけつけさんばい	w:25808
@@ -26717,3 +26715,15 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 撮りおろ	새로 촬영&AV@	M443									とりおろ	commerce:photography:v2
 録り下ろし音源	신규 녹음 음원	N110									とりおろしおんげん	commerce:recording-audio:n1
 録りおろし音源	신규 녹음 음원	N110									とりおろしおんげん	commerce:recording-audio:n2
+気のせいか	기분 탓인지	E300			GN							word:kinoseika
+小テスト	쪽지 시험	N110			GN							word:shoutesuto
+選り取りみどり	골라잡기	N110			GN							word:yoridori:1
+選り取り見取り	골라잡기	N110			GN							word:yoridori:2
+よりどりみどり	골라잡기	N110			GN							word:yoridori:3
+本当	정말	N110		J3	GN							word:hontou:question
+本当	정말	N110		J4	GN							word:hontou:exclamation
+っぽ	것 $DF@	H7U0			GN	5100	||2 &&2 P-1== "4**" ||4 Y-1== "L0" Y-1== "L8" Y-1== "R는" Y-1== "R던" &&2 P-1== "7**" Y-1== "L4"	っぽ는 관형형 동사나 형용사 뒤에서 것 같다를 고른다.				word:ppoi:predicate
+でしょ	그렇지	P200			GN	3173	||1 G+0== "Hz"	문장 첫머리에서 「でしょう」, 「でしょ」를 ‘그렇지’로 고른다.				word:desho:opening
+以来	만	N110			GN	5101	||1 &&2 S-1== "いつ" D-1= "얼마"	いつ 뒤의 以来를 만으로 고르고 いつ를 얼마로 바꾼다.				word:irai:itsu
+助か	&K5@	M418			GN	5102	||1 &&4 G+0== "Hz" U+0== "った" ||2 G+0== "Ow" S+1== "、" Y+0= "5다"	문장 첫머리에서 홀로 끝나는 助かった를 살았다로 고른다.				word:tasukaru:relief
+一行	한 줄	N110			GN	5103	||2 S-1== "あと" S-1== "もう"	あと·もう 뒤의 一行을 한 줄로 고른다.				word:ichigyou:line

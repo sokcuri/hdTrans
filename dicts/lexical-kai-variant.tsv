@@ -1,0 +1,17 @@
+#! layer=words
+# 廻 표기: 回와 같은 번역
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+廻	&K9@	M428			GN	412	||1 &&2 S-1== "に" D-1= "(으)로"	廻는 앞 표기가 に이면 ‘돌다’로 고르고 그 に를 방향 조사 ‘(으)로’로 바꾼다.				kai-variant:1
+廻	돌&AA@	M433			GN							kai-variant:2
+廻	다&A7@	M448			GN							kai-variant:3
+飛び廻	날아다&A7@	M418			GN							kai-variant:4
+逃げ廻	도망 다&A7@	M428			GN							kai-variant:5
+押し廻	대처해 나&A1@	M443			GN							kai-variant:6
+取り廻	잘 처리&AV@	M443			GN							kai-variant:7
+取り廻	잘 다&CB@	M443			GN							kai-variant:8
+取り廻	둘러&AZ@	M443			GN							kai-variant:9
+手廻し	수동식	I110			GN							kai-variant:10
+手廻し	준비	I110			GN							kai-variant:11
+手廻し	사전 준비&AV@	M449			GN							kai-variant:12
+大廻し	대돌리기	N110			GN							kai-variant:13
+磯廻	후미	N110	VPl		GN							kai-variant:14

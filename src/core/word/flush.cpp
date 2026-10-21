@@ -43,6 +43,7 @@ void Flush(Flusher& f) {
         KaraSource(f);
         NiAfterAdverb(f);
         NoAfterNa(f);
+        ShortPossessive(f);
         DeScene(f);
         YounaBeforeModifier(f);
         ParticleInNext(f);

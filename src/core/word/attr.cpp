@@ -160,11 +160,18 @@ bool Item::CheckLLAttr(int op, rules::Item* wi, int di) {
     return false;
 }
 
+bool Item::StartsSentence() const {
+    if (prev == nullptr) return true;
+    if (prev->prev != nullptr) return false;
+    const std::string_view b = prev->group->surface;
+    return b == "「" || b == "『" || b == "（" || b == "(" || b == "“" || b == "\"";
+}
+
 bool Item::CheckGAttr(std::string_view s, int di) {
     auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly) {
         if (c == "Ow") return IsRuleRightBoundary();
-        if (c == "Hz" && hzOnly) return prev == nullptr;
-        if (c == "Hz" && prev == nullptr) return true;
+        if (c == "Hz" && hzOnly) return StartsSentence();
+        if (c == "Hz" && StartsSentence()) return true;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         return Has(attrs, c);
     };
@@ -293,7 +300,7 @@ bool Item::CheckGobiGAttr(std::string_view s, int di) {
     if (!detail->Yougo()) return false;
     auto chunkMatches = [&](std::string_view c, std::string_view attrs) {
         if (c == "Ow") return IsRuleRightBoundary();
-        if (c == "Hz") return prev == nullptr;
+        if (c == "Hz") return StartsSentence();
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         return Has(attrs, c);
     };

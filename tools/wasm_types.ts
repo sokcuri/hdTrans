@@ -1,4 +1,4 @@
-import { HdTrans, type EhndFiles, type HdTransInfo, type InitOptions, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
+import { HdTrans, type EhndFiles, type HdTransInfo, type InitOptions, type Speech, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
 
 declare const translator: HdTrans;
 declare const enabled: boolean;
@@ -14,6 +14,14 @@ const notString: string = translator.translate('学生', { json: true });
 const notStructured: TranslationResult = translator.translate('学生', { json: false });
 // @ts-expect-error A boolean variable cannot promise only an object.
 const notAlwaysStructured: TranslationResult = translator.translate('学生', { json: enabled });
+
+const level: Speech = 'strict';
+translator.setSpeech(level);
+const strict: string = translator.translate('「学生だ」', { speech: 'strict' });
+const strictJson: TranslationResult = translator.translate('「学生だ」', { json: true, speech: 'soft' });
+const softInit: Promise<HdTrans> = HdTrans.init({ speech: 'soft' });
+// @ts-expect-error Only the named levels exist.
+translator.setSpeech('casual');
 
 const entries: readonly UserDictEntry[] = [
   { ja: '蒼月', ko: '아오츠키', pos: 'surname' },

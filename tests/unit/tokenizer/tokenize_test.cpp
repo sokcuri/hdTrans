@@ -100,8 +100,17 @@ const ScanCase kScanCases[] = {
     {"C:\\Windows\\System32\\drivers\\etc\\hosts"sv, "2/0:C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts 9/0:", nullptr},
     {"abc123def456!!!"sv, "2/0:abc123def456 3/0:!!! 9/0:", nullptr},
     {"1,000,000円"sv, "24/0:1,000,000円 9/0:", nullptr},
+    {"4,867/4,867"sv, "8/0:4,867/4,867 9/0:", nullptr},
+    {"HP：4,867/4,867"sv, "2/0:HP 22/0:： 8/0:4,867/4,867 9/0:", nullptr},
+    {"a4,867"sv, "2/0:a4,867 9/0:", nullptr},
+    {"4，867"sv, "1/0:4,867 9/0:", nullptr},
+    {"１，２３４"sv, "1/0:1,234 9/0:", nullptr},
     {"3.14159"sv, "2/0:3.14159 9/0:", nullptr},
-    {"ver1.2.3"sv, "2/0:ver1 3/0:. 2/0:2.3 9/0:", nullptr},
+    {"4.5/4.5"sv, "2/0:4.5/4.5 9/0:", nullptr},
+    {"４．５"sv, "2/0:4.5 9/0:", nullptr},
+    {"Lv.55"sv, "2/0:Lv.55 9/0:", nullptr},
+    {"Ｌｖ．２"sv, "2/0:Lv.2 9/0:", nullptr},
+    {"ver1.2.3"sv, "2/0:ver1.2.3 9/0:", nullptr},
     {"a.b.c"sv, "2/0:a.b.c 9/0:", nullptr},
     {"100%OFF"sv, "2/0:100%OFF 9/0:", nullptr},
     {"x-1"sv, "2/0:x-1 9/0:", nullptr},
@@ -174,6 +183,9 @@ const ScanCase kScanCases[] = {
     {"あー"sv, "24/0:あ 17/0:ー 9/0:", nullptr},
     {"あーい"sv, "24/0:あーい 9/0:", nullptr},
     {"すごいー！"sv, "24/0:すごい 17/0:ー！ 9/0:", nullptr},
+    // ！ or ？ after a lengthening ～ starts a token of its own, a sentence end like any other.
+    {"すごい～！！"sv, "24/0:すごい 17/0:～ 17/0:！！ 9/0:", nullptr},
+    {"すごい～？"sv, "24/0:すごい 17/0:～ 17/0:？ 9/0:", nullptr},
     {"あ～"sv, "24/0:あ 17/0:～ 9/0:", nullptr},
     {"あ～a"sv, "24/0:あ 17/0:～ 2/0:a 9/0:", nullptr},
     {"あ-a"sv, "24/0:あ 17/0:ー 2/0:a 9/0:", nullptr},
@@ -445,4 +457,12 @@ HD_TEST(tokenizer_stage_text_escape) {
     HD_CHECK_EQ(escaped, std::string("a\\\\b\\tc\\nd\\re\\x01\\x7f\\xff\\xe3\\x81f あ"));
     HD_CHECK(stagetest::UnescapeStageText(escaped) == raw);
     HD_CHECK_EQ(stagetest::EscapeStageText("あい"), std::string("あい"));
+}
+
+HD_TEST(tokenizer_mark_run) {
+    HD_CHECK_EQ(MarkRun("！！"), std::string("!!"));
+    HD_CHECK_EQ(MarkRun("！？！？」"), std::string("!?!?"));
+    HD_CHECK_EQ(MarkRun("？"), std::string("?"));
+    HD_CHECK_EQ(MarkRun("‼⁉⁈"), std::string("!!!?") + "?!");
+    HD_CHECK_EQ(MarkRun("。"), std::string());
 }

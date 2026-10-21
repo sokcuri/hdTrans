@@ -81,6 +81,15 @@ int ClassifySelected(const ResolvedItem& it) {
 
 char32_t FirstRune(std::string_view s) { return text::DecodeRune(s).cp; }
 
+// Whether an adverb is a mimetic said again right after itself (そぼそぼ そぼそぼ): the
+// same surface and Korean, a Korean of two equal halves (부슬부슬).
+bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
+    const std::string_view ko = EntryText(a);
+    const size_t half = ko.size() / 2;
+    return First(Code(a)) == '3' && First(Code(b)) == '3' && a.surface == b.surface && ko == EntryText(b) &&
+           half > 0 && ko.size() % 2 == 0 && ko.substr(0, half) == ko.substr(half);
+}
+
 bool HasRune(std::u32string_view set, char32_t r) { return set.find(r) != std::u32string_view::npos; }
 
 // A character after which a word may start: a space, punctuation other than a closing
@@ -230,6 +239,7 @@ void Composer::Start(std::vector<ResolvedItem>& items, const Settings& settings,
     for (auto& s : state_) {
         s.text.clear();
         s.saved.clear();
+        s.spoken = false;
     }
     written_.clear();
     inflected.clear();
@@ -252,6 +262,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
+        if (settings.casual) WriteCasual(first, last);
     }
     for (int n = static_cast<int>(nodes.size()) - 1; n >= 0; n--) {
         const int begin = n > 0 ? nodes[n - 1] : 0;
@@ -439,6 +450,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (!allowSpacing) return Result(std::move(t), false);
     }
     const std::string_view nextEntry = EntryText(next);
+    if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
     if (!Contains(nextTags, "Tu")) {
@@ -461,11 +473,13 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (next.surface == p) return Result(std::move(t), true);
         }
     }
+    if (Contains(nextEntry, "」") || (!nextEntry.empty() && Closes(FirstRune(nextEntry)))) {
+        return Result(std::move(t), false);
+    }
     if (nextKind != '2') {
         if (Contains(tags, "Bt")) return Result(std::move(t), false);
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
-    if (Contains(nextEntry, "」")) return Result(std::move(t), false);
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
     if (!isLast) {
         if (kind != '1' || WidthOf(t) != 2) return Result(std::move(t), false);
@@ -494,7 +508,10 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     item.tokenIndex - items[previous].tokenIndex == 1) {
                     t.insert(0, " ");
                 }
-                return Result(std::move(t), false);
+                // A number is written apart from a following one-word predicate (12 올랐다);
+                // a counter (3개) and a predicate that starts with the noun it counts
+                // (3시간 들였다) stay attached.
+                return Result(std::move(t), nextKind == '4' && nextEntry.find(' ') == std::string_view::npos);
             }
             if (nd(nextTags)) return Result(std::move(t), true);
             if (WidthOf(t) == 2 && previous >= 0) {
@@ -571,7 +588,8 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
 void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pieces& out) {
     const TokenText& tok = tokens[index];
     if (tok.type == tokenizer::kTypeWideSpace || tok.type == 78 || tok.span != 0 ||
-        (tok.text != "." && tok.text != "!" && tok.text != "?")) {
+        tok.text.empty() || tok.text.find_first_not_of(".!?") != std::string::npos ||
+        (tok.text.size() > 1 && tok.text.find('.') != std::string::npos)) {
         return;
     }
     const size_t next = static_cast<size_t>(index) + 1;

@@ -143,6 +143,12 @@ public:
                 result_.settings.useEhnd = !result_.settings.ehnd->empty();
             }
             else result_.settings.cache = std::move(path);
+        } else if (key == "speech") {
+            if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::String ||
+                !SpeechOf(Lower(Scalar(event_)), result_.settings.speech)) {
+                Error("speech: expected soft or strict");
+                return Skip();
+            }
         } else if (key == "cg" || key == "misread" || key == "reference") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
@@ -193,6 +199,16 @@ private:
 };
 
 }  // namespace
+
+bool SpeechOf(std::string_view name, Speech& out) {
+    constexpr std::pair<std::string_view, Speech> kLevels[] = {{"soft", Speech::Soft}, {"strict", Speech::Strict}};
+    for (const auto& [n, level] : kLevels) {
+        if (n != name) continue;
+        out = level;
+        return true;
+    }
+    return false;
+}
 
 ConfigResult LoadConfig(std::string_view path) {
     ConfigResult result;

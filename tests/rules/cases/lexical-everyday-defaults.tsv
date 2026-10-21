@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:jisjk:374723	「すみません、駅はどこですか」	「죄송합니다, 역은 어디입니까」	fix	defaults
+dict:jisjk:374723	遅れてすみません。	늦어 미안합니다.	keep	local
+dict:jisjk:149220	「この服、すごくいい」	「이 옷, 정말 좋아」	fix	defaults
+dict:jisjk:263870	「それって、どういう意味？」	「그거, 어떤 의미?」	fix	defaults
+dict:word:hontou:question	「本当？」	「정말?」	fix	defaults
+dict:word:hontou:question	「本当！」	「정말!」	fix	defaults
+dict:word:hontou:question	「本当のことを言え」	「사실을 말해라」	keep	defaults
+dict:word:hontou:question	本当に大丈夫だ。	정말로 괜찮다.	keep	defaults
+dict:jisjk:341354	「試合はどうだった？」	「시합은 어땠어?」	fix	defaults
+dict:jisjk:137276	楽しい日々は過ぎ去っちまった。	즐거운 날들은 지나가 버렸다.	fix	defaults
+dict:jisjk:137276	過ぎ去った日々を思う。	지나간 날들을 생각한다.	fix	defaults
+dict:jisjk:362355	それは悪そのものだ。	그것은 악 그 자체다.	fix	local
+dict:jisjk:107992	気のせいか、声が聞こえた。	기분 탓인지, 목소리가 들렸다.	fix	lookup
+dict:jisjk:107992	ただの気のせいだ。	단순한 기분 탓이다.	fix	defaults
+dict:word:shoutesuto	明日は小テストがある。	내일은 쪽지 시험이 있다.	fix	lookup
+dict:word:yoridori:3	ケーキはよりどりみどりだ。	케이크는 골라잡기다.	fix	lookup
+dict:names.132103	駅前にクレープ屋ができた。	역 앞에 크레페 가게가 생겼다.	fix	lookup
+dict:word:irai:itsu	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일 것이다.	fix	local
+dict:word:irai:itsu	それ以来、彼は来ない。	그 이후로, 그는 오지 않는다.	keep	local
+dict:word:ichigyou:line	あと一行だけ読ませて。	더 한 줄만 읽게 해.	fix	local
+dict:word:ichigyou:line	一行は村に着いた。	일행은 마을에 도착했다.	keep	local
+phrase:こうしたい	前からこうしたかったんだ。	전부터 이렇게 하고 싶었다.	fix	builtin-phrase
+phrase:こうしたい	私もそうしたい。	나도 그렇게 하고 싶다.	fix	builtin-phrase
+phrase:こうしたい	こうした問題は多い。	이러한 문제는 많다.	keep	builtin-phrase
