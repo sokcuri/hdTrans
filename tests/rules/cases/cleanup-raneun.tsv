@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+cleanup:raneun	山田という人が来た。	야마다라는 사람이 왔다.	fix	restore
+cleanup:raneun	「待て」という声がした。	「기다려」라는 목소리가 들렸다.	fix	restore
+cleanup:raneun	これは魔法という技術だ。	이것은 마법이라는 기술이다.	fix	restore
+cleanup:raneun	行くと言った。	간다고 했다.	keep	restore
+cleanup:raneun	そうだと言うのか。	그렇다고 말하는 것인가.	keep	restore
+cleanup:raneun	帰れと言う。	돌아가라고 한다.	keep	restore
