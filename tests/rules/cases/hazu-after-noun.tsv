@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+pattern:学生だったはず	彼は医者だったはずだ。	그는 의사였을 것이다.	fix	builtin-pattern
+pattern:学生だったはず	あそこは駅だったはずです。	저기는 역이었을 것입니다.	fix	builtin-pattern
+pattern:学生だったはず	勇者だったはずの男が笑った。	용사였을 터인 남자가 웃었다.	fix	builtin-pattern
+pattern:学生だったはず	そこは森だったはずだが、今は町だ。	거기는 숲이었을 텐데, 지금은 마을이다.	fix	builtin-pattern
+pattern:学生だったはず	彼が犯人だったはずがない。	그가 범인이었을 리가 없다.	fix	builtin-pattern
+pattern:学生だったはず	あの人が先生だったはずもない。	그 사람이 선생님이었을 리도 없다.	fix	builtin-pattern
+pattern:学生だったはず	昨日は雨だったはずなのに。	어제는 비였을 터인데.	fix	builtin-pattern
+pattern:学生だったはず	静かだったはずだ。	조용했을 것이다.	keep	builtin-pattern
+pattern:学生だったはず	ここにいたはずだ。	여기에 있었을 것이다.	keep	builtin-pattern
+pattern:学生だったはず	彼は医者のはずだ。	그는 의사일 것이다.	keep	builtin-pattern
+pattern:学生だったはず	彼が来るはずがない。	그가 올 리가 없다.	keep	builtin-pattern
