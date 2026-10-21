@@ -179,7 +179,18 @@ HD_TEST(pipeline_sound) {
         {"あっはっはっ", "아하하"},
         {"うふふっ", "우후훗"},
         {"ぐおおおおっ", "크오오오옷"},
-        {"ドキドキドキ", "ドキドキドキ"},
+        // An ABAB mimetic repeated over more than its two units is read as one run and
+        // written a block for each pair of units; a single AB unit is not.
+        {"ドキドキ", "두근두근"},
+        {"ドキドキドキ", "두근두근 두근두근"},
+        {"ドキドキドキドキ", "두근두근 두근두근"},
+        {"うずうずうず", "근질근질 근질근질"},
+        {"うずうずうずうずうず", "근질근질 근질근질 근질근질"},
+        {"わくわくわく", "두근두근 두근두근"},
+        {"あんあんあん", "앙앙앙"},
+        {"あんあんあんあん", "앙앙 앙앙"},
+        {"はあはあはあはあ", "하아하아하아 하아"},
+        {"うずうずうずらを見る。", "근질근질 근질근질らを見る。"},
         // Bursts of breath stand alone; in a word they stay.
         {"かはっ……", "카핫……"},
         {"「かッハ……！」", "「캇하……！」"},

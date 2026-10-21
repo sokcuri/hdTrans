@@ -231,6 +231,47 @@ size_t OpaqueLength(std::string_view s, std::span<const std::string> markers) {
     return MarkerLength(s, markers);
 }
 
+// Characters of one AB unit of a mimetic key.
+constexpr size_t kAbabUnit = 2;
+
+// An ono row whose key is ABAB (four kana, A other than B) with a Korean of two
+// equal blocks (うずうず 근질근질).
+bool AbabKey(const SoundRow& row) {
+    if (row.intj || row.lead || row.phrase || row.key.size() != 2 * kAbabUnit) return false;
+    const std::u32string_view key = row.key;
+    if (key[0] != key[2] || key[1] != key[3] || key[0] == key[1]) return false;
+    const std::u32string ko = DecodeText(row.korean);
+    return ko.size() >= 2 && ko.size() % 2 == 0 && ko.substr(0, ko.size() / 2) == ko.substr(ko.size() / 2);
+}
+
+// Whether the sound rows read f[at:] as exactly one AB unit.
+bool UnitIsSound(std::u32string_view f, size_t at, std::u32string_view unit, bool extra) {
+    std::string units;
+    for (const SoundRow& row : SoundRows(f[at], extra)) {
+        size_t end = 0;
+        if (MatchSound(row, f, at, end, units) && end - at == unit.size()) return true;
+    }
+    return false;
+}
+
+// The length in characters of the run of AB units at f[p:] when a plain chain of
+// sounds cannot read it: the lengthening after a unit takes the vowel that starts the
+// next (うずうずうず), an odd last unit has no sound row of its own (ドキドキドキ), or a
+// longer key splits the run (はあはあはあはあ). 0 otherwise. Pairs of units are
+// written as one block each, so no half unit is left.
+size_t AbabRun(const SoundRow& row, std::u32string_view f, size_t p, bool extra) {
+    const std::u32string_view unit = std::u32string_view(row.key).substr(0, kAbabUnit);
+    size_t n = 0;
+    while (p + n + unit.size() <= f.size() && f.substr(p + n, unit.size()) == unit) n += unit.size();
+    if (n < 3 * unit.size()) return 0;
+    const size_t count = n / unit.size();
+    if (!Lengthens(unit[0], unit[1])) {
+        if (count % 2 == 0) return 0;
+        if (UnitIsSound(f, p + n - unit.size(), unit, extra)) return 0;
+    }
+    return n;
+}
+
 // Scans one text for sounds and stutters.
 class SoundText {
 public:
@@ -254,7 +295,8 @@ private:
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) const;
-    bool MatchAt(size_t p, SoundMatch& best) const;
+    bool LongerWordAt(size_t p, size_t n) const;
+    bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PresentTime(size_t end) const;
     std::u32string_view Clause(size_t i) const;
@@ -310,16 +352,37 @@ void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name) 
     }
 }
 
+// Whether a dictionary word longer than n characters starts at character p.
+bool SoundText::LongerWordAt(size_t p, size_t n) const {
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(p, base, user, name);
+    return base > n || user > n;
+}
+
 // The sound at character p: the longest key, then the longest match. A dictionary word
 // that is longer, or a plain-dictionary entry that is at least as long as the key,
 // rules it out; a name-layer sense does not (ドーン, ガチャ).
-bool SoundText::MatchAt(size_t p, SoundMatch& best) const {
+bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     const SoundRow* chosen = nullptr;
     std::string units;
     for (const SoundRow& s : SoundRows(f_[p], ctx_.extraBuiltin)) {
-        if (chosen != nullptr && s.key.size() < chosen->key.size()) break;
+        const bool abab = AbabKey(s);
+        if (chosen != nullptr && s.key.size() < chosen->key.size() && !abab) break;
         size_t end = 0;
         bool ok = MatchSound(s, f_, p, end, units);
+        std::string runKorean;
+        if (ok && abab) {
+            size_t n = AbabRun(s, f_, p, ctx_.extraBuiltin);
+            // A word that starts in the last unit and runs past it (うずら in
+            // うずうずうずら) takes that unit: the run ends before it.
+            while (n >= 3 * kAbabUnit && LongerWordAt(p + n - kAbabUnit, kAbabUnit)) n -= kAbabUnit;
+            if (n >= 2 * kAbabUnit) {
+                end = p + n;
+                const size_t copies = (n / kAbabUnit + 1) / 2;
+                runKorean.assign(s.korean);
+                for (size_t i = 1; i < copies; i++) runKorean += ' ' + s.korean;
+            }
+        }
         if (ok && s.lead) {
             if (!UtteranceStart(p) || !PauseAt(end) || IsKatakanaRune(rs_[p])) continue;
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
@@ -328,14 +391,18 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best) const {
             ok = false;  // a final と is the particle, not katakana ト
         }
         if (ok && (chosen == nullptr || end > best.end)) {
-            std::string korean = units.find('h') != std::string::npos
-                                     ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)), text::Preset::Fan)
-                                     : Lengthen(Reading(s, p, end), units);
+            std::string korean = !runKorean.empty()
+                                     ? std::move(runKorean)
+                                     : units.find('h') != std::string::npos
+                                           ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)),
+                                                            text::Preset::Fan)
+                                           : Lengthen(Reading(s, p, end), units);
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead};
             chosen = &s;
         }
     }
-    if (chosen == nullptr || !Stopped(best)) return false;
+    if (chosen == nullptr) return false;
+    if (!Stopped(best) && !(inChain && best.intj && !chosen->phrase)) return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     size_t base = 0, user = 0, name = 0;
     LongestKeys(p, base, user, name);
@@ -467,7 +534,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
     if (!katakana && !runStart && !afterParticle) return chain;
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
-        if (!MatchAt(i, m)) break;
+        if (!MatchAt(i, m, i > p)) break;
         i = m.end;
         chain.push_back(std::move(m));
     }
@@ -763,7 +830,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     }
     size_t j = i;
     while (j < f.size() && f[j] == U'ッ') j++;
-    if (j > i && (j == f.size() || !IsKana(f[j]) || In(f[j], U"トテ～ー"))) {
+    if (j > i && (j == f.size() || !IsKana(f[j]) || In(f[j], U"トテ～ー") || (row.intj && !row.phrase))) {
         units += '!';
         for (i = j; i < f.size() && In(f[i], U"～ー"); i++) {
         }

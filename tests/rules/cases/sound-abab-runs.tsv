@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+sound:abab	うずうずうず	근질근질 근질근질	fix	sound
+sound:abab	うずうずうずうず	근질근질 근질근질	keep	sound
+sound:abab	うずうずうずうずうず	근질근질 근질근질 근질근질	fix	sound
+sound:abab	ウズウズウズ！	근질근질 근질근질!	fix	sound
+sound:abab	うずうずうずと待つ。	근질근질 근질근질 기다린다.	fix	sound
+sound:abab	胸がどきどきどきする。	가슴이 두근두근 두근두근한다.	fix	sound
+sound:abab	ドキドキドキ	두근두근 두근두근	fix	sound
+sound:abab	わくわくわく	두근두근 두근두근	fix	sound
+sound:abab	うずうずする。	근질근질한다.	keep	sound
+sound:abab	うずうず	근질근질	keep	sound
+sound:abab	あんあんあん	앙앙앙	keep	sound
+sound:abab	あんあんあんあん	앙앙 앙앙	keep	sound
+sound:abab	雨がそぼそぼそぼそぼ降る。	비가 부슬부슬 부슬부슬 내린다.	keep	sound
+sound:abab	うずらを見る。	메추라기를 본다.	keep	sound
