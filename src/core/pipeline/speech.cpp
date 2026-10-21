@@ -112,14 +112,15 @@ std::vector<std::string> OwnTexts(std::string_view line, int depth) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::string_view c = line.substr(at, r.size == 0 ? 1 : r.size);
         at += c.size();
-        const bool opens = r.cp == U'「' || r.cp == U'『';
+        // ｢ and ｣ too: CasualQuotes reads the text before they become 「 and 」.
+        const bool opens = r.cp == U'「' || r.cp == U'『' || r.cp == U'｢';
         if (opens && depth == 0) texts.emplace_back();
         if (opens) {
             depth++;
             if (depth == 2) texts.back() += c;
             continue;
         }
-        if ((r.cp == U'」' || r.cp == U'』') && depth > 0) {
+        if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 1) texts.back() += c;
             continue;
         }
@@ -255,7 +256,8 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::string_view c = line.substr(at, r.size == 0 ? 1 : r.size);
         at += c.size();
-        const bool opens = r.cp == U'「' || r.cp == U'『';
+        // ｢ and ｣ too: CasualQuotes reads the text before they become 「 and 」.
+        const bool opens = r.cp == U'「' || r.cp == U'『' || r.cp == U'｢';
         if (opens && depth == 0) {
             texts.emplace_back();
             styles.push_back(r.cp == U'『' ? kWritten : 0);

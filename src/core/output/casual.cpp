@@ -32,14 +32,14 @@ std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
     for (std::size_t at = 0; at < line.size();) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         at += r.size == 0 ? 1 : r.size;
-        if (r.cp == U'「' || r.cp == U'『') {
+        if (r.cp == U'「' || r.cp == U'『' || r.cp == U'｢') {
             if (depth++ == 0) {
                 polite.push_back(false);
                 own = polite.size() - 1;
             }
             continue;
         }
-        if ((r.cp == U'」' || r.cp == U'』') && depth > 0) {
+        if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) own = 0;
             continue;
         }
@@ -124,9 +124,9 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
     for (std::size_t at = 0; at < line.size();) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::size_t size = r.size == 0 ? 1 : r.size;
-        if (r.cp == U'「' || r.cp == U'『') {
+        if (r.cp == U'「' || r.cp == U'『' || r.cp == U'｢') {
             if (depth++ == 0) quote = ++count;
-        } else if ((r.cp == U'」' || r.cp == U'』') && depth > 0) {
+        } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
         } else if (depth == 1 && quote < styles.size() && styles[quote] == kCasualSpeech) {
             // The word starts after a space or punctuation, or after 그, 이, 저 that do (그것은).
@@ -469,8 +469,9 @@ void Composer::WriteCasual(int first, int last) {
             AskConjecture(i, Clause(before + std::string(own)), own, quoted && !styled)) {
             continue;
         }
-        // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라).
-        if (close != 0 && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
+        // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라); not in
+        // polite or old speech (何でしたっけ).
+        if (close != 0 && !styled && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
             QuestionWord(Clause(before + std::string(own)))) {
             it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(), "더라");
             continue;

@@ -282,7 +282,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             }
         }
     }
-    const auto compose = [&](LineSpeech speech, const StageObserver& observer) {
+    const auto compose = [&](LineSpeech speech, const StageObserver& observer, const TranslationOptions& options) {
         std::vector<output::Sentence> sentences;
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
@@ -300,20 +300,31 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         if (observer.restored) observer.restored(observer.context, steps);
         return steps.line;
     };
-    if (!speech.markedOnly) return compose(speech, observer);
+    if (!speech.markedOnly) {
+        if (!speech.casual) return compose(speech, observer, options);
+        // Soft: every plain quote is casual speech and takes the spoken words (것은 건).
+        std::vector<std::uint8_t> spoken = speech.styles;
+        for (std::uint8_t& style : spoken) {
+            if (style == 0) style = output::kCasualSpeech;
+        }
+        return output::SpokenWords(compose(speech, observer, options), carry.depth, spoken);
+    }
     // A casual quote whose Korean keeps a polite end (고마워요, 좋네요) keeps its plain ends:
     // 해체 next to 해요체 reads as two speakers. The line is composed again without it, or
     // for an observer, which the first pass does not report to.
-    const std::string first = compose(speech, StageObserver{});
+    // The first pass counts no rules either; the line is composed again when they are counted.
+    TranslationOptions trial = options;
+    trial.ruleTally = nullptr;
+    const std::string first = compose(speech, StageObserver{}, trial);
     const std::vector<bool> polite = output::PoliteQuotes(first, carry.depth);
-    bool again = Observes(observer);
+    bool again = Observes(observer) || options.ruleTally != nullptr;
     for (std::size_t k = 0; k < speech.styles.size(); k++) {
         if (speech.styles[k] != output::kCasualSpeech) continue;
         if (polite.size() == speech.styles.size() && !polite[k]) continue;
         speech.styles[k] = 0;
         again = true;
     }
-    return output::SpokenWords(again ? compose(speech, observer) : first, carry.depth, speech.styles);
+    return output::SpokenWords(again ? compose(speech, observer, options) : first, carry.depth, speech.styles);
 }
 
 std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Generated& generated,
