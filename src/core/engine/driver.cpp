@@ -153,10 +153,12 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
 }
 
 // The speech of a line for the compose stage: whether its plain sentence ends become 해체,
-// its quotes at the start of the next chunk and the styles of its quotes.
+// whether its questions take the forms of speech, its quotes at the start of the next chunk
+// and the styles of its quotes.
 struct LineSpeech {
     bool casual = false;
     bool markedOnly = false;
+    bool asked = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -201,13 +203,14 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     output::Settings composeSettings = ComposeSettings(text);
     composeSettings.casual = text && speech.casual;
     composeSettings.casualMarkedOnly = speech.markedOnly;
+    composeSettings.asked = text && speech.asked;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes
     for (std::size_t k = 0; k < analysis.sentences.size(); k++) {
         const word::Sentence& sentence = analysis.sentences[k];
         const std::size_t start = std::min(static_cast<std::size_t>(sentence.first), s.tokens.size());
-        for (; composeSettings.casual && counted < start; counted++) {
+        for (; (composeSettings.casual || composeSettings.asked) && counted < start; counted++) {
             composeSettings.quotes = output::QuotesAfter(composeSettings.quotes, s.tokens.Raw(counted));
         }
         output::Sentence done;
@@ -262,6 +265,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked);
     LineSpeech speech;
     if (!options.reference) {
+        speech.asked = true;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;

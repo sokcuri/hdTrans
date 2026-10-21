@@ -41,6 +41,10 @@ struct Settings {
     bool casual = false;
     // Only the quotes whose style has kCasualSpeech.
     bool casualMarkedOnly = false;
+    // Text path: the questions of speech (WriteCasual) in their spoken forms without casual
+    // too: a plain question in a quote of no style in 해체 (大丈夫か？ 괜찮아?), だろう before
+    // ？ as agreement asked or a wonder.
+    bool asked = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
@@ -131,7 +135,10 @@ private:
 
     std::string Build(int i, int action, std::string_view mode);
     void WriteCasual(int first, int last);
-    char32_t QuotedEnd(int i, int last, bool nested) const;
+    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr) const;
+    bool AskConjecture(int i, std::string_view clause, std::string_view own, bool casual);
+    bool AskPlain(int i, std::string_view own);
+    bool Stative(std::string_view marker) const;
     std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);
     void BuildAction(int i, int action, std::string_view mode);
