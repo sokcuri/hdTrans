@@ -134,6 +134,15 @@ HD_TEST(compose_place_noun_after_dropped_no) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+HD_TEST(compose_untranslated_honorific_spacing) {
+    const CompositionCase cases[] = {
+        {{{"魔王", "110", "", "마왕"}, {"ちゃん", "110", "", ""}, {"の", "200", "", "의"},
+          {"本", "110", "", "책"}},
+         {1, 3, 4}, "마왕의 책."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 HD_TEST(compose_sentence_token_ranges) {
     std::vector<TokenText> tokens(12000);
     for (TokenText& token : tokens) {

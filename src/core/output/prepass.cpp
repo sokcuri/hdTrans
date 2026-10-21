@@ -426,6 +426,20 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             }
         }
     }
+    if (nextIndex == i + 1) {
+        // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
+        // the word after it.
+        constexpr std::string_view kHonorifics[] = {"ちゃん", "さん", "くん", "君", "たん", "様", "さま", "殿", "氏"};
+        while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
+               std::find(std::begin(kHonorifics), std::end(kHonorifics), items[nextIndex].surface) !=
+                   std::end(kHonorifics)) {
+            nextIndex++;
+        }
+        if (nextIndex != i + 1 && nextIndex < count) {
+            nextTags = GAttr(items[nextIndex]);
+            nextKind = First(Code(items[nextIndex]));
+        }
+    }
     if (nextIndex == count) nextIndex = -1;
     const int previous = i - 1;
     // A place or time noun after a の that the rules left untranslated starts a word
