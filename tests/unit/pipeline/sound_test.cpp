@@ -442,14 +442,23 @@ HD_TEST(pipeline_join_spelled_out) {
         {"い・ろ・は・に", "\uE008이로하니\uE009"},
         {"①あ・い", "①\uE008아이\uE009"},
         {"問１　あ・い", "問１　\uE008아이\uE009"},
-        {"は・る", "\uE008하루\uE009"},
+        {"(1) あ・い", "(1) \uE008아이\uE009"},
+        {"あ・イ・う", "\uE008아이우\uE009"},
+        {"き・ゃ・あ", "\uE008きゃあ\uE009"},
+        {"ド・きゅ・う！", "\uE008도큐우\uE009！"},
+        // A word before the end of the line, after a bracket that is no label, with a lone ー
+        // piece or in katakana and hiragana.
+        {"は・る", "\uE008はる\uE009"},
+        {"(笑) さ・い・て・い！", "(笑) \uE008さいてい\uE009！"},
+        {"答え：さ・い・て・い", "答え：\uE008さいてい\uE009"},
+        {"さ・イ・テ・い", "\uE008さいてい\uE009"},
+        {"さ・ー・い・て・い", "\uE008さいてい\uE009"},
         // Unchanged: names, lists, kanji read one by one, katakana that is no word, a piece
         // of more than one kana, a run next to other characters, a lone piece.
         {"ジョン・スミス", "ジョン・スミス"},
         {"赤・青・黄の三色", "赤・青・黄の三色"},
         {"謹・賀・新・年", "謹・賀・新・年"},
         {"ケ・ロ", "ケ・ロ"},
-        {"ド・きゅ・う！", "ド・きゅ・う！"},
         {"スー・チー", "スー・チー"},
         {"愛・たそがれ", "愛・たそがれ"},
         {"元・帝国軍", "元・帝国軍"},
