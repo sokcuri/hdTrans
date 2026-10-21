@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:359324	「ある日、雪が降った」	「어느 날, 눈이 내렸어」	keep	local
+dict:jisjk:359324	「ある店もある」	「있는 가게도 있어」	keep	local
+dict:jisjk:265218	「あと友達も来る」	「그리고 친구도 올 거야」	fix	local
+dict:jisjk:115361	「あと三日で終わる」	「앞으로 3일에 끝나」	keep	local

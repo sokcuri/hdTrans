@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+sound:stutter-pieces	「う――痛い」	「우――아파」	keep	sound

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+L285	「だが、それは違うと思う」	「하지만, 그것은 다르다고 생각해」	current	local
+L285	「だが今さら引き返せない」	「하지만 이제 와서 되돌아갈 수 없어」	current	local
+L1914	「今日は本当に寒かった」	「오늘은 정말로 추웠어」	current	local-ending

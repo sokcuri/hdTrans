@@ -84,8 +84,8 @@ L280	友達たちと海へ行った。	친구들과 바다에 갔다.	current	lo
 L280	女の人たちが笑っていた。	여자들이 웃고 있었다.	current	local
 L281	だから私は反対したんです。	그러니까 나는 반대했습니다.	current	local
 L281	だから今日は早く帰りたい。	그러니까 오늘은 빨리 돌아가고 싶다.	current	local
-L285	「だが、それは違うと思う」	「하지만, 그것은 다르다고 생각해」	current	local
-L285	「だが今さら引き返せない」	「하지만 이제 와서 되돌아갈 수 없어」	current	local
+L285	「だが、それは違うと思う」	「하지만, 그것은 다르다고 생각한다」	current	local
+L285	「だが今さら引き返せない」	「하지만 이제 와서 되돌아갈 수 없다」	current	local
 L289	彼は医者だったらしい。	그는 의사였던 것 같다.	current	local
 L289	学生だった頃の友達に会った。	학생이었던 무렵의 친구를 만났다.	current	local
 L291	私だって！	나도!	current	local
@@ -251,7 +251,7 @@ L1895	「私も一緒に行きたいの」	「나도 함께 가고 싶은거야�
 L1906	このカレーは辛くない。	이 카레는 맵지 않다.	current	local-ending
 L1906	今日はそんなに寒くない。	오늘은 그렇게 춥지 않다.	current	local-ending
 L1914	彼の話は少し長かった。	그의 이야기는 조금 길었다.	current	local-ending
-L1914	「今日は本当に寒かった」	「오늘은 정말로 추웠어」	current	local-ending
+L1914	「今日は本当に寒かった」	「오늘은 정말로 추웠다」	current	local-ending
 L1922	先生達は今会議中です。	선생님들은 지금 회의중입니다.	current	local
 L1922	学生達は静かに試験を受けた。	학생들은 조용하게 시험을 보았다.	current	local
 L1925	私は甘い物が好きです。	나는 단 것을 좋아합니다.	current	local

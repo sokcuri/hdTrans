@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:lead-he-ha	「へ――面白い」	「헤――재미있어」	fix	sound
+sound:lead-he-ha	「は――疲れた」	「하――지쳤어」	fix	sound
+sound:lead-he-ha	「学校へ行く」	「학교에 갈 거야」	keep	sound

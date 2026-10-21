@@ -258,7 +258,7 @@ private:
     std::vector<hdTrans::userdict::SourceEntry> userEntries_;
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
-    hdTrans::Speech speech_ = hdTrans::Speech::Soft;
+    hdTrans::Speech speech_ = hdTrans::Speech::Strict;
     std::string error_;
     std::string dictionaryVersion_;
 };

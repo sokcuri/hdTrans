@@ -219,18 +219,18 @@ async function progressCheck() {
   console.log(`progress: ${ok ? 'ok    ' : 'FAILED'} bar shown during a ${all.split('\n').length}-line translation and hidden after (${r.info})`);
 }
 
-// speechCheck sets 대사 말투 to 엄격하게 and back, and checks that quoted speech
-// keeps its plain -다 only while strict and that the choice is saved.
+// speechCheck sets 대사 말투 to 부드럽게 and back, and checks that quoted speech
+// is softened only while soft and that the choice is saved.
 async function speechCheck() {
   const pick = (value) => evaluate(`(() => { const s = document.getElementById('speech');
     s.value = '${value}'; s.dispatchEvent(new Event('change')); })()`);
-  const soft = (await translate('「明日、海に行く」')).out;
-  await pick('strict');
-  const strict = (await settled()).out;
-  const saved = await evaluate(`localStorage.getItem('hdtrans.speech')`);
+  const strict = (await translate('「明日、海に行く」')).out;
   await pick('soft');
+  const soft = (await settled()).out;
+  const saved = await evaluate(`localStorage.getItem('hdtrans.speech')`);
+  await pick('strict');
   const back = (await settled()).out;
-  const ok = soft !== strict && back === soft && saved === 'strict';
+  const ok = soft !== strict && back === strict && saved === 'soft';
   failed ||= !ok;
   console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
 }

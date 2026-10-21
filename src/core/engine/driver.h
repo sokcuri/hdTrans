@@ -105,7 +105,7 @@ struct TranslationOptions {
     // translation; their user dictionary joins the lookups. Null for none.
     const filter::Filters* filters = nullptr;
     // The speech level of the text inside 「」; Strict with reference.
-    Speech speech = Speech::Soft;
+    Speech speech = Speech::Strict;
 };
 
 // Translates the lines of one call as one document: the registry and the document context

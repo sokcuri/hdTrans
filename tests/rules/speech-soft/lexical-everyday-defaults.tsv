@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:149220	「この服、すごくいい」	「이 옷, 정말 좋아」	fix	defaults

@@ -94,7 +94,7 @@ void Usage(std::FILE* file) {
                "  --userdict PATH        user dictionary file or folder (repeatable)\n"
                "  --ehnd DIR             opt-in Ehnd folder\n"
                "  --each, --raw          independent lines, or word-pipeline-only lines\n"
-               "  --speech LEVEL         speech in 「」: soft (해체, default) or strict (-다)\n"
+               "  --speech LEVEL         speech in 「」: soft (해체) or strict (-다, default)\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"

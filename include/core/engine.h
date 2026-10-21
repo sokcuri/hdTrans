@@ -134,7 +134,7 @@ public:
     // dictionaries.
     void Reset();
 
-    // The speech level of later translations; Speech::Soft until set. Reference mode
+    // The speech level of later translations; Speech::Strict until set. Reference mode
     // writes Speech::Strict.
     void SetSpeech(Speech speech) { speech_ = speech; }
 
@@ -146,7 +146,7 @@ private:
     const bool reference_;
     const bool cg_;
     const bool misread_;
-    Speech speech_ = Speech::Soft;
+    Speech speech_ = Speech::Strict;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

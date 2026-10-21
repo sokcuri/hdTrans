@@ -99,7 +99,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
 | `--no-cg` | CG-lite 손 규칙(`cgRules`, 기본 켬)을 끔: 오독 결정의 후보를 지우거나 고르는 규칙표 |
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
-| `--speech LEVEL` | 대사(「」 안, 앞 줄에서 열린 「」 포함)의 말투. `soft`(기본): 딱딱한 문장 끝 `-다`를 해체로 부드럽게 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야), `strict`: 번역의 `-다`를 그대로 둠. 공손체(です, ます)와 고풍 말투(ておる, じゃ)의 대사, 『』 안, 인용한 말(「…」という)은 그대로 둠. `--reference`에서는 `strict` |
+| `--speech LEVEL` | 대사(「」 안, 앞 줄에서 열린 「」 포함)의 말투. `soft`: 딱딱한 문장 끝 `-다`를 해체로 부드럽게 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야), `strict`(기본): 번역의 `-다`를 그대로 둠. 공손체(です, ます)와 고풍 말투(ておる, じゃ)의 대사, 『』 안, 인용한 말(「…」という)은 그대로 둠. `--reference`에서는 `strict` |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G), `index`(전역 규칙은 PRIO), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
 
@@ -143,7 +143,7 @@ CLI 플래그가 파일보다 우선합니다.
 | `cg` | bool, 기본 `true`. `false`는 `--no-cg` |
 | `misread` | bool, 기본 `false`. `true`는 `--misread` |
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
-| `speech` | `soft`(기본) 또는 `strict`, `--speech`와 같음 |
+| `speech` | `strict`(기본) 또는 `soft`, `--speech`와 같음 |
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
 알 수 없는 키와 잘못된 값은 건너뛰고, 문법 오류 앞의 정상 항목은 유지합니다. 진단은 CLI의 표준 오류,
