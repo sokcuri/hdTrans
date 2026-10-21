@@ -1231,3 +1231,15 @@
 こうしたい	이렇게 하고 싶다	adj
 そうしたい	그렇게 하고 싶다	adj
 ああしたい	저렇게 하고 싶다	adj
+// だっけ after a question word: 더라 (何だっけ 뭐였더라); なんだっけ only as an utterance
+// of its own, not the copula of a noun before it (苦手なんだっけ).
+なんだっけ	뭐였더라	intj
+何だっけ	뭐였더라	phrase
+どうだったっけ	어땠더라	phrase
+どうだっけ	어땠더라	phrase
+どこだっけ	어디였더라	phrase
+誰だっけ	누구였더라	phrase
+いつだっけ	언제였더라	phrase
+そうだっけ	그랬나	phrase
+そうだったっけ	그랬나	phrase
+そーだっけ	그랬나	phrase

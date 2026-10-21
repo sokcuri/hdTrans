@@ -430,3 +430,18 @@
 // 〜たばかり at the end of a sentence (なったばかり 된 지 얼마 안 됐다).
 書いたばかり	쓴 지 얼마 안 됐다	end	prio=-1
 書いたばかりだ	쓴 지 얼마 안 됐다	end	prio=-1
+// っけ: asking what one half remembers, in the spoken forms (言ったっけ 말했나,
+// 行くんだっけ 가는 거였지, 鈴木さんだっけ 스즈키 씨였나).
+書いたっけ	썼나	end	prio=-1
+書いてたっけ	쓰고 있었나	end	prio=-1
+書いてたんだっけ	쓰고 있었나	end	prio=-1
+書くっけ	쓰더라	end	prio=-1
+書くんだっけ	쓰는 거였지	end	prio=-1
+書かないんだっけ	쓰지 않는 거였지	end	prio=-1
+書かなかったっけ	쓰지 않았나	end	prio=-1
+高いんだっけ	높은 거였지	end	prio=-1
+高かったっけ	높았나	end	prio=-1
+静かなんだっけ	조용한 거였지	end	prio=-1
+静かだったっけ	조용했나	end	prio=-1
+学生だっけ	학생이었나	end	prio=-1
+学生なんだっけ	학생이었나	end	prio=-1
