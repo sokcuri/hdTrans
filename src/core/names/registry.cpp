@@ -343,10 +343,14 @@ const std::map<std::string, Name>& Registry::Accepted() {
         return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && !numeral && (f.surname || f.records == 0);
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
-        Name& s = all[x];
-        s.score += c;
-        s.person = true;
-        s.surname = true;
+        // The surname stands for the person alone too, but a common word (北, 上) reads as
+        // that word wherever the full name is not written.
+        if (!Flags(x).common) {
+            Name& s = all[x];
+            s.score += c;
+            s.person = true;
+            s.surname = true;
+        }
         Name& j = all[joined];
         j.score += kThreshold;
         j.person = true;

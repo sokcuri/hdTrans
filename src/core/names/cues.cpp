@@ -559,6 +559,22 @@ DictFlags Registry::Flags(std::string_view s) {
                 }
             }
         }
+        // The words of the plain dictionaries count as the base dictionary's do (ギア,
+        // 艦載機): a name is a word of no dictionary, or one that reads as a person.
+        for (const dict::UserEntry* e : snap_->TextPlain().Search(s, dict::LookupMode::General)) {
+            if (e->key != s || e->nameLayer || e->kana || e->codes == nullptr) continue;
+            f.records++;
+            const std::string_view sem = e->codes->sem.Text(), attr = e->codes->gram.Text();
+            if (sem.starts_with("QPN") || attr.starts_with("Wa") || attr.starts_with("Wb")) {
+                f.person = true;
+                f.surname = f.surname || attr.starts_with("Wa");
+                f.given = f.given || attr.starts_with("Wb");
+            } else if (sem.starts_with("QCT")) {
+                f.city = true;
+            } else {
+                f.common = true;
+            }
+        }
         f.role = roleSem && !f.person && !f.city;
         for (const dict::Record& rec : snap_->NameRecords(s)) {
             if (rec.codes == nullptr || !rec.codes->sem.Text().starts_with("QPN")) continue;
