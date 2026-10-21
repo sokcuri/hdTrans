@@ -129,7 +129,7 @@ dict:jisjk:355883	彼が読んだお手紙だ。	!rule:dict:jisjk:355883	keep	lo
 dict:jisjk:355883	手紙を読んでおいた。	편지를 읽어 두었다.	fix	local
 dict:jisjk:267778	話しておいた。	이야기해 두었다.	fix	local
 dict:jisjk:267778	読んでおいた。	읽어 두었다.	fix	local
-dict:jisjk:265894	私の条件にかなう。	나의 조건에 부합한다.	fix	local
+dict:jisjk:265894	私の条件にかなう。	내 조건에 부합한다.	fix	local
 dict:jisjk:265894	彼にかなう人はいない。	그에게 필적하는 사람은 없다.	fix	local
 dict:jisjk:114763	かまってくれる。	상대해 준다.	fix	local
 dict:jisjk:114763	かまわない。	상관없다.	fix	local

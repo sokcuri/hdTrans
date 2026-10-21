@@ -238,7 +238,7 @@ L1810	彼の名前はあれ？	그의 이름은 저것?	current	local
 L1832	それ嘘じゃん。	그것거짓말야.	current	local
 L1832	今日は休みじゃん。	오늘은 휴일야.	current	local
 L1840	ひが昇る。	히가 오른다.	current	local
-L1865	実はこれが私の宝物なんだよ。	실은 이것이 나의 보물이야.	current	local
+L1865	実はこれが私の宝物なんだよ。	실은 이것이 내 보물이야.	current	local
 L1865	あいつはいつもああなんだよ。	저녀석은 언제나 아야.	current	local
 L1865	それはなんだよ？	그것은 뭐야?	current	local
 L1865	本当なんだよ。	사실이야.	current	local
@@ -298,7 +298,7 @@ L2084	学生として、ルールは守ります。	학생으로서 룰은 지�
 L2084	友人として、彼の夢を応援したい。	친구로서 그의 꿈을 응원하고 싶다.	current	local
 L2085	私が一番の年上でした。	내가 제일의 연상이었습니다.	current	local
 L2085	私が部屋の掃除をします。	내가 방의 청소를 합니다.	current	local
-L2087	私の妹は大学生です。	나의 여동생은 대학생입니다.	current	local
+L2087	私の妹は大学生です。	내 여동생은 대학생입니다.	current	local
 L2087	私に連絡をください。	나에게 연락을 주세요.	current	local
 L2090	彼が歌うのを聞いて、感動した。	그가 노래하는 것을 들어, 감동했다.	current	local-ending
 L2090	雨が降るのを待ってから出かけた。	비가 오는 것을 기다리고 나서 나갔다.	current	local-ending
@@ -380,7 +380,7 @@ L2468	話の内容がまだわからない。	이야기의 내용을 아직 모�
 L2475	静かなことが好きな人です。	조용한 일을 좋아하는 사람입니다.	current	local
 L2475	そんなことを言わないでください。	그런 일을 말하지 말아 주세요.	current	local
 L2476	おかしなことを言うね。	이상한 것을 말하는군.	current	local
-L2486	私の姉は看護師です。	나의 언니는 간호사입니다.	current	local
+L2486	私の姉は看護師です。	내 언니는 간호사입니다.	current	local
 L2486	あちらが駅の入口です。	저쪽이 역의 입구입니다.	current	local
 L2528	友人といる。	친구와 있다.	current	local
 L2568	先生に本を読んでいただいた。	선생님이 책을 읽어 주었다.	current	local
@@ -438,7 +438,7 @@ L2831	本当は知っているんじゃないか。	사실은 알고 있지 않�
 L2831	そこで泣いているんじゃないよ。	거기서 울고 있지 않아.	current	local-ending
 L2835	早く寝た方がいいよ。	빨리 자는 것이 좋아.	current	local-ending
 L2835	少し休んだ方がいいと思う。	조금 쉬는 것이 좋다고 생각한다.	current	local-ending
-L2837	彼女は私の前に立った。	그녀는 나의 앞에 섰다.	current	local
+L2837	彼女は私の前に立った。	그녀는 내 앞에 섰다.	current	local
 L2837	子供が先生の前に座った。	아이가 선생님의 앞에 앉았다.	current	local
 L2874	箱の中を見る。	상자안을 본다.	current	local
 L2907	最近は朝晩が寒くなってきた。	최근에는 조석이 추워졌다.	current	local
@@ -456,7 +456,7 @@ L2962	京都巡りツアーに参加する。	교토 순회 투어에 참가한�
 L2963	店員さんに道を聞いた。	점원에 길을 물었다.	current	local
 L2963	運転手さんにお礼を言った。	운전기사에 감사 인사를 했다.	current	local
 L2975	あれはうちの猫よ。	저것은 우리 고양이야.	current	local
-L2975	今日は私の誕生日よ。	오늘은 나의 생일이야.	current	local
+L2975	今日は私の誕生日よ。	오늘은 내 생일이야.	current	local
 L2989	梨がへった。	배가 줄었다.	current	local
 L3007	どうもすみませんが、教えてください。	정말로 죄송합니다만, 가르쳐 주세요.	fix	local
 L3044	ホテルはネットで予約出来ます。	호텔은 넷에서 예약 할 수 있습니다.	current	local
@@ -560,7 +560,7 @@ L3557	私は母に本を読んでもらえた。	나는 어머니에게 책을 �
 L3581	私には妹が二人います。	나에게는 여동생이 두 사람 있습니다.	current	local
 L3581	母には内緒にしてください。	어머니에게는 비밀로 해 주세요.	current	local
 L3587	いいか、よく聞けよ。	좋은가, 잘 들어.	current	local-ending
-L3587	それは君の荷物ではないか。	그것은 너의 짐이 아닌가.	current	local-ending
+L3587	それは君の荷物ではないか。	그것은 네 짐이 아닌가.	current	local-ending
 L3597	電話ないし、メールで連絡する。	전화없고, 메일로 연락한다.	current	local
 L3598	涙が出る程美味しい。	눈물이 나올 정도로 맛있다.	current	local-ending
 L3602	あまりに高くて買えないよ。	너무나 비싸서 살 수 없어.	current	local-ending
@@ -615,7 +615,7 @@ L3955	毎日薬を飲んで欲しい。	매일약을 먹었으면 좋겠다.	cur
 L3955	約束を忘れないで欲しい。	약속을 잊지 않으면 좋겠다.	current	local
 L3969	まあでも、仕方ないですね。	뭐 그렇지만, 어쩔 수 없네요.	current	local
 L3972	わたしに手紙が届きました。	나에게 편지가 도착했습니다.	current	local
-L3972	これはわたしの新しい靴です。	이것은 나의 새로운 구두입니다.	current	local
+L3972	これはわたしの新しい靴です。	이것은 내 새로운 구두입니다.	current	local
 L3975	先生に宿題を出しました。	선생님에게 숙제를 냈습니다.	current	local
 L3975	母に誕生日の花を贈った。	어머니에게 생일의 꽃을 선물했다.	current	local
 L3999	その案が候補にあがった。	그 안이 후보에 올랐다.	current	local

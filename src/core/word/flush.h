@@ -79,6 +79,7 @@ void ReturnTo(Flusher& f);
 void KaraSource(Flusher& f);
 void NiAfterAdverb(Flusher& f);
 void NoAfterNa(Flusher& f);
+void ShortPossessive(Flusher& f);
 void DeScene(Flusher& f);
 void YounaBeforeModifier(Flusher& f);
 void ParticleInNext(Flusher& f);
