@@ -57,6 +57,8 @@ constexpr ConstraintRule kRules[] = {
      "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요). うわ, おわ는 그대로 와", "와"},
     {"n-after-verb", ConstraintWord::Source, "ん", ConstraintContext::AfterVerbEnding, ConstraintReject::Target,
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
+    {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
+     "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
 };
@@ -83,6 +85,9 @@ constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い"
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};
+// What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
+// ていただく).
+constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
 constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
 
@@ -226,6 +231,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                            [&](std::string_view e) { return lead.ends_with(e); });
     case ConstraintContext::NotAfterQuantity:
         return !EndsInQuantity(lead);
+    case ConstraintContext::AfterTeNotAdjective:
+        return (preceding.ends_with("て") || preceding.ends_with("で")) &&
+               !StartsWithAny(after, kAdjectiveOrHumbleTails);
     case ConstraintContext::NotBeforeNoun: {
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;

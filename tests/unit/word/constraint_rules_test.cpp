@@ -76,7 +76,10 @@ const dict::Snapshot* Dictionary() {
          "ん\t응\tQ110\t\t\tGN\t83\n"
          "ん\t\tQ110\t\t\tGN\t84\n"
          "そう言った\t그런\tA9D0\t\t\tGN\t85\n"
-         "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"},
+         "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"
+         "いた\t아$AA@\tH7N0\t\t\tGN\t87\n"
+         "いた\t손상&C6@\tM425\t\t\tGN\t88\n"
+         "い\t&HN@\tM417\t\t\tGN\t89\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -129,7 +132,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{20});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{21});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -278,6 +281,18 @@ HD_TEST(constraint_tachidachi_before_agaru) {
         {"一人立ちする", "一人立ちする", "一人立ち", "독립"},
         {"一人立ち", "一人立ち", "一人立ち", "독립"},
         {"一人立ち、", "一人立ち、", "一人立ち", "독립"},
+    });
+}
+
+// いた right after て or で is the past of いる unless an adjective ending, 致す or 頂く
+// follows it (見ていたい, でいたします, ていただく).
+HD_TEST(constraint_ita_after_te) {
+    CheckCases({
+        {"捨てていたんです", "いたんです", "いた", ""},
+        {"見ていたな", "いたな", "いた", ""},
+        {"見ていたい", "いたい", "いた", "아$AA@ 손상&C6@"},
+        {"部屋でいたします", "いたします", "いた", "아$AA@ 손상&C6@"},
+        {"肩がいたんだ", "いたんだ", "いた", "아$AA@ 손상&C6@"},
     });
 }
 

@@ -32,6 +32,7 @@ enum class ConstraintContext : uint8_t {
     AfterPredicate,     // right after た, だ, る, う, い, す or ん in the token or the token before (だったわ, ですわ)
     NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
     NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
+    AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
 };
 
 // The senses a rule rejects.
