@@ -984,6 +984,70 @@ void JiBeforeJiman(Flusher& f) {
     }
 }
 
+namespace {
+
+// The Korean of a のか word: its ending, or the word itself when it has none (なのか).
+std::string_view NokaText(const Item* it) {
+    if (const Entry* d = it->DirectEntry(it->DirectIndex())) return d->dst;
+    if (const Entry* e = it->group->At(it->selected); e != nullptr && !it->detail->Yougo()) return e->dst;
+    return {};
+}
+
+bool Noka(const Item* it) {
+    const std::string_view s = it->DirectGroup() != nullptr ? it->DirectSurface() : std::string_view(it->group->surface);
+    return s.ends_with("のか") && !NokaText(it).empty();
+}
+
+bool PunctuationItem(const Item* it) {
+    const std::string_view s = it->group->surface;
+    return s == "、" || s == "," || s == "。" || s == "." || s == "…" || s == "‥" || s == "？" || s == "?" ||
+           s == "！" || s == "!" || s == "」" || s == "』";
+}
+
+// The question in 지 of t (것일까 것인지, 건가 건지, 인가 인지, 는가 는지); "" when t has
+// none of them at its end. t in 지 is itself.
+std::string NokaInJi(std::string_view t) {
+    if (t.ends_with("지")) return std::string(t);
+    constexpr std::pair<std::string_view, std::string_view> kForms[] = {
+        {"것일까", "것인지"}, {"건가", "건지"}, {"인가", "인지"}, {"는가", "는지"}};
+    for (const auto& [from, to] : kForms) {
+        if (t.ends_with(from)) return std::string(t.substr(0, t.size() - from.size())) + std::string(to);
+    }
+    return {};
+}
+
+void WriteNoka(Item* it, std::string_view s) {
+    if (it->DirectEntry(it->DirectIndex()) != nullptr) {
+        it->AssignDirectSlot(it->DirectIndex(), s);
+    } else {
+        it->AssignEntrySurface(it->selected, s);
+    }
+}
+
+}  // namespace
+
+void ParallelNoka(Flusher& f) {
+    std::vector<Item*> run;
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!Noka(it) || (it->next != nullptr && !PunctuationItem(it->next))) continue;
+        run.push_back(it);
+    }
+    if (run.size() < 2) return;
+    // Every clause but the last is followed by a comma.
+    for (std::size_t k = 0; k + 1 < run.size(); k++) {
+        const std::string_view s = run[k]->next->group->surface;
+        if (s != "、" && s != ",") return;
+    }
+    std::vector<std::string> forms;
+    for (const Item* it : run) {
+        forms.push_back(NokaInJi(NokaText(it)));
+        if (forms.back().empty()) return;
+    }
+    for (std::size_t k = 0; k < run.size(); k++) {
+        if (forms[k] != NokaText(run[k])) WriteNoka(run[k], forms[k]);
+    }
+}
+
 void ParticleInNext(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* n = it->next;

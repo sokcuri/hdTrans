@@ -87,6 +87,8 @@ void DeScene(Flusher& f);
 void YounaBeforeModifier(Flusher& f);
 void ParticleInNext(Flusher& f);
 void JiBeforeJiman(Flusher& f);
+// Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
+void ParallelNoka(Flusher& f);
 void ComitativeTo(Flusher& f);
 void NounTo(Flusher& f);
 

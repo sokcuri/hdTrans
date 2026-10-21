@@ -50,6 +50,7 @@ void Flush(Flusher& f) {
         YounaBeforeModifier(f);
         ParticleInNext(f);
         JiBeforeJiman(f);
+        ParallelNoka(f);
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);
