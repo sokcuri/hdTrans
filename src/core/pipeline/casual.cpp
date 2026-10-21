@@ -45,6 +45,8 @@ bool Shiren(std::string_view s, size_t pos, Match& m) {
 }
 
 // (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
+// or (やら|[くにとゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a character other
+// than kana; なら after a noun is the conditional (君ならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
     auto tail = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -64,6 +66,18 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     for (std::string_view w : {"わか", "分か", "判", "知", "つま", "たま"}) {
         p = pos;
         if (Lit(s, p, w) && Lit(s, p, "ん") && tail(p)) return true;
+    }
+    for (std::string_view w : {"やら", "なら"}) {
+        p = pos;
+        if (w == "なら" && !OneOf(s, p, U"くにとゃばて")) continue;  // not after a noun: 君ならねぇ、
+        if (!Lit(s, p, w)) continue;
+        m.group[1] = Span(s, pos, p);
+        if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえー")) continue;
+        if (CharOrEnd(s, p, U"なよぜぞしんかけだっ", m, 2)) return true;
+        size_t q = p;
+        if (Take(s, q, [](char32_t c) { return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～'; })) {
+            return Done(s, m, p, p, 2);  // before a kanji or punctuation: ならねえ相手, やらねぇ。
+        }
     }
     return false;
 }
