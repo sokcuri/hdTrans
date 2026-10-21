@@ -734,8 +734,8 @@ size_t SoundText::WordLen(size_t p) const {
 }
 
 // The length of the と, or the て of って, that makes an ono row ending at character i
-// an adverb, or 0: the particle must not start a longer word (とても) nor come before
-// katakana.
+// an adverb, or 0: the particle must not start a longer word (とても) that reaches at
+// least as far as the word after it (とお of とお尻 does not), nor come before katakana.
 size_t SoundText::Adverbial(size_t i) const {
     const std::u32string_view rs = rs_;
     if (i >= rs.size() || (i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]))) return 0;
@@ -743,7 +743,11 @@ size_t SoundText::Adverbial(size_t i) const {
     if (i + 1 < rs.size() && IsJapaneseRune(rs[i + 1])) {
         size_t base = 0, user = 0, name = 0;
         LongestKeys(i, base, user, name);
-        if (base > 1) return 0;
+        if (base > 1) {
+            size_t nextBase = 0, nextUser = 0, nextName = 0;
+            LongestKeys(i + 1, nextBase, nextUser, nextName);
+            if (base >= 1 + std::max(nextBase, nextUser)) return 0;
+        }
     }
     return 1;
 }
