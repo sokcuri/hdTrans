@@ -7524,7 +7524,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 お年玉	세배돈	I110	VMo		GN				jisjk:40560		
 お年玉	새해 선물	I110			GN				jisjk:117464		
 お年賀	연하	N110			GN				jisjk:267825		
-お店	가게	N110			GN				jisjk:114861		
+お店	가게	N110	VPl		GN				jisjk:114861		
 お座なり的な	무책임한	E0H0			GN				jisjk:149768		
 お座成り	무성의%A1@	G8U0			GN				jisjk:2147		
 お座成り	임시 변통	N110			GN				jisjk:165308		
@@ -107246,7 +107246,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 且座	차도의 하나	N110			GN				jisjk:232489		
 且来	앗소	N130	QCTVPl		GN				jisjk:270170		
 丕寧子	비녕자	N130	QPN		GN				jisjk:204683		
-世	세상	N110			GN				jisjk:115916		
+世	세상	N110	VPl		GN				jisjk:115916		
 世	세	N110		On	GN	1918	||1 P-1== "1**"	世는 앞말이 명사이면 ‘세’를 고른다.	jisjk:258964		
 世じん	세진	N110			GN				jisjk:198434		
 世すて人	은둔자	I110	VHn		GN				jisjk:74568		
