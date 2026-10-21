@@ -138,6 +138,7 @@ private:
     char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr) const;
     bool AskConjecture(int i, std::string_view clause, std::string_view own, bool casual);
     bool AskPlain(int i, std::string_view own);
+    void AskWord(int i, int last);
     bool Stative(std::string_view marker) const;
     std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);

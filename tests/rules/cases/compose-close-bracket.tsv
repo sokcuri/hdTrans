@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 compose:close-bracket	「え、あの、なんで」	「어, 저, 어째서」	fix	compose
 compose:close-bracket	「なんで」	「어째서」	fix	compose
-compose:close-bracket	「なんで？」	「어째서?」	keep	compose
+compose:close-bracket	「なんで？」	「왜?」	keep	compose
 compose:close-bracket	なんで行くの？	어째서 가는 거야?	keep	compose
 compose:close-bracket	「どうして」	「어째서」	keep	compose
 compose:close-bracket	（なんで）	(어째서)	fix	compose
