@@ -435,8 +435,8 @@ HD_TEST(pipeline_join_spelled_out) {
         {"ちょ・っ・と", "\uE008ちょっと\uE009"},
         {"さ・い・て・いです", "\uE008さいてい\uE009です"},
         {"う・そ。", "\uE008うそ\uE009。"},
-        // Kana that are no word, a list in the order of the kana table or the iroha, the
-        // choices after a label and two kana without a pause after them are read kana by kana.
+        // Kana that are no word, a list in the order of the kana table or the iroha and the
+        // choices after a label are read kana by kana.
         {"そ・ふ・ゆ", "\uE008소후유\uE009"},
         {"は・ひ・ふ・へ・ほ", "\uE008하히후헤호\uE009"},
         {"い・ろ・は・に", "\uE008이로하니\uE009"},
@@ -446,13 +446,20 @@ HD_TEST(pipeline_join_spelled_out) {
         {"あ・イ・う", "\uE008아이우\uE009"},
         {"き・ゃ・あ", "\uE008きゃあ\uE009"},
         {"ド・きゅ・う！", "\uE008도큐우\uE009！"},
-        // A word before the end of the line, after a bracket that is no label, with a lone ー
-        // piece or in katakana and hiragana.
-        {"は・る", "\uE008はる\uE009"},
+        // A word before punctuation, after a bracket that is no label or in katakana and
+        // hiragana.
+        {"は・る！", "\uE008はる\uE009！"},
         {"(笑) さ・い・て・い！", "(笑) \uE008さいてい\uE009！"},
         {"答え：さ・い・て・い", "答え：\uE008さいてい\uE009"},
         {"さ・イ・テ・い", "\uE008さいてい\uE009"},
-        {"さ・ー・い・て・い", "\uE008さいてい\uE009"},
+        {"さ・ー・い・て・い", "사・ー・이・테・이"},
+        // Two pieces at the end of a line or two particles: kana by kana; a lone ー or small kana
+        // piece: piece by piece, every piece kept.
+        {"う・そ", "\uE008우소\uE009"},
+        {"て・を！", "\uE008테오\uE009！"},
+        {"あ・ー", "아・ー"},
+        {"あ・ゃ", "아・야"},
+        {"）あ・い", "）\uE008아이\uE009"},
         // Unchanged: names, lists, kanji read one by one, katakana that is no word, a piece
         // of more than one kana, a run next to other characters, a lone piece.
         {"ジョン・スミス", "ジョン・スミス"},

@@ -451,8 +451,9 @@ bool KanaOrder(std::u32string_view rs, size_t i, size_t end) {
 }
 
 // Whether the run at rs[i] follows a label of a list or a question (①あ・い, 問１　あ・い・う,
-// (1) あ・い, ア．あ・い): a digit, a circled number, or a digit or a letter or kana standing
-// alone before ）) .．:：; not a word before them ((笑) さ・い・て・い, 答え：ひ・み・つ).
+// 問　あ・い, 第１問 あ・い, (1) あ・い, 問題ア．あ・い): a digit, a circled number, 問, or a digit,
+// a Latin letter or a katakana standing alone or after a kanji before ）) .．:：; not a word
+// before them ((笑) さ・い・て・い, 答え：ひ・み・つ).
 bool AfterLabel(std::u32string_view rs, size_t i) {
     size_t k = i;
     while (k > 0 && (rs[k - 1] == U' ' || rs[k - 1] == U'　')) k--;
@@ -460,14 +461,41 @@ bool AfterLabel(std::u32string_view rs, size_t i) {
     const auto digit = [](char32_t c) { return (c >= U'0' && c <= U'9') || (c >= U'０' && c <= U'９'); };
     const auto letter = [](char32_t c) {
         return (c >= U'A' && c <= U'Z') || (c >= U'a' && c <= U'z') || (c >= U'Ａ' && c <= U'Ｚ') ||
-               (c >= U'ａ' && c <= U'ｚ') || IsKatakanaRune(c) || IsHiraganaRune(c);
+               (c >= U'ａ' && c <= U'ｚ') || (IsKatakanaRune(c) && c != U'ー');
     };
     const char32_t c = rs[k - 1];
-    if (digit(c) || (c >= 0x2460 && c <= 0x24FF) || (c >= 0x3220 && c <= 0x3243) || (c >= 0x3251 && c <= 0x32BF)) return true;
+    if (digit(c) || c == U'問' || (c >= 0x2460 && c <= 0x24FF) || (c >= 0x3220 && c <= 0x3243) ||
+        (c >= 0x3251 && c <= 0x32BF)) {
+        return true;
+    }
     if (!In(c, U")）.．:：") || k < 2) return false;
     const char32_t l = rs[k - 2];
     if (digit(l)) return true;
-    return letter(l) && (k < 3 || !(letter(rs[k - 3]) || IsKanjiRune(rs[k - 3])));
+    return letter(l) && (k < 3 || !letter(rs[k - 3]));
+}
+
+// Whether the two-piece run at rs[i:end] is two particles (て・を, の・に, は・が).
+bool ParticlePair(std::u32string_view rs, size_t i, size_t end) {
+    return end == i + 3 && In(rs[i], U"はがをにのでとへもやかて") && In(rs[i + 2], U"はがをにのでとへもやかて");
+}
+
+// The run at rs[i:end] read piece by piece as heard, ・ between the pieces and a lone ー kept
+// (あ・い 아・이, あ・ー 아・ー, あ・ゃ 아・야).
+std::u32string Literal(std::u32string_view rs, size_t i, size_t end) {
+    std::u32string out;
+    for (size_t k = i; k < end;) {
+        size_t q = k;
+        while (q < end && rs[q] != U'・') q++;
+        const std::u32string piece(rs.substr(k, q - k));
+        if (piece == U"ー") {
+            out += piece;
+        } else {
+            out += DecodeText(ReadKana(EncodeText(ToHiragana(piece))));
+        }
+        if (q < end) out.push_back(U'・');
+        k = q + 1;
+    }
+    return out;
 }
 
 bool IsWordRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r) || r == U'・'; }
@@ -784,40 +812,49 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
         // Kana only, hiragana or both: a run that is no word is read kana by kana.
         const bool kana = std::none_of(joined.begin(), joined.end(), [](char32_t c) { return IsKanjiRune(c); });
         const bool hiragana = std::any_of(joined.begin(), joined.end(), [](char32_t c) { return IsHiraganaRune(c); });
-        bool word = true;
+        // Two pieces are a word only before explicit punctuation (ば・か！, not ば・か at the end
+        // of a line); a lone ー piece keeps the run literal (あ・ー), and a run with a lone ー
+        // or small kana piece that is not joined is read piece by piece (あ・ゃ 아・야).
+        const bool closed = end < rs.size() && In(rs[end], U"！？!?…‥、。」』）");
+        bool dash = false, lone = false;
+        for (size_t k = i + 1; k < end; k++) {
+            if (rs[k - 1] != U'・' || (k + 1 < end && rs[k + 1] != U'・')) continue;
+            dash = dash || rs[k] == U'ー';
+            lone = lone || rs[k] == U'ー' || IsSmallVowel(rs[k]) || In(rs[k], U"ゃゅょゎャュョヮァィゥェォ");
+        }
+        bool word = !dash;
         size_t kata = 0;
         while (kata < joined.size() && IsKatakanaRune(joined[kata])) kata++;
         if (kata > 0) {
             std::u32string key = joined.substr(0, kata);
             while (!key.empty() && In(key.back(), U"ーッ")) key.pop_back();
             word = key.size() >= 2 && key.find(U'ー') == std::u32string::npos &&  // a name: スー・チー
+                   (ends.size() > 2 || closed) &&                                  // バ・ン
                    (!e.Tags(key).empty() || !e.Tags(ToHiragana(key)).empty()) &&  // a name: ア・イ
                    !(ends.size() == 2 && e.NameKey(key) && !e.CommonWordKey(key));  // ユ・リ, not マ・ジ
-            if (!word && !hiragana) continue;  // katakana stay for the word stage (ア・イ 아·이)
+            word = word && !dash;
+            if (!word && !hiragana && !lone) continue;  // katakana stay for the word stage (ア・イ 아·이)
         } else {
-            // A word the dictionary reads; two kana pieces only before a pause or the end of
-            // the line. A list, a label's choices or a name are read kana by kana (あ・い・う 아·이·우).
-            // Without a lone ー (す・ー・ご・い), kana in hiragana (さ・イ・テ・い).
-            std::u32string core;
-            for (size_t k = i; k < end; k++) {
-                if (rs[k] != U'・' && !(rs[k] == U'ー' && k > i && rs[k - 1] == U'・')) core.push_back(rs[k]);
-            }
-            core = ToHiragana(core);
-            const bool beforePause =
-                end >= rs.size() || IsPause(rs[end]) || SpelledTail(std::u32string_view(rs).substr(end));
-            word = !AfterLabel(rs, i) && !KanaOrder(rs, i, end) &&
+            // A word the dictionary reads; two kana pieces only before punctuation and not two
+            // particles (て・を). A list, a label's choices or a name are read kana by kana
+            // (あ・い・う 아·이·우).
+            const std::u32string core = ToHiragana(joined);  // kana in hiragana: さ・イ・テ・い
+            word = !dash && !AfterLabel(rs, i) && !KanaOrder(rs, i, end) &&
                    !(hiragana && e.NameKey(core, true) && !e.WordKey(core)) &&
                    (e.ReadsAll(core) || Emphasis::LexiconKey(ToKatakana(core), ctx.extraBuiltin)) &&
-                   (!kana || ends.size() > 2 || beforePause);
+                   (!kana || ends.size() > 2 || (closed && !ParticlePair(rs, i, end)));
             joined = core;
         }
         if (!word) {
             if (!kana) continue;
-            const std::string heard = ReadKana(EncodeText(ToHiragana(joined)));
             out.append(rs, at, i - at);
-            out.push_back(kEmphasisOpen);
-            out += DecodeText(heard);
-            out.push_back(kEmphasisClose);
+            if (lone) {
+                out += Literal(rs, i, end);
+            } else {
+                out.push_back(kEmphasisOpen);
+                out += DecodeText(ReadKana(EncodeText(ToHiragana(joined))));  // か・ん・こ・れ 칸・코・레
+                out.push_back(kEmphasisClose);
+            }
             at = end;
             i = end - 1;
             changed = true;

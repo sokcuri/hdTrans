@@ -68,13 +68,15 @@ namespace internal {
 // kana or kanji each (with a small kana and one ー, ～ or っ after it; after the first piece
 // also a lone small kana, っ or ー), not next to other kana, kanji or ・ but for a copula or
 // particle after it (さ・い・て・いです). A run of kanji only (赤・青・黄, 謹・賀・新・年) stays.
+// Two pieces are joined only before ！？!?…‥、。」』） and not when both are particles (て・を).
 // A run that starts with katakana is joined only when it is a dictionary key of two or more
 // characters without ー, and two pieces not when the key is a person's name and no common
-// word (ア・イ, スー・チー, ユ・リ; but マ・ジ). Other runs, their kana in hiragana and a lone ー
-// left out, are joined when the dictionary or the sound lexicon reads them as words, two
-// kana pieces only before a pause or the end of the line. A run of kana that is not, a list in
-// the order of the kana table or the iroha (あ・い・う, は・ひ・ふ・へ・ほ), the choices after a
-// label (①あ・い, (1) あ・い) or a name (か・ん・こ・れ) is written kana by kana as heard (아·이·우).
+// word (ア・イ, スー・チー, ユ・リ; but マ・ジ？). Other runs, their kana in hiragana, are joined
+// when the dictionary or the sound lexicon reads them as words. A run of kana that is not, a
+// list in the order of the kana table or the iroha (あ・い・う, は・ひ・ふ・へ・ほ), the choices
+// after a label (①あ・い, 問１　あ・い), a name (か・ん・こ・れ) or a run with a lone ー or small
+// kana piece is written piece by piece as heard, ・ between the pieces and a lone ー kept
+// (아・이・우, あ・ー 아・ー).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).

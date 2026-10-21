@@ -19,9 +19,9 @@ sound:spelled-out	は・ひ・ふ・へ・ほ	하·히·후·헤·호	fix	sound
 sound:spelled-out	か・ん・こ・れ！	칸·코·레!	fix	sound
 sound:spelled-out	ユ・リ	유·리	keep	sound
 sound:spelled-out	お・は・よ～！	안·녕~!	fix	sound
-sound:spelled-out	ば・か	바·보	fix	sound
-sound:spelled-out	う・そ	거·짓·말	fix	sound
-sound:spelled-out	す・き	좋·아	fix	sound
+sound:spelled-out	ば・か	바·카	fix	sound
+sound:spelled-out	う・そ	우·소	fix	sound
+sound:spelled-out	す・き	스·키	fix	sound
 sound:spelled-out	い・く！	간·다!	fix	sound
 sound:spelled-out	し・ね！	죽·어·라!	fix	sound
 sound:spelled-out	「や・だ」	「싫·어」	fix	sound
@@ -35,4 +35,25 @@ sound:spelled-out	(1) あ・い	(1) 아·이	fix	sound
 sound:spelled-out	あ・イ・う	아·이·우	keep	sound
 sound:spelled-out	さ・イ・テ・い！	최·저!	fix	sound
 sound:spelled-out	き・ゃ・あ	꺄·아	fix	sound
-sound:spelled-out	す・ー・ご・い	대·단·해	fix	sound
+sound:spelled-out	す・ー・ご・い	스·-·고·이	fix	sound
+sound:spelled-out	ば・か！	바·보!	fix	sound
+sound:spelled-out	て・を	테·오	fix	sound
+sound:spelled-out	の・に	노·니	fix	sound
+sound:spelled-out	は・が	하·가	fix	sound
+sound:spelled-out	か・き	카·키	fix	sound
+sound:spelled-out	さ・し	사·시	fix	sound
+sound:spelled-out	た・ち	타·치	fix	sound
+sound:spelled-out	あ・か	아·카	fix	sound
+sound:spelled-out	あ・い	아·이	fix	sound
+sound:spelled-out	い・ろ	이·로	fix	sound
+sound:spelled-out	バ・ン	바·응	keep	sound
+sound:spelled-out	問　あ・い	문 아·이	fix	sound
+sound:spelled-out	第１問 あ・い	제1문 아·이	fix	sound
+sound:spelled-out	問題ア．あ・い	문제아. 아·이	fix	sound
+sound:spelled-out	）あ・い	) 아·이	fix	sound
+sound:spelled-out	あ・ー	아·-	keep	sound
+sound:spelled-out	あ・ー・ー	아·-·-	keep	sound
+sound:spelled-out	は・ー	하·-	fix	sound
+sound:spelled-out	え・ー	에·-	fix	sound
+sound:spelled-out	そ・ー・だ	소·-·다	fix	sound
+sound:spelled-out	あ・ゃ	아·야	keep	sound
