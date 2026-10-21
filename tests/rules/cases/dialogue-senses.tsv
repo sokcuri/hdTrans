@@ -59,4 +59,13 @@ dict:jisjk:265314	僕にどうこうできる話じゃない。	나에게 어떻
 dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 말아라.	keep	local
 dict:jisjk:78475	兄は予備校に通っている。	형은 입시학원에 다니고 있다.	fix	lookup
 dict:jisjk:171364	画材を買いに行く。	화구를 사러 간다.	fix	lookup
+dict:jisjk:94308	違う、そうじゃない。	아니다, 그렇지 않다.	fix	local
+dict:jisjk:94308	いや、違うよ。	아니, 아니야.	fix	local
+dict:jisjk:94308	え、違うの？	어, 아니야?	fix	local
+dict:jisjk:94308	違います。	아닙니다.	fix	local
+dict:jisjk:94308	「違う違う、逆だよ」	「아니야 아니야, 반대야」	fix	local
+dict:jisjk:94308	答えが違う。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:94308	全然違う。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:94308	違う人が来た。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:114502	ちがう！	아니다!	fix	local
 compose:aniya-casual	「勝つことだけが目的ではありませんよ」	「이기는 것만이 목적이 아니에요」	fix	compose

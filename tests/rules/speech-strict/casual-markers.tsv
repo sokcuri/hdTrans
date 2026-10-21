@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:speech-casual-marked	「違う。そうじゃないよ」	「달라. 그렇지 않아」	fix	compose
+compose:speech-casual-marked	「違う。そうじゃないよ」	「아니야. 그렇지 않아」	fix	compose
 compose:speech-casual-marked	「もう全部食べちゃった。おいしかった」	「벌써 전부 먹어 버렸어. 맛있었어」	fix	compose
 compose:speech-casual-marked	「そんなの知らねえ。俺は関係ない」	「그런 거 몰라. 나는 관계없어」	fix	compose
 compose:speech-casual-marked	「ずっと待ってる。寒いね」	「쭉 기다리고 있어. 춥네」	fix	compose
