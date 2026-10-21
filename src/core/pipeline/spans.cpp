@@ -139,14 +139,15 @@ Match StutterSpan(std::string_view s) {
     return {bytes, output::SpanOpen};
 }
 
-// A drawl span: kDrawlMark, the pause marks and kDrawlMark.
+// A drawl span: kDrawlMark, kLeadDrawlMark or kPastLeadDrawlMark, the pause marks and the
+// same mark.
 Match DrawlSpan(std::string_view s) {
     const text::Rune open = text::DecodeRune(s);
-    if (open.cp != kDrawlMark) return {};
+    if (open.cp != kDrawlMark && open.cp != kLeadDrawlMark && open.cp != kPastLeadDrawlMark) return {};
     for (size_t n = open.size; n < s.size();) {
         const text::Rune r = text::DecodeRune(s.substr(n));
         n += r.size;
-        if (r.cp == kDrawlMark) return {n, output::SpanOpen};
+        if (r.cp == open.cp) return {n, output::SpanOpen};
     }
     return {};
 }

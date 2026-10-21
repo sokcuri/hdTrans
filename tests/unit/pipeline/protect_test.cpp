@@ -65,9 +65,10 @@ HD_TEST(pipeline_cut_spans) {
         // Stutter marks with their separators.
         {"\xEE\x80\x80、\xEE\x80\x80、あ", "〖2\xEE\x80\x80、\xEE\x80\x80、〗あ"},
         {"\xEE\x80\x80……あ\xEE\x80\x80・あ", "〖2\xEE\x80\x80……〗あ〖2\xEE\x80\x80〗・あ"},
-        // Drawl spans from mark to mark; an unclosed mark is foreign.
+        // Drawl spans from mark to the same mark; an unclosed mark is foreign.
         {"です\uE005……\uE005。", "です〖2\uE005……\uE005〗。"},
-        {"です\uE005…\uE005\uE005―\uE005", "です〖2\uE005…\uE005〗〖2\uE005―\uE005〗"},
+        {"です\uE006…\uE006\uE005…\uE005", "です〖2\uE006…\uE006〗〖2\uE005…\uE005〗"},
+        {"です\uE007―\uE007", "です〖2\uE007―\uE007〗"},
         {"です\uE005…", "です〖1\uE005〗…"},
         // Foreign runs end at white space; ASCII, half-width forms and CP932 symbols are
         // not foreign; invalid bytes are.

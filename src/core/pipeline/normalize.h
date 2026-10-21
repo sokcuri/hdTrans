@@ -30,6 +30,12 @@ std::string JoinNasai(std::string_view text);
 // only are written after the ending as a drawl span (kDrawlMark), others are dropped.
 std::string JoinMasu(std::string_view text);
 
+// A word joined to です, でした, でしょう cut off by …‥・―─ when no kana or ー ～ follows,
+// or the particles of JoinMasu and no kana (好き…です 好きです, 静か…ですね). The marks are
+// written after the ending as a drawl span (kLeadDrawlMark, for でした kPastLeadDrawlMark).
+// Not after が, を or a request form (ください, なさい).
+std::string JoinPausedCopula(std::string_view text);
+
 // The spoken and old-fashioned spellings the dictionary does not read in their plain
 // form: an adjective or verb stem in katakana (ウザい うざい), じゃね？ and 良くね？,
 // ねえ after は or も, the contracted ている and いる, じゃない of an appeal (じゃん) or a

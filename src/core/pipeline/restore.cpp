@@ -1,5 +1,6 @@
 #include "core/pipeline/restore.h"
 
+#include <algorithm>
 #include <map>
 #include <string>
 #include <string_view>
@@ -226,6 +227,20 @@ size_t DrawlPoint(std::u32string_view w) {
     return tail < n ? n - tail : n;
 }
 
+// DrawlPoint moved before the copula or 하다 the ending starts with: 입 or 합 before 니다
+// 니까 (최저……입니다); with past, also 이었, 였 or 했 before 습니다 습니까 (학교……였습니다).
+size_t LeadDrawlPoint(std::u32string_view w, bool past) {
+    const size_t p = DrawlPoint(w);
+    if (p == w.size()) return p;
+    if (w[p] == U'니' && (w[p - 1] == U'입' || w[p - 1] == U'합')) return p - 1;
+    if (!past || w[p] != U'습') return p;
+    if (p >= 2 && w[p - 1] == U'었' && w[p - 2] == U'이') return p - 2;
+    if (w[p - 1] == U'였' || w[p - 1] == U'했') return p - 1;
+    return p;
+}
+
+bool IsDrawlMark(char32_t r) { return r == kDrawlMark || r == kLeadDrawlMark || r == kPastLeadDrawlMark; }
+
 // Whether r ends a word: white space, punctuation or a closing bracket.
 bool EndsWord(char32_t r) {
     return r == U' ' || r == U'\t' || r == U'\n' || Contains(U"、。，．！？!?,.:;…‥・―─—～ー」』）)］]】〕〉》\"'", r);
@@ -385,14 +400,15 @@ std::string WriteStutters(std::string_view s) {
 
 std::string WriteDrawls(std::string_view s) {
     const std::u32string rs = Runes(s);
-    if (!Contains(rs, kDrawlMark)) return std::string(s);
+    if (std::none_of(rs.begin(), rs.end(), IsDrawlMark)) return std::string(s);
     std::u32string out;
     for (size_t i = 0; i < rs.size(); i++) {
-        if (rs[i] != kDrawlMark) {
+        if (!IsDrawlMark(rs[i])) {
             out.push_back(rs[i]);
             continue;
         }
-        const size_t close = rs.find(kDrawlMark, i + 1);
+        const char32_t mark = rs[i];
+        const size_t close = rs.find(mark, i + 1);
         if (close == std::u32string::npos) continue;
         std::u32string marks;
         for (size_t k = i + 1; k < close; k++) {
@@ -412,7 +428,8 @@ std::string WriteDrawls(std::string_view s) {
         if (start == end) continue;
         if (close + 1 == rs.size() || EndsWord(rs[close + 1])) out.resize(end);
         const std::u32string_view word = std::u32string_view(out).substr(start, end - start);
-        out.insert(start + DrawlPoint(word), marks);
+        out.insert(start + (mark == kDrawlMark ? DrawlPoint(word) : LeadDrawlPoint(word, mark == kPastLeadDrawlMark)),
+                   marks);
     }
     return Utf8(out);
 }

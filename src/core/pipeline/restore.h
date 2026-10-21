@@ -60,12 +60,14 @@ std::string WriteDropped(std::string_view s);
 // after it (past spaces, marks and separators) is dropped with its separator.
 std::string WriteStutters(std::string_view s);
 
-// Each drawl span (kDrawlMark, pause marks, kDrawlMark) after a Hangul word written as its
-// marks, in the Korean form of the tokenizer (・ ·), inside the word before the polite
-// ending: before 습니다 습니까 읍시다, else 니다 니까 시다 (먹겠…습니다, 입…니다), before 지요
-// 까요 네요 군요, else before the last syllable (고마워…요), at the end of a one-syllable
-// word. Spaces between the word and the span go unless a word follows. A span with no
-// Hangul word before it is dropped.
+// Each drawl span (a drawl mark, pause marks, the same mark) after a Hangul word written as
+// its marks, in the Korean form of the tokenizer (・ ·), inside the word. For kDrawlMark
+// they go before the polite ending: before 습니다 습니까 읍시다, else 니다 니까 시다 (먹겠…습니다,
+// 입…니다), before 지요 까요 네요 군요, else before the last syllable (고마워…요), at the
+// end of a one-syllable word. For kLeadDrawlMark they go before 입 or 합 of 입니다 합니다
+// (좋아…합니다), for kPastLeadDrawlMark also before 이었 였 했 of 습니다 (조용…했습니다).
+// Spaces between the word and the span go unless a word follows. A span with no Hangul
+// word before it is dropped.
 std::string WriteDrawls(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
@@ -78,9 +80,12 @@ constexpr char32_t kStutterMark = 0xE000;
 // After the marks of a longer stutter piece, one mark for each kana of the word the piece
 // does not reach (ごめ、 of ごめんなさい: 2 kStutterMark, 4 kStutterRest).
 constexpr char32_t kStutterRest = 0xE004;
-// Encloses the pause marks normalize cut out of a polite ending (いただきま…す), written
-// after the ending (WriteDrawls).
+// Enclose the pause marks normalize cut out of a polite ending (いただきま…す), from
+// before です or でしょう (好き…です) and from before でした, written after the ending
+// (WriteDrawls).
 constexpr char32_t kDrawlMark = 0xE005;
+constexpr char32_t kLeadDrawlMark = 0xE006;
+constexpr char32_t kPastLeadDrawlMark = 0xE007;
 
 namespace internal {
 

@@ -195,6 +195,13 @@ HD_TEST(pipeline_write_drawls) {
         {"갑시다\uE005…\uE005!", "갑…시다!"},
         {"그렇겠지요\uE005…\uE005", "그렇겠…지요"},
         {"고마워요\uE005…\uE005", "고마워…요"},
+        // Before the copula or 하다: 입 합 before 니다, and for でした 이었 였 했 before 습니다.
+        {"좋아합니다\uE006……\uE006\uE005……\uE005", "좋아……합……니다"},
+        {"어떻습니까\uE006…\uE006?", "어떻…습니까?"},
+        {"노력했습니다\uE006…\uE006", "노력했…습니다"},
+        {"조용했습니다\uE007…\uE007", "조용…했습니다"},
+        {"화객선이었습니다\uE007…\uE007", "화객선…이었습니다"},
+        {"조용하네요\uE006…\uE006", "조용하…네요"},
         // ・ in its Korean form; the space written as if a word followed the span goes before
         // punctuation and stays before a word.
         {"받습니다\uE005・・・\uE005", "받···습니다"},

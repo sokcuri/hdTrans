@@ -99,6 +99,28 @@ HD_TEST(pipeline_join_masu) {
     Check(JoinMasu, cases);
 }
 
+HD_TEST(pipeline_join_paused_copula) {
+    // \uE006 encloses the marks of a pause before です or でしょう, \uE007 before でした.
+    const Case cases[] = {
+        {"好き……です"sv, "好きです\uE006……\uE006"sv},
+        {"静か…ですね。"sv, "静かですね\uE006…\uE006。"sv},
+        {"いい…ですか？"sv, "いいですか\uE006…\uE006？"sv},
+        {"二度寝…でしょうか？"sv, "二度寝でしょうか\uE006…\uE006？"sv},
+        {"静か――でした。"sv, "静かでした\uE007――\uE007。"sv},
+        {"カレー・・・です"sv, "カレーです\uE006・・・\uE006"sv},
+        {"好き……です\uE005……\uE005"sv, "好きです\uE006……\uE006\uE005……\uE005"sv},
+        // Other marks, a following kana, no word before, a case particle or a request form.
+        {"元気、ですね"sv, "元気、ですね"sv},
+        {"かい・です"sv, "かい・です"sv},
+        {"そう…ですって"sv, "そう…ですって"sv},
+        {"……ですが"sv, "……ですが"sv},
+        {"私が…ですか？"sv, "私が…ですか？"sv},
+        {"お任せください……です。"sv, "お任せください……です。"sv},
+        {"2300…です"sv, "2300…です"sv},
+    };
+    Check(JoinPausedCopula, cases);
+}
+
 HD_TEST(pipeline_spoken_forms) {
     const Case cases[] = {
         {"マジでウザい！"sv, "マジでうざい！"sv},
@@ -290,6 +312,9 @@ HD_TEST(pipeline_normalize_sequence) {
     const Case text[] = {
         {"|お兄様《おにいさま》、ｺﾞﾒﾝ、なさい"sv, "|お兄様《おにいさま》、ゴメンなさい"sv},
         {"ごめん…なさい、ござい、ます"sv, "ごめんなさい、ございます"sv},
+        // The time is read before a pause before です is joined.
+        {"マルフタマルマル…です"sv, "0200…です"sv},
+        {"好き……で……す"sv, "好きです\uE006……\uE006\uE005……\uE005"sv},
     };
     for (const Case& c : text) HD_CHECK_EQ(Normalize(c.in, LineContext{.document = false, .female = false}), std::string(c.want));
 }

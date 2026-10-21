@@ -8,7 +8,8 @@
 //   5. spoken and old-fashioned spellings (SpokenForms);
 //   6. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
 //   7. casual contractions (RewriteCasual);
-//   8. the military time in digits (RewriteMilitaryTime).
+//   8. the military time in digits (RewriteMilitaryTime);
+//   9. a word cut from the copula by a pause joined (JoinPausedCopula).
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
@@ -25,7 +26,7 @@ std::string Normalize(std::string_view line, const LineContext& ctx) {
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
     text = JoinNasai(NormalizeForms(text));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
-    return RewriteMilitaryTime(text);
+    return JoinPausedCopula(RewriteMilitaryTime(text));
 }
 
 namespace internal {
@@ -180,14 +181,45 @@ bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// marks as a drawl span (kDrawlMark, marks, kDrawlMark) when DrawlMarks holds; nothing
-// for other marks (、 ー).
-std::string DrawlSpan(std::string_view marks) {
+// A word cut from the copula by a pause: ([ぁ-ゖァ-ヺー一-龥々])([…‥・―─]+)(です|でした|でしょう)
+// (P?)([^ぁ-ゖァ-ヺー～]|$) as groups 1, 4, 2, 5 and 3, with P the particles of EndingEnd;
+// not after が, を, ください, 下さい or なさい.
+bool SplitPausedCopula(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const auto wordChar = [](char32_t c) {
+        return IsHiraganaClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー' || IsKanjiClass(c);
+    };
+    if (!Take(s, p, wordChar)) return false;
+    const size_t word = p;
+    const std::string_view before = s.substr(0, word);
+    if (before.ends_with("が") || before.ends_with("を") || before.ends_with("ください") ||
+        before.ends_with("下さい") || before.ends_with("なさい")) {
+        return false;
+    }
+    while (OneOf(s, p, U"…‥・―─")) continue;
+    if (!DrawlMarks(Span(s, word, p))) return false;
+    for (std::string_view w : {"です", "でした", "でしょう"}) {
+        size_t r = p, e = 0, t = 0;
+        if (!Lit(s, r, w) || !EndingEnd(s, r, true, e, t)) continue;
+        m.group[1] = Span(s, pos, word);
+        m.group[2] = Span(s, p, r);
+        m.group[3] = Span(s, e, t);
+        m.group[4] = Span(s, word, p);
+        m.group[5] = Span(s, r, e);
+        m.end = t;
+        return true;
+    }
+    return false;
+}
+
+// marks as a drawl span (mark, marks, mark) when DrawlMarks holds; nothing for other
+// marks (、 ー).
+std::string DrawlSpan(std::string_view marks, char32_t mark) {
     if (!DrawlMarks(marks)) return {};
     std::string out;
-    text::AppendRune(out, kDrawlMark);
+    text::AppendRune(out, mark);
     out += marks;
-    text::AppendRune(out, kDrawlMark);
+    text::AppendRune(out, mark);
     return out;
 }
 
@@ -349,9 +381,16 @@ std::string JoinNasai(std::string_view text) {
 
 std::string JoinMasu(std::string_view text) {
     const auto join = [](const Match& m) {
-        return Cat({m.group[1], m.group[2], m.group[5], DrawlSpan(m.group[4]), m.group[3]});
+        return Cat({m.group[1], m.group[2], m.group[5], DrawlSpan(m.group[4], kDrawlMark), m.group[3]});
     };
     return ReplaceAll(ReplaceAll(text, SplitMasu, join), SplitCutPolite, join);
+}
+
+std::string JoinPausedCopula(std::string_view text) {
+    return ReplaceAll(text, SplitPausedCopula, [](const Match& m) {
+        const char32_t mark = m.group[2] == "でした" ? kPastLeadDrawlMark : kLeadDrawlMark;
+        return Cat({m.group[1], m.group[2], m.group[5], DrawlSpan(m.group[4], mark), m.group[3]});
+    });
 }
 
 std::string RewriteInterjections(std::string_view text) {
