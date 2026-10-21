@@ -219,6 +219,11 @@ HD_TEST(pipeline_kata_speech) {
         {"アハハハハ！", "アハハハハ！"},
         {"ネバネバ", "ネバネバ"},
         {"猫はネコデス、と言った。", "猫はネコデス、と言った。"},  // mostly not katakana
+        // Particles and okurigana after a kanji word, and お before one.
+        {"猫ハ、ワタシノ、ネコデス", "猫は、わたしの、ねこです"},
+        {"音声ヲ、解析シマス。発信源ハ、内部", "音声を、解析します。発信源は、内部"},
+        {"ワタシノ、猫ヲ、オ貸シ、シマス", "わたしの、猫を、お貸し、します"},
+        {"音声ロボット、内部ロボット", "音声ロボット、内部ロボット"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(internal::KataSpeech(Text(c.in), ctx, *snap)), std::string(c.want));
     // Spans are passed over.

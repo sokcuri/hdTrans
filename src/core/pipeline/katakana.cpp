@@ -505,6 +505,20 @@ bool IsPlainKataSpeech(const output::Pieces& line, const std::vector<const KataR
     return words >= 2 || (words == 1 && sounds > 0 && evidence > 0);
 }
 
+// The particles that speech in katakana writes after a kanji word (依頼者ハ, 工場カラ).
+constexpr std::u32string_view kParticleRuns[] = {U"ハ",   U"ガ",   U"ヲ",   U"ニ",   U"ノ",   U"デ",   U"ト",
+                                                 U"モ",   U"ヘ",   U"カラ", U"ヨリ", U"マデ", U"ニハ", U"デハ",
+                                                 U"トハ", U"ニモ", U"デモ", U"ヘノ", U"カラハ"};
+
+// Whether a katakana run after a kanji is its okurigana or particle: a particle of
+// kParticleRuns, or a run without a dictionary sense that starts with a kana that
+// may follow a stem (来マシタ, 困ッタ).
+bool Okurigana(const KataRun& r, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (std::find(std::begin(kParticleRuns), std::end(kParticleRuns), r.kana) != std::end(kParticleRuns)) return true;
+    if (!KeyTags(Utf8(r.kana), ctx, snap).empty()) return false;
+    return RuneIn(r.kana[0] - 0x60, kConjKana) || r.kana[0] == U'ッ' || r.kana[0] == U'ヲ';
+}
+
 // Whether a line without hiragana writes its okurigana and particles in katakana
 // (痛イ……沈マナイ, 目ヲ開ケテ): two or more katakana runs follow a kanji, start with a
 // kana that may follow a stem or is a particle, and are not katakana words.
@@ -514,8 +528,7 @@ bool IsOkuriganaSpeech(const output::Pieces& line, const std::vector<std::vector
     for (size_t k = 0; k < line.size(); k++) {
         const std::string_view text = TextOf(line[k]);
         for (const KataRun& r : runs[k]) {
-            if (!IsKanjiRune(LastRune(text.substr(0, r.start)).cp) || !KeyTags(Utf8(r.kana), ctx, snap).empty()) continue;
-            if (RuneIn(r.kana[0] - 0x60, kConjKana) || r.kana[0] == U'ッ' || r.kana[0] == U'ヲ') n++;
+            if (IsKanjiRune(LastRune(text.substr(0, r.start)).cp) && Okurigana(r, ctx, snap)) n++;
         }
     }
     return n >= 2;
@@ -656,7 +669,9 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             japanese += CountRunes(t, IsJapaneseRune);
             hira += CountRunes(t, IsHiraganaRune);
         }
-        if (2 * kata < japanese) continue;  // not speech whatever the runs read as
+        // Not speech whatever the runs read as, unless kanji words take their particles and
+        // okurigana in katakana (発信源ハ、物置ノ、内部).
+        if (2 * kata < japanese && hira > 0) continue;
         std::vector<std::vector<KataRun>> runs(line.size());
         std::vector<const KataRun*> all;
         for (size_t k = 0; k < line.size(); k++) {
@@ -676,9 +691,13 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             size_t at = 0;
             for (const KataRun& r : runs[k]) {
                 std::string h;
+                const std::string_view text = TextOf(line[k]);
+                const bool afterKanji = IsKanjiRune(LastRune(text.substr(0, r.start)).cp);
+                const bool honorific = (r.kana == U"オ" || r.kana == U"ゴ") && IsKanjiRune(text::DecodeRune(text.substr(r.end)).cp);
                 if (!r.pieces.empty()) {
                     h = RunHiragana(r);
-                } else if (okurigana && KeyTags(Utf8(r.kana), ctx, snap).empty()) {
+                } else if ((okurigana && KeyTags(Utf8(r.kana), ctx, snap).empty()) ||
+                           (afterKanji && Okurigana(r, ctx, snap)) || honorific) {
                     h = ToHiragana(Utf8(r.kana));
                 } else {
                     continue;
