@@ -46,7 +46,8 @@ std::string JoinPausedCopula(std::string_view text);
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
 
 // あれ and え at the start of a sentence before 、，！？…‥ or a dash with a small っ (あれ、 あれっ、,
-// え―― えっ――, えぇ？ えっ？),
+// え―― えっ――, えぇ？ えっ？), but not あれ when a particle follows its …‥ or dash run
+// (あれ――は何だ),
 // じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
 std::string RewriteInterjections(std::string_view text);
 

@@ -203,6 +203,11 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"「え――本当？」"sv, "「えっ――本当？」"sv},
         {"あれ─"sv, "あれっ─"sv},
         {"「ええ――」"sv, "「ええ――」"sv},
+        // The pronoun あれ before a particle.
+        {"あれ――は何だ？"sv, "あれ――は何だ？"sv},
+        {"あれ―は誰？"sv, "あれ―は誰？"sv},
+        {"あれ……が欲しい"sv, "あれ……が欲しい"sv},
+        {"え――はい"sv, "えっ――はい"sv},
     };
     Check(RewriteInterjections, cases);
 }
