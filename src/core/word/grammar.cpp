@@ -360,7 +360,11 @@ constexpr std::string_view kResultVerbs[] = {
     "混じ", "死", "太", "痩せ", "決ま", "開", "閉じ", "腫れ", "枯れ", "割れ", "汚れ", "曲が", "折れ", "破れ", "崩れ", "乾",
     "冷え", "腐", "詰ま", "埋ま", "刺さ", "慣れ", "晴れ", "曇", "凍", "外れ", "取れ", "引きこも", "引き籠も", "惚れ", "ハマ",
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
+    "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌",
 };
+
+// Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
+constexpr std::string_view kOngoingNouns[] = {"話題", "噂", "評判", "問題", "人気", "注目", "議論", "流行"};
 
 // Verbal nouns whose されている is a state.
 constexpr std::string_view kResultNouns[] = {
@@ -404,7 +408,8 @@ void ResultState(Flusher& f) {
         const std::string_view stem = it->group->surface;
         const char c1 = At(it->Code(it->selected), 1);
         const bool object = c1 >= '3' && c1 <= '6';
-        if (stem == "な" && GradualBefore(it)) continue;
+        if ((stem == "な" || stem == "にな") && GradualBefore(it)) continue;
+        if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
         const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
         const bool state = (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
                            ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem));

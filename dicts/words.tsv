@@ -11872,6 +11872,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 似付かわし	어울$A4@	H7U0			GN				llm			w:11864
 似合し	어울$A4@	H7U0			GN				llm		にあわしい	w:11865
 但書き	단서	N110			GN						ただしがき	w:11866
+佇	우두커니 &AD@	M425		Dx	GN	5113	||1 &&2 U+0== "んで" ||2 S+1== "い" S+1== "お"	佇む가 ている·ておる로 이어지면 서다(상태형)로 골라 ‘우두커니 서 있다’가 되게 한다.		1		w:26714
 佇	우두커니 서 &HN@	M425			GN				xxx llm	1		w:11867
 位	위	N110			GN				xxx llm	1		w:11868
 位数	위수	N110			GN						いすう	w:11869
