@@ -1,0 +1,24 @@
+rule	input	expected	kind	layer
+dict:lexical-split-words	これで二回目だ。	이것으로 두 번째다.	fix	lookup
+dict:lexical-split-words	一つ目の箱を開けた。	첫 번째의 상자를 열었다.	fix	lookup
+dict:lexical-split-words	何回目の挑戦だろう。	몇 번째의 도전일 것이다.	fix	lookup
+dict:lexical-split-words	書類に一度目を通した。	서류에 한 번 훑어보았다.	keep	lookup
+dict:lexical-split-words	彼女は遠慮がちに笑った。	그녀는 조심스럽게 웃었다.	fix	lookup
+dict:lexical-split-words	道を間違えがちだ。	길을 잘못하기 십상이다.	fix	lookup
+dict:lexical-split-words	あいつとは出来が違う。	저녀석과는 수준이 다르다.	fix	lookup
+dict:lexical-split-words	犬を猫と見間違えた。	개를 고양이와 잘못 보았다.	fix	lookup
+dict:lexical-split-words	夜の街を彷徨いていた。	밤의 거리를 서성거리고 있었다.	fix	lookup
+dict:lexical-split-words	友達に揶揄われた。	친구에게 놀려졌다.	fix	lookup
+dict:lexical-split-words	壁が黒く焼け焦げていた。	벽이 검게 그을리고 있었다.	fix	lookup
+dict:lexical-split-words	天文学的な数字だ。	천문학적인 숫자다.	keep	lookup
+dict:lexical-split-words	比類無き強さを持つ。	비할 데 없는 강함을 가진다.	fix	lookup
+dict:lexical-split-words	きめ細やかな泡が立つ。	고운 거품이 인다.	fix	lookup
+dict:lexical-split-words	ド派手な服を着ていた。	아주 화려한 옷을 입고 있었다.	fix	lookup
+dict:lexical-split-words	どこからともなく歌が聞こえた。	어디선가 노래가 들렸다.	fix	lookup
+dict:lexical-split-words	息も絶え絶えの様子だった。	숨이 넘어갈 듯한 모습이었다.	fix	lookup
+pattern:書くやもしれん	明日は雨が降るやもしれん。	내일은 비가 올지도 모른다.	fix	builtin-pattern
+pattern:書くに足る	信頼するに足る人物だ。	신뢰하기에 충분한 인물이다.	fix	builtin-pattern
+pattern:書くに従って	時間が経つに従って寒くなった。	시간이 지남에 따라 추워졌다.	fix	builtin-pattern
+pattern:学生だってこと	彼が犯人だってことは秘密だ。	그가 범인이라는 것은 비밀이다.	fix	builtin-pattern
+pattern:学生だってこと	彼だって、ことの重さは分かる。	그도, 일의 무게는 안다.	keep	builtin-pattern
+dict:lexical-split-words	有り得ぬ天文学的確率だ。	있을 수 있지 않는 천문학적 확률이다.	fix	lookup
