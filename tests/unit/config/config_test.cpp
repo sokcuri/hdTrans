@@ -121,7 +121,7 @@ HD_TEST(ConfigEmptyAndMissing) {
         HD_CHECK(result.settings.cg);
         HD_CHECK(!result.settings.misread);
         HD_CHECK(!result.settings.reference);
-        HD_CHECK(result.settings.speech == hdTrans::Speech::Soft);
+        HD_CHECK(result.settings.speech == hdTrans::Speech::Strict);
     }
 }
 

@@ -281,8 +281,8 @@ try {
     engine.FS.mkdir('/speech');
     engine.FS.writeFile('/speech/base.tsv', 'key\tko\tpos\tsem\tgram\tdict\trule\tid\n'
         + '高\t$D3@\tH7N0\t\t\tGN\t0\t1\nい\t1다\tT500\t\t\tGN\t0\t2\n');
-    const soft = await HdTrans.init({ module: engine, directories: ['/speech'] });
-    const strict = await HdTrans.init({ module: engine, directories: ['/speech'], speech: 'strict' });
+    const soft = await HdTrans.init({ module: engine, directories: ['/speech'], speech: 'soft' });
+    const strict = await HdTrans.init({ module: engine, directories: ['/speech'] });
     try {
         assert.equal(soft.translate('「高い」'), '「높아」');
         assert.equal(soft.translate('「高い」', { speech: 'strict' }), '「높다」');

@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:passive-quotation	「気づかれたくない」と言った。	「들키고 싶지 않아」라고 말했다.	fix	lookup
+dict:passive-quotation	「気づかれたくなかった」と言った。	「들키고 싶지 않았어」라고 말했다.	fix	lookup

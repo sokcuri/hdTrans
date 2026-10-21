@@ -19,7 +19,7 @@ struct Config {
     bool cg = true;
     bool misread = false;
     bool reference = false;
-    Speech speech = Speech::Soft;
+    Speech speech = Speech::Strict;
 };
 
 struct ConfigDiagnostic {

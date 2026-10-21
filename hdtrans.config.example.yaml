@@ -10,4 +10,4 @@ dicts:
 cg: true
 misread: false
 reference: false
-speech: soft  # 「」 안 대사의 딱딱한 -다를 해체로 부드럽게. strict: 번역의 -다를 그대로
+speech: strict  # 번역의 -다를 그대로. soft: 「」 안 대사의 딱딱한 -다를 해체로 부드럽게

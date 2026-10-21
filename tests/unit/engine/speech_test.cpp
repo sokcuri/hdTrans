@@ -32,8 +32,15 @@ const Fixture& Dictionary() {
     return f;
 }
 
+// Soft unless the options say otherwise; the default level is strict.
+internal::TranslationOptions Soft() {
+    internal::TranslationOptions options;
+    options.speech = Speech::Soft;
+    return options;
+}
+
 std::vector<std::string> Translate(const std::vector<std::string>& lines, internal::Memory& memory,
-                                   const internal::TranslationOptions& options = {}) {
+                                   const internal::TranslationOptions& options = Soft()) {
     const Fixture& f = Dictionary();
     return internal::TranslateDocument(*f.snapshot, *f.generated, lines, memory, {}, options);
 }
@@ -44,7 +51,7 @@ std::string Joined(const std::vector<std::string>& lines) {
     return s;
 }
 
-std::string Translate(const std::vector<std::string>& lines, const internal::TranslationOptions& options = {}) {
+std::string Translate(const std::vector<std::string>& lines, const internal::TranslationOptions& options = Soft()) {
     internal::Memory memory;
     return Joined(Translate(lines, memory, options));
 }
@@ -56,7 +63,8 @@ HD_TEST(engine_speech_levels) {
     internal::TranslationOptions strict;
     strict.speech = Speech::Strict;
     HD_CHECK_EQ(Translate({"「高い」", "高い。"}, strict), "「높다」|높다.");
-    internal::TranslationOptions reference;
+    HD_CHECK_EQ(Translate({"「高い」"}, internal::TranslationOptions{}), "「높다」");  // strict by default
+    internal::TranslationOptions reference = Soft();
     reference.reference = true;
     HD_CHECK_EQ(Translate({"「高い」"}, reference), "「높다」");
 }
@@ -86,10 +94,12 @@ HD_TEST(engine_speech_session) {
     Engine engine(false, CacheWrite::Off);
     HD_REQUIRE(engine.Open({folder.string()}));
     Session session(engine);
+    HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");  // strict by default
+    session.SetSpeech(Speech::Soft);
+    HD_CHECK_EQ(session.Translate("「高い」"), "「높아」");
+    session.Reset();
     HD_CHECK_EQ(session.Translate("「高い」"), "「높아」");
     session.SetSpeech(Speech::Strict);
-    HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
-    session.Reset();
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
     session.SetSpeech(Speech::Soft);
     HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
