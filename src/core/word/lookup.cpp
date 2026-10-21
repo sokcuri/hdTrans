@@ -313,6 +313,13 @@ bool Worker::TrailsOff(std::string_view rest) const {
 bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const {
     const char tag = At(u.codes->partText, 0);
     if (!AnyOf("PSTU", tag) || query.empty() || current < 0) return true;
+    // A key ending in で does not split です, でしょう, でございます or でも (もんで).
+    if (u.key.ends_with("で")) {
+        const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+        for (const std::string_view s : {"す", "し", "ご", "も"}) {
+            if (rest.starts_with(s)) return false;
+        }
+    }
     const std::string_view left = Tok(current).text;
     if (tag == 'P') {
         const long before = std::max(static_cast<long>(left.size()) - static_cast<long>(query.size()), 0L);
