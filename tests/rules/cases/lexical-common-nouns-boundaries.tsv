@@ -28,6 +28,6 @@ dict:w:25018	丁寧さが彼の長所だ。	정중함이 그의 장점이다.	fi
 dict:w:25018	長所がある。	장점이 있다.	fix	lookup
 dict:w:25018	彼の短所も知っている。	그의 단점도 알고 있다.	keep	lookup
 dict:w:25018	長短所を比べる。	장단점을 비교한다.	keep	lookup
-dict:common-nouns	妾候補の話だ。	첩 후보의 이야기다.	fix	lookup
+dict:common-nouns	妾候補の話だ。	첩 후보 이야기다.	fix	lookup
 dict:common-nouns	妾の子だ。	첩의 자식이다.	keep	lookup
-dict:common-nouns	姫候補の話だ。	공주 후보의 이야기다.	keep	lookup
+dict:common-nouns	姫候補の話だ。	공주 후보 이야기다.	keep	lookup

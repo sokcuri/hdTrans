@@ -33,7 +33,7 @@ dict:hyokkori	猫がひょっこり現れた。	고양이가 불쑥 나타났다
 dict:hyokkori	ひょっこりと現れた。	불쑥 나타났다.	keep	lookup
 dict:hyokkori	ひょいっと顔を出す。	불쑥 얼굴을 내민다.	keep	lookup
 dict:gokeiyaku	件名：ご契約の確認	건명：계약의 확인	fix	lookup
-dict:gokeiyaku	件名：ご契約のお知らせ	건명：계약의 알림	fix	lookup
+dict:gokeiyaku	件名：ご契約のお知らせ	건명：계약 알림	fix	lookup
 dict:gokeiyaku	ご契約を取り消した。	계약을 취소했다.	keep	lookup
 dict:gokeiyaku	ご契約いただきありがとうございます。	계약해 주셔 감사합니다.	keep	lookup
 dict:gokeiyaku	契約後に帰った。	계약후에 돌아갔다.	keep	lookup
