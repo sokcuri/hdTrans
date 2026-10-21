@@ -32,3 +32,4 @@ dict:jisjk:9157	あたしが一番わかってる	내가 제일 알고 있다	fi
 dict:jisjk:9157	英語が少しわかる	영어를 조금 안다	keep	local
 constraint:honorific-kanji-name	千里ちゃん、待って	치사토짱, 기다려	fix	lookup
 constraint:honorific-kanji-name	翼くん	츠바사군	keep	lookup
+names:cued-single-kanji	筧くん、おはよう	카케이군, 안녕	fix	lookup
