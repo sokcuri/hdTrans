@@ -314,18 +314,27 @@ void NegativeCopula(Flusher& f) {
 void SubjectBeforeGa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* p = it->prev;
-        if (p == nullptr || it->selected < 0 || p->selected < 0 ||
-            output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") {
+        if (p == nullptr || it->selected < 0 || p->selected < 0) continue;
+        // 俺じゃない (이)가 아니다: 내가 아니다.
+        if (it->EntryText(it->selected).starts_with("(이)가 ") && !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
+            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
+            if (!subject.empty()) p->AssignEntrySurface(p->selected, std::string(subject));
             continue;
         }
-        if (it->group->surface == "が") {
+        if (output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") continue;
+        if (it->group->surface == "の") {
+            const Item* n = it->next;
+            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) {
+                SelectLemma(f, it, "의");
+                continue;
+            }
+        }
+        // 俺が, and 俺の作った with の as the subject of a clause: 내가.
+        if (it->group->surface == "が" || it->group->surface == "の") {
             const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
             if (!subject.empty() && !p->detail->Yougo()) {
                 if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
             }
-        } else if (it->group->surface == "の") {
-            const Item* n = it->next;
-            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) SelectLemma(f, it, "의");
         }
     }
 }
@@ -912,6 +921,22 @@ void ShortPossessive(Flusher& f) {
         if (const char32_t r = text::DecodeRune(m->group->surface).cp; !text::IsLetter(r) && !text::IsDigit(r)) continue;
         const std::string lemma = ItemLemma(f, it, it->selected);
         const std::string_view s = it->group->surface;
+        // A phrase that opens with a clause (知らない間に 모르는 사이에) takes the pronoun as its
+        // subject: 내가 모르는 사이에.
+        const std::string_view head = m->EntryText(m->selected).substr(0, m->EntryText(m->selected).find(' '));
+        bool kana = false;  // 知らない間に, not 笑顔 웃는 얼굴
+        for (std::string_view t = m->group->surface; !t.empty() && !kana;) {
+            const text::Rune r = text::DecodeRune(t);
+            kana = r.cp >= U'ぁ' && r.cp <= U'ゖ';
+            t.remove_prefix(r.size);
+        }
+        if (kana && head.size() < m->EntryText(m->selected).size() && (head.ends_with("는") || head.ends_with("던")) &&
+            !SubjectPronoun(lemma).empty() &&
+            (InSet(kFirstPersonPronouns, s) || InSet(kSecondPersonPronouns, s))) {
+            TakeTarget(n, At(n->Code(n->selected), 0), "(이)가");
+            if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, std::string(SubjectPronoun(lemma)));
+            continue;
+        }
         std::string_view target;
         if ((lemma == "나" || lemma == "저") && InSet(kFirstPersonPronouns, s)) {
             target = lemma == "나" ? "내 " : "제 ";

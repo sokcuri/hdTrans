@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+rewrite:subject-pronoun	私の知らない間に部屋が片付いていた。	내가 모르는 사이에 방이 정리되고 있었다.	fix	rewrites
+rewrite:subject-pronoun	俺の乗っている車は古い。	내가 타고 있는 차는 낡다.	fix	rewrites
+rewrite:subject-pronoun	犯人は俺じゃない。	범인은 내가 아니다.	fix	rewrites
+rewrite:subject-pronoun	君の知らない話をしよう。	네가 모르는 이야기를 하자.	keep	rewrites
+rewrite:short-possessive	私の本を返して。	내 책을 돌려줘.	keep	rewrites
+rewrite:short-possessive	俺の笑顔が好きだ。	내 웃는 얼굴을 좋아한다.	keep	rewrites
