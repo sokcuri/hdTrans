@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+compose:place-noun-space	店の中には誰もいない。	가게 안에는 아무도 없다.	fix	compose
+compose:place-noun-space	ベッドの下に隠した。	침대 아래에 숨겼다.	fix	compose
+compose:place-noun-space	子供の時から好きだった。	아이 때부터 좋아했다.	fix	compose
+compose:place-noun-space	言われた通りにした。	들은 대로 했다.	keep	compose
+compose:place-noun-space	三日間の旅行だった。	3일간의 여행이었다.	keep	compose

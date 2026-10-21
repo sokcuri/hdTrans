@@ -428,6 +428,16 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     if (nextIndex == count) nextIndex = -1;
     const int previous = i - 1;
+    // A place or time noun after a の that the rules left untranslated starts a word
+    // (가게 안, 침대 아래, 아이 때).
+    constexpr std::string_view kPlaceNouns[] = {"上", "中", "下", "時", "前", "後", "外", "奥", "横", "隣",
+                                                "裏", "内", "間", "際", "頃", "底", "側", "周り"};
+    if (!t.empty() && previous >= 0 && EntryText(items[previous]).empty() &&
+        (item.surface == "上" ||
+         (kind == '1' && items[previous].surface == "の" && !Contains(tags, "Ct") &&
+          std::find(std::begin(kPlaceNouns), std::end(kPlaceNouns), item.surface) != std::end(kPlaceNouns)))) {
+        t.insert(0, " ");
+    }
     using Result = std::pair<std::string, bool>;
     if (nextIndex < 0 || t.empty() || item.selectionFlag == 1 ||
         TokenDistance(tokens, item.tokenIndex, items[nextIndex].tokenIndex) >= 2) {
@@ -439,7 +449,6 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         return Result(std::move(t), false);
     }
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };
-    if (item.surface == "上" && previous >= 0 && EntryText(items[previous]).empty()) t.insert(0, " ");
     bool allowSpacing = true;
     if (t == "\\") {
         if (previous >= 0 && nd(internal::EntryAt(items[previous], 0).gattr)) {

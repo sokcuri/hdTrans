@@ -170,7 +170,7 @@ L1057	これは金と言う金属です。	이것은 금이라는 금속입니�
 L1058	運動用の靴が必要だ。	운동용의 구두가 필요하다.	fix	local
 L1069	雨が止んだ後、虹が出た。	비가 그친 후, 무지개가 나왔다.	current	local
 L1069	食事後、すぐに散歩に出かけた。	식사 후, 곧바로 산책하러 나갔다.	current	local
-L1075	学生の時よく走った。	학생때 잘 달렸다.	current	local
+L1075	学生の時よく走った。	학생 때 잘 달렸다.	current	local
 L1111	箱の内にある。	상자의 안에 있다.	fix	local
 L1115	今日は5月3日です。	오늘은 5월 3일입니다.	current	local
 L1115	旅行は三日で終わった。	여행은 3일에 끝났다.	current	local
@@ -203,8 +203,8 @@ L1295	だってそう思ったんだもの。	왜냐하면 그렇게 생각한�
 L1303	このペンは私のと同じです。	이 펜은 저의 것과 같습니다.	current	local
 L1303	兄のを借りて学校へ行った。	형의 것을 빌려 학교에 갔다.	current	local
 L1312	彼が笑える理由は分からない。	그가 웃을 수 있는 이유는 모른다.	current	local
-L1317	食事の時の話は面白かった。	식사때 이야기는 재미있었다.	current	local
-L1317	ベッドの下の箱を探している。	침대아래의 상자를 찾고 있다.	current	local
+L1317	食事の時の話は面白かった。	식사 때 이야기는 재미있었다.	current	local
+L1317	ベッドの下の箱を探している。	침대 아래의 상자를 찾고 있다.	current	local
 L1318	明日はどこに行くの？	내일은 어디에 가는 거야?	current	local-ending
 L1318	どうして泣いているの？	왜 울고 있는 거야?	current	local-ending
 L1327	「この本、もう読むの！」	「이 책, 이제 읽어!」	current	local-ending
@@ -388,7 +388,7 @@ L2571	肉を薄く切った。	고기를 얇게 잘랐다.	current	local
 L2580	ちょっといいですか。	조금 괜찮습니까.	current	local
 L2580	明日は来なくてもいいよ。	내일은 오지 않아도 괜찮아.	current	local
 L2581	冷蔵庫には何もなかった。	냉장고에는 아무것도 없었다.	current	local
-L2581	財布の中にお金がなかった。	지갑안에 돈이 없었다.	current	local
+L2581	財布の中にお金がなかった。	지갑 안에 돈이 없었다.	current	local
 L2593	昔ここに城があったとされている。	옛날 여기에 성이 있었다고 여겨지고 있다.	current	local-ending
 L5110	なんて日だ。	이 무슨 날이다.	current	local
 L5110	なんて男だ。	이 무슨 남자다.	current	local
@@ -440,7 +440,7 @@ L2835	早く寝た方がいいよ。	빨리 자는 것이 좋아.	current	local-
 L2835	少し休んだ方がいいと思う。	조금 쉬는 것이 좋다고 생각한다.	current	local-ending
 L2837	彼女は私の前に立った。	그녀는 내 앞에 섰다.	current	local
 L2837	子供が先生の前に座った。	아이가 선생님 앞에 앉았다.	current	local
-L2874	箱の中を見る。	상자안을 본다.	current	local
+L2874	箱の中を見る。	상자 안을 본다.	current	local
 L2907	最近は朝晩が寒くなってきた。	최근에는 조석이 추워졌다.	current	local
 L2907	薬を飲んだら少し眠くなってきた。	약을 먹으면 조금 졸려졌다.	current	local
 L2916	「おはよう」と言った。	「안녕」이라고 말했다.	current	local
@@ -621,7 +621,7 @@ L3975	母に誕生日の花を贈った。	어머니에게 생일의 꽃을 선�
 L3999	その案が候補にあがった。	그 안이 후보에 올랐다.	current	local
 L4001	彼は話を聞かれた。	그는 이야기를 들렸다.	current	local
 L4033	先に宿題を済ませておこう。	먼저 숙제를 끝마쳐 두자.	current	local
-L4033	旅行の前に切符を買っておく。	여행앞에 표를 사 둔다.	current	local
+L4033	旅行の前に切符を買っておく。	여행 앞에 표를 사 둔다.	current	local
 L4051	無事でなによりです。	무사해서 다행입니다.	current	local
 L4075	ケーキを四つに分けて食べた。	케이크를 4개로 나누어 먹었다.	current	local
 L4075	この問題には二つの答えがある。	이 문제에는 2개의 대답이 있다.	current	local
