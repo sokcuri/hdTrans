@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+normalize:nsu	「明日も来るんすか？」	「내일도 옵니까?」	fix	normalize
+normalize:nsu	「それ、俺の席なんスけど」	「그것, 내 자리인데요」	fix	normalize
+normalize:ssu-katakana	「よくわかるっス」	「잘 알아요」	fix	normalize
+normalize:nsu	「ん？なんすか？」	「응? 뭔데요?」	keep	normalize

@@ -228,6 +228,27 @@ bool Run(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// ([るたなういくすつぬむぶぐてだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
+// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ.
+bool Nsu(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"るたなういくすつぬむぶぐてだ")) return false;
+    // なんすか starting a word is 何すか (なんすか？ 뭔데요), its own phrase.
+    if (Span(s, pos, p) == "な") {
+        size_t before = pos;
+        while (before > 0 && (static_cast<unsigned char>(s[before - 1]) & 0xC0) == 0x80) before--;
+        if (before > 0) before--;
+        const char32_t c = pos == 0 ? 0 : text::DecodeRune(s.substr(before)).cp;
+        if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c))) return false;
+    }
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
+    // ないんすか and ないんすよ have their own end rows (書かないんすか 쓰지 않나요).
+    size_t q = p;
+    if (m.group[1] == "い" && s.substr(0, pos).ends_with("な") && OneOf(s, q, U"かよ")) return false;
+    return CharOrEnd(s, p, U"かけよねわ」』！？!?。…‥ー〜～ぉぇ、", m, 2);
+}
+
 // A literal pattern.
 template <const char* kText>
 bool Literal(std::string_view s, size_t pos, Match& m) {
@@ -239,6 +260,8 @@ bool Literal(std::string_view s, size_t pos, Match& m) {
 
 constexpr char kKya[] = "っきゃない";
 constexpr char kUssai[] = "うっさい";
+constexpr char kSsuKatakana[] = "っス";
+constexpr char kNaiNsuKatakana[] = "ないんス";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -416,6 +439,9 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Literal<kKya>, [](const Match&) { return std::string("しかない"); });
     text = ReplaceAll(text, Teeka, [](const Match& m) { return Cat({m.group[1], "たいか"}); });
     text = ReplaceAll(text, Literal<kUssai>, [](const Match&) { return std::string("うるさい"); });
+    text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
+    text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
+    text = ReplaceAll(text, Nsu, [](const Match& m) { return Cat({m.group[1], "んです", m.group[2]}); });
     text = ReplaceAll(text, Ikka, [](const Match& m) { return Cat({"いいか", m.group[1]}); });
     text = ReplaceAll(text, Tondemo, [](const Match&) { return std::string("とんでもない"); });
     text = ReplaceAll(text, Mashou, [](const Match& m) { return Cat({m.group[1], "しょう"}); });
