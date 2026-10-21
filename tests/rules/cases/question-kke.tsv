@@ -5,7 +5,7 @@ ending:書いたっけ	「いや、あったっけ？」	「아니, 있었나?�
 ending:書いたっけ	「言ったっけ？」	「말했나?」	fix	builtin-ending
 ending:書かなかったっけ	「傘持ってなかったっけ」	「우산 가지지 않았나」	fix	builtin-ending
 ending:高いんだっけ	「携帯ないんだっけ」	「휴대폰 없는 거였지」	fix	builtin-ending
-ending:高いんだっけ	「あそこの卵屋、安いんだっけ？」	「저기의 란 가게, 싼 거였지?」	fix	builtin-ending
+ending:高いんだっけ	「あそこの卵屋、安いんだっけ？」	「저기의 계란 가게, 싼 거였지?」	fix	builtin-ending
 ending:書かないんだっけ	「お前も知らないんだっけ」	「너도 모르는 거였지」	fix	builtin-ending
 ending:書くんだっけ	「彼はゲームとかやるんだっけ？」	「그는 게임이라든지 하는 거였지?」	fix	builtin-ending
 ending:書くっけ	「そんな店、あるっけ？」	「그런 가게, 있더라?」	fix	builtin-ending
