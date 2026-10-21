@@ -2646,14 +2646,14 @@ bool RuleL288([[maybe_unused]] Item* p) {
 }
 
 // local 289
-//     pos[+1] is 1**
+//     pos[+1] is 1** and ko[+1] != "?"
 //     (src[+1] == "ことが分か" or src[+1] == "ことがわか") and pos[+1] is 4**
 //     src[+1] == "らし" and pos[+1] is 7**
 //     (src[+1] == "にちがいあ" or src[+1] == "に違いあ") and pos[+1] is 4**
 //     (src[+1] == "ことは" or src[+1] == "こと")
 //     src[+1] == "だけに"
 bool RuleL289([[maybe_unused]] Item* p) {
-    return PumsaEq(p, 1, "1**"sv) ||
+    return (PumsaEq(p, 1, "1**"sv) && DstNe(p, 1, "\077"sv)) ||
            ((SrcEq(p, 1, "ことが分か"sv) ||
            SrcEq(p, 1, "ことがわか"sv)) && PumsaEq(p, 1, "4**"sv)) ||
            (SrcEq(p, 1, "らし"sv) && PumsaEq(p, 1, "7**"sv)) ||
@@ -4720,7 +4720,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL286, 0x028cffbdb305139eull},
     {RuleL287, 0x210ef0258dd66521ull},
     {RuleL288, 0x63a02f40fc6a2e5bull},
-    {RuleL289, 0xe001ca47a1fc05e3ull},
+    {RuleL289, 0x59d2e69b7e2409faull},
     {RuleL290, 0x776fffbb4c9d28f4ull},
     {RuleL291, 0x1a03d2b8464b908dull},
     {RuleL292, 0xf0693e0ae0c0e714ull},
