@@ -309,7 +309,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.styles[k] = 0;
         again = true;
     }
-    return again ? compose(speech, observer) : first;
+    return output::SpokenWords(again ? compose(speech, observer) : first, carry.depth, speech.styles);
 }
 
 std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Generated& generated,

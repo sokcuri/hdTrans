@@ -47,3 +47,21 @@ HD_TEST(output_polite_quotes) {
     HD_CHECK_EQ(show(PoliteQuotes("그는 웃었어요. 「몰라」", 0)), "10");
     HD_CHECK_EQ(show(PoliteQuotes("갑니다」라고 했다", 1)), "01");
 }
+
+HD_TEST(output_spoken_words) {
+    const std::vector<std::uint8_t> casual = {0, kCasualSpeech};
+    const struct {
+        const char* line;
+        const char* want;
+    } cases[] = {
+        {"「그것은 달라. 하는 것을 봤어」", "「그건 달라. 하는 걸 봤어」"},
+        {"「그런 것이 아니야. 이것이야」", "「그런 게 아니야. 이거야」"},
+        {"「무엇인가 먹고 있네. 무엇을 해?」", "「뭔가 먹고 있네. 뭘 해?」"},
+        {"「무엇인가가 문제야. 무엇인가를 몰라」", "「무엇인가가 문제야. 무엇인가를 몰라」"},
+        {"「어느것은 사물이야. 『그것은』」", "「어느것은 사물이야. 『그것은』」"},
+        {"그것은 「그것은」", "그것은 「그건」"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(SpokenWords(c.line, 0, casual), std::string(c.want));
+    HD_CHECK_EQ(SpokenWords("「그것은」", 0, {0, 0}), std::string("「그것은」"));
+    HD_CHECK_EQ(SpokenWords("그것은 몰라」", 1, casual), std::string("그건 몰라」"));
+}

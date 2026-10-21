@@ -50,6 +50,10 @@ struct Settings {
 // 좋네요, 합니다).
 std::vector<bool> PoliteQuotes(std::string_view line, int depth);
 
+// line with the written words of its quotes styled kCasualSpeech in their spoken form (것은
+// 건, 그것을 그걸, 무엇을 뭘, 무엇인가 뭔가); quotes and depth as for PoliteQuotes.
+std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles);
+
 // The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing
 // bracket outside a quote is ignored), and count counts the quotes opened outside any.
 QuoteState QuotesAfter(QuoteState state, std::string_view text);
