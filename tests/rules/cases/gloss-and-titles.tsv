@@ -13,3 +13,4 @@ dict:san-role:1	店長さん	점장님	fix	local
 dict:san-role:1	店員さんを呼んだ。	점원을 불렀다.	keep	local
 dict:san-role:1	先生さん	선생님	fix	local
 dict:san-role:1	田中さん	타나카씨	keep	local
+phrase:今のは	「……！　……今のは」	「……! ……방금 그건」	fix	builtin-phrase

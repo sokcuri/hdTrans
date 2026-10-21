@@ -336,7 +336,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
     auto surnameLike = [&](const std::string& x) {
         const DictFlags f = Flags(x);
         const std::size_t k = RuneCount(x);
-        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && (f.surname || f.records == 0);
+        // Not a numeral (二, 三十), which no dictionary row reads either.
+        const bool numeral = AllRunes(x, [](char32_t c) {
+            return std::u32string_view(U"〇一二三四五六七八九十百千万億零").find(c) != std::u32string_view::npos;
+        });
+        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && !numeral && (f.surname || f.records == 0);
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
         Name& s = all[x];
