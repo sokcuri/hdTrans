@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:w:26718	先生へと謝罪した。	선생님에게 사죄했다.	fix	local
+dict:w:26718	国王へと視線を向けた。	국왕에게 시선을 보냈다.	fix	local
+dict:w:26718	学校へと向かった。	학교로 향했다.	keep	local
