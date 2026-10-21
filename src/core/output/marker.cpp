@@ -508,7 +508,8 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             }
             if (settings_.text && !it.endingSurface.ends_with("て") && !it.endingSurface.ends_with("で") &&
                 SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
-                replacement = SpokenInfinitive(replacement);
+                // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
+                replacement = replacement == "아니어" ? (suffix.empty() ? "아니야" : "아니에") : SpokenInfinitive(replacement);
             }
             break;
         }

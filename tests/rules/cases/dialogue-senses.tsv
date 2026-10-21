@@ -59,3 +59,4 @@ dict:jisjk:265314	僕にどうこうできる話じゃない。	나에게 어떻
 dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 말아라.	keep	local
 dict:jisjk:78475	兄は予備校に通っている。	형은 입시학원에 다니고 있다.	fix	lookup
 dict:jisjk:171364	画材を買いに行く。	화구를 사러 간다.	fix	lookup
+compose:aniya-casual	「勝つことだけが目的ではありませんよ」	「이기는 것만이 목적이 아니에요」	fix	compose
