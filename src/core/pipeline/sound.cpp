@@ -148,8 +148,9 @@ size_t StutterSeparator(std::u32string_view rs, size_t i) {
 // ending.
 bool InWord(char32_t r) { return IsKanjiRune(r) || IsKatakanaRune(r) || text::IsLetter(r) || text::IsDigit(r); }
 
+// The end of the katakana run at p, with a ～ between katakana in it (ザ～ラ).
 size_t KatakanaEnd(std::u32string_view rs, size_t p) {
-    while (p < rs.size() && IsKatakanaRune(rs[p])) p++;
+    while (p < rs.size() && (IsKatakanaRune(rs[p]) || (rs[p] == U'～' && p + 1 < rs.size() && IsKatakanaRune(rs[p + 1])))) p++;
     return p;
 }
 
@@ -1152,8 +1153,13 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
         tail = row.key[n - 1];
     }
     if (p + stem.size() > f.size()) return false;
+    bool tilde = false;  // a ～ stands for the key's ー (う～ん)
     for (size_t k = 0; k < stem.size(); k++) {
         const char32_t r = stem[k];
+        if (r == U'ー' && f[p + k] == U'～') {
+            tilde = true;
+            continue;
+        }
         if (f[p + k] != r && (row.key.size() < 3 || PlainVowel(r) == 0 || PlainVowel(f[p + k]) != PlainVowel(r))) {
             return false;
         }
@@ -1176,6 +1182,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
         for (; i < f.size() && (f[i] == U'ー' || f[i] == U'～' || f[i] == U'ッ' || f[i] == tail); i++) {
         }
         end = i;
+        if (tilde) units += 't';
         return true;
     }
     size_t j = i;
@@ -1186,10 +1193,18 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
         }
     }
     end = i;
+    if (tilde) units += 't';
     return true;
 }
 
 std::string Lengthen(std::string_view korean, std::string_view units) {
+    if (const size_t t = units.find('t'); t != std::string_view::npos) {
+        std::string rest(units);
+        std::erase(rest, 't');
+        std::string out = Lengthen(korean, rest);
+        if (!out.empty() && out.find('~') == std::string::npos) out += '~';
+        return out;
+    }
     std::u32string rs = DecodeText(korean);
     if (rs.empty() || units.empty()) return std::string(korean);
     if (units[0] == 'r') {

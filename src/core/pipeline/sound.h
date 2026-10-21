@@ -143,7 +143,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // carries the sound (the only syllable, or one without an initial consonant: 앙, 하아,
 // 우왓), each 'v' adds a syllable of its vowel, at most four, before the final
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
-// (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~.
+// (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~, and 't' (a ～ that
+// stood for the key's ー: う～ん) a ~ at the end.
 std::string Lengthen(std::string_view korean, std::string_view units);
 
 // A row of the sound lexicon; key in katakana.
@@ -181,7 +182,7 @@ std::u32string ToKatakana(std::u32string_view rs);
 // (あははは+はは, あっはっは+っはっ) with a unit 'r' for each, or 'h' when the syllable holds
 // ッ: such a match is written as heard, each syllable with its ㅅ (앗핫핫핫). Elongation may follow the key, or come before its last
 // character when that is ン or ッ; ッ may close it, with the ～ and ー after it, when no kana
-// but ト, テ, ～ or ー follows.
+// but ト, テ, ～ or ー follows. A ～ matches the key's ー, with a unit 't'.
 bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& end, std::string& units);
 
 }  // namespace internal

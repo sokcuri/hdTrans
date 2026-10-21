@@ -55,6 +55,8 @@ HD_TEST(pipeline_lengthen) {
         // Repeats write the last syllable again and let ! close it.
         {"아하하", "r", "아하하하"}, {"아하하", "rr!", "아하하하핫"}, {"후후", "r", "후후후"},
         {"아하하", "!", "아하하"},
+        // A ～ that stood for the key's ー adds one ~ at the end.
+        {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
