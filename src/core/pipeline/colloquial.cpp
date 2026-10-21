@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "core/pipeline/protect.h"
+#include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/pipeline/sound.h"
 
@@ -248,6 +249,42 @@ bool FullAdjective(const Emphasis& e, std::u32string_view stem, char32_t kana, s
     return false;
 }
 
+// The end of a piece of a word spelled out with ・ at rs[p:], or p: a kana or kanji (っ not
+// first), a small kana that ends its syllable, and one ー, ～ or っ.
+size_t SpelledPiece(std::u32string_view rs, size_t p, bool first) {
+    if (p >= rs.size()) return p;
+    const char32_t c = rs[p];
+    const bool small = In(c, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ");
+    if ((!IsHiraganaRune(c) && !IsKatakanaRune(c) && !IsKanjiRune(c)) || c == U'ー' || small ||
+        (first && In(c, U"っッ"))) {
+        return p;
+    }
+    size_t q = p + 1;
+    if (q < rs.size() && In(rs[q], U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ")) q++;
+    if (q < rs.size() && In(rs[q], U"ー～っッ")) q++;
+    return q;
+}
+
+std::u32string ToHiragana(std::u32string_view rs) {
+    std::u32string out(rs);
+    for (char32_t& r : out) {
+        if (r >= U'ァ' && r <= U'ヶ') r -= 0x60;
+    }
+    return out;
+}
+
+// Whether text starts with a copula or a particle that may follow a word spelled out with
+// ・ (さ・い・て・いです, 大・好・きだよ).
+bool SpelledTail(std::u32string_view text) {
+    for (const std::u32string_view t :
+         {U"です", U"でした", U"でしょ", U"だ", U"じゃ", U"って", U"よ", U"ね", U"なの", U"の", U"か"}) {
+        if (text.starts_with(t)) return true;
+    }
+    return false;
+}
+
+bool IsWordRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r) || r == U'・'; }
+
 }  // namespace
 
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -367,6 +404,55 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     }
     if (!changed) return std::string(text);
     return EncodeText(rs);
+}
+
+std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find("・") == std::string_view::npos) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    std::u32string out;
+    bool changed = false;
+    size_t at = 0;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (i > 0 && IsWordRune(rs[i - 1])) continue;
+        std::vector<size_t> ends;
+        for (size_t p = i;;) {
+            const size_t q = SpelledPiece(rs, p, ends.empty());
+            if (q == p) break;
+            ends.push_back(q);
+            if (q + 1 >= rs.size() || rs[q] != U'・') break;
+            p = q + 1;
+        }
+        if (ends.size() < 2) continue;
+        const size_t end = ends.back();
+        if (end < rs.size() && IsWordRune(rs[end]) && !SpelledTail(std::u32string_view(rs).substr(end))) continue;
+        std::u32string joined;
+        bool kanjiOnly = true;
+        for (size_t k = i; k < end; k++) {
+            if (rs[k] == U'・') continue;
+            joined.push_back(rs[k]);
+            kanjiOnly = kanjiOnly && IsKanjiRune(rs[k]);
+        }
+        if (kanjiOnly) continue;  // a list (赤・青・黄) or a compound read character by character
+        size_t kata = 0;
+        while (kata < joined.size() && IsKatakanaRune(joined[kata])) kata++;
+        if (kata > 0 && joined.find(U'ー') != std::u32string::npos) continue;  // a name: スー・チー
+        if (kata > 0) {
+            std::u32string key = joined.substr(0, kata);
+            while (!key.empty() && In(key.back(), U"ーッ")) key.pop_back();
+            if (key.size() < 2 || (e.Tags(key).empty() && e.Tags(ToHiragana(key)).empty())) continue;  // a name (ア・イ)
+        }
+        out.append(rs, at, i - at);
+        out.push_back(kEmphasisOpen);
+        out += joined;
+        out.push_back(kEmphasisClose);
+        at = end;
+        i = end - 1;
+        changed = true;
+    }
+    if (!changed) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
 }
 
 }  // namespace hdTrans::pipeline::internal

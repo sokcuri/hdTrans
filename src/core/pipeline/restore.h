@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteDrawls(WriteStutters(...))))
+    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteEmphasis(WriteDrawls(...))))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -77,6 +77,10 @@ std::string WriteDrawls(std::string_view s);
 std::string EscapePrivateUse(std::string_view s);
 std::string UnescapePrivateUse(std::string_view s);
 
+// The Korean between each kEmphasisOpen and the next kEmphasisClose with · between its
+// syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
+std::string WriteEmphasis(std::string_view s);
+
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);
 
@@ -93,6 +97,10 @@ constexpr char32_t kStutterRest = 0xE004;
 constexpr char32_t kDrawlMark = 0xE005;
 constexpr char32_t kLeadDrawlMark = 0xE006;
 constexpr char32_t kPastLeadDrawlMark = 0xE007;
+// The marks around a word spelled out with ・ for emphasis (さ・い・て・い), which the
+// restore stage writes back as · between the syllables of its Korean (WriteEmphasis).
+constexpr char32_t kEmphasisOpen = 0xE008;
+constexpr char32_t kEmphasisClose = 0xE009;
 
 namespace internal {
 

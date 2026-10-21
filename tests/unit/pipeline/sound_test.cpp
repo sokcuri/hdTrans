@@ -388,6 +388,42 @@ HD_TEST(pipeline_rewrite_emphasis) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
 
+HD_TEST(pipeline_join_spelled_out) {
+    const auto loaded = dict::Load({{
+        0, "base.tsv",
+        "key\tko\tpos\tid\n"
+        "さいてい\t최저\tN110\t1\n"
+        "ダメ\t안 돼\tN110\t2\n"
+        "ば\t1면\tS590\t3\n",
+    }});
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"あなたなんて、さ・い・て・い！", "あなたなんて、\uE008さいてい\uE009！"},
+        {"大・好・き", "\uE008大好き\uE009"},
+        {"ダ・メ・よ？", "\uE008ダメよ\uE009？"},
+        {"あ・げ・る・ねー♪", "\uE008あげるねー\uE009♪"},
+        {"ちょ・っ・と", "\uE008ちょっと\uE009"},
+        {"さ・い・て・いです", "\uE008さいてい\uE009です"},
+        // Unchanged: names, lists, kanji read one by one, katakana that is no word, a piece
+        // of more than one kana, a run next to other characters, a lone piece.
+        {"ジョン・スミス", "ジョン・スミス"},
+        {"赤・青・黄の三色", "赤・青・黄の三色"},
+        {"謹・賀・新・年", "謹・賀・新・年"},
+        {"ア・イ", "ア・イ"},
+        {"ド・きゅ・う！", "ド・きゅ・う！"},
+        {"スー・チー", "スー・チー"},
+        {"愛・たそがれ", "愛・たそがれ"},
+        {"元・帝国軍", "元・帝国軍"},
+        {"君が・ば・か", "君が・ば・か"},
+        {"さ・いてい", "さ・いてい"},
+        {"ば・", "ば・"},
+        {"っ・ば", "っ・ば"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpelledOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 HD_TEST(pipeline_rewrite_casual_adjectives) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());

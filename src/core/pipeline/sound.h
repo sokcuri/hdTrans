@@ -54,13 +54,22 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: WriteMasked, CompleteCutOffs, WriteSounds, then RewriteCasualAdjectives;
+// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs, WriteSounds, then
+// RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
 // use ctx.lookup.
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap);
 
 namespace internal {
+
+// Each word spelled out with ・ between its characters for emphasis (さ・い・て・い, 大・好・き,
+// ダ・メ) joined and put between kEmphasisOpen and kEmphasisClose: two or more pieces of one
+// kana or kanji each (with a small kana and one ー, ～ or っ after it), not next to other kana,
+// kanji or ・ but for a copula or particle after it (さ・い・て・いです). A run of kanji only (赤・青・黄, 謹・賀・新・年) stays, and so does a run that starts
+// with katakana unless they are a dictionary key of two or more characters without ー (ア・イ,
+// ド・きゅ・う, スー・チー).
+std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);

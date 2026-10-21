@@ -240,6 +240,24 @@ HD_TEST(pipeline_escape_private_use) {
     HD_CHECK_EQ(pipeline::Restore(cleaned, typed, true), std::string("버튼 \uE005을 누른다"));
 }
 
+HD_TEST(pipeline_write_emphasis) {
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"당신 같은 건, \uE008최저\uE009!", "당신 같은 건, 최·저!"},
+        // Spaces between the syllables go; the syllables before the word are not joined to it.
+        {"들어 오면, \uE008안 돼\uE009?", "들어 오면, 안·돼?"},
+        {"제독 \uE008제독\uE009♪", "제독 제·독♪"},
+        {"\uE008돈\uE009, 마니", "돈, 마니"},
+        // A mark without its pair is dropped.
+        {"\uE008사·실", "사·실"},
+        {"그만\uE009", "그만"},
+        {"그만", "그만"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteEmphasis(c.in), std::string(c.want));
+}
+
 HD_TEST(pipeline_drop_particle_marks) {
     HD_CHECK_EQ(pipeline::DropParticleMarks("섹○\uE001를 가○\uE002을 애○\uE003을"), std::string("섹○를 가○을 애○을"));
     HD_CHECK_EQ(pipeline::DropParticleMarks("\uE000、아"), std::string("\uE000、아"));

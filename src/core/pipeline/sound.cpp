@@ -1124,7 +1124,8 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 }  // namespace internal
 
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
-    const std::string completed = internal::CompleteCutOffs(internal::WriteMasked(normalized, ctx, snap), ctx, snap);
+    const std::string completed =
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
     std::string sounded = internal::RewriteCasualAdjectives(internal::WriteSounds(completed, ctx, snap), ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);

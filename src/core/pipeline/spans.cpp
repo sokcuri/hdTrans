@@ -153,6 +153,14 @@ Match DrawlSpan(std::string_view s) {
     return {};
 }
 
+// An emphasis mark: kEmphasisOpen opens a span, kEmphasisClose closes one.
+Match EmphasisSpan(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (r.cp == kEmphasisOpen) return {r.size, output::SpanOpen};
+    if (r.cp == kEmphasisClose) return {r.size, output::SpanClose};
+    return {};
+}
+
 bool IsHangul(char32_t r) {
     return (r >= 0x1100 && r <= 0x11FF) || (r >= 0x3131 && r <= 0x318E) || (r >= 0xA960 && r <= 0xA97F) ||
            (r >= 0xAC00 && r <= 0xD7A3) || (r >= 0xD7B0 && r <= 0xD7FF) || (r >= 0xFFA0 && r <= 0xFFDC);
@@ -192,10 +200,11 @@ Match ForeignSpan(std::string_view s) {
     return {n, output::SpanWord};
 }
 
-enum class SpanClass { Tag, BbCode, Entity, Marker, Stutter, Drawl, Hangul, Foreign };
+enum class SpanClass { Tag, BbCode, Entity, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign };
 
-constexpr SpanClass kClasses[] = {SpanClass::Tag,     SpanClass::BbCode, SpanClass::Entity, SpanClass::Marker,
-                                  SpanClass::Stutter, SpanClass::Drawl,  SpanClass::Hangul, SpanClass::Foreign};
+constexpr SpanClass kClasses[] = {SpanClass::Tag,    SpanClass::BbCode,   SpanClass::Entity,
+                                  SpanClass::Marker, SpanClass::Stutter,  SpanClass::Drawl,
+                                  SpanClass::Emphasis, SpanClass::Hangul, SpanClass::Foreign};
 
 Match MatchClass(SpanClass c, std::string_view s, std::span<const std::string> markers) {
     switch (c) {
@@ -205,6 +214,7 @@ Match MatchClass(SpanClass c, std::string_view s, std::span<const std::string> m
         case SpanClass::Marker: return MarkerSpan(s, markers);
         case SpanClass::Stutter: return StutterSpan(s);
         case SpanClass::Drawl: return DrawlSpan(s);
+        case SpanClass::Emphasis: return EmphasisSpan(s);
         case SpanClass::Hangul: return HangulSpan(s);
         case SpanClass::Foreign: return ForeignSpan(s);
     }
