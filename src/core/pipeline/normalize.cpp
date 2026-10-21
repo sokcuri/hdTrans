@@ -447,6 +447,10 @@ std::string NormalizeForms(std::string_view text) {
             }
         } else if (c <= 3) {
             c = U' ';
+        } else if (c == U'‼' || c == U'⁉' || c == U'⁈') {
+            text::AppendRune(out, c == U'⁈' ? U'？' : U'！');  // the marks CP932 has: ‼ ！！, ⁉ ！？
+            c = c == U'‼' ? U'！' : c == U'⁉' ? U'？' : U'！';
+            if (const text::Rune vs = At(text, i); vs.cp == 0xFE0E || vs.cp == 0xFE0F) i += vs.size;  // ‼︎
         } else {
             c = MapForm(c);
         }

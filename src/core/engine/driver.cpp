@@ -72,6 +72,12 @@ void BuildTexts(const tokenizer::Tokens& tokens, const word::Analysis& analysis,
         const auto v = tokens.View(static_cast<std::size_t>(j), static_cast<std::size_t>(last));
         texts[static_cast<std::size_t>(j)].type = v.type;
         texts[static_cast<std::size_t>(j)].text = std::string(v.text);
+        if (v.text == "!" || v.text == "?") {
+            // A run of marks keeps every mark (！！ !!, ！？ !?); the analysis read its first.
+            if (std::string run = tokenizer::MarkRun(tokens.Raw(static_cast<std::size_t>(j))); run.size() > 1) {
+                texts[static_cast<std::size_t>(j)].text = std::move(run);
+            }
+        }
         if (analysis.spaced[static_cast<std::size_t>(j)]) {
             texts[static_cast<std::size_t>(j)].type = tokenizer::kTypeWideSpace;
             texts[static_cast<std::size_t>(j)].text = " ";

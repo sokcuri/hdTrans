@@ -588,7 +588,8 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
 void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pieces& out) {
     const TokenText& tok = tokens[index];
     if (tok.type == tokenizer::kTypeWideSpace || tok.type == 78 || tok.span != 0 ||
-        (tok.text != "." && tok.text != "!" && tok.text != "?")) {
+        tok.text.empty() || tok.text.find_first_not_of(".!?") != std::string::npos ||
+        (tok.text.size() > 1 && tok.text.find('.') != std::string::npos)) {
         return;
     }
     const size_t next = static_cast<size_t>(index) + 1;

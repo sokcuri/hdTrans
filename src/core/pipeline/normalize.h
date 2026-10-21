@@ -16,8 +16,9 @@ namespace internal {
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
 // or semi-voiced mark composed (ｶﾞ ガ, ﾊﾟ パ, ｳﾞ ヴ; a mark that does not compose becomes
 // ゛ or ゜); the CP932 mapping differences (〜 ～, − －, ‖ ∥, ¢ £ ¬ in full width) and
-// kanji forms outside JIS X 0208 (頰 頬, 𠮟 叱) mapped; U+0000..U+0003 as spaces. Invalid
-// UTF-8 bytes are kept.
+// kanji forms outside JIS X 0208 (頰 頬, 𠮟 叱) mapped; ‼ ⁉ ⁈ as two marks (！！ ！？ ？！)
+// without a variation selector after them; U+0000..U+0003 as spaces. Invalid UTF-8 bytes
+// are kept.
 std::string NormalizeForms(std::string_view text);
 
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.

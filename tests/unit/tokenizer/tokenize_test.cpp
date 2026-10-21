@@ -458,3 +458,11 @@ HD_TEST(tokenizer_stage_text_escape) {
     HD_CHECK(stagetest::UnescapeStageText(escaped) == raw);
     HD_CHECK_EQ(stagetest::EscapeStageText("あい"), std::string("あい"));
 }
+
+HD_TEST(tokenizer_mark_run) {
+    HD_CHECK_EQ(MarkRun("！！"), std::string("!!"));
+    HD_CHECK_EQ(MarkRun("！？！？」"), std::string("!?!?"));
+    HD_CHECK_EQ(MarkRun("？"), std::string("?"));
+    HD_CHECK_EQ(MarkRun("‼⁉⁈"), std::string("!!!?") + "?!");
+    HD_CHECK_EQ(MarkRun("。"), std::string());
+}

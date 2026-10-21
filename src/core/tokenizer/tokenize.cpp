@@ -585,4 +585,32 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
     while (out.size() > start && out.back() == ' ') out.pop_back();
 }
 
+namespace {
+
+// The ASCII marks of an exclamation or question mark, "" for other characters.
+std::string_view MarkForm(char32_t c) {
+    switch (c) {
+        case U'！': case U'!': return "!";
+        case U'？': case U'?': return "?";
+        case U'‼': return "!!";
+        case U'⁉': return "!?";
+        case U'⁈': return "?!";
+        default: return "";
+    }
+}
+
+}  // namespace
+
+std::string MarkRun(std::string_view s) {
+    std::string out;
+    for (size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        const std::string_view form = MarkForm(r.cp);
+        if (form.empty()) break;
+        out.append(form);
+        i += r.size;
+    }
+    return out;
+}
+
 }  // namespace hdTrans::tokenizer

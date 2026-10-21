@@ -188,7 +188,7 @@ std::string SoftEnding(std::string_view ending, bool planned, bool promised) {
 
 // Characters that end a sentence of speech after its predicate, and those passed over
 // before them (a stretched or cut-off end).
-constexpr std::u32string_view kEnds = U"」』！？!?。．.…‥、，,～~〜∼―─♪☆★♥♡";
+constexpr std::u32string_view kEnds = U"」』！？!?‼⁉⁈。．.…‥、，,～~〜∼―─♪☆★♥♡";
 // With the closing marks of the sound stage (kEmphasisClose, kLengthenMark).
 constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE009\uE00A";
 

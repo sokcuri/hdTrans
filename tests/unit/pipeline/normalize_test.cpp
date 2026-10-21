@@ -39,6 +39,7 @@ HD_TEST(pipeline_normalize_forms) {
         {"ﾍﾟﾎﾞﾍﾞ"sv, "ペボベ"sv},
         {"x\xffy"sv, "x\xffy"sv},
         {"ｶ"sv, "カ"sv},
+        {"待って‼ えっ⁉ 何⁈ うっ‼\uFE0E"sv, "待って！！ えっ！？ 何？！ うっ！！"sv},
     };
     Check(NormalizeForms, cases);
 }
