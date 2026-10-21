@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:gram:nokoto:person-kanji	先輩の事を尊敬している。	선배를 존경하고 있다.	fix	local
+dict:gram:nokoto:person-kanji	先生の事が好きだ。	선생님을 좋아한다.	fix	local
+dict:gram:nokoto:person-kanji	東京の事を聞いた。	도쿄의 일을 들었다.	keep	local
+dict:gram:nokoto:time:のこと	日曜日の午後のことだった。	일요일 오후였다.	fix	local
+dict:gram:nokoto:time:のこと	昨日のことは忘れた。	어제의 일은 잊었다.	keep	local
+dict:jisjk:266137	これが負けるってことか。	이것이 진다는 것인가.	keep	local
+dict:jisjk:116967	これが負けるって事か。	이것이 진다는 것인가.	fix	local
+dict:jisjk:116679	そんなことを考えていた。	그런 것을 생각하고 있었다.	fix	local
+dict:jisjk:116679	どんなことがあっても諦めない。	어떤 일이 있어도 포기하지 않는다.	keep	local
+dict:jisjk:341294	答えを得ることは出来ない。	대답을 얻을 수 없다.	fix	local-ending
