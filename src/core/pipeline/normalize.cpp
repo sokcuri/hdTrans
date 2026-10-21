@@ -48,7 +48,7 @@ constexpr CharMap kCp932Forms[] = {
 // Kanji forms outside JIS X 0208 (the JIS X 0213 forms of web text) with the form the
 // dictionary holds.
 constexpr CharMap kKanjiForms[] = {
-    {U'頰', U'頬'}, {U'摑', U'掴'}, {U'𠮟', U'叱'}, {U'剝', U'剥'}, {U'繫', U'繋'}, {U'噓', U'嘘'},
+    {U'頰', U'頬'}, {U'閒', U'間'}, {U'摑', U'掴'}, {U'𠮟', U'叱'}, {U'剝', U'剥'}, {U'繫', U'繋'}, {U'噓', U'嘘'},
     {U'搔', U'掻'}, {U'鷗', U'鴎'}, {U'屛', U'屏'}, {U'餠', U'餅'}, {U'塡', U'填'}, {U'醬', U'醤'},
     {U'蔣', U'蒋'}, {U'﨑', U'崎'}, {U'髙', U'高'}, {U'德', U'徳'}, {U'淸', U'清'}, {U'靑', U'青'},
     {U'瀨', U'瀬'}, {U'吞', U'呑'}, {U'揭', U'掲'}, {U'涉', U'渉'}, {U'焰', U'焔'}, {U'狀', U'状'},
@@ -462,6 +462,9 @@ std::string NormalizeForms(std::string_view text) {
                 c += 2;
                 i += mark.size;
             }
+        } else if (c == U'〆' && i < text.size() &&
+                   (In(At(text, i).cp, U"切めるた") || (At(text, i).cp >= U'一' && At(text, i).cp <= U'鿿'))) {
+            c = U'締';  // 〆切, 〆る: the kanji 締 written short
         } else if (c <= 3) {
             c = U' ';
         } else if (c == U'‼' || c == U'⁉' || c == U'⁈') {
