@@ -48,3 +48,7 @@ dict:jisjk:374182	わるい、忘れてた。	rule:dict:jisjk:374182=미안$AB@	
 dict:jisjk:153760	彼は突然立ち上がった。	그는 갑자기 일어섰다.	fix	lookup
 phrase:突然の	突然の雨に降られた。	갑작스러운 비를 맞았다.	fix	lookup
 phrase:突然	ずいぶん突然だね。	꽤 갑작스럽네.	fix	lookup
+dict:jisjk:964	なんとなく窓の外を眺めた。	왠지 창 밖을 바라보았다.	fix	lookup
+dict:word:nantonaku:vaguely	なんとなくわかる気がする。	rule:dict:word:nantonaku:vaguely=어렴풋이	fix	local
+dict:word:nantonaku:vaguely	なんとなく嫌な予感がする。	!rule:dict:word:nantonaku:vaguely	keep	local
+dict:word:nantonaku:vaguely-kanji	何となく分かっていた。	rule:dict:word:nantonaku:vaguely-kanji=어렴풋이	fix	local

@@ -26735,3 +26735,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自然と	자연스럽게	E300			GN							word:shizento:adverb
 自然と	자연과	E300			GN	5201	||4 S+1== "共に" S+1== "ともに" S+1== "一体" S+1== "人間"	共に, 一体, 人間 앞의 自然と는 명사와 조사 자연과로 고른다.				word:shizento:nature
 楽しみ	기대돼	N110			GN	5202	||2 &&2 G+0== "Hz" ||3 G+0== "Ow" P+1== "6**" S+1== "?" &&2 S-1!= "Rの" ||3 G+0== "Ow" P+1== "6**" S+1== "?"	の 뒤가 아니고 문장 끝이나 문장 부호 앞에 홀로 오는 楽しみ를 기대돼로 고른다.				word:tanoshimi:alone
+なんとなく	어렴풋이	E311			GN	5203	||8 S+1== "L分か" S+1== "Lわか" S+1== "L知" S+1== "L覚" S+1== "L憶" S+1== "L察" S+1== "L理解" S+1== "L把握"	わかる, 知る, 覚える, 察する, 理解, 把握 앞의 なんとなく를 어렴풋이로 고른다.				word:nantonaku:vaguely
+何となく	어렴풋이	E311			GN	5203	||8 S+1== "L分か" S+1== "Lわか" S+1== "L知" S+1== "L覚" S+1== "L憶" S+1== "L察" S+1== "L理解" S+1== "L把握"	わかる, 知る, 覚える, 察する, 理解, 把握 앞의 なんとなく를 어렴풋이로 고른다.				word:nantonaku:vaguely-kanji
