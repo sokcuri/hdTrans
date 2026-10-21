@@ -20,3 +20,11 @@ dict:word:ayauku:narrowly	計画が危うくなった。	!rule:dict:word:ayauku:
 dict:word:ayauku:narrowly	彼の嘘が立場を危うくする。	!rule:dict:word:ayauku:narrowly	keep	local
 dict:word:shizento:nature	気づけば自然と笑っていた。	정신을 차려 보니 자연스럽게 웃고 있었다.	fix	local
 dict:word:shizento:nature	自然と人間の関係を考える。	rule:dict:word:shizento:nature=자연과	keep	local
+dict:jisjk:35843	走ったら体中が痛い。	달리면 온몸이 아프다.	fix	lookup
+phrase:身体中	身体中に力が入らない。	온몸에 힘이 들어가지 않는다.	fix	lookup
+phrase:脱力する	試合が終わって一気に脱力した。	시합이 끝나 단번에 힘이 빠졌다.	fix	lookup
+phrase:寝返りを打つ	夜中に何度も寝返りを打った。	한밤중에 몇 번이나 뒤척였다.	fix	lookup
+dict:jisjk:95067	彼女は腰を振って踊った。	rule:dict:jisjk:95067=흔&L4@	fix	local
+dict:jisjk:95067	手を振って別れた。	손을 흔들어 헤어졌다.	keep	local
+dict:jisjk:95067	首を振って断った。	!rule:dict:jisjk:95067	keep	local
+dict:jisjk:4875	いやらしい目で見ないで。	야한 눈으로 보지 마.	fix	lookup

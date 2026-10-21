@@ -3975,7 +3975,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いやみたらし	밉살스$G7@	H7N0			GN				jisjk:119860		
 いやも応もな	반대할 여지가 $FA@	H7N0			GN				jisjk:121831		
 いやら	3지	T500			GN	4769	||1 &&4 S+0== "い" P-1== "4**" M-1== "57*" Y-1= "6야"	て형 동사 뒤의 어간 い에 붙은 いやら를 '-을지'로 고르면서 앞 동사 어미를 '-아야'로 바꾼다. (미발동: rare-context)	jisjk:373493		
-いやらし	불쾌$AB@	G7U0			GN				jisjk:4875		
+いやらし	야$AB@	G7U0			GN				jisjk:4875		
 いやーな	싫은	E0H0			GN				jisjk:123410		
 いや応なく	억지로	E300			GN				jisjk:122842		
 いよ	6	T500			GN				jisjk:342060		
@@ -122850,7 +122850,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 体をこわばらせ	몸을 움추&AA@	M427			GN				jisjk:262069		
 体を壊	건강을 해&AO@	M423		Pn	GN				jisjk:341099		
 体一つ	몸 하나	N110			GN				jisjk:169617		
-体中	체내	N110	VPl		GN				jisjk:35843		
+体中	온몸	N110	VPl		GN				jisjk:35843		
 体位	체위	N110			GN				jisjk:35836		
 体側	몸의 측면	N110	VBp		GN				jisjk:152939		
 体内	체내	N110	VPl		GN				jisjk:35820		
@@ -177045,7 +177045,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 嫌にな	싫어&AL@	E428			GN				jisjk:342720		
 嫌み	싫은소리	N110		Hd	GN				jisjk:126245		
 嫌やが	싫어&AV@	M448			GN				jisjk:342239		
-嫌らし	불쾌$AB@	H7U0			GN				jisjk:6038		
+嫌らし	야$AB@	H7U0			GN				jisjk:6038		
 嫌われ	미움&FD@	M427			GN				jisjk:341992		
 嫌味	불쾌%A1@	G8L0			GN				jisjk:3921		
 嫌味	싫은 소리	N110	UTsUHr		GN				jisjk:3922		
@@ -215373,7 +215373,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 振	날&AA@	M448	URtUQfVMo	Ct	GN	813	||1 S-2== "日の丸"	振의 두 단어 앞이 日の丸이면 날리다라는 번역을 고른다. (미발동: rare-context)	jisjk:95064		
 振	발행&AV@	M448			GN	814	||1 &&3 P-1== "2**" P-2== "1**" ||2 D-2== "어음" D-2== "수표"	振 앞의 조사 너머 명사가 어음이나 수표로 번역되면 발행하다를 고른다. (미발동: rare-context)	jisjk:95065		
 振	휘&E1@	M430	VSwVTwURt		GN	815	||2 &&2 S-1== "大振りに" P-1== "3**" S-2== "暴力"	앞에 大振りに 부사가 있거나 두 단어 앞에 暴力이 있으면 振를 휘두르다로 고른다. (미발동: rare-context)	jisjk:95066		
-振	흔&L4@	M448	VRw		GN	816	||1 &&2 S-1== "を" S-2== "R手"	振는 を 앞 명사가 手로 끝나면 ‘흔들다’로 고른다.	jisjk:95067		
+振	흔&L4@	M448	VRw		GN	816	||1 &&2 S-1== "を" ||3 S-2== "R手" S-2== "R腰" S-2== "R尻"	振는 を 앞 명사가 手, 腰, 尻로 끝나면 ‘흔들다’로 고른다.	jisjk:95067		
 振	&JE@	M448			GN	5047	||1 &&2 S-2== "首" D-2= "고개"	振는 두 단어 앞이 首이면 젓다로 고르면서 首를 고개로 바꾼다. (미발동: rare-context)	jisjk:375270		
 振い落	떨어뜨&AA@	M433			GN				jisjk:95068		
 振こ人	불입인	I110			GN				jisjk:85273		
