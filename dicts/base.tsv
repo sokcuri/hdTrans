@@ -4095,15 +4095,15 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いろあせ	색이 바&Ai@	M427	VCp		GN				jisjk:141180		
 いろいろ	여러 가지	E301			GN				jisjk:110		
 いろいろ	가지각색%D4@	G8L0			GN				jisjk:111		
-いろいろあ	여러가지 &HN@	M428			GN				jisjk:144950		
+いろいろあ	여러 가지 &HN@	M428			GN				jisjk:144950		
 いろいろいそがし	여러 가지로 바$A5@	H7N0			GN				jisjk:121875		
-いろいろと	여러가지	E311			GN				jisjk:112		
-いろいろと	여러가지로	N110			GN				jisjk:160068		
-いろいろな	여러가지	E300			GN				jisjk:103675		
-いろいろなかたち	여러가지 형태	G110			GN				jisjk:259883		
-いろいろなこと	여러가지	E110			GN				jisjk:374950		
-いろいろな障害	여러가지 장해	G110			GN				jisjk:257493		
-いろいろの	여러가지	C0D1			GN				jisjk:4540		
+いろいろと	여러 가지	E311			GN				jisjk:112		
+いろいろと	여러 가지로	N110			GN				jisjk:160068		
+いろいろな	여러 가지	E300			GN				jisjk:103675		
+いろいろなかたち	여러 가지 형태	G110			GN				jisjk:259883		
+いろいろなこと	여러 가지	E110			GN				jisjk:374950		
+いろいろな障害	여러 가지 장해	G110			GN				jisjk:257493		
+いろいろの	여러 가지	C0D1			GN				jisjk:4540		
 いろいろひと	여러 사람	N110	VHn		GN				jisjk:150556		
 いろいろまよわれ	여러 가지로 망설여&AL@	M427			GN				jisjk:144957		
 いろいろやってみてい	다양하게 해 보고 &HN@	M447			GN				jisjk:144960		
@@ -4146,7 +4146,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いろわけ	색별	N110			GN				jisjk:126350		
 いろをうしな	창백해&AL@	M420			GN				jisjk:145173		
 いろをつけ	경품을 붙&AJ@	M427			GN				jisjk:145187		
-いろんな	여러가지	C0D1			GN				jisjk:4541		
+いろんな	여러 가지	C0D1			GN				jisjk:4541		
 いろんな	여러	C0D1			GN	3413	||1 &&2 P+1== "1**" A+1== "VHn"	사람 명사 앞의 'いろんな'를 '여러'로 고른다.	jisjk:343172		
 いろんなものを売ってい	다양한 것을 팔고 &HN@	C4U7		Pn	GN				jisjk:341394		
 いろんな人	여러 사람	C0H0			GN				jisjk:264148		
@@ -20142,11 +20142,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 さまがわり	양상이 바&CW@	M419			GN				jisjk:120658		
 さまがわり	양상 변화	N110			GN				jisjk:185429		-1
 さまざま	다양%A1@	G8L0			GN				jisjk:2183		
-さまざま	여러가지	N110			GN				jisjk:340010		
+さまざま	여러 가지	N110			GN				jisjk:340010		
 さまざまであ	다양&AV@	M428			GN				jisjk:120672		
 さまざまな困難	다양한 곤란	A110			GN				jisjk:90211		
-さまざまに	여러가지로	E300			GN				jisjk:123146		
-さまざまの	여러가지	C0D1			GN				jisjk:4563		
+さまざまに	여러 가지로	E300			GN				jisjk:123146		
+さまざまの	여러 가지	C0D1			GN				jisjk:4563		
 さまたげ	방해&AV@	M457			GN				jisjk:121535		
 さまたげ	장애	N110			GN				jisjk:185430		-1
 さまつ	사소한 일	I110			GN				jisjk:41073		
@@ -30031,7 +30031,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そんなことな	그렇지 $D7@	C7U0			GN				jisjk:341088		
 そんなことはな	그렇지 $D7@	C7U0			GN				jisjk:340796		
 そんなこと言われ	그런 말을 &J6@	M427			GN				jisjk:138078		
-そんなこんな	여러가지	E311			GN				jisjk:655		
+そんなこんな	여러 가지	E311			GN				jisjk:655		
 そんなでもありません	그 정도는 아닙니다	C9D0			GN				jisjk:201687		
 そんなとき	그럴 때	E300			GN				jisjk:363704		
 そんなところ	그런 곳	C110	VPl		GN				jisjk:41231		
@@ -35830,10 +35830,10 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なに	무엇	N110			GN				jisjk:266033		
 なに	무엇	N110			GN	2453	||1 ||2 S+1== "を" S+1== "にもまして"	なに를 を·にもまして 앞에서 '무엇'으로 선택한다.	jisjk:266034		
 なにか	뭔가	N110			GN				jisjk:41395		
-なにか	여러가지	N110			GN				jisjk:263888		
+なにか	여러 가지	N110			GN				jisjk:263888		
 なにかしら	뭘까	N110			GN				jisjk:341387		
 なにかと	이것저것	E311			GN				jisjk:933		
-なにかと	여러가지로	E300	XXX		GN				jisjk:267607		
+なにかと	여러 가지로	E300	XXX		GN				jisjk:267607		
 なにがさて	어쨌든	E311			GN				jisjk:934		
 なにがし	아무개	I120			GN				jisjk:41396		
 なにがなんでも	어쨌든지	A9D0			GN				jisjk:373777		
@@ -42586,7 +42586,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 もろて	양손	I110			GN				jisjk:106813		
 もろに	그대로	E300			GN				jisjk:375024		
 もろはのつるぎ	쌍날의 검	N110	VPe		GN				jisjk:155751		
-もろもろ	여러가지	I110			GN				jisjk:41745		
+もろもろ	여러 가지	I110			GN				jisjk:41745		
 もろ刃	양날	I110			GN				jisjk:106814		
 もろ刃の剣	쌍날의 검	N110	VPe		GN				jisjk:155750		
 もろ白	순곡 청주	I110			GN				jisjk:106841		
@@ -48482,7 +48482,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 イレーザー	지우개	N110	VSw		GN				jisjk:43500		
 イレース	erase	N110			GN				jisjk:43501		
 イレーズ	일레이즈	N110			GN				jisjk:112538		
-イロイロあ	여러가지가 &HN@	M428			GN				jisjk:364490		
+イロイロあ	여러 가지가 &HN@	M428			GN				jisjk:364490		
 イロジカル	비논리적%D4@	G8U0			GN				jisjk:147336		
 イロニー	아이러니	N110			GN				jisjk:43503		
 イロハ	이로하	N130	QPN		GN				jisjk:371726		
@@ -123020,7 +123020,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 何が何だか	뭐가 뭔지	E300			GN				jisjk:364344		
 何が何でも	어쨌든지	A9D0			GN				jisjk:373778		
 何くれ	아무개	I110			GN				jisjk:88348		
-何くれとなく	여러가지로	I110			GN				jisjk:108822		
+何くれとなく	여러 가지로	I110			GN				jisjk:108822		
 何くわぬ	아무렇지도 않은	E300			GN				jisjk:364438		
 何げなく	아무렇지도 않게	E311			GN				jisjk:2040		
 何ごと	무슨 일	N110			GN				jisjk:368819		
@@ -152305,7 +152305,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 各部	각부	N110	VPl		GN				jisjk:14436		
 各部分	각 부분	N110	VPl		GN				jisjk:163715		
 各部品箱	각 부품 상자	N110			GN				jisjk:351933		
-各金種	여러가지 돈	I110			GN				jisjk:60299		
+各金種	여러 가지 돈	I110			GN				jisjk:60299		
 各金額	각 금액	N110			GN				jisjk:161083		
 各銀行	각 은행	N110	VBl		GN				jisjk:161082		
 各階	각층	N110	VBl		GN				jisjk:168786		
@@ -247199,10 +247199,10 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 様	%B3@	G8U0			GN	3231	||1 &&3 P-1== "130" A-1== "QPN" D+0= "님%D4@"	様 앞의 명사가 인명 의미의 130 고유명사이면 현재 번역을 님이다로 바꾼다. (미발동: rare-context)	jisjk:342295		
 様	방법	N110			GN				jisjk:373378		
 様□	다양%A1@	G8N0			GN				jisjk:103951		
-様々	여러가지%D4@	G8U0			GN				jisjk:260401		
-様々	여러가지	G110			GN				jisjk:260418		
-様々な	여러가지	G300			GN				jisjk:117276		
-様々に	여러가지로	E300			GN				jisjk:123145		
+様々	여러 가지%D4@	G8U0			GN				jisjk:260401		
+様々	여러 가지	G110			GN				jisjk:260418		
+様々な	여러 가지	G300			GN				jisjk:117276		
+様々に	여러 가지로	E300			GN				jisjk:123145		
 様々の	다양한	E0H0			GN				jisjk:149888		
 様に	0 것처럼	S500			GN				jisjk:260552		
 様に	님이	D110		Tu	GN	3248	||1 &&5 P-1== "13*" P+1== "4**" M+1== "57*" S+2== "いただ" P+2== "4**"	様に 앞에 고유명사가 있고 뒤에 57형 동사와 いただ 동사가 오면 님이를 고른다. (미발동: rare-context)	jisjk:342433		
@@ -290655,10 +290655,10 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 種目	종목	N110			GN				jisjk:33856		
 種目別	종목별	N110			GN				jisjk:353366		
 種社会	종사회	N110	VBl		GN				jisjk:234888		
-種種	여러가지	E311			GN				jisjk:1966		
+種種	여러 가지	E311			GN				jisjk:1966		
 種種	여러 가지	N110			GN				jisjk:175838		
 種種	여러 가지	N110			GN				jisjk:189927		
-種種の	여러가지	C0D1			GN				jisjk:4756		
+種種の	여러 가지	C0D1			GN				jisjk:4756		
 種種相	갖가지 모습	I110			GN				jisjk:83862		
 種種相	여러면	A110			GN				jisjk:83863		
 種種雑多	가지각색	A110			GN				jisjk:90304		
@@ -308718,12 +308718,12 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 艱難	고난	N110	SFl		GN				jisjk:170697		
 艱難辛苦	간난신고	I110			GN				jisjk:60379		
 色	색	N110	UCrUCl		GN				jisjk:115880		
-色□	여러가지	E300			GN				jisjk:103414		
+色□	여러 가지	E300			GN				jisjk:103414		
 色□お[xyeok	뺏은 후	A9H1			GN				jisjk:103393		
-色々	여러가지	N110			GN				jisjk:115363		
+色々	여러 가지	N110			GN				jisjk:115363		
 色々	다양%A1@	G8U0			GN				jisjk:119386		
 色々と	다양하게	E300			GN				jisjk:149004		
-色々とほんとにサンキュー	여러가지로 정말로 생큐	A9D0			GN				jisjk:264115		
+色々とほんとにサンキュー	여러 가지로 정말로 생큐	A9D0			GN				jisjk:264115		
 色々人	여러 사람	N110	VHn		GN				jisjk:150555		
 色あい	색조	N110			GN				jisjk:126310		
 色あせ	퇴색&AV@	M417			GN				jisjk:93427		
@@ -308874,7 +308874,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 色聴	색청	N110			GN				jisjk:233573	0000000000000000000000000000000000000000000000000000000000000000432d47513f254e27405edf3f383827df44093c5b4f574f5d3f33df3f3041004e31313000005074004d5556486e00466400436c000000000000006400710071006800000000000000000000000000474e000000000000000000000000122c0c3c	
 色良い	호의적인	N110			GN				jisjk:159587		
 色色	여러 가지	E300			GN				jisjk:122850		
-色色な	여러가지	C0D1			GN				jisjk:4702		
+色色な	여러 가지	C0D1			GN				jisjk:4702		
 色艷	피부 윤기	N110			GN				jisjk:25950		
 色落ち	탈색	N110		HdHc	GN				jisjk:343844		
 色街	유흥가	N110	VPl		GN				jisjk:126344		
@@ -326788,12 +326788,12 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 諸	제	N110		Z6	GN				jisjk:115842		
 諸	모로	N130	QCTVPl		GN				jisjk:258908		
 諸	제	N110	XXX	On	GN				jisjk:335012		
-諸々の	여러가지	N110			GN				jisjk:266920		
+諸々の	여러 가지	N110			GN				jisjk:266920		
 諸の木	모로노키	N130	QCTVPl		GN				jisjk:335039		
 諸ひざ	양무릎	I110	VBp		GN				jisjk:83524		
 諸事	제반사	N110			GN				jisjk:33449		
-諸事実	여러가지 사실	N110			GN				jisjk:161018		
-諸事情	여러가지 사정	N110			GN				jisjk:160385		
+諸事実	여러 가지 사실	N110			GN				jisjk:161018		
+諸事情	여러 가지 사정	N110			GN				jisjk:160385		
 諸事由	여러 가지 사유	N110			GN				jisjk:160951		
 諸事象	제 사상	N110			GN				jisjk:364063		
 諸事項	여러 사항	N110			GN				jisjk:151252		
