@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-rewrite:parallel-noka	試験は良かったのか、あるいは悪かったのか。	시험은 좋았던 것인지, 혹은 나빴던 건지.	fix	rewrites
+rewrite:parallel-noka	試験は良かったのか、あるいは悪かったのか。	시험은 좋았던 건지, 혹은 나빴던 건지.	fix	rewrites
 rewrite:parallel-noka	彼は来るのか、来ないのか。	그는 오는지, 오지 않는 건지.	fix	rewrites
 rewrite:parallel-noka	それは本当なのか、嘘なのか。	그것은 사실인지, 거짓말인지.	fix	rewrites
-rewrite:parallel-noka	試験は良かったのか、分からない。	시험은 좋았던 것일까, 모른다.	keep	rewrites
+rewrite:parallel-noka	試験は良かったのか、分からない。	시험은 좋았던 걸까, 모른다.	keep	rewrites
