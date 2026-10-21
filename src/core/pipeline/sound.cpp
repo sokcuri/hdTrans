@@ -308,6 +308,7 @@ private:
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PresentTime(size_t end) const;
+    bool Scoff(size_t p, size_t end) const;
     std::u32string_view Clause(size_t i) const;
     std::u32string_view Line(size_t p) const;
     bool AfterClause(size_t p, size_t end) const;
@@ -520,7 +521,9 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
 //     いや is next to it, or it stands alone before ！; 아니 before a clause that
 //     declines (無理, 違う, 遠慮); 이야 otherwise;
 //   - いざ is 막상 in a conditional clause (いざ講義になると), 자 otherwise;
-//   - ただいま is 지금 before a clause (PresentTime), 다녀왔습니다 otherwise.
+//   - ただいま is 지금 before a clause (PresentTime), 다녀왔습니다 otherwise;
+//   - はん is a scoff (흥) where it opens an utterance before ！ 、 or 。 and no sound
+//     follows (Scoff), a moan (하앙) otherwise.
 std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
@@ -534,6 +537,8 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
         if (ContainsAny(Clause(end), kConditionals)) return "막상";
     } else if (key == U"タダイマ") {
         if (PresentTime(end)) return "지금";
+    } else if (key == U"ハン") {
+        if (Scoff(p, end)) return "흥";
     }
     return s.korean;
 }
@@ -545,6 +550,16 @@ bool SoundText::PresentTime(size_t end) const {
     if (end >= f_.size()) return false;
     if (IsKanjiRune(f_[end])) return true;
     return f_[end] == U'、' && ContainsAny(Clause(end), kProgressCues);
+}
+
+// Whether the はん at characters [p, end) is a scoff: it opens an utterance, ！ 、 or 。 follows,
+// and the word after them is no sound (はん！こんなの; not はんっ、あんっ).
+bool SoundText::Scoff(size_t p, size_t end) const {
+    if (!UtteranceStart(p) || end >= rs_.size() || !In(rs_[end], U"！!、，。")) return false;
+    size_t i = end;
+    while (i < rs_.size() && In(rs_[i], U"！!、，。　 ")) i++;
+    SoundMatch m;
+    return i == rs_.size() || !MatchAt(i, m);
 }
 
 // The text from character i to the end of its sentence, in katakana.
