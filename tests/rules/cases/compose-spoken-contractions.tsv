@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+compose:spoken-contraction	窓を開けておいてよ。	창을 열어 둬.	fix	compose
+compose:spoken-contraction	本当にそうなったの？	정말로 그렇게 됐어?	fix	compose
+compose:spoken-contraction	写真を見たよ。	사진을 봤어.	fix	compose
+compose:spoken-contraction	敵じゃないぞ！	적이 아니야!	fix	compose
+compose:spoken-contraction	花が咲くのよ。	꽃이 피어.	keep	compose
+compose:spoken-contraction	石を集めたの？	돌을 모았어?	keep	compose
+compose:spoken-contraction	彼は先生になった。	그는 선생님이 되었다.	keep	compose
+compose:spoken-contraction	窓を開けておいた。	창을 열어 두었다.	keep	compose

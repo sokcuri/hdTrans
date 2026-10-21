@@ -169,6 +169,11 @@ namespace internal {
 const ResolvedEntry& EntryAt(const ResolvedItem& it, int i);
 inline const ResolvedEntry& Selected(const ResolvedItem& it) { return EntryAt(it, it.selected); }
 
+// The spoken contraction of an 아/어 form that ends a sentence (주어 줘, 되어 돼, 보아 봐)
+// or of a past stem (되었 됐, 주었 줬). Other forms, ㅣ with 어 among them (피어, 아니어),
+// are returned unchanged.
+std::string SpokenInfinitive(std::string_view form);
+
 }  // namespace internal
 
 }  // namespace hdTrans::output
