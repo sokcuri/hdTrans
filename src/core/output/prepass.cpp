@@ -516,10 +516,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     item.tokenIndex - items[previous].tokenIndex == 1) {
                     t.insert(0, " ");
                 }
-                // A number is written apart from a following one-word predicate (12 올랐다);
-                // a counter (3개) and a predicate that starts with the noun it counts
-                // (3시간 들였다) stay attached.
-                return Result(std::move(t), nextKind == '4' && nextEntry.find(' ') == std::string_view::npos);
+                // A number is written apart from a following one-word predicate (12 올랐다,
+                // 0600 같다); a counter (3개, 10엔인) and a predicate that starts with the noun it
+                // counts (3시간 들였다) stay attached.
+                const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
+                return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
             if (nd(nextTags)) return Result(std::move(t), true);
             if (WidthOf(t) == 2 && previous >= 0) {
