@@ -4,3 +4,4 @@ dict:jisjk:264210	この靴、高いの？	이 구두, 비싼 거야?	fix	local-
 ending:geo-space	明日は寒いだろうよ。	내일은 추울 것 같아요.	fix	local-ending
 ending:geo-space	もう来ないの？	이제 오지 않는 거야?	fix	local-ending
 dict:jisjk:264266	悪い人じゃないのよ。	나쁜 사람은 아닌 거예요.	fix	lookup
+dict:jisjk:266870	人が住んでいるってのか？	사람이 살고 있다는 건지?	fix	defaults
