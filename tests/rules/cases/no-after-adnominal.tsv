@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:no-final-adnominal:1	あの音が耳障りなの。	그 소리가 귀에 거슬리는 거야.	fix	local
+dict:no-final-adnominal:1	滑稽なのは君の方だ。	우스운 것은 네 편이다.	fix	local
+dict:no-final-adnominal:1	そんなのいらない。	!rule:dict:no-final-adnominal:1	keep	local
