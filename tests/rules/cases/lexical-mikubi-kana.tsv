@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:lex-mikubi:kana-verb-stem	私は相手をみくびる。	나는 상대를 업신여긴다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	相手をみくびった。	상대를 업신여겼다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	私は相手をみくびらない。	나는 상대를 업신여기지 않는다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	相手をみくびりませんでした。	상대를 업신여기지 않았습니다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	相手をみくびる人は失敗する。	상대를 업신여기는 사람은 실패한다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	私は彼にみくびられた。	나는 그에게 업신여겨졌다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	彼は相手にみくびられている。	그는 상대에게 업신여겨지고 있다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	私はみくびられているのか。	나는 업신여겨지고 있는 것인가.	fix	lookup
+dict:lex-mikubi:kana-passive-stem	私は彼にみくびられたくない。	나는 그에게 업신여겨지고 싶지 않다.	fix	lookup
+dict:lex-mikubi:canonical-passive-stem	私は彼に見くびられたくない。	나는 그에게 업신여겨지고 싶지 않다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	画面を見る。	화면을 본다.	keep	lookup
+dict:lex-mikubi:kana-verb-stem	首が痛い。	목이 아프다.	keep	lookup
+dict:lex-mikubi:kana-verb-stem	首を振った。	고개를 저었다.	keep	lookup
+dict:lex-mikubi:kana-verb-stem	人をくびる。	사람을 교살한다.	keep	lookup
+dict:lex-mikubi:kana-passive-stem	私は相手にみくびられたくなかった。	나는 상대에게 업신여겨지고 싶지 않았다.	fix	lookup
+dict:lex-mikubi:canonical-passive-stem	私は相手に見くびられたくなかった。	나는 상대에게 업신여겨지고 싶지 않았다.	fix	lookup
+dict:lex-mikubi:kana-passive-stem	みくびられたくなければ、準備しよう。	업신여겨지고 싶지 않으면, 준비하자.	fix	lookup
+dict:lex-mikubi:canonical-passive-stem	見くびられたくなければ、準備しよう。	업신여겨지고 싶지 않으면, 준비하자.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	私は相手をみくびりたくない。	나는 상대를 업신여기고 싶지 않다.	fix	lookup
+dict:lex-mikubi:kana-verb-stem	私は相手を見くびりたくない。	나는 상대를 업신여기고 싶지 않다.	keep	lookup
+dict:lex-mikubi:kana-passive-stem	みくびられたくなる。	업신여겨지고 싶어진다.	fix	lookup
+dict:lex-mikubi:canonical-passive-stem	見くびられたくなる。	업신여겨지고 싶어진다.	fix	lookup
+dict:lex-mikubi:kana-passive-stem	みくびられたくなって困る。	업신여겨지고 싶어져 곤란하다.	fix	lookup
+dict:lex-mikubi:canonical-passive-stem	見くびられたくなって困る。	업신여겨지고 싶어져 곤란하다.	fix	lookup

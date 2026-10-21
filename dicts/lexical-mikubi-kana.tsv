@@ -1,0 +1,6 @@
+#! layer=words
+# 見くびる의 가나 표기
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+みくび	업신여&A2@	M438			GN							lex-mikubi:kana-verb-stem
+みくびられ	업신여겨&AL@	M427			GN							lex-mikubi:kana-passive-stem
+見くびられ	업신여겨&AL@	M427			GN							lex-mikubi:canonical-passive-stem
