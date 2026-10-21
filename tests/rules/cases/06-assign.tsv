@@ -60,7 +60,7 @@ dict:jisjk:348598	日程のどれを選んだ。	일정의 어느 것을 선택�
 dict:jisjk:348598	どれを買った。	어떤 것을 샀다.	fix	local
 dict:jisjk:356264	元気でなによりです。	건강해서 다행입니다.	fix	local
 dict:jisjk:356264	なによりも大事だ。	무엇보다도 소중하다.	fix	local
-dict:jisjk:3926	私は私が好きです。	나는 나를 좋아합니다.	fix	local
+dict:jisjk:3926	私は私が好きです。	저는 저를 좋아합니다.	fix	local
 dict:jisjk:3926	猫が好きです。	고양이를 좋아합니다.	fix	local
 dict:jisjk:114761	安く高い品質を得る。	싸고 높은 품질을 얻는다.	fix	local
 dict:jisjk:114761	高い服を買う。	비싼 옷을 산다.	fix	local
@@ -99,7 +99,7 @@ dict:jisjk:358020	ひと通り読んだ。	한 차례 읽었다.	fix	local
 dict:jisjk:358020	ひと通りの知識だ。	보통의 지식이다.	fix	local
 dict:jisjk:359369	まとまりのある話だ。	짜임새가 있는 이야기다.	fix	local
 dict:jisjk:359369	まとまりがない。	정리가 없다.	fix	local
-dict:jisjk:263623	五日先の話だ。	닷새 후의 이야기다.	fix	local
+dict:jisjk:263623	五日先の話だ。	닷새 후 이야기다.	fix	local
 dict:jisjk:263623	この先に店がある。	이 앞에 가게가 있다.	fix	local
 dict:jisjk:116112	箱の内には紙がある。	상자의 안에는 종이가 있다.	fix	local
 dict:jisjk:116112	三人の内から選ぶ。	세 명중에서 선택한다.	fix	local
@@ -119,7 +119,7 @@ dict:jisjk:3829	裏の通りを走った。	뒤의 거리를 달렸다.	fix	loca
 dict:jisjk:3829	説明の通りに書いた。	설명대로에 썼다.	fix	local
 dict:jisjk:115623	金と言う金属は重い。	금이라는 금속은 무겁다.	fix	local
 dict:jisjk:115623	彼は金と言った。	그는 돈이라고 말했다.	fix	local
-dict:jisjk:115623	私は金と申します。	나는 김이라고 합니다.	fix	local
+dict:jisjk:115623	私は金と申します。	저는 김이라고 합니다.	fix	local
 dict:jisjk:115563	狭い間に箱を置く。	좁은 사이에 상자를 둔다.	fix	local
 dict:jisjk:115563	短い間だけ待つ。	짧은 동안만 기다린다.	fix	local
 dict:jisjk:115563	長い間待った。	오랫동안 기다렸다.	fix	local

@@ -29,8 +29,14 @@ constexpr ConstraintRule kRules[] = {
      "한자 단어 + 경칭: 인명 뜻 말고는 지명 뜻뿐이면 인명 뜻만 (太郎殿 타로전 → 타로님)", {}},
     {"kimi-after-katakana", ConstraintWord::Source, "君", ConstraintContext::AfterKatakana, ConstraintReject::Pronoun,
      "가타카나 바로 뒤의 君은 대명사(너·네)가 아니라 접미사 군 (バカ君が 바보네가 → 바보군이)", {}},
+    {"kimito-after-mask", ConstraintWord::Source, "君と", ConstraintContext::AfterMask, ConstraintReject::OtherTargets,
+     "가린 이름(○○, △△) 바로 뒤의 君と는 너와가 아니라 군과 (△△君と 너와 → △△군과)", "군과"},
+    {"kimi-after-mask", ConstraintWord::Source, "君", ConstraintContext::AfterMask, ConstraintReject::Pronoun,
+     "가린 이름(○○, △△) 바로 뒤의 君은 대명사가 아니라 접미사 군 (××君が 너가 → ××군이)", {}},
     {"quote-after-exclamation", ConstraintWord::Source, "と", ConstraintContext::AfterExclamation,
-     ConstraintReject::NonQuote, "！·？ 바로 뒤의 と는 인용 조사 라고 (ドン！と 돈! 와 → 돈! 라고)", {}},
+     ConstraintReject::NonQuote, "！·？ 바로 뒤나 ！っ 뒤의 と는 인용 조사 라고 (ドン！と 돈! 와 → 쾅! 라고)", {}},
+    {"quote-comma-after-exclamation", ConstraintWord::Source, "と、", ConstraintContext::AfterExclamation,
+     ConstraintReject::NonQuote, "！·？ 바로 뒤나 ！っ 뒤의 と、도 인용 (ドン！っと、 쾅! 와 → 쾅! 라고,)", {}},
     {"quote-tte-after-pause", ConstraintWord::Source, "って", ConstraintContext::AfterPause,
      ConstraintReject::NonQuote, "！·？·、·… 뒤에서 명사(奴·こと·話 등)를 꾸미는 って는 인용 (休暇、って奴 휴가, 는 녀석 → 휴가, 라는 녀석)", {}},
     {"iwaku-line-opening", ConstraintWord::Source, "曰く", ConstraintContext::LineOpening, ConstraintReject::NonAdverb,
@@ -51,12 +57,20 @@ constexpr ConstraintRule kRules[] = {
      ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
     {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
+    {"me-yatsu-detached", ConstraintWord::Source, "め", ConstraintContext::Detached, ConstraintReject::Target,
+     "띄어 쓰였거나 문장 부호 뒤에 홀로 선 め는 녀석이 아님 (名前: め 녀석 → 메)", "녀석"},
     {"wa-won-without-number", ConstraintWord::Source, "わ", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 わ는 원이 아님 (だったわ 이었던 원, おわっ 원)", "원"},
     {"wa-after-predicate", ConstraintWord::Source, "わ", ConstraintContext::AfterPredicate, ConstraintReject::Target,
-     "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요). うわ, おわ는 그대로 와", "와"},
+     "술어 바로 뒤 말끝의 わ는 감탄사 와가 아님 (だったわね 이었던 와군요 → 이었군요, 知らねーわ). うわ, おわ는 그대로 와", "와"},
     {"n-after-verb", ConstraintWord::Source, "ん", ConstraintContext::AfterVerbEnding, ConstraintReject::Target,
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
+    {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
+     "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
+    {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
+     "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
+    {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
+     ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
 };
 
 struct HonorificSuffix {
@@ -76,11 +90,23 @@ constexpr std::u32string_view kQuantityBreaks = U"、。，．！？!?…「」�
 
 constexpr std::string_view kOpeningBrackets[] = {"「", "『", "（", "(", "“", "‘", "【", "〈", "《", "［", "["};
 
-// The last characters of a predicate that a sentence-final particle follows.
-constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん"};
+// The characters that mask a name (○○君, △△さん).
+constexpr std::u32string_view kMasks = U"○●◯〇◎×✕＊*■□△▲◇◆";
+
+// The last characters of a predicate that a sentence-final particle follows; え, ー and
+// the like end a drawn-out slang predicate (痛えわ, 知らねーわ).
+constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い", "す", "ん", "え", "ぇ", "ー", "エ", "ェ"};
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};
+// The rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the
+// first kana of まで, なら or たくさん after 今年.
+constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "なけ", "なきゃ", "なくちゃ", "なさ", "ねえ",
+                                           "ねー", "ます", "ませ", "まし", "て", "ちゃ", "ちま", "たら",
+                                           "たり", "たい", "たく", "よう", "つつ", "ながら"};
+// What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
+// ていただく).
+constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
 constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
 
@@ -189,12 +215,14 @@ bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
 
 // Whether the context of rule holds for the word source of the candidates list: after is
 // the text after it, before the character before it in its token, previous the character
-// before it past spaces and token ends, preceding the text right before it (its token's
-// head, else the token before), lead the token before and the head.
+// before it past spaces and token ends, adjacent the character right before it (in its
+// token or the token before), preceding the text right before it (its token's head, else
+// the token before), lead the token before and the head.
 bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>& list, std::string_view source,
                  std::string_view after, std::string_view before, std::string_view previous,
-                 std::string_view preceding, std::string_view lead) {
-    const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?";
+                 std::string_view adjacent, std::string_view preceding, std::string_view lead) {
+    const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?" ||
+                             (previous == "っ" && (lead.ends_with("！っ") || lead.ends_with("!っ")));
     switch (rule.context) {
     case ConstraintContext::Honorific:
     case ConstraintContext::FamiliarHonorific:
@@ -203,6 +231,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return c.source.size() > source.size(); });
     case ConstraintContext::AfterKatakana:
         return NameClassOf(before) == kClassKatakana;
+    case ConstraintContext::AfterMask:
+        return !previous.empty() && kMasks.find(text::DecodeRune(previous).cp) != std::u32string_view::npos;
     case ConstraintContext::AfterExclamation:
         return exclamation && !StartsWithAny(after, kDrawls);
     case ConstraintContext::AfterPause:
@@ -224,6 +254,25 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                            [&](std::string_view e) { return lead.ends_with(e); });
     case ConstraintContext::NotAfterQuantity:
         return !EndsInQuantity(lead);
+    case ConstraintContext::AfterTeNotAdjective:
+        return (preceding.ends_with("て") || preceding.ends_with("で")) &&
+               !StartsWithAny(after, kAdjectiveOrHumbleTails);
+    case ConstraintContext::NotBeforeNoun: {
+        const int next = NameClassOf(FirstChar(after));
+        return next != kClassKanji && next != kClassKatakana;
+    }
+    case ConstraintContext::BeforeSuruForm:
+        // した, but not たくさん: the past ends there or a particle or mark follows it.
+        if (after.starts_with("たくさん")) return false;
+        if (after.starts_with("た") && !after.starts_with("たく")) {
+            const std::string_view rest = after.substr(std::string_view("た").size());
+            const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+            return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
+        }
+        return StartsWithAny(after, kSuruTails);
+    case ConstraintContext::Detached:
+        return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||
+               kQuantityBreaks.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
     case ConstraintContext::LineOpening:
     case ConstraintContext::Elsewhere:
         return ((previous.empty() || StartsWithAny(previous, kOpeningBrackets)) &&
@@ -298,6 +347,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     std::string following;
     for (int j = current + 1; j < TokenCount() && following.size() < 32; j++) following += Tok(j).text;
     const std::string_view preceding = !head.empty() || current <= 0 ? head : Tok(current - 1).text;
+    const std::string_view adjacent = !head.empty() ? before : LastChar(current > 0 ? preceding : settings.before);
     std::string lead(current > 0 ? Tok(current - 1).text : std::string_view());
     lead += head;
     std::vector<dict::Candidate>& list = found.list;
@@ -311,7 +361,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 !ContextFits(rule, list, source,
                              query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                           : std::string_view(following),
-                             before, previous, preceding, lead)) {
+                             before, previous, adjacent, preceding, lead)) {
                 i++;
                 continue;
             }

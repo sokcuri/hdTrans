@@ -98,7 +98,7 @@ bool Item::RunKeiyoTrieQuery() {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
                 if (Byte(At(e.code, 1)) != base.kind || (Has(e.gattr, "Sh") && Classify(remaining) != 0) ||
                     !w->EndingApplies(e, after, tokenIndex) ||
-                    w->CutsWord(second.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), second.size())), after)) {
+                    w->CutsWord(remaining.substr(0, remaining.size() - second.size()), second.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), second.size())), after)) {
                     base.enabled[index] = false;
                     continue;
                 }
@@ -222,7 +222,7 @@ bool Item::RunDakeiyoCase8Query() {
             const Entry& e = *g->entries[static_cast<std::size_t>(entry)];
             if ((Has(e.gattr, "Sh") && Classify(tail) != 0) || At(e.code, 0) != '5' || Byte(At(e.code, 1)) != base.kind ||
                 !w->EndingApplies(e, after, tokenIndex) ||
-                w->CutsWord(scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
+                w->CutsWord(tail.substr(0, tail.size() - scanned.size()), scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
                 base.enabled[entry] = false;
                 continue;
             }

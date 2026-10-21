@@ -1,8 +1,8 @@
 rule	input	expected	kind	layer
 dict:jisjk:341470	リンゴを、どうぞ包んでください。	사과를, 어서 감싸 주세요.	fix	local
 dict:jisjk:341470	リンゴを、どうぞ。	사과를, 드세요.	fix	local
-dict:jisjk:343546	行くって見抜いた。	간다 라고 간파했다.	keep	local
-dict:jisjk:343546	来るって思った。	온다 라고 생각했다.	keep	local
+dict:jisjk:343546	行くって見抜いた。	간다고 간파했다.	keep	local
+dict:jisjk:343546	来るって思った。	온다고 생각했다.	keep	local
 dict:jisjk:6506	田中さんと話す。	rule:dict:jisjk:6506=씨	keep	local
 dict:jisjk:6506	店員さんを呼ぶ。	!rule:dict:jisjk:6506	keep	local
 dict:jisjk:267272	書いており、読んでいる。	쓰고 있어 읽고 있다.	fix	local
@@ -14,7 +14,7 @@ dict:jisjk:370773	二本のバラを買う。	두 송이의 장미를 산다.	fi
 dict:jisjk:370773	二本のチューリップを買う。	두 송이의 튤립을 산다.	fix	local
 dict:jisjk:3994	石から火線が飛んだ。	rule:dict:jisjk:3994=에서	keep	local
 dict:jisjk:3994	傷から血が溢れた。	rule:dict:jisjk:3994=에서	keep	local
-dict:jisjk:3994	友達から手紙が来た。	친구로부터 편지가 왔다.	fix	local
+dict:jisjk:3994	友達から手紙が来た。	친구에게서 편지가 왔다.	fix	local
 dict:jisjk:365922	彼女はそういうのを買った。	그녀는 그러한 것을 샀다.	fix	local
 dict:jisjk:365922	そういうのは大事だ。	그러한 것은 소중하다.	fix	local
 dict:jisjk:4904	料理をうまい方法で作る。	요리를 능숙한 방법으로 만든다.	fix	local
@@ -35,7 +35,7 @@ dict:jisjk:354975	その案が候補にあがった。	그 안이 후보에 올�
 dict:jisjk:354975	話題にあがる。	화제에 오른다.	fix	local
 dict:jisjk:354975	お迎えにあがりました。	맞이하러 갔습니다.	fix	local
 dict:jisjk:354975	屋上にあがった。	옥상에 갔다.	fix	local
-dict:jisjk:119195	上着からはみだす。	윗도리로부터 삐어져 나온다.	fix	local
+dict:jisjk:119195	上着からはみだす。	윗도리에서 삐어져 나온다.	fix	local
 dict:jisjk:119195	はみだす布を切る。	삐어져 나오는 옷감을 자른다.	fix	local
 dict:jisjk:267431	寺へ参って行く。	!rule:dict:jisjk:267431	keep	local
 dict:jisjk:267431	病気で皆参っている。	rule:dict:jisjk:267431=약해&AL@	keep	local

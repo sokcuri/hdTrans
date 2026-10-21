@@ -69,6 +69,17 @@ HD_TEST(engine_speech_levels) {
     HD_CHECK_EQ(Translate({"「高い」"}, reference), "「높다」");
 }
 
+HD_TEST(engine_speech_questions) {
+    // A plain question in a quote of no style asks in 해체 at the strict level too; narration,
+    // old speech and the reference level keep the plain end.
+    const internal::TranslationOptions strict;
+    HD_CHECK_EQ(Translate({"「高い？」", "高い？"}, strict), "「높아?」|높다?");
+    HD_CHECK_EQ(Translate({"「わしは高い？」"}, strict), "「와시하 높다?」");
+    internal::TranslationOptions reference;
+    reference.reference = true;
+    HD_CHECK_EQ(Translate({"「高い？」"}, reference), "「높다?」");
+}
+
 HD_TEST(engine_speech_quote_across_lines) {
     // A quote closed on a later line is speech on every line it covers.
     HD_CHECK_EQ(Translate({"「高い。", "高い。", "高い」", "高い。"}), "「높아.|높아.|높아」|높다.");

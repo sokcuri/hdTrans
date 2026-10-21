@@ -37,3 +37,30 @@ HD_TEST(pipeline_quote_styles) {
     HD_CHECK_EQ(show(QuoteStyles("ございます」", 1)), show({0, kPoliteSpeech}));
     HD_CHECK_EQ(show(QuoteStyles("すぐ消える」魔法", 1)), show({0, kCited}));
 }
+
+HD_TEST(pipeline_casual_quotes) {
+    const struct {
+        const char* line;
+        const char* want;  // one digit per quote, 0 for the text outside quotes
+    } cases[] = {
+        {"「違う。そうじゃないよ」", "01"},
+        {"「行くね」「寒いわ」「嘘じゃん」", "0111"},
+        {"「そうさ」「行かないもん」「明日来るって」「晴れるかな」「どうかしら」", "011111"},
+        {"「食べちゃった」「見てる」「言っとく」「知らねえ」", "01111"},
+        {"「違う」「明日行く」「そうだ」「行くぞ」", "00000"},
+        // Old commands, calls and stiff speech.
+        {"「やめよ」「部下たちよ」「分かるかね」「分かっているのだよ」「我々は勝つよ」", "000000"},
+        {"「思うが……」「であるよ」", "000"},
+        // Not contractions: ちょっとくらい, おねえさん, 待って.
+        {"「ちょっとくらい」「おねえさんだ」「待って」", "0000"},
+        // A quote inside a quote is not its own text.
+        {"「『行くよ』と書いてある」", "00"},
+        {"地の文だよ。「行く」", "00"},
+    };
+    for (const auto& c : cases) {
+        std::string got;
+        for (const bool b : CasualQuotes(c.line)) got += b ? '1' : '0';
+        HD_CHECK_EQ(got, std::string(c.want));
+    }
+    HD_CHECK_EQ(std::string(CasualQuotes("寒いね」", 1)[1] ? "1" : "0"), "1");
+}

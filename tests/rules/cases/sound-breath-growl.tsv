@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+sound:caught-breath	「……ッ、関係ない！」	「……읏, 관계없다!」	fix	sound
+sound:caught-breath	「――っ！」	「――읏!」	fix	sound
+sound:caught-breath	「君だ……ッ！」	「너다……!」	keep	sound
+sound:growl	うぐっ……	윽……	fix	sound
+sound:growl	グォ……？	구오……?	fix	sound
+sound:growl	グオォォォン！	구오오오오옹!	fix	sound
+sound:growl	ドゴォン！	콰아앙!	fix	sound
+normalize:interjection-are	あれ～？おかしいな。	어라? 이상한데.	fix	normalize
+normalize:interjection-are	あれ～は何？	저것~은 뭐?	keep	normalize

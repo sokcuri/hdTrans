@@ -26,6 +26,7 @@
 お疲れ様でした	수고하셨습니다	intj
 お疲れさまです	수고하셨습니다	intj
 お疲れさまでした	수고하셨습니다	intj
+お疲れさん	수고했어	intj
 おつかれさま	수고했어	intj
 おつかれさまです	수고하셨습니다	intj
 おつかれさまでした	수고하셨습니다	intj
@@ -473,6 +474,7 @@
 じゃあ	그럼	intj
 
 じゃあね	그럼 안녕	intj
+それじゃあね	그럼 안녕	intj
 
 と言われても	라고 해도	phrase
 にも関わらず	에도 불구하고	phrase	gattr=Tu
@@ -491,8 +493,8 @@
 学院一	학원 제일	n
 何故か	어째서인지	adv
 そりゃ	그야	adv
-呆気取られる	어안이 벙벙해지다	v1
-呆気に取られる	어안이 벙벙해지다	v1
+呆気取られる	어안이 벙벙해지다	v1	gattr=Dx
+呆気に取られる	어안이 벙벙해지다	v1	gattr=Dx
 孤立する	고립되다	v
 は？	뭐?	intj
 待て	기다려	intj
@@ -1120,6 +1122,7 @@
 何だよそれ	뭐야 그게	intj
 なんだそれ	뭐야 그게	intj
 なんだよそれ	뭐야 그게	intj
+なにそれ	뭐야 그게	intj
 何だこれ	뭐야 이게	intj
 何だあれ	뭐야 저게	intj
 何だあれは	뭐야 저건	intj
@@ -1231,3 +1234,22 @@
 こうしたい	이렇게 하고 싶다	adj
 そうしたい	그렇게 하고 싶다	adj
 ああしたい	저렇게 하고 싶다	adj
+// だっけ after a question word: 더라 (何だっけ 뭐였더라); なんだっけ only as an utterance
+// of its own, not the copula of a noun before it (苦手なんだっけ).
+なんだっけ	뭐였더라	intj
+何だっけ	뭐였더라	phrase
+何でしたっけ	뭐였죠	phrase
+なんでしたっけ	뭐였죠	phrase
+どうだったっけ	어땠더라	phrase
+どうだっけ	어땠더라	phrase
+どこだっけ	어디였더라	phrase
+誰だっけ	누구였더라	phrase
+いつだっけ	언제였더라	phrase
+そうだっけ	그랬나	phrase
+そうだったっけ	그랬나	phrase
+そーだっけ	그랬나	phrase
+// しないかい: an invitation (少し話をしないかい 이야기를 하지 않을래); なんだい: 뭐야, as an
+// utterance of its own, not the copula of a noun before it (つもりなんだい).
+しないかい	하지 않을래	phrase
+なんだい	뭐야	intj
+何だい	뭐야	phrase

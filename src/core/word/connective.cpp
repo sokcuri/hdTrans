@@ -1,5 +1,6 @@
 // Text-path passes on the て form that joins two predicates: the sequence 고 of an action verb,
 // and the て of an utterance-final verb read as a request.
+#include <algorithm>
 #include <string_view>
 
 #include "core/output/families.h"
@@ -68,6 +69,48 @@ void TeSequence(Flusher& f) {
             !InSet(kSequenceVerbs, output::Lemma(it->EntryText(it->selected), f.families)) || !PredicateFollows(it)) {
             continue;
         }
+        it->AssignDirectSlot(it->DirectIndex(), "1고");
+    }
+}
+
+// Words of thanks and apology after which a て or 連用 form gives the reason (어서). The て of
+// 借りる (この場を借りて 이 자리를 빌려) keeps its form.
+constexpr std::string_view kThanks[] = {
+    "ありがと", "有難", "有り難", "感謝", "すみません", "済みません", "すいません", "申し訳", "ごめん",
+};
+
+void TeThanks(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
+        const Item* n = it->next;
+        if (n != nullptr && n->group->surface == "、") n = n->next;
+        if (n == nullptr) continue;
+        const std::string_view next = n->group->surface;
+        if (std::any_of(std::begin(kThanks), std::end(kThanks), [&](std::string_view t) { return next.starts_with(t); })) {
+            it->AssignDirectSlot(it->DirectIndex(), "6서");
+        }
+    }
+}
+
+// Verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
+constexpr std::string_view kMeansVerbs[] = {
+    "使", "用い", "利用し", "見習", "真似", "通じ", "介し", "頼", "生か", "活か", "込め", "合わせ", "伴", "装", "模し",
+};
+
+void TeObjectComma(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        const std::string_view stem = it->group->surface;
+        if (std::any_of(std::begin(kMeansVerbs), std::end(kMeansVerbs), [&](std::string_view v) { return stem.ends_with(v); })) {
+            continue;
+        }
+        const Item* p = it->prev;
+        const Item* n = it->next;
+        if (p == nullptr || n == nullptr || p->group->surface != "を" || n->group->surface != "、") continue;
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || e->dst != "6") continue;
         it->AssignDirectSlot(it->DirectIndex(), "1고");
     }
 }

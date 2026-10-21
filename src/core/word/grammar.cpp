@@ -314,18 +314,27 @@ void NegativeCopula(Flusher& f) {
 void SubjectBeforeGa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* p = it->prev;
-        if (p == nullptr || it->selected < 0 || p->selected < 0 ||
-            output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") {
+        if (p == nullptr || it->selected < 0 || p->selected < 0) continue;
+        // 俺じゃない (이)가 아니다: 내가 아니다.
+        if (it->EntryText(it->selected).starts_with("(이)가 ") && !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
+            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
+            if (!subject.empty()) p->AssignEntrySurface(p->selected, std::string(subject));
             continue;
         }
-        if (it->group->surface == "が") {
+        if (output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") continue;
+        if (it->group->surface == "の") {
+            const Item* n = it->next;
+            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) {
+                SelectLemma(f, it, "의");
+                continue;
+            }
+        }
+        // 俺が, and 俺の作った with の as the subject of a clause: 내가.
+        if (it->group->surface == "が" || it->group->surface == "の") {
             const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
             if (!subject.empty() && !p->detail->Yougo()) {
                 if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
             }
-        } else if (it->group->surface == "の") {
-            const Item* n = it->next;
-            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) SelectLemma(f, it, "의");
         }
     }
 }
@@ -360,7 +369,11 @@ constexpr std::string_view kResultVerbs[] = {
     "混じ", "死", "太", "痩せ", "決ま", "開", "閉じ", "腫れ", "枯れ", "割れ", "汚れ", "曲が", "折れ", "破れ", "崩れ", "乾",
     "冷え", "腐", "詰ま", "埋ま", "刺さ", "慣れ", "晴れ", "曇", "凍", "外れ", "取れ", "引きこも", "引き籠も", "惚れ", "ハマ",
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
+    "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌",
 };
+
+// Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
+constexpr std::string_view kOngoingNouns[] = {"話題", "噂", "評判", "問題", "人気", "注目", "議論", "流行"};
 
 // Verbal nouns whose されている is a state.
 constexpr std::string_view kResultNouns[] = {
@@ -380,7 +393,7 @@ constexpr std::string_view kGradualAdverbs[] = {
     "次第", "徐々", "どんどん", "だんだん", "段々", "ますます", "益々", "日に日に", "少しずつ", "みるみる",
 };
 
-// Stems of the verbs of noticing or remembering that take 못하다 (notYet).
+// Stems of the verbs of noticing or remembering whose negative takes 못하다 (notYet).
 constexpr std::string_view kNotYetVerbs[] = {"気づ", "気付", "気がつ", "気が付", "覚え"};
 
 // Whether an adverb of gradual change stands before it in its sentence.
@@ -404,7 +417,8 @@ void ResultState(Flusher& f) {
         const std::string_view stem = it->group->surface;
         const char c1 = At(it->Code(it->selected), 1);
         const bool object = c1 >= '3' && c1 <= '6';
-        if (stem == "な" && GradualBefore(it)) continue;
+        if ((stem == "な" || stem == "にな") && GradualBefore(it)) continue;
+        if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
         const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
         const bool state = (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
                            ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem));
@@ -425,14 +439,16 @@ void NotYet(Flusher& f) {
         Item* n = it->next;
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());
-        if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || n->group->surface != "いな" ||
+        if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || (n->group->surface != "いな" && n->group->surface != "な") ||
             ItemLemma(f, n, n->selected) != "않다" || !std::any_of(std::begin(kNotYetVerbs), std::end(kNotYetVerbs),
                                                                     [&](std::string_view v) { return it->group->surface.ends_with(v); })) {
             continue;
         }
+        Entry* d = n->DirectEntry(n->DirectIndex());
+        // A plain ない (気付かない) changes only before a terminal ending; its attributive keeps 않다.
+        if (n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
         output::Conjugated target = output::Conjugating("못하다", '$', "", f.families);
         if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, target.target);
-        Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr) continue;
         for (const std::string_view form : {std::string_view("1는다"), std::string_view("1다")}) {
             if (d->dst.starts_with(form)) {
@@ -883,7 +899,7 @@ void NiAfterAdverb(Flusher& f) {
 }
 
 // Pronouns whose genitive takes the short form: 나의 -> 내, 저의 -> 제, 너의 -> 네.
-constexpr std::string_view kFirstPersonPronouns[] = {"私", "僕", "俺", "わたし", "わたくし", "あたし", "ぼく", "おれ", "ボク", "オレ"};
+constexpr std::string_view kFirstPersonPronouns[] = {"私", "僕", "俺", "わたし", "わたくし", "あたし", "アタシ", "ぼく", "おれ", "ボク", "オレ"};
 constexpr std::string_view kSecondPersonPronouns[] = {"君", "お前", "おまえ", "きみ"};
 
 // A pronoun and the genitive の right before a word (a letter or digit, in the same token
@@ -905,6 +921,22 @@ void ShortPossessive(Flusher& f) {
         if (const char32_t r = text::DecodeRune(m->group->surface).cp; !text::IsLetter(r) && !text::IsDigit(r)) continue;
         const std::string lemma = ItemLemma(f, it, it->selected);
         const std::string_view s = it->group->surface;
+        // A phrase that opens with a clause (知らない間に 모르는 사이에) takes the pronoun as its
+        // subject: 내가 모르는 사이에.
+        const std::string_view head = m->EntryText(m->selected).substr(0, m->EntryText(m->selected).find(' '));
+        bool kana = false;  // 知らない間に, not 笑顔 웃는 얼굴
+        for (std::string_view t = m->group->surface; !t.empty() && !kana;) {
+            const text::Rune r = text::DecodeRune(t);
+            kana = r.cp >= U'ぁ' && r.cp <= U'ゖ';
+            t.remove_prefix(r.size);
+        }
+        if (kana && head.size() < m->EntryText(m->selected).size() && (head.ends_with("는") || head.ends_with("던")) &&
+            !SubjectPronoun(lemma).empty() &&
+            (InSet(kFirstPersonPronouns, s) || InSet(kSecondPersonPronouns, s))) {
+            TakeTarget(n, At(n->Code(n->selected), 0), "(이)가");
+            if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, std::string(SubjectPronoun(lemma)));
+            continue;
+        }
         std::string_view target;
         if ((lemma == "나" || lemma == "저") && InSet(kFirstPersonPronouns, s)) {
             target = lemma == "나" ? "내 " : "제 ";
@@ -915,6 +947,141 @@ void ShortPossessive(Flusher& f) {
         }
         // The pronoun carries the space; the empty の adds none.
         TakeTarget(n, At(n->Code(n->selected), 0), "");
+        TakeTarget(it, At(it->Code(it->selected), 0), target);
+    }
+}
+
+namespace {
+
+constexpr std::string_view kPoliteMarks[] = {"です", "ます", "ません", "ました", "ましょ", "まして", "でした", "でしょうか",
+                                             "ござい", "ください", "下さい"};
+
+// Whether s speaks politely; a polite word reported with って (一番ですって) does not.
+bool PoliteSurface(std::string_view s) {
+    if (Has(s, "ですって") || Has(s, "ますって") || Has(s, "でしたって") || Has(s, "でしょうかって")) return false;
+    if (s.ends_with("いませ")) return true;
+    for (const std::string_view m : kPoliteMarks) {
+        if (Has(s, m)) return true;
+    }
+    return false;
+}
+
+// Whether the last predicate after it in its sentence is polite, looking past the quotes that
+// open after it and stopping at the end of the quote it stands in (私が許してくださいと頼む
+// ことはない is not).
+bool PoliteAfter(const Item* it) {
+    int depth = 0;
+    const Item* last = nullptr;
+    for (const Item* q = it->next; q != nullptr; q = q->next) {
+        const std::string_view s = q->group->surface;
+        // The text of q up to the next word, which holds the brackets no word took.
+        const size_t from = std::min(static_cast<size_t>(q->start), q->text.size());
+        const size_t to = q->next != nullptr && q->next->tokenIndex == q->tokenIndex
+                              ? std::max(from, std::min(static_cast<size_t>(q->next->start), q->text.size()))
+                              : q->text.size();
+        const std::string_view span = q->text.substr(from, to - from);
+        for (size_t i = 0; i < span.size();) {
+            const text::Rune r = text::DecodeRune(span.substr(i));
+            if (r.cp == U'「' || r.cp == U'『') depth++;
+            if (r.cp == U'」' || r.cp == U'』') depth--;
+            i += r.size == 0 ? 1 : r.size;
+        }
+        if (depth < 0) break;
+        if (depth == 0 && (q->detail->Yougo() || PoliteSurface(s) || !q->DirectSurface().empty())) last = q;
+    }
+    return last != nullptr && (PoliteSurface(last->group->surface) || PoliteSurface(last->DirectSurface()));
+}
+
+constexpr std::string_view kHumblePronouns[] = {"私", "わたし", "わたくし", "あたし", "僕", "ぼく",
+                                                "私たち", "私達", "わたしたち", "僕たち", "僕達", "僕ら"};
+
+}  // namespace
+
+namespace {
+
+bool OnReading(const Item* it) {
+    return it != nullptr && it->selected >= 0 && Has(it->GAttr(it->selected), "On");
+}
+
+// s with the initial sound rule on its first syllable: ㄹ before ㅑ ㅕ ㅖ ㅛ ㅠ ㅣ and ㄴ before
+// those vowels become ㅇ, another ㄹ becomes ㄴ (륭 융, 녀 여, 로 노).
+std::string InitialSound(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (r.cp < 0xAC00 || r.cp > 0xD7A3) return std::string(s);
+    const char32_t index = r.cp - 0xAC00;
+    char32_t lead = index / (21 * 28);
+    const char32_t vowel = index / 28 % 21, tail = index % 28;
+    const bool palatal = vowel == 2 || vowel == 6 || vowel == 7 || vowel == 12 || vowel == 17 || vowel == 20;
+    if (lead == 5) lead = palatal ? 11 : 2;
+    else if (lead == 2 && palatal) lead = 11;
+    else return std::string(s);
+    std::string out;
+    text::AppendRune(out, 0xAC00 + (lead * 21 + vowel) * 28 + tail);
+    out.append(s.substr(r.size));
+    return out;
+}
+
+}  // namespace
+
+// The Sino-Korean reading that starts a word follows the initial sound rule (隆書 륭서 →
+// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading stays (興隆 흥륭).
+void InitialSoundRule(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!OnReading(it)) continue;
+        // A word starts after punctuation, a particle or the start of its token, but not
+        // after the ・ of a word spelled out (謹・賀・新・年).
+        if (it->start > 0 && std::string_view(it->text).substr(0, static_cast<size_t>(it->start)).ends_with("・")) continue;
+        const Item* p = it->prev;
+        if (p != nullptr && p->tokenIndex == it->tokenIndex && p->start + p->length == it->start) {
+            const std::string_view ps = p->group->surface;
+            const char32_t last = ps.empty() ? 0 : DecodeLastRune(ps).cp;
+            const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
+            if (!particle && (text::IsLetter(last) || text::IsDigit(last))) continue;
+        }
+        const std::string target(it->EntryText(it->selected));
+        if (const std::string ruled = InitialSound(target); ruled != target) {
+            TakeTarget(it, At(it->Code(it->selected), 0), ruled);
+        }
+    }
+}
+
+// ちゃん right after a katakana noun as 짱 where it was left empty (ナッちゃん 낫짱); the
+// empty ちゃん of a kin word (お姉ちゃん 언니) stays.
+void ChanAfterKatakana(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const Item* p = it->prev;
+        if (p == nullptr || it->selected < 0 || it->group->surface != "ちゃん" || !TrimSpace(it->EntryText(it->selected)).empty() ||
+            p->start + p->length != it->start || p->tokenIndex != it->tokenIndex || p->group->surface.empty()) {
+            continue;
+        }
+        bool katakana = true;
+        for (size_t i = 0; i < p->group->surface.size();) {
+            const text::Rune r = text::DecodeRune(p->group->surface.substr(i));
+            katakana = katakana && ((r.cp >= U'ァ' && r.cp <= U'ヶ') || r.cp == U'ー');
+            i += r.size == 0 ? 1 : r.size;
+        }
+        if (katakana && p->selected >= 0 && At(p->Code(p->selected), 0) == '1') SelectLemma(f, it, "짱");
+    }
+}
+
+// The first person of a polite sentence in its humble form: 나 저, 내 제, 우리 저희
+// (私はそう思います 저는 그렇게 생각합니다).
+void HumbleFirstPerson(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (it->selected < 0 || it->detail->Yougo() || !InSet(kHumblePronouns, it->group->surface)) continue;
+        const std::string lemma = ItemLemma(f, it, it->selected);
+        std::string_view target;
+        if (lemma == "나") target = "저";
+        else if (lemma == "내") target = "제";
+        else if (lemma == "내 ") target = "제 ";
+        else if (lemma == "우리") target = "저희";
+        else if (lemma == "우리들") target = "저희들";
+        else continue;
+        if (!PoliteAfter(it)) continue;
+        if (target == "저" && it->next != nullptr && it->next->selected >= 0 &&
+            ItemLemma(f, it->next, it->next->selected).starts_with("(이)가")) {
+            target = "제";
+        }
         TakeTarget(it, At(it->Code(it->selected), 0), target);
     }
 }
@@ -974,6 +1141,183 @@ void JiBeforeJiman(Flusher& f) {
         if (direct != nullptr && direct->dst.ends_with("겠지")) {
             if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, "만");
         }
+    }
+}
+
+namespace {
+
+// The Korean of a のか word: its ending, or the word itself when it has none (なのか).
+std::string_view NokaText(const Item* it) {
+    if (const Entry* d = it->DirectEntry(it->DirectIndex())) return d->dst;
+    if (const Entry* e = it->group->At(it->selected); e != nullptr && !it->detail->Yougo()) return e->dst;
+    return {};
+}
+
+bool Noka(const Item* it) {
+    const std::string_view s = it->DirectGroup() != nullptr ? it->DirectSurface() : std::string_view(it->group->surface);
+    return s.ends_with("のか") && !NokaText(it).empty();
+}
+
+bool PunctuationItem(const Item* it) {
+    const std::string_view s = it->group->surface;
+    return s == "、" || s == "," || s == "。" || s == "." || s == "…" || s == "‥" || s == "？" || s == "?" ||
+           s == "！" || s == "!" || s == "」" || s == "』";
+}
+
+// The question in 지 of t (것일까 것인지, 건가 건지, 인가 인지, 는가 는지); "" when t has
+// none of them at its end. t in 지 is itself.
+std::string NokaInJi(std::string_view t) {
+    if (t.ends_with("지")) return std::string(t);
+    constexpr std::pair<std::string_view, std::string_view> kForms[] = {
+        {"것일까", "것인지"}, {"건가", "건지"}, {"인가", "인지"}, {"는가", "는지"}};
+    for (const auto& [from, to] : kForms) {
+        if (t.ends_with(from)) return std::string(t.substr(0, t.size() - from.size())) + std::string(to);
+    }
+    return {};
+}
+
+void WriteNoka(Item* it, std::string_view s) {
+    if (it->DirectEntry(it->DirectIndex()) != nullptr) {
+        it->AssignDirectSlot(it->DirectIndex(), s);
+    } else {
+        it->AssignEntrySurface(it->selected, s);
+    }
+}
+
+}  // namespace
+
+void ParallelNoka(Flusher& f) {
+    std::vector<Item*> run;
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!Noka(it) || (it->next != nullptr && !PunctuationItem(it->next))) continue;
+        run.push_back(it);
+    }
+    if (run.size() < 2) return;
+    // Every clause but the last is followed by a comma.
+    for (std::size_t k = 0; k + 1 < run.size(); k++) {
+        const std::string_view s = run[k]->next->group->surface;
+        if (s != "、" && s != ",") return;
+    }
+    std::vector<std::string> forms;
+    for (const Item* it : run) {
+        forms.push_back(NokaInJi(NokaText(it)));
+        if (forms.back().empty()) return;
+    }
+    for (std::size_t k = 0; k < run.size(); k++) {
+        if (forms[k] != NokaText(run[k])) WriteNoka(run[k], forms[k]);
+    }
+}
+
+namespace {
+
+// The token range [open, close] of the quote around token j: open is the token with 「 or 『
+// before it and close the token with 」 or 』 after it; -1 for a side the chunk lacks.
+// False when j is not inside a quote.
+bool QuoteAround(const Worker& w, int j, int& open, int& close) {
+    open = close = -1;
+    for (int k = j; k >= 0; k--) {
+        const std::string_view t = w.Tok(k).text;
+        if (k != j && (Has(t, "」") || Has(t, "』"))) break;
+        if (Has(t, "「") || Has(t, "『")) {
+            open = k;
+            break;
+        }
+    }
+    for (int k = j; k < w.TokenCount(); k++) {
+        const std::string_view t = w.Tok(k).text;
+        if (k != j && (Has(t, "「") || Has(t, "『"))) break;
+        if (Has(t, "」") || Has(t, "』")) {
+            close = k;
+            break;
+        }
+    }
+    return open >= 0 || close >= 0;
+}
+
+// Whether the quote text has a mark of old or haughty speech (ておる, のじゃ, せよ, であろう,
+// 余が, 儂, わしが, くれてやる, a final じゃ or ぬ).
+bool OldSpeech(std::string_view q) {
+    for (const std::string_view m : {"ておる", "ており", "ておっ", "でおる", "のじゃ", "であろう", "である", "儂",
+                                     "わしが", "わしは", "わしの", "わしに", "わしを", "わしも", "くれてやる",
+                                     "くれてやろう", "余が", "余は", "余の", "余に", "余を", "余も"}) {
+        if (Has(q, m)) return true;
+    }
+    // 突撃せよ, not 出せよ.
+    for (std::size_t at = q.find("せよ"); at != std::string_view::npos; at = q.find("せよ", at + 1)) {
+        const std::string_view head = q.substr(0, at);
+        const text::Rune last = DecodeLastRune(head);
+        if (last.size > 0 && text::IsKanji(last.cp) && text::IsKanji(DecodeLastRune(head.substr(0, head.size() - last.size)).cp)) {
+            return true;
+        }
+    }
+    for (const std::string_view m : {"じゃ", "ぬ"}) {
+        for (std::size_t at = q.find(m); at != std::string_view::npos; at = q.find(m, at + m.size())) {
+            const std::string_view rest = q.substr(at + m.size());
+            const std::string_view head = q.substr(0, at);
+            if (m == "じゃ" && (head.ends_with("それ") || head.ends_with("これ") || rest.starts_with("あ") ||
+                                rest.starts_with("な") || rest.starts_with("ん") || rest.starts_with("ね"))) {
+                continue;
+            }
+            if (rest.empty() || RuneIn(text::DecodeRune(rest).cp, "。！？!?、…‥」』ぞよ")) return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
+void OfferPromise(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        Entry* e = it->group->At(it->selected);
+        const Entry* d = it->DirectEntry(it->DirectIndex());
+        const std::string_view surface = it->group->surface;
+        const bool humble = surface.ends_with("さしあげ") || surface.ends_with("差し上げ");
+        if (e == nullptr || d == nullptr || !(e->dst.ends_with("&CJ@") || (humble && e->dst.ends_with("드&AA@"))) ||
+            (!surface.ends_with("や") && !surface.ends_with("あげ") && !surface.ends_with("上げ")) || !QuoteEnd(f.w, it)) {
+            continue;
+        }
+        const std::string_view ending = it->DirectSurface();
+        // Only a present or volitional ending turns: not 教えてやったよ, 教えてさしあげられます.
+        if (it->DetailRecord() != 0 || d->dst.empty() || !AnyOf("46017", d->dst[0])) continue;
+        std::string_view after = From(it->text, it->start + it->length);
+        if (after.empty() && it->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(it->tokenIndex + 1).text;
+        if (after.starts_with("？") || after.starts_with("?")) continue;
+        const bool polite = ending == "ます" || ending == "ますよ" || ending == "ますね" || ending == "ますわ" ||
+                            (humble && ending == "ましょう");
+        const bool plain = ending == "る" || ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" ||
+                           ending == "ぜ" || ending == "ぞ" || ending == "ろう" || ending == "よう" || ending == "のじゃ";
+        // The verb itself ends in る, ろう, よう or ます: not the request あげてね, やってよ.
+        const std::string_view tail = it->text.substr(
+            std::min(it->text.size(), static_cast<std::size_t>(it->start) + it->group->surface.size()));
+        if (!tail.starts_with("る") && !tail.starts_with("ろう") && !tail.starts_with("よう") && !tail.starts_with("ま") &&
+            !tail.starts_with("のじゃ")) {
+            continue;
+        }
+        // A final particle marks speech outside brackets too (a line of dialogue).
+        const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
+                            ending == "ぞ";
+        int open = 0, close = 0;
+        if (!polite && !plain) continue;
+        if (!QuoteAround(f.w, it->tokenIndex, open, close) && !spoken) continue;
+        if (polite && humble) {
+            it->AssignDirectSlot(it->DirectIndex(), "1겠습니다");
+            continue;
+        }
+        if (humble) continue;
+        if (polite) {
+            if (surface.ends_with("あげ") || surface.ends_with("上げ")) {
+                std::string dst = e->dst;
+                dst.replace(dst.size() - std::string_view("&CJ@").size(), std::string_view::npos, "드&AA@");
+                it->AssignEntrySurface(it->selected, dst);
+            }
+            it->AssignDirectSlot(it->DirectIndex(), "3게요");
+            continue;
+        }
+        std::string quote;
+        const int from = open >= 0 ? open : 0;
+        const int to = close >= 0 ? close : f.w.TokenCount() - 1;
+        for (int k = from; k <= to; k++) quote += f.w.Tok(k).text;
+        it->AssignDirectSlot(it->DirectIndex(), OldSpeech(quote) || surface.ends_with("くれてや") ? "1마" : "3게");
     }
 }
 

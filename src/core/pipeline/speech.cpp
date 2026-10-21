@@ -18,7 +18,8 @@ constexpr std::string_view kPoliteMarkers[] = {"です", "ます", "ました", 
 // Old or lordly speech; a classical negative ぬ (ならぬ, 知らぬ) only before the end of a
 // clause, which 死ぬ is not.
 constexpr std::string_view kOldMarkers[] = {
-    "ておる", "でおる",   "ておった", "でおった", "ておらぬ", "せよ",   "ござる", "ござらん", "のじゃ", "じゃ。",
+    "ておる", "でおる",   "ておった", "でおった", "ておって", "でおって", "ておらぬ", "せよ",   "ござる", "ござらん",
+    "のじゃ", "じゃ。",
     "じゃ」", "じゃ！",   "じゃぞ",   "じゃな。", "じゃな」", "じゃなあ", "じゃわい", "だわい", "ぞよ",   "であろう",
     "かろう", "わしは",   "わしが",   "わしの",   "わしも",   "わしを", "わしに", "儂",       "余は",   "余の",
     "余が",   "余を",     "余に",     "余と",     "余も",     "我が",   "なり！", "なり」",   "なり。", "申した",
@@ -103,6 +104,146 @@ bool CitedBefore(std::string_view after, bool embedded) {
     return noun && !SubjectAfter(after);
 }
 
+// The text of each quote of line at its own level (element 0 outside quotes), with a
+// nested quote written as its brackets only; indexed as QuoteStyles.
+std::vector<std::string> OwnTexts(std::string_view line, int depth) {
+    std::vector<std::string> texts(depth > 0 ? 2 : 1);
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        const std::string_view c = line.substr(at, r.size == 0 ? 1 : r.size);
+        at += c.size();
+        // ｢ and ｣ too: CasualQuotes reads the text before they become 「 and 」.
+        const bool opens = r.cp == U'「' || r.cp == U'『' || r.cp == U'｢';
+        if (opens && depth == 0) texts.emplace_back();
+        if (opens) {
+            depth++;
+            if (depth == 2) texts.back() += c;
+            continue;
+        }
+        if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
+            if (--depth == 1) texts.back() += c;
+            continue;
+        }
+        if (depth <= 1) texts[depth > 0 ? texts.size() - 1 : 0] += c;
+    }
+    return texts;
+}
+
+// Whether s, the text after a word, ends a sentence: after a drawl (ー, っ, small vowels,
+// 〜), the end of the quote, a sentence mark or an ellipsis.
+bool EndsAfter(std::string_view s) {
+    while (!s.empty()) {
+        const text::Rune r = text::DecodeRune(s);
+        if (r.size == 0) return false;
+        if (RuneIn(r.cp, U"ーっッぁぃぅぇぉ〜～")) {
+            s.remove_prefix(r.size);
+            continue;
+        }
+        return RuneIn(r.cp, U"。！？!?…‥」』♪☆★♥♡") || text::IsSpace(r.cp);
+    }
+    return true;
+}
+
+// The last character of s before at, 0 at the start.
+char32_t RuneBefore(std::string_view s, std::size_t at) { return at == 0 ? 0 : internal::LastRune(s.substr(0, at)).cp; }
+
+// Each sentence-final particle with the characters that may stand before it ("" any
+// hiragana) and those that may not.
+struct Final {
+    std::string_view particle;
+    std::u32string_view after;
+    std::u32string_view notAfter;
+};
+
+// Marks of stiff or lordly speech that the old markers of StyleOf do not cover: のだ and
+// である ending a sentence, たまえ, かね, じゃろう, ワシ, 我々, a sentence ended by が (思うが……).
+bool StiffSpeech(std::string_view text) {
+    for (const std::string_view m : {"である", "であろう", "たまえ", "じゃろ", "ワシ", "しれん", "我々", "我ら"}) {
+        if (text.find(m) != std::string_view::npos) return true;
+    }
+    for (const std::string_view m : {"のだ", "かね", "がね"}) {
+        for (std::size_t at = text.find(m); at != std::string_view::npos; at = text.find(m, at + 1)) {
+            std::string_view after = text.substr(at + m.size());
+            // のだ after a predicate (知っているのだ, 静かなのだ); not ものだ or 俺のだ.
+            if (m == "のだ" && !RuneIn(RuneBefore(text, at), U"るたいうな")) continue;
+            if (m == "のだ") {
+                for (const std::string_view p : {"よ", "ぞ", "な", "が", "ね"}) {
+                    if (after.starts_with(p)) after.remove_prefix(p.size());
+                }
+            }
+            if (EndsAfter(after) || after.starts_with("、")) return true;
+        }
+    }
+    for (std::size_t at = text.find("が"); at != std::string_view::npos; at = text.find("が", at + 1)) {
+        if (internal::IsHiraganaRune(RuneBefore(text, at)) && EndsAfter(text.substr(at + std::string_view("が").size()))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Whether text, the own text of a quote, is casual speech: a sentence-final particle (よ,
+// ね, わ, じゃん, さ, もん, って, かな, かしら) or a contraction (ちゃう, てる, とく, ねえ).
+bool CasualOf(std::string_view text) {
+    if (StiffSpeech(text)) return false;
+    // よ: not an old command (せよ, やめよ, 考えよ), ぞよ or a call (部下たちよ); ね: not かね;
+    // って: a hearsay or quoting って (行くって, 来たって, そうだって), not a te-form.
+    static constexpr Final kFinals[] = {
+        {"よ", U"", U"せめべげえけぞち"}, {"ね", U"", U"かが"},          {"わ", U"るたいだんよ", U""},
+        {"じゃん", U"", U""},             {"さ", U"うのらだ", U""},        {"もん", U"だいたるんの", U""},
+        {"って", U"だるたい", U""},       {"かな", U"", U"ば"},            {"かしら", U"", U""},
+    };
+    for (const Final& f : kFinals) {
+        for (std::size_t at = text.find(f.particle); at != std::string_view::npos; at = text.find(f.particle, at + 1)) {
+            if (!EndsAfter(text.substr(at + f.particle.size()))) continue;
+            const char32_t prev = RuneBefore(text, at);
+            // After a kana word; じゃん after a noun too (嘘じゃん).
+            const bool noun = internal::IsKanjiRune(prev) || internal::IsKatakanaRune(prev);
+            if (!internal::IsHiraganaRune(prev) && !(noun && f.particle == "じゃん")) continue;
+            if (!f.after.empty() && f.after.find(prev) == std::u32string_view::npos) continue;
+            if (f.notAfter.find(prev) != std::u32string_view::npos) continue;
+            // いって: ないって, いいって; not 言って.
+            const std::string_view head = text.substr(0, at);
+            if (f.particle == "って" && prev == U'い' && !head.ends_with("ない") && !head.ends_with("いい")) continue;
+            return true;
+        }
+    }
+    for (const std::string_view c : {"ちゃう", "ちゃった", "ちゃって", "ちゃえ", "ちゃお", "じゃう", "じゃった", "じゃって",
+                                     "じゃえ", "じゃお"}) {
+        if (text.find(c) != std::string_view::npos) return true;
+    }
+    for (const std::string_view c : {"ってる", "ってた", "ってん", "してる", "してた", "してん", "いてる", "いてた",
+                                     "んでる", "んでた", "いでる", "いでた", "見てる", "見てた", "来てる", "来てた",
+                                     "出てる", "出てた", "寝てる", "寝てた", "着てる", "着てた"}) {
+        if (text.find(c) != std::string_view::npos) return true;
+    }
+    // しとく, 言っとく, 読んどく: ておく after a verb; not ちょっとくらい, ずっといて.
+    for (const std::string_view c : {"とく", "とけ", "といて", "といた", "とこう", "どく", "どけ", "どいて", "どいた"}) {
+        for (std::size_t at = text.find(c); at != std::string_view::npos; at = text.find(c, at + 1)) {
+            const text::Rune te = internal::LastRune(text.substr(0, at));
+            const char32_t stem = RuneBefore(text, at - te.size);
+            const bool voiced = c.starts_with("ど");
+            if (voiced ? te.cp == U'ん' && internal::IsKanjiRune(stem)
+                       : te.cp == U'し' || ((te.cp == U'っ' || te.cp == U'い') && internal::IsKanjiRune(stem))) {
+                return true;
+            }
+        }
+    }
+    for (const std::string_view c : {"ねえ", "ねぇ", "ねー"}) {
+        for (std::size_t at = text.find(c); at != std::string_view::npos; at = text.find(c, at + 1)) {
+            const std::string_view after = text.substr(at + c.size());
+            if (after.starts_with("さん") || after.starts_with("ちゃん") || after.starts_with("さま") ||
+                after.starts_with("様") || after.starts_with("さ")) {
+                continue;
+            }
+            // 知らねえ, 行かねー: a negative after an a-row stem.
+            const char32_t prev = RuneBefore(text, at);
+            if (RuneIn(prev, U"らかさたなまわがばやじゃれっえ")) return true;
+        }
+    }
+    return false;
+}
+
 }  // namespace
 
 std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
@@ -115,7 +256,8 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::string_view c = line.substr(at, r.size == 0 ? 1 : r.size);
         at += c.size();
-        const bool opens = r.cp == U'「' || r.cp == U'『';
+        // ｢ and ｣ too: CasualQuotes reads the text before they become 「 and 」.
+        const bool opens = r.cp == U'「' || r.cp == U'『' || r.cp == U'｢';
         if (opens && depth == 0) {
             texts.emplace_back();
             styles.push_back(r.cp == U'『' ? kWritten : 0);
@@ -124,7 +266,7 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
         }
         if (opens) {
             depth++;
-        } else if ((r.cp == U'」' || r.cp == U'』') && depth > 0 && --depth == 0) {
+        } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0 && --depth == 0) {
             texts.back() += c;
             // A word quoted inside a sentence (モットーは「従う」だ) is cited too.
             const bool word = embedded && text::RuneCount(texts.back()) <= 6;
@@ -159,6 +301,13 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
         }
     }
     return styles;
+}
+
+std::vector<bool> CasualQuotes(std::string_view line, int depth) {
+    const std::vector<std::string> texts = OwnTexts(line, depth);
+    std::vector<bool> casual(texts.size(), false);
+    for (std::size_t k = 1; k < texts.size(); k++) casual[k] = CasualOf(texts[k]);
+    return casual;
 }
 
 }  // namespace hdTrans::pipeline

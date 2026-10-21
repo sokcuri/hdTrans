@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+compose:question-word	「アンナ、何を書いているの？」	「안나, 뭘 쓰고 있는 거야?」	fix	compose
+compose:question-word	「何を？」	「뭘?」	fix	compose
+compose:question-word	「なにか、いいアイディアがある？」	「뭔가, 좋은 아이디어가 있어?」	fix	compose
+compose:question-word	「え？　何が？」	「어? 뭐가?」	fix	compose
+compose:question-word	「どうして泣いてるの？」	「왜 울어?」	fix	compose
+compose:question-word	「なんでだ？」	「어째서야?」	keep	compose
+compose:question-word	「ごはん何にする？」	「밥 무엇으로 해?」	keep	compose
+compose:question-word	「何かあったら言ってね」	「무슨 일이 있으면 말해」	keep	compose
+compose:question-word	「何を書いておられるのですか？」	「무엇을 쓰고 계십니까?」	keep	compose
+compose:question-word	「余に何か用か？」	「짐에게 무슨 볼일인가?」	keep	compose

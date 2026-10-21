@@ -38,7 +38,8 @@ enum class UserReload { Off, Auto };
 // earlier line left open. Narration keeps its 다.
 enum class Speech {
     Soft,    // the plain sentence ends (간다, 학생이다) in 해체 (갈 거야, 학생이야)
-    Strict,  // the sentence ends of the translation (간다, 학생이다)
+    Strict,  // the sentence ends of the translation (간다, 학생이다); a plain question still asks in
+             // 해체 (大丈夫か？ 괜찮아?)
 };
 
 // The loaded dictionaries. Shared by any number of sessions and threads.

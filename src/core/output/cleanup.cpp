@@ -75,7 +75,16 @@ Pieces Cleanup(const std::vector<Sentence>& sentences) {
 }
 
 void AppendSentence(Pieces& result, const Pieces& sentence) {
-    if (StartsWith(Head(sentence), " ")) TrimRight(result);
+    const std::string_view head = Head(sentence);
+    if (StartsWith(head, " ")) {
+        TrimRight(result);
+    } else if ((StartsWith(head, "(이)라") || StartsWith(head, "(으)로")) && !result.empty() &&
+               result.back().span == SpanText) {
+        // A quoting (이)라 or (으)로 right after ! or ? goes with the word before them
+        // (돈!으로, 쾅!이라고).
+        const std::string_view t = result.back().text;
+        if (t.ends_with("! ") || t.ends_with("? ")) TrimRight(result);
+    }
     Append(result, sentence);
 }
 

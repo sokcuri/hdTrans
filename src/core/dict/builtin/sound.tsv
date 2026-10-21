@@ -277,7 +277,7 @@
 ううっ	우웃	intj
 うっ	윽	intj
 うぐ	우그	intj
-うぐっ	우극	intj
+うぐっ	윽	intj
 うぐぅ	우그으	intj
 うあ	우아	intj
 うあっ	우앗	intj
@@ -339,6 +339,8 @@
 ぐげ	그게	intj
 ぐおっ	크옷	intj
 ぐおお	크오오	intj
+ぐぉ	구오	intj
+ぐおん	구오옹	ono
 ぐわ	크와	intj
 ぐわっ	크왓	intj
 ぐわぁ	크와아	intj
@@ -1158,6 +1160,7 @@
 どごっ	퍽	ono
 どごーん	콰과광	ono
 どご	퍽	ono
+どごん	콰앙	ono
 どすっ	퍽	ono
 どすん	쿵	ono
 どすーん	쿠웅	ono
@@ -3023,3 +3026,9 @@
 はっくしゅん	에취	intj
 はっくしょん	에취	intj
 はっくしゅっ	에취	intj
+てか	그보다	lead
+ったく	참나	lead
+たく	참나	lead
+ども	안녕	lead
+だからって	그렇다고 해서	lead
+なんだと	뭐라고	lead

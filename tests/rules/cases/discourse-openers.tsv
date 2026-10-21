@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:jisjk:263916	それじゃあ、また明日。	그럼, 또 내일.	fix	lookup
+dict:jisjk:263916	それじゃあ行ってくるね。	그럼 다녀올게.	fix	lookup
+dict:jisjk:263916	それじゃ、帰ろう。	그러면, 돌아가자.	keep	lookup
+phrase:それじゃあね	それじゃあね。	그럼 안녕.	fix	builtin-phrase
+phrase:なにそれ	なにそれ、変なの。	뭐야 그게, 이상해.	fix	builtin-phrase
+phrase:なにそれ	え、なにそれ！？	어, 뭐야 그게!?	fix	builtin-phrase
+dict:jisjk:341448	なんだよ、急に。	뭐야, 갑자기.	fix	local
+dict:jisjk:341448	……なんだよ？	……뭐야?	fix	local
+dict:jisjk:341448	それは秘密なんだよ。	그것은 비밀이야.	keep	local
+dict:jisjk:341448	あれは何なんだよ。	저것은 뭐야.	keep	local
+local:2822	わかった、すぐ行く。	알았다, 바로 간다.	fix	local-ending
+local:2822	そうか、分かった、ありがとう。	그런가, 알았다, 고마워.	fix	local-ending
+local:2822	了解した、隊長。	이해했다, 대장.	fix	local-ending
+local:2822	昨日買った、赤い靴を履いた。	어제 산, 붉은 구두를 신었다.	keep	local-ending
+local:2822	彼が書いた本を読んだ。	그가 쓴 책을 읽었다.	keep	local-ending
+sound:lead-teka	てかてかの床。	번들번들의 바닥.	keep	sound
+sound:lead-ttaku	ったく、また遅刻か。	참나, 또 지각인가.	fix	sound
+sound:lead-ttaku	たく、仕方ないな。	참나, 어쩔 수 없는데.	fix	sound
+sound:lead-ttaku	早く帰りたくて走った。	빨리 돌아가고 싶어서 달렸다.	keep	sound
+sound:lead-domo	ども、はじめまして。	안녕, 처음 뵙겠습니다.	fix	sound
+sound:lead-domo	子どもたちが遊んでいる。	아이들이 놀고 있다.	keep	sound
+sound:lead-teka	てか、もう帰ろう。	그보다, 이제 돌아가자.	fix	sound
+sound:lead-nandato	なんだと！？	뭐라고!?	fix	sound
+sound:lead-nandato	なんだと、もう一度言ってみろ。	뭐라고, 한번 더 말해 봐라.	fix	sound

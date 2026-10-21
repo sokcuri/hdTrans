@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:jisjk:373996	氷のような冷たい手だ。	얼음 같은 차가운 손이다.	fix	local
+dict:gram:youna:pronoun	彼のような人になりたい。	그와 같은 사람이 되고 싶다.	keep	local
+dict:jisjk:264206	風のように走った。	바람처럼 달렸다.	fix	lookup
+dict:jisjk:2245	まるで夢のようだ。	마치 꿈 같다.	fix	lookup
+dict:jisjk:342187	道が複雑なようで、迷ってしまった。	길이 복잡한 것 같아서, 헤매어 버렸다.	fix	local-ending
+dict:jisjk:342187	静かで綺麗な町だ。	조용하고 예쁜 마을이다.	keep	local-ending

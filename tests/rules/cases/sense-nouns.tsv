@@ -27,7 +27,7 @@ dict:コレ	コレクションがある。	콜렉션이 있다.	keep	defaults
 dict:取っ手部分	取っ手部分は木製だ。	손잡이 부분은 목제다.	fix	defaults
 dict:取っ手部分	取っ手を握った。	손잡이를 잡았다.	keep	defaults
 dict:人となり	人となりを知る。	사람됨을 안다.	fix	defaults
-dict:人となり	人の隣に座る。	사람의 옆에 앉는다.	keep	defaults
+dict:人となり	人の隣に座る。	사람 옆에 앉는다.	keep	defaults
 dict:その口調	その口調が柔らかい。	그 어조가 부드럽다.	fix	defaults
 dict:その口調	その口を閉じた。	그 입을 닫았다.	keep	defaults
 dict:マッサージ機能	マッサージ機能がある。	마사지 기능이 있다.	fix	defaults
@@ -41,7 +41,7 @@ dict:金木犀	銀木犀の花が咲いた。	은목서의 꽃이 피었다.	kee
 dict:詫び	詫びとして金を置く。	사과로서 돈을 둔다.	fix	defaults
 dict:詫び	詫びて謝る。	사과해 사과한다.	keep	defaults
 dict:王族付き	王族付きのメイドだ。	왕족 전속의 메이드다.	fix	defaults
-dict:王族付き	写真付きの手紙だ。	사진 첨부의 편지다.	keep	defaults
+dict:王族付き	写真付きの手紙だ。	사진 첨부 편지다.	keep	defaults
 dict:殿下	殿下に話した。	전하에게 이야기했다.	fix	defaults
 dict:殿下	写真に写った。	사진에 찍혔다.	keep	defaults
 dict:首席	首席で卒業した。	수석으로 졸업했다.	fix	defaults

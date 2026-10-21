@@ -27,7 +27,7 @@ dict:jisjk:115307	試験がすんだ。	시험이 끝났다.	keep	local
 dict:jisjk:267484	私にできる仕事だ。	내가 할 수 있는 일이다.	fix	local
 dict:jisjk:267484	彼にできる仕事だ。	그가 할 수 있는 일이다.	keep	local
 dict:jisjk:267484	君にできる仕事だ。	네가 할 수 있는 일이다.	fix	local
-dict:jisjk:267484	私にできません。	내가 할 수 없습니다.	fix	local
+dict:jisjk:267484	私にできません。	제가 할 수 없습니다.	fix	local
 dict:jisjk:341799	友人について来る。	친구를 따라 온다.	fix	local
 dict:jisjk:341799	計画について話す。	계획에 대해 이야기한다.	keep	local
 dict:jisjk:341799	友人について話す。	친구에 대해 이야기한다.	keep	local

@@ -56,7 +56,7 @@ dict:jisjk:363278	兄は良いチャンスを逃した。	형은 좋은 찬스�
 dict:jisjk:363278	兄は東京へ行く予定だ。	형은 도쿄에 갈 예정이다.	keep	local-ending
 dict:jisjk:363278	電車が遅れるおそれがある。	전철이 늦을 우려가 있다.	keep	local-ending
 dict:jisjk:363278	兄は強い覚悟を見せた。	형은 강한 각오를 보였다.	keep	local-ending
-dict:particle-joins:2	それを私にください。	그것을 나에게 주세요.	fix	lookup
+dict:particle-joins:2	それを私にください。	그것을 저에게 주세요.	fix	lookup
 dict:particle-joins:2	あの本を彼にください。	그 책을 그에게 주세요.	fix	lookup
 dict:particle-joins:1	先生が私にくださった。	선생님이 나에게 주셨다.	fix	lookup
 dict:particle-joins:2	水をください。	물을 주세요.	keep	lookup

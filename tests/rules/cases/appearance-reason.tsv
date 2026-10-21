@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+pattern:静かそうだし	彼は平気そうだし、心配ない。	그는 아무렇지도 않아 보이고, 걱정없다.	fix	lookup
+pattern:書かなさそうだし	雨は降らなさそうだし、出かけよう。	비는 내리지 않을 것 같고, 나가자.	fix	lookup
+pattern:静かそうだし	元気そうだし、安心した。	건강해 보이고, 안심했다.	fix	lookup
+pattern:高そうだし	戦争も終わりそうだし、帰ろう。	전쟁도 끝날 것 같고, 돌아가자.	keep	lookup

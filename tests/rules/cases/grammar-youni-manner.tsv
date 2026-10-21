@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:gram:youni:manner	囁くように話した。	속삭이듯이 이야기했다.	fix	local-ending
+dict:gram:youni:manner	逃げるように部屋を出た。	도망치듯이 방을 나왔다.	fix	local-ending
+dict:gram:youni:manner	忘れないようにメモした。	잊지 않도록 메모했다.	keep	local-ending
+dict:gram:youni:manner	聞こえるように大きな声で話した。	들리도록 큰 목소리로 이야기했다.	keep	local-ending

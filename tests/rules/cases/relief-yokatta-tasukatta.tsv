@@ -5,7 +5,7 @@ phrase:よかった	「それはよかった」	「그것은 좋았다」	keep	b
 phrase:よかった	「よかったら来てね」	「괜찮다면 와」	keep	builtin-phrase
 phrase:よかった	「よかったね」	「잘됐네」	keep	builtin-phrase
 dict:word:tasukaru:relief	「助かった……」	「살았다……」	fix	local
-dict:word:tasukaru:relief	助かった、ありがとう。	살았다, 고마워요.	fix	local
+dict:word:tasukaru:relief	助かった、ありがとう。	살았다, 고마워.	fix	local
 dict:jisjk:139412	「助かったよ」	「도움이 됐어」	fix	local
 dict:word:tasukaru:relief	命が助かった。	생명이 살아났다.	keep	local
 dict:jisjk:361304	間に合った。	늦지 않았다.	fix	local

@@ -25,7 +25,8 @@ Pieces Cleanup(const std::vector<Sentence>& sentences);
 
 // Appends the output of a sentence to that of its chunk. A sentence only ends in a
 // space added after its final punctuation; that space gives way to a space that
-// starts the next sentence.
+// starts the next sentence, and after ! or ? to a quoting (이)라 or (으)로 that starts
+// it (돈!(으)로).
 void AppendSentence(Pieces& result, const Pieces& sentence);
 
 // Appends the output of a chunk to that of the line: the spaces between them become

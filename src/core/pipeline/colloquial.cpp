@@ -595,6 +595,18 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // The tic っぽい drawn out after a word (行くっぽーい, 寝ちゃったっぽ～い) is っぽい with the
+    // lengthening mark.
+    for (size_t i = 1; i + 2 < rs.size(); i++) {
+        if (rs[i] != U'ぽ' || !(IsHiraganaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]))) continue;
+        size_t end = i + 1;
+        while (end < rs.size() && In(rs[end], U"ー～ぉ")) end++;
+        if (end == i + 1 || end >= rs.size() || rs[end] != U'い') continue;
+        if (end + 1 < rs.size() && !IsPause(rs[end + 1])) continue;
+        rs = Spliced(rs, i + 1, U"い", end + 1);
+        rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(i + 2), kLengthenMark);
+        changed = true;
+    }
     for (size_t i = 1; i < rs.size(); i++) {
         const char32_t prev = rs[i - 1];
         if ((!IsHiraganaRune(prev) && !IsKanjiRune(prev)) || prev == U'っ') continue;

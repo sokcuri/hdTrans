@@ -58,11 +58,17 @@ void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
+void HumbleFirstPerson(Flusher& f);
+void ChanAfterKatakana(Flusher& f);
+void InitialSoundRule(Flusher& f);
 void SubjectNo(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end
 // of the utterance (closing punctuation, a pause or the end of the chunk).
 void TeRequest(Flusher& f);
+void TeThanks(Flusher& f);
+// The て or 連用 form of a verb with an object before a comma reads 고 (電話を切って、 전화를 끊고,).
+void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 void NotYet(Flusher& f);
@@ -84,6 +90,12 @@ void DeScene(Flusher& f);
 void YounaBeforeModifier(Flusher& f);
 void ParticleInNext(Flusher& f);
 void JiBeforeJiman(Flusher& f);
+// Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
+void ParallelNoka(Flusher& f);
+// An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
+// 手伝ってあげます), reads as a promise (가르쳐 줄게, 도와 드릴게요), or 주마 in old or
+// haughty speech.
+void OfferPromise(Flusher& f);
 void ComitativeTo(Flusher& f);
 void NounTo(Flusher& f);
 

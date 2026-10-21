@@ -1,10 +1,10 @@
 #! layer=words
 # 목적을 나타내는 ～に来る와 생활 낱말
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
-見に来	보러 &AH@	M427			GN						みにく	everyday-words:1
-会いに来	만나러 &AH@	M427			GN						あいにく	everyday-words:2
-買いに来	사러 &AH@	M427			GN						かいにく	everyday-words:3
-食べに来	먹으러 &AH@	M427			GN						たべにく	everyday-words:4
+見に	보러 &AH@	M41=			GN							everyday-words:1
+会いに	만나러 &AH@	M41=			GN							everyday-words:2
+買いに	사러 &AH@	M41=			GN							everyday-words:3
+食べに	먹으러 &AH@	M41=			GN							everyday-words:4
 はちまき	머리띠	N110			GN						はちまき	everyday-words:5
 昼ごろ	낮쯤	N110	UMe	Tm	GN						ひるごろ	everyday-words:6
 のほかの	의 다른	P200			GN						のほかの	everyday-words:12

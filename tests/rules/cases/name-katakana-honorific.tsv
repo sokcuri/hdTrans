@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+protect:katakana-honorific	「ヨウタサマ」	「요우타님」	fix	lookup
+protect:katakana-honorific	「ヨウタサン、オハヨウ、ゴザイマス」	「요우타씨, 안녕, 있습니다」	fix	lookup
+protect:katakana-honorific	単三電池、タンサン、デンチ。	에이에이 건전지 전지, 탄산, 덴치.	keep	lookup
+protect:katakana-honorific	タクサン、アリマス。	많이, 있습니다.	keep	lookup
+protect:katakana-honorific	オジサンが来た。	아저씨가 왔다.	keep	lookup

@@ -4,7 +4,7 @@ dict:polite-negative-ma	安全を無視するわけにはいきませんし。	�
 dict:polite-negative-ma	短い番号は登録できません。	짧은 번호는 등록할 수 없습니다.	keep	local-ending
 dict:polite-negative-ma	短い番号は登録できませんでした。	짧은 번호는 등록할 수 없었습니다.	keep	local-ending
 dict:polite-negative-ma	短い番号は登録できますね。	짧은 번호는 등록할 수 있네요.	keep	local-ending
-dict:polite-negative-ma	私はその番号を登録しませんね。	나는 그 번호를 등록하지 않아요.	keep	local-ending
+dict:polite-negative-ma	私はその番号を登録しませんね。	저는 그 번호를 등록하지 않아요.	keep	local-ending
 dict:polite-negative-ma	明日は港にいきませんし。	내일은 항구에 가지않고.	keep	local-ending
 dict:polite-negative-ma	安全を無視するわけにはいきません。	안전을 무시할 수는 없습니다.	keep	local-ending
 dict:polite-negative-ma	部屋には椅子がありませんね。	방에는 의자가 없겠네요.	keep	local-ending
@@ -30,6 +30,6 @@ dict:polite-negative-ma	明日は港にいきます。	내일은 항구에 갑�
 dict:polite-negative-ma	料理のできあがりを待ちます。	요리의 완성을 기다립니다.	keep	local-ending
 dict:polite-negative-ma	いきなり雨が降りました。	갑자기 비가 왔습니다.	keep	local-ending
 dict:polite-negative-ma	池のいきものを観察します。	연못의 생물을 관찰합니다.	keep	local-ending
-dict:polite-negative-ma	私はその番号を登録しませんし。	나는 그 번호를 등록하지않고.	keep	local-ending
+dict:polite-negative-ma	私はその番号を登録しませんし。	저는 그 번호를 등록하지않고.	keep	local-ending
 dict:polite-negative-ma	私はその番号を登録しない。	나는 그 번호를 등록하지 않는다.	keep	local-ending
 dict:polite-negative-ma	短い番号は登録できませんよ。	짧은 번호는 등록할 수 없어요.	fix	local-ending

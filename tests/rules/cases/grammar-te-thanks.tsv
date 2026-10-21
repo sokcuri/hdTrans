@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+rewrite:te-thanks	資料をお送りいただき、ありがとうございます。	자료를 전송해 주셔서, 감사합니다.	fix	rewrites
+rewrite:te-thanks	手伝ってくれてありがとう。	도와 주어서 고마워.	fix	rewrites
+rewrite:te-thanks	遅れてすみません。	늦어서 미안합니다.	fix	rewrites
+rewrite:te-thanks	待たせてごめんね。	기다리게 해서 미안해.	fix	rewrites
+rewrite:te-thanks	ご飯を食べて寝た。	밥을 먹고 잤다.	keep	rewrites
+rewrite:te-thanks	この場を借りて感謝します。	이 자리를 빌려 감사합니다.	keep	rewrites

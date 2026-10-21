@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:jisjk:340889	美人さんだね。	미인이구나.	fix	local
+dict:jisjk:340889	ケーキ屋さんに寄ろう。	케이크 상점에 들르자.	fix	local
+dict:jisjk:340889	甘えん坊さんだね。	응석꾸러기구나.	fix	local
+phrase:お疲れさん	お疲れさん。	수고했어.	fix	phrases
+dict:jisjk:340889	田中さんが来た。	타나카씨가 왔다.	keep	local
+dict:jisjk:340889	店員さんを呼んだ。	점원을 불렀다.	keep	local

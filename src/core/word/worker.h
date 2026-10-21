@@ -67,6 +67,11 @@ public:
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);
     bool SuVerb(std::string_view stem);
+    // Whether after, the text after the stem in い of a わ-row verb written in kanji
+    // (彷徨い), is the て or past た that only a く verb in い takes there (彷徨いて is 彷徨く
+    // in て). The desire forms (たい, 言いてえ) and a て the sound stage put before an ellipsis
+    // (戦い…) do not count.
+    bool TeAfterWaStem(std::string_view stem, std::string_view after) const;
 
     // Allocation; every field is set.
     Record* NewRecord();
@@ -79,9 +84,10 @@ public:
     Item* InsertLateCandidate(std::string_view text, int offset, int token, Record* records);
     Item* QueryPrefixTable(std::string_view text, int offset, int token);
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
+    bool GodanImperative(std::string_view form) const;
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
-    bool CutsWord(std::string_view ending, std::string_view after) const;
+    bool CutsWord(std::string_view before, std::string_view ending, std::string_view after) const;
     uint8_t Register(const dict::UserEntry& u) const;
     Record* CreateSyntheticRecord(int token, std::string_view source, bool emptyTarget);
     bool Transliterate(std::string_view s, std::string& out);

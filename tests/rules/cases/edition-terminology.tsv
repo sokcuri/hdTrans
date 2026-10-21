@@ -14,7 +14,7 @@ dict:edition-terminology	通常版	통상판	keep	lookup
 dict:edition-terminology	初版を買いました。	초판을 샀습니다.	keep	lookup
 dict:edition-terminology	限定版を予約しました。	한정판을 예약했습니다.	keep	lookup
 dict:edition-terminology	通常版を買いました。	통상판을 샀습니다.	keep	lookup
-dict:edition-terminology	初回の授業に参加しました。	첫회의 수업에 참가했습니다.	keep	lookup
+dict:edition-terminology	初回の授業に参加しました。	첫회 수업에 참가했습니다.	keep	lookup
 dict:edition-terminology	特別な授業です。	특별한 수업입니다.	keep	lookup
 dict:edition-terminology	特別版	특별판	keep	lookup
 dict:edition-terminology	初回 限定版	초회한정판	keep	lookup
@@ -22,7 +22,7 @@ dict:edition-terminology	初回の限定版	첫회의 한정판	keep	lookup
 dict:edition-terminology	初回限定 特装版	초회 한정 특장판	fix	lookup
 dict:edition-terminology	特装版 限定版	특장판 한정판	fix	lookup
 dict:edition-terminology	「初回限定特装版」を買いました。	「초회 한정 특장판」을 샀습니다.	fix	lookup
-dict:edition-terminology	初回の授業は特別です。	첫회의 수업은 특별합니다.	keep	lookup
+dict:edition-terminology	初回の授業は特別です。	첫회 수업은 특별합니다.	keep	lookup
 dict:edition-terminology	初回限定の特装版	첫회 한정의 특장판	fix	lookup
 dict:edition-terminology	特装車	특장차	keep	lookup
 dict:edition-terminology	初回授業	첫회 수업	keep	lookup

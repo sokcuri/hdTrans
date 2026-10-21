@@ -262,7 +262,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
-        if (settings.casual) WriteCasual(first, last);
+        if (settings.casual || settings.asked) WriteCasual(first, last);
     }
     for (int n = static_cast<int>(nodes.size()) - 1; n >= 0; n--) {
         const int begin = n > 0 ? nodes[n - 1] : 0;
@@ -496,6 +496,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
+            // A verbal noun (Hd, or a katakana word) joins the する after it (マスターする 마스터하다).
+            constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
+            const bool verbalNoun =
+                Contains(tags, "Hd") || tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana;
+            if (verbalNoun && nextEntry == "&AV@" &&
+                std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
+                return Result(std::move(t), false);
+            }
             if (nextFirst == ")") return Result(std::move(t), false);
             if (Contains(tags, "Wa") || Contains(tags, "Wb")) {
                 const bool space = Contains(tags, "Wb") && nextKind != '1';
@@ -508,10 +516,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     item.tokenIndex - items[previous].tokenIndex == 1) {
                     t.insert(0, " ");
                 }
-                // A number is written apart from a following one-word predicate (12 올랐다);
-                // a counter (3개) and a predicate that starts with the noun it counts
-                // (3시간 들였다) stay attached.
-                return Result(std::move(t), nextKind == '4' && nextEntry.find(' ') == std::string_view::npos);
+                // A number is written apart from a following one-word predicate (12 올랐다,
+                // 0600 같다); a counter (3개, 10엔인) and a predicate that starts with the noun it
+                // counts (3시간 들였다) stay attached.
+                const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
+                return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
             if (nd(nextTags)) return Result(std::move(t), true);
             if (WidthOf(t) == 2 && previous >= 0) {

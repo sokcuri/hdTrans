@@ -296,14 +296,17 @@ bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
     });
 }
 
-// start (あれ|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a particle
-// (あれ――は何だ, the pronoun).
+// start (あれ[～ー]*|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a
+// particle (あれ――は何だ, the pronoun).
 bool StartInterjection(std::string_view s, size_t pos, Match& m) {
     return SentenceStart(s, pos, m, [&](size_t q) {
         for (std::string_view w : {"あれ", "え"}) {
             size_t r = q;
             if (!Lit(s, r, w)) continue;
             size_t t = r;
+            if (w == "あれ") {
+                while (OneOf(s, t, U"～ー")) continue;  // あれ～？
+            }
             if (!OneOf(s, t, U"、，！？…‥―─—")) continue;
             size_t after = t;
             while (OneOf(s, after, U"…‥―─—")) continue;
@@ -419,6 +422,20 @@ bool IsKanaOrMark(char32_t c) {
     return (c >= U'ぁ' && c <= U'ゖ') || (c >= U'ァ' && c <= U'ヶ') || c == U'ー' || c == U'～';
 }
 
+// The end of a katakana time of day (hour 00 to 29 read as マル, ヒト or フタ first, not
+// マルマルマルマル) before hiragana, or after a run of ー～ and small ゥッ that the time takes
+// in, before anything but katakana: ヒトサンマルマルです, フタサンマルマルー！. 0 otherwise.
+size_t TimeEnd(std::string_view text, const Match& m) {
+    const std::string_view w = m.group[0];
+    if (!w.starts_with("マル") && !w.starts_with("ヒト") && !w.starts_with("フタ")) return 0;
+    if (w == "マルマルマルマル") return 0;
+    size_t p = m.end;
+    while (p < text.size() && In(At(text, p).cp, U"ー～ゥッ")) p += At(text, p).size;
+    const char32_t c = p < text.size() ? At(text, p).cp : 0;
+    if (p == m.end) return c >= U'ぁ' && c <= U'ゖ' ? p : 0;
+    return (c >= U'ァ' && c <= U'ヶ') || (c >= U'一' && c <= U'鿿') ? 0 : p;
+}
+
 }  // namespace
 
 std::string NormalizeForms(std::string_view text) {
@@ -496,7 +513,11 @@ std::string RewriteMilitaryTime(std::string_view text) {
     size_t at = 0;
     Match m;
     for (size_t from = 0; Find(text, from, MilitaryTime, m); from = m.end) {
-        if (m.end < text.size() && IsKanaOrMark(At(text, m.end).cp)) continue;
+        if (m.end < text.size() && IsKanaOrMark(At(text, m.end).cp)) {
+            const size_t end = TimeEnd(text, m);
+            if (end == 0) continue;
+            m.end = end;
+        }
         std::string words;
         for (size_t i = 0; i < m.group[0].size();) {
             const text::Rune r = At(m.group[0], i);

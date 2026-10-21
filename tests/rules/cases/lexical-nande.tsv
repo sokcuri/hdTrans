@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+rewrite:initial-conjunction	なんで怒るの？	왜 화내는 거야?	fix	rewrites
+rewrite:initial-conjunction	なんでここにいるんだ。	왜 여기에 있는 거야.	fix	rewrites

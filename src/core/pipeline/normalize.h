@@ -46,8 +46,9 @@ std::string JoinPausedCopula(std::string_view text);
 // できぬ.
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
 
-// あれ and え at the start of a sentence before 、，！？…‥ or a dash with a small っ (あれ、 あれっ、,
-// え―― えっ――, えぇ？ えっ？), but not あれ when a particle follows its …‥ or dash run
+// あれ (also drawn out, あれ～？) and え at the start of a sentence before 、，！？…‥ or a
+// dash with a small っ (あれ、 あれっ、, え―― えっ――, えぇ？ えっ？), but not あれ when a
+// particle follows its …‥ or dash run
 // (あれ――は何だ), え after an ellipsis or a dash before a question mark as えっ
 // (へ……え？ へ……えっ？), じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
 std::string RewriteInterjections(std::string_view text);
@@ -58,7 +59,7 @@ std::string RewriteInterjections(std::string_view text);
 std::string RewriteCasual(std::string_view text);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル
-// 1400) when no kana follows.
+// 1400) when no kana follows, or when hiragana follows a time of day (マルロクマルマルです).
 std::string RewriteMilitaryTime(std::string_view text);
 
 // The elder-sibling words of line in a woman's Korean (お兄様 오빠, お姉ちゃん 언니) when

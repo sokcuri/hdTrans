@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+pattern:学生だからって	子供だからって、甘やかすな。	아이라고 해서, 응석을 받아주지 말아라.	fix	lookup
+pattern:書いたからって	一度負けたからって、諦めるな。	한 번 졌다고 해서, 포기하지 말아라.	fix	lookup
+pattern:書かないからって	返事が来ないからって、怒らないで。	대답이 오지 않는다고 해서, 화내지 마.	fix	lookup
+pattern:高いからって	安いからって、買いすぎた。	싸다고 해서, 너무 샀다.	fix	lookup
+pattern:書いてるからって	毎日走ってるからって、速くはならない。	매일 달리고 있다고 해서, 빠르게는 안 된다.	fix	lookup
+phrase:、だからって	でも、だからって許されない。	그렇지만, 그렇다고 해서 허락되지 않는다.	fix	lookup
+sound:lead-dakaratte	だからって、逃げるのか。	그렇다고 해서, 도망치는 건가.	fix	sound
+pattern:学生だからって	まだ子供だからって思ってるんだろう。	아직 아이이니까라고 생각하는 것일까.	keep	lookup

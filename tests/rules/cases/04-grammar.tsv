@@ -18,7 +18,7 @@ dict:jisjk:115938	彼の分の席はない。	그의 몫의 자리는 없다.	fi
 dict:jisjk:115938	三人分の席はない。	세 명분의 자리는 없다.	fix	local
 dict:jisjk:115938	三席ある。	!rule:dict:jisjk:115938	keep	local
 dict:jisjk:354463	二〇二五年末に会う。	rule:dict:jisjk:354463=년말	keep	local
-dict:jisjk:354463	今年の年末に会う。	금년의 연말에 만난다.	fix	local
+dict:jisjk:354463	今年の年末に会う。	금년 연말에 만난다.	fix	local
 dict:jisjk:115791	学生の時よく泳いだ。	!rule:dict:jisjk:115791	keep	local
 dict:jisjk:115791	５時すぐ帰る。	5시 바로 돌아간다.	fix	local
 dict:jisjk:6120	だが、それは違う。	rule:dict:jisjk:6120=하지만	keep	local

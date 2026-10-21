@@ -133,7 +133,7 @@ struct InitialConjunction {
 };
 
 constexpr InitialConjunction kInitialConjunctions[] = {
-    {"でも", "그렇지만"}, {"では", "그럼"}, {"なんで", "어째서"}, {"だって", "왜냐하면"},
+    {"でも", "그렇지만"}, {"では", "그럼"}, {"なんで", "왜"}, {"だって", "왜냐하면"},
 };
 
 // Whether the text ends in a dash, or with ellipsis also in an ellipsis, after trailing
@@ -240,7 +240,13 @@ void ChooseInitialConjunctions(Flusher& f) {
         bool done = false;
         for (const InitialConjunction& c : kInitialConjunctions) {
             if (c.surface != surface) continue;
-            TakeTarget(it, At(it->Code(it->selected), 0), c.target, {Provenance::Initial});
+            // 왜 takes no copula or particle (なんでだ 어째서야, なんでって 어째서냐니, not 왜야).
+            const Item* n = it->next;
+            const char32_t first = n != nullptr ? text::DecodeRune(n->group->surface).cp : 0;
+            const bool joined = n != nullptr && n->selected >= 0 && n->tokenIndex == it->tokenIndex &&
+                                At(n->Code(n->selected), 0) == '2' && first >= U'ぁ' && first <= U'ゖ';
+            TakeTarget(it, At(it->Code(it->selected), 0), c.target == "왜" && joined ? "어째서" : c.target,
+                       {Provenance::Initial});
             done = true;
             break;
         }

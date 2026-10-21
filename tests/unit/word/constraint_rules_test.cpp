@@ -40,6 +40,8 @@ const dict::Snapshot* Dictionary() {
          "さん\t씨\tN110\t\t\tGN\t20\n"
          "と\t(와)과\tP200\t\t\tGN\t21\n"
          "と\t(이)라고\tP200\t\t\tGN\t22\n"
+         "と、\t(와)과\tP201\t\t\tGN\t85\n"
+         "と、\t라고\tP200\t\t\tGN\t86\n"
          "が\t(이)가\tP200\t\t\tGN\t23\n"
          "ドン\t쾅\tN110\t\t\tGN\t24\n"
          "音\t소리\tN110\t\t\tGN\t25\n"
@@ -57,6 +59,8 @@ const dict::Snapshot* Dictionary() {
          "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
          "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
          "一人\t한 사람\tN110\t\t\tGN\t41\n"
+         "君と\t군과\tN110\tQPN\t\tGN\t42\n"
+         "君と\t너와\tN110\t\t\tGN\t43\n"
          "上が\t&E6@\tM428\tXXX\t\tGN\t39\n"
          "あお\t$C2@\tH7U0\t\t\tGN\t60\n"
          "しろ\t$AD@\tH7U0\t\t\tGN\t61\n"
@@ -70,11 +74,17 @@ const dict::Snapshot* Dictionary() {
          "し\t&HT@\tM41<\t\t\tGN\t77\n"
          "め\t째\tQ110\t\t\tGN\t78\n"
          "め\t\tQ110\t\t\tGN\t79\n"
+         "め\t녀석\tQ110\t\tHa\tGN\t44\n"
          "わ\t원\tQ110\t\t\tGN\t80\n"
          "わ\t와\tQ110\t\t\tGN\t81\n"
          "わ\t\tQ110\t\t\tGN\t82\n"
          "ん\t응\tQ110\t\t\tGN\t83\n"
-         "ん\t\tQ110\t\t\tGN\t84\n"},
+         "ん\t\tQ110\t\t\tGN\t84\n"
+         "そう言った\t그런\tA9D0\t\t\tGN\t85\n"
+         "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"
+         "いた\t아$AA@\tH7N0\t\t\tGN\t87\n"
+         "いた\t손상&C6@\tM425\t\t\tGN\t88\n"
+         "い\t&HN@\tM417\t\t\tGN\t89\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -127,7 +137,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{19});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{26});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -204,6 +214,14 @@ HD_TEST(constraint_kimi_after_katakana) {
     });
 }
 
+// 君 and 君と right after a mask character (a masked name) are the suffix 군, not the pronoun;
+// after other text they keep both.
+HD_TEST(constraint_kimi_after_mask) {
+    CheckCases({{"君が", "君が", "君", "군"}, {"君と", "君と", "君と", "군과"}}, "△");
+    CheckCases({{"君が", "君が", "君", "군"}, {"君と", "君と", "君と", "군과"}}, "○");
+    CheckCases({{"君が", "君が", "君", "너 군"}, {"君と", "君と", "君と", "군과 너와"}}, "、");
+}
+
 // と after ！ or ？ quotes, also past a space or at the start of a chunk after one; と
 // elsewhere keeps its senses.
 HD_TEST(constraint_quote_after_exclamation) {
@@ -215,6 +233,7 @@ HD_TEST(constraint_quote_after_exclamation) {
         {"うわ！ととと", "ととと", "と", "(와)과 (이)라고"},
     });
     CheckCases({{"と音が", "と音が", "と", "(이)라고"}}, "！");
+    CheckCases({{"ドン！と、音が", "と、音が", "と、", "라고"}, {"ドンと、音が", "と、音が", "と、", "(와)과 라고"}});
     CheckCases({{"と音が", "と音が", "と", "(와)과 (이)라고"}}, "、");
 }
 
@@ -279,20 +298,57 @@ HD_TEST(constraint_tachidachi_before_agaru) {
     });
 }
 
+// いた right after て or で is the past of いる unless an adjective ending, 致す or 頂く
+// follows it (見ていたい, でいたします, ていただく).
+HD_TEST(constraint_ita_after_te) {
+    CheckCases({
+        {"捨てていたんです", "いたんです", "いた", ""},
+        {"見ていたな", "いたな", "いた", ""},
+        {"見ていたい", "いたい", "いた", "아$AA@ 손상&C6@"},
+        {"部屋でいたします", "いたします", "いた", "아$AA@ 손상&C6@"},
+        {"肩がいたんだ", "いたんだ", "いた", "아$AA@ 손상&C6@"},
+    });
+}
+
+// そう言った before a kanji or katakana word is the adnominal 그런 (そう言った意味); elsewhere
+// its sense goes so that the verb そう言 and its ending read it (そう言った。, そう言ったが).
+HD_TEST(constraint_sou_itta_predicate) {
+    CheckCases({
+        {"そう言った意味", "そう言った意味", "そう言った", "그런"},
+        {"そう言ったミス", "そう言ったミス", "そう言った", "그런"},
+        {"そう言った。", "そう言った。", "そう言った", ""},
+        {"そう言ったが", "そう言ったが", "そう言った", ""},
+        {"そう言った、", "そう言った、", "そう言った", ""},
+    });
+}
+
 // め and わ with no numeral among the three characters before them are not the ordinal 째 and
 // the 원 of a sum (化け物め, おわっ); after a quantity (三回め, 5人め) they keep every sense.
-// わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ).
+// わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ,
+// 知らねーわ).
 HD_TEST(constraint_counter_without_number) {
     CheckCases({
-        {"化け物め", "め", "め", ""},
-        {"ごめ", "め", "め", ""},
-        {"三回め", "め", "め", "째 "},
-        {"5人め", "め", "め", "째 "},
-        {"何度め", "め", "め", "째 "},
+        {"化け物め", "め", "め", "녀석"},
+        {"ごめ", "め", "め", "녀석"},
+        {"三回め", "め", "め", "째  녀석"},
+        {"5人め", "め", "め", "째  녀석"},
+        {"何度め", "め", "め", "째  녀석"},
         {"おわ", "わ", "わ", "와 "},
         {"五わ", "わ", "わ", "원 와 "},
         {"誤算だったわ", "わ", "わ", ""},
         {"よろしいですわ", "わ", "わ", ""},
+        {"知らねーわ", "わ", "わ", ""},
+        {"痛えわ", "わ", "わ", ""},
+    });
+}
+
+// め standing apart (after a space, punctuation or nothing) is not 녀석.
+HD_TEST(constraint_me_yatsu_detached) {
+    CheckCases({
+        {"ケンタめ", "め", "め", "녀석"},
+        {"名前: め", "め", "め", ""},
+        {"、め", "め", "め", ""},
+        {"め", "め", "め", ""},
     });
 }
 

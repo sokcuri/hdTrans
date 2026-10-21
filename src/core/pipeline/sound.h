@@ -38,6 +38,18 @@
 //     entry at least as long as the sound's key (without a final と), win; the ending
 //     of an end row does not win over an intj row before a pause or an ellipsis.
 //
+// A katakana word that starts an utterance or follows 、 or an ellipsis, before ！と or
+// ！っと, that an ono row reads alone or with ッ is that sound even where a dictionary word
+// reads it (ドン！っと 쾅!).
+//
+// A katakana mimetic the lexicon lacks before と or っと (a run ending in ッ, or a unit of two
+// to four characters said twice, that no dictionary key reads) is written in hiragana when
+// it ends in ッ and a dictionary word reads it so (ジッと じっと), otherwise as heard with
+// the と dropped (メキメキと 메키메키).
+//
+// A lone っ or ッ that an utterance holds after nothing but an ellipsis or a dash, before
+// a pause, an ellipsis, a dash or the end, is a caught breath (……ッ、 ……읏,).
+//
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
@@ -113,6 +125,7 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
 // phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
+// The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
 // dropped (ていとくぅ, ないでぇ, なのぉ). A run with ー that ends a phrase after a word is
 // written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those

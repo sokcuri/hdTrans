@@ -26,6 +26,130 @@ QuoteState QuotesAfter(QuoteState state, std::string_view text) {
     return state;
 }
 
+std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
+    std::vector<bool> polite(depth > 0 ? 2 : 1, false);
+    std::size_t own = depth > 0 ? 1 : 0;  // the quote whose own text is read
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        at += r.size == 0 ? 1 : r.size;
+        if (r.cp == U'「' || r.cp == U'『' || r.cp == U'｢') {
+            if (depth++ == 0) {
+                polite.push_back(false);
+                own = polite.size() - 1;
+            }
+            continue;
+        }
+        if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
+            if (--depth == 0) own = 0;
+            continue;
+        }
+        if (depth > 1 || polite[own]) continue;
+        for (const std::string_view end : {"요", "죠", "니다", "시오"}) {
+            if (!line.substr(0, at).ends_with(end)) continue;
+            std::string_view after = line.substr(at);
+            for (text::Rune d = text::DecodeRune(after);
+                 d.size > 0 && std::u32string_view(U"~～―ー─-♪").find(d.cp) != std::u32string_view::npos;
+                 d = text::DecodeRune(after)) {
+                after.remove_prefix(d.size);
+            }
+            const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
+            // Nouns that end in 요 (필요, 중요).
+            const std::string_view head = line.substr(0, at - end.size());
+            bool noun = false;
+            for (const std::string_view n :
+                 {"필", "중", "주", "수", "강", "소", "월", "화", "목", "금", "토", "일", "동", "요"}) {
+                noun = noun || (end == "요" && head.ends_with(n));
+            }
+            if (!noun && (next == 0 || text::IsSpace(next) ||
+                          std::u32string_view(U".,!?…‥」』｣。、！？").find(next) != std::u32string_view::npos)) {
+                polite[own] = true;
+            }
+        }
+    }
+    return polite;
+}
+
+namespace {
+
+// s without its last character.
+std::string_view WithoutLast(std::string_view s) {
+    std::size_t at = s.size();
+    while (at > 0 && (static_cast<unsigned char>(s[at - 1]) & 0xC0) == 0x80) at--;
+    return s.substr(0, at > 0 ? at - 1 : 0);
+}
+
+// Whether s starts with the end of a word: nothing, a space or punctuation.
+bool WordEnds(std::string_view s) {
+    if (s.empty()) return true;
+    const char32_t c = text::DecodeRune(s).cp;
+    return text::IsSpace(c) ||
+           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪").find(c) != std::u32string_view::npos;
+}
+
+// The spoken form of the written word at the start of s (것은 건, 무엇을 뭘) and the bytes it
+// replaces; {} for none. 것 forms follow a space or 그, 이, 저; 무엇 forms start a word.
+std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pronoun) {
+    struct Form {
+        std::string_view written;
+        std::string_view spoken;
+        bool ended;  // the word ends after it
+    };
+    static constexpr Form kForms[] = {
+        {"것은", "건", false},       {"것을", "걸", false},       {"것이야", "거야", false},
+        {"것이지", "거지", false},   {"것이니까", "거니까", false}, {"것이", "게", true},
+        {"것", "거", true},          {"무엇인가", "뭔가", false},  {"무엇을", "뭘", false},
+        {"무엇이야", "뭐야", false}, {"무엇이지", "뭐지", false},  {"무엇이", "뭐가", true},
+        {"무엇", "뭐", true},
+    };
+    for (const Form& f : kForms) {
+        if (!s.starts_with(f.written) || (f.ended && !WordEnds(s.substr(f.written.size())))) continue;
+        if (pronoun && f.written.starts_with("무엇")) continue;
+        // 무엇인가 asking what something is (무엇인가가 문제, 무엇인가를 몰라) is 뭔지.
+        const std::string_view rest = s.substr(f.written.size());
+        if (f.written == "무엇인가" && (rest.starts_with("가") || rest.starts_with(" 몰") || rest.starts_with(" 모르") ||
+                                        rest.starts_with("를 몰") || rest.starts_with("를 모르"))) {
+            return {};
+        }
+        return {f.spoken, f.written.size()};
+    }
+    return {};
+}
+
+}  // namespace
+
+std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles) {
+    std::string out;
+    std::size_t quote = depth > 0 ? 1 : 0;
+    std::size_t count = quote;
+    for (std::size_t at = 0; at < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        const std::size_t size = r.size == 0 ? 1 : r.size;
+        if (r.cp == U'「' || r.cp == U'『' || r.cp == U'｢') {
+            if (depth++ == 0) quote = ++count;
+        } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
+            if (--depth == 0) quote = 0;
+        } else if (depth == 1 && quote < styles.size() && styles[quote] == kCasualSpeech) {
+            // The word starts after a space or punctuation, or after 그, 이, 저 that do (그것은).
+            const std::string_view head = WithoutLast(out);
+            const char32_t last = out.empty() ? 0 : text::DecodeRune(std::string_view(out).substr(head.size())).cp;
+            const bool start = out.empty() || WordEnds(std::string_view(out).substr(head.size()));
+            const bool pronoun = (last == U'그' || last == U'이' || last == U'저') &&
+                                 (head.empty() || WordEnds(head.substr(WithoutLast(head).size())));
+            if (start || pronoun) {
+                const auto [spoken, length] = SpokenWord(line.substr(at), !start);
+                if (length > 0) {
+                    out += spoken;
+                    at += length;
+                    continue;
+                }
+            }
+        }
+        out += line.substr(at, size);
+        at += size;
+    }
+    return out;
+}
+
 namespace {
 
 using internal::First;
@@ -204,6 +328,72 @@ char32_t LastNonSpace(std::string_view s) {
     return last;
 }
 
+bool Hiragana(char32_t c) { return c >= U'ぁ' && c <= U'ゖ'; }
+
+// The item before item i that writes something, i itself for none (ん in あるんか).
+int Spoken(const std::vector<ResolvedItem>& items, int i) {
+    for (int k = i - 1; k >= 0; k--) {
+        if (items[k].directIndex >= 0 || !Selected(items[k]).text.empty()) return k;
+    }
+    return i;
+}
+
+// Whether the Korean of an item ends in an adnominal form (있는, 한 사람인, 4은), which a
+// following copula cannot take.
+bool Adnominal(const ResolvedItem& it) {
+    if (it.directIndex < 0) return Selected(it).text == "인";  // the copula of な
+    const std::string_view text = it.ending.text;
+    if (text == "4" || text == "0") return true;
+    for (const std::string_view end : {"는", "인", "은", "던"}) {
+        if (text.ends_with(end)) return true;
+    }
+    return false;
+}
+
+// Whether clause holds a question word, not an indefinite one (誰も, 何か, いつも, どうしても,
+// いくらでも), not one inside a word (あいつ, みんなに) and not one of an embedded question
+// (どう使うかは).
+bool QuestionWord(std::string_view clause) {
+    for (const std::string_view q : {"何", "なに", "なんで", "なんの", "なんだろ", "なんな", "なぜ", "どう", "どこ", "どれ", "どの",
+                                     "どんな", "どっち", "どちら", "誰", "だれ", "いつ", "いくら", "いくつ", "一体"}) {
+        for (std::size_t at = clause.find(q); at != std::string_view::npos; at = clause.find(q, at + 1)) {
+            const std::string_view after = clause.substr(at + q.size());
+            bool other = false;
+            for (const std::string_view k : {"も", "か", "でも", "だって", "しても", "せ", "ぞ"}) other = other || after.starts_with(k);
+            for (const std::string_view k : {"かは", "かを", "かが", "かも", "か、", "かどうか", "かなんて", "かわか", "か分か",
+                                             "か知", "ても", "でも", "うが", "ようと"}) {
+                other = other || after.find(k) != std::string_view::npos;
+            }
+            if (Hiragana(text::DecodeRune(q).cp) && at > 0) {
+                std::size_t back = at - 1;
+                while (back > 0 && (static_cast<unsigned char>(clause[back]) & 0xC0) == 0x80) back--;
+                const char32_t previous = text::DecodeRune(clause.substr(back)).cp;
+                other = other || (Hiragana(previous) &&
+                                  std::u32string_view(U"はがをにでもとへてやのよねっ").find(previous) == std::u32string_view::npos);
+            }
+            if (!other) return true;
+        }
+    }
+    return false;
+}
+
+// Whether the run of end marks that starts with close and goes on with rest (？, ！？, …？)
+// asks.
+bool Asks(char32_t close, std::string_view rest) {
+    for (char32_t c = close;;) {
+        if (c == U'？' || c == U'?' || c == U'⁉' || c == U'⁈') return true;
+        if (std::u32string_view(U"！!‼…‥～~〜♪☆★♥♡").find(c) == std::u32string_view::npos &&
+            kSkipped.find(c) == std::u32string_view::npos && !text::IsSpace(c)) {
+            return false;
+        }
+        if (rest.empty()) return false;
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.size == 0) return false;
+        rest.remove_prefix(r.size);
+        c = r.cp;
+    }
+}
+
 // The family marker that ends a conjugating target (생각&AV@), "" for none.
 std::string_view Marker(std::string_view stem) {
     if (stem.size() < 4 || !stem.ends_with("@")) return {};
@@ -213,7 +403,8 @@ std::string_view Marker(std::string_view stem) {
 
 }  // namespace
 
-char32_t Composer::QuotedEnd(int i, int last, bool nested) const {
+char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
+    if (asked != nullptr) *asked = false;
     const ResolvedItem& it = (*items_)[i];
     const std::string_view own = source_[it.tokenIndex];
     const std::size_t end = static_cast<std::size_t>(it.offset + it.length);
@@ -228,19 +419,22 @@ char32_t Composer::QuotedEnd(int i, int last, bool nested) const {
         s.remove_prefix(r.size);
         if (kSkipped.find(r.cp) != std::u32string_view::npos || text::IsSpace(r.cp)) continue;
         if (kEnds.find(r.cp) == std::u32string_view::npos) return 0;
-        // A quote inside speech that a noun or a particle follows (『書いた』もの) is cited;
-        // a report (逃げた……とある) is no speech.
+        // A quote inside speech that a noun, a particle or another quote follows (『書いた』もの,
+        // 『言わない』『聞かない』) is cited; a report (逃げた……とある) is no speech.
         if (nested && (r.cp == U'」' || r.cp == U'』') && !s.empty()) {
             const char32_t next = text::DecodeRune(s).cp;
-            if (text::IsKanji(next) || (next >= U'ァ' && next <= U'ヺ') ||
+            if (text::IsKanji(next) || (next >= U'ァ' && next <= U'ヺ') || next == U'「' || next == U'『' ||
                 (next >= U'ぁ' && next <= U'ゖ' && !s.starts_with("と") && !s.starts_with("っ"))) {
                 return 0;
             }
         }
+        // A clause quoted in speech (探してほしい、と).
+        if ((r.cp == U'、' || r.cp == U'，' || r.cp == U',') && (s.starts_with("と") || s.starts_with("って"))) return 0;
         if (r.cp == U'…' || r.cp == U'‥') {
             while (s.starts_with("…") || s.starts_with("‥")) s.remove_prefix(std::string_view("…").size());
             if (s.starts_with("と") || s.starts_with("って")) return 0;
         }
+        if (asked != nullptr) *asked = Asks(r.cp, s);
         return r.cp;
     }
     return U'\n';
@@ -261,16 +455,51 @@ void Composer::WriteCasual(int first, int last) {
         // Speech: inside a quote at the start and at the end of the item; not polite or old
         // speech.
         const QuoteState at = QuotesAfter(settings_.quotes, before);
-        if (at.depth == 0 || QuotesAfter(at, own).depth == 0) continue;
+        const bool quoted = at.depth > 0 && QuotesAfter(at, own).depth > 0;
         const std::size_t quote = static_cast<std::size_t>(at.count);
-        if (settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size() &&
-            (*settings_.quoteStyles)[quote] != 0) {
+        const std::uint8_t style = settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size()
+                                       ? (*settings_.quoteStyles)[quote]
+                                       : 0;
+        // Polite or old speech; kCasualSpeech only marks casual speech.
+        const bool styled = (style & ~kCasualSpeech) != 0;
+        bool asked = false;
+        const char32_t close = QuotedEnd(i, last, quoted && at.depth > 1, &asked);
+        if (quoted && !styled) AskWord(i, last);
+        if (close != 0 && asked &&
+            AskConjecture(i, Clause(before + std::string(own)), own, quoted && !styled)) {
             continue;
         }
-        const char32_t close = QuotedEnd(i, last, at.depth > 1);
+        // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라), in
+        // polite or old speech with 던가 (どこでしたっけ 어디서 했던가).
+        if (close != 0 && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
+            QuestionWord(Clause(before + std::string(own)))) {
+            it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(),
+                                   styled ? "던가" : "더라");
+            continue;
+        }
+        // ？ after ぞ, ぜ, よ, わ, さ or ね presses a statement (結婚するつもりなんだぞ？), it
+        // does not ask.
+        if (asked) {
+            std::size_t kept = 0;  // the end of the last character that is not a lengthening mark
+            for (std::size_t pos = 0; pos < own.size();) {
+                const text::Rune r = text::DecodeRune(own.substr(pos));
+                pos += r.size == 0 ? 1 : r.size;
+                if (kSkipped.find(r.cp) == std::u32string_view::npos) kept = pos;
+            }
+            const std::string_view tail = own.substr(0, kept);
+            for (const std::string_view p : {"ぞ", "ぜ", "よ", "わ", "さ", "ね"}) asked = asked && !tail.ends_with(p);
+        }
+        if (!quoted || styled || (!settings_.casual && !asked)) continue;
+        // Marked casual quotes: their own text only, not a quote inside them (『書いた』って);
+        // a question asks in any plain quote.
+        if (settings_.casualMarkedOnly && !asked && ((style & kCasualSpeech) == 0 || at.depth > 1)) continue;
         // である reports (優勢である) and declarations (破棄する) keep their style.
         if (close == 0 || own.find("であ") != std::string_view::npos ||
             (before.ends_with("で") && own.starts_with("あ"))) {
+            continue;
+        }
+        // すか (行くんすか) is polite; よっか (しよっか) is no noun with か.
+        if (asked && !before.ends_with("す") && !before.ends_with("ス") && !before.ends_with("っ") && AskPlain(i, own)) {
             continue;
         }
         // 白紙撤回とする, 王太子妃とする: a declaration.
@@ -311,6 +540,16 @@ void Composer::WriteCasual(int first, int last) {
         // 온다!).
         if (!marker.empty() && Lookup(marker[0], std::string(marker) + "6").ends_with("이어")) continue;
         if (alone && First(it.ending.text) == '5' && (exclaimed || close == U'…' || close == U'‥')) continue;
+        // Marked casual quotes keep 너무 X다 (露骨すぎだ, 握りすぎだ), whose 해체 is no word,
+        // and 待った (잠깐!), whose past would be read.
+        if (settings_.casualMarkedOnly) {
+            const std::string_view surface = it.surface;
+            if ((First(it.ending.text) != '5' &&
+                 (surface.find("すぎ") != std::string_view::npos || surface.find("過ぎ") != std::string_view::npos)) ||
+                (surface.starts_with("待") && First(it.ending.text) == '5' && close != U'？' && close != U'?')) {
+                continue;
+            }
+        }
         const std::string present = PresentWord(it.ending.text, stem);
         // 말한다 in 해체 (말해) reads as an order; a name (虹輝と言う) or a promise keeps it.
         if (present.ends_with("말한다")) continue;
@@ -318,7 +557,12 @@ void Composer::WriteCasual(int first, int last) {
         for (const std::string_view v : kStateSurfaces) {
             stative = stative || std::string_view(it.surface).starts_with(v);
         }
-        const bool planned = !present.empty() && !stative && close != U'？' && close != U'?' &&
+        bool state = false;
+        for (const std::string_view s : kStates) state = state || present.ends_with(s);
+        // A present action in 해체 reads as a plan, a promise or an order; only soft speech
+        // chooses one.
+        if (settings_.casualMarkedOnly && !asked && !present.empty() && !state) continue;
+        const bool planned = !present.empty() && !stative && !asked && close != U'？' && close != U'?' &&
                              Planned(present, Clause(before + std::string(own)));
         // 주다 in 해체 (줘) reads as a request.
         if ((planned && exclaimed) || (!planned && marker == "&CJ@")) continue;
@@ -353,6 +597,227 @@ std::string Composer::PresentWord(std::string_view ending, std::string_view stem
     const auto syllable = text::Split(before);
     if (before != U'는' && !(syllable && syllable->final == 4)) return {};  // 4: ㄴ
     return word;
+}
+
+// だろう or であろう before ？: the guess (것이다) asks for agreement, in casual speech
+// without 겠 (行っただろう？ 갔지?, 学生だろう？ 학생이지?) and elsewhere with it (갔겠지?);
+// after a question word it wonders (どうなったんだろう？ 어떻게 됐을까?).
+bool Composer::AskConjecture(int i, std::string_view clause, std::string_view own, bool casual) {
+    // だろうか asks by itself (気のせいだろうか 기분 탓일까).
+    if ((own.find("だろ") == std::string_view::npos && own.find("であろ") == std::string_view::npos) ||
+        own.find("ろうか") != std::string_view::npos) {
+        return false;
+    }
+    std::vector<ResolvedItem>& items = *items_;
+    ResolvedItem& it = items[i];
+    const bool wonder = QuestionWord(clause);
+    if (it.directIndex < 0) {
+        const std::string_view text = Selected(it).text;
+        if (it.selected < 0 || (text != "일 것이다" && (text != "일까" || wonder))) return false;
+        // Alone in its clause (「だろう？」) it agrees with what was said (그렇지?); after an
+        // adnominal (오르고 있는, 한 사람인) it takes 거.
+        const bool alone = clause == own;
+        std::string_view to = wonder ? "일까" : alone ? (casual ? "그렇지" : "그렇겠지") : casual ? "(이)지" : "(이)겠지";
+        if (!alone && Adnominal(items[Spoken(items, i)])) to = wonder ? "걸까" : casual ? "거지" : "것이겠지";
+        it.entry.text = to;
+        if (it.selected == 0) it.first.text = to;
+        return true;
+    }
+    std::string& ending = it.ending.text;
+    const std::string_view guess = "을 것이다";
+    std::string to;
+    if (ending.ends_with(guess)) {
+        const std::string_view head = std::string_view(ending).substr(0, ending.size() - guess.size());
+        if (head != "5" && !head.ends_with("있") && !head.ends_with("없")) return false;
+        to = std::string(head) + (wonder ? "을까" : casual ? "지" : "겠지");
+    } else if (ending == "3 것이다") {
+        to = wonder ? "3까" : casual && Stative(Marker(Selected(it).text)) ? "1지" : "1겠지";
+    } else if (ending == "1겠지" && wonder) {
+        to = "3까";
+    } else if (ending == "3까" && casual && !wonder) {
+        to = "1지";
+    } else {
+        return false;
+    }
+    ending = std::move(to);
+    return true;
+}
+
+// A plain question in casual speech: か after a noun in 해체 (暗号か？ 암호인가 암호야?), a
+// predicate before か in 해체 (大丈夫か？ 괜찮은가 괜찮아?; あるか？ 있을까 있어? when it
+// states, not after う: 行けないだろうか 갈 수 없을까), ないか after a verb as an invitation
+// (行かないか？ 가지 않겠는가 가지 않을래?) and ってこと as what is meant (行くってこと？
+// 간다는 것 간다는 거야?, 見てるってこと？ 보고 있다고 일 보고 있다는 거야?).
+bool Composer::AskPlain(int i, std::string_view own) {
+    std::vector<ResolvedItem>& items = *items_;
+    ResolvedItem& it = items[i];
+    auto told = [&](int k) {
+        if (k < 1 || items[k].directIndex >= 0 || items[k].selected < 0) return false;
+        const std::string_view thing = Selected(items[k]).text;
+        std::string& said = items[k - 1].ending.text;
+        if ((thing != "것" && thing != "일") || items[k - 1].directIndex < 0) return false;
+        if (said.ends_with("다고")) said = said.substr(0, said.size() - std::string_view("고").size()) + "는";
+        return said.ends_with("다는");
+    };
+    if (it.directIndex < 0 && told(i)) {
+        it.entry.text = "거야";
+        if (it.selected == 0) it.first.text = it.entry.text;
+        return true;
+    }
+    if (it.directIndex < 0 && it.selected >= 0 && Selected(it).text == "(이)다" && told(i - 1)) {
+        items[i - 1].entry.text = "거";
+        if (items[i - 1].selected == 0) items[i - 1].first.text = "거";
+        return false;
+    }
+    if (it.directIndex >= 0 && it.ending.text.ends_with("다는 것")) {
+        it.ending.text.replace(it.ending.text.size() - std::string_view("것").size(), std::string_view("것").size(), "거야");
+        return true;
+    }
+    if (it.directIndex < 0) {
+        if (it.selected < 0 || Selected(it).text != "인가" || i == 0) return false;
+        // A past adnominal before it (元気だったか 건강했던인가) asks with 어 (건강했어).
+        ResolvedItem& previous = items[Spoken(items, i)];
+        const char before = First(Selected(previous).code);
+        if (previous.directIndex >= 0 && previous.ending.text == "5던") {
+            previous.ending.text = "5어";
+            state_[Spoken(items, i)].spoken = true;
+            it.entry.text = "";
+        } else if (Selected(previous).text.ends_with("야")) {  // 용건이야인가 (用だか)
+            return false;
+        } else if (Adnominal(previous)) {  // 있는 인가 (あるんか)
+            it.entry.text = "거야";
+        } else if (previous.directIndex < 0 && (before == '1' || before == '9') && !Selected(previous).text.empty() &&
+                   !Selected(previous).text.ends_with(" ")) {  // a noun or a phrase (何か用か 무슨 볼일이야)
+            it.entry.text = "(이)야";
+        } else {
+            return false;
+        }
+        if (it.selected == 0) it.first.text = it.entry.text;
+        return true;
+    }
+    const std::string_view marker = Marker(Selected(it).text);
+    std::string& ending = it.ending.text;
+    std::string to;
+    if (ending == "4가" && marker != "$DH@") {
+        to = "6";
+    } else if (ending == "1지 않는가" || ending == "1지 않는가 ") {
+        to = "1지 않아";
+    } else if (ending == "1겠는가" && marker == "$DH@") {
+        to = "3래";
+    } else if (ending == "3까" && own.ends_with("か") && !own.ends_with("うか") && Stative(marker) && marker != "$DH@" &&
+               !Selected(it).text.starts_with("안 ")) {
+        // Not after a verb's ない, which may invite (来ないか 오지 않을까), nor 안 될까, which is no
+        // 안 돼 (ことにならないか).
+        to = "6";
+    } else {
+        return false;
+    }
+    ending = std::move(to);
+    state_[i].spoken = true;
+    return true;
+}
+
+// Whether the family of marker states: an adjective's, or a verb's whose terminal and
+// first rows agree (있다).
+bool Composer::Stative(std::string_view marker) const {
+    if (marker.empty()) return false;
+    if (marker[0] != '&') return true;
+    const std::string m(marker);
+    const std::string_view terminal = Lookup('&', m + "4");
+    return !terminal.empty() && terminal == Lookup('&', m + "1");
+}
+
+// 무엇 and 어째서 in a casual question are spoken 뭐 and 왜 (何を書いてるの？ 뭘 쓰고 있는
+// 거야?, 何かあった？ 뭔가 있었어?, なんで来たの？ 왜 온 거야?).
+void Composer::AskWord(int i, int last) {
+    std::vector<ResolvedItem>& items = *items_;
+    ResolvedItem& it = items[i];
+    if (it.selected < 0) return;
+    const std::string_view own = Selected(it).text;
+    std::string to;
+    if (own == "무엇") {
+        to = "뭐";
+    } else if (own == "무엇인가") {
+        to = "뭔가";
+    } else if (own == "어째서") {
+        to = "왜";
+    } else {
+        // A verb after it (何がある 무엇이 &HN@).
+        for (const auto& [from, spoken] : {std::pair<std::string_view, std::string_view>{"무엇이 ", "뭐가 "},
+                                           {"무엇을 ", "뭘 "}, {"무엇인가 ", "뭔가 "}, {"무엇 ", "뭐 "}, {"어째서 ", "왜 "}}) {
+            if (own.starts_with(from)) to = std::string(spoken) + std::string(own.substr(from.size()));
+        }
+        if (to.empty()) return;
+    }
+    // The sentence the item is in ends in ？.
+    const std::string_view src = source_[it.tokenIndex];
+    const std::size_t end = static_cast<std::size_t>(it.offset + it.length);
+    std::string after(end < src.size() ? src.substr(end) : std::string_view());
+    for (int t = it.tokenIndex + 1; t <= last; t++) after += source_[t];
+    const std::size_t following = static_cast<std::size_t>(last) + 1;
+    if (following < tokens_->size()) after += (*tokens_)[following].text;
+    bool asks = false;
+    for (std::string_view s = after; !s.empty();) {
+        const text::Rune r = text::DecodeRune(s);
+        if (r.size == 0) return;
+        s.remove_prefix(r.size);
+        if (r.cp == U'？' || r.cp == U'?' || r.cp == U'⁉' || r.cp == U'⁈') {
+            asks = true;
+            break;
+        }
+        if (r.cp == U'！' || r.cp == U'!') {
+            asks = s.starts_with("？") || s.starts_with("?");
+            break;
+        }
+        if (std::u32string_view(U"。．」』「『\n").find(r.cp) != std::u32string_view::npos) break;
+    }
+    if (!asks) return;
+    const int n = static_cast<int>(items.size());
+    const auto entry = [&](int k) {
+        return k < n && items[k].directIndex < 0 && items[k].selected >= 0 ? Selected(items[k]).text : std::string_view();
+    };
+    // 왜 takes no copula or particle (なんでだ 어째서야, なんでって 어째서는, not 왜야, 왜는).
+    if (to == "왜" && First(i + 1 < n && items[i + 1].selected >= 0 ? Selected(items[i + 1]).code : "") == '2' &&
+        (entry(i + 1).starts_with("(") || internal::HasSyllable(entry(i + 1)))) {
+        return;
+    }
+    if (to == "뭐") {
+        // 뭐 takes a particle, a verb (何描いてる 뭐 그려) or ends the question (何？ 뭐?); a noun
+        // after it would join it (何あれ 뭐저것), and so would a noun before it (ごはん何 밥뭐);
+        // 뭐가 before a copula is no question (何がだ 뭐가야).
+        const std::string_view particle = entry(i + 1);
+        bool ends = i + 1 >= n;
+        if (!ends && items[i + 1].tokenIndex != it.tokenIndex) {
+            const std::string_view next = source_[items[i + 1].tokenIndex];
+            ends = !next.empty() && kEnds.find(text::DecodeRune(next).cp) != std::u32string_view::npos;
+        }
+        const bool verb = i + 1 < n && items[i + 1].directIndex >= 0;
+        if (!ends && !verb && particle != "(을)를" && particle != "(이)가" && particle != "(으)로" && particle != "에") return;
+        if ((i > 0 && items[i - 1].directIndex < 0 && First(Selected(items[i - 1]).code) == '1' &&
+             !Selected(items[i - 1]).text.empty()) ||
+            (particle == "(이)가" && entry(i + 2).starts_with("(이)"))) {
+            return;
+        }
+        // 뭘 for 무엇을; the space of を goes before the word after it, none before an end mark
+        // (何を……？ 뭘……?), and not before a comma, whose particle after it reads the one before
+        // (何を、とは 뭐를, 이란).
+        if (particle == "(을)를") {
+            const ResolvedItem& p = items[i + 1];
+            const std::string_view ps = source_[p.tokenIndex];
+            const std::size_t at = static_cast<std::size_t>(p.offset + p.length);
+            std::string rest(at < ps.size() ? ps.substr(at) : std::string_view());
+            for (int t = p.tokenIndex + 1; t <= last && rest.empty(); t++) rest = source_[t];
+            const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+            if (next != U'、' && next != U'，' && next != U',') {
+                to = "뭘";
+                const bool word = next != 0 && kEnds.find(next) == std::u32string_view::npos;
+                items[i + 1].entry.text = word ? " " : "";
+                if (items[i + 1].selected == 0) items[i + 1].first.text = items[i + 1].entry.text;
+            }
+        }
+    }
+    it.entry.text = to;
+    if (it.selected == 0) it.first.text = to;
 }
 
 }  // namespace hdTrans::output
