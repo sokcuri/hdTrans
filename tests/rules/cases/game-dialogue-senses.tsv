@@ -49,3 +49,9 @@ dict:follow:1	皆、私に続いて！	모두, 나를 따라!	fix	local
 dict:follow:1	千歳、千代田に続いて建造された。	지토세, 치요다에 이어 건조되었다.	keep	local
 dict:follow:1	後半に続くのです！	후반에 계속됩니다!	keep	local
 dict:thanks-zonji:1	司令、ありがとう存じます。	사령, 감사합니다.	fix	defaults
+dict:jisjk:342040	「雨ね」	「비네」	fix	builtin-ending
+dict:jisjk:342040	「約束ね」	「약속이네」	fix	builtin-ending
+dict:jisjk:90200	「本当にごめんね、遅れて」	「정말로 미안해, 늦어」	fix	defaults
+dict:jisjk:201961	「誕生日おめでとう！」	「생일 축하해!」	fix	defaults
+dict:jisjk:201961	「おめでとうございます」	「축하합니다」	keep	defaults
+dict:onegai-ne:1	「お願いね」	「부탁해」	fix	defaults

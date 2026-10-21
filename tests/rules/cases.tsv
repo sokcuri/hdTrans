@@ -480,8 +480,8 @@ L3151	私は何も知らないと答えた。	나는 아무것도 모른다고 �
 L3151	もう痛くないと話していた。	이제 아프지 않다고 이야기하고 있었다.	current	local-ending
 L3152	彼は約束を守らないな。	그는 약속을 지키지 않는데.	current	local
 L3172	私とは、少し違う。	나와는, 조금 다르다.	current	local
-L3180	明日は休みね。	내일은 휴일이군요.	current	local
-L3180	続きね。	계속이군요.	current	local
+L3180	明日は休みね。	내일은 휴일이네.	current	local
+L3180	続きね。	계속이네.	current	local
 L3182	はやく、寝なさい。	빠르게, 자세요.	fix	local
 L3190	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
 L3190	ここは学校じゃないよ。	여기는 학교가 아니야.	current	local-ending
