@@ -1133,9 +1133,9 @@
 何だこれって	뭐야 이건	intj
 何だあれって	뭐야 저건	intj
 なぜだ	왜지	intj
-どうしてだ	어째서지	intj
+どうしてだ	왜지	intj
 なぜだろう	왜일까	intj
-どうしてだろう	어째서일까	intj
+どうしてだろう	왜일까	intj
 // はず after a pause, with nothing before it in the sentence
 はず	그럴 것	intj
 はずだ	그럴 것이다	intj
@@ -1238,6 +1238,10 @@
 // of its own, not the copula of a noun before it (苦手なんだっけ).
 なんだっけ	뭐였더라	intj
 何だっけ	뭐였더라	phrase
+何でもありません	아무것도 아니에요	intj
+なんでもありません	아무것도 아니에요	intj
+何でもないです	아무것도 아니에요	intj
+なんでもないです	아무것도 아니에요	intj
 今のは	방금 그건	phrase
 今のが	방금 그게	phrase
 今のを	방금 그걸	phrase

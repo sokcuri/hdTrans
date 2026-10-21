@@ -159,7 +159,7 @@ L1012	バスは学校へ進む。	버스는 학교에 진학한다.	current	loca
 L1024	式典がすんだ。	식전이 끝났다.	current	local
 L1031	あと三個食べた。	앞으로 3개 먹었다.	current	local
 L1031	あと三日で終わる。	앞으로 3일에 끝난다.	current	local
-L1033	どうしてそんなことをしたの。	어째서 그런 일을 했어.	current	local
+L1033	どうしてそんなことをしたの。	왜 그런 일을 했어.	current	local
 L1033	そんなことより早く食べよう。	그런 일보다 빨리 먹자.	current	local
 L1041	俺と彼は昔からの友達だ。	나와 그는 옛날부터의 친구다.	current	local
 L1041	俺も一緒に行っていいかな。	나도 함께 가도 좋을까.	current	local
@@ -206,9 +206,9 @@ L1312	彼が笑える理由は分からない。	그가 웃을 수 있는 이유
 L1317	食事の時の話は面白かった。	식사때 이야기는 재미있었다.	current	local
 L1317	ベッドの下の箱を探している。	침대아래의 상자를 찾고 있다.	current	local
 L1318	明日はどこに行くの？	내일은 어디에 가는 거야?	current	local-ending
-L1318	どうして泣いているの？	어째서 울고 있는 거야?	current	local-ending
+L1318	どうして泣いているの？	왜 울고 있는 거야?	current	local-ending
 L1327	「この本、もう読むの！」	「이 책, 이제 읽어!」	current	local-ending
-L1327	「どうして泣いているの。何があったの」	「어째서 울고 있어. 무엇이 있었어」	current	local-ending
+L1327	「どうして泣いているの。何があったの」	「왜 울고 있어. 무슨 일이 있었어」	current	local-ending
 L1339	その服は高くないですよ。	그 옷은 비싸지 않아요.	current	local
 L1339	この問題はそんなに難しくない。	이 문제는 그렇게 어렵지 않다.	current	local
 L1345	彼は三キロ泳ぐことができる。	그는 3킬로 헤엄칠 수가 있다.	current	local

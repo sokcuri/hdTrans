@@ -26,6 +26,7 @@ struct QuoteState {
 // A quote style besides those of pipeline::QuoteStyles: the Japanese of the quote is
 // casual speech (pipeline::CasualQuotes).
 constexpr std::uint8_t kCasualSpeech = 32;
+constexpr std::uint8_t kPoliteStyle = 1;  // pipeline::kPoliteSpeech, a quote in です and ます
 
 // The switches of the stage.
 struct Settings {
@@ -54,8 +55,9 @@ struct Settings {
 // 좋네요, 합니다).
 std::vector<bool> PoliteQuotes(std::string_view line, int depth);
 
-// line with the written words of its quotes styled kCasualSpeech in their spoken form (것은
-// 건, 그것을 그걸, 무엇을 뭘, 무엇인가 뭔가); quotes and depth as for PoliteQuotes.
+// line with the written words of its quotes in their spoken form: 무엇 in every plain or
+// polite quote (무엇을 뭘, 무엇인가 뭔가, 무엇입니까 뭡니까), and 것 too in those styled
+// kCasualSpeech (것은 건, 그것을 그걸); quotes and depth as for PoliteQuotes.
 std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles);
 
 // The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing

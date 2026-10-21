@@ -34,3 +34,12 @@ constraint:honorific-kanji-name	千里ちゃん、待って	치사토짱, 기다
 constraint:honorific-kanji-name	翼くん	츠바사군	keep	lookup
 names:cued-single-kanji	筧くん、おはよう	카케이군, 안녕	fix	lookup
 normalize:shime	「そんなわけで、〆切までもう時間がないんだ」	「그래서, 마감까지 이제 시간이 없다」	fix	normalize
+dict:jisjk:845	「どうして？」	「왜?」	fix	defaults
+dict:doushite:copula	「どうしてなの？」	「어째서야?」	keep	local
+compose:spoken-what	「皆さん、何がいいですか？」	「여러분, 뭐가 좋습니까?」	fix	compose
+compose:spoken-what	「何を食べたいですか？」	「뭘 먹고 싶습니까?」	fix	compose
+compose:spoken-what	何をしている？	무엇을 하고 있어?	keep	compose
+compose:spoken-what	「なによりおかしいのは」	「무엇보다도 이상한 것은」	keep	compose
+dict:nanika:atta	「何かあったの？」	「무슨 일 있었어?」	fix	local
+dict:naniga:atta	「何があったんですか？」	「무슨 일이 있었습니까?」	fix	local
+phrase:何でもありません	「何でもありません」	「아무것도 아니에요」	fix	builtin-phrase

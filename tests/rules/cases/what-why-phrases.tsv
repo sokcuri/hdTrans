@@ -5,7 +5,7 @@ phrase:何だこれ	なんだこれ、すごい。	뭐야 이게, 대단해.	fix
 phrase:何だこれ	何だこれは	이게 대체 뭐야	keep	builtin-phrase
 phrase:何だこれ	何だそれ	뭐야 그게	keep	builtin-phrase
 phrase:なぜだ	「なぜだ、教えてくれ」	「왜지, 가르쳐 줘」	fix	builtin-phrase
-phrase:なぜだ	「どうしてだ？」	「어째서지?」	fix	builtin-phrase
+phrase:なぜだ	「どうしてだ？」	「왜지?」	fix	builtin-phrase
 phrase:なぜだ	なぜだろう。	왜일까.	fix	builtin-phrase
 phrase:なぜだ	なぜだか分からない	왜인지 모른다	keep	builtin-phrase
 phrase:なぜだ	なぜだと思う？	왜라고 생각해?	keep	builtin-phrase

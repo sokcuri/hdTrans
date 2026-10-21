@@ -3,6 +3,6 @@ compose:close-bracket	「え、あの、なんで」	「어, 저, 왜」	fix	com
 compose:close-bracket	「なんで」	「왜」	fix	compose
 compose:close-bracket	「なんで？」	「왜?」	keep	compose
 compose:close-bracket	なんで行くの？	왜 가는 거야?	keep	compose
-compose:close-bracket	「どうして」	「어째서」	keep	compose
+compose:close-bracket	「どうして」	「왜」	keep	compose
 compose:close-bracket	（なんで）	(왜)	fix	compose
 compose:close-bracket	『なんで』	『왜』	fix	compose
