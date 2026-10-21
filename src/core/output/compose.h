@@ -31,10 +31,11 @@ struct Settings {
     bool text = false;      // input of the text path: kana runs the items drop are kept, particles
                             // alternate by ParticleClass
     // Text path: the plain sentence ends (간다, 다르다, 학생이다) of speech in 해체 (갈 거야,
-    // 달라, 학생이야). Speech is the text inside 「」 and 『』; quotes is the state at the first
-    // token of the sentence, and the quoteStyles of the line (pipeline::QuoteStyles) keep
-    // polite and old speech.
+    // 달라, 학생이야). Speech is the text inside 「」 and 『』, and with spoken the text of the
+    // line outside them; quotes is the state at the first token of the sentence, and the
+    // quoteStyles of the line (pipeline::QuoteStyles) keep polite and old speech.
     bool soften = false;
+    bool spoken = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };

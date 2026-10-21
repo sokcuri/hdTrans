@@ -10,7 +10,40 @@ namespace hdTrans::pipeline {
 
 namespace {
 
+using internal::LastRune;
 using internal::RuneIn;
+
+// Characters that end a sentence, those after its last word, and those that stretch it.
+constexpr std::u32string_view kSentenceEnds = U"。！？!?…‥";
+constexpr std::u32string_view kTrailing = U"。！？!?…‥♪☆★♥♡、, 　";
+constexpr std::u32string_view kStretch = U"ー～〜っッ";
+
+// Spoken sentence ends, matched at the end of a sentence without kTrailing and kStretch.
+constexpr std::string_view kSpokenEnds[] = {
+    "よ", "ね", "ぞ", "ぜ", "わ", "さ", "じゃん", "だろ", "でしょ", "っけ", "かな", "かよ", "っす",
+    "ちゃう", "ちゃった", "じゃう", "じゃった", "ねえ", "ねぇ", "なぁ",
+};
+
+// s without the characters of set at its end.
+std::string_view TrimEnd(std::string_view s, std::u32string_view set) {
+    while (!s.empty()) {
+        const text::Rune r = LastRune(s);
+        if (r.size == 0 || !RuneIn(r.cp, set)) break;
+        s.remove_suffix(r.size);
+    }
+    return s;
+}
+
+bool SpokenEnd(std::string_view sentence) {
+    sentence = TrimEnd(sentence, kTrailing);
+    const std::string_view word = TrimEnd(sentence, kStretch);
+    if (word.empty()) return false;
+    for (const std::string_view end : kSpokenEnds) {
+        if (word.ends_with(end)) return true;
+    }
+    // 行くぞー, さむーい: a stretched kana end.
+    return word.size() < sentence.size() && internal::IsHiraganaRune(LastRune(word).cp);
+}
 
 constexpr std::string_view kPoliteMarkers[] = {"です", "ます", "ました", "まして", "ません", "でした", "ましょう",
                                                 "でしょう", "ください", "下さい", "なさい", "ませ", "いただきたい", "ていただく"};
@@ -160,6 +193,41 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line) {
         }
     }
     return styles;
+}
+
+bool SpeakerLine(std::string_view line) {
+    std::size_t at = 0;
+    int count = 0;
+    while (at < line.size()) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        if (r.size == 0) return false;
+        if (r.cp == U':' && line.substr(at + 1).starts_with(" ")) break;
+        if (text::IsSpace(r.cp) || (text::IsPunct(r.cp) && r.cp != U'・') || ++count > 8) return false;
+        at += r.size;
+    }
+    if (count == 0 || at >= line.size()) return false;
+    std::string_view rest = line.substr(at + 1);
+    while (!rest.empty() && text::IsSpace(text::DecodeRune(rest).cp)) rest.remove_prefix(text::DecodeRune(rest).size);
+    if (rest.empty()) return false;
+    const char32_t first = text::DecodeRune(rest).cp;
+    return !text::IsPunct(first) && !text::IsDigit(first);
+}
+
+bool MarkedSpeech(std::string_view line) {
+    // An indented paragraph is narration, however casual (　窓を閉めた。寒いからさ。).
+    if (line.find("「") != std::string_view::npos || line.find("『") != std::string_view::npos ||
+        line.starts_with("　") || line.starts_with(" ")) {
+        return false;
+    }
+    auto at = [&](std::size_t i) { return text::DecodeRune(line.substr(i)); };
+    for (std::size_t start = 0, end = 0;;) {
+        while (end < line.size() && !RuneIn(at(end).cp, kSentenceEnds)) end += at(end).size;
+        std::size_t stop = end;
+        while (stop < line.size() && RuneIn(at(stop).cp, kTrailing)) stop += at(stop).size;
+        if (SpokenEnd(line.substr(start, stop - start))) return true;
+        if (stop >= line.size()) return false;
+        start = end = stop;
+    }
 }
 
 }  // namespace hdTrans::pipeline

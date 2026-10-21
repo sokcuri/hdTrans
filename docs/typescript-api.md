@@ -81,10 +81,12 @@ console.log(result.choices);
 ```
 
 대사의 문장 끝은 기본으로 해체로 씁니다(「明日行く」 → 「내일 갈 거야」). 대사로 볼 범위는 `Soften` 값
-`'off'`, `'quotes'`(기본, 「」 안)이며 CLI의 `--soften`과 같습니다. `HdTrans.init({ soften })`나
-`setSoften(mode)`는 다음 번역부터, `translate(text, { soften })`는 그 호출에만 적용합니다.
+`'off'`, `'quotes'`(기본, 「」 안), `'marked'`(「」 안과 `이름: ` 뒤의 줄, 괄호 없이 말투로 끝나는 줄),
+`'dialogue'`(모든 줄)이며 CLI의 `--soften`과 같습니다. `HdTrans.init({ soften })`나 `setSoften(mode)`는 다음
+번역부터, `translate(text, { soften })`는 그 호출에만 적용합니다.
 
 ```ts
+hdTrans.setSoften("dialogue");                         // 게임 음성처럼 괄호 없는 대사
 const plain = hdTrans.translate("「明日行く」", { soften: "off" });  // 「내일 간다」
 ```
 

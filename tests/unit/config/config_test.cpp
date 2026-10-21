@@ -48,7 +48,7 @@ HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(
         "# settings\ndicts: [dicts, '../extra']\nuserdict: user.tsv\nehnd: Ehnd\n"
-        "cache: cache\ncg: false\nmisread: true\nreference: true\nsoften: off\n");
+        "cache: cache\ncg: false\nmisread: true\nreference: true\nsoften: dialogue\n");
     HD_CHECK(result.found);
     HD_REQUIRE(result.diagnostics.empty());
     const auto& settings = result.settings;
@@ -63,14 +63,15 @@ HD_TEST(ConfigAllKeys) {
     HD_CHECK(!settings.cg);
     HD_CHECK(settings.misread);
     HD_CHECK(settings.reference);
-    HD_CHECK(settings.soften == hdTrans::Soften::Off);
+    HD_CHECK(settings.soften == hdTrans::Soften::Dialogue);
 }
 
 HD_TEST(ConfigSoften) {
     TempConfig file;
     const struct Case { const char* yaml; hdTrans::Soften want; } cases[] = {
-        {"soften: off\n", hdTrans::Soften::Off},   {"soften: quotes\n", hdTrans::Soften::Quotes},
-        {"soften: false\n", hdTrans::Soften::Off}, {"soften: true\n", hdTrans::Soften::Quotes},
+        {"soften: off\n", hdTrans::Soften::Off},       {"soften: quotes\n", hdTrans::Soften::Quotes},
+        {"soften: marked\n", hdTrans::Soften::Marked}, {"soften: dialogue\n", hdTrans::Soften::Dialogue},
+        {"soften: false\n", hdTrans::Soften::Off},     {"soften: true\n", hdTrans::Soften::Quotes},
     };
     for (const auto& test : cases) {
         const auto result = file.Load(test.yaml);

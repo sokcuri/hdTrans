@@ -33,7 +33,7 @@ struct ConfigResult {
     bool found = false;
 };
 
-// The mode named off or quotes; false for another name.
+// The mode named off, quotes, marked or dialogue; false for another name.
 bool SoftenOf(std::string_view name, Soften& out);
 
 // Missing files are optional. Invalid entries are skipped; earlier valid entries survive syntax errors.

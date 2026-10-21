@@ -149,7 +149,7 @@ public:
             if (scalar && ScalarKind(event_) == Kind::Bool && (value == "true" || value == "false")) {
                 result_.settings.soften = value == "true" ? Soften::Quotes : Soften::Off;
             } else if (!scalar || ScalarKind(event_) != Kind::String || !SoftenOf(value, result_.settings.soften)) {
-                Error("soften: expected off, quotes or a boolean");
+                Error("soften: expected off, quotes, marked, dialogue or a boolean");
                 return Skip();
             }
         } else if (key == "cg" || key == "misread" || key == "reference") {
@@ -204,7 +204,8 @@ private:
 }  // namespace
 
 bool SoftenOf(std::string_view name, Soften& out) {
-    constexpr std::pair<std::string_view, Soften> kModes[] = {{"off", Soften::Off}, {"quotes", Soften::Quotes}};
+    constexpr std::pair<std::string_view, Soften> kModes[] = {
+        {"off", Soften::Off}, {"quotes", Soften::Quotes}, {"marked", Soften::Marked}, {"dialogue", Soften::Dialogue}};
     for (const auto& [n, mode] : kModes) {
         if (n != name) continue;
         out = mode;

@@ -102,10 +102,10 @@ public:
         return true;
     }
 
-    // off or quotes: the speech of later translations.
+    // off, quotes, marked or dialogue: the speech of later translations.
     bool SetSoften(const std::string& mode) {
         if (!hdTrans::internal::SoftenOf(mode, soften_)) {
-            error_ = "hdtrans: soften takes off or quotes";
+            error_ = "hdtrans: soften takes off, quotes, marked or dialogue";
             return false;
         }
         if (session_) session_->SetSoften(soften_);

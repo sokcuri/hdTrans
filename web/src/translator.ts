@@ -42,9 +42,10 @@ export interface TranslationResult {
   logs: string[];
 }
 
-/** The speech whose plain sentence ends (간다) become 해체 (갈 거야): none, or the text
- *  inside 「」 (the default). */
-export type Soften = 'off' | 'quotes';
+/** The speech whose plain sentence ends (간다) become 해체 (갈 거야): none, the text inside
+ *  「」 (the default), also lines after a speaker name and lines without brackets that end
+ *  like speech, or every line. */
+export type Soften = 'off' | 'quotes' | 'marked' | 'dialogue';
 
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
 export type EhndFiles = Readonly<Record<string, string>>;

@@ -91,10 +91,12 @@ output::Settings ComposeSettings(bool text) {
     return s;
 }
 
-// The speech of a line for the compose stage: whether its plain sentence ends soften, its
-// quotes at the start of the next chunk and the styles of its quotes.
+// The speech of a line for the compose stage: whether its plain sentence ends soften,
+// whether the line is spoken as a whole, its quotes at the start of the next chunk and the
+// styles of its quotes.
 struct Speech {
     bool soften = false;
+    bool spoken = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -138,6 +140,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
     output::Settings composeSettings = ComposeSettings(text);
     composeSettings.soften = text && speech.soften;
+    composeSettings.spoken = speech.spoken;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes
@@ -193,7 +196,12 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     std::string before;
     Speech speech;
     speech.soften = !options.reference && options.soften != Soften::Off;
-    if (speech.soften) speech.styles = pipeline::QuoteStyles(output::String(marked));
+    if (speech.soften) {
+        speech.spoken = options.soften == Soften::Dialogue ||
+                        (options.soften == Soften::Marked &&
+                         (pipeline::SpeakerLine(facts.text) || pipeline::MarkedSpeech(facts.text)));
+        speech.styles = pipeline::QuoteStyles(output::String(marked));
+    }
     for (std::size_t i = 0; i < chunks.size(); i++) {
         if (observer.pieces) observer.pieces(observer.context, "CH", static_cast<int>(i), chunks[i]);
         TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, speech, s,

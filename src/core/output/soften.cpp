@@ -243,11 +243,13 @@ void Composer::Soften(int first, int last) {
         std::string before;
         for (int t = first; t < it.tokenIndex; t++) before += source_[t];
         before += src.substr(0, start);
-        // Speech: inside a quote at the start and at the end of the item; not polite or old
-        // speech.
+        // Speech: inside a quote at the start and at the end of the item, or a spoken line
+        // outside its quotes; not polite or old speech.
         const QuoteState at = QuotesAfter(settings_.quotes, before);
-        if (at.depth <= 0 || QuotesAfter(at, own).depth <= 0) continue;
-        const std::size_t quote = static_cast<std::size_t>(at.count);
+        const int after = QuotesAfter(at, own).depth;
+        const bool quoted = at.depth > 0 && after > 0;
+        if (!quoted && !(settings_.spoken && at.depth == 0 && after == 0)) continue;
+        const std::size_t quote = quoted ? static_cast<std::size_t>(at.count) : 0;
         if (settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size() &&
             (*settings_.quoteStyles)[quote] != 0) {
             continue;

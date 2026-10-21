@@ -38,7 +38,10 @@ enum class UserReload { Off, Auto };
 // 학생이야). Narration keeps its 다.
 enum class Soften {
     Off,
-    Quotes,  // the text inside 「」
+    Quotes,    // the text inside 「」
+    Marked,    // also a line after a speaker name (名前: …) and a line without brackets
+               // whose sentences end like speech (〜よ, 〜だろ, 〜ちゃう)
+    Dialogue,  // every line
 };
 
 // The loaded dictionaries. Shared by any number of sessions and threads.

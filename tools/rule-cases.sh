@@ -1,6 +1,6 @@
 #!/bin/sh
 # Checks the rule cases in tests/rules/cases.tsv (or every table in a directory) against a built CLI.
-#   tools/rule-cases.sh CLI DICTS [CASES] [--accept]
+#   tools/rule-cases.sh CLI DICTS [CASES] [--accept] [-- CLI-OPTIONS...]
 # CASES is a TSV with the header `rule input expected kind layer`. Every input is translated as its
 # own session (-each -why). `expected` is either the whole Korean output, or
 # `rule:L<n>=<target>`: some word of the line is chosen by local rule n with that target
@@ -8,7 +8,8 @@
 # execution layer of the rule (docs/pipeline-layers.md).
 # Failing rows are reported grouped by layer, each with its rule, input, expected and actual
 # value, so that a change in one layer that breaks another layer's rows shows as such.
-# --accept rewrites the expected value of every full-output row whose kind is current.
+# --accept rewrites the expected value of every full-output row whose kind is current. The words
+# after -- are passed to the CLI (--soften dialogue).
 # Exit: 0 all rows pass, 1 a row fails, 2 invalid arguments or failed CLI.
 set -eu
 LC_ALL=C; export LC_ALL
@@ -16,8 +17,13 @@ LC_ALL=C; export LC_ALL
 cli=$1 dicts=$2; shift 2
 here=$(cd "$(dirname "$0")/.." && pwd)
 cases=$here/tests/rules/cases.tsv accept=
-for a in "$@"; do
-    if [ "$a" = --accept ]; then accept=1; else cases=$a; fi
+while [ $# -gt 0 ]; do
+    case $1 in
+        --accept) accept=1 ;;
+        --) shift; break ;;
+        *) cases=$1 ;;
+    esac
+    shift
 done
 [ -e "$cases" ] || { echo "no cases at $cases" >&2; exit 2; }
 [ -d "$dicts" ] || { echo "no dictionaries at $dicts" >&2; exit 2; }
@@ -36,7 +42,7 @@ if [ -d "$cases" ]; then
 fi
 head -n 1 "$cases" | grep -q '^rule	input	expected	kind	layer$' || { echo "bad header in $cases" >&2; exit 2; }
 tail -n +2 "$cases" | cut -f 2 > "$tmp/in.txt"
-"$cli" -dicts "$dicts" -each -why -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
+"$cli" -dicts "$dicts" -each -why "$@" -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
     { echo "CLI failed" >&2; exit 2; }
 # The dictionary row id names the rule a row carries; a case may use either.
 awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"

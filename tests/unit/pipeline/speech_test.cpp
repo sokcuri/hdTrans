@@ -8,6 +8,45 @@
 
 using namespace hdTrans::pipeline;
 
+HD_TEST(pipeline_speaker_line) {
+    const struct {
+        const char* line;
+        bool want;
+    } cases[] = {
+        {"母: もう寝なさい", true},
+        {"ユキ二号: 行くよ！", true},
+        {"母:もう寝なさい", false},
+        {"設定：音量を上げる", false},
+        {"残り時間: 10分", false},
+        {"時刻: 9:30", false},
+        {"とても長い名前の人物です: こんにちは", false},
+        {"彼は言った: 「行く」", false},
+        {"https://example.com/", false},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(SpeakerLine(c.line), c.want);
+}
+
+HD_TEST(pipeline_marked_speech) {
+    const struct {
+        const char* line;
+        bool want;
+    } cases[] = {
+        {"明日は晴れるよ。", true},
+        {"そうだろ？", true},
+        {"もう行っちゃった。", true},
+        {"何だっけ", true},
+        {"行くぞー！", true},
+        {"彼は先生になった。", false},
+        {"彼女が服を捨てる。", false},
+        {"雨が降っていた。窓を閉めた。", false},
+        {"　窓を閉めた。寒いからさ。", false},
+        {"「行くよ」と彼は言った。", false},
+        {"『明日』は来るよ。", false},
+        {"", false},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(MarkedSpeech(c.line), c.want);
+}
+
 HD_TEST(pipeline_quote_styles) {
     const struct {
         const char* line;

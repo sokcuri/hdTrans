@@ -94,7 +94,7 @@ void Usage(std::FILE* file) {
                "  --userdict PATH        user dictionary file or folder (repeatable)\n"
                "  --ehnd DIR             opt-in Ehnd folder\n"
                "  --each, --raw          independent lines, or word-pipeline-only lines\n"
-               "  --soften MODE          speech in 해체: off or quotes (default)\n"
+               "  --soften MODE          speech in 해체: off, quotes (default), marked or dialogue\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -385,7 +385,7 @@ int RunMain(int argc, char** argv) {
     misread = misread || config.settings.misread;
     hdTrans::Soften soften = config.settings.soften;
     if (softenArg && !hdTrans::internal::SoftenOf(*softenArg, soften)) {
-        std::fprintf(stderr, "hdtrans: --soften takes off or quotes\n");
+        std::fprintf(stderr, "hdtrans: --soften takes off, quotes, marked or dialogue\n");
         return 2;
     }
     noCg = noCg || !config.settings.cg;
