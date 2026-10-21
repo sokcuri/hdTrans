@@ -21,3 +21,5 @@ sound:lead-ttaku	早く帰りたくて走った。	빨리 돌아가고 싶어서
 sound:lead-domo	ども、はじめまして。	안녕, 처음 뵙겠습니다.	fix	sound
 sound:lead-domo	子どもたちが遊んでいる。	아이들이 놀고 있다.	keep	sound
 sound:lead-teka	てか、もう帰ろう。	그보다, 이제 돌아가자.	fix	sound
+sound:lead-nandato	なんだと！？	뭐라고!?	fix	sound
+sound:lead-nandato	なんだと、もう一度言ってみろ。	뭐라고, 한번 더 말해 봐라.	fix	sound
