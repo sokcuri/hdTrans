@@ -1,4 +1,5 @@
 // The rewrites of Normalize, in order:
+//   0. characters of the private use area escaped (EscapePrivateUse);
 //   1. on a document line, the kin terms for the speaker's sex (WriteKinTerms), then
 //      ruby markup removed (StripRuby);
 //   2. character forms: half-width katakana, CP932 mapping differences, kanji forms
@@ -23,7 +24,7 @@ namespace hdTrans::pipeline {
 using namespace internal;
 
 std::string Normalize(std::string_view line, const LineContext& ctx) {
-    std::string text(line);
+    std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
     text = JoinNasai(NormalizeForms(text));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));

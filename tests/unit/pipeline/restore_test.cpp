@@ -207,13 +207,37 @@ HD_TEST(pipeline_write_drawls) {
         {"받습니다\uE005・・・\uE005", "받···습니다"},
         {"갑니까 \uE005…\uE005?", "갑…니까?"},
         {"갑니까 \uE005…\uE005그는", "갑…니까 그는"},
-        // One syllable, no Hangul word before, or no closing mark.
+        // One syllable or no Hangul word before.
         {"네\uE005…\uE005", "네…"},
         {"\uE005…\uE005. 아", ". 아"},
         {"abc\uE005…\uE005", "abc"},
-        {"갑니다\uE005…", "갑니다…"},
+        // A mark without a closing mark or with other text or nothing before it stays.
+        {"갑니다\uE005…", "갑니다\uE005…"},
+        {"가\uE005나\uE005다", "가\uE005나\uE005다"},
+        {"가\uE006\uE006", "가\uE006\uE006"},
+        {"가\uE007…\uE005", "가\uE007…\uE005"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteDrawls(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_escape_private_use) {
+    struct Case {
+        std::string_view in, escaped;
+    };
+    const Case cases[] = {
+        {"ボタン\uE005を押す", "ボタン\U000F0005を押す"},
+        {"\uE000、あ\uE001\uF8FF", "\U000F0000、あ\U000F0001\U000F18FF"},
+        {"a\uF900b", "a\uF900b"},
+        {"x\xFFy", "x\xFFy"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(pipeline::EscapePrivateUse(c.in), std::string(c.escaped));
+        HD_CHECK_EQ(pipeline::UnescapePrivateUse(c.escaped), std::string(c.in));
+    }
+    // Restore writes the escaped input back.
+    const Pieces typed = {{"ボタン"}, {"\U000F0005", SpanWord}, {"を押す"}};
+    const Pieces cleaned = {{"버튼 "}, {"\U000F0005", SpanWord}, {"을 누른다"}};
+    HD_CHECK_EQ(pipeline::Restore(cleaned, typed, true), std::string("버튼 \uE005을 누른다"));
 }
 
 HD_TEST(pipeline_drop_particle_marks) {

@@ -343,6 +343,9 @@ HD_TEST(pipeline_normalize_sequence) {
         // The time is read before a pause before です is joined.
         {"マルフタマルマル…です"sv, "0200…です"sv},
         {"好き……で……す"sv, "好きです\uE006……\uE006\uE005……\uE005"sv},
+        // Private use characters of the input are escaped and so never read as marks.
+        {"ボタン\uE005を押す"sv, "ボタン\U000F0005を押す"sv},
+        {"a\uE005…\uE005"sv, "a\U000F0005…\U000F0005"sv},
     };
     for (const Case& c : text) HD_CHECK_EQ(Normalize(c.in, LineContext{.document = false, .female = false}), std::string(c.want));
 }

@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // DropParticleMarks(WriteDrawls(WriteStutters(WriteDropped(String(korean)))))
+    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteDrawls(WriteStutters(...))))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -69,6 +69,13 @@ std::string WriteStutters(std::string_view s);
 // Spaces between the word and the span go unless a word follows. A span with no Hangul
 // word before it is dropped.
 std::string WriteDrawls(std::string_view s);
+
+// The engine keeps its in-band marks in the private use area U+E000..U+F8FF. Normalize
+// moves those characters of the input to U+F0000..U+F18FF, where the stages carry them as
+// foreign characters, and restore moves them back; input in U+F0000..U+F18FF comes out in
+// U+E000..U+F8FF.
+std::string EscapePrivateUse(std::string_view s);
+std::string UnescapePrivateUse(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);

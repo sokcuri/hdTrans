@@ -35,3 +35,7 @@ normalize:copula-pause	それは……ですね	그것은……이군요	keep	no
 normalize:copula-pause	今日は……ですね、雨です	오늘은……이군요, 비입니다	keep	normalize
 normalize:copula-pause	うーん……ですね	으음……이군요	keep	normalize
 normalize:copula-pause	だから……です	그러니까……입니다	keep	normalize
+normalize:private-use	ボタンを押す	버튼 을 누른다	keep	normalize
+normalize:private-use	abc	abc	keep	normalize
+normalize:private-use	行く	간다	keep	normalize
+normalize:private-use	、あ	, 아	keep	normalize

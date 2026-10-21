@@ -408,8 +408,12 @@ std::string WriteDrawls(std::string_view s) {
             continue;
         }
         const char32_t mark = rs[i];
-        const size_t close = rs.find(mark, i + 1);
-        if (close == std::u32string::npos) continue;
+        size_t close = i + 1;
+        while (close < rs.size() && Contains(U"…‥・―─", rs[close])) close++;
+        if (close == i + 1 || close == rs.size() || rs[close] != mark) {
+            out.push_back(mark);
+            continue;
+        }
         std::u32string marks;
         for (size_t k = i + 1; k < close; k++) {
             const auto form = tokenizer::CanonicalForm(rs[k]);
@@ -434,6 +438,43 @@ std::string WriteDrawls(std::string_view s) {
     return Utf8(out);
 }
 
+namespace {
+
+constexpr char32_t kPrivateFirst = 0xE000;
+constexpr char32_t kPrivateLast = 0xF8FF;
+constexpr char32_t kPrivateEscape = 0xF0000;
+
+template <class F>
+std::string MapRunes(std::string_view s, F f) {
+    std::string out;
+    out.reserve(s.size());
+    for (std::string_view rest = s; !rest.empty();) {
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.cp == text::kReplacement && r.size == 1) {
+            out += rest.front();
+        } else {
+            text::AppendRune(out, f(r.cp));
+        }
+        rest.remove_prefix(r.size);
+    }
+    return out;
+}
+
+}  // namespace
+
+std::string EscapePrivateUse(std::string_view s) {
+    return MapRunes(s, [](char32_t r) {
+        return r >= kPrivateFirst && r <= kPrivateLast ? r - kPrivateFirst + kPrivateEscape : r;
+    });
+}
+
+std::string UnescapePrivateUse(std::string_view s) {
+    return MapRunes(s, [](char32_t r) {
+        return r >= kPrivateEscape && r <= kPrivateEscape + (kPrivateLast - kPrivateFirst) ? r - kPrivateEscape + kPrivateFirst
+                                                                                             : r;
+    });
+}
+
 std::string DropParticleMarks(std::string_view s) {
     std::string out;
     out.reserve(s.size());
@@ -455,7 +496,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = DropParticleMarks(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))));
+    st.line = UnescapePrivateUse(DropParticleMarks(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean))))));
     return st;
 }
 
