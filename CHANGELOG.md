@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/sokcuri/hdTrans/compare/v0.4.0...v0.4.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **release:** keep the plain speech of quoted lines by default ([4c7bf3b](https://github.com/sokcuri/hdTrans/commit/4c7bf3b7aa7f9acbd4148a90a9257e2a3ee8ac21))
+* **speech:** keep the plain -다 of quoted speech by default ([#23](https://github.com/sokcuri/hdTrans/issues/23)) ([8dce347](https://github.com/sokcuri/hdTrans/commit/8dce347b608c1d1887550d8b7aa406fcf3a5e482))
+
 ## [0.4.0](https://github.com/sokcuri/hdTrans/compare/v0.3.2...v0.4.0) (2026-10-21)
 
 
