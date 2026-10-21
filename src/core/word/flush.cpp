@@ -31,6 +31,7 @@ void Flush(Flusher& f) {
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);
+        TeThanks(f);
         PastSequence(f);
         QuoteTo(f);
         NodaTo(f);

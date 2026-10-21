@@ -1,5 +1,6 @@
 // Text-path passes on the て form that joins two predicates: the sequence 고 of an action verb,
 // and the て of an utterance-final verb read as a request.
+#include <algorithm>
 #include <string_view>
 
 #include "core/output/families.h"
@@ -69,6 +70,27 @@ void TeSequence(Flusher& f) {
             continue;
         }
         it->AssignDirectSlot(it->DirectIndex(), "1고");
+    }
+}
+
+// Words of thanks and apology after which a て or 連用 form gives the reason (어서). The て of
+// 借りる (この場を借りて 이 자리를 빌려) keeps its form.
+constexpr std::string_view kThanks[] = {
+    "ありがと", "有難", "有り難", "感謝", "すみません", "済みません", "すいません", "申し訳", "ごめん",
+};
+
+void TeThanks(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
+        const Item* n = it->next;
+        if (n != nullptr && n->group->surface == "、") n = n->next;
+        if (n == nullptr) continue;
+        const std::string_view next = n->group->surface;
+        if (std::any_of(std::begin(kThanks), std::end(kThanks), [&](std::string_view t) { return next.starts_with(t); })) {
+            it->AssignDirectSlot(it->DirectIndex(), "6서");
+        }
     }
 }
 

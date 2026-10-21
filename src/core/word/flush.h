@@ -63,6 +63,7 @@ void SubjectNo(Flusher& f);
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end
 // of the utterance (closing punctuation, a pause or the end of the chunk).
 void TeRequest(Flusher& f);
+void TeThanks(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 void NotYet(Flusher& f);
