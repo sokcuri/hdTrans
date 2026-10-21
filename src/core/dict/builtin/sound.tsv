@@ -1,10 +1,11 @@
 // Builtin sound lexicon: interjections, moans, laughs, sound effects and
-// mimetics, in the plain dictionary format (JP, KR, POS intj, ono or lead).
+// mimetics, in the plain dictionary format (JP, KR, POS intj, ono, lead or open).
 // A key matches in hiragana and katakana alike, with elongation (はぁぁ,
 // あーーん, きゃああっ). intj rows stand alone; ono rows may take grammar
 // after them (する, の, に) and drop a following と; lead rows are
 // interjections only at the start of an utterance and before a pause
-// (おい、 ちょっと…, but not ちょっと高い).
+// (おい、 ちょっと…, but not ちょっと高い); open rows are lead rows that need no pause
+// (ってかなんで 그보다, 왜).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -3027,6 +3028,20 @@
 はっくしょん	에취	intj
 はっくしゅっ	에취	intj
 てか	그보다	lead
+ってか	그보다	open
+っていうか	그보다	open
+ていうか	그보다	open
+ってゆうか	그보다	open
+てゆうか	그보다	open
+ってゆーか	그보다	open
+てゆーか	그보다	open
+ってかさ	그보다	lead
+っていうかさ	그보다	lead
+ていうかさ	그보다	lead
+つーかさ	그보다	lead
+っつーかさ	그보다	lead
+てゆーかさ	그보다	lead
+ってゆーかさ	그보다	lead
 ったく	참나	lead
 たく	참나	lead
 ども	안녕	lead

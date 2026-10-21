@@ -32,7 +32,8 @@
 //     kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but not from
 //     a form of する;
 //   - a lead row (おい、 ほら！ ちょっと…) is a sound only at the start of an utterance
-//     and before a pause, and then wins over the dictionary words;
+//     and before a pause, and then wins over the dictionary words; an open row is a
+//     lead row that needs no pause (ってかなんで 그보다 왜);
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
 //     entry at least as long as the sound's key (without a final と), win; the ending
@@ -155,6 +156,7 @@ struct SoundRow {
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause
+    bool open = false;    // a lead row that needs no pause after it (ってか 그보다)
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

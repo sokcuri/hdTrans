@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+sound:open-tteka	ってかなんで来たの？	그보다, 왜 왔어?	fix	sound
+sound:open-tteka	ってか先輩、遅いですよ。	그보다 선배, 늦어요.	fix	sound
+sound:open-tteka	ていうか、もう帰ろうよ。	그보다, 이제 돌아가자.	fix	sound
+sound:open-tteka	……っていうか、誰？	……그보다, 누구?	fix	sound
+sound:open-tteka	っていうかさ、それ本当？	그보다, 그것 정말?	fix	sound
+sound:open-tteka	てかてかに光る。	번들번들에 빛난다.	keep	sound
