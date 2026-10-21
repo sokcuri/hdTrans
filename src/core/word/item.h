@@ -212,6 +212,7 @@ public:
     bool CheckLLAttr(int op, rules::Item* wi, int di) override;
     // Whether the word starts its sentence: no word before it, or only an opening bracket.
     bool StartsSentence() const;
+    bool JoinsNext() const;
     bool CheckGAttr(std::string_view s, int di) override;
     bool MinGAttrOperation(int di, std::string_view s) override;
     bool CheckGobiSrc(std::string_view s) override;

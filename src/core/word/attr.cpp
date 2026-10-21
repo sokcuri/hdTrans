@@ -167,9 +167,15 @@ bool Item::StartsSentence() const {
     return b == "「" || b == "『" || b == "（" || b == "(" || b == "“" || b == "\"";
 }
 
+bool Item::JoinsNext() const {
+    return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
+}
+
 bool Item::CheckGAttr(std::string_view s, int di) {
     auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly) {
         if (c == "Ow") return IsRuleRightBoundary();
+        // Oj: the On reading of a word written right before the next one (事私, not 事…私).
+        if (c == "Oj") return Has(attrs, "On") && JoinsNext();
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
