@@ -22,6 +22,7 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 const src = $<HTMLTextAreaElement>('src');
 const out = $<HTMLTextAreaElement>('out');
 const example = $<HTMLSelectElement>('example');
+const speech = $<HTMLSelectElement>('speech');
 const status = $<HTMLElement>('status');
 const bar = $<HTMLProgressElement>('bar');
 const info = $<HTMLElement>('info');
@@ -56,6 +57,12 @@ document.querySelectorAll('input[name=mode]').forEach((el) =>
   }),
 );
 const mode = () => (document.querySelector('input[name=mode]:checked') as HTMLInputElement).value;
+const savedSpeech = localStorage.getItem('hdtrans.speech');
+if (savedSpeech === 'soft' || savedSpeech === 'strict') speech.value = savedSpeech;
+speech.addEventListener('change', () => {
+  localStorage.setItem('hdtrans.speech', speech.value);
+  schedule();
+});
 
 /** Returns the text of the example file. */
 async function exampleText(file: string): Promise<string> {
@@ -134,7 +141,7 @@ function warningText(warning: string, userLines: number): string {
 }
 
 // The input is translated a moment after it last changed. Every change
-// (text, mode, dictionaries) starts a new generation; a result is shown
+// (text, mode, speech, dictionaries) starts a new generation; a result is shown
 // only if no change came while it was made, otherwise the translation runs
 // again at once.
 let timer: ReturnType<typeof setTimeout> | undefined;
@@ -162,7 +169,7 @@ async function translate() {
     const id = ++seq;
     const m = await new Promise<Reply>((resolve) => {
       pending.set(id, resolve);
-      worker.postMessage({ type: 'translate', id, mode: mode(), lines, userdict: d.text });
+      worker.postMessage({ type: 'translate', id, mode: mode(), speech: speech.value, lines, userdict: d.text });
     });
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);

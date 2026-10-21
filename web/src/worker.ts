@@ -1,6 +1,6 @@
 // The engine runs here, off the page's thread.
 // in: init with engine URL, compiled module and snapshot;
-//     translate with id, mode, lines and userdict.
+//     translate with id, mode, speech, lines and userdict.
 // out: ready/fatal, result/error. A failed userdict update keeps the prior overlay.
 import { HdTrans, type WasmModule } from './translator.js';
 
@@ -45,6 +45,7 @@ self.onmessage = async (ev: MessageEvent) => {
       t.setUserDictRaw(msg.userdict);
       loaded = msg.userdict;
     }
+    t.setSpeech(msg.speech);
     let lines: string[];
     if (msg.mode === 'document') {
       t.reset();
