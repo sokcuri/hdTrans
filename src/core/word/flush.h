@@ -58,6 +58,7 @@ void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
+void HumbleFirstPerson(Flusher& f);
 void SubjectNo(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end

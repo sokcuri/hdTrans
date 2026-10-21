@@ -951,6 +951,74 @@ void ShortPossessive(Flusher& f) {
     }
 }
 
+namespace {
+
+constexpr std::string_view kPoliteMarks[] = {"です", "ます", "ません", "ました", "ましょ", "まして", "でした", "でしょうか",
+                                             "ござい", "ください", "下さい"};
+
+// Whether s speaks politely; a polite word reported with って (一番ですって) does not.
+bool PoliteSurface(std::string_view s) {
+    if (Has(s, "ですって") || Has(s, "ますって") || Has(s, "でしたって") || Has(s, "でしょうかって")) return false;
+    if (s.ends_with("いませ")) return true;
+    for (const std::string_view m : kPoliteMarks) {
+        if (Has(s, m)) return true;
+    }
+    return false;
+}
+
+// Whether the last predicate after it in its sentence is polite, looking past the quotes that
+// open after it and stopping at the end of the quote it stands in (私が許してくださいと頼む
+// ことはない is not).
+bool PoliteAfter(const Item* it) {
+    int depth = 0;
+    const Item* last = nullptr;
+    for (const Item* q = it->next; q != nullptr; q = q->next) {
+        const std::string_view s = q->group->surface;
+        // The text of q up to the next word, which holds the brackets no word took.
+        const size_t from = std::min(static_cast<size_t>(q->start), q->text.size());
+        const size_t to = q->next != nullptr && q->next->tokenIndex == q->tokenIndex
+                              ? std::max(from, std::min(static_cast<size_t>(q->next->start), q->text.size()))
+                              : q->text.size();
+        const std::string_view span = q->text.substr(from, to - from);
+        for (size_t i = 0; i < span.size();) {
+            const text::Rune r = text::DecodeRune(span.substr(i));
+            if (r.cp == U'「' || r.cp == U'『') depth++;
+            if (r.cp == U'」' || r.cp == U'』') depth--;
+            i += r.size == 0 ? 1 : r.size;
+        }
+        if (depth < 0) break;
+        if (depth == 0 && (q->detail->Yougo() || PoliteSurface(s) || !q->DirectSurface().empty())) last = q;
+    }
+    return last != nullptr && (PoliteSurface(last->group->surface) || PoliteSurface(last->DirectSurface()));
+}
+
+constexpr std::string_view kHumblePronouns[] = {"私", "わたし", "わたくし", "あたし", "僕", "ぼく",
+                                                "私たち", "私達", "わたしたち", "僕たち", "僕達", "僕ら"};
+
+}  // namespace
+
+// The first person of a polite sentence in its humble form: 나 저, 내 제, 우리 저희
+// (私はそう思います 저는 그렇게 생각합니다).
+void HumbleFirstPerson(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (it->selected < 0 || it->detail->Yougo() || !InSet(kHumblePronouns, it->group->surface)) continue;
+        const std::string lemma = ItemLemma(f, it, it->selected);
+        std::string_view target;
+        if (lemma == "나") target = "저";
+        else if (lemma == "내") target = "제";
+        else if (lemma == "내 ") target = "제 ";
+        else if (lemma == "우리") target = "저희";
+        else if (lemma == "우리들") target = "저희들";
+        else continue;
+        if (!PoliteAfter(it)) continue;
+        if (target == "저" && it->next != nullptr && it->next->selected >= 0 &&
+            ItemLemma(f, it->next, it->next->selected).starts_with("(이)가")) {
+            target = "제";
+        }
+        TakeTarget(it, At(it->Code(it->selected), 0), target);
+    }
+}
+
 void NoAfterNa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;

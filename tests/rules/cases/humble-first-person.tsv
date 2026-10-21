@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+rewrite:humble-first-person	私はそう思います。	저는 그렇게 생각합니다.	fix	rewrites
+rewrite:humble-first-person	私にも教えてください。	저에게도 가르쳐 주세요.	fix	rewrites
+rewrite:humble-first-person	私の部屋はこちらです。	제 방은 이쪽입니다.	fix	rewrites
+rewrite:humble-first-person	私たちも参加します。	저희도 참가합니다.	fix	rewrites
+rewrite:humble-first-person	私が案内いたします。	제가 안내하겠습니다.	fix	rewrites
+rewrite:humble-first-person	僕は大丈夫です。	저는 괜찮습니다.	fix	rewrites
+rewrite:humble-first-person	わ、私じゃありません！	제, 제가 아닙니다!	fix	rewrites
+rewrite:humble-first-person	私はそう思う。	나는 그렇게 생각한다.	keep	rewrites
+rewrite:humble-first-person	私は彼に「待ってください」と言った。	나는 그에게 「기다려 주세요」라고 말했다.	keep	rewrites
+rewrite:humble-first-person	私が一番ですって？冗談でしょ。	내가 제일이라고? 농담이지.	keep	rewrites
+rewrite:humble-first-person	私も済ませたぞ。	나도 끝마쳤어.	keep	rewrites
+rewrite:humble-first-person	私も行きたいって言ったでしょう？	나도 가고 싶다고 말했겠지요?	keep	rewrites

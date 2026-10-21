@@ -55,6 +55,7 @@ void Flush(Flusher& f) {
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);
+        HumbleFirstPerson(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);

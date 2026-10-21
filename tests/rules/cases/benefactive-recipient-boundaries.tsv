@@ -12,12 +12,12 @@ dict:wake-temoratte	友人からパンを分けてもらってください。	�
 dict:wake-temoratte	友人からパンを分けてもらってもいいですか。	친구에게서 빵을 나누어 받아도 괜찮습니까.	fix	lookup
 dict:wake-request	パンを分けてもらえますか。	빵을 나누어 줄 수 있습니까.	keep	lookup
 dict:wake-request	パンを分けてもらえませんか。	빵을 나누어주실 수 있겠습니까.	keep	lookup
-dict:wake-request	私にパンを分けてもらえますか。	나에게 빵을 나누어 줄 수 있습니까.	keep	lookup
-dict:wake-request	私にパンを分けてもらえませんか。	나에게 빵을 나누어주실 수 있겠습니까.	keep	lookup
+dict:wake-request	私にパンを分けてもらえますか。	저에게 빵을 나누어 줄 수 있습니까.	keep	lookup
+dict:wake-request	私にパンを分けてもらえませんか。	저에게 빵을 나누어주실 수 있겠습니까.	keep	lookup
 dict:oshie-request	料理を教えてもらえますか。	요리를 가르쳐 줄 수 있습니까.	keep	lookup
 dict:oshie-request	料理を教えてもらえませんか。	요리를 가르쳐주실 수 있겠습니까.	keep	lookup
-dict:oshie-request	私に料理を教えてもらえますか。	나에게 요리를 가르쳐 줄 수 있습니까.	keep	lookup
-dict:oshie-request	私に料理を教えてもらえませんか。	나에게 요리를 가르쳐주실 수 있겠습니까.	keep	lookup
+dict:oshie-request	私に料理を教えてもらえますか。	저에게 요리를 가르쳐 줄 수 있습니까.	keep	lookup
+dict:oshie-request	私に料理を教えてもらえませんか。	저에게 요리를 가르쳐주실 수 있겠습니까.	keep	lookup
 dict:oshie-information	道を教えてもらえますか。	길을 가르쳐 줄 수 있습니까.	keep	lookup
 dict:oshie-information	道を教えてもらえませんか。	길을 가르쳐주실 수 있겠습니까.	keep	lookup
 dict:real-giving	友人がパンを分けてくれた。	친구가 빵을 나누어 주었다.	keep	lookup
