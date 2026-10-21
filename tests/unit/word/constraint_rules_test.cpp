@@ -135,7 +135,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{22});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{24});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());

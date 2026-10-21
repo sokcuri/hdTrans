@@ -3,6 +3,6 @@ dict:me-yatsu:1	ケンタめ、また遅刻か。	rule:dict:me-yatsu:1=녀석	fi
 dict:me-yatsu:1	リョウめとんでもないことをした。	료우 녀석 터무니 없는 것을 했다.	fix	local
 dict:me-yatsu:1	親父め、また寝坊した。	아버지 녀석, 또 늦잠잤다.	fix	local
 dict:me-yatsu:1	こいつめ、逃げるな。	!rule:dict:me-yatsu:1	keep	local
-dict:me-yatsu:1	三回めの挑戦だ。	세 번째의 도전이다.	keep	local
+dict:me-yatsu:1	三回めの挑戦だ。	세 번째 도전이다.	keep	local
 dict:me-yatsu:1	私めにお任せください。	!rule:dict:me-yatsu:1	keep	local
 constraint:me-yatsu-detached	ケンタ: め	켄타: 메	keep	lookup
