@@ -274,20 +274,26 @@ std::string DrawlSpan(std::string_view marks, char32_t mark) {
     return out;
 }
 
-// (^|[\n「『（。！？!?])([ 　―…‥]*) as groups 1 and 2, then rest(end of group 2).
+// The character before pos, U+0000 at the start of s.
+char32_t Before(std::string_view s, size_t pos) {
+    if (pos == 0) return 0;
+    size_t q = pos - 1;
+    while (q > 0 && (static_cast<unsigned char>(s[q]) & 0xC0) == 0x80) q--;
+    return At(s, q).cp;
+}
+
+// (?<=^|[\n「『（。！？!?])([ 　―…‥]*) as group 2 (group 1 empty), then rest(end of group 2).
+// The character before is not taken, so a sentence that starts right after a match
+// starts its own (え？え？).
 template <class Rest>
 bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
-    for (int alt = 0; alt < 2; alt++) {
-        size_t p = pos;
-        if (alt == 0 ? pos != 0 : !OneOf(s, p, U"\n「『（。！？!?")) continue;
-        const bool ok = Repeat(s, p, InSet(U" 　―…‥"), 0, kUnbounded, [&](size_t q) {
-            m.group[1] = Span(s, pos, p);
-            m.group[2] = Span(s, p, q);
-            return rest(q);
-        });
-        if (ok) return true;
-    }
-    return false;
+    if (pos != 0 && !In(Before(s, pos), U"\n「『（。！？!?")) return false;
+    size_t p = pos;
+    return Repeat(s, p, InSet(U" 　―…‥"), 0, kUnbounded, [&](size_t q) {
+        m.group[1] = Span(s, pos, pos);
+        m.group[2] = Span(s, p, q);
+        return rest(q);
+    });
 }
 
 // start (あれ|え)([、，！？…‥―─—]); not あれ when a run of …‥―─— ends before a particle
@@ -324,6 +330,25 @@ bool StartEe(std::string_view s, size_t pos, Match& m) {
                 m.end = v;
                 return true;
             });
+        });
+    });
+}
+
+// […‥―─—] え[ぇえー]* ([…‥]*[？?]): え after a pause inside an utterance that asks
+// (へ……え？, ……て、…え？) as group 1 and the question as group 2.
+bool PauseEe(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"…‥―─—")) return false;
+    const size_t at = p;
+    if (!Lit(s, p, "え")) return false;
+    return Repeat(s, p, InSet(U"ぇえー"), 0, kUnbounded, [&](size_t t) {
+        return Repeat(s, t, InSet(U"…‥"), 0, kUnbounded, [&](size_t u) {
+            size_t v = u;
+            if (!OneOf(s, v, U"？?")) return false;
+            m.group[1] = Span(s, pos, at);
+            m.group[2] = Span(s, t, v);
+            m.end = v;
+            return true;
         });
     });
 }
@@ -453,6 +478,7 @@ std::string RewriteInterjections(std::string_view text) {
         return Cat({m.group[1], m.group[2], m.group[3], "っ", m.group[4]});
     });
     s = ReplaceAll(s, StartEe, [](const Match& m) { return Cat({m.group[1], m.group[2], "えっ", m.group[3]}); });
+    s = ReplaceAll(s, PauseEe, [](const Match& m) { return Cat({m.group[1], "えっ", m.group[2]}); });
     return ReplaceAll(s, StartJaa, [](const Match& m) {
         return Cat({m.group[1], m.group[2], "じゃあ、", m.group[3]});
     });

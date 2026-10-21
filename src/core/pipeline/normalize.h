@@ -47,8 +47,8 @@ std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool 
 
 // あれ and え at the start of a sentence before 、，！？…‥ or a dash with a small っ (あれ、 あれっ、,
 // え―― えっ――, えぇ？ えっ？), but not あれ when a particle follows its …‥ or dash run
-// (あれ――は何だ),
-// じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
+// (あれ――は何だ), え after an ellipsis or a dash before a question mark as えっ
+// (へ……え？ へ……えっ？), じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
 std::string RewriteInterjections(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
