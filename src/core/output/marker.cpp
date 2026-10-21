@@ -186,7 +186,7 @@ std::string NotForm(std::string_view s) {
     return std::string(s);
 }
 
-// Form 2 keeps a final ㄹ for 면, 러 and 려; before ㄴ, ㅂ, ㅅ and 오 the ㄹ drops (길니까 → 기니까).
+// Forms 1 and 2 keep a stem's final ㄹ (길면, 길지); before ㄴ, ㅂ, ㅅ and 오 it drops (기니까, 기네).
 std::string DropRieulBefore(std::string form, std::string_view suffix) {
     constexpr int kRieulFinal = 8, kNieunInitial = 2, kBieupInitial = 7, kSiotInitial = 9;
     if (form.size() < 3 || suffix.empty()) return form;
@@ -660,7 +660,7 @@ void Composer::BuildAdjective(int i) {
             }
         }
     }
-    if (key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
+    if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
     sc.text = Cat({stem, replacement, suffix});
 }
 
