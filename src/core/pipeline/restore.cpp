@@ -496,6 +496,20 @@ std::string WriteEmphasis(std::string_view s) {
     return Utf8(out);
 }
 
+std::string WriteLengthening(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kLengthenMark)) return std::string(s);
+    std::u32string out;
+    for (const char32_t r : rs) {
+        if (r != kLengthenMark) {
+            out.push_back(r);
+        } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
+            out.push_back(U'~');
+        }
+    }
+    return Utf8(out);
+}
+
 std::string DropParticleMarks(std::string_view s) {
     std::string out;
     out.reserve(s.size());
@@ -517,8 +531,8 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = UnescapePrivateUse(
-        DropParticleMarks(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))));
+    st.line = UnescapePrivateUse(DropParticleMarks(
+        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean))))))));
     return st;
 }
 

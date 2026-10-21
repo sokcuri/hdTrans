@@ -96,14 +96,22 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // reads the word: a っ before a kana that does not start a て or た form (まっかせて,
 // いっくぞ, 負っける), and a run of ー, ～ or small vowels that lengthens the kana before
 // it (やーめーて, うるさ～い, 見ぃつけた, 勝ぁああつ), dropped or written as the long vowel
-// (どーだ どうだ, おにーちゃん); a run of two or more with a small vowel after a
-// dictionary word before a shout's ッ, ！ or ？ is dropped (なんだそりゃああぁあッ). A
-// lengthened vowel kana (あぁ) or particle (か～, なぁー), a mark that a word or a sound
-// holds (もっと, せーの, おーい) and a lengthened nickname (うーちゃん) are left alone. The
-// rewrite is kept when a dictionary key then reaches further past the mark than before
-// or, when no key reached past it, after a kanji or, for a lengthening mark, a verb or
-// adjective stem. A ー or ～ that ends a volitional form after a verb stem is written う
-// (いこー いこう). Returns text itself when nothing changes.
+// (どーだ どうだ, おにーちゃん, おねーさん, てーとく ていとく); a run of two or more with a
+// small vowel after a dictionary word before a shout's ッ, ！ or ？ is dropped
+// (なんだそりゃああぁあッ). A lengthened vowel kana (あぁ) or particle (か～, なぁー), a mark
+// that a word or a sound holds (もっと, せーの, おーい) and a lengthened nickname (うーちゃん)
+// are left alone. The rewrite is kept when a dictionary key then reaches further past the
+// mark than before or, when no key reached past it, after a kanji or, for a lengthening
+// mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
+// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
+// A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
+// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
+// dropped (ていとくぅ, ないでぇ, なのぉ). A run with ー that ends a phrase after a word is
+// written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those
+// kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
+// that makes a word of four or more characters (せんせー せんせい). Neither touches a
+// lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
+// after る or て. Returns text itself when nothing changes.
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // korean with the elongation units of a sound match: 'r' for each repeat of the

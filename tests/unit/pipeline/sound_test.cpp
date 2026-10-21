@@ -172,11 +172,22 @@ HD_TEST(pipeline_sound) {
         {"まっかせてよ！", "まかせてよ！"},
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
-        {"うるさ～い！", "うるさい！"},
+        {"うるさ～い！", "うるさい\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
+        // after a て form is dropped; the lengthening of the last syllable of a phrase inside
+        // a word is marked after it.
+        {"まかせてー！", "まかせて～！"},
+        {"まかせてぇ！", "まかせて！"},
+        {"もっとー！", "もっと～！"},
+        {"冷たいねー", "冷たいね～"},
+        {"やーめーて！", "やめて\uE00A！"},
+        // Unchanged: the casual negative ね, a lone kana, a sound.
+        {"知らねー", "知らねー"},
+        {"よー！", "よー！"},
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},
         {"うーちゃん！", "うーちゃん！"},
@@ -372,11 +383,22 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"まっかせてよ！", "まかせてよ！"},
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
-        {"うるさ～い！", "うるさい！"},
+        {"うるさ～い！", "うるさい\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
+        // after a て form is dropped; the lengthening of the last syllable of a phrase inside
+        // a word is marked after it.
+        {"まかせてー！", "まかせて～！"},
+        {"まかせてぇ！", "まかせて！"},
+        {"もっとー！", "もっと～！"},
+        {"冷たいねー", "冷たいね～"},
+        {"やーめーて！", "やめて\uE00A！"},
+        // Unchanged: the casual negative ね, a lone kana, a sound.
+        {"知らねー", "知らねー"},
+        {"よー！", "よー！"},
         // Unchanged: a word holds the mark, a sound, a nickname, an ending.
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},

@@ -258,6 +258,13 @@ HD_TEST(pipeline_write_emphasis) {
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteEmphasis(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_write_lengthening) {
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
+}
+
 HD_TEST(pipeline_drop_particle_marks) {
     HD_CHECK_EQ(pipeline::DropParticleMarks("섹○\uE001를 가○\uE002을 애○\uE003을"), std::string("섹○를 가○을 애○을"));
     HD_CHECK_EQ(pipeline::DropParticleMarks("\uE000、아"), std::string("\uE000、아"));

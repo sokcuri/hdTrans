@@ -74,6 +74,8 @@ HD_TEST(pipeline_cut_spans) {
         {"a\uE005\uE005", "a〖1\uE005\uE005〗"},
         // Emphasis marks open and close a span each.
         {"\uE008さいてい\uE009！", "〖2\uE008〗さいてい〖3\uE009〗！"},
+        // The lengthening mark closes a span.
+        {"せんぱい\uE00A！", "せんぱい〖3\uE00A〗！"},
         // Foreign runs end at white space; ASCII, half-width forms and CP932 symbols are
         // not foreign; invalid bytes are.
         {"Ωé αβ☆ｱ ไทย", "Ω〖1é〗 αβ☆ｱ 〖1ไทย〗"},

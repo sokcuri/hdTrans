@@ -153,11 +153,12 @@ Match DrawlSpan(std::string_view s) {
     return {};
 }
 
-// An emphasis mark: kEmphasisOpen opens a span, kEmphasisClose closes one.
+// An emphasis mark: kEmphasisOpen opens a span, kEmphasisClose and kLengthenMark close
+// one.
 Match EmphasisSpan(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
     if (r.cp == kEmphasisOpen) return {r.size, output::SpanOpen};
-    if (r.cp == kEmphasisClose) return {r.size, output::SpanClose};
+    if (r.cp == kEmphasisClose || r.cp == kLengthenMark) return {r.size, output::SpanClose};
     return {};
 }
 

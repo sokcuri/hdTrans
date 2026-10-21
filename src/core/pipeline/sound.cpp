@@ -338,9 +338,11 @@ bool SoundText::UtteranceStart(size_t p) const {
     return In(rs_[p - 1], U"\n「『（(。！？!?♪ 　―");
 }
 
-// Whether there is a pause at character p: the end of the text or a comma, sentence end
-// or closing bracket (not an ellipsis: ちょっと…痛い).
-bool SoundText::PauseAt(size_t p) const { return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n"); }
+// Whether there is a pause at character p: the end of the text or a comma, sentence end,
+// closing bracket or lengthening mark (not an ellipsis: ちょっと…痛い).
+bool SoundText::PauseAt(size_t p) const {
+    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark;
+}
 
 // The length in characters of the longest base key, plain-dictionary key and name-layer
 // key that start at character p; kana spellings do not count, nor with skipEnds the

@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteEmphasis(WriteDrawls(...))))
+    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteLengthening(WriteEmphasis(...))))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -81,6 +81,9 @@ std::string UnescapePrivateUse(std::string_view s);
 // syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
 std::string WriteEmphasis(std::string_view s);
 
+// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!).
+std::string WriteLengthening(std::string_view s);
+
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);
 
@@ -101,6 +104,8 @@ constexpr char32_t kPastLeadDrawlMark = 0xE007;
 // restore stage writes back as · between the syllables of its Korean (WriteEmphasis).
 constexpr char32_t kEmphasisOpen = 0xE008;
 constexpr char32_t kEmphasisClose = 0xE009;
+// The lengthening mark of the sound stage (WriteLengthening).
+using output::kLengthenMark;
 
 namespace internal {
 
