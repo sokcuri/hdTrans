@@ -58,7 +58,7 @@ std::string RewriteInterjections(std::string_view text);
 std::string RewriteCasual(std::string_view text);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル
-// 1400) when no kana follows.
+// 1400) when no kana follows, or when hiragana follows a time of day (マルロクマルマルです).
 std::string RewriteMilitaryTime(std::string_view text);
 
 // The elder-sibling words of line in a woman's Korean (お兄様 오빠, お姉ちゃん 언니) when

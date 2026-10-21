@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+normalize:military-time	マルロクマルマルです、起きてください。	0600입니다, 일어나 주세요.	fix	normalize
+normalize:military-time	ヒトサンマルマルっぽい！	1300 같다!	fix	normalize
+normalize:military-time	ヒトヨン、マルマルっぽい。	1400 같다.	fix	normalize
+normalize:military-time	フタサンマルマルー！もう寝よう。	2300! 이제 자자.	fix	normalize
+normalize:military-time	マルマルマルマルだよ。	마르마르마르말이야.	keep	normalize
+normalize:military-time	ゴーゴーマルマルだって。	고고마르말이래.	keep	normalize
