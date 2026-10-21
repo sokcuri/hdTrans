@@ -542,6 +542,39 @@ std::string DropEchoedGlosses(std::string_view line) {
     return Utf8(rs);
 }
 
+// line with the literal 무슨 말을 하다 of a retort (何言ってるの, 何を言ってるんですか) written
+// as the idiom 무슨 소리야 or 무슨 소리예요, where it ends a clause: before a mark, a closing
+// bracket or the end. A report of what was said (무슨 말을 했는지) keeps the verb.
+std::string RetortIdioms(std::string_view line) {
+    struct Idiom {
+        std::string_view literal, idiom;
+    };
+    static constexpr Idiom kIdioms[] = {
+        {"무슨 말을 하고 있는 거야", "무슨 소리야"}, {"무슨 말을 하는 거야", "무슨 소리야"},
+        {"무슨 말을 하는거야", "무슨 소리야"},       {"무슨 말을 하고 있어", "무슨 소리야"},
+        {"무슨 말을 하는 건데", "무슨 소리야"},      {"무슨 말을 해", "무슨 소리야"},
+        {"무슨 말을 하고 있습니까", "무슨 소리예요"}, {"무슨 말을 하는 겁니까", "무슨 소리예요"},
+        {"무슨 말을 하는 거예요", "무슨 소리예요"},  {"무슨 말을 하고 있어요", "무슨 소리예요"},
+        {"무슨 말을 합니까", "무슨 소리예요"},       {"무슨 말을 해요", "무슨 소리예요"},
+    };
+    std::string out(line);
+    for (std::size_t at = 0; (at = out.find("무슨 말을 ", at)) != std::string::npos;) {
+        bool done = false;
+        for (const Idiom& i : kIdioms) {
+            if (out.compare(at, i.literal.size(), i.literal) != 0) continue;
+            const std::size_t end = at + i.literal.size();
+            const char32_t next = end < out.size() ? text::DecodeRune(std::string_view(out).substr(end)).cp : 0;
+            if (next != 0 && !Contains(U"?!.,…‥~～―」』)\"'", next)) continue;
+            out.replace(at, i.literal.size(), i.idiom);
+            at += i.idiom.size();
+            done = true;
+            break;
+        }
+        if (!done) at += std::string_view("무슨 말을 ").size();
+    }
+    return out;
+}
+
 RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBrackets, bool literalCleanup) {
     RestoreSteps st;
     st.spaced = DropAddedSpaces(typed, cleaned);
@@ -552,6 +585,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
     });
     st.line = UnescapePrivateUse(DropEchoedGlosses(DropParticleMarks(
         WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))));
+    if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;
 }
 

@@ -43,4 +43,9 @@ compose:spoken-what	「なによりおかしいのは」	「무엇보다도 이�
 dict:nanika:atta	「何かあったの？」	「무슨 일 있었어?」	fix	local
 dict:naniga:atta	「何があったんですか？」	「무슨 일이 있었습니까?」	fix	local
 phrase:何でもありません	「何でもありません」	「아무것도 아니에요」	fix	builtin-phrase
-dict:nani-iu:3	「なに言ってんだよ」	「무슨 말을 하는거야」	fix	lookup
+dict:nani-iu:3	「なに言ってんだよ」	「무슨 소리야」	fix	lookup
+restore:retort-idiom	「何を言ってるの？」	「무슨 소리야?」	fix	restore
+restore:retort-idiom	「何を言ってるんですか」	「무슨 소리예요」	fix	restore
+restore:retort-idiom	「何言ってるの、あたりまえじゃない」	「무슨 소리야, 당연하지 않아」	fix	restore
+restore:retort-idiom	あんたが何言ったか覚えてる	네가 무슨 말을 했는지 기억하고 있다	keep	restore
+restore:retort-idiom	何を言ってもいい	무슨 말을 해도 괜찮다	keep	restore
