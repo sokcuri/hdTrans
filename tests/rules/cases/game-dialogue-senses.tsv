@@ -37,3 +37,9 @@ conj:imperative	「遠慮なく申せ」	「거리낌 없이 말씀드려라」	
 cut:noun-head	揺れるしっぽを見た。	흔들리는 꼬리를 보았다.	fix	lookup
 cut:noun-head	行くし、食べるし。	가고, 먹고.	keep	lookup
 cut:noun-head	どこかにないかなって	어디엔가 없을까는	keep	lookup
+dict:jisjk:340957	「伏せろ！」	「엎드려라!」	fix	local
+dict:jisjk:340957	みんな、伏せて！	모두, 엎드려!	fix	local
+dict:jisjk:340957	地面に伏せた	땅에 엎드렸다	fix	local
+dict:jisjk:340957	机に伏せて寝ていた	책상에 엎드려 자고 있었다	fix	local
+dict:jisjk:340957	カードを伏せた	카드를 덮었다	keep	local
+dict:jisjk:340957	顔を伏せる	얼굴을 숙인다	keep	local

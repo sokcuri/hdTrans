@@ -14226,7 +14226,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 地震学者	지진학자	N110	VHn		GN						じしんがくしゃ	w:14214
 地震工学	지진공학	N110			GN						じしんこうがく	w:14215
 地震情報	지진정보	N110			GN						じしんじょうほう	w:14216
-地面	땅	N110			GN				xxx llm	1		w:14217
+地面	땅	N110	VPl		GN				xxx llm	1		w:14217
 均しく	똑같이	E300			GN						ひとしく	w:14218
 均一価格	균일가	N110			GN						きんいつかかく	w:14219
 均勢	균세	N110			GN						きんせい	w:14220
