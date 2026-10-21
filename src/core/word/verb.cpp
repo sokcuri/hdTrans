@@ -63,6 +63,8 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
               !Starts(tail, "とか") && !Starts(tail, "とこ") && !Starts(tail, "とっ") && !Starts(tail, "ときゃ")))) {
             continue;
         }
+        // Nor does a bare ichidan stem end an utterance: before a closing bracket or a
+        // full-width ！ or ？ the e-row kana is a godan imperative (「立て」 서라, not 세우고).
         if (branch == 4 || branch == 11) {
             const std::size_t n = entry.size();
             const std::string_view rest = tail.substr(n);
@@ -232,6 +234,17 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // The byte length of the pattern in tail, and the text after it.
     auto pattern = [&]() { return static_cast<int>(UnitOffset(tail, patternWidth).offset); };
     auto after = [&]() { return tail.substr(static_cast<std::size_t>(pattern())); };
+    // A bare ichidan stem ends no utterance where its last kana also makes the imperative
+    // of a godan verb: before a closing bracket or a full-width sentence mark that is the
+    // reading (「立て」 서라, not 세우고). The mark may start the next token.
+    if (!matched && base.patternKind == 7 && Conjugation(7, base.kind).empty()) {
+        const std::string_view next = tail.empty() ? base.nextText : tail;
+        if ((Starts(next, "」") || Starts(next, "』") || Starts(next, "。") || Starts(next, "！") ||
+             Starts(next, "？")) &&
+            w->GodanImperative(surface)) {
+            return false;
+        }
+    }
     if (!w->MatchDictionary(tail, surface, '4', 'X')) return false;
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);

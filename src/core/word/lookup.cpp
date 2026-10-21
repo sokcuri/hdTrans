@@ -6,6 +6,7 @@
 #include "core/text/unicode.h"
 #include "core/tokenizer/classify.h"
 #include "core/word/validity_rules.h"
+#include "core/word/conjugation.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
 #include "core/word/worker.h"
@@ -422,6 +423,21 @@ bool Worker::SplitsModal(const Record& r, std::string_view query, bool afterKa) 
     if (!rest.starts_with("も") || !r.source.ends_with("のか") || current < 0) return false;
     const std::string_view after = TrimLeftChars(rest.substr(std::string_view("も").size()), "ねよなぁっー");
     return SentenceFinal(after, current, true);
+}
+
+// Whether form is also the imperative of a godan verb of the dictionary: form without its
+// last kana is the stem of a godan verb whose imperative ends in that kana (立て of 立つ).
+bool Worker::GodanImperative(std::string_view form) const {
+    const std::string_view last = LastChar(form);
+    const std::string_view stem = form.substr(0, form.size() - last.size());
+    if (stem.empty()) return false;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
+        const int kind = pc[3] - '0';
+        if (kind != 7 && kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 11) == last) return true;
+    }
+    return false;
 }
 
 // An interjection (E32) or set phrase (A9) whose key ends in て or ます and is a form
