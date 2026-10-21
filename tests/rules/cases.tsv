@@ -38,7 +38,7 @@ L154	毎日練習して泳げるようになった。	매일 연습해 헤엄칠
 L154	子供が一人で歩けるようになった。	아이가 혼자서 걸을 수 있게 되었다.	current	local-ending
 L155	早く寝たらいいよ。	빨리 자면 좋아.	current	local-ending
 L155	どうしたらいいか分からない。	어떻게 하면 좋은가 모른다.	current	local-ending
-L157	やっと宿題が終わったわ。	드디어 숙제가 끝났어요.	current	local-ending
+L157	やっと宿題が終わったわ。	드디어 숙제가 끝났어.	current	local-ending
 L168	朝は水だけ飲んで家を出た。	아침은 물만 마시고 집을 나갔다.	current	local
 L168	夜は野菜だけ食べることにした。	밤은 야채만 먹기로 했다.	current	local
 L176	兄が委員長に選ばれた。	형이 위원장으로 선택되었다.	current	local
@@ -244,8 +244,8 @@ L1865	それはなんだよ？	그것은 뭐야?	current	local
 L1865	本当なんだよ。	사실이야.	current	local
 L1869	第5章を読み終えました。	제5장을 다 읽었습니다.	current	local
 L1869	これは第2の人生の始まりだ。	이것은 제2의 인생의 시작이다.	current	local
-L1893	あの子には勝てないわ。	그 아이에게는 이길 수 없어요.	current	local-ending
-L1893	私にはよく分からないわ。	나에게는 잘 몰라요.	current	local-ending
+L1893	あの子には勝てないわ。	그 아이에게는 이길 수 없어.	current	local-ending
+L1893	私にはよく分からないわ。	나에게는 잘 몰라.	current	local-ending
 L1895	「あの犬と遊びたいの」	「그 개와 놀고 싶은거야」	current	local-ending
 L1895	「私も一緒に行きたいの」	「나도 함께 가고 싶은거야」	current	local-ending
 L1906	このカレーは辛くない。	이 카레는 맵지 않다.	current	local-ending
@@ -551,7 +551,7 @@ L3437	友人のうちで食べた。	친구의 집에서 먹었다.	fix	local
 L3459	時間はまだありません。	시간은 아직 없습니다.	current	local
 L3465	彼女も行くって聞きました。	그녀도 간다고 들었습니다.	current	local-ending
 L3465	来週から働くって思っていた。	다음주부터 일한다고 생각하고 있었다.	current	local-ending
-L3475	君もそう思うよねえ。	너도 그렇게 생각하지요.	current	local
+L3475	君もそう思うよねえ。	너도 그렇게 생각하지.	current	local
 L3475	なかなか面白い話だねえ。	꽤 재미있는 이야기구나.	current	local
 L3475	子供がえを描いた。	아이가 를 그렸다.	current	local
 L3556	というか、それはちょっと違うと思う。	이라고 할까, 그건 좀 다르다고 생각한다.	current	local

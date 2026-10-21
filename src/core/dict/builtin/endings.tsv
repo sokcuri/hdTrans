@@ -343,6 +343,12 @@
 静かでしてよ	조용해요	end	prio=-1
 高くってよ	높아요	end	prio=-1
 高くてよ	높아요	end	prio=-1
+// ますよね, ませんよね: polite agreement
+書きますよね	쓰지요	end	prio=-1
+書きましたよね	썼지요	end	prio=-1
+書きましたわよね	썼지요	end	prio=-1
+書いてますよね	쓰고 있지요	end	prio=-1
+書いてませんよね	쓰지 않았지요	end	prio=-1
 学生ですもの	학생인걸요	end	prio=-1
 高いですもの	높은걸요	end	prio=-1
 静かですもの	조용한걸요	end	prio=-1

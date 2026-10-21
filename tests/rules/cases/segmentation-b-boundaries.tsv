@@ -8,7 +8,7 @@ dict:segmentation-b	しっかし面白い。	하지만 재미있다.	fix	lookup
 dict:segmentation-b	しかし雨が続く。	그러나 비가 계속된다.	keep	lookup
 dict:segmentation-b	傘を貸した。	우산을 빌려 주었다.	keep	lookup
 dict:segmentation-b	そんなわけないよ。	그럴 리 없어.	fix	lookup
-dict:segmentation-b	そんなわけなかったよ。	그럴 리 없었어요.	fix	lookup
+dict:segmentation-b	そんなわけなかったよ。	그럴 리 없었어.	fix	lookup
 dict:segmentation-b	そんなわけで戻った。	그래서 돌아왔다.	keep	lookup
 dict:segmentation-b	彼にはわけない仕事だ。	그에게는 수월한 일이다.	keep	lookup
 dict:segmentation-b	なんのかんの言っても便利だ。	이러니저러니 말해도 편리하다.	fix	lookup
