@@ -67,6 +67,11 @@ public:
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);
     bool SuVerb(std::string_view stem);
+    // Whether after, the text after the stem in い of a わ-row verb written in kanji
+    // (彷徨い), is the て or past た that only a く verb in い takes there (彷徨いて is 彷徨く
+    // in て). The desire forms (たい, 言いてえ) and a て the sound stage put before an ellipsis
+    // (戦い…) do not count.
+    bool TeAfterWaStem(std::string_view stem, std::string_view after) const;
 
     // Allocation; every field is set.
     Record* NewRecord();

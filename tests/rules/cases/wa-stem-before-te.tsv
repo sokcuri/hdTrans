@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+verb:wa-stem-te	夜の街を彷徨いていた。	밤의 거리를 방황하고 있었다.	fix	conjugation
+verb:wa-stem-te	テーブルを拭いてから座った。	테이블을 닦고 나서 앉았다.	fix	conjugation
+verb:wa-stem-te	森を彷徨った。	숲을 헤매었다.	keep	conjugation
+verb:wa-stem-te	汗を拭った。	땀을 닦았다.	keep	conjugation
+verb:wa-stem-te	会いたい。	만나고 싶다.	keep	conjugation

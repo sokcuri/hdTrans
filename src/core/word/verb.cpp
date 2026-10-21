@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
 #include "core/word/strings.h"
@@ -194,6 +195,28 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     return false;
 }
 
+bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const {
+    if (stem.empty()) return false;
+    for (std::string_view t = stem; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!text::IsKanji(r.cp)) return false;
+        t.remove_prefix(r.size);
+    }
+    if (after == kJaTe && current + 1 < TokenCount()) {
+        const std::string_view next = Tok(current + 1).text;
+        if (Starts(next, kJaEllipsis) || Starts(next, "‥")) return false;
+    }
+    if (Starts(after, kJaTe)) {
+        // 言いてえ, 会いてぇ: the spoken たい.
+        return !Starts(after, "てえ") && !Starts(after, "てぇ") && !Starts(after, "てー") && !Starts(after, "てェ");
+    }
+    if (!Starts(after, "た")) return false;
+    for (const std::string_view desire : {"たい", "たく", "たか", "たけ", "たが", "たさ", "たそ", "たげ"}) {
+        if (Starts(after, desire)) return false;
+    }
+    return true;
+}
+
 bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int& branch, int& length) {
     Detail d;
     d.patternKind = Byte(kind) - '0';
@@ -251,6 +274,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
     if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
 
+    if (!matched && base.kind == 10 && base.patternKind == 0 && w->TeAfterWaStem(surface, after())) return false;
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||

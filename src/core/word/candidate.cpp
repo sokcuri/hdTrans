@@ -737,6 +737,21 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
                     }
                     return candidate;
                 }
+                // A く verb of the same stem reads the て or た that the stem in い of a わ-row
+                // verb cannot take (彷徨いて: 彷徨く in て, not 彷徨う + て).
+                Record* other = stop->child;
+                while (other != nullptr && other->source == stop->source && At(other->partCode, 1) == '4' &&
+                       At(other->partCode, 3) == At(stop->partCode, 3)) {
+                    other = other->child;
+                }
+                const std::string_view afterStem = From(text, offset + static_cast<long>(stop->source.size()));
+                if (word->patternKind == 0 && word->kind == 10 && afterStem.starts_with("い") &&
+                    TeAfterWaStem(stop->source, afterStem.substr(std::string_view("い").size())) && other != nullptr &&
+                    other->source == stop->source && At(other->partCode, 1) == '4') {
+                    rec = other;
+                    group->records = nullptr;
+                    continue;
+                }
                 rec = group->records;
                 group->records = nullptr;
             }
