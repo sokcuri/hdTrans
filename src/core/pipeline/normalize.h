@@ -23,8 +23,9 @@ std::string NormalizeForms(std::string_view text);
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.
 std::string JoinNasai(std::string_view text);
 
-// A verb stem joined to ます, ました, ません cut off by 、，…‥ (ござい、ます) when no kana
-// or ー ～ follows.
+// A verb stem joined to ます, ました, ません cut off by 、，…‥ (ござい、ます); ます, ました,
+// ません, です, でしょう cut inside by 、，…‥・―─ (いただきま…す, 好き……で……す) or spelled
+// まっす, まス, でっす joined; both when no kana or ー ～ follows.
 std::string JoinMasu(std::string_view text);
 
 // The spoken and old-fashioned spellings the dictionary does not read in their plain

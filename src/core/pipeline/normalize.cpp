@@ -102,6 +102,51 @@ bool SplitMasu(std::string_view s, size_t pos, Match& m) {
     });
 }
 
+// A polite ending cut inside or spelled with っ or ス: a head, a run of marks, an
+// optional っ and a tail, then ([^ぁ-ゖァ-ヺー～]|$). The heads and tails are
+//   ([いきぎしじちにひびみりえけげせぜてでねへべめれ一-龥々]ま) (す|ス|した|せん)
+//   (で) (す|ス|しょう)
+// with marks [、，…‥・―─ー～]*; した, せん and しょう only after a mark other than ー ～
+// and without っ, and す only after such a mark or っ (ー ～ alone are left as they are).
+// Group 1 is the head, group 2 the tail (ス as す), group 3 the character after.
+bool SplitCutPolite(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    bool masu = false;
+    if (OneOf(s, p, U"いきぎしじちにひびみりえけげせぜてでねへべめれ") || Take(s, p, IsKanjiClass)) masu = Lit(s, p, "ま");
+    if (!masu) {
+        p = pos;
+        if (!Lit(s, p, "で")) return false;
+    }
+    const size_t cut = p;
+    bool marked = false;
+    while (true) {
+        const text::Rune r = At(s, p);
+        if (r.size == 0 || !In(r.cp, U"、，…‥・―─ー～")) break;
+        if (r.cp != U'ー' && r.cp != U'～') marked = true;
+        p += r.size;
+    }
+    const bool tsu = OneOf(s, p, U"っッ");
+    const std::initializer_list<std::string_view> masuTails = {"す", "ス", "した", "せん"};
+    const std::initializer_list<std::string_view> desuTails = {"す", "ス", "しょう"};
+    for (std::string_view w : masu ? masuTails : desuTails) {
+        size_t r = p;
+        if (!Lit(s, r, w)) continue;
+        const bool su = w == "す" || w == "ス";
+        if (w == "す" ? !marked && !tsu : !su && (!marked || tsu)) continue;
+        size_t t = r;
+        const bool tail = Take(s, t, [](char32_t c) {
+            return !IsHiraganaClass(c) && !(c >= U'ァ' && c <= U'ヺ') && c != U'ー' && c != U'～';
+        });
+        if (!tail && r != s.size()) continue;
+        m.group[1] = Span(s, pos, cut);
+        m.group[2] = su ? std::string_view("す") : Span(s, p, r);
+        m.group[3] = Span(s, r, t);
+        m.end = t;
+        return true;
+    }
+    return false;
+}
+
 // (^|[\n「『（。！？!?])([ 　―…‥]*) as groups 1 and 2, then rest(end of group 2).
 template <class Rest>
 bool SentenceStart(std::string_view s, size_t pos, Match& m, Rest rest) {
@@ -259,7 +304,8 @@ std::string JoinNasai(std::string_view text) {
 }
 
 std::string JoinMasu(std::string_view text) {
-    return ReplaceAll(text, SplitMasu, [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); });
+    const auto join = [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); };
+    return ReplaceAll(ReplaceAll(text, SplitMasu, join), SplitCutPolite, join);
 }
 
 std::string RewriteInterjections(std::string_view text) {
