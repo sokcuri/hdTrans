@@ -64,6 +64,8 @@ void SubjectNo(Flusher& f);
 // of the utterance (closing punctuation, a pause or the end of the chunk).
 void TeRequest(Flusher& f);
 void TeThanks(Flusher& f);
+// The て or 連用 form of a verb with an object before a comma reads 고 (電話を切って、 전화를 끊고,).
+void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 void NotYet(Flusher& f);

@@ -94,6 +94,27 @@ void TeThanks(Flusher& f) {
     }
 }
 
+// Verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
+constexpr std::string_view kMeansVerbs[] = {
+    "使", "用い", "利用し", "見習", "真似", "通じ", "介し", "頼", "生か", "活か", "込め", "合わせ", "伴", "装", "模し",
+};
+
+void TeObjectComma(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        const std::string_view stem = it->group->surface;
+        if (std::any_of(std::begin(kMeansVerbs), std::end(kMeansVerbs), [&](std::string_view v) { return stem.ends_with(v); })) {
+            continue;
+        }
+        const Item* p = it->prev;
+        const Item* n = it->next;
+        if (p == nullptr || n == nullptr || p->group->surface != "を" || n->group->surface != "、") continue;
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || e->dst != "6") continue;
+        it->AssignDirectSlot(it->DirectIndex(), "1고");
+    }
+}
+
 void VerseTe(Flusher& f) {
     if (!f.w.settings.verse) return;
     for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {

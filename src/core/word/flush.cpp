@@ -32,6 +32,7 @@ void Flush(Flusher& f) {
         SeeAnd(f);
         TeSequence(f);
         TeThanks(f);
+        TeObjectComma(f);
         PastSequence(f);
         QuoteTo(f);
         NodaTo(f);
