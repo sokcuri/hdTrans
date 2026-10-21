@@ -56,6 +56,7 @@ void Flush(Flusher& f) {
         ComitativeTo(f);
         NounTo(f);
         HumbleFirstPerson(f);
+        ChanAfterKatakana(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);

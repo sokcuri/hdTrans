@@ -18,6 +18,8 @@ namespace hdTrans::pipeline {
 //   - a line of speech written in katakana read as hiragana (internal::KataSpeech);
 //   - a pronoun, demonstrative or adjective written in katakana for emphasis read as
 //     hiragana unless it may be a name (internal::KataWordsToHiragana);
+//   - a hiragana nickname before ちゃん or くん written in Hangul
+//     (internal::NicknamesToHangul);
 //   - a conjunction cut from its clause at the start of a sentence written with its
 //     pronoun (internal::RewriteConjunctions);
 //   - ｢ and ｣ written as 「 and 」.
@@ -71,6 +73,14 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
 // text around it into a dictionary word, has no plain or name sense and is not one of
 // ctx.named.
 output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// A nickname of two to four hiragana before ちゃん or くん in the text pieces written as a
+// Hangul word span, its long vowels dropped (ゆうくん 유くん, みーちゃん 미ちゃん). It follows
+// a character that is neither kana nor a kanji, or a one-kana particle after a kanji or
+// katakana (私はゆうくん). It is not a dictionary word with its honorific and what follows
+// (どんちゃん騒ぎ), a kin word (ねえちゃん), a word with お or ご, the adverb ちゃんと or a
+// verb before くんだ or くんな (叩くんじゃねえ, 狙ってくんな).
+output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // ならば なら ですから であれば にも関わらず にも拘らず にもかかわらず 対して at the
 // start of a sentence or utterance written with their pronoun (それなら, だから,

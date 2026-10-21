@@ -4,6 +4,7 @@
 
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
+#include "core/text/kana.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::pipeline::internal {
@@ -723,6 +724,113 @@ output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext
     output::Pieces out = text;
     for (size_t k = 0; k < out.size(); k++) {
         if (out[k].span == output::SpanText) out[k].text = KataWordsIn(text[k].text, k > 0, k + 1 < text.size(), ctx, snap);
+    }
+    return out;
+}
+
+namespace {
+
+constexpr std::string_view kNicknameHonorifics[] = {"ちゃん", "くん"};
+
+// The kin, pet and other words before ちゃん the dictionary lacks in hiragana (いっちゃん 一番).
+constexpr std::string_view kKinHeads[] = {"にい", "にー", "ねえ", "ねー", "かあ", "かー", "とう", "とー", "ばあ", "ばー",
+                                          "じい", "じー", "ばっ", "じっ", "わん", "にゃん", "ぼっ", "じょう", "あか", "あん", "いっ"};
+
+constexpr std::u32string_view kParticleRunes = U"はがをにともへでや";
+
+bool NicknameRune(char32_t r) { return IsHiraganaRune(r) || r == U'ー'; }
+
+// The start of the nickname that ends at end in text, or npos: two to four kana after a
+// character other than kana or a kanji, or after a one-kana particle that follows a kanji,
+// katakana or a span.
+size_t NicknameStart(std::string_view text, size_t end, bool spanBefore) {
+    size_t start = end;
+    while (start > 0) {
+        const text::Rune r = LastRune(text.substr(0, start));
+        if (!NicknameRune(r.cp)) break;
+        start -= r.size;
+    }
+    const auto runes = [&](size_t from) { return CountRunes(text.substr(from, end - from), [](char32_t) { return true; }); };
+    const char32_t before = start == 0 ? 0 : LastRune(text.substr(0, start)).cp;
+    const bool boundary = start == 0 || (!IsKanjiRune(before) && !IsKatakanaRune(before));
+    if (start == end) return std::string_view::npos;
+    if (boundary && runes(start) >= 2 && runes(start) <= 4) return start;
+    const text::Rune first = text::DecodeRune(text.substr(start));
+    const size_t after = start + first.size;
+    if ((!boundary || (start == 0 && spanBefore)) && RuneIn(first.cp, kParticleRunes) && runes(after) >= 2 && runes(after) <= 4) {
+        return after;
+    }
+    return std::string_view::npos;
+}
+
+void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx, const dict::Snapshot& snap, output::Pieces& out) {
+    size_t at = 0;
+    for (size_t i = 0; i < text.size();) {
+        std::string_view honorific;
+        for (const std::string_view h : kNicknameHonorifics) {
+            if (text.substr(i).starts_with(h)) honorific = h;
+        }
+        if (honorific.empty()) {
+            i += std::max<size_t>(1, text::DecodeRune(text.substr(i)).size);
+            continue;
+        }
+        const size_t end = i;
+        i += honorific.size();
+        const size_t start = NicknameStart(text, end, spanBefore && at == 0);
+        if (start == std::string_view::npos || start < at) continue;
+        const std::string_view name = text.substr(start, end - start);
+        const std::string_view rest = text.substr(i);
+        if (name.starts_with("お") || name.starts_with("ご") || name.starts_with("ー")) continue;
+        bool kin = false;
+        for (const std::string_view k : kKinHeads) kin = kin || name == k;
+        if (kin || (honorific == "ちゃん" && rest.starts_with("と"))) continue;  // ここにちゃんと
+        // A verb before んだ or んじゃ (叩くんじゃねえ, しとくんだ).
+        // A verb before んだ, んで or んな (叩くんじゃねえ, しとくんで, 狙ってくんな).
+        if (honorific == "くん") {
+            const bool predicate = rest.starts_with("じゃ") || rest.starts_with("だ") || rest.starts_with("で") ||
+                                   rest.starts_with("な") || rest.starts_with("の");
+            const char32_t last = LastRune(name).cp;
+            bool verb = RuneIn(last, U"てでとっ");
+            // A verb stem of two kana or more at the end of the name (まだあるくんだ).
+            for (size_t from = 0; predicate && !verb && from < name.size();
+                 from += std::max<size_t>(1, text::DecodeRune(name.substr(from)).size)) {
+                const std::string_view stem = name.substr(from);
+                verb = CountRunes(stem, [](char32_t) { return true; }) >= 2 &&
+                       KeyTags(stem, ctx, snap).find('M') != std::string::npos;
+            }
+            if (verb) continue;
+        }
+        // A dictionary word ending in the honorific, with up to four characters after it
+        // (どんちゃん騒ぎ, 群がるおばちゃん).
+        bool word = false;
+        for (size_t from = 0; from < name.size() && !word; from += std::max<size_t>(1, text::DecodeRune(name.substr(from)).size)) {
+            for (size_t n = 0, e = 0; n <= 4 && !word; n++) {
+                const std::string key = std::string(name.substr(from)) + std::string(honorific) + std::string(rest.substr(0, e));
+                word = !KeyTags(key, ctx, snap).empty();
+                if (e >= rest.size()) break;
+                e += std::max<size_t>(1, text::DecodeRune(rest.substr(e)).size);
+            }
+        }
+        if (word) continue;
+        // Long vowels are dropped as a Korean name drops them (ゆうくん 유군, みーちゃん 미짱).
+        std::string kana(name);
+        for (size_t p; (p = kana.find("ー")) != std::string::npos;) kana.erase(p, std::string_view("ー").size());
+        const std::string hangul = text::FromKana(kana, text::Preset::FanShort);
+        if (hangul.empty()) continue;
+        if (start > at) output::Add(out, text.substr(at, start - at));
+        out.push_back({hangul, output::SpanWord});
+        at = end;
+    }
+    if (at < text.size()) output::Add(out, text.substr(at));
+}
+
+}  // namespace
+
+output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap) {
+    output::Pieces out;
+    for (size_t k = 0; k < text.size(); k++) {
+        if (text[k].span == output::SpanText) NicknamesIn(text[k].text, k > 0, ctx, snap, out);
+        else out.push_back(text[k]);
     }
     return out;
 }

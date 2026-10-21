@@ -152,6 +152,32 @@ HD_TEST(pipeline_lines_and_brackets) {
                 std::string("「a」〖2｢〗"));
 }
 
+HD_TEST(pipeline_nicknames_to_hangul) {
+    const auto snap = Snapshot("おばちゃん\t아줌마\tN110\t\t\tGN\t1\nどんちゃん騒ぎ\t법석\tN110\t\t\tGN\t2\n");
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ゆうくん、おはよう。", "〖1유〗くん、おはよう。"},
+        {"おやすみ、ふみちゃん", "おやすみ、〖1후미〗ちゃん"},
+        {"「みーちゃん！」", "「〖1미〗ちゃん！」"},
+        {"私はゆうくんが好き。", "私は〖1유〗くんが好き。"},
+        {"あにくんが来た。", "〖1아니〗くんが来た。"},
+        {"群がるおばちゃん", "群がるおばちゃん"},
+        {"ねえちゃん、待って", "ねえちゃん、待って"},
+        {"ここにちゃんと書いた。", "ここにちゃんと書いた。"},
+        {"皆がどんちゃん騒ぎだ。", "皆がどんちゃん騒ぎだ。"},
+        {"内容にしとくんで。", "内容にしとくんで。"},
+        {"なんでゆうくんまで", "なんでゆうくんまで"},  // a nickname inside a longer hiragana run
+        {"ぼくんち", "ぼくんち"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::NicknamesToHangul(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_kata_words) {
     const auto snap = Snapshot("からだ\t몸\tN110\t\t\tGN\t1\n");
     HD_REQUIRE(snap != nullptr);

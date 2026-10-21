@@ -997,6 +997,25 @@ constexpr std::string_view kHumblePronouns[] = {"私", "わたし", "わたく�
 
 }  // namespace
 
+// ちゃん right after a katakana noun as 짱 where it was left empty (ナッちゃん 낫짱); the
+// empty ちゃん of a kin word (お姉ちゃん 언니) stays.
+void ChanAfterKatakana(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const Item* p = it->prev;
+        if (p == nullptr || it->selected < 0 || it->group->surface != "ちゃん" || !TrimSpace(it->EntryText(it->selected)).empty() ||
+            p->start + p->length != it->start || p->tokenIndex != it->tokenIndex || p->group->surface.empty()) {
+            continue;
+        }
+        bool katakana = true;
+        for (size_t i = 0; i < p->group->surface.size();) {
+            const text::Rune r = text::DecodeRune(p->group->surface.substr(i));
+            katakana = katakana && ((r.cp >= U'ァ' && r.cp <= U'ヶ') || r.cp == U'ー');
+            i += r.size == 0 ? 1 : r.size;
+        }
+        if (katakana && p->selected >= 0 && At(p->Code(p->selected), 0) == '1') SelectLemma(f, it, "짱");
+    }
+}
+
 // The first person of a polite sentence in its humble form: 나 저, 내 제, 우리 저희
 // (私はそう思います 저는 그렇게 생각합니다).
 void HumbleFirstPerson(Flusher& f) {

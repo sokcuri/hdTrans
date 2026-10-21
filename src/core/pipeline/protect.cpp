@@ -138,6 +138,7 @@ output::Pieces ProtectTyped(std::string_view sounded, const LineContext& ctx, co
     output::Pieces typed = internal::CutSpans(sounded, ctx.markers);
     typed = internal::KataSpeech(typed, ctx, snap);
     typed = internal::KataWordsToHiragana(typed, ctx, snap);
+    typed = internal::NicknamesToHangul(typed, ctx, snap);
     return internal::RewriteConjunctions(typed);
 }
 
