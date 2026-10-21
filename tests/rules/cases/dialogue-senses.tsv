@@ -30,3 +30,7 @@ dict:jisjk:95067	首を振って断った。	!rule:dict:jisjk:95067	keep	local
 dict:jisjk:4875	いやらしい目で見ないで。	야한 눈으로 보지 마.	fix	lookup
 phrase:こっちこそ	いや、こっちこそごめんね。	아니, 나야말로 미안해.	fix	lookup
 phrase:こっちこそ	こっちこそありがとう。	나야말로 고마워.	fix	lookup
+dict:jisjk:265354	あなたさえいてくれれば十分だ。	rule:dict:jisjk:265354=만	fix	local
+dict:jisjk:265354	雨さえ降らなければ出かけよう。	비만 내리지 않으면 나가자.	fix	local
+dict:jisjk:265354	君さえよかったら一緒に行こう。	너만 괜찮다면 함께 가자.	fix	local
+dict:jisjk:265354	名前さえ知らない。	!rule:dict:jisjk:265354	keep	local
