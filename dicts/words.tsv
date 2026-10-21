@@ -26734,3 +26734,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 危うく	하마터면	E300			GN	5200	||1 &&5 S+1!= "Lな" S+1!= "L見" S+1!= "Lす" S+1!= "Lし" S+1!= "Lさ"	なる, 見える, する가 뒤따르지 않는 危うく를 하마터면으로 고른다.				word:ayauku:narrowly
 自然と	자연스럽게	E300			GN							word:shizento:adverb
 自然と	자연과	E300			GN	5201	||4 S+1== "共に" S+1== "ともに" S+1== "一体" S+1== "人間"	共に, 一体, 人間 앞의 自然と는 명사와 조사 자연과로 고른다.				word:shizento:nature
+楽しみ	기대돼	N110			GN	5202	||2 &&2 G+0== "Hz" ||3 G+0== "Ow" P+1== "6**" S+1== "?" &&2 S-1!= "Rの" ||3 G+0== "Ow" P+1== "6**" S+1== "?"	の 뒤가 아니고 문장 끝이나 문장 부호 앞에 홀로 오는 楽しみ를 기대돼로 고른다.				word:tanoshimi:alone

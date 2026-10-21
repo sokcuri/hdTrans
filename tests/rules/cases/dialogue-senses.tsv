@@ -34,3 +34,7 @@ dict:jisjk:265354	あなたさえいてくれれば十分だ。	rule:dict:jisjk:
 dict:jisjk:265354	雨さえ降らなければ出かけよう。	비만 내리지 않으면 나가자.	fix	local
 dict:jisjk:265354	君さえよかったら一緒に行こう。	너만 괜찮다면 함께 가자.	fix	local
 dict:jisjk:265354	名前さえ知らない。	!rule:dict:jisjk:265354	keep	local
+dict:word:tanoshimi:alone	明日のデート、楽しみ？	내일의 데이트, 기대돼?	fix	local
+dict:word:tanoshimi:alone	楽しみ！	기대돼!	fix	local
+dict:word:tanoshimi:alone	散歩が唯一の楽しみ。	!rule:dict:word:tanoshimi:alone	keep	local
+dict:word:tanoshimi:alone	人生の楽しみが増えた。	인생의 즐거움이 늘어났다.	keep	local
