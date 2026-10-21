@@ -9,3 +9,5 @@ sound:lead-naa	なあ、ちょっと来て。	저기, 조금 와.	fix	sound
 sound:lead-naa	大事なことだ。なあ？	소중한 일이다. 그렇지?	fix	sound
 sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
 sound:lead-naa	そうだなあ、うん。	그렇다, 응.	keep	sound
+phrase:なんていうか	なんていうか、変だね。	뭐랄까, 이상하네.	fix	builtin-phrase
+phrase:なんていうか	うん……なんていうかね……すごかった。	응……뭐랄까……대단했다.	fix	builtin-phrase
