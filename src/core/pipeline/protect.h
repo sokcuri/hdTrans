@@ -16,6 +16,7 @@ namespace hdTrans::pipeline {
 // The pieces the line is translated from, in this order:
 //   - the protected-span cut (internal::CutSpans);
 //   - a line of speech written in katakana read as hiragana (internal::KataSpeech);
+//   - a katakana honorific after a name written in hiragana (internal::KataHonorifics);
 //   - a pronoun, demonstrative or adjective written in katakana for emphasis read as
 //     hiragana unless it may be a name (internal::KataWordsToHiragana);
 //   - a hiragana nickname before ちゃん or くん written in Hangul
@@ -65,6 +66,11 @@ bool IsForeign(char32_t r);
 // 沈マナイ), count as speech on weaker evidence. A span with Hangul next to the text
 // counts as a sound already written.
 output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// A katakana honorific (サマ サン クン チャン ドノ) that ends a katakana run in the text
+// pieces written in hiragana when the run before it is a name or no dictionary word
+// and the whole run is no dictionary word (ヨウタサマ ヨウタさま); not after オ (オジサン).
+output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // Each word of a short list (アレ, ドコ, アタシ, ダメ, ヤバイ, ...) in the text pieces
 // written in hiragana where it reads as the word rather than a name: it fills its

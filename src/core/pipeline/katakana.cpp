@@ -394,6 +394,27 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
 // word reads as words only when its other words have three or more morae and do not
 // conjugate (アリスデス, not ウルトラマンネクサス). One kana reads only as a particle
 // (ハ, ヲ).
+// The length of the katakana name that kana ends in an honorific after (ヨウタサマ: 3), or
+// 0: a name of the name layer only or no dictionary word, not after オ (オジサン), before
+// サマ サン クン チャン or ドノ, the whole run no dictionary word in katakana or hiragana.
+size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
+    for (const std::u32string_view h : {std::u32string_view(U"サマ"), std::u32string_view(U"サン"),
+                                        std::u32string_view(U"クン"), std::u32string_view(U"チャン"),
+                                        std::u32string_view(U"ドノ")}) {
+        if (kana.size() < h.size() + 2 || !kana.ends_with(h)) continue;
+        const std::u32string_view name = kana.substr(0, kana.size() - h.size());
+        if (name[0] == U'オ' || name.back() == U'ー' || name.back() == U'ッ') return 0;
+        // A word whole, in katakana or hiragana (タクサン たくさん, ネエサン ねえさん).
+        if (!KeyTags(Utf8(kana), ctx, snap).empty() || !KeyTags(ToHiragana(Utf8(kana)), ctx, snap).empty()) return 0;
+        // A name of the name layer only, or no word (タン of タンサン is a word).
+        for (const dict::Candidate& c : snap.RetrieveRecords(Utf8(name), dict::LookupMode::General)) {
+            if (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN")) return 0;
+        }
+        return name.size();
+    }
+    return 0;
+}
+
 std::vector<KataPiece> ReadRun(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string h;
     std::vector<size_t> at;
@@ -403,6 +424,10 @@ std::vector<KataPiece> ReadRun(std::u32string_view kana, const LineContext& ctx,
         return {};
     }
     if (h.empty() || Laughter(h) || Doubled(h) || kana.back() == U'ー') return {};
+    if (const size_t n = KataNameBeforeHonorific(kana, ctx, snap); n > 0) {
+        // A name kept in katakana and its honorific in hiragana (ヨウタサマ ヨウタさま).
+        return {{0, n, PieceKind::Kata, 0, ""}, {n, kana.size(), PieceKind::Word, 2, "N"}};
+    }
     const std::string key = Utf8(kana);
     if (HasUserEntries(key, ctx)) return {};
     if (KeyTags(key, ctx, snap).empty()) {
@@ -663,6 +688,44 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
 }
 
 }  // namespace
+
+namespace {
+
+// text with the katakana honorific that ends a katakana run after a name written in
+// hiragana (ヨウタサマ ヨウタさま).
+std::string KataHonorificsIn(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::string b;
+    size_t at = 0;
+    for (size_t i = 0; i < text.size();) {
+        const text::Rune r = text::DecodeRune(text.substr(i));
+        if (!IsKatakanaRune(r.cp)) {
+            i += std::max<size_t>(1, r.size);
+            continue;
+        }
+        const size_t start = i;
+        i += RunOf(text.substr(i), IsKatakanaRune);
+        const std::u32string kana = Runes(text.substr(start, i - start));
+        const size_t n = KataNameBeforeHonorific(kana, ctx, snap);
+        if (n == 0) continue;
+        b.append(text.substr(at, start - at));
+        b += Utf8(std::u32string_view(kana).substr(0, n));
+        b += ToHiragana(Utf8(std::u32string_view(kana).substr(n)));
+        at = i;
+    }
+    if (at == 0) return std::string(text);
+    b.append(text.substr(at));
+    return b;
+}
+
+}  // namespace
+
+output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap) {
+    output::Pieces out = text;
+    for (output::Piece& p : out) {
+        if (p.span == output::SpanText) p.text = KataHonorificsIn(p.text, ctx, snap);
+    }
+    return out;
+}
 
 output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::vector<output::Pieces> byLine = Lines(text);

@@ -152,6 +152,26 @@ HD_TEST(pipeline_lines_and_brackets) {
                 std::string("「a」〖2｢〗"));
 }
 
+HD_TEST(pipeline_kata_honorifics) {
+    const auto snap = Snapshot("タン\t혀\tN110\t\t\tGN\t1\nたくさん\t많이\tN311\t\t\tGN\t2\n");
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ヨウタサマ", "ヨウタさま"},
+        {"「ヨウタサン、ドウゾ」", "「ヨウタさん、ドウゾ」"},
+        {"タンサン", "タンサン"},
+        {"タクサン", "タクサン"},
+        {"オジサン", "オジサン"},
+        {"サマ", "サマ"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::KataHonorifics(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_nicknames_to_hangul) {
     const auto snap = Snapshot("おばちゃん\t아줌마\tN110\t\t\tGN\t1\nどんちゃん騒ぎ\t법석\tN110\t\t\tGN\t2\n");
     HD_REQUIRE(snap != nullptr);
