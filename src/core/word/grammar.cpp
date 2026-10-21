@@ -1048,6 +1048,108 @@ void ParallelNoka(Flusher& f) {
     }
 }
 
+namespace {
+
+// The token range [open, close] of the quote around token j: open is the token with 「 or 『
+// before it and close the token with 」 or 』 after it; -1 for a side the chunk lacks.
+// False when j is not inside a quote.
+bool QuoteAround(const Worker& w, int j, int& open, int& close) {
+    open = close = -1;
+    for (int k = j; k >= 0; k--) {
+        const std::string_view t = w.Tok(k).text;
+        if (k != j && (Has(t, "」") || Has(t, "』"))) break;
+        if (Has(t, "「") || Has(t, "『")) {
+            open = k;
+            break;
+        }
+    }
+    for (int k = j; k < w.TokenCount(); k++) {
+        const std::string_view t = w.Tok(k).text;
+        if (k != j && (Has(t, "「") || Has(t, "『"))) break;
+        if (Has(t, "」") || Has(t, "』")) {
+            close = k;
+            break;
+        }
+    }
+    return open >= 0 || close >= 0;
+}
+
+// Whether the quote text has a mark of old or haughty speech (ておる, のじゃ, せよ, であろう,
+// 余が, 儂, わしが, くれてやる, a final じゃ or ぬ).
+bool OldSpeech(std::string_view q) {
+    for (const std::string_view m : {"ておる", "ており", "ておっ", "でおる", "のじゃ", "であろう", "である", "儂",
+                                     "わしが", "わしは", "わしの", "わしに", "わしを", "わしも", "くれてやる",
+                                     "くれてやろう", "余が", "余は", "余の", "余に", "余を", "余も"}) {
+        if (Has(q, m)) return true;
+    }
+    // 突撃せよ, not 出せよ.
+    for (std::size_t at = q.find("せよ"); at != std::string_view::npos; at = q.find("せよ", at + 1)) {
+        const std::string_view head = q.substr(0, at);
+        const text::Rune last = DecodeLastRune(head);
+        if (last.size > 0 && text::IsKanji(last.cp) && text::IsKanji(DecodeLastRune(head.substr(0, head.size() - last.size)).cp)) {
+            return true;
+        }
+    }
+    for (const std::string_view m : {"じゃ", "ぬ"}) {
+        for (std::size_t at = q.find(m); at != std::string_view::npos; at = q.find(m, at + m.size())) {
+            const std::string_view rest = q.substr(at + m.size());
+            const std::string_view head = q.substr(0, at);
+            if (m == "じゃ" && (head.ends_with("それ") || head.ends_with("これ") || rest.starts_with("あ") ||
+                                rest.starts_with("な") || rest.starts_with("ん") || rest.starts_with("ね"))) {
+                continue;
+            }
+            if (rest.empty() || RuneIn(text::DecodeRune(rest).cp, "。！？!?、…‥」』ぞよ")) return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
+void OfferPromise(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        Entry* e = it->group->At(it->selected);
+        const Entry* d = it->DirectEntry(it->DirectIndex());
+        const std::string_view surface = it->group->surface;
+        const bool humble = surface.ends_with("さしあげ") || surface.ends_with("差し上げ");
+        if (e == nullptr || d == nullptr || !(e->dst.ends_with("&CJ@") || (humble && e->dst.ends_with("드&AA@"))) ||
+            (!surface.ends_with("や") && !surface.ends_with("あげ") && !surface.ends_with("上げ")) || !QuoteEnd(f.w, it)) {
+            continue;
+        }
+        const std::string_view ending = it->DirectSurface();
+        // Only a present or volitional ending turns: not 教えてやったよ, 教えてさしあげられます.
+        if (it->DetailRecord() != 0 || d->dst.empty() || !AnyOf("46017", d->dst[0])) continue;
+        std::string_view after = From(it->text, it->start + it->length);
+        if (after.empty() && it->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(it->tokenIndex + 1).text;
+        if (after.starts_with("？") || after.starts_with("?")) continue;
+        const bool polite = ending == "ます" || ending == "ますよ" || ending == "ますね" || ending == "ますわ" ||
+                            (humble && ending == "ましょう");
+        const bool plain = ending == "る" || ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" ||
+                           ending == "ぜ" || ending == "ぞ" || ending == "ろう" || ending == "よう" || ending == "のじゃ";
+        int open = 0, close = 0;
+        if ((!polite && !plain) || !QuoteAround(f.w, it->tokenIndex, open, close)) continue;
+        if (polite && humble) {
+            it->AssignDirectSlot(it->DirectIndex(), "1겠습니다");
+            continue;
+        }
+        if (humble) continue;
+        if (polite) {
+            if (surface.ends_with("あげ") || surface.ends_with("上げ")) {
+                std::string dst = e->dst;
+                dst.replace(dst.size() - std::string_view("&CJ@").size(), std::string_view::npos, "드&AA@");
+                it->AssignEntrySurface(it->selected, dst);
+            }
+            it->AssignDirectSlot(it->DirectIndex(), "3게요");
+            continue;
+        }
+        std::string quote;
+        const int from = open >= 0 ? open : 0;
+        const int to = close >= 0 ? close : f.w.TokenCount() - 1;
+        for (int k = from; k <= to; k++) quote += f.w.Tok(k).text;
+        it->AssignDirectSlot(it->DirectIndex(), OldSpeech(quote) || surface.ends_with("くれてや") ? "1마" : "3게");
+    }
+}
+
 void ParticleInNext(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* n = it->next;

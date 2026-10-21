@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+rewrite:offer-promise	「宿題、教えてやるよ」	「숙제, 가르쳐 줄게」	fix	rewrites
+rewrite:offer-promise	「荷物、持ってあげる」	「짐, 가져 줄게」	fix	rewrites
+rewrite:offer-promise	「それなら手伝ってあげます」	「그렇다면 도와 드릴게요」	fix	rewrites

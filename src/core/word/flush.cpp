@@ -51,6 +51,7 @@ void Flush(Flusher& f) {
         ParticleInNext(f);
         JiBeforeJiman(f);
         ParallelNoka(f);
+        OfferPromise(f);
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);

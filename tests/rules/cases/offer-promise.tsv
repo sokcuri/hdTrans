@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+rewrite:offer-promise	「宿題、教えてやるよ」	「숙제, 가르쳐 줄게」	fix	rewrites
+rewrite:offer-promise	「荷物、持ってあげるね」	「짐, 가져 줄게」	fix	rewrites
+rewrite:offer-promise	「それなら手伝ってあげます」	「그렇다면 도와 드릴게요」	fix	rewrites
+rewrite:offer-promise	「では、ご案内して差し上げます」	「그럼, 안내해 드리겠습니다」	fix	rewrites
+rewrite:offer-promise	「褒美をくれてやる」	「포상을 주마」	fix	rewrites
+rewrite:offer-promise	「わしが稽古をつけてやろう」	「내가 가르침을 주마」	fix	rewrites
+rewrite:offer-promise	「昨日、教えてやったよ」	「어제, 가르쳐 줬어」	keep	rewrites
+rewrite:offer-promise	毎晩、弟に本を読んでやる。	매일 밤, 남동생에게 책을 읽어 준다.	keep	rewrites
