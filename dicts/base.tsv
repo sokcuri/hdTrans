@@ -20356,7 +20356,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 さわり	감촉	I110			GN				jisjk:101751		
 さわりもしな	만지지도 $DH@	H7U0		AvJs	GN				jisjk:375377		
 さわんとうしゅ	좌완 투수	N110	VRwVHn		GN				jisjk:185566		-1
-さん	씨	N110	VHn	Tu	GN	327	||2 &&14 A-1-= "VHn" S-1!= "R屋" S-1!= "Rがり" S-1!= "R張り" S-1!= "R坊" S-1!= "美人" D-1!= "R님" S-1!= "R長" S-1!= "提督" S-1!= "運転手" S-1!= "師匠" S-1!= "博士" S-1!= "教授" S-1!= "神父" &&2 P-1== "13*" G-1== "WaWb"	앞말의 사람 의미나 인명 표지를 검사해 호칭 さん을 ‘씨’로 고른다. 가게(屋), 성격을 이르는 말, 美人 뒤는 빼고 L2963에 맡긴다.	jisjk:6506		
+さん	씨	N110	VHn	Tu	GN	327	||2 &&15 A-1-= "VHn" A-1!= "UAq" S-1!= "R屋" S-1!= "Rがり" S-1!= "R張り" S-1!= "R坊" S-1!= "美人" D-1!= "R님" S-1!= "R長" S-1!= "提督" S-1!= "運転手" S-1!= "師匠" S-1!= "博士" S-1!= "教授" S-1!= "神父" &&2 P-1== "13*" G-1== "WaWb"	앞말의 사람 의미나 인명 표지를 검사해 호칭 さん을 ‘씨’로 고른다. 직업, 역할을 이르는 말(UAq), 가게(屋), 성격을 이르는 말, 美人 뒤는 빼고 L2963에 맡긴다.	jisjk:6506		
 さん	님	N110	VHn	Tu	GN	5130	||1 &&3 P-1== "1**" D-1!= "R님" ||7 S-1== "R長" S-1== "提督" S-1== "運転手" S-1== "師匠" S-1== "博士" S-1== "教授" S-1== "神父"	직함 뒤의 さん은 ‘님’으로 고른다(提督さん 제독님, 店長さん 점장님, 運転手さん 운전기사님). 店員さん 같은 다른 직업은 L2963.	san-role:1		
 さん	&A5@	M429	QHP		GN				jisjk:121747		
 さん	관여&AV@	M429			GN				jisjk:121750		
@@ -53112,7 +53112,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 オーナ	오너	N110	VHn		GN				jisjk:13942		
 オーナメント	오너먼트	N110			GN				jisjk:158117		
 オーナレコード	오너레코드	N110			GN				jisjk:44772		
-オーナー	오너	N110	UAq		BZ				jisjk:44769		
+オーナー	오너	N110	UAqVHn		BZ				jisjk:44769		
 オーナーシップ	소유권	N110	URt		GN				jisjk:44770		
 オーナーズクラブ	오너즈 클럽	N110			GN				jisjk:268404		
 オーナーチェンジ	오너 체인지	N110			GN				jisjk:364419		
@@ -54206,7 +54206,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 カリノフスキー	카리노프스키	N130	QPN		GN				jisjk:371500		
 カリビアンブラック	중남미의 밀입국자	N110	VHn		GN				jisjk:158582		
 カリビアン・ベイ	캐러비안 베이	N130			GN				jisjk:365723		
-カリフ	칼리프	N110	UAqURt		GN				jisjk:45567		
+カリフ	칼리프	N110	UAqURtVHn		GN				jisjk:45567		
 カリフ	칼리프	N130	QPN		GN				jisjk:371816		
 カリフォルニア	캘리포니아	N130	QCT	Qq	GN				jisjk:45568		
 カリフォルニア銀行	캘리포니아 은행	N130	QIDVGt		GN				jisjk:45569		
@@ -55675,7 +55675,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 キラキラとした	반짝 반짝 빛나는	E0H0			GN				jisjk:150168		
 キラリ	키라리	N130	QPN		GN				jisjk:371909		
 キラリと光	반짝반짝 빛&A5@	M428			GN				jisjk:342982		
-キラー	킬러	N110	UAq		GN				jisjk:46106		
+キラー	킬러	N110	UAqVHn		GN				jisjk:46106		
 キラーえいせい	위성 공격 위성	N110	VSsVPe		GN				jisjk:158867		
 キラーアプリ	큘러업	N110			GN				jisjk:46107		
 キラーアプリケーション	킬러 아플리케이션	N110			GN				jisjk:260443		
@@ -56194,7 +56194,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 クインデグレ	쿠인데글레	N110			GN				jisjk:100109		
 クイント	퀸트	N110	USoQMUVRw		GN				jisjk:158959		
 クイントン	퀸튼	N130	QPN		GN				jisjk:369944		
-クイーン	여왕	N110	UAqVQwURt		GN				jisjk:46232		
+クイーン	여왕	N110	UAqVQwURtVHn		GN				jisjk:46232		
 クイーンサイズ	퀸사이즈	N110		Ct	GN				jisjk:46233		
 クイーンズ	퀸즈	N110	VPl		GN				jisjk:46234		
 クイーンズスクエア	퀸즈스퀘어	N110	VPl		GN				jisjk:158954		
@@ -60625,7 +60625,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 サラリと	깔끔&AV@	M429			GN				jisjk:266024		
 サラリー	봉급	N110	VMo		GN				jisjk:47748		
 サラリー. マン	샐러리맨	N110	VHn		GN				jisjk:47749		
-サラリーマン	샐러리맨	N110	UAq		GN				jisjk:47750		
+サラリーマン	샐러리맨	N110	UAqVHn		GN				jisjk:47750		
 サラリーマンら	샐러리맨들	N110	VHn		GN				jisjk:129040		
 サラリーマン向け	샐러리맨용	N110			GN				jisjk:152226		
 サラン	사란	N110	VCp		GN				jisjk:129041		
@@ -65038,7 +65038,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 スバル興産	스바루 흥산	N130	QIDVGt		GN				jisjk:49199		
 スバング・ジャヤ	스방자야	N110	VPl		GN				jisjk:130004		
 スパ	온천	N110	VPl		GN				jisjk:130005		
-スパイ	스파이	N110	UAqHGu		GN				jisjk:49204		
+スパイ	스파이	N110	UAqHGuVHn		GN				jisjk:49204		
 スパイカー	스파이커	N110	VRwVHn		GN				jisjk:130011		
 スパイク	스파이크	N110			GN				jisjk:49205		
 スパイクシューズ	스파이크 슈즈	N110	VCp		GN				jisjk:130012		
@@ -69516,7 +69516,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 テロ	테러행위를 &AV@	M418			GN				jisjk:91603		
 テロ	테러	N110			GN				jisjk:91604		
 テロップ	텔롭	N110	QID		GN				jisjk:131258		
-テロリスト	테러리스트	N110	UAqHGu		GN				jisjk:50930		
+テロリスト	테러리스트	N110	UAqHGuVHn		GN				jisjk:50930		
 テロリズム	테러리즘	N110			GN				jisjk:50931		
 テロル	테러	N110	HGu		GN				jisjk:50932		
 テロ活動	테러 활동	N110			BZ				jisjk:351185		
@@ -74539,7 +74539,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ハンセン氏病	한센씨병	N110			GN				jisjk:53210		
 ハンセン病	문둥병	N110	QHP		GN				jisjk:132360		
 ハンソル紙博物館	한솔 종이 박물관	N130	VBl		GN				jisjk:375866		
-ハンター	헌터	N110	UAq		GN				jisjk:53211		
+ハンター	헌터	N110	UAqVHn		GN				jisjk:53211		
 ハンターキラー	헌터 킬러	N110	VTwVHn		GN				jisjk:132361		
 ハンダ	핸더	N110			GN				jisjk:53212		
 ハンダ付け	납땜	N110		Hd	GN				jisjk:132362		
@@ -75962,7 +75962,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 パイレックス	파이렉스	N110			GN				jisjk:53690		
 パイレーツパンツ	파이어러츠 팬츠	N110	VCp		GN				jisjk:132741		
 パイレートエディション	해적판	N110			GN				jisjk:132742		
-パイロット	파일럿	N110	UAqVPl		GN				jisjk:53691		
+パイロット	파일럿	N110	UAqVPlVHn		GN				jisjk:53691		
 パイロット。 サーベイ	파일럿서베이	N110			GN				jisjk:53692		
 パイロット。 レーティング	pilot rating system	N110			GN				jisjk:53693		
 パイロットら	파일럿들	N110	VHn		GN				jisjk:132743		
@@ -85215,7 +85215,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 マジェド	마제드	N130	QPN		GN				jisjk:371285		
 マジカル	매직컬	N110			GN				jisjk:103381		
 マジカルミックス	매지컬 믹스	N110			GN				jisjk:134640		
-マジシャン	매지션	N110	UAq		GN				jisjk:57152		
+マジシャン	매지션	N110	UAqVHn		GN				jisjk:57152		
 マジストレイト	행정관	N110	VHnULw		GN				jisjk:134641		
 マジソン	매디슨	N110			GN				jisjk:57153		
 マジソン街	매디슨가	N110	VPl		GN				jisjk:134642		
@@ -92212,7 +92212,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 レボー	레보	N130	QPN		GN				jisjk:366902		
 レポ	리포트	N110			GN				jisjk:360399		
 レポオペ	레포거래	N110			BZ				jisjk:362685		
-レポーター	리포터	N110	UAqUTs		GN				jisjk:59646		
+レポーター	리포터	N110	UAqUTsVHn		GN				jisjk:59646		
 レポーティングシステム	reporting system	N110			GN				jisjk:59647		
 レポート	리포트	N110	VSw	Hd	GN				jisjk:14190		
 レポートドキュメント	report document	N110			GN				jisjk:59648		
@@ -104150,7 +104150,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 下奥富	시모쿠도미	N130	QCTVPl		GN				jisjk:298664		
 下奥平	시모쿠다이라	N130	QCTVPl		GN				jisjk:298663		
 下奥田	시모쿠다	N130	QCTVPl		GN				jisjk:298662		
-下女	하녀	N110	UAqVQw		GN				jisjk:38168		
+下女	하녀	N110	UAqVQwVHn		GN				jisjk:38168		
 下女中	하녀	N110	VHn		GN				jisjk:234420		
 下好間	시모요시마	N130	QCTVPl		GN				jisjk:300418		
 下妙典	시모묘덴	N130	QCTVPl		GN				jisjk:300260		
@@ -113188,7 +113188,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 乳業農業協同組合	유업 농업협동조합	I110			GN				jisjk:110251		
 乳様突起	유양 돌기	N110	VBpQHP		GN				jisjk:248259		
 乳歯	유치	N110	VBp		GN				jisjk:30632		
-乳母	유모	N110	UAqVQw		GN				jisjk:30617		
+乳母	유모	N110	UAqVQwVHn		GN				jisjk:30617		
 乳母子	우바코	N130	QCTVPl		GN				jisjk:275780		
 乳母日傘	애지중지 키우는 일	N110			GN				jisjk:166417		
 乳母沢	우바자와	N130	QCTVPl		GN				jisjk:275785		
@@ -121293,7 +121293,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 伯母沢	오바자와	N130	QCTVPl		GN				jisjk:280624		
 伯母谷	오바타니	N130	QCTVPl		GN				jisjk:280647		
 伯治	하쿠지	N130	QCTVPl		GN				jisjk:319868		
-伯爵	백작	N110	UAqURt		GN				jisjk:23221		
+伯爵	백작	N110	UAqURtVHn		GN				jisjk:23221		
 伯父	백부	N110	VHnVQmUQf		GN				jisjk:23219		
 伯父さん	백부	I110	VQmUQfVHn		GN				jisjk:69895		
 伯玄町	하쿠겜마치	N130	QCTVPl		GN				jisjk:319852		
@@ -124005,7 +124005,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 侍医	시의	N110			GN				jisjk:27690		
 侍史	시사	N110			GN				jisjk:236602		
 侍大将	사무라이 대장	N110	VHnVTw		GN				jisjk:232709		
-侍女	시녀	N110	UAq		GN				jisjk:27689		
+侍女	시녀	N110	UAqVHn		GN				jisjk:27689		
 侍島	사무라이지마	N130	QCTVPl		GN				jisjk:296366		
 侍座	귀인의 옆에 앉아있는 일	N110			GN				jisjk:236595		
 侍従	시종	N110	VHn		GN				jisjk:9918		
@@ -127013,7 +127013,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 僧伽	증가	N110	UCl		GN				jisjk:239977		
 僧位	승위	N110			GN				jisjk:239921		
 僧体	승려의 차림	N110			GN				jisjk:101332		
-僧侶	승려	N110	UAqUCl		GN				jisjk:27638		
+僧侶	승려	N110	UAqUClVHn		GN				jisjk:27638		
 僧俗	승속	N110		Hd	GN				jisjk:240140		
 僧兵	승병	N110	VHnUCl		GN				jisjk:200457		
 僧坊	소보	N130	QCTVPl		GN				jisjk:304724		
@@ -131954,7 +131954,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 兵器取引	무기거래	K110		Hd	MI				jisjk:345937		
 兵団	군단	N110	VHn		GN				jisjk:23632		
 兵団	헤이단	N130	QCTVPl		GN				jisjk:327353		
-兵士	병사	N110	UAq		GN				jisjk:23644		
+兵士	병사	N110	UAqVHn		GN				jisjk:23644		
 兵太夫	효다유	N130	QCTVPl		GN				jisjk:324838		
 兵安	헤이안	N130	QCTVPl		GN				jisjk:327313		
 兵家	효게	N130	QCTVPl		GN				jisjk:324826		
@@ -132994,7 +132994,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 内閣文庫	내각 문고	N110	VBkVSwVBl		GN				jisjk:246812		
 内閣法制局	내각 법제국	N110	VBlULw		GN				jisjk:246813		
 内閣組閣	내각조각	N110			GN				jisjk:267326		
-内閣総理大臣	내각총리대신	N110	UQfUAq		BZ				jisjk:153848		
+内閣総理大臣	내각총리대신	N110	UQfUAqVHn		BZ				jisjk:153848		
 内閣総辞職	내각 총사직	N110			GN				jisjk:246810		
 内閣責任制	내각책임제	N110	UMn		GN				jisjk:206078		
 内院	내원	N110	VPl		GN				jisjk:18147		
@@ -135754,7 +135754,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 刑	형	N110	ULw		GN				jisjk:177142		
 刑	형	N110		On	GN				jisjk:259682		
 刑中	형중	N110			GN				jisjk:160023		
-刑事	형사	N110	UAqHGu		GN				jisjk:39142		
+刑事	형사	N110	UAqHGuVHn		GN				jisjk:39142		
 刑事ら	형사들	N110	VHn		GN				jisjk:177482		
 刑事事件	형사사건	I110			BZ				jisjk:108356		
 刑事収容施設	형사 수용 시설	N110			BZ				jisjk:353873		
@@ -139239,7 +139239,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 助戸大橋町	스케도오하시쵸	I130	QCTVPl		GN				jisjk:303263		
 助戸新山町	스케도신야마쵸	I130	QCTVPl		GN				jisjk:303264		
 助戸東山町	스케도히가시야마쵸	I130	QCTVPl		GN				jisjk:303266		
-助手	조수	N110	UAq		GN				jisjk:33500		
+助手	조수	N110	UAqVHn		GN				jisjk:33500		
 助手席	조수석	N110	VBl		GN				jisjk:195680		
 助教	조교	N110	UAq		GN				jisjk:33493		
 助教授	조교수	I110	UAq		GN				jisjk:83548		
@@ -143133,7 +143133,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 医家	의가	N110	QHP		GN				jisjk:125177		
 医専	의전	N110	VBl		GN				jisjk:228250		
 医局	의국	N110	VGt		GN				jisjk:31105		
-医師	의사	N110	UAq		GN				jisjk:31110		
+医師	의사	N110	UAqVHn		GN				jisjk:31110		
 医師ら	의사들	N110	VHn		GN				jisjk:125470		
 医師会	의사회	N110	QHPVBl		GN				jisjk:125397		
 医師協同組合	의사협동조합	I110			GN				jisjk:110242		
@@ -147231,7 +147231,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 博基	히로키	N130	QPN	Wb	GN				jisjk:372204		
 博報堂	하쿠호도	I130	QIDVGt		GN				jisjk:69568		
 博報堂プロス	하쿠호도 푸로스	I130	QIDVGt		GN				jisjk:69569		
-博士	박사	N110	UAq		GN				jisjk:22640		
+博士	박사	N110	UAqVHn		GN				jisjk:22640		
 博士の学位	박사학위	N110	UPp		GN				jisjk:205195		
 博士号	박사 학위	N110			GN				jisjk:154035		
 博士家	박사가문	N110	VBl		GN				jisjk:249305		
@@ -152111,7 +152111,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 司政	사정	N110			GN				jisjk:187436		
 司政官	사정관	N110	VHn		GN				jisjk:187445		
 司教	주교	N110	UClVHn		GN				jisjk:25012		
-司書	사서	N110	UAq		GN				jisjk:25016		
+司書	사서	N110	UAqVHn		GN				jisjk:25016		
 司書補	사서보	I110			GN				jisjk:71802		
 司朗	시로	N130	QPN		GN				jisjk:100590		
 司法	사법	N110	ULwHGu		GN				jisjk:25015		
@@ -157183,7 +157183,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 商事	상사	N110	VGt		GN				jisjk:25797		
 商事仲裁	상사 중재	N110	UMn		BZ				jisjk:355431		
 商事会社	상사 회사	N110	VBlVMo		GN				jisjk:190935		
-商人	상인	N110	UAq		GN				jisjk:25801		
+商人	상인	N110	UAqVHn		GN				jisjk:25801		
 商人	아킨도	N130	QCTVPl		GN				jisjk:269350		
 商人気質	상인 기질	N110	SFl		GN				jisjk:124097		
 商人留	아키히토도메	N130	QCTVPl		GN				jisjk:269335		
@@ -160247,7 +160247,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 国父	국부	N110	VHn		GN				jisjk:16930		
 国玉町	쿠다마마치	N130	QCTVPl		GN				jisjk:290649		
 国玉通	쿠니타마도리	N130	QCTVPl		GN				jisjk:290807		
-国王	국왕	N110	UAqUAq		GN				jisjk:16951		
+国王	국왕	N110	UAqUAqVHn		GN				jisjk:16951		
 国璽	국새	N110			GN				jisjk:16940		
 国生	코쿠쇼	N130	QPN	Wa	GN				jisjk:7079		
 国生	코츠쇼	N130	QCTVPl		GN				jisjk:293551		
@@ -162466,7 +162466,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 坊ヶつる	보가쓰루	N130	VPl		GN				jisjk:221399		
 坊ヶつる	보가쓰루	N130	VPl		GN				jisjk:221400		
 坊丸町	보우마루마치	N130	QCTVPl		GN				jisjk:328644		
-坊主	스님	N110	UAqUCl		GN				jisjk:22979		
+坊主	스님	N110	UAqUClVHn		GN				jisjk:22979		
 坊主丁	보우즈쵸	N130	QCTVPl		GN				jisjk:328629		
 坊主刈り	까까머리	N110		Hd	GN				jisjk:251325		
 坊主小兵衛	보즈 고헤에	N130	VHn		GN				jisjk:221414		
@@ -163270,7 +163270,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 執り行	거행&AV@	M440			GN				jisjk:145973		
 執り行な	거행&AV@	M430			GN				jisjk:95131		
 執り行わせていただ	거행&AV@	M421			GN				jisjk:143759		
-執事	집사	N110	UAq		GN				jisjk:35068		
+執事	집사	N110	UAqVHn		GN				jisjk:35068		
 執刀	집도	N110		Hd	GN				jisjk:35066		
 執務	집무	N110		Hd	GN				jisjk:35067		
 執務室	집무실	I110			GN				jisjk:103370		
@@ -165429,7 +165429,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 声を詰まらせ	목이 메&AJ@	M427			GN				jisjk:119225		
 声付き	음성	I110	UHrUTs		GN				jisjk:74562		
 声価	성가	N110	VMo		GN				jisjk:26589		
-声優	성우	N110	UAq		GN				jisjk:26602		
+声優	성우	N110	UAqVHn		GN				jisjk:26602		
 声問村	코에토이무라	N130	QCTVPl		GN				jisjk:292899		
 声喩	의성어	N110	UTs		GN				jisjk:198090		
 声嘶症	성시증	I110	UTi		GN				jisjk:74563		
@@ -165685,7 +165685,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 売上高限界利益率	매상고 한계 이익률	I110			BZ				jisjk:348799		
 売主	판매측	N110	VHn		BZ				jisjk:21517		
 売予約	매예약	N110			BZ				jisjk:349258		
-売人	판매원	N110	UAq		GN				jisjk:21513		
+売人	판매원	N110	UAqVHn		GN				jisjk:21513		
 売付	매도	N110		Hd	GN				jisjk:160479		
 売付買付両選択権	매도 매입 양선택권	N110			BZ				jisjk:349270		
 売付選択	매도 선텍	N110			BZ				jisjk:349269		
@@ -168207,7 +168207,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 大作	오사쿠	N130	QCTVPl		GN				jisjk:277764		
 大作	다이사쿠	N130	QCTVPl		GN				jisjk:308028		
 大作新田	오사쿠신덴	I130	QCTVPl		GN				jisjk:277765		
-大使	대사	N110	UAqUAq		GN				jisjk:18939		
+大使	대사	N110	UAqUAqVHn		GN				jisjk:18939		
 大使ら	대사들	N110	VHn		GN				jisjk:152926		
 大使夫人	대사부인	I110			GN				jisjk:110978		
 大使館	대사관	I110	VPlQMS		GN				jisjk:65201		
@@ -171759,7 +171759,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 大給恒	오규우 유즈루	N110	VHn		GN				jisjk:212676		
 大給町	오규우쵸	N130	QCTVPl		GN				jisjk:279499		
 大統一理論	대 통일이론	N110			GN				jisjk:242158		
-大統領	대통령	N111	UAq		GN				jisjk:65620		
+大統領	대통령	N111	UAqVHn		GN				jisjk:65620		
 大統領中心制	대통령중심제	N110	UMn		GN				jisjk:205814		
 大統領令	대통령령	K110			GN				jisjk:104024		
 大統領候補者	대통령후보자	I110			GN				jisjk:110470		
@@ -171936,7 +171936,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 大膳町	다이젠쵸	N130	QCTVPl		GN				jisjk:308167		
 大膳野町	다이젠노쵸	I130	QCTVPl		GN				jisjk:308168		
 大臀根	대둔근	I110			GN				jisjk:65106		
-大臣	대신	N110	UAq		GN				jisjk:18976		
+大臣	대신	N110	UAqVHn		GN				jisjk:18976		
 大臣官房	대신관방	I110			GN				jisjk:110732		
 大臣柱	대신주	N110	VBl		GN				jisjk:242120		
 大自在天	 대자대천	N110	VHnUCl		GN				jisjk:242106		
@@ -175750,7 +175750,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 女俳優	여배우	I110	UAqVQw		GN				jisjk:64277		
 女傑	여걸	N110	VHnVQw		GN				jisjk:18198		
 女僧	여승	N110	UAqVQwUCl		GN				jisjk:18214		
-女優	여배우	N110	UAqVQw		GN				jisjk:18219		
+女優	여배우	N110	UAqVQwVHn		GN				jisjk:18219		
 女先生	여선생	I110	UAqVQw		GN				jisjk:64282		
 女児	여아	N110	VHnVQw		GN				jisjk:18217		
 女化町	오나바케쵸	N130	QCTVPl		GN				jisjk:280460		
@@ -175952,7 +175952,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 奴草	노초	N110	VPt		GN				jisjk:254221		
 奴詞	노예나 하인이 쓰던 말투	N110			GN				jisjk:254217		
 奴輩	놈들	N110			GN				jisjk:246721		
-奴隷	노예	N110	UAq		GN				jisjk:18305		
+奴隷	노예	N110	UAqVHn		GN				jisjk:18305		
 奴隷制度	노예 제도	N110			GN				jisjk:246762		
 奴隷制道	노예제도	N110	UMn		GN				jisjk:206029		
 奴隷海岸	노예 해안	N110	VPl		GN				jisjk:246760		
@@ -176594,7 +176594,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 委員会に付	위원회에 회부&AV@	M429	ULw		GN				jisjk:143575		
 委員団	위원단	I110	VGt		GN				jisjk:79396		
 委員部	위원부	N110	VPl		GN				jisjk:160554		
-委員長	위원장	N110	UAq		GN				jisjk:150470		
+委員長	위원장	N110	UAqVHn		GN				jisjk:150470		
 委嘱	위촉	N110		Hd	GN				jisjk:30567		
 委曲	상세한 사정	N110			GN				jisjk:30563		
 委棄	포기	N110	ULw	Hd	GN				jisjk:125232		
@@ -177849,7 +177849,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 学習院大	가쿠슈인대	N110	VBl		GN				jisjk:171250		
 学習院大学	가쿠슈인대학	N120	VPl		GN				jisjk:171252		
 学習院女子	가쿠슈인여자	N110	VBl		GN				jisjk:171248		
-学者	학자	N110	UAq		GN				jisjk:38412		
+学者	학자	N110	UAqVHn		GN				jisjk:38412		
 学者くさ	학자티가 $A2@	H7N0	SFlUTh		GN				jisjk:120836		
 学者ら	학자들	N110	VHn		GN				jisjk:171244		
 学者肌	학자기질	I110			GN				jisjk:88452		
@@ -179897,7 +179897,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 官休庵	관휴암	N110	VBl		GN				jisjk:229784		
 官位	관직의 등급	N110			GN				jisjk:169997		
 官倉	관창	N110	VBl		GN				jisjk:206559		
-官僚	관료	N110	UAqQMS		GN				jisjk:16324		
+官僚	관료	N110	UAqQMSVHn		GN				jisjk:16324		
 官僚ら	관료들	N110	VHn		GN				jisjk:170946		
 官僚主義	관료주의	N110			GN				jisjk:170941		
 官僚制	관료제	I110	URt		GN				jisjk:62062		
@@ -179925,7 +179925,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 官城石灰工業	미야기석회공업	I110	VGt		GN				jisjk:62063		
 官報	관보	N110	QMS		GN				jisjk:16330		
 官場現形記	관장현형기	N110	VBkVSw		GN				jisjk:229974		
-官女	궁녀	N110	UAqVQw		GN				jisjk:16322		
+官女	궁녀	N110	UAqVQwVHn		GN				jisjk:16322		
 官奴婢	관노비	I110	UAq		GN				jisjk:62060		
 官婢	관비	N110	UAq		GN				jisjk:16331		
 官学	관학	N110	USu		GN				jisjk:16349		
@@ -180011,7 +180011,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 官邸	관저	N110	VBl		GN				jisjk:16342		
 官邸筋	관저 당국	N110	VBl		GN				jisjk:170637		
 官金	관금	N110	VMy		GN				jisjk:229806		
-官長	관장	N110	UAq		GN				jisjk:16341		
+官長	관장	N110	UAqVHn		GN				jisjk:16341		
 官需	관청수요	N110	QMS		GN				jisjk:16336		
 官需品	관수품	I110	VMa		GN				jisjk:62065		
 官需官給制	관수관급제	N110	UMn		GN				jisjk:206566		
@@ -181909,7 +181909,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 宰予	재예	N110	VHn		GN				jisjk:232210		
 宰司	미코토모치	N110	VHn		GN				jisjk:252226		
 宰府	사이후	N130	QCTVPl		GN				jisjk:295183		
-宰相	재상	N110	UAq		GN				jisjk:32362		
+宰相	재상	N110	UAqVHn		GN				jisjk:32362		
 宰領	감독	N110		Hd	GN				jisjk:184629		
 宰領町	사이료마치	N130	QCTVPl		GN				jisjk:295199		
 害	해&AO@	M433			GN				jisjk:13814		
@@ -184878,7 +184878,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 将積良子	마사즈미 료코	N130	VHn		GN				jisjk:226133		
 将義	마사요시	N130	QPN	Wb	GN				jisjk:10819		
 将貴	마사타카	N130	QPN	Wb	GN				jisjk:202692		
-将軍	장군	N110	UAq		GN				jisjk:32166		
+将軍	장군	N110	UAqVHn		GN				jisjk:32166		
 将軍家	막부	N110	VBl		GN				jisjk:235151		
 将軍沢	쇼군사와	N130	QCTVPl		GN				jisjk:300735		
 将軍職	장군직	I110	UQf		GN				jisjk:82235		
@@ -200233,7 +200233,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 店内	점내	N110	VPl		GN				jisjk:33036		
 店卸	재고 정리	N110		Hd	GN				jisjk:153106		
 店口	가게 앞	N110			GN				jisjk:252359		
-店員	점원	N110	UAq		GN				jisjk:33039		
+店員	점원	N110	UAqVHn		GN				jisjk:33039		
 店売	점매	N110			GN				jisjk:244852		
 店売り	점매	N110			GN				jisjk:363668		
 店屋	음식점	N110	VBl		GN				jisjk:33038		
@@ -200526,7 +200526,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 庭園灯	정원등	N110			GN				jisjk:244255		
 庭埃	벼과 일년초	N110	VPt		GN				jisjk:248335		
 庭宝	엔포	N110	UMe		GN				jisjk:127794		
-庭師	정원사	N110	UAq		GN				jisjk:33160		
+庭師	정원사	N110	UAqVHn		GN				jisjk:33160		
 庭師鳥	바우어새	N110	VAm		GN				jisjk:248322		
 庭掃除	정원 청소	N110			GN				jisjk:248324		
 庭暦	엔랴쿠	N110	UMe		GN				jisjk:127801		
@@ -201345,7 +201345,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 弁論部	변론부	I110			GN				jisjk:87574		
 弁護	변호	N110	UTs	Hd	GN				jisjk:23490		
 弁護人	변호인	I110	VHnUQfUAq		GN				jisjk:70084		
-弁護士	변호사	N110	UQfUAq		GN				jisjk:361097		
+弁護士	변호사	N110	UQfUAqVHn		GN				jisjk:361097		
 弁護士会	변호사회	N110	VBlULw		GN				jisjk:154857		
 弁護士法	변호사법	N110	ULw		BZ				jisjk:360269		
 弁護権論	변호권론	N110			GN				jisjk:161572		
@@ -203483,7 +203483,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 役にた	도움이 &C6@	M424		Pn	GN				jisjk:373399		
 役に立	도움이 &C6@	M424		Pn	GN				jisjk:114599		
 役不足	역부족	I110			GN				jisjk:78193		
-役人	공무원	N110	UAqUAq		GN				jisjk:29220		
+役人	공무원	N110	UAqUAqVHn		GN				jisjk:29220		
 役人根性	관리 근성	N110			GN				jisjk:254067		
 役人町	야쿠닌쵸	N130	QCTVPl		GN				jisjk:335307		
 役付き	책임있는 직책	I110			GN				jisjk:78192		
@@ -203508,7 +203508,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 役印	직인	N110	VSw		GN				jisjk:29221		
 役名	역할의 이름	N110			GN				jisjk:29211		
 役向き	직무상	I110			GN				jisjk:78194		
-役員	임원	N110	UAq		GN				jisjk:29218		
+役員	임원	N110	UAqVHn		GN				jisjk:29218		
 役員会	임원회	N110	VBl		GN				jisjk:155810		
 役員会議	임원회의	I110			GN				jisjk:363508		
 役員会議室	임원회의실	N110	VBl		GN				jisjk:155812		
@@ -203541,7 +203541,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 役立たず	쓸모없는 놈	N110	VHn		GN				jisjk:254061		
 役立て	도움이 &C6@	M437			GN				jisjk:94128		
 役立ててもら	도움이 &C6@	M420			GN				jisjk:148422		
-役者	배우	N110	UAq		GN				jisjk:29222		
+役者	배우	N110	UAqVHn		GN				jisjk:29222		
 役者論語	배우논어	N110	VBkVSw		GN				jisjk:254047		
 役職	직무	N110			GN				jisjk:29225		
 役職名	직함	N110	VMo		GN				jisjk:151871		
@@ -204387,7 +204387,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 従事	종사	N110		Hd	GN				jisjk:33845		
 従位接続詞	종위 접속사	I110			GN				jisjk:83854		
 従価税	종가세	I110	VMo		GN				jisjk:83850		
-従僕	하인	N110	UAq		GN				jisjk:33844		
+従僕	하인	N110	UAqVHn		GN				jisjk:33844		
 従兄	사촌	N110	VQmVHnUQf		GN				jisjk:33851		
 従兄弟	사촌형제	I110	UQfVHnVQm		GN				jisjk:83856		
 従兄弟違い	오촌	N110	VHn		GN				jisjk:228634		
@@ -211104,7 +211104,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 戦場ヶ原	센조가하라	N130	VPl		GN				jisjk:216982		
 戦場ヶ原	센조가하라	N130	VPl		GN				jisjk:216983		
 戦塵	전진	N110			GN				jisjk:32826		
-戦士	전사	N110	UAqVTw		GN				jisjk:32807		
+戦士	전사	N110	UAqVTwVHn		GN				jisjk:32807		
 戦士たち	전사들	N110	VHn		GN				jisjk:198980		
 戦局	전국	N110	UMe		GN				jisjk:32792		
 戦庭	전쟁터	N110	VPlVTw		GN				jisjk:125299		
@@ -216280,7 +216280,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 探り始め	찾기 시작&AV@	M447			GN				jisjk:120847		
 探り足	더듬어 가는 걸음	N110			GN				jisjk:185029		
 探る構え	찾는 자세	I110			GN				jisjk:110369		
-探偵	탐정	N110	UAq		GN				jisjk:36876		
+探偵	탐정	N110	UAqVHn		GN				jisjk:36876		
 探偵小説	탐정 소설	N110			GN				jisjk:153221		
 探問	탐문	N110			GN				jisjk:36872		
 探察	탐색	N110			GN				jisjk:36878		
@@ -216678,7 +216678,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 提燈	제등	N110			GN				jisjk:33390		
 提燈持ち	나팔수	I110	VHn		GN				jisjk:83371		
 提琴	제금	N110			GN				jisjk:33387		
-提督	제독	N110	UAq		GN				jisjk:33389		
+提督	제독	N110	UAqVHn		GN				jisjk:33389		
 提示	제시	N110		Hd	GN				jisjk:33392		
 提示部	제시부	N110	USoQMU		GN				jisjk:244345		
 提興屋	히사게코우야	N130	QCTVPl		GN				jisjk:324155		
@@ -218569,7 +218569,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 教化力	교화력	I110			GN				jisjk:62586		
 教区	교구	N110			GN				jisjk:16594		
 教卓	교탁	N110	VPe		GN				jisjk:173744		
-教員	교원	N110	UAq		GN				jisjk:16617		
+教員	교원	N110	UAqVHn		GN				jisjk:16617		
 教員ら	교원들	N110	VHn		GN				jisjk:173400		
 教員会議	교원회의	I110			GN				jisjk:108615		
 教唆	교사	N110		Hd	GN				jisjk:16608		
@@ -218584,7 +218584,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 教委	교육위원회	N110	VGt		GN				jisjk:16618		
 教子	노리코	N130	QPN		GN				jisjk:97059		
 教学	교육과 학문	N110			GN				jisjk:97072		
-教官	교관	N110	UAq		GN				jisjk:16592		
+教官	교관	N110	UAqVHn		GN				jisjk:16592		
 教宣局	교선국	I110	VPl		GN				jisjk:62569		
 教室	교실	N110	VPl		GN				jisjk:16614		
 教室内	교실내	N110	VBl		GN				jisjk:173617		
@@ -218592,14 +218592,14 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 教尋	교우진	N130	VHn		GN				jisjk:214270		
 教導	교도	N110		Hd	GN				jisjk:16597		
 教導所	교도소	N110	VBlULw		GN				jisjk:173859		
-教師	교사	N110	UAq		GN				jisjk:16609		
+教師	교사	N110	UAqVHn		GN				jisjk:16609		
 教師たち	교사들	N110	VHn		GN				jisjk:173614		
 教師宛	교사 앞	N110	VPl		GN				jisjk:173609		
 教徒	교도	N110	VHn		GN				jisjk:16598		
 教懐	교우카이	N130	VHn		GN				jisjk:214248		
 教戒	교계	N110		Hd	GN				jisjk:173439		
 教戒師	교계사	I110	VHn		GN				jisjk:62566		
-教授	교수	N110	UAq	Hd	GN				jisjk:16611		
+教授	교수	N110	UAqVHn	Hd	GN				jisjk:16611		
 教授ら	교수들	N110	VHn		GN				jisjk:173673		
 教授チーム	교수팀	N110	VGt		GN				jisjk:203350		
 教授細目	교수세목	I110			GN				jisjk:108591		
@@ -219478,7 +219478,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 文守彬	문수빈	N130	QPN		GN				jisjk:208044		
 文宗	문종	N130	QPN		GN				jisjk:205299		
 文宗秀	문종수	N130	QPN		GN				jisjk:208052		
-文官	문관	N110	UAq		GN				jisjk:22212		
+文官	문관	N110	UAqVHn		GN				jisjk:22212		
 文官大礼服	문관대례복	N110	VCp		GN				jisjk:205321		
 文定王后	문정왕후	N130	QPN		GN				jisjk:205300		
 文室	후무로	N130	QCTVPl		GN				jisjk:326960		
@@ -243037,7 +243037,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 校訂	교정	N110		Hd	GN				jisjk:16655		
 校訂本	교정본	I110	VSw		GN				jisjk:62589		
 校訓	교훈	N110	UTs		GN				jisjk:16659		
-校長	교장	N110	UAq		GN				jisjk:16652		
+校長	교장	N110	UAqVHn		GN				jisjk:16652		
 校長ら	교장들	N110	VHn		GN				jisjk:180904		
 校門	교문	N110	VPl		GN				jisjk:16643		
 校閲	교열	N110		Hd	GN				jisjk:16647		
@@ -250529,7 +250529,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 武井武雄	다케이 다케오	N130	VHn		GN				jisjk:217468		
 武井直也	다케이나오야	N110	VHn		GN				jisjk:241270		
 武井釜	타케이가마	N130	QCTVPl		GN				jisjk:306295		
-武人	무인	N110	UAq		GN				jisjk:22058		
+武人	무인	N110	UAqVHn		GN				jisjk:22058		
 武仁夫	후지오	N130	QPN	Wb	GN				jisjk:343784		
 武代	타케다이	N130	QCTVPl		GN				jisjk:306360		
 武住	부쥬우	N130	QCTVPl		GN				jisjk:327221		
@@ -250586,7 +250586,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 武器庫	무기고	N110	VBl		GN				jisjk:154714		
 武器輸送	무기수송	K110		Hd	GN				jisjk:104038		
 武城書院	무성서원	N130	VBl		GN				jisjk:205365		
-武士	무사	N110	UAq		GN				jisjk:22050		
+武士	무사	N110	UAqVHn		GN				jisjk:22050		
 武士	타케시	N130	QCTVPl		GN				jisjk:306335		
 武士	부시	N130	QCTVPl		GN				jisjk:327215		
 武士	모노노후	N130	QCTVPl		GN				jisjk:334766		
@@ -250613,7 +250613,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 武富時敏	다케토미 도키토시	N130	VHn		GN				jisjk:217528		
 武寧王	무령왕	N130	QPN		GN				jisjk:205380		
 武寧王陵	무녕왕릉	N130	VBl		GN				jisjk:205379		
-武将	무장	N110	UAq		GN				jisjk:22060		
+武将	무장	N110	UAqVHn		GN				jisjk:22060		
 武尊山	호타카야마	I110	QCT		GN				jisjk:69074		
 武尾	타케오	N130	QPN		GN				jisjk:99584		
 武尾実	타케오미노루	I130	QPN		GN				jisjk:99586		
@@ -250913,7 +250913,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 歩み板	디딤널	N110	VPe		GN				jisjk:124879		
 歩一歩	조금씩	E311			GN				jisjk:1642		
 歩一歩と	조금씩	E311			GN				jisjk:1643		
-歩兵	보병	N110	UAqVGt		GN				jisjk:23787		
+歩兵	보병	N110	UAqVGtVHn		GN				jisjk:23787		
 歩兵連隊	보병 연대	I110	VGt		GN				jisjk:70268		
 歩古丹	아유미코탄	I110	QCT		GN				jisjk:70264		
 歩合	수수료	N110	VMo		GN				jisjk:23792		
@@ -265753,7 +265753,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 漁家	료케	N130	QCTVPl		GN				jisjk:338494		
 漁屋	어물상	N110	VPl		GN				jisjk:29004		
 漁川	이자리가와	N130			GN				jisjk:104725		
-漁師	어부	N110	UAq		GN				jisjk:29000		
+漁師	어부	N110	UAqVHn		GN				jisjk:29000		
 漁師	료시	N130	QCTVPl		GN				jisjk:338516		
 漁師さん	어부	N110	VHn		GN				jisjk:266648		
 漁師の人	어부	N110	VHn		GN				jisjk:365610		
@@ -271513,7 +271513,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 狙撃	저격	N110		Hd	GN				jisjk:32474		
 狙撃事件	저격사건	N130	UTs		GN				jisjk:204456		
 狙撃兵	저격병	N110	VTwVHn		GN				jisjk:200682		
-狙撃手	저격수	N110	UAqUQf		GN				jisjk:361321		
+狙撃手	저격수	N110	UAqUQfVHn		GN				jisjk:361321		
 狙撃犯	저격범	N110	VHnULw		GN				jisjk:200680		
 狛	코마	N130	QCTVPl		GN				jisjk:293917		
 狛	박	N110	XXX	On	GN				jisjk:340683		
@@ -276955,7 +276955,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 男浪	세찬 파도	N110	VSs		GN				jisjk:165787		
 男湯	남탕	N110	VPlVQm		GN				jisjk:18059		
 男滝	수폭포	N110	VPl		GN				jisjk:165508		
-男爵	남작	N110	UAq		GN				jisjk:18055		
+男爵	남작	N110	UAqVHn		GN				jisjk:18055		
 男爵夫人	남작부인	I110			GN				jisjk:110395		
 男爵薯	남작감자	N110	VPt		GN				jisjk:242409		
 男物	남자용품	N110	VQm		GN				jisjk:18046		
@@ -277617,7 +277617,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 番の州公園	반노스코우엔	I130	QCTVPl		GN				jisjk:321873		
 番の州町	반노스쵸	I130	QCTVPl		GN				jisjk:321874		
 番の州緑町	반노스미도리쵸	I130	QCTVPl		GN				jisjk:321875		
-番人	지키는 사람	N110	UAq		GN				jisjk:23364		
+番人	지키는 사람	N110	UAqVHn		GN				jisjk:23364		
 番付	순위	N110		Ct	GN				jisjk:23360		
 番付	프로그램	N110	USe		GN				jisjk:23361		
 番付け	순서표	I110			GN				jisjk:70024		
@@ -278281,7 +278281,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 痴呆症	치매증	N110	UTi		GN				jisjk:347538		
 痴情	치정	N110			GN				jisjk:36523		
 痴愚神礼讃	우신예찬	N110	VBkVSw		GN				jisjk:242593		
-痴漢	치한	N110	UAqHGu		GN				jisjk:36524		
+痴漢	치한	N110	UAqHGuVHn		GN				jisjk:36524		
 痴話	남녀간의 정담	N110			GN				jisjk:243594		
 痴話げんか	치정싸움	I110			GN				jisjk:110564		
 痴話喧嘩	사랑 싸움	N110		Hd	GN				jisjk:153494		
@@ -280209,7 +280209,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 皇居外苑	고쿄가이엔	N130	VPl		GN				jisjk:214796		
 皇居外苑	코우쿄가이엔	I130	QCTVPl		GN				jisjk:292207		
 皇山町	코우잔쵸	N130	QCTVPl		GN				jisjk:292282		
-皇帝	황제	N110	UAqQMS		GN				jisjk:39754		
+皇帝	황제	N110	UAqQMSVHn		GN				jisjk:39754		
 皇帝ワルツ	황제왈츠	N130	QMU		GN				jisjk:203821		
 皇座山	오자산	I110	QCT		GN				jisjk:89694		
 皇御国	황국	N110	VPl		GN				jisjk:238203		
@@ -280455,7 +280455,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 盗聴騒ぎ	도청 소동	N110			GN				jisjk:151481		
 盗視聴	도시청	N110	VBl		GN				jisjk:203199		
 盗視聴防止の方式	도시청방지방식	N110	UMn		GN				jisjk:203167		
-盗賊	도적	N110	UAqHGu		GN				jisjk:19351		
+盗賊	도적	N110	UAqHGuVHn		GN				jisjk:19351		
 盗賊鴎	도둑갈매기	N110	VAm		GN				jisjk:245503		
 盗跖	도척	N110	VHn		GN				jisjk:245483		
 盗難	도난	N110		Hd	GN				jisjk:19345		
@@ -300789,7 +300789,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 総立ち	총기립	I110			GN				jisjk:86443		
 総管	총관	N110			GN				jisjk:36028		
 総索引	총색인	N110			GN				jisjk:240039		
-総統	총통	N110	UAq		GN				jisjk:36060		
+総統	총통	N110	UAqVHn		GN				jisjk:36060		
 総統選	총통 선거	N110			GN				jisjk:151302		
 総統選挙	총통선거	N110			BZ				jisjk:358990		
 総締け	총계	N110			GN				jisjk:200235		
@@ -302285,7 +302285,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 羊蹄	요우테이	N130	QCTVPl		GN				jisjk:337320		
 羊蹄山	요테이산	I110	QCT		GN				jisjk:77871		
 羊酪	양락	N110	VFd		GN				jisjk:255131		
-羊飼	목동	N110	UAq		GN				jisjk:28901		
+羊飼	목동	N110	UAqVHn		GN				jisjk:28901		
 羊飼い	목동	I110	UAq		GN				jisjk:77870		
 羊馬麟	양마린	N130	QPN		GN				jisjk:208465		
 美	미	N110			GN				jisjk:116178		
@@ -308509,7 +308509,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 艦艇	함정	N110	VTpVTw		GN				jisjk:38534		
 艦載	함재	N110	VTw		GN				jisjk:229877		
 艦載機	함재기	I110			MI				jisjk:88565		
-艦長	함장	N110	UAq		GN				jisjk:38533		
+艦長	함장	N110	UAqVHn		GN				jisjk:38533		
 艦長室	함장실	I110	VPl		GN				jisjk:88564		
 艦隊	함대	N110	VGtVHnVTw		GN				jisjk:38529		
 艦首	함수	N110	VPl		GN				jisjk:38532		
@@ -309973,7 +309973,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 芸が細か	세심하게 배려되어 $FB@	H7N0			GN				jisjk:122713		
 芸予	게이요	N130			GN				jisjk:104499		
 芸事	예능일	N110			GN				jisjk:29537		
-芸人	연예인	N110	UAq		GN				jisjk:29540		
+芸人	연예인	N110	UAqVHn		GN				jisjk:29540		
 芸備線	게이비선	N130	VPl		GN				jisjk:214739		
 芸備線	게이비선	N130	VPl		GN				jisjk:214740		
 芸北	게이호쿠	N130	QCT		GN				jisjk:29536		
@@ -314873,7 +314873,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 薬屋	약방	N110	VBl		GN				jisjk:28836		
 薬屋さん	약방 주인	I110	UAq		GN				jisjk:77845		
 薬屋町	쿠스리야쵸	N130	QCTVPl		GN				jisjk:290547		
-薬師	약사	N110	UAq		GN				jisjk:28831		
+薬師	약사	N110	UAqVHn		GN				jisjk:28831		
 薬師	쿠즈시	N130	QCTVPl		GN				jisjk:290559		
 薬師	야쿠시	N130	QCTVPl		GN				jisjk:335280		
 薬師が丘	야쿠시가오카	I130	QCTVPl		GN				jisjk:335282		
@@ -317674,7 +317674,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 街頭奉仕	가두봉사	I110			GN				jisjk:109093		
 街頭演説	가두연설	I110		Hd	GN				jisjk:109092		
 衛	마모루	N130	QPN	Wb	GN				jisjk:375240		
-衛兵	위병	N110	UAqUAq		GN				jisjk:30601		
+衛兵	위병	N110	UAqUAqVHn		GN				jisjk:30601		
 衛兵勤務	위병근무	I110			GN				jisjk:108922		
 衛士	위사	N110	VTwVHn		GN				jisjk:127545		
 衛戍	위수	N110			GN				jisjk:30604		
@@ -323425,7 +323425,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 親炙	친자	N110		Hd	GN				jisjk:192581		
 親父	아버지	N110	VHn		GN				jisjk:36576		
 親玉	두목	N110	VHn		GN				jisjk:36589		
-親王	황태자	N110	UAqURt		GN				jisjk:36590		
+親王	황태자	N110	UAqURtVHn		GN				jisjk:36590		
 親王塚町	신노우즈카쵸	I130	QCTVPl		GN				jisjk:301990		
 親生元素	친생원소	N110			GN				jisjk:236140		
 親生児	신생아	N110	VHn		GN				jisjk:236142		
@@ -327061,7 +327061,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 講堂	강당	N110	VBl		GN				jisjk:14822		
 講堂町	코우도우쵸	N130	QCTVPl		GN				jisjk:292551		
 講壇	강단	N110	VPl		GN				jisjk:14820		
-講師	강사	N110	UAq		GN				jisjk:14824		
+講師	강사	N110	UAqVHn		GN				jisjk:14824		
 講平	고우헤이	N130	QPN		GN				jisjk:96385		
 講座	강좌	N110			GN				jisjk:14828		
 講式	강의방식	N110			GN				jisjk:96347		
@@ -327320,7 +327320,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 議会政治	의회 정치	N110			GN				jisjk:175018		
 議会選	의회 선거	N110	VBl		GN				jisjk:175019		
 議会選挙	의회 선거	N110			GN				jisjk:372143		
-議員	의원	N110	UQfUAq		GN				jisjk:31098		
+議員	의원	N110	UQfUAqVHn		GN				jisjk:31098		
 議員ら	위원들	N110	VHn		GN				jisjk:175003		
 議員内閣制	의원내각제	N110	ULw		GN				jisjk:203603		
 議員定数変更	의원 정수 변경	N110			BZ				jisjk:355214		
@@ -332263,7 +332263,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 踊り念仏	염불	N110	UCl		GN				jisjk:165765		
 踊り歌	무용가	N110			GN				jisjk:165760		
 踊場	층계참	N110			GN				jisjk:30096		
-踊子	무희	N110	UAq		GN				jisjk:30095		
+踊子	무희	N110	UAqVHn		GN				jisjk:30095		
 踊子	오도리코	N130	QCTVPl		GN				jisjk:280402		
 踊瀬免	오도리제멘	N130	QCTVPl		GN				jisjk:280403		
 踊石町	오도리시쵸	N130	QCTVPl		GN				jisjk:280401		
@@ -332777,7 +332777,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 軍事道路	군사도로	N110	VPl		GN				jisjk:206344		
 軍事都市	군사도시	N110	VPl		GN				jisjk:206343		
 軍事革命	군사혁명	N110	UMe		GN				jisjk:206338		
-軍人	군인	N110	UAqHGu		GN				jisjk:17073		
+軍人	군인	N110	UAqHGuVHn		GN				jisjk:17073		
 軍人ら	군인들	N110	VHn		GN				jisjk:177060		
 軍人皇帝時代	군인황제시대	N110	UMe		GN				jisjk:206334		
 軍令	군령	N110	ULw		GN				jisjk:17046		
@@ -346607,7 +346607,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 門田町	몬데쵸	N130	QCTVPl		GN				jisjk:335078		
 門田町	몬덴쵸	N130	QCTVPl		GN				jisjk:335082		
 門田町	몬뎀마치	N130	QCTVPl		GN				jisjk:335083		
-門番	문지기	N110	UAq		GN				jisjk:22287		
+門番	문지기	N110	UAqVHn		GN				jisjk:22287		
 門真	카도마	N130	QCT	Qq	GN				jisjk:22301		
 門真	몬마	N130	QPN	Wa	GN				jisjk:358892		
 門真市	카도마시	N130	QCTVPl	Qq	GN				jisjk:282678		
@@ -347277,7 +347277,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 間組	하자마쿠미	N130	VGt		GN				jisjk:14573		
 間縄	못줄	N110	VPe		GN				jisjk:178599		
 間繩	못줄	N110	VPe		GN				jisjk:206973		
-間者	간첩	N110	UAqHGu		GN				jisjk:14570		
+間者	간첩	N110	UAqHGuVHn		GN				jisjk:14570		
 間脇	마와키	N130	QCTVPl		GN				jisjk:330047		
 間脳	간뇌	N110	VBp		GN				jisjk:14558		
 間脳下垂体糸	간뇌 하수체계	N110	QHP		GN				jisjk:230173		
@@ -357128,7 +357128,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 首玉	고리	N110	VPe		GN				jisjk:176270		
 首班	수반	N110	UQf		GN				jisjk:27489		
 首皇子	오비토노 미코	N110	VHn		GN				jisjk:212983		
-首相	수상	N110	UAq		GN				jisjk:27491		
+首相	수상	N110	UAqVHn		GN				jisjk:27491		
 首相にもたら	수상에게 가져&AH@	M423			GN				jisjk:122149		
 首相ら	수상들	N110	VHn		GN				jisjk:189909		
 首相側	수상측	N110	VBl		GN				jisjk:189905		
@@ -358335,7 +358335,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 騎乗	승마	N110	VRw	Hd	GN				jisjk:172202		
 騎兵	기병	N110	VHn		GN				jisjk:17897		
 騎兵隊	기병대	I110	VGtVTw		GN				jisjk:63900		
-騎士	기사	N110	UAq		GN				jisjk:17898		
+騎士	기사	N110	UAqVHn		GN				jisjk:17898		
 騎士修道会	기사 수도회	N110	VBl		GN				jisjk:230677		
 騎士道	기사도	I110			GN				jisjk:63901		
 騎士道文学	기사도문학	N110	USuVSw		GN				jisjk:206178		

@@ -2941,10 +2941,10 @@ bool RuleL326([[maybe_unused]] Item* p) {
 }
 
 // local 327
-//     sem[-1] under VHn and src[-1] not ends "屋" and src[-1] not ends "がり" and src[-1] not ends "張り" and src[-1] not ends "坊" and src[-1] != "美人" and ko[-1] not ends "님" and src[-1] not ends "長" and src[-1] != "提督" and src[-1] != "運転手" and src[-1] != "師匠" and src[-1] != "博士" and src[-1] != "教授" and src[-1] != "神父"
+//     sem[-1] under VHn and sem[-1] lacks UAq and src[-1] not ends "屋" and src[-1] not ends "がり" and src[-1] not ends "張り" and src[-1] not ends "坊" and src[-1] != "美人" and ko[-1] not ends "님" and src[-1] not ends "長" and src[-1] != "提督" and src[-1] != "運転手" and src[-1] != "師匠" and src[-1] != "博士" and src[-1] != "教授" and src[-1] != "神父"
 //     pos[-1] is 13* and gram[-1] has Wa|Wb
 bool RuleL327([[maybe_unused]] Item* p) {
-    return (AttrMinusEq(p, -1, "VHn"sv) && SrcNe(p, -1, "R屋"sv) && SrcNe(p, -1, "Rがり"sv) && SrcNe(p, -1, "R張り"sv) && SrcNe(p, -1, "R坊"sv) && SrcNe(p, -1, "美人"sv) && DstNe(p, -1, "R님"sv) && SrcNe(p, -1, "R長"sv) && SrcNe(p, -1, "提督"sv) && SrcNe(p, -1, "運転手"sv) && SrcNe(p, -1, "師匠"sv) && SrcNe(p, -1, "博士"sv) && SrcNe(p, -1, "教授"sv) && SrcNe(p, -1, "神父"sv)) ||
+    return (AttrMinusEq(p, -1, "VHn"sv) && AttrNe(p, -1, "UAq"sv) && SrcNe(p, -1, "R屋"sv) && SrcNe(p, -1, "Rがり"sv) && SrcNe(p, -1, "R張り"sv) && SrcNe(p, -1, "R坊"sv) && SrcNe(p, -1, "美人"sv) && DstNe(p, -1, "R님"sv) && SrcNe(p, -1, "R長"sv) && SrcNe(p, -1, "提督"sv) && SrcNe(p, -1, "運転手"sv) && SrcNe(p, -1, "師匠"sv) && SrcNe(p, -1, "博士"sv) && SrcNe(p, -1, "教授"sv) && SrcNe(p, -1, "神父"sv)) ||
            (PumsaEq(p, -1, "13*"sv) && GramEq(p, -1, "WaWb"sv));
 }
 
@@ -4758,7 +4758,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL324, 0xb64e47ce2a2bc78aull},
     {RuleL325, 0x1fe7bcfb89f2a006ull},
     {RuleL326, 0x96ce39f669f745cbull},
-    {RuleL327, 0x7211015a340782fdull},
+    {RuleL327, 0xee7a59a8c035f158ull},
     {RuleL328, 0xbb20f0b0364af855ull},
     {RuleL329, 0x6e3786f746e0c70aull},
     {RuleL330, 0xa35f874ccabb8cfcull},
