@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+phrase:どうしたんですか	あれ、どうしたんですか？	어라, 무슨 일이세요?	fix	builtin-phrase
+phrase:どうしたんだ	どうしたんだ、顔が真っ赤だぞ。	무슨 일이야, 얼굴이 새빨갛다.	fix	builtin-phrase
+phrase:どうしました	どうしました？　顔色が悪いですよ。	무슨 일이에요? 안색이 안 좋아요.	fix	builtin-phrase
+phrase:どうしたのよ	ちょっと、どうしたのよ？	잠깐, 왜 그래?	fix	builtin-phrase
+phrase:どうしたんだ	どうしたらいいの？	어떻게 하면 좋은거야?	keep	builtin-phrase
