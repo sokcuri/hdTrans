@@ -30514,7 +30514,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 たし	1고 있기도 했고	S570			GN				jisjk:342925		
 たしか	확실%A1@	G8U0			GN				jisjk:673		
 たしか	분명히	G311			GN				jisjk:139953		
-たしかに	분명히	E311			GN				jisjk:674		
+たしかに	확실히	E311			GN				jisjk:674		
 たしかめ	확인&AV@	M447			GN				jisjk:139378		
 たしかめ合	서로 확인&AV@	M410			GN				jisjk:91013		
 たしざん	덧셈	N110			GN				jisjk:153024		
@@ -36152,7 +36152,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なんだ	5어	U500			GN	4471	||1 S+0== "夢中"	어미 なんだ의 본말이 夢中이면 어를 고른다. (미발동: rare-context)	jisjk:364679		
 なんだ	뭐야	P200			GN	4772	||2 G+0== "Hz" D-1== "「"	なんだ를 문장 처음이나 여는따옴표 뒤에서 '뭐야'로 선택한다.	jisjk:373502		
 なんだ	1다	U500			GN	4800	||1 G+0== "Ow"	なんだ는 현재 단어가 오른쪽 경계 Ow이면 종결 어미 ‘-다’를 고른다.	jisjk:373573		
-なんだか	어쩐지	E311			GN				jisjk:958		
+なんだか	왠지	E311			GN				jisjk:958		
 なんだから	(이)니까	E200		Tu	GN				jisjk:268382		
 なんだから	2니까	U500			GN				jisjk:346460		
 なんだかんだ	이러니 저러니	E311			GN				jisjk:959		
@@ -291988,6 +291988,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 突止め	규명&AV@	M447			GN				jisjk:142545		
 突沸	돌비	N110			GN				jisjk:246003		
 突然	갑자기	N110			GN				jisjk:153760		
+突然の	갑작스러운	E0H0			GN				lex:totsuzen-no		
 突然ですが	갑작스럽지만	A9D0			GN				jisjk:266913		
 突然として	갑자기	E311			GN				jisjk:1570		
 突然のことで	갑작스러운 일로	E300			GN				jisjk:371835		

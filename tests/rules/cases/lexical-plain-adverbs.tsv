@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:jisjk:153760	電話が突然鳴った。	전화가 갑자기 울렸다.	fix	lookup
+dict:lex:totsuzen-no	突然の雨に濡れた。	갑작스러운 비에 젖었다.	fix	lookup
+dict:jisjk:674	たしかに、それは正しい。	확실히, 그것은 올바르다.	fix	lookup
+dict:jisjk:958	なんだか眠くなってきた。	왠지 졸려졌다.	fix	lookup
+dict:jisjk:66268	突然変異が起きた。	돌연변이가 일어났다.	keep	lookup
