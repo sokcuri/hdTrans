@@ -55,6 +55,8 @@ constexpr ConstraintRule kRules[] = {
      ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
     {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
+    {"me-yatsu-detached", ConstraintWord::Source, "め", ConstraintContext::Detached, ConstraintReject::Target,
+     "띄어 쓰였거나 문장 부호 뒤에 홀로 선 め는 녀석이 아님 (名前: め 녀석 → 메)", "녀석"},
     {"wa-won-without-number", ConstraintWord::Source, "わ", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 わ는 원이 아님 (だったわ 이었던 원, おわっ 원)", "원"},
     {"wa-after-predicate", ConstraintWord::Source, "わ", ConstraintContext::AfterPredicate, ConstraintReject::Target,
@@ -203,11 +205,12 @@ bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
 
 // Whether the context of rule holds for the word source of the candidates list: after is
 // the text after it, before the character before it in its token, previous the character
-// before it past spaces and token ends, preceding the text right before it (its token's
-// head, else the token before), lead the token before and the head.
+// before it past spaces and token ends, adjacent the character right before it (in its
+// token or the token before), preceding the text right before it (its token's head, else
+// the token before), lead the token before and the head.
 bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>& list, std::string_view source,
                  std::string_view after, std::string_view before, std::string_view previous,
-                 std::string_view preceding, std::string_view lead) {
+                 std::string_view adjacent, std::string_view preceding, std::string_view lead) {
     const bool exclamation = previous == "！" || previous == "？" || previous == "!" || previous == "?";
     switch (rule.context) {
     case ConstraintContext::Honorific:
@@ -247,6 +250,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;
     }
+    case ConstraintContext::Detached:
+        return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||
+               kQuantityBreaks.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
     case ConstraintContext::LineOpening:
     case ConstraintContext::Elsewhere:
         return ((previous.empty() || StartsWithAny(previous, kOpeningBrackets)) &&
@@ -321,6 +327,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     std::string following;
     for (int j = current + 1; j < TokenCount() && following.size() < 32; j++) following += Tok(j).text;
     const std::string_view preceding = !head.empty() || current <= 0 ? head : Tok(current - 1).text;
+    const std::string_view adjacent = !head.empty() ? before : LastChar(current > 0 ? preceding : settings.before);
     std::string lead(current > 0 ? Tok(current - 1).text : std::string_view());
     lead += head;
     std::vector<dict::Candidate>& list = found.list;
@@ -334,7 +341,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 !ContextFits(rule, list, source,
                              query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                           : std::string_view(following),
-                             before, previous, preceding, lead)) {
+                             before, previous, adjacent, preceding, lead)) {
                 i++;
                 continue;
             }

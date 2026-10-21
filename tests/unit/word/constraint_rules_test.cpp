@@ -72,6 +72,7 @@ const dict::Snapshot* Dictionary() {
          "し\t&HT@\tM41<\t\t\tGN\t77\n"
          "め\t째\tQ110\t\t\tGN\t78\n"
          "め\t\tQ110\t\t\tGN\t79\n"
+         "め\t녀석\tQ110\t\tHa\tGN\t44\n"
          "わ\t원\tQ110\t\t\tGN\t80\n"
          "わ\t와\tQ110\t\t\tGN\t81\n"
          "わ\t\tQ110\t\t\tGN\t82\n"
@@ -134,7 +135,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{21});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{22});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -323,15 +324,25 @@ HD_TEST(constraint_sou_itta_predicate) {
 // わ after a predicate is the sentence-final particle, not the interjection 와 (だったわ).
 HD_TEST(constraint_counter_without_number) {
     CheckCases({
-        {"化け物め", "め", "め", ""},
-        {"ごめ", "め", "め", ""},
-        {"三回め", "め", "め", "째 "},
-        {"5人め", "め", "め", "째 "},
-        {"何度め", "め", "め", "째 "},
+        {"化け物め", "め", "め", "녀석"},
+        {"ごめ", "め", "め", "녀석"},
+        {"三回め", "め", "め", "째  녀석"},
+        {"5人め", "め", "め", "째  녀석"},
+        {"何度め", "め", "め", "째  녀석"},
         {"おわ", "わ", "わ", "와 "},
         {"五わ", "わ", "わ", "원 와 "},
         {"誤算だったわ", "わ", "わ", ""},
         {"よろしいですわ", "わ", "わ", ""},
+    });
+}
+
+// め standing apart (after a space, punctuation or nothing) is not 녀석.
+HD_TEST(constraint_me_yatsu_detached) {
+    CheckCases({
+        {"ケンタめ", "め", "め", "녀석"},
+        {"名前: め", "め", "め", ""},
+        {"、め", "め", "め", ""},
+        {"め", "め", "め", ""},
     });
 }
 
