@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:w:25805	昨日、駅前で先輩に会った。	어제, 역 앞에서 선배를 만났다.	fix	local
+dict:w:25805	駅前に集まった。	역 앞에 모였다.	keep	local
+dict:jisjk:114687	授業で習った歌を歌う。	수업에서 배운 노래를 부른다.	fix	local
+dict:jisjk:114687	講義で質問した。	강의에서 질문했다.	fix	local
+dict:jisjk:114687	図書館で本を読んだ。	도서관에서 책을 읽었다.	keep	local
+dict:jisjk:114687	ペンで名前を書いた。	펜으로 이름을 썼다.	keep	local
+dict:jisjk:114687	バスで学校へ行く。	버스로 학교에 간다.	keep	local

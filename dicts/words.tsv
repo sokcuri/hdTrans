@@ -25823,7 +25823,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 駄目人間	한심한 인간	N110			GN				llm			w:25802
 駄菓子屋	과자 가게	N110	VBl		GN				llm		だがしや	w:25803
 駄駄	응석	N110			GN						だだ	w:25804
-駅前	역 앞	N110			GN				xxx llm	1		w:25805
+駅前	역 앞	N110	VPl		GN				xxx llm	1		w:25805
 駆けつけ	달려&AH@	M427			GN				xxx llm	1		w:25806
 駆けつけ三杯	벌주 세 잔	N110	VFd		GN				llm		かけつけさんばい	w:25807
 駆け付け三杯	벌주 세 잔	N110	VFd		GN				llm		かけつけさんばい	w:25808
@@ -26715,3 +26715,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 撮りおろ	새로 촬영&AV@	M443									とりおろ	commerce:photography:v2
 録り下ろし音源	신규 녹음 음원	N110									とりおろしおんげん	commerce:recording-audio:n1
 録りおろし音源	신규 녹음 음원	N110									とりおろしおんげん	commerce:recording-audio:n2
+気のせいか	기분 탓인지	E300			GN							word:kinoseika
+小テスト	쪽지 시험	N110			GN							word:shoutesuto
+選り取りみどり	골라잡기	N110			GN							word:yoridori:1
+選り取り見取り	골라잡기	N110			GN							word:yoridori:2
+よりどりみどり	골라잡기	N110			GN							word:yoridori:3
+本当	정말	N110		J3	GN							word:hontou:question
+本当	정말	N110		J4	GN							word:hontou:exclamation
+以来	만	N110			GN	5101	||1 &&2 S-1== "いつ" D-1= "얼마"	いつ 뒤의 以来를 만으로 고르고 いつ를 얼마로 바꾼다.				word:irai:itsu
+一行	한 줄	N110			GN	5103	||2 S-1== "あと" S-1== "もう"	あと·もう 뒤의 一行을 한 줄로 고른다.				word:ichigyou:line
