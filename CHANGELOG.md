@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/sokcuri/hdTrans/compare/v0.3.1...v0.3.2) (2026-10-21)
+
+
+### Bug Fixes
+
+* **release:** improve Japanese word recognition and Korean grammar ([eba3f26](https://github.com/sokcuri/hdTrans/commit/eba3f2624816ec47317d0930abb01d15a0149e7d))
+* **translation:** correct lexical senses, colloquial forms and Korean inflection ([#19](https://github.com/sokcuri/hdTrans/issues/19)) ([2af8df2](https://github.com/sokcuri/hdTrans/commit/2af8df239d15b300f832c33e44acfccb44d2ad71))
+
 ## [0.3.1](https://github.com/sokcuri/hdTrans/compare/v0.3.0...v0.3.1) (2026-10-20)
 
 
