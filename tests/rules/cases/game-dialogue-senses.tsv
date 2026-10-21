@@ -43,3 +43,9 @@ dict:jisjk:340957	地面に伏せた	땅에 엎드렸다	fix	local
 dict:jisjk:340957	机に伏せて寝ていた	책상에 엎드려 자고 있었다	fix	local
 dict:jisjk:340957	カードを伏せた	카드를 덮었다	keep	local
 dict:jisjk:340957	顔を伏せる	얼굴을 숙인다	keep	local
+dict:follow:1	僕に続け！	나를 따라라!	fix	local
+dict:follow:1	皆さん、私に続いてください。	여러분, 나를 따라와 주세요.	fix	local
+dict:follow:1	皆、私に続いて！	모두, 나를 따라!	fix	local
+dict:follow:1	千歳、千代田に続いて建造された。	지토세, 치요다에 이어 건조되었다.	keep	local
+dict:follow:1	後半に続くのです！	후반에 계속됩니다!	keep	local
+dict:thanks-zonji:1	司令、ありがとう存じます。	사령, 감사합니다.	fix	defaults
