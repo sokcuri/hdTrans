@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+compose:mitai-space	お前みたいな奴には負けない。	너 같은 놈에게는 지지 않는다.	fix	compose
+compose:mitai-space	夢みたいだ。	꿈 같다.	fix	compose
+compose:mitai-space	子供みたいに笑う。	아이같이 웃는다.	keep	compose

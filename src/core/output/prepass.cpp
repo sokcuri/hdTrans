@@ -438,6 +438,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
           std::find(std::begin(kPlaceNouns), std::end(kPlaceNouns), item.surface) != std::end(kPlaceNouns)))) {
         t.insert(0, " ");
     }
+    // みたい read as the adjective 같다 is written apart from the word before it; the
+    // particle 같이 stays attached (너 같은 놈, 아이같이).
+    if (item.surface == "みたい" && previous >= 0 && !EntryText(items[previous]).empty() &&
+        t.starts_with("같") && !t.starts_with("같이")) {
+        t.insert(0, " ");
+    }
     using Result = std::pair<std::string, bool>;
     if (nextIndex < 0 || t.empty() || item.selectionFlag == 1 ||
         TokenDistance(tokens, item.tokenIndex, items[nextIndex].tokenIndex) >= 2) {
