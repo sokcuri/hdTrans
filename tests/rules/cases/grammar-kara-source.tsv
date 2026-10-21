@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:gram:kara:person	姉から手紙が届いた。	언니에게서 편지가 도착했다.	fix	local
+dict:gram:kara:person	佐藤さんから話を聞いた。	사토씨에게서 이야기를 들었다.	fix	local
+dict:gram:kara:person	先輩から道具を借りた。	선배에게서 도구를 빌렸다.	fix	local
+dict:gram:kara:person	姉からの手紙を読んだ。	언니로부터의 편지를 읽었다.	keep	local
+dict:gram:kara:person	北海道から来た。	홋카이도에서 왔다.	keep	local
+dict:gram:kara:thing	鞄から財布を出した。	가방에서 지갑을 꺼냈다.	fix	local
+dict:gram:kara:thing	瓶から水を注いだ。	병에서 물을 따랐다.	fix	local
+dict:gram:kara:thing	台所のほうから音がした。	부엌 쪽에서 소리가 났다.	fix	local
+dict:gram:kara:thing	危険から身を守る。	위험으로부터 몸을 지킨다.	keep	local
+dict:jisjk:3993	ここからが本番だ。	여기부터가 실전이다.	fix	local
+dict:jisjk:3993	準備運動から始めよう。	준비 운동부터 시작하자.	fix	local
+dict:jisjk:3993	子供から大人まで集まった。	아이부터 어른까지 모였다.	fix	local
+dict:jisjk:3993	明日から休みだ。	내일부터 휴일이다.	keep	local

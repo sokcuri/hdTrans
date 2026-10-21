@@ -1,15 +1,15 @@
 rule	input	expected	kind	layer
-dict:wake-temoratta	私は友人からパンを分けてもらった。	나는 친구로부터 빵을 나누어 받았다.	fix	lookup
+dict:wake-temoratta	私は友人からパンを分けてもらった。	나는 친구에게서 빵을 나누어 받았다.	fix	lookup
 dict:wake-temoratta	私は友人にパンを分けてもらった。	나는 친구에게 빵을 나누어 받았다.	fix	lookup
-dict:wake-temoratta	友人からパンを分けてもらったらしい。	친구로부터 빵을 나누어 받은 것 같다.	fix	lookup
-dict:wake-temoratta	友人からパンを分けてもらったので安心した。	친구로부터 빵을 나누어 받았으므로 안심했다.	fix	lookup
-dict:wake-temoratta	友人からパンを分けてもらった人。	친구로부터 빵을 나누어 받은 사람.	fix	lookup
-dict:wake-temoratta	友人からパンを分けてもらったら、帰る。	친구로부터 빵을 나누어 받으면, 돌아간다.	fix	lookup
-dict:wake-temoratta	友人からパンを分けてもらったりする。	친구로부터 빵을 나누어 받거나 한다.	fix	lookup
-dict:wake-temoratte	友人からパンを分けてもらっている。	친구로부터 빵을 나누어 받고 있다.	fix	lookup
-dict:wake-temoratte	友人からパンを分けてもらっていた。	친구로부터 빵을 나누어 받고 있었다.	fix	lookup
-dict:wake-temoratte	友人からパンを分けてもらってください。	친구로부터 빵을 나누어 받아 주세요.	fix	lookup
-dict:wake-temoratte	友人からパンを分けてもらってもいいですか。	친구로부터 빵을 나누어 받아도 괜찮습니까.	fix	lookup
+dict:wake-temoratta	友人からパンを分けてもらったらしい。	친구에게서 빵을 나누어 받은 것 같다.	fix	lookup
+dict:wake-temoratta	友人からパンを分けてもらったので安心した。	친구에게서 빵을 나누어 받았으므로 안심했다.	fix	lookup
+dict:wake-temoratta	友人からパンを分けてもらった人。	친구에게서 빵을 나누어 받은 사람.	fix	lookup
+dict:wake-temoratta	友人からパンを分けてもらったら、帰る。	친구에게서 빵을 나누어 받으면, 돌아간다.	fix	lookup
+dict:wake-temoratta	友人からパンを分けてもらったりする。	친구에게서 빵을 나누어 받거나 한다.	fix	lookup
+dict:wake-temoratte	友人からパンを分けてもらっている。	친구에게서 빵을 나누어 받고 있다.	fix	lookup
+dict:wake-temoratte	友人からパンを分けてもらっていた。	친구에게서 빵을 나누어 받고 있었다.	fix	lookup
+dict:wake-temoratte	友人からパンを分けてもらってください。	친구에게서 빵을 나누어 받아 주세요.	fix	lookup
+dict:wake-temoratte	友人からパンを分けてもらってもいいですか。	친구에게서 빵을 나누어 받아도 괜찮습니까.	fix	lookup
 dict:wake-request	パンを分けてもらえますか。	빵을 나누어 줄 수 있습니까.	keep	lookup
 dict:wake-request	パンを分けてもらえませんか。	빵을 나누어주실 수 있겠습니까.	keep	lookup
 dict:wake-request	私にパンを分けてもらえますか。	나에게 빵을 나누어 줄 수 있습니까.	keep	lookup
@@ -24,9 +24,9 @@ dict:real-giving	友人がパンを分けてくれた。	친구가 빵을 나누
 dict:real-giving	友人にパンを分けてあげた。	친구에게 빵을 나누어 주었다.	keep	lookup
 dict:real-giving	先生が料理を教えてくれた。	선생님이 요리를 가르쳐 주었다.	keep	lookup
 dict:real-giving	友人に料理を教えてあげた。	친구에게 요리를 가르쳐 주었다.	keep	lookup
-dict:standalone-morau	友人から本をもらった。	친구로부터 책을 받았다.	keep	lookup
-dict:standalone-morau	友人から本をもらえる。	친구로부터 책을 받을 수 있다.	keep	lookup
-dict:standalone-morau	友人から本をもらえない。	친구로부터 책을 받을 수 없다.	keep	lookup
+dict:standalone-morau	友人から本をもらった。	친구에게서 책을 받았다.	keep	lookup
+dict:standalone-morau	友人から本をもらえる。	친구에게서 책을 받을 수 있다.	keep	lookup
+dict:standalone-morau	友人から本をもらえない。	친구에게서 책을 받을 수 없다.	keep	lookup
 dict:standalone-morau	本をもらえますか。	책을 받을 수 있습니까.	keep	lookup
 dict:plain-wakeru	パンを分ける。	빵을 나눈다.	keep	lookup
 dict:plain-wakeru	二つに分ける。	2개로 나눈다.	keep	lookup
@@ -34,15 +34,15 @@ dict:plain-oshieru	料理を教える。	요리를 가르친다.	keep	lookup
 dict:plain-oshieru	先生の教えを守る。	선생님의 가르침을 지킨다.	keep	lookup
 dict:competing-benefactive	友人に手伝ってもらった。	친구에게 도움을 받았다.	keep	lookup
 dict:competing-desire	自分で料理を教えたい。	스스로 요리를 가르치고 싶다.	keep	lookup
-dict:standalone-negative	友人から本をもらわなかった。	친구로부터 책을 받지 않았다.	keep	lookup
-dict:standalone-negative	友人から本をもらえません。	친구로부터 책을 받을 수 없습니다.	keep	lookup
+dict:standalone-negative	友人から本をもらわなかった。	친구에게서 책을 받지 않았다.	keep	lookup
+dict:standalone-negative	友人から本をもらえません。	친구에게서 책을 받을 수 없습니다.	keep	lookup
 dict:real-giving-negative	友人にパンを分けてあげなかった。	친구에게 빵을 나누어 주지 않았다.	keep	lookup
 dict:plain-negative	料理を教えない。	요리를 가르치지 않는다.	keep	lookup
-dict:ju-temoratta	私は友人から銃を分けてもらった。	나는 친구로부터 총을 나누어 받았다.	fix	lookup
+dict:ju-temoratta	私は友人から銃を分けてもらった。	나는 친구에게서 총을 나누어 받았다.	fix	lookup
 dict:ju-temoratta	私は友人に銃を分けてもらった。	나는 친구에게 총을 나누어 받았다.	fix	lookup
-dict:ju-temoratta	友人から銃を分けてもらったらしい。	친구로부터 총을 나누어 받은 것 같다.	fix	lookup
-dict:ju-temoratte	友人から銃を分けてもらっている。	친구로부터 총을 나누어 받고 있다.	fix	lookup
+dict:ju-temoratta	友人から銃を分けてもらったらしい。	친구에게서 총을 나누어 받은 것 같다.	fix	lookup
+dict:ju-temoratte	友人から銃を分けてもらっている。	친구에게서 총을 나누어 받고 있다.	fix	lookup
 dict:ju-request	銃を分けてもらえますか。	총을 나누어 줄 수 있습니까.	keep	lookup
 dict:ju-request	銃を分けてもらえませんか。	총을 나누어주실 수 있겠습니까.	keep	lookup
-dict:nested-benefactive	友人からパンを分けてもらってくれた。	친구로부터 빵을 나누어 받아 주었다.	fix	lookup
+dict:nested-benefactive	友人からパンを分けてもらってくれた。	친구에게서 빵을 나누어 받아 주었다.	fix	lookup
 dict:plain-division	班を二つに分ける。	반을 2개로 나눈다.	keep	lookup

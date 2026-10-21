@@ -847,6 +847,8 @@ bool RuleL105([[maybe_unused]] Item* p) {
 //     src[-1] == "小さい頃" and pos[-1] is 3**
 //     (src[-1] ends "頃" or src[-1] ends "ころ" or src[-1] ends "ごろ")
 //     src[-1] == "っ" and pos[-2] is 1** and sem[-2] has UMe
+//     pos[-1] is 1** and ((src[+1] starts "始" or src[+1] starts "はじ") and pos[+1] is 4** or (src[+2] starts "始" or src[+2] starts "はじ") and pos[+2] is 4**|1** or src[+1] == "が" and pos[+1] is 2**)
+//     pos[-1] is 1** and sem[-1] under VHn and (src[+2] == "まで" or src[+3] == "まで")
 bool RuleL106([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "1**3**"sv) && AttrEq(p, -1, "UMe"sv)) ||
            ((SrcEq(p, -1, "歳"sv) ||
@@ -855,7 +857,14 @@ bool RuleL106([[maybe_unused]] Item* p) {
            (SrcEq(p, -1, "R頃"sv) ||
            SrcEq(p, -1, "Rころ"sv) ||
            SrcEq(p, -1, "Rごろ"sv)) ||
-           (SrcEq(p, -1, "っ"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UMe"sv));
+           (SrcEq(p, -1, "っ"sv) && PumsaEq(p, -2, "1**"sv) && AttrEq(p, -2, "UMe"sv)) ||
+           (PumsaEq(p, -1, "1**"sv) && (((SrcEq(p, 1, "L始"sv) ||
+           SrcEq(p, 1, "Lはじ"sv)) && PumsaEq(p, 1, "4**"sv)) ||
+           ((SrcEq(p, 2, "L始"sv) ||
+           SrcEq(p, 2, "Lはじ"sv)) && PumsaEq(p, 2, "4**1**"sv)) ||
+           (SrcEq(p, 1, "が"sv) && PumsaEq(p, 1, "2**"sv)))) ||
+           (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && (SrcEq(p, 2, "まで"sv) ||
+           SrcEq(p, 3, "まで"sv)));
 }
 
 // local 107
@@ -4528,7 +4537,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL103, 0xfcc4470635ee5f07ull},
     {RuleL104, 0x28d244ebae38bc42ull},
     {RuleL105, 0xd5c6c48a088228b6ull},
-    {RuleL106, 0xc73941e62e38e6c0ull},
+    {RuleL106, 0xb7eef3874002154bull},
     {RuleL107, 0xd2853acdc53a271aull},
     {RuleL108, 0xc3e03b1a6a87d717ull},
     {RuleL109, 0xb59da349669dcd59ull},
