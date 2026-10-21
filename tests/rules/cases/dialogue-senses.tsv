@@ -45,3 +45,6 @@ dict:jisjk:374181	天気が悪いな。	!rule:dict:jisjk:374181	keep	local
 dict:jisjk:374181	悪いのは私だ。	!rule:dict:jisjk:374181	keep	local
 dict:jisjk:374181	悪い人じゃない。	!rule:dict:jisjk:374181	keep	local
 dict:jisjk:374182	わるい、忘れてた。	rule:dict:jisjk:374182=미안$AB@	fix	local
+dict:jisjk:153760	彼は突然立ち上がった。	그는 갑자기 일어섰다.	fix	lookup
+phrase:突然の	突然の雨に降られた。	갑작스러운 비를 맞았다.	fix	lookup
+phrase:突然	ずいぶん突然だね。	꽤 갑작스럽네.	fix	lookup
