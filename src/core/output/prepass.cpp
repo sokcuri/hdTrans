@@ -496,6 +496,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
+            // A verbal noun (Hd, or a katakana word) joins the する after it (マスターする 마스터하다).
+            constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
+            const bool verbalNoun =
+                Contains(tags, "Hd") || tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana;
+            if (verbalNoun && nextEntry == "&AV@" &&
+                std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
+                return Result(std::move(t), false);
+            }
             if (nextFirst == ")") return Result(std::move(t), false);
             if (Contains(tags, "Wa") || Contains(tags, "Wb")) {
                 const bool space = Contains(tags, "Wb") && nextKind != '1';
