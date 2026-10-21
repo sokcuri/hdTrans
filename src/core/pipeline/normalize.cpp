@@ -369,7 +369,7 @@ bool StartJaa(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "サン", "ヨン", "ゴー",
+constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン", "ゴー",
                                                "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ"};
 constexpr std::string_view kMilitaryKana[] = {"まる", "ひと", "ふた", "さん", "よん",
                                               "ごー", "ろく", "なな", "はち", "きゅう"};
@@ -380,8 +380,8 @@ struct MilitaryDigit {
     char digit;
 };
 constexpr MilitaryDigit kMilitaryDigits[] = {
-    {"キュウ", '9'}, {"キュー", '9'}, {"マル", '0'}, {"ヒト", '1'}, {"フタ", '2'}, {"サン", '3'},
-    {"ヨン", '4'},   {"ゴー", '5'},   {"ロク", '6'}, {"ナナ", '7'}, {"ハチ", '8'}, {"ゴ", '5'},
+    {"キュウ", '9'}, {"キュ", '9'}, {"マル", '0'}, {"ヒト", '1'}, {"フタ", '2'}, {"ニ", '2'}, {"サン", '3'},
+    {"ヨン", '4'},   {"ゴ", '5'},   {"ロク", '6'}, {"ナナ", '7'}, {"ハチ", '8'},
 };
 
 template <size_t N>
@@ -392,7 +392,7 @@ bool AnyWord(std::string_view s, size_t& pos, const std::string_view (&words)[N]
     return false;
 }
 
-// W([、・ ]?W){3} with W a katakana digit word, or four hiragana digit words. A word
+// W([、・ ー]?W){3} with W a katakana digit word, or four hiragana digit words. A word
 // never begins with a separator or ー, so the first word that fits is the only one
 // that lets the rest match.
 bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
@@ -401,7 +401,7 @@ bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
         int n = 1;
         for (; n < 4; n++) {
             size_t q = p;
-            OneOf(s, q, U"、・ ");
+            OneOf(s, q, U"、・ ー");  // ヒトマルーマルマル draws a word out
             if (!AnyWord(s, q, kMilitaryWords)) break;
             p = q;
         }
@@ -522,7 +522,7 @@ std::string RewriteMilitaryTime(std::string_view text) {
         for (size_t i = 0; i < m.group[0].size();) {
             const text::Rune r = At(m.group[0], i);
             i += r.size;
-            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ') continue;
+            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ' || r.cp == U'ー') continue;
             text::AppendRune(words, r.cp >= U'ぁ' && r.cp <= U'ゖ' ? r.cp + 0x60 : r.cp);
         }
         out.append(text.substr(at, m.begin - at));

@@ -21,3 +21,6 @@ names:name-line	愛	애	keep	normalize
 names:name-line	クマ	곰	keep	normalize
 names:name-line	糸	실	keep	normalize
 dict:jisjk:101466	新編「第二航空戦隊」出撃せよ！	신편 「제2항공전대」출격하라!	fix	lookup
+normalize:military-time	ヒトニーマルマル。	1200.	fix	normalize
+normalize:military-time	ヒトマルーマルマル！	1000!	fix	normalize
+normalize:military-time	フタマルマルマル。	2000.	keep	normalize
