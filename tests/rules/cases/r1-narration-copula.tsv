@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:narration-copula	薔薇の盛りの、美しい初夏のことであった。	장미의 한창때의, 아름다운 초여름이었다.	fix	lookup
