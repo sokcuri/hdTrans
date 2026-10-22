@@ -42,6 +42,7 @@ void Flush(Flusher& f) {
         TerminalBeforeQuote(f);
         HodoDegree(f);
         QuestionCopula(f);
+        WonderingDarou(f);
         GenitiveBetweenNames(f);
         LongVowelAfterKatakana(f);
         ReturnTo(f);

@@ -997,6 +997,94 @@ void QuestionCopula(Flusher& f) {
     }
 }
 
+namespace {
+
+// Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
+constexpr std::string_view kWonderWords[] = {
+    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どっち", "どちら", "どれ", "どんな", "どの",
+    "一体", "いったい", "いくつ", "いくら",
+};
+
+// Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+constexpr std::string_view kWonderNot[] = {
+    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "なにか", "なにも", "なんか", "なんて", "なんだか",
+    "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも", "どこか", "どこも", "どこでも",
+    "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも", "どうせ", "どうしても", "どうぞ",
+    "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも", "いくらか", "いくらでも",
+};
+
+bool WonderWord(std::string_view s) {
+    // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
+    if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
+    for (const std::string_view w : kWonderWords) {
+        if (!s.starts_with(w)) continue;
+        for (const std::string_view n : kWonderNot) {
+            if (s.starts_with(n)) return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+// Whether a question word stands before it in its clause, with no concessive も, ても or でも
+// and no embedded か question between.
+bool WonderBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        const std::string_view d = p->DirectSurface();
+        if (s.empty() || AnyRuneIn(s, "。！？!?「」『』") || s.ends_with("も") || s == "か" || d.ends_with("も") ||
+            d.ends_with("か")) {
+            return false;
+        }
+        if (WonderWord(s)) return true;
+    }
+    return false;
+}
+
+// Whether only closing marks, an ellipsis, a comma or a question mark follow the item.
+bool WonderEnd(const Worker& w, const Item* it) {
+    std::string_view rest = From(it->text, it->start + it->length);
+    if (rest.empty() && it->tokenIndex + 1 < w.TokenCount()) {
+        if (w.Span(it->tokenIndex + 1) != 0) return false;
+        rest = w.Tok(it->tokenIndex + 1).text;
+    }
+    return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "？?。．.」』）)…‥、～ー");
+}
+
+// The question form of a conjecture (3 것이다 -> 3까, 일 것이다 -> 일까), or "" for other targets.
+std::string_view WonderForm(std::string_view dst) {
+    constexpr std::pair<std::string_view, std::string_view> kForms[] = {
+        {"3 것이다", "3까"},       {"1겠지", "3까"},     {"5을 것이다", "5을까"}, {"1겠지요", "3까요"},
+        {"5겠지요", "5을까요"},   {"일 것이다", "일까"}, {"이겠지", "일까"},     {"(이)겠지", "일까"},
+        {"(이)겠지요", "일까요"}, {"3 거예요", "3까요"},
+    };
+    for (const auto& [from, to] : kForms) {
+        if (dst == from) return to;
+    }
+    return {};
+}
+
+bool WonderSurface(std::string_view s) { return s.ends_with("だろう") || s.ends_with("だろ") || s.ends_with("でしょう"); }
+
+}  // namespace
+
+void WonderingDarou(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const bool ending = it->DirectIndex() >= 0 && WonderSurface(it->DirectSurface());
+        if ((!ending && !WonderSurface(it->group->surface)) || !WonderEnd(f.w, it) || !WonderBefore(it)) continue;
+        if (ending) {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e == nullptr) continue;
+            const std::string_view to = WonderForm(e->dst);
+            if (!to.empty()) it->AssignDirectSlot(it->DirectIndex(), to);
+            continue;
+        }
+        if (it->group->At(it->selected) == nullptr) continue;
+        const std::string_view to = WonderForm(it->EntryText(it->selected));
+        if (!to.empty()) it->AssignEntrySurface(it->selected, to);
+    }
+}
+
 void GenitiveBetweenNames(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;

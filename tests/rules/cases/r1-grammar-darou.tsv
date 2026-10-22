@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+rewrite:wondering-darou	さあ、どっちだろう。	자, 어느 쪽일까.	fix	rewrites
+rewrite:wondering-darou	　どういう意味だろう……。	 무슨 뜻일까…….	fix	rewrites
+rewrite:wondering-darou	　未来と並んで歩くのは何年ぶりだろう。	 미래와 함께 걷는 것은 몇 년만일까.	fix	rewrites
+rewrite:wondering-darou	　……どう受け取るべきだろう。	 ……어떻게 받아야 할까.	fix	rewrites
+rewrite:wondering-darou	ビュッフェエリアはどうなっているだろう。	뷔페 에리어는 어떻게 되어 있을까.	fix	rewrites
+rewrite:wondering-darou	なら、これまでの態度は何だったのだろう。	그렇다면, 지금까지의 태도는 무엇이었던 걸까.	fix	rewrites
+rewrite:wondering-darou	何があってもついていくだろう	무엇이 있어도 따라갈 것이다	keep	rewrites
+rewrite:wondering-darou	ま、悪いことじゃないだろう。	뭐, 나쁜 일이 아닐 것이다.	keep	rewrites

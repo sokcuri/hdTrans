@@ -85,6 +85,8 @@ void NodaTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
 void HodoDegree(Flusher& f);
 void QuestionCopula(Flusher& f);
+// A sentence-final だろう after a question word asks: 何だろう 뭘까, どっちだろう 어느 쪽일까.
+void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
 void ReturnTo(Flusher& f);

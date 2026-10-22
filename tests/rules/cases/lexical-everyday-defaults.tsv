@@ -16,7 +16,7 @@ dict:jisjk:107992	ただの気のせいだ。	그냥 기분 탓이다.	fix	defau
 dict:word:shoutesuto	明日は小テストがある。	내일은 쪽지 시험이 있다.	fix	lookup
 dict:word:yoridori:3	ケーキはよりどりみどりだ。	케이크는 골라잡기다.	fix	lookup
 dict:names.132103	駅前にクレープ屋ができた。	역 앞에 크레페 가게가 생겼다.	fix	lookup
-dict:word:irai:itsu	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일 것이다.	fix	local
+dict:word:irai:itsu	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일까.	fix	local
 dict:word:irai:itsu	それ以来、彼は来ない。	그 이후로, 그는 오지 않는다.	keep	local
 dict:word:ichigyou:line	あと一行だけ読ませて。	더 한 줄만 읽게 해.	fix	local
 dict:word:ichigyou:line	一行は村に着いた。	일행은 마을에 도착했다.	keep	local
