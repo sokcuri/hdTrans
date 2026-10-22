@@ -514,3 +514,14 @@ HD_TEST(pipeline_dialect_forms) {
     ctx.dialectForms = true;
     HD_CHECK_EQ(Normalize("金がねえ", ctx), "金がない");
 }
+
+HD_TEST(pipeline_normalize_doubled_wo) {
+    const Case cases[] = {
+        {"避ける素振りをを見せない"sv, "避ける素振りを見せない"sv},
+        {"好きな食べ物をを互いに"sv, "好きな食べ物を互いに"sv},
+        {"本ををを読む"sv, "本を読む"sv},
+        {"「をを」"sv, "「をを」"sv},
+        {"本を読む"sv, "本を読む"sv},
+    };
+    Check(CollapseDoubledWo, cases);
+}

@@ -10,7 +10,8 @@
 //   6. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
 //   7. casual contractions (RewriteCasual);
 //   8. the military time in digits (RewriteMilitaryTime);
-//   9. a word cut from the copula by a pause joined (JoinPausedCopula).
+//   9. a word cut from the copula by a pause joined (JoinPausedCopula);
+//  10. a doubled を after a word written once (CollapseDoubledWo).
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
@@ -28,7 +29,7 @@ std::string Normalize(std::string_view line, const LineContext& ctx) {
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
     text = JoinNasai(NormalizeForms(text));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
-    return JoinPausedCopula(RewriteMilitaryTime(text));
+    return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
 
 namespace internal {
@@ -550,6 +551,22 @@ std::string RewriteMilitaryTime(std::string_view text) {
         at = m.end;
     }
     out.append(text.substr(at));
+    return out;
+}
+
+std::string CollapseDoubledWo(std::string_view text) {
+    std::string out;
+    out.reserve(text.size());
+    char32_t before = 0, last = 0;  // the last two characters written
+    for (size_t i = 0; i < text.size();) {
+        const text::Rune r = text::DecodeRune(text.substr(i));
+        if (r.cp != U'を' || last != U'を' || before == U'を' || !IsJapaneseRune(before)) {
+            out.append(text.substr(i, r.size));
+            before = last;
+            last = r.cp;
+        }
+        i += r.size;
+    }
     return out;
 }
 

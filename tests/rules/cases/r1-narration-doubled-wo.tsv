@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+normalize:doubled-wo	避ける素振りをを見せない	피하는 기색을 보이지 않는다	fix	normalize
+normalize:doubled-wo	好きな食べ物をを互いに	좋아하는 음식을 서로	fix	normalize
