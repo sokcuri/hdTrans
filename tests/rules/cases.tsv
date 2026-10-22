@@ -515,8 +515,8 @@ L3293	健康のために毎晩運動する。	건강을 위해 매일 밤 운동
 L3302	私が代わりにやるよ。	내가 대신에 할게.	current	local-ending
 L3302	荷物を持ってあげるよ。	짐을 들어 줄게.	current	local-ending
 L3302	彼は料理するよ。	그는 요리해.	current	local-ending
-L3315	私にとって家族は一番大切です。	저에게 있어 가족은 제일 중요합니다.	current	local
-L3315	子どもにとって遊びは学びの場だ。	아이에게 있어 놀이는 배움의 장소다.	current	local
+L3315	私にとって家族は一番大切です。	저에게 가족은 제일 중요합니다.	current	local
+L3315	子どもにとって遊びは学びの場だ。	아이에게 놀이는 배움의 장소다.	current	local
 L3318	私は走っていないのに汗が出る。	나는 달리지 않았는데 땀이 난다.	current	local-ending
 L3318	走っていないのに汗が出る。	달리지 않았는데 땀이 난다.	current	local-ending
 L3319	忙しいってことが言い訳にはならない。	바쁘다는 일이 변명은 되지 않는다.	current	local-ending
