@@ -59,3 +59,6 @@ dict:jisjk:7576	ナナイさんが微かに微笑んだように見えた	나나
 dict:jisjk:96056	ふたりの声に慌てて顔をあげると	rule:dict:jisjk:96056=황급&AW@	fix	local
 dict:jisjk:96056	慌てて手を伸ばすが	황급히 손을 뻗지만	fix	local
 dict:jisjk:96056	全然慌ててるじゃないっ	!rule:dict:jisjk:96056	keep	local
+dict:jisjk:5128	弾力もすごいよね……なんか	탄력도 대단하지……무슨	fix	local
+dict:jisjk:5128	たしかにレナはすごいけど	확실히 레나는 대단한데	fix	local
+dict:jisjk:5128	すごい見てる	rule:dict:jisjk:5128=대단$KA@	fix	local
