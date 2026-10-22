@@ -4,7 +4,8 @@
 // confirmed for the text (LookupContext::confirmed; not a place sense, since
 // confirmed keys are persons), when the key is not a word of the base dictionary
 // (StrongName), when a katakana person name stands before an honorific
-// (AddressedName), or, for person senses, when a familiar honorific follows it
+// (AddressedName), or, for person senses, when a familiar honorific follows it, or さん, 様
+// or 先輩 after a key that starts with no お and ends in no 屋
 // (PersonCue). A plain-dictionary entry with the same key removes it. A place sense
 // with the flag replace respells the key's base senses instead (Load).
 #include <algorithm>
@@ -85,12 +86,19 @@ constexpr std::array<std::string_view, 12> kSentenceTails = {"だよ", "だね",
                                                               "ますか", "ました", "ません", "でした", "だもん", "ないもん"};
 // Familiar honorifics after a key that make it a person's name (梨花ちゃん, 圭一くん).
 constexpr std::array<std::string_view, 5> kPersonCues = {"ちゃん", "くん", "君", "たん", "っち"};
+// Honorifics that also follow shops and titles (八百屋さん, お姫様): a cue only after a key
+// that is no such word.
+constexpr std::array<std::string_view, 4> kPoliteCues = {"さん", "様", "さま", "先輩"};
 // Particles that join the words of a phrase key.
 constexpr std::string_view kPhraseParticles = "のとがをにへや";
 constexpr std::string_view kNumerals = "〇一二三四五六七八九十百千万億兆0123456789０１２３４５６７８９";
 constexpr std::string_view kCounters = "本人個回日年月時分秒歳枚匹頭台冊杯度番号階件通名羽隻機発門両着足軒";
 
-bool PersonCue(std::string_view after) { return HasPrefixIn(after, kPersonCues); }
+bool PersonCue(std::string_view key, std::string_view after) {
+    if (HasPrefixIn(after, kPersonCues)) return true;
+    static constexpr std::array<std::string_view, 3> kPrefixes = {"お", "ご", "御"};
+    return HasPrefixIn(after, kPoliteCues) && !HasPrefixIn(key, kPrefixes) && !key.ends_with("屋");
+}
 
 // Whether key is a number, alone or with a counter (二, 十七, 四本, 0時).
 bool NumeralKey(std::string_view key) {
@@ -369,7 +377,7 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
         if (!StrongName(text, m->n) && !AddressedName(text, m->n)) {
             person = true;
             if (!ctx.confirmed || ctx.confirmed->find(key) == ctx.confirmed->end()) {
-                cued = PersonCue(text.substr(m->n)) && CuedKey(key);
+                cued = PersonCue(key, text.substr(m->n)) && CuedKey(key);
                 if (!cued) continue;
             }
         }
