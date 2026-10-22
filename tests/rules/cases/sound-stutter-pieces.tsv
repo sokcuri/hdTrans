@@ -4,7 +4,7 @@ sound:stutter-pieces	「ご、ごめ、ごめんなさい」	「미, 미안, 미
 sound:stutter-pieces	「あ、あり、ありがとう」	「고, 고마, 고마워」	fix	sound
 sound:stutter-pieces	「ぃ―――いやぁぁぁッ!?」	「시―――싫어어엇!?」	fix	sound
 sound:stutter-pieces	「わ、わ、わたし……」	「나, 나, 나……」	keep	sound
-sound:stutter-pieces	「あ――本当に？」	「아――정말로?」	keep	sound
+sound:stutter-pieces	「あ――本当に？」	「아――정말?」	keep	sound
 sound:stutter-pieces	「い、いや、大丈夫です」	「아, 아니, 괜찮습니다」	keep	sound
 sound:stutter-pieces	「は、はい、仰る通りです！」	「네, 네, 말씀하신 대로입니다!」	keep	sound
 sound:stutter-pieces	「お、おのれ、おのれぇーっ！」	「다, 당신, 당신-!」	keep	sound

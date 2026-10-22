@@ -20256,6 +20256,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 さらし首	효수	N110	ULw		GN				jisjk:185500		
 さらなる	새로운	E0H0			GN				jisjk:149890		
 さらなる	그러한	N110			GN				jisjk:185506		
+さらに	더욱	E301			GN				sarani:default		
 さらに	한층 더	E301			GN	14	||1 &&2 P+1== "7**" P+2== "1**"	い형용사와 명사가 이어지는 さらに를 '한층 더'로 고른다.	jisjk:447		
 さらに	게다가	E311			GN	979	||3 &&2 P+1== "1**" G+1== "NdNj" &&2 P-1== "4**" P+1== "3**7**8**" &&3 S-1== "、" P-2== "4**" P+1== "3**7**8**"	さらに는 뒤에 숫자가 오거나 앞 동사와 뒤의 부사·형용사를 연결하는 문맥이면 '게다가'를 고른다.	jisjk:114929		
 さらに	또한	E300			GN	4532	||1 &&3 P+1== "1**" D+2== "," P+3== "1**"	명사와 쉼표와 명사가 차례로 뒤따르는 さらに를 또한으로 고른다.	jisjk:365496		
@@ -30638,7 +30639,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ただならぬ	보통이 아닌	E0H0			GN				jisjk:123536		
 ただに	단지	E311			GN				jisjk:678		
 ただに	무료가	E300			GN	4865	||1 &&2 S+1== "な" P+1== "4**"	ただに 뒤에 な 동사가 오면 무료가를 고른다. (미발동: rare-word)	jisjk:373946		
-ただの	단순한	C0D1			GN				jisjk:4581		
+ただの	그냥	C0D1			GN				jisjk:4581		
 ただのぶ	타다노부	N130	QPN	Wb	GN				jisjk:257626		
 ただのり	편승	N110			GN				jisjk:151338		
 ただの従業員	보통 종업원	N110	VHnVMo		GN				jisjk:151336		
@@ -36249,7 +36250,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なんですよ	(이에)예요	P200			GN				jisjk:341286		
 なんですよね	1네요	U500			GN				jisjk:258476		
 なんですよね	이예요	P200		Tu	GN				jisjk:264563		
-なんでも	뭐든지	E311			GN				jisjk:962		
+なんでも	뭐든	E311			GN				jisjk:962		
 なんでもあ	무엇이든지 &HN@	M428			GN				jisjk:144838		
 なんでもありの	무엇이든지 있는	E0H0			GN				jisjk:150030		
 なんでもかんでも	뭐든지	E300			GN				jisjk:341930		
@@ -123055,7 +123056,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 何であろうか	무엇일까	N110			GN				jisjk:151575		
 何です	무엇입니다	E300			GN				jisjk:342586		
 何ですか	무엇입니까	E300			GN				jisjk:342585		
-何でも	뭐든지	N300			GN				jisjk:114872		
+何でも	뭐든	N300			GN				jisjk:114872		
 何でもあ	무엇이든지 &HN@	M428			GN				jisjk:144837		
 何でもありの	무엇이든지 있는	E0H0			GN				jisjk:150029		
 何でもい	뭐든지 $DE@	E7U0		Pe	GN				jisjk:342581		
@@ -207526,6 +207527,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 思わし	생각$AF@	H7U0			GN	264	||1 &&2 S-2== "状態" D+0= "$DE@"	思わし의 두 단어 앞이 状態이면 번역을 좋다로 바꾼다. (미발동: rare-word)	jisjk:5631		
 思わし	바람직$AB@	H7N0	QHP		GN				jisjk:120049		
 思わしき	추측되는	E0H0			GN				jisjk:150350		
+思わず	나도 모르게	E311			GN				omowazu:default		
 思わず	무심코	E311			GN	319	||1 A+1== "UTs"	思わず는 다음 단어가 발화 의미 코드 UTs를 지니면 무심코로 고른다.	jisjk:6375		
 思わず	엉겁결에	E311			GN				jisjk:266449		
 思わずに	생각지도 않게	E311			GN				jisjk:1679		
@@ -233396,7 +233398,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 本式	본식	N110			GN				jisjk:24018		
 本当	사실	N110			GN				jisjk:23975		
 本当ですか	정말입니까	A9D0			GN				jisjk:263955		
-本当に	정말로	E311			GN				jisjk:1646		
+本当に	정말	E311			GN				jisjk:1646		
 本当の	진정한	N0D1			GN				jisjk:4692		
 本当のこと	사실	N110			GN				jisjk:375265		
 本当のところ	정말로	E300			GN				jisjk:149510		

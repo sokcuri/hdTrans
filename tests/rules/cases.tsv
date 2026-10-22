@@ -251,7 +251,7 @@ L1895	「私も一緒に行きたいの」	「나도 함께 가고 싶은 거야
 L1906	このカレーは辛くない。	이 카레는 맵지 않다.	current	local-ending
 L1906	今日はそんなに寒くない。	오늘은 그렇게 춥지 않다.	current	local-ending
 L1914	彼の話は少し長かった。	그의 이야기는 조금 길었다.	current	local-ending
-L1914	「今日は本当に寒かった」	「오늘은 정말로 추웠다」	current	local-ending
+L1914	「今日は本当に寒かった」	「오늘은 정말 추웠다」	current	local-ending
 L1922	先生達は今会議中です。	선생님들은 지금 회의중입니다.	current	local
 L1922	学生達は静かに試験を受けた。	학생들은 조용하게 시험을 보았다.	current	local
 L1925	私は甘い物が好きです。	저는 단 것을 좋아합니다.	current	local
@@ -311,11 +311,11 @@ L2125	明日は会うことが出来ますか。	아케비는 만날 수가 있�
 L2128	それって本物じゃねえ？	그거 진짜가 아니야?	current	local
 L2128	これ、あなたの鞄じゃないか？	이것, 당신의 가방이 아닌가?	current	local
 L2131	え、え、もう終わったの？	네, 네, 벌써 끝났어?	current	local
-L2131	あの、え、これ本当に私の？	저, 네, 이것 정말로 나의?	current	local
+L2131	あの、え、これ本当に私の？	저, 네, 이것 정말 나의?	current	local
 L2141	ねえ、ところで明日は暇ですか。	있잖아, 그런데 내일은 한가합니까.	current	local
 L2155	それは彼の役目なのである。	그것은 그의 역할인 것이다.	current	local
 L2157	「足、まだ痛いの？」	「다리, 아직 아픈 거야?」	current	local-ending
-L2157	「これ、本当においしいの？」	「이거, 정말로 맛있는 거야?」	current	local-ending
+L2157	「これ、本当においしいの？」	「이거, 정말 맛있는 거야?」	current	local-ending
 L2163	今夜は暑くて眠れないよ。	오늘 밤은 더워서 잘 수 없어.	current	local-ending
 L2163	辛くてとても食べられない。	괴롭고 도저히 먹을 수 없다.	current	local-ending
 L2167	誰と話してるの？	누구와 이야기해?	current	local-ending
@@ -664,7 +664,7 @@ L4421	人生ってそんなものさ。	인생은 그런 거야.	current	local
 L4421	それが男というものさ。	그것이 남자라는 거야.	current	local
 L4433	電話とかで話す。	전화등에서 이야기한다.	current	local
 L4470	ここに座ってはだめなの？	여기에 앉아서는 안 돼?	current	local-ending
-L4470	本当にそれで大丈夫なの？	정말로 그래서 괜찮아?	current	local-ending
+L4470	本当にそれで大丈夫なの？	정말 그래서 괜찮아?	current	local-ending
 L4470	だめなの？	안 돼?	current	local-ending
 L4475	何もしてくれんかった。	아무것도 해 주지 않았다.	current	local
 L4480	私は掃除をさせられた。	나는 청소를 하도록 강요받았다.	current	local
@@ -685,7 +685,7 @@ L4664	もう帰らなければと思います。	이제 돌아가야 한다고 �
 L4741	今度友達と旅行に行きます。	이번에 친구와 여행하러 갑니다.	current	local
 L4741	今度家に遊びに来てください。	이번에 집에 놀러 와 주세요.	current	local
 L4772	「なんだ、あれは」	「뭐야, 저건」	current	local
-L4772	「なんだ、ただの猫か」	「뭐야, 단순한 고양이인가」	current	local
+L4772	「なんだ、ただの猫か」	「뭐야, 그냥 고양이인가」	current	local
 L4778	彼の喜びぶりを見た。	그의 기쁨 모습을 보았다.	fix	local
 L4781	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local
 L4781	勝とうという気持ちが強い。	이기려는 기분이 강하다.	current	local

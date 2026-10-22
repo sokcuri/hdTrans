@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:speech-quoted	「それは本当に違う」	「그건 정말로 달라」	fix	compose
+compose:speech-quoted	「それは本当に違う」	「그건 정말 달라」	fix	compose
 compose:speech-quoted	「明日、海に行く」	「내일, 바다에 갈 거야」	fix	compose
 compose:speech-quoted	「冷蔵庫にプリンがある」	「냉장고에 푸딩이 있어」	fix	compose
 compose:speech-quoted	「今日は朝から雨だ」	「오늘은 아침부터 비야」	fix	compose

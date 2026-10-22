@@ -6,13 +6,13 @@ dict:jisjk:263870	「それって、どういう意味？」	「그거, 무슨 �
 dict:word:hontou:question	「本当？」	「정말?」	fix	defaults
 dict:word:hontou:question	「本当！」	「정말!」	fix	defaults
 dict:word:hontou:question	「本当のことを言え」	「사실을 말해라」	keep	defaults
-dict:word:hontou:question	本当に大丈夫だ。	정말로 괜찮다.	keep	defaults
+dict:word:hontou:question	本当に大丈夫だ。	정말 괜찮다.	keep	defaults
 dict:jisjk:341354	「試合はどうだった？」	「시합은 어땠어?」	fix	defaults
 dict:jisjk:137276	楽しい日々は過ぎ去っちまった。	즐거운 날들은 지나가 버렸다.	fix	defaults
 dict:jisjk:137276	過ぎ去った日々を思う。	지나간 날들을 생각한다.	fix	defaults
 dict:jisjk:362355	それは悪そのものだ。	그것은 악 그 자체다.	fix	local
 dict:jisjk:107992	気のせいか、声が聞こえた。	기분 탓인지, 목소리가 들렸다.	fix	lookup
-dict:jisjk:107992	ただの気のせいだ。	단순한 기분 탓이다.	fix	defaults
+dict:jisjk:107992	ただの気のせいだ。	그냥 기분 탓이다.	fix	defaults
 dict:word:shoutesuto	明日は小テストがある。	내일은 쪽지 시험이 있다.	fix	lookup
 dict:word:yoridori:3	ケーキはよりどりみどりだ。	케이크는 골라잡기다.	fix	lookup
 dict:names.132103	駅前にクレープ屋ができた。	역 앞에 크레페 가게가 생겼다.	fix	lookup
