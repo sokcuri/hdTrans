@@ -22,3 +22,6 @@ dict:jisjk:5143	「御園、その質問はずるいだろ」	「미소노, 그 
 dict:jisjk:349562	「まぁ……そうだろうね？」	「뭐……그렇겠지?」	fix	lookup
 dict:jisjk:349562	「まぁ……一応」	「뭐……일단」	fix	lookup
 dict:lex:maamaa:da	まぁまぁだ	그저 그렇다	fix	lookup
+dict:w:26726	私の絵は大したものじゃないんだ	내 그림은 별것 아니다	fix	lookup
+dict:w:26723	大したことじゃない	별일 아니다	fix	lookup
+dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대단한 자신이 아닌가」	keep	lookup
