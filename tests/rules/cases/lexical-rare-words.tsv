@@ -105,3 +105,4 @@ sense:いたい	一緒にいかがですか。	함께 어떻습니까.	keep	sens
 sense:いたい	お腹がいたい。	배가 아프다.	keep	senses
 dict:rare-words	朝から頭がいたい。	아침부터 머리가 아프다.	fix	lookup
 dict:rare-words	彷徨える騎士に会った。	떠도는 기사를 만났다.	fix	lookup
+dict:rare-words	武器は剣と鉈。	무기는 검과 손도끼.	fix	lookup
