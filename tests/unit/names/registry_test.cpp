@@ -42,7 +42,9 @@ const dict::Snapshot* Dictionary() {
          "周\t아마네\tN130\tQPN\tWb\tGN\t13\n"
          "樹\t이츠키\tN130\tQPN\tWb\tGN\t14\n"
          "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"
-         "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"},
+         "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"
+         "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t23\n"
+         "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"},
     });
     return loaded.snapshot.get();
 }
@@ -135,6 +137,13 @@ HD_TEST(names_labels) {
         names::Registry box = Scan(snap, Repeat("のぞみ\n「……え？」", 3));
         HD_CHECK(box.Names() == (std::vector<std::string>{"のぞみ"}));
         HD_CHECK_EQ(box.Render("のぞみ"), std::string("노조미"));
+    }
+    // A hiragana person of the name layer that no other dictionary reads is a name before an
+    // honorific, also after a particle; a particle after a kanji starts no name (体がびくん).
+    {
+        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n").Names() == (std::vector<std::string>{"つぐみ"}));
+        HD_CHECK(Scan(snap, "妹のつぐみちゃん。\n").Names() == (std::vector<std::string>{"つぐみ"}));
+        HD_CHECK(Scan(snap, Repeat("体がびくんと跳ねる。", 3)).Names().empty());
     }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());

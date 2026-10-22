@@ -115,7 +115,7 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 }
 
 void Registry::Forget(const Evidence& evidence) {
-    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_};
+    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_, &kanaHon_};
     for (std::size_t i = 0; i < evidence.counts.size(); i++) {
         for (const std::string& key : evidence.counts[i]) {
             auto it = counts[i]->find(key);
@@ -199,6 +199,7 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             count(prefixes_, label, 1);
         }
     }
+    for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t, 8);
     // A line that is a name alone and is followed by a quote names the speaker of the
     // quote, as a game's name box does.
     const std::string_view body = TrimSpace(line);
@@ -318,6 +319,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
+        n.person = true;
+    }
+    for (const auto& [t, c] : kanaHon_) {
+        Name& n = all[t];
+        n.score += static_cast<double>(std::min(c, kHonorificCap));
         n.person = true;
     }
     for (const auto& [t, c] : gloss_) {
@@ -461,7 +467,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
     for (const auto& [t, n] : all) {
         double need = kThreshold;
         if (RuneCount(t) == 1 && AllRunes(t, IsKanji) && !n.label) need = kSingleThreshold;
-        if (AllRunes(t, IsHiragana) && !n.label) continue;
+        if (AllRunes(t, IsHiragana) && !n.label && kanaHon_.count(t) == 0) continue;
         if (n.score >= need) scores_[t] = n;
     }
     scoresValid_ = true;

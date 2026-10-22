@@ -640,6 +640,47 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     return "";
 }
 
+// The hiragana names before an honorific in line (not っち or たん, which end words: こっち): the hiragana run before it, or, after a
+// kanji or katakana, the run less the one-kana particle that starts it (妹のさよりちゃん),
+// of three or four kana, that the name layer reads as a person and no dictionary as a
+// person or animal noun (うさぎさん), that starts with no お or ご and that joins the
+// honorific into no dictionary word (みなさん, たくさん).
+std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
+    std::vector<std::string> out;
+    for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
+        static constexpr std::string_view kKanaHonorifics[] = {"さん", "ちゃん", "くん", "君", "様", "さま", "先輩", "先生"};
+        std::string_view h;
+        for (const std::string_view x : kKanaHonorifics) {
+            if (line.substr(pos).starts_with(x) && x.size() > h.size()) h = x;
+        }
+        if (h.empty() || pos == 0) continue;
+        std::size_t start = pos;
+        while (start > 0) {
+            const text::Rune r = RuneBefore(line, start);
+            if (!IsHiragana(r.cp) && r.cp != U'ー') break;
+            start -= r.size;
+        }
+        std::string_view run = line.substr(start, pos - start);
+        const bool afterWord = start > 0 && (IsKanji(RuneBefore(line, start).cp) || IsKatakana(RuneBefore(line, start).cp));
+        for (int k = 0; k < 2 && !run.empty(); k++) {
+            const std::size_t n = RuneCount(run);
+            const char32_t first = FirstRune(run).cp;
+            const bool particle = IsParticleRune(first);
+            if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && first != U'お' && first != U'ご' &&
+                AllRunes(run, IsHiragana) && !RoleLike(run)) {
+                const DictFlags f = Flags(run);
+                if ((f.layerGiven || f.layerSurname) && !f.role && Flags(std::string(run) + std::string(h)).records == 0) {
+                    out.emplace_back(run);
+                    break;
+                }
+            }
+            if (!particle) break;
+            run.remove_prefix(FirstRune(run).size);
+        }
+    }
+    return out;
+}
+
 bool Registry::Addressed(std::string_view line, std::string_view t) {
     for (const std::string_view h : kHonorificList) {
         if (line.find(std::string(t) + std::string(h)) != std::string_view::npos) return true;

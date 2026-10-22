@@ -69,7 +69,7 @@ public:
     // Reads the evidence of one line.
     struct Evidence {
         uint64_t id = 0;
-        std::array<std::vector<std::string>, 8> counts;
+        std::array<std::vector<std::string>, 9> counts;
         std::vector<std::array<std::string, 3>> joined;
         std::vector<std::string> readings, actors;
     };
@@ -108,6 +108,7 @@ private:
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
+    std::vector<std::string> KanaHonorificNames(std::string_view line);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
 
@@ -146,6 +147,7 @@ private:
     std::string nameLine_;                              // the last line when it is a name alone
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
+    std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby
     std::map<std::string, std::string> reading_;        // first gloss or ruby reading
     std::map<std::string, int> runs_;                   // kanji runs
