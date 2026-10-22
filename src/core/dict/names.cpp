@@ -179,13 +179,16 @@ namespace internal {
 
 bool PlaceSense(const SemCodes& sem) { return sem.Contains("QCT") || sem.Contains("QNN"); }
 
-NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base) {
+NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base, const CodeTable& codes) {
     NameKeyCounts n;
     for (std::size_t i = 0; i < count; i++) {
         Row& r = rows[i];
+        const Codes* c = codes.At(r.code);
+        const bool kanaPerson = c != nullptr && c->sem.HasPrefix("QPN") && RuneCount(r.key) >= 2 &&
+                                !AnyRune(r.key, [](char32_t rune) { return !IsHiragana(rune); });
         if (HasCommaOrPeriod(r.key)) {
             n.punct++;
-        } else if (InflectedKey(r.key, base)) {
+        } else if (!kanaPerson && InflectedKey(r.key, base)) {
             n.inflected++;
         } else if (Syllables(r.target) > 2 * static_cast<int>(RuneCount(r.key)) + 4) {
             n.longKorean++;

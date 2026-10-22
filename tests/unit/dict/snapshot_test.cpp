@@ -87,6 +87,27 @@ HD_TEST(SnapshotRowsWithoutRuleBodiesAreReported) {
     HD_CHECK(carried.errors.empty());
 }
 
+// A hiragana person of the name layer whose key reads as a verb form stays stored, but
+// takes part in a lookup only where the key is confirmed.
+HD_TEST(SnapshotKanaPersonKeptForConfirmedLookups) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\tid\n";
+    const LoadResult loaded = Load({
+        MakeFile("base.tsv", header + "つぐ\t잇&AA@\tM442\t\t\tGN\t1\n"),
+        MakeFile("names.tsv", "#! layer=names\n" + header +
+                                  "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t2\n"
+                                  "つぐみ\t작품\tN130\tQWK\t\tGN\t3\n"),
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const Snapshot& snap = *loaded.snapshot;
+    HD_CHECK_EQ(Targets(snap.NameRecords("つぐみ")), std::string("츠구미"));
+    const LookupContext none;
+    HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, none)).find("츠구미") == std::string::npos);
+    KeySet confirmed{"つぐみ"};
+    LookupContext context;
+    context.confirmed = &confirmed;
+    HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, context)).find("츠구미") != std::string::npos);
+}
+
 HD_TEST(SnapshotFolderLayers) {
     const LoadResult r = LoadFoldersTsv({Folder(), Folder() + "/over"});
     HD_REQUIRE(r.snapshot != nullptr);
