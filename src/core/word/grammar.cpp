@@ -315,6 +315,15 @@ void SubjectBeforeGa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* p = it->prev;
         if (p == nullptr || it->selected < 0 || p->selected < 0) continue;
+        // The subject form 내, 제, 네 that a rule chose for が goes back to 나, 저, 너 where the
+        // が reads as an object (私が好き 내를 → 나를 좋아해).
+        if (it->group->surface == "が" && output::Lemma(it->EntryText(it->selected), f.families) == "(을)를" &&
+            !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
+            const std::string_view own = p->EntryText(p->selected);
+            const std::string_view plain = own == "내" ? "나" : own == "제" ? "저" : own == "네" ? "너" : "";
+            if (!plain.empty()) p->AssignEntrySurface(p->selected, std::string(plain));
+            continue;
+        }
         // 俺じゃない (이)가 아니다: 내가 아니다.
         if (it->EntryText(it->selected).starts_with("(이)가 ") && !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
             const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));

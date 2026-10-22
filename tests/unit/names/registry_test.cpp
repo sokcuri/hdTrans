@@ -29,7 +29,12 @@ const dict::Snapshot* Dictionary() {
          "圭一\t케이이치\tN130\tQPN\tWb\tGN\t9\n"
          "ソード\t소드\tN110\t\t\tGN\t10\n"
          "ワールド\t월드\tN110\t\t\tGN\t11\n"
-         "ハル\t헐\tN110\t\t\tGN\t15\n"},
+         "ハル\t헐\tN110\t\t\tGN\t15\n"
+         "提督\t제독\tN110\t\t\tGN\t17\n"
+         "あなた\t당신\tN120\t\t\tGN\t18\n"
+         "私\t나\tN120\t\t\tGN\t19\n"
+         "わたくし\t저\tN120\t\t\tGN\t20\n"
+         "三日\t3일\tN110\t\t\tGN\t21\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -120,6 +125,30 @@ HD_TEST(names_labels) {
     // A joint label names both; Xの母 counts once for X.
     names::Registry r = Scan(snap, Repeat("梨花＆沙都子「おはよう」", 3) + "OutputLine(\"圭一の母\", NULL, \"어머니\", NULL, 0);\n圭一さん");
     HD_CHECK(r.Names() == (std::vector<std::string>{"圭一", "梨花", "沙都子"}));
+    // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
+    HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
+    // A gloss that is a word of its own reads the word, no name (提督(あなた), 私(わたくし));
+    // one that is no word names (三日(みか)).
+    {
+        std::string got;
+        for (const std::string& n : Scan(snap, Repeat("提督(あなた)、何いってんの！", 3) + Repeat("私(わたくし)、行くわ。", 3)).Names()) got += n + " ";
+        HD_CHECK_EQ(got, std::string());
+    }
+    const std::vector<std::string> mika = Scan(snap, Repeat("三日(みか)が来た。", 3)).Names();
+    HD_CHECK(std::find(mika.begin(), mika.end(), "三日") != mika.end());
+    // A given name split from a full name that is a common word does not stand for the
+    // person elsewhere (前原光: 光 stays the word).
+    const std::vector<std::string> hikaru = Scan(snap, Repeat("前原光は来た。", 3)).Names();
+    HD_CHECK(std::find(hikaru.begin(), hikaru.end(), "光") == hikaru.end());
+    // A surname of a full name that is a common word does not stand for the person
+    // elsewhere (梨花, a word in the fixture: 梨花圭一 keeps 梨花 the word).
+    const std::vector<std::string> rika = Scan(snap, Repeat("圭一さん、おはよう。", 3) + Repeat("梨花圭一が来た。", 3)).Names();
+    HD_CHECK(std::find(rika.begin(), rika.end(), "梨花") == rika.end());
+    // A bracket that the line goes on after is a title, not a speaker's quote.
+    HD_CHECK(Scan(snap, Repeat("梨花「第二部隊」、出撃せよ！", 3)).Names().empty());
+    // A numeral is no surname before a name (二美咲).
+    const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
+    HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
 }
 
 HD_TEST(names_honorifics) {

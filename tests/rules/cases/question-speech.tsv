@@ -2,13 +2,13 @@ rule	input	expected	kind	layer
 compose:question-plain	「おい、大丈夫か？」	「어이, 괜찮아?」	fix	compose
 compose:question-plain	「この部屋、暑くないか？」	「이 방, 덥지 않아?」	fix	compose
 compose:question-plain	「好きな人はいるか？」	「좋아하는 사람은 있어?」	fix	compose
-compose:question-plain	「これは、暗号か？」	「이것은, 암호야?」	fix	compose
+compose:question-plain	「これは、暗号か？」	「이건, 암호야?」	fix	compose
 compose:question-plain	「本気なのか？」	「진심이야?」	fix	compose
 compose:question-plain	「一緒に行かないか？」	「함께 가지 않을래?」	fix	compose
 compose:question-plain	「元気だったか？」	「건강했어?」	fix	compose
 compose:question-plain	「どうしたいんだ？」	「어떻게 하고 싶어?」	fix	compose
 compose:question-plain	「どういう意味だ……？」	「어떤 의미야……?」	fix	compose
-compose:question-plain	「それ、私が抜けるってこと？」	「그것, 내가 빠진다는 거야?」	fix	compose
+compose:question-plain	「それ、私が抜けるってこと？」	「그거, 내가 빠진다는 거야?」	fix	compose
 compose:question-plain	「見てるってこと？」	「보고 있다는 거야?」	fix	compose
 compose:question-plain	「行くか？」	「갈까?」	keep	compose
 compose:question-plain	「明日は晴れるかな？」	「내일은 갤까?」	keep	compose
@@ -17,13 +17,13 @@ compose:question-plain	「だって、俺はお前と結婚するつもりなん
 compose:question-plain	「行きますか？」	「갑니까?」	keep	compose
 compose:question-plain	「大丈夫でしょうか？」	「괜찮을까요?」	keep	compose
 compose:question-plain	「お主、まだ戦えるか？」	「그대, 아직 싸울 수 있을까?」	keep	compose
-compose:question-conjecture	「何か言いたいことがあったんだろう？」	「뭔가 말하고 싶은 것이 있었지?」	fix	compose
+compose:question-conjecture	「何か言いたいことがあったんだろう？」	「뭔가 말하고 싶은 게 있었지?」	fix	compose
 compose:question-conjecture	「お前らも、人のことは言えないだろう？」	「너희들도, 사람은 말할 수 없지?」	fix	compose
 compose:question-conjecture	「だろう？」	「그렇지?」	fix	compose
 compose:question-conjecture	「冗談だろう？」	「농담이지?」	fix	compose
 compose:question-conjecture	「いつまでこうなんだろう？」	「언제까지 이러할까?」	fix	compose
-compose:question-conjecture	どうしてこんなことになってしまったのだろう？	어째서 이렇게 되어 버렸을까?	fix	compose
+compose:question-conjecture	どうしてこんなことになってしまったのだろう？	왜 이렇게 되어 버렸을까?	fix	compose
 compose:question-conjecture	「余の申したことを覚えておるであろう？」	「여가 말씀드린 것을 기억하고 있겠지?」	fix	compose
 compose:question-conjecture	「気のせいだろうか？」	「기분 탓일까?」	keep	compose
-compose:question-recall	「あれ、どこに置いたっけ？」	「어라, 어디에 두었더라?」	fix	compose
+compose:question-recall	「あれ、どこに置いたっけ？」	「어라, 어디에 뒀더라?」	fix	compose
 compose:question-recall	「言ったっけ？」	「말했나?」	keep	compose

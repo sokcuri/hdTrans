@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:i:4404	あんな奴を相手にするな。	저런 놈을 상대로 하지 말아라.	fix	lookup
+dict:i:4404	あんな奴を相手にするな。	저런 놈을 상대로 하지 마.	fix	lookup
 dict:i:4404	魔物を相手にするのは大変だ。	마물을 상대로 하는 것은 힘들다.	fix	lookup
 dict:i:4404	強敵を相手にする。	강적을 상대로 한다.	fix	lookup
 dict:i:4404	相手にする必要はない。	상대로 할 필요는 없다.	fix	lookup

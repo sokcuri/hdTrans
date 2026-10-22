@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:lex:ato-wa-rest	後は任せた。	나머지는 맡겼다.	fix	local
+dict:lex:ato-wa-rest	よし、後は待つだけだ。	좋아, 나머지는 기다릴 뿐이다.	fix	local
+dict:lex:ato-wa-rest	その後は知らない。	그 후는 모른다.	keep	local

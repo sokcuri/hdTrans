@@ -73,11 +73,17 @@ void TeSequence(Flusher& f) {
     }
 }
 
-// Words of thanks and apology after which a て or 連用 form gives the reason (어서). The て of
-// 借りる (この場を借りて 이 자리를 빌려) keeps its form.
+// Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:
+// 와 줘서 기뻐, 도와줘서 살았다). The て of 借りる (この場を借りて 이 자리를 빌려) keeps its form.
 constexpr std::string_view kThanks[] = {
     "ありがと", "有難", "有り難", "感謝", "すみません", "済みません", "すいません", "申し訳", "ごめん",
+    "嬉し", "うれし", "助か", "たすか", "良かっ", "よかっ", "幸せ", "しあわせ", "残念", "悲し", "かなし",
+    "寂し", "さみし", "さびし", "安心", "ほっと",
 };
+
+// Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に
+// 嬉しい).
+constexpr std::string_view kDegree[] = {"本当に", "ほんとに", "ほんとうに", "とても", "すごく", "凄く", "すっごく", "めちゃくちゃ"};
 
 void TeThanks(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -86,8 +92,20 @@ void TeThanks(Flusher& f) {
         if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
         const Item* n = it->next;
         if (n != nullptr && n->group->surface == "、") n = n->next;
+        if (n != nullptr && std::any_of(std::begin(kDegree), std::end(kDegree), [&](std::string_view d) {
+                return n->group->surface == d;
+            })) {
+            n = n->next;
+        }
         if (n == nullptr) continue;
         const std::string_view next = n->group->surface;
+        if (next.find("たら") != std::string_view::npos) continue;  // 行ってよかったら: permission
+        // A word of feeling that describes a noun or a manner (幸せな未来, 幸せになる) is no
+        // predicate the て form gives the reason for.
+        if (const Item* a = n->next; a != nullptr && (a->Code(0).starts_with("1") || a->group->surface == "な" ||
+                                                     a->group->surface == "に" || a->group->surface == "の")) {
+            continue;
+        }
         if (std::any_of(std::begin(kThanks), std::end(kThanks), [&](std::string_view t) { return next.starts_with(t); })) {
             it->AssignDirectSlot(it->DirectIndex(), "6서");
         }

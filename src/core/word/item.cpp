@@ -235,6 +235,8 @@ Item* Item::Object(int delta) {
                     if (item != nullptr) item = item->next;
                 }
                 if (item != nullptr && item->EntryText(0) == ")") item = item->next;
+                // A small っ closing the word before (行くっ) is part of its sound.
+                while (item != nullptr && item->ClosingTsu()) item = item->next;
             }
         }
     } else {

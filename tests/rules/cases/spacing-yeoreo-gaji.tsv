@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:115363	色々ありがとう。	여러 가지 고마워.	fix	lookup
+dict:jisjk:4541	いろんな店がある。	여러 가지 가게가 있다.	fix	lookup

@@ -268,11 +268,13 @@ bool Snapshot::PersonCueKey(std::string_view key) const {
     return false;
 }
 
-// Whether a cue may confirm key: two or more characters with a kanji and no
-// katakana, and no base sense of a person (先生, 部長 take honorifics as roles) or a
-// name (the base reading wins).
+// Whether a cue may confirm key: two or more characters with a kanji, or one kanji no
+// base word has, and no katakana, and no base sense of a person (先生, 部長 take
+// honorifics as roles) or a name (the base reading wins).
 bool Snapshot::CuedKey(std::string_view key) const {
-    if (RuneCount(key) < 2 || AnyRune(key, [](char32_t r) { return r >= U'ァ' && r <= U'ヺ'; }) ||
+    // One kanji only where the base dictionary has no word of it (筧, 凪).
+    if ((RuneCount(key) < 2 && !base_.Records(key).empty()) || RuneCount(key) < 1 ||
+        AnyRune(key, [](char32_t r) { return r >= U'ァ' && r <= U'ヺ'; }) ||
         !AnyRune(key, [](char32_t r) { return r >= 0x4E00 && r <= 0x9FFF; })) {
         return false;
     }

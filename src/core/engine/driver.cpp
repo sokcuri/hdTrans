@@ -301,7 +301,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         return steps.line;
     };
     if (!speech.markedOnly) {
-        if (!speech.casual) return compose(speech, observer, options);
+        if (!speech.casual) return output::SpokenWords(compose(speech, observer, options), carry.depth, speech.styles);
         // Soft: every plain quote is casual speech and takes the spoken words (것은 건).
         std::vector<std::uint8_t> spoken = speech.styles;
         for (std::uint8_t& style : spoken) {

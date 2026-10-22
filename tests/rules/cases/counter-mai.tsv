@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:116267	紙を3枚ください。	종이를 3장 주세요.	fix	global-stem
+dict:jisjk:116267	写真を二枚撮った。	사진을 두 장 찍었다.	keep	global-stem

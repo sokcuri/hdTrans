@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+compose:untranslated-honorific	魔王ちゃんの本だ。	마왕의 책이다.	fix	compose
+compose:untranslated-honorific	店員さんは笑った。	점원은 웃었다.	keep	compose

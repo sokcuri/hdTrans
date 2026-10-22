@@ -10,6 +10,8 @@
 #include "core/names/chars.h"
 #include "core/names/labels.h"
 #include "core/names/registry.h"
+#include "core/text/unicode.h"
+#include "core/text/utf8.h"
 
 namespace hdTrans::names {
 
@@ -268,6 +270,23 @@ bool QuoteName(std::string_view line, std::string& label) {
     if (after >= line.size()) return false;
     const std::string_view rest = line.substr(after);
     if (!(rest.starts_with("「") || rest.starts_with("『") || rest.starts_with(":") || rest.starts_with("："))) return false;
+    // A speaker's quote ends the line; words after its closing bracket make the bracket a
+    // title or ruby, not speech (精鋭「第八駆逐隊」、出撃せよ, 全「すべ」て). Punctuation, spaces
+    // and an aside in parentheses may follow (田中「おはよう」。, 「…」（笑）).
+    if (rest.starts_with("「") || rest.starts_with("『")) {
+        const std::size_t close = rest.rfind(rest.starts_with("「") ? "」" : "』");
+        if (close != std::string_view::npos && close > 0) {
+            int aside = 0;
+            for (std::string_view tail = rest.substr(close + std::string_view("」").size()); !tail.empty();) {
+                const text::Rune r = text::DecodeRune(tail);
+                if (r.size == 0) break;
+                tail.remove_prefix(r.size);
+                if (r.cp == U'（' || r.cp == U'(') aside++;
+                if ((r.cp == U'）' || r.cp == U')') && aside > 0) aside--;
+                if (aside == 0 && text::IsLetter(r.cp)) return false;
+            }
+        }
+    }
     label = std::string(line.substr(p, q - p));
     return true;
 }
@@ -535,9 +554,28 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
-                if (!Has(attr, "On") && (Has(sem, "VHn") || Has(sem, "UAq") || Has(sem, "QAA") || Has(sem, "QAB"))) {
+                // A person, profession or animal noun, or a pronoun (オレ, 俺).
+                if (!Has(attr, "On") && (Has(sem, "VHn") || Has(sem, "UAq") || Has(sem, "QAA") || Has(sem, "QAB") ||
+                                         rec.codes->partText.starts_with("N12"))) {
                     roleSem = true;
                 }
+            }
+        }
+        // The words of the plain dictionaries count as the base dictionary's do (ギア,
+        // 艦載機): a name is a word of no dictionary, or one that reads as a person.
+        for (const dict::UserEntry* e : snap_->TextPlain().Search(s, dict::LookupMode::General)) {
+            if (e->key != s || e->nameLayer || e->kana || e->codes == nullptr) continue;
+            f.records++;
+            const std::string_view sem = e->codes->sem.Text(), attr = e->codes->gram.Text();
+            if (sem.starts_with("QPN") || attr.starts_with("Wa") || attr.starts_with("Wb")) {
+                f.person = true;
+                f.surname = f.surname || attr.starts_with("Wa");
+                f.given = f.given || attr.starts_with("Wb");
+            } else if (sem.starts_with("QCT")) {
+                f.city = true;
+            } else {
+                f.common = true;
+                if (e->codes->partText.starts_with("N12")) roleSem = true;
             }
         }
         f.role = roleSem && !f.person && !f.city;

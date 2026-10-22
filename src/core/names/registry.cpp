@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "core/names/chars.h"
+#include "core/text/utf8.h"
 #include "core/names/labels.h"
 #include "core/names/readings.h"
 #include "core/names/ruby.h"
@@ -149,6 +150,22 @@ void Registry::Forget(const Evidence& evidence) {
     scoresValid_ = false;
 }
 
+// Whether a gloss or ruby reading marks a word's reading, not a name: the base is a common
+// word, or ends in one, and the reading is one too: its own reading (私（わたくし）,
+// 夾叉（きょうさ）) or another word read in its place (提督（あなた）, 各艦（ふね）). A
+// reading that is no word still names (三日（みか）, 千里（ちさと）).
+bool Registry::Gikun(std::string_view base, std::string_view reading) {
+    const DictFlags r = Flags(reading);
+    if (!r.common || r.person) return false;
+    // The base, or the word that ends it (各艦（ふね）).
+    for (std::string_view b = base; !b.empty(); b.remove_prefix(text::DecodeRune(b).size)) {
+        const DictFlags f = Flags(b);
+        if (f.common && !f.person) return true;
+        if (text::DecodeRune(b).size == 0) break;
+    }
+    return false;
+}
+
 void Registry::Add(std::string_view rawLine, Evidence* evidence) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;
@@ -167,7 +184,7 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         RubyMatch m;
         if (!FindRuby(line, from, m)) break;
         const std::string base(m.base), kana(m.reading);
-        if (IsKanaText(kana)) {
+        if (IsKanaText(kana) && !Gikun(base, kana)) {
             count(gloss_, base, 3);
             SetReading(base, kana);
         }
@@ -218,6 +235,10 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         RubyMatch m;
         if (!FindGloss(line, from, m)) break;
         const std::string base(m.base);
+        if (Gikun(base, m.reading)) {
+            from = m.end;
+            continue;
+        }
         count(gloss_, base, 3);
         if (recording_ != nullptr || reading_[base].empty()) {
             std::string r;
@@ -315,13 +336,26 @@ const std::map<std::string, Name>& Registry::Accepted() {
     auto surnameLike = [&](const std::string& x) {
         const DictFlags f = Flags(x);
         const std::size_t k = RuneCount(x);
-        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && (f.surname || f.records == 0);
+        // Not a numeral (二, 三十), which no dictionary row reads either.
+        const bool numeral = AllRunes(x, [](char32_t c) {
+            return std::u32string_view(U"〇一二三四五六七八九十百千万億零").find(c) != std::u32string_view::npos;
+        });
+        // A single kanji no dictionary knows (改) is no surname without a surname reading.
+        return k >= 1 && k <= 3 && AllRunes(x, IsKanji) && !numeral &&
+               (f.surname || f.layerSurname || (f.records == 0 && k >= 2));
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
-        Name& s = all[x];
-        s.score += c;
-        s.person = true;
-        s.surname = true;
+        // A common word is no full name (沢山 is 沢 + 山 only as a name).
+        const DictFlags fj = Flags(joined);
+        if (fj.common && !fj.person) return;
+        // The surname stands for the person alone too, but a common word (北, 上) reads as
+        // that word wherever the full name is not written.
+        if (!Flags(x).common) {
+            Name& s = all[x];
+            s.score += c;
+            s.person = true;
+            s.surname = true;
+        }
         Name& j = all[joined];
         j.score += kThreshold;
         j.person = true;
@@ -345,6 +379,9 @@ const std::map<std::string, Name>& Registry::Accepted() {
         const auto [x, y] = GivenSplit(t);
         if (y.empty()) continue;
         full(x, y, t, c);
+        // The given name stands for the person alone too, but a common word (大森海: 海)
+        // reads as that word wherever the full name is not written.
+        if (Flags(y).common) continue;
         Name& g = all[y];
         g.score = std::max(g.score, kSingleThreshold);
         g.person = true;
@@ -374,7 +411,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
             for (const std::string& p : parts) any = any || att.count(p) > 0;
             if (!any) continue;
         }
+        // A common word in the chain (ギア・バーラー) stays a word on its own.
         for (const std::string& p : parts) {
+            const DictFlags f = Flags(p);
+            if (f.common && !f.person) continue;
             all[p].score += score;
             all[p].person = true;
         }

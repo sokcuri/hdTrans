@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:jisjk:354180	店員に頭を下げた。	점원에게 고개를 숙였다.	fix	local
+dict:jisjk:354180	騎士に助けられた。	기사에게 도움을 받았다.	fix	local
+dict:jisjk:354180	公園に行った。	공원에 갔다.	keep	local
+dict:jisjk:6506	刑事さんが来た。	형사가 왔다.	fix	local
+dict:jisjk:6506	田中さんが来た。	타나카씨가 왔다.	keep	local
+dict:jisjk:354180	ママに話した。	엄마에게 이야기했다.	fix	local
+dict:jisjk:354180	看護師に聞いた。	간호사에게 들었다.	fix	local
+dict:jisjk:354180	魔王に挑んだ。	마왕에게 도전했다.	fix	local
+dict:w:26719	リリアナ嬢に手紙を渡した。	릴리아나양에게 편지를 건네주었다.	fix	defaults

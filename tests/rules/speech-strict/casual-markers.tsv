@@ -1,17 +1,17 @@
 rule	input	expected	kind	layer
-compose:speech-casual-marked	「違う。そうじゃないよ」	「달라. 그렇지 않아」	fix	compose
+compose:speech-casual-marked	「違う。そうじゃないよ」	「아니야. 그렇지 않아」	fix	compose
 compose:speech-casual-marked	「もう全部食べちゃった。おいしかった」	「벌써 전부 먹어 버렸어. 맛있었어」	fix	compose
 compose:speech-casual-marked	「そんなの知らねえ。俺は関係ない」	「그런 거 몰라. 나는 관계없어」	fix	compose
-compose:speech-casual-marked	「ずっと待ってる。寒いね」	「쭉 기다리고 있어. 춥네」	fix	compose
+compose:speech-casual-marked	「ずっと待ってる。寒いね」	「계속 기다리고 있어. 춥네」	fix	compose
 compose:speech-casual-marked	「これは僕の本だよ。昨日買った」	「이건 내 책이야. 어제 샀어」	fix	compose
-compose:speech-casual-marked	「何か落ちてるよ。君のものか」	「뭔가 떨어져 있어. 네 것인가」	fix	compose
+compose:speech-casual-marked	「何か落ちてるよ。君のものか」	「뭔가 떨어져 있어. 네 건가」	fix	compose
 compose:speech-casual-marked	「家に帰るよ。疲れた」	「집에 돌아가. 지쳤어」	fix	compose
 compose:speech-casual-marked	「いいもん。一人で行くもん。平気だ」	「좋은 걸. 혼자서 가는걸. 아무렇지도 않아」	fix	compose
 compose:speech-casual-marked	「明日は早く起きるよ。もう寝る」	「내일은 일찍 일어나. 이제 잔다」	keep	compose
 compose:speech-casual-marked	「ありがとうね。助かった」	「고마워. 살았어」	fix	compose
 compose:speech-casual-marked	「ごめんなさいね。助かった」	「미안해요. 살았다」	keep	compose
-compose:speech-casual-marked	「君の言う通りだわ。私が悪かった」	「네가 말하는 대로예요. 내가 나빴다」	keep	compose
-compose:speech-casual-marked	「余計なことを言うな。分かっているのだ」	「불필요한 말을 하지 말아라. 알고 있다」	keep	compose
+compose:speech-casual-marked	「君の言う通りだわ。私が悪かった」	「네가 말하는 대로야. 내가 나빴어」	keep	compose
+compose:speech-casual-marked	「余計なことを言うな。分かっているのだ」	「불필요한 말을 하지 마. 알고 있다」	keep	compose
 compose:speech-casual-marked	「我々の勝利は決まった。諦めるがいいさ」	「우리 승리는 정해졌다. 포기하는게 좋아」	keep	compose
 compose:speech-casual-marked	「『もう遅い』って書いてあったよ」	「『이미 늦다』는 써 있었어」	keep	compose
 compose:speech-casual-marked	「彼は来ない、と言ってたよ」	「그는 오지 않는다, 라고 말했어」	keep	compose

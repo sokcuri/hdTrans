@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+sound:moan-syllables	「あっ、はんっ……」	「앗, 하앙……」	fix	sound
+sound:moan-syllables	「はんっ、あんっ」	「하앙, 앙」	fix	sound
+sound:moan-syllables	「はん、そんな話は聞かないね」	「흥, 그런 이야기는 듣지 않네」	fix	sound
+sound:moan-syllables	「ひんっ、だめっ」	「히잉, 안 돼」	fix	sound
+sound:moan-syllables	「ひあっ、ああっ」	「히앗, 아앗」	fix	sound
+sound:moan-syllables	「あっ、うくっ、だめ」	「앗, 으윽, 안 돼」	fix	sound
+sound:moan-syllables	「あ、あくっ……」	「아, 아윽……」	fix	sound
+sound:moan-syllables	「んっ、んはっ……」	「읏, 응핫……」	fix	sound
+sound:moan-syllables	もうくっつきました？	벌써 들러붙었습니까?	keep	sound
+sound:moan-syllables	はんこを押す	도장을 찍는다	keep	sound

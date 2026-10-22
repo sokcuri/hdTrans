@@ -9,16 +9,16 @@ dict:polite-causal	静かでしたか？	조용했습니까?	keep	lookup
 dict:polite-causal	元気でしたか？	건강했습니까?	keep	lookup
 dict:polite-causal	学生でしたか？	학생이었습니까?	keep	lookup
 dict:polite-causal	面白くありませんか？	재미있지 않습니까?	keep	lookup
-dict:polite-causal	静かですから、眠れます。	조용하기 때문에, 잘 수 있습니다.	keep	lookup
+dict:polite-causal	静かですから、眠れます。	조용하니까, 잘 수 있습니다.	keep	lookup
 dict:polite-causal	静かではありませんでしたから、眠れませんでした。	조용하지는 않았기 때문에, 잘 수 없었습니다.	keep	lookup
-dict:polite-causal	学生でしたから、安かった。	학생이었기 때문에, 쌌다.	keep	lookup
+dict:polite-causal	学生でしたから、安かった。	학생이었으니까, 쌌다.	keep	lookup
 dict:polite-causal	静かでしたから、眠れましたか？	조용했으니까, 잘 수 있었습니까?	fix	lookup
-dict:polite-causal	彼はもう駅に着いているんですから、迎えに行きましょう。	그는 이제 역에 도착해 있기 때문에, 마중하러 갑시다.	keep	lookup
-dict:polite-causal	彼は待っているんですから、急いでください。	그는 기다리고 있기 때문에, 서둘러 주세요.	keep	lookup
-dict:polite-causal	彼は本を読んでいるんですから、待ってください。	그는 책을 읽고 있기 때문에, 기다려 주세요.	keep	lookup
-dict:polite-causal	彼はもう来ているんですから、始めましょう。	그는 벌써 와 있기 때문에, 시작합시다.	keep	lookup
-dict:polite-causal	窓は開いているんですから、閉めてください。	창은 열려 있기 때문에, 닫아 주세요.	keep	lookup
-dict:polite-causal	彼はそこに立っているんですから、声をかけてください。	그는 거기에 서 있기 때문에, 말을 걸어 주세요.	keep	lookup
+dict:polite-causal	彼はもう駅に着いているんですから、迎えに行きましょう。	그는 이제 역에 도착해 있으니까, 마중하러 갑시다.	keep	lookup
+dict:polite-causal	彼は待っているんですから、急いでください。	그는 기다리고 있으니까, 서둘러 주세요.	keep	lookup
+dict:polite-causal	彼は本を読んでいるんですから、待ってください。	그는 책을 읽고 있으니까, 기다려 주세요.	keep	lookup
+dict:polite-causal	彼はもう来ているんですから、始めましょう。	그는 벌써 와 있으니까, 시작합시다.	keep	lookup
+dict:polite-causal	窓は開いているんですから、閉めてください。	창은 열려 있으니까, 닫아 주세요.	keep	lookup
+dict:polite-causal	彼はそこに立っているんですから、声をかけてください。	그는 거기에 서 있으니까, 말을 걸어 주세요.	keep	lookup
 dict:polite-causal	彼は待ってるんですか？	그는 기다립니까?	keep	lookup
 dict:polite-causal	彼は待っているんですか？	그는 기다리고 있습니까?	keep	lookup
 dict:polite-causal	彼はまだ入っていない。	그는 아직 들어가 있지 않다.	keep	lookup

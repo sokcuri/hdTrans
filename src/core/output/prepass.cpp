@@ -426,8 +426,38 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             }
         }
     }
+    if (nextIndex == i + 1) {
+        // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
+        // the word after it.
+        constexpr std::string_view kHonorifics[] = {"ちゃん", "さん", "くん", "君", "たん", "様", "さま", "殿", "氏"};
+        while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
+               std::find(std::begin(kHonorifics), std::end(kHonorifics), items[nextIndex].surface) !=
+                   std::end(kHonorifics)) {
+            nextIndex++;
+        }
+        if (nextIndex != i + 1 && nextIndex < count) {
+            nextTags = GAttr(items[nextIndex]);
+            nextKind = First(Code(items[nextIndex]));
+        }
+    }
     if (nextIndex == count) nextIndex = -1;
     const int previous = i - 1;
+    // A place or time noun after a の that the rules left untranslated starts a word
+    // (가게 안, 침대 아래, 아이 때).
+    constexpr std::string_view kPlaceNouns[] = {"上", "中", "下", "時", "前", "後", "外", "奥", "横", "隣",
+                                                "裏", "内", "間", "際", "頃", "底", "側", "周り"};
+    if (!t.empty() && previous >= 0 && EntryText(items[previous]).empty() &&
+        (item.surface == "上" ||
+         (kind == '1' && items[previous].surface == "の" && !Contains(tags, "Ct") &&
+          std::find(std::begin(kPlaceNouns), std::end(kPlaceNouns), item.surface) != std::end(kPlaceNouns)))) {
+        t.insert(0, " ");
+    }
+    // みたい read as the adjective 같다 is written apart from the word before it; the
+    // particle 같이 stays attached (너 같은 놈, 아이같이).
+    if (item.surface == "みたい" && previous >= 0 && !EntryText(items[previous]).empty() &&
+        t.starts_with("같") && !t.starts_with("같이")) {
+        t.insert(0, " ");
+    }
     using Result = std::pair<std::string, bool>;
     if (nextIndex < 0 || t.empty() || item.selectionFlag == 1 ||
         TokenDistance(tokens, item.tokenIndex, items[nextIndex].tokenIndex) >= 2) {
@@ -439,7 +469,6 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         return Result(std::move(t), false);
     }
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };
-    if (item.surface == "上" && previous >= 0 && EntryText(items[previous]).empty()) t.insert(0, " ");
     bool allowSpacing = true;
     if (t == "\\") {
         if (previous >= 0 && nd(internal::EntryAt(items[previous], 0).gattr)) {
@@ -453,6 +482,24 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
+    // A noun of degree, time or listing read as a free noun after a word stands apart
+    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등); 等 after a number is a rank (1등).
+    struct FreeNoun {
+        std::string_view surface;
+        std::string_view korean;
+    };
+    constexpr FreeNoun kFreeNouns[] = {{"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"},
+                                       {"ほど", "정도"}, {"程", "정도"},   {"等", "등"},     {"など", "등"},
+                                       {"前", "전"},     {"後", "후"},     {"前", "앞"},     {"後", "뒤"}};
+    if (kind == '1' && !t.ends_with(' ') && Contains(GAttr(next), "Tu") == false) {
+        for (const FreeNoun& f : kFreeNouns) {
+            const std::string_view ns = next.surface;
+            const bool same = ns == f.surface || (ns.starts_with(f.surface) && ns.substr(f.surface.size()) == "の");
+            if (!same || !nextEntry.starts_with(f.korean)) continue;
+            if (f.korean == "등" && (IsDigit(First(t)) || nd(tags))) break;
+            return Result(std::move(t), true);
+        }
+    }
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
     } else if (t != ",") {
@@ -496,12 +543,46 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
-            // A verbal noun (Hd, or a katakana word) joins the する after it (マスターする 마스터하다).
+            // A verbal noun (Hd, a kanji compound or a katakana word) joins the する or できる after it
+            // read with 하다 or 되다 (即答する 즉답하다, キスしたい 키스하고 싶다, 我慢できない
+            // 자제할 수 없다).
             constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
-            const bool verbalNoun =
-                Contains(tags, "Hd") || tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana;
+            constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
+            constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
+            // A compound of two or more kanji before する is a verbal noun (即答する 즉답하다),
+            // unless it tells a time, a frequency or an amount, which stays an adverb apart from
+            // the verb (毎日する 매일 한다, 全部します 전부 합니다).
+            auto kanjiCompound = [](std::string_view s) {
+                static constexpr std::u32string_view kTimeStarts = U"毎今明昨何半";
+                static constexpr std::u32string_view kTimeEnds = U"日朝晩週年月夜時頃";
+                static constexpr std::string_view kAdverbNouns[] = {
+                    "全部", "全員", "全然", "一緒", "本当", "普通", "大体", "結構", "多少", "十分", "一番",
+                    "一度", "二度", "三度", "最初", "最後", "永遠", "同時", "直接", "自分", "先程", "以前",
+                };
+                if (std::find(std::begin(kAdverbNouns), std::end(kAdverbNouns), s) != std::end(kAdverbNouns)) return false;
+                int n = 0;
+                char32_t first = 0, last = 0;
+                for (std::size_t k = 0; k < s.size(); n++) {
+                    const text::Rune r = text::DecodeRune(s.substr(k));
+                    if (r.size == 0 || !text::IsKanji(r.cp)) return false;
+                    if (n == 0) first = r.cp;
+                    last = r.cp;
+                    k += r.size;
+                }
+                return n >= 2 && kTimeStarts.find(first) == std::u32string_view::npos &&
+                       kTimeEnds.find(last) == std::u32string_view::npos;
+            };
+            const bool verbalNoun = Contains(tags, "Hd") ||
+                                    tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
+                                    kanjiCompound(item.surface);
+            auto startsWithAny = [](std::string_view s, std::span<const std::string_view> list) {
+                return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
+            };
             if (verbalNoun && nextEntry == "&AV@" &&
                 std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
+                return Result(std::move(t), false);
+            }
+            if (verbalNoun && startsWithAny(next.surface, kSuruStarts) && startsWithAny(nextEntry, kDoing)) {
                 return Result(std::move(t), false);
             }
             if (nextFirst == ")") return Result(std::move(t), false);
@@ -527,6 +608,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 if ((nd(GAttr(items[previous])) && Contains(tags, "Ct")) || nd(tags)) return Result(std::move(t), true);
             }
             if (tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana) return Result(std::move(t), true);
+            // A pronoun forms no compound with the noun after it (私無し 나 없이, not 나없음).
+            if (Code(item).starts_with("12") && nextKind == '1') return Result(std::move(t), true);
             const bool spaced = !converted && (WidthOf(t) > 2 || nextKind != kind);
             if (Contains(nextEntry, "&AV@") || Contains(nextEntry, "&C6@") || Contains(nextEntry, "%A1@") ||
                 Contains(nextEntry, "%D5@") || Contains(nextEntry, "$AB@") || Contains(nextEntry, "$AE@")) {

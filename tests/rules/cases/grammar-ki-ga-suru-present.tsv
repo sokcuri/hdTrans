@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:lex:ki-ga-suru-present	明日は雨が降る気がする。	내일은 비가 오는 것 같다.	fix	local
+dict:lex:ki-ga-suru-present	誰かに見られている気がして、振り向いた。	누군가에게 보여지고 있는 것 같아, 뒤돌아 보았다.	fix	local
+dict:lex:ki-ga-suru-present	今日は勉強する気がしない。	오늘은 공부할 생각이 들지 않는다.	keep	local

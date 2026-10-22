@@ -1,0 +1,42 @@
+rule	input	expected	kind	layer
+compose:kuna-adjective	本当は違うのね。	사실은 다르구나.	fix	compose
+compose:kuna-adjective	答えが違うんだな。	대답이 다르구나.	fix	compose
+compose:kuna-verb	何も知らないのね。	아무것도 모르는구나.	fix	compose
+compose:kuna-verb	もう帰るのね。	이제 돌아가는구나.	fix	compose
+compose:kuna-existential	まだいるのね。	아직 있는구나.	keep	compose
+builtin-ending:nanone	ずいぶん静かなのね。	꽤 조용하구나.	fix	builtin-ending
+builtin-ending:nanone	あなた、学生なのね。	당신, 학생이구나.	fix	builtin-ending
+builtin-ending:nanone	甘いものが好きなのね。	단 것을 좋아하는구나.	fix	builtin-ending
+builtin-ending:none	もう見たのね。	벌써 보았구나.	fix	builtin-ending
+builtin-ending:none	まだ覚えてるのね。	아직 기억하고 있구나.	fix	builtin-ending
+builtin-ending:none	そうだったのね。	그랬구나.	fix	builtin-ending
+builtin-ending:ze	俺も行くぜ！	나도 간다!	fix	builtin-ending
+builtin-ending:ze	ここで待ってるぜ。	여기서 기다리고 있다.	fix	builtin-ending
+builtin-ending:ze	こいつは最高だぜ！	이 녀석은 최고야!	fix	builtin-ending
+lookup:ze-question	そろそろ茹でるぜ？	슬슬 데치지?	fix	lookup
+lookup:nee	よく食べるねえ。	잘 먹네.	fix	lookup
+lookup:ze-question	この肉、美味いぜ？	이 고기, 맛있지?	fix	lookup
+lookup:ze-question	こんなの簡単だぜ？	이런 건 간단하지?	fix	lookup
+lookup:ze-question	次はお前の番だぜ？	다음은 네 차례지?	fix	lookup
+lookup:ze-question	ちゃんと言ってるぜ？	제대로 말하고 있지?	fix	lookup
+lookup:ze-question	俺は先に行ったぜ？	나는 먼저 갔지?	fix	lookup
+lookup:ze-question	この肉、美味いぜ！	이 고기, 맛있어!	fix	lookup
+builtin-phrase:kondo-wa	今度は俺の番だ。	이번에는 내 차례다.	fix	builtin-phrase
+builtin-phrase:kondo-wa	今回も勝った。	이번에도 이겼다.	fix	builtin-phrase
+builtin-ending:ze	楽しかったぜ、ありがとう。	즐거웠어, 고마워.	fix	builtin-ending
+sound:particle-nee	「やだねぇ、もう」	「싫어, 이제」	fix	sound
+sound:particle-nee	「ねぇ、先生」	「저기, 선생님」	keep	sound
+sound:particle-nee	「えへへ、ねぇ」	「에헤헤, 저기」	keep	sound
+sound:particle-nee	「ねぇねぇねぇ、先生」	「저기 저기 저기, 선생님」	keep	sound
+builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 모른다」	fix	builtin-phrase
+restore:retort-idiom	「彼に何を言うの？」	「그에게 무슨 말을 하는 거야?」	keep	restore
+restore:retort-idiom	何を言っていいか分からない	무슨 말을 해도 좋은가 모른다	keep	restore
+compose:spoken-syllables	「この文の主語は何ですか」	「이 문장의 주어는 뭡니까」	keep	compose
+compose:spoken-syllables	「与えられた仕事」	「주어진 일」	keep	compose
+compose:verbal-noun	「毎日するよ」	「매일 할게」	fix	compose
+compose:verbal-noun	「即答した」	「즉답했다」	keep	compose
+sound:oi-call	「おい茂る草むら」	「무성한 풀숲」	keep	sound
+compose:spoken-syllables	「主語です」	「주어입니다」	keep	compose
+sound:oi-call	「おい出てこい」	「어이 나와라」	keep	sound
+normalize:shime	「〆の一杯」	「마무리의 한 잔」	fix	normalize
+restore:retort-idiom	「何言ってるんだろう」	「무슨 말을 하는 걸까」	keep	restore

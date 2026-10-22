@@ -55,6 +55,8 @@ HD_TEST(pipeline_lengthen) {
         // Repeats write the last syllable again and let ! close it.
         {"아하하", "r", "아하하하"}, {"아하하", "rr!", "아하하하핫"}, {"후후", "r", "후후후"},
         {"아하하", "!", "아하하"},
+        // A ～ that stood for the key's ー adds one ~ at the end.
+        {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
@@ -251,9 +253,18 @@ HD_TEST(pipeline_sound) {
         {"「ではっ……」", "「ではっ……」"},
         {"「かはっと」", "「かはっと」"},
         {"「カハッ！」", "「カハッ！」"},
+        // A lone ん or small vowel between punctuation is a voice of its own.
+        {"「あっ、ん、くぁっ」", "「앗、응、크앗」"},
+        {"……ぅ……", "……우……"},
+        {"あっ、く、うぅ", "앗、크、우우"},
+        {"な ん", "な ん"},
+        {"君ん家", "君ん家"},
         {"「おい、誰か！！」", "「어이、誰か！！」"},
         {"「お、おい、魅…、」", "「\xEE\x80\x80" "、어이、魅…、」"},
         {"おいおいおい", "이봐 이봐 이봐"},
+        {"「おい田中」", "「어이 田中」"},
+        {"「おいこら！」", "「야 이놈아！」"},
+        {"ここにおいて", "ここにおいて"},
         {"ほら、見て！", "자、見て！"},
         {"ちょっと高い", "ちょっと高い"},
         {"これでよし。", "これでよし。"},

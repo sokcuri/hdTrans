@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 sense:モテる	あの人はモテる。	그 사람은 인기를 끈다.	fix	senses
 sense:モテる	あの人はモテない。	그 사람은 인기없다.	keep	senses
 sense:モテる	この箱なら持てる。	이 상자라면 가질 수 있다.	keep	senses
-dict:jisjk:95081	振り返っても姿は見えない。	돌아봐도 모습은 안보인다.	fix	local
+dict:jisjk:95081	振り返っても姿は見えない。	돌아봐도 모습은 안 보인다.	fix	local
 dict:jisjk:95081	振り返ってから歩いた。	돌아보고 나서 걸었다.	fix	local
 dict:jisjk:95081	振り返って走った。	되돌아 보고 달렸다.	keep	local
 dict:jisjk:93767	競走で勝った。	경주에서 이겼다.	fix	local

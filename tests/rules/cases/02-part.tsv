@@ -17,7 +17,7 @@ dict:jisjk:115818	手を見た。	손을 보았다.	fix	local
 dict:jisjk:375136	帽子に星がついた。	모자에 별이 붙었다.	fix	local
 dict:jisjk:375136	区別がついた。	구별이 되었다.	fix	local
 dict:jisjk:265495	その建物は図書館に当たる。	그 건물은 도서관에 해당된다.	fix	local
-dict:jisjk:265495	出発の時に当たる。	출발때에 이른다.	fix	local
+dict:jisjk:265495	出発の時に当たる。	출발 때 이른다.	fix	local
 dict:jisjk:363300	規則に従って申し込む。	규칙을 따르고 신청한다.	fix	local
 dict:jisjk:363300	規則に従って歩く。	규칙을 따라 걷는다.	fix	local
 dict:jisjk:265331	粉を払った。	가루를 털어 냈다.	keep	local

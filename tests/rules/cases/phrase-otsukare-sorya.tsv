@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+phrase:お疲れ	「お疲れ。今日も頑張ったね」	「수고했어. 오늘도 노력했네」	fix	builtin-phrase
+phrase:お疲れ	お疲れ様でした。	수고하셨습니다.	keep	builtin-phrase
+phrase:そりゃあ	「そりゃあ、無理だろ」	「그야, 무리이지」	fix	builtin-phrase

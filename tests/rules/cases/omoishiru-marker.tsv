@@ -14,7 +14,7 @@ dict:jisjk:93320	現実を思い知らない。	현실을 깨닫지 않는다.	k
 dict:jisjk:93320	現実を思い知ったと言った。	현실을 깨달았다고 했다.	fix	lookup
 dict:jisjk:93320	現実を思い知る人だ。	현실을 깨닫는 사람이다.	keep	lookup
 dict:jisjk:93320	現実を思い知ってから帰った。	현실을 깨닫고 나서 돌아갔다.	keep	lookup
-dict:jisjk:93320	現実を思い知ったから帰った。	현실을 깨달았기 때문에 돌아갔다.	fix	lookup
+dict:jisjk:93320	現実を思い知ったから帰った。	현실을 깨달았으니까 돌아갔다.	fix	lookup
 dict:jisjk:93320	現実を思い知ってよかった。	현실을 깨달아서 좋았다.	fix	lookup
 dict:jisjk:93320	扉を閉じた。	문을 닫았다.	keep	lookup
 dict:jisjk:93320	扉を閉じて。	문을 닫아.	keep	lookup

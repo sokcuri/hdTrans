@@ -27,6 +27,11 @@
 お疲れさまです	수고하셨습니다	intj
 お疲れさまでした	수고하셨습니다	intj
 お疲れさん	수고했어	intj
+サンキュー	고마워	intj
+サンキュ	고마워	intj
+お疲れ	수고했어	intj
+お疲れっ	수고했어	intj
+お疲れー	수고했어~	intj
 おつかれさま	수고했어	intj
 おつかれさまです	수고하셨습니다	intj
 おつかれさまでした	수고하셨습니다	intj
@@ -114,6 +119,7 @@
 さもありなんだ	그럴 만도 하지	intj
 さもあらん	그럴 법하지	intj
 そうだったな	그랬지	intj
+そうだな	그래	intj
 そうなんだわ	그렇거든	intj
 そのまさかよ	바로 그 설마야	intj
 だめだわ	안 되겠어	intj
@@ -464,7 +470,7 @@
 泣きを見る	낭패를 보다	v1
 苦手にする	껄끄러워하다	v
 ともあろうもの	씩이나 되는 사람	phrase
-どういう事	무슨 일	n
+どういう事	무슨 뜻	n
 言うのもなんだけど	할 말은 아니지만	phrase
 余所見する	한눈팔다	v
 物怖じする	주눅 들다	v
@@ -493,6 +499,7 @@
 学院一	학원 제일	n
 何故か	어째서인지	adv
 そりゃ	그야	adv
+そりゃあ	그야	adv
 呆気取られる	어안이 벙벙해지다	v1	gattr=Dx
 呆気に取られる	어안이 벙벙해지다	v1	gattr=Dx
 孤立する	고립되다	v
@@ -579,6 +586,17 @@
 睨みつける	노려보다	v1
 睨み付ける	노려보다	v1
 さぁ	자	intj
+// さあね: the noncommittal answer, not the call to start
+さぁねぇ	글쎄	intj
+さあねぇ	글쎄	intj
+さぁね	글쎄	intj
+さあね	글쎄	intj
+さーね	글쎄	intj
+さーねぇ	글쎄	intj
+さぁな	글쎄	intj
+さあな	글쎄	intj
+さぁなぁ	글쎄	intj
+さあなあ	글쎄	intj
 捩れ曲がる	뒤틀리다	v5
 めり込む	처박히다	v5
 秘める	간직하다	v1
@@ -695,6 +713,14 @@
 どうした	무슨 일이야	intj
 どうしたの	무슨 일이야	intj
 どしたの	무슨 일이야	intj
+どうしたんだ	무슨 일이야	intj
+どうしたんだよ	무슨 일이야	intj
+どうしたんだい	무슨 일이야	intj
+どうしたのよ	왜 그래	intj
+どうしたんですか	무슨 일이세요	intj
+どうしたのですか	무슨 일이세요	intj
+どうしたんです	무슨 일이에요	intj
+どうしました	무슨 일이에요	intj
 命に関わる	목숨이 걸리다	v5
 顔を拝む	얼굴을 보다	v5
 欠片も	티끌만큼도	adv
@@ -870,7 +896,7 @@
 こっちのセリフ	내가 할 말	phrase
 お役立ち	도움	n
 お味方	아군	n
-俺達	우리들	n	attr=VHn
+俺達	우리	n	attr=VHn
 まいりましょう	갑시다	intj
 後を追いかける	뒤를 쫓아가다	v1
 後を追う	뒤를 쫓다	v5
@@ -1133,9 +1159,9 @@
 何だこれって	뭐야 이건	intj
 何だあれって	뭐야 저건	intj
 なぜだ	왜지	intj
-どうしてだ	어째서지	intj
+どうしてだ	왜지	intj
 なぜだろう	왜일까	intj
-どうしてだろう	어째서일까	intj
+どうしてだろう	왜일까	intj
 // はず after a pause, with nothing before it in the sentence
 はず	그럴 것	intj
 はずだ	그럴 것이다	intj
@@ -1238,6 +1264,21 @@
 // of its own, not the copula of a noun before it (苦手なんだっけ).
 なんだっけ	뭐였더라	intj
 何だっけ	뭐였더라	phrase
+何でもありません	아무것도 아니에요	intj
+なんでもありません	아무것도 아니에요	intj
+何でもないです	아무것도 아니에요	intj
+なんでもないです	아무것도 아니에요	intj
+今のは	방금 그건	phrase
+今のが	방금 그게	phrase
+今のを	방금 그걸	phrase
+// 이번 and 지난번 take 에 before 는 and 도 (이번에는, not 이번은).
+今度は	이번에는	phrase
+今回は	이번에는	phrase
+今度も	이번에도	phrase
+今回も	이번에도	phrase
+前回は	지난번에는	phrase
+前回も	지난번에도	phrase
+この前は	지난번에는	phrase
 何でしたっけ	뭐였죠	phrase
 なんでしたっけ	뭐였죠	phrase
 どうだったっけ	어땠더라	phrase
@@ -1253,3 +1294,30 @@
 しないかい	하지 않을래	phrase
 なんだい	뭐야	intj
 何だい	뭐야	phrase
+
+// なんていうか and its spellings as a hedge of speech: 뭐랄까, an utterance of its own.
+なんていうか	뭐랄까	intj
+なんていうかな	뭐랄까	intj
+なんていうかね	뭐랄까	intj
+なんて言うか	뭐랄까	intj
+なんというか	뭐랄까	intj
+なんていうのか	뭐랄까	intj
+なんつーか	뭐랄까	intj
+なんつうか	뭐랄까	intj
+なんてゆーか	뭐랄까	intj
+なんてゆうか	뭐랄까	intj
+
+// Everyday words of dialogue and narration read in a rarer sense.
+寝返りを打つ	뒤척이다	v5:규칙
+脱力する	힘이 빠지다	v
+わずかに	조금	adv
+最低でも	최소한	adv
+何倍も	몇 배나	adv
+こっちこそ	나야말로	phrase
+身体中	온몸	n
+
+// 突然: the adverb 갑자기 (base), 갑작스럽다 as a predicate or before な, 갑작스러운 before の.
+突然	갑작스럽다	na
+突然の	갑작스러운	phrase
+なぞる	더듬다	v5
+秘所	은밀한 곳	n

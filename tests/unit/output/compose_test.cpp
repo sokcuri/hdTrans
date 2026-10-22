@@ -120,6 +120,29 @@ HD_TEST(compose_adverb_omitted_particle_spacing) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+HD_TEST(compose_place_noun_after_dropped_no) {
+    const CompositionCase cases[] = {
+        {{{"店", "110", "", "가게"}, {"の", "230", "", ""}, {"中", "110", "", "안"}},
+         {2, 3}, "가게 안."},
+        {{{"箱", "110", "", "상자"}, {"の", "230", "", ""}, {"上", "110", "", "위"}},
+         {2, 3}, "상자 위."},
+        {{{"三日", "110", "", "3일"}, {"の", "230", "", ""}, {"間", "110", "Ct", "간"}},
+         {2, 3}, "3일간."},
+        {{{"金", "110", "", "금"}, {"の", "230", "", ""}, {"貨", "110", "", "화"}},
+         {2, 3}, "금화."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
+HD_TEST(compose_untranslated_honorific_spacing) {
+    const CompositionCase cases[] = {
+        {{{"魔王", "110", "", "마왕"}, {"ちゃん", "110", "", ""}, {"の", "200", "", "의"},
+          {"本", "110", "", "책"}},
+         {1, 3, 4}, "마왕의 책."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 HD_TEST(compose_sentence_token_ranges) {
     std::vector<TokenText> tokens(12000);
     for (TokenText& token : tokens) {

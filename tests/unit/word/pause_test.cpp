@@ -23,7 +23,7 @@ const dict::LoadResult& PauseDictionary() {
         "が\t이\tP200\t\t\tGN\t0\t6\n"
         "こと\t것\tN110\t\t\tGN\t0\t7\n"
         "でも\t에서도\tP200\t\t\tGN\t0\t8\n"
-        "でも\t그렇지만\tP200\t\t\tGN\t0\t9\n"
+        "でも\t하지만\tP200\t\t\tGN\t0\t9\n"
         "」\t」\tN600\t\t\tGN\t0\t10\n"
         "んだ\t것이다\tN110\t\t\tGN\t0\t11\n"}});
     return result;
@@ -99,6 +99,6 @@ HD_TEST(word_pause_ends_clause) {
     HD_CHECK_EQ(AfterPasses("高い……山", {"山"}), std::string("4 산"));
     HD_CHECK_EQ(AfterPasses("高い……ことが", {"こと", "が"}), std::string("4 것"));
     HD_CHECK_EQ(AfterPasses("高い――んだが", {"んだ", "が"}), std::string("4 것이다"));
-    HD_CHECK_EQ(AfterPasses("高い……でも山", {"でも", "山"}), std::string("1다 그렇지만"));
+    HD_CHECK_EQ(AfterPasses("高い……でも山", {"でも", "山"}), std::string("1다 하지만"));
     HD_CHECK_EQ(AfterPasses("高い……でも」", {"でも", "」"}), std::string("4 에서도"));
 }

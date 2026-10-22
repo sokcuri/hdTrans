@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:u-bucket-parti	迷惑のかからない場所	폐가 걸리지 않는 장소	fix	lookup
 dict:u-bucket-parti	迷惑のかからない場所を探す。	폐가 걸리지 않는 장소를 찾는다.	fix	lookup
-dict:u-bucket-parti	迷惑なのか分からない	폐가 되는것인가 모르다	keep	lookup
+dict:u-bucket-parti	迷惑なのか分からない	폐가 되는건가 모르다	keep	lookup
 dict:u-bucket-parti	静かなのかな	조용한가	keep	lookup
 dict:u-bucket-parti	本当に大丈夫なのか	정말로 괜찮은가	keep	lookup
 dict:u-bucket-parti	迷惑の場所	폐의 장소	keep	lookup

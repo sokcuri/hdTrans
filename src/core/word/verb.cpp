@@ -18,6 +18,9 @@ int Byte(char c) { return static_cast<unsigned char>(c); }
 
 bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 
+// たく of the desire after a stem (見たくない), not the た of the past before くせに (見たくせに).
+bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni); }
+
 }  // namespace
 
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop) {
@@ -94,17 +97,19 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if ((kind == 7 || kind == 11 || kind == 13) && d.kind == 1) d.kind = 4;  // られ: the potential before the passive
         if (d.patternMatched == 0) {
             if (kind == 7 && d.kind == 6) {
-                if (Starts(tail, kJaTai) || Starts(tail, kJaTakatta) || Starts(tail, kJaTaku) || Starts(tail, kJaTakereba) ||
+                if (Starts(tail, kJaTai) || Starts(tail, kJaTakatta) || Taku(tail) || Starts(tail, kJaTakereba) ||
                     Starts(tail, kJaTaki)) {
                     d.kind = 10;
                 }
             } else if (kind == 3 && d.kind == 6) {
-                if (Starts(tail, kJaShitai) || Starts(tail, kJaShitakatta) || Starts(tail, kJaShitaku) ||
+                if (Starts(tail, kJaShitai) || Starts(tail, kJaShitakatta) ||
+                    (Starts(tail, kJaShitaku) && Taku(tail.substr(std::string_view("し").size()))) ||
                     Starts(tail, kJaShitakereba) || Starts(tail, kJaShitaki)) {
                     d.kind = 10;
                 }
             } else if (kind == 9 && d.kind == 6) {
-                if (Cut(tail, 2, 4) == kJaTai || Cut(tail, 2, 8) == kJaTakatta || Cut(tail, 2, 4) == kJaTaku ||
+                if (Cut(tail, 2, 4) == kJaTai || Cut(tail, 2, 8) == kJaTakatta ||
+                    (Cut(tail, 2, 4) == kJaTaku && Taku(tail.substr(text::DecodeRune(tail).size))) ||
                     Cut(tail, 2, 8) == kJaTakereba || Cut(tail, 2, 4) == kJaTaki) {
                     d.kind = 10;
                 }
@@ -122,7 +127,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if ((kind == 11 || kind == 13) && d.kind == 6 && d.patternMatched == 0) {
             const std::string stem(Conjugation(kind, 10));
             for (const std::string_view t : {kJaTai, kJaTakatta, kJaTaku, kJaTakereba, kJaTaki}) {
-                if (Starts(tail, stem + std::string(t))) {
+                if (Starts(tail, stem + std::string(t)) && (t != kJaTaku || Taku(tail.substr(stem.size())))) {
                     d.kind = 10;
                     break;
                 }
@@ -355,7 +360,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
             };
             bool compound = false;
             for (const auto& [win, s] : compounds) {
-                if (*win == s) {
+                if (*win == s && (s != kJaTaku || Taku(after()))) {
                     compound = true;
                     break;
                 }
@@ -394,7 +399,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     const bool punctuation = tail.starts_with(kJaComma) || tail.starts_with(",");
     bool queryAllowed = !rest.empty() && !punctuation;
     if (queryAllowed && base.kind == 10 &&
-        (four == kJaTai || eight == kJaTakatta || four == kJaTaku || eight == kJaTakereba || four == kJaTaki ||
+        (four == kJaTai || eight == kJaTakatta || (four == kJaTaku && Taku(after())) || eight == kJaTakereba || four == kJaTaki ||
          four == kJaDzura || six == kJaSokona || four == kJaSokonaKanji)) {
         queryAllowed = false;
     }
@@ -499,7 +504,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     base.resultCount = static_cast<int>(ending->entries.size());
     length += ending->length;
     const int end = length;
-    const bool specialEnd = four == kJaTai || eight == kJaTakatta || four == kJaTaku || eight == kJaTakereba ||
+    const bool specialEnd = four == kJaTai || eight == kJaTakatta || (four == kJaTaku && Taku(after())) || eight == kJaTakereba ||
                             four == kJaTaki || four == kJaSugi || four == kJaSugiKanji || six == kJaTsudzuke ||
                             four == kJaTsudzukeKanji || four == kJaTsudzu || four == kJaDzura || six == kJaSokona ||
                             four == kJaSokonaKanji;

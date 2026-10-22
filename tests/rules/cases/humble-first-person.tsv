@@ -10,4 +10,4 @@ rewrite:humble-first-person	私はそう思う。	나는 그렇게 생각한다.
 rewrite:humble-first-person	私は彼に「待ってください」と言った。	나는 그에게 「기다려 주세요」라고 말했다.	keep	rewrites
 rewrite:humble-first-person	私が一番ですって？冗談でしょ。	내가 제일이라고? 농담이지.	keep	rewrites
 rewrite:humble-first-person	私も済ませたぞ。	나도 끝마쳤어.	keep	rewrites
-rewrite:humble-first-person	私も行きたいって言ったでしょう？	나도 가고 싶다고 말했겠지요?	keep	rewrites
+rewrite:humble-first-person	私も行きたいって言ったでしょう？	나도 가고 싶다고 말했겠죠?	keep	rewrites

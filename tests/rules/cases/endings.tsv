@@ -9,7 +9,7 @@ ending:ないんす	今日は書かないっす。	오늘은 쓰지 않아요.	k
 ending:ないんす	そうなんよ。	그런 이야.	keep	builtin-ending
 ending:ないんす	好きなんよ。	좋아하는 이야.	keep	builtin-ending
 ending:ないんす	本当なんよ。	사실이야.	keep	builtin-ending
-ending:ないんす	たくさんよ。	많아요.	keep	builtin-ending
+ending:ないんす	たくさんよ。	많아.	keep	builtin-ending
 dict:jisjk:342620	彼は掃除するよ。	그는 청소해.	fix	local-ending
 dict:jisjk:342620	私は掃除するよ。	나는 청소할게.	keep	local-ending
 dict:jisjk:342620	君が助けるよ。	네가 도와.	fix	local-ending

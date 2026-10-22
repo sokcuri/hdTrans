@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:jisjk:262235	水しか飲まない。	물밖에 마시지 않는다.	fix	defaults
+dict:jisjk:262235	三日しか休めなかった。	3일밖에 쉴 수 없었다.	fix	defaults
+dict:jisjk:4303	待つしかない。	기다릴 수밖에 없다.	fix	local-ending
+dict:jisjk:202182	駅までしか行かない。	역까지밖에 가지 않는다.	fix	lookup
+dict:jisjk:358958	このほかに道はない。	이 밖에 길은 없다.	keep	lookup

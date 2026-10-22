@@ -2,6 +2,7 @@
 // neighbours.
 #include <cstdint>
 #include "core/output/compose.h"
+#include "core/output/inflect.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
@@ -184,6 +185,39 @@ std::string NotForm(std::string_view s) {
         return out;
     }
     return std::string(s);
+}
+
+// Forms 1 and 2 keep a stem's final ㄹ (길면, 길지); before ㄴ, ㅂ, ㅅ and 오 it drops (기니까, 기네).
+std::string DropRieulBefore(std::string form, std::string_view suffix) {
+    constexpr int kRieulFinal = 8, kNieunInitial = 2, kBieupInitial = 7, kSiotInitial = 9;
+    if (form.size() < 3 || suffix.empty()) return form;
+    const text::Rune last = text::DecodeRune(std::string_view(form).substr(form.size() - 3));
+    const auto stem = text::Split(last.cp);
+    const auto next = text::Split(text::DecodeRune(suffix).cp);
+    if (last.size != 3 || !stem || !next || stem->final != kRieulFinal) return form;
+    if (next->initial != kNieunInitial && next->initial != kBieupInitial && next->initial != kSiotInitial &&
+        text::DecodeRune(suffix).cp != U'오') {
+        return form;
+    }
+    form.resize(form.size() - 3);
+    text::AppendRune(form, text::SetFinal(last.cp, 0));
+    return form;
+}
+
+// 구나 and 군 follow a verb's 는 form (가는구나, 모르는구나) but an adjective's stem (다르구나),
+// whichever part of speech the Japanese word has. key is a family marker and a form code:
+// '&' families use the verb codes ('0' 는, '1' stem), '$' and '%' the adjective codes ('4'
+// 는, '1' stem). 있다, 없다 and the copula keep the form their row gives.
+void ExclamationForm(std::string& key, std::string_view suffix) {
+    if (key.size() != 5 || !(suffix.starts_with("구나") || suffix.starts_with("군"))) return;
+    const auto* family = internal::FindKoreanFamily(std::string_view(key).substr(0, 4));
+    if (!family || family->inflectionClass == internal::InflectionClass::Existential ||
+        family->inflectionClass == internal::InflectionClass::Copula || (family->flags & internal::kBareDeclarative)) {
+        return;
+    }
+    const char neun = key[0] == '&' ? '0' : '4';
+    if (key[4] != neun && key[4] != '1') return;
+    key[4] = family->partOfSpeech == internal::KoreanPartOfSpeech::Verb ? neun : '1';
 }
 
 // The text of the first item after item i that has one (a dropped ぉ has none); "." after the
@@ -496,6 +530,7 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 key += c.head;
                 suffix = std::string(c.tail);
             }
+            ExclamationForm(key, suffix);
             if (!Contains(key, "&CJ@") || !Contains(suffix, kKoJuseyo)) {
                 replacement = LookupSource(key, *generated_);
             } else {
@@ -508,11 +543,13 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             }
             if (settings_.text && !it.endingSurface.ends_with("て") && !it.endingSurface.ends_with("で") &&
                 SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
-                replacement = SpokenInfinitive(replacement);
+                // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
+                replacement = replacement == "아니어" ? (suffix.empty() ? "아니야" : "아니에") : SpokenInfinitive(replacement);
             }
             break;
         }
     }
+    if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
     if (TextGate(i, key)) {
         it.selectionFlag = 1;
         sc.text = std::move(stem);
@@ -598,6 +635,7 @@ void Composer::BuildAdjective(int i) {
     const auto [cls, rest] = FirstByte(suffixView);
     key += cls;
     std::string suffix(rest);
+    ExclamationForm(key, suffix);
     switch (selectedClass) {
         case '7': replacement = LookupDollar(key, *generated_); break;
         case '8': replacement = LookupPercent(key, *generated_); break;
@@ -642,6 +680,7 @@ void Composer::BuildAdjective(int i) {
             }
         }
     }
+    if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
     sc.text = Cat({stem, replacement, suffix});
 }
 

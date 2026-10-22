@@ -287,8 +287,8 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
         if (next.empty() && current + 1 < TokenCount() && Span(current + 1) == 0) next = NextText(current + 1);
         if (next.starts_with(kJaEllipsis) || next.starts_with(kJaTwoDots)) return false;
     }
-    // やられたって…まだ: concessive; 長すぎるってぇ？: a question
-    if (u.key.ends_with("って") && TrailsOff(after)) return false;
+    // やられたって…まだ: concessive; 長すぎるってぇ？: a question; 美味いぜ？ seeks agreement
+    if ((u.key.ends_with("って") || u.key.ends_with("ぜ")) && TrailsOff(after)) return false;
     const bool closingParticle = u.key.ends_with("のう") || u.key.ends_with("のぅ");
     return SentenceFinal(after, current, closingParticle);
 }

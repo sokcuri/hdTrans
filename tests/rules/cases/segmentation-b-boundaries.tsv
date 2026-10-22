@@ -5,10 +5,10 @@ dict:segmentation-b	この道具のみを使う。	이 도구만을 사용한다
 dict:segmentation-b	水を飲みます。	물을 마십니다.	keep	lookup
 dict:segmentation-b	しっかし、雨が続く。	하지만, 비가 계속된다.	fix	lookup
 dict:segmentation-b	しっかし面白い。	하지만 재미있다.	fix	lookup
-dict:segmentation-b	しかし雨が続く。	그러나 비가 계속된다.	keep	lookup
+dict:segmentation-b	しかし雨が続く。	하지만 비가 계속된다.	keep	lookup
 dict:segmentation-b	傘を貸した。	우산을 빌려 주었다.	keep	lookup
 dict:segmentation-b	そんなわけないよ。	그럴 리 없어.	fix	lookup
-dict:segmentation-b	そんなわけなかったよ。	그럴 리 없었어요.	fix	lookup
+dict:segmentation-b	そんなわけなかったよ。	그럴 리 없었어.	fix	lookup
 dict:segmentation-b	そんなわけで戻った。	그래서 돌아왔다.	keep	lookup
 dict:segmentation-b	彼にはわけない仕事だ。	그에게는 수월한 일이다.	keep	lookup
 dict:segmentation-b	なんのかんの言っても便利だ。	이러니저러니 말해도 편리하다.	fix	lookup
@@ -16,7 +16,7 @@ dict:segmentation-b	何のかんの言いながら片付けた。	이러니저�
 dict:segmentation-b	何の缶を開けた。	무슨캔을 땄다.	keep	lookup
 dict:segmentation-b	何の管を調べた。	무슨관을 조사했다.	keep	lookup
 dict:segmentation-b	夫婦がいちゃついていた。	부부가 시시덕거리고 있었다.	fix	lookup
-dict:segmentation-b	いちゃつくな。	시시덕거리지 말아라.	fix	lookup
+dict:segmentation-b	いちゃつくな。	시시덕거리지 마.	fix	lookup
 dict:segmentation-b	ここにいちゃいけない。	여기에 있으면 안 된다.	keep	lookup
 dict:segmentation-b	資料をださない。	자료를 내지 않는다.	keep	lookup
 dict:segmentation-b	荷物をださないで。	짐을 내지 마.	keep	lookup
