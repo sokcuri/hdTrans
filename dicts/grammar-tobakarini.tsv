@@ -1,0 +1,5 @@
+#! layer=base
+# 명사나 소리 뒤 とばかりに
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+とばかりに	(이)라는 듯이	P200			GN				tobakarini:1
+これ幸いとばかりに	이때다 하고	E300			GN				tobakarini:2
