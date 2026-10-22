@@ -541,6 +541,8 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"サア" || key == U"サァ") {
         // さあ asked back (さあ？) is the shrug 글쎄, not the call 자.
         if (end < rs_.size() && In(rs_[end], U"？?")) return "글쎄";
+    } else if (key == U"ヘ") {
+        if (end < rs_.size() && In(rs_[end], U"？?")) return "어";  // へ？ asked back
     } else if (key == U"ウウン") {
         // ううん is the answer no (아니) said once and plainly; drawn out, cut off by っ or
         // asking before ？ it is a hum or a moan (으응).
@@ -862,7 +864,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // Before a kanji word the kana cannot be compared: a speaker who starts the word again
     // after a restart (、 or a dash) says a piece of two kana at most (ち、ちが、違う), so the
     // piece is never translated. A dictionary word, a sound or a demonstrative says
-    // something of its own (で、でも、本当; お、おい、魅; あ、あれ、何), and a pause after
+    // something of its own (お、おい、魅; あ、あれ、何), and a pause after
     // a word keeps the word (そ、そんな……嘘).
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
@@ -900,7 +902,9 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         pieces.clear();
         return 0;
     }
-    if (f[i] == f[p] && x != U"デ" && x != U"ジャ") return i;
+    // で、 and じゃ、 inside a line are the conjunction (それで、でも); opening an utterance
+    // before a word they start again they stutter it (で、でも 그, 그래도).
+    if (f[i] == f[p] && ((x != U"デ" && x != U"ジャ") || UtteranceStart(p))) return i;
     const bool sound = x.ends_with(U'ッ') && In(f[p], kSoundsBeforeKanji);
     if (IsKanjiRune(rs[i]) && !((comma || dash) && notStutter) && !sound) return i;
     pieces.clear();

@@ -156,9 +156,11 @@ HD_TEST(pipeline_sound) {
         // a rest mark for each kana of the word it does not reach.
         {"「ご、ごめ、ごめんなさい」",
          "「\xEE\x80\x80" "、\xEE\x80\x80\xEE\x80\x80\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84" "、ごめんなさい」"},
-        // A dictionary word, a demonstrative, an answer or a sound is a word of its own; a
+        // で、 opening an utterance stutters; a dictionary word, a demonstrative, an answer or
+        // a sound is a word of its own; a
         // pause after a word keeps the word; no stutter before a numeral.
-        {"「で、でも、本当」", "「그래서、でも、本当」"},
+        {"「で、でも、本当」", "「\xEE\x80\x80" "、でも、本当」"},
+        {"「それで、でも、本当」", "「それで、でも、本当」"},
         {"「さ、さ、三分」", "「자、さ、三分」"},
         {"「あ、あれ、何」", "「\xEE\x80\x80" "、あれ、何」"},
         {"「は、はい、行く」", "「\xEE\x80\x80" "、はい、行く」"},

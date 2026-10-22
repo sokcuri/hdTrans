@@ -58,3 +58,8 @@ sound:short-answer	「あの……」	「저기……」	fix	sound
 sound:short-answer	「あの人は誰？」	「그 사람은 누구?」	keep	sound
 sound:short-answer	「さあ？」	「글쎄?」	fix	sound
 sound:short-answer	「お待たせ」	「기다렸지」	fix	sound
+sound:stutter-de	「で、でも……」	「하, 하지만……」	fix	sound
+sound:stutter-de	「で、どうなった？」	「그래서, 어떻게 됐어?」	keep	sound
+sound:short-answer	「へ？」	「어?」	fix	sound
+sound:short-answer	「いいの？」	「괜찮아?」	fix	sound
+sound:short-answer	「んなわけあるか」	「그럴 리가 있냐」	fix	sound

@@ -989,7 +989,6 @@
 しょうがねえ	어쩔 수 없지	intj
 しょうがねぇ	어쩔 수 없지	intj
 そうそう	맞아 맞아	intj
-りょーかい	오케이	intj
 もぐり込む	파고들다	v5
 皮むき	껍질 벗기기	n
 待ちくたびれる	기다리다 지치다	v1
@@ -1292,6 +1291,19 @@
 そうね	그래	intj
 そうだね	그러게	intj
 // Short answers and greetings standing as an utterance
+いいの	괜찮아	intj
+いいのか	괜찮아	intj
+いいのかよ	괜찮냐	intj
+りょーかい	알았어	intj
+りょうかい	알았어	intj
+ならよかった	그럼 다행이네	intj
+なら良かった	그럼 다행이네	intj
+よろしい	좋아	intj
+んなわけあるか	그럴 리가 있냐	intj
+そんなわけあるか	그럴 리가 있냐	intj
+そんなわけないだろ	그럴 리가 없잖아	intj
+またまたぁ	에이, 또 그런다~	intj
+またまたー	에이, 또 그런다~	intj
 お待たせ	기다렸지	intj
 おまたせ	기다렸지	intj
 そっか	그렇구나	intj
