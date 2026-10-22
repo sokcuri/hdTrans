@@ -538,6 +538,11 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
         if (AfterClause(p, end)) return "그치";
+    } else if (key == U"ウウン") {
+        // ううん is the answer no (아니) said once and plainly; drawn out, cut off by っ or
+        // asking before ？ it is a hum or a moan (으응).
+        const bool asked = end < rs_.size() && In(rs_[end], U"？?");
+        if (end - p != key.size() || asked || (end < rs_.size() && In(rs_[end], U"ッっー～"))) return "으응";
     } else if (key == U"ポリポリ") {
         const std::u32string_view line = Line(p);
         if (ContainsAny(line, kEatingCues) && !ContainsAny(line, kScratchingCues)) return "오독오독";

@@ -4028,7 +4028,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いらっしゃい	계(오)세요	N300			GN				jisjk:341956		
 いらっしゃいましーん	이랏샤이마신	N130	VPe		GN				jisjk:364535		
 いらっしゃいますか	1고 계십니까	S570			GN				jisjk:264309		
-いらっしゃいませ	어서 오십시오	A9D1			GN				jisjk:114490		
+いらっしゃいませ	어서 오세요	A9D1			GN				jisjk:114490		
 いらっしゃるのか	오실까	A9D0			GN				jisjk:114736		
 いらつ	화가 &A5@	M421			GN				jisjk:341240		
 いらな	필요$FA@	H7U0			GN				jisjk:4876		
@@ -4340,7 +4340,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ういまご	첫손자	N110	VBpVHnVHn		GN				jisjk:126524		
 ういやつ	귀여운 놈	I110	VHn		GN				jisjk:40412		
 うう	우우	N110	UHr		CT				jisjk:258151		
-ううん	으응	E321			GN				jisjk:116		
+ううん	아니	E321			GN				jisjk:116		
 うえ	1고	S500			GN				jisjk:103405		
 うえ	위	N110	UDrVPl		GN				jisjk:103406		
 うえ	이식&AV@	M447	QHPVBp		GN				jisjk:141222		
@@ -18562,7 +18562,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ごだんかつよう	오단 활용	N110	UTs		GN				jisjk:183902		-1
 ごちそう	맛좋은 음식	N110	VFdVFd		GN				jisjk:41010		
 ごちそう	대접&AV@	M419			GN				jisjk:201775		
-ごちそうさま	잘 먹었어요	A9D0			GN				jisjk:347008		
+ごちそうさま	잘 먹었어	A9D0			GN				jisjk:347008		
 ごちそうさまでした	잘 먹었습니다	A9D0			GN				jisjk:151110		
 ごちそうさまです	잘 먹었습니다	A9D0			GN				jisjk:347009		
 ごちそうされ	맛있는 음식을 대접&FD@	M427			GN				jisjk:117853		
@@ -29402,7 +29402,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そちらの方でお決まりですか	이것으로 하시겠습니까	A9D0			GN				jisjk:374844		
 そちら側	그 쪽편	I120	VTpUDrVPl		GN				jisjk:41201		
 そちら様	그 쪽 분	I110	VHn		GN				jisjk:374887		
-そっか	그래	A9D0			GN				jisjk:257472		
+そっか	그렇구나	A9D0			GN				jisjk:257472		
 そっかな	그래	C0H0			CT				jisjk:258154		
 そっきしゃ	솟키샤	N120	VPl		GN				jisjk:200797		-1
 そっきじゅつ	속기술	N110			GN				jisjk:200799		-1
@@ -29832,7 +29832,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 それこそ	그야말로	E311			GN				jisjk:623		
 それしゃ	전문가	N110	VHn		GN				jisjk:201063		-1
 それじたい	그 자체	N110			GN				jisjk:201065		-1
-それじゃ	그러면	C331			GN				jisjk:624		
+それじゃ	그럼	C331			GN				jisjk:624		
 それじゃ	그래서	C300			GN				jisjk:263839		
 それじゃあ	그럼	C331			GN				jisjk:263916		
 それぞれ	각각	E311			GN				jisjk:625		

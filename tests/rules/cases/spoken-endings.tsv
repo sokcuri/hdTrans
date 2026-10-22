@@ -46,3 +46,11 @@ dict:ee-yes	「ええ」	「네」	fix	lookup
 dict:nasai	「早く寝なさい」	「빨리 자」	fix	lookup
 dict:nasai	「勉強しなさい」	「공부해」	fix	lookup
 dict:nasai	「戻ってきなさい」	「돌아와」	fix	lookup
+sound:short-answer	「そっか……」	「그렇구나……」	fix	sound
+sound:short-answer	「おう」	「어」	fix	sound
+sound:short-answer	「ううん、大丈夫」	「아니, 괜찮아」	fix	sound
+sound:short-answer	「だよな」	「그렇지」	fix	sound
+sound:short-answer	今日は……ですね、雨です	오늘은……이군요, 비입니다	keep	sound
+builtin-phrase:short-answer	「俺もだ」	「나도 그래」	fix	builtin-phrase
+sound:short-answer	「ううううぅぅぅんっ……！」	「으으으으으응……!」	keep	sound
+sound:short-answer	「さぁどっちだ！うぅん？！」	「어느 쪽이다! 으응?!」	keep	sound

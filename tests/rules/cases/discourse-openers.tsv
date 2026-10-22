@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:263916	それじゃあ、また明日。	그럼, 또 내일.	fix	lookup
 dict:jisjk:263916	それじゃあ行ってくるね。	그럼 다녀올게.	fix	lookup
-dict:jisjk:263916	それじゃ、帰ろう。	그러면, 돌아가자.	keep	lookup
+dict:jisjk:263916	それじゃ、帰ろう。	그럼, 돌아가자.	keep	lookup
 phrase:それじゃあね	それじゃあね。	그럼 안녕.	fix	builtin-phrase
 phrase:なにそれ	なにそれ、変なの。	뭐야 그게, 이상해.	fix	builtin-phrase
 phrase:なにそれ	え、なにそれ！？	어, 뭐야 그게!?	fix	builtin-phrase
