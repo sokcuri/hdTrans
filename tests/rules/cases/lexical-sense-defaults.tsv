@@ -34,3 +34,11 @@ dict:jisjk:148385	体が震えてあらぬ方向へ飛び	몸이 떨려 엉뚱�
 dict:jisjk:345205	ま、何にしても一件落着だな	뭐, 어쨌든 일단락이네	fix	lookup
 dict:w:26727	まあいいや、適当に座ってくれ	뭐 좋아, 적당히 앉아 줘	fix	lookup
 phrase:誰の目にもとまらない	どこかにいるけれど、誰の目にもとまらない	어디엔가 있지만, 누구의 눈에도 띄지 않는다	fix	builtin-phrase
+dict:jisjk:19260	図星かどうかはどっち	정곡인가 어떤가는 어느 쪽	fix	lookup
+dict:jisjk:53338	ケーキバイキングははじめて	케이크 뷔페는 처음	fix	lookup
+dict:w:26736	持久走の練習のしすぎで	오래달리기의 연습의 너무 해	fix	lookup
+dict:jisjk:43715	イントネーションや間がおかしい	억양이나 사이가 이상하다	fix	lookup
+dict:w:26738	俺の仕事は親父さんを説得すること	내 일은 아버지를 설득하는 것	fix	lookup
+dict:w:26739	何だか本当に新婚さんみたいだな	왠지 정말 신혼부부 같네	fix	lookup
+dict:jisjk:86934	朝は仲良く一緒に歯磨きだ	아침은 사이 좋고 함께 양치질이다	fix	lookup
+phrase:歯磨き粉	歯磨き粉が切れてる	치약이 끊어져 있다	fix	builtin-phrase
