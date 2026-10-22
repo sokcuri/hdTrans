@@ -78,3 +78,7 @@ dict:nanda-what	「これ、なんなの？」	「이거, 뭐야?」	fix	local
 dict:nanda-what	「結局なんなんだろう」	「결국 뭘까」	fix	local
 dict:nanda-what	「これ、なんだろう？」	「이거, 뭘까?」	fix	local
 dict:nanda-what	「学生なんだ」	「학생이야」	keep	local
+dict:nanda-what	「生徒のほうなんだ」	「학생 쪽이야」	fix	local
+dict:nanda-what	「網のことなんだ」	「그물이야」	fix	local
+dict:nanda-what	「ウチをなんだと思ってる」	「우리를 뭐라고 생각해」	fix	local
+dict:nanda-what	「なんだなんだこれは」	「뭐야 뭐야 이건」	keep	local
