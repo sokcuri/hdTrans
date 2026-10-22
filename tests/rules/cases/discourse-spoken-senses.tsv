@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:jisjk:262396	え？　どういうこと？	어? 무슨 뜻?	fix	defaults
-dict:jisjk:955	なるほど、そういうことか。	그렇구나, 그런 것인가.	fix	defaults
-dict:jisjk:149270	それにしても暑いな。	그나저나 더운데.	fix	defaults
+dict:jisjk:955	なるほど、そういうことか。	그렇구나, 그런 건가.	fix	defaults
+dict:jisjk:149270	それにしても暑いな。	그나저나 덥네.	fix	defaults
 dict:jisjk:123718	例の件はどうなった？	그 건은 어떻게 됐어?	fix	defaults
 dict:lex:rei-no-demonstrative	例のあの店に行こう。	예의 그 가게에 가자.	fix	local

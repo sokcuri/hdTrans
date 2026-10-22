@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-ending:書いたんじゃない	「あいつ、もう帰ったんじゃない？」	「저녀석, 벌써 돌아간 거 아니야?」	fix	builtin-ending
+ending:書いたんじゃない	「あいつ、もう帰ったんじゃない？」	「저 녀석, 벌써 돌아간 거 아니야?」	fix	builtin-ending
 ending:書いたんじゃないか	「財布、家に忘れたんじゃないか」	「지갑, 집에 잊은 거 아닌가」	fix	builtin-ending
 ending:高くないんじゃないかな	「この服、少し大きくないんじゃないかな」	「이 옷, 조금 크지 않은 거 아닐까」	fix	builtin-ending
 ending:書かないんじゃないですか	「彼女は行かないんじゃないですか」	「그녀는 가지 않는 거 아니에요」	fix	builtin-ending
