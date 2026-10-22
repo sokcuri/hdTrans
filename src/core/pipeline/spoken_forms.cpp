@@ -496,12 +496,30 @@ bool ContainsAny(std::string_view s, std::u32string_view set) {
 
 bool Contains(std::string_view s, std::string_view part) { return s.find(part) != std::string_view::npos; }
 
+// かしら(?:ね[ぇえー～]*|ん) before a character other than hiragana or the end: the ね or ん
+// after the sentence-final かしら adds nothing (どうしてかしらね, あるかしらん).
+bool KashiraNe(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "かしら")) return false;
+    if (Lit(s, p, "ね")) {
+        while (OneOf(s, p, U"ぇえー～")) {
+        }
+    } else if (!Lit(s, p, "ん")) {
+        return false;
+    }
+    size_t q = p;
+    if (Take(s, q, IsHiraganaClass)) return false;
+    m.end = p;
+    return true;
+}
+
 std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.group[1], mid, m.group[2]}); }
 
 }  // namespace
 
 std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectForms) {
     std::string text(in);
+    if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
     if (ContainsAny(text, kKataStemStarts)) {
         text = ReplaceAll(text, KataStemPattern, [](const Match& m) {
             const Match g = Rematch(m, KataStemPattern);

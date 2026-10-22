@@ -9130,11 +9130,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 かしょう	하천의 바닥	N110	VPl		GN				jisjk:168247		-1
 かしょう	화상	N110	UClVHn		GN				jisjk:168250		-1
 かしょく	과식	N110		Hd	GN				jisjk:168257		-1
-かしら	까	K110			GN				jisjk:4264		
+かしら	일까	K110		Tu	GN				jisjk:4264		
 かしら	0 것일까	S500			GN				jisjk:4265		
-かしら	우두머리	K110			GN	1753	||1 P+1== "2**"	뒤에 조사가 오면 かしら를 우두머리라는 명사로 고른다. (미발동: rare-context)	jisjk:202128		
+かしら	우두머리	K110			GN	1753	||1 &&4 P+1== "2**" S+1!= "Lね" S+1!= "Lよ" S+1!= "Lわ"	뒤에 조사가 오면 かしら를 우두머리라는 명사로 고른다. 문장을 끝맺는 ね, よ, わ는 뺀다. (미발동: rare-context)	jisjk:202128		
 かしら	3까	U500			GN				jisjk:265929		
-かしら	일까	P200			GN				jisjk:266101		
+かしら	일까	P200	XXX		GN				jisjk:266101		
 かしら	3까	S550			GN				jisjk:344995		
 かしら。	5을까	S560			GN				jisjk:4266		
 かしらぶん	두목	N110	VHn		GN				jisjk:168259		-1

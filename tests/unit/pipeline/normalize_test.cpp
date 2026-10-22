@@ -185,6 +185,9 @@ HD_TEST(pipeline_spoken_forms) {
         {"そこにいんじゃ"sv, "そこにいるんじゃ"sv},
         {"遅っっ。"sv, "遅い。"sv},
         {"やったじゃない"sv, "やったじゃん"sv},
+        {"血筋かしらねぇ、あんたも"sv, "血筋かしら、あんたも"sv},
+        {"そういえば、どうしてかしらね？"sv, "そういえば、どうしてかしら？"sv},
+        {"毎日どっかしらでイベント"sv, "毎日どっかしらでイベント"sv},
     };
     Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
 }

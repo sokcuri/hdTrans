@@ -417,14 +417,15 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
     l.records = out;
 }
 
-// Text path: the records that split the modal かもしれない are dropped.
+// Text path: the records that split the modal かもしれない or the sentence-final かしら
+// are dropped.
 void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
     const bool afterKa = surface.ends_with(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query)) {
             l.count--;
             continue;
         }
@@ -447,6 +448,19 @@ bool Worker::SplitsModal(const Record& r, std::string_view query, bool afterKa) 
     if (!rest.starts_with("も") || !r.source.ends_with("のか") || current < 0) return false;
     const std::string_view after = TrimLeftChars(rest.substr(std::string_view("も").size()), "ねよなぁっー");
     return SentenceFinal(after, current, true);
+}
+
+// A word longer than か that ends in か before しら and the end of the sentence (なのか +
+// しら, 何故か + しら): the か belongs to the sentence-final かしら. Ending rows are kept,
+// and so are the polite ですか and ませんか.
+bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
+    if (r.source.size() <= std::string_view("か").size() || !r.source.ends_with("か") || !query.starts_with(r.source) ||
+        current < 0 || AnyOf("STU", At(r.partCode, 0)) || r.source.ends_with("すか") || r.source.ends_with("せんか")) {
+        return false;
+    }
+    const std::string_view rest = query.substr(r.source.size());
+    if (!rest.starts_with("しら")) return false;
+    return SentenceFinal(TrimLeftChars(rest.substr(std::string_view("しら").size()), "ねよぁっー"), current, true);
 }
 
 // Whether form is also the imperative of a godan verb of the dictionary: form without its

@@ -43,7 +43,7 @@ std::string JoinPausedCopula(std::string_view text);
 // form: an adjective or verb stem in katakana (ウザい うざい), じゃね？ and 良くね？,
 // ねえ after は or も, the contracted ている and いる, じゃない of an appeal (じゃん) or a
 // prohibition (なよ), a clipped adjective (怖っ！ 怖い！), the negative ん (知らん 知らない),
-// できぬ.
+// できぬ; the ね or ん after a sentence-final かしら is dropped (どうしてかしらね).
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
 
 // あれ (also drawn out, あれ～？) and え at the start of a sentence before 、，！？…‥ or a
