@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+lexical:momu	乳房を揉んだ。	유방을 주물렀다.	fix	lookup
+lexical:momu	肩を揉んでくれる。	어깨를 주물러 준다.	fix	lookup
+lexical:momu	絵の件で揉めていたならなおさらだ。	그림의 건으로 다투고 있었다면 더욱더 그러하다.	fix	lookup
+lexical:momu	「揉めるな」	「다투지 마」	fix	lookup
