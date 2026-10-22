@@ -106,11 +106,18 @@ std::string WriteSounds(std::string_view text, const LineContext& ctx, const dic
 // (行かな…… 行かない……). A stem or a fragment without kanji stays.
 std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// そっか after kanji written そうか where the longest end of the kanji run that the dictionary
+// has is the stem of a verb in す: the volitional cut short (流そっか, 見逃そっか); after a noun
+// (漢字そっか, 了解そっか) it is the answer そうか and stays. Before the end, a sentence mark, a
+// closing bracket, な, ね or a drawn vowel.
+std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap);
+
 // The casual adjective endings -ee and -ii of -ai, -oi, -ui (うるせぇ, すげー, わりぃ,
 // 冷て～) written in full (うるさい, すごい, わるい, 冷たい) before the end of a clause or a
 // sentence particle, when the dictionary has the stem, starting a word, as an
 // adjective. Not after っ or ん, not the particle ぜ (歌おうぜぇ), not a て form
-// (届いてぇ; 冷てぇ and いてぇ are adjectives).
+// (届いてぇ; 冷てぇ and いてぇ are adjectives). A kanji that starts a word clipped with っ
+// before a mark is the adjective of that kanji with い (浅っ 浅い).
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The emphasis that spoken text writes inside a word dropped when the dictionary then

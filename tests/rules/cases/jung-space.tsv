@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+compose:free-noun-space	外出中の当主を呼び戻そう	외출 중의 당주를 불러들이자	fix	compose
+compose:free-noun-space	交戦中に騎士様が隣国に	교전 중에 기사님이 이웃나라에	fix	compose
+dict:jisjk:353225	同期の中ではそう遅い出世ではない	동기 중에서는 그렇게 늦은 출세가 아니다	fix	lookup
+dict:jisjk:265197	爺さんの人脈の中から年頃の娘さん	할아버지의 인맥 중에서 적령기의 따님	fix	lookup
+compose:free-noun-space	喧嘩中の二人は聞く耳を持たない	싸움 중의 두 사람은 들을 귀를 가지지 않는다	fix	compose
+dict:jisjk:265197	その中から選ぶようになって	그 중에서 선택하게 되어	fix	lookup

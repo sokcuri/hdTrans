@@ -59,6 +59,9 @@ public:
     // Token j as typed once visited (j before current): "" for a token emptied or
     // never visited.
     std::string_view Typed(int j) const;
+    // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
+    // and the raw text of the tokens before it; computed once for all tokens.
+    int QuoteDepth(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -93,6 +96,8 @@ public:
     bool Transliterate(std::string_view s, std::string& out);
 
 private:
+    std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
     void BuildSyntheticTransform(std::string_view surface, int token, int offset, bool emptyTarget);
@@ -110,6 +115,7 @@ private:
     bool Skip(const dict::UserEntry& u, std::string_view query) const;
     bool EndRowFits(const dict::UserEntry& u, std::string_view query) const;
     bool TrailsOff(std::string_view rest) const;
+    bool Asks(std::string_view rest) const;
     bool PatternFits(const dict::UserEntry& u, std::string_view query) const;
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
@@ -117,6 +123,7 @@ private:
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropModalSplits(Lookup& l, std::string_view query);
     bool SplitsModal(const Record& r, std::string_view query, bool afterKa) const;
+    bool SplitsKashira(const Record& r, std::string_view query) const;
     bool VerbUtterance(const Record& r) const;
     void TransliterateGlosses(Record* records);
 };

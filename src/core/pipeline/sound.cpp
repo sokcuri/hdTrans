@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
@@ -250,11 +251,13 @@ size_t MarkerLength(std::string_view s, std::span<const std::string> markers) {
     return n;
 }
 
-// The length of the opaque span at the start of s: a tag, BBCode tag, entity or marker.
-size_t OpaqueLength(std::string_view s, std::span<const std::string> markers) {
+// The length of the opaque span at the start of s: a tag, BBCode tag, entity, style code
+// or marker.
+size_t OpaqueLength(std::string_view s, char before, std::span<const std::string> markers) {
     if (const size_t n = TagLength(s); n > 0) return n;
     if (const size_t n = BbCodeLength(s); n > 0) return n;
     if (const size_t n = EntityLength(s); n > 0) return n;
+    if (const size_t n = StyleCodeLength(s, before); n > 0) return n;
     return MarkerLength(s, markers);
 }
 
@@ -510,6 +513,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     }
     if (chosen == nullptr) return false;
     if (!Stopped(best) && !(inChain && best.intj && !chosen->phrase)) return false;
+    // A phrase does not end at a ッ before テ: that is its verb in the te-form (イっちゃってぇ).
+    if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
     // (見て！ぽい～！ 포이~!).
@@ -538,6 +543,16 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
         if (AfterClause(p, end)) return "그치";
+    } else if (key == U"サア" || key == U"サァ") {
+        // さあ asked back (さあ？) is the shrug 글쎄, not the call 자.
+        if (end < rs_.size() && In(rs_[end], U"？?")) return "글쎄";
+    } else if (key == U"ヘ") {
+        if (end < rs_.size() && In(rs_[end], U"？?")) return "어";  // へ？ asked back
+    } else if (key == U"ウウン") {
+        // ううん is the answer no (아니) said once and plainly; drawn out, cut off by っ or
+        // asking before ？ it is a hum or a moan (으응).
+        const bool asked = end < rs_.size() && In(rs_[end], U"？?");
+        if (end - p != key.size() || asked || (end < rs_.size() && In(rs_[end], U"ッっー～"))) return "으응";
     } else if (key == U"ポリポリ") {
         const std::u32string_view line = Line(p);
         if (ContainsAny(line, kEatingCues) && !ContainsAny(line, kScratchingCues)) return "오독오독";
@@ -854,7 +869,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // Before a kanji word the kana cannot be compared: a speaker who starts the word again
     // after a restart (、 or a dash) says a piece of two kana at most (ち、ちが、違う), so the
     // piece is never translated. A dictionary word, a sound or a demonstrative says
-    // something of its own (で、でも、本当; お、おい、魅; あ、あれ、何), and a pause after
+    // something of its own (お、おい、魅; あ、あれ、何), and a pause after
     // a word keeps the word (そ、そんな……嘘).
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
@@ -892,7 +907,9 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         pieces.clear();
         return 0;
     }
-    if (f[i] == f[p] && x != U"デ" && x != U"ジャ") return i;
+    // で、 and じゃ、 inside a line are the conjunction (それで、でも); opening an utterance
+    // before a word they start again they stutter it (で、でも 그, 그래도).
+    if (f[i] == f[p] && ((x != U"デ" && x != U"ジャ") || UtteranceStart(p))) return i;
     const bool sound = x.ends_with(U'ッ') && In(f[p], kSoundsBeforeKanji);
     if (IsKanjiRune(rs[i]) && !((comma || dash) && notStutter) && !sound) return i;
     pieces.clear();
@@ -1043,9 +1060,10 @@ std::string SoundText::Write() {
     std::string b;
     b.reserve(text_.size() + text_.size() / 2);
     bool afterParticle = false;  // the token before rs[i] is a lone particle
+    size_t wordEnd = 0;          // the end of the last word of more than one character
     std::vector<StutterPiece> pieces;
     for (size_t i = 0; i < rs.size();) {
-        if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), ctx_.markers); skip > 0) {
+        if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
             afterParticle = false;
             b += text_.substr(offsets_[i], skip);
             const size_t end = offsets_[i] + skip;
@@ -1112,6 +1130,18 @@ std::string SoundText::Write() {
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
                 next = std::min(rs.size(), i + WordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
+                if (next > i + 1) wordEnd = next;
+                // A word in kanji that takes its particle (煙が, 香りが) ends like a lone one.
+                if (next > i + 1 && IsKanjiRune(rs[i]) && In(rs[next - 1], U"はがをにもでへ")) particle = true;
+                // は, が or を after a word stays a particle before a sound adverb in と that a
+                // kana word would swallow (彼はこくりと, not はこ; 香りがもわりと, not がも).
+                if (!particle && In(rs[i], U"はがを") && i > 0 && (IsKanjiRune(rs[i - 1]) || wordEnd == i)) {
+                    const std::vector<SoundMatch> after = Sounds(i + 1, true);
+                    if (!after.empty() && rs[after.back().end - 1] == U'と') {
+                        next = i + 1;
+                        particle = true;
+                    }
+                }
             }
             b += Bytes(i, next);
         }
@@ -1327,7 +1357,8 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed =
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
-    std::string sounded = internal::RewriteCasualAdjectives(internal::WriteSounds(completed, ctx, snap), ctx, snap);
+    std::string sounded =
+        internal::RewriteCasualAdjectives(internal::WriteSounds(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }

@@ -30,7 +30,12 @@ const dict::LoadResult& SoundDictionary() {
         "かは\t1는가는\tS561\t12\n"
         "では\t그럼\tP250\t13\n"
         "キー\t키\tN110\t14\n"
-        "でも\t그렇지만\tE300\t15\n",
+        "でも\t그렇지만\tE300\t15\n"
+        "浅\t얕\tH100\t16\n"
+        "おも\t무겁\tH100\t17\n"
+        "おめぇ\t너\tN120\t18\n"
+        "てめー\t너\tN120\t19\n"
+        "てめぇ\t너\tN120\t20\n",
     }});
     return result;
 }
@@ -137,7 +142,7 @@ HD_TEST(pipeline_sound) {
         {"うわぁー！", "우와아아！"},
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
-        {"いくぅぅ", "가아아"},
+        {"いくぅぅ", "가 버려~"},
         {"な、なにを", "\xEE\x80\x80" "、なにを"},
         {"だっ、だめ", "\xEE\x80\x80" "、だめ"},
         {"お…お兄ちゃん", "\xEE\x80\x80" "…お兄ちゃん"},
@@ -156,9 +161,11 @@ HD_TEST(pipeline_sound) {
         // a rest mark for each kana of the word it does not reach.
         {"「ご、ごめ、ごめんなさい」",
          "「\xEE\x80\x80" "、\xEE\x80\x80\xEE\x80\x80\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84\xEE\x80\x84" "、ごめんなさい」"},
-        // A dictionary word, a demonstrative, an answer or a sound is a word of its own; a
+        // で、 opening an utterance stutters; a dictionary word, a demonstrative, an answer or
+        // a sound is a word of its own; a
         // pause after a word keeps the word; no stutter before a numeral.
-        {"「で、でも、本当」", "「그래서、でも、本当」"},
+        {"「で、でも、本当」", "「\xEE\x80\x80" "、でも、本当」"},
+        {"「それで、でも、本当」", "「それで、でも、本当」"},
         {"「さ、さ、三分」", "「자、さ、三分」"},
         {"「あ、あれ、何」", "「\xEE\x80\x80" "、あれ、何」"},
         {"「は、はい、行く」", "「\xEE\x80\x80" "、はい、行く」"},
@@ -417,6 +424,11 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"休もうっと。", "休もうっと。"},
         {"なんとかなるっしょ。", "なんとかなるっしょ。"},
         {"日曜日じゃなかったっけ", "日曜日じゃなかったっけ"},
+        // A word spelled with ー keeps it before kana; before a mark, where the tokenizer would
+        // split the ー off, it takes the small vowel of a spelling the dictionary has.
+        {"てめーが黙ってろ", "てめーが黙ってろ"},
+        {"てめー！", "てめぇ！"},
+        {"だぞてめー、", "だぞてめぇ、"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
@@ -501,8 +513,34 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"冷て～！", "冷たい！"},
         {"歌おうぜぇ～。", "歌おうぜぇ～。"},  // the particle ぜ
         {"届いてぇ！", "届いてぇ！"},          // a て form
+        {"「キャリア浅っ」", "「キャリア浅い」"},
+        {"最浅っ！", "最浅っ！"},  // inside a word
+        {"もっと浅っす", "もっと浅っす"},
+        {"おめぇ、何してんだ", "おめぇ、何してんだ"},  // a word spelled with the small vowel
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
+}
+
+// そっか after the kanji stem of a verb in す is its volitional; after a noun the answer.
+HD_TEST(pipeline_volitional_so) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "見逃\t놓&AO@\tM433\t1\n"
+                                     "流\t흘&AA@\tM443\t2\n"
+                                     "漢字\t한자\tN110\t3\n"
+                                     "了解\t이해\tN110\t4\n"
+                                     "解\t풀&AO@\tM443\t5\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const Case cases[] = {
+        {"「見逃そっか」", "「見逃そうか」"},
+        {"汗を流そっか？", "汗を流そうか？"},
+        {"今日は見逃そっかな", "今日は見逃そうかな"},
+        {"漢字そっか", "漢字そっか"},
+        {"了解そっか", "了解そっか"},  // the noun 了解, though 解 alone is a verb stem
+        {"あ、そっか", "あ、そっか"},
+        {"見逃そっかす", "見逃そっかす"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteVolitionalSo(c.in, *loaded.snapshot), std::string(c.want));
 }
 
 HD_TEST(pipeline_sound_extra_isolation) {

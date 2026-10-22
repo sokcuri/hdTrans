@@ -43,6 +43,7 @@ namespace internal {
 //     closing tag SpanClose);
 //   - BBCode tags [b], [/b], [color=red] of up to 128 characters (SpanOpen, SpanClose);
 //   - entities &amp; &#123; &#x1F;  (SpanOpen);
+//   - inline style codes (StyleCodeLength, SpanOpen);
 //   - the host markers, the longest that matches (SpanOpen);
 //   - the stutter marks U+E000 with their separators (SpanOpen);
 //   - the drawl spans U+E005, U+E006 or U+E007 to the same mark (SpanOpen);
@@ -53,6 +54,11 @@ namespace internal {
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
 //     taking the small vowel after it (SpanWord).
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers);
+
+// The length of the inline style code at the start of s, or 0: a font %fNAME; (NAME up to
+// 64 bytes without ;, % or a line feed), a colour #RRGGBB; or #RRGGBBAA;, or the reset #;.
+// A colour or reset does not follow &, where it is a malformed entity (&#12345678;).
+size_t StyleCodeLength(std::string_view s, char before);
 
 // A character kept as written: outside CP932 and neither a Han character nor kana.
 // Hangul, emoji, the letters and symbols of other scripts and the hiragana ゔゕゖ are
@@ -77,7 +83,8 @@ output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx
 // katakana run, does not follow ・ ＝ の or a span, is followed by a particle or
 // predicate it takes (an adjective also by the end of a sentence), does not join the
 // text around it into a dictionary word, has no plain or name sense and is not one of
-// ctx.named.
+// ctx.named. The stem of 行く in katakana before its hiragana conjugation (イっちゃう,
+// イッた, イクの, イきそう) is written 行 the same way.
 output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // A nickname of two to four hiragana before ちゃん or くん in the text pieces written as a
@@ -90,8 +97,9 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
 
 // ならば なら ですから であれば にも関わらず にも拘らず にもかかわらず 対して at the
 // start of a sentence or utterance written with their pronoun (それなら, だから,
-// それでも, 反面) in the text pieces; なら before hiragana stays. A span next to a
-// text piece reads as a character that is neither hiragana nor a line break.
+// それでも, 反面) in the text pieces; なら before hiragana other than いい (ならいい)
+// stays. A span next to a text piece reads as a character that is neither hiragana nor a
+// line break.
 output::Pieces RewriteConjunctions(const output::Pieces& text);
 
 // The text of a text piece, "" for a span.

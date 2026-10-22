@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+lookup:kashira-split	何故かしら……逆に不安になってきたわ……	왜일까……반대로 불안에 됐어……	fix	lookup
+lookup:kashira-split	これが、仲間のいる心強さなのかしら……	이것이, 동료가 있는 든든함인 걸까……	fix	lookup
+dict:jisjk:4264	こういう感じかしら？	이런 느낌일까?	fix	lookup
+dict:colloquial-endings:5	途中ですれ違わなかったかしら？	도중에 스치듯 지나치지 않았을까?	fix	lookup
+dict:colloquial-endings:6	５歳くらいだったかしら	5세 정도였을까	fix	lookup
+dict:colloquial-endings:10	ちゃんとやってるかしら	제대로 하고 있을까	fix	lookup
+dict:colloquial-endings:11	派手すぎないかしら	너무 화려하지 않을까	fix	lookup
+normalize:kashira-ne	どうしてかしらね？	왜일까?	fix	normalize
+dict:jisjk:202128	どうしてかしらね？	!rule:dict:jisjk:202128	keep	local
+dict:jisjk:4264	そうかしら？	그럴까?	keep	lookup
+lookup:kashira-split	どうしてこんなことになったのかしら	왜 이렇게 된 걸까	keep	lookup
+dict:colloquial-endings:12	……というわけで、いかがかしら？	……그래서, 어떨까?	fix	lookup

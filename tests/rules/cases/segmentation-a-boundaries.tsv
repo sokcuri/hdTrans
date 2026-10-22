@@ -16,5 +16,5 @@ segmentation:makushitateru	宿題をださなかった。	숙제를 내지 않�
 segmentation:makushitateru	まだ答えをださない。	아직 대답을 내지 않는다.	keep	lookup
 segmentation:makushitateru	彼は宿題をださない人だ。	그는 숙제를 내지 않는 사람이다.	keep	lookup
 segmentation:makushitateru	柱を立てる。	기둥을 세운다.	keep	lookup
-segmentation:makushitateru	マキさんはカッターを買った。	마키씨는 커터를 샀다.	keep	lookup
-segmentation:makushitateru	フリオさんはジップラインを見た。	후리오씨는 집라인을 보았다.	keep	lookup
+segmentation:makushitateru	マキさんはカッターを買った。	마키 씨는 커터를 샀다.	keep	lookup
+segmentation:makushitateru	フリオさんはジップラインを見た。	후리오 씨는 집라인을 보았다.	keep	lookup

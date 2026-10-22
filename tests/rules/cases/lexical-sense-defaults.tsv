@@ -1,0 +1,66 @@
+rule	input	expected	kind	layer
+dict:jisjk:3372	だから余計なことを考えるな	그러니까 쓸데없는 일을 생각하지 마	fix	lookup
+dict:jisjk:3372	余計な心配だったようだ。	쓸데없는 걱정이었던 것 같다.	fix	lookup
+dict:w:26720	余計に時間かかるだろ	더 시간 걸리지	fix	lookup
+dict:jisjk:3372	一言余計よ！	한마디 쓸데없어!	keep	lookup
+dict:jisjk:3860	「身体はもう平気なのか？」	「몸은 이제 괜찮아?」	fix	lookup
+dict:jisjk:3860	「平気なの？」	「괜찮아?」	fix	lookup
+dict:lex:heiki:alone	平気？	괜찮아?	fix	lookup
+dict:jisjk:3860	平気で何時間もこもってる	rule:dict:jisjk:3860=아무렇지도 %B5@	keep	local
+phrase:平気な顔	平気な顔して甘い言葉を囁く	아무렇지 않은 얼굴 해 달콤한 말을 속삭인다	fix	builtin-phrase
+phrase:余計なお世話	余計なお世話です	쓸데없는 참견입니다	fix	builtin-phrase
+dict:w:26722	「ちょっと待て」	「잠깐 기다려」	fix	local
+dict:w:26722	「ちょっと待って下さいね」	「잠깐 기다려 주세요」	fix	local
+dict:w:26722	ちょっと来てください	rule:dict:w:26722=잠깐	fix	local
+dict:w:26722	「ちょっと痛いかも」	!rule:dict:w:26722	keep	local
+phrase:ちょっと待った	「……ちょっと待った、恥ずかしすぎる」	「……잠깐만, 너무 부끄럽다」	fix	builtin-phrase
+dict:jisjk:374181	「待たせて悪い」	「기다리게 해 미안하다」	fix	local
+dict:jisjk:374181	「引き留めて悪かった」	「만류해 미안했다」	fix	local
+dict:jisjk:374181	知りすぎて悪い情報なんかない	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:5143	「ずるいぞ」	「치사해」	fix	lookup
+dict:jisjk:5143	「御園、その質問はずるいだろ」	「미소노, 그 질문은 치사하지」	fix	lookup
+dict:jisjk:349562	「まぁ……そうだろうね？」	「뭐……그렇겠지?」	fix	lookup
+dict:jisjk:349562	「まぁ……一応」	「뭐……일단」	fix	lookup
+dict:lex:maamaa:da	まぁまぁだ	그저 그렇다	fix	lookup
+dict:w:26726	私の絵は大したものじゃないんだ	내 그림은 별것 아니다	fix	lookup
+dict:w:26723	大したことじゃない	별일 아니다	fix	lookup
+dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대단한 자신이잖아」	keep	lookup
+dict:jisjk:116378	頭の脇に	머리의 옆에	fix	lookup
+dict:jisjk:116378	脇にどいて	옆에 물러나	fix	lookup
+dict:i:7772	もっと脇を締めて……	좀 더 겨드랑이를 붙여……	fix	lookup
+dict:w:26728	驚かれるのは無理もないと思いますが	놀라지는 것은 무리도 아니라고 생각합니다만	fix	lookup
+dict:w:26733	取り付く島もないなぁ	말을 붙여 볼 수도 없다	fix	lookup
+dict:jisjk:148385	体が震えてあらぬ方向へ飛び	몸이 떨려 엉뚱한 방향에 날아	fix	lookup
+dict:jisjk:345205	ま、何にしても一件落着だな	뭐, 어쨌든 일단락이네	fix	lookup
+dict:w:26727	まあいいや、適当に座ってくれ	뭐 좋아, 적당히 앉아 줘	fix	lookup
+phrase:誰の目にもとまらない	どこかにいるけれど、誰の目にもとまらない	어디엔가 있지만, 누구의 눈에도 띄지 않는다	fix	builtin-phrase
+dict:jisjk:19260	図星かどうかはどっち	정곡인가 어떤가는 어느 쪽	fix	lookup
+dict:jisjk:53338	ケーキバイキングははじめて	케이크 뷔페는 처음	fix	lookup
+dict:w:26736	持久走の練習のしすぎで	오래달리기의 연습의 너무 해	fix	lookup
+dict:jisjk:43715	イントネーションや間がおかしい	억양이나 사이가 이상하다	fix	lookup
+dict:w:26738	俺の仕事は親父さんを説得すること	내 일은 아버지를 설득하는 것	fix	lookup
+dict:w:26739	何だか本当に新婚さんみたいだな	왠지 정말 신혼부부 같네	fix	lookup
+dict:jisjk:86934	朝は仲良く一緒に歯磨きだ	아침은 사이 좋고 함께 양치질이다	fix	lookup
+phrase:歯磨き粉	歯磨き粉が切れてる	치약이 끊어져 있다	fix	builtin-phrase
+dict:jisjk:142104	今はデジタル時計を使ってる爆弾が多くて	지금은 디지털 시계를 쓰고 있는 폭탄이 많아서	fix	lookup
+dict:jisjk:91780	なにかをじっと見つめている	뭔가를 가만히 바라보고 있다	fix	lookup
+dict:jisjk:5834	心のどこかで『優しいからそう言ってく	마음의 어디선가 『다정하니까 그렇게 말해 간다	fix	lookup
+dict:jisjk:31505	眼光がほんの一瞬鋭く光った	안광이 그저 순간 날카롭게 빛났다	fix	lookup
+dict:jisjk:722	ちなみにリクエストは	참고로 리퀘스트는	fix	lookup
+dict:jisjk:23777	能力は普段とほぼ変わらない	능력은 평소와 거의 변함없다	fix	lookup
+dict:jisjk:92821	森下さんの頭を撫でてしまったんだろ	모리시타 씨의 머리를 쓰다듬고 있고 끝낸 거지	fix	lookup
+dict:jisjk:593	落ち着くまでそっと抱きしめて待つ	침착할 때까지 살며시 꼭 껴안아 기다린다	fix	lookup
+dict:jisjk:53243	ここはやっぱりハンバーグがうまそうだなぁ	여기는 역시 햄버그가 먹음직스럽구나	fix	lookup
+dict:jisjk:26143	夕飯も食べてないし	저녁도 먹지 않고	fix	lookup
+dict:jisjk:153518	足を組んだまま通知表を眺めていた	다리를 꼰 채로 성적표를 바라보고 있었다	fix	lookup
+dict:jisjk:79589	家族の首を入れて遊園地を訪れた	가족의 목을 넣어 놀이공원을 방문했다	fix	lookup
+dict:jisjk:50594	いつものようにチョコを食べて	여느 때처럼 초콜릿을 먹어	fix	lookup
+dict:jisjk:7576	ナナイさんが微かに微笑んだように見えた	나나이 씨가 희미하게 미소 지은 것처럼 보였다	fix	lookup
+dict:jisjk:96056	ふたりの声に慌てて顔をあげると	rule:dict:jisjk:96056=황급&AW@	fix	local
+dict:jisjk:96056	慌てて手を伸ばすが	황급히 손을 뻗지만	fix	local
+dict:jisjk:96056	全然慌ててるじゃないっ	!rule:dict:jisjk:96056	keep	local
+dict:jisjk:5128	弾力もすごいよね……なんか	탄력도 대단하지……무슨	fix	local
+dict:jisjk:5128	たしかにレナはすごいけど	확실히 레나는 대단한데	fix	local
+dict:jisjk:5128	すごい見てる	rule:dict:jisjk:5128=대단$KA@	fix	local
+dict:jisjk:268079	きーんと冷えててすっごくおいしいですよ～	끼잉 차가워져 있어 엄청 맛있어요~	fix	lookup
+dict:jisjk:90693	ＳとＮがぴったりくっついてるような感じ	S와 N이 딱 들러붙어 있는 것 같은 느낌	fix	lookup

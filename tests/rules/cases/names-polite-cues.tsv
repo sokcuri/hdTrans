@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+names:polite-cue	「筧さん？」	「카케이 씨?」	fix	lookup
+names:polite-cue	玉藻さんが描いた絵	타마모 씨가 그린 그림	fix	lookup
+names:polite-cue	「白崎も、巫女さん以外にトライしたらどうだ？」	「시라사키도, 무녀 씨 이외에 트라이하면 어때?」	keep	lookup
+names:polite-cue	「さすが、お姫様を守るナイトだね」	「역시, 공주님을 지키는 나이트구나」	keep	lookup
+names:polite-cue	「そんな、闇の情報屋さんみたいな台詞じゃなくて……」	「그런, 어둠의 정보상같은 대사가 아니고……」	keep	lookup

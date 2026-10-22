@@ -103,6 +103,8 @@ inline std::string_view Slice(std::string_view s, long from, long count) {
 bool RuneIn(char32_t r, std::string_view set);
 // Whether some rune of s is in set.
 bool AnyRuneIn(std::string_view s, std::string_view set);
+// The depth of 「」 and 『』 quotes open after s when depth were open before it.
+int QuoteDepthAfter(std::string_view s, int depth);
 // s without the runes of cutset at either end (strings.Trim).
 std::string_view TrimRunes(std::string_view s, std::string_view cutset);
 // s without the Unicode white space at either end (strings.TrimSpace).

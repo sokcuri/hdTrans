@@ -289,6 +289,8 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
     }
     // やられたって…まだ: concessive; 長すぎるってぇ？: a question; 美味いぜ？ seeks agreement
     if ((u.key.ends_with("って") || u.key.ends_with("ぜ")) && TrailsOff(after)) return false;
+    // 気のせいじゃないか？ asks (탓 아니야?); 楽じゃないか…… and 楽じゃないか！ do not (편하잖아).
+    if (u.key.ends_with("じゃないか") && Asks(after)) return false;
     const bool closingParticle = u.key.ends_with("のう") || u.key.ends_with("のぅ");
     return SentenceFinal(after, current, closingParticle);
 }
@@ -305,6 +307,15 @@ bool Worker::TrailsOff(std::string_view rest) const {
         if (rest.starts_with(p)) return true;
     }
     return false;
+}
+
+// A question mark after rest, past small kana and ellipses, or at the start of the next
+// token when rest is empty.
+bool Worker::Asks(std::string_view rest) const {
+    constexpr std::string_view kTrail = "ぁぃぅぇぉっー…‥";
+    rest = TrimLeftChars(rest, kTrail);
+    if (rest.empty() && current + 1 < TokenCount() && Span(current + 1) == 0) rest = TrimLeftChars(NextText(current + 1), kTrail);
+    return rest.starts_with("？") || rest.starts_with("?");
 }
 
 // Patterns and noun rows that are not end rows: a noun pattern needs a noun before
@@ -406,14 +417,15 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
     l.records = out;
 }
 
-// Text path: the records that split the modal かもしれない are dropped.
+// Text path: the records that split the modal かもしれない or the sentence-final かしら
+// are dropped.
 void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
     const bool afterKa = surface.ends_with(query) && surface.substr(0, surface.size() - query.size()).ends_with("か");
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query)) {
             l.count--;
             continue;
         }
@@ -436,6 +448,19 @@ bool Worker::SplitsModal(const Record& r, std::string_view query, bool afterKa) 
     if (!rest.starts_with("も") || !r.source.ends_with("のか") || current < 0) return false;
     const std::string_view after = TrimLeftChars(rest.substr(std::string_view("も").size()), "ねよなぁっー");
     return SentenceFinal(after, current, true);
+}
+
+// A word longer than か that ends in か before しら and the end of the sentence (なのか +
+// しら, 何故か + しら): the か belongs to the sentence-final かしら. Ending rows are kept,
+// and so are the polite ですか and ませんか.
+bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
+    if (r.source.size() <= std::string_view("か").size() || !r.source.ends_with("か") || !query.starts_with(r.source) ||
+        current < 0 || AnyOf("STU", At(r.partCode, 0)) || r.source.ends_with("すか") || r.source.ends_with("せんか")) {
+        return false;
+    }
+    const std::string_view rest = query.substr(r.source.size());
+    if (!rest.starts_with("しら")) return false;
+    return SentenceFinal(TrimLeftChars(rest.substr(std::string_view("しら").size()), "ねよぁっー"), current, true);
 }
 
 // Whether form is also the imperative of a godan verb of the dictionary: form without its

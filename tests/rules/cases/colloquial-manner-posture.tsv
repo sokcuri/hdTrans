@@ -13,7 +13,7 @@ dict:taiiku-zuwari	体育座りになる。	무릎을 끌어안고 앉는다.	fi
 dict:chintara-to	彼はちんたらと歩いた。	그는 느릿느릿 걸었다.	fix	lookup
 dict:chintara-to	彼はちんたらと走る。	그는 느릿느릿 달린다.	fix	lookup
 dict:chintara-to	ちんたらと歩かないで。	느릿느릿 걷지 마.	keep	lookup
-dict:chintara-to	ちんたらと話していた。	느릿느릿 이야기하고 있었다.	keep	lookup
+dict:chintara-to	ちんたらと話していた。	느릿느릿 이야기했다.	keep	lookup
 dict:hisshi-to	子供は母の手をひっしと握った。	아이는 어머니의 손을 꼭 잡았다.	fix	lookup
 dict:hisshi-to	彼は荷物をひっしと抱いた。	그는 짐을 꼭 안았다.	fix	lookup
 dict:hisshi-to	彼女は手をひっしとつかんだ。	그녀는 손을 꼭 잡았다.	fix	lookup

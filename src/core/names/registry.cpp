@@ -115,7 +115,7 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 }
 
 void Registry::Forget(const Evidence& evidence) {
-    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_};
+    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_, &kanaHon_};
     for (std::size_t i = 0; i < evidence.counts.size(); i++) {
         for (const std::string& key : evidence.counts[i]) {
             auto it = counts[i]->find(key);
@@ -199,6 +199,17 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             count(prefixes_, label, 1);
         }
     }
+    for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t, 8);
+    // A line that is a name alone, a speaker line before a quote, names the speaker of the
+    // quote.
+    const std::string_view body = TrimSpace(line);
+    if (!nameLine_.empty() && (body.starts_with("「") || body.starts_with("『") || body.starts_with("（"))) {
+        count(prefixes_, nameLine_, 1);
+    }
+    nameLine_.clear();
+    if (const std::size_t n = RuneCount(body); n >= 1 && n <= 8 && PlainLabel(body) && !LabelRole(body)) {
+        nameLine_ = std::string(body);
+    }
     const std::vector<Run> runs = RunsOf(line);
     std::size_t chain = 0;  // first run of the current katakana chain
     for (std::size_t i = 0; i < runs.size(); i++) {
@@ -266,11 +277,19 @@ std::vector<std::string> Registry::Names() {
     return out;
 }
 
+std::vector<std::string> Registry::HonorificOnlyNames() {
+    std::vector<std::string> out;
+    for (const auto& [t, n] : Accepted()) {
+        if (n.honorificOnly) out.push_back(t);
+    }
+    return out;
+}
+
 const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
     std::set<std::string> labelled;
-    auto addLabel = [&](const std::string& raw) {
+    auto addLabel = [&](const std::string& raw, bool plain) {
         for (const std::string& p : LabelParts(raw)) {
             std::string x;
             if (ParentLabel(p, x)) {
@@ -279,12 +298,18 @@ const std::map<std::string, Name>& Registry::Accepted() {
                 continue;
             }
             if (p.empty() || RoleLike(p) || LabelRole(p) || !AllRunes(p, IsNameRune)) continue;
+            // A plain-text label that is a common word and no person of the name layer is
+            // a role (放送, 司会), not a name.
+            if (plain) {
+                const DictFlags f = Flags(p);
+                if (f.common && !f.person && !f.layerSurname && !f.layerGiven) continue;
+            }
             labelled.insert(p);
         }
     };
-    for (const auto& [raw, n] : labels_) addLabel(raw);
+    for (const auto& [raw, n] : labels_) addLabel(raw, false);
     for (const auto& [raw, n] : prefixes_) {
-        if (n >= 3) addLabel(raw);
+        if (n >= 3) addLabel(raw, true);
     }
     for (const std::string& t : labelled) {
         Name& n = all[t];
@@ -304,10 +329,32 @@ const std::map<std::string, Name>& Registry::Accepted() {
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
         n.person = true;
     }
+    for (const auto& [t, c] : kanaHon_) {
+        Name& n = all[t];
+        n.score += static_cast<double>(std::min(c, kHonorificCap));
+        n.person = true;
+    }
     for (const auto& [t, c] : gloss_) {
         Name& n = all[t];
         n.score += 2 * static_cast<double>(c);
         n.person = true;
+    }
+    // A plain-text label seen once or twice adds to the evidence of a surface an honorific
+    // or a gloss shows.
+    for (const auto& [raw, c] : prefixes_) {
+        if (c >= 3) continue;
+        for (const std::string& p : LabelParts(raw)) {
+            const auto it = all.find(p);
+            if (it == all.end() || it->second.score <= 0 || labelled.count(p) > 0 || RoleLike(p) || LabelRole(p)) continue;
+            it->second.score += static_cast<double>(c);
+        }
+    }
+    // A person of the name layer that no other dictionary reads needs one piece of evidence
+    // less, unless it is written in kana alone (a hiragana run before honorifics, below).
+    for (auto& [t, n] : all) {
+        if (!n.person || n.label || n.score <= 0 || AllRunes(t, IsKatakana) || AllRunes(t, IsHiragana)) continue;
+        const DictFlags f = Flags(t);
+        if ((f.layerSurname || f.layerGiven) && !f.common && !f.person && !f.role) n.score += 1;
     }
     for (const auto& [t, c] : runs_) {
         const auto rd = tables_->readings.find(t);
@@ -428,7 +475,19 @@ const std::map<std::string, Name>& Registry::Accepted() {
     for (const auto& [t, n] : all) {
         double need = kThreshold;
         if (RuneCount(t) == 1 && AllRunes(t, IsKanji) && !n.label) need = kSingleThreshold;
-        if (AllRunes(t, IsHiragana) && !n.label) continue;
+        if (AllRunes(t, IsHiragana) && !n.label) {
+            // A hiragana run seen before an honorific is a name there; it stands for the person
+            // alone only when its score reaches the threshold, as after two honorifics, and it is
+            // no common word and no predicate form (あおいさん, but あおい空).
+            const auto k = kanaHon_.find(t);
+            if (k == kanaHon_.end()) continue;
+            if (n.score < need || Flags(t).common || PredicateForm(t)) {
+                Name h = n;
+                h.honorificOnly = true;
+                scores_[t] = h;
+                continue;
+            }
+        }
         if (n.score >= need) scores_[t] = n;
     }
     scoresValid_ = true;
@@ -654,10 +713,14 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
                 break;
             }
         }
+        const bool honorific = !KanaHonorificAt(line.substr(b)).empty();
+        // A hiragana name starts the line, follows other than hiragana or stands before an
+        // honorific (妹のさよりちゃん, ねえあおいさん), but not a creature, food or adverb there.
         if (AllRunes(found, IsHiragana)) {
-            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp);
+            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing);
         }
-        if (ok) out.push_back(Occurrence{a, b, found, Guarded(line, a, b)});
+        const bool bare = acc.at(found).honorificOnly && !honorific;
+        if (ok) out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
     }
     return out;
 }

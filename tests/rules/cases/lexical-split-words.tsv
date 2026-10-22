@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:lexical-split-words	これで二回目だ。	이것으로 두 번째다.	fix	lookup
 dict:lexical-split-words	一つ目の箱を開けた。	첫 번째의 상자를 열었다.	fix	lookup
-dict:lexical-split-words	何回目の挑戦だろう。	몇 번째 도전일 것이다.	fix	lookup
+dict:lexical-split-words	何回目の挑戦だろう。	몇 번째 도전일까.	fix	lookup
 dict:lexical-split-words	書類に一度目を通した。	서류에 한 번 훑어보았다.	keep	lookup
 dict:lexical-split-words	彼女は遠慮がちに笑った。	그녀는 조심스럽게 웃었다.	fix	lookup
 dict:lexical-split-words	道を間違えがちだ。	길을 잘못하기 십상이다.	fix	lookup

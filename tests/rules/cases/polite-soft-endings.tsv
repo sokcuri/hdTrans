@@ -15,4 +15,4 @@ dict:polite-soft-ending	どうでしょう？	어떨까요?	fix	lookup
 dict:polite-soft-ending	明日行きます。	내일 갑니다.	keep	lookup
 dict:polite-soft-ending	学生です。	학생입니다.	keep	lookup
 dict:polite-soft-ending	昨日行きました。	어제 갔습니다.	keep	lookup
-dict:polite-soft-ending	本当にそうです。	정말로 그렇습니다.	keep	lookup
+dict:polite-soft-ending	本当にそうです。	정말 그렇습니다.	keep	lookup

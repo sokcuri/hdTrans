@@ -87,6 +87,27 @@ HD_TEST(SnapshotRowsWithoutRuleBodiesAreReported) {
     HD_CHECK(carried.errors.empty());
 }
 
+// A hiragana person of the name layer whose key reads as a verb form stays stored, but
+// takes part in a lookup only where the key is confirmed.
+HD_TEST(SnapshotKanaPersonKeptForConfirmedLookups) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\tid\n";
+    const LoadResult loaded = Load({
+        MakeFile("base.tsv", header + "つぐ\t잇&AA@\tM442\t\t\tGN\t1\n"),
+        MakeFile("names.tsv", "#! layer=names\n" + header +
+                                  "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t2\n"
+                                  "つぐみ\t작품\tN130\tQWK\t\tGN\t3\n"),
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const Snapshot& snap = *loaded.snapshot;
+    HD_CHECK_EQ(Targets(snap.NameRecords("つぐみ")), std::string("츠구미"));
+    const LookupContext none;
+    HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, none)).find("츠구미") == std::string::npos);
+    KeySet confirmed{"つぐみ"};
+    LookupContext context;
+    context.confirmed = &confirmed;
+    HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, context)).find("츠구미") != std::string::npos);
+}
+
 HD_TEST(SnapshotFolderLayers) {
     const LoadResult r = LoadFoldersTsv({Folder(), Folder() + "/over"});
     HD_REQUIRE(r.snapshot != nullptr);
@@ -555,16 +576,16 @@ HD_TEST(SnapshotCompiledPlainDictionaries) {
     HD_CHECK_EQ(s.PlainFiles().size(), size_t{4});
     // The builtin endings come first, then the plain files numbered in order; the
     // base dictionary resolves the る-verb 帰る as godan.
-    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{565});
+    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{576});
     HD_CHECK_EQ(EntriesOf(s.Plain(), 0), "帰 돌아&A1@ M428 @1.0 | 猫 냥이 N110 @2.0");
     HD_CHECK_EQ(EntriesOf(s.Plain(), 1), "猫 고양이 N110 @1.0");
-    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{568});
+    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{579});
     HD_CHECK(s.Plain().Entries()[0].end);
     // The text path adds the kana spellings, the phrases but the 343 interjections in
     // kana, and the patterns.
     HD_CHECK_EQ(EntriesOf(s.TextPlain(), -2), "あい 사랑 N110 @3.0");
-    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2308});
-    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2312});
+    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2412});
+    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2416});
     HD_CHECK(s.Senses().contains("腕"));
     const auto better = s.Senses().find("マシ");
     HD_REQUIRE(better != s.Senses().end());

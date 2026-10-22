@@ -39,11 +39,15 @@ std::string JoinMasu(std::string_view text);
 // conjunction (それは, えっと, つまり, だから) or a request form (ください, なさい).
 std::string JoinPausedCopula(std::string_view text);
 
+// A を repeated after a word written once (素振りをを見せる 素振りを見せる); a run of を
+// that does not follow a word stays.
+std::string CollapseDoubledWo(std::string_view text);
+
 // The spoken and old-fashioned spellings the dictionary does not read in their plain
 // form: an adjective or verb stem in katakana (ウザい うざい), じゃね？ and 良くね？,
 // ねえ after は or も, the contracted ている and いる, じゃない of an appeal (じゃん) or a
 // prohibition (なよ), a clipped adjective (怖っ！ 怖い！), the negative ん (知らん 知らない),
-// できぬ.
+// できぬ; the ね or ん after a sentence-final かしら is dropped (どうしてかしらね).
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
 
 // あれ (also drawn out, あれ～？) and え at the start of a sentence before 、，！？…‥ or a

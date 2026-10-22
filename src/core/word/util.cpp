@@ -22,6 +22,17 @@ bool AnyRuneIn(std::string_view s, std::string_view set) {
     return false;
 }
 
+int QuoteDepthAfter(std::string_view s, int depth) {
+    for (std::size_t at = 0; at < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(at));
+        if (r.size == 0) break;
+        if (r.cp == U'「' || r.cp == U'『') depth++;
+        if ((r.cp == U'」' || r.cp == U'』') && depth > 0) depth--;
+        at += r.size;
+    }
+    return depth;
+}
+
 std::string_view TrimRunes(std::string_view s, std::string_view cutset) {
     while (!s.empty() && RuneIn(text::DecodeRune(s).cp, cutset)) s.remove_prefix(text::DecodeRune(s).size);
     while (!s.empty() && RuneIn(DecodeLastRune(s).cp, cutset)) s.remove_suffix(DecodeLastRune(s).size);

@@ -21,8 +21,8 @@ dict:common-nouns	部室で会う。	동아리방에서 만난다.	fix	lookup
 dict:common-nouns	部室へ行く。	동아리방에 간다.	fix	lookup
 dict:common-nouns	部屋で待つ。	방에서 기다린다.	keep	lookup
 dict:common-nouns	部活に行く。	동아리에 간다.	keep	lookup
-dict:common-nouns	ハンバーグを食べる。	함박스테이크를 먹는다.	fix	lookup
-dict:common-nouns	ハンバーグはない。	함박스테이크는 없다.	fix	lookup
+dict:common-nouns	ハンバーグを食べる。	햄버그를 먹는다.	fix	lookup
+dict:common-nouns	ハンバーグはない。	햄버그는 없다.	fix	lookup
 dict:common-nouns	ハンバーガーを食べる。	햄버거를 먹는다.	keep	lookup
 dict:common-nouns	チーズバーガー。	치즈버거.	keep	lookup
 dict:common-nouns	舞台袖に下がる。	무대 옆에 내려간다.	fix	lookup

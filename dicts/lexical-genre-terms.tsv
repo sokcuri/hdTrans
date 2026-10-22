@@ -1,0 +1,42 @@
+#! layer=words
+# 판타지, 군사물, 귀족 계급의 일반 용어
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+聖騎士	성기사	N110	VHn		GN				replace			genre-terms:1
+騎士団長	기사단장	N110	VHn		GN				replace			genre-terms:2
+魔導師	마도사	N110	VHn		GN				replace			genre-terms:3
+竜騎士	용기사	N110	VHn		GN				replace			genre-terms:4
+零戦	제로센	N110	VBlVTw		GN				replace			genre-terms:5
+冒険者	모험가	N110	VHn		GN				replace			genre-terms:6
+受付嬢	접수원	N110	VHn		GN				replace			genre-terms:7
+錬金術師	연금술사	N110	VHn		GN				replace			genre-terms:8
+兵糧	군량	N110			GN				replace			genre-terms:9
+公子	공자	N110	VHn		GN				replace			genre-terms:11
+王弟	왕제	N110	VHn		GN				replace			genre-terms:12
+王子妃	왕자비	N110	VHn		GN				replace			genre-terms:13
+第一王子	제1 왕자	N110	VHn		GN				replace			genre-terms:14
+第一王女	제1 왕녀	N110	VHn		GN				replace			genre-terms:15
+第一皇子	제1 황자	N110	VHn		GN				replace			genre-terms:16
+第一皇女	제1 황녀	N110	VHn		GN				replace			genre-terms:17
+公爵位	공작위	N110			GN				replace			genre-terms:18
+侯爵位	후작위	N110			GN				replace			genre-terms:19
+伯爵位	백작위	N110			GN				replace			genre-terms:20
+子爵位	자작위	N110			GN				replace			genre-terms:21
+男爵位	남작위	N110			GN				replace			genre-terms:22
+叙任	서임	N110		Hd	GN				replace			genre-terms:23
+叙任式	서임식	N110			GN				replace			genre-terms:24
+魔除け	액막이	N110			GN				replace			genre-terms:25
+水魔法	물 마법	N110			GN				replace			genre-terms:26
+火魔法	불 마법	N110			GN				replace			genre-terms:27
+土魔法	흙 마법	N110			GN				replace			genre-terms:28
+光魔法	빛 마법	N110			GN				replace			genre-terms:29
+艦攻	함공	N110	VPeVTw		GN				replace			genre-terms:30
+九九艦爆	99식 함폭	N110	VPeVTw		GN				replace			genre-terms:31
+九七艦攻	97식 함공	N110	VPeVTw		GN				replace			genre-terms:32
+九六艦戦	96식 함전	N110	VPeVTw		GN				replace			genre-terms:33
+一式陸攻	1식 육공	N110	VPeVTw		GN				replace			genre-terms:34
+零式艦上戦闘機	영식 함상 전투기	N110	VPeVTw		GN				replace			genre-terms:35
+三八式歩兵銃	38식 보병총	N110	VPeVTw		GN				replace			genre-terms:36
+収納袋	수납 주머니	N110			GN				replace			genre-terms:37
+魔法袋	마법 주머니	N110			GN				replace			genre-terms:38
+アイテム袋	아이템 주머니	N110			GN				replace			genre-terms:39
+冒険者たち	모험가들	N110	VHn		GN				replace			genre-terms:40

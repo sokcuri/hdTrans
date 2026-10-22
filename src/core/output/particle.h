@@ -58,7 +58,7 @@ struct JosaForms {
     std::string_view vowel;
 };
 
-constexpr int kJosaRows = 28;
+constexpr int kJosaRows = 29;
 
 // Two rows are equal; the first one matches.
 std::span<const JosaForms, kJosaRows> JosaTable();

@@ -1,0 +1,15 @@
+#! layer=base
+# 과거 어미 뒤 のだ, のだろう, のだから 계열
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+かったのだろう	5을 것이다	T500			GN				past-noda:1
+かったのだろうと	5을 거라고	T500			GN				past-noda:2
+かったのだから	5으니까	T500			GN				past-noda:3
+かったのですから	5으니까요	T500			GN				past-noda:4
+かったのかしら	5던 걸까	T500			GN				past-noda:5
+かったのでしょうか	5을까요	T500			GN				past-noda:6
+かったのだった	5다	T500			GN				past-noda:7
+かったのであった	5다	T500			GN				past-noda:8
+かったのだけど	5는데	T500			GN				past-noda:9
+かったのだけれど	5는데	T500			GN				past-noda:10
+由もなかったのだ	3 수가 없었던 것이다	S500			GN				past-noda:11
+由もなかったのである	3 수가 없었던 것이다	S500			GN				past-noda:12

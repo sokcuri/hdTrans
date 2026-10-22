@@ -1,5 +1,8 @@
+#include <algorithm>
+
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
+#include "core/pipeline/runes.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -18,6 +21,9 @@ bool CharOrEnd(std::string_view s, size_t p, std::u32string_view set, Match& m, 
     if (OneOf(s, q, set) || p == s.size()) return Done(s, m, p, q, k);
     return false;
 }
+
+// The character before byte pos of s; 0 at the start.
+char32_t Before(std::string_view s, size_t pos) { return pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp; }
 
 // かも(しれ|知れ)(?:ん|ね[ぇえー]+)
 bool Shiren(std::string_view s, size_t pos, Match& m) {
@@ -105,10 +111,12 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// (っ|し)ちま([うっえいわお])|んじま([うっえいわお])
+// ([っし]|[えけげせぜてでねべめれ]|[見来寝着出居似煮])ちま([うっえいわお])|んじま([うっえいわお]):
+// てしまう contracted, after the て form of a godan verb, する and a verb in -eru or -iru
+// (言っちまう, 忘れちまう, 見ちまった)
 bool Chimau(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (OneOf(s, p, U"っし")) {
+    if (OneOf(s, p, U"っしえけげせぜてでねべめれ見来寝着出居似煮")) {
         size_t q = p;
         if (Lit(s, q, "ちま")) {
             size_t r = q;
@@ -239,7 +247,7 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
         while (before > 0 && (static_cast<unsigned char>(s[before - 1]) & 0xC0) == 0x80) before--;
         if (before > 0) before--;
         const char32_t c = pos == 0 ? 0 : text::DecodeRune(s.substr(before)).cp;
-        if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c))) return false;
+        if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー')) return false;
     }
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
@@ -262,6 +270,8 @@ constexpr char kKya[] = "っきゃない";
 constexpr char kUssai[] = "うっさい";
 constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
+constexpr char kMokkai[] = "もっかい";
+constexpr char kSoyuKoto[] = "そゆこと";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -332,8 +342,169 @@ bool Janee(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|^し|[^ぁ-ゖ]し)(と|ど)
-// (く|こう|こ|いて|いた|きな|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$)
+// じゃん(?:かよ?[っー～]*|っ+) before a character other than hiragana or the end: the particles
+// and the stress after じゃん change nothing (いいじゃんか, ないじゃんかよ, 夢じゃんっ,
+// 透けてるじゃんかーっ).
+bool JanKa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "じゃん")) return false;
+    const size_t head = p;
+    if (Lit(s, p, "か")) {
+        Lit(s, p, "よ");
+        while (OneOf(s, p, U"っー～")) {
+        }
+    } else {
+        while (Lit(s, p, "っ")) {
+        }
+    }
+    if (p == head) return false;
+    size_t q = p;
+    if (Take(s, q, IsHiraganaClass)) return false;
+    m.end = p;
+    return true;
+}
+
+// ([ぁ-ゖ一-龥々])([こごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
+// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな). Not そっか: after kana
+// (そっか, あそっか) it is そうか read as an answer, and after kanji the sound stage asks the
+// dictionary (RewriteVolitionalSo).
+bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Take(s, p, [](char32_t c) { return IsHiraganaClass(c) || IsKanjiClass(c); })) return false;
+    const size_t kana = p;
+    if (!OneOf(s, p, U"こごそとのぼもろよ")) return false;
+    if (Span(s, kana, p) == "そ") return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "っか")) return false;
+    size_t q = p;
+    if (q < s.size() && !OneOf(s, q, U"なねぁあー～？?！!。、…‥」』）)")) return false;
+    m.end = p;
+    return true;
+}
+
+// Whether pos starts a sentence or a clause: the start of s, or after 「『（。！？!?…‥、
+// or a space.
+bool ClauseStart(std::string_view s, size_t pos) {
+    if (pos == 0) return true;
+    size_t p = pos - 1;
+    while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) p--;
+    return In(At(s, p).cp, U"「『（。！？!?…‥、 　");
+}
+
+// んで at the start of a clause before 、，？?！!…‥」: それで (んで、どうする).
+bool NdeStart(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "んで")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, U"、，？?！!…‥」")) return false;
+    m.end = p;
+    return true;
+}
+
+// しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー, ならしゃーない). Not the
+// topic は fused to a pronoun in し (あたしゃあね, わしゃあね, わっしゃあ, わたくしゃあ).
+bool Shaanai(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    for (const std::string_view stem : {"あた", "わた", "わたく", "わ", "わっ", "あっ"}) {
+        if (s.substr(0, pos).ends_with(stem)) return false;
+    }
+    if (!Lit(s, p, "しゃ") || !OneOf(s, p, U"ーあ")) return false;
+    if (!Lit(s, p, "ない")) {
+        if (!Lit(s, p, "ね")) return false;
+        while (OneOf(s, p, U"ぇえー")) {
+        }
+    }
+    m.end = p;
+    return true;
+}
+
+// さーて at the start of a clause before と or a mark: さて (さーて、行くか).
+bool Saate(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "さ")) return false;
+    if (!Repeat(s, p, InSet(U"ー～"), 1, kUnbounded, [&](size_t q) {
+            size_t r = q;
+            if (!Lit(s, r, "て")) return false;
+            size_t t = r;
+            if (t < s.size() && !Lit(s, t, "と") && !OneOf(s, t, U"、，？?！!…‥」。")) return false;
+            m.end = r;
+            return true;
+        })) {
+        return false;
+    }
+    return true;
+}
+
+// ひで[えぇー]+ before a sentence particle or a character other than hiragana: ひどい.
+bool Hidee(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "ひで")) return false;
+    return Repeat(s, p, InSet(U"えぇー"), 1, kUnbounded, [&](size_t q) {
+        size_t r = q;
+        if (r < s.size() && !OneOf(s, r, U"なよぞし") && Take(s, r, IsHiraganaClass)) return false;
+        m.end = q;
+        return true;
+    });
+}
+
+// おいっ+ at the start of a clause before a mark: the call おい, not 置いて.
+bool OiTsu(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "おい") || !Lit(s, p, "っ")) return false;
+    while (Lit(s, p, "っ")) {
+    }
+    size_t q = p;
+    if (q < s.size() && !OneOf(s, q, U"、，？?！!…‥」。")) return false;
+    m.end = p;
+    return true;
+}
+
+// ([いるたうくすつぬぶむぐ])んか(?=[？?」』。…‥！!]|ね|い|よ|$): the question のか with
+// の contracted after a predicate (いいんか, あるんか, 信じるんかい). A く that follows
+// katakana, two kanji, う, ん, ー or a small kana, or starts the text, is the honorific くん
+// (田中くんか, ユウくんかい, ゆうくんか), not the end of a verb (書くんか, いくんか).
+bool NnKa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"いるたうくすつぬぶむぐ")) return false;
+    if (Span(s, pos, p) == "く") {
+        const text::Rune b = LastRune(s.substr(0, pos));
+        if (pos == 0 || IsKatakanaRune(b.cp) || In(b.cp, U"うんーぁぃぅぇぉゃゅょゎ") ||
+            (IsKanjiClass(b.cp) && IsKanjiClass(Before(s, pos - b.size)))) {
+            return false;
+        }
+    }
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "んか")) return false;
+    size_t q = p;
+    if (q < s.size() && !OneOf(s, q, U"？?」』。…‥！!ねいよ")) return false;
+    m.end = p;
+    return true;
+}
+
+// なー+に at the start of a clause: なに drawn out (なーにやってんの).
+bool Naani(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "な")) return false;
+    return Repeat(s, p, InSet(U"ー～"), 1, kUnbounded, [&](size_t q) {
+        size_t r = q;
+        if (!Lit(s, r, "に")) return false;
+        m.end = r;
+        return true;
+    });
+}
+
+// ([こそど])っから: ここから, そこから, どこから contracted.
+bool KoKara(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"こそど")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "っから")) return false;
+    m.end = p;
+    return true;
+}
+
+// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|やっ|^し|[^ぁ-ゖ]し)(と|ど)
+// (く|こう|こ|いて|いた|きな|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$), or けば
 bool Toku(std::string_view s, size_t pos, Match& m) {
     auto after = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -348,6 +519,8 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
             if (Take(s, t, [](char32_t c) { return !IsHiraganaClass(c); })) return Done(s, m, r, t, 4);
             t = r;
             if (OneOf(s, t, U"よねぞわなも")) return Done(s, m, r, t, 4);
+            t = r;
+            if (w == "け" && Lit(s, t, "ば")) return Done(s, m, r, t, 4);
             for (std::string_view e : {"あげ", "くれ", "くだ"}) {
                 t = r;
                 if (Lit(s, t, e)) return Done(s, m, r, t, 4);
@@ -361,7 +534,7 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
         const bool ok = Repeat(s, p, InSet(U"っしいえけげせぜてねべめれん"), 0, 1, after);
         if (ok) return true;
     }
-    for (std::string_view w : {"もらっ", "まかし"}) {
+    for (std::string_view w : {"もらっ", "まかし", "やっ"}) {
         p = pos;
         if (Lit(s, p, w) && after(p)) return true;
     }
@@ -369,6 +542,24 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     if (pos == 0 && Lit(s, p, "し") && after(p)) return true;
     p = pos;
     return Take(s, p, [](char32_t c) { return !IsHiraganaClass(c); }) && Lit(s, p, "し") && after(p);
+}
+
+// Toku where the text around allows it: やっといた that starts a clause and is cut off by a
+// mark before a verb of searching or finding in its sentence is the adverb やっと before
+// いた (やっといた、探したよ), not やっておいた (やっといたよ).
+bool TokuInText(std::string_view s, size_t pos, Match& m) {
+    constexpr std::string_view kFound = "やっといた";
+    if (s.substr(pos).starts_with(kFound) && ClauseStart(s, pos)) {
+        size_t p = pos + kFound.size();
+        if (OneOf(s, p, U"、，！!…‥")) {
+            std::string_view rest = s.substr(p);
+            rest = rest.substr(0, std::min(rest.find("。"), rest.find("」")));
+            for (std::string_view v : {"探", "捜", "見つけ", "見つか", "見っけ", "発見", "さがし", "みつけ", "みつか"}) {
+                if (rest.find(v) != std::string_view::npos) return false;
+            }
+        }
+    }
+    return Toku(s, pos, m);
 }
 
 // ([そこあど])[ーう]ゆ[うー]
@@ -448,7 +639,19 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, UtoShite, [](const Match& m) { return Cat({"うとしてい", m.group[1]}); });
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
-    text = ReplaceAll(text, Toku, [](const Match& m) {
+    text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
+    text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
+    text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
+    text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
+    text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
+    text = ReplaceAll(text, OiTsu, [](const Match&) { return std::string("おい"); });
+    text = ReplaceAll(text, Literal<kSoyuKoto>, [](const Match&) { return std::string("そういうこと"); });
+    text = ReplaceAll(text, NnKa, [](const Match& m) { return Cat({m.group[1], "のか"}); });
+    text = ReplaceAll(text, Naani, [](const Match&) { return std::string("なに"); });
+    text = ReplaceAll(text, KoKara, [](const Match& m) { return Cat({m.group[1], "こから"}); });
+    text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
+    text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
+    text = ReplaceAll(text, TokuInText, [](const Match& m) {
         const Match g = Rematch(m, Toku);
         const std::string_view stem = g.group[1];
         std::string_view te = "て";

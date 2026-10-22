@@ -6,7 +6,7 @@ local:3604	そこへ行くな。	거기에 가지 마.	keep	local-ending
 local:3604	それは困るな。	그것은 곤란하구나.	keep	local-ending
 dict:aredake:1	犬があれだけ大きいとは思わなかった。	개가 그토록 크다고는 생각하지 않았다.	fix	lookup
 dict:aredake:2	家もあれだけ古いと危ない。	집도 그토록 낡으면 위험하다.	fix	lookup
-dict:aredake:3	彼にあれだけ言われたのに。	그에게 그토록 말해졌는데.	fix	lookup
+dict:aredake:3	彼にあれだけ言われたのに。	그에게 그토록 들었는데.	fix	lookup
 dict:aredake:1	お金があれば買える。	돈이 있으면 살 수 있다.	keep	lookup
 dict:aredake:2	時間もあれば終わる。	시간도 있으면 끝난다.	keep	lookup
 constraint:sou-itta-predicate	彼女は笑ってそう言った。	그녀는 웃어 그렇게 말했다.	fix	lookup

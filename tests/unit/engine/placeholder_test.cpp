@@ -41,6 +41,6 @@ HD_TEST(engine_placeholder_masks) {
     const dict::Snapshot& snap = *loaded.snapshot;
     HD_CHECK_EQ(Translate(snap, "○月○日"), std::string("○월 ○일"));
     HD_CHECK_EQ(Translate(snap, "第○話"), std::string("제○화"));
-    HD_CHECK_EQ(Translate(snap, "◯◯さん"), std::string("◯◯씨"));
+    HD_CHECK_EQ(Translate(snap, "◯◯さん"), std::string("◯◯ 씨"));
     HD_CHECK_EQ(Translate(snap, "●月●日"), std::string("●월●일"));
 }

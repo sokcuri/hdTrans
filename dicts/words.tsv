@@ -1170,7 +1170,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 まっ赤	빨강	N110			GN						まっか	w:1163
 まつ毛	속눈썹	N110			GN						まつげ	w:1164
 まともに	제대로	E300			GN				xxx llm	1		w:1165
-まとわりつ	달라&HC@	M421			GN						まとわりつく	w:26627
+まとわりつ	달라&HC@	M421		Dx	GN						まとわりつく	w:26627
 まま親	계친	N110			GN						ままおや	w:1166
 まるっきり	통	E300			GN						まるっきり	w:1167
 まる一日	하루 종일	N110	UMe	Tm	GN				llm		まるいちにち	w:1168
@@ -12111,7 +12111,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 俳諧	하이카이 렌가	N110			GN				llm		はいかい	w:12103
 俵物	다와라모노	N110			GN				xxx llm	1		w:12104
 倉頡輸入法	창힐 입력법	N110	UTt		GN						そうけつゆにゅうほう	w:12105
-個所	군데	N110			GN				xxx	1	かしょ	w:12106
+個所	부분	N110			GN				xxx	1	かしょ	w:12106
 個虫	개충	N110			GN				xxx llm	1		w:12107
 倍良	놀래기과	N110			GN						べら	w:12108
 倒さ	거꾸로	N110			GN				llm		さかさ	w:12109
@@ -12179,7 +12179,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 傷痕	상흔	N110			GN						きずあと	w:12171
 傷薬	상처약	N110			GN				xxx llm	1		w:12172
 傷跡	상흔	N110			GN				xxx	1	きずあと	w:12173
-傾	기&LC@	M422			GN				xxx llm	1		w:12174
+傾	기&LC@	M422		Dx	GN				xxx llm	1		w:12174
 傾斜面	경사면	N110			GN						けいしゃめん	w:12175
 僅かに	조금	E300			GN				xxx		わずかに	w:12176
 僅かに	간신히	E300			GN				llm		わずかに	w:12177
@@ -14475,9 +14475,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大きな	큰	E0H0			GN				llm		おおきな	w:14463
 大ごと	큰일	N110			GN				llm		おおごと	w:14464
 大さじ	큰술	N110		Ct	GN				llm		おおさじ	w:14465
-大したこと無	시들$AB@	H7U0			GN						たいしたことない	w:14466
-大した事な	시들$AB@	H7U0			GN						たいしたことない	w:14467
-大した事無	시들$AB@	H7U0			GN						たいしたことない	w:14468
+大したこと無	별일 아$A3@	E7U0			GN						たいしたことない	w:14466
+大した事な	별일 아$A3@	E7U0			GN						たいしたことない	w:14467
+大した事無	별일 아$A3@	E7U0			GN						たいしたことない	w:14468
 大そう	무척	E300			GN						たいそう	w:14469
 大そう	엄청%D3@	G8U0			GN				xxx llm		たいそう	w:14470
 大そう	대단%A1@	G8U0			GN				llm		たいそう	w:14471
@@ -15218,7 +15218,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 寝技	굳히기	N110	UTt		GN				xxx llm		ねわざ	w:15206
 寝技	뒷거래	N110			GN				llm		ねわざ	w:15207
 寝癖	뻗친 머리	N110			GN				xxx llm	1		w:15208
-寝転が	드러&J4@	M428			GN				xxx llm	1		w:15209
+寝転が	드러&J4@	M428		Dx	GN				xxx llm	1		w:15209
 寝返	돌아&J4@	M428			GN						ねがえる	w:15210
 察し	짐작	N110			GN				xxx llm	1		w:15211
 察知	감지	N110			GN				xxx llm	1		w:15212
@@ -15396,7 +15396,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 少数言語	소수언어	N110			GN						しょうすうげんご	w:15382
 少陰	소음	N110			GN						しょういん	w:15383
 少陽	소양	N110			GN						しょうよう	w:15384
-尖	뾰족해&AL@	M428			GN				xxx llm	1		w:15385
+尖	뾰족해&AL@	M428		Dx	GN				xxx llm	1		w:15385
 尖度	첨도	N110			GN						せんど	w:15386
 尖閣土竜	센카쿠두더지	N110			GN						せんかくもぐら	w:15387
 尚も	더욱	E300			GN						なおも	w:26630
@@ -21148,7 +21148,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 突っかい棒	지지대	N110			GN						つっかいぼう	w:21130
 突っ慳貪	퉁명%A1@	G8U0			GN						つっけんどん	w:21131
 突っ支い棒	지지대	N110			GN						つっかいぼう	w:21132
-突っ立	우두커니 &AD@	M424			GN				xxx llm	1		w:21133
+突っ立	우두커니 &AD@	M424		Dx	GN				xxx llm	1		w:21133
 突っ走	폭주&AV@	M428			GN				xxx llm	1		w:21134
 突っ込みをいれ	태클을 &L1@	M427			GN				llm			w:21135
 突出し	돌출	N110			GN				xxx llm		つきだし	w:21136
@@ -23474,7 +23474,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 解決方法	해결 방법	N110	UMn		GN				llm		かいけつほうほう	w:23454
 解熱薬	해열제	N110			GN						げねつやく	w:23455
 触	만&AL@	M428			GN				xxx llm	1		w:23456
-触れ合	서로 &F9@	M420			GN				xxx llm	1		w:23457
+触れ合	서로 &F9@	M420		Dx	GN				xxx llm	1		w:23457
 触れ合い	교감	N110			GN				llm		ふれあい	w:23458
 触れ込み	선전	N110	UTs		GN				llm		ふれこみ	w:23459
 触合い	교감	N110			GN				llm		ふれあい	w:23460
@@ -25813,7 +25813,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 馬鹿者	바보	N110			GN						ばかもの	w:25793
 馭者	마부	N110			GN						ぎょしゃ	w:25794
 馴れ寿司	나레즈시	N110			GN						なれずし	w:25795
-馴染	친숙해&AL@	M425			GN				xxx llm	1		w:25796
+馴染	친숙해&AL@	M425		Dx	GN				xxx llm	1		w:25796
 馴鮨	나레즈시	N110			GN						なれずし	w:25797
 駄々	응석	N110			GN						だだ	w:25798
 駄々っ子	응석받이	N110			GN						だだっこ	w:25799
@@ -26692,7 +26692,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ほんきほんき	진짜 진짜	E320			GN							w:26697
 褒めちぎ	한껏 칭찬&AV@	M438			GN							w:26698
 危険をかえりみずに	위험을 무릅쓰고	A9D0			GN							w:26699
-上気	상기&C6@	M429			GN							w:26700
+上気	상기&C6@	M429		Dx	GN							w:26700
 怖えよ	무서워	E320			GN							w:26701
 格好つけ	허세	N110			GN							w:26702
 ジュージュージュー	지글지글지글	E300			GN							w:26703
@@ -26705,7 +26705,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 読書漬け	독서 삼매경	N110			GN							w:26710
 わんぴーす	원피스	N110	VCp		GN						わんぴーす	w:26711
 打たれ強	맷집이 $DE@	H7U0			GN						うたれづよい	w:26712
-頑張ろっか	힘내볼까	E320			GN							w:26713
+頑張ろうか	힘내볼까	E320			GN							w:26713
 初回限定特装版	초회 한정 특장판	N110			GN							edition:first-limited-special
 特装版	특장판	N110			GN							edition:special
 撮り下ろし	신규 촬영	N110									とりおろし	commerce:photography:n1
@@ -26739,3 +26739,22 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 弾け	칠 수 &HN@	M427			GN	5501	||2 &&4 S-1== "が" P-2== "1**" A-2== "VRy" D-1= "(을)를" &&2 P-1== "2**" A-2== "VRy"	악기(VRy) 뒤 조사 다음의 弾け를 터지다가 아니라 칠 수 있다로 고르고, が는 (을)를로 바꾼다 (ピアノが弾ける 피아노를 칠 수 있다).				w:26717
 へと	에게	P201			GN	5502	||1 &&7 P-1== "1**" A-1== "VHnUAq" S+1!= "L迎" S+1!= "L辿" S+1!= "L昇" S+1!= "L着" S+1!= "L下"	사람이나 직업 의미의 명사 뒤 へと를 (으)로가 아니라 에게로 고른다 (先生へと謝罪した 선생님에게 사죄했다). 맞이하다, 도착하다, 승격하다, 내려가다 앞은 (으)로로 둔다.				w:26718
 嬢	양	N110	VHn	Tu	GN							w:26719
+余計に	더	E300			GN						よけいに	w:26720
+よけいに	더	E300			GN							w:26721
+ちょっと	잠깐	E300			GN	5206	||1 ||4 S+1== "L待" S+1== "L来" S+1== "L行って" S+1== "L出かけ"	기다리다, 오다, 다녀오다, 나가다 앞의 ちょっと는 잠깐으로 고른다.				w:26722
+大したことじゃな	별일 아$A3@	E7U0			GN						たいしたことじゃない	w:26723
+大した事じゃな	별일 아$A3@	E7U0			GN						たいしたことじゃない	w:26724
+大したもんじゃな	별것 아$A3@	E7U0			GN						たいしたもんじゃない	w:26725
+大したものじゃな	별것 아$A3@	E7U0			GN						たいしたものじゃない	w:26726
+適当に	적당히	E300			GN						てきとうに	w:26727
+無理もな	무리도 아$A3@	E7U0			GN						むりもない	w:26728
+無理も無	무리도 아$A3@	E7U0			GN						むりもない	w:26729
+目にもとまらな	눈에도 보이지 $D7@	E7U0			GN						めにもとまらない	w:26730
+目にも止まらな	눈에도 보이지 $D7@	E7U0			GN						めにもとまらない	w:26731
+目にも留まらな	눈에도 보이지 $D7@	E7U0			GN						めにもとまらない	w:26732
+取り付く島もな	말을 붙여 볼 수도 $FA@	E7U0			GN						とりつくしまもない	w:26733
+取りつく島もな	말을 붙여 볼 수도 $FA@	E7U0			GN						とりつくしまもない	w:26734
+とりつく島もな	말을 붙여 볼 수도 $FA@	E7U0			GN						とりつくしまもない	w:26735
+持久走	오래달리기	N110			GN						じきゅうそう	w:26736
+親父さん	아버지	N110	VHn		GN						おやじさん	w:26738
+新婚さん	신혼부부	N110	VHn		GN						しんこんさん	w:26739

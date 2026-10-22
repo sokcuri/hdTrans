@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+normalize:volitional-ka	それじゃ行こっか	그럼 갈까	fix	normalize
+normalize:volitional-ka	じゃあ……いこっか	그럼……갈까	fix	normalize
+normalize:volitional-ka	それじゃ食べよっか	그럼 먹을까	fix	normalize
+normalize:volitional-ka	一緒の布団で寝よっか？	함께의 이불에서 잘까?	fix	normalize
+normalize:volitional-ka	バイトでもしよっかな	아르바이트라도 할까	fix	normalize
+normalize:volitional-ka	あ、そっか	아, 그렇구나	keep	normalize
+normalize:ko-kara	こっからは教師の領分じゃない	여기에서는 교사의 영역이 아니다	fix	normalize
+normalize:mokkai	もっかい撮るから笑って	다시 한번 찍으니까 웃어	fix	normalize
+sound:volitional-so	漢字そっか	한자 그렇구나	fix	sound
+sound:volitional-so	お風呂で汗を流そっか？	욕실로 땀을 흘릴까?	keep	sound
+sound:volitional-so	「見逃そっか」	「놓칠까」	fix	sound
+sound:volitional-so	手放そっか	손에서 놓을까	fix	sound
+sound:volitional-so	「了解そっか」	「이해 그렇구나」	fix	sound
+sound:volitional-so	電話そっか	전화 그렇구나	fix	sound

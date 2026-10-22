@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:narration-copula	薔薇の盛りの、美しい初夏のことであった。	장미의 한창때의, 아름다운 초여름이었다.	fix	lookup
+dict:narration-copula	それにしても、見事なブーメランだこと。	그나저나, 훌륭한 부메랑이네.	fix	lookup
+dict:narration-copula	叔父との別れを選択させられたのであるが。	숙부와의 이별을 선택 당했지만.	fix	lookup
+dict:narration-copula	まあまだ、安全であるし。	뭐 아직, 안전하고.	fix	lookup

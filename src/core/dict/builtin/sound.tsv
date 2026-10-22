@@ -128,6 +128,7 @@
 あふぅ	아후우	intj
 あぅ	아우	intj
 あうっ	아웃	intj
+あう	아우	intj
 あくっ	아윽	intj
 あぅっ	아웃	intj
 あひ	아히	intj
@@ -158,6 +159,11 @@
 んふっ	응훗	intj
 んふぅ	응후우	intj
 んぅ	응우	intj
+んう	응우	intj
+ひく	히윽	intj
+はくっ	하윽	intj
+ふくっ	후윽	intj
+ふぁい	네에	intj
 んひ	응히	intj
 んひっ	응힛	intj
 んひぃ	응히이	intj
@@ -219,7 +225,7 @@
 ひぎっ	히긱	intj
 ひぎぃ	히기이	intj
 ひゃ	햐	intj
-ひゃっ	햣	intj
+ひゃっ	꺅	intj
 ひゃあ	햐아	intj
 ひゃぁ	햐아	intj
 ひゃあっ	햐앗	intj
@@ -247,7 +253,7 @@
 ふう	후우	intj
 ふぅっ	후웃	intj
 ふぅん	흐응	intj
-ふうん	흐응	intj
+ふうん	흐음	intj
 ふーん	흐응	intj
 ふむ	흠	intj
 ふむふむ	흠흠	ono
@@ -287,6 +293,7 @@
 うぐ	우그	intj
 うぐっ	윽	intj
 うくっ	으윽	intj
+うく	으윽	intj
 うぐぅ	우그으	intj
 うあ	우아	intj
 うあっ	우앗	intj
@@ -314,7 +321,7 @@
 うむっ	으음	intj
 うー	우우	intj
 うーん	으음	intj
-ううん	으응	intj
+ううん	아니	intj
 うーっ	우웃	intj
 むー	무우	intj
 むぅ	무우	intj
@@ -562,7 +569,7 @@
 はいはい	네네	intj
 はーい	네에	intj
 はぁい	네에	intj
-はいっ	넷	intj
+はいっ	네	intj
 ねぇ	저기	intj
 ねえねえ	저기 저기	intj
 ねぇねぇ	저기 저기	intj
@@ -594,8 +601,8 @@
 やぁ	야아	intj
 やぁん	야앙	intj
 やあん	야앙	intj
-やんっ	양	intj
-やん	양	intj
+やんっ	앙	intj
+やん	앙	intj
 いやん	이양	intj
 いやーん	이야앙	intj
 らめ	안 돼	intj
@@ -605,6 +612,7 @@
 へっくしゅ	에취	intj
 へっくしょん	에취	intj
 はくしゅん	에취	intj
+くちん	에취	intj
 くしゅん	에취	intj
 くしゅっ	에취	intj
 くしょん	에취	intj
@@ -1882,6 +1890,12 @@
 むわぁ	후끈	ono
 もわっ	뭉게	ono
 もわもわ	뭉게뭉게	ono
+もわり	물씬	ono
+むわり	후끈	ono
+ほわり	포근	ono
+ふるり	부르르	ono
+ちんまり	오도카니	ono
+ちびっ	찔끔	ono
 もくもく	뭉게뭉게	ono
 むくむく	뭉게뭉게	ono
 むくっ	벌떡	ono
@@ -2205,7 +2219,7 @@
 しょぼん	시무룩	ono
 しょぼしょぼ	꿈뻑꿈뻑	ono
 しゅんと	시무룩	ono
-げんなり	기진맥진	ono
+げんなり	맥없이/기진맥진하다	ono
 がっかり	실망	ono
 がっくし	털썩	ono
 うんざり	지긋지긋	ono
@@ -2991,6 +3005,13 @@
 ほれ	자	lead
 よし	좋아	lead
 さあ	자	lead
+ですね	그렇죠	lead
+ですねえ	그러게요	lead
+だな	그러게	lead
+だなあ	그러게	lead
+だなぁ	그러게	lead
+だよな	그렇지	lead
+だよね	그렇지	lead
 ねえ	있잖아	lead
 なあ	저기	lead
 なあ？	그렇지?	lead

@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:tobakarini:1	花の盛りとばかりに美しくなった。	한창 피어날 때라는 듯이 아름다워졌다.	fix	lookup
+dict:tobakarini:1	フフンっとばかりに挑発的な笑みを浮かべ	후훈이라는 듯이 도발적인 미소를 짓고	fix	lookup
+dict:tobakarini:1	関係ないとばかりに、	관계없다는 듯이,	keep	lookup
+dict:tobakarini:2	これ幸いとばかりに	이때다 하고	fix	lookup
+dict:jisjk:265698	俺があんなこと言ったばかりに……	내가 저런 말 한 탓에……	fix	lookup

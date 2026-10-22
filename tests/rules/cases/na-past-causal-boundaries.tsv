@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:na-past-cause	急だったため、連絡できなかった。	갑작스러웠기 때문에, 연락할 수 없었다.	fix	lookup
 dict:na-past-cause	静かだったため、眠れた。	조용했기 때문에, 잘 수 있었다.	fix	lookup
 dict:na-past-cause	必要だったため、買った。	필요했기 때문에, 샀다.	fix	lookup
-dict:na-past-cause	便利だったため、使った。	편리했기 때문에, 사용했다.	fix	lookup
+dict:na-past-cause	便利だったため、使った。	편리했기 때문에, 썼다.	fix	lookup
 dict:na-past-cause	安全だったため、帰った。	안전했기 때문에, 돌아갔다.	fix	lookup
 dict:na-past-cause	静かだったため、集中できた。	조용했기 때문에, 집중할 수 있었다.	fix	lookup
 dict:na-past-cause	急だったため、行かなかった。	갑작스러웠기 때문에, 가지 않았다.	fix	lookup
@@ -13,16 +13,16 @@ dict:na-past-cause	静かだったため，眠れた。	조용했기 때문에, 
 dict:na-past-cause	静かだったため,眠れた。	조용했기 때문에, 잘 수 있었다.	fix	lookup
 dict:na-past-cause	静かだったため、眠れなかった。	조용했기 때문에, 잘 수 없었다.	fix	lookup
 dict:na-past-cause	必要だったため、買わなかった。	필요했기 때문에, 사지 않았다.	fix	lookup
-dict:na-past-cause	便利だったため、使っていた。	편리했기 때문에, 사용하고 있었다.	fix	lookup
+dict:na-past-cause	便利だったため、使っていた。	편리했기 때문에, 쓰고 있었다.	fix	lookup
 dict:na-past-cause	静かだったため、眠れると思った。	조용했기 때문에, 잘 수 있다고 생각했다.	fix	lookup
 dict:na-present-cause	静かなため、眠れる。	조용하기 때문에, 잘 수 있다.	keep	lookup
 dict:na-present-cause	急なため、連絡できない。	갑작스럽기 때문에, 연락할 수 없다.	keep	lookup
 dict:na-present-cause	必要なため、買う。	필요하기 때문에, 산다.	keep	lookup
-dict:na-present-cause	便利なため、使う。	편리하기 때문에, 사용한다.	keep	lookup
+dict:na-present-cause	便利なため、使う。	편리하기 때문에, 쓴다.	keep	lookup
 dict:na-negative-past-cause	静かではなかったため、眠れなかった。	조용하지 않았기 때문에, 잘 수 없었다.	keep	lookup
 dict:na-negative-past-cause	静かじゃなかったため、眠れなかった。	조용하지 않았기 때문에, 잘 수 없었다.	keep	lookup
 dict:na-negative-past-cause	必要ではなかったため、買わなかった。	필요하지 않았기 때문에, 사지 않았다.	keep	lookup
-dict:na-negative-past-cause	便利ではなかったため、使わなかった。	편리하지 않았기 때문에, 사용하지 않았다.	keep	lookup
+dict:na-negative-past-cause	便利ではなかったため、使わなかった。	편리하지 않았기 때문에, 쓰지 않았다.	keep	lookup
 dict:noun-past-cause	休みだったため、帰った。	휴일이었기 때문에, 돌아갔다.	keep	lookup
 dict:noun-past-cause	学生だったため、安かった。	학생이었기 때문에, 쌌다.	keep	lookup
 dict:na-past	静かだった。	조용했다.	keep	lookup
@@ -33,7 +33,7 @@ dict:storage	水をためる。	물을 모아 둔다.	keep	lookup
 dict:storage	水をためなかった。	물을 모아 두지 않았다.	keep	lookup
 dict:storage	水をためない。	물을 모아 두지 않는다.	keep	lookup
 dict:storage	水をためている。	물을 모아 두고 있다.	keep	lookup
-dict:storage-cause	水をためたため、使えた。	물을 모아 두었기 때문에, 사용할 수 있었다.	keep	lookup
+dict:storage-cause	水をためたため、使えた。	물을 모아 두었기 때문에, 쓸 수 있었다.	keep	lookup
 dict:purpose	本を買うために働いた。	책을 사기 위해 일했다.	keep	lookup
 dict:purpose	勉強するために本を買った。	공부하기 위해 책을 샀다.	keep	lookup
 dict:sigh	ため息をついた。	한숨을 쉬었다.	keep	lookup

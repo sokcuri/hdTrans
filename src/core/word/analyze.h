@@ -75,6 +75,8 @@ struct Settings {
     // Text path: the last character of the line's text before the chunk, white space
     // aside; empty for the first chunk.
     std::string_view before;
+    // Text path: the depth of 「」 and 『』 open at the start of the chunk.
+    int quoteDepth = 0;
     // Empty by default; the list and its names outlive the analysis.
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set

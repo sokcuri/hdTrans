@@ -37,6 +37,9 @@ struct DictFlags {
     bool person = false, surname = false, given = false, city = false;
     bool common = false;  // a record that is neither a name nor a place
     bool role = false;    // a person, profession or animal noun with no name record
+    // A base record of a creature, fruit or food noun or of an adverb: what speech addresses
+    // with an honorific (ひよこさん, いちごちゃん) or what stands before ちゃんと (いつか).
+    bool thing = false;
     // The name-layer person records: a surname or given name, and the first Hangul
     // target among them.
     bool layerSurname = false, layerGiven = false;
@@ -51,6 +54,9 @@ struct Name {
     bool surname = false;   // left part of a full name
     bool given = false;     // right part of a full name found by GivenSplit
     bool hasParts = false;  // a full name; parts holds its parts
+    // A hiragana run seen before honorifics without the evidence to stand for the person
+    // alone: a name only where an honorific follows it.
+    bool honorificOnly = false;
     std::vector<std::string> parts;
 };
 
@@ -69,7 +75,7 @@ public:
     // Reads the evidence of one line.
     struct Evidence {
         uint64_t id = 0;
-        std::array<std::vector<std::string>, 8> counts;
+        std::array<std::vector<std::string>, 9> counts;
         std::vector<std::array<std::string, 3>> joined;
         std::vector<std::string> readings, actors;
     };
@@ -81,6 +87,8 @@ public:
 
     // The accepted surfaces, in byte order.
     std::vector<std::string> Names();
+    // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
+    std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
     bool Named(std::string_view t);
     // The surfaces the lines show to be names: the accepted names and the surfaces Named reports
@@ -108,6 +116,9 @@ private:
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
+    std::vector<std::string> KanaHonorificNames(std::string_view line);
+    std::string_view KanaHonorificAt(std::string_view s);
+    bool PredicateForm(std::string_view run);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
 
@@ -143,8 +154,10 @@ private:
     std::shared_ptr<Tables> tables_;
     std::map<std::string, int> labels_;                 // script-format labels
     std::map<std::string, int> prefixes_;               // line-start labels of plain-text forms
+    std::string nameLine_;                              // the last line when it is a name alone
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
+    std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby
     std::map<std::string, std::string> reading_;        // first gloss or ruby reading
     std::map<std::string, int> runs_;                   // kanji runs

@@ -13,11 +13,17 @@
 ご主人様	주인님	n	attr=VHn
 ごしゅじんさま	주인님	n	attr=VHn
 おかえりなさいませ	어서 오세요	intj
+おかえりなさーい	어서 오세요	intj
 おかえり	어서 와	intj
 いってきます	다녀오겠습니다	intj
 いってきまーす	다녀오겠습니다	intj
 行ってきます	다녀오겠습니다	intj
 いってらっしゃい	잘 다녀와	intj
+いってらっしゃーい	잘 다녀와	intj
+はいはーい	네네	intj
+だーれだ	누구게	intj
+なんだと	뭐라고	intj
+なんだとっ	뭐라고	intj
 いってらっしゃいませ	다녀오세요	intj
 行ってらっしゃい	잘 다녀와	intj
 いただきまーす	잘 먹겠습니다	intj
@@ -432,10 +438,11 @@
 お酒に目がない	술이라면 사족을 못 쓰다	adj	gattr=Av
 
 // Stock phrases of erotic scenes.
-イクッ	가앗	intj
-イクゥ	가아	intj
+イクッ	가 버려	intj
+イクゥ	가 버려	intj
 イクイク	간다 간다	intj
 イっちゃう	가 버려	intj
+イっちゃ	가 버려	intj
 イっちゃった	가 버렸어	intj
 イキそう	갈 것 같아	intj
 イかせて	가게 해 줘	intj
@@ -578,7 +585,9 @@
 どうすれば良いのだ	어떻게 하면 좋단 말인가	phrase
 もう良い	이제 됐다	phrase
 お待ちです	기다리고 계십니다	phrase
-ただいま	다녀왔습니다	intj
+ただいま	다녀왔어	intj
+ただいまー	다녀왔어~	intj
+ただいま～	다녀왔어~	intj
 ありますから	있으니까요	phrase
 
 // Verbs missing from the base dictionary.
@@ -752,7 +761,15 @@
 聞いた事がない	들은 적이 없다	adj
 写真を取られる	사진이 찍히다	v1
 写真を撮られる	사진이 찍히다	v1
+ちょっと待った	잠깐만	intj
+誰の目にもとまらない	누구의 눈에도 띄지 않다	adj
+誰の目にも止まらない	누구의 눈에도 띄지 않다	adj
+誰の目にも留まらない	누구의 눈에도 띄지 않다	adj
+歯磨き粉	치약	n
 嫌な予感	불길한 예감	n
+平気な顔	아무렇지 않은 얼굴	n
+余計なお世話	쓸데없는 참견	n
+よけいなお世話	쓸데없는 참견	n
 これからどうしよう	앞으로 어떻게 하지	phrase
 頭では	머리로는	phrase
 唐突に	갑자기	adv
@@ -987,7 +1004,6 @@
 しょうがねえ	어쩔 수 없지	intj
 しょうがねぇ	어쩔 수 없지	intj
 そうそう	맞아 맞아	intj
-りょーかい	오케이	intj
 もぐり込む	파고들다	v5
 皮むき	껍질 벗기기	n
 待ちくたびれる	기다리다 지치다	v1
@@ -1279,6 +1295,53 @@
 前回は	지난번에는	phrase
 前回も	지난번에도	phrase
 この前は	지난번에는	phrase
+ただの一度も	단 한 번도	phrase
+ただ一度も	단 한 번도	phrase
+了解しました	알겠습니다	phrase
+俺もだ	나도 그래	phrase
+私もだ	나도 그래	phrase
+僕もだ	나도 그래	phrase
+どういう意味	무슨 뜻	phrase
+// そうよ, そうね answering: the casual agreement
+そうよ	그래	intj
+そうよね	그렇지	intj
+そうね	그래	intj
+そうだね	그러게	intj
+// Short answers and greetings standing as an utterance
+なんでなんだ	왜지	intj
+なんでなんだろう	왜일까	intj
+どうしてなんだ	왜지	intj
+どうしてなんだろう	왜일까	intj
+いいの	괜찮아	intj
+いいのか	괜찮아	intj
+いいのかよ	괜찮냐	intj
+りょーかい	알았어	intj
+りょうかい	알았어	intj
+ならよかった	그럼 다행이네	intj
+なら良かった	그럼 다행이네	intj
+よろしい	좋아	intj
+んなわけあるか	그럴 리가 있냐	intj
+そんなわけあるか	그럴 리가 있냐	intj
+そんなわけないだろ	그럴 리가 없잖아	intj
+またまたぁ	에이, 또 그런다~	intj
+またまたー	에이, 또 그런다~	intj
+お待たせ	기다렸지	intj
+おまたせ	기다렸지	intj
+そっか	그렇구나	intj
+おう	어	intj
+おうっ	어	intj
+はいよ	알았어	intj
+あいよ	알았어	intj
+よっす	안녕	intj
+よーっす	안녕	intj
+ういーす	안녕	intj
+うぃーす	안녕	intj
+ういっす	안녕	intj
+ちーっす	안녕	intj
+どうかした	왜 그래	intj
+どうかしたの	왜 그래	intj
+どうかしましたか	무슨 일 있으세요	intj
+というと	무슨 뜻이야	intj
 何でしたっけ	뭐였죠	phrase
 なんでしたっけ	뭐였죠	phrase
 どうだったっけ	어땠더라	phrase

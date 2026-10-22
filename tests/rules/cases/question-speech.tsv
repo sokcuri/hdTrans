@@ -7,7 +7,7 @@ compose:question-plain	「本気なのか？」	「진심이야?」	fix	compose
 compose:question-plain	「一緒に行かないか？」	「함께 가지 않을래?」	fix	compose
 compose:question-plain	「元気だったか？」	「건강했어?」	fix	compose
 compose:question-plain	「どうしたいんだ？」	「어떻게 하고 싶어?」	fix	compose
-compose:question-plain	「どういう意味だ……？」	「어떤 의미야……?」	fix	compose
+compose:question-plain	「どういう意味だ……？」	「무슨 뜻이야……?」	fix	compose
 compose:question-plain	「それ、私が抜けるってこと？」	「그거, 내가 빠진다는 거야?」	fix	compose
 compose:question-plain	「見てるってこと？」	「보고 있다는 거야?」	fix	compose
 compose:question-plain	「行くか？」	「갈까?」	keep	compose

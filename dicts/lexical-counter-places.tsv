@@ -1,0 +1,23 @@
+#! layer=words
+# 수사 뒤 か所 계열 조수사 (지명 앞부분과 겹치는 표기)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+一ケ所	한 군데	N110	VPl		GN				replace			counter-places:1
+三箇所	3군데	N110	VPl		GN				replace			counter-places:2
+四箇所	4군데	N110	VPl		GN				replace			counter-places:3
+五箇所	5군데	N110	VPl		GN				replace			counter-places:4
+七箇所	7군데	N110	VPl		GN				replace			counter-places:5
+八箇所	8군데	N110	VPl		GN				replace			counter-places:6
+五ヶ所	5군데	N110	VPl		GN				replace			counter-places:7
+六ヶ所	6군데	N110	VPl		GN				replace			counter-places:8
+三ケ所	3군데	N110	VPl		GN				replace			counter-places:9
+四ケ所	4군데	N110	VPl		GN				replace			counter-places:10
+五ケ所	5군데	N110	VPl		GN				replace			counter-places:11
+六ケ所	6군데	N110	VPl		GN				replace			counter-places:12
+八ケ所	8군데	N110	VPl		GN				replace			counter-places:13
+三カ所	3군데	N110	VPl		GN				replace			counter-places:14
+六か所	6군데	N110	VPl		GN				replace			counter-places:15
+二箇所	2군데	N110	VPl		GN				replace			counter-places:16
+何か所	몇 군데	N110	VPl		GN				replace			counter-places:17
+何カ所	몇 군데	N110	VPl		GN				replace			counter-places:18
+何ケ所	몇 군데	N110	VPl		GN				replace			counter-places:19
+何ヵ所	몇 군데	N110	VPl		GN				replace			counter-places:20

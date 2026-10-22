@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-phrase:どしたの	どしたの？　困ってる？	무슨 일이야? 곤란하고 있어?	fix	builtin-phrase
+phrase:どしたの	どしたの？　困ってる？	무슨 일이야? 곤란해?	fix	builtin-phrase
 phrase:どしたの	どうしたの？	무슨 일이야?	keep	builtin-phrase
 phrase:どしたの	制度を調べた。	제도를 조사했다.	keep	builtin-phrase
 dict:jisjk:265116	もっとも、雨なら休む。	다만, 비라면 쉰다.	fix	local
