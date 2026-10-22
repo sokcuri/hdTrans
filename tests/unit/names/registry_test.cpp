@@ -142,17 +142,26 @@ HD_TEST(names_labels) {
         HD_CHECK(box.Names() == (std::vector<std::string>{"のぞみ"}));
         HD_CHECK_EQ(box.Render("のぞみ"), std::string("노조미"));
     }
-    // A hiragana person of the name layer that no other dictionary reads is a name before two
-    // honorifics, also after a particle; a particle after a kanji starts no name (体がびくん).
-    // One honorific is no evidence, nor are a common word (ひかり) and the form of an
-    // adjective (あおい) before any number of them.
+    // A hiragana person of the name layer that no other dictionary reads is a name before an
+    // honorific, also after a particle; a particle after a kanji starts no name (体がびくん).
+    // It stands for the person alone after two honorifics; after one, and for a common word
+    // (ひかり) or the form of an adjective (あおい), only where an honorific follows it.
     {
-        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n").Names().empty());
-        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n").Names() ==
-                 (std::vector<std::string>{"つぐみ"}));
+        const std::vector<std::string> tsugumi = {"つぐみ"};
+        names::Registry once = Scan(snap, "「つぐみちゃん的にはどう？」\n");
+        HD_CHECK(once.Names() == tsugumi);
+        HD_CHECK(once.HonorificOnlyNames() == tsugumi);
+        HD_CHECK_EQ(Occurrences(once, "つぐみちゃん"), std::string("つぐみ"));
+        HD_CHECK_EQ(Occurrences(once, "デスク、つぐみが唸る。"), std::string("つぐみ!"));
+        names::Registry twice = Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n");
+        HD_CHECK(twice.Names() == tsugumi);
+        HD_CHECK(twice.HonorificOnlyNames().empty());
         HD_CHECK(Scan(snap, Repeat("体がびくんと跳ねる。", 3)).Names().empty());
-        HD_CHECK(Scan(snap, Repeat("あおいさんが来た。", 3) + "あおい空が広がる。\n").Names().empty());
-        HD_CHECK(Scan(snap, Repeat("ひかりちゃん、おはよう。", 3)).Names().empty());
+        names::Registry aoi = Scan(snap, Repeat("あおいさんが来た。", 3));
+        HD_CHECK(aoi.HonorificOnlyNames() == (std::vector<std::string>{"あおい"}));
+        HD_CHECK_EQ(Occurrences(aoi, "あおいさん、待って！"), std::string("あおい"));
+        HD_CHECK_EQ(Occurrences(aoi, "あおい空が広がる。"), std::string("あおい!"));
+        HD_CHECK(Scan(snap, Repeat("ひかりちゃん、おはよう。", 3)).HonorificOnlyNames() == (std::vector<std::string>{"ひかり"}));
     }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());

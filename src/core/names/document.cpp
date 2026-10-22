@@ -357,7 +357,7 @@ std::string Utf8Of(char32_t c) {
     return out;
 }
 
-// A line that is one name and nothing else, as a game's name box writes the speaker: a run
+// A line that is one name and nothing else, a speaker line before a quote: a run
 // of kanji with a person reading, read as that person (筧 카케이).
 std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line) {
     const std::string_view t = names::internal::TrimLineSpace(line);
@@ -414,6 +414,10 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         } else {
             plain.insert(o.surface);
         }
+    }
+    // A name only before an honorific takes part where an honorific follows it in the line.
+    for (const std::string& t : r.HonorificOnlyNames()) {
+        if (plain.count(t) == 0) guarded.insert(t);
     }
     for (const std::string& t : guarded) {
         if (plain.count(t) == 0) facts.skip.push_back(t);

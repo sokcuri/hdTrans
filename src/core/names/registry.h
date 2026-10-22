@@ -51,6 +51,9 @@ struct Name {
     bool surname = false;   // left part of a full name
     bool given = false;     // right part of a full name found by GivenSplit
     bool hasParts = false;  // a full name; parts holds its parts
+    // A hiragana run seen before honorifics without the evidence to stand for the person
+    // alone: a name only where an honorific follows it.
+    bool honorificOnly = false;
     std::vector<std::string> parts;
 };
 
@@ -81,6 +84,8 @@ public:
 
     // The accepted surfaces, in byte order.
     std::vector<std::string> Names();
+    // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
+    std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
     bool Named(std::string_view t);
     // The surfaces the lines show to be names: the accepted names and the surfaces Named reports
@@ -109,6 +114,7 @@ private:
     bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
+    static std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);

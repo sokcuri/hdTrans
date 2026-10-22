@@ -277,6 +277,14 @@ std::vector<std::string> Registry::Names() {
     return out;
 }
 
+std::vector<std::string> Registry::HonorificOnlyNames() {
+    std::vector<std::string> out;
+    for (const auto& [t, n] : Accepted()) {
+        if (n.honorificOnly) out.push_back(t);
+    }
+    return out;
+}
+
 const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
@@ -342,7 +350,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
     }
     // A person of the name layer that no other dictionary reads needs one piece of evidence
-    // less, unless it is written in kana alone: a hiragana run needs two honorifics.
+    // less, unless it is written in kana alone (a hiragana run before honorifics, below).
     for (auto& [t, n] : all) {
         if (!n.person || n.label || n.score <= 0 || AllRunes(t, IsKatakana) || AllRunes(t, IsHiragana)) continue;
         const DictFlags f = Flags(t);
@@ -467,7 +475,19 @@ const std::map<std::string, Name>& Registry::Accepted() {
     for (const auto& [t, n] : all) {
         double need = kThreshold;
         if (RuneCount(t) == 1 && AllRunes(t, IsKanji) && !n.label) need = kSingleThreshold;
-        if (AllRunes(t, IsHiragana) && !n.label && kanaHon_.count(t) == 0) continue;
+        if (AllRunes(t, IsHiragana) && !n.label) {
+            // A hiragana run seen before an honorific is a name there; it stands for the person
+            // alone only after two honorifics and when it is no common word and no predicate
+            // form (あおいさん, but あおい空).
+            const auto k = kanaHon_.find(t);
+            if (k == kanaHon_.end()) continue;
+            if (n.score < need || Flags(t).common || PredicateForm(t)) {
+                Name h = n;
+                h.honorificOnly = true;
+                scores_[t] = h;
+                continue;
+            }
+        }
         if (n.score >= need) scores_[t] = n;
     }
     scoresValid_ = true;
@@ -696,7 +716,8 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         if (AllRunes(found, IsHiragana)) {
             ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp);
         }
-        if (ok) out.push_back(Occurrence{a, b, found, Guarded(line, a, b)});
+        const bool bare = acc.at(found).honorificOnly && KanaHonorificAt(line.substr(b)).empty();
+        if (ok) out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
     }
     return out;
 }

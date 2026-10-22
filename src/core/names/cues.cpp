@@ -660,20 +660,26 @@ bool Registry::PredicateForm(std::string_view run) {
     return found;
 }
 
+// The honorific of KanaHonorificNames that starts s, the longest; "" for none.
+std::string_view Registry::KanaHonorificAt(std::string_view s) {
+    static constexpr std::string_view kKanaHonorifics[] = {"さん", "ちゃん", "くん", "君", "様", "さま", "先輩", "先生"};
+    std::string_view h;
+    for (const std::string_view x : kKanaHonorifics) {
+        if (s.starts_with(x) && x.size() > h.size()) h = x;
+    }
+    return h;
+}
+
 // The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (not たん or
-// っち, which also end words: こっち): the hiragana run before it, or, after a kanji or katakana, the run
-// less the one-kana particle that starts it (妹のさよりちゃん), of three or four kana, that the
-// name layer reads as a person and no dictionary as a common, person or animal noun (うさぎさん),
-// that is no predicate form (あおい), that starts with no お or ご and that joins the honorific
-// into no dictionary word (みなさん, たくさん).
+// っち, which also end words: こっち): the hiragana run before it, or, after a kanji or
+// katakana, the run less the one-kana particle that starts it (妹のさよりちゃん), of three or
+// four kana, that the name layer reads as a person and no dictionary as a person or animal
+// noun (うさぎさん), that starts with no お or ご and that joins the honorific into no dictionary
+// word (みなさん, たくさん).
 std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
     std::vector<std::string> out;
     for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
-        static constexpr std::string_view kKanaHonorifics[] = {"さん", "ちゃん", "くん", "君", "様", "さま", "先輩", "先生"};
-        std::string_view h;
-        for (const std::string_view x : kKanaHonorifics) {
-            if (line.substr(pos).starts_with(x) && x.size() > h.size()) h = x;
-        }
+        const std::string_view h = KanaHonorificAt(line.substr(pos));
         if (h.empty() || pos == 0) continue;
         std::size_t start = pos;
         while (start > 0) {
@@ -690,8 +696,7 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && first != U'お' && first != U'ご' &&
                 AllRunes(run, IsHiragana) && !RoleLike(run)) {
                 const DictFlags f = Flags(run);
-                if ((f.layerGiven || f.layerSurname) && !f.role && !f.common && !PredicateForm(run) &&
-                    Flags(std::string(run) + std::string(h)).records == 0) {
+                if ((f.layerGiven || f.layerSurname) && !f.role && Flags(std::string(run) + std::string(h)).records == 0) {
                     out.emplace_back(run);
                     break;
                 }
