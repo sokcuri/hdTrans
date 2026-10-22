@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:233008	これが三種の神器だ。	이것이 삼종 신기다.	fix	lookup
+dict:jisjk:249816	両チームの初顔合わせとなった。	양팀의 첫 대면이 되었다.	fix	lookup
