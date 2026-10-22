@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:341464	なんか、ちょっと寂しいな。	왠지, 조금 외로운데.	fix	local
+dict:jisjk:964	なんとなく空を見ていた。	무심코 하늘을 보고 있었다.	keep	local
+dict:jisjk:964	なんとなく嫌な予感がする。	왠지 불길한 예감이 한다.	fix	defaults
+dict:lex:nantonaku-roughly	話はなんとなくわかった。	이야기는 대충 알았다.	fix	local

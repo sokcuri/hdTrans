@@ -464,10 +464,10 @@ L3044	この部屋で自由に料理が出来る。	이 방에서 자유롭게 �
 L3046	田中さんね、昨日引っ越したんだって。	타나카씨, 어제 이사했다고.	current	local
 L3059	「ん？　どうかした？」	「응? 어떻게든 했어?」	current	local
 L3059	「ん？　もう一回言って？」	「응? 다시 한번 말해?」	current	local
-L3093	なんか寒いね。	어쩐지 춥네.	current	local
-L3093	今日は、なんか眠い。	오늘은, 어쩐지 졸리다.	current	local
+L3093	なんか寒いね。	왠지 춥네.	current	local
+L3093	今日は、なんか眠い。	오늘은, 왠지 졸리다.	current	local
 L3093	なんか食べたい。	뭔가 먹고 싶다.	current	local
-L3093	なんか変だ。	어쩐지 이상하다.	current	local
+L3093	なんか変だ。	왠지 이상하다.	current	local
 L3094	パンを、どうぞ運んでください。	빵을, 어서 옮겨 주세요.	fix	local
 L3131	値段より品質で選びます。	가격보다 품질로 선택합니다.	current	local
 L3131	昼より夜は静かで落ち着く。	낮보다 밤은 조용해 침착한다.	current	local
@@ -730,7 +730,7 @@ G140	鳥の群れが北方向に飛んでいった。	새의 무리가 북방향
 G160	茫然と空を見上げていた。	망연과 하늘을 올려다보고 있었다.	current	global-stem
 G170	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	global-stem
 G170	彼は茫然と空を見上げた。	그는 망연과 하늘을 올려다보았다.	current	global-stem
-G200	ねえ、なんか音がしない？	있잖아, 어쩐지 소리가 나지 않아?	current	global-stem
+G200	ねえ、なんか音がしない？	있잖아, 왠지 소리가 나지 않아?	current	global-stem
 G200	ええと、だから明日は行けません。	음, 그러니까 내일은 안 됩니다.	current	global-stem
 G210	駅で先生をお見かけしました。	역에서 선생님을 보았습니다.	current	global-last
 G210	社長にはあとでお伝えします。	사장에게는 나중에 전하겠습니다.	current	global-last

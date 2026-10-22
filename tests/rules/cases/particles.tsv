@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:jisjk:114687	残りのポイントで買う。	나머지의 포인트로 산다.	fix	local
 dict:jisjk:114687	近所の店で本を買う。	이웃의 가게에서 책을 산다.	keep	local
 dict:jisjk:341464	なんか飲みたい。	뭔가 마시고 싶다.	fix	local
-dict:jisjk:341464	なんか静かだ。	어쩐지 조용하다.	keep	local
+dict:jisjk:341464	なんか静かだ。	왠지 조용하다.	keep	local
 dict:jisjk:6169	明日だと困る。	내일이라면 곤란하다.	fix	local
 dict:jisjk:6169	休日だと助かる。	휴일이라면 살아난다.	fix	local
 dict:jisjk:6169	本当だとしたら驚く。	사실이라고 하면 놀란다.	keep	local

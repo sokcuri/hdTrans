@@ -47,7 +47,7 @@ dict:jisjk:369554	食べればと思う。	먹으면 하고 생각한다.	fix	lo
 dict:jisjk:369554	彼が来ると思う。	그가 온다고 생각한다.	fix	local
 dict:jisjk:258808	嘘なんかじゃない。	거짓말 같은 것이 아니다.	fix	local
 dict:jisjk:341464	顔なんか見えない。	!rule:dict:jisjk:341464	keep	local
-dict:jisjk:341464	まぁなんか可愛い。	rule:dict:jisjk:341464=어쩐지	keep	local
+dict:jisjk:341464	まぁなんか可愛い。	rule:dict:jisjk:341464=왠지	keep	local
 dict:jisjk:359256	三日前も寒かった。	3일전에도 추웠다.	fix	local
 dict:jisjk:359256	３発も命中させた。	rule:dict:jisjk:359256=(이)나	keep	local
 dict:jisjk:35	いかがあそばしますか。	어떻게 하십니까.	fix	local

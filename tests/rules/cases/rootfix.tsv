@@ -19,7 +19,7 @@ compose:action	研究し続けるのみだ。	계속 연구할 뿐 이다.	fix	c
 compose:action	研究し続ける。	계속 연구한다.	keep	compose
 dict:jisjk:116128	同じ年の友達だ。	같은 나이의 친구다.	keep	local
 dict:jisjk:341464	目なんか分からない。	눈은 모른다.	fix	local
-dict:jisjk:341464	なんか静かだ。	어쩐지 조용하다.	keep	local
+dict:jisjk:341464	なんか静かだ。	왠지 조용하다.	keep	local
 senses	病の重さというより東宮だからであろう。	병의 심함이라는 것보다 동궁이니까일 것이다.	keep	senses
 dict:Tu	二人分の食事。	두 사람분의 식사.	fix	compose
 dict:jisjk:93606	パンを焼いた。	빵을 구웠다.	keep	senses

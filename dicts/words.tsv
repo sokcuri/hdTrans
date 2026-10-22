@@ -11918,7 +11918,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 何でもかんでも	무조건	E300			GN				xxx		なんでもかんでも	w:11910
 何でもかんでも	어떻게든	E300			GN				llm		なんでもかんでも	w:11911
 何でも屋	만능 해결사	I110			GN				xxx llm	1		w:11912
-何となく	왠지 모르게	E300			GN				xxx llm	1		w:11913
+何となく	왠지	E300			GN				xxx llm	1		w:11913
 何ともな	아무렇지도 $D7@	E7U0			GN				xxx llm	1		w:11914
 何と言うか	뭐랄까	A9D0			GN				llm		なんというか	w:11915
 何なのか	무엇인지	A9D0			GN				llm		なんなのか	w:11916
