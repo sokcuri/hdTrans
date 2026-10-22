@@ -25,3 +25,6 @@ dict:lex:maamaa:da	まぁまぁだ	그저 그렇다	fix	lookup
 dict:w:26726	私の絵は大したものじゃないんだ	내 그림은 별것 아니다	fix	lookup
 dict:w:26723	大したことじゃない	별일 아니다	fix	lookup
 dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대단한 자신이 아닌가」	keep	lookup
+dict:jisjk:116378	頭の脇に	머리의 옆에	fix	lookup
+dict:jisjk:116378	脇にどいて	옆에 물러나	fix	lookup
+dict:i:7772	もっと脇を締めて……	좀 더 겨드랑이를 붙여……	fix	lookup
