@@ -521,6 +521,25 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
 }
 
+// そっか after the kanji stem of a verb in す is its volitional; after a noun the answer.
+HD_TEST(pipeline_volitional_so) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "見逃\t놓&AO@\tM433\t1\n"
+                                     "流\t흘&AA@\tM443\t2\n"
+                                     "漢字\t한자\tN110\t3\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const Case cases[] = {
+        {"「見逃そっか」", "「見逃そうか」"},
+        {"汗を流そっか？", "汗を流そうか？"},
+        {"今日は見逃そっかな", "今日は見逃そうかな"},
+        {"漢字そっか", "漢字そっか"},
+        {"あ、そっか", "あ、そっか"},
+        {"見逃そっかす", "見逃そっかす"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteVolitionalSo(c.in, *loaded.snapshot), std::string(c.want));
+}
+
 HD_TEST(pipeline_sound_extra_isolation) {
     HD_CHECK(!internal::IsSoundKey(U"ガボッ"));
     HD_CHECK(internal::IsSoundKey(U"ガボッ", true));

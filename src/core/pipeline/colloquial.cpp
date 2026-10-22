@@ -8,6 +8,7 @@
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/pipeline/sound.h"
+#include "core/word/conjugation.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -577,6 +578,35 @@ bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
 }
 
 }  // namespace
+
+std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap) {
+    const std::u32string rs = DecodeText(text);
+    std::u32string out;
+    size_t at = 0;
+    for (size_t i = 1; i + 3 <= rs.size(); i++) {
+        if (rs[i] != U'そ' || rs[i + 1] != U'っ' || rs[i + 2] != U'か' || !IsKanjiRune(rs[i - 1])) continue;
+        if (i + 3 < rs.size() && !In(rs[i + 3], U"なねぁあー～？?！!。、…‥」』）)")) continue;
+        size_t start = i - 1;
+        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        bool verb = false;
+        for (size_t k = start; k < i && !verb; k++) {
+            for (const dict::Candidate& c : snap.RetrieveRecords(EncodeText(rs.substr(k, i - k)), dict::LookupMode::General)) {
+                if (c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+                if (word::Conjugation(c.codes->partText[3] - '0', 5) == "そう") {
+                    verb = true;
+                    break;
+                }
+            }
+        }
+        if (!verb) continue;
+        out.append(rs, at, i + 1 - at);
+        out.push_back(U'う');
+        at = i + 2;
+    }
+    if (at == 0) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
+}
 
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::u32string rs = DecodeText(text);
