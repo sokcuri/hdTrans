@@ -31,7 +31,11 @@ const dict::LoadResult& SoundDictionary() {
         "では\t그럼\tP250\t13\n"
         "キー\t키\tN110\t14\n"
         "でも\t그렇지만\tE300\t15\n"
-        "浅\t얕\tH100\t16\n",
+        "浅\t얕\tH100\t16\n"
+        "おも\t무겁\tH100\t17\n"
+        "おめぇ\t너\tN120\t18\n"
+        "てめー\t너\tN120\t19\n"
+        "てめぇ\t너\tN120\t20\n",
     }});
     return result;
 }
@@ -420,6 +424,11 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"休もうっと。", "休もうっと。"},
         {"なんとかなるっしょ。", "なんとかなるっしょ。"},
         {"日曜日じゃなかったっけ", "日曜日じゃなかったっけ"},
+        // A word spelled with ー keeps it before kana; before a mark, where the tokenizer would
+        // split the ー off, it takes the small vowel of a spelling the dictionary has.
+        {"てめーが黙ってろ", "てめーが黙ってろ"},
+        {"てめー！", "てめぇ！"},
+        {"だぞてめー、", "だぞてめぇ、"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
@@ -507,6 +516,7 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"「キャリア浅っ」", "「キャリア浅い」"},
         {"最浅っ！", "最浅っ！"},  // inside a word
         {"もっと浅っす", "もっと浅っす"},
+        {"おめぇ、何してんだ", "おめぇ、何してんだ"},  // a word spelled with the small vowel
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
 }

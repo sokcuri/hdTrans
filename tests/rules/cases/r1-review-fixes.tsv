@@ -7,3 +7,7 @@ normalize:toku	「やっといた、探したよ」	「드디어 있었어, 찾�
 normalize:toku	ああ、とっくにやっといた。	아, 진작 해 두었다.	keep	normalize
 normalize:volitional-ka	漢字そっか	한자 그렇구나	fix	normalize
 normalize:volitional-ka	お風呂で汗を流そっか？	욕실로 땀을 흘릴까?	keep	normalize
+normalize:spelled-small-vowel	おめぇ、何してんだ	너, 뭐하는 거야	fix	normalize
+normalize:spelled-small-vowel	てめー！	너!	fix	normalize
+normalize:spelled-small-vowel	てめー、ふざけるな	너, 장난치지 마	fix	normalize
+normalize:spelled-small-vowel	おはよー	안녕~	keep	normalize
