@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.4](https://github.com/sokcuri/hdTrans/compare/v0.4.3...v0.4.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **release:** read dialogue, narration and scenes more naturally ([d47bffb](https://github.com/sokcuri/hdTrans/commit/d47bffb36ef0b5f61b1b820c59a939995c5ed189))
+* **translation:** refine senses, grammar, aspect, colloquial speech, names and scenes ([#29](https://github.com/sokcuri/hdTrans/issues/29)) ([4cc0eb5](https://github.com/sokcuri/hdTrans/commit/4cc0eb5ed90f094fdff101e3ad2edf8b5c00d6e7))
+
 ## [0.4.3](https://github.com/sokcuri/hdTrans/compare/v0.4.2...v0.4.3) (2026-10-22)
 
 
