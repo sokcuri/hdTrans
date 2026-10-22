@@ -15,3 +15,9 @@ builtin-ending:ze	ここで待ってるぜ。	여기서 기다리고 있다.	fix
 builtin-ending:ze	こいつは最高だぜ！	이 녀석은 최고다!	fix	builtin-ending
 lookup:ze-question	そろそろ茹でるぜ？	슬슬 데치지?	fix	lookup
 lookup:nee	よく食べるねえ。	잘 먹네.	fix	lookup
+lookup:ze-question	この肉、美味いぜ？	이 고기, 맛있지?	fix	lookup
+lookup:ze-question	こんなの簡単だぜ？	이런 건 간단하지?	fix	lookup
+lookup:ze-question	次はお前の番だぜ？	다음은 네 차례지?	fix	lookup
+lookup:ze-question	ちゃんと言ってるぜ？	제대로 말하고 있지?	fix	lookup
+lookup:ze-question	俺は先に行ったぜ？	나는 먼저 갔지?	fix	lookup
+lookup:ze-question	この肉、美味いぜ！	이 고기, 맛있다!	fix	lookup
