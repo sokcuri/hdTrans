@@ -542,6 +542,13 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     return Take(s, p, [](char32_t c) { return !IsHiraganaClass(c); }) && Lit(s, p, "し") && after(p);
 }
 
+// Toku where the text before allows it: at the start of a clause やっといた is the adverb
+// やっと before いた (やっといた、探したよ), not やっておいた.
+bool TokuInText(std::string_view s, size_t pos, Match& m) {
+    if (s.substr(pos).starts_with("やっといた") && ClauseStart(s, pos)) return false;
+    return Toku(s, pos, m);
+}
+
 // ([そこあど])[ーう]ゆ[うー]
 bool Souyuu(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -631,7 +638,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, KoKara, [](const Match& m) { return Cat({m.group[1], "こから"}); });
     text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
     text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
-    text = ReplaceAll(text, Toku, [](const Match& m) {
+    text = ReplaceAll(text, TokuInText, [](const Match& m) {
         const Match g = Rematch(m, Toku);
         const std::string_view stem = g.group[1];
         std::string_view te = "て";
