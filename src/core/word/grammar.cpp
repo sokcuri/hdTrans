@@ -388,7 +388,7 @@ constexpr std::string_view kOngoingNouns[] = {"話題", "噂", "評判", "問題
 // Verbal nouns whose されている is a state.
 constexpr std::string_view kResultNouns[] = {
     "舗装", "設置", "固定", "封印", "整備", "保存", "記載", "記録", "配置", "装備", "収納", "展示", "包装", "印刷", "登録",
-    "接続", "密閉", "施錠", "武装", "装飾", "彫刻", "刻印", "整頓", "固定化",
+    "接続", "密閉", "施錠", "武装", "装飾", "彫刻", "刻印", "整頓", "固定化", "表示", "拘束", "掲載", "確保",
 };
 
 // Stems of the passive verbs whose ている is a state.
