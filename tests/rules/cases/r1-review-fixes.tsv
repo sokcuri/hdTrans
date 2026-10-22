@@ -15,3 +15,10 @@ katakana:iku-stem	イカなんて嫌いだ。	오징어 같은 건 싫다.	fix	n
 katakana:iku-stem	あいつイかれてる	저 녀석 고장 나고 있다	fix	normalize
 katakana:iku-stem	イカせて	가게 해 줘	keep	normalize
 katakana:iku-stem	「イキそうなんだっ」	「갈 것 같애」	keep	normalize
+rewrite:wondering-darou	なぜなら彼は来るだろう。	왜냐하면 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	何しろ彼は来るだろう。	어쨌든 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	どっちみち雨だろう。	결국은 비일 것이다.	fix	rewrites
+rewrite:wondering-darou	何を言われようと、俺は行くだろう。	무슨 말을 들으려고, 나는 갈 것이다.	fix	rewrites
+rewrite:wondering-darou	真崎新へのなんらかの処分は必要となるだろう。	마사키 아라타에게로의 하등의 처분은 필요할 것이다.	fix	rewrites
+rewrite:wondering-darou	ビュッフェエリアはどうなっているだろう。	뷔페 에리어는 어떻게 되어 있을까.	keep	rewrites
+rewrite:wondering-darou	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일까.	keep	rewrites

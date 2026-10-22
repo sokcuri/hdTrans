@@ -1005,42 +1005,77 @@ namespace {
 
 // Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 constexpr std::string_view kWonderWords[] = {
-    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どっち", "どちら", "どれ", "どんな", "どの",
+    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
+    "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
     "一体", "いったい", "いくつ", "いくら",
 };
 
 // Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 constexpr std::string_view kWonderNot[] = {
-    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "なにか", "なにも", "なんか", "なんて", "なんだか",
-    "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも", "どこか", "どこも", "どこでも",
-    "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも", "どうせ", "どうしても", "どうぞ",
-    "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも", "いくらか", "いくらでも",
+    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "何卒", "何気", "なにか", "なにも", "なんか",
+    "なんて", "なんだか", "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも",
+    "どこか", "どこも", "どこでも", "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも",
+    "どうせ", "どうしても", "どうぞ", "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも",
+    "いくらか", "いくらでも",
 };
 
-bool WonderWord(std::string_view s) {
+// The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
+constexpr std::string_view kWonderParticles[] = {"を", "が", "に", "へ", "で", "と", "の", "は", "から", "まで", "くらい", "ぐらい"};
+
+// Whether item p is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
+// with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
+// such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
+bool WonderWord(const Item* p) {
+    const std::string_view s = p->group->surface;
     // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
     if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
+    for (const std::string_view n : kWonderNot) {
+        if (s.starts_with(n)) return false;
+    }
+    const char cls = At(p->Code(std::max(p->selected, 0)), 0);
     for (const std::string_view w : kWonderWords) {
         if (!s.starts_with(w)) continue;
-        for (const std::string_view n : kWonderNot) {
-            if (s.starts_with(n)) return false;
+        const std::string_view rest = s.substr(w.size());
+        if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
+        for (const std::string_view part : kWonderParticles) {
+            if (rest.starts_with(part)) return true;
         }
-        return true;
+        if (cls != '0' && cls != '3') return true;
     }
     return false;
 }
 
-// Whether a question word stands before it in its clause, with no concessive も, ても or でも
-// and no embedded か question between.
+// Whether s ends in a concessive volitional: -(よ)うと or -(よ)うが (言われようと, 何をしようが,
+// 誰だろうと).
+bool ConcessiveVolitional(std::string_view s) {
+    for (const std::string_view p : {std::string_view("と"), std::string_view("が")}) {
+        if (!s.ends_with(p)) continue;
+        std::string_view v = s.substr(0, s.size() - p.size());
+        if (!v.ends_with("う")) continue;
+        v.remove_suffix(std::string_view("う").size());
+        if (!v.empty() && RuneIn(DecodeLastRune(v).cp, "おこごそぞとどのぼぽほもよろ")) return true;
+    }
+    return false;
+}
+
+// The text of item it.
+std::string_view ItemText(const Item* it) {
+    return std::string_view(it->text).substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
+}
+
+// Whether a question word stands before it in its clause, with no concessive も, ても, でも,
+// (よ)うと or (よ)うが and no embedded か question between.
 bool WonderBefore(const Item* it) {
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
         const std::string_view d = p->DirectSurface();
         if (s.empty() || AnyRuneIn(s, "。！？!?「」『』") || s.ends_with("も") || s == "か" || d.ends_with("も") ||
-            d.ends_with("か")) {
+            d.ends_with("か") || ConcessiveVolitional(ItemText(p)) ||
+            ((s == "と" || s == "が") && p->prev != nullptr &&
+             ConcessiveVolitional(std::string(ItemText(p->prev)) + std::string(s)))) {
             return false;
         }
-        if (WonderWord(s)) return true;
+        if (WonderWord(p)) return true;
     }
     return false;
 }
