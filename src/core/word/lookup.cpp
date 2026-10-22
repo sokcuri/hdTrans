@@ -122,9 +122,11 @@ struct SkipContext {
 }  // namespace
 
 bool NounBefore(std::string_view text) {
+    // Pronouns and nouns that end in hiragana (予定通り).
     static constexpr std::string_view kPronouns[] = {"これ", "それ", "あれ", "どれ", "ここ", "そこ", "あそこ",
                                                      "どこ", "だれ", "みんな", "こいつ", "そいつ", "あいつ", "わたし",
-                                                     "あたし", "あなた", "おれ", "ぼく", "きみ", "かれ", "かのじょ"};
+                                                     "あたし", "あなた", "おれ", "ぼく", "きみ", "かれ", "かのじょ",
+                                                     "通り", "どおり"};
     const text::Rune last = DecodeLastRune(text);
     const char32_t r = last.cp;
     if (r >= 0x3041 && r <= 0x309F) {

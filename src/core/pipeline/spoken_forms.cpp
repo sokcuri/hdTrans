@@ -519,6 +519,20 @@ bool KashiraNe(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ワケ standing alone, after no katakana and before no katakana or kanji: the noun わけ
+// written in katakana (やられるワケにはいかない, そういうワケだ, ワケがわからない).
+bool KataWake(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && IsKatakanaRune(LastRune(s.substr(0, pos)).cp)) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ワケ")) return false;
+    if (p < s.size()) {
+        const char32_t after = At(s, p).cp;
+        if (IsKatakanaRune(after) || IsKanjiRune(after)) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.group[1], mid, m.group[2]}); }
 
 }  // namespace
@@ -526,6 +540,7 @@ std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.gro
 std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectForms) {
     std::string text(in);
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
+    if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
     if (ContainsAny(text, kKataStemStarts)) {
         text = ReplaceAll(text, KataStemPattern, [](const Match& m) {
             const Match g = Rematch(m, KataStemPattern);
