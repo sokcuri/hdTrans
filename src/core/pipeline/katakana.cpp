@@ -390,7 +390,8 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
 }
 
 // The length of the katakana name that kana ends in an honorific after (ヨウタサマ: 3), or
-// 0: a name of the name layer only or no dictionary word, not after オ (オジサン), before
+// 0: a name of the name layer only or no dictionary word, not after オ (オジサン) nor a
+// run the document shows to be a name whole, before
 // サマ サン クン チャン or ドノ, the whole run no dictionary word in katakana or hiragana.
 size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
     for (const std::u32string_view h : {std::u32string_view(U"サマ"), std::u32string_view(U"サン"),
@@ -399,6 +400,8 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
         if (kana.size() < h.size() + 2 || !kana.ends_with(h)) continue;
         const std::u32string_view name = kana.substr(0, kana.size() - h.size());
         if (name[0] == U'オ' || name.back() == U'ー' || name.back() == U'ッ') return 0;
+        // A name the document shows whole (クロサン beside クロイチ and クロニ).
+        if (ctx.named != nullptr && ctx.named->contains(Utf8(kana))) return 0;
         // A word whole, in katakana or hiragana (タクサン たくさん, ネエサン ねえさん).
         if (!KeyTags(Utf8(kana), ctx, snap).empty() || !KeyTags(ToHiragana(Utf8(kana)), ctx, snap).empty()) return 0;
         // A name of the name layer only, or no word (タン of タンサン is a word).

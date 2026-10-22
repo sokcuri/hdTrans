@@ -9,6 +9,7 @@
 #include <deque>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -132,6 +133,12 @@ private:
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
 
+    // The katakana runs that end in a katakana honorific (クロサン) while the prose lines
+    // write their head with two or more other endings that are no honorific (クロイチ,
+    // クロニ): one name, a numbered or derived one, not the head and an honorific.
+    const std::set<std::string>& SiblingNames();
+    void FindSiblingNames();
+
     // Scores, splits and the accepted names (registry.cpp).
     const std::map<std::string, Name>& Accepted();
     std::pair<std::string, std::string> GivenSplit(std::string_view t);
@@ -183,6 +190,7 @@ private:
     std::shared_ptr<FlagCache> sharedFlags_;
     std::map<std::string, DictFlags> flags_;
     std::map<std::string, Name> scores_;                // accepted names, valid while scoresValid_
+    std::set<std::string> siblings_;                    // SiblingNames, valid while scoresValid_
     bool scoresValid_ = false;
 };
 

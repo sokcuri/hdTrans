@@ -22,6 +22,9 @@ using namespace internal;
 
 namespace {
 
+// The katakana honorifics a katakana name may end in (ヨウタサン).
+constexpr std::string_view kKatakanaHonorifics[] = {"サン", "サマ", "クン", "チャン", "ドノ"};
+
 // Thresholds of the evidence score.
 constexpr double kThreshold = 2.0;
 constexpr double kSingleThreshold = 3.0;  // single-kanji surfaces without a label
@@ -523,6 +526,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         j.parts = parts;
     }
     scores_.clear();
+    FindSiblingNames();
     for (const auto& [t, n] : all) {
         double need = kThreshold;
         if (RuneCount(t) == 1 && AllRunes(t, IsKanji) && !n.label) need = kSingleThreshold;
@@ -658,9 +662,37 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     }
 }
 
+const std::set<std::string>& Registry::SiblingNames() {
+    if (scoresValid_) return siblings_;
+    Accepted();
+    return siblings_;
+}
+
+void Registry::FindSiblingNames() {
+    siblings_.clear();
+    for (const auto& [t, c] : kana_) {
+        (void)c;
+        std::string_view head;
+        for (const std::string_view h : kKatakanaHonorifics) {
+            if (t.size() > h.size() && std::string_view(t).ends_with(h)) head = std::string_view(t).substr(0, t.size() - h.size());
+        }
+        if (RuneCount(head) < 2) continue;
+        int siblings = 0;
+        for (auto it = kana_.lower_bound(std::string(head)); it != kana_.end() && it->first.starts_with(head); ++it) {
+            const std::string_view tail = std::string_view(it->first).substr(head.size());
+            if (tail.empty() || it->first == t || tail.starts_with("ー") || prose_.count(it->first) == 0) continue;
+            bool honorific = false;
+            for (const std::string_view h : kKatakanaHonorifics) honorific = honorific || tail.starts_with(h);
+            if (!honorific) siblings++;
+        }
+        if (siblings >= 2) siblings_.insert(t);
+    }
+}
+
 bool Registry::Named(std::string_view t) {
     const std::string key(t);
     if (Accepted().count(key) > 0) return true;
+    if (SiblingNames().count(key) > 0) return true;
     const auto h = hon_.find(key), g = gloss_.find(key);
     if ((h != hon_.end() && h->second > 0) || (g != gloss_.end() && g->second > 0)) return true;
     for (const auto* m : {&labels_, &prefixes_}) {
@@ -693,6 +725,7 @@ std::vector<std::string> Registry::NamedSurfaces() {
     for (const auto& [k, n] : chains_) {
         for (const std::string& t : LabelParts(k)) named.insert(t);
     }
+    for (const std::string& t : SiblingNames()) named.insert(t);
     return std::vector<std::string>(named.begin(), named.end());
 }
 

@@ -523,3 +523,18 @@ HD_TEST(names_prose_katakana) {
     HD_CHECK(prose.count("ユキ") == 1 && prose.at("ユキ") == 2);
     HD_CHECK(prose.count("ハル") == 0);
 }
+
+HD_TEST(names_katakana_siblings) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    // A head written with two other endings in the prose makes head + サン one name.
+    names::Registry r = Scan(snap, "クロイチは好奇心旺盛だ。\nクロニは用心深い。\nクロサンは力がある。");
+    HD_CHECK(r.Named("クロサン"));
+    const std::vector<std::string> named = r.NamedSurfaces();
+    HD_CHECK(std::find(named.begin(), named.end(), "クロサン") != named.end());
+    // One other ending, or endings that are honorifics, are not enough.
+    names::Registry one = Scan(snap, "ヨウタノ本だ。\nヨウタサンは来た。");
+    HD_CHECK(!one.Named("ヨウタサン"));
+    names::Registry honorifics = Scan(snap, "ヨウタクンは来た。\nヨウタチャンが来た。\nヨウタサンは来た。");
+    HD_CHECK(!honorifics.Named("ヨウタサン"));
+}
