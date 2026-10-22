@@ -402,10 +402,10 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
 }
 
 // しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー, ならしゃーない). Not the
-// topic は fused to a pronoun in し (あたしゃあね, わしゃあね, あっしゃあ).
+// topic は fused to a pronoun in し (あたしゃあね, わしゃあね, わっしゃあ, わたくしゃあ).
 bool Shaanai(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    for (const std::string_view stem : {"あた", "わた", "わ", "あっ"}) {
+    for (const std::string_view stem : {"あた", "わた", "わたく", "わ", "わっ", "あっ"}) {
         if (s.substr(0, pos).ends_with(stem)) return false;
     }
     if (!Lit(s, p, "しゃ") || !OneOf(s, p, U"ーあ")) return false;
@@ -554,7 +554,7 @@ bool TokuInText(std::string_view s, size_t pos, Match& m) {
         if (OneOf(s, p, U"、，！!…‥")) {
             std::string_view rest = s.substr(p);
             rest = rest.substr(0, std::min(rest.find("。"), rest.find("」")));
-            for (std::string_view v : {"探", "捜", "見つけ", "さがし", "みつけ"}) {
+            for (std::string_view v : {"探", "捜", "見つけ", "見つか", "見っけ", "発見", "さがし", "みつけ", "みつか"}) {
                 if (rest.find(v) != std::string_view::npos) return false;
             }
         }
