@@ -24,12 +24,17 @@ inline constexpr KataStem kKataStems[] = {
     {"セコ", "せこ"},
     {"ムズ", "むず"},
     {"ハズ", "はず"},
+    {"ツラ", "つら"},
+    {"エラ", "えら"},
 };
 
-inline constexpr std::u32string_view kKataStemStarts = U"イショウダエヒコマセム";
+inline constexpr std::u32string_view kKataStemStarts = U"イショウダエヒコマセムツ";
+
+inline constexpr std::string_view kKataAdjectiveEnding = "イ";
 
 inline constexpr std::string_view kKataEndings[] = {
     "い",
+    "イ",
     "く",
     "かっ",
     "かろ",

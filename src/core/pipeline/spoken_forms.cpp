@@ -7,7 +7,9 @@ namespace hdTrans::pipeline::internal {
 
 namespace {
 
-// Group 1 a stem of kKataStems in their order, group 2 its ending.
+// Group 1 a stem of kKataStems in their order, group 2 its ending. The adjective ending
+// written in katakana (マズイ) only ends a katakana word of the stem and イ alone (not
+// セコイア).
 bool KataStemPattern(std::string_view s, size_t pos, Match& m) {
     for (const KataStem& k : kKataStems) {
         size_t p = pos;
@@ -15,6 +17,10 @@ bool KataStemPattern(std::string_view s, size_t pos, Match& m) {
         for (std::string_view e : kKataEndings) {
             size_t q = p;
             if (!Lit(s, q, e)) continue;
+            if (e == kKataAdjectiveEnding &&
+                (IsKatakanaRune(LastRune(s.substr(0, pos)).cp) || (q < s.size() && IsKatakanaRune(At(s, q).cp)))) {
+                continue;
+            }
             m.group[1] = Span(s, pos, p);
             m.group[2] = Span(s, p, q);
             m.end = q;
@@ -527,7 +533,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
             for (const KataStem& k : kKataStems) {
                 if (k.kata == g.group[1]) hira = k.hira;
             }
-            return Cat({hira, g.group[2]});
+            return Cat({hira, g.group[2] == kKataAdjectiveEnding ? std::string_view("い") : g.group[2]});
         });
     }
     if (Contains(text, "ね")) {
