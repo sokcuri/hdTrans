@@ -701,7 +701,9 @@ void PreparedState(Flusher& f) {
 
 void PastProgressiveAdnominal(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb || it->detail->record != 0) {
+            continue;
+        }
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         if (HoldingVerb(ItemLemma(f, it, it->selected))) continue;
