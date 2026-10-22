@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:w:401	病院も3か所行って	병원도 3군데 가	fix	lookup
+dict:w:401	階段は１フロアに２か所あるみたい	계단은 1 플로어에 2군데 있는 것 같다	fix	lookup
+dict:w:401	敵の対空陣地を二か所確認	적의 대공 진지를 2군데 확인	fix	lookup
+dict:jisjk:104106	お付き合いして三か月も経てば	교제해 3개월도 지나면	keep	lookup
