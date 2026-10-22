@@ -83,7 +83,8 @@ output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx
 // katakana run, does not follow ・ ＝ の or a span, is followed by a particle or
 // predicate it takes (an adjective also by the end of a sentence), does not join the
 // text around it into a dictionary word, has no plain or name sense and is not one of
-// ctx.named.
+// ctx.named. The stem of 行く in katakana before its hiragana conjugation (イっちゃう,
+// イッた, イクの, イきそう) is written 行 the same way.
 output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // A nickname of two to four hiragana before ちゃん or くん in the text pieces written as a

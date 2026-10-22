@@ -595,6 +595,24 @@ constexpr std::string_view kVerbNext[] = {"ん", "の", "から", "けど", "し
 
 constexpr std::u32string_view kSentenceEnd = U"。！？!?…‥」』";
 
+// The stem of 行く written in katakana with its conjugation in hiragana, as fiction writes
+// the verb for climax (イっちゃう, イッた, イクの, イきそう, イかせて): the katakana run and the
+// hiragana it must be followed by, and its kanji spelling. イケ is left out (イケる, イケてる).
+struct KataStem {
+    std::string_view run;
+    std::string_view as;
+    std::string_view next[8];
+};
+
+constexpr KataStem kKataStems[] = {
+    {"イ", "行", {"った", "って", "っち", "っし", "く", "き", "か", "こ"}},
+    {"イッ", "行っ", {"た", "て", "ち", "し"}},
+    {"イク", "行く", {"の", "ん", "っ", "ぅ", "から", "まで", "時", "とき"}},
+    {"イキ", "行き", {"そう", "そ", "ま", "た", "す", "っぱ", "続"}},
+    {"イカ", "行か", {"せ", "され", "な"}},
+    {"イコ", "行こ", {"う"}},
+};
+
 // The element of list that starts s.
 template <size_t N>
 bool PrefixIn(std::string_view s, const std::string_view (&list)[N], std::string_view& found) {
@@ -645,6 +663,14 @@ bool HasUserSense(std::string_view s, const LineContext& ctx, const dict::Snapsh
     return false;
 }
 
+// Whether a plain dictionary other than the name layer gives the key s a sense.
+bool HasPlainSense(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    for (const dict::Candidate& c : snap.GetWordInfo(s, dict::LookupMode::General, ctx.lookup).list) {
+        if (c.user != nullptr && !c.user->nameLayer && c.user->key.size() == s.size()) return true;
+    }
+    return false;
+}
+
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
 // around it.
 std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, const LineContext& ctx,
@@ -660,12 +686,26 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         const size_t start = i;
         i += RunOf(text.substr(i), IsKatakanaRune);
         const std::string_view word = text.substr(start, i - start);
+        const char32_t prev = LastRune(text.substr(0, start)).cp;
+        const KataStem* stem = nullptr;
+        for (const KataStem& x : kKataStems) {
+            if (x.run != word) continue;
+            for (const std::string_view n : x.next) {
+                if (!n.empty() && text.substr(i).starts_with(n)) stem = &x;
+            }
+        }
+        if (stem != nullptr && prev != U'・' && prev != U'＝' && !(start == 0 && spanBefore) &&
+            !HasPlainSense(word, ctx, snap) && (ctx.named == nullptr || ctx.named->find(word) == ctx.named->end())) {
+            b.append(text.substr(at, start - at));
+            b += stem->as;
+            at = i;
+            continue;
+        }
         const KataWord* kw = nullptr;
         for (const KataWord& x : kKataWords) {
             if (x.word == word) kw = &x;
         }
         if (kw == nullptr) continue;
-        const char32_t prev = LastRune(text.substr(0, start)).cp;
         const std::string_view rest = text.substr(i);
         const char32_t next = text::DecodeRune(rest).cp;
         std::string_view follower;

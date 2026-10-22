@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+katakana:iku-stem	「イった……？」	「갔어……?」	fix	normalize
+katakana:iku-stem	「イクのか？」	「가는 건가?」	fix	normalize
+katakana:iku-stem	「一緒にイこう……」	「함께 가자……」	fix	normalize
+katakana:iku-stem	「イっちゃい……そうです……」	「가버릴……것 같습니다……」	fix	normalize
+katakana:iku-stem	一緒にイキたい。	함께 가고 싶다.	fix	normalize
+katakana:iku-stem	「イキそうなんだっ」	「갈 것 같애」	fix	normalize
+katakana:iku-stem	「……痛いじゃないか。骨がイッたぞ」	「……아프잖아. 뼈가 갔어」	fix	normalize
+katakana:iku-stem	「先にイッちゃって……」	「먼저 가버려……」	fix	normalize
+katakana:iku-stem	「タコさんやイカさんになっちゃうよね」	「문어씨랑 오징어씨가 돼 버리지」	keep	normalize
