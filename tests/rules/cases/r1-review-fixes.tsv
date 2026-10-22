@@ -41,3 +41,4 @@ rewrite:wondering-darou	どっちのほうがいいだろう。	어느 쪽 쪽�
 rewrite:wondering-darou	どのような人だろう。	어떠한 사람일까.	fix	rewrites
 sound:volitional-so	「見逃そっか」	「놓칠까」	fix	sound
 sound:volitional-so	手放そっか	손에서 놓을까	fix	sound
+rewrite:prepared-state	ボールを投げてある。	공을 던져 두었다.	fix	rewrites

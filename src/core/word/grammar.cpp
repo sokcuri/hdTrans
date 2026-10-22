@@ -665,10 +665,20 @@ bool SubjectGaBefore(const Item* it) {
     return false;
 }
 
-// Whether a Korean verb lemma already reads as a passive or a change of state (닫혀지다,
-// 정리되다, 이용당하다), which takes no 두다.
+// Whether a Korean verb lemma already reads as a passive or a change of state, which takes no
+// 두다: 되다 or 당하다 (정리되다, 이용당하다), or 지다 after the 어 form of a verb, a syllable
+// without a final consonant in ㅏ, ㅐ, ㅓ, ㅕ, ㅘ, ㅙ, ㅝ or ㅞ (닫혀지다, 열어지다; not 던지다,
+// 만지다 or 가지다).
 bool KoreanPassive(std::string_view lemma) {
-    return lemma.ends_with("지다") || lemma.ends_with("되다") || lemma.ends_with("당하다");
+    if (lemma.ends_with("되다") || lemma.ends_with("당하다")) return true;
+    if (!lemma.ends_with("지다") || lemma.ends_with("가지다")) return false;
+    const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지다").size());
+    if (stem.empty()) return false;
+    const char32_t c = DecodeLastRune(stem).cp;
+    if (c < 0xAC00 || c > 0xD7A3 || (c - 0xAC00) % 28 != 0) return false;
+    const int medial = static_cast<int>((c - 0xAC00) / 28 % 21);
+    return medial == 0 || medial == 1 || medial == 4 || medial == 6 || medial == 9 || medial == 10 || medial == 14 ||
+           medial == 15;
 }
 
 }  // namespace
