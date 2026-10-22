@@ -1,0 +1,24 @@
+#! layer=base
+# 농사, 살림, 자연의 일상 낱말과 짐승 고기, 방향
+ため池	저수지	n
+万能農具	만능 농기구	n
+明かり取り窓	채광창	n
+血抜き	피 빼기	n	gattr=Hd
+猪肉	멧돼지고기	n	attr=VFd
+兎肉	토끼고기	n	attr=VFd
+熊肉	곰고기	n	attr=VFd
+鴨肉	오리고기	n	attr=VFd
+名主	이장	n	attr=VHn
+生ゴミ	음식물 쓰레기	n
+食感	식감	n
+虫眼鏡	돋보기	n
+遊び道具	장난감	n
+鍛冶場	대장간	n	attr=VBl
+長テーブル	긴 테이블	n
+薄味	싱거운 맛	n
+東方向	동쪽 방향	n	attr=VTpUDr
+西方向	서쪽 방향	n	attr=VTpUDr
+南方向	남쪽 방향	n	attr=VTpUDr
+北方向	북쪽 방향	n	attr=VTpUDr
+別方向	다른 방향	n	attr=VTpUDr
+半円状	반원 모양	n

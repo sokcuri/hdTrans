@@ -728,8 +728,8 @@ G80	千ウォン札を財布に入れた。	천원 지폐를 지갑에 넣었다
 G90	兵士たちは前線に立った。	병사들은 전선에 섰다.	current	global-stem
 G100	― 梅 ―	― 매 ―	current	global-stem
 G100	竹！？どうしたの	죽!? 무슨 일이야	current	global-stem
-G140	南方向に小さな川が見える。	남방향에 작은 강이 보인다.	current	global-stem
-G140	鳥の群れが北方向に飛んでいった。	새의 무리가 북방향으로 날아 갔다.	current	global-stem
+G140	南方向に小さな川が見える。	남쪽 방향으로 작은 강이 보인다.	current	global-stem
+G140	鳥の群れが北方向に飛んでいった。	새의 무리가 북쪽 방향으로 날아 갔다.	current	global-stem
 G160	茫然と空を見上げていた。	망연과 하늘을 올려다보고 있었다.	current	global-stem
 G170	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	global-stem
 G170	彼は茫然と空を見上げた。	그는 망연과 하늘을 올려다보았다.	current	global-stem
