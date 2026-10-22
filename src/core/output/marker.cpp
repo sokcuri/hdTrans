@@ -549,6 +549,7 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             break;
         }
     }
+    if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
     if (TextGate(i, key)) {
         it.selectionFlag = 1;
         sc.text = std::move(stem);

@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:kara-clause	お金がないから、何も買えない。	돈이 없으니까, 아무것도 살 수 없다.	fix	lookup
+dict:kara-clause	危ないからやめろ。	위험하니까 그만두어라.	fix	lookup
+dict:kara-clause	作るから、待ってて。	만드니까, 기다리고 있어.	fix	lookup
+dict:kara-clause	友達だから、助ける。	친구니까, 돕는다.	fix	lookup
+dict:kara-clause	静かだから、眠れる。	조용하니까, 잘 수 있다.	fix	lookup
+dict:kara-copula	気づいたからだろう。	눈치챘기 때문일 것이다.	fix	local
+dict:kara-copula	好きだからです。	좋아하기 때문입니다.	fix	local
+dict:kara-copula	疲れたからだよ。	지쳤기 때문이야.	fix	local

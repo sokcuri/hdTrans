@@ -6,7 +6,7 @@ dict:teitai:1	ずっと君の隣に座っていたいな。	쭉 네 옆에 앉�
 dict:teitai:1	家で休んでいたくて、断った。	집에서 쉬고 있고 싶어서, 끊었다.	fix	local
 dict:teitai:1	朝はずっと寝てたい。	아침은 쭉 자고 있고 싶다.	fix	local
 dict:teitai:1	彼は家で本を読んでいた。	그는 집에서 책을 읽고 있었다.	keep	local
-dict:teitai:1	本を読んでいたから、気付かなかった。	책을 읽고 있었기 때문에, 깨닫지 못했다.	keep	local
+dict:teitai:1	本を読んでいたから、気付かなかった。	책을 읽고 있었으니까, 깨닫지 못했다.	keep	local
 dict:teitai:1	肩をぶつけて痛い。	어깨를 부딪쳐 아프다.	keep	local
 dict:teitai:1	早く帰りたい。	빨리 돌아가고 싶다.	keep	local
 constraint:ita-after-te	鍵は机の上に置かれていたんです。	열쇠는 책상 위에 놓여져 있었습니다.	keep	lookup
