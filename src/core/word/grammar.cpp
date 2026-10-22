@@ -583,11 +583,11 @@ namespace {
 // Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 constexpr std::string_view kWritingVerbs[] = {"書", "か", "描", "記", "記し", "しるし"};
 
-// The ending of 두다 that says an action was done beforehand, for the ending of the existential
-// ある after a て form: the present reads as done (4다 5다, 0 8, 7니다 5습니다, 2니까 5으니까); a
-// condition (2면), a connective 6 that goes on and the past keep their form. "" for other
-// endings.
-std::string PreparedEnding(std::string_view ending, bool utteranceEnd) {
+// The perfect of an ending of the existential 있다 that follows a て form, for a verb whose
+// state is the result of what it did: the present reads as done (4다 5다, 0 8, 7니다 5습니다,
+// 2니까 5으니까); a condition (2면), a connective 6 that goes on and the past keep their form.
+// "" for other endings.
+std::string PerfectEnding(std::string_view ending, bool utteranceEnd) {
     if (ending.empty()) return {};
     const std::string_view rest = ending.substr(1);
     switch (ending[0]) {
@@ -603,6 +603,7 @@ std::string PreparedEnding(std::string_view ending, bool utteranceEnd) {
             }
             return {};
         case '2':
+        case 'A':
             if (rest.starts_with("면")) return std::string(ending);
             return "5으" + std::string(rest);
         case '6':
@@ -611,6 +612,13 @@ std::string PreparedEnding(std::string_view ending, bool utteranceEnd) {
             return std::string(ending);
     }
     return {};
+}
+
+// Whether item it ends its sentence: the end of the utterance, or ！ or ？ after it.
+bool SentenceEnd(const Worker& w, const Item* it) {
+    std::string_view after = From(it->text, it->start + it->length);
+    if (after.empty() && it->tokenIndex + 1 < w.TokenCount()) after = w.Tok(it->tokenIndex + 1).text;
+    return UtteranceEnd(w, it) || RuneIn(text::DecodeRune(after).cp, "！？!?");
 }
 
 // Whether a verb stem ends in the passive れ of a verb (書かれ, 包まれ, され), which takes no 두다.
@@ -639,10 +647,7 @@ void PreparedState(Flusher& f) {
         }
         const Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr) continue;
-        std::string_view after = From(n->text, n->start + n->length);
-        if (after.empty() && n->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(n->tokenIndex + 1).text;
-        const bool end = UtteranceEnd(f.w, n) || RuneIn(text::DecodeRune(after).cp, "！？!?");
-        const std::string prepared = PreparedEnding(d->dst, end);
+        const std::string prepared = PerfectEnding(d->dst, SentenceEnd(f.w, n));
         if (prepared.empty()) continue;
         n->AssignEntrySurface(n->selected, "&C7@");
         n->AssignDirectSlot(n->DirectIndex(), prepared);
