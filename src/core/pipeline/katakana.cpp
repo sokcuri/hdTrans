@@ -566,9 +566,12 @@ bool IsOkuriganaSpeech(const output::Pieces& line, const std::vector<std::vector
 // emphasis; adjective marks the adjectives. Each is also a possible character name.
 // オレ and オマエ are not here: the base dictionary reads them as 나 and 너, and おれ
 // also reads as 折れ.
+// A verb is written in its kanji form (as), which keeps it apart from the kana around
+// it (出さないとコロス 出さないと殺す), and reads as a predicate like an adjective.
 struct KataWord {
     std::string_view word;
     bool adjective;
+    std::string_view as = {};
 };
 
 constexpr KataWord kKataWords[] = {
@@ -576,6 +579,8 @@ constexpr KataWord kKataWords[] = {
     {"ダレ", false}, {"ココ", false}, {"ソコ", false}, {"ドコ", false}, {"アタシ", false},
     {"アンタ", false}, {"ダメ", true}, {"ヤバイ", true}, {"スゴイ", true}, {"カワイイ", true},
     {"ウルサイ", true}, {"ヒドイ", true}, {"コワイ", true}, {"ウザイ", true},
+    {"コロス", true, "殺す"}, {"ブチコロス", true, "ぶっ殺す"}, {"シネ", true, "死ね"}, {"キエロ", true, "消えろ"},
+    {"ユルサナイ", true, "許さない"}, {"ヤメテ", true, "やめて"}, {"タスケテ", true, "助けて"},
 };
 
 // The particles and predicates after which a word of kKataWords reads as the word; an
@@ -585,6 +590,8 @@ constexpr std::string_view kPronounNext[] = {"は", "が", "を", "も", "じゃ
 constexpr std::string_view kAdjectiveNext[] = {"だ", "じゃ", "って", "か"};
 // The sentence-final particles after which an i-adjective of kKataWords reads as one.
 constexpr std::string_view kAdjectiveFinal[] = {"ぞ", "よ", "な", "ね", "わ"};
+// What else follows a verb of kKataWords (コロスんだ, コロスから).
+constexpr std::string_view kVerbNext[] = {"ん", "の", "から", "けど", "し", "ぜ"};
 
 constexpr std::u32string_view kSentenceEnd = U"。！？!?…‥」』";
 
@@ -665,7 +672,8 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         bool ok;
         if (kw->adjective) {
             ok = PrefixIn(rest, kAdjectiveNext, follower) ||
-                 (word.ends_with("イ") && PrefixIn(rest, kAdjectiveFinal, follower));
+                 ((word.ends_with("イ") || !kw->as.empty()) && PrefixIn(rest, kAdjectiveFinal, follower)) ||
+                 (!kw->as.empty() && PrefixIn(rest, kVerbNext, follower));
             ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd);
         } else {
             ok = PrefixIn(rest, kPronounNext, follower);
@@ -674,8 +682,10 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         if (!ok || prev == U'・' || prev == U'＝' || prev == U'の' || (start == 0 && spanBefore)) continue;
         if (HasUserSense(word, ctx, snap)) continue;
         if (ctx.named != nullptr && ctx.named->find(word) != ctx.named->end()) continue;
-        const std::string hiragana = ToHiragana(word);
-        if (JoinsWord(text.substr(0, start), hiragana + std::string(follower), rest.substr(follower.size()), ctx, snap)) {
+        const std::string hiragana = kw->as.empty() ? ToHiragana(word) : std::string(kw->as);
+        const bool kanji = !kw->as.empty() && !IsHiraganaRune(text::DecodeRune(kw->as).cp);
+        if (!kanji &&
+            JoinsWord(text.substr(0, start), hiragana + std::string(follower), rest.substr(follower.size()), ctx, snap)) {
             continue;
         }
         b.append(text.substr(at, start - at));

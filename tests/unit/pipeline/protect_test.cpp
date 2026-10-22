@@ -347,6 +347,10 @@ HD_TEST(pipeline_katakana_dictionary) {
         {"ダメよ。", "ダメよ。"},  // only an i-adjective before a sentence-final particle
         {"オレは行く。", "オレは行く。"},
         {"ドレスを着た。", "ドレスを着た。"},
+        {"出さないとコロスぞ。", "出さないと殺すぞ。"},  // kanji keeps the word apart from と
+        {"アタシがコロスんだ。", "あたしが殺すんだ。"},
+        {"ヤメテよ！", "やめてよ！"},
+        {"コロスケが来た。", "コロスケが来た。"},
     };
     for (const auto& c : words) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, snap)), std::string(c.want));
