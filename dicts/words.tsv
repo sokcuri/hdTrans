@@ -26741,3 +26741,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 嬢	양	N110	VHn	Tu	GN							w:26719
 余計に	더	E300			GN						よけいに	w:26720
 よけいに	더	E300			GN							w:26721
+ちょっと	잠깐	E300			GN	5206	||1 ||4 S+1== "L待" S+1== "L来" S+1== "L行って" S+1== "L出かけ"	기다리다, 오다, 다녀오다, 나가다 앞의 ちょっと는 잠깐으로 고른다.				w:26722
