@@ -40697,8 +40697,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ま	&E1@	M441			GN				jisjk:343675		
 ま	&E1@	M441			GN	3493	||1 A-2== "VCpVAc"	두 단어 앞이 의복·외모를 뜻하는 말이면 동사 ま를 두르다로 고른다. (미발동: rare-context)	jisjk:343676		
 ま、	뭐,	N110			GN				jisjk:368319		
-まぁ	아무튼	Q110			GN				jisjk:349562		
-まあ	뭐	N110			GN				jisjk:340365		
+まぁ	뭐	E300			GN				jisjk:349562		
+まあ	뭐	E300			GN				jisjk:340365		
 まあたらし	아주 새$G9@	H7N0			GN				jisjk:136234		
 まあと	어머나 하며	E321			GN				jisjk:1244		
 まあね	그냥	E300			GN				jisjk:374672		
@@ -40707,6 +40707,10 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 まあまあだね	그저 그런 정도로군	A9H1			GN				jisjk:90249		
 まあまあです	그저 그렇습니다	A9D0			GN				jisjk:114858		
 まあまあの	그저 그런	C0D1			GN				jisjk:4625		
+まぁまぁ	그저	E311			GN				lex:maamaa:small		
+まぁまぁだ	그저 그렇다	A9D0			GN				lex:maamaa:da		
+まぁまぁです	그저 그렇습니다	A9D0			GN				lex:maamaa:desu		
+まぁまぁの	그저 그런	C0D1			GN				lex:maamaa:no		
 まい	1지 않는다	S5:0		J2	GN				jisjk:4413		
 まい	1지 않을 것이다	S500		J2	GN				jisjk:4414		
 まい	(가)&AH@	M428			GN	2048	||1 &&4 S-1== "が" P-1== "2**" S-2== "汽車" P-2== "1**"	まい가 汽車が 뒤에 오면 가오다를 고른다. (미발동: rare-context)	jisjk:262441		
