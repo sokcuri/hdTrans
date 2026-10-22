@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-segmentation:nikujaga	夕飯に肉じゃがを作った。	저녁밥에 고기감자조림을 만들었다.	fix	lookup
+segmentation:nikujaga	夕飯に肉じゃがを作った。	저녁에 고기감자조림을 만들었다.	fix	lookup
 segmentation:nikujaga	肉じゃがは食べなかった。	고기감자조림은 먹지 않았다.	fix	lookup
 segmentation:nikujaga	肉じゃが定食を注文した。	고기감자조림 정식을 주문했다.	fix	lookup
 segmentation:nikujaga	肉がじゃがいもより多い。	고기가 감자보다 많다.	keep	lookup

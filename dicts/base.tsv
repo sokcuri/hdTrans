@@ -29436,7 +29436,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そっちゅう	뇌졸중	N110	QHP		GN				jisjk:200830		-1
 そっち退け	뒷전으로 물림	I110			GN				jisjk:111853		
 そって	따라	E300			GN				jisjk:149259		
-そっと	살그머니	E311			GN				jisjk:593		
+そっと	살며시	E311			GN				jisjk:593		
 そっとう	졸도	N110	QHP	Hd	GN				jisjk:200831		-1
 そっぽ	딴 쪽	N110	VTpUDrVPl		GN				jisjk:41202		
 そっぽを向	외면&AV@	M421			GN				jisjk:117616		
@@ -35765,7 +35765,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なつめ	대추	N110	VPtVFd		GN				jisjk:153883		
 なつめ茶	대추차	N130	VFd		GN				jisjk:373442		
 なつよう	여름용	N110			GN				jisjk:163034		
-なで	어루만&AL@	M437			GN				jisjk:91184		
+なで	쓰다&H7@	M437			GN				jisjk:91184		
 なでおろ	쓸어 내&AA@	M443			GN				jisjk:365402		
 なでがた	선이 아름다운 어깨	N110	UYh		GN				jisjk:258526		
 なでしこ	패랭이 꽃	I110			GN				jisjk:112954		
@@ -68732,7 +68732,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 チョウ	나비	N110	VHn		GN				jisjk:50592		
 チョウチョウ	나비	N110	VHn		GN				jisjk:50593		
 チョゲサ	조계사	N110	VPl		GN				jisjk:375987		
-チョコ	초콜렛	N110	VFd		GN				jisjk:50594		
+チョコ	초콜릿	N110	VFd		GN				jisjk:50594		
 チョコチップ	초코칩	N110	VFd		GN				jisjk:343833		
 チョコチョコと	조금조금씩	E300			GN				jisjk:343441		
 チョコバー	초콜릿 바	N110	VFd		GN				jisjk:131007		
@@ -74617,7 +74617,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ハンナンマトラス	한난마트라스	N130	QIDVGt		GN				jisjk:53241		
 ハンニョウル	학여울	N130	QST		GN				jisjk:374381		
 ハンバーガー	햄버거	N110	VFd		GN				jisjk:53242		
-ハンバーグ	햄버거	N110	VFd		GN				jisjk:53243		
+ハンバーグ	햄버그	N110	VFd		GN				jisjk:53243		
 ハンバーグステーキ	햄버그 스테이크	N110	VFd		GN				jisjk:132373		
 ハンバ－ガ－	햄버거	N110			GN				jisjk:132374		
 ハンパ	불완전	N110			GN				jisjk:53244		
@@ -166322,7 +166322,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 夕風	저녁 바람	N110	VFr		GN				jisjk:26154		
 夕食	저녁식사	N110	VFd	Om	GN				jisjk:26145		
 夕食会	저녁 식사회	I110	VGt		GN				jisjk:74119		
-夕飯	저녁밥	N110	VFd	Om	GN				jisjk:26143		
+夕飯	저녁	N110	VFd	Om	GN				jisjk:26143		
 夕鶴	석학	N110	VAm		GN				jisjk:254695		
 外	&C8@	M433			GN	399	||1 &&4 P+0== "4**" P-1== "2**" S-2== "看板" P-2== "1**"	外는 看板 명사와 조사 뒤에서 동사 후보 떼다를 고른다. (미발동: rare-context)	jisjk:13750		
 外	&HB@	M433	VAc		GN				jisjk:13751		
@@ -217306,7 +217306,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 撥音	발목음	N110	USoQMU		GN				jisjk:250375		
 撩乱	꽃이 어지럽게 핀 모양	N110			GN				jisjk:256102		
 撫	쓰다&H7@	M433			GN				jisjk:92820		
-撫で	어루만&AL@	M437			GN				jisjk:92821		
+撫で	쓰다&H7@	M437			GN				jisjk:92821		
 撫でて	쓰다듬고 &HN@	M447			GN				jisjk:144460		
 撫でてあげ	어루만져 &CJ@	M447			GN				jisjk:144457		
 撫でまわ	더&H7@	M443			GN				jisjk:144463		
@@ -335762,7 +335762,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 通知書	통지서	N110			BZ				jisjk:160342		
 通知済み	통지필	N110			GN				jisjk:151416		
 通知簿	성적표	N110	VPe		GN				jisjk:153519		
-通知表	통지표	N110			GN				jisjk:153518		
+通知表	성적표	N110			GN				jisjk:153518		
 通知預金	통지예금	I110			GN				jisjk:111227		
 通研	즈켄	N110	QCT		GN				jisjk:37111		
 通研電気工業	츠켄 전기공업	I130	VGt		PN				jisjk:87402		
@@ -336845,7 +336845,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 遊君	유녀	N110	VHn		GN				jisjk:254616		
 遊吟	유음	N110			GN				jisjk:254613		
 遊園	유원	N110	VPl		GN				jisjk:30795		
-遊園地	유원지	I110	VPl		GN				jisjk:79589		
+遊園地	놀이공원	I110	VPl		GN				jisjk:79589		
 遊女	유녀	N110	VHn		GN				jisjk:30784		
 遊子	여행자	N110	VHn		GN				jisjk:30796		
 遊子	유시	N130	QCTVPl		GN				jisjk:336858		
