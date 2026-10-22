@@ -110,18 +110,17 @@ tools/explain.sh <binA> <binB> <사전 폴더> '学生です。'   # 처음 달�
 - `compare.sh`는 기록 이름이나 폴더 경로를 받아 세트, 줄, 입력, A, B와 세트별, 전체 개수를 출력합니다.
 - `compare.sh`와 `explain.sh`의 종료 코드: 0 같음, 1 다름, 2 잘못된 입력.
 
-## 테스트 데이터 (비공개 저장소)
+## 테스트 데이터
 
-저작권이 있는 글로 하는 엔드투엔드 테스트의 입력과 기대 출력은 비공개 저장소 `sokcuri/hdTrans-data`에
-있습니다. 이 저장소에는 넣지 않습니다. 그 본문이나 번역을 이 저장소의 파일, 커밋 메시지, 이슈, 풀 리퀘스트에
-옮기지 않습니다. 접근 권한이 없으면 아래 테스트는 건너뜁니다.
+엔드투엔드 테스트의 입력과 기대 출력은 이 저장소 밖에 두고 `HDTRANS_TESTDATA`로 찾습니다. 데이터가 없으면
+아래 테스트는 건너뜁니다.
 
 - 출처마다 폴더 하나(`syosetu/`, 앞으로 `corpus/`, `lyrics/`, `eroge/` 등)이고, 하위 폴더는 없습니다.
 - `<set>.<NNN>.ja.txt`: 첫 줄은 작품, 작가나 권리자, 원문 URL을 적은 `#` 줄, 그다음은 입력
 - `<set>.<NNN>.ko.txt`: 같은 `#` 줄, 그다음은 입력 전체를 한 문서로 기본 설정으로 번역한 엔진 출력
 
 ```sh
-export HDTRANS_TESTDATA=/path/to/hdTrans-data                        # 받은 테스트 데이터 (절대 경로)
+export HDTRANS_TESTDATA=/path/to/testdata                            # 테스트 데이터 (절대 경로)
 tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts            # 기대 출력과 비교
 tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept   # 새 출력을 받아들임
 tools/e2e.sh <cliA|runA> build/mac/hdtrans dicts                    # 두 빌드 비교
