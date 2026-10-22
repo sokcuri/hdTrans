@@ -400,13 +400,13 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// しゃ[ーあ](?:ない|ね[ぇえー]*) that starts a word: しょうがない (しゃーない, しゃーねー). After
-// other hiragana than a drawn vowel, ゃ, は or も, the しゃ is the topic は fused to a word
-// ending in し (あたしゃあね, わしゃあね).
+// しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー, ならしゃーない). Not the
+// topic は fused to a pronoun in し (あたしゃあね, わしゃあね, あっしゃあ).
 bool Shaanai(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    const char32_t b = Before(s, pos);
-    if (IsHiraganaClass(b) && !In(b, U"ぁあぇえぉおーゃはも")) return false;
+    for (const std::string_view stem : {"あた", "わた", "わ", "あっ"}) {
+        if (s.substr(0, pos).ends_with(stem)) return false;
+    }
     if (!Lit(s, p, "しゃ") || !OneOf(s, p, U"ーあ")) return false;
     if (!Lit(s, p, "ない")) {
         if (!Lit(s, p, "ね")) return false;

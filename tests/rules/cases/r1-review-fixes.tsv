@@ -33,3 +33,5 @@ rewrite:passive-records	「というか、なんでまた朝早く集合をか�
 rewrite:passive-records	固くて高品質な板を敷き詰められた床は	단단해서 고품질인 판을 전면에 깔아진 바닥은	keep	rewrites
 rewrite:past-progressive-adnominal	踏みつけられていた足から解放され、私は立ち上がった。	짓밟아지고 있던 다리에서 해방되어 나는 일어섰다.	fix	rewrites
 rewrite:past-progressive-adnominal	読んでいた本を閉じた。	읽던 책을 덮었다.	keep	rewrites
+normalize:shaanai	ならしゃーない	라면 어쩔 수 없다	keep	normalize
+normalize:shaanai	だってしゃーねーだろ	왜냐하면 어쩔 수 없지	keep	normalize
