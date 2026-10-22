@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+sense:お盆	とりあえず、コップとお皿、お盆。	우선, 컵과 접시, 쟁반.	fix	senses
+sense:お盆	お盆休みに帰省する。	여름 휴가에 귀성한다.	keep	senses
+sense:手洗い	汲んできた水は手洗い用だ。	길어 온 물은 손 씻기용이다.	fix	senses
+sense:手洗い	ちょっと手洗いに行ってくる。	조금 화장실에 다녀올게.	keep	senses
+sense:伸びる	最初に降り立った場所に伸びる道。	처음에 내려선 장소에 뻗는 길.	fix	senses
+sense:伸びる	黒いモヤが僕に伸びてくる。	검은 안개가 나에게 뻗어 온다.	fix	senses
+sense:伸びる	能力が飛躍的に伸びる。	능력이 비약적으로 자란다.	keep	senses
+sense:伸びる	髪が肩まで伸びた。	머리카락이 어깨까지 자랐다.	keep	senses
+sense:足	それは地面を踏む足の感覚。	그것은 땅을 밟는 발의 감각.	fix	senses
