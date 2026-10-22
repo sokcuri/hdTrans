@@ -225,6 +225,24 @@ std::string_view TextTail(const Pieces& p) {
     return !p.empty() && p.back().span == SpanText ? std::string_view(p.back().text) : std::string_view();
 }
 
+// A word read as a particle that a noun before it takes without a space (바위뿐, 평소대로,
+// 크기밖에, 밭마다, 그만큼), keyed by the Japanese it translates.
+bool AttachesToNoun(std::string_view surface, std::string_view korean) {
+    struct Particle {
+        std::string_view japanese;
+        std::string_view korean;
+    };
+    constexpr Particle kParticles[] = {
+        {"ばかり", "뿐"}, {"だけ", "뿐"},   {"のみ", "뿐"},   {"通り", "대로"},   {"どおり", "대로"},
+        {"しか", "밖에"}, {"にしか", "밖에"}, {"毎", "마다"}, {"ごと", "마다"},  {"ほど", "만큼"},
+        {"くらい", "만큼"}, {"ぐらい", "만큼"},
+    };
+    for (const Particle& p : kParticles) {
+        if (surface.starts_with(p.japanese) && korean.starts_with(p.korean)) return true;
+    }
+    return false;
+}
+
 // Whether the item continues a number or a range of numbers written before it (第2回,
 // 1、2個, 2～3本, 百二十).
 bool InsideNumber(const std::vector<TokenText>& tokens, const ResolvedItem& item) {
@@ -271,6 +289,30 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const ResolvedItem
     const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
     if (native.empty()) return t.substr(0, digits) + std::string(counter);
     return std::string(native) + ' ' + std::string(counter);
+}
+
+// A word of two kanji and 中, 後 or 前 read with their Sino-Korean syllables (作業中 작업중,
+// 使用後 사용후) is written with the time noun apart (작업 중, 사용 후), like the noun
+// 中, 後 or 前 after a word.
+std::string SplitTimeNoun(const ResolvedItem& item, std::string t) {
+    std::u32string key, ko;
+    for (size_t k = 0; k < item.surface.size();) {
+        const auto r = text::DecodeRune(std::string_view(item.surface).substr(k));
+        key.push_back(r.cp);
+        k += r.size;
+    }
+    for (size_t k = 0; k < t.size();) {
+        const auto r = text::DecodeRune(std::string_view(t).substr(k));
+        ko.push_back(r.cp);
+        k += r.size;
+    }
+    if (key.size() != 3 || ko.size() != 3 || !HasRune(U"中後前", key[2])) return t;
+    for (size_t k = 1; k < 3; k++) {
+        if (dict::Written(key[k]) != ko[k]) return t;
+    }
+    if (!IsKanji(key[0]) || ko[0] < 0xAC00 || ko[0] > 0xD7A3) return t;
+    const size_t last = DropLastRune(t).size();
+    return t.substr(0, last) + ' ' + t.substr(last);
 }
 
 // Whether item j writes a native count (二匹 두 마리, 三箇所 세 군데, 何個 몇 개, 数 before 頭
@@ -428,7 +470,8 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
             remainder = FilterKana(remainder, settings_);
         }
     }
-    std::string translated = CountWithin(tokens, item, ApplyParenthesisTextFilter(Build(i, 0, {}), i));
+    std::string translated =
+        SplitTimeNoun(item, CountWithin(tokens, item, ApplyParenthesisTextFilter(Build(i, 0, {}), i)));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
     std::string composed;
@@ -653,7 +696,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     constexpr FreeNoun kFreeNouns[] = {{"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"},
                                        {"ほど", "정도"}, {"程", "정도"},   {"等", "등"},     {"など", "등"},
                                        {"前", "전"},     {"後", "후"},     {"前", "앞"},     {"後", "뒤"},
-                                       {"中", "중"}};
+                                       {"中", "중"},     {"くらい", "정도"}, {"ぐらい", "정도"}, {"など", "같은"}};
+    if (kind == '1' && AttachesToNoun(next.surface, nextEntry)) return Result(std::move(t), false);
     if (kind == '1' && !t.ends_with(' ') && Contains(GAttr(next), "Tu") == false) {
         for (const FreeNoun& f : kFreeNouns) {
             const std::string_view ns = next.surface;

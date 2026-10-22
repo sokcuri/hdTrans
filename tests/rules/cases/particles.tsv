@@ -70,5 +70,5 @@ dict:jisjk:369554	雨が降ったら帰る。	비가 오면 돌아간다.	keep	l
 dict:jisjk:369554	帰らなければならない。	돌아가야 한다.	keep	local
 dict:jisjk:369554	帰ったと思う。	돌아갔다고 생각한다.	keep	local
 dict:jisjk:369554	彼が来たらと言った。	그가 온다고 했다.	keep	local
-dict:jisjk:365696	正解もなにも、選択肢は一つだけだ。	정답이고 뭐고, 선택지는 하나 뿐이다.	fix	local
+dict:jisjk:365696	正解もなにも、選択肢は一つだけだ。	정답이고 뭐고, 선택지는 하나뿐이다.	fix	local
 dict:jisjk:365696	理由もなにも、知らない。	이유고 뭐고, 모른다.	keep	local
