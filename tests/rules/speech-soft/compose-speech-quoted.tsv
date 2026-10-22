@@ -20,7 +20,7 @@ compose:speech-quoted	「助かった……」	「살았다……」	keep	compos
 compose:speech-quoted	「来る！」	「온다!」	keep	compose
 compose:speech-quoted	「敵の右翼が優勢である」	「적의 우익이 우세하다」	keep	compose
 compose:speech-quoted	「わしはここで待っておる」	「나는 여기서 기다리고 있다」	keep	compose
-compose:speech-quoted	「ありがとうございます。それは違う」	「감사합니다. 그것은 다르다」	keep	compose
+compose:speech-quoted	「ありがとうございます。それは違う」	「감사합니다. 그건 다르다」	keep	compose
 compose:speech-quoted	『雨が降る』	『비가 온다』	keep	compose
 compose:speech-quoted	彼は「雨が降る」ということを知った。	그는 「비가 온다」라는 것을 알았다.	keep	compose
 compose:speech-quoted	「すぐ消える」魔法を使った。	「바로 사라진다」마법을 사용했다.	keep	compose

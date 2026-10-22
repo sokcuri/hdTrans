@@ -2,13 +2,13 @@ rule	input	expected	kind	layer
 compose:question-plain	「おい、大丈夫か？」	「어이, 괜찮아?」	fix	compose
 compose:question-plain	「この部屋、暑くないか？」	「이 방, 덥지 않아?」	fix	compose
 compose:question-plain	「好きな人はいるか？」	「좋아하는 사람은 있어?」	fix	compose
-compose:question-plain	「これは、暗号か？」	「이것은, 암호야?」	fix	compose
+compose:question-plain	「これは、暗号か？」	「이건, 암호야?」	fix	compose
 compose:question-plain	「本気なのか？」	「진심이야?」	fix	compose
 compose:question-plain	「一緒に行かないか？」	「함께 가지 않을래?」	fix	compose
 compose:question-plain	「元気だったか？」	「건강했어?」	fix	compose
 compose:question-plain	「どうしたいんだ？」	「어떻게 하고 싶어?」	fix	compose
 compose:question-plain	「どういう意味だ……？」	「어떤 의미야……?」	fix	compose
-compose:question-plain	「それ、私が抜けるってこと？」	「그것, 내가 빠진다는 거야?」	fix	compose
+compose:question-plain	「それ、私が抜けるってこと？」	「그거, 내가 빠진다는 거야?」	fix	compose
 compose:question-plain	「見てるってこと？」	「보고 있다는 거야?」	fix	compose
 compose:question-plain	「行くか？」	「갈까?」	keep	compose
 compose:question-plain	「明日は晴れるかな？」	「내일은 갤까?」	keep	compose

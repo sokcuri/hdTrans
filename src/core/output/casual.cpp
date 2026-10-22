@@ -88,6 +88,7 @@ bool WordEnds(std::string_view s) {
 
 // The spoken form of the written word at the start of s (것은 건, 무엇을 뭘) and the bytes it
 // replaces; {} for none. 것 forms follow a space or 그, 이, 저; 무엇 forms start a word.
+// things admits the 것 forms after a space; after 그, 이, 저 (pronoun) they always apply.
 std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pronoun, bool things) {
     struct Form {
         std::string_view written;
@@ -95,7 +96,7 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
         bool ended;  // the word ends after it
     };
     static constexpr Form kForms[] = {
-        {"것은", "건", false},       {"것을", "걸", false},       {"것이야", "거야", false},
+        {"것은", "건", false},       {"것을", "걸", false},       {"것으로", "걸로", false},       {"것이야", "거야", false},
         {"것이지", "거지", false},   {"것이니까", "거니까", false}, {"것이", "게", true},
         {"것", "거", true},          {"무엇인가", "뭔가", false},  {"무엇을", "뭘", false},
         {"무엇이야", "뭐야", false}, {"무엇이지요", "뭐죠", false}, {"무엇이지", "뭐지", false},  {"무엇입니까", "뭡니까", false},
@@ -106,7 +107,7 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
     for (const Form& f : kForms) {
         if (!s.starts_with(f.written) || (f.ended && !WordEnds(s.substr(f.written.size())))) continue;
         if (pronoun && f.written.starts_with("무엇")) continue;
-        if (!things && f.written.starts_with("것")) continue;
+        if (!things && !pronoun && f.written.starts_with("것")) continue;
         // 무엇인가 asking what something is (무엇인가가 문제, 무엇인가를 몰라) is 뭔지.
         const std::string_view rest = s.substr(f.written.size());
         if (f.written == "무엇인가" && (rest.starts_with("가") || rest.starts_with(" 몰") || rest.starts_with(" 모르") ||
@@ -132,7 +133,8 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
         } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle)) == 0) {
-            // 무엇 is 뭐 in any plain or polite quote; 것 is 거 only in casual speech.
+            // 무엇 is 뭐 and the pronouns 그것, 이것, 저것 are 그거, 이거, 저거 in any plain or polite
+            // quote; 것 after a clause is 거 only in casual speech.
             const bool things = styles[quote] == kCasualSpeech;
             // The word starts after a space or punctuation, or after 그, 이, 저 that do (그것은).
             const std::string_view head = WithoutLast(out);
@@ -140,7 +142,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             const bool start = out.empty() || WordEnds(std::string_view(out).substr(head.size()));
             const bool pronoun = (last == U'그' || last == U'이' || last == U'저') &&
                                  (head.empty() || WordEnds(head.substr(WithoutLast(head).size())));
-            if (start || (pronoun && things)) {
+            if (start || pronoun) {
                 const auto [spoken, length] = SpokenWord(line.substr(at), !start, things);
                 if (length > 0) {
                     out += spoken;

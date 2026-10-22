@@ -84,7 +84,7 @@ L280	友達たちと海へ行った。	친구들과 바다에 갔다.	current	lo
 L280	女の人たちが笑っていた。	여자들이 웃고 있었다.	current	local
 L281	だから私は反対したんです。	그러니까 저는 반대했습니다.	current	local
 L281	だから今日は早く帰りたい。	그러니까 오늘은 빨리 돌아가고 싶다.	current	local
-L285	「だが、それは違うと思う」	「하지만, 그것은 다르다고 생각한다」	current	local
+L285	「だが、それは違うと思う」	「하지만, 그건 다르다고 생각한다」	current	local
 L285	「だが今さら引き返せない」	「하지만 이제 와서 되돌아갈 수 없다」	current	local
 L289	彼は医者だったらしい。	그는 의사였던 것 같다.	current	local
 L289	学生だった頃の友達に会った。	학생이었던 무렵의 친구를 만났다.	current	local
@@ -315,7 +315,7 @@ L2131	あの、え、これ本当に私の？	저, 네, 이것 정말로 나의?
 L2141	ねえ、ところで明日は暇ですか。	있잖아, 그런데 내일은 한가합니까.	current	local
 L2155	それは彼の役目なのである。	그것은 그의 역할인 것이다.	current	local
 L2157	「足、まだ痛いの？」	「다리, 아직 아픈거야?」	current	local-ending
-L2157	「これ、本当においしいの？」	「이것, 정말로 맛있는거야?」	current	local-ending
+L2157	「これ、本当においしいの？」	「이거, 정말로 맛있는거야?」	current	local-ending
 L2163	今夜は暑くて眠れないよ。	오늘 밤은 더워서 잘 수 없어.	current	local-ending
 L2163	辛くてとても食べられない。	괴롭고 도저히 먹을 수 없다.	current	local-ending
 L2167	誰と話してるの？	누구와 이야기해?	current	local-ending
@@ -684,7 +684,7 @@ L4655	君のことは忘れない。	너는 잊지 않는다.	current	local
 L4664	もう帰らなければと思います。	이제 돌아가야 한다고 생각합니다.	current	local
 L4741	今度友達と旅行に行きます。	이번에 친구와 여행하러 갑니다.	current	local
 L4741	今度家に遊びに来てください。	이번에 집에 놀러 와 주세요.	current	local
-L4772	「なんだ、あれは」	「뭐야, 저것은」	current	local
+L4772	「なんだ、あれは」	「뭐야, 저건」	current	local
 L4772	「なんだ、ただの猫か」	「뭐야, 단순한 고양이인가」	current	local
 L4778	彼の喜びぶりを見た。	그의 기쁨 모습을 보았다.	fix	local
 L4781	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local

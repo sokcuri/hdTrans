@@ -62,6 +62,10 @@ HD_TEST(output_spoken_words) {
         {"그것은 「그것은」", "그것은 「그건」"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(SpokenWords(c.line, 0, casual), std::string(c.want));
-    HD_CHECK_EQ(SpokenWords("「그것은」", 0, {0, 0}), std::string("「그것은」"));
+    // Outside casual speech only the pronouns contract.
+    HD_CHECK_EQ(SpokenWords("「그것은 하는 것은」", 0, {0, 0}), std::string("「그건 하는 것은」"));
+    HD_CHECK_EQ(SpokenWords("「이것으로 됩니다」", 0, {0, kPoliteStyle}), std::string("「이걸로 됩니다」"));
+    // 4: a quote in the written style.
+    HD_CHECK_EQ(SpokenWords("「그것은」", 0, {0, 4}), std::string("「그것은」"));
     HD_CHECK_EQ(SpokenWords("그것은 몰라」", 1, casual), std::string("그건 몰라」"));
 }
