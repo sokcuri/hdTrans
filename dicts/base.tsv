@@ -13894,7 +13894,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 くったくな	환하고 명랑$AB@	H7N0			GN				jisjk:120479		
 くっちせい	굴지성	N110	VPt		GN				jisjk:176156		-1
 くっちゃ	1지 않으면	T500			GN				jisjk:368333		
-くっつ	들러&HC@	M411			GN				jisjk:90693		
+くっつ	들러&HC@	M411		Dx	GN				jisjk:90693		
 くっつけ	붙&AJ@	M417			GN				jisjk:90694		
 くって	6서	T500			GN				jisjk:341178		
 くっぷく	굴복	N110	VTw	Hd	GN				jisjk:176157		-1
@@ -41130,7 +41130,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 またある時は	또 어떤 때에는	E300			GN				jisjk:264393		
 またいとこ	육촌	I110	VHn		GN				jisjk:41644		
 またいわゆる	또 이른바	E0H0			GN				jisjk:150263		
-またが	걸&AO@	M418	VAc		GN				jisjk:91477		
+またが	걸&AO@	M418	VAc	Dx	GN				jisjk:91477		
 またが	올라&AR@	M418			GN				jisjk:91478		
 またが	연기&AV@	M418			GN	3980	||1 &&2 S+1== "計上" P+1== "4**"	またが는 바로 뒤가 計上 동사이면 연기하다로 고른다. (미발동: rare-context) [의심] またがり計上는 여러 기간에 걸쳐 계상한다는 뜻일 수 있는데 計上만 보고 연기하다를 고르면 기간 분산을 지연으로 바꾼다.	jisjk:354612		
 またしても	또다시	E310			GN				jisjk:362945		
@@ -113075,7 +113075,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 乱すべき	어지럽히는	E0H0			GN				jisjk:150316		
 乱り心地	병	N110	QHP		GN				jisjk:252413		
 乱れ	혼란	N110			GN				jisjk:7424		
-乱れ	흐트러&AL@	M417			GN				jisjk:7425		
+乱れ	흐트러&AL@	M417		Dx	GN				jisjk:7425		
 乱れと	난무&AV@	M426			GN				jisjk:375068		
 乱れ髪	흐트러진 머리	N110	VBp		GN				jisjk:252414		
 乱丁	난정	N110			GN				jisjk:19987		
@@ -123513,7 +123513,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 作ってみ	만들어 &AY@	M447			GN				jisjk:148752		
 作の山町	사쿠노야마쵸	I130	QCTVPl		GN				jisjk:295725		
 作らせていただ	만&L4@	M441			GN				jisjk:263199		
-作られ	만들어&AL@	M427			GN				jisjk:142191		
+作られ	만들어&AL@	M427		Dx	GN				jisjk:142191		
 作られ	만드&AE@	M427			GN	2780	||1 &&3 S-1== "を" P-2== "1**" ||2 S-3== "お" S-3== "ご"	作られ 앞에 お나 ご·명사·を가 차례로 있으면 만드시다를 고른다. (미발동: rare-context)	jisjk:267706		
 作られてお	만들어져 &HN@	M428			GN				jisjk:148906		
 作られはじめ	만들어지기 시작&AV@	M427			GN				jisjk:118037		
@@ -126936,7 +126936,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 傷者	상처가 난 물건	N110			GN				jisjk:25783		
 傷薬	상약	N110			GN				jisjk:25782		
 傷跡	상처 자국	N110			GN				jisjk:104939		
-傾	기&LC@	M421			GN				jisjk:91877		
+傾	기&LC@	M421		Dx	GN				jisjk:91877		
 傾き	기울기	N110			GN				jisjk:6808		
 傾け	기울&AJ@	M437			GN				jisjk:91878		
 傾けられ	기울여 &AL@	M447			GN				jisjk:370512		
@@ -134213,7 +134213,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 凸部	볼록부	N110	VPl		GN				jisjk:35618		
 凸面	철면	N110	VPl		GN				jisjk:35617		
 凸面鏡	볼록거울	I110			GN				jisjk:86119		
-凹	패&AJ@	M415			GN				jisjk:94215		
+凹	패&AJ@	M415		Dx	GN				jisjk:94215		
 凹ま	들어가게 &AV@	M433			GN				jisjk:94216		
 凹み	함몰	N110			GN				jisjk:104689		
 凹レンズ	오목 렌즈	I110			GN				jisjk:78796		
@@ -135819,7 +135819,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 列	참석&AV@	M419			GN				jisjk:13747		
 列	열	N110			GN				jisjk:116371		
 列	렬	N110		On	GN				jisjk:259326		
-列ができ	줄이 생&A2@	M4U7		Pn	GN				jisjk:346513		
+列ができ	줄이 생&A2@	M4U7		PnDx	GN				jisjk:346513		
 列な	나란히 늘어서 &HN@	M428			GN				jisjk:143878		
 列ね	늘어&AA@	M447			GN				jisjk:143892		
 列ベクトル	열	N110			GN				jisjk:256437		
@@ -138339,7 +138339,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 力	츠토무	N130	VHnQPN	Wb	GN				jisjk:339790		
 力	력	N110	 	Z7On	GN				jisjk:339794		
 力いっぱい	힘껏	E311			GN				jisjk:1593		
-力が入	힘이 들어&A1@	M428		Pn	GN				jisjk:340134		
+力が入	힘이 들어&A1@	M428		PnDx	GN				jisjk:340134		
 力が出	힘이 &A5@	M427		Pn	GN				jisjk:266245		
 力が及	힘이 &F9@	M426		Pn	GN				jisjk:351358		
 力が及ばな	어찌할 도리가 $FA@	H7U0			GN				jisjk:5487		
@@ -140598,7 +140598,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 包	파오	N110	VBl		GN				jisjk:132754		
 包	싸서 &CJ@	M445	VMy		GN				jisjk:143160		
 包	포	N110		On	GN				jisjk:259529		
-包まれ	싸&AJ@	M417			GN				jisjk:95766		
+包まれ	싸&AJ@	M417		Dx	GN				jisjk:95766		
 包まれ	둘러싸&AJ@	M427	VPl		GN				jisjk:143142		
 包み	소포	N110			GN				jisjk:13284		
 包みきれな	숨길 수 $FA@	H7N0			GN				jisjk:137085		
@@ -183632,7 +183632,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 寝ずの番	불침번	N110	UMe	Hd	GN				jisjk:248575		
 寝ずの番を	불침번을 &AD@	M419			GN				jisjk:147671		
 寝そびれ	잠을 설&AO@	M417			GN				jisjk:95568		
-寝そべ	엎드려 &J4@	M418			GN				jisjk:342415		
+寝そべ	엎드려 &J4@	M418		Dx	GN				jisjk:342415		
 寝そべり	엎드려 눕기	N110		Hd	GN				jisjk:342416		
 寝たきり	와병생활	A9D0			GN	4066	||1 P+1== "1**"	寝たきり를 명사 앞에서 와병생활로 고른다. (미발동: rare-context)	jisjk:357116		
 寝たきり	잠든 채	A9D0			GN				jisjk:357117		
@@ -188627,7 +188627,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 少額紙	소액지폐	I110	VMo		GN				jisjk:75200		
 少食	소식	N110	VFd		GN				jisjk:26834		
 尖	날카로워&AL@	M418			GN				jisjk:95266		
-尖	뾰족해&AL@	M428	SFl		GN				jisjk:146600		
+尖	뾰족해&AL@	M428	SFl	Dx	GN				jisjk:146600		
 尖ら	날카롭게 &AV@	M433			GN				jisjk:95267		
 尖ら	뾰족하게 &AV@	M443			GN				jisjk:145070		
 尖らか	뾰로통하게 내&AB@	M443			GN				jisjk:146593		
@@ -202480,7 +202480,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 張り紙	벽보	I110	VSwVSp		GN				jisjk:82266		
 張り裂け	부풀어 터&AL@	M417			GN				jisjk:94615		
 張り裂ける	한껏 부풀어 터지다	I110			GN				jisjk:111392		
-張り詰め	긴장&C6@	M417	UFl		GN				jisjk:94625		
+張り詰め	긴장&C6@	M417	UFl	Dx	GN				jisjk:94625		
 張り詰め	덮&AJ@	M417			GN				jisjk:94626		
 張り詰め	붙&AJ@	M437			GN				jisjk:94627		
 張り込み	잠복함	N110			GN				jisjk:250201		
@@ -213553,7 +213553,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 投げ入れ	처&H5@	M437			GN				jisjk:95704		
 投げ入れ	던져 &H5@	M427			GN				jisjk:144206		
 投げ入れ花	자연스러운 꽃꽂이	N110			GN				jisjk:247171		
-投げ出	내던&AL@	M433			GN				jisjk:95705		
+投げ出	내던&AL@	M433		Dx	GN				jisjk:95705		
 投げ売り	덤핑	I110		Hd	GN				jisjk:87416		
 投げ捨て	내던&AL@	M437			GN				jisjk:95703		
 投げ掛け	걸&AO@	M437	VAcVCp		GN				jisjk:95699		
@@ -255992,7 +255992,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 沃川郡	옥천군	N130	QCT		GN				jisjk:375739		
 沃素	옥소	N110			GN				jisjk:29659		
 沃野	옥야	N110	VPl		GN				jisjk:29660		
-沈	가라&FI@	M415			GN				jisjk:95577		
+沈	가라&FI@	M415		Dx	GN				jisjk:95577		
 沈	바&Ai@	M415	UClVSs		GN				jisjk:95578		
 沈	잠&A2@	M415	UFlVBpSFl		GN	846	||1 &&3 P-1== "2**" S-2== "物思い" P-2== "1**"	物思い 명사와 조사 뒤에서 沈을 잠기다로 고른다. (미발동: rare-context)	jisjk:95579		
 沈	&AL@	M415	VSs		GN	998	||1 &&4 P-1== "2**" S-2== "西" D-2== "서쪽" P-2== "1**"	沈는 서쪽으로 번역된 西 명사와 조사 뒤에서 지다로 고른다. (미발동: rare-context)	jisjk:115067		
@@ -260718,7 +260718,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 浮かぬ顔	우울한 얼굴	I110	VBp		GN				jisjk:70883		
 浮かばれ	체면이 &AD@	M427	UCl		GN				jisjk:141244		
 浮かびあが	부상&AV@	M428			GN				jisjk:145318		
-浮かび上が	떠&E6@	M418			GN				jisjk:93127		
+浮かび上が	떠&E6@	M418		Dx	GN				jisjk:93127		
 浮かべ	띄&AI@	M437			GN				jisjk:93128		
 浮かべ	떠올&AA@	M447	SFl		GN				jisjk:141249		
 浮かべ	글썽&AJ@	M447			GN	1773	||2 &&2 S-1== "を" ||2 S-2== "涙" S-2== "なみだ" ||2 S+1== "涙" S+1== "なみだ"	「涙・なみだを」 뒤나 눈물 명사 바로 앞에서 「浮かべ」를 ‘글썽이다’로 고른다. (미발동: rare-context)	jisjk:202356		
@@ -261487,7 +261487,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 消	&A3@	M433	UXlVCmVEl		GN	725	||2 &&4 P+0== "4**" P-1== "2**" P-2== "1**" A-2-= "VCmVEl" S-2== "明かり"	消는 정보·전기 관련 목적어 뒤나 明かり를 목적어로 삼는 문맥에서 '끄다'를 고른다.	jisjk:93594		
 消	제거&AV@	M433			GN	726	||1 &&2 P-1== "2**" ||3 S-2== "噂" S-2== "毒" S-2== "邪魔者"	「噂・毒・邪魔者」와 조사 뒤에서 「消」를 ‘제거하다’로 고른다. (미발동: rare-context)	jisjk:93595		
 消	지&AI@	M443	XXX		GN	1199	||2 &&2 P-1== "2**" ||5 S-2== "字" S-2== "つや" S-2== "録音" S-2== "黒板" S-2== "名前" &&4 P+0== "4**" P-1== "2**" A-2-= "VSw" P-2== "1**"	消 앞의 조사에 字·つや·録音·黒板·名前 또는 정보 의미 계열 명사가 붙으면 지우다라는 번역을 고른다. (미발동: rare-context)	jisjk:116692		
-消え	사라&AL@	M417			GN				jisjk:93596		
+消え	사라&AL@	M417		Dx	GN				jisjk:93596		
 消えうせ	없어&AL@	M417			GN				jisjk:93597		
 消えゆ	사라져 &A1@	M411			GN				jisjk:93598		
 消え入	스러&AL@	M418			GN				jisjk:93601		
@@ -262596,7 +262596,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 添え	곁들&AJ@	M437	VFd		GN				jisjk:358032		
 添えてあ	첨부되어 &HN@	M428			GN				jisjk:137993		
 添えてお	첨부해 &C7@	M421			GN				jisjk:137994		
-添えられ	더해&AL@	M427			GN				jisjk:358039		
+添えられ	더해&AL@	M427		Dx	GN				jisjk:358039		
 添え字	첨자	I110			GN				jisjk:86151		
 添え手紙	첨장	N110			GN				jisjk:200568		
 添え書き	첨서	I110	VSw	Hd	GN				jisjk:86150		
@@ -265141,7 +265141,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 準起訴	준기소	N110		Hd	GN				jisjk:237135		
 準通貨	준통화	N110	VMo		BZ				jisjk:360794		
 準雨	준우	N130	QPN	Wb	GN				jisjk:340993		
-溜	쌓&AJ@	M428	VPl		GN				jisjk:140755		
+溜	쌓&AJ@	M428	VPl	Dx	GN				jisjk:140755		
 溜ま	모&AJ@	M418		Dx	GN	676	||1 &&3 P-1== "2**" ||2 S-2== "お金" S-2== "金" P-2== "1**"	앞 조사 앞에 お金 또는 金 명사가 있으면 溜ま를 모이다로 고른다. (미발동: rare-context)	jisjk:92606		
 溜ま	고&AJ@	M418		Dx	GN	1001	||1 &&3 P-1== "2**" S-2== "水" P-2== "1**"	溜ま를 水와 조사 뒤에서 고이다로 고른다. (미발동: rare-context)	jisjk:115078		
 溜ま	쌓&AJ@	M428			GN	1461	||1 S-2== "仕事"	溜ま를 두 단어 앞이 仕事일 때 쌓이다로 고른다. (미발동: rare-context)	jisjk:140758		
@@ -267439,12 +267439,12 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 炸楽	작약	N110			GN				jisjk:232390		
 炸裂	작렬	N110		Hd	GN				jisjk:185026		
 点	&AP@	M43:	VEIVEI		GN				jisjk:13767		
-点	켜&AL@	M411	VEIVEI		GN				jisjk:13768		
+点	켜&AL@	M411	VEIVEI	Dx	GN				jisjk:13768		
 点	점	N110	XXX		GN				jisjk:119093		
 点	&H5@	M423	QHPQHP		GN				jisjk:121376		
-点	켜&AL@	M421	VEl		GN				jisjk:142715		
+点	켜&AL@	M421	VEl	Dx	GN				jisjk:142715		
 点	&AP@	M449			GN				jisjk:144550		
-点	켜&AL@	M428			GN				jisjk:145754		
+点	켜&AL@	M428		Dx	GN				jisjk:145754		
 点	점수	N110			GN	1932	||1 &&3 ||2 S+1== "が" S+1== "を" S+2== "取れ" P+2== "4**"	点 뒤에 が·を와 取れ 동사가 이어지면 점수를 고른다. (미발동: rare-context)	jisjk:259419		
 点	점	N110		On	GN				jisjk:342255		
 点々と	점점이	E300			GN				jisjk:149343		
@@ -294687,7 +294687,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 筋	관계	N110		Z7	GN				jisjk:346656		
 筋が悪	혈통이 나$A5@	H7U0			GN				jisjk:5421		
 筋が立	도리에 &FB@	M414			GN				jisjk:92149		
-筋が通	조리가 &AD@	M428			GN				jisjk:137151		
+筋が通	조리가 &AD@	M428		Dx	GN				jisjk:137151		
 筋が違	도리에 어긋&A5@	M410			GN				jisjk:92150		
 筋め	주름	N110			GN				jisjk:196667		
 筋もみ	안마	N110			GN				jisjk:196669		
@@ -299601,7 +299601,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 絞首	교수	N110		Hd	GN				jisjk:16668		
 絞首刑	교수형	I110	HGu		GN				jisjk:62606		
 絞首台	교수대	N110	VBl		GN				jisjk:180386		
-絡	관련&C6@	M425	XXX		GN	670	||3 &&2 P-1== "2**" A-2== "VHnVMo" &&2 M+0== "56*" S+1== "事件" S-2== "事件"	絡를 사람·물건 의미의 조사구 뒤나 事件 관련 문맥에서 관련되다로 고른다. (미발동: rare-context)	jisjk:92490		
+絡	관련&C6@	M425	XXX	Dx	GN	670	||3 &&2 P-1== "2**" A-2== "VHnVMo" &&2 M+0== "56*" S+1== "事件" S-2== "事件"	絡를 사람·물건 의미의 조사구 뒤나 事件 관련 문맥에서 관련되다로 고른다. (미발동: rare-context)	jisjk:92490		
 絡	휘감&A2@	M415			GN	2354	||1 &&3 P-1== "2**" S-2== "一面" P-2== "1**"	一面과 조사 뒤의 絡을 '휘감기다'로 고른다. (미발동: rare-context)	jisjk:265563		
 絡	연결&C6@	M425			GN	4659	||1 &&2 S-1== "に" S-2== "Rゴール"	絡를 ゴール로 끝나는 말과 に 뒤에서 연결되다로 고른다. (미발동: rare-context)	jisjk:369477		
 絡が	휘어 감&A2@	M418			GN				jisjk:92491		
@@ -299615,7 +299615,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 絡みあい	뒤얽힘	N110			GN				jisjk:163136		
 絡み付	휘감&A2@	M411			GN				jisjk:92496		
 絡み付け	휘감기게 &AV@	M437			GN				jisjk:92497		
-絡み合	얽&AW@	M410			GN				jisjk:92498		
+絡み合	얽&AW@	M410		Dx	GN				jisjk:92498		
 絡み合い	뒤엉킴	N110			GN				jisjk:7418		
 絡み合いの	뒤얽히는	E0H0			GN				jisjk:150245		
 絡め	묻&AW@	M437			GN	671	||1 &&2 S-1== "に" A-2== "VLqVFd"	絡め가 액체나 음식 의미 명사의 に 뒤에 오면 묻히다를 고른다. (미발동: rare-context)	jisjk:92499		
@@ -301497,7 +301497,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 縛	&Ha@	M439			GN				jisjk:92941		
 縛	&Ha@	M448			GN				jisjk:92942		
 縛	속박&AV@	M448			GN	4082	||1 S-1== "あれこれと"	縛를 あれこれと 뒤에서 속박하다로 고른다. (미발동: rare-context)	jisjk:357796		
-縛られ	속박&C6@	M417			GN				jisjk:92943		
+縛られ	속박&C6@	M417		Dx	GN				jisjk:92943		
 縛られ	묶&AJ@	M417			GN				jisjk:373516		
 縛られ	묶&AJ@	M417			GN	4777	||1 A-1== "VBp"	縛られ를 신체 의미 코드 VBp가 있는 앞말 뒤에서 묶이다로 고른다. (미발동: rare-context)	jisjk:373517		
 縛られたプロメテウス	묶인 프로메테우스	N110	UArVBkVSwVHn		GN				jisjk:234233		
@@ -313299,7 +313299,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 落ち葉色	고동색	N110			GN				jisjk:165552		
 落ち行	도망&A1@	M411			GN				jisjk:92517		
 落ち行	귀착&AV@	M421			GN				jisjk:146364		
-落ち込	낙담&AV@	M425			GN				jisjk:146308		
+落ち込	낙담&AV@	M425		Dx	GN				jisjk:146308		
 落ち込	침체&AV@	M425	SFl		BZ				jisjk:146313		-1
 落ち込	떨어&AL@	M425			GN	3314	||2 ||3 S-2== "R成長" S-2== "R伸び" S-2== "R相場" &&4 S-1== "に" G-2== "Ct" G-3== "NjNd" D-1= "(으)로"	落ち込를 成長·伸び·相場로 끝나는 말 뒤나 수량 に 뒤에서 떨어지다로 고르고 수량의 に를 으로로 바꾼다. (미발동: rare-context)	jisjk:342696		
 落ち込	우울&Mf@	M425		VaXj	GN	4719	||1 S-2== "気分"	落ち込의 두 단어 앞이 気分이면 우울하다라는 번역을 고른다. (미발동: rare-context)	jisjk:373269		
@@ -324748,7 +324748,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 託麻	다쿠마	N110	QCT		GN				jisjk:36791		
 記	&HY@	M433			GN				jisjk:92243		
 記	기록&AV@	M443	VBkVSwUTh		GN				jisjk:136704		
-記され	기록&C6@	M427			GN				jisjk:118843		
+記され	기록&C6@	M427		Dx	GN				jisjk:118843		
 記事	기사	N110	VSw		GN				jisjk:17864		
 記事取り寄せ	기사 구독	N110	VCm		GN				jisjk:150943		
 記事文	기사문	N110	VCm		GN				jisjk:172181		
@@ -333326,7 +333326,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 載せ	&LZ@	M447	VFdVMy		GN	1716	||1 S-1== "そっと"	載せ 앞에 そっと가 오면 얹다라는 번역을 고른다. (미발동: rare-context)	jisjk:201899		
 載せかえ	바꿔&JC@	M437			GN				jisjk:374765		
 載せかえ	교환	N110		Hd	GN				jisjk:374830		
-載せられ	 실&AA@	M427			GN				jisjk:266786		
+載せられ	 실&AA@	M427		Dx	GN				jisjk:266786		
 載せ変え	바꿔&JC@	M437			GN				jisjk:374766		
 載せ変え	교환	N110		Hd	GN				jisjk:374829		
 載せ換え	바꿔&JC@	M437			GN				jisjk:374771		
@@ -346709,7 +346709,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 閉じ合わせ	서로 덮음	N110			GN				jisjk:164796		
 閉じ篭	두문불출&AV@	M418			GN				jisjk:95758		
 閉じ込め	가&C7@	M447			GN				jisjk:145274		
-閉じ込められ	갇&AW@	M417			GN				jisjk:143207		
+閉じ込められ	갇&AW@	M417		Dx	GN				jisjk:143207		
 閉じ込められ	갇히기	N110			GN				jisjk:152801		
 閉じ込め事故	감금 사고	N110			GN				jisjk:161628		
 閉そく	폐색	I110			GN				jisjk:87939		
@@ -355733,7 +355733,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 飛び入	나타 &A5@	M428			GN				jisjk:345020		
 飛び入り	나타&A5@	M429			GN				jisjk:264178		
 飛び入り	즉흥	N110			GN				jisjk:264179		
-飛び出	뛰쳐나&AH@	M413			GN	711	||1 &&4 S-1== "を" P-1== "2**" ||4 S-2== "家" S-2== "学校" S-2== "故郷" S-2== "会社" P-2== "1**"	'家·学校·故郷·会社'와 목적격 'を' 뒤의 '飛び出'를 '뛰쳐나오다'로 고른다.	jisjk:93232		
+飛び出	뛰쳐나&AH@	M413		Dx	GN	711	||1 &&4 S-1== "を" P-1== "2**" ||4 S-2== "家" S-2== "学校" S-2== "故郷" S-2== "会社" P-2== "1**"	'家·学校·故郷·会社'와 목적격 'を' 뒤의 '飛び出'를 '뛰쳐나오다'로 고른다.	jisjk:93232		
 飛び出	뛰어나&A1@	M423			GN				jisjk:145589		
 飛び出	튀어 나&AH@	M423			GN	4241	||1 S-1== "が"	が 뒤의 飛び出를 튀어 나오다로 고른다.	jisjk:362274		
 飛び出し	튀어나옴	N110		Hd	GN				jisjk:246060		
