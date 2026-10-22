@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.3](https://github.com/sokcuri/hdTrans/compare/v0.4.2...v0.4.3) (2026-10-22)
+
+
+### Bug Fixes
+
+* **release:** make game dialogue read like spoken Korean ([c84cc83](https://github.com/sokcuri/hdTrans/commit/c84cc83d8c40946d599b826d0f097517c8af9371))
+* **translation:** read game dialogue endings, contractions and senses the spoken way ([#27](https://github.com/sokcuri/hdTrans/issues/27)) ([f1446b5](https://github.com/sokcuri/hdTrans/commit/f1446b5ea4d3b341a97ca6c498a58e0e11792e3c))
+
 ## [0.4.2](https://github.com/sokcuri/hdTrans/compare/v0.4.1...v0.4.2) (2026-10-21)
 
 
