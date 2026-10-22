@@ -215410,12 +215410,12 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 挫傷	좌상	N110	QHP	Hd	GN				jisjk:186394		
 挫折	좌절	N110	UFl	Hd	GN				jisjk:33995		
 挫骨	좌골	N110	QHP		GN				jisjk:233336		
-振	&LK@	M430			GN				jisjk:95062		
+振	휘&E1@	M430			GN				jisjk:95062		
 振	거절&AV@	M448	VHn		GN				jisjk:95063		
 振	날&AA@	M448	URtUQfVMo	Ct	GN	813	||1 S-2== "日の丸"	振의 두 단어 앞이 日の丸이면 날리다라는 번역을 고른다. (미발동: rare-context)	jisjk:95064		
 振	발행&AV@	M448			GN	814	||1 &&3 P-1== "2**" P-2== "1**" ||2 D-2== "어음" D-2== "수표"	振 앞의 조사 너머 명사가 어음이나 수표로 번역되면 발행하다를 고른다. (미발동: rare-context)	jisjk:95065		
 振	휘&E1@	M430	VSwVTwURt		GN	815	||2 &&2 S-1== "大振りに" P-1== "3**" S-2== "暴力"	앞에 大振りに 부사가 있거나 두 단어 앞에 暴力이 있으면 振를 휘두르다로 고른다. (미발동: rare-context)	jisjk:95066		
-振	흔&L4@	M448	VRw		GN	816	||1 &&2 S-1== "を" ||3 S-2== "R手" S-2== "R腰" S-2== "R尻"	振는 を 앞 명사가 手, 腰, 尻로 끝나면 ‘흔들다’로 고른다.	jisjk:95067		
+振	흔&L4@	M448	VRwXXX		GN	816	||1 &&2 S-1== "を" ||3 S-2== "R手" S-2== "R腰" S-2== "R尻"	振는 を 앞 명사가 手, 腰, 尻로 끝나면 ‘흔들다’로 고른다.	jisjk:95067		
 振	&JE@	M448			GN	5047	||1 &&2 S-2== "首" D-2= "고개"	振는 두 단어 앞이 首이면 젓다로 고르면서 首를 고개로 바꾼다. (미발동: rare-context)	jisjk:375270		
 振い落	떨어뜨&AA@	M433			GN				jisjk:95068		
 振こ人	불입인	I110			GN				jisjk:85273		
@@ -215503,12 +215503,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 振り返ってみ	되돌아 &AY@	M447			GN				jisjk:368194		
 振り返って見	되돌아 &AY@	M447			GN				jisjk:368193		
 振り頻	퍼&JG@	M418			GN				jisjk:95086		
-振る	&LK@	M430			GN				jisjk:95101		
+振る	휘&E1@	M430			GN				jisjk:95101		
 振る	발휘&AV@	M430			GN				jisjk:369355		
 振る	휘&E1@	M430			GN	5060	||1 S-2== "暴力"	두 단어 앞에 暴力이 있으면 振る를 휘두르다로 고른다. (미발동: rare-context)	jisjk:375297		
 振るい落と	&LK@	M433			GN				jisjk:95103		
 振るい起こ	불러 일으&AQ@	M433			GN				jisjk:95102		
-振るった	기발한	C0D1			GN				jisjk:4761		
 振る舞	행위	N110			GN				jisjk:85283		
 振る舞	행동&AV@	M450			GN				jisjk:85284		
 振る舞	대접&AV@	M430			GN				jisjk:85285		

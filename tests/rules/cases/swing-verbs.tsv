@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+sense:振る	俺はそのまま、クワを振り続けた。	나는 그대로, 괭이를 계속 휘둘렀다.	fix	senses
+dict:jisjk:95062	クワを振るいながら移動する。	괭이를 휘두르면서 이동한다.	fix	defaults
+dict:jisjk:95062	周辺を耕している時、クワを振るった先に動物が現れた。	주변을 경작하고 있을 때, 괭이를 휘두른 곳에 동물이 나타났다.	fix	defaults
+dict:jisjk:95067	足を一本だけ上げ、左右に振ってから去った。	다리를 하나만 올려 좌우에 흔들고 나서 떠났다.	fix	defaults
+dict:jisjk:95067	手を振る。	손을 흔든다.	keep	senses
+dict:jisjk:95067	彼女に振られた。	그녀에게 차였다.	keep	defaults
+lexical:everyday-terms	声なき叫びに全身を振るわせる。	목소리없는 외침에 전신을 떤다.	fix	lookup
