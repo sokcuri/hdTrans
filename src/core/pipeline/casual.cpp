@@ -263,6 +263,7 @@ constexpr char kUssai[] = "うっさい";
 constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
+constexpr char kSoyuKoto[] = "そゆこと";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -369,6 +370,79 @@ bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
     if (!Lit(s, p, "っか")) return false;
     size_t q = p;
     if (q < s.size() && !OneOf(s, q, U"なねぁあー～？?！!。、…‥」』）)")) return false;
+    m.end = p;
+    return true;
+}
+
+// Whether pos starts a sentence or a clause: the start of s, or after 「『（。！？!?…‥、
+// or a space.
+bool ClauseStart(std::string_view s, size_t pos) {
+    if (pos == 0) return true;
+    size_t p = pos - 1;
+    while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) p--;
+    return In(At(s, p).cp, U"「『（。！？!?…‥、 　");
+}
+
+// んで at the start of a clause before 、，？?！!…‥」: それで (んで、どうする).
+bool NdeStart(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "んで")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, U"、，？?！!…‥」")) return false;
+    m.end = p;
+    return true;
+}
+
+// しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー).
+bool Shaanai(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "しゃ") || !OneOf(s, p, U"ーあ")) return false;
+    if (!Lit(s, p, "ない")) {
+        if (!Lit(s, p, "ね")) return false;
+        while (OneOf(s, p, U"ぇえー")) {
+        }
+    }
+    m.end = p;
+    return true;
+}
+
+// さーて at the start of a clause before と or a mark: さて (さーて、行くか).
+bool Saate(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "さ")) return false;
+    if (!Repeat(s, p, InSet(U"ー～"), 1, kUnbounded, [&](size_t q) {
+            size_t r = q;
+            if (!Lit(s, r, "て")) return false;
+            size_t t = r;
+            if (t < s.size() && !Lit(s, t, "と") && !OneOf(s, t, U"、，？?！!…‥」。")) return false;
+            m.end = r;
+            return true;
+        })) {
+        return false;
+    }
+    return true;
+}
+
+// ひで[えぇー]+ before a sentence particle or a character other than hiragana: ひどい.
+bool Hidee(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "ひで")) return false;
+    return Repeat(s, p, InSet(U"えぇー"), 1, kUnbounded, [&](size_t q) {
+        size_t r = q;
+        if (r < s.size() && !OneOf(s, r, U"なよぞし") && Take(s, r, IsHiraganaClass)) return false;
+        m.end = q;
+        return true;
+    });
+}
+
+// おいっ+ at the start of a clause before a mark: the call おい, not 置いて.
+bool OiTsu(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "おい") || !Lit(s, p, "っ")) return false;
+    while (Lit(s, p, "っ")) {
+    }
+    size_t q = p;
+    if (q < s.size() && !OneOf(s, q, U"、，？?！!…‥」。")) return false;
     m.end = p;
     return true;
 }
@@ -500,6 +574,12 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
+    text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
+    text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
+    text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
+    text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
+    text = ReplaceAll(text, OiTsu, [](const Match&) { return std::string("おい"); });
+    text = ReplaceAll(text, Literal<kSoyuKoto>, [](const Match&) { return std::string("そういうこと"); });
     text = ReplaceAll(text, KoKara, [](const Match& m) { return Cat({m.group[1], "こから"}); });
     text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
     text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
