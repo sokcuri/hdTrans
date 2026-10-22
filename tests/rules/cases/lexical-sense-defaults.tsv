@@ -62,3 +62,4 @@ dict:jisjk:96056	全然慌ててるじゃないっ	!rule:dict:jisjk:96056	keep	l
 dict:jisjk:5128	弾力もすごいよね……なんか	탄력도 대단하지……무슨	fix	local
 dict:jisjk:5128	たしかにレナはすごいけど	확실히 레나는 대단한데	fix	local
 dict:jisjk:5128	すごい見てる	rule:dict:jisjk:5128=대단$KA@	fix	local
+dict:jisjk:268079	きーんと冷えててすっごくおいしいですよ～	끼잉 차가워져 있어 엄청 맛있어요~	fix	lookup
