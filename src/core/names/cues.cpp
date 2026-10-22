@@ -660,8 +660,8 @@ bool Registry::PredicateForm(std::string_view run) {
     return found;
 }
 
-// The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (たん and っち
-// also end words: こっち): the hiragana run before it, or, after a kanji or katakana, the run
+// The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (not たん or
+// っち, which also end words: こっち): the hiragana run before it, or, after a kanji or katakana, the run
 // less the one-kana particle that starts it (妹のさよりちゃん), of three or four kana, that the
 // name layer reads as a person and no dictionary as a common, person or animal noun (うさぎさん),
 // that is no predicate form (あおい), that starts with no お or ご and that joins the honorific

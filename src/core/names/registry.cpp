@@ -200,8 +200,8 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         }
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t, 8);
-    // A line that is a name alone and is followed by a quote names the speaker of the
-    // quote (a speaker line before a quote).
+    // A line that is a name alone, a speaker line before a quote, names the speaker of the
+    // quote.
     const std::string_view body = TrimSpace(line);
     if (!nameLine_.empty() && (body.starts_with("「") || body.starts_with("『") || body.starts_with("（"))) {
         count(prefixes_, nameLine_, 1);

@@ -92,7 +92,6 @@ Match EntitySpan(std::string_view s) {
     return {};
 }
 
-
 Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
     size_t n = 0;
     for (const std::string& m : markers) {

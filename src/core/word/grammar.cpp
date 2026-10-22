@@ -588,7 +588,6 @@ void SimpleAspect(Flusher& f) {
 
 namespace {
 
-
 // Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state
 // the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit.
 constexpr std::string_view kHoldingVerbs[] = {
@@ -602,7 +601,6 @@ bool HoldingVerb(std::string_view lemma) {
         return lemma == v || (lemma.ends_with(v) && lemma.substr(0, lemma.size() - v.size()).ends_with(" "));
     });
 }
-
 
 }  // namespace
 

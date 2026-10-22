@@ -71,7 +71,9 @@ void TeThanks(Flusher& f);
 void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
-// The ている of a verb of thinking, saying or perceiving read as the simple form.
+// The ている of a verb of thinking or perceiving, or of one whose Korean is an adjective, read
+// as the simple form (思っている 생각한다, 困っている 곤란하다); that of a verb of saying or of
+// 付き合う except in the plain present and in 지 (言っていた 말했다, 付き合っている人 사귀는 사람).
 void SimpleAspect(Flusher& f);
 // The progressive ていた of a verb of the dictionary, not one the passive or potential pass
 // rewrote, before a noun it describes read as 던 (読んでいた本 읽던 책).
