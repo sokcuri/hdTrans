@@ -14,3 +14,6 @@ sound:phrase-icchau	「イクっ、イっちゃっ……ああっ！」	「가 �
 sound:phrase-icchau	「も、もう、い、いっちゃう……！」	「이, 이제, 가, 가 버려……!」	keep	sound
 sound:phrase-icchau	「私もイっちゃってっ……」	「나도 가버려 ……」	fix	sound
 katakana:iku-stem	「……イクよ、もうっ……くっ」	「……가, 정말……큭」	fix	normalize
+katakana:iku-stem	イカなんて嫌いだ。	오징어 같은 건 싫다.	fix	normalize
+katakana:iku-stem	あいつイかれてる	저 녀석 고장 나고 있다	fix	normalize
+katakana:iku-stem	イカせて	가게 해 줘	keep	normalize

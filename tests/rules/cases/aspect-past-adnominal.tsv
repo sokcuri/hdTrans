@@ -5,3 +5,5 @@ rewrite:past-progressive-adnominal	泣きじゃくっていた千里が、よう
 rewrite:past-progressive-adnominal	子供が右手で抱えていたパンを捨て、代わりに銃を抜いた。	아이가 오른손으로 움켜 쥐고 있던 빵을 버려 대신에 총을 뽑았다.	keep	rewrites
 rewrite:past-progressive-adnominal	「ああ……うちに来て漫画読んでたもんね」	「아……치러 와 만화 읽고 있었던 것이네」	keep	rewrites
 rewrite:past-progressive-adnominal	「おまえたち、何をしていたんだ」	「너 서, 뭘 하고 있던 거야」	keep	rewrites
+rewrite:past-progressive-adnominal	踏みつけられていた足から解放され、私は立ち上がった。	짓밟아지고 있던 다리에서 해방되어 나는 일어섰다.	fix	rewrites
+rewrite:past-progressive-adnominal	読んでいた本を閉じた。	읽던 책을 덮었다.	keep	rewrites

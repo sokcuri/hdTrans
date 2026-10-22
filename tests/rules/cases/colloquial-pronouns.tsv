@@ -5,3 +5,7 @@ dict:colloquial-variants:7	いいかオメェら、主役はオレたちだ	좋�
 normalize:spelled-small-vowel	てめーも同罪だぞ。	너도 같은 죄다.	fix	normalize
 normalize:spelled-small-vowel	ひゃんっ……筧さぁん……	햐앙……카케이 씨……	keep	normalize
 normalize:spelled-small-vowel	てめーが黙ってろ	네가 입을 다물어라	fix	normalize
+normalize:spelled-small-vowel	おめぇ、何してんだ	너, 뭐하는 거야	fix	normalize
+normalize:spelled-small-vowel	てめー！	너!	fix	normalize
+normalize:spelled-small-vowel	てめー、ふざけるな	너, 장난치지 마	fix	normalize
+normalize:spelled-small-vowel	おはよー	안녕~	keep	normalize

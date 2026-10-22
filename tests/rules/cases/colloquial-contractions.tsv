@@ -14,3 +14,12 @@ normalize:chimau	リーシェお嬢さまにフラれちまったのか？	리�
 normalize:chimau	見ちまったなぁ？	봐 버렸다?	fix	normalize
 normalize:toku	ああ、とっくにやっといた。	아, 진작 해 두었다.	fix	normalize
 normalize:toku	やっとこの言葉が言えるわ	드디어 이 말을 말할 수 있어	keep	normalize
+normalize:n-ka	「田中くんか？」	「타나카 군이야?」	fix	normalize
+normalize:n-ka	「佐藤くんかい？」	「사토 군이야?」	fix	normalize
+normalize:n-ka	お前が書くんか？	네가 쓰는 건가?	keep	normalize
+normalize:shaanai	まぁしゃあないか	뭐 어쩔 수 없는가	keep	normalize
+normalize:toku	「やっといた、探したよ」	「드디어 있었어, 찾았어」	fix	normalize
+normalize:shaanai	ならしゃーない	라면 어쩔 수 없다	keep	normalize
+normalize:shaanai	だってしゃーねーだろ	왜냐하면 어쩔 수 없지	keep	normalize
+normalize:toku	「やっといたよ」	「해 뒀어」	fix	normalize
+normalize:toku	「宿題？やっといたよ」	「숙제? 해 뒀어」	fix	normalize
