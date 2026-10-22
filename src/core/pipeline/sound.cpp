@@ -513,6 +513,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     }
     if (chosen == nullptr) return false;
     if (!Stopped(best) && !(inChain && best.intj && !chosen->phrase)) return false;
+    // A phrase does not end at a ッ before テ: that is its verb in the te-form (イっちゃってぇ).
+    if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
     // (見て！ぽい～！ 포이~!).
