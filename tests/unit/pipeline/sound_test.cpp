@@ -527,13 +527,16 @@ HD_TEST(pipeline_volitional_so) {
                                      "key\tko\tpos\tid\n"
                                      "見逃\t놓&AO@\tM433\t1\n"
                                      "流\t흘&AA@\tM443\t2\n"
-                                     "漢字\t한자\tN110\t3\n"}});
+                                     "漢字\t한자\tN110\t3\n"
+                                     "了解\t이해\tN110\t4\n"
+                                     "解\t풀&AO@\tM443\t5\n"}});
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     const Case cases[] = {
         {"「見逃そっか」", "「見逃そうか」"},
         {"汗を流そっか？", "汗を流そうか？"},
         {"今日は見逃そっかな", "今日は見逃そうかな"},
         {"漢字そっか", "漢字そっか"},
+        {"了解そっか", "了解そっか"},  // the noun 了解, though 解 alone is a verb stem
         {"あ、そっか", "あ、そっか"},
         {"見逃そっかす", "見逃そっかす"},
     };

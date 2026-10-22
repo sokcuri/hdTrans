@@ -588,15 +588,20 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
         if (i + 3 < rs.size() && !In(rs[i + 3], U"なねぁあー～？?！!。、…‥」』）)")) continue;
         size_t start = i - 1;
         while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        // The longest kanji run before そ that the dictionary has decides (了解 is a noun, 見逃 a
+        // verb stem).
         bool verb = false;
-        for (size_t k = start; k < i && !verb; k++) {
-            for (const dict::Candidate& c : snap.RetrieveRecords(EncodeText(rs.substr(k, i - k)), dict::LookupMode::General)) {
-                if (c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
-                if (word::Conjugation(c.codes->partText[3] - '0', 5) == "そう") {
+        for (size_t k = start; k < i; k++) {
+            const std::vector<dict::Candidate> records =
+                snap.RetrieveRecords(EncodeText(rs.substr(k, i - k)), dict::LookupMode::General);
+            if (records.empty()) continue;
+            for (const dict::Candidate& c : records) {
+                if (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                    word::Conjugation(c.codes->partText[3] - '0', 5) == "そう") {
                     verb = true;
-                    break;
                 }
             }
+            break;
         }
         if (!verb) continue;
         out.append(rs, at, i + 1 - at);
