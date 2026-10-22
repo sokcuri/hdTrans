@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+ending:書くからな	「あとで迎えに行くからな」	「나중에 마중하러 가니까」	fix	builtin-ending
+ending:書いたからね	「もう宿題は終わったからね」	「이제 숙제는 끝났으니까」	fix	builtin-ending
+ending:書いてるから	「雨が降ってるから」	「비가 오고 있으니까」	fix	builtin-ending
+ending:静かだから	「僕は平気だから」	「나는 아무렇지도 않으니까」	fix	builtin-ending
+ending:静かだから	「この部屋は静かだから」	「이 방은 조용하니까」	fix	builtin-ending
+ending:静かだったからな	「あいつ、昨日は元気だったからな」	「저 녀석, 어제는 건강했으니까」	fix	builtin-ending
+dict:jisjk:6170	「明日は休みだからよ」	「내일은 휴일이니까」	keep	lookup
+ending:書かないからさ	「私、甘いものは嫌いじゃないからさ」	「나, 단 건 싫지 않으니까」	fix	builtin-ending
+ending:書きましたから	「もう約束しましたから」	「벌써 약속했으니까요」	fix	builtin-ending
+ending:高いですから	「この料理は少し辛いですから」	「이 요리는 조금 매우니까요」	fix	builtin-ending
+dict:kara-final:2	「二度と言いませんから」	「두 번 다시 말하지 않으니까요」	fix	local-ending
+dict:kara-final:1	「その答えはわかりませんから」	「그 대답은 모르니까요」	fix	local-ending
+ending:書いてるから	「雨が降ってるから、傘を持っていこう」	「비가 오고 있으니, 우산을 가지고 가자」	keep	builtin-ending

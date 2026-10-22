@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+conj:taku-kuseni	見たくせに、何も言わない。	본 주제에, 아무것도 말하지 않는다.	fix	conjugation
+conj:taku-kuseni	食べたくせに文句を言う。	먹은 주제에 불평한다.	fix	conjugation
+conj:taku-kuseni	見たくない。	보고 싶지 않다.	keep	conjugation

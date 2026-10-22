@@ -4013,8 +4013,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蛙の子はカエル	부전자전	A9D0			GN							w:23109
 蛙のコはカエル	부전자전	A9D0			GN							w:23109
 劃時代的	획기적	I110			GN							jisjk:89820
-かっこ悪	보기 안$DE@	H7U0			GN							jisjk:263531
-恰好悪	보기 안$DE@	H7U0			GN							jisjk:263531
+かっこ悪	보기 안 $DE@	H7U0			GN							jisjk:263531
+恰好悪	보기 안 $DE@	H7U0			GN							jisjk:263531
 格鬪	격투	N110		Hd	GN							jisjk:15205
 隔靴搔痒	격화소양	I110			GN							jisjk:60831
 學園	학원	N110	VBl		GN							jisjk:38409
@@ -4968,7 +4968,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 しつけ糸	시침 실	N110	VPe		GN							jisjk:187897
 仕舞た屋	여염집	N110	VMo		GN							jisjk:188663
 し方がな	어쩔 수 $FA@	H7N0		Xn	GN							jisjk:136390
-し方がな	방법이 $FA@	H7U0			GN	2610	||1 &&3 U-1== "より" Y-1== "0 것 밖에" M-1== "50*"	仕方がな 앞의 より 어미가 지정된 것 밖에 번역과 50계열 코드를 가지면 방법이 없다를 고른다. (미발동: rare-context)				jisjk:266898
+し方がな	방법이 $FA@	H7U0			GN	2610	||1 &&3 U-1== "より" Y-1== "0 것밖에" M-1== "50*"	仕方がな 앞의 より 어미가 지정된 것 밖에 번역과 50계열 코드를 가지면 방법이 없다를 고른다. (미발동: rare-context)				jisjk:266898
 仕方無	어쩔 수 $FA@	H7N0			GN	1402	||1 &&3 P-1== "7**" U-1== "くて" Y-1= "6"	「仕方な」는 い형용사의 「くて」형 뒤에서 ‘어쩔 수 없다’를 고르고 앞 어미를 ‘-아/어’로 바꾼다.				jisjk:120916
 仕方話	손짓,몸짓으로 하는 이야기	N110			GN							jisjk:233505
 仕方咄	손짓,몸짓으로 하는 이야기	N110			GN							jisjk:233505
@@ -5326,7 +5326,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 出來	생&A2@	M427			GN	1249	||4 &&5 S-1== "が" P-1== "2**" ||5 S-2== "急用" S-2== "用事" S-2== "お金" S-2== "出会い" S-2== "R人" P-2== "1**" D-1= "(이)가" &&4 S-1== "が" P-1== "2**" ||4 S-2== "友達" S-2== "出会い" S-2== "R人" S-2== "子供" D-1= "(이)가" &&3 S-1== "が" S-2== "」" P-3== "1**" &&2 S-1== "ところが" P-2== "0**"	出来는 が 앞의 急用·用事·お金·出会い·…人·友達·子供 문맥이나 인용부호가 낀 が 및 연체사 뒤의 ところが 다음에서 ‘생기다’를 고르고 일부 が를 주격으로 고친다.				jisjk:116807
 出來	만&L4@	M4U7			GN	1250	||1 &&2 S-1== "で" P-1== "2**"	出来는 조사 で 뒤에서 재료·수단으로 만들어짐을 나타내는 ‘만들다’로 고른다.				jisjk:116808
 出來	&HN@	M427		Ma	GN	2030	||3 &&4 U+0== "Lません" ||3 U-1== "Rことは" U-1== "Rことが" U-1== "R事が" M-1== "50*" D+0= "&M9@" ||5 U-1== "Rことも" U-1== "Rことが" U-1== "R事が" U-1== "Rのが" U-1== "Rことは" &&2 S-1== "の" U-2== "こと"	出来는 앞 동사의 ことが・ことは 등의 명사화 어미 뒤에서 '있다'를 고르며 일부 ません 활용에서는 '없다'로 바꾼다.				jisjk:262135
-出來	생&A2@	M427			GN	2545	||3 &&3 S-1== "が" ||6 S-2== "急用" S-2== "用事" S-2== "R金" S-2== "出会い" S-2== "R人" S-2== "友達" D-1= "(이)가" &&3 S-1== "が" P-2== "1**" A-2== "UQfUYhVGtUMeVMoVHnVPl" &&4 P-1== "3**" S-2== "が" ||4 S-3== "友達" S-3== "出会い" S-3== "R人" S-3== "子供" D-2= "(이)가"	용무·돈·만남·사람 등의 명사와 주격 조사 뒤의 '出来'를 '생기다'로 고르고 앞 조사를 주격으로 맞추기도 한다.				jisjk:266427
+出來	생&A2@	M427			GN	2545	||3 &&3 S-1== "が" ||6 S-2== "急用" S-2== "用事" S-2== "R金" S-2== "出会い" S-2== "R人" S-2== "友達" D-1= "(이)가" &&4 S-1== "が" P-2== "1**" A-2== "UQfUYhVGtUMeVMoVHnVPlVBlVTp" D-1= "(이)가" &&4 P-1== "3**" S-2== "が" ||4 S-3== "友達" S-3== "出会い" S-3== "R人" S-3== "子供" D-2= "(이)가"	용무·돈·만남·사람 등의 명사와 주격 조사 뒤의 '出来'를 '생기다'로 고르고 앞 조사를 주격으로 맞추기도 한다.				jisjk:266427
 出來	할 수 &HN@	M427	XXX	Ke	GN	3044	||5 &&2 S-1== "自由に" P-1== "3**" &&2 U+0== "Lません" D+0= "할 수 &M9@" &&2 P-1== "1**" G-1== "Hd" &&2 U+0== "ませず" D+0= "&AV@" &&3 ||2 S-1== "の" S-1== "が" P-1== "2**" D-1= "(을)를"	出来는 自由に·する형 명사·특정 부정형 및 の·が 뒤에서 ‘할 수 있다’로 고르며 부정 번역과 앞 조사도 정리한다.				jisjk:341217
 出來	가능&AV@	M427			GN	3174	||1 &&4 S-1== "なら" D-1== "(이)라면" P-1== "2**" P-2== "1**"	出来는 명사와 라면으로 번역된 なら 조사 뒤에서 가능하다로 고른다. (미발동: rare-context)				jisjk:342000
 出來	할 수 &HN@	M427	XXX	Ke	GN	4428	||2 &&2 U+0== "Lません" D+0= "할 수 &M9@" &&2 M+0== "590" D+0= "&AV@"	「出来」는 공손 부정형이면 ‘할 수 없다’로 바꾸고 지정된 어미형에서는 가능 표현을 걷어내 ‘하다’로 바꾼다.				jisjk:364410
@@ -6556,7 +6556,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 函れ	입금시&AQ@	M447	VMo		GN							jisjk:141174
 函れ	들어갈 수 &HN@	M447	VPl	Ma	GN	2946	||4 &&4 U+0== "Lません" S-1== "に" A-2== "QIDVGt" D+0= "들어갈 수 &M9@" &&4 U+0== "Lません" ||3 S-1== "が" S-1== "は" S-1== "でも" A-2== "VHn" D+0= "들어갈 수 &M9@" &&4 U+0== "Lません" P-1== "4**" M-1== "53*" D+0= "들어갈 수 &M9@" &&3 U+0== "Lません" S-2== "R保険" D+0= "들어갈 수 &M9@"	入れ는 자신의 어미가 ません으로 시작하면서 조직 관련 に, 사람 뒤의 が·は·でも, 53* 어미 동사 뒤 또는 …保険 관련 문맥이면 어간을 ‘들어갈 수 없다’로 바꾼다.				jisjk:340814
 函れ	들어갈 수 &HN@	M447	VPl	Ma	GN	3399	||1 &&3 U+0== "Lません" P-1== "3**" D+0= "들어갈 수 &M9@"	入れ의 어미가 ません으로 시작하고 앞말이 부사이면 들어갈 수 없다 계열로 번역을 바꾼다. (미발동: rare-context)				jisjk:343124
-函れ	들어갈 수 &HN@	M447	VPl		GN	3825	||5 &&2 S-1== "に" A-2== "QIDVGt" &&2 ||3 S-1== "が" S-1== "は" S-1== "でも" A-2== "VHn" &&2 P-1== "4**" M-1== "53*" S-2== "R保険" P-1== "3**"	특정 용기·사람·보험 문맥이나 부사·동사의 가능형 뒤에서 入れ를 들어갈 수 있다로 고른다.				jisjk:347162
+函れ	들어갈 수 &HN@	M447	VPl		GN	3825	||5 &&2 S-1== "に" A-2== "QIDVGt" &&3 ||3 S-1== "が" S-1== "は" S-1== "でも" A-2== "VHn" U+0!= "Lて" &&2 P-1== "4**" M-1== "53*" S-2== "R保険" P-1== "3**"	특정 용기·사람·보험 문맥이나 부사·동사의 가능형 뒤에서 入れ를 들어갈 수 있다로 고른다. 사람 뒤라도 て형(入れてくれた 넣어 주었다)은 뺀다.				jisjk:347162
 函れ	&AV@	M447			GN	4491	||2 &&2 S-1== "を" ||2 S-2== "暖房" S-2== "冷房" &&3 P-1== "2**" S-2== "籍" D-2= "혼인신고"	暖房·冷房를 목적어로 받는 入れ를 '하다'로 고르거나 籍와 조사 뒤에서 籍를 '혼인신고'로 바꾸고 '하다'를 고른다. (미발동: rare-context)				jisjk:365059
 函れ	들어갈 수 &HN@	M427			GN	4492	||2 &&3 U+0== "Lません" S-2== "満席" D+0= "들어갈 수 &M9@" S-2== "満席"	두 단어 앞이 「満席」이면 「入れ」를 ‘들어갈 수 있다’로 고르고 「ません」 어미에서는 ‘들어갈 수 없다’로 바꾼다. (미발동: rare-context)				jisjk:365060
 いれ込	&H5@	M445			GN							jisjk:142777
@@ -6795,8 +6795,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 びん詰	병조림	I110			GN							jisjk:70150
 不恰好	꼴%BD@	G8L0			GN							jisjk:2970
 不恰好	꼴사나운 모양	I110			GN							jisjk:2971
-不きげん	기분이 안%B8@	G8U0			GN							jisjk:2986
-不気嫌	기분이 안%B8@	G8U0			GN							jisjk:2986
+不きげん	기분이 안 %B8@	G8U0			GN							jisjk:2986
+不気嫌	기분이 안 %B8@	G8U0			GN							jisjk:2986
 不俱戴天	불구대천	I110			GN							jisjk:71332
 不工合	불편	I110			GN							jisjk:71334
 不工合	결함	I110			GN				xxx llm	1		w:11028
@@ -7874,7 +7874,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 入れかわ	(교대)교체&AV@	M428			GN							jisjk:141153
 入れかわ	교체&C6@	M428			GN							jisjk:374909
 入れもの	용기	I110			GN							jisjk:81961
-色いろ	여러가지	N110			GN							jisjk:115363
+色いろ	여러 가지	N110			GN							jisjk:115363
 色いろ	다양%A1@	G8U0			GN							jisjk:119386
 隠栖	은둔 생활	N110		Hd	GN							jisjk:126461
 印棉	인면	N110	VCp		GN							jisjk:126499
@@ -8464,8 +8464,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 情知らず	몰인정함	N110	SFl		GN							jisjk:153874
 情深	인정이 $D4@	H7U0			GN							jisjk:5905
 夏やせ	여름탐	I110			GN							jisjk:105461
-何呉と無く	여러가지로	I110			GN							jisjk:108822
-何呉となく	여러가지로	I110			GN							jisjk:108822
+何呉と無く	여러 가지로	I110			GN							jisjk:108822
+何呉となく	여러 가지로	I110			GN							jisjk:108822
 並み木	가로수	N110	QAL		GN							jisjk:23702
 並み木	나미키	N130	QCTVPl		GN							jisjk:315468
 並み並み	보통	N110			GN				llm			w:11134
@@ -13917,10 +13917,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 痛くも痒くも無	아무렇지도 $D7@	H7N0			GN							jisjk:121692
 痛くもかゆくも無	아무렇지도 $D7@	H7N0			GN							jisjk:121692
 譲り受け人	양수인	N110	VHnUQfUAq		BZ							jisjk:159939
-ひと筋縄ではいかな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄では行かな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄じゃいかな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
-ひと筋縄じゃ行かな	보통 수단으로는 안$AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄ではいかな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄では行かな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄じゃいかな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
+ひと筋縄じゃ行かな	보통 수단으로는 안 $AF@	H7N0		Pn	GN							jisjk:137742
 シャーリア	샤리아	N110			GN							w:4666
 シャリーヤ	샤리아	N110			GN							w:4666
 シャリヤ	샤리아	N110			GN							w:4666
@@ -14497,9 +14497,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 インナー・シティ	도회 중심지	N110	VPl		GN							jisjk:157441
 ダーク・エージ	암흑시대	N110			GN							jisjk:50174
 目が眩	눈이 &LU@	M425			GN							jisjk:118027
-開いた口がふさがらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
-あいた口がふさがらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
-あいた口が塞がらな	기가 막혀 말이 안나$KC@	H7U0			GN							jisjk:116985
+開いた口がふさがらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
+あいた口がふさがらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
+あいた口が塞がらな	기가 막혀 말이 안 나$KC@	H7U0			GN							jisjk:116985
 アーチチョーク	아티초크	N110			GN							w:1956
 考え合わせ	아울러 생각&AV@	M447			GN							jisjk:141479
 考えあわせ	아울러 생각&AV@	M447			GN							jisjk:141479
@@ -15125,8 +15125,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 瓢箪から独楽	표주박에서 망아지	A110			GN							jisjk:90314
 ひょうたんから独楽	표주박에서 망아지	A110			GN							jisjk:90314
 瓢簞から駒	표주박에서 망아지	A110			GN							jisjk:90314
-犬も喰わな	아무도 상대 안$AB@	H7U0		Pn	GN							jisjk:117134
-犬もくわな	아무도 상대 안$AB@	H7U0		Pn	GN							jisjk:117134
+犬も喰わな	아무도 상대 안 $AB@	H7U0		Pn	GN							jisjk:117134
+犬もくわな	아무도 상대 안 $AB@	H7U0		Pn	GN							jisjk:117134
 屁のカッパ	개뿔도 아님	K110			GN							jisjk:118028
 明つ神	천황	N110	VHn		GN							jisjk:227028
 虎の門事件	토라노몬사건	N110			GN							jisjk:246186
@@ -15150,7 +15150,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 白へび	흰뱀	N110	VAm		GN							jisjk:235898
 シガレット・ケース	시가렛 케이스	N110	VPe		GN							jisjk:129179
 アコースティック・エミッション	acoustic emission	N110			GN							jisjk:42405
-都合が悪	사정이 안$DE@	H7U0			GN							jisjk:267229
+都合が悪	사정이 안 $DE@	H7U0			GN							jisjk:267229
 ブリニ	블리니	N110	VFd		GN				llm			w:8269
 冬薯蕷葛	도꼬로마	N110	VPt		GN							jisjk:245854
 御津柏	떡갈나무 잎	N110			GN							jisjk:252477
@@ -18504,7 +18504,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 とんぼ玉	둥근 유리 구슬	N110			GN							jisjk:246293
 トンボ玉	둥근 유리 구슬	N110			GN							jisjk:246293
 釣りあげ	끌어 올&AA@	M447			GN							jisjk:143934
-わらじ銭	몇 푼 안되는 노자	N110	VMy		GN							jisjk:257060
+わらじ銭	몇 푼 안 되는 노자	N110	VMy		GN							jisjk:257060
 動機づけ	동기마련	I110			GN							jisjk:66281
 女松	적송	N110	VPt		GN							jisjk:253498
 虫こぶ	충영	N110	VPtVAm		GN							jisjk:253059
@@ -20384,8 +20384,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 椿々山	쓰바키친잔	N110	VHn		GN							jisjk:244048
 楽楽ダイエット	쉬운 다이어트	N110	VAc		GN							jisjk:151913
 楽々と	편안히	E311			GN							jisjk:1582
-様様な	여러가지	G300			GN							jisjk:117276
-様様に	여러가지로	E300			GN							jisjk:123145
+様様な	여러 가지	G300			GN							jisjk:117276
+様様に	여러 가지로	E300			GN							jisjk:123145
 様様の	다양한	E0H0			GN							jisjk:149888
 機械油々剤	기계유유제	N110	VMd		GN							jisjk:206203
 次次とはね	차례차례로 &AO@	M447			GN							jisjk:140582
@@ -20455,7 +20455,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 私同さま	자신과 같음	N110			GN	879	||1 G+0== "Ow"	私同様를 오른쪽 문장 경계에서 자신과 같음으로 고른다. (미발동: rare-word)				jisjk:100597
 私同さま	저와 같이	N110	XXX		GN							jisjk:267008
 種種な	다양한	E0H0			GN							jisjk:149897
-種々の	여러가지	C0D1			GN							jisjk:4756
+種々の	여러 가지	C0D1			GN							jisjk:4756
 空模さま	형세	I110			GN							jisjk:61933
 空々の	텅 비어 있는	C0D1			GN							jisjk:4644
 端株々主	단주 주주	N110	VHn		BZ							jisjk:358844
@@ -20490,7 +20490,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 舞々螺	달팽이	N110	VAm		GN							jisjk:251538
 色色と	다양하게	E300			GN							jisjk:149004
 色色と	여러모로	E300			GN				xxx llm	1		w:22601
-色色とほんとにサンキュー	여러가지로 정말로 생큐	A9D0			GN							jisjk:264115
+色色とほんとにサンキュー	여러 가지로 정말로 생큐	A9D0			GN							jisjk:264115
 色色人	여러 사람	N110	VHn		GN							jisjk:150555
 艷々し	반지르르$AB@	H7U0			GN							jisjk:5804
 花模さま	꽃 무늬	I110			GN							jisjk:89347
@@ -20513,7 +20513,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 記録仕さま	기록 사양	N110			GN							jisjk:174511
 設定しさま	설정 방법	N110			GN							jisjk:162509
 語々	한마디 한마디	N110	UTs		GN							jisjk:29033
-諸諸の	여러가지	N110			GN							jisjk:266920
+諸諸の	여러 가지	N110			GN							jisjk:266920
 議会制民主々義	의회제 민주주의	N110			GN							jisjk:230952
 貴方々	당신	N110	VHn		GN							jisjk:227454
 貸借対照表々示原則	대차대조표 표시원칙	N110			BZ							jisjk:364011
@@ -20595,7 +20595,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 野生々物	야생생물	N110			GN							w:24917
 黄色狒々	노랑개코원숭이	N110			GN							w:26230
 アタシ	나	I120	XXXVQwVHn		GN	511	||2 &&4 S+1== "の" D+1== "의" P+1== "2**" ||2 P+2== "1**" P+2== "7**" &&2 ||2 S+1== "に" S+1== "を" P+1== "2**"	지시어, 의문사, 대명사: こ, そ, あ, ど 계열(これ, その, そんな, どんなに, このまま…), 의문사(何, なん, 誰, いつ, いくつ, いくら, いかが), 인칭대명사(私, 僕, 俺, 君, 自分…). 형식: docs/rule-language.md, 실행 순서: docs/pipeline-layers.md. 규칙은 그 번호를 가리키는 사전 단어(머리 단어)의 갈래로 파일을 정한다(docs/rule-language.md#주제-파일). 파일 안에서는 머리 단어별로 모아 두었다. 다른 파일: それから, それで 같은 접속사와 そうか, どうぞ, どうも 같은 응답, 인사는 discourse.txt, そう(것 같다)는 sense-*.txt. あたし를 소유격 の와 명사, 형용사가 이어지는 문맥에서 '나'로 선택한다. 조사 に·を 앞에서도 나를 고른다.			あたし	variant:atashi:1
-アタシ	내	I120	VQwVHn		GN	512	||4 &&3 D+1== "(이)가" P+1== "2**" ||2 P+2== "4**" P+2== "8**" S+1== "が好き" &&2 S+1== "の好き" P+1== "8**" &&2 S+1== "が" P+1== "2**"	あたし는 주격 조사 が나 が好き・の好き 등의 앞에서 '내'를 골라 '내가' 같은 표현을 만든다.			あたし	variant:atashi:2
+アタシ	내	I120	VQwVHn		GN	512	||4 &&3 D+1== "(이)가" P+1== "2**" P+2== "4**" S+1== "が好き" &&2 S+1== "の好き" P+1== "8**" &&2 S+1== "が" P+1== "2**"	あたし는 주격 조사 が나 が好き・の好き 등의 앞에서 '내'를 골라 '내가' 같은 표현을 만든다.			あたし	variant:atashi:2
 あたしたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:1
 あたし達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:2
 アタシたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:3

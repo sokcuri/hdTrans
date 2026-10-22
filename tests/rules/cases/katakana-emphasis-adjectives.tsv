@@ -5,3 +5,5 @@ katakana:emphasis-adjective	それはヒドイよ。	그것은 심해.	fix	norma
 katakana:emphasis-adjective	「……ワレモ、行ク」	「……나도, 간다」	fix	lookup
 katakana:emphasis-adjective	そんなのダメよ。	그런 것 안 돼.	keep	normalize
 katakana:emphasis-adjective	これ、スゴイね。	이것, 대단하네.	fix	normalize
+katakana:emphasis-adjective	出さないとコロスぞ。	내지 않으면 죽이겠어.	fix	normalize
+katakana:emphasis-adjective	アタシがコロスんだ。	내가 죽이는 거야.	fix	normalize

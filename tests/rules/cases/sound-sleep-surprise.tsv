@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:sleep-surprise	「むにゃ……」	「음냐……」	fix	sound
+sound:sleep-surprise	「およ？」	「어라?」	fix	sound
+sound:sleep-surprise	およそ百人	대략 백명	keep	sound

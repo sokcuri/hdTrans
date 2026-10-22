@@ -205,7 +205,7 @@ std::string Compile(std::string_view jp, std::string_view kr, std::string_view p
         add(std::string(jp), std::string(kr), "N130", "QPNVHn", "Wb");
     } else if (pos == "surname") {
         add(std::string(jp), std::string(kr), "N130", "QPNVHn", "Wa");
-    } else if (pos == "intj" || pos == "lead") {
+    } else if (pos == "intj" || pos == "lead" || pos == "open") {
         add(std::string(jp), std::string(kr), "E000");
     } else if (pos == "hon") {
         add(std::string(jp), std::string(kr), "N110", "", space ? "Ha" : "Tu");

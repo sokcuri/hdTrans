@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:6434	あいつはもう帰った。	저 녀석은 벌써 돌아갔다.	fix	lookup

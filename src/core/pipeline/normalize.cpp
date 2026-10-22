@@ -48,7 +48,7 @@ constexpr CharMap kCp932Forms[] = {
 // Kanji forms outside JIS X 0208 (the JIS X 0213 forms of web text) with the form the
 // dictionary holds.
 constexpr CharMap kKanjiForms[] = {
-    {U'頰', U'頬'}, {U'摑', U'掴'}, {U'𠮟', U'叱'}, {U'剝', U'剥'}, {U'繫', U'繋'}, {U'噓', U'嘘'},
+    {U'頰', U'頬'}, {U'閒', U'間'}, {U'摑', U'掴'}, {U'𠮟', U'叱'}, {U'剝', U'剥'}, {U'繫', U'繋'}, {U'噓', U'嘘'},
     {U'搔', U'掻'}, {U'鷗', U'鴎'}, {U'屛', U'屏'}, {U'餠', U'餅'}, {U'塡', U'填'}, {U'醬', U'醤'},
     {U'蔣', U'蒋'}, {U'﨑', U'崎'}, {U'髙', U'高'}, {U'德', U'徳'}, {U'淸', U'清'}, {U'靑', U'青'},
     {U'瀨', U'瀬'}, {U'吞', U'呑'}, {U'揭', U'掲'}, {U'涉', U'渉'}, {U'焰', U'焔'}, {U'狀', U'状'},
@@ -369,7 +369,7 @@ bool StartJaa(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "サン", "ヨン", "ゴー",
+constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン", "ゴー",
                                                "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ"};
 constexpr std::string_view kMilitaryKana[] = {"まる", "ひと", "ふた", "さん", "よん",
                                               "ごー", "ろく", "なな", "はち", "きゅう"};
@@ -380,8 +380,8 @@ struct MilitaryDigit {
     char digit;
 };
 constexpr MilitaryDigit kMilitaryDigits[] = {
-    {"キュウ", '9'}, {"キュー", '9'}, {"マル", '0'}, {"ヒト", '1'}, {"フタ", '2'}, {"サン", '3'},
-    {"ヨン", '4'},   {"ゴー", '5'},   {"ロク", '6'}, {"ナナ", '7'}, {"ハチ", '8'}, {"ゴ", '5'},
+    {"キュウ", '9'}, {"キュ", '9'}, {"マル", '0'}, {"ヒト", '1'}, {"フタ", '2'}, {"ニ", '2'}, {"サン", '3'},
+    {"ヨン", '4'},   {"ゴ", '5'},   {"ロク", '6'}, {"ナナ", '7'}, {"ハチ", '8'},
 };
 
 template <size_t N>
@@ -392,7 +392,7 @@ bool AnyWord(std::string_view s, size_t& pos, const std::string_view (&words)[N]
     return false;
 }
 
-// W([、・ ]?W){3} with W a katakana digit word, or four hiragana digit words. A word
+// W([、・ ー]?W){3} with W a katakana digit word, or four hiragana digit words. A word
 // never begins with a separator or ー, so the first word that fits is the only one
 // that lets the rest match.
 bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
@@ -401,7 +401,7 @@ bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
         int n = 1;
         for (; n < 4; n++) {
             size_t q = p;
-            OneOf(s, q, U"、・ ");
+            OneOf(s, q, U"、・ ー");  // ヒトマルーマルマル draws a word out
             if (!AnyWord(s, q, kMilitaryWords)) break;
             p = q;
         }
@@ -462,6 +462,15 @@ std::string NormalizeForms(std::string_view text) {
                 c += 2;
                 i += mark.size;
             }
+        } else if (c == U'〆' && (i == text.size() || In(At(text, i).cp, U"のはをがにでも」』、。！？…"))) {
+            out += "締め";  // 〆の一杯, 〆はラーメン: the noun 締め (the finish)
+            continue;
+        } else if (c == U'〆' && i < text.size() &&
+                   (In(At(text, i).cp, U"切めるり") || (At(text, i).cp >= U'一' && At(text, i).cp <= U'鿿'))) {
+            c = U'締';  // 〆切, 〆る, 〆日: the kanji 締 written short
+        } else if (c == U'〆' && i < text.size() && At(text, i).cp >= U'ぁ' && At(text, i).cp <= U'ゖ') {
+            out += "しめ";  // 〆た: the kana しめ written short
+            continue;
         } else if (c <= 3) {
             c = U' ';
         } else if (c == U'‼' || c == U'⁉' || c == U'⁈') {
@@ -522,7 +531,7 @@ std::string RewriteMilitaryTime(std::string_view text) {
         for (size_t i = 0; i < m.group[0].size();) {
             const text::Rune r = At(m.group[0], i);
             i += r.size;
-            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ') continue;
+            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ' || r.cp == U'ー') continue;
             text::AppendRune(words, r.cp >= U'ぁ' && r.cp <= U'ゖ' ? r.cp + 0x60 : r.cp);
         }
         out.append(text.substr(at, m.begin - at));

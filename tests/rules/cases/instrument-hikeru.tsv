@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:w:26717	彼女はピアノが弾ける。	그녀는 피아노를 칠 수 있다.	fix	local
+dict:w:26717	ギターは弾けない。	기타는 칠 수 없다.	fix	local
+dict:w:26717	風船が弾けた。	풍선이 터졌다.	keep	local

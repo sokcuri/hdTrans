@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:shush	「しーっ……」	「쉿……」	fix	sound
+sound:shush	（しーっ！ 静かにして）	(쉿! 조용하게 해)	fix	sound
+sound:shush	母がしーっと指を口に当てる。	어머니가 쉿 하고 손가락을 입에 댄다.	fix	sound

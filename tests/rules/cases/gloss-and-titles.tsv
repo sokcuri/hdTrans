@@ -1,0 +1,51 @@
+rule	input	expected	kind	layer
+names:gloss-word	違うわよ！提督(あなた)、何いってんの！	달라! 제독(당신), 의향은!	fix	normalize
+names:gloss-word	12時。私(わたくし)、ランチにはサンドイッチを所望しますわ	12시. 저, 런치에는 샌드위치를 소망해요	fix	normalize
+names:gloss-name	三日(みか)が来た。三日は優しい。	미카가 왔다. 미카는 상냥하다.	fix	normalize
+global:on-joined	ような事…私…えっ	같은 일…나…어	fix	global-stem
+global:on-joined	夜…夜は…怖いですね。	밤…밤은…무섭네요.	fix	global-stem
+dict:jisjk:266427	新しい店が出来た。	새로운 가게가 생겼다.	fix	local
+dict:jisjk:266427	料理が出来る。	요리를 할 수 있다.	keep	local
+dict:warship:1	新しい艦が出来たんですって。	새로운 함이 생겼다고 합니다.	fix	local
+compose:pronoun-space	私無しじゃ無理	나 없음은 무리	fix	compose
+dict:san-role:1	提督さん、おはよう	제독님, 안녕	fix	local
+dict:san-role:1	店長さん	점장님	fix	local
+dict:san-role:1	店員さんを呼んだ。	점원을 불렀다.	keep	local
+dict:san-role:1	先生さん	선생님	fix	local
+dict:san-role:1	田中さん	타나카씨	keep	local
+phrase:今のは	「……！　……今のは」	「……! ……방금 그건」	fix	builtin-phrase
+names:name-line	高峰	타카미네	fix	normalize
+names:name-line	小太刀	코다치	fix	normalize
+names:name-line	慶	케이	fix	normalize
+names:name-line	愛	애	keep	normalize
+names:name-line	クマ	곰	keep	normalize
+names:name-line	糸	실	keep	normalize
+dict:jisjk:101466	新編「第二航空戦隊」出撃せよ！	신편 「제2항공전대」출격하라!	fix	lookup
+normalize:military-time	ヒトニーマルマル。	1200.	fix	normalize
+normalize:military-time	ヒトマルーマルマル！	1000!	fix	normalize
+normalize:military-time	フタマルマルマル。	2000.	keep	normalize
+dict:jisjk:40280	あたしの勝手でしょ	내 제멋대로이지	fix	local
+dict:jisjk:40280	あたしの作ったケーキ	내가 만든 케이크	keep	local
+grammar:subject-pronoun	あたしが好き	나를 좋아해	fix	rewrites
+dict:jisjk:355685	あんたが沢山仕事できる	네가 많이 일할 수 있다	fix	local
+dict:jisjk:9157	あたしが一番わかってる	내가 제일 알고 있다	fix	local
+dict:jisjk:9157	英語が少しわかる	영어를 조금 안다	keep	local
+constraint:honorific-kanji-name	千里ちゃん、待って	치사토짱, 기다려	fix	lookup
+constraint:honorific-kanji-name	翼くん	츠바사군	keep	lookup
+names:cued-single-kanji	筧くん、おはよう	카케이군, 안녕	fix	lookup
+normalize:shime	「そんなわけで、〆切までもう時間がないんだ」	「그래서, 마감까지 이제 시간이 없다」	fix	normalize
+dict:jisjk:845	「どうして？」	「왜?」	fix	defaults
+dict:doushite:copula	「どうしてなの？」	「어째서야?」	keep	local
+compose:spoken-what	「皆さん、何がいいですか？」	「여러분, 뭐가 좋습니까?」	fix	compose
+compose:spoken-what	「何を食べたいですか？」	「뭘 먹고 싶습니까?」	fix	compose
+compose:spoken-what	何をしている？	무엇을 하고 있어?	keep	compose
+compose:spoken-what	「なによりおかしいのは」	「무엇보다도 이상한 건」	keep	compose
+dict:nanika:atta	「何かあったの？」	「무슨 일 있었어?」	fix	local
+dict:naniga:atta	「何があったんですか？」	「무슨 일이 있었습니까?」	fix	local
+phrase:何でもありません	「何でもありません」	「아무것도 아니에요」	fix	builtin-phrase
+dict:nani-iu:3	「なに言ってんだよ」	「무슨 소리야」	fix	lookup
+restore:retort-idiom	「何を言ってるの？」	「무슨 소리야?」	fix	restore
+restore:retort-idiom	「何を言ってるんですか」	「무슨 소리예요」	fix	restore
+restore:retort-idiom	「何言ってるの、あたりまえじゃない」	「무슨 소리야, 당연하지 않아」	fix	restore
+restore:retort-idiom	あんたが何言ったか覚えてる	네가 무슨 말을 했는지 기억하고 있다	keep	restore
+restore:retort-idiom	何を言ってもいい	무슨 말을 해도 괜찮다	keep	restore

@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:wave-dash	「う～ん、どうしよう」	「으음~, 어떻게 하지」	fix	sound
+sound:wave-dash	「え～と……」	「음~……」	fix	sound
+sound:wave-dash	「わ～い！」	「와아~!」	fix	sound
+sound:wave-dash	「うーん、どうしよう」	「으음, 어떻게 하지」	keep	sound

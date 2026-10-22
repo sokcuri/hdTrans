@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:265795	あの子のことが気になる。	그 아이가 신경 쓰인다.	fix	defaults

@@ -523,6 +523,59 @@ std::string DropParticleMarks(std::string_view s) {
     return out;
 }
 
+// line without a gloss in parentheses that only repeats the word before it, as a kana gloss
+// of a reading or a name reads once translated (저(저) 저, 미카(미카) 미카).
+std::string DropEchoedGlosses(std::string_view line) {
+    std::u32string rs = Runes(line);
+    auto hangul = [](char32_t r) { return r >= U'가' && r <= U'힣'; };
+    for (std::size_t i = 1; i < rs.size(); i++) {
+        if (rs[i] != U'(' || !hangul(rs[i - 1])) continue;
+        std::size_t j = i + 1;
+        while (j < rs.size() && hangul(rs[j])) j++;
+        if (j == i + 1 || j >= rs.size() || rs[j] != U')') continue;
+        const std::size_t n = j - i - 1;
+        std::size_t word = i;  // the start of the Hangul run before (
+        while (word > 0 && hangul(rs[word - 1])) word--;
+        if (i - word < n || rs.compare(i - n, n, rs, i + 1, n) != 0) continue;
+        rs.erase(i, n + 2);
+    }
+    return Utf8(rs);
+}
+
+// line with the literal 무슨 소리를 하다 of a retort (何言ってるの, 何を言ってるんですか; the
+// dictionary reads it so only for the て form of 言う) written as the idiom 무슨 소리야 or
+// 무슨 소리예요, where it ends a clause: before a mark, a closing bracket or the end.
+std::string RetortIdioms(std::string_view line) {
+    struct Idiom {
+        std::string_view literal, idiom;
+    };
+    static constexpr Idiom kIdioms[] = {
+        {"무슨 소리를 하고 있는 거야", "무슨 소리야"}, {"무슨 소리를 하는 거야", "무슨 소리야"},
+        {"무슨 소리를 하는거야", "무슨 소리야"},       {"무슨 소리를 하고 있어", "무슨 소리야"},
+        {"무슨 소리를 하는 건데", "무슨 소리야"},      {"무슨 소리를 해", "무슨 소리야"},
+        {"무슨 소리를 하고 있습니까", "무슨 소리예요"}, {"무슨 소리를 하는 겁니까", "무슨 소리예요"},
+        {"무슨 소리를 하는 거예요", "무슨 소리예요"},  {"무슨 소리를 하고 있어요", "무슨 소리예요"},
+        {"무슨 소리를 합니까", "무슨 소리예요"},       {"무슨 소리를 해요", "무슨 소리예요"},
+        {"무슨 소리를 하고 있습니다", "무슨 소리예요"},
+    };
+    std::string out(line);
+    for (std::size_t at = 0; (at = out.find("무슨 소리를 ", at)) != std::string::npos;) {
+        bool done = false;
+        for (const Idiom& i : kIdioms) {
+            if (out.compare(at, i.literal.size(), i.literal) != 0) continue;
+            const std::size_t end = at + i.literal.size();
+            const char32_t next = end < out.size() ? text::DecodeRune(std::string_view(out).substr(end)).cp : 0;
+            if (next != 0 && !Contains(U"?!.,…‥~～―」』)\"'", next)) continue;
+            out.replace(at, i.literal.size(), i.idiom);
+            at += i.idiom.size();
+            done = true;
+            break;
+        }
+        if (!done) at += std::string_view("무슨 소리를 ").size();
+    }
+    return out;
+}
+
 RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBrackets, bool literalCleanup) {
     RestoreSteps st;
     st.spaced = DropAddedSpaces(typed, cleaned);
@@ -531,8 +584,9 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = UnescapePrivateUse(DropParticleMarks(
-        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean))))))));
+    st.line = UnescapePrivateUse(DropEchoedGlosses(DropParticleMarks(
+        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))));
+    if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;
 }
 

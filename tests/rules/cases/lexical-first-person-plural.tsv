@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:166234	俺たちは同じクラスだ。	우리는 같은 반이다.	fix	lookup
+dict:jisjk:70297	僕たちの家はここだ。	우리의 집은 여기다.	fix	lookup
+phrase:俺達	俺達の勝ちだ。	우리의 승리다.	fix	builtin-phrase

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:adverbial-to	彼女はもぞもぞとお尻を動かした。	그녀는 꼼지락꼼지락 엉덩이를 움직였다.	fix	sound
+sound:adverbial-to	どーんとお願いします！	콰앙 부탁드립니다!	fix	sound
+sound:adverbial-to	じろじろと見る	빤히 본다	keep	sound

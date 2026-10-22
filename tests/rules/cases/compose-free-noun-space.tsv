@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+compose:free-noun-space	五十倍以上の力だ。	오십배 이상의 힘이다.	fix	compose
+compose:free-noun-space	午後四時頃に来た。	오후 4시 무렵에 왔다.	fix	compose
+compose:free-noun-space	三人ほどの男がいた。	세 명 정도의 남자가 있었다.	fix	compose
+compose:free-noun-space	りんご等を買った。	사과 등을 샀다.	fix	compose
+compose:free-noun-space	クラスで一等になった。	반에서 일등이 되었다.	keep	compose

@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:114687	お店で売っている。	가게에서 팔고 있다.	fix	local
+dict:jisjk:114687	クラスで一番速い。	반에서 제일 빠르다.	fix	local
+dict:jisjk:114687	この世で最も美しい。	이 세상에서 가장 아름답다.	fix	local
+dict:jisjk:114687	バスで行く。	버스로 간다.	keep	local

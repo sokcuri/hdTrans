@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:341995	「でしょう？」	「그렇지?」	fix	local
 dict:jisjk:341995	でしょう、先生	그렇지, 선생님	keep	local
-dict:jisjk:341995	「明日は雨でしょう」	「내일은 비겠지요」	keep	local
+dict:jisjk:341995	「明日は雨でしょう」	「내일은 비겠죠」	keep	local
 dict:jisjk:342862	ございません	없습니다	fix	local
 dict:jisjk:342862	はい、ございません	네, 없습니다	fix	local
 dict:jisjk:342862	はい、ございます	네, 있습니다	keep	local

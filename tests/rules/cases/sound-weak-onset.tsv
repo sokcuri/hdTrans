@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:weak-onset	「ああっ、ぅあっ、あ」	「아앗, 우앗, 아」	fix	sound
+sound:weak-onset	「ぅわぁ～、すごい」	「우와아~, 대단해」	fix	sound
+sound:weak-onset	「…ぇへへ♪」	「…에헤헤♪」	fix	sound
+sound:weak-onset	≪貴様ァァァ！！≫	≪네놈!! ≫	keep	sound

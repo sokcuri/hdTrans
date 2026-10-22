@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:194235	彼は銃を撃った。	그는 총을 쏘았다.	fix	global-stem
+dict:jisjk:194235	銃を下ろせ。	총을 내려라.	keep	lookup

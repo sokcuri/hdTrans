@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+sound:pain-cries	「いたっ！　何するの！」	「아얏! 뭐해!」	fix	sound
+sound:pain-cries	「あいたたた……」	「아야야야……」	fix	sound
+sound:pain-cries	「あだっ！？」	「아얏!?」	fix	sound
+sound:pain-cries	「……あちちっ」	「……앗 뜨거」	fix	sound
+sound:pain-cries	いたっけそんな奴？	있었던가 그런 놈?	keep	sound
+sound:pain-cries	いたって普通だ	매우 보통이다	keep	sound

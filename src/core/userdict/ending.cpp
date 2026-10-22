@@ -118,7 +118,10 @@ std::string CompileEnding(std::string_view jp, std::string_view kr, Rec& r) {
         r.key = jp.substr(kModelNa.size());
         r.part = "U500";
         err = FormByPrefix(kr, kModelNaKR, {"했5", "해6", "합7", "함8", "한4", "할3", "하1"}, code, text);
-        if (code == '1' && (text.starts_with("면") || text.starts_with("러") || text.starts_with("려"))) code = '2';
+        if (code == '1' && (text.starts_with("면") || text.starts_with("러") || text.starts_with("려") ||
+                            text.starts_with("니") || text.starts_with("며") || text.starts_with("므"))) {
+            code = '2';
+        }
     } else if (jp.starts_with(kModelNoun)) {
         if (!kr.starts_with(kModelNounKR)) {
             return "KR " + Quote(kr) + " does not start with " + std::string(kModelNounKR);

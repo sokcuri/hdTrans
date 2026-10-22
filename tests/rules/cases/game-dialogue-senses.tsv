@@ -1,12 +1,12 @@
 rule	input	expected	kind	layer
 dict:jisjk:90167	「ありがとう」	「고마워」	fix	defaults
 dict:jisjk:90167	「ありがとうございます」	「감사합니다」	keep	defaults
-dict:jisjk:263984	ずっと辛かった。	쭉 괴로웠다.	fix	local
-dict:jisjk:263984	ずっと一緒にいたい。	쭉 함께 있고 싶다.	fix	local
+dict:jisjk:263984	ずっと辛かった。	계속 괴로웠다.	fix	local
+dict:jisjk:263984	ずっと一緒にいたい。	계속 함께 있고 싶다.	fix	local
 dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	keep	local
 dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
 dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local
-dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 말아라」	fix	local
+dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 마」	fix	local
 dict:variant:atashi:2	「アタシが行く」	「내가 간다」	fix	local
 dict:jisjk:1204	「あたしを見て」	「나를 봐」	fix	local
 dict:jisjk:1204	「あたしに任せて」	「나에게 맡겨」	fix	local
@@ -16,7 +16,7 @@ dict:jisjk:144074	敵を撃った。	적을 쏘았다.	fix	lookup
 dict:jisjk:144074	「撃って」	「쏘아」	fix	lookup
 conj:kuru	「来い」	「와라」	fix	conjugation
 conj:kuru	「早く来い！」	「빨리 와라!」	fix	conjugation
-conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안된다」	keep	conjugation
+conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안 된다」	keep	conjugation
 conj:kuru	来たかった。	오고 싶었다.	keep	conjugation
 conj:kuru	友達が来た。	친구가 왔다.	keep	conjugation
 conj:kuru	誰も来ない。	아무도 오지 않는다.	keep	conjugation

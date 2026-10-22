@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:jisjk:343423	彼は明日も来るのだろう。	그는 내일도 올 것이다.	fix	ending-defaults
+dict:jisjk:343423	あの子はもう寝ているのだろう。	그 아이는 이미 자고 있을 것이다.	fix	ending-defaults
+dict:nodarou-wh:1	彼女は何を考えているのだろう。	그녀는 무엇을 생각하고 있는 걸까.	keep	local-ending
+dict:nodarou-wh:2	誰が手紙を書いたのだろう。	누가 편지를 쓴 걸까.	fix	local-ending
+dict:nodarou-wh:2	どこかで道を間違えたのだろう。	어디선가 길을 잘못했을 것이다.	keep	local-ending

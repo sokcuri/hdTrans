@@ -106,6 +106,7 @@ private:
     // Labels and the evidence of a single run (cues.cpp).
     std::string Label(std::string_view line, bool& script);
     DictFlags Flags(std::string_view s);
+    bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);

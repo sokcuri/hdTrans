@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:353393	先生にだけ話した。	선생님에게만 이야기했다.	fix	local
+dict:jisjk:353393	駅にだけ行った。	역에만 갔다.	keep	local
+dict:jisjk:340814	先生が入れてくれた。	선생님이 넣어 주었다.	fix	local
+dict:jisjk:340814	先生でも入れる部屋だ。	선생님이라도 들어갈 수 있는 방이다.	keep	local

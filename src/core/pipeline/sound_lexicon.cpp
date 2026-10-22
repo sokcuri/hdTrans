@@ -53,7 +53,8 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
             row.root = std::string(lemma);
         }
         row.key = ToKatakana(DecodeText(f[0]));
-        row.lead = f[2] == "lead";
+        row.open = f[2] == "open";
+        row.lead = f[2] == "lead" || row.open;
         row.intj = f[2] == "intj" || row.lead;
         row.phrase = phrases;
         const char32_t first = row.key[0];

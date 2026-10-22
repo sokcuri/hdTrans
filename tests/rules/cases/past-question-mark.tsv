@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+L3258	「さっきまで寝てた？」	「조금 전까지 잤어?」	fix	local-ending
+L289	「それは誰の傘だった？」	「그건 누구의 우산이었어?」	fix	local
+L289	「あれは雨だった日のことだ」	「저건 비였던 날이다」	keep	local

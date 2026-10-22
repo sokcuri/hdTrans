@@ -204,7 +204,7 @@ bool RuleL24([[maybe_unused]] Item* p) {
 }
 
 // local 25
-//     src[+2] starts "まで" and (end.src[+3] == "た" or end.src[+3] == "だ" or end.src[+3] == "いた" or end.src[+3] == "いだ" or end.src[+3] == "った" or end.src[+3] == "んだ" or end.src[+3] == "ました") and ko := "매우"
+//     src[+2] starts "まで" and (end.src[+3] == "た" or end.src[+3] == "だ" or end.src[+3] == "いた" or end.src[+3] == "いだ" or end.src[+3] == "った" or end.src[+3] == "んだ" or end.src[+3] == "ました") and ko := "무척"
 //     src[+2] starts "まで"
 bool RuleL25([[maybe_unused]] Item* p) {
     return (SrcEq(p, 2, "Lまで"sv) && (GobiSrcEq(p, 3, "た"sv) ||
@@ -213,7 +213,7 @@ bool RuleL25([[maybe_unused]] Item* p) {
            GobiSrcEq(p, 3, "いだ"sv) ||
            GobiSrcEq(p, 3, "った"sv) ||
            GobiSrcEq(p, 3, "んだ"sv) ||
-           GobiSrcEq(p, 3, "ました"sv)) && DstSet(p, 0, "매우"sv)) ||
+           GobiSrcEq(p, 3, "ました"sv)) && DstSet(p, 0, "무척"sv)) ||
            SrcEq(p, 2, "Lまで"sv);
 }
 
@@ -2646,14 +2646,14 @@ bool RuleL288([[maybe_unused]] Item* p) {
 }
 
 // local 289
-//     pos[+1] is 1**
+//     pos[+1] is 1** and ko[+1] != "?"
 //     (src[+1] == "ことが分か" or src[+1] == "ことがわか") and pos[+1] is 4**
 //     src[+1] == "らし" and pos[+1] is 7**
 //     (src[+1] == "にちがいあ" or src[+1] == "に違いあ") and pos[+1] is 4**
 //     (src[+1] == "ことは" or src[+1] == "こと")
 //     src[+1] == "だけに"
 bool RuleL289([[maybe_unused]] Item* p) {
-    return PumsaEq(p, 1, "1**"sv) ||
+    return (PumsaEq(p, 1, "1**"sv) && DstNe(p, 1, "\077"sv)) ||
            ((SrcEq(p, 1, "ことが分か"sv) ||
            SrcEq(p, 1, "ことがわか"sv)) && PumsaEq(p, 1, "4**"sv)) ||
            (SrcEq(p, 1, "らし"sv) && PumsaEq(p, 1, "7**"sv)) ||
@@ -2941,10 +2941,10 @@ bool RuleL326([[maybe_unused]] Item* p) {
 }
 
 // local 327
-//     sem[-1] under VHn and src[-1] not ends "屋" and src[-1] not ends "がり" and src[-1] not ends "張り" and src[-1] not ends "坊" and src[-1] != "美人"
+//     sem[-1] under VHn and sem[-1] lacks UAq and src[-1] not ends "屋" and src[-1] not ends "がり" and src[-1] not ends "張り" and src[-1] not ends "坊" and src[-1] != "美人" and ko[-1] not ends "님" and src[-1] not ends "長" and src[-1] != "提督" and src[-1] != "運転手" and src[-1] != "師匠" and src[-1] != "博士" and src[-1] != "教授" and src[-1] != "神父"
 //     pos[-1] is 13* and gram[-1] has Wa|Wb
 bool RuleL327([[maybe_unused]] Item* p) {
-    return (AttrMinusEq(p, -1, "VHn"sv) && SrcNe(p, -1, "R屋"sv) && SrcNe(p, -1, "Rがり"sv) && SrcNe(p, -1, "R張り"sv) && SrcNe(p, -1, "R坊"sv) && SrcNe(p, -1, "美人"sv)) ||
+    return (AttrMinusEq(p, -1, "VHn"sv) && AttrNe(p, -1, "UAq"sv) && SrcNe(p, -1, "R屋"sv) && SrcNe(p, -1, "Rがり"sv) && SrcNe(p, -1, "R張り"sv) && SrcNe(p, -1, "R坊"sv) && SrcNe(p, -1, "美人"sv) && DstNe(p, -1, "R님"sv) && SrcNe(p, -1, "R長"sv) && SrcNe(p, -1, "提督"sv) && SrcNe(p, -1, "運転手"sv) && SrcNe(p, -1, "師匠"sv) && SrcNe(p, -1, "博士"sv) && SrcNe(p, -1, "教授"sv) && SrcNe(p, -1, "神父"sv)) ||
            (PumsaEq(p, -1, "13*"sv) && GramEq(p, -1, "WaWb"sv));
 }
 
@@ -4289,15 +4289,15 @@ bool RuleG150([[maybe_unused]] Item* p) {
 }
 
 // global 4000 stem pos 1 prio 160
-//     pos is 1** and gram has On and pos[+1] is 1** and gram[+1] has On
+//     pos is 1** and gram has Oj and pos[+1] is 1** and gram[+1] has On
 bool RuleG160([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Oj"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv));
 }
 
 // global 4001 stem pos 1 prio 170
-//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has On
+//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has Oj
 bool RuleG170([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "On"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Oj"sv));
 }
 
 // global 4100 stem pos 1 prio 180
@@ -4456,7 +4456,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL22, 0x63fee27b17126605ull},
     {RuleL23, 0xc779e017097dad25ull},
     {RuleL24, 0x997bd6d403455375ull},
-    {RuleL25, 0x7487fb2bd36b6d41ull},
+    {RuleL25, 0xd3acb9f0b452dfa7ull},
     {RuleL26, 0x3585dfd78286f36full},
     {RuleL27, 0x4bec2880dc8f978bull},
     {RuleL28, 0x76d0ff42f7b2666aull},
@@ -4720,7 +4720,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL286, 0x028cffbdb305139eull},
     {RuleL287, 0x210ef0258dd66521ull},
     {RuleL288, 0x63a02f40fc6a2e5bull},
-    {RuleL289, 0xe001ca47a1fc05e3ull},
+    {RuleL289, 0x59d2e69b7e2409faull},
     {RuleL290, 0x776fffbb4c9d28f4ull},
     {RuleL291, 0x1a03d2b8464b908dull},
     {RuleL292, 0xf0693e0ae0c0e714ull},
@@ -4758,7 +4758,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL324, 0xb64e47ce2a2bc78aull},
     {RuleL325, 0x1fe7bcfb89f2a006ull},
     {RuleL326, 0x96ce39f669f745cbull},
-    {RuleL327, 0xbad29e8385fd15b9ull},
+    {RuleL327, 0xee7a59a8c035f158ull},
     {RuleL328, 0xbb20f0b0364af855ull},
     {RuleL329, 0x6e3786f746e0c70aull},
     {RuleL330, 0xa35f874ccabb8cfcull},
@@ -4951,8 +4951,8 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG130, 0x60209eb785257c06ull},
     {RuleG140, 0xef64f925c202219dull},
     {RuleG150, 0x2405743392f641fcull},
-    {RuleG160, 0x44dc0dd94414cb52ull},
-    {RuleG170, 0x93e16d6cf2487ccaull},
+    {RuleG160, 0x57e4fc1b141b133eull},
+    {RuleG170, 0x93d3d56cf23cf026ull},
     {RuleG180, 0xb147e1d8e11a4f76ull},
     {RuleG190, 0x20c67167c24a264bull},
     {RuleG200, 0x6b080de836eac7c3ull},

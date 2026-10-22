@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:6310	村のなかで迷った。	마을 안에서 헤매었다.	fix	local

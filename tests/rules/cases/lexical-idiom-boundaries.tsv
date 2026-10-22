@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:oyasashii	先生はおやさしい。	선생님은 다정하다.	fix	lookup
 dict:oyasashii	先生はおやさしくて、親切です。	선생님은 다정하고, 친절합니다.	fix	lookup
-dict:oyasashii	先生はとてもおやさしいんです。	선생님은 매우 다정합니다.	fix	lookup
+dict:oyasashii	先生はとてもおやさしいんです。	선생님은 무척 다정합니다.	fix	lookup
 dict:oyasashii	先生はおやさしかった。	선생님은 다정했다.	fix	lookup
 dict:oyasashii	先生はおやさしくない。	선생님은 다정하지 않다.	fix	lookup
 dict:oyasashii	先生はやさしい。	선생님은 상냥하다.	keep	lookup

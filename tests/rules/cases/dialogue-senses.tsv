@@ -1,0 +1,71 @@
+rule	input	expected	kind	layer
+sound:open-tteka	ってかなんで来たの？	그보다, 왜 왔어?	fix	sound
+sound:open-tteka	ってか先輩、遅いですよ。	그보다 선배, 늦어요.	fix	sound
+sound:open-tteka	ていうか、もう帰ろうよ。	그보다, 이제 돌아가자.	fix	sound
+sound:open-tteka	……っていうか、誰？	……그보다, 누구?	fix	sound
+sound:open-tteka	っていうかさ、それ本当？	그보다, 그것 정말?	fix	sound
+sound:open-tteka	てかてかに光る。	번들번들에 빛난다.	keep	sound
+sound:lead-naa	なあ、ちょっと来て。	저기, 조금 와.	fix	sound
+sound:lead-naa	大事なことだ。なあ？	소중한 일이다. 그렇지?	fix	sound
+sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
+sound:lead-naa	そうだなあ、うん。	그래~, 응.	keep	sound
+phrase:なんていうか	なんていうか、変だね。	뭐랄까, 이상하네.	fix	builtin-phrase
+phrase:なんていうか	うん……なんていうかね……すごかった。	응……뭐랄까……대단했다.	fix	builtin-phrase
+dict:jisjk:103790	あっという間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
+phrase:わずかに	今朝はわずかに寒い。	오늘 아침은 조금 춥다.	fix	lookup
+phrase:最低でも	最低でも一週間はかかる。	최소한 일주일간은 걸린다.	fix	lookup
+phrase:何倍も	こっちの方が何倍も楽だ。	여기가 몇 배나 편하다.	fix	lookup
+dict:word:ayauku:narrowly	危うく転ぶところだった。	rule:dict:word:ayauku:narrowly=하마터면	fix	local
+dict:word:ayauku:narrowly	計画が危うくなった。	!rule:dict:word:ayauku:narrowly	keep	local
+dict:word:ayauku:narrowly	彼の嘘が立場を危うくする。	!rule:dict:word:ayauku:narrowly	keep	local
+dict:word:shizento:nature	気づけば自然と笑っていた。	정신을 차려 보니 자연스럽게 웃고 있었다.	fix	local
+dict:word:shizento:nature	自然と人間の関係を考える。	rule:dict:word:shizento:nature=자연과	keep	local
+dict:jisjk:35843	走ったら体中が痛い。	달리면 온몸이 아프다.	fix	lookup
+phrase:身体中	身体中に力が入らない。	온몸에 힘이 들어가지 않는다.	fix	lookup
+phrase:脱力する	試合が終わって一気に脱力した。	시합이 끝나 단번에 힘이 빠졌다.	fix	lookup
+phrase:寝返りを打つ	夜中に何度も寝返りを打った。	한밤중에 몇 번이나 뒤척였다.	fix	lookup
+dict:jisjk:95067	彼女は腰を振って踊った。	rule:dict:jisjk:95067=흔&L4@	fix	local
+dict:jisjk:95067	手を振って別れた。	손을 흔들어 헤어졌다.	keep	local
+dict:jisjk:95067	首を振って断った。	!rule:dict:jisjk:95067	keep	local
+dict:jisjk:4875	いやらしい目で見ないで。	야한 눈으로 보지 마.	fix	lookup
+phrase:こっちこそ	いや、こっちこそごめんね。	아니, 나야말로 미안해.	fix	lookup
+phrase:こっちこそ	こっちこそありがとう。	나야말로 고마워.	fix	lookup
+dict:jisjk:265354	あなたさえいてくれれば十分だ。	rule:dict:jisjk:265354=만	fix	local
+dict:jisjk:265354	雨さえ降らなければ出かけよう。	비만 내리지 않으면 나가자.	fix	local
+dict:jisjk:265354	君さえよかったら一緒に行こう。	너만 괜찮다면 함께 가자.	fix	local
+dict:jisjk:265354	名前さえ知らない。	!rule:dict:jisjk:265354	keep	local
+dict:word:tanoshimi:alone	明日のデート、楽しみ？	내일의 데이트, 기대돼?	fix	local
+dict:word:tanoshimi:alone	楽しみ！	기대돼!	fix	local
+dict:word:tanoshimi:alone	散歩が唯一の楽しみ。	!rule:dict:word:tanoshimi:alone	keep	local
+dict:word:tanoshimi:alone	人生の楽しみが増えた。	인생의 즐거움이 늘어났다.	keep	local
+dict:jisjk:374181	悪い、遅くなった。	미안하다, 늦어졌다.	fix	local
+dict:jisjk:374181	ごめん、悪かった。	미안, 미안했다.	fix	local
+dict:jisjk:374181	悪かったな、急に呼んで。	rule:dict:jisjk:374181=미안$AB@	fix	local
+dict:jisjk:374181	天気が悪いな。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374181	悪いのは私だ。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374181	悪い人じゃない。	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:374182	わるい、忘れてた。	rule:dict:jisjk:374182=미안$AB@	fix	local
+dict:jisjk:153760	彼は突然立ち上がった。	그는 갑자기 일어섰다.	fix	lookup
+phrase:突然の	突然の雨に降られた。	갑작스러운 비를 맞았다.	fix	lookup
+phrase:突然	ずいぶん突然だね。	꽤 갑작스럽네.	fix	lookup
+dict:jisjk:964	なんとなく窓の外を眺めた。	왠지 창 밖을 바라보았다.	fix	lookup
+dict:word:nantonaku:vaguely	なんとなくわかる気がする。	rule:dict:word:nantonaku:vaguely=어렴풋이	fix	local
+dict:word:nantonaku:vaguely	なんとなく嫌な予感がする。	!rule:dict:word:nantonaku:vaguely	keep	local
+dict:word:nantonaku:vaguely-kanji	何となく分かっていた。	rule:dict:word:nantonaku:vaguely-kanji=어렴풋이	fix	local
+phrase:なぞる	指で地図をなぞった。	손가락으로 지도를 더듬었다.	fix	lookup
+phrase:なぞる	昔の記憶をなぞる。	옛 기억을 더듬는다.	fix	lookup
+phrase:秘所	彼女の秘所に触れる。	그녀의 은밀한 곳에 접한다.	fix	lookup
+dict:jisjk:265314	僕にどうこうできる話じゃない。	나에게 어떻게 할 수 있는 이야기가 아니다.	fix	local
+dict:jisjk:265314	人の趣味にどうこう言うな。	사람의 취미에 이러쿵저러쿵 말하지 마.	keep	local
+dict:jisjk:78475	兄は予備校に通っている。	형은 입시학원에 다니고 있다.	fix	lookup
+dict:jisjk:171364	画材を買いに行く。	화구를 사러 간다.	fix	lookup
+dict:jisjk:94308	違う、そうじゃない。	아니다, 그렇지 않다.	fix	local
+dict:jisjk:94308	いや、違うよ。	아니, 아니야.	fix	local
+dict:jisjk:94308	え、違うの？	어, 아니야?	fix	local
+dict:jisjk:94308	違います。	아닙니다.	fix	local
+dict:jisjk:94308	「違う違う、逆だよ」	「아니야 아니야, 반대야」	fix	local
+dict:jisjk:94308	答えが違う。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:94308	全然違う。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:94308	違う人が来た。	!rule:dict:jisjk:94308	keep	local
+dict:jisjk:114502	ちがう！	아니다!	fix	local
+compose:aniya-casual	「勝つことだけが目的ではありませんよ」	「이기는 것만이 목적이 아니에요」	fix	compose

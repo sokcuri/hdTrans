@@ -3,3 +3,7 @@ compose:suru-join	剣術をマスターした。	검술을 마스터했다.	fix	
 compose:suru-join	ゲームをクリアして寝た。	게임을 클리어해 잤다.	fix	compose
 compose:suru-join	そうしよう。	그렇게 하자.	keep	compose
 compose:suru-join	変な顔をしている。	이상한 얼굴을 하고 있다.	keep	compose
+compose:suru-join	キスしたい。	키스하고 싶다.	fix	compose
+compose:suru-join	即答した。	즉답했다.	fix	compose
+compose:suru-join	我慢できない。	참을 수 없다.	fix	compose
+compose:suru-join	何してるの？	뭐해?	keep	compose

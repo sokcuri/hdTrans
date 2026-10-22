@@ -729,7 +729,12 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             }
         }
         const size_t before = e.Reach(rs, from, i);
-        if (before > end || SoundCovers(rs, from, i, ctx.extraBuiltin) || SoundWord(rs, from, end, ctx.extraBuiltin)) continue;  // もっと, せーの, おーい
+        // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
+        // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,
+        // おっかしい; not あっぶね, さっお).
+        const bool sound = SoundWord(rs, from, end, ctx.extraBuiltin);
+        const bool soundTsu = sound && r == U'っ' && rs[end] != U'と';
+        if (before > end || SoundCovers(rs, from, i, ctx.extraBuiltin) || (sound && !soundTsu)) continue;  // もっと, せーの, おーい
         if (cands.empty()) continue;
         int best = -1;
         bool spelled = false;
@@ -740,7 +745,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             // The long vowel of the e row only within a word that starts before the kana it
             // lengthens (せんせーが, not the めい of てめーは).
             size_t reach = v == 3 && !c.empty() ? (i >= 2 ? e.Reach(m, from, i - 1) : 0) : e.Reach(m, from, i);
-            if (reach <= i + c.size()) continue;
+            if (reach <= i + c.size() || (soundTsu && reach < i + 2 && !e.StemTagged(m, from, reach, "H"))) continue;
             const size_t far = reach;
             reach += end - i - c.size();
             if (reach > bestReach) {
