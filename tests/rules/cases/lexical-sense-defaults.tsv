@@ -24,7 +24,7 @@ dict:jisjk:349562	「まぁ……一応」	「뭐……일단」	fix	lookup
 dict:lex:maamaa:da	まぁまぁだ	그저 그렇다	fix	lookup
 dict:w:26726	私の絵は大したものじゃないんだ	내 그림은 별것 아니다	fix	lookup
 dict:w:26723	大したことじゃない	별일 아니다	fix	lookup
-dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대단한 자신이 아닌가」	keep	lookup
+dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대단한 자신이잖아」	keep	lookup
 dict:jisjk:116378	頭の脇に	머리의 옆에	fix	lookup
 dict:jisjk:116378	脇にどいて	옆에 물러나	fix	lookup
 dict:i:7772	もっと脇を締めて……	좀 더 겨드랑이를 붙여……	fix	lookup
@@ -48,14 +48,14 @@ dict:jisjk:5834	心のどこかで『優しいからそう言ってく	마음의
 dict:jisjk:31505	眼光がほんの一瞬鋭く光った	안광이 그저 순간 날카롭게 빛났다	fix	lookup
 dict:jisjk:722	ちなみにリクエストは	참고로 리퀘스트는	fix	lookup
 dict:jisjk:23777	能力は普段とほぼ変わらない	능력은 평소와 거의 변함없다	fix	lookup
-dict:jisjk:92821	森下さんの頭を撫でてしまったんだろ	모리시타씨의 머리를 쓰다듬고 있고 끝낸 거지	fix	lookup
+dict:jisjk:92821	森下さんの頭を撫でてしまったんだろ	모리시타 씨의 머리를 쓰다듬고 있고 끝낸 거지	fix	lookup
 dict:jisjk:593	落ち着くまでそっと抱きしめて待つ	침착할 때까지 살며시 꼭 껴안아 기다린다	fix	lookup
 dict:jisjk:53243	ここはやっぱりハンバーグがうまそうだなぁ	여기는 역시 햄버그가 먹음직스럽구나	fix	lookup
 dict:jisjk:26143	夕飯も食べてないし	저녁도 먹지 않고	fix	lookup
 dict:jisjk:153518	足を組んだまま通知表を眺めていた	다리를 꼰 채로 성적표를 바라보고 있었다	fix	lookup
 dict:jisjk:79589	家族の首を入れて遊園地を訪れた	가족의 목을 넣어 놀이공원을 방문했다	fix	lookup
 dict:jisjk:50594	いつものようにチョコを食べて	여느 때처럼 초콜릿을 먹어	fix	lookup
-dict:jisjk:7576	ナナイさんが微かに微笑んだように見えた	나나이씨가 희미하게 미소 지은 것처럼 보였다	fix	lookup
+dict:jisjk:7576	ナナイさんが微かに微笑んだように見えた	나나이 씨가 희미하게 미소 지은 것처럼 보였다	fix	lookup
 dict:jisjk:96056	ふたりの声に慌てて顔をあげると	rule:dict:jisjk:96056=황급&AW@	fix	local
 dict:jisjk:96056	慌てて手を伸ばすが	황급히 손을 뻗지만	fix	local
 dict:jisjk:96056	全然慌ててるじゃないっ	!rule:dict:jisjk:96056	keep	local
@@ -63,4 +63,4 @@ dict:jisjk:5128	弾力もすごいよね……なんか	탄력도 대단하지�
 dict:jisjk:5128	たしかにレナはすごいけど	확실히 레나는 대단한데	fix	local
 dict:jisjk:5128	すごい見てる	rule:dict:jisjk:5128=대단$KA@	fix	local
 dict:jisjk:268079	きーんと冷えててすっごくおいしいですよ～	끼잉 차가워져 있어 엄청 맛있어요~	fix	lookup
-dict:jisjk:90693	ＳとＮがぴったりくっついてるような感じ	S와 N이 딱 달라붙고 있는 것 같은 느낌	fix	lookup
+dict:jisjk:90693	ＳとＮがぴったりくっついてるような感じ	S와 N이 딱 들러붙어 있는 것 같은 느낌	fix	lookup

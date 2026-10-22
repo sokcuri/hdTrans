@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 phrase:nandato	「なんだと……」	「뭐라고……」	fix	builtin-phrase
 phrase:nandato	「夢って、なんだと思う？」	「꿈은, 뭐라고 생각해?」	fix	builtin-phrase
-phrase:nandato	子供の頃は、ずっと一緒なんだと思っていたけれど。	어릴 적은, 계속 함께야라고 생각하고 있었지만.	keep	builtin-phrase
+phrase:nandato	子供の頃は、ずっと一緒なんだと思っていたけれど。	어릴 적은, 계속 함께야라고 생각했지만.	keep	builtin-phrase
 phrase:daareda	「だーれだっ」	「누구게」	fix	builtin-phrase
 phrase:haihaai	「はいはーい！　じゃーあたしが知らせてくるっ！！」	「네네! 그러면 내가 알려 온다!!」	fix	builtin-phrase
 phrase:itterasshai	ふんふん、いってらっしゃーい。	흥흥, 잘 다녀와.	fix	builtin-phrase

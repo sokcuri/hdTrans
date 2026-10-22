@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 ending:学生じゃないか	なかなか面白い後輩じゃないか。	꽤 재미있는 후배잖아.	fix	builtin-ending
-ending:学生じゃないか	嬉野さんじゃないか。	우레시노씨잖아.	fix	builtin-ending
+ending:学生じゃないか	嬉野さんじゃないか。	우레시노 씨잖아.	fix	builtin-ending
 ending:学生じゃないか	「俺が？　気のせいじゃないか？」	「내가? 기분 탓이 아니야?」	keep	builtin-ending
 ending:静かじゃないか	「死んじゃったほうが楽じゃないか……！」	「죽어 버렸다 편이 편하잖아……!」	fix	builtin-ending
 ending:書いたじゃないですか	「以前、男湯の札を無視して入っていって騒ぎになったじゃないですか。	「이전, 남탕의 지폐를 무시해 들어가 소동이 됐잖아요.	fix	builtin-ending
