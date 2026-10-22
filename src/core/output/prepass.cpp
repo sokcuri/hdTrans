@@ -644,9 +644,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
         // the word after it.
         constexpr std::string_view kHonorifics[] = {"ちゃん", "さん", "くん", "君", "たん", "様", "さま", "殿", "氏"};
+        // So does a verb whose stem and ending the rules emptied (行こうと思って 가려고).
         while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
-               std::find(std::begin(kHonorifics), std::end(kHonorifics), items[nextIndex].surface) !=
-                   std::end(kHonorifics)) {
+               (std::find(std::begin(kHonorifics), std::end(kHonorifics), items[nextIndex].surface) !=
+                    std::end(kHonorifics) ||
+                (items[nextIndex].detailClass == DetailClass::Yougo && items[nextIndex].directIndex >= 0 &&
+                 items[nextIndex].ending.text.empty()))) {
             nextIndex++;
         }
         if (nextIndex != i + 1 && nextIndex < count) {
