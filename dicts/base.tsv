@@ -10923,7 +10923,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 か否か	0지 아닌지	S500			GN				jisjk:364301		
 か国	개국	N110	VPl	Ct	GN				jisjk:365480		
 か弱	연약$AB@	H7U0			GN				jisjk:4984		
-か所	개소	K110	VPl	Ct	GN				jisjk:105242		
+か所	군데	K110	VPl	Ct	GN				jisjk:105242		
 か月	개월	N110	UMe	Ct	GN				jisjk:104106		
 か月	개월	N200	UMe	Ct	GN				jisjk:353245		
 か細	가냘$AA@	H7U0			GN				jisjk:4983		
@@ -54771,7 +54771,6 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 カ変	카변	N110	UTs		GN				jisjk:169254		
 カ年	개년	N110		Ct	GN				jisjk:13954		
 カ性ソーダ	가성 소다	N110			GN				jisjk:158414		
-カ所	개소	N110	VPl	Ct	GN				jisjk:13955		
 カ所	군데	N110	VPl	Ct	GN				jisjk:115279		
 カ所だけ	곳 뿐	N110		Ct	GN				jisjk:152118		
 カ文字	다리	N110			GN				jisjk:45734		
@@ -58087,7 +58086,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ケール	케일	N110	VFd		GN				jisjk:369638		
 ケ国	개국	N110	QNN	Ct	GN				jisjk:363614		
 ケ店	개점	N110	VBl	Ct	GN				jisjk:152178		
-ケ所	개소	N110	VPl	Ct	GN				jisjk:105215		
+ケ所	군데	N110	VPl	Ct	GN				jisjk:105215		
 ケ月	개월	N110		Ct	GN				jisjk:105214		
 ケ研	케이스연구	N110			GN				jisjk:161410		
 ケ研	케이스연구	N110			GN				jisjk:161411		
@@ -93924,13 +93923,13 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ヴロイラー	broiler	N110			GN				jisjk:60099		
 ヴローカー	브로커	N110			GN				jisjk:60098		
 ヵ		N110			GN				jisjk:268224		
-ヵ所	개소	K110	VPl	Ct	GN				jisjk:364281		
+ヵ所	군데	K110	VPl	Ct	GN				jisjk:364281		
 ヵ月	개월	N110	UMe	Ct	GN				jisjk:14202		
 ヵ月強	개월 남짓	N110		Ct	GN				jisjk:152633		
 ヵ月超	개월 이상	N110		Ct	GN				jisjk:152690		
 ヵ月間	개월간	N110	UMe	Ct	GN				jisjk:152632		
 ヵ条	개조	N110		Ct	GN				jisjk:152742		
-ヶ所	개소	K110	VPl	Ct	GN				jisjk:364283		
+ヶ所	군데	K110	VPl	Ct	GN				jisjk:364283		
 ヶ月	개월	N110	UMe	Ct	GN				jisjk:340216		
 ヶ月毎	개월마다	N110		Ct	GN	2886	||1 G-1== "NjNd"	수량 표현 바로 뒤에서 ヶ月毎를 개월마다로 고른다. (미발동: rare-word)	jisjk:340186		
 ヶ月間	개월간	N110		Ct	GN	1805	||1 G-1== "NjNd"	ヶ月間을 숫자 문법 코드가 있는 단어 뒤에서 '개월간'으로 선택한다.	jisjk:257360		
@@ -125935,7 +125934,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 個性	개성	N110			GN				jisjk:14859		
 個性的	개성적	N110			GN				jisjk:182377		
 個我	개아	N110	VHn		GN				jisjk:181688		
-個所	개소	N110	VPl	Ct	GN				jisjk:14860		
+個所	군데	N110	VPl	Ct	GN				jisjk:14860		
 個所	곳	N110			GN	4981	||1 P-1== "4**7**8**"	個所를 동사·형용사·형용동사 뒤에서 곳으로 고른다. (미발동: rare-word)	jisjk:374912		
 個数	개수	N110			GN				jisjk:14861		
 個数論	개수론	N110			GN				jisjk:160551		
@@ -294969,7 +294968,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 箆岳	노노다케	N130	VPl		GN				jisjk:219480		
 箆岳	노노다케	N130	VPl		GN				jisjk:219481		
 箆津	노츠	N130	QCTVPl		GN				jisjk:319426		
-箇所	개소	N110	VPl	Ct	GN				jisjk:14921		
+箇所	군데	N110	VPl	Ct	GN				jisjk:14921		
 箇月	개월	N110	UMe	Ct	GN				jisjk:14922		
 箇条	조목	N110	VBkVSwULw		GN				jisjk:168334		
 箇条書き	조목별로 나누어 쓴 글	N110	VBkVSw		GN				jisjk:168346		

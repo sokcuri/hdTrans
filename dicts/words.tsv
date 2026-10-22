@@ -12111,7 +12111,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 俳諧	하이카이 렌가	N110			GN				llm		はいかい	w:12103
 俵物	다와라모노	N110			GN				xxx llm	1		w:12104
 倉頡輸入法	창힐 입력법	N110	UTt		GN						そうけつゆにゅうほう	w:12105
-個所	군데	N110			GN				xxx	1	かしょ	w:12106
+個所	부분	N110			GN				xxx	1	かしょ	w:12106
 個虫	개충	N110			GN				xxx llm	1		w:12107
 倍良	놀래기과	N110			GN						べら	w:12108
 倒さ	거꾸로	N110			GN				llm		さかさ	w:12109
