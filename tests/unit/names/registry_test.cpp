@@ -39,7 +39,12 @@ const dict::Snapshot* Dictionary() {
          "ひかり\t빛\tN110\t\t\tGN\t26\n"
          "ひよこ\t병아리\tN110\tVAm\t\tGN\t29\n"
          "話\t이야기&AV@\tM443\t\t\tGN\t30\n"
-         "なま\t날것\tN110\t\t\tGN\t32\n"},
+         "なま\t날것\tN110\t\t\tGN\t32\n"
+         "秋刀魚\t꽁치\tN110\t\t\tGN\t33\n"
+         "さんま\t꽁치\tN110\t\t\tGN\t34\n"
+         "さんま\t산마\tN130\tQPN\tWb\tGN\t35\n"
+         "千里\t천리\tN110\t\t\tGN\t36\n"
+         "ちさと\t치사토\tN130\tQPN\tWb\tGN\t37\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -212,6 +217,10 @@ HD_TEST(names_labels) {
     }
     const std::vector<std::string> mika = Scan(snap, Repeat("三日(みか)が来た。", 3)).Names();
     HD_CHECK(std::find(mika.begin(), mika.end(), "三日") != mika.end());
+    // A reading that is also a name reads the word when a word of it has the base's Korean.
+    HD_CHECK(Scan(snap, Repeat("秋刀魚(さんま)を焼いた。", 3)).Names().empty());
+    const std::vector<std::string> chisato = Scan(snap, Repeat("千里(ちさと)が来た。", 3)).Names();
+    HD_CHECK(std::find(chisato.begin(), chisato.end(), "千里") != chisato.end());
     // A given name split from a full name that is a common word does not stand for the
     // person elsewhere (前原光: 光 stays the word).
     const std::vector<std::string> hikaru = Scan(snap, Repeat("前原光は来た。", 3)).Names();

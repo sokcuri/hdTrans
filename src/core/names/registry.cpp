@@ -153,10 +153,29 @@ void Registry::Forget(const Evidence& evidence) {
 // Whether a gloss or ruby reading marks a word's reading, not a name: the base is a common
 // word, or ends in one, and the reading is one too: its own reading (私（わたくし）,
 // 夾叉（きょうさ）) or another word read in its place (提督（あなた）, 各艦（ふね）). A
-// reading that is no word still names (三日（みか）, 千里（ちさと）).
+// reading that is no word still names (三日（みか）, 千里（ちさと）), and so does one that is
+// also a name, unless a word of it has the base's Korean (秋刀魚（さんま）: 꽁치).
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
-    if (!r.common || r.person) return false;
+    if (!r.common) return false;
+    if (r.person) {
+        if (snap_ == nullptr) return false;
+        const auto words = [&](std::string_view s) {
+            std::set<std::string_view> out;
+            for (const dict::Candidate& rec : snap_->RetrieveRecords(s, dict::LookupMode::General)) {
+                if (rec.codes == nullptr || rec.source != s) continue;
+                const std::string_view sem = rec.codes->sem.Text(), attr = rec.codes->gram.Text();
+                if (sem.starts_with("QPN") || sem.starts_with("QCT") || attr.starts_with("Wa") || attr.starts_with("Wb")) {
+                    continue;
+                }
+                out.insert(rec.target);
+            }
+            return out;
+        };
+        const std::set<std::string_view> own = words(base);
+        const std::set<std::string_view> read = words(reading);
+        if (std::none_of(read.begin(), read.end(), [&](std::string_view t) { return own.count(t) != 0; })) return false;
+    }
     // The base, or the word that ends it (各艦（ふね）).
     for (std::string_view b = base; !b.empty(); b.remove_prefix(text::DecodeRune(b).size)) {
         const DictFlags f = Flags(b);
