@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+rewrite:past-progressive-adnominal	読んでいた本から顔を上げる。	읽던 책에서 고개를 든다.	fix	rewrites
+rewrite:past-progressive-adnominal	≪残念だけれど、貴女たちが住んでいた寮は現在Ａクラスの子たちが暮らしているわ≫	≪유감이지만, 당신들이 살던 기숙사는 현재 A반의 아이들이 살고 있어≫	fix	rewrites
+rewrite:past-progressive-adnominal	泣きじゃくっていた千里が、ようやく落ち着いてきた。	흐느껴 울던 천리가, 드디어 침착해 왔다.	fix	rewrites
+rewrite:past-progressive-adnominal	子供が右手で抱えていたパンを捨て、代わりに銃を抜いた。	아이가 오른손으로 움켜 쥐고 있던 빵을 버려 대신에 총을 뽑았다.	keep	rewrites
+rewrite:past-progressive-adnominal	「ああ……うちに来て漫画読んでたもんね」	「아……치러 와 만화 읽고 있었던 것이네」	keep	rewrites
+rewrite:past-progressive-adnominal	「おまえたち、何をしていたんだ」	「너 서, 뭘 하고 있던 거야」	keep	rewrites

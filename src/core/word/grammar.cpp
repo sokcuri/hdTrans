@@ -532,6 +532,63 @@ void SimpleAspect(Flusher& f) {
     }
 }
 
+namespace {
+
+// Nouns after ていた that name the clause rather than a thing in it (していたの, していたこと,
+// していたようだ); they keep 고 있던.
+constexpr std::string_view kClauseNouns[] = {"の", "ん", "こと", "事", "もの", "もん", "物", "よう", "みたい", "はず", "わけ", "訳"};
+
+// Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state
+// the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit.
+constexpr std::string_view kHoldingVerbs[] = {
+    "잡다", "쥐다", "움켜쥐다", "움켜 쥐다", "붙잡다", "안다", "껴안다", "끌어안다", "들다", "물다", "악물다", "입다", "신다",
+    "끼다", "차다", "메다", "업다", "품다", "대다", "가지다", "지니다", "숙이다", "잊다", "알다", "기억하다", "달라붙다", "붙다", "앉다", "눕다", "서다", "앞두다",
+};
+
+// Whether lemma is one of kHoldingVerbs or a phrase that ends in one (이를 악물다).
+bool HoldingVerb(std::string_view lemma) {
+    return std::any_of(std::begin(kHoldingVerbs), std::end(kHoldingVerbs), [&](std::string_view v) {
+        return lemma == v || (lemma.ends_with(v) && lemma.substr(0, lemma.size() - v.size()).ends_with(" "));
+    });
+}
+
+// Whether item it is followed by a noun that ていた describes, not at the end of the utterance
+// (楽しみにしてたさ).
+bool DescribedNoun(const Worker& w, const Item* it) {
+    const Item* n = it->next;
+    return n != nullptr && n->tokenIndex == it->tokenIndex && n->selected >= 0 && At(n->Code(n->selected), 0) == '1' &&
+           !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
+           !std::any_of(std::begin(kClauseNouns), std::end(kClauseNouns),
+                        [&](std::string_view c) { return n->group->surface.starts_with(c); });
+}
+
+}  // namespace
+
+void PastProgressiveAdnominal(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr) continue;
+        if (HoldingVerb(ItemLemma(f, it, it->selected))) continue;
+        if ((e->dst == "1고 있었던" || e->dst == "1고 있던") && DescribedNoun(f.w, it)) {
+            it->AssignDirectSlot(it->DirectIndex(), "1던");
+            continue;
+        }
+        const std::string_view te = it->DirectSurface();
+        Item* n = it->next;
+        if (e->dst != "1고" || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr || n->group->surface != "い" ||
+            n->selected < 0 || n->DirectIndex() < 0 || n->DirectSurface() != "た" ||
+            !ItemLemma(f, n, n->selected).starts_with("있") || !DescribedNoun(f.w, n)) {
+            continue;
+        }
+        const Entry* d = n->DirectEntry(n->DirectIndex());
+        if (d == nullptr || d->dst != "8") continue;
+        it->AssignDirectSlot(it->DirectIndex(), "1던");
+        n->AssignEntrySurface(n->selected, "");
+        n->AssignDirectSlot(n->DirectIndex(), "");
+    }
+}
+
 void NotYet(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* n = it->next;

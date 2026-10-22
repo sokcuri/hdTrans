@@ -29,6 +29,7 @@ void Flush(Flusher& f) {
         TeRequest(f);
         ResultState(f);
         SimpleAspect(f);
+        PastProgressiveAdnominal(f);
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);

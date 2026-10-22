@@ -73,6 +73,8 @@ void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 // The ている of a verb of thinking, saying or perceiving read as the simple form.
 void SimpleAspect(Flusher& f);
+// The progressive ていた before a noun it describes read as 던 (読んでいた本 읽던 책).
+void PastProgressiveAdnominal(Flusher& f);
 void NotYet(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);

@@ -501,8 +501,8 @@ L3244	先生が本を説明された。	선생님이 책이 설명되었다.	cur
 L3244	部屋を掃除された。	방이 청소되었다.	current	local
 L3255	そんな話があるかっ！	그런 이야기가 있다!	current	local
 L3255	お前なんか知るかっ！	너 같은 것 안다!	current	local
-L3258	私が待ってた電車はまだ来ない。	내가 기다리고 있었던 전철은 아직 오지 않는다.	current	local-ending
-L3258	さっき読んでた本を貸してください。	조금 전 읽고 있었던 책을 빌려 주세요.	current	local-ending
+L3258	私が待ってた電車はまだ来ない。	내가 기다리던 전철은 아직 오지 않는다.	current	local-ending
+L3258	さっき読んでた本を貸してください。	조금 전 읽던 책을 빌려 주세요.	current	local-ending
 L3261	この仕事は今日中に終わりそう。	이 일은 오늘중에 끝날 것 같다.	current	local
 L3261	あのケーキ、とても美味しそう。	그 케이크, 무척 맛있을 것 같다.	current	local
 L3263	嫌がらせをされた。	괴롭힘을 당했다.	current	local
