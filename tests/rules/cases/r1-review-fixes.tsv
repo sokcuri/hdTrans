@@ -27,3 +27,7 @@ rewrite:prepared-state	ポスターが貼ってある。	포스터가 붙여 있
 rewrite:prepared-state	短剣には毒が塗ってあった。	단검에는 독이 발라 있었다.	fix	rewrites
 rewrite:prepared-state	窓を開けてある。	창을 열어 두었다.	keep	rewrites
 rewrite:prepared-state	切符を買ってある。	표를 사 두었다.	keep	rewrites
+rewrite:passive-records	ついにこの本を書き上げられた。	마침내 이 책을 다 쓸 수 있었다.	fix	rewrites
+rewrite:passive-records	俺は架子に腕を絡められたまま、この道を歩く。	나는 가자에게 팔을 걸어진 채로, 이 길을 걷는다.	keep	rewrites
+rewrite:passive-records	「というか、なんでまた朝早く集合をかけられたんだ？」	「이라고 할까, 왜 또 아침 일찍 집합을 걸쳐진 거야?」	keep	rewrites
+rewrite:passive-records	固くて高品質な板を敷き詰められた床は	단단해서 고품질인 판을 전면에 깔아진 바닥은	keep	rewrites

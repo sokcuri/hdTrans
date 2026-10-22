@@ -68,8 +68,27 @@ constexpr std::string_view kAbilityVerbs[] = {
     "続け", "受け止め", "乗り越え", "生き延び", "逃げ", "着",
 };
 
-// Ichidan stems whose られた after an object is mostly the potential (新年を迎えられた).
-constexpr std::string_view kObjectAbilityVerbs[] = {"迎え", "任せ"};
+// Ichidan stems of acts done to someone, whose narrative られた after an object is the passive
+// (決断を命じられた, 罵声を浴びせられた, 集合をかけられた, 場所を入れ替えられて). After an object
+// other verbs are the potential (書き上げられた, 新年を迎えられたこと) unless the object is the
+// body or what one wears (腕を絡められ, 顔を近づけられ) or the verb describes the noun after it
+// (板を敷き詰められた床).
+constexpr std::string_view kObjectPassiveVerbs[] = {
+    "命じ", "禁じ", "告げ", "浴びせ", "付け加え", "投げ", "割り当て", "課せ", "与え", "教え", "見せ", "封じ", "尋ね",
+    "舐め", "押し付け", "押しつけ", "突きつけ", "突き付け", "かけ", "掛け", "込め", "閉め", "開け", "入れ替え", "取り替え",
+    "括り付け", "縛り付け",
+};
+
+// Whether the object of を, item o, is a part of the body or what one wears (VBp, VAc).
+bool BodyObject(const Item* o) {
+    if (o == nullptr) return false;
+    const std::string_view attr = o->Attr(std::max(o->selected, 0));
+    for (std::size_t i = 0; i + 3 <= attr.size(); i += 3) {
+        const std::string_view c = attr.substr(i, 3);
+        if (c == "VBp" || c == "VAc") return true;
+    }
+    return false;
+}
 
 // Whether stem is a compound verb of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 bool CompoundAction(std::string_view stem) {
@@ -90,6 +109,20 @@ bool Transitive(const Item* it) {
     return false;
 }
 
+// Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと,
+// していたようだ, 迎えられたこと).
+constexpr std::string_view kClauseNouns[] = {"の", "ん", "こと", "事", "もの", "もん", "物", "よう", "みたい", "はず", "わけ", "訳"};
+
+// Whether item it is followed by a noun that the verb describes, not at the end of the
+// utterance (楽しみにしてたさ); before selection the first candidate of the next item counts.
+bool DescribedNoun(const Worker& w, const Item* it) {
+    const Item* n = it->next;
+    return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
+           !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
+           !std::any_of(std::begin(kClauseNouns), std::end(kClauseNouns),
+                        [&](std::string_view c) { return n->group->surface.starts_with(c); });
+}
+
 // The passive reading of a られた, られて or られ、 with no other cue.
 bool NarrativePassive(const Item* it, std::string_view rest) {
     if (!rest.starts_with("た") && !rest.starts_with("て") && !rest.starts_with(kJaComma)) return false;
@@ -100,14 +133,15 @@ bool NarrativePassive(const Item* it, std::string_view rest) {
 //   - a negative, conditional or volitional form and the polite non-past are potential;
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
-//   - going back through the clause, the nearest を (potential unless listed or a narrative
-//     form) or an agent
+//   - going back through the clause, the nearest を (potential unless listed, or a narrative
+//     form of a verb of kObjectPassiveVerbs, after the body or before a noun it describes)
+//     or an agent
 //     に, から, によって, により after a thing-free word decides;
 //   - listed verbs and narrative forms are passive;
 //   - a subject は or が that is a thing makes the reading passive, unless the verb is the
 //     plain non-past form;
 //   - otherwise potential.
-bool PassiveReading(const Item* it, std::string_view rest) {
+bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
     constexpr std::string_view kPotentialForms[] = {"な", "ず", "ぬ", "ん", "ませ", "ます", "れば", "よう", "たら", "たり"};
     for (const std::string_view p : kPotentialForms) {
         if (rest.starts_with(p)) return false;
@@ -121,7 +155,9 @@ bool PassiveReading(const Item* it, std::string_view rest) {
     const Item* subject = nullptr;
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
-        if (s == "を" && !listed && (!NarrativePassive(it, rest) || InSet(kObjectAbilityVerbs, it->group->surface))) {
+        if (s == "を" && !listed &&
+            (!NarrativePassive(it, rest) ||
+             !(InSet(kObjectPassiveVerbs, it->group->surface) || BodyObject(p->prev) || DescribedNoun(w, it)))) {
             return false;
         } else if (s == "に" || s == "から" || s == "によって" || s == "により") {
             const Item* a = p->prev;
@@ -246,7 +282,7 @@ void PassiveRecords(Flusher& f) {
         std::string_view rest = From(it->text, it->start + static_cast<long>(it->group->surface.size()));
         if (!rest.starts_with("られ")) continue;
         rest.remove_prefix(std::string_view("られ").size());
-        if (!PassiveReading(it, rest)) continue;
+        if (!PassiveReading(f.w, it, rest)) continue;
         it->detail->record = 1;
         for (Entry* e : it->group->entries) {
             if (e->gattr.ends_with("Ka")) e->gattr = e->gattr.substr(0, e->gattr.size() - 2) + "Pi";
@@ -552,9 +588,6 @@ void SimpleAspect(Flusher& f) {
 
 namespace {
 
-// Nouns after ていた that name the clause rather than a thing in it (していたの, していたこと,
-// していたようだ); they keep 고 있던.
-constexpr std::string_view kClauseNouns[] = {"の", "ん", "こと", "事", "もの", "もん", "物", "よう", "みたい", "はず", "わけ", "訳"};
 
 // Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state
 // the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit.
@@ -570,15 +603,6 @@ bool HoldingVerb(std::string_view lemma) {
     });
 }
 
-// Whether item it is followed by a noun that ていた describes, not at the end of the utterance
-// (楽しみにしてたさ).
-bool DescribedNoun(const Worker& w, const Item* it) {
-    const Item* n = it->next;
-    return n != nullptr && n->tokenIndex == it->tokenIndex && n->selected >= 0 && At(n->Code(n->selected), 0) == '1' &&
-           !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
-           !std::any_of(std::begin(kClauseNouns), std::end(kClauseNouns),
-                        [&](std::string_view c) { return n->group->surface.starts_with(c); });
-}
 
 }  // namespace
 
