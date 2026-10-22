@@ -231820,7 +231820,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 朧気	어렴풋%A1@	G8U0			GN				jisjk:2750		
 朧気	오보로케	N130	QCTVPl		GN				jisjk:280755		
 木	나무	N110	XXX		GN				jisjk:116294		
-木	목	N110	UMe	J5Mo	GN	1136	||1 G+0== "Td"	木는 문장에 홀로 있거나 문법 코드 Td가 맞으면 요일 약칭 목으로 고른다. (미발동: rare-context)	jisjk:116295		
+木	목	N110		J5Mo	GN	1136	||1 G+0== "Td"	木는 문장에 홀로 있거나 문법 코드 Td가 맞으면 요일 약칭 목으로 고른다. (미발동: rare-context)	jisjk:116295		
 木	목	N110		On	GN				jisjk:287532		
 木々も色づきはじめ	단풍도 곱게 물들기 시작하여	A9D0			GN				jisjk:263699		
 木々高太郎	기기 다카타로	N130	VHn		GN				jisjk:213852		
