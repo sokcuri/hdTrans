@@ -720,7 +720,7 @@ L5067	彼は何だかんだと理由をつけて断った。	그는 이러니저
 L5088	昨日はお腹すいた。	어제는 배 고팠다.	current	local
 G30	電車では窓側席に座りたい。	전철에서는 창가석에 앉고 싶다.	current	global-stem
 G40	小顔になるマッサージを試した。	소얼굴이 되는 맛사지를 시험했다.	current	global-stem
-G80	紙を十枚ください。	종이를 10매 주세요.	current	global-stem
+G80	紙を十枚ください。	종이를 10장 주세요.	current	global-stem
 G80	千ウォン札を財布に入れた。	천원 지폐를 지갑에 넣었다.	current	global-stem
 G90	兵士たちは前線に立った。	병사들은 전선에 섰다.	current	global-stem
 G100	― 梅 ―	― 매 ―	current	global-stem
