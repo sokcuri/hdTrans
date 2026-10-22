@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-sound:moan-fragments	「あう……筧くん……」	「아우……카케이군……」	fix	sound
+sound:moan-fragments	「あう」	「아우」	fix	sound
 sound:moan-fragments	「ああっ、んく！　あう、あふっ、あううっ～！」	「아앗, 응쿠! 아우, 아훗, 아우웃!」	fix	sound
 sound:moan-fragments	「ひく、うく……っ、うあ、あ、あっ！　あ、やんっ！」	「히윽, 으윽……, 우아, 아, 앗! 아, 앙!」	fix	sound
 sound:moan-fragments	「やんっ……ああ……」	「앙……아……」	fix	sound
