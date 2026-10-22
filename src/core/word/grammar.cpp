@@ -680,13 +680,28 @@ void NotYet(Flusher& f) {
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());
         if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || (n->group->surface != "いな" && n->group->surface != "な") ||
-            ItemLemma(f, n, n->selected) != "않다" || !std::any_of(std::begin(kNotYetVerbs), std::end(kNotYetVerbs),
-                                                                    [&](std::string_view v) { return it->group->surface.ends_with(v); })) {
+            ItemLemma(f, n, n->selected) != "않다") {
+            continue;
+        }
+        // The ていない of a potential verb says it has not managed (描けていない 그리지 못했다), where
+        // 할 수 있지 않다 is no Korean.
+        const std::string_view te = it->DirectSurface();
+        const bool potential = (te.ends_with("て") || te.ends_with("で")) &&
+                               (it->detail->record == 4 || it->EntryText(it->selected) == "할 수 &HN@");
+        if (!potential && !std::any_of(std::begin(kNotYetVerbs), std::end(kNotYetVerbs),
+                                       [&](std::string_view v) { return it->group->surface.ends_with(v); })) {
             continue;
         }
         Entry* d = n->DirectEntry(n->DirectIndex());
         // A plain ない (気付かない) changes only before a terminal ending; its attributive keeps 않다.
-        if (n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
+        if (!potential && n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
+        if (potential) {
+            if (it->detail->record == 4) {
+                it->detail->record = 0;
+            } else {
+                it->AssignEntrySurface(it->selected, "&AV@");
+            }
+        }
         output::Conjugated target = output::Conjugating("못하다", '$', "", f.families);
         if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, target.target);
         if (d == nullptr) continue;
