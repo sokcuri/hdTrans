@@ -102,12 +102,14 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
                     d.kind = 10;
                 }
             } else if (kind == 3 && d.kind == 6) {
-                if (Starts(tail, kJaShitai) || Starts(tail, kJaShitakatta) || (Starts(tail, kJaShitaku) && Taku(tail.substr(std::string_view("し").size()))) ||
+                if (Starts(tail, kJaShitai) || Starts(tail, kJaShitakatta) ||
+                    (Starts(tail, kJaShitaku) && Taku(tail.substr(std::string_view("し").size()))) ||
                     Starts(tail, kJaShitakereba) || Starts(tail, kJaShitaki)) {
                     d.kind = 10;
                 }
             } else if (kind == 9 && d.kind == 6) {
-                if (Cut(tail, 2, 4) == kJaTai || Cut(tail, 2, 8) == kJaTakatta || (Cut(tail, 2, 4) == kJaTaku && Taku(tail.substr(text::DecodeRune(tail).size))) ||
+                if (Cut(tail, 2, 4) == kJaTai || Cut(tail, 2, 8) == kJaTakatta ||
+                    (Cut(tail, 2, 4) == kJaTaku && Taku(tail.substr(text::DecodeRune(tail).size))) ||
                     Cut(tail, 2, 8) == kJaTakereba || Cut(tail, 2, 4) == kJaTaki) {
                     d.kind = 10;
                 }
