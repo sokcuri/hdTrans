@@ -120,14 +120,20 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
 }
 
 // The contracted spoken form of 주, 두 and 되 before 어 and 었 at the start of s (와 주어 와
-// 줘, 됐어) and the bytes it replaces; {} for none. 주어지다 (be given) keeps its 주어.
+// 줘, 됐어) and the bytes it replaces; {} for none. The nouns 주어 (subject) and 두어 (a
+// couple) keep their form before a particle or a counter, and so does 주어지다 (be given,
+// 주어졌다).
 std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s) {
     static constexpr std::pair<std::string_view, std::string_view> kForms[] = {
         {"주어", "줘"}, {"주었", "줬"}, {"두어", "둬"}, {"두었", "뒀"}, {"되어", "돼"}, {"되었", "됐"},
     };
+    static constexpr std::string_view kNounAfter[] = {"지", "진", "졌", "져", "가", "는", "를", "의", "로", "와", "에", "이",
+                                                      " 번", " 개", " 명", " 시간", " 차례", " 마디", " 걸음", " 달"};
     for (const auto& [written, spoken] : kForms) {
         if (!s.starts_with(written)) continue;
-        if (written == "주어" && (s.substr(written.size()).starts_with("지") || s.substr(written.size()).starts_with("진"))) {
+        const std::string_view rest = s.substr(written.size());
+        if (written.ends_with("어") && !written.starts_with("되") &&
+            std::any_of(std::begin(kNounAfter), std::end(kNounAfter), [&](std::string_view n) { return rest.starts_with(n); })) {
             return {};
         }
         return {spoken, written.size()};

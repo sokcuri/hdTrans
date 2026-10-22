@@ -542,23 +542,24 @@ std::string DropEchoedGlosses(std::string_view line) {
     return Utf8(rs);
 }
 
-// line with the literal 무슨 말을 하다 of a retort (何言ってるの, 何を言ってるんですか) written
-// as the idiom 무슨 소리야 or 무슨 소리예요, where it ends a clause: before a mark, a closing
-// bracket or the end. A report of what was said (무슨 말을 했는지) keeps the verb.
+// line with the literal 무슨 소리를 하다 of a retort (何言ってるの, 何を言ってるんですか; the
+// dictionary reads it so only for the て form of 言う) written as the idiom 무슨 소리야 or
+// 무슨 소리예요, where it ends a clause: before a mark, a closing bracket or the end.
 std::string RetortIdioms(std::string_view line) {
     struct Idiom {
         std::string_view literal, idiom;
     };
     static constexpr Idiom kIdioms[] = {
-        {"무슨 말을 하고 있는 거야", "무슨 소리야"}, {"무슨 말을 하는 거야", "무슨 소리야"},
-        {"무슨 말을 하는거야", "무슨 소리야"},       {"무슨 말을 하고 있어", "무슨 소리야"},
-        {"무슨 말을 하는 건데", "무슨 소리야"},      {"무슨 말을 해", "무슨 소리야"},
-        {"무슨 말을 하고 있습니까", "무슨 소리예요"}, {"무슨 말을 하는 겁니까", "무슨 소리예요"},
-        {"무슨 말을 하는 거예요", "무슨 소리예요"},  {"무슨 말을 하고 있어요", "무슨 소리예요"},
-        {"무슨 말을 합니까", "무슨 소리예요"},       {"무슨 말을 해요", "무슨 소리예요"},
+        {"무슨 소리를 하고 있는 거야", "무슨 소리야"}, {"무슨 소리를 하는 거야", "무슨 소리야"},
+        {"무슨 소리를 하는거야", "무슨 소리야"},       {"무슨 소리를 하고 있어", "무슨 소리야"},
+        {"무슨 소리를 하는 건데", "무슨 소리야"},      {"무슨 소리를 해", "무슨 소리야"},
+        {"무슨 소리를 하고 있습니까", "무슨 소리예요"}, {"무슨 소리를 하는 겁니까", "무슨 소리예요"},
+        {"무슨 소리를 하는 거예요", "무슨 소리예요"},  {"무슨 소리를 하고 있어요", "무슨 소리예요"},
+        {"무슨 소리를 합니까", "무슨 소리예요"},       {"무슨 소리를 해요", "무슨 소리예요"},
+        {"무슨 소리를 하고 있습니다", "무슨 소리예요"},
     };
     std::string out(line);
-    for (std::size_t at = 0; (at = out.find("무슨 말을 ", at)) != std::string::npos;) {
+    for (std::size_t at = 0; (at = out.find("무슨 소리를 ", at)) != std::string::npos;) {
         bool done = false;
         for (const Idiom& i : kIdioms) {
             if (out.compare(at, i.literal.size(), i.literal) != 0) continue;
@@ -570,7 +571,7 @@ std::string RetortIdioms(std::string_view line) {
             done = true;
             break;
         }
-        if (!done) at += std::string_view("무슨 말을 ").size();
+        if (!done) at += std::string_view("무슨 소리를 ").size();
     }
     return out;
 }

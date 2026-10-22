@@ -478,8 +478,10 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                         (end == p + 1 && end < rs_.size() && In(rs_[end], U"―─—…‥"));
             }
             // おい also calls right before a name or a word in kanji or katakana (おい田中,
-            // おいチビ), which no verb form of 置く or 老いる starts.
-            if (s.key == U"オイ" && end < rs_.size() && (text::IsKanji(rs_[end]) || IsKatakanaRune(rs_[end]))) {
+            // おいチビ), which no verb form of 置く or 老いる starts; 追い and 生い spelled in
+            // kana start compounds there (おい茂る, おい立ち, おい払う).
+            if (s.key == U"オイ" && end < rs_.size() && (text::IsKanji(rs_[end]) || IsKatakanaRune(rs_[end])) &&
+                !In(rs_[end], U"茂立払出込抜越掛詰求付回続")) {
                 pause = true;
             }
             if (!start || (!pause && !s.open) || IsKatakanaRune(rs_[p])) continue;

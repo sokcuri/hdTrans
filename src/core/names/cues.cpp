@@ -10,6 +10,8 @@
 #include "core/names/chars.h"
 #include "core/names/labels.h"
 #include "core/names/registry.h"
+#include "core/text/unicode.h"
+#include "core/text/utf8.h"
 
 namespace hdTrans::names {
 
@@ -268,13 +270,21 @@ bool QuoteName(std::string_view line, std::string& label) {
     if (after >= line.size()) return false;
     const std::string_view rest = line.substr(after);
     if (!(rest.starts_with("「") || rest.starts_with("『") || rest.starts_with(":") || rest.starts_with("："))) return false;
-    // A speaker's quote ends the line; text after its closing bracket makes the bracket a
-    // title or ruby, not speech (精鋭「第八駆逐隊」、出撃せよ, 全「すべ」て).
+    // A speaker's quote ends the line; words after its closing bracket make the bracket a
+    // title or ruby, not speech (精鋭「第八駆逐隊」、出撃せよ, 全「すべ」て). Punctuation, spaces
+    // and an aside in parentheses may follow (田中「おはよう」。, 「…」（笑）).
     if (rest.starts_with("「") || rest.starts_with("『")) {
         const std::size_t close = rest.rfind(rest.starts_with("「") ? "」" : "』");
         if (close != std::string_view::npos && close > 0) {
-            const std::string_view tail = rest.substr(close + std::string_view("」").size());
-            if (SkipSpace(tail, 0) < tail.size()) return false;
+            int aside = 0;
+            for (std::string_view tail = rest.substr(close + std::string_view("」").size()); !tail.empty();) {
+                const text::Rune r = text::DecodeRune(tail);
+                if (r.size == 0) break;
+                tail.remove_prefix(r.size);
+                if (r.cp == U'（' || r.cp == U'(') aside++;
+                if ((r.cp == U'）' || r.cp == U')') && aside > 0) aside--;
+                if (aside == 0 && text::IsLetter(r.cp)) return false;
+            }
         }
     }
     label = std::string(line.substr(p, q - p));

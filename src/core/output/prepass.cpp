@@ -549,14 +549,28 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
             constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
             constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
+            // A compound of two or more kanji before する is a verbal noun (即答する 즉답하다),
+            // unless it tells a time, a frequency or an amount, which stays an adverb apart from
+            // the verb (毎日する 매일 한다, 全部します 전부 합니다).
             auto kanjiCompound = [](std::string_view s) {
+                static constexpr std::u32string_view kTimeStarts = U"毎今明昨何半";
+                static constexpr std::u32string_view kTimeEnds = U"日朝晩週年月夜時頃";
+                static constexpr std::string_view kAdverbNouns[] = {
+                    "全部", "全員", "全然", "一緒", "本当", "普通", "大体", "結構", "多少", "十分", "一番",
+                    "一度", "二度", "三度", "最初", "最後", "永遠", "同時", "直接", "自分", "先程", "以前",
+                };
+                if (std::find(std::begin(kAdverbNouns), std::end(kAdverbNouns), s) != std::end(kAdverbNouns)) return false;
                 int n = 0;
+                char32_t first = 0, last = 0;
                 for (std::size_t k = 0; k < s.size(); n++) {
                     const text::Rune r = text::DecodeRune(s.substr(k));
                     if (r.size == 0 || !text::IsKanji(r.cp)) return false;
+                    if (n == 0) first = r.cp;
+                    last = r.cp;
                     k += r.size;
                 }
-                return n >= 2;
+                return n >= 2 && kTimeStarts.find(first) == std::u32string_view::npos &&
+                       kTimeEnds.find(last) == std::u32string_view::npos;
             };
             const bool verbalNoun = Contains(tags, "Hd") ||
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
