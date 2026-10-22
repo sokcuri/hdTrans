@@ -13,3 +13,4 @@ lexical:icchau	「それ、言っちゃっていいの？」	「그거, 말해�
 sound:phrase-icchau	「イクっ、イっちゃっ……ああっ！」	「가 버려, 가 버려……아앗!」	fix	sound
 sound:phrase-icchau	「も、もう、い、いっちゃう……！」	「이, 이제, 가, 가 버려……!」	keep	sound
 sound:phrase-icchau	「私もイっちゃってっ……」	「나도 가버려 ……」	fix	sound
+katakana:iku-stem	「……イクよ、もうっ……くっ」	「……가, 정말……큭」	fix	normalize
