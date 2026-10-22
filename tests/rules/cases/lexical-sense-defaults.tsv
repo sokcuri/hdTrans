@@ -17,3 +17,5 @@ phrase:ちょっと待った	「……ちょっと待った、恥ずかしすぎ
 dict:jisjk:374181	「待たせて悪い」	「기다리게 해 미안하다」	fix	local
 dict:jisjk:374181	「引き留めて悪かった」	「만류해 미안했다」	fix	local
 dict:jisjk:374181	知りすぎて悪い情報なんかない	!rule:dict:jisjk:374181	keep	local
+dict:jisjk:5143	「ずるいぞ」	「치사해」	fix	lookup
+dict:jisjk:5143	「御園、その質問はずるいだろ」	「미소노, 그 질문은 치사하지」	fix	lookup
