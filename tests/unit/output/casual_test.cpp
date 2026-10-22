@@ -61,6 +61,7 @@ HD_TEST(output_spoken_words) {
         {"「어느것은 사물이야. 『그것은』」", "「어느것은 사물이야. 『그것은』」"},
         {"그것은 「그것은」", "그것은 「그건」"},
         {"「갈 것 같아. 그런 것 싫어」", "「갈 것 같아. 그런 거 싫어」"},
+        {"「와 주어. 놓아두었어. 주어진 일이 되었어」", "「와 줘. 놓아뒀어. 주어진 일이 됐어」"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(SpokenWords(c.line, 0, casual), std::string(c.want));
     HD_CHECK_EQ(SpokenWords("「그것은 하는 것은」", 0, {0, 0}), std::string("「그건 하는 건」"));

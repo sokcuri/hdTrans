@@ -119,6 +119,22 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
     return {};
 }
 
+// The contracted spoken form of 주, 두 and 되 before 어 and 었 at the start of s (와 주어 와
+// 줘, 됐어) and the bytes it replaces; {} for none. 주어지다 (be given) keeps its 주어.
+std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s) {
+    static constexpr std::pair<std::string_view, std::string_view> kForms[] = {
+        {"주어", "줘"}, {"주었", "줬"}, {"두어", "둬"}, {"두었", "뒀"}, {"되어", "돼"}, {"되었", "됐"},
+    };
+    for (const auto& [written, spoken] : kForms) {
+        if (!s.starts_with(written)) continue;
+        if (written == "주어" && (s.substr(written.size()).starts_with("지") || s.substr(written.size()).starts_with("진"))) {
+            return {};
+        }
+        return {spoken, written.size()};
+    }
+    return {};
+}
+
 }  // namespace
 
 std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles) {
@@ -133,8 +149,13 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
         } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle)) == 0) {
-            // 무엇 is 뭐 and 것 is 거 in any plain or polite quote: spoken Korean contracts them
-            // whatever the speech level (그건, 하는 걸, 뭘).
+            if (const auto [spoken, length] = SpokenSyllables(line.substr(at)); length > 0) {
+                out += spoken;
+                at += length;
+                continue;
+            }
+            // 무엇 is 뭐, 것 is 거 and 주어 is 줘 in any plain or polite quote: spoken Korean
+            // contracts them whatever the speech level (그건, 하는 걸, 뭘, 와 줘).
             // The word starts after a space or punctuation, or after 그, 이, 저 that do (그것은).
             const std::string_view head = WithoutLast(out);
             const char32_t last = out.empty() ? 0 : text::DecodeRune(std::string_view(out).substr(head.size())).cp;
