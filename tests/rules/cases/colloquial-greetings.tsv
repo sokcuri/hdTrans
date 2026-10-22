@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:colloquial-variants:9	「おいっす、頑張ってる？」	「어이, 노력하고 있어?」	fix	lookup
+dict:colloquial-variants:10	「ういす、行ってきます！」	「넵, 다녀오겠습니다!」	fix	lookup
+dict:colloquial-variants:11	「ちっすー」	「안녕~」	fix	lookup
+dict:colloquial-variants:12	「おっす」	「여어」	fix	lookup

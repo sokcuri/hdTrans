@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+names:hiragana-honorific	またいつかちゃんと話そう	또 언젠가 제대로 이야기하자	fix	lookup
+names:hiragana-honorific	そのうちいつかちゃんと返す	머지않아 언젠가 제대로 돌려준다	fix	lookup
+names:hiragana-honorific	きっといつかちゃんとわかる	분명 언젠가 제대로 안다	fix	lookup
+names:hiragana-honorific	いつかちゃんと話そう	언젠가 제대로 이야기하자	fix	lookup
+names:hiragana-honorific	いつもげんきちゃんとあいさつする	언제나 원기 제대로 인사한다	fix	lookup
+names:hiragana-honorific	みんなでりんごちゃんと遊ぶ	모두 사과 제대로 논다	fix	lookup
+names:hiragana-honorific	ねえひよこさん	저기 병아리 씨	fix	lookup
+names:hiragana-honorific	ことりさん	작은새 씨	fix	lookup
+names:hiragana-honorific	つばめさん	제비 씨	fix	lookup
+names:hiragana-honorific	ほたるさん	반딧불 씨	fix	lookup
+names:hiragana-honorific	森のひよこさん	숲의 병아리 씨	fix	lookup
+names:hiragana-honorific	ねえあおいさん	저기 아오이 씨	keep	lookup
+names:hiragana-honorific	ほらひかりちゃん	자 히카리짱	keep	lookup
+names:hiragana-honorific	妹のさよりちゃん。	여동생 사요리짱.	keep	lookup
+names:hiragana-honorific	だいすきなさくらちゃん	야 좋아하는 사쿠라짱	keep	lookup
+names:hiragana-honorific	あのほのかさん	그 호노카 씨	keep	lookup
+names:hiragana-honorific	さよりちゃんと初めて会ったのは、病院だった。	사요리짱과 처음으로 만난 것은, 병원이었다.	keep	lookup
+names:hiragana-honorific	さよりちゃんと話をした	사요리짱과 이야기를 했다	keep	lookup
+names:hiragana-honorific	「あおいさん、待って！」	「아오이 씨, 기다려!」	keep	lookup

@@ -8,7 +8,7 @@ normalize:topic-wa	「こっちわ大丈夫」	「여기는 괜찮아」	keep	no
 verb:wa-stem-te	「言いたまえ」	「말하게」	keep	conjugation
 verb:wa-stem-te	「笑いたまえ」	「웃게」	keep	conjugation
 names:nickname	「ねこちゃん、かわいい」	「고양이, 귀엽다」	keep	normalize
-names:nickname	「ゆうくん、おはよう」	「유군, 안녕」	keep	normalize
+names:nickname	「ゆうくん、おはよう」	「유 군, 좋은 아침」	keep	normalize
 compose:speech-casual-marked	｢知らねえよ。そういうことは分かってるんだ｣	｢몰라. 그런 건 알고 있어｣	fix	compose
 phrase:何でしたっけ	「あれは何でしたっけ」	「저건 뭐였죠」	fix	builtin-phrase
 constraint:kotoshi-suru	ことしまでに終わらせる	금년까지 끝낸다	keep	lookup

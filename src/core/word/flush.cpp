@@ -28,6 +28,9 @@ void Flush(Flusher& f) {
         VerseTe(f);
         TeRequest(f);
         ResultState(f);
+        SimpleAspect(f);
+        PastProgressiveAdnominal(f);
+        PreparedState(f);
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);
@@ -39,6 +42,7 @@ void Flush(Flusher& f) {
         TerminalBeforeQuote(f);
         HodoDegree(f);
         QuestionCopula(f);
+        WonderingDarou(f);
         GenitiveBetweenNames(f);
         LongVowelAfterKatakana(f);
         ReturnTo(f);

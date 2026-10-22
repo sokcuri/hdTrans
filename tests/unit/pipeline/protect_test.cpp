@@ -53,6 +53,9 @@ HD_TEST(pipeline_cut_spans) {
         {"[b x]y[color=a\nb]", "[b x]y[color=a\nb]"},
         {"a&amp;b&#169;&#x1F363;&x;", "a〖2&amp;〗b〖2&#169;〗〖2&#x1F363;〗&x;"},
         {"&#12345678;&#X41;&a12345678901234567890123456789012;", "&#12345678;&#X41;&a12345678901234567890123456789012;"},
+        // Inline style codes: a font, a colour and the reset.
+        {"だよ%f源ノ角ゴシックB;#00ff92cb;♥%fbase;#;」", "だよ〖2%f源ノ角ゴシックB;〗〖2#00ff92cb;〗〖1♥〗〖2%fbase;〗〖2#;〗」"},
+        {"C#;と#12354;と%f;x%fa%b;", "C〖2#;〗と#12354;と〖2%f;〗x%fa%b;"},
         // A tag wins over a BBCode tag and Hangul inside it.
         {"<a title=\"[b]김\">", "〖2<a title=\"[b]김\">〗"},
         // Not tags: no letter after <, < inside.
@@ -121,6 +124,7 @@ HD_TEST(pipeline_rewrite_conjunctions) {
     } cases[] = {
         {"なら行こう", "それなら行こう"},
         {"ならない", "ならない"},  // before hiragana
+        {"「ならいいけど」", "「それならいいけど」"},
         {"「ならば、行く」", "「それならば、行く」"},
         // The 。 after a match is taken by it, so it starts no second one.
         {"ですから。にもかかわらず彼は", "だから。にもかかわらず彼は"},
@@ -221,6 +225,23 @@ HD_TEST(pipeline_kata_words) {
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+    // The katakana stem of 行く, but not where a dictionary word reads the run: a noun before a
+    // particle, a verb whose conjugation follows, also with its first kana in katakana.
+    const auto iku = Snapshot("イカ\t오징어\tN110\t\t\tGN\t1\nイカれ\t미&AO@\tM427\t\t\tGN\t2\n");
+    HD_REQUIRE(iku != nullptr);
+    const struct {
+        const char* in;
+        const char* want;
+    } stems[] = {
+        {"イカなんて嫌いだ。", "イカなんて嫌いだ。"},
+        {"イかれてる", "イカれてる"},
+        {"イカせて", "行かせて"},
+        {"イった", "行った"},
+        {"イキそう", "行きそう"},
+    };
+    for (const auto& c : stems) {
+        HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *iku)), std::string(c.want));
     }
     // After a span, and an adjective before a span.
     const output::Pieces spans = {{"<b>", output::SpanOpen}, {"アレは。ダメ", output::SpanText}, {"</b>", output::SpanClose}};

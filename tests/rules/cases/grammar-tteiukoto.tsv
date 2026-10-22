@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+pattern:書いたってこと	「つまり筧さんは私の芸人根性に惚れたってことですか？」	「즉 카케이 씨는 제 연예인 근성에 반했다는 것입니까?」	fix	builtin-pattern
+pattern:書いてるってこと	「ともかく、俺たちは俺たちでやってるってことだよ」	「어쨌든, 우리는 우리대로 하고 있다는 거야」	fix	builtin-pattern
+pattern:学生ってこと	「つまりそれは、確定した未来ってことですか？」	「즉 그건, 확정한 미래라는 것입니까?」	fix	builtin-pattern
+pattern:高いということ	１５００円×１０００で、最低１５０万の金は欲しいということだ。	1500엔×1000으로, 최저 150만의 금은 갖고 싶다는 것이다.	fix	builtin-pattern
+pattern:書いたということ	羊飼いからのメールはＰＣ用のアドレスに来たということだった。	양치기로부터의 메일은 PC용의 주소에 왔다는 것이었다.	fix	builtin-pattern
+pattern:学生ではないということ	歌姫の名は伊達ではないということだ。	가희의 이름은 다테가 아니라는 것이다.	fix	builtin-pattern
+pattern:学生だということ	縁が繋がっている状態だということを忘れるな	인연이 연결되어 있는 상태라는 것을 잊지 마	fix	builtin-pattern
+pattern:書くってこと	「それって、わがままを言うってこと？」	「그거, 이기적임을 말한다는 거야?」	keep	builtin-pattern

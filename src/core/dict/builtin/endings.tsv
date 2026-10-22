@@ -376,6 +376,17 @@
 書くじゃないか	쓰잖아	end	prio=-1
 高いじゃないか	높잖아	end	prio=-1
 書いたじゃない	썼잖아	end	prio=-1
+書くじゃない	쓰잖아	end	prio=-1
+高いじゃない	높잖아	end	prio=-1
+高かったじゃないか	높았잖아	end	prio=-1
+学生じゃないか	학생이잖아	end	prio=-1
+学生だったじゃないか	학생이었잖아	end	prio=-1
+静かじゃないか	조용하잖아	end	prio=-1
+書くじゃないですか	쓰잖아요	end	prio=-1
+書いたじゃないですか	썼잖아요	end	prio=-1
+高いじゃないですか	높잖아요	end	prio=-1
+学生じゃないですか	학생이잖아요	end	prio=-1
+静かじゃないですか	조용하잖아요	end	prio=-1
 書いてたじゃない	쓰고 있었잖아	end	prio=-1
 // んじゃない after the past or a negative: 〜ㄴ 거 아니야, not 〜지 않아
 書いたんじゃない	쓴 거 아니야	end	prio=-1

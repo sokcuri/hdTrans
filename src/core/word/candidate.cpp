@@ -82,6 +82,11 @@ Record* ReorderAfterNoun(const Item& parent, Record* records) {
         owned = first;
         first = first->child;
     }
+    // A counter after a numeral keeps its place (三か所, not 三 + か + 所).
+    if (const std::string_view g = parent.GAttr(0);
+        first != nullptr && (Has(g, "Nj") || Has(g, "Nd")) && Has(first->attr, "Ct")) {
+        return records;
+    }
     bool reorder = false;
     Record* detached = nullptr;
     for (Record* p = first; p != nullptr; p = p->child) {

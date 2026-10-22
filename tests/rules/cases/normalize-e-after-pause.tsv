@@ -4,5 +4,5 @@ normalize:e-after-pause	「え？…え？ 何で聞くんだろ？」	「어? �
 normalize:e-after-pause	「……て、…え？」	「……라고,…어?」	fix	normalize
 normalize:e-after-pause	それは…え？本当？	그것은…어? 정말?	fix	normalize
 normalize:e-after-pause	「……え、そうなの？」	「……어, 그래?」	keep	normalize
-normalize:e-after-pause	そうですね…ええ、そうです。	그렇네요…예, 그렇습니다.	keep	normalize
+normalize:e-after-pause	そうですね…ええ、そうです。	그렇네요…네, 그렇습니다.	keep	normalize
 normalize:e-after-pause	あれ！あれ、おかしいな。	어라! 어라, 이상한데.	fix	normalize

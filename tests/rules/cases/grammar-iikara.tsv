@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-dict:gram:iikara	いいから、早く寝なさい。	됐으니까, 빨리 자세요.	fix	local
+dict:gram:iikara	いいから、早く寝なさい。	됐으니까, 빨리 자.	fix	local
 dict:gram:iikara	ほら、いいから座れ。	자, 됐으니까 앉아라.	fix	local
 dict:gram:iikara	天気がいいから、散歩しよう。	날씨가 좋으니까, 산책하자.	keep	local

@@ -482,15 +482,24 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
-    // A noun of degree, time or listing read as a free noun after a word stands apart
-    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등); 等 after a number is a rank (1등).
+    // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
+    if (kind == '1' && (nextEntry == "씨" || nextEntry == "군")) {
+        constexpr std::string_view kSpacedHonorifics[] = {"さん", "くん", "君", "氏"};
+        if (std::find(std::begin(kSpacedHonorifics), std::end(kSpacedHonorifics), next.surface) !=
+            std::end(kSpacedHonorifics)) {
+            return Result(std::move(t), true);
+        }
+    }
+    // A noun of degree, time, listing or span read as a free noun after a word stands apart
+    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등, 회의 중); 等 after a number is a rank (1등).
     struct FreeNoun {
         std::string_view surface;
         std::string_view korean;
     };
     constexpr FreeNoun kFreeNouns[] = {{"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"},
                                        {"ほど", "정도"}, {"程", "정도"},   {"等", "등"},     {"など", "등"},
-                                       {"前", "전"},     {"後", "후"},     {"前", "앞"},     {"後", "뒤"}};
+                                       {"前", "전"},     {"後", "후"},     {"前", "앞"},     {"後", "뒤"},
+                                       {"中", "중"}};
     if (kind == '1' && !t.ends_with(' ') && Contains(GAttr(next), "Tu") == false) {
         for (const FreeNoun& f : kFreeNouns) {
             const std::string_view ns = next.surface;
@@ -622,7 +631,15 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), spaced);
         }
         case '3': case '4': case '5': case '7': case '8': case '9': {
-            const char np = First(Code(next));
+            // A predicate that writes nothing (an auxiliary いる folded into the verb before
+            // it) leaves the spacing to the word after it.
+            int after = nextIndex;
+            while (kind == '4' && First(Code(items[after])) == '4' && EntryText(items[after]).empty() &&
+                   (items[after].directIndex < 0 || items[after].ending.text.empty()) && after + 1 < count &&
+                   items[after + 1].tokenIndex == items[after].tokenIndex) {
+                after++;
+            }
+            const char np = First(Code(items[after]));
             const bool space = np != '2' && np != '6' && (!IsOutputBuilderBlockedText(remainder) || WidthOf(remainder) > 4);
             return Result(std::move(t), space);
         }

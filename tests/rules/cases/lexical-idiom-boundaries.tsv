@@ -4,8 +4,8 @@ dict:oyasashii	先生はおやさしくて、親切です。	선생님은 다정
 dict:oyasashii	先生はとてもおやさしいんです。	선생님은 무척 다정합니다.	fix	lookup
 dict:oyasashii	先生はおやさしかった。	선생님은 다정했다.	fix	lookup
 dict:oyasashii	先生はおやさしくない。	선생님은 다정하지 않다.	fix	lookup
-dict:oyasashii	先生はやさしい。	선생님은 상냥하다.	keep	lookup
-dict:oyasashii	先生は優しい。	선생님은 상냥하다.	keep	lookup
+dict:oyasashii	先生はやさしい。	선생님은 다정하다.	keep	lookup
+dict:oyasashii	先生は優しい。	선생님은 다정하다.	keep	lookup
 dict:oyasashii	先生のおやつです。	선생님의 간식입니다.	keep	lookup
 dict:oyasashii	おや、ここにあった。	어라, 여기에 있었다.	keep	lookup
 dict:oyasashii	この問題は易しい。	이 문제는 쉽다.	keep	lookup

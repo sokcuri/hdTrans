@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 sound:katakana-mimetic	ギシッギシッと階段が軋む。	기싯기싯 계단이 삐걱거린다.	fix	sound
 sound:katakana-mimetic	ボゴッと壁が割れた。	보곳 벽이 깨졌다.	fix	sound
-sound:katakana-mimetic	彼はジッと私を見つめた。	그는 가만히 나를 응시했다.	fix	sound
+sound:katakana-mimetic	彼はジッと私を見つめた。	그는 가만히 나를 바라보았다.	fix	sound
 sound:katakana-mimetic	ドン！っと扉が開いた。	쾅!이라고 문이 열렸다.	fix	sound
 sound:katakana-mimetic	バン！と机を叩いた。	쾅!이라고 책상을 두드렸다.	fix	sound
 sound:katakana-mimetic	マフィアのドン！と呼ばれた男。	마피아의 돈!으로 불린 남자.	keep	sound

@@ -169,6 +169,11 @@ bool Item::StartsSentence() const {
     return b == "「" || b == "『" || b == "（" || b == "(" || b == "“" || b == "\"";
 }
 
+bool Item::InQuote() const {
+    const int depth = w != nullptr ? w->QuoteDepth(tokenIndex) : 0;
+    return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
+}
+
 bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
@@ -187,6 +192,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
+        // Qt: the word stands inside a quote (G!= "Qt" for narration).
+        if (c == "Qt") return InQuote();
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
@@ -218,8 +225,23 @@ bool Item::IsRuleRightBoundary() const {
         if (n != nullptr) n = n->next;
     }
     // A small っ closing the word (行くっ」) is part of its sound, not a word after it.
-    while (n != nullptr && n->ClosingTsu()) n = n->next;
+    const Item* tsu = nullptr;
+    while (n != nullptr && n->ClosingTsu()) {
+        tsu = n;
+        n = n->next;
+    }
     if (n == nullptr) return true;
+    // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
+    // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
+    if (tsu != nullptr && n->group->surface == "、") return true;
+    if (tsu != nullptr && w != nullptr && n->tokenIndex > tsu->tokenIndex + 1) {
+        bool ellipsis = true;
+        for (int k = tsu->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
+            const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
+            ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
+        }
+        if (ellipsis) return true;
+    }
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),
                                      std::string_view("="), std::string_view("-")}) {

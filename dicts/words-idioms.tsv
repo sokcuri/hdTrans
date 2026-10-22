@@ -6353,7 +6353,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 遜色な	손색$FA@	H7N0			GN							i:6349
 遜色無	손색$FA@	H7N0			GN				llm			i:6350
 有効に使	효과적으로 사용&AV@	M420			GN				llm			i:6351
-印象に残	인상에 &F4@	M428			GN				llm			i:6352
+印象に残	인상에 &F4@	M428		Dx	GN				llm			i:6352
 友達以上恋人未満	친구 이상 연인 미만	N110			GN				llm			i:6353
 友だち以上恋人未満	친구 이상 연인 미만	N110			GN				llm			i:6354
 諸悪の根源	모든 악의 근원	N110			GN				llm			i:6355
@@ -6985,7 +6985,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 帳尻が合	수지가 &FB@	M420			GN				llm			i:6981
 申し訳ないくらい	미안할 정도	N110			GN				llm			i:6982
 申し訳ないぐらい	미안할 정도	N110			GN				llm			i:6983
-顔に出	얼굴에 드러&A5@	M427			GN				llm			i:6984
+顔に出	얼굴에 드러&A5@	M427		Dx	GN				llm			i:6984
 首が繋が	해고를 면&AV@	M428			GN				llm			i:6985
 皮肉なことに	얄궂게도	E300			GN				llm			i:6986
 忸怩たる思い	부끄러운 심정	N110			GN				llm			i:6987
@@ -7773,3 +7773,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 何かに付けて	걸핏하면	E300			GN							i:7769
 なにかに付けて	걸핏하면	E300			GN							i:7770
 とおぼしき	(으)로 보이는	E0H0		TuPj	GN							i:7771
+脇を締め	겨드랑이를 붙&AJ@	M437			GN						わきをしめ	i:7772

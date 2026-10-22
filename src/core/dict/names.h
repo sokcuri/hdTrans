@@ -20,7 +20,9 @@ struct NameKeyCounts {
 
 // Marks deleted the name-layer rows whose key holds 、 or 。 or is an inflected word,
 // or whose Korean has more than twice as many syllables as the key has characters,
-// plus four (longer ones render a work or a description), and counts them by kind.
-NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base);
+// plus four (longer ones render a work or a description), and counts them by kind. A
+// person row of two hiragana or more is kept though its key reads as an inflected word
+// (つぐみ, のぞみ): it takes part only where the key is confirmed.
+NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base, const CodeTable& codes);
 
 }  // namespace hdTrans::dict::internal

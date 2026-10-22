@@ -71,6 +71,16 @@ void TeThanks(Flusher& f);
 void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
+// The ている of a verb of thinking or perceiving, or of one whose Korean is an adjective, read
+// as the simple form (思っている 생각한다, 見えている 보인다); that of a verb of saying or of
+// 付き合う except in the plain present and in 지 (言っていた 말했다, 付き合っている人 사귀는 사람).
+void SimpleAspect(Flusher& f);
+// The progressive ていた of a verb of the dictionary, not one the passive or potential pass
+// rewrote, before a noun it describes read as 던 (読んでいた本 읽던 책).
+void PastProgressiveAdnominal(Flusher& f);
+// The てある of an action done beforehand read as 어 두었다 (用意してある 준비해 두었다); after a が
+// subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
+void PreparedState(Flusher& f);
 void NotYet(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
@@ -79,6 +89,9 @@ void NodaTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
 void HodoDegree(Flusher& f);
 void QuestionCopula(Flusher& f);
+// A sentence-final だろう after a question word in its clause asks (何だろう 뭘까, どっちだろう
+// 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
+void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
 void ReturnTo(Flusher& f);

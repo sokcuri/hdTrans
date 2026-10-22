@@ -22,12 +22,11 @@ README.md is for users; developer documentation is in docs/ (index: docs/README.
 - Unit tests use small local fixtures, not external expectation sets or dictionary totals.
 - `tools/snapshot.sh` records built-CLI outputs; `tools/compare.sh` reports baseline changes
   (docs/testing.md).
-- End-to-end test data (copyrighted texts and their expected outputs) lives in the private
-  repository sokcuri/hdTrans-data, found through `HDTRANS_TESTDATA`; without it the tests
-  skip. `tools/e2e.sh --expected "$HDTRANS_TESTDATA" CLI dicts` reports changed lines and
+- End-to-end test data (texts and their expected outputs) is kept outside this repository
+  and found through `HDTRANS_TESTDATA`; without it the tests skip.
+  `tools/e2e.sh --expected "$HDTRANS_TESTDATA" CLI dicts` reports changed lines and
   `--accept` rewrites the expected outputs there; ctest runs it as `testdata`
-  (docs/testing.md). Never copy its texts or translations into this repository, commit
-  messages, issues or pull requests.
+  (docs/testing.md).
 - A translation behaviour change needs its own commit with the reason; once it is on `main`,
   accept the new outputs in the test-data repository and commit them there.
 - `tools/detect-bad.sh` lists ill-formed Korean sequences in outputs; a pattern becomes a

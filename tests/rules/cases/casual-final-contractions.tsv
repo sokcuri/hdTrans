@@ -3,7 +3,7 @@ ending:学生だっての	それは俺の役目だっての！	그것은 내 역
 ending:書くっての	だから行くっての。	그러니까 간다니까.	fix	builtin-ending
 ending:書くなっての	勝手に触るなっての！	마음대로 만지지 말라니까!	fix	builtin-ending
 ending:書かないっての	そんなの知らないっての。	그런 것 모른다니까.	fix	builtin-ending
-ending:高いっての	本当に重いっての！	정말로 무겁다니까!	fix	builtin-ending
+ending:高いっての	本当に重いっての！	정말 무겁다니까!	fix	builtin-ending
 ending:書くかっての	こんな所で眠れるかっての！	이런 곳에서 잘 수 있겠냐고!	fix	builtin-ending
 ending:書くって	だから行くって。	그러니까 간다니까.	keep	builtin-ending
 ending:学生だっけか	あれは去年だっけか。	저것은 작년이었던가.	fix	builtin-ending

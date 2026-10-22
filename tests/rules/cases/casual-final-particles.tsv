@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:jisjk:341305	もう寝るわ。	이제 자.	fix	local-ending
 dict:jisjk:258670	この部屋、ちょっと寒いわ。	이 방, 조금 추워.	fix	local-ending
 dict:jisjk:258704	昨日の映画、面白かったよ。	어제의 영화, 재미있었어.	fix	lookup
-dict:jisjk:6179	それはただの噂だわ。	그것은 단순한 소문이야.	fix	lookup
+dict:jisjk:6179	それはただの噂だわ。	그것은 그냥 소문이야.	fix	lookup
 dict:jisjk:4480	あの人なら先に帰ったわよ。	그 사람이라면 먼저 돌아갔어.	fix	lookup
 dict:jisjk:264885	駅まで遠いわね。	역까지 머네.	fix	lookup
 dict:jisjk:4186	雨が降り出したのね。	비가 오기 시작했구나.	fix	lookup

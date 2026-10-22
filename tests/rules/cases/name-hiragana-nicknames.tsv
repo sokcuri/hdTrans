@@ -1,9 +1,9 @@
 rule	input	expected	kind	layer
-protect:hiragana-nickname	ゆうくん、おはよう。	유군, 안녕.	fix	lookup
+protect:hiragana-nickname	ゆうくん、おはよう。	유 군, 좋은 아침.	fix	lookup
 protect:hiragana-nickname	おやすみ、ふみちゃん。	잘 자, 후미짱.	fix	lookup
 protect:hiragana-nickname	なあ、みーちゃん。	저기, 미짱.	keep	lookup
-protect:hiragana-nickname	それに、ゆうくんもいる。	게다가, 유군도 있다.	fix	lookup
-protect:hiragana-nickname	私はゆうくんが好き。	나는 유군을 좋아해.	fix	lookup
+protect:hiragana-nickname	それに、ゆうくんもいる。	게다가, 유 군도 있다.	fix	lookup
+protect:hiragana-nickname	私はゆうくんが好き。	나는 유 군을 좋아해.	fix	lookup
 rewrite:chan-after-katakana	アリスちゃんが来た。	앨리스짱이 왔다.	fix	rewrites
 protect:hiragana-nickname	ここにちゃんと書いた。	여기에 제대로 썼다.	keep	lookup
 protect:hiragana-nickname	特売に群がるおばちゃん。	특매에 몰려드는 아줌마.	keep	lookup

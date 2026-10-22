@@ -8,6 +8,7 @@
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/pipeline/sound.h"
+#include "core/word/conjugation.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -498,6 +499,19 @@ std::u32string Literal(std::u32string_view rs, size_t i, size_t end) {
     return out;
 }
 
+// The start of the dictionary word of three characters or more that rs[i], a small vowel or
+// ー, ends, from from on (おめぇ, てめぇ, てめー; not the さぁ of 筧さぁん): not a verb or adjective
+// stem (おいしー), and after other than hiragana or after a particle (だぞてめー, not あけおめー).
+// npos for none.
+size_t SpelledWordStart(const Emphasis& e, std::u32string_view rs, size_t from, size_t i) {
+    for (size_t j = from; j + 2 <= i; j++) {
+        if (j > 0 && IsHiraganaRune(rs[j - 1]) && !In(rs[j - 1], U"はがをにのでとへもやよねぞぜなわさか")) continue;
+        const std::u32string_view w = rs.substr(j, i + 1 - j);
+        if (e.WordKey(w) && e.Tags(w).find_first_of("MH") == std::string::npos) return j;
+    }
+    return std::u32string::npos;
+}
+
 bool IsWordRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || IsKanjiRune(r) || r == U'・'; }
 
 // A character that ends a spoken phrase: punctuation, a closing bracket, a space, a mark
@@ -565,16 +579,74 @@ bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
 
 }  // namespace
 
+std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap) {
+    const std::u32string rs = DecodeText(text);
+    std::u32string out;
+    size_t at = 0;
+    for (size_t i = 1; i + 3 <= rs.size(); i++) {
+        if (rs[i] != U'そ' || rs[i + 1] != U'っ' || rs[i + 2] != U'か' || !IsKanjiRune(rs[i - 1])) continue;
+        if (i + 3 < rs.size() && !In(rs[i + 3], U"なねぁあー～？?！!。、…‥」』）)")) continue;
+        size_t start = i - 1;
+        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        // The longest kanji run before そ that the dictionary has decides (了解 is a noun, 見逃 a
+        // verb stem).
+        bool verb = false;
+        for (size_t k = start; k < i; k++) {
+            const std::vector<dict::Candidate> records =
+                snap.RetrieveRecords(EncodeText(rs.substr(k, i - k)), dict::LookupMode::General);
+            if (records.empty()) continue;
+            for (const dict::Candidate& c : records) {
+                if (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                    word::Conjugation(c.codes->partText[3] - '0', 5) == "そう") {
+                    verb = true;
+                }
+            }
+            break;
+        }
+        if (!verb) continue;
+        out.append(rs, at, i + 1 - at);
+        out.push_back(U'う');
+        at = i + 2;
+    }
+    if (at == 0) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
+}
+
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     std::u32string out, full;
     bool changed = false;
     size_t at = 0;
+    // A kanji that starts a word clipped with っ before a mark or the end, when the kanji is
+    // the stem of an adjective and no name (キャリア浅っ 浅い, 高っ！; not 蒼っ！).
+    for (size_t k = 0; k + 1 < rs.size(); k++) {
+        if (!IsKanjiRune(rs[k]) || rs[k + 1] != U'っ' || (k > 0 && IsKanjiRune(rs[k - 1]))) continue;
+        size_t q = k + 1;
+        while (q < rs.size() && rs[q] == U'っ') q++;
+        if (q < rs.size() && !In(rs[q], U"！!？?。、…‥」』")) continue;
+        const std::u32string_view stem = std::u32string_view(rs).substr(k, 1);
+        if (e.Tags(stem).find('H') == std::string::npos || e.NameKey(stem, true)) continue;
+        out.append(rs, at, k - at);
+        out.push_back(rs[k]);
+        out.push_back(U'い');
+        at = q;
+        changed = true;
+    }
+    if (changed) return RewriteCasualAdjectives(EncodeText(out + rs.substr(at)), ctx, snap);
     for (size_t s = 0; s < rs.size();) {
         size_t stemLen = 0, runEnd = 0, end = 0;
         if (!CasualAdjectiveAt(rs, s, stemLen, runEnd, end)) {
             s++;
+            continue;
+        }
+        // A word spelled with the small vowel or ー is no casual adjective (おめぇ、 not 重い).
+        const size_t mark = s + stemLen + 1;
+        size_t from = s + stemLen;
+        while (from > 0 && mark - from < 4 && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+        if (runEnd == mark + 1 && SpelledWordStart(e, rs, from, mark) != std::u32string::npos) {
+            s = end;
             continue;
         }
         if (FullAdjective(e, std::u32string_view(rs).substr(s, stemLen), rs[s + stemLen], full)) {
@@ -641,6 +713,22 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 break;
             }
             if (end >= rs.size() || !IsHiraganaRune(rs[end])) {
+                // The tokenizer ends a hiragana run at a ー before other than kana or kanji, so there
+                // a word spelled with it that the mark may not lengthen (おはよー おはよ～) is written
+                // with the small vowel of the same sound when the dictionary has that spelling too
+                // (てめー！ てめぇ！).
+                if (r == U'ー' && end == i + 1 && v >= 0 && (end >= rs.size() || !IsWordRune(rs[end]))) {
+                    if (const size_t j = SpelledWordStart(e, rs, from, i);
+                        j != std::u32string::npos && !LengthensWord(e, rs, from, i)) {
+                        std::u32string w = rs.substr(j, end - j);
+                        w.back() = kEmphasisVowels[v][0];
+                        if (e.WordKey(w) && e.Tags(w).find_first_of("MH") == std::string::npos) {
+                            rs[i] = w.back();
+                            changed = true;
+                        }
+                        continue;
+                    }
+                }
                 if (Volitional(rs, i) && e.StemEnds(rs, from, i - 1) && e.Reach(rs, from, i - 1) < i) {
                     rs = Spliced(rs, i, U"う", end);
                     changed = true;
@@ -728,6 +816,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 continue;
             }
         }
+        if ((IsSmallVowel(r) || r == U'ー') && end == i + 1 && SpelledWordStart(e, rs, from, i) != std::u32string::npos) continue;
         const size_t before = e.Reach(rs, from, i);
         // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
         // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,

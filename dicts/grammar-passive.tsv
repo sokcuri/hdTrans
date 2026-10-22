@@ -1,0 +1,6 @@
+#! layer=words
+# 수동 구문: 사람의 시선을 받는 見られる, 감정의 대상이 되는 呆れられる
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+目で見られ	눈초리를 &FD@	M417		Pn	GN							passive-gaze:1
+目で見られ続け	눈초리를 계속 &FD@	M417		Pn	GN							passive-gaze:3
+呆れられ	한심하게 여겨&AL@	M417			GN							passive-feeling:1

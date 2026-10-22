@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 ending:書くからな	「あとで迎えに行くからな」	「나중에 마중하러 가니까」	fix	builtin-ending
 ending:書いたからね	「もう宿題は終わったからね」	「이제 숙제는 끝났으니까」	fix	builtin-ending
 ending:書いてるから	「雨が降ってるから」	「비가 오고 있으니까」	fix	builtin-ending
-ending:静かだから	「僕は平気だから」	「나는 아무렇지도 않으니까」	fix	builtin-ending
+ending:静かだから	「僕は平気だから」	「나는 괜찮으니까」	fix	builtin-ending
 ending:静かだから	「この部屋は静かだから」	「이 방은 조용하니까」	fix	builtin-ending
 ending:静かだったからな	「あいつ、昨日は元気だったからな」	「저 녀석, 어제는 건강했으니까」	fix	builtin-ending
 dict:jisjk:6170	「明日は休みだからよ」	「내일은 휴일이니까」	keep	lookup

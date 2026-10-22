@@ -728,11 +728,11 @@ bool RuleL95([[maybe_unused]] Item* p) {
 }
 
 // local 96
-//     end.src == "で" and pos[+1] is 7**|8** and end.ko := "1고"
-//     end.src == "で" and end.ko := "1게"
+//     end.src == "で" and pos[+1] is 7**|8** and end.ko := "1고" and ko := "아무렇지도 %B5@"
+//     end.src == "で" and end.ko := "1게" and ko := "아무렇지도 %B5@"
 bool RuleL96([[maybe_unused]] Item* p) {
-    return (GobiSrcEq(p, 0, "で"sv) && PumsaEq(p, 1, "7**8**"sv) && GobiDstSet(p, 0, "1고"sv)) ||
-           (GobiSrcEq(p, 0, "で"sv) && GobiDstSet(p, 0, "1게"sv));
+    return (GobiSrcEq(p, 0, "で"sv) && PumsaEq(p, 1, "7**8**"sv) && GobiDstSet(p, 0, "1고"sv) && DstSet(p, 0, "아무렇지도 %B5@"sv)) ||
+           (GobiSrcEq(p, 0, "で"sv) && GobiDstSet(p, 0, "1게"sv) && DstSet(p, 0, "아무렇지도 %B5@"sv));
 }
 
 // local 97
@@ -4527,7 +4527,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL93, 0xf1469da37011441aull},
     {RuleL94, 0xf2bd933a4c5e2df2ull},
     {RuleL95, 0x958e4b0425de092eull},
-    {RuleL96, 0x948ed32288ec23f3ull},
+    {RuleL96, 0x01b7a43be9102e3bull},
     {RuleL97, 0xe0fb90beddf39075ull},
     {RuleL98, 0x7d85fc8c08ac4ef5ull},
     {RuleL99, 0xc61fb05c3c3b734aull},

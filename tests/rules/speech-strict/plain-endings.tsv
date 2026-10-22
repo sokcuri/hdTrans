@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:speech-strict	「それは本当に違う」	「그건 정말로 다르다」	keep	compose
+compose:speech-strict	「それは本当に違う」	「그건 정말 다르다」	keep	compose
 compose:speech-strict	「明日、海に行く」	「내일, 바다에 간다」	keep	compose
 compose:speech-strict	「今日は朝から雨だ」	「오늘은 아침부터 비다」	keep	compose
 compose:speech-strict	「窓を開けておいてよ」	「창을 열어 둬」	keep	compose

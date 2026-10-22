@@ -1,6 +1,8 @@
 // Speaker labels, honorifics and the evidence of a single run: the script formats
 // (OutputLine, Ren'Py, KiriKiri, TyranoScript), the plain-text forms (【名】, [名]:,
 // 名「」, 名：), the speaker cues of a line and the name runs of a line.
+#include <algorithm>
+#include <array>
 #include <span>
 #include <string>
 #include <string_view>
@@ -12,6 +14,7 @@
 #include "core/names/registry.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 
 namespace hdTrans::names {
 
@@ -57,6 +60,9 @@ constexpr std::string_view kParentSuffixes[] = {"の父", "の母", "の兄", "�
 constexpr std::string_view kParticles[] = {"は", "が", "を", "の", "に", "へ", "と", "も", "や", "で", "よ", "ね", "さ"};
 
 bool Has(std::string_view s, std::string_view part) { return s.find(part) != std::string_view::npos; }
+
+// The semantic codes of animals, birds, fish, reptiles, insects and other creatures.
+constexpr std::array<std::string_view, 8> kCreatureCodes = {"QAA", "QAB", "QAC", "QAD", "QAE", "QAF", "QAG", "QAH"};
 bool InList(std::string_view text, std::span<const std::string_view> list) {
     for (const std::string_view w : list) {
         if (w == text) return true;
@@ -401,7 +407,9 @@ bool LabelRole(std::string_view p) {
     return false;
 }
 
-bool RoleLike(std::string_view t) { return InList(t, kRoleWords) || Has(t, "の"); }
+bool RoleLike(std::string_view t) {
+    return InList(t, kRoleWords) || (Has(t, "の") && !AllRunes(t, IsHiragana));  // の of a hiragana name (のぞみ)
+}
 
 bool ParentLabel(std::string_view p, std::string& x) {
     for (const std::string_view s : kParentSuffixes) {
@@ -554,6 +562,9 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
+                const std::string_view part = rec.codes->partText;
+                f.thing = f.thing || part.starts_with("E3") || Has(sem, "VAm") || Has(sem, "QAM") || Has(sem, "VFd") ||
+                          std::any_of(kCreatureCodes.begin(), kCreatureCodes.end(), [&](std::string_view c) { return Has(sem, c); });
                 // A person, profession or animal noun, or a pronoun (オレ, 俺).
                 if (!Has(attr, "On") && (Has(sem, "VHn") || Has(sem, "UAq") || Has(sem, "QAA") || Has(sem, "QAB") ||
                                          rec.codes->partText.starts_with("N12"))) {
@@ -636,6 +647,106 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     const std::size_t n = RuneCount(t);
     if ((run.kanji && n <= 4 && AllRunes(t, IsKanji)) || (!run.kanji && n >= 2 && n <= 12)) return t;
     return "";
+}
+
+// Whether the hiragana run is a form of a base-dictionary verb or adjective that ends a
+// predicate: an adjective stem and い (あおい), or a verb stem and one kana of the u row
+// (かおる). The 連用 form, which also makes nouns (つぐみ, のぞみ), does not count.
+bool Registry::PredicateForm(std::string_view run) {
+    if (snap_ == nullptr) return false;
+    const dict::Dict& base = snap_->Base();
+    const text::Rune last = RuneBefore(run, run.size());
+    if (last.size == 0 || last.size >= run.size()) return false;
+    const bool adjective = last.cp == U'い';
+    if (!adjective && !InRunes(last.cp, "うくぐすつぬぶむる")) return false;
+    const int k = base.Find(run.substr(0, run.size() - last.size));
+    if (k < 0) return false;
+    bool found = false;
+    base.EachRecord(k, [&](const dict::Record& rec) {
+        found = rec.codes != nullptr && rec.codes->part.Tag() == (adjective ? 'H' : 'M');
+        return !found;
+    });
+    return found;
+}
+
+// The honorific of KanaHonorificNames that starts s, the longest; "" for none. Not the ちゃん
+// of the adverb ちゃんと before a verb that conjugates there (いつかちゃんと話そう; but
+// さよりちゃんと初めて, ちゃんと話を).
+std::string_view Registry::KanaHonorificAt(std::string_view s) {
+    static constexpr std::string_view kKanaHonorifics[] = {"さん", "ちゃん", "くん", "君", "様", "さま", "先輩", "先生"};
+    std::string_view h;
+    for (const std::string_view x : kKanaHonorifics) {
+        if (s.starts_with(x) && x.size() > h.size()) h = x;
+    }
+    constexpr std::string_view kChanto = "ちゃんと";
+    if (h != "ちゃん" || !s.starts_with(kChanto) || snap_ == nullptr) return h;
+    const std::string_view after = s.substr(kChanto.size());
+    dict::LookupContext ctx;
+    ctx.plain = &snap_->Plain();
+    for (const dict::Candidate& c : snap_->GetWordInfo(after, dict::LookupMode::General, ctx).list) {
+        if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+        const std::string_view tail = after.substr(c.source.size());
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(c.codes->partText[3] - '0', branch);
+            if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && tail.starts_with(conj)) return {};
+        }
+    }
+    return h;
+}
+
+// The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (not たん or
+// っち, which also end words: こっち): the hiragana run before it, or, after a kanji or
+// katakana, the run less the one-kana particle that starts it (妹のさよりちゃん), of three or
+// four kana, or the last four or three kana of a longer run (ねえあおいさん), that the name
+// layer reads as a person and no dictionary as a person or animal noun (うさぎさん) or as a
+// creature, fruit or food noun or an adverb (ひよこさん, いちごちゃん, いつか), that starts
+// with no お or ご and that joins the honorific into no dictionary word (みなさん, たくさん).
+std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
+    std::vector<std::string> out;
+    for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
+        const std::string_view h = KanaHonorificAt(line.substr(pos));
+        if (h.empty() || pos == 0) continue;
+        std::size_t start = pos;
+        while (start > 0) {
+            const text::Rune r = RuneBefore(line, start);
+            if ((!IsHiragana(r.cp) && r.cp != U'ー') || r.size == 0 || r.size > start) break;
+            start -= r.size;
+        }
+        std::string_view run = line.substr(start, pos - start);
+        const std::string_view whole = run;
+        const bool afterWord = start > 0 && (IsKanji(RuneBefore(line, start).cp) || IsKatakana(RuneBefore(line, start).cp));
+        auto name = [&](std::string_view t) {
+            const char32_t first = FirstRune(t).cp;
+            if (first == U'お' || first == U'ご' || !AllRunes(t, IsHiragana) || RoleLike(t)) return false;
+            const DictFlags f = Flags(t);
+            return (f.layerGiven || f.layerSurname) && !f.role && !f.thing &&
+                   Flags(std::string(t) + std::string(h)).records == 0;
+        };
+        bool found = false;
+        for (int k = 0; k < 2 && !run.empty(); k++) {
+            const std::size_t n = RuneCount(run);
+            const bool particle = IsParticleRune(FirstRune(run).cp);
+            if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && name(run)) {
+                out.emplace_back(run);
+                found = true;
+                break;
+            }
+            if (!particle) break;
+            run.remove_prefix(FirstRune(run).size);
+        }
+        // In a longer run, its last four or three kana, when the whole run with the honorific
+        // is no word (ねえあおいさん, ほらひかりちゃん).
+        if (found || RuneCount(whole) <= 4 || Flags(std::string(whole) + std::string(h)).records > 0) continue;
+        for (const std::size_t n : {std::size_t{4}, std::size_t{3}}) {
+            std::string_view t = whole;
+            for (std::size_t skip = RuneCount(whole) - n; skip > 0; skip--) t.remove_prefix(FirstRune(t).size);
+            if (name(t)) {
+                out.emplace_back(t);
+                break;
+            }
+        }
+    }
+    return out;
 }
 
 bool Registry::Addressed(std::string_view line, std::string_view t) {

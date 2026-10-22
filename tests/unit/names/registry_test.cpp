@@ -34,14 +34,24 @@ const dict::Snapshot* Dictionary() {
          "あなた\t당신\tN120\t\t\tGN\t18\n"
          "私\t나\tN120\t\t\tGN\t19\n"
          "わたくし\t저\tN120\t\t\tGN\t20\n"
-         "三日\t3일\tN110\t\t\tGN\t21\n"},
+         "三日\t3일\tN110\t\t\tGN\t21\n"
+         "あお\t$C2@\tH7U0\t\t\tGN\t25\n"
+         "ひかり\t빛\tN110\t\t\tGN\t26\n"
+         "ひよこ\t병아리\tN110\tVAm\t\tGN\t29\n"
+         "話\t이야기&AV@\tM443\t\t\tGN\t30\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
          "椎名\t시이나\tN130\tQPN\tWa\tGN\t12\n"
          "周\t아마네\tN130\tQPN\tWb\tGN\t13\n"
          "樹\t이츠키\tN130\tQPN\tWb\tGN\t14\n"
-         "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"},
+         "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"
+         "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"
+         "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t23\n"
+         "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"
+         "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
+         "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"
+         "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"},
     });
     return loaded.snapshot.get();
 }
@@ -115,6 +125,10 @@ HD_TEST(names_labels) {
         {Repeat("女子生徒Ａ「おはよう」", 3), false},
         {Repeat("魅音？「おはよう」", 3), false},
         {Repeat("// 魅音「おはよう」", 3), false},
+        // A name box: the name alone on a line, its quote on the next.
+        {Repeat("魅音\n「おはよう」", 3), true},
+        {Repeat("魅音\n「おはよう」", 2), false},
+        {Repeat("魅音\nおはよう。", 3), false},
     };
     for (const auto& [doc, want] : cases) {
         names::Registry r = Scan(snap, doc);
@@ -125,6 +139,41 @@ HD_TEST(names_labels) {
     // A joint label names both; Xの母 counts once for X.
     names::Registry r = Scan(snap, Repeat("梨花＆沙都子「おはよう」", 3) + "OutputLine(\"圭一の母\", NULL, \"어머니\", NULL, 0);\n圭一さん");
     HD_CHECK(r.Names() == (std::vector<std::string>{"圭一", "梨花", "沙都子"}));
+    // A name box of hiragana names the speaker and renders the name.
+    {
+        names::Registry box = Scan(snap, Repeat("のぞみ\n「……え？」", 3));
+        HD_CHECK(box.Names() == (std::vector<std::string>{"のぞみ"}));
+        HD_CHECK_EQ(box.Render("のぞみ"), std::string("노조미"));
+    }
+    // A hiragana person of the name layer that no other dictionary reads is a name before an
+    // honorific, also after a particle; a particle after a kanji starts no name (体がびくん).
+    // It stands for the person alone after two honorifics; after one, and for a common word
+    // (ひかり) or the form of an adjective (あおい), only where an honorific follows it.
+    {
+        const std::vector<std::string> tsugumi = {"つぐみ"};
+        names::Registry once = Scan(snap, "「つぐみちゃん的にはどう？」\n");
+        HD_CHECK(once.Names() == tsugumi);
+        HD_CHECK(once.HonorificOnlyNames() == tsugumi);
+        HD_CHECK_EQ(Occurrences(once, "つぐみちゃん"), std::string("つぐみ"));
+        HD_CHECK_EQ(Occurrences(once, "デスク、つぐみが唸る。"), std::string("つぐみ!"));
+        HD_CHECK_EQ(Occurrences(once, "妹のつぐみちゃん。"), std::string("つぐみ"));
+        HD_CHECK_EQ(Occurrences(once, "ねえつぐみちゃん"), std::string("つぐみ"));
+        HD_CHECK(Scan(snap, "「ねえつぐみちゃん」\n").HonorificOnlyNames() == tsugumi);
+        names::Registry twice = Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n");
+        HD_CHECK(twice.Names() == tsugumi);
+        HD_CHECK(twice.HonorificOnlyNames().empty());
+        HD_CHECK(Scan(snap, Repeat("体がびくんと跳ねる。", 3)).Names().empty());
+        names::Registry aoi = Scan(snap, Repeat("あおいさんが来た。", 3));
+        HD_CHECK(aoi.HonorificOnlyNames() == (std::vector<std::string>{"あおい"}));
+        HD_CHECK_EQ(Occurrences(aoi, "あおいさん、待って！"), std::string("あおい"));
+        HD_CHECK_EQ(Occurrences(aoi, "あおい空が広がる。"), std::string("あおい!"));
+        HD_CHECK(Scan(snap, Repeat("ひかりちゃん、おはよう。", 3)).HonorificOnlyNames() == (std::vector<std::string>{"ひかり"}));
+        // A creature noun is what speech addresses with an honorific (ひよこさん), and the ちゃん
+        // of the adverb ちゃんと before a verb is no honorific.
+        HD_CHECK(Scan(snap, Repeat("ねえひよこさん", 3)).Names().empty());
+        HD_CHECK(Scan(snap, Repeat("つぐみちゃんと話そう", 3)).Names().empty());
+        HD_CHECK(Scan(snap, Repeat("つぐみちゃんと遊んだ", 3)).Names() == tsugumi);
+    }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
     // A gloss that is a word of its own reads the word, no name (提督(あなた), 私(わたくし));
@@ -175,6 +224,18 @@ HD_TEST(names_honorifics) {
     }
     names::Registry r = Scan(snap, Repeat("リン様", 4));
     HD_CHECK_EQ(r.Render("リン"), std::string("린"));
+}
+
+// A stray continuation byte before an honorific or in a speaker line is read as one
+// replacement character; scanning never steps back past the start of the line.
+HD_TEST(names_malformed_utf8) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    for (const std::string doc : {"\xE3\x81\x82\x80さん", "\x80さん", "\x80\x80つぐみちゃん", "つぐみ\x80\n「おはよう」",
+                                  "\xE3\x80\x80\x80"}) {
+        names::Registry r = Scan(snap, doc);
+        HD_CHECK(r.Names().size() <= 1);
+    }
 }
 
 // A katakana word that introduces itself with と名乗る is a name in the whole document, also when

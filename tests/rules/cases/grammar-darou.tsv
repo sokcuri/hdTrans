@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+rewrite:wondering-darou	さあ、どっちだろう。	자, 어느 쪽일까.	fix	rewrites
+rewrite:wondering-darou	　どういう意味だろう……。	 무슨 뜻일까…….	fix	rewrites
+rewrite:wondering-darou	　未来と並んで歩くのは何年ぶりだろう。	 미래와 함께 걷는 것은 몇 년만일까.	fix	rewrites
+rewrite:wondering-darou	　……どう受け取るべきだろう。	 ……어떻게 받아야 할까.	fix	rewrites
+rewrite:wondering-darou	ビュッフェエリアはどうなっているだろう。	뷔페 에리어는 어떻게 되어 있을까.	fix	rewrites
+rewrite:wondering-darou	なら、これまでの態度は何だったのだろう。	그렇다면, 지금까지의 태도는 무엇이었던 걸까.	fix	rewrites
+rewrite:wondering-darou	何があってもついていくだろう	무엇이 있어도 따라갈 것이다	keep	rewrites
+rewrite:wondering-darou	ま、悪いことじゃないだろう。	뭐, 나쁜 일이 아닐 것이다.	keep	rewrites
+rewrite:wondering-darou	なぜなら彼は来るだろう。	왜냐하면 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	何しろ彼は来るだろう。	어쨌든 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	どっちみち雨だろう。	결국은 비일 것이다.	fix	rewrites
+rewrite:wondering-darou	何を言われようと、俺は行くだろう。	무슨 말을 들으려고, 나는 갈 것이다.	fix	rewrites
+rewrite:wondering-darou	真崎新へのなんらかの処分は必要となるだろう。	마사키 아라타에게로의 하등의 처분은 필요할 것이다.	fix	rewrites
+rewrite:wondering-darou	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일까.	keep	rewrites
+rewrite:wondering-darou	どっちのほうがいいだろう。	어느 쪽 쪽이 좋을까.	fix	rewrites
+rewrite:wondering-darou	どのような人だろう。	어떠한 사람일까.	fix	rewrites

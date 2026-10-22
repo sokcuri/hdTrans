@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-ending:書くのか	本当に行くのか？	정말로 가는 건가?	fix	builtin-ending
+ending:書くのか	本当に行くのか？	정말 가는 건가?	fix	builtin-ending
 ending:書くのか	そこで何をしているのか？	거기서 무엇을 하고 있는 건가?	fix	builtin-ending
 ending:書いたのか	もう食べたのか。	벌써 먹은 건가.	fix	builtin-ending
 ending:書いたのか	そこにいたのか。	거기에 있던 건가.	fix	builtin-ending
