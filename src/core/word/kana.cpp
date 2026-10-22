@@ -1,5 +1,7 @@
 #include "core/word/kana.h"
 
+#include <deque>
+#include <string>
 #include <vector>
 
 #include "core/text/hangul.h"
@@ -48,6 +50,7 @@ bool KatakanaCell(std::string_view c) { return IsKatakana(text::DecodeRune(c).cp
 struct Run {
     std::vector<std::string_view> cells;
     std::vector<std::string_view> scratch;
+    std::deque<std::string> composed;  // syllables made here, which cells may point to
     bool fault = false;
 
     long Size() const { return static_cast<long>(cells.size()); }
@@ -90,6 +93,7 @@ struct Run {
     }
 
     void ApplyFinal(long i, int row);
+    void AddFinalN(long i);
     void Matrix(long cursor);
     void Transliterate();
 };
@@ -136,6 +140,17 @@ void Run::ApplyFinal(long i, int row) {
         Replace(i + 1, kMarkMu, "");
     }
     if (At(i + 1) == kLongVowel) Replace(i + 1, kLongVowel, "");
+}
+
+// Writes the ン at cells[i + 1] as the final ㄴ of the syllable at cells[i], when the
+// syllable has no final.
+void Run::AddFinalN(long i) {
+    const text::Rune r = text::DecodeRune(At(i));
+    if (r.cp < U'가' || r.cp > U'힣' || (r.cp - U'가') % 28 != 0) return;
+    std::string& withN = composed.emplace_back();
+    text::AppendRune(withN, r.cp + 4);
+    Replace(i, At(i), withN);
+    Replace(i + 1, kMarkN, "");
 }
 
 // Transliterates the katakana at cells[cursor] by the matrix of single katakana,
@@ -196,6 +211,9 @@ void Run::Transliterate() {
             } else if (text::RuneCount(value) == 1 && At(cursor + 1) == kLongVowel) {
                 ApplyFinal(cursor, 10);
             }
+            // A ン after the syllable, or after the long mark it drops, is its final ㄴ
+            // (ヴァン 반, ティーン 틴).
+            if (Has(cursor + 1, kMarkN) && text::RuneCount(value) == 1) AddFinalN(cursor);
             direct = true;
             break;
         }

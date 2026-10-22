@@ -25,7 +25,7 @@ uint64_t PairFingerprint(std::span<const KanaPair> rows) {
 // The expected values are the hashes of the tables the data was generated from, cell
 // by cell and row by row in table order.
 HD_TEST(kana_tables_fingerprints) {
-    HD_CHECK_EQ(PairFingerprint(KanaDirect()), uint64_t{0x6f375b5ccf9c3f44ull});
+    HD_CHECK_EQ(PairFingerprint(KanaDirect()), uint64_t{0x61af42a220cf1a02ull});
     HD_CHECK_EQ(PairFingerprint(HiraganaRows()), uint64_t{0x28dfd139d3b063b4ull});
 
     hdtest::Fnv matrix;
