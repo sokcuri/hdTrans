@@ -632,13 +632,30 @@ bool PassiveStem(std::string_view stem) {
     return !stem.empty() && RuneIn(DecodeLastRune(stem).cp, "かさたなはまやらわがざだばぱ");
 }
 
+// Whether a が subject stands before verb item it in its clause: then てある is the state the
+// thing is in (窓が開けてある 창이 열려 있다), not an action done beforehand.
+bool SubjectGaBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s == "が") return p->prev != nullptr;
+        if (p->detail->Yougo() || s.empty() || Has("、。,「」『』！？", s)) break;
+    }
+    return false;
+}
+
+// Whether a Korean verb lemma already reads as a passive or a change of state (닫혀지다,
+// 정리되다, 이용당하다), which takes no 두다.
+bool KoreanPassive(std::string_view lemma) {
+    return lemma.ends_with("지다") || lemma.ends_with("되다") || lemma.ends_with("당하다");
+}
+
 }  // namespace
 
 void PreparedState(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb || it->detail->record != 0 ||
             it->lexical || InSet(kWritingVerbs, it->group->surface) || GrammarCode(it->GAttr(it->selected), "Dx") ||
-            PassiveStem(it->group->surface)) {
+            PassiveStem(it->group->surface) || SubjectGaBefore(it) || KoreanPassive(ItemLemma(f, it, it->selected))) {
             continue;
         }
         const Entry* e = it->DirectEntry(it->DirectIndex());

@@ -22,3 +22,8 @@ rewrite:wondering-darou	何を言われようと、俺は行くだろう。	무�
 rewrite:wondering-darou	真崎新へのなんらかの処分は必要となるだろう。	마사키 아라타에게로의 하등의 처분은 필요할 것이다.	fix	rewrites
 rewrite:wondering-darou	ビュッフェエリアはどうなっているだろう。	뷔페 에리어는 어떻게 되어 있을까.	keep	rewrites
 rewrite:wondering-darou	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일까.	keep	rewrites
+rewrite:prepared-state	窓が開けてある。	창이 열려 있다.	fix	rewrites
+rewrite:prepared-state	ポスターが貼ってある。	포스터가 붙여 있다.	fix	rewrites
+rewrite:prepared-state	短剣には毒が塗ってあった。	단검에는 독이 발라 있었다.	fix	rewrites
+rewrite:prepared-state	窓を開けてある。	창을 열어 두었다.	keep	rewrites
+rewrite:prepared-state	切符を買ってある。	표를 사 두었다.	keep	rewrites

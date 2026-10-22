@@ -75,7 +75,8 @@ void ResultState(Flusher& f);
 void SimpleAspect(Flusher& f);
 // The progressive ていた before a noun it describes read as 던 (読んでいた本 읽던 책).
 void PastProgressiveAdnominal(Flusher& f);
-// The てある of an action done beforehand read as 어 두었다 (用意してある 준비해 두었다).
+// The てある of an action done beforehand read as 어 두었다 (用意してある 준비해 두었다); after a が
+// subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
 void PreparedState(Flusher& f);
 void NotYet(Flusher& f);
 void SeeAnd(Flusher& f);
