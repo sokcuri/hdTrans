@@ -153,6 +153,9 @@ HD_TEST(names_labels) {
         HD_CHECK(once.HonorificOnlyNames() == tsugumi);
         HD_CHECK_EQ(Occurrences(once, "つぐみちゃん"), std::string("つぐみ"));
         HD_CHECK_EQ(Occurrences(once, "デスク、つぐみが唸る。"), std::string("つぐみ!"));
+        HD_CHECK_EQ(Occurrences(once, "妹のつぐみちゃん。"), std::string("つぐみ"));
+        HD_CHECK_EQ(Occurrences(once, "ねえつぐみちゃん"), std::string("つぐみ"));
+        HD_CHECK(Scan(snap, "「ねえつぐみちゃん」\n").HonorificOnlyNames() == tsugumi);
         names::Registry twice = Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n");
         HD_CHECK(twice.Names() == tsugumi);
         HD_CHECK(twice.HonorificOnlyNames().empty());

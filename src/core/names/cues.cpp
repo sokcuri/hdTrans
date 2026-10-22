@@ -673,9 +673,9 @@ std::string_view Registry::KanaHonorificAt(std::string_view s) {
 // The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (not たん or
 // っち, which also end words: こっち): the hiragana run before it, or, after a kanji or
 // katakana, the run less the one-kana particle that starts it (妹のさよりちゃん), of three or
-// four kana, that the name layer reads as a person and no dictionary as a person or animal
-// noun (うさぎさん), that starts with no お or ご and that joins the honorific into no dictionary
-// word (みなさん, たくさん).
+// four kana, or the last four or three kana of a longer run (ねえあおいさん), that the name
+// layer reads as a person and no dictionary as a person or animal noun (うさぎさん), that starts
+// with no お or ご and that joins the honorific into no dictionary word (みなさん, たくさん).
 std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
     std::vector<std::string> out;
     for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
@@ -688,21 +688,36 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             start -= r.size;
         }
         std::string_view run = line.substr(start, pos - start);
+        const std::string_view whole = run;
         const bool afterWord = start > 0 && (IsKanji(RuneBefore(line, start).cp) || IsKatakana(RuneBefore(line, start).cp));
+        auto name = [&](std::string_view t) {
+            const char32_t first = FirstRune(t).cp;
+            if (first == U'お' || first == U'ご' || !AllRunes(t, IsHiragana) || RoleLike(t)) return false;
+            const DictFlags f = Flags(t);
+            return (f.layerGiven || f.layerSurname) && !f.role && Flags(std::string(t) + std::string(h)).records == 0;
+        };
+        bool found = false;
         for (int k = 0; k < 2 && !run.empty(); k++) {
             const std::size_t n = RuneCount(run);
-            const char32_t first = FirstRune(run).cp;
-            const bool particle = IsParticleRune(first);
-            if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && first != U'お' && first != U'ご' &&
-                AllRunes(run, IsHiragana) && !RoleLike(run)) {
-                const DictFlags f = Flags(run);
-                if ((f.layerGiven || f.layerSurname) && !f.role && Flags(std::string(run) + std::string(h)).records == 0) {
-                    out.emplace_back(run);
-                    break;
-                }
+            const bool particle = IsParticleRune(FirstRune(run).cp);
+            if ((k == 1 || !particle || !afterWord) && n >= 3 && n <= 4 && name(run)) {
+                out.emplace_back(run);
+                found = true;
+                break;
             }
             if (!particle) break;
             run.remove_prefix(FirstRune(run).size);
+        }
+        // In a longer run, its last four or three kana after a word such as an interjection
+        // (ねえあおいさん, ほらひかりちゃん), when the whole run with the honorific is no word.
+        if (found || RuneCount(whole) <= 4 || Flags(std::string(whole) + std::string(h)).records > 0) continue;
+        for (const std::size_t n : {std::size_t{4}, std::size_t{3}}) {
+            std::string_view t = whole;
+            for (std::size_t skip = RuneCount(whole) - n; skip > 0; skip--) t.remove_prefix(FirstRune(t).size);
+            if (name(t)) {
+                out.emplace_back(t);
+                break;
+            }
         }
     }
     return out;
