@@ -166,6 +166,29 @@ bool Registry::Gikun(std::string_view base, std::string_view reading) {
     return false;
 }
 
+std::string Registry::DropReadings(std::string_view line) {
+    if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos) return std::string(line);
+    std::string out;
+    std::size_t at = 0;
+    RubyMatch m;
+    for (std::size_t from = 0; FindReading(line, from, m); from = m.end) {
+        std::string hiragana;
+        for (std::size_t i = 0; i < m.reading.size();) {
+            const text::Rune r = RuneAt(m.reading, i);
+            i += r.size;
+            text::AppendRune(hiragana, IsKatakana(r.cp) && r.cp != U'ー' ? r.cp - 0x60 : r.cp);
+        }
+        const DictFlags f = Flags(hiragana);
+        if (IsKatakana(FirstRune(m.reading).cp) && (!f.common || f.person)) continue;
+        if (f.pronoun && Flags(m.base).human) continue;
+        out.append(line.substr(at, m.begin - at));
+        out.append(m.base);
+        at = m.end;
+    }
+    out.append(line.substr(at));
+    return out;
+}
+
 void Registry::Add(std::string_view rawLine, Evidence* evidence) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;

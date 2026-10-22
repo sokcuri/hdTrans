@@ -30,7 +30,7 @@ const dict::Snapshot* Dictionary() {
          "ソード\t소드\tN110\t\t\tGN\t10\n"
          "ワールド\t월드\tN110\t\t\tGN\t11\n"
          "ハル\t헐\tN110\t\t\tGN\t15\n"
-         "提督\t제독\tN110\t\t\tGN\t17\n"
+         "提督\t제독\tN110\tUAqVHn\t\tGN\t17\n"
          "あなた\t당신\tN120\t\t\tGN\t18\n"
          "私\t나\tN120\t\t\tGN\t19\n"
          "わたくし\t저\tN120\t\t\tGN\t20\n"
@@ -38,7 +38,8 @@ const dict::Snapshot* Dictionary() {
          "あお\t$C2@\tH7U0\t\t\tGN\t25\n"
          "ひかり\t빛\tN110\t\t\tGN\t26\n"
          "ひよこ\t병아리\tN110\tVAm\t\tGN\t29\n"
-         "話\t이야기&AV@\tM443\t\t\tGN\t30\n"},
+         "話\t이야기&AV@\tM443\t\t\tGN\t30\n"
+         "なま\t날것\tN110\t\t\tGN\t32\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -96,8 +97,34 @@ HD_TEST(names_strip_ruby) {
         {"<ruby>梨花<rt>りか</rt></ruby>ちゃん", "梨花ちゃん"},
         {"<ruby><rb>梨花</rb><rp>（</rp><rt>りか</rt><rp>）</rp></ruby>", "梨花"},
         {"《》だけ", "《》だけ"},
+        {"｜魔導騎士（マジックナイト）が", "魔導騎士が"},
+        {"運行情報 | 京都(北部)へ", "運行情報 | 京都(北部)へ"},
+        {"｜騎士（の話）", "｜騎士（の話）"},
     };
     for (const auto& [in, want] : cases) HD_CHECK_EQ(names::StripRuby(in), want);
+}
+
+HD_TEST(names_drop_readings) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r(snap);
+    const std::vector<std::pair<std::string, std::string>> cases = {
+        {"天井の梁（はり）から", "天井の梁から"},
+        {"錆（さ）びない", "錆びない"},
+        {"和気藹々(わきあいあい)とした", "和気藹々とした"},
+        {"生（ナマ）食", "生食"},
+        {"山田太郎（やまだ たろう）。", "山田太郎。"},
+        // A katakana word over the kanji, a pronoun over a person noun, an aside.
+        {"炎（ブレス）", "炎（ブレス）"},
+        {"提督(あなた)、", "提督(あなた)、"},
+        {"一部隊（十騎）", "一部隊（十騎）"},
+        // More morae than one kanji is read with, mixed scripts, no kanji before.
+        {"猫（ねこねこねこ）", "猫（ねこねこねこ）"},
+        {"種（ポストカードつき）", "種（ポストカードつき）"},
+        {"これ（はり）", "これ（はり）"},
+        {"梁（ ）", "梁（ ）"},
+    };
+    for (const auto& [in, want] : cases) HD_CHECK_EQ(r.DropReadings(in), want);
 }
 
 HD_TEST(names_speaker_cues) {

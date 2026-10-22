@@ -40,6 +40,8 @@ struct DictFlags {
     // A base record of a creature, fruit or food noun or of an adverb: what speech addresses
     // with an honorific (ひよこさん, いちごちゃん) or what stands before ちゃんと (いつか).
     bool thing = false;
+    // A record of a pronoun (あなた, わし), and one of a person noun that is none (提督).
+    bool pronoun = false, human = false;
     // The name-layer person records: a surname or given name, and the first Hangul
     // target among them.
     bool layerSurname = false, layerGiven = false;
@@ -105,6 +107,11 @@ public:
     // The registered names of line (ruby markup removed), leftmost-longest, that fill
     // their kanji or katakana run.
     std::vector<Occurrence> Occurrences(std::string_view line);
+    // line without the readings in parentheses after kanji (FindReading): every hiragana
+    // reading, and a katakana one whose hiragana spelling is a word (生（ナマ）). A katakana
+    // word written over the kanji (炎（ブレス）) and a pronoun over a person noun
+    // (提督(あなた)) stay as glosses.
+    std::string DropReadings(std::string_view line);
 
     text::Preset preset = text::Preset::Fan;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.

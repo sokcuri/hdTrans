@@ -405,8 +405,8 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
-    facts.text = names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female));
     names::Registry& r = *doc.registry;
+    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)));
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
         if (o.noun) {

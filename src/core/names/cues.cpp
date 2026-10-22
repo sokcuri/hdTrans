@@ -563,6 +563,11 @@ DictFlags Registry::Flags(std::string_view s) {
             } else {
                 f.common = true;
                 const std::string_view part = rec.codes->partText;
+                if (part.starts_with("N12") || part.starts_with("I12")) {
+                    f.pronoun = true;
+                } else if (Has(sem, "VHn")) {
+                    f.human = true;
+                }
                 f.thing = f.thing || part.starts_with("E3") || Has(sem, "VAm") || Has(sem, "QAM") || Has(sem, "VFd") ||
                           std::any_of(kCreatureCodes.begin(), kCreatureCodes.end(), [&](std::string_view c) { return Has(sem, c); });
                 // A person, profession or animal noun, or a pronoun (オレ, 俺).

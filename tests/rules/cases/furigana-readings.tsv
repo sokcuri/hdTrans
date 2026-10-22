@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+names:reading	天井の梁（はり）からこちらを見ている。	천장의 대들보로부터 이쪽을 보고 있다.	fix	normalize
+names:reading	温泉地でも錆（さ）びないように木製だった。	온천지에서도 녹슬지 않도록 목제였다.	fix	normalize
+names:reading	メインは秋刀魚と鮭（しゃけ）だ。	메인은 꽁치와 연어다.	fix	normalize
+names:reading	和気藹々(わきあいあい)とした遊びだ。	화기 애애로 한 놀이다.	fix	normalize
+names:reading	お腹を撫（な）でることだって怖くはありません。	배를 쓰다듬는 것이라도 무섭지는 않습니다.	fix	normalize
+names:reading	食生活が、生（ナマ）食中心だったからだ。	식생활이, 생식 중심이었기 때문이다.	fix	normalize
+names:reading	左(ひだり)舷に、敵艦発見！	좌현에, 적함 발견!	fix	normalize
+names:reading	竜の炎（ブレス）かな？	용의 불길(호흡)일까?	keep	normalize
+names:reading	夕食（カレー）を作る。	저녁식사(카레)를 만든다.	keep	normalize
+names:reading	一部隊（十騎）いれば十分だ。	일부대(10기) 있으면 충분하다.	keep	normalize
+names:reading	｜魔導騎士（マジックナイト）が立つ。	마짓쿠나이토가 선다.	fix	normalize
+names:reading	列車運行情報 | 京都・洛北(比叡山、鞍馬)へ	열차 운행 정보 | 교토·도성의 북쪽(히에이잔, 안마)에	keep	normalize
