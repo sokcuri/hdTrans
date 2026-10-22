@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:jisjk:139412	まあ、食料確保をしてくれるのは助かる。	뭐, 식량 확보를 해 주는 것은 도움이 된다.	fix	local
+dict:jisjk:139412	食料の交易ができれば助かるが、行くのは難しい。	식량 교역이 가능하면 도움이 되지만, 가는 것은 어렵다.	fix	local
+dict:jisjk:139412	話が早くて助かる。	이야기가 빠르고 도움이 된다.	fix	local
+dict:jisjk:139412	皆が説得してくれて助かった。	모두가 설득해 주어서 도움이 되었다.	fix	local
+dict:jisjk:139412	命が助かった。	생명이 살아났다.	keep	local
+dict:jisjk:139412	長男だけ外出してて助かったの。	장남만 외출하고 있어 살아났어.	keep	local
+dict:jisjk:139412	今後も来てもらえると助かる。	향후도 와 줄 수 있으면 도움이 된다.	fix	local
+dict:jisjk:139412	逃げれば助かる。	도망치면 살아난다.	keep	local
