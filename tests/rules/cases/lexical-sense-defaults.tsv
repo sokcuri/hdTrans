@@ -64,3 +64,5 @@ dict:jisjk:5128	たしかにレナはすごいけど	확실히 레나는 대단�
 dict:jisjk:5128	すごい見てる	rule:dict:jisjk:5128=대단$KA@	fix	local
 dict:jisjk:268079	きーんと冷えててすっごくおいしいですよ～	끼잉 차가워져 있어 엄청 맛있어요~	fix	lookup
 dict:jisjk:90693	ＳとＮがぴったりくっついてるような感じ	S와 N이 딱 들러붙어 있는 것 같은 느낌	fix	lookup
+dict:i:3378	挨拶を交わし、一日が始まる。	인사를 나누어, 하루가 시작된다.	fix	lookup
+dict:i:3378	二人は挨拶を交わす。	두 사람은 인사를 나눈다.	fix	lookup
