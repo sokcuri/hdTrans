@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -543,10 +545,21 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     return Take(s, p, [](char32_t c) { return !IsHiraganaClass(c); }) && Lit(s, p, "し") && after(p);
 }
 
-// Toku where the text before allows it: at the start of a clause やっといた is the adverb
-// やっと before いた (やっといた、探したよ), not やっておいた.
+// Toku where the text around allows it: やっといた that starts a clause and is cut off by a
+// mark before a verb of searching or finding in its sentence is the adverb やっと before
+// いた (やっといた、探したよ), not やっておいた (やっといたよ).
 bool TokuInText(std::string_view s, size_t pos, Match& m) {
-    if (s.substr(pos).starts_with("やっといた") && ClauseStart(s, pos)) return false;
+    constexpr std::string_view kFound = "やっといた";
+    if (s.substr(pos).starts_with(kFound) && ClauseStart(s, pos)) {
+        size_t p = pos + kFound.size();
+        if (OneOf(s, p, U"、，！!…‥")) {
+            std::string_view rest = s.substr(p);
+            rest = rest.substr(0, std::min(rest.find("。"), rest.find("」")));
+            for (std::string_view v : {"探", "捜", "見つけ", "さがし", "みつけ"}) {
+                if (rest.find(v) != std::string_view::npos) return false;
+            }
+        }
+    }
     return Toku(s, pos, m);
 }
 
