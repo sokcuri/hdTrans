@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+dict:genre-terms:2	必ず騎士団長になるから	반드시 기사단장이 되니까	fix	lookup
+dict:genre-terms:14	この国の第一王子様であったようだ。	이 나라의 제1 왕자님인 것 같다.	fix	lookup
+dict:genre-terms:7	傭兵ギルドの受付嬢。	용병 길드의 접수원.	fix	lookup
+dict:genre-terms:6	昔はちょっとは名の知れた冒険者だった	옛날은 조금은 이름이 알려진 모험가였다	fix	lookup
+dict:genre-terms:4	竜騎士の存在しない蛮族の国と思われます。	용기사의 존재하지 않는 오랑캐의 나라라고 생각됩니다.	fix	lookup
+dict:genre-terms:22	男爵位に叙爵される。	남작위에 작위 수여된다.	fix	lookup
+dict:genre-terms:28	土魔法しか使えない	흙 마법밖에 사용할 수 없다	fix	lookup
+dict:genre-terms:5	「零戦52型」	「제로센 52형」	fix	lookup
+dict:genre-terms:34	「一式陸攻」性能向上型の調達	「1식 육공」성능 향상형의 조달	fix	lookup
+dict:genre-terms:30	「九七式艦攻」「天山」	「97식 함공」「텐잔」	fix	lookup
+dict:genre-terms:6	世界一の冒険者になりたい	세계 제일의 모험가가 되고 싶다	fix	lookup
