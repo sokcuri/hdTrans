@@ -109,6 +109,7 @@ char NumberClass(const TextBefore& text, size_t end) {
     bool decimal = false;
     for (size_t i = end; i > 0;) {
         const auto r = DecodeLastRune(text, i);
+        if (r.size == 0 || r.size > i) break;
         i -= r.size;
         if (const int d = DigitValue(r.cp); d >= 0) {
             if (count == 0) last = d;
@@ -163,7 +164,7 @@ char LatinClass(const TextBefore& text, size_t end) {
     while (i > 0) {
         const auto r = DecodeLastRune(text, i);
         const char c = LatinValue(r.cp);
-        if (c == 0) break;
+        if (c == 0 || r.size == 0 || r.size > i) break;
         lower = lower || IsLowerLatin(r.cp);
         if (count < 3) last[count] = c;
         count++;
@@ -268,6 +269,7 @@ char ParticleClass(const TextBefore& text) {
             if (const auto reading = dict::Reading(r)) return HangulClass(text::Final(*reading));
             return 'v';
         }
+        if (rune.size == 0 || rune.size > i) return 0;
         i -= rune.size;
     }
     return 0;

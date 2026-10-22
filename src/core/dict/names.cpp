@@ -154,7 +154,7 @@ bool InflectedKey(std::string_view key, const Dict& base) {
     }
     for (std::size_t i = key.size(); i > 0;) {
         const auto r = DecodeLastRune(key.substr(0, i));
-        if (!IsHiragana(r.cp)) return false;
+        if (!IsHiragana(r.cp) || r.size == 0 || r.size > i) return false;
         i -= r.size;
         const std::string_view stem = key.substr(0, i);
         if (stem.empty() || (RuneCount(stem) == 1 && IsHiragana(FirstRune(stem)))) return false;

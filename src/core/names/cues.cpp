@@ -657,7 +657,7 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
         std::size_t start = pos;
         while (start > 0) {
             const text::Rune r = RuneBefore(line, start);
-            if (!IsHiragana(r.cp) && r.cp != U'ー') break;
+            if ((!IsHiragana(r.cp) && r.cp != U'ー') || r.size == 0 || r.size > start) break;
             start -= r.size;
         }
         std::string_view run = line.substr(start, pos - start);

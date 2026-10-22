@@ -647,7 +647,7 @@ bool JoinsWord(std::string_view before, const std::string& w, std::string_view a
     size_t k = before.size();
     for (int i = 0; i < 3; i++) {
         const text::Rune r = LastRune(before.substr(0, k));
-        if (!IsHiraganaRune(r.cp)) break;
+        if (!IsHiraganaRune(r.cp) || r.size == 0 || r.size > k) break;
         k -= r.size;
         if (Longest(std::string(before.substr(k)) + word, ctx, snap) > before.size() - k) return true;
     }
@@ -860,7 +860,7 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore) {
     size_t start = end;
     while (start > 0) {
         const text::Rune r = LastRune(text.substr(0, start));
-        if (!NicknameRune(r.cp)) break;
+        if (!NicknameRune(r.cp) || r.size == 0 || r.size > start) break;
         start -= r.size;
     }
     const auto runes = [&](size_t from) { return CountRunes(text.substr(from, end - from), [](char32_t) { return true; }); };

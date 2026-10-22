@@ -59,12 +59,17 @@ inline text::Rune FirstRune(std::string_view s) {
     return text::DecodeRune(s);
 }
 
-// The last code point of s that starts before byte end; {0, 0} for none.
+// The code point of s that ends at byte end; {0, 0} for none. A byte that ends no
+// sequence there (a stray continuation byte) is U+FFFD of size 1, so the size never
+// exceeds end.
 inline text::Rune RuneBefore(std::string_view s, std::size_t end) {
     if (end == 0) return {0, 0};
+    const std::size_t lim = end >= 4 ? end - 4 : 0;
     std::size_t i = end - 1;
-    while (i > 0 && (static_cast<unsigned char>(s[i]) & 0xC0) == 0x80) i--;
-    return text::DecodeRune(s.substr(i));
+    while (i > lim && (static_cast<unsigned char>(s[i]) & 0xC0) == 0x80) i--;
+    const text::Rune r = text::DecodeRune(s.substr(i, end - i));
+    if (i + r.size != end) return {text::kReplacement, 1};
+    return r;
 }
 
 inline bool IsKanaText(std::string_view s) {
@@ -86,7 +91,7 @@ inline std::string_view TrimSpace(std::string_view s) {
     }
     while (e > b) {
         const text::Rune r = RuneBefore(s, e);
-        if (!IsSpace(r.cp)) break;
+        if (!IsSpace(r.cp) || r.size == 0 || r.size > e - b) break;
         e -= r.size;
     }
     return s.substr(b, e - b);

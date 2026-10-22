@@ -197,6 +197,18 @@ HD_TEST(names_honorifics) {
     HD_CHECK_EQ(r.Render("リン"), std::string("린"));
 }
 
+// A stray continuation byte before an honorific or in a speaker line is read as one
+// replacement character; scanning never steps back past the start of the line.
+HD_TEST(names_malformed_utf8) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    for (const std::string doc : {"\xE3\x81\x82\x80さん", "\x80さん", "\x80\x80つぐみちゃん", "つぐみ\x80\n「おはよう」",
+                                  "\xE3\x80\x80\x80"}) {
+        names::Registry r = Scan(snap, doc);
+        HD_CHECK(r.Names().size() <= 1);
+    }
+}
+
 // A katakana word that introduces itself with と名乗る is a name in the whole document, also when
 // the dictionary has it as a common word; a kanji word, a role and other quotes are not.
 HD_TEST(names_self_introduction) {

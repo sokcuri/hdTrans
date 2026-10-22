@@ -225,7 +225,7 @@ bool PredicateBefore(std::string_view before) {
     size_t start = before.size();
     while (start > 0) {
         const text::Rune r = LastRune(before.substr(0, start));
-        if (!IsHiraganaClass(r.cp)) break;
+        if (!IsHiraganaClass(r.cp) || r.size == 0 || r.size > start) break;
         start -= r.size;
     }
     const std::string_view run = before.substr(start);
