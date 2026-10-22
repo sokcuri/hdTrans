@@ -44,7 +44,9 @@ const dict::Snapshot* Dictionary() {
          "さんま\t꽁치\tN110\t\t\tGN\t34\n"
          "さんま\t산마\tN130\tQPN\tWb\tGN\t35\n"
          "千里\t천리\tN110\t\t\tGN\t36\n"
-         "ちさと\t치사토\tN130\tQPN\tWb\tGN\t37\n"},
+         "ちさと\t치사토\tN130\tQPN\tWb\tGN\t37\n"
+         "みか\t미카\tN130\tQPN\tWb\tGN\t38\n"
+         "用途\t용도\tN110\t\t\tGN\t39\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -215,7 +217,7 @@ HD_TEST(names_labels) {
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
     // A gloss that is a word of its own reads the word, no name (提督(あなた), 私(わたくし));
-    // one that is no word names (三日(みか)).
+    // one that is a name and no word names (三日(みか)).
     {
         std::string got;
         for (const std::string& n : Scan(snap, Repeat("提督(あなた)、何いってんの！", 3) + Repeat("私(わたくし)、行くわ。", 3)).Names()) got += n + " ";
@@ -223,6 +225,8 @@ HD_TEST(names_labels) {
     }
     const std::vector<std::string> mika = Scan(snap, Repeat("三日(みか)が来た。", 3)).Names();
     HD_CHECK(std::find(mika.begin(), mika.end(), "三日") != mika.end());
+    // A reading in no dictionary after a word that is only a word reads the word.
+    HD_CHECK(Scan(snap, Repeat("用途(ようと)はわからない。", 3)).Names().empty());
     // A reading that is also a name reads the word when a word of it has the base's Korean.
     HD_CHECK(Scan(snap, Repeat("秋刀魚(さんま)を焼いた。", 3)).Names().empty());
     const std::vector<std::string> chisato = Scan(snap, Repeat("千里(ちさと)が来た。", 3)).Names();

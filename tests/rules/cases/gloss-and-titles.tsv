@@ -50,3 +50,4 @@ restore:retort-idiom	「何言ってるの、あたりまえじゃない」	「�
 restore:retort-idiom	あんたが何言ったか覚えてる	네가 무슨 말을 했는지 기억하고 있다	keep	restore
 restore:retort-idiom	何を言ってもいい	무슨 말을 해도 괜찮다	keep	restore
 names:gloss-word	秋刀魚（さんま）は大きいので半分に切る。	꽁치는 크기 때문에 반으로 자른다.	fix	normalize
+names:gloss-word	右舷（みぎげん）の敵艦を撃て！	우현의 적함을 쏘아라!	fix	normalize
