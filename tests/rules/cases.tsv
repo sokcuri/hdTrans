@@ -101,7 +101,7 @@ L300	彼は医者なんだ。	그는 의사야.	current	local
 L300	明日は休みなんだ。	내일은 휴일이야.	current	local
 L317	庭の鳥に餌をやった。	뜰의 새에게 먹이를 주었다.	current	local
 L317	今度は私が作ってやるよ。	이번에는 내가 만들어 줄게.	current	local
-L327	田中さんは今日休みです。	타나카씨는 오늘 휴일입니다.	current	local
+L327	田中さんは今日休みです。	타나카 씨는 오늘 휴일입니다.	current	local
 L335	どんな感じの部屋ですか。	어떤 느낌의 방입니까.	current	local
 L335	明るい感じの人だと思う。	밝은 느낌의 사람이라고 생각한다.	current	local
 L411	時間はゆっくりと過ぎて行く。	시간은 천천히 지나 간다.	current	local
@@ -461,7 +461,7 @@ L2989	梨がへった。	배가 줄었다.	current	local
 L3007	どうもすみませんが、教えてください。	정말로 죄송합니다만, 가르쳐 주세요.	fix	local
 L3044	ホテルはネットで予約出来ます。	호텔은 넷에서 예약 할 수 있습니다.	current	local
 L3044	この部屋で自由に料理が出来る。	이 방에서 자유롭게 요리를 할 수 있다.	current	local
-L3046	田中さんね、昨日引っ越したんだって。	타나카씨, 어제 이사했다고.	current	local
+L3046	田中さんね、昨日引っ越したんだって。	타나카 씨, 어제 이사했다고.	current	local
 L3059	「ん？　どうかした？」	「응? 왜 그래?」	current	local
 L3059	「ん？　もう一回言って？」	「응? 다시 한번 말해?」	current	local
 L3093	なんか寒いね。	왠지 춥네.	current	local

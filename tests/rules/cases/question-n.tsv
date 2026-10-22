@@ -2,6 +2,6 @@ rule	input	expected	kind	layer
 normalize:question-n	試験に落ちたん？	시험에 떨어졌어?	fix	normalize
 normalize:question-n	もう帰るん？	이제 돌아가는 거야?	fix	normalize
 normalize:question-n	そうなん？	그래?	fix	normalize
-normalize:question-n	コウジくん？	코우지군?	keep	normalize
+normalize:question-n	コウジくん？	코우지 군?	keep	normalize
 normalize:question-n	たぶん？	아마?	keep	normalize
 normalize:question-n	うん？	응?	keep	normalize

@@ -482,6 +482,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
+    // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
+    if (kind == '1' && (nextEntry == "씨" || nextEntry == "군")) {
+        constexpr std::string_view kSpacedHonorifics[] = {"さん", "くん", "君", "氏"};
+        if (std::find(std::begin(kSpacedHonorifics), std::end(kSpacedHonorifics), next.surface) !=
+            std::end(kSpacedHonorifics)) {
+            return Result(std::move(t), true);
+        }
+    }
     // A noun of degree, time or listing read as a free noun after a word stands apart
     // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등); 等 after a number is a rank (1등).
     struct FreeNoun {

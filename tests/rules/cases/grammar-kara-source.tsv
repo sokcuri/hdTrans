@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:gram:kara:person	姉から手紙が届いた。	언니에게서 편지가 도착했다.	fix	local
-dict:gram:kara:person	佐藤さんから話を聞いた。	사토씨에게서 이야기를 들었다.	fix	local
+dict:gram:kara:person	佐藤さんから話を聞いた。	사토 씨에게서 이야기를 들었다.	fix	local
 dict:gram:kara:person	先輩から道具を借りた。	선배에게서 도구를 빌렸다.	fix	local
 dict:gram:kara:person	姉からの手紙を読んだ。	언니로부터의 편지를 읽었다.	keep	local
 dict:gram:kara:person	北海道から来た。	홋카이도에서 왔다.	keep	local
