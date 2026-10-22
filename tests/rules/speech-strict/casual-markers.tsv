@@ -6,7 +6,7 @@ compose:speech-casual-marked	「ずっと待ってる。寒いね」	「계속 �
 compose:speech-casual-marked	「これは僕の本だよ。昨日買った」	「이건 내 책이야. 어제 샀어」	fix	compose
 compose:speech-casual-marked	「何か落ちてるよ。君のものか」	「뭔가 떨어져 있어. 네 건가」	fix	compose
 compose:speech-casual-marked	「家に帰るよ。疲れた」	「집에 돌아가. 지쳤어」	fix	compose
-compose:speech-casual-marked	「いいもん。一人で行くもん。平気だ」	「좋은 걸. 혼자서 가는걸. 아무렇지도 않아」	fix	compose
+compose:speech-casual-marked	「いいもん。一人で行くもん。平気だ」	「좋은 걸. 혼자서 가는걸. 괜찮아」	fix	compose
 compose:speech-casual-marked	「明日は早く起きるよ。もう寝る」	「내일은 일찍 일어나. 이제 잔다」	keep	compose
 compose:speech-casual-marked	「ありがとうね。助かった」	「고마워. 살았어」	fix	compose
 compose:speech-casual-marked	「ごめんなさいね。助かった」	「미안해요. 살았다」	keep	compose

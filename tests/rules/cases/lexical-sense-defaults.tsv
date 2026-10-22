@@ -3,3 +3,8 @@ dict:jisjk:3372	だから余計なことを考えるな	그러니까 쓸데없�
 dict:jisjk:3372	余計な心配だったようだ。	쓸데없는 걱정이었던 것 같다.	fix	lookup
 dict:w:26720	余計に時間かかるだろ	더 시간 걸리지	fix	lookup
 dict:jisjk:3372	一言余計よ！	한마디 쓸데없어!	keep	lookup
+dict:jisjk:3860	「身体はもう平気なのか？」	「몸은 이제 괜찮아?」	fix	lookup
+dict:jisjk:3860	「平気なの？」	「괜찮아?」	fix	lookup
+dict:lex:heiki:alone	平気？	괜찮아?	fix	lookup
+dict:jisjk:3860	平気で何時間もこもってる	rule:dict:jisjk:3860=아무렇지도 %B5@	keep	local
+phrase:平気な顔	平気な顔して甘い言葉を囁く	아무렇지 않은 얼굴 해 달콤한 말을 속삭인다	fix	builtin-phrase
