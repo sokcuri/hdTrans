@@ -30,6 +30,7 @@ void Flush(Flusher& f) {
         ResultState(f);
         SimpleAspect(f);
         PastProgressiveAdnominal(f);
+        PreparedState(f);
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);

@@ -578,6 +578,77 @@ bool DescribedNoun(const Worker& w, const Item* it) {
 
 }  // namespace
 
+namespace {
+
+// Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
+constexpr std::string_view kWritingVerbs[] = {"書", "か", "描", "記", "記し", "しるし"};
+
+// The ending of 두다 that says an action was done beforehand, for the ending of the existential
+// ある after a て form: the present reads as done (4다 5다, 0 8, 7니다 5습니다, 2니까 5으니까); a
+// condition (2면), a connective 6 that goes on and the past keep their form. "" for other
+// endings.
+std::string PreparedEnding(std::string_view ending, bool utteranceEnd) {
+    if (ending.empty()) return {};
+    const std::string_view rest = ending.substr(1);
+    switch (ending[0]) {
+        case '4': return "5" + std::string(rest);
+        case '0': return "8" + std::string(rest);
+        case '7': return "5습" + std::string(rest);
+        case '3': return "5을" + std::string(rest);
+        case '5': return std::string(ending);
+        case '1':
+            if (rest.starts_with("지") || rest.starts_with("고") || rest.starts_with("네") || rest.starts_with("나") ||
+                rest.starts_with("니")) {
+                return "5" + std::string(rest);
+            }
+            return {};
+        case '2':
+            if (rest.starts_with("면")) return std::string(ending);
+            return "5으" + std::string(rest);
+        case '6':
+            if (rest.empty() && utteranceEnd) return "5어";
+            if (rest.starts_with("요")) return "5어" + std::string(rest);
+            return std::string(ending);
+    }
+    return {};
+}
+
+// Whether a verb stem ends in the passive れ of a verb (書かれ, 包まれ, され), which takes no 두다.
+bool PassiveStem(std::string_view stem) {
+    if (!stem.ends_with("れ")) return false;
+    stem.remove_suffix(std::string_view("れ").size());
+    return !stem.empty() && RuneIn(DecodeLastRune(stem).cp, "かさたなはまやらわがざだばぱ");
+}
+
+}  // namespace
+
+void PreparedState(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb || it->detail->record != 0 ||
+            it->lexical || InSet(kWritingVerbs, it->group->surface) || GrammarCode(it->GAttr(it->selected), "Dx") ||
+            PassiveStem(it->group->surface)) {
+            continue;
+        }
+        const Entry* e = it->DirectEntry(it->DirectIndex());
+        const std::string_view te = it->DirectSurface();
+        Item* n = it->next;
+        if (e == nullptr || e->dst != "6" || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
+            n->group->surface != "あ" || n->selected < 0 || n->DirectIndex() < 0 ||
+            n->EntryText(n->selected) != "&HN@") {
+            continue;
+        }
+        const Entry* d = n->DirectEntry(n->DirectIndex());
+        if (d == nullptr) continue;
+        std::string_view after = From(n->text, n->start + n->length);
+        if (after.empty() && n->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(n->tokenIndex + 1).text;
+        const bool end = UtteranceEnd(f.w, n) || RuneIn(text::DecodeRune(after).cp, "！？!?");
+        const std::string prepared = PreparedEnding(d->dst, end);
+        if (prepared.empty()) continue;
+        n->AssignEntrySurface(n->selected, "&C7@");
+        n->AssignDirectSlot(n->DirectIndex(), prepared);
+    }
+}
+
 void PastProgressiveAdnominal(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
