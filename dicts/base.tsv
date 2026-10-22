@@ -111525,7 +111525,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 丹頂鶴	두루미	I110	QAAQABQAB		GN				jisjk:64662		
 主	주요%A1@	G8U0			GN				jisjk:3673		
 主	주	N110		Z6	GN				jisjk:115814		
-主	주인	N110	VHn		GN				jisjk:115815		
+主	주인	N110	VHnXXX		GN				jisjk:115815		
 主ぜん	요리사	N110	VHn		GN				jisjk:189986		
 主たる	주된	C0D1			GN				jisjk:4758		
 主として	주로	E311			GN				jisjk:1969		
@@ -125680,7 +125680,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 俺賢培	옹현배	N130	QPN		GN				jisjk:208696		
 俺逹	우리들	N120	VHn		GN				jisjk:29088		
 倉	쿠라	N130	QPN	Wa	GN				jisjk:117981		
-倉	창	N110	XXX	On	GN				jisjk:259380		
+倉	창고	N110	XXX		GN				terms:1		
+倉	창	N110		On	GN				jisjk:259380		
 倉の沢	쿠라노사와	N130	QCTVPl		GN				jisjk:291214		
 倉ケ作	쿠라가사쿠	N130	QCTVPl		GN				jisjk:291158		
 倉ケ岳	쿠라가타케	N130	QCTVPl		GN				jisjk:291159		
@@ -163540,7 +163541,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 埼玉養蜂	사이타마양봉	I130			GN				jisjk:107379		
 堀	&AT@	M438			GN				jisjk:92093		
 堀	호리	N130	QPN	Wa	GN				jisjk:118499		
-堀	굴	N110	XXX	On	GN				jisjk:259404		
+堀	해자	N110	XXX		GN				terms:2		
+堀	굴	N110		On	GN				jisjk:259404		
 堀っ立て小屋	날림집	I110	VPl		GN				jisjk:63037		
 堀の内	호리노우치	N130	QCTVPl		GN				jisjk:328240		
 堀の内町	호리노우치쵸	I130	QCTVPl		GN				jisjk:328244		
@@ -170380,7 +170382,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 大朝戸	오아사토	N130	QCTVPl		GN				jisjk:277203		
 大朝日岳	오아사히다	I110	QCT		GN				jisjk:65528		
 大朝町	오아사쵸	N130	QCTVPl		GN				jisjk:277200		
-大木	대목	N110	QAL		GN				jisjk:18918		
+大木	큰 나무	N110	QAL		GN				jisjk:18918		
 大木	오오키	N130	QPNQCTVPl	Wa	GN				jisjk:277533		
 大木乙	오기오츠	N130	QCTVPl		GN				jisjk:277552		
 大木六	오기로쿠	N130	QCTVPl		GN				jisjk:277565		
@@ -183685,7 +183687,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 寝屋川市	네야가와시	I130	QCTVPl	Qq	GN				jisjk:319093		
 寝巻	잠옷	N110	VFdVCp		GN				jisjk:36638		
 寝巻き	잠옷	I110	VCp		GN				jisjk:87013		
-寝床	침상	N110	VPl		GN				jisjk:36642		
+寝床	잠자리	N110	VPl		GN				jisjk:36642		
 寝床に着	잠자리에 &L4@	M421			GN				jisjk:147692		
 寝待ち	음력 8월 19밤의 달	N110	VSs		GN				jisjk:248707		
 寝心地	잘 때의 기분	I110	UFl		GN				jisjk:87017		
@@ -199202,9 +199204,9 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 幸隆	유키타카	N130	QPN	Wb	GN				jisjk:258109		
 幸雄	유키오	N130	QPN	Wb	GN				jisjk:38794		
 幸高町	코우타카마치	N130	QCTVPl		GN				jisjk:292432		
-幹	줄기	N110	QAL		GN				jisjk:115555		
+幹	줄기	N110	QALXXX		GN				jisjk:115555		
 幹	미키	N130	QPN	Wa	GN				jisjk:258527		
-幹	간	N110	XXX	On	GN				jisjk:340505		
+幹	간	N110		On	GN				jisjk:340505		
 幹一郎	칸이치로우	N130	QPN	Wb	GN				jisjk:356496		
 幹事	간사	N110	UAq	Hd	GN				jisjk:14521		
 幹事団	간사단	N110	VGt		GN				jisjk:356976		
@@ -231843,6 +231845,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 木の新保七番丁	키노심보시치반쵸	I130	QCTVPl		GN				jisjk:289498		
 木の本	키노모토	N130	QCTVPl		GN				jisjk:289523		
 木の枝	나뭇가지	I110	QAL		GN				jisjk:68874		
+木の根	나무뿌리	N110	XXX		GN				terms:4		
 木の根	키노네	N130	QCTVPl		GN				jisjk:289507		
 木の瀬	키노세	N130	QCTVPl		GN				jisjk:289502		
 木の端	나뭇 조각	N110	VPt		GN				jisjk:172642		
@@ -234366,9 +234369,9 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 杁前町	이리마에쵸	N130	QCTVPl		GN				jisjk:274097		
 杁差岳	이부리사시다케	N110	VPl		GN				jisjk:211335		
 杁差岳	이부리사시다케	N110	VPl		GN				jisjk:211336		
-杉	삼나무	N110	VPt		GN				jisjk:196587		
+杉	삼나무	N110	VPtXXX		GN				jisjk:196587		
 杉	스기	N130	QCTVPl		GN				jisjk:303140		
-杉	삼	N110	XXX	On	GN				jisjk:340714		
+杉	삼	N110		On	GN				jisjk:340714		
 杉	스기	N130	QPN	Wa	GN				jisjk:341153		
 杉の井	스기노이	N130	QCTVPl		GN				jisjk:303189		
 杉の入	스기노이리	N130	QCTVPl		GN				jisjk:303190		
@@ -242804,8 +242807,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 栖本	스모토	N130	QPN	Wa	GN				jisjk:26067		
 栖本町	스모토마치	I130	QCT		GN				jisjk:106100		
 栖田	스다	N130	QPN	Wa	GN				jisjk:8458		
-栗	밤	N110	VFd		GN				jisjk:115637		
-栗	률	N110	XXX	On	GN				jisjk:258727		
+栗	밤	N110	VFdXXX		GN				jisjk:115637		
+栗	률	N110		On	GN				jisjk:258727		
 栗のいが	밤송이	N110	VPt		GN				jisjk:176585		
 栗の実	알밤	K110			GN				jisjk:116840		
 栗ケ丘	쿠리가오카	N130	QCTVPl		GN				jisjk:291276		
@@ -248999,6 +249002,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 檄	격문	N110			GN				jisjk:178823		
 檄	격	N110		On	GN				jisjk:259689		
 檄文	격문	N110	VSw		GN				jisjk:203483		
+檜	편백나무	N110	QALXXX		GN				terms:5		
 檜	히노키	N130	QCTVPl		GN				jisjk:324547		
 檜ヶ山	히노키가센	N130	VPl		GN				jisjk:220159		
 檜ヶ山	히노키가센	N130	VPl		GN				jisjk:220160		
@@ -256349,7 +256353,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 没食子	무식자	N110	VHn		GN				jisjk:251442		
 没食子酸	몰식자산	N110			GN				jisjk:155698		
 没骨	몰골법	N110			GN				jisjk:253777		
-沢	늪	N110	VPlXXX		GN				jisjk:185549		
+沢	계곡	N110	VPlXXX		GN				jisjk:185549		
 沢	사와	N130	QCTVPl		GN				jisjk:296493		
 沢	택	N110		On	GN				jisjk:339446		
 沢	사와	N130	QPN	Wa	GN				jisjk:341147		
@@ -269770,6 +269774,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 爛れ	진무름	N110			GN				jisjk:241401		
 爛れ目	진무른 눈	N110	VBp		GN				jisjk:241402		
 爛漫	난만	N110			GN				jisjk:17960		
+前爪	앞발톱	N110	VBp		GN				terms:3		
 爪	손톱	N110	VBp	XXX	GN				jisjk:116054		
 爪	츠메	N130	QCTVPl		GN				jisjk:259073		
 爪	조	N110		On	GN				jisjk:309957		
@@ -304723,7 +304728,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 肝胆	간담	N110	VBp		GN				jisjk:14543		
 肝脳	간뇌	N110	VBp		GN				jisjk:14542		
 肝膓	간장	N110	VBp		GN				jisjk:14548		
-肝臓	간장	N110	VBp		GN				jisjk:14549		
+肝臓	간	N110	VBp		GN				jisjk:14549		
 肝臓がん	간장암	I110	UTi		GN				jisjk:60377		
 肝臓ジストマ	간 디스토마	N110	VAm		GN				jisjk:170568		
 肝臓癌	간암	N110	UTi		GN				jisjk:206966		
@@ -305067,8 +305072,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 背	등&AL@	M411			GN				jisjk:13692		
 背	반역&AV@	M411	QNN		GN				jisjk:13693		
 背	어&A2@	M411	ULw		GN				jisjk:13694		
-背	등	N110	VBp		GN				jisjk:116140		
-背	키	N110	XXXUXl		GN	1120	||2 &&3 P+1== "2**" ||2 S+2== "高" S+2== "低" P+2== "7**" &&4 P+1== "2**" S+2== "伸び" D+2== "자&A9@" P+2== "4**"	「背」 뒤에 조사와 높낮이를 나타내는 형용사 또는 ‘자라다’인 「伸び」가 오면 ‘키’를 고른다.	jisjk:116141		
+背	등	N110	VBpXXX		GN				jisjk:116140		
+背	키	N110	UXl		GN	1120	||2 &&3 P+1== "2**" ||4 S+2== "高" S+2== "低" S+2== "小さ" S+2== "大き" P+2== "7**" &&4 P+1== "2**" S+2== "伸び" D+2== "자&A9@" P+2== "4**"	「背」 뒤에 조사와 높낮이, 크기를 나타내는 형용사 또는 ‘자라다’인 「伸び」가 오면 ‘키’를 고른다.	jisjk:116141		
 背	어&A2@	M421	ULw		GN				jisjk:138799		
 背	배	N110		On	GN				jisjk:259146		
 背あて部	등받이 부분	N110	VBl		GN				jisjk:197103		

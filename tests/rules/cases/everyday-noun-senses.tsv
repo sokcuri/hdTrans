@@ -1,0 +1,24 @@
+rule	input	expected	kind	layer
+dict:terms:1	小屋というよりは倉だな。	오두막이라는 것보다는 창고네.	fix	defaults
+dict:terms:1	倉庫に入れる。	창고에 들어갈 수 있다.	keep	defaults
+dict:terms:2	柵の外側に堀を作る。	울타리의 바깥쪽에 해자를 만든다.	fix	defaults
+dict:terms:2	堀さんが来た。	호리 씨가 왔다.	keep	defaults
+dict:terms:3	凶暴そうな前爪を持っていた。	흉포할 것 같은 앞발톱을 가지고 있었다.	fix	lookup
+dict:terms:4	太い木の根が横たわっていた。	굵은 나무뿌리가 누워 있었다.	fix	defaults
+dict:terms:5	杉とか檜を育てる。	삼나무라든지 편백나무를 기른다.	fix	defaults
+dict:jisjk:116141	ハクレンの背から降りる。	백련의 등에서 내린다.	fix	defaults
+dict:jisjk:116141	背が高い。	키가 크다.	keep	local
+dict:jisjk:116141	背は小さいが迫力がある。	키는 작지만 박력이 있다.	fix	local
+sense:背	背はやや低めで、目線が低い。	키는 약간 낮은으로, 시선이 낮다.	fix	senses
+sense:背	私に似たから、背が余り伸びなかったのね。	나를 닮았으니까, 키가 남아 자라지 않았구나.	fix	senses
+sense:背	背を伸ばして座る。	등을 펴 앉는다.	keep	senses
+sense:角	子犬たちの額から角が伸び始めていた。	강아지들의 이마에서 뿔이 자라기 시작하고 있었다.	fix	senses
+sense:角	角を曲がる。	모퉁이를 돈다.	keep	senses
+dict:jisjk:115815	人間を主と認めた。	인간을 주인으로 인정했다.	fix	defaults
+dict:jisjk:115815	主人公だ。	주인공이다.	keep	defaults
+dict:jisjk:242807	果樹園の栗を収穫する。	과수원의 밤을 수확한다.	fix	defaults
+dict:jisjk:115555	大木の幹に穴を空ける。	큰 나무의 줄기에 구멍을 뚫는다.	fix	defaults
+dict:jisjk:115555	幹部が来た。	간부가 왔다.	keep	defaults
+dict:jisjk:185549	沢といった感じの場所だ。	계곡이라는 느낌의 장소다.	fix	defaults
+dict:jisjk:36642	寝床に戻った。	잠자리에 돌아왔다.	fix	defaults
+dict:jisjk:14549	心臓とか肝臓はともかく。	심장이라든지 간은 차치하고.	fix	defaults
