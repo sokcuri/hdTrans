@@ -59,6 +59,9 @@ public:
     // Token j as typed once visited (j before current): "" for a token emptied or
     // never visited.
     std::string_view Typed(int j) const;
+    // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
+    // and the raw text of the tokens before it; computed once for all tokens.
+    int QuoteDepth(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -93,6 +96,8 @@ public:
     bool Transliterate(std::string_view s, std::string& out);
 
 private:
+    std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
     void BuildSyntheticTransform(std::string_view surface, int token, int offset, bool emptyTarget);

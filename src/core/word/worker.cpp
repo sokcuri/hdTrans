@@ -1,5 +1,7 @@
 #include "core/word/worker.h"
 
+#include <algorithm>
+
 #include "core/word/strings.h"
 #include "core/tokenizer/tokenize.h"
 
@@ -15,6 +17,20 @@ tokenizer::TokenView Worker::Tok(int j) const {
     if (spaced[static_cast<std::size_t>(j)]) return {tokenizer::kTypeWideSpace, " "};
     if (current < 0) return {tokens[static_cast<std::size_t>(j)].type, tokens.Raw(static_cast<std::size_t>(j))};
     return tokens.View(static_cast<std::size_t>(j), static_cast<std::size_t>(current));
+}
+
+int Worker::QuoteDepth(int j) {
+    if (quoteDepths_.empty()) {
+        quoteDepths_.reserve(tokens.size() + 1);
+        int depth = settings.quoteDepth;
+        for (std::size_t i = 0; i < tokens.size(); i++) {
+            quoteDepths_.push_back(depth);
+            depth = QuoteDepthAfter(tokens.Raw(i), depth);
+        }
+        quoteDepths_.push_back(depth);
+    }
+    if (j < 0) return settings.quoteDepth;
+    return quoteDepths_[std::min(static_cast<std::size_t>(j), quoteDepths_.size() - 1)];
 }
 
 std::string_view Worker::NextText(int j) const {

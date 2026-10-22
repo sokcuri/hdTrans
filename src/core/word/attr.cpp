@@ -170,21 +170,8 @@ bool Item::StartsSentence() const {
 }
 
 bool Item::InQuote() const {
-    int depth = w != nullptr ? w->settings.quoteDepth : 0;
-    auto scan = [&depth](std::string_view s) {
-        for (std::size_t at = 0; at < s.size();) {
-            const text::Rune r = text::DecodeRune(s.substr(at));
-            if (r.size == 0) break;
-            if (r.cp == U'「' || r.cp == U'『') depth++;
-            if ((r.cp == U'」' || r.cp == U'』') && depth > 0) depth--;
-            at += r.size;
-        }
-    };
-    if (w != nullptr) {
-        for (int i = 0; i < tokenIndex && i < static_cast<int>(w->tokens.size()); i++) scan(w->tokens.Raw(static_cast<std::size_t>(i)));
-    }
-    scan(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
-    return depth > 0;
+    const int depth = w != nullptr ? w->QuoteDepth(tokenIndex) : 0;
+    return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
 bool Item::JoinsNext() const {
