@@ -1,5 +1,6 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
+#include "core/pipeline/runes.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -18,6 +19,9 @@ bool CharOrEnd(std::string_view s, size_t p, std::u32string_view set, Match& m, 
     if (OneOf(s, q, set) || p == s.size()) return Done(s, m, p, q, k);
     return false;
 }
+
+// The character before byte pos of s; 0 at the start.
+char32_t Before(std::string_view s, size_t pos) { return pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp; }
 
 // かも(しれ|知れ)(?:ん|ね[ぇえー]+)
 bool Shiren(std::string_view s, size_t pos, Match& m) {
@@ -450,10 +454,19 @@ bool OiTsu(std::string_view s, size_t pos, Match& m) {
 }
 
 // ([いるたうくすつぬぶむぐ])んか(?=[？?」』。…‥！!]|ね|い|よ|$): the question のか with
-// の contracted after a predicate (いいんか, あるんか, 信じるんかい).
+// の contracted after a predicate (いいんか, あるんか, 信じるんかい). A く that follows
+// katakana, two kanji, う, ん, ー or a small kana, or starts the text, is the honorific くん
+// (田中くんか, ユウくんかい, ゆうくんか), not the end of a verb (書くんか, いくんか).
 bool NnKa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"いるたうくすつぬぶむぐ")) return false;
+    if (Span(s, pos, p) == "く") {
+        const text::Rune b = LastRune(s.substr(0, pos));
+        if (pos == 0 || IsKatakanaRune(b.cp) || In(b.cp, U"うんーぁぃぅぇぉゃゅょゎ") ||
+            (IsKanjiClass(b.cp) && IsKanjiClass(Before(s, pos - b.size)))) {
+            return false;
+        }
+    }
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "んか")) return false;
     size_t q = p;

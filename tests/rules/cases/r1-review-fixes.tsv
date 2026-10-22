@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+normalize:n-ka	「田中くんか？」	「타나카 군이야?」	fix	normalize
+normalize:n-ka	「佐藤くんかい？」	「사토 군이야?」	fix	normalize
+normalize:n-ka	お前が書くんか？	네가 쓰는 건가?	keep	normalize
