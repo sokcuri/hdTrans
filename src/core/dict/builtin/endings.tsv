@@ -121,7 +121,7 @@
 書くぜ	쓴다	end	prio=-1
 書いたぜ	썼다	end	prio=-1
 静かだぞ	조용하다	end	prio=-1
-静かだぜ	조용하다	end	prio=-1
+静かだぜ	조용해	end	prio=-1
 // のだ, んだ. のだ is also the narration's assertion (書いたのだ: 썼던
 // 것이다), so 거야 needs the casual register.
 書くのだ	쓰는 것이다	end	register=plain prio=-1
@@ -451,15 +451,16 @@
 静かだったのね	조용했구나	end	prio=-1
 学生なのね	학생이구나	end	prio=-1
 学生だったのね	학생이었구나	end	prio=-1
-// ぜ ending a sentence: the plain declarative
-書くぜ	쓴다	end	prio=-1
-書いたぜ	썼다	end	prio=-1
+// ぜ ending a sentence: the plain declarative after a verb, the casual 해체 after an
+// adjective or a noun
 書いてるぜ	쓰고 있다	end	prio=-1
 書いてたぜ	쓰고 있었다	end	prio=-1
 書かないぜ	쓰지 않는다	end	prio=-1
-高いぜ	높다	end	prio=-1
-静かだぜ	조용하다	end	prio=-1
-学生だぜ	학생이다	end	prio=-1
+高いぜ	높아	end	prio=-1
+学生だぜ	학생이야	end	prio=-1
+高かったぜ	높았어	end	prio=-1
+静かだったぜ	조용했어	end	prio=-1
+学生だったぜ	학생이었어	end	prio=-1
 書くよな	쓰지	end	prio=-1
 書いたよな	썼지	end	prio=-1
 書いてるよな	쓰고 있지	end	prio=-1

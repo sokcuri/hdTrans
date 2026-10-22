@@ -3077,7 +3077,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いせの	이세노	N130	QCTVPl		GN				jisjk:272492		
 いせや	이세야	I130	QIDVGt		GN				jisjk:40375		
 いせやデンキ	이세야 덴키	I130	QIDVGt		GN				jisjk:40376		
-いぜ	1다	T500			GN				jisjk:258674		
+いぜ	6	T500			GN				jisjk:258674		
 いぜ	1지	T500			GN	5135	||1 D+1== "?"	물음표 앞의 いぜ는 동의를 구하므로 ‘-지’를 고른다(美味いぜ？ 맛있지?).	ze:question-1		
 いぜん	이전	I110			GN				jisjk:97570		
 いぜん	여전히	E300	UMe		GN				jisjk:122804		
@@ -9472,7 +9472,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 かったし	5고	T500			GN				jisjk:263004		
 かったじゃないか	5던 것이 아닌가	T500			GN				jisjk:343556		
 かったせいか	5던 탓일까	T500			GN				jisjk:264964		
-かったぜ	5다	T500			GN				jisjk:258708		
+かったぜ	5어	T500			GN				jisjk:258708		
 かったぜ	5지	T500			GN	5136	||1 D+1== "?"	물음표 앞의 かったぜ는 동의를 구하므로 ‘-지’를 고른다(楽しかったぜ？ 즐거웠지?).	ze:question-2		
 かったぞ	5어	T500			GN				jisjk:258707		
 かったため	5기 (위해)때문에	T500			GN				jisjk:263564		
@@ -31319,7 +31319,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 だしね	1니까	U500			GN				jisjk:264810		
 だしをと	국물을 &A6@	M448			GN				jisjk:139707		
 だじゃれ	익살	K110			GN				jisjk:201615		
-だぜ	1다	U500			GN				jisjk:258505		
+だぜ	6	U500			GN				jisjk:258505		
 だぜ	1지	U500			GN	5137	||1 D+1== "?"	물음표 앞의 だぜ는 동의를 구하므로 ‘-지’를 고른다(簡単だぜ？ 간단하지?).	ze:question-3		
 だそう	(이)라고 %A1@	G8U0		TuAvPj	GN	946	||1 P-1== "1**"	だそう는 명사 뒤에서 전언 표현 ‘(이)라고 한다’를 고른다.	jisjk:114787		
 だぞ	1구나	U500			GN				jisjk:258504		
@@ -31368,7 +31368,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 だったし	(이었)였고	P201		Z2	GN				jisjk:6145		
 だったし	(이었)였고	P201		J1Z2	GN				jisjk:6146		
 だったし	5고	U500			GN				jisjk:340866		
-だったぜ	5다	U500			GN				jisjk:258439		
+だったぜ	5어	U500			GN				jisjk:258439		
 だったぜ	5지	U500			GN	5138	||1 D+1== "?"	물음표 앞의 だったぜ는 동의를 구하므로 ‘-지’를 고른다(簡単だったぜ？ 간단했지?).	ze:question-4		
 だったそう	(이었)였다고 %A1@	G8U0		AvPjTu	GN				jisjk:372679		
 だったぞ	5어	U500			GN				jisjk:258438		
