@@ -289,6 +289,8 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
     }
     // やられたって…まだ: concessive; 長すぎるってぇ？: a question; 美味いぜ？ seeks agreement
     if ((u.key.ends_with("って") || u.key.ends_with("ぜ")) && TrailsOff(after)) return false;
+    // 気のせいじゃないか？ asks (탓 아니야?); 楽じゃないか…… and 楽じゃないか！ do not (편하잖아).
+    if (u.key.ends_with("じゃないか") && Asks(after)) return false;
     const bool closingParticle = u.key.ends_with("のう") || u.key.ends_with("のぅ");
     return SentenceFinal(after, current, closingParticle);
 }
@@ -305,6 +307,15 @@ bool Worker::TrailsOff(std::string_view rest) const {
         if (rest.starts_with(p)) return true;
     }
     return false;
+}
+
+// A question mark after rest, past small kana and ellipses, or at the start of the next
+// token when rest is empty.
+bool Worker::Asks(std::string_view rest) const {
+    constexpr std::string_view kTrail = "ぁぃぅぇぉっー…‥";
+    rest = TrimLeftChars(rest, kTrail);
+    if (rest.empty() && current + 1 < TokenCount() && Span(current + 1) == 0) rest = TrimLeftChars(NextText(current + 1), kTrail);
+    return rest.starts_with("？") || rest.starts_with("?");
 }
 
 // Patterns and noun rows that are not end rows: a noun pattern needs a noun before

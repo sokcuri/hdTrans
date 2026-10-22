@@ -110,6 +110,7 @@ private:
     bool Skip(const dict::UserEntry& u, std::string_view query) const;
     bool EndRowFits(const dict::UserEntry& u, std::string_view query) const;
     bool TrailsOff(std::string_view rest) const;
+    bool Asks(std::string_view rest) const;
     bool PatternFits(const dict::UserEntry& u, std::string_view query) const;
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
