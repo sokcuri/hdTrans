@@ -5,3 +5,5 @@ normalize:n-ka	お前が書くんか？	네가 쓰는 건가?	keep	normalize
 normalize:shaanai	まぁしゃあないか	뭐 어쩔 수 없는가	keep	normalize
 normalize:toku	「やっといた、探したよ」	「드디어 있었어, 찾았어」	fix	normalize
 normalize:toku	ああ、とっくにやっといた。	아, 진작 해 두었다.	keep	normalize
+normalize:volitional-ka	漢字そっか	한자 그렇구나	fix	normalize
+normalize:volitional-ka	お風呂で汗を流そっか？	욕실로 땀을 흘릴까?	keep	normalize

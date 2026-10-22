@@ -363,15 +363,16 @@ bool JanKa(std::string_view s, size_t pos, Match& m) {
 }
 
 // ([ぁ-ゖ一-龥々])([こごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
-// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな). Not そっか after
-// kana (そっか, あそっか), which is そうか read as an answer.
+// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな). そっか is that of a
+// verb in す only after the one kanji of its stem (流そっか); after kana (そっか, あそっか) or a
+// word of two kanji (漢字そっか) it is そうか read as an answer.
 bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     const text::Rune before = At(s, p);
     if (!Take(s, p, [](char32_t c) { return IsHiraganaClass(c) || IsKanjiClass(c); })) return false;
     const size_t kana = p;
     if (!OneOf(s, p, U"こごそとのぼもろよ")) return false;
-    if (Span(s, kana, p) == "そ" && !IsKanjiClass(before.cp)) return false;
+    if (Span(s, kana, p) == "そ" && (!IsKanjiClass(before.cp) || IsKanjiClass(Before(s, pos)))) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "っか")) return false;
     size_t q = p;
