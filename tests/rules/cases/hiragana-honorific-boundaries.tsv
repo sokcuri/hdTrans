@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 constraint:honorific-hiragana	あおくん、本を返して。	아오군, 책을 돌려줘.	fix	lookup
 constraint:honorific-hiragana	あおくんの家は近い。	아오군의 집은 가깝다.	fix	lookup
 constraint:honorific-hiragana	しろくんが窓を開けた。	시로군이 창을 열었다.	fix	lookup
-constraint:honorific-hiragana	「しろちゃん、おはよう」	「시로짱, 안녕」	fix	lookup
+constraint:honorific-hiragana	「しろちゃん、おはよう」	「시로짱, 좋은 아침」	fix	lookup
 constraint:honorific-hiragana	あお君が話した。	아오군이 이야기했다.	fix	lookup
 constraint:honorific-hiragana	しろくんだと言った。	시로군이라고 말했다.	fix	lookup
 constraint:honorific-hiragana	あおちゃんが図書館へ行った。	아오짱이 도서관에 갔다.	fix	lookup

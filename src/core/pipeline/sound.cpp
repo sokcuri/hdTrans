@@ -538,6 +538,9 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
         if (AfterClause(p, end)) return "그치";
+    } else if (key == U"サア" || key == U"サァ") {
+        // さあ asked back (さあ？) is the shrug 글쎄, not the call 자.
+        if (end < rs_.size() && In(rs_[end], U"？?")) return "글쎄";
     } else if (key == U"ウウン") {
         // ううん is the answer no (아니) said once and plainly; drawn out, cut off by っ or
         // asking before ？ it is a hum or a moan (으응).

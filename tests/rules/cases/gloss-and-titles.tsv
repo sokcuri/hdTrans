@@ -8,7 +8,7 @@ dict:jisjk:266427	新しい店が出来た。	새로운 가게가 생겼다.	fix
 dict:jisjk:266427	料理が出来る。	요리를 할 수 있다.	keep	local
 dict:warship:1	新しい艦が出来たんですって。	새로운 함이 생겼다고 합니다.	fix	local
 compose:pronoun-space	私無しじゃ無理	나 없음은 무리	fix	compose
-dict:san-role:1	提督さん、おはよう	제독님, 안녕	fix	local
+dict:san-role:1	提督さん、おはよう	제독님, 좋은 아침	fix	local
 dict:san-role:1	店長さん	점장님	fix	local
 dict:san-role:1	店員さんを呼んだ。	점원을 불렀다.	keep	local
 dict:san-role:1	先生さん	선생님	fix	local
@@ -32,7 +32,7 @@ dict:jisjk:9157	あたしが一番わかってる	내가 제일 알고 있다	fi
 dict:jisjk:9157	英語が少しわかる	영어를 조금 안다	keep	local
 constraint:honorific-kanji-name	千里ちゃん、待って	치사토짱, 기다려	fix	lookup
 constraint:honorific-kanji-name	翼くん	츠바사군	keep	lookup
-names:cued-single-kanji	筧くん、おはよう	카케이군, 안녕	fix	lookup
+names:cued-single-kanji	筧くん、おはよう	카케이군, 좋은 아침	fix	lookup
 normalize:shime	「そんなわけで、〆切までもう時間がないんだ」	「그래서, 마감까지 이제 시간이 없다」	fix	normalize
 dict:jisjk:845	「どうして？」	「왜?」	fix	defaults
 dict:doushite:copula	「どうしてなの？」	「어째서야?」	keep	local

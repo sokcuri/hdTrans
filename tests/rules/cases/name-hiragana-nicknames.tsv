@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-protect:hiragana-nickname	ゆうくん、おはよう。	유군, 안녕.	fix	lookup
+protect:hiragana-nickname	ゆうくん、おはよう。	유군, 좋은 아침.	fix	lookup
 protect:hiragana-nickname	おやすみ、ふみちゃん。	잘 자, 후미짱.	fix	lookup
 protect:hiragana-nickname	なあ、みーちゃん。	저기, 미짱.	keep	lookup
 protect:hiragana-nickname	それに、ゆうくんもいる。	게다가, 유군도 있다.	fix	lookup
