@@ -1060,6 +1060,7 @@ std::string SoundText::Write() {
     std::string b;
     b.reserve(text_.size() + text_.size() / 2);
     bool afterParticle = false;  // the token before rs[i] is a lone particle
+    size_t wordEnd = 0;          // the end of the last word of more than one character
     std::vector<StutterPiece> pieces;
     for (size_t i = 0; i < rs.size();) {
         if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
@@ -1129,6 +1130,18 @@ std::string SoundText::Write() {
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
                 next = std::min(rs.size(), i + WordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
+                if (next > i + 1) wordEnd = next;
+                // A word in kanji that takes its particle (煙が, 香りが) ends like a lone one.
+                if (next > i + 1 && IsKanjiRune(rs[i]) && In(rs[next - 1], U"はがをにもでへ")) particle = true;
+                // は, が or を after a word stays a particle before a sound adverb in と that a
+                // kana word would swallow (彼はこくりと, not はこ; 香りがもわりと, not がも).
+                if (!particle && In(rs[i], U"はがを") && i > 0 && (IsKanjiRune(rs[i - 1]) || wordEnd == i)) {
+                    const std::vector<SoundMatch> after = Sounds(i + 1, true);
+                    if (!after.empty() && rs[after.back().end - 1] == U'と') {
+                        next = i + 1;
+                        particle = true;
+                    }
+                }
             }
             b += Bytes(i, next);
         }

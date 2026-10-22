@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:particle-before-sound	火力がちょこっと足りないのかしら	화력이 살짝 부족한 걸까	fix	sound
+sound:particle-before-sound	世界観の相違をまざまざと見せ付けられた	세계관의 차이를 생생히 과시해졌다	fix	sound
+sound:particle-before-sound	まさか、私のことがバレてる？	설마, 내가 들키고 있어?	keep	sound
