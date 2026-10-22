@@ -728,6 +728,17 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 continue;
             }
         }
+        if ((IsSmallVowel(r) || r == U'ー') && end == i + 1) {
+            // A dictionary word of three characters or more spelled with the small vowel or ー
+            // ends with it (おめぇ, てめぇ, てめー; not the さぁ of 筧さぁん); not a verb or
+            // adjective stem (おいしー).
+            bool spelledWord = false;
+            for (size_t j = from; j + 2 <= i && !spelledWord; j++) {
+                const std::u32string_view w = std::u32string_view(rs).substr(j, end - j);
+                spelledWord = e.WordKey(w) && e.Tags(w).find_first_of("MH") == std::string::npos;
+            }
+            if (spelledWord) continue;
+        }
         const size_t before = e.Reach(rs, from, i);
         // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
         // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,

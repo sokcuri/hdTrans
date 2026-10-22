@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:colloquial-variants:3	バカかおめぇ。	바보나 너.	fix	lookup
+dict:colloquial-variants:5	オメェどこ中よ！	너 어디안이야!	fix	lookup
+dict:colloquial-variants:7	いいかオメェら、主役はオレたちだ	좋은가 너희, 주역은 우리들이다	fix	lookup
+normalize:spelled-small-vowel	てめーも同罪だぞ。	너도 같은 죄다.	fix	normalize
+normalize:spelled-small-vowel	ひゃんっ……筧さぁん……	햐앙……견씨……	keep	normalize
+normalize:spelled-small-vowel	てめーが黙ってろ	네가 입을 다물어라	fix	normalize

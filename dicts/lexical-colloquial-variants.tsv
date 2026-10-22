@@ -1,0 +1,11 @@
+#! layer=words
+# 구어 표기: 작은 모음이나 장음으로 쓴 대명사
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+てめぇ	너	I120	VHn		GN							colloquial-variants:1
+てめー	너	I120	VHn		GN							colloquial-variants:2
+おめぇ	너	I120	VHn		GN							colloquial-variants:3
+おめー	너	I120	VHn		GN							colloquial-variants:4
+オメェ	너	I120	VHn		GN							colloquial-variants:5
+おめぇら	너희	I120	VHn		GN							colloquial-variants:6
+オメェら	너희	I120	VHn		GN							colloquial-variants:7
+てめぇら	네 녀석들	I120	VHn		GN							colloquial-variants:8
