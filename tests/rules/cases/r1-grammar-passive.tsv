@@ -5,3 +5,10 @@ dict:gram:mirare-passive:2	俺に見られるのが恥ずかしいのか	나에�
 dict:gram:mirare-passive:2	僕たちも容疑者に見られているっぽかったです	저희도 용의자로 보여지고 있는 것 같았습니다	keep	local
 dict:passive-gaze:1	冷たい目で見られた。	차가운 눈초리를 받았다.	fix	local
 dict:passive-gaze:3	ロシアでも日本でも奇異の目で見られ続けた私に、	러시아에서도 일본에서도 기이의 눈초리를 계속 받은 나에게,	fix	local
+dict:gram:iware:hear	「……言われたくなかったよ」	「……듣고 싶지 않았어」	fix	local
+dict:gram:iware:hear	「そんなこと言われたって……」	「그런 말 들어도……」	fix	local
+dict:gram:iware:hear	「白崎に言われるとは……」	「시라사키에게 듣다니……」	fix	local
+dict:gram:iware:quote	「だから、休めと言われても休めなかったんだ」	「그러니까, 쉬라고 해도 쉴 수 없었다」	fix	local
+dict:gram:iware:say	笑顔で言われてしまう。	웃는 얼굴로 말해 버린다.	fix	local
+dict:gram:iware:said	世界の真実を知っていると言われている伝説の	세계의 진실을 알고 있다고들 하고 있는 전설의	fix	local
+dict:gram:iware:agent-if	彼女にそう言われちゃ仕方ない。	그녀가 그렇게 말하면 어쩔 수 없다.	fix	local
