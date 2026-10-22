@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 ending:ないんす	今日は出かけないんすよ。	오늘은 나가지 않아요.	fix	builtin-ending
-ending:ないんす	その箱は使わないんすか？	그 상자는 사용하지 않나요?	fix	builtin-ending
+ending:ないんす	その箱は使わないんすか？	그 상자는 쓰지 않나요?	fix	builtin-ending
 ending:ないんす	今日は食べないんすよ。	오늘은 먹지 않아요.	fix	builtin-ending
 ending:ないんす	ここでは話しかけられないんすよ。	여기에서는 말을 걸 수 없어요.	fix	builtin-ending
 ending:ないんす	この字は読めないんすか？	이 글자는 읽을 수 없나요?	fix	builtin-ending

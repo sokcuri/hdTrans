@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 names:gloss-word	違うわよ！提督(あなた)、何いってんの！	달라! 제독(당신), 의향은!	fix	normalize
 names:gloss-word	12時。私(わたくし)、ランチにはサンドイッチを所望しますわ	12시. 저, 런치에는 샌드위치를 소망해요	fix	normalize
-names:gloss-name	三日(みか)が来た。三日は優しい。	미카가 왔다. 미카는 상냥하다.	fix	normalize
+names:gloss-name	三日(みか)が来た。三日は優しい。	미카가 왔다. 미카는 다정하다.	fix	normalize
 global:on-joined	ような事…私…えっ	같은 일…나…어	fix	global-stem
 global:on-joined	夜…夜は…怖いですね。	밤…밤은…무섭네요.	fix	global-stem
 dict:jisjk:266427	新しい店が出来た。	새로운 가게가 생겼다.	fix	local

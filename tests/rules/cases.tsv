@@ -54,7 +54,7 @@ L197	彼女は泣きそうな顔で謝った。	그녀는 울 것 같은 얼굴�
 L199	財布を落としてしまった。	지갑을 잃어버려 버렸다.	current	local-ending
 L199	疲れて家に帰り、すぐ寝た。	지쳐 집에 돌아가, 바로 잤다.	current	local-ending
 L200	先に寝ていいからね。	먼저 자도 좋으니까.	current	local-ending
-L200	このペンを使っていいよ。	이 펜을 사용해도 좋아.	current	local-ending
+L200	このペンを使っていいよ。	이 펜을 써도 좋아.	current	local-ending
 L208	もうこうなったらやるしかない。	이제 이렇게 되면 할 수밖에 없다.	current	local-ending
 L208	約束したのだから、行くしかない。	약속했으니까, 갈 수밖에 없다.	current	local-ending
 L212	東京でも雪が降ったそうです。	도쿄에서도 눈이 내렸다고 합니다.	current	local
@@ -76,7 +76,7 @@ L237	彼は静かに窓の外を見ています。	그는 조용하게 창 밖�
 L239	彼は行かないという話を聞いた。	그는 가지 않는다고 하는 이야기를 들었다.	current	local
 L239	忙しいというか、時間が足りないんです。	바쁘다고 하는지, 시간이 부족합니다.	current	local
 L241	料理をうまい方法で作った。	요리를 능숙한 방법으로 만들었다.	fix	local
-L252	子供にやさしい先生です。	아이에게 상냥한 선생님입니다.	fix	local
+L252	子供にやさしい先生です。	아이에게 다정한 선생님입니다.	fix	local
 L256	あの店は安くておいしいらしい。	그 가게는 싸고 맛있는 것 같다.	current	local
 L256	隣の家の人は引っ越したらしい。	옆의 집의 사람은 이사한 것 같다.	current	local
 L267	仕事を辛くしないで。	일을 괴롭게 하지 말아줘.	current	local
@@ -492,7 +492,7 @@ L3209	この部屋は予約できません。	이 방은 예약할 수 없습니
 L3210	買います品物が決まりました。	사는 물건이 정해졌습니다.	current	local-ending
 L3210	私が行きます時間は夕方です。	제가 가는 시간은 저녁입니다.	current	local-ending
 L3211	この部屋は静かで広い。	이 방은 조용하고 넓다.	current	local-ending
-L3211	彼は親切で優しい人だ。	그는 친절하고 상냥한 사람이다.	current	local-ending
+L3211	彼は親切で優しい人だ。	그는 친절하고 다정한 사람이다.	current	local-ending
 L3215	食べてないと困る。	먹지 않았다고 곤란하다.	current	local-ending
 L3230	彼は悪いとされている。	그는 나쁘다고 여겨지고 있다.	current	local-ending
 L3244	会議で新しい案が提案された。	회의에서 새로운 안이 제안되었다.	current	local
@@ -573,7 +573,7 @@ L3604	そんなに急ぐな！	그렇게 서두르지 마!	current	local-ending
 L3606	弟は毎朝六時に走る。	남동생은 매일 아침 6시에 달린다.	current	local-ending
 L3606	私は来月、京都へ引っ越す。	나는 내달, 교토에 이사한다.	current	local-ending
 L3651	彼は強く扉を叩いた。	그는 강하게 문을 두드렸다.	current	local-ending
-L3651	母は私に優しく話しかけた。	어머니는 나에게 상냥하게 말을 걸었다.	current	local-ending
+L3651	母は私に優しく話しかけた。	어머니는 나에게 다정하게 말을 걸었다.	current	local-ending
 L3666	明日は雨が降るそうだ。	내일은 비가 온다고 한다.	current	local
 L3666	この辺りはとても静かだそうだ。	이 주위는 무척 조용하다고 한다.	current	local
 L3675	試験に合格するには努力が必要だ。	시험에 합격하려면 노력이 필요하다.	current	local
@@ -711,7 +711,7 @@ L4951	右へどうぞ進んでください。	오른쪽으로 부디 진행해 �
 L4979	犯人は彼とのことです。	범인은 그와의 일입니다.	current	local
 L4988	汚れ防止の布です。	오염 방지의 옷감입니다.	fix	local
 L4988	汚れ対策を考える。	오염 대책을 생각한다.	fix	local
-L4990	残ったうちの半分を使う。	남은 것 중 반을 사용한다.	current	local
+L4990	残ったうちの半分を使う。	남은 것 중 반을 쓴다.	current	local
 L4990	うちの猫だ。	우리 고양이다.	current	local
 L4993	ステンレス流しを買う。	스텐레스 흘려 보내기를 산다.	current	local
 L5015	星がついた。	별이 붙었다.	current	local

@@ -64,7 +64,7 @@ dict:recording-audio	録り下ろし音源ではない。	신규 녹음 음원�
 dict:recording-audio	録りおろし音源ではありません。	신규 녹음 음원이 아닙니다.	fix	lookup
 dict:recording-audio	録り下ろし音源の特典	신규 녹음 음원의 특전	fix	lookup
 dict:recording-audio	録りおろし音源の特典	신규 녹음 음원의 특전	fix	lookup
-dict:recording-audio	録り下ろし音源を使わない。	신규 녹음 음원을 사용하지 않는다.	fix	lookup
+dict:recording-audio	録り下ろし音源を使わない。	신규 녹음 음원을 쓰지 않는다.	fix	lookup
 dict:commerce-roots	既存の音源	기존의 음원	keep	lookup
 dict:commerce-roots	音源を録音した。	음원을 녹음했다.	keep	lookup
 dict:photography	撮りおろさない。	새로 촬영하지 않는다.	fix	lookup

@@ -31768,8 +31768,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ちどん	지둔%A1@	G8U0			GN				jisjk:140468		
 ちな	연관&C6@	M425			GN				jisjk:141618		
 ちなまぐさ	피냄새가 $A2@	H7N0	QHP		GN				jisjk:121566		
-ちなみに	덧붙여서	E311			GN				jisjk:722		
-ちなみに	덧붙여서	E310		J1	GN				jisjk:723		
+ちなみに	참고로	E311			GN				jisjk:722		
+ちなみに	참고로	E310		J1	GN				jisjk:723		
 ちぬ	피를 묻&AW@	M428			GN				jisjk:141627		
 ちぬられ	피로 물&L4@	M427			GN				jisjk:141622		
 ちのけ	핏기	E0H0	QHPVBp		GN				jisjk:123554		
@@ -42732,7 +42732,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 やさい	야채	N110	VDtVPt		GN				jisjk:343382		
 やさいるい	야채류	N110			GN				jisjk:164330		-1
 やさし	$DE@	H7M0			GN	252	||1 &&2 S-1== "に" ||4 S-2== "体" S-2== "からだ" S-2== "身体" S-2== "肌"	やさし는 体·からだ·身体·肌와 に 뒤에서 신체에 이롭다는 ‘좋다’를 고른다.	jisjk:5289		
-やさし	상냥$AB@	H7M0	VHn		GN	1151	||5 &&2 ||2 S+1== "言葉" S+1== "言い方" P+1== "1**" ||2 A-2-= "VHn" A-2-= "VBp" A+1== "VHn" A-3== "VHn" &&3 P+1== "4**" S+2== "くれ" P+2== "4**"	やさし는 言葉·言い方 앞, 주변에 사람·신체 의미 코드가 있는 경우 또는 뒤에 동사와 くれ가 이어지면 ‘상냥하다’를 고른다.	jisjk:116459		
+やさし	다정$AB@	H7M0	VHn		GN	1151	||5 &&2 ||2 S+1== "言葉" S+1== "言い方" P+1== "1**" ||2 A-2-= "VHn" A-2-= "VBp" A+1== "VHn" A-3== "VHn" &&3 P+1== "4**" S+2== "くれ" P+2== "4**"	やさし는 言葉·言い方 앞, 주변에 사람·신체 의미 코드가 있는 경우 또는 뒤에 동사와 くれ가 이어지면 ‘상냥하다’를 고른다.	jisjk:116459		
 やさし	$GF@	H7M0	XXX		GN				jisjk:374989		
 やさしい会話	쉬운 회화	H110		Hd	GN				jisjk:343952		
 やさしくされ	친절하게 대해&AL@	E427			GN				jisjk:262299		
@@ -95391,7 +95391,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 一睡	한 잠	N110			GN				jisjk:104674		
 一督	한 번 &AY@	M439			GN				jisjk:94530		
 一瞥	시선을 돌림	N110			GN				jisjk:104772		
-一瞬	일순간	N110			GN				jisjk:31505		
+一瞬	순간	N110			GN				jisjk:31505		
 一瞬	한 순간	N110			GN				jisjk:114510		
 一瞬にして	한순간에	E300			GN				jisjk:148983		
 一瞬のうち	한 순간	I110	UMe		GN				jisjk:80366		
@@ -123829,7 +123829,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 併設	병설	N110		Hd	GN				jisjk:23621		
 併読	병독	N110		Hd	GN				jisjk:154813		
 併進	병진	N110			GN				jisjk:23625		
-使	사용&AV@	M440	VMySFl		GN				jisjk:142104		
+使	&AF@	M440	VMySFl		GN				jisjk:142104		
 使	심부름&AV@	M440			GN	4782	||1 &&2 S-1== "お" S+1== "に"	使가 お와 に 사이에 있으면 심부름하다를 고른다. (미발동: rare-context)	jisjk:373525		
 使い	사용	N110		Hd	GN				jisjk:7714		
 使い	사자(심부름꾼)	N110			GN	1294	||1 &&3 P+1== "2**" P+2== "4**" A+2== "UMv"	조사를 사이에 두고 이동 의미 동사가 뒤따르는 使い를 '사자(심부름꾼)'로 고른다. (미발동: rare-context)	jisjk:116960		
@@ -127172,7 +127172,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 優	우수&AV@	M418			GN				jisjk:114571		
 優	스구루	N130	QPN	Wb	GN				jisjk:364937		
 優	우	N110		On	GN				jisjk:365459		
-優し	상냥$AB@	H7M0			GN				jisjk:5834		
+優し	다정$AB@	H7M0			GN				jisjk:5834		
 優しさ	상냥함	K110			GN				jisjk:202265		
 優しさゆえ	상냥함 때문	N110			GN				jisjk:151873		
 優しそう	상냥한 듯%A1@	G8U0			GN				jisjk:147240		
@@ -159331,7 +159331,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 因って来たる	그것으로 인한	E0H0			GN				jisjk:123706		
 因となり果とな	인과가 &C6@	M428		Dx	GN				jisjk:145268		
 因み	인연	N110			GN				jisjk:31374		
-因みに	덧붙여서	E331			GN				jisjk:1844		
+因みに	참고로	E331			GN				jisjk:1844		
 因原	임바라	N130	QCTVPl		GN				jisjk:274537		
 因子	인자	N110			GN				jisjk:31382		
 因尾	임비	N130	QCTVPl		GN				jisjk:274538		
@@ -228551,7 +228551,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 普恩寺	후온지	N130	QCTVPl		GN				jisjk:325586		
 普愚	보우	N130	QPN		GN				jisjk:204903		
 普正寺町	후쇼지마치	I130	QCTVPl		GN				jisjk:326248		
-普段	평상시	N110			GN				jisjk:23777		
+普段	평소	N110			GN				jisjk:23777		
 普段から	평상시부터	N110			GN				jisjk:266579		
 普段着	평상복	I110	VCpVAc		GN				jisjk:70255		
 普済国師	후사이 고쿠시	N130	VHn		GN				jisjk:220430		
@@ -322650,8 +322650,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 見つか	발견&C6@	M418			GN				jisjk:91778		
 見つけ	찾아&A6@	M437			GN				jisjk:91779		
 見つけだ	찾아&A6@	M443			GN				jisjk:141988		
-見つめ	응시&AV@	M437			GN				jisjk:91780		
-見つめ合	서로 응시&AV@	M440			GN				jisjk:142456		
+見つめ	바라&AY@	M437			GN				jisjk:91780		
+見つめ合	서로 바라&AY@	M440			GN				jisjk:142456		
 見つめ直	다시 &AY@	M433	USe		GN				jisjk:91781		
 見づら	보기 힘$KH@	H7U0			GN				jisjk:264453		
 見てあげ	봐 &CJ@	M4U7			GN				jisjk:120250		

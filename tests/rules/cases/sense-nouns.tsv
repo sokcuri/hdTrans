@@ -8,7 +8,7 @@ dict:jisjk:343112	夜は歩いた。	밤에는 걸었다.	keep	local
 dict:jisjk:343112	夜走った。	밤에 달렸다.	keep	local
 dict:jisjk:374980	選んだうちの一つだ。	선택한 것 중 하나다.	fix	local
 dict:jisjk:374980	うちの犬は元気だ。	우리 개는 건강하다.	keep	local
-dict:jisjk:57270	マッチ二本を使う。	성냥 두 개를 사용한다.	fix	local
+dict:jisjk:57270	マッチ二本を使う。	성냥 두 개를 쓴다.	fix	local
 dict:jisjk:57270	紙マッチを擦る。	종이 성냥을 문지른다.	fix	local
 dict:jisjk:57270	テニスマッチを見た。	테니스 매치를 보았다.	keep	local
 dict:jisjk:90306	本を持って来いと言った。	책을 가져와라고 말했다.	fix	local

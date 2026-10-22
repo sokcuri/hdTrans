@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:ato-next:1	あとは5ポイント使い、剣を買う。	그다음은 5포인트 사용해, 검을 산다.	fix	local
+dict:ato-next:1	あとは5ポイント使い、剣を買う。	그다음은 5포인트 써, 검을 산다.	fix	local
 dict:ato-next:1	あとは寝るだけだ。	rule:dict:ato-next:1=그다음	fix	local
 dict:ato-next:1	あとは任せた。	나머지는 맡겼다.	keep	local
 dict:ato-next:1	あとは三人だけだ。	!rule:dict:ato-next:1	keep	local
