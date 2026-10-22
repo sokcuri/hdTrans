@@ -37,7 +37,7 @@ constexpr PassiveLemma kPassiveLemmas[] = {
     {"何を言", "무슨 말을 듣다:ㄷ"}, {"追い出", "쫓겨나다"}, {"叩き出", "쫓겨나다"}, {"脅", "협박당하다"}, {"乱入", "난입당하다"},
     {"閉め", "닫히다:규칙"}, {"開け", "열리다:규칙"}, {"連れ", "이끌리다:규칙"}, {"込め", "담기다:규칙"},
     {"括り付け", "묶이다:규칙"}, {"縛り付け", "묶이다:규칙"}, {"入れ替え", "바뀌다:규칙"}, {"取り替え", "바뀌다:규칙"},
-    {"捨て", "버려지다:규칙"}, {"育て", "길러지다:규칙"},
+    {"捨て", "버려지다:규칙"}, {"育て", "길러지다:규칙"}, {"命じ", "명령받다"},
 };
 
 // The target of the passive lemma of surface; false when surface has none.
@@ -68,6 +68,9 @@ constexpr std::string_view kAbilityVerbs[] = {
     "続け", "受け止め", "乗り越え", "生き延び", "逃げ", "着",
 };
 
+// Ichidan stems whose られた after an object is mostly the potential (新年を迎えられた).
+constexpr std::string_view kObjectAbilityVerbs[] = {"迎え", "任せ"};
+
 // Whether stem is a compound verb of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 bool CompoundAction(std::string_view stem) {
     constexpr std::string_view suffixes[] = {"付け", "つけ", "かけ", "掛け", "立て", "かかえ", "抱え"};
@@ -87,9 +90,9 @@ bool Transitive(const Item* it) {
     return false;
 }
 
-// The passive reading of a られた or られて with no other cue.
+// The passive reading of a られた, られて or られ、 with no other cue.
 bool NarrativePassive(const Item* it, std::string_view rest) {
-    if (!rest.starts_with("た") && !rest.starts_with("て")) return false;
+    if (!rest.starts_with("た") && !rest.starts_with("て") && !rest.starts_with(kJaComma)) return false;
     return !InSet(kAbilityVerbs, it->group->surface);
 }
 
@@ -97,7 +100,8 @@ bool NarrativePassive(const Item* it, std::string_view rest) {
 //   - a negative, conditional or volitional form and the polite non-past are potential;
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
-//   - going back through the clause, the nearest を (potential unless listed) or an agent
+//   - going back through the clause, the nearest を (potential unless listed or a narrative
+//     form) or an agent
 //     に, から, によって, により after a thing-free word decides;
 //   - listed verbs and narrative forms are passive;
 //   - a subject は or が that is a thing makes the reading passive, unless the verb is the
@@ -117,7 +121,7 @@ bool PassiveReading(const Item* it, std::string_view rest) {
     const Item* subject = nullptr;
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
-        if (s == "を" && !listed) {
+        if (s == "を" && !listed && (!NarrativePassive(it, rest) || InSet(kObjectAbilityVerbs, it->group->surface))) {
             return false;
         } else if (s == "に" || s == "から" || s == "によって" || s == "により") {
             const Item* a = p->prev;
