@@ -3,8 +3,8 @@ compose:number-predicate	最大HPが12上がった。	최대 HP가 12 올랐다.
 compose:number-predicate	値段が3上がった。	가격이 3 올랐다.	fix	compose
 compose:number-predicate	あと25使って取得する。	앞으로 25 써 취득한다.	fix	compose
 compose:number-predicate	3時間かけた。	3시간 들였다.	keep	compose
-compose:number-predicate	3個買った。	3개 샀다.	keep	compose
-compose:number-predicate	3人増えた。	3명 늘어났다.	keep	compose
+compose:number-predicate	3個買った。	세 개 샀다.	keep	compose
+compose:number-predicate	3人増えた。	세 명 늘어났다.	keep	compose
 compose:number-predicate	5分待った。	5분 기다렸다.	keep	compose
 compose:number-predicate	その数は30近い。	그 수는 30 가깝다.	fix	compose
 compose:number-predicate	１０円なんて安い。	10엔인 이라고 싸다.	keep	compose

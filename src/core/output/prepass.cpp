@@ -154,8 +154,108 @@ bool KeepsAdjacency(int type) {
 
 bool IsDigit(char c) { return c >= '0' && c <= '9'; }
 
+bool AllDigits(std::string_view s) { return !s.empty() && std::all_of(s.begin(), s.end(), IsDigit); }
+
+// s without its last character.
+std::string_view DropLastRune(std::string_view s) {
+    size_t k = s.size();
+    while (k > 0 && (static_cast<unsigned char>(s[k - 1]) & 0xC0) == 0x80) k--;
+    return s.substr(0, k > 0 ? k - 1 : 0);
+}
+
+// The last character of s, 0 when s is empty.
+char32_t LastRune(std::string_view s) { return s.empty() ? 0 : text::DecodeRune(s.substr(DropLastRune(s).size())).cp; }
+
+// A counter counted with native Korean numerals (두 마리, 세 번, 네 장). A Korean counter
+// that also counts with Sino-Korean numerals lists the Japanese counters it is native
+// for: 2번 for 番 and 3장 for 章 stay digits.
+struct NativeCounter {
+    std::string_view korean;
+    std::u32string_view sources;  // one-character Japanese counters; empty for any
+};
+constexpr NativeCounter kNativeCounters[] = {
+    {"마리", U""},  {"개", U""},     {"명", U""},     {"사람", U""},   {"권", U"冊"},   {"자루", U""},
+    {"그루", U""},  {"잔", U""},     {"대", U"台"},   {"장", U"枚張"}, {"살", U""},     {"가지", U""},
+    {"군데", U""},  {"채", U"軒棟"}, {"척", U"隻艘"}, {"벌", U"着"},   {"통", U"通樽"},
+    {"켤레", U""},  {"송이", U""},   {"알", U""},     {"병", U"本瓶"}, {"그릇", U""},   {"끼", U""},
+    {"가닥", U""},  {"쌍", U""},     {"곳", U""},     {"마디", U""},   {"걸음", U""},   {"접시", U""},
+    {"봉지", U""},  {"상자", U""},   {"바퀴", U""},   {"발", U"発"},   {"차례", U""},   {"번", U"回度遍"},
+    {"번째", U""},  {"개째", U""},   {"명째", U""},   {"마리째", U""}, {"면", U"面"},   {"덩어리", U""},
+};
+
+bool CountsNatively(std::string_view counter, std::string_view korean) {
+    const char32_t source = text::DecodeRune(counter).cp;
+    for (const NativeCounter& c : kNativeCounters) {
+        if (korean == c.korean) return c.sources.empty() || HasRune(c.sources, source);
+    }
+    return false;
+}
+
+// The native Korean numeral that a count of one to nine written in digits or kanji
+// reads before a native counter (二 두, 3 세); 十 reads 열. Empty for any other number.
+std::string_view NativeNumeral(std::string_view digits, std::string_view surface) {
+    constexpr std::string_view kNative[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉"};
+    if (surface == "十" && digits == "10") return "열";
+    if (digits.size() != 1 || digits[0] == '0') return {};
+    for (size_t k = 0; k < surface.size();) {
+        const auto r = text::DecodeRune(surface.substr(k));
+        if (!(r.cp >= U'0' && r.cp <= U'9') && !(r.cp >= U'０' && r.cp <= U'９') &&
+            !HasRune(U"一二三四五六七八九", r.cp)) {
+            return {};
+        }
+        k += r.size;
+    }
+    return kNative[digits[0] - '1'];
+}
+
 std::string_view TextTail(const Pieces& p) {
     return !p.empty() && p.back().span == SpanText ? std::string_view(p.back().text) : std::string_view();
+}
+
+// Whether the item continues a number or a range of numbers written before it (第2回,
+// 1、2個, 2～3本, 百二十).
+bool InsideNumber(const std::vector<TokenText>& tokens, const ResolvedItem& item) {
+    std::string before(std::string_view(tokens[item.tokenIndex].text).substr(0, item.offset));
+    for (int k = item.tokenIndex - 1; k >= 0 && text::RuneCount(before) < 2; k--) before.insert(0, tokens[k].text);
+    char32_t r = LastRune(before);
+    if (HasRune(U"、，,.~～〜-－・", r)) r = LastRune(DropLastRune(before));
+    return r != 0 && (text::IsDigit(r) || HasRune(U"〇○一二三四五六七八九十百千万億第", r));
+}
+
+// A number and its counter read as one word (三箇所 3군데, 八本 8 개, ２人 2명): a count
+// of one to nine counted natively is written in native Korean apart from the counter
+// (세 군데, 여덟 개, 두 명), a larger one in digits joined to it.
+std::string CountWithin(const std::vector<TokenText>& tokens, const ResolvedItem& item, std::string t) {
+    size_t digits = 0;
+    while (digits < t.size() && IsDigit(t[digits])) digits++;
+    if (digits == 0 || digits == t.size()) return t;
+    const std::string_view counter = std::string_view(t).substr(t[digits] == ' ' ? digits + 1 : digits);
+    std::string_view surface = item.surface;
+    size_t numeral = 0;
+    while (numeral < surface.size()) {
+        const auto r = text::DecodeRune(surface.substr(numeral));
+        if (!text::IsDigit(r.cp) && !HasRune(U"〇○一二三四五六七八九十", r.cp)) break;
+        numeral += r.size;
+    }
+    if (numeral == 0 || numeral == surface.size() || !CountsNatively(surface.substr(numeral), counter)) return t;
+    if (InsideNumber(tokens, item)) return t;
+    const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
+    if (native.empty()) return t.substr(0, digits) + std::string(counter);
+    return std::string(native) + ' ' + std::string(counter);
+}
+
+// Whether item j is a count written in native Korean (二匹 두 마리, 三箇所 세 군데).
+bool WritesNativeCount(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens, int j) {
+    if (j < 0 || j >= static_cast<int>(items.size())) return false;
+    const ResolvedItem& item = items[j];
+    const std::string_view t = EntryText(item);
+    if (t.empty() || !IsDigit(t[0])) return false;
+    if (!AllDigits(t)) return !IsDigit(CountWithin(tokens, item, std::string(t))[0]);
+    if (j + 1 >= static_cast<int>(items.size()) || TokenDistance(tokens, item.tokenIndex, items[j + 1].tokenIndex) >= 2) {
+        return false;
+    }
+    return CountsNatively(items[j + 1].surface, EntryText(items[j + 1])) && !InsideNumber(tokens, item) &&
+           !NativeNumeral(t, item.surface).empty();
 }
 
 }  // namespace
@@ -295,7 +395,7 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
             remainder = FilterKana(remainder, settings_);
         }
     }
-    std::string translated = ApplyParenthesisTextFilter(Build(i, 0, {}), i);
+    std::string translated = CountWithin(tokens, item, ApplyParenthesisTextFilter(Build(i, 0, {}), i));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
     std::string composed;
@@ -466,6 +566,26 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     const ResolvedItem& next = items[nextIndex];
     if (const int a = tokens[item.tokenIndex].type, b = tokens[next.tokenIndex].type;
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
+        return Result(std::move(t), false);
+    }
+    // The word before a native count stands apart from it (개 두 마리, not 개두 마리), also
+    // across items that write nothing.
+    for (int j = nextIndex; j < count && TokenDistance(tokens, item.tokenIndex, items[j].tokenIndex) < 2; j++) {
+        if (WritesNativeCount(items, tokens, j)) {
+            if (!t.ends_with(' ')) return Result(std::move(t), true);
+            break;
+        }
+        if (!EntryText(items[j]).empty()) break;
+    }
+    // A count before a native counter: one to nine is written in native Korean apart from
+    // the counter (二匹 두 마리, 3回 세 번), a larger number in digits joined to it (20마리).
+    // A number inside a longer one or a range (第2回, 1、2個, 2～3本) stays as it is.
+    if (AllDigits(t) && CountsNatively(next.surface, EntryText(next))) {
+        if (!InsideNumber(tokens, item)) {
+            if (const std::string_view native = NativeNumeral(t, item.surface); !native.empty()) {
+                return Result(std::string(native), true);
+            }
+        }
         return Result(std::move(t), false);
     }
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };

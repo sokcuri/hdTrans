@@ -61,7 +61,7 @@ dict:jisjk:341742	先生といる。	선생님과 있다.	fix	local
 dict:jisjk:341742	母と一緒にいる。	어머니와 함께 있다.	keep	local
 dict:jisjk:114918	彼女を正式な妻とした。	그녀를 정식인 아내로 했다.	keep	local
 dict:jisjk:114918	船を旗艦とする。	배를 기함으로 한다.	keep	local
-dict:jisjk:359256	３発も命中させた。	3발이나 명중시켰다.	keep	local
+dict:jisjk:359256	３発も命中させた。	세 발이나 명중시켰다.	keep	local
 dict:jisjk:369554	もう帰らなければと思います。	이제 돌아가야 한다고 생각합니다.	fix	local
 dict:jisjk:369554	早く行かなきゃと思った。	빨리 가야 한다고 생각했다.	fix	local
 dict:jisjk:369554	一緒に行けたらと思って。	함께 갈 수 있으면 하고 생각해.	fix	local

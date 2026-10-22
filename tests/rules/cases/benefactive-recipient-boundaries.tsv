@@ -29,7 +29,7 @@ dict:standalone-morau	友人から本をもらえる。	친구에게서 책을 �
 dict:standalone-morau	友人から本をもらえない。	친구에게서 책을 받을 수 없다.	keep	lookup
 dict:standalone-morau	本をもらえますか。	책을 받을 수 있습니까.	keep	lookup
 dict:plain-wakeru	パンを分ける。	빵을 나눈다.	keep	lookup
-dict:plain-wakeru	二つに分ける。	2개로 나눈다.	keep	lookup
+dict:plain-wakeru	二つに分ける。	두 개로 나눈다.	keep	lookup
 dict:plain-oshieru	料理を教える。	요리를 가르친다.	keep	lookup
 dict:plain-oshieru	先生の教えを守る。	선생님의 가르침을 지킨다.	keep	lookup
 dict:competing-benefactive	友人に手伝ってもらった。	친구에게 도움을 받았다.	keep	lookup
@@ -45,4 +45,4 @@ dict:ju-temoratte	友人から銃を分けてもらっている。	친구에게�
 dict:ju-request	銃を分けてもらえますか。	총을 나누어 줄 수 있습니까.	keep	lookup
 dict:ju-request	銃を分けてもらえませんか。	총을 나누어주실 수 있겠습니까.	keep	lookup
 dict:nested-benefactive	友人からパンを分けてもらってくれた。	친구에게서 빵을 나누어 받아 주었다.	fix	lookup
-dict:plain-division	班を二つに分ける。	반을 2개로 나눈다.	keep	lookup
+dict:plain-division	班を二つに分ける。	반을 두 개로 나눈다.	keep	lookup
