@@ -11,3 +11,7 @@ compose:native-count	1、2個残った。	1, 2개 남았다.	keep	compose
 compose:native-count	2～3本ある。	2~3개 있다.	keep	compose
 compose:native-count	二番の札。	2번의 지폐.	keep	compose
 compose:native-count	三章を開いた。	3장을 열었다.	keep	compose
+compose:native-count	何箇所か開けてから寝た。	몇 군데인가 열고 나서 잤다.	fix	compose
+compose:native-count	何人か怪我をしている。	여러 명 다치고 있다.	fix	compose
+compose:native-count	ネズミが一匹、肥料になった。	쥐가 한 마리, 비료가 되었다.	fix	compose
+compose:native-count	野球に夢中な人、数人。	야구에 열중한 사람, 몇 사람.	fix	compose

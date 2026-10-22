@@ -10,7 +10,7 @@ dict:jisjk:114918	彼女を王太子妃とする。	그녀를 왕태자비로 �
 dict:Tu	成果が得られていない。	성과를 얻지 못하고 있다.	fix	compose
 dict:Tu	時間があってもいい。	시간이 있어도 된다.	fix	compose
 dict:Tu	料理が分からない。	요리를 모른다.	keep	compose
-dict:Ct	モンスターを３体も倒した。	몬스터를 3체나 넘어뜨렸다.	fix	local
+dict:Ct	モンスターを３体も倒した。	몬스터를 세 체나 넘어뜨렸다.	fix	local
 dict:Ct	一発で決める。	한 방으로 결정한다.	keep	local
 dict:idiom	なにかにつけて文句を言う。	걸핏하면 불평한다.	fix	lookup
 dict:idiom	なにかに使う。	뭔가에 쓴다.	keep	lookup

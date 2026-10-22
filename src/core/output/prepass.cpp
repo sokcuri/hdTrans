@@ -168,27 +168,40 @@ char32_t LastRune(std::string_view s) { return s.empty() ? 0 : text::DecodeRune(
 
 // A counter counted with native Korean numerals (두 마리, 세 번, 네 장). A Korean counter
 // that also counts with Sino-Korean numerals lists the Japanese counters it is native
-// for: 2번 for 番 and 3장 for 章 stay digits.
+// for: 2번 for 番 and 3장 for 章 stay digits. Some counters form words with a numeral
+// (한번, 한잔, 한마디) and are not split from one.
 struct NativeCounter {
     std::string_view korean;
     std::u32string_view sources;  // one-character Japanese counters; empty for any
+    bool joins = false;
 };
 constexpr NativeCounter kNativeCounters[] = {
-    {"마리", U""},  {"개", U""},     {"명", U""},     {"사람", U""},   {"권", U"冊"},   {"자루", U""},
-    {"그루", U""},  {"잔", U""},     {"대", U"台"},   {"장", U"枚張"}, {"살", U""},     {"가지", U""},
-    {"군데", U""},  {"채", U"軒棟"}, {"척", U"隻艘"}, {"벌", U"着"},   {"통", U"通樽"},
-    {"켤레", U""},  {"송이", U""},   {"알", U""},     {"병", U"本瓶"}, {"그릇", U""},   {"끼", U""},
-    {"가닥", U""},  {"쌍", U""},     {"곳", U""},     {"마디", U""},   {"걸음", U""},   {"접시", U""},
-    {"봉지", U""},  {"상자", U""},   {"바퀴", U""},   {"발", U"発"},   {"차례", U""},   {"번", U"回度遍"},
-    {"번째", U""},  {"개째", U""},   {"명째", U""},   {"마리째", U""}, {"면", U"面"},   {"덩어리", U""},
+    {"마리", U""},          {"개", U""},          {"명", U""},           {"사람", U""},         {"권", U"冊"},
+    {"자루", U""},          {"그루", U""},        {"잔", U"", true},     {"대", U"台"},         {"장", U"枚張"},
+    {"살", U""},            {"가지", U"", true},  {"군데", U""},         {"채", U"軒棟"},       {"척", U"隻艘"},
+    {"벌", U"着"},          {"통", U"通樽", true}, {"켤레", U""},        {"송이", U""},         {"알", U"", true},
+    {"병", U"本瓶"},        {"그릇", U""},        {"끼", U"", true},     {"가닥", U"", true},   {"쌍", U""},
+    {"곳", U""},            {"마디", U"", true},  {"걸음", U"", true},   {"접시", U""},         {"봉지", U""},
+    {"상자", U""},          {"바퀴", U""},        {"발", U"発"},         {"차례", U"", true},   {"번", U"回度遍", true},
+    {"번째", U""},          {"개째", U""},        {"명째", U""},         {"마리째", U""},       {"면", U"面"},
+    {"덩어리", U""},        {"체", U"体"},
 };
 
-bool CountsNatively(std::string_view counter, std::string_view korean) {
+const NativeCounter* FindNativeCounter(std::string_view counter, std::string_view korean) {
     const char32_t source = text::DecodeRune(counter).cp;
     for (const NativeCounter& c : kNativeCounters) {
-        if (korean == c.korean) return c.sources.empty() || HasRune(c.sources, source);
+        if (korean == c.korean) return c.sources.empty() || HasRune(c.sources, source) ? &c : nullptr;
     }
-    return false;
+    return nullptr;
+}
+
+// The words a native count starts with, and the characters of the Japanese numbers and
+// question words they translate.
+constexpr std::string_view kNativeCounts[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "몇", "여러"};
+constexpr std::u32string_view kCountLeads = U"0123456789０１２３４５６７８９一二三四五六七八九十何数幾";
+
+bool CountsNatively(std::string_view counter, std::string_view korean) {
+    return FindNativeCounter(counter, korean) != nullptr;
 }
 
 // The native Korean numeral that a count of one to nine written in digits or kanji
@@ -226,6 +239,22 @@ bool InsideNumber(const std::vector<TokenText>& tokens, const ResolvedItem& item
 // of one to nine counted natively is written in native Korean apart from the counter
 // (세 군데, 여덟 개, 두 명), a larger one in digits joined to it.
 std::string CountWithin(const std::vector<TokenText>& tokens, const ResolvedItem& item, std::string t) {
+    // A native count read as one word with its counter (一匹 한마리, ２人 두명, 何個 몇개)
+    // stands apart from it (한 마리, 두 명, 몇 개).
+    for (const std::string_view count : kNativeCounts) {
+        if (!t.starts_with(count) || t.size() == count.size() || t[count.size()] == ' ') continue;
+        const std::string_view surface = item.surface;
+        if (!HasRune(kCountLeads, text::DecodeRune(surface).cp)) break;
+        size_t numeral = 0;
+        while (numeral < surface.size()) {
+            const auto r = text::DecodeRune(surface.substr(numeral));
+            if (!HasRune(kCountLeads, r.cp)) break;
+            numeral += r.size;
+        }
+        const NativeCounter* c = FindNativeCounter(surface.substr(numeral), std::string_view(t).substr(count.size()));
+        if (c != nullptr && !c->joins) t.insert(count.size(), " ");
+        break;
+    }
     size_t digits = 0;
     while (digits < t.size() && IsDigit(t[digits])) digits++;
     if (digits == 0 || digits == t.size()) return t;
@@ -244,18 +273,22 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const ResolvedItem
     return std::string(native) + ' ' + std::string(counter);
 }
 
-// Whether item j is a count written in native Korean (二匹 두 마리, 三箇所 세 군데).
+// Whether item j writes a native count (二匹 두 마리, 三箇所 세 군데, 何個 몇 개, 数 before 頭
+// 몇 마리).
 bool WritesNativeCount(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens, int j) {
     if (j < 0 || j >= static_cast<int>(items.size())) return false;
     const ResolvedItem& item = items[j];
     const std::string_view t = EntryText(item);
-    if (t.empty() || !IsDigit(t[0])) return false;
-    if (!AllDigits(t)) return !IsDigit(CountWithin(tokens, item, std::string(t))[0]);
-    if (j + 1 >= static_cast<int>(items.size()) || TokenDistance(tokens, item.tokenIndex, items[j + 1].tokenIndex) >= 2) {
-        return false;
-    }
-    return CountsNatively(items[j + 1].surface, EntryText(items[j + 1])) && !InsideNumber(tokens, item) &&
-           !NativeNumeral(t, item.surface).empty();
+    if (t.empty() || !HasRune(kCountLeads, text::DecodeRune(item.surface).cp)) return false;
+    const bool beforeCounter = j + 1 < static_cast<int>(items.size()) &&
+                               TokenDistance(tokens, item.tokenIndex, items[j + 1].tokenIndex) < 2 &&
+                               CountsNatively(items[j + 1].surface, EntryText(items[j + 1]));
+    if (AllDigits(t)) return beforeCounter && !InsideNumber(tokens, item) && !NativeNumeral(t, item.surface).empty();
+    if (t == "몇" || t == "여러") return beforeCounter;
+    const std::string written = CountWithin(tokens, item, std::string(t));
+    return std::any_of(std::begin(kNativeCounts), std::end(kNativeCounts), [&](std::string_view count) {
+        return written.starts_with(count) && written.size() > count.size() && written[count.size()] == ' ';
+    });
 }
 
 }  // namespace
@@ -588,6 +621,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         }
         return Result(std::move(t), false);
     }
+    if ((t == "몇" || t == "여러") && CountsNatively(next.surface, EntryText(next))) return Result(std::move(t), true);
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };
     bool allowSpacing = true;
     if (t == "\\") {
