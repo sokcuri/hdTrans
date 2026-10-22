@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:3372	だから余計なことを考えるな	그러니까 쓸데없는 일을 생각하지 마	fix	lookup
+dict:jisjk:3372	余計な心配だったようだ。	쓸데없는 걱정이었던 것 같다.	fix	lookup
+dict:w:26720	余計に時間かかるだろ	더 시간 걸리지	fix	lookup
+dict:jisjk:3372	一言余計よ！	한마디 쓸데없어!	keep	lookup
