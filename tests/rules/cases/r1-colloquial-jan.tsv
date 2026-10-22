@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:jisjk:257530	どう考えたって夢じゃん	어떻게 생각해도 꿈이잖아	fix	lookup
+dict:jisjk:257530	やっぱりプロポーズじゃん	역시 프러포즈잖아	fix	lookup
+dict:colloquial-endings:1	今まさにそうしてるじゃん	지금 그야말로 그렇게 하고 있잖아	fix	lookup
+dict:colloquial-endings:2	てんで役に立たなかったじゃん	아예 쓸모없었잖아	fix	lookup
+dict:colloquial-endings:3	昔は可愛いの好きだったじゃん	옛날은 귀여운 것 좋아했잖아	fix	lookup
+normalize:jan-ka	ほんとに出ていく事ないじゃんか	정말 나가는 일 없잖아	fix	normalize
+normalize:jan-ka	それは聞いてるじゃんっ！	그것은 듣고 있잖아!	fix	normalize
+dict:jisjk:257530	あ、名前書いてあるじゃん	아, 이름 써 있잖아	keep	lookup
+dict:jisjk:257530	全部喋るじゃん……	전부 말하잖아……	keep	lookup

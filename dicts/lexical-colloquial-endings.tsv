@@ -1,0 +1,7 @@
+#! layer=words
+# 구어 끝맺음(じゃん, かしら 등)이 앞 활용과 붙은 어미
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+るじゃん	1고 있잖아	S570		Sh	GN							colloquial-endings:1
+かったじゃん	5잖아	T500			GN							colloquial-endings:2
+だったじゃん	5잖아	U500			GN							colloquial-endings:3
+だったじゃん	(이었)였잖아	P200			GN							colloquial-endings:4

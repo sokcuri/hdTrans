@@ -332,6 +332,28 @@ bool Janee(std::string_view s, size_t pos, Match& m) {
     });
 }
 
+// じゃん(?:かよ?[っー～]*|っ+) before a character other than hiragana or the end: the particles
+// and the stress after じゃん change nothing (いいじゃんか, ないじゃんかよ, 夢じゃんっ,
+// 透けてるじゃんかーっ).
+bool JanKa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "じゃん")) return false;
+    const size_t head = p;
+    if (Lit(s, p, "か")) {
+        Lit(s, p, "よ");
+        while (OneOf(s, p, U"っー～")) {
+        }
+    } else {
+        while (Lit(s, p, "っ")) {
+        }
+    }
+    if (p == head) return false;
+    size_t q = p;
+    if (Take(s, q, IsHiraganaClass)) return false;
+    m.end = p;
+    return true;
+}
+
 // ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|^し|[^ぁ-ゖ]し)(と|ど)
 // (く|こう|こ|いて|いた|きな|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$)
 bool Toku(std::string_view s, size_t pos, Match& m) {
@@ -448,6 +470,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, UtoShite, [](const Match& m) { return Cat({"うとしてい", m.group[1]}); });
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
+    text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
     text = ReplaceAll(text, Toku, [](const Match& m) {
         const Match g = Rematch(m, Toku);
         const std::string_view stem = g.group[1];
