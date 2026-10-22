@@ -99,7 +99,7 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
         {"것은", "건", false},       {"것을", "걸", false},       {"것으로", "걸로", false},       {"것이야", "거야", false},
         {"것이지", "거지", false},   {"것이니까", "거니까", false}, {"것이", "게", true},
         {"것", "거", true},          {"무엇인가", "뭔가", false},  {"무엇을", "뭘", false},
-        {"무엇이야", "뭐야", false}, {"무엇이지요", "뭐죠", false}, {"무엇이지", "뭐지", false},  {"무엇입니까", "뭡니까", false},
+        {"무엇이야", "뭐야", false}, {"무엇이지요", "뭐죠", false}, {"무엇이죠", "뭐죠", false}, {"무엇이지", "뭐지", false},  {"무엇입니까", "뭡니까", false},
         {"무엇입니다", "뭡니다", false}, {"무엇이에요", "뭐예요", false}, {"무엇인지", "뭔지", false},
         {"무엇인데", "뭔데", false}, {"무엇이든", "뭐든", false},  {"무엇이라도", "뭐라도", false},
         {"무엇일까", "뭘까", false}, {"무엇이", "뭐가", true},    {"무엇", "뭐", true},
