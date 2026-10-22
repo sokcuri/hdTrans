@@ -1,0 +1,5 @@
+#! layer=words
+# 성애 장면의 동사, 명사, 관용 표현
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+いっちゃ	가버&AA@	M420			GN							adult:1
+いっちま	가버&AA@	M420			GN							adult:2
