@@ -1,0 +1,23 @@
+rule	input	expected	kind	layer
+lexical:katakana-words	クワを振り下ろした。	괭이를 내리쳤다.	fix	lookup
+lexical:katakana-words	クイを打つ。	말뚝을 친다.	fix	lookup
+lexical:katakana-words	黒いモヤのような化け物だ。	검은 안개와 같은 괴물이다.	fix	lookup
+lexical:katakana-words	巨大なリスの巣だ。	거대한 다람쥐의 둥지다.	fix	lookup
+lexical:katakana-words	ナス、ダイコン、トマト。	가지, 무, 토마토.	fix	lookup
+lexical:katakana-words	まず、ライチ。	우선, 리치.	fix	lookup
+lexical:katakana-words	カマやナイフを使う。	낫이나 나이프를 쓴다.	fix	lookup
+lexical:katakana-words	バールのような物で木を引っ掛けた。	쇠지레와 같은 물건으로 나무를 걸었다.	fix	lookup
+lexical:katakana-words	他はイマイチだったらしい。	외는 별로였던 것 같다.	fix	lookup
+lexical:katakana-words	作物はスクスク育っている。	작물은 무럭무럭 자라고 있다.	fix	lookup
+lexical:katakana-words	軽くオヤツでも作ろう。	가볍게 간식이라도 만들자.	fix	lookup
+lexical:katakana-words	そのツテを頼りたい。	그 연줄을 의지하고 싶다.	fix	lookup
+lexical:katakana-words	ここはキッチリしておく。	여기는 제대로 해 둔다.	fix	lookup
+lexical:katakana-words	多くキープしたい。	많이 확보하고 싶다.	fix	lookup
+lexical:katakana-words	テレながら言った。	쑥스러워하면서 말했다.	fix	lookup
+lexical:katakana-words	毛皮をナメす。	모피를 무두질한다.	fix	lookup
+lexical:katakana-words	生のままじゃキツい。	생으로는 힘들다.	fix	lookup
+lexical:katakana-words	同じカマの飯を食う仲間だ。	한솥밥을 먹는 동료다.	fix	lookup
+lexical:katakana-words	カマをかけたら正解だった。	떠보면 정답이었다.	fix	lookup
+lexical:katakana-words	クワ・トイネ公国だ。	쿠와 트이네 공국이다.	keep	lookup
+lexical:katakana-words	リスクが高い。	리스크가 높다.	keep	lookup
+lexical:katakana-words	モヤモヤする。	찜찜한다.	keep	lookup
