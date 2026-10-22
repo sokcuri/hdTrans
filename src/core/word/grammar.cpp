@@ -421,6 +421,18 @@ constexpr std::string_view kSeeAndFollowers = " は も を が の に と で 
 
 }  // namespace
 
+namespace {
+
+// Whether the 2-byte grammar codes gattr hold code.
+bool GrammarCode(std::string_view gattr, std::string_view code) {
+    for (std::size_t i = 0; i + 2 <= gattr.size(); i += 2) {
+        if (gattr.substr(i, 2) == code) return true;
+    }
+    return false;
+}
+
+}  // namespace
+
 void ResultState(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
@@ -431,7 +443,9 @@ void ResultState(Flusher& f) {
         if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
         const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
         const bool state = (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
-                           ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem));
+                           ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem)) ||
+                           (it->detail->record <= 1 && GrammarCode(it->GAttr(it->selected), "Dx") &&
+                            !it->EntryText(it->selected).ends_with("&HN@"));
         if (!state) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
