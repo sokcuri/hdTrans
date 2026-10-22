@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:names.760038	魔王様が来た。	마왕님이 왔다.	fix	lookup
+dict:names.760038	姫様が笑った。	공주님이 웃었다.	keep	lookup
+dict:names.760038	俺様が来た。	오레사마가 왔다.	keep	lookup

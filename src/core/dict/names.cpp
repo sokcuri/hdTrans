@@ -317,7 +317,8 @@ bool Snapshot::PhraseKey(std::string_view key) const {
 
 // Whether the name key s[:n] is not a word of the base dictionary: the base and user
 // dictionaries have no sense with it nor, for katakana, with its hiragana spelling
-// (アレ, イク); it is not a single character, a number, hiragana only or a phrase; no
+// (アレ, イク); it is not a single character, a number, hiragana only, a phrase or a
+// title (TitleKey); no
 // base word other than a verb starts inside it and ends after it (宇宙機 in
 // 宇宙機関); and no verb or adjective stem starts inside it, ends with it and is
 // followed by hiragana other than a name follower (子来 in 子来た, 家近 in 家近い,
@@ -325,7 +326,7 @@ bool Snapshot::PhraseKey(std::string_view key) const {
 bool Snapshot::StrongName(std::string_view s, std::size_t n) const {
     const std::string_view key = s.substr(0, n);
     if (RuneCount(key) == 1 || NumeralKey(key) || !AnyRune(key, [](char32_t r) { return !IsHiragana(r); }) ||
-        BaseWord(key) || BaseWord(HiraganaOf(key)) || PhraseKey(key)) {
+        BaseWord(key) || BaseWord(HiraganaOf(key)) || PhraseKey(key) || TitleKey(key)) {
         return false;
     }
     const std::string_view after = s.substr(n);
@@ -346,6 +347,23 @@ bool Snapshot::StrongName(std::string_view s, std::size_t n) const {
         if (crosses) return false;
     }
     return true;
+}
+
+// Whether key is a base person noun with 様 or さま (魔王様, 姫様): a title, not a name. A
+// pronoun (俺様) or a noun with a person sense (アキラ様) is no title.
+bool Snapshot::TitleKey(std::string_view key) const {
+    for (const std::string_view h : {std::string_view("様"), std::string_view("さま")}) {
+        if (key.size() <= h.size() || !key.ends_with(h)) continue;
+        bool role = false, person = false;
+        for (const Record& r : base_.Records(key.substr(0, key.size() - h.size()))) {
+            const SemCodes& sem = r.codes->sem;
+            person = person || sem.HasPrefix("QPN") || sem.HasCode("QPN");
+            role = role || ((sem.HasCode("VHn") || sem.HasCode("UAq")) && !r.codes->partText.starts_with("N12") &&
+                            !r.codes->partText.starts_with("I12"));
+        }
+        return role && !person;
+    }
+    return false;
 }
 
 // Whether the name key s[:n], katakana of two or more characters, is followed by an
