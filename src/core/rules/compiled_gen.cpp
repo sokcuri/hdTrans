@@ -4239,9 +4239,9 @@ bool RuleG80([[maybe_unused]] Item* p) {
 }
 
 // global 1010 stem pos 1 prio 90
-//     sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4**
+//     sem under sem[+2] and pos[+1] is 2** and pos[+2] is 4** and sem lacks QPN
 bool RuleG90([[maybe_unused]] Item* p) {
-    return (AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv));
+    return (AttrMinusEqW(p, 0, 2) && PumsaEq(p, 1, "2**"sv) && PumsaEq(p, 2, "4**"sv) && AttrNe(p, 0, "QPN"sv));
 }
 
 // global 1015 stem pos 1 prio 100
@@ -4944,7 +4944,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
-    {RuleG90, 0xf785d9c5b40f546dull},
+    {RuleG90, 0xb504a3b967d44dedull},
     {RuleG100, 0x02cb2c354852c2f1ull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},

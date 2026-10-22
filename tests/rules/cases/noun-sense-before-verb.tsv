@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+G90	森に入って草を集める。	숲에 들어와 풀을 모은다.	fix	global-stem
+G90	鞄の中に入っている。	가방 안에 들어가 있다.	fix	global-stem
+G90	森先生に会いに行く。	모리 선생을 만나러 간다.	keep	global-stem
