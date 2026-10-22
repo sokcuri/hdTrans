@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:oi-call	「おい田中、聞いてるか？」	「어이 타나카, 듣고 있어?」	fix	sound
+sound:oi-call	「おいこら、待て！」	「야 이놈아, 기다려!」	fix	sound
+sound:oi-call	ここにおいて。	여기에 있어.	keep	sound
