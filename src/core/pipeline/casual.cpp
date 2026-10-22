@@ -105,10 +105,12 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// (っ|し)ちま([うっえいわお])|んじま([うっえいわお])
+// ([っし]|[えけげせぜてでねべめれ]|[見来寝着出居似煮])ちま([うっえいわお])|んじま([うっえいわお]):
+// てしまう contracted, after the て form of a godan verb, する and a verb in -eru or -iru
+// (言っちまう, 忘れちまう, 見ちまった)
 bool Chimau(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (OneOf(s, p, U"っし")) {
+    if (OneOf(s, p, U"っしえけげせぜてでねべめれ見来寝着出居似煮")) {
         size_t q = p;
         if (Lit(s, q, "ちま")) {
             size_t r = q;
@@ -239,7 +241,7 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
         while (before > 0 && (static_cast<unsigned char>(s[before - 1]) & 0xC0) == 0x80) before--;
         if (before > 0) before--;
         const char32_t c = pos == 0 ? 0 : text::DecodeRune(s.substr(before)).cp;
-        if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c))) return false;
+        if (pos == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || (c >= U'ァ' && c <= U'ヺ') || c == U'ー')) return false;
     }
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
@@ -447,6 +449,31 @@ bool OiTsu(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ([いるたうくすつぬぶむぐ])んか(?=[？?」』。…‥！!]|ね|い|よ|$): the question のか with
+// の contracted after a predicate (いいんか, あるんか, 信じるんかい).
+bool NnKa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"いるたうくすつぬぶむぐ")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "んか")) return false;
+    size_t q = p;
+    if (q < s.size() && !OneOf(s, q, U"？?」』。…‥！!ねいよ")) return false;
+    m.end = p;
+    return true;
+}
+
+// なー+に at the start of a clause: なに drawn out (なーにやってんの).
+bool Naani(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "な")) return false;
+    return Repeat(s, p, InSet(U"ー～"), 1, kUnbounded, [&](size_t q) {
+        size_t r = q;
+        if (!Lit(s, r, "に")) return false;
+        m.end = r;
+        return true;
+    });
+}
+
 // ([こそど])っから: ここから, そこから, どこから contracted.
 bool KoKara(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -457,8 +484,8 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|^し|[^ぁ-ゖ]し)(と|ど)
-// (く|こう|こ|いて|いた|きな|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$)
+// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|やっ|^し|[^ぁ-ゖ]し)(と|ど)
+// (く|こう|こ|いて|いた|きな|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$), or けば
 bool Toku(std::string_view s, size_t pos, Match& m) {
     auto after = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -473,6 +500,8 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
             if (Take(s, t, [](char32_t c) { return !IsHiraganaClass(c); })) return Done(s, m, r, t, 4);
             t = r;
             if (OneOf(s, t, U"よねぞわなも")) return Done(s, m, r, t, 4);
+            t = r;
+            if (w == "け" && Lit(s, t, "ば")) return Done(s, m, r, t, 4);
             for (std::string_view e : {"あげ", "くれ", "くだ"}) {
                 t = r;
                 if (Lit(s, t, e)) return Done(s, m, r, t, 4);
@@ -486,7 +515,7 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
         const bool ok = Repeat(s, p, InSet(U"っしいえけげせぜてねべめれん"), 0, 1, after);
         if (ok) return true;
     }
-    for (std::string_view w : {"もらっ", "まかし"}) {
+    for (std::string_view w : {"もらっ", "まかし", "やっ"}) {
         p = pos;
         if (Lit(s, p, w) && after(p)) return true;
     }
@@ -580,6 +609,8 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
     text = ReplaceAll(text, OiTsu, [](const Match&) { return std::string("おい"); });
     text = ReplaceAll(text, Literal<kSoyuKoto>, [](const Match&) { return std::string("そういうこと"); });
+    text = ReplaceAll(text, NnKa, [](const Match& m) { return Cat({m.group[1], "のか"}); });
+    text = ReplaceAll(text, Naani, [](const Match&) { return std::string("なに"); });
     text = ReplaceAll(text, KoKara, [](const Match& m) { return Cat({m.group[1], "こから"}); });
     text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
     text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
