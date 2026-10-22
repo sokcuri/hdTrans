@@ -30,7 +30,8 @@ const dict::LoadResult& SoundDictionary() {
         "かは\t1는가는\tS561\t12\n"
         "では\t그럼\tP250\t13\n"
         "キー\t키\tN110\t14\n"
-        "でも\t그렇지만\tE300\t15\n",
+        "でも\t그렇지만\tE300\t15\n"
+        "浅\t얕\tH100\t16\n",
     }});
     return result;
 }
@@ -503,6 +504,9 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"冷て～！", "冷たい！"},
         {"歌おうぜぇ～。", "歌おうぜぇ～。"},  // the particle ぜ
         {"届いてぇ！", "届いてぇ！"},          // a て form
+        {"「キャリア浅っ」", "「キャリア浅い」"},
+        {"最浅っ！", "最浅っ！"},  // inside a word
+        {"もっと浅っす", "もっと浅っす"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
 }

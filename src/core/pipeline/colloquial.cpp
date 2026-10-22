@@ -571,6 +571,22 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
     std::u32string out, full;
     bool changed = false;
     size_t at = 0;
+    // A kanji that starts a word clipped with っ before a mark or the end, when the kanji is
+    // the stem of an adjective and no name (キャリア浅っ 浅い, 高っ！; not 蒼っ！).
+    for (size_t k = 0; k + 1 < rs.size(); k++) {
+        if (!IsKanjiRune(rs[k]) || rs[k + 1] != U'っ' || (k > 0 && IsKanjiRune(rs[k - 1]))) continue;
+        size_t q = k + 1;
+        while (q < rs.size() && rs[q] == U'っ') q++;
+        if (q < rs.size() && !In(rs[q], U"！!？?。、…‥」』")) continue;
+        const std::u32string_view stem = std::u32string_view(rs).substr(k, 1);
+        if (e.Tags(stem).find('H') == std::string::npos || e.NameKey(stem, true)) continue;
+        out.append(rs, at, k - at);
+        out.push_back(rs[k]);
+        out.push_back(U'い');
+        at = q;
+        changed = true;
+    }
+    if (changed) return RewriteCasualAdjectives(EncodeText(out + rs.substr(at)), ctx, snap);
     for (size_t s = 0; s < rs.size();) {
         size_t stemLen = 0, runEnd = 0, end = 0;
         if (!CasualAdjectiveAt(rs, s, stemLen, runEnd, end)) {
