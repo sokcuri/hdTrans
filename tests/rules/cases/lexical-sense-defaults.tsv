@@ -28,3 +28,9 @@ dict:jisjk:123527	「ほー、大した自信じゃないか」	「호오, 대�
 dict:jisjk:116378	頭の脇に	머리의 옆에	fix	lookup
 dict:jisjk:116378	脇にどいて	옆에 물러나	fix	lookup
 dict:i:7772	もっと脇を締めて……	좀 더 겨드랑이를 붙여……	fix	lookup
+dict:w:26728	驚かれるのは無理もないと思いますが	놀라지는 것은 무리도 아니라고 생각합니다만	fix	lookup
+dict:w:26733	取り付く島もないなぁ	말을 붙여 볼 수도 없다	fix	lookup
+dict:jisjk:148385	体が震えてあらぬ方向へ飛び	몸이 떨려 엉뚱한 방향에 날아	fix	lookup
+dict:jisjk:345205	ま、何にしても一件落着だな	뭐, 어쨌든 일단락이네	fix	lookup
+dict:w:26727	まあいいや、適当に座ってくれ	뭐 좋아, 적당히 앉아 줘	fix	lookup
+phrase:誰の目にもとまらない	どこかにいるけれど、誰の目にもとまらない	어디엔가 있지만, 누구의 눈에도 띄지 않는다	fix	builtin-phrase
