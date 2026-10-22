@@ -100,7 +100,7 @@ L298	犬などの小さい動物がいる。	개 등이 작은 동물이 있다.
 L300	彼は医者なんだ。	그는 의사야.	current	local
 L300	明日は休みなんだ。	내일은 휴일이야.	current	local
 L317	庭の鳥に餌をやった。	뜰의 새에게 먹이를 주었다.	current	local
-L317	今度は私が作ってやるよ。	이번은 내가 만들어 줄게.	current	local
+L317	今度は私が作ってやるよ。	이번에는 내가 만들어 줄게.	current	local
 L327	田中さんは今日休みです。	타나카씨는 오늘 휴일입니다.	current	local
 L335	どんな感じの部屋ですか。	어떤 느낌의 방입니까.	current	local
 L335	明るい感じの人だと思う。	밝은 느낌의 사람이라고 생각한다.	current	local
@@ -273,7 +273,7 @@ L1982	窓を閉めます？	창을 닫습니까?	current	local-ending
 L1982	お茶を入れます？	차를 끓입니까?	current	local-ending
 L1985	私は妹と買い物に行った。	나는 여동생과 쇼핑하러 갔다.	current	local
 L1985	犬と猫を一匹ずつ飼っている。	개와 고양이를 한마리씩 기르고 있다.	current	local
-L2001	今回は俺が払う。	이번은 내가 지불한다.	current	local
+L2001	今回は俺が払う。	이번에는 내가 지불한다.	current	local
 L2001	俺が全部やっておくよ。	내가 전부 해 둬.	current	local
 L2009	こんなに食べちゃ体に悪いよ。	이렇게 먹으면 몸에 안 좋아.	current	local-ending
 L2009	あいつにとっちゃ簡単な仕事だよ。	저녀석에 있으면 간단한 일이야.	current	local-ending

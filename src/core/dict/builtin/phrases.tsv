@@ -1246,6 +1246,14 @@
 今のは	방금 그건	phrase
 今のが	방금 그게	phrase
 今のを	방금 그걸	phrase
+// 이번 and 지난번 take 에 before 는 and 도 (이번에는, not 이번은).
+今度は	이번에는	phrase
+今回は	이번에는	phrase
+今度も	이번에도	phrase
+今回も	이번에도	phrase
+前回は	지난번에는	phrase
+前回も	지난번에도	phrase
+この前は	지난번에는	phrase
 何でしたっけ	뭐였죠	phrase
 なんでしたっけ	뭐였죠	phrase
 どうだったっけ	어땠더라	phrase
