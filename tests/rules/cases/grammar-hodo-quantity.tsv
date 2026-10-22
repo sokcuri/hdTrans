@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:jisjk:265559	十日ほど掛かった。	열흘 정도 걸렸다.	fix	local
+dict:jisjk:265559	三人ほど来た。	세 명 정도 왔다.	fix	local
+dict:jisjk:265559	数日ほど待った。	며칠 정도 기다렸다.	fix	local
+dict:jisjk:265559	一時間ほど待った。	1시간 정도 기다렸다.	keep	local
+dict:jisjk:265559	数学ほど難しいものはない。	!rule:dict:jisjk:265559	keep	local
