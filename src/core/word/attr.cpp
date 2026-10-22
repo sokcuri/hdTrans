@@ -245,8 +245,16 @@ bool Item::IsRuleRightBoundary() const {
     }
     if (n == nullptr) return true;
     // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
-    // すごいっ……奥まで).
-    if (tsu != nullptr && (n->group->surface == "、" || n->tokenIndex > tsu->tokenIndex + 1)) return true;
+    // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
+    if (tsu != nullptr && n->group->surface == "、") return true;
+    if (tsu != nullptr && w != nullptr && n->tokenIndex > tsu->tokenIndex + 1) {
+        bool ellipsis = true;
+        for (int k = tsu->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
+            const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
+            ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
+        }
+        if (ellipsis) return true;
+    }
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),
                                      std::string_view("="), std::string_view("-")}) {
