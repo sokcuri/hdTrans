@@ -36,3 +36,7 @@ compose:spoken-syllables	「与えられた仕事」	「주어진 일」	keep	co
 compose:verbal-noun	「毎日するよ」	「매일 할게」	fix	compose
 compose:verbal-noun	「即答した」	「즉답했다」	keep	compose
 sound:oi-call	「おい茂る草むら」	「무성한 풀숲」	keep	sound
+compose:spoken-syllables	「主語です」	「주어입니다」	keep	compose
+sound:oi-call	「おい出てこい」	「어이 나와라」	keep	sound
+normalize:shime	「〆の一杯」	「마무리의 한 잔」	fix	normalize
+restore:retort-idiom	「何言ってるんだろう」	「무슨 말을 하는 걸까」	keep	restore

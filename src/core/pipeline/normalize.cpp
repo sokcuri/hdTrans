@@ -462,8 +462,12 @@ std::string NormalizeForms(std::string_view text) {
                 c += 2;
                 i += mark.size;
             }
-        } else if (c == U'〆' && i < text.size() && In(At(text, i).cp, U"切めるり")) {
-            c = U'締';  // 〆切, 〆る, 〆め, 〆り: the kanji 締 written short
+        } else if (c == U'〆' && (i == text.size() || In(At(text, i).cp, U"のはをがにでも」』、。！？…"))) {
+            out += "締め";  // 〆の一杯, 〆はラーメン: the noun 締め (the finish)
+            continue;
+        } else if (c == U'〆' && i < text.size() &&
+                   (In(At(text, i).cp, U"切めるり") || (At(text, i).cp >= U'一' && At(text, i).cp <= U'鿿'))) {
+            c = U'締';  // 〆切, 〆る, 〆日: the kanji 締 written short
         } else if (c == U'〆' && i < text.size() && At(text, i).cp >= U'ぁ' && At(text, i).cp <= U'ゖ') {
             out += "しめ";  // 〆た: the kana しめ written short
             continue;

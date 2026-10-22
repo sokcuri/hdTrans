@@ -1,6 +1,7 @@
 // Casual speech: the plain sentence ends (다) that the rules chose for the predicates of
 // speech, mapped to the casual style (해체) so that the tense and mood the rules chose are
 // kept.
+#include <algorithm>
 #include <string>
 #include <string_view>
 
@@ -119,22 +120,49 @@ std::pair<std::string_view, std::size_t> SpokenWord(std::string_view s, bool pro
     return {};
 }
 
+// Whether s ends with the 아/어 form of a verb, maybe followed by one space (와, 보여 , 해 ):
+// the form an auxiliary 주다 or 두다 follows.
+bool AfterInfinitive(std::string_view s) {
+    if (s.ends_with(" ")) s.remove_suffix(1);
+    const std::string_view head = WithoutLast(s);
+    if (head.size() == s.size()) return false;
+    const auto syllable = text::Split(text::DecodeRune(s.substr(head.size())).cp);
+    if (!syllable || syllable->final != 0) return false;
+    constexpr int kInfinitiveVowels[] = {0, 1, 4, 6, 9, 10, 14};  // ㅏ ㅐ ㅓ ㅕ ㅘ ㅙ ㅝ
+    return std::find(std::begin(kInfinitiveVowels), std::end(kInfinitiveVowels), syllable->vowel) !=
+           std::end(kInfinitiveVowels);
+}
+
 // The contracted spoken form of 주, 두 and 되 before 어 and 었 at the start of s (와 주어 와
-// 줘, 됐어) and the bytes it replaces; {} for none. The nouns 주어 (subject) and 두어 (a
-// couple) keep their form before a particle or a counter, and so does 주어지다 (be given,
-// 주어졌다).
-std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s) {
+// 줘, 그만두어 그만둬, 됐어) and the bytes it replaces; {} for none; before is the text so far.
+// A word 주어 or 두어 on its own is the noun 주어 (subject) or 두어 (a couple) before a
+// particle or the copula; otherwise it is the verb before 서, 도, 야, 라 or 요, or after the
+// 아/어 form of a verb, a particle or an adverb (보여 주어, 돈을 주어, 곁에 두어, 가만히 두어).
+// 주어지다 (be given) keeps its 주어.
+std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s, std::string_view before) {
     static constexpr std::pair<std::string_view, std::string_view> kForms[] = {
         {"주어", "줘"}, {"주었", "줬"}, {"두어", "둬"}, {"두었", "뒀"}, {"되어", "돼"}, {"되었", "됐"},
     };
-    static constexpr std::string_view kNounAfter[] = {"지", "진", "졌", "져", "가", "는", "를", "의", "로", "와", "에", "이",
-                                                      " 번", " 개", " 명", " 시간", " 차례", " 마디", " 걸음", " 달"};
     for (const auto& [written, spoken] : kForms) {
         if (!s.starts_with(written)) continue;
         const std::string_view rest = s.substr(written.size());
-        if (written.ends_with("어") && !written.starts_with("되") &&
-            std::any_of(std::begin(kNounAfter), std::end(kNounAfter), [&](std::string_view n) { return rest.starts_with(n); })) {
-            return {};
+        if (written == "주어" || written == "두어") {
+            for (const std::string_view given : {"지", "진", "졌", "져"}) {
+                if (rest.starts_with(given)) return {};
+            }
+            for (const std::string_view particle : {"가", "는", "를", "의", "이", "입", "인", "일", "임", "만", "와"}) {
+                if (rest.starts_with(particle)) return {};
+            }
+            const std::string_view head = WithoutLast(before);
+            const bool attached = !before.empty() && text::Split(text::DecodeRune(before.substr(head.size())).cp);
+            bool verb = attached || AfterInfinitive(before);
+            for (const std::string_view word : {"을 ", "를 ", "에 ", "에게 ", "한테 ", "히 ", "고 ", "게 ", "로 "}) {
+                verb = verb || before.ends_with(word);
+            }
+            for (const std::string_view ending : {"서", "도", "야", "라", "요"}) {
+                verb = verb || rest.starts_with(ending);
+            }
+            if (!verb) return {};
         }
         return {spoken, written.size()};
     }
@@ -155,7 +183,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
         } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle)) == 0) {
-            if (const auto [spoken, length] = SpokenSyllables(line.substr(at)); length > 0) {
+            if (const auto [spoken, length] = SpokenSyllables(line.substr(at), out); length > 0) {
                 out += spoken;
                 at += length;
                 continue;
