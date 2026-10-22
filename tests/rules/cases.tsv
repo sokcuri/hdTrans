@@ -252,7 +252,7 @@ L1906	このカレーは辛くない。	이 카레는 맵지 않다.	current	loc
 L1906	今日はそんなに寒くない。	오늘은 그렇게 춥지 않다.	current	local-ending
 L1914	彼の話は少し長かった。	그의 이야기는 조금 길었다.	current	local-ending
 L1914	「今日は本当に寒かった」	「오늘은 정말 추웠다」	current	local-ending
-L1922	先生達は今会議中です。	선생님들은 지금 회의중입니다.	current	local
+L1922	先生達は今会議中です。	선생님들은 지금 회의 중입니다.	current	local
 L1922	学生達は静かに試験を受けた。	학생들은 조용하게 시험을 보았다.	current	local
 L1925	私は甘い物が好きです。	저는 단 것을 좋아합니다.	current	local
 L1925	買う物をメモに書いた。	사는 것을 메모에 썼다.	current	local
@@ -504,6 +504,9 @@ L3255	お前なんか知るかっ！	너 같은 것 안다!	current	local
 L3258	私が待ってた電車はまだ来ない。	내가 기다리던 전철은 아직 오지 않는다.	current	local-ending
 L3258	さっき読んでた本を貸してください。	조금 전 읽던 책을 빌려 주세요.	current	local-ending
 L3261	この仕事は今日中に終わりそう。	이 일은 오늘중에 끝날 것 같다.	current	local
+L3258	私が待ってた電車はまだ来ない。	내가 기다리고 있었던 전철은 아직 오지 않는다.	current	local-ending
+L3258	さっき読んでた本を貸してください。	조금 전 읽고 있었던 책을 빌려 주세요.	current	local-ending
+L3261	この仕事は今日中に終わりそう。	이 일은 오늘 중에 끝날 것 같다.	current	local
 L3261	あのケーキ、とても美味しそう。	그 케이크, 무척 맛있을 것 같다.	current	local
 L3263	嫌がらせをされた。	괴롭힘을 당했다.	current	local
 L3263	告白をされた。	고백을 받았다.	current	local
