@@ -1048,6 +1048,7 @@ namespace {
 constexpr std::string_view kWonderWords[] = {
     "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
     "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
+    "どのような", "どういう", "どういった", "いかなる",
     "一体", "いったい", "いくつ", "いくら",
 };
 
@@ -1087,14 +1088,14 @@ bool WonderWord(const Item* p) {
 }
 
 // Whether s ends in a concessive volitional: -(よ)うと or -(よ)うが (言われようと, 何をしようが,
-// 誰だろうと).
+// 誰だろうと). No verb has a volitional in ほう, which is the noun (どっちのほうが).
 bool ConcessiveVolitional(std::string_view s) {
     for (const std::string_view p : {std::string_view("と"), std::string_view("が")}) {
         if (!s.ends_with(p)) continue;
         std::string_view v = s.substr(0, s.size() - p.size());
         if (!v.ends_with("う")) continue;
         v.remove_suffix(std::string_view("う").size());
-        if (!v.empty() && RuneIn(DecodeLastRune(v).cp, "おこごそぞとどのぼぽほもよろ")) return true;
+        if (!v.empty() && RuneIn(DecodeLastRune(v).cp, "おこごそぞとどのぼもよろ")) return true;
     }
     return false;
 }
