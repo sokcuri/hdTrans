@@ -1,0 +1,5 @@
+#! layer=words
+# 수동 구문: 사람의 시선을 받는 見られる
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+目で見られ	눈초리를 &FD@	M417		Pn	GN							passive-gaze:1
+目で見られ続け	눈초리를 계속 &FD@	M417		Pn	GN							passive-gaze:3
