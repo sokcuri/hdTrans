@@ -40,8 +40,12 @@ std::string Registry::Dict() {
         if (kr.empty()) continue;
         const DictFlags f = Flags(t);
         std::string pos = "n";
+        // A place of the dictionaries that only a gloss names (五村（ごのむら）) stays a place.
+        const bool place = f.city && !f.person && !n.label && hon_.count(t) == 0 && kanaHon_.count(t) == 0;
         if (!n.hasParts && (n.surname || (f.surname && !f.given))) {
             pos = "surname";
+        } else if (place) {
+            pos = "place";
         } else if (n.person) {
             pos = "name";
         }

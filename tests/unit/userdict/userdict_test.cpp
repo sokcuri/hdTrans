@@ -94,6 +94,7 @@ HD_TEST(userdict_parse) {
         {"ガチ\t진짜\tphrase", "ガチ 진짜 A9D0 @1.0"},
         {"春香\t하루카\tname", "春香 하루카 N130 QPNVHn Wb name @1.0"},
         {"藤井\t후지이\tsurname", "藤井 후지이 N130 QPNVHn Wa name @1.0"},
+        {"五村\t고노무라\tplace", "五村 고노무라 N130 QCTVPl @1.0"},
         {"はわわ\t아앗\tintj", "はわわ 아앗 E000 @1.0"},
         {"ちゃん\t짱\thon", "ちゃん 짱 N110 Tu hon @1.0"},
         {"先輩\t선배\thon\tspace", "先輩 선배 N110 Ha hon @1.0"},
