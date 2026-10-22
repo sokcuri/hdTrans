@@ -109,6 +109,7 @@ private:
     bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
+    bool PredicateForm(std::string_view run);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
 

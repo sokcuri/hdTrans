@@ -201,7 +201,7 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t, 8);
     // A line that is a name alone and is followed by a quote names the speaker of the
-    // quote, as a game's name box does.
+    // quote (a speaker line before a quote).
     const std::string_view body = TrimSpace(line);
     if (!nameLine_.empty() && (body.starts_with("「") || body.starts_with("『") || body.starts_with("（"))) {
         count(prefixes_, nameLine_, 1);
@@ -341,12 +341,12 @@ const std::map<std::string, Name>& Registry::Accepted() {
             it->second.score += static_cast<double>(c);
         }
     }
-    // A person of the name layer that no other dictionary reads, in kanji or hiragana,
-    // needs one piece of evidence less.
+    // A person of the name layer that no other dictionary reads needs one piece of evidence
+    // less, unless it is written in kana alone: a hiragana run needs two honorifics.
     for (auto& [t, n] : all) {
-        if (!n.person || n.label || n.score <= 0) continue;
+        if (!n.person || n.label || n.score <= 0 || AllRunes(t, IsKatakana) || AllRunes(t, IsHiragana)) continue;
         const DictFlags f = Flags(t);
-        if ((f.layerSurname || f.layerGiven) && !f.common && !f.person && !f.role && !AllRunes(t, IsKatakana)) n.score += 1;
+        if ((f.layerSurname || f.layerGiven) && !f.common && !f.person && !f.role) n.score += 1;
     }
     for (const auto& [t, c] : runs_) {
         const auto rd = tables_->readings.find(t);

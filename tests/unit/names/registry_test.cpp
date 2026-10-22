@@ -34,7 +34,9 @@ const dict::Snapshot* Dictionary() {
          "あなた\t당신\tN120\t\t\tGN\t18\n"
          "私\t나\tN120\t\t\tGN\t19\n"
          "わたくし\t저\tN120\t\t\tGN\t20\n"
-         "三日\t3일\tN110\t\t\tGN\t21\n"},
+         "三日\t3일\tN110\t\t\tGN\t21\n"
+         "あお\t$C2@\tH7U0\t\t\tGN\t25\n"
+         "ひかり\t빛\tN110\t\t\tGN\t26\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -44,7 +46,9 @@ const dict::Snapshot* Dictionary() {
          "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"
          "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"
          "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t23\n"
-         "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"},
+         "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"
+         "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
+         "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"},
     });
     return loaded.snapshot.get();
 }
@@ -138,12 +142,17 @@ HD_TEST(names_labels) {
         HD_CHECK(box.Names() == (std::vector<std::string>{"のぞみ"}));
         HD_CHECK_EQ(box.Render("のぞみ"), std::string("노조미"));
     }
-    // A hiragana person of the name layer that no other dictionary reads is a name before an
-    // honorific, also after a particle; a particle after a kanji starts no name (体がびくん).
+    // A hiragana person of the name layer that no other dictionary reads is a name before two
+    // honorifics, also after a particle; a particle after a kanji starts no name (体がびくん).
+    // One honorific is no evidence, nor are a common word (ひかり) and the form of an
+    // adjective (あおい) before any number of them.
     {
-        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n").Names() == (std::vector<std::string>{"つぐみ"}));
-        HD_CHECK(Scan(snap, "妹のつぐみちゃん。\n").Names() == (std::vector<std::string>{"つぐみ"}));
+        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n").Names().empty());
+        HD_CHECK(Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n").Names() ==
+                 (std::vector<std::string>{"つぐみ"}));
         HD_CHECK(Scan(snap, Repeat("体がびくんと跳ねる。", 3)).Names().empty());
+        HD_CHECK(Scan(snap, Repeat("あおいさんが来た。", 3) + "あおい空が広がる。\n").Names().empty());
+        HD_CHECK(Scan(snap, Repeat("ひかりちゃん、おはよう。", 3)).Names().empty());
     }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
