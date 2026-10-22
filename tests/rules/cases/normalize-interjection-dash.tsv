@@ -2,6 +2,6 @@ rule	input	expected	kind	layer
 normalize:interjection	「え――本当？」	「어――정말?」	fix	normalize
 normalize:interjection	あれ――おかしいな。	어라――이상한데.	fix	normalize
 normalize:interjection	「え、本当？」	「어, 정말?」	keep	normalize
-normalize:interjection	「ええ――そうよ」	「예――그래요」	keep	normalize
+normalize:interjection	「ええ――そうよ」	「네――그래요」	keep	normalize
 normalize:interjection	あれ――は何だ？	저것――은 뭐야?	keep	normalize
 normalize:interjection	あれ……が欲しい	저것……을 갖고 싶다	keep	normalize

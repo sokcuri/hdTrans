@@ -40,3 +40,6 @@ compose:spoken-syllables	「主語です」	「주어입니다」	keep	compose
 sound:oi-call	「おい出てこい」	「어이 나와라」	keep	sound
 normalize:shime	「〆の一杯」	「마무리의 한 잔」	fix	normalize
 restore:retort-idiom	「何言ってるんだろう」	「무슨 말을 하는 걸까」	keep	restore
+dict:wakarimashita:answer	「はい、わかりました」	「네, 알겠습니다」	fix	local-ending
+dict:wakarimashita:answer	売り方がわかりました。	판매 방법이 알았습니다.	keep	local-ending
+dict:ee-yes	「ええ」	「네」	fix	lookup
