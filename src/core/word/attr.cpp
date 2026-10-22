@@ -238,8 +238,15 @@ bool Item::IsRuleRightBoundary() const {
         if (n != nullptr) n = n->next;
     }
     // A small っ closing the word (行くっ」) is part of its sound, not a word after it.
-    while (n != nullptr && n->ClosingTsu()) n = n->next;
+    const Item* tsu = nullptr;
+    while (n != nullptr && n->ClosingTsu()) {
+        tsu = n;
+        n = n->next;
+    }
     if (n == nullptr) return true;
+    // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
+    // すごいっ……奥まで).
+    if (tsu != nullptr && (n->group->surface == "、" || n->tokenIndex > tsu->tokenIndex + 1)) return true;
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),
                                      std::string_view("="), std::string_view("-")}) {
