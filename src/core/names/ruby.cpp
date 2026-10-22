@@ -237,17 +237,27 @@ std::size_t ReadingMorae(std::string_view s) {
 }
 
 // ([一-龥々〆ヶ]+)[（(]([ぁ-ゖー・ 　]{1,16}|[ァ-ヺー・ 　]{1,16})[）)], at most 4 morae for each
-// kanji and one more.
+// kanji and one more; or ([一-龥々〆ヶ]+)「([ぁ-ゖー]{1,16})」 before the hiragana the word
+// goes on with (全「すべ」て), or before a particle after one kanji (心「こころ」に; not a
+// name quoted after a noun, 戦艦「やまと」の, nor a quote before と).
 bool ReadingAt(std::string_view s, std::size_t pos, RubyMatch& m) {
     std::size_t p = pos;
     const std::size_t kanji = Take(s, p, s.size(), IsRubyKanji);
     const std::size_t baseEnd = p;
-    if (kanji < 1 || !OpenParen(s, p)) return false;
+    if (kanji < 1) return false;
+    const bool bracket = Lit(s, p, "「");
+    if (!bracket && !OpenParen(s, p)) return false;
     const std::size_t readStart = p;
-    const std::size_t k = Take(s, p, 17, NotParen);
+    const std::size_t k = Take(s, p, 17, [](char32_t c) { return NotParen(c) && c != U'「' && c != U'」'; });
     const std::size_t readEnd = p;
-    if (k < 1 || k > 16 || !CloseParen(s, p)) return false;
+    if (k < 1 || k > 16 || !(bracket ? Lit(s, p, "」") : CloseParen(s, p))) return false;
     const std::string_view reading = s.substr(readStart, readEnd - readStart);
+    if (bracket) {
+        if (!AllRunes(reading, [](char32_t c) { return IsHiragana(c) || c == U'ー'; })) return false;
+        const char32_t next = p < s.size() ? RuneAt(s, p).cp : 0;
+        if (!IsHiragana(next) || next == U'と') return false;
+        if (kanji > 1 && InRunes(next, "のにをはがでへもかや")) return false;
+    }
     const std::size_t morae = ReadingMorae(reading);
     if (morae < 1 || morae > 4 * kanji + 1) return false;
     m.begin = pos;

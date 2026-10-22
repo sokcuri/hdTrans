@@ -119,6 +119,12 @@ HD_TEST(names_drop_readings) {
         {"和気藹々(わきあいあい)とした", "和気藹々とした"},
         {"生（ナマ）食", "生食"},
         {"山田太郎（やまだ たろう）。", "山田太郎。"},
+        {"全「すべ」てを壊「こわ」せる", "全てを壊せる"},
+        {"心「こころ」に", "心に"},
+        // A name quoted after a noun, a quote before と, a quote that ends the line.
+        {"戦艦「やまと」の", "戦艦「やまと」の"},
+        {"私「こんびに」とやら", "私「こんびに」とやら"},
+        {"魅音「おはよう」", "魅音「おはよう」"},
         // A katakana word over the kanji, a pronoun over a person noun, an aside.
         {"炎（ブレス）", "炎（ブレス）"},
         {"提督(あなた)、", "提督(あなた)、"},

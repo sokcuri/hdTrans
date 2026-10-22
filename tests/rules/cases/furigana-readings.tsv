@@ -11,3 +11,5 @@ names:reading	夕食（カレー）を作る。	저녁식사(카레)를 만든�
 names:reading	一部隊（十騎）いれば十分だ。	일부대(10기) 있으면 충분하다.	keep	normalize
 names:reading	｜魔導騎士（マジックナイト）が立つ。	마짓쿠나이토가 선다.	fix	normalize
 names:reading	列車運行情報 | 京都・洛北(比叡山、鞍馬)へ	열차 운행 정보 | 교토·도성의 북쪽(히에이잔, 안마)에	keep	normalize
+names:reading	全「すべ」てを壊「こわ」せる	모든 것을 부술 수 있다	fix	normalize
+names:reading	補給機「こうのとり」のドッキング	보급기 「황새」의 도킹	keep	normalize

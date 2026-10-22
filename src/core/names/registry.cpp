@@ -186,7 +186,10 @@ bool Registry::Gikun(std::string_view base, std::string_view reading) {
 }
 
 std::string Registry::DropReadings(std::string_view line) {
-    if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos) return std::string(line);
+    if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos &&
+        line.find("「") == std::string_view::npos) {
+        return std::string(line);
+    }
     std::string out;
     std::size_t at = 0;
     RubyMatch m;
