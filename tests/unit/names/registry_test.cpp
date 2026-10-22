@@ -41,7 +41,8 @@ const dict::Snapshot* Dictionary() {
          "椎名\t시이나\tN130\tQPN\tWa\tGN\t12\n"
          "周\t아마네\tN130\tQPN\tWb\tGN\t13\n"
          "樹\t이츠키\tN130\tQPN\tWb\tGN\t14\n"
-         "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"},
+         "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"
+         "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"},
     });
     return loaded.snapshot.get();
 }
@@ -115,6 +116,10 @@ HD_TEST(names_labels) {
         {Repeat("女子生徒Ａ「おはよう」", 3), false},
         {Repeat("魅音？「おはよう」", 3), false},
         {Repeat("// 魅音「おはよう」", 3), false},
+        // A name box: the name alone on a line, its quote on the next.
+        {Repeat("魅音\n「おはよう」", 3), true},
+        {Repeat("魅音\n「おはよう」", 2), false},
+        {Repeat("魅音\nおはよう。", 3), false},
     };
     for (const auto& [doc, want] : cases) {
         names::Registry r = Scan(snap, doc);
@@ -125,6 +130,12 @@ HD_TEST(names_labels) {
     // A joint label names both; Xの母 counts once for X.
     names::Registry r = Scan(snap, Repeat("梨花＆沙都子「おはよう」", 3) + "OutputLine(\"圭一の母\", NULL, \"어머니\", NULL, 0);\n圭一さん");
     HD_CHECK(r.Names() == (std::vector<std::string>{"圭一", "梨花", "沙都子"}));
+    // A name box of hiragana names the speaker and renders the name.
+    {
+        names::Registry box = Scan(snap, Repeat("のぞみ\n「……え？」", 3));
+        HD_CHECK(box.Names() == (std::vector<std::string>{"のぞみ"}));
+        HD_CHECK_EQ(box.Render("のぞみ"), std::string("노조미"));
+    }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
     // A gloss that is a word of its own reads the word, no name (提督(あなた), 私(わたくし));

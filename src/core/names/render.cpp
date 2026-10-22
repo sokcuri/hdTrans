@@ -104,6 +104,9 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         std::string tr;
         if (word::TransliterateName(t, tr) && IsHangulText(tr)) return tr;
     }
+    if (AllRunes(t, IsHiragana)) {
+        if (std::string kr = text::FromKana(t, preset); IsHangulText(kr)) return kr;
+    }
     return "";
 }
 

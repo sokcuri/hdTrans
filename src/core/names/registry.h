@@ -143,6 +143,7 @@ private:
     std::shared_ptr<Tables> tables_;
     std::map<std::string, int> labels_;                 // script-format labels
     std::map<std::string, int> prefixes_;               // line-start labels of plain-text forms
+    std::string nameLine_;                              // the last line when it is a name alone
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby

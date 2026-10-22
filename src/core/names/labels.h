@@ -20,7 +20,7 @@ std::span<const std::string_view> PersonSuffixes();
 bool PlainLabel(std::string_view p);
 // Whether a label is a role (a group or a non-name) rather than a name.
 bool LabelRole(std::string_view p);
-// Whether t is a role word, or contains の.
+// Whether t is a role word, or contains の and is not hiragana alone.
 bool RoleLike(std::string_view t);
 // X of a label Xの父 (and its relatives), when p is one.
 bool ParentLabel(std::string_view p, std::string& x);

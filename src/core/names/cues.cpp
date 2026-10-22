@@ -401,7 +401,9 @@ bool LabelRole(std::string_view p) {
     return false;
 }
 
-bool RoleLike(std::string_view t) { return InList(t, kRoleWords) || Has(t, "の"); }
+bool RoleLike(std::string_view t) {
+    return InList(t, kRoleWords) || (Has(t, "の") && !AllRunes(t, IsHiragana));  // の of a hiragana name (のぞみ)
+}
 
 bool ParentLabel(std::string_view p, std::string& x) {
     for (const std::string_view s : kParentSuffixes) {

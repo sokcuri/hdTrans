@@ -199,6 +199,16 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             count(prefixes_, label, 1);
         }
     }
+    // A line that is a name alone and is followed by a quote names the speaker of the
+    // quote, as a game's name box does.
+    const std::string_view body = TrimSpace(line);
+    if (!nameLine_.empty() && (body.starts_with("「") || body.starts_with("『") || body.starts_with("（"))) {
+        count(prefixes_, nameLine_, 1);
+    }
+    nameLine_.clear();
+    if (const std::size_t n = RuneCount(body); n >= 1 && n <= 8 && PlainLabel(body) && !LabelRole(body)) {
+        nameLine_ = std::string(body);
+    }
     const std::vector<Run> runs = RunsOf(line);
     std::size_t chain = 0;  // first run of the current katakana chain
     for (std::size_t i = 0; i < runs.size(); i++) {
@@ -270,7 +280,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
     if (scoresValid_) return scores_;
     std::map<std::string, Name> all;
     std::set<std::string> labelled;
-    auto addLabel = [&](const std::string& raw) {
+    auto addLabel = [&](const std::string& raw, bool plain) {
         for (const std::string& p : LabelParts(raw)) {
             std::string x;
             if (ParentLabel(p, x)) {
@@ -279,12 +289,18 @@ const std::map<std::string, Name>& Registry::Accepted() {
                 continue;
             }
             if (p.empty() || RoleLike(p) || LabelRole(p) || !AllRunes(p, IsNameRune)) continue;
+            // A plain-text label that is a common word and no person of the name layer is
+            // a role (放送, 司会), not a name.
+            if (plain) {
+                const DictFlags f = Flags(p);
+                if (f.common && !f.person && !f.layerSurname && !f.layerGiven) continue;
+            }
             labelled.insert(p);
         }
     };
-    for (const auto& [raw, n] : labels_) addLabel(raw);
+    for (const auto& [raw, n] : labels_) addLabel(raw, false);
     for (const auto& [raw, n] : prefixes_) {
-        if (n >= 3) addLabel(raw);
+        if (n >= 3) addLabel(raw, true);
     }
     for (const std::string& t : labelled) {
         Name& n = all[t];
@@ -308,6 +324,23 @@ const std::map<std::string, Name>& Registry::Accepted() {
         Name& n = all[t];
         n.score += 2 * static_cast<double>(c);
         n.person = true;
+    }
+    // A plain-text label seen once or twice adds to the evidence of a surface an honorific
+    // or a gloss shows.
+    for (const auto& [raw, c] : prefixes_) {
+        if (c >= 3) continue;
+        for (const std::string& p : LabelParts(raw)) {
+            const auto it = all.find(p);
+            if (it == all.end() || it->second.score <= 0 || labelled.count(p) > 0 || RoleLike(p) || LabelRole(p)) continue;
+            it->second.score += static_cast<double>(c);
+        }
+    }
+    // A person of the name layer that no other dictionary reads, in kanji or hiragana,
+    // needs one piece of evidence less.
+    for (auto& [t, n] : all) {
+        if (!n.person || n.label || n.score <= 0) continue;
+        const DictFlags f = Flags(t);
+        if ((f.layerSurname || f.layerGiven) && !f.common && !f.person && !f.role && !AllRunes(t, IsKatakana)) n.score += 1;
     }
     for (const auto& [t, c] : runs_) {
         const auto rd = tables_->readings.find(t);
