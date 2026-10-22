@@ -169,6 +169,24 @@ bool Item::StartsSentence() const {
     return b == "「" || b == "『" || b == "（" || b == "(" || b == "“" || b == "\"";
 }
 
+bool Item::InQuote() const {
+    int depth = w != nullptr ? w->settings.quoteDepth : 0;
+    auto scan = [&depth](std::string_view s) {
+        for (std::size_t at = 0; at < s.size();) {
+            const text::Rune r = text::DecodeRune(s.substr(at));
+            if (r.size == 0) break;
+            if (r.cp == U'「' || r.cp == U'『') depth++;
+            if ((r.cp == U'」' || r.cp == U'』') && depth > 0) depth--;
+            at += r.size;
+        }
+    };
+    if (w != nullptr) {
+        for (int i = 0; i < tokenIndex && i < static_cast<int>(w->tokens.size()); i++) scan(w->tokens.Raw(static_cast<std::size_t>(i)));
+    }
+    scan(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
+    return depth > 0;
+}
+
 bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
@@ -187,6 +205,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
+        // Qt: the word stands inside a quote (G!= "Qt" for narration).
+        if (c == "Qt") return InQuote();
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;

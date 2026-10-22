@@ -197,6 +197,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Analysis analysis;
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
     settings.before = before;
+    settings.quoteDepth = speech.quotes.depth;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
 

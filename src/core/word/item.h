@@ -212,6 +212,8 @@ public:
     bool CheckLLAttr(int op, rules::Item* wi, int di) override;
     // Whether the word starts its sentence: no word before it, or only an opening bracket.
     bool StartsSentence() const;
+    // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
+    bool InQuote() const;
     bool JoinsNext() const;
     // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
     // word or only punctuation follows.
