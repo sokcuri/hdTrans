@@ -65,3 +65,5 @@ sound:short-answer	「いいの？」	「괜찮아?」	fix	sound
 sound:short-answer	「んなわけあるか」	「그럴 리가 있냐」	fix	sound
 dict:chatte	「忘れちゃって、ごめん」	「잊어서, 미안」	fix	lookup
 dict:chatte	「言っちゃってもいい？」	「말해 버려도 좋아?」	fix	local-ending
+restore:intent	「買おうと思って来た」	「사려고 왔다」	fix	restore
+restore:intent	明日行こうと思います。	내일 가려고 합니다.	fix	restore
