@@ -4,7 +4,7 @@ rewrite:simple-aspect	仲間は大切に思ってる。	동료는 소중히 생�
 rewrite:simple-aspect	父親はいつもそう言っていた。	아버지는 언제나 그렇게 말했다.	fix	rewrites
 rewrite:simple-aspect	「一体何を話していたんですか？」	「도대체 뭘 이야기했습니까?」	fix	rewrites
 rewrite:simple-aspect	「ほんと、困ってるんです」	「정말, 곤란합니다」	fix	rewrites
-rewrite:simple-aspect	困ってる人がいたら	곤란한 사람이 있으면	fix	rewrites
+rewrite:simple-aspect	「う～ん、でも、もし、本当に困ってる人だったら……」	「으음~, 하지만, 만약, 정말 곤란한 사람이라면……」	fix	rewrites
 rewrite:simple-aspect	親父さんが玉藻をどれだけ大切に思っているかがわかった。	아버지씨가 말을 얼마나 소중히 생각할지를 알 수 있었다.	fix	rewrites
 rewrite:simple-aspect	「ほら、御園もこう言ってる」	「자, 미소노도 이렇게 말하고 있어」	keep	rewrites
 rewrite:simple-aspect	俺たちの携帯アドレスを知っていた	우리의 휴대폰 주소를 알고 있었다	keep	rewrites
