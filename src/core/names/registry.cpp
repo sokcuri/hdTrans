@@ -715,9 +715,9 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
         }
         const bool honorific = !KanaHonorificAt(line.substr(b)).empty();
         // A hiragana name starts the line, follows other than hiragana or stands before an
-        // honorific (妹のさよりちゃん, ねえあおいさん).
+        // honorific (妹のさよりちゃん, ねえあおいさん), but not a creature, food or adverb there.
         if (AllRunes(found, IsHiragana)) {
-            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || honorific;
+            ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing);
         }
         const bool bare = acc.at(found).honorificOnly && !honorific;
         if (ok) out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});

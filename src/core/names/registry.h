@@ -37,6 +37,9 @@ struct DictFlags {
     bool person = false, surname = false, given = false, city = false;
     bool common = false;  // a record that is neither a name nor a place
     bool role = false;    // a person, profession or animal noun with no name record
+    // A base record of a creature, fruit or food noun or of an adverb: what speech addresses
+    // with an honorific (ひよこさん, いちごちゃん) or what stands before ちゃんと (いつか).
+    bool thing = false;
     // The name-layer person records: a surname or given name, and the first Hangul
     // target among them.
     bool layerSurname = false, layerGiven = false;
@@ -114,7 +117,7 @@ private:
     bool Gikun(std::string_view base, std::string_view reading);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
-    static std::string_view KanaHonorificAt(std::string_view s);
+    std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);

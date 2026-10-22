@@ -36,7 +36,9 @@ const dict::Snapshot* Dictionary() {
          "わたくし\t저\tN120\t\t\tGN\t20\n"
          "三日\t3일\tN110\t\t\tGN\t21\n"
          "あお\t$C2@\tH7U0\t\t\tGN\t25\n"
-         "ひかり\t빛\tN110\t\t\tGN\t26\n"},
+         "ひかり\t빛\tN110\t\t\tGN\t26\n"
+         "ひよこ\t병아리\tN110\tVAm\t\tGN\t29\n"
+         "話\t이야기&AV@\tM443\t\t\tGN\t30\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -48,7 +50,8 @@ const dict::Snapshot* Dictionary() {
          "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t23\n"
          "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"
          "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
-         "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"},
+         "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"
+         "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"},
     });
     return loaded.snapshot.get();
 }
@@ -165,6 +168,11 @@ HD_TEST(names_labels) {
         HD_CHECK_EQ(Occurrences(aoi, "あおいさん、待って！"), std::string("あおい"));
         HD_CHECK_EQ(Occurrences(aoi, "あおい空が広がる。"), std::string("あおい!"));
         HD_CHECK(Scan(snap, Repeat("ひかりちゃん、おはよう。", 3)).HonorificOnlyNames() == (std::vector<std::string>{"ひかり"}));
+        // A creature noun is what speech addresses with an honorific (ひよこさん), and the ちゃん
+        // of the adverb ちゃんと before a verb is no honorific.
+        HD_CHECK(Scan(snap, Repeat("ねえひよこさん", 3)).Names().empty());
+        HD_CHECK(Scan(snap, Repeat("つぐみちゃんと話そう", 3)).Names().empty());
+        HD_CHECK(Scan(snap, Repeat("つぐみちゃんと遊んだ", 3)).Names() == tsugumi);
     }
     // A reading in brackets that the word goes on after is ruby, no label (全「すべ」て).
     HD_CHECK(Scan(snap, Repeat("全「すべ」てを壊せる", 3)).Names().empty());
