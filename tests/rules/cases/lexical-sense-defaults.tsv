@@ -8,3 +8,4 @@ dict:jisjk:3860	「平気なの？」	「괜찮아?」	fix	lookup
 dict:lex:heiki:alone	平気？	괜찮아?	fix	lookup
 dict:jisjk:3860	平気で何時間もこもってる	rule:dict:jisjk:3860=아무렇지도 %B5@	keep	local
 phrase:平気な顔	平気な顔して甘い言葉を囁く	아무렇지 않은 얼굴 해 달콤한 말을 속삭인다	fix	builtin-phrase
+phrase:余計なお世話	余計なお世話です	쓸데없는 참견입니다	fix	builtin-phrase
