@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:342895	切ってやろうかと思った。	잘라 줄까 하고 생각했다.	fix	lookup
+dict:jisjk:342895	農具かと問われたら	농구일까 하고 질문받으면	fix	lookup
