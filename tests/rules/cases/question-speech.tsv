@@ -17,7 +17,7 @@ compose:question-plain	「だって、俺はお前と結婚するつもりなん
 compose:question-plain	「行きますか？」	「갑니까?」	keep	compose
 compose:question-plain	「大丈夫でしょうか？」	「괜찮을까요?」	keep	compose
 compose:question-plain	「お主、まだ戦えるか？」	「그대, 아직 싸울 수 있을까?」	keep	compose
-compose:question-conjecture	「何か言いたいことがあったんだろう？」	「뭔가 말하고 싶은 것이 있었지?」	fix	compose
+compose:question-conjecture	「何か言いたいことがあったんだろう？」	「뭔가 말하고 싶은 게 있었지?」	fix	compose
 compose:question-conjecture	「お前らも、人のことは言えないだろう？」	「너희들도, 사람은 말할 수 없지?」	fix	compose
 compose:question-conjecture	「だろう？」	「그렇지?」	fix	compose
 compose:question-conjecture	「冗談だろう？」	「농담이지?」	fix	compose
