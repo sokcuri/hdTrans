@@ -6,6 +6,7 @@
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -671,6 +672,54 @@ bool HasPlainSense(std::string_view s, const LineContext& ctx, const dict::Snaps
     return false;
 }
 
+// What may follow a noun: particles, the copula and honorifics (イカなんて, イカを).
+constexpr std::string_view kNounNext[] = {"は", "が", "を", "に", "の", "で", "と", "へ", "も", "や", "か", "だ", "です",
+                                          "じゃ", "なんて", "など", "なら", "なの", "なんか", "って", "より", "から",
+                                          "まで", "さん", "ちゃん", "くん", "たち", "だけ", "しか", "ね", "よ"};
+
+// How a dictionary word other than a name reads the katakana run word with rest, the text
+// after it: a verb whose conjugation rest goes on with (イキった), or another word that rest
+// leaves or continues with a particle (イカなんて). 0 for none, 1 for the text as written, 2
+// when the first kana of rest is in katakana in the word (イかれてる: イカれ).
+int KnownWord(std::string_view word, std::string_view rest, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::string spellings[2] = {std::string(word) + std::string(rest), {}};
+    const text::Rune first = text::DecodeRune(rest);
+    if (IsHiraganaRune(first.cp)) {
+        spellings[1] = std::string(word);
+        text::AppendRune(spellings[1], first.cp + 0x60);
+        spellings[1] += rest.substr(first.size);
+    }
+    for (int k = 0; k < 2; k++) {
+        const std::string& text = spellings[k];
+        if (text.empty()) continue;
+        const size_t least = k == 0 ? word.size() : word.size() + 3;  // a katakana is three bytes
+        for (const dict::Candidate& c : snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes == nullptr || c.source.size() < least || (c.user != nullptr && c.user->nameLayer) ||
+                c.codes->sem.HasPrefix("QPN")) {
+                continue;
+            }
+            const std::string_view tail = std::string_view(text).substr(c.source.size());
+            const std::string_view part = c.codes->partText;
+            if (part.size() == 4 && part[0] == 'M') {
+                const int kind = part[3] - '0';
+                for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                    const std::string_view conj = word::Conjugation(kind, branch);
+                    if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && tail.starts_with(conj)) {
+                        return k + 1;
+                    }
+                }
+                continue;
+            }
+            const text::Rune next = text::DecodeRune(tail);
+            if (tail.empty() || !IsHiraganaRune(next.cp)) return k + 1;
+            for (const std::string_view n : kNounNext) {
+                if (tail.starts_with(n)) return k + 1;
+            }
+        }
+    }
+    return 0;
+}
+
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
 // around it.
 std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, const LineContext& ctx,
@@ -694,7 +743,16 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
                 if (!n.empty() && text.substr(i).starts_with(n)) stem = &x;
             }
         }
-        if (stem != nullptr && prev != U'・' && prev != U'＝' && !(start == 0 && spanBefore) &&
+        const int known = stem != nullptr ? KnownWord(word, text.substr(i), ctx, snap) : 0;
+        if (known == 2) {
+            const text::Rune first = text::DecodeRune(text.substr(i));
+            b.append(text.substr(at, i - at));
+            text::AppendRune(b, first.cp + 0x60);
+            i += first.size;
+            at = i;
+            continue;
+        }
+        if (stem != nullptr && known == 0 && prev != U'・' && prev != U'＝' && !(start == 0 && spanBefore) &&
             !HasPlainSense(word, ctx, snap) && (ctx.named == nullptr || ctx.named->find(word) == ctx.named->end())) {
             b.append(text.substr(at, start - at));
             b += stem->as;

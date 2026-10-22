@@ -11,3 +11,7 @@ normalize:spelled-small-vowel	おめぇ、何してんだ	너, 뭐하는 거야	
 normalize:spelled-small-vowel	てめー！	너!	fix	normalize
 normalize:spelled-small-vowel	てめー、ふざけるな	너, 장난치지 마	fix	normalize
 normalize:spelled-small-vowel	おはよー	안녕~	keep	normalize
+katakana:iku-stem	イカなんて嫌いだ。	오징어 같은 건 싫다.	fix	normalize
+katakana:iku-stem	あいつイかれてる	저 녀석 고장 나고 있다	fix	normalize
+katakana:iku-stem	イカせて	가게 해 줘	keep	normalize
+katakana:iku-stem	「イキそうなんだっ」	「갈 것 같애」	keep	normalize

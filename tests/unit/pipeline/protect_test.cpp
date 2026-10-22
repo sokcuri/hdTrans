@@ -226,6 +226,23 @@ HD_TEST(pipeline_kata_words) {
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
     }
+    // The katakana stem of 行く, but not where a dictionary word reads the run: a noun before a
+    // particle, a verb whose conjugation follows, also with its first kana in katakana.
+    const auto iku = Snapshot("イカ\t오징어\tN110\t\t\tGN\t1\nイカれ\t미&AO@\tM427\t\t\tGN\t2\n");
+    HD_REQUIRE(iku != nullptr);
+    const struct {
+        const char* in;
+        const char* want;
+    } stems[] = {
+        {"イカなんて嫌いだ。", "イカなんて嫌いだ。"},
+        {"イかれてる", "イカれてる"},
+        {"イカせて", "行かせて"},
+        {"イった", "行った"},
+        {"イキそう", "行きそう"},
+    };
+    for (const auto& c : stems) {
+        HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *iku)), std::string(c.want));
+    }
     // After a span, and an adjective before a span.
     const output::Pieces spans = {{"<b>", output::SpanOpen}, {"アレは。ダメ", output::SpanText}, {"</b>", output::SpanClose}};
     HD_CHECK_EQ(Show(internal::KataWordsToHiragana(spans, ctx, *snap)), std::string("〖2<b>〗アレは。ダメ〖3</b>〗"));
