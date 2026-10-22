@@ -1,8 +1,11 @@
 #pragma once
 // What the stages of the text path need from the document and the session a line
 // belongs to, besides the dictionaries.
+#include <functional>
+#include <map>
 #include <span>
 #include <string>
+#include <vector>
 
 #include "core/dict/snapshot.h"
 
@@ -26,6 +29,10 @@ struct LineContext {
     // surface written where a name stands (a speaker label, before an honorific,
     // under ruby, a part of a ・ chain). Null without a document.
     const dict::KeySet* named = nullptr;
+    // The katakana runs the document writes in lines that are mostly not katakana, with
+    // their counts, and those of this line (names::ProseRuns). Null without a document.
+    const std::map<std::string, int, std::less<>>* prose = nullptr;
+    const std::vector<std::string>* lineProse = nullptr;
 };
 
 }  // namespace hdTrans::pipeline

@@ -77,7 +77,7 @@ public:
     // Reads the evidence of one line.
     struct Evidence {
         uint64_t id = 0;
-        std::array<std::vector<std::string>, 9> counts;
+        std::array<std::vector<std::string>, 10> counts;
         std::vector<std::array<std::string, 3>> joined;
         std::vector<std::string> readings, actors;
     };
@@ -96,6 +96,9 @@ public:
     // The surfaces the lines show to be names: the accepted names and the surfaces Named reports
     // beyond them, in byte order.
     std::vector<std::string> NamedSurfaces();
+    // The katakana runs of the lines added that are mostly not katakana (ProseRuns), with
+    // their counts.
+    const std::map<std::string, int>& ProseKatakana() const;
     // Identifies the names of the registry: two registries on one snapshot with equal
     // keys translate every line alike.
     std::string Key();
@@ -172,6 +175,7 @@ private:
     std::map<std::string, int> kana_;                   // katakana runs
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
+    std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
     struct FlagCache {
         std::map<std::string, DictFlags> values;
         std::size_t bytes = 0;
@@ -185,6 +189,11 @@ private:
 // The labels of the speaker cues of text: a name at a line start followed by 「, です,
 // でち, っす or a call to action, in order.
 std::vector<std::string> SpeakerCues(std::string_view text);
+
+// The katakana runs of a line with hiragana and less katakana than other Japanese
+// characters: the words a document writes in katakana in its prose, which a line of
+// katakana does not read as katakana speech. Empty for other lines.
+std::vector<std::string> ProseRuns(std::string_view line);
 
 // The text of line without ruby markup, keeping the base text.
 std::string StripRuby(std::string_view line);

@@ -511,3 +511,15 @@ HD_TEST(names_historical_honorific_not_given) {
                  rows.find("様") == std::string::npos);
     }
 }
+
+HD_TEST(names_prose_katakana) {
+    HD_CHECK(names::ProseRuns("クロイチは好奇心旺盛で活発。") == std::vector<std::string>{"クロイチ"});
+    HD_CHECK(names::ProseRuns("クロ、ユキ、クロイチ、クロニ。").empty());  // no hiragana
+    HD_CHECK(names::ProseRuns("クロイチ、クロニ、クロサンだ。").empty());  // mostly katakana
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r = Scan(snap, "ユキはよく走る。\nユキが吠えた。\nユキ、ハル。");
+    const auto& prose = r.ProseKatakana();
+    HD_CHECK(prose.count("ユキ") == 1 && prose.at("ユキ") == 2);
+    HD_CHECK(prose.count("ハル") == 0);
+}

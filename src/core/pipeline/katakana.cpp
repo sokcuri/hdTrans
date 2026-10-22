@@ -104,6 +104,8 @@ struct KataRun {
     // The run read as Japanese words; empty when it does not, or when hiragana or kanji
     // touch the run.
     std::vector<KataPiece> pieces;
+    // The other lines of the document write the run in their prose.
+    bool prose = false;
 };
 
 // Particles and endings with what each follows: kana of the vowel rows a, i, u, e, o
@@ -471,6 +473,12 @@ std::vector<KataRun> KataRuns(std::string_view line, const LineContext& ctx, con
         run.start = start;
         run.end = i;
         run.kana = Runes(line.substr(start, i - start));
+        if (ctx.prose != nullptr) {
+            const std::string_view t = line.substr(start, i - start);
+            const auto found = ctx.prose->find(t);
+            const auto own = ctx.lineProse == nullptr ? 0 : std::count(ctx.lineProse->begin(), ctx.lineProse->end(), t);
+            run.prose = found != ctx.prose->end() && found->second > own;
+        }
         if (!IsJapaneseRune(prev) && !IsJapaneseRune(next)) run.pieces = ReadRun(run.kana, ctx, snap);
         runs.push_back(std::move(run));
     }
@@ -870,6 +878,16 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             runs[k] = KataRuns(TextOf(line[k]), ctx, snap);
             for (const KataRun& r : runs[k]) all.push_back(&r);
         }
+        // Two or more runs that read as words, all of which the document's prose writes,
+        // are the document's katakana words, a list of names (クロ、ユキ、クロイチ).
+        int words = 0;
+        bool prose = true;
+        for (const KataRun* r : all) {
+            if (r->pieces.empty()) continue;
+            words++;
+            prose = prose && r->prose;
+        }
+        if (words >= 2 && prose) continue;
         bool okurigana = false;
         if (IsKataSpeech(japanese, all)) {
         } else if (kata == japanese && IsPlainKataSpeech(line, all, snap)) {

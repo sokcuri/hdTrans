@@ -340,6 +340,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     for (const std::string& t : r.Names()) doc->accepted.insert(t);
     doc->named = doc->accepted;
     for (const std::string& t : r.NamedSurfaces()) doc->named.insert(t);
+    for (const auto& [t, n] : r.ProseKatakana()) doc->prose.emplace(t, n);
 
     const std::string registryDict = r.Dict();
     userdict::Context ctx{doc->codes.get(), &doc->families, &snap.Base()};
@@ -428,6 +429,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
+    facts.prose = names::ProseRuns(names::StripRuby(line));
     return facts;
 }
 
@@ -458,6 +460,7 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     out.plain = found->second.plain.get();
     out.confirmed = facts.skip.empty() ? &doc.accepted : &found->second.confirmed;
     out.persons.insert(facts.persons.begin(), facts.persons.end());
+    out.prose = facts.prose;
     return out;
 }
 
@@ -470,6 +473,8 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     ctx.lookup.confirmed = lookup.confirmed;
     ctx.lookup.persons = &lookup.persons;
     ctx.named = &doc.named;
+    ctx.prose = &doc.prose;
+    ctx.lineProse = &lookup.prose;
     return ctx;
 }
 

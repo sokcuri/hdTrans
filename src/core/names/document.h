@@ -42,6 +42,7 @@ struct DocumentContext {
     dict::KeySet persons_;             // the persons of the document, for the person places
     dict::KeySet accepted;             // the accepted names of the registry
     dict::KeySet named;                // the accepted names and the surfaces shown to be names
+    std::map<std::string, int, std::less<>> prose;  // Registry::ProseKatakana
     std::set<std::string> verseLines;  // the lines that run on into the next (verse)
     std::unique_ptr<names::Registry> registry;
     std::unique_ptr<dict::CodeTable> codes;  // the codes of the entries compiled here
@@ -64,6 +65,7 @@ struct LineFacts {
     std::vector<std::string> persons;      // the place keys the line shows to be persons, sorted
     std::optional<std::string> wholeLine;  // the line's KR row of lines.tsv, when it is one
     bool verse = false;                    // the line runs on into the next line
+    std::vector<std::string> prose;        // names::ProseRuns of the line
 };
 
 // The lookups of a line: its plain entries, the names it confirms and its person places.
@@ -72,6 +74,7 @@ struct LineLookup {
     const dict::UserText* plain = nullptr;
     const dict::KeySet* confirmed = nullptr;
     dict::KeySet persons;
+    std::vector<std::string> prose;  // LineFacts::prose
 };
 
 // A bounded rolling window of line evidence and content-keyed expensive scans.

@@ -115,7 +115,7 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 }
 
 void Registry::Forget(const Evidence& evidence) {
-    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_, &kanaHon_};
+    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_, &kanaHon_, &prose_};
     for (std::size_t i = 0; i < evidence.counts.size(); i++) {
         for (const std::string& key : evidence.counts[i]) {
             auto it = counts[i]->find(key);
@@ -261,6 +261,7 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         nameLine_ = std::string(body);
     }
     const std::vector<Run> runs = RunsOf(line);
+    for (const std::string& t : ProseRuns(line)) count(prose_, t, 9);
     std::size_t chain = 0;  // first run of the current katakana chain
     for (std::size_t i = 0; i < runs.size(); i++) {
         const Run& run = runs[i];
@@ -695,6 +696,25 @@ std::vector<std::string> Registry::NamedSurfaces() {
     return std::vector<std::string>(named.begin(), named.end());
 }
 
+const std::map<std::string, int>& Registry::ProseKatakana() const { return prose_; }
+
+std::vector<std::string> ProseRuns(std::string_view line) {
+    std::size_t katakana = 0, japanese = 0;
+    bool hiragana = false;
+    for (std::size_t i = 0; i < line.size(); i += RuneAt(line, i).size) {
+        const char32_t c = RuneAt(line, i).cp;
+        katakana += IsKatakana(c) ? 1 : 0;
+        japanese += IsNameRune(c) || c == U'々' ? 1 : 0;
+        hiragana = hiragana || IsHiragana(c);
+    }
+    std::vector<std::string> out;
+    if (!hiragana || 2 * katakana >= japanese) return out;
+    for (const Run& run : RunsOf(line)) {
+        if (!run.kanji) out.emplace_back(run.text);
+    }
+    return out;
+}
+
 std::string Registry::Key() {
     std::string out = Dict();
     out.push_back('\0');
@@ -715,6 +735,8 @@ std::string Registry::Key() {
     for (const auto& [a, v] : actors_) {
         out += a + "=" + v + "\t";
     }
+    out.push_back('\0');
+    for (const auto& [t, n] : prose_) out += t + "\t";
     return out;
 }
 
