@@ -7663,7 +7663,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 お振り込み先	불입처	N110	VBl		GN				jisjk:165945		
 お振込み	입금	N110			GN				jisjk:260583		
 お掛け	&AF@	M449			GN	1971	||1 &&3 P-1== "2**" ||2 S-2== "お手紙" S-2== "手紙" P-2== "1**"	お掛け 앞의 조사 너머 명사가 お手紙나 手紙이면 쓰다를 고른다. (미발동: rare-context)	jisjk:260514		
-お掛けなさい	앉아 주세요	A9D0			GN				jisjk:201808		
+お掛けなさい	앉아	A9D0			GN				jisjk:201808		
 お探しの	찾는	A9H1			GN				jisjk:104017		
 お探しの	찾으시는	E0H0			GN				jisjk:149766		
 お握り	주먹밥	I110			GN				jisjk:40624		
@@ -18016,8 +18016,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 こらしめ	벌&CJ@	M447			GN				jisjk:120286		
 こらしめ	징벌	N110			GN				jisjk:183079		-1
 こられ	올 수 &HN@	M427	UMv	Ma	GN	2465	||1 &&2 U+0== "Lません" D+0= "올 수 &M9@"	こられ의 어미가 ません으로 시작하면 번역을 올 수 없다로 바꾼다. (미발동: rare-context)	jisjk:266099		
-こらんなさい	6 보세요	S570			GN				jisjk:4289		
-こらんなさいよ	6 보세요	S570			GN				jisjk:4290		
+こらんなさい	6 봐	S570			GN				jisjk:4289		
+こらんなさいよ	6 봐	S570			GN				jisjk:4290		
 こり	넌더리&A5@	M427	SFl		GN				jisjk:120324		
 こり	결림	N110	QHPVBp		GN				jisjk:183099		
 こりかたま	열중&AV@	M428	SFl		GN				jisjk:120311		
@@ -18691,8 +18691,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ごらんいただ	봐 주&AE@	M421			GN				jisjk:120062		
 ごらんくださ	봐주&AE@	M438			GN				jisjk:114527		
 ごらんください	봐주세요	A9D0			GN				jisjk:366418		
-ごらんなさい	보세요	A9H1			GN				jisjk:90201		
-ごらんなさい	6 보세요	S570			GN				jisjk:373498		
+ごらんなさい	봐	A9H1			GN				jisjk:90201		
+ごらんなさい	6 봐	S570			GN				jisjk:373498		
 ごらんにいれ	보여 드&AA@	M447	VRw		GN				jisjk:120529		
 ごらんにな	보&AE@	M428			GN				jisjk:120533		
 ごらんになっての	보시고 난	E0H0			GN				jisjk:149880		
@@ -18997,7 +18997,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ご覧いただ	보&AE@	M421			GN				jisjk:120054		
 ご覧くださ	보아 주&AE@	M448			GN	2387	||1 P+1== "5**"	뒤 단어가 어미 품사이면 ご覧くださ를 보아 주시다로 고른다. (미발동: rare-word)	jisjk:265725		
 ご覧ください	봐 주세요	A9H1			GN				jisjk:90203		
-ご覧なさい	보십시오	A9D0			GN				jisjk:355856		
+ご覧なさい	봐	A9D0			GN				jisjk:355856		
 ご覧にな	보&AE@	M428			GN				jisjk:103946		
 ご覧になっていただ	보&AE@	M441			GN				jisjk:148498		
 ご覧になっての	보시고 난	E0H0			GN				jisjk:149879		
@@ -21815,7 +21815,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 しなぎれ	품절	N110	VMo		GN				jisjk:188046		-1
 しなくてもよ	하지 않아도 $AF@	H7N0			GN				jisjk:136465		
 しなければならな	해야 $Kz@	H7N0	XXX	AvSk	GN				jisjk:136467		
-しなさい	해 주세요	A9D0		Sk	GN				jisjk:114817		
+しなさい	해	A9D0		Sk	GN				jisjk:114817		
 しなさだめ	품평	N110		Hd	GN				jisjk:188047		-1
 しなさんな	하지 말아	E300			GN	3938	||1 &&2 P-1== "1**" G-1== "Hd"	しなさんな는 앞말이 する와 결합하는 명사이면 금지 표현 '하지 말아'를 고른다.	jisjk:352963		
 しなじな	갖가지 물품	N110			GN				jisjk:188050		-1
@@ -35653,12 +35653,12 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なごりおし	서운$AB@	H7U0			GN				jisjk:5229		
 なさ	없음	N110			GN				jisjk:201729		
 なさ	하&AE@	M448			GN				jisjk:262652		
-なさい	6 주세요	S570			GN				jisjk:201756		
-なさい	6 주세요	S580			GN				jisjk:202276		
-なさい	A세요	S5:0			GN	3092	||3 &&3 S+0== "あげ" D+0== "&CJ@" P+0== "4**" ||5 S+0== "帰" S+0== "見" S+0== "み" S+0== "する" S+0== "書" D+0== "R&AV@"	あげ·帰·見·み·する·書 또는 '하다'로 끝나는 번역을 가진 지정 동사에 붙은 なさい를 '-세요'로 고른다.	jisjk:341462		
-なさい	6 주세요	S520			GN				jisjk:344720		
+なさい	6	S570			GN				jisjk:201756		
+なさい	6	S580			GN				jisjk:202276		
+なさい	6	S5:0			GN	3092	||1 P+0== "4**"	なさい는 아랫사람에게 하는 명령이므로 반말 명령 ‘-아/어’로 고른다(寝なさい 자, 答えなさい 대답해).	jisjk:341462		
+なさい	6	S520			GN				jisjk:344720		
 なさいませ	A십시오	S5:0			GN				jisjk:4363		
-なさいよ	A세요	S5:0			GN				jisjk:4364		
+なさいよ	6	S5:0			GN				jisjk:4364		
 なさけしらず	몰인정함	N110	SFl		GN				jisjk:153875		
 なさけな	한심$AB@	H7U0			GN				jisjk:5230		
 なさけぶか	인정이 $D4@	H7U0			GN				jisjk:5231		
@@ -43487,8 +43487,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 よしげん	요시겐	I110			GN				jisjk:112812		
 よしず	갈대발	I110			GN				jisjk:106704		
 よしな	이유가 $FA@	H7N0	SFl		GN				jisjk:136989		
-よしなさい	그만해요	E300			GN				jisjk:356151		
-よしなさいよ	그만해요	E300			GN				jisjk:356152		
+よしなさい	그만해	E300			GN				jisjk:356151		
+よしなさいよ	그만해	E300			GN				jisjk:356152		
 よしのさと	요시노사토	K130	QPN		GN				jisjk:103720		
 よしのり	요시노리	N130	QPN	Wb	GN				jisjk:349565		
 よしまさ	요시마사	K130	QPN		GN				jisjk:103746		
@@ -203747,7 +203747,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 待ち順次アクセス法	대기순차 액세스방법	N110	UMn		GN				jisjk:203229		
 待ったなしの	미룰 수 없는	E0H0			GN				jisjk:150119		
 待ったをかけ	잠깐을 외&AO@	M427		Pn	GN				jisjk:346707		
-待っていなさい	기다려 주세요	A9D0			GN				jisjk:202013		
+待っていなさい	기다리고 있어	A9D0			GN				jisjk:202013		
 待てば海路の日和あり	쥐구멍에도 볕들 날이 있다	N110	UTs		GN				jisjk:151800		
 待乳山	맛치야마	I110	QCT		GN				jisjk:65916		
 待井	마치이	N130	QPN		GN				jisjk:98267		
@@ -331302,7 +331302,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 起きさせていただ	일어&A5@	M421			GN				jisjk:262850		
 起きたばかり	일어난지 얼마 안 되었음	N110			GN				jisjk:150668		
 起きて	일어&A5@	M41;			GN				jisjk:342678		
-起きなさい	일어나 주세요	A9D0			GN				jisjk:202014		
+起きなさい	일어나	A9D0			GN				jisjk:202014		
 起きやしな	일어나지는 $DH@	H7N0			GN				jisjk:121998		
 起き上が	일어&A5@	M418			GN				jisjk:92248		
 起き上が	일어&AD@	M428			GN				jisjk:145580		

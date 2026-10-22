@@ -43,3 +43,6 @@ restore:retort-idiom	「何言ってるんだろう」	「무슨 말을 하는 �
 dict:wakarimashita:answer	「はい、わかりました」	「네, 알겠습니다」	fix	local-ending
 dict:wakarimashita:answer	売り方がわかりました。	판매 방법이 알았습니다.	keep	local-ending
 dict:ee-yes	「ええ」	「네」	fix	lookup
+dict:nasai	「早く寝なさい」	「빨리 자」	fix	lookup
+dict:nasai	「勉強しなさい」	「공부해」	fix	lookup
+dict:nasai	「戻ってきなさい」	「돌아와」	fix	lookup

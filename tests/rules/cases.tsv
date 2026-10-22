@@ -231,7 +231,7 @@ L1745	市が人口調査を行う。	시가 인구조사를 실시한다.	curren
 L1749	明日は雨が降ると思う。	내일은 비가 온다고 생각한다.	current	local-ending
 L1749	彼はすぐ来るとおっしゃいました。	그는 바로 온다고 말씀하셨습니다.	current	local-ending
 L1778	台風による被害が大きかった。	태풍에 의한 피해가 컸다.	current	local-ending
-L1778	先生に対する態度を改めなさい。	선생님에 대한 태도를 고치세요.	current	local-ending
+L1778	先生に対する態度を改めなさい。	선생님에 대한 태도를 고쳐.	current	local-ending
 L1810	「え、あれ？」	「어, 어?」	current	local
 L1810	「ああ、あれ」	「아, 어」	current	local
 L1810	彼の名前はあれ？	그의 이름은 저것?	current	local
@@ -482,7 +482,7 @@ L3152	彼は約束を守らないな。	그는 약속을 지키지 않네.	curre
 L3172	私とは、少し違う。	나와는, 조금 다르다.	current	local
 L3180	明日は休みね。	내일은 휴일이네.	current	local
 L3180	続きね。	계속이네.	current	local
-L3182	はやく、寝なさい。	빠르게, 자세요.	fix	local
+L3182	はやく、寝なさい。	빠르게, 자.	fix	local
 L3190	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
 L3190	ここは学校じゃないよ。	여기는 학교가 아니야.	current	local-ending
 L3205	今日はとても寒い。	오늘은 무척 춥다.	current	local-ending
