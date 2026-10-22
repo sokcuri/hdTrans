@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 sound:lone-voice	「あっ、ん、ふぁっ」	「앗, 응, 후앗」	fix	sound
-sound:lone-voice	「んっ……ぁ、だめ」	「읏……아, 안돼」	fix	sound
+sound:lone-voice	「んっ……ぁ、だめ」	「읏……아, 안 돼」	fix	sound
 sound:lone-voice	「ん、そうだね」	「응, 그렇네」	keep	sound
 sound:lone-voice	君ん家に行く	너 네 집에 간다	keep	sound
 sound:lone-voice	「あっ、く、うぅ」	「앗, 크, 우우」	fix	sound

@@ -246,8 +246,8 @@ L1869	第5章を読み終えました。	제5장을 다 읽었습니다.	current
 L1869	これは第2の人生の始まりだ。	이것은 제2의 인생의 시작이다.	current	local
 L1893	あの子には勝てないわ。	그 아이에게는 이길 수 없어.	current	local-ending
 L1893	私にはよく分からないわ。	나에게는 잘 몰라.	current	local-ending
-L1895	「あの犬と遊びたいの」	「그 개와 놀고 싶은거야」	current	local-ending
-L1895	「私も一緒に行きたいの」	「나도 함께 가고 싶은거야」	current	local-ending
+L1895	「あの犬と遊びたいの」	「그 개와 놀고 싶은 거야」	current	local-ending
+L1895	「私も一緒に行きたいの」	「나도 함께 가고 싶은 거야」	current	local-ending
 L1906	このカレーは辛くない。	이 카레는 맵지 않다.	current	local-ending
 L1906	今日はそんなに寒くない。	오늘은 그렇게 춥지 않다.	current	local-ending
 L1914	彼の話は少し長かった。	그의 이야기는 조금 길었다.	current	local-ending
@@ -314,8 +314,8 @@ L2131	え、え、もう終わったの？	네, 네, 벌써 끝났어?	current	l
 L2131	あの、え、これ本当に私の？	저, 네, 이것 정말로 나의?	current	local
 L2141	ねえ、ところで明日は暇ですか。	있잖아, 그런데 내일은 한가합니까.	current	local
 L2155	それは彼の役目なのである。	그것은 그의 역할인 것이다.	current	local
-L2157	「足、まだ痛いの？」	「다리, 아직 아픈거야?」	current	local-ending
-L2157	「これ、本当においしいの？」	「이거, 정말로 맛있는거야?」	current	local-ending
+L2157	「足、まだ痛いの？」	「다리, 아직 아픈 거야?」	current	local-ending
+L2157	「これ、本当においしいの？」	「이거, 정말로 맛있는 거야?」	current	local-ending
 L2163	今夜は暑くて眠れないよ。	오늘 밤은 더워서 잘 수 없어.	current	local-ending
 L2163	辛くてとても食べられない。	괴롭고 도저히 먹을 수 없다.	current	local-ending
 L2167	誰と話してるの？	누구와 이야기해?	current	local-ending
@@ -586,7 +586,7 @@ L3775	彼の自由に行動させた。	그의 자유에 행동시켰다.	curren
 L3780	道が狭くて、車が通れない。	길이 좁아서, 차를 통과할 수 없다.	current	local-ending
 L3780	この靴は小さくて、足が痛い。	이 구두는 작아서, 다리가 아프다.	current	local-ending
 L3800	そんな高い服は買えないよ。	그렇게 비싼 옷은 살 수 없어.	current	local
-L3800	そんな簡単な問題も解けないの？	그렇게 간단한 문제도 풀 수 없는거야?	current	local
+L3800	そんな簡単な問題も解けないの？	그렇게 간단한 문제도 풀 수 없는 거야?	current	local
 L3824	駅で三時間も待たされた。	역에서 3시간이나 기다리게 되었다.	current	local
 L3824	二週間も雨が続いている。	2주간이나 비가 계속되고 있다.	current	local
 L3830	まだ寝てる？	아직 자고 있어?	current	local-ending
