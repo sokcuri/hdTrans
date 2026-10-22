@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+protect:conjunction-nara	「ならいいじゃん」	「그렇다면 좋잖아」	fix	lookup
+protect:conjunction-nara	「ならいいんだけど」	「그렇다면 좋은데」	fix	lookup

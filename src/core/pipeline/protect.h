@@ -96,8 +96,9 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
 
 // ならば なら ですから であれば にも関わらず にも拘らず にもかかわらず 対して at the
 // start of a sentence or utterance written with their pronoun (それなら, だから,
-// それでも, 反面) in the text pieces; なら before hiragana stays. A span next to a
-// text piece reads as a character that is neither hiragana nor a line break.
+// それでも, 反面) in the text pieces; なら before hiragana other than いい (ならいい)
+// stays. A span next to a text piece reads as a character that is neither hiragana nor a
+// line break.
 output::Pieces RewriteConjunctions(const output::Pieces& text);
 
 // The text of a text piece, "" for a span.

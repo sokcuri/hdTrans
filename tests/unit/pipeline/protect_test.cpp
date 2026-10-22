@@ -124,6 +124,7 @@ HD_TEST(pipeline_rewrite_conjunctions) {
     } cases[] = {
         {"なら行こう", "それなら行こう"},
         {"ならない", "ならない"},  // before hiragana
+        {"「ならいいけど」", "「それならいいけど」"},
         {"「ならば、行く」", "「それならば、行く」"},
         // The 。 after a match is taken by it, so it starts no second one.
         {"ですから。にもかかわらず彼は", "だから。にもかかわらず彼は"},

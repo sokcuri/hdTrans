@@ -76,7 +76,7 @@ std::string RewriteConjunctionsIn(std::string_view s) {
         out.append(s.substr(at, m.word - at));
         const std::string_view next = s.substr(m.next, m.end - m.next);
         const char32_t c = text::DecodeRune(next).cp;
-        if (m.conjunction->word == "なら" && c >= 0x3041 && c <= 0x309F) {
+        if (m.conjunction->word == "なら" && c >= 0x3041 && c <= 0x309F && !s.substr(m.next).starts_with("いい")) {
             out.append(m.conjunction->word);
         } else {
             out.append(m.conjunction->form);
