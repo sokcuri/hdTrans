@@ -658,6 +658,14 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
         if (!MatchAt(i, m, i > p)) break;
+        // ねぇ and なぁ right after another sound are its closing particle, not a call (やだねぇ
+        // 싫어, not 싫어 저기); they call only where an utterance starts, after a pause or
+        // after another call (ねぇねぇねぇ).
+        auto call = [](std::u32string_view k) { return k.size() >= 2 && In(k[0], U"ネナ") && In(k[1], U"エェアァー"); };
+        if (!chain.empty() && m.key.size() == 2 && call(m.key) && !call(chain.back().key)) {
+            chain.back().end = i = m.end;
+            break;
+        }
         i = m.end;
         chain.push_back(std::move(m));
     }

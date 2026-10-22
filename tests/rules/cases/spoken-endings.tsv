@@ -24,3 +24,8 @@ lookup:ze-question	この肉、美味いぜ！	이 고기, 맛있어!	fix	lookup
 builtin-phrase:kondo-wa	今度は俺の番だ。	이번에는 내 차례다.	fix	builtin-phrase
 builtin-phrase:kondo-wa	今回も勝った。	이번에도 이겼다.	fix	builtin-phrase
 builtin-ending:ze	楽しかったぜ、ありがとう。	즐거웠어, 고마워.	fix	builtin-ending
+sound:particle-nee	「やだねぇ、もう」	「싫어, 이제」	fix	sound
+sound:particle-nee	「ねぇ、先生」	「저기, 선생님」	keep	sound
+sound:particle-nee	「えへへ、ねぇ」	「에헤헤, 저기」	keep	sound
+sound:particle-nee	「ねぇねぇねぇ、先生」	「저기 저기 저기, 선생님」	keep	sound
+builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 모른다」	fix	builtin-phrase
