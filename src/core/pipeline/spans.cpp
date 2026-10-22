@@ -92,6 +92,7 @@ Match EntitySpan(std::string_view s) {
     return {};
 }
 
+
 Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
     size_t n = 0;
     for (const std::string& m : markers) {
@@ -201,17 +202,18 @@ Match ForeignSpan(std::string_view s) {
     return {n, output::SpanWord};
 }
 
-enum class SpanClass { Tag, BbCode, Entity, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign };
+enum class SpanClass { Tag, BbCode, Entity, Style, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign };
 
-constexpr SpanClass kClasses[] = {SpanClass::Tag,    SpanClass::BbCode,   SpanClass::Entity,
-                                  SpanClass::Marker, SpanClass::Stutter,  SpanClass::Drawl,
-                                  SpanClass::Emphasis, SpanClass::Hangul, SpanClass::Foreign};
+constexpr SpanClass kClasses[] = {SpanClass::Tag,     SpanClass::BbCode, SpanClass::Entity,   SpanClass::Style,
+                                  SpanClass::Marker,  SpanClass::Stutter, SpanClass::Drawl,   SpanClass::Emphasis,
+                                  SpanClass::Hangul,  SpanClass::Foreign};
 
-Match MatchClass(SpanClass c, std::string_view s, std::span<const std::string> markers) {
+Match MatchClass(SpanClass c, std::string_view s, char before, std::span<const std::string> markers) {
     switch (c) {
         case SpanClass::Tag: return TagSpan(s);
         case SpanClass::BbCode: return BbCodeSpan(s);
         case SpanClass::Entity: return EntitySpan(s);
+        case SpanClass::Style: return {StyleCodeLength(s, before), output::SpanOpen};
         case SpanClass::Marker: return MarkerSpan(s, markers);
         case SpanClass::Stutter: return StutterSpan(s);
         case SpanClass::Drawl: return DrawlSpan(s);
@@ -229,6 +231,19 @@ struct Cut {
 };
 
 }  // namespace
+
+size_t StyleCodeLength(std::string_view s, char before) {
+    if (s.starts_with("%f")) {
+        const size_t end = s.find_first_of(";%\n", 2);
+        return end != std::string_view::npos && end <= 2 + 64 && s[end] == ';' ? end + 1 : 0;
+    }
+    if (s.empty() || s[0] != '#' || before == '&') return 0;
+    size_t n = 1;
+    while (n < s.size() && n <= 8 && IsHexDigit(s[n])) n++;
+    const size_t digits = n - 1;
+    if (n >= s.size() || s[n] != ';' || (digits != 0 && digits != 6 && digits != 8)) return 0;
+    return n + 1;
+}
 
 bool IsForeign(char32_t r) {
     if (r < 0x80 || (r >= 0xFF61 && r <= 0xFF9F) || (r >= U'ぁ' && r <= U'ん') || (r >= U'ァ' && r <= U'ヺ') ||
@@ -249,7 +264,7 @@ output::Pieces CutSpans(std::string_view text, std::span<const std::string> mark
                 continue;
             }
             const size_t free = next < cuts.size() ? cuts[next].start : text.size();
-            if (const Match m = MatchClass(c, text.substr(i, free - i), markers); m.length > 0) {
+            if (const Match m = MatchClass(c, text.substr(i, free - i), i > 0 ? text[i - 1] : '\0', markers); m.length > 0) {
                 cuts.push_back({i, i + m.length, m.kind});
                 i += m.length;
                 continue;

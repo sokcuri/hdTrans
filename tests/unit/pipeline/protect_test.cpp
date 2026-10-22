@@ -53,6 +53,9 @@ HD_TEST(pipeline_cut_spans) {
         {"[b x]y[color=a\nb]", "[b x]y[color=a\nb]"},
         {"a&amp;b&#169;&#x1F363;&x;", "a〖2&amp;〗b〖2&#169;〗〖2&#x1F363;〗&x;"},
         {"&#12345678;&#X41;&a12345678901234567890123456789012;", "&#12345678;&#X41;&a12345678901234567890123456789012;"},
+        // Inline style codes: a font, a colour and the reset.
+        {"だよ%f源ノ角ゴシックB;#00ff92cb;♥%fbase;#;」", "だよ〖2%f源ノ角ゴシックB;〗〖2#00ff92cb;〗〖1♥〗〖2%fbase;〗〖2#;〗」"},
+        {"C#;と#12354;と%f;x%fa%b;", "C〖2#;〗と#12354;と〖2%f;〗x%fa%b;"},
         // A tag wins over a BBCode tag and Hangul inside it.
         {"<a title=\"[b]김\">", "〖2<a title=\"[b]김\">〗"},
         // Not tags: no letter after <, < inside.

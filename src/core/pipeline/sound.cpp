@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
@@ -250,11 +251,13 @@ size_t MarkerLength(std::string_view s, std::span<const std::string> markers) {
     return n;
 }
 
-// The length of the opaque span at the start of s: a tag, BBCode tag, entity or marker.
-size_t OpaqueLength(std::string_view s, std::span<const std::string> markers) {
+// The length of the opaque span at the start of s: a tag, BBCode tag, entity, style code
+// or marker.
+size_t OpaqueLength(std::string_view s, char before, std::span<const std::string> markers) {
     if (const size_t n = TagLength(s); n > 0) return n;
     if (const size_t n = BbCodeLength(s); n > 0) return n;
     if (const size_t n = EntityLength(s); n > 0) return n;
+    if (const size_t n = StyleCodeLength(s, before); n > 0) return n;
     return MarkerLength(s, markers);
 }
 
@@ -1057,7 +1060,7 @@ std::string SoundText::Write() {
     bool afterParticle = false;  // the token before rs[i] is a lone particle
     std::vector<StutterPiece> pieces;
     for (size_t i = 0; i < rs.size();) {
-        if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), ctx_.markers); skip > 0) {
+        if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
             afterParticle = false;
             b += text_.substr(offsets_[i], skip);
             const size_t end = offsets_[i] + skip;

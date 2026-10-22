@@ -43,6 +43,7 @@ namespace internal {
 //     closing tag SpanClose);
 //   - BBCode tags [b], [/b], [color=red] of up to 128 characters (SpanOpen, SpanClose);
 //   - entities &amp; &#123; &#x1F;  (SpanOpen);
+//   - inline style codes (StyleCodeLength, SpanOpen);
 //   - the host markers, the longest that matches (SpanOpen);
 //   - the stutter marks U+E000 with their separators (SpanOpen);
 //   - the drawl spans U+E005, U+E006 or U+E007 to the same mark (SpanOpen);
@@ -53,6 +54,11 @@ namespace internal {
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
 //     taking the small vowel after it (SpanWord).
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers);
+
+// The length of the inline style code at the start of s, or 0: a font %fNAME; (NAME up to
+// 64 bytes without ;, % or a line feed), a colour #RRGGBB; or #RRGGBBAA;, or the reset #;.
+// A colour or reset does not follow &, where it is a malformed entity (&#12345678;).
+size_t StyleCodeLength(std::string_view s, char before);
 
 // A character kept as written: outside CP932 and neither a Han character nor kana.
 // Hangul, emoji, the letters and symbols of other scripts and the hiragana ゔゕゖ are
