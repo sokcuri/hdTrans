@@ -425,7 +425,7 @@ void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsVerb(*r, query)) {
             l.count--;
             continue;
         }
@@ -461,6 +461,30 @@ bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
     const std::string_view rest = query.substr(r.source.size());
     if (!rest.starts_with("しら")) return false;
     return SentenceFinal(TrimLeftChars(rest.substr(std::string_view("しら").size()), "ねよぁっー"), current, true);
+}
+
+// A person name of two kanji or more whose last kanji is the stem of an ichidan verb that
+// the hiragana after the name conjugates (る, た, て), the kanji before it being a word
+// (今居る: 今 and 居る, not the name 今居): the name takes the verb's stem.
+bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
+    if (!r.semantic.starts_with("QPN") || !query.starts_with(r.source) || text::RuneCount(r.source) < 2) return false;
+    const std::string_view rest = query.substr(r.source.size());
+    const text::Rune next = text::DecodeRune(rest);
+    if (next.cp < U'ぁ' || next.cp > U'ゖ') return false;
+    const std::string_view last = LastChar(r.source);
+    const std::string_view head = r.source.substr(0, r.source.size() - last.size());
+    if (NameClassOf(last) != kClassKanji || snapshot.RetrieveRecords(head, dict::LookupMode::General).empty()) {
+        return false;
+    }
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(last, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        int branch = 0, length = 0;
+        if (pc.size() == 4 && pc.starts_with("M4") && pc[3] == '7' && AnalyseVerbTail(last, pc[3], rest, branch, length) &&
+            length > 0) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Whether form is also the imperative of a godan verb of the dictionary: form without its
