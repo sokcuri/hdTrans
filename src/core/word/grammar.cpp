@@ -6,6 +6,7 @@
 
 #include "core/output/korean.h"
 #include "core/output/families.h"
+#include "core/output/inflect.h"
 #include "core/output/particle.h"
 #include "core/text/hangul.h"
 #include "core/text/unicode.h"
@@ -440,6 +441,94 @@ void ResultState(Flusher& f) {
         if (rest.starts_with(" 있") || (rest.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with("있"))) {
             it->AssignDirectSlot(it->DirectIndex(), "6" + std::string(rest));
         }
+    }
+}
+
+namespace {
+
+// Stems of the verbs of thinking and perceiving whose ている is read as the simple form
+// (思っている 생각한다, 見えている 보인다); a stem ending in 思 also counts (そう思). The verbs of
+// saying and going out with someone (言っていた 말했다, 付き合っている人 사귀는 사람) keep the
+// progressive in the plain present and in 지, where their simple form reads as narration.
+constexpr std::string_view kStateVerbs[] = {"見え", "聞こえ", "想"};
+constexpr std::string_view kSayVerbs[] = {"話", "お話", "付き合"};
+constexpr std::string_view kSayEnds[] = {"言", "云"};
+
+enum class Aspect { None, State, Say };
+
+// Whether a verb's Korean ends in a marker family of an adjective (困って 곤란&Mf@): an adjective
+// takes neither 고 있다 nor 어 있다.
+bool AdjectiveTarget(std::string_view target) {
+    if (target.size() < 4 || !target.ends_with("@") || target[target.size() - 4] != '&') return false;
+    const output::internal::KoreanFamily* family = output::internal::FindKoreanFamily(target.substr(target.size() - 4));
+    return family != nullptr && family->partOfSpeech == output::internal::KoreanPartOfSpeech::Adjective &&
+           family->inflectionClass != output::internal::InflectionClass::Copula;
+}
+
+Aspect SimpleAspectOf(std::string_view stem, std::string_view target) {
+    if (InSet(kStateVerbs, stem) || stem.ends_with("思") || AdjectiveTarget(target)) return Aspect::State;
+    if (InSet(kSayVerbs, stem) ||
+        std::any_of(std::begin(kSayEnds), std::end(kSayEnds), [&](std::string_view e) { return stem.ends_with(e); })) {
+        return Aspect::Say;
+    }
+    return Aspect::None;
+}
+
+// Whether a verb of saying keeps its progressive before ending, the simple form's ending.
+bool KeepsProgressive(Aspect aspect, std::string_view ending) {
+    return aspect == Aspect::Say && (ending.starts_with("4") || ending.starts_with("1지"));
+}
+
+// The ending of a verb that takes the place of 있 and what follows it in an ending of the
+// existential family (있었다 → 5다, 있는데 → 0데, 있으면 → 2면); "" when rest starts otherwise.
+std::string ExistentialToVerb(Flusher& f, std::string_view rest) {
+    char code = 0;
+    std::string_view row;
+    for (const char k : std::string_view("0123456789AB")) {
+        const std::string_view r = LookupSource("&HN@" + std::string(1, k), f.families);
+        if (!r.empty() && rest.starts_with(r) && r.size() > row.size()) {
+            code = k;
+            row = r;
+        }
+    }
+    if (code == 0) return {};
+    const std::string_view after = rest.substr(row.size());
+    if ((code == '1' || code == '4') && after.starts_with(kKoDa) && !after.starts_with("다가")) code = '4';
+    return std::string(1, code) + std::string(after);
+}
+
+}  // namespace
+
+void SimpleAspect(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb || it->detail->record != 0) {
+            continue;
+        }
+        const Aspect aspect = SimpleAspectOf(it->group->surface, it->EntryText(it->selected));
+        Entry* e = it->DirectEntry(it->DirectIndex());
+        if (aspect == Aspect::None || e == nullptr) continue;
+        const std::string_view te = it->DirectSurface();
+        const std::string progressive = "1고 ";
+        const std::string resultative = "6 ";
+        const bool contracted = std::string_view(e->dst).starts_with(progressive) ||
+                                (std::string_view(e->dst).starts_with(resultative) && AdjectiveTarget(it->EntryText(it->selected)));
+        if (contracted) {
+            const std::size_t cut = e->dst.starts_with(progressive) ? progressive.size() : resultative.size();
+            const std::string simple = ExistentialToVerb(f, std::string_view(e->dst).substr(cut));
+            if (!simple.empty() && !KeepsProgressive(aspect, simple)) it->AssignDirectSlot(it->DirectIndex(), simple);
+            continue;
+        }
+        Item* n = it->next;
+        if ((e->dst != "1고" && e->dst != "6") || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
+            n->group->surface != "い" || n->selected < 0 || n->DirectIndex() < 0 ||
+            !ItemLemma(f, n, n->selected).starts_with("있") || n->DirectSurface().ends_with("っけ")) {
+            continue;
+        }
+        const Entry* d = n->DirectEntry(n->DirectIndex());
+        if (d == nullptr || d->dst.empty() || KeepsProgressive(aspect, d->dst)) continue;
+        it->AssignDirectSlot(it->DirectIndex(), d->dst);
+        n->AssignEntrySurface(n->selected, "");
+        n->AssignDirectSlot(n->DirectIndex(), "");
     }
 }
 

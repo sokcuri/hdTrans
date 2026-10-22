@@ -71,6 +71,8 @@ void TeThanks(Flusher& f);
 void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
+// The ている of a verb of thinking, saying or perceiving read as the simple form.
+void SimpleAspect(Flusher& f);
 void NotYet(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);

@@ -630,7 +630,15 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), spaced);
         }
         case '3': case '4': case '5': case '7': case '8': case '9': {
-            const char np = First(Code(next));
+            // A predicate that writes nothing (an auxiliary いる folded into the verb before
+            // it) leaves the spacing to the word after it.
+            int after = nextIndex;
+            while (kind == '4' && First(Code(items[after])) == '4' && EntryText(items[after]).empty() &&
+                   (items[after].directIndex < 0 || items[after].ending.text.empty()) && after + 1 < count &&
+                   items[after + 1].tokenIndex == items[after].tokenIndex) {
+                after++;
+            }
+            const char np = First(Code(items[after]));
             const bool space = np != '2' && np != '6' && (!IsOutputBuilderBlockedText(remainder) || WidthOf(remainder) > 4);
             return Result(std::move(t), space);
         }

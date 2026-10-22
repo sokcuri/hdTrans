@@ -337,7 +337,7 @@ L2220	私だって知っている。	나도 알고 있다.	current	local
 L2220	誰だって知っている。	누구라도 알고 있다.	current	local
 L2221	そんなことだって、やればできるさ。	그런 일도, 하면 할 수 있고 말이야.	current	local
 L2228	「ありがとう」って言った。	「고마워」라고 말했다.	current	local
-L2228	「やった」って思ってるよ。	「해냈다」라고 생각하고 있어.	current	local
+L2228	「やった」って思ってるよ。	「해냈다」라고 생각해.	current	local
 L2245	もっとも、例外もある。	다만, 예외도 있다.	current	local
 L2252	明日は雨が降るって噂です。	내일은 비가 온다는 소문입니다.	current	local-ending
 L2252	来月結婚するって話を聞きました。	내달 결혼한다는 이야기를 들었습니다.	current	local-ending
@@ -477,7 +477,7 @@ L3138	環境問題について作文を書いた。	환경 문제에 대해 작�
 L3138	この問題について皆で話し合った。	이 문제에 대해 모두가 서로 이야기했다.	current	local
 L3138	友達について来る。	친구를 따라 온다.	current	local
 L3151	私は何も知らないと答えた。	나는 아무것도 모른다고 대답했다.	current	local-ending
-L3151	もう痛くないと話していた。	이제 아프지 않다고 이야기하고 있었다.	current	local-ending
+L3151	もう痛くないと話していた。	이제 아프지 않다고 이야기했다.	current	local-ending
 L3152	彼は約束を守らないな。	그는 약속을 지키지 않네.	current	local
 L3172	私とは、少し違う。	나와는, 조금 다르다.	current	local
 L3180	明日は休みね。	내일은 휴일이네.	current	local
@@ -550,7 +550,7 @@ L3429	彼には自信が無い。	그에게는 자신이 없다.	current	local
 L3437	友人のうちで食べた。	친구의 집에서 먹었다.	fix	local
 L3459	時間はまだありません。	시간은 아직 없습니다.	current	local
 L3465	彼女も行くって聞きました。	그녀도 간다고 들었습니다.	current	local-ending
-L3465	来週から働くって思っていた。	다음주부터 일한다고 생각하고 있었다.	current	local-ending
+L3465	来週から働くって思っていた。	다음주부터 일한다고 생각했다.	current	local-ending
 L3475	君もそう思うよねえ。	너도 그렇게 생각하지.	current	local
 L3475	なかなか面白い話だねえ。	꽤 재미있는 이야기구나.	current	local
 L3475	子供がえを描いた。	아이가 를 그렸다.	current	local

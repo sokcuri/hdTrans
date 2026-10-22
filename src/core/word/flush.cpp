@@ -28,6 +28,7 @@ void Flush(Flusher& f) {
         VerseTe(f);
         TeRequest(f);
         ResultState(f);
+        SimpleAspect(f);
         NotYet(f);
         SeeAnd(f);
         TeSequence(f);
