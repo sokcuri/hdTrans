@@ -72,7 +72,7 @@ constexpr ConstraintRule kRules[] = {
     {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
      "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
     {"itadake-dake", ConstraintWord::Source, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
-     "だ·で·じゃ·に·の·か 앞의 いただけ는 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다)", {}},
+     "だ, で, じゃ, に, の, か 앞의 いただけ는 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
     {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
