@@ -25,3 +25,10 @@ compose:number-label	ワールド2ステージ5クリア	월드 2 스테이지 5
 compose:number-label	ver2.0アップデート	ver2.0 업데이트	fix	compose
 compose:number-label	「12cm30連装噴進砲」x1	「12cm30연장분진포」x1	keep	compose
 compose:number-label	唯一無二のID欄だから	유일무이의 ID란이니까	keep	compose
+lookup:name-after-label	チャプター5ボス	챕터 5 보스	fix	lookup
+lookup:name-after-label	エリア5ボス	에리어 5 보스	fix	lookup
+lookup:name-after-label	5ボス	5보스	keep	lookup
+compose:number-label	SP消費	SP 소비	fix	compose
+compose:number-label	SP消費する	SP 소비한다	fix	compose
+compose:number-label	HPが1回復した	HP가 1 회복했다	keep	compose
+compose:number-label	S評価する	S평가한다	keep	compose

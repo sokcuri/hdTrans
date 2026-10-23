@@ -310,15 +310,20 @@ bool DigitOrLatin(char32_t r) {
 // stays apart (1 レベル 1 레벨). The noun starts with kanji, katakana or a Latin letter: a
 // number written on (第2回, 百二十) is no noun after it, and a word in hiragana is a pronoun or
 // a word of its own (≫758それ 그것). A predicate, a verbal noun with する or a word read as a
-// verb or an adjective, stands apart (HPが1回復した 1 회복했다).
+// verb or an adjective, stands apart after a number (HPが1回復した 1 회복했다); after Latin
+// letters it is a noun like any other (SP消費 SP 소비).
 bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
     if (n != i + 1 || !Adjoins(items, n)) return false;
     const ResolvedItem& b = items[n];
+    char32_t end = LastRune(items[i].surface);
+    if (end >= U'Ａ' && end <= U'ｚ') end -= 0xFEE0;
+    const bool latin = (end >= U'A' && end <= U'Z') || (end >= U'a' && end <= U'z');
     const char32_t lead = text::DecodeRune(b.surface).cp;
     if (HasRune(kNumerals, lead) || b.surface.starts_with("第")) return false;
     if (!IsKanji(lead) && tokenizer::Class(lead) != tokenizer::kClassKatakana && !DigitOrLatin(lead)) return false;
     const std::string_view code = Code(b);
-    return code.size() >= 2 && code[0] == '1' && code[1] != '2' && !EntryText(b).ends_with("@") && !PredicateNoun(items, n);
+    return code.size() >= 2 && code[0] == '1' && code[1] != '2' && !EntryText(b).ends_with("@") &&
+           (latin || !PredicateNoun(items, n));
 }
 
 // Whether the number or the Latin word that ends item i in the source stands apart from the

@@ -386,8 +386,18 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
 }
 
 // A name-layer key, matched at query (the rest of the surface being split), fills its
-// kana run.
+// kana run, and one that starts with a digit does not start on a number written straight
+// after katakana or Latin letters: the number labels that word (チャプター5ボス).
 bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
+    if (const char32_t d = text::DecodeRune(FirstChar(key)).cp; (d >= U'0' && d <= U'9') || (d >= U'０' && d <= U'９')) {
+        const std::string_view surface = transformSurface;
+        std::string_view before;
+        if (surface.ends_with(query)) before = LastChar(surface.substr(0, surface.size() - query.size()));
+        if (before.empty() && current > 0) before = LastChar(Tok(current - 1).text);
+        char32_t b = text::DecodeRune(before).cp;
+        if (b >= U'Ａ' && b <= U'ｚ') b -= 0xFEE0;
+        if (NameClassOf(before) == kClassKatakana || (b >= U'A' && b <= U'Z') || (b >= U'a' && b <= U'z')) return false;
+    }
     const int first = NameClassOf(FirstChar(key)), last = NameClassOf(LastChar(key));
     if (first == kClassHiragana || first == kClassKatakana) {
         const std::string_view surface = transformSurface;

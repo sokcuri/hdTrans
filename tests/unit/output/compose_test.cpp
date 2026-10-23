@@ -170,7 +170,7 @@ HD_TEST(compose_sentence_token_ranges) {
 
 // A number or a Latin letter joins the noun written straight after it in the source; a label
 // (a reply number, a time, a four-digit number before kanji, a Latin word) and a verbal noun
-// that is the predicate stand apart.
+// that is the predicate stand apart; an abbreviation stands apart from a verbal noun too.
 HD_TEST(compose_number_before_noun) {
     const CompositionCase cases[] = {
         {{{"1", "110", "Nd", "1"}, {"レベル", "110", "", "레벨"}}, {1, 2}, "1레벨."},
@@ -195,6 +195,7 @@ HD_TEST(compose_number_before_noun) {
         {{{"キハ", "110", "", "키하"}, {"208", "110", "Nd", "208"}, {"車両", "110", "", "차량"}}, {1, 2, 3}, "키하 208 차량."},
         {{{"9", "110", "Nd", "9"}, {"米国", "130", "", "미국"}}, {1, 2}, "9미국."},
         {{{"1", "110", "Nd", "1"}, {"回復", "110", "Hd", "회복"}}, {1, 2}, "1 회복."},
+        {{{"SP", "110", "", "SP"}, {"消費", "110", "Hd", "소비"}}, {1, 2}, "SP 소비."},
         {{{"Lv2", "110", "", "Lv2"}, {"スキル", "110", "", "스킬"}}, {1, 2}, "Lv2 스킬."},
         {{{"改二", "110", "", "개2"}, {"改装", "110", "", "개장"}}, {1, 2}, "개2개장."},
     };
