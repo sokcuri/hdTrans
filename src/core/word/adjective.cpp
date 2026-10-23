@@ -254,6 +254,12 @@ bool Item::RunDakeiyoCase8Query() {
         const std::string_view scanned = From(tail, scanOffset);
         for (int entry = 0; entry < static_cast<int>(g->entries.size()); entry++) {
             const Entry& e = *g->entries[static_cast<std::size_t>(entry)];
+            // The adnominal な goes before a noun, never before the particle って (こうなって is
+            // こう and なって, not こうな; the quote of an adjectival noun is だって).
+            if (g->surface == kJaNa && after.starts_with(kJaTte)) {
+                base.enabled[entry] = false;
+                continue;
+            }
             if ((Has(e.gattr, "Sh") && Classify(tail) != 0) || At(e.code, 0) != '5' || Byte(At(e.code, 1)) != base.kind ||
                 !w->EndingApplies(e, after, tokenIndex) ||
                 w->CutsWord(tail.substr(0, tail.size() - scanned.size()), scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
