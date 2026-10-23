@@ -3,9 +3,29 @@
 // A family is declared once by "//= FAMILY <TAB> after NAME <TAB> what it is for" and runs right
 // after the text pass or family NAME. Its rows are ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS
 // <TAB> NOTE, ID being cx:FAMILY:PRIO. On each word from the left, the first row of the family by
-// PRIO whose condition holds applies its actions.
+// PRIO whose condition holds applies its actions. "//~ MAP <TAB> FROM=TO ... <TAB> what it is for"
+// declares a word map for map-lemma and map-target, above the rows that use it.
+//~ subject-pronoun	나=내 저=제 너=네	The subject form of a pronoun before 가 (내가, 제가, 네가).
+//~ plain-pronoun	내=나 제=저 네=너	The subject forms back to the plain pronoun, before a particle that is no subject (나를).
+//~ who-subject	누구=누	The subject form of 누구 before 가 (누가).
+//= benefactive-provider	after DegreeAfterNumber	The に after a person read 에게 before a verb with もらう, with no other に, no は, が or から, no verb and no punctuation between, names the giver: the subject (이)가, with a pronoun in its subject form, or (은)는 for には. Not when the verb before もらう is a causative (相談をさせてもらう).
+cx:benefactive-provider:10		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게" F-1== "person" >0 ||2 &&5 S+1== "もら" D+1== "R&CJ@" F+0== "conjugating" S+0!= "させ" F+0!= "causative" &&2 ||2 S+0== "Rてもら" S+0== "Rでもら" D+0== "R&CJ@" ||7 S+0== "に" S+0== "には" S+0== "は" S+0== "が" S+0== "から" S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "(이)가" map-lemma@-1 @subject-pronoun map-lemma@-1 @who-subject	友達にノートを見せてもらった 친구가 노트를 보여 주었다
+cx:benefactive-provider:20		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게는" F-1== "person" >0 ||2 &&5 S+1== "もら" D+1== "R&CJ@" F+0== "conjugating" S+0!= "させ" F+0!= "causative" &&2 ||2 S+0== "Rてもら" S+0== "Rでもら" D+0== "R&CJ@" ||7 S+0== "に" S+0== "には" S+0== "は" S+0== "が" S+0== "から" S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "(은)는"	
+//= go-not-say	after ChooseInitialConjunctions	The い of いう read 말하다 after に, へ, まで or から is 가다 (行く), unless a person or a noun of manner (noun.manner-ni) stands before the particle.
+cx:go-not-say:10		&&7 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni C+0== "가다"	select-lemma "가다"	学校までいった 학교까지 갔다
+cx:go-not-say:20		&&6 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni	set-verb "가다"	the word has no candidate 가다
 //= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
+//= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
+cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
+cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다
+//= subject-before-ga	after NegativeCopula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
+cx:subject-before-ga:10		&&4 S+0== "が" F-1== "selected" L+0== "(을)를" F-1!= "conjugating"	map-target@-1 @plain-pronoun	私が好き 나를 좋아해
+cx:subject-before-ga:20		&&3 D+0== "L(이)가 " F-1== "selected" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺じゃない 내가 아니다
+cx:subject-before-ga:30		&&5 S+0== "の" F-1== "selected" L+0== "(이)가" F+1== "conjugating" S+1== "~を"	select-lemma "의"	
+cx:subject-before-ga:40		&&4 ||2 S+0== "が" S+0== "の" F-1== "selected" L+0== "(이)가" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺が 내가
+//= subject-no	after subject-before-ga	The の read 의 after a noun and before a predicate of existence, quantity or knowing (stem.subject-predicate), or before an adjective after a noun of a quality (noun.attribute), with a noun after the predicate, is the subject (이)가.
+cx:subject-no:10		&&7 S+0== "の" L+0== "의" P-1== "1" F+1== "selected" P+2== "1" ||2 S+1== @stem.subject-predicate &&2 S-1== @noun.attribute P+1== "7" C+0== "(이)가"	select-lemma "(이)가" map-lemma@-1 @subject-pronoun	人の少ない町 사람이 적은 마을
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
 cx:hodo-degree:10		&&3 ||2 U+0== "R程に" U+0== "Rほどに" ||2 Y+0== "~수록" &&2 Y+0== "~만큼" S+1== "に" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도로"	痛ましい程に 참혹할 정도로
 cx:hodo-degree:20		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1== "に" ||2 Y+0== "~수록" Y+0== "~만큼" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도" select-lemma@+1 "(으)로"	ほどに with に its own word
@@ -21,7 +41,12 @@ cx:ni-after-adverb:20		&&7 S+0== "に" F+0== "selected" F-1== "selected" L+0== "
 cx:ni-after-adverb:30		&&6 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1!= "conjugating" ||3 L-1== "R껏" L-1== "R으로" L-1== "R지로"	select-lemma ""	無理やりに 억지로
 //= no-after-na	after ni-after-adverb	The の read 의 after a な adjective read in 한 is the noun 것.
 cx:no-after-na:10		&&7 S+0== "の" F+0== "selected" F-1== "selected" F-1!= "conjugating" S-1== "Rな" L-1== "R한" L+0== "의"	select-lemma "것"	元気そうなのが 씩씩한 것이
-//= de-scene	after ShortPossessive	The で read (으)로 after a noun of a place or scene is 에서, unless the noun can be a means (noun.scene-means) and the first verb after it, with no punctuation or other particle between, is one of verb.means-de; after an instant it is 에.
+//= short-possessive	after no-after-na	A pronoun and the genitive の right before a word (a letter or digit in the same token or at the start of the next) read as the short possessive (내 책); before punctuation, a particle or a gap they stay 나의. A phrase that opens with a clause (知らない間に 모르는 사이에) takes the pronoun as its subject (내가).
+cx:short-possessive:10		&&12 S+1== "の" L+1== "의" F+0!= "conjugating" F+2== "selected" P+2!= "2" P+2!= "6" F+2== "touches-prev" F+2== "alnum-start" ||3 L+0== "나" L+0== "저" L+0== "너" ||2 S+0== @pronoun.first-person-genitive S+0== @pronoun.second-person-genitive F+2== "hiragana" ||2 O+2== "R는" O+2== "R던"	take-target@+1 "(이)가" map-lemma @subject-pronoun	私の知らない間に 내가 모르는 사이에
+cx:short-possessive:20		&&10 S+1== "の" L+1== "의" F+0!= "conjugating" F+2== "selected" P+2!= "2" P+2!= "6" F+2== "touches-prev" F+2== "alnum-start" L+0== "나" S+0== @pronoun.first-person-genitive	take-target@+1 "" take-target "내 "	私の手 내 손
+cx:short-possessive:30		&&10 S+1== "の" L+1== "의" F+0!= "conjugating" F+2== "selected" P+2!= "2" P+2!= "6" F+2== "touches-prev" F+2== "alnum-start" L+0== "저" S+0== @pronoun.first-person-genitive	take-target@+1 "" take-target "제 "	わたくしの名前 제 이름
+cx:short-possessive:40		&&10 S+1== "の" L+1== "의" F+0!= "conjugating" F+2== "selected" P+2!= "2" P+2!= "6" F+2== "touches-prev" F+2== "alnum-start" L+0== "너" S+0== @pronoun.second-person-genitive	take-target@+1 "" take-target "네 "	お前の方 네 편
+//= de-scene	after short-possessive	The で read (으)로 after a noun of a place or scene is 에서, unless the noun can be a means (noun.scene-means) and the first verb after it, with no punctuation or other particle between, is one of verb.means-de; after an instant it is 에.
 cx:de-scene:10		&&6 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" ||2 S-1== "一瞬" S-1== "瞬時"	select-lemma "에"	一瞬で 한순간에
 cx:de-scene:20		&&7 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" S-1== @noun.scene !1 &&2 S-1== @noun.scene-means >0 &&3 F+0== "selected" F+0== "verb" S+0== @Rverb.means-de ||3 F+0!= "selected" &&2 F+0!= "conjugating" ||2 P+0== "6" &&2 K+0== "P" S+0!= "を" F+0== "verb"	select-lemma "에서"	後ろで 뒤에서; not 夢で終わった, where the first verb after it makes 夢 the means
 //= particle-in-next	after de-scene	A particle whose Korean starts the Korean of the next word writes nothing, the next word carrying it.

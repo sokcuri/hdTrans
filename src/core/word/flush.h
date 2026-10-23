@@ -70,14 +70,8 @@ void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
-// The provider に before a て verb and もらう read as 주다 is its subject: 王子様に案内してもらう
-// 왕자님이 안내해 주다.
-void BenefactiveProvider(Flusher& f);
-void GoNotSay(Flusher& f);
 void PositiveIke(Flusher& f);
-void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
-void SubjectBeforeGa(Flusher& f);
 // A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
 // plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
 void PluralPronoun(Flusher& f);
@@ -90,7 +84,6 @@ void DegreeAfterNumber(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
 void ChanAfterKatakana(Flusher& f);
 void InitialSoundRule(Flusher& f);
-void SubjectNo(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end
 // of the utterance (closing punctuation, a pause or the end of the chunk).
@@ -126,7 +119,6 @@ void QuestionCopula(Flusher& f);
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void ShortPossessive(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,

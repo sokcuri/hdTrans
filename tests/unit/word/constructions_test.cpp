@@ -2,6 +2,7 @@
 
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "core/word/flush.h"
@@ -51,6 +52,54 @@ HD_TEST(constructions_parse) {
     HD_CHECK(n[root + 2].kind == hdTrans::rules::BodyKind::ScanLeft && n[root + 2].count == 0);
     HD_CHECK(n[root + 3].atom && n[root + 4].kind == hdTrans::rules::BodyKind::Or && n[root + 4].count == 0);
     HD_CHECK(n[root + 5].atom && n[root].end == root + 6);
+}
+
+HD_TEST(constructions_parse_maps) {
+    const std::vector<std::string_view> lines = {
+        "//~ subject\t나=내 저=제\tthe subject form\n",
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\t&&4 C+0== \"가다\" G+0== \"HdCt\" O+1== \"R는\" F-1== \"person\"\tmap-lemma@-1 @subject set-verb \"가다\"\t\n",
+        "cx:a:20\t\tO+0== @Rnoun.event\tmap-target @subject\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.maps.size() == 1 && t.rows.size() == 2);
+    HD_CHECK_EQ(t.maps[0].name, std::string("subject"));
+    HD_CHECK(t.maps[0].pairs == (std::vector<std::pair<std::string, std::string>>{{"나", "내"}, {"저", "제"}}));
+    HD_REQUIRE(t.rows[0].actions.size() == 2);
+    HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::MapLemma && t.rows[0].actions[0].map == 0);
+    HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[0].delta), -1);
+    HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::SetVerb);
+    HD_CHECK_EQ(t.rows[0].actions[1].value, std::string("가다"));
+    HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::MapTarget);
+}
+
+HD_TEST(constructions_parse_map_errors) {
+    const std::vector<std::string_view> lines = {
+        "//~ m\t나=내\tdoc\n",
+        "//~ m\t너=네\tagain\n",
+        "//~ bad\t나내\tno equals sign\n",
+        "//~ bad\t나=내 나=제\ta key twice\n",
+        "//~ bad\t=내\tno key\n",
+        "//~ bad\t나=\tno value\n",
+        "//~ bad\t나=내  저=제\ttwo spaces\n",
+        "//~ Bad\t나=내\tname\n",
+        "//~ bad\t나=내\n",
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\tS+0== \"で\"\tmap-lemma @none\t\n",
+        "cx:a:20\t\tS+0== \"で\"\tmap-lemma \"나\"\t\n",
+        "cx:a:30\t\tG+0== \"Hdc\"\tselect-lemma \"에\"\t\n",
+        "cx:a:40\t\tG+0== @noun.event\tselect-lemma \"에\"\t\n",
+        "cx:a:50\t\tS+0== \"で\"\tset-verb \"가다\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    const std::string bad = ": a map line is //~ MAP <TAB> FROM=TO ... <TAB> what it is for, each FROM once\n";
+    HD_CHECK_EQ(Errors(t), "2: a second line for the map m\n3" + bad + "4" + bad + "5" + bad + "6" + bad + "7" + bad +
+                               "8" + bad + "9" + bad +
+                               "11: actions: no such map\n"
+                               "12: actions: a map action takes @MAP\n"
+                               "13: condition: G takes two-letter codes\n"
+                               "14: condition: this field takes no word class\n");
 }
 
 HD_TEST(constructions_parse_errors) {

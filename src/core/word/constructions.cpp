@@ -7,8 +7,10 @@
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/codes.h"
+#include "core/output/korean.h"
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
+#include "core/tokenizer/classify.h"
 #include "core/tokenizer/token.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
@@ -49,6 +51,36 @@ constexpr NamedFeature kFeatures[] = {
     {"adjectival", [](Flusher&, const Item* it) { return it->adjectival; }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
+    // The selected candidate has a sem code of a person, an animal or a god (Person).
+    {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
+    // The verb was analysed as a causative.
+    {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
+    // The word starts where the word before it ends: in the same token, or at the start of the next
+    // token when the word before ends its token.
+    {"touches-prev",
+     [](Flusher&, const Item* it) {
+         const Item* p = it->prev;
+         if (p == nullptr) return false;
+         const int end = p->start + p->length;
+         return (it->tokenIndex == p->tokenIndex && it->start == end) ||
+                (it->tokenIndex == p->tokenIndex + 1 && end == static_cast<int>(p->text.size()) && it->start == 0);
+     }},
+    // The surface starts with a letter or a digit (Unicode L or Nd).
+    {"alnum-start",
+     [](Flusher&, const Item* it) {
+         const char32_t r = text::DecodeRune(it->group->surface).cp;
+         return text::IsLetter(r) || text::IsDigit(r);
+     }},
+    // The surface holds a hiragana.
+    {"hiragana",
+     [](Flusher&, const Item* it) {
+         for (std::string_view t = it->group->surface; !t.empty();) {
+             const text::Rune r = text::DecodeRune(t);
+             if (tokenizer::ClassFlags(r.cp, 2) == tokenizer::kClassHiragana) return true;
+             t.remove_prefix(r.size);
+         }
+         return false;
+     }},
 };
 
 struct FieldSpelling {
@@ -61,12 +93,13 @@ constexpr FieldSpelling kFields[] = {
     {'P', CxField::Part},    {'A', CxField::Sem},           {'K', CxField::Class},
     {'U', CxField::EndingSurface}, {'Y', CxField::EndingTarget}, {'B', CxField::Word},
     {'I', CxField::Text},    {'H', CxField::Head},          {'F', CxField::Feature},
+    {'C', CxField::Candidate}, {'G', CxField::Gram},        {'O', CxField::FirstWord},
 };
 
 bool SetField(CxField field) {
     return field == CxField::Surface || field == CxField::Lemma || field == CxField::Target ||
            field == CxField::EndingSurface || field == CxField::EndingTarget || field == CxField::Text ||
-           field == CxField::Head || field == CxField::Word;
+           field == CxField::Head || field == CxField::Word || field == CxField::Candidate || field == CxField::FirstWord;
 }
 
 // The nodes and atoms of one condition appended to a table.
@@ -116,6 +149,7 @@ public:
                 a.match = CxMatch::Feature;
             }
             if (a.field == CxField::Class && raw.size() != 1) return tokens.Fail("K takes one letter");
+            if (a.field == CxField::Gram && (raw.empty() || raw.size() % 2 != 0)) return tokens.Fail("G takes two-letter codes");
             a.value = std::move(raw);
         }
         t_.nodes.push_back({rules::BodyKind::Or, true, static_cast<uint32_t>(t_.atoms.size()), 0});
@@ -148,10 +182,11 @@ bool FamilyName(std::string_view s) {
     return std::ranges::all_of(s, [](char c) { return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-'; });
 }
 
-bool ParseActions(std::string_view text, std::vector<CxAction>& out, const char*& error) {
+bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::vector<CxAction>& out, const char*& error) {
     constexpr std::pair<std::string_view, CxVerb> kVerbs[] = {
         {"select-lemma", CxVerb::SelectLemma}, {"take-target", CxVerb::TakeTarget}, {"set-target", CxVerb::SetTarget},
-        {"set-ending", CxVerb::SetEnding},     {"replace-head", CxVerb::ReplaceHead},
+        {"set-ending", CxVerb::SetEnding},     {"replace-head", CxVerb::ReplaceHead}, {"map-lemma", CxVerb::MapLemma},
+        {"map-target", CxVerb::MapTarget},     {"set-verb", CxVerb::SetVerb},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -174,6 +209,20 @@ bool ParseActions(std::string_view text, std::vector<CxAction>& out, const char*
         if (!known) {
             tokens.Fail("unknown action");
             break;
+        }
+        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget) {
+            if (!tokens.Next(literal) || !literal.starts_with('@')) {
+                tokens.Fail("a map action takes @MAP");
+                break;
+            }
+            const auto map = std::ranges::find(maps, literal.substr(1), &CxMap::name);
+            if (map == maps.end()) {
+                tokens.Fail("no such map");
+                break;
+            }
+            a.map = static_cast<int>(map - maps.begin());
+            out.push_back(std::move(a));
+            continue;
         }
         const char* bad = nullptr;
         if (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.value, bad)) {
@@ -216,6 +265,31 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
             continue;
         }
+        if (line.starts_with("//~")) {
+            std::string_view head = line.substr(3);
+            while (head.starts_with(' ')) head.remove_prefix(1);
+            const std::vector<std::string_view> f = SplitTabs(head);
+            CxMap map{f.empty() ? std::string() : std::string(f[0]), {}};
+            bool ok = f.size() == 3 && FamilyName(f[0]) && !f[1].empty() && !f[2].empty();
+            for (std::string_view rest = ok ? f[1] : std::string_view(); ok && !rest.empty();) {
+                const std::size_t space = rest.find(' ');
+                const std::string_view pair = rest.substr(0, space);
+                const std::size_t eq = pair.find('=');
+                ok = eq != 0 && eq != std::string_view::npos && eq + 1 < pair.size() &&
+                     std::ranges::find(map.pairs, pair.substr(0, eq), &std::pair<std::string, std::string>::first) == map.pairs.end();
+                if (ok) map.pairs.emplace_back(pair.substr(0, eq), pair.substr(eq + 1));
+                rest = space == std::string_view::npos ? std::string_view() : rest.substr(space + 1);
+                ok = ok && (space == std::string_view::npos || !rest.empty());
+            }
+            if (!ok) {
+                fail(number, "a map line is //~ MAP <TAB> FROM=TO ... <TAB> what it is for, each FROM once");
+            } else if (std::ranges::find(t.maps, map.name, &CxMap::name) != t.maps.end()) {
+                fail(number, "a second line for the map " + map.name);
+            } else {
+                t.maps.push_back(std::move(map));
+            }
+            continue;
+        }
         if (line.starts_with("//")) continue;
         const std::vector<std::string_view> f = SplitTabs(line);
         if (f.size() != 5 || f[2].empty() || f[3].empty()) {
@@ -247,7 +321,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             continue;
         }
         const char* error = nullptr;
-        if (!ParseActions(f[3], row.actions, error)) {
+        if (!ParseActions(f[3], t.maps, row.actions, error)) {
             fail(number, std::string("actions: ") + error);
             continue;
         }
@@ -371,6 +445,23 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
         case CxField::Text: v = MatchesValue(a, Slice(it->text, it->start, it->length)); break;
         case CxField::Head: v = MatchesValue(a, Slice(it->text, 0, it->start)); break;
         case CxField::Feature: v = a.feature(f, it); break;
+        case CxField::Candidate: {
+            const int count = static_cast<int>(it->group->entries.size());
+            for (int slot = 0; slot < count && !v; slot++) v = MatchesValue(a, ItemLemma(f, it, slot));
+            break;
+        }
+        case CxField::Gram: {
+            const std::string_view codes = it->GAttr(it->selected);
+            for (std::size_t off = 0; off < a.value.size() && !v; off += 2) v = Has(codes, std::string_view(a.value).substr(off, 2));
+            break;
+        }
+        case CxField::FirstWord: {
+            const std::string_view target = it->EntryText(it->selected);
+            const std::size_t space = target.find(' ');
+            if (space == std::string_view::npos) return false;
+            v = MatchesValue(a, target.substr(0, space));
+            break;
+        }
     }
     return v != a.negated;
 }
@@ -409,7 +500,7 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
-void Apply(Flusher& f, Item* origin, const internal::CxAction& a, Selection source) {
+void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
     Item* it = origin;
     for (int d = a.delta; it != nullptr && d > 0; d--) it = it->next;
     for (int d = a.delta; it != nullptr && d < 0; d++) it = it->prev;
@@ -435,6 +526,21 @@ void Apply(Flusher& f, Item* origin, const internal::CxAction& a, Selection sour
             }
             break;
         }
+        case internal::CxVerb::MapLemma:
+        case internal::CxVerb::MapTarget: {
+            const std::string key =
+                a.verb == internal::CxVerb::MapLemma ? ItemLemma(f, it, it->selected) : std::string(it->EntryText(it->selected));
+            for (const auto& [from, to] : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (from == key) {
+                    it->AssignEntrySurface(it->selected, to, source);
+                    break;
+                }
+            }
+            break;
+        }
+        case internal::CxVerb::SetVerb:
+            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            break;
     }
 }
 
@@ -461,7 +567,7 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
                     if (fired) tally->constructionFires[static_cast<std::size_t>(r)]++;
                 }
                 if (!fired) continue;
-                for (const internal::CxAction& a : row.actions) Apply(f, it, a, {Provenance::Rewrite, r});
+                for (const internal::CxAction& a : row.actions) Apply(f, t, it, a, {Provenance::Rewrite, r});
                 break;
             }
         }

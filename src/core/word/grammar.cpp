@@ -714,57 +714,6 @@ void RespectfulPassive(Flusher& f) {
     }
 }
 
-void BenefactiveProvider(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const std::string_view surface = it->group->surface;
-        if (it->selected < 0 || !it->EntryText(it->selected).ends_with("&CJ@")) continue;
-        // もら after its verb, or a word that holds both (見せてもら).
-        Item* start = nullptr;
-        if (surface == "もら" && it->prev != nullptr && it->prev->detail->Yougo()) {
-            // A causative before もらう asks leave, and its に is no giver (相談をさせてもらう).
-            if (it->prev->group->surface == "させ" || it->prev->detail->record == 2) continue;
-            start = it->prev->prev;
-        } else if (surface.ends_with("てもら") || surface.ends_with("でもら")) {
-            start = it->prev;
-        } else {
-            continue;
-        }
-        for (Item* p = start; p != nullptr; p = p->prev) {
-            const std::string_view s = p->group->surface;
-            if (s == "に" || s == "には") {
-                Item* a = p->prev;
-                const std::string ko(p->selected < 0 ? std::string_view() : p->EntryText(p->selected));
-                if (a == nullptr || a->selected < 0 || !Person(a->Attr(a->selected)) || (ko != "에게" && ko != "에게는")) break;
-                p->AssignEntrySurface(p->selected, ko == "에게" ? "(이)가" : "(은)는");
-                // 나, 저, 너 and 누구 before 가 are 내, 제, 네 and 누.
-                const std::string lemma = ItemLemma(f, a, a->selected);
-                const std::string_view subject = lemma == "누구" ? std::string_view("누") : SubjectPronoun(lemma);
-                if (ko == "에게" && !subject.empty()) a->AssignEntrySurface(a->selected, std::string(subject));
-                break;
-            }
-            if (s == "は" || s == "が" || s == "から" || s.empty() || p->detail->Yougo() ||
-                Has("、。,「」『』！？!?", s)) {
-                break;
-            }
-        }
-    }
-}
-
-void GoNotSay(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || p->prev == nullptr || it->group->surface != "い" || !it->detail->Yougo() ||
-            !output::Lemma(it->EntryText(it->selected), f.families).starts_with("말하") ||
-            !Has(" に へ まで から ", " " + p->group->surface + " ") || Person(p->prev->Attr(p->prev->selected)) ||
-            dict::InClass("noun.manner-ni", p->prev->group->surface)) {
-            continue;
-        }
-        if (SelectLemma(f, it, "가다")) continue;
-        output::Conjugated c = output::Conjugating("가다", '&', "", f.families);
-        if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, c.target);
-    }
-}
-
 void PositiveIke(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->group->surface != kJaIke || !it->EntryText(it->selected).starts_with(kKoAn)) continue;
@@ -778,40 +727,6 @@ void PositiveIke(Flusher& f) {
                 it->SelectCandidate(slot, {Provenance::Rewrite});
                 break;
             }
-        }
-    }
-}
-
-namespace {
-
-// Whether the attributive of it modifies a noun of an event (海外であった事件): the first word after it that
-// does not inflect is a verbal noun or one of noun.event.
-bool ModifiesEvent(const Item* it) {
-    const Entry* e = it->DirectEntry(it->DirectIndex());
-    if (e == nullptr || e->dst != "8") return false;
-    const Item* n = it->next;
-    while (n != nullptr && n->detail->Yougo()) n = n->next;
-    if (n == nullptr || n->selected < 0 || At(n->Code(n->selected), 0) != '1') return false;
-    const std::string_view noun = n->group->surface;
-    return Has(n->GAttr(n->selected), "Hd") ||
-           std::ranges::any_of(dict::ClassMembers("noun.event"), [&](std::string_view v) { return noun.ends_with(v); });
-}
-
-}  // namespace
-
-// であ that a place before it read as 에서 만나다: before a noun of an event it is 에서 있다, what happened
-// there; after a noun that is no place partner it is the copula.
-void CopulaDeAru(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "であ" ||
-            !output::Lemma(it->EntryText(it->selected), f.families).starts_with("에서 만나")) {
-            continue;
-        }
-        if (ModifiesEvent(it)) {
-            SelectLemma(f, it, "에서 있다");
-        } else if (!dict::InClass("word.meet-partner", p->group->surface)) {
-            SelectLemma(f, it, "이다");
         }
     }
 }
@@ -832,64 +747,6 @@ void NegativeCopula(Flusher& f) {
             continue;
         }
         if (const std::string_view subject = SubjectPronoun(plemma); !subject.empty()) SelectLemma(f, p, subject);
-    }
-}
-
-void SubjectBeforeGa(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        if (p == nullptr || it->selected < 0 || p->selected < 0) continue;
-        // The subject form 내, 제, 네 that a rule chose for が goes back to 나, 저, 너 where the
-        // が reads as an object (私が好き 내를 → 나를 좋아해).
-        if (it->group->surface == "が" && output::Lemma(it->EntryText(it->selected), f.families) == "(을)를" &&
-            !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
-            const std::string_view own = p->EntryText(p->selected);
-            const std::string_view plain = own == "내" ? "나" : own == "제" ? "저" : own == "네" ? "너" : "";
-            if (!plain.empty()) p->AssignEntrySurface(p->selected, std::string(plain));
-            continue;
-        }
-        // 俺じゃない (이)가 아니다: 내가 아니다.
-        if (it->EntryText(it->selected).starts_with("(이)가 ") && !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty()) p->AssignEntrySurface(p->selected, std::string(subject));
-            continue;
-        }
-        if (output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") continue;
-        if (it->group->surface == "の") {
-            const Item* n = it->next;
-            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) {
-                SelectLemma(f, it, "의");
-                continue;
-            }
-        }
-        // 俺が, and 俺の作った with の as the subject of a clause: 내가.
-        if (it->group->surface == "が" || it->group->surface == "の") {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty() && !p->detail->Yougo()) {
-                if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
-            }
-        }
-    }
-}
-
-void SubjectNo(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        Item* n = it->next;
-        if (p == nullptr || n == nullptr || n->next == nullptr || it->group->surface != "の" || it->selected < 0 ||
-            output::Lemma(it->EntryText(it->selected), f.families) != "의" || p->selected < 0 ||
-            At(p->Code(p->selected), 0) != '1' || n->selected < 0 ||
-            (!dict::InClass("stem.subject-predicate", n->group->surface) &&
-             !(dict::InClass("noun.attribute", p->group->surface) && At(n->Code(n->selected), 0) == '7')) ||
-            n->next->selected < 0 || At(n->next->Code(n->next->selected), 0) != '1') {
-            continue;
-        }
-        if (SelectLemma(f, it, "(이)가")) {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty()) {
-                if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
-            }
-        }
     }
 }
 
@@ -1779,55 +1636,6 @@ void LongVowelAfterKatakana(Flusher& f) {
             ((next >= U'ぁ' && next <= U'ヺ') || text::IsKanji(next) || RuneIn(next, "、。！？」』）…"))) {
             if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, "");
         }
-    }
-}
-
-// A pronoun and the genitive の right before a word (a letter or digit, in the same token
-// or at the start of the next) read as the short possessive (내 책); before punctuation,
-// a particle or a gap they stay 나의.
-void ShortPossessive(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
-        if (n == nullptr || n->group->surface != "の" || it->selected < 0 || n->selected < 0 || it->detail->Yougo() ||
-            ItemLemma(f, n, n->selected) != "의") {
-            continue;
-        }
-        const Item* m = n->next;
-        const int end = n->start + n->length;
-        const bool adjacent =
-            m != nullptr && ((m->tokenIndex == n->tokenIndex && m->start == end) ||
-                             (m->tokenIndex == n->tokenIndex + 1 && end == static_cast<int>(n->text.size()) && m->start == 0));
-        if (!adjacent || m->selected < 0 || At(m->Code(m->selected), 0) == '2' || At(m->Code(m->selected), 0) == '6') continue;
-        if (const char32_t r = text::DecodeRune(m->group->surface).cp; !text::IsLetter(r) && !text::IsDigit(r)) continue;
-        const std::string lemma = ItemLemma(f, it, it->selected);
-        const std::string_view s = it->group->surface;
-        // A phrase that opens with a clause (知らない間に 모르는 사이에) takes the pronoun as its
-        // subject: 내가 모르는 사이에.
-        const std::string_view head = m->EntryText(m->selected).substr(0, m->EntryText(m->selected).find(' '));
-        bool kana = false;  // 知らない間に, not 笑顔 웃는 얼굴
-        for (std::string_view t = m->group->surface; !t.empty() && !kana;) {
-            const text::Rune r = text::DecodeRune(t);
-            kana = r.cp >= U'ぁ' && r.cp <= U'ゖ';
-            t.remove_prefix(r.size);
-        }
-        if (kana && head.size() < m->EntryText(m->selected).size() && (head.ends_with("는") || head.ends_with("던")) &&
-            !SubjectPronoun(lemma).empty() &&
-            (dict::InClass("pronoun.first-person-genitive", s) || dict::InClass("pronoun.second-person-genitive", s))) {
-            TakeTarget(n, At(n->Code(n->selected), 0), "(이)가");
-            if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, std::string(SubjectPronoun(lemma)));
-            continue;
-        }
-        std::string_view target;
-        if ((lemma == "나" || lemma == "저") && dict::InClass("pronoun.first-person-genitive", s)) {
-            target = lemma == "나" ? "내 " : "제 ";
-        } else if (lemma == "너" && dict::InClass("pronoun.second-person-genitive", s)) {
-            target = "네 ";
-        } else {
-            continue;
-        }
-        // The pronoun carries the space; the empty の adds none.
-        TakeTarget(n, At(n->Code(n->selected), 0), "");
-        TakeTarget(it, At(it->Code(it->selected), 0), target);
     }
 }
 

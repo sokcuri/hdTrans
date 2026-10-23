@@ -9,6 +9,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "core/rules/body.h"
@@ -31,7 +32,8 @@ std::string_view ConstructionId(int index);
 namespace internal {
 
 enum class CxField : uint8_t {
-    Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature,
+    Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature, Candidate, Gram,
+    FirstWord,
 };
 
 // How an atom compares: with a literal (rule surface markers, code patterns), with the members of a
@@ -57,12 +59,19 @@ struct CxNode {
     uint32_t end = 0;    // one past the subtree
 };
 
-enum class CxVerb : uint8_t { SelectLemma, TakeTarget, SetTarget, SetEnding, ReplaceHead };
+enum class CxVerb : uint8_t { SelectLemma, TakeTarget, SetTarget, SetEnding, ReplaceHead, MapLemma, MapTarget, SetVerb };
 
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
     std::string value, with;  // with: the new head of replace-head
+    int map = -1;             // map-lemma, map-target: into maps
+};
+
+// A word map declared by "//~ NAME <TAB> FROM=TO ... <TAB> what it is for".
+struct CxMap {
+    std::string name;
+    std::vector<std::pair<std::string, std::string>> pairs;
 };
 
 struct CxRow {
@@ -92,6 +101,7 @@ struct ConstructionTable {
     std::vector<CxFamily> families;
     std::vector<CxNode> nodes;
     std::vector<CxAtom> atoms;
+    std::vector<CxMap> maps;
     std::vector<int> afterPass;  // the family anchored after each pass, -1 for none
     std::vector<CxError> errors;
 };
