@@ -36,6 +36,13 @@ constexpr std::string_view kMarkBPRows = "バビブベボパピプペポ";
 constexpr std::string_view kMarkPu = "プ";
 constexpr std::string_view kMarkMu = "ム";
 constexpr std::string_view kSmallVowels = "ァィゥェォャュョ";
+constexpr std::string_view kFinalRu = "르";
+// Kana ending in a or i: before エール they leave the エ a vowel of its own (ピエール, カナエール);
+// after u or o it may be a glide (ホエール whale).
+constexpr std::string_view kHiatusBefore = "アカサタナハマヤラワガザダバパァイキシチニヒミリギジヂビピィ";
+// ム, ヌ and ス before ール: an English long u with l (tool, pool, rule) does not follow m, n
+// or s, so these are not the ㄹ of English words (アムール 아무르, ヌール 누르, マンスール 만수르).
+constexpr std::string_view kNonEnglishLongU = "ムヌス";
 
 // The characters of s as cells; an invalid byte is the cell U+FFFD.
 void AppendCells(std::vector<std::string_view>& out, std::string_view s) {
@@ -58,21 +65,25 @@ int Vowel(std::string_view s) {
     return static_cast<int>(r.cp - U'가') / 28 % 21;
 }
 
-// The syllable s with the final ㄹ and, for vowel >= 0, that vowel.
-std::string FinalL(std::string_view s, int vowel) {
+// The syllable s with the final (an index of the 28 finals) and, for vowel >= 0, that vowel.
+std::string WithFinal(std::string_view s, int vowel, int final) {
     const text::Rune r = text::DecodeRune(s);
     if (s.empty() || r.size != s.size() || text::Final(r.cp) < 0) return std::string(s);
     const int index = static_cast<int>(r.cp - U'가');
     const int initial = index / 28 / 21;
     std::string out;
-    text::AppendRune(out, static_cast<char32_t>(U'가' + (initial * 21 + (vowel >= 0 ? vowel : index / 28 % 21)) * 28 + 8));
+    text::AppendRune(out, static_cast<char32_t>(U'가' + (initial * 21 + (vowel >= 0 ? vowel : index / 28 % 21)) * 28 + final));
     return out;
 }
+
+// The syllable s with the final ㄹ and, for vowel >= 0, that vowel.
+std::string FinalL(std::string_view s, int vowel) { return WithFinal(s, vowel, 8); }
 
 // A katakana run edited as cells: one katakana, one Hangul syllable or the two spaces
 // of an empty cell of the kana rows.
 struct Run {
     std::vector<std::string_view> cells;
+    std::vector<std::string_view> source;  // the katakana of the run before any edit
     std::vector<std::string_view> scratch;
     std::deque<std::string> composed;  // syllables made here, which cells may point to
     bool fault = false;
@@ -115,6 +126,9 @@ struct Run {
         }
         fault = true;
     }
+
+    // The kana before the last three of the run (the X of Xール), or empty.
+    std::string_view BeforeTail() const { return source.size() >= 4 ? source[source.size() - 4] : std::string_view(); }
 
     void ApplyFinal(long i, int row);
     void AddFinal(long i, int final, std::string_view mark);
@@ -222,6 +236,11 @@ void Run::Matrix(long cursor) {
         } else if (column == 0 && cursor >= Size() - 1) {
             Replace(cursor, search, KanaCell(row, 6));
             Replace(cursor + 1, kLongVowel, "");
+        } else if (column == 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu) &&
+                   kNonEnglishLongU.find(search) != std::string_view::npos) {
+            Replace(cursor, search, WithFinal(KanaCell(row, column), kVowelU, 0));
+            Replace(cursor + 1, kLongVowel, "");
+            Replace(cursor + 1, kMarkRu, kFinalRu);
         } else if (column >= 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu)) {
             // A long u or o before the final ル takes it as ㄹ (ツール 툴, ゴール 골); a long a or
             // i keeps 르 (ダミール 다미르).
@@ -246,6 +265,13 @@ void Run::Matrix(long cursor) {
         Replace(cursor, search, KanaCell(row, cell));
         Replace(cursor + 1, next, "");
         ApplyFinal(cursor, row);
+    } else if (column == 3 && longVowelNext && row == 0 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu) &&
+               !BeforeTail().empty() && kHiatusBefore.find(BeforeTail()) != std::string_view::npos) {
+        // エール after a vowel a or i is the vowel e, not ei, before 르 (ピエール 피에르, イエール
+        // 이에르, カナエール 카나에르).
+        Replace(cursor, search, KanaCell(row, 3));
+        Replace(cursor + 1, kLongVowel, "");
+        Replace(cursor + 1, kMarkRu, kFinalRu);
     } else if (column == 3 && longVowelNext) {
         Replace(cursor, search, KanaCell(row, 3));
         Replace(cursor + 1, kLongVowel, kSourceI);
@@ -303,6 +329,7 @@ bool TransliterateKatakana(std::string_view s, std::string& out) {
         std::size_t end = i;
         while (end < cells.size() && KatakanaCell(cells[end])) end++;
         run.cells.assign(cells.begin() + static_cast<long>(i), cells.begin() + static_cast<long>(end));
+        run.source = run.cells;
         run.Transliterate();
         if (run.fault) return false;
         cells.erase(cells.begin() + static_cast<long>(i), cells.begin() + static_cast<long>(end));
