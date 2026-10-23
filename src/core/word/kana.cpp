@@ -34,6 +34,7 @@ constexpr std::string_view kMarkKu = "ク";
 constexpr std::string_view kMarkBPRows = "バビブベボパピプペポ";
 constexpr std::string_view kMarkPu = "プ";
 constexpr std::string_view kMarkMu = "ム";
+constexpr std::string_view kSmallVowels = "ァィゥェォャュョ";
 
 // The characters of s as cells; an invalid byte is the cell U+FFFD.
 void AppendCells(std::vector<std::string_view>& out, std::string_view s) {
@@ -139,8 +140,10 @@ void Run::ApplyFinal(long i, int row) {
             if (n == 10 && Has(i + 1, kMarkKusu)) Replace(i + 1, kMarkKu, "");
         }
     }
-    // ム before the long mark is a syllable of its own (スムーズ, ムーン).
-    if (At(i + 1) == kMarkMu && At(i + 2) != kLongVowel && variant(25, v)) {
+    // ム closes the syllable (ゲーム 게임) unless ー or a small vowel makes it a syllable (ムーン 문).
+    if (At(i + 1) == kMarkMu && !Has(i + 2, kLongVowel) &&
+        (At(i + 2).empty() || kSmallVowels.find(At(i + 2)) == std::string_view::npos) &&
+        variant(25, v)) {
         Replace(i, At(i), v);
         Replace(i + 1, kMarkMu, "");
     }

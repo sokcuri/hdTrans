@@ -35,6 +35,11 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("ビッグ"), std::string("빅"));
     HD_CHECK_EQ(Katakana("スムーズ"), std::string("스무즈"));
     HD_CHECK_EQ(Katakana("チーム"), std::string("팀"));
+    // ム closes the syllable before it unless ー or a small vowel follows.
+    HD_CHECK_EQ(Katakana("ティアムーン"), std::string("티아문"));
+    HD_CHECK_EQ(Katakana("アムール"), std::string("아무르"));
+    HD_CHECK_EQ(Katakana("ゲーム"), std::string("게임"));
+    HD_CHECK_EQ(Katakana("ハムスター"), std::string("함스타"));
 }
 
 HD_TEST(kana_hiragana_cases) {
