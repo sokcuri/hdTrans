@@ -692,6 +692,28 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(i + 2), kLengthenMark);
         changed = true;
     }
+    // An adjective drawn out at the end of a phrase: the い and ぃ after the い that ends it,
+    // before a pause or a shout's っ, dropped (ずるいぃ, 痛いぃぃ, おいしいいっ). The adjective
+    // is a stem that is not い alone, いい after a word (きもち+いいいいい) or たい after a verb
+    // stem (見てみたいいい); a run of い alone is a cry (いいいいい).
+    for (size_t k = 1; k < rs.size(); k++) {
+        if (rs[k - 1] != U'い' || !In(rs[k], U"いぃ")) continue;
+        size_t end = k;
+        while (end < rs.size() && In(rs[end], U"いぃ")) end++;
+        size_t q = end;
+        while (q < rs.size() && In(rs[q], U"っッ")) q++;
+        if (q < rs.size() && !IsPause(rs[q])) continue;
+        size_t from = k - 1;
+        while (from > 0 && k - 1 - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+        const std::u32string_view before = std::u32string_view(rs).substr(from, k - 1 - from);
+        const bool stem = e.StemTagged(rs, from, k - 1, "H") && before.find_first_not_of(U'い') != std::u32string_view::npos;
+        const bool good = k >= 2 && rs[k - 2] == U'い' && k - 2 > from && e.Reach(rs, from, k - 2) == k - 2 &&
+                          e.Tags(U"い").find('H') != std::string::npos;
+        const bool wish = before.ends_with(U"た") && k >= 3 && e.StemEnds(rs, from, k - 2);  // 見てみたいいい
+        if (!stem && !good && !wish) continue;
+        rs = Spliced(rs, k, U"", end);
+        changed = true;
+    }
     // A word drawn out syllable by syllable, a ー after two or more of its kana (とーにーかーく,
     // だーかーらー): the word without the marks, drawn out at the end when the last mark
     // ends the run, when the dictionary has it.

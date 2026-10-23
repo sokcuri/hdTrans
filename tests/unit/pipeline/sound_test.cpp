@@ -558,6 +558,12 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // A sound key that starts inside the stem before the mark does not hold it (ゴォ of
         // すご), one that starts a word does (おーい).
         {"すごぉぉい！", "すごい！"},
+        // The い and ぃ that draw out an adjective at the end of a phrase go; い alone stays.
+        {"うるさいぃ！", "うるさい！"},
+        {"すごいいいっ！", "すごいっ！"},
+        {"冷たいぃぃ", "冷たい"},
+        {"いいいい！", "いいいい！"},
+        {"うるさいいね", "うるさいいね"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
