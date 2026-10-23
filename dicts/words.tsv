@@ -5981,13 +5981,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツェペリナイ	체펠리나이	N110	VFd		GN						ツェペリナイ	w:5974
 ツシマヤマネコ	쓰시마삵	N110			GN						ツシマヤマネコ	w:5975
 ツチノコ	쓰치노코	N110			GN						ツチノコ	w:5976
-ツッコ	처&MK@	M425			GN				xxx		ツッコむ	w:5977
+ツッコ	태클을 &L1@	M425			GN				xxx		ツッコむ	w:26756
+ツッコ	처&MK@	M425			GN						ツッコむ	w:5977
 ツッコ	돌입&AV@	M425			GN						ツッコむ	w:5978
 ツッコ	파고&L4@	M425			GN				llm		ツッコむ	w:5979
 ツッコ	추궁&AV@	M425			GN				llm		ツッコむ	w:5980
 ツッコ	참견&AV@	M425			GN				llm		ツッコむ	w:5981
 ツッコ	받아&AO@	M425			GN				llm		ツッコむ	w:5982
-ツッコミ	츳코미	N110	VHn		GN				llm		ツッコミ	w:5983
+ツッコミ	태클	N110			GN				llm		ツッコミ	w:5983
 ツツガムシ病	쓰쓰가무시증	N110	UTi		GN				llm		つつがむしびょう	w:5984
 ツツジ目	진달래목	N110			GN						ツツジもく	w:5985
 ツツジ科	진달래과	N110			GN						ツツジか	w:5986
