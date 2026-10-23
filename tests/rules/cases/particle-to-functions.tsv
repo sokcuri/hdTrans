@@ -40,3 +40,5 @@ dict:gram:toshite:tari	学生として当然だ。	학생으로서 당연하다.
 dict:gram:toshite:adverb	執事までが唖然として固まった。	집사까지가 아연하게 굳어졌다.	fix	local
 dict:gram:taru:tari	これぞまさに搭乗者の歴然たる差ってやつ？	이거야 그야말로 탑승자의 역력한 차이는 녀석?	fix	local
 dict:gram:taru:tari	学生たる者。	학생인 사람.	keep	local
+dict:gram:dato:focus-quote	社交界に入るのが当たり前だとしか思っていなかった。	사교계에 들어가는 것이 당연하다고밖에 생각하지 않았었다.	fix	local-ending
+dict:gram:dato:focus-quote	静かだと困る。	조용하다면 곤란하다.	keep	local-ending
