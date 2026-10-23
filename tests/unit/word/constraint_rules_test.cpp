@@ -98,7 +98,8 @@ const dict::Snapshot* Dictionary() {
          "余\t남&F4@\tM418\t\t\tGN\t100\n"
          "お\t\tN110\t\tZ6\tGN\t101\n"
          "お待ち\t대기\tN110\t\t\tGN\t102\n"
-         "お休み\t휴가\tN110\t\t\tGN\t103\n"},
+         "お休み\t휴가\tN110\t\t\tGN\t103\n"
+         "いただけ\t받을 수 &HN@\tM427\t\t\tGN\t104\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -151,7 +152,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{33});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{34});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -320,6 +321,17 @@ HD_TEST(constraint_o_stem_nasai) {
         {"お待ちなさいませ", "お待ちなさいませ", "お待ち", ""},
         {"お待ちください", "お待ちください", "お待ち", "대기"},
         {"お休みなさい", "お休みなさい", "お休み", "휴가"},
+    });
+}
+
+// いただけ before だ, で, じゃ, に, の or か is いた and だけ (待っていただけだ); before a verb
+// ending it stays (待っていただける).
+HD_TEST(constraint_itadake_dake) {
+    CheckCases({
+        {"待っていただけだ", "いただけだ", "いただけ", ""},
+        {"待っていただけですから", "いただけですから", "いただけ", ""},
+        {"待っていただける", "いただける", "いただけ", "받을 수 &HN@"},
+        {"待っていただけない", "いただけない", "いただけ", "받을 수 &HN@"},
     });
 }
 

@@ -71,6 +71,8 @@ constexpr ConstraintRule kRules[] = {
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
      "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
+    {"itadake-dake", ConstraintWord::Source, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
+     "だ·で·じゃ·に·の·か 앞의 いただけ는 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
     {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
@@ -118,6 +120,8 @@ constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～"
 constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "なけ", "なきゃ", "なくちゃ", "なさ", "ねえ",
                                            "ねー", "ます", "ませ", "まし", "て", "ちゃ", "ちま", "たら",
                                            "たり", "たい", "たく", "よう", "つつ", "ながら"};
+// What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
+constexpr std::string_view kCopulaStarts[] = {"だ", "で", "じゃ", "に", "の", "か"};
 // What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
 // ていただく).
 constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
@@ -289,6 +293,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("上が");
     case ConstraintContext::BeforeNasai:
         return after.starts_with("なさい");
+    case ConstraintContext::BeforeCopula:
+        return StartsWithAny(after, kCopulaStarts);
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });

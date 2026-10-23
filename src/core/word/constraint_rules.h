@@ -51,6 +51,7 @@ enum class ConstraintContext : uint8_t {
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)
     BeforeNasai,        // なさい or なさいませ follows (お待ちなさい)
+    BeforeCopula,       // だ, で, じゃ, に, の or か follows, which no verb stem takes (いただけだ)
 };
 
 // The senses a rule rejects.
