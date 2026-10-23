@@ -25,22 +25,25 @@ cx:even-before-passive:10	このまま放置でもされない限り	이대로 �
 cx:even-before-passive:10	修理でもされたのか	수리라도 된 건가	fix	rewrites
 cx:even-before-passive:10	学校でも勉強する。	학교에서도 공부한다.	keep	rewrites
 cx:even-before-passive:10	家でも食べられる。	집에서도 먹을 수 있다.	keep	rewrites
-rewrite:comitative-to	５と５。	5와 5.	fix	rewrites
-rewrite:comitative-to	３と４を足す。	3과 4를 더한다.	fix	rewrites
-rewrite:comitative-to	木材300と鉄500を準備せよ！	목재 300과 철 500을 준비하라!	fix	rewrites
-rewrite:comitative-to	「春」や「秋」とチームを組んだ。	「봄」이나 「가을」과 팀을 짰다.	fix	rewrites
-rewrite:comitative-to	３と答えた。	3이라고 대답했다.	fix	rewrites
-rewrite:comitative-to	修正液で消して０と書いてあった	수정액으로 지워 0이라고 써 있었다	fix	rewrites
-rewrite:comitative-to	答えは５と言った。	대답은 5라고 말했다.	keep	rewrites
-rewrite:comitative-to	「はい」と言った。	「네」라고 말했다.	keep	rewrites
-rewrite:comitative-to	５と一致する。	5와 일치한다.	fix	rewrites
-rewrite:comitative-to	１０と交換する。	10과 교환한다.	fix	rewrites
-rewrite:comitative-to	「秋」と戦った。	「가을」과 싸웠다.	fix	rewrites
-rewrite:comitative-to	答えを３とする。	대답을 3으로 한다.	keep	rewrites
-rewrite:comitative-to	「お疲れ～」と田中と佐藤	「수고했어~」라고 타나카와 사토	fix	rewrites
-rewrite:comitative-to	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
-rewrite:comitative-to	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
-rewrite:comitative-to	「潜水母艦」と複数の潜水艦を編成せよ！	「잠수모함」과 복수의 잠수함을 편성하라!	keep	rewrites
+cx:comitative-to:20	５と５。	5와 5.	fix	rewrites
+cx:comitative-to:20	３と４を足す。	3과 4를 더한다.	fix	rewrites
+cx:comitative-to:20	木材300と鉄500を準備せよ！	목재 300과 철 500을 준비하라!	fix	rewrites
+cx:comitative-to:50	「春」や「秋」とチームを組んだ。	「봄」이나 「가을」과 팀을 짰다.	fix	rewrites
+cx:comitative-to:30	３と答えた。	3이라고 대답했다.	fix	rewrites
+cx:comitative-to:30	修正液で消して０と書いてあった	수정액으로 지워 0이라고 써 있었다	fix	rewrites
+cx:comitative-to:10	答えは５と言った。	대답은 5라고 말했다.	keep	rewrites
+cx:comitative-to:40	「はい」と言った。	「네」라고 말했다.	keep	rewrites
+cx:comitative-to:10	５と一致する。	5와 일치한다.	fix	rewrites
+cx:comitative-to:10	１０と交換する。	10과 교환한다.	fix	rewrites
+cx:comitative-to:10	５と一致する。	rule:cx:comitative-to:10=(와)과	fix	rewrites
+cx:comitative-to:40	「秋」と戦った。	「가을」과 싸웠다.	fix	rewrites
+cx:comitative-to:20	答えを３とする。	대답을 3으로 한다.	keep	rewrites
+cx:comitative-to:30	３と４を足す。	!rule:cx:comitative-to:30	keep	rewrites
+cx:comitative-to:50	「はい」と言った。	「네」라고 말했다.	keep	rewrites
+cx:comitative-to:50	「お疲れ～」と田中と佐藤	「수고했어~」라고 타나카와 사토	fix	rewrites
+cx:comitative-to:50	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
+cx:comitative-to:50	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
+cx:comitative-to:50	「潜水母艦」と複数の潜水艦を編成せよ！	「잠수모함」과 복수의 잠수함을 편성하라!	keep	rewrites
 cx:no-after-na:10	元気そうなのが一番だ。	씩씩한 것이 제일이다.	current	rewrites
 cx:no-after-na:10	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
 cx:no-after-na:10	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites

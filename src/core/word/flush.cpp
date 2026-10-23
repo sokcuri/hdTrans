@@ -65,7 +65,6 @@ constexpr Pass kTextPasses[] = {
     {"ShortPossessive", ShortPossessive},
     {"ParallelNoka", ParallelNoka},
     {"OfferPromise", OfferPromise},
-    {"ComitativeTo", ComitativeTo},
     {"PluralPronoun", PluralPronoun},
     {"HumbleFirstPerson", HumbleFirstPerson},
     {"ChanAfterKatakana", ChanAfterKatakana},

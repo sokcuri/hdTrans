@@ -416,6 +416,16 @@ bool PauseOrEnd(const Item* it) {
     return InSet(kCommaItems, s) || InSet(kSentenceEndItems, s) || InSet(kClosingQuoteItems, s) || s == "。";
 }
 
+bool NumberSurface(std::string_view s) {
+    if (s.empty()) return false;
+    for (std::string_view rest = s; !rest.empty(); rest.remove_prefix(text::DecodeRune(rest).size)) {
+        const char32_t r = text::DecodeRune(rest).cp;
+        const bool digit = (r >= U'0' && r <= U'9') || (r >= U'０' && r <= U'９');
+        if (!digit && !RuneIn(r, "〇一二三四五六七八九十百千万億")) return false;
+    }
+    return true;
+}
+
 bool OpensLine(const Worker& w, const Item* it) {
     std::string_view before = it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
     for (int t = it->tokenIndex;;) {
@@ -1353,8 +1363,6 @@ bool RieulStem(std::string_view lemma) {
     return text::Final(DecodeLastRune(lemma).cp) == text::kFinalRieul;
 }
 
-bool QuoteVerbFollows(const Item* it);
-
 // Whether the と of item it, with no pause after it, joins an event that followed it in the
 // past sentence ending at last (振り返ると彼女がいた): the verb before it is no state of
 // いる or ある, nor 言う after か or から or quoting (というと, から言うと), and no word of saying or
@@ -1457,7 +1465,8 @@ bool QuoteEnd(const Worker& w, const Item* it) {
     return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)");
 }
 
-// Whether the item starts with a verb of saying or thinking, or is 聞く.
+}  // namespace
+
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
@@ -1466,6 +1475,8 @@ bool QuoteVerbFollows(const Item* it) {
     }
     return false;
 }
+
+namespace {
 
 // Whether a verb of thinking stands within four items after it, with no predicate and no clause
 // boundary in between.
@@ -1770,21 +1781,6 @@ void LongVowelAfterKatakana(Flusher& f) {
         }
     }
 }
-
-namespace {
-
-// Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty.
-bool NumberSurface(std::string_view s) {
-    if (s.empty()) return false;
-    for (std::string_view rest = s; !rest.empty(); rest.remove_prefix(text::DecodeRune(rest).size)) {
-        const char32_t r = text::DecodeRune(rest).cp;
-        const bool digit = (r >= U'0' && r <= U'9') || (r >= U'０' && r <= U'９');
-        if (!digit && !RuneIn(r, "〇一二三四五六七八九十百千万億")) return false;
-    }
-    return true;
-}
-
-}  // namespace
 
 // A pronoun and the genitive の right before a word (a letter or digit, in the same token
 // or at the start of the next) read as the short possessive (내 책); before punctuation,
@@ -2257,47 +2253,6 @@ void OfferPromise(Flusher& f) {
         const int to = close >= 0 ? close : f.w.TokenCount() - 1;
         for (int k = from; k <= to; k++) quote += f.w.Tok(k).text;
         it->AssignDirectSlot(it->DirectIndex(), OldSpeech(quote) || surface.ends_with("くれてや") ? "1마" : "3게");
-    }
-}
-
-void ComitativeTo(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        Item* n = it->next;
-        if (p == nullptr || n == nullptr || it->selected < 0 || p->selected < 0 || n->selected < 0) continue;
-        std::string_view bracket;
-        if (it->group->surface == "と") {
-            if (!NumberSurface(p->group->surface)) continue;
-        } else if (it->group->surface == "」と" || it->group->surface == "』と") {
-            // A bracketed word span the phrase or sound stage already read is an utterance, so its と quotes.
-            if (At(p->Code(p->selected), 0) != '1' || (p->Fixed() && f.w.Span(p->tokenIndex) == tokenizer::kSpanWord) ||
-                p->prev == nullptr ||
-                !Has("「『", p->prev->group->surface)) {
-                continue;
-            }
-            bracket = "」";
-        } else {
-            continue;
-        }
-        const std::string lemma = ItemLemma(f, it, it->selected);
-        const std::string_view bare = bracket.empty() || !lemma.starts_with(bracket) ? std::string_view(lemma)
-                                                                                      : std::string_view(lemma).substr(bracket.size());
-        if (bare != "(으)로" && bare != "(이)라고" && bare != "라고") continue;
-        const bool quote = QuoteVerbFollows(n) || IsAny(n, dict::ClassMembers("verb.naming"));
-        const std::string after = n->next != nullptr ? n->next->group->surface : std::string();
-        bool partner = !quote && At(n->Code(n->selected), 0) == '1';
-        if (bracket.empty()) {
-            const bool sound = !after.empty() && RuneIn(text::DecodeRune(after).cp, "しすさせ");
-            partner = partner && after != "は" && after != "が" && (after.empty() || !sound);
-        } else {
-            partner = partner && Has(" を の も や と ", " " + after + " ");
-        }
-        const char cls = At(it->Code(it->selected), 0);
-        if (IsAny(n, dict::ClassMembers("word.comitative")) || partner) {
-            TakeTarget(it, cls, std::string(bracket) + "(와)과");
-        } else if (quote && bracket.empty()) {
-            TakeTarget(it, cls, "(이)라고");
-        }
     }
 }
 

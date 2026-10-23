@@ -57,6 +57,10 @@ bool Person(std::string_view attr);
 bool PauseOrEnd(const Item* it);
 // Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
+// Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
+bool NumberSurface(std::string_view s);
+// Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
+bool QuoteVerbFollows(const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
@@ -129,7 +133,6 @@ void ParallelNoka(Flusher& f);
 // 手伝ってあげます), reads as a promise (가르쳐 줄게, 도와 드릴게요), or 주마 in old or
 // haughty speech.
 void OfferPromise(Flusher& f);
-void ComitativeTo(Flusher& f);
 
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);

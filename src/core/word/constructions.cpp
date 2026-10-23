@@ -9,6 +9,7 @@
 #include "core/dict/codes.h"
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
+#include "core/tokenizer/token.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
 
@@ -40,6 +41,10 @@ constexpr NamedFeature kFeatures[] = {
          return !lemma.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with(lemma + " ");
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
+    {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
+    {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
+    // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
+    {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };
