@@ -48,3 +48,4 @@ rewrite:hodo-degree	かつてない程のテンションアップ。	전에 없�
 rewrite:hodo-degree	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
 rewrite:hodo-degree	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 rewrite:hodo-degree	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
+rewrite:de-scene	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

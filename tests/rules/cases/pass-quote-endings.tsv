@@ -19,3 +19,7 @@ rewrite:geot-before-mitai	早々に見抜かれてたみたいですけど	일�
 rewrite:geot-before-mitai	夏休み前にも来てたみたいだけど	여름 방학 전에도 오고 있었던 것 같지만	fix	rewrites
 rewrite:geot-before-mitai	来たみたいだ。	온 것 같다.	keep	rewrites
 rewrite:geot-before-mitai	子供みたいだ。	아이 같다.	keep	rewrites
+rewrite:terminal-before-quote	疲れた、とうとう倒れた。	지쳤다, 드디어 쓰러졌다.	keep	rewrites
+rewrite:terminal-before-quote	終わった、とにかく帰ろう。	끝났다, 어쨌든 돌아가자.	keep	rewrites
+rewrite:terminal-before-quote	終わった、ところで君は？	끝났다, 그런데 너는?	keep	rewrites
+rewrite:terminal-before-quote	笑った、とても楽しそうに。	웃었다, 무척 즐거운 듯이.	keep	rewrites

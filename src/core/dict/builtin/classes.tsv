@@ -62,6 +62,7 @@
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
+//= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
@@ -1023,6 +1024,25 @@ noun.label-role	部員
 noun.label-role	生徒
 noun.label-role	教師
 noun.label-role	医者
+
+noun.manner-ni	一括り
+noun.manner-ni	ひとくくり
+noun.manner-ni	一言
+noun.manner-ni	ひとこと
+noun.manner-ni	一口
+noun.manner-ni	端的
+noun.manner-ni	簡単
+noun.manner-ni	正直
+noun.manner-ni	素直
+noun.manner-ni	率直
+noun.manner-ni	具体的
+noun.manner-ni	大雑把
+noun.manner-ni	おおざっぱ
+noun.manner-ni	手短
+noun.manner-ni	大まか
+noun.manner-ni	一般的
+noun.manner-ni	有り体
+noun.manner-ni	ありてい
 
 noun.not-verbal	全部
 noun.not-verbal	全員
