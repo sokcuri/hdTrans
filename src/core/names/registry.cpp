@@ -41,6 +41,16 @@ std::vector<std::size_t> RuneStarts(std::string_view s) {
 
 bool IsRuneStartByte(char c) { return (static_cast<unsigned char>(c) & 0xC0) != 0x80; }
 
+// Whether the text after a word gives it as a name: と名乗る, と名付ける (シロとか名付けよう).
+bool NamingCue(std::string_view after) {
+    for (const std::string_view q : {"と", "とか", "って"}) {
+        if (!after.starts_with(q)) continue;
+        const std::string_view verb = after.substr(q.size());
+        if (verb.starts_with("名乗") || verb.starts_with("名付け") || verb.starts_with("名づけ")) return true;
+    }
+    return false;
+}
+
 // Whether the text after a word makes it the doer of a favour: に with てもらう or 頼む
 // (Xに作ってもらった, Xに頼んで), or が with てくれる (Xが作ってくれた), in its sentence.
 bool AgentCue(std::string_view after) {
@@ -316,8 +326,8 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
             count(agents_, std::string(run.text), 10);
         }
-        if (!run.kanji && RuneCount(run.text) >= 2 && line.substr(run.end).starts_with("と名乗") && !RoleLike(run.text) &&
-            !Flags(run.text).role) {
+        if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
+            !RoleLike(run.text) && !Flags(run.text).role) {
             count(gloss_, std::string(run.text), 3);
         }
     }
