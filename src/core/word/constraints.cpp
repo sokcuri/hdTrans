@@ -69,6 +69,8 @@ constexpr ConstraintRule kRules[] = {
      "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
     {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
+    {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
+     "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
     {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
@@ -212,6 +214,13 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return source == rule.source;
     case ConstraintWord::EndsInDe:
         return text::RuneCount(source) >= 2 && source.ends_with("で");
+    case ConstraintWord::OStem: {
+        // The greetings お帰りなさい and お休みなさい are no orders.
+        constexpr std::string_view kGreetings[] = {"お帰り", "おかえり", "お休み", "おやすみ"};
+        return source.starts_with("お") && text::RuneCount(source) >= 3 &&
+               NameClassOf(source.substr(source.size() - std::string_view("い").size())) == kClassHiragana &&
+               std::find(std::begin(kGreetings), std::end(kGreetings), source) == std::end(kGreetings);
+    }
     }
     return false;
 }
@@ -278,6 +287,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なる") && !after.starts_with("なるべく") && !after.starts_with("なるほど");
     case ConstraintContext::BeforeAgaru:
         return after.starts_with("上が");
+    case ConstraintContext::BeforeNasai:
+        return after.starts_with("なさい");
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });

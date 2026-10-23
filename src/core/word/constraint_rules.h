@@ -14,6 +14,8 @@ enum class ConstraintWord : uint8_t {
     Kanji,     // a kanji word not after another kanji or the prefixes お and ご
     Source,    // the word whose source is the rule's source
     EndsInDe,  // a word of two or more characters whose source ends in で (歳で, 途中で)
+    OStem,     // お and a verb stem ending in hiragana, three characters or more (お待ち, おやめ),
+               // not the greetings お帰り and お休み
 };
 
 // What must be next to the word.
@@ -48,6 +50,7 @@ enum class ConstraintContext : uint8_t {
     NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)
+    BeforeNasai,        // なさい or なさいませ follows (お待ちなさい)
 };
 
 // The senses a rule rejects.

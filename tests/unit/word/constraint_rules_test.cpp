@@ -95,7 +95,10 @@ const dict::Snapshot* Dictionary() {
          "まで\t까지\tP200\t\t\tGN\t97\n"
          "余り\t나머지\tN110\t\t\tGN\t98\n"
          "余り\t별로\tN300\t\t\tGN\t99\n"
-         "余\t남&F4@\tM418\t\t\tGN\t100\n"},
+         "余\t남&F4@\tM418\t\t\tGN\t100\n"
+         "お\t\tN110\t\tZ6\tGN\t101\n"
+         "お待ち\t대기\tN110\t\t\tGN\t102\n"
+         "お休み\t휴가\tN110\t\t\tGN\t103\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -148,7 +151,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{32});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{33});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -306,6 +309,17 @@ HD_TEST(constraint_tachidachi_before_agaru) {
         {"一人立ちする", "一人立ちする", "一人立ち", "독립"},
         {"一人立ち", "一人立ち", "一人立ち", "독립"},
         {"一人立ち、", "一人立ち、", "一人立ち", "독립"},
+    });
+}
+
+// お and a verb stem before なさい is the order of the verb, not a noun (お待ちなさい); the
+// greeting お休みなさい and お待ち elsewhere keep the noun.
+HD_TEST(constraint_o_stem_nasai) {
+    CheckCases({
+        {"お待ちなさい", "お待ちなさい", "お待ち", ""},
+        {"お待ちなさいませ", "お待ちなさいませ", "お待ち", ""},
+        {"お待ちください", "お待ちください", "お待ち", "대기"},
+        {"お休みなさい", "お休みなさい", "お休み", "휴가"},
     });
 }
 
