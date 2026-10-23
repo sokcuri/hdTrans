@@ -305,7 +305,7 @@ bool ExclamationNa(std::string_view s, size_t pos, Match& m) {
         if (!Lit(s, p, "な")) return false;
         return Repeat(s, p, InSet(U"ぁあー～"), 0, kUnbounded, [&](size_t q) {
             size_t r = q;
-            if (!OneOf(s, r, U"！!？?。…‥」』）") && q != s.size()) return false;
+            if (!OneOf(s, r, U"！!？?。、…‥」』）") && q != s.size()) return false;
             m.group[2] = Span(s, p, q);
             m.group[3] = Span(s, q, r);
             m.end = r;
