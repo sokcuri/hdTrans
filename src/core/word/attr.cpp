@@ -174,6 +174,25 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
+bool Item::AfterQuestionWord() const {
+    static constexpr std::string_view kQuestionWords[] = {
+        "何", "なに", "なん", "なんで", "何で", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どうして",
+        "どう", "どれ", "どちら", "どっち", "どんな", "どの", "一体", "いったい", "いくら"};
+    for (const Item* x = this; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
+        // Not an indefinite (どこにでも, 何か, 誰も, いつも).
+        const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();
+        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || after.starts_with("か")) {
+            continue;
+        }
+        for (const std::string_view q : kQuestionWords) {
+            if (s == q) return true;
+        }
+    }
+    return false;
+}
+
 bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
@@ -242,6 +261,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Vp") return detail != nullptr && detail->record == 4;
         // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
         if (c == "Nq") return ReadsCount(i);
+        // Qw: a question word is the word or comes before it in its sentence.
+        if (c == "Qw") return AfterQuestionWord();
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {

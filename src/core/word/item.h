@@ -214,6 +214,9 @@ public:
     bool StartsSentence() const;
     // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
     bool InQuote() const;
+    // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
+    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
+    bool AfterQuestionWord() const;
     bool JoinsNext() const;
     // Whether candidate i reads the word as a count (rule code Nq): a number or 半, or a number
     // (kanji or digits, or 数, 何, 幾 before it) and a counter coded Ct, read with digits or a
