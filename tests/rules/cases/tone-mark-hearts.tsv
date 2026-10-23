@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+protect:tone-mark	「きもちいい♥」	「기분 좋다♥」	fix	protect
+protect:tone-mark	「せんぱい♡」	「선배♡」	fix	protect
+protect:tone-mark	「だいすき♥」	「너무 좋아♥」	fix	protect
+protect:tone-mark	「おねがい♡」	「부탁♡」	fix	protect
+protect:tone-mark	「あんっ♡」	「앙♡」	keep	protect
+protect:tone-mark	「ふふ♪」	「후후♪」	keep	protect

@@ -248,7 +248,7 @@ size_t StyleCodeLength(std::string_view s, char before) {
 
 bool IsForeign(char32_t r) {
     if (r < 0x80 || (r >= 0xFF61 && r <= 0xFF9F) || (r >= U'ぁ' && r <= U'ん') || (r >= U'ァ' && r <= U'ヺ') ||
-        r == U'ー' || r == U'—' || text::IsKanji(r)) {
+        r == U'ー' || r == U'—' || text::IsKanji(r) || RuneIn(r, kToneMarks)) {
         return false;
     }
     return !tokenizer::IsCp932Symbol(r);

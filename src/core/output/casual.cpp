@@ -49,7 +49,7 @@ std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
             if (!line.substr(0, at).ends_with(end)) continue;
             std::string_view after = line.substr(at);
             for (text::Rune d = text::DecodeRune(after);
-                 d.size > 0 && std::u32string_view(U"~～―ー─-♪").find(d.cp) != std::u32string_view::npos;
+                 d.size > 0 && std::u32string_view(U"~～―ー─-♪♡♥❤").find(d.cp) != std::u32string_view::npos;
                  d = text::DecodeRune(after)) {
                 after.remove_prefix(d.size);
             }
@@ -84,7 +84,7 @@ bool WordEnds(std::string_view s) {
     if (s.empty()) return true;
     const char32_t c = text::DecodeRune(s).cp;
     return text::IsSpace(c) ||
-           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪").find(c) != std::u32string_view::npos;
+           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪♡♥❤").find(c) != std::u32string_view::npos;
 }
 
 // The spoken form of the written word at the start of s (것은 건, 무엇을 뭘) and the bytes it

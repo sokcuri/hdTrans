@@ -336,7 +336,7 @@ namespace {
 
 bool SentenceMark(char32_t r) {
     return r == U'。' || r == U'！' || r == U'？' || r == U'…' || r == U'‥' || r == U'．' || r == U'!' || r == U'?' ||
-           r == U'.' || r == U'♪';
+           r == U'.' || r == U'♪' || r == U'♡' || r == U'♥' || r == U'❤';
 }
 
 bool Hiragana(char32_t r) { return r >= U'ぁ' && r <= U'ゖ'; }

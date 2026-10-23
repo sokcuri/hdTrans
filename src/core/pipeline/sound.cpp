@@ -369,7 +369,7 @@ private:
 // opening bracket, a sentence end, a space or a stutter (お、おい).
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
-    return In(rs_[p - 1], U"\n「『（(。！？!?♪ 　―");
+    return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
 }
 
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
