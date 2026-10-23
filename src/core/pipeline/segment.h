@@ -46,7 +46,9 @@ bool Conjunctive(std::string_view s);
 // spaces, ideographic spaces and tabs that holds a tab or two or more characters, with
 // characters of the line on both sides (lineBefore, lineAfter: the line goes on before
 // or after s), unless a kanji standing alone is on each side, a two-character name
-// padded to the width of three (林  涛). The leading white space of a line is none.
+// padded to the width of three (林  涛). The leading white space of a line is none, and
+// neither are exactly two ASCII spaces after a hiragana (a particle or an inflected
+// ending) or before a copula, an auxiliary, a particle or sentence punctuation.
 size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter);
 
 // Whether the white space at s[i] stands between two words of a line: characters other

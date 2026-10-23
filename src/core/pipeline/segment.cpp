@@ -61,6 +61,31 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
     return n;
 }
 
+// Words that follow another word inside one clause and so never start a column: a
+// copula, an auxiliary or a particle, matched at the start of the hiragana run that
+// begins a column (kBoundStart) or as the whole run (kBoundWhole).
+constexpr std::string_view kBoundStart[] = {
+    "です", "でし", "である", "じゃ", "だっ", "だろ", "だよ", "だね", "だな", "ます", "まし", "ませ", "ない",
+    "なかっ", "らしい", "みたい", "ような", "ように", "ようだ", "そうだ", "そうな", "たいで", "たかっ", "から",
+    "まで", "より", "だけ", "しか", "ばかり", "など", "くらい", "ぐらい", "ほど", "には", "では", "とは", "にも",
+    "でも", "って"};
+constexpr std::string_view kBoundWhole[] = {"だ", "が", "を", "に", "へ", "で", "と", "も", "は", "の",
+                                            "や", "か", "よ", "ね", "わ", "ぞ", "さ", "な", "たい"};
+
+// Whether s starts with a word that only follows another one in the same clause, or with
+// punctuation that ends or splits a sentence or closes a bracket.
+bool StartsBound(std::string_view s) {
+    if (RuneIn(text::DecodeRune(s).cp, U"。．、，！？!?…‥」』）)】〉》")) return true;
+    const std::string_view run = s.substr(0, RunOf(s, IsHiraganaRune));
+    for (const std::string_view w : kBoundStart) {
+        if (run.starts_with(w)) return true;
+    }
+    for (const std::string_view w : kBoundWhole) {
+        if (run == w) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool KanaSpace(std::string_view s, size_t i) {
@@ -98,6 +123,10 @@ size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) 
     const size_t end = i + blanks;
     const text::Rune next = text::DecodeRune(s.substr(end));
     if (end == s.size() ? !lineAfter : lineEnd(next.cp)) return i;
+    // Exactly two ASCII spaces inside a clause, typed as extra spacing between words: after
+    // a particle or an inflected ending (both written in hiragana) or before a copula, an
+    // auxiliary, a particle or punctuation (猫が  好き  です, 私は  学生です  。).
+    if (run == "  " && (IsHiraganaRune(last.cp) || StartsBound(s.substr(end)))) return i;
     // A single kanji on each side, each standing alone: a two-character name padded to the
     // width of three (林  涛).
     const auto alone = [&](size_t at, bool more) {

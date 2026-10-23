@@ -163,6 +163,17 @@ HD_TEST(pipeline_segment_column_gaps) {
         {"林  涛", "林  涛"},
         {"林  涛  歌手", "林  涛|[  ]歌手"},
         {"林業  涛", "林業|[  ]涛"},
+        // Two ASCII spaces inside a clause are no separator; three are, and so are two
+        // ideographic spaces.
+        {"猫が  好き  です", "猫が  好き  です"},
+        {"私は  学生です  。", "私は  学生です  。"},
+        {"学生  です", "学生  です"},
+        {"彼  は来た", "彼  は来た"},
+        {"1話  長めのプロローグ", "1話|[  ]長めのプロローグ"},
+        {"友人  : 「いつき！」", "友人|[  ]: 「いつき！」"},
+        {"名前  はじまり", "名前|[  ]はじまり"},
+        {"猫が   好き", "猫が|[   ]好き"},
+        {"猫が　　好き", "猫が|[　　]好き"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(text(c.in), std::string(c.want));
     // A separator after a span, before one, and after a 、 that ends a chunk.
