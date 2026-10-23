@@ -13,6 +13,7 @@ enum class ConstraintWord : uint8_t {
     Hiragana,  // a hiragana run of two or more characters outside a kana or kanji word
     Kanji,     // a kanji word not after another kanji or the prefixes お and ご
     Source,    // the word whose source is the rule's source
+    EndsInDe,  // a word of two or more characters whose source ends in で (歳で, 途中で)
 };
 
 // What must be next to the word.
@@ -39,6 +40,8 @@ enum class ConstraintContext : uint8_t {
     BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
     OpeningKotode,      // only spaces, opening brackets or an ellipsis before the word in its line, うことで、
                         // after it (ということで、 at the start of a sentence)
+    BeforeAru,          // ある, あり, あっ, あれ or あろ follows and every sense of the word is a noun
+                        // (歳であり: the copula である; not まである)
     NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)

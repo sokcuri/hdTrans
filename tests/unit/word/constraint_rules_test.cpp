@@ -88,7 +88,11 @@ const dict::Snapshot* Dictionary() {
          "わけ\t이유\tN110\t\t\tGN\t90\n"
          "わけ\t나&C4@\tM417\t\t\tGN\t91\n"
          "とい\t그렇다고 &AV@\tM420\t\t\tGN\t92\n"
-         "ということで、\t그래서,\tP200\t\t\tGN\t93\n"},
+         "ということで、\t그래서,\tP200\t\t\tGN\t93\n"
+         "歳\t세\tN110\t\t\tGN\t94\n"
+         "歳で\t세에\tN110\t\t\tGN\t95\n"
+         "ま\t\tQ110\t\t\tGN\t96\n"
+         "まで\t까지\tP200\t\t\tGN\t97\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -141,7 +145,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{29});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{30});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -394,5 +398,17 @@ HD_TEST(constraint_toiu_kotode_opening) {
         {"ということです", "ということです", "とい", "그렇다고 &AV@"},
         {"休みということで、", "ということで、", "とい", "그렇다고 &AV@"},
         {"というと", "というと", "とい", "그렇다고 &AV@"},
+    });
+}
+
+// A word in で before a form of ある gives way, so that で stays the copula である
+// (歳であり 세이며); before other text it stays (歳で死んだ 세에).
+HD_TEST(constraint_de_before_aru) {
+    CheckCases({
+        {"歳であり、", "歳であり、", "歳で", ""},
+        {"歳であった", "歳であった", "歳で", ""},
+        {"歳で死んだ", "歳で死んだ", "歳で", "세에"},
+        {"歳であり、", "歳であり、", "歳", "세"},
+        {"証拠まである", "まである", "まで", "까지"},
     });
 }

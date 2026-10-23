@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+constraint:de-before-aru	既に十四歳であり、	이미 14세이며,	fix	lookup
+constraint:de-before-aru	十四歳で死んだ。	14세에 죽었다.	keep	lookup

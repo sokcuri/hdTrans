@@ -75,6 +75,8 @@ constexpr ConstraintRule kRules[] = {
      "줄 첫머리의 ということで、는 동사 という + ことで가 아니라 연결 표현 그래서 (그렇다고 하는 것으로, → 그래서,)", {}},
     {"to-iu-kotode-opening", ConstraintWord::Source, "と言", ConstraintContext::OpeningKotode, ConstraintReject::Word,
      "줄 첫머리의 と言うことで、는 동사 と言う + ことで가 아니라 연결 표현 그래서 (이렇게 말하는 것으로, → 그래서,)", {}},
+    {"de-before-aru", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeAru, ConstraintReject::Word,
+     "ある의 활용 앞에서 で로 끝나는 단어는 쓰지 않고 で를 계사 である에 남김 (十四歳であり 14세에 있어 → 14세이며)", {}},
     {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
@@ -118,6 +120,8 @@ constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "�
 constexpr std::string_view kNounFollowers[] = {"だ", "で", "じゃ", "が", "の", "ね", "か", "や", "って",
                                                "なん", "なの", "なら", "あっ", "あり", "ある", "さ", "よ"};
 constexpr std::string_view kStemFollowers[] = {"ない", "無い", "なく", "なかっ", "は", "も", "に"};
+// The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+constexpr std::string_view kAruForms[] = {"ある", "あり", "あっ", "あれ", "あろ"};
 // The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 constexpr std::string_view kObjectParticles[] = {"を", "に", "へ", "で"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
@@ -197,6 +201,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return AllOfClass(source, kClassKanji) && NameClassOf(before) != kClassKanji && FindHonorificPrefix(before) == -1;
     case ConstraintWord::Source:
         return source == rule.source;
+    case ConstraintWord::EndsInDe:
+        return text::RuneCount(source) >= 2 && source.ends_with("で");
     }
     return false;
 }
@@ -284,6 +290,12 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
         }
         return StartsWithAny(after, kSuruTails);
+    case ConstraintContext::BeforeAru:
+        // A noun fused with で (歳で), not a particle in で (まである).
+        return StartsWithAny(after, kAruForms) &&
+               std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                   return c.source == source && c.codes != nullptr && c.codes->part.Tag() != 'N';
+               });
     case ConstraintContext::OpeningKotode:
         return (previous.empty() || previous == "…" || previous == "‥" || StartsWithAny(previous, kOpeningBrackets)) &&
                (after.starts_with("うことで、") || after.starts_with("うことで，"));
