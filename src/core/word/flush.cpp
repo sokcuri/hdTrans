@@ -33,7 +33,6 @@ constexpr Pass kTextPasses[] = {
     {"RespectfulPassive", RespectfulPassive},
     {"OwnPassives", OwnPassives},
     {"DegreeAfterNumber", DegreeAfterNumber},
-    {"BenefactiveProvider", BenefactiveProvider},
     {"ChooseInitialConjunctions", ChooseInitialConjunctions},
     {"GoNotSay", GoNotSay},
     {"HanBeforeNa", HanBeforeNa},

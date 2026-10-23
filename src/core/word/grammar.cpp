@@ -714,42 +714,6 @@ void RespectfulPassive(Flusher& f) {
     }
 }
 
-void BenefactiveProvider(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const std::string_view surface = it->group->surface;
-        if (it->selected < 0 || !it->EntryText(it->selected).ends_with("&CJ@")) continue;
-        // もら after its verb, or a word that holds both (見せてもら).
-        Item* start = nullptr;
-        if (surface == "もら" && it->prev != nullptr && it->prev->detail->Yougo()) {
-            // A causative before もらう asks leave, and its に is no giver (相談をさせてもらう).
-            if (it->prev->group->surface == "させ" || it->prev->detail->record == 2) continue;
-            start = it->prev->prev;
-        } else if (surface.ends_with("てもら") || surface.ends_with("でもら")) {
-            start = it->prev;
-        } else {
-            continue;
-        }
-        for (Item* p = start; p != nullptr; p = p->prev) {
-            const std::string_view s = p->group->surface;
-            if (s == "に" || s == "には") {
-                Item* a = p->prev;
-                const std::string ko(p->selected < 0 ? std::string_view() : p->EntryText(p->selected));
-                if (a == nullptr || a->selected < 0 || !Person(a->Attr(a->selected)) || (ko != "에게" && ko != "에게는")) break;
-                p->AssignEntrySurface(p->selected, ko == "에게" ? "(이)가" : "(은)는");
-                // 나, 저, 너 and 누구 before 가 are 내, 제, 네 and 누.
-                const std::string lemma = ItemLemma(f, a, a->selected);
-                const std::string_view subject = lemma == "누구" ? std::string_view("누") : SubjectPronoun(lemma);
-                if (ko == "에게" && !subject.empty()) a->AssignEntrySurface(a->selected, std::string(subject));
-                break;
-            }
-            if (s == "は" || s == "が" || s == "から" || s.empty() || p->detail->Yougo() ||
-                Has("、。,「」『』！？!?", s)) {
-                break;
-            }
-        }
-    }
-}
-
 void GoNotSay(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;

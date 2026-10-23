@@ -5,6 +5,11 @@
 // <TAB> NOTE, ID being cx:FAMILY:PRIO. On each word from the left, the first row of the family by
 // PRIO whose condition holds applies its actions. "//~ MAP <TAB> FROM=TO ... <TAB> what it is for"
 // declares a word map for map-lemma and map-target, above the rows that use it.
+//~ subject-pronoun	나=내 저=제 너=네	The subject form of a pronoun before 가 (내가, 제가, 네가).
+//~ who-subject	누구=누	The subject form of 누구 before 가 (누가).
+//= benefactive-provider	after DegreeAfterNumber	The に after a person read 에게 before a verb with もらう, with no other に, no は, が or から, no verb and no punctuation between, names the giver: the subject (이)가, with a pronoun in its subject form, or (은)는 for には. Not when the verb before もらう is a causative (相談をさせてもらう).
+cx:benefactive-provider:10		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게" F-1== "person" >0 ||2 &&5 S+1== "もら" D+1== "R&CJ@" F+0== "conjugating" S+0!= "させ" F+0!= "causative" &&2 ||2 S+0== "Rてもら" S+0== "Rでもら" D+0== "R&CJ@" ||7 S+0== "に" S+0== "には" S+0== "は" S+0== "が" S+0== "から" S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "(이)가" map-lemma@-1 @subject-pronoun map-lemma@-1 @who-subject	友達にノートを見せてもらった 친구가 노트를 보여 주었다
+cx:benefactive-provider:20		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게는" F-1== "person" >0 ||2 &&5 S+1== "もら" D+1== "R&CJ@" F+0== "conjugating" S+0!= "させ" F+0!= "causative" &&2 ||2 S+0== "Rてもら" S+0== "Rでもら" D+0== "R&CJ@" ||7 S+0== "に" S+0== "には" S+0== "は" S+0== "が" S+0== "から" S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "(은)는"	
 //= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
