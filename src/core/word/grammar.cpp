@@ -1242,16 +1242,32 @@ void PastSequence(Flusher& f) {
     if (last == nullptr) return;
     std::string end(last->group->surface);
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
-    if (!end.ends_with("た") || end.ends_with("よかった") || end.ends_with("良かった")) return;
+    // A verb whose past た is in its conjugation, not in its ending (噴火した: する + た).
+    const bool pastForm = last->detail->cls == kDetailVerb && last->detail->kind == 6 && last->DirectSurface().empty();
+    if ((!end.ends_with("た") && !pastForm) || end.ends_with("よかった") || end.ends_with("良かった")) return;
     for (Item* it = f.w.chain.head; it != nullptr && it != last; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         const std::string_view d = it->DirectSurface();
-        if (it->next == nullptr ||
-            (it->next->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
+        const bool seeing = e->dst == "2면" && d.ends_with("ば") &&
+                            output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다");
+        // てみれば before a past is what one found on trying, also without a comma (出かけてみれば
+        // 出会ったのは 나가 보니 만난 것은).
+        const std::string_view stem = it->group->surface;
+        const bool tried = seeing && (stem.ends_with("てみ") || stem.ends_with("でみ") ||
+                                      (stem == "み" && it->prev != nullptr && it->prev->detail->Yougo() &&
+                                       (it->prev->DirectSurface().ends_with(kJaTe) || it->prev->DirectSurface().ends_with(kJaDe))));
+        // A point of view (長期的に見れば, 目で見れば, 外から見れば) is no step of the story.
+        const bool viewpoint = it->prev != nullptr && (it->prev->group->surface.ends_with("的に") ||
+                                                      it->prev->group->surface.ends_with("目で") ||
+                                                      it->prev->group->surface.ends_with("から"));
+        if (tried) {
+            it->AssignDirectSlot(it->DirectIndex(), "2니");
+        } else if (it->next == nullptr ||
+                   (it->next->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
             continue;
-        } else if (e->dst == "2면" && d.ends_with("ば") && output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다")) {
+        } else if (seeing && !viewpoint) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
         } else if (e->dst != "2면(자)") {
             continue;

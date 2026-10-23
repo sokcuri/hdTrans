@@ -250322,6 +250322,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 正直	정직	N110			GN				jisjk:3627		
 正直	쇼지키	N130	QCTVPl		GN				jisjk:300787		
 正直	솔직히	N130			GN	4870	||1 &&2 ||2 S+1== "言" S+1== "い" P+1== "4**"	正直는 동사 言 또는 い 앞에서 부사 '솔직히'를 고른다.	jisjk:373973		
+平たく言うと	쉽게 말하면	E300			GN				gram:iuto:平たく言うと		
+端的に言うと	단적으로 말하면	E300			GN				gram:iuto:端的に言うと		
+一言で言うと	한마디로 말하면	E300			GN				gram:iuto:一言で言うと		
+正直に言うと	솔직히 말하면	E300			GN				gram:iuto:正直に言うと		
+正直言うと	솔직히 말하면	E300			GN				gram:iuto:正直言うと		
 正直でいた	솔직하고 $F9@	G7U0			GN				jisjk:342491		
 正直に言	솔직히 말&AV@	M440			GN				jisjk:265632		
 正直屋	쇼오지키야	I130	VGt		PN				jisjk:83239		
