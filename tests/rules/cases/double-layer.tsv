@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:343471	袋を二重にして運ぶ。	봉투를 이중으로 해 옮긴다.	fix	lookup
