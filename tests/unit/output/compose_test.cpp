@@ -322,3 +322,27 @@ HD_TEST(compose_verbal_noun_passive) {
     };
     for (const auto& c : cases) CheckComposition(c);
 }
+
+// An ellipsis or a mark of tone closes the word before it: the space the word was written
+// with goes, but not one of the input or one after a sentence mark.
+HD_TEST(compose_emit_closing_symbols) {
+    struct Case {
+        std::vector<TokenText> tokens;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{tokenizer::kTypeJapanese, 0, "그건 ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}}, "그건……"},
+        {{{tokenizer::kTypeJapanese, 0, "선배 ", ""}, {tokenizer::kTypeSymbol, 0, "♡", ""}}, "선배♡"},
+        {{{tokenizer::kTypeJapanese, 0, "좀 더 ", ""}, {tokenizer::kTypeSymbol, 0, "♪", ""}}, "좀 더♪"},
+        {{{tokenizer::kTypeJapanese, 0, "그건", ""}, {tokenizer::kTypeAsciiSpace, 0, " ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}},
+         "그건 ……"},
+        {{{tokenizer::kTypeJapanese, 0, "했다. ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}}, "했다. ……"},
+        {{{tokenizer::kTypeJapanese, 0, "그건 ", ""}, {tokenizer::kTypeSymbol, 0, "※", ""}}, "그건 ※"},
+    };
+    Settings settings;
+    for (const Case& c : cases) {
+        Pieces out;
+        EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+        HD_CHECK_EQ(String(out), c.expected);
+    }
+}

@@ -7,6 +7,7 @@
 #include "core/output/compose.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
+#include "core/text/hangul.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/tokenizer/canonical.h"
@@ -1172,13 +1173,37 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     return Result(std::move(t), false);
 }
 
+namespace {
+
+// Whether a symbol token starts with an ellipsis or a mark of tone, which closes the word
+// before it (그건……, 좀 더♪).
+bool ClosesWord(std::string_view t) {
+    return !t.empty() && std::u32string_view(U"…‥♪☆★♡♥❤❣♫♬").find(text::DecodeRune(t).cp) != std::u32string_view::npos;
+}
+
+// Whether out ends in spaces written after a syllable.
+bool SpacedAfterSyllable(const Pieces& out) {
+    const std::string_view t = TextTail(out);
+    const size_t end = t.find_last_not_of(' ');
+    return end != std::string_view::npos && end + 1 < t.size() &&
+           text::Final(DecodeLastRune(TextBefore(t.substr(0, end + 1)), end + 1).cp) >= 0;
+}
+
+}  // namespace
+
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& s, Pieces& out) {
     out.clear();
     std::string text;
     for (int i = first; i <= last; i++) {
         const TokenText& tok = tokens[i];
         switch (tok.type) {
-            case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16: case tokenizer::kTypeSymbol:
+            case tokenizer::kTypeSymbol:
+                if (tok.span == 0 && i > first && tokens[i - 1].type != tokenizer::kTypeAsciiSpace && ClosesWord(tok.text) &&
+                    SpacedAfterSyllable(out)) {
+                    TrimRight(out);
+                }
+                break;
+            case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16:
             case tokenizer::kTypeJapanese: case tokenizer::kTypeProtected:
                 break;
             default:

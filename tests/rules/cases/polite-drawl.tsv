@@ -26,7 +26,7 @@ normalize:copula-pause	フタサンマルマル…です。	2300…입니다.	ke
 normalize:drawl	ここで…す、すみません！	여기서…죄, 죄송합니다!	keep	normalize
 normalize:drawl	学校で……す、すごい	학교에서……대, 대단해	keep	normalize
 normalize:drawl	家で…す、好き	집에서…조, 좋아해	keep	normalize
-normalize:drawl	今ま…す、すぐに	지금 …고, 곧바로	keep	normalize
+normalize:drawl	今ま…す、すぐに	지금…고, 곧바로	keep	normalize
 normalize:drawl	いま、した。	지금, 했다.	keep	normalize
 normalize:drawl	そうで…す、はい。	그렇…습니다, 네.	keep	normalize
 normalize:copula-pause	えっと……ですね	음……이군요	keep	normalize
