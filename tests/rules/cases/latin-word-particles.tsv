@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+compose:latin-particle	詳しくはwiki の記事を見てください。	자세하게는 wiki의 기사를 봐 주세요.	fix	compose
+compose:latin-particle	Wiki が更新された。	Wiki가 갱신되었다.	fix	compose
+compose:latin-particle	API を呼び出す。	API를 호출한다.	fix	compose
+compose:latin-particle	Linux は無料だ。	Linux는 무료다.	fix	compose
+compose:latin-particle	C++ で書かれている。	C++로 쓰여져 있다.	fix	compose
+compose:latin-particle	Python で書いたスクリプト。	Python으로 쓴 스크립트.	fix	compose
+compose:latin-particle	ＩＤは、ａｂｃ０１２３ です。	ID는, abc0123입니다.	fix	compose
+compose:latin-particle	詳しくはwikiの記事を見てください。	자세하게는 wiki의 기사를 봐 주세요.	keep	compose
+compose:latin-particle	「GitHub」に登録した。	「GitHub」에 등록했다.	keep	compose
+compose:latin-particle	A レベルだ。	A 레벨이다.	keep	compose
+compose:latin-particle	HP が 1 回復した。	HP가 1 회복했다.	keep	compose
+compose:latin-particle	junya: と	junya: 와	keep	compose
+compose:latin-particle	ピクリとも動かなくなった。	움찔도 움직이지 않게 되었다.	fix	compose
+compose:latin-particle	ちょこっとだけですから！	살짝만이니까!	fix	compose

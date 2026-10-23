@@ -186,6 +186,14 @@ private:
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& settings,
                            Pieces& out);
 
+// Empties the space token between a word in Latin letters, digits or a word span that
+// ends in no punctuation (junya: と stays apart) and a Japanese token of tokens
+// first..last that starts with a particle written in Korean: a
+// Korean particle joins its word also where the source puts a space (wiki の記事 wiki의
+// 기사, API です API입니다).
+void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector<TokenText>& tokens, int first,
+                             int last);
+
 // Appends a space after a sentence ending in ".", "!" or "?" (token types other than
 // 26 and 78) when the next token is not a sentence end itself and does not start with
 // 」.

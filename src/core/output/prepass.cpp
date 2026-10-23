@@ -637,6 +637,24 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
         const int begin = n > 0 ? nodes[n - 1] : 0;
         for (int index = nodes[n] - 1; index >= begin; index--) WriteItem(index, index == nodes[n] - 1, markers);
     }
+    JoinParticlesAfterSpace(items, tokens, first, last);
+}
+
+void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector<TokenText>& tokens, int first,
+                             int last) {
+    for (const ResolvedItem& item : items) {
+        const int t = item.tokenIndex;
+        if (item.offset != 0 || t - 2 < first || t > last || tokens[t].type != tokenizer::kTypeJapanese) continue;
+        TokenText& space = tokens[t - 1];
+        const TokenText& word = tokens[t - 2];
+        if (space.type != tokenizer::kTypeAsciiSpace || space.span != 0 || !KeepsAdjacency(word.type) ||
+            word.text.empty() || std::string_view(" .,:;!?").find(word.text.back()) != std::string_view::npos) {
+            continue;
+        }
+        const std::string& written = tokens[t].text;
+        if (First(Code(item)) != '2' || written.empty() || written.front() == ' ') continue;
+        space.text.clear();
+    }
 }
 
 void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker> markers) {

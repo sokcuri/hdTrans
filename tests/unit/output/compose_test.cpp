@@ -263,3 +263,49 @@ HD_TEST(compose_ordinal_prefix_before_number_token) {
     composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
     HD_CHECK_EQ(String(result), "서장 제2화.");
 }
+
+// A particle that starts a Japanese token joins a Latin word or a number before it across a
+// space of the source; a noun after the space stays apart.
+HD_TEST(compose_particle_joins_latin_word_across_space) {
+    struct Case {
+        const char* word;
+        int wordType;
+        const char *surface, *code, *target;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {"wiki", tokenizer::kTypeAlpha, "の", "211", "의", "wiki의."},
+        {"API", tokenizer::kTypeAlpha, "です", "200", "입니다", "API입니다."},
+        {"3", tokenizer::kTypeNumber, "も", "200", "도", "3도."},
+        {"wiki", tokenizer::kTypeAlpha, "記事", "110", "기사", "wiki 기사."},
+    };
+    for (const Case& c : cases) {
+        std::vector<TokenText> tokens = {
+            {c.wordType, 0, c.word, ""},
+            {tokenizer::kTypeAsciiSpace, 0, " ", ""},
+            {tokenizer::kTypeJapanese, 0, c.surface, ""},
+            {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+            {tokenizer::kTypeTruncated, 0, "", ""},
+        };
+        std::vector<ResolvedItem> items(2);
+        items[0].tokenIndex = 0;
+        items[0].surface = c.word;
+        items[0].first = items[0].entry = {"110", "Nm", c.word};
+        items[1].tokenIndex = 2;
+        items[1].surface = c.surface;
+        items[1].first = items[1].entry = {c.code, "", c.target};
+        for (ResolvedItem& item : items) {
+            item.length = static_cast<int>(item.surface.size());
+            item.selected = 0;
+        }
+        Nodes nodes;
+        BuildItems(items, tokens, nodes);
+        Composer composer;
+        Families families;
+        Settings settings;
+        settings.text = true;
+        Pieces result;
+        composer.Compose(items, tokens, 0, 3, {}, settings, families, result);
+        HD_CHECK_EQ(String(result), c.expected);
+    }
+}
