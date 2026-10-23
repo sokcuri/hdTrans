@@ -17,3 +17,9 @@ rewrite:line-initial-to	そんなバカな。と笑い飛ばそうとしたが�
 rewrite:line-initial-to	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
 rewrite:line-initial-to	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
 rewrite:line-initial-to	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites
+rewrite:past-sequence	　振り返ると彼女がいた。	 돌아보니 그녀가 있었다.	fix	rewrites
+rewrite:past-sequence	　ドアを開けると私服の彼女がいた。	 문을 열자 사복의 그녀가 있었다.	fix	rewrites
+rewrite:past-sequence	　スマホを見ると１７時半すぎだった。	 스마트폰을 보니 17너무 시다.	fix	rewrites
+rewrite:past-sequence	宦官を加えると三千の大所帯だった。	내시를 가세하면 3000의 대가족이었다.	keep	rewrites
+rewrite:past-sequence	両手で抱えたポリタンクは、歩いているとバランスを崩してしまうほど重かった。	양손으로 움켜 쥔 폴리탱크는, 걷고 있으면 밸런스를 무너뜨려 버릴 만큼 무거웠다.	keep	rewrites
+rewrite:past-sequence	自身が狙われる可能性があると深く理解していた。	자신이 노려질 가능성이 있으면 깊게 이해하고 있었다.	keep	rewrites

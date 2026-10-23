@@ -904,6 +904,48 @@ bool RieulStem(std::string_view lemma) {
     return text::Final(DecodeLastRune(lemma).cp) == text::kFinalRieul;
 }
 
+bool QuoteVerbFollows(const Item* it);
+
+// Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an
+// event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
+constexpr std::string_view kSupposedMarks[] = {"そう", "ほど", "らし", "よう", "はず", "かも", "という", "って", "べき", "もの", "こと"};
+
+// Whether the と of item it, with no pause after it, joins an event that followed it in the
+// past sentence ending at last (振り返ると彼女がいた): the verb before it is no state of
+// いる or ある, nor 言う after か or から or quoting (というと, から言うと), and no word of saying or
+// thinking, no other と and no mark of supposition stands between it and the end
+// (可能性があると深く理解していた, 離れすぎると信号が拾えないという欠点), and a past copula
+// at the end follows only seeing or noticing.
+bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
+    const std::string full = output::Lemma(it->EntryText(it->selected), f.families);
+    std::string_view lemma = full;
+    if (const std::size_t space = lemma.rfind(' '); space != std::string_view::npos) lemma.remove_prefix(space + 1);
+    if (lemma.starts_with("있") || lemma.starts_with("없")) return false;
+    // A past copula ends a state the clause leads to (加えると三千の大所帯だった 더하면); only
+    // seeing or noticing finds it (見ると十七時すぎだった 보니).
+    std::string end(last->group->surface);
+    if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
+    if ((end.ends_with("だった") || end.ends_with("であった") || end.ends_with("でした")) && !lemma.ends_with("보다") &&
+        lemma != "눈치채다" && lemma != "깨닫다" && lemma != "알아차리다") {
+        return false;
+    }
+    if (it->group->surface.starts_with("と") ||
+        (it->prev != nullptr && (it->prev->group->surface == "から" || it->prev->group->surface == "か"))) {
+        return false;
+    }
+    for (const Item* x = it->next; x != nullptr; x = x->next) {
+        if (x->selected < 0 || QuoteVerbFollows(x) || Has(x->Attr(x->selected), "UTh") || Has(x->Attr(x->selected), "UTs")) {
+            return false;
+        }
+        if (x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と")) return false;
+        for (const std::string_view m : kSupposedMarks) {
+            if (Has(x->group->surface, m) || (x->DirectIndex() >= 0 && Has(x->DirectSurface(), m))) return false;
+        }
+        if (x == last) break;
+    }
+    return true;
+}
+
 }  // namespace
 
 void PastSequence(Flusher& f) {
@@ -923,7 +965,8 @@ void PastSequence(Flusher& f) {
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         const std::string_view d = it->DirectSurface();
-        if (it->next == nullptr || it->next->group->surface != kJaComma) {
+        if (it->next == nullptr ||
+            (it->next->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
             continue;
         } else if (e->dst == "2면" && d.ends_with("ば") && output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다")) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
