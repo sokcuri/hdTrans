@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+normalize:kanji-wakaru	どうなっているか判らないが。	어떻게 되어 있을지 모르겠지만.	fix	normalize
+normalize:kanji-wakaru	何を言っているのか解らなかった。	무슨 말을 하는지 몰랐다.	fix	normalize
+normalize:kanji-wakaru	判りやすい。	알기 쉽다.	keep	normalize
+normalize:kanji-wakaru	解っ散。	해산.	keep	normalize
+normalize:kanji-wakaru	問題が解ける。	문제가 풀린다.	keep	normalize

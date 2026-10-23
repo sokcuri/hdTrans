@@ -533,6 +533,22 @@ bool KataWake(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// 判 or 解 for わか in わかる: after no kanji (評判らしい, 了解っす stay) and before ら, り, る,
+// った, って or, for 判, れ (判らない, 解った, 判れば).
+bool KanjiWakaru(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && IsKanjiRune(LastRune(s.substr(0, pos)).cp)) return false;
+    size_t p = pos;
+    const bool han = Lit(s, p, "判");
+    if (!han && !Lit(s, p, "解")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, han ? U"らりるれ" : U"らりる")) {
+        q = p;
+        if (!Lit(s, q, "っ") || !OneOf(s, q, U"たて")) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.group[1], mid, m.group[2]}); }
 
 }  // namespace
@@ -541,6 +557,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     std::string text(in);
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
     if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
+    if (Contains(text, "判") || Contains(text, "解")) {
+        text = ReplaceAll(text, KanjiWakaru, [](const Match&) { return std::string("わか"); });
+    }
     if (ContainsAny(text, kKataStemStarts)) {
         text = ReplaceAll(text, KataStemPattern, [](const Match& m) {
             const Match g = Rematch(m, KataStemPattern);
