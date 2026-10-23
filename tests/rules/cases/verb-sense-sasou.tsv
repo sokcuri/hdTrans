@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:365678	霧島でも誘うか	기리시마에서도 부를까	fix	global-stem
+dict:jisjk:365678	眠気を誘う。	졸음을 유발한다.	keep	senses
