@@ -1030,6 +1030,17 @@ bool ThinkingVerbAhead(const Item* it) {
     return false;
 }
 
+// Whether a verb of saying or thinking stands within six items from x on, with no
+// predicate before it (いけないと、散々親父から言われていた).
+bool QuoteVerbAhead(const Item* x) {
+    for (int n = 0; n < 6 && x != nullptr && x->selected >= 0; n++, x = x->next) {
+        if (QuoteVerbFollows(x)) return true;
+        const char cls = At(x->Code(x->selected), 0);
+        if (cls == '4' || cls == '6' || cls == '7') return false;
+    }
+    return false;
+}
+
 // Whether the next item is a verb of thinking or wishing (思う, 考える, 願う, 祈る, 望む).
 bool WishVerbNext(const Item* x) {
     if (x == nullptr || x->selected < 0) return false;
@@ -1063,13 +1074,23 @@ void QuoteTo(Flusher& f) {
             }
             continue;
         }
-        const std::string_view d = it->DirectSurface();
+        std::string_view d = it->DirectSurface();
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
+        // An ending that takes the comma after と (ないと、) quotes when a verb of saying or
+        // thinking follows in the clause (時間がないと、彼は言った 시간이 없다고, 그는 말했다).
+        const bool paused = d.ends_with(std::string("と") + std::string(kJaComma));
+        if (paused) d.remove_suffix(kJaComma.size());
         if (d.ends_with("と")) HearSense(f, it->next);
         if (!d.ends_with("と") || (!e->dst.starts_with("2면") && !e->dst.starts_with("1다면"))) continue;
         const bool end = QuoteEnd(f.w, it);
         const std::string ja = it->group->surface + std::string(d);
+        if (paused) {
+            if (At(it->Code(it->selected), 0) == '7' && QuoteVerbAhead(it->next)) {
+                it->AssignDirectSlot(it->DirectIndex(), "1다고,");
+            }
+            continue;
+        }
         // たらと思う keeps the condition as an unfinished wish (行けたらと思う 갈 수 있으면 하고 생각한다);
         // before a verb of saying it is a suggestion (行ったらと言われた) and stays a quote.
         if ((d == "らと" || d.ends_with("たらと") || d.ends_with("だらと")) && WishVerbNext(it->next)) {
@@ -1077,8 +1098,15 @@ void QuoteTo(Flusher& f) {
             continue;
         }
         const bool thought = (At(it->Code(it->selected), 0) == '7' || ja.ends_with("ないと") || d.starts_with("た")) &&
-                             ThinkingVerbAhead(it);
-        if ((!end && !QuoteVerbFollows(it->next) && !thought) || (end && (ja.ends_with("ないと") || SayingConditional(it))) ||
+                             (ThinkingVerbAhead(it) ||
+                              (it->next != nullptr && it->next->group->surface == kJaComma && QuoteVerbAhead(it->next->next)));
+        // ないと that ends the utterance is a duty (行かないと 가지 않으면), but the adjective ない
+        // after a noun or a particle there closes a quotation (毒はないと 독은 없다고).
+        const bool absent = (it->group->surface == "な" || it->group->surface == "無") && it->prev != nullptr &&
+                            it->prev->selected >= 0 && At(it->prev->Code(it->prev->selected), 0) != '4' &&
+                            ItemLemma(f, it, it->selected).ends_with("없다");
+        const bool duty = ja.ends_with("ないと") && !absent;
+        if ((!end && !QuoteVerbFollows(it->next) && !thought) || (end && (duty || SayingConditional(it))) ||
             Has(d, "ます")) {
             continue;
         }

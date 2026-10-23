@@ -23,3 +23,8 @@ rewrite:past-sequence	　スマホを見ると１７時半すぎだった。	 �
 rewrite:past-sequence	宦官を加えると三千の大所帯だった。	내시를 가세하면 3000의 대가족이었다.	keep	rewrites
 rewrite:past-sequence	両手で抱えたポリタンクは、歩いているとバランスを崩してしまうほど重かった。	양손으로 움켜 쥔 폴리탱크는, 걷고 있으면 밸런스를 무너뜨려 버릴 만큼 무거웠다.	keep	rewrites
 rewrite:past-sequence	自身が狙われる可能性があると深く理解していた。	자신이 노려질 가능성이 있으면 깊게 이해하고 있었다.	keep	rewrites
+rewrite:quote-to	思うこと、女の笑みほど恐ろしい毒はないと。	생각하는 것, 여자의 미소만큼 무서운 독은 없다고.	fix	rewrites
+rewrite:quote-to	時間がないと、彼は言った。	시간이 없다고, 그는 말했다.	fix	rewrites
+rewrite:quote-to	予測だけで物事を考えるのはいけないと、散々言われていた。	예측만으로 일을 생각하는 것은 안 된다고, 실컷 말하고 있었다.	fix	rewrites
+rewrite:quote-to	早く行かないと。	빨리 가지 않으면.	keep	rewrites
+rewrite:quote-to	お金がないと、困る。	돈이 없으면 곤란하다.	keep	rewrites
