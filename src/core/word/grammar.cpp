@@ -252,10 +252,54 @@ std::string KoreanPassiveLemma(std::string_view lemma) {
     return std::string(stem) + std::string(by);
 }
 
+// Whether verb item it ends in its attributive form (る, た) before a noun in its token that
+// names no clause (と言われた下女, not と言われるのが or と言われたこと); an auxiliary いる after
+// its て form ends it instead (と言われている騎士団長).
+bool ModifiesNoun(const Item* it) {
+    if (const Item* aux = it->next; aux != nullptr && aux->tokenIndex == it->tokenIndex && aux->detail->Yougo() &&
+                                    (aux->group->surface == "い" || aux->group->surface == "お")) {
+        it = aux;
+    }
+    const Item* n = it->next;
+    const std::string_view own = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
+    return n != nullptr && n->tokenIndex == it->tokenIndex && (own.ends_with("る") || own.ends_with("た")) &&
+           At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
+           !std::any_of(std::begin(kClauseNouns), std::end(kClauseNouns),
+                        [&](std::string_view c) { return n->group->surface.starts_with(c); });
+}
+
+// The passive of a word in 言 (言う with what is said before it) has no 지다 passive in
+// Korean: after a quote it is the active 하다 (待てと言われて 기다리라고 해서), or 불리다 before a
+// noun it describes (無口と言われた下女 과묵이라고 불린 하녀); after an object 하다 becomes 듣다
+// (嫌味を言われる 비꼬는 말을 듣다). Other words in 言 keep their passive.
+void SayPassive(Item* it) {
+    const std::string_view s = it->group->surface;
+    if (!s.ends_with("言") || s == "言") return;
+    const bool object = s.ends_with("を言");
+    const int count = static_cast<int>(it->group->entries.size());
+    std::vector<std::string> targets;
+    for (int slot = 0; slot < count; slot++) {
+        const std::string_view t = it->EntryText(slot);
+        if (const std::size_t q = t.find("라고"); q != std::string_view::npos) {
+            targets.emplace_back(ModifiesNoun(it) ? std::string(t.substr(0, q)) + "라고 불&AA@" : std::string(t));
+        } else if (object && t.ends_with("&AV@")) {
+            targets.push_back(std::string(t.substr(0, t.size() - std::string_view("&AV@").size())) + "&J6@");
+        } else {
+            return;
+        }
+    }
+    it->detail->record = 0;
+    it->lexical = true;
+    for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
+}
+
 // Writes a passive verb item of kPassiveLemmas as its Korean passive in the active voice.
 void WriteLexicalPassive(Flusher& f, Item* it) {
     std::string lexical;
-    if (!PassiveTarget(f, it->group->surface, lexical)) return;
+    if (!PassiveTarget(f, it->group->surface, lexical)) {
+        SayPassive(it);
+        return;
+    }
     it->detail->record = 0;
     it->lexical = true;
     const int count = static_cast<int>(it->group->entries.size());
