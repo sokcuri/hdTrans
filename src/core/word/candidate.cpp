@@ -766,9 +766,9 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
         return false;
     }
     // A name spelled like the number before an honorific (九十九さん) is the name.
-    constexpr std::string_view kHonorifics[] = {"さん", "様", "さま", "氏", "君", "くん", "ちゃん", "殿"};
     const std::string_view after = text.substr(std::min(source.size(), text.size()));
-    if (std::any_of(std::begin(kHonorifics), std::end(kHonorifics), [&](std::string_view h) { return after.starts_with(h); })) {
+    if (std::ranges::any_of(dict::ClassMembers("honorific.candidate"),
+                            [&](std::string_view h) { return after.starts_with(h); })) {
         for (const Record* r = records; r != nullptr; r = r->child) {
             if (r->source == source && (r->partCode.starts_with("N13") || r->semantic.starts_with("QPN"))) return false;
         }

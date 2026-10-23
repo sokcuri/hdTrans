@@ -25,6 +25,7 @@
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
+//= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), which the rules about familiar address look for alone.
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
@@ -406,6 +407,15 @@ follower.verbal-noun	も
 follower.verbal-noun	で
 follower.verbal-noun	と
 follower.verbal-noun	へ
+
+honorific.candidate	さん
+honorific.candidate	様
+honorific.candidate	さま
+honorific.candidate	氏
+honorific.candidate	君
+honorific.candidate	くん
+honorific.candidate	ちゃん
+honorific.candidate	殿
 
 honorific.constraint	さん
 honorific.constraint	さま
