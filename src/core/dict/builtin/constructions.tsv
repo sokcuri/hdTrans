@@ -25,3 +25,8 @@ cx:particle-in-next:10		&&5 F+0== "selected" F+1== "selected" F+0!= "conjugating
 cx:ji-before-jiman:10		&&4 F+1== "selected" ||2 S+1== "Lけど" S+1== "Lけれど" L+1== "R지만" Y+0== "R겠지"	set-target@+1 "만"	ないのだろうけど 없겠지만
 //= even-before-passive	after OfferPromise	The でも read 에서도 before a passive verb is (이)라도, not the place of the action.
 cx:even-before-passive:10		&&6 F-1== "exists" S+0== "でも" L+0== "에서도" F+1== "conjugating" A-1!= "VPl" ||2 I+1== "~られ" I+1== "Lされ"	select-lemma "(이)라도"	修理でもされたのか 수리라도 된 건가
+//= noun-to	after ComitativeTo	The と after a noun is (와)과 before a word of company or comparison, and (이)라고 before a verb of naming or supposing.
+cx:noun-to:10		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1!= "conjugating" P-1== "1" ||3 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" B+1== @word.comitative	take-target "(와)과"	友達と話す 친구와 이야기한다
+cx:noun-to:20		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1!= "conjugating" P-1== "1" L+0== "(와)과" ||2 B+1== @verb.naming B+1== @word.supposing	take-target "(이)라고"	勇者と呼ぶ 용사라고 부른다
+//= line-initial-to	after noun-to	A と that opens a line or follows a sentence end on it quotes what was said before it: (이)라고. Not before an ellipsis or another と, nor before なる or する (となると), nor before a word of company (と一緒に).
+cx:line-initial-to:10		&&12 F+0== "first" S+0== "と" F+0== "selected" F+0!= "fixed" F+1== "selected" F+0== "opens-line" S+1!= @Lword.partner-to S+1!= "L…" S+1!= "L‥" S+1!= "Lと" ||2 P+1!= "4" &&3 S+1!= "Lな" S+1!= "Lす" S+1!= "Lし" ||2 L+0== "(와)과" L+0== "(으)로"	take-target "(이)라고"	と私が頭を下げると 라고 내가 고개를 숙이면

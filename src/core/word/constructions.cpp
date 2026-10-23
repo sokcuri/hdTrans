@@ -38,6 +38,7 @@ constexpr NamedFeature kFeatures[] = {
          const std::string lemma = ItemLemma(f, it, it->selected);
          return !lemma.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with(lemma + " ");
      }},
+    {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };

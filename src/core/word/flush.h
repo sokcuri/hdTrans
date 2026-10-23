@@ -55,6 +55,8 @@ std::string ItemLemma(Flusher& f, const Item* it, int slot);
 bool Person(std::string_view attr);
 // Whether the item is a comma, a sentence-end mark, a closing quote or bracket, or 。 (grammar.cpp).
 bool PauseOrEnd(const Item* it);
+// Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
+bool OpensLine(const Worker& w, const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
@@ -131,13 +133,6 @@ void ParallelNoka(Flusher& f);
 // haughty speech.
 void OfferPromise(Flusher& f);
 void ComitativeTo(Flusher& f);
-void NounTo(Flusher& f);
-// A と that opens a line or follows a sentence end on it (と私が頭を下げると, バカな。と笑う)
-// quotes what was said before it: (이)라고 rather than (와)과 or (으)로. Not inside brackets,
-// where it stutters, nor before an ellipsis or another と, nor before なる or する, where it
-// starts a conjunction (となると, とすると), nor before a word of company, sameness or
-// difference (と一緒に, と同じ, と違って), where it is the comitative.
-void LineInitialTo(Flusher& f);
 
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);
