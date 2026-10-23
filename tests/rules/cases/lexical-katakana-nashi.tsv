@@ -2,3 +2,7 @@ rule	input	expected	kind	layer
 dict:w:6669	異常ナシ！	이상 없음!	fix	lookup
 dict:w:6669	過去なんて全部ナシにできれば	과거 같은 건 전부 없음으로 할 수 있으면	fix	lookup
 dict:w:26755	リンゴとナシを買った。	사과와 배를 샀다.	keep	senses
+sense:ナシ	ナシと桃	배와 복숭아	fix	senses
+sense:ナシ	ナシ、リンゴ、ブドウを食べた。	배, 사과, 포도를 먹었다.	fix	senses
+sense:ナシ	ナシの花が咲いた。	배의 꽃이 피었다.	fix	senses
+sense:ナシ	今日の予定はナシ、ということで。	오늘의 예정은 없음, 이라는 것으로.	keep	senses
