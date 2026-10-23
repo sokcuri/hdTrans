@@ -1,0 +1,34 @@
+# 규칙: LAY-7
+rule	input	expected	kind	layer
+compose:latin-particle-form	Tom と Mary	Tom과 Mary	fix	compose
+compose:latin-particle-form	TomがMaryを見た。	Tom이 Mary를 보았다.	fix	compose
+compose:latin-particle-form	Tomは来た。	Tom은 왔다.	fix	compose
+compose:latin-particle-form	Teamで勝った。	Team으로 이겼다.	fix	compose
+compose:latin-particle-form	Kenと遊んだ。	Ken과 놀았다.	fix	compose
+compose:latin-particle-form	Loginが必要だ。	Login이 필요하다.	fix	compose
+compose:latin-particle-form	Paulと会った。	Paul과 만났다.	fix	compose
+compose:latin-particle-form	Toolを使う。	Tool을 쓴다.	fix	compose
+compose:latin-particle-form	Styleを変えた。	Style을 바꾸었다.	fix	compose
+compose:latin-particle-form	Catと遊ぶ。	Cat과 논다.	fix	compose
+compose:latin-particle-form	Robotが動く。	Robot이 움직인다.	fix	compose
+compose:latin-particle-form	Webで見た。	Web으로 보았다.	fix	compose
+compose:latin-particle-form	Appを開いた。	App을 열었다.	fix	compose
+compose:latin-particle-form	彼の名はTomだ。	그의 이름은 Tom이다.	fix	compose
+compose:latin-particle-form	「Tom」と言った。	「Tom」이라고 말했다.	fix	compose
+compose:latin-particle-form	Ｔｏｍと会った。	Tom과 만났다.	fix	compose
+compose:latin-particle-form	Websiteを作った。	Website를 만들었다.	fix	compose
+compose:latin-particle-form	Weekが終わった。	Week가 끝났다.	fix	compose
+compose:latin-particle-form	Mikeと話す。	Mike와 이야기한다.	keep	compose
+compose:latin-particle-form	Steakを食べた。	Steak를 먹었다.	keep	compose
+compose:latin-particle-form	Jackが来た。	Jack이 왔다.	keep	compose
+compose:latin-particle-form	Markが来た。	Mark가 왔다.	keep	compose
+compose:latin-particle-form	Bookを読んだ。	Book을 읽었다.	keep	compose
+compose:latin-particle-form	Busに乗った。	Bus를 탔다.	keep	compose
+compose:latin-particle-form	Maryと会った。	Mary와 만났다.	keep	compose
+compose:latin-particle-form	Googleで検索した。	Google로 검색했다.	keep	compose
+compose:latin-particle-form	Billと遊ぶ。	Bill과 논다.	keep	compose
+compose:latin-particle-form	Meは好きだ。	Me는 좋아한다.	keep	compose
+compose:latin-particle-form	BGMが流れる。	BGM이 흐른다.	keep	compose
+compose:latin-particle-form	APIと連携する。	API와 연계한다.	keep	compose
+compose:latin-particle-form	3と5を足す。	3과 5를 더한다.	keep	compose
+compose:latin-particle-form	5kgの米を買った。	5kg의 쌀을 샀다.	keep	compose
