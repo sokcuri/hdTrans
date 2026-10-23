@@ -21,6 +21,22 @@ bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 // たく of the desire after a stem (見たくない), not the た of the past before くせに (見たくせに).
 bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni); }
 
+// Whether も at the start of s is followed by a form of する that ends there (立ち上がりもせず,
+// 笑いもしない, 読みもした; not しても, していない): the continuative before it is the verb,
+// emphasised, not a noun.
+bool SuruAfterMo(std::string_view s) {
+    if (!s.starts_with("も")) return false;
+    const std::string_view r = s.substr(std::string_view("も").size());
+    if (r.starts_with("して") || r.starts_with("しち")) return false;
+    return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
+}
+
+// Whether s is a single hiragana (the stem で of 出る, which でもする is not).
+bool OneKana(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
+}
+
 }  // namespace
 
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop) {
@@ -301,7 +317,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
-         two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || two == kJaMo ||
+         two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
          (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) || two == kJaYo || four == kJaNado ||
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
@@ -355,7 +371,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
-              two == kJaNasai || two == kJaNi)) {
+              two == kJaNasai || two == kJaNi || (SuruAfterMo(after()) && !OneKana(surface)))) {
             const std::pair<const Window*, std::string_view> compounds[] = {
                 {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
                 {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},

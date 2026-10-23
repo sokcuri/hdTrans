@@ -67,6 +67,7 @@ void Flush(Flusher& f) {
         ChanAfterKatakana(f);
         InitialSoundRule(f);
         InwardAuxiliary(f);
+        EmphaticMo(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);

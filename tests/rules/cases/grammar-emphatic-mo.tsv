@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+rewrite:emphatic-mo	もう出て行ってもいいのに、彼は立ち上がりもせず、	이제 나가도 괜찮은데, 그는 일어서지도 않고,	fix	rewrites
+rewrite:emphatic-mo	「では、戦いもせず、日々を過ごしていた」	「그럼, 싸우지도 않고, 날마다를 보내고 있었다」	fix	rewrites
+rewrite:emphatic-mo	今度は衝突も沈みもしない。	이번에는 충돌도 가라앉지도 않는다.	fix	rewrites
+rewrite:emphatic-mo	自分の正気を疑いもした。	자신의 제정신을 의심하기도 했다.	fix	rewrites
+rewrite:emphatic-mo	それは気になりもするだろう。	그것은 신경 쓰이기도 할 것이다.	fix	rewrites
+rewrite:emphatic-mo	返事もせず、	대답도 하지 않고,	keep	rewrites
+rewrite:emphatic-mo	練習でもしようか。	연습이라도 할까.	keep	rewrites

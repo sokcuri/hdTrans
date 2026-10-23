@@ -1086,6 +1086,10 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 after++;
             }
             const char np = First(Code(items[after]));
+            // Past a folded verb, a word that is written apart (Ha) still is (읽지도 않고 버렸다).
+            if (after != nextIndex && Contains(GAttr(items[after]), "Ha") && !Contains(GAttr(items[after]), "Tu")) {
+                return Result(std::move(t), true);
+            }
             const bool space = np != '2' && np != '6' && (!IsOutputBuilderBlockedText(remainder) || WidthOf(remainder) > 4);
             return Result(std::move(t), space);
         }
