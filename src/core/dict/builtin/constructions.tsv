@@ -1,0 +1,8 @@
+// Constructions of the rewrite layer (docs/rule-language.md, 구문 표): the Korean of a word picked
+// from the words around it, after the word stage has chosen every candidate.
+// A family is declared once by "//= FAMILY <TAB> after NAME <TAB> what it is for" and runs right
+// after the text pass or family NAME. Its rows are ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS
+// <TAB> NOTE, ID being cx:FAMILY:PRIO. On each word from the left, the first row of the family by
+// PRIO whose condition holds applies its actions.
+//= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
+cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다

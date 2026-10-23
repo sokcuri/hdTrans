@@ -66,6 +66,9 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
 4. **Pick the layer.**
    - For the same cause, data comes first (rows, `sem`/`gram` codes, senses), then rules, then
      engine code.
+   - A word whose Korean depends on the words around it after selection (a particle read by its
+     neighbours) is a row of `src/core/dict/builtin/constructions.tsv`, not a new C++ pass
+     (docs/rule-language.md, 구문 표).
    - Change engine code when rows would have to be listed in parallel, when a rule cannot see the
      information it needs, when a later stage overrides the decision, or when the analysis itself
      is wrong.
@@ -92,12 +95,14 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
      the speech level also go in `tests/rules/speech-soft/` or `tests/rules/speech-strict/`.
    - **First line.** `# 규칙: <spec ids>`. Columns are `rule input expected kind layer` (header in
      tools/rule-cases.sh):
-     - `rule`: `dict:<row id>` for a dictionary row's local rule, `L<n>`, `G<prio>`, or
-       `<stage>:<name>` for other changes (`sound:`, `constraint:`, `rewrite:`, `compose:`,
-       `normalize:`, `sense:`).
+     - `rule`: `dict:<row id>` for a dictionary row's local rule, `L<n>`, `G<prio>`,
+       `cx:<family>:<prio>` for a construction row, or `<stage>:<name>` for other changes
+       (`sound:`, `constraint:`, `rewrite:`, `compose:`, `normalize:`, `sense:`).
      - `expected`: the whole output; `rule:dict:<row id>=<ko>` (the rule that row carries chose
-       `<ko>`); `rule:L<n>=<ko>`; or `!rule:dict:<row id>` (it chooses nothing). Assert only what
-       the fix decides unless the whole line is right.
+       `<ko>`); `rule:L<n>=<ko>`; `rule:cx:<family>:<prio>=<ko>`; or `!rule:dict:<row id>` and
+       `!rule:cx:<family>:<prio>` (it chooses nothing). Assert only what the fix decides unless the
+       whole line is right. Every construction row needs a `fix` and a `keep` case (ctest
+       `rules.constructions`).
      - `kind`: `fix`, `keep` or `current`.
      - `layer`: the docs/pipeline-layers.md name of the layer that decides the line.
    - **Inputs.** Short excerpts of real lines or the relevant part of a line. Use neutral names.

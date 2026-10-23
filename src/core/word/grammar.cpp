@@ -1794,17 +1794,6 @@ void LongVowelAfterKatakana(Flusher& f) {
     }
 }
 
-void ReturnTo(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        const Item* n = it->next;
-        if (p != nullptr && n != nullptr && it->group->surface == "に" && ItemLemma(f, it, it->selected) == "하러" &&
-            n->group->surface.starts_with("戻")) {
-            SelectLemma(f, it, "(으)로");
-        }
-    }
-}
-
 
 void EvenBeforePassive(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {

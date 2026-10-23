@@ -4,6 +4,7 @@
 #include <utility>
 
 #include "core/engine/rules.h"
+#include "core/word/constructions.h"
 #include "core/word/select.h"
 
 namespace hdTrans::internal {
@@ -58,8 +59,11 @@ TraceSelection Selection(const word::Selection& selection, int index, std::strin
         out.layer = "senses";
         out.source = "senses.tsv:" + std::to_string(selection.id);
         break;
-    case Provenance::Initial:
-    case Provenance::Rewrite: out.layer = "rewrites"; break;
+    case Provenance::Initial: out.layer = "rewrites"; break;
+    case Provenance::Rewrite:
+        out.layer = "rewrites";
+        out.source = std::string(word::ConstructionId(selection.id));
+        break;
     case Provenance::Scorer: out.layer = "scorers"; break;
     case Provenance::Misread: out.layer = "misread"; break;
     case Provenance::Cg: out.layer = "cg-lite"; break;

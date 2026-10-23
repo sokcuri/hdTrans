@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Leaves out each sentence pass of the word stage in turn and runs the rule cases and examples/, to
-list the passes that no test catches.
+"""Leaves out each sentence pass of the word stage and each row of the construction table in turn and
+runs the rule cases and examples/, to list the passes and rows that no test catches.
 
   tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]
   tools/pass-mutation.py --self-test
 
 CLI is an experiment build (CMake -DHDTRANS_PASS_EXPERIMENTS=ON, docs/testing.md; default
 build/<preset>-passexp/hdtrans with HDTRANS_PRESET as in the other tools). DICTS defaults to dicts/.
-The passes are the names in src/core/word/flush.cpp; PASS... limits the run to some of them. Each
-pass is left out with HDTRANS_PASS_SKIP while tests/rules/cases.tsv, tests/rules/cases/,
+The passes are the names in src/core/word/flush.cpp and the row ids (cx:FAMILY:PRIO) of
+src/core/dict/builtin/constructions.tsv; PASS... limits the run to some of them. Each is left out
+with HDTRANS_PASS_SKIP while tests/rules/cases.tsv, tests/rules/cases/,
 tests/rules/speech-soft/ (--speech soft), tests/rules/speech-strict/ (--speech strict) and
 examples/ run, JOBS at a time (default: the number of CPUs), each with a fresh HOME, a time limit
 of SECONDS (default 900) and one dictionary cache that a run without a left-out pass fills first.
@@ -47,6 +48,11 @@ OFF_BY_DEFAULT = re.compile(r"X\((\w+),\s*false\)")
 def pass_names(source):
     names = [m.group(1) for m in PASS.finditer(source) if m.group(1) == m.group(2)]
     return list(dict.fromkeys(names))
+
+
+def construction_ids(table):
+    """The row ids of a construction table, in table order."""
+    return [line.split("\t", 1)[0] for line in table.split("\n") if line.startswith("cx:")]
 
 
 def not_exercised(flush, analyze):
@@ -106,6 +112,8 @@ def self_test():
     src = ('constexpr Pass kTextPasses[] = {\n    {"Select", Select},\n    {"NounTo", NounTo},\n};\n'
            'Run(f, {"DrainNmTail", DrainNmTail});\nRun(f, {"NounTo", NounTo});\nauto x = {"a", b};\n')
     assert pass_names(src) == ["Select", "NounTo", "DrainNmTail"], pass_names(src)
+    table = "// a\n//= de\tafter X\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
+    assert construction_ids(table) == ["cx:de:10", "cx:de:20"], construction_ids(table)
     assert failures("cases", 1, "== layer local: 2 failed\nrule cases: 40 rows, 2 failed (local 2)\n", "") == 2
     assert failures("cases", 2, "", "CLI failed\n") == "crash"
     assert failures("cases", 2, "", "no cases at x\n") is None
@@ -152,11 +160,12 @@ def main(argv):
         print(f"no CLI at {cli}; build one with -DHDTRANS_PASS_EXPERIMENTS=ON (docs/testing.md)", file=sys.stderr)
         return 2
     flush = (ROOT / "src/core/word/flush.cpp").read_text(encoding="utf-8")
-    names = pass_names(flush)
+    table = (ROOT / "src/core/dict/builtin/constructions.tsv").read_text(encoding="utf-8")
+    names = pass_names(flush) + construction_ids(table)
     idle = set(not_exercised(flush, (ROOT / "src/core/word/analyze.h").read_text(encoding="utf-8")))
     unknown = [p for p in only if p not in names]
     if unknown:
-        print(f"unknown passes: {' '.join(unknown)}", file=sys.stderr)
+        print(f"unknown passes or rows: {' '.join(unknown)}", file=sys.stderr)
         return 2
     names = only or names
     cache = tempfile.mkdtemp(prefix="hdtrans-mutation-cache.")

@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 # Checks that the word classes src/core names (dict::InClass, dict::ClassMembers, always with a
 # literal set name; comments do not count) are the sets of classes.tsv: each named set has a doc
-# line and rows, and each set of the table is named somewhere.
+# line and rows, and each set of the table is named somewhere, in the sources or by an @SET of the
+# construction table (the engine checks those names when it reads the table).
 #   cmake -DSOURCE=<repository> -P word_classes.cmake
 if(NOT DEFINED SOURCE)
     message(FATAL_ERROR "SOURCE is required")
@@ -81,6 +82,13 @@ foreach(path IN LISTS sources)
             string(APPEND failures "${path}: ${set} has no rows in classes.tsv\n")
         endif()
     endforeach()
+endforeach()
+file(READ "${SOURCE}/src/core/dict/builtin/constructions.tsv" constructions)
+string(REGEX REPLACE "\n//[^\n]*" "" constructions "\n${constructions}")
+string(REGEX MATCHALL "@[LR]?[a-z][a-z0-9.-]*" calls "${constructions}")
+foreach(call IN LISTS calls)
+    string(REGEX REPLACE "^@[LR]?" "" set "${call}")
+    list(APPEND named "${set}")
 endforeach()
 set(sets ${docs} ${rows})
 list(REMOVE_DUPLICATES sets)

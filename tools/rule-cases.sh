@@ -8,9 +8,12 @@
 #                                dictionary row <row id> carries, with that target (the dictionary
 #                                translation as -why prints it);
 #   rule:L<n>=<target>           the same with the local rule number;
-#   !rule:dict:<row id>          that rule chooses nothing in the line.
+#   rule:cx:<family>:<prio>=<target>  some word or ending of the line takes that target from the
+#                                construction row (src/core/dict/builtin/constructions.tsv);
+#   !rule:dict:<row id>, !rule:cx:<family>:<prio>  that rule or row chooses nothing in the line.
 # `rule` names what the row tests: dict:<row id> or L<n> for a local rule, G<prio> for a global
-# rule, else <stage>:<name> (sound:, constraint:, rewrite:, compose:, normalize:, sense:, ...).
+# rule, cx:<family>:<prio> for a construction row, else <stage>:<name> (sound:, constraint:,
+# rewrite:, compose:, normalize:, sense:, ...).
 # kind is fix, keep or current. layer is the execution layer that decides the line
 # (docs/pipeline-layers.md: local, local-ending, global-stem, global-last, global-ending, lookup,
 # defaults, senses, rewrites, compose, normalize, sound, restore, ...); failures are grouped by it.

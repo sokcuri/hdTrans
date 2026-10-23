@@ -5,6 +5,7 @@
 // of each item's candidate and ending by the rules, and the passes that fix class-3
 // words, negatives and terminal forms.
 #include <cstddef>
+#include <span>
 #include <string_view>
 
 #include "core/output/families.h"
@@ -24,6 +25,8 @@ struct Flusher {
 
 // Runs the sentence passes over w.chain (the chain of one sentence after the token loop).
 void Flush(Flusher& f);
+// The names of the text-path passes in order; the families of the construction table run after them.
+std::span<const std::string_view> TextPassNames();
 
 // Selection (selectors.cpp).
 void CleanupSelectors(Flusher& f);
@@ -117,7 +120,6 @@ void QuestionCopula(Flusher& f);
 void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void ReturnTo(Flusher& f);
 void KaraSource(Flusher& f);
 void NiAfterAdverb(Flusher& f);
 void NoAfterNa(Flusher& f);

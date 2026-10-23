@@ -101,7 +101,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
 | `--speech LEVEL` | 대사(「」 안, 앞 줄에서 열린 「」 포함)의 말투. `soft`: 딱딱한 문장 끝 `-다`를 해체로 부드럽게 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야), `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. 평서형 의문문은 해체로 물음(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?). 동작의 현재(간다)와 のだ, である, かね 같은 딱딱한 대사, 번역에 해요체가 남는 대사는 그대로 둠. 공손체(です, ます)와 고풍 말투(ておる, じゃ)의 대사, 『』 안, 인용한 말(「…」という)은 그대로 둠. `--reference`에서는 `strict` |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
-| `--rule-counts FILE` | 선택 규칙마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G), `index`(전역 규칙은 PRIO), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
+| `--rule-counts FILE` | 선택 규칙과 구문 표의 행마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G, cx), `index`(전역 규칙은 PRIO, 구문 표는 행 id), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
 
 기존 `-in`, `-why` 같은 단일 하이픈 옵션도 받습니다. 직접 문장을 인자로 넘길 수 있고, `--` 뒤는 옵션으로 해석하지 않습니다.
 `--in`과 직접 문장을 함께 지정하면 오류입니다. npm CLI와 공통 옵션의 이름과 의미가 같으며, npm판의 실행 엔진은 WASM입니다.

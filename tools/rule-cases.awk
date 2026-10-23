@@ -1,5 +1,9 @@
 FILENAME == ARGV[1] {
-        if ($1 == "WHY" && $8 == "LocalRule") why[$2] = why[$2] "\n" "L" $9 "=" $10
+        if ($1 != "WHY") next
+        if ($8 == "LocalRule") why[$2] = why[$2] "\n" "L" $9 "=" $10
+        # A construction row names itself as the source of the word (15) or of the ending (17).
+        if ($15 ~ /^cx:/) why[$2] = why[$2] "\n" $15 "=" $10
+        if ($17 ~ /^cx:/) why[$2] = why[$2] "\n" $17 "=" $18
         next
     }
     FILENAME == ARGV[3] { rule_of[$1] = $2; next }
@@ -12,7 +16,7 @@ FILENAME == ARGV[1] {
         }
         if (!($5 in failed)) { failed[$5] = 0; order[++layers] = $5 }
         negate = 0
-        if ($3 ~ /^!rule:dict:/) { negate = 1; $3 = substr($3, 2) }
+        if ($3 ~ /^!rule:(dict|cx):/) { negate = 1; $3 = substr($3, 2) }
         if ($3 ~ /^rule:dict:/) {
             rest = substr($3, 11)
             at = index(rest, "=")
@@ -25,12 +29,12 @@ FILENAME == ARGV[1] {
         if (negate) {
             # !rule: the rule must not choose anything in this line.
             target = substr($3, 6)
-            if (index(why[n] "\n", "\n" target) != 0) {
+            if (index(why[n] "\n", "\n" target "=") != 0) {
                 got = substr(why[n], 2); gsub(/\n/, "; ", got)
                 report[$5] = report[$5] sprintf("%s: %s\n  expected no %s\n  actual   %s\n", $1, $2, target, got)
                 failed[$5]++; bad++
             }
-        } else if ($3 ~ /^rule:L[0-9]+=/) {
+        } else if ($3 ~ /^rule:(L[0-9]+|cx:[a-z0-9-]+:[0-9]+)=/) {
             want = substr($3, 6)
             if (index(why[n] "\n", "\n" want "\n") == 0) {
                 got = substr(why[n], 2); gsub(/\n/, "; ", got)
