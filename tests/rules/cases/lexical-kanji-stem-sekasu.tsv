@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:compound-verbs:29	俺を急かす。	나를 재촉한다.	fix	words
+dict:compound-verbs:29	急ぐ。	서두른다.	keep	words
