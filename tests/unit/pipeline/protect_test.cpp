@@ -96,6 +96,11 @@ HD_TEST(pipeline_cut_spans) {
         // ◯ has no Korean form of its own and is kept as written; ○ is a dictionary word.
         {"◯◯さん", "〖1◯◯〗さん"},
         {"○○さん", "○○さん"},
+        // Marks of tone after の and before a particle name a thing; elsewhere they stay text.
+        {"あなたの♡を", "あなたの〖1♡〗を"},
+        {"私の♪は。", "私の〖1♪〗は。"},
+        {"好きなの♡もっと", "好きなの♡もっと"},
+        {"大好き♡を", "大好き♡を"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(internal::CutSpans(c.in, {})), std::string(c.want));
 

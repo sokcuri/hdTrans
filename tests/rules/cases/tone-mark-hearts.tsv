@@ -5,3 +5,9 @@ protect:tone-mark	「だいすき♥」	「너무 좋아♥」	fix	protect
 protect:tone-mark	「おねがい♡」	「부탁♡」	fix	protect
 protect:tone-mark	「あんっ♡」	「앙♡」	keep	protect
 protect:tone-mark	「ふふ♪」	「후후♪」	keep	protect
+protect:tone-noun	あなたの♡を撃ち抜く	당신의 ♡을 쏘아 꿰뚫는다	fix	protect
+protect:tone-noun	私の♡は	나의 ♡은	fix	protect
+protect:tone-noun	私の♪を	나의 ♪을	fix	protect
+protect:tone-noun	「大好き♡」	「너무 좋아♡」	keep	protect
+protect:tone-noun	「いいよ♪」	「좋아♪」	keep	protect
+protect:tone-noun	♡♡	♡♡	keep	protect

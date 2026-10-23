@@ -208,24 +208,40 @@ Match ForeignSpan(std::string_view s) {
     return {n, output::SpanWord};
 }
 
-enum class SpanClass { Tag, BbCode, Entity, Style, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign };
+// A run of marks of tone (♪ and kToneMarks) that names a thing: after の and before a
+// particle (あなたの♡を, 私の♪は). A particle other than を counts only before a character
+// that is not hiragana, so that a word after a sentence-final の (なの♡もっと) is not one.
+Match ToneNounSpan(std::string_view before, std::string_view s) {
+    if (!before.ends_with("の")) return {};
+    const size_t n = RunOf(s, [](char32_t r) { return r == U'♪' || RuneIn(r, kToneMarks); });
+    if (n == 0) return {};
+    const text::Rune particle = text::DecodeRune(s.substr(n));
+    if (particle.cp == U'を') return {n, output::SpanWord};
+    if (!RuneIn(particle.cp, U"がはにへでもと")) return {};
+    const char32_t after = text::DecodeRune(s.substr(n + particle.size)).cp;
+    if (after >= U'ぁ' && after <= U'ゖ') return {};
+    return {n, output::SpanWord};
+}
+
+enum class SpanClass { Tag, BbCode, Entity, Style, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign, ToneNoun };
 
 constexpr SpanClass kClasses[] = {SpanClass::Tag,     SpanClass::BbCode, SpanClass::Entity,   SpanClass::Style,
                                   SpanClass::Marker,  SpanClass::Stutter, SpanClass::Drawl,   SpanClass::Emphasis,
-                                  SpanClass::Hangul,  SpanClass::Foreign};
+                                  SpanClass::Hangul,  SpanClass::Foreign, SpanClass::ToneNoun};
 
-Match MatchClass(SpanClass c, std::string_view s, char before, std::span<const std::string> markers) {
+Match MatchClass(SpanClass c, std::string_view before, std::string_view s, std::span<const std::string> markers) {
     switch (c) {
         case SpanClass::Tag: return TagSpan(s);
         case SpanClass::BbCode: return BbCodeSpan(s);
         case SpanClass::Entity: return EntitySpan(s);
-        case SpanClass::Style: return {StyleCodeLength(s, before), output::SpanOpen};
+        case SpanClass::Style: return {StyleCodeLength(s, before.empty() ? '\0' : before.back()), output::SpanOpen};
         case SpanClass::Marker: return MarkerSpan(s, markers);
         case SpanClass::Stutter: return StutterSpan(s);
         case SpanClass::Drawl: return DrawlSpan(s);
         case SpanClass::Emphasis: return EmphasisSpan(s);
         case SpanClass::Hangul: return HangulSpan(s);
         case SpanClass::Foreign: return ForeignSpan(s);
+        case SpanClass::ToneNoun: return ToneNounSpan(before, s);
     }
     return {};
 }
@@ -270,7 +286,7 @@ output::Pieces CutSpans(std::string_view text, std::span<const std::string> mark
                 continue;
             }
             const size_t free = next < cuts.size() ? cuts[next].start : text.size();
-            if (const Match m = MatchClass(c, text.substr(i, free - i), i > 0 ? text[i - 1] : '\0', markers); m.length > 0) {
+            if (const Match m = MatchClass(c, text.substr(0, i), text.substr(i, free - i), markers); m.length > 0) {
                 cuts.push_back({i, i + m.length, m.kind});
                 i += m.length;
                 continue;

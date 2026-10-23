@@ -53,7 +53,9 @@ namespace internal {
 //   - Hangul runs with the masks in or after them (자○), joined by ASCII or full-width
 //     spaces (SpanWord);
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
-//     taking the small vowel after it (SpanWord).
+//     taking the small vowel after it (SpanWord);
+//   - runs of marks of tone that name a thing, after の and before a particle
+//     (あなたの♡を; SpanWord).
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers);
 
 // The length of the inline style code at the start of s, or 0: a font %fNAME; (NAME up to
