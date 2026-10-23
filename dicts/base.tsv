@@ -7331,8 +7331,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 お偉方	높은 분	I110	VHn		GN				jisjk:40637		
 お元気	건강%A1@	G8U0			GN				jisjk:341276		
 お元気	건강	N110			GN				jisjk:341277		
-お元気そう	건강해 보%D4@	G8U0			GN				jisjk:356262		
-元気そう	건강해 보%D4@	G8U0			GN				colloq:genki-sou		
+お元気そう	건강해 보%D4@	G8U0		Av	GN				jisjk:356262		
+元気そう	건강해 보%D4@	G8U0		Av	GN				colloq:genki-sou		
 お元気でしたか	안녕하셨습니까	A9H1			GN				jisjk:90187		
 お元気でしょうか	안녕하십니까	A9D0			GN				jisjk:371836		
 お元気ですか	안녕하십니까	A9H1			GN				jisjk:90188		

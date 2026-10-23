@@ -10,3 +10,5 @@ ending:静かそうですね	「順調そうですね」	「순조로울 것 같
 ending:静かそう	大丈夫そうだ。	괜찮은 것 같다.	keep	builtin-ending
 dict:colloq:genki-sou	「アイツ、元気そうね」	「그 녀석, 건강해 보이네」	fix	lookup
 dict:colloq:genki-sou	元気そうで安心した。	건강해 보여 안심했다.	fix	lookup
+dict:colloq:genki-sou	元気そうだ。	건강해 보인다.	fix	lookup
+dict:jisjk:356262	お元気そうだ。	건강해 보인다.	fix	lookup
