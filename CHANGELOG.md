@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.6](https://github.com/sokcuri/hdTrans/compare/v0.4.5...v0.4.6) (2026-10-23)
+
+
+### Bug Fixes
+
+* **release:** read numbers, questions and cries naturally and harden the engine ([177b3c4](https://github.com/sokcuri/hdTrans/commit/177b3c44ec5ba2015f4b09a0511e839ec25dcf8a))
+* **release:** read numbers, questions and cries naturally and harden the engine ([#45](https://github.com/sokcuri/hdTrans/issues/45)) ([177b3c4](https://github.com/sokcuri/hdTrans/commit/177b3c44ec5ba2015f4b09a0511e839ec25dcf8a))
+* **translation:** read counts, labels, cries and questions as Korean games write them ([#44](https://github.com/sokcuri/hdTrans/issues/44)) ([588508d](https://github.com/sokcuri/hdTrans/commit/588508d047d77c37464cc5e800dc8f04fce562f9))
+
 ## [0.4.5](https://github.com/sokcuri/hdTrans/compare/v0.4.4...v0.4.5) (2026-10-23)
 
 
