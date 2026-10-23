@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:i:7072	3ページ目を開く	3페이지째를 연다	fix	local
+dict:i:7072	本の3ページ目を開いた	책의 3페이지째를 열었다	fix	local
+dict:jisjk:92789	2ページ目を開けた	2페이지째를 열었다	fix	local
+dict:i:7072	ゆっくりと目を開いた	천천히 눈을 떴다	keep	local
+dict:jisjk:92789	目を開けた	눈을 떴다	keep	local
