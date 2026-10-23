@@ -31,6 +31,10 @@ rewrite:comitative-to	３と答えた。	3이라고 대답했다.	fix	rewrites
 rewrite:comitative-to	修正液で消して０と書いてあった	수정액으로 지워 0이라고 써 있었다	fix	rewrites
 rewrite:comitative-to	答えは５と言った。	대답은 5라고 말했다.	keep	rewrites
 rewrite:comitative-to	「はい」と言った。	「네」라고 말했다.	keep	rewrites
+rewrite:comitative-to	「お疲れ～」と田中と佐藤	「수고했어~」라고 타나카와 사토	fix	rewrites
+rewrite:comitative-to	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
+rewrite:comitative-to	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
+rewrite:comitative-to	「潜水母艦」と複数の潜水艦を編成せよ！	「잠수모함」과 복수의 잠수함을 편성하라!	keep	rewrites
 rewrite:no-after-na	元気そうなのが一番だ。	씩씩한 것이 제일이다.	current	rewrites
 rewrite:no-after-na	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
 rewrite:no-after-na	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites

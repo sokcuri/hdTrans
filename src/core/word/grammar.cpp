@@ -2425,7 +2425,12 @@ void ComitativeTo(Flusher& f) {
         if (it->group->surface == "と") {
             if (!NumberSurface(p->group->surface)) continue;
         } else if (it->group->surface == "」と" || it->group->surface == "』と") {
-            if (At(p->Code(p->selected), 0) != '1' || p->prev == nullptr || !Has("「『", p->prev->group->surface)) continue;
+            // A bracketed word span the phrase or sound stage already read is an utterance, so its と quotes.
+            if (At(p->Code(p->selected), 0) != '1' || (p->Fixed() && f.w.Span(p->tokenIndex) == tokenizer::kSpanWord) ||
+                p->prev == nullptr ||
+                !Has("「『", p->prev->group->surface)) {
+                continue;
+            }
             bracket = "」";
         } else {
             continue;
