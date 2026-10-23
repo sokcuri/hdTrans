@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/output/inflect.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/token.h"
 #include "core/word/strings.h"
@@ -26,6 +27,27 @@ bool PredicativeAdverb(std::string_view s) {
 
 // Two width units of numerals (兆億万千百十九..一○).
 bool NumeralPair(const Window& w) { return !w.broken && WidthOf(w.text) == 2 && Has(kNumeralOrder, w.text); }
+
+// Whether an entry of the stem group g says no: a negative of the dictionary (gram Xn) or
+// a Korean whose last word is the predicate 없다, 않다 or 모르다 (知らない $C4@, 行けない
+// 갈 수 $FA@), not an adjective that only ends in one (馬鹿馬鹿しい 어처구니$FA@).
+bool NegativeStem(const Group& g) {
+    for (const Entry* e : g.entries) {
+        if (Has(e->gattr, "Xn")) return true;
+        const std::string_view t = e->dst;
+        if (t.size() < 4 || !t.ends_with("@") || (t.size() > 4 && t[t.size() - 5] != ' ')) continue;
+        const output::internal::KoreanFamily* f = output::internal::FindKoreanFamily(t.substr(t.size() - 4));
+        if (f != nullptr && (f->stem == "없" || f->stem == "않" || f->stem == "모르")) return true;
+    }
+    return false;
+}
+
+// An ending row in いことはない or いことは無い reads a double negative (知らないことはない 모르는
+// 것은 아니다); after a stem that does not say no, ことはない is a superlative (こんなに切ない
+// ことはない 이렇게 안타까운 일은 없다).
+bool DoubleNegativeRow(const Entry& e) {
+    return e.user != nullptr && At(e.user->codes->partText, 0) == 'T' && e.user->key.starts_with("いことは");
+}
 
 }  // namespace
 
@@ -97,6 +119,7 @@ bool Item::RunKeiyoTrieQuery() {
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
                 if (Byte(At(e.code, 1)) != base.kind || (Has(e.gattr, "Sh") && Classify(remaining) != 0) ||
+                    (DoubleNegativeRow(e) && !NegativeStem(*group)) ||
                     !w->EndingApplies(e, after, tokenIndex) ||
                     w->CutsWord(remaining.substr(0, remaining.size() - second.size()), second.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), second.size())), after)) {
                     base.enabled[index] = false;

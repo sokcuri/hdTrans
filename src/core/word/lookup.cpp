@@ -130,14 +130,6 @@ bool AskedNegativeGuess(const dict::UserEntry& u, std::string_view left, std::st
     return before.ends_with("じゃな") || before.ends_with("ではな");
 }
 
-// An i-adjective row in いことはない or いことは無い after a stem that is no negative in な: the
-// row reads a double negative (知らないことはない 모르는 것은 아니다), while after another
-// adjective ことはない is a superlative (こんなに嬉しいことはない 이렇게 기쁜 일은 없다).
-bool PositiveDoubleNegative(const dict::UserEntry& u, std::string_view left, std::string_view query) {
-    if (At(u.codes->partText, 0) != 'T' || !u.key.starts_with("いことは") || left.size() < query.size()) return false;
-    return !left.substr(0, left.size() - query.size()).ends_with("な");
-}
-
 // The means ことで (送ることで 보냄으로써) neither after 言う (ということで, と言うことで: the
 // connective 그래서, 라는 것으로) nor before the negative copula (満たすことでなく
 // 채우는 것이 아니라); query is the text from ことで on, left its token.
@@ -382,7 +374,7 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
         }
     }
     const std::string_view left = Tok(current).text;
-    if (AskedNegativeGuess(u, left, query) || PositiveDoubleNegative(u, left, query)) return false;
+    if (AskedNegativeGuess(u, left, query)) return false;
     if (u.key.ends_with("ことで") && SaysOrNegates(left, query)) return false;
     if (tag == 'P') {
         const long before = std::max(static_cast<long>(left.size()) - static_cast<long>(query.size()), 0L);
