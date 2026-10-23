@@ -31,3 +31,5 @@ compose:native-count-idiom	攻撃に1回耐える。	공격에 1회 참는다.	k
 compose:native-count-idiom	3回も言った。	3회나 말했다.	keep	compose
 compose:native-count-idiom	3度も言った。	3번이나 말했다.	keep	compose
 dict:jisjk:267304	2度と来るな。	두 번 다시 오지 마.	fix	lookup
+compose:native-count-ordinal	1杯目のコーヒー	1잔째의 커피	fix	compose
+compose:native-count-ordinal	1杯	한잔	keep	compose

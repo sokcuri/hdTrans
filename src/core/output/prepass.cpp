@@ -536,7 +536,7 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     // or else 첫 번.
     const bool ordinal = Ordinal(items, i);
     if (std::string first = FirstUnit(t, item.surface, ordinal); !first.empty()) return first;
-    for (const std::string_view count : kNativeCounts) {
+    for (const std::string_view& count : kNativeCounts) {
         if (!t.starts_with(count) || t.size() == count.size()) continue;
         const bool apart = t[count.size()] == ' ';
         if (apart && !ordinal) continue;
@@ -554,6 +554,13 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
             break;
         }
         const NativeCounter* c = FindNativeCounter(surface.substr(numeral), korean);
+        // A word of an Arabic digit and its counter (1杯 한잔) counts in digits in an ordinal
+        // (1杯目 1잔째, as 2杯目 2잔째).
+        const auto value = &count - std::begin(kNativeCounts) + 1;
+        if (c != nullptr && ordinal && value <= 9 && text::IsDigit(text::DecodeRune(surface).cp)) {
+            t = std::to_string(value) + std::string(korean);
+            break;
+        }
         if (c != nullptr && !(c->joins && count == "한" && !ordinal)) t = WriteNativeCount(count, *c, ordinal);
         break;
     }
