@@ -653,14 +653,14 @@ bool Worker::VerbUtterance(const Record& r) const {
 }
 
 // A predicate followed only by closing punctuation: rest, the text of its token after
-// the ending, is closing punctuation, or rest is empty and the next token ends the
-// sentence or the line, is closing punctuation (…) or laughter (www). With comma, a
-// comma after the predicate also ends it.
+// the ending, is closing punctuation or a dash, or rest is empty and the next token ends
+// the sentence or the line, is closing punctuation (…, ――) or laughter (www). With comma,
+// a comma after the predicate also ends it.
 bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     // The punctuation that may follow a sentence-final predicate in its token, and the
     // small kana that only lengthen or stop its last sound (書くなっ, 来たぁ).
     static constexpr std::string_view kClosing[] = {"。", "．", "！", "？", "…", "‥", "・", "」", "』", "）", "～",
-                                                    "ー", "♪", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
+                                                    "ー", "―", "—", "─", "♪", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
                                                     "ぁ", "ぃ", "ぅ", "ぇ", "ぉ", "ァ", "ィ", "ゥ", "ェ", "ォ"};
     auto closing = [](std::string_view t) {
         while (!t.empty()) {
