@@ -29,3 +29,14 @@ dict:w:27002	今週いっぱい休む。	금주 내내 쉰다.	keep	defaults
 dict:number-ippai	彼女の精一杯の描写。	그녀의 혼신의 묘사.	fix	defaults
 dict:number-ippai	精一杯頑張ります！	힘껏 노력하겠습니다!	keep	defaults
 dict:number-ippai	お腹が痛い。	배가 아프다.	keep	defaults
+dict:number-ippai	胸が一杯だ。	가슴이 벅차다.	fix	fixed
+dict:jisjk:373504	ドキドキ……頭がいっぱいさ	두근두근……머릿속이 가득해	fix	local-ending
+dict:jisjk:373504	胸が一杯さ。	가슴이 벅차.	fix	local-ending
+dict:jisjk:373504	お腹がいっぱいさ	배가 불러	fix	local-ending
+dict:jisjk:373504	お疲れ様だね、司令官！大丈夫さ！	수고 하셨습니다구나, 사령관! 괜찮아!	fix	local-ending
+dict:jisjk:373504	狩りは得意さ。	사냥은 자신있어.	fix	local-ending
+dict:jisjk:373504	俺の狡猾さ…！！	내 교활함…!!	keep	ending-defaults
+dict:jisjk:373504	大変さがわかる。	힘듦을 알 수 있다.	keep	ending-defaults
+dict:jisjk:373504	その大切さを知った。	그 중요함을 알았다.	keep	ending-defaults
+dict:jisjk:373504	頭がいっぱいだよ	머릿속이 가득해	keep	defaults
+dict:jisjk:373504	容姿と優秀さで有名だ。	용모와 우수함으로 유명하다.	keep	ending-defaults
