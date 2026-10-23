@@ -6,7 +6,7 @@ word:ellipsis-end	明るくて暖かい…居場所…。	밝고 따뜻한…있
 word:ellipsis-end	ねえ、起きてる……？	있잖아, 일어나고 있어……?	keep	local-ending
 word:ellipsis-end	私が隠している……すべてのことを	내가 숨기고 있는……모든 일을	fix	local-ending
 word:ellipsis-end	一応は気になる……くらい？	일단은 신경 쓰이는……정도?	fix	local-ending
-word:ellipsis-end	夜は、危ない……かも。	밤은, 위험한……일지도.	fix	local-ending
-word:ellipsis-end	別にいい…そういうのは。	별로 좋다…그러한 것은.	fix	local-ending
+word:ellipsis-end	雨が降る……かも。	비가 오는……일지도.	fix	local-ending
+word:ellipsis-end	眠い…そういうのは後で。	졸리다…그러한 것은 나중에.	fix	local-ending
 word:ellipsis-end	がんばります……かも。	열심히 하겠습니다……일지도.	keep	local-ending
 word:ellipsis-end	みんなを、信じる……か	모두를, 믿는다……인가	keep	local-ending
