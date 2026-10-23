@@ -26821,3 +26821,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いいとこ	좋은 데	N110			GN						いいとこ	w:26802
 いいとこ見せ	멋진 모습을 보&AJ@	M437			GN						いいとこみせ	w:26803
 いいとこを見せ	멋진 모습을 보&AJ@	M437			GN						いいとこをみせ	w:26804
+デプロイ	디플로이	N110		Hd	GN							w:26787
+プル	풀	N110		Hd	GN							w:26788
+起票	작성	N110		Hd	GN							w:26789
+コピペ	복붙	N110		Hd	GN							w:26790
+炎上	불타&E6@	M419			GN							w:26791
+炎上プロジェクト	불붙은 프로젝트	N110			GN							w:26792

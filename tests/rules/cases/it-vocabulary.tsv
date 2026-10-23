@@ -12,3 +12,18 @@ lexical:loanword-spelling	キャッシュを削除してください。	캐시�
 lexical:loanword-spelling	ディレクトリを移動する。	디렉터리를 이동한다.	fix	defaults
 lexical:loanword-spelling	データベースを調べた。	데이터베이스를 조사했다.	fix	defaults
 lexical:loanword-spelling	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
+lexical:it-loanword	リポジトリをクローンしてください。	리포지토리를 클론해 주세요.	fix	defaults
+lexical:it-loanword	プルリクエストを送った。	풀 리퀘스트를 보냈다.	fix	defaults
+lexical:it-loanword	本番環境にデプロイした。	실전 환경에 디플로이했다.	fix	defaults
+lexical:it-loanword	ソースコードを読む。	소스 코드를 읽는다.	fix	defaults
+lexical:it-loanword	コンパイルエラーが出た。	컴파일 에러가 나왔다.	fix	defaults
+lexical:it-loanword	フレームワークを選ぶ。	프레임워크를 선택한다.	fix	defaults
+lexical:it-loanword	スクリーンショットを撮った。	스크린샷을 찍었다.	fix	defaults
+lexical:it-loanword	画像をアップロードする。	이미지를 업로드한다.	fix	defaults
+lexical:it-loanword	コピペした。	복붙했다.	fix	defaults
+lexical:it-loanword	この改造、仕様書はどこだ？	이 개조, 사양서는 어디야?	fix	defaults
+lexical:it-loanword	あとは本格的なバグの洗い出しだな	나머지는 본격적인 버그의 찾아내기네	fix	defaults
+lexical:it-loanword	後輩氏の炎上プロジェクトの後始末	후배 씨 불붙은 프로젝트의 뒤처리	fix	defaults
+lexical:it-loanword	資料もなく作業して炎上しない訳が無い。	자료도 없게 작업해 불타오르지 않을 리가 없다.	fix	defaults
+lexical:it-loanword	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
+lexical:it-loanword	ソフトをインストールした。	소프트를 설치했다.	keep	defaults

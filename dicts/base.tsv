@@ -46043,7 +46043,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 アップルパイ	애플 파이	N110	VFd		GN				jisjk:156995		
 アップルメニュー	애플 메뉴	N130			IT				jisjk:261628		
 アップル社	애플사	N110	VBl		GN				jisjk:156993		
-アップロード	업 로드	N110		Hd	IT				jisjk:156996		
+アップロード	업로드	N110		Hd	IT				jisjk:156996		
 アップワードコンパチブル	upward compatible	N110			GN				jisjk:42602		
 アッペンゼラ	아펜젤라	N130			GN				jisjk:97450		
 アツギ	아츠기	N130			BZ				jisjk:359058		
@@ -52486,7 +52486,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 オフプライスストア	오프 프라이스(off-price)스토어	N110	VPl		BZ				jisjk:363395		
 オフホワイト	off-white	N110			GN				jisjk:158279		
 オフマイク	오프마이크	N110	UAr		GN				jisjk:158280		
-オフライン	오프 라인	N110			IT				jisjk:260303		
+オフライン	오프라인	N110			IT				jisjk:260303		
 オフラインのつきあい	오프라인 교제	N110			GN				jisjk:152109		
 オフラインブラウズ	offline browse	N110			IT				jisjk:260304		
 オフリミッツ	출입 금지	N110			GN				jisjk:158281		
@@ -59381,7 +59381,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 コンパイラ型言語	compiler language	N110			IT				jisjk:260535		
 コンパイル	컴파일	N110			GN				jisjk:47317		
 コンパイルアンドゴー	컴파일 앤드 고우	N110			GN				jisjk:47318		
-コンパイルエラー	compile error	K110			IT				jisjk:260536		
+コンパイルエラー	컴파일 에러	K110			IT				jisjk:260536		
 コンパイン	combine	N110			GN				jisjk:47319		
 コンパウンド	콤파운드	N110			GN				jisjk:47320		
 コンパウンドエディタ	컴파운드 에디터	N110	UTt		GN				jisjk:47321		
@@ -62364,7 +62364,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ショートアカウント	단기 예측 매각	N110	VMo		GN				jisjk:129361		
 ショートオーダー	즉석 요리	N110	VFd		GN				jisjk:129362		
 ショートカット	쇼트 컷	N110	VAc		GN				jisjk:129363		
-ショートカットキー	단축 키	N110			IT				jisjk:261248		
+ショートカットキー	단축키	N110			IT				jisjk:261248		
 ショートカバー	쇼트 카바	N110	VMo		GN				jisjk:129364		
 ショートケーキ	쇼트케이크	N110	VFd		GN				jisjk:129365		
 ショートサーキット	단락	N110	VEl		GN				jisjk:129366		
@@ -64236,7 +64236,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 スクリーンエディター	스크린 에디터	N110			GN				jisjk:129786		
 スクリーンキャプチャ	화면 캡취	N110			IT				jisjk:261286		
 スクリーングラバー	screen grabber	N110			GN				jisjk:48820		
-スクリーンショット	screen shot	N110		Op	IT				jisjk:261703		
+スクリーンショット	스크린샷	N110		Op	IT				jisjk:261703		
 スクリーンセイバー	스크린 세이버	N110			GN				jisjk:129787		
 スクリーンセーバ	화면 보호기	N110			IT				jisjk:261288		
 スクリーンセーバー	스크린 세이버	N110			GN				jisjk:103975		
@@ -67064,8 +67064,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ソースエディター	source editor	N110			GN				jisjk:49801		
 ソースエラ	소스 에러	N110			GN				jisjk:49802		
 ソースコーディング	source coding	N110			GN				jisjk:49803		
-ソースコード	원시 코드	N110			IT				jisjk:261340		
-ソースファイル	원시 파일	N110			IT				jisjk:261342		
+ソースコード	소스 코드	N110			IT				jisjk:261340		
+ソースファイル	소스 파일	N110			IT				jisjk:261342		
 ソースファイルサーバ	소스 파일 서버	N110			GN				jisjk:49804		
 ソースフィールド	source field	N110			GN				jisjk:49805		
 ソースプログラム	소스 프로그램	N110			GN				jisjk:130465		
@@ -80467,7 +80467,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 フレームバッフャ	frame buffer	N110			IT				jisjk:262693		
 フレームリレー	프레임 릴레이(frame relay)	N110			BZ				jisjk:262695		
 フレームレート	frame rate	N110			IT				jisjk:262697		
-フレームワーク	체제	N110	UTs		GN				jisjk:133537		
+フレームワーク	프레임워크	N110	UTs		GN				jisjk:133537		
 フレーム理論	frame theory	N110			IT				jisjk:262696		
 フレールせんしゃ	지레제거 대전차	N110	VTw		MI				jisjk:345915		
 フレール戦車	지레제거 대전차	K110	VTw		MI				jisjk:345917		
@@ -81560,7 +81560,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 プラグを差しこ	플러그를 &FU@	M445			GN				jisjk:148543		
 プラグを差し込	플러그를 &FU@	M445			GN				jisjk:148542		
 プラグアンドプレイ	플러그 앤 플레이	N110			IT				jisjk:261731		
-プラグイン	플러그 인	N110			IT				jisjk:261732		
+プラグイン	플러그인	N110			IT				jisjk:261732		
 プラグインカード	plug-in card	N110			GN				jisjk:55915		
 プラグインソフト	플러그 인 소프트웨어 	N110			IT				jisjk:262183		
 プラグコンパチブルマシーン	호환성 있는 컴퓨터	N110			GN				jisjk:152505		
@@ -83927,7 +83927,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ホームヘルプサービス	봉사원 제도	N110			GN				jisjk:134204		
 ホームヘルプ制度	홈 헬프 시스템	N110	VMo		GN				jisjk:134203		
 ホームベースドビジネス	재택 사업	N110	VMo		GN				jisjk:134205		
-ホームページ	홈 페이지	N110	VBl		IT				jisjk:134206		
+ホームページ	홈페이지	N110	VBl		IT				jisjk:134206		
 ホームページへ	홈페이지로	A9H1			GN				jisjk:104046		
 ホームページもどき	홈 페이지 모방	N110			GN				jisjk:134208		
 ホームページ作り	홈 페이지 만들기	N110			GN				jisjk:134207		
@@ -91000,7 +91000,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 リボ核酸	리보 핵산	N110			GN				jisjk:135746		
 リポイド	리포이드	N110			GN				jisjk:135751		
 リポジショニング	리포지셔닝	N110	VCmVMo		GN				jisjk:135752		
-リポジトリ	리포지터리(repository)	N110			BZ				jisjk:364155		
+リポジトリ	리포지토리	N110			BZ				jisjk:364155		
 リポゾーム	리포솜	N110			GN				jisjk:135753		
 リポーター	리포터	N110	UAq		GN				jisjk:59263		
 リポーティングシステム	보고제도	N110			GN				jisjk:107091		
@@ -118662,7 +118662,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 仕来り	관례	I110			GN				jisjk:105872		
 仕業	조업	N110			GN				jisjk:24980		
 仕様	사양	N110			GN				jisjk:24979		
-仕様書	시방서	N110	VMo		GN				jisjk:191950		
+仕様書	사양서	N110	VMo		GN				jisjk:191950		
 仕様書き	사양서	I110			GN				jisjk:71754		
 仕法	방식	N110			GN				jisjk:24975		
 仕法書	시방서	I110	VSw		GN				jisjk:71745		
@@ -258815,7 +258815,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 洗い上げ	철저히 조사해서 밝&AW@	M447	ULw		GN				jisjk:138574		
 洗い出	밝혀&A6@	M433			GN				jisjk:93574		
 洗い出	들추어&A6@	M443			GN				jisjk:138583		
-洗い出し	들추어내기	N110			GN				jisjk:124893		
+洗い出し	찾아내기	N110			GN				jisjk:124893		
 洗い堰	둑	N110	VBl		GN				jisjk:227677		
 洗い場	주방	I110	VPlVCk		GN				jisjk:74623		
 洗い張り	재양	I110			GN				jisjk:111111		
