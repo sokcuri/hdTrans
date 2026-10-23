@@ -15,6 +15,9 @@ cx:go-not-say:10		&&7 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== 
 cx:go-not-say:20		&&6 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni	set-verb "가다"	the word has no candidate 가다
 //= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
+//= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
+cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
+cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
 cx:hodo-degree:10		&&3 ||2 U+0== "R程に" U+0== "Rほどに" ||2 Y+0== "~수록" &&2 Y+0== "~만큼" S+1== "に" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도로"	痛ましい程に 참혹할 정도로
 cx:hodo-degree:20		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1== "に" ||2 Y+0== "~수록" Y+0== "~만큼" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도" select-lemma@+1 "(으)로"	ほどに with に its own word

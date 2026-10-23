@@ -71,7 +71,6 @@ void RespectfulPassive(Flusher& f);
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
 void PositiveIke(Flusher& f);
-void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
 // A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its

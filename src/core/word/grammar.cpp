@@ -731,40 +731,6 @@ void PositiveIke(Flusher& f) {
     }
 }
 
-namespace {
-
-// Whether the attributive of it modifies a noun of an event (海外であった事件): the first word after it that
-// does not inflect is a verbal noun or one of noun.event.
-bool ModifiesEvent(const Item* it) {
-    const Entry* e = it->DirectEntry(it->DirectIndex());
-    if (e == nullptr || e->dst != "8") return false;
-    const Item* n = it->next;
-    while (n != nullptr && n->detail->Yougo()) n = n->next;
-    if (n == nullptr || n->selected < 0 || At(n->Code(n->selected), 0) != '1') return false;
-    const std::string_view noun = n->group->surface;
-    return Has(n->GAttr(n->selected), "Hd") ||
-           std::ranges::any_of(dict::ClassMembers("noun.event"), [&](std::string_view v) { return noun.ends_with(v); });
-}
-
-}  // namespace
-
-// であ that a place before it read as 에서 만나다: before a noun of an event it is 에서 있다, what happened
-// there; after a noun that is no place partner it is the copula.
-void CopulaDeAru(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "であ" ||
-            !output::Lemma(it->EntryText(it->selected), f.families).starts_with("에서 만나")) {
-            continue;
-        }
-        if (ModifiesEvent(it)) {
-            SelectLemma(f, it, "에서 있다");
-        } else if (!dict::InClass("word.meet-partner", p->group->surface)) {
-            SelectLemma(f, it, "이다");
-        }
-    }
-}
-
 void NegativeCopula(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* p = it->prev;
