@@ -246,8 +246,8 @@ std::string_view TextTail(const Pieces& p) {
     return !p.empty() && p.back().span == SpanText ? std::string_view(p.back().text) : std::string_view();
 }
 
-// A word read as a particle that a noun before it takes without a space (바위뿐, 평소대로,
-// 크기밖에, 밭마다, 그만큼), keyed by the Japanese it translates.
+// A word read as a particle or suffix that a noun before it takes without a space (바위뿐,
+// 평소대로, 크기밖에, 밭마다, 그만큼, 한 번당), keyed by the Japanese it translates.
 bool AttachesToNoun(std::string_view surface, std::string_view korean) {
     struct Particle {
         std::string_view japanese;
@@ -261,7 +261,7 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
     for (const Particle& p : kParticles) {
         if (surface.starts_with(p.japanese) && korean.starts_with(p.korean)) return true;
     }
-    return false;
+    return korean == "당" && (surface == "あたり" || surface == "当たり" || surface == "当り");
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,
@@ -711,8 +711,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         return Result(std::move(t), false);
     }
     // The word before a native count stands apart from it (개 두 마리, not 개두 마리), also
-    // across items that write nothing.
-    for (int j = settings_.literal ? nextIndex : count; j < count && TokenDistance(tokens, item.tokenIndex, items[j].tokenIndex) < 2; j++) {
+    // across items that write nothing; punctuation keeps its own spacing (두 번·한 번).
+    for (int j = settings_.literal && !Opens(LastRune(t)) ? nextIndex : count;
+         j < count && TokenDistance(tokens, item.tokenIndex, items[j].tokenIndex) < 2; j++) {
         if (WritesNativeCount(items, tokens, j)) {
             if (!t.ends_with(' ')) return Result(std::move(t), true);
             break;
@@ -729,11 +730,19 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     // 몇 and 여러 stand apart from any counter (몇 체, 몇 층).
     if (settings_.literal && (t == "몇" || t == "여러") && Contains(nextTags, "Ct")) return Result(std::move(t), true);
-    // A number word in Hangul stands apart from the counter after it (수십 명, 몇백 년).
-    if (constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
-        settings_.literal && Contains(nextTags, "Ct") &&
-        std::find(std::begin(kNumberWords), std::end(kNumberWords), t) != std::end(kNumberWords)) {
-        return Result(std::move(t), true);
+    // A number word in Hangul, also one that goes on with 만 or 억 (몇십만, 수백억), stands
+    // apart from the counter after it (수십 명, 몇백 년, 몇십만 명) and joins 万 or 億.
+    if (settings_.literal && Contains(nextTags, "Ct")) {
+        constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
+        auto numberWord = [&](std::string_view w) {
+            return std::find(std::begin(kNumberWords), std::end(kNumberWords), w) != std::end(kNumberWords);
+        };
+        const bool myriad = next.surface == "万" || next.surface == "億";
+        if (numberWord(t)) return Result(std::move(t), !myriad);
+        if ((item.surface == "万" || item.surface == "億") && previous >= 0 && numberWord(EntryText(items[previous])) &&
+            !myriad) {
+            return Result(std::move(t), true);
+        }
     }
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };
     bool allowSpacing = true;
@@ -921,6 +930,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
                 return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
+            // 第 read 제 is a prefix of the number after it (제19구축대).
+            if (item.surface == "第" && t == "제" && nd(nextTags)) return Result(std::move(t), false);
             if (nd(nextTags)) return Result(std::move(t), true);
             if (WidthOf(t) == 2 && previous >= 0) {
                 if ((nd(GAttr(items[previous])) && Contains(tags, "Ct")) || nd(tags)) return Result(std::move(t), true);
