@@ -53,6 +53,9 @@ bool Person(std::string_view attr);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
+// A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
+// with it instead of 어지다.
+void OwnPassives(Flusher& f);
 void GoNotSay(Flusher& f);
 void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);

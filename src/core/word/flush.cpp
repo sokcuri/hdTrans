@@ -15,6 +15,7 @@ void Flush(Flusher& f) {
     ApplyNegatives(f);
     if (f.w.settings.text) {
         Select(f);
+        OwnPassives(f);
         ChooseInitialConjunctions(f);
         GoNotSay(f);
         HanBeforeNa(f);

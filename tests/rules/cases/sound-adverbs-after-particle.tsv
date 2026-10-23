@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 sound:particle-before-sound	正面の椅子にちんまりと腰を下ろしている少女	정면의 의자에 오도카니 앉아 있는 소녀	fix	sound
 sound:particle-before-sound	火力がちょこっと足りないのかしら	화력이 살짝 부족한 걸까	fix	sound
-sound:particle-before-sound	世界観の相違をまざまざと見せ付けられた	세계관의 차이를 생생히 과시해졌다	fix	sound
+sound:particle-before-sound	世界観の相違をまざまざと見せ付けられた	세계관의 차이를 생생히 과시되었다	fix	sound
 sound:particle-before-sound	腐ったような香りがもわりと漂ってきた	썩은 것 같은 향기가 물씬 감돌아 왔다	fix	sound
 sound:particle-before-sound	燭台の炎がふるりと揺れて	촛대의 불길이 부르르 흔들려	fix	sound
 sound:particle-before-sound	ちびっと優しくしてやって	찔끔 다정하게 해 줘	fix	sound

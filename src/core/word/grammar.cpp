@@ -40,6 +40,23 @@ constexpr PassiveLemma kPassiveLemmas[] = {
     {"捨て", "버려지다:규칙"}, {"育て", "길러지다:규칙"}, {"命じ", "명령받다"},
 };
 
+// Korean verbs with a passive of their own (먹다 먹히다, 둘러싸다 둘러싸이다), which a
+// passive item takes instead of 어지다.
+struct KoreanPassive {
+    std::string_view active;
+    std::string_view passive;
+};
+
+constexpr KoreanPassive kKoreanPassives[] = {
+    {"먹다", "먹히다"},     {"잡다", "잡히다"},     {"밟다", "밟히다"},     {"막다", "막히다"},
+    {"찍다", "찍히다"},     {"뽑다", "뽑히다"},     {"박다", "박히다"},     {"둘러싸다", "둘러싸이다"},
+    {"에워싸다", "에워싸이다"}, {"쌓다", "쌓이다"}, {"놓다", "놓이다"},     {"섞다", "섞이다"},
+    {"꺾다", "꺾이다"},     {"덮다", "덮이다"},     {"묶다", "묶이다"},     {"쫓다", "쫓기다"},
+    {"빼앗다", "빼앗기다"}, {"찢다", "찢기다"},     {"끊다", "끊기다"},     {"끌다", "끌리다"},
+    {"물다", "물리다"},     {"팔다", "팔리다"},     {"밀다", "밀리다"},     {"누르다", "눌리다"},
+    {"부르다", "불리다"},   {"자르다", "잘리다"},   {"흔들다", "흔들리다"}, {"잡아먹다", "잡아먹히다"},
+};
+
 // The target of the passive lemma of surface; false when surface has none.
 bool PassiveTarget(Flusher& f, std::string_view surface, std::string& target) {
     for (const PassiveLemma& p : kPassiveLemmas) {
@@ -172,6 +189,42 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
     return subject != nullptr && Thing(subject->Attr(std::max(subject->selected, 0))) && !rest.starts_with("る");
 }
 
+// Nouns with 하다 whose passive is the noun with 받다 (사과받다) or 당하다 (무시당하다); the
+// others take 되다 (고용되다).
+constexpr std::string_view kReceivedNouns[] = {
+    "사과", "축하", "비난", "칭찬", "위협", "공격", "의심", "존경", "초대", "부탁", "요청", "지시", "명령",
+    "질문", "추천", "소개", "지원", "용서", "허락", "인정", "환영", "주목", "보호", "치료", "교육", "지적",
+    "오해", "고백", "사랑", "감사", "대접", "위로", "격려", "축복", "저주", "제안", "신뢰", "주의", "충고", "재판",
+};
+constexpr std::string_view kSufferedNouns[] = {
+    "무시", "거절", "배신", "이용", "습격", "강요", "협박", "돌진", "매도", "납치", "살해", "폭행", "감금",
+    "추방", "방해", "모욕", "조롱", "추격", "포위", "기습", "학대", "구박", "고문", "희롱",
+};
+// Nouns with 하다 that keep 어지다 (말하다 말해지다, 의지하다).
+constexpr std::string_view kKeptNouns[] = {"말", "의지", "생각", "일"};
+
+// The Korean passive of the Korean of a passive verb: a verb of kKoreanPassives, or a
+// noun with 하다 as the noun with 되다, 받다 or 당하다; "" for others (a psych verb in 어하다).
+std::string KoreanPassiveLemma(std::string_view lemma) {
+    for (const KoreanPassive& k : kKoreanPassives) {
+        if (lemma == k.active || (lemma.ends_with(k.active) && lemma[lemma.size() - k.active.size() - 1] == ' ')) {
+            return std::string(lemma.substr(0, lemma.size() - k.active.size())) + std::string(k.passive);
+        }
+    }
+    constexpr std::string_view kHada = "하다";
+    if (!lemma.ends_with(kHada) || lemma.size() < kHada.size() + 6) return {};
+    const std::string_view stem = lemma.substr(0, lemma.size() - kHada.size());
+    const std::size_t space = stem.rfind(' ');
+    const std::string_view noun = space == std::string_view::npos ? stem : stem.substr(space + 1);
+    const char32_t last = DecodeLastRune(noun).cp;
+    if (last < 0xAC00 || last > 0xD7A3 || noun.size() < 6) return {};
+    // 좋아하다, 미워하다: a feeling in 어하다, whose passive is another word (미움받다).
+    if (last == U'아' || last == U'어' || last == U'워' || last == U'여' || last == U'와') return {};
+    if (InSet(kKeptNouns, noun)) return {};
+    const std::string_view by = InSet(kReceivedNouns, noun) ? "받다" : InSet(kSufferedNouns, noun) ? "당하다" : "되다";
+    return std::string(stem) + std::string(by);
+}
+
 // Writes a passive verb item of kPassiveLemmas as its Korean passive in the active voice.
 void WriteLexicalPassive(Flusher& f, Item* it) {
     std::string lexical;
@@ -291,6 +344,20 @@ void PassiveRecords(Flusher& f) {
     }
 }
 
+
+void OwnPassives(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->detail->record != 1 || it->lexical || it->selected < 0) continue;
+        const std::string passive = KoreanPassiveLemma(output::Lemma(it->EntryText(it->selected), f.families));
+        if (passive.empty()) continue;
+        // A passive in 이다 is a plain verb, not the copula.
+        output::Conjugated c = output::Conjugating(passive, '&', passive.ends_with("이다") ? "규칙" : "", f.families);
+        if (!c.error.empty()) continue;
+        it->detail->record = 0;
+        it->lexical = true;
+        it->AssignEntrySurface(it->selected, c.target);
+    }
+}
 
 void GoNotSay(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -435,7 +502,7 @@ constexpr std::string_view kResultNouns[] = {
 constexpr std::string_view kResultPassives[] = {
     "並べ", "置", "囲", "覆", "積", "飾", "掛け", "盛", "刻", "書", "貼", "吊", "敷", "張", "描", "記", "包", "詰め",
     "閉じ込め", "埋め", "刺", "縛", "隠", "残", "向け", "付け", "込め", "組", "建て", "植え", "収め", "閉ざ", "塗", "彫",
-    "繋", "結", "束ね", "挟", "重ね", "据え", "閉め", "開け", "括り付け", "縛り付け",
+    "繋", "結", "束ね", "挟", "重ね", "据え", "閉め", "開け", "括り付け", "縛り付け", "取り囲", "取り巻",
 };
 
 // The adverbs of gradual change before a ている of なる (a progression).
