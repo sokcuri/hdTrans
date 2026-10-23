@@ -13,3 +13,5 @@ cx:kara-source:20		&&8 S+0== "Lから" F+0== "selected" D+0== "L(으)로부터" 
 cx:ni-after-adverb:10		&&5 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" ||2 S-1== "くらい" S-1== "ぐらい"	select-lemma "(으)로"	それくらいに 그 정도로
 cx:ni-after-adverb:20		&&7 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1== "conjugating" Y-1== "6" F+1!= "boundary"	select-lemma ""	て form before に and a word
 cx:ni-after-adverb:30		&&6 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1!= "conjugating" ||3 L-1== "R껏" L-1== "R으로" L-1== "R지로"	select-lemma ""	無理やりに 억지로
+//= no-after-na	after ni-after-adverb	The の read 의 after a な adjective read in 한 is the noun 것.
+cx:no-after-na:10		&&7 S+0== "の" F+0== "selected" F-1== "selected" F-1!= "conjugating" S-1== "Rな" L-1== "R한" L+0== "의"	select-lemma "것"	元気そうなのが 씩씩한 것이

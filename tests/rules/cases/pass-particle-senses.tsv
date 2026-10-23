@@ -35,10 +35,10 @@ rewrite:comitative-to	「お疲れ～」と田中と佐藤	「수고했어~」�
 rewrite:comitative-to	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
 rewrite:comitative-to	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
 rewrite:comitative-to	「潜水母艦」と複数の潜水艦を編成せよ！	「잠수모함」과 복수의 잠수함을 편성하라!	keep	rewrites
-rewrite:no-after-na	元気そうなのが一番だ。	씩씩한 것이 제일이다.	current	rewrites
-rewrite:no-after-na	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
-rewrite:no-after-na	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites
-rewrite:no-after-na	静かなので眠れる。	조용해서 잘 수 있다.	keep	rewrites
+cx:no-after-na:10	元気そうなのが一番だ。	씩씩한 것이 제일이다.	current	rewrites
+cx:no-after-na:10	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
+cx:no-after-na:10	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites
+cx:no-after-na:10	静かなので眠れる。	조용해서 잘 수 있다.	keep	rewrites
 rewrite:particle-in-next	水泳部なだけに	수영부인 만큼	fix	rewrites
 rewrite:particle-in-next	人気なだけに	인기인 만큼	fix	rewrites
 rewrite:particle-in-next	学生だけに話す。	학생에게만 이야기한다.	keep	rewrites
@@ -59,6 +59,7 @@ cx:ni-after-adverb:30	無理やりに振り向かせた。	억지로 뒤돌아 �
 cx:ni-after-adverb:30	部屋に入る。	방에 들어간다.	keep	rewrites
 cx:ni-after-adverb:10	部屋に入る。	방에 들어간다.	keep	rewrites
 cx:ni-after-adverb:20	もう少し強めに。	!rule:cx:ni-after-adverb:20	keep	rewrites
+cx:no-after-na:10	元気そうなのが一番だ。	rule:cx:no-after-na:10=것	fix	rewrites
 cx:kara-source:20	中から小さなぬいぐるみが出てきた。	안에서 작은 봉제인형이 나왔다.	fix	rewrites
 cx:kara-source:20	町からも距離がある。	마을에서도 거리가 있다.	fix	rewrites
 rewrite:de-scene	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

@@ -2125,18 +2125,6 @@ void HumbleFirstPerson(Flusher& f) {
     }
 }
 
-void NoAfterNa(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "の" || it->selected < 0 || p->selected < 0 || p->detail->Yougo() ||
-            !p->group->surface.ends_with("な") || !ItemLemma(f, p, p->selected).ends_with("한") ||
-            ItemLemma(f, it, it->selected) != "의") {
-            continue;
-        }
-        SelectLemma(f, it, "것");
-    }
-}
-
 namespace {
 
 // Whether the predicate after it is a verb of verb.means-de: the first verb, past nouns and their を

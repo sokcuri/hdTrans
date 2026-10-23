@@ -122,7 +122,6 @@ void QuestionCopula(Flusher& f);
 void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void NoAfterNa(Flusher& f);
 void ShortPossessive(Flusher& f);
 void DeScene(Flusher& f);
 void YounaBeforeModifier(Flusher& f);

@@ -64,7 +64,6 @@ constexpr Pass kTextPasses[] = {
     {"WonderingDarou", WonderingDarou},
     {"GenitiveBetweenNames", GenitiveBetweenNames},
     {"LongVowelAfterKatakana", LongVowelAfterKatakana},
-    {"NoAfterNa", NoAfterNa},
     {"ShortPossessive", ShortPossessive},
     {"DeScene", DeScene},
     {"YounaBeforeModifier", YounaBeforeModifier},
