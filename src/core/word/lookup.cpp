@@ -723,9 +723,22 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 //   - the text after the ending starts with a small kana or ー, which no free word starts
 //     with, and is no particle or ending of the dictionary (って, っけ, っす);
 //   - that kana and the text after it are a dictionary noun of three or more characters.
+// An ending in です also gives its す to an adverb or interjection that starts with it
+// (寝込んだのですっかり: ので + すっかり, 遅れたのですみません: ので + すみません).
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
+    if (ending.ends_with("です") && !after.empty()) {
+        std::string query = "す";
+        query += after.substr(0, std::min<std::size_t>(after.size(), 24));
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const bool adverb = At(part, 0) == 'E' || At(part, 0) == 'A' || (At(part, 0) == 'P' && At(part, 1) != '2');
+            if ((c.user == nullptr || !c.user->nameLayer) && adverb && text::RuneCount(c.source) >= 2) {
+                return true;
+            }
+        }
+    }
     const text::Rune next = text::DecodeRune(after);
     if (next.size == 0 || ending.empty() ||
         std::u32string_view(U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー").find(next.cp) == std::u32string_view::npos) {

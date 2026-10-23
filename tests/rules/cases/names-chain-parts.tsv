@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 names:chain-parts	ティオーナ・ルドルフォン。	티오나 루돌폰.	fix	lookup
-names:chain-parts	ミーア・ルーナ・ティアムーンは、呆然と周りを見回していた。	미아 루나 티아문은, 보연과 주위를 둘러보고 있었다.	fix	lookup
+names:chain-parts	ミーア・ルーナ・ティアムーンは、呆然と周りを見回していた。	미아 루나 티아문은, 멍하니 주위를 둘러보고 있었다.	fix	lookup
 names:chain-parts	ユフィリア・マゼンタは目を見開いた。	유피리아 마젠타는 눈을 크게 떴다.	keep	lookup
 kana:mu-syllable	ティアムーンの姫	티아문의 공주	fix	lookup
 kana:mu-syllable	ゲームを始めた。	게임을 시작했다.	keep	lookup
