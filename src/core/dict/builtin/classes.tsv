@@ -58,6 +58,7 @@
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
+//= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
@@ -921,6 +922,30 @@ noun.dependent-ellipsis	うち
 noun.dependent-ellipsis	くらい
 noun.dependent-ellipsis	ぐらい
 noun.dependent-ellipsis	ほど
+
+noun.event	事件
+noun.event	事故
+noun.event	テロ
+noun.event	戦い
+noun.event	騒ぎ
+noun.event	騒動
+noun.event	争い
+noun.event	喧嘩
+noun.event	事
+noun.event	話
+noun.event	祭り
+noun.event	事態
+noun.event	惨劇
+noun.event	悲劇
+noun.event	災害
+noun.event	震災
+noun.event	地震
+noun.event	儀式
+noun.event	事変
+noun.event	虐殺
+noun.event	抗争
+noun.event	暴動
+noun.event	乱
 
 noun.do-angle	角度
 noun.do-angle	傾斜
