@@ -1196,10 +1196,10 @@ std::string SoundText::Write() {
                 next = run;
             } else {
                 // An ono sound: the と after it is dropped (メキメキと 메키메키).
-                const size_t to = MimeticTo(i, run, hiragana);
+                const size_t toEnd = MimeticTo(i, run, hiragana);
                 b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, run - i)), text::Preset::Fan);
-                if (Spaced(to)) b += ' ';
-                next = to;
+                if (Spaced(toEnd)) b += ' ';
+                next = toEnd;
             }
         } else {
             if (IsKatakanaRune(rs[i])) {
