@@ -871,6 +871,8 @@ const std::map<std::string, Name>& Registry::Accepted() {
 // the boundary, and the right part not a person suffix or honorific.
 std::pair<std::string, std::string> Registry::GivenSplit(std::string_view t) {
     if (!AllRunes(t, IsKanji) || Flags(t).records > 0) return {"", ""};
+    // Three kanji at most on each side.
+    if (RuneCount(t) > 6) return {"", ""};
     for (const std::size_t i : RuneStarts(t)) {
         const std::string_view x = t.substr(0, i), y = t.substr(i);
         const std::size_t nx = RuneCount(x);

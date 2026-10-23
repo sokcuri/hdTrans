@@ -435,7 +435,8 @@ bool WriteImage(ImageWriter& writer, const Snapshot& snap, std::string_view name
     for (const auto& s : writer.sections) {
         const auto pad = static_cast<std::size_t>(s.desc.offset - at);
         ok = ok && std::fwrite(padding.data(), 1, pad, f) == pad;
-        ok = ok && std::fwrite(s.bytes.data(), 1, s.bytes.size(), f) == s.bytes.size();
+        // An empty section has no data pointer, which fwrite may not take.
+        ok = ok && (s.bytes.empty() || std::fwrite(s.bytes.data(), 1, s.bytes.size(), f) == s.bytes.size());
         at = s.desc.offset + s.bytes.size();
     }
     if (!internal::CloseCacheTemp(f)) ok = false;

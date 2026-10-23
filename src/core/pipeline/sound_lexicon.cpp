@@ -57,6 +57,14 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
         row.lead = f[2] == "lead" || row.open;
         row.intj = f[2] == "intj" || row.lead;
         row.phrase = phrases;
+        if (f.size() >= 4) {
+            std::string_view opts = f[3];
+            while (!opts.empty()) {
+                const size_t sp = opts.find(' ');
+                row.exclaim = row.exclaim || opts.substr(0, sp) == "exclaim";
+                opts = sp == std::string_view::npos ? std::string_view() : opts.substr(sp + 1);
+            }
+        }
         const char32_t first = row.key[0];
         lex[first].push_back(std::move(row));
     }

@@ -482,13 +482,13 @@ bool Worker::Dispatch(int i, int& last) {
     const int type = tokens.TypeAfter(static_cast<std::size_t>(i));
     const std::string_view left = tokens.Canonical(static_cast<std::size_t>(i));
     switch (type) {
-    case 1: case 15: case 2: case 16:
+    case tokenizer::kTypeNumber: case 15: case tokenizer::kTypeAlpha: case 16:
         BuildTokenTransformText(i);
         break;
-    case 4: case 5: case 8:
+    case tokenizer::kTypeAsciiClose: case tokenizer::kTypeAsciiOpen: case tokenizer::kTypeAsciiSymbol:
         if (left == "(" || left == ")" || Has(left, "%")) BuildTokenTransformText(i);
         break;
-    case 24:
+    case tokenizer::kTypeJapanese:
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
         else BuildSurfaceTransform(i, left);
         if (const Item* tail = chain.tail) {
@@ -608,7 +608,7 @@ Record* Worker::LookupFallbackRecord(int token, std::string_view source, int lef
     r->target.assign(source);
     if (left == 12 && right == 15) r->target = EncodeNumericPair(source);
     switch (tokens.TypeAfter(static_cast<std::size_t>(token))) {
-    case 1: case 2: case 15: case 16: case 24:
+    case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16: case tokenizer::kTypeJapanese:
         r->partCode = source == "'" || left == 50 || right == 50 ? "N600" : "N110";
         break;
     default:
@@ -631,7 +631,7 @@ Record* Worker::ProbeNumericPrefix(int token, std::string_view source, bool afte
         return !rest.empty() && static_cast<unsigned char>(rest[0]) >= 0x80 ? FirstChar(rest) : std::string_view();
     };
     switch (Classify(source)) {
-    case 24: {
+    case tokenizer::kTypeJapanese: {
         const std::string_view c = FirstChar(source);
         // A number of two or more kanji is read as its digits even where a dictionary word
         // spells it (五十 50, 百二十 120); 百 and 千 alone keep their words (千里).
@@ -686,10 +686,27 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
     transformSurface = surface;
     int cursor = 0;
     const int size = static_cast<int>(full.size());
-    while (cursor < size) {
+    // Where a search that reached kMaxWordDepth stopped: the search goes on there.
+    Item* parent = nullptr;
+    int retries = 0;
+    resumeCursor = -1;
+    auto resumed = [&] {
+        if (resumeCursor < 0) return false;
+        cursor = resumeCursor;
+        parent = resumeParent;
+        retries = resumeRetries;
+        resumeCursor = -1;
+        return true;
+    };
+    // Each step moves the cursor forward by at least one byte or resumes a search that
+    // stopped deeper in the token, so the steps stay below the budget.
+    for (long budget = 4L * size + 16; cursor < size && budget > 0; budget--) {
         insertedLength = 0;
-        candidateRetryCount = 0;
-        const bool translated = TranslateCandidateAt(full, cursor, token, nullptr);
+        candidateRetryCount = retries;
+        const bool translated = TranslateCandidateAt(full, cursor, token, parent);
+        parent = nullptr;
+        retries = 0;
+        if (resumed()) continue;
         cursor += insertedLength;
         if (translated && insertedLength != 0) continue;
         if (cursor >= size) break;
@@ -700,6 +717,7 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
                 while (cur != nullptr && cur->source.size() <= numeric->source.size()) cur = cur->child;
                 if (cur != nullptr) {
                     ProcessCandidateRecord(full, cursor, token, cur, nullptr);
+                    if (resumed()) continue;
                     return;
                 }
             }
@@ -844,11 +862,32 @@ bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::str
     return false;
 }
 
+namespace {
+
+struct DepthScope {
+    explicit DepthScope(int& d) : depth(d) { ++depth; }
+    ~DepthScope() { --depth; }
+    DepthScope(const DepthScope&) = delete;
+    DepthScope& operator=(const DepthScope&) = delete;
+    int& depth;
+};
+
+}  // namespace
+
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
     const std::string_view text = From(full, cursor);
     if (text.empty()) return true;
+    // Each word of the token adds a level; a very long token takes its words in parts so
+    // that the depth, and the stack, stays bounded.
+    if (wordDepth >= kMaxWordDepth) {
+        resumeCursor = cursor;
+        resumeParent = parent;
+        resumeRetries = candidateRetryCount;
+        return true;
+    }
+    const DepthScope scope(wordDepth);
     if (Item* hon = HonorificItem(full, cursor, token, parent)) {
         TranslateCandidateAt(full, cursor + hon->length, token, hon);
         Insert(hon);

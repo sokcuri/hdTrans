@@ -81,6 +81,8 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  L2
 - 층 이름은 위 표의 이름입니다(`local`, `global-stem`, `global-last`, `defaults`, `local-ending`,
   `global-ending`, `ending-defaults`, `senses`, `rewrites`, `scorers`, `misread`, `cg-lite`, `fixed`).
 - 규칙은 `L번호`(지역) 또는 `파일:GPRIO`(전역), 의미 표는 `senses.tsv:행`입니다.
+- `fixed`는 단어 선택 전에 번역이 정해진 구간입니다. `sound` 층(`masked.tsv`, `sound.tsv`, `phrases.tsv`)이나
+  `protect` 층이 한국어로 바꾼 부분과 `constraints`가 더한 이름 항목이 여기에 듭니다.
 - 기록하지 않는 층: `constraints`(추가한 이름 항목은 `fixed`), 찾기의 거르기, `rewrites`의 각 패스 이름,
   `cg-lite`의 행, `compose`와 그 뒤. 이 층들은 출력 텍스트를 바꿔도 `WHY`에 이름이 없습니다.
 - `defaults`로 고른 후보의 번역을 규칙의 대입이 바꿨으면 그 규칙이 보입니다(`CandidateChoice`).

@@ -1,3 +1,4 @@
+# 규칙: LEX-4
 rule	input	expected	kind	layer
 names:polite-cue	「筧さん？」	「카케이 씨?」	fix	lookup
 names:polite-cue	玉藻さんが描いた絵	타마모 씨가 그린 그림	fix	lookup

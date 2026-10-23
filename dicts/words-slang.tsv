@@ -234,7 +234,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アカタチ科	홍갈치과	N110			GN							s:231
 アカツメクサ	붉은토끼풀	N110			GN							s:232
 アカテガニ	도둑게	N110			GN							s:233
-アカデミックドレス	대학 예복	N110			GN							s:234
+アカデミックドレス	학위복	N110			GN							s:234
 アカネズミ	흰배숲쥐	N110			GN							s:235
 アカネ科	꼭두서니과	N110			GN							s:236
 アカハライモリ	일본붉은배영원	N110			GN							s:237
@@ -500,7 +500,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アンチエイジング	안티에이징	N110			GN				llm			s:497
 アンチマター	반물질	N110			GN							s:498
 アンチマテリアルライフル	대물 소총	N110			GN							s:499
-アントライオン	명주잠자리과	N110			GN							s:500
+アントライオン	개미귀신	N110			GN							s:500
 アンドンクラゲ	작은상자해파리	N110			GN							s:501
 アンビグラム	앰비그램	N110			GN							s:502
 アンミツ	안미츠	N110			GN							s:503
@@ -512,7 +512,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アース神族	아스	N110			GN							s:509
 アートトラック	데코토라	N110			GN							s:510
 アーバンファンタジー	도시 판타지	N110			GN							s:511
-アーミングソード	무장검	N110			GN							s:512
+アーミングソード	아밍 소드	N110			GN							s:512
 アーミーナイフ	군용 칼	N110			GN				llm			s:513
 アームレスリング	팔씨름	N110			GN							s:514
 アーリア人	아리아인	N110			GN							s:515
@@ -729,7 +729,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウリ目	박목	N110			GN							s:726
 ウルトラサウルス	울트라사우루스	N110			GN							s:727
 ウルメイワシ	눈퉁멸	N110			GN							s:728
-ウレキサイト	조회붕석	N110			GN							s:729
+ウレキサイト	울렉사이트	N110			GN							s:729
 ウロコオリス	비늘꼬리청서과	N110			GN							s:730
 ウロコフネタマガイ	비늘발고둥	N110			GN							s:731
 ウンウンオクチウム	오가네손	N110			GN							s:732
@@ -801,8 +801,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エロマンガサウルス	에로망가사우루스	N110			GN							s:798
 エロ動画	성인 비디오	N110			GN							s:799
 エンコー	원조교제	N110			GN				llm			s:800
-エンジェルトランペット	브루그만시아	N110			GN							s:801
-エンゼルトランペット	브루그만시아	N110			GN							s:802
+エンジェルトランペット	엔젤 트럼펫	N110			GN							s:801
+エンゼルトランペット	엔젤 트럼펫	N110			GN							s:802
 エンタメ	엔터테인먼트	N110			GN							s:803
 エンティティ	엔티티	N110			GN				llm			s:804
 エンテロドン	엔텔로돈	N110			GN							s:805
@@ -936,7 +936,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オリシャ	오리샤	N110			GN							s:933
 オリジナルコンボ	오리지널 콤보	N110			GN				llm			s:934
 オリックス属	오릭스	N110			GN							s:935
-オルゴイコルコイ	몽골 살인 벌레	N110			GN							s:936
+オルゴイコルコイ	올고이 코르코이	N110			GN							s:936
 オルターエゴ	또 다른 자아	N110			GN							s:937
 オルチャン	얼짱	N110			GN							s:938
 オルニトケイルス	오르니토케이루스	N110			GN							s:939
@@ -964,7 +964,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オーストラリアアカメ	바라문디	N110			GN							s:961
 オーストリア人	오스트리아인	N110			GN							s:962
 オーストロネシア語族	오스트로네시아어족	N110			GN							s:963
-オートフェラ	스스로 하는 펠라치오	N110			GN							s:964
+オートフェラ	셀프 펠라치오	N110			GN							s:964
 オートマチック・リボルバー	자동 리볼버	N110			GN							s:965
 オートマータ	오토마타	N110			GN				llm			s:966
 オーバーツーリズム	오버투어리즘	N110			GN				llm			s:967
@@ -1065,7 +1065,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カニクイイヌ	게잡이여우	N110			GN							s:1062
 カニクイザル	필리핀원숭이	N110			GN							s:1063
 カニバサミ	가위치기	N110			GN							s:1064
-カニバリズム	식인	N110			GN							s:1065
+カニバリズム	카니발리즘	N110			GN							s:1065
 カニムシ	가짜전갈	N110			GN				llm			s:1066
 カニ玉	푸융단	N110			GN							s:1067
 カヌレ	카늘레	N110			GN							s:1068
@@ -1172,7 +1172,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カンガルー科	캥거루과	N110			GN							s:1169
 カンスト	카운터 스톱	N110			GN				llm			s:1170
 カンテレ	칸텔레	N110			GN							s:1171
-カンディル	흡혈메기	N110			GN							s:1172
+カンディル	칸디루	N110			GN							s:1172
 カンネメエリア	칸네메예리아	N110			GN							s:1173
 カンネメエリア科	칸네메예리아과	N110			GN				llm			s:1174
 カンノーリ	카놀리	N110			GN				llm			s:1175
@@ -1227,7 +1227,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ガリレオ衛星	갈릴레이 위성	N110			GN							s:1224
 ガルディミムス	가루디미무스	N110			GN							s:1225
 ガルフレ	여자친구	N110			GN							s:1226
-ガレット・デ・ロワ	왕 케이크	N110			GN							s:1227
+ガレット・デ・ロワ	갈레트 데 루아	N110			GN							s:1227
 ガレー船	갤리선	N110			GN				llm			s:1228
 ガンガゼ	가시왕관성게	N110			GN							s:1229
 ガンギエイ目	홍어목	N110			GN							s:1230
@@ -1287,7 +1287,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 キムチバーガー	김치버거	N110			GN							s:1284
 キムチ丼	김치덮밥	N110			GN				llm			s:1285
 キメハラ	귀멸 하라스먼트	N110			GN				llm			s:1286
-キャスケット	뉴스보이캡	N110			GN							s:1287
+キャスケット	캐스켓	N110			GN							s:1287
 キャソック	성직복	N110			GN							s:1288
 キャッチコピー	캐치프레이즈	N110			GN							s:1289
 キャドボロサウルス	캐드보로사우루스	N110			GN				llm			s:1290
@@ -1444,7 +1444,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 クリトサウルス	크리토사우루스	N110			GN							s:1441
 クリトリス包皮	음핵 포피	N110			GN							s:1442
 クリプトクリドゥス	크립토클리두스	N110			GN							s:1443
-クリプトスポリジウム	와포자충속	N110			GN							s:1444
+クリプトスポリジウム	크립토스포리디움	N110			GN							s:1444
 クリームブリュレ	크렘 브륄레	N110			GN							s:1445
 クルド人	쿠르드인	N110			GN							s:1446
 クルマエビ	보리새우	N110			GN							s:1447
@@ -1518,7 +1518,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 グラム・ロック	글램 록	N110			GN							s:1515
 グラントガゼル	그랜트가젤	N110			GN							s:1516
 グラントシロカブト	그란티장수풍뎅이	N110			GN							s:1517
-グランドクロス	행성 십자배열	N110			GN							s:1518
+グランドクロス	그랜드 크로스	N110			GN							s:1518
 グランドフィナーレ	그랜드 피날레	N110			GN				llm			s:1519
 グランピング	글램핑	N110			GN							s:1520
 グラーヴェ	그라베	N110			GN				llm			s:1521
@@ -1707,10 +1707,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 コーヒーカップ	커피잔	N110			GN							s:1704
 コーヒーサイフォン	커피 사이폰	N110			GN				llm			s:1705
 コーヒーノキ	커피나무	N110			GN				llm			s:1706
-コープレイ	회색들소	N110			GN							s:1707
+コープレイ	쿠프레이	N110			GN							s:1707
 コーム	빗	N110			GN							s:1708
 コールドスリープ	냉동 수면	N110			GN				llm			s:1709
-コーンスネーク	옥수수뱀	N110			GN							s:1710
+コーンスネーク	콘스네이크	N110			GN							s:1710
 コーンスープ	콘수프	N110			GN				llm			s:1711
 コーンドッグ	콘도그	N110			GN							s:1712
 ゴカイ	갯지렁이	N110			GN							s:1713
@@ -1836,7 +1836,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 サンショウクイ科	할미새사촌과	N110			GN							s:1833
 サンショクキムネオオハシ	무지개왕부리새	N110			GN							s:1834
 サンスクリット語	산스크리트어	N110			GN							s:1835
-サンダルウッド	백단향	N110			GN				llm			s:1836
+サンダルウッド	샌들우드	N110			GN				llm			s:1836
 サンピラー	빛기둥	N110			GN							s:1837
 サンフィッシュ目	검정우럭목	N110			GN							s:1838
 サンフィッシュ科	검정우럭과	N110			GN							s:1839
@@ -1924,7 +1924,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 シャムネコ	샴고양이	N110			GN				llm			s:1921
 シャムワニ	시암악어	N110			GN							s:1922
 シャム猫	샴고양이	N110			GN				llm			s:1923
-シャモア	알프스산양	N110			GN							s:1924
+シャモア	샤모아	N110			GN							s:1924
 シャモティラヌス	시아모티란누스	N110			GN							s:1925
 シャロヴィプテリクス	샤로빕테릭스	N110			GN							s:1926
 シャワートイレ	전자 비데	N110			GN							s:1927
@@ -1932,7 +1932,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 シャンパンカラー	샴페인 컬러	N110			GN							s:1929
 シャーデンフロイデ	샤덴프로이데	N110			GN							s:1930
 シャーベットカラー	셔벗 컬러	N110			GN				llm			s:1931
-シュウカイドウ	베고니아	N110			GN							s:1932
+シュウカイドウ	추해당	N110			GN							s:1932
 シュウカイドウ科	베고니아과	N110			GN							s:1933
 シュシュ	곱창밴드	N110			GN				llm			s:1934
 シュタールヘルム	슈탈헬름	N110			GN							s:1935
@@ -1965,7 +1965,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 シラケ世代	시라케 세대	N110			GN							s:1962
 シラコバト	염주비둘기	N110			GN							s:1963
 シリアルキラー	연쇄살인범	N110			GN							s:1964
-シリアルコード	일련번호	N110			GN							s:1965
+シリアルコード	시리얼 코드	N110			GN							s:1965
 シリアル食品	시리얼	N110			GN							s:1966
 シリキレグモ	시클로코스미아	N110			GN							s:1967
 シリケンイモリ	칼꼬리영원	N110			GN							s:1968
@@ -2020,7 +2020,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ジフテリア菌	디프테리아균	N110			GN				llm			s:2017
 ジメチルヒドラジン	디메틸히드라진	N110			GN							s:2018
 ジャイアントバイソン	자이언트들소	N110			GN							s:2019
-ジャイアント・ホグウィード	만테가지아눔어수리	N110			GN							s:2020
+ジャイアント・ホグウィード	자이언트 호그위드	N110			GN							s:2020
 ジャイロボール	자이로볼	N110			GN							s:2021
 ジャガーの戦士	재규어 전사	N110			GN				llm			s:2022
 ジャコウ	사향	N110			GN							s:2023
@@ -2107,8 +2107,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スク水	학교 수영복	N110			GN							s:2104
 スク水着	학교 수영복	N110			GN							s:2105
 スグリ科	까치밥나무과	N110			GN							s:2106
-スケイルアーマー	어린갑	N110			GN							s:2107
-スケイルメイル	어린갑	N110			GN							s:2108
+スケイルアーマー	스케일 아머	N110			GN							s:2107
+スケイルメイル	스케일 메일	N110			GN							s:2108
 スケトウダラ	명태	N110			GN							s:2109
 スケブ	스케치북	N110			GN							s:2110
 スコットランド人	스코틀랜드인	N110			GN							s:2111
@@ -2131,7 +2131,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スタンダードブレッド	스탠더드브레드	N110			GN							s:2128
 スターゲイジーパイ	스타게이지 파이	N110			GN				llm			s:2129
 スターシップ	스타십	N110			GN				llm			s:2130
-スターフルーツ	카람볼라	N110			GN							s:2131
+スターフルーツ	스타프루트	N110			GN							s:2131
 スターリンのオルガン	카추샤 로켓	N110			GN				llm			s:2132
 スターリングエンジン	스털링 기관	N110			GN							s:2133
 スターリン主義	스탈린주의	N110			GN							s:2134
@@ -2504,7 +2504,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チベットモンキー	티베트마카크	N110			GN							s:2501
 チベット族	티베트족	N110			GN							s:2502
 チミチャンガ	치미창가	N110			GN							s:2503
-チャイナドレス	치파오	N110			GN							s:2504
+チャイナドレス	차이나 드레스	N110			GN							s:2504
 チャイニーズハムスター	중국햄스터	N110			GN							s:2505
 チャイロスズメバチ	검정말벌	N110			GN							s:2506
 チャウチャウ	차우차우	N110			GN							s:2507
@@ -2614,7 +2614,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ティラノサウルス科	티라노사우루스과	N110			GN							s:2611
 ティーカップ	찻잔	N110			GN							s:2612
 ティーブレイク	티 브레이크	N110			GN				llm			s:2613
-ティーポット	찻주전자	N110			GN							s:2614
+ティーポット	티포트	N110			GN							s:2614
 テクネチウム	테크네튬	N110			GN							s:2615
 テコドントサウルス	테코돈토사우루스	N110			GN							s:2616
 テスケロサウルス	테스켈로사우루스	N110			GN							s:2617
@@ -2670,7 +2670,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ディケラトプス	디케라톱스	N110			GN				llm			s:2667
 ディスる	디스	N110			GN							s:2668
 ディスノミア	디스노미아	N110			GN							s:2669
-ディスリスペクト	디스	N110			GN							s:2670
+ディスリスペクト	무시	N110			GN							s:2670
 ディトランジション	탈성전환	N110			GN							s:2671
 ディナステス属	왕장수풍뎅이속	N110			GN							s:2672
 ディニクチス	디니크티스	N110			GN				llm			s:2673
@@ -2716,7 +2716,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 デリケートゾーン	은밀한 부분	N110			GN							s:2713
 デルタドロメウス	델타드로메우스	N110			GN							s:2714
 デルタ多面体	델타다면체	N110			GN							s:2715
-デルフィニウム	제비고깔속	N110			GN							s:2716
+デルフィニウム	델피니움	N110			GN							s:2716
 デンキウナギ	전기뱀장어	N110			GN							s:2717
 デンキウナギ目	김노투스목	N110			GN							s:2718
 デング出血熱	뎅기출혈열	N110			GN				llm			s:2719
@@ -2785,7 +2785,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 トリグリセリド	트라이글리세라이드	N110			GN							s:2782
 トリセツ	사용 설명서	N110			GN							s:2783
 トリックアート	트릭 아트	N110			GN				llm			s:2784
-トリプティク	세 폭 제단화	N110			GN							s:2785
+トリプティク	삼면화	N110			GN							s:2785
 トリプルアクセル	트리플 악셀	N110			GN				llm			s:2786
 トリプルデミック	트리플데믹	N110			GN				llm			s:2787
 トリュフチョコレート	트뤼프 앙 쇼콜라	N110			GN							s:2788
@@ -2828,7 +2828,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ドクウツボ	대왕곰치	N110			GN							s:2825
 ドクカマス	큰꼬치고기	N110			GN							s:2826
 ドクゼリ	독미나리	N110			GN							s:2827
-ドクターフィッシュ	가라루파	N110			GN							s:2828
+ドクターフィッシュ	닥터피시	N110			GN							s:2828
 ドクチョウ亜科	표범나비아과	N110			GN							s:2829
 ドクツルタケ	독우산광대버섯	N110			GN							s:2830
 ドクトカゲ	독도마뱀	N110			GN							s:2831
@@ -2857,7 +2857,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ドラゴンフルーツ	용과	N110			GN				llm			s:2854
 ドラス科	가시메기과	N110			GN							s:2855
 ドラフター	제도기	N110			GN				llm			s:2856
-ドラムスティック	북채	N110			GN							s:2857
+ドラムスティック	드럼스틱	N110			GN							s:2857
 ドラム式洗濯機	드럼 세탁기	N110			GN				llm			s:2858
 ドラレコ	블랙박스	N110			GN				llm			s:2859
 ドラヴィダ語族	드라비다어족	N110			GN							s:2860
@@ -2888,7 +2888,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ナイチンゲール症候群	나이팅게일 증후군	N110			GN				llm			s:2885
 ナイチンゲール誓詞	나이팅게일 선서	N110			GN							s:2886
 ナイトビジョン	야간 투시	N110			GN				llm			s:2887
-ナイトラス・オキサイド・システム	아산화질소 기관	N110			GN							s:2888
+ナイトラス・オキサイド・システム	아산화질소 분사 장치	N110			GN							s:2888
 ナイフフィッシュ	칼고기과	N110			GN							s:2889
 ナイラ証言	나이라 증언	N110			GN							s:2890
 ナイルオオトカゲ	나일왕도마뱀	N110			GN							s:2891
@@ -3116,7 +3116,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハチノスツヅリガ	꿀벌부채명나방	N110			GN							s:3113
 ハチマキ	하치마키	N110			GN							s:3114
 ハッカ油	박하유	N110			GN				llm			s:3115
-ハックロム	롬 해킹	N110			GN							s:3116
+ハックロム	핵롬	N110			GN							s:3116
 ハッシウム	하슘	N110			GN							s:3117
 ハッシュタグ	해시태그	N110			GN							s:3118
 ハッシュドポテト	해시 브라운	N110			GN							s:3119
@@ -3198,12 +3198,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハーディ・ガーディ	허디 거디	N110			GN							s:3195
 ハーバリウム	하바리움	N110			GN				llm			s:3196
 ハーフタイムショー	하프타임 쇼	N110			GN							s:3197
-ハーフトラック	반궤도차	N110			GN							s:3198
+ハーフトラック	하프트랙	N110			GN							s:3198
 ハーリング	헐링	N110			GN				llm			s:3199
 バイオセーフティレベル	생물 안전도	N110			GN							s:3200
 バイオパンク	바이오펑크	N110			GN							s:3201
 バイオマスプラスチック	바이오매스 플라스틱	N110			GN				llm			s:3202
-バイオーム	생물 군계	N110			GN							s:3203
+バイオーム	바이옴	N110			GN							s:3203
 バイケイソウ	박새	N110			GN							s:3204
 バイタルサイン	활력 징후	N110			GN							s:3205
 バイノーラル録音	바이노럴 레코딩	N110			GN							s:3206
@@ -3220,7 +3220,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バスク語	바스크어	N110			GN							s:3217
 バスク風チーズケーキ	바스크 치즈케이크	N110			GN							s:3218
 バスケットシューズ	농구화	N110			GN							s:3219
-バスソルト	목욕 소금	N110			GN							s:3220
+バスソルト	배스 솔트	N110			GN							s:3220
 バスドラム	베이스 드럼	N110			GN				llm			s:3221
 バスボム	배스 밤	N110			GN							s:3222
 バス会社	버스 회사	N110			GN							s:3223
@@ -3237,7 +3237,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バッタ科	메뚜기과	N110			GN							s:3234
 バッティングセンター	배팅 센터	N110			GN				llm			s:3235
 バット投げ	배트 플립	N110			GN							s:3236
-バッドランド	악지	N110			GN							s:3237
+バッドランド	배드랜드	N110			GN							s:3237
 バッフェ	뷔페	N110			GN							s:3238
 バトルドレス	배틀 드레스	N110			GN				llm			s:3239
 バトルパス	배틀 패스	N110			GN							s:3240
@@ -3313,9 +3313,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 パチキ	박치기	N110			GN				llm			s:3310
 パッケージデザイン	포장 디자인	N110			GN							s:3311
 パッツン	일자 앞머리	N110			GN							s:3312
-パティシエール	제과사	N110			GN							s:3313
+パティシエール	파티시에르	N110			GN							s:3313
 パティスリー	파티스리	N110			GN							s:3314
-パテシエ	제과사	N110			GN							s:3315
+パテシエ	파티시에	N110			GN							s:3315
 パテント・トロール	특허 괴물	N110			GN							s:3316
 パニック映画	재난 영화	N110			GN							s:3317
 パニック障害	공황장애	N110			GN							s:3318
@@ -3364,7 +3364,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヒジキ	톳	N110			GN							s:3361
 ヒタキ上科	딱새상과	N110			GN							s:3362
 ヒタキ科	솔딱새과	N110			GN							s:3363
-ヒットチャート	음악 차트	N110			GN				llm			s:3364
+ヒットチャート	히트 차트	N110			GN				llm			s:3364
 ヒップホップダンス	힙합 댄스	N110			GN							s:3365
 ヒツジグサ	수련	N110			GN							s:3366
 ヒツジ属	양속	N110			GN							s:3367
@@ -3425,7 +3425,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ビクトリアン	빅토리아 시대	N110			GN							s:3422
 ビジネス機	비즈니스 제트기	N110			GN							s:3423
 ビゼンクラゲ	숲뿌리해파리	N110			GN							s:3424
-ビターオレンジ	쓴귤	N110			GN							s:3425
+ビターオレンジ	비터 오렌지	N110			GN							s:3425
 ビックホーン	큰뿔양	N110			GN							s:3426
 ビッグスクーター	빅 스쿠터	N110			GN				llm			s:3427
 ビッグホーン	큰뿔양	N110			GN							s:3428
@@ -3538,9 +3538,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フウロソウ目	쥐손이풀목	N110			GN							s:3535
 フウロソウ科	쥐손이풀과	N110			GN							s:3536
 フェアユース	공정 이용	N110			GN							s:3537
-フェアリーリング	균륜	N110			GN							s:3538
-フェイジョア	파인애플구아바	N110			GN							s:3539
-フェイスシールド	안면 보호대	N110			GN							s:3540
+フェアリーリング	페어리 링	N110			GN							s:3538
+フェイジョア	페이조아	N110			GN							s:3539
+フェイスシールド	페이스 실드	N110			GN							s:3540
 フェイスハガー	페이스허거	N110			GN				llm			s:3541
 フェイスパウダー	페이스 파우더	N110			GN							s:3542
 フェイスペインティング	페이스 페인팅	N110			GN				llm			s:3543
@@ -3592,7 +3592,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フラップジャック	플랩잭	N110			GN							s:3589
 フラトリサイド	형제살해	N110			GN							s:3590
 フラミンゴ属	홍학속	N110			GN				llm			s:3591
-フラワーガール	결혼식 화동	N110			GN							s:3592
+フラワーガール	화동	N110			GN							s:3592
 フラワーショップ	꽃집	N110			GN							s:3593
 フラワーブーケ	부케	N110			GN							s:3594
 フランス皇帝	프랑스 황제	N110			GN				llm			s:3595
@@ -3653,8 +3653,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラジル水着	마이크로키니	N110			GN							s:3650
 ブラックジョーク	블랙 유머	N110			GN				llm			s:3651
 ブラックデー	블랙데이	N110			GN							s:3652
-ブラックドック	검둥개	N110			GN							s:3653
-ブラックドッグ	검둥개	N110			GN							s:3654
+ブラックドック	블랙 도그	N110			GN							s:3653
+ブラックドッグ	블랙 도그	N110			GN							s:3654
 ブラックプロパガンダ	흑색선전	N110			GN							s:3655
 ブラックペッパー	후추	N110			GN							s:3656
 ブラックレター	흑자체	N110			GN							s:3657
@@ -3663,13 +3663,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラッドストーン	혈석	N110			GN							s:3660
 ブラッドソーセージ	선지 소시지	N110			GN							s:3661
 ブラ水	마이크로키니	N110			GN							s:3662
-ブリガンダイン	두정갑	N110			GN							s:3663
+ブリガンダイン	브리간딘	N110			GN							s:3663
 ブリッ子	내숭녀	N110			GN				llm			s:3664
 ブリティッシュ・ショートヘア	브리티시 쇼트헤어	N110			GN							s:3665
 ブリトン人	브리튼족	N110			GN							s:3666
 ブリモドキ	동갈방어	N110			GN							s:3667
 ブリンブリン	블링블링	N110			GN							s:3668
-ブリーチング	고래의 부상 행동	N110			GN							s:3669
+ブリーチング	수면 도약	N110			GN							s:3669
 ブルカノドン	불카노돈	N110			GN							s:3670
 ブルガリア料理	불가리아 요리	N110			GN							s:3671
 ブルセラ	부르세라	N110			GN				llm			s:3672
@@ -3830,7 +3830,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベーシックインカム	기본소득	N110			GN							s:3827
 ベータ版	베타 버전	N110			GN							s:3828
 ペインキラー	페인킬러	N110			GN							s:3829
-ペイントソフト	그림 그리기 프로그램	N110			GN				llm			s:3830
+ペイントソフト	그림 프로그램	N110			GN				llm			s:3830
 ペイントツール	페인트 툴	N110			GN				llm			s:3831
 ペイントローラー	페인트 롤러	N110			GN							s:3832
 ペクティノドン	펙티노돈	N110			GN				llm			s:3833
@@ -3839,7 +3839,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ペットショップ	펫숍	N110			GN				llm			s:3836
 ペットボトルロケット	물로켓	N110			GN							s:3837
 ペットロス	펫로스 증후군	N110			GN							s:3838
-ペッパーミル	후추 분쇄기	N110			GN				llm			s:3839
+ペッパーミル	페퍼 밀	N110			GN				llm			s:3839
 ペドフォビア	소아공포증	N110			GN							s:3840
 ペニスケース	페니스 케이스	N110			GN				llm			s:3841
 ペニスバンド	스트랩온 딜도	N110			GN							s:3842
@@ -3857,7 +3857,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ペロキャン	막대사탕	N110			GN							s:3854
 ペロペロキャンディ	막대사탕	N110			GN							s:3855
 ペンタグラム	오망성	N110			GN				llm			s:3856
-ペンタトニック・スケール	오음음계	N110			GN							s:3857
+ペンタトニック・スケール	펜타토닉 스케일	N110			GN							s:3857
 ペンタブ	그래픽 태블릿	N110			GN							s:3858
 ペンローズの階段	펜로즈의 계단	N110			GN							s:3859
 ホイコーロー	후이궈러우	N110			GN							s:3860
@@ -3907,10 +3907,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ホラー漫画	공포 만화	N110			GN							s:3904
 ホリネズミ	포켓고퍼	N110			GN				llm			s:3905
 ホルターネック	홀터넥	N110			GN							s:3906
-ホローポイント	중공탄	N110			GN							s:3907
+ホローポイント	할로 포인트	N110			GN							s:3907
 ホワイトシチュー	크림 스튜	N110			GN							s:3908
 ホワイトタイガー	흰호랑이	N110			GN							s:3909
-ホワイトノイズ	백색 잡음	N110			GN							s:3910
+ホワイトノイズ	화이트 노이즈	N110			GN							s:3910
 ホワイト・タイガー	흰호랑이	N110			GN							s:3911
 ホンオフェ	홍어회	N110			GN							s:3912
 ホンソメワケベラ	청줄청소놀래기	N110			GN							s:3913
@@ -3918,7 +3918,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ホームパーティ	홈파티	N110			GN							s:3915
 ホームパーティー	홈파티	N110			GN							s:3916
 ホームベーカリー	제빵기	N110			GN							s:3917
-ボアコンストリクター	보아	N110			GN							s:3918
+ボアコンストリクター	보아뱀	N110			GN							s:3918
 ボア科	보아과	N110			GN				llm			s:3919
 ボウイナイフ	보위 나이프	N110			GN				llm			s:3920
 ボウエンギョ	기간투라속	N110			GN							s:3921
@@ -3960,7 +3960,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ボルトアクションライフル	볼트 액션	N110			GN							s:3957
 ボルネオオオカブト	아틀라스장수풍뎅이	N110			GN							s:3958
 ボールギャグ	볼 개그	N110			GN				llm			s:3959
-ボールパイソン	공비단뱀	N110			GN							s:3960
+ボールパイソン	볼파이톤	N110			GN							s:3960
 ボールプール	볼풀	N110			GN							s:3961
 ボールペン画	볼펜화	N110			GN							s:3962
 ポアンカレ予想	푸앵카레 추측	N110			GN							s:3963
@@ -3968,7 +3968,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ポケットマウス科	주머니생쥐류	N110			GN							s:3965
 ポゴスティック	스카이콩콩	N110			GN							s:3966
 ポジティブシンキング	긍정적인 마음가짐	N110			GN							s:3967
-ポストアポカリプス	종말물	N110			GN							s:3968
+ポストアポカリプス	포스트 아포칼립스	N110			GN							s:3968
 ポストヒューマン	포스트휴먼	N110			GN							s:3969
 ポスト団塊ジュニア	포스트 단카이 주니어	N110			GN							s:3970
 ポタモガーレ	왕수달뒤쥐	N110			GN							s:3971
@@ -3982,7 +3982,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ポトス	스킨답서스	N110			GN							s:3979
 ポトフ	포토푀	N110			GN							s:3980
 ポニテ	포니테일	N110			GN							s:3981
-ポリアモリー	비독점적 다자연애	N110			GN							s:3982
+ポリアモリー	폴리아모리	N110			GN							s:3982
 ポリオミノ	폴리오미노	N110			GN							s:3983
 ポリコレ	정치적 올바름	N110			GN							s:3984
 ポリス的動物	사회적 동물	N110			GN							s:3985
@@ -4032,9 +4032,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マジコン	게임 백업 디바이스	N110			GN							s:4029
 マジックアワー	매직 아워	N110			GN							s:4030
 マジックマッシュルーム	환각버섯	N110			GN							s:4031
-マジックミラー	단방향 거울	N110			GN							s:4032
+マジックミラー	매직 미러	N110			GN							s:4032
 マジュンガサウルス	마준가사우루스	N110			GN							s:4033
-マスカスタマイゼーション	대량 고객화	N110			GN							s:4034
+マスカスタマイゼーション	매스 커스터마이제이션	N110			GN							s:4034
 マスキングテープ	마스킹 테이프	N110			GN				llm			s:4035
 マスクオフ	마스크 오프	N110			GN				llm			s:4036
 マスクラット	사향쥐	N110			GN							s:4037
@@ -4055,7 +4055,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マッサージチェア	안마의자	N110			GN							s:4052
 マッサージ椅子	안마의자	N110			GN							s:4053
 マッシュアップ	매시업	N110			GN							s:4054
-マッシュルームカット	버섯 머리	N110			GN				llm			s:4055
+マッシュルームカット	머시룸 컷	N110			GN				llm			s:4055
 マッソスポンディルス	마소스폰딜루스	N110			GN							s:4056
 マッチョイズム	마초이즘	N110			GN				llm			s:4057
 マッチョマン	마초	N110			GN							s:4058
@@ -4086,7 +4086,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マメンチサウルス	마멘키사우루스	N110			GN							s:4083
 マメ亜科	콩아과	N110			GN							s:4084
 マラウィサウルス	말라위사우루스	N110			GN							s:4085
-マラカイト	공작석	N110			GN							s:4086
+マラカイト	말라카이트	N110			GN							s:4086
 マリアライト	마리알라이트	N110			GN							s:4087
 マリア観音	마리아 관음상	N110			GN							s:4088
 マリッジリング	결혼 반지	N110			GN							s:4089
@@ -4097,7 +4097,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マルチカム	멀티캠	N110			GN							s:4094
 マルチコプター	멀티콥터	N110			GN							s:4095
 マルチメディアカード	멀티미디어카드	N110			GN							s:4096
-マルチロール	다목적 전투기	N110			GN							s:4097
+マルチロール	멀티롤	N110			GN							s:4097
 マルハナバチ	뒤영벌	N110			GN				llm			s:4098
 マルメタピオカガエル	마루메타피오카개구리	N110			GN				llm			s:4099
 マレビト	마레비토	N110			GN							s:4100
@@ -4190,7 +4190,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミュー粒子	뮤 입자	N110			GN							s:4187
 ミルクプリン	밀크 푸딩	N110			GN				llm			s:4188
 ミルクヘビ	밀크스네이크	N110			GN							s:4189
-ミルワーム	갈색거저리	N110			GN							s:4190
+ミルワーム	밀웜	N110			GN							s:4190
 ミレニアム世代	밀레니얼 세대	N110			GN							s:4191
 ミレニアム懸賞問題	밀레니엄 문제	N110			GN							s:4192
 ミレニアル世代	밀레니얼 세대	N110			GN							s:4193
@@ -4199,7 +4199,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミントグリーン	민트 그린	N110			GN				llm			s:4196
 ミートハンマー	고기망치	N110			GN							s:4197
 ミームコイン	밈 코인	N110			GN							s:4198
-ミールワーム	갈색거저리	N110			GN							s:4199
+ミールワーム	밀웜	N110			GN							s:4199
 ムカシトカゲ	투아타라	N110			GN							s:4200
 ムギツク	돌고기	N110			GN							s:4201
 ムクドリモドキ科	찌르레기사촌과	N110			GN				llm			s:4202
@@ -4243,8 +4243,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 メガネザル	안경원숭이	N110			GN							s:4240
 メガファウナ	거대동물	N110			GN							s:4241
 メガプノサウルス	메갑노사우루스	N110			GN							s:4242
-メガマウス	넓은주둥이상어	N110			GN							s:4243
-メガマウスザメ	넓은주둥이상어	N110			GN							s:4244
+メガマウス	메가마우스	N110			GN							s:4243
+メガマウスザメ	메가마우스 상어	N110			GN							s:4244
 メガラクネ	메가라크네	N110			GN							s:4245
 メガラニア	메갈라니아	N110			GN							s:4246
 メガラプトル	메가랍토르	N110			GN							s:4247
@@ -4387,7 +4387,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユーパルケリア	에우파르케리아	N110			GN							s:4384
 ユーフォニアム	유포니움	N110			GN							s:4385
 ユーフォニウム	유포니움	N110			GN							s:4386
-ユーフォルビア	대극속	N110			GN							s:4387
+ユーフォルビア	유포르비아	N110			GN							s:4387
 ユーリノサウルス	에우리노사우루스	N110			GN							s:4388
 ヨウシュヤマゴボウ	미국자리공	N110			GN							s:4389
 ヨウジウオ	실고기	N110			GN							s:4390
@@ -4428,8 +4428,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ライチョウ科	뇌조과	N110			GN				llm			s:4425
 ライデン瓶	라이덴병	N110			GN							s:4426
 ライトゴロ	우익수 땅볼	N110			GN				llm			s:4427
-ライトセイバー	광선검	N110			GN				llm			s:4428
-ライトセーバー	광선검	N110			GN				llm			s:4429
+ライトセイバー	라이트세이버	N110			GN				llm			s:4428
+ライトセーバー	라이트세이버	N110			GN				llm			s:4429
 ライトボックス	라이트박스	N110			GN							s:4430
 ライフルグレネード	총류탄	N110			GN							s:4431
 ライフルマン	소총수	N110			GN							s:4432
@@ -4466,12 +4466,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ラミネート加工	라미네이트	N110			GN							s:4463
 ラミネート装甲	라미네이트 장갑	N110			GN							s:4464
 ラム肉	양고기	N110			GN				llm			s:4465
-ラメラーアーマー	찰갑	N110			GN							s:4466
+ラメラーアーマー	라멜라 아머	N110			GN							s:4466
 ランゲルハンス島	랑게르한스섬	N110			GN							s:4467
 ランチボックス	도시락	N110			GN				llm			s:4468
 ランチュウ	난주	N110			GN							s:4469
 ランニングホームラン	인사이드더파크 홈런	N110			GN							s:4470
-ランニングマシン	트레드밀	N110			GN							s:4471
+ランニングマシン	러닝머신	N110			GN							s:4471
 ラン科	난초과	N110			GN							s:4472
 ラーオ語	라오어	N110			GN							s:4473
 ラークシャサ	나찰	N110			GN							s:4474
@@ -4483,7 +4483,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リアル脱出ゲーム	리얼 탈출 게임	N110			GN							s:4480
 リオハサウルス	리오자사우루스	N110			GN							s:4481
 リオプレウロドン	리오플레우로돈	N110			GN							s:4482
-リカーブボウ	반곡궁	N110			GN							s:4483
+リカーブボウ	리커브 보우	N110			GN							s:4483
 リクイグアナ	갈라파고스육지이구아나	N110			GN							s:4484
 リクガメ	육지거북	N110			GN				llm			s:4485
 リクガメ上科	땅거북상과	N110			GN							s:4486
@@ -4558,7 +4558,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レインボーフラッグ	무지개 깃발	N110			GN							s:4555
 レエリナサウラ	레아엘리나사우라	N110			GN							s:4556
 レオパード	표범	N110			GN							s:4557
-レオパードゲッコー	표범도마뱀붙이	N110			GN							s:4558
+レオパードゲッコー	레오파드 게코	N110			GN							s:4558
 レガリケラトプス	레갈리케라톱스	N110			GN							s:4559
 レクソヴィサウルス	렉소비사우루스	N110			GN							s:4560
 レゲトン	레게톤	N110			GN							s:4561
@@ -4574,7 +4574,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レッドスクリーン	레드 스크린	N110			GN				llm			s:4571
 レッドテールキャット	붉은꼬리메기	N110			GN							s:4572
 レッバキサウルス	레바키사우루스	N110			GN							s:4573
-レティクル	십자선	N110			GN							s:4574
+レティクル	레티클	N110			GN							s:4574
 レトルトパウチ	레토르트 식품	N110			GN							s:4575
 レトロ調	레트로	N110			GN							s:4576
 レニウム	레늄	N110			GN							s:4577
@@ -4594,7 +4594,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レンタルビデオ	비디오 대여	N110			GN							s:4591
 レンタルビデオ店	비디오 대여점	N110			GN				llm			s:4592
 レーザーガン	광선총	N110			GN							s:4593
-レーザーライフル	광선총	N110			GN							s:4594
+レーザーライフル	레이저 라이플	N110			GN							s:4594
 レーザー銃	광선총	N110			GN							s:4595
 レーシングゲーム	경주 게임	N110			GN							s:4596
 レースゲーム	경주 게임	N110			GN							s:4597
@@ -4646,7 +4646,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロングヘアー	장발	N110			GN							s:4643
 ロンドンタクシー	런던 택시	N110			GN				llm			s:4644
 ローキック	로킥	N110			GN							s:4645
-ローストチキン	통닭구이	N110			GN							s:4646
+ローストチキン	로스트 치킨	N110			GN							s:4646
 ローズデー	로즈데이	N110			GN							s:4647
 ローチオオカブト	넵튠왕장수풍뎅이	N110			GN							s:4648
 ロードキル	로드킬	N110			GN							s:4649
@@ -4661,7 +4661,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ローマ皇帝	로마 제국의 황제	N110			GN							s:4658
 ローマ神話	로마 신화	N110			GN							s:4659
 ローライダー	로우라이더	N110			GN							s:4660
-ロールアイス	철판 아이스크림	N110			GN							s:4661
+ロールアイス	롤 아이스크림	N110			GN							s:4661
 ロールパン	롤빵	N110			GN							s:4662
 ローンアンテロープ	론영양	N110			GN							s:4663
 ワイマラナー	와이마라너	N110			GN							s:4664
@@ -4685,10 +4685,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ワルナスビ	도깨비가지	N110			GN							s:4682
 ワンタンメン	완탕면	N110			GN				llm			s:4683
 ワンタン麺	완탕면	N110			GN				llm			s:4684
-ワーキングプア	노동 빈곤층	N110			GN							s:4685
+ワーキングプア	워킹 푸어	N110			GN							s:4685
 ワークライフバランス	일과 삶의 균형	N110			GN				llm			s:4686
 ワータイガー	웨어타이거	N110			GN				llm			s:4687
-ワープア	노동 빈곤층	N110			GN							s:4688
+ワープア	워킹 푸어	N110			GN							s:4688
 ワープロソフト	워드 프로세서	N110			GN							s:4689
 ワームホール	웜홀	N110			GN							s:4690
 ヲタ芸	오타게	N110			GN							s:4691
@@ -7030,7 +7030,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どうって事はない	별것 아니야	A9D0			GN				llm			s:7027
 何じゃそりゃ	뭐야 그게	A9D0			GN				llm			s:7028
 何じゃそら	뭐야 그게	A9D0			GN				llm			s:7029
-バツイチ	이혼 경력 한 번	N110			GN				llm			s:7030
+バツイチ	돌싱	N110			GN				llm			s:7030
 パイオツ	가슴	N110			GN				llm			s:7031
 ヘベレケ	곤드레만드레	N110			GN				llm			s:7032
 ヘボ医者	돌팔이 의사	N110			GN				llm			s:7033
@@ -7556,8 +7556,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 決め顔	결정적인 표정	N110			GN				llm			s:7553
 アナル舐め	항문 핥기	N110			GN				llm			s:7554
 タマキン	불알	N110			GN				llm			s:7555
-ブリックパック	팩 음료	N110			GN				llm			s:7556
-ブリック・パック	팩 음료	N110			GN				llm			s:7557
+ブリックパック	종이팩	N110			GN				llm			s:7556
+ブリック・パック	종이팩	N110			GN				llm			s:7557
 釣りバカ	낚시광	N110			GN				llm			s:7558
 釣り馬鹿	낚시광	N110			GN				llm			s:7559
 穴マンコ	똥구멍	N110			GN				llm			s:7560
@@ -7668,8 +7668,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウラシマ効果	우라시마 효과	N110			GN				llm			s:7665
 浦島効果	우라시마 효과	N110			GN				llm			s:7666
 コタツムリ	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7667
-こたつ虫	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7668
-炬燵虫	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7669
+こたつ虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7668
+炬燵虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7669
 早稲女	와세다 여학생	N110			GN				llm			s:7670
 ワセ女	와세다 여학생	N110			GN				llm			s:7671
 クソゲ	똥겜	N110			GN				llm			s:7672
@@ -9128,8 +9128,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 わかり手	공감해 주는 사람	N110			GN				llm			s:9125
 分かり手	공감해 주는 사람	N110			GN				llm			s:9126
 バチコリ	딱	E300			GN				llm			s:9127
-ミリ知ら	밀리도 모르는 척하는 사람	N110			GN				llm			s:9128
-ミリしら	밀리도 모르는 척하는 사람	N110			GN				llm			s:9129
+ミリ知ら	1도 모름	N110			GN				llm			s:9128
+ミリしら	1도 모름	N110			GN				llm			s:9129
 竿役	남자 상대역	N110			GN				llm			s:9130
 暗黒微笑	암흑 미소	N110			GN				llm			s:9131
 脱オタ	탈오타쿠	N110			GN				llm			s:9132

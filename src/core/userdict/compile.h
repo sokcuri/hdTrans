@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "core/dict/dict.h"
+#include "core/text/lifetime.h"
 #include "core/userdict/conjugating.h"
 
 namespace hdTrans::userdict::internal {
@@ -44,7 +45,7 @@ bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int
 // Text helpers over UTF-8, with the white space of text::IsSpace.
 std::u32string Runes(std::string_view s);
 std::string Utf8(std::u32string_view r);
-std::string_view TrimSpace(std::string_view s);
+std::string_view TrimSpace(std::string_view s HDTRANS_LIFETIMEBOUND);
 std::vector<std::string_view> Fields(std::string_view s);
 std::vector<std::string_view> Split(std::string_view s, char sep);
 // s in double quotes, with quotes, backslashes and control bytes escaped.

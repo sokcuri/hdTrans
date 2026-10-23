@@ -9,6 +9,7 @@
 | `unit` | 단위 테스트 `hdtrans_tests` |
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
+| `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
@@ -53,6 +54,8 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
   `current`(지금 동작을 그대로 적어 둔 문장)
 - `layer`: 그 규칙이 도는 실행 층([pipeline-layers.md](pipeline-layers.md)의 `local`, `local-ending`, `global-stem`,
   `global-last`, `global-ending`)
+
+머리줄 앞의 `#` 줄은 행이 아닙니다. 표가 지키게 하는 [번역 규칙](../spec/README.md)의 id를 `# 규칙: NUM-1, NUM-3`처럼 적습니다.
 
 ```sh
 tools/rule-cases.sh build/mac/hdtrans dicts            # 다르면 규칙, 입력, 기대값, 실제값을 보이고 실패
@@ -164,8 +167,8 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
 
 ### CI
 
-`.github/workflows/e2e.yml`은 풀 리퀘스트와 `main` 푸시마다 현재 커밋의 CLI만 빌드해 `--expected`로
-비교합니다. 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
+Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `--expected` 비교를 합니다. gate가
+matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
 로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다.
 
@@ -227,9 +230,17 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
      `ANTHROPIC_API_KEY`(`x-api-key`)를 환경에서 읽습니다. 둘 다 있으면 Bearer를 씁니다. 키, 토큰을 파일에 넣지 않습니다.
      GPT 모델은 해당 모델을 제공하는 Anthropic Messages 호환 게이트웨이가 필요합니다.
 
-5. 같은 줄을 두 모델이 모두 `worse`로 판정하면 원인 변경을 되돌립니다. 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다.
+   - 줄이 많으면 표본을 뽑지 않고 판정 입력을 나눠(`split -l 500 PAIRS.tsv part.`) 조각마다 판정을 동시에 돌리고
+     출력을 이어 붙입니다. 모델 대신 사람이나 에이전트가 판정한 결과도 같은 열(`key verdict judge`, 넷째 열에 메모)로 씁니다.
+
+5. 개수를 셉니다: `python3 tools/verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.sonnet.tsv" "$RUN/dev.gpt.tsv"`는 바뀐 줄,
+   나아짐, 같음, 나빠짐과 두 모델이 모두 `worse`로 판정한 키를 출력합니다. 그런 줄이 있으면 원인 변경을 되돌리거나 조건을
+   좁힙니다. 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다. 나아짐:나빠짐이 2:1 이상이고 한 부류의 줄이 몰려
+   나빠지지 않을 때 남깁니다.
 6. held-out에도 3~5를 별도로 실행하고, 개발 세트와 held-out의 변경 줄, 개선, 동률, 악화 및 쌍방 악화 수를 **분리 보고**합니다.
    held-out을 보고 규칙을 맞췄으면 더는 held-out이 아니므로 새 평가 세트가 필요합니다.
+7. 줄 단위 회귀 문장과 참조 샘플은 `tools/measure.sh`가 같은 형식의 판정 입력(`corpus.pairs.tsv`, `sample.pairs.tsv`)을
+   쓰므로 3~5를 똑같이 합니다. 참조 샘플의 chrF는 기준보다 낮지 않아야 합니다.
 
 ### 나쁜 구간을 고른 층 찾기 (attribute.py)
 
@@ -300,3 +311,10 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_DICTS_A` | `e2e.sh` | A 쪽 사전 |
 | `HDTRANS_DRIVER_DUMP` | CLI | `-stages`와 같음 |
 | `HDTRANS_CACHE_DIR`, `HDTRANS_SNAPSHOT`, `HDTRANS_VERIFY_DICTS` | 엔진 | 사전 캐시 ([dictionary-files.md](dictionary-files.md#캐시)) |
+| `HDTRANS_WORK` | `gate.sh`, `measure.sh` | 작업 출력 폴더 (기본 `build/work`) |
+| `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
+| `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
+| `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
+| `HDTRANS_HYGIENE_PATTERNS` | `hygiene.py` | 커밋하면 안 되는 말의 정규식 파일 (저장소 밖) |
+
+작업 절차와 그 도구(`gate.sh`, `measure.sh`, `pick.sh` 등)는 [skills/README.md](../skills/README.md)에 있습니다.

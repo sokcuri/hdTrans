@@ -267,6 +267,8 @@ void CleanupClass3Item(Item* it) {
 
 // insertParenthesized finds a proper noun (code 13...) followed by a parenthesised
 // hiragana reading of its target and makes one word of the noun and the reading.
+// The parenthesis and the reading are in the noun's token: the new word replaces the
+// reading there, so the same noun does not match again.
 Item* InsertParenthesized(Flusher& f) {
     Worker& w = f.w;
     Chain& chain = w.chain;
@@ -289,9 +291,9 @@ Item* InsertParenthesized(Flusher& f) {
             open = cursorNext();
             if (open == nullptr) break;
         }
-        if (open == nullptr || open->EntryText(open->selected) != "(") continue;
+        if (open == nullptr || open->tokenIndex != index || open->EntryText(open->selected) != "(") continue;
         Item* inner = cursorNext();
-        if (inner == nullptr || Classify(inner->group->surface) != 13) continue;
+        if (inner == nullptr || inner->tokenIndex != index || Classify(inner->group->surface) != 13) continue;
         const int start = inner->start;
         std::string raw(inner->text.substr(static_cast<std::size_t>(inner->start), static_cast<std::size_t>(inner->length)));
         std::string innerTranslation(inner->EntryText(inner->selected));
@@ -316,14 +318,27 @@ Item* InsertParenthesized(Flusher& f) {
     return nullptr;
 }
 
+// An upper bound on the insertions of a pass over the chain. Each insertion replaces
+// items of the chain or consumes the records of a group, so a pass makes at most about
+// one per item; the bound stops a pass whose insertion leaves the chain unchanged.
+int InsertionBudget(const Chain& chain) {
+    int count = 0;
+    for (const Item* it = chain.head; it != nullptr; it = it->next) count++;
+    return 2 * count + 2;
+}
+
 }  // namespace
 
 void DrainNmTail(Flusher& f) {
-    for (Item* it = BuildNmTail(f); it != nullptr; it = BuildNmTail(f)) f.w.chain.Insert(it, true);
+    for (int budget = InsertionBudget(f.w.chain); budget > 0; budget--) {
+        Item* it = BuildNmTail(f);
+        if (it == nullptr) return;
+        f.w.chain.Insert(it, true);
+    }
 }
 
 void ReinsertPhrases(Flusher& f) {
-    for (;;) {
+    for (int budget = InsertionBudget(f.w.chain); budget > 0; budget--) {
         const Phrase p = FindPhrase(f);
         if (p.record == nullptr) return;
         Item* it = f.w.InsertLateCandidate(p.text, p.start, p.token, p.record);
@@ -337,7 +352,7 @@ void CleanupClass3(Flusher& f) {
     for (Item* it = chain.tail; it != nullptr; it = it->prev) {
         if (At(it->Code(it->selected), 0) == '3') CleanupClass3Item(it);
     }
-    for (;;) {
+    for (int budget = InsertionBudget(chain); budget > 0; budget--) {
         Item* it = InsertParenthesized(f);
         if (it == nullptr) return;
         chain.Insert(it, true);

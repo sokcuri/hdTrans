@@ -49,7 +49,7 @@ std::vector<bool> PoliteQuotes(std::string_view line, int depth) {
             if (!line.substr(0, at).ends_with(end)) continue;
             std::string_view after = line.substr(at);
             for (text::Rune d = text::DecodeRune(after);
-                 d.size > 0 && std::u32string_view(U"~～―ー─-♪").find(d.cp) != std::u32string_view::npos;
+                 d.size > 0 && std::u32string_view(U"~～―ー─-♪♡♥❤").find(d.cp) != std::u32string_view::npos;
                  d = text::DecodeRune(after)) {
                 after.remove_prefix(d.size);
             }
@@ -84,7 +84,7 @@ bool WordEnds(std::string_view s) {
     if (s.empty()) return true;
     const char32_t c = text::DecodeRune(s).cp;
     return text::IsSpace(c) ||
-           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪").find(c) != std::u32string_view::npos;
+           std::u32string_view(U".,!?…‥~～―ー─-「『」』｢｣。、！？♪♡♥❤").find(c) != std::u32string_view::npos;
 }
 
 // The spoken form of the written word at the start of s (것은 건, 무엇을 뭘) and the bytes it
@@ -374,8 +374,8 @@ std::string CasualEnding(std::string_view ending, bool planned, bool promised) {
 // Characters that end a sentence of speech after its predicate, and those passed over
 // before them (a stretched or cut-off end).
 constexpr std::u32string_view kEnds = U"」』！？!?‼⁉⁈。．.…‥、，,～~〜∼―─♪☆★♥♡";
-// With the closing marks of the sound stage (kEmphasisClose, kLengthenMark).
-constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE009\uE00A";
+// With the closing marks of the sound stage (kEmphasisClose, kLengthenMark, kDrawnMark).
+constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE009\uE00A\uE00B";
 
 // The last character of s that is not a space or an emphasis open mark, 0 for none.
 char32_t LastNonSpace(std::string_view s) {
@@ -503,6 +503,11 @@ char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
 
 void Composer::WriteCasual(int first, int last) {
     std::vector<ResolvedItem>& items = *items_;
+    // The quote state at (carriedToken, carriedOffset), carried forward from item to item
+    // so that a long line is read once.
+    QuoteState carried = settings_.quotes;
+    int carriedToken = first;
+    std::size_t carriedOffset = 0;
     for (int i = 0; i < static_cast<int>(items.size()); i++) {
         ResolvedItem& it = items[i];
         if (it.tokenIndex < first || it.tokenIndex > last) continue;
@@ -510,12 +515,30 @@ void Composer::WriteCasual(int first, int last) {
         const std::size_t start = std::min<std::size_t>(static_cast<std::size_t>(it.offset), src.size());
         const std::size_t end = std::min<std::size_t>(static_cast<std::size_t>(it.offset + it.length), src.size());
         const std::string_view own = src.substr(start, end - start);
-        std::string before;
-        for (int t = first; t < it.tokenIndex; t++) before += source_[t];
-        before += src.substr(0, start);
+        // The source text from the first token up to the item, built when a rule reads it.
+        std::string beforeText;
+        bool beforeBuilt = false;
+        auto before = [&]() -> const std::string& {
+            if (!beforeBuilt) {
+                for (int t = first; t < it.tokenIndex; t++) beforeText += source_[t];
+                beforeText += src.substr(0, start);
+                beforeBuilt = true;
+            }
+            return beforeText;
+        };
+        if (it.tokenIndex < carriedToken || (it.tokenIndex == carriedToken && start < carriedOffset)) {
+            carried = settings_.quotes;
+            carriedToken = first;
+            carriedOffset = 0;
+        }
+        for (; carriedToken < it.tokenIndex; carriedToken++, carriedOffset = 0) {
+            carried = QuotesAfter(carried, std::string_view(source_[carriedToken]).substr(carriedOffset));
+        }
+        carried = QuotesAfter(carried, src.substr(carriedOffset, start - carriedOffset));
+        carriedOffset = start;
         // Speech: inside a quote at the start and at the end of the item; not polite or old
         // speech.
-        const QuoteState at = QuotesAfter(settings_.quotes, before);
+        const QuoteState at = carried;
         const bool quoted = at.depth > 0 && QuotesAfter(at, own).depth > 0;
         const std::size_t quote = static_cast<std::size_t>(at.count);
         const std::uint8_t style = settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size()
@@ -527,13 +550,13 @@ void Composer::WriteCasual(int first, int last) {
         const char32_t close = QuotedEnd(i, last, quoted && at.depth > 1, &asked);
         if (quoted && !styled) AskWord(i, last);
         if (close != 0 && asked &&
-            AskConjecture(i, Clause(before + std::string(own)), own, quoted && !styled)) {
+            AskConjecture(i, Clause(before() + std::string(own)), own, quoted && !styled)) {
             continue;
         }
         // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라), in
         // polite or old speech with 던가 (どこでしたっけ 어디서 했던가).
         if (close != 0 && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
-            QuestionWord(Clause(before + std::string(own)))) {
+            QuestionWord(Clause(before() + std::string(own)))) {
             it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(),
                                    styled ? "던가" : "더라");
             continue;
@@ -556,21 +579,22 @@ void Composer::WriteCasual(int first, int last) {
         if (settings_.casualMarkedOnly && !asked && ((style & kCasualSpeech) == 0 || at.depth > 1)) continue;
         // である reports (優勢である) and declarations (破棄する) keep their style.
         if (close == 0 || own.find("であ") != std::string_view::npos ||
-            (before.ends_with("で") && own.starts_with("あ"))) {
+            (before().ends_with("で") && own.starts_with("あ"))) {
             continue;
         }
         // すか (行くんすか) is polite; よっか (しよっか) is no noun with か.
-        if (asked && !before.ends_with("す") && !before.ends_with("ス") && !before.ends_with("っ") && AskPlain(i, own)) {
+        if (asked && !before().ends_with("す") && !before().ends_with("ス") && !before().ends_with("っ") &&
+            AskPlain(i, own)) {
             continue;
         }
         // 白紙撤回とする, 王太子妃とする: a declaration.
-        bool declared = own.starts_with("する") && before.ends_with("と");
+        bool declared = own.starts_with("する") && before().ends_with("と");
         for (const std::string_view d : kDeclarations) {
-            declared = declared || own.starts_with(d) || before.ends_with(d) ||
-                       before.ends_with(std::string(d) + "と") || before.ends_with(std::string(d) + "を");
+            declared = declared || own.starts_with(d) || before().ends_with(d) ||
+                       before().ends_with(std::string(d) + "と") || before().ends_with(std::string(d) + "を");
         }
         if (declared) continue;
-        const char32_t open = LastNonSpace(before);
+        const char32_t open = LastNonSpace(before());
         const bool alone = open == 0 || std::u32string_view(U"「『。！？!?…‥").find(open) != std::u32string_view::npos;
         const bool exclaimed = close == U'！' || close == U'!';
         if (it.directIndex < 0) {
@@ -624,11 +648,11 @@ void Composer::WriteCasual(int first, int last) {
         // chooses one.
         if (settings_.casualMarkedOnly && !asked && !present.empty() && !state) continue;
         const bool planned = !present.empty() && !stative && !asked && close != U'？' && close != U'?' &&
-                             Planned(present, Clause(before + std::string(own)));
+                             Planned(present, Clause(before() + std::string(own)));
         // 주다 in 해체 (줘) reads as a request.
         if ((planned && exclaimed) || (!planned && marker == "&CJ@")) continue;
         const std::string original = it.ending.text;
-        std::string soft = CasualEnding(original, planned, planned && Promised(Clause(before + std::string(own))));
+        std::string soft = CasualEnding(original, planned, planned && Promised(Clause(before() + std::string(own))));
         if (soft.empty()) continue;
         // A repeated predicate (終わった終わった) takes the same end.
         for (int j = i - 1;

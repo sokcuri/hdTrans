@@ -1,0 +1,9 @@
+# 규칙: NUM-1, NUM-3, NUM-6
+rule	input	expected	kind	layer
+compose:number-noun	S級の魔物だ。	S급의 마물이다.	fix	compose
+compose:number-noun	第一王子が来た。	제1왕자가 왔다.	fix	compose
+compose:number-noun	5ポイント獲得した。	5포인트 획득했다.	fix	compose
+compose:number-label	2300 提督	2300 제독	keep	compose
+compose:number-label	≫372 過疎	≫372 과소	keep	compose
+compose:number-label	2026 特別	2026 특별	keep	compose
+rewrite:degree-after-number	気温は三十度だ。	기온은 30도다.	keep	rewrites

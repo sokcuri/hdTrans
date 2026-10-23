@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/text/lifetime.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::word {
@@ -41,7 +42,7 @@ Window Left(std::string_view s, int n);
 Window Right(std::string_view s, int n);
 
 // s from byte offset i, clamped.
-inline std::string_view From(std::string_view s, long i) {
+inline std::string_view From(std::string_view s HDTRANS_LIFETIMEBOUND, long i) {
     if (i < 0) i = 0;
     if (static_cast<std::size_t>(i) > s.size()) i = static_cast<long>(s.size());
     return s.substr(static_cast<std::size_t>(i));
@@ -56,8 +57,8 @@ inline bool Has(std::string_view s, std::string_view sub) { return s.find(sub) !
 
 // The first and the last character of s; "" for an empty string. An invalid byte is a
 // character of its own.
-std::string_view FirstChar(std::string_view s);
-std::string_view LastChar(std::string_view s);
+std::string_view FirstChar(std::string_view s HDTRANS_LIFETIMEBOUND);
+std::string_view LastChar(std::string_view s HDTRANS_LIFETIMEBOUND);
 
 // The rune that ends s: U+FFFD of size 1 for an invalid sequence, size 0 for "".
 text::Rune DecodeLastRune(std::string_view s);
@@ -93,7 +94,7 @@ bool InSet(const std::string_view (&list)[N], std::string_view s) {
 }
 
 // s[from, from+count) of a token text, clamped to s.
-inline std::string_view Slice(std::string_view s, long from, long count) {
+inline std::string_view Slice(std::string_view s HDTRANS_LIFETIMEBOUND, long from, long count) {
     s = From(s, from);
     if (count < 0) return {};
     return s.substr(0, static_cast<std::size_t>(count));
@@ -106,9 +107,9 @@ bool AnyRuneIn(std::string_view s, std::string_view set);
 // The depth of 「」 and 『』 quotes open after s when depth were open before it.
 int QuoteDepthAfter(std::string_view s, int depth);
 // s without the runes of cutset at either end (strings.Trim).
-std::string_view TrimRunes(std::string_view s, std::string_view cutset);
+std::string_view TrimRunes(std::string_view s HDTRANS_LIFETIMEBOUND, std::string_view cutset);
 // s without the Unicode white space at either end (strings.TrimSpace).
-std::string_view TrimSpace(std::string_view s);
+std::string_view TrimSpace(std::string_view s HDTRANS_LIFETIMEBOUND);
 
 // Whether s has a byte of set.
 inline bool AnyOf(std::string_view set, char c) { return set.find(c) != std::string_view::npos; }

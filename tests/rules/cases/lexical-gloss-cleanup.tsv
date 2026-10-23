@@ -1,0 +1,30 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:90529	影響をおよぼす。	영향을 미친다.	fix	lookup
+dict:jisjk:93160	心が奮い立つ。	마음이 분발한다.	fix	lookup
+dict:jisjk:144242	遺志をくむ。	유지를 이어받는다.	fix	lookup
+dict:jisjk:93160	自分を奮い立たせてきた。	자신을 분발시켜 왔다.	keep	lookup
+dict:jisjk:262312	ファーストインファーストアウトで処理する。	선입선출로 처리한다.	fix	lookup
+dict:jisjk:262451	インスペクションを行う。	인스펙션을 실시한다.	fix	lookup
+dict:jisjk:364401	コンシュマーが多い。	컨슈머가 많다.	keep	lookup
+dict:jisjk:49395	一度カプセルの中でスリープ状態に入ってしまえば	한 번 캡슐 중에서 슬립 상태에 들어가 버리면	fix	lookup
+dict:jisjk:260094	二度とスパムメールを送らない。	두 번 다시 스팸 메일을 보내지 않는다.	fix	lookup
+dict:jisjk:55237	フライドポテトなら片手で食べられる。	감자튀김이라면 한 손으로 먹을 수 있다.	fix	lookup
+dict:jisjk:55945	最大の懸念だったプランターを並べる土地	최대의 염려였던 플랜터를 늘어놓는 토지	fix	lookup
+dict:jisjk:14060	ドアを開けた。	문을 열었다.	keep	lookup
+dict:jisjk:14539	「簡易書留の受領証明」	「간이 등기의 영수증명」	fix	lookup
+dict:jisjk:251973	豆撒きですね。	콩 뿌리기군요.	fix	lookup
+dict:jisjk:40363	製薬スキル、今いくつだっけ？	제약 스킬, 지금 몇 개였나?	fix	lookup
+dict:jisjk:222501	生来なんとなく身体は丈夫な方で、	본디부터 왠지 몸은 튼튼한 편으로,	keep	lookup
+dict:jisjk:45398	攻撃隊各機、カタパルトへ。	공격대 각 기, 캐터펄트에.	fix	lookup
+dict:jisjk:49833	この優秀なソナーがあれば……	이 우수한 소나가 있으면……	fix	lookup
+dict:jisjk:158549	つまりこれこそは擬態・カモフラージュの原点と言える。	즉 이것이야말로는 의태·위장의 원점이라고 할 수 있다.	keep	lookup
+dict:jisjk:252453	三井財閥の当主。	미츠이 재벌의 당주.	fix	lookup
+dict:jisjk:49750	ゼネラルモーターズの車。	제너럴 모터스의 차.	fix	lookup
+dict:jisjk:158446	カジュアルユーザーが多い。	캐주얼 유저가 많다.	fix	lookup
+dict:jisjk:43901	ウェハースを食べた。	웨하스를 먹었다.	fix	lookup
+dict:jisjk:41912	システムのアーキテクチャー。	시스템의 아키텍처.	fix	lookup
+dict:jisjk:128323	二人のケミストリー。	두 사람의 케미스트리.	fix	lookup
+dict:jisjk:43750	インフラストラクチャーを整える。	인프라스트럭처를 정돈한다.	fix	lookup
+dict:jisjk:261958	ファット	팻	fix	lookup
+dict:jisjk:158445	カジュアルドラッグ	가벼운 마약	keep	lookup

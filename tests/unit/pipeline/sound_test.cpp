@@ -66,13 +66,16 @@ HD_TEST(pipeline_lengthen) {
     } cases[] = {
         {"하아", "vv", "하아아아"}, {"앙", "vvv", "아아아앙"}, {"꺅", "vv", "꺄아악"},
         {"앙", "~", "아~앙"},       {"하아", "!", "하앗"},     {"하아", "~", "하아~"},
-        {"정말", "vv", "정말~"},    {"쾅", "v", "콰앙"},       {"하아", "vvvvvvv", "하아아아아아"},
+        {"정말", "vv", "정말~"},    {"쾅", "v", "콰앙"},       {"하아", "vvvvvvv", "하아아아아아아아아"},
+        {"꺅", "vvvvvvvvvvvvvvvvvvvv", "꺄아아아아아아아아아아아아아아아악"},
         {"정말", "!", "정말"},      {"ok", "vv", "ok"},        {"", "v", ""},
         // Repeats write the last syllable again and let ! close it.
         {"아하하", "r", "아하하하"}, {"아하하", "rr!", "아하하하핫"}, {"후후", "r", "후후후"},
         {"아하하", "!", "아하하"},
         // A ～ that stood for the key's ー adds one ~ at the end.
         {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
+        // 'd' lets the last syllable of a word carry the lengthening.
+        {"안 돼", "vvvd", "안 돼애애애"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
@@ -148,6 +151,13 @@ HD_TEST(pipeline_sound) {
         {"司書が本を運ぶ", "司書が本を運ぶ"},
         {"ししょかん", "ししょかん"},
         {"ああああん", "아아아앙"},
+        // A cry that ends drawing out its vowel runs on into the next cry; words stay apart.
+        {"ひぃやあっ！", "히이야앗！"},
+        {"ふぁーふぁー", "후아아후아아"},
+        {"やだやだ", "싫어 싫어"},
+        // Of two keys as long, the one whose Korean draws the vowel out (ひぎぃ, not ひぎっ).
+        {"ひぎぃぃぃっ！", "히기이이익！"},
+        {"ひぎっ！", "히긱！"},
         {"はぁぁぁ…", "하아아아…"},
         {"いやぁぁぁ！", "싫어어어！"},
         {"うわぁー！", "우와아아！"},
@@ -202,7 +212,7 @@ HD_TEST(pipeline_sound) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -470,6 +480,35 @@ HD_TEST(pipeline_sound_markers) {
     HD_CHECK_EQ(internal::WriteSounds("ドキドキ", ctx, *snap), std::string("ドキドキ"));
 }
 
+HD_TEST(pipeline_write_cries) {
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        // A cry the lexicon lacks, as heard, its drawn vowel kept and ッ as ㅅ.
+        {"「ひぃやあああ！」", "「히이야아아아！」"},
+        {"「ひぃやアアア！」", "「히이야아아아！」"},
+        {"のおおおお……", "노오오오오……"},
+        {"おりゃあああっ！", "오랴아아앗！"},
+        {"あ、どわあああ！", "あ、도와아아아！"},
+        {"いいいい！", "이이이이！"},
+        // A word drawn out, a key that reaches the vowel, one vowel kana, ン and a run after a
+        // closing bracket or a word stay.
+        {"やめてぇぇぇ！", "やめてぇぇぇ！"},
+        {"すごいいい！", "すごいいい！"},
+        {"ひぃや！", "ひぃや！"},
+        {"うんんんっ！", "うんんんっ！"},
+        {"「手」だぁああ！", "「手」だぁああ！"},
+        {"花見ああああ！", "花見ああああ！"},
+        {"ひぃやあああ", "히이야아아아"},
+        {"ひぃやあああね", "ひぃやあああね"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::WriteCries(c.in, ctx, *snap), std::string(c.want));
+}
+
 HD_TEST(pipeline_rewrite_emphasis) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());
@@ -485,7 +524,7 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        {"なんだそりゃぁあッ？", "なんだそりゃッ？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -521,6 +560,23 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"とーにーかーく！", "とにかく！"},
         {"いーなー", "いーなー"},
         {"お花見か～いいわね", "お花見か～いいわね"},
+        // A sound key that starts inside the stem before the mark does not hold it (ゴォ of
+        // すご), one that starts a word does (おーい).
+        {"すごぉぉい！", "すごい！"},
+        // The い and ぃ that draw out an adjective at the end of a phrase go; い alone stays.
+        {"うるさいぃ！", "うるさい！"},
+        {"すごいいいっ！", "すごいっ！"},
+        {"冷たいぃぃ", "冷たい"},
+        {"いいいい！", "いいいい！"},
+        {"うるさいいね", "うるさいいね"},
+        // A shout's っ after the lengthening of a word ends the phrase: the run is ～ and the
+        // っ goes; a cry (no word before the mark) keeps it for the cry pass.
+        {"まかせてーーっ！", "まかせて～！"},
+        {"ぎやぁーっ！", "ぎやぁーっ！"},
+        // A dropped run of three or more vowel kana leaves a drawn mark for each.
+        {"まかせてぇぇぇ！", "まかせて\uE00B\uE00B\uE00B！"},
+        {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B！"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
@@ -685,4 +741,28 @@ HD_TEST(pipeline_sound_name_and_noun) {
         {"モヤモヤが残る", "찜찜が残る"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// An exclaim row (よかった 다행이다) as written is no sound before a question mark, after
+// an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
+HD_TEST(pipeline_sound_exclaim_before_question) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim);
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"よかった。", "다행이다。"},
+        {"映画、よかった……", "映画、다행이다……"},
+        {"映画、よかった？", "映画、よかった？"},
+        {"よかった?", "よかった?"},
+        {"よかった……？", "よかった……？"},
+        {"よかったぁ?", "다행이다~?"},
+        {"ヨカッタ？", "다행이다？"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

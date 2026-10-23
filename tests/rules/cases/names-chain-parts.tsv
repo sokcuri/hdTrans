@@ -1,3 +1,4 @@
+# 규칙: LEX-4
 rule	input	expected	kind	layer
 names:chain-parts	ピーター・ウィッティンガム。ウィッティンガムは笑った。	피터 휘팅엄. 휘팅엄은 웃었다.	fix	lookup
 names:chain-parts	ユフィリア・マゼンタは目を見開いた。	유피리아 마젠타는 눈을 크게 떴다.	keep	lookup

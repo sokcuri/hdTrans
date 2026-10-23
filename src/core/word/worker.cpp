@@ -7,9 +7,14 @@
 
 namespace hdTrans::word {
 
-Worker::Worker(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, const dict::LookupContext& lookup,
-               const Settings& settings, Arena& arena, LookupObserver observer)
-    : tokens(tokens), snapshot(snapshot), lookupContext(lookup), settings(settings), arena(arena), observer(observer) {
+Worker::Worker(const tokenizer::Tokens& chunkTokens, const dict::Snapshot& dictionary, const dict::LookupContext& lookup,
+               const Settings& stageSettings, Arena& storage, LookupObserver lookupObserver)
+    : tokens(chunkTokens),
+      snapshot(dictionary),
+      lookupContext(lookup),
+      settings(stageSettings),
+      arena(storage),
+      observer(lookupObserver) {
     spaced.assign(tokens.size(), 0);
 }
 

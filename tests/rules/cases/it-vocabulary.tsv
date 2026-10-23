@@ -1,3 +1,4 @@
+# 규칙: LEX-1, LEX-2
 rule	input	expected	kind	layer
 sound:name-noun	ニコニコ動画で見た。	니코니코 동화로 보았다.	fix	sound
 sound:name-noun	ニコニコ大百科に載っている。	니코니코 대백과에 실려 있다.	fix	sound
@@ -45,7 +46,7 @@ sense:叩く	ターミナルでコマンドを叩く。	터미널에서 커맨�
 sense:叩く	ドアを叩く。	문을 두드린다.	keep	senses
 sense:配信	先月の公式配信に出てたよ！	지난달의 공식 방송하러 나왔어!	fix	senses
 sense:配信	ネット配信には「アップデートパッチ」という伝家の宝刀がある	넷 배포에는 「업데이트 패치」라는 전가의 보도가 있다	fix	senses
-sense:配信	今後二度とスパムメールを配信しないよう	향후 두 번 다시 스팜메일을 발송하지 않게	fix	senses
+sense:配信	今後二度とスパムメールを配信しないよう	향후 두 번 다시 스팸 메일을 발송하지 않게	fix	senses
 sense:配信	りんかい線 運行情報を公式Xでも配信しています。	린카이선 운행 정보를 공식 X에서도 전달하고 있습니다.	keep	senses
 compose:verbal-noun-passive	プルリクエストがマージされた。	풀 리퀘스트가 머지되었다.	fix	compose
 compose:verbal-noun-passive	ドアはロックされている。	문은 락되고 있다.	fix	compose
@@ -63,4 +64,4 @@ sense:クラス	クラスを定義する。	클래스를 정의한다.	keep	sens
 sense:クラス	クラスのメソッドを呼ぶ。	클래스의 메소드를 부른다.	keep	senses
 sense:保存	設定を保存した。	설정을 저장했다.	keep	senses
 sense:クラス	クラス名を変える。	클래스명을 바꾼다.	keep	senses
-sense:クラス	クラスに5名いる。	반에 다섯 명 있다.	keep	senses
+sense:クラス	クラスに5名いる。	반에 5명 있다.	keep	senses

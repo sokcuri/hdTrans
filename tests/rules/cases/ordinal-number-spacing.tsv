@@ -1,3 +1,4 @@
+# 규칙: NUM-1
 rule	input	expected	kind	layer
 dict:jisjk:257895	中央艦隊討伐部隊第1艦隊所属。	중앙 함대 토벌 부대 제1함대 소속.	fix	compose
 dict:jisjk:257895	コミックス第9巻	코믹스 제9권	fix	compose

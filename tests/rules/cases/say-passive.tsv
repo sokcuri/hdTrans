@@ -1,3 +1,4 @@
+# 규칙: SPC-2
 rule	input	expected	kind	layer
 rewrite:say-passive	不快ではあったが、嫌味を言われても仕方がない。	불쾌한 것은 않았지만, 비꼬는 말을 들어도 어쩔 수 없다.	fix	rewrites
 rewrite:say-passive	彼女に嫌味を言われるまでもない。	그녀에게 비꼬는 말을 들을 것도 없다.	fix	rewrites

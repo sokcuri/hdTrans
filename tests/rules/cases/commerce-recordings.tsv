@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:commerce-roots	書き下ろし	신작	keep	lookup
 dict:commerce-roots	描き下ろし	신작	keep	lookup
 dict:commerce-roots	書き下ろしブックレット	신작 소책자	keep	lookup
-dict:commerce-roots	描き下ろしA3クリアポスター	신작 A3클리어 포스터	keep	lookup
+dict:commerce-roots	描き下ろしA3クリアポスター	신작 A3 클리어 포스터	keep	lookup
 dict:commerce-roots	書き下ろし小説	신작 소설	keep	lookup
 dict:commerce-roots	描き下ろしイラスト	신작 일러스트	keep	lookup
 dict:commerce-roots	書き下ろし脚本	신작 각본	keep	lookup

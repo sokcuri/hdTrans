@@ -9,6 +9,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/text/lifetime.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::pipeline::internal {
@@ -93,7 +94,7 @@ bool Repeat(std::string_view s, size_t pos, Pred pred, size_t min, size_t max, R
 
 constexpr size_t kUnbounded = static_cast<size_t>(-1);
 
-inline std::string_view Span(std::string_view s, size_t from, size_t to) { return s.substr(from, to - from); }
+inline std::string_view Span(std::string_view s HDTRANS_LIFETIMEBOUND, size_t from, size_t to) { return s.substr(from, to - from); }
 
 // [ぁ-ゖ]
 inline bool IsHiraganaClass(char32_t c) { return c >= 0x3041 && c <= 0x3096; }

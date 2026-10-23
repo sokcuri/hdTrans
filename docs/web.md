@@ -84,9 +84,12 @@ HDTRANS_WEB_HOST=user@host HDTRANS_WEB_SSH='ssh -i KEY' web/deploy.sh rollback <
 ### 자동 배포
 
 `.github/workflows/deploy-web.yml`은 `Publish npm`이 태그 push에서 성공하고 그 태그가 최신 안정 릴리스이면
-그 태그의 커밋으로 네이티브 CLI(`linux`)와 WebAssembly 엔진을 빌드하고, 예제 텍스트를 서버에서 받아 사이트를
-만든 뒤 `web/deploy.sh`로 올립니다. 이어서 공개 페이지가 방금 만든 `index.html`과 같은지(버전 줄의 엔진 버전과
-커밋), `manifest.json`, 예제 목록, 엔진과 사전 파일을 확인합니다. 서버에도 없는 예제가 있으면 실패하고, 받은
+그 릴리스의 `hdTrans-<버전>-linux-x64.tar.gz`(CLI)와 npm 패키지 `hdTrans-<버전>-wasm.tgz`(0.4.5 전에는
+`hdtrans-<버전>.tgz`)를 받아 같은 릴리스의 `SHA256SUMS.txt`로 확인하고, 그 버전이 npm에 있으면 패키지를 npm의
+`dist.integrity`와도 비교합니다. 다시 빌드하지 않습니다. CLI(`--version`)와 패키지의 엔진이 릴리스 버전을 보고하는지
+확인하고, 태그 커밋의 소스와 예제 텍스트(서버에서 받음)로 사이트를 만든 뒤(CLI는 사전
+스냅샷만 컴파일) `web/deploy.sh`로 올립니다. 이어서 공개 페이지가 방금 만든 `index.html`과 같은지(버전 줄의 엔진
+버전과 커밋), `manifest.json`, 예제 목록을 확인하고, 공개된 엔진 파일을 릴리스 엔진과 바이트 단위로 비교합니다. 서버에도 없는 예제가 있으면 실패하고, 받은
 예제 텍스트는 아티팩트로 올리지 않습니다.
 
 Actions에서 develop 브랜치로 직접 실행할 때는 게시된 릴리스 태그와 `dry_run`(기본 켬)을 고릅니다. `dry_run`은

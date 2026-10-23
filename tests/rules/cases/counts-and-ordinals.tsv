@@ -10,22 +10,22 @@ lexical:number-words	バターを塗りつけるだけで、十二分に美味�
 dict:jisjk:100504	三十分後に出る。	30분 후에 나온다.	fix	lookup
 dict:jisjk:18276	三年前の話	3년 전의 이야기	fix	lookup
 dict:jisjk:351233	三千円なら買う。	3000엔이라면 산다.	fix	local
-compose:native-count	1つ目は手動回避	첫 번째는 수동 회피	fix	compose
-compose:native-count	1回目は失敗した。	첫 번째는 실패했다.	fix	compose
-compose:native-count	1匹目を捕まえた。	첫 번째를 잡았다.	fix	compose
-compose:native-count	２回目でしょう？	두 번째죠?	keep	compose
+compose:native-count	1つ目は手動回避	1번째는 수동 회피	fix	compose
+compose:native-count	1回目は失敗した。	1번째는 실패했다.	fix	compose
+compose:native-count	1匹目を捕まえた。	1마리째를 잡았다.	fix	compose
+compose:native-count	２回目でしょう？	2번째죠?	keep	compose
 compose:native-count	二匹目を捕まえた。	두 마리째를 잡았다.	keep	compose
 compose:native-count	何回を数えた。	몇 번을 세었다.	fix	compose
 compose:native-count	三回を数えた。	세 번을 세었다.	keep	compose
 compose:native-count	一升瓶から	한 되병에서	keep	compose
 compose:native-count	ここの地蔵峠は、8体のお地蔵さまが並んでいます	여기의 지조토게는, 8체의 지장님이 줄지어 있습니다	fix	compose
 compose:native-count	数体の女王蜂	몇 체의 여왕벌	keep	compose
-compose:native-count	回数は……『2回・1回・2回』でお願い	횟수는……『두 번·한 번·두 번』으로 부탁	fix	compose
+compose:native-count	回数は……『2回・1回・2回』でお願い	횟수는……『2회·1회·2회』로 부탁	fix	compose
 compose:number-spacing	いや流石に何十万人もいるプレイヤーで	아니 역시 몇십만 명이나 있는 플레이어로	fix	compose
 compose:number-spacing	何百万もかかります。	몇백만이나 걸립니다.	fix	compose
 compose:number-spacing	精鋭第十九駆逐隊	정예 제19구축대	fix	compose
 compose:number-spacing	第十一戦隊	제11전대	keep	compose
-compose:number-spacing	1回あたり5ミリ	한 번당 5밀리	fix	compose
+compose:number-spacing	1回あたり5ミリ	1회당 5밀리	fix	compose
 compose:number-spacing	当たり前だ。	당연하다.	keep	compose
 dict:jisjk:259268	一匹目を捕まえた。	rule:dict:jisjk:259268=째	fix	local
 dict:jisjk:259268	三人の目	!rule:dict:jisjk:259268	keep	local

@@ -48,12 +48,14 @@ namespace internal {
 //   - the host markers, the longest that matches (SpanOpen);
 //   - the stutter marks U+E000 with their separators (SpanOpen);
 //   - the drawl spans U+E005, U+E006 or U+E007 to the same mark (SpanOpen);
-//   - the emphasis marks U+E008 (SpanOpen) and U+E009 (SpanClose) and the lengthening
-//     mark U+E00A (SpanClose);
+//   - the emphasis marks U+E008 (SpanOpen) and U+E009 (SpanClose), the lengthening
+//     mark U+E00A and a run of the drawn mark U+E00B (SpanClose);
 //   - Hangul runs with the masks in or after them (자○), joined by ASCII or full-width
 //     spaces (SpanWord);
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
-//     taking the small vowel after it (SpanWord).
+//     taking the small vowel after it (SpanWord);
+//   - runs of marks of tone that name a thing, after の and before a particle
+//     (あなたの♡を; SpanWord).
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers);
 
 // The length of the inline style code at the start of s, or 0: a font %fNAME; (NAME up to
@@ -63,8 +65,12 @@ size_t StyleCodeLength(std::string_view s, char before);
 
 // A character kept as written: outside CP932 and neither a Han character nor kana.
 // Hangul, emoji, the letters and symbols of other scripts and the hiragana ゔゕゖ are
-// foreign; ASCII, the half-width forms and ヷヸヹヺ are not.
+// foreign; ASCII, the half-width forms, ヷヸヹヺ and the marks of tone outside CP932
+// (kToneMarks) are not: like ♪ they close an utterance rather than name a thing.
 bool IsForeign(char32_t r);
+
+// The hearts and notes that CP932 lacks, written after an utterance as ♪ is (すき♡).
+constexpr std::u32string_view kToneMarks = U"♡♥❤❣♫♬";
 
 // On each line whose katakana runs read as Japanese speech (ワタシハ ニホンゴガ
 // ワカリマセン), the runs that read as words written in hiragana; katakana dictionary

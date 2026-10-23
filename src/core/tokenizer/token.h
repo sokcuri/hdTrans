@@ -6,6 +6,8 @@
 #include <string_view>
 #include <vector>
 
+#include "core/text/lifetime.h"
+
 namespace hdTrans::tokenizer {
 
 // Token types. The scanner emits 1-9, 17, 18, 22, 24, 26, 77 and 79. 13 and 14 are
@@ -96,10 +98,10 @@ struct Tokens {
 
     size_t size() const { return tokens.size(); }
     const Token& operator[](size_t i) const { return tokens[i]; }
-    std::string_view Text(TextRef r) const { return std::string_view(text).substr(r.offset, r.size); }
-    std::string_view Raw(size_t i) const { return Text(tokens[i].raw); }
-    std::string_view Merged(size_t i) const { return Text(tokens[i].merged); }
-    std::string_view Canonical(size_t i) const { return Text(tokens[i].canonical); }
+    std::string_view Text(TextRef r) const HDTRANS_LIFETIMEBOUND { return std::string_view(text).substr(r.offset, r.size); }
+    std::string_view Raw(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].raw); }
+    std::string_view Merged(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].merged); }
+    std::string_view Canonical(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].canonical); }
 
     // The type after the token has been visited: 77 when it was emptied.
     int TypeAfter(size_t i) const { return tokens[i].clearedBy >= 0 ? kTypeMarkup : tokens[i].type; }

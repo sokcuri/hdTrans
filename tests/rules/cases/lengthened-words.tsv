@@ -21,7 +21,7 @@ sound:adjective-long-i	んもぅ、恥ずかしー事言わないでよねっ！
 sound:adjective-long-i	わたしー、行く	나~, 간다	keep	sound
 sound:adjective-long-i	もしもしー	여보세요~	keep	sound
 sound:stretched-word	「とーにーかーく！　避けるの禁止！」	「어쨌든! 피하는 거 금지!」	fix	sound
-sound:stretched-word	ふぇぇあぁぁー！むーりーー！！	후에에 아아아아! 무리~!!	fix	sound
+sound:stretched-word	ふぇぇあぁぁー！むーりーー！！	후에에아아아아! 무리~!!	fix	sound
 sound:stretched-word	「いーなー、行ってみたい」	「이~인―, 가 보고 싶다」	keep	sound
 sound:long-vowel-before-word	「先輩、おはよーございますっ！」	「선배, 안녕하세요!」	fix	sound
 sound:long-vowel-before-word	「ごけっこん、おめでとーございます！」	「결혼, 축하합니다!」	fix	sound
@@ -32,3 +32,31 @@ sound:long-vowel-after-word	『あんなしょーもないグループ抜けち�
 sound:long-vowel-after-word	まあしょーがない、起きよ。	뭐 어쩔 수 없다, 일어나라.	fix	sound
 sound:long-vowel-after-word	お金ちょーだい、お金！	돈 줘, 돈!	fix	sound
 sound:long-vowel-after-word	お仕事しゅーりょー。	일-~.	keep	sound
+sound:stretched-word	「すごぉぉい！」	「대단해!」	fix	sound
+sound:stretched-word	「いっきまぁーす！」	「갑니다~!」	fix	sound
+sound:stretched-word	「しれいかーん！」	「사령관~!」	fix	sound
+sound:stretched-word	壁伝いにそーっと近づき	벽 따라에 살며시 다가가	fix	sound
+sound:stretched-word	こんな額のちょこっとした傷	이런 이마의 자그마한 상처	keep	sound
+sound:drawn-adjective	「ずるいぃ！」	「치사하다!」	fix	sound
+sound:drawn-adjective	「痛いぃぃ……」	「아프다……」	fix	sound
+sound:drawn-adjective	「きもちいいいいい！」	「기분 좋다아아아!」	fix	sound
+sound:drawn-adjective	うらやましいいいいいいい！！！	부럽다아아아아아아!!!	fix	sound
+sound:drawn-adjective	「知らないぃ？」	「몰라?」	fix	sound
+sound:drawn-adjective	「いいいいい！」	「이이이이이!」	keep	sound
+sound:drawn-adjective	「かわいーー！」	「귀엽다~!」	fix	sound
+sound:drawn-adjective	「長いオフ貰ってい～い？」	「긴 오프 받아도 좋아~?」	fix	sound
+sound:drawn-adjective	「ああー！」	「아아아!」	keep	sound
+sound:shout-tilde	「だめーーーっ！」	「안 돼~!」	fix	sound
+sound:shout-tilde	「なんでよーーーっ！」	「어째서~!」	fix	sound
+sound:shout-tilde	「千莉、頑張れーーっ！」	「천리, 힘내라~!」	fix	sound
+sound:shout-tilde	「するかぁーっ！」	「할까~!」	fix	sound
+sound:shout-tilde	「ぎやぁーっ！」	「기야아앗!」	keep	sound
+sound:shout-tilde	「とぉりゃぁあああーーーーっ！」	「토랴아아아아아아아앗!」	keep	sound
+sound:drawn-word	「やめてぇぇぇ！」	「그만둬어어어!」	fix	sound
+sound:drawn-word	「ちょっと、待ったああああああああっ！」	「잠깐, 기다렸다아아아아아아아아!」	fix	sound
+sound:drawn-word	「余計なこと言うなあああああっ！！」	「쓸데없는 말 하지 마아아아아아!!」	fix	sound
+sound:drawn-word	「たすけてぇぇぇぇぇっ！」	「살려어어어어어!」	fix	sound
+sound:drawn-word	「やめてぇ！」	「그만둬!」	keep	sound
+sound:drawn-word	「のおおおおお！」	「노오오오오오!」	keep	sound
+sound:drawn-word	「だめぇぇぇぇぇぇっ！！」	「안 돼애애애애앳!!」	fix	sound
+sound:drawn-word	「ばかぁぁぁ……」	「바보오오오……」	fix	sound

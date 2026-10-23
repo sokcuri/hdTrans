@@ -128,9 +128,9 @@ void ReloadThread::Detach() {
 
 bool ReloadThread::Start(std::function<void()> body) {
     g_running.fetch_add(1);
-    thread_ = std::thread([body = std::move(body)]() mutable {
-        body();
-        body = nullptr;
+    thread_ = std::thread([run = std::move(body)]() mutable {
+        run();
+        run = nullptr;
         g_running.fetch_sub(1);
     });
     return true;

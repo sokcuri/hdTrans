@@ -7,6 +7,7 @@
 #include "core/output/compose.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
+#include "core/text/hangul.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/tokenizer/canonical.h"
@@ -224,18 +225,20 @@ const NativeCounter* FindNativeCounter(std::string_view counter, std::string_vie
 constexpr std::string_view kNativeCounts[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "몇", "여러"};
 constexpr std::u32string_view kCountLeads = U"0123456789０１２３４５６７８９一二三四五六七八九十何数幾";
 
-// The native Korean numeral that a count of one to nine written in digits or kanji
-// reads before a native counter (二 두, 3 세); 十 reads 열. Empty for any other number.
-std::string_view NativeNumeral(std::string_view digits, std::string_view surface) {
+// The native Korean numeral that a count of one to nine written in kanji reads before a
+// native counter (二 두, 三 세); 十 reads 열. Empty for any other number, and for a number
+// written in Arabic digits, which stays in digits (2回 2회, 7枚 7장, 1個 1개) as a number
+// does in a count, a table or a rule text, where the digits of one to nine and of larger
+// numbers would otherwise mix.
+// An Arabic 1 in an idiom of counting (IdiomaticOne) reads 한 as 一 does.
+std::string_view NativeNumeral(std::string_view digits, std::string_view surface, bool idiom = false) {
     constexpr std::string_view kNative[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉"};
     if (surface == "十" && digits == "10") return "열";
+    if (idiom && digits == "1" && (surface == "1" || surface == "１")) return kNative[0];
     if (digits.size() != 1 || digits[0] == '0') return {};
     for (size_t k = 0; k < surface.size();) {
         const auto r = text::DecodeRune(surface.substr(k));
-        if (!(r.cp >= U'0' && r.cp <= U'9') && !(r.cp >= U'０' && r.cp <= U'９') &&
-            !HasRune(U"一二三四五六七八九", r.cp)) {
-            return {};
-        }
+        if (!HasRune(U"一二三四五六七八九", r.cp)) return {};
         k += r.size;
     }
     return kNative[digits[0] - '1'];
@@ -285,6 +288,9 @@ bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
                        [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
 }
 
+// Kanji counters read in Sino-Korean that a number joins (2000년, 14일째, 3회).
+constexpr std::u32string_view kSinoCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
+
 // The kanji digits a number is written with digit by digit (二〇二六).
 constexpr std::u32string_view kNumerals = U"〇○一二三四五六七八九";
 
@@ -306,38 +312,54 @@ bool DigitOrLatin(char32_t r) {
 // stays apart (1 レベル 1 레벨). The noun starts with kanji, katakana or a Latin letter: a
 // number written on (第2回, 百二十) is no noun after it, and a word in hiragana is a pronoun or
 // a word of its own (≫758それ 그것). A predicate, a verbal noun with する or a word read as a
-// verb or an adjective, stands apart (HPが1回復した 1 회복했다).
+// verb or an adjective, stands apart after a number (HPが1回復した 1 회복했다); after Latin
+// letters it is a noun like any other (SP消費 SP 소비).
 bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
     if (n != i + 1 || !Adjoins(items, n)) return false;
     const ResolvedItem& b = items[n];
+    char32_t end = LastRune(items[i].surface);
+    if (end >= U'Ａ' && end <= U'ｚ') end -= 0xFEE0;
+    const bool latin = (end >= U'A' && end <= U'Z') || (end >= U'a' && end <= U'z');
     const char32_t lead = text::DecodeRune(b.surface).cp;
     if (HasRune(kNumerals, lead) || b.surface.starts_with("第")) return false;
     if (!IsKanji(lead) && tokenizer::Class(lead) != tokenizer::kClassKatakana && !DigitOrLatin(lead)) return false;
     const std::string_view code = Code(b);
-    return code.size() >= 2 && code[0] == '1' && code[1] != '2' && !EntryText(b).ends_with("@") && !PredicateNoun(items, n);
+    return code.size() >= 2 && code[0] == '1' && code[1] != '2' && !EntryText(b).ends_with("@") &&
+           (latin || !PredicateNoun(items, n));
 }
 
-// Whether the number or the Latin word that ends item i in the source labels the noun of
-// item n rather than counts or measures it, so that a space stays between them: a reply
-// number after ≫ or >> (≫372過疎 ≫372 과소), a time (23：40追記 23：40 추기), a number of four
-// digits before a noun in kanji, a year or a time (2026特別 2026 특별, 2300提督 2300 제독), and
-// a Latin word of two letters or more with a small letter, a name or a word, before a noun in
-// kanji of two characters or more (class空母 class 항공모함, Bismarck追撃戦 Bismarck 추격전). A
-// counter or a suffix after it joins it (1939年, Iowa級 Iowa급, Java風 Java풍), and so do a unit
-// after a number (10cm, 1000G), a letter (Aランク A랭크) and a word in katakana after a Latin word,
-// which may be a spoken ending (Christmasダヨ Christmas다요).
-bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
+// Whether the number or the Latin word that ends item i in the source stands apart from the
+// noun of item n written straight after it. A number before a noun counts it and joins it; a
+// number after a word labels that word and stands apart from the next noun. They join before a
+// counter, a unit or a suffix (5ポイント 5포인트, 1939年, 10cm, 1000G, Iowa級 Iowa급, Java風 Java풍,
+// ID欄 ID란), a noun of one character (34世 34세), a noun counted in an ordinal (1ゲーム目
+// 1게임째), after 第 (第2エリア 제2에리어), when the number counts the noun (3学期 3학기, 8等分
+// 8등분, 22コンボ 22콤보, 3セット 3세트), and after one letter or a letter written two or three
+// times (Aランク A랭크, SSランク SS랭크). They stand apart when the number is the label of the
+// word written straight before it in katakana or Latin letters, or the end of a label
+// (ステージ3ボス戦 스테이지 3 보스전, Lv.10スキル Lv.10 스킬, No.2-1キャラクター No.2-1 캐릭터,
+// R1ボタン R1 버튼, ver2.0アップデート ver2.0 업데이트); when a word in Latin capitals, an
+// abbreviation, is before a noun (ATBゲージ ATB 게이지), or a word with small letters, a name or
+// a word, before a noun in kanji of two characters or more (class空母 class 항공모함,
+// Bismarck追撃戦 Bismarck 추격전); and for a reply number after ≫ or >> (≫372過疎 ≫372 과소), a
+// time (23：40追記 23：40 추기) and a number of four digits before a noun in kanji, a year or a
+// time (2026特別 2026 특별, 2300提督 2300 제독). A word in katakana after a word with small
+// letters may be a spoken ending and joins it (Christmasダヨ Christmas다요).
+bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
     const ResolvedItem& a = items[i];
     const ResolvedItem& b = items[n];
-    if (Contains(GAttr(b), "Ct") || Contains(GAttr(b), "Z7")) return false;
+    if (Contains(GAttr(b), "Ct") || Contains(GAttr(b), "Z7") || Ordinal(items, n)) return false;
     const auto ascii = [](char32_t r) { return r >= U'！' && r <= U'～' ? r - 0xFEE0 : r; };
+    const auto latin = [](char32_t r) { return (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'); };
+    const auto digit = [](char32_t r) { return r >= U'0' && r <= U'9'; };
+    const char32_t lead = text::DecodeRune(b.surface).cp;
     std::string_view rest = std::string_view(tokens[a.tokenIndex].text).substr(0, static_cast<std::size_t>(a.offset + a.length));
     std::size_t digits = 0;
     bool grouped = false;
     for (char32_t r = ascii(LastRune(rest)); r != 0; r = ascii(LastRune(rest))) {
         if (r == U',' || r == U'.' || HasRune(U"十百千万億", r)) {
             grouped = true;
-        } else if (r >= U'0' && r <= U'9') {
+        } else if (digit(r)) {
             digits++;
         } else {
             break;
@@ -351,19 +373,37 @@ bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<Resolved
         const std::string_view head = before;
         const char32_t mark = ascii(LastRune(head)), prior = ascii(LastRune(DropLastRune(head)));
         if (mark == U':' && prior >= U'0' && prior <= U'9') return true;
-        const char32_t lead = text::DecodeRune(b.surface).cp;
-        return digits == 4 && !grouped && IsKanji(lead) && !HasRune(U"十百千万億兆", lead);
+        // An ordinal after 第 numbers the noun (第2エリア 제2에리어).
+        if (mark == U'第') return false;
+        // A noun of one character after a number is its counter or suffix (34世 34세, 657コ 657코),
+        // and Latin letters are its unit (10cm, 1000G).
+        if (text::RuneCount(b.surface) == 1 || latin(ascii(lead))) return false;
+        if (IsKanji(lead) && digits == 4 && !grouped && !HasRune(U"十百千万億兆", lead)) return true;
+        // The number goes on a label written before it (Lv.10, No.2-1): past a dot or a hyphen,
+        // a Latin letter, a digit or katakana. Latin letters after a number are its unit, and a
+        // number after them counts anew (12cm30連装 12cm30연장).
+        std::string_view label = mark == U'.' || mark == U'-' ? DropLastRune(head) : head;
+        if (latin(ascii(LastRune(label)))) {
+            while (latin(ascii(LastRune(label)))) label = DropLastRune(label);
+            return !digit(ascii(LastRune(label)));
+        }
+        const char32_t r = ascii(LastRune(label));
+        return digit(r) || tokenizer::Class(r) == tokenizer::kClassKatakana;
     }
     std::size_t letters = 0;
-    bool small = false;
-    for (char32_t r = ascii(LastRune(rest)); (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'); r = ascii(LastRune(rest))) {
+    bool small = false, same = true;
+    const char32_t last = ascii(LastRune(rest));
+    for (char32_t r = last; latin(r); r = ascii(LastRune(rest))) {
         letters++;
         small = small || r >= U'a';
+        same = same && r == last;
         rest = DropLastRune(rest);
     }
-    const char32_t before = ascii(LastRune(rest));
-    return letters >= 2 && small && !(before >= U'0' && before <= U'9') && IsKanji(text::DecodeRune(b.surface).cp) &&
-           text::RuneCount(b.surface) >= 2;
+    if (letters == 0 || digit(ascii(LastRune(rest)))) return false;
+    if (letters == 1 || (same && !small && letters <= 3)) return false;
+    // One kanji after a Latin word is a suffix (ID欄 ID란, USS風 USS풍).
+    if (IsKanji(lead) && text::RuneCount(b.surface) == 1) return false;
+    return !small || IsKanji(lead);
 }
 
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
@@ -430,9 +470,62 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
            dict::Written(r.cp) == text::DecodeRune(EntryText(b)).cp;
 }
 
-// A number and its counter read as one word (三箇所 3군데, 八本 8 개, ２人 2명): a count
-// of one to nine counted natively is written in native Korean apart from the counter
-// (세 군데, 여덟 개, 두 명), a larger one in digits joined to it.
+// Whether item k follows item k - 1 with nothing between them: in the same token, or at the
+// start of the next one (a number token after a word).
+bool Follows(const std::vector<ResolvedItem>& items, int k) {
+    return Adjoins(items, k) || (k > 0 && items[k].tokenIndex == items[k - 1].tokenIndex + 1 && items[k].offset == 0);
+}
+
+// The source of the items written straight before item k, and after it, up to n
+// characters (the token texts hold the Korean of the items composed so far).
+std::string SourceBefore(const std::vector<ResolvedItem>& items, int k, std::size_t n) {
+    std::string before;
+    for (int j = k; j > 0 && Follows(items, j) && text::RuneCount(before) < n; j--) before.insert(0, items[j - 1].surface);
+    return before;
+}
+
+std::string SourceAfter(const std::vector<ResolvedItem>& items, int k, std::size_t n) {
+    std::string after;
+    for (int j = k + 1; j < static_cast<int>(items.size()) && Follows(items, j) && text::RuneCount(after) < n; j++) {
+        after += items[j].surface;
+    }
+    return after;
+}
+
+// Whether the count of item number, an Arabic 1, and its counter, item counter (the same
+// item when they are one word), form an idiom that Korean says with the native 한 as for
+// 一 (NUM-5): none left (1人残らず 한 명 남김없이), one after another (1人また1人 한 명 또
+// 한 명) and once in a period (100年に1度 100년에 한 번, 1日に1回 1일에 한 번).
+bool IdiomaticOne(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int number, int counter) {
+    if (number < 0 || counter >= static_cast<int>(items.size())) return false;
+    const std::string_view surface = items[number].surface;
+    const bool one = surface.starts_with("1") ? surface.size() == 1 || !IsDigit(surface[1]) : surface.starts_with("１");
+    if (!one || (surface.starts_with("１") && surface.substr(std::string_view("１").size()).starts_with("１"))) return false;
+    if (number > 0 && Adjoins(items, number) && InsideNumber(tokens, items[number])) return false;
+    std::string_view word = items[counter].surface;
+    if (number == counter) word.remove_prefix(surface.starts_with("1") ? 1 : std::string_view("１").size());
+    if (word.empty()) return false;
+    const std::string after = SourceAfter(items, counter, 8);
+    const std::string before = SourceBefore(items, number, 8);
+    if (std::string_view(after).starts_with("残らず")) return true;
+    for (const std::string_view digit : {"1", "１"}) {
+        if (std::string_view(after).starts_with("また" + std::string(digit) + std::string(word))) return true;
+        const std::string earlier = std::string(digit) + std::string(word) + "また";
+        if (std::string_view(before).ends_with(earlier) &&
+            !text::IsDigit(LastRune(std::string_view(before).substr(0, before.size() - earlier.size())))) {
+            return true;
+        }
+    }
+    if (word != "度" && word != "回") return false;
+    if (!std::string_view(before).ends_with("に")) return false;
+    const char32_t period = LastRune(std::string_view(before).substr(0, before.size() - std::string_view("に").size()));
+    return HasRune(U"年日月週生間分秒晩夜朝回度", period);
+}
+
+// A number and its counter read as one word (三箇所 3군데, 八本 8 개, 二人 2명): a count
+// of one to nine in kanji counted natively is written in native Korean apart from the
+// counter (세 군데, 여덟 개, 두 명), a larger one or one in Arabic digits (２人 2명) in digits
+// joined to it.
 std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i,
                         std::string t) {
     const ResolvedItem& item = items[i];
@@ -478,8 +571,11 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     const NativeCounter* c = numeral == 0 ? nullptr : FindNativeCounter(surface.substr(numeral), counter);
     if (c == nullptr || numeral == surface.size()) return t;
     if (InsideNumber(tokens, item) || CompoundAfter(items, i, *c)) return t;
-    const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
-    if (native.empty()) return t.substr(0, digits) + std::string(counter);
+    const std::string_view native =
+        NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral), IdiomaticOne(tokens, items, i, i));
+    // A number in digits stays in digits; in an ordinal its counter is read as after a native
+    // numeral (1回目 1번째 as 2回目 2번째).
+    if (native.empty()) return t.substr(0, digits) + std::string(Ordinal(items, i) ? NativeForm(*c) : counter);
     return WriteNativeCount(native, *c, Ordinal(items, i));
 }
 
@@ -519,7 +615,10 @@ bool WritesNativeCount(const std::vector<ResolvedItem>& items, const std::vector
                                  ? FindNativeCounter(items[j + 1].surface, EntryText(items[j + 1]))
                                  : nullptr;
     const bool beforeCounter = c != nullptr && !CompoundAfter(items, j + 1, *c);
-    if (AllDigits(t)) return beforeCounter && !InsideNumber(tokens, item) && !NativeNumeral(t, item.surface).empty();
+    if (AllDigits(t)) {
+        return beforeCounter && !InsideNumber(tokens, item) &&
+               !NativeNumeral(t, item.surface, IdiomaticOne(tokens, items, j, j + 1)).empty();
+    }
     if (t == "몇" || t == "여러") return beforeCounter;
     const std::string written = CountWithin(tokens, items, j, std::string(t));
     return std::any_of(std::begin(kNativeCounts), std::end(kNativeCounts), [&](std::string_view count) {
@@ -729,12 +828,13 @@ std::string Composer::WriteCount(int i, std::string text) const {
     text = CountWithin(tokens, items, i, std::move(text));
     const int count = static_cast<int>(items.size());
     if (AllDigits(text) && i + 1 < count && WritesNativeCount(items, tokens, i)) {
-        const std::string_view native = NativeNumeral(text, items[i].surface);
+        const std::string_view native = NativeNumeral(text, items[i].surface, IdiomaticOne(tokens, items, i, i + 1));
         if (!native.empty()) text = native == "한" && Ordinal(items, i + 1) ? "첫" : native;
     } else if (const NativeCounter* c = FindNativeCounter(items[i].surface, text);
                c != nullptr && WritesNativeCount(items, tokens, i - 1)) {
         const std::string written =
-            WriteNativeCount(NativeNumeral(EntryText(items[i - 1]), items[i - 1].surface), *c, Ordinal(items, i));
+            WriteNativeCount(NativeNumeral(EntryText(items[i - 1]), items[i - 1].surface, IdiomaticOne(tokens, items, i - 1, i)),
+                             *c, Ordinal(items, i));
         text = written.substr(written.find(' ') + 1);
     }
     return text;
@@ -776,7 +876,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             break;
         }
         if (next == nullptr || (!next->blank && next->end <= runEnd)) return translated;
-        if (!next->empty) break;
+        if (!next->empty || next->end <= pos) break;
         pos = next->end;
     }
     const std::string_view run = src.substr(start, pos - start);
@@ -896,9 +996,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         }
         if (!EntryText(items[j]).empty()) break;
     }
-    // A count before a native counter: one to nine, written in native Korean by WriteCount,
-    // and 몇 or 여러 stand apart from the counter (二匹 두 마리, 3回 세 번, 何匹 몇 마리), a
-    // larger number in digits joins it (20마리). A number inside a longer one or a range
+    // A count before a native counter: one to nine in kanji, written in native Korean by
+    // WriteCount, and 몇 or 여러 stand apart from the counter (二匹 두 마리, 三回 세 번, 何匹 몇
+    // 마리), a number in digits joins it (20마리, 3回 3회). A number inside a longer one or a range
     // (第2回, 1、2個, 2～3本) or before a compound stays as it is.
     if (settings_.literal && FindNativeCounter(next.surface, EntryText(next)) != nullptr) {
         if (t.find(' ') == std::string::npos && WritesNativeCount(items, tokens, i)) return Result(std::move(t), true);
@@ -979,19 +1079,19 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // 후, 14일째) unless it is the verbal noun of the predicate (1 회복했다), and an ordinal
     // after 第 joins the noun it numbers (제17구축대, 제1함대).
     if (settings_.literal && AllDigits(t) && nextKind == '1') {
-        constexpr std::u32string_view kCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
         const char32_t lead = text::DecodeRune(next.surface).cp;
         const bool ordinal = previous >= 0 && items[previous].surface == "第";
-        if (IsKanji(lead) && (ordinal || HasRune(kCounters, lead)) &&
+        if (IsKanji(lead) && (ordinal || HasRune(kSinoCounters, lead)) &&
             dict::Written(lead) == text::DecodeRune(EntryText(next)).cp && (ordinal || !PredicateNoun(items, nextIndex))) {
             return Result(std::move(t), false);
         }
     }
-    // A digit or a Latin letter is written with the noun after it as the source writes them:
-    // together without a space in the source, apart with one (JoinsNoun); a label keeps its
-    // space (LabelsNoun).
+    // A digit or a Latin letter is written with the noun after it apart when the source writes
+    // a space between them (JoinsNoun); without one, they join when the number counts the noun
+    // or the letter grades it and stand apart when the number labels the word before it
+    // (ApartFromNoun).
     if (nextKind == '1' && DigitOrLatin(LastRune(t)) && JoinsNoun(items, i, nextIndex)) {
-        return Result(std::move(t), LabelsNoun(tokens, items, i, nextIndex));
+        return Result(std::move(t), ApartFromNoun(tokens, items, i, nextIndex));
     }
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
@@ -1032,7 +1132,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), nextKind != '2' && nextKind != '6');
         case '1': {
             const TokenText& tok = tokens[item.tokenIndex];
-            if (t == "(" || tok.span != 0 || WidthOf(tok.text) == 1 || nextKind == '2') return Result(std::move(t), false);
+            // A token of one narrow character (at most three bytes) keeps the word after it.
+            const bool narrow = tok.text.size() <= 3 && WidthOf(tok.text) == 1;
+            if (t == "(" || tok.span != 0 || narrow || nextKind == '2') return Result(std::move(t), false);
             // 第 read 제, the ordinal prefix, is written with the number after it, also when a word
             // comes before it in the token or the row (제19구축대, 서장 제2화, 겸 제1함대).
             if ((t == "제" || t.ends_with(" 제")) && (item.surface.ends_with("第") || Contains(tags, "Z6")) && nd(nextTags)) {
@@ -1123,10 +1225,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     item.tokenIndex - items[previous].tokenIndex == 1) {
                     t.insert(0, " ");
                 }
-                // A number is written apart from a following one-word predicate (12 올랐다,
-                // 0600 같다); a counter (3개, 10엔인) and a predicate that starts with the noun it
-                // counts (3시간 들였다) stay attached.
-                const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
+                // A number is written apart from a following one-word predicate or adverb (12 올랐다,
+                // 0600 같다, 1개 주세요); a counter (3개, 10엔인) and a predicate that starts with
+                // the noun it counts (3시간 들였다) stay attached.
+                const bool adverb = nextKind == '3' && !Contains(nextTags, "Ct") &&
+                                    !HasRune(kSinoCounters, text::DecodeRune(next.surface).cp);
+                const bool predicate = nextKind == '4' || adverb || (nextKind == '7' && next.surface != "円");
                 return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
             if (nd(nextTags)) return Result(std::move(t), true);
@@ -1170,13 +1274,37 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     return Result(std::move(t), false);
 }
 
+namespace {
+
+// Whether a symbol token starts with an ellipsis or a mark of tone, which closes the word
+// before it (그건……, 좀 더♪).
+bool ClosesWord(std::string_view t) {
+    return !t.empty() && std::u32string_view(U"…‥♪☆★♡♥❤❣♫♬").find(text::DecodeRune(t).cp) != std::u32string_view::npos;
+}
+
+// Whether out ends in spaces written after a syllable.
+bool SpacedAfterSyllable(const Pieces& out) {
+    const std::string_view t = TextTail(out);
+    const size_t end = t.find_last_not_of(' ');
+    return end != std::string_view::npos && end + 1 < t.size() &&
+           text::Final(DecodeLastRune(TextBefore(t.substr(0, end + 1)), end + 1).cp) >= 0;
+}
+
+}  // namespace
+
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& s, Pieces& out) {
     out.clear();
     std::string text;
     for (int i = first; i <= last; i++) {
         const TokenText& tok = tokens[i];
         switch (tok.type) {
-            case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16: case tokenizer::kTypeSymbol:
+            case tokenizer::kTypeSymbol:
+                if (tok.span == 0 && i > first && tokens[i - 1].type != tokenizer::kTypeAsciiSpace &&
+                    ClosesWord(tok.text) && SpacedAfterSyllable(out)) {
+                    TrimRight(out);
+                }
+                break;
+            case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16:
             case tokenizer::kTypeJapanese: case tokenizer::kTypeProtected:
                 break;
             default:

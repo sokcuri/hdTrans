@@ -323,6 +323,8 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             space = opt == "space";
         } else if (opt == "stative" && pos == "end") {
             stative = true;
+        } else if (opt == "exclaim" && pos == "intj") {
+            // Read by the sound stage (an exclamation is no sound before a question mark).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {

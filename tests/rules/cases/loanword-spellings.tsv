@@ -1,4 +1,12 @@
+# 규칙: LEX-1, LEX-2
 rule	input	expected	kind	layer
 dict:jisjk:50461	木を切るためにチェーンソーを使う。	나무를 자르기 위해 전기톱을 쓴다.	fix	lookup
 dict:jisjk:54899	フェニックスの雛が生まれた。	피닉스의 병아리가 태어났다.	fix	lookup
 dict:jisjk:367969	フェリペが来た。	페리페가 왔다.	fix	lookup
+dict:jisjk:45370	カジュアルな服。	캐주얼한 옷.	fix	lookup
+dict:jisjk:48509	ジュースを飲む。	주스를 마신다.	fix	lookup
+dict:jisjk:42918	アマチュアの選手。	아마추어의 선수.	fix	lookup
+dict:jisjk:46389	クリーチャーが出た。	크리처가 나왔다.	fix	lookup
+dict:jisjk:50905	テレビを見る。	텔레비전을 본다.	fix	lookup
+dict:jisjk:48440	ジャケットを着る。	재킷을 입는다.	fix	lookup
+dict:jisjk:346940	「チュッ♡」	「쪽♡」	keep	lookup

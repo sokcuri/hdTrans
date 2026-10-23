@@ -1,3 +1,4 @@
+# 규칙: LAY-1, LAY-2, LAY-3
 rule	input	expected	kind	layer
 segment:column-gap	17      医者      ベテラン     浮遊中	17      의사      베테랑     부유 중	fix	segment
 segment:column-gap	１７　　　医者　　　浮遊中	17　　　의사　　　부유 중	fix	segment

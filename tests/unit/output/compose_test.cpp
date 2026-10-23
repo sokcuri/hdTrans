@@ -170,10 +170,17 @@ HD_TEST(compose_sentence_token_ranges) {
 
 // A number or a Latin letter joins the noun written straight after it in the source; a label
 // (a reply number, a time, a four-digit number before kanji, a Latin word) and a verbal noun
-// that is the predicate stand apart.
+// that is the predicate stand apart; an abbreviation stands apart from a verbal noun too.
 HD_TEST(compose_number_before_noun) {
     const CompositionCase cases[] = {
         {{{"1", "110", "Nd", "1"}, {"レベル", "110", "", "레벨"}}, {1, 2}, "1레벨."},
+        {{{"22", "110", "Nd", "22"}, {"コンボ", "110", "", "콤보"}}, {1, 2}, "22콤보."},
+        {{{"ステージ", "110", "", "스테이지"}, {"3", "110", "Nd", "3"}, {"ボス戦", "110", "", "보스전"}}, {1, 2, 3}, "스테이지 3 보스전."},
+        {{{"Lv.10", "110", "", "Lv.10"}, {"スキル", "110", "", "스킬"}}, {1, 2}, "Lv.10 스킬."},
+        {{{"ロウリア", "110", "", "로우리아"}, {"34", "110", "Nd", "34"}, {"世", "110", "", "세"}}, {1, 3}, "로우리아 34세."},
+        {{{"ATB", "110", "", "ATB"}, {"ゲージ", "110", "", "게이지"}}, {1, 2}, "ATB 게이지."},
+        {{{"A", "110", "", "A"}, {"ランク", "110", "", "랭크"}}, {1, 2}, "A랭크."},
+        {{{"SS", "110", "", "SS"}, {"ランク", "110", "", "랭크"}}, {1, 2}, "SS랭크."},
         {{{"3", "110", "Nd", "3"}, {"学期", "110", "", "학기"}}, {1, 2}, "3학기."},
         {{{"第五", "110", "", "제5"}, {"戦隊", "110", "", "전대"}}, {1, 2}, "제5전대."},
         {{{"2026", "110", "Nd", "2026"}, {"特別", "110", "", "특별"}}, {1, 2}, "2026 특별."},
@@ -185,10 +192,11 @@ HD_TEST(compose_number_before_noun) {
         {{{"Java", "110", "", "Java"}, {"風", "110", "", "풍"}}, {2}, "Java풍."},
         {{{"10cm", "110", "", "10cm"}, {"砲", "110", "", "포"}}, {2}, "10cm포."},
         {{{"1000", "110", "Nd", "1000"}, {"G", "110", "", "G"}}, {1, 2}, "1000G."},
-        {{{"キハ", "110", "", "키하"}, {"208", "110", "Nd", "208"}, {"車両", "110", "", "차량"}}, {1, 2, 3}, "키하 208차량."},
+        {{{"キハ", "110", "", "키하"}, {"208", "110", "Nd", "208"}, {"車両", "110", "", "차량"}}, {1, 2, 3}, "키하 208 차량."},
         {{{"9", "110", "Nd", "9"}, {"米国", "130", "", "미국"}}, {1, 2}, "9미국."},
         {{{"1", "110", "Nd", "1"}, {"回復", "110", "Hd", "회복"}}, {1, 2}, "1 회복."},
-        {{{"Lv2", "110", "", "Lv2"}, {"スキル", "110", "", "스킬"}}, {1, 2}, "Lv2스킬."},
+        {{{"SP", "110", "", "SP"}, {"消費", "110", "Hd", "소비"}}, {1, 2}, "SP 소비."},
+        {{{"Lv2", "110", "", "Lv2"}, {"スキル", "110", "", "스킬"}}, {1, 2}, "Lv2 스킬."},
         {{{"改二", "110", "", "개2"}, {"改装", "110", "", "개장"}}, {1, 2}, "개2개장."},
     };
     for (const auto& c : cases) CheckComposition(c);
@@ -202,7 +210,9 @@ HD_TEST(compose_native_counts) {
         // One in an ordinal is 첫, counted with 번.
         {{{"一", "110", "NjNd", "1"}, {"回", "110", "Ct", "회"}, {"目", "110", "Ct", "째"}}, {3}, "첫 번째."},
         {{{"一", "110", "NjNd", "1"}, {"匹", "110", "Ct", "마리"}, {"目", "110", "Ct", "째"}}, {3}, "첫 번째."},
-        {{{"1番目", "110", "Ct", "1번째"}}, {1}, "첫 번째."},
+        {{{"1番目", "110", "Ct", "1번째"}}, {1}, "1번째."},
+        {{{"3", "110", "Nd", "3"}, {"回", "110", "Ct", "회"}}, {2}, "3회."},
+        {{{"7", "110", "Nd", "7"}, {"枚", "110", "Ct", "장"}}, {2}, "7장."},
         {{{"二", "110", "NjNd", "2"}, {"匹", "110", "Ct", "마리"}, {"目", "110", "Ct", "째"}}, {3}, "두 마리째."},
         // A count the dictionary reads apart from its counter: 첫 번 in an ordinal, people
         // with 번, the first day 첫날; outside an ordinal it stays.
@@ -220,6 +230,10 @@ HD_TEST(compose_native_counts) {
         {{{"八", "110", "NjNd", "8"}, {"体", "110", "Ct", "체"}}, {2}, "8체."},
         {{{"数", "110", "NjNd", "몇"}, {"体", "110", "Ct", "체"}}, {2}, "몇 체."},
         {{{"二十", "110", "NjNd", "20"}, {"匹", "110", "Ct", "마리"}}, {2}, "20마리."},
+        // An Arabic 1 in an idiom of counting reads 한 (NUM-5).
+        {{{"1", "110", "Nd", "1"}, {"人", "110", "Ct", "명"}, {"残らず", "310", "", "남김없이"}}, {2, 3}, "한 명 남김없이."},
+        {{{"年", "110", "Ct", "년"}, {"に", "200", "", "에"}, {"1", "110", "Nd", "1"}, {"度", "110", "Ct", "번"}}, {2, 4}, "년에 한 번."},
+        {{{"1", "110", "Nd", "1"}, {"人", "110", "Ct", "명"}}, {2}, "1명."},
     };
     for (const auto& c : cases) CheckComposition(c, true);
 }
@@ -321,4 +335,28 @@ HD_TEST(compose_verbal_noun_passive) {
         {{{"色々", "110", "", "여러 가지"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "여러 가지 했다."},
     };
     for (const auto& c : cases) CheckComposition(c);
+}
+
+// An ellipsis or a mark of tone closes the word before it: the space the word was written
+// with goes, but not one of the input or one after a sentence mark.
+HD_TEST(compose_emit_closing_symbols) {
+    struct Case {
+        std::vector<TokenText> tokens;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{tokenizer::kTypeJapanese, 0, "그건 ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}}, "그건……"},
+        {{{tokenizer::kTypeJapanese, 0, "선배 ", ""}, {tokenizer::kTypeSymbol, 0, "♡", ""}}, "선배♡"},
+        {{{tokenizer::kTypeJapanese, 0, "좀 더 ", ""}, {tokenizer::kTypeSymbol, 0, "♪", ""}}, "좀 더♪"},
+        {{{tokenizer::kTypeJapanese, 0, "그건", ""}, {tokenizer::kTypeAsciiSpace, 0, " ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}},
+         "그건 ……"},
+        {{{tokenizer::kTypeJapanese, 0, "했다. ", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}}, "했다. ……"},
+        {{{tokenizer::kTypeJapanese, 0, "그건 ", ""}, {tokenizer::kTypeSymbol, 0, "※", ""}}, "그건 ※"},
+    };
+    Settings settings;
+    for (const Case& c : cases) {
+        Pieces out;
+        EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+        HD_CHECK_EQ(String(out), c.expected);
+    }
 }

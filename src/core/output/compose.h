@@ -177,8 +177,9 @@ private:
 };
 
 // The output pieces of the token texts first..last of a sentence: before a token that
-// is not text (types other than 1, 2, 15, 16, 22, 24, 79) trailing spaces are trimmed
-// unless the previous token is a space; a space separates a token from a preceding
+// is not text (types other than 1, 2, 15, 16, 22, 24, 79), and before a symbol that starts
+// with an ellipsis or a mark of tone (… ‥ ♪ ☆ ★ ♡ ♥) after a syllable, trailing spaces
+// are trimmed unless the previous token is a space; a space separates a token from a preceding
 // "</A>", "</a>" or "&#CS". A span token writes its span text as a span piece, then
 // what compose added to its text; a space written before a closing-tag span moves after
 // it. With settings.cleanup a space the engine wrote never forms a run with another

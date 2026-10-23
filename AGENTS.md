@@ -5,6 +5,8 @@ One static library and thin front ends: CLI, `hdTransEngine.dll` (C API), `J2KEn
 as sources in third_party/ (built by CMake, no network): PCRE2 for the regex rows of
 the filter stage (src/core/filter), libyaml for optional settings (src/core/config).
 README.md is for users; developer documentation is in docs/ (index: docs/README.md).
+Working procedures are Claude Code skills in skills/ (skills/README.md); link them once per
+checkout with `mkdir -p .claude && ln -s ../skills .claude/skills`.
 
 ## Build and test
 - CMake presets (CMakePresets.json): `mac` / `linux` use Ninja with clang or gcc;
@@ -51,6 +53,9 @@ README.md is for users; developer documentation is in docs/ (index: docs/README.
   words share the cause first, and fix the mechanism (codes, rules over classes, engine code)
   when it spans many words. For the same cause, data (dictionary rows, codes) before rules,
   rules before engine code. Each fix gets a fix test and a keep test.
+- Translation output follows the rules in spec/ (index: spec/README.md); fixes and reviews are
+  checked against them.
+- A change that contradicts a rule updates that rule and its cases in the same change.
 - Judge behaviour changes against a build of a fixed commit in its own worktree, not against
   a moving main; revert or narrow a change behind a line both judges call worse.
 - External user dictionaries (Ehnd) are never merged into dicts/.

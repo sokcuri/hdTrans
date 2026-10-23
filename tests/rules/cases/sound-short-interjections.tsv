@@ -3,3 +3,5 @@ sound:uowa	うっ、うあ、うはあ、うひょ、うおわ、うおおっ	�
 sound:uhara	あん、はあん、ああん、はああん、はあ、あんはああん、	앙, 하앙, 아앙, 하아앙, 하아, 앙하아앙,	keep	sound
 sound:uowa	うおっ！	우옷!	keep	sound
 sound:uhara	はあ、そうですか。	하아, 그렇습니까.	keep	sound
+sound:short-interjections	「まっ、でも」	「뭐, 하지만」	fix	sound
+sound:short-interjections	「まっ……またっ……」	「또……또……」	keep	sound

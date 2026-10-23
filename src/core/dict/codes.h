@@ -17,6 +17,8 @@
 #include <string>
 #include <string_view>
 
+#include "core/text/lifetime.h"
+
 namespace hdTrans::dict {
 
 // The class digit of a part code (byte 1).
@@ -55,9 +57,9 @@ public:
     constexpr bool Empty() const { return size_ == 0; }
     constexpr std::size_t Size() const { return size_; }
     // The kept bytes: the whole text up to 4 bytes.
-    std::string_view Text() const { return {bytes_.data(), size_ < 4 ? size_ : std::size_t{4}}; }
+    std::string_view Text() const HDTRANS_LIFETIMEBOUND { return {bytes_.data(), size_ < 4 ? size_ : std::size_t{4}}; }
     // The bytes after the tag ("429" of "M429"), the code the rules see.
-    std::string_view Code() const { return Text().substr(Empty() ? 0 : 1); }
+    std::string_view Code() const HDTRANS_LIFETIMEBOUND { return Text().substr(Empty() ? 0 : 1); }
 
     // Whether the tag is one of the bytes of set ("NIK").
     bool TagIn(std::string_view set) const { return !Empty() && set.find(Tag()) != std::string_view::npos; }
@@ -88,16 +90,16 @@ public:
     CodeList() = default;
     explicit CodeList(std::string_view text) : text_(text) {}
 
-    std::string_view Text() const { return text_; }
+    std::string_view Text() const HDTRANS_LIFETIMEBOUND { return text_; }
     bool Empty() const { return text_.empty(); }
     bool Aligned() const { return text_.size() % Width == 0; }
 
     std::size_t Count() const { return text_.size() / Width; }
-    std::string_view At(std::size_t i) const { return std::string_view(text_).substr(i * Width, Width); }
-    std::string_view First() const { return Count() > 0 ? At(0) : std::string_view(); }
-    std::string_view Last() const { return Count() > 0 ? At(Count() - 1) : std::string_view(); }
+    std::string_view At(std::size_t i) const HDTRANS_LIFETIMEBOUND { return std::string_view(text_).substr(i * Width, Width); }
+    std::string_view First() const HDTRANS_LIFETIMEBOUND { return Count() > 0 ? At(0) : std::string_view(); }
+    std::string_view Last() const HDTRANS_LIFETIMEBOUND { return Count() > 0 ? At(Count() - 1) : std::string_view(); }
     // The bytes after the last whole code.
-    std::string_view Rest() const { return std::string_view(text_).substr(Count() * Width); }
+    std::string_view Rest() const HDTRANS_LIFETIMEBOUND { return std::string_view(text_).substr(Count() * Width); }
 
     // Whether s occurs anywhere in the text, at any offset.
     bool Contains(std::string_view s) const { return text_.find(s) != std::string::npos; }
@@ -148,7 +150,7 @@ class DictCode {
 public:
     DictCode() = default;
     explicit DictCode(std::string_view text) : text_(text) {}
-    std::string_view Text() const { return text_; }
+    std::string_view Text() const HDTRANS_LIFETIMEBOUND { return text_; }
     bool SourceOnly() const { return text_ == "SO"; }
     bool operator==(const DictCode&) const = default;
     bool operator==(std::string_view s) const { return text_ == s; }

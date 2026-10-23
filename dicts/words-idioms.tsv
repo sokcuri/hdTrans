@@ -2110,7 +2110,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 美酒佳肴	좋은 술과 맛있는 안주	N110			GN				llm			i:2105
 美人薄命	미인박명	A9D0			GN							i:2106
 不朽不滅	불후불멸	N110			GN				llm			i:2107
-父子相伝	그 아버지에 그 아들	N110			GN							i:2108
+父子相伝	부자 상전	N110			GN							i:2108
 武運長久	무운장구	A9D0			GN				llm			i:2109
 風俗壊乱	풍속 문란	N110			GN				llm			i:2110
 複雑多岐	복잡다기	N110			GN				llm			i:2111
@@ -2123,10 +2123,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 暮色蒼然	어스름하게 땅거미가 지는	E300			GN				llm			i:2118
 放蕩無頼	방탕무뢰	N110			GN				llm			i:2119
 豊年満作	풍년 대풍작	N110			GN				llm			i:2120
-忙中有閑	바쁜 가운데서도 누리는 여유	N110			GN				llm			i:2121
+忙中有閑	망중한	N110			GN				llm			i:2121
 暴虐非道	포악무도	N110			GN				llm			i:2122
 墨痕淋漓	먹 자국도 힘차게	E300			GN				llm			i:2123
-枕流漱石	억지를 부리며 잘못을 인정하지 않음	N110			GN				llm			i:2124
+枕流漱石	수석침류	N110			GN				llm			i:2124
 漫言放語	함부로 내뱉는 말	N110			GN				llm			i:2125
 無為無能	무위무능	N110			GN				llm			i:2126
 無病息災	무병장수	N110			GN				llm			i:2127
@@ -2166,7 +2166,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蝸牛角上	와우각상	N110			GN				llm			i:2161
 豁然大悟	활연대오	N110			GN				llm			i:2162
 躊躇逡巡	주저하며 망설임	N110			GN				llm			i:2163
-輾転反側	이리 뒤척 저리 뒤척	N110			GN							i:2164
+輾転反側	전전반측	N110			GN							i:2164
 闊達自在	활달자재	N110			GN				llm			i:2165
 言う事を聞	말을 &J6@	M421		Pn	GN				llm			i:2166
 甲斐がな	헛$AE@	H7N0			GN							i:2167
@@ -4517,7 +4517,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 不思議なほど	신기할 정도로	A9D0			GN				llm			i:4513
 心のぶつかり合い	마음의 충돌	A9D0			GN				llm			i:4514
 花虎の尾	숙근 꼬리풀	N110			GN				llm			i:4515
-ハナトラノオ	피소스테기아	N110			GN				llm			i:4516
+ハナトラノオ	꽃범의꼬리	N110			GN				llm			i:4516
 鳩が豆鉄砲を食ったよう	놀라서 눈이 휘둥그레진 모습	A9D0			GN				llm			i:4517
 型にはま	틀에 박&AW@	M428			GN				llm			i:4518
 型に嵌ま	판에 박&AW@	M428			GN							i:4519
@@ -6714,7 +6714,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 頭がいっぱい	머릿속이 가득해	A9D0			GN				llm			i:6710
 傷の舐め合い	서로 상처를 핥아주기	A9D0			GN				llm			i:6711
 傷の舐めあい	서로 상처를 핥아주기	A9D0			GN				llm			i:6712
-ラットレース	노 브레인 레이스	N110			GN							i:6713
+ラットレース	무한 경쟁	N110			GN							i:6713
 ラット・レース	래트 레이스	N110			GN				llm			i:6714
 距離を詰め	거리를 좁&AW@	M427		Pn	GN				llm			i:6715
 お任せあれ	맡겨 주세요	A9D0			GN				llm			i:6716

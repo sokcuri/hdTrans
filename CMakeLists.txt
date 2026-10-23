@@ -37,6 +37,16 @@ else()
     if(HDTRANS_WERROR)
         add_compile_options(-Werror)
     endif()
+    # Sanitizers for every target, e.g. address,undefined. Any report aborts the program.
+    set(HDTRANS_SANITIZE "" CACHE STRING "Comma-separated -fsanitize= list (GCC/Clang)")
+    if(HDTRANS_SANITIZE)
+        add_compile_options(-fsanitize=${HDTRANS_SANITIZE} -fno-sanitize-recover=all -fno-omit-frame-pointer)
+        if(HDTRANS_SANITIZE MATCHES "undefined")
+            # vptr needs RTTI, which the build turns off.
+            add_compile_options(-fno-sanitize=vptr)
+        endif()
+        add_link_options(-fsanitize=${HDTRANS_SANITIZE})
+    endif()
 endif()
 
 # The builtin dictionary tables, src/core/dict/builtin/*.tsv and builtin/extra/*.tsv, compiled in.
@@ -154,6 +164,14 @@ if(NOT EMSCRIPTEN)
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME tools.selfbase COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/selfbase.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        find_program(HDTRANS_PYTHON python3)
+        if(HDTRANS_PYTHON)
+            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene)
+                add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
+                    "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
+            endforeach()
+            add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+        endif()
     endif()
 
     # Translates examples/ with the dictionaries in HDTRANS_DICTS at test time; skipped when unset.

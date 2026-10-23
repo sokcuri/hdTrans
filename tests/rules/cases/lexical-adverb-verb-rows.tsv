@@ -2,5 +2,5 @@ rule	input	expected	kind	layer
 userdict:adverb-verb	お姉さんは思わず笑い、そんな風ににまにま鑑賞されているとは思いもしない。	언니는 나도 모르게 웃어, 그런 식으로 히죽히죽 감상되고 있다고는 생각하지도 않는다.	fix	lookup
 userdict:adverb-verb	茫然とする私はそのまま医務室に運ばれた。	멍해지는 나는 그대로 의무실에 옮겨졌다.	fix	lookup
 userdict:adverb-verb	あっという間に消え去ったお菓子に呆然としていると、彼がそっと二個目を差し出してくれた。	순식간에 사라진 과자에 멍해져 있으니, 그가 살며시 두 개째를 내밀어 주었다.	fix	lookup
-userdict:adverb-verb	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 두 번째 중얼거림을 토해냈다.	keep	lookup
+userdict:adverb-verb	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 2번째 중얼거림을 토해냈다.	keep	lookup
 userdict:adverb-verb	呆然と立ち尽くす私と彼の視線が合った。	멍하니 우두커니 서는 나와 그의 시선이 맞았다.	keep	lookup
