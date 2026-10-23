@@ -47,6 +47,14 @@ public:
     int current = -1;  // the token being processed
     int insertedLength = 0;
     int candidateRetryCount = 0;
+    // The word search of a token recurses once per word. At kMaxWordDepth levels it stops
+    // with the words found so far, and BuildSurfaceTransform goes on at resumeCursor
+    // (-1 for none) with resumeParent as the word before and resumeRetries retries used.
+    static constexpr int kMaxWordDepth = 300;
+    int wordDepth = 0;
+    int resumeCursor = -1;
+    Item* resumeParent = nullptr;
+    int resumeRetries = 0;
     std::string_view transformSurface;
     bool fault = false;
 

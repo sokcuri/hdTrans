@@ -686,10 +686,25 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
     transformSurface = surface;
     int cursor = 0;
     const int size = static_cast<int>(full.size());
+    // Where a search that reached kMaxWordDepth stopped: the search goes on there.
+    Item* parent = nullptr;
+    int retries = 0;
+    resumeCursor = -1;
+    auto resumed = [&] {
+        if (resumeCursor < 0) return false;
+        cursor = resumeCursor;
+        parent = resumeParent;
+        retries = resumeRetries;
+        resumeCursor = -1;
+        return true;
+    };
     while (cursor < size) {
         insertedLength = 0;
-        candidateRetryCount = 0;
-        const bool translated = TranslateCandidateAt(full, cursor, token, nullptr);
+        candidateRetryCount = retries;
+        const bool translated = TranslateCandidateAt(full, cursor, token, parent);
+        parent = nullptr;
+        retries = 0;
+        if (resumed()) continue;
         cursor += insertedLength;
         if (translated && insertedLength != 0) continue;
         if (cursor >= size) break;
@@ -700,6 +715,7 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
                 while (cur != nullptr && cur->source.size() <= numeric->source.size()) cur = cur->child;
                 if (cur != nullptr) {
                     ProcessCandidateRecord(full, cursor, token, cur, nullptr);
+                    if (resumed()) continue;
                     return;
                 }
             }
@@ -844,11 +860,32 @@ bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::str
     return false;
 }
 
+namespace {
+
+struct DepthScope {
+    explicit DepthScope(int& d) : depth(d) { ++depth; }
+    ~DepthScope() { --depth; }
+    DepthScope(const DepthScope&) = delete;
+    DepthScope& operator=(const DepthScope&) = delete;
+    int& depth;
+};
+
+}  // namespace
+
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
     const std::string_view text = From(full, cursor);
     if (text.empty()) return true;
+    // Each word of the token adds a level; a very long token takes its words in parts so
+    // that the depth, and the stack, stays bounded.
+    if (wordDepth >= kMaxWordDepth) {
+        resumeCursor = cursor;
+        resumeParent = parent;
+        resumeRetries = candidateRetryCount;
+        return true;
+    }
+    const DepthScope scope(wordDepth);
     if (Item* hon = HonorificItem(full, cursor, token, parent)) {
         TranslateCandidateAt(full, cursor + hon->length, token, hon);
         Insert(hon);
