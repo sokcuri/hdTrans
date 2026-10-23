@@ -14,7 +14,7 @@ HD_TEST(word_improvements_defaults_and_reference) {
     using hdTrans::word::Settings;
     constexpr std::string_view defaultOn[] = {
         "extraBuiltin", "literalCleanup", "imperativeEu", "causativePassive", "exclamationNa", "dialectForms",
-        "expandedGroups", "semanticAlternatives", "nonterminalBoundary", "cgRules",
+        "expandedGroups", "semanticAlternatives", "nonterminalBoundary", "cgRules", "kanjiNumbers",
     };
     const Improvements defaults;
     const Improvements reference = Improvements::Reference();
@@ -84,6 +84,18 @@ HD_TEST(word_improvements_causative_passive_output) {
                      "書かされた。", "서.", "쓰게 되었다.");
     CheckImprovement(&hdTrans::word::Improvements::causativePassive, files,
                      "書かせられた。", "서.", "쓰게 되었다.");
+}
+
+HD_TEST(word_improvements_kanji_numbers_output) {
+    const std::vector<hdTrans::dict::File> files = {
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+         "五十\t오십\tN110\t\t\tGN\t0\t1\n"
+         "日\t일\tN110\t\tCt\tGN\t0\t2\n"
+         "百\t백\tN110\t\tNj\tGN\t0\t3\n"},
+    };
+    CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "五十日", "오십일", "50일");
+    CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "百二十日", "백이10일", "120일");
 }
 
 HD_TEST(word_improvements_forward_terminal_order) {

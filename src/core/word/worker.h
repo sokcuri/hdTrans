@@ -102,10 +102,14 @@ private:
     void BuildTokenTransformText(int i);
     void BuildSyntheticTransform(std::string_view surface, int token, int offset, bool emptyTarget);
     std::string FilterKana(std::string_view text) const;
-    Record* LookupFallbackRecord(int token, std::string_view source, int left, int right);
-    Record* ProbeNumericPrefix(int token, std::string_view source);
+    // The record of a numeral, ASCII digits or punctuation at source; digits: a kanji number
+    // that is not looked up in the dictionary.
+    Record* LookupFallbackRecord(int token, std::string_view source, int left, int right, bool digits = false);
+    // afterMyriad: the text before source ends with 万 or 億.
+    Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
+    bool SpellsNumber(Record* records, const Record& number);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);

@@ -70,6 +70,53 @@ std::string EncodeNumericPair(std::string_view text) {
     return digits;
 }
 
+// Whether the text before cursor ends with 万 or 億: the number after it is a part of the
+// larger number (三万五千 3만5천).
+bool AfterMyriad(std::string_view full, int cursor) {
+    const std::string_view head = full.substr(0, static_cast<std::size_t>(cursor));
+    return head.ends_with("万") || head.ends_with("億");
+}
+
+// A kanji number at the start of s read with 十, 百 and 千 (百二十 120, 五百 500, 二千五百
+// 2500): the bytes it takes and its value in digits. Two digits in a row end it (三四十 is
+// three, then forty), and so does a unit not smaller than the one before.
+struct KanjiNumber {
+    std::size_t size = 0;
+    std::string digits;
+};
+
+KanjiNumber ParseKanjiNumber(std::string_view s) {
+    constexpr std::u32string_view kDigits = U"〇一二三四五六七八九";
+    long total = 0, lastUnit = 10000;
+    int digit = -1;
+    std::size_t k = 0, used = 0;
+    KanjiNumber n;
+    while (k < s.size()) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        const std::size_t d = r.cp == U'○' ? 0 : kDigits.find(r.cp);
+        const long unit = r.cp == U'十' ? 10 : r.cp == U'百' ? 100 : r.cp == U'千' ? 1000 : 0;
+        if (d != std::u32string_view::npos) {
+            if (digit >= 0) break;
+            digit = static_cast<int>(d);
+            k += r.size;
+            continue;
+        }
+        if (unit == 0 || unit >= lastUnit) break;
+        total += (digit >= 0 ? digit : 1) * unit;
+        digit = -1;
+        lastUnit = unit;
+        k += r.size;
+        used = k;
+    }
+    if (digit >= 0) {
+        total += digit;
+        used = k;
+    }
+    n.size = used;
+    if (used > 0) n.digits = std::to_string(total);
+    return n;
+}
+
 // After a noun parent, the particle records (kind 2) that follow the first verb or
 // adjective record move to the front (behind the leading plain-dictionary records).
 Record* ReorderAfterNoun(const Item& parent, Record* records) {
@@ -431,8 +478,8 @@ Record* Worker::CreateSyntheticRecord(int token, std::string_view source, bool e
 
 // The dictionary record whose source is exactly source (with the records after it), or
 // a numeral or punctuation record for it.
-Record* Worker::LookupFallbackRecord(int token, std::string_view source, int left, int right) {
-    if (const Lookup l = DoLookup(source, kModeGeneral); l.count != 0) {
+Record* Worker::LookupFallbackRecord(int token, std::string_view source, int left, int right, bool digits) {
+    if (const Lookup l = digits ? Lookup{} : DoLookup(source, kModeGeneral); l.count != 0) {
         for (Record* r = l.records; r != nullptr; r = r->child) {
             if (r->source == source) return r;
         }
@@ -468,7 +515,7 @@ Record* Worker::LookupFallbackRecord(int token, std::string_view source, int lef
 
 // A numeral (kanji or ASCII digits) or an ASCII punctuation character at source and
 // its record, or null.
-Record* Worker::ProbeNumericPrefix(int token, std::string_view source) {
+Record* Worker::ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad) {
     if (source.empty()) return nullptr;
     std::size_t prefix = 0;
     int left = 0, right = 0;
@@ -480,6 +527,15 @@ Record* Worker::ProbeNumericPrefix(int token, std::string_view source) {
     switch (Classify(source)) {
     case 24: {
         const std::string_view c = FirstChar(source);
+        // A number of two or more kanji is read as its digits even where a dictionary word
+        // spells it (五十 50, 百二十 120); 百 and 千 alone keep their words (千里).
+        if (settings.improvements.kanjiNumbers && !afterMyriad) {
+            if (const KanjiNumber n = ParseKanjiNumber(source); text::RuneCount(source.substr(0, n.size)) >= 2) {
+                Record* r = LookupFallbackRecord(token, source.substr(0, n.size), 12, 15, true);
+                r->target = n.digits;
+                return r;
+            }
+        }
         if (IsNumeral(c)) {
             left = 12, right = 15;
             prefix = c.size();
@@ -532,7 +588,7 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
         if (translated && insertedLength != 0) continue;
         if (cursor >= size) break;
         const std::string_view rest = full.substr(static_cast<std::size_t>(cursor));
-        if (Record* numeric = ProbeNumericPrefix(token, rest)) {
+        if (Record* numeric = ProbeNumericPrefix(token, rest, AfterMyriad(full, cursor))) {
             if (const Lookup l = DoLookup(rest, kModeGeneral); l.count != 0) {
                 Record* cur = l.records;
                 while (cur != nullptr && cur->source.size() <= numeric->source.size()) cur = cur->child;
@@ -572,6 +628,29 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
 
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
+// Whether the dictionary words at a kanji number of two or more characters only spell the number or the number and one counter (五十 오십, 十五日 십오일,
+// 十二月 십이월): the number is read as digits then (50, 15일, 12월). A longer word
+// (五十肩, 八百屋, 二十四時間) is kept.
+bool Worker::SpellsNumber(Record* records, const Record& number) {
+    const std::string_view source = number.source;
+    if (!settings.improvements.kanjiNumbers || source.empty() || static_cast<unsigned char>(source[0]) < 0x80 ||
+        number.target.empty() || !IsDigit(number.target[0]) || text::RuneCount(source) < 2) {
+        return false;
+    }
+    for (Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() <= source.size()) continue;
+        if (!std::string_view(r->source).starts_with(source)) return false;
+        const std::string_view rest = std::string_view(r->source).substr(source.size());
+        if (FirstChar(rest).size() != rest.size()) return false;
+        bool counter = false;
+        if (const Lookup l = DoLookup(rest, kModeGeneral); l.count != 0) {
+            for (Record* c = l.records; c != nullptr && !counter; c = c->child) counter = c->source == rest && Has(c->attr, "Ct");
+        }
+        if (!counter) return false;
+    }
+    return true;
+}
+
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
     const std::string_view text = From(full, cursor);
     if (text.empty()) return true;
@@ -581,9 +660,31 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
         return true;
     }
     Lookup found;
-    if (Record* numeric = ProbeNumericPrefix(token, text)) {
+    // 第 before a number of two or more kanji is a word of its own unless the dictionary
+    // spells them together (第五十 제50, not 第五 제5 and 十).
+    if (constexpr std::string_view kOrdinal = "第"; settings.improvements.kanjiNumbers && text.starts_with(kOrdinal)) {
+        const std::string_view rest = text.substr(kOrdinal.size());
+        if (const KanjiNumber n = ParseKanjiNumber(rest); text::RuneCount(rest.substr(0, n.size)) >= 2) {
+            const std::string_view whole = text.substr(0, kOrdinal.size() + n.size);
+            bool spelled = false;
+            if (const Lookup words = DoLookup(text, kModeGeneral); words.count != 0) {
+                for (Record* r = words.records; r != nullptr && !spelled; r = r->child) spelled = r->source == whole;
+            }
+            // A longer word at the number (a name) keeps the dictionary reading too.
+            if (Record* number = ProbeNumericPrefix(token, rest); number != nullptr && !spelled) {
+                const Lookup after = DoLookup(rest, kModeGeneral);
+                spelled = after.count != 0 && !SpellsNumber(after.records, *number);
+            }
+            if (const Lookup l = DoLookup(kOrdinal, kModeGeneral); !spelled && l.count != 0) {
+                return ProcessCandidateRecord(full, cursor, token, l.records, parent);
+            }
+        }
+    }
+    if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         const Lookup dictionary = DoLookup(text, kModeGeneral);
-        if (dictionary.count == 0) return ProcessCandidateRecord(full, cursor, token, numeric, parent);
+        if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric)) {
+            return ProcessCandidateRecord(full, cursor, token, numeric, parent);
+        }
         found = dictionary;
     } else {
         found = DoLookup(text, kModeGeneral);

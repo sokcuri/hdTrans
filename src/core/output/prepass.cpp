@@ -753,6 +753,17 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), true);
         }
     }
+    // A number joins a noun after it that starts with a counter read in Sino-Korean (2000년
+    // 후, 14일째), and an ordinal after 第 joins the noun it numbers (제17구축대, 제1함대).
+    if (settings_.literal && AllDigits(t) && nextKind == '1') {
+        constexpr std::u32string_view kCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
+        const char32_t lead = text::DecodeRune(next.surface).cp;
+        const bool ordinal = previous >= 0 && items[previous].surface == "第";
+        if (IsKanji(lead) && (ordinal || HasRune(kCounters, lead)) &&
+            dict::Written(lead) == text::DecodeRune(EntryText(next)).cp) {
+            return Result(std::move(t), false);
+        }
+    }
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
     } else if (t != ",") {
