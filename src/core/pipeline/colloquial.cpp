@@ -572,11 +572,11 @@ bool IsWordRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || I
 bool NotAllI(std::u32string_view s) { return s.find_first_not_of(U'い') != std::u32string_view::npos; }
 
 // Whether rs[k - 2] and rs[k - 1] are the adjective いい after words that start at or after
-// from, of two or more characters or ending in a kanji (気持ちいい, きもちいい, これいい; not
-// the cries ふいい, きいい, いいい).
-bool GoodAfterWord(const Emphasis& e, std::u32string_view rs, size_t from, size_t k) {
+// from, of two or more characters or ending in a kanji, and that no key reads past reach
+// (気持ちいい, きもちいい, これいい; not the cries ふいい, きいい, いいい).
+bool GoodAfterWord(const Emphasis& e, std::u32string_view rs, size_t from, size_t k, size_t reach) {
     return k >= 3 && k - 2 > from && rs[k - 2] == U'い' && rs[k - 1] == U'い' && !In(rs[k - 3], U"いぃ") &&
-           (k - 2 - from >= 2 || IsKanjiRune(rs[k - 3])) && e.Reach(rs, from, k - 2) == k - 2 &&
+           (k - 2 - from >= 2 || IsKanjiRune(rs[k - 3])) && e.Reach(rs, from, k - 2) <= reach &&
            e.Tags(U"い").find('H') != std::string::npos;
 }
 
@@ -780,7 +780,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         }
         const std::u32string_view before = std::u32string_view(rs).substr(from, k - 1 - from);
         const bool stem = e.StemTagged(rs, from, k - 1, "H") && NotAllI(before);
-        const bool good = GoodAfterWord(e, rs, from, k);
+        const bool good = k >= 2 && GoodAfterWord(e, rs, from, k, k - 2);
         const bool wish = before.ends_with(U"た") && k >= 3 && e.StemEnds(rs, from, k - 2);  // 見てみたいいい
         if (!stem && !good && !wish) continue;
         rs = Spliced(rs, k, Drawn(rs, k, end), end);
@@ -838,7 +838,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             while (dashEnd < rs.size() && IsDash(rs[dashEnd])) dashEnd++;
             const bool adjectiveI = dashedI && ShoutEnd(rs, dashEnd) && i >= 2 &&
                                     (e.StemTagged(rs, from, i - 1, "H") || e.AdjectiveStemBefore(rs, from, i - 1) ||
-                                     GoodAfterWord(e, rs, from, i)) &&
+                                     GoodAfterWord(e, rs, from, i, i)) &&  // もういいー
                                     NotAllI(std::u32string_view(rs).substr(from, i - from));
             if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI && !adjectiveI)) {
                 continue;
