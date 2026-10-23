@@ -18,15 +18,15 @@ const dict::Snapshot* Dictionary() {
     static const dict::LoadResult loaded = dict::Load({
         {0, "base.tsv",
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
-         "魅音\t미온\tN130\tQPN\tWb\tGN\t1\n"
-         "梨花\t배꽃\tN110\t\t\tGN\t2\n"
+         "紗英\t사에\tN130\tQPN\tWb\tGN\t1\n"
+         "桃花\t복숭아꽃\tN110\t\t\tGN\t2\n"
          "光\t빛\tN110\t\t\tGN\t3\n"
          "光\t히카루\tN130\tQPN\tWb\tGN\t4\n"
          "光\t빛나&AA@\tM428\t\t\tGN\t5\n"
          "乾\t마르&AA@\tM428\t\t\tGN\t6\n"
          "乾\t이누이\tN130\tQPN\tWa\tGN\t7\n"
-         "前原\t마에바라\tN130\tQPN\tWa\tGN\t8\n"
-         "圭一\t케이이치\tN130\tQPN\tWb\tGN\t9\n"
+         "高森\t타카모리\tN130\tQPN\tWa\tGN\t8\n"
+         "恭平\t쿄헤이\tN130\tQPN\tWb\tGN\t9\n"
          "ソード\t소드\tN110\t\t\tGN\t10\n"
          "ワールド\t월드\tN110\t\t\tGN\t11\n"
          "ハル\t헐\tN110\t\t\tGN\t15\n"
@@ -90,7 +90,7 @@ const dict::Snapshot* Dictionary() {
          "周\t아마네\tN130\tQPN\tWb\tGN\t13\n"
          "樹\t이츠키\tN130\tQPN\tWb\tGN\t14\n"
          "ハル\t하루\tN130\tQPNVHn\tWb\tGN\t16\n"
-         "梨花\t리카\tN130\tQPNVHn\tWb\tGN\t22\n"
+         "桃花\t모모카\tN130\tQPNVHn\tWb\tGN\t22\n"
          "つぐみ\t츠구미\tN130\tQPNVHn\tWb\tGN\t23\n"
          "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"
          "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
@@ -137,11 +137,11 @@ std::string Occurrences(names::Registry& r, const std::string& line) {
 
 HD_TEST(names_strip_ruby) {
     const std::vector<std::pair<std::string, std::string>> cases = {
-        {"|梨花《りか》ちゃん", "梨花ちゃん"},
+        {"|桃花《ももか》ちゃん", "桃花ちゃん"},
         {"｜幻晶騎士《シルエットナイト》", "幻晶騎士"},
         {"猫猫《マオマオ》", "猫猫"},
-        {"<ruby>梨花<rt>りか</rt></ruby>ちゃん", "梨花ちゃん"},
-        {"<ruby><rb>梨花</rb><rp>（</rp><rt>りか</rt><rp>）</rp></ruby>", "梨花"},
+        {"<ruby>桃花<rt>ももか</rt></ruby>ちゃん", "桃花ちゃん"},
+        {"<ruby><rb>桃花</rb><rp>（</rp><rt>ももか</rt><rp>）</rp></ruby>", "桃花"},
         {"《》だけ", "《》だけ"},
         {"｜魔導騎士（マジックナイト）が", "魔導騎士が"},
         {"運行情報 | 京都(北部)へ", "運行情報 | 京都(北部)へ"},
@@ -173,7 +173,7 @@ HD_TEST(names_drop_readings) {
         // A name quoted after a noun, a quote before と, a quote that ends the line.
         {"戦艦「やまと」の", "戦艦「やまと」の"},
         {"私「こんびに」とやら", "私「こんびに」とやら"},
-        {"魅音「おはよう」", "魅音「おはよう」"},
+        {"紗英「おはよう」", "紗英「おはよう」"},
         // No word of the base's: a quote after a speaker, a name after a noun, a remark,
         // and fewer morae than kanji.
         {"姉「うん」って言った。", "姉「うん」って言った。"},
@@ -214,7 +214,7 @@ HD_TEST(names_kana_name_in_parentheses) {
 }
 
 HD_TEST(names_speaker_cues) {
-    HD_CHECK_EQ(names::SpeakerCues("魅音「おはよう」\n圭一です。").size(), size_t{2});
+    HD_CHECK_EQ(names::SpeakerCues("紗英「おはよう」\n恭平です。").size(), size_t{2});
     HD_CHECK_EQ(names::SpeakerCues("そう言って、おはよう").size(), size_t{0});
 }
 
@@ -222,36 +222,36 @@ HD_TEST(names_labels) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     const std::vector<std::pair<std::string, bool>> cases = {
-        {Repeat("魅音「おはよう」", 3), true},
-        {Repeat("魅音「おはよう」", 2), false},  // a plain-text form must recur
-        {Repeat("【魅音】「おはよう」", 3), true},
-        {Repeat("魅音：おはよう", 3), true},
-        {Repeat("魅音 : 「おはよう」", 3), true},
-        {Repeat("[魅音]: 「おはよう」", 3), true},
-        {"OutputLine(\"<color=#5ec69a>魅音</color>\", NULL, \"<color=#5ec69a>미온</color>\", NULL, Line_ContinueAfterTyping);", true},
-        {"define m = Character(\"魅音\")\nm \"おはよう\"", true},
-        {"[name text=\"魅音\"]おはよう", true},
-        {"@nm t=\"魅音\"", true},
-        {"#魅音\nおはよう", true},
+        {Repeat("紗英「おはよう」", 3), true},
+        {Repeat("紗英「おはよう」", 2), false},  // a plain-text form must recur
+        {Repeat("【紗英】「おはよう」", 3), true},
+        {Repeat("紗英：おはよう", 3), true},
+        {Repeat("紗英 : 「おはよう」", 3), true},
+        {Repeat("[紗英]: 「おはよう」", 3), true},
+        {"OutputLine(\"<color=#5ec69a>紗英</color>\", NULL, \"<color=#5ec69a>사에</color>\", NULL, Line_ContinueAfterTyping);", true},
+        {"define m = Character(\"紗英\")\nm \"おはよう\"", true},
+        {"[name text=\"紗英\"]おはよう", true},
+        {"@nm t=\"紗英\"", true},
+        {"#紗英\nおはよう", true},
         {Repeat("そう言って「おはよう」", 3), false},
-        {Repeat("魅音の母「おはよう」", 3), false},
+        {Repeat("紗英の母「おはよう」", 3), false},
         {Repeat("女子生徒Ａ「おはよう」", 3), false},
-        {Repeat("魅音？「おはよう」", 3), false},
-        {Repeat("// 魅音「おはよう」", 3), false},
+        {Repeat("紗英？「おはよう」", 3), false},
+        {Repeat("// 紗英「おはよう」", 3), false},
         // A name box: the name alone on a line, its quote on the next.
-        {Repeat("魅音\n「おはよう」", 3), true},
-        {Repeat("魅音\n「おはよう」", 2), false},
-        {Repeat("魅音\nおはよう。", 3), false},
+        {Repeat("紗英\n「おはよう」", 3), true},
+        {Repeat("紗英\n「おはよう」", 2), false},
+        {Repeat("紗英\nおはよう。", 3), false},
     };
     for (const auto& [doc, want] : cases) {
         names::Registry r = Scan(snap, doc);
         const std::vector<std::string> names = r.Names();
-        const bool got = std::find(names.begin(), names.end(), "魅音") != names.end();
+        const bool got = std::find(names.begin(), names.end(), "紗英") != names.end();
         HD_CHECK_EQ(got, want);
     }
     // A joint label names both; Xの母 counts once for X.
-    names::Registry r = Scan(snap, Repeat("梨花＆沙都子「おはよう」", 3) + "OutputLine(\"圭一の母\", NULL, \"어머니\", NULL, 0);\n圭一さん");
-    HD_CHECK(r.Names() == (std::vector<std::string>{"圭一", "梨花", "沙都子"}));
+    names::Registry r = Scan(snap, Repeat("桃花＆奈津子「おはよう」", 3) + "OutputLine(\"恭平の母\", NULL, \"어머니\", NULL, 0);\n恭平さん");
+    HD_CHECK(r.Names() == (std::vector<std::string>{"奈津子", "恭平", "桃花"}));
     // A name box of hiragana names the speaker and renders the name.
     {
         names::Registry box = Scan(snap, Repeat("のぞみ\n「……え？」", 3));
@@ -305,15 +305,15 @@ HD_TEST(names_labels) {
     const std::vector<std::string> chisato = Scan(snap, Repeat("千里(ちさと)が来た。", 3)).Names();
     HD_CHECK(std::find(chisato.begin(), chisato.end(), "千里") != chisato.end());
     // A given name split from a full name that is a common word does not stand for the
-    // person elsewhere (前原光: 光 stays the word).
-    const std::vector<std::string> hikaru = Scan(snap, Repeat("前原光は来た。", 3)).Names();
+    // person elsewhere (高森光: 光 stays the word).
+    const std::vector<std::string> hikaru = Scan(snap, Repeat("高森光は来た。", 3)).Names();
     HD_CHECK(std::find(hikaru.begin(), hikaru.end(), "光") == hikaru.end());
     // A surname of a full name that is a common word does not stand for the person
-    // elsewhere (梨花, a word in the fixture: 梨花圭一 keeps 梨花 the word).
-    const std::vector<std::string> rika = Scan(snap, Repeat("圭一さん、おはよう。", 3) + Repeat("梨花圭一が来た。", 3)).Names();
-    HD_CHECK(std::find(rika.begin(), rika.end(), "梨花") == rika.end());
+    // elsewhere (桃花, a word in the fixture: 桃花恭平 keeps 桃花 the word).
+    const std::vector<std::string> rika = Scan(snap, Repeat("恭平さん、おはよう。", 3) + Repeat("桃花恭平が来た。", 3)).Names();
+    HD_CHECK(std::find(rika.begin(), rika.end(), "桃花") == rika.end());
     // A bracket that the line goes on after is a title, not a speaker's quote.
-    HD_CHECK(Scan(snap, Repeat("梨花「第二部隊」、出撃せよ！", 3)).Names().empty());
+    HD_CHECK(Scan(snap, Repeat("桃花「第二部隊」、出撃せよ！", 3)).Names().empty());
     // A numeral is no surname before a name (二美咲).
     const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
     HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
@@ -323,10 +323,10 @@ HD_TEST(names_honorifics) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     const std::vector<std::pair<std::string, std::vector<std::string>>> cases = {
-        {Repeat("梨花ちゃん、おはよう。", 4), {"梨花"}},
-        {Repeat("梨花ちゃん、おはよう。", 3), {}},  // a common word scores 0.5 per honorific
-        {"詩音さん", {}},
-        {"詩音さん\n詩音さん", {"詩音"}},
+        {Repeat("桃花ちゃん、おはよう。", 4), {"桃花"}},
+        {Repeat("桃花ちゃん、おはよう。", 3), {}},  // a common word scores 0.5 per honorific
+        {"柚葉さん", {}},
+        {"柚葉さん\n柚葉さん", {"柚葉"}},
         {"光さんが来た。\n光さんが言った。", {}},  // a single kanji needs 3
         {"光さんが来た。\n光さんが言った。\n光さん、", {"光"}},
         {"光さんだ。\n光さんだ。\n光さんだ。", {}},
@@ -390,9 +390,9 @@ HD_TEST(names_occurrences_and_guards) {
         {Repeat("桜さん、", 3), "桜の花が咲いた。", "桜!"},
         {Repeat("桜さん、", 3), "桜が咲いた。", "桜!"},
         {Repeat("桜さん、", 3), "桜は学生です。", "桜"},
-        {Repeat("詩音さん", 2), "詩音達が来た。", "詩音"},
-        {Repeat("詩音さん", 2), "詩音祭だ。", ""},
-        {Repeat("詩音さん", 2) + "園崎詩音が来た。", "園崎詩音だ。", "園崎詩音"},
+        {Repeat("柚葉さん", 2), "柚葉達が来た。", "柚葉"},
+        {Repeat("柚葉さん", 2), "柚葉祭だ。", ""},
+        {Repeat("柚葉さん", 2) + "水野柚葉が来た。", "水野柚葉だ。", "水野柚葉"},
     };
     for (const auto& c : cases) {
         names::Registry r = Scan(snap, c[0]);
@@ -403,10 +403,10 @@ HD_TEST(names_occurrences_and_guards) {
 HD_TEST(names_dict_rows) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
-    names::Registry r = Scan(snap, "竜宮レナ（りゅうぐうれな）\n" + Repeat("前原圭一「おはよう」", 3) + Repeat("圭一くん", 2));
+    names::Registry r = Scan(snap, "宝生ミナ（ほうしょうみな）\n" + Repeat("高森恭平「おはよう」", 3) + Repeat("恭平くん", 2));
     HD_CHECK_EQ(r.Dict(),
-                std::string("前原\t마에바라\tsurname\n前原圭一\t마에바라 케이이치\tname\n"
-                            "圭一\t케이이치\tname\n竜宮レナ\t류우구우 레나\tname\nちゃん\t짱\thon\n"));
+                std::string("宝生ミナ\t호우쇼우 미나\tname\n恭平\t쿄헤이\tname\n"
+                            "高森\t타카모리\tsurname\n高森恭平\t타카모리 쿄헤이\tname\nちゃん\t짱\thon\n"));
     r.chan = "쨩";
     const std::string dict = r.Dict();
     const std::string tail = "ちゃん\t쨩\thon\n";
@@ -417,20 +417,20 @@ HD_TEST(names_readings_without_table) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     const std::vector<std::pair<std::string, std::pair<std::string, text::Preset>>> cases = {
-        {"竜宮レナ（りゅうぐうれな）だ。", {"竜宮レナ", text::Preset::Fan}},
-        {"竜宮レナ（りゅうぐうれな）だ。", {"竜宮レナ", text::Preset::FanShort}},
-        {"|梨花《りか》が来た。", {"梨花", text::Preset::Fan}},
-        {"<ruby>梨花<rt>リファ</rt></ruby>が来た。", {"梨花", text::Preset::Fan}},
+        {"宝生ミナ（ほうしょうみな）だ。", {"宝生ミナ", text::Preset::Fan}},
+        {"宝生ミナ（ほうしょうみな）だ。", {"宝生ミナ", text::Preset::FanShort}},
+        {"|桃花《ももか》が来た。", {"桃花", text::Preset::Fan}},
+        {"<ruby>桃花<rt>トウカ</rt></ruby>が来た。", {"桃花", text::Preset::Fan}},
     };
-    const std::vector<std::string> want = {"류우구우 레나", "류구 레나", "리카", "리파"};
+    const std::vector<std::string> want = {"호우쇼우 미나", "호쇼 미나", "모모카", "토우카"};
     for (size_t i = 0; i < cases.size(); i++) {
         names::Registry r = Scan(snap, cases[i].first);
         r.preset = cases[i].second.second;
         HD_CHECK_EQ(r.Render(cases[i].second.first), want[i]);
     }
     // A dictionary person reading is used when no reading table entry exists.
-    names::Registry blank = Scan(snap, Repeat("魅音「おはよう」", 3));
-    HD_CHECK_EQ(blank.Render("魅音"), std::string("미온"));
+    names::Registry blank = Scan(snap, Repeat("紗英「おはよう」", 3));
+    HD_CHECK_EQ(blank.Render("紗英"), std::string("사에"));
     names::Registry plain = Scan(snap, Repeat("光さん、", 3));
     HD_CHECK_EQ(plain.Render("光"), std::string("히카루"));
     names::Registry shota = Scan(snap, Repeat("翔太「おはよう」", 3));

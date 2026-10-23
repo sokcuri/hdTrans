@@ -387,11 +387,11 @@ HD_TEST(pipeline_rewrite_military_time) {
 
 HD_TEST(pipeline_strip_ruby) {
     const Case cases[] = {
-        {"|梨花《りか》ちゃん"sv, "梨花ちゃん"sv},
+        {"|桃花《ももか》ちゃん"sv, "桃花ちゃん"sv},
         {"｜幻晶騎士《シルエットナイト》"sv, "幻晶騎士"sv},
         {"猫猫《マオマオ》"sv, "猫猫"sv},
-        {"<ruby>梨花<rt>りか</rt></ruby>ちゃん"sv, "梨花ちゃん"sv},
-        {"<ruby><rb>梨花</rb><rp>（</rp><rt>りか</rt><rp>）</rp></ruby>"sv, "梨花"sv},
+        {"<ruby>桃花<rt>ももか</rt></ruby>ちゃん"sv, "桃花ちゃん"sv},
+        {"<ruby><rb>桃花</rb><rp>（</rp><rt>ももか</rt><rp>）</rp></ruby>"sv, "桃花"sv},
         {"《》だけ"sv, "《》だけ"sv},
         {"漢字《かな》と|ルビ《るび》"sv, "漢字とルビ"sv},
         {"|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv, "|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv},

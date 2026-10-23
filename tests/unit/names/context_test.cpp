@@ -20,9 +20,9 @@ const dict::Snapshot* Dictionary() {
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
-         "魅音\t미온\tN130\tQPN\tWb\tGN\t3\n"
-         "詩音\t시온\tN130\tQPN\tWb\tGN\t4\n"
-         "園崎詩音\t소노자키 시온\tN130\tQPN\t\tGN\t5\n"
+         "紗英\t사에\tN130\tQPN\tWb\tGN\t3\n"
+         "柚葉\t유즈하\tN130\tQPN\tWb\tGN\t4\n"
+         "水野柚葉\t미즈노 유즈하\tN130\tQPN\t\tGN\t5\n"
          "時雨\t시구레\tN130\tQPN\tWb\tGN\t6\n"
          "睦月\t무츠키\tN130\tQPN\tWb\tGN\t7\n"},
     });
@@ -35,13 +35,13 @@ HD_TEST(names_cued_names) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     const std::vector<std::pair<std::string, std::vector<std::string>>> cases = {
-        {"魅音「おはよう」", {"魅音"}},
-        {"詩音さん", {}},
+        {"紗英「おはよう」", {"紗英"}},
+        {"柚葉さん", {}},
         {"睦月です。", {}},
         {"時雨、行くよ！", {"時雨"}},
         {"そう言って「おはよう」", {}},
-        {"園崎詩音「こんにちは」", {"園崎詩音"}},
-        {"photo\n魅音「あ」", {"魅音"}},
+        {"水野柚葉「こんにちは」", {"水野柚葉"}},
+        {"photo\n紗英「あ」", {"紗英"}},
     };
     for (const auto& [text, want] : cases) {
         HD_CHECK(pipeline::CuedNames(*snap, text) == want);

@@ -84,7 +84,7 @@ constexpr std::array<std::string_view, 20> kNameFollowers = {"は", "が", "を"
 // Endings of a sentence, not of a name (陽炎型十番艦の時津風だよ).
 constexpr std::array<std::string_view, 12> kSentenceTails = {"だよ", "だね", "だぞ", "です", "ですか", "ます",
                                                               "ますか", "ました", "ません", "でした", "だもん", "ないもん"};
-// Familiar honorifics after a key that make it a person's name (梨花ちゃん, 圭一くん).
+// Familiar honorifics after a key that make it a person's name (桃花ちゃん, 恭平くん).
 constexpr std::array<std::string_view, 5> kPersonCues = {"ちゃん", "くん", "君", "たん", "っち"};
 // Honorifics that also follow shops and titles (八百屋さん, お姫様): a cue only after a key
 // that is no such word.
