@@ -88,6 +88,9 @@ bool Item::RunKeiyoTrieQuery() {
     // No adverbial く goes on into くらい or くせに: those follow a past in た (したくらい, not
     // the stem of したい).
     if (remaining.starts_with(kJaKurai) || remaining.starts_with(kJaKuseni)) return false;
+    // A stem in た (the desire たい, 冷たい) has no adnominal な, which only a few stems such
+    // as 大き and 小さ take: たな is the past and a particle (慣れてきたな, not 来たい).
+    if (surface.ends_with("た") && remaining.starts_with(kJaNa)) return false;
     length = base.kind == 'x' ? surfaceLength : offset + surfaceLength;
     const std::string_view second = From(remaining, offset);
     if (!w->MatchDictionary(second, "", '6', '7')) return false;

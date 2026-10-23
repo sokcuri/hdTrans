@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+adjective:ta-na	「なんていうか、慣れてきたな」	「뭐랄까, 익숙해져 왔군」	fix	conjugation
+adjective:ta-na	「……そうかい、邪魔したな」	「……그런가, 방해했군」	fix	conjugation
+adjective:ta-na	「俺の怪我のことを知って遠慮したなら、その必要はない」	「내 상처를 알아 사양했다면, 그 필요는 없다」	fix	conjugation
+adjective:ta-na	疲れてきたなら、少し休みましょう。	지쳐 왔다면, 조금 쉽시다.	fix	conjugation
+adjective:ta-na	大きな家	큰 집	keep	conjugation
+adjective:ta-na	行きたいな	가고 싶네	keep	conjugation
