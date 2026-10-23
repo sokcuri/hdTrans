@@ -1,0 +1,14 @@
+# 규칙: SPC-7
+rule	input	expected	kind	layer
+ending:chau-particles	「食べちゃったよ」	「먹어 버렸어」	fix	builtin-ending
+ending:chau-particles	「あっ、ごめん……驚かせちゃったね」	「앗, 미안……놀라게 해 버렸네」	fix	builtin-ending
+ending:chau-particles	悪い事をしちゃったなぁ。	나쁜 일을 해 버렸네.	fix	builtin-ending
+ending:chau-particles	「飲んじゃったぞ」	「마셔 버렸어」	fix	builtin-ending
+ending:chau-particles	「食べちまったよ」	「먹어 버렸어」	fix	builtin-ending
+ending:chau-particles	「バレちゃうよ？」	「들켜 버릴 거야?」	fix	builtin-ending
+ending:chau-particles	「暗くなっちゃうなぁ！」	「어두워져 버리네!」	fix	builtin-ending
+ending:chau-particles	「お肌が荒れちゃうね」	「피부가 거칠어져 버리네」	fix	builtin-ending
+ending:chau-particles	食べちゃったよ	먹어 버렸어	fix	builtin-ending
+ending:chau-particles	「食べちゃったわ」	「먹어 버렸어」	keep	builtin-ending
+ending:chau-particles	「食べてしまったよ」	「먹어 버렸어」	keep	builtin-ending
+ending:chau-particles	「食べたね」	「먹었네」	keep	builtin-ending

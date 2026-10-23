@@ -11,7 +11,7 @@ normalize:n-ka	「いや、信じるんかい……」	「아니, 믿는 거야�
 normalize:naani	「なーにイチャついてんのよ。」	「뭐 시시덕거리고 있어.」	fix	normalize
 normalize:nsu	「え、ダメなんすか？」	「어, 안 됩니까?」	fix	normalize
 normalize:chimau	リーシェお嬢さまにフラれちまったのか？	리쉐 아가씨에게 차여 버렸어인가?	fix	normalize
-normalize:chimau	見ちまったなぁ？	봐 버렸다?	fix	normalize
+normalize:chimau	見ちまったなぁ？	봐 버렸네?	fix	normalize
 normalize:toku	ああ、とっくにやっといた。	아, 진작 해 두었다.	fix	normalize
 normalize:toku	やっとこの言葉が言えるわ	드디어 이 말을 말할 수 있어	keep	normalize
 normalize:n-ka	「田中くんか？」	「타나카 군이야?」	fix	normalize
