@@ -222,10 +222,18 @@ HD_TEST(pipeline_kata_words) {
         {"せまいからダメ？", "せまいからダメ？"},  // からだ joins the text around it
         {"アレックスは来た。", "アレックスは来た。"},
         {"スゴイね。", "すごいね。"},
+        {"ウルサイッ！", "うるさいっ！"},  // a closing ッ is the sound of an adjective
+        {"ウルサイッ", "うるさいっ"},
+        {"アレッ？", "アレッ？"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
     }
+    // A dictionary word clipped of its ッ before punctuation reads as the adjective.
+    const auto dame = Snapshot("ダメ\t안 됨\tN111\t\t\tGN\t1\nバカ\t바보\tN110\t\t\tGN\t2\n");
+    HD_REQUIRE(dame != nullptr);
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("ダメッ！"), ctx, *dame)), std::string("だめ！"));
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("バカッ！"), ctx, *dame)), std::string("バカ！"));
     // The katakana stem of 行く, but not where a dictionary word reads the run: a noun before a
     // particle, a verb whose conjugation follows, also with its first kana in katakana.
     const auto iku = Snapshot("イカ\t오징어\tN110\t\t\tGN\t1\nイカれ\t미&AO@\tM427\t\t\tGN\t2\n");

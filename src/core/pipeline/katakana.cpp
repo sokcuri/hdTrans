@@ -766,7 +766,18 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         const char32_t prev = LastRune(text.substr(0, start)).cp;
         if (const std::string_view bare = ClippedWord(word, text.substr(i), ctx, snap); !bare.empty()) {
             b.append(text.substr(at, start - at));
-            b += bare;
+            // A clipped adjective of kKataWords ends its sentence and reads as the word
+            // (ダメッ！ だめ！).
+            const KataWord* kw = nullptr;
+            for (const KataWord& x : kKataWords) {
+                if (x.word == bare && x.adjective) kw = &x;
+            }
+            if (kw != nullptr && prev != U'・' && prev != U'＝' && prev != U'の' && !HasUserSense(bare, ctx, snap) &&
+                (ctx.named == nullptr || ctx.named->find(std::string(bare)) == ctx.named->end())) {
+                b += kw->as.empty() ? ToHiragana(bare) : std::string(kw->as);
+            } else {
+                b += bare;
+            }
             at = i;
             continue;
         }
@@ -795,9 +806,12 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         }
         const std::string_view rest = text.substr(i);
         const char32_t next = text::DecodeRune(rest).cp;
+        // A small ッ closing the run is the sound of the word, not part of it (ウルサイッ！).
+        const bool tsu = word.size() > std::string_view("ッ").size() && word.ends_with("ッ");
+        const std::string_view base = tsu ? word.substr(0, word.size() - std::string_view("ッ").size()) : word;
         const KataWord* kw = nullptr;
         for (const KataWord& x : kKataWords) {
-            if (x.word == word) kw = &x;
+            if (x.word == base && (!tsu || x.adjective)) kw = &x;
         }
         if (kw == nullptr) continue;
         std::string_view follower;
@@ -812,9 +826,12 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));
         }
         if (!ok || prev == U'・' || prev == U'＝' || prev == U'の' || (start == 0 && spanBefore)) continue;
-        if (HasUserSense(word, ctx, snap)) continue;
-        if (ctx.named != nullptr && ctx.named->find(word) != ctx.named->end()) continue;
-        const std::string hiragana = kw->as.empty() ? ToHiragana(word) : std::string(kw->as);
+        if (HasUserSense(word, ctx, snap) || HasUserSense(base, ctx, snap)) continue;
+        if (ctx.named != nullptr &&
+            (ctx.named->find(std::string(word)) != ctx.named->end() || ctx.named->find(std::string(base)) != ctx.named->end())) {
+            continue;
+        }
+        const std::string hiragana = (kw->as.empty() ? ToHiragana(base) : std::string(kw->as)) + (tsu ? "っ" : "");
         const bool kanji = !kw->as.empty() && !IsHiraganaRune(text::DecodeRune(kw->as).cp);
         if (!kanji &&
             JoinsWord(text.substr(0, start), hiragana + std::string(follower), rest.substr(follower.size()), ctx, snap)) {
