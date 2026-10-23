@@ -42,6 +42,13 @@ bool PhraseKey(std::string_view key) {
     return false;
 }
 
+// Whether a name-layer row is a title that is a phrase: a phrase key that names no
+// organisation or place (共に民主党 and ファへ市 stand inside sentences).
+bool PhraseTitle(const dict::UserEntry& u) {
+    if (u.codes != nullptr && (u.codes->sem.HasPrefix("VGt") || u.codes->sem.HasPrefix("QCT"))) return false;
+    return PhraseKey(u.key);
+}
+
 // s without the leading characters of set.
 std::string_view TrimLeftChars(std::string_view s, std::string_view set) {
     while (!s.empty()) {
@@ -232,7 +239,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
 
 bool Worker::Skip(const dict::UserEntry& u, std::string_view query) const {
     return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) ||
-           (u.nameLayer && PhraseKey(u.key) && !StandsApart(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
+           (u.nameLayer && PhraseTitle(u) && !StandsApart(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
            (settings.text && BoundImperative(u, query));
 }
 
