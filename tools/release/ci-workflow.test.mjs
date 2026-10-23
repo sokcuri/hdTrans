@@ -210,6 +210,47 @@ test('only the serialized web deploy job sees the deploy secrets and the example
   assert.doesNotMatch(deployWeb, /contents: write|id-token|secrets: inherit/);
 });
 
+const repo = { owner: 'sokcuri', repo: 'hdTrans' };
+const repositoryId = 7;
+const buildRun = fields => ({
+  path: '.github/workflows/build.yml', status: 'completed', conclusion: 'success',
+  repository: { id: repositoryId }, head_repository: { id: repositoryId }, ...fields,
+});
+
+// records: tree → [{ artifact, run }] of tested-tree uploads; runs: further runs by id.
+function fakeGithub(records = {}, runs = {}) {
+  const all = { ...runs };
+  const artifacts = [];
+  let id = 100;
+  for (const [tree, list] of Object.entries(records)) {
+    for (const { artifact = {}, run = {} } of list) {
+      id += 1;
+      all[id] = buildRun({ id, event: 'push', head_branch: 'develop', ...run });
+      artifacts.push({
+        name: testedTreeArtifact(tree), expired: false,
+        workflow_run: { id, repository_id: repositoryId, head_repository_id: repositoryId }, ...artifact,
+      });
+    }
+  }
+  const listArtifactsForRepo = Symbol('listArtifactsForRepo');
+  return {
+    rest: {
+      actions: {
+        listArtifactsForRepo,
+        getWorkflowRun: async ({ run_id }) => {
+          if (!all[run_id]) throw Object.assign(new Error('Not Found'), { status: 404 });
+          return { data: all[run_id] };
+        },
+      },
+    },
+    paginate: async (method, params) => {
+      assert.equal(method, listArtifactsForRepo);
+      assert.equal(params.owner, repo.owner);
+      return artifacts.filter(artifact => artifact.name === params.name);
+    },
+  };
+}
+
 function gitFixture(t) {
   const dir = mkdtempSync(join(tmpdir(), 'hdtrans-gate-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
@@ -223,9 +264,11 @@ function gitFixture(t) {
     mkdirSync(join(dir, path, '..'), { recursive: true });
     writeFileSync(join(dir, path), text);
   };
-  const commit = (message, { name = 'Someone', email = 'someone@example.com' } = {}) => {
+  const someone = { name: 'Someone', email: 'someone@example.com' };
+  const commit = (message, author = someone, committer = author) => {
     git('add', '-A');
-    git('-c', `user.name=${name}`, '-c', `user.email=${email}`, 'commit', '-q', '--allow-empty', '-m', message);
+    git('-c', `user.name=${committer.name}`, '-c', `user.email=${committer.email}`, 'commit', '-q', '--allow-empty',
+      `--author=${author.name} <${author.email}>`, '-m', message);
     return git('rev-parse', 'HEAD');
   };
   git('init', '-q', '-b', 'main');
@@ -236,47 +279,73 @@ function gitFixture(t) {
   return { dir, git, write, commit };
 }
 
-function versionCommitFixture(t, { changes = releaseFiles, identity = releaseBot, extraMessage = '' } = {}) {
+function versionCommitFixture(t, {
+  changes = releaseFiles, deletes = [], author = releaseBot, committer = author, extraMessage = '', run = {},
+} = {}) {
   const fixture = gitFixture(t);
   const source = fixture.commit('fix: something (#1)');
   for (const path of changes) fixture.write(path, '0.1.1\n');
-  const sha = fixture.commit(`chore(main): release 0.1.1\n\nRelease-Source: ${source}\nRelease-Build: 42${extraMessage}`, identity);
-  const context = { eventName: 'push', ref: 'refs/heads/main', sha, payload: { before: source, after: sha } };
-  return { ...fixture, source, sha, context };
+  for (const path of deletes) rmSync(join(fixture.dir, path));
+  const sha = fixture.commit(`chore(main): release 0.1.1\n\nRelease-Source: ${source}\nRelease-Build: 42${extraMessage}`,
+    author, committer);
+  const context = {
+    eventName: 'push', ref: 'refs/heads/main', sha, repo,
+    payload: { before: source, after: sha, repository: { id: repositoryId } },
+  };
+  const github = fakeGithub({}, {
+    42: buildRun({ id: 42, event: 'push', head_branch: 'main', head_sha: source, ...run }),
+  });
+  return { ...fixture, source, sha, context, github };
 }
 
 test('the release bot version commit push to main skips the matrix', async t => {
-  const { git, source, context } = versionCommitFixture(t);
-  assert.equal(versionCommit({ payload: context.payload, sha: context.sha, git }), source);
-  const gate = await buildGate({ context, git });
+  const { git, source, context, github } = versionCommitFixture(t);
+  assert.deepEqual(versionCommit({ payload: context.payload, sha: context.sha, git }), { source, build: 42 });
+  const gate = await buildGate({ github, context, git });
   assert.equal(gate.run, false);
-  assert.match(gate.reason, /version commit/);
+  assert.match(gate.reason, /version commit .* \(Build run 42\)/);
 });
 
 test('anything else about a version-like commit builds everything', async t => {
+  const someone = { name: 'Someone', email: 'someone@example.com' };
   const cases = {
-    'another author': versionCommitFixture(t, { identity: { name: 'Someone', email: releaseBot.email } }),
-    'another email': versionCommitFixture(t, { identity: { name: releaseBot.name, email: 'bot@example.com' } }),
+    'another author': versionCommitFixture(t, { author: { name: 'Someone', email: releaseBot.email } }),
+    'another email': versionCommitFixture(t, { author: { name: releaseBot.name, email: 'bot@example.com' } }),
+    'only the author is the bot': versionCommitFixture(t, { committer: someone }),
+    'only the committer is the bot': versionCommitFixture(t, { author: someone, committer: releaseBot }),
     'a source file': versionCommitFixture(t, { changes: [...releaseFiles, 'src/a.cpp'] }),
+    'a deleted release file': versionCommitFixture(t, { changes: releaseFiles.slice(1), deletes: [releaseFiles[0]] }),
     'no change': versionCommitFixture(t, { changes: [] }),
     'another message': versionCommitFixture(t, { extraMessage: '\nExtra: 1' }),
+    'a failed source Build': versionCommitFixture(t, { run: { conclusion: 'failure' } }),
+    'a source Build in progress': versionCommitFixture(t, { run: { status: 'in_progress', conclusion: null } }),
+    'a Build of another commit': versionCommitFixture(t, { run: { head_sha: 'c'.repeat(40) } }),
+    'a Build of a pull request': versionCommitFixture(t, { run: { event: 'pull_request' } }),
+    'a Build of develop': versionCommitFixture(t, { run: { head_branch: 'develop' } }),
+    'another workflow': versionCommitFixture(t, { run: { path: '.github/workflows/publish-npm.yml' } }),
+    'a fork Build': versionCommitFixture(t, { run: { head_repository: { id: 8 } } }),
+    'a run that is not there': versionCommitFixture(t, { run: { id: 43 } }),
   };
-  for (const [name, { git, context }] of Object.entries(cases)) {
-    assert.equal((await buildGate({ context, git })).run, true, name);
+  for (const [name, { git, context, github }] of Object.entries(cases)) {
+    assert.equal((await buildGate({ github, context, git })).run, true, name);
   }
-  const { git, context, source, sha } = versionCommitFixture(t);
+  const missing = versionCommitFixture(t);
+  const noRun = await buildGate({ github: fakeGithub(), context: missing.context, git: missing.git });
+  assert.equal(noRun.run, true);
+  assert.match(noRun.reason, /Not Found/);
+  const { git, context, source, sha, github } = versionCommitFixture(t);
   const variants = {
     'a develop push': { ...context, ref: 'refs/heads/develop' },
     'a tag push': { ...context, ref: 'refs/tags/v0.1.1' },
     'a pull request': { ...context, eventName: 'pull_request' },
     'a manual run': { ...context, eventName: 'workflow_dispatch' },
-    'a push of several commits': { ...context, payload: { before: '1'.repeat(40), after: sha } },
-    'another head': { ...context, sha: source, payload: { before: source, after: source } },
+    'a push of several commits': { ...context, payload: { ...context.payload, before: '1'.repeat(40) } },
+    'another head': { ...context, sha: source, payload: { ...context.payload, before: source, after: source } },
   };
   for (const [name, variant] of Object.entries(variants)) {
-    assert.equal((await buildGate({ context: variant, git })).run, true, name);
+    assert.equal((await buildGate({ github, context: variant, git })).run, true, name);
   }
-  const broken = await buildGate({ context, git: () => { throw new Error('no git'); } });
+  const broken = await buildGate({ github, context, git: () => { throw new Error('no git'); } });
   assert.equal(broken.run, true);
   assert.match(broken.reason, /no git/);
 });
@@ -290,11 +359,14 @@ test('a version commit on a merge of two parents builds everything', async t => 
   fixture.git('checkout', '-q', 'main');
   fixture.git('merge', '-q', '--no-ff', '--no-commit', 'side');
   for (const path of releaseFiles) fixture.write(path, '0.1.1\n');
-  fixture.git('add', '--', ...releaseFiles);
   const sha = fixture.commit(`chore(main): release 0.1.1\n\nRelease-Source: ${base}\nRelease-Build: 42`, releaseBot);
   assert.equal(fixture.git('show', '-s', '--format=%P', 'HEAD').split(' ').length, 2);
-  const context = { eventName: 'push', ref: 'refs/heads/main', sha, payload: { before: base, after: sha } };
-  assert.equal((await buildGate({ context, git: fixture.git })).run, true);
+  const context = {
+    eventName: 'push', ref: 'refs/heads/main', sha, repo,
+    payload: { before: base, after: sha, repository: { id: repositoryId } },
+  };
+  const github = fakeGithub({}, { 42: buildRun({ id: 42, event: 'push', head_branch: 'main', head_sha: base }) });
+  assert.equal((await buildGate({ github, context, git: fixture.git })).run, true);
 });
 
 test('the gate runs first and only a definite no skips the release tools and the matrix', () => {
@@ -302,9 +374,28 @@ test('the gate runs first and only a definite no skips the release tools and the
   assert.match(gate, /fetch-depth: 2/);
   assert.match(gate, /buildGate\(\{ github, context \}\)/);
   assert.doesNotMatch(gate, /secrets\.|contents: write/);
+  // Outputs are set last, so a step that fails anywhere leaves run empty.
+  const script = gate.slice(gate.indexOf('script: |'));
+  assert.ok(script.indexOf('core.summary') < script.indexOf("core.setOutput('run'"));
+  const steps = gate.split('\n      - ').slice(1);
+  assert.equal(steps.length, 2);
+  const startsWith = (a, b) => a.startsWith(b);
+  for (const step of steps) {
+    assert.match(step, /\n        continue-on-error: true\n/);
+    const runs = new Function('github', 'startsWith', `return (${step.match(/\n        if: (.*)\n/)[1]});`);
+    assert.equal(runs({ event_name: 'pull_request', ref: 'refs/pull/1/merge' }, startsWith), true);
+    assert.equal(runs({ event_name: 'push', ref: 'refs/heads/main' }, startsWith), true);
+    assert.equal(runs({ event_name: 'push', ref: 'refs/heads/develop' }, startsWith), true);
+    assert.equal(runs({ event_name: 'push', ref: 'refs/tags/v1.2.3' }, startsWith), false);
+    assert.equal(runs({ event_name: 'workflow_dispatch', ref: 'refs/tags/v1.2.3' }, startsWith), false);
+    assert.equal(runs({ event_name: 'workflow_dispatch', ref: 'refs/heads/main' }, startsWith), false);
+  }
   for (const job of ['release-tools', 'build']) {
     const body = build.slice(build.indexOf(`\n  ${job}:\n`));
     assert.match(body, /^    needs: gate\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' \}\}$/m, job);
+    const runs = new Function('needs', 'cancelled', `return (${body.match(/^    if: \$\{\{ (.*) \}\}$/m)[1]});`);
+    for (const run of ['true', '', undefined]) assert.equal(runs({ gate: { outputs: { run } } }, () => false), true, `${job} ${run}`);
+    assert.equal(runs({ gate: { outputs: { run: 'false' } } }, () => false), false);
   }
   assert.doesNotMatch(build + publisher, /skip ci/);
 });
@@ -396,53 +487,28 @@ test('the web deploy builds nothing and checks the live engine against the relea
   assert.match(live, /cmp "\$live\/\$asset" "build\/wasm\//);
 });
 
-const repo = { owner: 'sokcuri', repo: 'hdTrans' };
-const repositoryId = 7;
-
-function fakeGithub(records = {}) {
-  const runs = {};
-  const artifacts = [];
-  let id = 100;
-  for (const [tree, list] of Object.entries(records)) {
-    for (const { artifact = {}, run = {} } of list) {
-      id += 1;
-      runs[id] = {
-        id, path: '.github/workflows/build.yml', status: 'completed', conclusion: 'success',
-        repository: { id: repositoryId }, head_repository: { id: repositoryId }, ...run,
-      };
-      artifacts.push({
-        name: testedTreeArtifact(tree), expired: false,
-        workflow_run: { id, repository_id: repositoryId, head_repository_id: repositoryId }, ...artifact,
-      });
-    }
-  }
-  const listArtifactsForRepo = Symbol('listArtifactsForRepo');
-  return {
-    rest: { actions: { listArtifactsForRepo, getWorkflowRun: async ({ run_id }) => ({ data: runs[run_id] }) } },
-    paginate: async (method, params) => {
-      assert.equal(method, listArtifactsForRepo);
-      assert.equal(params.owner, repo.owner);
-      return artifacts.filter(artifact => artifact.name === params.name);
-    },
-  };
-}
-
-test('only a completed successful Build of this repository vouches for a tree', async () => {
+test('only a successful develop push or develop pull request Build of this repository vouches for a tree', async () => {
   const tree = 'a'.repeat(40);
   const lookup = records => testedRun({ github: fakeGithub({ [tree]: records }), repo, repositoryId, tree });
-  assert.equal(await lookup([{}]), 101);
+  assert.equal(await lookup([{}]), 101, 'a develop push');
+  assert.equal(await lookup([{ run: { event: 'pull_request' } }]), 101, 'the develop to main pull request');
   const refused = {
     expired: { artifact: { expired: true } },
     'another repository': { artifact: { workflow_run: { id: 101, repository_id: 8, head_repository_id: 8 } } },
     'a fork pull request': { artifact: { workflow_run: { id: 101, repository_id: repositoryId, head_repository_id: 8 } } },
-    'a fork head in the run': { run: { head_repository: { id: 8 } } },
+    'a fork run named develop': { run: { event: 'pull_request', head_repository: { id: 8 } } },
+    'a feature branch pull request': { run: { event: 'pull_request', head_branch: 'feat/x' } },
+    'a pull request whose build.yml changed': { run: { event: 'pull_request', head_branch: 'ci/build-change' } },
+    'a main push': { run: { head_branch: 'main' } },
+    'a manual run on develop': { run: { event: 'workflow_dispatch' } },
     'another workflow': { run: { path: '.github/workflows/publish-npm.yml' } },
     'a run in progress': { run: { status: 'in_progress', conclusion: null } },
     'a failed run': { run: { conclusion: 'failure' } },
+    'another run id': { run: { id: 999 } },
     'another name': { artifact: { name: testedTreeArtifact('b'.repeat(40)) } },
   };
   for (const [name, record] of Object.entries(refused)) assert.equal(await lookup([record]), undefined, name);
-  assert.equal(await lookup([refused['a failed run'], {}]), 102);
+  assert.equal(await lookup([refused['a feature branch pull request'], {}]), 102);
   assert.equal(await lookup([]), undefined);
 });
 
@@ -465,17 +531,17 @@ function mergeFixture(t) {
     change();
     return fixture.commit('Merge develop');
   };
-  const prContext = ({ sha, base = 'main', ref = 'develop', owner = 'sokcuri/hdTrans' } = {}) => ({
+  const prContext = ({ sha, base = 'main', ref = 'develop', owner = 'sokcuri/hdTrans', headSha = head } = {}) => ({
     eventName: 'pull_request', ref: 'refs/pull/3/merge', sha, repo,
     payload: {
       repository: { id: repositoryId },
       pull_request: {
         base: { ref: base, repo: { full_name: 'sokcuri/hdTrans' } },
-        head: { ref, sha: head, repo: { full_name: owner } },
+        head: { ref, sha: headSha, repo: { full_name: owner } },
       },
     },
   });
-  return { ...fixture, head, headTree: fixture.git('rev-parse', `${head}^{tree}`), merge, prContext };
+  return { ...fixture, head, versioned, headTree: fixture.git('rev-parse', `${head}^{tree}`), merge, prContext };
 }
 
 test('a main push skips the matrix for a tree that a successful Build tested', async t => {
@@ -483,7 +549,7 @@ test('a main push skips the matrix for a tree that a successful Build tested', a
   const sha = merge();
   const tree = git('rev-parse', 'HEAD^{tree}');
   const context = { eventName: 'push', ref: 'refs/heads/main', sha, repo, payload: { before: '0'.repeat(40), after: sha, repository: { id: repositoryId } } };
-  const skipped = await buildGate({ github: fakeGithub({ [tree]: [{}] }), context, git });
+  const skipped = await buildGate({ github: fakeGithub({ [tree]: [{ run: { event: 'pull_request' } }] }), context, git });
   assert.equal(skipped.run, false);
   assert.equal(skipped.tree, tree);
   assert.equal(skipped.testedBy, undefined);
@@ -501,7 +567,7 @@ test('a main push skips the matrix for a tree that a successful Build tested', a
 });
 
 test('a develop to main pull request that adds only release versions reuses the develop record', async t => {
-  const { git, write, merge, prContext, headTree } = mergeFixture(t);
+  const { git, write, commit, merge, prContext, head, headTree, versioned } = mergeFixture(t);
   const github = fakeGithub({ [headTree]: [{}] });
   const sha = merge();
   const skipped = await buildGate({ github, context: prContext({ sha }), git });
@@ -519,6 +585,7 @@ test('a develop to main pull request that adds only release versions reuses the 
   assert.equal((await buildGate({ github: fakeGithub(), context: prContext({ sha }), git })).run, true, 'no record');
   const changes = {
     'a source file only on main': () => write('src/hotfix.cpp', 'int h;\n'),
+    'a release file deleted on main': () => git('rm', '-q', 'release-version.txt'),
     'a dependency only on main': () => write('npm/package.json',
       '{"name":"hdtrans","version":"0.2.0","devDependencies":{"typescript":"^7.0.3"}}\n'),
     'a lock entry only on main': () => write('npm/package-lock.json',
@@ -528,32 +595,48 @@ test('a develop to main pull request that adds only release versions reuses the 
     const changed = merge(change);
     assert.equal((await buildGate({ github, context: prContext({ sha: changed }), git })).run, true, name);
   }
+  assert.equal((await buildGate({ github, context: prContext({ sha, headSha: versioned }), git })).run, true,
+    'a second parent that is not the pull request head');
+  git('checkout', '-q', '--detach', head);
+  write('CHANGELOG.md', '## 0.2.0\n');
+  const linear = commit('one parent');
+  assert.equal((await buildGate({ github, context: prContext({ sha: linear }), git })).run, true, 'a merge ref with one parent');
 });
 
 test('the record job runs only after a passing matrix or a matched release-files-only tree', () => {
   const job = build.slice(build.indexOf('\n  tested:\n'), build.indexOf('\n  release:\n'));
-  const tested = new Function('github', 'needs', 'startsWith', 'cancelled', `return (${foldedCondition(job).replaceAll('needs.release-tools', "needs['release-tools']")});`);
+  const tested = new Function('github', 'needs', 'startsWith', 'cancelled',
+    `return (${foldedCondition(job).replaceAll('needs.release-tools', "needs['release-tools']")});`);
   const startsWith = (a, b) => a.startsWith(b);
   const needs = (run, result = 'success', tested_by = '', tree = 'a'.repeat(40)) => ({
     gate: { outputs: { run, tree, tested_by } }, 'release-tools': { result }, build: { result },
   });
-  const pr = { event_name: 'pull_request', ref: 'refs/pull/1/merge' };
-  const develop = { event_name: 'push', ref: 'refs/heads/develop' };
-  const tag = { event_name: 'push', ref: 'refs/tags/v1.2.3' };
+  const pr = (owner = 'sokcuri/hdTrans', head_ref = 'develop') => ({
+    event_name: 'pull_request', ref: 'refs/pull/1/merge', repository: 'sokcuri/hdTrans', head_ref,
+    event: { pull_request: { head: { repo: { full_name: owner } } } },
+  });
+  const push = ref => ({ event_name: 'push', ref, repository: 'sokcuri/hdTrans', event: {} });
   const check = (github, n, cancelled = false) => tested(github, n, startsWith, () => cancelled);
-  assert.equal(check(pr, needs('true')), true);
-  assert.equal(check(develop, needs('true')), true);
-  assert.equal(check(tag, needs('true')), false);
-  assert.equal(check(pr, needs('true', 'failure')), false);
-  assert.equal(check(pr, needs('true', 'skipped')), false);
-  assert.equal(check(pr, needs('true', 'success', '', '')), false);
-  assert.equal(check(pr, needs('true'), true), false);
-  assert.equal(check(pr, needs('false', 'skipped', '101')), true);
-  assert.equal(check(pr, needs('false', 'skipped')), false);
-  assert.equal(check({ event_name: 'push', ref: 'refs/heads/main' }, needs('false', 'skipped')), false);
+  assert.equal(check(pr(), needs('true')), true);
+  assert.equal(check(pr('someone/hdTrans'), needs('true')), false, 'a fork');
+  assert.equal(check(pr('sokcuri/hdTrans', 'feat/x'), needs('true')), false, 'a feature branch');
+  assert.equal(check(push('refs/heads/develop'), needs('true')), true);
+  assert.equal(check(push('refs/heads/main'), needs('true')), false);
+  assert.equal(check(push('refs/tags/v1.2.3'), needs('true')), false);
+  assert.equal(check({ ...push('refs/heads/develop'), event_name: 'workflow_dispatch' }, needs('true')), false);
+  assert.equal(check(pr(), needs('true', 'failure')), false);
+  assert.equal(check(pr(), needs('true', 'skipped')), false);
+  assert.equal(check(pr(), needs('true', 'success', '', '')), false);
+  assert.equal(check(pr(), needs('', 'success', '', '')), false);
+  assert.equal(check(pr(), needs('true'), true), false);
+  assert.equal(check(pr(), needs('false', 'skipped', '101')), true);
+  assert.equal(check(pr('someone/hdTrans'), needs('false', 'skipped', '101')), false);
+  assert.equal(check(pr(), needs('false', 'skipped')), false);
+  assert.equal(check(push('refs/heads/main'), needs('false', 'skipped')), false);
   assert.match(job, /name: tested-tree-\$\{\{ needs\.gate\.outputs\.tree \}\}/);
   assert.match(job, /retention-days: 30/);
-  assert.doesNotMatch(job, /secrets\.|permissions:/);
+  assert.match(job, /\n    permissions: \{\}\n/);
+  assert.doesNotMatch(job, /secrets\./);
   const gate = build.slice(build.indexOf('\n  gate:\n'), build.indexOf('\n  release-tools:\n'));
   assert.match(gate, /permissions:\n      contents: read\n      actions: read\n/);
   assert.match(publisher, /  build:\n    needs: validate\n    permissions:\n      contents: write\n      actions: read\n/);

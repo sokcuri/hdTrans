@@ -117,20 +117,22 @@ cmake --build --preset wasm --parallel
   Node로 `tools/wasm_smoke.mjs`를 실행해 작은 사전으로 한 번 번역해 봅니다(셋째 인자로 그 사전을
   컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
   ([testing.md](testing.md#ci)). 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
-- Build의 `gate` job이 matrix(릴리스 도구 테스트 포함)를 돌릴지 정합니다. 아래 경우에만 건너뛰고, 그 밖의 경우와
-  확인 중 오류는 전체를 빌드합니다. 릴리스 파일은 `CHANGELOG.md`, `.release-please-manifest.json`,
-  `release-version.txt`, `npm/package.json`, `npm/package-lock.json`입니다.
+- Build의 `gate` job이 풀 리퀘스트와 브랜치 push에서 matrix(릴리스 도구 테스트 포함)를 돌릴지 정합니다. 아래
+  경우에만 건너뛰고, 그 밖의 경우와 확인 중 오류는 전체를 빌드합니다. 태그와 수동 실행에서는 판단하지 않고 늘
+  전체를 빌드합니다. 릴리스 파일은 `CHANGELOG.md`, `.release-please-manifest.json`, `release-version.txt`,
+  `npm/package.json`, `npm/package-lock.json`입니다.
   - `main` push가 릴리스 봇의 버전 커밋 하나입니다. 작성자와 커미터가 봇이고, 메시지가 릴리스 커밋 형식이며,
-    부모가 `Release-Source`의 커밋이고, 릴리스 파일만 바꿉니다. 같은 커밋을 태그 빌드가 테스트합니다.
-  - `main` push의 트리를 이 저장소의 성공한 Build가 이미 테스트했습니다.
+    부모가 `Release-Source`의 커밋이고, 릴리스 파일만 고치거나 더합니다. `Release-Build`의 run은 그 부모를
+    빌드해 성공한 `main` push Build입니다. 같은 커밋을 태그 빌드가 테스트합니다.
+  - `main` push의 트리를 기록한 Build가 있습니다.
   - `develop`→`main` PR의 병합 트리가 `develop` head 트리와 릴리스 파일만 다르고(`npm/package.json`과 lock은
-    버전만), `develop` 트리를 성공한 Build가 테스트했습니다.
+    버전만, 삭제 없음), `develop` 트리를 기록한 Build가 있습니다.
 
-  matrix가 통과한 풀 리퀘스트와 브랜치 push의 Build, 그리고 셋째 경우의 PR Build는
-  `tested-tree-<트리 해시>` 아티팩트(30일)를 남기며, gate는 이 기록을 찾습니다. 포크의 기록은 쓰지 않습니다.
-- 컴파일 캐시는 `develop` push와 풀 리퀘스트만 저장합니다. `main`, 태그, 수동 실행은 읽기만 하므로 `develop`의
-  최신 캐시를 씁니다. Emscripten(`EMSDK_VERSION`)은 버전과 러너마다 캐시 한 벌을 모든 워크플로가 함께 쓰고,
-  ccache는 컴파일러를 그 버전으로 식별합니다.
+  기록은 `tested-tree-<트리 해시>` 아티팩트(30일)입니다. matrix가 통과한 `develop` push의 Build와 이 저장소의
+  `develop`→`main` PR Build(셋째 경우 포함)만 남기고, gate도 이 저장소의 성공한 그 두 종류 run의 기록만 씁니다.
+- 컴파일 캐시는 `develop` push와 풀 리퀘스트, `develop`에서의 수동 실행만 저장합니다. `main` push, 태그, 그 밖의
+  수동 실행은 읽기만 하므로 `develop`의 최신 캐시를 씁니다. Emscripten(`EMSDK_VERSION`)은 버전과 러너마다 캐시
+  한 벌을 모든 워크플로가 함께 쓰고, ccache는 컴파일러를 그 버전으로 식별합니다.
 - **release.yml**: `build.yml`의 결과를 받아 Windows ZIP과 Linux, macOS tar.gz, `SHA256SUMS.txt`를
   만듭니다. Windows는 x86 `J2KEngine.dll`, x64 CLI, GUI, C API와 별도의 x86 CLI, C API를 담습니다.
   WASM 아티팩트에는 엔진, TypeScript용 JavaScript와 `.d.ts`를 포함합니다. 빌드한 엔진, JavaScript 래퍼와 기본 사전을 담은 npm 패키지는 `hdTrans-<버전>-wasm.tgz`로 릴리스에 첨부합니다.

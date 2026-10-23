@@ -43,7 +43,8 @@ env:
 
 jobs:
   # Skips the matrix for the release bot's version commit (the tag pipeline tests it) and for
-  # a tree that a successful Build already tested; any doubt builds everything.
+  # a tree that a successful Build already tested. Tags and manual runs skip the steps, and a
+  # failed step leaves no output: both build everything.
   gate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -56,6 +57,8 @@ jobs:
       tested_by: ${{ steps.gate.outputs.tested_by }}
     steps:
       - uses: actions/checkout@v7
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/'))
+        continue-on-error: true
         with:
           fetch-depth: 2
           filter: blob:none
@@ -63,16 +66,18 @@ jobs:
           persist-credentials: false
       - name: Decide what to build
         id: gate
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/'))
+        continue-on-error: true
         uses: actions/github-script@v8
         with:
           script: |
             const { buildGate } = await import(`${process.env.GITHUB_WORKSPACE}/tools/release/build-gate.mjs`);
             const gate = await buildGate({ github, context });
             core.info(`Build gate: ${gate.reason}`);
+            await core.summary.addRaw(`Build gate: ${gate.reason}\n`).write();
             core.setOutput('run', String(gate.run));
             core.setOutput('tree', gate.tree);
             core.setOutput('tested_by', gate.testedBy ?? '');
-            await core.summary.addRaw(`Build gate: ${gate.reason}\n`).write();
 
   release-tools:
     needs: gate
@@ -399,17 +404,21 @@ jobs:
             build/${{ matrix.preset }}/sccache.log
             build/${{ matrix.preset }}/ccache.log
 
-  # Records a tree whose matrix passed, or that the gate matched to a tested develop tree,
-  # for the gate of a later Build of the same tree.
+  # Records a develop tree whose matrix passed, or a develop→main merge tree that the gate
+  # matched to one, for the gate of a later main push of the same tree. The gate accepts
+  # only these records.
   tested:
     needs: [gate, release-tools, build]
     if: >-
       !cancelled() && needs.gate.outputs.tree != '' &&
-      (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/')) &&
+      ((github.event_name == 'pull_request' && github.head_ref == 'develop' &&
+        github.event.pull_request.head.repo.full_name == github.repository) ||
+       (github.event_name == 'push' && github.ref == 'refs/heads/develop')) &&
       ((needs.gate.outputs.run == 'true' && needs.release-tools.result == 'success' && needs.build.result == 'success') ||
        (needs.gate.outputs.run == 'false' && needs.gate.outputs.tested_by != ''))
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions: {}
     steps:
       - name: Write the record
         env:
