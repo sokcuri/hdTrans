@@ -12,6 +12,7 @@ description: Combine several fix branches into one integration branch by cherry-
 - Before updating any other checkout to the new commits, save its edits with `git diff > edits.patch`
   for the dirty files. Reapply the patch afterwards and check `git status`. Do not stash in a shared tree.
 - Configure and build the preset once. `tools/pick.sh` rebuilds through `tools/regen-rules.sh`.
+- Build and measure the base in a sibling worktree `$BASE` (fix-translation setup step 4).
 
 ## Order and collisions
 
@@ -33,13 +34,21 @@ description: Combine several fix branches into one integration branch by cherry-
 tools/pick.sh $(git rev-list --reverse <base>..<branch>)
 ```
 
-- Table conflicts (dicts/, builtin tables, tests/rules/) keep both sides.
+- Table conflicts (dicts/, builtin tables, tests/rules/) keep both sides, unless both sides change
+  the same row (same id, same case, or same key and class). Such a block is left with its markers.
 - `program.hash` and `compiled_gen.cpp` are regenerated.
 - `examples/*.ko.txt` keep ours and are re-checked by the gate.
-- Any other conflict, a new repeated row, a colliding id, a contradicting case, a row the picked
-  commit deleted that came back, a staged marker or a stray path stops the run.
+- The run stops on any of these:
+  - any other conflict;
+  - a merge commit, or a cherry-pick that fails without conflicts (the git output is printed);
+  - a new repeated row, a reused id, or a contradicting case;
+  - a row the picked commit deleted that came back;
+  - a staged marker or a stray path.
+- A stop leaves the pick in progress. Resolve it by hand, run `git commit -C <commit>`, then pick the
+  rest. Picks that stop nothing print `picked`, and only commits already applied print `empty`;
+  check that the picked count matches.
 
-After a stop, resolve it by hand, then run `git commit -C <commit>` and pick the rest. Conflict policy:
+Conflict policy:
 
 - **Same cause fixed twice**: keep one mechanism, the broader one (a code or class rule over word
   rows, an engine fix over per-word rules). Delete the other branch's rows and cases, and keep its
@@ -49,16 +58,21 @@ After a stop, resolve it by hand, then run `git commit -C <commit>` and pick the
 
 ## Verify
 
-1. `tools/gate.sh` prints `GATE OK`. `tools/union-tsv.py --check` reports nothing new compared with the base.
-2. `tools/shadow.py <base>` for changed C++.
-3. Measure the integration against the base build and against each branch's run (fix-translation
-   step 11). Judge every line that no single branch changed, which means only the combination
-   produced it. Judge also every line where two branches disagree. The same thresholds apply:
-   better:worse at least 2:1 and chrF not lower than the base.
-4. Grep the full diff for conflict markers (`git diff <base> | grep -E '^\+(<<<<<<<|>>>>>>>)'`), stray
-   paths (`git diff --stat <base>`), source names and instruction wording (fix-translation "Before
-   committing").
-5. Run the review-code skill on the combined diff before any PR.
+1. `tools/gate.sh` prints `GATE OK`.
+2. The base may already have table findings, so compare the table check with the base instead of
+   expecting none:
+   ```sh
+   (cd "$BASE" && python3 -I "$OLDPWD/tools/union-tsv.py" --check) | grep -v '^CHECK' | sort > base.check
+   python3 -I tools/union-tsv.py --check | grep -v '^CHECK' | sort | comm -13 base.check -   # must be empty
+   ```
+3. `tools/shadow.py <base>`. Only warnings on lines the integration added or edited count.
+4. Measure the integration against the base build and each branch's run (fix-translation step 11).
+   - Judge every line that no single branch changed, which means only the combination produced it,
+     and every line where two branches disagree (fix-translation step 12).
+   - The same thresholds apply: improved:worse at least 2:1, and chrF not lower than the base.
+5. `tools/hygiene.py <base>` covers markers, stray paths, absolute paths and instruction wording
+   over the whole diff and its messages.
+6. Run the review-code skill on the combined diff before any PR.
 
 ## Report
 

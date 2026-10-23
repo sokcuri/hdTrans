@@ -2,10 +2,18 @@
 # Checks the rule cases in tests/rules/cases.tsv (or every table in a directory) against a built CLI.
 #   tools/rule-cases.sh CLI DICTS [CASES] [--accept] [-- CLI-OPTIONS...]
 # CASES is a TSV with the header `rule input expected kind layer`. Every input is translated as its
-# own session (-each -why). `expected` is either the whole Korean output, or
-# `rule:L<n>=<target>`: some word of the line is chosen by local rule n with that target
-# (the dictionary translation as -why prints it). kind is fix, keep or current. layer is the
-# execution layer of the rule (docs/pipeline-layers.md).
+# own session (-each -why). `expected` is one of
+#   the whole Korean output;
+#   rule:dict:<row id>=<target>  some word of the line is chosen by the local rule that the
+#                                dictionary row <row id> carries, with that target (the dictionary
+#                                translation as -why prints it);
+#   rule:L<n>=<target>           the same with the local rule number;
+#   !rule:dict:<row id>          that rule chooses nothing in the line.
+# `rule` names what the row tests: dict:<row id> or L<n> for a local rule, G<prio> for a global
+# rule, else <stage>:<name> (sound:, constraint:, rewrite:, compose:, normalize:, sense:, ...).
+# kind is fix, keep or current. layer is the execution layer that decides the line
+# (docs/pipeline-layers.md: local, local-ending, global-stem, global-last, global-ending, lookup,
+# defaults, senses, rewrites, compose, normalize, sound, restore, ...); failures are grouped by it.
 # Failing rows are reported grouped by layer, each with its rule, input, expected and actual
 # value, so that a change in one layer that breaks another layer's rows shows as such.
 # --accept rewrites the expected value of every full-output row whose kind is current. The words

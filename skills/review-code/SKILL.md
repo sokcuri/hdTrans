@@ -27,12 +27,18 @@ the outputs before and after when behaviour is involved. Report findings by sect
   F='-fsanitize=address,undefined -fno-sanitize-recover=all -fno-sanitize=vptr -fno-omit-frame-pointer'
   cmake --preset mac -B build/asan -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="$F" -DCMAKE_C_FLAGS="$F" \
     -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined -DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined
-  cmake --build build/asan --parallel && (cd build/asan && HDTRANS_DICTS=$PWD/../../dicts ctest)
+  tools/with-timeout.sh 3600 cmake --build build/asan --parallel
+  (cd build/asan && HOME=$(mktemp -d) HDTRANS_DICTS=$PWD/../../dicts ../../tools/with-timeout.sh 3600 ctest -E '^testdata$')
   ```
-  Use Clang; GCC's stack-use-after-return checking makes dictionary loading far slower.
-  Also run the translation of a long input and of the examples under the sanitizer build.
-- `tools/shadow.py <base>`: `-Wshadow-all` on the changed sources. MSVC rejects a local or parameter
-  that hides another name (C4456, C4457, C4458), and only the Windows CI would catch it otherwise.
+  - On Linux use `--preset linux`. Use Clang; GCC's stack-use-after-return checking makes
+    dictionary loading far slower.
+  - Also run a long input and the examples under the sanitizer build. Any report aborts the run.
+- `tools/shadow.py [<base>]` runs `-Wshadow-all` on the sources changed since the merge base with
+  develop. MSVC rejects a local or parameter that hides another name (C4456, C4457), and only the
+  Windows CI would catch it otherwise.
+  - Warnings on lines the change added or edited fail. Warnings elsewhere are listed as existing.
+  - A constructor parameter named like its member and a lambda local that shadows an uncaptured
+    local are not reported, because MSVC accepts both.
 - Views into arguments: when the tree has `HDTRANS_LIFETIMEBOUND` (`src/core/text/lifetime.h`), every
   function returning a `string_view`/`span` into a parameter or `*this` carries it, so Clang reports
   views of temporaries (`-Wdangling-gsl`).
@@ -61,17 +67,14 @@ the outputs before and after when behaviour is involved. Report findings by sect
   - no exceptions or RTTI;
   - standard library only, outside src/core/filter and src/core/config.
 
-## 4. Hygiene greps over the diff
+## 4. Hygiene over the diff
 
-```sh
-git diff <base> --stat                                     # unexpected paths, files named like options
-git diff <base> | grep -nE '^\+(<<<<<<<|>>>>>>>|=======$)' # conflict markers
-git diff <base> --name-only | grep -E '_gen\.|program\.hash'   # generated files change only through tools/regen-rules.sh
-git diff <base> | grep -nE '^\+.*/(Users|home)/'           # absolute paths
-git diff <base> | grep -n '^+.*·'                          # middle dot in Korean text
-git log <base>..HEAD --format=%B | grep -inE 'novel|소설|blog|블로그|review|리뷰|web|웹|public|공개|audit|user|사용자|request|요청|instruction|지시|prompt|프롬프트'
-```
-
-- Do the same grep on the diff and on any title or character name.
+- `tools/hygiene.py <base>` covers conflict markers, added paths named like options or holding
+  spaces, absolute home paths, the middle dot, wording that records an instruction, and the
+  private patterns in `$HDTRANS_HYGIENE_PATTERNS` (names of sources, data sets, works).
+  Read every hit.
+- Generated files (`*_gen.*`, `program.hash`) change only through `tools/regen-rules.sh`.
+  Check with `git diff <base> --name-only | grep -E '_gen\.|program\.hash'` and regenerate to compare.
 - Tests use neutral names.
-- Comments follow AGENTS.md: no history, no justification, no references to sources, machines or people.
+- Comments follow AGENTS.md: no history, no justification, and no references to sources, machines
+  or people.

@@ -7,6 +7,7 @@
 A local rule is new when a row with a `rule` number and a `ctx` body appears in dicts/ or the
 builtin tables and BASE has no such number; a global rule when a `G <prio>` line appears in
 src/core/rules/globals.txt with a priority BASE does not use.
+Tables without a header line (the user-dictionary format) have no rule columns and add no rule.
 Parallel branches that add the same number need one of them renumbered before integration.
 Exit 1 when two revisions share a number.
 """

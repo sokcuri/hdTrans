@@ -10,36 +10,61 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
 
 ## 1. Review gate
 
-- Run the review-code skill on the whole branch diff (`git diff <remote>/develop...HEAD`) with a separate Opus
-  reviewer. Fix every blocker, then have the commits added after the review reviewed as a delta.
-- `tools/gate.sh` prints `GATE OK`. `tools/shadow.py <remote>/develop` is clean. If the tree has `mac-asan` or
-  `linux-asan` presets, the sanitizer ctest is clean too.
-- Translation changes were measured and judged (fix-translation steps 11–12). Keep the numbers for
-  the PR body.
-- Grep the diff, the commit messages and the PR text for source names and instruction wording
-  (fix-translation "Before committing"). Rewrite any hit before pushing.
+- Run the review-code skill on the whole branch diff (`git diff <remote>/develop...HEAD`) with a
+  separate Opus reviewer. Fix every blocker, then have a reviewer read the commits added after the
+  review as a delta.
+- `tools/gate.sh` prints `GATE OK`.
+- `tools/shadow.py` reports no new warning.
+- If the tree has `mac-asan` or `linux-asan` presets, the sanitizer ctest passes too.
+- Translation changes were measured and every changed line was judged (fix-translation steps
+  11–12). Keep the numbers for the PR body.
+- `tools/hygiene.py <remote>/develop` has no real hit. Read the PR title and body for the same things.
+
+## Merging any PR
+
+Wait for its checks before merging:
+
+```sh
+gh pr checks N --watch --fail-fast
+gh pr checks N
+```
+
+- The second command must show `gate` and `title` as `pass`, and the matrix (`linux`, `mac`,
+  `windows-x64`, `windows-x86`, `wasm`, `release-tools`) as `pass`.
+  - The matrix may show `skipping` only when `gate` passed and decided the tree was already tested
+    (docs/build.md "CI").
+  - `release` and `tested` may show `skipping`.
+- An empty list or `pending` means the checks have not started or not finished. That is not a
+  pass: wait or rerun, and never merge with checks pending.
 
 ## 2. Work branch → develop
 
 ```sh
 git push -u <remote> <branch>
 gh pr create --base develop --title 'fix(<scope>): <summary>' --body-file body.md --milestone X.Y.Z
+gh pr checks N --watch --fail-fast && gh pr checks N
 gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain summary>'
 ```
 
-- The squash subject decides the bump. A `feat` subject on main bumps the minor version, so use
-  `fix:` unless a feature release is intended. Breaking changes use `!`.
-- The body states what changed, the cause classes, the tests, and the judged counts (changed,
-  better, same, worse). Name no data sets or sources.
+- The body states what changed, the cause classes, the tests and the judgment numbers (changed,
+  improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
+- The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
 
 ## 3. develop → main
 
+- **The title of this PR decides the release** (`promotionVersion` in tools/release/release.mjs,
+  docs/contributing.md):
+  - `fix`, `perf` and `revert` make a patch release;
+  - `feat` makes a minor release;
+  - `!` or a `BREAKING CHANGE:` footer in the body makes a major release;
+  - `docs`, `ci`, `chore`, `test`, `build`, `refactor` and `style` make no release.
+  Use `fix:` unless a feature release is intended.
 - Write a new title and body as a release summary, grouped by area (words, speech, numbers, layout,
-  sounds, tools). Do not copy the develop PR. The title follows Conventional Commits and sets the
-  version bump.
-- `gh pr create --base main --head develop --milestone X.Y.Z`, then merge with a merge commit, not a
-  squash: `gh pr merge N --merge`.
+  sounds, tools). Do not copy the develop PR.
+- Open it with `gh pr create --base main --head develop --milestone X.Y.Z`.
+- Wait for its checks (see "Merging any PR"), then merge with a merge commit, not a squash:
+  `gh pr merge N --merge`.
 
 ## 4. What CI does after the merge
 

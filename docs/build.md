@@ -48,6 +48,16 @@ ctest --preset mac
 macOS에서 Command Line Tools만 쓰면 컴파일러 확인 단계에서 실패할 수 있습니다. 그때는 Xcode를 쓰게 합니다:
 `export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.
 
+처음 구성할 때 컴파일러가 아직 지원하지 않는 최신 SDK를 골라 실패하면, 설치된 SDK 가운데 하나를 `SDKROOT`로
+정하고 구성부터 다시 합니다. 이후 빌드도 같은 `SDKROOT`로 합니다.
+
+```sh
+ls /Library/Developer/CommandLineTools/SDKs                              # Command Line Tools
+ls "$(xcode-select -p)"/Platforms/MacOSX.platform/Developer/SDKs          # Xcode
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX<버전>.sdk   # 고른 SDK
+rm -rf build/mac && cmake --preset mac
+```
+
 ## Windows
 
 Visual Studio 프리셋은 개발자 명령 프롬프트 없이 일반 터미널에서 동작합니다.

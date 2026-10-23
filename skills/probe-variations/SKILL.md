@@ -19,22 +19,26 @@ Keep both sets in `$HDTRANS_WORK/<branch>/` (not in the repository) as one line 
   - The same surface in another sense, or a neighbouring construction.
   - Lines just outside the rule's condition (the other side of every test in it).
 - Add real lines that contain the pattern:
-  `grep -F '<pattern>' "$HDTRANS_CORPUS" "$HDTRANS_GAME_SAMPLE/ja.txt" | head -n 50`.
+  `tools/count-class.py '<regex>' --show 50` lists them from `$HDTRANS_CORPUS` and `$HDTRANS_REF_SAMPLE/ja.txt`.
 
 ## Run
 
 ```sh
 p=$HDTRANS_WORK/<branch>
-run() { HOME=$(mktemp -d) HDTRANS_CACHE_DIR=off "$1" -dicts "$2" -each -in "$p/$3.txt" -out "$p/$3.$4.txt"; }
+run() { # CLI DICTS SET TAG [CLI-OPTIONS...]
+  cli=$1 d=$2 n=$3 tag=$4; shift 4
+  HOME=$(mktemp -d) HDTRANS_CACHE_DIR=off tools/with-timeout.sh 300 \
+    "$cli" -dicts "$d" -each "$@" -in "$p/$n.txt" -out "$p/$n.$tag.txt"
+}
 for s in variations near-misses; do
-  run "$BASE/build/<preset>/hdtrans" "$BASE/dicts" "$s" base
+  run "$BASE/build/<preset>/hdtrans" "$BASE/dicts" "$s" base      # add e.g. --speech soft to both runs
   run build/<preset>/hdtrans dicts "$s" fixed
   paste "$p/$s.txt" "$p/$s.base.txt" "$p/$s.fixed.txt" > "$p/$s.tsv"   # ja, before, after
 done
 ```
 
-The base is the pinned baseline worktree build (fix-translation setup). Use the same options in
-both runs, for example `--speech soft`.
+The base is the pinned baseline worktree build (fix-translation setup step 4). Pass the same
+options to both runs.
 
 ## Classify
 

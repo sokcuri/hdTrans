@@ -6,8 +6,10 @@
   tools/accept-cases.py --self-test
 
 Reads the failure report of tools/rule-cases.sh (`rule: input`, `  expected X`, `  actual   Y`)
-and, in each FILE, replaces X by Y in the rows with that rule, input and expected value. Rows
-of any kind are rewritten, so run it only on rows whose new output was judged better.
+and, in each FILE, replaces X by Y in the rows with that rule, input and expected value. Only
+rows whose expected value is a whole translation change; `rule:` and `!rule:` rows assert what a
+rule chooses and are fixed by hand. Rows of any kind are rewritten, so run it only on rows whose
+new output was judged better.
 Prints the number of rows changed per file.
 """
 import re
@@ -23,7 +25,7 @@ def accept(report, text):
     lines, n = text.split("\n"), 0
     for k, line in enumerate(lines):
         cols = line.split("\t")
-        if line.startswith("#") or len(cols) < 3:
+        if line.startswith("#") or len(cols) < 3 or cols[2].startswith(("rule:", "!rule:")):
             continue
         new = fixes.get((cols[0], cols[1], cols[2]))
         if new is not None:
@@ -38,6 +40,8 @@ def self_test():
     table = "# 규칙: LEX-1\nrule\tinput\texpected\tkind\tlayer\nL1\t猫だ。\t고양이다.\tfix\tlocal\n"
     out, n = accept(report, table)
     assert n == 1 and "L1\t猫だ。\t고양이이다.\tfix\tlocal" in out, out
+    rule = "L1: 猫だ。\n  expected rule:L1=고양이\n  actual   rule:L2=괭이\n"
+    assert accept(rule, "L1\t猫だ。\trule:L1=고양이\tfix\tlocal\n")[1] == 0
     with tempfile.TemporaryDirectory() as d:
         p = Path(d) / "t.tsv"
         p.write_text(table, encoding="utf-8")
