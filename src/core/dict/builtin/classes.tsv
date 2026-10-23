@@ -1,0 +1,3 @@
+// Word classes the passes test words against (dict::InClass, dict::ClassMembers):
+// SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
+// in it. Every set is named once below by "//= SET <TAB> what it is for".

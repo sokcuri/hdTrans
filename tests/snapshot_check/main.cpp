@@ -149,7 +149,7 @@ bool WriteCompiled(const Snapshot& s, const std::string& path) {
     };
     for (const std::string_view name : BuiltinNames()) {
         if (name == "sound.tsv" || name == "phrases.tsv" || name == "patterns.tsv" || name == "senses.tsv" ||
-            name == "lines.tsv") {
+            name == "lines.tsv" || name == "classes.tsv") {
             continue;
         }
         if (!compile("builtin/" + std::string(name), BuiltinText(name), -1, builtin)) return false;

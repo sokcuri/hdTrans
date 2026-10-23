@@ -161,6 +161,8 @@ if(NOT EMSCRIPTEN)
     set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
     add_test(NAME unit COMMAND hdtrans_tests)
+    add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
     set_tests_properties(unit PROPERTIES ENVIRONMENT
         "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache")
     if(UNIX)
