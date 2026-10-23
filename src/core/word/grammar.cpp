@@ -832,6 +832,14 @@ void NotYet(Flusher& f) {
         output::Conjugated target = output::Conjugating("못하다", '$', "", f.families);
         if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, target.target);
         if (d == nullptr) continue;
+        // 覚えていない says the memory is not there now (기억하지 못한다), but read as learning
+        // or feeling it is an action not done, past like other verbs (単語をまだ覚えていない
+        // 아직 배우지 못했다).
+        const bool remember = it->group->surface.ends_with("覚え") || it->group->surface.ends_with("憶え");
+        if (remember && !ItemLemma(f, it, it->selected).starts_with("기억") && (d->dst == "1는다" || d->dst == "1다")) {
+            n->AssignDirectSlot(n->DirectIndex(), "5다");
+            continue;
+        }
         for (const std::string_view form : {std::string_view("1는다"), std::string_view("1다")}) {
             if (d->dst.starts_with(form)) {
                 n->AssignDirectSlot(n->DirectIndex(), "4다" + d->dst.substr(form.size()));

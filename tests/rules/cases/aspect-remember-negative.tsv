@@ -2,3 +2,6 @@ rule	input	expected	kind	layer
 dict:jisjk:341739	憶えてない……	기억하지 못한다……	fix	rewrites
 dict:jisjk:341739	痛みは憶えていない。	아픔은 기억하지 못한다.	fix	rewrites
 dict:jisjk:341739	まだ食べてない。	아직 먹지 않았다.	keep	local-ending
+dict:jisjk:341739	単語をまだ覚えていない。	단어를 아직 배우지 못했다.	fix	rewrites
+dict:jisjk:341739	漢字を覚えていない。	한자를 배우지 못했다.	fix	rewrites
+dict:jisjk:341739	名前を覚えていない。	이름을 기억하지 못한다.	keep	rewrites
