@@ -1,3 +1,4 @@
+# 규칙: LEX-4
 rule	input	expected	kind	layer
 names:gloss	「ありがとう、イルマ。新婚さんじゃないけど」	「고마워, 이르마. 신혼부부가 아닌데」	fix	lookup
 names:gloss	帝都名物の大広場に設営された断頭台。	제국의 수도 명물의 큰 광장에 설치된 단두대.	fix	lookup

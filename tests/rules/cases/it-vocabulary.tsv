@@ -1,3 +1,4 @@
+# 규칙: LEX-1, LEX-2
 rule	input	expected	kind	layer
 sound:name-noun	ニコニコ動画で見た。	니코니코 동화로 보았다.	fix	sound
 sound:name-noun	ニコニコ大百科に載っている。	니코니코 대백과에 실려 있다.	fix	sound

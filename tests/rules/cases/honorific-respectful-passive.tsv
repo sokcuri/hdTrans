@@ -1,3 +1,4 @@
+# 규칙: SPC-2
 rule	input	expected	kind	layer
 rewrite:respectful-passive	王子様がお見舞いに訪ねて来られた。	왕자님이 병문안 하러 방문해 오셨다.	fix	rewrites
 rewrite:respectful-passive	アルベルト王子がなにやら頭を下げて来られましたが……	알베르트 왕자가 뭔가 고개를 숙여 오셨습니다만……	fix	rewrites

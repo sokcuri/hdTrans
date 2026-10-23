@@ -1,3 +1,4 @@
+# 규칙: NUM-1, NUM-3, NUM-4
 rule	input	expected	kind	layer
 compose:number-noun	1レベル上がった。	1레벨 올랐다.	fix	compose
 compose:number-noun	２０ページを開く。	20페이지를 편다.	fix	compose

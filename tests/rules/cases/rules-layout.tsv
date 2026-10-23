@@ -1,0 +1,5 @@
+# 규칙: LAY-1, LAY-3
+rule	input	expected	kind	layer
+segment:column-gap	山田　 太郎	야마다　 타로	fix	segment
+segment:column-gap	武器　 防具	무기　 방어구	fix	segment
+compose:latin-particle	GitHub に上げた。	GitHub에 올렸다.	fix	compose

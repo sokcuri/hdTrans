@@ -54,6 +54,8 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
 - `layer`: 그 규칙이 도는 실행 층([pipeline-layers.md](pipeline-layers.md)의 `local`, `local-ending`, `global-stem`,
   `global-last`, `global-ending`)
 
+머리줄 앞의 `#` 줄은 행이 아닙니다. 표가 지키게 하는 [번역 규칙](../spec/README.md)의 id를 `# 규칙: NUM-1, NUM-3`처럼 적습니다.
+
 ```sh
 tools/rule-cases.sh build/mac/hdtrans dicts            # 다르면 규칙, 입력, 기대값, 실제값을 보이고 실패
 tools/rule-cases.sh build/mac/hdtrans dicts --accept   # current 행의 번역 전체 기대값을 새 출력으로 바꿈

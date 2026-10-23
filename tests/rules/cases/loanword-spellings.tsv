@@ -1,3 +1,4 @@
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 dict:jisjk:50461	木を切るためにチェーンソーを使う。	나무를 자르기 위해 전기톱을 쓴다.	fix	lookup
 dict:jisjk:54899	フェニックスの雛が生まれた。	피닉스의 병아리가 태어났다.	fix	lookup

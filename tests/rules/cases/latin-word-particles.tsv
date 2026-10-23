@@ -1,3 +1,4 @@
+# 규칙: LAY-3
 rule	input	expected	kind	layer
 compose:latin-particle	詳しくはwiki の記事を見てください。	자세하게는 wiki의 기사를 봐 주세요.	fix	compose
 compose:latin-particle	Wiki が更新された。	Wiki가 갱신되었다.	fix	compose

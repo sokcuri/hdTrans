@@ -1,3 +1,4 @@
+# 규칙: LEX-4
 rule	input	expected	kind	layer
 G90	王子と会った時の私はまだ子供だった。	왕자와 만났을 때의 나는 아직 아이였다.	fix	global-stem
 G90	森に入ってしばらくしたところで	숲에 들어와 한동안 했더니	fix	global-stem

@@ -30,15 +30,22 @@ done
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-rules.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 trap 'exit 2' HUP INT TERM
-# A directory holds one table per theme (tests/rules/cases/*.tsv); they are checked together.
+# Lines starting with # (the ids of the rules a table enforces, spec/) precede the header and are
+# not rows. A directory holds one table per theme (tests/rules/cases/*.tsv); they are checked together.
+src=$cases
 if [ -d "$cases" ]; then
     [ -z "$accept" ] || { echo "--accept needs a single file" >&2; exit 2; }
     first=1
     for f in "$cases"/*.tsv; do
-        head -n 1 "$f" | grep -q '^rule	input	expected	kind	layer$' || { echo "bad header in $f" >&2; exit 2; }
-        if [ -n "$first" ]; then cat "$f"; first=; else tail -n +2 "$f"; fi
+        grep -v '^#' "$f" > "$tmp/one.tsv" || true
+        head -n 1 "$tmp/one.tsv" | grep -q '^rule	input	expected	kind	layer$' || { echo "bad header in $f" >&2; exit 2; }
+        if [ -n "$first" ]; then cat "$tmp/one.tsv"; first=; else tail -n +2 "$tmp/one.tsv"; fi
     done > "$tmp/all.tsv"
     cases=$tmp/all.tsv
+else
+    grep '^#' "$cases" > "$tmp/notes.tsv" || true
+    grep -v '^#' "$cases" > "$tmp/one.tsv" || true
+    cases=$tmp/one.tsv
 fi
 head -n 1 "$cases" | grep -q '^rule	input	expected	kind	layer$' || { echo "bad header in $cases" >&2; exit 2; }
 tail -n +2 "$cases" | cut -f 2 > "$tmp/in.txt"
@@ -49,5 +56,5 @@ awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) 
 awk -F '\t' -v OFS='\t' -v accept="$accept" -v fixed="$tmp/fixed.tsv" \
     -f "$here/tools/rule-cases.awk" \
  "$tmp/why.txt" "$tmp/out.txt" "$tmp/rule-by-id.tsv" "$cases" || status=$?
-[ -z "$accept" ] || cp "$tmp/fixed.tsv" "$cases"
+[ -z "$accept" ] || cat "$tmp/notes.tsv" "$tmp/fixed.tsv" > "$src"
 exit "${status:-0}"
