@@ -2048,6 +2048,50 @@ void ChanAfterKatakana(Flusher& f) {
     }
 }
 
+void PluralPronoun(Flusher& f) {
+    static constexpr std::string_view kPluralSuffixes[] = {"たち", "達", "ら", "ども"};
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        Item* n = it->next;
+        if (n == nullptr || it->selected < 0 || n->selected < 0 || it->detail->Yougo() ||
+            !InSet(kPluralSuffixes, n->group->surface) || n->tokenIndex != it->tokenIndex ||
+            it->start + it->length != n->start) {
+            continue;
+        }
+        const char cls = At(it->Code(it->selected), 0);
+        const std::string suffix = ItemLemma(f, n, n->selected);
+        if (cls != '1' || (suffix != "들" && suffix != "등")) continue;
+        const std::string lemma = ItemLemma(f, it, it->selected);
+        std::string_view target;
+        if (lemma == "나") target = "우리";
+        else if (lemma == "저") target = "저희";
+        else if (lemma == "너") target = "너희";
+        else if (lemma == "우리" || lemma == "저희" || lemma == "너희") target = lemma;
+        else continue;
+        // The pronoun carries the space the suffix had before a word (우리 전원); the
+        // empty suffix adds none.
+        // Items written as nothing between them (ボクたちの仲間 우리 동료) are passed over.
+        std::string written(target);
+        const Item* last = n;
+        const Item* m = n->next;
+        bool adjacent = false;
+        while (m != nullptr && m->selected >= 0) {
+            const int end = last->start + last->length;
+            adjacent = (m->tokenIndex == last->tokenIndex && m->start == end) ||
+                       (m->tokenIndex == last->tokenIndex + 1 && end == static_cast<int>(last->text.size()) && m->start == 0);
+            if (!adjacent || !TrimSpace(m->EntryText(m->selected)).empty()) break;
+            last = m;
+            m = m->next;
+        }
+        if (adjacent && m != nullptr && m->selected >= 0 && At(m->Code(m->selected), 0) != '2' &&
+            At(m->Code(m->selected), 0) != '6') {
+            const char32_t r = text::DecodeRune(m->group->surface).cp;
+            if (text::IsLetter(r) || text::IsDigit(r)) written += ' ';
+        }
+        TakeTarget(it, cls, written);
+        TakeTarget(n, At(n->Code(n->selected), 0), "");
+    }
+}
+
 // The first person of a polite sentence in its humble form: 나 저, 내 제, 우리 저희
 // (私はそう思います 저는 그렇게 생각합니다).
 void HumbleFirstPerson(Flusher& f) {

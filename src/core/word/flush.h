@@ -67,6 +67,9 @@ void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
+// A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
+// plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
+void PluralPronoun(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
 void ChanAfterKatakana(Flusher& f);
 void InitialSoundRule(Flusher& f);
