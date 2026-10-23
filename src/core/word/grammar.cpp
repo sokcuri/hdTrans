@@ -2167,6 +2167,20 @@ void NoAfterNa(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether the first verb from it on is one of verb.means-de.
+bool MeansVerbFollows(const Item* it) {
+    for (; it != nullptr; it = it->next) {
+        if (it->detail->cls != kDetailVerb) continue;
+        const std::string_view stem = it->group->surface;
+        return std::ranges::any_of(dict::ClassMembers("verb.means-de"), [&](std::string_view v) { return stem.ends_with(v); });
+    }
+    return false;
+}
+
+}  // namespace
+
 void DeScene(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;
@@ -2176,7 +2190,8 @@ void DeScene(Flusher& f) {
         }
         if (p->group->surface == "一瞬" || p->group->surface == "瞬時") {
             SelectLemma(f, it, "에");
-        } else if (dict::InClass("noun.scene", p->group->surface)) {
+        } else if (dict::InClass("noun.scene", p->group->surface) &&
+                   !(dict::InClass("noun.scene-means", p->group->surface) && MeansVerbFollows(it->next))) {
             SelectLemma(f, it, "에서");
         }
     }

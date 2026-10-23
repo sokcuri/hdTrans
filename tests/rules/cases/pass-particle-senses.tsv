@@ -8,6 +8,10 @@ rewrite:de-scene	夢で雨が降るのはおかしい？	꿈에서 비가 오는
 rewrite:de-scene	ナイフで切った。	나이프로 잘랐다.	keep	rewrites
 rewrite:de-scene	電車で学校に行く。	전철로 학교에 간다.	keep	rewrites
 rewrite:de-scene	一瞬で消えた。	한순간에 사라졌다.	keep	rewrites
+rewrite:de-scene	欺く夢で取り繕った	속이는 꿈으로 꾸몄다	fix	rewrites
+rewrite:de-scene	夢で終わった。	꿈으로 끝났다.	fix	rewrites
+rewrite:de-scene	夢で会おう。	꿈에서 만나자.	keep	rewrites
+rewrite:de-scene	この状況で誤魔化した。	이 상황에서 속였다.	keep	rewrites
 rewrite:return-to	場面は開幕の宣言に戻る。	장면은 개막 선언으로 돌아온다.	fix	rewrites
 rewrite:return-to	彼は自分の仕事に戻った。	그는 자신의 일로 돌아왔다.	fix	rewrites
 rewrite:return-to	昔みたいな関係に戻れないかな	옛날 같은 관계로 돌아갈 수 없을까	fix	rewrites

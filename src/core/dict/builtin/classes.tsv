@@ -67,6 +67,7 @@
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
+//= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
@@ -106,6 +107,7 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
+//= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
@@ -1211,6 +1213,8 @@ noun.scene	夢
 noun.scene	環境
 noun.scene	空間
 
+noun.scene-means	夢
+
 noun.time-end	時
 noun.time-end	頃
 noun.time-end	日
@@ -1822,6 +1826,24 @@ verb.means	合わせ
 verb.means	伴
 verb.means	装
 verb.means	模し
+
+verb.means-de	繕
+verb.means-de	誤魔化
+verb.means-de	ごまか
+verb.means-de	飾
+verb.means-de	満た
+verb.means-de	満ち
+verb.means-de	埋め
+verb.means-de	彩
+verb.means-de	覆
+verb.means-de	包
+verb.means-de	騙
+verb.means-de	塗
+verb.means-de	溢れ
+verb.means-de	膨らま
+verb.means-de	膨らませ
+verb.means-de	終わ
+verb.means-de	終え
 
 verb.naming	呼ぶ
 verb.naming	書く
