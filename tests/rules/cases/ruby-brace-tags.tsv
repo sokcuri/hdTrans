@@ -1,3 +1,4 @@
+# 규칙: LAY-4
 rule	input	expected	kind	layer
 normalize:ruby	階下から、{rb}微{/rb}{rt}かす{/rt}かに声が聞こえる。	아래층에서, {rb}희미하게{/rb}{rt}희미하게{/rt} 목소리가 들린다.	fix	normalize
 normalize:ruby	{rb}怪訝{/rb}{rt}けげん{/rt}な顔をした。	{rb}의아스러운{/rb}{rt}의아한{/rt} 표정을 했다.	fix	normalize

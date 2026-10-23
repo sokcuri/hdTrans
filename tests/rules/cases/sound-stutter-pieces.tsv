@@ -1,3 +1,4 @@
+# 규칙: SND-1
 rule	input	expected	kind	layer
 sound:stutter-pieces	「さ、さ、最低」	「최, 최, 최저」	fix	sound
 sound:stutter-pieces	「ご、ごめ、ごめんなさい」	「미, 미안, 미안해요」	fix	sound

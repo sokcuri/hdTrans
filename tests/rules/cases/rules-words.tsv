@@ -1,0 +1,8 @@
+# 규칙: LEX-1, LEX-2
+rule	input	expected	kind	layer
+lexical:it-loanword	プッシュしてからプルリクエストを送る。	푸시하고 나서 풀 리퀘스트를 보낸다.	fix	defaults
+lexical:it-loanword	イシューを立てる。	이슈를 오픈한다.	fix	defaults
+lexical:it-loanword	リポジトリにプッシュした。	리포지토리에 푸시했다.	fix	defaults
+lexical:loanword-spelling	メッセージを送った。	메시지를 보냈다.	keep	defaults
+lexical:loanword-native	ガスマスクが必要だ。	방독면이 필요하다.	keep	defaults
+lexical:loanword-native	ドアを閉めた。	문을 닫았다.	keep	defaults

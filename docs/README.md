@@ -24,6 +24,7 @@
 | [빌드](build.md) | 요구 사항, CMake 프리셋, Windows와 WebAssembly 빌드 |
 | [기여 안내](contributing.md) | 브랜치, 커밋과 PR, 버전과 릴리스 |
 | [오역 고치기](fixing-translations.md) | 번역 진단, 사전과 규칙 수정, 회귀 테스트 |
+| [번역 규칙](../spec/README.md) | 출력이 지켜야 하는 규칙과 그 사례 |
 | [테스트](testing.md) | 단위 테스트, 예제, 기준선과 엔드투엔드 테스트 |
 | [사전 파일](dictionary-files.md) | 기본 사전 원본, 스냅샷, 사용자 사전과 캐시 |
 | [번역 파이프라인](pipeline-layers.md) | 처리 단계, 사전과 규칙 적용 순서, 진단 출력 |

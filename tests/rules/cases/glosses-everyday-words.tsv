@@ -1,3 +1,4 @@
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:105355	上掛けの布からはノミが出た。	이불의 천에서는 벼룩이 나왔다.	fix	defaults
 dict:jisjk:254328	ちょっと野暮用で出かける。	조금 볼일로 나간다.	fix	defaults
