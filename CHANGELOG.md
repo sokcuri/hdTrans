@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.7](https://github.com/sokcuri/hdTrans/compare/v0.4.6...v0.4.7) (2026-10-23)
+
+
+### Features
+
+* **tools:** surface budget, pass experiments and pass mutation check ([#46](https://github.com/sokcuri/hdTrans/issues/46)) ([761e3ae](https://github.com/sokcuri/hdTrans/commit/761e3aea61999bc5f6eb771fad48257a8276a0d0))
+
+
+### Bug Fixes
+
+* **release:** read past でしょ, っす, よかった and quoted と naturally and move special cases into tables ([02cfde8](https://github.com/sokcuri/hdTrans/commit/02cfde856bc71da1f86b822336ef4034f07a9cc5))
+* **translation:** read stretched words, past でしょ, よかった, counts and humming as Korean writes them ([#49](https://github.com/sokcuri/hdTrans/issues/49)) ([2521760](https://github.com/sokcuri/hdTrans/commit/25217607766849e826169b84cd88d7baa9d7d480))
+* **translation:** stop passes that misread と words, 夢で, いう, quoted greetings, であった and verse lines; fix 枚目, ages, っす, polite でしょ and bowls ([#50](https://github.com/sokcuri/hdTrans/issues/50)) ([8d57711](https://github.com/sokcuri/hdTrans/commit/8d57711a6f04b62326f713301a818008194bdf6a))
+
 ## [0.4.6](https://github.com/sokcuri/hdTrans/compare/v0.4.5...v0.4.6) (2026-10-23)
 
 
