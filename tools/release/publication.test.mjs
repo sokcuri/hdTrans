@@ -25,10 +25,10 @@ function fixture(t, packed = metadata) {
   write('release-version.txt', `${metadata.version}\n`);
   write('.release-please-manifest.json', { '.': metadata.version });
   write('archive/package/package.json', packed);
-  const path = join(packageDir, 'hdtrans-1.2.3.tgz');
+  const path = join(packageDir, 'hdTrans-1.2.3-wasm.tgz');
   execFileSync('tar', ['-czf', path, '-C', join(root, 'archive'), 'package']);
   const hash = createHash('sha256').update(readFileSync(path)).digest('hex');
-  write('packages/SHA256SUMS.txt', `${hash}  hdtrans-1.2.3.tgz\n`);
+  write('packages/SHA256SUMS.txt', `${hash}  hdTrans-1.2.3-wasm.tgz\n`);
   return { root, packageDir, ref, write };
 }
 
@@ -68,7 +68,7 @@ for (const patch of [{ name: 'other' }, { version: '1.2.4' }, { repository: { ur
 }
 test('checksum mismatch is rejected before registry access', t => {
   const f = fixture(t);
-  f.write('packages/SHA256SUMS.txt', `${'0'.repeat(64)}  hdtrans-1.2.3.tgz\n`);
+  f.write('packages/SHA256SUMS.txt', `${'0'.repeat(64)}  hdTrans-1.2.3-wasm.tgz\n`);
   assert.throws(() => verifyNpmPackage(f), /checksum does not match/);
 });
 
@@ -199,7 +199,7 @@ test('upload failure leaves a new release as a draft without a stable publicatio
 for (const draft of [true, false]) {
   test(`existing ${draft ? 'draft' : 'published'} releases are reused without deletion or redrafting`, async t => {
     const h = releaseHarness(t, { existing: { id: 7, tag_name: 'v1.2.3', draft, prerelease: false }, hiddenDraft: draft,
-      assets: [{ id: 9, name: 'hdtrans-1.2.3.tgz' }] });
+      assets: [{ id: 9, name: 'hdTrans-1.2.3-wasm.tgz' }] });
     assert.equal(await h.run(), true);
     assert.deepEqual(h.calls.map(([kind]) => kind), ['delete-asset', 'upload', 'upload', 'latest', 'publish']);
     assert.equal(h.calls.at(-1)[1].release_id, 7);

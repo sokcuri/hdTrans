@@ -45,8 +45,10 @@ jobs:
           node tools/package-npm.mjs --snapshot build/shared/dicts.hdsnap \
             --wasm build/artifacts/hdtrans-wasm --wrapper build/artifacts/hdtrans-wasm/translator.js
           npm --prefix npm test
+          version="$(node -p 'require("./npm/package.json").version')"
           npm pack ./npm --pack-destination build/release
-          (cd build/release && sha256sum hdtrans-*.tgz >> SHA256SUMS.txt)
+          mv "build/release/hdtrans-$version.tgz" "build/release/hdTrans-$version-wasm.tgz"
+          (cd build/release && sha256sum "hdTrans-$version-wasm.tgz" >> SHA256SUMS.txt)
       - name: Upload release packages
         uses: actions/upload-artifact@v7
         with:

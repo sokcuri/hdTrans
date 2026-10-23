@@ -68,14 +68,48 @@ node web/check.mjs http://127.0.0.1:8000/ INPUT want.txt 20
 HDTRANS_WEB_HOST=user@host HDTRANS_WEB_SSH='ssh -i KEY' web/deploy.sh
 ```
 
-올리기 전에 서버의 사이트 폴더를 `<폴더>.bak-<UTC 시각>`으로 복사하고, 되돌리는 명령을 출력합니다.
+올리기 전에 서버의 사이트 폴더를 `<폴더>.bak-<UTC 시각>`으로 복사하고, 올린 뒤 최신 백업만
+`HDTRANS_WEB_KEEP`개(기본 10) 남기고 되돌리는 명령을 출력합니다.
 
 ```sh
 HDTRANS_WEB_HOST=user@host HDTRANS_WEB_SSH='ssh -i KEY' web/deploy.sh rollback <폴더>.bak-<UTC 시각>
 ```
 
-`HDTRANS_WEB_DIR`로 서버의 사이트 폴더를 바꿉니다(기본 `/srv/hdtrans/web`). 접속 정보와 키는 저장소에
-두지 않습니다. 올린 뒤 `node web/check.mjs https://trans.kuri.kr/ ...`로 확인합니다.
+`web/deploy.sh dry-run`은 내용이 바뀔 파일만 보여 주고, `web/deploy.sh examples 폴더`는 `web/examples/`에 없는
+예제 텍스트를 서버의 사이트에서 그 폴더로 받습니다(`HDTRANS_WEB_EXAMPLES`로 씀). 저장소에 없는 예제는 서버의
+`examples/`에만 있으므로 배포는 서버의 `examples/*.txt`와 그 압축본을 지우지 않습니다. `HDTRANS_WEB_DIR`로 서버의 사이트
+폴더를 바꿉니다(기본 `/srv/hdtrans/web`). 접속 정보와 키는 저장소에 두지 않습니다. 올린 뒤
+`node web/check.mjs https://trans.kuri.kr/ ...`로 확인합니다.
+
+### 자동 배포
+
+`.github/workflows/deploy-web.yml`은 `Publish npm`이 태그 push에서 성공하고 그 태그가 최신 안정 릴리스이면
+그 태그의 커밋으로 네이티브 CLI(`linux`)와 WebAssembly 엔진을 빌드하고, 예제 텍스트를 서버에서 받아 사이트를
+만든 뒤 `web/deploy.sh`로 올립니다. 이어서 공개 페이지가 방금 만든 `index.html`과 같은지(버전 줄의 엔진 버전과
+커밋), `manifest.json`, 예제 목록, 엔진과 사전 파일을 확인합니다. 서버에도 없는 예제가 있으면 실패하고, 받은
+예제 텍스트는 아티팩트로 올리지 않습니다.
+
+Actions에서 develop 브랜치로 직접 실행할 때는 게시된 릴리스 태그와 `dry_run`(기본 켬)을 고릅니다. `dry_run`은
+사이트를 만든 뒤 바뀔 파일 수만 보고합니다. 최신이 아닌 태그를 고르면 사이트가 그 릴리스로 바뀝니다.
+
+비밀값은 GitHub 환경 `web`(develop 브랜치만 허용)에 둡니다.
+
+| 이름 | 내용 |
+|---|---|
+| `HDTRANS_WEB_HOST` | 배포 계정의 ssh 대상, `hdtrans-deploy@<호스트>` |
+| `HDTRANS_WEB_DEPLOY_KEY` | 배포 계정의 개인 키 |
+| `HDTRANS_WEB_KNOWN_HOSTS` | 서버의 호스트 키(`known_hosts` 형식) |
+
+서버의 배포 계정 `hdtrans-deploy`는 사이트 폴더와 백업 폴더의 주인이고, 그 키는 `authorized_keys`의 강제
+명령 `web/deploy-command.sh`로 `web/deploy.sh`의 deploy, dry-run, examples가 보내는 명령만 실행합니다(받은
+심볼릭 링크는 무효로 바꾸고, 예제 읽기는 심볼릭 링크를 거부). 두 파일은 함께 고치고, 바꾼
+`deploy-command.sh`는 서버에 다시 설치합니다. 손으로 올릴 때도 이 계정을 써야 파일 주인이 바뀌지 않습니다.
+
+저장소에 없는 예제를 새로 넣을 때는 먼저 그 `.txt`를 서버의 사이트 `examples/`에 `hdtrans-deploy` 소유, 644로
+올린 뒤 `web/examples.tsv`에 적습니다. 순서가 바뀌면 다음 배포가 예제를 찾지 못해 실패합니다.
+
+되돌릴 때는 관리자 키로 `web/deploy.sh rollback <폴더>.bak-<UTC 시각>`을 실행합니다. 배포 로그의 `rollback:`
+줄이 그 명령이며, 배포 계정으로는 되돌릴 수 없습니다.
 
 ## 메모리
 
