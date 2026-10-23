@@ -10,3 +10,4 @@ sense:半月	半月ぶりに会った。	보름만에 만났다.	fix	senses
 sense:半月	空に半月が浮かぶ。	하늘에 반달이 떠오른다.	keep	senses
 sense:優れる	体調が優れない。	컨디션이 좋지 않다.	fix	senses
 sense:優れる	成績が優れている。	성적이 우수하다.	keep	senses
+sense:腕	腕を認められた。	솜씨를 인정받았다.	fix	senses
