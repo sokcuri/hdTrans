@@ -324,7 +324,9 @@ bool SoundCovers(const Emphasis& e, std::u32string_view rs, size_t from, size_t 
     std::string units;
     for (size_t j = from; j < i; j++) {
         bool inStem = false;
-        for (size_t k = from; k < j && !inStem; k++) inStem = e.Tags(rs.substr(k, i - k)).find_first_of("MH") != std::string::npos;
+        for (size_t k = from; k < j && !inStem; k++) {
+            inStem = e.Tags(rs.substr(k, i - k)).find_first_of("MH") != std::string::npos;
+        }
         if (inStem) continue;
         for (const SoundRow& s : SoundRows(f[j], extra)) {
             size_t end = 0;
@@ -619,8 +621,8 @@ bool ParticleNe(std::u32string_view rs, size_t k) {
 // hiragana in a run of two or more characters, except a kana of the e row other than
 // the end of a word that is no verb or adjective stem (だめー), the て of a te form or an
 // imperative (待ってー, 助けてー, 待てー; not the casual たい of やりてー), the で of a te
-// form (読んでー, ないでー) and the particle ね (casual forms such as やべー, 知らねー stay); not the particle さ, nor な after る or て, which reads as a
-// prohibition before ～.
+// form (読んでー, ないでー) and the particle ね (casual forms such as やべー, 知らねー stay);
+// not the particle さ, nor な after る or て, which reads as a prohibition before ～.
 bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_t i) {
     const char32_t prev = rs[i - 1];
     if (IsKanjiRune(prev)) return !e.EndsInStem(rs, from, i);
@@ -758,9 +760,12 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         while (q < rs.size() && In(rs[q], U"っッ")) q++;
         if (q < rs.size() && !IsPause(rs[q])) continue;
         size_t from = k - 1;
-        while (from > 0 && k - 1 - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+        while (from > 0 && k - 1 - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) {
+            from--;
+        }
         const std::u32string_view before = std::u32string_view(rs).substr(from, k - 1 - from);
-        const bool stem = e.StemTagged(rs, from, k - 1, "H") && before.find_first_not_of(U'い') != std::u32string_view::npos;
+        const bool stem =
+            e.StemTagged(rs, from, k - 1, "H") && before.find_first_not_of(U'い') != std::u32string_view::npos;
         const bool good = k >= 3 && rs[k - 2] == U'い' && k - 2 > from && !In(rs[k - 3], U"いぃ") &&
                           e.Reach(rs, from, k - 2) == k - 2 &&
                           e.Tags(U"い").find('H') != std::string::npos;

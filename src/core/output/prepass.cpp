@@ -1198,8 +1198,8 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
         const TokenText& tok = tokens[i];
         switch (tok.type) {
             case tokenizer::kTypeSymbol:
-                if (tok.span == 0 && i > first && tokens[i - 1].type != tokenizer::kTypeAsciiSpace && ClosesWord(tok.text) &&
-                    SpacedAfterSyllable(out)) {
+                if (tok.span == 0 && i > first && tokens[i - 1].type != tokenizer::kTypeAsciiSpace &&
+                    ClosesWord(tok.text) && SpacedAfterSyllable(out)) {
                     TrimRight(out);
                 }
                 break;

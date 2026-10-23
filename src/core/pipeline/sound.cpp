@@ -188,7 +188,9 @@ bool EndsDrawn(std::string_view s) {
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
 // drawing out its vowel before another cry (ひぃ+やあっ 히이야앗, ふぁー+ふぁー 후아아후아아).
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
-    if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) return false;
+    if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) {
+        return false;
+    }
     return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&
            (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
 }
@@ -1694,7 +1696,7 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
         std::erase(rest, 'd');
         std::u32string rs = DecodeText(korean);
         if (rs.empty() || rs.back() < 0xAC00 || rs.back() > 0xD7A3) return Lengthen(korean, rest);
-        // The last syllable carries the sound: written apart as a word of one syllable.
+        // The last syllable carries the sound: it is lengthened as a word of one syllable.
         const size_t last = rs.size() - 1;
         return EncodeText(std::u32string_view(rs).substr(0, last)) + Lengthen(EncodeText(rs.substr(last)), rest);
     }
