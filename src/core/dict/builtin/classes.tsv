@@ -12,6 +12,11 @@
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), which the rules about familiar address look for alone.
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
+//= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
+//= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
+//= honorific.katakana-name	The katakana honorifics a katakana name may end in (ヨウタサン).
+//= honorific.name	Person suffixes that follow a name (さん, 様, 先生), with their drawn-out spellings (さぁん, ちゃーん); a label or run that ends in one is the name before it.
+//= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
@@ -21,11 +26,14 @@
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
+//= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
+//= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
+//= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
@@ -38,7 +46,11 @@
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
+//= suffix.label-parent	Ends of a speaker label Xの父 that name a relative of the name X (アリスの母).
+//= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
+//= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
 //= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
+//= suffix.title-in-name	Title words that may follow a name inside its run (茜たち, 水無月家).
 //= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
@@ -173,6 +185,69 @@ honorific.honoured-person	母上
 honorific.honoured-person	父上
 honorific.honoured-person	兄上
 honorific.honoured-person	姉上
+
+honorific.kana-name	さん
+honorific.kana-name	ちゃん
+honorific.kana-name	くん
+honorific.kana-name	君
+honorific.kana-name	様
+honorific.kana-name	さま
+honorific.kana-name	先輩
+honorific.kana-name	先生
+
+honorific.kanji-name	先生
+honorific.kanji-name	先輩
+honorific.kanji-name	様
+honorific.kanji-name	殿
+honorific.kanji-name	君
+honorific.kanji-name	氏
+honorific.kanji-name	嬢
+
+honorific.katakana-name	サン
+honorific.katakana-name	サマ
+honorific.katakana-name	クン
+honorific.katakana-name	チャン
+honorific.katakana-name	ドノ
+
+honorific.name	さん
+honorific.name	ちゃん
+honorific.name	くん
+honorific.name	君
+honorific.name	様
+honorific.name	さま
+honorific.name	先輩
+honorific.name	殿
+honorific.name	氏
+honorific.name	たん
+honorific.name	嬢
+honorific.name	はん
+honorific.name	っち
+honorific.name	ちゃま
+honorific.name	先生
+honorific.name	せんせい
+honorific.name	さぁん
+honorific.name	ちゃーん
+honorific.name	くーん
+honorific.name	公
+honorific.name	卿
+
+honorific.person-title	さん
+honorific.person-title	ちゃん
+honorific.person-title	くん
+honorific.person-title	君
+honorific.person-title	様
+honorific.person-title	さま
+honorific.person-title	先輩
+honorific.person-title	先生
+honorific.person-title	殿
+honorific.person-title	氏
+honorific.person-title	たん
+honorific.person-title	っち
+honorific.person-title	姉
+honorific.person-title	兄
+honorific.person-title	お姉
+honorific.person-title	お兄
+honorific.person-title	改
 
 ko-adjective.stem-end	좋
 ko-adjective.stem-end	같
@@ -372,6 +447,59 @@ noun.do-angle	華氏
 noun.do-angle	零下
 noun.do-angle	氷点下
 
+noun.label-role	みんな
+noun.label-role	皆
+noun.label-role	一同
+noun.label-role	全員
+noun.label-role	２人
+noun.label-role	二人
+noun.label-role	3人
+noun.label-role	３人
+noun.label-role	声
+noun.label-role	電話
+noun.label-role	アナウンス
+noun.label-role	ナレーション
+noun.label-role	司会
+noun.label-role	実況
+noun.label-role	解説
+noun.label-role	店長
+noun.label-role	店員
+noun.label-role	担任
+noun.label-role	秘書
+noun.label-role	父親
+noun.label-role	母親
+noun.label-role	刑事
+noun.label-role	女性
+noun.label-role	男性
+noun.label-role	女の子
+noun.label-role	男の子
+noun.label-role	クラスメイト
+noun.label-role	おばあさん
+noun.label-role	おじいさん
+noun.label-role	ばあちゃん
+noun.label-role	じいちゃん
+noun.label-role	おばちゃん
+noun.label-role	おじちゃん
+noun.label-role	おばさん
+noun.label-role	おじさん
+noun.label-role	客
+noun.label-role	お客さん
+noun.label-role	子供
+noun.label-role	スタッフ
+noun.label-role	警察
+noun.label-role	守衛
+noun.label-role	審判
+noun.label-role	ネコ
+noun.label-role	猫
+noun.label-role	犬
+noun.label-role	魔物
+noun.label-role	騎士
+noun.label-role	兵士
+noun.label-role	部員
+noun.label-role	生徒
+noun.label-role	教師
+noun.label-role	医者
+
 noun.ongoing-ninaru	話題
 noun.ongoing-ninaru	噂
 noun.ongoing-ninaru	評判
@@ -421,6 +549,109 @@ noun.result-sareru	表示
 noun.result-sareru	拘束
 noun.result-sareru	掲載
 noun.result-sareru	確保
+
+noun.role	父
+noun.role	母
+noun.role	兄
+noun.role	姉
+noun.role	弟
+noun.role	妹
+noun.role	叔父
+noun.role	叔母
+noun.role	伯父
+noun.role	伯母
+noun.role	祖父
+noun.role	祖母
+noun.role	爺
+noun.role	婆
+noun.role	主人
+noun.role	奥
+noun.role	奥様
+noun.role	皆
+noun.role	俺
+noun.role	私
+noun.role	僕
+noun.role	自分
+noun.role	子供
+noun.role	子
+noun.role	お前
+noun.role	貴方
+noun.role	先生
+noun.role	先輩
+noun.role	後輩
+noun.role	部長
+noun.role	会長
+noun.role	店長
+noun.role	社長
+noun.role	委員長
+noun.role	校長
+noun.role	村長
+noun.role	監督
+noun.role	師匠
+noun.role	殿下
+noun.role	陛下
+noun.role	姫
+noun.role	王
+noun.role	王子
+noun.role	王女
+noun.role	女王
+noun.role	魔王
+noun.role	勇者
+noun.role	神
+noun.role	神様
+noun.role	下級生
+noun.role	上級生
+noun.role	生徒
+noun.role	男
+noun.role	女
+noun.role	女子
+noun.role	男子
+noun.role	少年
+noun.role	少女
+noun.role	客
+noun.role	前
+noun.role	屋
+noun.role	皆様
+noun.role	皆さん
+noun.role	親父
+noun.role	お袋
+noun.role	娘
+noun.role	息子
+noun.role	嫁
+noun.role	旦那
+noun.role	彼
+noun.role	彼女
+noun.role	誰
+noun.role	方
+noun.role	赤
+noun.role	坊
+noun.role	店員
+noun.role	黒服
+noun.role	邪神
+noun.role	お客
+noun.role	刑事
+noun.role	警部
+noun.role	博士
+noun.role	教授
+noun.role	医者
+noun.role	看護師
+noun.role	選手
+noun.role	コーチ
+noun.role	ウェイトレス
+noun.role	メイド
+noun.role	マスター
+noun.role	ギャラリー
+noun.role	シスター
+noun.role	ママ
+noun.role	パパ
+noun.role	オーナー
+noun.role	マネージャー
+noun.role	キャプテン
+noun.role	リーダー
+noun.role	ボス
+noun.role	お嬢
+noun.role	じい
+noun.role	ばあ
 
 noun.scene	後ろ
 noun.scene	前
@@ -473,6 +704,20 @@ noun.time-end	少し前
 noun.time-end	当初
 noun.time-end	瞬間
 noun.time-end	今
+
+particle.after-name	は
+particle.after-name	が
+particle.after-name	を
+particle.after-name	の
+particle.after-name	に
+particle.after-name	へ
+particle.after-name	と
+particle.after-name	も
+particle.after-name	や
+particle.after-name	で
+particle.after-name	よ
+particle.after-name	ね
+particle.after-name	さ
 
 particle.case-before-stem	を
 particle.case-before-stem	に
@@ -593,10 +838,73 @@ suffix.continuative	そうだ
 suffix.continuative	そうな
 suffix.continuative	そうです
 
+suffix.label-parent	の父
+suffix.label-parent	の母
+suffix.label-parent	の兄
+suffix.label-parent	の姉
+suffix.label-parent	の弟
+suffix.label-parent	の妹
+
+suffix.label-role	生徒
+suffix.label-role	女子
+suffix.label-role	男子
+suffix.label-role	部
+suffix.label-role	客
+suffix.label-role	員
+suffix.label-role	長
+suffix.label-role	者
+suffix.label-role	親
+suffix.label-role	性
+suffix.label-role	係
+suffix.label-role	手
+suffix.label-role	官
+suffix.label-role	師
+suffix.label-role	顧問
+suffix.label-role	補佐
+suffix.label-role	主将
+suffix.label-role	担当
+suffix.label-role	学生
+suffix.label-role	ＤＪ
+suffix.label-role	DJ
+suffix.label-role	たち
+suffix.label-role	達
+suffix.label-role	メンバー
+
+suffix.person-after-surname	達
+suffix.person-after-surname	家
+suffix.person-after-surname	氏
+suffix.person-after-surname	ら
+suffix.person-after-surname	一家
+suffix.person-after-surname	夫妻
+suffix.person-after-surname	夫婦
+suffix.person-after-surname	兄弟
+suffix.person-after-surname	姉妹
+suffix.person-after-surname	親子
+suffix.person-after-surname	一族
+suffix.person-after-surname	様
+suffix.person-after-surname	殿
+suffix.person-after-surname	君
+
 suffix.plural-pronoun	たち
 suffix.plural-pronoun	達
 suffix.plural-pronoun	ら
 suffix.plural-pronoun	ども
+
+suffix.title-in-name	先生
+suffix.title-in-name	先輩
+suffix.title-in-name	選手
+suffix.title-in-name	様
+suffix.title-in-name	殿
+suffix.title-in-name	君
+suffix.title-in-name	氏
+suffix.title-in-name	嬢
+suffix.title-in-name	家
+suffix.title-in-name	姉
+suffix.title-in-name	兄
+suffix.title-in-name	夫妻
+suffix.title-in-name	一家
+suffix.title-in-name	達
+suffix.title-in-name	たち
 
 suru.tail	ない
 suru.tail	なく

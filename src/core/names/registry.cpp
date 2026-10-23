@@ -4,12 +4,12 @@
 #include <array>
 #include <initializer_list>
 #include <set>
-#include <span>
 #include <utility>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/names/chars.h"
 #include "core/text/utf8.h"
 #include "core/names/labels.h"
@@ -23,9 +23,6 @@ namespace hdTrans::names {
 using namespace internal;
 
 namespace {
-
-// The katakana honorifics a katakana name may end in (ヨウタサン).
-constexpr std::string_view kKatakanaHonorifics[] = {"サン", "サマ", "クン", "チャン", "ドノ"};
 
 // The numbers one to ten read in katakana, after a name in a numbered name (サーラサン).
 constexpr std::string_view kNumberReadings[] = {"イチ", "ニ", "サン", "ヨン", "ゴ", "ロク", "ナナ", "ハチ", "キュウ", "ジュウ"};
@@ -83,21 +80,13 @@ bool HasSuffixOf(std::string_view text, std::string_view suffix) {
     return text.size() > suffix.size() && text.ends_with(suffix);
 }
 
-// Whether lst holds s.
-bool Contains(std::span<const std::string_view> lst, std::string_view s) {
-    for (const std::string_view w : lst) {
-        if (w == s) return true;
-    }
-    return false;
-}
-
 // Whether the next text after a name ends the name: no hiragana, or a particle or an
 // honorific.
 bool NameEnd(std::string_view text) {
     if (text.empty()) return true;
     const char32_t c = RuneAt(text, 0).cp;
     if (!IsHiragana(c) || InRunes(c, "はがをのにへともやでかだ")) return true;
-    for (const std::string_view h : Honorifics()) {
+    for (const std::string_view h : dict::ClassMembers("honorific.name")) {
         if (text.starts_with(h)) return true;
     }
     return false;
@@ -880,7 +869,9 @@ std::pair<std::string, std::string> Registry::GivenSplit(std::string_view t) {
         const DictFlags fx = Flags(x), fy = Flags(y);
         if (!(fx.surname || fx.layerSurname) || fx.common || fx.role) continue;
         if (!(fy.given || fy.layerGiven) || fy.role) continue;
-        if (Contains(PersonSuffixes(), y) || Contains(Honorifics(), y) || Crossed(t, i)) continue;
+        if (dict::InClass("suffix.person-after-surname", y) || dict::InClass("honorific.name", y) || Crossed(t, i)) {
+            continue;
+        }
         return {std::string(x), std::string(y)};
     }
     return {"", ""};
@@ -1021,7 +1012,7 @@ void Registry::FindSiblingNames() {
     for (const auto& [t, c] : kana_) {
         (void)c;
         std::string_view head;
-        for (const std::string_view h : kKatakanaHonorifics) {
+        for (const std::string_view h : dict::ClassMembers("honorific.katakana-name")) {
             if (t.size() > h.size() && std::string_view(t).ends_with(h)) head = std::string_view(t).substr(0, t.size() - h.size());
         }
         if (RuneCount(head) < 2) continue;
@@ -1030,7 +1021,9 @@ void Registry::FindSiblingNames() {
             const std::string_view tail = std::string_view(it->first).substr(head.size());
             if (tail.empty() || it->first == t || tail.starts_with("ー") || prose_.count(it->first) == 0) continue;
             bool honorific = false;
-            for (const std::string_view h : kKatakanaHonorifics) honorific = honorific || tail.starts_with(h);
+            for (const std::string_view h : dict::ClassMembers("honorific.katakana-name")) {
+                honorific = honorific || tail.starts_with(h);
+            }
             if (!honorific) siblings++;
         }
         if (siblings >= 2) siblings_.insert(t);
@@ -1133,7 +1126,7 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
     const std::vector<Run> runs = RunsOf(line);
     auto okRight = [&](std::string_view p) {
         if (p.empty() || acc.count(std::string(p)) > 0) return true;
-        for (const std::string_view k : TitleSuffixes()) {
+        for (const std::string_view k : dict::ClassMembers("suffix.title-in-name")) {
             if (!p.starts_with(k)) continue;
             const std::string_view rest = p.substr(k.size());
             if (rest.empty() || acc.count(std::string(rest)) > 0) return true;
