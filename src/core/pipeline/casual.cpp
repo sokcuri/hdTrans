@@ -170,7 +170,7 @@ bool NaTsu(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥」]|$)
+// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥・」]|$)
 bool Nna(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
@@ -180,7 +180,7 @@ bool Nna(std::string_view s, size_t pos, Match& m) {
     if (OneOf(s, q, U"よぁー")) return Done(s, m, p, q, 2);
     const bool ok = Repeat(s, p, InSet(U"っッ"), 0, 1, [&](size_t r) {
         size_t t = r;
-        if (!OneOf(s, t, U"！!、。？?…‥」")) return false;
+        if (!OneOf(s, t, U"！!、。？?…‥・」")) return false;
         return Done(s, m, p, t, 2);
     });
     if (ok) return true;
@@ -629,8 +629,10 @@ std::string RewriteCasual(std::string_view in) {
         return Cat({"んじゃ", g.group[3]});
     });
     text = ReplaceAll(text, Tsuu, [](const Match&) { return std::string("という"); });
-    text = ReplaceAll(text, NaTsu, [](const Match& m) { return Cat({m.group[1], "な", m.group[2]}); });
+    // The prohibition spelled with ん is read first, so that its emphasis っ goes as that of
+    // るな does (すんなッ！ するな！).
     text = ReplaceAll(text, Nna, [](const Match& m) { return Cat({m.group[1], "るな", m.group[2]}); });
+    text = ReplaceAll(text, NaTsu, [](const Match& m) { return Cat({m.group[1], "な", m.group[2]}); });
     text = ReplaceAll(text, Sun, [](const Match& m) {
         const Match g = Rematch(m, Sun);
         return ContractedRu(Cat({g.group[1], "す"}), g.group[2]);

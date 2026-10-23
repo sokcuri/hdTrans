@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:jisjk:344556	「聞くな、耳が穢れる」	「듣지 마, 귀가 더럽혀진다」	fix	local-ending
+dict:jisjk:344556	「あまり見るな、恥ずかしい」	「너무 보지 마, 부끄럽다」	fix	local-ending
+dict:jisjk:344556	「こら、邪魔するな、上手く動けないだろう」	「이봐, 방해하지 마, 잘 움직일 수 없을 것이다」	fix	local-ending
+dict:jisjk:344556	ふざけるな、負けるかよっ！	장난치지 마, 질까 보냐!	fix	local-ending
+dict:jisjk:344556	絶対にはぐれるな、そこを動くな、	절대로 놓치지 마, 거기를 움직이지 마,	fix	local-ending
+dict:jisjk:344556	行くな。	가지 마.	keep	local-ending
+normalize:exclamation-na	よく食べるな、お前	잘 먹는구나, 너	keep	normalize
+normalize:exclamation-na	困るな、それは	곤란하구나, 그것은	keep	normalize
+normalize:prohibition-nna	「真似すんな、小ザル！」	「흉내내지 마, 소잘!」	fix	normalize
+normalize:prohibition-nna	「泣きそうな顔すんなっ！　ジョークだから！」	「울 것 같은 얼굴 하지 마! 농담이니까!」	fix	normalize
+normalize:prohibition-nna	「オメェら抜け駆けすんなッ！」	「너희 빠지고 달리고 하지 마!」	fix	normalize
+normalize:prohibition-nna	大した事ないだろ？心配すんな・・・	별일 아니지? 걱정하지 마···	fix	normalize
+normalize:prohibition-nna	交渉はすんなり進んだ。	교섭은 순조롭게 나아갔다.	keep	normalize
