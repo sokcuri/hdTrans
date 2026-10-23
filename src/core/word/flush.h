@@ -120,7 +120,6 @@ void QuestionCopula(Flusher& f);
 void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void KaraSource(Flusher& f);
 void NiAfterAdverb(Flusher& f);
 void NoAfterNa(Flusher& f);
 void ShortPossessive(Flusher& f);

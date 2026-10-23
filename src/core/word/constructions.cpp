@@ -7,6 +7,7 @@
 #include "core/dict/classes.h"
 #include "core/dict/codes.h"
 #include "core/rules/match.h"
+#include "core/text/unicode.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
 
@@ -29,6 +30,8 @@ constexpr NamedFeature kFeatures[] = {
     {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }},
     {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
     {"last", [](Flusher&, const Item* it) { return it->next == nullptr; }},
+    // A digit ends the text before the word in its token (3から).
+    {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };
 
 struct FieldSpelling {

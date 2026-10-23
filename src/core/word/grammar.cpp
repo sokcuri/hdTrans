@@ -1810,22 +1810,6 @@ void EvenBeforePassive(Flusher& f) {
 
 namespace {
 
-// Whether s starts with one of the words.
-bool StartsWithAny(std::string_view s, std::span<const std::string_view> words) {
-    for (const std::string_view w : words) {
-        if (s.starts_with(w)) return true;
-    }
-    return false;
-}
-
-// Whether s ends with one of the words.
-bool EndsWithAny(std::string_view s, std::span<const std::string_view> words) {
-    for (const std::string_view w : words) {
-        if (s.ends_with(w)) return true;
-    }
-    return false;
-}
-
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty.
 bool NumberSurface(std::string_view s) {
     if (s.empty()) return false;
@@ -1843,30 +1827,6 @@ bool AdverbTarget(std::string_view ko) {
 }
 
 }  // namespace
-
-void KaraSource(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->group->surface.starts_with("から") || it->selected < 0) continue;
-        Entry* e = it->group->At(it->selected);
-        if (e == nullptr || !e->dst.starts_with("(으)로부터")) continue;
-        const Item* n = it->next;
-        if (n != nullptr &&
-            (n->group->surface == "が" || StartsWithAny(n->group->surface, dict::ClassMembers("word.kara-source-keep")))) {
-            continue;
-        }
-        const std::string_view before = std::string_view(it->text).substr(0, static_cast<std::size_t>(it->start));
-        const char32_t last = DecodeLastRune(before).cp;
-        const Item* p = it->prev;
-        const std::string_view rest = std::string_view("(으)로부터");
-        if (EndsWithAny(before, dict::ClassMembers("noun.time-end")) || text::IsDigit(last) || RuneIn(last, "番号")) {
-            it->AssignEntrySurface(it->selected, "부터" + e->dst.substr(rest.size()));
-        } else if (p != nullptr && p->selected >= 0 && !p->detail->Yougo() && At(p->Code(p->selected), 0) == '1' &&
-                   (Has(p->Attr(p->selected), "VPl") || Has(p->Attr(p->selected), "VBp") ||
-                    dict::InClass("noun.scene", p->group->surface))) {
-            it->AssignEntrySurface(it->selected, "에서" + e->dst.substr(rest.size()));
-        }
-    }
-}
 
 void NiAfterAdverb(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
