@@ -94,7 +94,6 @@
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
-//= speech.polite-talk	The marks of speech.polite but the command なさい, which make a quote polite talk (です, ます, ください): でしょ there seeks agreement politely (知らなかったでしょ 몰랐죠).
 //= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
 //= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
@@ -1670,20 +1669,6 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
-
-speech.polite-talk	です
-speech.polite-talk	ます
-speech.polite-talk	ました
-speech.polite-talk	まして
-speech.polite-talk	ません
-speech.polite-talk	でした
-speech.polite-talk	ましょう
-speech.polite-talk	でしょう
-speech.polite-talk	ください
-speech.polite-talk	下さい
-speech.polite-talk	ませ
-speech.polite-talk	いただきたい
-speech.polite-talk	ていただく
 
 stem.compound-particle	つ
 stem.compound-particle	対し
