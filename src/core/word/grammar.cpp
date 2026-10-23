@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/output/korean.h"
 #include "core/output/families.h"
@@ -356,6 +357,183 @@ void OwnPassives(Flusher& f) {
         it->detail->record = 0;
         it->lexical = true;
         it->AssignEntrySurface(it->selected, c.target);
+    }
+}
+
+namespace {
+
+// Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様).
+constexpr std::string_view kHonorificTitles[] = {
+    "様", "さま", "殿", "殿下", "陛下", "閣下", "猊下", "先生", "王子", "王女", "王妃", "国王", "皇帝", "皇后",
+    "皇太子", "女王", "母上", "父上", "兄上", "姉上",
+};
+
+// Godan stems of permitting, entrusting and taking away, whose subject before the object and
+// (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+constexpr std::string_view kReceiverVerbs[] = {"許", "任", "託", "奪", "盗", "取り上げ"};
+
+// Whether noun item n names someone the speaker honours.
+bool HonouredPerson(const Item* n) {
+    if (n == nullptr || n->detail->Yougo() || n->selected < 0) return false;
+    const std::string_view s = n->group->surface;
+    for (const std::string_view t : kHonorificTitles) {
+        if (s.ends_with(t)) return true;
+    }
+    return false;
+}
+
+// The respectful reading of the passive or potential (ら)れ of item it: going back through the
+// sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
+// otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
+// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた). A
+// transitive verb also needs its object before that subject: without one its subject is what
+// the act is done to (陛下が幽閉された, 姫様は許された).
+bool RespectfulReading(const Item* it, bool transitive) {
+    bool object = false;
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.starts_with("によ")) {
+            return false;
+        } else if (s == "に" || s == "には" || s == "から") {
+            const Item* a = p->prev;
+            if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
+        } else if (s == "を") {
+            object = true;
+        } else if (transitive && !object && (s == "は" || s == "が" || s == "も")) {
+            return false;
+        } else if (s == "は" || s == "が" || s == "も") {
+            return HonouredPerson(p->prev);
+        } else if (s.empty() || Has("。！？「」『』!?", s) ||
+                   ((s == "、" || s == ",") && p->prev != nullptr && p->prev->detail->Yougo())) {
+            break;
+        }
+    }
+    return false;
+}
+
+// Whether a verb part code takes an object (class 3 to 6, M431 書く; not M418 帰る).
+bool TransitiveCode(std::string_view code) { return At(code, 1) >= '3' && At(code, 1) <= '6'; }
+
+// The honorific target of the conjugating verb target text (쓰&AF@ 쓰시다); "" when it has none.
+std::string HonorificTarget(Flusher& f, std::string_view text) {
+    // Verbs with their own honorific word.
+    constexpr std::string_view kSuppletive[][2] = {
+        {"말하다", "말씀하시다"}, {"먹다", "드시다"}, {"마시다", "드시다"}, {"자다", "주무시다"}, {"있다", "계시다"},
+        {"죽다", "돌아가시다"},
+    };
+    if (text.size() < 4 || text.back() != '@' || text[text.size() - 4] != '&') return {};
+    const std::string_view head = text.substr(0, text.size() - 4);
+    std::string lemma;
+    const std::string plain = output::Lemma(text, f.families);
+    for (const auto& [verb, honorific] : kSuppletive) {
+        if (plain == verb || plain.ends_with(" " + std::string(verb))) {
+            lemma = plain.substr(0, plain.size() - verb.size()) + std::string(honorific);
+        }
+    }
+    if (lemma.empty()) {
+        const std::string_view stem = LookupSource(std::string(text.substr(text.size() - 4)) + "A", f.families);
+        if (stem.empty()) return {};
+        lemma = std::string(head) + std::string(stem) + "시다";
+    }
+    output::Conjugated c = output::Conjugating(lemma, '&', "", f.families);
+    return c.error.empty() ? std::move(c.target) : std::string();
+}
+
+// The honorific target of the verb whose passive stem is surface (書かれ 書 쓰&AF@ 쓰시다), its
+// default record first; "" when the dictionary has no such verb.
+std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitive) {
+    // The passive endings by the conjugation kinds (the last digit of the part code) of the verbs
+    // they follow; '?' is 行く.
+    constexpr std::string_view kEndings[][2] = {
+        {"られ", "78"}, {"され", "3"}, {"かれ", "1?"}, {"がれ", "2"}, {"たれ", "4"}, {"なれ", "<"},
+        {"ばれ", "6"},  {"まれ", "5"}, {"われ", "0"},
+    };
+    for (const auto& [ending, kinds] : kEndings) {
+        if (!surface.ends_with(ending) || surface.size() == ending.size()) continue;
+        const std::string_view base = f.w.arena.Keep(std::string(surface.substr(0, surface.size() - ending.size())));
+        if (InSet(kPassiveVerbs, base) || InSet(kObjectPassiveVerbs, base) || InSet(kReceiverVerbs, base)) return {};
+        const Lookup found = f.w.DoLookup(base, kModeGeneral);
+        const Record* verb = nullptr;
+        for (const Record* r = found.records; r != nullptr; r = r->child) {
+            if (r->source != base || At(r->partCode, 1) != '4' || !Has(kinds, std::string(1, At(r->partCode, 3))) ||
+                !r->target.ends_with("@")) {
+                continue;
+            }
+            if (verb == nullptr || Has(r->semantic, "XXX")) verb = r;
+            if (Has(r->semantic, "XXX")) break;
+        }
+        if (verb == nullptr) return {};
+        transitive = TransitiveCode(verb->partCode);
+        return HonorificTarget(f, verb->target);
+    }
+    return {};
+}
+
+}  // namespace
+
+void RespectfulPassive(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->group->entries.empty() || it->selected < 0 || it->lexical) continue;
+        const std::string_view surface = it->group->surface;
+        const int record = it->detail->record;
+        if (record == 1 || record == 4) {
+            // A verb whose (ら)れ is the passive by itself or a potential before a negative or a
+            // condition keeps its reading.
+            if (InSet(kPassiveVerbs, surface) || InSet(kObjectPassiveVerbs, surface) || InSet(kReceiverVerbs, surface) ||
+                CompoundAction(surface)) {
+                continue;
+            }
+            std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
+            if (record == 4) {
+                if (!rest.starts_with("られ") || InSet(kAbilityVerbs, surface)) continue;
+                rest.remove_prefix(std::string_view("られ").size());
+                if (rest.starts_with("な") || rest.starts_with("ず") || rest.starts_with("ぬ") || rest.starts_with("ん") ||
+                    rest.starts_with("れば") || rest.starts_with("たら")) {
+                    continue;
+                }
+            }
+            if (!RespectfulReading(it, TransitiveCode(it->Code(it->selected)))) continue;
+            const int count = static_cast<int>(it->group->entries.size());
+            std::vector<std::string> targets(static_cast<std::size_t>(count));
+            bool ok = true;
+            for (int slot = 0; slot < count && ok; slot++) {
+                targets[static_cast<std::size_t>(slot)] = HonorificTarget(f, it->EntryText(slot));
+                ok = !targets[static_cast<std::size_t>(slot)].empty();
+            }
+            if (!ok) continue;
+            it->detail->record = 0;
+            it->lexical = true;
+            for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
+            continue;
+        }
+        // A word written as a passive or potential stem (され, 来られ, 書かれ): its honorific
+        // candidate, or the honorific of the verb it is made from.
+        if (record != 0 || !surface.ends_with("れ") || it->EntryText(it->selected).ends_with("&AE@")) continue;
+        // Only a passive or potential Korean (쓰여지다, 결정되다, 올 수 있다), not a verb of its own
+        // (生まれ 태어나다).
+        const std::string chosen = ItemLemma(f, it, it->selected);
+        if (!chosen.ends_with("지다") && !chosen.ends_with("되다") && !Has(chosen, "수 있") && !Has(chosen, "수 없")) {
+            continue;
+        }
+        const int count = static_cast<int>(it->group->entries.size());
+        int honorific = -1;
+        for (int slot = 0; slot < count && honorific < 0; slot++) {
+            if (it->EntryText(slot).ends_with("&AE@")) honorific = slot;
+        }
+        if (honorific >= 0) {
+            if (!RespectfulReading(it, false)) continue;
+            it->SelectCandidate(honorific, {Provenance::Rewrite});
+            // The object the passive made a subject is the object again (本を説明された 책을).
+            for (Item* p = it->prev; p != nullptr; p = p->prev) {
+                if (p->group->surface != "を") continue;
+                if (p->selected >= 0 && p->EntryText(p->selected) == "(이)가") p->AssignEntrySurface(p->selected, "(을)를");
+                break;
+            }
+            continue;
+        }
+        bool transitive = false;
+        const std::string target = BaseVerbTarget(f, surface, transitive);
+        if (!target.empty() && RespectfulReading(it, transitive)) it->AssignEntrySurface(it->selected, target);
     }
 }
 

@@ -53,6 +53,9 @@ bool Person(std::string_view attr);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
+// The passive or potential (ら)れ of a verb whose subject names someone the speaker honours is
+// the respectful form: 書かれた 쓰셨다, 来られた 오셨다.
+void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
