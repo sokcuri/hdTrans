@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+compose:number-noun	1レベル上がった。	1레벨 올랐다.	fix	compose
+compose:number-noun	２０ページを開く。	20페이지를 편다.	fix	compose
+compose:number-noun	3学期が始まった。	3학기가 시작되었다.	fix	compose
+compose:number-noun	8等分にする。	8등분으로 한다.	fix	compose
+compose:number-noun	第五戦隊が出撃。	제5전대가 출격.	fix	compose
+compose:number-noun	第三王子だ。	제3왕자다.	fix	compose
+compose:number-noun	1 レベルだ。	1 레벨이다.	keep	compose
+compose:number-noun	A レベルだ。	A 레벨이다.	keep	compose
+compose:number-noun	Aランクの冒険者。	A랭크의 모험가.	keep	compose
+compose:number-noun	レベルが1上がった。	레벨이 1 올랐다.	keep	compose
+compose:number-noun	二匹の猫。	두 마리의 고양이.	keep	compose
+compose:number-noun	キハ208車両と	키하 208 차량과	keep	compose
+compose:number-noun	≫372過疎	≫372 과소	keep	compose

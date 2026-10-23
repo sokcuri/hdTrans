@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:genre-terms:2	必ず騎士団長になるから	반드시 기사단장이 되니까	fix	lookup
-dict:genre-terms:14	この国の第一王子様であったようだ。	이 나라의 제1 왕자님인 것 같다.	fix	lookup
+dict:genre-terms:14	この国の第一王子様であったようだ。	이 나라의 제1왕자님인 것 같다.	fix	lookup
 dict:genre-terms:7	傭兵ギルドの受付嬢。	용병 길드의 접수원.	fix	lookup
 dict:genre-terms:6	昔はちょっとは名の知れた冒険者だった	옛날은 조금은 이름이 알려진 모험가였다	fix	lookup
 dict:genre-terms:4	竜騎士の存在しない蛮族の国と思われます。	용기사의 존재하지 않는 오랑캐의 나라라고 생각됩니다.	fix	lookup

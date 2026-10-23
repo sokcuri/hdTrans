@@ -255,6 +255,69 @@ bool HangulWord(std::string_view s) {
     return true;
 }
 
+// The kanji digits a number is written with digit by digit (二〇二六).
+constexpr std::u32string_view kNumerals = U"〇○一二三四五六七八九";
+
+// Whether item k is written straight after item k - 1 in the source.
+bool Adjoins(const std::vector<ResolvedItem>& items, int k) {
+    return k > 0 && items[k].tokenIndex == items[k - 1].tokenIndex &&
+           items[k].offset == items[k - 1].offset + items[k - 1].length;
+}
+
+// Whether the common noun of item n is written straight after the number of item i in the
+// source (1レベル, ２０ページ, 3学期, 第五戦隊): the number counts it, and the Korean joins
+// them (1레벨, 20페이지, 3학기, 제5전대). A number that labels rather than counts stands apart:
+// a time or a year of four digits (2300 제독, 2026 특별), a number after ≫, : or / (a reply
+// number, a time, a date), and one written on to a katakana or Latin name (キハ208 차량,
+// AK47 돌격소총); so do a name after it (9.11 미국) and a verbal noun that is the predicate
+// (HPが1回復した 1 회복했다).
+bool CountedNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
+    const ResolvedItem& a = items[i];
+    const ResolvedItem& b = items[n];
+    if (n != i + 1 || !Adjoins(items, n) || HasRune(kNumerals, text::DecodeRune(b.surface).cp) ||
+        b.surface.starts_with("第")) {
+        return false;
+    }
+    // The number the item ends, written digit by digit (2026, 二〇二六) or with separators.
+    const std::string_view token = tokens[a.tokenIndex].text;
+    std::string_view number = token.substr(0, static_cast<std::size_t>(a.offset + a.length));
+    std::size_t digits = 0;
+    bool grouped = false;
+    for (char32_t r = LastRune(number); r != 0; r = LastRune(number)) {
+        if (r == U',' || r == U'，' || r == U'.' || HasRune(U"十百千万億", r)) {
+            grouped = true;
+        } else if (text::IsDigit(r) || HasRune(kNumerals, r)) {
+            digits++;
+        } else {
+            break;
+        }
+        number = DropLastRune(number);
+    }
+    if (digits >= 4 && !grouped) return false;
+    const char32_t before = !number.empty()     ? LastRune(number)
+                            : a.tokenIndex > 0 ? LastRune(tokens[a.tokenIndex - 1].text)
+                                               : 0;
+    const char32_t ascii = before >= U'Ａ' && before <= U'ｚ' ? before - 0xFEE0 : before;
+    if (HasRune(U"≫＞>#＃:：/／", before) || tokenizer::Class(before) == tokenizer::kClassKatakana ||
+        (ascii >= U'A' && ascii <= U'Z') || (ascii >= U'a' && ascii <= U'z')) {
+        return false;
+    }
+    const char32_t lead = text::DecodeRune(b.surface).cp;
+    if (!IsKanji(lead) && tokenizer::Class(lead) != tokenizer::kClassKatakana) return false;
+    const std::string_view code = Code(b), tags = GAttr(b);
+    if (code.size() < 2 || code[0] != '1' || code[1] == '3' || Contains(tags, "Wa") || Contains(tags, "Wb")) return false;
+    if (Contains(tags, "Hd")) {
+        if (n + 1 >= static_cast<int>(items.size())) return false;
+        const ResolvedItem& c = items[n + 1];
+        constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
+        if (c.tokenIndex != b.tokenIndex ||
+            std::any_of(std::begin(kSuruStarts), std::end(kSuruStarts), [&](std::string_view p) { return c.surface.starts_with(p); })) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
 constexpr std::string_view kOneDay = "하루";
 constexpr std::string_view kFirstDay = "첫날";
@@ -967,8 +1030,16 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 const bool space = Contains(tags, "Wb") && nextKind != '1';
                 return Result(std::move(t), space);
             }
+            // A number joins a counter after it (3개) and a noun it counts (CountedNoun: 1레벨,
+            // 第五戦隊 제5전대); before other nouns it stands apart.
+            if (item.surface.starts_with("第") && text::IsDigit(LastRune(t)) && CountedNoun(tokens, items, i, nextIndex)) {
+                return Result(std::move(t), false);
+            }
             if (IsDigit(First(t))) {
-                if (nextKind == '1') return Result(std::move(t), !Contains(nextTags, "Ct"));
+                if (nextKind == '1') {
+                    return Result(std::move(t), !Contains(nextTags, "Ct") &&
+                                                    !(text::IsDigit(LastRune(t)) && CountedNoun(tokens, items, i, nextIndex)));
+                }
                 if (item.tokenIndex - 1 >= 0 && previous >= 0 && tokens[next.tokenIndex].type != 15 &&
                     tokens[next.tokenIndex].type != tokenizer::kTypeNumber &&
                     item.tokenIndex - items[previous].tokenIndex == 1) {

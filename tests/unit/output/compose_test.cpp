@@ -168,6 +168,21 @@ HD_TEST(compose_sentence_token_ranges) {
     std::printf("compose 4000 sentences: %.3f ms\n", std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count());
 }
 
+// A number joins the noun it counts when the source writes them together; one that labels,
+// a name after it and a verbal noun that is the predicate stand apart.
+HD_TEST(compose_number_before_noun) {
+    const CompositionCase cases[] = {
+        {{{"1", "110", "Nd", "1"}, {"レベル", "110", "", "레벨"}}, {1, 2}, "1레벨."},
+        {{{"3", "110", "Nd", "3"}, {"学期", "110", "", "학기"}}, {1, 2}, "3학기."},
+        {{{"第五", "110", "", "제5"}, {"戦隊", "110", "", "전대"}}, {1, 2}, "제5전대."},
+        {{{"2026", "110", "Nd", "2026"}, {"特別", "110", "", "특별"}}, {1, 2}, "2026 특별."},
+        {{{"キハ", "110", "", "키하"}, {"208", "110", "Nd", "208"}, {"車両", "110", "", "차량"}}, {1, 2, 3}, "키하 208 차량."},
+        {{{"9", "110", "Nd", "9"}, {"米国", "130", "", "미국"}}, {1, 2}, "9 미국."},
+        {{{"1", "110", "Nd", "1"}, {"回復", "110", "Hd", "회복"}}, {1, 2}, "1 회복."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 HD_TEST(compose_native_counts) {
     const CompositionCase cases[] = {
         {{{"三", "110", "NjNd", "3"}, {"匹", "110", "Ct", "마리"}}, {2}, "세 마리."},

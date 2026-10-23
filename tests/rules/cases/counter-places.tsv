@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:w:401	病院も3か所行って	병원도 세 군데 가	fix	lookup
-dict:w:401	階段は１フロアに２か所あるみたい	계단은 1 플로어에 두 군데 있는 것 같다	fix	lookup
+dict:w:401	階段は１フロアに２か所あるみたい	계단은 1플로어에 두 군데 있는 것 같다	fix	lookup
 dict:w:401	敵の対空陣地を二か所確認	적의 대공 진지를 두 군데 확인	fix	lookup
 dict:counter-places:5	地図上の七箇所から光の柱が立ち	지도상의 일곱 군데에서 빛의 기둥이 서	fix	lookup
 dict:jisjk:105215	センサーは二ケ所ある。	센서는 두 군데 있다.	fix	lookup

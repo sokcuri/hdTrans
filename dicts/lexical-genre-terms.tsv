@@ -13,10 +13,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 公子	공자	N110	VHn		GN				replace			genre-terms:11
 王弟	왕제	N110	VHn		GN				replace			genre-terms:12
 王子妃	왕자비	N110	VHn		GN				replace			genre-terms:13
-第一王子	제1 왕자	N110	VHn		GN				replace			genre-terms:14
-第一王女	제1 왕녀	N110	VHn		GN				replace			genre-terms:15
-第一皇子	제1 황자	N110	VHn		GN				replace			genre-terms:16
-第一皇女	제1 황녀	N110	VHn		GN				replace			genre-terms:17
+第一王子	제1왕자	N110	VHn		GN				replace			genre-terms:14
+第一王女	제1왕녀	N110	VHn		GN				replace			genre-terms:15
+第一皇子	제1황자	N110	VHn		GN				replace			genre-terms:16
+第一皇女	제1황녀	N110	VHn		GN				replace			genre-terms:17
 公爵位	공작위	N110			GN				replace			genre-terms:18
 侯爵位	후작위	N110			GN				replace			genre-terms:19
 伯爵位	백작위	N110			GN				replace			genre-terms:20
