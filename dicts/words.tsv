@@ -23157,7 +23157,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 行違い	엇갈림	N110			GN				xxx llm		いきちがい	w:23135
 行違い	어긋남	N110	UTh		GN				llm		いきちがい	w:23136
 行革	행정 개혁	N110			GN				xxx llm	1		w:23137
-術	술	N110			GN				xxx llm	1		w:23138
+術	술법	N110			GN				xxx llm	1		w:23138
 術者	시전자	N110			GN				llm			w:23139
 術語	전문 용어	N110			GN				xxx llm	1		w:23140
 街々	거리거리	N110			GN						まちまち	w:23141
