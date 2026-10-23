@@ -3104,7 +3104,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 闇夜の鉄砲	무모한 시도	N110			GN				llm			i:3099
 闇夜の礫	무모한 시도	N110			GN				llm			i:3100
 山高きが故に貴からず	산이 높다고 귀한 것은 아니지	A9D0			GN				llm			i:3101
-病は気から	병은 마음먹기에 달렸다	A9D0			GN							i:3102
+病は気から	병은 마음먹기 나름	A9D0			GN							i:3102
 柳の下にいつも泥鰌はおらぬ	버드나무 아래 늘 미꾸라지가 있지는 않아	A9D0			GN				llm			i:3103
 柳の下に何時も泥鰌は居らぬ	버드나무 아래 늘 미꾸라지가 있지는 않아	A9D0			GN				llm			i:3104
 柳に雪折れなし	부드러운 것이 오래가는 법	A9D0			GN				llm			i:3105
@@ -6185,7 +6185,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 胃袋を掴	입맛을 사로&FK@	M425		Pn	GN				llm			i:6181
 良い年をお迎えください	좋은 새해 맞으세요	A9D0			GN				llm			i:6182
 良い年をお迎え下さい	좋은 새해 맞으세요	A9D0			GN				llm			i:6183
-都合をつけ	시간을 내&CJ@	M427		Pn	GN							i:6184
+都合をつけ	시간을 &A6@	M427		Pn	GN							i:6184
 都合を付け	시간을 &A6@	M427		Pn	GN				llm			i:6185
 目を背け	시선을 돌&AA@	M427		Pn	GN				llm			i:6186
 兜を脱	두 손 &L4@	M422		Pn	GN				llm			i:6187
