@@ -726,14 +726,30 @@ constexpr std::string_view kResultVerbs[] = {
     "混じ", "死", "太", "痩せ", "決ま", "開", "閉じ", "腫れ", "枯れ", "割れ", "汚れ", "曲が", "折れ", "破れ", "崩れ", "乾",
     "冷え", "腐", "詰ま", "埋ま", "刺さ", "慣れ", "晴れ", "曇", "凍", "外れ", "取れ", "引きこも", "引き籠も", "惚れ", "ハマ",
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
-    "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌",
+    "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌", "取り残",
     "座り込", "座りこ", "しゃがみ込", "しゃがみこ", "へたり込", "へたりこ", "屈み込", "かがみ込", "倒れ込", "倒れこ",
     "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ",
 };
 
+// Whether stem is a result verb of kResultVerbs, or a compound or phrase that ends in one of
+// two or more characters that starts with a kanji (根性が曲が 曲が, 折れ曲が 曲が); a single kanji
+// matches only itself (目立 is no 立).
+bool ResultVerbStem(std::string_view stem) {
+    // 見惚れる is gazing, not having fallen for someone.
+    static constexpr std::string_view kActions[] = {"見惚れ", "見とれ"};
+    if (InSet(kResultVerbs, stem)) return true;
+    if (InSet(kActions, stem)) return false;
+    for (const std::string_view v : kResultVerbs) {
+        if (stem.size() > v.size() && stem.ends_with(v) && text::RuneCount(v) >= 2 && text::IsKanji(text::DecodeRune(v).cp)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Stems of the verbs of resultState whose state reads as the Korean past (亡くなっているから
-// 돌아가셨으니까, 亡くなっている人 돌아가신 사람).
-constexpr std::string_view kPastResultVerbs[] = {"亡くな"};
+// 돌아가셨으니까, 古びている本 오래된 책).
+constexpr std::string_view kPastResultVerbs[] = {"亡くな", "生き残", "古び"};
 
 std::string ExistentialToVerb(Flusher& f, std::string_view rest);
 
@@ -818,7 +834,7 @@ void ResultState(Flusher& f) {
         if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
         const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
         const bool past = it->detail->record == 0 && !it->lexical && InSet(kPastResultVerbs, stem);
-        const bool state = past || (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
+        const bool state = past || (it->detail->record == 0 && !it->lexical && (ResultVerbStem(stem) || nounPassive) && !object) ||
                            ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem)) ||
                            (it->detail->record <= 1 && GrammarCode(it->GAttr(it->selected), "Dx") &&
                             !it->EntryText(it->selected).ends_with("&HN@"));
