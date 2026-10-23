@@ -6711,7 +6711,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いい子にする	착하게 있어	A9D0			GN				llm			i:6707
 良い子にする	착하게 있어	A9D0			GN				llm			i:6708
 教皇の座	교황좌	N110			GN				llm			i:6709
-頭がいっぱい	머릿속이 가득해	A9D0			GN				llm			i:6710
+頭がいっぱい	머릿속이 가득%A1@	G8U0			GN				llm			i:6710
 傷の舐め合い	서로 상처를 핥아주기	A9D0			GN				llm			i:6711
 傷の舐めあい	서로 상처를 핥아주기	A9D0			GN				llm			i:6712
 ラットレース	무한 경쟁	N110			GN							i:6713

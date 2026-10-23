@@ -305424,9 +305424,9 @@ ttt	ttt	K110			GN				jisjk:201744
 胸がすっと	가슴이 후련&Mf@	M429		Va	GN				jisjk:266593		
 胸がつかえ	가슴이 막&AW@	M427			GN				jisjk:117014		
 胸がつぶれ	가슴이 찢어&AL@	M427			GN				jisjk:118196		
-胸が一杯	가슴이 가득	N110			GN				jisjk:260744		
+胸が一杯	가슴이 벅%F2@	G8U0			GN				jisjk:260744		
 胸が一杯にな	가슴이 벅차&E6@	M428			GN				jisjk:116992		
-胸が一杯の	가슴이 가득 한	I110			GN				jisjk:260743		
+胸が一杯の	가슴이 벅찬	I110			GN				jisjk:260743		
 胸が張り裂け	가슴이 찢어&AL@	M428		Pn	GN				jisjk:116994		
 胸が波立	가슴이 울렁거&AA@	M414			GN				jisjk:96102		
 胸が焼け	가슴이 &AR@	M427			GN				jisjk:116996		
@@ -306365,7 +306365,7 @@ ttt	ttt	K110			GN				jisjk:201744
 腹	속마음	N110			GN	1124	||1 &&3 P+1== "2**" S+2== "読" P+2== "4**"	腹 뒤에 조사와 読 동사가 이어지면 속마음을 고른다. (미발동: rare-context)	jisjk:116216		
 腹	복	N110		On	GN				jisjk:259208		
 腹いせ	울분	I110	UFl		GN				jisjk:70446		
-腹いっぱい	전부	I110			GN				jisjk:70447		
+腹いっぱい	배%EE@	G8U0			GN				jisjk:70447		
 腹がすわ	각오&AV@	M428			GN				jisjk:117903		
 腹がな	배짱이 $FA@	H7N0			GN				jisjk:137704		
 腹が太	뻔뻔스$G7@	H7U0			GN				jisjk:5610		
@@ -306408,7 +306408,7 @@ ttt	ttt	K110			GN				jisjk:201744
 腹を立て	화를 &A6@	M417			GN				jisjk:93065		
 腹を見抜	속셈을 간파&AV@	M421			GN				jisjk:117907		
 腹タラッピング	배트래핑	N110	UTt		GN				jisjk:204872		
-腹一杯	만복	I110			GN				jisjk:70458		
+腹一杯	배%EE@	G8U0			GN				jisjk:70458		
 腹下し	설사	I110	UTi		GN				jisjk:70462		
 腹下り	설사	N110	QHP	Hd	GN				jisjk:154109		
 腹中	마음 속	N110	VPl		GN				jisjk:23930		
