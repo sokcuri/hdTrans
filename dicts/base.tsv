@@ -29607,7 +29607,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 その分配	그 분배	I110			GN				jisjk:161354		
 その分野	그 분야	I110	VPl		GN				jisjk:200939		
 その分類	그 분류	N110			GN				jisjk:160948		
-その割には	거기에 비하면	A9D0			GN				jisjk:373341		
+その割には	그런 것치고는	A9D0			GN				jisjk:373341		
 その取消しによ	그 취소에 의&AV@	M428			GN				jisjk:148315		
 その口	그 입	N110	VBp		GN				jisjk:200947		
 その名の通り	그 이름과 같이	I110			GN				jisjk:111872		
@@ -118658,6 +118658,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 仕送り	송금을 &AV@	M439			GN				jisjk:121827		
 仕過	지나치게 &AV@	M443			GN				jisjk:122177		
 仕過ご	지나치게 &AV@	M443			GN				jisjk:122181		
+他	나머지	N110			GN	5951	||1 &&2 ||4 S+1== "は" S+1== "が" S+1== "も" S+1== "を" ||2 G+0== "Hz" S-1== "、"	문장이나 절 첫머리에서 は, が, も, を가 붙는 他는 ‘나머지’로 고른다.	terms:7		
 他	외	N111	XXX	Z7	GN				jisjk:115985		
 他	타	N110		Z6	GN				jisjk:115986		
 他	타	N110		On	GN				jisjk:259013		

@@ -2,4 +2,4 @@ rule	input	expected	kind	layer
 dict:lex:mayou-hesitate	彼は迷わず答えた。	그는 망설이지 않고 대답했다.	fix	local
 dict:lex:mayou-hesitate	どちらにするか迷っている。	어느 쪽으로 할까 망설이고 있다.	fix	local
 dict:lex:mayou-hesitate	判断に迷う。	판단에 망설인다.	fix	local
-dict:lex:mayou-hesitate	森の中で迷った。	숲 중에서 헤매었다.	keep	defaults
+dict:lex:mayou-hesitate	森の中で迷った。	숲속에서 헤매었다.	keep	defaults

@@ -17,3 +17,5 @@ lexical:everyday-terms	滝は西方向にある。	폭포는 서쪽 방향에 �
 lexical:everyday-terms	別方向を探してみる。	다른 방향을 찾아 본다.	fix	lookup
 lexical:everyday-terms	丸太を半円状にした。	통나무를 반원 모양으로 했다.	fix	lookup
 lexical:everyday-terms	大木さんが来た。	오키 씨가 왔다.	keep	lookup
+lexical:everyday-terms	森の中は薄暗かった。	숲속은 어슴푸레했다.	fix	lookup
+lexical:everyday-terms	月に照らされた山の中。	달에 비추어진 산속.	fix	lookup
