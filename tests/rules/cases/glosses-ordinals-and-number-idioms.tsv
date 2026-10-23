@@ -13,3 +13,5 @@ lookup:number-words	夜戦は彼女の十八番なの。	야전은 그녀의 십
 lookup:number-words	十八番艦が入港した。	18번함이 입항했다.	keep	lookup
 lexical:fixed-idioms	人の噂も四十九日だ。	사람의 소문도 49일이다.	fix	lookup
 lexical:fixed-idioms	父の四十九日が過ぎた。	아버지의 사십구일재가 지났다.	keep	lookup
+names:gloss	西日本鉄道（にしてつ）の駅	서일본 철도(니시테츠)의 역	fix	normalize
+names:gloss	理由（なし）	이유(없음)	keep	normalize

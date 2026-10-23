@@ -200,6 +200,19 @@ HD_TEST(names_drop_readings) {
     for (const auto& [in, want] : cases) HD_CHECK_EQ(r.DropReadings(in), want);
 }
 
+// A hiragana run in parentheses that is no reading of the kanji before it and no word
+// is a name; a word or a reading there is none.
+HD_TEST(names_kana_name_in_parentheses) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r = Scan(snap, "鉄道株式会社（ながてつ）の人");
+    const std::vector<std::string> found = r.Names();
+    HD_CHECK(std::find(found.begin(), found.end(), "ながてつ") != found.end());
+    HD_CHECK_EQ(r.Render("ながてつ"), "나가테츠");
+    HD_CHECK(Scan(snap, "理由(なし)").Names().empty());
+    HD_CHECK(Scan(snap, "天井の梁（はり）から").Names().empty());
+}
+
 HD_TEST(names_speaker_cues) {
     HD_CHECK_EQ(names::SpeakerCues("魅音「おはよう」\n圭一です。").size(), size_t{2});
     HD_CHECK_EQ(names::SpeakerCues("そう言って、おはよう").size(), size_t{0});

@@ -454,6 +454,23 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         from = m.end;
     }
     line = StripRuby(line);
+    // A hiragana run in parentheses after kanji that is no reading of them and no word
+    // (長良川鉄道株式会社（ながてつ）) is a name given to what they name: it reads as one.
+    for (std::size_t from = 0; from <= line.size();) {
+        RubyMatch m;
+        if (!FindReading(line, from, m)) break;
+        from = m.end;
+        if (line.substr(m.begin + m.base.size()).starts_with("「") || !AllRunes(m.reading, IsHiragana) ||
+            ReadingMorae(m.reading) < 3) {
+            continue;
+        }
+        const DictFlags f = Flags(m.reading);
+        if (f.records > 0 || f.layerSurname || f.layerGiven ||
+            BaseReading(m.base, m.reading, std::string_view(line).substr(m.end), false, false)) {
+            continue;
+        }
+        count(gloss_, std::string(m.reading), 3);
+    }
     bool script = false;
     if (const std::string label = Label(line, script); !label.empty()) {
         if (script) {
@@ -789,7 +806,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // alone only when its score reaches the threshold, as after two honorifics, and it is
             // no common word and no predicate form (あおいさん, but あおい空).
             const auto k = kanaHon_.find(t);
-            if (k == kanaHon_.end()) continue;
+            if (k == kanaHon_.end()) {
+                // A name given in parentheses (Add) stands alone.
+                if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;
+                continue;
+            }
             if (n.score < need || Flags(t).common || PredicateForm(t)) {
                 Name h = n;
                 h.honorificOnly = true;
