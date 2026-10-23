@@ -121,11 +121,9 @@ void QuestionCopula(Flusher& f);
 // A sentence-final だろう after a question word in its clause asks (何だろう 뭘까, どっちだろう
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
-void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
 void ShortPossessive(Flusher& f);
 void DeScene(Flusher& f);
-void YounaBeforeModifier(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,

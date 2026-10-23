@@ -1756,17 +1756,6 @@ void WonderingDarou(Flusher& f) {
     }
 }
 
-void GenitiveBetweenNames(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        const Item* n = it->next;
-        if (p != nullptr && n != nullptr && it->group->surface == "の" && ItemLemma(f, it, it->selected).empty() &&
-            p->Attr(p->selected).starts_with("QPN") && n->Attr(n->selected).starts_with("QPN")) {
-            SelectLemma(f, it, "의");
-        }
-    }
-}
-
 void LongVowelAfterKatakana(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->group->surface != "ー" || it->selected < 0 || ItemLemma(f, it, it->selected) != "-") continue;
@@ -2127,22 +2116,6 @@ void DeScene(Flusher& f) {
         } else if (dict::InClass("noun.scene", p->group->surface) &&
                    !(dict::InClass("noun.scene-means", p->group->surface) && MeansVerbFollows(it->next))) {
             SelectLemma(f, it, "에서");
-        }
-    }
-}
-
-void YounaBeforeModifier(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* n = it->next;
-        if (n == nullptr || it->group->surface != "のような" || it->selected < 0 ||
-            ItemLemma(f, it, it->selected) != "(와)과 같이" || !n->detail->Yougo()) {
-            continue;
-        }
-        const std::string_view d = n->DirectSurface();
-        const Item* after = n->next;
-        if (d == "な" || (d == "い" && after != nullptr && !after->detail->Yougo() && after->selected >= 0 &&
-                          At(after->Code(after->selected), 0) == '1')) {
-            SelectLemma(f, it, "(와)과 같은");
         }
     }
 }
