@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+names:gloss	「ありがとう、イルマ。新婚さんじゃないけど」	「고마워, 이르마. 신혼부부가 아닌데」	fix	lookup
+names:gloss	帝都名物の大広場に設営された断頭台。	제국의 수도 명물의 대광장에 진지구축 된 단두대.	fix	lookup
+names:gloss	ドヴォルザークの交響曲を聴いた。	드보르자크의 교향곡을 들었다.	fix	lookup
+names:gloss	「あ、あの…魔王様、剣は忘れてたでしょ」	「그, 그…마왕님, 검은 잊고 있었던이지」	fix	lookup
+names:gloss	ジョン・スミスが来た。	존 스미스가 왔다.	keep	lookup

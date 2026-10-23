@@ -133714,7 +133714,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 魔王学院デルゾゲード	마왕학원 델조게이드	N110			GN						まおうがくいんでるぞげーど	names.760035
 魔王少女	마왕소녀	N130	QPNVHn	Wb	GN							names.760036
 魔王日記	마왕일기	N130	QWK		GN							names.760037
-魔王様	양나리	N130	QPNVHn	Wb	GN						まおうさま	names.760038
 魔王様、リトライ!	마왕님 리트라이!	N130	QWK		GN							names.760039
 魔王様、リトライ! R	마왕님, 리트라이! R	N130	QWK		GN							names.760040
 魔王様と結婚したい	마왕님과 결혼하고 싶어	N130	QWK		GN							names.760041
@@ -140998,7 +140997,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 龍魚「龍宮の使い遊泳弾」	용어「용궁의 사자 유영탄」	N130	QPNVHn		GN							names.767319
 龍魚の一撃	용어의 일격	N110			GN							names.767320
 龍魚の怒り	용어의 분노	N110			GN						りゅうぎょのいかり	names.767321
-龍鳳	롬팽	N110			GN						りゅうほう	names.767322
+龍鳳	류호	N110			GN						りゅうほう	names.767322
 龍鳳山	용봉산	N130	QCTVPl		GN							names.767323
 龍鳳改二	류호우 개이	N110			GN						りゅうほうかいに	names.767324
 龍麿	타츠마로	N130	QPNVHn	Wb	GN						たつまろ	names.767325
