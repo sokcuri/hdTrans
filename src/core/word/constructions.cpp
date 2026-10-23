@@ -212,7 +212,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             } else if (!families.emplace(f[0], t.families.size()).second) {
                 fail(number, "a second line for the family " + std::string(f[0]));
             } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1});
+                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number});
             }
             continue;
         }
@@ -239,7 +239,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, "a second row " + std::string(id));
             continue;
         }
-        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}};
+        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, number};
         rules::Tokens tokens(f[2]);
         CxSink sink(t);
         if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
@@ -259,11 +259,12 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
     std::vector<bool> placed(t.families.size());
     for (std::size_t k = 0; k < t.families.size(); k++) {
         CxFamily& c = t.families[k];
-        if (c.rows.empty()) fail(0, "no rows for the family " + c.name);
+        if (c.rows.empty()) fail(c.line, "no rows for the family " + c.name);
         std::ranges::stable_sort(c.rows, {}, [&](int r) { return t.rows[static_cast<std::size_t>(r)].prio; });
         for (std::size_t i = 1; i < c.rows.size(); i++) {
-            if (t.rows[static_cast<std::size_t>(c.rows[i])].prio == t.rows[static_cast<std::size_t>(c.rows[i - 1])].prio) {
-                fail(0, "two rows of " + c.name + " share a PRIO");
+            const CxRow& r = t.rows[static_cast<std::size_t>(c.rows[i])];
+            if (r.prio == t.rows[static_cast<std::size_t>(c.rows[i - 1])].prio) {
+                fail(r.line, "two rows of " + c.name + " share a PRIO");
             }
         }
         int* slot = nullptr;
@@ -272,11 +273,11 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
         } else if (const auto anchor = families.find(c.after); anchor != families.end()) {
             slot = &t.families[anchor->second].next;
         } else {
-            fail(0, "the family " + c.name + " runs after " + c.after + ", which is no pass or family");
+            fail(c.line, "the family " + c.name + " runs after " + c.after + ", which is no pass or family");
             continue;
         }
         if (*slot >= 0) {
-            fail(0, "two families run after " + c.after + "; order them with after");
+            fail(c.line, "two families run after " + c.after + "; order them with after");
             continue;
         }
         *slot = static_cast<int>(k);
@@ -290,7 +291,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
         }
     }
     for (std::size_t k = 0; k < t.families.size(); k++) {
-        if (placed[k] && !reached[k]) fail(0, "the family " + t.families[k].name + " is not reached from a pass");
+        if (placed[k] && !reached[k]) fail(t.families[k].line, "the family " + t.families[k].name + " is not reached from a pass");
     }
     return t;
 }
@@ -303,12 +304,6 @@ const ConstructionTable& BuiltinConstructions() {
         return ConstructionTable{};
     }();
     return table;
-}
-
-std::vector<std::string_view> ConstructionFeatures() {
-    std::vector<std::string_view> out;
-    for (const NamedFeature& n : kFeatures) out.push_back(n.name);
-    return out;
 }
 
 }  // namespace internal

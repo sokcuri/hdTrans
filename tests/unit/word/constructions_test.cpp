@@ -95,12 +95,12 @@ HD_TEST(constructions_parse_errors) {
                                        "17: condition: ! takes one operand: !1\n"
                                        "18: a row is ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS <TAB> NOTE\n"
                                        "21: a second row cx:a:90\n"
-                                       "0: two rows of a share a PRIO\n"
-                                       "0: the family b runs after Nowhere, which is no pass or family\n"
-                                       "0: two families run after First; order them with after\n"
-                                       "0: no rows for the family empty\n"
-                                       "0: the family d is not reached from a pass\n"
-                                       "0: the family e is not reached from a pass\n"));
+                                       "20: two rows of a share a PRIO\n"
+                                       "3: the family b runs after Nowhere, which is no pass or family\n"
+                                       "4: two families run after First; order them with after\n"
+                                       "7: no rows for the family empty\n"
+                                       "5: the family d is not reached from a pass\n"
+                                       "6: the family e is not reached from a pass\n"));
 }
 
 HD_TEST(constructions_builtin_table) {

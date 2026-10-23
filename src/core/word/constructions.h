@@ -71,6 +71,7 @@ struct CxRow {
     int prio = 0;
     uint32_t root = 0;  // into nodes
     std::vector<CxAction> actions;
+    int line = 0;  // in the table
 };
 
 struct CxFamily {
@@ -78,6 +79,7 @@ struct CxFamily {
     std::string after;
     std::vector<int> rows;  // into rows, by PRIO
     int next = -1;          // the family anchored after this one
+    int line = 0;           // of its //= line
 };
 
 struct CxError {
@@ -99,8 +101,6 @@ struct ConstructionTable {
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes);
 // The parsed builtin constructions.tsv.
 const ConstructionTable& BuiltinConstructions();
-// The names of the features a condition may test (F).
-std::vector<std::string_view> ConstructionFeatures();
 
 }  // namespace internal
 
