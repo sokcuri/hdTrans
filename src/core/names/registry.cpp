@@ -225,27 +225,174 @@ bool Registry::Gikun(std::string_view base, std::string_view reading) {
     return false;
 }
 
+// The Korean of the words of the dictionaries written s, the kanji words s is a kana
+// spelling of among them; names and places left out.
+std::set<std::string_view> Registry::Words(std::string_view s) {
+    std::set<std::string_view> out;
+    if (snap_ == nullptr || s.empty()) return out;
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(s, dict::LookupMode::General)) {
+        if (rec.codes == nullptr || rec.source != s || rec.target.empty()) continue;
+        const std::string_view sem = rec.codes->sem.Text(), attr = rec.codes->gram.Text();
+        if (sem.starts_with("QPN") || sem.starts_with("QCT") || attr.starts_with("Wa") || attr.starts_with("Wb")) continue;
+        out.insert(rec.target);
+    }
+    for (const dict::UserEntry* e : snap_->TextPlain().Search(s, dict::LookupMode::General)) {
+        if (e->key != s || e->nameLayer || e->target.empty()) continue;
+        out.insert(e->target);
+    }
+    return out;
+}
+
+namespace {
+
+// The content-word classes of WordClasses.
+constexpr unsigned kNounClass = 1, kVerbClass = 2, kAdjectiveClass = 4, kAdjectivalNounClass = 8;
+
+}  // namespace
+
+// The content-word classes of the words written s: noun, verb, adjective and adjectival
+// noun (N11, N12 and I11, M4, H7, G8), names and places left out.
+unsigned Registry::WordClasses(std::string_view s) {
+    unsigned out = 0;
+    if (snap_ == nullptr || s.empty()) return out;
+    auto add = [&](const dict::Codes& codes) {
+        const std::string_view sem = codes.sem.Text(), part = codes.partText;
+        if (sem.starts_with("QPN") || sem.starts_with("QCT")) return;
+        if (part.starts_with("N11") || part.starts_with("N12") || part.starts_with("I11")) out |= kNounClass;
+        if (part.starts_with("M4")) out |= kVerbClass;
+        if (part.starts_with("H7")) out |= kAdjectiveClass;
+        if (part.starts_with("G8")) out |= kAdjectivalNounClass;
+    };
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(s, dict::LookupMode::General)) {
+        if (rec.codes != nullptr && rec.source == s) add(*rec.codes);
+    }
+    for (const dict::UserEntry* e : snap_->TextPlain().Search(s, dict::LookupMode::General)) {
+        if (e->key == s && !e->nameLayer && e->codes != nullptr) add(*e->codes);
+    }
+    return out;
+}
+
+namespace {
+
+// The ends of the first kana of after, up to three, after none: the okurigana a reading may
+// go on with.
+std::vector<std::size_t> KanaEnds(std::string_view after) {
+    std::vector<std::size_t> ends{0};
+    for (std::size_t k = 0; k < after.size() && ends.size() <= 3 && IsHiragana(RuneAt(after, k).cp);) {
+        k += RuneAt(after, k).size;
+        ends.push_back(k);
+    }
+    return ends;
+}
+
+}  // namespace
+
+// Whether s and t are nouns of a kind: N11 records of both share a semantic code, or both
+// are verbal nouns (Hd); names and places left out.
+bool Registry::SameKind(std::string_view s, std::string_view t) {
+    if (snap_ == nullptr) return false;
+    auto codes = [&](std::string_view key) {
+        std::set<std::string> out;
+        for (const dict::Candidate& rec : snap_->RetrieveRecords(key, dict::LookupMode::General)) {
+            if (rec.codes == nullptr || rec.source != key || !rec.codes->partText.starts_with("N11")) continue;
+            const dict::SemCodes& sem = rec.codes->sem;
+            if (sem.HasPrefix("QPN") || sem.HasPrefix("QCT")) continue;
+            for (std::size_t i = 0; i < sem.Count(); i++) out.insert(std::string(sem.At(i)));
+            if (rec.codes->gram.HasCode("Hd")) out.insert("Hd");
+        }
+        return out;
+    };
+    const std::set<std::string> a = codes(s);
+    for (const std::string& c : codes(t)) {
+        if (a.count(c) != 0) return true;
+    }
+    return false;
+}
+
+// Whether base and reading, each with the same first kana of after or none, are written
+// words with a Korean in common, the reading being a word or a kana spelling of one
+// (全「すべ」て: 全て and すべて 모두; 錆（さ）びない: 錆び and さび 녹; むね 胸 가슴).
+bool Registry::SameWord(std::string_view base, std::string_view reading, std::string_view after) {
+    for (const std::size_t k : KanaEnds(after)) {
+        const std::set<std::string_view> own = Words(std::string(base) + std::string(after.substr(0, k)));
+        for (const std::string_view t : Words(std::string(reading) + std::string(after.substr(0, k)))) {
+            if (own.count(t) != 0) return true;
+        }
+    }
+    return false;
+}
+
+// Whether reading, in hiragana, is the reading of the kanji run base of a line that goes on
+// with after. It is when it is the same word (SameWord), or the reading of a name
+// (園崎詩音（しおん）); over one kanji, a word of the same class (梁（はり）, 駆「か」け), or in
+// 「」 any reading in a styled line, one with other 「」 readings (日「ひ」の誓「ちか」い); in
+// parentheses, over a word of no dictionary (夾叉(きょうさ)), a noun of the same kind as the
+// base (朝餉(あさがれい), 輜重(しちょう)), or no word at all (鮭（しゃけ）, 黄泉戸喫(よもつへぐい)),
+// with a mora for each kanji of a word. A remark (結果（まあまあ）, 理由(なし)), a quote
+// after a speaker (姉「うん」って), a name after a noun (店「さくら」で) or one that is
+// shorter than its word (長良川鉄道株式会社（ながてつ）) is none.
+bool Registry::BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket,
+                           bool styled) {
+    if (SameWord(base, reading, after)) return true;
+    const DictFlags b = Flags(base), f = Flags(reading);
+    // A person of any dictionary, the name layer's too.
+    const bool person = b.person || !b.layerName.empty();
+    if (person && (f.person || !f.layerName.empty())) return true;
+    // A quote after a person (姉「はい」って) is no reading of a word of the same class.
+    if (bracket && after.starts_with("って") && (b.role || b.human || b.person)) return false;
+    const bool single = RuneCount(base) == 1;
+    if (bracket && styled && single) return true;
+    if (single) {
+        // A verb or adjective stem that is no noun goes on with its okurigana: what stands
+        // between them is its reading (励（はげ）んで).
+        const unsigned own = WordClasses(base);
+        if ((own & (kVerbClass | kAdjectiveClass)) != 0 && (own & kNounClass) == 0 && !after.empty() &&
+            IsHiragana(RuneAt(after, 0).cp)) {
+            return true;
+        }
+        const bool particle = !after.empty() && InRunes(RuneAt(after, 0).cp, "のにをはがでへもかや");
+        for (const std::size_t k : KanaEnds(after)) {
+            if (bracket && k == 0 && particle) continue;
+            const std::string_view ok = after.substr(0, k);
+            const std::string bk = std::string(base) + std::string(ok), rk = std::string(reading) + std::string(ok);
+            if ((WordClasses(bk) & WordClasses(rk)) != 0) return true;
+        }
+    }
+    if (bracket) return false;
+    if (b.records == 0 && (snap_ == nullptr || snap_->NameRecords(base).empty())) return true;
+    if (!single && SameKind(base, reading)) return true;
+    if (f.records > 0 || f.layerSurname || f.layerGiven) return false;
+    return person || ReadingMorae(reading) >= RuneCount(base);
+}
+
 std::string Registry::DropReadings(std::string_view line) {
     if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos &&
         line.find("「") == std::string_view::npos) {
         return std::string(line);
     }
-    std::string out;
-    std::size_t at = 0;
+    struct Found {
+        RubyMatch m;
+        std::string hiragana;
+        bool bracket;
+    };
+    std::vector<Found> found;
+    bool styled = false;
     RubyMatch m;
     for (std::size_t from = 0; FindReading(line, from, m); from = m.end) {
-        std::string hiragana;
-        for (std::size_t i = 0; i < m.reading.size();) {
-            const text::Rune r = RuneAt(m.reading, i);
-            i += r.size;
-            text::AppendRune(hiragana, IsKatakana(r.cp) && r.cp != U'ー' ? r.cp - 0x60 : r.cp);
-        }
-        const DictFlags f = Flags(hiragana);
+        Found x{m, ToHiragana(m.reading), line.substr(m.begin + m.base.size()).starts_with("「")};
+        const DictFlags f = Flags(x.hiragana);
         if (IsKatakana(FirstRune(m.reading).cp) && (!f.common || f.person)) continue;
         if (f.pronoun && Flags(m.base).human) continue;
-        out.append(line.substr(at, m.begin - at));
-        out.append(m.base);
-        at = m.end;
+        styled = styled || (x.bracket && BaseReading(m.base, x.hiragana, line.substr(m.end), true, false));
+        found.push_back(std::move(x));
+    }
+    std::string out;
+    std::size_t at = 0;
+    for (const Found& x : found) {
+        if (!BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) continue;
+        out.append(line.substr(at, x.m.begin - at));
+        out.append(x.m.base);
+        at = x.m.end;
     }
     out.append(line.substr(at));
     return out;

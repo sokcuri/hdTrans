@@ -111,10 +111,10 @@ public:
     // The registered names of line (ruby markup removed), leftmost-longest, that fill
     // their kanji or katakana run.
     std::vector<Occurrence> Occurrences(std::string_view line);
-    // line without the readings in parentheses after kanji (FindReading): every hiragana
-    // reading, and a katakana one whose hiragana spelling is a word (生（ナマ）). A katakana
-    // word written over the kanji (炎（ブレス）) and a pronoun over a person noun
-    // (提督(あなた)) stay as glosses.
+    // line without the readings after kanji (FindReading) that are the kanji's reading
+    // (BaseReading): a hiragana one, and a katakana one whose hiragana spelling is a word
+    // (生（ナマ）). A katakana word written over the kanji (炎（ブレス）) and a pronoun over a
+    // person noun (提督(あなた)) stay as glosses.
     std::string DropReadings(std::string_view line);
 
     text::Preset preset = text::Preset::Fan;
@@ -126,6 +126,11 @@ private:
     std::string Label(std::string_view line, bool& script);
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
+    std::set<std::string_view> Words(std::string_view s);
+    unsigned WordClasses(std::string_view s);
+    bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
+    bool SameKind(std::string_view s, std::string_view t);
+    bool BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket, bool styled);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
     std::string_view KanaHonorificAt(std::string_view s);

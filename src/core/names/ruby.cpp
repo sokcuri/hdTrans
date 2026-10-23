@@ -206,8 +206,8 @@ bool GlossAt(std::string_view s, std::size_t pos, RubyMatch& m) {
 
 bool IsSmallKana(char32_t c) { return InRunes(c, "ぁぃぅぇぉゃゅょゎゕゖァィゥェォャュョヮヵヶ"); }
 
-// The morae of a reading: its kana but the small ones; spaces and ・ are not counted, nor
-// allowed at its ends. 0 for a run of mixed or other characters.
+}  // namespace
+
 std::size_t ReadingMorae(std::string_view s) {
     bool hiragana = false, katakana = false, gap = true;
     std::size_t morae = 0;
@@ -235,6 +235,8 @@ std::size_t ReadingMorae(std::string_view s) {
     if (gap || (hiragana && katakana)) return 0;
     return morae;
 }
+
+namespace {
 
 // ([一-龥々〆ヶ]+)[（(]([ぁ-ゖー・ 　]{1,16}|[ァ-ヺー・ 　]{1,16})[）)], at most 4 morae for each
 // kanji and one more; or ([一-龥々〆ヶ]+)「([ぁ-ゖー]{1,16})」 before the hiragana the word

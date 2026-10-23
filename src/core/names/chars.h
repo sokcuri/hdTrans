@@ -72,6 +72,18 @@ inline text::Rune RuneBefore(std::string_view s, std::size_t end) {
     return r;
 }
 
+// s with its katakana ァ to ヶ written in hiragana; other characters (ー) are kept.
+inline std::string ToHiragana(std::string_view s) {
+    std::string out;
+    for (std::size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        if (r.size == 0) break;
+        i += r.size;
+        text::AppendRune(out, r.cp >= 0x30A1 && r.cp <= 0x30F6 ? r.cp - 0x60 : r.cp);
+    }
+    return out;
+}
+
 inline bool IsKanaText(std::string_view s) {
     return AllRunes(s, [](char32_t c) { return IsHiragana(c) || IsKatakana(c); });
 }

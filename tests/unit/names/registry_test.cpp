@@ -46,7 +46,34 @@ const dict::Snapshot* Dictionary() {
          "千里\t천리\tN110\t\t\tGN\t36\n"
          "ちさと\t치사토\tN130\tQPN\tWb\tGN\t37\n"
          "みか\t미카\tN130\tQPN\tWb\tGN\t38\n"
-         "用途\t용도\tN110\t\t\tGN\t39\n"},
+         "用途\t용도\tN110\t\t\tGN\t39\n"
+         "生\t날것\tN110\t\t\tGN\t40\n"
+         "錆び\t녹&LJ@\tM427\t\t\tGN\t63\n"
+         "さび\t녹&LJ@\tM417\t\t\tGN\t64\n"
+         "全て\t모두\tN110\t\t\tGN\t41\n"
+         "すべて\t모두\tE300\t\t\tGN\t42\n"
+         "壊\t깨뜨&AA@\tM443\t\t\tGN\t43\n"
+         "こわ\t깨뜨&AA@\tM443\t\t\tGN\t44\n"
+         "心\t마음\tN110\t\t\tGN\t45\n"
+         "こころ\t마음\tN110\t\t\tGN\t46\n"
+         "梁\t대들보\tN110\t\t\tGN\t47\n"
+         "はり\t바늘\tN110\t\t\tGN\t48\n"
+         "姉\t언니\tN110\tVHn\t\tGN\t49\n"
+         "はい\t재\tN110\t\t\tGN\t50\n"
+         "うん\t응\tN320\t\t\tGN\t51\n"
+         "店\t가게\tN110\t\t\tGN\t52\n"
+         "結果\t결과\tN110\t\t\tGN\t53\n"
+         "まあまあ\t그저\tE311\t\t\tGN\t54\n"
+         "理由\t이유\tN110\t\t\tGN\t55\n"
+         "なし\t없음\tN110\t\t\tGN\t56\n"
+         "鉄道株式会社\t철도 주식회사\tN110\t\t\tGN\t57\n"
+         "朝餉\t조반\tN110\tVFd\t\tGN\t65\n"
+         "あさがれい\t아침 수라\tN110\tVFd\t\tGN\t66\n"
+         "きょうさ\t교사\tN110\t\t\tGN\t67\n"
+         "うち\t집\tN110\tVPl\t\tGN\t58\n"
+         "ウチ\t우리\tN110\t\t\tGN\t59\n"
+         "フトン\t이불\tN110\t\t\tGN\t60\n"
+         "ふとん\t이부자리\tN110\t\t\tGN\t61\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -122,11 +149,22 @@ HD_TEST(names_drop_readings) {
         {"生（ナマ）食", "生食"},
         {"山田太郎（やまだ たろう）。", "山田太郎。"},
         {"全「すべ」てを壊「こわ」せる", "全てを壊せる"},
+        // A noun of the same kind, any word over a word of no dictionary.
+        {"朝餉(あさがれい)を", "朝餉を"},
+        {"夾叉(きょうさ)か", "夾叉か"},
         {"心「こころ」に", "心に"},
         // A name quoted after a noun, a quote before と, a quote that ends the line.
         {"戦艦「やまと」の", "戦艦「やまと」の"},
         {"私「こんびに」とやら", "私「こんびに」とやら"},
         {"魅音「おはよう」", "魅音「おはよう」"},
+        // No word of the base's: a quote after a speaker, a name after a noun, a remark,
+        // and fewer morae than kanji.
+        {"姉「うん」って言った。", "姉「うん」って言った。"},
+        {"姉「はい」って言った。", "姉「はい」って言った。"},
+        {"店「まるや」で買った。", "店「まるや」で買った。"},
+        {"結果（まあまあ）だった。", "結果（まあまあ）だった。"},
+        {"理由(なし)", "理由(なし)"},
+        {"鉄道株式会社（ながてつ）の人", "鉄道株式会社（ながてつ）の人"},
         // A katakana word over the kanji, a pronoun over a person noun, an aside.
         {"炎（ブレス）", "炎（ブレス）"},
         {"提督(あなた)、", "提督(あなた)、"},
