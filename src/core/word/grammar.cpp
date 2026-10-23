@@ -58,6 +58,14 @@ constexpr KoreanPassive kKoreanPassives[] = {
     {"부르다", "불리다"},   {"자르다", "잘리다"},   {"흔들다", "흔들리다"}, {"잡아먹다", "잡아먹히다"},
 };
 
+// Whether the 2-byte grammar codes gattr hold code.
+bool GrammarCode(std::string_view gattr, std::string_view code) {
+    for (std::size_t i = 0; i + 2 <= gattr.size(); i += 2) {
+        if (gattr.substr(i, 2) == code) return true;
+    }
+    return false;
+}
+
 // The target of the passive lemma of surface; false when surface has none.
 bool PassiveTarget(Flusher& f, std::string_view surface, std::string& target) {
     for (const PassiveLemma& p : kPassiveLemmas) {
@@ -429,6 +437,13 @@ bool RespectfulReading(const Item* it, bool transitive) {
     return false;
 }
 
+// Whether item n is a noun whose する takes an object: any noun but one tagged Hi (気絶, 崩御,
+// 到着), whose する is done by its subject alone.
+bool SinoNounTakesObject(const Item* n) {
+    return n != nullptr && !n->detail->Yougo() && n->selected >= 0 && At(n->Code(n->selected), 0) == '1' &&
+           !GrammarCode(n->GAttr(n->selected), "Hi");
+}
+
 // Whether a verb part code takes an object (class 3 to 6, M431 書く; not M418 帰る).
 bool TransitiveCode(std::string_view code) { return At(code, 1) >= '3' && At(code, 1) <= '6'; }
 
@@ -547,7 +562,9 @@ void RespectfulPassive(Flusher& f) {
             if (it->EntryText(slot).ends_with("&AE@")) honorific = slot;
         }
         if (honorific >= 0) {
-            if (!RespectfulReading(it, false)) continue;
+            // The する of a Sino noun takes an object unless the noun's する is intransitive
+            // (gram Hi): 陛下が幽閉された is the passive, 国王様が崩御された the respectful form.
+            if (!RespectfulReading(it, surface == "され" && SinoNounTakesObject(it->prev))) continue;
             it->SelectCandidate(honorific, {Provenance::Rewrite});
             // The object the passive made a subject is the object again (本を説明された 책을).
             for (Item* p = it->prev; p != nullptr; p = p->prev) {
@@ -809,18 +826,6 @@ bool GradualBefore(const Item* it) {
 
 // The particles and punctuation of seeAnd (before the 見る て they do not change).
 constexpr std::string_view kSeeAndFollowers = " は も を が の に と で や か よ ね な ";
-
-}  // namespace
-
-namespace {
-
-// Whether the 2-byte grammar codes gattr hold code.
-bool GrammarCode(std::string_view gattr, std::string_view code) {
-    for (std::size_t i = 0; i + 2 <= gattr.size(); i += 2) {
-        if (gattr.substr(i, 2) == code) return true;
-    }
-    return false;
-}
 
 }  // namespace
 

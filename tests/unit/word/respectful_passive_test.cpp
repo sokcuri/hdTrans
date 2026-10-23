@@ -24,7 +24,11 @@ std::string Translate(std::string_view text) {
                                             "帰\t돌아&A1@\tM418\t\t\tGN\t0\t11\n"
                                             "飲\t마&AE@\tM435\t\t\tGN\t0\t12\n"
                                             "命じ\t명&AV@\tM447\t\t\tGN\t0\t13\n"
-                                            "役目\t역할\tN110\t\t\tGN\t0\t14\n"}});
+                                            "役目\t역할\tN110\t\t\tGN\t0\t14\n"
+                                            "され\t&C6@\tM447\tXXX\tTu\tGN\t0\t15\n"
+                                            "され\t하&AE@\tM427\t\t\tGN\t0\t16\n"
+                                            "逮捕\t체포\tN110\t\tHd\tGN\t0\t17\n"
+                                            "到着\t도착\tN110\t\tHdHi\tGN\t0\t18\n"}});
     HD_CHECK(loaded.errors.empty());
     if (loaded.snapshot == nullptr) return {};
     const auto generated = internal::NewGenerated(*loaded.snapshot);
@@ -54,4 +58,12 @@ HD_TEST(word_passive_conditional_after_an_object) {
     // potential with a recipient に.
     HD_CHECK(Translate("役目を命じられれば").starts_with("역할을 명령받"));
     HD_CHECK(Translate("彼に役目を命じられれば").starts_with("그에게 역할을 명할 수 "));
+}
+
+HD_TEST(word_respectful_passive_of_a_sino_noun) {
+    // The する of a Sino noun takes an object unless the noun is tagged Hi: without one an
+    // honoured subject is the one acted on.
+    HD_CHECK_EQ(Translate("陛下が逮捕された。"), "폐하가 체포되었다.");
+    HD_CHECK_EQ(Translate("陛下が手紙を逮捕された。"), "폐하가 편지를 체포하셨다.");
+    HD_CHECK_EQ(Translate("陛下が到着された。"), "폐하가 도착하셨다.");
 }

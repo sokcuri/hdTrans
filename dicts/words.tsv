@@ -11841,7 +11841,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 伏龍	복룡	N110			GN						ふくりゅう	w:11833
 伐	공격&AV@	M424			GN						うつ	w:11834
 休刊日	휴간일	N110	UMe	Tm	GN				llm		きゅうかんび	w:11835
-休憩	휴식	N110			GN				xxx llm	1		w:11836
+休憩	휴식	N110		Hi	GN				xxx llm	1		w:11836
 休憩所	휴게소	N110			GN						きゅうけいじょ	w:11837
 休憩時間	쉬는 시간	N110	UMe	Tm	GN				llm		きゅうけいじかん	w:11838
 休符	쉼표	N110	QMU		GN						きゅうふ	w:11839
@@ -12658,7 +12658,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 出版者	출판사	N110			GN						しゅっぱんしゃ	w:12646
 出直	다시 &AH@	M423			GN				xxx llm	1		w:12647
 出窓	돌출창	N110			GN				xxx llm	1		w:12648
-出立	출발	N110			GN				xxx llm	1		w:12649
+出立	출발	N110		Hi	GN				xxx llm	1		w:12649
 出自	출신	N110			GN				xxx llm	1		w:12650
 出逢い	만남	N110			GN						であい	w:12651
 出遭	만&A5@	M420			GN						であう	w:12652
@@ -13320,7 +13320,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 厳探	엄탐&AV@	M429			GN						げんたん	w:13308
 厳秘	극비	N110			GN				xxx llm	1		w:13309
 去勢不安	거세불안	N110			GN						きょせいふあん	w:13310
-参列	참석	N110			GN				xxx llm	1		w:13311
+参列	참석	N110		Hi	GN				xxx llm	1		w:13311
 参加賞	참가상	N110			GN						さんかしょう	w:13312
 参稼報酬	연봉	N110			GN				xxx llm	1		w:13313
 参考までに	참고로	A9D0			GN				llm		さんこうまでに	w:13314
@@ -18156,7 +18156,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 来援	도우러 &AH@	M429			GN				llm		らいえん	w:18141
 来月	내달	I110	UMe	Tm	GN				xxx	1	らいげつ	w:18142
 来航	내항	I110			GN				xxx llm	1		w:18143
-来訪	방문	I110			GN				xxx llm	1		w:18144
+来訪	방문	I110		Hi	GN				xxx llm	1		w:18144
 来訪神	내방신	N110			GN						らいほうしん	w:18145
 杭打ち機	항타기	N110			GN						くいうちき	w:18146
 杭打機	항타기	N110			GN						くいうちき	w:18147
@@ -22655,7 +22655,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 若衆組	청년단	N110			GN				xxx llm	1		w:22633
 若連中	청년단	N110			GN				xxx llm	1		w:22634
 若鶏	영계	N110			GN				xxx llm	1		w:22635
-苦労	고생	N110			GN				xxx llm	1		w:22636
+苦労	고생	N110		Hi	GN				xxx llm	1		w:22636
 苦参	클라라	N110			GN						くらら	w:22637
 苦塩	간수	N110			GN						にがり	w:22638
 苦境	곤경	N110			GN				xxx llm	1		w:22639
@@ -24375,7 +24375,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 追送	추송&AV@	M429			GN						ついそう	w:24353
 追随者	아류	N110			GN						ついずいしゃ	w:24354
 退け	물리&AO@	M427			GN				xxx llm	1		w:24355
-退出	퇴장	N110			GN				xxx llm	1		w:24356
+退出	퇴장	N110		Hi	GN				xxx llm	1		w:24356
 退屈	지루함	N110			GN				xxx llm	1		w:24357
 退屈凌ぎ	심심풀이	N110			GN						たいくつしのぎ	w:24358
 退職願い	사직서	N110			GN						たいしょくねがい	w:24359
@@ -26802,3 +26802,25 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 昂然	의기양양	N110		Tr	GN						こうぜん	w:26764
 淡々	담담	N110		Tr	GN						たんたん	w:26765
 凛とした	늠름한	E0H0			GN						りんとした	w:26766
+籠	바구니	N110	XXX		GN						かご	w:26750
+ちょこっとした	자그마한	C0D1			GN							w:26740
+祟り	재앙	N110			GN							w:26741
+籠	바구니	N110	VPe		GN							w:26742
+籠も	틀어박&AW@	M418			GN							w:26743
+篭も	틀어박&AW@	M418			GN							w:26744
+閉じ籠も	틀어박&AW@	M418			GN							w:26745
+元から	원래부터	E300			GN							w:26746
+くび	목	N110	VBp		GN				xxx	1		w:26747
+むき出しの	드러난	C0D1			GN							w:26748
+剥き出しの	드러난	C0D1			GN							w:26749
+呆然	망연	N110		Tr	GN						ぼうぜん	w:26740
+茫然	망연	N110		Tr	GN						ぼうぜん	w:26741
+颯爽	씩씩	N110		Tr	GN						さっそう	w:26742
+凛と	늠름하게	E300			GN						りんと	w:26743
+凜と	늠름하게	E300			GN						りんと	w:26744
+憤然	분연	N110		Tr	GN						ふんぜん	w:26745
+昂然	의기양양	N110		Tr	GN						こうぜん	w:26746
+淡々	담담	N110		Tr	GN						たんたん	w:26747
+凛とした	늠름한	E0H0			GN						りんとした	w:26748
+崩御	붕어	N110		HdHi	GN						ほうぎょ	w:26751
+薨去	훙거	N110		HdHi	GN						こうきょ	w:26752
