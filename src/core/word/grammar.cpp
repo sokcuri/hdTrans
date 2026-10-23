@@ -1121,49 +1121,6 @@ void QuestionCopula(Flusher& f) {
 
 namespace {
 
-// Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
-constexpr std::string_view kWonderWords[] = {
-    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
-    "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
-    "どのような", "どういう", "どういった", "いかなる",
-    "一体", "いったい", "いくつ", "いくら",
-};
-
-// Starts of words that begin like a question word but are none (何か, どうせ, いつも).
-constexpr std::string_view kWonderNot[] = {
-    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "何卒", "何気", "なにか", "なにも", "なんか",
-    "なんて", "なんだか", "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも",
-    "どこか", "どこも", "どこでも", "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも",
-    "どうせ", "どうしても", "どうぞ", "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも",
-    "いくらか", "いくらでも",
-};
-
-// The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
-constexpr std::string_view kWonderParticles[] = {"を", "が", "に", "へ", "で", "と", "の", "は", "から", "まで", "くらい", "ぐらい"};
-
-// Whether item p is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
-// with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
-// such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
-bool WonderWord(const Item* p) {
-    const std::string_view s = p->group->surface;
-    // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
-    if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
-    for (const std::string_view n : kWonderNot) {
-        if (s.starts_with(n)) return false;
-    }
-    const char cls = At(p->Code(std::max(p->selected, 0)), 0);
-    for (const std::string_view w : kWonderWords) {
-        if (!s.starts_with(w)) continue;
-        const std::string_view rest = s.substr(w.size());
-        if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
-        for (const std::string_view part : kWonderParticles) {
-            if (rest.starts_with(part)) return true;
-        }
-        if (cls != '0' && cls != '3') return true;
-    }
-    return false;
-}
-
 // Whether s ends in a concessive volitional: -(よ)うと or -(よ)うが (言われようと, 何をしようが,
 // 誰だろうと). No verb has a volitional in ほう, which is the noun (どっちのほうが).
 bool ConcessiveVolitional(std::string_view s) {
@@ -1194,13 +1151,20 @@ bool WonderBefore(const Item* it) {
              ConcessiveVolitional(std::string(ItemText(p->prev)) + std::string(s)))) {
             return false;
         }
-        if (WonderWord(p)) return true;
+        if (p->IsQuestionWord()) return true;
     }
     return false;
 }
 
-// Whether only closing marks, an ellipsis, a comma or a question mark follow the item.
+// Whether only closing marks, an ellipsis, a comma or a question mark follow the item, or a
+// final な left without a translation before them (どこに行ったんだろうな).
 bool WonderEnd(const Worker& w, const Item* it) {
+    const Item* n = it->next;
+    if (n != nullptr && n->tokenIndex == it->tokenIndex && n->start == it->start + it->length &&
+        (n->group->surface == "な" || n->group->surface == "なぁ" || n->group->surface == "なあ") && n->selected >= 0 &&
+        n->group->At(n->selected) != nullptr && n->EntryText(n->selected).empty()) {
+        it = n;
+    }
     std::string_view rest = From(it->text, it->start + it->length);
     if (rest.empty() && it->tokenIndex + 1 < w.TokenCount()) {
         if (w.Span(it->tokenIndex + 1) != 0) return false;

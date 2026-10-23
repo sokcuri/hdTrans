@@ -174,21 +174,70 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
+namespace {
+
+// Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
+constexpr std::string_view kWonderWords[] = {
+    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
+    "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
+    "どのような", "どういう", "どういった", "いかなる",
+    "一体", "いったい", "いくつ", "いくら",
+};
+
+// Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+constexpr std::string_view kWonderNot[] = {
+    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "何卒", "何気", "なにか", "なにも", "なんか",
+    "なんて", "なんだか", "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも",
+    "どこか", "どこも", "どこでも", "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも",
+    "どうせ", "どうしても", "どうぞ", "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも",
+    "いくらか", "いくらでも",
+};
+
+// The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
+constexpr std::string_view kWonderParticles[] = {"を", "が", "に", "へ", "で", "と", "の", "は", "から", "まで", "くらい", "ぐらい"};
+
+}  // namespace
+
+// Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
+// with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
+// such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
+bool Item::IsQuestionWord() const {
+    const std::string_view s = group->surface;
+    // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
+    if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
+    // The か of 何か before ら is the particle から (何から, どこから, いつから).
+    for (const std::string_view n : kWonderNot) {
+        if (s.starts_with(n) && !(n.ends_with("か") && s.substr(n.size()).starts_with("ら"))) return false;
+    }
+    const char cls = At(Code(std::max(selected, 0)), 0);
+    for (const std::string_view w : kWonderWords) {
+        if (!s.starts_with(w)) continue;
+        const std::string_view rest = s.substr(w.size());
+        if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
+        for (const std::string_view part : kWonderParticles) {
+            if (rest.starts_with(part)) return true;
+        }
+        if (cls != '0' && cls != '3') return true;
+    }
+    return false;
+}
+
 bool Item::AfterQuestionWord() const {
-    static constexpr std::string_view kQuestionWords[] = {
-        "何", "なに", "なん", "なんで", "何で", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どうして",
-        "どう", "どれ", "どちら", "どっち", "どんな", "どの", "一体", "いったい", "いくら"};
     for (const Item* x = this; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
-        // Not an indefinite (どこにでも, 何か, 誰も, いつも).
+        // A question closed by か before the word is embedded (どうなるか……ってのもあるだろうな).
+        if (x != this && (s == "か" || x->DirectSurface().ends_with("か"))) break;
+        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
+        // alone or before a particle; から, かな and かしら keep the question.
         const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();
-        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || after.starts_with("か")) {
-            continue;
-        }
-        for (const std::string_view q : kQuestionWords) {
-            if (s == q) return true;
-        }
+        const bool indefiniteKa =
+            after.starts_with("か") &&
+            (after == "か" ||
+             std::u32string_view(U"がをにでもはのとへか").find(text::DecodeRune(after.substr(std::string_view("か").size())).cp) !=
+                 std::u32string_view::npos);
+        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || indefiniteKa) continue;
+        if (x->IsQuestionWord()) return true;
     }
     return false;
 }
