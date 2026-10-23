@@ -22,7 +22,9 @@ std::string Translate(std::string_view text) {
                                             "茶\t차\tN110\t\t\tGN\t0\t9\n"
                                             "書\t&AF@\tM431\t\t\tGN\t0\t10\n"
                                             "帰\t돌아&A1@\tM418\t\t\tGN\t0\t11\n"
-                                            "飲\t마&AE@\tM435\t\t\tGN\t0\t12\n"}});
+                                            "飲\t마&AE@\tM435\t\t\tGN\t0\t12\n"
+                                            "命じ\t명&AV@\tM447\t\t\tGN\t0\t13\n"
+                                            "役目\t역할\tN110\t\t\tGN\t0\t14\n"}});
     HD_CHECK(loaded.errors.empty());
     if (loaded.snapshot == nullptr) return {};
     const auto generated = internal::NewGenerated(*loaded.snapshot);
@@ -45,4 +47,11 @@ HD_TEST(word_respectful_passive_keeps_the_passive) {
     HD_CHECK_EQ(Translate("陛下が彼に手紙を書かれた。"), "폐하가 그에게 편지를 써졌다.");
     HD_CHECK_EQ(Translate("彼が手紙を書かれた。"), "그가 편지를 써졌다.");
     HD_CHECK_EQ(Translate("陛下が書かれた。"), "폐하가 써졌다.");
+}
+
+HD_TEST(word_passive_conditional_after_an_object) {
+    // A verb of acts done to someone is passive in the conditional after its object, and
+    // potential with a recipient に.
+    HD_CHECK(Translate("役目を命じられれば").starts_with("역할을 명령받"));
+    HD_CHECK(Translate("彼に役目を命じられれば").starts_with("그에게 역할을 명할 수 "));
 }

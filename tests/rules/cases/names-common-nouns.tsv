@@ -11,7 +11,7 @@ dict:jisjk:202480	高原さんが来た。	타카하라 씨가 왔다.	keep	glob
 dict:w:26740	シュトーレンやレープクーヘンが楽しみ！	슈톨렌이나 레프쿠헨이 즐겨!	fix	defaults
 dict:w:26742	まあ、二年ほど働けば市井に戻れなくもない	뭐, 2년 정도 일하면 저잣거리로 돌아갈 수 없는 것도 아니다	fix	defaults
 dict:w:26742	市井の人々。	서민들.	keep	lookup
-dict:w:26743	一度でも夜伽を命じられれば	한 번이라도 밤시중을 명할 수 있으면	fix	lookup
+dict:w:26743	一度でも夜伽を命じられれば	한 번이라도 밤시중을 명령받으면	fix	lookup
 dict:w:26744	ちょっと藪に入ったところに祠	조금 덤불에 들어온 것에 사당	fix	defaults
 dict:w:26744	藪医者	돌팔이	keep	lookup
 dict:w:26745	二度とネズミ共を城内に立ち入らせるな。	두 번 다시 쥐 모두를 성내에 들어가게 하지 마.	fix	defaults

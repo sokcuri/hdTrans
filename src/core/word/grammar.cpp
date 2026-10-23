@@ -147,7 +147,22 @@ bool NarrativePassive(const Item* it, std::string_view rest) {
     return !InSet(kAbilityVerbs, it->group->surface);
 }
 
+// Whether the clause before item it has an object を and no に (夜伽を命じられれば, not
+// 証拠を上に見せられれば).
+bool ObjectWithoutRecipient(const Item* it) {
+    bool object = false;
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s == "に" || s == "には") return false;
+        if (s == "を") object = true;
+        if (p->detail->Yougo() || s.empty() || Has("、。,「」『』！？", s)) break;
+    }
+    return object;
+}
+
 // The passive reading of the られ of verb item it; rest is the text after られ:
+//   - a conditional of a verb of kObjectPassiveVerbs is passive after its object without a
+//     recipient に;
 //   - a negative, conditional or volitional form and the polite non-past are potential;
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
@@ -160,6 +175,9 @@ bool NarrativePassive(const Item* it, std::string_view rest) {
 //     plain non-past form;
 //   - otherwise potential.
 bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
+    if ((rest.starts_with("れば") || rest.starts_with("たら")) && InSet(kObjectPassiveVerbs, it->group->surface)) {
+        return ObjectWithoutRecipient(it);
+    }
     constexpr std::string_view kPotentialForms[] = {"な", "ず", "ぬ", "ん", "ませ", "ます", "れば", "よう", "たら", "たり"};
     for (const std::string_view p : kPotentialForms) {
         if (rest.starts_with(p)) return false;
