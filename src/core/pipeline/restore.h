@@ -82,7 +82,10 @@ std::string UnescapePrivateUse(std::string_view s);
 // syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
 std::string WriteEmphasis(std::string_view s);
 
-// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!).
+// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!); each
+// kDrawnMark after a Hangul syllable written as a syllable of its vowel, the final
+// consonant moved to the last one (그만둬\uE00B\uE00B 그만둬어어, 님\uE00B 니임), and
+// dropped elsewhere.
 std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
@@ -106,6 +109,7 @@ constexpr char32_t kPastLeadDrawlMark = 0xE007;
 using output::kEmphasisClose;
 using output::kEmphasisOpen;
 // The lengthening mark of the sound stage (WriteLengthening).
+using output::kDrawnMark;
 using output::kLengthenMark;
 
 namespace internal {

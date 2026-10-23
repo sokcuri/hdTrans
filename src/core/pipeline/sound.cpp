@@ -375,7 +375,7 @@ bool SoundText::UtteranceStart(size_t p) const {
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
 // closing bracket or lengthening mark (not an ellipsis: ちょっと…痛い).
 bool SoundText::PauseAt(size_t p) const {
-    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark;
+    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark || rs_[p] == output::kDrawnMark;
 }
 
 // The length in characters of the longest base key, plain-dictionary key and name-layer
@@ -538,6 +538,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             ok = false;  // a final と is the particle, not katakana ト
         }
         if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
+        // An interjection drawn out by three or more vowel kana draws out its last syllable
+        // whatever its initial (だめぇぇぇっ 안 돼애애애, not 안 돼~).
+        if (ok && s.intj && runKorean.empty()) {
+            size_t vowels = 0;
+            for (size_t k = p + 1; k < end; k++) vowels += PlainVowel(f_[k]) != 0 && Lengthens(f_[k], f_[k - 1]);
+            if (vowels >= 3) units += 'd';
+        }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
@@ -1682,6 +1689,15 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
 }
 
 std::string Lengthen(std::string_view korean, std::string_view units) {
+    if (const size_t d = units.find('d'); d != std::string_view::npos) {
+        std::string rest(units);
+        std::erase(rest, 'd');
+        std::u32string rs = DecodeText(korean);
+        if (rs.empty() || rs.back() < 0xAC00 || rs.back() > 0xD7A3) return Lengthen(korean, rest);
+        // The last syllable carries the sound: written apart as a word of one syllable.
+        const size_t last = rs.size() - 1;
+        return EncodeText(std::u32string_view(rs).substr(0, last)) + Lengthen(EncodeText(rs.substr(last)), rest);
+    }
     if (const size_t t = units.find('t'); t != std::string_view::npos) {
         std::string rest(units);
         std::erase(rest, 't');

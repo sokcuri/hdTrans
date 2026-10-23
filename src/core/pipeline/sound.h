@@ -166,9 +166,12 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
 // dropped (ていとくぅ, ないでぇ, なのぉ), and so is a run of い and ぃ after the い that ends
 // an adjective, before a pause or a shout's っ (ずるいぃ, 痛いぃぃ, きもちいいいいい; not the
-// cry いいいいい). A run with ー that ends a phrase, also before a shout's っ, after a word
-// is written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji or those
-// kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
+// cry いいいいい), and a run of three or more plain vowel kana after words, before a pause or
+// a ッ (待ったああああっ, 言うなあああっ). Such a dropped run of three or more vowel kana
+// leaves one kDrawnMark for each, which takes a shout's ッ after it (やめてぇぇぇ やめて + 3
+// marks). A run with ー that ends a phrase, also before a shout's っ, after a word is
+// written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji
+// or those kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
 // that makes a word of four or more characters (せんせー せんせい). Neither touches a
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
 // after る or て. Returns text itself when nothing changes.
@@ -181,8 +184,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // carries the sound (the only syllable, or one without an initial consonant: 앙, 하아,
 // 우왓), each 'v' adds a syllable of its vowel, at most four, before the final
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
-// (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~, and 't' (a ～ that
-// stood for the key's ー: う～ん) a ~ at the end.
+// (하아 하앗); other words take one ~ instead (정말 정말~), unless 'd' (an interjection drawn
+// out by three or more vowel kana) makes the last syllable carry it (안 돼 + vvvd 안 돼애애애).
+// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end.
 std::string Lengthen(std::string_view korean, std::string_view units);
 
 // A row of the sound lexicon; key in katakana.

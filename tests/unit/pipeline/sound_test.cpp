@@ -74,6 +74,8 @@ HD_TEST(pipeline_lengthen) {
         {"아하하", "!", "아하하"},
         // A ～ that stood for the key's ー adds one ~ at the end.
         {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
+        // 'd' lets the last syllable of a word carry the lengthening.
+        {"안 돼", "vvvd", "안 돼애애애"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
@@ -154,7 +156,7 @@ HD_TEST(pipeline_sound) {
         {"ふぁーふぁー", "후아아후아아"},
         {"やだやだ", "싫어 싫어"},
         // Of two keys as long, the one whose Korean draws the vowel out (ひぎぃ, not ひぎっ).
-        {"ひぎぃぃぃっ！", "히기이이잇！"},
+        {"ひぎぃぃぃっ！", "히기이이익！"},
         {"ひぎっ！", "히긱！"},
         {"はぁぁぁ…", "하아아아…"},
         {"いやぁぁぁ！", "싫어어어！"},
@@ -210,7 +212,7 @@ HD_TEST(pipeline_sound) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -522,7 +524,7 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃッ？"},
+        {"なんだそりゃぁあッ？", "なんだそりゃッ？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -571,6 +573,10 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // っ goes; a cry (no word before the mark) keeps it for the cry pass.
         {"まかせてーーっ！", "まかせて～！"},
         {"ぎやぁーっ！", "ぎやぁーっ！"},
+        // A dropped run of three or more vowel kana leaves a drawn mark for each.
+        {"まかせてぇぇぇ！", "まかせて\uE00B\uE00B\uE00B！"},
+        {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B！"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }

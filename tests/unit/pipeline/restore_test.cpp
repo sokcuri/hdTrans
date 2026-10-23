@@ -265,6 +265,11 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
+    // A drawn mark draws out the vowel of the syllable before it, the final moved last.
+    HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼애"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("선배님\uE00B\uE00B"), std::string("선배니이임"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00B선배"), std::string("!선배"));
 }
 
 HD_TEST(pipeline_drop_particle_marks) {
