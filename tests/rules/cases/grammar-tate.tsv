@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:gram:tate:焼きたて:pre	厚切りの焼きたてトースト、ベーコン。	후끝의 갓 구운 토스트, 베이컨.	fix	local
+dict:gram:tate:焼きたて	焼きたてが一番おいしい。	갓 구운 것이 제일 맛있다.	keep	defaults
+dict:gram:tate:ending	算数を習いたての小学生にも分かります。	산수를 배운 지 얼마 안 된 초등학생에게도 압니다.	fix	local
+dict:gram:tate:ending	炊きたて麦飯と、熱々お味噌汁。	밥한 지 얼마 안 된 보리밥과 따끈따끈 맛조 국물.	fix	local
+dict:gram:tate:ending	計画を立てて、	계획을 세우고,	keep	local

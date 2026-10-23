@@ -30770,6 +30770,15 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 たて	&JA@	M467	VBlUAr		GN				jisjk:140629		
 たて	&FQ@	M447	VBl		GN				jisjk:344338		
 たておくりしき	가로 이송식	N110			GN				jisjk:162615		
+たて	8 지 얼마 안 된 것	S5:0	XXX		GN				gram:tate:ending:noun		
+たて	8 지 얼마 안 된	S5:0			GN	6212	||1 ||2 P+1== "1**" S+1== "の"	동사 연용형 뒤의 たて는 ‘-은 지 얼마 안 된’으로 읽고 뒤에 명사가 없으면 ‘것’을 붙인다(入学したて 입학한 지 얼마 안 된).	gram:tate:ending		
+たての	8 지 얼마 안 된	S5:0			GN				gram:tate:ending:no		
+出来たて	갓 만든	N110			GN	6211	||1 P+1== "1**"	V連用形+たて는 뒤에 명사가 바로 오면 꾸미는 말(갓 구운)로, 그 밖에는 명사(갓 구운 것)로 읽는다.	gram:tate:出来たて:pre		
+出来たて	갓 만든 것	N110	XXX		GN				gram:tate:出来たて		
+焼きたて	갓 구운	N110			GN	6211	||1 P+1== "1**"	V連用形+たて는 뒤에 명사가 바로 오면 꾸미는 말(갓 구운)로, 그 밖에는 명사(갓 구운 것)로 읽는다.	gram:tate:焼きたて:pre		
+焼きたて	갓 구운 것	N110	XXX		GN				gram:tate:焼きたて		
+淹れたて	갓 우려낸	N110			GN	6211	||1 P+1== "1**"	V連用形+たて는 뒤에 명사가 바로 오면 꾸미는 말(갓 구운)로, 그 밖에는 명사(갓 구운 것)로 읽는다.	gram:tate:淹れたて:pre		
+淹れたて	갓 우려낸 것	N110	XXX		GN				gram:tate:淹れたて		
 たてかえ	대신 지불&AV@	M417	VMo		GN				jisjk:140525		
 たてかえ	재건축	N110			GN				jisjk:161247		-1
 たてかけ	기대어 세워 &F6@	M447			GN				jisjk:140531		
