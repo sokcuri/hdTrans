@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:341739	憶えてない……	기억하지 못한다……	fix	rewrites
+dict:jisjk:341739	痛みは憶えていない。	아픔은 기억하지 못한다.	fix	rewrites
+dict:jisjk:341739	まだ食べてない。	아직 먹지 않았다.	keep	local-ending

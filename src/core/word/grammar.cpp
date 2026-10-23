@@ -511,7 +511,7 @@ constexpr std::string_view kGradualAdverbs[] = {
 };
 
 // Stems of the verbs of noticing or remembering whose negative takes 못하다 (notYet).
-constexpr std::string_view kNotYetVerbs[] = {"気づ", "気付", "気がつ", "気が付", "覚え"};
+constexpr std::string_view kNotYetVerbs[] = {"気づ", "気付", "気がつ", "気が付", "覚え", "憶え"};
 
 // Whether an adverb of gradual change stands before it in its sentence.
 bool GradualBefore(const Item* it) {
