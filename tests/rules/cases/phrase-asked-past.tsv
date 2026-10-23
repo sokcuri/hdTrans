@@ -1,4 +1,3 @@
-# 규칙: SPC-1
 rule	input	expected	kind	layer
 sound:asked-past	宿題、できた？	숙제, 다 됐어?	fix	sound
 sound:asked-past	「できた？」	「다 됐어?」	fix	sound

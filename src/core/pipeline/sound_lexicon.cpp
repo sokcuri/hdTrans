@@ -62,6 +62,7 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
             while (!opts.empty()) {
                 const size_t sp = opts.find(' ');
                 row.exclaim = row.exclaim || opts.substr(0, sp) == "exclaim";
+                row.predicate = row.predicate || opts.substr(0, sp) == "predicate";
                 opts = sp == std::string_view::npos ? std::string_view() : opts.substr(sp + 1);
             }
         }

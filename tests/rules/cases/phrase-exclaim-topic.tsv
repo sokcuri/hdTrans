@@ -1,4 +1,3 @@
-# 규칙: SPC-1
 rule	input	expected	kind	layer
 sound:exclaim	あの頃は、よかった。	그 무렵은, 좋았다.	fix	sound
 sound:exclaim	あの時が、よかった。	그 때가, 좋았다.	fix	sound
@@ -7,3 +6,4 @@ sound:exclaim	「そりゃよかった」	「다행이다」	fix	builtin-phrase
 sound:exclaim	それは、よかった。	그것은, 다행이다.	keep	sound
 sound:exclaim	ああ、よかった。	아, 다행이다.	keep	sound
 sound:exclaim	でも、よかった。	하지만, 다행이다.	keep	sound
+sound:exclaim	今度は、やった！	이번에는, 해냈다!	keep	sound

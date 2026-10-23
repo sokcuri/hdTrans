@@ -757,7 +757,9 @@ HD_TEST(pipeline_sound_name_and_noun) {
 // an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
 HD_TEST(pipeline_sound_exclaim_before_question) {
     bool flagged = false;
-    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim);
+    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) {
+        flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim && r.predicate);
+    }
     HD_CHECK(flagged);
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());
