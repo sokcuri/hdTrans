@@ -431,11 +431,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         queryAllowed = false;
     }
 
-    // The ending group at rest, the text after the conjugation pattern.
-    auto endingGroup = [&](std::string_view rest) -> Group* {
+    // The ending group at endingText, the text after the conjugation pattern.
+    auto endingGroup = [&](std::string_view endingText) -> Group* {
         Group* g = nullptr;
-        if (!queryAllowed || rest.empty()) return g;
-        const Lookup found = w->DoLookup(rest, kModeVerbEnding);
+        if (!queryAllowed || endingText.empty()) return g;
+        const Lookup found = w->DoLookup(endingText, kModeVerbEnding);
         if (found.count == 0) return g;
         g = w->NewGroup(found.records, ' ');
         if (g->length <= 0) return g;
@@ -444,23 +444,23 @@ bool Item::AcceptVerbContinuation(Record* following) {
             fill(g);
             bool accepted = false;
             if (base.patternKind == 7 && base.kind == 8 &&
-                (rest.starts_with(kJaMasu) || rest.starts_with(kJaMase) || rest.starts_with(kJaMashi) ||
-                 (w->settings.text && rest.starts_with(kJaYaga)))) {
+                (endingText.starts_with(kJaMasu) || endingText.starts_with(kJaMase) || endingText.starts_with(kJaMashi) ||
+                 (w->settings.text && endingText.starts_with(kJaYaga)))) {
                 base.kind = 10;
             } else {
                 restore();
             }
-            const std::string_view next = From(after(), g->length);
+            const std::string_view afterGroup = From(after(), g->length);
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
-                if ((Has(e.gattr, "Sh") && Classify(next) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
-                    !w->EndingApplies(e, next, tokenIndex) ||
-                    w->CutsWord(tail.substr(0, tail.size() - rest.size()), rest.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), rest.size())), next)) {
+                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
+                    !w->EndingApplies(e, afterGroup, tokenIndex) ||
+                    w->CutsWord(tail.substr(0, tail.size() - endingText.size()), endingText.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), endingText.size())), afterGroup)) {
                     base.enabled[index] = false;
                     continue;
                 }
                 base.group = g;
-                if (g->length <= 0 || w->MatchDictionary(next, g->surface, '5', '4')) accepted = true;
+                if (g->length <= 0 || w->MatchDictionary(afterGroup, g->surface, '5', '4')) accepted = true;
                 else keepScanning = false;
             }
             if (accepted) break;
