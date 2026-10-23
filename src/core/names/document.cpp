@@ -176,7 +176,8 @@ struct DocumentHistory {
     // next line is Japanese with hiragana, not a name or title (骨まで愛して before 莫文蔚).
     static bool Continues(std::string_view line, std::string_view next) {
         line = names::internal::TrimSpace(line);
-        if (!line.ends_with("て") && !line.ends_with("で")) return false;
+        next = names::internal::TrimSpace(next);
+        if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
         const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
         return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
                !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });

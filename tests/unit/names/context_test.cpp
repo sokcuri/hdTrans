@@ -121,4 +121,9 @@ HD_TEST(document_verse_lines) {
     HD_CHECK_EQ(verse.size(), std::size_t{2});
     HD_CHECK(verse.count("窓を開けて") == 1);
     HD_CHECK(verse.count("風を感じて") == 1);
+    // An empty next line and the end of the text end the verse.
+    const std::vector<std::string> ends = {"私を信じて", "", "明日も会おう", "空を見上げて"};
+    HD_CHECK(pipeline::internal::VerseLines(ends).empty());
+    const std::vector<std::string> spaces = {"私を信じて", "　 "};
+    HD_CHECK(pipeline::internal::VerseLines(spaces).empty());
 }
