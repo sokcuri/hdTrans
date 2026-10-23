@@ -65,6 +65,11 @@ bool Item::RunDefaultTrieQuery() {
         return false;
     }
     if (group->entries.empty()) return false;
+    // A noun ending in ら before しい, しく or しかっ leaves ら to らしい (お前らしい: お前 + らしい).
+    if (marker == '1' && surface.ends_with("ら") &&
+        (remaining.starts_with("しい") || remaining.starts_with("しく") || remaining.starts_with("しかっ"))) {
+        return false;
+    }
     if (const Window first = Left(surface, 2); marker == '1' && WidthOf(surface) == 4 && NumeralPair(first)) {
         if (NumeralPair(Right(markerText, 2))) return false;
     }
