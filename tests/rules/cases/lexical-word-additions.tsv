@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:w:26741	丸々と太っている。	통통하게 살쪄 있다.	fix	lookup
+dict:w:26742	丸々一日かかった。	꼬박 하루 걸렸다.	fix	lookup
+dict:w:26743	「すまぬ」	「미안하다」	fix	lookup
+dict:w:26744	「すまぬが、頼む」	「미안하지만, 부탁한다」	fix	lookup
+dict:w:26745	日持ちするだろう。	오래 갈 것이다.	fix	lookup
+dict:w:26746	木に吊るしてくれる。	나무에 매달아 준다.	fix	lookup
+dict:w:26746	肉を吊るす。	고기를 매단다.	fix	lookup
+dict:w:26747	これでもかと生えている。	질릴 만큼 나 있다.	fix	lookup
+dict:w:26740	それは大岩ぐらいの大きさだ。	그것은 큰 바위 정도의 크기다.	fix	lookup
+dict:w:26740	大岩さんが来た。	오이와 씨가 왔다.	keep	lookup
