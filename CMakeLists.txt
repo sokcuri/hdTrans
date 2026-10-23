@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(HDTRANS_WERROR "Treat compiler warnings as errors" ON)
 option(HDTRANS_INTERPRET_RULES "Evaluate every selection rule with the interpreter, ignoring compiled rules" OFF)
+option(HDTRANS_PASS_EXPERIMENTS "Read HDTRANS_PASS_SKIP and HDTRANS_PASS_SHUFFLE to leave out or reorder sentence passes (measurement builds only)" OFF)
 
 if(MSVC)
     # Static CRT: the DLL is one file inside a host that ships no runtime of ours.
@@ -94,6 +95,9 @@ set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIE
 if(HDTRANS_INTERPRET_RULES)
     target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
 endif()
+if(HDTRANS_PASS_EXPERIMENTS)
+    target_compile_definitions(hdtrans PRIVATE HDTRANS_PASS_EXPERIMENTS)
+endif()
 file(GLOB_RECURSE HDTRANS_DATA_SOURCES CONFIGURE_DEPENDS src/core/*.cpp src/core/*.h)
 list(APPEND HDTRANS_DATA_SOURCES ${HDTRANS_RULES})
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${HDTRANS_DATA_SOURCES})
@@ -166,11 +170,16 @@ if(NOT EMSCRIPTEN)
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
-            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene)
+            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            # Japanese and Korean text in src/core stays within tools/surface-budget.tsv.
+            add_test(NAME tools.surface-budget COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --check)
+            add_test(NAME tools.surface-budget.self-test COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --self-test)
         endif()
     endif()
 

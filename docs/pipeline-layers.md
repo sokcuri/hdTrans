@@ -24,7 +24,7 @@
 | lookup | 사전 순서로 후보를 모음. 뒤 사전이 같은 키, 품사의 `endings`, `phrases`, `patterns` 행을 바꿈 | 후보 목록 | 이 순서가 뒤 층의 "처음 참" 순서 | `dicts/*.tsv`, 사용자 사전 | `src/core/word/lookup.cpp` `Worker::DoLookup` `snapshot.GetWordInfo(` |
 | constraints | 표 순서로 모두 적용. 후보를 모두 지우지는 않음 | 후보 제거, 이름 항목 추가 | 추가한 이름 항목은 `-why`에 `Fixed`로 보임 | `src/core/word/constraints.cpp`의 `kRules` | `src/core/word/lookup.cpp` `Worker::DoLookup` `ApplyConstraints(found, query)` |
 | lookup-drops | 모두 적용 | 후보 제거, 번역 음역 | 없음 | 코드 | `src/core/word/lookup.cpp` `Worker::DoLookup` `DropBoundUtterances(l, query)` |
-| pre-select | 모두 적용 | 항목 삽입, 문법 코드 Ka→Pi | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `DrainNmTail(f)` |
+| pre-select | 모두 적용 | 항목 삽입, 문법 코드 Ka→Pi | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `"DrainNmTail"` |
 | local | 단어마다 후보를 사전 순서로 두고 그 행의 지역 규칙을 실행, 처음 참인 후보 | 후보 선택, `D=`, `Y=` 번역 | 거짓인 규칙의 대입은 되돌림 | 사전 `ctx` 열 | `src/core/word/selectors.cpp` `CleanupSelectors` `RunLocalRule(f, it, source.id)` |
 | global-stem | 후보마다 품사키가 맞는 어간 전역 규칙을 PRIO 순으로, 번호 1001~4999, 처음 참 | 후보 선택, 번역 | 거짓인 규칙의 대입은 되돌림 | `src/core/rules/globals.txt` | `src/core/word/selectors.cpp` `CleanupSelectors` `false, &source.id)` |
 | defaults | 하나뿐 → 첫 `XXX` → `J` 숫자 | 후보 선택 | 없음 | 사전 `sem`, `gram` | `src/core/word/selectors.cpp` `CleanupSelectors` `SelectLastXXX(it)` |
@@ -33,12 +33,12 @@
 | global-ending | 어미 후보마다 어미 전역 규칙을 PRIO 순으로, 처음 참 | 어미 선택, 대입 | 거짓인 규칙의 대입은 되돌림 | `src/core/rules/globals.txt` | `src/core/word/selectors.cpp` `SelectDirect` `RunGlobalRule(f, it, false` |
 | ending-defaults | 하나뿐 → 첫 `XXX` → `J` 숫자 | 어미 선택 | 없음 | 사전 `sem`, `gram` | `src/core/word/selectors.cpp` `SelectDirect` `SelectDirectLastXXX(it)` |
 | global-last | 후보마다 어간 전역 규칙을 PRIO 순으로, 번호 1~999, 처음 참 | 앞에서 고른 후보를 **바꿈**(어미는 다시 고르지 않음) | 대입은 남음 | `src/core/rules/globals.txt` | `src/core/word/selectors.cpp` `CleanupSelectors` `true, &source.id)` |
-| class3 | 모두 적용 | 선택, 번역 | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `CleanupClass3(f)` |
+| class3 | 모두 적용 | 선택, 번역 | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `"CleanupClass3"` |
 | senses | 키마다 행을 파일 순서로, 처음 맞는 행 | 선택 또는 번역 | 없음 | `src/core/dict/builtin/senses.tsv` | `src/core/word/select.cpp` `Select` `ChooseSenses(f)` |
 | scorers | 처음 다른 후보를 고른 채점기 | 선택 | 없음 | 문서 의미 기억 | `src/core/word/select.cpp` `Select` `scorer.score(` |
-| rewrites | 패스 약 35개를 차례로, 각 패스는 왼쪽부터 | 선택, 어간, 어미 번역 | 뒤 패스가 앞 패스를 덮음 | 코드, `patterns.tsv` | `src/core/word/flush.cpp` `Flush` `ChooseInitialConjunctions(f)` |
-| misread | 결정을 모두 계산한 뒤 적용(`-misread`) | 후보, 어미, 가나 소리 | 없음 | 모델 | `src/core/word/flush.cpp` `Flush` `FilterMisreads(f)` |
-| cg-lite | tier 오름차순, 각 tier는 고정점까지. REMOVE와 SELECT | 후보 제거, 선택 | 고른 후보가 지워지면 첫 살아 있는 후보 | `cg_rules.tsv`, `cg_learned.tsv` | `src/core/word/flush.cpp` `Flush` `FilterCg(f)` |
+| rewrites | 패스 56개(`kTextPasses`)를 차례로, 각 패스는 왼쪽부터 | 선택, 어간, 어미 번역 | 뒤 패스가 앞 패스를 덮음 | 코드, `patterns.tsv` | `src/core/word/flush.cpp` `Flush` `kTextPasses` |
+| misread | 결정을 모두 계산한 뒤 적용(`-misread`) | 후보, 어미, 가나 소리 | 없음 | 모델 | `src/core/word/flush.cpp` `Flush` `"FilterMisreads"` |
+| cg-lite | tier 오름차순, 각 tier는 고정점까지. REMOVE와 SELECT | 후보 제거, 선택 | 고른 후보가 지워지면 첫 살아 있는 후보 | `cg_rules.tsv`, `cg_learned.tsv` | `src/core/word/flush.cpp` `Flush` `"FilterCg"` |
 | compose | 항목을 오른쪽에서 왼쪽으로 | 조사 형태, 활용 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateChunk` `s.composer.Compose(` |
 | cleanup | 모두 적용 | 출력 텍스트 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateBody` `output::Cleanup(sentences, gaps)` |
 | restore | 차례로. `cleanup.tsv`는 위치마다 파일 순서의 첫 행 | 출력 텍스트 | 없음 | `src/core/dict/builtin/extra/cleanup.tsv` | `src/core/engine/driver.cpp` `TranslateBody` `pipeline::RestoreAll(` |

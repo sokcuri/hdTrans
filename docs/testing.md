@@ -10,6 +10,7 @@
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
+| `tools.surface-budget` | `src/core`의 일본어, 한국어 문자열이 `tools/surface-budget.tsv`의 상한을 넘지 않는지 확인 ([아래](#표면-문자열-예산-surface-budgetpy)). `.self-test`는 도구 자체 시험 (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
@@ -78,6 +79,56 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 
 출력은 `build/examples/`에 생깁니다. 사전 인자가 비어 있으면 77로 끝나며, ctest는 이를 건너뜀으로
 처리합니다.
+
+## 표면 문자열 예산 (surface-budget.py)
+
+`tools/surface-budget.py`는 `src/core`의 `.cpp`, `.h`마다 엔진 코드에 직접 쓴 일본어와 한국어를 셉니다.
+첫 줄이 `// Generated ...; do not edit`인 생성 파일만 빼고, 이름이 `_gen`이어도 손으로 고치는 파일은 셉니다.
+열의 뜻은 도구 첫머리에 있습니다. 문자열, 낱말 목록, 표면형 비교 조건(`In(`, `OneOf(`, `Starts(` 같은 도우미
+호출, 여러 줄에 걸친 비교, `case U'…'` 포함)과 그 우회(가나 문자 리터럴, `\u` 이스케이프, 가나, 한자, 한글
+범위의 16진 상수와 범위 경계로 쓴 10진 상수, 헤더 상수 사용)를 셉니다. 비트 마스크와 BOM은 세지 않습니다.
+코드와 분류 비교 조건(`cond_code`)은 상한 없이 셉니다.
+
+- `tools/surface-budget.tsv`가 파일마다 상한입니다. 표에 없는 파일의 상한은 0이라서, 새 파일에 문자열을
+  쓰면 실패합니다. 파일 이름을 바꾸거나 나누는 것도 새 파일의 상한을 올리는 일입니다.
+- `--check`(기본)는 상한을 넘는 수를 보이고 실패합니다. 낮출 수 있는 상한이 있으면 그 수와 `--update`
+  명령을 알립니다. `--base REF`를 주면 REF 뒤에 바뀐 파일의 수가 상한보다 낮을 때도 실패합니다. 남은
+  여유를 표에 적어 두지 않으면 나중에 트레일러 없이 다시 채울 수 있기 때문입니다.
+- `--update`는 지금 수를 상한으로 씁니다. 낮추기와 지운 파일의 행 지우기는 그냥 되지만, 올리기는
+  develop과의 merge base(`--base REF`) 뒤의 커밋 하나에 `Surface-Budget: <이유>` 트레일러가 있을 때만
+  씁니다. 트레일러 하나가 그 범위의 모든 파일에 통합니다. 올려야 하면 코드를 그 트레일러와 함께
+  커밋하고, `--update`를 돌린 뒤 표를 커밋합니다.
+- `--report`는 열마다 합계, 표면형 비교와 코드 비교 조건의 비(`surface:code`), 문자열이 많은 파일을
+  보입니다. 구조를 바꾼 뒤 수가 줄었는지 볼 때 씁니다.
+- CI의 `release-tools` 작업은 `--self-test`와 `--check`를 돌립니다. PR에서는 PR이 갈라진 기준 커밋
+  (`github.event.pull_request.base.sha`)으로 `--check --base`를 돌려, 표의 수가 오르거나 행이 늘었는데
+  PR의 어느 커밋에도 트레일러가 없을 때와 PR이 바꾼 파일에 적지 않은 여유가 있을 때 실패합니다.
+
+## 패스 실험 빌드
+
+단어 단계의 문장 패스(`src/core/word/flush.cpp`)가 순서에 얼마나 민감한지, 테스트가 패스를 얼마나 붙잡는지
+재는 빌드입니다. CMake 옵션 `HDTRANS_PASS_EXPERIMENTS`(기본 꺼짐)를 켠 빌드만 아래 두 변수를 읽고, 릴리스와
+CI 빌드에는 이 코드가 들어가지 않습니다. 켠 빌드도 변수가 없으면 출력이 같습니다.
+
+```sh
+cmake --preset mac -B build/mac-passexp -DHDTRANS_PASS_EXPERIMENTS=ON
+cmake --build build/mac-passexp --parallel --target hdtrans_cli
+HDTRANS_PASS_SKIP=NounTo build/mac-passexp/hdtrans -dicts dicts -in in.txt   # 그 패스를 빼고 번역
+HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # 씨앗 7로 패스 순서를 섞어 번역
+```
+
+- `HDTRANS_PASS_SKIP`: 뺄 패스 이름, 쉼표로 구분하고 앞뒤 공백은 무시. 이름은 `flush.cpp`의 `Run` 호출과
+  `kTextPasses`에 있고, 모르는 이름은 표준 오류에 알립니다.
+- `HDTRANS_PASS_SHUFFLE`: 10진 씨앗. `kTextPasses`(`Select`부터 `EmphaticMo`까지 56개)의 순서만 섞고, 그 앞뒤
+  패스는 그대로 둡니다. 같은 씨앗은 같은 순서입니다. 10진수가 아니면 표준 오류에 알리고 멈춥니다(abort).
+- 두 변수는 프로세스에서 처음 번역할 때 한 번 읽습니다.
+
+`tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]`는 이 빌드(기본
+`build/<프리셋>-passexp/hdtrans`, 사전 기본 `dicts/`)로 패스를 하나씩 빼고 규칙 사례 네 묶음(`cases.tsv`,
+`cases/`, `speech-soft/`, `speech-strict/`)과 `examples/`를 돌려, 패스마다 묶음별 실패 수와 어느 테스트도
+잡지 못한 패스를 보입니다. 실행마다 시간 제한(기본 900초)이 있고, CLI가 죽거나(`crash`) 시간을 넘긴
+(`timeout`) 묶음은 그 패스를 잡은 것으로 칩니다. 기본으로 꺼진 개선 옵션(`src/core/word/analyze.h`)만 돌리는
+패스(`FilterMisreads`)는 `not exercised`로 따로 보입니다.
 
 ## 한 입력 살펴보기: 단계 기록 (-stages)
 
@@ -315,6 +366,8 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
+| `HDTRANS_PASS_SKIP`, `HDTRANS_PASS_SHUFFLE` | `HDTRANS_PASS_EXPERIMENTS` 빌드의 엔진 | 뺄 문장 패스, 패스 순서를 섞는 씨앗 ([패스 실험 빌드](#패스-실험-빌드)) |
+| `HDTRANS_EXAMPLES_OUT` | `examples.sh` | 출력 폴더 (기본 `build/examples`) |
 | `HDTRANS_HYGIENE_PATTERNS` | `hygiene.py` | 커밋하면 안 되는 말의 정규식 파일 (저장소 밖) |
 
 작업 절차와 그 도구(`gate.sh`, `measure.sh`, `pick.sh` 등)는 [skills/README.md](../skills/README.md)에 있습니다.
