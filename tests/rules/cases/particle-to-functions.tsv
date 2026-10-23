@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+sound:paused-to	　ぱさり、と、唯一持つことを許された日記帳が落ちた。	 툭, 하고, 유일 가지는 것이 용서된 일기장이 떨어졌다.	fix	sound
+sound:paused-to	ふむ、と彼が腕を組む。	흠, 하고 그가 팔짱을 낀다.	fix	sound
+sound:paused-to	　ダンッ！　ダンッ！　と豪快な音が断続的に響いてくる。	 쾅! 쾅! 하고 호쾌한 소리가 단속적으로 울려 온다.	fix	sound
+sound:paused-to	彼はニヒヒ…と笑いながら、	그는 니히히… 하고 웃으면서,	fix	sound
+sound:paused-to	やっ……と、静かになったぁ……。	얏……과 조용하게 되었다…….	keep	sound
+sound:paused-to	うん、とても良い。	응, 무척 좋다.	keep	sound
+sound:pon	　ぽん、と手を叩く。	 퐁, 하고 손뼉을 친다.	fix	sound
+sound:pon	ぽんと手を叩く。	탁 손뼉을 친다.	keep	sound
+sound:katakana-after-to	　スタスタとベッドから降りると、彼女は部屋を飛び出した。	 척척 침대에서 내리니, 그녀는 방을 뛰쳐나왔다.	fix	sound
+sound:katakana-after-to	舌を絡めて、チュッとキスをした。	혀를 걸고, 쪽 키스를 했다.	keep	sound
+sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 복도를 걸어간다.	fix	sound
+sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
+sound:hiragana-doubled	いろいろと考えた。	여러모로 생각했다.	keep	sound

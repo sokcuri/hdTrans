@@ -172,6 +172,7 @@ struct SoundMatch {
     std::string_view root;
     bool intj = false, lead = false, open = false;
     bool spaceAfter = false;  // a word that starts inside the match took its end
+    bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
 };
 
 // Whether two sounds in a row are written apart: both have two or more syllables, and
@@ -324,9 +325,12 @@ private:
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
     size_t Adverbial(size_t i) const;
+    bool StartsLongerWord(size_t i) const;
+    size_t PausedTo(size_t i) const;
     size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
     size_t MimeticTo(size_t p, size_t end, bool& hiragana) const;
+    size_t HiraganaMimeticTo(size_t p) const;
     std::string ExclaimedSound(size_t p, size_t end) const;
     size_t LoneCatch(size_t p) const;
     std::string_view LoneVoice(size_t p) const;
@@ -507,7 +511,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 if (IsHiraganaRune(rs_[end])) korean += ',';
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter};
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase};
             chosen = &s;
         }
     }
@@ -768,21 +772,45 @@ size_t SoundText::WordLen(size_t p) const {
 
 // The length of the と, or the て of って, that makes an ono row ending at character i
 // an adverb, or 0: the particle must not start a longer word (とても) that reaches at
-// least as far as the word after it (とお of とお尻 does not), nor come before katakana.
+// least as far as the word after it (とお of とお尻 does not), nor join two sounds
+// (ドキドキとワクワク); before another katakana word it stays adverbial (スタスタとベッドから).
 size_t SoundText::Adverbial(size_t i) const {
     const std::u32string_view rs = rs_;
-    if (i >= rs.size() || (i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]))) return 0;
+    if (i >= rs.size()) return 0;
+    if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
-    if (i + 1 < rs.size() && IsJapaneseRune(rs[i + 1])) {
-        size_t base = 0, user = 0, name = 0;
-        LongestKeys(i, base, user, name);
-        if (base > 1) {
-            size_t nextBase = 0, nextUser = 0, nextName = 0;
-            LongestKeys(i + 1, nextBase, nextUser, nextName);
-            if (base >= 1 + std::max(nextBase, nextUser)) return 0;
-        }
+    return StartsLongerWord(i) ? 0 : 1;
+}
+
+// Whether a dictionary word of two or more characters starts at the particle at character
+// i and reaches at least as far as the word after the particle (とても, but not とお of とお尻).
+bool SoundText::StartsLongerWord(size_t i) const {
+    if (i + 1 >= rs_.size() || !IsJapaneseRune(rs_[i + 1])) return false;
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(i, base, user, name);
+    if (base <= 1) return false;
+    size_t nextBase = 0, nextUser = 0, nextName = 0;
+    LongestKeys(i + 1, nextBase, nextUser, nextName);
+    return base >= 1 + std::max(nextBase, nextUser);
+}
+
+// The character after the と that a sound ending at character i takes across a pause: a
+// run of 、 ！ ？ or an ellipsis, spaces, then と that starts no longer word (ぱさり、と
+// 툭, 하고; ダンッ！　と 쾅! 하고; but not うん、とても or ふふ、という) and is followed by
+// neither another と nor, after an ellipsis, a pause, which make it a stutter or a filler
+// (うわ！ ととと, やっ……と、 ううう……と、), nor by a form of する (ぎゅっ、として); 0 otherwise.
+size_t SoundText::PausedTo(size_t i) const {
+    const std::u32string_view rs = rs_;
+    size_t j = i;
+    while (j < rs.size() && In(rs[j], U"、，！!？?…‥")) j++;
+    if (j == i) return 0;
+    while (j < rs.size() && text::IsSpace(rs[j])) j++;
+    if (j >= rs.size() || rs[j] != U'と') return 0;
+    if (j + 1 < rs.size() && (In(rs[j + 1], U"とトしすさせ") ||
+                              (In(rs[j + 1], U"、，…‥") && rs.substr(i, j - i).find_first_of(U"…‥") != std::u32string_view::npos))) {
+        return 0;
     }
-    return 1;
+    return StartsLongerWord(j) ? 0 : j + 1;
 }
 
 // The end of the stutter at character p and its pieces, or 0: a kana syllable (with
@@ -1064,6 +1092,35 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     return i;
 }
 
+// The end of the と or っと after a hiragana mimetic the sound lexicon lacks at character
+// p, or 0: a unit of two plain kana said twice (とてとてと, ふるふると) that no dictionary or
+// name-layer key of four or more characters reads there, before と or っと that does not
+// quote (ふるふるという) or start する.
+size_t SoundText::HiraganaMimeticTo(size_t p) const {
+    const std::u32string_view rs = rs_, f = f_;
+    constexpr size_t n = 4;
+    if (p + n >= rs.size()) return 0;
+    for (size_t k = p; k < p + n; k++) {
+        if (!IsHiraganaRune(rs[k]) || In(rs[k], U"っゃゅょぁぃぅぇぉゎ")) return 0;
+    }
+    if (f.substr(p, 2) != f.substr(p + 2, 2) || f[p] == f[p + 1]) return 0;
+    size_t i = p + n;
+    if (rs[i] == U'っ') i++;
+    if (i >= rs.size() || rs[i] != U'と') return 0;
+    i++;
+    const std::u32string_view rest = rs.substr(i);
+    for (const std::u32string_view q : {U"いう", U"いっ", U"言", U"思", U"か", U"は", U"も", U"の"}) {
+        if (rest.starts_with(q)) return 0;
+    }
+    if (i < rs.size() && In(rs[i], U"しすさせ")) return 0;
+    const dict::Candidates rd =
+        snap_.GetWordInfo(Bytes(p, std::min(rs.size(), i + 4)), dict::LookupMode::General, ctx_.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (text::RuneCount(c.source) >= n) return 0;
+    }
+    return i;
+}
+
 std::string SoundText::Write() {
     const std::u32string_view rs = rs_;
     std::string b;
@@ -1105,7 +1162,16 @@ std::string SoundText::Write() {
                     b += m.korean;
                 }
             }
-            if (Spaced(next) || chain.back().spaceAfter) b += ' ';
+            // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
+            if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
+                b += Bytes(next, to - 1);
+                if (!text::IsSpace(rs[to - 2])) b += ' ';
+                b += "하고";
+                next = to;
+                if (next < rs.size() && !In(rs[next], U"、。，！？!?…‥」』）)")) b += ' ';
+            } else if (Spaced(next) || chain.back().spaceAfter) {
+                b += ' ';
+            }
         } else if (const size_t lone = LoneCatch(i); lone > 0) {
             b += "읏";
             next = lone;
@@ -1114,6 +1180,14 @@ std::string SoundText::Write() {
         } else if (const size_t burst = Burst(i); burst > 0) {
             b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, burst - i)), text::Preset::Fan);
             next = burst;
+        } else if (const size_t to = IsHiraganaRune(rs[i]) && (i == 0 || !IsHiraganaRune(rs[i - 1]) || afterParticle)
+                                         ? HiraganaMimeticTo(i)
+                                         : 0;
+                   to > 0) {
+            // A hiragana sound the lexicon lacks, as heard, the と after it dropped (とてとてと 토테토테).
+            b += text::FromKana(EncodeText(std::u32string_view(f_).substr(i, 4)), text::Preset::Fan);
+            if (Spaced(to)) b += ' ';
+            next = to;
         } else if (bool hiragana = false; IsKatakanaRune(rs[i]) && MimeticTo(i, KatakanaEnd(rs, i), hiragana) > 0) {
             const size_t run = KatakanaEnd(rs, i);
             if (hiragana) {

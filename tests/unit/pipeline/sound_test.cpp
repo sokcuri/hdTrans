@@ -276,6 +276,22 @@ HD_TEST(pipeline_sound) {
         {"ちょっと高い", "ちょっと高い"},
         {"これでよし。", "これでよし。"},
         {"<b>きゃあ</b>ぎゅっと", "<b>꺄아</b>꽉"},
+        // A と after a pause quotes the sound with 하고; not a stutter, a filler or する.
+        {"ぱさり、と落ちた", "툭、 하고 落ちた"},
+        {"ふむ、と頷く", "흠、 하고 頷く"},
+        {"ダンッ！　と音が", "쾅！　하고 音が"},
+        {"ひぃ…と叫ぶ", "히이… 하고 叫ぶ"},
+        {"ふむ、とは", "흠、とは"},
+        {"やっ……と、静か", "얏……と、静か"},
+        {"ぎゅっ、として", "꽉、として"},
+        {"ぱさり、と、落ちた", "툭、 하고、落ちた"},
+        // Before a katakana word the と stays adverbial, but not between two sounds.
+        {"スタスタとベッド", "척척 ベッド"},
+        {"ドキドキとワクワク", "두근두근と두근두근"},
+        // A doubled hiragana unit no word reads is a sound before と (とてとてと 토테토테).
+        {"とてとてと歩く", "토테토테 歩く"},
+        {"彼はふるふると", "彼は후루후루"},
+        {"ふるふるという", "ふるふるという"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
