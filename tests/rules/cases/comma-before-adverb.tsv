@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:261822	まっ、とりあえず	뭐, 우선	fix	lookup
+dict:jisjk:261822	まぁ、とりあえず行こう。	뭐, 우선 가자.	fix	lookup
+dict:jisjk:260655	では、とり急ぎご連絡まで。	그럼, 서둘러 연락까지.	fix	lookup
+dict:jisjk:265418	彼は賢い、それに強い。	그는 영리한, 게다가 강하다.	keep	lookup

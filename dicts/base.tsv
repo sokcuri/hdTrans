@@ -313,17 +313,17 @@ ttt	ttt	K110			GN				jisjk:201744
 ○	○	N600		Nd	GN	3043	||3 G+1== "Ct" S-1== "○" S+1== "○"	부사, 연체사, 관용구 뜻 선택: 머리 단어가 부사(3**), 연체사(0**, 大の, 普通の), 관용구(9**)인 규칙. 형식: docs/rule-language.md, 실행 순서: docs/pipeline-layers.md. 규칙은 그 번호를 가리키는 사전 단어(머리 단어)의 갈래로 파일을 정한다(docs/rule-language.md#주제-파일). 파일 안에서는 머리 단어별로 모아 두었다. 다른 파일: 접속사, 감탄사, 인사말은 discourse.txt, 지시, 의문 부사(そんなに, どんなに, なんとか)는 pronouns-demonstratives.txt, 의태어는 sound-mimetic.txt. 조수사 앞이나 다른 동그라미 기호 옆의 '○'를 숫자 성격의 동그라미 기호로 고른다.	jisjk:341214		
 ○ごと	통째	N110			GN				jisjk:340603		
 、	,	N600		Mk	GN				jisjk:257312		
-、それに	게다가	P210			GN				jisjk:265418		
+、それに	, 게다가	P210			GN				jisjk:265418		
 、って	라는	P200			GN				jisjk:264594		
 、という	5다고 한다	S560			GN	2640	||1 G+0== "Ow"	、という 어미는 오른쪽 경계이면 과거형 다고 한다로 고른다. (미발동: rare-context)	jisjk:267017		
 、という	5다는	S560	XXX		GN				jisjk:267018		
 、というだけで	(이)라는 것만으로	N200			GN				jisjk:361912		
 、といえば	라면	N200			GN				jisjk:264433		
 、ともに	,함께	E300			GN				jisjk:257615		
-、とりあえず	우선	E300			GN				jisjk:261822		
-、とり急ぎ	서둘러	K110			GN				jisjk:260655		
-、どうか	아무쪼록	N110		Ha	GN				jisjk:260698		
-、どうかなあ	어떨까	N110			GN				jisjk:267233		
+、とりあえず	, 우선	E300			GN				jisjk:261822		
+、とり急ぎ	, 서둘러	K110			GN				jisjk:260655		
+、どうか	, 아무쪼록	N110		Ha	GN				jisjk:260698		
+、どうかなあ	, 어떨까	N110			GN				jisjk:267233		
 。	.	N600		Mk	GN				jisjk:341908		
 。すると	그러자	P200			GN				jisjk:261775		
 々	들	N110			GN				jisjk:344801		
