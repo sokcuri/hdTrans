@@ -229,6 +229,8 @@ HD_TEST(pipeline_sound) {
         {"すごおおおい！", "すごい\uE00A！"},
         {"うるさああい！", "うるさい\uE00A！"},
         {"すごおい！", "すごおい！"},
+        // A ー after the い that ends an adjective before a pause is written ～.
+        {"すごいー！", "すごい～！"},
         // Unchanged: the casual negative ね, a lone kana, a sound.
         {"知らねー", "知らねー"},
         {"よー！", "よー！"},

@@ -175,7 +175,7 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // a ッ (待ったああああっ, 言うなあああっ). Such a dropped run of three or more vowel kana
 // leaves one kDrawnMark for each, which takes a shout's ッ after it (やめてぇぇぇ やめて + 3
 // marks). A run with ー that ends a phrase, also before a shout's っ, after a word is
-// written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji
+// written ～ (提督ー！, 待ってー, だよねー, だめーーっ, かわいいー！), its small vowels dropped after a kanji
 // or those kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
 // that makes a word of four or more characters (せんせー せんせい). Neither touches a
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な

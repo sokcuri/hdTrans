@@ -819,7 +819,19 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             // ああっ, あぁすみません: the lengthened interjection; but the い of an adjective stem
             // takes a mark for its own い (かわいー).
             const bool stemI = prev == U'い' && (r == U'ー' || r == U'～') && e.LongStem(rs, from, i);
-            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI)) continue;
+            // So does the い that ends an adjective before a pause (かわいいー！ かわいい～！), but
+            // not a cry of い alone (いいー).
+            size_t dashEnd = i;
+            while (dashEnd < rs.size() && (rs[dashEnd] == U'ー' || rs[dashEnd] == U'～')) dashEnd++;
+            const bool goodI = i >= 3 && rs[i - 2] == U'い' && !In(rs[i - 3], U"いぃ") &&
+                               e.Tags(U"い").find('H') != std::string::npos;  // 気持ちいいー
+            const bool adjectiveI = prev == U'い' && dashEnd > i && ShoutEnd(rs, dashEnd) && i >= 2 &&
+                                    (e.StemTagged(rs, from, i - 1, "H") || e.AdjectiveStemBefore(rs, from, i - 1) || goodI) &&
+                                    std::u32string_view(rs).substr(from, i - from).find_first_not_of(U'い') !=
+                                        std::u32string_view::npos;
+            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI && !adjectiveI)) {
+                continue;
+            }
             const bool plainStart = !IsSmallVowel(r) && r != U'ー' && r != U'～';
             bool small = IsSmallVowel(r) || plainStart;
             while (end < rs.size()) {
