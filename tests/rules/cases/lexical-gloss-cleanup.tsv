@@ -1,3 +1,4 @@
+# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:90529	影響をおよぼす。	영향을 미친다.	fix	lookup
 dict:jisjk:93160	心が奮い立つ。	마음이 분발한다.	fix	lookup

@@ -1,3 +1,4 @@
+# 규칙: NUM-2
 rule	input	expected	kind	layer
 compose:number-label	ステージ3ボス戦	스테이지 3 보스전	fix	compose
 compose:number-label	Lv.10スキル習得	Lv.10 스킬 습득	fix	compose

@@ -5,7 +5,7 @@
 한 번 내는 소리는 안에 공백이 없는 한국어 소리 하나로 옮기고 길이를 대략 맞춘다. 말더듬은 이어지는 낱말의 첫
 음절을 되풀이해 옮긴다. 의태어, 의성어 뒤의 と는 하고로 옮기거나 빼고, 과, 와, 라고로 옮기지 않는다.
 
-현재: 0.4.6에서 맞춤
+현재: 따름
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -16,4 +16,5 @@
 | 「わ、わ、わたし……」 | 「나, 나, 나……」 | 유지 |
 | じろじろと見る | 빤히 본다 | 유지 |
 
-사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-adverbial-to.tsv`(말더듬과 と)
+사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-adverbial-to.tsv`(말더듬과 と),
+`tests/rules/cases/sound-drawn-cries.tsv`(소리의 길이)

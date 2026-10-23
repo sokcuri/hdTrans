@@ -1,3 +1,4 @@
+# 규칙: SND-1
 rule	input	expected	kind	layer
 sound:cry	「ひぃやあああああああああああああ！」	「히이야아아아아아아아아아아아아아!」	fix	sound
 sound:cry	「ひぃやアアアアア！」	「히이야아아아아아!」	fix	sound

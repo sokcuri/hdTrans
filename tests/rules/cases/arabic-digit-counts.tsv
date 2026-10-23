@@ -1,3 +1,4 @@
+# 규칙: NUM-5
 rule	input	expected	kind	layer
 compose:native-count	2回まで使用可能。	2회까지 사용 가능.	fix	compose
 compose:native-count	攻撃回数：2回	공격 횟수：2회	fix	compose
