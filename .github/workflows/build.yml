@@ -38,6 +38,7 @@ env:
   SCCACHE_CACHE_SIZE: 1G
   CCACHE_DIR: ${{ github.workspace }}/build/ccache
   CCACHE_MAXSIZE: 1G
+  EMSDK_VERSION: 4.0.22
   HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt
 
 jobs:
@@ -127,12 +128,30 @@ jobs:
               "$name=$value" >> $env:GITHUB_ENV
             }
           }
-      - name: Set up Emscripten
+      # One Emscripten cache entry per version and runner, shared by every workflow.
+      - name: Restore Emscripten
+        id: emsdk-cache
         if: matrix.preset == 'wasm'
-        uses: mymindstorm/setup-emsdk@v16
+        uses: actions/cache/restore@v6
         with:
-          version: 4.0.22
-          actions-cache-folder: build/emsdk
+          path: build/emsdk
+          key: emsdk-${{ env.EMSDK_VERSION }}-${{ runner.os }}-${{ runner.arch }}
+      - name: Install Emscripten
+        if: matrix.preset == 'wasm' && steps.emsdk-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p build/emsdk
+          curl -fsSL --retry 3 "https://github.com/emscripten-core/emsdk/archive/refs/tags/$EMSDK_VERSION.tar.gz" |
+            tar -xz -C build/emsdk
+          mv "build/emsdk/emsdk-$EMSDK_VERSION" build/emsdk/emsdk-main
+          build/emsdk/emsdk-main/emsdk install "$EMSDK_VERSION"
+      - name: Save Emscripten
+        if: >-
+          matrix.preset == 'wasm' && steps.emsdk-cache.outputs.cache-hit != 'true' &&
+          (github.ref == 'refs/heads/develop' || github.event_name == 'pull_request')
+        uses: actions/cache/save@v6
+        with:
+          path: build/emsdk
+          key: ${{ steps.emsdk-cache.outputs.cache-primary-key }}
       - name: Set up ccache for Emscripten
         if: matrix.preset == 'wasm'
         run: |
@@ -140,10 +159,14 @@ jobs:
           sudo apt-get install -y ccache
           # Keep sysroot paths stable in both cold and restored compiler caches.
           sdk="$GITHUB_WORKSPACE/build/emsdk/emsdk-main"
-          "$sdk/emsdk" activate 4.0.22
+          "$sdk/emsdk" activate "$EMSDK_VERSION"
           source "$sdk/emsdk_env.sh"
-          env | grep '^EMSDK' >> "$GITHUB_ENV"
-          echo "EM_CONFIG=$sdk/.emscripten" >> "$GITHUB_ENV"
+          {
+            env | grep '^EMSDK'
+            echo "EM_CONFIG=$sdk/.emscripten"
+            # The Emscripten version identifies the compiler; restored files have other mtimes.
+            echo "CCACHE_COMPILERCHECK=string:emsdk-$EMSDK_VERSION"
+          } >> "$GITHUB_ENV"
           printf '%s\n' "$sdk" "$sdk/upstream/emscripten" >> "$GITHUB_PATH"
       - name: Set up Node for the WASM smoke test
         if: matrix.preset == 'wasm'
@@ -158,9 +181,11 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.11
         with:
           disable_annotations: true
+      # Only develop and pull requests save compiler caches; main and tags read develop's.
       - name: Restore native compiler cache
+        id: native-cache
         if: matrix.preset != 'wasm'
-        uses: actions/cache@v6
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.SCCACHE_DIR }}
           key: sccache-${{ runner.os }}-${{ runner.arch }}-${{ matrix.preset }}-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
@@ -168,8 +193,9 @@ jobs:
             sccache-${{ runner.os }}-${{ runner.arch }}-${{ matrix.preset }}-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
             sccache-${{ runner.os }}-${{ runner.arch }}-${{ matrix.preset }}-
       - name: Restore WASM compiler cache
+        id: wasm-cache
         if: matrix.preset == 'wasm'
-        uses: actions/cache@v6
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ runner.os }}-${{ runner.arch }}-wasm-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
@@ -198,6 +224,7 @@ jobs:
               -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
           fi
       - name: Build CLI, libraries and tests
+        id: compile
         env:
           EM_COMPILER_WRAPPER: ${{ matrix.preset == 'wasm' && 'ccache' || '' }}
         run: cmake --build --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS"
@@ -306,6 +333,22 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
             sccache --stop-server
           fi
+      - name: Save native compiler cache
+        if: >-
+          !cancelled() && matrix.preset != 'wasm' && steps.compile.outcome == 'success' &&
+          (github.ref == 'refs/heads/develop' || github.event_name == 'pull_request')
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: ${{ steps.native-cache.outputs.cache-primary-key }}
+      - name: Save WASM compiler cache
+        if: >-
+          !cancelled() && matrix.preset == 'wasm' && steps.compile.outcome == 'success' &&
+          (github.ref == 'refs/heads/develop' || github.event_name == 'pull_request')
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ${{ steps.wasm-cache.outputs.cache-primary-key }}
       - name: Upload CLI, GUI and libraries
         uses: actions/upload-artifact@v7
         with:
