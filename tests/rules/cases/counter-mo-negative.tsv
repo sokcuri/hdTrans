@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:jisjk:4079	1人もいない	1명도 없다	fix	local
 dict:jisjk:4079	1人も来なかった	1명도 오지 않았다	fix	local
-dict:jisjk:4079	百人もいない魔法使い	백명도 없는 마법사	fix	local
+dict:jisjk:4079	1匹もいない	1마리도 없다	fix	local
 dict:jisjk:4079	3人も来た	3명이나 왔다	keep	local
 dict:jisjk:4079	10人もいるのに	10명이나 있는데	keep	local
