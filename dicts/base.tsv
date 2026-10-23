@@ -1305,7 +1305,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 あちら	저리	I120	VPlVTpUDr		GN				jisjk:40285		
 あちら	저쪽	I120	VPlVTpUDr		GN	3485	||1 P+1== "2**"	「あちら」 뒤에 조사가 오면 장소·방향을 가리키는 ‘저쪽’을 고른다.	jisjk:343622		
 あちらこちら	여기저기	I110	VPl		GN				jisjk:40286		
-あちら側	저 쪽편	I120	VTpUDrVPl		GN				jisjk:40288		
+あちら側	저쪽편	I120	VTpUDrVPl		GN				jisjk:40288		
 あちら帰り	유학한 사람	N110	VHn		GN				jisjk:124527		
 あちら様	저쪽 분	I110	VHn		GN				jisjk:40287		
 あっ	앗	P320		J1	GN				jisjk:104121		
@@ -1567,7 +1567,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 あのとき	그 때	D120	UMe		GN				jisjk:40312		
 あのなか	그 안	I110	VPl		GN				jisjk:40313		
 あのね	저기요	E0H0			GN				jisjk:373480		
-あのひ	그 날	N110	UMe		GN				jisjk:124664		
+あのひ	그날	N110	UMe		GN				jisjk:124664		
 あのへん	그 근처	I120	VPl		GN				jisjk:40314		
 あのほか	그 외	I110			GN				jisjk:40315		
 あのよ	저승	N110	UClVPl		GN				jisjk:124667		
@@ -1585,7 +1585,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 あの年ごろ	그 나이때	K110			GN				jisjk:357769		
 あの年ごろ	그 나이때	C110			GN				jisjk:357771		
 あの手この手	이런수 저런수	I110			GN				jisjk:40316		
-あの日	그 날	N110	UMe		GN				jisjk:6443		
+あの日	그날	N110	UMe		GN				jisjk:6443		
 あの時	그 때	N120	UMe		GN				jisjk:6441		
 あの晩	그날 밤	N110	UMe		GN				jisjk:6440		
 あの点	그 점	N120	VPl		GN				jisjk:6445		
@@ -3992,7 +3992,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 いよう	이상%A1@	G8U0			GN				jisjk:119384		
 いよう	1게	T500			GN				jisjk:265975		
 いようが、なかろうが	있거나 말거나	K110			GN				jisjk:264600		
-いようですが	4듯 하지만	T500			GN				jisjk:265028		
+いようですが	4듯하지만	T500			GN				jisjk:265028		
 いようなら	1을 것 같다면	T500		Yn	GN				jisjk:265536		
 いように	4 것 처럼	T500			GN	1892	||1 &&2 ||4 S+1== "思" S+1== "見え" S+1== "思え" S+1== "見せ" P+1== "4**"	いように는 思·見え·思え·見せ 동사 앞에서 앞 형용사를 ‘-ㄴ 것처럼’으로 연결하는 어미로 고른다.	jisjk:258669		
 いように	1게	T500			GN				jisjk:266167		
@@ -17392,7 +17392,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 こちらからかけなおします	이쪽에서 다시 걸겠습니다	N110			GN				jisjk:151079		
 こちらがわ	이쪽편	I110	VPl		GN				jisjk:40964		
 こちらへ	이쪽으로	A9H1			GN				jisjk:103997		
-こちら側	이 쪽편	I120	VTpUDrVPl		GN				jisjk:40965		
+こちら側	이쪽편	I120	VTpUDrVPl		GN				jisjk:40965		
 こちら側で	이 편에	E311			GN				jisjk:372		
 こぢんまり	아담하게	M301			GN				jisjk:373		
 こぢんまり	아담&AV@	M429			GN				jisjk:120022		
@@ -19521,7 +19521,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 さきこぼれ	어우러져 &CM@	M418	QAL		GN				jisjk:90818		
 さきこぼれ	만발&AV@	M427	VPtUMe		GN				jisjk:120700		
 さきごろ	지난번	N110	UMe		GN				jisjk:184798		-1
-さきさま	그 쪽	N110	VHn		GN				jisjk:184800		-1
+さきさま	그쪽	N110	VHn		GN				jisjk:184800		-1
 さきざき	장래	N110	UMe		GN				jisjk:184801		-1
 さきざき	이전	N110	UMe		GN				jisjk:184803		-1
 さきそめ	피기 시작&AV@	M427	VPtUMe		GN				jisjk:120706		
@@ -22049,8 +22049,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 しま	&H5@	M430			GN	1766	||1 &&4 S-1== "に" P-1== "2**" P-2== "1**" ||4 A-2== "VPl" A-2== "VFn" A-2== "UTh" A-2== "UXg"	しま는 に 앞 명사가 특정 장소·물체·추상 의미 코드에 해당하면 ‘넣다’로 고른다.	jisjk:202286		
 しま	끝&A5@	M410			GN	2222	||1 S-1== "もう"	もう 바로 뒤에서 동사 しま를 끝나다로 고른다. (미발동: rare-context)	jisjk:264775		
 しま	닫&AW@	M428		Dx	GN	3498	||1 &&2 S-1== "が" ||6 S-2== "まど" S-2== "R窓" S-2== "ドア" S-2== "R門" S-2== "戸" S-2== "扉"	しま 앞에 窓·門로 끝나는 말이나 まど·ドア·戸·扉와 が가 오면 닫히다라는 번역을 고른다. (미발동: rare-context)	jisjk:343690		
-しま	큰일&A5@	M410			GN	4227	||3 S+1== "!" &&2 G+0== "Hz" M+0== "56*" &&2 M+0== "56*" S-1== "、"	느낌표 앞이거나 문장 처음·쉼표 뒤의 과거형인 しま를 큰일나다로 고른다.	jisjk:362205		
-しま	큰일&A5@	M410			GN	4228	||1 D+1== "!"	뒤 단어가 느낌표로 번역되면 동사 しま를 큰일나다로 고른다. (미발동: rare-context)	jisjk:362206		
+しま	큰일 &A5@	M410			GN	4227	||3 S+1== "!" &&2 G+0== "Hz" M+0== "56*" &&2 M+0== "56*" S-1== "、"	느낌표 앞이거나 문장 처음·쉼표 뒤의 과거형인 しま를 큰일나다로 고른다.	jisjk:362205		
+しま	큰일 &A5@	M410			GN	4228	||1 D+1== "!"	뒤 단어가 느낌표로 번역되면 동사 しま를 큰일나다로 고른다. (미발동: rare-context)	jisjk:362206		
 しまい	끝	N110	UMe		GN				jisjk:188452		
 しまい	자매	N110	VBpVHnVHn		GN				jisjk:188453		-1
 しまい	시마이	N120	VHn		GN				jisjk:188455		-1
@@ -29397,11 +29397,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そだてあげ	길러&A6@	M447			GN				jisjk:138742		
 そだてかた	육아 방법	N110			GN				jisjk:200786		-1
 そだてのおや	수양 부모	N110	VHn		GN				jisjk:200787		-1
-そちら	그 쪽	I120	VTpUDrVPl		GN				jisjk:41199		
+そちら	그쪽	I120	VTpUDrVPl		GN				jisjk:41199		
 そちらがわ	그쪽편	I110	VPl		GN				jisjk:41200		
 そちらの方でお決まりですか	이것으로 하시겠습니까	A9D0			GN				jisjk:374844		
-そちら側	그 쪽편	I120	VTpUDrVPl		GN				jisjk:41201		
-そちら様	그 쪽 분	I110	VHn		GN				jisjk:374887		
+そちら側	그쪽편	I120	VTpUDrVPl		GN				jisjk:41201		
+そちら様	그쪽 분	I110	VHn		GN				jisjk:374887		
 そっか	그렇구나	A9D0			GN				jisjk:257472		
 そっかな	그래	C0H0			CT				jisjk:258154		
 そっきしゃ	솟키샤	N120	VPl		GN				jisjk:200797		-1
@@ -29541,7 +29541,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そのはず	그럴 것%D4@	G8U0			GN				jisjk:344731		
 そのばかぎり	그때 뿐	N110			GN				jisjk:200931		-1
 そのばしのぎ	임시 방편	N110			GN				jisjk:200933		-1
-そのひ	그 날	N110	UMe		GN				jisjk:160709		
+そのひ	그날	N110	UMe		GN				jisjk:160709		
 そのひぐらし	하루 벌어 하루 살이	N110	VMo	Hd	GN				jisjk:200936		-1
 そのひそみになら	덩달아 본&A8@	M420			GN				jisjk:138043		
 そのひと	그 사람	N110	VHn		GN				jisjk:267964		
@@ -29645,11 +29645,11 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 その折	그 때	N110			GN				jisjk:6524		
 その折に	그 때	E311			GN				jisjk:612		
 その支持を取りつけ	그 지지를 &HH@	M447			GN				jisjk:138040		
-その方	그 쪽	N110			GN				jisjk:106393		
-その方	그 쪽	N110			GN				jisjk:114548		
+その方	그쪽	N110			GN				jisjk:106393		
+その方	그쪽	N110			GN				jisjk:114548		
 その方	그 분	N110	VHn		GN				jisjk:114549		
 その方法	그방법	N110			GN				jisjk:267324		
-その日	그 날	N110	UMe		Gn				jisjk:6523		
+その日	그날	N110	UMe		Gn				jisjk:6523		
 その日時	그 일시	N110	UMe		GN				jisjk:184427		
 その日暮らし	하루살이	I110			GN				jisjk:41215		
 その日本	그 일본	N110	QNN		GN				jisjk:344409		
@@ -36067,7 +36067,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 なり	1자 마자	S500			GN	3920	||1 P+1== "1**4**7**8**"	명사·동사·형용사·형용동사 앞의 なり 어미를 자 마자로 고른다.	jisjk:351487		
 なりかけ	되기 시작&AV@	M427			GN				jisjk:359463		
 なりすまし	위장	N110			GN				jisjk:347644		
-なりそうにな	되지 않을 듯 $AB@	G7U0			GN	2628	||1 &&2 S-1== "とは" D-1= "(으)로는"	とは 바로 뒤에서 なりそうにな를 되지 않을 듯 하다로 고르고 とは를 으로는으로 바꾼다. (미발동: rare-word)	jisjk:266958		
+なりそうにな	되지 않을 듯$AB@	G7U0			GN	2628	||1 &&2 S-1== "とは" D-1= "(으)로는"	とは 바로 뒤에서 なりそうにな를 되지 않을 듯 하다로 고르고 とは를 으로는으로 바꾼다. (미발동: rare-word)	jisjk:266958		
 なりた	이루어&AL@	M414			GN				jisjk:91193		
 なりたが	되고 싶어&AV@	C428			GN				jisjk:201835		
 なりたがってい	되고 싶어&AV@	N428			GN				jisjk:201844		
@@ -43297,7 +43297,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 よう	%B3@	G8U0			GN	69	||5 &&3 P-1== "8**" U-1== "だった" Y-1== "5던 것" &&3 P-1== "7**" U-1== "かった" Y-1== "5던 것" &&3 P-1== "8**" U-1== "な" Y-1== "4 것" &&2 P-1== "4**" M-1== "50*56*" &&2 P-1== "4**" U-1== "まいりました"	よう의 같다 후보를 지정된 형용사·형용동사 어미나 동사 어미 뒤에서 고른다.	jisjk:2281		
 よう	8 듯	S560		J1	GN				jisjk:2282		
 よう	도록 &AV@	M429			GN				jisjk:148564		
-よう	듯 %A1@	G8U0			GN	2389	||1 &&2 P-1== "8**" U-1== "な"	な 어미를 가진 형용동사 뒤에서 よう를 듯 하다로 고른다. (미발동: rare-context)	jisjk:265739		
+よう	듯%A1@	G8U0			GN	2389	||1 &&2 P-1== "8**" U-1== "な"	な 어미를 가진 형용동사 뒤에서 よう를 듯 하다로 고른다. (미발동: rare-context)	jisjk:265739		
 よう	3 수	S5:0			GN	2410	||2 &&3 S+1== "が" S+2== "な" P+2== "7**" P+1== "2**"	よう 어미는 뒤에 が와 な 형용사가 오거나 바로 뒤가 조사이면 관형형 수를 고른다. (미발동: other) [의심] 두 번째 대안 P+1 2**가 모든 뒤 조사를 허용하여 食べようとする 같은 의지형도 가능의 을 수로 선택할 수 있다.	jisjk:265837		
 よう	1도록(듯이)	S500			GN				jisjk:265934		
 よう	것 %B3@	G8U0			GN	3232	||1 &&2 S-1== "だった" D-1= "(이었)였던"	よう를 だった 뒤에서 '것 같다'로 고르면서 앞말의 번역을 '-이었던'으로 바꾼다.	jisjk:342298		
@@ -101246,7 +101246,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 上新道	카미심미치	N130	QCTVPl		GN				jisjk:284576		
 上新郷	카미싱고우	N130	QCTVPl		GN				jisjk:284552		
 上新電機	죠신 전기	I130	QIDVGt		GN				jisjk:73418		
-上方	윗쪽	N110	VPl		GN				jisjk:25706		
+上方	위쪽	N110	VPl		GN				jisjk:25706		
 上方	카미가타	N130	QCT		GN				jisjk:25707		
 上方	우와가타	N130	QCTVPl		GN				jisjk:276302		
 上方	카미카타	N130	QCTVPl		GN				jisjk:283897		
@@ -103698,7 +103698,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 下倉田町	시모쿠라타쵸	I130	QCTVPl		GN				jisjk:298986		
 下値	하한가	N110			BZ				jisjk:38252		
 下値支持帯	하한가 지지대	N110			BZ				jisjk:357095		
-下側	아래 쪽	N110	VPl		GN				jisjk:38250		
+下側	아래쪽	N110	VPl		GN				jisjk:38250		
 下働き	허드레일	N110	VMo		GN				jisjk:187631		
 下僕	하인	N110	VHn		GN				jisjk:179055		
 下僚	하직 관리	N110	VHn		GN				jisjk:169749		
@@ -104591,7 +104591,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 下所島	시모토코로지마	N130	QCTVPl		GN				jisjk:299624		
 下手	서%C2@	G8U0			GN				jisjk:3900		
 下手	겸손한 태도	N110	VBp		GN				jisjk:3901		
-下手	아래 쪽	N110	VPl		GN				jisjk:3902		
+下手	아래쪽	N110	VPl		GN				jisjk:3902		
 下手	서투름	N110	XXX		GN				jisjk:116460		
 下手	시모데	N130	QCTVPl		GN				jisjk:299596		
 下手くそ	아주 서툼	N110			GN				jisjk:260766		
@@ -105661,7 +105661,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 下落合	시모오치아이	N130	VPl		GN				jisjk:215985		
 下落合	시모치아이	N130	QCTVPl		GN				jisjk:298686		
 下落相場	내림세	N110			BZ				jisjk:363603		
-下葉	아래 쪽 잎	N110	VPt		GN				jisjk:187624		
+下葉	아래쪽 잎	N110	VPt		GN				jisjk:187624		
 下葭原町	시모요시하라쵸	I130	QCTVPl		GN				jisjk:300416		
 下蒜山	시모히루젠	I110	QCT		GN				jisjk:88292		
 下蒲刈	시모카마가리	I130	QCT		PN				jisjk:88341		
@@ -126313,7 +126313,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 假裝	가장	N110		Hd	GN				jisjk:168492		
 偉	훌륭$AB@	H7N0	SFl		GN				jisjk:119949		
 偉が	뽐&A6@	M438			GN				jisjk:94294		
-偉そう	잘난듯 %A1@	G8U0			GN				jisjk:364413		
+偉そう	잘난듯%A1@	G8U0			GN				jisjk:364413		
 偉一郎	이이치로우	N130	QPN	Wb	GN				jisjk:356702		
 偉丈夫	대장부	I110	VHn		GN				jisjk:79388		
 偉人	위인	N110	VHn		GN				jisjk:30540		
@@ -127954,7 +127954,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 先染め	선염	N110			GN				jisjk:267995		
 先棒	선봉	N110	VPl		GN				jisjk:26250		
 先棒を担	남의 앞잡이 노릇을 &AV@	M442			GN				jisjk:120357		
-先様	그 쪽	N110	VPlVTpUDr		GN				jisjk:26262		
+先様	그쪽	N110	VPlVTpUDr		GN				jisjk:26262		
 先決	선결	N110		Hd	GN				jisjk:26229		
 先決問題	선결 문제	N110			GN				jisjk:198912		
 先浜	사키하마	N130	QPN	Wa	GN				jisjk:8662		
@@ -132053,8 +132053,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 其の後	그 후	N110			GN				jisjk:240511		
 其の折	마침 그 때	N110			GN				jisjk:240506		
 其の方	그 분	N110	VHn		GN				jisjk:240507		
-其の方	그 쪽	N110			GN				jisjk:240527		
-其の日	그 날	N110			GN				jisjk:240523		
+其の方	그쪽	N110			GN				jisjk:240527		
+其の日	그날	N110			GN				jisjk:240523		
 其の日稼ぎ	날품팔이	N110		Hd	GN				jisjk:200934		
 其の昔	그 옛날	N110			GN				jisjk:240530		
 其の段	그 일	N110			GN				jisjk:240515		
@@ -154616,7 +154616,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 向けての	향한	C0D1			GN				jisjk:4780		
 向けに	전용으로	I110			GN				jisjk:263218		
 向け替え	방향을 돌&AA@	M437			GN				jisjk:95928		
-向こう	저 편	I110	VPl		GN				jisjk:88796		
+向こう	저편	I110	VPl		GN				jisjk:88796		
 向こうみずの相場師	투기꾼	N110	UQf		BZ				jisjk:360753		
 向こうを張	대항&AV@	M418			GN				jisjk:95929		
 向こう三軒両隣	가장 가까운 이웃	N110	VHn		GN				jisjk:253007		
@@ -166916,7 +166916,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 多々連	타다레	N130	QCTVPl		GN				jisjk:306711		
 多いため	많기 때문	N110			GN				jisjk:150636		
 多いに	많이	E300			GN				jisjk:122889		
-多いよう	많은 듯 %A1@	G8U0			GN				jisjk:201843		
+多いよう	많은 듯%A1@	G8U0			GN				jisjk:201843		
 多かれ少なかれ	많든 적든	E311			GN				jisjk:1524		
 多くありません	많지 않습니다	A9D0			GN				jisjk:201720		
 多くでも	많은 부분에서도 	E300			GN				jisjk:265594		
@@ -169219,7 +169219,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 大変ですか	힘듭니까	I110			GN				jisjk:264314		
 大変ですか	힘듭니까	C0H0			GN				jisjk:264315		
 大変ですね	큰일이네요	A9D0			GN				jisjk:260884		
-大変なことにな	큰일&A5@	M428		Pe	GN				jisjk:138120		
+大変なことにな	큰일 &A5@	M428		Pe	GN				jisjk:138120		
 大変な目に合	큰 일을 당&AV@	G420			GN				jisjk:265362		
 大変に	대단히	E300			GN				jisjk:267757		
 大変のよう	힘든 것 %B3@	G8U0			GN				jisjk:139436		
@@ -203090,7 +203090,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 当摩蹶速	다이마노 게하야	N130	VHn		GN				jisjk:217167		
 当擦	빈정거&AA@	M428			GN				jisjk:140261		
 当新田	토우신덴	N130	QCTVPl		GN				jisjk:310918		
-当方	이 쪽	N110			GN				jisjk:18741		
+当方	이쪽	N110			GN				jisjk:18741		
 当日	당일	N110	UMe		GN				jisjk:18757		
 当日売り	당일 판매	N110		Hd	GN				jisjk:246422		
 当時	당시	N111	UMe	Bh	GN				jisjk:18750		
@@ -203607,7 +203607,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 彼我	피아	N120	VHn		GN				jisjk:38073		
 彼所	저기	N110	VPl		GN				jisjk:124434		
 彼所	저기	N110			GN				jisjk:168156		
-彼方	저 쪽	N110	VPlVTpUDr		GN				jisjk:38071		
+彼方	저쪽	N110	VPlVTpUDr		GN				jisjk:38071		
 彼方	오치카타	N130	QCTVPl		GN				jisjk:280161		
 彼方に	저 멀리	E300			GN				jisjk:370507		
 彼方様	저쪽	N110	VPl		GN				jisjk:227455		
@@ -208796,7 +208796,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 悲し	슬$Kt@	H7M0			GN				jisjk:5619		
 悲し	슬퍼&AV@	M435			GN				jisjk:5620		
 悲しき玩具	가나시키간구	N110	VBkVSw		GN				jisjk:229041		
-悲しげ	슬픈 듯 %A1@	G8U0	SFl		GN				jisjk:169062		
+悲しげ	슬픈 듯%A1@	G8U0	SFl		GN				jisjk:169062		
 悲しさ	슬픔	N110	UFl		GN				jisjk:7670		
 悲しさのあまり	슬픈 나머지	A9D1			GN				jisjk:114624		
 悲しみ	슬픔	N110	UFl		GN				jisjk:7671		
@@ -214262,7 +214262,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 押しつけ	강압	N110		Hd	GN				jisjk:10449		
 押しつけ	억&EB@	M437			GN				jisjk:10450		
 押しつけ	강요&AV@	M437			GN	1534	||1 &&2 S-1== "に" A-2-= "VHn"	押しつけ 앞의 に 너머 말이 사람 의미 계열이면 강요하다를 고른다. (미발동: rare-context)	jisjk:145997		
-押しつけがまし	강요하는 듯 $AB@	H7U0		Pn	GN				jisjk:5759		
+押しつけがまし	강요하는 듯$AB@	H7U0		Pn	GN				jisjk:5759		
 押しつけられ	꽉 눌&AA@	M427			GN				jisjk:148541		
 押しつぶ	&EB@	M433			GN				jisjk:93967		
 押しつぶ	부&CF@	M443			GN				jisjk:146009		
@@ -281216,7 +281216,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 直一	나오카즈	N130	VHnQPN	Wb	GN				jisjk:339828		
 直一郎	나오이치로우	N130	QPN	Wb	GN				jisjk:356467		
 直七郎	나오시치로우	N130	QPN	Wb	GN				jisjk:354055		
-直上	바로 윗쪽	N110	VPl		GN				jisjk:34837		
+直上	바로 위쪽	N110	VPl		GN				jisjk:34837		
 直上部	직상부	I110	VPl		GN				jisjk:85245		
 直下	직하	N110	VPl		GN				jisjk:34863		
 直下型地震	직하형 지진	N110			GN				jisjk:243540		
@@ -293760,7 +293760,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 竿竹	대막대기	N110	VPe		GN				jisjk:184670		
 竿釣	대낚시	N110	VPe		GN				jisjk:184674		
 竿頭	간두	N110			GN				jisjk:230132		
-竿頭	그 날 제일 만힝 낚은 사람	N110	VHn		GN				jisjk:232225		
+竿頭	그날 제일 만힝 낚은 사람	N110	VHn		GN				jisjk:232225		
 笂井町	우츠보이마치	N130	QCTVPl		GN				jisjk:275605		
 笄島	코우가이지마	N130	QCTVPl		GN				jisjk:292193		
 笆籬	대나무등으로 조잡하게 엮은 울	N110	VBl		GN				jisjk:250188	00000000000000000000000000000000000000000000000000000000000000004b144c5546544a113f474831df3e493f1d38304f2bdf40543f45df40103a004e3131300056426c00506c004472554d6556506c000000000000006400750061006800000000000000000000000000474e000000000000000000000000cd2c0c3c	
@@ -361730,7 +361730,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 鳴きしき	요란하게 &LC@	M418			GN				jisjk:92756		
 鳴きしき	요란하게 울어&C5@	M428	VAmSFl		GN				jisjk:146982		
 鳴き交わ	여기저기서 &AI@	M423	VAm		GN				jisjk:146947		
-鳴き声	울음 소리	I110	UHr		GN				jisjk:68804		
+鳴き声	울음소리	I110	UHr		GN				jisjk:68804		
 鳴き袋	울음주머니	N110	VBpQHP		GN				jisjk:247150		
 鳴き言	푸념	I110			GN				jisjk:68805		
 鳴き集	요란하게 울어&C5@	M421	VAm		GN				jisjk:146997		

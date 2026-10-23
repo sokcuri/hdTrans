@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 pattern:書いたのだった	少女は静かに扉を閉めたのだった。	소녀는 조용하게 문을 닫았다.	fix	builtin-pattern
 dict:jisjk:363689	彼はいつも笑うのだった。	그는 언제나 웃었다.	fix	lookup
-dict:jisjk:265016	その日、彼は旅に出たのだ。	그 날, 그는 여행을 떠났다.	fix	lookup
+dict:jisjk:265016	その日、彼は旅に出たのだ。	그날, 그는 여행을 떠났다.	fix	lookup
 dict:gram:noda:quote	騙されたのだと気づいた。	속았던 것이라고 눈치챘다.	keep	local-ending
