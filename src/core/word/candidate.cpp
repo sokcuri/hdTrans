@@ -698,7 +698,9 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
         resumeCursor = -1;
         return true;
     };
-    while (cursor < size) {
+    // Each step moves the cursor forward by at least one byte or resumes a search that
+    // stopped deeper in the token, so the steps stay below the budget.
+    for (long budget = 4L * size + 16; cursor < size && budget > 0; budget--) {
         insertedLength = 0;
         candidateRetryCount = retries;
         const bool translated = TranslateCandidateAt(full, cursor, token, parent);

@@ -77,7 +77,8 @@ public:
     bool Next() {
         yaml_event_delete(&event_);
         event_ = {};
-        if (yaml_parser_parse(&parser_, &event_)) return true;
+        // After the end of the stream the parser keeps returning no event.
+        if (yaml_parser_parse(&parser_, &event_)) return event_.type != YAML_NO_EVENT;
         result_.diagnostics.push_back({parser_.problem_mark.line + 1,
                                       parser_.problem ? parser_.problem : "cannot parse YAML"});
         return false;

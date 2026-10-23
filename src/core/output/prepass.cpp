@@ -876,7 +876,7 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
             break;
         }
         if (next == nullptr || (!next->blank && next->end <= runEnd)) return translated;
-        if (!next->empty) break;
+        if (!next->empty || next->end <= pos) break;
         pos = next->end;
     }
     const std::string_view run = src.substr(start, pos - start);
