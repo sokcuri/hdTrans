@@ -1032,7 +1032,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), nextKind != '2' && nextKind != '6');
         case '1': {
             const TokenText& tok = tokens[item.tokenIndex];
-            if (t == "(" || tok.span != 0 || WidthOf(tok.text) == 1 || nextKind == '2') return Result(std::move(t), false);
+            // A token of one narrow character (at most three bytes) keeps the word after it.
+            const bool narrow = tok.text.size() <= 3 && WidthOf(tok.text) == 1;
+            if (t == "(" || tok.span != 0 || narrow || nextKind == '2') return Result(std::move(t), false);
             // 第 read 제, the ordinal prefix, is written with the number after it, also when a word
             // comes before it in the token or the row (제19구축대, 서장 제2화, 겸 제1함대).
             if ((t == "제" || t.ends_with(" 제")) && (item.surface.ends_with("第") || Contains(tags, "Z6")) && nd(nextTags)) {
