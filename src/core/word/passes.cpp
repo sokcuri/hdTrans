@@ -193,6 +193,9 @@ Phrase FindPhrase(Flusher& f) {
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
                             continue;
                         }
+                        // そう after the stem is the appearance, not a noun after a noun (泣きそう 울 것
+                        // 같다, not 울음 그렇게).
+                        if (next->group->surface == kJaSou) continue;
                     }
                     if (next == nullptr || next->group->surface != kJaNi || PhraseFollowsNi(next)) {
                         return {it->text, it->start, it->tokenIndex, record};

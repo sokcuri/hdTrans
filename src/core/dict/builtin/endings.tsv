@@ -181,6 +181,11 @@
 静かだっぽい	조용한 것 같아	end	prio=-1
 静かなのっぽい	조용한 것 같아	end	prio=-1
 静かだったっぽい	조용했던 것 같아	end	prio=-1
+// そう of appearance ending a sentence (大丈夫そう。)
+静かそう	조용할 것 같다	end	prio=-1
+静かそうです	조용할 것 같습니다	end	prio=-1
+静かそうね	조용할 것 같네	end	prio=-1
+静かそうですね	조용할 것 같네요	end	prio=-1
 // ぽい, the tic spelled without っ
 書くぽい	쓰는 것 같아	end	prio=-1
 書くぽーい	쓰는 것 같아	end	prio=-1
