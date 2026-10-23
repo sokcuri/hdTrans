@@ -411,6 +411,11 @@ bool Thing(std::string_view attr) {
 
 bool Person(std::string_view attr) { return !attr.empty() && !Thing(attr); }
 
+bool PauseOrEnd(const Item* it) {
+    const std::string_view s = it->group->surface;
+    return InSet(kCommaItems, s) || InSet(kSentenceEndItems, s) || InSet(kClosingQuoteItems, s) || s == "。";
+}
+
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {
@@ -1821,33 +1826,7 @@ bool NumberSurface(std::string_view s) {
     return true;
 }
 
-// The adverb-like noun targets (無理やり 억지로, 精一杯 힘껏): ending in 껏, 으로 or 지로.
-bool AdverbTarget(std::string_view ko) {
-    return ko.ends_with("껏") || ko.ends_with("으로") || ko.ends_with("지로");
-}
-
 }  // namespace
-
-void NiAfterAdverb(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "に" || it->selected < 0 || p->selected < 0 ||
-            ItemLemma(f, it, it->selected) != "에") {
-            continue;
-        }
-        const Item* n = it->next;
-        const bool afterVerb = p->detail->Yougo() && p->DirectIndex() >= 0 && p->DirectEntry(p->DirectIndex()) != nullptr &&
-                               p->DirectEntry(p->DirectIndex())->dst == "6" && n != nullptr && !InSet(kCommaItems, n->group->surface) &&
-                               !InSet(kSentenceEndItems, n->group->surface) && !InSet(kClosingQuoteItems, n->group->surface) &&
-                               n->group->surface != "。";
-        const bool adverb = !p->detail->Yougo() && AdverbTarget(ItemLemma(f, p, p->selected));
-        if (p->group->surface == "くらい" || p->group->surface == "ぐらい") {
-            SelectLemma(f, it, "(으)로");
-        } else if (afterVerb || adverb) {
-            SelectLemma(f, it, "");
-        }
-    }
-}
 
 // A pronoun and the genitive の right before a word (a letter or digit, in the same token
 // or at the start of the next) read as the short possessive (내 책); before punctuation,

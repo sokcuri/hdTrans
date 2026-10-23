@@ -53,6 +53,8 @@ bool Thing(std::string_view attr);
 // The dictionary form of entry slot of it (an empty string for no entry).
 std::string ItemLemma(Flusher& f, const Item* it, int slot);
 bool Person(std::string_view attr);
+// Whether the item is a comma, a sentence-end mark, a closing quote or bracket, or 。 (grammar.cpp).
+bool PauseOrEnd(const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
@@ -120,7 +122,6 @@ void QuestionCopula(Flusher& f);
 void WonderingDarou(Flusher& f);
 void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void NiAfterAdverb(Flusher& f);
 void NoAfterNa(Flusher& f);
 void ShortPossessive(Flusher& f);
 void DeScene(Flusher& f);

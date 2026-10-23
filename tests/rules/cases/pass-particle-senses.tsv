@@ -52,11 +52,13 @@ cx:kara-source:10	次からは本気だからね。	다음부터는 진심이니
 cx:kara-source:10	生まれた時からほぼ決まっている。	태어났을 때부터 거의 정해져 있다.	fix	rewrites
 cx:kara-source:10	彼からの手紙。	그로부터의 편지.	keep	rewrites
 cx:kara-source:20	彼からの手紙。	그로부터의 편지.	keep	rewrites
-rewrite:ni-after-adverb	机に負けないぐらいに大きい。	책상에 지지 않을 정도로 크다.	fix	rewrites
-rewrite:ni-after-adverb	今度は少し強めにな	이번에는 조금 강하게 해	fix	rewrites
-rewrite:ni-after-adverb	予想以上に困難だった。	예상 이상으로 곤란했다.	fix	rewrites
-rewrite:ni-after-adverb	無理やりに振り向かせた。	억지로 뒤돌아 보게 했다.	fix	rewrites
-rewrite:ni-after-adverb	部屋に入る。	방에 들어간다.	keep	rewrites
+cx:ni-after-adverb:10	机に負けないぐらいに大きい。	책상에 지지 않을 정도로 크다.	fix	rewrites
+cx:ni-after-adverb:20	今度は少し強めにな	이번에는 조금 강하게 해	fix	rewrites
+cx:ni-after-adverb:30	予想以上に困難だった。	예상 이상으로 곤란했다.	fix	rewrites
+cx:ni-after-adverb:30	無理やりに振り向かせた。	억지로 뒤돌아 보게 했다.	fix	rewrites
+cx:ni-after-adverb:30	部屋に入る。	방에 들어간다.	keep	rewrites
+cx:ni-after-adverb:10	部屋に入る。	방에 들어간다.	keep	rewrites
+cx:ni-after-adverb:20	もう少し強めに。	!rule:cx:ni-after-adverb:20	keep	rewrites
 cx:kara-source:20	中から小さなぬいぐるみが出てきた。	안에서 작은 봉제인형이 나왔다.	fix	rewrites
 cx:kara-source:20	町からも距離がある。	마을에서도 거리가 있다.	fix	rewrites
 rewrite:de-scene	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

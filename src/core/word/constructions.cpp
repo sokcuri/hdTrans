@@ -30,6 +30,7 @@ constexpr NamedFeature kFeatures[] = {
     {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }},
     {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
     {"last", [](Flusher&, const Item* it) { return it->next == nullptr; }},
+    {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };
