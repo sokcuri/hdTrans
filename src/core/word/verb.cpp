@@ -80,14 +80,16 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
             // A bare e-row form before a closing bracket, a full-width sentence mark or the
             // quoting って or と is the imperative (「撃て」, 「書け」の一点張り, 言えって言った):
             // a potential stem cannot end there without its る. Neither form takes a copula
-            // or に, except the だの, だとか or だって that quote an order, and only an order
-            // takes の (待っていただけだ is いた and だけ; 背負えだとか, 寝ろの一言).
+            // or に, except the だの, だと (だとか), だって or だなんて that quote an order, and only
+            // an order takes の (背負えだとか, 帰れだと, 寝ろの一言). The imperative of いただく is
+            // no order (待っていただけだと is いた and だけ).
             if (branch == 4 && (Starts(rest, "」") || Starts(rest, "』") || Starts(rest, "）") || Starts(rest, "。") ||
                                 Starts(rest, "…") || Starts(rest, "‥") || Starts(rest, "！") || Starts(rest, "？") ||
                                 Starts(rest, "って") || Starts(rest, "と"))) {
                 continue;
             }
-            const bool quoted = branch == 11 && (Starts(rest, "だの") || Starts(rest, "だとか") || Starts(rest, "だって"));
+            const bool quoted = branch == 11 && recordText != "いただ" && recordText != "頂" &&
+                                (Starts(rest, "だの") || Starts(rest, "だと") || Starts(rest, "だって") || Starts(rest, "だなんて"));
             if (!entry.empty() && !quoted &&
                 (Starts(rest, "だ") || Starts(rest, "で") || Starts(rest, "じゃ") || Starts(rest, "に") ||
                  (branch == 4 && Starts(rest, "の")))) {

@@ -364522,3 +364522,6 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 もあれだけ	도 그토록	P200		Tu	GN				aredake:2		
 にあれだけ	에게 그토록	P200		Tu	GN				aredake:3		
 にとってこいつ	에게 이 녀석	P200		Tu	GN				nitotte-koitsu:1		
+だと	2라고	S5;0			GN				quoted-order:1		
+だなんて	2라니	S5;0			GN				quoted-order:2		
+だとか	2라든가	S5;0			GN				quoted-order:3		

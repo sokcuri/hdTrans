@@ -85,7 +85,7 @@ HD_TEST(verb_bare_command_boundaries) {
     };
     for (const Row& row : rows) {
         for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの", "」", "」の", "』か", "。", "！",
-                                                 "の", "だとか"}) {
+                                                 "の", "だとか", "だと", "だなんて"}) {
             int branch = -1, length = -1;
             HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(boundary), branch, length));
             HD_CHECK_EQ(branch, 11);
@@ -105,6 +105,12 @@ HD_TEST(verb_bare_command_boundaries) {
             const bool matched = word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(copula), branch, length);
             HD_CHECK(!matched || (branch != 4 && branch != 11));
         }
+    }
+    // The imperative of いただく quotes no order: いただけだと is いた and だけ.
+    for (const std::string_view quote : {"だと", "だって", "だなんて", "だの"}) {
+        int branch = -1, length = -1;
+        const bool matched = word::AnalyseVerbTail("いただ", '1', std::string("け") + std::string(quote), branch, length);
+        HD_CHECK(!matched || (branch != 4 && branch != 11));
     }
     struct Case {
         std::string_view key;

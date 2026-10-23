@@ -3,5 +3,5 @@ constraint:itadake-dake	「窓から景色を見ていただけだよ」	「창�
 constraint:itadake-dake	……いえ、私が勝手に待っていただけですから	……아니요 제가 마음대로 기다리고 있었을 뿐이므로	fix	lookup
 constraint:itadake-dake	先生が将棋を捨てていただけに、一気に、詰み局面へ発展した。	선생님이 쇼기를 버리고 있었던 만큼, 단번에, 외통수 국면에 발전했다.	fix	lookup
 conjugation:e-row-copula	「俺の深層心理なくせに使えないなぁ……」	「내 심층 심리인 주제에 쓸 수 없다……」	fix	conjugation
-conjugation:e-row-copula	彼らの想いを背負えだとか、代わりに人生を謳歌しろという意味ではない	그들의 마음을 짊어져라라고, 대신에 인생을 구가하라고 말하는 의미가 아니다	keep	conjugation
+conjugation:e-row-copula	彼らの想いを背負えだとか、代わりに人生を謳歌しろという意味ではない	그들의 마음을 짊어지라든가, 대신에 인생을 구가하라고 말하는 의미가 아니다	keep	conjugation
 constraint:itadake-dake	もう少し待っていただけるかしら？	좀 더 기다려 주실 수 있을까?	keep	lookup
