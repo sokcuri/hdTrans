@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+normalize:kata-stem	ムズイ。	어렵다.	fix	normalize
+normalize:kata-stem	ダサイ服だ。	촌스러운 옷이다.	fix	normalize
+normalize:kata-stem	セコイ奴だ。	치사한 놈이다.	fix	normalize
+normalize:kata-stem	これはマズイ。	이것은 큰일이다.	keep	normalize

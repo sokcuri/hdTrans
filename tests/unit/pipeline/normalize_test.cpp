@@ -1,10 +1,13 @@
 // Table tests of the normalising rewrites, one table per rewrite, and of the whole
 // sequence of Normalize.
+#include <cstdlib>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/snapshot.h"
 #include "core/pipeline/normalize.h"
+#include "core/pipeline/spoken_forms_gen.h"
 #include "core/pipeline/stage_text.h"
 #include "hdtest.h"
 
@@ -148,7 +151,7 @@ HD_TEST(pipeline_join_paused_copula) {
 HD_TEST(pipeline_spoken_forms) {
     const Case cases[] = {
         {"マジでウザい！"sv, "マジでうざい！"sv},
-        {"ダサすぎます！"sv, "ださすぎます！"sv},
+        {"ダサすぎます！"sv, "ダサすぎます！"sv},
         {"ズルい！"sv, "ズルい！"sv},
         {"これはマズイ。"sv, "これはまずい。"sv},
         {"マズイっ！"sv, "まずいっ！"sv},
@@ -184,7 +187,8 @@ HD_TEST(pipeline_spoken_forms) {
         {"させんなよ"sv, "させんなよ"sv},
         {"田中さん！"sv, "田中さん！"sv},
         {"ハズい"sv, "ハズい"sv},
-        {"ハズいしウザい"sv, "はずいしうざい"sv},
+        {"ハズいしウザい"sv, "ハズいしうざい"sv},
+        {"ムズイしダサイ"sv, "むずいしダサい"sv},
         {"それじゃねっって"sv, "それじゃないって"sv},
         {"決まってんだろ"sv, "決まってるんだろ"sv},
         {"そこにいんじゃ"sv, "そこにいるんじゃ"sv},
@@ -551,4 +555,22 @@ HD_TEST(pipeline_normalize_doubled_wo) {
         {"本を読む"sv, "本を読む"sv},
     };
     Check(CollapseDoubledWo, cases);
+}
+
+// Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a
+// verb of the shipped dictionaries, so the rewrite never makes a word they lack (ムズイ
+// むずい). The dictionaries are needed, so the test skips without HDTRANS_DICTS.
+HD_TEST(pipeline_kata_stems_are_dictionary_stems) {
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    const auto loaded = hdTrans::dict::LoadFoldersTsv({dicts});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    for (const KataStem& k : kKataStems) {
+        bool stem = false;
+        for (const hdTrans::dict::Candidate& c : loaded.snapshot->RetrieveRecords(k.hira, hdTrans::dict::LookupMode::General)) {
+            const char tag = c.codes != nullptr ? c.codes->part.Tag() : 0;
+            stem = stem || tag == 'H' || tag == 'M';
+        }
+        HD_CHECK_EQ(std::string(k.hira) + (stem ? " stem" : " missing"), std::string(k.hira) + " stem");
+    }
 }
