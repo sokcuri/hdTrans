@@ -3,16 +3,16 @@ dict:jisjk:105355	上掛けの布からはノミが出た。	이불의 옷감에
 dict:jisjk:254328	ちょっと野暮用で出かける。	조금 볼일로 나간다.	fix	defaults
 dict:jisjk:176760	黒枠の眼鏡をかけた男。	검은 테두리의 안경을 쓴 남자.	fix	defaults
 dict:jisjk:123496	本は並んでいて然るべきものだろう？	책은 줄지어 있어 마땅한 것이겠지?	fix	defaults
-dict:w:26764	女性達が財と執念で磨き上げた。	여성들이 재산과 집념으로 닦았다.	fix	defaults
-dict:w:26759	手近な小惑星を照準する。	가까운 소행성을 조준한다.	fix	defaults
-dict:w:26760	親父が手近にいる店員を呼び止める。	아버지가 가까이에 있는 점원을 불러 세운다.	fix	defaults
-dict:w:26762	刃が横薙ぎに弧を描いた。	칼날이 옆으로 호를 그렸다.	fix	defaults
-dict:w:26761	横薙ぎの一撃。	가로베기의 일격.	fix	defaults
-dict:w:26763	ヘタに動いて起こしたら困る。	섣불리 움직여 일으키면 곤란하다.	fix	defaults
-dict:w:26763	下手に出る。	서투르게 나온다.	keep	defaults
-dict:w:26766	お目付は仕事なわけだし。	감시역은 일인 거고.	fix	defaults
-dict:w:26767	朝日が目にしみる。	아침해가 눈을 찌른다.	fix	defaults
-dict:w:26771	「ただ、今だけ……」	「다만, 지금만……」	fix	defaults
-dict:w:26772	イチゴのヘタに指を置いた。	딸기의 열매 꼭지에 손가락을 두었다.	keep	local
-dict:w:26774	ミナさんの前で、いいとこ見せたかったの？	미나 씨 앞에서, 멋진 모습을 보이고 싶었어?	fix	defaults
-dict:w:26773	ここはいいとこだ。	여기는 좋은 데다.	fix	defaults
+dict:w:26795	女性達が財と執念で磨き上げた。	여성들이 재산과 집념으로 닦았다.	fix	defaults
+dict:w:26790	手近な小惑星を照準する。	가까운 소행성을 조준한다.	fix	defaults
+dict:w:26791	親父が手近にいる店員を呼び止める。	아버지가 가까이에 있는 점원을 불러 세운다.	fix	defaults
+dict:w:26793	刃が横薙ぎに弧を描いた。	칼날이 옆으로 호를 그렸다.	fix	defaults
+dict:w:26792	横薙ぎの一撃。	가로베기의 일격.	fix	defaults
+dict:w:26794	ヘタに動いて起こしたら困る。	섣불리 움직여 일으키면 곤란하다.	fix	defaults
+dict:w:26794	下手に出る。	서투르게 나온다.	keep	defaults
+dict:w:26796	お目付は仕事なわけだし。	감시역은 일인 거고.	fix	defaults
+dict:w:26797	朝日が目にしみる。	아침해가 눈을 찌른다.	fix	defaults
+dict:w:26800	「ただ、今だけ……」	「다만, 지금만……」	fix	defaults
+dict:w:26801	イチゴのヘタに指を置いた。	딸기의 열매 꼭지에 손가락을 두었다.	keep	local
+dict:w:26803	ミナさんの前で、いいとこ見せたかったの？	미나 씨 앞에서, 멋진 모습을 보이고 싶었어?	fix	defaults
+dict:w:26802	ここはいいとこだ。	여기는 좋은 데다.	fix	defaults
