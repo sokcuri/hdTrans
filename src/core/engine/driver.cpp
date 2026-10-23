@@ -205,6 +205,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     composeSettings.casual = text && speech.casual;
     composeSettings.casualMarkedOnly = speech.markedOnly;
     composeSettings.asked = text && speech.asked;
+    composeSettings.literal = text && !options.reference && options.wordImprovements.literalCleanup;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes

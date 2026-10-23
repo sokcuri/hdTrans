@@ -46,6 +46,9 @@ struct Settings {
     // too: a plain question in a quote of no style in 해체 (大丈夫か？ 괜찮아?), だろう before
     // ？ as agreement asked or a wonder.
     bool asked = false;
+    // Text path outside the reference mode: counts in native Korean (두 마리, 세 번) and the
+    // spacing of particle and free nouns (바위뿐, 키 정도, 작업 중).
+    bool literal = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
@@ -154,6 +157,9 @@ private:
     std::string Context(std::string text) const;
     void WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker> markers);
     std::string KeepDropped(int i, std::string translated, std::string_view remainder);
+    // With settings.literal, the text of item i as a count is written (二匹 두 마리, 三回 세
+    // 번); other text as is.
+    std::string WriteCount(int i, std::string text) const;
     std::pair<std::string, bool> Spacing(int i, std::string t, std::string_view tags, std::string_view nextTags,
                                          char kind, char nextKind, bool isLast, bool converted,
                                          std::string_view remainder) const;

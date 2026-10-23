@@ -15,3 +15,9 @@ compose:native-count	何箇所か開けてから寝た。	몇 군데인가 열�
 compose:native-count	何人か怪我をしている。	여러 명 다치고 있다.	fix	compose
 compose:native-count	ネズミが一匹、肥料になった。	쥐가 한 마리, 비료가 되었다.	fix	compose
 compose:native-count	野球に夢中な人、数人。	야구에 열중한 사람, 몇 사람.	fix	compose
+compose:native-count	西が四回で覚えさせた。	서쪽이 네 번으로 기억하게 했다.	fix	compose
+compose:native-count	南西の場合は、三回を打った後に四回を打つ。	남서의 경우는, 세 번을 친 후에 네 번을 친다.	fix	compose
+compose:native-count	数回試した。	몇 차례 시험했다.	fix	compose
+compose:native-count	5回分の料金	5회분의 요금	keep	compose
+compose:native-count	七回帰を止めた。	7회귀를 멈추었다.	keep	compose
+compose:native-count	子犬四匹分の肉。	강아지 네 마리분의 고기.	keep	compose
