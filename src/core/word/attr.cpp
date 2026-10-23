@@ -185,8 +185,51 @@ bool Item::ClosingTsu() const {
     return !text::IsLetter(c) && !text::IsDigit(c);
 }
 
+bool Item::ReadsCount(int i) {
+    const std::string_view s = group->surface;
+    std::size_t k = 0;
+    bool numeral = false;
+    while (k < s.size()) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (text::IsDigit(r.cp) || std::u32string_view(U"〇○一二三四五六七八九十百千半").find(r.cp) != std::u32string_view::npos) {
+            numeral = true;
+        } else if (r.cp != U'数' && r.cp != U'何' && r.cp != U'幾') {
+            break;
+        }
+        k += r.size;
+    }
+    if (k == 0) return false;
+    std::string_view rest = s.substr(k);
+    if (rest.empty()) return numeral;
+    // A fraction (五分の一) and a count with a half (四畳半, 一時間半) are counts too.
+    if (rest.starts_with("分の")) {
+        const std::string_view m = rest.substr(std::string_view("分の").size());
+        const char32_t r = text::DecodeRune(m).cp;
+        return text::IsDigit(r) || std::u32string_view(U"一二三四五六七八九十百千").find(r) != std::u32string_view::npos;
+    }
+    if (rest.size() > std::string_view("半").size() && rest.ends_with("半")) rest.remove_suffix(std::string_view("半").size());
+    if (w == nullptr || rest == "月" || rest == "時") return false;
+    // The word must read as a count: digits or a Korean numeral first (三人 세 명, 十日 열흘,
+    // 一年 일 년), not a word of its own (一番 제일).
+    constexpr std::string_view kNumerals[] = {
+        "한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "스물", "스무", "서른", "마흔", "쉰",
+        "예순", "일흔", "여든", "아흔", "하나", "둘", "셋", "넷", "하루", "이틀", "사흘", "나흘", "닷새", "엿새",
+        "이레", "여드레", "아흐레", "보름", "며칠", "몇", "수", "반", "일", "이", "삼", "사", "오", "육", "칠",
+        "팔", "구", "십", "백", "천"};
+    const std::string_view ko = EntryText(i);
+    if (std::none_of(ko.begin(), ko.end(), [](char c) { return c >= '0' && c <= '9'; }) &&
+        std::none_of(std::begin(kNumerals), std::end(kNumerals), [&](std::string_view n) { return ko.starts_with(n); })) {
+        return false;
+    }
+    const Lookup l = w->DoLookup(rest, kModeGeneral);
+    for (Record* c = l.records; c != nullptr; c = c->child) {
+        if (c->source == rest && Has(c->attr, "Ct")) return true;
+    }
+    return false;
+}
+
 bool Item::CheckGAttr(std::string_view s, int di) {
-    auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly) {
+    auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly, int i) {
         if (c == "Ow") return IsRuleRightBoundary();
         // Oj: the On reading of a word written right before the next one (事私, not 事…私).
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
@@ -197,12 +240,14 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
+        // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
+        if (c == "Nq") return ReadsCount(i);
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {
         for (int i = 0; i < Count(*this); i++) {
             for (std::size_t off = 0; off < s.size(); off += 2) {
-                if (chunkMatches(Chunk(s, off, 2), GAttr(i), false)) return true;
+                if (chunkMatches(Chunk(s, off, 2), GAttr(i), false, i)) return true;
             }
         }
         return false;
@@ -210,7 +255,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
     const bool hzOnly = di == -1;
     if (di == -1) di = selected;
     for (std::size_t off = 0; off < s.size(); off += 2) {
-        if (chunkMatches(Chunk(s, off, 2), GAttr(di), hzOnly)) return true;
+        if (chunkMatches(Chunk(s, off, 2), GAttr(di), hzOnly, di)) return true;
     }
     return false;
 }

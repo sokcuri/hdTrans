@@ -27,3 +27,5 @@ compose:number-spacing	精鋭第十九駆逐隊	정예 제19구축대	fix	compos
 compose:number-spacing	第十一戦隊	제11전대	keep	compose
 compose:number-spacing	1回あたり5ミリ	한 번당 5밀리	fix	compose
 compose:number-spacing	当たり前だ。	당연하다.	keep	compose
+dict:jisjk:259268	一匹目を捕まえた。	rule:dict:jisjk:259268=째	fix	local
+dict:jisjk:259268	三人の目	!rule:dict:jisjk:259268	keep	local

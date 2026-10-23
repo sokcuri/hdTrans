@@ -221,6 +221,7 @@ private:
             for (const char* engine : {"Ow", "Hz", "Td", "Pi", "Sa", "Ka"}) {
                 if (c == engine) return true;
             }
+            if (c == "Nq") return true;  // a count, Item::ReadsCount
             return inv_.gramCodes.count(c) > 0;
         }
         const bool familyTest = o.flat == std::string_view("-=") || o.field == 'T';

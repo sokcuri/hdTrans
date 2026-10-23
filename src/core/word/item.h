@@ -215,6 +215,12 @@ public:
     // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
     bool InQuote() const;
     bool JoinsNext() const;
+    // Whether candidate i reads the word as a count (rule code Nq): a number or 半, or a number
+    // (kanji or digits, or 数, 何, 幾 before it) and a counter coded Ct, read with digits or a
+    // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時
+    // after a number name a month or an hour (五月, 三時), and a word read otherwise is no
+    // count (一番 제일).
+    bool ReadsCount(int i);
     // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
     // word or only punctuation follows.
     bool ClosingTsu() const;
