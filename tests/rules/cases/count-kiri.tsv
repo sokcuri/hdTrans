@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:sense:kiri:1	一度きりの人生。	한 번 뿐의 인생.	fix	local
+dict:sense:kiri:1	三度きりだ。	세 번 뿐이다.	fix	local
+dict:sense:kiri:1	それきり帰らなかった。	그 뒤로 돌아가지 않았다.	keep	local
