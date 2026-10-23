@@ -172,9 +172,15 @@ struct DocumentHistory {
         if (line.ends_with('\r')) line.remove_suffix(1);
         return std::string(line);
     }
+    // A line in て goes on in the next one when it holds no sentence before (…よ？私に任せて asks) and the
+    // next line is Japanese with hiragana, not a name or title (骨まで愛して before 莫文蔚).
     static bool Continues(std::string_view line, std::string_view next) {
         line = names::internal::TrimSpace(line);
-        return (line.ends_with("て") || line.ends_with("で")) && !names::internal::TrimSpace(next).empty();
+        next = names::internal::TrimSpace(next);
+        if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
+        const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
+        return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
+               !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });
     }
     void Remember(std::string_view text) {
         if (!lines.empty() && Continues(lines.back().text, text)) {
@@ -248,12 +254,7 @@ namespace internal {
 std::set<std::string> VerseLines(std::span<const std::string> lines) {
     std::set<std::string> verse;
     for (std::size_t i = 0; i + 1 < lines.size(); i++) {
-        const std::string_view t = names::internal::TrimSpace(lines[i]);
-        if ((t.ends_with("て") || t.ends_with("で")) && !names::internal::TrimSpace(lines[i + 1]).empty()) {
-            std::string_view line = lines[i];
-            if (line.ends_with('\r')) line.remove_suffix(1);
-            verse.insert(std::string(line));
-        }
+        if (DocumentHistory::Continues(lines[i], lines[i + 1])) verse.insert(DocumentHistory::VerseKey(lines[i]));
     }
     return verse;
 }

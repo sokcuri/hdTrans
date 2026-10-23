@@ -579,6 +579,11 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"冷たいぃぃ", "冷たい"},
         {"いいいい！", "いいいい！"},
         {"うるさいいね", "うるさいいね"},
+        // Before a sentence particle and a pause the mark of an adjective's い goes after the
+        // particle.
+        {"うるさいーよ！", "うるさいよ～！"},
+        {"冷たいーね", "冷たいね～"},
+        {"冷たいーねこ", "冷たいーねこ"},
         // A shout's っ after the lengthening of a word ends the phrase: the run is ～ and the
         // っ goes; a cry (no word before the mark) keeps it for the cry pass.
         {"まかせてーーっ！", "まかせて～！"},

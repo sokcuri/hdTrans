@@ -8,3 +8,25 @@ compose:speech-casual-marked	「行くの？」	「가는 거야?」	fix	compose
 compose:speech-polite	「今日は暑いですね。帰る」	「오늘은 덥네요. 돌아간다」	keep	compose
 compose:speech-ssu-polite	「了解っす」	「알겠어요」	keep	compose
 compose:speech-ssu-polite	「そうっすね」	「그렇네요」	keep	compose
+ending:かったっす	「よかったっす」	「좋았어요」	fix	builtin-ending
+ending:かったっす	「眠かったっすよ」	「졸렸어요」	fix	builtin-ending
+ending:なかったっす	「行かなかったっす」	「가지 않았어요」	fix	builtin-ending
+ending:だったっす	「静かだったっす」	「조용했어요」	fix	builtin-ending
+phrase:そうっすよ	「そうっすよ」	「그래요」	fix	builtin-phrase
+ending:かったっす	「よかった」	「다행이다」	keep	builtin-ending
+ending:かったっす	「行ったっすよ」	「갔어요」	keep	builtin-ending
+compose:polite-agreement	「そうなんです……知らなかったでしょ？」	「그렇습니다……몰랐죠?」	fix	compose
+compose:polite-agreement	「そうなんです。高いでしょ？」	「그렇습니다. 높죠?」	fix	compose
+compose:polite-agreement	「知らなかったでしょ？」	「몰랐잖아?」	keep	compose
+compose:polite-agreement	「早く寝なさい。疲れたでしょ？」	「빨리 자. 지쳤잖아?」	keep	compose
+compose:polite-agreement	「そうですよ。知らなかったでしょ？」	「그래요. 몰랐죠?」	fix	compose
+compose:polite-agreement	「目を覚ますでしょ？」	「눈을 뜨겠지?」	keep	compose
+compose:polite-agreement	「もう済ませたでしょ？」	「벌써 끝마쳤잖아?」	keep	compose
+compose:polite-agreement	「ますます高いでしょ？」	「더욱 더 높지?」	keep	compose
+compose:polite-agreement	「休ませてよ。疲れたでしょ？」	「쉬게 해. 지쳤잖아?」	keep	compose
+compose:polite-agreement	「行くよ。そうなんです、高いでしょ？」	「가. 그렇습니다, 높지?」	keep	compose
+compose:polite-agreement	「『はい、行きます』って言ったでしょ？」	「『네, 갑니다』라고 말했잖아?」	keep	compose
+ending:だったっす	「学生だったっすね」	「학생이었네요」	fix	builtin-ending
+ending:だったっす	「学生だったっすか？」	「학생이었나요?」	fix	builtin-ending
+ending:だったっす	「静かだったっすよ」	「조용했어요」	fix	builtin-ending
+ending:だったっす	「暇だったっすよ」	「한가했어요」	fix	builtin-ending

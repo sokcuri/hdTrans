@@ -52,14 +52,17 @@
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
+//= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
+//= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
+//= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
@@ -67,6 +70,7 @@
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
+//= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
@@ -106,6 +110,7 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
+//= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
@@ -779,6 +784,12 @@ mark.close-after-space	』
 mark.close-after-space	）
 mark.close-after-space	)
 
+mark.sentence-end	。
+mark.sentence-end	！
+mark.sentence-end	？
+mark.sentence-end	!
+mark.sentence-end	?
+
 mark.supposed	そう
 mark.supposed	ほど
 mark.supposed	らし
@@ -920,6 +931,30 @@ noun.dependent-ellipsis	くらい
 noun.dependent-ellipsis	ぐらい
 noun.dependent-ellipsis	ほど
 
+noun.event	事件
+noun.event	事故
+noun.event	テロ
+noun.event	戦い
+noun.event	騒ぎ
+noun.event	騒動
+noun.event	争い
+noun.event	喧嘩
+noun.event	事
+noun.event	話
+noun.event	祭り
+noun.event	事態
+noun.event	惨劇
+noun.event	悲劇
+noun.event	災害
+noun.event	震災
+noun.event	地震
+noun.event	儀式
+noun.event	事変
+noun.event	虐殺
+noun.event	抗争
+noun.event	暴動
+noun.event	乱
+
 noun.do-angle	角度
 noun.do-angle	傾斜
 noun.do-angle	傾き
@@ -988,6 +1023,25 @@ noun.label-role	部員
 noun.label-role	生徒
 noun.label-role	教師
 noun.label-role	医者
+
+noun.manner-ni	一括り
+noun.manner-ni	ひとくくり
+noun.manner-ni	一言
+noun.manner-ni	ひとこと
+noun.manner-ni	一口
+noun.manner-ni	端的
+noun.manner-ni	簡単
+noun.manner-ni	正直
+noun.manner-ni	素直
+noun.manner-ni	率直
+noun.manner-ni	具体的
+noun.manner-ni	大雑把
+noun.manner-ni	おおざっぱ
+noun.manner-ni	手短
+noun.manner-ni	大まか
+noun.manner-ni	一般的
+noun.manner-ni	有り体
+noun.manner-ni	ありてい
 
 noun.not-verbal	全部
 noun.not-verbal	全員
@@ -1210,6 +1264,8 @@ noun.scene	世界
 noun.scene	夢
 noun.scene	環境
 noun.scene	空間
+
+noun.scene-means	夢
 
 noun.time-end	時
 noun.time-end	頃
@@ -1822,6 +1878,24 @@ verb.means	合わせ
 verb.means	伴
 verb.means	装
 verb.means	模し
+
+verb.means-de	繕
+verb.means-de	誤魔化
+verb.means-de	ごまか
+verb.means-de	飾
+verb.means-de	満た
+verb.means-de	満ち
+verb.means-de	埋め
+verb.means-de	彩
+verb.means-de	覆
+verb.means-de	包
+verb.means-de	騙
+verb.means-de	塗
+verb.means-de	溢れ
+verb.means-de	膨らま
+verb.means-de	膨らませ
+verb.means-de	終わ
+verb.means-de	終え
 
 verb.naming	呼ぶ
 verb.naming	書く

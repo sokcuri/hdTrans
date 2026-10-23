@@ -8,6 +8,10 @@ rewrite:de-scene	夢で雨が降るのはおかしい？	꿈에서 비가 오는
 rewrite:de-scene	ナイフで切った。	나이프로 잘랐다.	keep	rewrites
 rewrite:de-scene	電車で学校に行く。	전철로 학교에 간다.	keep	rewrites
 rewrite:de-scene	一瞬で消えた。	한순간에 사라졌다.	keep	rewrites
+rewrite:de-scene	欺く夢で取り繕った	속이는 꿈으로 꾸몄다	fix	rewrites
+rewrite:de-scene	夢で終わった。	꿈으로 끝났다.	fix	rewrites
+rewrite:de-scene	夢で会おう。	꿈에서 만나자.	keep	rewrites
+rewrite:de-scene	この状況で誤魔化した。	이 상황에서 속였다.	keep	rewrites
 rewrite:return-to	場面は開幕の宣言に戻る。	장면은 개막 선언으로 돌아온다.	fix	rewrites
 rewrite:return-to	彼は自分の仕事に戻った。	그는 자신의 일로 돌아왔다.	fix	rewrites
 rewrite:return-to	昔みたいな関係に戻れないかな	옛날 같은 관계로 돌아갈 수 없을까	fix	rewrites
@@ -27,6 +31,10 @@ rewrite:comitative-to	３と答えた。	3이라고 대답했다.	fix	rewrites
 rewrite:comitative-to	修正液で消して０と書いてあった	수정액으로 지워 0이라고 써 있었다	fix	rewrites
 rewrite:comitative-to	答えは５と言った。	대답은 5라고 말했다.	keep	rewrites
 rewrite:comitative-to	「はい」と言った。	「네」라고 말했다.	keep	rewrites
+rewrite:comitative-to	「お疲れ～」と田中と佐藤	「수고했어~」라고 타나카와 사토	fix	rewrites
+rewrite:comitative-to	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
+rewrite:comitative-to	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
+rewrite:comitative-to	「潜水母艦」と複数の潜水艦を編成せよ！	「잠수모함」과 복수의 잠수함을 편성하라!	keep	rewrites
 rewrite:no-after-na	元気そうなのが一番だ。	씩씩한 것이 제일이다.	current	rewrites
 rewrite:no-after-na	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
 rewrite:no-after-na	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites
@@ -40,3 +48,4 @@ rewrite:hodo-degree	かつてない程のテンションアップ。	전에 없�
 rewrite:hodo-degree	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
 rewrite:hodo-degree	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 rewrite:hodo-degree	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
+rewrite:de-scene	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

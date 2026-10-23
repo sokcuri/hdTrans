@@ -183,7 +183,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (depth++ == 0) quote = ++count;
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
-        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle)) == 0) {
+        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle)) == 0) {
             if (const auto [spoken, length] = SpokenSyllables(line.substr(at), out); length > 0) {
                 out += spoken;
                 at += length;
@@ -447,6 +447,23 @@ std::string_view Marker(std::string_view stem) {
     return m[0] == '&' || m[0] == '$' || m[0] == '%' ? m : std::string_view();
 }
 
+// The agreement an ending text seeks (5잖아 몰랐잖아, 높지, 되잖아) in polite speech: a past or a 지
+// with 죠 (몰랐죠, 높죠), another 잖아 with 요 (되잖아요).
+void PoliteAgreement(std::string& ending) {
+    constexpr std::string_view kSeek = "잖아", kSure = "지", kPolite = "죠";
+    if (ending.ends_with(kSure)) {
+        ending.replace(ending.size() - kSure.size(), kSure.size(), kPolite);
+    } else if (ending.ends_with(kSeek)) {
+        const std::string_view stem = std::string_view(ending).substr(0, ending.size() - kSeek.size());
+        const auto syllable = text::Split(LastRune(stem));
+        if (stem == "5" || (syllable && syllable->final == 20)) {  // the past form, or ㅆ (20)
+            ending.replace(ending.size() - kSeek.size(), kSeek.size(), kPolite);
+        } else {
+            ending += "요";
+        }
+    }
+}
+
 }  // namespace
 
 char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
@@ -557,6 +574,13 @@ void Composer::WriteCasual(int first, int last) {
             }
             const std::string_view tail = own.substr(0, kept);
             for (const std::string_view p : {"ぞ", "ぜ", "よ", "わ", "さ", "ね"}) asked = asked && !tail.ends_with(p);
+        }
+        // でしょ is polite itself: in a quote of polite speech the agreement it seeks is polite too
+        // (…なんです……知らなかったでしょ？ 몰랐죠?, 高いでしょ 높죠, ばいいでしょ 되잖아요).
+        if (quoted && (style & kPoliteTalkStyle) != 0 && close != 0 && it.directIndex >= 0 &&
+            it.endingSurface.ends_with("でしょ")) {
+            PoliteAgreement(it.ending.text);
+            continue;
         }
         if (!quoted || styled || (!settings_.casual && !asked)) continue;
         // Marked casual quotes: their own text only, not a quote inside them (『書いた』って);

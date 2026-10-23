@@ -730,7 +730,8 @@ void GoNotSay(Flusher& f) {
         const Item* p = it->prev;
         if (p == nullptr || p->prev == nullptr || it->group->surface != "い" || !it->detail->Yougo() ||
             !output::Lemma(it->EntryText(it->selected), f.families).starts_with("말하") ||
-            !Has(" に へ まで から ", " " + p->group->surface + " ") || Person(p->prev->Attr(p->prev->selected))) {
+            !Has(" に へ まで から ", " " + p->group->surface + " ") || Person(p->prev->Attr(p->prev->selected)) ||
+            dict::InClass("noun.manner-ni", p->prev->group->surface)) {
             continue;
         }
         if (SelectLemma(f, it, "가다")) continue;
@@ -756,11 +757,35 @@ void PositiveIke(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether the attributive of it modifies a noun of an event (海外であった事件): the first word after it that
+// does not inflect is a verbal noun or one of noun.event.
+bool ModifiesEvent(const Item* it) {
+    const Entry* e = it->DirectEntry(it->DirectIndex());
+    if (e == nullptr || e->dst != "8") return false;
+    const Item* n = it->next;
+    while (n != nullptr && n->detail->Yougo()) n = n->next;
+    if (n == nullptr || n->selected < 0 || At(n->Code(n->selected), 0) != '1') return false;
+    const std::string_view noun = n->group->surface;
+    return Has(n->GAttr(n->selected), "Hd") ||
+           std::ranges::any_of(dict::ClassMembers("noun.event"), [&](std::string_view v) { return noun.ends_with(v); });
+}
+
+}  // namespace
+
+// であ that a place before it read as 에서 만나다: before a noun of an event it is 에서 있다, what happened
+// there; after a noun that is no place partner it is the copula.
 void CopulaDeAru(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;
-        if (p != nullptr && it->group->surface == "であ" && !dict::InClass("word.meet-partner", p->group->surface) &&
-            output::Lemma(it->EntryText(it->selected), f.families).starts_with("에서 만나")) {
+        if (p == nullptr || it->group->surface != "であ" ||
+            !output::Lemma(it->EntryText(it->selected), f.families).starts_with("에서 만나")) {
+            continue;
+        }
+        if (ModifiesEvent(it)) {
+            SelectLemma(f, it, "에서 있다");
+        } else if (!dict::InClass("word.meet-partner", p->group->surface)) {
             SelectLemma(f, it, "이다");
         }
     }
@@ -1546,6 +1571,21 @@ void NodaTo(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether an attributive (綺麗な, 赤い, 走る, 走った) and a noun follow it, past punctuation (とても、キレイな裸).
+bool ModifierFollows(const Item* it) {
+    const Item* m = it->next;
+    while (m != nullptr && !m->detail->Yougo() && m->selected >= 0 && At(m->Code(m->selected), 0) == '6') m = m->next;
+    if (m == nullptr || m->DirectIndex() < 0) return false;
+    const Entry* e = m->DirectEntry(m->DirectIndex());
+    if (e == nullptr || (e->dst != "0" && e->dst != "4" && e->dst != "8")) return false;
+    const Item* n = m->next;
+    return n != nullptr && !n->detail->Yougo() && n->selected >= 0 && At(n->Code(n->selected), 0) == '1';
+}
+
+}  // namespace
+
 void TerminalBeforeQuote(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* next = it->next;
@@ -1561,7 +1601,13 @@ void TerminalBeforeQuote(Flusher& f) {
                 pause = pause && f.w.Span(t) == 0 && !left.empty() && TrimRunes(left, "…‥、").empty();
             }
         }
+        // A noun or adverb that starts with と (とても, とうとう) quotes nothing, but the clause
+        // before the pause stays a sentence unless the word leads to a modifier and its noun, which
+        // the clause modifies too (できあがった、とても綺麗な花 완성된, 무척 예쁜 꽃).
         if (!pause || next == nullptr || (!next->group->surface.starts_with("と") && !next->group->surface.starts_with("なんて")) ||
+            next->selected < 0 || next->group->At(next->selected) == nullptr ||
+            (std::string_view("PSM").find(next->group->At(next->selected)->cls) == std::string_view::npos &&
+             ModifierFollows(next)) ||
             it->DirectIndex() < 0 || OwnedGroup(it->DirectGroup()) || !Has(it->EntryText(it->selected), "@")) {
             continue;
         }
@@ -2163,6 +2209,27 @@ void NoAfterNa(Flusher& f) {
     }
 }
 
+namespace {
+
+// Whether the predicate after it is a verb of verb.means-de: the first verb, past nouns and their を
+// but not past punctuation or another particle (夢で、すべてが終わった is no means).
+bool MeansVerbFollows(const Item* it) {
+    for (; it != nullptr; it = it->next) {
+        if (it->selected < 0) return false;
+        const Entry* e = it->group->At(it->selected);
+        const char code = At(it->Code(it->selected), 0);
+        if (!it->detail->Yougo() && (code == '6' || (e != nullptr && e->cls == 'P' && it->group->surface != "を"))) {
+            return false;
+        }
+        if (it->detail->cls != kDetailVerb) continue;
+        const std::string_view stem = it->group->surface;
+        return std::ranges::any_of(dict::ClassMembers("verb.means-de"), [&](std::string_view v) { return stem.ends_with(v); });
+    }
+    return false;
+}
+
+}  // namespace
+
 void DeScene(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;
@@ -2172,7 +2239,8 @@ void DeScene(Flusher& f) {
         }
         if (p->group->surface == "一瞬" || p->group->surface == "瞬時") {
             SelectLemma(f, it, "에");
-        } else if (dict::InClass("noun.scene", p->group->surface)) {
+        } else if (dict::InClass("noun.scene", p->group->surface) &&
+                   !(dict::InClass("noun.scene-means", p->group->surface) && MeansVerbFollows(it->next))) {
             SelectLemma(f, it, "에서");
         }
     }
@@ -2406,7 +2474,12 @@ void ComitativeTo(Flusher& f) {
         if (it->group->surface == "と") {
             if (!NumberSurface(p->group->surface)) continue;
         } else if (it->group->surface == "」と" || it->group->surface == "』と") {
-            if (At(p->Code(p->selected), 0) != '1' || p->prev == nullptr || !Has("「『", p->prev->group->surface)) continue;
+            // A bracketed word span the phrase or sound stage already read is an utterance, so its と quotes.
+            if (At(p->Code(p->selected), 0) != '1' || (p->Fixed() && f.w.Span(p->tokenIndex) == tokenizer::kSpanWord) ||
+                p->prev == nullptr ||
+                !Has("「『", p->prev->group->surface)) {
+                continue;
+            }
             bracket = "」";
         } else {
             continue;

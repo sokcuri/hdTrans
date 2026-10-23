@@ -1,5 +1,6 @@
 #include "core/pipeline/speech.h"
 
+#include <algorithm>
 #include <string>
 
 #include "core/dict/classes.h"
@@ -185,6 +186,10 @@ bool CasualOf(std::string_view text) {
             // いって: ないって, いいって; not 言って.
             const std::string_view head = text.substr(0, at);
             if (f.particle == "って" && prev == U'い' && !head.ends_with("ない") && !head.ends_with("いい")) continue;
+            // After a polite form the particle is polite speech (そうですよ, いいですね, 行きますよ).
+            if (std::ranges::any_of(dict::ClassMembers("speech.polite"), [&](std::string_view m) { return head.ends_with(m); })) {
+                continue;
+            }
             return true;
         }
     }

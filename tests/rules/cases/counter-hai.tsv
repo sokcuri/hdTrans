@@ -3,3 +3,8 @@ dict:jisjk:116138	2杯目	2잔째	fix	local
 dict:jisjk:116138	コーヒーを3杯飲んだ	커피를 3잔 마셨다	fix	local
 dict:jisjk:116138	優勝杯	우승배	keep	global-stem
 dict:jisjk:116138	二杯	두 잔	keep	local
+dict:jisjk:116138	ご飯を何杯もおかわりした。	밥을 몇 그릇이나 더 먹었다.	fix	local
+dict:jisjk:116138	牛丼を2杯平らげた。	rule:dict:jisjk:116138=그릇	fix	local
+dict:jisjk:116138	コーヒーを何杯も飲んだ。	커피를 몇 잔이나 마셨다.	keep	local
+dict:jisjk:116138	果汁を2杯飲んだ。	과즙을 2잔 마셨다.	keep	local
+dict:jisjk:116138	青汁を3杯	녹즙을 3잔	keep	local
