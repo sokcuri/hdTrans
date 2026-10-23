@@ -199,6 +199,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     if (mode == kModeGeneral && settings.text) {
         DropBoundUtterances(l, query);
         DropNegatedAdverbs(l, query);
+        DropFinalAdnominals(l, query);
     }
     if (settings.text) {
         DropModalSplits(l, query);
@@ -432,6 +433,41 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
         const bool bound = NameClassOf(next) == kClassHiragana ||
                            (r->source.ends_with("ます") && !(alone && UtteranceBoundary(next)));
         if (r->user == nullptr && bound && VerbUtterance(*r)) {
+            l.count--;
+            continue;
+        }
+        if (out == nullptr) out = r;
+        else last->child = r;
+        last = r;
+    }
+    if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
+// Text path, mode 0: an adnominal record (part class 0) in the past (お腹が空いた 배가 고픈) is
+// dropped before the end of the line or of a sentence (。！？」』), where nothing follows for
+// it to modify, so that the predicate analysis ends the sentence (배가 고팠다). Before a
+// pause it stays (荒涼とした…工事現場).
+void Worker::DropFinalAdnominals(Lookup& l, std::string_view query) {
+    Record* out = nullptr;
+    Record* last = nullptr;
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        bool final = false;
+        if (At(r->partCode, 1) == '0' && query.size() >= r->source.size() &&
+            (r->source.ends_with("た") || r->source.ends_with("だ"))) {
+            std::string_view rest = query.substr(r->source.size());
+            if (rest.empty() && current >= 0) {
+                final = current + 1 >= TokenCount();
+                if (!final) {
+                    rest = NextText(current + 1);
+                    final = rest.empty();
+                }
+            }
+            for (const std::string_view p : {"。", "！", "？", "!", "?", "」", "』"}) {
+                final = final || rest.starts_with(p);
+            }
+        }
+        if (final) {
             l.count--;
             continue;
         }

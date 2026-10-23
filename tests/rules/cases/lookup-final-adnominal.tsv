@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+lookup:final-adnominal	ちょっとお腹が空いた。	조금 배가 고팠다.	fix	lookup
+lookup:final-adnominal	「お腹が空いた」	「배가 고팠다」	fix	lookup
+lookup:final-adnominal	お腹が空いた子供。	배가 고픈 아이.	keep	lookup
+lookup:final-adnominal	そこは荒涼とした…工事現場。	거기는 황량한…공사 현장.	keep	lookup
