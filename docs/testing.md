@@ -114,7 +114,8 @@ CI 빌드에는 이 코드가 들어가지 않습니다. 켠 빌드도 변수가
 ```sh
 cmake --preset mac -B build/mac-passexp -DHDTRANS_PASS_EXPERIMENTS=ON
 cmake --build build/mac-passexp --parallel --target hdtrans_cli
-HDTRANS_PASS_SKIP=NounTo build/mac-passexp/hdtrans -dicts dicts -in in.txt   # 그 패스를 빼고 번역
+HDTRANS_PASS_SKIP=QuoteTo build/mac-passexp/hdtrans -dicts dicts -in in.txt  # 그 패스를 빼고 번역
+HDTRANS_PASS_SKIP=cx:noun-to:20 build/mac-passexp/hdtrans -dicts dicts -in in.txt  # 구문 표의 행 하나를 빼고 번역
 HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # 씨앗 7로 패스 순서를 섞어 번역
 ```
 
