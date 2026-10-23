@@ -25,7 +25,7 @@ rewrite:past-sequence	両手で抱えたポリタンクは、歩いていると�
 rewrite:past-sequence	自身が狙われる可能性があると深く理解していた。	자신이 노려질 가능성이 있으면 깊게 이해하고 있었다.	keep	rewrites
 rewrite:quote-to	思うこと、女の笑みほど恐ろしい毒はないと。	생각하는 것, 여자의 미소만큼 무서운 독은 없다고.	fix	rewrites
 rewrite:quote-to	時間がないと、彼は言った。	시간이 없다고, 그는 말했다.	fix	rewrites
-rewrite:quote-to	予測だけで物事を考えるのはいけないと、散々言われていた。	예측만으로 일을 생각하는 것은 안 된다고, 실컷 말하고 있었다.	fix	rewrites
+rewrite:quote-to	予測だけで物事を考えるのはいけないと、父は何度も言った。	예측만으로 일을 생각하는 것은 안 된다고, 아버지는 몇 번이나 말했다.	fix	rewrites
 rewrite:quote-to	早く行かないと。	빨리 가지 않으면.	keep	rewrites
 rewrite:quote-to	お金がないと、困る。	돈이 없으면 곤란하다.	keep	rewrites
 dict:gram:to:tari	彼女は朗々と歌い上げた。	그녀는 낭랑하게 노래했다.	fix	local
