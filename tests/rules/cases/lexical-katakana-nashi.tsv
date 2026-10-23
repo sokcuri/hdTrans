@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:w:6669	異常ナシ！	이상 없음!	fix	lookup
+dict:w:6669	過去なんて全部ナシにできれば	과거 같은 건 전부 없음으로 할 수 있으면	fix	lookup
+dict:w:26755	リンゴとナシを買った。	사과와 배를 샀다.	keep	senses
