@@ -1224,7 +1224,9 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     // katakana unit is the sound rather than the hiragana adverb (メキメキと, not めきめきと).
     if (i < rs_.size() && In(rs_[i], U"しすさせ")) return 0;
     if (!tsu) return i;
-    const dict::Candidates kana = snap_.GetWordInfo(EncodeText(h), dict::LookupMode::General, ctx_.lookup);
+    // The candidates point into the key, so it lives as long as they do.
+    const std::string key = EncodeText(h);
+    const dict::Candidates kana = snap_.GetWordInfo(key, dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : kana.list) {
         if (text::RuneCount(c.source) == i - p) hiragana = true;
     }
