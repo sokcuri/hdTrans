@@ -487,6 +487,8 @@ constexpr std::string_view kResultVerbs[] = {
     "冷え", "腐", "詰ま", "埋ま", "刺さ", "慣れ", "晴れ", "曇", "凍", "外れ", "取れ", "引きこも", "引き籠も", "惚れ", "ハマ",
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
     "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌",
+    "座り込", "座りこ", "しゃがみ込", "しゃがみこ", "へたり込", "へたりこ", "屈み込", "かがみ込", "倒れ込", "倒れこ",
+    "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ",
 };
 
 // Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
@@ -650,6 +652,28 @@ void SimpleAspect(Flusher& f) {
         // An adjective target has no verb form 0 or 4 (있는, 있다); the composer reads it with its
         // いる (苛々している 초조하다).
         if (AdjectiveTarget(it->EntryText(it->selected)) && (d->dst[0] == '0' || d->dst[0] == '4')) continue;
+        it->AssignDirectSlot(it->DirectIndex(), d->dst);
+        n->AssignEntrySurface(n->selected, "");
+        n->AssignDirectSlot(n->DirectIndex(), "");
+    }
+}
+
+void InwardAuxiliary(Flusher& f) {
+    for (Item* n = f.w.chain.head; n != nullptr; n = n->next) {
+        Item* it = n->prev;
+        if (it == nullptr || n->tokenIndex != it->tokenIndex || n->selected < 0 || n->DirectIndex() < 0 ||
+            n->detail->cls != kDetailVerb || n->detail->record != 0) {
+            continue;
+        }
+        const std::string_view surface = n->group->surface;
+        if (surface != "込" && !(surface == "こ" && At(n->Code(n->selected), 2) == '5')) continue;
+        if (it->selected < 0 || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
+        // Only the 連用形: the bare stem or its one i-row kana (詰め込む, 打ち込む).
+        const std::string_view stem = it->DirectSurface();
+        constexpr std::string_view kIRow = "いきしちにひみりぎじび";
+        if (!stem.empty() && (text::RuneCount(stem) != 1 || kIRow.find(stem) == std::string_view::npos)) continue;
+        const Entry* d = n->DirectEntry(n->DirectIndex());
+        if (d == nullptr || d->dst.empty()) continue;
         it->AssignDirectSlot(it->DirectIndex(), d->dst);
         n->AssignEntrySurface(n->selected, "");
         n->AssignDirectSlot(n->DirectIndex(), "");

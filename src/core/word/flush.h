@@ -85,6 +85,9 @@ void PastProgressiveAdnominal(Flusher& f);
 // subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
 void PreparedState(Flusher& f);
 void NotYet(Flusher& f);
+// A verb stem not in the dictionary before 込む takes the ending of 込む, which writes nothing
+// (惚れ込む 반하다, 老け込んだ 늙었다): the Korean verb alone carries the action.
+void InwardAuxiliary(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);

@@ -63,6 +63,7 @@ void Flush(Flusher& f) {
         HumbleFirstPerson(f);
         ChanAfterKatakana(f);
         InitialSoundRule(f);
+        InwardAuxiliary(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);
