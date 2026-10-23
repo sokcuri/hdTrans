@@ -5694,7 +5694,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なる程	옳아	E320			GN							w:16686
 成るほど	옳아	E300			GN				xxx			w:16685
 成るほど	옳아	E320			GN							w:16686
-井然	정연	N110			GN							jisjk:197685
+井然	정연	N110		Tr	GN							jisjk:197685
 星ぞら	밤하늘	N110	VPl		GN							jisjk:26537
 正切	탄젠트	N110			GN							jisjk:197667
 正直もの	정직한 사람	N110	VHn		GN							jisjk:346705
@@ -7485,7 +7485,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 寃罪	원죄	N110	UClULw		GN							jisjk:127737
 寃罪	억울한 죄	N110			GN							jisjk:127738
 寃罪	누명	N110			GN				xxx llm	1		w:12523
-凜然	추위가 심함	N110			GN							jisjk:98116
+凜然	늠름	N110		Tr	GN							jisjk:98116
 くり舟	쪽배	N110			GN							w:12797
 ひょう窃	표절	N110		Hd	GN							jisjk:154471
 尤め	비난&AV@	M437			GN							jisjk:7023
@@ -7565,7 +7565,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 麾下	휘하	N110	VPl		GN							jisjk:17731
 シャレっ気	멋 부리는 기질	N110			GN							jisjk:234629
 かん腸	관장	N110		Hd	GN							jisjk:116633
-混然	혼연	N110	UFl		GN							jisjk:203639
+混然	혼연	N110	UFl	Tr	GN							jisjk:203639
 沪過	여과	N110		Hd	GN							jisjk:20279
 沪紙	여과지	N110			GN							jisjk:105220
 沪紙	거름종이	N110			GN				xxx	1		w:1306
@@ -7846,7 +7846,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 荒れはて	몹시 황폐해&AL@	M427	VPl		GN							jisjk:138764
 荒果て	몹시 황폐해&AL@	M427	VPl		GN							jisjk:138764
 暗翳	암영	N110			GN							jisjk:28543
-意気揚々	의기양양	N110	SFl		GN							jisjk:125287
+意気揚々	의기양양	N110	SFl	Tr	GN							jisjk:125287
 いき渡	널리 퍼&AL@	M418			GN							jisjk:95904
 いき渡	골고루 미&AO@	M428			GN							jisjk:140623
 ゆき渡	널리 퍼&AL@	M418			GN							jisjk:95904
@@ -8288,7 +8288,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 すり硝子	불투명유리	N110			GN							jisjk:238227
 ズル休み	땡땡이 &AO@	M449			GN							jisjk:346980
 制御機	제어기	N110	VPe		GN							jisjk:197305
-正々堂々	정정당당	N110	SFl	Dd	GN							jisjk:197659
+正々堂々	정정당당	N110	SFl	DdTr	GN							jisjk:197659
 雪踏	셋타	N110	VCp		GN							jisjk:239153
 責め苛	괴롭&AW@	M445			GN							jisjk:138375
 仙郷	선경	N110	VPl		GN							jisjk:26215
@@ -8301,7 +8301,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 前前回	전전회	N110	UMe		GN							jisjk:199741
 全智	전지	N110			GN							jisjk:32680
 仄聞	풍문	N110	VCm		GN							jisjk:200659
-楚々	청초함	N110			GN							jisjk:240447
+楚々	청초	N110		Tr	GN							jisjk:240447
 卒先	솔선	N110		Hd	GN							jisjk:30868
 率爾	졸지	N110			GN							jisjk:240465
 卒都婆	졸탑파	I110			GN							jisjk:102336
@@ -8815,15 +8815,15 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 両々	양쪽이 다	N110			GN							jisjk:256105
 凜々し	늠름$AB@	H7N0			GN							jisjk:137059
 凜凜し	늠름$AB@	H7N0			GN							jisjk:137059
-凛々	늠름	N110			GN							jisjk:20972
-凜々	늠름	N110			GN							jisjk:20972
+凛々	늠름	N110		Tr	GN							jisjk:20972
+凜々	늠름	N110		Tr	GN							jisjk:20972
 凜凜	늠름	N110			GN							jisjk:20972
 類形	유형	N110			GN							jisjk:20892
 麗々し	번지르르$AB@	H7M0			GN							jisjk:5486
 麗々し	요란$AB@	H7N0	SFlVAc		GN							jisjk:137062
 歴々	역력%A1@	G8L0			GN							jisjk:2734
 歴々	역력함	N110			GN							jisjk:156614
-朗々	낭랑	N110			GN							jisjk:20030
+朗々	낭랑	N110		Tr	GN							jisjk:20030
 わかり切	뻔&AV@	M428			GN							w:12629
 分り切	뻔&AV@	M428			GN							w:12629
 分かり難	이해하기 어$G8@	H7N0			GN							jisjk:138407
@@ -10284,7 +10284,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 彫物師	조각사	I110	UAq		GN							jisjk:83557
 調子はずれ	가락이 맞지 않음	N110			GN							jisjk:243251
 調べもの	조사	N110			GN							jisjk:235802
-滔々	도도	N110	QAB		GN							jisjk:205772
+滔々	도도	N110	QAB	Tr	GN							jisjk:205772
 濤々	도도	N110	QAB		GN							jisjk:205772
 濤濤	도도	N110	QAB		GN							jisjk:205772
 稲扱き	벼훑이	I110			GN							jisjk:66087

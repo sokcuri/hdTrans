@@ -28,3 +28,15 @@ rewrite:quote-to	時間がないと、彼は言った。	시간이 없다고, �
 rewrite:quote-to	予測だけで物事を考えるのはいけないと、散々言われていた。	예측만으로 일을 생각하는 것은 안 된다고, 실컷 말하고 있었다.	fix	rewrites
 rewrite:quote-to	早く行かないと。	빨리 가지 않으면.	keep	rewrites
 rewrite:quote-to	お金がないと、困る。	돈이 없으면 곤란하다.	keep	rewrites
+dict:gram:to:tari	少女は、呆然と周りを見回していた。	소녀는, 멍하니 주위를 둘러보고 있었다.	fix	local
+dict:gram:to:tari	正々堂々と戦いましょう。	정정당당하게 싸웁시다.	fix	local
+dict:gram:to:tari	飲み散らかした大人たちが意気揚々と部屋に戻っていく。	마셔 어지른 어른들이 의기양양하게 방으로 돌아간다.	fix	local
+dict:gram:to:tari	彼は黙然と空を見上げた。	그는 묵연하게 하늘을 올려다보았다.	fix	local
+dict:gram:to:tari	茫然とする私はそのまま医務室に運ばれた。	멍해지는 나는 그대로 의무실에 옮겨졌다.	fix	local
+dict:gram:to:tari	友人と部屋に戻っていく。	친구와 방으로 돌아간다.	keep	local
+dict:gram:to:tari-comma	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 두 번째 중얼거림을 토해냈다.	fix	local
+dict:gram:toshite:tari	愕然として言葉を失う。	아연실색하게 말을 잃는다.	fix	local
+dict:gram:toshite:tari	学生として当然だ。	학생으로서 당연하다.	keep	local
+dict:gram:toshite:adverb	執事までが唖然として固まった。	집사까지가 아연하게 굳어졌다.	fix	local
+dict:gram:taru:tari	これぞまさに搭乗者の歴然たる差ってやつ？	이거야 그야말로 탑승자의 역력한 차이는 녀석?	fix	local
+dict:gram:taru:tari	学生たる者。	학생인 사람.	keep	local

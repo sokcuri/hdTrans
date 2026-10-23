@@ -37,9 +37,9 @@ dict:jisjk:80454	一通り数えた。	한 차례 세었다.	fix	local
 dict:jisjk:80454	一通りの方法だ。	보통의 방법이다.	fix	local
 dict:jisjk:375256	４人の国を見た。	4명의 나라를 보았다.	keep	local
 dict:jisjk:375256	人の国を旅した。	외국을 여행했다.	fix	local
-dict:jisjk:114918	愕然とした。	아연실색했다.	fix	local
-dict:jisjk:114918	鬱蒼とした森林。	울창한 삼림.	fix	local
-dict:jisjk:114918	鬱蒼と茂る。	rule:dict:jisjk:114918=하게	keep	local
+dict:gram:to:tari	愕然とした。	아연실색했다.	fix	local
+dict:gram:to:tari	鬱蒼とした森林。	울창한 삼림.	fix	local
+dict:gram:to:tari	鬱蒼と茂る。	rule:dict:gram:to:tari=하게	keep	local
 dict:jisjk:114918	友人とする相談です。	친구와 하는 상담입니다.	fix	local
 dict:jisjk:114918	やがて妻としたという。	rule:dict:jisjk:114918=(으)로	keep	local
 dict:jisjk:369554	少しでも役に立てればと思います。	조금이라도 도움이 될 수 있으면 하고 생각합니다.	fix	local
