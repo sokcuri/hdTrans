@@ -2,6 +2,7 @@
 #include <iterator>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "core/engine/driver.h"
@@ -103,10 +104,26 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
         {0, "base.tsv",
          "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
          "日\t일\tN110\t\tCt\tGN\t0\t1\n"
-         "万\t만\tN110\t\tNj\tGN\t0\t2\n"},
+         "万\t만\tN110\t\tNj\tGN\t0\t2\n"
+         "十五日\t십오일\tN110\t\t\tGN\t0\t3\n"
+         "四十九日\t사십구일재\tN110\t\t\tGN\t0\t4\n"
+         "二十日\t스무날\tN110\t\t\tGN\t0\t5\n"},
     };
     // A number that goes on after 万 is one number, written in groups of four digits.
     CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "一万二千三百日", "1만2천3백일", "1만 2300일");
+    // A word that spells the number and its counter reads digits; one read otherwise keeps its reading.
+    CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "十五日", "십오일", "15일");
+    const auto loaded = hdTrans::dict::Load(files);
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"四十九日", "사십구일재"},
+                                          std::pair<std::string, std::string_view>{"二十日", "스무날"}}) {
+        hdTrans::internal::TranslationOptions options;
+        hdTrans::internal::Memory memory;
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        HD_REQUIRE(out.size() == 1);
+        HD_CHECK_EQ(out[0], std::string(expected));
+    }
 }
 
 HD_TEST(word_improvements_forward_terminal_order) {

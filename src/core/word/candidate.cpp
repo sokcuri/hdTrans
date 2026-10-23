@@ -155,6 +155,24 @@ KanjiNumber ParseKanjiNumber(std::string_view s) {
     return n;
 }
 
+// The Sino-Korean reading of a number of up to four digits (15 십오, 120 백이십, 2000 이천);
+// empty for any other text.
+std::string SinoKoreanNumber(std::string_view digits) {
+    constexpr std::string_view kDigits[] = {"", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"};
+    constexpr std::string_view kUnits[] = {"", "십", "백", "천"};
+    if (digits.empty() || digits.size() > 4 || digits[0] == '0') return {};
+    std::string out;
+    for (std::size_t k = 0; k < digits.size(); k++) {
+        if (!IsDigit(digits[k])) return {};
+        const int d = digits[k] - '0';
+        const std::size_t unit = digits.size() - 1 - k;
+        if (d == 0) continue;
+        if (d > 1 || unit == 0) out += kDigits[d];
+        out += kUnits[unit];
+    }
+    return out;
+}
+
 // After a noun parent, the particle records (kind 2) that follow the first verb or
 // adjective record move to the front (behind the leading plain-dictionary records).
 Record* ReorderAfterNoun(const Item& parent, Record* records) {
@@ -664,17 +682,18 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
     }
 }
 
-// Looks up the words at full[cursor:] and processes them; parent is the word before,
-// whose candidates may be reordered.
-// Whether the dictionary words at a kanji number of two or more characters only spell the number or the number and one counter (五十 오십, 十五日 십오일,
-// 十二月 십이월): the number is read as digits then (50, 15일, 12월). A longer word
-// (五十肩, 八百屋, 二十四時間) is kept.
+// Whether the dictionary words at a kanji number of two or more characters only spell the
+// number, alone or with one counter read with its Sino-Korean syllable (五十 오십, 十五日
+// 십오일, 十二月 12월): the number is read as digits then (50, 15일, 12월). A word read
+// otherwise (四十九日 사십구일재, 二十歳 20살) or a longer word (五十肩, 八百屋, 二十四時間)
+// keeps its reading.
 bool Worker::SpellsNumber(Record* records, const Record& number) {
     const std::string_view source = number.source;
     if (!settings.improvements.kanjiNumbers || source.empty() || static_cast<unsigned char>(source[0]) < 0x80 ||
         number.target.empty() || !IsDigit(number.target[0]) || text::RuneCount(source) < 2) {
         return false;
     }
+    const std::string reading = SinoKoreanNumber(number.target);
     for (Record* r = records; r != nullptr; r = r->child) {
         if (r->source.size() <= source.size()) continue;
         if (!std::string_view(r->source).starts_with(source)) return false;
@@ -685,10 +704,29 @@ bool Worker::SpellsNumber(Record* records, const Record& number) {
             for (Record* c = l.records; c != nullptr && !counter; c = c->child) counter = c->source == rest && Has(c->attr, "Ct");
         }
         if (!counter) return false;
+        const std::optional<char32_t> syllable = dict::Written(text::DecodeRune(rest).cp);
+        if (reading.empty() || !syllable) return false;
+        std::string target;
+        for (const char c : std::string_view(r->target)) {
+            if (c != ' ') target += c;
+        }
+        // A word that does not read the number (a name read 쥬하치, 十八番 장기) is no other
+        // reading of it.
+        constexpr std::string_view kNativeTens[] = {"열", "스물", "스무", "서른", "마흔", "쉰", "예순", "일흔", "여든", "아흔"};
+        if (!target.starts_with(reading) && !target.starts_with(number.target) &&
+            std::none_of(std::begin(kNativeTens), std::end(kNativeTens),
+                         [&](std::string_view w) { return target.starts_with(w); })) {
+            continue;
+        }
+        std::string unit;
+        text::AppendRune(unit, *syllable);
+        if (target != reading + unit && target != number.target + unit) return false;
     }
     return true;
 }
 
+// Looks up the words at full[cursor:] and processes them; parent is the word before,
+// whose candidates may be reordered.
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
     const std::string_view text = From(full, cursor);
     if (text.empty()) return true;
