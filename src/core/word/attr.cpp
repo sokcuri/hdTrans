@@ -301,17 +301,31 @@ bool Item::IsRuleRightBoundary() const {
     // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
     // So does a predicate with its ending before an ellipsis (うるさい…テメェ 시끄럽다…).
     if (tsu != nullptr && n->group->surface == "、") return true;
-    // A noun that needs a modifier (こと, もの, わけ) still takes the predicate across the
-    // pause (行く……ことにした 가는……것으로).
-    static constexpr std::string_view kBoundNouns[] = {"こと", "事", "もの", "物", "の", "ん", "ところ", "所", "とこ", "わけ",
-                                                       "訳", "はず", "筈", "つもり", "よう", "ため", "為", "まま", "ほう", "方",
-                                                       "みたい", "らしい", "そう"};
-    // Nor does a common noun, which the predicate may still modify (暖かい…居場所); a pronoun,
-    // an interjection or another clause after the pause starts anew (うるさい…テメェ).
-    const int ns = n->selected >= 0 ? n->selected : 0;
-    bool bound = At(n->Code(ns), 0) == '1' && At(n->Code(ns), 1) != '2';
-    for (const std::string_view b : kBoundNouns) bound = bound || n->group->surface.starts_with(b);
-    // A conjunctive ending (分からないが, 行って) is no end either.
+    // A noun that needs a modifier (こと, もの, わけ), an auxiliary (みたい, らしい, だろう,
+    // かもしれない) or an adverbial particle (まで, ほど, くらい) still takes the predicate across
+    // the pause (行く……ことにした 가는……것으로, 来る……まで 오는……까지): the word alone or with a
+    // particle (ことに, わけがない), not the start of another word (ようやく, だけど).
+    static constexpr std::string_view kBoundNouns[] = {
+        "こと", "事", "もの", "物", "の", "ん", "ところ", "所", "とこ", "わけ", "訳", "はず", "筈", "つもり", "よう", "ため",
+        "為", "まま", "ほう", "方", "とき", "時", "ころ", "頃", "みたい", "らし", "そう", "まで", "ほど", "くらい", "ぐらい",
+        "だけ", "ばかり"};
+    static constexpr std::string_view kAuxiliaries[] = {"かも", "だろう", "でしょう"};
+    const std::string_view ns = n->group->surface;
+    bool bound = false;
+    for (const std::string_view b : kBoundNouns) {
+        if (!ns.starts_with(b)) continue;
+        const char32_t after = text::DecodeRune(ns.substr(b.size())).cp;
+        bound = bound || ns.size() == b.size() || std::u32string_view(U"にがをはもでのだかとなじ").find(after) != std::u32string_view::npos;
+    }
+    for (const std::string_view b : kAuxiliaries) bound = bound || ns.starts_with(b);
+    // Nor does a common noun, which the predicate may still modify (暖かい…居場所), or an
+    // attributive phrase before one (隠している……すべてのこと); a pronoun, a demonstrative, an
+    // interjection or another clause after the pause starts anew (うるさい…テメェ, ……この人).
+    const int sel = n->selected >= 0 ? n->selected : 0;
+    const std::string_view nc = n->Code(sel);
+    bound = bound || (At(nc, 0) == '1' && At(nc, 1) != '2') || (At(nc, 0) == '0' && At(nc, 1) == 'D');
+    // A conjunctive ending (分からないが, 行って) is no end either; a polite ending
+    // (がんばります……かも) never modifies and ends the clause whatever follows.
     bool terminal = false;
     if (detail != nullptr && detail->Yougo()) {
         const std::string_view ending = DirectSurface();
@@ -319,6 +333,7 @@ bool Item::IsRuleRightBoundary() const {
         for (const std::string_view e : {"い", "る", "う", "く", "す", "つ", "ぬ", "ぶ", "む", "ぐ", "た", "だ"}) {
             terminal = terminal || ending.ends_with(e);
         }
+        if (ending.ends_with("ます") || ending.ends_with("です")) bound = false;
     }
     const char32_t punct = text::DecodeRune(n->group->surface).cp;
     const bool mark = std::u32string_view(U"?？!！。、」』").find(punct) != std::u32string_view::npos;
