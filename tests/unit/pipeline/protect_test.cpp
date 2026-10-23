@@ -202,6 +202,44 @@ HD_TEST(pipeline_nicknames_to_hangul) {
     }
 }
 
+// With the name layer: a nickname after a word and a particle inside a longer run, before
+// ちゃんと, and before くんの after a stem of a verb that does not end in く.
+HD_TEST(pipeline_nicknames_to_hangul_name_layer) {
+    dict::File base, names;
+    base.name = "base.tsv";
+    base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n"
+                "それ\t그것\tN120\t\t\tGN\t1\n"
+                "こと\t것\tN110\t\t\tGN\t2\n"
+                "はとこ\t육촌\tN110\tVHn\t\tGN\t3\n"
+                "あお\t부&AO@\tM452\t\t\tGN\t4\n"
+                "いつか\t언젠가\tE311\t\t\tGN\t5\n"
+                "話\t이야기&AV@\tM443\t\t\tGN\t6\n";
+    names.name = "names.tsv";
+    names.text = "#! layer=names\nkey\tko\tpos\tsem\tgram\tdict\tid\n"
+                 "まき\t마키\tN130\tQPNVHn\tWb\tGN\t7\n"
+                 "りこ\t리코\tN130\tQPNVHn\tWb\tGN\t8\n"
+                 "はとこ\t육촌\tN130\tQPNVHn\tWb\tGN\t9\n"
+                 "いつか\t이츠카\tN130\tQPNVHn\tWb\tGN\t11\n";
+    const auto snap = dict::Load({base, names}).snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"それはまきくんの夢", "それは〖1마키〗くんの夢"},
+        {"ことはりこちゃんに", "ことは〖1리코〗ちゃんに"},
+        {"それははとこちゃんに", "それははとこちゃんに"},
+        {"りこちゃんと会う", "〖1리코〗ちゃんと会う"},
+        {"あおくんの夢", "〖1아오〗くんの夢"},
+        {"いつかちゃんと話そう", "いつかちゃんと話そう"},
+        {"しろちゃんと。", "しろちゃんと。"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::NicknamesToHangul(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_kata_words) {
     const auto snap = Snapshot("からだ\t몸\tN110\t\t\tGN\t1\n");
     HD_REQUIRE(snap != nullptr);

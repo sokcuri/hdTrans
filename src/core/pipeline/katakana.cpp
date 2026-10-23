@@ -984,10 +984,89 @@ constexpr std::u32string_view kParticleRunes = U"はがをにともへでや";
 
 bool NicknameRune(char32_t r) { return IsHiraganaRune(r) || r == U'ー'; }
 
+// Whether the name layer reads s as a person.
+bool LayerPerson(std::string_view s, const dict::Snapshot& snap) {
+    for (const dict::Record& rec : snap.NameRecords(s)) {
+        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
+    }
+    return false;
+}
+
+// Whether s is a person name of the name layer that no dictionary reads as a person noun
+// (はとこ 육촌).
+bool NameNotKin(std::string_view s, const dict::Snapshot& snap) {
+    if (!LayerPerson(s, snap)) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
+        if (c.codes == nullptr) continue;
+        const std::string_view sem = c.codes->sem.Text();
+        if (!sem.starts_with("QPN") && sem.find("VHn") != std::string_view::npos) return false;
+    }
+    return true;
+}
+
+// Whether the verb at the start of s conjugates there (話そう, 遊ぶ).
+bool VerbAt(std::string_view s, const dict::Snapshot& snap) {
+    dict::LookupContext lookup;
+    lookup.plain = &snap.Plain();
+    for (const dict::Candidate& c : snap.GetWordInfo(s, dict::LookupMode::General, lookup).list) {
+        if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M' ||
+            c.source.size() > s.size()) {
+            continue;
+        }
+        const std::string_view tail = s.substr(c.source.size());
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(c.codes->partText[3] - '0', branch);
+            if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && tail.starts_with(conj)) return true;
+        }
+    }
+    return false;
+}
+
+// Whether the kana run name is a verb in its dictionary or imperative form, which ends a
+// clause (しろ, 見ろ).
+bool ClauseVerb(std::string_view name, const dict::Snapshot& snap) {
+    for (int group = 1; group <= 3; group++) {
+        for (const int branch : {0, 11, 12}) {
+            if (word::PrefixForm(50 * group + branch) == name) return true;
+        }
+    }
+    dict::LookupContext lookup;
+    lookup.plain = &snap.Plain();
+    for (const dict::Candidate& c : snap.GetWordInfo(name, dict::LookupMode::General, lookup).list) {
+        if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M' ||
+            c.source.size() > name.size()) {
+            continue;
+        }
+        const std::string_view tail = name.substr(c.source.size());
+        for (const int branch : {0, 11, 12}) {
+            if (word::Conjugation(c.codes->partText[3] - '0', branch) == tail) return true;
+        }
+    }
+    return false;
+}
+
+// Whether the ちゃんと that starts rest, after the kana run name, is the adverb: after a run
+// that the name layer reads as no person (ここにちゃんと), that is an adverb or a word that
+// modifies (いつかちゃんと, もっとちゃんと) or a verb ending a clause (しろちゃんと), or
+// after a common word before a verb that conjugates (りんごちゃんと遊ぶ). After a name of
+// no other word, ちゃん and と are the honorific and the particle (りこちゃんと目が合う,
+// りこちゃんと遊ぶ).
+bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snapshot& snap) {
+    if (!LayerPerson(name, snap) || ClauseVerb(name, snap)) return true;
+    bool word = false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.codes->part.Empty() || c.codes->sem.Text().starts_with("QPN")) continue;
+        const char tag = c.codes->part.Tag();
+        if (tag == 'E' || tag == 'P') return true;
+        word = true;
+    }
+    return word && VerbAt(rest.substr(std::string_view("ちゃんと").size()), snap);
+}
+
 // The start of the nickname that ends at end in text, or npos: two to four kana after a
-// character other than kana or a kanji, or after a one-kana particle that follows a kanji,
-// katakana or a span.
-size_t NicknameStart(std::string_view text, size_t end, bool spanBefore) {
+// character other than kana or a kanji, after a one-kana particle that follows a kanji,
+// katakana or a span, or after a word and a case particle inside a longer kana run.
+size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const dict::Snapshot& snap) {
     size_t start = end;
     while (start > 0) {
         const text::Rune r = LastRune(text.substr(0, start));
@@ -1003,6 +1082,28 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore) {
     const size_t after = start + first.size;
     if ((!boundary || (start == 0 && spanBefore)) && RuneIn(first.cp, kParticleRunes) && runes(after) >= 2 && runes(after) <= 4) {
         return after;
+    }
+    // Inside a longer run, the two to four kana after は, が, を, も, に or と that follows a
+    // word of two kana or more, when the name layer reads them as a person and no dictionary
+    // as a person noun (それはまきくん, それははとこちゃん: no はとこ; not
+    // やはりのんちゃん).
+    auto wordBefore = [&](size_t p) {
+        for (size_t from = start; from < p; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
+            const std::string_view w = text.substr(from, p - from);
+            if (CountRunes(w, [](char32_t) { return true; }) >= 2 && !snap.RetrieveRecords(w, dict::LookupMode::General).empty()) {
+                return true;
+            }
+        }
+        return false;
+    };
+    for (size_t p = after; p < end;) {
+        const text::Rune r = text::DecodeRune(text.substr(p));
+        const size_t next = p + std::max<size_t>(1, r.size);
+        if (RuneIn(r.cp, U"はがをもにと") && runes(next) >= 2 && runes(next) <= 4 && wordBefore(p) &&
+            NameNotKin(text.substr(next, end - next), snap)) {
+            return next;
+        }
+        p = next;
     }
     return std::string_view::npos;
 }
@@ -1020,14 +1121,14 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         }
         const size_t end = i;
         i += honorific.size();
-        const size_t start = NicknameStart(text, end, spanBefore && at == 0);
+        const size_t start = NicknameStart(text, end, spanBefore && at == 0, snap);
         if (start == std::string_view::npos || start < at) continue;
         const std::string_view name = text.substr(start, end - start);
         const std::string_view rest = text.substr(i);
         if (name.starts_with("お") || name.starts_with("ご") || name.starts_with("ー")) continue;
         bool kin = false;
         for (const std::string_view k : kKinHeads) kin = kin || name == k;
-        if (kin || (honorific == "ちゃん" && rest.starts_with("と"))) continue;  // ここにちゃんと
+        if (kin || (honorific == "ちゃん" && rest.starts_with("と") && ChantoAdverb(name, text.substr(end), snap))) continue;
         // An animal called with the honorific is the animal (ねこちゃん 고양이).
         bool animal = false;
         for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
@@ -1041,12 +1142,17 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
                                    rest.starts_with("な") || rest.starts_with("の");
             const char32_t last = LastRune(name).cp;
             bool verb = predicate && RuneIn(last, U"てでとっ");
-            // A verb stem of two kana or more at the end of the name (まだあるくんだ).
+            // The stem, of two kana or more, of a verb whose dictionary form ends in the く
+            // of くん at the end of the name (まだあるくんだ 歩く), not a stem of another verb
+            // (あおくんの: あおる, あおぐ).
             for (size_t from = 0; predicate && !verb && from < name.size();
                  from += std::max<size_t>(1, text::DecodeRune(name.substr(from)).size)) {
                 const std::string_view stem = name.substr(from);
-                verb = CountRunes(stem, [](char32_t) { return true; }) >= 2 &&
-                       KeyTags(stem, ctx, snap).find('M') != std::string::npos;
+                if (CountRunes(stem, [](char32_t) { return true; }) < 2) break;
+                for (const dict::Candidate& c : snap.RetrieveRecords(stem, dict::LookupMode::General)) {
+                    if (c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+                    if (word::Conjugation(c.codes->partText[3] - '0', 0) == "く") verb = true;
+                }
             }
             if (verb) continue;
         }

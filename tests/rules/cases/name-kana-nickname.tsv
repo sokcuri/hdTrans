@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+names:kana-nickname	それはまきくんの夢だから	그것은 마키 군의 꿈이니까	fix	lookup
+names:kana-nickname	「あ、今言ったことはまきちゃんには内緒だよ？」	「아, 지금 말했던 건 마키짱에게는 비밀이야?」	fix	lookup
+names:kana-nickname	りこちゃんと一緒に帰る。	리코짱과 함께 돌아간다.	fix	lookup
+names:kana-nickname	その傷もまきくんの一部だから	그 상처도 마키 군의 일부니까	keep	lookup
+names:kana-nickname	まだあるくんだ	아직 걷는 거야	keep	lookup
+names:kana-nickname	狙ってくんな	노려 오지 마	keep	lookup
+names:kana-nickname	ここにちゃんとある。	여기에 제대로 있다.	keep	lookup
