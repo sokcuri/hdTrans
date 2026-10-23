@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import { npmAssetName } from './publication.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const build = readFileSync(join(root, '.github/workflows/build.yml'), 'utf8');
@@ -146,4 +147,10 @@ test('only the release mutation job serializes stable and nightly publication se
   assert.doesNotMatch(release.slice(0, release.indexOf('\n  release:\n')), /concurrency:/);
   assert.match(mutation, /group: github-release-\$\{\{ github.ref == 'refs\/heads\/develop' && 'nightly' \|\| 'stable' \}\}/);
   assert.match(mutation, /queue: max\n      cancel-in-progress: false/);
+});
+
+test('the packed npm package is uploaded and summed under the name the publisher verifies', () => {
+  const name = npmAssetName('$version');
+  assert.ok(release.includes(`mv "build/release/hdtrans-$version.tgz" "build/release/${name}"`));
+  assert.ok(release.includes(`sha256sum "${name}" >> SHA256SUMS.txt`));
 });
