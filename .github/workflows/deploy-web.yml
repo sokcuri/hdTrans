@@ -148,6 +148,7 @@ jobs:
               -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
             cmake --build --preset linux --parallel "$(getconf _NPROCESSORS_ONLN)" --target hdtrans_cli
           fi
+      # The paths share build/ as their root, so the artifacts keep linux/ and wasm/ below it.
       - uses: actions/upload-artifact@v7
         with:
           name: web-${{ matrix.preset }}
@@ -190,11 +191,11 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: web-linux
-          path: build/linux
+          path: build
       - uses: actions/download-artifact@v8
         with:
           name: web-wasm
-          path: build/wasm
+          path: build
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
