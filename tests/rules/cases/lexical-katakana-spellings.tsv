@@ -10,3 +10,6 @@ lexical:katakana-apology	ゴメンね、変なこと聞いて。	미안해, 이�
 lexical:katakana-apology	そんなのはゴメンだ。	그런 것은 싫다.	keep	defaults
 normalize:nna	ごめんな、遅れて。	미안, 늦어.	fix	normalize
 normalize:nna	なめんなよ！	얕보지 마!	keep	normalize
+segmentation:katakana-run	リアルなティアーズ	리얼한 티아즈	fix	lookup
+segmentation:katakana-run	ドッペルゲンガーって何？	돕페르겐가라고 뭐?	fix	lookup
+segmentation:katakana-run	ティアーズ	티아즈	keep	lookup

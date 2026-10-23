@@ -18,29 +18,34 @@ constexpr std::string_view kNegativeFamily = "&NF@";
 constexpr std::string_view kNegativeAdjective = "$DH@";
 constexpr std::string_view kAbsentFamily = "&M9@";  // 없다
 
-// The text of the group's surface and the ending is not a sequence containing kanji.
-bool NoKanji(std::string_view s) {
+// Every character of s is katakana.
+bool AllKatakana(std::string_view s) {
     for (std::string_view rest = s; !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) {
-        if (NameClassOf(FirstChar(rest)) == kClassKanji) return false;
+        if (NameClassOf(FirstChar(rest)) != kClassKatakana) return false;
     }
     return true;
 }
 
 // A katakana word with katakana neighbours of its token: one word of the run, or
-// nullptr.
+// nullptr. On the text path a neighbour joins only when all it covers is katakana, so
+// the hiragana ending of a word stays out of the run (リアルなティアーズ).
 Item* BuildNmTail(Flusher& f) {
     Worker& w = f.w;
-    auto katakana = [&](std::string_view s) { return Classify(s) == 14 && (!w.settings.text || NoKanji(s)); };
+    auto katakana = [&](const Item* x) {
+        if (Classify(x->group->surface) != 14) return false;
+        if (!w.settings.text) return true;
+        return AllKatakana(x->text.substr(static_cast<std::size_t>(x->start), static_cast<std::size_t>(x->length)));
+    };
     for (Item* it = w.chain.tail; it != nullptr; it = it->prev) {
         if (Classify(it->group->surface) != 14 || !Has(it->GAttr(0), "Nm")) continue;
         int start = it->start;
         int length = it->length;
         int neighbours = 0;
-        if (Item* n = it->next; n != nullptr && katakana(n->group->surface) && it->tokenIndex == n->tokenIndex) {
+        if (Item* n = it->next; n != nullptr && katakana(n) && it->tokenIndex == n->tokenIndex) {
             neighbours = 1;
             length += n->length;
         }
-        if (Item* p = it->prev; p != nullptr && katakana(p->group->surface) && it->tokenIndex == p->tokenIndex) {
+        if (Item* p = it->prev; p != nullptr && katakana(p) && it->tokenIndex == p->tokenIndex) {
             start = p->start;
             neighbours++;
             length += p->length;
