@@ -571,7 +571,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウエディング・マーチ	결혼 행진곡	N110	USoQMU		GN							jisjk:157617
 ウェディング・リング	결혼 반지	N110	VAc		GN							jisjk:267323
 ウエディング・リング	결혼 반지	N110	VAc		GN							jisjk:267323
-ウェハース	웨이퍼	N110			GN							jisjk:43901
+ウェハース	웨하스	N110			GN							jisjk:43901
 ウオーキングシューズ	워킹 슈즈	N110	VCp		GN							jisjk:267339
 ウォーキング・シューズ	워킹 슈즈	N110	VCp		GN							jisjk:267339
 ウオーキング・シューズ	워킹 슈즈	N110	VCp		GN							jisjk:267339
@@ -12755,7 +12755,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マネーローンダリング	자금세탁	N110			GN				xxx llm	1		w:9285
 マネー・ロンダリング	자금 세탁	N110			GN							jisjk:113357
 マネー・ロンダリング	자금세탁	N110			GN				xxx llm	1		w:9285
-リストラチャリング	리스트럭쳐링	N110			BZ							jisjk:107119
+リストラチャリング	리스트럭처링	N110			BZ							jisjk:107119
 リボルビングシステム	리볼빅 시스템	N110	UMn		BZ							jisjk:359398
 ローカルコンテント	로컬 컨텐트	N110			BZ							jisjk:359687
 アート・シアター	아트시어터	N110	UArVBl		GN							jisjk:156940

@@ -47801,8 +47801,8 @@ ttt	ttt	K110			GN				jisjk:201744
 アーキオロジー	고고학	N110	USu		GN				jisjk:41908		
 アーキオロジー	아키올로지	N110			GN				jisjk:41909		
 アーキタイプ	아키타이프	N110			GN				jisjk:41910		
-アーキテクチャ	아키텍쳐	N110			IT				jisjk:41911		
-アーキテクチャー	아키텍쳐	N110			BZ				jisjk:41912		
+アーキテクチャ	아키텍처	N110			IT				jisjk:41911		
+アーキテクチャー	아키텍처	N110			BZ				jisjk:41912		
 アーキテクチュア	아키텍처	N110			GN				jisjk:41913		
 アーキテクチュアルレンダラー	아키텍추럴 렌더러	N110	VHnUAq		GN				jisjk:151930		
 アーキテクト	아키텍트	N110			GN				jisjk:41914		
@@ -49236,9 +49236,9 @@ ttt	ttt	K110			GN				jisjk:201744
 インフュージョンポンプ	수액 펌프	N110	QHPVPe		GN				jisjk:157469		
 インフラ	인프라	N110			BZ				jisjk:341053		
 インフライトショップ	기내 면세점	N110	VBl		GN				jisjk:157470		
-インフラストラクチャ	인프라스트럭쳐	N110			IT				jisjk:262476		
-インフラストラクチャ	인프라스트럭쳐	N110			BZ				jisjk:364095		
-インフラストラクチャー	인프라스트럭쳐	N110			BZ				jisjk:43750		
+インフラストラクチャ	인프라스트럭처	N110			IT				jisjk:262476		
+インフラストラクチャ	인프라스트럭처	N110			BZ				jisjk:364095		
+インフラストラクチャー	인프라스트럭처	N110			BZ				jisjk:43750		
 インフラストラクチュア	인프라스트럭처	N110			GN				jisjk:43751		
 インフラスラクチャー	인프라스트럭처	N110	VBl		GN				jisjk:157471		
 インフラテック	인프라텍	N130	QIDVGt		GN				jisjk:43752		
@@ -50521,7 +50521,7 @@ ttt	ttt	K110			GN				jisjk:201744
 エキザミネーション	시험	N110			GN				jisjk:44100		
 エキシビション	전람회	N110			GN				jisjk:98786		
 エキシマ	엑시머	N110			BZ				jisjk:349022		
-エキシマレーザー	엑시머 레이져	N110			BZ				jisjk:157748		
+エキシマレーザー	엑시머 레이저	N110			BZ				jisjk:157748		
 エキジビション	전람회	N110	VGt		GN				jisjk:44101		
 エキジビションゲーム	엑시비션 게임	N110			GN				jisjk:44102		
 エキス	엑기스	N110	VFd		GN				jisjk:44103		
@@ -50639,7 +50639,7 @@ ttt	ttt	K110			GN				jisjk:201744
 エクスポ	엑스포	N110	VGt		GN				jisjk:44161		
 エクスポジション	박람회	N110	VGt		GN				jisjk:44163		
 エクスポズ	엑스포스	N130	VGt		GN				jisjk:374159		
-エクスポージャー	익스포져	N110			BZ				jisjk:157771		
+エクスポージャー	익스포저	N110			BZ				jisjk:157771		
 エクスポート	익스포트	N110			GN				jisjk:44162		
 エクスライツ	권리락	N110	VMoULw		GN				jisjk:157772		
 エクスレバン	엑스레반	N110			GN				jisjk:98794		
@@ -53685,7 +53685,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カジュアル	캐쥬얼	N110	VCp		GN				jisjk:45370		
 カジュアルデー	캐쥬얼 데이	N110			BZ				jisjk:351270		
 カジュアルドラッグ	가벼운 마약	N110	QHP		GN				jisjk:158445		
-カジュアルユーザー	가벼운 마약 복용자	N110	VHn		GN				jisjk:158446		
+カジュアルユーザー	캐주얼 유저	N110	VHn		GN				jisjk:158446		
 カジュアルルック	캐주얼 룩	N110	VCp		GN				jisjk:158447		
 カジュアルレイバー	임시 노동력	N110			GN				jisjk:158448		
 カジラギ	카지라기	N130	QPN		GN				jisjk:367312		
@@ -58039,7 +58039,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ケミカルリファイナリー	석유 화학 정유 공장	N110	VBlVMo		GN				jisjk:128320		
 ケミカルレーザー	화학 레이저	N110	VPe		GN				jisjk:128321		
 ケミスト	화학자	N110	VHnUTh		GN				jisjk:128322		
-ケミストリー	캐미스트리	N110			GN				jisjk:128323		
+ケミストリー	케미스트리	N110			GN				jisjk:128323		
 ケミストリーレターズ	케미스트리레터즈	N110	VBkVSw		GN				jisjk:164164		
 ケミョン山	계명산	N130	QCT		GN				jisjk:375975		
 ケム	연기	N110	VPeVTw		GN				jisjk:128324		
@@ -61183,7 +61183,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サーチ	서치	N110			GN				jisjk:13989		
 サーチエンジン	써치엔진	N110	VPe		GN				jisjk:47481		
 サーチビジョン	서치 비젼	N110	UArVPe		GN				jisjk:128820		
-サーチャー	서쳐	N110			GN				jisjk:47482		
+サーチャー	서처	N110			GN				jisjk:47482		
 サーチャージ	서차지	N110			BZ				jisjk:47483		
 サーチライト	서치라이트	N110			GN				jisjk:47484		
 サーツァイ	서차이	N110			GN				jisjk:47485		
@@ -64477,7 +64477,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スタニッチ	스타니치	N130	QPN		GN				jisjk:370106		
 スタバ	스타벅스	N110	VPlVGt		GN				jisjk:373953		
 スタビライザ	스태빌라이져	N110			BZ				jisjk:48985		
-スタビライザー	스태빌라이져	N110	VPe		GN				jisjk:48986		
+スタビライザー	스태빌라이저	N110	VPe		GN				jisjk:48986		
 スタビライザー	스태빌라이저	N110			BZ				jisjk:363619		
 スタビライザー. トラス	스태빌라이저 트러스	N110			GN				jisjk:48987		
 スタビリティー	안정성	N110			GN				jisjk:129847		
@@ -71460,7 +71460,7 @@ ttt	ttt	K110			GN				jisjk:201744
 トリニダード	트리니다드	N130	QNNVPl		GN				jisjk:363261		
 トリニダードトバコ	트리니다드 토바고	N110	VPl		GN				jisjk:51879		
 トリニティ工業	토리니티공업	N130	QIDVGt		GN				jisjk:51880		
-トリニトロトルエン	TNT	N110	VTw		GN				jisjk:131656		
+トリニトロトルエン	트리니트로톨루엔	N110	VTw		GN				jisjk:131656		
 トリニトロン	트리니트론	N110			GN				jisjk:131657		
 トリニトロン管	트리니트론 튜브 	N110			IT				jisjk:260979		
 トリニータ	토리니타	N130	VGt		GN				jisjk:257717		
@@ -76364,7 +76364,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パナホーム	파나홈	N130	QID		GN				jisjk:360802		
 パナホーム三重	파나홈 미에	N130	QIDVGt		GN				jisjk:53787		
 パナホーム北関東	파나홈 키타칸토	N130	QIDVGt		GN				jisjk:53786		
-パナホーム城西	파나홈 죠세이	N130	QIDVGt		GN				jisjk:53788		
+パナホーム城西	파나홈 조세이	N130	QIDVGt		GN				jisjk:53788		
 パナホーム埼玉中央	파나홈 사이타마 중앙	N130	QIDVGt		GN				jisjk:53784		
 パナホーム東関東	파나홈 히가시칸토	N130	QIDVGt		GN				jisjk:53785		
 パナマ	파나마	N130	QNNVPl		GN				jisjk:53789		
@@ -78587,7 +78587,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ファッション産業	패션 산업	N110	QID		BZ				jisjk:359877		
 ファッション界	패션계	N110	VPl		GN				jisjk:133241		
 ファッジ	퍼지	N110	VFd		GN				jisjk:133246		
-ファット	FAT	N110			IT				jisjk:261958		
+ファット	팻	N110			IT				jisjk:261958		
 ファットキャット	유력자	N110	VHn		GN				jisjk:133247		
 ファットビッツ	팻비츠	N110			GN				jisjk:54635		
 ファットーリ	화또리	N130	QPN		GN				jisjk:367443		
@@ -90519,7 +90519,7 @@ ttt	ttt	K110			GN				jisjk:201744
 リストボックス	리스트 박스	N110			IT				jisjk:261530		
 リストラ	정리해고	N110	VHn		GN				jisjk:59074		
 リストラクチャリン	리스트럭쳐링	N110			GN				jisjk:107118		
-リストラクチャリング	리스트럭쳐링	N110			BZ				jisjk:107119		
+リストラクチャリング	리스트럭처링	N110			BZ				jisjk:107119		
 リストラクチャー	재구성	N110	UTs		GN				jisjk:135646		
 リストラクチュアリング	구조 조정	N110			GN				jisjk:107126		
 リストラベル	리스트라벨	N110			GN				jisjk:107221		
