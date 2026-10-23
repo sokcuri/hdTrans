@@ -1172,11 +1172,14 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
             const bool contractedConditional = tableGroup == 1 && entry == 3 && tail.starts_with("すりゃ");
             if (prefix.empty() || (!tail.starts_with(prefix) && !contractedConditional)) continue;
             const std::size_t pl = prefix.size();
+            // The く of くらい or くせに after the past (したくらい, 来たくせに) is not the desire.
+            const std::string_view afterPrefix = tail.substr(pl);
+            const bool kuWord = afterPrefix.starts_with(kJaKurai) || afterPrefix.starts_with(kJaKuseni);
             if (tableGroup == 1) {
                 if (entry == 6) {
                     const Window two = tailAt(pl, 2), six = tailAt(pl, 6);
-                    if (two == PrefixGate(0) || six == PrefixGate(1) || two == PrefixGate(2) || six == PrefixGate(3) ||
-                        two == PrefixGate(4) || six == kJaOwaru) {
+                    if (two == PrefixGate(0) || six == PrefixGate(1) || (two == PrefixGate(2) && !kuWord) ||
+                        six == PrefixGate(3) || two == PrefixGate(4) || six == kJaOwaru) {
                         continue;
                     }
                 } else if (entry == 8 || entry == 10) {
@@ -1186,8 +1189,8 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
             } else if (tableGroup == 3 && entry == 6) {
                 // As for する: 来た before い, かった, く, ければ or き is the 来たい family, not the past.
                 const Window two = tailAt(pl, 2), six = tailAt(pl, 6);
-                if (two == PrefixGate(0) || six == PrefixGate(1) || two == PrefixGate(2) || six == PrefixGate(3) ||
-                    two == PrefixGate(4)) {
+                if (two == PrefixGate(0) || six == PrefixGate(1) || (two == PrefixGate(2) && !kuWord) ||
+                    six == PrefixGate(3) || two == PrefixGate(4)) {
                     continue;
                 }
             } else if (tableGroup == 3 && (entry == 8 || entry == 10) && tail.starts_with(PrefixForm(50 * 3 + 17))) {

@@ -105,7 +105,10 @@ const dict::Snapshot* Dictionary() {
          "太陽\t태양\tN110\tVFr\t\tGN\t107\n"
          "太陽\t태양\tN130\tQPNVHn\tWb\tGN\t108\n"
          "碧\t$C2@\tH7M0\t\t\tGN\t109\n"
-         "碧\t아오이\tN130\tQPN\tWb\tGN\t110\n"},
+         "碧\t아오이\tN130\tQPN\tWb\tGN\t110\n"
+         "したく\t준비\tN110\t\t\tGN\t111\n"
+         "した\t아래\tN110\t\t\tGN\t112\n"
+         "くらい\t정도\tP200\t\t\tGN\t113\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -160,7 +163,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{34});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{35});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -461,6 +464,16 @@ HD_TEST(constraint_toiu_kotode_opening) {
         {"ということです", "ということです", "とい", "그렇다고 &AV@"},
         {"休みということで、", "ということで、", "とい", "그렇다고 &AV@"},
         {"というと", "というと", "とい", "그렇다고 &AV@"},
+    });
+}
+
+// A word in く before らい gives way to the shorter word, so that く starts くらい (したくらい);
+// before other text it stays (したくをする).
+HD_TEST(constraint_ku_before_rai) {
+    CheckCases({
+        {"したくらいだ", "したくらいだ", "したく", ""},
+        {"したくらいだ", "したくらいだ", "した", "아래"},
+        {"したくをする", "したくをする", "したく", "준비"},
     });
 }
 

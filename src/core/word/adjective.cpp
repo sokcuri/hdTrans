@@ -85,6 +85,9 @@ bool Item::RunKeiyoTrieQuery() {
     const std::string_view remaining = From(text, surfaceLength + start);
     const int offset = base.scanOffset;
     if (!w->MatchDictionary(remaining, surface, '7', 'X')) return false;
+    // No adverbial く goes on into くらい or くせに: those follow a past in た (したくらい, not
+    // the stem of したい).
+    if (remaining.starts_with(kJaKurai) || remaining.starts_with(kJaKuseni)) return false;
     length = base.kind == 'x' ? surfaceLength : offset + surfaceLength;
     const std::string_view second = From(remaining, offset);
     if (!w->MatchDictionary(second, "", '6', '7')) return false;

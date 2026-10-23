@@ -57,6 +57,8 @@ constexpr ConstraintRule kRules[] = {
      ConstraintReject::OtherTargets, "この·その·あの 뒤의 先に는 앞에 (この先に 이 먼저 → 이 앞에). 先に行く는 그대로 먼저", "앞에"},
     {"tachisagari-before-agaru", ConstraintWord::Source, "一人立ち", ConstraintContext::BeforeAgaru,
      ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
+    {"ku-before-rai", ConstraintWord::EndsInKu, "", ConstraintContext::BeforeRai, ConstraintReject::Word,
+     "らい 앞에서 く로 끝나는 단어는 くらい를 끊음: 짧은 단어와 くらい로 (したくらい 준비등 → 한 정도, きたくらい 귀가등 → 온 정도)", {}},
     {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
     {"me-yatsu-detached", ConstraintWord::Source, "め", ConstraintContext::Detached, ConstraintReject::Target,
@@ -236,6 +238,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
                NameClassOf(source.substr(source.size() - std::string_view("い").size())) == kClassHiragana &&
                std::find(std::begin(kGreetings), std::end(kGreetings), source) == std::end(kGreetings);
     }
+    case ConstraintWord::EndsInKu:
+        return text::RuneCount(source) >= 2 && source.ends_with("く");
     }
     return false;
 }
@@ -306,6 +310,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
         return StartsWithAny(after, kCopulaStarts);
+    case ConstraintContext::BeforeRai:
+        return after.starts_with("らい");
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });

@@ -16,6 +16,7 @@ enum class ConstraintWord : uint8_t {
     EndsInDe,  // a word of two or more characters whose source ends in で (歳で, 途中で)
     OStem,     // お and a verb stem ending in hiragana, three characters or more (お待ち, おやめ),
                // not the greetings お帰り and お休み
+    EndsInKu,  // a word of two or more characters whose source ends in く (したく, きたく)
 };
 
 // What must be next to the word.
@@ -47,6 +48,7 @@ enum class ConstraintContext : uint8_t {
                         // after it (ということで、 at the start of a sentence)
     BeforeAru,          // ある, あり, あっ, あれ or あろ follows and every sense of the word is a noun
                         // (歳であり: the copula である; not まである)
+    BeforeRai,          // らい follows, so the word's last く starts くらい (したくらい, きたくらい)
     NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)

@@ -18,8 +18,9 @@ int Byte(char c) { return static_cast<unsigned char>(c); }
 
 bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 
-// たく of the desire after a stem (見たくない), not the た of the past before くせに (見たくせに).
-bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni); }
+// たく of the desire after a stem (見たくない), not the た of the past before くせに or くらい
+// (見たくせに, 見たくらい).
+bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni) && !s.starts_with(kJaTakurai); }
 
 // Whether も at the start of s is followed by a form of する that ends there (立ち上がりもせず,
 // 笑いもしない, 読みもした; not しても, していない): the continuative before it is the verb,
