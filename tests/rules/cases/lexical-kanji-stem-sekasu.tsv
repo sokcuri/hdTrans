@@ -1,3 +1,7 @@
 rule	input	expected	kind	layer
-dict:compound-verbs:29	俺を急かす。	나를 재촉한다.	fix	words
-dict:compound-verbs:29	急ぐ。	서두른다.	keep	words
+dict:jisjk:140002	俺を急かす。	나를 재촉한다.	fix	analysis
+dict:jisjk:140002	彼女を急かした。	그녀를 재촉했다.	fix	analysis
+dict:jisjk:140002	彼を急かし、俺たちは校舎に向かった。	그를 재촉하고, 우리는 교사로 향했다.	fix	analysis
+dict:jisjk:140002	急かさないで。	재촉하지 마.	fix	analysis
+dict:jisjk:140002	急な話だ。	갑작스러운 이야기다.	keep	analysis
+dict:jisjk:140002	急ぐ。	서두른다.	keep	analysis
