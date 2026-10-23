@@ -321,8 +321,10 @@ private:
     std::string IyaReading(size_t p, size_t end) const;
     bool Stopped(const SoundMatch& m) const;
     bool MimeticAfterWord(const SoundMatch& m) const;
+    bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
+    bool StemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
-    std::vector<SoundMatch> Sounds(size_t p, bool afterParticle) const;
+    std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
@@ -390,6 +392,19 @@ bool SoundText::WordAt(size_t p, size_t n) const {
         if (text::RuneCount(c.source) == n) return true;
     }
     return false;
+}
+
+// Whether the n characters at p are in the dictionary only as the stem of a verb or
+// adjective, which its ending goes on from (しつこ of しつこく; not ただ, also an adverb).
+bool SoundText::StemAt(size_t p, size_t n) const {
+    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup);
+    bool stem = false;
+    for (const dict::Candidate& c : rd.list) {
+        if (text::RuneCount(c.source) != n || c.codes == nullptr) continue;
+        if (c.codes->part.ClassDigit() != '4' && c.codes->part.ClassDigit() != '7') return false;
+        stem = true;
+    }
+    return stem;
 }
 
 // Whether a dictionary word longer than n characters, and longer than any sound read
@@ -696,16 +711,20 @@ bool SoundText::MimeticAfterWord(const SoundMatch& m) const {
 
 // The chain of sounds that starts at character p, the last one taking the と that
 // follows it, or an empty chain. afterParticle tells that the token before p is a lone
-// particle.
-std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
+// particle, afterWord that it is a hiragana word of the dictionary of two or more kana that
+// is no verb or adjective stem (ただぼーっと, またぶるっと); after such a word only an ono
+// sound of three or more kana
+// starts, and only as WordStartsSound allows.
+std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool afterWord) const {
     const std::u32string_view rs = rs_;
     const char32_t r = rs[p];
     const char32_t prev = p > 0 ? rs[p - 1] : 0;
     const bool katakana = IsKatakanaRune(r) && !IsKatakanaRune(prev);
     const bool runStart = IsHiraganaRune(r) && !IsHiraganaRune(prev) && prev != U'ー' && prev != U'～';
     afterParticle = afterParticle && IsHiraganaRune(r);
+    afterWord = afterWord && IsHiraganaRune(r) && !runStart && !afterParticle;
     std::vector<SoundMatch> chain;
-    if (!katakana && !runStart && !afterParticle) return chain;
+    if (!katakana && !runStart && !afterParticle && !afterWord) return chain;
     bool loose = false;  // the first sound took a ッ that the next sound starts from
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
@@ -745,7 +764,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
         for (const SoundMatch& m : chain) {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
-    } else if ((afterParticle && first.intj) ||
+    } else if ((afterParticle && first.intj) || (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
                 !MimeticAfterWord(first))) {
         return {};
@@ -756,6 +775,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
         if (!last.intj) end += Adverbial(end);
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) ||
             (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end]))) {
+            if (afterWord && !WordStartsSound(p, last, end)) return {};
             last.end = end;
             if (loose && chain.size() < 2) return {};
             return chain;
@@ -763,6 +783,23 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
         chain.pop_back();
     }
     return chain;
+}
+
+// Whether a chain of sounds that starts at p right after a hiragana word, its last sound
+// last ending at end with its adverbial と, is read as sounds: it does not start with a
+// particle (はな|にやって, さん|がぶ), no dictionary word reads it, and it ends in と, its
+// key's or one it took, or is a doubled unit (ぐさぐさ). Kana after a short hiragana word
+// often go on as grammar (な|くたって, から|っと), which these conditions keep out.
+bool SoundText::WordStartsSound(size_t p, const SoundMatch& last, size_t end) const {
+    if (In(rs_[p], kParticles)) return false;
+    const std::u32string_view key = last.key;
+    // A dictionary word that reads the kana as far (ぶすっとした, ふわふわ, さらりと) is left
+    // to the word stage, unless ー cuts it there (ぼーっと).
+    if (key.find(U'ー') == std::u32string_view::npos && p + WordLen(p) >= last.end) return false;
+    // Three kana or more before the と (ぼーっと, not すっと of はぶ|すっと).
+    if (key.size() - (key.ends_with(U'ト') ? 1 : 0) < 3) return false;
+    if (key.ends_with(U'ト') || (end > last.end && rs_[last.end] == U'と')) return true;
+    return key.size() >= 4 && key.size() % 2 == 0 && key.substr(0, key.size() / 2) == key.substr(key.size() / 2);
 }
 
 // Whether the ono sound m is followed at i by the に of manner or result that Korean writes
@@ -1231,11 +1268,12 @@ std::string SoundText::Write() {
     std::string b;
     b.reserve(text_.size() + text_.size() / 2);
     bool afterParticle = false;  // the token before rs[i] is a lone particle
+    bool afterWord = false;      // the token before rs[i] is a hiragana word of 2+ kana
     size_t wordEnd = 0;          // the end of the last word of more than one character
     std::vector<StutterPiece> pieces;
     for (size_t i = 0; i < rs.size();) {
         if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
-            afterParticle = false;
+            afterParticle = afterWord = false;
             b += text_.substr(offsets_[i], skip);
             const size_t end = offsets_[i] + skip;
             while (i < rs.size() && offsets_[i] < end) i++;
@@ -1243,6 +1281,7 @@ std::string SoundText::Write() {
         }
         size_t next = i + 1;
         bool particle = false;
+        bool word = false;
         std::vector<SoundMatch> chain;
         if (const size_t end = Stutter(i, pieces); end > 0) {
             for (const StutterPiece& piece : pieces) {
@@ -1255,7 +1294,7 @@ std::string SoundText::Write() {
             }
             next = end;
             stutterEnd_ = end;
-        } else if (chain = Sounds(i, afterParticle); !chain.empty()) {
+        } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
             const bool doing = next < rs.size() && In(rs[next], U"しすさせ");
             for (size_t k = 0; k < chain.size(); k++) {
@@ -1317,12 +1356,13 @@ std::string SoundText::Write() {
                 if (const std::string korean = ExclaimedSound(i, next); !korean.empty()) {
                     b += korean;
                     i = next;
-                    afterParticle = false;
+                    afterParticle = afterWord = false;
                     continue;
                 }
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
                 next = std::min(rs.size(), i + WordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
+                word = next > i + 1 && IsHiraganaRune(rs[i]) && IsHiraganaRune(rs[next - 1]) && !StemAt(i, next - i);
                 if (next > i + 1) wordEnd = next;
                 // A word in kanji that takes its particle (煙が, 香りが) ends like a lone one.
                 if (next > i + 1 && IsKanjiRune(rs[i]) && In(rs[next - 1], U"はがをにもでへ")) particle = true;
@@ -1339,6 +1379,7 @@ std::string SoundText::Write() {
             b += Bytes(i, next);
         }
         afterParticle = particle;
+        afterWord = word && !particle;
         i = next;
     }
     return b;

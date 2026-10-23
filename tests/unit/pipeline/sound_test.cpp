@@ -45,7 +45,8 @@ const dict::LoadResult& SoundDictionary() {
         "いな\t아니\tE300\t27\n"
         "としてい\t(으)로 하고 있\tM100\t28\n"
         "リスク\t리스크\tN110\t29\n"
-        "ついに\t마침내\tE300\t30\n",
+        "ついに\t마침내\tE300\t30\n"
+        "ただ\t다만\tE300\t31\n",
     }});
     return result;
 }
@@ -332,6 +333,9 @@ HD_TEST(pipeline_sound) {
         // a long vowel there is a volitional ending.
         {"時折ぶるっと身", "時折부르르 身"},
         {"休もうっと", "休もうっと"},
+        // A sound after a hiragana word: a mimetic in と or doubled, not grammar going on.
+        {"ただぼーっと道", "ただ멍하니 道"},
+        {"わからなくたって", "わからなくたって"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
