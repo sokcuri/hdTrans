@@ -43,7 +43,8 @@ const dict::LoadResult& SoundDictionary() {
         "わたし\t나\tN120\t25\n"
         "とにかく\t어쨌든\tE300\t26\n"
         "いな\t아니\tE300\t27\n"
-        "としてい\t(으)로 하고 있\tM100\t28\n",
+        "としてい\t(으)로 하고 있\tM100\t28\n"
+        "リスク\t리스크\tN110\t29\n",
     }});
     return result;
 }
@@ -317,6 +318,8 @@ HD_TEST(pipeline_sound) {
         {"メキメキと", "메키메키"},
         // と before する goes after a mimetic even where a key starts with it.
         {"トロンとしていた", "몽롱していた"},
+        // A sound does not end inside the katakana word after it (するり).
+        {"損をするリスク", "損をするリスク"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},

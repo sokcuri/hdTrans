@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:katakana-run	逆に損をするリスクも抱えている。	반대로 손해 보는 리스크도 안고 있다.	fix	sound
+sound:katakana-run	すっげーボインボインなんだぜ！	대박 출렁출렁이야!	keep	sound
+sound:katakana-run	アマインダヨォッ…へッへッ	달아 …헷헷	keep	sound

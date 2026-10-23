@@ -320,6 +320,7 @@ private:
     size_t NextWord(size_t i) const;
     std::string IyaReading(size_t p, size_t end) const;
     bool Stopped(const SoundMatch& m) const;
+    bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle) const;
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
@@ -504,6 +505,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
         if (ok && runKorean.empty() && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
             ok = false;  // a final と is the particle, not katakana ト
         }
+        if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
         if (ok && (chosen == nullptr || end > best.end)) {
             std::string korean = !runKorean.empty()
                                      ? std::move(runKorean)
@@ -535,6 +537,19 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (chosen->key.back() == U'ト') keyLen--;
     const size_t surface = best.end - p;
     return !(base > surface || (base == surface && surface > best.keyLen) || user >= keyLen);
+}
+
+// Whether a match at [p, end) that starts in hiragana ends on a katakana letter other than
+// ッ and ー inside a katakana run that begins after p and goes on past end (する+リ of
+// するリスク; not へッ of へッへッ).
+bool SoundText::EndsInsideKatakana(size_t p, size_t end) const {
+    if (end >= rs_.size() || !IsKatakanaRune(rs_[end]) || In(rs_[end], U"ッー") || In(rs_[end - 1], U"ッー") ||
+        !IsHiraganaRune(rs_[p])) {
+        return false;
+    }
+    size_t k = end;
+    while (k > p && IsKatakanaRune(rs_[k - 1])) k--;
+    return k > p && k < end;
 }
 
 // The Korean of the sound s at characters [p, end), for the sounds whose reading
