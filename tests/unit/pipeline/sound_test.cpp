@@ -555,6 +555,9 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"とーにーかーく！", "とにかく！"},
         {"いーなー", "いーなー"},
         {"お花見か～いいわね", "お花見か～いいわね"},
+        // A sound key that starts inside the stem before the mark does not hold it (ゴォ of
+        // すご), one that starts a word does (おーい).
+        {"すごぉぉい！", "すごい！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }

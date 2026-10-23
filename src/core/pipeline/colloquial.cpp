@@ -280,12 +280,16 @@ bool Volitional(std::u32string_view rs, size_t i) {
     return false;
 }
 
-// A key of the sound lexicon that starts between from and i, holds the mark at
-// character i and goes past it (おーい, えーっと).
-bool SoundCovers(std::u32string_view rs, size_t from, size_t i, bool extra) {
+// A key of the sound lexicon that starts between from and i, holds the mark at character
+// i and goes past it (おーい, えーっと, くらいのちょこっと), and does not start inside a
+// verb or adjective stem that ends at the mark (not the ゴォ inside すご of すごぉぉい).
+bool SoundCovers(const Emphasis& e, std::u32string_view rs, size_t from, size_t i, bool extra) {
     const std::u32string f = ToKatakana(rs);
     std::string units;
     for (size_t j = from; j < i; j++) {
+        bool inStem = false;
+        for (size_t k = from; k < j && !inStem; k++) inStem = e.Tags(rs.substr(k, i - k)).find_first_of("MH") != std::string::npos;
+        if (inStem) continue;
         for (const SoundRow& s : SoundRows(f[j], extra)) {
             size_t end = 0;
             if (MatchSound(s, f, j, end, units) && end > i + 1 && s.key.find(f[i]) != std::u32string::npos) return true;
@@ -880,7 +884,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         // おっかしい; not あっぶね, さっお).
         const bool sound = SoundWord(rs, from, end, ctx.extraBuiltin);
         const bool soundTsu = sound && r == U'っ' && rs[end] != U'と';
-        if (before > end || SoundCovers(rs, from, i, ctx.extraBuiltin) || (sound && !soundTsu)) continue;  // もっと, せーの, おーい
+        if (before > end || SoundCovers(e, rs, from, i, ctx.extraBuiltin) || (sound && !soundTsu)) continue;  // もっと, せーの, おーい
         if (cands.empty()) continue;
         int best = -1;
         bool spelled = false;

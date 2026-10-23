@@ -32,3 +32,8 @@ sound:long-vowel-after-word	『あんなしょーもないグループ抜けち�
 sound:long-vowel-after-word	まあしょーがない、起きよ。	뭐 어쩔 수 없다, 일어나라.	fix	sound
 sound:long-vowel-after-word	お金ちょーだい、お金！	돈 줘, 돈!	fix	sound
 sound:long-vowel-after-word	お仕事しゅーりょー。	일-~.	keep	sound
+sound:stretched-word	「すごぉぉい！」	「대단해!」	fix	sound
+sound:stretched-word	「いっきまぁーす！」	「갑니다~!」	fix	sound
+sound:stretched-word	「しれいかーん！」	「사령관~!」	fix	sound
+sound:stretched-word	壁伝いにそーっと近づき	벽 따라에 살며시 다가가	fix	sound
+sound:stretched-word	こんな額のちょこっとした傷	이런 이마의 자그마한 상처	keep	sound
