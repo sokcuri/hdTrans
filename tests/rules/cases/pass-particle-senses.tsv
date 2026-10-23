@@ -33,6 +33,10 @@ rewrite:comitative-to	３と答えた。	3이라고 대답했다.	fix	rewrites
 rewrite:comitative-to	修正液で消して０と書いてあった	수정액으로 지워 0이라고 써 있었다	fix	rewrites
 rewrite:comitative-to	答えは５と言った。	대답은 5라고 말했다.	keep	rewrites
 rewrite:comitative-to	「はい」と言った。	「네」라고 말했다.	keep	rewrites
+rewrite:comitative-to	５と一致する。	5와 일치한다.	fix	rewrites
+rewrite:comitative-to	１０と交換する。	10과 교환한다.	fix	rewrites
+rewrite:comitative-to	「秋」と戦った。	「가을」과 싸웠다.	fix	rewrites
+rewrite:comitative-to	答えを３とする。	대답을 3으로 한다.	keep	rewrites
 rewrite:comitative-to	「お疲れ～」と田中と佐藤	「수고했어~」라고 타나카와 사토	fix	rewrites
 rewrite:comitative-to	「ただいま」と姉と妹	「다녀왔어」라고 언니와 여동생	fix	rewrites
 rewrite:comitative-to	「春」と夏と秋を選んだ。	「봄」과 여름과 가을을 선택했다.	keep	rewrites
