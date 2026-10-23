@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/output/compose.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
@@ -182,7 +183,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (depth++ == 0) quote = ++count;
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
-        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle)) == 0) {
+        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle)) == 0) {
             if (const auto [spoken, length] = SpokenSyllables(line.substr(at), out); length > 0) {
                 out += spoken;
                 at += length;
@@ -247,22 +248,6 @@ constexpr Rewrite kPlannedWords[] = {
     {"간다", "갈 거야"}, {"온다", "올 거야"}, {"준다", "줄 거야"}, {"드린다", "드릴 거야"},
 };
 
-// Present verbs that state, not plan, written in 해체 (모른다 몰라, 생각한다 생각해).
-constexpr std::string_view kStates[] = {
-    "된다",     "모른다",   "안다",     "생각한다", "좋아한다", "싫어한다", "사랑한다", "보인다", "들린다",
-    "바뀐다",   "걸린다",   "끝난다",   "열린다",   "부탁한다", "느낀다",   "바란다",   "믿는다", "원한다",
-    "이해한다", "감사한다", "축하한다", "않는다",   "생각난다", " 든다",    "쓰인다",   "떨린다", "고 한다",
-    "야 한다",  "면 한다",
-};
-
-// Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
-constexpr std::string_view kStateSurfaces[] = {"違", "似", "足り", "異な", "すぎ", "過ぎ", "見え", "聞こえ"};
-
-// Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
-constexpr std::string_view kDeclarations[] = {
-    "宣言", "却下", "許可", "禁止", "破棄", "任命", "撤回", "謝罪", "通達", "布告", "命令", "追放", "承認", "認可",
-};
-
 // The clause of speech before an item: the text after the last bracket, sentence end or
 // comma.
 std::string_view Clause(std::string_view before) {
@@ -277,9 +262,9 @@ std::string_view Clause(std::string_view before) {
 
 // Whether a present verb (word, its Korean) said after clause, its Japanese, states a plan:
 // an action, without a question word and without a subject other than the speaker
-// (雨が降る 비가 와, 誰が行く 누가 가); the verbs of kStates state.
+// (雨が降る 비가 와, 誰が行く 누가 가); the verbs of ko-verb.casual-state state.
 bool Planned(std::string_view word, std::string_view clause) {
-    for (const std::string_view s : kStates) {
+    for (const std::string_view s : dict::ClassMembers("ko-verb.casual-state")) {
         if (word.ends_with(s)) return false;
     }
     // A question word, not an indefinite one (誰も, 何か, いつも).
@@ -462,6 +447,23 @@ std::string_view Marker(std::string_view stem) {
     return m[0] == '&' || m[0] == '$' || m[0] == '%' ? m : std::string_view();
 }
 
+// The agreement an ending text seeks (5잖아 몰랐잖아, 높지, 되잖아) in polite speech: a past or a 지
+// with 죠 (몰랐죠, 높죠), another 잖아 with 요 (되잖아요).
+void PoliteAgreement(std::string& ending) {
+    constexpr std::string_view kSeek = "잖아", kSure = "지", kPolite = "죠";
+    if (ending.ends_with(kSure)) {
+        ending.replace(ending.size() - kSure.size(), kSure.size(), kPolite);
+    } else if (ending.ends_with(kSeek)) {
+        const std::string_view stem = std::string_view(ending).substr(0, ending.size() - kSeek.size());
+        const auto syllable = text::Split(LastRune(stem));
+        if (stem == "5" || (syllable && syllable->final == 20)) {  // the past form, or ㅆ (20)
+            ending.replace(ending.size() - kSeek.size(), kSeek.size(), kPolite);
+        } else {
+            ending += "요";
+        }
+    }
+}
+
 }  // namespace
 
 char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
@@ -573,6 +575,13 @@ void Composer::WriteCasual(int first, int last) {
             const std::string_view tail = own.substr(0, kept);
             for (const std::string_view p : {"ぞ", "ぜ", "よ", "わ", "さ", "ね"}) asked = asked && !tail.ends_with(p);
         }
+        // でしょ is polite itself: in a quote of polite speech the agreement it seeks is polite too
+        // (…なんです……知らなかったでしょ？ 몰랐죠?, 高いでしょ 높죠, ばいいでしょ 되잖아요).
+        if (quoted && (style & kPoliteTalkStyle) != 0 && close != 0 && it.directIndex >= 0 &&
+            it.endingSurface.ends_with("でしょ")) {
+            PoliteAgreement(it.ending.text);
+            continue;
+        }
         if (!quoted || styled || (!settings_.casual && !asked)) continue;
         // Marked casual quotes: their own text only, not a quote inside them (『書いた』って);
         // a question asks in any plain quote.
@@ -589,7 +598,7 @@ void Composer::WriteCasual(int first, int last) {
         }
         // 白紙撤回とする, 王太子妃とする: a declaration.
         bool declared = own.starts_with("する") && before().ends_with("と");
-        for (const std::string_view d : kDeclarations) {
+        for (const std::string_view d : dict::ClassMembers("noun.casual-declaration")) {
             declared = declared || own.starts_with(d) || before().ends_with(d) ||
                        before().ends_with(std::string(d) + "と") || before().ends_with(std::string(d) + "を");
         }
@@ -639,11 +648,13 @@ void Composer::WriteCasual(int first, int last) {
         // 말한다 in 해체 (말해) reads as an order; a name (虹輝と言う) or a promise keeps it.
         if (present.ends_with("말한다")) continue;
         bool stative = false;
-        for (const std::string_view v : kStateSurfaces) {
+        for (const std::string_view v : dict::ClassMembers("verb.casual-state")) {
             stative = stative || std::string_view(it.surface).starts_with(v);
         }
         bool state = false;
-        for (const std::string_view s : kStates) state = state || present.ends_with(s);
+        for (const std::string_view s : dict::ClassMembers("ko-verb.casual-state")) {
+            state = state || present.ends_with(s);
+        }
         // A present action in 해체 reads as a plan, a promise or an order; only soft speech
         // chooses one.
         if (settings_.casualMarkedOnly && !asked && !present.empty() && !state) continue;

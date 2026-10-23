@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "core/dict/char_readings.h"
+#include "core/dict/classes.h"
 #include "core/output/cleanup.h"
 #include "core/output/compose.h"
 #include "core/output/particle.h"
@@ -283,9 +284,8 @@ bool HangulWord(std::string_view s) {
 bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
     if (!Contains(GAttr(items[n]), "Hd")) return false;
     if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return true;
-    constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
-    return std::any_of(std::begin(kSuruStarts), std::end(kSuruStarts),
-                       [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
+    return std::ranges::any_of(dict::ClassMembers("suru.predicate-noun"),
+                               [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
 }
 
 // Kanji counters read in Sino-Korean that a number joins (2000년, 14일째, 3회).
@@ -536,7 +536,7 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     // or else 첫 번.
     const bool ordinal = Ordinal(items, i);
     if (std::string first = FirstUnit(t, item.surface, ordinal); !first.empty()) return first;
-    for (const std::string_view count : kNativeCounts) {
+    for (const std::string_view& count : kNativeCounts) {
         if (!t.starts_with(count) || t.size() == count.size()) continue;
         const bool apart = t[count.size()] == ' ';
         if (apart && !ordinal) continue;
@@ -554,6 +554,13 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
             break;
         }
         const NativeCounter* c = FindNativeCounter(surface.substr(numeral), korean);
+        // A word of an Arabic digit and its counter (1杯 한잔) counts in digits in an ordinal
+        // (1杯目 1잔째, as 2杯目 2잔째).
+        const auto value = &count - std::begin(kNativeCounts) + 1;
+        if (c != nullptr && ordinal && value <= 9 && text::IsDigit(text::DecodeRune(surface).cp)) {
+            t = std::to_string(value) + std::string(korean);
+            break;
+        }
         if (c != nullptr && !(c->joins && count == "한" && !ordinal)) t = WriteNativeCount(count, *c, ordinal);
         break;
     }
@@ -576,6 +583,10 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     // A number in digits stays in digits; in an ordinal its counter is read as after a native
     // numeral (1回目 1번째 as 2回目 2번째).
     if (native.empty()) return t.substr(0, digits) + std::string(Ordinal(items, i) ? NativeForm(*c) : counter);
+    // つ counts with the bare native numeral, as 一つ reads 하나 (1つ残らず 하나 남김없이).
+    if (native == kNativeCounts[0] && dict::InClass("counter.bare-native-one", surface.substr(numeral)) && !Ordinal(items, i)) {
+        return "하나";
+    }
     return WriteNativeCount(native, *c, Ordinal(items, i));
 }
 
@@ -940,11 +951,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (nextIndex == i + 1) {
         // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
         // the word after it.
-        constexpr std::string_view kHonorifics[] = {"ちゃん", "さん", "くん", "君", "たん", "様", "さま", "殿", "氏"};
         // So does a verb whose stem and ending the rules emptied (行こうと思って 가려고).
         while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
-               (std::find(std::begin(kHonorifics), std::end(kHonorifics), items[nextIndex].surface) !=
-                    std::end(kHonorifics) ||
+               (dict::InClass("honorific.prepass", items[nextIndex].surface) ||
                 (items[nextIndex].detailClass == DetailClass::Yougo && items[nextIndex].directIndex >= 0 &&
                  items[nextIndex].ending.text.empty()))) {
             nextIndex++;
@@ -958,12 +967,10 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     const int previous = i - 1;
     // A place or time noun after a の that the rules left untranslated starts a word
     // (가게 안, 침대 아래, 아이 때).
-    constexpr std::string_view kPlaceNouns[] = {"上", "中", "下", "時", "前", "後", "外", "奥", "横", "隣",
-                                                "裏", "内", "間", "際", "頃", "底", "側", "周り"};
     if (!t.empty() && previous >= 0 && EntryText(items[previous]).empty() &&
         (item.surface == "上" ||
          (kind == '1' && items[previous].surface == "の" && !Contains(tags, "Ct") &&
-          std::find(std::begin(kPlaceNouns), std::end(kPlaceNouns), item.surface) != std::end(kPlaceNouns)))) {
+          dict::InClass("noun.prepass-place", item.surface)))) {
         t.insert(0, " ");
     }
     // みたい read as the adjective 같다 is written apart from the word before it; the
@@ -1037,11 +1044,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
     // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
     if (kind == '1' && (nextEntry == "씨" || nextEntry == "군")) {
-        constexpr std::string_view kSpacedHonorifics[] = {"さん", "くん", "君", "氏"};
-        if (std::find(std::begin(kSpacedHonorifics), std::end(kSpacedHonorifics), next.surface) !=
-            std::end(kSpacedHonorifics)) {
-            return Result(std::move(t), true);
-        }
+        if (dict::InClass("honorific.prepass-spaced", next.surface)) return Result(std::move(t), true);
     }
     // A noun of degree, time, listing or span read as a free noun after a word stands apart
     // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등, 회의 중); 等 after a number is a rank (1등).
@@ -1146,9 +1149,6 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             // A verbal noun (Hd, a kanji compound or a katakana word) joins the する, なさる or できる
             // after it read with 하다 or 되다 (即答する 즉답하다, キスしたい 키스하고 싶다, 我慢できない
             // 자제할 수 없다, 購入なさる 구입하신다).
-            constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
-            constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき", "なさ"};
-            constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
             // A compound of two or more kanji before する is a verbal noun (即答する 즉답하다),
             // unless it tells a time, a frequency or an amount, which stays an adverb apart from
             // the verb (毎日する 매일 한다, 全部します 전부 합니다), or it is a kanji doubled with 々,
@@ -1156,11 +1156,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             auto kanjiCompound = [](std::string_view s) {
                 static constexpr std::u32string_view kTimeStarts = U"毎今明昨何半";
                 static constexpr std::u32string_view kTimeEnds = U"日朝晩週年月夜時頃";
-                static constexpr std::string_view kAdverbNouns[] = {
-                    "全部", "全員", "全然", "一緒", "本当", "普通", "大体", "結構", "多少", "十分", "一番",
-                    "一度", "二度", "三度", "最初", "最後", "永遠", "同時", "直接", "自分", "先程", "以前",
-                };
-                if (std::find(std::begin(kAdverbNouns), std::end(kAdverbNouns), s) != std::end(kAdverbNouns)) return false;
+                if (dict::InClass("noun.not-verbal", s)) return false;
                 int n = 0;
                 char32_t first = 0, last = 0;
                 for (std::size_t k = 0; k < s.size(); n++) {
@@ -1202,13 +1198,16 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
             };
             if (verbalNoun && nextEntry == "&AV@" &&
-                std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
+                dict::InClass("suru.verbal-noun-whole", next.surface)) {
                 return Result(std::move(t), false);
             }
             // される is written with the marker of 되다; its written Korean shows whether 되다
             // follows the noun (マージされた 머지되었다, but 温存され過ぎた 온존 너무 되었다).
-            const bool passive = next.surface.starts_with("さ") && nextEntry == "&C6@" && startsWithAny(remainder, kDoing);
-            if (verbalNoun && startsWithAny(next.surface, kSuruStarts) && (startsWithAny(nextEntry, kDoing) || passive)) {
+            const std::span<const std::string_view> doing = dict::ClassMembers("ko.doing");
+            const bool passive =
+                next.surface.starts_with("さ") && nextEntry == "&C6@" && startsWithAny(remainder, doing);
+            if (verbalNoun && startsWithAny(next.surface, dict::ClassMembers("suru.verbal-noun-start")) &&
+                (startsWithAny(nextEntry, doing) || passive)) {
                 return Result(std::move(t), false);
             }
             if (nextFirst == ")") return Result(std::move(t), false);

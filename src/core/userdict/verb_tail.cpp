@@ -1,5 +1,6 @@
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/text/utf8.h"
 #include "core/userdict/compile.h"
 #include "core/word/conjugation.h"
@@ -62,8 +63,6 @@ bool AsciiPunct(char c) {
 }
 
 std::string_view Conj(int kind, int branch) { return word::Conjugation(kind, branch); }
-
-constexpr std::string_view kRequestStems[] = {"くださ", "下さ", "いらっしゃ", "おっしゃ", "なさ", "ござ"};
 
 }  // namespace
 
@@ -169,7 +168,7 @@ bool AnalyseVerbTail(std::string_view key, char kindByte, std::string_view tail,
         if (WidthOf(tail) >= 6) middle = Window(tail, 2, 4);
         return starts(tail, "い") && (middle == "ます" || middle == "ませ" || middle == "まし");
     };
-    for (const std::string_view stem : kRequestStems) {
+    for (const std::string_view stem : dict::ClassMembers("stem.request")) {
         const std::size_t i = key.find(stem);
         if (i != std::string_view::npos && i == key.size() - stem.size() && politeRequest()) {
             patternKind = kKindGodanRu;

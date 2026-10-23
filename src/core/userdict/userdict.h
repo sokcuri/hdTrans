@@ -40,6 +40,8 @@
 //   neg=LEMMA       v and adj rows: the Korean verb that negates this one
 //   exclaim         intj rows: an exclamation, which the sound stage does not read as
 //                   a sound before a question mark (よかった 다행이다, よかった？ 좋았어?)
+//   predicate       exclaim rows: nor after a noun topic and a comma, where it is the
+//                   predicate (あの頃は、よかった 좋았다)
 #include <cstdint>
 #include <string>
 #include <string_view>

@@ -1,5 +1,5 @@
 // Text-path passes on the words next to an adjective: the copula of だろ and なる after an
-// adjective, に after an adjectival noun, and the 것 before a みたい.
+// adjective, and the 것 before a みたい.
 #include <string>
 #include <string_view>
 
@@ -26,9 +26,6 @@ void AdjectiveNeighbours(Flusher& f) {
                    n->group->surface == kJaNa && At(n->Code(n->selected), 0) == '4' &&
                    output::CopulaTarget(it->EntryText(it->selected), f.families)) {
             SelectLemma(f, n, "되다");
-        } else if (cls == '1' && it->adjectival && n->group->surface == kJaNi && n->EntryText(n->selected) == "에" &&
-                   !n->Fixed()) {
-            TakeTarget(n, At(n->Code(n->selected), 0), "하게");
         }
     }
 }

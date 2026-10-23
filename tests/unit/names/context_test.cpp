@@ -1,5 +1,6 @@
 // Per-line speaker cues, builtin whole-line rows and confirmed-name lookup caching.
 #include <algorithm>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -111,4 +112,18 @@ HD_TEST(document_skip_cache_length_prefix) {
     HD_CHECK(first.plain != second.plain);
     HD_CHECK_EQ(doc->plainByKey.size(), std::size_t{2});
     HD_CHECK(pipeline::LookupOf(*doc, one).plain == first.plain);
+}
+
+HD_TEST(document_verse_lines) {
+    const std::vector<std::string> lines = {"窓を開けて", "風を感じて", "駅まで行こう", "", "もう遅いよ。私に任せて",
+                                            "明日また会おう", "星をめざして", "山田太郎"};
+    const std::set<std::string> verse = pipeline::internal::VerseLines(lines);
+    HD_CHECK_EQ(verse.size(), std::size_t{2});
+    HD_CHECK(verse.count("窓を開けて") == 1);
+    HD_CHECK(verse.count("風を感じて") == 1);
+    // An empty next line and the end of the text end the verse.
+    const std::vector<std::string> ends = {"私を信じて", "", "明日も会おう", "空を見上げて"};
+    HD_CHECK(pipeline::internal::VerseLines(ends).empty());
+    const std::vector<std::string> spaces = {"私を信じて", "　 "};
+    HD_CHECK(pipeline::internal::VerseLines(spaces).empty());
 }

@@ -1,5 +1,5 @@
 // A と that opens its line, or follows a sentence end on it, quotes what was said before
-// it (LineInitialTo).
+// it (cx:line-initial-to:10).
 #include <string>
 #include <vector>
 

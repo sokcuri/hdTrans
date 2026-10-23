@@ -164,6 +164,10 @@ HD_TEST(pipeline_sound) {
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
         {"いくぅぅ", "가 버려~"},
+        // A phrase that states a past event is asked before ？; before ！ or 。 it stays.
+        {"できた？", "다 됐어？"},
+        {"できた！", "다 됐다！"},
+        {"できた。", "다 됐다。"},
         // A ー inside an interjection may be longer; a two-syllable one in い may be
         // lengthened before it, but not before a word.
         {"わーーい！", "와아！"},
@@ -221,6 +225,12 @@ HD_TEST(pipeline_sound) {
         {"もっとー！", "もっと～！"},
         {"冷たいねー", "冷たいね～"},
         {"やーめーて！", "やめて\uE00A！"},
+        // A run of three plain vowels inside a word, or of two before an adjective's い.
+        {"すごおおおい！", "すごい\uE00A！"},
+        {"うるさああい！", "うるさい\uE00A！"},
+        {"すごおい！", "すごおい！"},
+        // A ー after the い that ends an adjective before a pause is written ～.
+        {"すごいー！", "すごい～！"},
         // Unchanged: the casual negative ね, a lone kana, a sound.
         {"知らねー", "知らねー"},
         {"よー！", "よー！"},
@@ -569,6 +579,11 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"冷たいぃぃ", "冷たい"},
         {"いいいい！", "いいいい！"},
         {"うるさいいね", "うるさいいね"},
+        // Before a sentence particle and a pause the mark of an adjective's い goes after the
+        // particle.
+        {"うるさいーよ！", "うるさいよ～！"},
+        {"冷たいーね", "冷たいね～"},
+        {"冷たいーねこ", "冷たいーねこ"},
         // A shout's っ after the lengthening of a word ends the phrase: the run is ～ and the
         // っ goes; a cry (no word before the mark) keeps it for the cry pass.
         {"まかせてーーっ！", "まかせて～！"},
@@ -747,7 +762,9 @@ HD_TEST(pipeline_sound_name_and_noun) {
 // an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
 HD_TEST(pipeline_sound_exclaim_before_question) {
     bool flagged = false;
-    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim);
+    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) {
+        flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim && r.predicate);
+    }
     HD_CHECK(flagged);
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());
@@ -763,6 +780,9 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
         {"よかった……？", "よかった……？"},
         {"よかったぁ?", "다행이다~?"},
         {"ヨカッタ？", "다행이다？"},
+        // After a noun in kanji marked as topic and a comma it is the predicate.
+        {"映画は、よかった。", "映画は、よかった。"},
+        {"それは、よかった。", "それは、다행이다。"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

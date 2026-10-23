@@ -1,3 +1,17 @@
 rule	input	expected	kind	layer
 word:copula-de-aru	あそこであった。	저기에서 만났다.	keep	rewrites
 word:copula-de-aru	その子であった。	그 아이였다.	keep	rewrites
+word:copula-de-aru	互いに苦笑するのであった。	서로 쓴웃음을 짓는 것이었다.	fix	rewrites
+word:copula-de-aru	控えめに言って変質者であった。	조심스럽게 말해 변질자였다.	fix	rewrites
+word:copula-de-aru	豊かな森であった。	풍부한 숲이었다.	fix	rewrites
+word:copula-de-aru	学生である。	학생이다.	keep	rewrites
+word:copula-de-aru	海外であった事件	해외에서 있던 사건	fix	rewrites
+word:copula-de-aru	あそこであった事件	저기에서 있던 사건	fix	rewrites
+word:copula-de-aru	あそこであった人	저기에서 만난 사람	keep	rewrites
+word:copula-de-aru	光点であった星々が光る	광점인 별들이 빛난다	keep	rewrites
+dict:w:26813	君とであった日	너와 만난 날	fix	local
+dict:w:26813	わざとであろうか？	일부러일까?	keep	local
+dict:w:26813	大切なことであった。	중요한 것이었다.	keep	local
+dict:w:26812	友達とであった場所	친구와 만난 장소	fix	lookup
+dict:w:26812	運命とであった	운명과 만났다	keep	lookup
+dict:w:26812	先生とであった	선생님과 만났다	keep	lookup

@@ -280,15 +280,16 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     std::vector<std::string> gaps;
     const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked, &gaps);
     LineSpeech speech;
+    std::vector<bool> casual;
     if (!options.reference) {
         speech.asked = true;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
+        casual = pipeline::CasualQuotes(facts.text, carry.depth);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
             // (知らねえ, 言っとく).
-            const std::vector<bool> casual = pipeline::CasualQuotes(facts.text, carry.depth);
             if (casual.size() == speech.styles.size()) {
                 for (std::size_t k = 0; k < casual.size(); k++) {
                     if (!casual[k] || speech.styles[k] != 0) continue;
@@ -317,6 +318,21 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         if (watch.restored) watch.restored(watch.context, steps);
         return steps.line;
     };
+    // でしょ in a quote of polite talk seeks agreement politely (知らなかったでしょ 몰랐죠): a quote of
+    // polite speech whose Korean ends a sentence politely (그렇습니다, 봐 주세요; not 일어나 of
+    // なさい, not a 済ませた or ますます) and whose Japanese has no casual mark (よ, ね).
+    if (!options.reference && facts.text.find("でしょ") != std::string_view::npos &&
+        std::ranges::any_of(speech.styles, [](std::uint8_t s) { return (s & output::kPoliteStyle) != 0; })) {
+        TranslationOptions trial = options;
+        trial.ruleTally = nullptr;
+        const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);
+        for (std::size_t k = 0; k < speech.styles.size() && k < polite.size(); k++) {
+            const bool casualMark = k < casual.size() && casual[k];
+            if ((speech.styles[k] & output::kPoliteStyle) != 0 && polite[k] && !casualMark) {
+                speech.styles[k] |= output::kPoliteTalkStyle;
+            }
+        }
+    }
     if (!speech.markedOnly) {
         if (!speech.casual) return output::SpokenWords(compose(speech, observer, options), carry.depth, speech.styles);
         // Soft: every plain quote is casual speech and takes the spoken words (것은 건).

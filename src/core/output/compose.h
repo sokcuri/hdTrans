@@ -27,6 +27,9 @@ struct QuoteState {
 // casual speech (pipeline::CasualQuotes).
 constexpr std::uint8_t kCasualSpeech = 32;
 constexpr std::uint8_t kPoliteStyle = 1;  // pipeline::kPoliteSpeech, a quote in です and ます
+// A quote of polite speech whose Korean ends a sentence politely and whose Japanese has no casual
+// mark (the engine sets it for でしょ).
+constexpr std::uint8_t kPoliteTalkStyle = 64;
 
 // The switches of the stage.
 struct Settings {

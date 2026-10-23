@@ -6,6 +6,9 @@
 #         -P builtin_tables.cmake
 #     the lines of FILE, each ending in "\n" but a missing last one, and the function ACCESSOR
 #     (declared in HEADER) that returns them as std::span<const std::string_view>
+#   cmake -DCLASSES=<file> -DOUT=<file> -P builtin_tables.cmake
+#     the names of the sets of the word-class table FILE (its "//= NAME" lines) as kClassNames,
+#     written only when they change, so that an edit of the members compiles nothing
 #   cmake -DRULE_DIR=<dir> -DOUT=<file> -P builtin_tables.cmake
 #     the rules program: the header "rules 1 LOCALCOUNT GLOBALCOUNT" and the lines of the *.txt
 #     files of RULE_DIR in name order, as RuleLines(), and each file's name and lines as
@@ -33,6 +36,28 @@ function(hdtrans_literal_lines path var)
     string(REPLACE "\n" "\\n\"sv,\n    \"" text "${text}")
     set(${var} "{\n    \"${text}${end}}" PARENT_SCOPE)
 endfunction()
+
+if(DEFINED CLASSES)
+    file(READ "${CLASSES}" text)
+    string(REPLACE "\r" "" text "\n${text}")
+    string(REGEX MATCHALL "\n//= [a-z][a-z0-9.-]*\t" names "${text}")
+    set(body "")
+    foreach(name IN LISTS names)
+        string(REGEX REPLACE "\n//= ([^\t]*)\t" "\\1" name "${name}")
+        string(APPEND body "    \"${name}\",\n")
+    endforeach()
+    string(CONCAT header "// Generated table; do not edit.\n#pragma once\n#include <string_view>\n\n"
+        "namespace hdTrans::dict::internal {\n\n// The names of the sets of classes.tsv.\n"
+        "inline constexpr std::string_view kClassNames[] = {\n${body}};\n\n}  // namespace hdTrans::dict::internal\n")
+    set(old "")
+    if(EXISTS "${OUT}")
+        file(READ "${OUT}" old)
+    endif()
+    if(NOT old STREQUAL header)
+        file(WRITE "${OUT}" "${header}")
+    endif()
+    return()
+endif()
 
 if(DEFINED RULE_DIR)
     file(GLOB files LIST_DIRECTORIES false "${RULE_DIR}/*.txt")

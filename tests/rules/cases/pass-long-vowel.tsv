@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+rewrite:long-vowel-after-katakana	チャオー、先生。	차오, 선생님.	fix	rewrites
+rewrite:long-vowel-after-katakana	ストレートヘアーはいつも	스트레이트 헤어는 언제나	fix	rewrites
+rewrite:long-vowel-after-katakana	すごーい！	대단해!	keep	rewrites
+rewrite:long-vowel-after-katakana	コーヒーを飲む。	커피를 마신다.	keep	rewrites

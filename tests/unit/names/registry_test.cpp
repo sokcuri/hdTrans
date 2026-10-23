@@ -176,6 +176,12 @@ HD_TEST(names_drop_readings) {
         {"和気藹々(わきあいあい)とした", "和気藹々とした"},
         {"生（ナマ）食", "生食"},
         {"山田太郎（やまだ たろう）。", "山田太郎。"},
+        // One space may stand before the parenthesis; then only a reading the dictionaries
+        // confirm (a word with the same Korean, the sound of a name) is dropped.
+        {"秋刀魚 (さんま) を焼く", "秋刀魚 を焼く"},
+        {"高森 (たかもり) が来た", "高森 が来た"},
+        {"天井の梁 (はり) から", "天井の梁 (はり) から"},
+        {"結果 （まあまあ） だった。", "結果 （まあまあ） だった。"},
         {"全「すべ」てを壊「こわ」せる", "全てを壊せる"},
         // A noun of the same kind, any word over a word of no dictionary.
         {"朝餉(あさがれい)を", "朝餉を"},

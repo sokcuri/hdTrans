@@ -1,8 +1,11 @@
 #include <algorithm>
+#include <span>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
+#include "core/text/unicode.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -418,10 +421,40 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// Whether a comma stands right before pos.
+bool AfterComma(std::string_view s, size_t pos) { return pos > 0 && In(Before(s, pos), U"、"); }
+
+// そ before a copula form of copula.short-so where a clause starts (spaces after its
+// punctuation allowed, not after a word and a space: むらで そだった): そう said short. A form of
+// copula.short-so-final only before the end of the sentence (あ、そだ。), and one of
+// copula.short-so-sentence also not after a comma (大きく、そだった is the verb 育つ).
+bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
+    size_t start = pos;
+    while (start > 0 && text::IsSpace(Before(s, start))) start -= LastRune(s.substr(0, start)).size;
+    size_t p = pos;
+    if (!ClauseStart(s, start) || !Lit(s, p, "そ")) return false;
+    const std::string_view rest = s.substr(p);
+    auto starts = [&](std::span<const std::string_view> forms, bool end) {
+        for (const std::string_view f : forms) {
+            if (!rest.starts_with(f)) continue;
+            if (!end || f.size() == rest.size()) return true;
+            const char32_t next = text::DecodeRune(rest.substr(f.size())).cp;
+            return !IsHiraganaRune(next) && !IsKanji(next);
+        }
+        return false;
+    };
+    if (!starts(dict::ClassMembers("copula.short-so"), false) && !starts(dict::ClassMembers("copula.short-so-final"), true) &&
+        (AfterComma(s, start) || !starts(dict::ClassMembers("copula.short-so-sentence"), true))) {
+        return false;
+    }
+    m.end = p;
+    return true;
+}
+
 // でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
 // without its subject, said for そうでなければ (でなければ、すぐに死ぬ 그렇지 않으면).
 bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
-    if (!ClauseStart(s, pos) || (pos > 0 && In(Before(s, pos), U"、"))) return false;
+    if (!ClauseStart(s, pos) || AfterComma(s, pos)) return false;
     for (std::string_view w : {"でなければ", "でないと", "でなきゃ"}) {
         size_t p = pos;
         if (Lit(s, p, w)) {
@@ -709,6 +742,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
     text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
+    text = ReplaceAll(text, SoCopulaStart, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });

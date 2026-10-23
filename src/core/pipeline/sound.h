@@ -33,7 +33,8 @@
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
 //     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
 //     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
-//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?); an ono row may be followed by anything, and と or the て of って
+//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?), nor, a predicate row, after a noun in
+//     kanji or katakana with は or が and a comma (あの頃は、よかった 좋았다); an ono row may be followed by anything, and と or the て of って
 //     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
 //     (スタスタとベッド 척척 ベッド, but ドキドキとワクワク). A space separates a sound from a
 //     following kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but
@@ -162,7 +163,10 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // are left alone. The rewrite is kept when a dictionary key then reaches further past the
 // mark than before or, when no key reached past it, after a kanji or, for a lengthening
 // mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
-// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
+// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark), and so does
+// a run of three or more plain vowels of the kana before it inside a word, or of two before
+// the い of an adjective stem (すごおおおい すごい + mark, さむううい; おばあああちゃん
+// おばあちゃん keeps one vowel of the word).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
 // The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ, or
@@ -172,7 +176,7 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // a ッ (待ったああああっ, 言うなあああっ). Such a dropped run of three or more vowel kana
 // leaves one kDrawnMark for each, which takes a shout's ッ after it (やめてぇぇぇ やめて + 3
 // marks). A run with ー that ends a phrase, also before a shout's っ, after a word is
-// written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji
+// written ～ (提督ー！, 待ってー, だよねー, だめーーっ, かわいいー！), its small vowels dropped after a kanji
 // or those kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
 // that makes a word of four or more characters (せんせー せんせい). Neither touches a
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
@@ -205,6 +209,9 @@ struct SoundRow {
     // An exclamation (fourth column exclaim): a statement that is no sound before a
     // question mark, where the words ask for an evaluation (よかった？ 좋았어?).
     bool exclaim = false;
+    // An exclaim row that is no sound after a noun topic and a comma either, where it is the
+    // predicate (fourth column predicate: あの頃は、よかった 좋았다).
+    bool predicate = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

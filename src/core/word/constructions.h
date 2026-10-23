@@ -1,0 +1,107 @@
+#pragma once
+// The construction table of the rewrite layer, constructions.tsv (docs/rule-language.md, 구문 표):
+// rows that pick the Korean of a word from the words around it, written in the body syntax of the
+// rules with fields of the resolved chain, and grouped in families that run between the sentence
+// passes of Flush. The builtin table is parsed once, on first use, into an immutable structure
+// shared by every thread.
+#include <cstddef>
+#include <cstdint>
+#include <span>
+#include <string>
+#include <string_view>
+#include <vector>
+
+#include "core/rules/body.h"
+
+namespace hdTrans::dict::internal {
+struct WordClass;
+}
+
+namespace hdTrans::word {
+
+struct Flusher;
+class Item;
+
+// Runs the family anchored after the text pass at index pass of TextPassNames, then the family
+// anchored after it, and so on. skip, when given, leaves out the families and rows it names.
+void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_view name) = nullptr);
+// The id of row index of the builtin table ("cx:return-to:10"); empty for none.
+std::string_view ConstructionId(int index);
+
+namespace internal {
+
+enum class CxField : uint8_t {
+    Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature,
+};
+
+// How an atom compares: with a literal (rule surface markers, code patterns), with the members of a
+// word class (equal to one, starting or ending with one), or by a registered feature.
+enum class CxMatch : uint8_t { Literal, Member, MemberStart, MemberEnd, Feature };
+
+using CxFeature = bool (*)(Flusher& f, const Item* it);
+
+struct CxAtom {
+    CxField field = CxField::Surface;
+    CxMatch match = CxMatch::Literal;
+    int8_t delta = 0;
+    bool negated = false;
+    std::string value;
+    const dict::internal::WordClass* set = nullptr;
+    CxFeature feature = nullptr;
+};
+
+struct CxNode {
+    rules::BodyKind kind = rules::BodyKind::Or;
+    bool atom = false;
+    uint32_t count = 0;  // lists: operands; scans: the bound, 0 for none; atoms: index into atoms
+    uint32_t end = 0;    // one past the subtree
+};
+
+enum class CxVerb : uint8_t { SelectLemma, TakeTarget, SetTarget, SetEnding, ReplaceHead };
+
+struct CxAction {
+    CxVerb verb = CxVerb::SelectLemma;
+    int8_t delta = 0;
+    std::string value, with;  // with: the new head of replace-head
+};
+
+struct CxRow {
+    std::string id;  // cx:<family>:<prio>
+    std::string spec;
+    int prio = 0;
+    uint32_t root = 0;  // into nodes
+    std::vector<CxAction> actions;
+    int line = 0;  // in the table
+};
+
+struct CxFamily {
+    std::string name;
+    std::string after;
+    std::vector<int> rows;  // into rows, by PRIO
+    int next = -1;          // the family anchored after this one
+    int line = 0;           // of its //= line
+};
+
+struct CxError {
+    int line = 0;
+    std::string message;
+};
+
+struct ConstructionTable {
+    std::vector<CxRow> rows;  // in table order; the index is the provenance id
+    std::vector<CxFamily> families;
+    std::vector<CxNode> nodes;
+    std::vector<CxAtom> atoms;
+    std::vector<int> afterPass;  // the family anchored after each pass, -1 for none
+    std::vector<CxError> errors;
+};
+
+// Parses the lines of a construction table against the names of the text passes, in order.
+// Errors are collected; the rows that parse still load.
+ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes);
+// The parsed builtin constructions.tsv.
+const ConstructionTable& BuiltinConstructions();
+
+}  // namespace internal
+
+}  // namespace hdTrans::word

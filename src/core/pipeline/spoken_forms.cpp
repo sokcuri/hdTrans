@@ -1,3 +1,6 @@
+#include <span>
+
+#include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -77,9 +80,8 @@ bool ParticleNee(std::string_view s, size_t pos, Match& m) {
 }
 
 // A rune of first, then lit, then one of the words: groups 1 and 2.
-template <size_t N>
 bool CharLitWord(std::string_view s, size_t pos, Match& m, std::u32string_view first, std::string_view lit,
-                 const std::string_view (&words)[N]) {
+                 std::span<const std::string_view> words) {
     size_t p = pos;
     if (!OneOf(s, p, first)) return false;
     m.group[1] = Span(s, pos, p);
@@ -94,17 +96,14 @@ bool CharLitWord(std::string_view s, size_t pos, Match& m, std::u32string_view f
     return false;
 }
 
-constexpr std::string_view kTeruAfter[] = {"じゃ", "だろ"};
-constexpr std::string_view kIruAfter[] = {"の", "だ", "じゃ"};
-
 // ([てで])ん(じゃ|だろ)
 bool ContractedTeru(std::string_view s, size_t pos, Match& m) {
-    return CharLitWord(s, pos, m, U"てで", "ん", kTeruAfter);
+    return CharLitWord(s, pos, m, U"てで", "ん", dict::ClassMembers("follower.contracted-teru"));
 }
 
 // ([にでもがは])いん(の|だ|じゃ)
 bool ContractedIru(std::string_view s, size_t pos, Match& m) {
-    return CharLitWord(s, pos, m, U"にでもがは", "いん", kIruAfter);
+    return CharLitWord(s, pos, m, U"にでもがは", "いん", dict::ClassMembers("follower.contracted-iru"));
 }
 
 // One rune of set or the end of s at p as group 2, ending the match.
@@ -418,13 +417,6 @@ bool SlangAdjectivePattern(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// The pronouns after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
-constexpr std::string_view kTopicWaWords[] = {
-    "こっち", "そっち", "あっち", "どっち", "こちら", "そちら", "あちら", "お前", "おまえ", "オマエ", "てめえ",
-    "あんた", "アンタ", "あなた", "貴方", "君", "きみ", "キミ", "私", "わたし", "あたし", "アタシ", "俺", "おれ",
-    "オレ", "僕", "ぼく", "ボク", "これ", "それ", "あれ", "今日", "明日", "昨日", "みんな", "皆",
-};
-
 // (こっち|お前|…)わ before a mark, a space, kanji, katakana or the end: group 1 the
 // pronoun (こっちわ大丈夫 こっちは). わ before hiragana stays (お前わかってる).
 bool TopicWa(std::string_view s, size_t pos, Match& m) {
@@ -434,7 +426,7 @@ bool TopicWa(std::string_view s, size_t pos, Match& m) {
             return false;
         }
     }
-    for (std::string_view w : kTopicWaWords) {
+    for (std::string_view w : dict::ClassMembers("pronoun.topic-wa")) {
         size_t p = pos;
         if (!Lit(s, p, w) || !Lit(s, p, "わ")) continue;
         size_t q = p;

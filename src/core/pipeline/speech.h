@@ -28,8 +28,9 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth = 0);
 
 // For each quote of line (indexed as QuoteStyles), whether its own text, without the quotes
 // inside it, is casual speech: a sentence-final よ, ね, わ, じゃん, さ, もん, って, かな or
-// かしら, or a contraction (食べちゃう, 見てる, やっとく, 知らねえ); not a quote with stiff
-// or lordly marks (のだ, である, たまえ, かね, 我々, a sentence ended by が).
+// かしら not after a polite form (そうですよ), or a contraction (食べちゃう, 見てる, やっとく,
+// 知らねえ); not a quote with stiff or lordly marks (のだ, である, たまえ, かね, 我々, a sentence
+// ended by が).
 std::vector<bool> CasualQuotes(std::string_view line, int depth = 0);
 
 }  // namespace hdTrans::pipeline

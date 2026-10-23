@@ -15,6 +15,7 @@ HD_TEST(pipeline_quote_styles) {
     } cases[] = {
         {"「行くよ」と彼は言った。", {0, 0}},
         {"「ありがとうございます」", {0, kPoliteSpeech}},
+        {"「早く起きなさい」", {0, kPoliteSpeech}},
         {"「わしはここで待っておる」", {0, kOldSpeech}},
         {"『雨が降る』", {0, kWritten}},
         {"想「おも」い出", {0, kReading | kCited}},

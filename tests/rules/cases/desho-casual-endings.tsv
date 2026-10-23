@@ -13,3 +13,10 @@ ending:でしょ	「その日に会えばいいでしょう」	「그날에 만�
 ending:でしょ	「明日は晴れるでしょう」	「내일은 개이겠죠」	keep	builtin-ending
 ending:でしょ	「そんなの笑っちゃうでしょ」	「그런 거 웃어버리잖아」	fix	builtin-ending
 phrase:どうでしょ	ケーキを焼いてみたの。どうでしょ？	케이크를 구워 봤어. 어때?	fix	builtin-phrase
+ending:でしょ	よかったでしょ？	좋았잖아?	fix	builtin-ending
+ending:でしょ	「ずっと忙しかったでしょ。」	「계속 바빴잖아.」	fix	builtin-ending
+ending:でしょ	「豪華だったでしょ？」	「호화로웠잖아?」	fix	builtin-ending
+ending:でしょ	「こっちは日中だったでしょ？」	「여기는 낮이었잖아?」	fix	builtin-ending
+dict:jisjk:356224	よかったでしょう？	좋았죠?	fix	ending-defaults
+dict:jisjk:356224	「意外と美味しかったでしょう。」	「의외로 맛있었죠.」	keep	ending-defaults
+ending:でしょ	「だから言ったでしょ」	「그러니까 말했잖아」	keep	builtin-ending

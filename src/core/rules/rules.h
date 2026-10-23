@@ -139,6 +139,9 @@ struct Program {
 // their position in Program::globalRules. Not synchronised; one evaluating thread at a time.
 struct Tally {
     std::vector<uint64_t> localRuns, localFires, globalRuns, globalFires;
+    // The rows of the construction table (core/word/constructions.h) by their index, sized by the
+    // first run: runs counts the items a row was tried on.
+    std::vector<uint64_t> constructionRuns, constructionFires;
 
     explicit Tally(const Program& program)
         : localRuns(program.localRules.size()), localFires(program.localRules.size()),

@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(HDTRANS_WERROR "Treat compiler warnings as errors" ON)
 option(HDTRANS_INTERPRET_RULES "Evaluate every selection rule with the interpreter, ignoring compiled rules" OFF)
+option(HDTRANS_PASS_EXPERIMENTS "Read HDTRANS_PASS_SKIP and HDTRANS_PASS_SHUFFLE to leave out or reorder sentence passes (measurement builds only)" OFF)
 
 if(MSVC)
     # Static CRT: the DLL is one file inside a host that ships no runtime of ours.
@@ -68,6 +69,11 @@ endfunction()
 hdtrans_builtin_source(builtin_gen.cpp "${HDTRANS_BUILTIN_DIR}" kTables BuiltinTables HDTRANS_BUILTIN_TSV)
 hdtrans_builtin_source(builtin_extra_gen.cpp "${HDTRANS_BUILTIN_DIR}/extra" kFiles ExtraBuiltinFiles
     HDTRANS_BUILTIN_EXTRA_TSV)
+# The set names of the word classes, checked when a source names a class.
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h"
+    COMMAND "${CMAKE_COMMAND}" "-DCLASSES=${HDTRANS_BUILTIN_DIR}/classes.tsv"
+        "-DOUT=${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h" -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/builtin_tables.cmake"
+    DEPENDS "${HDTRANS_BUILTIN_DIR}/classes.tsv" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/builtin_tables.cmake" VERBATIM)
 # The rules program of the word stage, the *.txt files of src/core/rules, compiled in; a stamp
 # lists the files so that adding or removing one regenerates the source.
 set(HDTRANS_RULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules")
@@ -87,12 +93,15 @@ add_subdirectory(third_party/libyaml)
 file(GLOB_RECURSE HDTRANS_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
 add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp")
+    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
 set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
 if(HDTRANS_INTERPRET_RULES)
     target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
+endif()
+if(HDTRANS_PASS_EXPERIMENTS)
+    target_compile_definitions(hdtrans PRIVATE HDTRANS_PASS_EXPERIMENTS)
 endif()
 file(GLOB_RECURSE HDTRANS_DATA_SOURCES CONFIGURE_DEPENDS src/core/*.cpp src/core/*.h)
 list(APPEND HDTRANS_DATA_SOURCES ${HDTRANS_RULES})
@@ -147,7 +156,7 @@ if(NOT EMSCRIPTEN)
     endif()
 
     add_executable(hdtrans_tests ${HDTRANS_TEST_SOURCES} src/frontend/dictionary_version.cpp)
-    target_include_directories(hdtrans_tests PRIVATE tests/unit src)
+    target_include_directories(hdtrans_tests PRIVATE tests/unit src "${CMAKE_CURRENT_BINARY_DIR}")
     target_link_libraries(hdtrans_tests PRIVATE hdtrans_gui_support)
     enable_testing()
     add_test(NAME cli.version COMMAND hdtrans_cli --version --dicts "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder")
@@ -157,6 +166,8 @@ if(NOT EMSCRIPTEN)
     set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
     add_test(NAME unit COMMAND hdtrans_tests)
+    add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
     set_tests_properties(unit PROPERTIES ENVIRONMENT
         "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache")
     if(UNIX)
@@ -166,11 +177,20 @@ if(NOT EMSCRIPTEN)
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
-            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene)
+            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
+                    construction-cases)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            # Every row of the construction table has a fix and a keep rule case.
+            add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)
+            # Japanese and Korean text in src/core stays within tools/surface-budget.tsv.
+            add_test(NAME tools.surface-budget COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --check)
+            add_test(NAME tools.surface-budget.self-test COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --self-test)
         endif()
     endif()
 
@@ -225,7 +245,7 @@ if(NOT EMSCRIPTEN)
     if(NOT CMAKE_CROSSCOMPILING)
         # It builds from the rule and code sources only, not from the library that holds its output.
         file(GLOB HDTRANS_RULEC_SOURCES CONFIGURE_DEPENDS src/rulec/*.cpp)
-        add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/load.cpp src/core/rules/eval.cpp
+        add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/body.cpp src/core/rules/load.cpp src/core/rules/eval.cpp
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
             src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp)
         target_include_directories(hdrulec PRIVATE src)

@@ -75,6 +75,21 @@ TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파�
 일반 의미 코드는 그대로 두고 해당 뜻의 행에 태그를 덧붙입니다.
 명시적인 단어 연어를 의미 부류보다 앞에 두어 좁은 조건을 우선할 수 있습니다.
 
+### 낱말 부류 (classes.tsv)
+
+`classes.tsv`는 엔진의 단계가 단어를 견주어 보는 이름 붙은 단어 집합입니다. 한 줄은 `부류<TAB>단어[<TAB>메모]`이고,
+부류의 단어는 파일 순서대로 읽으며(앞에서부터 맞춰 보는 단계가 있음) 한 부류에 한 번만 나옵니다. 머리의
+`//= 부류<TAB>설명` 줄이 부류마다 하나씩 쓰임새를 적습니다. 코드는 `dict::InClass("부류", 단어)`와
+`dict::ClassMembers("부류")`로 읽습니다. 표에 없는 부류 이름은 컴파일되지 않고, 어느 코드도 부르지 않는 부류는 ctest
+`dicts.classes`가 찾습니다.
+사전으로 불러오지 않는 내장 표라서 고치면 사전 캐시도 다시 만듭니다.
+
+### 구문 표 (constructions.tsv)
+
+`constructions.tsv`는 `rewrites` 층에서 조사 같은 단어의 한국어를 앞뒤 단어로 고르는 행의 표입니다. 조건은 규칙의 본문
+문법으로 쓰고 `classes.tsv`의 부류를 `@부류`로 부릅니다. 형식은 [rule-language.md](rule-language.md#구문-표-constructionstsv)에
+있습니다. 사전으로 불러오지 않는 내장 표라서 고치면 사전 캐시도 다시 만듭니다.
+
 ### 복자 표 (masked.tsv)
 
 `masked.tsv`는 복자(伏せ字)로 가린 단어의 표이며 사전으로 불러오지 않고 번역 경로가 직접 읽습니다. 한 줄은
@@ -224,6 +239,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 | `stative` | `end` 줄: 상태 서술어에만. 같은 어미의 일반 줄보다 앞에 둠 |
 | `neg=LEMMA` | `v`, `adj` 줄: 이 단어를 부정하는 한국어 동사 |
 | `exclaim` | 내장 `phrases.tsv`의 `intj` 줄: 감탄. 물음표 앞에서는 소리로 읽지 않고 단어로 읽음 (よかった 다행이다, よかった？ 좋았어?) |
+| `predicate` | `exclaim` 줄: 한자나 가타카나 명사＋は, が와 쉼표 뒤에서도 단어로 읽음 (あの頃は、よかった 좋았다) |
 
 정의: `src/core/userdict/userdict.h`.
 
