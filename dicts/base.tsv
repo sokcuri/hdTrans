@@ -235792,7 +235792,7 @@ ttt	ttt	K110			GN				jisjk:201744
 杭瀬本町	쿠이세홈마치	I130	QCTVPl		GN				jisjk:290168		
 杭迫	쿠이세코	N130	QPN	Wa	GN				jisjk:13358		
 杯	배	N110		Z7	GN				jisjk:116137		
-杯	잔	N110	XXXVCk		GN				jisjk:116138		
+杯	잔	N110	XXXVCk	Ct	GN	7302	||1 &&2 P-1== "1**" G-1== "NjNd"	숫자 뒤의 杯는 잔을 세는 조수사 ‘잔’으로 고른다(2杯 2잔).	jisjk:116138		
 杯	배	N110		On	GN				jisjk:259144		
 杯を	술잔을 나&C4@	M419			GN				jisjk:93007		
 杯をもら	부하가 &C6@	M420			GN				jisjk:120227		
