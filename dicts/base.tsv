@@ -135126,7 +135126,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 分利	분리	N110			GN				jisjk:24442		
 分刻み	분 간격	K110	UMe	Tm	GN				jisjk:341611		
 分前	배당	N110			GN				jisjk:100054		
-分前	분전	N110		Ct	GN	3998	||1 G-1== "NjNd"	숫자 뒤의 分前를 '분전'으로 고른다.	jisjk:354974		
+分前	분 전	N110		Ct	GN	3998	||1 G-1== "NjNd"	숫자 뒤의 分前를 '분 전'으로 고른다.	jisjk:354974		
 分割	분할	N110		Hd	BZ	460	||1 &&3 S-1== "に" G-2== "Ct" D-1= "(으)로"	조수사와 に 뒤의 分割를 '분할'로 고르고 に를 '(으)로'로 바꾼다.	jisjk:24490		
 分割コンパイル	분활 컨바일	N110			IT				jisjk:262740		
 分割型	분할형	N110			GN				jisjk:162140		
@@ -135175,7 +135175,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 分度板	분도판	N110	VPe		GN				jisjk:204735		
 分引	할인	N110	VMo	Hd	GN				jisjk:154746		
 分引き	할인	N110	VMo	Hd	GN				jisjk:154747		
-分後	분후	N110			GN				jisjk:100504		
+分後	분 후	N110			GN				jisjk:100504		
 分所	분소	N110	VPl		GN				jisjk:24457		
 分担	분담	N110		Hd	GN				jisjk:24431		
 分担金	분담금	N110	VMy		GN				jisjk:154782		
@@ -198814,7 +198814,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 年利率	연 이율	I110		Ct	GN				jisjk:64323		
 年利益金額	연이익금액	N110			GN				jisjk:160808		
 年制	년제	N130		Ct	GN				jisjk:223824		
-年前	년전	N110	UMe	Ct	GN				jisjk:18276		
+年前	년 전	N110	UMe	Ct	GN				jisjk:18276		
 年前から	년 전부터	E311			GN				jisjk:1521		
 年前に	년전에	E300	UMe		GN				jisjk:149438		
 年前後	년 전후	N110	UMe		GN				jisjk:350085		
@@ -223122,7 +223122,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 日刊現代	일간 겐다이	I130	VGt		PN				jisjk:80508		
 日制	일제	N110		Ct	GN				jisjk:262381		
 日前	히쿠마	N110	VPl		GN				jisjk:31664		
-日前	일전	N110		Ct	GN	2535	||2 G-1== "NjNd" S-1== "何"	숫자나 何 뒤의 日前를 '일전'으로 고른다.	jisjk:266376		
+日前	일 전	N110		Ct	GN	2535	||2 G-1== "NjNd" S-1== "何"	숫자나 何 뒤의 日前를 '일 전'으로 고른다.	jisjk:266376		
 日前から	일 전부터	E311		Tu	GN				jisjk:1900		
 日前にもら	일 전에 &FD@	M420			GN				jisjk:145228		
 日前後	일 전후	N110		Ct	GN	4043	||1 G-1== "NjNd"	日前後 앞에 수사가 오면 일 전후를 고른다. (미발동: rare-word)	jisjk:356176		

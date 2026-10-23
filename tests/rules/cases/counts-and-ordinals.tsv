@@ -7,3 +7,5 @@ lookup:number-words	四十九日の法要	사십구일재의 법요	fix	lookup
 lookup:number-words	十五日に会う。	15일에 만난다.	keep	lookup
 lookup:number-words	十二月になった。	12월이 되었다.	keep	lookup
 lexical:number-words	バターを塗りつけるだけで、十二分に美味だ。	버터를 바르는 것만으로, 충분히 맛좋다.	fix	lookup
+dict:jisjk:100504	三十分後に出る。	30분 후에 나온다.	fix	lookup
+dict:jisjk:18276	三年前の話	3년 전의 이야기	fix	lookup
