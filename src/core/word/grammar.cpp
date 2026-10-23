@@ -56,6 +56,7 @@ constexpr KoreanPassive kKoreanPassives[] = {
     {"빼앗다", "빼앗기다"}, {"찢다", "찢기다"},     {"끊다", "끊기다"},     {"끌다", "끌리다"},
     {"물다", "물리다"},     {"팔다", "팔리다"},     {"밀다", "밀리다"},     {"누르다", "눌리다"},
     {"부르다", "불리다"},   {"자르다", "잘리다"},   {"흔들다", "흔들리다"}, {"잡아먹다", "잡아먹히다"},
+    {"핥다", "핥이다"},
 };
 
 // Whether the 2-byte grammar codes gattr hold code.
@@ -293,9 +294,25 @@ void SayPassive(Item* it) {
     for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
 }
 
+// Verbs of kPassiveLemmas whose lemma reads an attitude to a person (舐められる 얕보이다);
+// with an object of を in the clause the passive is the act done to the speaker's body
+// (鈴口を舐められて), which the verb's own reading gives.
+constexpr std::string_view kAttitudePassives[] = {"舐め"};
+
+// Whether a を stands before item it in its clause.
+bool ObjectBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s == "を") return true;
+        if (p->detail->Yougo() || s.empty() || Has("、。,「」『』！？", s)) return false;
+    }
+    return false;
+}
+
 // Writes a passive verb item of kPassiveLemmas as its Korean passive in the active voice.
 void WriteLexicalPassive(Flusher& f, Item* it) {
     std::string lexical;
+    if (InSet(kAttitudePassives, it->group->surface) && ObjectBefore(it)) return;
     if (!PassiveTarget(f, it->group->surface, lexical)) {
         SayPassive(it);
         return;
