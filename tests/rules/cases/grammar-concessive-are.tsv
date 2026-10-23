@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:gram:areba:concessive	どんな理由があれ、とばっちりを受けたのは変わらない。	어떤 이유가 있든, 불똥을 받은 것은 변함없다.	fix	local
+dict:gram:areba:concessive	あれが欲しい。	저것을 갖고 싶다.	keep	local
+dict:gram:areba:何であれ	目標が何であれ、俺達にゃ関係ないこと……	목표가 무엇이든, 우리관계없는 것……	fix	defaults
