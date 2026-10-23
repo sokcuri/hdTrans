@@ -714,21 +714,6 @@ void RespectfulPassive(Flusher& f) {
     }
 }
 
-void GoNotSay(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || p->prev == nullptr || it->group->surface != "い" || !it->detail->Yougo() ||
-            !output::Lemma(it->EntryText(it->selected), f.families).starts_with("말하") ||
-            !Has(" に へ まで から ", " " + p->group->surface + " ") || Person(p->prev->Attr(p->prev->selected)) ||
-            dict::InClass("noun.manner-ni", p->prev->group->surface)) {
-            continue;
-        }
-        if (SelectLemma(f, it, "가다")) continue;
-        output::Conjugated c = output::Conjugating("가다", '&', "", f.families);
-        if (it->group->At(it->selected) != nullptr) it->AssignEntrySurface(it->selected, c.target);
-    }
-}
-
 void PositiveIke(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->group->surface != kJaIke || !it->EntryText(it->selected).starts_with(kKoAn)) continue;
