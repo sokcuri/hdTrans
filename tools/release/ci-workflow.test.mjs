@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
-import { buildGate, releaseBot, releaseFiles, versionCommit } from './build-gate.mjs';
+import { buildGate, releaseBot, releaseFiles, testedRun, testedTreeArtifact, versionCommit } from './build-gate.mjs';
 import { npmAssetName } from './publication.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -61,7 +61,7 @@ function foldedCondition(workflow) {
   return workflow.match(/^    if: >-\n((?:^      .*\n)+)/m)[1].trim().replace(/\n\s*/g, ' ');
 }
 const canRelease = new Function('github', 'inputs', 'startsWith', `return (${foldedCondition(release)});`);
-const canPackage = new Function('github', 'startsWith', `return (${foldedCondition(build)});`);
+const canPackage = new Function('github', 'startsWith', `return (${foldedCondition(build.slice(build.indexOf('\n  release:\n')))});`);
 const canPublish = new Function('needs', `return (${publisherJob.match(/^    if: (.*)$/m)[1]});`);
 
 test('tag publication owns the only tag trigger and calls Build without dispatch or completion listeners', () => {
@@ -394,4 +394,167 @@ test('the web deploy builds nothing and checks the live engine against the relea
   const live = stepScript(deployWeb, 'Check the live site');
   assert.match(live, /for asset in engine wasm; do/);
   assert.match(live, /cmp "\$live\/\$asset" "build\/wasm\//);
+});
+
+const repo = { owner: 'sokcuri', repo: 'hdTrans' };
+const repositoryId = 7;
+
+function fakeGithub(records = {}) {
+  const runs = {};
+  const artifacts = [];
+  let id = 100;
+  for (const [tree, list] of Object.entries(records)) {
+    for (const { artifact = {}, run = {} } of list) {
+      id += 1;
+      runs[id] = {
+        id, path: '.github/workflows/build.yml', status: 'completed', conclusion: 'success',
+        repository: { id: repositoryId }, head_repository: { id: repositoryId }, ...run,
+      };
+      artifacts.push({
+        name: testedTreeArtifact(tree), expired: false,
+        workflow_run: { id, repository_id: repositoryId, head_repository_id: repositoryId }, ...artifact,
+      });
+    }
+  }
+  const listArtifactsForRepo = Symbol('listArtifactsForRepo');
+  return {
+    rest: { actions: { listArtifactsForRepo, getWorkflowRun: async ({ run_id }) => ({ data: runs[run_id] }) } },
+    paginate: async (method, params) => {
+      assert.equal(method, listArtifactsForRepo);
+      assert.equal(params.owner, repo.owner);
+      return artifacts.filter(artifact => artifact.name === params.name);
+    },
+  };
+}
+
+test('only a completed successful Build of this repository vouches for a tree', async () => {
+  const tree = 'a'.repeat(40);
+  const lookup = records => testedRun({ github: fakeGithub({ [tree]: records }), repo, repositoryId, tree });
+  assert.equal(await lookup([{}]), 101);
+  const refused = {
+    expired: { artifact: { expired: true } },
+    'another repository': { artifact: { workflow_run: { id: 101, repository_id: 8, head_repository_id: 8 } } },
+    'a fork pull request': { artifact: { workflow_run: { id: 101, repository_id: repositoryId, head_repository_id: 8 } } },
+    'a fork head in the run': { run: { head_repository: { id: 8 } } },
+    'another workflow': { run: { path: '.github/workflows/publish-npm.yml' } },
+    'a run in progress': { run: { status: 'in_progress', conclusion: null } },
+    'a failed run': { run: { conclusion: 'failure' } },
+    'another name': { artifact: { name: testedTreeArtifact('b'.repeat(40)) } },
+  };
+  for (const [name, record] of Object.entries(refused)) assert.equal(await lookup([record]), undefined, name);
+  assert.equal(await lookup([refused['a failed run'], {}]), 102);
+  assert.equal(await lookup([]), undefined);
+});
+
+function mergeFixture(t) {
+  const fixture = gitFixture(t);
+  fixture.write('npm/package.json', '{"name":"hdtrans","version":"0.1.0","devDependencies":{"typescript":"^7.0.2"}}\n');
+  fixture.write('npm/package-lock.json', '{"name":"hdtrans","version":"0.1.0","packages":{"":{"version":"0.1.0"}}}\n');
+  fixture.commit('base');
+  fixture.git('checkout', '-q', '-b', 'develop');
+  fixture.write('src/b.cpp', 'int b;\n');
+  const head = fixture.commit('feat: b (#2)');
+  fixture.git('checkout', '-q', 'main');
+  fixture.write('npm/package.json', '{"name":"hdtrans","version":"0.2.0","devDependencies":{"typescript":"^7.0.2"}}\n');
+  fixture.write('npm/package-lock.json', '{"name":"hdtrans","version":"0.2.0","packages":{"":{"version":"0.2.0"}}}\n');
+  fixture.write('CHANGELOG.md', '## 0.2.0\n');
+  const versioned = fixture.commit('chore(main): release 0.2.0', releaseBot);
+  const merge = (change = () => {}) => {
+    fixture.git('checkout', '-q', '--detach', versioned);
+    fixture.git('merge', '-q', '--no-ff', '--no-commit', head);
+    change();
+    return fixture.commit('Merge develop');
+  };
+  const prContext = ({ sha, base = 'main', ref = 'develop', owner = 'sokcuri/hdTrans' } = {}) => ({
+    eventName: 'pull_request', ref: 'refs/pull/3/merge', sha, repo,
+    payload: {
+      repository: { id: repositoryId },
+      pull_request: {
+        base: { ref: base, repo: { full_name: 'sokcuri/hdTrans' } },
+        head: { ref, sha: head, repo: { full_name: owner } },
+      },
+    },
+  });
+  return { ...fixture, head, headTree: fixture.git('rev-parse', `${head}^{tree}`), merge, prContext };
+}
+
+test('a main push skips the matrix for a tree that a successful Build tested', async t => {
+  const { git, merge, headTree } = mergeFixture(t);
+  const sha = merge();
+  const tree = git('rev-parse', 'HEAD^{tree}');
+  const context = { eventName: 'push', ref: 'refs/heads/main', sha, repo, payload: { before: '0'.repeat(40), after: sha, repository: { id: repositoryId } } };
+  const skipped = await buildGate({ github: fakeGithub({ [tree]: [{}] }), context, git });
+  assert.equal(skipped.run, false);
+  assert.equal(skipped.tree, tree);
+  assert.equal(skipped.testedBy, undefined);
+  assert.match(skipped.reason, /passed in Build run 101/);
+  assert.equal((await buildGate({ github: fakeGithub({ [headTree]: [{}] }), context, git })).run, true);
+  assert.equal((await buildGate({ github: fakeGithub({ [tree]: [{ run: { conclusion: 'failure' } }] }), context, git })).run, true);
+  assert.equal((await buildGate({ github: fakeGithub({ [tree]: [{}] }), context: { ...context, ref: 'refs/heads/develop' }, git })).run, true);
+  const noRepository = { ...context, payload: { ...context.payload, repository: undefined } };
+  assert.equal((await buildGate({ github: fakeGithub({ [tree]: [{}] }), context: noRepository, git })).run, true);
+  const failing = { rest: { actions: {} }, paginate: async () => { throw new Error('API down'); } };
+  const broken = await buildGate({ github: failing, context, git });
+  assert.equal(broken.run, true);
+  assert.equal(broken.tree, tree);
+  assert.match(broken.reason, /API down/);
+});
+
+test('a develop to main pull request that adds only release versions reuses the develop record', async t => {
+  const { git, write, merge, prContext, headTree } = mergeFixture(t);
+  const github = fakeGithub({ [headTree]: [{}] });
+  const sha = merge();
+  const skipped = await buildGate({ github, context: prContext({ sha }), git });
+  assert.equal(skipped.run, false);
+  assert.equal(skipped.testedBy, 101);
+  assert.equal(skipped.tree, git('rev-parse', 'HEAD^{tree}'));
+  assert.notEqual(skipped.tree, headTree);
+  for (const [name, context] of Object.entries({
+    'a feature branch': prContext({ sha, ref: 'feature' }),
+    'a pull request to develop': prContext({ sha, base: 'develop' }),
+    'a fork': prContext({ sha, owner: 'someone/hdTrans' }),
+  })) {
+    assert.equal((await buildGate({ github, context, git })).run, true, name);
+  }
+  assert.equal((await buildGate({ github: fakeGithub(), context: prContext({ sha }), git })).run, true, 'no record');
+  const changes = {
+    'a source file only on main': () => write('src/hotfix.cpp', 'int h;\n'),
+    'a dependency only on main': () => write('npm/package.json',
+      '{"name":"hdtrans","version":"0.2.0","devDependencies":{"typescript":"^7.0.3"}}\n'),
+    'a lock entry only on main': () => write('npm/package-lock.json',
+      '{"name":"hdtrans","version":"0.2.0","packages":{"":{"version":"0.2.0","license":"x"}}}\n'),
+  };
+  for (const [name, change] of Object.entries(changes)) {
+    const changed = merge(change);
+    assert.equal((await buildGate({ github, context: prContext({ sha: changed }), git })).run, true, name);
+  }
+});
+
+test('the record job runs only after a passing matrix or a matched release-files-only tree', () => {
+  const job = build.slice(build.indexOf('\n  tested:\n'), build.indexOf('\n  release:\n'));
+  const tested = new Function('github', 'needs', 'startsWith', 'cancelled', `return (${foldedCondition(job).replaceAll('needs.release-tools', "needs['release-tools']")});`);
+  const startsWith = (a, b) => a.startsWith(b);
+  const needs = (run, result = 'success', tested_by = '', tree = 'a'.repeat(40)) => ({
+    gate: { outputs: { run, tree, tested_by } }, 'release-tools': { result }, build: { result },
+  });
+  const pr = { event_name: 'pull_request', ref: 'refs/pull/1/merge' };
+  const develop = { event_name: 'push', ref: 'refs/heads/develop' };
+  const tag = { event_name: 'push', ref: 'refs/tags/v1.2.3' };
+  const check = (github, n, cancelled = false) => tested(github, n, startsWith, () => cancelled);
+  assert.equal(check(pr, needs('true')), true);
+  assert.equal(check(develop, needs('true')), true);
+  assert.equal(check(tag, needs('true')), false);
+  assert.equal(check(pr, needs('true', 'failure')), false);
+  assert.equal(check(pr, needs('true', 'skipped')), false);
+  assert.equal(check(pr, needs('true', 'success', '', '')), false);
+  assert.equal(check(pr, needs('true'), true), false);
+  assert.equal(check(pr, needs('false', 'skipped', '101')), true);
+  assert.equal(check(pr, needs('false', 'skipped')), false);
+  assert.equal(check({ event_name: 'push', ref: 'refs/heads/main' }, needs('false', 'skipped')), false);
+  assert.match(job, /name: tested-tree-\$\{\{ needs\.gate\.outputs\.tree \}\}/);
+  assert.match(job, /retention-days: 30/);
+  assert.doesNotMatch(job, /secrets\.|permissions:/);
+  const gate = build.slice(build.indexOf('\n  gate:\n'), build.indexOf('\n  release-tools:\n'));
+  assert.match(gate, /permissions:\n      contents: read\n      actions: read\n/);
+  assert.match(publisher, /  build:\n    needs: validate\n    permissions:\n      contents: write\n      actions: read\n/);
 });

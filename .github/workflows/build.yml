@@ -42,11 +42,18 @@ env:
   HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt
 
 jobs:
+  # Skips the matrix for the release bot's version commit (the tag pipeline tests it) and for
+  # a tree that a successful Build already tested; any doubt builds everything.
   gate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
     outputs:
       run: ${{ steps.gate.outputs.run }}
+      tree: ${{ steps.gate.outputs.tree }}
+      tested_by: ${{ steps.gate.outputs.tested_by }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -63,6 +70,8 @@ jobs:
             const gate = await buildGate({ github, context });
             core.info(`Build gate: ${gate.reason}`);
             core.setOutput('run', String(gate.run));
+            core.setOutput('tree', gate.tree);
+            core.setOutput('tested_by', gate.testedBy ?? '');
             await core.summary.addRaw(`Build gate: ${gate.reason}\n`).write();
 
   release-tools:
@@ -389,6 +398,37 @@ jobs:
             build/${{ matrix.preset }}/ctest.log
             build/${{ matrix.preset }}/sccache.log
             build/${{ matrix.preset }}/ccache.log
+
+  # Records a tree whose matrix passed, or that the gate matched to a tested develop tree,
+  # for the gate of a later Build of the same tree.
+  tested:
+    needs: [gate, release-tools, build]
+    if: >-
+      !cancelled() && needs.gate.outputs.tree != '' &&
+      (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/')) &&
+      ((needs.gate.outputs.run == 'true' && needs.release-tools.result == 'success' && needs.build.result == 'success') ||
+       (needs.gate.outputs.run == 'false' && needs.gate.outputs.tested_by != ''))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Write the record
+        env:
+          TREE: ${{ needs.gate.outputs.tree }}
+          TESTED_BY: ${{ needs.gate.outputs.tested_by }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/tested"
+          {
+            echo "tree $TREE"
+            echo "run $GITHUB_RUN_ID"
+            echo "event $GITHUB_EVENT_NAME $GITHUB_REF $GITHUB_SHA"
+            if [[ -n "$TESTED_BY" ]]; then echo "tested by run $TESTED_BY"; fi
+          } > "$RUNNER_TEMP/tested/tested-tree.txt"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: tested-tree-${{ needs.gate.outputs.tree }}
+          path: ${{ runner.temp }}/tested/tested-tree.txt
+          retention-days: 30
+          if-no-files-found: error
 
   release:
     needs: [build, release-tools]

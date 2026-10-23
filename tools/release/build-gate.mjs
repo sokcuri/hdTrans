@@ -32,16 +32,76 @@ export function versionCommit({ payload, sha, git }) {
   return source;
 }
 
-export async function buildGate({ context, git = defaultGit }) {
+export const testedTreeArtifact = tree => `tested-tree-${tree}`;
+
+// A completed, successful Build of this repository that recorded the tree as tested.
+export async function testedRun({ github, repo, repositoryId, tree }) {
+  const name = testedTreeArtifact(tree);
+  const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, { ...repo, name, per_page: 100 });
+  for (const artifact of artifacts) {
+    const source = artifact.workflow_run;
+    if (artifact.name !== name || artifact.expired || !source ||
+        source.repository_id !== repositoryId || source.head_repository_id !== repositoryId) {
+      continue;
+    }
+    const run = (await github.rest.actions.getWorkflowRun({ ...repo, run_id: source.id })).data;
+    if (run.path === '.github/workflows/build.yml' && run.status === 'completed' && run.conclusion === 'success' &&
+        run.repository?.id === repositoryId && run.head_repository?.id === repositoryId) {
+      return run.id;
+    }
+  }
+}
+
+function withoutVersion(text) {
+  const json = JSON.parse(text);
+  delete json.version;
+  if (json.packages?.['']) delete json.packages[''].version;
+  return JSON.stringify(json);
+}
+
+// The develop→main merge ref, which differs from the develop head only in the release files,
+// with npm/package.json and its lock differing only in their versions.
+export function releaseFilesOnly({ git, head }) {
+  const parents = git('show', '-s', '--format=%P', 'HEAD').split(' ');
+  if (parents.length !== 2 || parents[1] !== head) return false;
+  const changed = git('diff', '--name-only', head, 'HEAD').split('\n').filter(Boolean);
+  if (changed.some(path => !releaseFiles.includes(path))) return false;
+  return changed.filter(path => path.endsWith('.json') && path.startsWith('npm/'))
+    .every(path => withoutVersion(git('show', `${head}:${path}`)) === withoutVersion(git('show', `HEAD:${path}`)));
+}
+
+export async function buildGate({ github, context, git = defaultGit }) {
+  let tree = '';
   try {
-    if (context.eventName === 'push' && context.ref === 'refs/heads/main') {
-      const source = versionCommit({ payload: context.payload, sha: context.sha, git });
-      if (source) {
-        return { run: false, reason: `release version commit on ${source}; the tag pipeline builds and tests it` };
+    tree = git('rev-parse', 'HEAD^{tree}');
+    const mainPush = context.eventName === 'push' && context.ref === 'refs/heads/main';
+    const source = mainPush && versionCommit({ payload: context.payload, sha: context.sha, git });
+    if (source) {
+      return { run: false, tree, reason: `release version commit on ${source}; the tag pipeline builds and tests it` };
+    }
+    const repo = context.repo;
+    const repositoryId = context.payload.repository?.id;
+    if (!Number.isInteger(repositoryId)) return { run: true, tree, reason: 'full build' };
+    if (mainPush) {
+      const tested = await testedRun({ github, repo, repositoryId, tree });
+      if (tested) return { run: false, tree, reason: `tree ${tree} passed in Build run ${tested}` };
+    }
+    const pr = context.payload.pull_request;
+    const full = `${repo.owner}/${repo.repo}`.toLowerCase();
+    if (context.eventName === 'pull_request' && pr?.base?.ref === 'main' && pr.head?.ref === 'develop' &&
+        pr.base.repo?.full_name?.toLowerCase() === full && pr.head.repo?.full_name?.toLowerCase() === full &&
+        /^[0-9a-f]{40}$/.test(pr.head.sha ?? '') && releaseFilesOnly({ git, head: pr.head.sha })) {
+      const headTree = git('rev-parse', `${pr.head.sha}^{tree}`);
+      const tested = await testedRun({ github, repo, repositoryId, tree: headTree });
+      if (tested) {
+        return {
+          run: false, tree, testedBy: tested,
+          reason: `develop tree ${headTree} passed in Build run ${tested}; this tree adds only release files`,
+        };
       }
     }
-    return { run: true, reason: 'full build' };
+    return { run: true, tree, reason: 'full build' };
   } catch (error) {
-    return { run: true, reason: `full build (gate error: ${error.message})` };
+    return { run: true, tree, reason: `full build (gate error: ${error.message})` };
   }
 }

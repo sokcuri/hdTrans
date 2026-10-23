@@ -30,6 +30,7 @@ jobs:
     needs: validate
     permissions:
       contents: write
+      actions: read
     uses: ./.github/workflows/build.yml
     with:
       dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
