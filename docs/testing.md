@@ -99,6 +99,25 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
   브랜치>`로, 기준 브랜치 뒤에 표의 수가 오르거나 행이 늘었는데 PR의 어느 커밋에도 트레일러가 없으면
   실패합니다.
 
+## 패스 실험 빌드
+
+단어 단계의 문장 패스(`src/core/word/flush.cpp`)가 순서에 얼마나 민감한지, 테스트가 패스를 얼마나 붙잡는지
+재는 빌드입니다. CMake 옵션 `HDTRANS_PASS_EXPERIMENTS`(기본 꺼짐)를 켠 빌드만 아래 두 변수를 읽고, 릴리스와
+CI 빌드에는 이 코드가 들어가지 않습니다. 켠 빌드도 변수가 없으면 출력이 같습니다.
+
+```sh
+cmake --preset mac -B build/mac-passexp -DHDTRANS_PASS_EXPERIMENTS=ON
+cmake --build build/mac-passexp --parallel --target hdtrans_cli
+HDTRANS_PASS_SKIP=NounTo build/mac-passexp/hdtrans -dicts dicts -in in.txt   # 그 패스를 빼고 번역
+HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # 씨앗 7로 패스 순서를 섞어 번역
+```
+
+- `HDTRANS_PASS_SKIP`: 뺄 패스 이름, 쉼표로 구분. 이름은 `flush.cpp`의 `Run` 호출과 `kTextPasses`에 있고,
+  모르는 이름은 무시합니다.
+- `HDTRANS_PASS_SHUFFLE`: 10진 씨앗. `kTextPasses`(`Select`부터 `EmphaticMo`까지)의 순서만 섞고, 그 앞뒤 패스는
+  그대로 둡니다. 같은 씨앗은 같은 순서입니다.
+- 두 변수는 프로세스에서 처음 번역할 때 한 번 읽습니다.
+
 ## 한 입력 살펴보기: 단계 기록 (-stages)
 
 ```sh
@@ -335,6 +354,7 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
+| `HDTRANS_PASS_SKIP`, `HDTRANS_PASS_SHUFFLE` | `HDTRANS_PASS_EXPERIMENTS` 빌드의 엔진 | 뺄 문장 패스, 패스 순서를 섞는 씨앗 ([패스 실험 빌드](#패스-실험-빌드)) |
 | `HDTRANS_HYGIENE_PATTERNS` | `hygiene.py` | 커밋하면 안 되는 말의 정규식 파일 (저장소 밖) |
 
 작업 절차와 그 도구(`gate.sh`, `measure.sh`, `pick.sh` 등)는 [skills/README.md](../skills/README.md)에 있습니다.

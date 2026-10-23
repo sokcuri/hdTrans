@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(HDTRANS_WERROR "Treat compiler warnings as errors" ON)
 option(HDTRANS_INTERPRET_RULES "Evaluate every selection rule with the interpreter, ignoring compiled rules" OFF)
+option(HDTRANS_PASS_EXPERIMENTS "Read HDTRANS_PASS_SKIP and HDTRANS_PASS_SHUFFLE to leave out or reorder sentence passes (measurement builds only)" OFF)
 
 if(MSVC)
     # Static CRT: the DLL is one file inside a host that ships no runtime of ours.
@@ -93,6 +94,9 @@ set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIE
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
 if(HDTRANS_INTERPRET_RULES)
     target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
+endif()
+if(HDTRANS_PASS_EXPERIMENTS)
+    target_compile_definitions(hdtrans PRIVATE HDTRANS_PASS_EXPERIMENTS)
 endif()
 file(GLOB_RECURSE HDTRANS_DATA_SOURCES CONFIGURE_DEPENDS src/core/*.cpp src/core/*.h)
 list(APPEND HDTRANS_DATA_SOURCES ${HDTRANS_RULES})
