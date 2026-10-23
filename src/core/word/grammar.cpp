@@ -1633,10 +1633,12 @@ void QuoteTo(Flusher& f) {
         const bool thought = (At(it->Code(it->selected), 0) == '7' || ja.ends_with("ないと") || d.starts_with("た")) &&
                              (ThinkingVerbAhead(it) ||
                               (it->next != nullptr && it->next->group->surface == kJaComma && QuoteVerbAhead(it->next->next)));
-        // ないと that ends the utterance is a duty (行かないと 가지 않으면), but the adjective ない
-        // after a noun or a particle there closes a quotation (毒はないと 독은 없다고).
+        // ないと that ends the utterance is a duty or a need (行かないと 가지 않으면, 時間がないと
+        // 시간이 없으면), but the adjective ない after the topic は or も there closes a quotation
+        // (毒はないと 독은 없다고, 何もないと 아무것도 없다고).
         const bool absent = (it->group->surface == "な" || it->group->surface == "無") && it->prev != nullptr &&
-                            it->prev->selected >= 0 && At(it->prev->Code(it->prev->selected), 0) != '4' &&
+                            it->prev->selected >= 0 &&
+                            (it->prev->group->surface.ends_with("は") || it->prev->group->surface.ends_with("も")) &&
                             ItemLemma(f, it, it->selected).ends_with("없다");
         const bool duty = ja.ends_with("ないと") && !absent;
         if ((!end && !QuoteVerbFollows(it->next) && !thought) || (end && (duty || SayingConditional(it))) ||

@@ -55,3 +55,6 @@ dict:jisjk:118946	契約の解消と変更をお願いします。	계약 해소
 dict:jisjk:118946	名前をタロウと変更した。	이름을 타로우라고 변경했다.	keep	local
 sense:short-stature	身長も低い訳ではない。	키도 작은 것은 아니다.	fix	senses
 sense:short-stature	声が低い。	목소리가 낮다.	keep	senses
+rewrite:quote-to	もっと時間がないと。	좀 더 시간이 없으면.	fix	rewrites
+rewrite:quote-to	「力がないと」	「힘이 없으면」	fix	rewrites
+rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도 없다고.	keep	rewrites
