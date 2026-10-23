@@ -418,6 +418,29 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// そ before the copula at the start of a clause: そう said short (そだね, そだった, そであった,
+// そでもない, そじゃない). Not the verb 育つ (そだって, そだてる) nor the noun 袖 (そでを).
+bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "そ")) return false;
+    const size_t so = p;
+    bool copula = false;
+    if (size_t q = p; Lit(s, q, "だ")) {
+        if (size_t r = q; Lit(s, r, "った")) {
+            copula = true;
+        } else {
+            copula = q >= s.size() || In(At(s, q).cp, U"ねよなけろ") || !IsHiraganaRune(At(s, q).cp);
+        }
+    } else if (size_t r = p; Lit(s, r, "で")) {
+        copula = r < s.size() && In(At(s, r).cp, U"あしも");
+    } else if (size_t t = p; Lit(s, t, "じゃ")) {
+        copula = true;
+    }
+    if (!copula) return false;
+    m.end = so;
+    return true;
+}
+
 // でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
 // without its subject, said for そうでなければ (でなければ、すぐに死ぬ 그렇지 않으면).
 bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
@@ -709,6 +732,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
     text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
+    text = ReplaceAll(text, SoCopulaStart, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });

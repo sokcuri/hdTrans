@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+normalize:so-copula	そであった。	그랬다.	fix	defaults
+normalize:so-copula	うん、そだね。	응, 그러게.	fix	fixed
+normalize:so-copula	そでもない？	그렇지도 않아?	fix	defaults
+normalize:so-copula	そでを捲る	소매를 걷는다	keep	defaults
+normalize:so-copula	子どもがそだつ	아이가 자란다	keep	defaults
