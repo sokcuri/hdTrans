@@ -373,18 +373,25 @@ bool Item::IsRuleRightBoundary() const {
         "だけ", "ばかり"};
     static constexpr std::string_view kAuxiliaries[] = {"かも", "だろう", "でしょう"};
     const std::string_view ns = n->group->surface;
+    const int sel = n->selected >= 0 ? n->selected : 0;
+    const std::string_view nc = n->Code(sel);
+    // The words of a bound noun that open a clause after a pause instead: そうか (I see), and
+    // ところで、 and ところが、 (by the way, but).
+    const std::string_view following = n->next != nullptr ? std::string_view(n->next->group->surface) : std::string_view();
+    const bool opener = ns.starts_with("そうか") || (ns == "そう" && following.starts_with("か")) ||
+                        ((ns == "ところで" || ns == "ところが") && following == "、");
     bool bound = false;
     for (const std::string_view b : kBoundNouns) {
-        if (!ns.starts_with(b)) continue;
+        if (opener || !ns.starts_with(b)) continue;
         const char32_t after = text::DecodeRune(ns.substr(b.size())).cp;
         bound = bound || ns.size() == b.size() || std::u32string_view(U"にがをはもでのだかとなじ").find(after) != std::u32string_view::npos;
     }
     for (const std::string_view b : kAuxiliaries) bound = bound || ns.starts_with(b);
+    // かな as the particle that asks (楽しい……かな), not かなり or the verb かなう.
+    bound = bound || (At(nc, 0) == '2' && ns.starts_with("かな"));
     // Nor does a common noun, which the predicate may still modify (暖かい…居場所), or an
     // attributive phrase before one (隠している……すべてのこと); a pronoun, a demonstrative, an
     // interjection or another clause after the pause starts anew (うるさい…テメェ, ……この人).
-    const int sel = n->selected >= 0 ? n->selected : 0;
-    const std::string_view nc = n->Code(sel);
     bound = bound || (At(nc, 0) == '1' && At(nc, 1) != '2') || (At(nc, 0) == '0' && At(nc, 1) == 'D');
     // A conjunctive ending (分からないが, 行って) is no end either; a polite ending
     // (がんばります……かも) never modifies and ends the clause whatever follows.

@@ -10,3 +10,7 @@ word:ellipsis-end	雨が降る……かも。	비가 오는……일지도.	fix	
 word:ellipsis-end	眠い…そういうのは後で。	졸리다…그러한 것은 나중에.	fix	local-ending
 word:ellipsis-end	がんばります……かも。	열심히 하겠습니다……일지도.	keep	local-ending
 word:ellipsis-end	みんなを、信じる……か	모두를, 믿는다……인가	keep	local-ending
+dict:lex:kana-geolkka	楽しい……かな	즐거운……걸까	fix	local
+dict:lex:kana-geolkka	来ない……かな	오지 않는……걸까	fix	local
+dict:lex:kana-geolkka	楽しいかな	즐거울까	keep	local
+word:ellipsis-end	うるさい……かなり	시끄럽다……꽤	keep	local-ending
