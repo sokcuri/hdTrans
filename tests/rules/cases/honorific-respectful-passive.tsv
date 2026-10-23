@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:respectful-passive	王子様がお見舞いに訪ねて来られた。	왕자님이 병문안 하러 방문해 오셨다.	fix	rewrites
-rewrite:respectful-passive	ジオルド王子がなにやら頭を下げて来られましたが……	지오르드 왕자가 뭔가 고개를 숙여 오셨습니다만……	fix	rewrites
+rewrite:respectful-passive	アルベルト王子がなにやら頭を下げて来られましたが……	알베르트 왕자가 뭔가 고개를 숙여 오셨습니다만……	fix	rewrites
 rewrite:respectful-passive	王子はすぐにその衝撃から回復された。	왕자는 곧바로 그 충격으로부터 회복하셨다.	fix	rewrites
 rewrite:respectful-passive	シンシア様はまたほろほろと涙を零される。	신시아님은 또 나폴나폴 눈물을 흘리신다.	fix	rewrites
 rewrite:respectful-passive	お母様はすでに気絶されたようで	어머님은 이미 기절하신 것 같아서	fix	rewrites

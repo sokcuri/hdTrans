@@ -88,7 +88,7 @@ const dict::Snapshot* Dictionary() {
          "星\t별\tN110\t\t\tGN\t81\n"
          "星\t호시\tN130\tQPN\tWa\tGN\t82\n"
          "犬\t개\tN110\t\t\tGN\t83\n"
-         "クラエス\t크로에스\tN130\tQPN\t\tGN\t88\n"},
+         "ブラエス\t브로에스\tN130\tQPN\t\tGN\t88\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -110,8 +110,8 @@ const dict::Snapshot* Dictionary() {
          "ほし\t호시\tN130\tQPNVHn\tWb\tGN\t86\n"
          "ぽち\t포치\tN130\tQPNVHn\tWb\tGN\t87\n"
          "ティオーナ・ルドルフォン\t티오나 루돌폰\tN130\tQPNVHn\t\tGN\t89\n"
-         "カタリナ・クラエス\t카타리나 클라에스\tN130\tQPNVHn\t\tGN\t90\n"
-         "ミーア・ルーナ\t미아루나\tN130\tQPNVHn\t\tGN\t91\n"},
+         "エレナ・ブラエス\t엘레나 블라에스\tN130\tQPNVHn\t\tGN\t90\n"
+         "ニーナ・ルーナ\t니나루나\tN130\tQPNVHn\t\tGN\t91\n"},
     });
     return loaded.snapshot.get();
 }
@@ -501,14 +501,14 @@ HD_TEST(names_katakana_full_names) {
 HD_TEST(names_chain_parts_from_layer) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
-    names::Registry r = Scan(snap, "ティオーナ・ルドルフォン。\nカタリナ・クラエス、八歳。\nルドルフォン辺境伯\nクラエス公爵");
+    names::Registry r = Scan(snap, "ティオーナ・ルドルフォン。\nエレナ・ブラエス、八歳。\nルドルフォン辺境伯\nブラエス公爵");
     HD_CHECK_EQ(r.Render("ティオーナ・ルドルフォン"), std::string("티오나 루돌폰"));
     HD_CHECK_EQ(r.Render("ルドルフォン"), std::string("루돌폰"));
-    HD_CHECK_EQ(r.Render("カタリナ・クラエス"), std::string("카타리나 클라에스"));
-    HD_CHECK_EQ(r.Render("クラエス"), std::string("클라에스"));
+    HD_CHECK_EQ(r.Render("エレナ・ブラエス"), std::string("엘레나 블라에스"));
+    HD_CHECK_EQ(r.Render("ブラエス"), std::string("블라에스"));
     // A reading without a word per part leaves the parts to their own readings.
-    names::Registry m = Scan(snap, "ミーア・ルーナは笑った。");
-    HD_CHECK_EQ(m.Render("ミーア・ルーナ"), std::string("미아 루나"));
+    names::Registry m = Scan(snap, "ニーナ・ルーナは笑った。");
+    HD_CHECK_EQ(m.Render("ニーナ・ルーナ"), std::string("니나 루나"));
 }
 
 HD_TEST(names_given_split) {

@@ -162,7 +162,7 @@ private:
     std::string RenderPart(std::string_view t, bool whole = false);
     std::string PersonName(std::string_view t);
     // The word of x in the name-layer person reading of an accepted chain name
-    // (ミーア・ルーナ・ティアムーン 미아 루나 티아문) that has x as a part and a word per part,
+    // (エレナ・ブラエス 엘레나 블라에스) that has x as a part and a word per part,
     // so that x reads alike in the chain and alone; "" for none.
     std::string ChainPart(std::string_view x);
     std::string PrefixForm(std::string_view x);
