@@ -11,3 +11,5 @@ compose:native-count	一日で終わった。	하루에 끝났다.	keep	compose
 compose:native-count	二度目のときは遅れた。	두 번째 때는 늦었다.	keep	compose
 lookup:number-words	夜戦は彼女の十八番なの。	야전은 그녀의 십팔번이야.	fix	lookup
 lookup:number-words	十八番艦が入港した。	18번함이 입항했다.	keep	lookup
+lexical:fixed-idioms	人の噂も四十九日だ。	사람의 소문도 49일이다.	fix	lookup
+lexical:fixed-idioms	父の四十九日が過ぎた。	아버지의 사십구일재가 지났다.	keep	lookup
