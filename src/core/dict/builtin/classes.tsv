@@ -2,8 +2,15 @@
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+//= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
+//= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
+//= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
+//= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
+//= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
+//= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), which the rules about familiar address look for alone.
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
@@ -15,9 +22,11 @@
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
+//= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
+//= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
@@ -28,7 +37,9 @@
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
+//= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
 //= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
+//= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
@@ -46,6 +57,7 @@
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
+//= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
@@ -62,6 +74,19 @@ adverb.gradual	日に日に
 adverb.gradual	少しずつ
 adverb.gradual	みるみる
 
+aru.after-de	ある
+aru.after-de	あり
+aru.after-de	あっ
+aru.after-de	あれ
+aru.after-de	あろ
+
+copula.after-dake	だ
+copula.after-dake	で
+copula.after-dake	じゃ
+copula.after-dake	に
+copula.after-dake	の
+copula.after-dake	か
+
 ending.rare-passive	てい
 ending.rare-passive	てる
 ending.rare-passive	てお
@@ -77,6 +102,56 @@ ending.rare-potential	れば
 ending.rare-potential	よう
 ending.rare-potential	たら
 ending.rare-potential	たり
+
+follower.ita	い
+follower.ita	か
+follower.ita	く
+follower.ita	け
+follower.ita	し
+follower.ita	だ
+
+follower.noun-not-stem	だ
+follower.noun-not-stem	で
+follower.noun-not-stem	じゃ
+follower.noun-not-stem	が
+follower.noun-not-stem	の
+follower.noun-not-stem	ね
+follower.noun-not-stem	か
+follower.noun-not-stem	や
+follower.noun-not-stem	って
+follower.noun-not-stem	なん
+follower.noun-not-stem	なの
+follower.noun-not-stem	なら
+follower.noun-not-stem	あっ
+follower.noun-not-stem	あり
+follower.noun-not-stem	ある
+follower.noun-not-stem	さ
+follower.noun-not-stem	よ
+
+follower.stem	ない
+follower.stem	無い
+follower.stem	なく
+follower.stem	なかっ
+follower.stem	は
+follower.stem	も
+follower.stem	に
+
+honorific.constraint	さん
+honorific.constraint	さま
+honorific.constraint	様
+honorific.constraint	殿
+honorific.constraint	氏
+honorific.constraint	先輩
+honorific.constraint	先生
+honorific.constraint	くん
+honorific.constraint	君
+honorific.constraint	ちゃん
+honorific.constraint	たん
+
+honorific.constraint-familiar	くん
+honorific.constraint-familiar	君
+honorific.constraint-familiar	ちゃん
+honorific.constraint-familiar	たん
 
 honorific.honoured-person	様
 honorific.honoured-person	さま
@@ -306,6 +381,18 @@ noun.ongoing-ninaru	注目
 noun.ongoing-ninaru	議論
 noun.ongoing-ninaru	流行
 
+noun.quoted	奴
+noun.quoted	やつ
+noun.quoted	こと
+noun.quoted	事
+noun.quoted	もの
+noun.quoted	物
+noun.quoted	感じ
+noun.quoted	話
+noun.quoted	言葉
+noun.quoted	のは
+noun.quoted	のが
+
 noun.result-sareru	舗装
 noun.result-sareru	設置
 noun.result-sareru	固定
@@ -386,6 +473,11 @@ noun.time-end	少し前
 noun.time-end	当初
 noun.time-end	瞬間
 noun.time-end	今
+
+particle.case-before-stem	を
+particle.case-before-stem	に
+particle.case-before-stem	へ
+particle.case-before-stem	で
 
 particle.contrast	が
 particle.contrast	けど
@@ -485,10 +577,49 @@ suffix.compound-action	立て
 suffix.compound-action	かかえ
 suffix.compound-action	抱え
 
+suffix.continuative	ます
+suffix.continuative	まし
+suffix.continuative	ませ
+suffix.continuative	過ぎ
+suffix.continuative	すぎ
+suffix.continuative	始め
+suffix.continuative	はじめ
+suffix.continuative	続け
+suffix.continuative	つづけ
+suffix.continuative	がち
+suffix.continuative	気味
+suffix.continuative	つつ
+suffix.continuative	そうだ
+suffix.continuative	そうな
+suffix.continuative	そうです
+
 suffix.plural-pronoun	たち
 suffix.plural-pronoun	達
 suffix.plural-pronoun	ら
 suffix.plural-pronoun	ども
+
+suru.tail	ない
+suru.tail	なく
+suru.tail	なかっ
+suru.tail	なけ
+suru.tail	なきゃ
+suru.tail	なくちゃ
+suru.tail	なさ
+suru.tail	ねえ
+suru.tail	ねー
+suru.tail	ます
+suru.tail	ませ
+suru.tail	まし
+suru.tail	て
+suru.tail	ちゃ
+suru.tail	ちま
+suru.tail	たら
+suru.tail	たり
+suru.tail	たい
+suru.tail	たく
+suru.tail	よう
+suru.tail	つつ
+suru.tail	ながら
 
 verb.naming	呼ぶ
 verb.naming	書く
@@ -937,6 +1068,11 @@ word.do-times	目
 word.do-times	も
 word.do-times	ほど
 word.do-times	程
+
+word.greeting-o	お帰り
+word.greeting-o	おかえり
+word.greeting-o	お休み
+word.greeting-o	おやすみ
 
 word.kara-source-keep	なる
 word.kara-source-keep	成る
