@@ -54,3 +54,5 @@ compose:verbal-noun-passive	ちょっと温存され過ぎたけど	조금 온�
 sense:通らない	ビルドが通らない。	빌드가 통과하지 않는다.	fix	senses
 sense:通らない	声が通らない。	목소리가 통하지 않는다.	keep	senses
 lexical:it-loanword	本番環境にデプロイした。	운영 환경에 디플로이했다.	fix	defaults
+lexical:it-loanword	イシューを閉じた。	이슈를 닫았다.	fix	defaults
+lexical:it-loanword	イシューをクローズした。	이슈를 클로즈했다.	fix	defaults
