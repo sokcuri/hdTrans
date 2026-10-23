@@ -299,10 +299,33 @@ bool Item::IsRuleRightBoundary() const {
     if (n == nullptr) return true;
     // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
     // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
+    // So does a predicate with its ending before an ellipsis (うるさい…テメェ 시끄럽다…).
     if (tsu != nullptr && n->group->surface == "、") return true;
-    if (tsu != nullptr && w != nullptr && n->tokenIndex > tsu->tokenIndex + 1) {
+    // A noun that needs a modifier (こと, もの, わけ) still takes the predicate across the
+    // pause (行く……ことにした 가는……것으로).
+    static constexpr std::string_view kBoundNouns[] = {"こと", "事", "もの", "物", "の", "ん", "ところ", "所", "とこ", "わけ",
+                                                       "訳", "はず", "筈", "つもり", "よう", "ため", "為", "まま", "ほう", "方",
+                                                       "みたい", "らしい", "そう"};
+    // Nor does a common noun, which the predicate may still modify (暖かい…居場所); a pronoun,
+    // an interjection or another clause after the pause starts anew (うるさい…テメェ).
+    const int ns = n->selected >= 0 ? n->selected : 0;
+    bool bound = At(n->Code(ns), 0) == '1' && At(n->Code(ns), 1) != '2';
+    for (const std::string_view b : kBoundNouns) bound = bound || n->group->surface.starts_with(b);
+    // A conjunctive ending (分からないが, 行って) is no end either.
+    bool terminal = false;
+    if (detail != nullptr && detail->Yougo()) {
+        const std::string_view ending = DirectSurface();
+        terminal = ending.empty();
+        for (const std::string_view e : {"い", "る", "う", "く", "す", "つ", "ぬ", "ぶ", "む", "ぐ", "た", "だ"}) {
+            terminal = terminal || ending.ends_with(e);
+        }
+    }
+    const char32_t punct = text::DecodeRune(n->group->surface).cp;
+    const bool mark = std::u32string_view(U"?？!！。、」』").find(punct) != std::u32string_view::npos;
+    const Item* closed = tsu != nullptr ? tsu : (terminal && !bound && !mark ? this : nullptr);
+    if (closed != nullptr && w != nullptr && n->tokenIndex > closed->tokenIndex + 1) {
         bool ellipsis = true;
-        for (int k = tsu->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
+        for (int k = closed->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
             const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
             ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
         }

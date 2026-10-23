@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+word:ellipsis-end	うるさい…テメェッ！	시끄럽다…네놈!	fix	local-ending
+word:ellipsis-end	怖い…なんか嫌な予感	무섭다…무슨 불길한 예감	fix	local-ending
+word:ellipsis-end	明日行く……ことにした。	내일 가는……것으로 했다.	keep	local-ending
+word:ellipsis-end	明るくて暖かい…居場所…。	밝고 따뜻한…있을 곳….	keep	local-ending
+word:ellipsis-end	Admiral、起きてる……？	Admiral, 일어나고 있어……?	keep	local-ending

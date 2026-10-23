@@ -6094,7 +6094,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テニス・ラケット	테니스 라켓	N110			GN						テニス・ラケット	w:6087
 テネシン	테네신	N110			GN						テネシン	w:6088
 テハンミングク	대한민국	N110			GN						テハンミングク	w:6089
-テメェ	네놈	N110			GN				llm			w:6090
+テメェ	네놈	N120	VHn		GN				llm			w:6090
 テメー	네놈	N110			GN				xxx llm			w:6091
 テメー	네놈	N120	VHn		GN				llm		テメー	w:6092
 テメー	나	N120	VHn		GN				llm		テメー	w:6093
