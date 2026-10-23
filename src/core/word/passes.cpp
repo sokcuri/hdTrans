@@ -65,6 +65,9 @@ bool PhraseFollowsNi(Item* ni) {
     return true;
 }
 
+// Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
+constexpr std::string_view kTeAuxiliaryStems[] = {"い", "み", "き", "しま"};
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -172,6 +175,13 @@ Phrase FindPhrase(Flusher& f) {
                 break;
             }
             case 3: {
+                // After a verb in its て form a kana auxiliary stays a verb (増えていき: いく, not 息).
+                if (const Item* prev = it->prev;
+                    prev != nullptr && prev->detail->Yougo() && At(prev->Code(0), 0) == '4' &&
+                    (prev->DirectSurface().ends_with(kJaTe) || prev->DirectSurface().ends_with(kJaDe)) &&
+                    InSet(kTeAuxiliaryStems, it->group->surface)) {
+                    break;
+                }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
                 Record* record = it->group->records;
                 it->group->records = nullptr;
