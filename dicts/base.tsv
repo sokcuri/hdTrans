@@ -18281,6 +18281,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 こんなにも	이렇게도	E311			GN				jisjk:414		
 こんなの	이런 건	C0H0			GN				jisjk:264373		
 こんなはず	이런 의도%D4@	G8U0			GN				jisjk:344794		
+こんなはず	이럴 리	C110			GN				colloq:hazu-1		
 こんなふうになっちゃ	이렇게 되어 버&AA@	M420			GN				jisjk:119684		
 こんなん	곤란	N110		Dd	GN				jisjk:183324		-1
 こんな感じで	이런 식으로	E300			GN				jisjk:264660		
@@ -30057,7 +30058,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そんなのな	그런 것이 $FA@	H7N0			GN				jisjk:136868		
 そんなのは	그런 것은	E300			GN				jisjk:262243		
 そんなはずが	그럴 리가	P200			GN				jisjk:344791		
-そんなはずが	그럴 리가	N110			GN				jisjk:344792		
+そんなはずが	그럴 리가	C110			GN				jisjk:344792		
+そんなはず	그럴 리	C110			GN				colloq:hazu-2		
 そんなふうに	그런 식으로	E300			GN				jisjk:149275		
 そんなような	그러한	N110			GN				jisjk:160067		
 そんなら	그렇다면	E331			GN				jisjk:658		
