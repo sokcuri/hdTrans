@@ -42,3 +42,7 @@ dict:jisjk:357444	3つの時代	!rule:dict:jisjk:357444	keep	local
 dict:jisjk:357444	3つの時計	!rule:dict:jisjk:357444	keep	local
 dict:jisjk:357444	三つの頃	rule:dict:jisjk:357444=살	fix	local
 dict:jisjk:357444	三つの箱	세 개의 상자	keep	local
+dict:jisjk:357444	3つの頃	3살 무렵	fix	local
+dict:jisjk:357444	八つの頃	여덟 살 무렵	fix	local
+dict:jisjk:357444	六つの箱	여섯 개의 상자	keep	local
+dict:jisjk:357444	3つのころ	3살 무렵	fix	local

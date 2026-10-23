@@ -13,3 +13,5 @@ dict:w:26813	君とであった日	너와 만난 날	fix	local
 dict:w:26813	わざとであろうか？	일부러일까?	keep	local
 dict:w:26813	大切なことであった。	중요한 것이었다.	keep	local
 dict:w:26812	友達とであった場所	친구와 만난 장소	fix	lookup
+dict:w:26812	運命とであった	운명과 만났다	keep	lookup
+dict:w:26812	先生とであった	선생님과 만났다	keep	lookup

@@ -12358,8 +12358,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 全財力	모든 재력	N110	VMo		GN				llm			w:12347
 全身全霊	혼신	I110			GN				xxx llm	1		w:12348
 全順序	전순서	N110			GN						ぜんじゅんじょ	w:12349
-八つ	여덟	N110			GN				xxx		やっつ	w:12350
-八つ	오후 두 시경	N110	UMe	Tm	GN				llm		やっつ	w:12351
 八の字	팔자	N110			GN						はちのじ	w:12352
 八元数	팔원수	N110			GN						はちげんすう	w:12353
 八分儀座	팔분의자리	N110			GN				xxx	1	はちぶんぎざ	w:12354
@@ -12403,8 +12401,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 公邸	공관	N110			GN				xxx llm	1		w:12392
 公開中	공개 중	A9D0			GN				llm		こうかいちゅう	w:12393
 公開処刑	공개 처형	N110			GN				llm			w:12394
-六つ	여섯	N110			GN				xxx		むっつ	w:12395
-六つ	여섯 시	N110	UMe	Tm	GN				llm		むっつ	w:12396
 六処	육처	N110			GN						ろくしょ	w:12397
 六分儀座	육분의자리	N110			GN				xxx	1	ろくぶんぎざ	w:12398
 六十四分音符	육십사분음표	N110	QMU		GN				llm		ろくじゅうしぶおんぷ	w:12399
@@ -26826,6 +26822,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 炎上	불타&E6@	M419			GN							w:26809
 炎上プロジェクト	불붙은 프로젝트	N110			GN							w:26810
 本番環境	운영 환경	N110			GN							w:26811
-とであ	와 만&A5@	M420		TuPj	GN							w:26812
+とであ	(와)과 만&A5@	M420		TuPj	GN							w:26812
 であ	만&A5@	M420		Pj	GN	6912	||1 &&2 S-1== "Rと" ||2 D-1== "R와" D-1== "R과"	와, 과로 끝나는 말 뒤의 であ는 出会う로 만나다를 고른다.				w:26813
 であ	에서 &HN@	M420		TuPj	GN			장소 뒤에서 명사를 꾸미는 であった는 그곳에서 있었던 일이다.				w:26814

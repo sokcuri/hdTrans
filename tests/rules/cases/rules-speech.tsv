@@ -19,3 +19,7 @@ compose:polite-agreement	「そうなんです……知らなかったでしょ�
 compose:polite-agreement	「そうなんです。高いでしょ？」	「그렇습니다. 높죠?」	fix	compose
 compose:polite-agreement	「知らなかったでしょ？」	「몰랐잖아?」	keep	compose
 compose:polite-agreement	「こら、起きなさい、遅刻したら内申に響くでしょ！」	「이봐, 일어나, 지각하면 내신에 울리겠지!」	keep	compose
+ending:だったっす	「学生だったっすね」	「학생이었네요」	fix	builtin-ending
+ending:だったっす	「学生だったっすか？」	「학생이었나요?」	fix	builtin-ending
+ending:だったっす	「静かだったっすよ」	「조용했어요」	fix	builtin-ending
+ending:だったっす	「暇だったっすよ」	「한가했어요」	fix	builtin-ending
