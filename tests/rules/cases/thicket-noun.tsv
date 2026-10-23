@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:259424	藪に入った。	덤불에 들어왔다.	fix	defaults
+dict:jisjk:259424	藪さんが来た。	야부 씨가 왔다.	keep	defaults
