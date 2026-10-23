@@ -111,7 +111,12 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
          "番\t번\tN110\t\tCt\tGN\t0\t6\n"
          "十八番\t십팔번\tN110\t\t\tGN\t0\t7\n"
          "十八番\t장기\tN110\t\t\tGN\t0\t8\n"
-         "艦\t함\tN110\t\t\tGN\t0\t9\n"},
+         "艦\t함\tN110\t\t\tGN\t0\t9\n"
+         "分\t분\tN110\t\tCt\tGN\t0\t10\n"
+         "十二分\t십이분\tN110\t\t\tGN\t0\t11\n"
+         "十二分\t충분%A1@\tG8U0\t\t\tGN\t0\t12\n"
+         "で\t에\tP211\t\t\tGN\t0\t13\n"
+         "に\t에\tP211\t\t\tGN\t0\t14\n"},
     };
     // A number that goes on after 万 is one number, written in groups of four digits.
     CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "一万二千三百日", "1만2천3백일", "1만 2300일");
@@ -125,7 +130,11 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
     for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"四十九日", "사십구일재"},
                                           std::pair<std::string, std::string_view>{"二十日", "스무날"},
                                           std::pair<std::string, std::string_view>{"十八番", "십팔번"},
-                                          std::pair<std::string, std::string_view>{"十八番艦", "18번함"}}) {
+                                          std::pair<std::string, std::string_view>{"十八番艦", "18번함"},
+                                          // An adjectival noun beside the spelled word keeps the
+                                          // word before に, and reads the count before other words.
+                                          std::pair<std::string, std::string_view>{"十二分に", "십이분에"},
+                                          std::pair<std::string, std::string_view>{"十二分で", "12분에"}}) {
         hdTrans::internal::TranslationOptions options;
         hdTrans::internal::Memory memory;
         const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);

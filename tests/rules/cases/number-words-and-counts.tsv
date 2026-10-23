@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+lookup:number-words	十二分で着く。	12분에 도착한다.	fix	lookup
+lookup:number-words	あと十二分だ。	앞으로 12분이다.	fix	lookup
+lookup:number-words	十二分待った。	12분 기다렸다.	keep	lookup
+lookup:number-words	十二分に美味だ。	충분히 맛좋다.	keep	lookup
+lookup:number-words	十二分な準備をした。	충분한 준비를 했다.	keep	lookup

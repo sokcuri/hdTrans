@@ -723,7 +723,13 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
                          [&](std::string_view w) { return target.starts_with(w); })) {
             const bool name = r->partCode.starts_with("N13") || r->semantic.starts_with("QPN") ||
                               r->semantic.starts_with("QCT") || (r->user != nullptr && r->user->nameLayer);
-            if (!name && !target.empty()) {
+            // An adjectival noun (十二分 충분하다) is that word before its endings に and な,
+            // or where no next word is seen; before any other word it is the count (十二分で
+            // 着く 12분에, あと十二分だ).
+            const std::string_view next = r->source.size() < text.size() ? text.substr(r->source.size()) : "";
+            const bool adjectival = r->partCode.starts_with("G8") && !next.empty() && !next.starts_with("に") &&
+                                    !next.starts_with("な");
+            if (!name && !target.empty() && !adjectival) {
                 own = true;
                 length = std::max(length, r->source.size());
             }
