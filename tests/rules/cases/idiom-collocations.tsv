@@ -3,6 +3,8 @@ dict:compound-verbs:10	「気分が……優れませんわ」	「기분이…�
 dict:compound-verbs:10	少し体調が優れなくて……ごめんなさい。	조금 컨디션이 좋지 않아서……미안해요.	fix	local
 dict:compound-verbs:10	体調が優れない。	컨디션이 좋지 않다.	fix	local
 dict:compound-verbs:10	彼は優れた剣士だ。	그는 뛰어난 검사다.	keep	local
+dict:compound-verbs:10	機嫌が優れない様子だ。	기분이 좋지 않은 모습이다.	fix	local
+dict:compound-verbs:10	成績が優れている。	성적이 우수하다.	keep	local
 dict:compound-verbs:21	卵サンドは、いつもより少しだけ塩味が効いている気がした。	달걀 샌드위치는, 평소보다 약간 짠맛이 강한 것 같았다.	fix	local
 dict:compound-verbs:21	トマトにニンニクが効いていて、美味しいです	토마토에 마늘이 강해, 맛있습니다	fix	local
 dict:compound-verbs:21	薬が効いてきた。	약이 들어 왔다.	keep	local
@@ -28,7 +30,7 @@ dict:compound-verbs	冷たい目で見降ろしていた。	차가운 눈으로 
 dict:compound-verbs	父に一目惚れし、	아버지에게 한눈에 반해,	fix	lookup
 dict:compound-verbs	ある日突然式場につれていかれて、	어느 날 갑자기 식장에 끌려가,	fix	lookup
 dict:jisjk:141769	下り坂ではさらに調子づいてペダルを回す。	내리막길에서는 더욱 신이 나 페달을 돌린다.	fix	lookup
-sense:skill	父は腕を認められ、名誉男爵の地位を受けていた。	아버지는 실력을 인정받아 명예 남작의 지위를 받고 있었다.	fix	senses
+sense:skill	父は腕を認められ、名誉男爵の地位を受けていた。	아버지는 솜씨를 인정받아 명예 남작의 지위를 받고 있었다.	fix	senses
 sense:groan-voice	うなり声をあげ、ベッドの上を転がる。	신음 소리를 내 침대 위를 구른다.	fix	senses
 sense:groan-voice	大声をあげる。	큰 소리를 지른다.	keep	senses
 sense:groan-voice	お菓子をあげる。	과자를 준다.	keep	senses

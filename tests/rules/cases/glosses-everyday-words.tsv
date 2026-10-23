@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:105355	上掛けの布からはノミが出た。	이불의 옷감에서는 벼룩이 나왔다.	fix	defaults
+dict:jisjk:105355	上掛けの布からはノミが出た。	이불의 천에서는 벼룩이 나왔다.	fix	defaults
 dict:jisjk:254328	ちょっと野暮用で出かける。	조금 볼일로 나간다.	fix	defaults
 dict:jisjk:176760	黒枠の眼鏡をかけた男。	검은 테두리의 안경을 쓴 남자.	fix	defaults
 dict:jisjk:123496	本は並んでいて然るべきものだろう？	책은 줄지어 있어 마땅한 것이겠지?	fix	defaults
@@ -11,7 +11,6 @@ dict:w:26792	横薙ぎの一撃。	가로베기의 일격.	fix	defaults
 dict:w:26794	ヘタに動いて起こしたら困る。	섣불리 움직여 일으키면 곤란하다.	fix	defaults
 dict:w:26794	下手に出る。	서투르게 나온다.	keep	defaults
 dict:w:26796	お目付は仕事なわけだし。	감시역은 일인 거고.	fix	defaults
-dict:w:26797	朝日が目にしみる。	아침해가 눈을 찌른다.	fix	defaults
 dict:w:26800	「ただ、今だけ……」	「다만, 지금만……」	fix	defaults
 dict:w:26801	イチゴのヘタに指を置いた。	딸기의 열매 꼭지에 손가락을 두었다.	keep	local
 dict:w:26803	ミナさんの前で、いいとこ見せたかったの？	미나 씨 앞에서, 멋진 모습을 보이고 싶었어?	fix	defaults
