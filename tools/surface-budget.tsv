@@ -9,7 +9,7 @@ src/core/filter/ehnd.cpp	0	0	0	0	0	0	3	0	0
 src/core/filter/filter.cpp	0	4	0	0	0	6	2	0	2
 src/core/names/chars.h	0	0	0	0	0	0	17	0	0
 src/core/names/cues.cpp	85	0	20	2	66	13	5	0	49
-src/core/names/document.cpp	5	0	2	0	0	0	0	0	6
+src/core/names/document.cpp	3	0	2	0	0	0	0	0	4
 src/core/names/historical.cpp	1115	0	0	11	1525	420	4	0	8
 src/core/names/readings.cpp	211	1	0	1	212	0	0	0	0
 src/core/names/registry.cpp	36	0	21	4	23	3	0	0	31

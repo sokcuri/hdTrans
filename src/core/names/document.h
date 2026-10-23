@@ -108,8 +108,8 @@ namespace internal {
 std::vector<std::string> PersonPlaces(const dict::Snapshot& snap, std::string_view text, names::Registry* registry,
                                       const dict::KeySet* persons);
 
-// The lines that run on into the next line: a line that ends in て or で
-// followed by a line that is not empty.
+// The lines that run on into the next line: a line that ends in て or で, holds no sentence end
+// before it and is followed by a line with hiragana.
 std::set<std::string> VerseLines(std::span<const std::string> lines);
 
 }  // namespace internal
