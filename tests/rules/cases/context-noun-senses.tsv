@@ -8,3 +8,10 @@ sense:伸びる	黒いモヤが僕に伸びてくる。	검은 안개가 나에�
 sense:伸びる	能力が飛躍的に伸びる。	능력이 비약적으로 자란다.	keep	senses
 sense:伸びる	髪が肩まで伸びた。	머리카락이 어깨까지 자랐다.	keep	senses
 sense:足	それは地面を踏む足の感覚。	그것은 땅을 밟는 발의 감각.	fix	senses
+sense:お盆	お盆の料理を作る。	추석의 요리를 만든다.	fix	senses
+sense:お盆	お盆の上の皿を取る。	쟁반 위의 접시를 잡는다.	keep	senses
+sense:角	角に額をぶつけた。	모퉁이에 이마를 부딪쳤다.	fix	senses
+sense:角	鬼の角が生えた。	귀신이 뿔이 났다.	keep	senses
+sense:背	彼の背に影が伸びる。	그의 등에 그림자가 뻗는다.	fix	senses
+sense:角	私の知ってる鹿は、あんな輝きを放つ角はしていなかった。	내가 알고 있는 사슴은, 저런 빛을 발하는 뿔은 하고 있지 않았다.	keep	senses
+sense:お盆	とりあえず、コップとお皿、お盆。	우선, 컵과 접시, 쟁반.	keep	senses
