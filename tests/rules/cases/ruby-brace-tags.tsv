@@ -7,3 +7,5 @@ normalize:ruby	そうか……{rb}現実{/rb}{rt}ここ{/rt}に彼女はいな�
 normalize:ruby	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	normalize
 normalize:ruby	カモがネギを{rb}背負{/rb}{rt}しょ{/rt}って……？	카모가 파를 {rb}짊어져{/rb}{rt}짊어져{/rt}……?	fix	normalize
 normalize:ruby	なんとなく俺も{rb}安堵{/rb}{rt}あんど{/rt}する。	왠지 나도 {rb}안도{/rb}{rt}안도{/rt}한다.	keep	normalize
+compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt} 버렸다.	fix	compose
+compose:text-gate	皿を割ってしまった。	접시를 깨어 버렸다.	keep	compose

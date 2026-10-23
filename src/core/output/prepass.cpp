@@ -785,6 +785,7 @@ std::string EncodeNumericPair(std::string_view text) {
 
 void Composer::Start(std::vector<ResolvedItem>& items, const Settings& settings, const Families& generated) {
     items_ = &items;
+    tokens_ = nullptr;
     settings_ = settings;
     generated_ = &generated;
     state_.resize(items.size());

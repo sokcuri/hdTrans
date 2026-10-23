@@ -151,6 +151,10 @@ private:
     std::string PresentWord(std::string_view ending, std::string_view stem) const;
     void BuildAdjective(int i);
     void BuildAction(int i, int action, std::string_view mode);
+    // Whether a span token (a markup tag) stands between the tokens of a and b.
+    bool SpanBetween(const ResolvedItem& a, const ResolvedItem& b) const;
+    // Whether item i writes only its stem: the next item's text starts with the same
+    // conjugation marker and no tag stands between them.
     bool TextGate(int i, std::string_view key);
     std::pair<std::string, std::string> CopulaForm(int i, std::string_view key, std::string_view replacement,
                                                    std::string_view suffix) const;
