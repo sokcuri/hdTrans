@@ -321,10 +321,11 @@ bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
 // item n rather than counts or measures it, so that a space stays between them: a reply
 // number after ≫ or >> (≫372過疎 ≫372 과소), a time (23：40追記 23：40 추기), a number of four
 // digits before a noun in kanji, a year or a time (2026特別 2026 특별, 2300提督 2300 제독), and
-// a Latin word of two letters or more with a small letter, a name or a word, before a noun of
-// two characters or more (class空母 class 항공모함, Bismarck追撃戦 Bismarck 추격전). A counter or
-// a suffix after it joins it (1939年, Iowa級 Iowa급, Java風 Java풍), and so do a unit after a
-// number (10cm, 1000G) and a letter (Aランク A랭크).
+// a Latin word of two letters or more with a small letter, a name or a word, before a noun in
+// kanji of two characters or more (class空母 class 항공모함, Bismarck追撃戦 Bismarck 추격전). A
+// counter or a suffix after it joins it (1939年, Iowa級 Iowa급, Java風 Java풍), and so do a unit
+// after a number (10cm, 1000G), a letter (Aランク A랭크) and a word in katakana after a Latin word,
+// which may be a spoken ending (Christmasダヨ Christmas다요).
 bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
     const ResolvedItem& a = items[i];
     const ResolvedItem& b = items[n];
@@ -361,7 +362,8 @@ bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<Resolved
         rest = DropLastRune(rest);
     }
     const char32_t before = ascii(LastRune(rest));
-    return letters >= 2 && small && !(before >= U'0' && before <= U'9') && text::RuneCount(b.surface) >= 2;
+    return letters >= 2 && small && !(before >= U'0' && before <= U'9') && IsKanji(text::DecodeRune(b.surface).cp) &&
+           text::RuneCount(b.surface) >= 2;
 }
 
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
