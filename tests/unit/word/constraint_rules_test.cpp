@@ -92,7 +92,10 @@ const dict::Snapshot* Dictionary() {
          "歳\t세\tN110\t\t\tGN\t94\n"
          "歳で\t세에\tN110\t\t\tGN\t95\n"
          "ま\t\tQ110\t\t\tGN\t96\n"
-         "まで\t까지\tP200\t\t\tGN\t97\n"},
+         "まで\t까지\tP200\t\t\tGN\t97\n"
+         "余り\t나머지\tN110\t\t\tGN\t98\n"
+         "余り\t별로\tN300\t\t\tGN\t99\n"
+         "余\t남&F4@\tM418\t\t\tGN\t100\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -145,7 +148,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{30});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{32});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -385,6 +388,19 @@ HD_TEST(constraint_wake_formal_noun) {
         {"二つにわけ、", "わけ、", "わけ", "나&C4@ 이유"},
         {"パンをわけない", "わけない", "わけ", "나&C4@ 이유"},
         {"わけ合う", "わけ合う", "わけ", "나&C4@ 이유"},
+    });
+}
+
+// 余り right before a predicate is the adverb 별로, not the stem of 余る or the noun 나머지;
+// before a particle, a pause or after a noun (在庫余り) it stays.
+HD_TEST(constraint_amari_before_predicate) {
+    CheckCases({
+        {"余り伸びない", "余り伸びない", "余", ""},
+        {"余り伸びない", "余り伸びない", "余り", "별로"},
+        {"余り好きじゃない", "余り好きじゃない", "余り", "별로"},
+        {"余りの", "余りの", "余り", "나머지 별로"},
+        {"余り、", "余り、", "余", "남&F4@"},
+        {"在庫余りばかり", "余りばかり", "余り", "나머지 별로"},
     });
 }
 

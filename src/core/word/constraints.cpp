@@ -77,6 +77,10 @@ constexpr ConstraintRule kRules[] = {
      "줄 첫머리의 と言うことで、는 동사 と言う + ことで가 아니라 연결 표현 그래서 (이렇게 말하는 것으로, → 그래서,)", {}},
     {"de-before-aru", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeAru, ConstraintReject::Word,
      "ある의 활용 앞에서 で로 끝나는 단어는 쓰지 않고 で를 계사 である에 남김 (十四歳であり 14세에 있어 → 14세이며)", {}},
+    {"amari-before-predicate", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::Verbs,
+     "술어가 바로 이어지는 余り는 余る의 연용형이 아니라 부사 (余り伸びなかった 남아 자라지 → 별로 자라지). 余りの, 余りに는 그대로", {}},
+    {"amari-adverb", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::OtherTargets,
+     "술어가 바로 이어지는 余り는 나머지가 아니라 별로 (余り好きじゃない 나머지를 → 별로)", "별로"},
     {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
@@ -280,6 +284,13 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::NotBeforeNoun: {
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;
+    }
+    case ConstraintContext::BeforeStem: {
+        const int next = NameClassOf(FirstChar(after));
+        const int last = NameClassOf(before);
+        if (last == kClassKanji || last == kClassKatakana) return false;
+        return next == kClassKanji || (next == kClassHiragana && !StartsWithAny(after, kNounFollowers) &&
+                                       !StartsWithAny(after, kStemFollowers) && !StartsWithAny(after, kObjectParticles));
     }
     case ConstraintContext::BeforeSuruForm:
         // した, but not たくさん: the past ends there or a particle or mark follows it.

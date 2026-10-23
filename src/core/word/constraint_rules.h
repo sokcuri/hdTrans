@@ -35,6 +35,9 @@ enum class ConstraintContext : uint8_t {
                         // token before (だったわ, ですわ, 知らねーわ)
     NotAfterQuantity,   // no numeral among the three characters before the word (化け物め, not 三回め or 5人め)
     NotBeforeNoun,      // no kanji or katakana right after the word (そう言った。, そう言ったが)
+    BeforeStem,         // a kanji or a hiragana that starts no particle or copula right after the word,
+                        // and no kanji or katakana word right before it (余り好き, 余り伸びない; not
+                        // 余りの, 余りに, 余り、, 在庫余り)
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
     Detached,           // nothing, a space or punctuation right before the word (名前: め)
     BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)

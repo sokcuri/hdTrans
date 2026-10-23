@@ -10,7 +10,7 @@ dict:jisjk:116141	竜の背から降りる。	용의 등에서 내린다.	fix	de
 dict:jisjk:116141	背が高い。	키가 크다.	keep	local
 dict:jisjk:116141	背は小さいが迫力がある。	키는 작지만 박력이 있다.	fix	local
 sense:背	背はやや低めで、目線が低い。	키는 약간 낮은으로, 시선이 낮다.	fix	senses
-sense:背	私に似たから、背が余り伸びなかったのね。	나를 닮았으니까, 키가 남아 자라지 않았구나.	fix	senses
+sense:背	私に似たから、背が余り伸びなかったのね。	나를 닮았으니까, 키가 별로 자라지 않았구나.	fix	senses
 sense:背	背を伸ばして座る。	등을 펴 앉는다.	keep	senses
 sense:角	子犬たちの額から角が伸び始めていた。	강아지들의 이마에서 뿔이 자라기 시작하고 있었다.	fix	senses
 sense:角	角を曲がる。	모퉁이를 돈다.	keep	senses
