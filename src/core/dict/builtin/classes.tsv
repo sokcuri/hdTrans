@@ -80,6 +80,7 @@
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
 //= particle.phrase	Particles that, after the first character of an item, make a phrase that starts with a noun.
+//= particle.title-phrase	Case particles that, between two kanji or katakana of a name-layer key, make the key a phrase that reads as a title only standing apart (星に願いを, 世界を救う).
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
@@ -1356,6 +1357,11 @@ particle.phrase	と
 particle.phrase	も
 particle.phrase	へ
 particle.phrase	の
+
+particle.title-phrase	を
+particle.title-phrase	に
+particle.title-phrase	へ
+particle.title-phrase	は
 
 particle.wonder	を
 particle.wonder	が

@@ -27,6 +27,21 @@ constexpr std::string_view kNameParticles = "はがをのにへともやで";
 bool IsKanaInflection(std::string_view c) { return !c.empty() && Has("いうえけるれろ", c); }
 bool IsNameParticle(std::string_view c) { return !c.empty() && Has(kNameParticles, c); }
 
+// Whether a name-layer key is a phrase: a particle of particle.title-phrase between two
+// kanji or katakana (星に願いを, 世界を救う).
+bool PhraseKey(std::string_view key) {
+    // Kanji or katakana: a name class other than hiragana and the rest.
+    auto content = [](int cls) { return cls != kClassOther && cls != kClassHiragana; };
+    int prev = kClassOther;
+    for (std::string_view rest = key; !rest.empty();) {
+        const std::string_view c = FirstChar(rest);
+        rest.remove_prefix(c.size());
+        if (content(prev) && dict::InClass("particle.title-phrase", c) && content(NameClassOf(FirstChar(rest)))) return true;
+        prev = NameClassOf(c);
+    }
+    return false;
+}
+
 // s without the leading characters of set.
 std::string_view TrimLeftChars(std::string_view s, std::string_view set) {
     while (!s.empty()) {
@@ -215,7 +230,8 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
 }
 
 bool Worker::Skip(const dict::UserEntry& u, std::string_view query) const {
-    return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
+    return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) ||
+           (u.nameLayer && PhraseKey(u.key) && !StandsApart(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
            (settings.text && BoundImperative(u, query));
 }
 
@@ -410,6 +426,29 @@ bool Worker::KanaBounded(std::string_view key, std::string_view query) const {
         }
     }
     return true;
+}
+
+// Whether the key matched at query has no kana, kanji or Hangul right before or after it, in its
+// token or the tokens next to it: a phrase reads as a title only standing apart from the
+// sentence around it (星に願いを込めた is no title).
+bool Worker::StandsApart(std::string_view key, std::string_view query) const {
+    const std::string_view surface = transformSurface;
+    std::string_view before;
+    if (surface.ends_with(query) && surface.size() > query.size()) {
+        before = LastChar(surface.substr(0, surface.size() - query.size()));
+    } else if (current > 0) {
+        // The space written after a span read in Hangul stands for no space of the text.
+        int b = current - 1;
+        if (b > 0 && Tok(b).type == tokenizer::kTypeAsciiSpace && Tok(b - 1).type == tokenizer::kTypeProtected) b--;
+        before = LastChar(Tok(b).text);
+    }
+    std::string_view after = FirstChar(query.substr(std::min(key.size(), query.size())));
+    if (after.empty() && current + 1 < TokenCount()) after = FirstChar(Tok(current + 1).text);
+    // A span already read in Hangul (ぼんやりと 멍하니) is a word of the sentence too.
+    auto apart = [](std::string_view c) {
+        return NameClassOf(c) == kClassOther && !HangulSyllable(text::DecodeRune(c).cp);
+    };
+    return apart(before) && apart(after);
 }
 
 // Whether the kana spelling u reads as a word where query starts.

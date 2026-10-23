@@ -1,0 +1,6 @@
+# 규칙: LEX-4
+rule	input	expected	kind	layer
+names:phrase-title	星に願いを込めた。	별에 소원을 담았다.	fix	lookup
+names:phrase-title	消えゆく星に願いを	사라져 가는 별에 소원을	fix	lookup
+names:phrase-title	世界を救う聖女	세계를 구하는 성녀	fix	lookup
+names:phrase-title	ポケットの中に入っている。	주머니 속에 들어가 있다.	keep	lookup

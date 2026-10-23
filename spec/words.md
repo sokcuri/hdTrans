@@ -58,9 +58,14 @@
 | 高原さんが来た。 | 타카하라 씨가 왔다. | 유지 |
 | ジョン・スミスが来た。 | 존 스미스가 왔다. | 유지 |
 | 「さすが、お姫様を守るナイトだね」 | 「역시, 공주님을 지키는 나이트구나」 | 유지 |
+| 星に願いを込めた。 | 별에 소원을 담았다. | 고침 |
+| ポケットの中に入っている。 | 주머니 속에 들어가 있다. | 유지 |
+
+조사(を, に, へ, は)로 이은 구 모양의 이름(작품 이름)은 앞뒤가 문장과 떨어져 있을 때만 이름으로 읽는다.
 
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
-`tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`
+`tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
+`tests/rules/cases/names-phrase-titles.tsv`
 
 ## LEX-5 가타카나로 쓴 일반 낱말은 그 낱말로 읽는다
 
