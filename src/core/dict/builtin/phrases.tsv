@@ -3,6 +3,8 @@
 // row whose key starts with kana is an utterance read like a sound (both
 // kana scripts, elongation, never before kana); the other rows are plain
 // entries. A phrase that ends in a particle keeps it (こんなのが 이런 게).
+// An intj row with exclaim in the fourth column is an exclamation, no sound
+// before a question mark (よかった 다행이다, but よかった？ 좋았어?).
 
 // Greetings and everyday set phrases.
 ただいま帰りました	다녀왔습니다	intj
@@ -191,7 +193,7 @@
 えーとえーと	음, 그러니까	intj
 ここからこっから	여기서부터	intj
 よかったよかった	다행이다 다행이다	intj
-よかった	다행이다	intj
+よかった	다행이다	intj	exclaim
 でしょでしょ	그렇지 그렇지	intj
 そでしょ	그렇지	intj
 でしょうね	그렇겠지요	intj
@@ -890,7 +892,7 @@
 できた	다 됐다	intj
 できたって	다 됐대	intj
 出来たって	다 됐대	phrase
-やった	해냈다	intj
+やった	해냈다	intj	exclaim
 やるな	제법인데	intj
 やるわね	제법이네	intj
 やってやるぜ	해 주마	intj

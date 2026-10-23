@@ -31,7 +31,9 @@
 //   - katakana that only draw out the vowel of the hiragana before them are no sound of
 //     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
-//     (はわわユウキ); an ono row may be followed by anything, and と or the て of って
+//     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
+//     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
+//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?); an ono row may be followed by anything, and と or the て of って
 //     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
 //     (スタスタとベッド 척척 ベッド, but ドキドキとワクワク). A space separates a sound from a
 //     following kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but
@@ -200,6 +202,9 @@ struct SoundRow {
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause
     bool open = false;    // a lead row that needs no pause after it (ってか 그보다)
+    // An exclamation (fourth column exclaim): a statement that is no sound before a
+    // question mark, where the words ask for an evaluation (よかった？ 좋았어?).
+    bool exclaim = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

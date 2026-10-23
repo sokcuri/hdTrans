@@ -742,3 +742,27 @@ HD_TEST(pipeline_sound_name_and_noun) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
+
+// An exclaim row (よかった 다행이다) as written is no sound before a question mark, after
+// an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
+HD_TEST(pipeline_sound_exclaim_before_question) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'ヨ')) flagged = flagged || (r.key == U"ヨカッタ" && r.exclaim);
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"よかった。", "다행이다。"},
+        {"映画、よかった……", "映画、다행이다……"},
+        {"映画、よかった？", "映画、よかった？"},
+        {"よかった?", "よかった?"},
+        {"よかった……？", "よかった……？"},
+        {"よかったぁ?", "다행이다~?"},
+        {"ヨカッタ？", "다행이다？"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}

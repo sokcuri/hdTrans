@@ -547,6 +547,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             for (size_t k = p + 1; k < end; k++) vowels += PlainVowel(f_[k]) != 0 && Lengthens(f_[k], f_[k - 1]);
             if (vowels >= 3) units += 'd';
         }
+        // An exclamation said as written before a question mark asks for the words
+        // (よかった？ 좋았어?); drawn out it stays the exclamation (よかったぁ? 다행이다~?),
+        // and so does one in katakana, which no word of the dictionary reads (ヨカッタ？).
+        if (ok && s.exclaim && end == p + s.key.size() && IsHiraganaRune(rs_[p])) {
+            size_t q = end;
+            while (q < rs_.size() && In(rs_[q], U"…‥")) q++;
+            if (q < rs_.size() && In(rs_[q], U"？?")) ok = false;
+        }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
