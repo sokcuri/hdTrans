@@ -476,6 +476,14 @@ void RespectfulPassive(Flusher& f) {
         if (!it->detail->Yougo() || it->group->entries.empty() || it->selected < 0 || it->lexical) continue;
         const std::string_view surface = it->group->surface;
         const int record = it->detail->record;
+        if (record == 1 && surface.ends_with("にな")) {
+            // なられ has no passive: お休みになられる is お休みになる said with more respect.
+            it->detail->record = 0;
+            if (it->EntryText(it->selected).ends_with("&AE@")) continue;
+            const std::string target = HonorificTarget(f, it->EntryText(it->selected));
+            if (!target.empty()) it->AssignEntrySurface(it->selected, target);
+            continue;
+        }
         if (record == 1 || record == 4) {
             // A verb whose (ら)れ is the passive by itself or a potential before a negative or a
             // condition keeps its reading.
