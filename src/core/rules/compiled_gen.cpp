@@ -2404,12 +2404,14 @@ bool RuleL255([[maybe_unused]] Item* p) {
 //     src[-1] == "の" and sem[-2] has VHn and ko[-1] := "의 것"
 //     pos[-1] is 4** and end.pos[-1] is 50*|56*
 //     pos[-1] is 8** and end.src[-1] == "" and end.ko[-1] := "4 것"
+//     pos[-1] is 8** and end.src[-1] ends "である" and end.ko[-1] := "4 것"
 bool RuleL256([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "7**"sv) && (GobiSrcEq(p, -1, "い"sv) ||
            GobiSrcEq(p, -1, "かった"sv))) ||
            (SrcEq(p, -1, "の"sv) && AttrEq(p, -2, "VHn"sv) && DstSet(p, -1, "의 것"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "50*56*"sv)) ||
-           (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, ""sv) && GobiDstSet(p, -1, "4 것"sv));
+           (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, ""sv) && GobiDstSet(p, -1, "4 것"sv)) ||
+           (PumsaEq(p, -1, "8**"sv) && GobiSrcEq(p, -1, "Rである"sv) && GobiDstSet(p, -1, "4 것"sv));
 }
 
 // local 257
@@ -4692,7 +4694,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL253, 0xa0e0e926f82c50eaull},
     {RuleL254, 0x0799b70d2ad5cf2eull},
     {RuleL255, 0x571cfb62bc2085d3ull},
-    {RuleL256, 0xac38925255733f7dull},
+    {RuleL256, 0x3b32c103be971068ull},
     {RuleL257, 0xa6d28c4fc489998eull},
     {RuleL258, 0x68455e31f2f0a3e9ull},
     {RuleL259, 0x240bd166fb77e18aull},
