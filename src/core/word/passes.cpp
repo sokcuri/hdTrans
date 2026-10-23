@@ -15,6 +15,7 @@ namespace {
 
 constexpr std::string_view kNegativeFamily = "&NF@";
 constexpr std::string_view kNegativeAdjective = "$DH@";
+constexpr std::string_view kAbsentFamily = "&M9@";  // 없다
 
 // The text of the group's surface and the ending is not a sequence containing kanji.
 bool NoKanji(std::string_view s) {
@@ -333,7 +334,11 @@ void CleanupClass3(Flusher& f) {
 void ApplyNegatives(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Entry* e = it->group->At(it->selected);
-        if (e == nullptr || e->user == nullptr || e->user->negative.empty() || it->DirectIndex() == -1) continue;
+        if (e == nullptr || it->DirectIndex() == -1) continue;
+        // A word already read as 없다 (があ, がござ before ません) takes the negative ending
+        // as a form of its own: ありませんのに 없는데요, not 없지 않는데요.
+        const bool absent = it->EntryText(it->selected).ends_with(kAbsentFamily);
+        if (!absent && (e->user == nullptr || e->user->negative.empty())) continue;
         Entry* ending = it->DirectEntry(it->DirectIndex());
         if (ending == nullptr) continue;
         char code = 0;
@@ -351,6 +356,8 @@ void ApplyNegatives(Flusher& f) {
                 }
             }
             after = std::string(rest.substr(row.size()));
+        } else if (absent) {
+            continue;
         } else if (Item* n = it->next; ending->dst == std::string("1") + std::string(kKoJi) && n != nullptr &&
                                        n->DirectIndex() != -1 && n->EntryText(n->selected) == kNegativeAdjective) {
             const std::string_view text = n->DirectText(n->DirectIndex());
@@ -380,7 +387,7 @@ void ApplyNegatives(Flusher& f) {
                    !afterView.starts_with(kKoRyeo)) {
             code = 'A';
         }
-        it->AssignEntrySurface(it->selected, e->user->negative);
+        if (!absent) it->AssignEntrySurface(it->selected, e->user->negative);
         it->AssignDirectSlot(it->DirectIndex(), std::string(1, code) + after);
     }
 }

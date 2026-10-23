@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+rewrite:absent-negative	あら、今日は何もありませんの？	어머, 오늘은 아무것도 없어요?	fix	rewrites
+rewrite:absent-negative	でも、ディアナを見捨てるわけにはいきませんわ	하지만, 디아나를 버릴 수는 없어요	fix	rewrites
+rewrite:absent-negative	「し、……仕方ありませんわね。」	「해,……어쩔 수 없어요.」	fix	rewrites
+rewrite:absent-negative	お金がありません。	돈이 없습니다.	keep	rewrites
