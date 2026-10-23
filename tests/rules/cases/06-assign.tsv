@@ -203,7 +203,7 @@ dict:jisjk:94123	薬を与えられる能力がある。	약을 줄 수 있는 �
 dict:jisjk:94123	賞を与えられた。	상이 주어졌다.	fix	local
 dict:jisjk:355840	今日は出てこられません。	오늘은 나올 수 없습니다.	fix	local
 dict:jisjk:355840	明日は出てこられる。	내일은 나올 수 있다.	fix	local
-dict:jisjk:143747	テレビに取り上げられた。	텔레비젼에서 다루어졌다.	fix	local
+dict:jisjk:143747	テレビに取り上げられた。	텔레비전에서 다루어졌다.	fix	local
 dict:jisjk:143747	議題に取り上げられた。	의제로 다루어졌다.	fix	local
 dict:jisjk:93661	学生が受けられる授業だ。	학생이 받을 수 있는 수업이다.	fix	local
 dict:jisjk:93661	罰が受けられた。	벌을 받게 되었다.	fix	local

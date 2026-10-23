@@ -743,7 +743,7 @@ G230	階段を走り上がった。	계단을 달려 올랐다.	current	global-l
 G240	みんなが同じことを言っています。	모두가 같은 것을 말합니다.	current	global-last
 G240	彼がいつも言っていることは正しい。	그가 언제나 말하는 것은 올바르다.	current	global-last
 G250	毎晩お酒飲んで寝る。	매일 밤 술 마시고 잔다.	current	global-stem
-G250	ジュース飲んで少し休もう。	쥬스 마시고 조금 쉬자.	current	global-stem
+G250	ジュース飲んで少し休もう。	주스 마시고 조금 쉬자.	current	global-stem
 G260	彼は舞台の中央に立った。	그는 무대의 중앙에 섰다.	current	global-stem
 G260	転びそうな友達の肩を支えた。	구를 것 같은 친구의 어깨를 결렸다.	current	global-stem
 G270	隣の部屋の音がよく聞こえる。	옆의 방의 소리가 잘 들린다.	current	global-stem
