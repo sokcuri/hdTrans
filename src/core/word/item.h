@@ -252,6 +252,8 @@ public:
     bool MitaiLike() const;
     bool StandsAlone() const;
     std::string_view PlainEnding() const;
+    std::string_view BareStemEnding(std::string_view after) const;
+    int ContextBefore() const;
     // The two width units before the word, looking past tokens of … and ‥; "" when
     // there are fewer.
     std::string CharBefore() const;

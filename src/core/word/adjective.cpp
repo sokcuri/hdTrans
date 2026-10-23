@@ -223,6 +223,10 @@ bool Item::RunDakeiyoCase8Query() {
         pseudo(ending, "");
         return true;
     }
+    if (const std::string_view ending = BareStemEnding(second); !ending.empty()) {
+        pseudo(ending, "");
+        return true;
+    }
     if (second.empty()) {
         if (StandsAlone()) {
             pseudo(PlainEnding(), "");
@@ -328,6 +332,102 @@ bool Item::StandsAlone() const {
 }
 
 // The ending of a stem that stands alone: 어렵다, 어려워 before a question mark.
+namespace {
+
+bool SentenceMark(char32_t r) {
+    return r == U'。' || r == U'！' || r == U'？' || r == U'…' || r == U'‥' || r == U'．' || r == U'!' || r == U'?' ||
+           r == U'.' || r == U'♪';
+}
+
+bool Hiragana(char32_t r) { return r >= U'ぁ' && r <= U'ゖ'; }
+
+}  // namespace
+
+// What stands right before the word: 0 the start of a sentence (nothing, a mark that
+// ends a sentence, a space, an opening quote), 1 another punctuation mark (、, （), 2 a
+// word.
+int Item::ContextBefore() const {
+    char32_t r = 0;
+    if (start > 0) {
+        r = DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp;
+    } else if (tokenIndex > 0) {
+        const tokenizer::TokenView before = w->Tok(tokenIndex - 1);
+        switch (before.type) {
+        case tokenizer::kTypeNewline:
+        case tokenizer::kTypeAsciiSpace:
+        case tokenizer::kTypeWideSpace:
+        case tokenizer::kTypeSentenceEnd: return 0;
+        case tokenizer::kTypeAsciiOpen: return 1;
+        case tokenizer::kTypeBracket:
+        case tokenizer::kTypeAsciiPunct:
+        case tokenizer::kTypeJapanese:
+        case tokenizer::kTypeSymbol: r = DecodeLastRune(before.text).cp; break;
+        default: return 2;
+        }
+    } else {
+        return 0;
+    }
+    if (SentenceMark(r) || r == U' ' || r == U'\u3000' || r == U'「' || r == U'『') return 0;
+    return text::IsPunct(r) ? 1 : 2;
+}
+
+// The plain ending of an adjectival-noun stem that ends a clause with its copula left
+// out (そんなの駄目！, 「綺麗」, もう駄目…): after the stem come only lengthening kana
+// (っ, ー, small vowels) and then a mark that ends the sentence, a closing quote or the
+// end of the text, or a comma when the stem opens the sentence. A one-kanji stem needs
+// a sentence mark after it and no kanji before it (「朧」 and 李雅微 are names). Stems
+// in hiragana are left to StandsAlone (下さいまし is not まし). "" when the stem does
+// not end a clause, ends in な, みたい or そう (the そう row reads 것 같다 there), or a
+// word of its length (a noun reading) exists.
+std::string_view Item::BareStemEnding(std::string_view after) const {
+    const std::string_view surface = group->surface;
+    if (surface.empty() || surface.ends_with(kJaNa) || surface.ends_with(kJaMitai) || surface.ends_with(kJaSou)) return {};
+    std::string_view rest = after;
+    while (!rest.empty()) {
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.cp != U'っ' && r.cp != U'ッ' && r.cp != U'ー' && r.cp != U'～' && r.cp != U'〜' && r.cp != U'ぁ' &&
+            r.cp != U'ぃ' && r.cp != U'ぅ' && r.cp != U'ぇ' && r.cp != U'ぉ') {
+            break;
+        }
+        rest.remove_prefix(r.size);
+    }
+    const text::Rune first = text::DecodeRune(surface);
+    const bool oneKanji = first.size == surface.size() && text::IsKanji(first.cp);
+    if (Hiragana(first.cp)) return {};
+    const int before = ContextBefore();
+    if (oneKanji && start > 0 && text::IsKanji(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return {};
+    bool question = false;
+    if (!rest.empty()) {
+        const char32_t r = text::DecodeRune(rest).cp;
+        if (r == U'、' || r == U'，') {
+            if (before != 0) return {};
+        } else if (r != U'」' && r != U'』') {
+            return {};
+        }
+        if (oneKanji) return {};
+    } else {
+        switch (detail->nextType) {
+        case tokenizer::kTypeAsciiPunct:
+        case tokenizer::kTypeSentenceEnd:
+        case tokenizer::kTypeNewline:
+        case tokenizer::kTypeEnd: break;
+        case tokenizer::kTypeSymbol:
+            if (!detail->nextText.starts_with("…") && !detail->nextText.starts_with("‥")) return {};
+            break;
+        case tokenizer::kTypeBracket:
+            if (oneKanji || !(detail->nextText.starts_with("」") || detail->nextText.starts_with("』"))) return {};
+            break;
+        default: return {};
+        }
+        const int p = detail->ClassifyTrailingPunctuation({});
+        if (p == 1 && (before != 0 || oneKanji)) return {};
+        question = p == 3;
+    }
+    const Item* other = w->InsertLateCandidate(text, start, tokenIndex, group->records);
+    if (other != nullptr && other->length >= group->length) return {};
+    return question ? "6" : "1다";
+}
+
 std::string_view Item::PlainEnding() const { return detail->ClassifyTrailingPunctuation({}) == 3 ? "6" : "1다"; }
 
 // A word ending in みたい that reads "like" (같다): みたい after a word, possibly across

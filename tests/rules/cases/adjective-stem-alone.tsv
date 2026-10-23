@@ -13,3 +13,13 @@ adjective:stem-alone	ではな。	그럼.	keep	conjugation
 adjective:stem-alone	がっかりした。	실망했다.	keep	conjugation
 adjective:stem-alone	彼は厳しい人だ。	그는 엄한 사람이다.	keep	conjugation
 adjective:stem-alone	静かな部屋だ。	조용한 방이다.	keep	conjugation
+adjective:stem-alone	そんなの駄目！	그런 것 안 된다!	fix	conjugation
+adjective:stem-alone	「もう駄目」	「이제 안 된다」	fix	conjugation
+adjective:stem-alone	「ちょっとだけ駄目？」	「조금 안 돼?」	fix	conjugation
+adjective:stem-alone	「ああっ、もうっ、駄目っ……」	「아앗, 정말, 안 된다 ……」	fix	conjugation
+adjective:stem-alone	「駄目、死んでも駄目」	「안 된다, 죽어도 안 된다」	fix	conjugation
+adjective:stem-alone	石畳の夕日が綺麗…	돌길의 석양이 예쁘다…	fix	conjugation
+adjective:stem-alone	「あー、駄目駄目っ」	「아―, 안 돼 안 돼」	fix	conjugation
+adjective:stem-alone	名前は「楽」。	이름은 「낙」.	keep	conjugation
+adjective:stem-alone	DEX（器用）:15	DEX(기용):15	keep	conjugation
+adjective:stem-alone	楽、行きます！	낙, 갑니다!	keep	conjugation
