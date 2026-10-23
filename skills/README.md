@@ -34,7 +34,7 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 | `tools/shadow.py [REF \| --all]` | clang `-Wshadow-all` on sources changed since the merge base; fails on new warnings only |
 | `tools/hygiene.py BASE` | Markers, stray paths, absolute paths, instruction wording and private patterns in a change |
 | `tools/surface-budget.py [--check \| --update \| --report] [--base REF]` | Japanese and Korean text in src/core per file against the ceilings in `tools/surface-budget.tsv`; raising one needs a `Surface-Budget:` trailer; `--report` prints totals and the surface:code condition ratio (docs/testing.md) |
-| `tools/pass-mutation.py [-c CLI] [-j JOBS] [PASS...]` | Leaves out each sentence pass in an experiment build and lists the passes no rule case or example catches (docs/testing.md) |
+| `tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]` | Leaves out each sentence pass in an experiment build and lists the passes no rule case or example catches (docs/testing.md) |
 | `tools/with-timeout.sh SECONDS CMD...` | Time limit with `timeout`, `gtimeout` or a perl alarm |
 
 ctest runs the `--self-test` of each Python tool (except `shadow.py`) and `tests/pick.sh`. The

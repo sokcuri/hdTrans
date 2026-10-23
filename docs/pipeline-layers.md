@@ -36,7 +36,7 @@
 | class3 | 모두 적용 | 선택, 번역 | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `"CleanupClass3"` |
 | senses | 키마다 행을 파일 순서로, 처음 맞는 행 | 선택 또는 번역 | 없음 | `src/core/dict/builtin/senses.tsv` | `src/core/word/select.cpp` `Select` `ChooseSenses(f)` |
 | scorers | 처음 다른 후보를 고른 채점기 | 선택 | 없음 | 문서 의미 기억 | `src/core/word/select.cpp` `Select` `scorer.score(` |
-| rewrites | 패스 약 35개를 차례로, 각 패스는 왼쪽부터 | 선택, 어간, 어미 번역 | 뒤 패스가 앞 패스를 덮음 | 코드, `patterns.tsv` | `src/core/word/flush.cpp` `Flush` `kTextPasses` |
+| rewrites | 패스 56개(`kTextPasses`)를 차례로, 각 패스는 왼쪽부터 | 선택, 어간, 어미 번역 | 뒤 패스가 앞 패스를 덮음 | 코드, `patterns.tsv` | `src/core/word/flush.cpp` `Flush` `kTextPasses` |
 | misread | 결정을 모두 계산한 뒤 적용(`-misread`) | 후보, 어미, 가나 소리 | 없음 | 모델 | `src/core/word/flush.cpp` `Flush` `"FilterMisreads"` |
 | cg-lite | tier 오름차순, 각 tier는 고정점까지. REMOVE와 SELECT | 후보 제거, 선택 | 고른 후보가 지워지면 첫 살아 있는 후보 | `cg_rules.tsv`, `cg_learned.tsv` | `src/core/word/flush.cpp` `Flush` `"FilterCg"` |
 | compose | 항목을 오른쪽에서 왼쪽으로 | 조사 형태, 활용 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateChunk` `s.composer.Compose(` |

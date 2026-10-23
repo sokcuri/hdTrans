@@ -8,7 +8,9 @@
 #include "core/word/select.h"
 
 #ifdef HDTRANS_PASS_EXPERIMENTS
+#include <charconv>
 #include <cstdint>
+#include <cstdio>
 #include <cstdlib>
 #include <string>
 #include <utility>
@@ -85,8 +87,31 @@ constexpr Pass kTextPasses[] = {
 
 #ifdef HDTRANS_PASS_EXPERIMENTS
 // Experiment builds only (CMake HDTRANS_PASS_EXPERIMENTS, docs/testing.md), read once per process:
-// HDTRANS_PASS_SKIP lists pass names to leave out, comma-separated; HDTRANS_PASS_SHUFFLE is a seed
-// that reorders kTextPasses.
+// HDTRANS_PASS_SKIP lists pass names to leave out, comma-separated; HDTRANS_PASS_SHUFFLE is a decimal
+// seed that reorders kTextPasses. An unknown name is reported on stderr; a seed that is not a
+// decimal number aborts.
+
+// The passes Flush runs outside kTextPasses.
+constexpr std::string_view kOuterPasses[] = {
+    "DrainNmTail",    "ReinsertPhrases",    "PassiveRecords", "CleanupSelectors", "CleanupClass3", "ApplyNegatives",
+    "PreferTerminal", "ExclaimedAdjective", "VerbNegative",   "FilterMisreads",   "FilterCg"};
+
+std::string_view Trim(std::string_view s) {
+    while (!s.empty() && (s.front() == ' ' || s.front() == '\t')) s.remove_prefix(1);
+    while (!s.empty() && (s.back() == ' ' || s.back() == '\t')) s.remove_suffix(1);
+    return s;
+}
+
+bool KnownPass(std::string_view name) {
+    for (const Pass& pass : kTextPasses) {
+        if (pass.name == name) return true;
+    }
+    for (std::string_view outer : kOuterPasses) {
+        if (outer == name) return true;
+    }
+    return false;
+}
+
 struct Experiment {
     std::vector<std::string> skip;
     std::vector<std::size_t> order;
@@ -106,13 +131,26 @@ const Experiment& CurrentExperiment() {
             std::string_view rest = skip;
             while (!rest.empty()) {
                 const std::size_t comma = rest.find(',');
-                if (comma != 0) e.skip.emplace_back(rest.substr(0, comma));
+                const std::string_view name = Trim(rest.substr(0, comma));
+                if (!name.empty()) {
+                    if (!KnownPass(name)) {
+                        std::fprintf(stderr, "HDTRANS_PASS_SKIP: no pass named %.*s\n", static_cast<int>(name.size()),
+                                     name.data());
+                    }
+                    e.skip.emplace_back(name);
+                }
                 rest.remove_prefix(comma == std::string_view::npos ? rest.size() : comma + 1);
             }
         }
         for (std::size_t i = 0; i < std::size(kTextPasses); i++) e.order.push_back(i);
-        if (const char* seed = std::getenv("HDTRANS_PASS_SHUFFLE"); seed != nullptr && *seed != '\0') {
-            std::uint64_t state = std::strtoull(seed, nullptr, 10);
+        const char* seedText = std::getenv("HDTRANS_PASS_SHUFFLE");
+        if (const std::string_view seed = Trim(seedText != nullptr ? seedText : ""); !seed.empty()) {
+            std::uint64_t state = 0;
+            const auto [end, error] = std::from_chars(seed.data(), seed.data() + seed.size(), state);
+            if (error != std::errc() || end != seed.data() + seed.size()) {
+                std::fprintf(stderr, "HDTRANS_PASS_SHUFFLE is not a decimal number: %s\n", seedText);
+                std::abort();
+            }
             for (std::size_t i = e.order.size(); i > 1; i--) {
                 std::swap(e.order[i - 1], e.order[static_cast<std::size_t>(SplitMix(state) % i)]);
             }
