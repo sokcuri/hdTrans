@@ -6,3 +6,9 @@ sound:lengthened-word	あ～めんどくさ～い。	아~귀찮다~.	fix	sound
 sound:lengthened-word	だーかーらー！何なの？	그러니까~! 뭐야 대체?	fix	sound
 sound:lengthened-word	お花見か～いいわね	꽃놀이인가~좋네	keep	sound
 sound:lengthened-word	「そうねー、いいね」	「그래~, 좋네」	keep	sound
+sound:lengthened-interjection	「はぁーい……」	「네에……」	fix	sound
+sound:lengthened-interjection	「おーーい、隠れてないで出てきなさいって。」	「어이, 숨지 말고 나와는.」	fix	sound
+sound:lengthened-interjection	え～い！	에잇!	fix	sound
+sound:lengthened-interjection	「へーい」	「헤이」	fix	sound
+sound:lengthened-interjection	「わぁ〜い！！」	「와아~!!」	fix	sound
+sound:lengthened-interjection	「う、うぅん、こっちこそごめんね！」	「아, 아니, 나야말로 미안해!」	keep	sound

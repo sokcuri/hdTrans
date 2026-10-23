@@ -1322,22 +1322,47 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     }
     if (p + stem.size() > f.size()) return false;
     bool tilde = false;  // a ～ stands for the key's ー (う～ん)
-    for (size_t k = 0; k < stem.size(); k++) {
+    const auto isMark = [](char32_t c) { return c == U'ー' || c == U'～'; };
+    size_t q = p;
+    for (size_t k = 0; k < stem.size(); k++, q++) {
+        if (q >= f.size()) return false;
         const char32_t r = stem[k];
-        if (r == U'ー' && f[p + k] == U'～') {
+        if (r == U'ー' && k > 0 && k + 1 < stem.size() && row.intj) {
+            // A ー inside the key of an interjection stands for a lengthening of any length, a
+            // small vowel of the syllable before it included (わーーい, はぁーい).
+            const size_t from = q;
+            const int v = VowelOf(stem[k - 1]);
+            bool mark = false;
+            while (q < f.size() && (isMark(f[q]) || (q == from && v >= 0 && f[q] == kSmallVowels[v]))) {
+                mark = mark || isMark(f[q]);
+                tilde = tilde || f[q] == U'～';
+                q++;
+            }
+            if (!mark) return false;
+            q--;
+            continue;
+        }
+        if (r == U'ー' && f[q] == U'～') {
             tilde = true;
             continue;
         }
+        // The first syllable of a two-syllable interjection that ends in イ or ウ may be
+        // lengthened before it with ー where no kana of a word follows (えーい！, ほーう、; not
+        // えーいくら).
+        if (k == 1 && stem.size() == 2 && row.intj && In(r, U"イウ") && isMark(f[q])) {
+            size_t j = q;
+            while (j < f.size() && f[j] != r && Lengthens(f[j], stem[0])) j++;
+            if (j < f.size() && f[j] == r && (j + 1 == f.size() || !IsKana(f[j + 1]) || In(f[j + 1], U"ッー～ァィゥェォ"))) q = j;
+        }
         // A small vowel that starts a word stands for the plain one (ぅあっ as うあっ).
         const bool weakOnset = k == 0 && In(f[p], kSmallVowels) && PlainVowel(f[p]) == r && (p == 0 || !text::IsLetter(f[p - 1]));
-        if (f[p + k] != r && !weakOnset &&
-            (row.key.size() < 3 || PlainVowel(r) == 0 || PlainVowel(f[p + k]) != PlainVowel(r))) {
+        if (f[q] != r && !weakOnset && (row.key.size() < 3 || PlainVowel(r) == 0 || PlainVowel(f[q]) != PlainVowel(r))) {
             return false;
         }
     }
     char32_t last = stem.back();
     if (last == U'ー' && stem.size() > 1) last = stem[stem.size() - 2];
-    size_t i = p + stem.size();
+    size_t i = q;
     if (tail == 0) i += Repeats(unit, f, i, units);
     for (; i < f.size() && Lengthens(f[i], last); i++) {
         if (f[i] != U'～') {

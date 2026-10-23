@@ -146,6 +146,12 @@ HD_TEST(pipeline_sound) {
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
         {"いくぅぅ", "가 버려~"},
+        // A ー inside an interjection may be longer; a two-syllable one in い may be
+        // lengthened before it, but not before a word.
+        {"わーーい！", "와아！"},
+        {"はぁーい……", "네에……"},
+        {"えーい！", "에잇！"},
+        {"えーいくら", "えーいくら"},
         {"な、なにを", "\xEE\x80\x80" "、なにを"},
         {"だっ、だめ", "\xEE\x80\x80" "、だめ"},
         {"お…お兄ちゃん", "\xEE\x80\x80" "…お兄ちゃん"},
