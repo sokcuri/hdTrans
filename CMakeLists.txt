@@ -37,6 +37,16 @@ else()
     if(HDTRANS_WERROR)
         add_compile_options(-Werror)
     endif()
+    # Sanitizers for every target, e.g. address,undefined. Any report aborts the program.
+    set(HDTRANS_SANITIZE "" CACHE STRING "Comma-separated -fsanitize= list (GCC/Clang)")
+    if(HDTRANS_SANITIZE)
+        add_compile_options(-fsanitize=${HDTRANS_SANITIZE} -fno-sanitize-recover=all -fno-omit-frame-pointer)
+        if(HDTRANS_SANITIZE MATCHES "undefined")
+            # vptr needs RTTI, which the build turns off.
+            add_compile_options(-fno-sanitize=vptr)
+        endif()
+        add_link_options(-fsanitize=${HDTRANS_SANITIZE})
+    endif()
 endif()
 
 # The builtin dictionary tables, src/core/dict/builtin/*.tsv and builtin/extra/*.tsv, compiled in.

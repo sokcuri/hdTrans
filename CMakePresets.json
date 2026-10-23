@@ -17,12 +17,26 @@
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
     },
     {
+      "name": "mac-asan",
+      "displayName": "macOS clang with AddressSanitizer and UndefinedBehaviorSanitizer",
+      "inherits": "mac",
+      "binaryDir": "${sourceDir}/build/mac-asan",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo", "HDTRANS_SANITIZE": "address,undefined" }
+    },
+    {
       "name": "linux",
       "displayName": "Linux, Release (core, shared library, CLI, tests)",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/linux",
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" },
       "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" }
+    },
+    {
+      "name": "linux-asan",
+      "displayName": "Linux with AddressSanitizer and UndefinedBehaviorSanitizer",
+      "inherits": "linux",
+      "binaryDir": "${sourceDir}/build/linux-asan",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo", "HDTRANS_SANITIZE": "address,undefined" }
     },
     {
       "name": "windows-x86",
@@ -69,7 +83,9 @@
   "buildPresets": [
     { "name": "mac", "configurePreset": "mac" },
     { "name": "mac-debug", "configurePreset": "mac-debug" },
+    { "name": "mac-asan", "configurePreset": "mac-asan" },
     { "name": "linux", "configurePreset": "linux" },
+    { "name": "linux-asan", "configurePreset": "linux-asan" },
     { "name": "windows-x86", "configurePreset": "windows-x86", "configuration": "Release" },
     { "name": "windows-x64", "configurePreset": "windows-x64", "configuration": "Release" },
     { "name": "windows-x86-ninja", "configurePreset": "windows-x86-ninja" },
@@ -79,7 +95,9 @@
   "testPresets": [
     { "name": "mac", "configurePreset": "mac", "output": { "outputOnFailure": true } },
     { "name": "mac-debug", "configurePreset": "mac-debug", "output": { "outputOnFailure": true } },
+    { "name": "mac-asan", "configurePreset": "mac-asan", "output": { "outputOnFailure": true } },
     { "name": "linux", "configurePreset": "linux", "output": { "outputOnFailure": true } },
+    { "name": "linux-asan", "configurePreset": "linux-asan", "output": { "outputOnFailure": true } },
     { "name": "windows-x86", "configurePreset": "windows-x86", "configuration": "Release", "output": { "outputOnFailure": true } },
     { "name": "windows-x64", "configurePreset": "windows-x64", "configuration": "Release", "output": { "outputOnFailure": true } },
     { "name": "windows-x86-ninja", "configurePreset": "windows-x86-ninja", "output": { "outputOnFailure": true } },
