@@ -119,7 +119,6 @@ void QuestionCopula(Flusher& f);
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void ShortPossessive(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,

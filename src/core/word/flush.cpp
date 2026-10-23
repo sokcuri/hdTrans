@@ -57,7 +57,6 @@ constexpr Pass kTextPasses[] = {
     {"QuestionCopula", QuestionCopula},
     {"WonderingDarou", WonderingDarou},
     {"LongVowelAfterKatakana", LongVowelAfterKatakana},
-    {"ShortPossessive", ShortPossessive},
     {"ParallelNoka", ParallelNoka},
     {"OfferPromise", OfferPromise},
     {"PluralPronoun", PluralPronoun},

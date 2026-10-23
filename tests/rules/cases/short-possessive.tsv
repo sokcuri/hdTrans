@@ -1,11 +1,11 @@
 rule	input	expected	kind	layer
-rewrite:short-possessive	母が私の手を握った。	어머니가 내 손을 잡았다.	fix	rewrites
-rewrite:short-possessive	わたくしの名前を申し上げます。	제 이름을 말씀드립니다.	fix	rewrites
-rewrite:short-possessive	僕の部屋は二階にある。	내 방은 2층에 있다.	fix	rewrites
-rewrite:short-possessive	あたしの夢……叶うかな。	내 꿈……실현될까.	fix	rewrites
-rewrite:short-possessive	お前の方だ。	네 편이다.	fix	rewrites
-rewrite:short-possessive	俺の、大事な剣。	나의, 소중한 검.	keep	rewrites
-rewrite:short-possessive	それは本当に君の？	그것은 정말 너의?	keep	rewrites
-rewrite:short-possessive	私の――宝物。	나의――보물.	keep	rewrites
-rewrite:short-possessive	彼の本を借りた。	그의 책을 빌렸다.	keep	rewrites
-rewrite:short-possessive	わたくしの、名前です。	저의, 이름입니다.	keep	rewrites
+cx:short-possessive:20	母が私の手を握った。	어머니가 내 손을 잡았다.	fix	rewrites
+cx:short-possessive:30	わたくしの名前を申し上げます。	제 이름을 말씀드립니다.	fix	rewrites
+cx:short-possessive:20	僕の部屋は二階にある。	내 방은 2층에 있다.	fix	rewrites
+cx:short-possessive:20	あたしの夢……叶うかな。	내 꿈……실현될까.	fix	rewrites
+cx:short-possessive:40	お前の方だ。	네 편이다.	fix	rewrites
+cx:short-possessive:20	俺の、大事な剣。	나의, 소중한 검.	keep	rewrites
+cx:short-possessive:40	それは本当に君の？	그것은 정말 너의?	keep	rewrites
+cx:short-possessive:20	私の――宝物。	나의――보물.	keep	rewrites
+cx:short-possessive:20	彼の本を借りた。	그의 책을 빌렸다.	keep	rewrites
+cx:short-possessive:30	わたくしの、名前です。	저의, 이름입니다.	keep	rewrites
