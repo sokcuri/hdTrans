@@ -731,6 +731,23 @@ int KnownWord(std::string_view word, std::string_view rest, const LineContext& c
     return 0;
 }
 
+// The word a katakana run that ends in ッ before punctuation or the end clips (テメェッ！
+// テメェ, バカッ！ バカ): the run without ッ when it is a dictionary word other than a name;
+// empty otherwise.
+std::string_view ClippedWord(std::string_view run, std::string_view rest, const LineContext& ctx,
+                             const dict::Snapshot& snap) {
+    constexpr std::string_view kTsu = "ッ";
+    if (!run.ends_with(kTsu) || text::RuneCount(run) < 3) return {};
+    const char32_t next = text::DecodeRune(rest).cp;
+    if (next != 0 && !RuneIn(next, U"！？!?…‥。、」』）)～― 　")) return {};
+    const std::string_view bare = run.substr(0, run.size() - kTsu.size());
+    if (ctx.named != nullptr && ctx.named->contains(std::string(run))) return {};
+    for (const dict::Candidate& c : snap.RetrieveRecords(bare, dict::LookupMode::General)) {
+        if (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN")) return bare;
+    }
+    return {};
+}
+
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
 // around it.
 std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, const LineContext& ctx,
@@ -747,6 +764,12 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         i += RunOf(text.substr(i), IsKatakanaRune);
         const std::string_view word = text.substr(start, i - start);
         const char32_t prev = LastRune(text.substr(0, start)).cp;
+        if (const std::string_view bare = ClippedWord(word, text.substr(i), ctx, snap); !bare.empty()) {
+            b.append(text.substr(at, start - at));
+            b += bare;
+            at = i;
+            continue;
+        }
         const KataStem* stem = nullptr;
         for (const KataStem& x : kKataStems) {
             if (x.run != word) continue;
