@@ -823,8 +823,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             // not a cry of い alone (いいー).
             size_t dashEnd = i;
             while (dashEnd < rs.size() && (rs[dashEnd] == U'ー' || rs[dashEnd] == U'～')) dashEnd++;
-            const bool goodI = i >= 3 && rs[i - 2] == U'い' && !In(rs[i - 3], U"いぃ") &&
-                               e.Tags(U"い").find('H') != std::string::npos;  // 気持ちいいー
+            // いい after a word (気持ちいいー; not the cries ふいいー, きいいー).
+            const bool goodI = i >= 3 && rs[i - 2] == U'い' && !In(rs[i - 3], U"いぃ") && e.WordEnds(rs, from, i - 2) &&
+                               e.Tags(U"い").find('H') != std::string::npos;
             const bool adjectiveI = prev == U'い' && dashEnd > i && ShoutEnd(rs, dashEnd) && i >= 2 &&
                                     (e.StemTagged(rs, from, i - 1, "H") || e.AdjectiveStemBefore(rs, from, i - 1) || goodI) &&
                                     std::u32string_view(rs).substr(from, i - from).find_first_not_of(U'い') !=
