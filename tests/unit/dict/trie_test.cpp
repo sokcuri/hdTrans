@@ -25,13 +25,24 @@ namespace {
 size_t allocations = 0;
 }  // namespace
 
+// Every form is replaced, so that each allocation and its release use the same allocator.
 void* operator new(size_t size) {
     allocations++;
     if (void* p = std::malloc(size ? size : 1)) return p;
     std::abort();
 }
+void* operator new[](size_t size) { return operator new(size); }
+void* operator new(size_t size, const std::nothrow_t&) noexcept {
+    allocations++;
+    return std::malloc(size ? size : 1);
+}
+void* operator new[](size_t size, const std::nothrow_t&) noexcept { return operator new(size, std::nothrow); }
 void operator delete(void* p) noexcept { std::free(p); }
 void operator delete(void* p, size_t) noexcept { std::free(p); }
+void operator delete(void* p, const std::nothrow_t&) noexcept { std::free(p); }
+void operator delete[](void* p) noexcept { std::free(p); }
+void operator delete[](void* p, size_t) noexcept { std::free(p); }
+void operator delete[](void* p, const std::nothrow_t&) noexcept { std::free(p); }
 
 namespace {
 
