@@ -922,6 +922,23 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                     wordEnd = reach;
                 }
             }
+            // A word that starts after another inside the run of kana (あんな + しょーもない
+            // しょうもない): the long vowel spelled when it then goes past the mark.
+            for (size_t j = start + 1; j < i && best < 0; j++) {
+                if (!IsHiraganaRune(rs[start]) || !e.WordKey(std::u32string_view(rs).substr(start, j - start))) continue;
+                for (size_t k = 1; k < cands.size() && best < 0; k++) {
+                    bool stem = false;
+                    const std::u32string m = Spliced(rs, i, cands[k], end);
+                    const size_t n = e.WordAt(m, j, stem);
+                    // A stem before its ending, or a word that ends the run of kana (お年玉 +
+                    // ちょーだい); not one that stops inside it (しゅうりょ of しゅーりょー).
+                    if (!stem && j + n < m.size() && (IsHiraganaRune(m[j + n]) || m[j + n] == U'ー')) continue;
+                    if (j + n > i + cands[k].size()) {
+                        best = static_cast<int>(k);
+                        wordEnd = j + n;
+                    }
+                }
+            }
             read = best >= 0;
         }
         if (best < 0) continue;
