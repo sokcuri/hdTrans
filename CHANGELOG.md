@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.5](https://github.com/sokcuri/hdTrans/compare/v0.4.4...v0.4.5) (2026-10-23)
+
+
+### Bug Fixes
+
+* **release:** read names, honorifics and table layouts more naturally ([43df625](https://github.com/sokcuri/hdTrans/commit/43df625a6f982eb09c400b879d8ec139d9ae28f9))
+* **release:** read names, honorifics and table layouts more naturally ([#37](https://github.com/sokcuri/hdTrans/issues/37)) ([43df625](https://github.com/sokcuri/hdTrans/commit/43df625a6f982eb09c400b879d8ec139d9ae28f9))
+* **translation:** read names, words, honorifics and layouts more naturally ([#36](https://github.com/sokcuri/hdTrans/issues/36)) ([80deed4](https://github.com/sokcuri/hdTrans/commit/80deed40ecbe81b7061c780c181b548cb4105e93))
+* **web:** list the examples under their published Korean titles ([#31](https://github.com/sokcuri/hdTrans/issues/31)) ([8abd50b](https://github.com/sokcuri/hdTrans/commit/8abd50b1227b9d66f8e58539e3485843c722dbe7))
+
 ## [0.4.4](https://github.com/sokcuri/hdTrans/compare/v0.4.3...v0.4.4) (2026-10-22)
 
 
