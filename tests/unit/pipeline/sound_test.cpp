@@ -285,6 +285,8 @@ HD_TEST(pipeline_sound) {
         {"やっ……と、静か", "얏……と、静か"},
         {"ぎゅっ、として", "꽉、として"},
         {"ぱさり、と、落ちた", "툭、 하고、落ちた"},
+        // A と that starts a stutter after the pause is no quote (と、とと、溶ける).
+        {"ひいい！？　と、とと、溶ける", "히이이！？　\xEE\x80\x80" "、\xEE\x80\x80" "、溶ける"},
         // Before a katakana word the と stays adverbial, but not between two sounds.
         {"スタスタとベッド", "척척 ベッド"},
         {"ドキドキとワクワク", "두근두근と두근두근"},

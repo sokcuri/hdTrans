@@ -799,7 +799,8 @@ bool SoundText::StartsLongerWord(size_t i) const {
 // run of 、 ！ ？ or an ellipsis, spaces, then と that starts no longer word (ぱさり、と
 // 툭, 하고; ダンッ！　と 쾅! 하고; but not うん、とても or ふふ、という) and is followed by
 // neither another と nor, after an ellipsis, a pause, which make it a stutter or a filler
-// (うわ！ ととと, やっ……と、 ううう……と、), nor by a form of する (ぎゅっ、として); 0 otherwise.
+// (うわ！ ととと, やっ……と、 ううう……と、), nor by a form of する (ぎゅっ、として), and that
+// starts no stutter (ひいい！？　と、とと、溶ける); 0 otherwise.
 size_t SoundText::PausedTo(size_t i) const {
     const std::u32string_view rs = rs_;
     size_t j = i;
@@ -811,6 +812,9 @@ size_t SoundText::PausedTo(size_t i) const {
                               (In(rs[j + 1], U"、，…‥") && rs.substr(i, j - i).find_first_of(U"…‥") != std::u32string_view::npos))) {
         return 0;
     }
+    // A と that starts a stutter is the first sound of the next word (と、とと、溶ける).
+    std::vector<StutterPiece> pieces;
+    if (Stutter(j, pieces) > 0) return 0;
     return StartsLongerWord(j) ? 0 : j + 1;
 }
 
