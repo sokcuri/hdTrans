@@ -14,6 +14,7 @@ namespace {
 
 constexpr std::string_view kLongVowel = "ー";
 constexpr std::string_view kInitialKu = "쿠";
+constexpr std::string_view kLongRu = "루";
 constexpr std::string_view kSourceI = "이";
 constexpr std::string_view kDirectSet = "ファフィフュフェフォ";
 constexpr std::string_view kEmptyCell = "  ";
@@ -93,6 +94,7 @@ struct Run {
     }
 
     void ApplyFinal(long i, int row);
+    void AddFinal(long i, int final, std::string_view mark);
     void AddFinalN(long i);
     void Matrix(long cursor);
     void Transliterate();
@@ -127,10 +129,12 @@ void Run::ApplyFinal(long i, int row) {
         const std::string_view following = At(i + 2);
         int n = 35;
         if (!following.empty() && kMarkKRow.find(following) != std::string_view::npos) n = 10;
+        else if (following == kMarkGu) n = 10;  // ビッグ 빅
         else if (!following.empty() && kMarkBPRows.find(following) != std::string_view::npos) n = 30;
         if (variant(n, v)) {
             Replace(i, At(i), v);
             if (n == 30 && following == kMarkPu) Replace(i + 2, kMarkPu, "");
+            if (following == kMarkGu) Replace(i + 2, kMarkGu, "");
             Replace(i + 1, kMarkTsu, "");
             if (n == 10 && Has(i + 1, kMarkKusu)) Replace(i + 1, kMarkKu, "");
         }
@@ -142,16 +146,18 @@ void Run::ApplyFinal(long i, int row) {
     if (At(i + 1) == kLongVowel) Replace(i + 1, kLongVowel, "");
 }
 
-// Writes the ン at cells[i + 1] as the final ㄴ of the syllable at cells[i], when the
-// syllable has no final.
-void Run::AddFinalN(long i) {
+// Writes the kana mark at cells[i + 1] as the final of the syllable at cells[i] (final is
+// the index of the final consonant), when the syllable has no final.
+void Run::AddFinal(long i, int final, std::string_view mark) {
     const text::Rune r = text::DecodeRune(At(i));
     if (r.cp < U'가' || r.cp > U'힣' || (r.cp - U'가') % 28 != 0) return;
-    std::string& withN = composed.emplace_back();
-    text::AppendRune(withN, r.cp + 4);
-    Replace(i, At(i), withN);
-    Replace(i + 1, kMarkN, "");
+    std::string& withFinal = composed.emplace_back();
+    text::AppendRune(withFinal, r.cp + static_cast<char32_t>(final));
+    Replace(i, At(i), withFinal);
+    Replace(i + 1, mark, "");
 }
+
+void Run::AddFinalN(long i) { AddFinal(i, 4, kMarkN); }
 
 // Transliterates the katakana at cells[cursor] by the matrix of single katakana,
 // looking at the small kana, ル and ー after it.
@@ -163,10 +169,15 @@ void Run::Matrix(long cursor) {
     const std::string_view next = At(cursor + 1);
     const bool longVowelNext = next == kLongVowel;
     if (column != 3 && longVowelNext) {
-        if (row == 12 && column == 2 && cursor == 0) {
-            Replace(cursor, search, KanaCell(12, 8));
+        if (row == 12 && column == 2) {
+            // A long ル is the vowel u (ルーク 루크, ルーン 룬, ルール 룰).
+            Replace(cursor, search, kLongRu);
             Replace(cursor + 1, kLongVowel, "");
-            ApplyFinal(cursor, 12);
+            if (Has(cursor + 1, kMarkN)) {
+                AddFinalN(cursor);
+            } else if (cursor + 2 == Size() && Has(cursor + 1, kMarkRu)) {
+                AddFinal(cursor, 8, kMarkRu);
+            }
         } else if (column == 0 && cursor >= Size() - 1) {
             Replace(cursor, search, KanaCell(row, 6));
             Replace(cursor + 1, kLongVowel, "");
