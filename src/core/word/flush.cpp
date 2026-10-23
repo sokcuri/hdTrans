@@ -39,8 +39,6 @@ constexpr Pass kTextPasses[] = {
     {"GeotBeforeMitai", GeotBeforeMitai},
     {"PositiveIke", PositiveIke},
     {"NegativeCopula", NegativeCopula},
-    {"SubjectBeforeGa", SubjectBeforeGa},
-    {"SubjectNo", SubjectNo},
     {"VerseTe", VerseTe},
     {"TeRequest", TeRequest},
     {"ResultState", ResultState},

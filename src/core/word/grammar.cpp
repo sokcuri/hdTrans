@@ -750,64 +750,6 @@ void NegativeCopula(Flusher& f) {
     }
 }
 
-void SubjectBeforeGa(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        if (p == nullptr || it->selected < 0 || p->selected < 0) continue;
-        // The subject form 내, 제, 네 that a rule chose for が goes back to 나, 저, 너 where the
-        // が reads as an object (私が好き 내를 → 나를 좋아해).
-        if (it->group->surface == "が" && output::Lemma(it->EntryText(it->selected), f.families) == "(을)를" &&
-            !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
-            const std::string_view own = p->EntryText(p->selected);
-            const std::string_view plain = own == "내" ? "나" : own == "제" ? "저" : own == "네" ? "너" : "";
-            if (!plain.empty()) p->AssignEntrySurface(p->selected, std::string(plain));
-            continue;
-        }
-        // 俺じゃない (이)가 아니다: 내가 아니다.
-        if (it->EntryText(it->selected).starts_with("(이)가 ") && !p->detail->Yougo() && p->group->At(p->selected) != nullptr) {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty()) p->AssignEntrySurface(p->selected, std::string(subject));
-            continue;
-        }
-        if (output::Lemma(it->EntryText(it->selected), f.families) != "(이)가") continue;
-        if (it->group->surface == "の") {
-            const Item* n = it->next;
-            if (n != nullptr && n->detail->Yougo() && Has(n->group->surface, "を")) {
-                SelectLemma(f, it, "의");
-                continue;
-            }
-        }
-        // 俺が, and 俺の作った with の as the subject of a clause: 내가.
-        if (it->group->surface == "が" || it->group->surface == "の") {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty() && !p->detail->Yougo()) {
-                if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
-            }
-        }
-    }
-}
-
-void SubjectNo(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        Item* n = it->next;
-        if (p == nullptr || n == nullptr || n->next == nullptr || it->group->surface != "の" || it->selected < 0 ||
-            output::Lemma(it->EntryText(it->selected), f.families) != "의" || p->selected < 0 ||
-            At(p->Code(p->selected), 0) != '1' || n->selected < 0 ||
-            (!dict::InClass("stem.subject-predicate", n->group->surface) &&
-             !(dict::InClass("noun.attribute", p->group->surface) && At(n->Code(n->selected), 0) == '7')) ||
-            n->next->selected < 0 || At(n->next->Code(n->next->selected), 0) != '1') {
-            continue;
-        }
-        if (SelectLemma(f, it, "(이)가")) {
-            const std::string_view subject = SubjectPronoun(output::Lemma(p->EntryText(p->selected), f.families));
-            if (!subject.empty()) {
-                if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, std::string(subject));
-            }
-        }
-    }
-}
-
 namespace {
 
 // Whether stem is a result verb of verb.result-state, or a compound or phrase that ends in one of

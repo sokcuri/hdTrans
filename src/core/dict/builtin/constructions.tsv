@@ -6,6 +6,7 @@
 // PRIO whose condition holds applies its actions. "//~ MAP <TAB> FROM=TO ... <TAB> what it is for"
 // declares a word map for map-lemma and map-target, above the rows that use it.
 //~ subject-pronoun	나=내 저=제 너=네	The subject form of a pronoun before 가 (내가, 제가, 네가).
+//~ plain-pronoun	내=나 제=저 네=너	The subject forms back to the plain pronoun, before a particle that is no subject (나를).
 //~ who-subject	누구=누	The subject form of 누구 before 가 (누가).
 //= benefactive-provider	after DegreeAfterNumber	The に after a person read 에게 before a verb with もらう, with no other に, no は, が or から, no verb and no punctuation between, names the giver: the subject (이)가, with a pronoun in its subject form, or (은)는 for には. Not when the verb before もらう is a causative (相談をさせてもらう).
 cx:benefactive-provider:10		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게" F-1== "person" >0 ||2 &&5 S+1== "もら" D+1== "R&CJ@" F+0== "conjugating" S+0!= "させ" F+0!= "causative" &&2 ||2 S+0== "Rてもら" S+0== "Rでもら" D+0== "R&CJ@" ||7 S+0== "に" S+0== "には" S+0== "は" S+0== "が" S+0== "から" S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "(이)가" map-lemma@-1 @subject-pronoun map-lemma@-1 @who-subject	友達にノートを見せてもらった 친구가 노트를 보여 주었다
@@ -18,6 +19,13 @@ cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adje
 //= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
 cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
 cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다
+//= subject-before-ga	after NegativeCopula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
+cx:subject-before-ga:10		&&4 S+0== "が" F-1== "selected" L+0== "(을)를" F-1!= "conjugating"	map-target@-1 @plain-pronoun	私が好き 나를 좋아해
+cx:subject-before-ga:20		&&3 D+0== "L(이)가 " F-1== "selected" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺じゃない 내가 아니다
+cx:subject-before-ga:30		&&5 S+0== "の" F-1== "selected" L+0== "(이)가" F+1== "conjugating" S+1== "~を"	select-lemma "의"	
+cx:subject-before-ga:40		&&4 ||2 S+0== "が" S+0== "の" F-1== "selected" L+0== "(이)가" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺が 내가
+//= subject-no	after subject-before-ga	The の read 의 after a noun and before a predicate of existence, quantity or knowing (stem.subject-predicate), or before an adjective after a noun of a quality (noun.attribute), with a noun after the predicate, is the subject (이)가.
+cx:subject-no:10		&&7 S+0== "の" L+0== "의" P-1== "1" F+1== "selected" P+2== "1" ||2 S+1== @stem.subject-predicate &&2 S-1== @noun.attribute P+1== "7" C+0== "(이)가"	select-lemma "(이)가" map-lemma@-1 @subject-pronoun	人の少ない町 사람이 적은 마을
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
 cx:hodo-degree:10		&&3 ||2 U+0== "R程に" U+0== "Rほどに" ||2 Y+0== "~수록" &&2 Y+0== "~만큼" S+1== "に" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도로"	痛ましい程に 참혹할 정도로
 cx:hodo-degree:20		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1== "に" ||2 Y+0== "~수록" Y+0== "~만큼" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도" select-lemma@+1 "(으)로"	ほどに with に its own word
