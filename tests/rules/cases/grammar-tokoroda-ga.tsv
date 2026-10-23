@@ -3,4 +3,4 @@ dict:gram:tokoroda-ga:tai	と、言いたいところだが……我々にも慈
 dict:gram:tokoroda-ga:tai	高いところだが、登る。	높은 곳이지만, 오른다.	keep	local
 dict:gram:tokoroda-ga:verb	「……本来なら叩き斬るところだが、貴様の奇天烈な格好に興味がある」	「……원래라면 베어 버릴 참이지만, 네놈의 괴상한 모습에 흥미가 있다」	fix	local
 dict:gram:tokoroda-ga:toiu	「まずは一安心というところだが、気を抜いてはいけないな」	「우선은 우선 안심이라는 정도이지만, 방심해선 안 되네」	fix	local
-validity:kattato-koro	ミツルは文章が詳細で無理やり怖くしようとしなかったところは評価した。	미츠루는 문장이 상세해 억지로 무섭게 하려고 하지 않았던 곳은 평가했다.	fix	analysis
+validity:kattato-koro	彼は文章が詳細で無理やり怖くしようとしなかったところは評価した。	그는 문장이 상세해 억지로 무섭게 하려고 하지 않았던 곳은 평가했다.	fix	analysis

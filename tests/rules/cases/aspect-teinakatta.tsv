@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
 dict:jisjk:359585	何やら、一生懸命話しかけてくれていたようだが、まったく聞いていなかった。	무엇인가, 열심히 말을 걸어 주고 있던 것 같지만, 전혀 듣지 않았다.	fix	local
-dict:jisjk:359585	しかしコゼットの瞳は微塵も恐れていなかった。	하지만 코제트의 눈동자는 티끌도 무서워하지 않았다.	fix	local
+dict:jisjk:359585	しかし少女の瞳は微塵も恐れていなかった。	하지만 소녀의 눈동자는 티끌도 무서워하지 않았다.	fix	local
 dict:jisjk:359585	まだ誰も来ていない。	아직 아무도 와 있지 않다.	keep	local

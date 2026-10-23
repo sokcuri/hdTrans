@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:gram:notame:copula	帝国のためですよ。	제국을 위해서예요.	fix	local
 dict:gram:notame:copula	「公共の利益のためです。それでは」	「공공의 이익을 위해서입니다. 그러면」	fix	local
-dict:gram:notame:copula	「筧君のためだから」	「카케이 군을 위해서니까」	fix	local
+dict:gram:notame:copula	「君のためだから」	「너를 위해서니까」	fix	local
 dict:gram:notame:copula	確率が高いためだ）のため車内はガラガラだ。	확률이 높기 때문이다) 때문에 차내는 와르르다.	keep	local
 dict:gram:notame:copula-cause	病気のためだ。	병 때문이다.	fix	local

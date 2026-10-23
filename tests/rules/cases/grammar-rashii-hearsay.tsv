@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:gram:rashii:hearsay	彼は相当の新米らしい。	그는 상당한 신참인 것 같다.	fix	local
-dict:gram:rashii:hearsay	紗弓実の方は、球技メインの比較的ソフトなやつらしい。	사유미 열매는, 구기 메인의 비교적 소프트인 녀석인 것 같다.	fix	local
+dict:gram:rashii:hearsay	妹の方は、球技メインの比較的ソフトなやつらしい。	여동생은, 구기 메인의 비교적 소프트인 녀석인 것 같다.	fix	local
 dict:gram:rashii:hearsay	「ははっ、先輩らしい」	「하핫, 선배답다」	keep	local
 dict:jisjk:5310	魔力が必要であるらしい。	마력이 필요한 것 같다.	fix	local
 dict:jisjk:5310	明日は雨らしい。	내일은 비인 것 같다.	keep	local
-dict:gram:rashii:hearsay	「自分の非を認めて反省するのも、言い訳しないのもマサキらしいわね」	「자신의 잘못을 인정해 반성하는 것도, 변명 하지 않는 것도 마사키답네」	keep	local
+dict:gram:rashii:hearsay	「自分の非を認めて反省するのも、言い訳しないのも彼らしいわね」	「자신의 잘못을 인정해 반성하는 것도, 변명 하지 않는 것도 그답네」	keep	local

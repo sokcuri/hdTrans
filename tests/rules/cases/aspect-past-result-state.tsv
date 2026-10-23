@@ -5,7 +5,7 @@ rewrite:result-state-past	父も亡くなっている人だ。	아버지도 돌�
 rewrite:result-state-past	父が亡くなった。	아버지가 돌아가셨다.	keep	rewrites
 rewrite:result-state-compound	根性が曲がっているから。	심보가 비뚤어져 있으니까.	fix	rewrites
 rewrite:result-state-compound	「確かに資料は存在しますが、記述内容と実態がかけ離れているクラブも多いようで……」	「확실히 자료는 존재합니다만, 기술 내용과 실태가 동떨어져 있는 클럽도 많은 듯해……」	fix	rewrites
-rewrite:result-state-compound	アキラは彼女に見惚れていた。	아키라는 그녀에게 넋을 잃고 보고 있었다.	keep	rewrites
+rewrite:result-state-compound	少年は彼女に見惚れていた。	소년은 그녀에게 넋을 잃고 보고 있었다.	keep	rewrites
 rewrite:result-state-compound	目立っている。	눈에 띄고 있다.	keep	rewrites
 rewrite:result-state-past	現在、二人の子どもだけが生き残っている。	현재, 두 사람의 아이만이 살아남았다.	fix	rewrites
 rewrite:result-state-past	古びている本。	오래된 책.	fix	rewrites
