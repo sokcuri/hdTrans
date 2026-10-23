@@ -1,4 +1,3 @@
 rule	input	expected	kind	layer
-dict:names.63942	イルマが作るサンドイッチは絶品だ。	이르마가 만드는 샌드위치는 일품이다.	fix	lookup
 dict:names.237116	　ディーア子爵家のユリシーズ様。	 디아 자작가의 율리시스님.	fix	lookup
 dict:names.63942	マルチェラが来た。	마르셀라가 왔다.	keep	lookup
