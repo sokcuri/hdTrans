@@ -106,3 +106,14 @@
 | 人の中で一番強い。 | 사람 중에서 제일 강하다. | 유지 |
 
 사례: `tests/rules/cases/pass-naka-sok.tsv`, `tests/rules/cases/naka-inside-mass.tsv`
+
+## LEX-8 명사 뒤의 なんて, なんか는 `같은 건`이다
+
+명사나 `명사のこと` 뒤에서 낮추어 말하는 なんて, なんか는 `같은 건`으로 옮기고 のこと는 따로 옮기지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| あたしのことなんて | 나 같은 건 | 고침 |
+| 夢なんて忘れて。 | 꿈 같은 건 잊어. | 유지 |
+
+사례: `tests/rules/cases/pattern-koto-nante.tsv`
