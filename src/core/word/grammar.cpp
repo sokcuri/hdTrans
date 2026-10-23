@@ -814,10 +814,13 @@ void PositiveIke(Flusher& f) {
     }
 }
 
+// The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
+constexpr std::string_view kMeetPartners[] = {"と", "ここ", "そこ", "あそこ", "どこ"};
+
 void CopulaDeAru(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;
-        if (p != nullptr && it->group->surface == "であ" && !Has("と ここ そこ あそこ どこ", p->group->surface) &&
+        if (p != nullptr && it->group->surface == "であ" && !InSet(kMeetPartners, p->group->surface) &&
             output::Lemma(it->EntryText(it->selected), f.families).starts_with("에서 만나")) {
             SelectLemma(f, it, "이다");
         }

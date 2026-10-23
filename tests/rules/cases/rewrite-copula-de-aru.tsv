@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+word:copula-de-aru	あそこであった。	저기에서 만났다.	keep	rewrites
+word:copula-de-aru	その子であった。	그 아이였다.	keep	rewrites
