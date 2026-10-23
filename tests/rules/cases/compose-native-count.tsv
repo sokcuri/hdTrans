@@ -3,13 +3,13 @@ compose:native-count	二匹の犬は、俺の後をついて歩いてきた。	�
 compose:native-count	子犬四匹には、もう名前をつけた。	강아지 네 마리에는, 이제 이름을 붙였다.	fix	compose
 compose:native-count	新しい命が四つ、生まれていた。	새로운 생명이 네 개, 태어나고 있었다.	fix	compose
 compose:native-count	八本の足が、左右に同じくらい。	여덟 개의 다리가, 좌우에 같은 정도.	fix	compose
-compose:native-count	お皿を３枚割った。	접시를 세 장 나누었다.	fix	compose
+compose:native-count	「たとえば、ここに１枚のティッシュがある」	「예를 들어, 여기에 한 장의 티슈가 있다」	fix	compose
 compose:native-count	十匹はいそうか？	열 마리는 있을 것 같은가?	fix	compose
 compose:native-count	二十匹ぐらいいても何とかしてやる。	20마리 정도 있어도 어떻게든 해 준다.	fix	compose
 compose:native-count	第2回の会議。	제2회의 회의.	keep	compose
 compose:native-count	1、2個残った。	1, 2개 남았다.	keep	compose
 compose:native-count	2～3本ある。	2~3개 있다.	keep	compose
-compose:native-count	二番の札。	2번의 지폐.	keep	compose
+compose:native-count	「2番の妨害すごくないか？」	「2번의 방해 대단하지 않아?」	keep	compose
 compose:native-count	三章を開いた。	3장을 열었다.	keep	compose
 compose:native-count	何箇所か開けてから寝た。	몇 군데인가 열고 나서 잤다.	fix	compose
 compose:native-count	何人か怪我をしている。	여러 명 다치고 있다.	fix	compose
@@ -21,4 +21,4 @@ compose:native-count	数回試した。	몇 차례 시험했다.	fix	compose
 compose:native-count	5回分の料金	5회분의 요금	keep	compose
 compose:native-count	七回帰を止めた。	7회귀를 멈추었다.	keep	compose
 compose:native-count	子犬四匹分の肉。	강아지 네 마리분의 고기.	keep	compose
-compose:native-count	日が昇る前から数十人の職人が集まってくる。	해가 뜨는 전부터 수십 명의 장인이 모여 온다.	fix	compose
+compose:native-count	数十人の観客が、静かに息をのんだ。	수십 명의 관객이, 조용하게 숨을 죽였다.	fix	compose

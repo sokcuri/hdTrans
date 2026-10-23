@@ -7,4 +7,4 @@ compose:number-predicate	3個買った。	세 개 샀다.	keep	compose
 compose:number-predicate	3人増えた。	세 명 늘어났다.	keep	compose
 compose:number-predicate	5分待った。	5분 기다렸다.	keep	compose
 compose:number-predicate	その数は30近い。	그 수는 30 가깝다.	fix	compose
-compose:number-predicate	１０円なんて安い。	10엔인 이라고 싸다.	keep	compose
+compose:number-predicate	送料は、一律800円です。	우송료는, 일률 800엔입니다.	keep	compose

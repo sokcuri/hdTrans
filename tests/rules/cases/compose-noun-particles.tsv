@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-compose:noun-particles	高さは一メートルも無い岩ばかりだ。	높이는 1미터나 없는 바위뿐이다.	fix	compose
+compose:noun-particles	岩ばかりだ。	바위뿐이다.	fix	compose
 compose:noun-particles	それ以降、ラミア族も巨人族も普段通り。	그 이후, 라미아족도 거인족도 평소대로.	fix	compose
 compose:noun-particles	普通の青年にしかみえない。	보통 청년밖에 보이지 않는다.	fix	compose
 compose:noun-particles	畑毎に種類が違う。	밭마다 종류가 다르다.	fix	compose
