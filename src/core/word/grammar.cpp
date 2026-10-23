@@ -647,6 +647,9 @@ void SimpleAspect(Flusher& f) {
         }
         const Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr || d->dst.empty() || KeepsProgressive(aspect, d->dst)) continue;
+        // An adjective target has no verb form 0 or 4 (있는, 있다); the composer reads it with its
+        // いる (苛々している 초조하다).
+        if (AdjectiveTarget(it->EntryText(it->selected)) && (d->dst[0] == '0' || d->dst[0] == '4')) continue;
         it->AssignDirectSlot(it->DirectIndex(), d->dst);
         n->AssignEntrySurface(n->selected, "");
         n->AssignDirectSlot(n->DirectIndex(), "");
@@ -1875,6 +1878,18 @@ bool StativeNegative(std::string_view lemma) {
     return stem.ends_with("있") || stem.ends_with("그렇") || stem.ends_with("얼마 되");
 }
 
+// Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective
+// (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
+constexpr std::string_view kAdjectiveStemEnds[] = {
+    "좋", "같", "싶", "나쁘", "많", "싫", "아프", "어렵", "두렵", "밉", "넓", "탐탁", "점잖",
+};
+
+bool AdjectiveNegative(std::string_view lemma) {
+    const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지 않다").size());
+    return std::any_of(std::begin(kAdjectiveStemEnds), std::end(kAdjectiveStemEnds),
+                       [&](std::string_view e) { return stem.ends_with(e); });
+}
+
 }  // namespace
 
 void ExclaimedAdjective(Flusher& f) {
@@ -1913,7 +1928,7 @@ void VerbNegative(Flusher& f) {
         if (stem.empty() || stem.ends_with("じゃ") || stem.ends_with("では")) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
-        if (stem.ends_with("く")) {
+        if (stem.ends_with("く") || AdjectiveNegative(lemma)) {
             if (e->dst == "4") it->AssignDirectSlot(it->DirectIndex(), "1은");
         } else if (e->dst == "1다") {
             it->AssignDirectSlot(it->DirectIndex(), "1는다");
