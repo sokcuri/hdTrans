@@ -780,11 +780,14 @@ size_t SoundText::WordLen(size_t p) const {
 // an adverb, or 0: the particle must not start a longer word (とても) that reaches at
 // least as far as the word after it (とお of とお尻 does not), nor join two sounds
 // (ドキドキとワクワク); before another katakana word it stays adverbial (スタスタとベッドから).
+// A と before a form of する is dropped even where a key such as としてい starts with it
+// (トロンとしていた 몽롱했다).
 size_t SoundText::Adverbial(size_t i) const {
     const std::u32string_view rs = rs_;
     if (i >= rs.size()) return 0;
     if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
+    if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], U"しすさせ")) return 1;
     return StartsLongerWord(i) ? 0 : 1;
 }
 

@@ -42,7 +42,8 @@ const dict::LoadResult& SoundDictionary() {
         "おいし\t맛있\tH100\t24\n"
         "わたし\t나\tN120\t25\n"
         "とにかく\t어쨌든\tE300\t26\n"
-        "いな\t아니\tE300\t27\n",
+        "いな\t아니\tE300\t27\n"
+        "としてい\t(으)로 하고 있\tM100\t28\n",
     }});
     return result;
 }
@@ -314,6 +315,8 @@ HD_TEST(pipeline_sound) {
         {"ホラホラと急かす", "ほらほらと急かす"},
         {"ネエネエと袖", "ねえねえと袖"},
         {"メキメキと", "메키메키"},
+        // と before する goes after a mimetic even where a key starts with it.
+        {"トロンとしていた", "몽롱していた"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},

@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:adverbial-to	もちもちとして柔らかい。	쫀득쫀득해 부드럽다.	fix	sound
+sound:adverbial-to	しょぼんとして立っていた。	시무룩해 서 있었다.	fix	sound
+sound:adverbial-to	ぬるぬるとしていて気持ちいい。	미끌미끌하고 있어 기분 좋다.	fix	sound
+sound:adverbial-to	ぐいっと飲み干した。	확 다 마셨다.	keep	sound
