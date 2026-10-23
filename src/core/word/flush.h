@@ -5,6 +5,7 @@
 // of each item's candidate and ending by the rules, and the passes that fix class-3
 // words, negatives and terminal forms.
 #include <cstddef>
+#include <span>
 #include <string_view>
 
 #include "core/output/families.h"
@@ -24,6 +25,8 @@ struct Flusher {
 
 // Runs the sentence passes over w.chain (the chain of one sentence after the token loop).
 void Flush(Flusher& f);
+// The names of the text-path passes in order; the families of the construction table run after them.
+std::span<const std::string_view> TextPassNames();
 
 // Selection (selectors.cpp).
 void CleanupSelectors(Flusher& f);
@@ -50,6 +53,14 @@ bool Thing(std::string_view attr);
 // The dictionary form of entry slot of it (an empty string for no entry).
 std::string ItemLemma(Flusher& f, const Item* it, int slot);
 bool Person(std::string_view attr);
+// Whether the item is a comma, a sentence-end mark, a closing quote or bracket, or 。 (grammar.cpp).
+bool PauseOrEnd(const Item* it);
+// Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
+bool OpensLine(const Worker& w, const Item* it);
+// Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
+bool NumberSurface(std::string_view s);
+// Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
+bool QuoteVerbFollows(const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
@@ -110,41 +121,22 @@ void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);
 void NodaTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
-void HodoDegree(Flusher& f);
 void QuestionCopula(Flusher& f);
 // A sentence-final だろう after a question word in its clause asks (何だろう 뭘까, どっちだろう
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
-void GenitiveBetweenNames(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void ReturnTo(Flusher& f);
-void KaraSource(Flusher& f);
-void NiAfterAdverb(Flusher& f);
-void NoAfterNa(Flusher& f);
 void ShortPossessive(Flusher& f);
-void DeScene(Flusher& f);
-void YounaBeforeModifier(Flusher& f);
-void ParticleInNext(Flusher& f);
-void JiBeforeJiman(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
 // 手伝ってあげます), reads as a promise (가르쳐 줄게, 도와 드릴게요), or 주마 in old or
 // haughty speech.
 void OfferPromise(Flusher& f);
-void ComitativeTo(Flusher& f);
-void NounTo(Flusher& f);
-// A と that opens a line or follows a sentence end on it (と私が頭を下げると, バカな。と笑う)
-// quotes what was said before it: (이)라고 rather than (와)과 or (으)로. Not inside brackets,
-// where it stutters, nor before an ellipsis or another と, nor before なる or する, where it
-// starts a conjunction (となると, とすると), nor before a word of company, sameness or
-// difference (と一緒に, と同じ, と違って), where it is the comitative.
-void LineInitialTo(Flusher& f);
 
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);
 void VerbNegative(Flusher& f);
-void EvenBeforePassive(Flusher& f);
 void TeSequence(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
 

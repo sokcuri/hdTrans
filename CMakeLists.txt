@@ -177,11 +177,15 @@ if(NOT EMSCRIPTEN)
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
-            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation)
+            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
+                    construction-cases)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            # Every row of the construction table has a fix and a keep rule case.
+            add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)
             # Japanese and Korean text in src/core stays within tools/surface-budget.tsv.
             add_test(NAME tools.surface-budget COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --check)
@@ -241,7 +245,7 @@ if(NOT EMSCRIPTEN)
     if(NOT CMAKE_CROSSCOMPILING)
         # It builds from the rule and code sources only, not from the library that holds its output.
         file(GLOB HDTRANS_RULEC_SOURCES CONFIGURE_DEPENDS src/rulec/*.cpp)
-        add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/load.cpp src/core/rules/eval.cpp
+        add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/body.cpp src/core/rules/load.cpp src/core/rules/eval.cpp
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
             src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp)
         target_include_directories(hdrulec PRIVATE src)

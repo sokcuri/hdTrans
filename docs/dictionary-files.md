@@ -84,6 +84,12 @@ TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파�
 `dicts.classes`가 찾습니다.
 사전으로 불러오지 않는 내장 표라서 고치면 사전 캐시도 다시 만듭니다.
 
+### 구문 표 (constructions.tsv)
+
+`constructions.tsv`는 `rewrites` 층에서 조사 같은 단어의 한국어를 앞뒤 단어로 고르는 행의 표입니다. 조건은 규칙의 본문
+문법으로 쓰고 `classes.tsv`의 부류를 `@부류`로 부릅니다. 형식은 [rule-language.md](rule-language.md#구문-표-constructionstsv)에
+있습니다. 사전으로 불러오지 않는 내장 표라서 고치면 사전 캐시도 다시 만듭니다.
+
 ### 복자 표 (masked.tsv)
 
 `masked.tsv`는 복자(伏せ字)로 가린 단어의 표이며 사전으로 불러오지 않고 번역 경로가 직접 읽습니다. 한 줄은

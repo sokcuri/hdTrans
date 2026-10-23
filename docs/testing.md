@@ -114,20 +114,22 @@ CI 빌드에는 이 코드가 들어가지 않습니다. 켠 빌드도 변수가
 ```sh
 cmake --preset mac -B build/mac-passexp -DHDTRANS_PASS_EXPERIMENTS=ON
 cmake --build build/mac-passexp --parallel --target hdtrans_cli
-HDTRANS_PASS_SKIP=NounTo build/mac-passexp/hdtrans -dicts dicts -in in.txt   # 그 패스를 빼고 번역
+HDTRANS_PASS_SKIP=QuoteTo build/mac-passexp/hdtrans -dicts dicts -in in.txt  # 그 패스를 빼고 번역
+HDTRANS_PASS_SKIP=cx:noun-to:20 build/mac-passexp/hdtrans -dicts dicts -in in.txt  # 구문 표의 행 하나를 빼고 번역
 HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # 씨앗 7로 패스 순서를 섞어 번역
 ```
 
 - `HDTRANS_PASS_SKIP`: 뺄 패스 이름, 쉼표로 구분하고 앞뒤 공백은 무시. 이름은 `flush.cpp`의 `Run` 호출과
-  `kTextPasses`에 있고, 모르는 이름은 표준 오류에 알립니다.
-- `HDTRANS_PASS_SHUFFLE`: 10진 씨앗. `kTextPasses`(`Select`부터 `EmphaticMo`까지 56개)의 순서만 섞고, 그 앞뒤
-  패스는 그대로 둡니다. 같은 씨앗은 같은 순서입니다. 10진수가 아니면 표준 오류에 알리고 멈춥니다(abort).
+  `kTextPasses`에 있고, 구문 표의 가족 이름이나 행 id(`cx:return-to:10`)도 됩니다. 모르는 이름은 표준 오류에 알립니다.
+- `HDTRANS_PASS_SHUFFLE`: 10진 씨앗. `kTextPasses`(`Select`부터 `EmphaticMo`까지)의 순서만 섞고(구문 표의 가족은
+  자기 패스를 따라감), 그 앞뒤 패스는 그대로 둡니다. 같은 씨앗은 같은 순서입니다. 10진수가 아니면 표준 오류에 알리고
+  멈춥니다(abort).
 - 두 변수는 프로세스에서 처음 번역할 때 한 번 읽습니다.
 
 `tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]`는 이 빌드(기본
 `build/<프리셋>-passexp/hdtrans`, 사전 기본 `dicts/`)로 패스를 하나씩 빼고 규칙 사례 네 묶음(`cases.tsv`,
 `cases/`, `speech-soft/`, `speech-strict/`)과 `examples/`를 돌려, 패스마다 묶음별 실패 수와 어느 테스트도
-잡지 못한 패스를 보입니다. 실행마다 시간 제한(기본 900초)이 있고, CLI가 죽거나(`crash`) 시간을 넘긴
+잡지 못한 패스를 보입니다. 구문 표의 행도 하나씩 뺍니다. 실행마다 시간 제한(기본 900초)이 있고, CLI가 죽거나(`crash`) 시간을 넘긴
 (`timeout`) 묶음은 그 패스를 잡은 것으로 칩니다. 기본으로 꺼진 개선 옵션(`src/core/word/analyze.h`)만 돌리는
 패스(`FilterMisreads`)는 `not exercised`로 따로 보입니다.
 

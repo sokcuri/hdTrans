@@ -1,0 +1,43 @@
+// Constructions of the rewrite layer (docs/rule-language.md, 구문 표): the Korean of a word picked
+// from the words around it, after the word stage has chosen every candidate.
+// A family is declared once by "//= FAMILY <TAB> after NAME <TAB> what it is for" and runs right
+// after the text pass or family NAME. Its rows are ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS
+// <TAB> NOTE, ID being cx:FAMILY:PRIO. On each word from the left, the first row of the family by
+// PRIO whose condition holds applies its actions.
+//= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
+cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
+//= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
+cx:hodo-degree:10		&&3 ||2 U+0== "R程に" U+0== "Rほどに" ||2 Y+0== "~수록" &&2 Y+0== "~만큼" S+1== "に" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도로"	痛ましい程に 참혹할 정도로
+cx:hodo-degree:20		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1== "に" ||2 Y+0== "~수록" Y+0== "~만큼" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도" select-lemma@+1 "(으)로"	ほどに with に its own word
+cx:hodo-degree:30		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1!= "に" Y+0== "~수록" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도"	痛い程の 따가울 정도의
+//= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
+cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다
+//= kara-source	after return-to	The から read (으)로부터 is 부터 after a time or a number, and 에서 after a place or scene.
+cx:kara-source:10		&&5 S+0== "Lから" F+0== "selected" D+0== "L(으)로부터" ||2 F+0== "last" &&2 S+1!= "が" S+1!= @Lword.kara-source-keep ||4 H+0== @Rnoun.time-end F+0== "after-digit" H+0== "R番" H+0== "R号"	replace-head "(으)로부터" "부터"	朝から 아침부터, 3番から 3번부터
+cx:kara-source:20		&&8 S+0== "Lから" F+0== "selected" D+0== "L(으)로부터" ||2 F+0== "last" &&2 S+1!= "が" S+1!= @Lword.kara-source-keep F-1== "selected" F-1!= "conjugating" P-1== "1" ||3 A-1== "VPl" A-1== "VBp" S-1== @noun.scene	replace-head "(으)로부터" "에서"	学校から 학교에서
+//= ni-after-adverb	after kara-source	The に read 에 is (으)로 after くらい, and nothing after a て form that goes on or after an adverb-like noun.
+cx:ni-after-adverb:10		&&5 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" ||2 S-1== "くらい" S-1== "ぐらい"	select-lemma "(으)로"	それくらいに 그 정도로
+cx:ni-after-adverb:20		&&7 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1== "conjugating" Y-1== "6" F+1!= "boundary"	select-lemma ""	て form before に and a word
+cx:ni-after-adverb:30		&&6 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1!= "conjugating" ||3 L-1== "R껏" L-1== "R으로" L-1== "R지로"	select-lemma ""	無理やりに 억지로
+//= no-after-na	after ni-after-adverb	The の read 의 after a な adjective read in 한 is the noun 것.
+cx:no-after-na:10		&&7 S+0== "の" F+0== "selected" F-1== "selected" F-1!= "conjugating" S-1== "Rな" L-1== "R한" L+0== "의"	select-lemma "것"	元気そうなのが 씩씩한 것이
+//= de-scene	after ShortPossessive	The で read (으)로 after a noun of a place or scene is 에서, unless the noun can be a means (noun.scene-means) and the first verb after it, with no punctuation or other particle between, is one of verb.means-de; after an instant it is 에.
+cx:de-scene:10		&&6 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" ||2 S-1== "一瞬" S-1== "瞬時"	select-lemma "에"	一瞬で 한순간에
+cx:de-scene:20		&&7 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" S-1== @noun.scene !1 &&2 S-1== @noun.scene-means >0 &&3 F+0== "selected" F+0== "verb" S+0== @Rverb.means-de ||3 F+0!= "selected" &&2 F+0!= "conjugating" ||2 P+0== "6" &&2 K+0== "P" S+0!= "を" F+0== "verb"	select-lemma "에서"	後ろで 뒤에서; not 夢で終わった, where the first verb after it makes 夢 the means
+//= particle-in-next	after de-scene	A particle whose Korean starts the Korean of the next word writes nothing, the next word carrying it.
+cx:particle-in-next:10		&&5 F+0== "selected" F+1== "selected" F+0!= "conjugating" K+0== "P" F+0== "lemma-starts-next"	set-target ""	人気なだけに 인기인 만큼
+//= ji-before-jiman	after particle-in-next	The けど read in 지만 after an ending in 겠지 is 만 alone.
+cx:ji-before-jiman:10		&&4 F+1== "selected" ||2 S+1== "Lけど" S+1== "Lけれど" L+1== "R지만" Y+0== "R겠지"	set-target@+1 "만"	ないのだろうけど 없겠지만
+//= even-before-passive	after OfferPromise	The でも read 에서도 before a passive verb is (이)라도, not the place of the action.
+cx:even-before-passive:10		&&6 F-1== "exists" S+0== "でも" L+0== "에서도" F+1== "conjugating" A-1!= "VPl" ||2 I+1== "~られ" I+1== "Lされ"	select-lemma "(이)라도"	修理でもされたのか 수리라도 된 건가
+//= comitative-to	after even-before-passive	The と after a number or a bracketed noun is (와)과 before a word of company or a noun partner, and after a number (이)라고 before a verb of saying, thinking or naming. A bracketed word span an earlier stage read is an utterance, so its と quotes.
+cx:comitative-to:10		&&7 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1== "number" ||3 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" B+1== @word.comitative	take-target "(와)과"	３と４を足す 3과 4를 더한다
+cx:comitative-to:20		&&10 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1== "number" ||3 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" F+1!= "quote-verb" B+1!= @verb.naming P+1== "1" ||2 F+1== "last" &&6 S+2!= "は" S+2!= "が" S+2!= "Lし" S+2!= "Lす" S+2!= "Lさ" S+2!= "Lせ"	take-target "(와)과"	鉄500を 철 500을, not 3とする
+cx:comitative-to:30		&&7 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1== "number" ||3 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" ||2 F+1== "quote-verb" B+1== @verb.naming	take-target "(이)라고"	３と答えた 3이라고 대답했다
+cx:comitative-to:40		&&9 ||2 S+0== "」と" S+0== "』と" F+0== "selected" F-1== "selected" F+1== "selected" P-1== "1" F-1!= "word-span" S-2== "00「『" ||6 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" L+0== "」(으)로" L+0== "」(이)라고" L+0== "」라고" B+1== @word.comitative	take-target "」(와)과"	「秋」と戦う 「가을」과 싸운다
+cx:comitative-to:50		&&12 ||2 S+0== "」と" S+0== "』と" F+0== "selected" F-1== "selected" F+1== "selected" P-1== "1" F-1!= "word-span" S-2== "00「『" ||6 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" L+0== "」(으)로" L+0== "」(이)라고" L+0== "」라고" F+1!= "quote-verb" B+1!= @verb.naming P+1== "1" ||5 S+2== "を" S+2== "の" S+2== "も" S+2== "や" S+2== "と"	take-target "」(와)과"	「秋」とチームを 「가을」과 팀을
+//= noun-to	after comitative-to	The と after a noun is (와)과 before a word of company or comparison, and (이)라고 before a verb of naming or supposing.
+cx:noun-to:10		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1!= "conjugating" P-1== "1" ||3 L+0== "(으)로" L+0== "(이)라고" L+0== "라고" B+1== @word.comitative	take-target "(와)과"	友達と話す 친구와 이야기한다
+cx:noun-to:20		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1!= "conjugating" P-1== "1" L+0== "(와)과" ||2 B+1== @verb.naming B+1== @word.supposing	take-target "(이)라고"	勇者と呼ぶ 용사라고 부른다
+//= line-initial-to	after noun-to	A と that opens a line or follows a sentence end on it quotes what was said before it: (이)라고. Not before an ellipsis or another と, nor before なる or する (となると), nor before a word of company (と一緒に).
+cx:line-initial-to:10		&&12 F+0== "first" S+0== "と" F+0== "selected" F+0!= "fixed" F+1== "selected" F+0== "opens-line" S+1!= @Lword.partner-to S+1!= "L…" S+1!= "L‥" S+1!= "Lと" ||2 P+1!= "4" &&3 S+1!= "Lな" S+1!= "Lす" S+1!= "Lし" ||2 L+0== "(와)과" L+0== "(으)로"	take-target "(이)라고"	と私が頭を下げると 라고 내가 고개를 숙이면

@@ -26,6 +26,7 @@
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/engine/rules.h"
+#include "core/word/constructions.h"
 #include "core/word/select.h"
 #include "stage_records.h"
 #include "trace_json.h"
@@ -174,8 +175,8 @@ std::string Decided(const hdTrans::word::Selection& s, bool ending) {
     case Provenance::Digit: return ending ? "ending-defaults\t" : "defaults\t";
     case Provenance::Sense:
     case Provenance::SenseDefault: return "senses\tsenses.tsv:" + std::to_string(s.id);
-    case Provenance::Initial:
-    case Provenance::Rewrite: return "rewrites\t";
+    case Provenance::Initial: return "rewrites\t";
+    case Provenance::Rewrite: return "rewrites\t" + std::string(hdTrans::word::ConstructionId(s.id));
     case Provenance::Scorer: return "scorers\t";
     case Provenance::Misread: return "misread\t";
     case Provenance::Cg: return "cg-lite\t";
@@ -250,6 +251,12 @@ bool WriteRuleCounts(const std::string& path, const hdTrans::rules::Program& pro
         std::fprintf(f, "G\t%d\t%c\t%d\t%d\t%llu\t%llu\n", r.prio, static_cast<char>(r.pumsa), r.number,
                      r.uganRule ? 1 : 0, static_cast<unsigned long long>(tally.globalRuns[i]),
                      static_cast<unsigned long long>(tally.globalFires[i]));
+    }
+    for (std::size_t i = 0; i < tally.constructionRuns.size(); i++) {
+        const std::string_view id = hdTrans::word::ConstructionId(static_cast<int>(i));
+        std::fprintf(f, "cx\t%.*s\t\t\t\t%llu\t%llu\n", static_cast<int>(id.size()), id.data(),
+                     static_cast<unsigned long long>(tally.constructionRuns[i]),
+                     static_cast<unsigned long long>(tally.constructionFires[i]));
     }
     return std::fclose(f) == 0;
 }

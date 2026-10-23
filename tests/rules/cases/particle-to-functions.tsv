@@ -12,11 +12,11 @@ sound:katakana-after-to	舌を絡めて、チュッとキスをした。	혀를 
 sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 복도를 걸어간다.	fix	sound
 sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
 sound:hiragana-doubled	いろいろと考えた。	여러모로 생각했다.	keep	sound
-rewrite:line-initial-to	と私が殊勝に頭を下げると、王子はひどくびっくりした顔をする。	라고 내가 기특하게 고개를 숙이면, 왕자는 몹시 놀란 얼굴을 한다.	fix	rewrites
-rewrite:line-initial-to	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어 버리려고 했지만 그만두기로 했다.	fix	rewrites
-rewrite:line-initial-to	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
-rewrite:line-initial-to	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
-rewrite:line-initial-to	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites
+cx:line-initial-to:10	と私が殊勝に頭を下げると、王子はひどくびっくりした顔をする。	라고 내가 기특하게 고개를 숙이면, 왕자는 몹시 놀란 얼굴을 한다.	fix	rewrites
+cx:line-initial-to:10	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어 버리려고 했지만 그만두기로 했다.	fix	rewrites
+cx:line-initial-to:10	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
+cx:line-initial-to:10	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
+cx:line-initial-to:10	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites
 rewrite:past-sequence	　振り返ると彼女がいた。	 돌아보니 그녀가 있었다.	fix	rewrites
 rewrite:past-sequence	　ドアを開けると私服の彼女がいた。	 문을 열자 사복의 그녀가 있었다.	fix	rewrites
 rewrite:past-sequence	　スマホを見ると１７時半すぎだった。	 스마트폰을 보니 17너무 시다.	fix	rewrites
@@ -58,6 +58,12 @@ sense:short-stature	声が低い。	목소리가 낮다.	keep	senses
 rewrite:quote-to	もっと時間がないと。	좀 더 시간이 없으면.	fix	rewrites
 rewrite:quote-to	「力がないと」	「힘이 없으면」	fix	rewrites
 rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도 없다고.	keep	rewrites
-rewrite:line-initial-to	と一緒に行こう。	와 함께 가자.	fix	rewrites
-rewrite:line-initial-to	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
-rewrite:line-initial-to	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites
+cx:line-initial-to:10	と一緒に行こう。	와 함께 가자.	fix	rewrites
+cx:line-initial-to:10	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
+cx:line-initial-to:10	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites
+cx:noun-to:10	誰かと会話する。	누군가와 대화한다.	fix	rewrites
+cx:noun-to:10	もっと未来と話したい。	좀 더 미래와 이야기하고 싶다.	fix	rewrites
+cx:noun-to:10	勇者と言った。	용사라고 말했다.	keep	rewrites
+cx:noun-to:20	ラピスと名乗った少女。	라피스라고 자칭한 소녀.	fix	rewrites
+cx:noun-to:20	異世界と仮定して考える。	이세계라고 가정하고 생각한다.	fix	rewrites
+cx:noun-to:20	勇者と戦う。	용사와 싸운다.	keep	rewrites

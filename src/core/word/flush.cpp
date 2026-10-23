@@ -1,9 +1,11 @@
 #include "core/word/flush.h"
 
+#include <array>
 #include <iterator>
 #include <string_view>
 
 #include "core/word/cg.h"
+#include "core/word/constructions.h"
 #include "core/word/misread.h"
 #include "core/word/select.h"
 
@@ -57,26 +59,12 @@ constexpr Pass kTextPasses[] = {
     {"QuoteTo", QuoteTo},
     {"NodaTo", NodaTo},
     {"TerminalBeforeQuote", TerminalBeforeQuote},
-    {"HodoDegree", HodoDegree},
     {"QuestionCopula", QuestionCopula},
     {"WonderingDarou", WonderingDarou},
-    {"GenitiveBetweenNames", GenitiveBetweenNames},
     {"LongVowelAfterKatakana", LongVowelAfterKatakana},
-    {"ReturnTo", ReturnTo},
-    {"KaraSource", KaraSource},
-    {"NiAfterAdverb", NiAfterAdverb},
-    {"NoAfterNa", NoAfterNa},
     {"ShortPossessive", ShortPossessive},
-    {"DeScene", DeScene},
-    {"YounaBeforeModifier", YounaBeforeModifier},
-    {"ParticleInNext", ParticleInNext},
-    {"JiBeforeJiman", JiBeforeJiman},
     {"ParallelNoka", ParallelNoka},
     {"OfferPromise", OfferPromise},
-    {"EvenBeforePassive", EvenBeforePassive},
-    {"ComitativeTo", ComitativeTo},
-    {"NounTo", NounTo},
-    {"LineInitialTo", LineInitialTo},
     {"PluralPronoun", PluralPronoun},
     {"HumbleFirstPerson", HumbleFirstPerson},
     {"ChanAfterKatakana", ChanAfterKatakana},
@@ -85,11 +73,18 @@ constexpr Pass kTextPasses[] = {
     {"EmphaticMo", EmphaticMo},
 };
 
+constexpr auto kTextPassNames = [] {
+    std::array<std::string_view, std::size(kTextPasses)> names{};
+    for (std::size_t i = 0; i < names.size(); i++) names[i] = kTextPasses[i].name;
+    return names;
+}();
+
 #ifdef HDTRANS_PASS_EXPERIMENTS
 // Experiment builds only (CMake HDTRANS_PASS_EXPERIMENTS, docs/testing.md), read once per process:
-// HDTRANS_PASS_SKIP lists pass names to leave out, comma-separated; HDTRANS_PASS_SHUFFLE is a decimal
-// seed that reorders kTextPasses. An unknown name is reported on stderr; a seed that is not a
-// decimal number aborts.
+// HDTRANS_PASS_SKIP lists pass names, construction families and construction row ids to leave out,
+// comma-separated; HDTRANS_PASS_SHUFFLE is a decimal seed that reorders kTextPasses, each with the
+// families that run after it. An unknown name is reported on stderr; a seed that is not a decimal
+// number aborts.
 
 // The passes Flush runs outside kTextPasses.
 constexpr std::string_view kOuterPasses[] = {
@@ -105,6 +100,13 @@ std::string_view Trim(std::string_view s) {
 bool KnownPass(std::string_view name) {
     for (const Pass& pass : kTextPasses) {
         if (pass.name == name) return true;
+    }
+    const internal::ConstructionTable& table = internal::BuiltinConstructions();
+    for (const internal::CxFamily& family : table.families) {
+        if (family.name == name) return true;
+    }
+    for (const internal::CxRow& row : table.rows) {
+        if (row.id == name) return true;
     }
     for (std::string_view outer : kOuterPasses) {
         if (outer == name) return true;
@@ -159,18 +161,35 @@ const Experiment& CurrentExperiment() {
     }();
     return experiment;
 }
+
+bool Skipped(std::string_view name) {
+    for (const std::string& skip : CurrentExperiment().skip) {
+        if (skip == name) return true;
+    }
+    return false;
+}
 #endif
 
 void Run(Flusher& f, const Pass& pass) {
 #ifdef HDTRANS_PASS_EXPERIMENTS
-    for (const std::string& name : CurrentExperiment().skip) {
-        if (name == pass.name) return;
-    }
+    if (Skipped(pass.name)) return;
 #endif
     pass.run(f);
 }
 
+// Text pass i and the construction families that run after it.
+void RunText(Flusher& f, std::size_t i) {
+    Run(f, kTextPasses[i]);
+#ifdef HDTRANS_PASS_EXPERIMENTS
+    RunConstructions(f, i, Skipped);
+#else
+    RunConstructions(f, i);
+#endif
+}
+
 }  // namespace
+
+std::span<const std::string_view> TextPassNames() { return kTextPassNames; }
 
 // The sentence passes in order. The text-path passes run only when settings.text is set.
 void Flush(Flusher& f) {
@@ -182,9 +201,9 @@ void Flush(Flusher& f) {
     Run(f, {"ApplyNegatives", ApplyNegatives});
     if (f.w.settings.text) {
 #ifdef HDTRANS_PASS_EXPERIMENTS
-        for (const std::size_t i : CurrentExperiment().order) Run(f, kTextPasses[i]);
+        for (const std::size_t i : CurrentExperiment().order) RunText(f, i);
 #else
-        for (const Pass& pass : kTextPasses) Run(f, pass);
+        for (std::size_t i = 0; i < std::size(kTextPasses); i++) RunText(f, i);
 #endif
     }
     if (f.w.settings.terminal) {

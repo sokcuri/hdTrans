@@ -11,9 +11,9 @@ rewrite:noda-to	無理はなかっただろうと思うんですよ。	무리는
 rewrite:noda-to	ひたすら恥ずかしかったのだと思います	오로지 부끄러웠던 것이라고 생각합니다	fix	rewrites
 rewrite:noda-to	そうだと思った。	그렇다고 생각했다.	keep	rewrites
 rewrite:noda-to	行くと思う。	간다고 생각한다.	keep	rewrites
-rewrite:ji-before-jiman	そこまで深い意味はないのだろうけど。	거기까지 깊은 의미는 없겠지만.	fix	rewrites
-rewrite:ji-before-jiman	衰退するだろけど	쇠퇴하겠지만	fix	rewrites
-rewrite:ji-before-jiman	高いけど買う。	비싸지만 산다.	keep	rewrites
+cx:ji-before-jiman:10	そこまで深い意味はないのだろうけど。	거기까지 깊은 의미는 없겠지만.	fix	rewrites
+cx:ji-before-jiman:10	衰退するだろけど	쇠퇴하겠지만	fix	rewrites
+cx:ji-before-jiman:10	高いけど買う。	비싸지만 산다.	keep	rewrites
 rewrite:geot-before-mitai	随分悔しがってたみたいだけど	상당히 분해하고 있었던 것 같지만	fix	rewrites
 rewrite:geot-before-mitai	早々に見抜かれてたみたいですけど	일찌감치 간파되고 있었던 것 같지만	fix	rewrites
 rewrite:geot-before-mitai	夏休み前にも来てたみたいだけど	여름 방학 전에도 오고 있었던 것 같지만	fix	rewrites
