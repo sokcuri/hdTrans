@@ -84,18 +84,33 @@ HD_TEST(verb_bare_command_boundaries) {
         {"遊", '6', "べ"}, {"帰", '8', "れ"}, {"行", '?', "け"},
     };
     for (const Row& row : rows) {
-        for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの", "」", "」の", "』か", "。", "！"}) {
+        for (const std::string_view boundary : {"」と", "』と", "」って", "』って", "だの", "」だの", "』だの", "」", "」の", "』か", "。", "！",
+                                                 "の", "だとか", "だと", "だなんて"}) {
             int branch = -1, length = -1;
             HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(boundary), branch, length));
             HD_CHECK_EQ(branch, 11);
             HD_CHECK_EQ(length, 3);
         }
-        for (const std::string_view continuation : {"る", "ない", "た", "れば", "ます", "本", "の", "よ"}) {
+        for (const std::string_view continuation : {"る", "ない", "た", "れば", "ます", "本", "よ"}) {
             int branch = -1, length = -1;
             HD_CHECK(word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(continuation), branch, length));
             HD_CHECK_EQ(branch, 4);
             HD_CHECK_EQ(length, 3);
         }
+    }
+    // Neither the e-row form nor the order takes a copula or に (待っていただけだ is いた and だけ).
+    for (const Row& row : rows) {
+        for (const std::string_view copula : {"だ", "です", "で", "じゃ", "に"}) {
+            int branch = -1, length = -1;
+            const bool matched = word::AnalyseVerbTail(row.key, row.kind, std::string(row.e) + std::string(copula), branch, length);
+            HD_CHECK(!matched || (branch != 4 && branch != 11));
+        }
+    }
+    // The imperative of いただく quotes no order: いただけだと is いた and だけ.
+    for (const std::string_view quote : {"だと", "だって", "だなんて", "だの"}) {
+        int branch = -1, length = -1;
+        const bool matched = word::AnalyseVerbTail("いただ", '1', std::string("け") + std::string(quote), branch, length);
+        HD_CHECK(!matched || (branch != 4 && branch != 11));
     }
     struct Case {
         std::string_view key;

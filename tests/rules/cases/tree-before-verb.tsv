@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:116295	木を切るのは斧だ。	나무를 자르는 것은 도끼다.	fix	global-stem
+dict:jisjk:116295	庭の木を切った。	뜰의 나무를 잘랐다.	fix	global-stem
+dict:jisjk:116295	十秒を切った。	10초가 채 안 되었다.	keep	local
+dict:jisjk:116295	月、火、水、木、金	월, 화, 수, 목, 금	keep	local

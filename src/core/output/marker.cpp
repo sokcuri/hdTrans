@@ -789,6 +789,8 @@ bool Composer::TextGate(int i, std::string_view key) {
         if (cls == '3' || cls == '0' || cls == '6' || cls == ';' || cls == '5' || At(DirectCode(next), 1) == '3') {
             return false;
         }
+        // A continuative with も before する keeps its ending (疑いもした 의심하기도 했다).
+        if (it.endingSurface == "も") return false;
         if (cls == '7') return WidthOf(DirectText(it)) <= 1;
         return true;
     }

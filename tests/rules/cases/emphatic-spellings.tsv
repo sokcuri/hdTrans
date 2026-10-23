@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+normalize:emphatic-spelling	「さっすが、話がわかるぜ親友！」	「역시, 이해한다 친구!」	fix	normalize
+normalize:emphatic-spelling	さっすがですねぇ！	역시 대단하네요!	fix	normalize
+normalize:emphatic-spelling	しっかたないなぁ…。	어쩔 수 없다….	fix	normalize
+normalize:emphatic-spelling	もうすんごい泣くんだ。	이제 대단히 우는 거야.	fix	normalize
+normalize:emphatic-spelling	すんごく……痛い！	정말……아프다!	fix	normalize
+normalize:emphatic-spelling	さすがですね。	역시 대단하네요.	keep	normalize

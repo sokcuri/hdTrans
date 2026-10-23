@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:jisjk:105028	第二話	제2화	fix	global
+dict:jisjk:105029	第三話を読んだ。	제3화를 읽었다.	fix	global
+dict:jisjk:160828	第七位	제7위	fix	global
+dict:jisjk:105028	第二の人生	제2의 인생	keep	global
+global:90	……俺とシグは部下2人を連れて最上階を目指す。	……나와 시그는 부하 두 명을 동반해 최상층을 목표로 한다.	fix	global
+global:90	……俺は部下2人を連れて最上階を目指す。	……나는 부하 두 명을 동반해 최상층을 목표로 한다.	fix	global
+global:90	昔話を読んだ。	옛날이야기를 읽었다.	keep	global

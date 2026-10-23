@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:jisjk:359210	無理だろうなぁ。	무리이겠지.	fix	local
+dict:jisjk:359210	まあ、そうだろうな。	뭐, 그렇겠지.	fix	local
+dict:jisjk:359210	情報収集、忘れてないだろうな？	정보수집, 잊지 않겠지?	fix	local
+dict:jisjk:359210	読んだだろうな。	읽었겠지.	fix	local
+dict:jisjk:359210	無理だろう。	무리일 것이다.	keep	local
+dict:jisjk:359210	何を見張ってるんだろうな？	무엇을 감시하는 걸까?	fix	local
+dict:jisjk:359210	誰が来るんだろうな	누가 오는 걸까	keep	local
+dict:jisjk:359210	何か食べたんだろうな	뭔가 먹었겠지	keep	local
+dict:jisjk:359210	どこから来たんだろうな	어디에서 왔을까	fix	local
+dict:jisjk:359210	いつからだろう。	언제부터일까.	fix	local
+dict:jisjk:359210	誰か来たんだろうな	누군가 왔겠지	keep	local
+dict:jisjk:359210	どこかから来たんだろうな	어딘가로부터 왔겠지	keep	local
+dict:jisjk:359210	誰が来るか知らないだろうな	누가 오는지 모르겠지	keep	local
+dict:jisjk:359210	何が起きたのか分からないだろうな	무슨 일이 일어났는지 모르겠지	fix	local

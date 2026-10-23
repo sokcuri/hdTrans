@@ -388,7 +388,8 @@ std::string WriteStutters(std::string_view s) {
         while (j + word < rs.size() && IsSyllable(rs[j + word])) word++;
         if (word == 0) continue;
         if (rest == 0) {
-            out.push_back(rs[j] - (rs[j] - text::kBase) % text::kFinalsCount);
+            // Marks without separators between them stand for a syllable said again each.
+            for (size_t m = 0; m < marks; m++) out.push_back(rs[j] - (rs[j] - text::kBase) % text::kFinalsCount);
         } else {
             const size_t share = (marks * word + marks + rest - 1) / (marks + rest);
             out += rs.substr(j, std::max<size_t>(1, std::min(share, word - 1)));
@@ -576,27 +577,6 @@ std::string RetortIdioms(std::string_view line) {
     return out;
 }
 
-// line with the literal 려고 생각하다 of an intention (行こうと思って 가려고 생각해) written as
-// 려고 하다 (가려고 했어); before another verb or as a reason 생각해 goes (사려고 왔다).
-std::string IntentIdioms(std::string_view line) {
-    constexpr std::string_view kLiteral = "려고 생각";
-    std::string out(line);
-    for (std::size_t at = 0; (at = out.find(kLiteral, at)) != std::string::npos;) {
-        const std::size_t end = at + kLiteral.size();
-        const std::string_view rest = std::string_view(out).substr(end);
-        if (rest.starts_with("해서")) {
-            out.erase(at + std::string_view("려고").size(), std::string_view(" 생각해서").size());
-        } else if (rest.starts_with("해 ")) {
-            out.erase(at + std::string_view("려고").size(), std::string_view(" 생각해").size());
-        } else if (rest.starts_with("하") || rest.starts_with("해") || rest.starts_with("했") || rest.starts_with("한") ||
-                   rest.starts_with("할") || rest.starts_with("합")) {
-            out.erase(at + std::string_view("려고 ").size(), std::string_view("생각").size());
-        }
-        at += std::string_view("려고").size();
-    }
-    return out;
-}
-
 RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBrackets, bool literalCleanup) {
     RestoreSteps st;
     st.spaced = DropAddedSpaces(typed, cleaned);
@@ -607,7 +587,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
     });
     st.line = UnescapePrivateUse(DropEchoedGlosses(DropParticleMarks(
         WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))));
-    if (literalCleanup) st.line = IntentIdioms(RetortIdioms(st.line));
+    if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;
 }
 

@@ -562,7 +562,13 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
+                f.place = f.place || Has(sem, "VPl");
                 const std::string_view part = rec.codes->partText;
+                if (part.starts_with("N12") || part.starts_with("I12")) {
+                    f.pronoun = true;
+                } else if (Has(sem, "VHn")) {
+                    f.human = true;
+                }
                 f.thing = f.thing || part.starts_with("E3") || Has(sem, "VAm") || Has(sem, "QAM") || Has(sem, "VFd") ||
                           std::any_of(kCreatureCodes.begin(), kCreatureCodes.end(), [&](std::string_view c) { return Has(sem, c); });
                 // A person, profession or animal noun, or a pronoun (オレ, 俺).
@@ -647,6 +653,15 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     const std::size_t n = RuneCount(t);
     if ((run.kanji && n <= 4 && AllRunes(t, IsKanji)) || (!run.kanji && n >= 2 && n <= 12)) return t;
     return "";
+}
+
+// Whether the name layer reads t as a person with a Hangul that is no Korean of its words
+// (東雲 시노노메 beside 새벽, but 店員 점원, 猫 고양이), and t is no person, profession,
+// animal or thing noun.
+bool Registry::LayerReading(std::string_view t) {
+    const DictFlags f = Flags(t);
+    if (f.layerName.empty() || f.role || f.thing || f.pronoun || f.human || RoleLike(t)) return false;
+    return Words(t).count(f.layerName) == 0;
 }
 
 // Whether the hiragana run is a form of a base-dictionary verb or adjective that ends a

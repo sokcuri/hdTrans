@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+rewrite:past-sequence	先日、薬草を探しに森に出かけてみれば出会ったのは、人さらいだった。	요전날, 약초를 찾으러 숲에 나가 보니 만난 것은, 유괴범이었다.	fix	rewrites
+rewrite:past-sequence	今日の授業は長いように感じたけど、終わってみればあっという間だった。	오늘의 수업은 길도록 느꼈지만, 끝나고 보니 순식간이었다.	fix	rewrites
+rewrite:past-sequence	彼女がそんなことを考えていると、目の前の二人が噴火した。	그녀가 그런 것을 생각하고 있으니, 눈앞의 두 사람이 분화했다.	fix	rewrites
+rewrite:past-sequence	長期的に見れば、マイナスだった。	장기적으로 보면, 마이너스였다.	keep	rewrites
+rewrite:past-sequence	やってみれば分かる。	해 보면 안다.	keep	rewrites
+dict:gram:iuto:正直言うと	「……正直言うと、心配した」	「……솔직히 말하면, 걱정했다」	keep	defaults
+rewrite:past-sequence	そう言うと、友人は言った。	그렇게 말하니, 친구는 말했다.	fix	rewrites

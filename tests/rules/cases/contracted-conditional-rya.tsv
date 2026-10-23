@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+normalize:rya	「ああ、大丈夫さ。寝りゃ治る」	「아, 괜찮음. 자면 낫는다」	fix	normalize
+normalize:rya	「見りゃわかるだろ」	「보면 알지」	fix	normalize
+normalize:rya	「あー、言われてみりゃそうか」	「아―, 듣고 보니 그런가」	fix	normalize
+normalize:rya	くそっ、こうなりゃ相討ちしかないか……	젠장, 이렇게 되면 맞받아침밖에 없는가……	fix	normalize
+normalize:rya	前方に熱源がありゃ止まる	전방으로 열원이 있으면 멈춘다	fix	normalize
+normalize:rya	そりゃそうだ	그야 그렇다	keep	normalize
+normalize:rya	「とりゃ！」	「토랴!」	keep	normalize

@@ -178,6 +178,8 @@ HD_TEST(pipeline_write_stutters) {
         // the whole word: 2 kana of 6 is 2 of 4 syllables, 2 of 3 is 1 of 2.
         {"「\uE000、\uE000\uE000\uE004\uE004\uE004\uE004、미안해요」", "「미, 미안, 미안해요」"},
         {"\uE000、\uE000\uE000\uE004、싫어", "시, 싫, 싫어"},
+        // Marks without separators write the syllable once each.
+        {"「\uE000\uE000\uE000마침내」", "「마마마마침내」"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteStutters(c.in), std::string(c.want));
 }

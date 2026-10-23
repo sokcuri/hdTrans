@@ -24,3 +24,10 @@ normalize:casual-negative-nee	僕たちにならねぇ、話せる	우리에게�
 normalize:casual-negative-nee	ここにならねぇ、住める	여기에라면, 살 수 있다	keep	normalize
 normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않는다…	fix	normalize
 normalize:casual-negative-nee	気にならねぇ、そんなの	신경 쓰이지 않는, 그런 것	fix	normalize
+normalize:casual-negative-nee	「見てねーわ」	「보지 않아」	fix	normalize
+normalize:casual-negative-nee	誰も気にしてねーよ	아무도 신경 쓰지 않아	fix	normalize
+normalize:casual-negative-nee	ここあんまり荒れねーから好きだわ	여기 별로 거칠어지지 않으니까 좋아하는구나	fix	normalize
+normalize:casual-negative-nee	そうとしか思えねえだろ	그렇다고밖에 생각되지 않지	fix	normalize
+normalize:casual-negative-nee	何かこえーしトイレいけねーよ	웬지 무섭고 화장실 안 돼	fix	normalize
+normalize:casual-negative-nee	「見てねー！」	「봐―！」	keep	normalize
+normalize:casual-negative-nee	もうすぐ夜明けねー。	이제 곧 새벽이네―.	keep	normalize

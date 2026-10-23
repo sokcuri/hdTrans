@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+constraint:ku-before-rai	この前も、俺が説教したくらいだ。	일전에도, 내가 설교한 정도다.	fix	lookup
+constraint:ku-before-rai	予約票を貰ってきたくらいだからな。	예약표를 받아 온 정도니까.	fix	lookup
+verb:taku	まだ二歳を過ぎたくらいなのに	아직 2세를 지난 정도인데	fix	conjugation
+verb:taku	一度見たくらいだ。	한 번 본 정도다.	fix	conjugation
+verb:taku	見たくない。	보고 싶지 않다.	keep	conjugation

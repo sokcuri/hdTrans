@@ -61,14 +61,41 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
     return n;
 }
 
+// Words that follow another word inside one clause and so never start a column: a
+// copula, an auxiliary or a particle, matched at the start of the hiragana run that
+// begins a column (kBoundStart) or as the whole run (kBoundWhole).
+constexpr std::string_view kBoundStart[] = {
+    "です", "でし", "である", "じゃ", "だっ", "だろ", "だよ", "だね", "だな", "ます", "まし", "ませ", "ない",
+    "なかっ", "らしい", "みたい", "ような", "ように", "ようだ", "そうだ", "そうな", "たいで", "たかっ", "から",
+    "まで", "より", "だけ", "しか", "ばかり", "など", "くらい", "ぐらい", "ほど", "には", "では", "とは", "にも",
+    "でも", "って"};
+constexpr std::string_view kBoundWhole[] = {"だ", "が", "を", "に", "へ", "で", "と", "も", "は", "の",
+                                            "や", "か", "よ", "ね", "わ", "ぞ", "さ", "な", "たい"};
+
+// Whether s starts with a word that only follows another one in the same clause, or with
+// punctuation that ends or splits a sentence or closes a bracket.
+bool StartsBound(std::string_view s) {
+    if (RuneIn(text::DecodeRune(s).cp, U"。．、，！？!?…‥」』）)】〉》")) return true;
+    const std::string_view run = s.substr(0, RunOf(s, IsHiraganaRune));
+    for (const std::string_view w : kBoundStart) {
+        if (run.starts_with(w)) return true;
+    }
+    for (const std::string_view w : kBoundWhole) {
+        if (run == w) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool KanaSpace(std::string_view s, size_t i) {
+    // The run of spaces is read only after a hiragana, so that a long run costs one pass.
     const char32_t last = LastRune(s.substr(0, i)).cp;
+    if (!IsHiraganaRune(last)) return false;
     std::string_view rest = s.substr(i);
     while (!rest.empty() && rest[0] == ' ') rest.remove_prefix(1);
     const char32_t first = text::DecodeRune(rest).cp;
-    if (!IsHiraganaRune(last) || !IsJapaneseRune(first)) return false;
+    if (!IsJapaneseRune(first)) return false;
     return RuneIn(last, U"ねよさわぞぜ") ||
            (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか"));
 }
@@ -83,9 +110,41 @@ bool Conjunctive(std::string_view s) {
     return false;
 }
 
+size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) {
+    // The checks on the characters around i come before the run is read, so that only the
+    // first blank of a run reads it and a long run costs one pass.
+    if (i >= s.size() || !IsBlank(text::DecodeRune(s.substr(i)).cp)) return i;
+    auto lineEnd = [](char32_t r) { return r == U'\n' || r == U'\r'; };
+    const text::Rune last = LastRune(s.substr(0, i));
+    if (i == 0 ? !lineBefore : (IsBlank(last.cp) || lineEnd(last.cp))) return i;
+    const size_t blanks = RunOf(s.substr(i), IsBlank);
+    const std::string_view run = s.substr(i, blanks);
+    if (run.find('\t') == std::string_view::npos && LastRune(run).size == blanks) return i;
+    const size_t end = i + blanks;
+    const text::Rune next = text::DecodeRune(s.substr(end));
+    if (end == s.size() ? !lineAfter : lineEnd(next.cp)) return i;
+    // Exactly two ASCII spaces inside a clause, typed as extra spacing between words: after
+    // a particle or an inflected ending (both written in hiragana) or before a copula, an
+    // auxiliary, a particle or punctuation (猫が  好き  です, 私は  学生です  。).
+    if (run == "  " && (IsHiraganaRune(last.cp) || StartsBound(s.substr(end)))) return i;
+    // A single kanji on each side, each standing alone: a two-character name padded to the
+    // width of three (林  涛).
+    const auto alone = [&](size_t at, bool more) {
+        if (at == 0 || at == s.size()) return !more;
+        const char32_t r = at < i ? LastRune(s.substr(0, at)).cp : text::DecodeRune(s.substr(at)).cp;
+        return IsBlank(r) || lineEnd(r);
+    };
+    if (IsKanjiRune(last.cp) && IsKanjiRune(next.cp) && alone(i - last.size, lineBefore) &&
+        alone(end + next.size, lineAfter)) {
+        return i;
+    }
+    return end;
+}
+
 bool BetweenWords(std::string_view s, size_t i) {
     auto word = [](char32_t r) { return r != text::kReplacement && !IsBlank(r) && r != U'\n' && r != U'\r'; };
     const text::Rune last = LastRune(s.substr(0, i));
+    if (!word(last.cp)) return false;  // before the run is read: one pass per run
     const char32_t before = LastRune(s.substr(0, i - last.size)).cp;
     const std::string_view rest = TrimLeftRunes(s.substr(i), U" 　\t");
     const text::Rune first = text::DecodeRune(rest);
@@ -95,10 +154,12 @@ bool BetweenWords(std::string_view s, size_t i) {
 
 }  // namespace internal
 
-std::vector<Chunk> Segment(const output::Pieces& pieces) {
+std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string>* gaps) {
     using namespace internal;
     std::vector<Chunk> parts;
+    std::vector<std::string> gapsBefore;
     Chunk part;
+    std::string gap;  // the column separator before part
     int count = 0;
     for (size_t k = 0; k < pieces.size(); k++) {
         const output::Piece& p = pieces[k];
@@ -110,10 +171,25 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
         size_t start = 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
+            if (const size_t end = ColumnGap(t, i, k > 0, k + 1 < pieces.size()); end != i) {
+                output::Add(part, t.substr(start, i - start));
+                if (!part.empty()) {
+                    parts.push_back(std::move(part));
+                    gapsBefore.push_back(std::move(gap));
+                    part.clear();
+                    gap.clear();
+                }
+                gap += t.substr(i, end - i);
+                start = i = end;
+                count = 0;
+                continue;
+            }
             if ((r.cp == U'　' || (r.cp == U' ' && KanaSpace(t, i))) && i > start && BetweenWords(t, i)) {
                 output::Add(part, t.substr(start, i - start));
                 parts.push_back(std::move(part));
+                gapsBefore.push_back(std::move(gap));
                 part.clear();
+                gap.clear();
                 start = i;
                 count = 0;
             } else if (IsSentenceEnd(r.cp)) {
@@ -123,7 +199,9 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
                 if (count >= kChunkBefore && Conjunctive(t.substr(0, i)) && CharsBeforeEnd(pieces, k, end) >= kChunkAfter) {
                     output::Add(part, t.substr(start, end - start));
                     parts.push_back(std::move(part));
+                    gapsBefore.push_back(std::move(gap));
                     part.clear();
+                    gap.clear();
                     start = end;
                     count = 0;
                 }
@@ -135,6 +213,7 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
         output::Add(part, t.substr(start));
     }
     parts.push_back(std::move(part));
+    gapsBefore.push_back(std::move(gap));
     for (size_t i = 1; i < parts.size(); i++) {
         Chunk& c = parts[i];
         if (c.empty() || c[0].span != output::SpanText) continue;
@@ -145,6 +224,7 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
             c.erase(c.begin());
         }
     }
+    if (gaps != nullptr) *gaps = std::move(gapsBefore);
     return parts;
 }
 

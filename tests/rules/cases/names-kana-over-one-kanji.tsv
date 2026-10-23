@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+names:reading	空（そら）を見上げた。	하늘을 올려다보았다.	fix	normalize
+names:reading	花（はな）が咲いた。	꽃이 피었다.	fix	normalize
+names:reading	星（ほし）が綺麗だ。	별이 예쁘다.	fix	normalize
+names:reading	猫（たま）が鳴いた。	고양이(타마)가 울었다.	fix	normalize
+names:reading	猫（タマ）が鳴いた。	고양이(타마)가 울었다.	keep	normalize
+names:reading	妹（ゆき）が来た。	여동생(유키)이 왔다.	keep	normalize
+names:reading	雪（ゆき）が降った。	눈이 내렸다.	keep	normalize

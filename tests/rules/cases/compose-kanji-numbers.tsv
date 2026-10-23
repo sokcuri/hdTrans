@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+compose:kanji-numbers	高度が五百メートルほどまで落ちていた。	고도가 500미터 정도까지 떨어져 있었다.	fix	compose
+compose:kanji-numbers	収穫まで、四十～五十日ほど。	수확까지, 40~50일 정도.	fix	compose
+compose:kanji-numbers	布のサイズは五十センチ四方。	천의 사이즈는 50센티 사방.	fix	compose
+compose:kanji-numbers	第五十話	제50화	fix	compose
+compose:kanji-numbers	二千年後の話だ	2000년 후 이야기다	fix	compose
+compose:kanji-numbers	十四日目に	14일째에	fix	compose
+compose:kanji-numbers	部屋数は5以上。	방수는 5 이상.	keep	compose
+compose:kanji-numbers	値段は三万五千円から	가격은 3만 5000엔으로부터	keep	compose
+compose:kanji-numbers	五十肩	오십견	keep	compose
+compose:kanji-numbers	千里が座る	천리가 앉는다	keep	compose

@@ -9,6 +9,7 @@
 #include <deque>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -40,6 +41,9 @@ struct DictFlags {
     // A base record of a creature, fruit or food noun or of an adverb: what speech addresses
     // with an honorific (ひよこさん, いちごちゃん) or what stands before ちゃんと (いつか).
     bool thing = false;
+    // A record of a pronoun (あなた, わし), and one of a person noun that is none (提督).
+    bool pronoun = false, human = false;
+    bool place = false;  // a record of a place noun (VPl) that is no name (うち 집)
     // The name-layer person records: a surname or given name, and the first Hangul
     // target among them.
     bool layerSurname = false, layerGiven = false;
@@ -75,7 +79,7 @@ public:
     // Reads the evidence of one line.
     struct Evidence {
         uint64_t id = 0;
-        std::array<std::vector<std::string>, 9> counts;
+        std::array<std::vector<std::string>, 11> counts;
         std::vector<std::array<std::string, 3>> joined;
         std::vector<std::string> readings, actors;
     };
@@ -94,6 +98,9 @@ public:
     // The surfaces the lines show to be names: the accepted names and the surfaces Named reports
     // beyond them, in byte order.
     std::vector<std::string> NamedSurfaces();
+    // The katakana runs of the lines added that are mostly not katakana (ProseRuns), with
+    // their counts.
+    const std::map<std::string, int>& ProseKatakana() const;
     // Identifies the names of the registry: two registries on one snapshot with equal
     // keys translate every line alike.
     std::string Key();
@@ -105,6 +112,11 @@ public:
     // The registered names of line (ruby markup removed), leftmost-longest, that fill
     // their kanji or katakana run.
     std::vector<Occurrence> Occurrences(std::string_view line);
+    // line without the readings after kanji (FindReading) that are the kanji's reading
+    // (BaseReading): a hiragana one, and a katakana one whose hiragana spelling is a word
+    // (生（ナマ）). A katakana word written over the kanji (炎（ブレス）) and a pronoun over a
+    // person noun (提督(あなた)) stay as glosses.
+    std::string DropReadings(std::string_view line);
 
     text::Preset preset = text::Preset::Fan;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
@@ -115,12 +127,27 @@ private:
     std::string Label(std::string_view line, bool& script);
     DictFlags Flags(std::string_view s);
     bool Gikun(std::string_view base, std::string_view reading);
+    std::set<std::string_view> Words(std::string_view s);
+    unsigned WordClasses(std::string_view s);
+    bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
+    bool SameKind(std::string_view s, std::string_view t);
+    bool NamedWithSound(std::string_view base, std::string_view reading);
+    bool BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket, bool styled);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
+    bool LayerReading(std::string_view t);
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
+
+    // The katakana runs that end in a katakana honorific (サーラサン) while the prose lines
+    // write their head with two or more other endings that are no honorific (サーライチ,
+    // サーラニ): one name, a numbered or derived one, not the head and an honorific.
+    const std::set<std::string>& SiblingNames();
+    bool NicknameCompound(std::string_view t);
+    bool TranslatedWord(std::string_view w);
+    void FindSiblingNames();
 
     // Scores, splits and the accepted names (registry.cpp).
     const std::map<std::string, Name>& Accepted();
@@ -135,6 +162,10 @@ private:
     // reading before its transliteration.
     std::string RenderPart(std::string_view t, bool whole = false);
     std::string PersonName(std::string_view t);
+    // The word of x in the name-layer person reading of an accepted chain name
+    // (ミレイユ・ベルクロア 미레유 베르크로아) that has x as a part and a word per part,
+    // so that x reads alike in the chain and alone; "" for none.
+    std::string ChainPart(std::string_view x);
     std::string PrefixForm(std::string_view x);
 
     void SetReading(const std::string& key, const std::string& value);
@@ -165,6 +196,8 @@ private:
     std::map<std::string, int> kana_;                   // katakana runs
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
+    std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
+    std::map<std::string, int> agents_;                 // katakana runs that do a favour (AgentCue)
     struct FlagCache {
         std::map<std::string, DictFlags> values;
         std::size_t bytes = 0;
@@ -172,12 +205,19 @@ private:
     std::shared_ptr<FlagCache> sharedFlags_;
     std::map<std::string, DictFlags> flags_;
     std::map<std::string, Name> scores_;                // accepted names, valid while scoresValid_
+    std::set<std::string> siblings_;                    // SiblingNames, valid while scoresValid_
+    std::map<std::string, std::string> numbered_;       // numbered names to their name, valid while scoresValid_
     bool scoresValid_ = false;
 };
 
 // The labels of the speaker cues of text: a name at a line start followed by 「, です,
 // でち, っす or a call to action, in order.
 std::vector<std::string> SpeakerCues(std::string_view text);
+
+// The katakana runs of a line with hiragana and less katakana than other Japanese
+// characters: the words a document writes in katakana in its prose, which a line of
+// katakana does not read as katakana speech. Empty for other lines.
+std::vector<std::string> ProseRuns(std::string_view line);
 
 // The text of line without ruby markup, keeping the base text.
 std::string StripRuby(std::string_view line);

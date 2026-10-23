@@ -156,7 +156,8 @@ Stem Form(const Stem& stem, KoreanPartOfSpeech pos, Class cls, uint16_t flags, c
             return stem + U"읍";
         case 'A': return EuStem(stem, cls, false);
         case 'B':
-            if (final == kRieul && (flags & kNominalRieulMieum)) return WithFinal(stem, kRieulMieum);
+            // A stem in ㄹ keeps it before the nominal ㅁ (만듦, 걺, 앎, 긺).
+            if (final == kRieul) return WithFinal(stem, kRieulMieum);
             return FinalForm(stem, cls, kMieum, U"음");
     }
     return {};

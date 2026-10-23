@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:jisjk:115102	腹を抱えて転げ回る。	배꼽이 빠지게 웃어 구르고 다닌다.	fix	local
+dict:jisjk:115102	せいぜい嗅ぎ回らないようにすることですね。	기껏해야 냄새 맡아 다니지 않도록 하는 것이군요.	fix	local
+dict:jisjk:115102	沙漠を歩いて回るのは厳しい！	사막을 걷고 다니는 것은 어렵다!	fix	local
+dict:compound-verbs:9	朝っぱらから子供のはしゃぎまわる声。	이른 아침부터 아이의 까불며 떠들어 다니는 목소리.	fix	local
+dict:compound-verbs:9	世界中を旅してまわって、生きてみたかった。	전세계를 여행해 다녀, 살아 보고 싶었다.	fix	local
+dict:jisjk:115102	いつの間にか後ろに回った。	어느새인가 뒤로 돌았다.	keep	local
+dict:jisjk:115102	コマが回る。	팽이가 돈다.	keep	local
+dict:compound-verbs:22	頭を下げ、回れ右をした。	고개를 숙여 뒤로돌아를 했다.	fix	lookup

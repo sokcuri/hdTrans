@@ -9,7 +9,7 @@ dict:common-nouns	彼は役者だ。	그는 배우다.	keep	lookup
 dict:common-nouns	会議が始まる。	회의가 시작된다.	keep	lookup
 dict:common-nouns	悪人を成敗する。	악인을 처벌한다.	fix	lookup
 dict:common-nouns	悪人を成敗してください。	악인을 처벌해 주세요.	fix	lookup
-dict:common-nouns	成敗された悪人。	처벌 된 악인.	fix	lookup
+dict:common-nouns	成敗された悪人。	처벌된 악인.	fix	lookup
 dict:common-nouns	成敗しなかった。	처벌하지 않았다.	fix	lookup
 dict:common-nouns	御成敗式目を読む。	고세이바이시키모쿠를 읽는다.	keep	lookup
 dict:common-nouns	成功と失敗を比べる。	성공과 실패를 비교한다.	keep	lookup

@@ -11,6 +11,6 @@ dict:teitai:1	肩をぶつけて痛い。	어깨를 부딪쳐 아프다.	keep	lo
 dict:teitai:1	早く帰りたい。	빨리 돌아가고 싶다.	keep	local
 constraint:ita-after-te	鍵は机の上に置かれていたんです。	열쇠는 책상 위에 놓여져 있었습니다.	keep	lookup
 constraint:ita-after-te	彼はずっと待っていたな。	그는 계속 기다리고 있었군.	fix	lookup
-constraint:ita-after-te	心の中では悲しんでいたんじゃないか。	마음 속에서는 슬퍼하고 있던 거 아닌가.	fix	lookup
+constraint:ita-after-te	心の中では悲しんでいたんじゃないか。	마음속에서는 슬퍼하고 있던 거 아닌가.	fix	lookup
 constraint:ita-after-te	こちらでいたしましょう。	이쪽에서 합시다.	keep	lookup
 constraint:ita-after-te	犬が捨てられていたんですね。	개를 버려지고 있었군요.	fix	lookup

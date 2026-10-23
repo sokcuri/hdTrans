@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:jisjk:257895	中央艦隊討伐部隊第1艦隊所属。	중앙 함대 토벌 부대 제1함대 소속.	fix	compose
+dict:jisjk:257895	コミックス第9巻	코믹스 제9권	fix	compose
+dict:jisjk:257895	第3話	제3화	keep	compose
+dict:jisjk:257895	約1時間後	약 1시간 후	keep	compose
+dict:jisjk:96563	総司令官兼第1艦隊司令官。	총사령관 겸 제1함대 사령관.	fix	compose

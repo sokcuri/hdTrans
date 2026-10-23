@@ -11,6 +11,7 @@ namespace {
 
 Piece Word(const char* s) { return {s, SpanWord}; }
 Piece Tag(const char* s) { return {s, SpanOpen}; }
+Piece Close(const char* s) { return {s, SpanClose}; }
 Piece Text(const char* s) { return {s, SpanText}; }
 
 std::string Show(char c) { return c == 0 ? std::string("0") : std::string(1, c); }
@@ -168,7 +169,16 @@ HD_TEST(output_fix_spacing) {
         {{Text("『무엇?  』 뭐!)")}, "『무엇?』 뭐!)"},
         {{Text("가라앉고 ――, 가 ― ")}, "가라앉고――, 가 ― "},
         {{Text("제１장 ９")}, "제1장 9"},
+        {{Text("「시끄럽다 」라고 『가자  』")}, "「시끄럽다」라고 『가자』"},
+        {{Text("「(웃음) )")}, "「(웃음) )"},
         {{Text("? "), Tag("<b>"), Text(" 」")}, "? <b> 」"},
+        // A ruby reading follows its base without a space; other tags keep it.
+        {{Tag("{rb}"), Text("후회해도"), Close("{/rb}"), Text(" "), Tag("{rt}"), Text("후회해도"), Tag("{/rt}")},
+         "{rb}후회해도{/rb}{rt}후회해도{/rt}"},
+        {{Close("</b>"), Text(" "), Tag("<i>")}, "</b> <i>"},
+        {{Close("{/rb}"), Text(" 가 "), Tag("{rt}")}, "{/rb} 가 {rt}"},
+        {{Text("했다 "), Tag("<k>"), Text("――")}, "했다<k>――"},
+        {{Text("했다 "), Tag("<k>"), Text("가")}, "했다 <k>가"},
     };
     for (const auto& c : cases) {
         Pieces p = c.in;
@@ -193,4 +203,22 @@ HD_TEST(output_cleanup_joins) {
     HD_REQUIRE(out.size() == 4);
     HD_CHECK_EQ(static_cast<int>(out[1].span), static_cast<int>(SpanWord));
     HD_CHECK_EQ(out[2].text, std::string(" 는 "));
+}
+
+HD_TEST(output_cleanup_column_gaps) {
+    // A column separator joins the chunks as typed, as a SpanGap piece, in place of the
+    // one space; chunks without sentences between pass theirs on.
+    const std::vector<Sentence> sentences = {
+        {0, {Text("의사 ")}},
+        {1, {Text(" 부유 중")}},
+        {3, {Text("상태")}},
+    };
+    const std::vector<std::string> gaps = {"", "　　 ", "  ", "\t"};
+    const Pieces out = Cleanup(sentences, gaps);
+    HD_CHECK_EQ(String(out), std::string("의사　　 부유 중  \t상태"));
+    HD_REQUIRE(out.size() == 5);
+    HD_CHECK_EQ(static_cast<int>(out[1].span), static_cast<int>(SpanGap));
+    HD_CHECK_EQ(out[3].text, std::string("  \t"));
+    // Without gaps the chunks take one space.
+    HD_CHECK_EQ(String(Cleanup(sentences)), std::string("의사 부유 중 상태"));
 }

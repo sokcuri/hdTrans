@@ -65,10 +65,20 @@ sound:short-answer	「いいの？」	「괜찮아?」	fix	sound
 sound:short-answer	「んなわけあるか」	「그럴 리가 있냐」	fix	sound
 dict:chatte	「忘れちゃって、ごめん」	「잊어서, 미안」	fix	lookup
 dict:chatte	「言っちゃってもいい？」	「말해 버려도 좋아?」	fix	local-ending
-restore:intent	「買おうと思って来た」	「사려고 왔다」	fix	restore
-restore:intent	明日行こうと思います。	내일 가려고 합니다.	fix	restore
+dict:jisjk:93288	「買おうと思って来た」	「사려고 왔다」	fix	local
+dict:jisjk:93288	明日行こうと思います。	내일 가려고 합니다.	fix	local
+dict:jisjk:93288	行こうと思って家を出た。	가려고 집을 나갔다.	fix	local
+dict:jisjk:93288	「直してやろうと思いましてね」	「고쳐 주려고요」	fix	local
+dict:jisjk:93288	行こうと思っています。	가려고 합니다.	fix	local
+dict:jisjk:114638	焼いてあげようと思ったのに。	구워 주려고 했는데.	fix	local
+dict:jisjk:93288	道具を作ろうと考える。	!rule:dict:jisjk:93288	keep	local
+dict:jisjk:93288	村に住もうと考えています。	마을에 살려고 생각하고 있습니다.	keep	local
 dict:nanda-what	「これはなんだ」	「이건 뭐야」	fix	local
 dict:nanda-what	「これ、なんなの？」	「이거, 뭐야?」	fix	local
 dict:nanda-what	「結局なんなんだろう」	「결국 뭘까」	fix	local
 dict:nanda-what	「これ、なんだろう？」	「이거, 뭘까?」	fix	local
 dict:nanda-what	「学生なんだ」	「학생이야」	keep	local
+dict:nanda-what	「生徒のほうなんだ」	「학생 쪽이야」	fix	local
+dict:nanda-what	「網のことなんだ」	「그물이야」	fix	local
+dict:nanda-what	「ウチをなんだと思ってる」	「우리를 뭐라고 생각해」	fix	local
+dict:nanda-what	「なんだなんだこれは」	「뭐야 뭐야 이건」	keep	local

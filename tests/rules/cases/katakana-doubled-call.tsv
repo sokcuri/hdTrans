@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:katakana-doubled-call	ホラホラと急かす。	자 자 재촉한다.	fix	sound
+sound:katakana-doubled-call	イクイクと叫んだ。	간다 간다고 외쳤다.	fix	sound
+sound:katakana-doubled-call	メキメキと上達した。	메키메키 능숙해졌다.	keep	sound
+sound:katakana-doubled-call	ジッと見る。	가만히 본다.	keep	sound

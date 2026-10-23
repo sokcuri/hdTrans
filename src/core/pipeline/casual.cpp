@@ -70,24 +70,36 @@ bool PausedConditional(std::string_view before, std::string_view at) {
 // after a noun (君ならねぇ) or before a pause where PausedConditional holds (行くならねぇ、,
 // 田中にならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
-    auto tail = [&](size_t p) {
+    // ねぇ or ねえ; ねー and, with strict, any of them only before a following character
+    // of the set (見てねーわ, 荒れねーから; not the particle in 見てねー！ or 夜明けねー).
+    auto tail = [&](size_t p, bool bar, bool strict) {
         m.group[1] = Span(s, pos, p);
-        if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえ")) return false;
-        return CharOrEnd(s, p, U"なよぜぞしんかけだっ", m, 2);
+        if (!Lit(s, p, "ね")) return false;
+        const bool lengthened = bar && OneOf(s, p, U"ー");
+        if (!lengthened && !OneOf(s, p, U"ぇえ")) return false;
+        if ((lengthened || strict) && p == s.size()) return false;
+        return CharOrEnd(s, p, U"なよぜぞしんかけだっわの", m, 2);
     };
     size_t p = pos;
-    if (Lit(s, p, "て") && tail(p)) return true;
+    if (Lit(s, p, "て") && tail(p, true, false)) return true;
     p = pos;
-    if (Lit(s, p, "で") && tail(p)) return true;
+    if (Lit(s, p, "で") && tail(p, false, false)) return true;
     p = pos;
-    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") && tail(p)) return true;
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") && tail(p, true, false)) return true;
+    // The stem of a verb in -eru or -iru, or a potential (荒れねー, 言えねえ, 通じねえ).
     p = pos;
-    if (OneOf(s, p, U"見来出居寝似着") && tail(p)) return true;
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"えけげせぜねべめれきぎしじちびみり") && tail(p, true, true)) return true;
+    for (std::string_view w : {"いけ", "くれ", "られ", "でき"}) {
+        p = pos;
+        if (Lit(s, p, w) && tail(p, true, true)) return true;
+    }
     p = pos;
-    if (Lit(s, p, "し") && tail(p)) return true;
+    if (OneOf(s, p, U"見来出居寝似着") && tail(p, true, false)) return true;
+    p = pos;
+    if (Lit(s, p, "し") && tail(p, true, false)) return true;
     for (std::string_view w : {"わか", "分か", "判", "知", "つま", "たま"}) {
         p = pos;
-        if (Lit(s, p, w) && Lit(s, p, "ん") && tail(p)) return true;
+        if (Lit(s, p, w) && Lit(s, p, "ん") && tail(p, true, false)) return true;
     }
     for (std::string_view w : {"やら", "なら"}) {
         p = pos;
@@ -158,7 +170,7 @@ bool NaTsu(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥」]|$)
+// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥・」]|$)
 bool Nna(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
@@ -168,7 +180,7 @@ bool Nna(std::string_view s, size_t pos, Match& m) {
     if (OneOf(s, q, U"よぁー")) return Done(s, m, p, q, 2);
     const bool ok = Repeat(s, p, InSet(U"っッ"), 0, 1, [&](size_t r) {
         size_t t = r;
-        if (!OneOf(s, t, U"！!、。？?…‥」")) return false;
+        if (!OneOf(s, t, U"！!、。？?…‥・」")) return false;
         return Done(s, m, p, t, 2);
     });
     if (ok) return true;
@@ -272,6 +284,11 @@ constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
 constexpr char kSoyuKoto[] = "そゆこと";
+// Words said with an emphatic っ or ん inside: さっすが さすが, しっかた しかた (しっかたないなぁ),
+// すんご すご (すんごい, すんごく).
+constexpr char kSassuga[] = "さっすが";
+constexpr char kShikkata[] = "しっかた";
+constexpr char kSungo[] = "すんご";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -397,6 +414,47 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     if (!ClauseStart(s, pos) || !Lit(s, p, "んで")) return false;
     size_t q = p;
     if (!OneOf(s, q, U"、，？?！!…‥」")) return false;
+    m.end = p;
+    return true;
+}
+
+// でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
+// without its subject, said for そうでなければ (でなければ、すぐに死ぬ 그렇지 않으면).
+bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
+    if (!ClauseStart(s, pos) || (pos > 0 && In(Before(s, pos), U"、"))) return false;
+    for (std::string_view w : {"でなければ", "でないと", "でなきゃ"}) {
+        size_t p = pos;
+        if (Lit(s, p, w)) {
+            m.end = pos + std::string_view("で").size();
+            return true;
+        }
+    }
+    return false;
+}
+
+// The conditional れば said りゃ after a verb stem (寝りゃ治る 寝れば, 見りゃわかる, なりゃ,
+// できりゃ, 信じりゃ), and りゃ before しない for りは (わかりゃしない わかりはしない), when a
+// word goes on after it. Not それは and これは said そりゃ, こりゃ, どりゃ, nor a shout
+// (おりゃ, うりゃっ, せりゃッ) or the pronoun わりゃ, nor ありゃ other than after が or も
+// (金がありゃ), nor てりゃ, which the endings read.
+bool Rya(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "りゃ")) return false;
+    const char32_t c = Before(s, pos);
+    if (c == 0 || (!IsHiraganaClass(c) && !IsKanjiClass(c)) || In(c, U"そこどてでっ")) return false;
+    const char32_t b = Before(s, pos - 3);  // c, a kana or kanji, is three bytes long
+    if (c == U'あ' && !In(b, U"がも")) return false;
+    if (In(c, U"おうとせえわ") && !IsHiraganaClass(b) && !IsKanjiClass(b)) return false;  // わりゃ: you
+    // A drawn-out あ goes with it before a word (できりゃあ苦労しない).
+    size_t q = p;
+    while (q < s.size() && In(At(s, q).cp, U"あぁ")) q += At(s, q).size;
+    if (q >= s.size() || In(At(s, q).cp, U"あぁっッー～〜")) return false;
+    if (!Take(s, q, [](char32_t r) { return IsHiraganaClass(r) || IsKanjiClass(r); })) return false;
+    m.group[1] = "れば";
+    for (std::string_view neg : {"しない", "しね", "しません", "せん", "しなかった"}) {
+        if (s.substr(p).starts_with(neg)) m.group[1] = "りは";
+    }
+    while (p < s.size() && In(At(s, p).cp, U"あぁ")) p += At(s, p).size;
     m.end = p;
     return true;
 }
@@ -597,6 +655,12 @@ bool EndsWithStemKanji(std::string_view s) {
 
 }  // namespace
 
+std::string RewriteEmphaticSpellings(std::string_view in) {
+    std::string text = ReplaceAll(in, Literal<kSassuga>, [](const Match&) { return std::string("さすが"); });
+    text = ReplaceAll(text, Literal<kShikkata>, [](const Match&) { return std::string("しかた"); });
+    return ReplaceAll(text, Literal<kSungo>, [](const Match&) { return std::string("すご"); });
+}
+
 std::string RewriteCasual(std::string_view in) {
     std::string text = ReplaceAll(in, Shiren, [](const Match& m) { return Cat({"かも", m.group[1], "ない"}); });
     text = ReplaceAll(text, Nee, [](const Match& m) {
@@ -617,8 +681,10 @@ std::string RewriteCasual(std::string_view in) {
         return Cat({"んじゃ", g.group[3]});
     });
     text = ReplaceAll(text, Tsuu, [](const Match&) { return std::string("という"); });
-    text = ReplaceAll(text, NaTsu, [](const Match& m) { return Cat({m.group[1], "な", m.group[2]}); });
+    // The prohibition spelled with ん is read first, so that its emphasis っ goes as that of
+    // るな does (すんなッ！ するな！).
     text = ReplaceAll(text, Nna, [](const Match& m) { return Cat({m.group[1], "るな", m.group[2]}); });
+    text = ReplaceAll(text, NaTsu, [](const Match& m) { return Cat({m.group[1], "な", m.group[2]}); });
     text = ReplaceAll(text, Sun, [](const Match& m) {
         const Match g = Rematch(m, Sun);
         return ContractedRu(Cat({g.group[1], "す"}), g.group[2]);
@@ -641,6 +707,8 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
+    text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });

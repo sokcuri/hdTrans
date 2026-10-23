@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:gram:to:tari	意気揚々と帰る。	의기양양하게 돌아간다.	fix	local
+dict:gram:to:tari	正々堂々と戦う。	정정당당하게 싸운다.	fix	local
+dict:gram:to:tari	我々と戦う。	!rule:dict:gram:to:tari	keep	local
+dict:gram:to:tari	山々と川。	!rule:dict:gram:to:tari	keep	local

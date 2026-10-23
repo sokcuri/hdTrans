@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:95930	頭に響く騒音	머리에 울리는 소음	fix	defaults
+dict:jisjk:95930	心に響く言葉	마음에 와닿는 말	keep	senses

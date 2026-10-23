@@ -312,10 +312,12 @@ private:
     void NameEntries(std::string_view text, LookupMode mode, const LookupContext& ctx,
                      const std::vector<const UserEntry*>& owned, std::vector<UserEntry>& out) const;
     bool StrongName(std::string_view s, std::size_t n) const;
+    bool TitleKey(std::string_view key) const;
     bool AddressedName(std::string_view s, std::size_t n) const;
     bool CuedKey(std::string_view key) const;
     bool PhraseKey(std::string_view key) const;
     bool BaseWord(std::string_view key) const;
+    bool CountedKey(std::string_view key) const;
 
     std::shared_ptr<internal::SnapshotFile> backing_;
     bool hasDictionary_ = false;

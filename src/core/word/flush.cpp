@@ -15,6 +15,10 @@ void Flush(Flusher& f) {
     ApplyNegatives(f);
     if (f.w.settings.text) {
         Select(f);
+        RespectfulPassive(f);
+        OwnPassives(f);
+        DegreeAfterNumber(f);
+        BenefactiveProvider(f);
         ChooseInitialConjunctions(f);
         GoNotSay(f);
         HanBeforeNa(f);
@@ -59,9 +63,13 @@ void Flush(Flusher& f) {
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);
+        LineInitialTo(f);
+        PluralPronoun(f);
         HumbleFirstPerson(f);
         ChanAfterKatakana(f);
         InitialSoundRule(f);
+        InwardAuxiliary(f);
+        EmphaticMo(f);
     }
     if (f.w.settings.terminal) {
         PreferTerminal(f);

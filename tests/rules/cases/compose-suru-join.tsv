@@ -7,3 +7,7 @@ compose:suru-join	キスしたい。	키스하고 싶다.	fix	compose
 compose:suru-join	即答した。	즉답했다.	fix	compose
 compose:suru-join	我慢できない。	참을 수 없다.	fix	compose
 compose:suru-join	何してるの？	뭐해?	keep	compose
+compose:suru-join	「我慢なさってください」	「인내하셔 주세요」	fix	compose
+compose:suru-join	小さくまとまっていては、年をとってから後悔なさるぞ。	작게 결정되고 있어서는, 나이를 먹고 나서 후회하시겠어.	fix	compose
+compose:suru-join	初詣には、いつ出発なさるの？	첫 참배에는, 언제 출발하시는 거야?	fix	compose
+compose:suru-join	何をなさっているのですか	무엇을 하고 계십니까	keep	compose

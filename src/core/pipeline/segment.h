@@ -2,6 +2,7 @@
 // The segment stage of the text path: a line cut into chunks that are translated one by
 // one and joined by a space.
 #include <cstddef>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -21,9 +22,11 @@ using Chunk = output::Pieces;
 //     and at an ASCII space that ends a phrase (internal::KanaSpace), unless the words
 //     on both sides stand alone between spaces as in text spaced out character by
 //     character (こ　の　展　開).
+//   - at a column separator (internal::ColumnGap); gaps, when given, receives for each
+//     chunk the separator before it as typed, "" after the other cuts and for the first.
 // The white space after a cut is dropped. Spans are never cut and stay with the text
 // before them.
-std::vector<Chunk> Segment(const output::Pieces& pieces);
+std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string>* gaps = nullptr);
 
 namespace internal {
 
@@ -38,6 +41,15 @@ bool KanaSpace(std::string_view s, size_t i);
 // でも けど けれど けれども から ので のに ながら on their own; で after ん or い, し
 // after い る だ す う く, が after た い る う す だ ん.
 bool Conjunctive(std::string_view s);
+
+// The end of the column separator that starts at s[i], or i where none does: a run of
+// spaces, ideographic spaces and tabs that holds a tab or two or more characters, with
+// characters of the line on both sides (lineBefore, lineAfter: the line goes on before
+// or after s), unless a kanji standing alone is on each side, a two-character name
+// padded to the width of three (林  涛). The leading white space of a line is none, and
+// neither are exactly two ASCII spaces after a hiragana (a particle or an inflected
+// ending) or before a copula, an auxiliary, a particle or sentence punctuation.
+size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter);
 
 // Whether the white space at s[i] stands between two words of a line: characters other
 // than white space on both sides, not both of them alone between spaces.

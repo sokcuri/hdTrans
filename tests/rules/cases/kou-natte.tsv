@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+adjectival-noun:na-before-tte	どうして、こうなってしまうのか……	왜, 이렇게 되어 버리는 건가……	fix	conjugation
+adjectival-noun:na-before-tte	「やはりこうなってしまったのね」	「역시 이렇게 돼 버렸구나」	fix	conjugation
+adjectival-noun:na-before-tte	こうなっては、言えるわけがない。	이렇게 되어서는, 말할 수 있을 리가 없다.	fix	conjugation
+adjectival-noun:na-before-tte	こうなった	이렇게 되었다	keep	conjugation

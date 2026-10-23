@@ -214,7 +214,22 @@ public:
     bool StartsSentence() const;
     // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
     bool InQuote() const;
+    // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
+    // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
+    bool AfterQuestionWord() const;
+    // Whether the conjugation ending closes with the question particle か (行くか, どうなるか), not
+    // with the kana of a verb form that ends in か (行かない).
+    bool EndingAsks() const;
+    // Whether the word is a question word: alone, with a particle (どこから, 誰の) or a kanji
+    // (何人), not an indefinite (何か, 誰も, いつでも).
+    bool IsQuestionWord() const;
     bool JoinsNext() const;
+    // Whether candidate i reads the word as a count (rule code Nq): a number or 半, or a number
+    // (kanji or digits, or 数, 何, 幾 before it) and a counter coded Ct, read with digits or a
+    // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時
+    // after a number name a month or an hour (五月, 三時), and a word read otherwise is no
+    // count (一番 제일).
+    bool ReadsCount(int i);
     // A small っ with no translation closing the word before it (行くっ」, 行くっ！): no
     // word or only punctuation follows.
     bool ClosingTsu() const;
@@ -237,6 +252,8 @@ public:
     bool MitaiLike() const;
     bool StandsAlone() const;
     std::string_view PlainEnding() const;
+    std::string_view BareStemEnding(std::string_view after) const;
+    int ContextBefore() const;
     // The two width units before the word, looking past tokens of … and ‥; "" when
     // there are fewer.
     std::string CharBefore() const;

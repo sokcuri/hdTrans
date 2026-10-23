@@ -33,6 +33,7 @@ constexpr std::string_view kKu = "ク";
 constexpr std::string_view kBPRows = "バビブベボパピプペポ";
 constexpr std::string_view kPu = "プ";
 constexpr std::string_view kMu = "ム";
+constexpr std::string_view kSmallVowels = "ァィゥェォャュョ";
 
 using Cells = std::vector<std::string>;
 
@@ -145,7 +146,10 @@ void ApplyKanaFinal(Run& run, long i, int row) {
             if (n == 10 && HasCells(run.cells, i + 1, kKusu)) run.Replace(i + 1, kKu, "");
         }
     }
-    if (CellAt(run.cells, i + 1) == kMu && variant(25, v)) {
+    // ム closes the syllable (ゲーム 게임) unless ー or a small vowel makes it a syllable (ムーン 문).
+    const std::string afterMu = CellAt(run.cells, i + 2);
+    if (CellAt(run.cells, i + 1) == kMu && afterMu != kLongVowel &&
+        (afterMu.empty() || kSmallVowels.find(afterMu) == std::string_view::npos) && variant(25, v)) {
         run.Replace(i, CellAt(run.cells, i), v);
         run.Replace(i + 1, kMu, "");
     }

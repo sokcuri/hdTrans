@@ -1,6 +1,8 @@
 // Rendering of the accepted names as Hangul: the plain-dictionary rendering, the kana
-// reading of the document, the readings table, the head of a longer katakana name, the
-// name layer's person rendering, and the katakana transliteration.
+// reading of the document, the readings table, a numbered name as its name and number,
+// the head of a longer katakana name, the name layer's person rendering, and the katakana
+// transliteration.
+#include <algorithm>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -40,8 +42,12 @@ std::string Registry::Dict() {
         if (kr.empty()) continue;
         const DictFlags f = Flags(t);
         std::string pos = "n";
+        // A place of the dictionaries that only a gloss names (五村（ごのむら）) stays a place.
+        const bool place = f.city && !f.person && !n.label && hon_.count(t) == 0 && kanaHon_.count(t) == 0;
         if (!n.hasParts && (n.surname || (f.surname && !f.given))) {
             pos = "surname";
+        } else if (place) {
+            pos = "place";
         } else if (n.person) {
             pos = "name";
         }
@@ -81,6 +87,12 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         if (IsKanaText(v->second)) return text::FromKana(v->second, preset);
         return v->second;
     }
+    if (const auto x = numbered_.find(key); x != numbered_.end()) {
+        const std::string head = RenderPart(x->second, true);
+        const std::string number = text::FromKana(std::string_view(key).substr(x->second.size()), preset);
+        if (!head.empty() && IsHangulText(number)) return head + number;
+    }
+    if (const std::string kr = ChainPart(t); !kr.empty()) return kr;
     if (const std::string kr = PrefixForm(t); !kr.empty()) return kr;
     const std::string layer = Flags(t).layerName;
     if (snap_ != nullptr) {
@@ -95,7 +107,11 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     const bool katakana = AllRunes(t, IsKatakana);
     const auto acc = Accepted().find(key);
     const bool given = acc != Accepted().end() && acc->second.given;
-    if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given)) return layer;
+    // A common kanji word that honorifics have shown to be a person reads as the person of
+    // the name layer (葉月さん 하즈키), not as the first row of the word.
+    const bool called = acc != Accepted().end() && hon_.count(key) > 0 && AllRunes(t, IsKanji) && Flags(t).common &&
+                        LayerReading(t);
+    if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given || called)) return layer;
     if (std::string kr = whole && katakana && snap_ != nullptr ? snap_->NameReading(t) : PersonName(t);
         IsHangulText(kr)) {
         return kr;
@@ -116,10 +132,29 @@ std::string Registry::PersonName(std::string_view t) {
     return IsHangulText(kr) ? kr : "";
 }
 
+std::string Registry::ChainPart(std::string_view x) {
+    for (const auto& [t, n] : Accepted()) {
+        if (!n.hasParts || n.parts.size() < 2) continue;
+        if (t.find("・") == std::string::npos && t.find("＝") == std::string::npos) continue;
+        const auto at = std::find(n.parts.begin(), n.parts.end(), x);
+        if (at == n.parts.end()) continue;
+        const std::string layer = Flags(t).layerName;
+        std::vector<std::string> words;
+        for (std::size_t i = 0; i <= layer.size();) {
+            const std::size_t sp = std::min(layer.find(' ', i), layer.size());
+            if (sp > i) words.push_back(layer.substr(i, sp - i));
+            i = sp + 1;
+        }
+        if (words.size() == n.parts.size()) return words[static_cast<std::size_t>(at - n.parts.begin())];
+    }
+    return "";
+}
+
 std::string Registry::PrefixForm(std::string_view x) {
     if (!AllRunes(x, IsKatakana)) return "";
     for (const std::string& t : Names()) {
-        if (!t.starts_with(x) || t.size() == x.size() || !AllRunes(t, IsKatakana)) continue;
+        // A numbered name reads its head the way the head reads (RenderPart).
+        if (!t.starts_with(x) || t.size() == x.size() || !AllRunes(t, IsKatakana) || numbered_.count(t) > 0) continue;
         const std::string_view y = std::string_view(t).substr(x.size());
         const std::string h = SyllableHead(RenderPart(t), x, y);
         if (!h.empty()) return h;

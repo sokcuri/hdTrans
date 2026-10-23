@@ -56,7 +56,7 @@ bool StartsWith(std::string_view s, std::string_view prefix) { return s.substr(0
 
 }  // namespace
 
-Pieces Cleanup(const std::vector<Sentence>& sentences) {
+Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::string> gaps) {
     Pieces out;
     Pieces got;
     int chunk = sentences.empty() ? 0 : sentences.front().chunk;
@@ -64,6 +64,14 @@ Pieces Cleanup(const std::vector<Sentence>& sentences) {
         if (s.chunk != chunk) {
             AppendChunk(out, std::move(got));
             got.clear();
+            std::string gap;
+            for (int c = chunk + 1; c <= s.chunk; c++) {
+                if (static_cast<size_t>(c) < gaps.size()) gap += gaps[static_cast<size_t>(c)];
+            }
+            if (!gap.empty()) {
+                TrimRight(out);
+                out.push_back({std::move(gap), SpanGap});
+            }
             chunk = s.chunk;
         }
         AppendSentence(got, s.pieces);
@@ -89,7 +97,9 @@ void AppendSentence(Pieces& result, const Pieces& sentence) {
 }
 
 void AppendChunk(Pieces& out, Pieces&& got) {
-    if (!out.empty() && !got.empty()) {
+    if (!out.empty() && out.back().span == SpanGap) {
+        TrimLeft(got);
+    } else if (!out.empty() && !got.empty()) {
         TrimRight(out);
         Add(out, " ");
         TrimLeft(got);
@@ -112,9 +122,20 @@ void FixSpacing(Pieces& pieces) {
             continue;
         }
         auto& t = pieces[k].text;
+        // A ruby reading follows its base without a space ({/rb}{rt}).
+        const bool rubyGap = w > 0 && k + 1 < pieces.size() && pieces[w - 1].span == SpanClose &&
+                             pieces[w - 1].text == "{/rb}" && pieces[k + 1].span == SpanOpen &&
+                             pieces[k + 1].text == "{rt}" && t.find_first_not_of(' ') == std::string::npos;
+        if (rubyGap) continue;
         internal::NarrowTilde(t);
         internal::DropSpaceBeforeComma(t);
         internal::DropSpaceBeforeClose(t);
+        // The same across an opening tag: 했다 <k>―― 했다<k>――.
+        if (k + 2 < pieces.size() && pieces[k + 1].span == SpanOpen && pieces[k + 2].span == SpanText &&
+            StartsWith(pieces[k + 2].text, "――")) {
+            const size_t end = t.find_last_not_of(' ') + 1;
+            if (end > 0 && end < t.size() && IsSyllable(LastRune(std::string_view(t).substr(0, end)))) t.resize(end);
+        }
         internal::NarrowWideDigits(t);
         Keep(pieces, w, k);
     }
@@ -339,6 +360,12 @@ void DropSpaceBeforeClose(std::string& text) {
                     }
                 } else if (StartsWith(rest, kDashes)) {
                     tail = kDashes;
+                } else {
+                    // A closing corner bracket takes no space after a syllable (가겠다 」 → 가겠다」),
+                    // also where a word between them wrote nothing.
+                    for (const std::string_view c : {"」", "』"}) {
+                        if (StartsWith(rest, c)) tail = c;
+                    }
                 }
                 if (!tail.empty()) {
                     Move(text, w, i, r.size);

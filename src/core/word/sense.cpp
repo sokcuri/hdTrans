@@ -104,8 +104,8 @@ bool SenseTriggers(const Item* x, const Item* it, const userdict::Sense& sense) 
 }
 
 // Whether a trigger of sense s stands on its side of it: for Before and After within the
-// window (a quotation mark counts but does not stop it), with no clause boundary and no
-// other predicate in between. A sense with no triggers applies always, but for a one-kanji
+// window (a quotation mark, or a comma between nouns, counts but does not stop it), with
+// no clause boundary and no other predicate in between. A sense with no triggers applies always, but for a one-kanji
 // key not inside a kanji compound.
 bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
     if (s.triggers.empty()) return text::RuneCount(s.key) != 1 || !InKanjiCompound(it);
@@ -116,12 +116,29 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         return false;
     }
     const Item* x = it;
+    auto step = [&](const Item* y) { return s.side == userdict::Side::After ? y->next : y->prev; };
     for (int n = 0; n < kSenseWindow; n++) {
-        x = s.side == userdict::Side::After ? x->next : x->prev;
+        x = step(x);
         if (x != nullptr && IsQuoteMark(x->group->surface)) continue;
+        // A comma between two nouns lists them (コップとお皿、お盆): the noun across it can be
+        // the trigger, but not the words of its own phrase (沖姉、朝ちゃん).
+        if (x != nullptr && x->group->surface == "、" && At(it->Code(it->selected), 0) == '1') {
+            const Item* y = step(x);
+            if (y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') return SenseTriggers(y, it, s);
+            // A comma right after the noun drops its particle (背、伸びたね): the predicate after it
+            // is still the noun's own.
+            if (n == 0 && s.side == userdict::Side::After) continue;
+        }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
         const char cls = At(x->Code(x->selected), 0);
+        // Before the word, an auxiliary verb written right after its verb (生えている角) lets
+        // that verb be the trigger.
+        const Item* main = x->prev;
+        if (cls == '4' && s.side == userdict::Side::Before && main != nullptr && main->selected >= 0 &&
+            At(main->Code(main->selected), 0) == '4' && main->JoinsNext() && SenseTriggers(main, it, s)) {
+            return true;
+        }
         if (cls == '6' || cls == '4' || cls == '7') return false;
     }
     return false;

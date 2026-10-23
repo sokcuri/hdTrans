@@ -5363,7 +5363,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 浦河町	우라카와정	N110			GN						うらかわちょう	names.631684
 浦河郡	우라카와군	N130	QCTVPl		GN							names.631685
 浦波	우라나미	N130	QPNVHn	Wb	GN							names.631686
-浦波改二	우라나미 개이	N110			GN						うらなみかいに	names.631687
+浦波改二	우라나미 개2	N110			GN						うらなみかいに	names.631687
 浦浜村	우라하마촌	N130	QCTVPl		GN							names.631688
 浦添伊緒奈	우라조에 이오나	N130	QPNVHn		GN						うらぞえ いおな	names.631689
 浦添城	우라소에 성	N110			GN						うらそえじょう	names.631690
@@ -6818,7 +6818,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 海風ツクモ	우미카제 쓰쿠모	N130	QPNVHn		GN						うみかぜつくも	names.633139
 海風型	우미카제급	N110			GN						うみかぜがた	names.633140
 海風型駆逐艦	우미카제급 구축함	N110			GN							names.633141
-海風改二	우미카제 개이	N110			GN						うみかぜ	names.633142
+海風改二	우미카제 개2	N110			GN						うみかぜ	names.633142
 海香	우미카	N130	QPNVHn	Wb	GN						うみか	names.633143
 海馬	해마체	N110			GN							names.633144
 海馬	카이바	N130	QPNVHn	Wa	GN							names.633145
@@ -7974,7 +7974,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 深雪さなえ	미유키 사나에	N130	QPNVHn		GN							names.634295
 深雪マユノ	미유키 마유노	N130	QPNVHn		GN						みゆきまゆの	names.634296
 深雪乃	미유키노	N130	QPNVHn	Wb	GN						みゆきの	names.634297
-深雪改二	미유키 개이	N110			GN						みゆき かいに	names.634298
+深雪改二	미유키 개2	N110			GN						みゆき かいに	names.634298
 深雪望	미유키 노조무	N130	QPNVHn		GN						みゆきのぞむ	names.634299
 深雪生誕祭	미유키 생탄제	N110			GN							names.634300
 深須村	후카스촌	N130	QCTVPl		GN							names.634301
@@ -11525,7 +11525,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 満漢全席	만한전석	N110			GN							names.637846
 満潮	미치시오	N130	QPNVHn	Wb	GN							names.637847
 満潮に乗って	밀물을 타고	N130	QWK		GN							names.637848
-満潮改二	미시오 개이	N110			GN						みちしお	names.637849
+満潮改二	미시오 개2	N110			GN						みちしお	names.637849
 満潮永澄	미시오 나가스미	N130	QPNVHn		GN						みちしお ながすみ	names.637850
 満濃町	만노정	N130	QCTVPl		GN							names.637851
 満点	만점	N110			GN							names.637852
@@ -13090,7 +13090,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 潮建志	켄지 조수	N130	QPNVHn		GN							names.639411
 潮建磁	우시오 겐지	N130	QPNVHn		GN						うしおけんじ	names.639412
 潮恵之輔	우시오 시게노스케	N130	QPNVHn		GN							names.639413
-潮改二	우시오 개이	N110			GN						うしお かいに	names.639414
+潮改二	우시오 개2	N110			GN						うしお かいに	names.639414
 潮木	우시오기	N130	QPNVHn	Wa	GN							names.639415
 潮木守一	우시오기 모리카즈	N130	QPNVHn		GN							names.639416
 潮村	우시오촌	N130	QCTVPl		GN							names.639417
@@ -21545,7 +21545,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 玉菊	타마기쿠	N130	QPNVHn	Wb	GN							names.647866
 玉葉	교쿠요	N130	QPNVHn	Wb	GN							names.647867
 玉葉和歌集	교쿠요와카슈	N110			GN						ぎょくようわかしゅう	names.647868
-玉葉妃	교쿠요히	N130	QPNVHn	Wb	GN						ぎょくようひ	names.647869
+玉葉妃	교쿠요비	N130	QPNVHn	Wb	GN						ぎょくようひ	names.647869
 玉葱の歌	양파의 노래	N130	QWK		GN							names.647870
 玉蓮女子高等学校	옥련여자고등학교	N130	VGt		GN							names.647871
 玉蓮山	옥련산	N130	QCTVPl		GN							names.647872
@@ -27310,7 +27310,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 由良四	유라시로	N130	QPNVHn	Wb	GN						ゆらしろう	names.653631
 由良四郎	유라 시로	N130	QPNVHn		GN						ゆら しろう	names.653632
 由良御前	유라 고젠	N130	QPNVHn		GN							names.653633
-由良改二	유라 개이	N110			GN						ゆらかいに	names.653634
+由良改二	유라 개2	N110			GN						ゆらかいに	names.653634
 由良有里紗	유라 아리사	N130	QPNVHn		GN							names.653635
 由良木 モモカ	유라키 모모카	N130	QPNVHn		GN						ゆらきももか	names.653636
 由良木ゆら	유라기 유라	N130	QPNVHn		GN						ゆらぎ ゆら	names.653637
@@ -31100,7 +31100,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 白雪巴	시라유키 토모에	N130	QPNVHn		GN						しらゆき ともえ	names.657421
 白雪徹平	시라유키 뎃페이	N130	QPNVHn		GN						しらゆき てっぺい	names.657422
 白雪恋	시라유키 렌	N130	QPNVHn		GN						しらゆき れん	names.657423
-白雪改二	시라유키 개이	N110			GN							names.657424
+白雪改二	시라유키 개2	N110			GN							names.657424
 白雪由佳	시라유키 유카	N130	QPNVHn		GN						しらゆき ゆうか	names.657425
 白雪真帆	시라유키 마호	N130	QPNVHn		GN						しらゆき まほ	names.657426
 白雪碧	시라유키 미도리	N130	QPNVHn		GN							names.657427
@@ -32338,7 +32338,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 皐月優	사츠키 유	N130	QPNVHn		GN						さつき ゆう	names.658659
 皐月夜見	사츠키 요미	N130	QPNVHn		GN						さつき よみ	names.658660
 皐月彩	사츠키 아야	N130	QPNVHn		GN							names.658661
-皐月改二	사츠키 개이	N110			GN						さつきかいに	names.658662
+皐月改二	사츠키 개2	N110			GN						さつきかいに	names.658662
 皐月芋網	사츠키 이모아미	N130	QPNVHn		GN						さつきいもあみ	names.658663
 皐月葵	사츠키 아오이	N110			GN						さつき あおい	names.658664
 皐月賞	고월상	N110			GN							names.658665
@@ -36619,8 +36619,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 矢的 猛	야마토 타케시	N130	QPNVHn		GN							names.662940
 矢矧	야하기	N130	QPNVHn	Wa	GN							names.662941
 矢矧	야하기	N110			GN							names.662942
-矢矧改二	야하기 개이	N110			GN						やはぎかいに	names.662943
-矢矧改二乙	야하기 개이을	N110			GN							names.662944
+矢矧改二	야하기 개2	N110			GN						やはぎかいに	names.662943
+矢矧改二乙	야하기 개2을	N110			GN							names.662944
 矢矧晴一郎	야하기 세이치로	N130	QPNVHn		GN							names.662945
 矢矧村	야하기촌	N130	QCTVPl		GN							names.662946
 矢神久美	야가미 구미	N110			GN						やがみ くみ	names.662947
@@ -40082,7 +40082,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 磯次	이소지	N130	QPNVHn	Wb	GN						いそじ	names.666403
 磯江太勢	이소에 다이세이	N130	QPNVHn		GN							names.666404
 磯波	이소나미	N130	QPNVHn	Wb	GN						いそなみ	names.666405
-磯波改二	이소나미 개이	N110			GN						いそなみかいに	names.666406
+磯波改二	이소나미 개2	N110			GN						いそなみかいに	names.666406
 磯津村	이소쓰촌	N130	QCTVPl		GN							names.666407
 磯浜町	이소하마정	N130	QCTVPl		GN							names.666408
 磯浦	이소우라	N130	QPNVHn	Wa	GN							names.666409
@@ -42710,7 +42710,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神通	진츠우	N130	QPNVHn	Wb	GN						じんつう	names.669031
 神通剣	신통검	N110			GN						じんつうけん	names.669032
 神通力	신통력	N110			GN						じんつうりき	names.669033
-神通改二	진츠우 개이	N110			GN						じんつうかいに	names.669034
+神通改二	진츠우 개2	N110			GN						じんつうかいに	names.669034
 神通村	가미도리촌	N130	QCTVPl		GN							names.669035
 神通車	신통차	N110			GN							names.669036
 神速	신속	N130	QPNVHn	Wb	GN							names.669037
@@ -45864,7 +45864,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 秋雲	아키구모	N130	QPNVHn	Wb	GN							names.672185
 秋雲	아키구모	N110			GN						あきぐも	names.672186
 秋雲先生	아키구모 선생	N110			GN						あきぐも	names.672187
-秋雲改二	아키구모 개이	N110			GN						あきぐもかいに	names.672188
+秋雲改二	아키구모 개2	N110			GN						あきぐもかいに	names.672188
 秋霜	아키시모	N130	QPNVHn	Wb	GN						あきしも	names.672189
 秋霜烈日	추상열일	N110			GN						しゅうそうれresidual	names.672190
 秋霜玉	추상옥	N110			GN						しゅうそうぎょく	names.672191
@@ -46728,7 +46728,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 稲戸井村	이나토미촌	N130	QCTVPl		GN							names.673049
 稲敷郡	이나시키군	N130	QCTVPl		GN							names.673050
 稲木	이나키	N130	QPNVHn	Wb	GN						いなき	names.673051
-稲木改二	이나기 개이	N110			GN						いなぎかいに	names.673052
+稲木改二	이나기 개2	N110			GN						いなぎかいに	names.673052
 稲木聡	이나기 사토시	N130	QPNVHn		GN							names.673053
 稲本	이나모토	N130	QPNVHn	Wa	GN							names.673054
 稲本 潤一	이나모토 준이치	N130	QPNVHn		GN						いなもと じゅんいち	names.673055
@@ -52510,7 +52510,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 筑摩	치쿠마	N130	QPNVHn	Wb	GN						ちくま	names.678831
 筑摩gif	치쿠마 gif	N130	QWK		GN						ちくまぎふ	names.678832
 筑摩地村	지쿠마지촌	N130	QCTVPl		GN							names.678833
-筑摩改二	치쿠마 개이	N110			GN						ちくま かいに	names.678834
+筑摩改二	치쿠마 개2	N110			GN						ちくま かいに	names.678834
 筑水	치쿠스이	N130	QPNVHn	Wb	GN						ちくすい	names.678835
 筑波 洋	츠쿠바 히로시	N130	QPNVHn		GN						つくば ひろし	names.678836
 筑波さくら	쓰쿠바 사쿠라	N130	QPNVHn		GN							names.678837
@@ -61805,7 +61805,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 羽黒先生	하구로 선생님	N110			GN						はぐろせんせい	names.688126
 羽黒山	하구로산	N130	QPNVHn	Wa	GN						はぐろさん	names.688127
 羽黒山政司	하구로야마 마사지	N130	QPNVHn		GN							names.688128
-羽黒改二	하구로 개이	N110			GN						はぐろかいに	names.688129
+羽黒改二	하구로 개2	N110			GN						はぐろかいに	names.688129
 羽黒村	하구로촌	N130	QCTVPl		GN							names.688130
 羽黒町	하구로정	N130	QCTVPl		GN							names.688131
 羽黒高校	하구로 고등학교	N110			GN							names.688132
@@ -77695,7 +77695,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 藤波孝生	후지나미 다카오	N130	QPNVHn		GN							names.704016
 藤波家	후지나미가	N110			GN						ふじなみけ	names.704017
 藤波心	후지나미 코코로	N130	QPNVHn		GN							names.704018
-藤波改二	후지나미 개이	N110			GN						ふじなみ	names.704019
+藤波改二	후지나미 개2	N110			GN						ふじなみ	names.704019
 藤波晟	후지나미 쇼	N130	QPNVHn		GN							names.704020
 藤波景忠	후지나미 가게타다	N110			GN						ふじなみかげただ	names.704021
 藤波朱理	후지나미 아카리	N130	QPNVHn		GN							names.704022
@@ -80219,7 +80219,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 衣笠友章	기누가사 토모아키	N130	QPNVHn		GN							names.706540
 衣笠彰梧	키누가사 쇼고	N130	QPNVHn		GN							names.706541
 衣笠拳次	기누가사 켄지	N130	QPNVHn		GN							names.706542
-衣笠改二	키누가사 개이	N110			GN							names.706543
+衣笠改二	키누가사 개2	N110			GN							names.706543
 衣笠晴香	키누가사 하루카	N130	QPNVHn		GN							names.706544
 衣笠村	기누가사촌	N130	QCTVPl		GN							names.706545
 衣笠梨代	키누가사 리요	N130	QPNVHn		GN							names.706546
@@ -89661,7 +89661,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 赤城山バサラ	아카기야마 바사라	N130	QPNVHn		GN						あかぎやまばさら	names.715982
 赤城徳彦	아카기 노리히코	N130	QPNVHn		GN							names.715983
 赤城提督シリーズ	아카기 제독 시리즈	N130	QWK		GN							names.715984
-赤城改二	아카기 개이	N110			GN						あかぎかいに	names.715985
+赤城改二	아카기 개2	N110			GN						あかぎかいに	names.715985
 赤城敏正	아카기 도시마사	N130	QPNVHn		GN							names.715986
 赤城斗馬	아카기 토우마	N110			GN						あかぎとうま	names.715987
 赤城村	아카기촌	N130	QCTVPl		GN							names.715988
@@ -91839,7 +91839,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 足柄下郡	아시가라시모군	N130	QCTVPl		GN							names.718160
 足柄山	아시가라산	N130	QCTVPl		GN						あしがらやま	names.718161
 足柄山地	아시가라 산지	N130	QCTVPl		GN						あしがらさんち	names.718162
-足柄改二	아시가라 개이	N110			GN						あしがら かいに	names.718163
+足柄改二	아시가라 개2	N110			GN						あしがら かいに	names.718163
 足柄村	아시가라촌	N130	QCTVPl		GN							names.718164
 足柄町	아시가라정	N130	QCTVPl		GN							names.718165
 足次村	아스와촌	N130	QCTVPl		GN							names.718166
@@ -97568,7 +97568,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 那智わたる	나치 와타루	N130	QPNVHn		GN							names.723889
 那智先生	나치 선생님	N110			GN						なちせんせい	names.723890
 那智原始林	나치 원시림	N130	QCTVPl		GN						なちげんしりん	names.723891
-那智改二	나치 개이	N110			GN						なちかいに	names.723892
+那智改二	나치 개2	N110			GN						なちかいに	names.723892
 那智渡	나치 와타루	N130	QPNVHn		GN						なち わたる	names.723893
 那智滝	나치 폭포	N130	QCTVPl		GN							names.723894
 那智町	나치정	N130	QCTVPl		GN							names.723895
@@ -108145,7 +108145,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鈴谷	스즈야	N130	QPNVHn	Wb	GN						すずや	names.734466
 鈴谷まや	스즈야 마야	N130	QPNVHn		GN							names.734467
 鈴谷アキ	스즈야 아키	N130	QPNVHn		GN						すずや あき	names.734468
-鈴谷改二	스즈야 개이	N130	QPNVHn		GN						すずやかいに	names.734469
+鈴谷改二	스즈야 개2	N130	QPNVHn		GN						すずやかいに	names.734469
 鈴谷昂	스즈야 고	N130	QPNVHn		GN						すずや こう	names.734470
 鈴谷着任しました～	스즈야 착임했습니다~	N130	QWK		GN							names.734471
 鈴賀	스즈카	N130	QPNVHn	Wa	GN						すずか	names.734472
@@ -111191,7 +111191,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長泉沼津IC	나가이즈미누마즈 IC	N110			GN						ながいずみぬまづあいしー	names.737512
 長泉洞	장천동	N130	QCTVPl		GN							names.737513
 長波	장파	N110			GN							names.737514
-長波改二	나가나미 개이	N110			GN							names.737515
+長波改二	나가나미 개2	N110			GN							names.737515
 長泰区	창타이 현	N130	QCTVPl		GN						ちょうたいく	names.737516
 長泰山	장태산	N130	QCTVPl		GN							names.737517
 長洋平	오사 요헤이	N130	QPNVHn		GN							names.737518
@@ -112111,7 +112111,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長門勇	나가토 이사무	N130	QPNVHn		GN							names.738432
 長門国	나가토국	N130	QCTVPl		GN							names.738433
 長門型戦艦	나가토급 전함	N110			GN							names.738434
-長門改二	나가토 개이	N110			GN							names.738435
+長門改二	나가토 개2	N110			GN							names.738435
 長門有希	나가토 유키	N130	QPNVHn		GN							names.738436
 長門有希ちゃんの消失	나가토 유키짱의 소실	N130	QPNVHn		GN							names.738437
 長門浦倭城	장문포왜성	N130	QCTVPl		GN							names.738438
@@ -114571,7 +114571,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 阿武隈急行	아부쿠마 급행	N110			GN						あぶくまきゅうこう	names.740892
 阿武隈急行株式会社	아부쿠마 급행	N130	VGt		GN							names.740893
 阿武隈改	아부쿠마改	N110			GN						あぶくまかい	names.740894
-阿武隈改二	아부쿠마 개이	N110			GN						あぶくまかいに	names.740895
+阿武隈改二	아부쿠마 개2	N110			GN						あぶくまかいに	names.740895
 阿武隈紗季	아부쿠마 사키	N130	QPNVHn		GN						あぶくまさき	names.740896
 阿武隈高地	아부쿠마 고지	N130	QCTVPl		GN							names.740897
 阿比	아비	N130	QPNVHn	Wb	GN							names.740898
@@ -118304,7 +118304,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 雪風	유키카제	N110			GN							names.744625
 雪風	유키카제	N130	QPNVHn	Wb	GN							names.744626
 雪風あさ	유키카제 아사	N130	QPNVHn		GN						ゆきかぜあさ	names.744627
-雪風改二	유키카제 개이	N130	QPNVHn		GN						ゆきかぜかいに	names.744628
+雪風改二	유키카제 개2	N130	QPNVHn		GN						ゆきかぜかいに	names.744628
 雪風生誕祭	유키카제 생탄제	N110			GN							names.744629
 雪風真弥	유키카제 마야	N130	QPNVHn		GN						ゆきかぜまや	names.744630
 雪餅ののめ	유키모치 노노메	N130	QPNVHn		GN						ゆきもちののめ	names.744631
@@ -119488,8 +119488,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 霞子	카코	N130	QPNVHn	Wb	GN						かこ	names.745809
 霞山区	샤산구	N130	QCTVPl		GN							names.745810
 霞愛歌	카스미 아이카	N130	QPNVHn		GN						かすみあいか	names.745811
-霞改二	카스미 개이	N110			GN						かすみかいに	names.745812
-霞改二乙	카스미 개이을	N110			GN						かすみかいにおつ	names.745813
+霞改二	카스미 개2	N110			GN						かすみかいに	names.745812
+霞改二乙	카스미 개2을	N110			GN						かすみかいにおつ	names.745813
 霞月	카즈키	N130	QPNVHn	Wb	GN						かづき	names.745814
 霞朱麗	카스미 슈레이	N130	QPNVHn		GN						かすみ しゅれい	names.745815
 霞村	가스미촌	N130	QCTVPl		GN							names.745816
@@ -119619,8 +119619,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 霧島小夜美	키리시마 사요미	N130	QPNVHn		GN						きりしまさよみ	names.745940
 霧島平治	기리시마 헤이지	N130	QPNVHn		GN						きりしま へいじ	names.745941
 霧島志狼	키리시마 시로	N130	QPNVHn		GN						きりしま しろう	names.745942
-霧島改二	키리시마 개이	N110			GN							names.745943
-霧島改二丙	키리시마 개이병	N110			GN							names.745944
+霧島改二	키리시마 개2	N110			GN							names.745943
+霧島改二丙	키리시마 개2병	N110			GN							names.745944
 霧島敬子	키리시마 케이코	N130	QPNVHn		GN						きりしま けいこ	names.745945
 霧島早苗	키리시마 사나에	N110			GN						きりしま さなえ	names.745946
 霧島昇	기리시마 노보루	N130	QPNVHn		GN							names.745947
@@ -130636,7 +130636,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 高波利克	타카나미 토시카츠	N130	QPNVHn		GN							names.756957
 高波善行	타카나미 요시유키	N130	QPNVHn		GN							names.756958
 高波奈々未	타카나미 나나미	N130	QPNVHn		GN							names.756959
-高波改二	타카나미 개이	N110			GN							names.756960
+高波改二	타카나미 개2	N110			GN							names.756960
 高波文一	타카나미 후미카즈	N130	QPNVHn		GN							names.756961
 高波村	다카나미촌	N130	QCTVPl		GN							names.756962
 高波瀬	코하세	N130	QPNVHn	Wa	GN							names.756963
@@ -132250,7 +132250,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鬼怒川熱史	기누가와 아쓰시	N130	QPNVHn		GN						きぬがわあつし	names.758571
 鬼怒川第一ホテル	기누가와 다이이치 호텔	N130	VGt		GN							names.758572
 鬼怒川線	기누가와 선	N110			GN						きぬがわせん	names.758573
-鬼怒改二	키누 개이	N130	QPNVHn		GN						きぬかいに	names.758574
+鬼怒改二	키누 개2	N130	QPNVHn		GN						きぬかいに	names.758574
 鬼怒無月	키도 나츠키	N130	QPNVHn		GN							names.758575
 鬼怒田 本吉	키누타 모토요시	N130	QPNVHn		GN						きぬたもとよし	names.758576
 鬼怒田 本吉	키누타 모토키치	N130	QPNVHn		GN							names.758577
@@ -133714,7 +133714,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 魔王学院デルゾゲード	마왕학원 델조게이드	N110			GN						まおうがくいんでるぞげーど	names.760035
 魔王少女	마왕소녀	N130	QPNVHn	Wb	GN							names.760036
 魔王日記	마왕일기	N130	QWK		GN							names.760037
-魔王様	양나리	N130	QPNVHn	Wb	GN						まおうさま	names.760038
 魔王様、リトライ!	마왕님 리트라이!	N130	QWK		GN							names.760039
 魔王様、リトライ! R	마왕님, 리트라이! R	N130	QWK		GN							names.760040
 魔王様と結婚したい	마왕님과 결혼하고 싶어	N130	QWK		GN							names.760041
@@ -139309,7 +139308,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 黒潮TOKYOジャパン	쿠로시오TOKYO재팬	N130	QPNVHn	Wb	GN							names.765630
 黒潮しらら	구로시오 시라라	N130	QPNVHn		GN						くろしおしらら	names.765631
 黒潮スプリンターズカップ	구로시오 스프린터즈컵	N110			GN							names.765632
-黒潮改二	쿠로시오 개이	N110			GN						くろしおかいに	names.765633
+黒潮改二	쿠로시오 개2	N110			GN						くろしおかいに	names.765633
 黒潮病	쿠로시오병	N110			GN						くろしおびょう	names.765634
 黒潮皐月賞	구로시오 사츠키상	N110			GN						くろしおさつきしょう	names.765635
 黒潮盃	구로시오배	N110			GN						くろしおはい	names.765636
@@ -140990,7 +140989,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 龍驤	류조호	N110			GN							names.767311
 龍驤ちゃん	류조 짱	N130	QWK		GN						りゅうじょうちゃん	names.767312
 龍驤改	류조 개	N110			GN						りゅうじょうかい	names.767313
-龍驤改二	류조 개이	N110			GN						りゅうじょうかいに	names.767314
+龍驤改二	류조 개2	N110			GN						りゅうじょうかいに	names.767314
 龍骨精	류세이	N130	QPNVHn	Wb	GN							names.767315
 龍骨鬼	용골귀	N110			GN						りゅうこつき	names.767316
 龍魔神	용마신	N110			GN							names.767317
@@ -140998,9 +140997,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 龍魚「龍宮の使い遊泳弾」	용어「용궁의 사자 유영탄」	N130	QPNVHn		GN							names.767319
 龍魚の一撃	용어의 일격	N110			GN							names.767320
 龍魚の怒り	용어의 분노	N110			GN						りゅうぎょのいかり	names.767321
-龍鳳	롬팽	N110			GN						りゅうほう	names.767322
+龍鳳	류호	N110			GN						りゅうほう	names.767322
 龍鳳山	용봉산	N130	QCTVPl		GN							names.767323
-龍鳳改二	류호우 개이	N110			GN						りゅうほうかいに	names.767324
+龍鳳改二	류호우 개2	N110			GN						りゅうほうかいに	names.767324
 龍麿	타츠마로	N130	QPNVHn	Wb	GN						たつまろ	names.767325
 龍龕手鑑	용감수경	N130	QWK		GN							names.767326
 龜	거북	N110			GN							names.767327

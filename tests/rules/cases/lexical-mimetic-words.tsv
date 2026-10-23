@@ -1,0 +1,22 @@
+rule	input	expected	kind	layer
+dict:mimetic-words:4	数歩よろめいた。	몇 걸음 비틀거렸다.	fix	lookup
+dict:mimetic-words:5	胡乱な男だ。	수상한 남자다.	fix	lookup
+dict:mimetic-words:15	胡乱げにこちらを窺っている。	수상하게 이쪽을 살피고 있다.	fix	lookup
+dict:mimetic-words:6	海が凪いでいる。	바다가 잔잔해져 있다.	fix	lookup
+dict:mimetic-words:7	足がもたついた。	다리가 꾸물거렸다.	fix	lookup
+dict:mimetic-words:8	唇がひくついている。	입술이 실룩거리고 있다.	fix	lookup
+dict:mimetic-words:9	指先がピクついた。	손가락끝이 실룩거렸다.	fix	lookup
+dict:mimetic-words:10	なんかキレキレじゃない？	왠지 예리하지 않아?	fix	lookup
+dict:mimetic-words:11	センスはキレッキレだ。	센스는 예리하다.	fix	lookup
+dict:mimetic-words:12	ズボラな性格だ。	칠칠치 못한 성격이다.	fix	lookup
+dict:mimetic-words:13	幹をシゴく。	줄기를 훑어 낸다.	fix	lookup
+dict:mimetic-words:14	仲間からハブられる。	동료에게서 따돌려진다.	fix	lookup
+dict:mimetic-words:16	藍染職人になった。	쪽빛 염색 장인이 되었다.	fix	lookup
+dict:mimetic-words:17	オトモダチになろう。	친구가 되자.	fix	lookup
+dict:mimetic-words:18	ビラを配る。	전단을 나눠준다.	fix	lookup
+dict:jisjk:116707	マジでキレそう。	진짜로 이성을 잃을 것 같다.	fix	lookup
+dict:jisjk:116707	彼がキレなかったら	그가 이성을 잃지 않았으면	fix	lookup
+dict:jisjk:116707	キレイな花だ。	깨끗한 꽃이다.	keep	lookup
+dict:jisjk:116707	彼はキレた。	그는 이성을 잃었다.	keep	lookup
+dict:mimetic-words:14	ハブ空港に着いた。	허브공항에 도착했다.	keep	lookup
+dict:mimetic-words:19	今日は、ポン酒にしてみるか。	오늘은, 정종으로 해 볼까.	fix	lookup

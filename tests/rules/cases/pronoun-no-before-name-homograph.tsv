@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:358006	俺の畑を守る。	내 밭을 지킨다.	fix	local
+dict:jisjk:374725	私の森を見た。	내 숲을 보았다.	fix	local
+dict:jisjk:358006	娘のユイが庭で遊んでいる。	딸 유이가 뜰에서 놀고 있다.	keep	local
+dict:jisjk:374725	兄の翔太が来た。	형 쇼타가 왔다.	keep	local

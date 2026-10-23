@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:114794	「たまに一緒にいる２年生の子は？」	「이따금 함께 있는 2학년의 아이는?」	fix	local
+dict:jisjk:114794	もう高校３年生なんだから。	이제 고등학교 3학년이니까.	fix	local
+dict:jisjk:114794	7年生が来た。	7년생이 왔다.	keep	local

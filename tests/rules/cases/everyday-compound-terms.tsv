@@ -1,0 +1,21 @@
+rule	input	expected	kind	layer
+lexical:everyday-terms	畑の外に大きなため池を作る。	밭의 밖에 큰 저수지를 만든다.	fix	lookup
+lexical:everyday-terms	【万能農具】を出してみる。	【만능 농기구】를 내 본다.	fix	lookup
+lexical:everyday-terms	壁に小さな明かり取り窓を作った。	벽에 작은 채광창을 만들었다.	fix	lookup
+lexical:everyday-terms	できる限り血抜きをする。	할 수 있는 한 피 빼기를 한다.	fix	lookup
+lexical:everyday-terms	犬たちは猪肉を貪っていた。	개들은 멧돼지고기를 탐내고 있었다.	fix	lookup
+lexical:everyday-terms	兎肉がまだある。	토끼고기가 아직 있다.	fix	lookup
+lexical:everyday-terms	村長や名主が来た。	촌장이나 이장이 왔다.	fix	lookup
+lexical:everyday-terms	生ゴミを処理する。	음식물 쓰레기를 처리한다.	fix	lookup
+lexical:everyday-terms	食感の違いが味を変える。	식감의 차이가 맛을 바꾼다.	fix	lookup
+lexical:everyday-terms	虫眼鏡！	돋보기!	fix	lookup
+lexical:everyday-terms	遊び道具だと投げてみた。	장난감이라고 던져 보았다.	fix	lookup
+lexical:everyday-terms	村の鍛冶場を見せたい。	마을의 대장간을 보여 주고 싶다.	fix	lookup
+lexical:everyday-terms	野性味溢れる長テーブルの完成。	야성미 흘러넘치는 긴 테이블의 완성.	fix	lookup
+lexical:everyday-terms	薄味の病院食だった。	싱거운 맛의 병원식이었다.	fix	lookup
+lexical:everyday-terms	滝は西方向にある。	폭포는 서쪽 방향에 있다.	fix	lookup
+lexical:everyday-terms	別方向を探してみる。	다른 방향을 찾아 본다.	fix	lookup
+lexical:everyday-terms	丸太を半円状にした。	통나무를 반원 모양으로 했다.	fix	lookup
+lexical:everyday-terms	大木さんが来た。	오키 씨가 왔다.	keep	lookup
+lexical:everyday-terms	森の中は薄暗かった。	숲속은 어슴푸레했다.	fix	lookup
+lexical:everyday-terms	月に照らされた山の中。	달에 비추어진 산속.	fix	lookup

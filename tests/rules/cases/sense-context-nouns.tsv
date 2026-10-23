@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+sense:踵	靴の踵を折った。	구두의 굽을 부러뜨렸다.	fix	senses
+sense:踵	部室に戻ろうと、踵を返した。	동아리방으로 돌아가려고, 발길을 돌렸다.	keep	senses
+sense:腕	彼の腕を認める。	그의 솜씨를 인정한다.	fix	senses
+sense:腕	腕を掴んだ。	팔을 잡았다.	keep	senses
+sense:クマ	目の下にクマが居座っている。	눈 아래에 다크서클이 눌러 앉고 있다.	fix	senses
+sense:クマ	森でクマが出た。	숲에서 곰이 나왔다.	keep	senses
+sense:手の内	手の内を明かす。	속셈을 밝힌다.	fix	senses
+sense:半月	半月ぶりに会った。	보름만에 만났다.	fix	senses
+sense:半月	空に半月が浮かぶ。	하늘에 반달이 떠오른다.	keep	senses
+sense:腕	腕を認められた。	솜씨를 인정받았다.	fix	senses

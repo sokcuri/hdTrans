@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:after-kanji	まだ焦点の定まらない目で、時折ぶるっと身を震わせていた。	아직 초점이 정해지지 않는 눈으로, 때때로 부르르 몸을 진동시키고 있었다.	fix	sound
+sound:after-kanji	結構ぺろっと食べられる	상당히 날름 먹을 수 있다	fix	sound
+sound:after-kanji	ちょっと休もうっと。	조금 쉬어야지.	keep	sound
+sound:after-kanji	書類もやっと片付きましたね。	서류도 드디어 정리됐어요.	keep	sound

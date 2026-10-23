@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+pattern:書くことで	お前を別の世界に送ることで私に利がある。	너를 다른 세계에 보냄으로써 나에게 이익이 있다.	fix	builtin-pattern
+pattern:書くことで	書くことではない。	쓰는 것은 아니다.	keep	builtin-pattern
+pattern:書くことで	私にできることであれば。	내가 할 수 있는 것이면.	keep	builtin-pattern
+pattern:書くことで	休みということで帰った。	휴일이라는 것으로 돌아갔다.	fix	builtin-pattern
+pattern:書くことで	棒で引っ掛けることで	봉으로 걺으로써	fix	builtin-pattern
+pattern:書くことで	料理を作ることで覚えた。	요리를 만듦으로써 기억했다.	fix	builtin-pattern
+pattern:書くことで	ですがまだ近場にいるだろうということで、ひとまず	그렇지만 아직 근처에 있을 것이라는 것으로, 일단	fix	builtin-pattern
+pattern:書くことで	知的好奇心を満たすことでなく	지적 호기심을 채우는 것이 아니고	fix	builtin-pattern
+constraint:to-iu-kotode-opening	と言うことで、終わりです。	그래서, 끝입니다.	fix	lookup
+constraint:toiu-kotode-opening	ということで、明日は休み。	그래서, 내일은 쉬어.	fix	lookup
+constraint:toiu-kotode-opening	休みということで帰った。	휴일이라는 것으로 돌아갔다.	keep	lookup
+dict:jisjk:4039	書くことでない。	쓰는 것이 아니다.	fix	local
+dict:jisjk:4039	書くことではない。	쓰는 것은 아니다.	keep	local
+pattern:書くことで	と言うことで終わりです。	이렇게 말하는 것으로 끝입니다.	fix	builtin-pattern
+pattern:書くことで	優勝者を予想することでな。	우승자를 예상함으로써.	keep	builtin-pattern
+constraint:toiu-kotode-opening	裏切り者がいる、ということですか？	배신자가 있다, 라는 것입니까?	keep	lookup

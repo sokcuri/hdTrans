@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:gram:dakeno	前にチラッと見ただけの写真のことだ。	전에 흘깃했을 뿐인 사진이다.	fix	local
+dict:gram:dakeno	ただ白いだけの粉。	다만 흰 것뿐인 가루.	fix	local
+dict:gram:dakeno	望む明日を買えるだけの金を手にした。	바라는 내일을 살 수 있을 만한 돈을 손에 넣었다.	fix	local
+dict:gram:dakeno	一度だけ会った。	한 번만 만났다.	keep	local

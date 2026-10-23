@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:gram:kiwamarinai	その構成は複雑極まりないものとなる。	그 구성은 복잡 짝이 없는 것이 된다.	fix	defaults
+dict:gram:kiwamarinai	後が不快極まりない。	후가 불쾌 짝이 없다.	fix	defaults
+dict:gram:kiwamaru	カオスが極まる。	카오스가 극에 달한다.	fix	defaults

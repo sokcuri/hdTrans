@@ -6,6 +6,7 @@
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
 #include "core/word/util.h"
@@ -174,6 +175,86 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
+namespace {
+
+// Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
+constexpr std::string_view kWonderWords[] = {
+    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
+    "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
+    "どのような", "どういう", "どういった", "いかなる",
+    "一体", "いったい", "いくつ", "いくら",
+};
+
+// Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+constexpr std::string_view kWonderNot[] = {
+    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "何卒", "何気", "なにか", "なにも", "なんか",
+    "なんて", "なんだか", "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも",
+    "どこか", "どこも", "どこでも", "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも",
+    "どうせ", "どうしても", "どうぞ", "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも",
+    "いくらか", "いくらでも",
+};
+
+// The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
+constexpr std::string_view kWonderParticles[] = {"を", "が", "に", "へ", "で", "と", "の", "は", "から", "まで", "くらい", "ぐらい"};
+
+}  // namespace
+
+// Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
+// with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
+// such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
+bool Item::IsQuestionWord() const {
+    const std::string_view s = group->surface;
+    // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
+    if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
+    // The か of 何か before ら is the particle から (何から, どこから, いつから).
+    for (const std::string_view n : kWonderNot) {
+        if (s.starts_with(n) && !(n.ends_with("か") && s.substr(n.size()).starts_with("ら"))) return false;
+    }
+    const char cls = At(Code(std::max(selected, 0)), 0);
+    for (const std::string_view wonder : kWonderWords) {
+        if (!s.starts_with(wonder)) continue;
+        const std::string_view rest = s.substr(wonder.size());
+        if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
+        for (const std::string_view part : kWonderParticles) {
+            if (rest.starts_with(part)) return true;
+        }
+        if (cls != '0' && cls != '3') return true;
+    }
+    return false;
+}
+
+bool Item::EndingAsks() const {
+    if (DirectGroup() == nullptr || !DirectSurface().ends_with("か")) return false;
+    // The text after the stem, past the kana of the verb's conjugation branch (行か|ない, 行く|か).
+    const int stem = static_cast<int>(group->surface.size());
+    std::string_view tail = From(text, start + stem).substr(0, static_cast<std::size_t>(std::max(0, length - stem)));
+    if (detail->cls == kDetailVerb && detail->patternKind >= 0 && detail->kind >= 0 && detail->kind < kConjugationBranches) {
+        const std::string_view conj = Conjugation(detail->patternKind, detail->kind);
+        if (!conj.empty() && tail.starts_with(conj)) tail.remove_prefix(conj.size());
+    }
+    return tail.ends_with("か");
+}
+
+bool Item::AfterQuestionWord() const {
+    for (const Item* x = this; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
+        // A question closed by か before the word is embedded (どうなるか……ってのもあるだろうな).
+        if (x != this && (s == "か" || x->EndingAsks())) break;
+        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
+        // alone or before a particle; から, かな and かしら keep the question.
+        const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();
+        const bool indefiniteKa =
+            after.starts_with("か") &&
+            (after == "か" ||
+             std::u32string_view(U"がをにでもはのとへか").find(text::DecodeRune(after.substr(std::string_view("か").size())).cp) !=
+                 std::u32string_view::npos);
+        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || indefiniteKa) continue;
+        if (x->IsQuestionWord()) return true;
+    }
+    return false;
+}
+
 bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
@@ -185,8 +266,51 @@ bool Item::ClosingTsu() const {
     return !text::IsLetter(c) && !text::IsDigit(c);
 }
 
+bool Item::ReadsCount(int i) {
+    const std::string_view s = group->surface;
+    std::size_t k = 0;
+    bool numeral = false;
+    while (k < s.size()) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (text::IsDigit(r.cp) || std::u32string_view(U"〇○一二三四五六七八九十百千半").find(r.cp) != std::u32string_view::npos) {
+            numeral = true;
+        } else if (r.cp != U'数' && r.cp != U'何' && r.cp != U'幾') {
+            break;
+        }
+        k += r.size;
+    }
+    if (k == 0) return false;
+    std::string_view rest = s.substr(k);
+    if (rest.empty()) return numeral;
+    // A fraction (五分の一) and a count with a half (四畳半, 一時間半) are counts too.
+    if (rest.starts_with("分の")) {
+        const std::string_view m = rest.substr(std::string_view("分の").size());
+        const char32_t r = text::DecodeRune(m).cp;
+        return text::IsDigit(r) || std::u32string_view(U"一二三四五六七八九十百千").find(r) != std::u32string_view::npos;
+    }
+    if (rest.size() > std::string_view("半").size() && rest.ends_with("半")) rest.remove_suffix(std::string_view("半").size());
+    if (w == nullptr || rest == "月" || rest == "時") return false;
+    // The word must read as a count: digits or a Korean numeral first (三人 세 명, 十日 열흘,
+    // 一年 일 년), not a word of its own (一番 제일).
+    constexpr std::string_view kNumerals[] = {
+        "한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "스물", "스무", "서른", "마흔", "쉰",
+        "예순", "일흔", "여든", "아흔", "하나", "둘", "셋", "넷", "하루", "이틀", "사흘", "나흘", "닷새", "엿새",
+        "이레", "여드레", "아흐레", "보름", "며칠", "몇", "수", "반", "일", "이", "삼", "사", "오", "육", "칠",
+        "팔", "구", "십", "백", "천"};
+    const std::string_view ko = EntryText(i);
+    if (std::none_of(ko.begin(), ko.end(), [](char c) { return c >= '0' && c <= '9'; }) &&
+        std::none_of(std::begin(kNumerals), std::end(kNumerals), [&](std::string_view n) { return ko.starts_with(n); })) {
+        return false;
+    }
+    const Lookup l = w->DoLookup(rest, kModeGeneral);
+    for (Record* c = l.records; c != nullptr; c = c->child) {
+        if (c->source == rest && Has(c->attr, "Ct")) return true;
+    }
+    return false;
+}
+
 bool Item::CheckGAttr(std::string_view s, int di) {
-    auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly) {
+    auto chunkMatches = [&](std::string_view c, std::string_view attrs, bool hzOnly, int i) {
         if (c == "Ow") return IsRuleRightBoundary();
         // Oj: the On reading of a word written right before the next one (事私, not 事…私).
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
@@ -197,12 +321,16 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
+        // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
+        if (c == "Nq") return ReadsCount(i);
+        // Qw: a question word is the word or comes before it in its sentence.
+        if (c == "Qw") return AfterQuestionWord();
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {
         for (int i = 0; i < Count(*this); i++) {
             for (std::size_t off = 0; off < s.size(); off += 2) {
-                if (chunkMatches(Chunk(s, off, 2), GAttr(i), false)) return true;
+                if (chunkMatches(Chunk(s, off, 2), GAttr(i), false, i)) return true;
             }
         }
         return false;
@@ -210,7 +338,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
     const bool hzOnly = di == -1;
     if (di == -1) di = selected;
     for (std::size_t off = 0; off < s.size(); off += 2) {
-        if (chunkMatches(Chunk(s, off, 2), GAttr(di), hzOnly)) return true;
+        if (chunkMatches(Chunk(s, off, 2), GAttr(di), hzOnly, di)) return true;
     }
     return false;
 }
@@ -233,10 +361,55 @@ bool Item::IsRuleRightBoundary() const {
     if (n == nullptr) return true;
     // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
     // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
+    // So does a predicate with its ending before an ellipsis (うるさい…テメェ 시끄럽다…).
     if (tsu != nullptr && n->group->surface == "、") return true;
-    if (tsu != nullptr && w != nullptr && n->tokenIndex > tsu->tokenIndex + 1) {
+    // A noun that needs a modifier (こと, もの, わけ), an auxiliary (みたい, らしい, だろう,
+    // かもしれない) or an adverbial particle (まで, ほど, くらい) still takes the predicate across
+    // the pause (行く……ことにした 가는……것으로, 来る……まで 오는……까지): the word alone or with a
+    // particle (ことに, わけがない), not the start of another word (ようやく, だけど).
+    static constexpr std::string_view kBoundNouns[] = {
+        "こと", "事", "もの", "物", "の", "ん", "ところ", "所", "とこ", "わけ", "訳", "はず", "筈", "つもり", "よう", "ため",
+        "為", "まま", "ほう", "方", "とき", "時", "ころ", "頃", "みたい", "らし", "そう", "まで", "ほど", "くらい", "ぐらい",
+        "だけ", "ばかり"};
+    static constexpr std::string_view kAuxiliaries[] = {"かも", "だろう", "でしょう"};
+    const std::string_view ns = n->group->surface;
+    const int sel = n->selected >= 0 ? n->selected : 0;
+    const std::string_view nc = n->Code(sel);
+    // The words of a bound noun that open a clause after a pause instead: そうか (I see), and
+    // ところで、 and ところが、 (by the way, but).
+    const std::string_view following = n->next != nullptr ? std::string_view(n->next->group->surface) : std::string_view();
+    const bool opener = ns.starts_with("そうか") || (ns == "そう" && following.starts_with("か")) ||
+                        ((ns == "ところで" || ns == "ところが") && following == "、");
+    bool bound = false;
+    for (const std::string_view b : kBoundNouns) {
+        if (opener || !ns.starts_with(b)) continue;
+        const char32_t after = text::DecodeRune(ns.substr(b.size())).cp;
+        bound = bound || ns.size() == b.size() || std::u32string_view(U"にがをはもでのだかとなじ").find(after) != std::u32string_view::npos;
+    }
+    for (const std::string_view b : kAuxiliaries) bound = bound || ns.starts_with(b);
+    // かな as the particle that asks (楽しい……かな), not かなり or the verb かなう.
+    bound = bound || (At(nc, 0) == '2' && ns.starts_with("かな"));
+    // Nor does a common noun, which the predicate may still modify (暖かい…居場所), or an
+    // attributive phrase before one (隠している……すべてのこと); a pronoun, a demonstrative, an
+    // interjection or another clause after the pause starts anew (うるさい…テメェ, ……この人).
+    bound = bound || (At(nc, 0) == '1' && At(nc, 1) != '2') || (At(nc, 0) == '0' && At(nc, 1) == 'D');
+    // A conjunctive ending (分からないが, 行って) is no end either; a polite ending
+    // (がんばります……かも) never modifies and ends the clause whatever follows.
+    bool terminal = false;
+    if (detail != nullptr && detail->Yougo()) {
+        const std::string_view ending = DirectSurface();
+        terminal = ending.empty();
+        for (const std::string_view e : {"い", "る", "う", "く", "す", "つ", "ぬ", "ぶ", "む", "ぐ", "た", "だ"}) {
+            terminal = terminal || ending.ends_with(e);
+        }
+        if (ending.ends_with("ます") || ending.ends_with("です")) bound = false;
+    }
+    const char32_t punct = text::DecodeRune(n->group->surface).cp;
+    const bool mark = std::u32string_view(U"?？!！。、」』").find(punct) != std::u32string_view::npos;
+    const Item* closed = tsu != nullptr ? tsu : (terminal && !bound && !mark ? this : nullptr);
+    if (closed != nullptr && w != nullptr && n->tokenIndex > closed->tokenIndex + 1) {
         bool ellipsis = true;
-        for (int k = tsu->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
+        for (int k = closed->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
             const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
             ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
         }

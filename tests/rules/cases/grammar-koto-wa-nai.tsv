@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+pattern:高いことはない	だが、食べられないことは無い。	하지만, 먹을 수 없는 것은 아니다.	fix	builtin-pattern
+pattern:高いことはない	知らないことはないが。	모르는 것은 아니지만.	fix	builtin-pattern
+pattern:書かないことはない	行かないことはない。	가지 않는 것은 아니다.	fix	builtin-pattern
+pattern:高いことはない	こんなに嬉しいことはない。	이렇게 기쁜 것은 없다.	keep	builtin-pattern
+pattern:書くことは無い	気にすることは無い。	신경 쓸 일은 없다.	fix	builtin-pattern
+pattern:高いことはない	こんなに切ないことはない。	이렇게 안타까운 것은 없다.	fix	builtin-pattern
+pattern:高いことはない	こんなに危ないことはない。	이렇게 위험한 것은 없다.	fix	builtin-pattern
+pattern:高いことはない	行けないことはない。	갈 수 없는 것은 아니다.	keep	builtin-pattern

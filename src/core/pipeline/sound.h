@@ -28,9 +28,14 @@
 //     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
 //     (はわわユウキ); an ono row may be followed by anything, and と or the て of って
-//     after it is dropped (ぎゅっと 꽉). A space separates a sound from a following
-//     kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but not from
-//     a form of する;
+//     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
+//     (スタスタとベッド 척척 ベッド, but ドキドキとワクワク). A space separates a sound from a
+//     following kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but
+//     not from a form of する;
+//   - a と after a sound and a pause (、 ！ ？ or an ellipsis) quotes the sound and is
+//     written 하고 after the pause (ぱさり、と 툭, 하고; ダンッ！　と 쾅! 하고), unless it
+//     starts a longer word (うん、とても), another と or する follows it, or a pause follows
+//     it after an ellipsis (やっ……と、, a stutter);
 //   - a lead row (おい、 ほら！ ちょっと…) is a sound only at the start of an utterance
 //     and before a pause, and then wins over the dictionary words; an open row is a
 //     lead row that needs no pause (ってかなんで 그보다 왜);
@@ -47,6 +52,11 @@
 // to four characters said twice, that no dictionary key reads) is written in hiragana when
 // it ends in ッ and a dictionary word reads it so (ジッと じっと), otherwise as heard with
 // the と dropped (メキメキと 메키메키).
+//
+// A hiragana mimetic the lexicon lacks before と or っと (a unit of two plain kana said
+// twice that starts a hiragana run or follows a lone particle, and that no dictionary key
+// of four or more characters reads) is written as heard with the と dropped (とてとてと
+// 토테토테).
 //
 // A lone っ or ッ that an utterance holds after nothing but an ellipsis or a dash, before
 // a pause, an ellipsis, a dash or the end, is a caught breath (……ッ、 ……읏,).

@@ -1,10 +1,10 @@
 rule	input	expected	kind	layer
-dict:w:401	病院も3か所行って	병원도 3군데 가	fix	lookup
-dict:w:401	階段は１フロアに２か所あるみたい	계단은 1 플로어에 2군데 있는 것 같다	fix	lookup
-dict:w:401	敵の対空陣地を二か所確認	적의 대공 진지를 2군데 확인	fix	lookup
-dict:counter-places:5	地図上の七箇所から光の柱が立ち	지도상의 7군데에서 빛의 기둥이 서	fix	lookup
-dict:jisjk:105215	センサーは二ケ所ある。	센서는 2군데 있다.	fix	lookup
-dict:jisjk:14921	違うのは１箇所。	다른 것은 1군데.	fix	lookup
+dict:w:401	病院も3か所行って	병원도 세 군데 가	fix	lookup
+dict:w:401	階段は１フロアに２か所あるみたい	계단은 1플로어에 두 군데 있는 것 같다	fix	lookup
+dict:w:401	敵の対空陣地を二か所確認	적의 대공 진지를 두 군데 확인	fix	lookup
+dict:counter-places:5	地図上の七箇所から光の柱が立ち	지도상의 일곱 군데에서 빛의 기둥이 서	fix	lookup
+dict:jisjk:105215	センサーは二ケ所ある。	센서는 두 군데 있다.	fix	lookup
+dict:jisjk:14921	違うのは１箇所。	다른 것은 한 군데.	fix	lookup
 dict:counter-places:18	そういうとこが機体の何カ所かにあるんだよな	그런 곳이 기체의 몇 군데인가에 있는 거지	fix	lookup
 dict:counter-places:17	巻き薔薇の後ろを糸で何か所か縫い止めた後	권장미 뒤를 실로 몇 군데인가 누비어 멈춘 후	fix	lookup
 dict:jisjk:104106	お付き合いして三か月も経てば	교제해 3개월도 지나면	keep	lookup

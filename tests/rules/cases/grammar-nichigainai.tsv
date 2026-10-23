@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:gram:nichigainai:attributive	嫌がらせだったに違いない。	괴롭힘이었던 것이 틀림없다.	fix	local
+dict:gram:nichigainai:attributive	今はガマンしてるに違いない。	지금은 자제하고 있는 것이 틀림없다.	fix	local
+dict:gram:nichigainai:attributive	静かだったに違いない。	조용했던 것이 틀림없다.	fix	local
+dict:gram:nichigainai:attributive	これは罠に違いない。	이것은 함정임에 틀림없다.	keep	local
+dict:gram:nichigainai:attributive	来るに違いない。	올 것임에 틀림없다.	keep	local
+dict:gram:nichigainai:attributive	寒かったに違いない。	추웠던 것이 틀림없다.	keep	local

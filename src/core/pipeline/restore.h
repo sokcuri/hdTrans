@@ -55,7 +55,8 @@ std::string WriteDropped(std::string_view s);
 // two or more ・) written as the next syllable of the text without its final and the
 // separator, 、 and ， as ", " (U+E000、어이 -> 어, 어이). A run of k marks and r
 // kStutterRest marks writes the share k/(k+r) of the next word's syllables, at least one
-// and short of the whole word, with their finals (ごめ、 미안, of 미안해요). Spaces before a mark at the
+// and short of the whole word, with their finals (ごめ、 미안, of 미안해요); k marks without
+// kStutterRest and separators write the syllable k times (つつつついに 마마마마침내). Spaces before a mark at the
 // start of the line or after an opening bracket are dropped; a mark with no syllable
 // after it (past spaces, marks and separators) is dropped with its separator.
 std::string WriteStutters(std::string_view s);

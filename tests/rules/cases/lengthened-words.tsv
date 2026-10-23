@@ -1,0 +1,34 @@
+rule	input	expected	kind	layer
+sound:lengthened-word	「まだ、なんとなーく興味があるってレベルなのに」	「아직, 왠지 흥미가 있다는 레벨인데」	fix	sound
+sound:lengthened-word	いや、かなーりやばい事実に気づいた。	아니, 꽤 위험한 사실을 눈치챘다.	fix	sound
+sound:lengthened-word	「車で行くから早くしなさーい。」	「차로 가니까 빨리 해~.」	fix	sound
+sound:lengthened-word	あ～めんどくさ～い。	아~귀찮다~.	fix	sound
+sound:lengthened-word	だーかーらー！何なの？	그러니까~! 뭐야 대체?	fix	sound
+sound:lengthened-word	お花見か～いいわね	꽃놀이인가~좋네	keep	sound
+sound:lengthened-word	「そうねー、いいね」	「그래~, 좋네」	keep	sound
+sound:lengthened-interjection	「はぁーい……」	「네에……」	fix	sound
+sound:lengthened-interjection	「おーーい、隠れてないで出てきなさいって。」	「어이, 숨지 말고 나와는.」	fix	sound
+sound:lengthened-interjection	え～い！	에잇!	fix	sound
+sound:lengthened-interjection	「へーい」	「헤이」	fix	sound
+sound:lengthened-interjection	「わぁ〜い！！」	「와아~!!」	fix	sound
+sound:lengthened-interjection	「う、うぅん、こっちこそごめんね！」	「아, 아니, 나야말로 미안해!」	keep	sound
+sound:adjective-long-i	「おいしー！　やっぱり、お料理は最高だね」	「맛있어~! 역시, 요리는 최고구나」	fix	sound
+sound:adjective-long-i	間宮は朝食、おいしーよねー。	마미야는 아침 식사, 맛있지~.	fix	sound
+sound:adjective-long-i	夕食、おいしーじゃん！	저녁식사, 맛있잖아!	fix	sound
+sound:adjective-long-i	うれしー	기쁘다~	fix	sound
+sound:adjective-long-i	意外と難しー…。	의외로 어렵다~….	fix	sound
+sound:adjective-long-i	んもぅ、恥ずかしー事言わないでよねっ！	응도, 부끄러운 말 말하지 말아!	fix	sound
+sound:adjective-long-i	わたしー、行く	나~, 간다	keep	sound
+sound:adjective-long-i	もしもしー	여보세요~	keep	sound
+sound:stretched-word	「とーにーかーく！　避けるの禁止！」	「어쨌든! 피하는 거 금지!」	fix	sound
+sound:stretched-word	ふぇぇあぁぁー！むーりーー！！	후에에 아아아아! 무리~!!	fix	sound
+sound:stretched-word	「いーなー、行ってみたい」	「이~인―, 가 보고 싶다」	keep	sound
+sound:long-vowel-before-word	「先輩、おはよーございますっ！」	「선배, 안녕하세요!」	fix	sound
+sound:long-vowel-before-word	「ごけっこん、おめでとーございます！」	「결혼, 축하합니다!」	fix	sound
+dict:colloq:daijobu	「だいじょぶ、だいじょぶ、気合い気合いっ」	「괜찮아, 괜찮아, 기합 기합」	fix	lookup
+dict:jisjk:257391	よし、これでいつ出番が来てもだいじょぶ！	좋아, 이것으로 언제 차례가 와도 괜찮아!	fix	lookup
+dict:jisjk:259061	そーなんだ	그렇군	fix	lookup
+sound:long-vowel-after-word	『あんなしょーもないグループ抜けちゃいなよ。』	『저런 시시한 그룹 빠져버릴. 』	fix	sound
+sound:long-vowel-after-word	まあしょーがない、起きよ。	뭐 어쩔 수 없다, 일어나라.	fix	sound
+sound:long-vowel-after-word	お金ちょーだい、お金！	돈 줘, 돈!	fix	sound
+sound:long-vowel-after-word	お仕事しゅーりょー。	일-~.	keep	sound

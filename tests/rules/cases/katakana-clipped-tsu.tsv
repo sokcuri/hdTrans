@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+katakana:clipped-tsu	バカッ！	바보!	fix	normalize
+katakana:clipped-tsu	アーッ！	아앗!	keep	normalize
+katakana:clipped-tsu	テメェッ！	네놈!	fix	normalize

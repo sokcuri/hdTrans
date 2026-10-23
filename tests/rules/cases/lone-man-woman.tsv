@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+G100	男	남자	fix	global-stem
+G100	女	여자	fix	global-stem
+G100	― 梅 ―	― 매 ―	keep	global-stem
+G100	続	속	keep	global-stem

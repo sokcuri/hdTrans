@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:sense:ataru:1	胸が背中に当たっている。	가슴이 등에 닿고 있다.	fix	local
+dict:sense:ataru:2	先端が固い壁に当たった。	끝이 단단한 벽에 부딪쳤다.	fix	local
+dict:sense:ataru:3	いつあの刃に当たるかわからない。	언제 그 칼날에 맞을지 모른다.	fix	local
+dict:sense:ataru:1:kana	背中にあたったものはあたってる。	rule:L6900=에 &F9@	fix	local
+dict:sense:ataru:1	妹にあたる立場だ。	여동생에 해당하는 입장이다.	keep	local

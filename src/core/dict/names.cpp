@@ -81,10 +81,10 @@ constexpr std::array<std::string_view, 31> kParticleTails = {
 // The particles and honorifics that follow a name.
 constexpr std::array<std::string_view, 20> kNameFollowers = {"は", "が", "を", "の", "に", "へ", "と", "も", "や", "で",
                                                               "か", "だ", "って", "から", "まで", "より", "さん", "ちゃん", "くん", "さま"};
-// Endings of a sentence, not of a name (陽炎型十番艦の時津風だよ).
+// Endings of a sentence, not of a name (同じ班の田中だよ).
 constexpr std::array<std::string_view, 12> kSentenceTails = {"だよ", "だね", "だぞ", "です", "ですか", "ます",
                                                               "ますか", "ました", "ません", "でした", "だもん", "ないもん"};
-// Familiar honorifics after a key that make it a person's name (梨花ちゃん, 圭一くん).
+// Familiar honorifics after a key that make it a person's name (桃花ちゃん, 恭平くん).
 constexpr std::array<std::string_view, 5> kPersonCues = {"ちゃん", "くん", "君", "たん", "っち"};
 // Honorifics that also follow shops and titles (八百屋さん, お姫様): a cue only after a key
 // that is no such word.
@@ -297,6 +297,31 @@ bool Snapshot::CuedKey(std::string_view key) const {
 
 bool Snapshot::BaseWord(std::string_view key) const { return base_.Find(key) >= 0 || user_.Find(key) >= 0; }
 
+// Whether key is a number and a counter word of the base dictionary (a sense with the
+// grammar code Ct): 24時間, 3ヶ月, 1位 after digits, 四年生 after a kanji numeral when the
+// counter has two characters or more. The word stage reads it with the counter's codes;
+// a kanji numeral and a one-character counter is often a place (千葉, 四国).
+bool Snapshot::CountedKey(std::string_view key) const {
+    std::size_t at = 0;
+    bool digits = false;
+    while (at < key.size()) {
+        const auto d = DecodeRune(key.substr(at));
+        if (!ContainsRune(kNumerals, d.cp)) break;
+        digits = digits || (d.cp >= U'0' && d.cp <= U'9') || (d.cp >= U'０' && d.cp <= U'９');
+        at += d.size;
+    }
+    const std::string_view counter = key.substr(at);
+    if (at == 0 || counter.empty() || (!digits && RuneCount(counter) < 2)) return false;
+    const int k = base_.Find(counter);
+    if (k < 0) return false;
+    bool found = false;
+    base_.EachRecord(k, [&](const Record& r) {
+        found = found || r.codes->gram.Contains("Ct");
+        return !found;
+    });
+    return found;
+}
+
 // Whether key is base words joined by particles between two characters other than
 // hiragana (北の海, 剣と魔法の世界, 我が祖国), a phrase rather than a name.
 bool Snapshot::PhraseKey(std::string_view key) const {
@@ -317,15 +342,16 @@ bool Snapshot::PhraseKey(std::string_view key) const {
 
 // Whether the name key s[:n] is not a word of the base dictionary: the base and user
 // dictionaries have no sense with it nor, for katakana, with its hiragana spelling
-// (アレ, イク); it is not a single character, a number, hiragana only or a phrase; no
+// (アレ, イク); it is not a single character, a number (CountedKey), hiragana only, a phrase
+// or a title (TitleKey); no
 // base word other than a verb starts inside it and ends after it (宇宙機 in
 // 宇宙機関); and no verb or adjective stem starts inside it, ends with it and is
 // followed by hiragana other than a name follower (子来 in 子来た, 家近 in 家近い,
 // but not 翔太 in 翔太くん).
 bool Snapshot::StrongName(std::string_view s, std::size_t n) const {
     const std::string_view key = s.substr(0, n);
-    if (RuneCount(key) == 1 || NumeralKey(key) || !AnyRune(key, [](char32_t r) { return !IsHiragana(r); }) ||
-        BaseWord(key) || BaseWord(HiraganaOf(key)) || PhraseKey(key)) {
+    if (RuneCount(key) == 1 || NumeralKey(key) || CountedKey(key) || !AnyRune(key, [](char32_t r) { return !IsHiragana(r); }) ||
+        BaseWord(key) || BaseWord(HiraganaOf(key)) || PhraseKey(key) || TitleKey(key)) {
         return false;
     }
     const std::string_view after = s.substr(n);
@@ -346,6 +372,23 @@ bool Snapshot::StrongName(std::string_view s, std::size_t n) const {
         if (crosses) return false;
     }
     return true;
+}
+
+// Whether key is a base person noun with 様 or さま (魔王様, 姫様): a title, not a name. A
+// pronoun (俺様) or a noun with a person sense (アキラ様) is no title.
+bool Snapshot::TitleKey(std::string_view key) const {
+    for (const std::string_view h : {std::string_view("様"), std::string_view("さま")}) {
+        if (key.size() <= h.size() || !key.ends_with(h)) continue;
+        bool role = false, person = false;
+        for (const Record& r : base_.Records(key.substr(0, key.size() - h.size()))) {
+            const SemCodes& sem = r.codes->sem;
+            person = person || sem.HasPrefix("QPN") || sem.HasCode("QPN");
+            role = role || ((sem.HasCode("VHn") || sem.HasCode("UAq")) && !r.codes->partText.starts_with("N12") &&
+                            !r.codes->partText.starts_with("I12"));
+        }
+        return role && !person;
+    }
+    return false;
 }
 
 // Whether the name key s[:n], katakana of two or more characters, is followed by an

@@ -2,6 +2,7 @@
 // The cleanup of the text path: the sentences and chunks of a line joined, alternating
 // particles that compose left open resolved, leading commas and the spaces the engine
 // writes before commas and closing brackets dropped.
+#include <span>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -19,9 +20,10 @@ struct Sentence {
 };
 
 // The cleaned-up text of a line from its sentences in order: the sentences of a chunk
-// joined (AppendSentence), the chunks joined by one space (AppendChunk), then
-// CleanupText and FixSpacing.
-Pieces Cleanup(const std::vector<Sentence>& sentences);
+// joined (AppendSentence), the chunks joined by one space (AppendChunk) or, where gaps
+// holds a column separator before a chunk (pipeline::Segment), by that separator as a
+// SpanGap piece, then CleanupText and FixSpacing.
+Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::string> gaps = {});
 
 // Appends the output of a sentence to that of its chunk. A sentence only ends in a
 // space added after its final punctuation; that space gives way to a space that
@@ -30,7 +32,7 @@ Pieces Cleanup(const std::vector<Sentence>& sentences);
 void AppendSentence(Pieces& result, const Pieces& sentence);
 
 // Appends the output of a chunk to that of the line: the spaces between them become
-// one space.
+// one space, or none after a SpanGap piece.
 void AppendChunk(Pieces& out, Pieces&& got);
 
 // Finishes the output of a whole text; span pieces are left as they are.
@@ -45,7 +47,9 @@ Pieces CleanupText(Pieces text);
 
 // In each text piece, in this order: ∼ written as ~, the spaces before a comma
 // dropped, the spaces between ? or ! and a closing bracket (『무엇?』) and between a
-// syllable and ―― dropped, full-width digits written in ASCII.
+// syllable and ―― dropped (also with an opening tag between them), full-width digits
+// written in ASCII. A text piece of spaces alone between the ruby tags {/rb} and {rt}
+// is dropped.
 void FixSpacing(Pieces& pieces);
 
 // The target of a word span: its text when it ends in a syllable, otherwise the

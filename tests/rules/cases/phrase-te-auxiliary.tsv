@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+phrase:te-auxiliary	ひとつ、ふたつと投票箱の中身が増えていき――	하나, 둘과 투표함의 내용물이 늘어나 가――	fix	phrases
+phrase:te-auxiliary	向こうで女を作ってしまい大火傷という話だ。	저편에서 여자를 만들어 버려 큰 화상이라는 이야기다.	fix	phrases
+phrase:te-auxiliary	先生は扉を閉めて向かいに座る。	선생님은 문을 닫고 맞은편에 앉는다.	keep	phrases

@@ -42,8 +42,7 @@ HD_TEST(inflect_classes_and_flags) {
         {"살", Class::Rieul, 0, Pos::Verb, '&', '7', "삽"},
         {"살", Class::Rieul, 0, Pos::Verb, '&', '8', "산"},
         {"살", Class::Rieul, 0, Pos::Verb, '&', 'A', "사"},
-        {"살", Class::Rieul, 0, Pos::Verb, '&', 'B', "삼"},
-        {"살", Class::Rieul, kNominalRieulMieum, Pos::Verb, '&', 'B', "삶"},
+        {"살", Class::Rieul, 0, Pos::Verb, '&', 'B', "삶"},
         {"긋", Class::Siot, 0, Pos::Verb, '&', '2', "그으"},
         {"긋", Class::Siot, 0, Pos::Verb, '&', '6', "그어"},
         {"노랗", Class::Hieuh, 0, Pos::Adjective, '$', '4', "노란"},
@@ -277,4 +276,12 @@ HD_TEST(inflect_frozen_rows) {
         CheckRow(c.key, Inflect(*family, c.key[4]), c.surface);
         CheckRow(c.key, MarkerRowFor(c.key), c.surface);
     }
+}
+
+// The 으 stem of the past-state family 했 keeps 으 (결혼했으니까).
+HD_TEST(inflect_past_state_eu_stem) {
+    const auto* family = FindKoreanFamily("&NC@");
+    HD_REQUIRE(family != nullptr);
+    HD_CHECK_EQ(Inflect(*family, 'A') + "니까", std::string("했으니까"));
+    HD_CHECK_EQ(Inflect(*family, '5') + "다", std::string("했다"));
 }

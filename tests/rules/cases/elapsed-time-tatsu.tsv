@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:jisjk:139403	三日たって、ようやく熱も下がってきた。	3일 지나, 드디어 열도 내려가 왔다.	fix	local
+dict:jisjk:139403	あれから何年たった？	그때부터 몇 년 지났어?	fix	local
+dict:jisjk:139403	しばらくたって、彼は戻った。	한동안 지나, 그는 돌아왔다.	fix	local
+dict:jisjk:139403	数日たった頃	며칠 지났을 무렵	fix	local
+dict:jisjk:139403	日がたつにつれて、	날이 지날수록,	fix	local
+dict:jisjk:139403	彼は立った。	그는 섰다.	keep	local
+dict:jisjk:139403	しばらく立っていた。	한동안 서 있었다.	keep	local
+dict:jisjk:369386	それからしばらくのことである。	그리고 한동안이다.	keep	local
+dict:jisjk:369386	彼のことで悩んだ。	그의 일로 고민했다.	keep	local

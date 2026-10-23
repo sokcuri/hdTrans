@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+rewrite:inward-auxiliary	文章を打ち込むスピード	문장을 치는 스피드	fix	rewrites
+rewrite:inward-auxiliary	急いで荷物を詰め込んで帰り支度を急ぐ。	서둘러 짐을 싸 돌아오는 길 준비를 서두른다.	fix	rewrites
+rewrite:inward-auxiliary	やりこんでいるゲーム	하고 있는 게임	fix	rewrites
+rewrite:inward-auxiliary	道が込んでいる。	길이 붐비고 있다.	keep	rewrites
+rewrite:inward-auxiliary	仕事が立て込んでてな。	일이 붐비고 있어.	keep	rewrites
+rewrite:inward-auxiliary	中を覗き込んだ。	안을 들여다보았다.	keep	rewrites
+dict:komu-kana	床に倒れこんだ。	바닥에 쓰러졌다.	fix	lookup
+dict:komu-kana	その場にへたりこんでいた。	그 자리에 주저앉아 있었다.	fix	lookup
+dict:komu-kana	周囲に溶け込む。	주위에 녹아든다.	fix	lookup
+rewrite:result-state	バス停のベンチに座り込んでたらさ。	버스정류장의 벤치에 주저앉아 있으면.	fix	rewrites
+rewrite:result-state	その場にへたり込んでしまった……	그 자리에 주저앉아 버렸다……	keep	rewrites

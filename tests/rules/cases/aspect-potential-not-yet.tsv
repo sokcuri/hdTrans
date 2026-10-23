@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:not-yet	「このところ、時間がなくて絵を描けていなかったんだ」	「요즈음, 시간이 없어서 그림을 그리지 못했다」	fix	rewrites
-rewrite:not-yet	御園は自分すら騙せていなかった。	미소노는 자신조차 속이지 못했었다.	fix	rewrites
+rewrite:not-yet	御園は自分すら騙せていなかった。	미소노는 자신조차 속이지 못했다.	fix	rewrites
 rewrite:not-yet	「まだ想像できてない」	「아직 상상하지 못했다」	fix	rewrites
 rewrite:not-yet	俺はまだ、あの四畳半から抜け出せていないのか。	나는 아직, 그 다다미 4장 반에서 빠져 나오지 못한 건가.	fix	rewrites
 rewrite:not-yet	「佳奈って、自分で思ってるほど素顔隠せてないからね」	「카나는, 스스로 생각하는만큼 맨얼굴 숨기지 못하니까」	fix	rewrites

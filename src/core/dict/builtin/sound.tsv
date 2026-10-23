@@ -251,6 +251,8 @@
 ふぁんっ	후앙	intj
 ふぅ	후우	intj
 ふう	후우	intj
+ふいー	휴우	intj
+ふぃー	휴우	intj
 ふぅっ	후웃	intj
 ふぅん	흐응	intj
 ふうん	흐음	intj
@@ -292,6 +294,7 @@
 うっ	윽	intj
 うぐ	우그	intj
 うぐっ	윽	intj
+つっ	읏	intj
 うくっ	으윽	intj
 うく	으윽	intj
 うぐぅ	우그으	intj
@@ -345,6 +348,7 @@
 ぐぅっ	구웃	intj
 ぐぬ	끄응	intj
 ぐぬぬ	끄으으	intj
+ふんぬっ	끄응	intj
 ぐぬぬぬ	끄으으으	intj
 ぐは	크하	intj
 ぐはっ	크헉	intj
@@ -553,8 +557,8 @@
 こんちくしょう	이런 젠장	intj
 やべ	큰일	intj
 やべっ	큰일	intj
-やべー	큰일났다	intj
-やべぇ	큰일났다	intj
+やべー	큰일 났다	intj
+やべぇ	큰일 났다	intj
 すげー	대박	intj
 すげぇ	대박	intj
 すっげー	대박	intj
@@ -1423,6 +1427,8 @@
 かたかた	달각달각	ono
 かたこと	덜컹덜컹	ono
 からんころん	딸랑딸랑	ono
+からんからん	달그랑달그랑	ono
+からんと	달그랑	ono
 からころ	달그락	ono
 からっ	바삭	ono
 かりっ	바삭	ono
@@ -1475,6 +1481,7 @@
 ぼきぼき	우두둑	ono
 ぼきり	우지끈	ono
 ぼっきり	우지끈	ono
+ぽん	퐁	ono
 ぽんっ	퐁	ono
 ぽーん	포옹	ono
 ぽんぽん	통통	ono
@@ -2945,7 +2952,7 @@
 ごごご	우우웅	ono
 ごごごご	우우우웅	ono
 ごごごごご	우우우우웅	ono
-やべえ	큰일났다	intj
+やべえ	큰일 났다	intj
 ふわぁ	후와아	intj
 ふわあ	후와아	intj
 ふわぁっ	후와앗	intj
@@ -2985,8 +2992,8 @@
 びーびー	앙앙	ono
 わしゃわしゃ	스글스글	ono
 しゃわしゃわ	살랑살랑	ono
-やっば	큰일났다	intj
-やばっ	큰일났다	intj
+やっば	큰일 났다	intj
+やばっ	큰일 났다	intj
 いったた	아야야	intj
 ありゃ	어라	intj
 おっけ	오케이	intj
@@ -3007,6 +3014,12 @@
 さあ	자	lead
 ですね	그렇죠	lead
 ですねえ	그러게요	lead
+ですよね	그렇죠	lead
+ですよねえ	그렇죠	lead
+ですわよね	그렇죠	lead
+ですわよねえ	그렇죠	lead
+ですわね	그렇네요	lead
+ですわねえ	그렇네요	lead
 だな	그러게	lead
 だなあ	그러게	lead
 だなぁ	그러게	lead
@@ -3041,6 +3054,7 @@
 やっばい	큰일이다	intj
 やっばーい	큰일이다	intj
 えい	에잇	intj
+へい	헤이	intj
 では	그럼	lead
 ではでは	그럼	lead
 ところで	그런데	lead
@@ -3102,7 +3116,7 @@
 っつーかさ	그보다	lead
 てゆーかさ	그보다	lead
 ってゆーかさ	그보다	lead
-ったく	참나	lead
+ったく	참나	open
 たく	참나	lead
 ども	안녕	lead
 だからって	그렇다고 해서	lead

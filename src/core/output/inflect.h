@@ -24,7 +24,6 @@ enum InflectionFlag : uint16_t {
     kFormalHortative = 1 << 6,
     kPastHortative = 1 << 7,
     kBareDeclarative = 1 << 8,
-    kNominalRieulMieum = 1 << 9
 };
 
 struct InflectionException {
