@@ -840,6 +840,15 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                                     (e.StemTagged(rs, from, i - 1, "H") || e.AdjectiveStemBefore(rs, from, i - 1) ||
                                      GoodAfterWord(e, rs, from, i, i)) &&  // もういいー
                                     NotAllI(std::u32string_view(rs).substr(from, i - from));
+            // Before a sentence particle and a pause the mark goes after the particle (かわいいーよ！
+            // かわいいよ～！).
+            if (dashedI && !adjectiveI && dashEnd < rs.size() && In(rs[dashEnd], U"よねわ") && ShoutEnd(rs, dashEnd + 1) &&
+                i >= 2 && (e.StemTagged(rs, from, i - 1, "H") || e.AdjectiveStemBefore(rs, from, i - 1)) &&
+                NotAllI(std::u32string_view(rs).substr(from, i - from))) {
+                rs = Spliced(rs, i, std::u32string{rs[dashEnd], U'～'}, dashEnd + 1);
+                changed = true;
+                continue;
+            }
             if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI && !adjectiveI)) {
                 continue;
             }
