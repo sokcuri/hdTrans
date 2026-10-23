@@ -18,7 +18,9 @@ HD_TEST(word_question_word_fragment) {
          "か\t인가\tP200\t\t\tGN\t0\t5\t\n"
          "から\t부터\tP200\t\t\tGN\t0\t6\t\n"
          "かな\t일까\tP200\t\t\tGN\t0\t7\t\n"
-         "猫\t고양이\tN110\t\t\tGN\t0\t8\t\n"},
+         "猫\t고양이\tN110\t\t\tGN\t0\t8\t\n"
+         "行\t&A1@\tM451\t\t\tGN\t0\t9\t\n"
+         "か\t0지\tS500\t\t\tGN\t0\t10\t\n"},
     };
     const auto loaded = hdTrans::dict::Load(files);
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
@@ -32,6 +34,7 @@ HD_TEST(word_question_word_fragment) {
         {"どこかな犬", "어디일까 나"},
         {"どこか犬", "어디인가 가"},
         {"どこ猫か犬", "어디고양이인가 가"},
+        {"どこ行くか犬", "어디 가는지 가"},  // the か after the verb's own kana closes a question
     };
     for (const Case& c : cases) {
         hdTrans::internal::Memory memory;

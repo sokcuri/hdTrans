@@ -6,6 +6,7 @@
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
 #include "core/word/util.h"
@@ -222,12 +223,24 @@ bool Item::IsQuestionWord() const {
     return false;
 }
 
+bool Item::EndingAsks() const {
+    if (DirectGroup() == nullptr || !DirectSurface().ends_with("か")) return false;
+    // The text after the stem, past the kana of the verb's conjugation branch (行か|ない, 行く|か).
+    const int stem = static_cast<int>(group->surface.size());
+    std::string_view tail = From(text, start + stem).substr(0, static_cast<std::size_t>(std::max(0, length - stem)));
+    if (detail->cls == kDetailVerb && detail->patternKind >= 0 && detail->kind >= 0 && detail->kind < kConjugationBranches) {
+        const std::string_view conj = Conjugation(detail->patternKind, detail->kind);
+        if (!conj.empty() && tail.starts_with(conj)) tail.remove_prefix(conj.size());
+    }
+    return tail.ends_with("か");
+}
+
 bool Item::AfterQuestionWord() const {
     for (const Item* x = this; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
         // A question closed by か before the word is embedded (どうなるか……ってのもあるだろうな).
-        if (x != this && (s == "か" || x->DirectSurface().ends_with("か"))) break;
+        if (x != this && (s == "か" || x->EndingAsks())) break;
         // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
         // alone or before a particle; から, かな and かしら keep the question.
         const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();

@@ -1154,7 +1154,7 @@ bool WonderBefore(const Item* it) {
         const std::string_view s = p->group->surface;
         const std::string_view d = p->DirectSurface();
         if (s.empty() || AnyRuneIn(s, "。！？!?「」『』") || s.ends_with("も") || s == "か" || d.ends_with("も") ||
-            d.ends_with("か") || ConcessiveVolitional(ItemText(p)) ||
+            p->EndingAsks() || ConcessiveVolitional(ItemText(p)) ||
             ((s == "と" || s == "が") && p->prev != nullptr &&
              ConcessiveVolitional(std::string(ItemText(p->prev)) + std::string(s)))) {
             return false;
