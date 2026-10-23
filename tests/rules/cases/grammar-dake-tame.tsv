@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+validity:dake-tame	ダリヤはうつむき、一度だけため息をついた。	다리야는 고개를 숙여, 한 번만 한숨을 쉬었다.	fix	analysis
+validity:dake-tame	彼女を抱けた。	그녀를 안을 수 있었다.	keep	analysis
