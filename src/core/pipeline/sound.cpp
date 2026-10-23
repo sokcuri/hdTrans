@@ -1055,7 +1055,8 @@ std::string SoundText::ExclaimedSound(size_t p, size_t end) const {
 // or a unit of two to four characters said twice (メキメキと, ガッシャガッシャと), after a
 // character other than katakana, that no dictionary or name-layer key reads whole, before
 // と or っと that does not quote (メキメキという) or start する. hiragana is set when a
-// dictionary word reads a run ending in ッ with と in hiragana (ジッと じっと).
+// dictionary word reads a run ending in ッ with と in hiragana (ジッと じっと), and for a
+// unit said twice that is a word (KanaWord: ホラホラと, ネエネエと).
 size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     hiragana = false;
     const std::u32string_view f = f_;
@@ -1072,6 +1073,11 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     const std::u32string_view rest = std::u32string_view(rs_).substr(i);
     for (const std::u32string_view q : {U"いう", U"いっ", U"言", U"思", U"か", U"は", U"も", U"の"}) {
         if (rest.starts_with(q)) return 0;
+    }
+    // A word said twice in katakana is that word in hiragana (ホラホラと ほらほらと, イクイクと).
+    if (doubled && n == 4 && KanaWord(p)) {
+        hiragana = true;
+        return i;
     }
     // A key that covers the run, with the と or what follows (ホッと, デカデカと), reads it.
     const dict::Candidates rd =
@@ -1097,17 +1103,24 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     return i;
 }
 
-// Whether the two kana at character p are a word rather than a sound, so that the unit
-// said twice repeats the word: a call or discourse word of the sound lexicon (a lead row
-// or a phrases.tsv row: ねえ, ほら, こら, いざ) or a verb in the dictionary form whose kana
-// stem the dictionary reads by default (XXX: いく 가다; not ふる, which has no default).
+// Whether the two kana at character p (hiragana or katakana) are a word rather than a
+// sound, so that the unit said twice repeats the word: a call or discourse word of the
+// sound lexicon (a lead row or a phrases.tsv row: ねえ, ほら, こら, いざ) or a verb in the
+// dictionary form whose kana stem the dictionary reads by default (XXX: いく 가다; not
+// ふる, which has no default).
 bool SoundText::KanaWord(size_t p) const {
     const std::u32string_view unit = std::u32string_view(f_).substr(p, 2);
     for (const SoundRow& s : SoundRows(unit[0], ctx_.extraBuiltin)) {
         if (s.key == unit && (s.lead || s.phrase)) return true;
     }
-    const std::string_view stem = Bytes(p, p + 1), ending = Bytes(p + 1, p + 2);
-    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + 2), dict::LookupMode::General, ctx_.lookup);
+    std::u32string kana(std::u32string_view(rs_).substr(p, 2));
+    for (char32_t& r : kana) {
+        if (r >= U'ァ' && r <= U'ヶ') r -= 0x60;
+    }
+    const std::string word = EncodeText(kana);
+    const std::string_view stem = std::string_view(word).substr(0, word.size() / 2),
+                           ending = std::string_view(word).substr(word.size() / 2);
+    const dict::Candidates rd = snap_.GetWordInfo(word, dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {
         if (c.source != stem || c.codes == nullptr || c.codes->part.Empty() || c.codes->part.Tag() != 'M') continue;
         if (c.codes->sem.HasCode("XXX") && word::Conjugation(c.codes->part.VerbKind(), 0) == ending) return true;

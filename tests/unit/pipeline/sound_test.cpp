@@ -297,6 +297,10 @@ HD_TEST(pipeline_sound) {
         // A call of the sound lexicon said twice stays words (ねえねえと, not 네에네에).
         {"ねえねえと袖", "ねえねえと袖"},
         {"ほらほらと急かす", "ほらほらと急かす"},
+        // In katakana it is the same word, written in hiragana for the word stage.
+        {"ホラホラと急かす", "ほらほらと急かす"},
+        {"ネエネエと袖", "ねえねえと袖"},
+        {"メキメキと", "메키메키"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
@@ -320,6 +324,8 @@ HD_TEST(pipeline_sound_doubled_kana_verb) {
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     HD_CHECK_EQ(Sound("いくいくと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
     HD_CHECK_EQ(Sound("ふるふると震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
+    HD_CHECK_EQ(Sound("イクイクと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
+    HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
 // A verb cut off before a dash or an ellipsis, completed when the dictionary has it.
