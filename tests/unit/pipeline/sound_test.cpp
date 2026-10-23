@@ -38,7 +38,9 @@ const dict::LoadResult& SoundDictionary() {
         "てめぇ\t너\tN120\t20\n"
         "なんとなく\t왠지\tE300\t21\n"
         "かなり\t꽤\tE300\t22\n"
-        "花見\t꽃놀이\tN110\t23\n",
+        "花見\t꽃놀이\tN110\t23\n"
+        "おいし\t맛있\tH100\t24\n"
+        "わたし\t나\tN120\t25\n",
     }});
     return result;
 }
@@ -487,6 +489,10 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // that kana goes on past the mark (なんとなく, かなり).
         {"なんとなーく興味がある", "なんとなく興味がある"},
         {"いや、かなーり危ない", "いや、かなり危ない"},
+        // The ー of an adjective in しい stands for its い (おいしー おいしい～).
+        {"おいしー！", "おいしい～！"},
+        {"おいしーよね", "おいしいよね"},
+        {"わたしー！", "わたし～！"},
         {"お花見か～いいわね", "お花見か～いいわね"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));

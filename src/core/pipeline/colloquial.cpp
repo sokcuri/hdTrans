@@ -721,6 +721,18 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 }
                 break;
             }
+            // The long vowel of an adjective in しい spelled with ー or ～ (おいしー, うれしー,
+            // たのしーね): the stem of an adjective ends before the mark, which stands for its
+            // い; drawn out before a pause (おいしい～！) and plain before a particle.
+            if (!plainStart && v == 1 && prev != U'い' &&
+                std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー' || c == U'～'; }) &&
+                (end >= rs.size() || !IsHiraganaRune(rs[end]) || In(rs[end], U"よねなのじゃわしかさぞ")) &&
+                e.AdjectiveStemBefore(rs, from, i) && !e.StemTagged(rs, from, i, "N")) {
+                const bool pause = end >= rs.size() || IsPause(rs[end]);
+                rs = Spliced(rs, i, pause ? U"い～" : U"い", end);
+                changed = true;
+                continue;
+            }
             if (end >= rs.size() || !IsHiraganaRune(rs[end])) {
                 // The tokenizer ends a hiragana run at a ー before other than kana or kanji, so there
                 // a word spelled with it that the mark may not lengthen (おはよー おはよ～) is written
