@@ -188,7 +188,10 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         else last->child = r;
         last = r;
     }
-    if (mode == kModeGeneral && settings.text) DropBoundUtterances(l, query);
+    if (mode == kModeGeneral && settings.text) {
+        DropBoundUtterances(l, query);
+        DropNegatedAdverbs(l, query);
+    }
     if (settings.text) {
         DropModalSplits(l, query);
         TransliterateGlosses(l.records);
@@ -421,6 +424,43 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
         const bool bound = NameClassOf(next) == kClassHiragana ||
                            (r->source.ends_with("ます") && !(alone && UtteranceBoundary(next)));
         if (r->user == nullptr && bound && VerbUtterance(*r)) {
+            l.count--;
+            continue;
+        }
+        if (out == nullptr) out = r;
+        else last->child = r;
+        last = r;
+    }
+    if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
+// Text path, mode 0: an adverb record in く of an i-adjective of the lookup (上手く 잘, 早く
+// 빨리, with 上手 and 早 as adjectives) before ない, はない, もない or なる is dropped, so that the
+// adjective takes the ending (上手くない 능숙하지 않다, not 잘 없다). Other adverbs in く stay
+// (全くない 전혀 없다).
+void Worker::DropNegatedAdverbs(Lookup& l, std::string_view query) {
+    auto adjective = [&](std::string_view stem) {
+        for (const Record* r = l.records; r != nullptr; r = r->child) {
+            if (r->source == stem && At(r->partCode, 0) == 'H' && At(r->partCode, 1) == '7') return true;
+        }
+        return false;
+    };
+    Record* out = nullptr;
+    Record* last = nullptr;
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        bool negated = false;
+        if (r->source.ends_with("く") && At(r->partCode, 0) == 'E' && At(r->partCode, 1) == '3' &&
+            query.size() >= r->source.size() &&
+            adjective(std::string_view(r->source).substr(0, r->source.size() - std::string_view("く").size()))) {
+            std::string_view rest = query.substr(r->source.size());
+            if (rest.starts_with("は") || rest.starts_with("も")) rest.remove_prefix(std::string_view("は").size());
+            for (const std::string_view n : {"ない", "なく", "なかっ", "なけれ", "なさそ", "なる", "なり", "なれ", "なっ",
+                                             "なら", "なろ"}) {
+                negated = negated || rest.starts_with(n);
+            }
+        }
+        if (negated) {
             l.count--;
             continue;
         }
