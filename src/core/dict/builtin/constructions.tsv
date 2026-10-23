@@ -70,3 +70,5 @@ cx:line-initial-to:10		&&12 F+0== "first" S+0== "と" F+0== "selected" F+0!= "fi
 cx:naka-sok:10		&&6 S+0== "中" F+0== "selected" S-1== "の" F-1== "selected" F-2== "selected" S-2== @noun.inside-medium	take-target "속"	記憶の中に 기억 속에
 cx:naka-sok:20		&&3 S+0== "の中で" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	静寂の中で 정적 속에서
 cx:naka-sok:30		&&3 S+0== "の中から" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	炎の中から 불길 속에서
+//= koto-nante	after naka-sok	The なんて or なんか after a のこと that follows a noun belittles the noun: 같은 건 after the noun, or after 의 일 where the rules read のこと so (昨日のこと 어제의 일).
+cx:koto-nante:10		&&6 ||2 S+0== "なんて" S+0== "なんか" F+0== "selected" F+0!= "fixed" S-1== "のこと" F-1== "selected" F-2== "selected"	set-target " 같은 건"	あたしのことなんて 나 같은 건

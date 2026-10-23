@@ -1,0 +1,6 @@
+# 규칙: LEX-8
+rule	input	expected	kind	layer
+cx:koto-nante:10	あたしのことなんて	나 같은 건	fix	rewrites
+cx:koto-nante:10	君のことなんて知らない。	너 같은 건 모른다.	fix	rewrites
+cx:koto-nante:10	昨日のことなんて覚えてない	어제의 일 같은 건 기억하지 못한다	fix	rewrites
+cx:koto-nante:10	夢なんて忘れて。	!rule:cx:koto-nante:10	keep	rewrites

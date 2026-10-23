@@ -1,5 +1,0 @@
-# 규칙: LEX-8
-rule	input	expected	kind	layer
-pattern:学生のことなんて	あたしのことなんて	나 같은 건	fix	fixed
-pattern:学生のことなんて	遺跡のことなんて任せておけばいい。	유적 같은 건 맡겨 두면 된다.	fix	fixed
-pattern:学生なんて	夢なんて忘れて。	꿈 같은 건 잊어.	keep	fixed
