@@ -33,7 +33,8 @@
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
 //     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
 //     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
-//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?); an ono row may be followed by anything, and と or the て of って
+//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?), nor after a noun in
+//     kanji or katakana with は or が and a comma (あの頃は、よかった 좋았다); an ono row may be followed by anything, and と or the て of って
 //     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
 //     (スタスタとベッド 척척 ベッド, but ドキドキとワクワク). A space separates a sound from a
 //     following kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but

@@ -564,6 +564,12 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             size_t q = end;
             while (q < rs_.size() && In(rs_[q], U"…‥")) q++;
             if (q < rs_.size() && In(rs_[q], U"？?")) ok = false;
+            // After a noun in kanji or katakana marked as topic or subject and a comma it is
+            // the predicate (あの頃は、よかった 좋았다); not after a pronoun in kana (それは、).
+            if (p >= 3 && In(rs_[p - 1], U"、，") && In(rs_[p - 2], U"はが") &&
+                (text::IsKanji(rs_[p - 3]) || (IsKatakanaRune(rs_[p - 3]) && rs_[p - 3] != U'ー'))) {
+                ok = false;
+            }
         }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).

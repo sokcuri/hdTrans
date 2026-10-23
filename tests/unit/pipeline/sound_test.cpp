@@ -773,6 +773,9 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
         {"よかった……？", "よかった……？"},
         {"よかったぁ?", "다행이다~?"},
         {"ヨカッタ？", "다행이다？"},
+        // After a noun in kanji marked as topic and a comma it is the predicate.
+        {"映画は、よかった。", "映画は、よかった。"},
+        {"それは、よかった。", "それは、다행이다。"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
