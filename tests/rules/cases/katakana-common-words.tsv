@@ -21,3 +21,15 @@ lexical:katakana-words	カマをかけたら正解だった。	떠보면 정답�
 lexical:katakana-words	クワ・トイネ公国だ。	쿠와 트이네 공국이다.	keep	lookup
 lexical:katakana-words	リスクが高い。	리스크가 높다.	keep	lookup
 lexical:katakana-words	モヤモヤする。	찜찜한다.	keep	lookup
+katakana:common-words	ヒゲを剃った。	수염을 깎았다.	fix	normalize
+katakana:common-words	あいつらダチなんだろ？	저 녀석들 친구지?	fix	normalize
+katakana:common-words	メシ買ったんすけど。	밥 샀는데요.	fix	normalize
+katakana:common-words	置いていかないで下さい、センパイ。	두고 가지 말아 주세요, 선배.	fix	normalize
+katakana:common-words	誰にもジャマされない。	누구에게도 방해되지 않는다.	fix	normalize
+katakana:common-words	バッチリ大丈夫だってば！	딱 괜찮다니까!	fix	normalize
+katakana:common-words	慢心はダメ、ゼッタイ。	자만심은 안 됨, 절대.	fix	normalize
+katakana:common-words	オトモダチのキミのことは忘れない。	친구의 너는 잊지 않는다.	fix	normalize
+katakana:common-words	トモダチが来た。	친구가 왔다.	fix	normalize
+katakana:common-words	マズイだけならまだしも。	큰일인 것뿐 라면 몰라도.	fix	normalize
+katakana:common-words	森田カナリが現れた。	모리타 카나리가 나타났다.	keep	normalize
+katakana:common-words	パジャマ姿の妹。	파자마 차림의 여동생.	keep	normalize

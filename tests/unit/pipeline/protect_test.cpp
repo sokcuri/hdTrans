@@ -375,6 +375,7 @@ HD_TEST(pipeline_katakana_dictionary) {
         {"ダメですよ。", "ダメですよ。"},  // the base word conjugates already
         {"ウルサイぞ。", "うるさいぞ。"},
         {"ヒドイよ！", "ひどいよ！"},
+        {"これはマズイって！", "これはまずいって！"},
         {"ダメよ。", "ダメよ。"},  // only an i-adjective before a sentence-final particle
         {"オレは行く。", "オレは行く。"},
         {"ドレスを着た。", "ドレスを着た。"},

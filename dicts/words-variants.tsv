@@ -20601,3 +20601,25 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アタシたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:3
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
 ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
+ヒゲ	수염	N110	VBp		GN							variant:katakana:1
+バッチリ	딱	E300			GN							variant:katakana:2
+ダチ	친구	N110	VHn		GN							variant:katakana:3
+メシ	밥	N110	VFd		GN							variant:katakana:4
+ナニ	뭐	N110			GN							variant:katakana:5
+キライ	%BA@	G8U0			GN							variant:katakana:6
+ゼッタイ	절대	E300			GN							variant:katakana:7
+ジャマ	방해	N110		Hd	GN							variant:katakana:8
+センパイ	선배	N110	VHn		GN							variant:katakana:9
+ヤツラ	녀석들	I110	VHn		GN							variant:katakana:10
+オフクロ	어머니	I110	VHn		GN							variant:katakana:11
+アニキ	형님	N110	VHn		GN							variant:katakana:12
+ジジイ	할아범	I110	VHn		GN							variant:katakana:13
+キッチリ	딱	E311			GN							variant:katakana:14
+ナマイキ	건방%C1@	G8U0			GN							variant:katakana:15
+カンペキ	완벽%A1@	G8L0			GN							variant:katakana:16
+テッペン	꼭대기	I110	VPl		GN							variant:katakana:17
+ツテ	연줄	N110			GN							variant:katakana:18
+ヒヨコ	병아리	N110	VAm		GN							variant:katakana:19
+オトモダチ	친구	N110	VHn		GN							variant:katakana:20
+ヒルメシ	점심	N110	VFd		GN							variant:katakana:21
+トモダチ	친구	N110	VHn		GN							variant:katakana:22

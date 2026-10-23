@@ -590,7 +590,7 @@ constexpr KataWord kKataWords[] = {
     {"アレ", false}, {"ソレ", false}, {"コレ", false}, {"ドレ", false}, {"ナニ", false},
     {"ダレ", false}, {"ココ", false}, {"ソコ", false}, {"ドコ", false}, {"アタシ", false},
     {"アンタ", false}, {"ダメ", true}, {"ヤバイ", true}, {"スゴイ", true}, {"カワイイ", true},
-    {"ウルサイ", true}, {"ヒドイ", true}, {"コワイ", true}, {"ウザイ", true},
+    {"ウルサイ", true}, {"ヒドイ", true}, {"コワイ", true}, {"ウザイ", true}, {"マズイ", true},
     {"コロス", true, "殺す"}, {"ブチコロス", true, "ぶっ殺す"}, {"シネ", true, "死ね"}, {"キエロ", true, "消えろ"},
     {"ユルサナイ", true, "許さない"}, {"ヤメテ", true, "やめて"}, {"タスケテ", true, "助けて"},
 };
