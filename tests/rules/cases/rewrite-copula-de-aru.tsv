@@ -1,3 +1,7 @@
 rule	input	expected	kind	layer
 word:copula-de-aru	あそこであった。	저기에서 만났다.	keep	rewrites
 word:copula-de-aru	その子であった。	그 아이였다.	keep	rewrites
+word:copula-de-aru	互いに苦笑するのであった。	서로 쓴웃음을 짓는 것이었다.	fix	rewrites
+word:copula-de-aru	控えめに言って変質者であった。	조심스럽게 말해 변질자였다.	fix	rewrites
+word:copula-de-aru	豊かな森であった。	풍부한 숲이었다.	fix	rewrites
+word:copula-de-aru	学生である。	학생이다.	keep	rewrites
