@@ -418,6 +418,20 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
+// without its subject, said for そうでなければ (でなければ、すぐに死ぬ 그렇지 않으면).
+bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
+    if (!ClauseStart(s, pos) || (pos > 0 && In(Before(s, pos), U"、"))) return false;
+    for (std::string_view w : {"でなければ", "でないと", "でなきゃ"}) {
+        size_t p = pos;
+        if (Lit(s, p, w)) {
+            m.end = pos + std::string_view("で").size();
+            return true;
+        }
+    }
+    return false;
+}
+
 // しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー, ならしゃーない). Not the
 // topic は fused to a pronoun in し (あたしゃあね, わしゃあね, わっしゃあ, わたくしゃあ).
 bool Shaanai(std::string_view s, size_t pos, Match& m) {
@@ -666,6 +680,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
+    text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
