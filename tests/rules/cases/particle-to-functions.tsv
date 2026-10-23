@@ -61,3 +61,9 @@ rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도
 rewrite:line-initial-to	と一緒に行こう。	와 함께 가자.	fix	rewrites
 rewrite:line-initial-to	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
 rewrite:line-initial-to	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites
+rewrite:noun-to	誰かと会話する。	누군가와 대화한다.	fix	rewrites
+rewrite:noun-to	もっと未来と話したい。	좀 더 미래와 이야기하고 싶다.	fix	rewrites
+rewrite:noun-to	勇者と言った。	용사라고 말했다.	keep	rewrites
+rewrite:noun-to	ラピスと名乗った少女。	라피스라고 자칭한 소녀.	fix	rewrites
+rewrite:noun-to	異世界と仮定して考える。	이세계라고 가정하고 생각한다.	fix	rewrites
+rewrite:noun-to	勇者と戦う。	용사와 싸운다.	keep	rewrites
