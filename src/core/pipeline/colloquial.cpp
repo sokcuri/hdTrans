@@ -903,7 +903,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                         rs = Spliced(rs, keep, U"～", to);
                         changed = true;
                     }
-                } else if (!plainStart && (end >= rs.size() || IsPause(rs[end]) || longTsu) && In(prev, kDrawlKana) &&
+                } else if (!plainStart && (end >= rs.size() || IsPause(rs[end]) || longTsu) &&
+                           (In(prev, kDrawlKana) || (!Drawn(rs, i, end).empty() && e.ReadsTo(rs, i))) &&
                            !(prev == U'て' && i >= 3 && rs[i - 2] == U'っ' && rs[i - 3] == U'だ') &&  // 何だってぇ
                            std::all_of(rs.begin() + i, rs.begin() + end, [&](char32_t c) { return c == kEmphasisVowels[v][0]; }) &&
                            !SoundRun(rs, i, end, ctx.extraBuiltin) && LengthensWord(e, rs, from, i)) {

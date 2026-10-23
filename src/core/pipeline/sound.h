@@ -163,8 +163,8 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
 // The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
-// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
-// dropped (ていとくぅ, ないでぇ, なのぉ), and so is a run of い and ぃ after the い that ends
+// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ, or
+// of three or more after words (ばかぁぁぁ), is dropped (ていとくぅ, ないでぇ, なのぉ), and so is a run of い and ぃ after the い that ends
 // an adjective, before a pause or a shout's っ (ずるいぃ, 痛いぃぃ, きもちいいいいい; not the
 // cry いいいいい), and a run of three or more plain vowel kana after words, before a pause or
 // a ッ (待ったああああっ, 言うなあああっ). Such a dropped run of three or more vowel kana
