@@ -59,6 +59,9 @@ void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
+// The provider に before a て verb and もらう read as 주다 is its subject: 王子様に案内してもらう
+// 왕자님이 안내해 주다.
+void BenefactiveProvider(Flusher& f);
 void GoNotSay(Flusher& f);
 void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);

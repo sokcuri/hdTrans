@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+rewrite:benefactive-provider	そして同い年の第三王子様に王宮の庭園を案内してもらう予定だった。	그리고 동갑의 제3왕자님이 왕궁의 정원을 안내해 줄 예정이었다.	fix	rewrites
+rewrite:benefactive-provider	味方に壁役をやってもらって敵を受けてもらう	아군이 벽역을 해 주어 적을 받아 준다	fix	rewrites
+rewrite:benefactive-provider	友達にノートを見せてもらった。	친구가 노트를 보여 주었다.	fix	rewrites
+rewrite:benefactive-provider	王宮で働く方々に相談をさせてもらった。	왕궁에서 일하는 분들에게 상담을 시켜 주었다.	keep	rewrites
+rewrite:benefactive-provider	お金をもらう。	돈을 받는다.	keep	rewrites
