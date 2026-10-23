@@ -322,6 +322,7 @@ private:
     bool Stopped(const SoundMatch& m) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle) const;
+    bool Manner(const SoundMatch& m, size_t i) const;
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
@@ -752,6 +753,21 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
         chain.pop_back();
     }
     return chain;
+}
+
+// Whether the ono sound m is followed at i by the に of manner or result that Korean writes
+// as 하게 after a doubled mimetic (くしゃくしゃに丸める 꼬깃꼬깃하게, がちがちに固い 딱딱하게):
+// m's Korean is two equal halves of Hangul, and に stands before no hiragana but a form of
+// する or なる.
+bool SoundText::Manner(const SoundMatch& m, size_t i) const {
+    if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
+    if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
+    const std::u32string k = DecodeText(m.korean);
+    if (k.size() < 2 || k.size() % 2 != 0) return false;
+    for (const char32_t r : k) {
+        if (r < U'가' || r > U'힣') return false;
+    }
+    return k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
 }
 
 // Whether a space goes between a sound and rs[i]: a kanji, katakana after hiragana, or
@@ -1248,6 +1264,11 @@ std::string SoundText::Write() {
                 b += "하고";
                 next = to;
                 if (next < rs.size() && !In(rs[next], U"、。，！？!?…‥」』）)")) b += ' ';
+            } else if (Manner(chain.back(), next)) {
+                // An adverb of manner or result: 꼬깃꼬깃하게 말다, 딱딱하게 굳다.
+                b += "하게";
+                next++;
+                if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
             }

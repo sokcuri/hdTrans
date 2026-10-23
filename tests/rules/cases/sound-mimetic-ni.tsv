@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+sound:manner-ni	くしゃくしゃに丸めてゴミ箱へ捨てた。	꼬깃꼬깃하게 말아 쓰레기통에 버렸다.	fix	sound
+sound:manner-ni	ガチガチに緊張して表情が硬い。	딱딱하게 긴장해 표정이 굳다.	fix	sound
+sound:manner-ni	服がボロボロになった。	옷이 너덜너덜하게 되었다.	fix	sound
+sound:manner-ni	ぴかぴかに光る	반짝반짝하게 빛난다	fix	sound
+sound:manner-ni	じろじろと見る	빤히 본다	keep	sound

@@ -324,6 +324,10 @@ HD_TEST(pipeline_sound) {
         // A syllable said again straight into its word, and a vowel said again.
         {"「つつつついに」", "「\xEE\x80\x80\xEE\x80\x80\xEE\x80\x80ついに」"},
         {"「えええ怖い」", "「えええ怖い」"},
+        // に after a doubled mimetic is 하게; after another sound it stays.
+        {"くしゃくしゃに丸めた", "꼬깃꼬깃하게 丸めた"},
+        {"ボロボロになった", "너덜너덜하게 なった"},
+        {"ぐちゃぐちゃに", "엉망진창に"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
