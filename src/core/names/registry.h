@@ -137,6 +137,7 @@ private:
     // write their head with two or more other endings that are no honorific (クロイチ,
     // クロニ): one name, a numbered or derived one, not the head and an honorific.
     const std::set<std::string>& SiblingNames();
+    bool NicknameCompound(std::string_view t);
     void FindSiblingNames();
 
     // Scores, splits and the accepted names (registry.cpp).

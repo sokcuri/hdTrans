@@ -14,6 +14,7 @@
 #include "core/names/labels.h"
 #include "core/names/readings.h"
 #include "core/names/ruby.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 
 namespace hdTrans::names {
@@ -416,6 +417,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
             all[t].score += static_cast<double>(std::min(c, 2));
         }
     }
+    for (const auto& [t, c] : prose_) {
+        if (c >= 2 && NicknameCompound(t)) {
+            Name& n = all[t];
+            n.score = std::max(n.score, kThreshold);
+            n.person = true;
+        }
+    }
     std::set<std::string> att;
     for (const auto& [t, n] : all) {
         if (n.score >= kThreshold) att.insert(t);
@@ -660,6 +668,47 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
             }
         }
     }
+}
+
+// Whether the katakana run t, no word of the dictionaries, splits into a Japanese word
+// written in katakana that the dictionary translates rather than transliterates (クズ
+// くず 쓰레기) and a person name (デン): a nickname joined to a name (クズデン), which reads
+// as one name rather than as the word and the name.
+bool Registry::NicknameCompound(std::string_view t) {
+    if (snap_ == nullptr || !AllRunes(t, IsKatakana) || RuneCount(t) < 4 || Flags(t).records > 0 ||
+        !snap_->NameRecords(t).empty()) {
+        return false;
+    }
+    auto translated = [&](std::string_view w) {
+        const DictFlags f = Flags(w);
+        if (!f.common || f.person || f.role) return false;
+        // A Japanese word written in katakana, which its hiragana spells too (クズ くず).
+        std::string hiragana;
+        for (std::size_t i = 0; i < w.size(); i += RuneAt(w, i).size) {
+            const char32_t c = RuneAt(w, i).cp;
+            if (c < U'ァ' || c > U'ヶ') return false;
+            text::AppendRune(hiragana, c - 0x60);
+        }
+        if (!Flags(hiragana).common) return false;
+        const std::string sound = text::FromKana(w, text::Preset::Fan);
+        bool any = false;
+        for (const dict::Candidate& c : snap_->RetrieveRecords(w, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.codes->sem.HasPrefix("QPN") || !IsHangulText(c.target)) continue;
+            if (text::SameSound(c.target, sound)) return false;
+            any = true;
+        }
+        return any;
+    };
+    auto name = [&](std::string_view w) {
+        const DictFlags f = Flags(w);
+        return f.person && !f.common && RuneCount(w) >= 2;
+    };
+    const std::vector<std::size_t> starts = RuneStarts(t);
+    for (std::size_t k = 2; k + 2 <= starts.size(); k++) {
+        const std::string_view a = t.substr(0, starts[k]), b = t.substr(starts[k]);
+        if ((translated(a) && name(b)) || (name(a) && translated(b))) return true;
+    }
+    return false;
 }
 
 const std::set<std::string>& Registry::SiblingNames() {
