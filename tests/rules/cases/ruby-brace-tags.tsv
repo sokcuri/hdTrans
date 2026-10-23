@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+normalize:ruby	階下から、{rb}微{/rb}{rt}かす{/rt}かに声が聞こえる。	아래층에서, {rb}희미하게{/rb}{rt}희미하게{/rt} 목소리가 들린다.	fix	normalize
+normalize:ruby	{rb}怪訝{/rb}{rt}けげん{/rt}な顔をした。	{rb}의아스러운{/rb}{rt}의아한{/rt} 표정을 했다.	fix	normalize
+normalize:ruby	「なんでそんなに、{rb}歪{/rb}{rt}ゆが{/rt}んでるんだよ……」	「왜 그렇게, {rb}비뚤어져 있어{/rb}{rt}뒤틀리고 있어{/rt}……」	fix	normalize
+normalize:ruby	そうか……{rb}現実{/rb}{rt}ここ{/rt}に彼女はいないんだ……。	그런가……{rb}현실{/rb}{rt}여기{/rt}에 그녀는 없다…….	keep	normalize
+normalize:ruby	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	normalize
+normalize:ruby	カモがネギを{rb}背負{/rb}{rt}しょ{/rt}って……？	카모가 파를 {rb}짊어져{/rb}{rt}짊어져{/rt}……?	fix	normalize
+normalize:ruby	なんとなく俺も{rb}安堵{/rb}{rt}あんど{/rt}する。	왠지 나도 {rb}안도{/rb}{rt}안도{/rt}한다.	keep	normalize

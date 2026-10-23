@@ -30,6 +30,18 @@ namespace hdTrans::internal {
 
 namespace {
 
+// Whether the dictionary has a verb or adjective whose key is base, alone or with the
+// first of the kana after it (pipeline::JoinBraceRuby).
+bool BaseContinues(const void* context, std::string_view base, std::string_view kana) {
+    const auto& snap = *static_cast<const dict::Snapshot*>(context);
+    const std::string text = std::string(base) + std::string(kana);
+    const dict::Candidates found = snap.GetWordInfo(text, dict::LookupMode::General, dict::LookupContext{});
+    return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) {
+        const char cls = c.codes ? c.codes->part.ClassDigit() : '\0';
+        return c.source.size() >= base.size() && (cls == '4' || cls == '7' || cls == '8');
+    });
+}
+
 auto FallbackOf(const dict::Snapshot& snap) {
     const auto fallback = snap.Fallback();
     return std::pair{fallback, fallback ? NewGenerated(*fallback) : nullptr};
@@ -255,7 +267,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const std::string normalized = pipeline::Normalize(facts.text, ctx);
+    const std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), BaseContinues, &snap);
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
     if (observer.text) observer.text(observer.context, "SN", sounded);

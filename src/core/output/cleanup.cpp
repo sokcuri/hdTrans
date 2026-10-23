@@ -112,6 +112,11 @@ void FixSpacing(Pieces& pieces) {
             continue;
         }
         auto& t = pieces[k].text;
+        // A ruby reading follows its base without a space ({/rb}{rt}).
+        const bool rubyGap = w > 0 && k + 1 < pieces.size() && pieces[w - 1].span == SpanClose &&
+                             pieces[w - 1].text == "{/rb}" && pieces[k + 1].span == SpanOpen &&
+                             pieces[k + 1].text == "{rt}" && t.find_first_not_of(' ') == std::string::npos;
+        if (rubyGap) continue;
         internal::NarrowTilde(t);
         internal::DropSpaceBeforeComma(t);
         internal::DropSpaceBeforeClose(t);

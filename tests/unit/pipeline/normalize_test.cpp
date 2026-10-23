@@ -424,6 +424,34 @@ HD_TEST(pipeline_strip_ruby) {
     Check(StripRuby, cases);
 }
 
+HD_TEST(pipeline_join_brace_ruby) {
+    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other bases are nouns.
+    const BaseContinues verbs = [](const void*, std::string_view base, std::string_view) {
+        return base == "背負" || base == "見惚";
+    };
+    const Case cases[] = {
+        {"{rb}悔{/rb}{rt}く{/rt}やんでも。"sv, "{rb}悔やんでも{/rb}{rt}くやんでも{/rt}。"sv},
+        {"{rb}微{/rb}{rt}かす{/rt}かに声"sv, "{rb}微かに{/rb}{rt}かすかに{/rt}声"sv},
+        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇ってくれた{/rb}{rt}かばってくれた{/rt}"sv},
+        {"{rb}背負{/rb}{rt}しょ{/rt}って"sv, "{rb}背負って{/rb}{rt}しょって{/rt}"sv},
+        {"{rb}見惚{/rb}{rt}みほ{/rt}れる。"sv, "{rb}見惚れる{/rb}{rt}みほれる{/rt}。"sv},
+        // A noun of two or more characters keeps the kana after the tags.
+        {"{rb}安堵{/rb}{rt}あんど{/rt}して"sv, "{rb}安堵{/rb}{rt}あんど{/rt}して"sv},
+        {"{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv, "{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv},
+        // A particle or a name suffix stays after the tags.
+        {"{rb}現実{/rb}{rt}ここ{/rt}にいる"sv, "{rb}現実{/rb}{rt}ここ{/rt}にいる"sv},
+        {"{rb}夢{/rb}{rt}ここ{/rt}で"sv, "{rb}夢{/rb}{rt}ここ{/rt}で"sv},
+        {"{rb}話{/rb}{rt}ばなし{/rt}だけど"sv, "{rb}話{/rb}{rt}ばなし{/rt}だけど"sv},
+        {"お{rb}前{/rb}{rt}め{/rt}ぇは"sv, "お{rb}前{/rb}{rt}め{/rt}ぇは"sv},
+        {"{rb}蒼{/rb}{rt}あおい{/rt}くーん"sv, "{rb}蒼{/rb}{rt}あおい{/rt}くーん"sv},
+        {"{rb}蒼{/rb}{rt}あおい{/rt}くん！"sv, "{rb}蒼{/rb}{rt}あおい{/rt}くん！"sv},
+        {"{rb}書{/rb}{rt}か{/rt}くんだ"sv, "{rb}書くんだ{/rb}{rt}かくんだ{/rt}"sv},
+        {"{rb}{/rb}{rt}く{/rt}や"sv, "{rb}{/rb}{rt}く{/rt}や"sv},
+        {"{k=-5.0}―――{/k}"sv, "{k=-5.0}―――{/k}"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, verbs, nullptr), std::string(c.want));
+}
+
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},

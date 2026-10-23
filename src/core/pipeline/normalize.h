@@ -1,5 +1,6 @@
 #pragma once
-// The normalising rewrites of a line before the sound lexicon. They need no dictionary.
+// The normalising rewrites of a line before the sound lexicon. They need no dictionary,
+// except JoinBraceRuby, which asks the caller.
 #include "core/pipeline/line_context.h"
 #include <span>
 #include <string>
@@ -10,6 +11,18 @@ namespace hdTrans::pipeline {
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
 // in normalize.cpp. A line that is written whole from the line table is not passed here.
 std::string Normalize(std::string_view line, const LineContext& ctx);
+
+// Whether the kana after a ruby base of two or more characters continue its word: the
+// dictionary has a verb or adjective that starts with the base (背負って, 見惚れる, 些細な),
+// not a noun alone (安堵して, 杞憂って).
+using BaseContinues = bool (*)(const void* context, std::string_view base, std::string_view kana);
+
+// line with the kana after each {rb}base{/rb}{rt}reading{/rt} moved into both tags, so
+// that the base and the reading are each read as a whole word ({rb}悔{/rb}{rt}く{/rt}やんでも
+// {rb}悔やんでも{/rb}{rt}くやんでも{/rt}): after a base of one character unless they start
+// a particle, the copula or a name suffix ({rb}夢{/rb}{rt}ここ{/rt}で, {rb}蒼{/rb}{rt}あおい{/rt}くん), after a
+// longer base when continues says so. Run after Normalize, with the dictionary.
+std::string JoinBraceRuby(std::string_view line, BaseContinues continues, const void* context);
 
 namespace internal {
 

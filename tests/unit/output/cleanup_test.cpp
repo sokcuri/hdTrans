@@ -11,6 +11,7 @@ namespace {
 
 Piece Word(const char* s) { return {s, SpanWord}; }
 Piece Tag(const char* s) { return {s, SpanOpen}; }
+Piece Close(const char* s) { return {s, SpanClose}; }
 Piece Text(const char* s) { return {s, SpanText}; }
 
 std::string Show(char c) { return c == 0 ? std::string("0") : std::string(1, c); }
@@ -171,6 +172,11 @@ HD_TEST(output_fix_spacing) {
         {{Text("「시끄럽다 」라고 『가자  』")}, "「시끄럽다」라고 『가자』"},
         {{Text("「(웃음) )")}, "「(웃음) )"},
         {{Text("? "), Tag("<b>"), Text(" 」")}, "? <b> 」"},
+        // A ruby reading follows its base without a space; other tags keep it.
+        {{Tag("{rb}"), Text("후회해도"), Close("{/rb}"), Text(" "), Tag("{rt}"), Text("후회해도"), Tag("{/rt}")},
+         "{rb}후회해도{/rb}{rt}후회해도{/rt}"},
+        {{Close("</b>"), Text(" "), Tag("<i>")}, "</b> <i>"},
+        {{Close("{/rb}"), Text(" 가 "), Tag("{rt}")}, "{/rb} 가 {rt}"},
         {{Text("했다 "), Tag("<k>"), Text("――")}, "했다<k>――"},
         {{Text("했다 "), Tag("<k>"), Text("가")}, "했다 <k>가"},
     };
