@@ -330,6 +330,7 @@ private:
     size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
     size_t MimeticTo(size_t p, size_t end, bool& hiragana) const;
+    bool KanaWord(size_t p) const;
     size_t HiraganaMimeticTo(size_t p) const;
     std::string ExclaimedSound(size_t p, size_t end) const;
     size_t LoneCatch(size_t p) const;
@@ -1092,10 +1093,29 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     return i;
 }
 
+// Whether the two kana at character p are a word rather than a sound, so that the unit
+// said twice repeats the word: a call or discourse word of the sound lexicon (a lead row
+// or a phrases.tsv row: ねえ, ほら, こら, いざ) or a verb in the dictionary form whose kana
+// stem the dictionary reads by default (XXX: いく 가다; not ふる, which has no default).
+bool SoundText::KanaWord(size_t p) const {
+    const std::u32string_view unit = std::u32string_view(f_).substr(p, 2);
+    for (const SoundRow& s : SoundRows(unit[0], ctx_.extraBuiltin)) {
+        if (s.key == unit && (s.lead || s.phrase)) return true;
+    }
+    const std::string_view stem = Bytes(p, p + 1), ending = Bytes(p + 1, p + 2);
+    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + 2), dict::LookupMode::General, ctx_.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.source != stem || c.codes == nullptr || c.codes->part.Empty() || c.codes->part.Tag() != 'M') continue;
+        if (c.codes->sem.HasCode("XXX") && word::Conjugation(c.codes->part.VerbKind(), 0) == ending) return true;
+    }
+    return false;
+}
+
 // The end of the と or っと after a hiragana mimetic the sound lexicon lacks at character
-// p, or 0: a unit of two plain kana said twice (とてとてと, ふるふると) that no dictionary or
-// name-layer key of four or more characters reads there, before と or っと that does not
-// quote (ふるふるという) or start する.
+// p, or 0: a unit of two plain kana said twice (とてとてと, ふるふると) that is no word
+// (KanaWord: ねえねえと, いくいくと) and that no dictionary or name-layer key of four or
+// more characters reads there, before と or っと that does not quote (ふるふるという) or
+// start する.
 size_t SoundText::HiraganaMimeticTo(size_t p) const {
     const std::u32string_view rs = rs_, f = f_;
     constexpr size_t n = 4;
@@ -1113,6 +1133,7 @@ size_t SoundText::HiraganaMimeticTo(size_t p) const {
         if (rest.starts_with(q)) return 0;
     }
     if (i < rs.size() && In(rs[i], U"しすさせ")) return 0;
+    if (KanaWord(p)) return 0;
     const dict::Candidates rd =
         snap_.GetWordInfo(Bytes(p, std::min(rs.size(), i + 4)), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {

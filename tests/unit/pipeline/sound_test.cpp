@@ -292,11 +292,32 @@ HD_TEST(pipeline_sound) {
         {"とてとてと歩く", "토테토테 歩く"},
         {"彼はふるふると", "彼は후루후루"},
         {"ふるふるという", "ふるふるという"},
+        // A call of the sound lexicon said twice stays words (ねえねえと, not 네에네에).
+        {"ねえねえと袖", "ねえねえと袖"},
+        {"ほらほらと急かす", "ほらほらと急かす"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// A doubled hiragana unit that is a verb in the dictionary form stays words when the
+// dictionary reads its kana stem by default (いくいくと 가다 가다); a stem without a
+// default reading is no established kana word, and the unit is a sound (ふるふると).
+HD_TEST(pipeline_sound_doubled_kana_verb) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tsem\tid\n"
+                                     "い\t가\tM411\tXXX\t1\n"
+                                     "い\t가\tM411\t\t2\n"
+                                     "ふ\t흔들\tM418\t\t3\n"
+                                     "ふ\t내리\tM418\t\t4\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    HD_CHECK_EQ(Sound("いくいくと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
+    HD_CHECK_EQ(Sound("ふるふると震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
 // A verb cut off before a dash or an ellipsis, completed when the dictionary has it.

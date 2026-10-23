@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+sound:kana-word	ねえねえと袖を引いた。	저기 소매를 당겼다.	fix	sound
+sound:kana-word	ほらほらと手を叩いた。	자 자 손뼉을 쳤다.	fix	sound
+sound:kana-word	いくいくと叫んだ。	간다 간다고 외쳤다.	fix	sound
+sound:kana-word	ぽてぽてと歩く。	포테포테 걷는다.	keep	sound
+sound:kana-word	彼女の頭をわしわしと撫でる。	그녀의 머리를 와시와시 쓰다듬는다.	keep	sound
+sound:kana-word	彼女が、ふるふると全身を震わせる。	그녀가, 후루후루 전신을 떤다.	keep	sound
