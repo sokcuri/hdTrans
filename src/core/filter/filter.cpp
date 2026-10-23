@@ -7,6 +7,7 @@
 
 #include "core/dict/layer.h"
 #include "core/filter/ehnd.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "pcre2.h"
 
@@ -608,6 +609,84 @@ void Filters::Run(Stage stage, const Program& p, std::u16string& text, Toggles& 
         const std::string message = std::string(stage == Stage::Pre ? "PreSkipLayer" : "PostSkipLayer") + " : " +
                                     skipped + "\n";
         log.write(log.context, message);
+    }
+}
+
+namespace {
+
+// A digit or a Latin letter, also a full-width one.
+bool DigitOrLatin(char32_t r) {
+    const char32_t a = r >= U'０' && r <= U'ｚ' ? r - 0xFEE0 : r;
+    return (a >= U'0' && a <= U'9') || (a >= U'A' && a <= U'Z') || (a >= U'a' && a <= U'z');
+}
+
+// The first character of a word in kanji, katakana or Latin letters.
+bool WordStart(char32_t r) {
+    const char32_t a = r >= U'０' && r <= U'ｚ' ? r - 0xFEE0 : r;
+    return text::IsKanji(r) || (r >= U'ァ' && r <= U'ヺ') || r == U'ー' || (a >= U'A' && a <= U'Z') ||
+           (a >= U'a' && a <= U'z');
+}
+
+struct Runes {
+    std::u32string cps;
+    std::vector<std::size_t> starts;  // the byte offset of each character, then the size
+};
+
+Runes Decode(std::string_view s) {
+    Runes out;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        out.cps.push_back(r.cp);
+        out.starts.push_back(k);
+        k += r.size;
+    }
+    out.starts.push_back(s.size());
+    return out;
+}
+
+}  // namespace
+
+void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
+    // The longest lines aligned; a longer line keeps the filtered text as it is.
+    constexpr std::size_t kMaxRunes = 1024;
+    const Runes a = Decode(source);
+    const std::size_t n = a.cps.size();
+    struct Gap {
+        std::size_t left, right;  // the characters around the spaces, in source
+    };
+    std::vector<Gap> gaps;
+    for (std::size_t k = 0; k < n; k++) {
+        if (!DigitOrLatin(a.cps[k])) continue;
+        std::size_t j = k + 1;
+        while (j < n && (a.cps[j] == U' ' || a.cps[j] == U'　')) j++;
+        if (j > k + 1 && j < n && WordStart(a.cps[j])) gaps.push_back({k, j});
+    }
+    if (gaps.empty() || n > kMaxRunes) return;
+    const Runes b = Decode(filtered);
+    const std::size_t m = b.cps.size();
+    if (m > kMaxRunes) return;
+    // lcs[i * (m + 1) + j]: the longest common subsequence of a from i and b from j.
+    std::vector<uint16_t> lcs((n + 1) * (m + 1), 0);
+    for (std::size_t i = n; i-- > 0;) {
+        for (std::size_t j = m; j-- > 0;) {
+            lcs[i * (m + 1) + j] = a.cps[i] == b.cps[j] ? static_cast<uint16_t>(lcs[(i + 1) * (m + 1) + j + 1] + 1)
+                                                        : std::max(lcs[(i + 1) * (m + 1) + j], lcs[i * (m + 1) + j + 1]);
+        }
+    }
+    std::vector<std::size_t> to(n, SIZE_MAX);  // the character of b each character of a is kept as
+    for (std::size_t i = 0, j = 0; i < n && j < m;) {
+        if (a.cps[i] == b.cps[j]) {
+            to[i++] = j++;
+        } else if (lcs[(i + 1) * (m + 1) + j] >= lcs[i * (m + 1) + j + 1]) {
+            i++;
+        } else {
+            j++;
+        }
+    }
+    for (auto g = gaps.rbegin(); g != gaps.rend(); ++g) {
+        const std::size_t l = to[g->left], r = to[g->right];
+        if (l == SIZE_MAX || r != l + 1) continue;
+        filtered.insert(b.starts[r], source.substr(a.starts[g->left + 1], a.starts[g->right] - a.starts[g->left + 1]));
     }
 }
 

@@ -1,0 +1,27 @@
+rule	input	expected	kind	layer
+compose:number-label	ステージ3ボス戦	스테이지 3 보스전	fix	compose
+compose:number-label	Lv.10スキル習得	Lv.10 스킬 습득	fix	compose
+compose:number-label	No.2-1キャラクター設定	No.2-1 캐릭터 설정	fix	compose
+compose:number-label	ダンジョン11宇宙1	던전 11 우주 1	fix	compose
+compose:number-label	L2ボタンとR2ボタンを同時に押す	L2 버튼과 R2 버튼을 동시에 누른다	fix	compose
+compose:number-label	22コンボ表示	22콤보 표시	keep	compose
+compose:number-label	ATBゲージ	ATB 게이지	fix	compose
+compose:number-label	HPゲージが減る。	HP 게이지가 줄어든다.	fix	compose
+compose:number-label	ステージ3 ボス戦	스테이지 3 보스전	keep	compose
+compose:number-label	SPを5ポイント消費する。	SP를 5포인트 소비한다.	keep	compose
+compose:number-label	第3章ボス	제3장 보스	keep	compose
+compose:number-label	第一王子	제1왕자	keep	compose
+compose:number-label	3ターン後に発動。	3턴 후에 발동.	keep	compose
+compose:number-label	1000ゴールドを払う。	1000골드를 지불한다.	keep	compose
+compose:number-label	1ゲーム目が始まった。	1게임째가 시작되었다.	keep	compose
+compose:number-label	S級冒険者	S급 모험가	keep	compose
+compose:number-label	SSランクの冒険者	SS랭크의 모험가	keep	compose
+compose:number-label	ハーク・ロウリア34世	하크 로우리아34세	keep	compose
+compose:number-label	3学期が始まった。	3학기가 시작되었다.	keep	compose
+compose:number-label	第2エリアへ進む。	제2에리어로 나아간다.	keep	compose
+compose:number-label	3セット行う。	3세트 실시한다.	keep	compose
+compose:number-label	2チームに分かれる。	2팀으로 나누어진다.	keep	compose
+compose:number-label	ワールド2ステージ5クリア	월드 2 스테이지 5 클리어	fix	compose
+compose:number-label	ver2.0アップデート	ver2.0 업데이트	fix	compose
+compose:number-label	「12cm30連装噴進砲」x1	「12cm30연장분진포」x1	keep	compose
+compose:number-label	唯一無二のID欄だから	유일무이의 ID란이니까	keep	compose

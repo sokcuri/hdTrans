@@ -319,3 +319,19 @@ HD_TEST(FilterMatcher) {
     m.Scan(u"this", seen, 2);
     HD_CHECK(seen[static_cast<std::size_t>(his)] == 2 && seen[static_cast<std::size_t>(he)] == 1);
 }
+
+HD_TEST(FilterKeepSpacesAfterNumbers) {
+    auto keep = [](std::string_view source, std::string filtered) {
+        KeepSpacesAfterNumbers(source, filtered);
+        return filtered;
+    };
+    // A space the pre-filter removed after a digit or a Latin letter comes back.
+    HD_CHECK_EQ(keep("ステージ3 ボス戦", "ステージ3ボス戦"), "ステージ3 ボス戦");
+    HD_CHECK_EQ(keep("1　レベル上がった", "⌒。1レベル上がった"), "⌒。1　レベル上がった");
+    HD_CHECK_EQ(keep("HP ゲージ", "HPゲージ"), "HP ゲージ");
+    // Other removed spaces, and spaces the filter kept, stay as the filter left them.
+    HD_CHECK_EQ(keep("補助能力値が １ ずつ", "補助能力値が１ずつ"), "補助能力値が１ずつ");
+    HD_CHECK_EQ(keep("ステージ3 ボス戦", "ステージ3 ボス戦"), "ステージ3 ボス戦");
+    // A character the filter rewrote leaves the space out.
+    HD_CHECK_EQ(keep("3 ボス", "3魔"), "3魔");
+}

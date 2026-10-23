@@ -100,3 +100,20 @@ HD_TEST(FilterLayersArePlain) {
     HD_REQUIRE(r.errors.size() == 1);
     HD_CHECK(r.errors[0].kind == hdTrans::dict::LoadErrorKind::Header);
 }
+
+// A space a prefilter removes after a digit is the source's spacing still (3 고양이, not 3고양이).
+HD_TEST(EngineEhndKeepsSpaceAfterNumber) {
+    TempFolder dicts("dicts"), ehnd("ehnd");
+    dicts.Write("base.tsv",
+                "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n");
+    ehnd.Write("PreFilter_a.txt", "(?<=[0-9]) +\t\t1\t1\n");
+    hdTrans::Engine e(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(e.Open({dicts.path.string()}));
+    HD_CHECK_EQ(Translate(e, "3猫"), "3고양이");
+    HD_CHECK_EQ(Translate(e, "3 猫"), "3 고양이");
+    HD_CHECK(e.OpenEhnd(ehnd.path.string()));
+    HD_CHECK(e.FilterErrors().empty());
+    HD_CHECK_EQ(Translate(e, "3猫"), "3고양이");
+    HD_CHECK_EQ(Translate(e, "3 猫"), "3 고양이");
+}

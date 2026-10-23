@@ -504,6 +504,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     for (std::size_t i = 0; i < filtered.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") FilterSnapshot(observer, "REQUEST", lines[i]);
         Filter(f, filter::Stage::Pre, filtered[i], toggles[i], observer);
+        filter::KeepSpacesAfterNumbers(lines[i], filtered[i]);
         if (!lines[i].empty() && lines[i] != "\r") FilterSnapshot(observer, "PRE", filtered[i]);
     }
     std::vector<std::string> out = TranslateDocumentPieces(snap, generated, filtered, memory, observer, options, filtered);
@@ -533,6 +534,7 @@ std::string TranslateRawLine(const dict::Snapshot& snap, Generated& generated, s
     std::string text(line);
     const filter::LogSink log{observer.context, observer.filterLog};
     options.filters->Apply(filter::Stage::Pre, text, toggles, log);
+    filter::KeepSpacesAfterNumbers(line, text);
     FilterSnapshot(observer, "PRE", text);
     std::string out = RawLine(snap, generated, text, observer, options);
     FilterSnapshot(observer, "TRANS", out);

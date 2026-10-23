@@ -318,27 +318,38 @@ bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
     return code.size() >= 2 && code[0] == '1' && code[1] != '2' && !EntryText(b).ends_with("@") && !PredicateNoun(items, n);
 }
 
-// Whether the number or the Latin word that ends item i in the source labels the noun of
-// item n rather than counts or measures it, so that a space stays between them: a reply
-// number after ≫ or >> (≫372過疎 ≫372 과소), a time (23：40追記 23：40 추기), a number of four
-// digits before a noun in kanji, a year or a time (2026特別 2026 특별, 2300提督 2300 제독), and
-// a Latin word of two letters or more with a small letter, a name or a word, before a noun in
-// kanji of two characters or more (class空母 class 항공모함, Bismarck追撃戦 Bismarck 추격전). A
-// counter or a suffix after it joins it (1939年, Iowa級 Iowa급, Java風 Java풍), and so do a unit
-// after a number (10cm, 1000G), a letter (Aランク A랭크) and a word in katakana after a Latin word,
-// which may be a spoken ending (Christmasダヨ Christmas다요).
-bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
+// Whether the number or the Latin word that ends item i in the source stands apart from the
+// noun of item n written straight after it. A number before a noun counts it and joins it; a
+// number after a word labels that word and stands apart from the next noun. They join before a
+// counter, a unit or a suffix (5ポイント 5포인트, 1939年, 10cm, 1000G, Iowa級 Iowa급, Java風 Java풍,
+// ID欄 ID란), a noun of one character (34世 34세), a noun counted in an ordinal (1ゲーム目
+// 1게임째), after 第 (第2エリア 제2에리어), when the number counts the noun (3学期 3학기, 8等分
+// 8등분, 22コンボ 22콤보, 3セット 3세트), and after one letter or a letter written two or three
+// times (Aランク A랭크, SSランク SS랭크). They stand apart when the number is the label of the
+// word written straight before it in katakana or Latin letters, or the end of a label
+// (ステージ3ボス戦 스테이지 3 보스전, Lv.10スキル Lv.10 스킬, No.2-1キャラクター No.2-1 캐릭터,
+// R1ボタン R1 버튼, ver2.0アップデート ver2.0 업데이트); when a word in Latin capitals, an
+// abbreviation, is before a noun (ATBゲージ ATB 게이지), or a word with small letters, a name or
+// a word, before a noun in kanji of two characters or more (class空母 class 항공모함,
+// Bismarck追撃戦 Bismarck 추격전); and for a reply number after ≫ or >> (≫372過疎 ≫372 과소), a
+// time (23：40追記 23：40 추기) and a number of four digits before a noun in kanji, a year or a
+// time (2026特別 2026 특별, 2300提督 2300 제독). A word in katakana after a word with small
+// letters may be a spoken ending and joins it (Christmasダヨ Christmas다요).
+bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
     const ResolvedItem& a = items[i];
     const ResolvedItem& b = items[n];
-    if (Contains(GAttr(b), "Ct") || Contains(GAttr(b), "Z7")) return false;
+    if (Contains(GAttr(b), "Ct") || Contains(GAttr(b), "Z7") || Ordinal(items, n)) return false;
     const auto ascii = [](char32_t r) { return r >= U'！' && r <= U'～' ? r - 0xFEE0 : r; };
+    const auto latin = [](char32_t r) { return (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'); };
+    const auto digit = [](char32_t r) { return r >= U'0' && r <= U'9'; };
+    const char32_t lead = text::DecodeRune(b.surface).cp;
     std::string_view rest = std::string_view(tokens[a.tokenIndex].text).substr(0, static_cast<std::size_t>(a.offset + a.length));
     std::size_t digits = 0;
     bool grouped = false;
     for (char32_t r = ascii(LastRune(rest)); r != 0; r = ascii(LastRune(rest))) {
         if (r == U',' || r == U'.' || HasRune(U"十百千万億", r)) {
             grouped = true;
-        } else if (r >= U'0' && r <= U'9') {
+        } else if (digit(r)) {
             digits++;
         } else {
             break;
@@ -352,19 +363,37 @@ bool LabelsNoun(const std::vector<TokenText>& tokens, const std::vector<Resolved
         const std::string_view head = before;
         const char32_t mark = ascii(LastRune(head)), prior = ascii(LastRune(DropLastRune(head)));
         if (mark == U':' && prior >= U'0' && prior <= U'9') return true;
-        const char32_t lead = text::DecodeRune(b.surface).cp;
-        return digits == 4 && !grouped && IsKanji(lead) && !HasRune(U"十百千万億兆", lead);
+        // An ordinal after 第 numbers the noun (第2エリア 제2에리어).
+        if (mark == U'第') return false;
+        // A noun of one character after a number is its counter or suffix (34世 34세, 657コ 657코),
+        // and Latin letters are its unit (10cm, 1000G).
+        if (text::RuneCount(b.surface) == 1 || latin(ascii(lead))) return false;
+        if (IsKanji(lead) && digits == 4 && !grouped && !HasRune(U"十百千万億兆", lead)) return true;
+        // The number goes on a label written before it (Lv.10, No.2-1): past a dot or a hyphen,
+        // a Latin letter, a digit or katakana. Latin letters after a number are its unit, and a
+        // number after them counts anew (12cm30連装 12cm30연장).
+        std::string_view label = mark == U'.' || mark == U'-' ? DropLastRune(head) : head;
+        if (latin(ascii(LastRune(label)))) {
+            while (latin(ascii(LastRune(label)))) label = DropLastRune(label);
+            return !digit(ascii(LastRune(label)));
+        }
+        const char32_t r = ascii(LastRune(label));
+        return digit(r) || tokenizer::Class(r) == tokenizer::kClassKatakana;
     }
     std::size_t letters = 0;
-    bool small = false;
-    for (char32_t r = ascii(LastRune(rest)); (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'); r = ascii(LastRune(rest))) {
+    bool small = false, same = true;
+    const char32_t last = ascii(LastRune(rest));
+    for (char32_t r = last; latin(r); r = ascii(LastRune(rest))) {
         letters++;
         small = small || r >= U'a';
+        same = same && r == last;
         rest = DropLastRune(rest);
     }
-    const char32_t before = ascii(LastRune(rest));
-    return letters >= 2 && small && !(before >= U'0' && before <= U'9') && IsKanji(text::DecodeRune(b.surface).cp) &&
-           text::RuneCount(b.surface) >= 2;
+    if (letters == 0 || digit(ascii(LastRune(rest)))) return false;
+    if (letters == 1 || (same && !small && letters <= 3)) return false;
+    // One kanji after a Latin word is a suffix (ID欄 ID란, USS風 USS풍).
+    if (IsKanji(lead) && text::RuneCount(b.surface) == 1) return false;
+    return !small || IsKanji(lead);
 }
 
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
@@ -988,11 +1017,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), false);
         }
     }
-    // A digit or a Latin letter is written with the noun after it as the source writes them:
-    // together without a space in the source, apart with one (JoinsNoun); a label keeps its
-    // space (LabelsNoun).
+    // A digit or a Latin letter is written with the noun after it apart when the source writes
+    // a space between them (JoinsNoun); without one, they join when the number counts the noun
+    // or the letter grades it and stand apart when the number labels the word before it
+    // (ApartFromNoun).
     if (nextKind == '1' && DigitOrLatin(LastRune(t)) && JoinsNoun(items, i, nextIndex)) {
-        return Result(std::move(t), LabelsNoun(tokens, items, i, nextIndex));
+        return Result(std::move(t), ApartFromNoun(tokens, items, i, nextIndex));
     }
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
