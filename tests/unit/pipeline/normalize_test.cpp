@@ -441,16 +441,26 @@ HD_TEST(pipeline_strip_ruby) {
 }
 
 HD_TEST(pipeline_join_brace_ruby) {
-    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other bases are nouns.
-    const BaseContinues verbs = [](const void*, std::string_view base, std::string_view) {
-        return base == "背負" || base == "見惚";
+    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other longer bases are
+    // nouns; 剥 inflects in が; after 庇 and 掬 a word follows the verb inside the kana.
+    const ReadBase read = [](const void*, std::string_view base, std::string_view kana) {
+        BaseReading r;
+        r.continues = base == "背負" || base == "見惚";
+        r.inflected = base == "剥";
+        if (base == "庇" && kana.starts_with("ってくれ")) r.wordEnd = std::string_view("って").size();
+        if (base == "掬" && kana.starts_with("ったまぐろ")) r.wordEnd = std::string_view("った").size();
+        return r;
     };
     const Case cases[] = {
         {"{rb}悔{/rb}{rt}く{/rt}やんでも。"sv, "{rb}悔やんでも{/rb}{rt}くやんでも{/rt}。"sv},
         {"{rb}微{/rb}{rt}かす{/rt}かに声"sv, "{rb}微かに{/rb}{rt}かすかに{/rt}声"sv},
-        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇ってくれた{/rb}{rt}かばってくれた{/rt}"sv},
         {"{rb}背負{/rb}{rt}しょ{/rt}って"sv, "{rb}背負って{/rb}{rt}しょって{/rt}"sv},
         {"{rb}見惚{/rb}{rt}みほ{/rt}れる。"sv, "{rb}見惚れる{/rb}{rt}みほれる{/rt}。"sv},
+        // Only the base's own word moves when another word follows it in the kana.
+        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇って{/rb}{rt}かばって{/rt}くれた"sv},
+        {"{rb}掬{/rb}{rt}すく{/rt}ったまぐろの"sv, "{rb}掬った{/rb}{rt}すくった{/rt}まぐろの"sv},
+        // Okurigana that start like a particle move when the base inflects in them.
+        {"{rb}剥{/rb}{rt}は{/rt}がそうと"sv, "{rb}剥がそうと{/rb}{rt}はがそうと{/rt}"sv},
         // A noun of two or more characters keeps the kana after the tags.
         {"{rb}安堵{/rb}{rt}あんど{/rt}して"sv, "{rb}安堵{/rb}{rt}あんど{/rt}して"sv},
         {"{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv, "{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv},
@@ -465,7 +475,7 @@ HD_TEST(pipeline_join_brace_ruby) {
         {"{rb}{/rb}{rt}く{/rt}や"sv, "{rb}{/rb}{rt}く{/rt}や"sv},
         {"{k=-5.0}―――{/k}"sv, "{k=-5.0}―――{/k}"sv},
     };
-    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, verbs, nullptr), std::string(c.want));
+    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, read, nullptr), std::string(c.want));
 }
 
 HD_TEST(pipeline_respell_variants) {

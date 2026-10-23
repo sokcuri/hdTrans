@@ -11,3 +11,11 @@ compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまっ�
 compose:text-gate	皿を割ってしまった。	접시를 깨어 버렸다.	keep	compose
 word:ruby-neighbour	彼は窓の外を{rb}眺めて{/rb}{rt}ながめて{/rt}いる。	그는 창 밖을 {rb}바라보고{/rb}{rt}바라보고{/rt} 있다.	fix	global-ending
 word:ruby-neighbour	{rb}現実{/rb}{rt}ここ{/rt}に彼女はいない。	{rb}현실{/rb}{rt}여기{/rt}에 그녀는 없다.	keep	defaults
+normalize:ruby	先生が俺を{rb}庇{/rb}{rt}かば{/rt}ってくれた。	선생님이 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주었다.	fix	normalize
+normalize:ruby	{rb}掬{/rb}{rt}すく{/rt}ったまぐろの上に、わさびを乗せた。	{rb}떠올린{/rb}{rt}건져올린{/rt} 참치 위에, 와사비를 실었다.	fix	normalize
+normalize:ruby	布団を{rb}剥{/rb}{rt}は{/rt}がした。	이불을 {rb}벗겼다{/rb}{rt}벗겼다{/rt}.	fix	normalize
+normalize:ruby	母に{rb}諭{/rb}{rt}さと{/rt}されて、反省した。	어머니에게 {rb}타일러져{/rb}{rt}설유되어{/rt}, 반성했다.	fix	normalize
+normalize:ruby	ぶつぶつ{rb}呟{/rb}{rt}つぶや{/rt}いたあと、立ち上がった。	투덜투덜{rb}중얼거린 뒤{/rb}{rt}중얼거린 뒤{/rt}, 일어섰다.	keep	normalize
+normalize:ruby	{rb}寂{/rb}{rt}さみ{/rt}しいけれど、平気。	{rb}외롭지만{/rb}{rt}외롭지만{/rt}, 괜찮아.	keep	normalize
+normalize:ruby	{rb}夢{/rb}{rt}ここ{/rt}で目が覚めた。	{rb}꿈{/rb}{rt}여기{/rt}에서 깨어났다.	keep	normalize
+normalize:ruby	{rb}人気{/rb}{rt}ひとけ{/rt}がない。	{rb}인기척{/rb}{rt}인기척{/rt}이 없다.	keep	normalize

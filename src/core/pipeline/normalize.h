@@ -2,6 +2,7 @@
 // The normalising rewrites of a line before the sound lexicon. They need no dictionary,
 // except JoinBraceRuby, which asks the caller.
 #include "core/pipeline/line_context.h"
+#include <cstddef>
 #include <span>
 #include <string>
 #include <string_view>
@@ -12,17 +13,29 @@ namespace hdTrans::pipeline {
 // in normalize.cpp. A line that is written whole from the line table is not passed here.
 std::string Normalize(std::string_view line, const LineContext& ctx);
 
-// Whether the kana after a ruby base of two or more characters continue its word: the
-// dictionary has a verb or adjective that starts with the base (背負って, 見惚れる, 些細な),
-// not a noun alone (安堵して, 杞憂って).
-using BaseContinues = bool (*)(const void* context, std::string_view base, std::string_view kana);
+// How the dictionary reads a ruby base with the kana after it.
+struct BaseReading {
+    // A verb or adjective starts with the base (背負って, 見惚れる, 些細な), not a noun
+    // alone (安堵して, 杞憂って).
+    bool continues = false;
+    // The word analysis of base and kana starts with a verb or adjective of the base that
+    // inflects in the kana (剥がそう, 潰さなきゃ).
+    bool inflected = false;
+    // The bytes of the kana that end the base's own word when another word follows it
+    // in the kana (庇って|くれた, 掬った|まぐろ); 0 when the word takes the whole run.
+    std::size_t wordEnd = 0;
+};
+using ReadBase = BaseReading (*)(const void* context, std::string_view base, std::string_view kana);
 
 // line with the kana after each {rb}base{/rb}{rt}reading{/rt} moved into both tags, so
 // that the base and the reading are each read as a whole word ({rb}悔{/rb}{rt}く{/rt}やんでも
 // {rb}悔やんでも{/rb}{rt}くやんでも{/rt}): after a base of one character unless they start
-// a particle, the copula or a name suffix ({rb}夢{/rb}{rt}ここ{/rt}で, {rb}蒼{/rb}{rt}あおい{/rt}くん), after a
-// longer base when continues says so. Run after Normalize, with the dictionary.
-std::string JoinBraceRuby(std::string_view line, BaseContinues continues, const void* context);
+// a particle, the copula or a name suffix ({rb}夢{/rb}{rt}ここ{/rt}で, {rb}蒼{/rb}{rt}あおい{/rt}くん)
+// and the base is not inflected in them (剥がそう), after a longer base when the base
+// continues. Only the kana up to the end of the base's word move when another
+// word follows in them ({rb}庇って{/rb}{rt}かばって{/rt}くれた). Run after Normalize,
+// with the dictionary.
+std::string JoinBraceRuby(std::string_view line, ReadBase read, const void* context);
 
 // Whether the variant at line[at, at + variant.size()) is part of another dictionary word and so
 // stays as written (身の程, ときめく).
