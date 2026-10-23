@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+compose:verbal-noun-passive	親族を名乗る人たちに色々されまして	친족을 자칭하는 사람들에게 여러 가지 되어서	fix	compose
+compose:verbal-noun-suru	俺に色々してほしいんだろ	나에게 여러 가지 해 주었으면 하는 거지	fix	compose
+compose:verbal-noun-suru	好き合って、色々したり、色々することだよ	서로 좋아해, 여러 가지 하거나 여러 가지 하는 것이야	fix	compose
+compose:verbal-noun-passive	お父上が離縁されたため	아버님이 이혼되었기 때문에	keep	compose

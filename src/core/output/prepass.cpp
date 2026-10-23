@@ -1049,7 +1049,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
             // A compound of two or more kanji before する is a verbal noun (即答する 즉답하다),
             // unless it tells a time, a frequency or an amount, which stays an adverb apart from
-            // the verb (毎日する 매일 한다, 全部します 전부 합니다).
+            // the verb (毎日する 매일 한다, 全部します 전부 합니다), or it is a kanji doubled with 々,
+            // an adverb or a な noun rather than a する noun (色々されまして 여러 가지 되어서).
             auto kanjiCompound = [](std::string_view s) {
                 static constexpr std::u32string_view kTimeStarts = U"毎今明昨何半";
                 static constexpr std::u32string_view kTimeEnds = U"日朝晩週年月夜時頃";
@@ -1064,6 +1065,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     const text::Rune r = text::DecodeRune(s.substr(k));
                     if (r.size == 0 || !text::IsKanji(r.cp)) return false;
                     if (n == 0) first = r.cp;
+                    if (n == 1 && r.cp == U'々') return false;
                     last = r.cp;
                     k += r.size;
                 }
