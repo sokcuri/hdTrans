@@ -23,18 +23,26 @@
 //= honorific.name	Person suffixes that follow a name (さん, 様, 先生), with their drawn-out spellings (さぁん, ちゃーん); a label or run that ends in one is the name before it.
 //= honorific.nickname	The honorifics that make the hiragana before them a nickname (みっちゃん, けんくん); the last one that starts the text wins.
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
+//= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
+//= honorific.prepass-spaced	Honorifics read 씨 or 군 that are written apart from the noun before them (田中さん 다나카 씨).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
+//= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
+//= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
+//= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
+//= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
+//= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
+//= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
@@ -58,7 +66,11 @@
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
 //= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
 //= suffix.title-in-name	Title words that may follow a name inside its run (茜たち, 水無月家).
+//= suru.predicate-noun	Starts of the する after a verbal noun that make the noun the predicate (回復した, 回復できる).
 //= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
+//= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
+//= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
+//= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
@@ -321,6 +333,21 @@ honorific.person-title	お姉
 honorific.person-title	お兄
 honorific.person-title	改
 
+honorific.prepass	ちゃん
+honorific.prepass	さん
+honorific.prepass	くん
+honorific.prepass	君
+honorific.prepass	たん
+honorific.prepass	様
+honorific.prepass	さま
+honorific.prepass	殿
+honorific.prepass	氏
+
+honorific.prepass-spaced	さん
+honorific.prepass-spaced	くん
+honorific.prepass-spaced	君
+honorific.prepass-spaced	氏
+
 kana.kin-before-chan	にい
 kana.kin-before-chan	にー
 kana.kin-before-chan	ねえ
@@ -428,6 +455,36 @@ ko-noun.passive-eojida	의지
 ko-noun.passive-eojida	생각
 ko-noun.passive-eojida	일
 
+ko-verb.casual-state	된다
+ko-verb.casual-state	모른다
+ko-verb.casual-state	안다
+ko-verb.casual-state	생각한다
+ko-verb.casual-state	좋아한다
+ko-verb.casual-state	싫어한다
+ko-verb.casual-state	사랑한다
+ko-verb.casual-state	보인다
+ko-verb.casual-state	들린다
+ko-verb.casual-state	바뀐다
+ko-verb.casual-state	걸린다
+ko-verb.casual-state	끝난다
+ko-verb.casual-state	열린다
+ko-verb.casual-state	부탁한다
+ko-verb.casual-state	느낀다
+ko-verb.casual-state	바란다
+ko-verb.casual-state	믿는다
+ko-verb.casual-state	원한다
+ko-verb.casual-state	이해한다
+ko-verb.casual-state	감사한다
+ko-verb.casual-state	축하한다
+ko-verb.casual-state	않는다
+ko-verb.casual-state	생각난다
+ko-verb.casual-state	 든다
+ko-verb.casual-state	쓰인다
+ko-verb.casual-state	떨린다
+ko-verb.casual-state	고 한다
+ko-verb.casual-state	야 한다
+ko-verb.casual-state	면 한다
+
 ko-verb.holding	잡다
 ko-verb.holding	쥐다
 ko-verb.holding	움켜쥐다
@@ -459,6 +516,23 @@ ko-verb.holding	앉다
 ko-verb.holding	눕다
 ko-verb.holding	서다
 ko-verb.holding	앞두다
+
+ko.doing	하
+ko.doing	할
+ko.doing	한
+ko.doing	해
+ko.doing	했
+ko.doing	함
+ko.doing	되
+ko.doing	될
+ko.doing	된
+ko.doing	됐
+ko.doing	돼
+
+mark.close-after-space	」
+mark.close-after-space	』
+mark.close-after-space	）
+mark.close-after-space	)
 
 mark.supposed	そう
 mark.supposed	ほど
@@ -511,6 +585,21 @@ noun.attribute	態度
 noun.attribute	機嫌
 noun.attribute	具合
 noun.attribute	調子
+
+noun.casual-declaration	宣言
+noun.casual-declaration	却下
+noun.casual-declaration	許可
+noun.casual-declaration	禁止
+noun.casual-declaration	破棄
+noun.casual-declaration	任命
+noun.casual-declaration	撤回
+noun.casual-declaration	謝罪
+noun.casual-declaration	通達
+noun.casual-declaration	布告
+noun.casual-declaration	命令
+noun.casual-declaration	追放
+noun.casual-declaration	承認
+noun.casual-declaration	認可
 
 noun.clause	の
 noun.clause	ん
@@ -594,6 +683,29 @@ noun.label-role	生徒
 noun.label-role	教師
 noun.label-role	医者
 
+noun.not-verbal	全部
+noun.not-verbal	全員
+noun.not-verbal	全然
+noun.not-verbal	一緒
+noun.not-verbal	本当
+noun.not-verbal	普通
+noun.not-verbal	大体
+noun.not-verbal	結構
+noun.not-verbal	多少
+noun.not-verbal	十分
+noun.not-verbal	一番
+noun.not-verbal	一度
+noun.not-verbal	二度
+noun.not-verbal	三度
+noun.not-verbal	最初
+noun.not-verbal	最後
+noun.not-verbal	永遠
+noun.not-verbal	同時
+noun.not-verbal	直接
+noun.not-verbal	自分
+noun.not-verbal	先程
+noun.not-verbal	以前
+
 noun.ongoing-ninaru	話題
 noun.ongoing-ninaru	噂
 noun.ongoing-ninaru	評判
@@ -602,6 +714,25 @@ noun.ongoing-ninaru	人気
 noun.ongoing-ninaru	注目
 noun.ongoing-ninaru	議論
 noun.ongoing-ninaru	流行
+
+noun.prepass-place	上
+noun.prepass-place	中
+noun.prepass-place	下
+noun.prepass-place	時
+noun.prepass-place	前
+noun.prepass-place	後
+noun.prepass-place	外
+noun.prepass-place	奥
+noun.prepass-place	横
+noun.prepass-place	隣
+noun.prepass-place	裏
+noun.prepass-place	内
+noun.prepass-place	間
+noun.prepass-place	際
+noun.prepass-place	頃
+noun.prepass-place	底
+noun.prepass-place	側
+noun.prepass-place	周り
 
 noun.quoted	奴
 noun.quoted	やつ
@@ -1000,6 +1131,12 @@ suffix.title-in-name	一家
 suffix.title-in-name	達
 suffix.title-in-name	たち
 
+suru.predicate-noun	し
+suru.predicate-noun	す
+suru.predicate-noun	さ
+suru.predicate-noun	せ
+suru.predicate-noun	でき
+
 suru.tail	ない
 suru.tail	なく
 suru.tail	なかっ
@@ -1022,6 +1159,30 @@ suru.tail	たく
 suru.tail	よう
 suru.tail	つつ
 suru.tail	ながら
+
+suru.verbal-noun-start	し
+suru.verbal-noun-start	す
+suru.verbal-noun-start	さ
+suru.verbal-noun-start	せ
+suru.verbal-noun-start	でき
+suru.verbal-noun-start	なさ
+
+suru.verbal-noun-whole	する
+suru.verbal-noun-whole	し
+suru.verbal-noun-whole	さ
+suru.verbal-noun-whole	せ
+suru.verbal-noun-whole	すれ
+suru.verbal-noun-whole	しろ
+suru.verbal-noun-whole	しよ
+
+verb.casual-state	違
+verb.casual-state	似
+verb.casual-state	足り
+verb.casual-state	異な
+verb.casual-state	すぎ
+verb.casual-state	過ぎ
+verb.casual-state	見え
+verb.casual-state	聞こえ
 
 verb.naming	呼ぶ
 verb.naming	書く
