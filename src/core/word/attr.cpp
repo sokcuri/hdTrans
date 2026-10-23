@@ -3,6 +3,7 @@
 // on the direct group and are false for Info details.
 #include <algorithm>
 
+#include "core/dict/classes.h"
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -175,30 +176,6 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
-namespace {
-
-// Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
-constexpr std::string_view kWonderWords[] = {
-    "何", "なに", "なん", "誰", "だれ", "どこ", "いつ", "なぜ", "何故", "どう", "どうして", "どうやって", "どっち",
-    "どちら", "どれ", "どれくらい", "どれほど", "どれだけ", "どんな", "どんなに", "どの", "どのくらい", "どのように",
-    "どのような", "どういう", "どういった", "いかなる",
-    "一体", "いったい", "いくつ", "いくら",
-};
-
-// Starts of words that begin like a question word but are none (何か, どうせ, いつも).
-constexpr std::string_view kWonderNot[] = {
-    "何か", "何も", "何でも", "何だか", "何とか", "何となく", "何て", "何卒", "何気", "なにか", "なにも", "なんか",
-    "なんて", "なんだか", "なんとか", "なんでも", "なんと", "なんだ", "誰か", "誰も", "誰でも", "だれか", "だれも",
-    "どこか", "どこも", "どこでも", "いつか", "いつも", "いつでも", "いつの間", "なぜか", "何故か", "どうか", "どうも",
-    "どうせ", "どうしても", "どうぞ", "どうにか", "どうやら", "どうでも", "どうにも", "どれも", "どれか", "どれでも",
-    "いくらか", "いくらでも",
-};
-
-// The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
-constexpr std::string_view kWonderParticles[] = {"を", "が", "に", "へ", "で", "と", "の", "は", "から", "まで", "くらい", "ぐらい"};
-
-}  // namespace
-
 // Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
 // with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
 // such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
@@ -207,15 +184,15 @@ bool Item::IsQuestionWord() const {
     // 何があっても, 誰だって, いつまでも, 何人か: any, not which.
     if (s.ends_with("も") || s.ends_with("だって") || s.ends_with("か")) return false;
     // The か of 何か before ら is the particle から (何から, どこから, いつから).
-    for (const std::string_view n : kWonderNot) {
+    for (const std::string_view n : dict::ClassMembers("question.wonder-not")) {
         if (s.starts_with(n) && !(n.ends_with("か") && s.substr(n.size()).starts_with("ら"))) return false;
     }
     const char cls = At(Code(std::max(selected, 0)), 0);
-    for (const std::string_view wonder : kWonderWords) {
+    for (const std::string_view wonder : dict::ClassMembers("question.wonder")) {
         if (!s.starts_with(wonder)) continue;
         const std::string_view rest = s.substr(wonder.size());
         if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
-        for (const std::string_view part : kWonderParticles) {
+        for (const std::string_view part : dict::ClassMembers("particle.wonder")) {
             if (rest.starts_with(part)) return true;
         }
         if (cls != '0' && cls != '3') return true;
@@ -367,11 +344,6 @@ bool Item::IsRuleRightBoundary() const {
     // かもしれない) or an adverbial particle (まで, ほど, くらい) still takes the predicate across
     // the pause (行く……ことにした 가는……것으로, 来る……まで 오는……까지): the word alone or with a
     // particle (ことに, わけがない), not the start of another word (ようやく, だけど).
-    static constexpr std::string_view kBoundNouns[] = {
-        "こと", "事", "もの", "物", "の", "ん", "ところ", "所", "とこ", "わけ", "訳", "はず", "筈", "つもり", "よう", "ため",
-        "為", "まま", "ほう", "方", "とき", "時", "ころ", "頃", "みたい", "らし", "そう", "まで", "ほど", "くらい", "ぐらい",
-        "だけ", "ばかり"};
-    static constexpr std::string_view kAuxiliaries[] = {"かも", "だろう", "でしょう"};
     const std::string_view ns = n->group->surface;
     const int sel = n->selected >= 0 ? n->selected : 0;
     const std::string_view nc = n->Code(sel);
@@ -381,12 +353,12 @@ bool Item::IsRuleRightBoundary() const {
     const bool opener = ns.starts_with("そうか") || (ns == "そう" && following.starts_with("か")) ||
                         ((ns == "ところで" || ns == "ところが") && following == "、");
     bool bound = false;
-    for (const std::string_view b : kBoundNouns) {
+    for (const std::string_view b : dict::ClassMembers("noun.bound-pause")) {
         if (opener || !ns.starts_with(b)) continue;
         const char32_t after = text::DecodeRune(ns.substr(b.size())).cp;
         bound = bound || ns.size() == b.size() || std::u32string_view(U"にがをはもでのだかとなじ").find(after) != std::u32string_view::npos;
     }
-    for (const std::string_view b : kAuxiliaries) bound = bound || ns.starts_with(b);
+    for (const std::string_view b : dict::ClassMembers("aux.bound-pause")) bound = bound || ns.starts_with(b);
     // かな as the particle that asks (楽しい……かな), not かなり or the verb かなう.
     bound = bound || (At(nc, 0) == '2' && ns.starts_with("かな"));
     // Nor does a common noun, which the predicate may still modify (暖かい…居場所), or an

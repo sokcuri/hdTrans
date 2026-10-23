@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/tokenizer/token.h"
 #include "core/word/flush.h"
 #include "core/word/terminal.h"
@@ -13,9 +14,6 @@
 
 namespace hdTrans::word {
 namespace {
-
-constexpr std::string_view kCopulaStarts[] = {"で", "じゃ", "に", "を", "が", "へ", "っ"};
-constexpr std::string_view kPhraseParticles[] = {"が", "を", "は", "に", "で", "と", "も", "へ", "の"};
 
 bool IsOneOfClosing(const Item* it) { return it != nullptr && InSet(kClosingQuoteItems, it->group->surface); }
 
@@ -32,13 +30,13 @@ bool IsPredicate(const Item* it) {
     while (!entry.empty() && entry.front() == ' ') entry.remove_prefix(1);
     if (entry.starts_with(kKoGeot)) return false;
     const std::string_view s = it->group->surface;
-    for (const std::string_view p : kCopulaStarts) {
+    for (const std::string_view p : dict::ClassMembers("follower.not-predicate-start")) {
         if (s.starts_with(p)) return false;
     }
     // A particle after the first character makes a phrase that starts with a noun.
     for (std::size_t i = FirstChar(s).size(); i < s.size();) {
         const std::string_view r = FirstChar(s.substr(i));
-        if (InSet(kPhraseParticles, r)) return false;
+        if (dict::InClass("particle.phrase", r)) return false;
         i += r.size();
     }
     return true;
@@ -78,14 +76,9 @@ bool PauseMarks(std::string_view s) {
     return true;
 }
 
-// The nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
-constexpr std::string_view kDependentNouns[] = {"こと", "事", "もの", "物", "の", "ん", "はず", "筈", "ところ", "所",
-                                                "わけ", "訳", "よう", "様", "つもり", "ため", "為", "まま", "ほう",
-                                                "方", "とき", "時", "うち", "くらい", "ぐらい", "ほど"};
-
 // Text input: it ends its token and is not the quotative いう (とかいう……), only ellipsis
 // or dash tokens stand between it and the next item, and that item is a conjunction, or
-// an adverb, a predicate or a noun that does not start with one of kDependentNouns, the
+// an adverb, a predicate or a noun that does not start with one of noun.dependent-ellipsis, the
 // noun not ending the sentence (知らない……本当に, 分からない……でも, 帰る――それでいい,
 // 熱すぎる・・・勘弁して, but 行く……ことにした, いた――んだけど, 消えた……直後。).
 bool PausedClause(const Flusher& f, const Item* it) {
@@ -103,7 +96,7 @@ bool PausedClause(const Flusher& f, const Item* it) {
     if (next->choice.layer == Provenance::Initial) return true;
     const char cls = At(next->Code(next->selected), 0);
     if (cls != '1' && cls != '3' && cls != '4' && cls != '7') return false;
-    for (const std::string_view n : kDependentNouns) {
+    for (const std::string_view n : dict::ClassMembers("noun.dependent-ellipsis")) {
         if (next->group->surface.starts_with(n)) return false;
     }
     if (cls != '1') return true;

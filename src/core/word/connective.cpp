@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/output/families.h"
 #include "core/word/flush.h"
 #include "core/word/strings.h"
@@ -10,13 +11,6 @@
 
 namespace hdTrans::word {
 namespace {
-
-// Korean verbs of actions done one after the other.
-constexpr std::string_view kSequenceVerbs[] = {
-    "먹다", "마시다", "읽다", "씻다", "듣다", "닦다", "입다", "벗다", "신다", "끄다", "닫다", "끝내다", "마치다",
-    "노래하다", "놀다", "자다", "쉬다", "샤워하다", "목욕하다", "세수하다", "양치질하다", "공부하다", "일하다",
-    "청소하다", "요리하다", "식사하다", "춤추다", "숙제하다", "운동하다", "산책하다",
-};
 
 // The item's text as typed, from its start over its length.
 std::string_view ItemText(const Item* it) { return Slice(it->text, it->start, it->length); }
@@ -31,7 +25,7 @@ bool PredicateFollows(const Item* it) {
     for (const std::string_view a : kStops) {
         if (next.starts_with(a)) return false;
     }
-    for (const std::string_view a : kTeAuxiliaries) {
+    for (const std::string_view a : dict::ClassMembers("aux.te-start")) {
         if (next.starts_with(a)) return false;
     }
     for (; n != nullptr; n = n->next) {
@@ -41,12 +35,6 @@ bool PredicateFollows(const Item* it) {
     }
     return false;
 }
-
-// Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
-constexpr std::string_view kParticleVerbs[] = {
-    "つ", "対し", "よ", "因", "依", "と", "関し", "通し", "お", "於", "めぐ", "巡", "際し", "沿", "向け", "比べ", "あた",
-    "当た", "わた", "渡", "かけ", "掛け", "従", "した", "伴", "とも", "応じ",
-};
 
 }  // namespace
 
@@ -66,7 +54,8 @@ void TeSequence(Flusher& f) {
         if (e == nullptr) continue;
         const std::string_view d = ItemText(it);
         if (e->dst != "6" || (!d.ends_with("て") && !d.ends_with("で")) || d.ends_with("ないで") ||
-            !InSet(kSequenceVerbs, output::Lemma(it->EntryText(it->selected), f.families)) || !PredicateFollows(it)) {
+            !dict::InClass("ko-verb.sequence", output::Lemma(it->EntryText(it->selected), f.families)) ||
+            !PredicateFollows(it)) {
             continue;
         }
         it->AssignDirectSlot(it->DirectIndex(), "1고");
@@ -75,15 +64,6 @@ void TeSequence(Flusher& f) {
 
 // Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:
 // 와 줘서 기뻐, 도와줘서 살았다). The て of 借りる (この場を借りて 이 자리를 빌려) keeps its form.
-constexpr std::string_view kThanks[] = {
-    "ありがと", "有難", "有り難", "感謝", "すみません", "済みません", "すいません", "申し訳", "ごめん",
-    "嬉し", "うれし", "助か", "たすか", "良かっ", "よかっ", "幸せ", "しあわせ", "残念", "悲し", "かなし",
-    "寂し", "さみし", "さびし", "安心", "ほっと",
-};
-
-// Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に
-// 嬉しい).
-constexpr std::string_view kDegree[] = {"本当に", "ほんとに", "ほんとうに", "とても", "すごく", "凄く", "すっごく", "めちゃくちゃ"};
 
 void TeThanks(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -92,7 +72,7 @@ void TeThanks(Flusher& f) {
         if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
         const Item* n = it->next;
         if (n != nullptr && n->group->surface == "、") n = n->next;
-        if (n != nullptr && std::any_of(std::begin(kDegree), std::end(kDegree), [&](std::string_view d) {
+        if (n != nullptr && std::ranges::any_of(dict::ClassMembers("adverb.degree-feeling"), [&](std::string_view d) {
                 return n->group->surface == d;
             })) {
             n = n->next;
@@ -106,22 +86,19 @@ void TeThanks(Flusher& f) {
                                                      a->group->surface == "に" || a->group->surface == "の")) {
             continue;
         }
-        if (std::any_of(std::begin(kThanks), std::end(kThanks), [&](std::string_view t) { return next.starts_with(t); })) {
+        if (std::ranges::any_of(dict::ClassMembers("word.thanks"),
+                                [&](std::string_view t) { return next.starts_with(t); })) {
             it->AssignDirectSlot(it->DirectIndex(), "6서");
         }
     }
 }
 
-// Verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
-constexpr std::string_view kMeansVerbs[] = {
-    "使", "用い", "利用し", "見習", "真似", "通じ", "介し", "頼", "生か", "活か", "込め", "合わせ", "伴", "装", "模し",
-};
-
 void TeObjectComma(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
         const std::string_view stem = it->group->surface;
-        if (std::any_of(std::begin(kMeansVerbs), std::end(kMeansVerbs), [&](std::string_view v) { return stem.ends_with(v); })) {
+        if (std::ranges::any_of(dict::ClassMembers("verb.means"),
+                                [&](std::string_view v) { return stem.ends_with(v); })) {
             continue;
         }
         const Item* p = it->prev;
@@ -157,7 +134,8 @@ void VerseTe(Flusher& f) {
     const Item* p = it->prev;
     const char cls = At(p->Code(p->selected), 0);
     const std::string_view pSurface = p->group->surface;
-    const bool particleBefore = Has(" に と を ", " " + std::string(pSurface) + " ") && InSet(kParticleVerbs, surface);
+    const bool particleBefore =
+        Has(" に と を ", " " + std::string(pSurface) + " ") && dict::InClass("stem.compound-particle", surface);
     if ((cls != '1' && cls != '2' && !(p->detail->Yougo() && (p->DirectSurface() == "もの" || p->DirectSurface() == "こと"))) ||
         particleBefore || (pSurface == "と" && surface == "し") || pSurface == "って" || f.w.Span(p->tokenIndex) != 0) {
         return;

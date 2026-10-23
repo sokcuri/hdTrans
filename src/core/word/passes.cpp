@@ -4,6 +4,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/word/conjugation.h"
 #include "core/word/flush.h"
 #include "core/word/kana.h"
@@ -64,9 +65,6 @@ bool PhraseFollowsNi(Item* ni) {
     }
     return true;
 }
-
-// Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
-constexpr std::string_view kTeAuxiliaryStems[] = {"い", "み", "き", "しま"};
 
 struct Phrase {
     std::string_view text;
@@ -179,7 +177,7 @@ Phrase FindPhrase(Flusher& f) {
                 if (const Item* prev = it->prev;
                     prev != nullptr && prev->detail->Yougo() && At(prev->Code(0), 0) == '4' &&
                     (prev->DirectSurface().ends_with(kJaTe) || prev->DirectSurface().ends_with(kJaDe)) &&
-                    InSet(kTeAuxiliaryStems, it->group->surface)) {
+                    dict::InClass("aux.te-kana-stem", it->group->surface)) {
                     break;
                 }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());

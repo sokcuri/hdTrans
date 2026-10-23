@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/dict/classes.h"
 #include "core/text/utf8.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/classify.h"
@@ -149,15 +150,10 @@ bool SaysOrNegates(std::string_view left, std::string_view query) {
 }  // namespace
 
 bool NounBefore(std::string_view text) {
-    // Pronouns and nouns that end in hiragana (予定通り).
-    static constexpr std::string_view kPronouns[] = {"これ", "それ", "あれ", "どれ", "ここ", "そこ", "あそこ",
-                                                     "どこ", "だれ", "みんな", "こいつ", "そいつ", "あいつ", "わたし",
-                                                     "あたし", "あなた", "おれ", "ぼく", "きみ", "かれ", "かのじょ",
-                                                     "通り", "どおり"};
     const text::Rune last = DecodeLastRune(text);
     const char32_t r = last.cp;
     if (r >= 0x3041 && r <= 0x309F) {
-        for (const std::string_view p : kPronouns) {
+        for (const std::string_view p : dict::ClassMembers("pronoun.hiragana-end")) {
             if (text.ends_with(p)) return true;
         }
         return false;

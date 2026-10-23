@@ -1297,7 +1297,7 @@ void SeeAnd(Flusher& f) {
         if (const Item* n = it->next; n != nullptr) {
             const std::string_view next = n->group->surface;
             bool stop = next.starts_with("」") || next.starts_with("』");
-            for (const std::string_view a : kTeAuxiliaries) stop = stop || next.starts_with(a);
+            for (const std::string_view a : dict::ClassMembers("aux.te-start")) stop = stop || next.starts_with(a);
             if (stop || Has(kSeeAndFollowers, " " + std::string(next) + " ")) continue;
         }
         it->AssignDirectSlot(it->DirectIndex(), "1고");

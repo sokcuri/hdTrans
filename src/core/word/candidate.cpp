@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "core/dict/char_readings.h"
+#include "core/dict/classes.h"
 #include "core/output/cleanup.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
@@ -851,11 +852,11 @@ bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::str
             continue;
         }
         const std::string_view after = rest.substr(r->source.size());
-        constexpr std::string_view kFollowers[] = {"し", "す", "さ", "せ", "でき", "を", "が", "の", "に", "は", "も", "で", "と", "へ"};
         const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
         const bool mark = next != 0 && !text::IsKanji(next) && (next < U'\u3041' || next > U'\u30FF');
         if (after.empty() || mark ||
-            std::any_of(std::begin(kFollowers), std::end(kFollowers), [&](std::string_view f) { return after.starts_with(f); })) {
+            std::ranges::any_of(dict::ClassMembers("follower.verbal-noun"),
+                                [&](std::string_view f) { return after.starts_with(f); })) {
             return true;
         }
     }
@@ -1056,10 +1057,6 @@ bool Worker::StartsWithHonorific(std::string_view text) {
 }
 
 Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
-    // Words that start with an honorific: after a name they are the title.
-    static constexpr std::string_view kTitleWords[] = {"殿下", "殿方", "様子", "様々", "君主", "君臨", "氏族"};
-    // The Korean endings after which a following honorific is written as nothing.
-    static constexpr std::string_view kTitleEnds[] = {"님", "씨", "군", "양", "짱", "선배"};
     Item* name = parent;
     if (const Item* tail = chain.tail; name == nullptr && tail != nullptr) {
         if ((tail->tokenIndex == token && tail->start + tail->length == cursor) ||
@@ -1074,7 +1071,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     const bool person = !name->group->entries.empty() && std::string_view(name->group->entries[0]->attr).starts_with("QPN");
     if (!name->IsNameItem() && !(person && NicknameSuke(text))) return nullptr;
     bool titleWord = false;
-    for (const std::string_view t : kTitleWords) {
+    for (const std::string_view t : dict::ClassMembers("noun.title-word")) {
         if (text.starts_with(t)) titleWord = true;
     }
     std::string_view key, kr;
@@ -1091,7 +1088,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     }
     if (key.empty()) return nullptr;
     const std::string_view nameText = name->group->entries[0]->dst;
-    for (const std::string_view end : kTitleEnds) {
+    for (const std::string_view end : dict::ClassMembers("ko.title-end")) {
         if (nameText.ends_with(end)) kr = {};
     }
     Entry* e = NewEntry();

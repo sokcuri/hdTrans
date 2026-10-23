@@ -1,8 +1,12 @@
 // Word classes the passes test words against (dict::InClass, dict::ClassMembers):
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
+//= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+//= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
+//= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
+//= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
 //= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
@@ -17,8 +21,10 @@
 //= follower.kata-noun	What may follow a katakana noun: particles, the copula and honorifics (イカなんて, イカを).
 //= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
 //= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
+//= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
+//= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), which the rules about familiar address look for alone.
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
@@ -37,12 +43,16 @@
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
+//= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
+//= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
+//= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
+//= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
@@ -53,22 +63,29 @@
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
+//= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
+//= particle.phrase	Particles that, after the first character of an item, make a phrase that starts with a noun.
+//= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
+//= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
 //= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
+//= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
+//= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
 //= speech.male	Speech markers inside an utterance that show the speaker to be a man (俺, だぜ, 兄上).
 //= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
 //= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
@@ -83,6 +100,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
@@ -106,6 +124,16 @@
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
+//= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
+
+adverb.degree-feeling	本当に
+adverb.degree-feeling	ほんとに
+adverb.degree-feeling	ほんとうに
+adverb.degree-feeling	とても
+adverb.degree-feeling	すごく
+adverb.degree-feeling	凄く
+adverb.degree-feeling	すっごく
+adverb.degree-feeling	めちゃくちゃ
 
 adverb.gradual	次第
 adverb.gradual	徐々
@@ -123,6 +151,39 @@ aru.after-de	あり
 aru.after-de	あっ
 aru.after-de	あれ
 aru.after-de	あろ
+
+aux.bound-pause	かも
+aux.bound-pause	だろう
+aux.bound-pause	でしょう
+
+aux.te-kana-stem	い
+aux.te-kana-stem	み
+aux.te-kana-stem	き
+aux.te-kana-stem	しま
+
+aux.te-start	い
+aux.te-start	居
+aux.te-start	お
+aux.te-start	置
+aux.te-start	く
+aux.te-start	下さ
+aux.te-start	来
+aux.te-start	き
+aux.te-start	み
+aux.te-start	見
+aux.te-start	も
+aux.te-start	貰
+aux.te-start	しま
+aux.te-start	仕舞
+aux.te-start	ほし
+aux.te-start	欲し
+aux.te-start	あ
+aux.te-start	や
+aux.te-start	いただ
+aux.te-start	頂
+aux.te-start	差し
+aux.te-start	行
+aux.te-start	ちょうだい
 
 bound.column-start	です
 bound.column-start	でし
@@ -297,6 +358,14 @@ follower.kata-verb	けど
 follower.kata-verb	し
 follower.kata-verb	ぜ
 
+follower.not-predicate-start	で
+follower.not-predicate-start	じゃ
+follower.not-predicate-start	に
+follower.not-predicate-start	を
+follower.not-predicate-start	が
+follower.not-predicate-start	へ
+follower.not-predicate-start	っ
+
 follower.noun-not-stem	だ
 follower.noun-not-stem	で
 follower.noun-not-stem	じゃ
@@ -322,6 +391,21 @@ follower.stem	なかっ
 follower.stem	は
 follower.stem	も
 follower.stem	に
+
+follower.verbal-noun	し
+follower.verbal-noun	す
+follower.verbal-noun	さ
+follower.verbal-noun	せ
+follower.verbal-noun	でき
+follower.verbal-noun	を
+follower.verbal-noun	が
+follower.verbal-noun	の
+follower.verbal-noun	に
+follower.verbal-noun	は
+follower.verbal-noun	も
+follower.verbal-noun	で
+follower.verbal-noun	と
+follower.verbal-noun	へ
 
 honorific.constraint	さん
 honorific.constraint	さま
@@ -611,6 +695,37 @@ ko-verb.holding	눕다
 ko-verb.holding	서다
 ko-verb.holding	앞두다
 
+ko-verb.sequence	먹다
+ko-verb.sequence	마시다
+ko-verb.sequence	읽다
+ko-verb.sequence	씻다
+ko-verb.sequence	듣다
+ko-verb.sequence	닦다
+ko-verb.sequence	입다
+ko-verb.sequence	벗다
+ko-verb.sequence	신다
+ko-verb.sequence	끄다
+ko-verb.sequence	닫다
+ko-verb.sequence	끝내다
+ko-verb.sequence	마치다
+ko-verb.sequence	노래하다
+ko-verb.sequence	놀다
+ko-verb.sequence	자다
+ko-verb.sequence	쉬다
+ko-verb.sequence	샤워하다
+ko-verb.sequence	목욕하다
+ko-verb.sequence	세수하다
+ko-verb.sequence	양치질하다
+ko-verb.sequence	공부하다
+ko-verb.sequence	일하다
+ko-verb.sequence	청소하다
+ko-verb.sequence	요리하다
+ko-verb.sequence	식사하다
+ko-verb.sequence	춤추다
+ko-verb.sequence	숙제하다
+ko-verb.sequence	운동하다
+ko-verb.sequence	산책하다
+
 ko.doing	하
 ko.doing	할
 ko.doing	한
@@ -622,6 +737,13 @@ ko.doing	될
 ko.doing	된
 ko.doing	됐
 ko.doing	돼
+
+ko.title-end	님
+ko.title-end	씨
+ko.title-end	군
+ko.title-end	양
+ko.title-end	짱
+ko.title-end	선배
 
 mark.close-after-space	」
 mark.close-after-space	』
@@ -680,6 +802,40 @@ noun.attribute	機嫌
 noun.attribute	具合
 noun.attribute	調子
 
+noun.bound-pause	こと
+noun.bound-pause	事
+noun.bound-pause	もの
+noun.bound-pause	物
+noun.bound-pause	の
+noun.bound-pause	ん
+noun.bound-pause	ところ
+noun.bound-pause	所
+noun.bound-pause	とこ
+noun.bound-pause	わけ
+noun.bound-pause	訳
+noun.bound-pause	はず
+noun.bound-pause	筈
+noun.bound-pause	つもり
+noun.bound-pause	よう
+noun.bound-pause	ため
+noun.bound-pause	為
+noun.bound-pause	まま
+noun.bound-pause	ほう
+noun.bound-pause	方
+noun.bound-pause	とき
+noun.bound-pause	時
+noun.bound-pause	ころ
+noun.bound-pause	頃
+noun.bound-pause	みたい
+noun.bound-pause	らし
+noun.bound-pause	そう
+noun.bound-pause	まで
+noun.bound-pause	ほど
+noun.bound-pause	くらい
+noun.bound-pause	ぐらい
+noun.bound-pause	だけ
+noun.bound-pause	ばかり
+
 noun.casual-declaration	宣言
 noun.casual-declaration	却下
 noun.casual-declaration	許可
@@ -707,6 +863,33 @@ noun.clause	みたい
 noun.clause	はず
 noun.clause	わけ
 noun.clause	訳
+
+noun.dependent-ellipsis	こと
+noun.dependent-ellipsis	事
+noun.dependent-ellipsis	もの
+noun.dependent-ellipsis	物
+noun.dependent-ellipsis	の
+noun.dependent-ellipsis	ん
+noun.dependent-ellipsis	はず
+noun.dependent-ellipsis	筈
+noun.dependent-ellipsis	ところ
+noun.dependent-ellipsis	所
+noun.dependent-ellipsis	わけ
+noun.dependent-ellipsis	訳
+noun.dependent-ellipsis	よう
+noun.dependent-ellipsis	様
+noun.dependent-ellipsis	つもり
+noun.dependent-ellipsis	ため
+noun.dependent-ellipsis	為
+noun.dependent-ellipsis	まま
+noun.dependent-ellipsis	ほう
+noun.dependent-ellipsis	方
+noun.dependent-ellipsis	とき
+noun.dependent-ellipsis	時
+noun.dependent-ellipsis	うち
+noun.dependent-ellipsis	くらい
+noun.dependent-ellipsis	ぐらい
+noun.dependent-ellipsis	ほど
 
 noun.do-angle	角度
 noun.do-angle	傾斜
@@ -1024,6 +1207,14 @@ noun.time-end	当初
 noun.time-end	瞬間
 noun.time-end	今
 
+noun.title-word	殿下
+noun.title-word	殿方
+noun.title-word	様子
+noun.title-word	様々
+noun.title-word	君主
+noun.title-word	君臨
+noun.title-word	氏族
+
 particle.after-name	は
 particle.after-name	が
 particle.after-name	を
@@ -1068,6 +1259,29 @@ particle.hodo-degree	だ
 particle.hodo-degree	で
 particle.hodo-degree	まで
 
+particle.phrase	が
+particle.phrase	を
+particle.phrase	は
+particle.phrase	に
+particle.phrase	で
+particle.phrase	と
+particle.phrase	も
+particle.phrase	へ
+particle.phrase	の
+
+particle.wonder	を
+particle.wonder	が
+particle.wonder	に
+particle.wonder	へ
+particle.wonder	で
+particle.wonder	と
+particle.wonder	の
+particle.wonder	は
+particle.wonder	から
+particle.wonder	まで
+particle.wonder	くらい
+particle.wonder	ぐらい
+
 pronoun.first-person-genitive	私
 pronoun.first-person-genitive	僕
 pronoun.first-person-genitive	俺
@@ -1079,6 +1293,30 @@ pronoun.first-person-genitive	ぼく
 pronoun.first-person-genitive	おれ
 pronoun.first-person-genitive	ボク
 pronoun.first-person-genitive	オレ
+
+pronoun.hiragana-end	これ
+pronoun.hiragana-end	それ
+pronoun.hiragana-end	あれ
+pronoun.hiragana-end	どれ
+pronoun.hiragana-end	ここ
+pronoun.hiragana-end	そこ
+pronoun.hiragana-end	あそこ
+pronoun.hiragana-end	どこ
+pronoun.hiragana-end	だれ
+pronoun.hiragana-end	みんな
+pronoun.hiragana-end	こいつ
+pronoun.hiragana-end	そいつ
+pronoun.hiragana-end	あいつ
+pronoun.hiragana-end	わたし
+pronoun.hiragana-end	あたし
+pronoun.hiragana-end	あなた
+pronoun.hiragana-end	おれ
+pronoun.hiragana-end	ぼく
+pronoun.hiragana-end	きみ
+pronoun.hiragana-end	かれ
+pronoun.hiragana-end	かのじょ
+pronoun.hiragana-end	通り
+pronoun.hiragana-end	どおり
 
 pronoun.humble-first-person	私
 pronoun.humble-first-person	わたし
@@ -1144,6 +1382,85 @@ question.copula	なぜ
 question.copula	どこ
 question.copula	いつ
 question.copula	どれ
+
+question.wonder	何
+question.wonder	なに
+question.wonder	なん
+question.wonder	誰
+question.wonder	だれ
+question.wonder	どこ
+question.wonder	いつ
+question.wonder	なぜ
+question.wonder	何故
+question.wonder	どう
+question.wonder	どうして
+question.wonder	どうやって
+question.wonder	どっち
+question.wonder	どちら
+question.wonder	どれ
+question.wonder	どれくらい
+question.wonder	どれほど
+question.wonder	どれだけ
+question.wonder	どんな
+question.wonder	どんなに
+question.wonder	どの
+question.wonder	どのくらい
+question.wonder	どのように
+question.wonder	どのような
+question.wonder	どういう
+question.wonder	どういった
+question.wonder	いかなる
+question.wonder	一体
+question.wonder	いったい
+question.wonder	いくつ
+question.wonder	いくら
+
+question.wonder-not	何か
+question.wonder-not	何も
+question.wonder-not	何でも
+question.wonder-not	何だか
+question.wonder-not	何とか
+question.wonder-not	何となく
+question.wonder-not	何て
+question.wonder-not	何卒
+question.wonder-not	何気
+question.wonder-not	なにか
+question.wonder-not	なにも
+question.wonder-not	なんか
+question.wonder-not	なんて
+question.wonder-not	なんだか
+question.wonder-not	なんとか
+question.wonder-not	なんでも
+question.wonder-not	なんと
+question.wonder-not	なんだ
+question.wonder-not	誰か
+question.wonder-not	誰も
+question.wonder-not	誰でも
+question.wonder-not	だれか
+question.wonder-not	だれも
+question.wonder-not	どこか
+question.wonder-not	どこも
+question.wonder-not	どこでも
+question.wonder-not	いつか
+question.wonder-not	いつも
+question.wonder-not	いつでも
+question.wonder-not	いつの間
+question.wonder-not	なぜか
+question.wonder-not	何故か
+question.wonder-not	どうか
+question.wonder-not	どうも
+question.wonder-not	どうせ
+question.wonder-not	どうしても
+question.wonder-not	どうぞ
+question.wonder-not	どうにか
+question.wonder-not	どうやら
+question.wonder-not	どうでも
+question.wonder-not	どうにも
+question.wonder-not	どれも
+question.wonder-not	どれか
+question.wonder-not	どれでも
+question.wonder-not	いくらか
+question.wonder-not	いくらでも
 
 speech.female	わたくし
 speech.female	ですわ
@@ -1267,6 +1584,34 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
+
+stem.compound-particle	つ
+stem.compound-particle	対し
+stem.compound-particle	よ
+stem.compound-particle	因
+stem.compound-particle	依
+stem.compound-particle	と
+stem.compound-particle	関し
+stem.compound-particle	通し
+stem.compound-particle	お
+stem.compound-particle	於
+stem.compound-particle	めぐ
+stem.compound-particle	巡
+stem.compound-particle	際し
+stem.compound-particle	沿
+stem.compound-particle	向け
+stem.compound-particle	比べ
+stem.compound-particle	あた
+stem.compound-particle	当た
+stem.compound-particle	わた
+stem.compound-particle	渡
+stem.compound-particle	かけ
+stem.compound-particle	掛け
+stem.compound-particle	従
+stem.compound-particle	した
+stem.compound-particle	伴
+stem.compound-particle	とも
+stem.compound-particle	応じ
 
 stem.request	くださ
 stem.request	下さ
@@ -1432,6 +1777,22 @@ verb.casual-state	すぎ
 verb.casual-state	過ぎ
 verb.casual-state	見え
 verb.casual-state	聞こえ
+
+verb.means	使
+verb.means	用い
+verb.means	利用し
+verb.means	見習
+verb.means	真似
+verb.means	通じ
+verb.means	介し
+verb.means	頼
+verb.means	生か
+verb.means	活か
+verb.means	込め
+verb.means	合わせ
+verb.means	伴
+verb.means	装
+verb.means	模し
 
 verb.naming	呼ぶ
 verb.naming	書く
@@ -1962,3 +2323,29 @@ word.supposing	見なす
 word.supposing	称する
 word.supposing	形容
 word.supposing	断定
+
+word.thanks	ありがと
+word.thanks	有難
+word.thanks	有り難
+word.thanks	感謝
+word.thanks	すみません
+word.thanks	済みません
+word.thanks	すいません
+word.thanks	申し訳
+word.thanks	ごめん
+word.thanks	嬉し
+word.thanks	うれし
+word.thanks	助か
+word.thanks	たすか
+word.thanks	良かっ
+word.thanks	よかっ
+word.thanks	幸せ
+word.thanks	しあわせ
+word.thanks	残念
+word.thanks	悲し
+word.thanks	かなし
+word.thanks	寂し
+word.thanks	さみし
+word.thanks	さびし
+word.thanks	安心
+word.thanks	ほっと
