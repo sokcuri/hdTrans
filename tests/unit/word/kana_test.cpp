@@ -36,8 +36,8 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("スムーズ"), std::string("스무즈"));
     HD_CHECK_EQ(Katakana("チーム"), std::string("팀"));
     // ム closes the syllable before it unless ー or a small vowel follows.
-    HD_CHECK_EQ(Katakana("ネアムーン"), std::string("네아문"));
-    HD_CHECK_EQ(Katakana("アムーズ"), std::string("아무즈"));
+    HD_CHECK_EQ(Katakana("リアムーゼ"), std::string("리아무제"));
+    HD_CHECK_EQ(Katakana("アムーレ"), std::string("아무레"));
     HD_CHECK_EQ(Katakana("ゲーム"), std::string("게임"));
     HD_CHECK_EQ(Katakana("ハムスター"), std::string("함스타"));
     // A syllable read with ャ, ュ or ョ takes the final of ン, ッ or ム after it; ジャ, ジュ,
