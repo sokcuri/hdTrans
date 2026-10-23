@@ -964,11 +964,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
-            // A verbal noun (Hd, a kanji compound or a katakana word) joins the する or できる after it
-            // read with 하다 or 되다 (即答する 즉답하다, キスしたい 키스하고 싶다, 我慢できない
-            // 자제할 수 없다).
+            // A verbal noun (Hd, a kanji compound or a katakana word) joins the する, なさる or できる
+            // after it read with 하다 or 되다 (即答する 즉답하다, キスしたい 키스하고 싶다, 我慢できない
+            // 자제할 수 없다, 購入なさる 구입하신다).
             constexpr std::string_view kSuru[] = {"する", "し", "さ", "せ", "すれ", "しろ", "しよ"};
-            constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
+            constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき", "なさ"};
             constexpr std::string_view kDoing[] = {"하", "할", "한", "해", "했", "함", "되", "될", "된", "됐", "돼"};
             // A compound of two or more kanji before する is a verbal noun (即答する 즉답하다),
             // unless it tells a time, a frequency or an amount, which stays an adverb apart from
