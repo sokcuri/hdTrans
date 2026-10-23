@@ -41,7 +41,32 @@ env:
   HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          filter: blob:none
+          sparse-checkout: tools/release
+          persist-credentials: false
+      - name: Decide what to build
+        id: gate
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { buildGate } = await import(`${process.env.GITHUB_WORKSPACE}/tools/release/build-gate.mjs`);
+            const gate = await buildGate({ github, context });
+            core.info(`Build gate: ${gate.reason}`);
+            core.setOutput('run', String(gate.run));
+            await core.summary.addRaw(`Build gate: ${gate.reason}\n`).write();
+
   release-tools:
+    needs: gate
+    if: ${{ !cancelled() && needs.gate.outputs.run != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -54,6 +79,8 @@ jobs:
 
   build:
     name: ${{ matrix.preset }}
+    needs: gate
+    if: ${{ !cancelled() && needs.gate.outputs.run != 'false' }}
     strategy:
       fail-fast: false
       matrix:

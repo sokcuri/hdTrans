@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import { buildGate, releaseBot, releaseFiles, versionCommit } from './build-gate.mjs';
 import { npmAssetName } from './publication.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -207,4 +208,103 @@ test('only the serialized web deploy job sees the deploy secrets and the example
   assert.match(deployJob, /- name: Deploy\n        if: env.DRY_RUN != 'true' && env.SKIP_DEPLOY != 'true'/);
   assert.match(deployWeb, /^permissions:\n  contents: read\n/m);
   assert.doesNotMatch(deployWeb, /contents: write|id-token|secrets: inherit/);
+});
+
+function gitFixture(t) {
+  const dir = mkdtempSync(join(tmpdir(), 'hdtrans-gate-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const env = { ...process.env, GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_SYSTEM: '/dev/null' };
+  const git = (...args) => {
+    const result = spawnSync('git', args, { cwd: dir, env, encoding: 'utf8' });
+    if (result.status !== 0) throw new Error(result.stderr);
+    return result.stdout.trim();
+  };
+  const write = (path, text) => {
+    mkdirSync(join(dir, path, '..'), { recursive: true });
+    writeFileSync(join(dir, path), text);
+  };
+  const commit = (message, { name = 'Someone', email = 'someone@example.com' } = {}) => {
+    git('add', '-A');
+    git('-c', `user.name=${name}`, '-c', `user.email=${email}`, 'commit', '-q', '--allow-empty', '-m', message);
+    return git('rev-parse', 'HEAD');
+  };
+  git('init', '-q', '-b', 'main');
+  git('config', 'user.name', 'Someone');
+  git('config', 'user.email', 'someone@example.com');
+  write('src/a.cpp', 'int a;\n');
+  for (const path of releaseFiles) write(path, '0.1.0\n');
+  return { dir, git, write, commit };
+}
+
+function versionCommitFixture(t, { changes = releaseFiles, identity = releaseBot, extraMessage = '' } = {}) {
+  const fixture = gitFixture(t);
+  const source = fixture.commit('fix: something (#1)');
+  for (const path of changes) fixture.write(path, '0.1.1\n');
+  const sha = fixture.commit(`chore(main): release 0.1.1\n\nRelease-Source: ${source}\nRelease-Build: 42${extraMessage}`, identity);
+  const context = { eventName: 'push', ref: 'refs/heads/main', sha, payload: { before: source, after: sha } };
+  return { ...fixture, source, sha, context };
+}
+
+test('the release bot version commit push to main skips the matrix', async t => {
+  const { git, source, context } = versionCommitFixture(t);
+  assert.equal(versionCommit({ payload: context.payload, sha: context.sha, git }), source);
+  const gate = await buildGate({ context, git });
+  assert.equal(gate.run, false);
+  assert.match(gate.reason, /version commit/);
+});
+
+test('anything else about a version-like commit builds everything', async t => {
+  const cases = {
+    'another author': versionCommitFixture(t, { identity: { name: 'Someone', email: releaseBot.email } }),
+    'another email': versionCommitFixture(t, { identity: { name: releaseBot.name, email: 'bot@example.com' } }),
+    'a source file': versionCommitFixture(t, { changes: [...releaseFiles, 'src/a.cpp'] }),
+    'no change': versionCommitFixture(t, { changes: [] }),
+    'another message': versionCommitFixture(t, { extraMessage: '\nExtra: 1' }),
+  };
+  for (const [name, { git, context }] of Object.entries(cases)) {
+    assert.equal((await buildGate({ context, git })).run, true, name);
+  }
+  const { git, context, source, sha } = versionCommitFixture(t);
+  const variants = {
+    'a develop push': { ...context, ref: 'refs/heads/develop' },
+    'a tag push': { ...context, ref: 'refs/tags/v0.1.1' },
+    'a pull request': { ...context, eventName: 'pull_request' },
+    'a manual run': { ...context, eventName: 'workflow_dispatch' },
+    'a push of several commits': { ...context, payload: { before: '1'.repeat(40), after: sha } },
+    'another head': { ...context, sha: source, payload: { before: source, after: source } },
+  };
+  for (const [name, variant] of Object.entries(variants)) {
+    assert.equal((await buildGate({ context: variant, git })).run, true, name);
+  }
+  const broken = await buildGate({ context, git: () => { throw new Error('no git'); } });
+  assert.equal(broken.run, true);
+  assert.match(broken.reason, /no git/);
+});
+
+test('a version commit on a merge of two parents builds everything', async t => {
+  const fixture = gitFixture(t);
+  const base = fixture.commit('base');
+  fixture.git('checkout', '-q', '-b', 'side');
+  fixture.write('src/b.cpp', 'int b;\n');
+  fixture.commit('side');
+  fixture.git('checkout', '-q', 'main');
+  fixture.git('merge', '-q', '--no-ff', '--no-commit', 'side');
+  for (const path of releaseFiles) fixture.write(path, '0.1.1\n');
+  fixture.git('add', '--', ...releaseFiles);
+  const sha = fixture.commit(`chore(main): release 0.1.1\n\nRelease-Source: ${base}\nRelease-Build: 42`, releaseBot);
+  assert.equal(fixture.git('show', '-s', '--format=%P', 'HEAD').split(' ').length, 2);
+  const context = { eventName: 'push', ref: 'refs/heads/main', sha, payload: { before: base, after: sha } };
+  assert.equal((await buildGate({ context, git: fixture.git })).run, true);
+});
+
+test('the gate runs first and only a definite no skips the release tools and the matrix', () => {
+  const gate = build.slice(build.indexOf('\n  gate:\n'), build.indexOf('\n  release-tools:\n'));
+  assert.match(gate, /fetch-depth: 2/);
+  assert.match(gate, /buildGate\(\{ github, context \}\)/);
+  assert.doesNotMatch(gate, /secrets\.|contents: write/);
+  for (const job of ['release-tools', 'build']) {
+    const body = build.slice(build.indexOf(`\n  ${job}:\n`));
+    assert.match(body, /^    needs: gate\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' \}\}$/m, job);
+  }
+  assert.doesNotMatch(build + publisher, /skip ci/);
 });

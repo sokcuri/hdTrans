@@ -5,12 +5,9 @@ import { GitHub, Manifest } from 'release-please';
 import { Version } from 'release-please/build/src/version.js';
 import { parseConventionalCommits } from 'release-please/build/src/commit.js';
 import { DefaultVersioningStrategy } from 'release-please/build/src/versioning-strategies/default.js';
+import { releaseBot, releaseFiles } from './build-gate.mjs';
 import { findRelease } from './publication.mjs';
 
-export const releaseFiles = [
-  'CHANGELOG.md', '.release-please-manifest.json', 'release-version.txt',
-  'npm/package.json', 'npm/package-lock.json',
-];
 const stableVersion = /^\d+\.\d+\.\d+$/;
 
 export function validateBuild(run, repo, workflowId) {
@@ -175,7 +172,7 @@ export async function releaseMain({ github, repo, runId, token, root = process.c
     if (!await isCurrent(source)) return;
     version = applyCandidate(root, candidate);
     git('add', '--', ...releaseFiles);
-    git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
+    git('-c', `user.name=${releaseBot.name}`, '-c', `user.email=${releaseBot.email}`,
       'commit', '-m', commitMessage(version, source, runId));
     releaseSha = git('rev-parse', 'HEAD');
     if (!await isCurrent(source)) return;
@@ -210,7 +207,7 @@ export async function releaseMain({ github, repo, runId, token, root = process.c
         throw new Error(`${tag} is not the expected local annotated tag.`);
       }
     } else {
-      git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
+      git('-c', `user.name=${releaseBot.name}`, '-c', `user.email=${releaseBot.email}`,
         'tag', '-a', tag, releaseSha, '-m', `Release ${tag}`);
     }
     if (!await isCurrent(releaseSha)) return;
