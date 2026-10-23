@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+rewrite:result-state-komu	彼女に惚れ込んでいる。	그녀에게 반해 있다.	fix	rewrites
+rewrite:result-state-komu	すっかり老け込んでいた。	완전히 늙어 있었다.	fix	rewrites
+rewrite:result-state-komu	床に倒れこんでいた。	바닥에 쓰러져 있었다.	keep	rewrites
+rewrite:result-state-komu	詰め込んでいる。	담고 있다.	keep	rewrites

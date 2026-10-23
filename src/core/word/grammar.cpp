@@ -745,7 +745,7 @@ constexpr std::string_view kResultVerbs[] = {
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
     "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌", "取り残",
     "座り込", "座りこ", "しゃがみ込", "しゃがみこ", "へたり込", "へたりこ", "屈み込", "かがみ込", "倒れ込", "倒れこ",
-    "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ", "引っ掛か", "寄り掛か", "もたれ掛か",
+    "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ", "引っ掛か", "寄り掛か", "もたれ掛か", "老け",
 };
 
 // Whether stem is a result verb of kResultVerbs, or a compound or phrase that ends in one of
@@ -832,22 +832,43 @@ bool GradualBefore(const Item* it) {
 // The particles and punctuation of seeAnd (before the 見る て they do not change).
 constexpr std::string_view kSeeAndFollowers = " は も を が の に と で や か よ ね な ";
 
+// The verb in its 連用形 (the bare stem or its one i-row kana) that an unlisted 込む, item n,
+// follows in the same token (詰め込む, 惚れ込んでいる); nullptr when n is no such 込む.
+Item* InwardVerb(Item* n) {
+    Item* it = n->prev;
+    if (it == nullptr || n->tokenIndex != it->tokenIndex || n->selected < 0 || n->DirectIndex() < 0 ||
+        n->detail->cls != kDetailVerb || n->detail->record != 0) {
+        return nullptr;
+    }
+    const std::string_view surface = n->group->surface;
+    if (surface != "込" && !(surface == "こ" && At(n->Code(n->selected), 2) == '5')) return nullptr;
+    if (it->selected < 0 || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) return nullptr;
+    const std::string_view stem = it->DirectSurface();
+    constexpr std::string_view kIRow = "いきしちにひみりぎじび";
+    if (!stem.empty() && (text::RuneCount(stem) != 1 || kIRow.find(stem) == std::string_view::npos)) return nullptr;
+    return it;
+}
+
 }  // namespace
 
 void ResultState(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
-        const std::string_view stem = it->group->surface;
-        const char c1 = At(it->Code(it->selected), 1);
+        // An unlisted 込む holds the ending of the verb before it, which decides (惚れ込んでいる
+        // 반해 있다); InwardAuxiliary moves the ending onto that verb later.
+        const Item* v = InwardVerb(it);
+        if (v == nullptr) v = it;
+        const std::string_view stem = v->group->surface;
+        const char c1 = At(v->Code(v->selected), 1);
         const bool object = c1 >= '3' && c1 <= '6';
-        if ((stem == "な" || stem == "にな") && GradualBefore(it)) continue;
-        if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
-        const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
-        const bool past = it->detail->record == 0 && !it->lexical && InSet(kPastResultVerbs, stem);
-        const bool state = past || (it->detail->record == 0 && !it->lexical && (ResultVerbStem(stem) || nounPassive) && !object) ||
-                           ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem)) ||
-                           (it->detail->record <= 1 && GrammarCode(it->GAttr(it->selected), "Dx") &&
-                            !it->EntryText(it->selected).ends_with("&HN@"));
+        if ((stem == "な" || stem == "にな") && GradualBefore(v)) continue;
+        if (stem == "にな" && v->prev != nullptr && InSet(kOngoingNouns, v->prev->group->surface)) continue;
+        const bool nounPassive = stem == "され" && v->prev != nullptr && InSet(kResultNouns, v->prev->group->surface);
+        const bool past = v->detail->record == 0 && !v->lexical && InSet(kPastResultVerbs, stem);
+        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(stem) || nounPassive) && !object) ||
+                           ((v->detail->record == 1 || v->lexical) && InSet(kResultPassives, stem)) ||
+                           (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
+                            !v->EntryText(v->selected).ends_with("&HN@"));
         if (!state) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
@@ -969,18 +990,8 @@ void SimpleAspect(Flusher& f) {
 
 void InwardAuxiliary(Flusher& f) {
     for (Item* n = f.w.chain.head; n != nullptr; n = n->next) {
-        Item* it = n->prev;
-        if (it == nullptr || n->tokenIndex != it->tokenIndex || n->selected < 0 || n->DirectIndex() < 0 ||
-            n->detail->cls != kDetailVerb || n->detail->record != 0) {
-            continue;
-        }
-        const std::string_view surface = n->group->surface;
-        if (surface != "込" && !(surface == "こ" && At(n->Code(n->selected), 2) == '5')) continue;
-        if (it->selected < 0 || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
-        // Only the 連用形: the bare stem or its one i-row kana (詰め込む, 打ち込む).
-        const std::string_view stem = it->DirectSurface();
-        constexpr std::string_view kIRow = "いきしちにひみりぎじび";
-        if (!stem.empty() && (text::RuneCount(stem) != 1 || kIRow.find(stem) == std::string_view::npos)) continue;
+        Item* it = InwardVerb(n);
+        if (it == nullptr) continue;
         const Entry* d = n->DirectEntry(n->DirectIndex());
         if (d == nullptr || d->dst.empty()) continue;
         it->AssignDirectSlot(it->DirectIndex(), d->dst);
