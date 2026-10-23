@@ -30090,8 +30090,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 そーそー	그래그래	A9D0			GN				jisjk:257574		
 そーだ	그래	N110			GN				jisjk:343327		
 そーだね	그래	A9D0			GN				jisjk:257486		
-そーなの	그래	C0H0			GN				jisjk:259142		
-そーなんだ	그렇군	C0H0			GN				jisjk:259061		
+そーなの	그래	E300			GN				jisjk:259142		
+そーなんだ	그렇군	E300			GN				jisjk:259061		
 そーゆー	그런	E0H0			GN				jisjk:123521		
 そ上	거슬러 올라&A1@	M429			GN				jisjk:138688		
 そ上に載せ	도마 위에 올려&F6@	M447			GN				jisjk:138012		
@@ -31181,7 +31181,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 だいじゅうりょうか	대중량화	N110		Hd	GN				jisjk:162496		
 だいじょうぶ	괜%C4@	G8U0			GN				jisjk:201659		
 だいじょうぶ	괜찮아	N110		J2J3J4	CT				jisjk:258559		
-だいじょぶ	괜%C4@	G880			GN				jisjk:257391		
+だいじょぶ	괜%C4@	G8U0			GN				jisjk:257391		
+だいじょぶ	괜찮아	N110		J2J3J4	CT				colloq:daijobu		
 だいすき	너무 좋아	E110			GN				jisjk:259766		
 だいすきにな	정말 좋아하게 &C6@	E468		Dx	GN				jisjk:341982		
 だいず	대두	N110	VFd		GN				jisjk:343742		
