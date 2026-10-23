@@ -308,3 +308,90 @@ test('the gate runs first and only a definite no skips the release tools and the
   }
   assert.doesNotMatch(build + publisher, /skip ci/);
 });
+
+function stepScript(workflow, name) {
+  const marker = `      - name: ${name}\n`;
+  const start = workflow.indexOf(marker);
+  assert.notEqual(start, -1, name);
+  const end = workflow.indexOf('\n      - ', start + marker.length);
+  const body = workflow.slice(start, end === -1 ? undefined : end);
+  return body.match(/        run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '');
+}
+
+function releaseFixture(t, { version = '1.2.3', npmName = `hdTrans-${version}-wasm.tgz`, engineVersion = version, tamper } = {}) {
+  const base = mkdtempSync(join(tmpdir(), 'hdtrans-web-release-'));
+  t.after(() => rmSync(base, { recursive: true, force: true }));
+  const assets = join(base, 'assets');
+  const stage = join(base, 'stage');
+  const work = join(base, 'work');
+  const bin = join(base, 'bin');
+  for (const dir of [assets, `${stage}/hdTrans-${version}`, `${stage}/package/dist`, work, bin]) mkdirSync(dir, { recursive: true });
+  writeFileSync(`${stage}/hdTrans-${version}/hdtrans`, '#!/bin/sh\n', { mode: 0o755 });
+  writeFileSync(`${stage}/hdTrans-${version}/README.txt`, 'readme\n');
+  writeFileSync(`${stage}/package/dist/hdtrans_engine.js`,
+    `export default async function create() { return { version: () => '${engineVersion}' }; }\n`);
+  writeFileSync(`${stage}/package/dist/hdtrans_engine.wasm`, 'wasm');
+  writeFileSync(`${stage}/package/dist/index.js`, '');
+  const tar = (...args) => assert.equal(spawnSync('tar', args, { cwd: stage }).status, 0);
+  tar('-czf', join(assets, `hdTrans-${version}-linux-x64.tar.gz`), `hdTrans-${version}`);
+  tar('-czf', join(assets, npmName), 'package');
+  writeFileSync(join(assets, `hdTrans-${version}-windows.zip`), 'zip');
+  const sums = spawnSync('sh', ['-c', 'sha256sum *'], { cwd: assets, encoding: 'utf8' }).stdout;
+  writeFileSync(join(assets, 'SHA256SUMS.txt'), sums);
+  if (tamper) writeFileSync(join(assets, tamper), 'tampered');
+  writeFileSync(join(bin, 'gh'), `#!/bin/bash
+[ "$1 $2 $3" = "release view v${version}" ] && { ls '${assets}'; exit 0; }
+[ "$1 $2 $3" = "release download v${version}" ] || exit 64
+shift 3
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -D) dir="$2"; shift 2 ;;
+    -p) cp '${assets}'/"$2" "$dir/" || exit 1; shift 2 ;;
+    *) shift ;;
+  esac
+done
+`, { mode: 0o755 });
+  const run = name => spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', stepScript(deployWeb, name)], {
+    cwd: work,
+    env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, TAG: `v${version}`, RUNNER_TEMP: base, GITHUB_REPOSITORY: 'o/r' },
+    encoding: 'utf8',
+  });
+  return { work, run };
+}
+
+test('the web deploy takes the CLI and the engine from the checked release packages', t => {
+  for (const npmName of ['hdTrans-1.2.3-wasm.tgz', 'hdtrans-1.2.3.tgz']) {
+    const { work, run } = releaseFixture(t, { npmName });
+    const download = run('Download the release packages');
+    assert.equal(download.status, 0, download.stderr);
+    assert.deepEqual(readdirSync(join(work, 'build/linux')), ['hdtrans']);
+    assert.deepEqual(readdirSync(join(work, 'build/wasm')).sort(), ['hdtrans_engine.js', 'hdtrans_engine.wasm']);
+    const check = run('Check the engine version');
+    assert.equal(check.status, 0, check.stderr);
+  }
+  for (const tamper of ['hdTrans-1.2.3-linux-x64.tar.gz', 'hdTrans-1.2.3-wasm.tgz']) {
+    const { work, run } = releaseFixture(t, { tamper });
+    const download = run('Download the release packages');
+    assert.notEqual(download.status, 0, tamper);
+    assert.match(download.stderr, /does not match SHA256SUMS/);
+    assert.equal(existsSync(join(work, 'build/wasm/hdtrans_engine.wasm')), false);
+  }
+  const { run } = releaseFixture(t, { engineVersion: '0.0.0-abcdef0' });
+  assert.equal(run('Download the release packages').status, 0);
+  const check = run('Check the engine version');
+  assert.notEqual(check.status, 0);
+  assert.match(check.stderr, /reports version 0\.0\.0-abcdef0, not 1\.2\.3/);
+});
+
+test('the web deploy builds nothing and checks the live engine against the release engine', () => {
+  assert.doesNotMatch(deployWeb, /\n  build:\n|cmake|emsdk|sccache|ccache|actions\/cache|download-artifact/);
+  assert.match(deployJob, /^    needs: release$/m);
+  const order = ['Verify the release source', 'Download the release packages', 'Check the engine version', 'Build the site']
+    .map(name => deployJob.indexOf(`- name: ${name}\n`));
+  assert.deepEqual([...order].sort((a, b) => a - b), order);
+  assert.ok(order[0] > 0);
+  assert.match(stepScript(deployWeb, 'Build the site'), /HDTRANS_CLI=build\/linux\/hdtrans HDTRANS_WASM=build\/wasm/);
+  const live = stepScript(deployWeb, 'Check the live site');
+  assert.match(live, /for asset in engine wasm; do/);
+  assert.match(live, /cmp "\$live\/\$asset" "build\/wasm\//);
+});

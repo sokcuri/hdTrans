@@ -22,8 +22,6 @@ permissions:
 
 env:
   SITE_URL: https://trans.kuri.kr/
-  SCCACHE_DIR: ${{ github.workspace }}/.sccache
-  CCACHE_DIR: ${{ github.workspace }}/build/ccache
 
 jobs:
   release:
@@ -80,87 +78,8 @@ jobs:
           fi
           { echo deploy=true; echo "tag=$tag"; echo "sha=$sha"; } >> "$GITHUB_OUTPUT"
 
-  build:
-    name: build (${{ matrix.preset }})
-    needs: release
-    if: needs.release.outputs.deploy == 'true'
-    strategy:
-      matrix:
-        preset: [linux, wasm]
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ needs.release.outputs.sha }}
-          persist-credentials: false
-      - name: Set up Emscripten
-        if: matrix.preset == 'wasm'
-        uses: mymindstorm/setup-emsdk@v16
-        with:
-          version: 4.0.22
-          actions-cache-folder: build/emsdk
-      - name: Set up ccache for Emscripten
-        if: matrix.preset == 'wasm'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ccache
-          # Keep sysroot paths stable in both cold and restored compiler caches.
-          sdk="$GITHUB_WORKSPACE/build/emsdk/emsdk-main"
-          "$sdk/emsdk" activate 4.0.22
-          source "$sdk/emsdk_env.sh"
-          env | grep '^EMSDK' >> "$GITHUB_ENV"
-          echo "EM_CONFIG=$sdk/.emscripten" >> "$GITHUB_ENV"
-          printf '%s\n' "$sdk" "$sdk/upstream/emscripten" >> "$GITHUB_PATH"
-      - name: Set up sccache
-        if: matrix.preset == 'linux'
-        uses: mozilla-actions/sccache-action@v0.0.11
-        with:
-          disable_annotations: true
-      # Restore only: the Build workflow owns these caches.
-      - name: Restore native compiler cache
-        if: matrix.preset == 'linux'
-        uses: actions/cache/restore@v6
-        with:
-          path: ${{ env.SCCACHE_DIR }}
-          key: sccache-${{ runner.os }}-${{ runner.arch }}-linux-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
-          restore-keys: |
-            sccache-${{ runner.os }}-${{ runner.arch }}-linux-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
-            sccache-${{ runner.os }}-${{ runner.arch }}-linux-
-      - name: Restore WASM compiler cache
-        if: matrix.preset == 'wasm'
-        uses: actions/cache/restore@v6
-        with:
-          path: ${{ env.CCACHE_DIR }}
-          key: ccache-${{ runner.os }}-${{ runner.arch }}-wasm-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
-          restore-keys: |
-            ccache-${{ runner.os }}-${{ runner.arch }}-wasm-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
-            ccache-${{ runner.os }}-${{ runner.arch }}-wasm-
-      - name: Build
-        run: |
-          if [[ "${{ matrix.preset }}" == wasm ]]; then
-            # ccache accepts the -Xclang arguments in Emscripten's Clang calls.
-            export EM_COMPILER_WRAPPER=ccache
-            emcmake cmake --preset wasm -G Ninja
-            cmake --build --preset wasm --parallel "$(getconf _NPROCESSORS_ONLN)" --target hdtrans_wasm
-          else
-            cmake --preset linux -G Ninja \
-              -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
-            cmake --build --preset linux --parallel "$(getconf _NPROCESSORS_ONLN)" --target hdtrans_cli
-          fi
-      # The paths share build/ as their root, so the artifacts keep linux/ and wasm/ below it.
-      - uses: actions/upload-artifact@v7
-        with:
-          name: web-${{ matrix.preset }}
-          retention-days: 1
-          if-no-files-found: error
-          path: |
-            build/linux/hdtrans
-            build/wasm/hdtrans_engine.js
-            build/wasm/hdtrans_engine.wasm
-
   deploy:
-    needs: [release, build]
+    needs: release
     if: needs.release.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -188,20 +107,54 @@ jobs:
           test "$(cat release-version.txt)" = "${TAG#v}"
           # This workflow's deploy script, so that older releases deploy with the current server commands.
           git checkout "$GITHUB_SHA" -- web/deploy.sh
-      - uses: actions/download-artifact@v8
-        with:
-          name: web-linux
-          path: build
-      - uses: actions/download-artifact@v8
-        with:
-          name: web-wasm
-          path: build
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
           package-manager-cache: false
       - name: Install TypeScript tools
         run: npm --prefix web ci --ignore-scripts --no-audit --no-fund
+      # The site uses the packages the tag pipeline built and tested: the Linux CLI
+      # compiles the dictionary snapshot and the npm package holds the engine.
+      - name: Download the release packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${TAG#v}"
+          dir="$RUNNER_TEMP/release"
+          mkdir -p "$dir" build/linux build/wasm
+          cli="hdTrans-$version-linux-x64.tar.gz"
+          npm="hdTrans-$version-wasm.tgz"
+          # Releases before 0.4.5 name the npm package hdtrans-<version>.tgz.
+          if ! gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' | grep -qxF "$npm"; then
+            npm="hdtrans-$version.tgz"
+          fi
+          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -D "$dir" -p SHA256SUMS.txt -p "$cli" -p "$npm"
+          for file in "$cli" "$npm"; do
+            if ! grep -qxF "$(cd "$dir" && sha256sum "$file")" "$dir/SHA256SUMS.txt"; then
+              echo "::error::$file does not match SHA256SUMS.txt of $TAG." >&2
+              exit 1
+            fi
+          done
+          tar -xzf "$dir/$cli" -C build/linux --strip-components=1 "hdTrans-$version/hdtrans"
+          tar -xzf "$dir/$npm" -C build/wasm --strip-components=2 \
+            package/dist/hdtrans_engine.js package/dist/hdtrans_engine.wasm
+          rm -rf "$dir"
+      - name: Check the engine version
+        run: |
+          engine="$(node --input-type=module - "$PWD/build/wasm" <<'JS'
+          import { readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          import { pathToFileURL } from 'node:url';
+          const dir = process.argv[2];
+          const { default: create } = await import(pathToFileURL(join(dir, 'hdtrans_engine.js')).href);
+          const engine = await create({ wasmBinary: readFileSync(join(dir, 'hdtrans_engine.wasm')) });
+          console.log(engine.version());
+          JS
+          )"
+          if [[ "$engine" != "${TAG#v}" ]]; then
+            echo "::error::The release engine reports version $engine, not ${TAG#v}." >&2
+            exit 1
+          fi
       - name: Set up SSH
         env:
           HDTRANS_WEB_HOST: ${{ secrets.HDTRANS_WEB_HOST }}
@@ -274,9 +227,11 @@ jobs:
           cmp "$live/manifest.json" build/web/dist/manifest.json
           get examples/list.json "$live/list.json"
           cmp "$live/list.json" build/web/dist/examples/list.json
-          for path in $(jq -r '.engine.path, .wasm.path, .dict.snapshot.path' build/web/dist/manifest.json); do
-            curl -fsSI --retry 3 "$SITE_URL$path" > /dev/null
+          for asset in engine wasm; do
+            get "$(jq -r ".$asset.path" build/web/dist/manifest.json)" "$live/$asset"
+            cmp "$live/$asset" "build/wasm/$(jq -r ".$asset.name" build/web/dist/manifest.json)"
           done
+          curl -fsSI --retry 3 "$SITE_URL$(jq -r .dict.snapshot.path build/web/dist/manifest.json)" > /dev/null
           {
             echo "### Deployed web $TAG"
             echo "$version"
