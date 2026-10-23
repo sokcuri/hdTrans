@@ -2,26 +2,47 @@
 // Word classes: named sets of surfaces that the passes test words against, read from the
 // builtin table classes.tsv (docs/dictionary-files.md). The table is parsed once, on first
 // use, into an immutable structure shared by every thread.
+#include <cstdint>
 #include <span>
 #include <string>
 #include <string_view>
-#include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 namespace hdTrans::dict {
 
+namespace internal {
+
+// FNV-1a of a class name.
+constexpr std::uint64_t ClassHash(std::string_view s) {
+    std::uint64_t h = 14695981039346656037ull;
+    for (const char c : s) h = (h ^ static_cast<unsigned char>(c)) * 1099511628211ull;
+    return h;
+}
+
+}  // namespace internal
+
+// The name of a word class: a string literal, hashed when the program is compiled. The
+// constructor is implicit so that a literal names the class.
+struct ClassName {
+    std::string_view name;
+    std::uint64_t hash;
+    consteval ClassName(const char* s) : name(s), hash(internal::ClassHash(s)) {}
+};
+
 // Whether surface is a member of the class named set; false for a set the table lacks.
-bool InClass(std::string_view set, std::string_view surface);
+bool InClass(ClassName set, std::string_view surface);
 // The members of the class named set in table order; empty for a set the table lacks.
-std::span<const std::string_view> ClassMembers(std::string_view set);
+std::span<const std::string_view> ClassMembers(ClassName set);
 
 namespace internal {
 
 struct WordClass {
+    std::string_view name;
+    std::string_view doc;
     std::vector<std::string_view> members;  // in table order
     std::unordered_set<std::string_view> index;
-    std::string_view doc;
 };
 
 struct ClassError {
@@ -31,9 +52,11 @@ struct ClassError {
 
 // The classes of a table, with views into its lines, which must outlive it.
 struct ClassTable {
-    std::unordered_map<std::string_view, WordClass> sets;
-    std::vector<std::string_view> order;  // set names in the order of their doc lines
+    std::vector<WordClass> classes;  // in the order of their doc lines
     std::vector<ClassError> errors;
+    // Open addressing over the ClassHash of the names: {hash, index into classes}, -1 for an
+    // empty slot; the size is a power of two.
+    std::vector<std::pair<std::uint64_t, int>> slots;
 };
 
 // Parses the lines of a classes table. Rows are SET <TAB> MEMBER [<TAB> NOTE]; "//= SET <TAB> DOC"
@@ -41,6 +64,8 @@ struct ClassTable {
 // set without a doc line, a doc line without rows, a repeated member or doc line, an empty
 // field and a member that ends in a space are errors; the rest of the table still loads.
 ClassTable ParseClasses(std::span<const std::string_view> lines);
+// The class of t named name, whose ClassHash is hash; null for none.
+const WordClass* FindClass(const ClassTable& t, std::string_view name, std::uint64_t hash);
 // The parsed builtin classes.tsv.
 const ClassTable& BuiltinClasses();
 

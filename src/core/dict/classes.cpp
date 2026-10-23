@@ -1,6 +1,6 @@
 #include "core/dict/classes.h"
 
-#include <utility>
+#include <unordered_map>
 
 #include "core/dict/builtin.h"
 
@@ -29,6 +29,7 @@ bool Trailing(std::string_view s) { return !s.empty() && s.back() == ' '; }
 
 ClassTable ParseClasses(std::span<const std::string_view> lines) {
     ClassTable t;
+    std::unordered_map<std::string_view, std::size_t> byName;
     const auto fail = [&](int line, std::string message) { t.errors.push_back({line, std::move(message)}); };
     int number = 0;
     for (const std::string_view raw : lines) {
@@ -41,10 +42,10 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
             const auto [set, doc] = Cut(head);
             if (set.empty() || doc.empty()) {
                 fail(number, "a doc line needs a set name and a text");
-            } else if (!t.sets.emplace(set, WordClass{{}, {}, doc}).second) {
+            } else if (!byName.emplace(set, t.classes.size()).second) {
                 fail(number, "a second doc line for " + std::string(set));
             } else {
-                t.order.push_back(set);
+                t.classes.push_back({set, doc, {}, {}});
             }
             continue;
         }
@@ -55,21 +56,41 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
             fail(number, "a row is SET <TAB> MEMBER, the member neither empty nor ending in a space");
             continue;
         }
-        const auto found = t.sets.find(set);
-        if (found == t.sets.end()) {
+        const auto found = byName.find(set);
+        if (found == byName.end()) {
             fail(number, "no doc line for the set " + std::string(set));
             continue;
         }
-        if (!found->second.index.insert(member).second) {
+        WordClass& c = t.classes[found->second];
+        if (!c.index.insert(member).second) {
             fail(number, "a second row of " + std::string(member) + " in " + std::string(set));
             continue;
         }
-        found->second.members.push_back(member);
+        c.members.push_back(member);
     }
-    for (const std::string_view set : t.order) {
-        if (t.sets.at(set).members.empty()) fail(0, "no rows for the set " + std::string(set));
+    for (const WordClass& c : t.classes) {
+        if (c.members.empty()) fail(0, "no rows for the set " + std::string(c.name));
+    }
+    std::size_t size = 8;
+    while (size < 2 * t.classes.size()) size *= 2;
+    t.slots.assign(size, {0, -1});
+    for (std::size_t k = 0; k < t.classes.size(); k++) {
+        const std::uint64_t hash = ClassHash(t.classes[k].name);
+        std::size_t i = hash & (size - 1);
+        while (t.slots[i].second >= 0) i = (i + 1) & (size - 1);
+        t.slots[i] = {hash, static_cast<int>(k)};
     }
     return t;
+}
+
+const WordClass* FindClass(const ClassTable& t, std::string_view name, std::uint64_t hash) {
+    if (t.slots.empty()) return nullptr;
+    const std::size_t mask = t.slots.size() - 1;
+    for (std::size_t i = hash & mask; t.slots[i].second >= 0; i = (i + 1) & mask) {
+        const WordClass& c = t.classes[static_cast<std::size_t>(t.slots[i].second)];
+        if (t.slots[i].first == hash && c.name == name) return &c;
+    }
+    return nullptr;
 }
 
 const ClassTable& BuiltinClasses() {
@@ -84,17 +105,15 @@ const ClassTable& BuiltinClasses() {
 
 }  // namespace internal
 
-bool InClass(std::string_view set, std::string_view surface) {
-    const internal::ClassTable& t = internal::BuiltinClasses();
-    const auto found = t.sets.find(set);
-    return found != t.sets.end() && found->second.index.contains(surface);
+bool InClass(ClassName set, std::string_view surface) {
+    const internal::WordClass* c = internal::FindClass(internal::BuiltinClasses(), set.name, set.hash);
+    return c != nullptr && c->index.contains(surface);
 }
 
-std::span<const std::string_view> ClassMembers(std::string_view set) {
-    const internal::ClassTable& t = internal::BuiltinClasses();
-    const auto found = t.sets.find(set);
-    if (found == t.sets.end()) return {};
-    return found->second.members;
+std::span<const std::string_view> ClassMembers(ClassName set) {
+    const internal::WordClass* c = internal::FindClass(internal::BuiltinClasses(), set.name, set.hash);
+    if (c == nullptr) return {};
+    return c->members;
 }
 
 }  // namespace hdTrans::dict
