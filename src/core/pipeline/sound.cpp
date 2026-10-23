@@ -1068,12 +1068,12 @@ size_t SoundText::LoneCatch(size_t p) const {
     return end;
 }
 
-// The Korean of a lone ん, small vowel or hiragana く ぐ や は ひ ふ at p that stands between
-// punctuation as a voice of its own (んっ、ん、んくっ; ……ぅ……; あっ、く、うぅ), or "".
+// The Korean of a lone ん, small vowel or hiragana く ぐ や は ひ ふ つ at p that stands between
+// punctuation as a voice of its own (んっ、ん、んくっ; ……ぅ……; あっ、く、うぅ; つ……), or "".
 std::string_view SoundText::LoneVoice(size_t p) const {
     const std::u32string_view rs = rs_;
-    constexpr std::u32string_view kVoices = U"ンァィゥェォくぐやはひふ";
-    constexpr std::string_view kKorean[] = {"응", "아", "이", "우", "에", "오", "크", "그", "야", "하", "히", "후"};
+    constexpr std::u32string_view kVoices = U"ンァィゥェォくぐやはひふつ";
+    constexpr std::string_view kKorean[] = {"응", "아", "이", "우", "에", "오", "크", "그", "야", "하", "히", "후", "읏"};
     size_t v = kVoices.find(f_[p]);
     if (v == std::u32string_view::npos) v = kVoices.find(rs[p]);  // hiragana only
     if (v == std::u32string_view::npos) return {};
