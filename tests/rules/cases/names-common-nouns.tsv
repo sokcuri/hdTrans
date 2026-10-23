@@ -5,3 +5,7 @@ G90	充分に店で休息を取り、	충분히 가게에서 휴식을 잡고,	f
 G90	鞄の中に入っている。	가방 안에 들어가 있다.	fix	global-stem
 G90	宮内に入る前は	궁내에 들어오기 전은	fix	global-stem
 G90	その前に立ち、周りを見回していた。	그 앞에 서, 주위를 둘러보고 있었다.	keep	global-stem
+dict:jisjk:202155	「え！？　あれカツラなのか！？」	「어!? 저거 가발이야!?」	fix	defaults
+dict:jisjk:202480	高原の避暑地もよかったけど、	고원의 피서지도 좋았지만,	fix	defaults
+dict:jisjk:202480	高原さんが来た。	타카하라 씨가 왔다.	keep	global-stem
+dict:w:26740	シュトーレンやレープクーヘンが楽しみ！	슈톨렌이나 레프쿠헨이 즐겨!	fix	defaults
