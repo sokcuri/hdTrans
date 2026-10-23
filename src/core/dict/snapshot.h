@@ -317,6 +317,7 @@ private:
     bool CuedKey(std::string_view key) const;
     bool PhraseKey(std::string_view key) const;
     bool BaseWord(std::string_view key) const;
+    bool CountedKey(std::string_view key) const;
 
     std::shared_ptr<internal::SnapshotFile> backing_;
     bool hasDictionary_ = false;

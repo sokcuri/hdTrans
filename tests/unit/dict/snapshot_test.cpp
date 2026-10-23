@@ -108,6 +108,34 @@ HD_TEST(SnapshotKanaPersonKeptForConfirmedLookups) {
     HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, context)).find("츠구미") != std::string::npos);
 }
 
+// A name key that is a number and a counter word of the base dictionary reads as the
+// counter: after digits with any counter, after a kanji numeral with a counter of two
+// characters or more. A kanji numeral and a one-character word stays a name.
+HD_TEST(SnapshotCountedNameKeys) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\tid\n";
+    const LoadResult loaded = Load({
+        MakeFile("base.tsv", header + "時間\t시간\tN110\tUMe\tCt\tGN\t1\n"
+                                      "位\t위\tN110\t\tCt\tGN\t2\n"
+                                      "年生\t학년\tN110\t\tCt\tGN\t3\n"
+                                      "葉\t잎\tN110\t\tCt\tGN\t4\n"
+                                      "日目\t일째\tN110\t\t\tGN\t5\n"),
+        MakeFile("names.tsv", "#! layer=names\n" + header +
+                                  "24時間\t작품\tN130\tQWK\t\tGN\t6\n"
+                                  "1位\t1등\tN110\t\t\tGN\t7\n"
+                                  "四年生\t요네오\tN130\tQPNVHn\t\tGN\t8\n"
+                                  "千葉\t지바\tN130\tQCTVPl\t\tGN\t9\n"
+                                  "3日目\t작품\tN130\tQWK\t\tGN\t10\n"),
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const Snapshot& snap = *loaded.snapshot;
+    const LookupContext none;
+    HD_CHECK(Show(snap.GetWordInfo("24時間が", LookupMode::General, none)).find("작품") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("1位に", LookupMode::General, none)).find("1등") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("四年生の", LookupMode::General, none)).find("요네오") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("千葉に", LookupMode::General, none)).find("지바") != std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("3日目に", LookupMode::General, none)).find("작품") != std::string::npos);
+}
+
 HD_TEST(SnapshotFolderLayers) {
     const LoadResult r = LoadFoldersTsv({Folder(), Folder() + "/over"});
     HD_REQUIRE(r.snapshot != nullptr);
