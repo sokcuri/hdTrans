@@ -46,7 +46,9 @@ const dict::LoadResult& SoundDictionary() {
         "としてい\t(으)로 하고 있\tM100\t28\n"
         "リスク\t리스크\tN110\t29\n"
         "ついに\t마침내\tE300\t30\n"
-        "ただ\t다만\tE300\t31\n",
+        "ただ\t다만\tE300\t31\n"
+        "歌\t노래하\tM100\t32\n"
+        "うよ\t6 버릴 거야\tS5A0\t33\n",
     }});
     return result;
 }
@@ -592,6 +594,9 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"まかせてぇぇぇ！", "まかせて\uE00B\uE00B\uE00B！"},
         {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
+        // drawl of the particle is ～.
+        {"歌うよぉー！", "歌うよ～！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
