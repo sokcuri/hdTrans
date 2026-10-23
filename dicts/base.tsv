@@ -65136,7 +65136,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スパイクシューズ	스파이크 슈즈	N110	VCp		GN				jisjk:130012		
 スパイクタイヤ	스파이크 타이어	N110	VPe		GN				jisjk:130013		
 スパイクヒール	스파이크 힐	N110	VCp		GN				jisjk:130014		
-スパイシー	스파이시	N110			GN				jisjk:264980		
+スパイシー	스파이시	N110		Dd	GN				jisjk:264980		
 スパイス	스파이스	N110			GN				jisjk:49206		
 スパイダ	스파이더	N110	VHn		GN				jisjk:49207		
 スパイダ。 ボンディング	스파이더 본딩	N110			GN				jisjk:49209		
@@ -65338,7 +65338,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スペシャリティー	스페셜리티	N110	UTs		GN				jisjk:130077		
 スペシャリティー	스페셜티	N110			BZ				jisjk:362619		
 スペシャリティーケミカル	스페셜리티 케미컬	N110			GN				jisjk:152267		
-スペシャル	스페셜	N110			GN				jisjk:49301		
+スペシャル	스페셜	N110		Dd	GN				jisjk:49301		
 スペシャルエフェクツ	특수 효과	N110	UAr		GN				jisjk:130078		
 スペシャルクォーテーション	특별 청산 지수	N110	VMo		GN				jisjk:152268		
 スペシャルデリバリー	속달편	N110			GN				jisjk:130079		
@@ -67997,7 +67997,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ダイリツ	다이리스	N110	VPl		GN				jisjk:50340		
 ダイレクタ	디렉터	N110			GN				jisjk:50341		
 ダイレクター	디렉터	N110			GN				jisjk:368520		
-ダイレクト	다이렉트	N110			CT				jisjk:50342		
+ダイレクト	다이렉트	N110		Dd	CT				jisjk:50342		
 ダイレクト。 フィード	다이렉트 피드	N110			GN				jisjk:50343		
 ダイレクト。 メール	다이렉트 메일	N110			GN				jisjk:50344		
 ダイレクトインジェクション	다이렉트 인젝션	N110			GN				jisjk:50345		
@@ -79967,7 +79967,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フラッター	플러터	N110			GN				jisjk:113970		
 フラッチ	클러치	N110			GN				jisjk:55277		
 フラッディング	플러딩	N110			GN				jisjk:55278		
-フラット	플랫	N110			GN				jisjk:55279		
+フラット	플랫	N110		Dd	GN				jisjk:55279		
 フラットアドレス空間	플랫 어드레스 공간	N110			IT				jisjk:262186		
 フラットケーブル	플랫 케이블	N110			IT				jisjk:262401		
 フラットシェーディング	플랫 셰이딩	N110			IT				jisjk:262187		
@@ -80013,7 +80013,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フラン	프랑	N130	QMMVMo		GN				jisjk:351278		
 フラン	프란	N130	QPN		GN				jisjk:367974		
 フランキー	프랑키	N130	QPN		GN				jisjk:366191		
-フランク	프랭크	N110			GN				jisjk:55292		
+フランク	프랭크	N110		Dd	GN				jisjk:55292		
 フランク	프랭크	N130	QPN		GN				jisjk:119044		
 フランクス	프랭크	N130	QPN		GN				jisjk:365290		
 フランクフルター	프랑크 소시지	N110	VFd		GN				jisjk:133467		
@@ -80137,7 +80137,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フリンセス	공주	N110	VHn		GN				jisjk:55385		
 フリント	플린트	N110	VPe		GN				jisjk:133512		
 フリントガラス	납유리	N110	VSn		GN				jisjk:55386		
-フリー	프리	N110			GN				jisjk:55316		
+フリー	프리	N110		Dd	GN				jisjk:55316		
 フリー. バーン	프리 반	N110			GN				jisjk:55317		
 フリー. フライヤ。 テレオペレーFree Flyer Teleoperator	프리 플라이어 텔레오퍼레이터	N110			GN				jisjk:55318		
 フリー. フライヤテレオペレータ	프리 플라이어 텔레오퍼레이터	N110			GN				jisjk:55319		
@@ -80421,7 +80421,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フレンドマッチ	친선 경기	N110	VBlVRw		GN				jisjk:133549		
 フレンドリ	프렌들리	N110			GN				jisjk:55503		
 フレンドリネス	프렌들리니스	N110			GN				jisjk:55505		
-フレンドリー	프렌드리	N130			GN				jisjk:55504		
+フレンドリー	프렌들리	N110		Dd	GN				jisjk:55504		
 フレンド派	프렌드파	N110	UCl		GN				jisjk:133548		
 フレー	프레이	N110			GN				jisjk:55423		
 フレーカー	플레이커	N110			GN				jisjk:163378		
@@ -81618,7 +81618,7 @@ ttt	ttt	K110			GN				jisjk:201744
 プラットホーム	플랫폼	N110	VPl		BZ				jisjk:55932		
 プラティニ	프라티니	N130	QPN		GN				jisjk:366994		
 プラテン	플래튼	N110			GN				jisjk:55933		
-プラトニック	플라토닉	N110			GN				jisjk:55934		
+プラトニック	플라토닉	N110		Dd	GN				jisjk:55934		
 プラトニックラブ	정신적인 사랑	N110	SFl		GN				jisjk:133752		
 プラトン	플라톤	N110	VHn		GN				jisjk:55935		
 プラトーン	플래툰	N110			GN				jisjk:114439		
@@ -83581,7 +83581,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ホッタ設備工業	홋타설비공업	N110	VPl		GN				jisjk:56557		
 ホッチキス	호치키스	N110	VPe		GN				jisjk:134245		
 ホッティガー	핫틴거	N130	QPN		GN				jisjk:370430		
-ホット	핫	N110			GN				jisjk:56558		
+ホット	핫	N110		Dd	GN				jisjk:56558		
 ホット	안심&AV@	M429	UThUYi		GN				jisjk:368391		
 ホット スポット	핫 스포트	N110			GN				jisjk:56559		
 ホット。 スタート	핫 스타트	N110			GN				jisjk:56560		

@@ -1,4 +1,4 @@
-# 규칙: LEX-5
+# 규칙: LEX-5, LEX-6
 rule	input	expected	kind	layer
 lexical:katakana-pronoun	ワタシはここにいるよ	나는 여기에 있어	fix	lookup
 lexical:katakana-pronoun	ワタシのクレーンが何か？	내 크레인이 뭔가?	fix	local
@@ -13,3 +13,8 @@ normalize:nna	なめんなよ！	얕보지 마!	keep	normalize
 segmentation:katakana-run	リアルなティアーズ	리얼한 티아즈	fix	lookup
 segmentation:katakana-run	ドッペルゲンガーって何？	돕페르겐가라고 뭐?	fix	lookup
 segmentation:katakana-run	ティアーズ	티아즈	keep	lookup
+sense:na-loan-adjective	ディープな話	딥한 이야기	fix	rewrites
+sense:na-loan-adjective	ホットなニュース	핫한 뉴스	fix	rewrites
+sense:na-loan-adjective	ロンリーなハートが	론리한 하트가	fix	rewrites
+sense:na-loan-adjective	ファンタジーな時点で	판타지인 시점에서	keep	local
+sense:na-loan-adjective	ゲームなのに	게임인데	keep	local
