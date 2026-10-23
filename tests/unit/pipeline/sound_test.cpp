@@ -164,6 +164,10 @@ HD_TEST(pipeline_sound) {
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
         {"いくぅぅ", "가 버려~"},
+        // A phrase that states a past event is asked before ？; before ！ or 。 it stays.
+        {"できた？", "다 됐어？"},
+        {"できた！", "다 됐다！"},
+        {"できた。", "다 됐다。"},
         // A ー inside an interjection may be longer; a two-syllable one in い may be
         // lengthened before it, but not before a word.
         {"わーーい！", "와아！"},

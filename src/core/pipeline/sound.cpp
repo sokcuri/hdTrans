@@ -8,6 +8,7 @@
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -103,6 +104,15 @@ bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
 // really"; が、 is a particle), so X、<kanji> is a stutter only for others.
 constexpr std::u32string_view kNotStutters[] = {U"ア", U"ウ", U"エ", U"オ", U"ン", U"ネ", U"デ", U"マ", U"サ",
                                                 U"ヤ", U"ヨ", U"ム", U"ガ", U"ヲ", U"ト", U"ジャ", U"チョ"};
+
+// korean asked as a casual question when it states a past event in the plain form (다 됐다
+// 다 됐어, 해냈다 해냈어); other Korean unchanged.
+std::string AskedPast(std::string korean) {
+    const std::u32string k = DecodeText(korean);
+    if (k.size() < 2 || k.back() != U'다' || text::Final(k[k.size() - 2]) != text::kFinalSsangSiot) return korean;
+    korean.replace(korean.size() - std::string_view("다").size(), std::string_view::npos, "어");
+    return korean;
+}
 
 // A kanji numeral or an ASCII or full-width digit.
 bool NumeralRune(char32_t r) {
@@ -641,7 +651,9 @@ bool SoundText::NounAt(size_t p, size_t n) const {
 //   - いざ is 막상 in a conditional clause (いざ講義になると), 자 otherwise;
 //   - ただいま is 지금 before a clause (PresentTime), 다녀왔습니다 otherwise;
 //   - はん is a scoff (흥) where it opens an utterance before ！ 、 or 。 and no sound
-//     follows (Scoff), a moan (하앙) otherwise.
+//     follows (Scoff), a moan (하앙) otherwise;
+//   - a phrase that states a past event in the plain form is asked before ？ (できた？
+//     다 됐어?, ヤッタ？ 해냈어?); an exclaim row in hiragana is no sound there (やった？).
 std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
@@ -668,6 +680,7 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"ハン") {
         if (Scoff(p, end)) return "흥";
     }
+    if (s.phrase && end < rs_.size() && In(rs_[end], U"？?")) return AskedPast(s.korean);
     return s.korean;
 }
 
