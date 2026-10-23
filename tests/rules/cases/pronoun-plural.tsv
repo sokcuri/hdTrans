@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-rewrite:plural-pronoun	「アンタ達２人は捜索班よ」	「너희 두 명은 수색반이야」	fix	rewrites
+rewrite:plural-pronoun	「アンタ達２人は捜索班よ」	「너희 2명은 수색반이야」	fix	rewrites
 rewrite:plural-pronoun	「大丈夫か、おまえたち」	「괜찮은가, 너희」	fix	rewrites
 rewrite:plural-pronoun	「スタッフさん、ボクたちの仲間になってほしいです。」	「스탭 씨, 우리 동료가 됐으면 합니다.」	fix	rewrites
 rewrite:plural-pronoun	あたしらしか勝たん！	우리밖에 이기지 않아!	fix	rewrites

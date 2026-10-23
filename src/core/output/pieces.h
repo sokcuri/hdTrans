@@ -5,6 +5,8 @@
 #include <string_view>
 #include <vector>
 
+#include "core/text/lifetime.h"
+
 namespace hdTrans::output {
 
 // Span kinds of a piece.
@@ -34,6 +36,12 @@ constexpr char32_t kEmphasisClose = 0xE009;
 // is still the end of the word's sentence.
 constexpr char32_t kLengthenMark = 0xE00A;
 
+// The mark the sound stage writes, once for each kana, after a word drawn out by three or
+// more vowel kana (やめてぇぇぇ, 待ったああああ), a closing span that the restore stage writes
+// as a syllable drawing out the vowel of the Korean syllable before it (그만둬어어어); a
+// sentence end after it is still the end of the word's sentence.
+constexpr char32_t kDrawnMark = 0xE00B;
+
 struct Piece {
     std::string text;
     SpanKind span = SpanText;
@@ -57,7 +65,7 @@ std::vector<Pieces> Lines(const Pieces& text);
 Pieces JoinLines(const std::vector<Pieces>& lines);
 
 // The first piece when it is text, otherwise "".
-std::string_view Head(const Pieces& p);
+std::string_view Head(const Pieces& p HDTRANS_LIFETIMEBOUND);
 
 // Drops the ASCII spaces that end the last piece when it is text; the piece goes
 // when nothing is left of it.

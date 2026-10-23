@@ -7,6 +7,7 @@
 
 #include "core/dict/layer.h"
 #include "core/filter/ehnd.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "pcre2.h"
 
@@ -608,6 +609,101 @@ void Filters::Run(Stage stage, const Program& p, std::u16string& text, Toggles& 
         const std::string message = std::string(stage == Stage::Pre ? "PreSkipLayer" : "PostSkipLayer") + " : " +
                                     skipped + "\n";
         log.write(log.context, message);
+    }
+}
+
+namespace {
+
+// The character r with the full-width forms of ASCII folded (１ 1, Ａ A), as a pre-filter
+// that rewrites them leaves the same character in its place.
+char32_t Fold(char32_t r) { return r >= U'！' && r <= U'～' ? r - 0xFEE0 : r; }
+
+// A digit or a Latin letter, also a full-width one.
+bool DigitOrLatin(char32_t r) {
+    const char32_t a = Fold(r);
+    return (a >= U'0' && a <= U'9') || (a >= U'A' && a <= U'Z') || (a >= U'a' && a <= U'z');
+}
+
+// The first character of a word in kanji, katakana or Latin letters.
+bool WordStart(char32_t r) {
+    const char32_t a = Fold(r);
+    return text::IsKanji(r) || (r >= U'ァ' && r <= U'ヺ') || r == U'ー' || (a >= U'A' && a <= U'Z') ||
+           (a >= U'a' && a <= U'z');
+}
+
+struct Runes {
+    std::u32string cps;
+    std::vector<std::size_t> starts;  // the byte offset of each character, then the size
+};
+
+Runes Decode(std::string_view s) {
+    Runes out;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        out.cps.push_back(r.cp);
+        out.starts.push_back(k);
+        k += r.size;
+    }
+    out.starts.push_back(s.size());
+    return out;
+}
+
+}  // namespace
+
+void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
+    if (filtered == source) return;
+    const Runes a = Decode(source);
+    const std::size_t n = a.cps.size();
+    struct Gap {
+        std::size_t left, right;  // the characters around the spaces, in source
+    };
+    std::vector<Gap> gaps;
+    for (std::size_t k = 0; k < n; k++) {
+        if (!DigitOrLatin(a.cps[k])) continue;
+        std::size_t j = k + 1;
+        while (j < n && (a.cps[j] == U' ' || a.cps[j] == U'　')) j++;
+        if (j > k + 1 && j < n && WordStart(a.cps[j])) gaps.push_back({k, j});
+    }
+    if (gaps.empty()) return;
+    const Runes b = Decode(filtered);
+    const std::size_t m = b.cps.size();
+    auto same = [&](std::size_t i, std::size_t j) { return Fold(a.cps[i]) == Fold(b.cps[j]); };
+    // The common start and end align as they are; the parts between them on their longest
+    // common subsequence. Parts of more than kMaxCells pairs stay unaligned, and the spaces
+    // in them stay as the filter left them.
+    constexpr std::size_t kMaxCells = std::size_t{1} << 22;
+    std::size_t head = 0;
+    while (head < n && head < m && same(head, head)) head++;
+    std::size_t tail = 0;
+    while (tail < n - head && tail < m - head && same(n - 1 - tail, m - 1 - tail)) tail++;
+    std::vector<std::size_t> to(n, SIZE_MAX);  // the character of b each character of a is kept as
+    for (std::size_t i = 0; i < head; i++) to[i] = i;
+    for (std::size_t i = n - tail; i < n; i++) to[i] = i - n + m;
+    const std::size_t an = n - head - tail, bm = m - head - tail;
+    if (an > 0 && bm > 0 && an * bm <= kMaxCells) {
+        // lcs[i * (bm + 1) + j]: the longest common subsequence of the parts from i and j.
+        std::vector<uint16_t> lcs((an + 1) * (bm + 1), 0);
+        for (std::size_t i = an; i-- > 0;) {
+            for (std::size_t j = bm; j-- > 0;) {
+                lcs[i * (bm + 1) + j] = same(head + i, head + j)
+                                            ? static_cast<uint16_t>(lcs[(i + 1) * (bm + 1) + j + 1] + 1)
+                                            : std::max(lcs[(i + 1) * (bm + 1) + j], lcs[i * (bm + 1) + j + 1]);
+            }
+        }
+        for (std::size_t i = 0, j = 0; i < an && j < bm;) {
+            if (same(head + i, head + j)) {
+                to[head + i++] = head + j++;
+            } else if (lcs[(i + 1) * (bm + 1) + j] >= lcs[i * (bm + 1) + j + 1]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+    }
+    for (auto g = gaps.rbegin(); g != gaps.rend(); ++g) {
+        const std::size_t l = to[g->left], r = to[g->right];
+        if (l == SIZE_MAX || r != l + 1) continue;
+        filtered.insert(b.starts[r], source.substr(a.starts[g->left + 1], a.starts[g->right] - a.starts[g->left + 1]));
     }
 }
 

@@ -6,6 +6,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/text/lifetime.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::names::internal {
@@ -94,7 +95,7 @@ inline bool IsHangulText(std::string_view s) {
 }
 
 // Trims White_Space from both ends of s.
-inline std::string_view TrimSpace(std::string_view s) {
+inline std::string_view TrimSpace(std::string_view s HDTRANS_LIFETIMEBOUND) {
     std::size_t b = 0, e = s.size();
     while (b < e) {
         const text::Rune r = RuneAt(s, b);
@@ -110,7 +111,7 @@ inline std::string_view TrimSpace(std::string_view s) {
 }
 
 // Trims space, tab, CR and the ideographic space from both ends (whole-line rows).
-inline std::string_view TrimLineSpace(std::string_view s) {
+inline std::string_view TrimLineSpace(std::string_view s HDTRANS_LIFETIMEBOUND) {
     static constexpr std::string_view kIdeographic = "\xE3\x80\x80";
     auto trimmable = [](char c) { return c == ' ' || c == '\t' || c == '\r'; };
     while (!s.empty()) {
@@ -135,7 +136,7 @@ inline std::string_view TrimLineSpace(std::string_view s) {
 }
 
 // Removes the CR characters at the end of s.
-inline std::string_view TrimCR(std::string_view s) {
+inline std::string_view TrimCR(std::string_view s HDTRANS_LIFETIMEBOUND) {
     while (!s.empty() && s.back() == '\r') s.remove_suffix(1);
     return s;
 }

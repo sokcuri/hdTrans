@@ -349,7 +349,7 @@ L2262	あと二人必要だ。	더 두 사람 필요하다.	current	local
 L2262	あと、これも。	그리고, 이것도.	current	local
 L2320	先に私が行ってもいいですか。	먼저 제가 가도 괜찮습니까.	current	local
 L2320	この荷物は私宛に届いたものです。	이 짐은 제앞에 닿은 것입니다.	current	local
-L2331	彼が一度も来なかったことに驚いた。	그가 한번도 오지 않았던 것으로 놀랐다.	current	local-ending
+L2331	彼が一度も来なかったことに驚いた。	그가 한 번도 오지 않았던 것으로 놀랐다.	current	local-ending
 L2331	寒かった冬の朝に、彼女と出会った。	추웠던 겨울 아침에, 그녀와 만났다.	current	local-ending
 L2340	犯人は彼の弟か？	범인은 그의 남동생인가?	current	local
 L2340	明日は日曜日か？	내일은 일요일인가?	current	local
@@ -705,7 +705,7 @@ L4919	この問題は難しいな。	이 문제는 어렵네.	current	local-endi
 L4919	今日は朝から寒いな。	오늘은 아침부터 춥네.	current	local-ending
 L4934	別に構わないけど。	별로 상관없는데.	current	local-ending
 L4934	ちょっと眠いけど。	조금 졸린데.	current	local-ending
-L4938	もう１個ください。	더 한 개 주세요.	current	local
+L4938	もう１個ください。	더 1개 주세요.	current	local
 L4941	パンをどうぞ。	빵을 드세요.	current	local
 L4951	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
 L4979	犯人は彼とのことです。	범인은 그와의 일입니다.	current	local
@@ -743,7 +743,7 @@ G230	階段を走り上がった。	계단을 달려 올랐다.	current	global-l
 G240	みんなが同じことを言っています。	모두가 같은 것을 말합니다.	current	global-last
 G240	彼がいつも言っていることは正しい。	그가 언제나 말하는 것은 올바르다.	current	global-last
 G250	毎晩お酒飲んで寝る。	매일 밤 술 마시고 잔다.	current	global-stem
-G250	ジュース飲んで少し休もう。	쥬스 마시고 조금 쉬자.	current	global-stem
+G250	ジュース飲んで少し休もう。	주스 마시고 조금 쉬자.	current	global-stem
 G260	彼は舞台の中央に立った。	그는 무대의 중앙에 섰다.	current	global-stem
 G260	転びそうな友達の肩を支えた。	구를 것 같은 친구의 어깨를 결렸다.	current	global-stem
 G270	隣の部屋の音がよく聞こえる。	옆의 방의 소리가 잘 들린다.	current	global-stem

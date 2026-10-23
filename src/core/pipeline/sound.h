@@ -25,9 +25,15 @@
 //     not start with a particle), follows another sound, or, for ono rows, follows a
 //     lone particle; the text between sounds is read as the longest dictionary words;
 //   - sounds in a row are written with a space between those of two or more syllables
-//     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어);
+//     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어), but not after a cry that ends
+//     in a kana drawing out the vowel before it, before another cry (ひぃやあっ 히이야앗,
+//     ふぁーふぁー 후아아후아아; not やだやだ 싫어 싫어);
+//   - katakana that only draw out the vowel of the hiragana before them are no sound of
+//     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
-//     (はわわユウキ); an ono row may be followed by anything, and と or the て of って
+//     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
+//     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
+//     question 좋았어?, but よかったぁ? the exclamation 다행이다~?); an ono row may be followed by anything, and と or the て of って
 //     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
 //     (スタスタとベッド 척척 ベッド, but ドキドキとワクワク). A space separates a sound from a
 //     following kanji or verb (ぽりぽりかく), and after a dropped particle from kana, but
@@ -79,7 +85,8 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs, WriteSounds, then
 // RewriteCasualAdjectives;
-// when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead.
+// when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
+// WriteCries.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
 // use ctx.lookup.
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap);
@@ -109,6 +116,20 @@ std::string WriteMasked(std::string_view text, const LineContext& ctx, const dic
 // (see the comment at the top). Invalid UTF-8 bytes are kept and read as neither kana
 // nor letters.
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The cries of text that the lexicon lacks written in Korean as heard: a run of kana
+// that starts with hiragana (katakana speech and names are left to later stages) where an
+// utterance starts or after a comma, an ellipsis, a dash or a mark of tone (not after a
+// closing bracket: 「左手」だぁああ is the copula), of one to three syllables and then two
+// or more kana that draw out its last vowel (ひぃやあああ 히이야아아아, のおおお 노오오오,
+// おりゃあああっ 오랴아아앗, ひぃやアアア; ー counts too), with ッ after them as the final ㅅ,
+// before a pause, an ellipsis, a dash, a mark of tone or the end. Two or more syllables
+// before the vowel must not start a dictionary key that reaches the vowel (てめーー), nor
+// read, in hiragana, as a word of two or more characters or a stem followed by words,
+// particles and endings (やったあああ, なんでよーーっ are words drawn out; おりゃあああ,
+// のわあああ are cries). It runs on the text that RewriteEmphasis has left, so a word
+// that it reads with the vowel dropped (やめてぇぇぇ) is no cry.
+std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // A verb cut off before a dash or an ellipsis (― — … ‥, ・・ or ーー) completed to the form
 // it starts, when the dictionary has the verb with its kanji: a part of the te form to the
@@ -144,10 +165,15 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
 // The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
-// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
-// dropped (ていとくぅ, ないでぇ, なのぉ). A run with ー that ends a phrase after a word is
-// written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those
-// kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
+// A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ, or
+// of three or more after words (ばかぁぁぁ), is dropped (ていとくぅ, ないでぇ, なのぉ), and so is a run of い and ぃ after the い that ends
+// an adjective, before a pause or a shout's っ (ずるいぃ, 痛いぃぃ, きもちいいいいい; not the
+// cry いいいいい), and a run of three or more plain vowel kana after words, before a pause or
+// a ッ (待ったああああっ, 言うなあああっ). Such a dropped run of three or more vowel kana
+// leaves one kDrawnMark for each, which takes a shout's ッ after it (やめてぇぇぇ やめて + 3
+// marks). A run with ー that ends a phrase, also before a shout's っ, after a word is
+// written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji
+// or those kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
 // that makes a word of four or more characters (せんせー せんせい). Neither touches a
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
 // after る or て. Returns text itself when nothing changes.
@@ -160,8 +186,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // carries the sound (the only syllable, or one without an initial consonant: 앙, 하아,
 // 우왓), each 'v' adds a syllable of its vowel, at most four, before the final
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
-// (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~, and 't' (a ～ that
-// stood for the key's ー: う～ん) a ~ at the end.
+// (하아 하앗); other words take one ~ instead (정말 정말~), unless 'd' (an interjection drawn
+// out by three or more vowel kana) makes the last syllable carry it (안 돼 + vvvd 안 돼애애애).
+// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end.
 std::string Lengthen(std::string_view korean, std::string_view units);
 
 // A row of the sound lexicon; key in katakana.
@@ -175,6 +202,9 @@ struct SoundRow {
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause
     bool open = false;    // a lead row that needs no pause after it (ってか 그보다)
+    // An exclamation (fourth column exclaim): a statement that is no sound before a
+    // question mark, where the words ask for an evaluation (よかった？ 좋았어?).
+    bool exclaim = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

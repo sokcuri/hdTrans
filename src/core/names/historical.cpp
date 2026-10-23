@@ -38,7 +38,12 @@ std::string Sub(const Runes& rs, std::size_t from, std::size_t to) {
 
 // Whether rs[from:] begins with the UTF-8 text p.
 bool HasPrefixAt(const Runes& rs, std::size_t from, std::string_view p) {
-    return Sub(rs, from, rs.size()).starts_with(p);
+    for (std::size_t i = 0, k = from; i < p.size(); k++) {
+        const text::Rune r = text::DecodeRune(p.substr(i));
+        if (k >= rs.size() || rs[k] != r.cp) return false;
+        i += r.size;
+    }
+    return true;
 }
 
 bool IsNameKanji(char32_t c) { return (c >= 0x4E00 && c <= 0x9FFF) || c == U'々' || c == U'ヶ'; }
@@ -520,7 +525,8 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
         std::string given;
         std::size_t stop = rs.size();
         if (end < rs.size()) {
-            given = GivenName(snap, Sub(rs, end, rs.size()));
+            // A given name has at most three kanji.
+            if (rs.size() - end <= 3) given = GivenName(snap, Sub(rs, end, rs.size()));
             if (given.empty()) {
                 if (!FullTitle(pieces) || rs.size() - end > 3) continue;
                 stop = end;
@@ -529,7 +535,7 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
             continue;
         }
         const std::string title = JoinTitle(pieces);
-        const std::string named = Sub(rs, t, rs.size());
+        const std::string named = given.empty() ? std::string() : Sub(rs, t, rs.size());
         for (std::size_t s = t >= 4 ? t - 4 : 0; s < t; s++) {
             const std::string sur = Sub(rs, s, t);
             int rank = 0;

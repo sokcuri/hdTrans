@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:colloq:hazu-1	こんなはずじゃなかった。	이럴 리가 아니었다.	fix	lookup
-dict:colloq:hazu-1	「こんなはずじゃ、なかったのに……」	「이럴 리는, 없었는데 ……」	fix	lookup
+dict:colloq:hazu-1	「こんなはずじゃ、なかったのに……」	「이럴 리는, 없었는데……」	fix	lookup
 dict:colloq:hazu-2	「そんなはずはありません。」	「그럴 리는 없습니다.」	fix	lookup
 dict:colloq:hazu-2	そんなはずないよね？	그럴 리 없지?	fix	lookup
 dict:jisjk:344792	そんなはずがない。	그럴 리가 없다.	keep	lookup

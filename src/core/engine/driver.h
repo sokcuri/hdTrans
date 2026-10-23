@@ -58,7 +58,9 @@ struct StageObserver {
 std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer);
 
 // The marker families of one loaded dictionary, made by the translations of all sessions.
-// Resolve and compose of a sentence run under mu.
+// The families synchronise themselves and the rules are not changed after the load, so
+// sentences resolve and compose concurrently; only a translation that counts rule runs
+// into a TranslationOptions::ruleTally resolves and composes under mu.
 struct Generated {
     std::mutex mu;
     output::Families families;

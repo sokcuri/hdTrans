@@ -3,6 +3,8 @@
 // character boundaries.
 #include <string_view>
 
+#include "core/text/lifetime.h"
+
 namespace hdTrans::output::internal {
 
 // 1 for ASCII and half-width katakana (U+FF61..U+FF9F), 2 for every other character.
@@ -16,22 +18,22 @@ struct Cut {
 
 // s split before its key: the last n ASCII characters when they all are, otherwise
 // the last n/2 characters.
-Cut CutLast(std::string_view s, int n);
+Cut CutLast(std::string_view s HDTRANS_LIFETIMEBOUND, int n);
 
 // The first character of s as head when it is ASCII (an ending class); otherwise head
 // is empty and tail is s.
-Cut FirstByte(std::string_view s);
+Cut FirstByte(std::string_view s HDTRANS_LIFETIMEBOUND);
 
 // s without its first n width units; a character that straddles the cut is dropped
 // too.
-std::string_view SkipWidth(std::string_view s, int n);
+std::string_view SkipWidth(std::string_view s HDTRANS_LIFETIMEBOUND, int n);
 
 // s split after its first n width units; a character that straddles the cut goes to
 // the tail.
-Cut CutFirst(std::string_view s, int n);
+Cut CutFirst(std::string_view s HDTRANS_LIFETIMEBOUND, int n);
 
 // The text of s from width unit start, count units long.
-std::string_view MidWidth(std::string_view s, int start, int count);
+std::string_view MidWidth(std::string_view s HDTRANS_LIFETIMEBOUND, int start, int count);
 
 // s[i], or 0 outside s.
 inline char At(std::string_view s, int i) {

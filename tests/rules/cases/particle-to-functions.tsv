@@ -35,7 +35,7 @@ dict:gram:to:tari	飲み散らかした大人たちが意気揚々と部屋に�
 dict:gram:to:tari	彼は黙然と空を見上げた。	그는 묵연하게 하늘을 올려다보았다.	fix	local
 dict:gram:to:tari	愕然とする私はそのまま医務室に運ばれた。	아연실색하는 나는 그대로 의무실에 옮겨졌다.	fix	local
 dict:gram:to:tari	友人と部屋に戻っていく。	친구와 방으로 돌아간다.	keep	local
-dict:gram:to:tari-comma	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 두 번째 중얼거림을 토해냈다.	fix	local
+dict:gram:to:tari-comma	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 2번째 중얼거림을 토해냈다.	fix	local
 dict:gram:to:tari-comma	彼女は颯爽と、廊下を歩いていった。	그녀는 씩씩하게, 복도를 걸어갔다.	fix	local
 dict:gram:toshite:tari	愕然として言葉を失う。	아연실색하게 말을 잃는다.	fix	local
 dict:gram:toshite:tari	学生として当然だ。	학생으로서 당연하다.	keep	local

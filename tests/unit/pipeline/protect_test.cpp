@@ -56,7 +56,7 @@ HD_TEST(pipeline_cut_spans) {
         {"a&amp;b&#169;&#x1F363;&x;", "a〖2&amp;〗b〖2&#169;〗〖2&#x1F363;〗&x;"},
         {"&#12345678;&#X41;&a12345678901234567890123456789012;", "&#12345678;&#X41;&a12345678901234567890123456789012;"},
         // Inline style codes: a font, a colour and the reset.
-        {"だよ%f源ノ角ゴシックB;#00ff92cb;♥%fbase;#;」", "だよ〖2%f源ノ角ゴシックB;〗〖2#00ff92cb;〗〖1♥〗〖2%fbase;〗〖2#;〗」"},
+        {"だよ%f源ノ角ゴシックB;#00ff92cb;♥%fbase;#;」", "だよ〖2%f源ノ角ゴシックB;〗〖2#00ff92cb;〗♥〖2%fbase;〗〖2#;〗」"},
         {"C#;と#12354;と%f;x%fa%b;", "C〖2#;〗と#12354;と〖2%f;〗x%fa%b;"},
         // A tag wins over a BBCode tag and Hangul inside it.
         {"<a title=\"[b]김\">", "〖2<a title=\"[b]김\">〗"},
@@ -81,6 +81,7 @@ HD_TEST(pipeline_cut_spans) {
         {"\uE008さいてい\uE009！", "〖2\uE008〗さいてい〖3\uE009〗！"},
         // The lengthening mark closes a span.
         {"せんぱい\uE00A！", "せんぱい〖3\uE00A〗！"},
+        {"やめて\uE00B\uE00B\uE00B！", "やめて〖3\uE00B\uE00B\uE00B〗！"},
         // Foreign runs end at white space; ASCII, half-width forms and CP932 symbols are
         // not foreign; invalid bytes are.
         {"Ωé αβ☆ｱ ไทย", "Ω〖1é〗 αβ☆ｱ 〖1ไทย〗"},
@@ -95,6 +96,11 @@ HD_TEST(pipeline_cut_spans) {
         // ◯ has no Korean form of its own and is kept as written; ○ is a dictionary word.
         {"◯◯さん", "〖1◯◯〗さん"},
         {"○○さん", "○○さん"},
+        // Marks of tone after の and before a particle name a thing; elsewhere they stay text.
+        {"あなたの♡を", "あなたの〖1♡〗を"},
+        {"私の♪は。", "私の〖1♪〗は。"},
+        {"好きなの♡もっと", "好きなの♡もっと"},
+        {"大好き♡を", "大好き♡を"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(internal::CutSpans(c.in, {})), std::string(c.want));
 
@@ -116,6 +122,10 @@ HD_TEST(pipeline_is_foreign) {
     HD_CHECK(!internal::IsForeign(U'ヺ'));
     HD_CHECK(!internal::IsForeign(U'漢'));
     HD_CHECK(!internal::IsForeign(U'Ω'));
+    // Hearts and notes outside CP932 close an utterance like ♪.
+    HD_CHECK(!internal::IsForeign(U'♡'));
+    HD_CHECK(!internal::IsForeign(U'♥'));
+    HD_CHECK(!internal::IsForeign(U'❤'));
     HD_CHECK(!internal::IsForeign(U'☆'));
 }
 

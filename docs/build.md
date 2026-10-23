@@ -18,7 +18,9 @@ hdTrans는 CMake 프리셋(`CMakePresets.json`)으로 빌드합니다. 외부 �
 |---|---|---|---|
 | `mac` | Ninja | `build/mac` | macOS clang Release |
 | `mac-debug` | Ninja | `build/mac-debug` | macOS Debug |
+| `mac-asan` | Ninja | `build/mac-asan` | macOS, AddressSanitizer와 UndefinedBehaviorSanitizer |
 | `linux` | Ninja | `build/linux` | Linux Release |
+| `linux-asan` | Ninja | `build/linux-asan` | Linux, AddressSanitizer와 UndefinedBehaviorSanitizer |
 | `windows-x64` | Visual Studio 18 2026 | `build/windows-x64/Release` | MSVC x64 |
 | `windows-x86` | Visual Studio 18 2026 | `build/windows-x86/Release` | MSVC x86 (32비트 호스트용 DLL) |
 | `windows-x64-ninja` | Ninja | `build/windows-x64-ninja` | MSVC x64, x64 개발자 환경 필요 |
@@ -44,6 +46,11 @@ ctest --preset mac
 ```
 
 이것이 기본 개발 루프입니다. 다른 네이티브 플랫폼에서는 `mac` 대신 해당 프리셋 이름을 씁니다.
+
+`mac-asan`, `linux-asan`은 `HDTRANS_SANITIZE=address,undefined`로 모든 타깃을 계측하고, 보고가 하나라도
+나오면 프로그램을 멈춥니다. 다른 GCC, Clang 빌드에도 `-DHDTRANS_SANITIZE=...`로 같은 계측을 켤 수 있습니다.
+CI의 `linux-asan` 작업은 Clang으로 이 프리셋을 빌드하고 단위 테스트, 예문, 규칙 사례를 돌립니다. GCC 13으로
+빌드했다면 `ASAN_OPTIONS=detect_stack_use_after_return=0`을 주어야 사전 읽기가 몇 분씩 걸리지 않습니다.
 
 macOS에서 Command Line Tools만 쓰면 컴파일러 확인 단계에서 실패할 수 있습니다. 그때는 Xcode를 쓰게 합니다:
 `export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.

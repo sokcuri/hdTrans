@@ -11,16 +11,16 @@ compose:number-noun	A レベルだ。	A 레벨이다.	keep	compose
 compose:number-noun	Aランクの冒険者。	A랭크의 모험가.	keep	compose
 compose:number-noun	レベルが1上がった。	레벨이 1 올랐다.	keep	compose
 compose:number-noun	二匹の猫。	두 마리의 고양이.	keep	compose
-compose:number-noun	キハ208車両と	키하 208차량과	fix	compose
+compose:number-noun	キハ208車両と	키하 208 차량과	fix	compose
 compose:number-noun	≫372過疎	≫372 과소	fix	compose
 lookup:count-word	HPが1回復した。	HP가 1 회복했다.	fix	lookup
 lookup:count-word	HPが1回復。	HP가 1 회복.	fix	lookup
 lookup:count-word	1回転する。	1 회전한다.	fix	lookup
-lookup:count-word	1回復活した。	한 번 부활했다.	keep	lookup
+lookup:count-word	1回復活した。	1회 부활했다.	keep	lookup
 lookup:count-word	一回復習した。	한 번 복습했다.	keep	lookup
-lookup:count-word	1回見た。	한 번 보았다.	keep	lookup
-compose:number-noun	Lv2スキルを覚えた。	Lv2스킬을 배웠다.	fix	compose
-compose:number-noun	レベル2魔法だ。	레벨 2마법이다.	fix	compose
+lookup:count-word	1回見た。	1회 보았다.	keep	lookup
+compose:number-noun	Lv2スキルを覚えた。	Lv2 스킬을 배웠다.	fix	compose
+compose:number-noun	レベル2魔法だ。	레벨 2 마법이다.	fix	compose
 compose:number-label	５/１４　２３：４０追記	5/14 23：40 추기	fix	compose
 compose:number-label	バレンタイン2026特別限定任務	발렌타인 2026 특별 한정 임무	fix	compose
 compose:number-label	Hi！ Essex class航空母艦、5番艦。	Hi! Essex class 항공모함, 5번함.	fix	compose
@@ -32,3 +32,9 @@ compose:number-label	Gato級潜水艦	Gato급 잠수함	keep	compose
 compose:number-label	１０００ｋｍも離れて	1000km도 떨어져	keep	compose
 compose:number-label	今日は私Houston特製、Java風sandwichをご用意しています。	오늘은 저 Houston 특제, Java풍sandwich를 준비하고 있습니다.	fix	compose
 compose:number-label	Oh...!! 今年ももうDecemberネー！	Oh...!! 금년도 이제 December네!	keep	compose
+grammar:counter-after-spaced-number	2026 年に始まった。	2026 년에 시작했다.	fix	rewrites
+grammar:counter-after-spaced-number	3 年前の話だ。	3 년 전의 이야기다.	keep	rewrites
+grammar:counter-after-spaced-number	１２ 月になった。	12 월이 되었다.	keep	rewrites
+grammar:counter-after-spaced-number	12 歳の子供。	12 세의 아이.	keep	rewrites
+grammar:counter-after-spaced-number	2026年に始まった。	2026년에 시작했다.	keep	local
+grammar:counter-after-spaced-number	12歳の子供。	12세의 아이.	keep	global-stem

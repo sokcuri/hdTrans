@@ -223,6 +223,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 | `register=R` | `end` 줄: 해당 말투의 서술어에만 (`plain`, `casual`, `polite`, `formal`, `archaic` 또는 `해라`, `해`, `해요`, `합쇼`, `하오`) |
 | `stative` | `end` 줄: 상태 서술어에만. 같은 어미의 일반 줄보다 앞에 둠 |
 | `neg=LEMMA` | `v`, `adj` 줄: 이 단어를 부정하는 한국어 동사 |
+| `exclaim` | 내장 `phrases.tsv`의 `intj` 줄: 감탄. 물음표 앞에서는 소리로 읽지 않고 단어로 읽음 (よかった 다행이다, よかった？ 좋았어?) |
 
 정의: `src/core/userdict/userdict.h`.
 

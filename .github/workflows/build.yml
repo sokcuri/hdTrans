@@ -439,6 +439,75 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
+  sanitize:
+    name: linux-asan
+    needs: gate
+    if: ${{ !cancelled() && needs.gate.outputs.run != 'false' && (github.event_name == 'push' || github.event_name == 'pull_request') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    env:
+      CC: clang
+      CXX: clang++
+      HDTRANS_CACHE_DIR: 'off'
+      ASAN_OPTIONS: detect_stack_use_after_return=1
+      UBSAN_OPTIONS: print_stacktrace=1
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up sccache
+        uses: mozilla-actions/sccache-action@v0.0.11
+        with:
+          disable_annotations: true
+      - name: Restore sanitizer compiler cache
+        id: asan-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: sccache-${{ runner.os }}-${{ runner.arch }}-linux-asan-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
+          restore-keys: |
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-asan-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-asan-
+      - name: Configure
+        run: |
+          cmake --preset linux-asan -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
+      - name: Build
+        id: compile
+        run: cmake --build --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)"
+      - name: Compile the dictionaries
+        run: |
+          home="$(mktemp -d)"
+          HOME="$home" build/linux-asan/hdtrans --dicts "$PWD/dicts" --compile-snapshot "$RUNNER_TEMP/dicts.hdsnap"
+          rm -rf "$home"
+      - name: Unit tests and rule cases under the sanitizers
+        run: |
+          unset HDTRANS_REQUIRE_ALL HDTRANS_GOLDEN HDTRANS_TEST_EXCLUDE
+          export HDTRANS_DICTS="$RUNNER_TEMP/dicts.hdsnap"
+          ctest --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)" -R '^(unit|rules\.cases.*|examples)$' \
+            2>&1 | tee build/linux-asan/ctest.log
+      - name: Report sanitizer compiler cache
+        if: always()
+        run: |
+          sccache --show-stats || true
+          sccache --stop-server || true
+      - name: Save sanitizer compiler cache
+        if: >-
+          !cancelled() && steps.compile.outcome == 'success' &&
+          (github.ref == 'refs/heads/develop' || github.event_name == 'pull_request')
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: ${{ steps.asan-cache.outputs.cache-primary-key }}
+      - name: Upload test log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-log-linux-asan
+          overwrite: true
+          if-no-files-found: ignore
+          path: build/linux-asan/ctest.log
+
   release:
     needs: [build, release-tools]
     if: >-

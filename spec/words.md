@@ -29,7 +29,8 @@
 | ディレクトリを移動する。 | 디렉터리를 이동한다. | 고침 |
 | メッセージを送った。 | 메시지를 보냈다. | 유지 |
 
-사례: `tests/rules/cases/it-vocabulary.tsv`, `tests/rules/cases/rules-words.tsv`
+사례: `tests/rules/cases/it-vocabulary.tsv`, `tests/rules/cases/rules-words.tsv`,
+`tests/rules/cases/loanword-spellings.tsv`, `tests/rules/cases/lexical-gloss-cleanup.tsv`
 
 ## LEX-3 사전 뜻풀이는 짧은 한국어 낱말이나 구다
 
@@ -43,7 +44,8 @@
 | ちょっと野暮用で出かける。 | 조금 볼일로 나간다. | 고침 |
 | 黒枠の眼鏡をかけた男。 | 검은 테두리의 안경을 쓴 남자. | 고침 |
 
-사례: `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`
+사례: `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`,
+`tests/rules/cases/lexical-gloss-cleanup.tsv`
 
 ## LEX-4 이름 읽기는 명사로 읽히는 낱말을 덮지 않는다
 
