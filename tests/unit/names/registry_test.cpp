@@ -87,7 +87,8 @@ const dict::Snapshot* Dictionary() {
          "そら\t자\tN110\t\t\tGN\t80\n"
          "星\t별\tN110\t\t\tGN\t81\n"
          "星\t호시\tN130\tQPN\tWa\tGN\t82\n"
-         "犬\t개\tN110\t\t\tGN\t83\n"},
+         "犬\t개\tN110\t\t\tGN\t83\n"
+         "クラエス\t크로에스\tN130\tQPN\t\tGN\t88\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -107,7 +108,10 @@ const dict::Snapshot* Dictionary() {
          "空\t소라\tN130\tQPNVHn\tWb\tGN\t84\n"
          "そら\t소라\tN130\tQPNVHn\tWb\tGN\t85\n"
          "ほし\t호시\tN130\tQPNVHn\tWb\tGN\t86\n"
-         "ぽち\t포치\tN130\tQPNVHn\tWb\tGN\t87\n"},
+         "ぽち\t포치\tN130\tQPNVHn\tWb\tGN\t87\n"
+         "ティオーナ・ルドルフォン\t티오나 루돌폰\tN130\tQPNVHn\t\tGN\t89\n"
+         "カタリナ・クラエス\t카타리나 클라에스\tN130\tQPNVHn\t\tGN\t90\n"
+         "ミーア・ルーナ\t미아루나\tN130\tQPNVHn\t\tGN\t91\n"},
     });
     return loaded.snapshot.get();
 }
@@ -490,6 +494,21 @@ HD_TEST(names_katakana_full_names) {
     HD_CHECK_EQ(m.Render("ユフィリア"), std::string("유피리아"));
     m.SetName("ユフィリア", "유필리아");
     HD_CHECK_EQ(m.Render("ユフィリア・マゼンタ"), std::string("유필리아 마젠타"));
+}
+
+// The parts of a chain name read as the words of its name-layer person reading, in the
+// chain and alone, over a transliteration or a base reading of the part.
+HD_TEST(names_chain_parts_from_layer) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r = Scan(snap, "ティオーナ・ルドルフォン。\nカタリナ・クラエス、八歳。\nルドルフォン辺境伯\nクラエス公爵");
+    HD_CHECK_EQ(r.Render("ティオーナ・ルドルフォン"), std::string("티오나 루돌폰"));
+    HD_CHECK_EQ(r.Render("ルドルフォン"), std::string("루돌폰"));
+    HD_CHECK_EQ(r.Render("カタリナ・クラエス"), std::string("카타리나 클라에스"));
+    HD_CHECK_EQ(r.Render("クラエス"), std::string("클라에스"));
+    // A reading without a word per part leaves the parts to their own readings.
+    names::Registry m = Scan(snap, "ミーア・ルーナは笑った。");
+    HD_CHECK_EQ(m.Render("ミーア・ルーナ"), std::string("미아 루나"));
 }
 
 HD_TEST(names_given_split) {

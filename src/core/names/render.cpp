@@ -2,6 +2,7 @@
 // reading of the document, the readings table, a numbered name as its name and number,
 // the head of a longer katakana name, the name layer's person rendering, and the katakana
 // transliteration.
+#include <algorithm>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -91,6 +92,7 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         const std::string number = text::FromKana(std::string_view(key).substr(x->second.size()), preset);
         if (!head.empty() && IsHangulText(number)) return head + number;
     }
+    if (const std::string kr = ChainPart(t); !kr.empty()) return kr;
     if (const std::string kr = PrefixForm(t); !kr.empty()) return kr;
     const std::string layer = Flags(t).layerName;
     if (snap_ != nullptr) {
@@ -124,6 +126,24 @@ std::string Registry::PersonName(std::string_view t) {
     if (snap_ == nullptr || !AllRunes(t, IsKatakana)) return "";
     const std::string kr = snap_->PersonName(t);
     return IsHangulText(kr) ? kr : "";
+}
+
+std::string Registry::ChainPart(std::string_view x) {
+    for (const auto& [t, n] : Accepted()) {
+        if (!n.hasParts || n.parts.size() < 2) continue;
+        if (t.find("・") == std::string::npos && t.find("＝") == std::string::npos) continue;
+        const auto at = std::find(n.parts.begin(), n.parts.end(), x);
+        if (at == n.parts.end()) continue;
+        const std::string layer = Flags(t).layerName;
+        std::vector<std::string> words;
+        for (std::size_t i = 0; i <= layer.size();) {
+            const std::size_t sp = std::min(layer.find(' ', i), layer.size());
+            if (sp > i) words.push_back(layer.substr(i, sp - i));
+            i = sp + 1;
+        }
+        if (words.size() == n.parts.size()) return words[static_cast<std::size_t>(at - n.parts.begin())];
+    }
+    return "";
 }
 
 std::string Registry::PrefixForm(std::string_view x) {
