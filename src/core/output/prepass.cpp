@@ -899,9 +899,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 return body.size() >= 2 && IsKanji(body[0]) && HasRune(U"いきぎしちひびみりえけげせてでねべめれ", body.back()) &&
                        std::none_of(body.begin(), body.end(), [](char32_t r) { return r == U'な' || r == U'の'; });
             };
+            // Its Korean must not be a verb phrase made a noun (流し読み 대강 읽기, お留守番 집 지키기).
+            const bool koreanVerbalNoun = t.find(' ') == std::string::npos || !t.ends_with("기");
             const bool verbalNoun = Contains(tags, "Hd") ||
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
-                                    kanjiCompound(item.surface) || (settings_.literal && stemOrHonorific(item.surface));
+                                    kanjiCompound(item.surface) ||
+                                    (settings_.literal && koreanVerbalNoun && stemOrHonorific(item.surface));
             auto startsWithAny = [](std::string_view s, std::span<const std::string_view> list) {
                 return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
             };
