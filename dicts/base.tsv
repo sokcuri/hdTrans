@@ -97237,7 +97237,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 三人吉三廓初買	삼인길삼확초매	N110	VBkVSwUAr		GN				jisjk:233154		
 三人姉妹	삼인자매	N110	USoQMU		GN				jisjk:233155		
 三人片輪	삼인편륜	N110	VBkVSw		GN				jisjk:233152		
-三人目	3명째	N110	UMe		GN				jisjk:186071		
+三人目	3번째	N110	UMe		GN				jisjk:186071		
 三人称	삼인칭	N110			GN				jisjk:186069		
 三仏生	삼부쇼	N130	QCTVPl		GN				jisjk:296827		
 三仙橋	삼선교	N130	QST		GN				jisjk:374351		
@@ -117166,7 +117166,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 人的資源	인적자원	I110			GN				jisjk:80126		
 人的資源会計	인적자원회계	N110			GN				jisjk:237632		
 人皇	진노	N110	VHn		GN				jisjk:237635		
-人目	명째	N110		Ct	GN				jisjk:31290		
+人目	번째	N110		Ct	GN				jisjk:31290		
 人目	남의 눈	N110			GN	973	||1 &&4 P+1== "2**" S+2== "引" D+2== "&L2@" P+2== "4**"	뒤에 조사와 끌다로 번역되는 引 동사가 오면 人目를 남의 눈으로 고른다. (미발동: rare-context)	jisjk:114908		
 人目がうるさ	남의 눈이 성가$A6@	H7N0			GN				jisjk:137753		
 人目とな	명째가 &C6@	M428		Dx	GN				jisjk:147599		

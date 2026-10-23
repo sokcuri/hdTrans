@@ -882,7 +882,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
         return Result(std::move(t), false);
     }
-    // The 째 of an ordinal joins the count before it (一度目 첫 번째, 二人目 두 명째).
+    // The 째 of an ordinal joins the count before it (一度目 첫 번째, 二人目 두 번째).
     if (nextIndex == i + 1 && Ordinal(items, i) && next.surface.starts_with("目") && EntryText(next).starts_with("째")) {
         return Result(std::move(t), false);
     }
