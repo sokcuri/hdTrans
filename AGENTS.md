@@ -5,6 +5,8 @@ One static library and thin front ends: CLI, `hdTransEngine.dll` (C API), `J2KEn
 as sources in third_party/ (built by CMake, no network): PCRE2 for the regex rows of
 the filter stage (src/core/filter), libyaml for optional settings (src/core/config).
 README.md is for users; developer documentation is in docs/ (index: docs/README.md).
+Working procedures are Claude Code skills in skills/ (skills/README.md); link them once per
+checkout with `mkdir -p .claude && ln -s ../skills .claude/skills`.
 
 ## Build and test
 - CMake presets (CMakePresets.json): `mac` / `linux` use Ninja with clang or gcc;
