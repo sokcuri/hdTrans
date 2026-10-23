@@ -657,9 +657,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
     }
     // A person of the name layer that no other dictionary reads needs one piece of evidence
-    // less, unless it is written in kana alone (a hiragana run before honorifics, below).
+    // less, a hiragana one too when an honorific has followed it (まきちゃん), but not one
+    // written in katakana.
     for (auto& [t, n] : all) {
-        if (!n.person || n.label || n.score <= 0 || AllRunes(t, IsKatakana) || AllRunes(t, IsHiragana)) continue;
+        if (!n.person || n.label || n.score <= 0 || AllRunes(t, IsKatakana)) continue;
+        if (AllRunes(t, IsHiragana) && kanaHon_.count(t) == 0) continue;
         const DictFlags f = Flags(t);
         if ((f.layerSurname || f.layerGiven) && !f.common && !f.person && !f.role) n.score += 1;
     }
@@ -826,15 +828,16 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (RuneCount(t) == 1 && AllRunes(t, IsKanji) && !n.label) need = kSingleThreshold;
         if (AllRunes(t, IsHiragana) && !n.label) {
             // A hiragana run seen before an honorific is a name there; it stands for the person
-            // alone only when its score reaches the threshold, as after two honorifics, and it is
-            // no common word and no predicate form (あおいさん, but あおい空).
+            // alone only when its score reaches the threshold, as after two honorifics, or twice
+            // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
+            // but あおい空).
             const auto k = kanaHon_.find(t);
             if (k == kanaHon_.end()) {
                 // A name given in parentheses (Add) stands alone.
                 if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;
                 continue;
             }
-            if (n.score < need || Flags(t).common || PredicateForm(t)) {
+            if (n.score < (Flags(t).common ? 2 * need : need) || PredicateForm(t)) {
                 Name h = n;
                 h.honorificOnly = true;
                 scores_[t] = h;
@@ -1168,7 +1171,13 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
             ok = a == 0 || !IsHiragana(internal::RuneBefore(line, a).cp) || (honorific && !Flags(found).thing);
         }
         const bool bare = acc.at(found).honorificOnly && !honorific;
-        if (ok) out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
+        if (ok) {
+            out.push_back(Occurrence{a, b, found, bare || Guarded(line, a, b)});
+        } else if (AllRunes(found, IsHiragana) && Flags(found).common && !acc.at(found).label) {
+            // A common word that only honorifics name stays the word inside a hiragana run
+            // (最後のひかり).
+            out.push_back(Occurrence{a, b, found, true});
+        }
     }
     return out;
 }

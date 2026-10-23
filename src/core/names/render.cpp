@@ -107,7 +107,11 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     const bool katakana = AllRunes(t, IsKatakana);
     const auto acc = Accepted().find(key);
     const bool given = acc != Accepted().end() && acc->second.given;
-    if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given)) return layer;
+    // A common kanji word that honorifics have shown to be a person reads as the person of
+    // the name layer (葉月さん 하즈키), not as the first row of the word.
+    const bool called = acc != Accepted().end() && hon_.count(key) > 0 && AllRunes(t, IsKanji) && Flags(t).common &&
+                        LayerReading(t);
+    if (!layer.empty() && !katakana && ((!Flags(t).common && RuneCount(t) > 1) || given || called)) return layer;
     if (std::string kr = whole && katakana && snap_ != nullptr ? snap_->NameReading(t) : PersonName(t);
         IsHangulText(kr)) {
         return kr;

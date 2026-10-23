@@ -281,21 +281,25 @@ HD_TEST(names_labels) {
     }
     // A hiragana person of the name layer that no other dictionary reads is a name before an
     // honorific, also after a particle; a particle after a kanji starts no name (体がびくん).
-    // It stands for the person alone after two honorifics; after one, and for a common word
-    // (ひかり) or the form of an adjective (あおい), only where an honorific follows it.
+    // It stands for the person alone after one honorific, a common word (ひかり) after four;
+    // the form of an adjective (あおい) only where an honorific follows it.
     {
         const std::vector<std::string> tsugumi = {"つぐみ"};
         names::Registry once = Scan(snap, "「つぐみちゃん的にはどう？」\n");
         HD_CHECK(once.Names() == tsugumi);
-        HD_CHECK(once.HonorificOnlyNames() == tsugumi);
+        HD_CHECK(once.HonorificOnlyNames().empty());
         HD_CHECK_EQ(Occurrences(once, "つぐみちゃん"), std::string("つぐみ"));
-        HD_CHECK_EQ(Occurrences(once, "デスク、つぐみが唸る。"), std::string("つぐみ!"));
+        HD_CHECK_EQ(Occurrences(once, "デスク、つぐみが唸る。"), std::string("つぐみ"));
         HD_CHECK_EQ(Occurrences(once, "妹のつぐみちゃん。"), std::string("つぐみ"));
         HD_CHECK_EQ(Occurrences(once, "ねえつぐみちゃん"), std::string("つぐみ"));
-        HD_CHECK(Scan(snap, "「ねえつぐみちゃん」\n").HonorificOnlyNames() == tsugumi);
+        HD_CHECK(Scan(snap, "「ねえつぐみちゃん」\n").HonorificOnlyNames().empty());
         names::Registry twice = Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n");
         HD_CHECK(twice.Names() == tsugumi);
         HD_CHECK(twice.HonorificOnlyNames().empty());
+        names::Registry four = Scan(snap, Repeat("ひかりちゃん、おはよう。", 4));
+        HD_CHECK(four.HonorificOnlyNames().empty());
+        HD_CHECK_EQ(Occurrences(four, "ひかりは笑った。"), std::string("ひかり"));
+        HD_CHECK_EQ(Occurrences(four, "最後のひかりだった。"), std::string("ひかり!"));
         HD_CHECK(Scan(snap, Repeat("体がびくんと跳ねる。", 3)).Names().empty());
         names::Registry aoi = Scan(snap, Repeat("あおいさんが来た。", 3));
         HD_CHECK(aoi.HonorificOnlyNames() == (std::vector<std::string>{"あおい"}));
@@ -362,6 +366,8 @@ HD_TEST(names_honorifics) {
         names::Registry r = Scan(snap, doc);
         HD_CHECK(r.Names() == want);
     }
+    // A common word that honorifics show to be a person reads as the person of the name layer.
+    HD_CHECK_EQ(Scan(snap, Repeat("桃花ちゃん、おはよう。", 4)).Render("桃花"), std::string("모모카"));
     names::Registry r = Scan(snap, Repeat("リン様", 4));
     HD_CHECK_EQ(r.Render("リン"), std::string("린"));
 }

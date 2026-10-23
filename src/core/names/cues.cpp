@@ -655,6 +655,15 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     return "";
 }
 
+// Whether the name layer reads t as a person with a Hangul that is no Korean of its words
+// (東雲 시노노메 beside 새벽, but 店員 점원, 猫 고양이), and t is no person, profession,
+// animal or thing noun.
+bool Registry::LayerReading(std::string_view t) {
+    const DictFlags f = Flags(t);
+    if (f.layerName.empty() || f.role || f.thing || f.pronoun || f.human || RoleLike(t)) return false;
+    return Words(t).count(f.layerName) == 0;
+}
+
 // Whether the hiragana run is a form of a base-dictionary verb or adjective that ends a
 // predicate: an adjective stem and い (あおい), or a verb stem and one kana of the u row
 // (かおる). The 連用 form, which also makes nouns (つぐみ, のぞみ), does not count.
