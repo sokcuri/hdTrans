@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:ending-kana-darouka	ちょっとタイミングが悪かったかな。	조금 타이밍이 나빴나.	fix	local-ending
+dict:ending-kana-darouka	大丈夫だろうか。	괜찮을까.	fix	local-ending
+dict:ending-kana-darouka	そんな道具があっただろうか？	그런 도구가 있었을까?	fix	local-ending
