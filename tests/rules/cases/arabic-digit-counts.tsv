@@ -33,3 +33,6 @@ compose:native-count-idiom	3度も言った。	3번이나 말했다.	keep	compos
 dict:jisjk:267304	2度と来るな。	두 번 다시 오지 마.	fix	lookup
 compose:native-count-ordinal	1杯目のコーヒー	1잔째의 커피	fix	compose
 compose:native-count-ordinal	1杯	한잔	keep	compose
+L1928	2枚目を見る。	2장째를 본다.	fix	local
+L1928	2枚目の写真。	2장째의 사진.	fix	local
+L1928	二枚目の俳優。	미남의 배우.	keep	local
