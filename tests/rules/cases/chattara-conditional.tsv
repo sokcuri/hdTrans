@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:colloquial-endings:13	食べちゃったら困る。	먹어 버리면 곤란하다.	fix	lookup
+dict:colloquial-endings:13	ここに定住しちゃったらいい。	여기에 정주해 버리면 좋다.	fix	lookup
+dict:colloquial-endings:13	食べちゃった。	먹어 버렸다.	keep	lookup
