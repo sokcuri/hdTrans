@@ -558,3 +558,9 @@ test('the record job runs only after a passing matrix or a matched release-files
   assert.match(gate, /permissions:\n      contents: read\n      actions: read\n/);
   assert.match(publisher, /  build:\n    needs: validate\n    permissions:\n      contents: write\n      actions: read\n/);
 });
+
+test('branch pushes build only main and develop; superseded pull request runs are cancelled', () => {
+  const triggers = build.slice(build.indexOf('\non:\n'), build.indexOf('\npermissions:'));
+  assert.match(triggers, /  push:\n    branches: \[main, develop\]\n  pull_request:\n/);
+  assert.match(build, /concurrency:\n  group: build-\$\{\{ github\.workflow \}\}-\$\{\{ github\.ref \}\}\n  cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/);
+});
