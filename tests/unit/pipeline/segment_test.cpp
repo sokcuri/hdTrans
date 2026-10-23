@@ -176,4 +176,10 @@ HD_TEST(pipeline_segment_column_gaps) {
     HD_CHECK_EQ(internal::ColumnGap("  b", 0, false, false), size_t{0});
     HD_CHECK_EQ(internal::ColumnGap("  b", 0, true, false), size_t{2});
     HD_CHECK_EQ(internal::ColumnGap("a  ", 1, false, true), size_t{3});
+    // Inside a run, and in leading or trailing white space, the run is not a separator.
+    HD_CHECK_EQ(internal::ColumnGap("a   b", 2, false, false), size_t{2});
+    HD_CHECK_EQ(internal::ColumnGap("a   ", 1, false, false), size_t{1});
+    // A long run of leading and trailing white space is cut in linear time.
+    const std::string blanks(1 << 20, ' ');
+    HD_CHECK_EQ(cut({{blanks + "猫" + blanks, output::SpanText}}), blanks + "猫" + blanks);
 }

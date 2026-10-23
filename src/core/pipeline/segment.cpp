@@ -64,11 +64,13 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
 }  // namespace
 
 bool KanaSpace(std::string_view s, size_t i) {
+    // The run of spaces is read only after a hiragana, so that a long run costs one pass.
     const char32_t last = LastRune(s.substr(0, i)).cp;
+    if (!IsHiraganaRune(last)) return false;
     std::string_view rest = s.substr(i);
     while (!rest.empty() && rest[0] == ' ') rest.remove_prefix(1);
     const char32_t first = text::DecodeRune(rest).cp;
-    if (!IsHiraganaRune(last) || !IsJapaneseRune(first)) return false;
+    if (!IsJapaneseRune(first)) return false;
     return RuneIn(last, U"ねよさわぞぜ") ||
            (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか"));
 }
@@ -84,13 +86,16 @@ bool Conjunctive(std::string_view s) {
 }
 
 size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) {
-    const size_t blanks = RunOf(s.substr(i), IsBlank);
-    const std::string_view run = s.substr(i, blanks);
-    if (blanks == 0 || (run.find('\t') == std::string_view::npos && LastRune(run).size == blanks)) return i;
-    const size_t end = i + blanks;
+    // The checks on the characters around i come before the run is read, so that only the
+    // first blank of a run reads it and a long run costs one pass.
+    if (i >= s.size() || !IsBlank(text::DecodeRune(s.substr(i)).cp)) return i;
     auto lineEnd = [](char32_t r) { return r == U'\n' || r == U'\r'; };
     const text::Rune last = LastRune(s.substr(0, i));
     if (i == 0 ? !lineBefore : (IsBlank(last.cp) || lineEnd(last.cp))) return i;
+    const size_t blanks = RunOf(s.substr(i), IsBlank);
+    const std::string_view run = s.substr(i, blanks);
+    if (run.find('\t') == std::string_view::npos && LastRune(run).size == blanks) return i;
+    const size_t end = i + blanks;
     const text::Rune next = text::DecodeRune(s.substr(end));
     if (end == s.size() ? !lineAfter : lineEnd(next.cp)) return i;
     // A single kanji on each side, each standing alone: a two-character name padded to the
@@ -110,6 +115,7 @@ size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) 
 bool BetweenWords(std::string_view s, size_t i) {
     auto word = [](char32_t r) { return r != text::kReplacement && !IsBlank(r) && r != U'\n' && r != U'\r'; };
     const text::Rune last = LastRune(s.substr(0, i));
+    if (!word(last.cp)) return false;  // before the run is read: one pass per run
     const char32_t before = LastRune(s.substr(0, i - last.size)).cp;
     const std::string_view rest = TrimLeftRunes(s.substr(i), U" 　\t");
     const text::Rune first = text::DecodeRune(rest);
