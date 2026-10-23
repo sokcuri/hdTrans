@@ -755,9 +755,10 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         } else if (r == U'ー' || r == U'～' || IsSmallVowel(r) ||
                    (v >= 0 && r == kEmphasisVowels[v][1] && r != prev && i + 1 < rs.size() &&
                     (rs[i + 1] == kEmphasisVowels[v][0] || rs[i + 1] == r))) {
-            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || In(prev, U"あいうえお")) {
-                continue;  // ああっ, あぁすみません: the lengthened interjection
-            }
+            // ああっ, あぁすみません: the lengthened interjection; but the い of an adjective stem
+            // takes a mark for its own い (かわいー).
+            const bool stemI = prev == U'い' && (r == U'ー' || r == U'～') && e.LongStem(rs, from, i);
+            if ((IsSmallVowel(r) && v >= 0 && r != kEmphasisVowels[v][0]) || (In(prev, U"あいうえお") && !stemI)) continue;
             const bool plainStart = !IsSmallVowel(r) && r != U'ー' && r != U'～';
             bool small = IsSmallVowel(r) || plainStart;
             while (end < rs.size()) {
@@ -770,13 +771,15 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 }
                 break;
             }
-            // The long vowel of an adjective in しい spelled with ー or ～ (おいしー, うれしー,
-            // たのしーね): the stem of an adjective ends before the mark, which stands for its
-            // い; drawn out before a pause (おいしい～！) and plain before a particle.
-            if (!plainStart && v == 1 && prev != U'い' &&
+            // The long vowel of an adjective in しい, or in いい after a stem of three or more
+            // kana, spelled with ー or ～ (おいしー, うれしー, かわいー, たのしーね): the stem of
+            // an adjective, not also a noun unless it ends in い (かわい is also a name), ends
+            // before the mark, which stands for its い; drawn out before a pause (おいしい～！)
+            // and plain before a particle.
+            if (!plainStart && v == 1 && (prev != U'い' || stemI) &&
                 std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー' || c == U'～'; }) &&
                 (end >= rs.size() || !IsHiraganaRune(rs[end]) || In(rs[end], U"よねなのじゃわしかさぞ")) &&
-                e.AdjectiveStemBefore(rs, from, i) && !e.StemTagged(rs, from, i, "N")) {
+                e.AdjectiveStemBefore(rs, from, i) && (stemI || !e.StemTagged(rs, from, i, "N"))) {
                 const bool pause = end >= rs.size() || IsPause(rs[end]);
                 rs = Spliced(rs, i, pause ? U"い～" : U"い", end);
                 changed = true;
