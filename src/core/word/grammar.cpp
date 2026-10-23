@@ -269,20 +269,79 @@ bool ModifiesNoun(const Item* it) {
                         [&](std::string_view c) { return n->group->surface.starts_with(c); });
 }
 
+// Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様).
+constexpr std::string_view kHonorificTitles[] = {
+    "様", "さま", "殿", "殿下", "陛下", "閣下", "猊下", "先生", "王子", "王女", "王妃", "国王", "皇帝", "皇后",
+    "皇太子", "女王", "母上", "父上", "兄上", "姉上",
+};
+
+// Whether noun item n names someone the speaker honours.
+bool HonouredPerson(const Item* n) {
+    if (n == nullptr || n->detail->Yougo() || n->selected < 0) return false;
+    const std::string_view s = n->group->surface;
+    for (const std::string_view t : kHonorificTitles) {
+        if (s.ends_with(t)) return true;
+    }
+    return false;
+}
+
+// The Korean of the quote passive of item it (天才と言われた) that is not before a noun it
+// describes, by the subject and the form:
+//   - after a condition or a concession (と言われれば, と言われても) the impersonal 하다;
+//   - with a subject は, が or も before a quoted noun (王子は天才と言われていた), the subject
+//     is called (불리다), or told (라는 말을 듣다) when it is a person and the form is neither a
+//     ている form nor the continuative before a comma (彼は天才と言われた);
+//   - another quote with an honoured subject in the sentence is the respectful 言われる, which
+//     the active reads (382さんは10体くらいと言われていました);
+//   - with no such subject: said by people (라고들 하다) in the ている forms, the impersonal
+//     하다 before a comma, told otherwise (バカと言われたことがある 바보라는 말을 들은 적이 있다).
+// head is the Korean before 라고 ((이)), rest the text after the item (われていた); "" keeps the
+// active reading.
+std::string QuotePassive(const Item* it, std::string_view head, std::string_view rest) {
+    const std::string h(head);
+    if (rest.starts_with("われ")) rest.remove_prefix(std::string_view("われ").size());
+    for (const std::string_view c : {"れば", "たら", "ても", "ては", "ちゃ"}) {
+        if (rest.starts_with(c) && !rest.starts_with("てはい") && !rest.starts_with("てはお")) return h + "라고 &AV@";
+    }
+    bool stative = false;
+    for (const std::string_view p : {"てい", "てる", "てお", "てた", "ては"}) stative = stative || rest.starts_with(p);
+    const bool comma = rest.starts_with(kJaComma) || rest.starts_with(",");
+    const Item* quote = it->prev;
+    if (quote == nullptr) return h + (stative ? "라고들 &AV@" : "라는 말을 &J6@");
+    const Entry* label = quote->detail->Yougo() ? nullptr : quote->group->At(std::max(quote->selected, 0));
+    if (const Item* p = quote->prev; label != nullptr && label->cls == 'N' && At(label->code, 0) == '1' &&
+                                     p != nullptr && p->prev != nullptr && !p->prev->detail->Yougo() &&
+                                     (p->group->surface == "は" || p->group->surface == "が" || p->group->surface == "も")) {
+        const bool person = Person(p->prev->Attr(std::max(p->prev->selected, 0)));
+        return h + (person && !stative && !comma ? "라는 말을 &J6@" : "라고 불&AA@");
+    }
+    for (const Item* p = quote; p != nullptr && !Has("。！？!?「」『』", p->group->surface); p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if ((s == "は" || s == "が" || s == "も") && p->prev != nullptr &&
+            (HonouredPerson(p->prev) || p->prev->group->surface == "さん")) {
+            return {};
+        }
+    }
+    return h + (stative ? "라고들 &AV@" : comma ? "라고 &AV@" : "라는 말을 &J6@");
+}
+
 // The passive of a word in 言 (言う with what is said before it) has no 지다 passive in
-// Korean: after a quote it is the active 하다 (待てと言われて 기다리라고 해서), or 불리다 before a
-// noun it describes (無口と言われた下女 과묵이라고 불린 하녀); after an object 하다 becomes 듣다
-// (嫌味を言われる 비꼬는 말을 듣다). Other words in 言 keep their passive.
+// Korean: after a quote it is 불리다 before a noun it describes (無口と言われた下女 과묵이라고
+// 불린 하녀) and otherwise QuotePassive; after an object 하다 becomes 듣다 (嫌味を言われる
+// 비꼬는 말을 듣다). Other words in 言 keep their passive.
 void SayPassive(Item* it) {
     const std::string_view s = it->group->surface;
     if (!s.ends_with("言") || s == "言") return;
     const bool object = s.ends_with("を言");
+    const std::string_view rest = From(it->text, it->start + static_cast<long>(s.size()));
     const int count = static_cast<int>(it->group->entries.size());
     std::vector<std::string> targets;
     for (int slot = 0; slot < count; slot++) {
         const std::string_view t = it->EntryText(slot);
         if (const std::size_t q = t.find("라고"); q != std::string_view::npos) {
-            targets.emplace_back(ModifiesNoun(it) ? std::string(t.substr(0, q)) + "라고 불&AA@" : std::string(t));
+            std::string target = ModifiesNoun(it) ? std::string(t.substr(0, q)) + "라고 불&AA@"
+                                                  : QuotePassive(it, t.substr(0, q), rest);
+            targets.push_back(target.empty() ? std::string(t) : std::move(target));
         } else if (object && t.ends_with("&AV@")) {
             targets.push_back(std::string(t.substr(0, t.size() - std::string_view("&AV@").size())) + "&J6@");
         } else {
@@ -449,25 +508,9 @@ void OwnPassives(Flusher& f) {
 
 namespace {
 
-// Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様).
-constexpr std::string_view kHonorificTitles[] = {
-    "様", "さま", "殿", "殿下", "陛下", "閣下", "猊下", "先生", "王子", "王女", "王妃", "国王", "皇帝", "皇后",
-    "皇太子", "女王", "母上", "父上", "兄上", "姉上",
-};
-
 // Godan stems of permitting, entrusting and taking away, whose subject before the object and
 // (ら)れ is the one acted on (参加を許される, 王位を奪われた).
 constexpr std::string_view kReceiverVerbs[] = {"許", "任", "託", "奪", "盗", "取り上げ"};
-
-// Whether noun item n names someone the speaker honours.
-bool HonouredPerson(const Item* n) {
-    if (n == nullptr || n->detail->Yougo() || n->selected < 0) return false;
-    const std::string_view s = n->group->surface;
-    for (const std::string_view t : kHonorificTitles) {
-        if (s.ends_with(t)) return true;
-    }
-    return false;
-}
 
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;

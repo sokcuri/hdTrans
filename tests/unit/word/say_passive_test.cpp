@@ -29,11 +29,14 @@ std::string Translate(std::string_view text) {
 
 }  // namespace
 
-// The passive of 言う after a quote is the active 하다, 불리다 before a noun it describes;
-// after an object 하다 becomes 듣다. No 말해지다 or 해지다.
+// The passive of 言う after a quote is 불리다 before a noun it describes or after a subject
+// that is no person, 라는 말을 듣다 without a subject; after an object 하다 becomes 듣다. No
+// 말해지다, 해지다 or an active 말하다.
 HD_TEST(word_say_passive) {
     const std::string quoted = Translate("天才と言われた。");
-    HD_CHECK(quoted.ends_with("라고 했다."));
+    HD_CHECK(quoted.ends_with("라는 말을 들었다."));
+    const std::string called = Translate("男が天才と言われた。");
+    HD_CHECK(called.find("라고 불") != std::string::npos && called.find("말했") == std::string::npos);
     const std::string named = Translate("天才と言われた男が来た。");
     HD_CHECK(named.find("라고 불") != std::string::npos && named.find("해지") == std::string::npos);
     HD_CHECK_EQ(Translate("嫌味を言われた。"), "비꼬는 말을 들었다.");

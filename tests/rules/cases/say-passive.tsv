@@ -2,4 +2,10 @@ rule	input	expected	kind	layer
 rewrite:say-passive	不快ではあったが、嫌味を言われても仕方がない。	불쾌한 것은 않았지만, 비꼬는 말을 들어도 어쩔 수 없다.	fix	rewrites
 rewrite:say-passive	彼女に嫌味を言われるまでもない。	그녀에게 비꼬는 말을 들을 것도 없다.	fix	rewrites
 rewrite:say-passive	無愛想で無口と言われた下女が話しかけた。	무뚝뚝해 과묵이라고 불린 하녀가 말을 걸었다.	fix	rewrites
-rewrite:say-passive	馬鹿じゃねーのと言われるのが関の山だ。	바보같지 않아라는 것이 기껏해야 그 정도다.	fix	rewrites
+rewrite:say-passive	馬鹿じゃねーのと言われるのが関の山だ。	바보같지 않아라는 말을 듣는 것이 기껏해야 그 정도다.	fix	rewrites
+rewrite:say-passive	王子は天才と言われていた。	왕자는 천재라고 불렸다.	fix	rewrites
+rewrite:say-passive	バカと言われたことがある。	바보라는 말을 들었던 적이 있다.	fix	rewrites
+rewrite:say-passive	その威力は圧倒的と言われていたけれど、出番はなかった。	그 위력은 압도적이라고들 했지만, 차례는 없었다.	fix	rewrites
+rewrite:say-passive	平が氏と言われ、一族のルーツを示す。	평이 씨라고 불려 일족의 루트를 나타낸다.	fix	rewrites
+rewrite:say-passive	王子は天才と言われている。	왕자는 천재라고 불리고 있다.	keep	rewrites
+rewrite:say-passive	382さんは10体くらいと言われていましたが	382 씨는 10체 정도라고 말했습니다만	keep	rewrites
