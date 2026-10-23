@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+segmentation:tachi-plural	骨ごと犬たちにやった。	뼈 마다 개들에게 했다.	fix	lookup
+segmentation:tachi-plural	この犬たち、知能が高い。	이 개들, 지능이 높다.	fix	lookup
+segmentation:tachi-plural	犬たち以外は寝ている。	개들 이외는 자고 있다.	fix	lookup
+segmentation:tachi-plural	木を断ちに行く。	나무를 끊으러 간다.	keep	lookup

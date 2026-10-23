@@ -123,6 +123,49 @@ Record* ReorderAfterNoun(const Item& parent, Record* records) {
     return records;
 }
 
+// After a noun parent, a suffix noun of persons that attaches to it (gram Tu, sense VHn:
+// たち) moves ahead of the verb or adjective records of a shorter key it starts with
+// (犬たちに: 들, not 断ち + に).
+Record* SuffixAfterNoun(const Item& parent, Record* records) {
+    if (At(parent.Code(0), 0) != '1') return records;
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || (At(first->partCode, 1) != '4' && At(first->partCode, 1) != '7')) return records;
+    std::string_view suffix;
+    for (Record* r = first; r != nullptr; r = r->child) {
+        if (At(r->partCode, 1) == '1' && Has(r->attr, "Tu") && Has(r->semantic, "VHn") &&
+            r->source.size() > first->source.size() && r->source.starts_with(first->source)) {
+            suffix = r->source;
+            break;
+        }
+    }
+    if (suffix.empty()) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '1' && r->source == suffix) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
 // Text that starts with a particle or punctuation, or is empty.
 bool NounEnd(std::string_view text) {
     if (text.empty()) return true;
@@ -565,6 +608,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
+        if (settings.text) records = SuffixAfterNoun(*parent, records);
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
