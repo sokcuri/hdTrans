@@ -71,6 +71,10 @@ constexpr ConstraintRule kRules[] = {
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
+    {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
+     "줄 첫머리의 ということで、는 동사 という + ことで가 아니라 연결 표현 그래서 (그렇다고 하는 것으로, → 그래서,)", {}},
+    {"to-iu-kotode-opening", ConstraintWord::Source, "と言", ConstraintContext::OpeningKotode, ConstraintReject::Word,
+     "줄 첫머리의 と言うことで、는 동사 と言う + ことで가 아니라 연결 표현 그래서 (이렇게 말하는 것으로, → 그래서,)", {}},
     {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
@@ -280,6 +284,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
         }
         return StartsWithAny(after, kSuruTails);
+    case ConstraintContext::OpeningKotode:
+        return (previous.empty() || previous == "…" || previous == "‥" || StartsWithAny(previous, kOpeningBrackets)) &&
+               (after.starts_with("うことで、") || after.starts_with("うことで，"));
     case ConstraintContext::NounSlot: {
         if (after.starts_with("よう") || after.starts_with("させ") || after.starts_with("され")) return false;
         if (StartsWithAny(after, kNounFollowers)) return true;

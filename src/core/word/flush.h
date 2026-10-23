@@ -56,9 +56,6 @@ void PassiveRecords(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
-// The ことで of ということで read as a means (함으로써) is the connective 것으로 (그렇다고 하는
-// 것으로).
-void SayingKotode(Flusher& f);
 void GoNotSay(Flusher& f);
 void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);

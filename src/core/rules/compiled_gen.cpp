@@ -1130,6 +1130,7 @@ bool RuleL126([[maybe_unused]] Item* p) {
 //     src[-1] == "も" and src[-2] == "こと" and src[-3] ends "な"
 //     src[-1] == "は" and end.src[-2] == "わけで"
 //     end.src == "いの" and pos[-1] is 7** and end.src[-1] == "いんじゃ" and end.ko := "1야"
+//     pos[-1] is 4** and end.src[-1] ends "ことで" and end.ko[-1] := "0 것이"
 bool RuleL127([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && (GobiSrcEq(p, -1, "Rでは"sv) ||
            GobiSrcEq(p, -1, "Rでも"sv))) ||
@@ -1140,7 +1141,8 @@ bool RuleL127([[maybe_unused]] Item* p) {
            (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "くも"sv) && GobiDstSet(p, -1, "4 것도"sv)) ||
            (SrcEq(p, -1, "も"sv) && SrcEq(p, -2, "こと"sv) && SrcEq(p, -3, "Rな"sv)) ||
            (SrcEq(p, -1, "は"sv) && GobiSrcEq(p, -2, "わけで"sv)) ||
-           (GobiSrcEq(p, 0, "いの"sv) && PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "いんじゃ"sv) && GobiDstSet(p, 0, "1야"sv));
+           (GobiSrcEq(p, 0, "いの"sv) && PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "いんじゃ"sv) && GobiDstSet(p, 0, "1야"sv)) ||
+           (PumsaEq(p, -1, "4**"sv) && GobiSrcEq(p, -1, "Rことで"sv) && GobiDstSet(p, -1, "0 것이"sv));
 }
 
 // local 128
@@ -4560,7 +4562,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL124, 0xbb1e107e37f49179ull},
     {RuleL125, 0x8235363acd731940ull},
     {RuleL126, 0x470def2162c6893dull},
-    {RuleL127, 0x43cd5dee60cf1944ull},
+    {RuleL127, 0x43dbd03df3b8e3cbull},
     {RuleL128, 0xe073a2c392a97b83ull},
     {RuleL129, 0x33fc731cc8c927adull},
     {RuleL130, 0x3491da01c9a9f487ull},

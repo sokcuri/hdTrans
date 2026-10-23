@@ -138,6 +138,22 @@ bool PositiveDoubleNegative(const dict::UserEntry& u, std::string_view left, std
     return !left.substr(0, left.size() - query.size()).ends_with("な");
 }
 
+// The means ことで (送ることで 보냄으로써) neither after 言う (ということで, と言うことで: the
+// connective 그래서, 라는 것으로) nor before the negative copula (満たすことでなく
+// 채우는 것이 아니라); query is the text from ことで on, left its token.
+bool SaysOrNegates(std::string_view left, std::string_view query) {
+    const std::string_view rest = query.substr(std::min(query.size(), std::string_view("ことで").size()));
+    for (const std::string_view no : {"ない", "なく", "なけ", "なかっ", "無"}) {
+        if (rest.starts_with(no)) return true;
+    }
+    if (left.size() < query.size()) return false;
+    const std::string_view before = left.substr(0, left.size() - query.size());
+    for (const std::string_view say : {"いう", "言う", "云う", "ゆう"}) {
+        if (before.ends_with(say)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -367,6 +383,7 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
     }
     const std::string_view left = Tok(current).text;
     if (AskedNegativeGuess(u, left, query) || PositiveDoubleNegative(u, left, query)) return false;
+    if (u.key.ends_with("ことで") && SaysOrNegates(left, query)) return false;
     if (tag == 'P') {
         const long before = std::max(static_cast<long>(left.size()) - static_cast<long>(query.size()), 0L);
         if (!NounBefore(left.substr(0, static_cast<std::size_t>(before)))) return false;
