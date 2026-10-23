@@ -8,7 +8,8 @@
 A resolved block keeps the ours lines, then the theirs lines not already in it; the base
 section of a diff3 block is dropped. A block where ours and theirs hold different rows for the
 same identity is left as it is: the same `id` in a table with an id column, the same rule, input
-and expectation kind in a case table, else the same key and class (first and third column).
+and expectation kind in a case table, the same set and member in classes.tsv, else the same key
+and class (first and third column).
 Exit 1 when a block is left.
 
 --check reports conflict markers, rows repeated verbatim, an id carried by more than one row
@@ -34,7 +35,9 @@ def header_of(cols):
     return cols if cols and cols[0] in ("key", "rule") else None
 
 
-def identity(header, cols):
+def identity(header, cols, classes=False):
+    if classes:
+        return ("class", cols[0], cols[1] if len(cols) > 1 else "")
     if header and header[0] == "rule":
         kind = cols[2].split("=", 1)[0] if len(cols) > 2 and cols[2].startswith(("rule:", "!rule:")) else "full"
         return ("case", *cols[:2], kind)
@@ -45,8 +48,9 @@ def identity(header, cols):
     return ("key", cols[0], cols[2] if len(cols) > 2 else "")
 
 
-def union(text):
+def union(text, path=""):
     """Returns the resolved text and the identities of the blocks left in place."""
+    classes = Path(path).name == "classes.tsv"
     out, kept, header = [], [], None
     lines = text.split("\n")
     i = 0
@@ -71,9 +75,10 @@ def union(text):
         if i == len(lines):
             out.extend(lines[start:])
             break
-        ours = {identity(header, x.rstrip("\r").split("\t")): x for x in sides[0] if x and not x.startswith("#")}
+        ours = {identity(header, x.rstrip("\r").split("\t"), classes): x
+                for x in sides[0] if x and not x.startswith("#")}
         clash = [k for x in sides[1] if x and not x.startswith("#")
-                 for k in [identity(header, x.rstrip("\r").split("\t"))] if k in ours and ours[k] != x]
+                 for k in [identity(header, x.rstrip("\r").split("\t"), classes)] if k in ours and ours[k] != x]
         if clash:
             out.extend(lines[start:i + 1])
             kept.extend(clash)
@@ -157,7 +162,7 @@ def resolve(paths):
     left = 0
     for path in paths:
         with open(path, encoding="utf-8", newline="") as f:
-            text, kept = union(f.read())
+            text, kept = union(f.read(), path)
         with open(path, "w", encoding="utf-8", newline="") as f:
             f.write(text)
         for k in kept:
@@ -180,6 +185,13 @@ def self_test():
     cases = ("rule\tinput\texpected\tkind\tlayer\n<<<<<<< HEAD\nL1\t猫\t고양이\tfix\tlocal\n=======\n"
              "L1\t猫\t괭이\tfix\tlocal\nL1\t猫\trule:L1=고양이\tfix\tlocal\n>>>>>>> pick\n")
     assert union(cases)[1] == [("case", "L1", "猫", "full")], union(cases)
+    sets = ("//= particle.case\tcase particles\nparticle.case\tを\n<<<<<<< HEAD\nparticle.case\tに\n=======\n"
+            "particle.case\tへ\n>>>>>>> pick\n")
+    assert union(sets, "src/core/dict/builtin/classes.tsv") == (
+        "//= particle.case\tcase particles\nparticle.case\tを\nparticle.case\tに\nparticle.case\tへ\n", []), union(sets)
+    assert union(sets)[1] == [("key", "particle.case", "")], union(sets)
+    noted = "<<<<<<< HEAD\nparticle.case\tに\tgoal\n=======\nparticle.case\tに\tplace\n>>>>>>> pick\n"
+    assert union(noted, "classes.tsv")[1] == [("class", "particle.case", "に")], union(noted, "classes.tsv")
     found = []
     check_table("dicts/t.tsv", ["key\tko\tid", "a\t가\tw:1", "b\t나\tw:1", "a\t가\tw:1", "=======",
                                 "c\t다\tw:2", "c\t라\tw:2", ""], found.append)
