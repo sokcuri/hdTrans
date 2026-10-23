@@ -4864,7 +4864,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 うつぶせ寝を	엎드려 &AK@	M4U9			GN				jisjk:144145		
 うつぼ	곰치	N110	VAm		GN				jisjk:126947		
 うつぼ木	우츠보키	I130	QCTVPl		GN				jisjk:275606		
-うつむ	숙&AJ@	M411			GN				jisjk:90478		
+うつむ	고개를 숙&AJ@	M411			GN				jisjk:90478		
 うつらうつら	꾸벅꾸벅	E311			GN				jisjk:129		
 うつらうつら	꾸벅꾸벅 &K7@	M429			GN				jisjk:145828		
 うつらうつらと	꾸벅꾸벅 &K7@	M429			GN				jisjk:145835		
@@ -17982,7 +17982,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 こめられ	담&A2@	M417		Dx	GN				jisjk:90792		
 こも	가득&AN@	M418		Dx	GN				jisjk:90793		
 こも	깃들&AJ@	M428	SFl	Dx	GN				jisjk:120260		
-こも	틀어박&AJ@	M428	VPlVBl	Dx	GN				jisjk:120266		
+こも	틀어박&AW@	M428	VPlVBl	Dx	GN				jisjk:120266		
 こも	거적	N110			GN				jisjk:183012		
 こもかぶり	거지	N110	VHn		GN				jisjk:183014		-1
 こもごも	교대로	E300			GN				jisjk:123098		
@@ -38531,7 +38531,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 はずみで	0 바람에	S560			GN				jisjk:344909		
 はずみに	0 바람에	S560			GN				jisjk:344908		
 はずれ	빠&AL@	M417			GN				jisjk:265307		
-はずれ	탈락	N110			GN				jisjk:368285		
+はずれ	꽝	N110			GN				jisjk:368285		
 はずれ	빗나&A1@	M417			GN	4763	||1 S-2== "的"	はずれ의 두 단어 앞이 的이면 빗나가다라는 번역을 고른다. (미발동: rare-word)	jisjk:373478		
 はた	&LK@	M431		Pj	GN				jisjk:116779		
 はたき	먼지떨이	I110			GN				jisjk:106546		
@@ -125613,10 +125613,10 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 修験	수험도	N130	UCl		GN				jisjk:9483		
 修験者	수험자	I110			GN				jisjk:106216		
 修験道	수험도	N130	UCl		GN				jisjk:234872		
-俯	숙&AJ@	M411			GN				jisjk:93112		
+俯	고개를 숙&AJ@	M411			GN				jisjk:93112		
 俯	엎어 &F6@	M423			GN				jisjk:144139		
 俯き	고개를 숙임	N110			GN				jisjk:126951		
-俯け	숙이게 &AV@	M437			GN				jisjk:93113		
+俯け	숙&AJ@	M437			GN				jisjk:93113		
 俯け	숙&AJ@	M447			GN				jisjk:144162		
 俯け	엎어 &F6@	M447	VPeVFd		GN				jisjk:144166		
 俯せ	엎드림	N110			GN				jisjk:126945		
@@ -176207,7 +176207,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 如電	뇨덴	N130	QPN	Wb	GN				jisjk:354833		
 如露	물뿌리개	N110	VPe		GN				jisjk:195771		
 如鱗木	나뭇결	N110			GN				jisjk:237501		
-妃	왕비	N110	VHn		GN				jisjk:172043		
+妃	비	N110	VHn		GN				jisjk:172043		
 妃	비	N110		On	GN				jisjk:259640		
 妃佐子	히사코	N130	QPN	Wb	GN				jisjk:350206		
 妃殿下	비전하	I110	VHn		GN				jisjk:71545		
@@ -233965,7 +233965,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 本鵠沼	홍쿠게누마	N130	QCTVPl		GN				jisjk:328356		
 本鹿	홍가	N130	QCTVPl		GN				jisjk:328343		
 本黄楊	회양목	N110	VPt		GN				jisjk:251186		
-札	지폐	N110	XXX		GN				jisjk:115757		
+札	패	N110	XXX		GN				jisjk:115757		
 札	표	N110	VMo		GN	1071	||1 &&3 P+1== "2**" S+2== "かか" P+2== "4**"	札 뒤에 조사와 かか 동사가 이어지면 표를 고른다. (미발동: rare-context)	jisjk:115758		
 札	후다	N130	QCTVPl		GN				jisjk:258868		
 札	찰	N110		On	GN				jisjk:326659		
@@ -295859,7 +295859,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 籍船	선적	N110			BZ				jisjk:355572		
 籐椅子	등의자	N110	VPe		GN				jisjk:153677		
 籠	깃들&AJ@	M428	SFl		GN				jisjk:120257		
-籠	틀어박&AJ@	M428	VPlVBl		GN				jisjk:120263		
+籠	틀어박&AW@	M428	VPlVBl		GN				jisjk:120263		
 籠め	포함&AV@	M447			GN				jisjk:120254		
 籠り	신불하기위해 일정 기간 신사나 	N110	UCl		GN				jisjk:231479		
 籠ノ登山	가고노토산	N110	VPl		GN				jisjk:213124		
@@ -349662,7 +349662,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 陽極線	양극선	I110			GN				jisjk:77881		
 陽樹	양수	N110			GN				jisjk:255047		
 陽気	%BE@	G8L0			GN				jisjk:3354		
-陽気	양기	N110			GN				jisjk:3355		
+陽気	날씨	N110			GN				jisjk:3355		
 陽気	쾌활%A1@	G8L0			GN				jisjk:373997		
 陽気で	명랑하고	N110			GN				jisjk:151894		
 陽気な	명랑한	N110			GN				jisjk:151895		

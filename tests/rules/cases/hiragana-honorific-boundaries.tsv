@@ -10,7 +10,7 @@ constraint:honorific-hiragana	あおくんって誰？	아오 군은 누구?	fix
 constraint:honorific-hiragana	あおくんなら来られる。	아오 군이라면 올 수 있다.	fix	lookup
 constraint:honorific-hiragana	あおくんへ手紙を書いた。	아오 군에게 편지를 썼다.	fix	lookup
 constraint:honorific-hiragana	空があおく染まった。	하늘이 푸르게 물들었다.	keep	lookup
-constraint:honorific-hiragana	布をしろく染めた。	옷감을 희게 물들였다.	keep	lookup
+constraint:honorific-hiragana	布をしろく染めた。	천을 희게 물들였다.	keep	lookup
 constraint:honorific-hiragana	空を見上げた。	하늘을 올려다보았다.	keep	lookup
 constraint:honorific-hiragana	花のさくらが咲いた。	꽃의 벚꽃이 피었다.	keep	lookup
 constraint:honorific-hiragana	話はまだつづくんだ。	이야기는 아직 계속되는 거야.	keep	lookup

@@ -18,5 +18,5 @@ dict:w:26745	二度とネズミ共を城内に立ち入らせるな。	두 번 �
 dict:w:26746	俺様の出番だ！	이 몸의 차례다!	fix	lookup
 dict:w:26749	緑金と白月石に飾られた廊下	녹금과 백월석에 장식된 복도	fix	lookup
 dict:w:26750	籠を持つ。	바구니를 가진다.	fix	defaults
-dict:w:26750	部屋に籠っていた。	방에 틀어박이고 있었다.	keep	defaults
+dict:w:26750	部屋に籠っていた。	방에 틀어박히고 있었다.	keep	defaults
 names:gloss	改装特I型駆逐艦「深雪改二」、出撃せよ！	개장특I형 구축함 「미유키 개2」, 출격하라!	fix	lookup

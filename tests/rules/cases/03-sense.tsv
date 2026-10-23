@@ -36,7 +36,7 @@ dict:jisjk:354975	話題にあがる。	화제에 오른다.	fix	local
 dict:jisjk:354975	お迎えにあがりました。	맞이하러 갔습니다.	fix	local
 dict:jisjk:354975	屋上にあがった。	옥상에 갔다.	fix	local
 dict:jisjk:119195	上着からはみだす。	윗도리에서 삐어져 나온다.	fix	local
-dict:jisjk:119195	はみだす布を切る。	삐어져 나오는 옷감을 자른다.	fix	local
+dict:jisjk:119195	はみだす布を切る。	삐어져 나오는 천을 자른다.	fix	local
 dict:jisjk:267431	寺へ参って行く。	!rule:dict:jisjk:267431	keep	local
 dict:jisjk:267431	病気で皆参っている。	rule:dict:jisjk:267431=약해&AL@	keep	local
 dict:jisjk:140862	深い苦痛を抱いている。	!rule:dict:jisjk:140862	keep	local

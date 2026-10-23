@@ -1,0 +1,49 @@
+rule	input	expected	kind	layer
+dict:word-senses	曇天を見上げた。	흐린 하늘을 올려다보았다.	fix	lookup
+dict:word-senses	中庭には石畳の水場があった。	안뜰에는 돌길의 물가가 있었다.	fix	lookup
+dict:word-senses	呪いだの祟りだの言っている。	저주라든가 재앙이라든가 말한다.	fix	lookup
+dict:word-senses	人間をことごとく祟りながら歩く。	인간을 죄다 탈이 나면서 걷는다.	keep	lookup
+dict:word-senses	とばっちりを受けた。	불똥을 받았다.	fix	lookup
+dict:word-senses	唇には薄っぺらい笑みが張り付いていた。	입술에는 얄팍한 미소가 붙어 있었다.	fix	lookup
+dict:word-senses	あの青臭さとえぐみ……。	그 풋내와 아린 맛…….	fix	lookup
+dict:word-senses	時々出てくるシチューもどきも、灰色に濁っていた。	가끔 나오는 스튜 비슷한 것도, 회색에 탁해지고 있었다.	fix	lookup
+dict:word-senses	ちょこっとした横傷が額に残っている。	자그마한 가로 상처가 이마에 남아 있다.	fix	lookup
+dict:word-senses	額にちょこっと残る。	이마에 살짝 남는다.	keep	lookup
+dict:word-senses	フルーツの盛り合わせだった。	과일의 모둠이었다.	fix	lookup
+dict:word-senses	大広場に設営された断頭台。	큰 광장에 설치된 단두대.	fix	lookup
+dict:word-senses	錆の浮いた無骨な刃が光った。	녹이 뜬 투박한 칼날이 빛났다.	fix	lookup
+dict:word-senses	布に包まれていた。	천에 싸여 있었다.	fix	lookup
+dict:word-senses	布団で寝る。	이불에서 잔다.	keep	lookup
+dict:word-senses	足元に置いた洗濯籠を抱えた。	발밑에 둔 세탁바구니를 안았다.	fix	lookup
+dict:word-senses	部屋に籠もった。	방에 틀어박혔다.	fix	lookup
+dict:word-senses	部屋に籠った。	방에 틀어박혔다.	fix	lookup
+dict:word-senses	彼女はうつむいていた。	그녀는 고개를 숙이고 있었다.	fix	lookup
+dict:word-senses	顔を俯けた。	얼굴을 숙였다.	fix	lookup
+dict:word-senses	靴の踵があれば高い。	구두의 굽이 있으면 높다.	fix	lookup
+dict:word-senses	踵を返した。	발길을 돌렸다.	keep	lookup
+dict:word-senses	少しだけ汗ばむ陽気の中、王都は騒々しかった。	약간 땀이 배는 날씨 안, 왕도는 떠들썩했다.	fix	lookup
+dict:word-senses	陽気な男だ。	쾌활한 남자다.	keep	lookup
+dict:word-senses	元から地味な洋服だった。	원래부터 수수한 옷이었다.	fix	lookup
+dict:word-senses	俺は彼の手元から本を取り上げた。	나는 그의 손 근처로부터 책을 빼앗았다.	keep	lookup
+dict:word-senses	くびが痛い。	목이 아프다.	fix	lookup
+dict:word-senses	彼はくびになった。	그는 해고 되었다.	keep	lookup
+dict:word-senses	それは帝の御手付きの宮女の話だった。	그것은 황제 승은의 궁녀 이야기였다.	fix	lookup
+dict:word-senses	位持ちともなれば自分専用の下女を持つことができる。	품계를 받은 자나 되면 자신 전용의 하녀를 가질 수가 있다.	fix	lookup
+dict:word-senses	妃、女官合わせて二千人だった。	비, 궁녀 합해서 2000명이었다.	fix	lookup
+dict:word-senses	色恋の話をしている。	연애 이야기를 하고 있다.	fix	lookup
+dict:word-senses	絢爛な衣装を着た。	화려한 의상을 입었다.	fix	lookup
+dict:word-senses	ちいとばかし待ってくれ。	조금 기다려 줘.	fix	lookup
+dict:word-senses	流血沙汰になった。	유혈 사태가 되었다.	fix	lookup
+dict:word-senses	我儘、お嬢様。	제멋대로, 아가씨.	fix	lookup
+dict:word-senses	ただただ驚いた。	그저 놀랐다.	fix	lookup
+dict:word-senses	東のはずれにある建物を見る。	동쪽의 변두리에 있는 건물을 본다.	fix	lookup
+dict:word-senses	くじははずれだ。	복권은 꽝이다.	keep	lookup
+dict:word-senses	札を掛けた。	패를 걸었다.	fix	lookup
+dict:word-senses	千ウォン札を財布に入れた。	천원 지폐를 지갑에 넣었다.	keep	lookup
+dict:word-senses	考える時には甘い物がいい。	생각할 때는 단 것이 좋다.	fix	lookup
+dict:word-senses	考えが甘い。	생각이 안이하다.	keep	lookup
+dict:word-senses	暗い茶の髪をまとめた。	어두운 갈색의 머리카락을 정리했다.	fix	lookup
+dict:word-senses	茶を飲む。	차를 마신다.	keep	lookup
+dict:word-senses	そんな恰好で恥ずかしい。	그런 차림으로 부끄럽다.	fix	lookup
+dict:word-senses	凛と立つ姿。	늠름하게 서는 모습.	fix	lookup
+dict:word-senses	むき出しの殺意。	드러난 살의.	fix	lookup

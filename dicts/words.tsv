@@ -5601,7 +5601,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 タウンミーティング	타운 홀 미팅	N110			GN						タウンミーティング	w:5594
 タウン・ページ	옐로 페이지	N110			GN						タウン・ページ	w:5595
 タウン・ミーティング	타운 홀 미팅	N110			GN						タウン・ミーティング	w:5596
-タオル	타월	N110			GN				xxx llm	1		w:5597
+タオル	수건	N110			GN				xxx llm	1		w:5597
 タオル掛け	수건걸이	N110			GN						タオルかけ	w:5598
 タガログ語	타갈로그어	N110			GN						タガログご	w:5599
 タクト	지휘봉	N110			GN				xxx llm	1		w:5600
@@ -16688,14 +16688,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成銀	성은	N110			GN						なりぎん	w:16673
 成長痛	성장통	N110			GN						せいちょうつう	w:16674
 我がこと	자기 일	N110			GN				llm		わがこと	w:16675
-我が侭	제멋대로 굶	N110			GN						わがまま	w:16676
+我が侭	제멋대로	N110			GN						わがまま	w:16676
 我が侭	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16677
-我が儘	제멋대로 굶	N110			GN						わがまま	w:16678
+我が儘	제멋대로	N110			GN						わがまま	w:16678
 我が儘	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16679
 我ながら	내가 생각해도	E300			GN				llm		われながら	w:16680
-我侭	제멋대로 굶	N110			GN						わがまま	w:16681
+我侭	제멋대로	N110			GN						わがまま	w:16681
 我侭	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16682
-我儘	제멋대로 굶	N110			GN						わがまま	w:16683
+我儘	제멋대로	N110			GN						わがまま	w:16683
 我楽多	잡동사니	N110			GN						ガラクタ	w:16684
 我毛香	오이풀	N110			GN						われもこう	w:16685
 我流	자기류	N110			GN				xxx llm	1		w:16686
@@ -24156,7 +24156,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 踏切り	건널목	N110			GN				xxx		ふみきり	w:24134
 踏切り	발구름	N110			GN				llm		ふみきり	w:24135
 踏切り	결단	N110	UTh		GN				llm		ふみきり	w:24136
-踵	발길	N110			GN				xxx llm	1		w:24137
+踵	뒤꿈치	N110			GN				xxx llm	1		w:24137
 踵骨	종골	N110	VBp		GN						しょうこつ	w:24138
 蹄葉炎	제엽염	N110	UTi		GN						ていようえん	w:24139
 蹄鉄	편자	N110			GN				xxx	1	ていてつ	w:24140
@@ -26786,3 +26786,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大蜘蛛	큰 거미	N110	VAm		GN						おおぐも	w:26748
 白月	백월	N110			GN						はくげつ	w:26749
 籠	바구니	N110	XXX		GN						かご	w:26750
+ちょこっとした	자그마한	C0D1			GN							w:26740
+祟り	재앙	N110			GN							w:26741
+籠	바구니	N110	VPe		GN							w:26742
+籠も	틀어박&AW@	M418			GN							w:26743
+篭も	틀어박&AW@	M418			GN							w:26744
+閉じ籠も	틀어박&AW@	M418			GN							w:26745
+元から	원래부터	E300			GN							w:26746
+くび	목	N110	VBp		GN				xxx	1		w:26747
+むき出しの	드러난	C0D1			GN							w:26748
+剥き出しの	드러난	C0D1			GN							w:26749
