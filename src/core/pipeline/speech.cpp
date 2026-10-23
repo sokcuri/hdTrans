@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -12,31 +13,15 @@ namespace {
 
 using internal::RuneIn;
 
-constexpr std::string_view kPoliteMarkers[] = {"です", "ます", "ました", "まして", "ません", "でした", "ましょう",
-                                                "でしょう", "ください", "下さい", "なさい", "ませ", "いただきたい", "ていただく"};
-
-// Old or lordly speech; a classical negative ぬ (ならぬ, 知らぬ) only before the end of a
-// clause, which 死ぬ is not.
-constexpr std::string_view kOldMarkers[] = {
-    "ておる", "でおる",   "ておった", "でおった", "ておって", "でおって", "ておらぬ", "せよ",   "ござる", "ござらん",
-    "のじゃ", "じゃ。",
-    "じゃ」", "じゃ！",   "じゃぞ",   "じゃな。", "じゃな」", "じゃなあ", "じゃわい", "だわい", "ぞよ",   "であろう",
-    "かろう", "わしは",   "わしが",   "わしの",   "わしも",   "わしを", "わしに", "儂",       "余は",   "余の",
-    "余が",   "余を",     "余に",     "余と",     "余も",     "我が",   "なり！", "なり」",   "なり。", "申した",
-    "まする", "参れ",     "致せ",     "申せ",     "くれい",   "おぬし", "お主",   "そなた",   "拙者",   "わらわ",
-    "かたじけない", "貴様", "ねば", "されど", "がよい", "が良い", "るがいい", "べけれ", "べし",
-};
-constexpr std::string_view kOldNegatives[] = {"らぬ", "せぬ", "きぬ", "まぬ", "わぬ", "かぬ", "がぬ", "たぬ", "ばぬ", "れぬ", "せん"};
-
 std::uint8_t StyleOf(std::string_view text) {
     std::uint8_t style = 0;
-    for (const std::string_view m : kPoliteMarkers) {
+    for (const std::string_view m : dict::ClassMembers("speech.polite")) {
         if (text.find(m) != std::string_view::npos) style |= kPoliteSpeech;
     }
-    for (const std::string_view m : kOldMarkers) {
+    for (const std::string_view m : dict::ClassMembers("speech.old")) {
         if (text.find(m) != std::string_view::npos) style |= kOldSpeech;
     }
-    for (const std::string_view n : kOldNegatives) {
+    for (const std::string_view n : dict::ClassMembers("speech.old-negative")) {
         for (std::size_t at = text.find(n); at != std::string_view::npos; at = text.find(n, at + 1)) {
             const std::string_view after = text.substr(at + n.size());
             for (const std::string_view end : {"。", "！", "」", "』", "、", "ぞ", "の", "わ", "か", "…", "?", "？", "!"}) {
@@ -61,11 +46,6 @@ bool SubjectAfter(std::string_view s) {
     return rest.starts_with("は") || rest.starts_with("が") || rest.starts_with("も");
 }
 
-constexpr std::string_view kSpeechVerbs[] = {
-    "言", "いう", "いっ", "いわ", "叫", "呟", "つぶや", "囁", "ささや", "怒鳴", "どな", "尋ね", "訊", "聞", "答",
-    "返", "告げ", "話", "笑", "頼", "喚", "わめ", "漏ら", "こぼ", "零", "呼", "叱", "怒", "泣", "続け", "言い", "思",
-};
-
 // Whether the text after the closing bracket of a quote makes it a cited phrase; embedded:
 // the quote opens inside a sentence, after a particle or a comma (彼は「行く」と言った), not
 // after a speaker name (ハル「行く」).
@@ -81,7 +61,7 @@ bool CitedBefore(std::string_view after, bool embedded) {
     if (after.starts_with("って")) {
         const std::string_view rest = after.substr(std::string_view("って").size());
         bool verb = false;
-        for (const std::string_view v : kSpeechVerbs) verb = verb || rest.starts_with(v);
+        for (const std::string_view v : dict::ClassMembers("verb.speech")) verb = verb || rest.starts_with(v);
         if (!rest.empty() && internal::IsKanjiRune(text::DecodeRune(rest).cp) && !verb) return true;
     }
     if (embedded) {
@@ -94,7 +74,7 @@ bool CitedBefore(std::string_view after, bool embedded) {
             if (!after.starts_with(to)) continue;
             std::string_view verb = after.substr(to.size());
             if (verb.starts_with("、")) verb.remove_prefix(std::string_view("、").size());
-            for (const std::string_view v : kSpeechVerbs) {
+            for (const std::string_view v : dict::ClassMembers("verb.speech")) {
                 if (verb.starts_with(v)) return false;
             }
         }

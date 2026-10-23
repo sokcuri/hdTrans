@@ -3,9 +3,14 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+//= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
+//= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
+//= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
+//= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
+//= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
 //= follower.kata-adjective-final	The sentence-final particles after which a katakana spelling of an i-adjective reads as one (ウルサイぞ).
@@ -56,8 +61,15 @@
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
+//= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
+//= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
+//= speech.male	Speech markers inside an utterance that show the speaker to be a man (俺, だぜ, 兄上).
+//= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
+//= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
+//= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
@@ -82,6 +94,7 @@
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
+//= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
@@ -111,12 +124,86 @@ aru.after-de	あっ
 aru.after-de	あれ
 aru.after-de	あろ
 
+bound.column-start	です
+bound.column-start	でし
+bound.column-start	である
+bound.column-start	じゃ
+bound.column-start	だっ
+bound.column-start	だろ
+bound.column-start	だよ
+bound.column-start	だね
+bound.column-start	だな
+bound.column-start	ます
+bound.column-start	まし
+bound.column-start	ませ
+bound.column-start	ない
+bound.column-start	なかっ
+bound.column-start	らしい
+bound.column-start	みたい
+bound.column-start	ような
+bound.column-start	ように
+bound.column-start	ようだ
+bound.column-start	そうだ
+bound.column-start	そうな
+bound.column-start	たいで
+bound.column-start	たかっ
+bound.column-start	から
+bound.column-start	まで
+bound.column-start	より
+bound.column-start	だけ
+bound.column-start	しか
+bound.column-start	ばかり
+bound.column-start	など
+bound.column-start	くらい
+bound.column-start	ぐらい
+bound.column-start	ほど
+bound.column-start	には
+bound.column-start	では
+bound.column-start	とは
+bound.column-start	にも
+bound.column-start	でも
+bound.column-start	って
+
+bound.column-whole	だ
+bound.column-whole	が
+bound.column-whole	を
+bound.column-whole	に
+bound.column-whole	へ
+bound.column-whole	で
+bound.column-whole	と
+bound.column-whole	も
+bound.column-whole	は
+bound.column-whole	の
+bound.column-whole	や
+bound.column-whole	か
+bound.column-whole	よ
+bound.column-whole	ね
+bound.column-whole	わ
+bound.column-whole	ぞ
+bound.column-whole	さ
+bound.column-whole	な
+bound.column-whole	たい
+
 copula.after-dake	だ
 copula.after-dake	で
 copula.after-dake	じゃ
 copula.after-dake	に
 copula.after-dake	の
 copula.after-dake	か
+
+ending.conjunctive	て
+ending.conjunctive	ば
+ending.conjunctive	たら
+ending.conjunctive	だら
+ending.conjunctive	ても
+ending.conjunctive	でも
+ending.conjunctive	けど
+ending.conjunctive	けれど
+ending.conjunctive	けれども
+ending.conjunctive	から
+ending.conjunctive	ので
+ending.conjunctive	のに
+ending.conjunctive	ながら
 
 ending.rare-passive	てい
 ending.rare-passive	てる
@@ -133,6 +220,13 @@ ending.rare-potential	れば
 ending.rare-potential	よう
 ending.rare-potential	たら
 ending.rare-potential	たり
+
+follower.contracted-iru	の
+follower.contracted-iru	だ
+follower.contracted-iru	じゃ
+
+follower.contracted-teru	じゃ
+follower.contracted-teru	だろ
 
 follower.ita	い
 follower.ita	か
@@ -1004,6 +1098,43 @@ pronoun.second-person-genitive	お前
 pronoun.second-person-genitive	おまえ
 pronoun.second-person-genitive	きみ
 
+pronoun.topic-wa	こっち
+pronoun.topic-wa	そっち
+pronoun.topic-wa	あっち
+pronoun.topic-wa	どっち
+pronoun.topic-wa	こちら
+pronoun.topic-wa	そちら
+pronoun.topic-wa	あちら
+pronoun.topic-wa	お前
+pronoun.topic-wa	おまえ
+pronoun.topic-wa	オマエ
+pronoun.topic-wa	てめえ
+pronoun.topic-wa	あんた
+pronoun.topic-wa	アンタ
+pronoun.topic-wa	あなた
+pronoun.topic-wa	貴方
+pronoun.topic-wa	君
+pronoun.topic-wa	きみ
+pronoun.topic-wa	キミ
+pronoun.topic-wa	私
+pronoun.topic-wa	わたし
+pronoun.topic-wa	あたし
+pronoun.topic-wa	アタシ
+pronoun.topic-wa	俺
+pronoun.topic-wa	おれ
+pronoun.topic-wa	オレ
+pronoun.topic-wa	僕
+pronoun.topic-wa	ぼく
+pronoun.topic-wa	ボク
+pronoun.topic-wa	これ
+pronoun.topic-wa	それ
+pronoun.topic-wa	あれ
+pronoun.topic-wa	今日
+pronoun.topic-wa	明日
+pronoun.topic-wa	昨日
+pronoun.topic-wa	みんな
+pronoun.topic-wa	皆
+
 question.copula	何
 question.copula	なに
 question.copula	誰
@@ -1013,6 +1144,117 @@ question.copula	なぜ
 question.copula	どこ
 question.copula	いつ
 question.copula	どれ
+
+speech.female	わたくし
+speech.female	ですわ
+speech.female	ますわ
+speech.female	でしたわ
+speech.female	ましたわ
+speech.female	ですの
+speech.female	かしら
+speech.female	わよ
+speech.female	わね
+speech.female	のよ
+speech.female	あたし
+speech.female	でしてよ
+
+speech.male	俺
+speech.male	僕
+speech.male	だぜ
+speech.male	るぜ
+speech.male	だぞ
+speech.male	るぞ
+speech.male	兄上
+speech.male	姉上
+
+speech.old	ておる
+speech.old	でおる
+speech.old	ておった
+speech.old	でおった
+speech.old	ておって
+speech.old	でおって
+speech.old	ておらぬ
+speech.old	せよ
+speech.old	ござる
+speech.old	ござらん
+speech.old	のじゃ
+speech.old	じゃ。
+speech.old	じゃ」
+speech.old	じゃ！
+speech.old	じゃぞ
+speech.old	じゃな。
+speech.old	じゃな」
+speech.old	じゃなあ
+speech.old	じゃわい
+speech.old	だわい
+speech.old	ぞよ
+speech.old	であろう
+speech.old	かろう
+speech.old	わしは
+speech.old	わしが
+speech.old	わしの
+speech.old	わしも
+speech.old	わしを
+speech.old	わしに
+speech.old	儂
+speech.old	余は
+speech.old	余の
+speech.old	余が
+speech.old	余を
+speech.old	余に
+speech.old	余と
+speech.old	余も
+speech.old	我が
+speech.old	なり！
+speech.old	なり」
+speech.old	なり。
+speech.old	申した
+speech.old	まする
+speech.old	参れ
+speech.old	致せ
+speech.old	申せ
+speech.old	くれい
+speech.old	おぬし
+speech.old	お主
+speech.old	そなた
+speech.old	拙者
+speech.old	わらわ
+speech.old	かたじけない
+speech.old	貴様
+speech.old	ねば
+speech.old	されど
+speech.old	がよい
+speech.old	が良い
+speech.old	るがいい
+speech.old	べけれ
+speech.old	べし
+
+speech.old-negative	らぬ
+speech.old-negative	せぬ
+speech.old-negative	きぬ
+speech.old-negative	まぬ
+speech.old-negative	わぬ
+speech.old-negative	かぬ
+speech.old-negative	がぬ
+speech.old-negative	たぬ
+speech.old-negative	ばぬ
+speech.old-negative	れぬ
+speech.old-negative	せん
+
+speech.polite	です
+speech.polite	ます
+speech.polite	ました
+speech.polite	まして
+speech.polite	ません
+speech.polite	でした
+speech.polite	ましょう
+speech.polite	でしょう
+speech.polite	ください
+speech.polite	下さい
+speech.polite	なさい
+speech.polite	ませ
+speech.polite	いただきたい
+speech.polite	ていただく
 
 speech.polite-grammar	です
 speech.polite-grammar	ます
@@ -1025,6 +1267,13 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
+
+stem.request	くださ
+stem.request	下さ
+stem.request	いらっしゃ
+stem.request	おっしゃ
+stem.request	なさ
+stem.request	ござ
 
 stem.subject-predicate	居な
 stem.subject-predicate	いな
@@ -1492,6 +1741,39 @@ verb.result-state-past	古び
 verb.say-teiru	話
 verb.say-teiru	お話
 verb.say-teiru	付き合
+
+verb.speech	言
+verb.speech	いう
+verb.speech	いっ
+verb.speech	いわ
+verb.speech	叫
+verb.speech	呟
+verb.speech	つぶや
+verb.speech	囁
+verb.speech	ささや
+verb.speech	怒鳴
+verb.speech	どな
+verb.speech	尋ね
+verb.speech	訊
+verb.speech	聞
+verb.speech	答
+verb.speech	返
+verb.speech	告げ
+verb.speech	話
+verb.speech	笑
+verb.speech	頼
+verb.speech	喚
+verb.speech	わめ
+verb.speech	漏ら
+verb.speech	こぼ
+verb.speech	零
+verb.speech	呼
+verb.speech	叱
+verb.speech	怒
+verb.speech	泣
+verb.speech	続け
+verb.speech	言い
+verb.speech	思
 
 verb.state-teiru	見え
 verb.state-teiru	聞こえ
