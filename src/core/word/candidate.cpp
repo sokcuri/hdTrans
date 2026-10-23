@@ -482,13 +482,13 @@ bool Worker::Dispatch(int i, int& last) {
     const int type = tokens.TypeAfter(static_cast<std::size_t>(i));
     const std::string_view left = tokens.Canonical(static_cast<std::size_t>(i));
     switch (type) {
-    case 1: case 15: case 2: case 16:
+    case tokenizer::kTypeNumber: case 15: case tokenizer::kTypeAlpha: case 16:
         BuildTokenTransformText(i);
         break;
-    case 4: case 5: case 8:
+    case tokenizer::kTypeAsciiClose: case tokenizer::kTypeAsciiOpen: case tokenizer::kTypeAsciiSymbol:
         if (left == "(" || left == ")" || Has(left, "%")) BuildTokenTransformText(i);
         break;
-    case 24:
+    case tokenizer::kTypeJapanese:
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
         else BuildSurfaceTransform(i, left);
         if (const Item* tail = chain.tail) {
@@ -608,7 +608,7 @@ Record* Worker::LookupFallbackRecord(int token, std::string_view source, int lef
     r->target.assign(source);
     if (left == 12 && right == 15) r->target = EncodeNumericPair(source);
     switch (tokens.TypeAfter(static_cast<std::size_t>(token))) {
-    case 1: case 2: case 15: case 16: case 24:
+    case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16: case tokenizer::kTypeJapanese:
         r->partCode = source == "'" || left == 50 || right == 50 ? "N600" : "N110";
         break;
     default:
@@ -631,7 +631,7 @@ Record* Worker::ProbeNumericPrefix(int token, std::string_view source, bool afte
         return !rest.empty() && static_cast<unsigned char>(rest[0]) >= 0x80 ? FirstChar(rest) : std::string_view();
     };
     switch (Classify(source)) {
-    case 24: {
+    case tokenizer::kTypeJapanese: {
         const std::string_view c = FirstChar(source);
         // A number of two or more kanji is read as its digits even where a dictionary word
         // spells it (五十 50, 百二十 120); 百 and 千 alone keep their words (千里).
