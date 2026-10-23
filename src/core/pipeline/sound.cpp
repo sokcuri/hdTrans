@@ -173,11 +173,22 @@ struct SoundMatch {
     bool intj = false, lead = false, open = false;
     bool spaceAfter = false;  // a word that starts inside the match took its end
     bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
+    bool drawn = false;       // the text ends in a kana that draws out the vowel before it (ひぃ, ふぁー)
 };
 
-// Whether two sounds in a row are written apart: both have two or more syllables, and
-// b does not continue a by starting with its last kana (うふふ+ふっ).
+// Whether the Korean s ends in an open syllable without an initial consonant that draws
+// out the vowel before it (히이, 아우; not 아앗).
+bool EndsDrawn(std::string_view s) {
+    const std::u32string k = DecodeText(s);
+    return k.size() > 1 && k.back() >= 0xAC00 && k.back() <= 0xD7A3 && (k.back() - 0xAC00) / 588 == 11 &&
+           (k.back() - 0xAC00) % 28 == 0;
+}
+
+// Whether two sounds in a row are written apart: both have two or more syllables, b does
+// not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
+// drawing out its vowel before another cry (ひぃ+やあっ 히이야앗, ふぁー+ふぁー 후아아후아아).
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
+    if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) return false;
     return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&
            (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
 }
@@ -540,7 +551,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 if (IsHiraganaRune(rs_[end])) korean += ',';
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase};
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase,
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2])};
             chosen = &s;
         }
     }

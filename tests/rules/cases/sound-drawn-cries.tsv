@@ -10,3 +10,7 @@ sound:cry	「やめてぇぇぇ！」	「그만둬!」	keep	sound
 sound:cry	「待ってぇぇぇ！」	「기다려!」	keep	sound
 sound:cry	「答えは「左手」だぁあぁああ！」	「대답은 「왼손」이다아!」	keep	sound
 sound:cry	「うんんんっ！」	「응!」	keep	sound
+sound:cry-chain	「ひぃやあああああっ！」	「히이야아아아아앗!」	fix	sound
+sound:cry-chain	「ふぁーふぁー……」	「후아아후아아……」	fix	sound
+sound:cry-chain	「やだやだ！」	「싫어 싫어!」	keep	sound
+sound:cry-chain	「あぁんっあぁっ！」	「아앙 아앗!」	keep	sound
