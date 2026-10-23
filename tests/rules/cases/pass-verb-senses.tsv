@@ -12,3 +12,7 @@ rewrite:go-not-say	後頭部からいったしな	후두부에서 갔고	fix	rew
 rewrite:go-not-say	先生にいった。	선생님에게 말했다.	keep	rewrites
 rewrite:go-not-say	彼にいっても無駄だ。	그에게 말해도 쓸데없다.	keep	rewrites
 rewrite:go-not-say	そういっても	그렇게 말해도	keep	rewrites
+rewrite:go-not-say	端的にいえば	단적으로 말하면	fix	rewrites
+rewrite:go-not-say	一括りにいっても	일괄에 말해도	fix	rewrites
+rewrite:go-not-say	公園にいく	공원에 간다	keep	rewrites
+rewrite:go-not-say	駅までいく	역까지 간다	keep	rewrites

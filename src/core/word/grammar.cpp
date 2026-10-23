@@ -730,7 +730,7 @@ void GoNotSay(Flusher& f) {
         const Item* p = it->prev;
         if (p == nullptr || p->prev == nullptr || it->group->surface != "い" || !it->detail->Yougo() ||
             !output::Lemma(it->EntryText(it->selected), f.families).starts_with("말하") ||
-            !Has(" に へ まで から ", " " + p->group->surface + " ") || Person(p->prev->Attr(p->prev->selected))) {
+            !Has(" に へ まで から ", " " + p->group->surface + " ") || !Thing(p->prev->Attr(p->prev->selected))) {
             continue;
         }
         if (SelectLemma(f, it, "가다")) continue;
