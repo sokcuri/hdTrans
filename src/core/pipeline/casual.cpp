@@ -432,6 +432,33 @@ bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The conditional れば said りゃ after a verb stem (寝りゃ治る 寝れば, 見りゃわかる, なりゃ,
+// できりゃ, 信じりゃ), and りゃ before しない for りは (わかりゃしない わかりはしない), when a
+// word goes on after it. Not それは and これは said そりゃ, こりゃ, どりゃ, nor a shout
+// (おりゃ, うりゃっ, せりゃッ) or the pronoun わりゃ, nor ありゃ other than after が or も
+// (金がありゃ), nor てりゃ, which the endings read.
+bool Rya(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "りゃ")) return false;
+    const char32_t c = Before(s, pos);
+    if (c == 0 || (!IsHiraganaClass(c) && !IsKanjiClass(c)) || In(c, U"そこどてでっ")) return false;
+    const char32_t b = Before(s, pos - 3);  // c, a kana or kanji, is three bytes long
+    if (c == U'あ' && !In(b, U"がも")) return false;
+    if (In(c, U"おうとせえわ") && !IsHiraganaClass(b) && !IsKanjiClass(b)) return false;  // わりゃ: you
+    // A drawn-out あ goes with it before a word (できりゃあ苦労しない).
+    size_t q = p;
+    while (q < s.size() && In(At(s, q).cp, U"あぁ")) q += At(s, q).size;
+    if (q >= s.size() || In(At(s, q).cp, U"あぁっッー～〜")) return false;
+    if (!Take(s, q, [](char32_t r) { return IsHiraganaClass(r) || IsKanjiClass(r); })) return false;
+    m.group[1] = "れば";
+    for (std::string_view neg : {"しない", "しね", "しません", "せん", "しなかった"}) {
+        if (s.substr(p).starts_with(neg)) m.group[1] = "りは";
+    }
+    while (p < s.size() && In(At(s, p).cp, U"あぁ")) p += At(s, p).size;
+    m.end = p;
+    return true;
+}
+
 // しゃ[ーあ](?:ない|ね[ぇえー]*): しょうがない (しゃーない, しゃーねー, ならしゃーない). Not the
 // topic は fused to a pronoun in し (あたしゃあね, わしゃあね, わっしゃあ, わたくしゃあ).
 bool Shaanai(std::string_view s, size_t pos, Match& m) {
@@ -680,6 +707,7 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
+    text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
