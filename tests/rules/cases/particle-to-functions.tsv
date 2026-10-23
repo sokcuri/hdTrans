@@ -45,3 +45,5 @@ dict:gram:dato:focus-quote	静かだと困る。	조용하다면 곤란하다.	k
 lexical:kato-spacing	はっきりいって頭がショートするかと思った。	분명히 말해 머리가 쇼트할 줄 알았다.	fix	local-ending
 lexical:kato-spacing	悪戯かと思われたが、犯人が見つからない。	못된 장난일까 하고 생각되었지만, 범인이 발견되지 않는다.	fix	local
 lexical:kato-spacing	行こうかなと思う。	갈까라고 생각한다.	keep	local-ending
+dict:jisjk:118946	契約の解消と変更をお願いします。	계약 해소와 변경을 부탁드립니다.	fix	local
+dict:jisjk:118946	名前をタロウと変更した。	이름을 타로우라고 변경했다.	keep	local
