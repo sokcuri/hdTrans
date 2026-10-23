@@ -80,3 +80,10 @@ HD_TEST(classes_builtin) {
     HD_CHECK(InClass("particle.case-before-stem", "を"));
     HD_CHECK(!InClass("particle.case-before-stem", "が"));
 }
+
+// The sets that the passes read as a part of another set.
+HD_TEST(classes_builtin_subsets) {
+    for (const std::string_view m : ClassMembers("honorific.constraint-familiar")) {
+        HD_CHECK(InClass("honorific.constraint", m));
+    }
+}

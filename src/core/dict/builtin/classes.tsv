@@ -27,7 +27,7 @@
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
-//= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), which the rules about familiar address look for alone.
+//= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).

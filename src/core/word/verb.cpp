@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/dict/classes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -209,7 +210,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if (WidthOf(tail) >= 6) middle = Cut(tail, 2, 4);
         return Starts(tail, kJaI) && (middle == kJaMasu || middle == kJaMase || middle == kJaMashi);
     };
-    for (const std::string_view stem : kRequestStems) {
+    for (const std::string_view stem : dict::ClassMembers("stem.request")) {
         if (const std::size_t i = record.source.find(stem);
             i != std::string_view::npos && i == record.source.size() - stem.size() && politeRequest()) {
             d.patternKind = 8;

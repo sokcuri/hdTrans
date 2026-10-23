@@ -149,7 +149,4 @@ inline constexpr std::string_view kNumeralOrder = "兆億万万千百十九八�
 // お, ご, 御.
 inline constexpr std::array<std::string_view, 3> kHonorificPrefixes = {"お", "ご", "御"};
 
-// The stems of the polite request verbs.
-inline constexpr std::array<std::string_view, 6> kRequestStems = {"くださ", "下さ", "いらっしゃ", "おっしゃ", "なさ", "ござ"};
-
 }  // namespace hdTrans::word
