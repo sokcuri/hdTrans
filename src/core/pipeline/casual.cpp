@@ -70,24 +70,36 @@ bool PausedConditional(std::string_view before, std::string_view at) {
 // after a noun (君ならねぇ) or before a pause where PausedConditional holds (行くならねぇ、,
 // 田中にならねぇ、).
 bool Nee(std::string_view s, size_t pos, Match& m) {
-    auto tail = [&](size_t p) {
+    // ねぇ or ねえ; ねー and, with strict, any of them only before a following character
+    // of the set (見てねーわ, 荒れねーから; not the particle in 見てねー！ or 夜明けねー).
+    auto tail = [&](size_t p, bool bar, bool strict) {
         m.group[1] = Span(s, pos, p);
-        if (!Lit(s, p, "ね") || !OneOf(s, p, U"ぇえ")) return false;
-        return CharOrEnd(s, p, U"なよぜぞしんかけだっ", m, 2);
+        if (!Lit(s, p, "ね")) return false;
+        const bool lengthened = bar && OneOf(s, p, U"ー");
+        if (!lengthened && !OneOf(s, p, U"ぇえ")) return false;
+        if ((lengthened || strict) && p == s.size()) return false;
+        return CharOrEnd(s, p, U"なよぜぞしんかけだっわの", m, 2);
     };
     size_t p = pos;
-    if (Lit(s, p, "て") && tail(p)) return true;
+    if (Lit(s, p, "て") && tail(p, true, false)) return true;
     p = pos;
-    if (Lit(s, p, "で") && tail(p)) return true;
+    if (Lit(s, p, "で") && tail(p, false, false)) return true;
     p = pos;
-    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") && tail(p)) return true;
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"かがさたなばまらわ") && tail(p, true, false)) return true;
+    // The stem of a verb in -eru or -iru, or a potential (荒れねー, 言えねえ, 通じねえ).
     p = pos;
-    if (OneOf(s, p, U"見来出居寝似着") && tail(p)) return true;
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"えけげせぜねべめれきぎしじちびみり") && tail(p, true, true)) return true;
+    for (std::string_view w : {"いけ", "くれ", "られ", "でき"}) {
+        p = pos;
+        if (Lit(s, p, w) && tail(p, true, true)) return true;
+    }
     p = pos;
-    if (Lit(s, p, "し") && tail(p)) return true;
+    if (OneOf(s, p, U"見来出居寝似着") && tail(p, true, false)) return true;
+    p = pos;
+    if (Lit(s, p, "し") && tail(p, true, false)) return true;
     for (std::string_view w : {"わか", "分か", "判", "知", "つま", "たま"}) {
         p = pos;
-        if (Lit(s, p, w) && Lit(s, p, "ん") && tail(p)) return true;
+        if (Lit(s, p, w) && Lit(s, p, "ん") && tail(p, true, false)) return true;
     }
     for (std::string_view w : {"やら", "なら"}) {
         p = pos;
