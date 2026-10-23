@@ -37,6 +37,9 @@ enum class ConstraintContext : uint8_t {
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
     Detached,           // nothing, a space or punctuation right before the word (名前: め)
     BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
+    NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
+                        // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
+                        // not わけて, わけた, わけよう)
 };
 
 // The senses a rule rejects.
@@ -66,6 +69,9 @@ enum class ConstraintReject : uint8_t {
     Target,
     // Every sense of the word, when a candidate with a longer source remains.
     Word,
+    // The verb senses (M) of the word and of the shorter words it starts with, when a sense
+    // of the word that is no verb remains.
+    Verbs,
 };
 
 struct ConstraintRule {

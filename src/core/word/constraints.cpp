@@ -71,6 +71,8 @@ constexpr ConstraintRule kRules[] = {
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
+    {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
+     "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
 
 struct HonorificSuffix {
@@ -107,6 +109,13 @@ constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "な
 // What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
 // ていただく).
 constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
+// What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって),
+// and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
+constexpr std::string_view kNounFollowers[] = {"だ", "で", "じゃ", "が", "の", "ね", "か", "や", "って",
+                                               "なん", "なの", "なら", "あっ", "あり", "ある", "さ", "よ"};
+constexpr std::string_view kStemFollowers[] = {"ない", "無い", "なく", "なかっ", "は", "も", "に"};
+// The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
+constexpr std::string_view kObjectParticles[] = {"を", "に", "へ", "で"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
 constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
 
@@ -271,6 +280,13 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
         }
         return StartsWithAny(after, kSuruTails);
+    case ConstraintContext::NounSlot: {
+        if (after.starts_with("よう") || after.starts_with("させ") || after.starts_with("され")) return false;
+        if (StartsWithAny(after, kNounFollowers)) return true;
+        const int next = NameClassOf(FirstChar(after));
+        return (StartsWithAny(after, kStemFollowers) || (next != kClassHiragana && next != kClassKanji)) &&
+               !StartsWithAny(adjacent, kObjectParticles);
+    }
     case ConstraintContext::Detached:
         return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||
                kQuantityBreaks.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
@@ -463,6 +479,14 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     return c.source.size() < source.size() && source.starts_with(c.source);
                 });
                 if (shorter) rejected = same;
+                break;
+            }
+            case ConstraintReject::Verbs: {
+                auto verb = [&](std::size_t k) { return list[k].codes->part.Tag() == 'M'; };
+                if (std::all_of(same.begin(), same.end(), verb)) break;
+                for (std::size_t k = 0; k < list.size(); k++) {
+                    if (list[k].codes != nullptr && verb(k) && source.starts_with(list[k].source)) rejected.push_back(k);
+                }
                 break;
             }
             case ConstraintReject::NonQuote:

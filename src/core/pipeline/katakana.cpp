@@ -595,11 +595,6 @@ constexpr KataWord kKataWords[] = {
     {"ユルサナイ", true, "許さない"}, {"ヤメテ", true, "やめて"}, {"タスケテ", true, "助けて"},
 };
 
-// Nouns of grammar patterns that fiction writes in katakana (ワケにはいかない, 言いワケ),
-// read in hiragana before hiragana, also where the hiragana joins the text around it into
-// a dictionary word. Before punctuation the hiragana would read as a verb (わけ。 沸け).
-constexpr std::string_view kKataPatternNouns[] = {"ワケ"};
-
 // The particles and predicates after which a word of kKataWords reads as the word; an
 // adjective also reads as one before the end of a sentence. あれ？ is also the
 // interjection "huh?", so アレ does not take ？.
@@ -777,17 +772,6 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         }
         const std::string_view rest = text.substr(i);
         const char32_t next = text::DecodeRune(rest).cp;
-        bool patternNoun = false;
-        for (const std::string_view x : kKataPatternNouns) patternNoun = patternNoun || x == word;
-        if (patternNoun) {
-            if (IsHiraganaRune(next) && prev != U'・' && prev != U'＝' && !(start == 0 && spanBefore) &&
-                (ctx.named == nullptr || ctx.named->find(word) == ctx.named->end())) {
-                b.append(text.substr(at, start - at));
-                b += ToHiragana(word);
-                at = i;
-            }
-            continue;
-        }
         const KataWord* kw = nullptr;
         for (const KataWord& x : kKataWords) {
             if (x.word == word) kw = &x;

@@ -9,3 +9,21 @@ pattern:書くわけはなかったが	答えるわけはなかったが、黙�
 pattern:学生なはず	本当なはずだ。	사실일 것이다.	fix	builtin-pattern
 pattern:学生なわけがない	見かけ通りなわけがない。	외관대로일 리가 없다.	fix	builtin-pattern
 dict:segmentation-b	そんなわけがない。	그럴 리가 없다.	fix	lookup
+normalize:katakana-wake	全部をやるワケにはいかない。	전부를 할 수는 없다.	fix	normalize
+normalize:katakana-wake	岩塩を諦めたワケではない。	암염을 포기한 것은 아니다.	fix	normalize
+normalize:katakana-wake	ワケギを植える。	실파를 심는다.	keep	normalize
+constraint:wake-formal-noun	雲の上の上なワケ。	구름 위 위인 것.	fix	lookup
+constraint:wake-formal-noun	中二病なわけ？	중2병인 것?	fix	lookup
+constraint:wake-formal-noun	そういうわけですか……	그런 것입니까……	fix	lookup
+constraint:wake-formal-noun	「そんなわけあるかいな……」	「그런 이유 있을까……」	fix	lookup
+constraint:wake-formal-noun	仲良くわけて食べた。	사이 좋게 나누어 먹었다.	keep	lookup
+constraint:wake-formal-noun	パンをわけ、食べた。	빵을 나누어 먹었다.	keep	lookup
+constraint:wake-formal-noun	みんなでわけよう。	모두 나누자.	keep	lookup
+dict:jisjk:373943	道理で手慣れてるわけだ。	rule:dict:jisjk:373943=것	fix	local
+dict:jisjk:373943	そのわけを話せ。	!rule:dict:jisjk:373943	keep	local
+dict:jisjk:373943	どんなわけなのか説明して。	!rule:dict:jisjk:373943	keep	local
+dict:jisjk:343497	今日は私が秘書艦ってわけ。	오늘은 내가 비서함이라는 것.	fix	local
+dict:jisjk:343497	秘書艦ってことだ。	비서함이라는 것이다.	keep	local
+dict:w:26748	わけあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
+dict:w:26748	ワケあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
+dict:w:26749	まあ、訳あって、あまり表には出てこない。	뭐, 사정이 있어, 그다지 겉에는 나오지 않는다.	fix	lookup

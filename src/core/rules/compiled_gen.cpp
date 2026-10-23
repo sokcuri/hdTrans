@@ -1743,12 +1743,14 @@ bool RuleL187([[maybe_unused]] Item* p) {
 }
 
 // local 188
-//     (src[-1] == "その" or src[-1] == "あの" or src[-1] == "この" or src[-1] == "どの")
+//     (src[-1] == "その" or src[-1] == "あの" or src[-1] == "この" or src[-1] == "どの" or src[-1] == "どういう" or src[-1] == "どんな")
 bool RuleL188([[maybe_unused]] Item* p) {
     return (SrcEq(p, -1, "その"sv) ||
            SrcEq(p, -1, "あの"sv) ||
            SrcEq(p, -1, "この"sv) ||
-           SrcEq(p, -1, "どの"sv));
+           SrcEq(p, -1, "どの"sv) ||
+           SrcEq(p, -1, "どういう"sv) ||
+           SrcEq(p, -1, "どんな"sv));
 }
 
 // local 189
@@ -4619,7 +4621,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL185, 0xa55ed351c2a5a05full},
     {RuleL186, 0x6335413206fbdcf8ull},
     {RuleL187, 0x29675fe7eade3335ull},
-    {RuleL188, 0x6df1598baaf5dd84ull},
+    {RuleL188, 0xbb6faa8b3061dbbeull},
     {RuleL189, 0x5db47ae41bcd8b28ull},
     {RuleL190, 0x5220ce1b72a4b4d1ull},
     {RuleL191, 0x4ac0f3ed4e6043e4ull},

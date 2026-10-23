@@ -1,6 +1,0 @@
-rule	input	expected	kind	layer
-katakana:pattern-noun	全部をやるワケにはいかない。	전부를 할 수는 없다.	fix	normalize
-katakana:pattern-noun	岩塩を諦めたワケではない。	암염을 포기한 것은 아니다.	fix	normalize
-katakana:pattern-noun	言いワケはしたくない。	변명은 하고 싶지 않다.	fix	normalize
-katakana:pattern-noun	雲の上の上なワケ。	구름 위 위인 이유.	keep	normalize
-katakana:pattern-noun	ワケギを植える。	실파를 심는다.	keep	normalize
