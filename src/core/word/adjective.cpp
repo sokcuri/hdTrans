@@ -341,6 +341,20 @@ bool SentenceMark(char32_t r) {
 
 bool Hiragana(char32_t r) { return r >= U'ぁ' && r <= U'ゖ'; }
 
+// Whether rest, a comma and the text after the word, goes on to another comma before
+// any mark that ends a clause: the word is then an item of a list (「陰険、脳筋、…」),
+// unless the item after it repeats it (駄目、駄目、…).
+bool ListsNouns(std::string_view word, std::string_view rest) {
+    rest.remove_prefix(text::DecodeRune(rest).size);
+    for (std::size_t i = 0; i < rest.size();) {
+        const text::Rune r = text::DecodeRune(rest.substr(i));
+        if (r.cp == U'、' || r.cp == U'，') return rest.substr(0, i) != word;
+        if (SentenceMark(r.cp) || r.cp == U'」' || r.cp == U'』') return false;
+        i += r.size;
+    }
+    return false;
+}
+
 }  // namespace
 
 // What stands right before the word: 0 the start of a sentence (nothing, a mark that
@@ -400,7 +414,9 @@ std::string_view Item::BareStemEnding(std::string_view after) const {
     if (!rest.empty()) {
         const char32_t r = text::DecodeRune(rest).cp;
         if (r == U'、' || r == U'，') {
-            if (before != 0) return {};
+            const std::string_view head = text.substr(0, static_cast<std::size_t>(start));
+            const bool repeated = head.ends_with(std::string(surface) + "、");
+            if ((before != 0 && !repeated) || ListsNouns(surface, rest)) return {};
         } else if (r != U'」' && r != U'』') {
             return {};
         }
