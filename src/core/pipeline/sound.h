@@ -162,7 +162,10 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // are left alone. The rewrite is kept when a dictionary key then reaches further past the
 // mark than before or, when no key reached past it, after a kanji or, for a lengthening
 // mark, a verb or adjective stem. A dropped run with ー or ～ before the last syllable of a
-// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark).
+// phrase leaves kLengthenMark after that syllable (せんぱーい！ せんぱい + mark), and so does
+// a run of three or more plain vowels of the kana before it inside a word, or of two before
+// the い of an adjective stem (すごおおおい すごい + mark, さむううい; おばあああちゃん
+// おばあちゃん keeps one vowel of the word).
 // A ー or ～ that ends a volitional form after a verb stem is written う (いこー いこう).
 // The tic っぽい drawn out before a pause (行くっぽーい) is っぽい with kLengthenMark.
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ, or

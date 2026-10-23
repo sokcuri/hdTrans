@@ -225,6 +225,10 @@ HD_TEST(pipeline_sound) {
         {"もっとー！", "もっと～！"},
         {"冷たいねー", "冷たいね～"},
         {"やーめーて！", "やめて\uE00A！"},
+        // A run of three plain vowels inside a word, or of two before an adjective's い.
+        {"すごおおおい！", "すごい\uE00A！"},
+        {"うるさああい！", "うるさい\uE00A！"},
+        {"すごおい！", "すごおい！"},
         // Unchanged: the casual negative ね, a lone kana, a sound.
         {"知らねー", "知らねー"},
         {"よー！", "よー！"},

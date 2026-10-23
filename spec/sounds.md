@@ -13,8 +13,9 @@
 | と、とと、溶けちゃう | 노, 노, 녹아버린다 | 고침 |
 | 「さ、さ、最低」 | 「최, 최, 최저」 | 고침 |
 | 彼女はもぞもぞとお尻を動かした。 | 그녀는 꼼지락꼼지락 엉덩이를 움직였다. | 고침 |
+| すごおおおい！ | 대단해~! | 고침 |
 | 「わ、わ、わたし……」 | 「나, 나, 나……」 | 유지 |
 | じろじろと見る | 빤히 본다 | 유지 |
 
 사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-adverbial-to.tsv`(말더듬과 と),
-`tests/rules/cases/sound-drawn-cries.tsv`(소리의 길이)
+`tests/rules/cases/sound-drawn-cries.tsv`(소리의 길이), `tests/rules/cases/sound-vowel-run.tsv`(낱말 안에서 늘인 모음)
