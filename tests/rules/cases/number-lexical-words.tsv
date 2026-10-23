@@ -1,5 +1,12 @@
 # 규칙: NUM-8
 rule	input	expected	kind	layer
+dict:number-lexical-words	七つ道具を持ってきた。	필수 도구를 가져왔다.	fix	defaults
+dict:number-lexical-words	八つ裂きの刑だ。	갈기갈기 찢기의 형이다.	fix	defaults
+dict:number-lexical-words	一騒動あった。	한바탕 소동 있었다.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかない相手だ。	보통 수단으로는 안 되는 상대다.	fix	defaults
+dict:number-lexical-words	一人前のレディとして扱ってよね！	어엿한 레이디로서 취급해!	fix	defaults
+dict:number-lexical-words	三日坊主で終わった。	작심삼일로 끝났다.	fix	defaults
+dict:w:27029	一人前の寿司を頼む。	1인분의 스시를 부탁한다.	keep	local
 dict:jisjk:365553	一番好きな作家は？	제일 좋아하는 작가는?	fix	local
 dict:jisjk:365553	どの子が一番好きなの？	어느 아이가 제일 좋아해?	fix	local
 dict:jisjk:365553	先輩好きです。	rule:dict:jisjk:365553=(을)를 좋아%D1@	keep	local
@@ -7,5 +14,6 @@ dict:jisjk:1859	駆逐艦の一番艦だ。	구축함의 1번함이다.	fix	loca
 dict:jisjk:1859	一番目の問題。	첫번째의 문제.	keep	local
 dict:jisjk:1859	一番強い。	제일 강하다.	keep	defaults
 dict:jisjk:1859	一番になりたい。	제일이 되고 싶다.	keep	defaults
+dict:number-lexical-words	八つ当たりするな。	엉뚱한 화풀이하지 마.	keep	defaults
 dict:number-lexical-words	一つください。	하나 주세요.	keep	defaults
 dict:number-lexical-words	一人で行く。	혼자서 간다.	keep	defaults
