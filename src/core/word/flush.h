@@ -117,6 +117,11 @@ void ParallelNoka(Flusher& f);
 void OfferPromise(Flusher& f);
 void ComitativeTo(Flusher& f);
 void NounTo(Flusher& f);
+// A と that opens a line or follows a sentence end on it (と私が頭を下げると, バカな。と笑う)
+// quotes what was said before it: (이)라고 rather than (와)과 or (으)로. Not inside brackets,
+// where it stutters, nor before an ellipsis or another と, nor before なる or する, where it
+// starts a conjunction (となると, とすると).
+void LineInitialTo(Flusher& f);
 
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);

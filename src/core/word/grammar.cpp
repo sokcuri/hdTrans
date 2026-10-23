@@ -1893,6 +1893,38 @@ void NounTo(Flusher& f) {
 
 namespace {
 
+// Whether nothing but spaces stands before the item on its line, or a sentence end does.
+bool OpensLine(const Worker& w, const Item* it) {
+    std::string_view before = it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
+    for (int t = it->tokenIndex;;) {
+        before = TrimSpace(before);
+        if (!before.empty()) return RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
+        if (--t < 0) return true;
+        before = w.Tok(t).text;
+    }
+}
+
+}  // namespace
+
+void LineInitialTo(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const Item* n = it->next;
+        if (it->prev != nullptr || n == nullptr || it->group->surface != "と" || it->selected < 0 || it->Fixed() ||
+            n->selected < 0 || !OpensLine(f.w, it)) {
+            continue;
+        }
+        const std::string_view next = n->group->surface;
+        if (next.starts_with("…") || next.starts_with("‥") || next.starts_with("と") ||
+            (At(n->Code(n->selected), 0) == '4' && (next.starts_with("な") || next.starts_with("す") || next.starts_with("し")))) {
+            continue;
+        }
+        const std::string lemma = ItemLemma(f, it, it->selected);
+        if (lemma == "(와)과" || lemma == "(으)로") TakeTarget(it, At(it->Code(it->selected), 0), "(이)라고");
+    }
+}
+
+namespace {
+
 // Punctuation before which an exclaimed adjective may open the utterance.
 constexpr std::string_view kExclaimOpeners[] = {"「", "『", "（", "(", "…", "……", "、"};
 

@@ -60,6 +60,7 @@ void Flush(Flusher& f) {
         EvenBeforePassive(f);
         ComitativeTo(f);
         NounTo(f);
+        LineInitialTo(f);
         HumbleFirstPerson(f);
         ChanAfterKatakana(f);
         InitialSoundRule(f);
