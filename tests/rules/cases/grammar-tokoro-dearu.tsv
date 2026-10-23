@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+validity:tokorode-copula	それが妥当なところである。	그것이 타당한 곳이다.	fix	analysis
+validity:tokorode-copula	誰もが知るところであるが、	누구나 아는 곳이지만,	fix	analysis
+validity:tokorode-copula	ところで、話がある。	그런데, 이야기가 있다.	keep	analysis
+dict:jisjk:352784	時間はまだ二時を回ったところである。	시간은 아직 2시를 지난 참이다.	fix	local
+dict:jisjk:352784	帰ってきたところだ。	돌아온 참이다.	keep	local
+dict:gram:tokoro:teiru	判断に迷っているところである。	판단에 망설이고 있는 중이다.	fix	local
+dict:gram:tokoro:teiru	古い書物を新たに書き写しているところです。	낡은 서적을 새롭게 베껴쓰고 있는 중입니다.	fix	local
+dict:gram:tokoro:teiru	今いるところである。	지금 있는 곳이다.	keep	local

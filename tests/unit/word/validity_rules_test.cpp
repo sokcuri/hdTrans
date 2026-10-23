@@ -24,8 +24,8 @@ HD_TEST(validity_rules_fingerprint) {
         h.Byte(static_cast<uint8_t>(r.followClass));
         h.Str(r.first);
     }
-    HD_CHECK_EQ(h.h, uint64_t{0x35a9c64d6de4dfafull});
-    HD_CHECK_EQ(rules.size(), size_t{740});
+    HD_CHECK_EQ(h.h, uint64_t{0x462718c1db64c61full});
+    HD_CHECK_EQ(rules.size(), size_t{742});
     HD_REQUIRE(!rules.empty());
     HD_CHECK_EQ(std::string(rules[0].source), std::string("でも"));
     HD_CHECK_EQ(rules[0].sourceClass, '2');
@@ -54,6 +54,8 @@ HD_TEST(validity_match_dictionary) {
         {"った", "です", '2', 'X', true},  {"ご", "です", '2', 'X', false},   {"っきり", "です", '2', 'X', false},
         {"た", "いったん", '3', 'X', true}, {"で", "いったん", '3', 'X', false},
         {"ですか", "zzz", '3', 'X', false}, {"ですか", "zzz", '3', 'Y', false}, {"ね", "zzz", '3', 'X', true},
+        // ところで does not end before the copula である (回ったところである: ところ + である).
+        {"ある。", "ところで", '5', '4', false}, {"あろう", "ところで", '3', 'X', false}, {"、", "ところで", '5', '4', true},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(worker.MatchDictionary(c.following, c.source, c.first, c.second), c.ok);
