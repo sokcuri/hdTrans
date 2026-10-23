@@ -1,0 +1,285 @@
+name: Deploy web
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('Deploy web {0}{1}', inputs.tag, inputs.dry_run && ' (dry run)' || '') || format('Deploy web {0}', github.event.workflow_run.head_branch) }}
+
+on:
+  workflow_run:
+    workflows: [Publish npm]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published stable release tag to deploy (v<major>.<minor>.<patch>)
+        type: string
+        required: true
+      dry_run:
+        description: Build the site and list what would change on the server without changing it
+        type: boolean
+        default: true
+        required: true
+
+permissions:
+  contents: read
+
+env:
+  SITE_URL: https://trans.kuri.kr/
+  SCCACHE_DIR: ${{ github.workspace }}/.sccache
+  CCACHE_DIR: ${{ github.workspace }}/build/ccache
+
+jobs:
+  release:
+    if: >-
+      github.repository == 'sokcuri/hdTrans' &&
+      ((github.event_name == 'workflow_run' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_repository.full_name == github.repository) ||
+       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      deploy: ${{ steps.resolve.outputs.deploy }}
+      tag: ${{ steps.resolve.outputs.tag }}
+      sha: ${{ steps.resolve.outputs.sha }}
+    steps:
+      - name: Resolve the published release
+        id: resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          RUN_TAG: ${{ github.event.workflow_run.head_branch }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          tag="$RUN_TAG"
+          if [[ "$EVENT" == workflow_dispatch ]]; then tag="$INPUT_TAG"; fi
+          if [[ ! "$tag" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            if [[ "$EVENT" == workflow_dispatch ]]; then
+              echo "::error::Select a v<major>.<minor>.<patch> release tag." >&2
+              exit 1
+            fi
+            echo "::notice::$tag is not a stable release tag; nothing to deploy."
+            echo deploy=false >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          sha="$(gh api "repos/$GITHUB_REPOSITORY/commits/$tag" --jq .sha)"
+          state="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$tag" --jq '"\(.draft) \(.prerelease)"')"
+          if [[ "$state" != 'false false' ]]; then
+            echo "::error::$tag has no published stable release." >&2
+            exit 1
+          fi
+          latest="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          if [[ "$EVENT" == workflow_run ]]; then
+            test "$sha" = "$RUN_SHA"
+            if [[ "$latest" != "$tag" ]]; then
+              echo "::notice::$tag is not the latest release ($latest); the site is left as it is."
+              echo deploy=false >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          elif [[ "$latest" != "$tag" ]]; then
+            echo "::warning::$tag is older than the latest release $latest."
+          fi
+          { echo deploy=true; echo "tag=$tag"; echo "sha=$sha"; } >> "$GITHUB_OUTPUT"
+
+  build:
+    name: build (${{ matrix.preset }})
+    needs: release
+    if: needs.release.outputs.deploy == 'true'
+    strategy:
+      matrix:
+        preset: [linux, wasm]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+          persist-credentials: false
+      - name: Set up Emscripten
+        if: matrix.preset == 'wasm'
+        uses: mymindstorm/setup-emsdk@v16
+        with:
+          version: 4.0.22
+          actions-cache-folder: build/emsdk
+      - name: Set up ccache for Emscripten
+        if: matrix.preset == 'wasm'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ccache
+          # Keep sysroot paths stable in both cold and restored compiler caches.
+          sdk="$GITHUB_WORKSPACE/build/emsdk/emsdk-main"
+          "$sdk/emsdk" activate 4.0.22
+          source "$sdk/emsdk_env.sh"
+          env | grep '^EMSDK' >> "$GITHUB_ENV"
+          echo "EM_CONFIG=$sdk/.emscripten" >> "$GITHUB_ENV"
+          printf '%s\n' "$sdk" "$sdk/upstream/emscripten" >> "$GITHUB_PATH"
+      - name: Set up sccache
+        if: matrix.preset == 'linux'
+        uses: mozilla-actions/sccache-action@v0.0.11
+        with:
+          disable_annotations: true
+      # Restore only: the Build workflow owns these caches.
+      - name: Restore native compiler cache
+        if: matrix.preset == 'linux'
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: sccache-${{ runner.os }}-${{ runner.arch }}-linux-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
+          restore-keys: |
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-
+      - name: Restore WASM compiler cache
+        if: matrix.preset == 'wasm'
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ runner.os }}-${{ runner.arch }}-wasm-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
+          restore-keys: |
+            ccache-${{ runner.os }}-${{ runner.arch }}-wasm-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
+            ccache-${{ runner.os }}-${{ runner.arch }}-wasm-
+      - name: Build
+        run: |
+          if [[ "${{ matrix.preset }}" == wasm ]]; then
+            # ccache accepts the -Xclang arguments in Emscripten's Clang calls.
+            export EM_COMPILER_WRAPPER=ccache
+            emcmake cmake --preset wasm -G Ninja
+            cmake --build --preset wasm --parallel "$(getconf _NPROCESSORS_ONLN)" --target hdtrans_wasm
+          else
+            cmake --preset linux -G Ninja \
+              -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
+            cmake --build --preset linux --parallel "$(getconf _NPROCESSORS_ONLN)" --target hdtrans_cli
+          fi
+      - uses: actions/upload-artifact@v7
+        with:
+          name: web-${{ matrix.preset }}
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            build/linux/hdtrans
+            build/wasm/hdtrans_engine.js
+            build/wasm/hdtrans_engine.wasm
+
+  deploy:
+    needs: [release, build]
+    if: needs.release.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: web
+      url: ${{ env.SITE_URL }}
+    concurrency:
+      group: deploy-web${{ inputs.dry_run && '-dry-run' || '' }}
+      cancel-in-progress: false
+    env:
+      TAG: ${{ needs.release.outputs.tag }}
+      SHA: ${{ needs.release.outputs.sha }}
+      DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify the release source
+        run: |
+          test "$(git rev-parse HEAD)" = "$SHA"
+          test "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$SHA"
+          git merge-base --is-ancestor HEAD origin/main
+          test "$(cat release-version.txt)" = "${TAG#v}"
+          # This workflow's deploy script, so that older releases deploy with the current server commands.
+          git checkout "$GITHUB_SHA" -- web/deploy.sh
+      - uses: actions/download-artifact@v8
+        with:
+          name: web-linux
+          path: build/linux
+      - uses: actions/download-artifact@v8
+        with:
+          name: web-wasm
+          path: build/wasm
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Install TypeScript tools
+        run: npm --prefix web ci --ignore-scripts --no-audit --no-fund
+      - name: Set up SSH
+        env:
+          HDTRANS_WEB_HOST: ${{ secrets.HDTRANS_WEB_HOST }}
+          DEPLOY_KEY: ${{ secrets.HDTRANS_WEB_DEPLOY_KEY }}
+          KNOWN_HOSTS: ${{ secrets.HDTRANS_WEB_KNOWN_HOSTS }}
+        run: |
+          test -n "$HDTRANS_WEB_HOST" && test -n "$DEPLOY_KEY" && test -n "$KNOWN_HOSTS"
+          dir="$RUNNER_TEMP/web-ssh"
+          install -d -m 700 "$dir"
+          (umask 077; printf '%s\n' "$DEPLOY_KEY" > "$dir/key"; printf '%s\n' "$KNOWN_HOSTS" > "$dir/known_hosts")
+          echo "HDTRANS_WEB_SSH=ssh -i $dir/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$dir/known_hosts -o ConnectTimeout=20" >> "$GITHUB_ENV"
+      # Example texts that are not in the repository come from the deployed site;
+      # they stay on this runner and are never uploaded as artifacts.
+      - name: Fetch the example texts
+        env:
+          HDTRANS_WEB_HOST: ${{ secrets.HDTRANS_WEB_HOST }}
+        run: web/deploy.sh examples "$RUNNER_TEMP/web-examples"
+      - name: Build the site
+        run: |
+          chmod +x build/linux/hdtrans
+          home="$(mktemp -d)"
+          HOME="$home" HDTRANS_CACHE_DIR=off HDTRANS_CLI=build/linux/hdtrans HDTRANS_WASM=build/wasm \
+            HDTRANS_WEB_EXAMPLES="$RUNNER_TEMP/web-examples" node web/build.mjs
+          rm -rf "$home"
+      - name: List the changes (dry run)
+        if: env.DRY_RUN == 'true'
+        env:
+          HDTRANS_WEB_HOST: ${{ secrets.HDTRANS_WEB_HOST }}
+        run: |
+          web/deploy.sh dry-run > "$RUNNER_TEMP/dry-run.log"
+          {
+            echo "### Deploy web $TAG (dry run)"
+            echo "Files whose content changes: $(grep -c '^<' "$RUNNER_TEMP/dry-run.log" || true)"
+            echo "Files to delete: $(grep -c '^\*deleting' "$RUNNER_TEMP/dry-run.log" || true)"
+          } >> "$GITHUB_STEP_SUMMARY"
+      # A newer release may have deployed while this one was building.
+      - name: Confirm the release is still the latest
+        if: env.DRY_RUN != 'true' && github.event_name == 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          if [[ "$latest" != "$TAG" ]]; then
+            echo "::notice::$TAG is no longer the latest release ($latest); the site is left as it is."
+            echo SKIP_DEPLOY=true >> "$GITHUB_ENV"
+          fi
+      - name: Deploy
+        if: env.DRY_RUN != 'true' && env.SKIP_DEPLOY != 'true'
+        env:
+          HDTRANS_WEB_HOST: ${{ secrets.HDTRANS_WEB_HOST }}
+        run: web/deploy.sh
+      - name: Check the live site
+        if: env.DRY_RUN != 'true' && env.SKIP_DEPLOY != 'true'
+        run: |
+          live="$RUNNER_TEMP/live"
+          mkdir -p "$live"
+          get() { curl -fsS --compressed --retry 3 -H 'Cache-Control: no-cache' "$SITE_URL$1" -o "$2"; }
+          for attempt in 1 2 3 4 5 6; do
+            get "?deploy=$SHA" "$live/index.html" && cmp -s "$live/index.html" build/web/dist/index.html && break
+            if [[ "$attempt" == 6 ]]; then echo "::error::The live page is not the page just built." >&2; exit 1; fi
+            sleep 10
+          done
+          version="$(grep -o '<p class="contact" id="version">[^<]*</p>' "$live/index.html" | sed 's/<[^>]*>//g')"
+          short="${version##*, }"
+          if [[ "$version" != "hdTrans ${TAG#v}, "* || ${#short} -lt 7 || "$SHA" != "$short"* ]]; then
+            echo "::error::The live version line ($version) is not $TAG at $SHA." >&2
+            exit 1
+          fi
+          get manifest.json "$live/manifest.json"
+          cmp "$live/manifest.json" build/web/dist/manifest.json
+          get examples/list.json "$live/list.json"
+          cmp "$live/list.json" build/web/dist/examples/list.json
+          for path in $(jq -r '.engine.path, .wasm.path, .dict.snapshot.path' build/web/dist/manifest.json); do
+            curl -fsSI --retry 3 "$SITE_URL$path" > /dev/null
+          done
+          {
+            echo "### Deployed web $TAG"
+            echo "$version"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Remove the key and example texts
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/web-ssh" "$RUNNER_TEMP/web-examples" build/web/dist/examples
