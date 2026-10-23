@@ -14,10 +14,10 @@ npm에서 설치합니다.
 npm install hdtrans
 ```
 
-`.tgz` 파일을 직접 설치할 수도 있습니다.
+[Releases](https://github.com/sokcuri/hdTrans/releases)의 `.tgz` 파일을 직접 설치할 수도 있습니다.
 
 ```sh
-npm install ./hdtrans-<version>.tgz
+npm install ./hdTrans-<version>-wasm.tgz
 ```
 
 ## 초기화와 종료

@@ -13,6 +13,8 @@ export function releaseVersion(ref) {
   return version;
 }
 
+export const npmAssetName = version => `hdTrans-${version}-wasm.tgz`;
+
 export function verifyNpmPackage({ root = process.cwd(), packageDir, ref }) {
   const version = releaseVersion(ref);
   const json = path => JSON.parse(readFileSync(join(root, path), 'utf8'));
@@ -24,7 +26,7 @@ export function verifyNpmPackage({ root = process.cwd(), packageDir, ref }) {
       lock.version !== version || lock.packages?.['']?.version !== version) {
     throw new Error('The source versions must match the release tag.');
   }
-  const name = `hdtrans-${version}.tgz`;
+  const name = npmAssetName(version);
   const path = join(packageDir, name);
   const bytes = readFileSync(path);
   const hash = createHash('sha256').update(bytes).digest('hex');

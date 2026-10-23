@@ -118,7 +118,7 @@ cmake --build --preset wasm --parallel
   `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
 - **release.yml**: `build.yml`의 결과를 받아 Windows ZIP과 Linux, macOS tar.gz, `SHA256SUMS.txt`를
   만듭니다. Windows는 x86 `J2KEngine.dll`, x64 CLI, GUI, C API와 별도의 x86 CLI, C API를 담습니다.
-  WASM 아티팩트에는 엔진, TypeScript용 JavaScript와 `.d.ts`를 포함합니다. npm용 `.tgz`도 빌드한 엔진과 기본 사전을 담아 릴리스에 첨부합니다.
+  WASM 아티팩트에는 엔진, TypeScript용 JavaScript와 `.d.ts`를 포함합니다. 빌드한 엔진, JavaScript 래퍼와 기본 사전을 담은 npm 패키지는 `hdTrans-<버전>-wasm.tgz`로 릴리스에 첨부합니다.
 - **e2e.yml**: 풀 리퀘스트와 `main`, `develop` 푸시 때, 현재 커밋의 CLI로 비공개 테스트 데이터를 번역해 기대 출력과
   달라진 줄을 보고합니다. 자세한 내용은 [testing.md](testing.md#ci)에 있습니다.
 
