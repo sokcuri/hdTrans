@@ -1561,7 +1561,11 @@ void TerminalBeforeQuote(Flusher& f) {
                 pause = pause && f.w.Span(t) == 0 && !left.empty() && TrimRunes(left, "…‥、").empty();
             }
         }
+        // The quote is a particle, ending or quoting verb; a noun or adverb that starts with と (とても,
+        // ところ) does not quote.
         if (!pause || next == nullptr || (!next->group->surface.starts_with("と") && !next->group->surface.starts_with("なんて")) ||
+            next->selected < 0 || next->group->At(next->selected) == nullptr ||
+            std::string_view("PSM").find(next->group->At(next->selected)->cls) == std::string_view::npos ||
             it->DirectIndex() < 0 || OwnedGroup(it->DirectGroup()) || !Has(it->EntryText(it->selected), "@")) {
             continue;
         }

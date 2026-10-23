@@ -3,6 +3,9 @@ rewrite:terminal-before-quote	死にたい、というのとは違う。	죽고 
 rewrite:terminal-before-quote	他意はない、という意味	타의는 없다, 라는 의미	fix	rewrites
 rewrite:terminal-before-quote	赤い、花。	붉은, 꽃.	keep	rewrites
 rewrite:terminal-before-quote	痛い時は休む。	아플 때는 쉰다.	keep	rewrites
+rewrite:terminal-before-quote	ラインができあがった、とても綺麗な裸だった。	라인이 완성된, 무척 예쁜 알몸이었다.	fix	rewrites
+rewrite:terminal-before-quote	頭が痛い、と言わんばかりに	머리가 아프다, 라고 말하듯이	keep	rewrites
+rewrite:terminal-before-quote	わからない、とか……？	모른다, 라든지……?	keep	rewrites
 rewrite:noda-to	そうだろうと思ったよ…。	그럴 것이라고 생각했어….	fix	rewrites
 rewrite:noda-to	無理はなかっただろうと思うんですよ。	무리는 없었을 것이라고 생각하는 거예요.	fix	rewrites
 rewrite:noda-to	ひたすら恥ずかしかったのだと思います	오로지 부끄러웠던 것이라고 생각합니다	fix	rewrites
