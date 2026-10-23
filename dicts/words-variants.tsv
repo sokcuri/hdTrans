@@ -9717,7 +9717,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 空出張	가공 출장	N110			GN							jisjk:158566
 そら目	착시	N110			GN							jisjk:16185
 カラ回り	표류	I110		Hd	GN							jisjk:61975
-空まわり	표류	I110		Hd	GN							jisjk:61975
+空まわり	공회전	I110		Hd	GN							jisjk:61975
 そら耳	환청	N110	UTi		GN							jisjk:16210
 空ぶかし	무부하회전	N110	VPe		GN							jisjk:229505
 空ふかし	무부하회전	N110	VPe		GN							jisjk:229505

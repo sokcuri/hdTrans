@@ -162032,7 +162032,7 @@ ttt	ttt	K110			GN				jisjk:201744
 地獄谷	지고쿠다니	I110	QCT		GN				jisjk:85003		
 地獄谷温泉	지고쿠다니온천	N110	VPl		GN				jisjk:236581		
 地獄道	지옥도	N110	VPlUCl		GN				jisjk:236582		
-地球	지구	N110	VSs		GN				jisjk:34547		
+地球	지구	N110	VSsVPl		GN				jisjk:34547		
 地球儀	지구의	I110	VPe		GN				jisjk:84963		
 地球再生計画	지구 재생계획	N110			BZ				jisjk:359836		
 地球化学	지구화학	I110			GN				jisjk:110719		
@@ -178225,7 +178225,7 @@ ttt	ttt	K110			GN				jisjk:201744
 宇奈月	우나즈키	I110	QCT		GN				jisjk:78912		
 宇奈月町	우나즈키마치	I130	QCTVPl		GN				jisjk:275681		
 宇奈根	우나네	N130	QCTVPl		GN				jisjk:275684		
-宇宙	우주	N110	VSs		GN				jisjk:30171		
+宇宙	우주	N110	VSsVPl		GN				jisjk:30171		
 宇宙ステーション	우주 스테이션	I110			BZ				jisjk:108953		
 宇宙中継	우주중계	N110	VCm		GN				jisjk:203675		
 宇宙人	우주인	I110	VHnQNN		GN				jisjk:78942		
@@ -291659,7 +291659,7 @@ ttt	ttt	K110			GN				jisjk:201744
 空嘔	헛구역질	N110	QHP		GN				jisjk:169573		
 空嘯	짐짓 시치미 &C8@	M421			GN				jisjk:138993		
 空回し	공회전	N110		Hd	GN				jisjk:6958		
-空回り	표류	I110		Hd	GN				jisjk:61975		
+空回り	공회전	I110		Hd	GN				jisjk:61975		
 空圧	공기 압력	N110			GN				jisjk:16204		
 空地	빈터	N110	VPl		GN				jisjk:16219		
 空城	소라죠	N130	QCTVPl		GN				jisjk:305049		

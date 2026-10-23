@@ -45,7 +45,7 @@
 | 黒枠の眼鏡をかけた男。 | 검은 테두리의 안경을 쓴 남자. | 고침 |
 
 사례: `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`,
-`tests/rules/cases/lexical-gloss-cleanup.tsv`
+`tests/rules/cases/lexical-gloss-cleanup.tsv`, `tests/rules/cases/lexical-idiom-glosses.tsv`
 
 ## LEX-4 이름 읽기는 명사로 읽히는 낱말을 덮지 않는다
 
