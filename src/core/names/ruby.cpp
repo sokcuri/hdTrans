@@ -91,12 +91,10 @@ bool BarParenRuby(std::string_view s, std::size_t pos, RubyMatch& m) {
     return true;
 }
 
-// ([一-龥々〆ヶ]+)《([^《》]{1,30})》
-bool KanjiRuby(std::string_view s, std::size_t pos, RubyMatch& m) {
-    std::size_t p = pos;
-    const std::size_t n = Take(s, p, s.size(), IsRubyKanji);
-    const std::size_t baseEnd = p;
-    if (n < 1 || !Lit(s, p, "《")) return false;
+// ([一-龥々〆ヶ]+)《([^《》]{1,30})》 at pos, where the kanji run from pos ends at baseEnd.
+bool KanjiRuby(std::string_view s, std::size_t pos, std::size_t baseEnd, RubyMatch& m) {
+    std::size_t p = baseEnd;
+    if (baseEnd == pos || !Lit(s, p, "《")) return false;
     const std::size_t readStart = p;
     const std::size_t k = Take(s, p, 31, NotBracket);
     const std::size_t readEnd = p;
@@ -275,8 +273,15 @@ bool FindReading(std::string_view s, std::size_t from, RubyMatch& m) {
 }
 
 bool FindRuby(std::string_view s, std::size_t from, RubyMatch& m) {
+    std::size_t runEnd = from;  // the end of the kanji run that holds pos, read once per run
     for (std::size_t pos = from; pos < s.size(); pos += RuneAt(s, pos).size) {
-        if (BarRuby(s, pos, m) || BarParenRuby(s, pos, m) || KanjiRuby(s, pos, m) || HtmlRuby(s, pos, m)) return true;
+        if (pos >= runEnd) {
+            runEnd = pos;
+            Take(s, runEnd, s.size(), IsRubyKanji);
+        }
+        if (BarRuby(s, pos, m) || BarParenRuby(s, pos, m) || KanjiRuby(s, pos, runEnd, m) || HtmlRuby(s, pos, m)) {
+            return true;
+        }
     }
     return false;
 }
