@@ -18,11 +18,11 @@ cx:return-to:10	昔みたいな関係に戻れないかな	옛날 같은 관계�
 cx:return-to:10	普通の生活に戻れないから	보통 생활로 돌아갈 수 없으니까	fix	rewrites
 cx:return-to:10	買い物に行った。	쇼핑하러 갔다.	keep	rewrites
 cx:return-to:10	仕事に行く。	일하러 간다.	keep	rewrites
-rewrite:even-before-passive	溶接でもされたかのように	용접이라도 된 것처럼	fix	rewrites
-rewrite:even-before-passive	このまま放置でもされない限り	이대로 방치라도 되지 않는 한	fix	rewrites
-rewrite:even-before-passive	修理でもされたのか	수리라도 된 건가	fix	rewrites
-rewrite:even-before-passive	学校でも勉強する。	학교에서도 공부한다.	keep	rewrites
-rewrite:even-before-passive	家でも食べられる。	집에서도 먹을 수 있다.	keep	rewrites
+cx:even-before-passive:10	溶接でもされたかのように	용접이라도 된 것처럼	fix	rewrites
+cx:even-before-passive:10	このまま放置でもされない限り	이대로 방치라도 되지 않는 한	fix	rewrites
+cx:even-before-passive:10	修理でもされたのか	수리라도 된 건가	fix	rewrites
+cx:even-before-passive:10	学校でも勉強する。	학교에서도 공부한다.	keep	rewrites
+cx:even-before-passive:10	家でも食べられる。	집에서도 먹을 수 있다.	keep	rewrites
 rewrite:comitative-to	５と５。	5와 5.	fix	rewrites
 rewrite:comitative-to	３と４を足す。	3과 4를 더한다.	fix	rewrites
 rewrite:comitative-to	木材300と鉄500を準備せよ！	목재 300과 철 500을 준비하라!	fix	rewrites

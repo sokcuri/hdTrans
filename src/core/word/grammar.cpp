@@ -1773,19 +1773,6 @@ void LongVowelAfterKatakana(Flusher& f) {
 }
 
 
-void EvenBeforePassive(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* n = it->next;
-        if (n == nullptr || it->prev == nullptr || it->group->surface != "でも" ||
-            output::Lemma(it->EntryText(it->selected), f.families) != "에서도" || !n->detail->Yougo() ||
-            Has(it->prev->Attr(it->prev->selected), "VPl")) {
-            continue;
-        }
-        const std::string_view s = Slice(n->text, n->start, n->length);
-        if (Has(s, "られ") || s.starts_with("され")) SelectLemma(f, it, "(이)라도");
-    }
-}
-
 namespace {
 
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty.

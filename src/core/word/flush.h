@@ -142,7 +142,6 @@ void LineInitialTo(Flusher& f);
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);
 void VerbNegative(Flusher& f);
-void EvenBeforePassive(Flusher& f);
 void TeSequence(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
 

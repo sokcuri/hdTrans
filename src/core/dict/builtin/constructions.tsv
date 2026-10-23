@@ -23,3 +23,5 @@ cx:no-after-na:10		&&7 S+0== "の" F+0== "selected" F-1== "selected" F-1!= "conj
 cx:particle-in-next:10		&&5 F+0== "selected" F+1== "selected" F+0!= "conjugating" K+0== "P" F+0== "lemma-starts-next"	set-target ""	人気なだけに 인기인 만큼
 //= ji-before-jiman	after particle-in-next	The けど read in 지만 after an ending in 겠지 is 만 alone.
 cx:ji-before-jiman:10		&&4 F+1== "selected" ||2 S+1== "Lけど" S+1== "Lけれど" L+1== "R지만" Y+0== "R겠지"	set-target@+1 "만"	ないのだろうけど 없겠지만
+//= even-before-passive	after OfferPromise	The でも read 에서도 before a passive verb is (이)라도, not the place of the action.
+cx:even-before-passive:10		&&6 F-1== "exists" S+0== "でも" L+0== "에서도" F+1== "conjugating" A-1!= "VPl" ||2 I+1== "~られ" I+1== "Lされ"	select-lemma "(이)라도"	修理でもされたのか 수리라도 된 건가
