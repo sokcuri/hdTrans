@@ -230,9 +230,11 @@ constexpr std::u32string_view kCountLeads = U"0123456789０１２３４５６７
 // written in Arabic digits, which stays in digits (2回 2회, 7枚 7장, 1個 1개) as a number
 // does in a count, a table or a rule text, where the digits of one to nine and of larger
 // numbers would otherwise mix.
-std::string_view NativeNumeral(std::string_view digits, std::string_view surface) {
+// An Arabic 1 in an idiom of counting (IdiomaticOne) reads 한 as 一 does.
+std::string_view NativeNumeral(std::string_view digits, std::string_view surface, bool idiom = false) {
     constexpr std::string_view kNative[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉"};
     if (surface == "十" && digits == "10") return "열";
+    if (idiom && digits == "1" && (surface == "1" || surface == "１")) return kNative[0];
     if (digits.size() != 1 || digits[0] == '0') return {};
     for (size_t k = 0; k < surface.size();) {
         const auto r = text::DecodeRune(surface.substr(k));
@@ -468,6 +470,58 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
            dict::Written(r.cp) == text::DecodeRune(EntryText(b)).cp;
 }
 
+// Whether item k follows item k - 1 with nothing between them: in the same token, or at the
+// start of the next one (a number token after a word).
+bool Follows(const std::vector<ResolvedItem>& items, int k) {
+    return Adjoins(items, k) || (k > 0 && items[k].tokenIndex == items[k - 1].tokenIndex + 1 && items[k].offset == 0);
+}
+
+// The source of the items written straight before item k, and after it, up to n
+// characters (the token texts hold the Korean of the items composed so far).
+std::string SourceBefore(const std::vector<ResolvedItem>& items, int k, std::size_t n) {
+    std::string before;
+    for (int j = k; j > 0 && Follows(items, j) && text::RuneCount(before) < n; j--) before.insert(0, items[j - 1].surface);
+    return before;
+}
+
+std::string SourceAfter(const std::vector<ResolvedItem>& items, int k, std::size_t n) {
+    std::string after;
+    for (int j = k + 1; j < static_cast<int>(items.size()) && Follows(items, j) && text::RuneCount(after) < n; j++) {
+        after += items[j].surface;
+    }
+    return after;
+}
+
+// Whether the count of item number, an Arabic 1, and its counter, item counter (the same
+// item when they are one word), form an idiom that Korean says with the native 한 as for
+// 一 (NUM-5): none left (1人残らず 한 명 남김없이), one after another (1人また1人 한 명 또
+// 한 명) and once in a period (100年に1度 100년에 한 번, 1日に1回 1일에 한 번).
+bool IdiomaticOne(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int number, int counter) {
+    if (number < 0 || counter >= static_cast<int>(items.size())) return false;
+    const std::string_view surface = items[number].surface;
+    const bool one = surface.starts_with("1") ? surface.size() == 1 || !IsDigit(surface[1]) : surface.starts_with("１");
+    if (!one || (surface.starts_with("１") && surface.substr(std::string_view("１").size()).starts_with("１"))) return false;
+    if (number > 0 && Adjoins(items, number) && InsideNumber(tokens, items[number])) return false;
+    std::string_view word = items[counter].surface;
+    if (number == counter) word.remove_prefix(surface.starts_with("1") ? 1 : std::string_view("１").size());
+    if (word.empty()) return false;
+    const std::string after = SourceAfter(items, counter, 8);
+    const std::string before = SourceBefore(items, number, 8);
+    if (std::string_view(after).starts_with("残らず")) return true;
+    for (const std::string_view digit : {"1", "１"}) {
+        if (std::string_view(after).starts_with("また" + std::string(digit) + std::string(word))) return true;
+        const std::string earlier = std::string(digit) + std::string(word) + "また";
+        if (std::string_view(before).ends_with(earlier) &&
+            !text::IsDigit(LastRune(std::string_view(before).substr(0, before.size() - earlier.size())))) {
+            return true;
+        }
+    }
+    if (word != "度" && word != "回") return false;
+    if (!std::string_view(before).ends_with("に")) return false;
+    const char32_t period = LastRune(std::string_view(before).substr(0, before.size() - std::string_view("に").size()));
+    return HasRune(U"年日月週生間分秒晩夜朝回度", period);
+}
+
 // A number and its counter read as one word (三箇所 3군데, 八本 8 개, 二人 2명): a count
 // of one to nine in kanji counted natively is written in native Korean apart from the
 // counter (세 군데, 여덟 개, 두 명), a larger one or one in Arabic digits (２人 2명) in digits
@@ -517,7 +571,8 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     const NativeCounter* c = numeral == 0 ? nullptr : FindNativeCounter(surface.substr(numeral), counter);
     if (c == nullptr || numeral == surface.size()) return t;
     if (InsideNumber(tokens, item) || CompoundAfter(items, i, *c)) return t;
-    const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
+    const std::string_view native =
+        NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral), IdiomaticOne(tokens, items, i, i));
     // A number in digits stays in digits; in an ordinal its counter is read as after a native
     // numeral (1回目 1번째 as 2回目 2번째).
     if (native.empty()) return t.substr(0, digits) + std::string(Ordinal(items, i) ? NativeForm(*c) : counter);
@@ -560,7 +615,10 @@ bool WritesNativeCount(const std::vector<ResolvedItem>& items, const std::vector
                                  ? FindNativeCounter(items[j + 1].surface, EntryText(items[j + 1]))
                                  : nullptr;
     const bool beforeCounter = c != nullptr && !CompoundAfter(items, j + 1, *c);
-    if (AllDigits(t)) return beforeCounter && !InsideNumber(tokens, item) && !NativeNumeral(t, item.surface).empty();
+    if (AllDigits(t)) {
+        return beforeCounter && !InsideNumber(tokens, item) &&
+               !NativeNumeral(t, item.surface, IdiomaticOne(tokens, items, j, j + 1)).empty();
+    }
     if (t == "몇" || t == "여러") return beforeCounter;
     const std::string written = CountWithin(tokens, items, j, std::string(t));
     return std::any_of(std::begin(kNativeCounts), std::end(kNativeCounts), [&](std::string_view count) {
@@ -770,12 +828,13 @@ std::string Composer::WriteCount(int i, std::string text) const {
     text = CountWithin(tokens, items, i, std::move(text));
     const int count = static_cast<int>(items.size());
     if (AllDigits(text) && i + 1 < count && WritesNativeCount(items, tokens, i)) {
-        const std::string_view native = NativeNumeral(text, items[i].surface);
+        const std::string_view native = NativeNumeral(text, items[i].surface, IdiomaticOne(tokens, items, i, i + 1));
         if (!native.empty()) text = native == "한" && Ordinal(items, i + 1) ? "첫" : native;
     } else if (const NativeCounter* c = FindNativeCounter(items[i].surface, text);
                c != nullptr && WritesNativeCount(items, tokens, i - 1)) {
         const std::string written =
-            WriteNativeCount(NativeNumeral(EntryText(items[i - 1]), items[i - 1].surface), *c, Ordinal(items, i));
+            WriteNativeCount(NativeNumeral(EntryText(items[i - 1]), items[i - 1].surface, IdiomaticOne(tokens, items, i - 1, i)),
+                             *c, Ordinal(items, i));
         text = written.substr(written.find(' ') + 1);
     }
     return text;

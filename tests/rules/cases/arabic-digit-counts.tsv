@@ -16,3 +16,15 @@ dict:jisjk:264868	1度も負けていない。	한 번도 지지 않았다.	fix	
 compose:native-count	1度だけ見た。	1번만 보았다.	fix	compose
 compose:native-count	1つください。	1개 주세요.	fix	compose
 compose:native-count	1人目の勇者	1번째의 용사	fix	compose
+compose:native-count-idiom	1人残らず倒した。	한 명 남김없이 쓰러뜨렸다.	fix	compose
+compose:native-count-idiom	敵を1匹残らず倒す。	적을 한 마리 남김없이 넘어뜨린다.	fix	compose
+compose:native-count-idiom	1人また1人	한 명 또 한 명	fix	compose
+compose:native-count-idiom	100年に1度の天才。	100년에 한 번의 천재.	fix	compose
+compose:native-count-idiom	1日に1回飲む。	1일에 한 번 마신다.	fix	compose
+compose:native-count-idiom	11人残らず	11명 남김없이	keep	compose
+compose:native-count-idiom	3人また3人	3명 또 3명	keep	compose
+compose:native-count-idiom	21人また1人	21명 또 1명	keep	compose
+compose:native-count-idiom	攻撃に1回耐える。	공격에 1회 참는다.	keep	compose
+compose:native-count-idiom	3回も言った。	3회나 말했다.	keep	compose
+compose:native-count-idiom	3度も言った。	3번이나 말했다.	keep	compose
+dict:jisjk:267304	2度と来るな。	두 번 다시 오지 마.	fix	lookup
