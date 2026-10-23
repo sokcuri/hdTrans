@@ -7,6 +7,11 @@
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
+//= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
+//= follower.kata-adjective-final	The sentence-final particles after which a katakana spelling of an i-adjective reads as one (ウルサイぞ).
+//= follower.kata-noun	What may follow a katakana noun: particles, the copula and honorifics (イカなんて, イカを).
+//= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
+//= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
@@ -16,7 +21,9 @@
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
 //= honorific.katakana-name	The katakana honorifics a katakana name may end in (ヨウタサン).
 //= honorific.name	Person suffixes that follow a name (さん, 様, 先生), with their drawn-out spellings (さぁん, ちゃーん); a label or run that ends in one is the name before it.
+//= honorific.nickname	The honorifics that make the hiragana before them a nickname (みっちゃん, けんくん); the last one that starts the text wins.
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
+//= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
@@ -121,6 +128,68 @@ follower.ita	く
 follower.ita	け
 follower.ita	し
 follower.ita	だ
+
+follower.kata-adjective	だ
+follower.kata-adjective	じゃ
+follower.kata-adjective	って
+follower.kata-adjective	か
+
+follower.kata-adjective-final	ぞ
+follower.kata-adjective-final	よ
+follower.kata-adjective-final	な
+follower.kata-adjective-final	ね
+follower.kata-adjective-final	わ
+
+follower.kata-noun	は
+follower.kata-noun	が
+follower.kata-noun	を
+follower.kata-noun	に
+follower.kata-noun	の
+follower.kata-noun	で
+follower.kata-noun	と
+follower.kata-noun	へ
+follower.kata-noun	も
+follower.kata-noun	や
+follower.kata-noun	か
+follower.kata-noun	だ
+follower.kata-noun	です
+follower.kata-noun	じゃ
+follower.kata-noun	なんて
+follower.kata-noun	など
+follower.kata-noun	なら
+follower.kata-noun	なの
+follower.kata-noun	なんか
+follower.kata-noun	って
+follower.kata-noun	より
+follower.kata-noun	から
+follower.kata-noun	まで
+follower.kata-noun	さん
+follower.kata-noun	ちゃん
+follower.kata-noun	くん
+follower.kata-noun	たち
+follower.kata-noun	だけ
+follower.kata-noun	しか
+follower.kata-noun	ね
+follower.kata-noun	よ
+
+follower.kata-pronoun	は
+follower.kata-pronoun	が
+follower.kata-pronoun	を
+follower.kata-pronoun	も
+follower.kata-pronoun	じゃ
+follower.kata-pronoun	だ
+follower.kata-pronoun	です
+follower.kata-pronoun	って
+follower.kata-pronoun	か
+follower.kata-pronoun	？
+follower.kata-pronoun	?
+
+follower.kata-verb	ん
+follower.kata-verb	の
+follower.kata-verb	から
+follower.kata-verb	けど
+follower.kata-verb	し
+follower.kata-verb	ぜ
 
 follower.noun-not-stem	だ
 follower.noun-not-stem	で
@@ -231,6 +300,9 @@ honorific.name	くーん
 honorific.name	公
 honorific.name	卿
 
+honorific.nickname	ちゃん
+honorific.nickname	くん
+
 honorific.person-title	さん
 honorific.person-title	ちゃん
 honorific.person-title	くん
@@ -248,6 +320,28 @@ honorific.person-title	兄
 honorific.person-title	お姉
 honorific.person-title	お兄
 honorific.person-title	改
+
+kana.kin-before-chan	にい
+kana.kin-before-chan	にー
+kana.kin-before-chan	ねえ
+kana.kin-before-chan	ねー
+kana.kin-before-chan	かあ
+kana.kin-before-chan	かー
+kana.kin-before-chan	とう
+kana.kin-before-chan	とー
+kana.kin-before-chan	ばあ
+kana.kin-before-chan	ばー
+kana.kin-before-chan	じい
+kana.kin-before-chan	じー
+kana.kin-before-chan	ばっ
+kana.kin-before-chan	じっ
+kana.kin-before-chan	わん
+kana.kin-before-chan	にゃん
+kana.kin-before-chan	ぼっ
+kana.kin-before-chan	じょう
+kana.kin-before-chan	あか
+kana.kin-before-chan	あん
+kana.kin-before-chan	いっ
 
 ko-adjective.stem-end	좋
 ko-adjective.stem-end	같
