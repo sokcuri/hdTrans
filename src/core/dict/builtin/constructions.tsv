@@ -66,3 +66,7 @@ cx:noun-to:10		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected
 cx:noun-to:20		&&8 S+0== "と" F+0== "selected" F-1== "selected" F+1== "selected" F-1!= "conjugating" P-1== "1" L+0== "(와)과" ||2 B+1== @verb.naming B+1== @word.supposing	take-target "(이)라고"	勇者と呼ぶ 용사라고 부른다
 //= line-initial-to	after noun-to	A と that opens a line or follows a sentence end on it quotes what was said before it: (이)라고. Not before an ellipsis or another と, nor before なる or する (となると), nor before a word of company (と一緒に).
 cx:line-initial-to:10		&&12 F+0== "first" S+0== "と" F+0== "selected" F+0!= "fixed" F+1== "selected" F+0== "opens-line" S+1!= @Lword.partner-to S+1!= "L…" S+1!= "L‥" S+1!= "Lと" ||2 P+1!= "4" &&3 S+1!= "Lな" S+1!= "Lす" S+1!= "Lし" ||2 L+0== "(와)과" L+0== "(으)로"	take-target "(이)라고"	と私が頭を下げると 라고 내가 고개를 숙이면
+//= naka-sok	after line-initial-to	The 中 after a noun of noun.inside-medium and の is 속, and the の中で or の中から after one 속에서: the inside of a medium, a time or a state, not of a container.
+cx:naka-sok:10		&&6 S+0== "中" F+0== "selected" S-1== "の" F-1== "selected" F-2== "selected" S-2== @noun.inside-medium	take-target "속"	記憶の中に 기억 속에
+cx:naka-sok:20		&&3 S+0== "の中で" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	静寂の中で 정적 속에서
+cx:naka-sok:30		&&3 S+0== "の中から" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	炎の中から 불길 속에서

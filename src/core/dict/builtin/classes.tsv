@@ -62,6 +62,7 @@
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
+//= noun.inside-medium	Nouns of a medium, a time or a state one is in, not a container: 中 after them and の is 속 (기억 속, 밤 속, 정적 속).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
@@ -974,6 +975,34 @@ noun.do-angle	摂氏
 noun.do-angle	華氏
 noun.do-angle	零下
 noun.do-angle	氷点下
+
+noun.inside-medium	記憶
+noun.inside-medium	思い出
+noun.inside-medium	想い出
+noun.inside-medium	夜
+noun.inside-medium	夜空
+noun.inside-medium	闇夜
+noun.inside-medium	暗がり
+noun.inside-medium	光
+noun.inside-medium	静寂
+noun.inside-medium	沈黙
+noun.inside-medium	炎
+noun.inside-medium	煙
+noun.inside-medium	空気
+noun.inside-medium	雪
+noun.inside-medium	嵐
+noun.inside-medium	波
+noun.inside-medium	人混み
+noun.inside-medium	人ごみ
+noun.inside-medium	雑踏
+noun.inside-medium	群衆
+noun.inside-medium	喧騒
+noun.inside-medium	日常
+noun.inside-medium	生活
+noun.inside-medium	季節
+noun.inside-medium	時代
+noun.inside-medium	歴史
+noun.inside-medium	物語
 
 noun.label-role	みんな
 noun.label-role	皆
