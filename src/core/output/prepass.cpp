@@ -90,6 +90,26 @@ bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
            half > 0 && ko.size() % 2 == 0 && ko.substr(0, half) == ko.substr(half);
 }
 
+// Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
+bool Doubled(std::string_view s, size_t min) {
+    const size_t half = s.size() / 2;
+    return s.size() % 2 == 0 && text::RuneCount(s.substr(0, half)) >= min && s.substr(0, half) == s.substr(half);
+}
+
+// Whether an adverb is a doubled mimetic read as a doubled Korean mimetic before a form of
+// する read with 하다, which Korean writes as one verb (두근두근했다, 부들부들하고).
+bool MimeticBeforeSuru(const ResolvedItem& a, const ResolvedItem& b, std::string_view nextEntry) {
+    if (First(Code(a)) != '3' || !Doubled(a.surface, 2) || !Doubled(EntryText(a), 2)) return false;
+    bool suru = false;
+    for (const std::string_view k : {"し", "す", "さ", "せ"}) suru = suru || b.surface.starts_with(k);
+    if (!suru) return false;
+    if (nextEntry == "&AV@") return true;
+    for (const std::string_view k : {"하", "해", "했", "한", "할", "함", "합"}) {
+        if (nextEntry.starts_with(k)) return true;
+    }
+    return false;
+}
+
 bool HasRune(std::u32string_view set, char32_t r) { return set.find(r) != std::u32string_view::npos; }
 
 // A character after which a word may start: a space, punctuation other than a closing
@@ -845,6 +865,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     const std::string_view nextEntry = EntryText(next);
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
+    if (MimeticBeforeSuru(item, next, nextEntry)) return Result(std::move(t), false);
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
     // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
