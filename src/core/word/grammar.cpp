@@ -745,19 +745,24 @@ constexpr std::string_view kResultVerbs[] = {
     "はま", "嵌ま", "突っ伏", "埋もれ", "腰を下ろ", "落ち着", "腰かけ", "腰掛け", "済", "な", "埋め尽くされ", "覚め",
     "にな", "歪", "建ち並", "立ち並", "耽", "叶", "染ま", "混ざ", "鍵がかか", "鍵が掛か", "佇", "嵌", "取り残",
     "座り込", "座りこ", "しゃがみ込", "しゃがみこ", "へたり込", "へたりこ", "屈み込", "かがみ込", "倒れ込", "倒れこ",
-    "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ",
+    "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ", "引っ掛か", "寄り掛か", "もたれ掛か",
 };
 
 // Whether stem is a result verb of kResultVerbs, or a compound or phrase that ends in one of
 // two or more characters that starts with a kanji (根性が曲が 曲が, 折れ曲が 曲が); a single kanji
-// matches only itself (目立 is no 立).
+// matches only itself (目立 is no 立). 掛か hangs only after the place に (壁に掛か, 罠に掛か):
+// after a verb かかる begins, approaches or assaults (取り掛かる, 差し掛かる, 襲い掛かる) and after
+// が it takes time or comes as a call (時間が掛かる), none of them a state; the compounds that
+// are one (引っ掛かる, 寄り掛かる) are listed.
 bool ResultVerbStem(std::string_view stem) {
     // 見惚れる is gazing, not having fallen for someone.
     static constexpr std::string_view kActions[] = {"見惚れ", "見とれ"};
+    constexpr std::string_view kHang = "掛か";
     if (InSet(kResultVerbs, stem)) return true;
     if (InSet(kActions, stem)) return false;
     for (const std::string_view v : kResultVerbs) {
-        if (stem.size() > v.size() && stem.ends_with(v) && text::RuneCount(v) >= 2 && text::IsKanji(text::DecodeRune(v).cp)) {
+        if (stem.size() > v.size() && stem.ends_with(v) && text::RuneCount(v) >= 2 && text::IsKanji(text::DecodeRune(v).cp) &&
+            (v != kHang || stem.substr(0, stem.size() - v.size()).ends_with("に"))) {
             return true;
         }
     }

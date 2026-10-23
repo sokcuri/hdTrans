@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+rewrite:result-state-compound	仕事に取り掛かっている。	일에 착수하고 있다.	fix	rewrites
+rewrite:result-state-compound	峠に差し掛かっている。	고개에 접어들고 있다.	fix	rewrites
+rewrite:result-state-compound	時間が掛かっている。	시간이 걸리고 있다.	fix	rewrites
+rewrite:result-state-compound	壁に掛かっている。	벽에 걸려 있다.	keep	rewrites
+rewrite:result-state-compound	枝に引っ掛かっている。	가지에 걸려 있다.	keep	rewrites
+rewrite:result-state-compound	根性が曲がっているから。	심보가 비뚤어져 있으니까.	keep	rewrites
