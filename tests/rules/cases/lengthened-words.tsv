@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+sound:lengthened-word	「まだ、なんとなーく興味があるってレベルなのに」	「아직, 왠지 흥미가 있다는 레벨인데」	fix	sound
+sound:lengthened-word	いや、かなーりやばい事実に気づいた。	아니, 꽤 위험한 사실을 눈치챘다.	fix	sound
+sound:lengthened-word	「車で行くから早くしなさーい。」	「차로 가니까 빨리 해~.」	fix	sound
+sound:lengthened-word	あ～めんどくさ～い。	아~귀찮다~.	fix	sound
+sound:lengthened-word	だーかーらー！何なの？	그러니까~! 뭐야 대체?	fix	sound
+sound:lengthened-word	お花見か～いいわね	꽃놀이인가~좋네	keep	sound
+sound:lengthened-word	「そうねー、いいね」	「그래~, 좋네」	keep	sound

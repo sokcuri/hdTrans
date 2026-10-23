@@ -112,6 +112,15 @@ public:
         return false;
     }
 
+    // An adjective stem of two or more characters that ends at character at of rs and
+    // starts at or after from (こわ in こわ～い).
+    bool AdjectiveStemBefore(std::u32string_view rs, size_t from, size_t at) const {
+        for (size_t j = from; j + 2 <= at; j++) {
+            if (Tags(rs.substr(j, at - j)).find('H') != std::string::npos) return true;
+        }
+        return false;
+    }
+
     // A verb or adjective stem of three or more characters that ends at character at
     // of rs and starts at or after from (うるさ in うるさ～い).
     bool LongStem(std::u32string_view rs, size_t from, size_t at) const {
@@ -771,6 +780,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             if (IsSmallVowel(rs[end]) ||
                 (rs[end] == U'っ' && (end + 1 >= rs.size() || !IsHiraganaRune(rs[end + 1]) || rs[end + 1] == U'て')) ||
                 (In(prev, U"かなねさわ") && rs[end] != U'ん' && !e.LongStem(rs, from, i) &&
+                 (IsSmallVowel(r) ||  // かぁいい
+                  (e.Reach(Spliced(rs, i, U"", end), from, i - 1) <= i &&       // in a word: なんとなーく, なさーい
+                   !(rs[end] == U'い' && e.AdjectiveStemBefore(rs, from, i)))) &&  // めんどくさーい
                  !(Nickname(std::u32string_view(rs).substr(end)) && inWord)) ||  // a particle: お花見か～いいわね
                 In(rs[end], U"おご") ||
                 (Nickname(std::u32string_view(rs).substr(end)) && !inWord)) {

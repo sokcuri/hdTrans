@@ -35,7 +35,10 @@ const dict::LoadResult& SoundDictionary() {
         "おも\t무겁\tH100\t17\n"
         "おめぇ\t너\tN120\t18\n"
         "てめー\t너\tN120\t19\n"
-        "てめぇ\t너\tN120\t20\n",
+        "てめぇ\t너\tN120\t20\n"
+        "なんとなく\t왠지\tE300\t21\n"
+        "かなり\t꽤\tE300\t22\n"
+        "花見\t꽃놀이\tN110\t23\n",
     }});
     return result;
 }
@@ -474,6 +477,11 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"てめーが黙ってろ", "てめーが黙ってろ"},
         {"てめー！", "てめぇ！"},
         {"だぞてめー、", "だぞてめぇ、"},
+        // After か, な, ね, さ, わ the mark lengthens a particle unless a word read before
+        // that kana goes on past the mark (なんとなく, かなり).
+        {"なんとなーく興味がある", "なんとなく興味がある"},
+        {"いや、かなーり危ない", "いや、かなり危ない"},
+        {"お花見か～いいわね", "お花見か～いいわね"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
