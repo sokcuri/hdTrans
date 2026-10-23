@@ -28,10 +28,13 @@ std::string Translate(std::string_view text) {
 
 }  // namespace
 
-// 度 after a number of 10 or more or with a decimal point is the degree; a smaller number
-// counts times.
+// 度 after a number of 10 or more or with a decimal point is the degree; a smaller number,
+// or 度 before も, ほど or 目, counts times.
 HD_TEST(word_degree_after_number) {
     HD_CHECK(Translate("180度").starts_with("180도"));
     HD_CHECK(Translate("0.5度").starts_with("0.5도"));
     HD_CHECK(Translate("5度").starts_with("5번") || Translate("5度").starts_with("다섯 번"));
+    // も, ほど and 目 after 度 count times.
+    HD_CHECK(!Translate("10度も").starts_with("10도"));
+    HD_CHECK(!Translate("10度ほど").starts_with("10도"));
 }

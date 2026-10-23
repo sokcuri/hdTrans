@@ -7,3 +7,11 @@ rewrite:degree-after-number	九十九さんが来た。	츠쿠모 씨가 왔다.
 rewrite:degree-after-number	五度ほど繰り返し読んだ。	다섯 번 정도 반복해 읽었다.	keep	rewrites
 rewrite:degree-after-number	十度目の挑戦だ。	열 번째 도전이다.	keep	rewrites
 rewrite:degree-after-number	九十九パーセントだ。	99퍼센트다.	keep	rewrites
+rewrite:degree-after-number	十度も言った。	열 번이나 말했다.	fix	rewrites
+rewrite:degree-after-number	十度ほど繰り返し読んだ。	열 번 정도 반복해 읽었다.	fix	rewrites
+rewrite:degree-after-number	二十度も言った。	20번이나 말했다.	fix	rewrites
+rewrite:degree-after-number	百八十度の方向転換	180도의 방향 전환	keep	rewrites
+rewrite:degree-after-number	九十度に曲げる。	90도에 굽힌다.	keep	rewrites
+rewrite:degree-after-number	45度	45도	keep	rewrites
+rewrite:degree-after-number	角度は四十五度だ。	각도는 45도다.	keep	rewrites
+rewrite:degree-after-number	熱が出て、二十度も吐いた。	열이 나, 20번이나 토했다.	keep	rewrites

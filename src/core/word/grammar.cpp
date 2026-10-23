@@ -2175,6 +2175,46 @@ void ChanAfterKatakana(Flusher& f) {
     }
 }
 
+namespace {
+
+// What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど
+// 다섯 번 정도).
+constexpr std::string_view kTimesTails[] = {"目", "も", "ほど", "程"};
+// Particles that may stand between 度 and a word of kAngleWords.
+constexpr std::string_view kAngleParticles[] = {"に", "を", "の", "へ", "と"};
+// Words after 度 that make it an angle or a temperature: a change of direction, a bend, a
+// turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる,
+// 三百六十度見渡す, 九十度近く).
+constexpr std::string_view kAngleWords[] = {
+    "変", "曲", "回", "転", "傾", "倒", "折", "反", "向", "捻", "ひね", "ねじ", "見渡", "開", "違", "異な", "ずれ",
+    "切り替", "方向", "角", "旋回", "逆", "ターン", "超え", "越え", "以上", "以下", "前後", "近", "単位", "上が", "下が",
+    "熱", "高熱", "微熱", "暑", "寒", "湯", "お湯", "気温", "温度", "体温"};
+// Nouns of angle or temperature earlier in the sentence (角度は四十五度, 体温が三十八度).
+constexpr std::string_view kAngleNouns[] = {"角度", "傾斜", "傾き", "温度", "気温", "体温", "水温", "室温",
+                                            "湯温", "油温", "熱", "摂氏", "華氏", "零下", "氷点下"};
+
+// Whether the sentence part before the number names an angle or a temperature.
+bool AngleBefore(std::string_view before) {
+    for (const std::string_view end : {"。", "！", "？", "!", "?", "\n"}) {
+        if (const std::size_t at = before.rfind(end); at != std::string_view::npos) before.remove_prefix(at + end.size());
+    }
+    return std::any_of(std::begin(kAngleNouns), std::end(kAngleNouns),
+                       [&](std::string_view w) { return before.find(w) != std::string_view::npos; });
+}
+
+bool AngleAfter(std::string_view after) {
+    for (const std::string_view p : kAngleParticles) {
+        if (after.starts_with(p)) {
+            after.remove_prefix(p.size());
+            break;
+        }
+    }
+    return std::any_of(std::begin(kAngleWords), std::end(kAngleWords),
+                       [&](std::string_view w) { return after.starts_with(w); });
+}
+
+}  // namespace
+
 void DegreeAfterNumber(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;
@@ -2188,7 +2228,19 @@ void DegreeAfterNumber(Flusher& f) {
         });
         if (!digits || !IsDigit(number[0])) continue;
         if (number.find('.') == std::string_view::npos && (number.size() < 2 || number[0] == '0')) continue;
-        if (const Item* n = it->next; n != nullptr && n->group->surface.starts_with("目")) continue;
+        const std::string_view after = From(it->text, it->start + it->length);
+        if (std::any_of(std::begin(kTimesTails), std::end(kTimesTails),
+                        [&](std::string_view t) { return after.starts_with(t); })) {
+            continue;
+        }
+        // Arabic digits (180度, ４５度) read as the degree; a kanji numeral only before a word
+        // of angle or temperature or after a noun of one in the sentence, and the bare 十 never
+        // (十度 열 번).
+        const std::string_view source = p->group->surface;
+        if (!text::IsDigit(text::DecodeRune(source).cp) &&
+            (source == "十" || (!AngleAfter(after) && !AngleBefore(p->text.substr(0, static_cast<std::size_t>(std::max(p->start, 0))))))) {
+            continue;
+        }
         SelectLemma(f, it, "도");
     }
 }
