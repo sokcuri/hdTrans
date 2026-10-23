@@ -4,3 +4,8 @@ dict:i:7072	本の3ページ目を開いた	책의 3페이지째를 열었다	fi
 dict:jisjk:92789	2ページ目を開けた	2페이지째를 열었다	fix	local
 dict:i:7072	ゆっくりと目を開いた	천천히 눈을 떴다	keep	local
 dict:jisjk:92789	目を開けた	눈을 떴다	keep	local
+dict:jisjk:92789	3日間目を開けていた	!rule:dict:jisjk:92789	keep	local
+dict:jisjk:92789	5分間目を開けなかった	!rule:dict:jisjk:92789	keep	local
+dict:jisjk:92789	10秒間目を開けて耐えた	!rule:dict:jisjk:92789	keep	local
+dict:jisjk:92789	3年ぶりに目を開けた	!rule:dict:jisjk:92789	keep	local
+dict:i:7072	3冊目を開く	3권째를 연다	fix	local
