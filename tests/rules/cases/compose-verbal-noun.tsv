@@ -2,5 +2,5 @@ rule	input	expected	kind	layer
 compose:verbal-noun	長生きしてもらえるように。	장수해 줄 수 있도록.	fix	compose
 compose:verbal-noun	婚姻はお約束できませんが	혼인은 약속할 수 없습니다만	fix	compose
 compose:verbal-noun	最近、建て増ししたパンの販売所	최근, 증축한 빵의 판매소	fix	compose
-compose:verbal-noun	クロたち用にする。	쿠로들용으로 한다.	keep	compose
+compose:verbal-noun	犬たち用にする。	개들용으로 한다.	keep	compose
 compose:direction-noun	もう少し上のほうですか。	좀 더 위쪽입니까.	fix	compose

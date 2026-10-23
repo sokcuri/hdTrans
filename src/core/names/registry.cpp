@@ -894,8 +894,8 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
 }
 
 // Whether the katakana word w is a Japanese word written in katakana, which its hiragana
-// spells too, and the dictionary translates rather than transliterates (クズ くず 쓰레기,
-// ザブトン 방석).
+// spells too, and the dictionary translates rather than transliterates (ヤカン やかん 주전자,
+// フトン 이불).
 bool Registry::TranslatedWord(std::string_view w) {
     if (snap_ == nullptr) return false;
     const DictFlags f = Flags(w);
@@ -918,8 +918,8 @@ bool Registry::TranslatedWord(std::string_view w) {
 }
 
 // Whether the katakana run t, no word of the dictionaries, splits into a Japanese word
-// written in katakana that the dictionary translates rather than transliterates (クズ
-// くず 쓰레기) and a person name (デン): a nickname joined to a name (クズデン), which reads
+// written in katakana that the dictionary translates rather than transliterates (ヤカン
+// やかん 주전자) and a person name (レン): a nickname joined to a name (ヤカンレン), which reads
 // as one name rather than as the word and the name.
 bool Registry::NicknameCompound(std::string_view t) {
     if (snap_ == nullptr || !AllRunes(t, IsKatakana) || RuneCount(t) < 4 || Flags(t).records > 0 ||

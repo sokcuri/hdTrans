@@ -139,9 +139,9 @@ private:
     bool Addressed(std::string_view line, std::string_view t);
     bool Guarded(std::string_view line, std::size_t a, std::size_t b);
 
-    // The katakana runs that end in a katakana honorific (クロサン) while the prose lines
-    // write their head with two or more other endings that are no honorific (クロイチ,
-    // クロニ): one name, a numbered or derived one, not the head and an honorific.
+    // The katakana runs that end in a katakana honorific (サーラサン) while the prose lines
+    // write their head with two or more other endings that are no honorific (サーライチ,
+    // サーラニ): one name, a numbered or derived one, not the head and an honorific.
     const std::set<std::string>& SiblingNames();
     bool NicknameCompound(std::string_view t);
     bool TranslatedWord(std::string_view w);

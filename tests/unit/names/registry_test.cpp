@@ -555,14 +555,14 @@ HD_TEST(names_historical_honorific_not_given) {
 }
 
 HD_TEST(names_prose_katakana) {
-    HD_CHECK(names::ProseRuns("クロイチは好奇心旺盛で活発。") == std::vector<std::string>{"クロイチ"});
-    HD_CHECK(names::ProseRuns("クロ、ユキ、クロイチ、クロニ。").empty());  // no hiragana
-    HD_CHECK(names::ProseRuns("クロイチ、クロニ、クロサンだ。").empty());  // mostly katakana
+    HD_CHECK(names::ProseRuns("サーライチは新しい物が好きだ。") == std::vector<std::string>{"サーライチ"});
+    HD_CHECK(names::ProseRuns("サーラ、ミナ、サーライチ、サーラニ。").empty());  // no hiragana
+    HD_CHECK(names::ProseRuns("サーライチ、サーラニ、サーラサンだ。").empty());  // mostly katakana
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
-    names::Registry r = Scan(snap, "ユキはよく走る。\nユキが吠えた。\nユキ、ハル。");
+    names::Registry r = Scan(snap, "ミナはよく走る。\nミナが笑った。\nミナ、ハル。");
     const auto& prose = r.ProseKatakana();
-    HD_CHECK(prose.count("ユキ") == 1 && prose.at("ユキ") == 2);
+    HD_CHECK(prose.count("ミナ") == 1 && prose.at("ミナ") == 2);
     HD_CHECK(prose.count("ハル") == 0);
 }
 
@@ -570,10 +570,10 @@ HD_TEST(names_katakana_siblings) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     // A head written with two other endings in the prose makes head + サン one name.
-    names::Registry r = Scan(snap, "クロイチは好奇心旺盛だ。\nクロニは用心深い。\nクロサンは力がある。");
-    HD_CHECK(r.Named("クロサン"));
+    names::Registry r = Scan(snap, "ミナイチは新しい物が好きだ。\nミナニは用心深い。\nミナサンは背が高い。");
+    HD_CHECK(r.Named("ミナサン"));
     const std::vector<std::string> named = r.NamedSurfaces();
-    HD_CHECK(std::find(named.begin(), named.end(), "クロサン") != named.end());
+    HD_CHECK(std::find(named.begin(), named.end(), "ミナサン") != named.end());
     // One other ending, or endings that are honorifics, are not enough.
     names::Registry one = Scan(snap, "ヨウタノ本だ。\nヨウタサンは来た。");
     HD_CHECK(!one.Named("ヨウタサン"));

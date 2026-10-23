@@ -400,7 +400,7 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
         if (kana.size() < h.size() + 2 || !kana.ends_with(h)) continue;
         const std::u32string_view name = kana.substr(0, kana.size() - h.size());
         if (name[0] == U'オ' || name.back() == U'ー' || name.back() == U'ッ') return 0;
-        // A name the document shows whole (クロサン beside クロイチ and クロニ).
+        // A name the document shows whole (サーラサン beside サーライチ and サーラニ).
         if (ctx.named != nullptr && ctx.named->contains(Utf8(kana))) return 0;
         // A word whole, in katakana or hiragana (タクサン たくさん, ネエサン ねえさん).
         if (!KeyTags(Utf8(kana), ctx, snap).empty() || !KeyTags(ToHiragana(Utf8(kana)), ctx, snap).empty()) return 0;
@@ -882,7 +882,7 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             for (const KataRun& r : runs[k]) all.push_back(&r);
         }
         // Two or more runs that read as words, all of which the document's prose writes,
-        // are the document's katakana words, a list of names (クロ、ユキ、クロイチ).
+        // are the document's katakana words, a list of names (サーラ、ミナ、サーライチ).
         int words = 0;
         bool prose = true;
         for (const KataRun* r : all) {

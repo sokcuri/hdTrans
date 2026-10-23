@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:354180	クロに聞けば分かる。	쿠로에게 들으면 안다.	fix	local
-dict:jisjk:354180	ルィンシァにマルビットを渡す。	르시에게 마르빗트를 건네준다.	fix	local
+dict:jisjk:354180	ミナに聞けば分かる。	미나에게 들으면 안다.	fix	local
+dict:jisjk:354180	リュミエナにブローチを渡す。	류미에나에게 브로치를 건네준다.	fix	local
 dict:jisjk:354180	「サマコンに出ないなんて言いませんから」	!rule:dict:jisjk:354180	keep	local
 dict:jisjk:354180	犬に言った。	개에게 말했다.	keep	local
