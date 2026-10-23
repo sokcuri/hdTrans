@@ -105,6 +105,12 @@ bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
 constexpr std::u32string_view kNotStutters[] = {U"ア", U"ウ", U"エ", U"オ", U"ン", U"ネ", U"デ", U"マ", U"サ",
                                                 U"ヤ", U"ヨ", U"ム", U"ガ", U"ヲ", U"ト", U"ジャ", U"チョ"};
 
+// The first character at or after q of rs that is no ellipsis.
+size_t PastEllipsis(std::u32string_view rs, size_t q) {
+    while (q < rs.size() && In(rs[q], U"…‥")) q++;
+    return q;
+}
+
 // korean asked as a casual question when it states a past event in the plain form (다 됐다
 // 다 됐어, 해냈다 해냈어); other Korean unchanged.
 std::string AskedPast(std::string korean) {
@@ -561,8 +567,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
         // (よかった？ 좋았어?); drawn out it stays the exclamation (よかったぁ? 다행이다~?),
         // and so does one in katakana, which no word of the dictionary reads (ヨカッタ？).
         if (ok && s.exclaim && end == p + s.key.size() && IsHiraganaRune(rs_[p])) {
-            size_t q = end;
-            while (q < rs_.size() && In(rs_[q], U"…‥")) q++;
+            const size_t q = PastEllipsis(rs_, end);
             if (q < rs_.size() && In(rs_[q], U"？?")) ok = false;
             // A predicate row after a noun in kanji or katakana marked as topic or subject and
             // a comma is the predicate (あの頃は、よかった 좋았다); not after a pronoun in kana
@@ -660,7 +665,7 @@ bool SoundText::NounAt(size_t p, size_t n) const {
 //   - はん is a scoff (흥) where it opens an utterance before ！ 、 or 。 and no sound
 //     follows (Scoff), a moan (하앙) otherwise;
 //   - a phrase that states a past event in the plain form is asked before ？ (できた？
-//     다 됐어?, ヤッタ？ 해냈어?); an exclaim row in hiragana is no sound there (やった？).
+//     다 됐어?, できた……？, ヤッタ？ 해냈어?); an exclaim row in hiragana is no sound there (やった？).
 std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
@@ -687,7 +692,9 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"ハン") {
         if (Scoff(p, end)) return "흥";
     }
-    if (s.phrase && end < rs_.size() && In(rs_[end], U"？?")) return AskedPast(s.korean);
+    if (const size_t q = PastEllipsis(rs_, end); s.phrase && q < rs_.size() && In(rs_[q], U"？?")) {
+        return AskedPast(s.korean);
+    }
     return s.korean;
 }
 
