@@ -5,13 +5,14 @@
 //   2. character forms: half-width katakana, CP932 mapping differences, kanji forms
 //      (NormalizeForms);
 //   3. an apology or greeting cut before なさい joined (JoinNasai);
-//   4. a polite ending cut off or inside joined (JoinMasu);
-//   5. spoken and old-fashioned spellings (SpokenForms);
-//   6. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
-//   7. casual contractions (RewriteCasual);
-//   8. the military time in digits (RewriteMilitaryTime);
-//   9. a word cut from the copula by a pause joined (JoinPausedCopula);
-//  10. a doubled を after a word written once (CollapseDoubledWo).
+//   4. words said with an emphatic っ or ん written plain (RewriteEmphaticSpellings);
+//   5. a polite ending cut off or inside joined (JoinMasu);
+//   6. spoken and old-fashioned spellings (SpokenForms);
+//   7. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
+//   8. casual contractions (RewriteCasual);
+//   9. the military time in digits (RewriteMilitaryTime);
+//  10. a word cut from the copula by a pause joined (JoinPausedCopula);
+//  11. a doubled を after a word written once (CollapseDoubledWo).
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
@@ -27,7 +28,7 @@ using namespace internal;
 std::string Normalize(std::string_view line, const LineContext& ctx) {
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
-    text = JoinNasai(NormalizeForms(text));
+    text = RewriteEmphaticSpellings(JoinNasai(NormalizeForms(text)));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }

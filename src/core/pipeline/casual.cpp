@@ -284,6 +284,11 @@ constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
 constexpr char kSoyuKoto[] = "そゆこと";
+// Words said with an emphatic っ or ん inside: さっすが さすが, しっかた しかた (しっかたないなぁ),
+// すんご すご (すんごい, すんごく).
+constexpr char kSassuga[] = "さっすが";
+constexpr char kShikkata[] = "しっかた";
+constexpr char kSungo[] = "すんご";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -608,6 +613,12 @@ bool EndsWithStemKanji(std::string_view s) {
 }
 
 }  // namespace
+
+std::string RewriteEmphaticSpellings(std::string_view in) {
+    std::string text = ReplaceAll(in, Literal<kSassuga>, [](const Match&) { return std::string("さすが"); });
+    text = ReplaceAll(text, Literal<kShikkata>, [](const Match&) { return std::string("しかた"); });
+    return ReplaceAll(text, Literal<kSungo>, [](const Match&) { return std::string("すご"); });
+}
 
 std::string RewriteCasual(std::string_view in) {
     std::string text = ReplaceAll(in, Shiren, [](const Match& m) { return Cat({"かも", m.group[1], "ない"}); });

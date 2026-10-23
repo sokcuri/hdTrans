@@ -460,6 +460,15 @@ HD_TEST(pipeline_normalize_sequence) {
     for (const Case& c : text) HD_CHECK_EQ(Normalize(c.in, LineContext{.document = false, .female = false}), std::string(c.want));
 }
 
+HD_TEST(pipeline_emphatic_spellings) {
+    const Case cases[] = {
+        {"さっすが先輩！"sv, "さすが先輩！"sv},
+        {"しっかたねえ、やるぞ"sv, "しかたねえ、やるぞ"sv},
+        {"すんごく痛い"sv, "すごく痛い"sv},
+        {"すんなり進んだ"sv, "すんなり進んだ"sv},
+    };
+    Check(RewriteEmphaticSpellings, cases);
+}
 HD_TEST(pipeline_escape_stage_text) {
     const Case cases[] = {
         {"a\\b\x09" "c\x0a" "d\x0d" "e\x01\x7f\xff€"sv, "a\\\\b\\tc\\nd\\re\\x01\\x7f\\xff€"sv},
