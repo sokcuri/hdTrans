@@ -94,7 +94,7 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  L2
 
 - 층 사이의 결합은 그대로 있습니다. 예: `local`이 참이면 그 대입으로 이웃 단어의 번역을 바꾸고,
   `global-last`는 앞 층의 선택을 덮고, `rewrites`는 그 뒤에서 다시 덮습니다. 표는 이것을 보이게 할 뿐 없애지 않습니다.
-- 층의 순서를 바꾸는 것은 모든 번역에 걸친 변경입니다. 전체 회귀(예제, 웹소설 51장, `rules.cases`)가 필요합니다.
+- 층의 순서를 바꾸는 것은 모든 번역에 걸친 변경입니다. 전체 회귀(예제, 웹소설 51장, `rules.cases.themes`)가 필요합니다.
 - 층을 너무 잘게 나누면 순서와 상호작용을 따라가기 어렵습니다. 새 층은 의미(처음 참, 모두 적용, 고정점)가
   다를 때만 둡니다.
 - 층 안의 우선순위는 여전히 필요합니다: 사전 순서(후보), PRIO(전역 규칙, 구문 표의 행), 파일 순서(senses, cleanup),
@@ -103,5 +103,5 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  L2
 ## 층별 테스트
 
 - 규칙마다: `tests/rules/cases/`의 행(`rule` 열이 그 규칙을 이름한 사전 행의 id, [rule-language.md](rule-language.md#규칙-테스트)).
-- 층마다: `tests/rules/cases.tsv`의 `layer` 열. `tools/rule-cases.sh`(ctest `rules.cases`)는 실패를 층별로 묶어
+- 층마다: 같은 표의 `layer` 열. `tools/rule-cases.sh`(ctest `rules.cases.themes`)는 실패를 층별로 묶어
   보여 주므로, 한 층을 고쳐 다른 층의 행이 깨지면 그렇게 보입니다.

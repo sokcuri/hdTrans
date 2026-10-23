@@ -13,8 +13,8 @@
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
 | `tools.surface-budget` | `src/core`의 일본어, 한국어 문자열이 `tools/surface-budget.tsv`의 상한을 넘지 않는지 확인 ([아래](#표면-문자열-예산-surface-budgetpy)). `.self-test`는 도구 자체 시험 (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
-| `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
-| `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
+| `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
+| `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
@@ -44,24 +44,26 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
 | `HDTRANS_TEST_EXCLUDE=a,b` | 쉼표로 구분한 이름의 테스트를 건너뜀 |
 | `HDTRANS_CACHE_DIR` | 테스트가 쓸 캐시 폴더 (절대 경로) |
 
-## 규칙 사례 (tests/rules/cases.tsv)
+## 규칙 사례 (tests/rules/cases/)
 
-규칙 프로그램의 단어 선택을 고정하는 표입니다. 열은 `rule input expected kind layer`이고
+주제마다 표 하나(`tests/rules/cases/<주제>.tsv`)로 규칙의 단어 선택을 확인합니다. 열은 `rule input expected kind layer`이고
 입력 한 줄을 한 세션으로 번역합니다(`-each -why`). 실패는 `layer`별로 묶어 보입니다.
 
-- `rule`: 사례가 겨냥하는 규칙(`L1276`, 전역 규칙은 PRIO로 `G330`)
+- `rule`: 사례가 겨냥하는 규칙. 지역 규칙은 그 규칙을 이름한 사전 행의 id(`dict:jisjk:848`), 전역 규칙은 PRIO(`G330`),
+  그 밖의 단계는 `<단계>:<이름>`(`sense:お盆`, `cx:noun-to:10`)
 - `input`: 직접 쓴 짧은 일본어 문장
-- `expected`: 번역 전체, 또는 `rule:L1276=<번역>`(그 줄의 어떤 단어를 지역 규칙 1276이 그 번역으로 골랐음, `-why` 기준)
+- `expected`: 번역 전체, 또는 `rule:dict:<id>=<번역>`(그 줄의 어떤 단어를 그 행의 지역 규칙이 그 번역으로 골랐음, `-why` 기준),
+  `!rule:dict:<id>`(그 규칙이 아무것도 고르지 않음)
 - `kind`: `fix`(고친 규칙이 이제 맞게 고르는 문장), `keep`(고치기 전 선택이 맞아서 그대로 남아야 하는 문장),
   `current`(지금 동작을 그대로 적어 둔 문장)
 - `layer`: 그 규칙이 도는 실행 층([pipeline-layers.md](pipeline-layers.md)의 `local`, `local-ending`, `global-stem`,
-  `global-last`, `global-ending`)
+  `global-last`, `global-ending`, `senses` 등)
 
 머리줄 앞의 `#` 줄은 행이 아닙니다. 표가 지키게 하는 [번역 규칙](../spec/README.md)의 id를 `# 규칙: NUM-1, NUM-3`처럼 적습니다.
 
 ```sh
-tools/rule-cases.sh build/mac/hdtrans dicts            # 다르면 규칙, 입력, 기대값, 실제값을 보이고 실패
-tools/rule-cases.sh build/mac/hdtrans dicts --accept   # current 행의 번역 전체 기대값을 새 출력으로 바꿈
+tools/rule-cases.sh build/mac/hdtrans dicts                                  # 다르면 규칙, 입력, 기대값, 실제값을 보이고 실패
+tools/rule-cases.sh build/mac/hdtrans dicts tests/rules/cases/<주제>.tsv --accept   # 그 표 current 행의 번역 전체 기대값을 새 출력으로 바꿈
 ```
 
 규칙을 고칠 때는 `fix` 행과 `keep` 행을 하나 이상씩 더하고, 커밋 전에 표 전체와 `examples/`를 돌립니다.
@@ -127,8 +129,8 @@ HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # �
 - 두 변수는 프로세스에서 처음 번역할 때 한 번 읽습니다.
 
 `tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]`는 이 빌드(기본
-`build/<프리셋>-passexp/hdtrans`, 사전 기본 `dicts/`)로 패스를 하나씩 빼고 규칙 사례 네 묶음(`cases.tsv`,
-`cases/`, `speech-soft/`, `speech-strict/`)과 `examples/`를 돌려, 패스마다 묶음별 실패 수와 어느 테스트도
+`build/<프리셋>-passexp/hdtrans`, 사전 기본 `dicts/`)로 패스를 하나씩 빼고 규칙 사례 세 묶음
+(`cases/`, `speech-soft/`, `speech-strict/`)과 `examples/`를 돌려, 패스마다 묶음별 실패 수와 어느 테스트도
 잡지 못한 패스를 보입니다. 구문 표의 행도 하나씩 뺍니다. 실행마다 시간 제한(기본 900초)이 있고, CLI가 죽거나(`crash`) 시간을 넘긴
 (`timeout`) 묶음은 그 패스를 잡은 것으로 칩니다. 기본으로 꺼진 개선 옵션(`src/core/word/analyze.h`)만 돌리는
 패스(`FilterMisreads`)는 `not exercised`로 따로 보입니다.

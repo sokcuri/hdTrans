@@ -1,4 +1,5 @@
-// Editing one line of the compiled-in rules program changes the selection the word stage makes.
+// A local rule is the ctx column of the dictionary rows that name it: editing that column
+// changes the selection the word stage makes.
 #include <memory>
 #include <string>
 #include <string_view>
@@ -7,45 +8,31 @@
 
 #include "core/dict/snapshot.h"
 #include "core/engine/driver.h"
-#include "core/engine/rules.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/word/analyze.h"
 #include "core/word/flush.h"
 #include "core/word/worker.h"
 #include "hdtest.h"
-#include "rule_fixture.h"
 
 using namespace hdTrans;
 
 namespace {
 
-// The rules program of the two rows below with the body of rule 2 written as body. The
-// rows load with a valid body and the text is edited after, so a body that does not
-// parse reaches the rule loader rather than failing the dictionary first.
-std::string EditedRules(std::string_view body) {
+// Two rows of 人気; the second names local rule 2 and carries body as its ctx.
+dict::LoadResult Load(std::string_view body, std::string_view more = {}) {
     std::vector<dict::File> files{{0, "base.tsv",
         "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n"
         "人気\t인적\tN110\tXXX\t\tGN\t0\t1\t\n"
-        "人気\t인기\tN110\t\t\tGN\t2\t2\t||1 G+0== \"Ow\"\n"}};
-    const dict::LoadResult loaded = dict::Load(std::move(files));
-    if (!loaded.snapshot) return {};
-    std::string text = internal::RuleProgramText(*loaded.snapshot);
-    const std::string prefix = "\nL 2 ";
-    const std::size_t start = text.find(prefix);
-    if (start == std::string::npos) return {};
-    const std::size_t end = text.find('\n', start + 1);
-    text.replace(start + 1, end - start - 1, "L 2 " + std::string(body));
-    return text;
+        "人気\t인기\tN110\t\t\tGN\t2\t2\t" + std::string(body) + "\n" + std::string(more)}};
+    return dict::Load(std::move(files));
 }
 
-// The target selected for 人気 in 人気。 under program, with the two rows below.
-std::string Selected(const rules::Program& program, word::Selection& choice) {
-    std::vector<dict::File> files{{0, "base.tsv",
-        "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n"
-        "人気\t인적\tN110\tXXX\t\tGN\t0\t1\t\n"
-        "人気\t인기\tN110\t\t\tGN\t2\t2\t||1 G+0== \"Ow\"\n"}};
-    const dict::LoadResult loaded = dict::Load(std::move(files));
+// The target selected for 人気 in 人気。 with rule 2's body written as body.
+std::string Selected(std::string_view body, word::Selection& choice) {
+    const dict::LoadResult loaded = Load(body);
     if (!loaded.errors.empty() || loaded.snapshot == nullptr) return "(no dictionary)";
+    const auto generated = internal::NewGenerated(*loaded.snapshot);
+    if (!generated->hasRules) return "(no rules)";
     tokenizer::Tokens tokens;
     word::Arena arena;
     word::Analysis analysis;
@@ -56,7 +43,7 @@ std::string Selected(const rules::Program& program, word::Selection& choice) {
     w.chain = analysis.sentences[0].chain;
     w.current = analysis.sentences[0].current;
     w.transformSurface = analysis.sentences[0].transformSurface;
-    word::Flusher f{w, program, loaded.snapshot->OutputFamilies()};
+    word::Flusher f{w, generated->rules, loaded.snapshot->OutputFamilies()};
     word::Flush(f);
     for (word::Item* it = w.chain.head; it != nullptr; it = it->next) {
         if (it->group->surface != "人気") continue;
@@ -70,12 +57,12 @@ std::string Selected(const rules::Program& program, word::Selection& choice) {
 
 HD_TEST(rules_edit_changes_selection) {
     struct Case {
-        const char* body;  // the new body of rule 2; null for the shipped one
+        const char* body;  // the ctx of the row that names rule 2
         const char* target;
         word::Provenance layer;
     };
     const Case cases[] = {
-        {nullptr, "인기", word::Provenance::LocalRule},
+        {"||1 G+0== \"Ow\"", "인기", word::Provenance::LocalRule},
         {"||0", "인적", word::Provenance::FirstXxx},
         {"||1 S+0== \"人\"", "인적", word::Provenance::FirstXxx},
         {"||1 S+0== \"L人\"", "인기", word::Provenance::LocalRule},
@@ -83,21 +70,30 @@ HD_TEST(rules_edit_changes_selection) {
         {"||1 D+0= \"인기도\"", "인기도", word::Provenance::LocalRule},
     };
     for (const Case& c : cases) {
-        rules::Program program;
-        {
-            rules::LoadError error{};
-            HD_REQUIRE(rules::Load(EditedRules(c.body ? c.body : "||1 G+0== \"Ow\""), program, error));
-        }
         word::Selection choice;
-        HD_CHECK_EQ(Selected(program, choice), std::string(c.target));
+        HD_CHECK_EQ(Selected(c.body, choice), std::string(c.target));
         HD_CHECK_EQ(static_cast<int>(choice.layer), static_cast<int>(c.layer));
     }
 }
 
-// A broken record makes the whole program fail to load, with its line.
-HD_TEST(rules_edit_bad_line) {
-    rules::Program program;
-    rules::LoadError error{};
-    HD_CHECK(!rules::Load(EditedRules("||1 S+1==  \"が\""), program, error));
-    HD_CHECK(error.line > 0);
+// A body the rule parser rejects, and a second body for a rule number, fail the dictionary at
+// the row's line.
+HD_TEST(rules_edit_bad_body) {
+    struct Case {
+        const char* body;
+        const char* more;  // a further row
+        int line;
+        const char* message;
+    };
+    const Case cases[] = {
+        {"||1 S+1==  \"が\"", "", 3, "the rule body does not parse"},
+        {"||1 G+0== \"Ow\"", "人気\t인기도\tN110\t\t\tGN\t2\t3\t||0\n", 4, "a second body for the local rule"},
+    };
+    for (const Case& c : cases) {
+        const dict::LoadResult loaded = Load(c.body, c.more);
+        HD_CHECK(loaded.snapshot == nullptr);
+        HD_REQUIRE(!loaded.errors.empty());
+        HD_CHECK_EQ(loaded.errors[0].line, c.line);
+        HD_CHECK_EQ(loaded.errors[0].message, std::string(c.message));
+    }
 }

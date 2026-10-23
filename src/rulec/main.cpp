@@ -1,6 +1,7 @@
 // hdrulec: the rule compiler.
-//   hdrulec lint RULES [-dicts DIR] [-tsv] [-max-delta N]
-//       parses the flat rules (or readable rules, *.hdr) and runs the checks; exit 1 on errors
+//   hdrulec lint RULES [-dicts DIR] [-tsv] [-max-delta N] [-budget FILE]
+//       parses the flat rules (or readable rules, *.hdr) and runs the checks; exit 1 on errors,
+//       and with -budget also when the warnings of a flag are not the count FILE records
 //   hdrulec convert RULES [-o OUT]       the flat rules in the readable syntax
 //   hdrulec flat RULES.hdr [-o OUT]      readable rules in the flat format
 //   hdrulec verify RULES [-paths N]      checks the front end against rules::Load and the
@@ -16,6 +17,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -57,6 +59,51 @@ int Report(const Source& source, const Diagnostics& diags, bool tsv) {
     if (!tsv && (diags.errors || diags.warnings))
         std::fprintf(stderr, "%d error(s), %d warning(s)\n", diags.errors, diags.warnings);
     return diags.errors ? 1 : 0;
+}
+
+// The warnings of each flag against the lines "flag<TAB>count" of path (# starts a comment; a
+// flag without a line has 0). A count above its line fails, and so does one below it, so that
+// the line is lowered with the change that removes the warnings. 0 equal, 1 different, 2 unread.
+int Budget(const Diagnostics& diags, const std::string& path) {
+    std::string text;
+    if (!ReadFile(path, text)) {
+        std::fprintf(stderr, "hdrulec: cannot read %s\n", path.c_str());
+        return 2;
+    }
+    std::map<std::string, long> ceiling, count;
+    for (std::size_t start = 0; start < text.size();) {
+        std::size_t end = text.find('\n', start);
+        if (end == std::string::npos) end = text.size();
+        std::string line = text.substr(start, end - start);
+        start = end + 1;
+        if (!line.empty() && line.back() == '\r') line.pop_back();
+        if (line.empty() || line[0] == '#') continue;
+        const std::size_t tab = line.find('\t');
+        char* last = nullptr;
+        const long n = tab == std::string::npos ? -1 : std::strtol(line.c_str() + tab + 1, &last, 10);
+        if (n < 0 || last == line.c_str() + tab + 1 || *last != '\0') {
+            std::fprintf(stderr, "hdrulec: %s: not \"flag<TAB>count\": %s\n", path.c_str(), line.c_str());
+            return 2;
+        }
+        if (tab == 0 || !ceiling.emplace(line.substr(0, tab), n).second) {
+            std::fprintf(stderr, "hdrulec: %s: an empty or repeated flag: %s\n", path.c_str(), line.c_str());
+            return 2;
+        }
+    }
+    for (const Diagnostic& d : diags.list) {
+        if (d.severity == Severity::Warning) count[d.flag]++;
+    }
+    for (const auto& entry : ceiling) count.try_emplace(entry.first, 0);
+    int status = 0;
+    for (const auto& [flag, n] : count) {
+        const auto it = ceiling.find(flag);
+        const long want = it == ceiling.end() ? 0 : it->second;
+        if (n == want) continue;
+        std::fprintf(stderr, "hdrulec: %ld [-W%s] warning(s), %s records %ld; %s\n", n, flag.c_str(), path.c_str(), want,
+                     n > want ? "fix the new ones" : "lower the line to the new count");
+        status = 1;
+    }
+    return status;
 }
 
 // The front end against rules::Load, and the readable round trip on every rule: same
@@ -155,7 +202,7 @@ int main(int argc, char** argv) {
         return 2;
     }
     const std::string command = argv[1], path = argv[2];
-    std::string out, dicts, check;
+    std::string out, dicts, check, budget;
     bool tsv = false, globals = false, hashOnly = false;
     int first = 0, last = -1;
     long long cap = 1 << 20;
@@ -165,6 +212,7 @@ int main(int argc, char** argv) {
         if (a == "-o" && i + 1 < argc) out = argv[++i];
         else if (a == "-dicts" && i + 1 < argc) dicts = argv[++i];
         else if (a == "-check" && i + 1 < argc) check = argv[++i];
+        else if (a == "-budget" && i + 1 < argc) budget = argv[++i];
         else if (a == "-tsv") tsv = true;
         else if (a == "-hash") hashOnly = true;
         else if (a == "-globals") globals = true;
@@ -190,6 +238,10 @@ int main(int argc, char** argv) {
     if (diags.errors) return Report(source, diags, tsv);
 
     if (command == "lint") {
+        if (!budget.empty() && dicts.empty()) {
+            std::fprintf(stderr, "hdrulec: -budget needs -dicts, without which the dictionary checks do not run\n");
+            return 2;
+        }
         Inventory inventory;
         error.clear();
         if (!dicts.empty() && !LoadInventory(dicts, inventory, error)) {
@@ -199,7 +251,9 @@ int main(int argc, char** argv) {
         File normalized = file;
         Normalize(normalized);
         Check(normalized, inventory, options, diags);
-        return Report(source, diags, tsv);
+        const int status = Report(source, diags, tsv);
+        if (budget.empty() || status != 0) return status;
+        return Budget(diags, budget);
     }
     if (command == "convert") return WriteFile(out, PrintReadable(file)) ? 0 : 2;
     if (command == "flat") return WriteFile(out, PrintFlat(file)) ? 0 : 2;

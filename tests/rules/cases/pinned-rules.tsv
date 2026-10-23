@@ -1,0 +1,106 @@
+rule	input	expected	kind	layer
+dict:jisjk:342084	彼が約束を破ったためしがない。	그가 약속을 어긴 적이 없다.	current	local-ending
+dict:jisjk:2824	そんなの私には無理だよ。	rule:dict:jisjk:2824=무리%D4@	current	local
+dict:jisjk:76161	電車からバスに乗り換えた。	rule:dict:jisjk:76161=갈아 &AR@	current	local
+dict:jisjk:5291	この靴は歩きやすい。	rule:dict:jisjk:5291=$GF@	current	local
+dict:jisjk:116539	財布を落としてしまった。	rule:dict:jisjk:116539=잃어버&AA@	current	local
+dict:jisjk:4403	三十分ばかり待った。	rule:dict:jisjk:4403=만	current	local
+dict:jisjk:4836	彼は行かないという話を聞いた。	rule:dict:jisjk:4836=&AV@	current	local
+dict:jisjk:355685	この市場では新鮮な魚が安く買える。	rule:dict:jisjk:355685=(을)를	current	local
+dict:jisjk:6285	犬などの小さい動物がいる。	rule:dict:jisjk:6285=등이	current	local
+dict:jisjk:6588	どんな感じの部屋ですか。	rule:dict:jisjk:6588=느낌	current	local
+dict:jisjk:266239	あたしの好きな色は青だよ。	rule:dict:jisjk:266239=(이)가	current	local
+dict:jisjk:115173	バスは学校へ進む。	rule:dict:jisjk:115173=진학&AV@	current	local
+dict:jisjk:137573	この資料を前提に話を進めます。	rule:dict:jisjk:137573=진행시&AQ@	current	local
+dict:jisjk:341095	友達と英語で話す。	rule:dict:jisjk:341095=&AV@	current	local
+sense:高い	その服は高くないですよ。	그 옷은 비싸지 않아요.	current	senses
+sense:話す	私は日本語を話すことができます。	저는 일본어를 할 수가 있습니다.	current	senses
+dict:jisjk:202389	台風による被害が大きかった。	태풍에 의한 피해가 컸다.	current	local-ending
+dict:jisjk:257566	ひが昇る。	rule:dict:jisjk:257566=히	current	local
+dict:jisjk:260433	大変なことになった。	rule:dict:jisjk:260433=것이 &C6@	current	local
+sense:入れる	お茶を入れます？	차를 끓입니까?	current	senses
+dict:jisjk:342916	彼がそんなことを言うなんてあり得ない。	그가 그런 말을 한다고 있을 수 없다.	current	local-ending
+dict:jisjk:263220	学生として、ルールは守ります。	rule:dict:jisjk:263220=(으)로서	current	local
+dict:jisjk:262135	明日は会うことが出来ますか。	rule:dict:jisjk:262135=&HN@	current	local
+dict:jisjk:265691	それって本物じゃねえ？	그거 진짜가 아니야?	current	local-ending
+dict:jisjk:264467	って、それ本当なの？	rule:dict:jisjk:264467=라고	current	local
+dict:jisjk:264720	寿司を自分で握ったこともあるんだ。	스시를 스스로 만든 적도 있는 거야.	current	local-ending
+dict:jisjk:265190	彼に助けてもらえない。	rule:dict:jisjk:265190=주지 $DH@	current	local
+dict:jisjk:375124	明日は晴れるのか気になる。	rule:dict:jisjk:375124=마음이 생&A2@	current	local
+dict:jisjk:116695	ここでは写真を撮ってはいけません。	rule:dict:jisjk:116695=안 &C6@	current	local
+dict:jisjk:268431	試験に向けて毎日頑張ります。	rule:dict:jisjk:268431=(을)를 향&AV@	current	local
+dict:jisjk:266938	私も彼がするようにできる。	나도 그가 하도록 할 수 있다.	current	local-ending
+dict:jisjk:267064	……そう。わかった。	rule:dict:jisjk:267064=그래	current	local
+dict:jisjk:267732	家を出る直前に電話が鳴った。	집을 나가기 직전에 전화가 울렸다.	current	local-ending
+dict:jisjk:267778	先に切符を買っておきます。	rule:dict:jisjk:267778=&C7@	current	local
+dict:jisjk:268221	早く寝た方がいいよ。	빨리 자는 것이 좋아.	current	local-ending
+sense:お礼	運転手さんにお礼を言った。	운전기사님에게 감사 인사를 했다.	current	senses
+dict:jisjk:340825	田中さんね、昨日引っ越したんだって。	타나카 씨, 어제 이사했다고.	current	local-ending
+dict:jisjk:341736	値段より品質で選びます。	rule:dict:jisjk:341736=보다	current	local
+dict:jisjk:4154	この問題について皆で話し合った。	rule:dict:jisjk:4154=(이)가	current	local
+dict:jisjk:342062	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
+dict:jisjk:342185	買います品物が決まりました。	사는 물건이 정해졌습니다.	current	local-ending
+dict:jisjk:342197	食べてないと困る。	먹지 않았다고 곤란하다.	current	local-ending
+dict:jisjk:342458	そんな話があるかっ！	그런 이야기가 있다!	current	local-ending
+dict:jisjk:342710	つまらないって人もいるけど私は好きだ。	시시하다는 사람도 있지만 나는 좋아한다.	current	local-ending
+dict:jisjk:343126	お送りしました資料をご確認ください。	보내 드렸던 자료를 확인해 주십시오.	current	local-ending
+dict:jisjk:343569	君もそう思うよねえ。	rule:dict:jisjk:343569=	current	local
+dict:jisjk:344514	電話ないし、メールで連絡する。	rule:dict:jisjk:344514=없고	current	local
+dict:jisjk:266225	この辺りはとても静かだそうだ。	이 주위는 무척 조용하다고 한다.	current	local-ending
+dict:jisjk:345267	試験に合格するには努力が必要だ。	rule:dict:jisjk:345267= 	current	local
+dict:jisjk:346541	彼の自由に行動させた。	rule:dict:jisjk:346541=자유에	current	local
+dict:jisjk:346797	そんな高い服は買えないよ。	rule:dict:jisjk:346797=그렇게	current	local
+dict:jisjk:348920	ここは猫が寝たところです。	여기는 고양이가 잤습니다.	current	local-ending
+dict:jisjk:349735	毎日練習しているからだと思う。	매일 연습하고 있기 때문이라고 생각한다.	current	local-ending
+dict:jisjk:4092	走ったら足が速くなった。	달리자 발이 빨라졌다.	current	local-ending
+dict:jisjk:353400	毎日薬を飲んで欲しい。	rule:dict:jisjk:353400=$DE@	current	local
+dict:jisjk:355019	彼は話を聞かれた。	rule:dict:jisjk:355019=들&AA@	current	local
+dict:jisjk:358632	一日だけで終わる。	rule:dict:jisjk:358632=에만	current	local
+dict:jisjk:359335	分かったものの不安は残る。	안 것의 불안은 남는다.	current	local-ending
+dict:jisjk:362124	はい、了解です。	rule:dict:jisjk:362124=%EF@	current	local
+sense:高い	値段は高いものの品質が良い。	가격은 비싸기는 하지만 품질이 좋다.	current	senses
+dict:jisjk:142505	彼は医者であり、作家でもある。	rule:dict:jisjk:142505=이기도 &Mf@	current	local
+dict:jisjk:364338	それが男というものさ。	rule:dict:jisjk:364338=(이)야	current	local
+dict:jisjk:364499	電話とかで話す。	rule:dict:jisjk:364499=등에서	current	local
+dict:jisjk:373336	今度友達と旅行に行きます。	rule:dict:jisjk:373336=이번에	current	local
+dict:jisjk:373524	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local-ending
+dict:jisjk:373549	天気がよくなくて残念だ。	날씨가 좋지 않아 유감이다.	current	local-ending
+dict:jisjk:4209	兄より弟の方が背が高い。	rule:dict:jisjk:4209=보다	current	local
+dict:jisjk:342560	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
+dict:jisjk:374896	犯人は彼とのことです。	rule:dict:jisjk:374896=(와)과의 일	current	local
+dict:jisjk:375007	ステンレス流しを買う。	rule:dict:jisjk:375007=흘려 보내기	current	local
+dict:jisjk:375216	健康のため歩く。	rule:dict:jisjk:375216=이기 때문에	current	local
+dict:jisjk:92417	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	local
+sense:見かける	駅で先生をお見かけしました。	역에서 선생님을 보았습니다.	current	senses
+dict:jisjk:3829	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local
+dict:jisjk:4904	料理をうまい方法で作った。	요리를 능숙한 방법으로 만들었다.	fix	local
+dict:jisjk:5289	子供にやさしい先生です。	아이에게 다정한 선생님입니다.	fix	local
+dict:jisjk:13902	だれに話してもらう。	누가 이야기해 준다.	fix	local
+dict:jisjk:80454	基本は一通り学んだ。	기본은 한 차례 배웠다.	fix	local
+dict:jisjk:92227	彼はいつも気をつけます。	그는 언제나 조심합니다.	fix	local
+dict:jisjk:115623	これは金と言う金属です。	이것은 금이라는 금속입니다.	fix	local
+dict:jisjk:115635	運動用の靴が必要だ。	운동용의 구두가 필요하다.	fix	local
+dict:jisjk:116112	箱の内にある。	상자의 안에 있다.	fix	local
+dict:jisjk:120856	仕事はもうきつい。	일은 이제 힘들다.	fix	local
+dict:jisjk:262308	ガラス越しに見える。	유리 너머로 보인다.	fix	local
+dict:jisjk:262887	天気が良い限り外で遊ぶ。	날씨가 좋은 한 밖에서 논다.	fix	local-ending
+dict:jisjk:263623	三日先の予定です。	3일 후의 예정입니다.	fix	local
+dict:jisjk:264356	つきの光が明るい。	달의 빛이 밝다.	fix	local
+dict:jisjk:267653	何かと忙しい。	이래저래 바쁘다.	fix	local
+dict:jisjk:341089	どうもすみませんが、教えてください。	정말로 죄송합니다만, 가르쳐 주세요.	fix	local
+dict:jisjk:341470	パンを、どうぞ運んでください。	빵을, 어서 옮겨 주세요.	fix	local
+dict:jisjk:342043	はやく、寝なさい。	빠르게, 자.	fix	local
+dict:jisjk:342993	こんな大金は払えねぇよ。	이런 큰돈은 지불할 수 없어.	fix	local
+dict:jisjk:342993	食べねぇよ。	먹지 않아.	fix	local
+dict:jisjk:343388	友人のうちで食べた。	친구의 집에서 먹었다.	fix	local
+dict:jisjk:347780	一緒に医者になろう。	함께 의사가 되자.	fix	local
+dict:jisjk:348191	日経記者です。	닛케이 기자입니다.	fix	local
+dict:jisjk:348419	近く見える。	가깝게 보인다.	fix	local
+dict:jisjk:348598	日程のどれを選びますか。	일정의 어느 것을 선택합니까.	fix	local
+dict:jisjk:358020	ひと通り調べた。	한 차례 조사했다.	fix	local
+dict:jisjk:361956	会議において決めた。	회의에서 결정했다.	fix	local
+dict:jisjk:362273	いただきます、後で返します。	받습니다, 나중에 돌려줍니다.	fix	local
+dict:jisjk:365922	彼はそういうのを食べる。	그는 그러한 것을 먹는다.	fix	local
+dict:jisjk:373518	彼の喜びぶりを見た。	그의 기쁨 모습을 보았다.	fix	local
+dict:jisjk:374955	汚れ防止の布です。	오염 방지의 천입니다.	fix	local
+dict:jisjk:374955	汚れ対策を考える。	오염 대책을 생각한다.	fix	local

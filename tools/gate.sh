@@ -28,7 +28,7 @@ cmake --build --preset "$preset" --parallel > "$out/build.log" 2>&1 ||
 HOME=$home HDTRANS_DICTS=$here/dicts "$here/tools/with-timeout.sh" "${HDTRANS_TIMEOUT:-1800}" \
     ctest --preset "$preset" -E '^testdata$' > "$out/ctest.log" 2>&1 ||
     { grep -E '\*\*\*|tests passed' "$out/ctest.log"; echo "GATE FAIL: ctest ($out/ctest.log)"; exit 1; }
-for t in unit examples rules.cases rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict; do
+for t in unit examples rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict; do
     grep -Eq "Test +#[0-9]+: $t \.+ +Passed" "$out/ctest.log" ||
         { echo "GATE FAIL: $t did not pass ($out/ctest.log)"; exit 1; }
 done
