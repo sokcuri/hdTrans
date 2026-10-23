@@ -538,7 +538,12 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             ok = false;  // a final と is the particle, not katakana ト
         }
         if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
-        if (ok && (chosen == nullptr || end > best.end)) {
+        // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
+        // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
+        const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
+                             runKorean.empty() && s.intj && !s.phrase && best.korean.ends_with('~') &&
+                             !Lengthen(Reading(s, p, end), units).ends_with('~');
+        if (ok && (chosen == nullptr || end > best.end || redrawn)) {
             std::string korean = !runKorean.empty()
                                      ? std::move(runKorean)
                                      : units.find('h') != std::string::npos
