@@ -3,7 +3,8 @@
 // A family is declared once by "//= FAMILY <TAB> after NAME <TAB> what it is for" and runs right
 // after the text pass or family NAME. Its rows are ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS
 // <TAB> NOTE, ID being cx:FAMILY:PRIO. On each word from the left, the first row of the family by
-// PRIO whose condition holds applies its actions.
+// PRIO whose condition holds applies its actions. "//~ MAP <TAB> FROM=TO ... <TAB> what it is for"
+// declares a word map for map-lemma and map-target, above the rows that use it.
 //= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
