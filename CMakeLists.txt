@@ -69,6 +69,11 @@ endfunction()
 hdtrans_builtin_source(builtin_gen.cpp "${HDTRANS_BUILTIN_DIR}" kTables BuiltinTables HDTRANS_BUILTIN_TSV)
 hdtrans_builtin_source(builtin_extra_gen.cpp "${HDTRANS_BUILTIN_DIR}/extra" kFiles ExtraBuiltinFiles
     HDTRANS_BUILTIN_EXTRA_TSV)
+# The set names of the word classes, checked when a source names a class.
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h"
+    COMMAND "${CMAKE_COMMAND}" "-DCLASSES=${HDTRANS_BUILTIN_DIR}/classes.tsv"
+        "-DOUT=${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h" -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/builtin_tables.cmake"
+    DEPENDS "${HDTRANS_BUILTIN_DIR}/classes.tsv" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/builtin_tables.cmake" VERBATIM)
 # The rules program of the word stage, the *.txt files of src/core/rules, compiled in; a stamp
 # lists the files so that adding or removing one regenerates the source.
 set(HDTRANS_RULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules")
@@ -88,7 +93,7 @@ add_subdirectory(third_party/libyaml)
 file(GLOB_RECURSE HDTRANS_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
 add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp")
+    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
 set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
@@ -151,7 +156,7 @@ if(NOT EMSCRIPTEN)
     endif()
 
     add_executable(hdtrans_tests ${HDTRANS_TEST_SOURCES} src/frontend/dictionary_version.cpp)
-    target_include_directories(hdtrans_tests PRIVATE tests/unit src)
+    target_include_directories(hdtrans_tests PRIVATE tests/unit src "${CMAKE_CURRENT_BINARY_DIR}")
     target_link_libraries(hdtrans_tests PRIVATE hdtrans_gui_support)
     enable_testing()
     add_test(NAME cli.version COMMAND hdtrans_cli --version --dicts "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder")
@@ -161,6 +166,8 @@ if(NOT EMSCRIPTEN)
     set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
     add_test(NAME unit COMMAND hdtrans_tests)
+    add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
     set_tests_properties(unit PROPERTIES ENVIRONMENT
         "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache")
     if(UNIX)

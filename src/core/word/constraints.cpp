@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "core/dict/char_readings.h"
+#include "core/dict/classes.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
@@ -93,16 +94,6 @@ constexpr ConstraintRule kRules[] = {
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
 
-struct HonorificSuffix {
-    std::string_view text;
-    bool familiar;
-};
-
-constexpr HonorificSuffix kHonorifics[] = {
-    {"さん", false}, {"さま", false}, {"様", false}, {"殿", false}, {"氏", false},  {"先輩", false},
-    {"先生", false}, {"くん", true},  {"君", true},  {"ちゃん", true}, {"たん", true},
-};
-
 // The numerals that start a quantity (つい三時間前, つい3日前, つい数分前).
 constexpr std::u32string_view kNumerals = U"0123456789０１２３４５６７８９一二三四五六七八九十百千数何半";
 // The characters that end the quantity before 前 is found.
@@ -119,32 +110,6 @@ constexpr std::string_view kPredicateEnds[] = {"た", "だ", "る", "う", "い"
 
 // What continues a word rather than follows a particle (とって, ととと, とぉぉ).
 constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～", "↓", "↑"};
-// The rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the
-// first kana of まで, なら or たくさん after 今年.
-constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "なけ", "なきゃ", "なくちゃ", "なさ", "ねえ",
-                                           "ねー", "ます", "ませ", "まし", "て", "ちゃ", "ちま", "たら",
-                                           "たり", "たい", "たく", "よう", "つつ", "ながら"};
-// What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
-constexpr std::string_view kCopulaStarts[] = {"だ", "で", "じゃ", "に", "の", "か"};
-// What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
-// ていただく).
-constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
-// What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって),
-// and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
-constexpr std::string_view kNounFollowers[] = {"だ", "で", "じゃ", "が", "の", "ね", "か", "や", "って",
-                                               "なん", "なの", "なら", "あっ", "あり", "ある", "さ", "よ"};
-constexpr std::string_view kStemFollowers[] = {"ない", "無い", "なく", "なかっ", "は", "も", "に"};
-// The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as
-// one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
-constexpr std::string_view kContinuativeSuffixes[] = {"ます", "まし", "ませ", "過ぎ", "すぎ", "始め", "はじめ",
-                                                      "続け", "つづけ", "がち", "気味", "つつ", "そうだ",
-                                                      "そうな", "そうです"};
-// The forms of ある after the で of である (であり, である, であった, であれば, であろう).
-constexpr std::string_view kAruForms[] = {"ある", "あり", "あっ", "あれ", "あろ"};
-// The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
-constexpr std::string_view kObjectParticles[] = {"を", "に", "へ", "で"};
-// The nouns that a quotation in って modifies (って奴 라는 녀석).
-constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
 
 bool AllOfClass(std::string_view s, int cls) {
     if (s.empty()) return false;
@@ -168,10 +133,9 @@ bool HangulText(std::string_view s) {
 
 bool HonorificAt(std::string_view s, bool familiarOnly) {
     if (s.starts_with("くんだり")) return false;  // 千里くんだり: all the way to a place
-    for (const HonorificSuffix& h : kHonorifics) {
-        if ((h.familiar || !familiarOnly) && s.starts_with(h.text)) return true;
-    }
-    return false;
+    const auto at = [&](std::string_view h) { return s.starts_with(h); };
+    if (familiarOnly) return std::ranges::any_of(dict::ClassMembers("honorific.constraint-familiar"), at);
+    return std::ranges::any_of(dict::ClassMembers("honorific.constraint"), at);
 }
 
 bool HiraganaHonorificAt(std::string_view s) {
@@ -232,11 +196,9 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
     case ConstraintWord::EndsInDe:
         return text::RuneCount(source) >= 2 && source.ends_with("で");
     case ConstraintWord::OStem: {
-        // The greetings お帰りなさい and お休みなさい are no orders.
-        constexpr std::string_view kGreetings[] = {"お帰り", "おかえり", "お休み", "おやすみ"};
         return source.starts_with("お") && text::RuneCount(source) >= 3 &&
                NameClassOf(source.substr(source.size() - std::string_view("い").size())) == kClassHiragana &&
-               std::find(std::begin(kGreetings), std::end(kGreetings), source) == std::end(kGreetings);
+               !dict::InClass("word.greeting-o", source);
     }
     case ConstraintWord::EndsInKu:
         return text::RuneCount(source) >= 2 && source.ends_with("く");
@@ -294,7 +256,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return exclamation && !StartsWithAny(after, kDrawls);
     case ConstraintContext::AfterPause:
         return (exclamation || previous == "、" || previous == "…" || previous == "‥" || previous == ",") &&
-               StartsWithAny(after, kQuotedNouns);
+               StartsWithAny(after, dict::ClassMembers("noun.quoted"));
     case ConstraintContext::BeforeNumeralAgo:
         return NumeralAgo(after);
     case ConstraintContext::AfterVerbEnding:
@@ -309,7 +271,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::BeforeNasai:
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
-        return StartsWithAny(after, kCopulaStarts);
+        return StartsWithAny(after, dict::ClassMembers("copula.after-dake"));
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
     case ConstraintContext::AfterPredicate:
@@ -319,7 +281,7 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return !EndsInQuantity(lead);
     case ConstraintContext::AfterTeNotAdjective:
         return (preceding.ends_with("て") || preceding.ends_with("で")) &&
-               !StartsWithAny(after, kAdjectiveOrHumbleTails);
+               !StartsWithAny(after, dict::ClassMembers("follower.ita"));
     case ConstraintContext::NotBeforeNoun: {
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;
@@ -328,9 +290,11 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         const int next = NameClassOf(FirstChar(after));
         const int last = NameClassOf(before);
         if (last == kClassKanji || last == kClassKatakana) return false;
-        return (next == kClassKanji || (next == kClassHiragana && !StartsWithAny(after, kNounFollowers) &&
-                                       !StartsWithAny(after, kStemFollowers) && !StartsWithAny(after, kObjectParticles))) &&
-               !StartsWithAny(after, kContinuativeSuffixes);
+        return (next == kClassKanji ||
+                (next == kClassHiragana && !StartsWithAny(after, dict::ClassMembers("follower.noun-not-stem")) &&
+                 !StartsWithAny(after, dict::ClassMembers("follower.stem")) &&
+                 !StartsWithAny(after, dict::ClassMembers("particle.case-before-stem")))) &&
+               !StartsWithAny(after, dict::ClassMembers("suffix.continuative"));
     }
     case ConstraintContext::BeforeSuruForm:
         // した, but not たくさん: the past ends there or a particle or mark follows it.
@@ -340,10 +304,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
             return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
         }
-        return StartsWithAny(after, kSuruTails);
+        return StartsWithAny(after, dict::ClassMembers("suru.tail"));
     case ConstraintContext::BeforeAru:
         // A noun fused with で (歳で), not a particle in で (まである).
-        return StartsWithAny(after, kAruForms) &&
+        return StartsWithAny(after, dict::ClassMembers("aru.after-de")) &&
                std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
                    return c.source == source && c.codes != nullptr && c.codes->part.Tag() != 'N';
                });
@@ -352,10 +316,11 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                (after.starts_with("うことで、") || after.starts_with("うことで，"));
     case ConstraintContext::NounSlot: {
         if (after.starts_with("よう") || after.starts_with("させ") || after.starts_with("され")) return false;
-        if (StartsWithAny(after, kNounFollowers)) return true;
+        if (StartsWithAny(after, dict::ClassMembers("follower.noun-not-stem"))) return true;
         const int next = NameClassOf(FirstChar(after));
-        return (StartsWithAny(after, kStemFollowers) || (next != kClassHiragana && next != kClassKanji)) &&
-               !StartsWithAny(adjacent, kObjectParticles);
+        return (StartsWithAny(after, dict::ClassMembers("follower.stem")) ||
+                (next != kClassHiragana && next != kClassKanji)) &&
+               !StartsWithAny(adjacent, dict::ClassMembers("particle.case-before-stem"));
     }
     case ConstraintContext::Detached:
         return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||

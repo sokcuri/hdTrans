@@ -1,7 +1,9 @@
 #include <algorithm>
+#include <span>
 #include <string>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
@@ -596,16 +598,6 @@ constexpr KataWord kKataWords[] = {
     {"ユルサナイ", true, "許さない"}, {"ヤメテ", true, "やめて"}, {"タスケテ", true, "助けて"},
 };
 
-// The particles and predicates after which a word of kKataWords reads as the word; an
-// adjective also reads as one before the end of a sentence. あれ？ is also the
-// interjection "huh?", so アレ does not take ？.
-constexpr std::string_view kPronounNext[] = {"は", "が", "を", "も", "じゃ", "だ", "です", "って", "か", "？", "?"};
-constexpr std::string_view kAdjectiveNext[] = {"だ", "じゃ", "って", "か"};
-// The sentence-final particles after which an i-adjective of kKataWords reads as one.
-constexpr std::string_view kAdjectiveFinal[] = {"ぞ", "よ", "な", "ね", "わ"};
-// What else follows a verb of kKataWords (コロスんだ, コロスから).
-constexpr std::string_view kVerbNext[] = {"ん", "の", "から", "けど", "し", "ぜ"};
-
 constexpr std::u32string_view kSentenceEnd = U"。！？!?…‥」』";
 // What may follow a word clipped by a closing ッ: a pause as well as an end (コワイッ、).
 constexpr std::u32string_view kClippedEnd = U"！？!?…‥。、」』）)～― 　";
@@ -629,8 +621,7 @@ constexpr KataStem kKataStems[] = {
 };
 
 // The element of list that starts s.
-template <size_t N>
-bool PrefixIn(std::string_view s, const std::string_view (&list)[N], std::string_view& found) {
+bool PrefixIn(std::string_view s, std::span<const std::string_view> list, std::string_view& found) {
     for (const std::string_view p : list) {
         if (s.starts_with(p)) {
             found = p;
@@ -686,11 +677,6 @@ bool HasPlainSense(std::string_view s, const LineContext& ctx, const dict::Snaps
     return false;
 }
 
-// What may follow a noun: particles, the copula and honorifics (イカなんて, イカを).
-constexpr std::string_view kNounNext[] = {"は", "が", "を", "に", "の", "で", "と", "へ", "も", "や", "か", "だ", "です",
-                                          "じゃ", "なんて", "など", "なら", "なの", "なんか", "って", "より", "から",
-                                          "まで", "さん", "ちゃん", "くん", "たち", "だけ", "しか", "ね", "よ"};
-
 // How a dictionary word other than a name reads the katakana run word with rest, the text
 // after it: a verb whose conjugation rest goes on with (イキった), or another word that rest
 // leaves or continues with a particle (イカなんて). 0 for none, 1 for the text as written, 2
@@ -726,7 +712,7 @@ int KnownWord(std::string_view word, std::string_view rest, const LineContext& c
             }
             const text::Rune next = text::DecodeRune(tail);
             if (tail.empty() || !IsHiraganaRune(next.cp)) return k + 1;
-            for (const std::string_view n : kNounNext) {
+            for (const std::string_view n : dict::ClassMembers("follower.kata-noun")) {
                 if (tail.starts_with(n)) return k + 1;
             }
         }
@@ -820,13 +806,14 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         std::string_view follower;
         bool ok;
         if (kw->adjective) {
-            ok = PrefixIn(rest, kAdjectiveNext, follower) ||
-                 ((word.ends_with("イ") || !kw->as.empty()) && PrefixIn(rest, kAdjectiveFinal, follower)) ||
-                 (!kw->as.empty() && PrefixIn(rest, kVerbNext, follower));
+            ok = PrefixIn(rest, dict::ClassMembers("follower.kata-adjective"), follower) ||
+                 ((word.ends_with("イ") || !kw->as.empty()) &&
+                  PrefixIn(rest, dict::ClassMembers("follower.kata-adjective-final"), follower)) ||
+                 (!kw->as.empty() && PrefixIn(rest, dict::ClassMembers("follower.kata-verb"), follower));
             ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd) ||
                  (tsu && RuneIn(next, kClippedEnd));
         } else {
-            ok = PrefixIn(rest, kPronounNext, follower);
+            ok = PrefixIn(rest, dict::ClassMembers("follower.kata-pronoun"), follower);
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));
         }
         if (!ok || prev == U'・' || prev == U'＝' || prev == U'の' || (start == 0 && spanBefore)) continue;
@@ -975,12 +962,6 @@ output::Pieces KataWordsToHiragana(const output::Pieces& text, const LineContext
 
 namespace {
 
-constexpr std::string_view kNicknameHonorifics[] = {"ちゃん", "くん"};
-
-// The kin, pet and other words before ちゃん the dictionary lacks in hiragana (いっちゃん 一番).
-constexpr std::string_view kKinHeads[] = {"にい", "にー", "ねえ", "ねー", "かあ", "かー", "とう", "とー", "ばあ", "ばー",
-                                          "じい", "じー", "ばっ", "じっ", "わん", "にゃん", "ぼっ", "じょう", "あか", "あん", "いっ"};
-
 constexpr std::u32string_view kParticleRunes = U"はがをにともへでや";
 
 bool NicknameRune(char32_t r) { return IsHiraganaRune(r) || r == U'ー'; }
@@ -1113,7 +1094,7 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
     size_t at = 0;
     for (size_t i = 0; i < text.size();) {
         std::string_view honorific;
-        for (const std::string_view h : kNicknameHonorifics) {
+        for (const std::string_view h : dict::ClassMembers("honorific.nickname")) {
             if (text.substr(i).starts_with(h)) honorific = h;
         }
         if (honorific.empty()) {
@@ -1127,8 +1108,7 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         const std::string_view name = text.substr(start, end - start);
         const std::string_view rest = text.substr(i);
         if (name.starts_with("お") || name.starts_with("ご") || name.starts_with("ー")) continue;
-        bool kin = false;
-        for (const std::string_view k : kKinHeads) kin = kin || name == k;
+        const bool kin = dict::InClass("kana.kin-before-chan", name);
         if (kin || (honorific == "ちゃん" && rest.starts_with("と") && ChantoAdverb(name, text.substr(end), snap))) continue;
         // An animal called with the honorific is the animal (ねこちゃん 고양이).
         bool animal = false;

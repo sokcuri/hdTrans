@@ -1,5 +1,6 @@
 #include "core/pipeline/segment.h"
 
+#include "core/dict/classes.h"
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -12,9 +13,6 @@ namespace {
 
 constexpr int kChunkBefore = 40;
 constexpr int kChunkAfter = 10;
-
-constexpr std::string_view kConjunctiveEndings[] = {"て",   "ば",   "たら", "だら",     "ても",   "でも",  "けど",
-                                                     "けれど", "けれども", "から", "ので", "のに", "ながら"};
 
 // Endings that end a clause only after one of the given characters.
 struct ConjunctiveAfter {
@@ -61,26 +59,15 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
     return n;
 }
 
-// Words that follow another word inside one clause and so never start a column: a
-// copula, an auxiliary or a particle, matched at the start of the hiragana run that
-// begins a column (kBoundStart) or as the whole run (kBoundWhole).
-constexpr std::string_view kBoundStart[] = {
-    "です", "でし", "である", "じゃ", "だっ", "だろ", "だよ", "だね", "だな", "ます", "まし", "ませ", "ない",
-    "なかっ", "らしい", "みたい", "ような", "ように", "ようだ", "そうだ", "そうな", "たいで", "たかっ", "から",
-    "まで", "より", "だけ", "しか", "ばかり", "など", "くらい", "ぐらい", "ほど", "には", "では", "とは", "にも",
-    "でも", "って"};
-constexpr std::string_view kBoundWhole[] = {"だ", "が", "を", "に", "へ", "で", "と", "も", "は", "の",
-                                            "や", "か", "よ", "ね", "わ", "ぞ", "さ", "な", "たい"};
-
 // Whether s starts with a word that only follows another one in the same clause, or with
 // punctuation that ends or splits a sentence or closes a bracket.
 bool StartsBound(std::string_view s) {
     if (RuneIn(text::DecodeRune(s).cp, U"。．、，！？!?…‥」』）)】〉》")) return true;
     const std::string_view run = s.substr(0, RunOf(s, IsHiraganaRune));
-    for (const std::string_view w : kBoundStart) {
+    for (const std::string_view w : dict::ClassMembers("bound.column-start")) {
         if (run.starts_with(w)) return true;
     }
-    for (const std::string_view w : kBoundWhole) {
+    for (const std::string_view w : dict::ClassMembers("bound.column-whole")) {
         if (run == w) return true;
     }
     return false;
@@ -101,7 +88,7 @@ bool KanaSpace(std::string_view s, size_t i) {
 }
 
 bool Conjunctive(std::string_view s) {
-    for (const std::string_view e : kConjunctiveEndings) {
+    for (const std::string_view e : dict::ClassMembers("ending.conjunctive")) {
         if (s.ends_with(e)) return true;
     }
     for (const ConjunctiveAfter& p : kConjunctiveAfter) {

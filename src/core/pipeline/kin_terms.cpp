@@ -1,5 +1,7 @@
+#include <span>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
 
 namespace hdTrans::pipeline::internal {
@@ -17,13 +19,7 @@ constexpr KinTerm kKinTerms[] = {
     {"お姉様", "언니"}, {"お姉さま", "언니"}, {"姉様", "언니"}, {"姉さま", "언니"}, {"お姉ちゃん", "언니"},
 };
 
-// Speech markers of the speaker's sex inside an utterance.
-constexpr std::string_view kFemaleMarkers[] = {"わたくし", "ですわ", "ますわ", "でしたわ", "ましたわ", "ですの",
-                                               "かしら",   "わよ",   "わね",   "のよ",     "あたし",   "でしてよ"};
-constexpr std::string_view kMaleMarkers[] = {"俺", "僕", "だぜ", "るぜ", "だぞ", "るぞ", "兄上", "姉上"};
-
-template <size_t N>
-bool HasAny(std::string_view s, const std::string_view (&list)[N]) {
+bool HasAny(std::string_view s, std::span<const std::string_view> list) {
     for (std::string_view m : list) {
         if (s.find(m) != std::string_view::npos) return true;
     }
@@ -77,8 +73,8 @@ SpeechCues ReadSpeechCues(std::string_view line) {
     SpeechCues cues;
     const auto utterances = Utterances(line);
     for (std::string_view u : utterances) {
-        if (HasAny(u, kFemaleMarkers)) cues.female = true;
-        if (!HasAny(u, kMaleMarkers)) continue;
+        if (HasAny(u, dict::ClassMembers("speech.female"))) cues.female = true;
+        if (!HasAny(u, dict::ClassMembers("speech.male"))) continue;
         for (const KinTerm& k : kKinTerms) {
             if (Contains(u, k.ja)) cues.maleKin = true;
         }
@@ -97,7 +93,9 @@ bool FemaleSpeech(std::span<const std::string> lines) {
 }
 
 std::string WriteKinTerms(std::string_view line, bool female) {
-    if (!((female && !HasAny(line, kMaleMarkers)) || HasAny(line, kFemaleMarkers))) return std::string(line);
+    if (!((female && !HasAny(line, dict::ClassMembers("speech.male"))) || HasAny(line, dict::ClassMembers("speech.female")))) {
+        return std::string(line);
+    }
     std::string out(line);
     for (const KinTerm& k : kKinTerms) out = ReplaceString(out, k.ja, k.female);
     return out;

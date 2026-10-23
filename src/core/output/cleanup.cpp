@@ -2,6 +2,7 @@
 
 #include <cstring>
 
+#include "core/dict/classes.h"
 #include "core/output/particle.h"
 #include "core/text/hangul.h"
 #include "core/text/utf8.h"
@@ -342,7 +343,6 @@ void DropSpaceBeforeComma(std::string& text) {
 }
 
 void DropSpaceBeforeClose(std::string& text) {
-    constexpr std::string_view kClosers[] = {"」", "』", "）", ")"};
     constexpr std::string_view kDashes = "――";
     size_t w = 0;
     for (size_t i = 0; i < text.size();) {
@@ -355,7 +355,7 @@ void DropSpaceBeforeClose(std::string& text) {
                 const std::string_view rest = std::string_view(text).substr(e);
                 std::string_view tail;
                 if (mark) {
-                    for (const auto c : kClosers) {
+                    for (const auto c : dict::ClassMembers("mark.close-after-space")) {
                         if (StartsWith(rest, c)) tail = c;
                     }
                 } else if (StartsWith(rest, kDashes)) {
