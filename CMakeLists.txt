@@ -253,7 +253,9 @@ if(NOT EMSCRIPTEN)
             --dump-rules "${HDTRANS_RULE_DUMP}" -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
         set_tests_properties(rules.dump PROPERTIES FIXTURES_SETUP ruledump
             ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/rules-cache")
-        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        # The warnings per flag are the counts tools/lint-budget.tsv records.
+        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+            -budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/lint-budget.tsv")
         add_test(NAME rules.unknown-codes COMMAND "${CMAKE_COMMAND}"
             -DRULEC=$<TARGET_FILE:hdrulec> -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts
             -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-unknown-codes

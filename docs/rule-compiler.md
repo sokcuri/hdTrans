@@ -7,7 +7,7 @@
 
 ```sh
 hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in   # 조립한 프로그램 (rules.dump)
-hdrulec lint build/rules.txt -dicts dicts [-tsv]   # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
+hdrulec lint build/rules.txt -dicts dicts [-tsv] [-budget tools/lint-budget.tsv]   # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
 hdrulec convert build/rules.txt -o build/rules.hdr # 읽기 쉬운 문법으로 (설명 주석 포함)
 hdrulec flat build/rules.hdr -o build/rules.txt    # 되돌리기
 hdrulec verify build/rules.txt [-paths N]          # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
@@ -26,6 +26,9 @@ hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen
 | 동작을 바꿨을 때 | `hdrulec dump build/rules.txt -hash > src/core/rules/program.hash` | `rules.identity` |
 | 늘 | `hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
 | 큰 변환 뒤 | `hdrulec verify build/rules.txt -paths 4096` | `rules.verify` |
+
+`rules.lint`는 플래그마다 경고 수가 `tools/lint-budget.tsv`에 적힌 수와 같아야 통과합니다(`-budget`). 경고를 없앤
+변경은 그 줄을 새 수로 낮추고, 경고가 늘면 그 경고를 고칩니다. 남은 경고는 번역을 바꿔야 고칠 수 있는 것들입니다.
 
 해시는 주석을 보지 않습니다. 동작을 바꿀 생각이
 없었는데 `rules.identity`가 깨지면 `hdrulec dump build/rules.txt` 출력을 이전 커밋과 비교합니다.
@@ -194,7 +197,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 |---|---|---|
 | 전역 규칙 텍스트 → 라이브러리 | `cmake/builtin_tables.cmake`(CMake 스크립트) | 같음 |
 | 생성 코드 `compiled_gen.cpp` | 커밋된 파일을 컴파일, ctest `rules.generated`가 다시 만들어 비교 | 커밋된 파일 |
-| 검사 | ctest `rules.dump`가 쓴 프로그램에 `rules.lint`(오류만 실패), `rules.verify`, `rules.identity` | 없음 |
+| 검사 | ctest `rules.dump`가 쓴 프로그램에 `rules.lint`(오류, 또는 플래그별 경고 수가 `tools/lint-budget.tsv`와 다르면 실패), `rules.verify`, `rules.identity` | 없음 |
 
 `hdrulec`는 라이브러리에 링크하지 않고 규칙, 코드 소스(`load.cpp`, `eval.cpp`, `match.cpp`, `codes.cpp` …)만으로
 빌드합니다. 그래서 생성 코드가 깨져도 생성기는 빌드됩니다. Windows의 x86 빌드도 x64 호스트에서 그대로 돌릴 수 있지만,
