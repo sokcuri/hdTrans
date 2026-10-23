@@ -123182,7 +123182,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 何ヶ月	몇개월	K110	UMe		GN				jisjk:201701		
 何ヶ月か前	몇달전	K110			GN				jisjk:266197		
 何一つ	무엇하나	I110			GN				jisjk:88367		
-何万	몇만	N110			GN				jisjk:38272		
+何万	몇만	N110		NjNd	GN				jisjk:38272		
 何世紀	몇세기	I110	UMe		GN				jisjk:88362		
 何事	무슨 일	N110			GN				jisjk:38279		
 何事	아무 일	N110			GN	4517	||1 &&5 S+1== "も" P+1== "2**" S+2== "な" D+2== "$FA@" P+2== "7**"	何事는 뒤에 も와 부정 형용사 な가 오면 아무 일로 고른다.	jisjk:365404		
@@ -123211,7 +123211,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 何分か前	몇분전	K110			GN				jisjk:266198		
 何分ぐらい	몇 분정도	A9D0			GN				jisjk:202025		
 何分で	몇분만에	E311			GN				jisjk:2058		
-何十	몇십	N110			GN				jisjk:38281		
+何十	몇십	N110		NjNd	GN				jisjk:38281		
 何十回も	몇 십회나	E311			GN				jisjk:2060		
 何十年	몇 십년	I110	UMe	Ct	GN				jisjk:88365		
 何千	몇천	N110		NjNd	GN				jisjk:38286		
@@ -123296,7 +123296,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 何番におかけですか	몇번에 거셨습니까	A9D0			GN				jisjk:341466		
 何番目	몇번째	I110		Ct	GN				jisjk:88361		
 何発	몇 발	N110			GN				jisjk:164321		
-何百	몇백	N110			GN				jisjk:38277		
+何百	몇백	N110		NjNd	GN				jisjk:38277		
 何百人もの	몇백명이나되는	N110			GN				jisjk:201951		
 何程	얼마만큼	E311			GN				jisjk:2063		
 何等	하등	N110			GN				jisjk:38271		
@@ -218996,7 +218996,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 数カ月かけ	수개월에 걸&AO@	M427			GN				jisjk:137121		
 数パーセント	몇 퍼센트	N110			GN				jisjk:196508		
 数ヶ月	수개월	I110	UMe		GN				jisjk:75833		
-数万	수만	N110			GN				jisjk:101183		
+数万	수만	N110		NjNd	GN				jisjk:101183		
 数万円	수만엔	N110			GN				jisjk:196497		
 数久田	스쿠타	N130	QCTVPl		GN				jisjk:303233		
 数人	몇사람	N110			GN				jisjk:101221		
@@ -219028,9 +219028,9 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 数十	수십	N110		Ct	GN				jisjk:352999		
 数十万	수십만	N110			GN				jisjk:196469		
 数十万円	수십만엔	N110	VMy		GN				jisjk:159594		
-数十人	수십명	N110	VHn		GN				jisjk:159593		
+数十人	수십 명	N110	VHn		GN				jisjk:159593		
 数十倍	수십배	N110			GN				jisjk:162318		
-数千	수천	N110		Ct	GN				jisjk:101248		
+数千	수천	N110		NjNd	GN				jisjk:101248		
 数千万円安	수천만엔 $AC@	H7N0			GN				jisjk:136638		
 数取り	계수	N110			GN				jisjk:228690		
 数取り器	계수기	N110	VPe		GN				jisjk:168396		

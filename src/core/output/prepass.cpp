@@ -707,6 +707,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (settings_.literal && (t == "몇" || t == "여러") && CountsNatively(next.surface, EntryText(next))) {
         return Result(std::move(t), true);
     }
+    // A number word in Hangul stands apart from the counter after it (수십 명, 몇백 년).
+    if (constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
+        settings_.literal && Contains(nextTags, "Ct") &&
+        std::find(std::begin(kNumberWords), std::end(kNumberWords), t) != std::end(kNumberWords)) {
+        return Result(std::move(t), true);
+    }
     auto nd = [](std::string_view s) { return Contains(s, "Nd") || Contains(s, "Nj"); };
     bool allowSpacing = true;
     if (t == "\\") {

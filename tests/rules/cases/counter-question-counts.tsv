@@ -6,3 +6,5 @@ dict:jisjk:116927	ウォーベア、何頭いるんだ？	워베아, 몇 마리 
 dict:counter-hin	習ったと照れながら出てきた何品かの料理。	rule:dict:counter-hin=가지	fix	local
 dict:counter-hin	鉄製品、銀製品。	철제품, 은제품.	keep	local
 dict:jisjk:265881	友人数名には直接挨拶をした。	친구 몇 명에는 직접 인사를 했다.	fix	local
+dict:jisjk:38281	何十人もいた。	몇십 명이나 있었다.	fix	lookup
+dict:jisjk:101248	数千本の矢	수천 개의 화살	fix	lookup
