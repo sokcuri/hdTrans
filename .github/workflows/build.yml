@@ -85,12 +85,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # History without old blobs: the surface budget reads commit messages since the PR base.
+          fetch-depth: 0
+          filter: blob:none
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
           package-manager-cache: false
       - run: npm --prefix tools/release ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix tools/release test
+      # Counts within tools/surface-budget.tsv; on a PR, a raised ceiling needs a commit with a
+      # `Surface-Budget: <reason>` trailer since the base branch.
+      - name: Surface budget
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          python3 -I tools/surface-budget.py --self-test
+          if [ -n "$BASE_REF" ]; then
+            python3 -I tools/surface-budget.py --check --base "origin/$BASE_REF"
+          else
+            python3 -I tools/surface-budget.py --check
+          fi
 
   build:
     name: ${{ matrix.preset }}

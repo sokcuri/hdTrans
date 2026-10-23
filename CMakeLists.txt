@@ -171,6 +171,11 @@ if(NOT EMSCRIPTEN)
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            # Japanese and Korean text in src/core stays within tools/surface-budget.tsv.
+            add_test(NAME tools.surface-budget COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --check)
+            add_test(NAME tools.surface-budget.self-test COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --self-test)
         endif()
     endif()
 

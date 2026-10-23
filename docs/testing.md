@@ -10,6 +10,7 @@
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
+| `tools.surface-budget` | `src/core`의 일본어, 한국어 문자열이 `tools/surface-budget.tsv`의 상한을 넘지 않는지 확인 ([아래](#표면-문자열-예산-surface-budgetpy)). `.self-test`는 도구 자체 시험 (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
@@ -78,6 +79,23 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 
 출력은 `build/examples/`에 생깁니다. 사전 인자가 비어 있으면 77로 끝나며, ctest는 이를 건너뜀으로
 처리합니다.
+
+## 표면 문자열 예산 (surface-budget.py)
+
+`tools/surface-budget.py`는 `src/core`의 `.cpp`, `.h`(생성 파일 `*_gen.*` 제외)마다 엔진 코드에 직접 쓴
+일본어와 한국어를 셉니다. 열의 뜻은 도구 첫머리에 있습니다. 문자열, 낱말 목록, 표면형 비교 조건과 그 우회
+(가나 문자 리터럴, `\u` 이스케이프와 가나, 한자, 한글 범위의 16진 상수, 헤더 상수 사용)를 세고,
+코드와 분류 비교 조건(`cond_code`)은 상한 없이 셉니다.
+
+- `tools/surface-budget.tsv`가 파일마다 상한입니다. 표에 없는 파일의 상한은 0이라서, 새 파일에 문자열을
+  쓰면 실패합니다.
+- `--check`(기본)는 상한을 넘는 수를 보이고 실패합니다. 낮출 수 있는 상한이 있으면 그 수를 알립니다.
+- `--update`는 지금 수를 상한으로 씁니다. 낮추기와 지운 파일의 행 지우기는 그냥 되지만, 올리기는
+  develop과의 merge base(`--base REF`) 뒤의 커밋 하나에 `Surface-Budget: <이유>` 트레일러가 있을 때만
+  씁니다. 올려야 하면 코드를 그 트레일러와 함께 커밋하고, `--update`를 돌린 뒤 표를 커밋합니다.
+- CI의 `release-tools` 작업은 `--self-test`와 `--check`를 돌립니다. PR에서는 `--check --base origin/<기준
+  브랜치>`로, 기준 브랜치 뒤에 표의 수가 오르거나 행이 늘었는데 PR의 어느 커밋에도 트레일러가 없으면
+  실패합니다.
 
 ## 한 입력 살펴보기: 단계 기록 (-stages)
 
