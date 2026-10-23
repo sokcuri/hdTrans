@@ -51,22 +51,27 @@ bool NamingCue(std::string_view after) {
     return false;
 }
 
-// Whether the text after a word makes it the doer of a favour: に with てもらう or 頼む
-// (Xに作ってもらった, Xに頼んで), or が with てくれる (Xが作ってくれた), in its sentence.
+// Whether the text after a word makes it the doer of a favour in its clause: に with
+// てもらう or 頼む and no other に before it (Xに作ってもらった, Xに頼んで), or が with てくれる
+// (Xが作ってくれた).
 bool AgentCue(std::string_view after) {
-    std::string_view sentence = after;
-    for (const std::string_view end : {"。", "！", "？", "」", "『", "「"}) {
-        const std::size_t at = sentence.find(end);
-        if (at != std::string_view::npos) sentence = sentence.substr(0, at);
+    std::string_view clause = after;
+    for (const std::string_view end : {"。", "！", "？", "」", "『", "「", "、"}) {
+        const std::size_t at = clause.find(end);
+        if (at != std::string_view::npos) clause = clause.substr(0, at);
     }
-    auto has = [&](std::initializer_list<std::string_view> list) {
+    auto has = [&](std::string_view rest, std::initializer_list<std::string_view> list) {
         for (const std::string_view w : list) {
-            if (sentence.find(w) != std::string_view::npos) return true;
+            if (rest.find(w) != std::string_view::npos) return true;
         }
         return false;
     };
-    if (sentence.starts_with("に")) return has({"てもら", "でもら", "頼"});
-    if (sentence.starts_with("が")) return has({"てくれ", "でくれ"});
+    if (clause.starts_with("に")) {
+        std::string_view rest = clause.substr(std::string_view("に").size());
+        rest = rest.substr(0, rest.find("に"));
+        return has(rest, {"てもら", "でもら", "頼"});
+    }
+    if (clause.starts_with("が")) return has(clause, {"てくれ", "でくれ"});
     return false;
 }
 
@@ -599,7 +604,8 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
     }
     for (const auto& [t, c] : agents_) {
-        if (c < 2 || !TranslatedWord(t)) continue;
+        // A place (ウチに来てもらう) is where the favour is done, not who does it.
+        if (c < 2 || !TranslatedWord(t) || Flags(t).place || Flags(ToHiragana(t)).place) continue;
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap));
         n.person = true;

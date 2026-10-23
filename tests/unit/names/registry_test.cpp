@@ -579,3 +579,20 @@ HD_TEST(names_katakana_siblings) {
     names::Registry honorifics = Scan(snap, "ヨウタクンは来た。\nヨウタチャンが来た。\nヨウタサンは来た。");
     HD_CHECK(!honorifics.Named("ヨウタサン"));
 }
+
+HD_TEST(names_favour_doer) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    // A katakana word that does favours in two sentences is a name.
+    names::Registry r = Scan(snap, "フトンに鞄を直してもらった。\nフトンが帽子を編んでくれた。");
+    const std::vector<std::string> names = r.Names();
+    HD_CHECK(std::find(names.begin(), names.end(), "フトン") != names.end());
+    // Not a place the favour is done at.
+    names::Registry place = Scan(snap, "ウチに来てもらった。\n明日もウチに来てもらうよ。");
+    const std::vector<std::string> none = place.Names();
+    HD_CHECK(std::find(none.begin(), none.end(), "ウチ") == none.end());
+    // Not one before another に-phrase of the clause.
+    names::Registry other = Scan(snap, "フトンに行って母に作ってもらった。\nフトンに寄って父に直してもらった。");
+    const std::vector<std::string> others = other.Names();
+    HD_CHECK(std::find(others.begin(), others.end(), "フトン") == others.end());
+}

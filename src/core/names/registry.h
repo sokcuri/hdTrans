@@ -43,6 +43,7 @@ struct DictFlags {
     bool thing = false;
     // A record of a pronoun (あなた, わし), and one of a person noun that is none (提督).
     bool pronoun = false, human = false;
+    bool place = false;  // a record of a place noun (VPl) that is no name (うち 집)
     // The name-layer person records: a surname or given name, and the first Hangul
     // target among them.
     bool layerSurname = false, layerGiven = false;

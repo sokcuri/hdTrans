@@ -562,6 +562,7 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
+                f.place = f.place || Has(sem, "VPl");
                 const std::string_view part = rec.codes->partText;
                 if (part.starts_with("N12") || part.starts_with("I12")) {
                     f.pronoun = true;
