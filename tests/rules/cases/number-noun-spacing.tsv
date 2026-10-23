@@ -38,3 +38,7 @@ grammar:counter-after-spaced-number	１２ 月になった。	12 월이 되었�
 grammar:counter-after-spaced-number	12 歳の子供。	12 세의 아이.	keep	rewrites
 grammar:counter-after-spaced-number	2026年に始まった。	2026년에 시작했다.	keep	local
 grammar:counter-after-spaced-number	12歳の子供。	12세의 아이.	keep	global-stem
+compose:number-noun	ケーキを8等分する。	케이크를 8등분한다.	fix	compose
+compose:number-noun	今10連敗中だ。	지금 10연패 중이다.	fix	compose
+compose:number-noun	画面を4分割する。	화면을 4분할한다.	fix	compose
+compose:number-noun	画面を分割する。	화면을 분할한다.	keep	compose

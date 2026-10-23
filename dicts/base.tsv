@@ -135201,7 +135201,7 @@ ttt	ttt	K110			GN				jisjk:201744
 分刻み	분 간격	K110	UMe	Tm	GN				jisjk:341611		
 分前	배당	N110			GN				jisjk:100054		
 分前	분 전	N110		Ct	GN	3998	||1 G-1== "NjNd"	숫자 뒤의 分前를 '분 전'으로 고른다.	jisjk:354974		
-分割	분할	N110		Hd	BZ	460	||1 &&3 S-1== "に" G-2== "Ct" D-1= "(으)로"	조수사와 に 뒤의 分割를 '분할'로 고르고 に를 '(으)로'로 바꾼다.	jisjk:24490		
+分割	분할	N110		HdCt	BZ	460	||1 &&3 S-1== "に" G-2== "Ct" D-1= "(으)로"	조수사와 に 뒤의 分割를 '분할'로 고르고 に를 '(으)로'로 바꾼다.	jisjk:24490		
 分割コンパイル	분활 컨바일	N110			IT				jisjk:262740		
 分割型	분할형	N110			GN				jisjk:162140		
 分割払い	할부	N110	VMo		BZ				jisjk:154755		
@@ -203715,7 +203715,7 @@ ttt	ttt	K110			GN				jisjk:201744
 往年	왕년	N110	UMe		GN				jisjk:29767		
 往往	때때로	E311			GN				jisjk:1798		
 往往にして	왕왕	E311			GN				jisjk:1799		
-往復	왕복	N110		Hd	GN				jisjk:29770		
+往復	왕복	N110		HdCt	GN				jisjk:29770		
 往復はがき	왕복엽서	I110			GN				jisjk:78705		
 往復切符	왕복표	I110			GN				jisjk:109005		
 往復割引運賃	왕복할인운임	N110	VMo		BZ				jisjk:359346		
@@ -294697,7 +294697,7 @@ ttt	ttt	K110			GN				jisjk:201744
 等価交換方式	등가교환방식	N110	UMn		BZ				jisjk:361633		
 等倍数	등배수	I110		Ct	GN				jisjk:67467		
 等値	등치	N110			GN				jisjk:19862		
-等分	등분	N110		Hd	GN				jisjk:19846		
+等分	등분	N110		HdCt	GN				jisjk:19846		
 等加速度運動	등가속도운동	N110			GN				jisjk:245287		
 等号	등호	N110			GN				jisjk:19864		
 等圧	등압	N110			GN				jisjk:19855		
@@ -336337,7 +336337,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連座制	연좌제	I110			GN				jisjk:67765		
 連弾	연탄	N110	USoQMU	Hd	GN				jisjk:156661		
 連想	연상	N110		Hd	GN				jisjk:20358		
-連戦	연전	N110		Hd	GN				jisjk:98658		
+連戦	연전	N110		HdCt	GN				jisjk:98658		
 連戦連勝	연전 연승	N110	VRwVTw		GN				jisjk:156648		
 連打	연타	N110		Hd	GN				jisjk:20400		
 連承錫	연승석	N130	QPN		GN				jisjk:208571		
@@ -336345,7 +336345,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連接	연접	N110		Hd	GN				jisjk:20398		
 連接棒	연접봉	N110	VPe		GN				jisjk:256482		
 連携	제휴	N110		Hd	GN				jisjk:20382		
-連敗	연패	N110		Hd	GN				jisjk:98663		
+連敗	연패	N110		HdCt	GN				jisjk:98663		
 連日	연일	N110	UMe		GN				jisjk:20366		
 連星	쌍성	N110	VSs		GN				jisjk:256481		
 連曲	연곡	N110	USoQMU		GN				jisjk:156628		
@@ -336381,7 +336381,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連用形	연용형	N110	UTs		GN				jisjk:156672		
 連画	연화	N110			GN				jisjk:98667		
 連番	연번	N110			GN				jisjk:256501		
-連発	연발	N110		Hd	GN				jisjk:20395		
+連発	연발	N110		HdCt	GN				jisjk:20395		
 連発銃	연발총	I110	VTw		GN				jisjk:67760		
 連盟	연맹	N110	VGt		GN				jisjk:20350		
 連盟	연맹	N110	VGt		GN				jisjk:20351		
@@ -336453,7 +336453,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連絡線	연락선	I110	VTp		GN				jisjk:67753		
 連絡船	연락선	I110			GN				jisjk:67754		
 連絡部	연락부	I110			GN				jisjk:98648		
-連続	연속	N110		Hd	GN				jisjk:20360		
+連続	연속	N110		HdCt	GN				jisjk:20360		
 連続	연속&AV@	M419			GN				jisjk:20361		
 連続に	연속으로	N110			GN				jisjk:260473		
 連続スペクトル	연속 스펙트럼	N110			GN				jisjk:256491		
@@ -336491,7 +336491,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連装型CD-ROMドライブ	연장형 CD-ROM 드라이브	K110	VPe		GN				jisjk:267821		
 連装型CDーROMドライブ	연장형 CD-ROM 드라이브	N110			IT				jisjk:261573		
 連装型CD－ROMドライブ	연장형 CD-ROM 드라이브	K110	VPe		GN				jisjk:267822		
-連覇	연패	N110		Hd	GN				jisjk:98664		
+連覇	연패	N110		HdCt	GN				jisjk:98664		
 連記	연기	N110		Hd	GN				jisjk:156626		
 連記投票	연기식 투표	N110		Hd	GN				jisjk:156627		
 連語	연어	N110	QLG		GN				jisjk:20365		
