@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+lookup:kanji-numbers	一万二千三百円。	1만 2300엔.	fix	lookup
+lookup:kanji-numbers	値段は一億二千万円だ。	가격은 1억 2000만엔이다.	fix	lookup
+lookup:kanji-numbers	五千万円	5000만엔	keep	lookup

@@ -79,18 +79,20 @@ bool AfterMyriad(std::string_view full, int cursor) {
 
 // A kanji number at the start of s read with 十, 百 and 千 (百二十 120, 五百 500, 二千五百
 // 2500): the bytes it takes and its value in digits. Two digits in a row end it (三四十 is
-// three, then forty), and so does a unit not smaller than the one before.
+// three, then forty), and so does a unit not smaller than the one before. A number that goes
+// on after 万 or 億 is read whole and written in groups of four digits (一万二千三百
+// 1만 2300, 三億五千万 3억 5000만); one that ends at 万 or 億 leaves it to the word after.
 struct KanjiNumber {
     std::size_t size = 0;
     std::string digits;
 };
 
-KanjiNumber ParseKanjiNumber(std::string_view s) {
+// The part of a number below 万 at the start of s: its bytes and value.
+std::pair<std::size_t, long> ParseKanjiGroup(std::string_view s) {
     constexpr std::u32string_view kDigits = U"〇一二三四五六七八九";
     long total = 0, lastUnit = 10000;
     int digit = -1;
     std::size_t k = 0, used = 0;
-    KanjiNumber n;
     while (k < s.size()) {
         const text::Rune r = text::DecodeRune(s.substr(k));
         const std::size_t d = r.cp == U'○' ? 0 : kDigits.find(r.cp);
@@ -112,8 +114,44 @@ KanjiNumber ParseKanjiNumber(std::string_view s) {
         total += digit;
         used = k;
     }
-    n.size = used;
-    if (used > 0) n.digits = std::to_string(total);
+    return {used, total};
+}
+
+KanjiNumber ParseKanjiNumber(std::string_view s) {
+    struct Myriad {
+        std::string_view kanji;
+        std::string_view korean;
+    };
+    constexpr Myriad kMyriads[] = {{"億", "억"}, {"万", "만"}};
+    KanjiNumber n;
+    std::string written;
+    std::size_t at = 0;
+    int next = 0;  // the first myriad still allowed
+    for (;;) {
+        const auto [size, value] = ParseKanjiGroup(s.substr(at));
+        if (size == 0) break;
+        const std::string_view after = s.substr(at + size);
+        int m = next;
+        while (m < 2 && !after.starts_with(kMyriads[m].kanji)) m++;
+        // A group closed by 万 or 億 belongs to the number only when another group follows.
+        if (m < 2 && value > 0 && ParseKanjiGroup(after.substr(kMyriads[m].kanji.size())).first > 0) {
+            if (!written.empty()) written += ' ';
+            written += std::to_string(value);
+            written += kMyriads[m].korean;
+            at += size + kMyriads[m].kanji.size();
+            next = m + 1;
+            continue;
+        }
+        if (value > 0 || written.empty()) {
+            if (!written.empty()) written += ' ';
+            written += std::to_string(value);
+        }
+        at += size;
+        break;
+    }
+    if (at == 0 || written.empty()) return n;
+    n.size = at;
+    n.digits = std::move(written);
     return n;
 }
 

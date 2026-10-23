@@ -98,6 +98,17 @@ HD_TEST(word_improvements_kanji_numbers_output) {
     CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "百二十日", "백이10일", "120일");
 }
 
+HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
+    const std::vector<hdTrans::dict::File> files = {
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+         "日\t일\tN110\t\tCt\tGN\t0\t1\n"
+         "万\t만\tN110\t\tNj\tGN\t0\t2\n"},
+    };
+    // A number that goes on after 万 is one number, written in groups of four digits.
+    CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "一万二千三百日", "1만2천3백일", "1만 2300일");
+}
+
 HD_TEST(word_improvements_forward_terminal_order) {
     using namespace hdTrans;
     const auto loaded = dict::Load({{0, "base.tsv",
