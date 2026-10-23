@@ -119,6 +119,17 @@ struct SkipContext {
     std::string_view query;
 };
 
+// An i-adjective row with かと after the ない of じゃない or ではない: that ない asks
+// whether it is so (行為なんじゃないかと 행위가 아닐까), so the guess or belief of the row
+// (높을 것 같습니다, 높은 줄 알았다) would turn it around.
+bool AskedNegativeGuess(const dict::UserEntry& u, std::string_view left, std::string_view query) {
+    if (At(u.codes->partText, 0) != 'T' || u.key.find("かと") == std::string_view::npos || left.size() < query.size()) {
+        return false;
+    }
+    const std::string_view before = left.substr(0, left.size() - query.size());
+    return before.ends_with("じゃな") || before.ends_with("ではな");
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -265,6 +276,7 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
     if (current < 0) return false;
     const std::string_view left = Tok(current).text;
     const std::string_view after = query.substr(std::min(u.key.size(), query.size()));
+    if (AskedNegativeGuess(u, left, query)) return false;
     if (At(u.codes->partText, 0) == 'P') {
         const long before = static_cast<long>(left.size()) - static_cast<long>(query.size());
         auto wordBefore = [&]() {
@@ -341,6 +353,7 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
         }
     }
     const std::string_view left = Tok(current).text;
+    if (AskedNegativeGuess(u, left, query)) return false;
     if (tag == 'P') {
         const long before = std::max(static_cast<long>(left.size()) - static_cast<long>(query.size()), 0L);
         if (!NounBefore(left.substr(0, static_cast<std::size_t>(before)))) return false;
