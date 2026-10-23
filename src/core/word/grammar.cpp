@@ -2082,8 +2082,9 @@ void PluralPronoun(Flusher& f) {
             last = m;
             m = m->next;
         }
+        // Not before a word that starts with a particle (じゃない (이)가 아니다: 너희가).
         if (adjacent && m != nullptr && m->selected >= 0 && At(m->Code(m->selected), 0) != '2' &&
-            At(m->Code(m->selected), 0) != '6') {
+            At(m->Code(m->selected), 0) != '6' && !TrimSpace(m->EntryText(m->selected)).starts_with("(")) {
             const char32_t r = text::DecodeRune(m->group->surface).cp;
             if (text::IsLetter(r) || text::IsDigit(r)) written += ' ';
         }

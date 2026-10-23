@@ -7,3 +7,5 @@ rewrite:plural-pronoun	「ウチらのクラス？」	「우리의 반?」	fix	r
 rewrite:plural-pronoun	「彼らは遅れてくる」	「그들은 늦게 온다」	keep	rewrites
 rewrite:plural-pronoun	「子供たちは寝ている」	「아이들은 자고 있다」	keep	rewrites
 rewrite:plural-pronoun	「あなたたちは誰？」	「당신들은 누구?」	keep	rewrites
+rewrite:plural-pronoun	「さっきの花火、あんた達じゃないでしょうね！？」	「조금 전의 불꽃, 너희가 아니겠죠!?」	fix	rewrites
+rewrite:plural-pronoun	ボクたちじゃない。	우리가 아니다.	fix	rewrites
