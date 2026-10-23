@@ -234,13 +234,13 @@ bool Ordinal(const std::vector<ResolvedItem>& items, int k) {
 
 // A native count and its counter as written (두 마리, 몇 번, 세 번째). One in an ordinal is
 // 첫 and is counted with 번 (첫 번째, not 한 번째 or 한 마리째); people in an ordinal are
-// counted with 명 (두 명째, not 두 사람째).
+// counted with 번 too (두 번째, not 두 사람째 or 두 명째).
 std::string WriteNativeCount(std::string_view count, const NativeCounter& c, bool ordinal) {
     std::string_view form = NativeForm(c);
     if (count == "한" && (ordinal || form.ends_with("째"))) {
         return form.ends_with("째") ? "첫 번째" : "첫 번";
     }
-    if (ordinal && form == "사람") form = "명";
+    if (ordinal && (form == "사람" || form == "명")) form = "번";
     return std::string(count) + ' ' + std::string(form);
 }
 
@@ -258,6 +258,17 @@ bool HangulWord(std::string_view s) {
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
 constexpr std::string_view kOneDay = "하루";
 constexpr std::string_view kFirstDay = "첫날";
+
+// In an ordinal, a count of one period that the dictionary reads t, starting surface: the
+// first period is 첫 and the period, with no 째 (一日目 하루 첫날, 一ヶ月目 한 달 첫 달). Empty
+// for any other count; a count of things is 첫 번째.
+std::string FirstUnit(std::string_view t, std::string_view surface, bool ordinal) {
+    if (!ordinal || !HasRune(kCountLeads, text::DecodeRune(surface).cp)) return {};
+    if (t == kOneDay) return std::string(kFirstDay);
+    constexpr std::string_view kPeriods[] = {"한 달", "한 주", "한 해"};
+    if (std::find(std::begin(kPeriods), std::end(kPeriods), t) == std::end(kPeriods)) return {};
+    return "첫 " + std::string(t.substr(std::string_view("한 ").size()));
+}
 
 std::string_view TextTail(const Pieces& p) {
     return !p.empty() && p.back().span == SpanText ? std::string_view(p.back().text) : std::string_view();
@@ -317,9 +328,10 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     // A native count read as one word with its counter (一匹 한마리, ２人 두명, 何個 몇개)
     // stands apart from it (한 마리, 두 명, 몇 개).
     // A count the dictionary reads apart from its counter (一度 한 번, 一枚 한 장, 二人 두 사람)
-    // is written as written but in an ordinal, where any counter after 한 is 첫 번.
+    // is written as written but in an ordinal, where one is the first of a period (FirstUnit)
+    // or else 첫 번.
     const bool ordinal = Ordinal(items, i);
-    if (ordinal && t == kOneDay && HasRune(kCountLeads, text::DecodeRune(item.surface).cp)) return std::string(kFirstDay);
+    if (std::string first = FirstUnit(t, item.surface, ordinal); !first.empty()) return first;
     for (const std::string_view count : kNativeCounts) {
         if (!t.starts_with(count) || t.size() == count.size()) continue;
         const bool apart = t[count.size()] == ' ';
@@ -580,9 +592,9 @@ std::string Composer::WriteCount(int i, std::string text) const {
     if (!settings_.literal) return text;
     const std::vector<ResolvedItem>& items = *items_;
     const std::vector<TokenText>& tokens = *tokens_;
-    // The 째 of 첫날 is in the count (一日目).
-    if (i > 0 && Ordinal(items, i - 1) && EntryText(items[i - 1]) == kOneDay && std::string_view(text).starts_with("째") &&
-        HasRune(kCountLeads, text::DecodeRune(items[i - 1].surface).cp)) {
+    // The first of a period takes no 째 (一日目 첫날, 一ヶ月目 첫 달).
+    if (i > 0 && std::string_view(text).starts_with("째") &&
+        !FirstUnit(EntryText(items[i - 1]), items[i - 1].surface, Ordinal(items, i - 1)).empty()) {
         return text.substr(std::string_view("째").size());
     }
     text = CountWithin(tokens, items, i, std::move(text));

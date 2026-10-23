@@ -4,3 +4,8 @@ lookup:number-words	あと十二分だ。	앞으로 12분이다.	fix	lookup
 lookup:number-words	十二分待った。	12분 기다렸다.	keep	lookup
 lookup:number-words	十二分に美味だ。	충분히 맛좋다.	keep	lookup
 lookup:number-words	十二分な準備をした。	충분한 준비를 했다.	keep	lookup
+compose:native-count	入社一ヶ月目の給料。	입사 첫 달의 급료.	fix	compose
+compose:native-count	一ヶ月目だ。	첫 달이다.	fix	compose
+compose:native-count	二ヶ月目に入った。	2개월째에 들어갔다.	keep	compose
+compose:native-count	一度目の人生は短かった。	첫 번째의 인생은 짧았다.	keep	compose
+compose:native-count	一ヶ月で終わった。	한 달에 끝났다.	keep	compose
