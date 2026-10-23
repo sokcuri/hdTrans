@@ -36,3 +36,9 @@ compose:native-count-ordinal	1杯	한잔	keep	compose
 L1928	2枚目を見る。	2장째를 본다.	fix	local
 L1928	2枚目の写真。	2장째의 사진.	fix	local
 L1928	二枚目の俳優。	미남의 배우.	keep	local
+dict:jisjk:357444	3つの時に引っ越した。	3살 때 이사했다.	fix	local
+dict:jisjk:357444	4つの頃	rule:dict:jisjk:357444=살	fix	local
+dict:jisjk:357444	3つの時代	!rule:dict:jisjk:357444	keep	local
+dict:jisjk:357444	3つの時計	!rule:dict:jisjk:357444	keep	local
+dict:jisjk:357444	三つの頃	rule:dict:jisjk:357444=살	fix	local
+dict:jisjk:357444	三つの箱	세 개의 상자	keep	local

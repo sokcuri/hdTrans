@@ -10943,7 +10943,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三たび	세 번	N110			GN				llm		みたび	w:10935
 三たび	세 번	E300			GN				xxx llm		みたび	w:10936
 三たび	여러 번	E300			GN				llm		みたび	w:10937
-三つ	세 개	N110			GN						みっつ	w:10938
 三つぞろい	쓰리피스 정장	N110	VCp		GN				llm		みつぞろい	w:10939
 三の焦	삼초	N110			GN						みのわた	w:10940
 三ヶ日	설 연휴	N110	UMe	Tm	GN				llm		さんがにち	w:10941
@@ -11336,7 +11335,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 乙未	을미	N110			GN						きのとひつじ	w:11328
 乙酉	을유	N110			GN						きのととり	w:11329
 九々	구구단	N110			GN						くく	w:11330
-九つ	아홉 개	N110			GN						ここのつ	w:11331
 九人	아홉 명	N110			GN				xxx llm	1		w:11332
 九仙	구천	N110			GN						キュウセン	w:11333
 九分	거의	N110			GN				xxx llm		くぶ	w:11334
