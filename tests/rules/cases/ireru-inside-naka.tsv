@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+dict:jisjk:94559	口の中に入れて。	입속에 넣어.	fix	local
+dict:jisjk:94559	胸の中に入れる。	가슴속에 넣는다.	fix	local
+dict:jisjk:94559	お腹の中に入れた。	뱃속에 넣었다.	fix	local
+dict:jisjk:94559	手中に入れた。	수중에 넣었다.	fix	local
+dict:jisjk:94559	箱の中に入れた。	상자 안에 넣었다.	keep	local
+dict:jisjk:94559	学校に入れる。	!rule:dict:jisjk:94559	keep	local
+dict:jisjk:202286	口の中にしまう。	입속에 넣는다.	keep	local
