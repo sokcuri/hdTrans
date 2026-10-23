@@ -230,7 +230,7 @@ std::size_t ReadingMorae(std::string_view s) {
 
 namespace {
 
-// ([一-龥々〆ヶ]+)[（(]([ぁ-ゖー・ 　]{1,16}|[ァ-ヺー・ 　]{1,16})[）)], at most 4 morae for each
+// ([一-龥々〆ヶ]+)[ 　]?[（(]([ぁ-ゖー・ 　]{1,16}|[ァ-ヺー・ 　]{1,16})[）)], at most 4 morae for each
 // kanji and one more; or ([一-龥々〆ヶ]+)「([ぁ-ゖー]{1,16})」 before the hiragana the word
 // goes on with (全「すべ」て), or before a particle after one kanji (心「こころ」に; not a
 // name quoted after a noun, 戦艦「やまと」の, nor a quote before と).
@@ -240,7 +240,12 @@ bool ReadingAt(std::string_view s, std::size_t pos, RubyMatch& m) {
     const std::size_t baseEnd = p;
     if (kanji < 1) return false;
     const bool bracket = Lit(s, p, "「");
-    if (!bracket && !OpenParen(s, p)) return false;
+    if (!bracket) {
+        std::size_t q = p;
+        if (!Lit(s, q, " ")) Lit(s, q, "　");  // one space may stand before the parenthesis: 山田 (やまだ)
+        if (!OpenParen(s, q)) return false;
+        p = q;
+    }
     const std::size_t readStart = p;
     const std::size_t k = Take(s, p, 17, [](char32_t c) { return NotParen(c) && c != U'「' && c != U'」'; });
     const std::size_t readEnd = p;

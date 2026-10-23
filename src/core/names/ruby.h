@@ -26,7 +26,8 @@ std::size_t ReadingMorae(std::string_view s);
 
 // The leftmost reading in parentheses in s at or after from: a kanji run, then （かな） or
 // (かな) of hiragana or of katakana, with as many morae as the run could be read with
-// (梁（はり）, 錆（さ）びない, 和気藹々(わきあいあい)). Spaces and ・ may stand inside. A
+// (梁（はり）, 錆（さ）びない, 和気藹々(わきあいあい), 山田 (やまだ)). Spaces and ・ may stand
+// inside, and one space before the parenthesis. A
 // hiragana reading may stand in 「」 where hiragana other than と goes on after it
 // (全「すべ」て). base is the kanji run.
 bool FindReading(std::string_view s, std::size_t from, RubyMatch& m);

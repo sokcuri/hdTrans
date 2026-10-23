@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+names:reading	山田 (やまだ) は来た。	야마다는 왔다.	fix	names
+names:reading	田中 (たなか) さん	타나카 씨	fix	names
+names:reading	東京 (とうきょう) に行く	도쿄에 간다	fix	names
+names:reading	山田(やまだ)は来た。	야마다는 왔다.	keep	names
+names:reading	山田 (仮名) は	야마다 (가명)는	keep	names
