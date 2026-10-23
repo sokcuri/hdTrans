@@ -111,6 +111,9 @@ struct Run {
 
     static std::size_t CellCount(std::string_view s) { return s == kEmptyCell ? 1 : text::RuneCount(s); }
 
+    // s kept for as long as the run, so that cells can point to it.
+    std::string_view Keep(std::string s) { return composed.emplace_back(std::move(s)); }
+
     // Replaces the first occurrence of the cells of search at or after cells[i] with
     // replacement, a cell of the kana rows or a text of single characters.
     void Replace(long i, std::string_view search, std::string_view replacement) {
@@ -238,13 +241,13 @@ void Run::Matrix(long cursor) {
             Replace(cursor + 1, kLongVowel, "");
         } else if (column == 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu) &&
                    kNonEnglishLongU.find(search) != std::string_view::npos) {
-            Replace(cursor, search, WithFinal(KanaCell(row, column), kVowelU, 0));
+            Replace(cursor, search, Keep(WithFinal(KanaCell(row, column), kVowelU, 0)));
             Replace(cursor + 1, kLongVowel, "");
             Replace(cursor + 1, kMarkRu, kFinalRu);
         } else if (column >= 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu)) {
             // A long u or o before the final ル takes it as ㄹ (ツール 툴, ゴール 골); a long a or
             // i keeps 르 (ダミール 다미르).
-            Replace(cursor, search, FinalL(KanaCell(row, column + 20), column == 2 ? kVowelU : -1));
+            Replace(cursor, search, Keep(FinalL(KanaCell(row, column + 20), column == 2 ? kVowelU : -1)));
             Replace(cursor + 1, kLongVowel, "");
             Replace(cursor + 1, kMarkRu, "");
         } else {
@@ -257,7 +260,7 @@ void Run::Matrix(long cursor) {
         // stays 룰 (アルル 아룰).
         const std::string_view plain = KanaCell(row, column);
         Replace(cursor, search,
-                column == 2 && row != 12 && Vowel(plain) == kVowelEu ? FinalL(plain, -1)
+                column == 2 && row != 12 && Vowel(plain) == kVowelEu ? Keep(FinalL(plain, -1))
                                                                      : KanaCell(row, column + 20));
         Replace(cursor + 1, kMarkRu, "");
     } else if (column == 1 && (next == kMarkYa || next == kMarkYu || next == kMarkYo)) {
