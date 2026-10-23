@@ -4,4 +4,4 @@ dict:jisjk:265559	兎の体が三つほど手に入った。	rule:dict:jisjk:265
 dict:jisjk:265559	お前ほど強くない。	!rule:dict:jisjk:265559	keep	local
 dict:w:26740	飲みやすいから、二樽は欲しいんだが	rule:dict:w:26740=통	fix	local
 dict:jisjk:104697	ウォーベアの一頭が反撃を試みた。	워베아의 한 마리가 반격을 시도했다.	fix	lookup
-dict:jisjk:160410	二体の木彫りの神を祀る。	두 체의 목각의 신을 모신다.	fix	lookup
+dict:jisjk:160410	二体の木彫りの神を祀る。	2체의 목각의 신을 모신다.	fix	lookup

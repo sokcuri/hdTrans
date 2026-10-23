@@ -166,9 +166,10 @@ std::string_view DropLastRune(std::string_view s) {
 // The last character of s, 0 when s is empty.
 char32_t LastRune(std::string_view s) { return s.empty() ? 0 : text::DecodeRune(s.substr(DropLastRune(s).size())).cp; }
 
-// A counter counted with native Korean numerals (두 마리, 세 번, 네 장). A Korean counter
-// that also counts with Sino-Korean numerals lists the Japanese counters it is native
-// for: 2번 for 番 and 3장 for 章 stay digits. Some counters form words with 한 (한번,
+// A Korean counter counted with native Korean numerals (두 마리, 세 번, 네 장); counters
+// counted with Sino-Korean numerals (8체, 3층, 2호) are not listed and keep digits. A Korean
+// counter that also counts with Sino-Korean numerals lists the Japanese counters it is
+// native for: 2번 for 番 and 3장 for 章 stay digits. Some counters form words with 한 (한번,
 // 한잔, 한마디) and are not split from it.
 struct NativeCounter {
     std::string_view korean;
@@ -185,7 +186,7 @@ constexpr NativeCounter kNativeCounters[] = {
     {"곳", U""},            {"마디", U"", true},  {"걸음", U"", true},   {"접시", U""},         {"봉지", U""},
     {"상자", U""},          {"바퀴", U""},        {"발", U"発"},         {"차례", U"", true},   {"번", U"回度遍", true},
     {"번째", U""},          {"개째", U""},        {"명째", U""},         {"마리째", U""},       {"면", U"面"},
-    {"덩어리", U""},        {"체", U"体"},         {"회", U"回", false, "번"},
+    {"덩어리", U""},        {"회", U"回", false, "번"},
 };
 
 std::string_view NativeForm(const NativeCounter& c) { return c.native.empty() ? c.korean : c.native; }
@@ -726,6 +727,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (t.find(' ') == std::string::npos && WritesNativeCount(items, tokens, i)) return Result(std::move(t), true);
         if (AllDigits(t)) return Result(std::move(t), false);
     }
+    // 몇 and 여러 stand apart from any counter (몇 체, 몇 층).
+    if (settings_.literal && (t == "몇" || t == "여러") && Contains(nextTags, "Ct")) return Result(std::move(t), true);
     // A number word in Hangul stands apart from the counter after it (수십 명, 몇백 년).
     if (constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
         settings_.literal && Contains(nextTags, "Ct") &&
