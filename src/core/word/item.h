@@ -11,6 +11,7 @@
 
 #include "core/dict/user_text.h"
 #include "core/rules/rules.h"
+#include "core/text/lifetime.h"
 #include "core/word/provenance.h"
 
 namespace hdTrans::word {
@@ -319,7 +320,7 @@ struct Arena {
     std::vector<std::unique_ptr<std::string>> texts;
 
     // Keeps text until the arena is reset and returns a view of it.
-    std::string_view Keep(std::string text) {
+    std::string_view Keep(std::string text) HDTRANS_LIFETIMEBOUND {
         texts.push_back(std::make_unique<std::string>(std::move(text)));
         return *texts.back();
     }

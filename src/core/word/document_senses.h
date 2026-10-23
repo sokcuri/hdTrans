@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/text/lifetime.h"
 #include "core/word/select.h"
 
 namespace hdTrans::word {
@@ -32,7 +33,7 @@ private:
 
 // A view into target without its form code, marker suffix, auxiliary prefixes or
 // common particles. This is a spelling comparison, not a Korean lemmatizer.
-std::string_view DocumentSenseStem(std::string_view target);
+std::string_view DocumentSenseStem(std::string_view target HDTRANS_LIFETIMEBOUND);
 
 int DocumentSenseScore(const Item& it, int candidate, const SelectContext& context);
 

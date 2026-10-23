@@ -601,8 +601,8 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
         // verb stem).
         bool verb = false;
         for (size_t k = start; k < i; k++) {
-            const std::vector<dict::Candidate> records =
-                snap.RetrieveRecords(EncodeText(rs.substr(k, i - k)), dict::LookupMode::General);
+            const std::string key = EncodeText(rs.substr(k, i - k));
+            const std::vector<dict::Candidate> records = snap.RetrieveRecords(key, dict::LookupMode::General);
             if (records.empty()) continue;
             for (const dict::Candidate& c : records) {
                 if (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&

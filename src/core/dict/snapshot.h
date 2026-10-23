@@ -57,6 +57,7 @@
 #include "core/dict/tsv.h"
 #include "core/dict/user_text.h"
 #include "core/output/families.h"
+#include "core/text/lifetime.h"
 #include "core/userdict/conjugating.h"
 #include "core/userdict/sense.h"
 
@@ -90,7 +91,7 @@ namespace internal {
 // first line that is not a header.
 bool ReadLayer(std::string_view text, FileLayer& layer);
 // text with the content of its "#!" first line removed, so that line numbers stay.
-std::string_view WithoutHeader(std::string_view text);
+std::string_view WithoutHeader(std::string_view text HDTRANS_LIFETIMEBOUND);
 
 }  // namespace internal
 
@@ -259,11 +260,11 @@ public:
     // are dropped. Name-layer senses that take part are placed like plain entries.
     // Place senses of a key the name layer respells take its Korean, or the person
     // spelling for the keys of ctx.persons.
-    Candidates GetWordInfo(std::string_view text, LookupMode mode, const LookupContext& ctx) const;
+    Candidates GetWordInfo(std::string_view text HDTRANS_LIFETIMEBOUND, LookupMode mode, const LookupContext& ctx) const;
 
     // The records of the base dictionary stored under exactly key, in order, with key
     // as their source. With an empty key, modes 1..3 query "D", "I", "V".
-    std::vector<Candidate> RetrieveRecords(std::string_view key, LookupMode mode) const;
+    std::vector<Candidate> RetrieveRecords(std::string_view key HDTRANS_LIFETIMEBOUND, LookupMode mode) const;
 
     // The name-layer records of key, whether or not the key takes part in lookups.
     std::vector<Record> NameRecords(std::string_view key) const;
@@ -305,8 +306,8 @@ private:
 
     Snapshot() = default;
 
-    Candidates GetWordInfoImpl(std::string_view text, LookupMode mode, const LookupContext& ctx) const;
-    std::vector<Candidate> RetrieveRecordsImpl(std::string_view key, LookupMode mode) const;
+    Candidates GetWordInfoImpl(std::string_view text HDTRANS_LIFETIMEBOUND, LookupMode mode, const LookupContext& ctx) const;
+    std::vector<Candidate> RetrieveRecordsImpl(std::string_view key HDTRANS_LIFETIMEBOUND, LookupMode mode) const;
     const Respelling* Place(std::string_view key) const;
     std::string_view Respelled(const Respelling* sp, const KeySet* persons, std::string_view key, const Record& r) const;
     void NameEntries(std::string_view text, LookupMode mode, const LookupContext& ctx,

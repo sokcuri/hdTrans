@@ -5,6 +5,8 @@
 #include <string_view>
 #include <vector>
 
+#include "core/text/lifetime.h"
+
 namespace hdTrans::output {
 
 // Span kinds of a piece.
@@ -57,7 +59,7 @@ std::vector<Pieces> Lines(const Pieces& text);
 Pieces JoinLines(const std::vector<Pieces>& lines);
 
 // The first piece when it is text, otherwise "".
-std::string_view Head(const Pieces& p);
+std::string_view Head(const Pieces& p HDTRANS_LIFETIMEBOUND);
 
 // Drops the ASCII spaces that end the last piece when it is text; the piece goes
 // when nothing is left of it.

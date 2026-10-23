@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "core/output/pieces.h"
+#include "core/text/lifetime.h"
 
 namespace hdTrans::output {
 
@@ -54,7 +55,7 @@ void FixSpacing(Pieces& pieces);
 
 // The target of a word span: its text when it ends in a syllable, otherwise the
 // syllable 가, 갈 or 각 of its SpanFinal. Views text or a static string.
-std::string_view StandIn(std::string_view text);
+std::string_view StandIn(std::string_view text HDTRANS_LIFETIMEBOUND);
 
 // The particle class ('v' vowel, 'c' consonant, 'l' ㄹ) of a word span: a jamo at its
 // end by its kind (ㄹ is 'l'), otherwise its ParticleClass, and 'c' for foreign text.

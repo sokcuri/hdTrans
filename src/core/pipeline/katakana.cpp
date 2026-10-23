@@ -405,7 +405,8 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
         // A word whole, in katakana or hiragana (タクサン たくさん, ネエサン ねえさん).
         if (!KeyTags(Utf8(kana), ctx, snap).empty() || !KeyTags(ToHiragana(Utf8(kana)), ctx, snap).empty()) return 0;
         // A name of the name layer only, or no word (タン of タンサン is a word).
-        for (const dict::Candidate& c : snap.RetrieveRecords(Utf8(name), dict::LookupMode::General)) {
+        const std::string key = Utf8(name);
+        for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
             if (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN")) return 0;
         }
         return name.size();
