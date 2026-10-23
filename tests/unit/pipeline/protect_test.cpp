@@ -224,6 +224,8 @@ HD_TEST(pipeline_kata_words) {
         {"スゴイね。", "すごいね。"},
         {"ウルサイッ！", "うるさいっ！"},  // a closing ッ is the sound of an adjective
         {"ウルサイッ", "うるさいっ"},
+        {"コワイッ、やめて", "こわいっ、やめて"},  // a pause ends it as well
+        {"ヒドイッだよ", "ひどいだよ"},            // before a copula the ッ goes
         {"アレッ？", "アレッ？"},
     };
     for (const auto& c : cases) {

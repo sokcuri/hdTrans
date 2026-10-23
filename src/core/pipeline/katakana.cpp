@@ -606,6 +606,8 @@ constexpr std::string_view kAdjectiveFinal[] = {"ぞ", "よ", "な", "ね", "わ
 constexpr std::string_view kVerbNext[] = {"ん", "の", "から", "けど", "し", "ぜ"};
 
 constexpr std::u32string_view kSentenceEnd = U"。！？!?…‥」』";
+// What may follow a word clipped by a closing ッ: a pause as well as an end (コワイッ、).
+constexpr std::u32string_view kClippedEnd = U"！？!?…‥。、」』）)～― 　";
 
 // The stem of 行く written in katakana with its conjugation in hiragana, as fiction writes
 // the verb for climax (イっちゃう, イッた, イクの, イきそう, イかせて): the katakana run and the
@@ -739,7 +741,7 @@ std::string_view ClippedWord(std::string_view run, std::string_view rest, const 
     constexpr std::string_view kTsu = "ッ";
     if (!run.ends_with(kTsu) || text::RuneCount(run) < 3) return {};
     const char32_t next = text::DecodeRune(rest).cp;
-    if (next != 0 && !RuneIn(next, U"！？!?…‥。、」』）)～― 　")) return {};
+    if (next != 0 && !RuneIn(next, kClippedEnd)) return {};
     const std::string_view bare = run.substr(0, run.size() - kTsu.size());
     if (ctx.named != nullptr && ctx.named->contains(std::string(run))) return {};
     for (const dict::Candidate& c : snap.RetrieveRecords(bare, dict::LookupMode::General)) {
@@ -820,7 +822,8 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             ok = PrefixIn(rest, kAdjectiveNext, follower) ||
                  ((word.ends_with("イ") || !kw->as.empty()) && PrefixIn(rest, kAdjectiveFinal, follower)) ||
                  (!kw->as.empty() && PrefixIn(rest, kVerbNext, follower));
-            ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd);
+            ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd) ||
+                 (tsu && RuneIn(next, kClippedEnd));
         } else {
             ok = PrefixIn(rest, kPronounNext, follower);
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));
@@ -831,10 +834,19 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             (ctx.named->find(std::string(word)) != ctx.named->end() || ctx.named->find(std::string(base)) != ctx.named->end())) {
             continue;
         }
-        const std::string hiragana = (kw->as.empty() ? ToHiragana(base) : std::string(kw->as)) + (tsu ? "っ" : "");
+        // The ッ stays as っ where it closes the word (ウルサイッ！ うるさいっ！) and goes before a
+        // particle or copula, which carries the word on (ダメッだよ だめだよ).
+        const std::string hiragana =
+            (kw->as.empty() ? ToHiragana(base) : std::string(kw->as)) + (tsu && follower.empty() ? "っ" : "");
         const bool kanji = !kw->as.empty() && !IsHiraganaRune(text::DecodeRune(kw->as).cp);
         if (!kanji &&
             JoinsWord(text.substr(0, start), hiragana + std::string(follower), rest.substr(follower.size()), ctx, snap)) {
+            // The word stays in katakana, and loses the ッ before its particle all the same.
+            if (tsu && !follower.empty()) {
+                b.append(text.substr(at, start - at));
+                b += base;
+                at = i;
+            }
             continue;
         }
         b.append(text.substr(at, start - at));
