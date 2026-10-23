@@ -45251,7 +45251,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 アイ・エー・エヌ・エー	IANA	N110			CT				jisjk:259964		
 アイ・エー・ビー	IAB	N110			CT				jisjk:259963		
 アイ・オー	아이오	N130	QID		BZ				jisjk:259977		
-アイ・オー・データ	아이오 데이타	N130	QID		BZ				jisjk:359156		
+アイ・オー・データ	아이오 데이터	N130	QID		BZ				jisjk:359156		
 アイ・シー・エフ	아이씨에프	N130	QID		BZ				jisjk:359157		
 アイ・シー・エム・ピー	ICMP	N110			CT				jisjk:259965		
 アイ・シー・キュー	ICQ	N110			CT				jisjk:259966		
@@ -54447,17 +54447,17 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 カレントクーポン	커런트 쿠폰	N110	VMo		GN				jisjk:158607		
 カレントグループ	커런트 그룹	N110	VGt		GN				jisjk:45620		
 カレントコンポーネント	커런트 콤파넌트	N110			GN				jisjk:45621		
-カレントサブディレクトリ	커런트 서브디렉토리	N110	UTt		GN				jisjk:45624		
-カレントサブディレクトリー	커런트 서브디렉토리	N110	UTt		GN				jisjk:45625		
+カレントサブディレクトリ	커런트 서브디렉터리	N110	UTt		GN				jisjk:45624		
+カレントサブディレクトリー	커런트 서브디렉터리	N110	UTt		GN				jisjk:45625		
 カレントサーバ	커런트 서버	N110	VHn		GN				jisjk:45622		
 カレントサーバー	커런트 서버	N110	VHn		GN				jisjk:45623		
 カレントシステム	커런트 시스템	N110	UAq		GN				jisjk:45626		
 カレントシステムビン	커런트 시스템 빈	N110	UTt		GN				jisjk:45627		
 カレントステータス	커런트 스테이터스	N110			GN				jisjk:45628		
 カレントチャネル	커런트채널	N110	UTt		GN				jisjk:45629		
-カレントディレクトリ	커런트 디렉토리	N110	UTt		GN				jisjk:45630		
-カレントディレクトリパス	커런트 디렉토리 패스	N110	UTt		GN				jisjk:45632		
-カレントディレクトリー	커런트 디렉토리	N110	UTt		GN				jisjk:45631		
+カレントディレクトリ	커런트 디렉터리	N110	UTt		GN				jisjk:45630		
+カレントディレクトリパス	커런트 디렉터리 패스	N110	UTt		GN				jisjk:45632		
+カレントディレクトリー	커런트 디렉터리	N110	UTt		GN				jisjk:45631		
 カレントトピックス	시사 문제	N110	VCm		GN				jisjk:158608		
 カレントトランザクション	커런트 트랜스액션	N110			GN				jisjk:45633		
 カレントトレーサ	커런트 트레이서	N110			GN				jisjk:45634		
@@ -54760,7 +54760,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 カード偽造	카드 위조	N110			BZ				jisjk:350279		
 カード内	카드내	N110			GN				jisjk:158384		
 カード再発行	카드 재발행	N110			BZ				jisjk:350282		
-カード型データベース	카드형 데이타베이스	N110			IT				jisjk:260322		
+カード型データベース	카드형 데이터베이스	N110			IT				jisjk:260322		
 カード式記帳法	카드식 기장법	N110			BZ				jisjk:350283		
 カード更新	카드 갱신	N110			BZ				jisjk:350281		
 カード決済	카드 결제	N110			BZ				jisjk:350280		
@@ -55457,9 +55457,9 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 キャッシャ	캐시어	N110			GN				jisjk:45964		
 キャッシャ ブック	현금출납장	N110	VSw		EC				jisjk:45965		
 キャッシャー	캐셔	N110	VPe		GN				jisjk:45966		
-キャッシュ	캐쉬	N110		Hd	BZ				jisjk:45967		
+キャッシュ	캐시	N110		Hd	BZ				jisjk:45967		
 キャッシュ アカウント	현금계산	N110			EC				jisjk:45968		
-キャッシュ カード	캐쉬카드	N110	VMoVMo		GN				jisjk:45969		
+キャッシュ カード	캐시카드	N110	VMoVMo		GN				jisjk:45969		
 キャッシュ ディスペンサー	현금자동 지불기	N110	VPe		EC				jisjk:45970		
 キャッシュ デポジター	현금자동 예금기	N110	VPe		EC				jisjk:45971		
 キャッシュ フロー	자금 유출입	N110			EC				jisjk:45972		
@@ -55469,16 +55469,16 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 キャッシュカード	현금카드	N110			GN				jisjk:112256		
 キャッシュディスペンサー	현금 자동 지급기	N110	VMoVBl		GN				jisjk:152135		
 キャッシュバック	개쉬 백	N110	VMo		GN				jisjk:158784		
-キャッシュフィーチャ	캐쉬 퓌쳐	N110			GN				jisjk:45974		
-キャッシュフラグ	캐쉬 플랙	N110			GN				jisjk:45975		
-キャッシュフロー	캐쉬 플로우(cash flow)	N110			BZ				jisjk:112258		
+キャッシュフィーチャ	캐시 퓌쳐	N110			GN				jisjk:45974		
+キャッシュフラグ	캐시 플랙	N110			GN				jisjk:45975		
+キャッシュフロー	캐시 플로우(cash flow)	N110			BZ				jisjk:112258		
 キャッシュフローフレーション	가격인상에 따른 인플레이션	N110	VMo		GN				jisjk:152136		
 キャッシュボックス	금고	N110	VPe		GN				jisjk:158785		
 キャッシュメモリ	캐시 기억 장치	N110			IT				jisjk:261147		
 キャッシュレスソサエティー	캐시리스 소사이어티	N110	VPl		GN				jisjk:152137		
-キャッシュ・アンド・キャリー	캐쉬 앤드 캐리(cash and carry)	N110			BZ				jisjk:352434		
-キャッシュ・カード	캐쉬카드	N110			BZ				jisjk:359536		
-キャッシュ・フロー	캐쉬 플로우	N110			BZ				jisjk:354205		
+キャッシュ・アンド・キャリー	캐시 앤드 캐리(cash and carry)	N110			BZ				jisjk:352434		
+キャッシュ・カード	캐시카드	N110			BZ				jisjk:359536		
+キャッシュ・フロー	캐시 플로우	N110			BZ				jisjk:354205		
 キャッシング	캐싱	N110			GN				jisjk:45976		
 キャッシング サービス	캐싱 서비스	N110			EC				jisjk:45977		
 キャッシングサービス	현금 서비스	N110	VMo		GN				jisjk:158786		
@@ -55995,7 +55995,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 キーフラグ	키 플랙	N110			GN				jisjk:45876		
 キープ	키프	N110	VRw	Hd	GN				jisjk:158734		
 キープアライブ	킵얼라이브	N110			GN				jisjk:45877		
-キープアライブメッセージ	킵얼라이브 메세지	N110	UTt		GN				jisjk:45878		
+キープアライブメッセージ	킵얼라이브 메시지	N110	UTt		GN				jisjk:45878		
 キープトラック	킵트랙	N110			GN				jisjk:45879		
 キープライト	우측통행	N110	UAq		GN				jisjk:45880		
 キープレフト	좌측통행	N110	UAq		GN				jisjk:45881		
@@ -58485,7 +58485,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 コストミニマム	cost minimum	N110			GN				jisjk:47003		
 コストリダクション	비용감축	N110			GN				jisjk:47004		
 コスト・インフレ	코스트 인플레	N110			BZ				jisjk:348336		
-コスト・プッシュ型インフレ	코스트 푸쉬형 인플레	N110			BZ				jisjk:354705		
+コスト・プッシュ型インフレ	코스트 푸시형 인플레	N110			BZ				jisjk:354705		
 コスト・プラス・フィー	코스트플러스피(cost plus fee)	N110			BZ				jisjk:362652		
 コスト削減	코스트 삭감	N110			BZ				jisjk:349342		
 コスト割れ	판매가 하락	N110			GN				jisjk:128494		
@@ -60140,7 +60140,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 サイバネート	인공두뇌화	N110	UTh		GN				jisjk:128909		
 サイバー	사이버	N110			GN				jisjk:128907		
 サイバーへいき	사이버 무기	N110			MI				jisjk:346233		
-サイバーキャッシュ	사이버 캐쉬	N110			BZ				jisjk:357156		
+サイバーキャッシュ	사이버 캐시	N110			BZ				jisjk:357156		
 サイバーコインサービス	사이버 코인 서비스	N110			BZ				jisjk:357181		
 サイバースター	사이버 스타	N110			GN				jisjk:128908		
 サイバースペース	사이버 스페이스	N110			BZ				jisjk:261696		
@@ -60521,7 +60521,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 サブタイトル	부제	N110			GN				jisjk:129001		
 サブタイプ	아류형	N110			GN				jisjk:129002		
 サブタスキング	써브태스킹	N110			GN				jisjk:47705		
-サブディレクトリ	서브 디렉토리	N110			GN				jisjk:47706		
+サブディレクトリ	서브 디렉터리	N110			GN				jisjk:47706		
 サブネット	서스네트워크	N110			IT				jisjk:261599		
 サブネットマスク	subnet mask	N110			GN				jisjk:47707		
 サブネット・マスク	서브넷 마스크	N110			IT				jisjk:261655		
@@ -61204,13 +61204,13 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 サーニズム	서니즘	N110			GN				jisjk:47492		
 サーニニズム	사니니즘	N110	SFl		GN				jisjk:128824		
 サーバ	서버	N110			GN				jisjk:13993		
-サーバコンソール	써버 콘솔	N110			GN				jisjk:47494		
-サーバディレクトリ	써버 디렉토리	N110			GN				jisjk:47495		
-サーバディレクトリー	써버 디렉토리	N110			GN				jisjk:47496		
+サーバコンソール	서버 콘솔	N110			GN				jisjk:47494		
+サーバディレクトリ	서버 디렉터리	N110			GN				jisjk:47495		
+サーバディレクトリー	서버 디렉터리	N110			GN				jisjk:47496		
 サーバマシン	서버머신	N110	VPe		GN				jisjk:47497		
-サーバメニューオプション	써버 메뉴 옵션	N110			GN				jisjk:47498		
+サーバメニューオプション	서버 메뉴 옵션	N110			GN				jisjk:47498		
 サーバユーザ	서버유저	N110	VHn		GN				jisjk:47499		
-サーバユーザー	써버 유저	N110	VHn		GN				jisjk:47500		
+サーバユーザー	서버 유저	N110	VHn		GN				jisjk:47500		
 サーバント	서번트	N110	VHn		GN				jisjk:47501		
 サーバー	서버	N110	VPeVElVCm		GN				jisjk:47493		
 サーバープロセス	서버 프로세스	N110			IT				jisjk:262251		
@@ -64284,15 +64284,15 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 スケアクロー	허수아비	N110	VPe		GN				jisjk:129797		
 スケイルズ	스케일즈	N130	QPN		GN				jisjk:369207		
 スケオ	스케오	N130	QPN		GN				jisjk:365956		
-スケジューラ	스케쥴러	N110			GN				jisjk:48861		
+スケジューラ	스케줄러	N110			GN				jisjk:48861		
 スケジューラー. タスク	scheduler task	N110			GN				jisjk:48862		
 スケジューリング	스케줄링	N110			GN				jisjk:129798		
-スケジューリング。 モデル	스케쥴링 모델	N110			GN				jisjk:48863		
-スケジューリングコントロール	스케쥴링 콘트롤	N110			GN				jisjk:48864		
-スケジューリングパラメータ	스케쥴링 파라미터	N110	VPe		GN				jisjk:48865		
-スケジューリングプログラム	스케쥴링 프로그램	N110			GN				jisjk:48866		
-スケジューリングメッセージ	스케쥴링 메세지	N110			GN				jisjk:48867		
-スケジューリングメニュー	스케쥴링 메뉴	N110			GN				jisjk:48868		
+スケジューリング。 モデル	스케줄링 모델	N110			GN				jisjk:48863		
+スケジューリングコントロール	스케줄링 콘트롤	N110			GN				jisjk:48864		
+スケジューリングパラメータ	스케줄링 파라미터	N110	VPe		GN				jisjk:48865		
+スケジューリングプログラム	스케줄링 프로그램	N110			GN				jisjk:48866		
+スケジューリングメッセージ	스케줄링 메시지	N110			GN				jisjk:48867		
+スケジューリングメニュー	스케줄링 메뉴	N110			GN				jisjk:48868		
 スケジュール	스케줄	N110			GN				jisjk:48869		
 スケソウダラ	명태	N110	VHn		GN				jisjk:48870		
 スケソダラ	명태	N110	QAA		GN				jisjk:48871		
@@ -64975,7 +64975,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ストリートウオーカー	매춘부	N110	VHn		GN				jisjk:129953		
 ストリートエンゼル	거리의 창녀	N110	VHn		GN				jisjk:129954		
 ストリートチルドレン	부랑아	N110	VHn		GN				jisjk:129955		
-ストリートバージョン	스트리트 버젼	N110	VPeVTp		GN				jisjk:129956		
+ストリートバージョン	스트리트 버전	N110	VPeVTp		GN				jisjk:129956		
 ストリートパフォーマンス	가두 행진	N110	VRwUAr		GN				jisjk:152262		
 ストリートピープル	히피족	N110	VHn		GN				jisjk:129957		
 ストリートファニチャー	가두 시설	N110			GN				jisjk:129958		
@@ -69309,7 +69309,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 テクノセブン	데크노세븐	N110	VPl		GN				jisjk:50811		
 テクノセントリズム	기술중심주의	N110			GN				jisjk:131162		
 テクノソニック	테크노소닉	N130	QIDVGt		GN				jisjk:50812		
-テクノトジデータベース	테크노로지데이타베이스	N110			GN				jisjk:50813		
+テクノトジデータベース	테크노로지데이터베이스	N110			GN				jisjk:50813		
 テクノナショナリズム	기술국가주의	N110			GN				jisjk:131163		
 テクノハウジング	테크노 하우징	N130	QIDVGt		GN				jisjk:50814		
 テクノバトル	테크노 전쟁	N110			GN				jisjk:131164		
@@ -69854,7 +69854,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ディスクエンベローブ	디스크 인벨로프	N110			GN				jisjk:51081		
 ディスクオリエンティッド	disk oriented	N110			GN				jisjk:51082		
 ディスクオンリ	디스크 온리	N110			GN				jisjk:51083		
-ディスクキャッシュ	디스크 캐쉬 프로그램	N110			IT				jisjk:261404		
+ディスクキャッシュ	디스크 캐시 프로그램	N110			IT				jisjk:261404		
 ディスククラッシュ	디스크 크래쉬	N110			GN				jisjk:51084		
 ディスクコプロセッサ	디스크 코프로셋서	N110			GN				jisjk:51085		
 ディスクコプロセッサボード	디스크 코프로셋서 보드	N110			GN				jisjk:51087		
@@ -69907,7 +69907,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ディスティネーション	데스티네이션	N110	VPl		GN				jisjk:51118		
 ディストネーション	디스티내이션	N110			GN				jisjk:51119		
 ディストネーションコード	디스티내이션 코드	N110			GN				jisjk:51120		
-ディストネーションディレクトリ	디스티내이션 디렉토리	N110			GN				jisjk:51121		
+ディストネーションディレクトリ	디스티내이션 디렉터리	N110			GN				jisjk:51121		
 ディストネーションドライブ	디스티내이션 드라이브	N110			GN				jisjk:51122		
 ディストネーションネッオワーク	디스티내이션 넷트워크	N110			GN				jisjk:51123		
 ディストネーションボリューム	디스티내이션 볼륨	N110			GN				jisjk:51124		
@@ -69940,7 +69940,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ディスプレイグラバ	디스플레이 그래버	N110			IT				jisjk:260900		
 ディスプレイケーブル	디스플레이 케이블	N110			IT				jisjk:260901		
 ディスプレイサブシステム	디스플레이 서브시스템	N110			IT				jisjk:260902		
-ディスプレイスケジューラ	디스플레이 스케쥴러	N110			GN				jisjk:51144		
+ディスプレイスケジューラ	디스플레이 스케줄러	N110			GN				jisjk:51144		
 ディスプレイドライバ	디스플레이 드라이버	N110			IT				jisjk:260903		
 ディスプレイメモリ	디스플레이 메모리	N110			IT				jisjk:260904		
 ディスプレイーエディター	디스플레이 에딧터	N110			GN				jisjk:51141		
@@ -70081,13 +70081,13 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ディレクター	디렉터	N110			GN				jisjk:51182		
 ディレクティブ	지시문	N110			IT				jisjk:260910		
 ディレクテッドバイ	감독	N110	VHn		GN				jisjk:131386		
-ディレクトリ	디렉토리	N110	VPl		GN				jisjk:51183		
-ディレクトリオーナ	디렉토리 오너	N110			GN				jisjk:51184		
-ディレクトリサービス	디렉토리 서비스	N110			IT				jisjk:260911		
-ディレクトリセキュリティ	디렉토리 시큐리티	N110			GN				jisjk:51185		
-ディレクトリセキュリティー	디렉토리 시큐리티	N110			GN				jisjk:51186		
-ディレクトリパスボックス	디렉토리 패스 박스	N110			GN				jisjk:51187		
-ディレクトリレベル	디렉토리 레벨	N110		Ct	GN				jisjk:51188		
+ディレクトリ	디렉터리	N110	VPl		GN				jisjk:51183		
+ディレクトリオーナ	디렉터리 오너	N110			GN				jisjk:51184		
+ディレクトリサービス	디렉터리 서비스	N110			IT				jisjk:260911		
+ディレクトリセキュリティ	디렉터리 시큐리티	N110			GN				jisjk:51185		
+ディレクトリセキュリティー	디렉터리 시큐리티	N110			GN				jisjk:51186		
+ディレクトリパスボックス	디렉터리 패스 박스	N110			GN				jisjk:51187		
+ディレクトリレベル	디렉터리 레벨	N110		Ct	GN				jisjk:51188		
 ディレクトリー	디렉터리	N110	VBkVSw		GN				jisjk:131387		
 ディレッタンティズム	딜레탕티즘	N110			GN				jisjk:131388		
 ディレッタント	딜레탕트	N110	VHn	Dd	GN				jisjk:131389		
@@ -70114,7 +70114,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ディーディーティー	DDT	N110			GN				jisjk:131294		
 ディートマー	디트머	N130	QPN		GN				jisjk:369576		
 ディービーエス	디비에스	N110	VPl		GN				jisjk:51031		
-ディーピー	데이타 프로세싱	N110			GN				jisjk:51032		
+ディーピー	데이터 프로세싱	N110			GN				jisjk:51032		
 ディーピーイー	DPE	N110			GN				jisjk:51033		
 ディープ	딥	N110	SFl	Dd	GN				jisjk:131295		
 ディープ。 ストール	팁 스톨	N110			GN				jisjk:51034		
@@ -70310,7 +70310,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 デジタルシミュレータ	디지털 시뮬레이터	N110			GN				jisjk:51253		
 デジタルスチルカメラ	디지털 카메라	N110	VPe		GN				jisjk:131440		
 デジタルツーカー	디지털 츠카	N130			BZ				jisjk:352927		
-デジタルデータ	디지털 데이타	N110			IT				jisjk:348107		
+デジタルデータ	디지털 데이터	N110			IT				jisjk:348107		
 デジタルビデオディスク	디지털 비디오 디스크	N110	VPe		GN				jisjk:363251		
 デジタルプロッタ	디지털 플롯터	N110			GN				jisjk:51254		
 デジタルプロッター	디지털 플롯터	N110			GN				jisjk:51255		
@@ -70576,7 +70576,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 デマンド。 レギュレータ	디맨드 레귤레이터	N110			GN				jisjk:51374		
 デマンドアサインサービス	디맨드 어사인 서비스	N110			GN				jisjk:51375		
 デマンドオーディット	디맨드 오딧	N110			GN				jisjk:51376		
-デマンドスケジューリングモデル	디맨드 스케쥴링 모델	N110			GN				jisjk:51377		
+デマンドスケジューリングモデル	디맨드 스케줄링 모델	N110			GN				jisjk:51377		
 デマンドバス	디맨드 버스	N110			GN				jisjk:51378		
 デマンドバス。 システム	디맨드 버스 시스템	N110			GN				jisjk:51379		
 デマンドバスシステム	디맨드 버스 시스템	N110			GN				jisjk:51380		
@@ -70797,13 +70797,13 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 データRAM	데이터 램	N110			IT				jisjk:260912		
 データ。 インタフェース	데이터 인터페이스	N110			GN				jisjk:50955		
 データ。 エクステントブロック	데이터 익스텐트블록	N110			GN				jisjk:50956		
-データ。 ストローブ	데이타 스트로브	N110			GN				jisjk:50957		
+データ。 ストローブ	데이터 스트로브	N110			GN				jisjk:50957		
 データ。 セットエクステンションｵ･ﾀﾌﾅﾍ ｼﾂ ﾀﾍｽｺﾅﾙｼﾇ	데이터 셋 익스텐션	N110			GN				jisjk:50958		
 データ。 ディクショナリ	데이터 딕쇼내리	N110			GN				jisjk:50959		
 データ。 ディクショナリー	데이터 딕쇼내리	N110			GN				jisjk:50960		
 データ。 プロセッサ	데이터 프로셋서	N110			GN				jisjk:50961		
 データのライブラリー	데이터의 라이브러리	N110			GN				jisjk:50962		
-データを取	데이타를 &FF@	M428			GN				jisjk:118925		
+データを取	데이터를 &FF@	M428			GN				jisjk:118925		
 データアクセスレジスタ	데이터 악세스 레지스터	N110			GN				jisjk:50963		
 データインタフェース	데이터 인터패이스	N110			GN				jisjk:50964		
 データエクステント。 ブロック	데이터 익스텐트 블록	N110			GN				jisjk:50965		
@@ -70834,8 +70834,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 データトランシーバ	데이터 트렌시버	N110			GN				jisjk:50986		
 データトランシーバー	데이터 트렌시버	N110			GN				jisjk:50987		
 データトランスポート	데이터 트렌스포트	N110			GN				jisjk:50988		
-データハイウェイ	데이타 하이웨이	N110	VPl		GN				jisjk:50989		
-データバス	데이타 버스	N110			IT				jisjk:260915		
+データハイウェイ	데이터 하이웨이	N110	VPl		GN				jisjk:50989		
+データバス	데이터 버스	N110			IT				jisjk:260915		
 データバスイネーブル	data bus enable	N110			GN				jisjk:50990		
 データバスステータス	데이터 버스 스태이터스	N110			GN				jisjk:50991		
 データバッファキー	데이터 버퍼 키	N110			GN				jisjk:50992		
@@ -70848,7 +70848,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 データフローマシーン	데이터 플로 머신	N110	VPe		GN				jisjk:131282		
 データプロセシング	정보 처리	N110			GN				jisjk:131283		
 データプロセッシング	데이터 처리	N110			GN				jisjk:131284		
-データベース	데이타베이스	N110			BZ				jisjk:50998		
+データベース	데이터베이스	N110			BZ				jisjk:50998		
 データベース。 キー	데이터베이스 키	N110			GN				jisjk:50999		
 データベース。 サーバ	데이터베이스 서버	N110			GN				jisjk:51000		
 データベースアドミニストレータ	DB 어드미니스트래이터	N110			GN				jisjk:51001		
@@ -70867,7 +70867,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 データリンクコントローラ	데이터 링크 콘트롤러	N110			GN				jisjk:51013		
 データリンクスイッチング	데이터 링크 스윗칭	N110			GN				jisjk:51014		
 データリンクハンドラ	데이터 링크 핸들러	N110			GN				jisjk:51015		
-データロガ	데이타 로거	N110			GN				jisjk:51017		
+データロガ	데이터 로거	N110			GN				jisjk:51017		
 データローダ	데이터로더	N110			GN				jisjk:51016		
 データ化	데이터화	N110		Hd	GN				jisjk:131277		
 データ取り込み	데이터 읽어들이기	N110			GN				jisjk:164288		
@@ -70891,7 +70891,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 デーリー	데일리	N110			GN				jisjk:51022		
 デーリーストア	데이리 스토어	N130	QIDVGt		GN				jisjk:51023		
 デー・トレーダー	데이 트레이더	N110	VHn		BZ				jisjk:347436		
-デ一タバンク	데이타뱅크	N110			GN				jisjk:51462		
+デ一タバンク	데이터뱅크	N110			GN				jisjk:51462		
 トアロード	토어 로드	N110	VPl		GN				jisjk:131562		
 トイ	토이	N110			GN				jisjk:260363		
 トイエ	토이에	N130	QPN		GN				jisjk:367072		
@@ -71302,7 +71302,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 トラバーユ	일	N110			GN				jisjk:51796		
 トラヒック	교통	N110			GN				jisjk:51797		
 トラヒックサービス	교통서비스	N110			GN				jisjk:51798		
-トラヒックデータ	트래픽 데이타	N110			GN				jisjk:51799		
+トラヒックデータ	트래픽 데이터	N110			GN				jisjk:51799		
 トラヒックパラメータ	트래픽 파라미터	N110			GN				jisjk:51800		
 トラヒックポリスマン	교통경찰	N110			GN				jisjk:51801		
 トラヒックレポート	트래픽 리포트	N110			GN				jisjk:51802		
@@ -73852,7 +73852,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ノンインバクト	넌인펙트	N110			GN				jisjk:52905		
 ノンインパクト	비충격식	N110			GN				jisjk:164073		
 ノンインパクトプリンター	비충격식 프린터	N110	VEl		GN				jisjk:152392		
-ノンキャッシュ費用	논캐쉬 비용	N110	VMoVMy		BZ				jisjk:352445		
+ノンキャッシュ費用	논캐시 비용	N110	VMoVMy		BZ				jisjk:352445		
 ノンキャリア	논캐리어	N110			BZ				jisjk:364462		
 ノンキャリア職員	비고시 출신 직원	N110			GN				jisjk:358069		
 ノンクリング	정전기 방지 가공	N110	VCp		GN				jisjk:132154		
@@ -75890,7 +75890,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 バージニア	버지니아	N130	QCT	Qq	GN				jisjk:53258		
 バージニア州	버지니아주	N110	VPl		GN				jisjk:132384		
 バージニティー	처녀성	N110	QHP		GN				jisjk:132385		
-バージョン	버젼	N110			GN				jisjk:53259		
+バージョン	버전	N110			GN				jisjk:53259		
 バージョンアップ	버전 업	N110			GN				jisjk:53260		
 バージョン管理システム	버전 콘트롤 시스템	N110			IT				jisjk:261028		
 バージン	virgin	N110	VHn		GN				jisjk:53261		
@@ -77534,7 +77534,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ビット	비트	N110			GN				jisjk:54221		
 ビット/インチ	bpi	N110			GN				jisjk:54222		
 ビットキャスト	비트 캐스트	N110			IT				jisjk:262280		
-ビットキャッシュ	비트 캐쉬	N110			IT				jisjk:262282		
+ビットキャッシュ	비트 캐시	N110			IT				jisjk:262282		
 ビットスタッフィング	비트 스터핑	N110			GN				jisjk:54223		
 ビットストリング	비트 스트링	N110			GN				jisjk:54225		
 ビットストリーム	비트 스트림	N110			GN				jisjk:54224		
@@ -78420,7 +78420,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ファイルサーバカバ	파일 서버 커버	N110			GN				jisjk:54547		
 ファイルサーバキー	file server key	N110			GN				jisjk:54548		
 ファイルサーバシャシ	file server chassis	N110			GN				jisjk:54549		
-ファイルサーバディレクトリー	파일 서버 디렉토리	N110			GN				jisjk:113959		
+ファイルサーバディレクトリー	파일 서버 디렉터리	N110			GN				jisjk:113959		
 ファイルサーバプロセッサ	file server processor	N110			GN				jisjk:54550		
 ファイルサーバプロセッサー	file server processor	N110			GN				jisjk:54551		
 ファイルサーバボード	file server board	N110			GN				jisjk:54552		
@@ -79526,7 +79526,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 フォンデゥー	fondue	N110			GN				jisjk:55088		
 フォンデュ	폰듀	N110	VFd		GN				jisjk:133415		
 フォント	폰트	N110			GN				jisjk:55089		
-フォントキャッシュ	폰트 캐쉬	N110			IT				jisjk:261730		
+フォントキャッシュ	폰트 캐시	N110			IT				jisjk:261730		
 フォントサイズ	font size	N110			GN				jisjk:55090		
 フォントジェネレータ	font generator	N110			GN				jisjk:55091		
 フォントライブラリー	font library	N110			GN				jisjk:55092		
@@ -81457,18 +81457,18 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 プチホテル	소규모 호텔	N110	VBl		GN				jisjk:133707		
 プチルアルコール	부틸알코올	N110			GN				jisjk:164015		
 プッシャー	푸시맨	N110	VHn		GN				jisjk:133709		
-プッシュ	푸쉬	N110			GN				jisjk:55893		
+プッシュ	푸시	N110			GN				jisjk:55893		
 プッシュカート	손수레	N110	VPe		GN				jisjk:133710		
-プッシュダウン	푸쉬 다운	N110			IT				jisjk:262371		
+プッシュダウン	푸시 다운	N110			IT				jisjk:262371		
 プッシュダウンオートマター	pushdown automata	N110			GN				jisjk:55894		
 プッシュダウンスタック	push down stack	N110			IT				jisjk:262171		
 プッシュバック	푸시백	N110	UMe		GN				jisjk:133711		
 プッシュプル	푸시풀	N110			GN				jisjk:163053		
-プッシュホン	푸쉬 버튼	N110			GN				jisjk:114404		
+プッシュホン	푸시 버튼	N110			GN				jisjk:114404		
 プッシュボタンウォー	푸시버튼 전쟁	N110	VTw		GN				jisjk:133712		
 プッシュロック	푸시 록	N110			GN				jisjk:133713		
-プッシュ型コンテンツ	푸쉬형 컨텐츠	N110			IT				jisjk:262170		
-プッシュ技術	푸쉬 기술	N110			IT				jisjk:262370		
+プッシュ型コンテンツ	푸시형 컨텐츠	N110			IT				jisjk:262170		
+プッシュ技術	푸시 기술	N110			IT				jisjk:262370		
 プッシング	프슁	N110			GN				jisjk:264004		
 プッシー	고양이	N110	VAm		GN				jisjk:133708		
 プッチーニ	Puccini	N110	VHn		GN				jisjk:55895		
@@ -82041,7 +82041,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 プログラムエラー	program error	N110			GN				jisjk:260585		
 プログラムサプライヤー	방송공급회사	N110			GN				jisjk:114218		
 プログラムジェネレータ	program generator	N110			IT				jisjk:262712		
-プログラムスケジューラ	프로그램 스케쥴러	N110			IT				jisjk:262714		
+プログラムスケジューラ	프로그램 스케줄러	N110			IT				jisjk:262714		
 プログラムスケジューラー	program scheduler	N110			GN				jisjk:56086		
 プログラムセレクションキー	program selection key	N110			GN				jisjk:56087		
 プログラムチェッカ	program checker	N110			GN				jisjk:56088		
@@ -83082,7 +83082,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ベータがたインターフェロン	바이러스 증식 억제 인자	N110	QHP		GN				jisjk:152528		
 ベータせん	베타선	N110			GN				jisjk:133998		
 ベータトロン	베타트론	N110	VEl		GN				jisjk:134000		
-ベータバージョン	베타 버젼	N110			IT				jisjk:262786		
+ベータバージョン	베타 버전	N110			IT				jisjk:262786		
 ベータ・サービス	베타 서비스	N110			BZ				jisjk:361070		
 ベータ係数	베타 계수	N110			BZ				jisjk:361069		
 ベータ値	베타치	N110			BZ				jisjk:361071		
@@ -83906,7 +83906,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ホームセクション	가정란	N110	VCmVBl		GN				jisjk:134192		
 ホームセンター	홈 센터	N110			BZ				jisjk:359957		
 ホームセンターカス	홈 센타카스	N130	QIDVGt		GN				jisjk:56468		
-ホームディレクトリ	홈 디렉토리	N110			IT				jisjk:262934		
+ホームディレクトリ	홈 디렉터리	N110			IT				jisjk:262934		
 ホームディレクトリー	home directory	N110			GN				jisjk:56469		
 ホームトレーディング	홈 트레이딩	N110			IT				jisjk:262935		
 ホームトレード	홈트레이드	N110			GN				jisjk:113393		
@@ -85012,7 +85012,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 マイナー	마이너	N110			GN				jisjk:57050		
 マイナーな	마이너스적인	N110			GN				jisjk:152564		
 マイナーチェンジ	일부 교환	N110	VMo		GN				jisjk:134569		
-マイナーバージョンアップ	마이너 버젼 업	N110			IT				jisjk:263037		
+マイナーバージョンアップ	마이너 버전 업	N110			IT				jisjk:263037		
 マイナーパワーサージ	minor power surge	N110			GN				jisjk:57051		
 マイナーパーティー	소수당	N110	VBl		GN				jisjk:134570		
 マイナーライター	무명 작가	N110	VHnUAq		GN				jisjk:134571		
@@ -85931,8 +85931,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 マラウイ	말라위	N130	QNNVPl		GN				jisjk:57428		
 マラカス	마라카스	N110	USoQMUVPe		GN				jisjk:134759		
 マラガ	말라가	N130			GN				jisjk:365169		
-マラケシュ	마라캐쉬	N130	QCT		GN				jisjk:348529		
-マラケシュ宣言	마라캐쉬 선언	N110			BZ				jisjk:348527		
+マラケシュ	마라캐시	N130	QCT		GN				jisjk:348529		
+マラケシュ宣言	마라캐시 선언	N110			BZ				jisjk:348527		
 マラゲーニア	말라게냐	N110	VHn		GN				jisjk:134760		
 マラゲーニャ	마르게니아	N110			GN				jisjk:57429		
 マラゴス	마라고스	N130	QPN		GN				jisjk:371979		
@@ -87315,7 +87315,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 メイリー	메이리	N130	QPN		GN				jisjk:369101		
 メイル	메일	N110			GN				jisjk:135010		
 メイルクローン	남성화된 여성	N110	VHn		GN				jisjk:135011		
-メイルサブディレクトリー	메일 서브디렉토리	N110			GN				jisjk:57939		
+メイルサブディレクトリー	메일 서브디렉터리	N110			GN				jisjk:57939		
 メイワ	메이와	N110	VPl		GN				jisjk:57940		
 メイワパックス	메이와팍스	N130	QIDVGt		GN				jisjk:57941		
 メイン	메인	N130	QCT	Qq	GN				jisjk:57942		
@@ -87348,8 +87348,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 メインテナンス。 マニュアル	메인테넌스 메뉴얼	N110			GN				jisjk:57964		
 メインテンス	메인트넌스	N110			IT				jisjk:263122		
 メインテーブル	메인 테이블	N110	VFdVPe		GN				jisjk:135015		
-メインディレクトリ	메인 디렉토리	N110			GN				jisjk:57965		
-メインディレクトリー	메인 디렉토리	N110			GN				jisjk:57966		
+メインディレクトリ	메인 디렉터리	N110			GN				jisjk:57965		
+メインディレクトリー	메인 디렉터리	N110			GN				jisjk:57966		
 メインドア	main door	N110			GN				jisjk:57967		
 メインハードウェア	메인 하드웨어	N110			GN				jisjk:57968		
 メインバルブ	메인 밸브	N110			GN				jisjk:57969		
@@ -87573,16 +87573,16 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 メッセンジャー	메신저	N110	VHnVGn		GN				jisjk:58033		
 メッセンジャーボーイ	배달계	N110			GN				jisjk:113804		
 メッセー	메신져	N110	VPeUTs	Hd	GN				jisjk:343448		
-メッセージ	메세지	N110	VSwUTsUHr		GN				jisjk:58029		
+メッセージ	메시지	N110	VSwUTsUHr		GN				jisjk:58029		
 メッセージID	message ID	N110			IT				jisjk:261460		
-メッセージ。 ハンドラー	메세지 핸들러	N110			GN				jisjk:58030		
+メッセージ。 ハンドラー	메시지 핸들러	N110			GN				jisjk:58030		
 メッセージエリア	시내 통화 지역	N110	VPl		GN				jisjk:135074		
 メッセージキュー	메시지 큐	N110			IT				jisjk:261461		
 メッセージソング	메시지송	N110			GN				jisjk:58031		
 メッセージタイプ別	메시지 타입별	N110			GN				jisjk:135075		
 メッセージダイジェスト関数	message digest function	N110			IT				jisjk:261462		
 メッセージドリブン	message driven	N110			IT				jisjk:261463		
-メッセージヘッダ	메세지헤더	N110			GN				jisjk:113824		
+メッセージヘッダ	메시지헤더	N110			GN				jisjk:113824		
 メッセージヘッダー	메시지 헤더	N110			GN				jisjk:113670		
 メッセージボックス	메시지 박스	N110			IT				jisjk:261464		
 メッセージループ	메시지 루프	N110			IT				jisjk:261465		
@@ -87617,7 +87617,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 メディアン	미디언	N110	UTs		GN				jisjk:135078		
 メディアンフィルター	메디안 필터	N110			GN				jisjk:58039		
 メディアート	메디아트	N130	QIDVGt		GN				jisjk:58036		
-メディア変換	미디어 컨버젼	I110			IT				jisjk:263141		
+メディア変換	미디어 컨버전	I110			IT				jisjk:263141		
 メディウム	매개	N110	UTs		GN				jisjk:135079		
 メディカル ソーシャルワーカ	메디컬 소셜 워커	N110			GN				jisjk:113806		
 メディカルエンジニアリング	의용공학	N110			GN				jisjk:113808		
@@ -87954,7 +87954,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 メールボーイ	메일보이	N110			GN				jisjk:113649		
 メールマガジン	메일 매거진	N110			IT				jisjk:202340		
 メールマージ	메일머지	N110			GN				jisjk:113648		
-メールメッセージ	메일 메세지	N110			GN				jisjk:57919		
+メールメッセージ	메일 메시지	N110			GN				jisjk:57919		
 メールリーダ	메일 리더	N110			IT				jisjk:263128		
 メール・ボム	Mail Bomb	N110			IT				jisjk:260009		
 メール友達	메일 친구	I110			IT				jisjk:263124		
@@ -89526,7 +89526,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ライトバック	write back	N110			IT				jisjk:263383		
 ライトバックキャッシュ	write-back cache	N110			IT				jisjk:261511		
 ライトバン	소형자동차	N110			GN				jisjk:113485		
-ライトビハインドキャッシュ	라이트 비하인드 캐쉬	N110			GN				jisjk:58713		
+ライトビハインドキャッシュ	라이트 비하인드 캐시	N110			GN				jisjk:58713		
 ライトフィリップス	라이트 필립스	N130	QPN		GN				jisjk:369308		
 ライトフリージング	반냉동	N110	UTsVFd		GN				jisjk:135415		
 ライトプロテクト	기록방지	N110			IT				jisjk:261512		
@@ -90026,9 +90026,9 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ラベリ	라베리	N130	QPN		GN				jisjk:371114		
 ラベル	라벨	N110	VMo		GN				jisjk:58876		
 ラベル	라벨	N110			IT				jisjk:263368		
-ラベルなしのデータセット	언에이블드 데이타 세트	N110			GN				jisjk:58877		
+ラベルなしのデータセット	언에이블드 데이터 세트	N110			GN				jisjk:58877		
 ラベルなしテープ	언에이블드 마그네틱 테이프	N110			GN				jisjk:58878		
-ラベルなしデータセット	언에이블드 데이타 세트	N110			GN				jisjk:58879		
+ラベルなしデータセット	언에이블드 데이터 세트	N110			GN				jisjk:58879		
 ラベルなしファイル	언에이블드  파일	N110			GN				jisjk:58880		
 ラベルフィールド	라벨 필드	N110			GN				jisjk:58881		
 ラベルプリンタ	Label Printer	N110			IT				jisjk:261520		
@@ -90847,7 +90847,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 リビア	리비아	N130	QNNVPl		GN				jisjk:59209		
 リビジョニスト	수정주의자	N110			GN				jisjk:59210		
 リビジョニズム	수정주의	N110			GN				jisjk:107431		
-リビジョン	리버젼	N110			IT				jisjk:263334		
+リビジョン	리비전	N110			IT				jisjk:263334		
 リビジョンバープレースメント	revision bar placement	N110			GN				jisjk:59211		
 リビドー	리비도	N110	UFl		GN				jisjk:59212		
 リビュ	리뷰	N130	QPN		GN				jisjk:371362		
@@ -91171,7 +91171,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 リレーション	릴레이션	N110			GN				jisjk:59322		
 リレーションシップ	릴레이션 쉽	N110			IT				jisjk:263314		
 リレーションズ	릴레이션즈(relations)	N110			GN				jisjk:103963		
-リレーションデータベース	관계형 데이타베이스	N110			IT				jisjk:261760		
+リレーションデータベース	관계형 데이터베이스	N110			IT				jisjk:261760		
 リレーホルダー	relay holder	N110			GN				jisjk:59323		
 リレーボックス	relay box	N110			GN				jisjk:59325		
 リレーボード	relay board	N110			GN				jisjk:59324		
@@ -91683,8 +91683,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 ルートセグメント	루트 세그먼트	N110			GN				jisjk:107933		
 ルートセット	루트셋트	N110			GN				jisjk:107679		
 ルートセールス	루트 세일즈	N110			GN				jisjk:107856		
-ルートディレクトリ	루트 디렉토리	N110			IT				jisjk:107932		
-ルートディレクトリー	루트 디렉토리	N110			GN				jisjk:107930		
+ルートディレクトリ	루트 디렉터리	N110			IT				jisjk:107932		
+ルートディレクトリー	루트 디렉터리	N110			GN				jisjk:107930		
 ルートパーティション	root partition	N110			IT				jisjk:261558		
 ルートファイルシステム	루트 파일 시스템	N110			GN				jisjk:107929		
 ルートフェーズ	루트 페이스	N110			GN				jisjk:107855		
@@ -131854,7 +131854,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 共明	쿄메이	N130	QCTVPl		GN				jisjk:289812		
 共有	공유	N110		Hd	GN				jisjk:16082		
 共有ディスク	공유 디스크	N110			IT				jisjk:261155		
-共有ディレクトリ	공유 디렉토리	N110			IT				jisjk:261156		
+共有ディレクトリ	공유 디렉터리	N110			IT				jisjk:261156		
 共有プリンタ	공유 프린터	N110			IT				jisjk:261157		
 共有レベルのアクセス権	공유 레벨의 접근 권한	N110			IT				jisjk:261159		
 共有レベルのセキュリティ	공유 레벨 보안	N110			IT				jisjk:261160		
@@ -132992,7 +132992,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 内郡	우치코리	N130	QCTVPl		GN				jisjk:275390		
 内部	내부	N110	VPl		GN				jisjk:18116		
 内部エネルギー	내부 에너지	N110			GN				jisjk:246874		
-内部キャッシュ	내장형 캐쉬	N110			IT				jisjk:261478		
+内部キャッシュ	내장형 캐시	N110			IT				jisjk:261478		
 内部クロック	내장 시계	N110			IT				jisjk:261479		
 内部光電効果	내부 광전 효과	N110			GN				jisjk:246868		
 内部創出資金	내부 창출 자금	N110	VMo		BZ				jisjk:353311		
@@ -135260,7 +135260,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 分散OS	디스트리뷰티드 OS	N110			IT				jisjk:262741		
 分散処理	디스트리뷰티드 프로세싱	N110			IT				jisjk:262745		
 分散化	분산화	N110		Hd	GN				jisjk:154773		
-分散型データベース	디스트리뷰티드 데이타베이스	N110			IT				jisjk:262743		
+分散型データベース	디스트리뷰티드 데이터베이스	N110			IT				jisjk:262743		
 分散小オフィス	분산 소오피스	N110	VBl		BZ				jisjk:360881		
 分散性	분산성	N110			GN				jisjk:163482		
 分散投資	분산 투자	N110	VMo	Hd	BZ				jisjk:354703		
@@ -166083,7 +166083,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 変成	변성	N110		Hd	GN				jisjk:23510		
 変成岩	변성암	I110	VSn		GN				jisjk:70097		
 変換	변환	N110		Hd	GN				jisjk:23545		
-変換コネクタ	컨버젼 커넥터	I110	VPe		IT				jisjk:262815		
+変換コネクタ	컨버전 커넥터	I110	VPe		IT				jisjk:262815		
 変換係数	변환계수	N110			BZ				jisjk:361091		
 変換効率	변환 효율	N110			BZ				jisjk:347908		
 変換器	변환기	N110	VPe		GN				jisjk:162306		
@@ -196755,7 +196755,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 帝位	제위	N110			GN				jisjk:33379		
 帝国	제국	N110	QNN		GN				jisjk:33376		
 帝国チヤック	데이코쿠치약크	I110	VGt		GN				jisjk:83335		
-帝国データバンク	테이코쿠 데이타 뱅크	I130	VGt		PN				jisjk:83336		
+帝国データバンク	테이코쿠 데이터 뱅크	I130	VGt		PN				jisjk:83336		
 帝国ヒューム管販売	테이코쿠 흄관판매	I130	VGt		PN				jisjk:83337		
 帝国ヒユーム管	데이코쿠흄관	I110	VGt		GN				jisjk:83338		
 帝国ピストンリング	테이코쿠 피스토닝	I130	VGt		PN				jisjk:83339		
@@ -224630,7 +224630,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 日本電気システム建設	일본 전기시스템 건설	I130	VGt		PN				jisjk:81383		
 日本電気ソフトウエア	일본 전기소프트웨어	I130	VGt		PN				jisjk:81384		
 日本電気テレコムシステム	일본 전기텔레콤 시스템	I130	VGt		PN				jisjk:81385		
-日本電気データ機器	일본 전기데이타 기기	I130	VGt		PN				jisjk:81386		
+日本電気データ機器	일본 전기데이터 기기	I130	VGt		PN				jisjk:81386		
 日本電気ビジネスシステム	일본 전기비즈니스 시스템	I130	VGt		PN				jisjk:81387		
 日本電気フィールドサービス	일본 전기필드 서비스	I130	VGt		PN				jisjk:81388		
 日本電気ホームエレクトロクス	니혼덴키홈에렉트론	I110	VPl		GN				jisjk:81389		
@@ -236333,7 +236333,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 東京ツナ販売	토쿄 튜나 판매	I130	QIDVGt		GN				jisjk:66433		
 東京テアトル	토쿄테아트르	I130	QIDVGt		GN				jisjk:66434		
 東京テレポートセンター	토오쿄오 텔레포트 센터	I130	QIDVGt		GN				jisjk:66435		
-東京テレメッセージ	토쿄 텔레 메세지	I130	QIDVGt		GN				jisjk:66436		
+東京テレメッセージ	토쿄 텔레 메시지	I130	QIDVGt		GN				jisjk:66436		
 東京ディズニーランド	도쿄 디즈니랜드	N110	VRwVPl		GN				jisjk:245351		
 東京デリカ	토쿄 데리카	I130	QIDVGt		GN				jisjk:66438		
 東京デーリー	토쿄 데리	I130	QIDVGt		GN				jisjk:66437		
@@ -256208,7 +256208,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 沖の田	오키노타	N130	QCTVPl		GN				jisjk:279420		
 沖の町	오키노마치	N130	QCTVPl		GN				jisjk:279436		
 沖ガラス	오키가라스	I110	VGt		GN				jisjk:86739		
-沖データシステムズ	오키 데이타시스템즈	I130	VGt		PN				jisjk:86740		
+沖データシステムズ	오키 데이터시스템즈	I130	VGt		PN				jisjk:86740		
 沖ノ内	오키노우치	N130	QCTVPl		GN				jisjk:279412		
 沖ノ山	오키노센	I110	QCT		GN				jisjk:86741		
 沖ノ島	오키노시마	N110	VPl		GN				jisjk:212667		
@@ -300364,7 +300364,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 網地島	아지시마	I110	QCT		GN				jisjk:68442		
 網地浜	아지하마	N130	QCTVPl		GN				jisjk:269964		
 網地草	아미지구사	N110	VPt		GN				jisjk:227618		
-網型データベース	망형 데이타베이스	K110			GN				jisjk:262046		
+網型データベース	망형 데이터베이스	K110			GN				jisjk:262046		
 網場町	아바마치	N130	QCTVPl		GN				jisjk:270357		
 網子	어부	N110	VHnUAq		GN				jisjk:124804		
 網屋	츠나야	N130	QPN		GN				jisjk:99427		
@@ -347881,7 +347881,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 関西テック	칸사이 텍	I130	QIDVGt		GN				jisjk:62199		
 関西テレビ	간사이 테레비	N110	UArVBl		GN				jisjk:229888		
 関西テレビ放送	칸사이 텔레비방송	I130	QIDVGt		GN				jisjk:62200		
-関西テレメッセージ	칸사이 텔레메세지	I130	QIDVGt		GN				jisjk:62201		
+関西テレメッセージ	칸사이 텔레메시지	I130	QIDVGt		GN				jisjk:62201		
 関西ナショナル電子部品	칸사이 내셔널전자부품	I110			GN				jisjk:109813		
 関西パナソニック自動車機器	칸사이 파나소닉 자동차기기	I110			GN				jisjk:109854		
 関西ビレットセンター	칸사이 비렛트센타	I130	QIDVGt		GN				jisjk:62202		
@@ -349908,8 +349908,8 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 階名	계명	N110	USoQMU		GN				jisjk:167180		
 階層	계층	N110	VPlUQf		GN				jisjk:15632		
 階層メニュー	계층 메뉴	N110			IT				jisjk:260332		
-階層化ディレクトリ	계층화 디렉토리	N110			IT				jisjk:260331		
-階層型ディレクトリ	계층형 디렉토리	N110			IT				jisjk:260334		
+階層化ディレクトリ	계층화 디렉터리	N110			IT				jisjk:260331		
+階層型ディレクトリ	계층형 디렉터리	N110			IT				jisjk:260334		
 階層短縮化の原理	계층단축화의원리	N110	UMn		GN				jisjk:206761		
 階建	층	N110			GN				jisjk:15625		
 階建て	층건물	I110	VBl	Ct	GN				jisjk:61251		

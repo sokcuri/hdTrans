@@ -6,3 +6,9 @@ sound:name-noun	ガチャを回した。	가챠를 돌렸다.	fix	sound
 sound:name-noun	口調のトーンをぐっと落とした。	어조의 톤을 꾹 떨어뜨렸다.	fix	sound
 sound:name-noun	彼はニコニコ笑った。	그는 싱글벙글 웃었다.	keep	sound
 sound:name-noun	ガチャリと鍵を回した。	철컥 열쇠를 돌렸다.	keep	sound
+lexical:loanword-spelling	リモートにプッシュした。	리모트에 푸시했다.	fix	defaults
+lexical:loanword-spelling	新しいバージョンをリリースしました。	새로운 버전을 릴리스했습니다.	fix	defaults
+lexical:loanword-spelling	キャッシュを削除してください。	캐시를 삭제해 주세요.	fix	defaults
+lexical:loanword-spelling	ディレクトリを移動する。	디렉터리를 이동한다.	fix	defaults
+lexical:loanword-spelling	データベースを調べた。	데이터베이스를 조사했다.	fix	defaults
+lexical:loanword-spelling	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
