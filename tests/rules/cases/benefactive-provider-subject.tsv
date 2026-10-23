@@ -4,3 +4,7 @@ rewrite:benefactive-provider	味方に壁役をやってもらって敵を受け
 rewrite:benefactive-provider	友達にノートを見せてもらった。	친구가 노트를 보여 주었다.	fix	rewrites
 rewrite:benefactive-provider	王宮で働く方々に相談をさせてもらった。	왕궁에서 일하는 분들에게 상담을 시켜 주었다.	keep	rewrites
 rewrite:benefactive-provider	お金をもらう。	돈을 받는다.	keep	rewrites
+rewrite:benefactive-provider	俺にノートを見せてもらった。	내가 노트를 보여 주었다.	fix	rewrites
+rewrite:benefactive-provider	誰にノートを見せてもらった？	누가 노트를 보여 줬어?	fix	rewrites
+rewrite:benefactive-provider	先生にはノートを見せてもらった。	선생님은 노트를 보여 주었다.	fix	rewrites
+rewrite:benefactive-provider	先生には本を見せた。	선생님에게는 책을 보였다.	keep	rewrites

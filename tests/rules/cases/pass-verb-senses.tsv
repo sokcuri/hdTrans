@@ -18,3 +18,6 @@ rewrite:go-not-say	公園にいく	공원에 간다	keep	rewrites
 rewrite:go-not-say	駅までいく	역까지 간다	keep	rewrites
 rewrite:go-not-say	異世界にいった。	이세계에 갔다.	keep	rewrites
 rewrite:go-not-say	正直にいって	정직하게 말해	keep	rewrites
+rewrite:go-not-say	町にいえば	마을에 가면	fix	rewrites
+rewrite:go-not-say	町にいうと	마을에 간다고	fix	rewrites
+rewrite:go-not-say	彼にいうと	그에게 말한다고	keep	rewrites

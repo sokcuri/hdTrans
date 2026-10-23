@@ -5,3 +5,14 @@ rewrite:subject-pronoun	犯人は俺じゃない。	범인은 내가 아니다.	
 rewrite:subject-pronoun	君の知らない話をしよう。	네가 모르는 이야기를 하자.	keep	rewrites
 rewrite:short-possessive	私の本を返して。	내 책을 돌려줘.	keep	rewrites
 rewrite:short-possessive	俺の笑顔が好きだ。	내 웃는 얼굴을 좋아한다.	keep	rewrites
+rewrite:subject-pronoun	俺が好きなのは君だ。	나를 좋아하는 것은 너다.	fix	rewrites
+rewrite:subject-pronoun	私が好きなのは猫だ。	내가 좋아하는 것은 고양이다.	keep	rewrites
+rewrite:subject-pronoun	彼じゃない。	그가 아니다.	keep	rewrites
+rewrite:subject-pronoun	少女の手を取る。	소녀의 손을 잡는다.	fix	rewrites
+rewrite:subject-pronoun	少女の手を見る。	소녀의 손을 본다.	keep	rewrites
+rewrite:subject-pronoun	お前が行け。	네가 가라.	fix	rewrites
+rewrite:subject-pronoun	君の好きな歌	네가 좋아하는 노래	fix	rewrites
+rewrite:subject-pronoun	彼の好きな歌	그가 좋아하는 노래	keep	rewrites
+rewrite:subject-no	人の少ない町	사람이 적은 마을	fix	rewrites
+rewrite:subject-no	気持ちのよい朝	기분이 좋은 아침	fix	rewrites
+rewrite:subject-no	人の話を聞く。	사람의 이야기를 듣는다.	keep	rewrites

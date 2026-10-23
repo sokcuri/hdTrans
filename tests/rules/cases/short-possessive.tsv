@@ -8,3 +8,4 @@ rewrite:short-possessive	俺の、大事な剣。	나의, 소중한 검.	keep	re
 rewrite:short-possessive	それは本当に君の？	그것은 정말 너의?	keep	rewrites
 rewrite:short-possessive	私の――宝物。	나의――보물.	keep	rewrites
 rewrite:short-possessive	彼の本を借りた。	그의 책을 빌렸다.	keep	rewrites
+rewrite:short-possessive	わたくしの、名前です。	저의, 이름입니다.	keep	rewrites
