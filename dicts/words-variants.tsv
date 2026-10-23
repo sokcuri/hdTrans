@@ -196,7 +196,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ろうけつ染め	납결	N110			GN							jisjk:267919
 ワックワク	두근두근&AV@	M429			GN							jisjk:265847
 ワックワク	두근두근	N110			GN				llm			w:10613
-アーカイヴ	어카이브(archive)	N110			IT							jisjk:259795
+アーカイヴ	어카이브	N110			IT							jisjk:259795
 アーカイヴ	아카이브	N110			GN				xxx llm	1		w:1931
 アーガル	아가일	N110			GN							w:1934
 アキテクチャ	아키텍쳐	N110			IT							jisjk:41911
@@ -266,7 +266,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アクティヴ	액티브	N110			GN							jisjk:2292
 アクチベーション	액티베이션	N110			IT							jisjk:260212
 アグリメント	어그리먼트	N110	VSw		GN							jisjk:42392
-アグロビジネス	애그리 비즈니스 (agribusiness)	N110	QID		BZ							jisjk:42396
+アグロビジネス	애그리 비즈니스	N110	QID		BZ							jisjk:42396
 アグレッシヴ	적극적	N110			GN							jisjk:112639
 アグレッシヴ	공격적%D4@	G8U0			GN							jisjk:147319
 アグレシブ	적극적	N110			GN							jisjk:112639
@@ -398,7 +398,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 イニシャティブ	주도권	N110			GN							jisjk:113080
 イニシャチブ	주도권	N110			GN							jisjk:113080
 イニシアライズ	이니셜라이즈	N110			GN							jisjk:113079
-イノベイション	이노베이션(innovation)	N110			GN							jisjk:43450
+イノベイション	이노베이션	N110			GN							jisjk:43450
 イマジネイション	상상력	N110			GN							jisjk:43465
 イマジネイション	상상	N110			GN							jisjk:43466
 イミグレイション	이주	N110			GN							jisjk:157248
@@ -470,7 +470,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 インデキス	인덱스	N110			GN							jisjk:43709
 インドア・スポーツ	실내 스포츠	N110	VRw		GN							jisjk:157425
 インナー・スペース	대기권내	N110	VSsVPl		GN							jisjk:157442
-インパクト・ローン	임팩트 론(impact loan)	N110	VMo		BZ							jisjk:157447
+インパクト・ローン	임팩트 론	N110	VMo		BZ							jisjk:157447
 インヘルノ	지옥	N110	UClVPl		GN							jisjk:157457
 インヘルノ	인페르노	N110			GN				xxx llm	1		w:2196
 インフォーマル・ドレス	약식 예복	N110	VCp		GN							jisjk:157462
@@ -484,7 +484,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 インベイダー	침략자	N110	VHn		GN							jisjk:157483
 インベントリー・サイクル	재고순환	N110			EC							jisjk:43768
 インベントリー・リカバリー	재고에 의한 경기 회복	N110			EC							jisjk:43769
-インヴォイス	인보이스(invoice)	N110	VSwVMo		BZ							jisjk:43773
+インヴォイス	인보이스	N110	VSwVMo		BZ							jisjk:43773
 インポッシブル	불가능	N110			GN							jisjk:157489
 インヴェンション	발명	N110			GN							jisjk:157485
 ウーマン・リブ	우먼리브	N110			GN							jisjk:43785
@@ -651,7 +651,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エア・ポット	보온병	N110	VPe		GN							jisjk:157734
 エログラム	aerogram	N110			GN							jisjk:44071
 エーログラム	aerogram	N110			GN							jisjk:44071
-エアロダイナミクス	에어로다이나믹스(aerodynamics)	N110	UTh		BZ							jisjk:157741
+エアロダイナミクス	에어로다이나믹스	N110	UTh		BZ							jisjk:157741
 エーリアン	에이리언	N110			GN							jisjk:98779
 エクサイティング	익사이팅	N110		Hh	GN							jisjk:44097
 エキシビジョン	전람회	N110			GN							jisjk:98786
@@ -705,7 +705,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エメリー・ボード	에머리 보드	N110			GN							jisjk:157944
 エリヤ	에리어	N110	VPl		GN							jisjk:44496
 エアリア	에리어	N110	VPl		GN							jisjk:44496
-エリアマーケティング	에리어 마케팅(area marketing)	N110			BZ							jisjk:348934
+エリアマーケティング	에리어 마케팅	N110			BZ							jisjk:348934
 エル・ドラド	엘도라도	N110	VPl		GN							jisjk:157979
 エルニニョ	엘리뇨	N110	VFr		GN							jisjk:44519
 エレクトロニック・コテージ	재택근무식 주택	N110	VBl		GN							jisjk:152075
@@ -748,7 +748,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オーバチュア	서곡	N110	USoQMU		GN							jisjk:158129
 オーバー・ドクター	박사 실업자	N110	VHn		GN							jisjk:158134
 オーバー・ドライブ	오버드라이브	N110	VPe		GN							jisjk:158135
-オーバー・パー	오버 파(over par)	N110	VRw		BZ							jisjk:158138
+オーバー・パー	오버 파	N110	VRw		BZ							jisjk:158138
 オーバー・フェンス	홈런	N110	VRw		GN							jisjk:158140
 オーバーヘッド・プロジェクター	투영 장치	N110	VPe		GN							jisjk:152094
 オーバコート	오버코트	N110			GN							jisjk:44777
@@ -1018,7 +1018,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 クラッシク	클래식	N110			GN							jisjk:46328
 クラッシク	클래식	N110	USo		GN							jisjk:46329
 クラシック・カー	클래식 카	N110			GN							jisjk:268401
-クラス・アクション	클래스 액션(class action)	N110	ULw		BZ							jisjk:158997
+クラス・アクション	클래스 액션	N110	ULw		BZ							jisjk:158997
 クラスメイト	클래스메이트	N110	VHn		GN							jisjk:159002
 クラス・メイト	클래스메이트	N110	VHn		GN							jisjk:159002
 クラス・メート	클래스메이트	N110	VHn		GN							jisjk:159002
@@ -1110,7 +1110,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ケーパビリティー	수용력	N110			GN							jisjk:104314
 ケーパビリティー	능력	N110			GN				xxx llm	1		w:3865
 ケアレス・ミス	부주의한 실수	N110			GN							jisjk:128306
-ゲートアレー	게이트 어레이(gate array)	N110			BZ							jisjk:260492
+ゲートアレー	게이트 어레이	N110			BZ							jisjk:260492
 ゲートウエイ	게이트웨이	N110	VBl		IT							jisjk:128334
 ゲーブル・ウインドー	합각창	N110	VBl		GN							jisjk:128338
 ゲーム・カウント	게임 카운트	N110	VRw		GN							jisjk:128343
@@ -1248,7 +1248,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ゴルフ・ウェア	골프 웨어	N110	VCpVRw		GN							jisjk:128807
 ゴルフ・ウエア	골프 웨어	N110	VCpVRw		GN							jisjk:128807
 ゴルフ・リンク	골프 코스	N110	VPlVRw		GN							jisjk:128809
-サーキットブレーカー	서킷브레이커(circuit breaker)	N110	 		BZ							jisjk:360231
+サーキットブレーカー	서킷브레이커	N110	 		BZ							jisjk:360231
 サードニクス	사도닉스	N110			GN							jisjk:47490
 サーヴァント	서번트	N110	VHn		GN							jisjk:47501
 サービス・エース	서비스에이스	N110			GN							jisjk:111866
@@ -1260,7 +1260,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 サベイヤー	써베이어	N110			GN							jisjk:47520
 サーベーヤー	써베이어	N110			GN							jisjk:47520
 サベーヤー	써베이어	N110			GN							jisjk:47520
-サーベランス	서베일런스(surveillance)	N110	UQfUAq		BZ							jisjk:128842
+サーベランス	서베일런스	N110	UQfUAq		BZ							jisjk:128842
 サーマル・プリンター	thermal printer	N110			GN							jisjk:47545
 サーマル・プリンタ	thermal printer	N110			GN							jisjk:47545
 サイド・アウト	사이드 아웃	N110	VRw		GN							jisjk:128891
@@ -1480,7 +1480,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ジャグル	저글링	N110			GN				xxx llm	1		w:4895
 ジャパニーズ・イングリッシュ	일본식 영어	N110	UTs		GN							jisjk:152240
 ジャパン・カップ	Japan Cup	N110	VRwVBl		GN							jisjk:129583
-ジャパンバッシング	재팬 배싱(Japan bashing)	N110			BZ							jisjk:357752
+ジャパンバッシング	재팬 배싱	N110			BZ							jisjk:357752
 ジャム・セッション	잼세션	N110	USoQMU		GN							jisjk:129593
 ジャングル・ジム	정글짐	N110	VPl		GN							jisjk:129596
 ジャンバースカート	점퍼스커트	N110	VCp		GN							jisjk:48496
@@ -1757,7 +1757,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テクノ・カット	테크노 커트	N110	VAc		GN							jisjk:131150
 テクノロジー・アセスメント	technology assessment	N110			GN							jisjk:50825
 テクノロジー・トランスファー	기술 이전	N110	VMo		GN							jisjk:152319
-テストマーケティング	테스트 마케팅(test marketing)	N110			BZ							jisjk:360756
+テストマーケティング	테스트 마케팅	N110			BZ							jisjk:360756
 テトラポット	tetrapod	N110			GN							jisjk:50864
 テニス・エルボー	테니스 엘보	N110	QHP		GN							jisjk:131189
 テレカンファレンス	영상 회의	N110			GN							jisjk:131216
@@ -1908,7 +1908,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 トラヴェリング	트래블링	N110	VRw		GN							jisjk:131616
 トラヴェル	여행	N110			GN							jisjk:51815
 トラベル・エージェンシー	여행사 대리점	N110	VBl		GN							jisjk:131617
-トランク・ルーム	트렁크룸(trunk room)	N110	VBl		BZ							jisjk:131623
+トランク・ルーム	트렁크룸	N110	VBl		BZ							jisjk:131623
 トランザクショナル・アナリシス	교류 분석	N110			GN							jisjk:152348
 トラムプ	트럼프	N110	VRw		GN							jisjk:51849
 トリック・ワーク	특수 촬영 기술	N110	UAr		GN							jisjk:131654
@@ -2010,7 +2010,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ナショナル・プレステージ	국위	N110			GN							jisjk:131846
 ナショナル・プロダクト	국민 생산	N110	VMo		GN							jisjk:131847
 ナショナル・ホリデー	국경일	N110	UMe		GN							jisjk:131848
-ナショナルミニマム	내셔널미니멈(national minimum)	N110			BZ							jisjk:355116
+ナショナルミニマム	내셔널미니멈	N110			BZ							jisjk:355116
 ナチュラル・サイエンス	자연 과학	N110	UTh		GN							jisjk:131857
 ナチュラル・セレクション	자연 도태	N110	UTh		GN							jisjk:131858
 ナチュラル・ターン	우회전	N110			GN							jisjk:131859
@@ -2021,9 +2021,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ナリシング・クリーム	영양 크림	N110	VAc		GN							jisjk:131888
 ナルシズム	나르시시즘	N110			GN							jisjk:52330
 ナロー・シルエット	내로 실루엣	N110	VCp		GN							jisjk:131898
-ナンバーディスプレー	number display(NTTservice)	N110			IT							jisjk:261481
-ナンバー・ディスプレー	number display(NTTservice)	N110			IT							jisjk:261481
-ナンバー・ディスプレイ	number display(NTTservice)	N110			IT							jisjk:261481
+ナンバーディスプレー	넘버 디스플레이	N110			IT							jisjk:261481
+ナンバー・ディスプレー	넘버 디스플레이	N110			IT							jisjk:261481
+ナンバー・ディスプレイ	넘버 디스플레이	N110			IT							jisjk:261481
 ナンバー・プレート	등록번호표	N110			GN							jisjk:103330
 ナンバー・プレート	번호판	N110			GN				xxx llm	1		w:6673
 ナンバー・ワン	넘버원	N110			GN							jisjk:131902
@@ -2044,7 +2044,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ニュー・メディア・コミュニティー	뉴 미디어 커뮤니티	N110	VPl		GN							jisjk:152377
 ニュー・ライト	신보수주의	N110			GN							jisjk:131990
 ニューラル・ネット	신경망	N110			GN							jisjk:163027
-ニューラル・ネットワーク	뉴럴 네트워크(neural network)	N110			BZ							jisjk:52619
+ニューラル・ネットワーク	뉴럴 네트워크	N110			BZ							jisjk:52619
 ニュー・ルック	뉴 룩	N110	VCp		GN							jisjk:131991
 ニュー・レフト	신좌익	N110			GN							jisjk:131992
 ニュー・ローラー	롤러 스케이트	N110	VRwVPe		GN							jisjk:131993
@@ -2151,7 +2151,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハイ・パワー	하이파워	N110			GN							jisjk:53035
 ハイ・ファッション	최첨단 패션	N110	VCpVAc		GN							jisjk:132266
 ハイフォネーション	하이픈 자동 삽입	N110			IT							jisjk:261053
-ハイブリット	하이브리드(hybrid)	N110			BZ							jisjk:53043
+ハイブリット	하이브리드	N110			BZ							jisjk:53043
 ハイブリッド・コンピューター	혼성 컴퓨터	N110			GN							jisjk:152404
 ハイ・ミス	노처녀	N110	VHn		GN							jisjk:132276
 ハイ・レベル	하이레벨	N110	VPl		GN							jisjk:53054
@@ -2193,7 +2193,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バースデイ	생일	N110	UMe		GN							jisjk:53268
 バーチカル・マーケティング	버티컬 마케팅	N110			GN							jisjk:53280
 バーチュアル	버추얼	N110			IT							jisjk:132395
-バーチュアル	버추얼(virtual)	N110			BZ							jisjk:362475
+バーチュアル	버추얼	N110			BZ							jisjk:362475
 ヴァーチャルリアリティ	가상 현실	N110			IT							jisjk:261032
 ヴァーチャルリアリティー	가상 현실	N110			IT							jisjk:261032
 ヴァーチャル・リアリティ	가상 현실	N110			IT							jisjk:261032
@@ -2244,7 +2244,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バック・ネット	백 네트	N110	VRw		GN							jisjk:132572
 バック・ミュージック	백 뮤직	N110	USo		GN							jisjk:53463
 バッヂ	배지	N110	VAc		GN							jisjk:53470
-バッジシステム	배지시스템(BADGE system)	N110			BZ							jisjk:362514
+バッジシステム	배지시스템	N110			BZ							jisjk:362514
 バッティング・ケージ	배팅 케이지	N110	VBlVRw		GN							jisjk:132592
 バッファー・ストック	버퍼 스톡	N110			GN							jisjk:53484
 バトン・ガール	밴드걸(지휘)	N110	USoQMUVHn		GN							jisjk:132605
@@ -2873,7 +2873,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ボサノーヴァ	보사노바	N110	QMU		GN							w:8922
 ボサ・ノーヴァ	보사노바	N110	QMU		GN							w:8922
 ボックス・カーフ	박스 카프	N110			GN							jisjk:56712
-ボックス・ストア	박스스토어(box store)	N110			BZ							jisjk:347542
+ボックス・ストア	박스스토어	N110			BZ							jisjk:347542
 バディー	보디	N110	VBp		GN							jisjk:56718
 バディ	보디	N110	VBp		GN							jisjk:56718
 ボディ・ライン	바디 라인	N110			GN							jisjk:134385
@@ -3184,7 +3184,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユニット・ドレス	단위복	N110			GN							jisjk:113535
 ユニット・ドレス	유닛 드레스	N110			GN				xxx llm	1		w:9877
 ユニット・プライシング	단위 가격 표시	N110	VMo		GN							jisjk:135341
-ユニットロード	유닛로드(unit road)	N110			BZ							jisjk:363015
+ユニットロード	유닛로드	N110			BZ							jisjk:363015
 ユニヴァーサル	세계적%D4@	G8L0			GN							jisjk:2403
 ユニヴァーサル	유니버설	N110	SFl		GN							jisjk:135346
 ユニバーサル・タイム	만국표준시	N110			GN							jisjk:113474
@@ -3246,7 +3246,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ランゲージ・プロセッサー	언어 번역 프로그램	N110	UTs		GN							jisjk:135556
 ランゲージ・ラボラトリー	언어실습실	N110	VPl		GN							jisjk:58911
 ランダム・サンプリング	무작위추출법	N110			GN							jisjk:108004
-ランニング・コスト	런닝코스트(running cost)	N110			BZ							jisjk:58933
+ランニング・コスト	런닝코스트	N110			BZ							jisjk:58933
 ランブル・シート	접좌석	N110	VBl		GN							jisjk:135573
 ランプウェイ	램프웨이	N110	VBlVTp		GN							jisjk:135574
 ランプウエイ	램프웨이	N110	VBlVTp		GN							jisjk:135574
@@ -3455,7 +3455,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロング・ラン	롱런	N110			GN							jisjk:107622
 ロンパー・ルーム	놀이방	N110			GN							jisjk:59910
 ワーカーホリック	워커홀릭	N110			BZ							jisjk:59916
-ワーカーホリック	워커홀릭(workaholic)	N110	VHn		BZ							jisjk:363046
+ワーカーホリック	워커홀릭	N110	VHn		BZ							jisjk:363046
 ワーキング・カップル	워킹 커플	N110			GN							jisjk:59919
 ワーキング・ランチ	워킹 런치	N110	VFd		GN							jisjk:159191
 ワーク・シェアリング	워크 쉐어링	N110			GN							jisjk:107915
@@ -12487,9 +12487,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 へそ曲げ	토라&AL@	M427			GN							jisjk:118034
 臍曲げ	토라&AL@	M427			GN							jisjk:118034
 始め値	시가	N110	VMo		BZ							jisjk:354944
-セーフティーネット	세이프티 넷(safety net )	N110			BZ							jisjk:363870
-セーフティ・ネット	세이프티 넷(safety net )	N110			BZ							jisjk:363870
-セーフティー・ネット	세이프티 넷(safety net )	N110			BZ							jisjk:363870
+セーフティーネット	세이프티 넷	N110			BZ							jisjk:363870
+セーフティ・ネット	세이프티 넷	N110			BZ							jisjk:363870
+セーフティー・ネット	세이프티 넷	N110			BZ							jisjk:363870
 バーサーク	베르세르크	N110			GN							w:8662
 ツース	투스	N110			GN							w:6334
 マジコウ	매직컬	N110			GN							jisjk:103381
@@ -12506,7 +12506,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 物づくり	농민	N110	VHn		GN							jisjk:253831
 モノ造り	농민	N110	VHn		GN							jisjk:253831
 もの造り	농민	N110	VHn		GN							jisjk:253831
-エコ・ステーション	에코 스테이션(eco-station)	N110			BZ							jisjk:349097
+エコ・ステーション	에코 스테이션	N110			BZ							jisjk:349097
 ナース・コール	나스 콜	N110			GN							jisjk:52157
 ハーフ・ミラー	반투명경	N110	VPe		GN							jisjk:132206
 ハロー・ワーク	헬로우 워크	N110			BZ							jisjk:53190
@@ -12719,7 +12719,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 餅米	찹쌀	I110	VFdVFdQAL		GN							jisjk:41731
 セクシャル・ハラスメント	섹슈얼 해러스먼트	N110			GN							jisjk:130270
 セクシュアル・ハラスメント	섹슈얼 해러스먼트	N110			GN							jisjk:130270
-アクセス・チャージ	액서스차지(access charge)	N110			BZ							jisjk:261993
+アクセス・チャージ	액서스차지	N110			BZ							jisjk:261993
 インサイダー取り引き	인사이더 거래	N110			BZ							jisjk:43542
 インサイダ取引	인사이더 거래	N110			BZ							jisjk:43542
 エクイティファイナンス	에쿼티 파이넌스	N110			BZ							jisjk:357604
@@ -12737,12 +12737,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 タックスヘイヴン	세금 피난지	N110	VPl		GN							jisjk:130689
 タックス・ヘイヴン	세금 피난지	N110	VPl		GN							jisjk:130689
 タックス・ヘブン	세금 피난지	N110	VPl		GN							jisjk:130689
-パリクラブ	파리 클럽(Paris Club)	N110	VGt		BZ							jisjk:356919
-ファイヤウォール	파이어 월(fire wall)	N110	VBl		BZ							jisjk:133215
-ファイアウオール	파이어 월(fire wall)	N110	VBl		BZ							jisjk:133215
-ファイヤーウオール	파이어 월(fire wall)	N110	VBl		BZ							jisjk:133215
-ファイヤウオール	파이어 월(fire wall)	N110	VBl		BZ							jisjk:133215
-ファンド・トラスト	펀드 트러스트(fund trust)	N110			BZ							jisjk:362653
+パリクラブ	파리 클럽	N110	VGt		BZ							jisjk:356919
+ファイヤウォール	파이어 월	N110	VBl		BZ							jisjk:133215
+ファイアウオール	파이어 월	N110	VBl		BZ							jisjk:133215
+ファイヤーウオール	파이어 월	N110	VBl		BZ							jisjk:133215
+ファイヤウオール	파이어 월	N110	VBl		BZ							jisjk:133215
+ファンド・トラスト	펀드 트러스트	N110			BZ							jisjk:362653
 フィジビリティスタディ	피지빌리티 스터디	N110			BZ							jisjk:361416
 フィージビリティ・スタディ	피지빌리티 스터디	N110			BZ							jisjk:361416
 フィジビリティ・スタディ	피지빌리티 스터디	N110			BZ							jisjk:361416
@@ -12755,7 +12755,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マネーローンダリング	자금세탁	N110			GN				xxx llm	1		w:9285
 マネー・ロンダリング	자금선정	N110			GN							jisjk:113357
 マネー・ロンダリング	자금세탁	N110			GN				xxx llm	1		w:9285
-リストラチャリング	리스트럭쳐링(restructuring)	N110			BZ							jisjk:107119
+リストラチャリング	리스트럭쳐링	N110			BZ							jisjk:107119
 リボルビングシステム	리볼빅 시스템	N110	UMn		BZ							jisjk:359398
 ローカルコンテント	로컬 컨텐트	N110			BZ							jisjk:359687
 アート・シアター	아트시어터	N110	UArVBl		GN							jisjk:156940
@@ -12888,7 +12888,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 張形	남근 모양으로 만든 음구	N110	VPe		GN							jisjk:250195
 張り型	남근 모양으로 만든 음구	N110	VPe		GN							jisjk:250195
 張型	남근 모양으로 만든 음구	N110	VPe		GN							jisjk:250195
-アポプトーシス	아포토시스(apoptosis)	N110			BZ							jisjk:347717
+アポプトーシス	아포토시스	N110			BZ							jisjk:347717
 ロカール	로케일	N110			IT							jisjk:261582
 ローカリゼーション	지방 분권	N110			GN							jisjk:136003
 ローカリゼーション	현지화	N110			GN				xxx llm	1		w:10558
@@ -12900,7 +12900,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 支払手続き	지불수속	N110			GN							jisjk:266971
 御手数	수고	N110			GN				llm			w:251
 ヴィークル	비클	N110			GN							jisjk:114180
-デュー・ディリジェンス	듀 딜리전스(due diligence)	N110			BZ							jisjk:361295
+デュー・ディリジェンス	듀 딜리전스	N110			BZ							jisjk:361295
 どん詰り	막판	I110			GN							jisjk:41386
 堪りかね	참지 못&AV@	M417			GN							jisjk:91679
 ピック・アップ	픽업	N110			GN							jisjk:54395
@@ -12940,19 +12940,19 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 コール・オプション	콜 옵션	N110	VMo		GN							jisjk:128432
 ゴミ捨て場	쓰레기장	N110			GN							jisjk:342522
 サーチ・エンジン	써치엔진	N110	VPe		GN							jisjk:47481
-サプライ・チェーン	서플라이 체인(supply-chain)	N110			BZ							jisjk:356227
+サプライ・チェーン	서플라이 체인	N110			BZ							jisjk:356227
 ジャンク・メール	정크 메일l	N110			GN							jisjk:48491
 ジャンク・メール	정크 메일	N110			GN				xxx llm	1		w:4910
 スパムメイル	SpamMail	N110			IT							jisjk:260094
 セットトップ・ボックス	셋탑 박스	N110			IT							jisjk:261330
-ゼロ・エミッション	제로 에미션(zero emission)	N110			BZ							jisjk:363482
-ソルベンシー・マージン	솔벤시 마진(solvency margin)	K110			GN							jisjk:362645
+ゼロ・エミッション	제로 에미션	N110			BZ							jisjk:363482
+ソルベンシー・マージン	솔벤시 마진	K110			GN							jisjk:362645
 ソルベンシー・マージン	솔벤시 마진	N110			BZ							jisjk:362646
 チャット・ルーム	대화방	N110	VPl		GN							jisjk:342270
 デーサービス	데이 서비스	N110			GN							jisjk:131394
 デイ・サービス	데이 서비스	N110			GN							jisjk:131394
 デー・サービス	데이 서비스	N110			GN							jisjk:131394
-デビット・カード	데빗 카드(debit card)	N110			BZ							jisjk:104005
+デビット・カード	데빗 카드	N110			BZ							jisjk:104005
 デフレ・スパイラル	디플레 스파이럴	N110			BZ							jisjk:355895
 ドナー・カード	증명 카드	N110	ULw		GN							jisjk:131757
 ドナー・カード	장기기증 카드	N110			GN				xxx llm	1		w:6538
@@ -13013,10 +13013,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ガッシャーン	와장창	N300			GN							jisjk:343184
 ガッシャン	와장창	N300			GN							jisjk:343184
 ココナット	코코넛	N110			GN							jisjk:46976
-サプライ・サイド	서플라이사이드(supply-side)	N110	VBlVMo		BZ							jisjk:129011
+サプライ・サイド	서플라이사이드	N110	VBlVMo		BZ							jisjk:129011
 タイトル・マッチ	타이틀 매치	N110	VGt		GN							jisjk:49957
 テイクアウト	테이크 아웃	N110			BZ							jisjk:131069
-テイクアウト	테이크 아웃(takeout)	N110	VFd		GN							jisjk:347819
+テイクアウト	테이크 아웃	N110	VFd		GN							jisjk:347819
 ハング・グライディング	hang gliding	N110			GN							jisjk:53201
 バス・ガイド	버스 가이드	N110	VHnUAqVTp		GN							jisjk:132536
 ペア・ルック	pair look	N110			GN							jisjk:56380
@@ -13425,8 +13425,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鑞付	납땜	I110			GN							jisjk:112654
 長ネギ	대파	N110	VPt		GN							jisjk:153856
 ろ液	노액	N110			GN							jisjk:256645
-レポジトリ	리포지터리(repository)	N110			BZ							jisjk:364155
-レポジトリー	리포지터리(repository)	N110			BZ							jisjk:364155
+レポジトリ	리포지터리	N110			BZ							jisjk:364155
+レポジトリー	리포지터리	N110			BZ							jisjk:364155
 エアロビ	에어로	N110			GN							jisjk:44070
 真蜱	진드기	N110			GN							w:20760
 及びも付かな	어림도 $FA@	H7N0			GN							jisjk:122031
@@ -13440,7 +13440,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ザクロ石	석류석	N110			GN							w:18253
 橐吾	털머위	N110	VPt		GN							jisjk:244239
 アクション・プラン	액션 플랜	N110			BZ							jisjk:352451
-コモンアジェンダ	커먼 어젠더(common agenda)	N110			BZ							jisjk:356457
+コモンアジェンダ	커먼 어젠더	N110			BZ							jisjk:356457
 シック・ハウス	쉬크 하우스	N110			GN							jisjk:340503
 ノーマリゼーション	노멀라이제이션	N110			GN							jisjk:52832
 ライフ・ステージ	라이프 스테이지	N110	UTsVBl		GN							jisjk:135428
@@ -13518,9 +13518,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハンレイ岩	반려암	N110	VSn		GN							jisjk:205125
 水ようかん	양갱	N110			GN							jisjk:252350
 水羊かん	양갱	N110			GN							jisjk:252350
-アバタール	아바타(Avatar)	N110			IT							jisjk:262024
-アヴァター	아바타(Avatar)	N110			IT							jisjk:262024
-アヴァタール	아바타(Avatar)	N110			IT							jisjk:262024
+アバタール	아바타	N110			IT							jisjk:262024
+アヴァター	아바타	N110			IT							jisjk:262024
+アヴァタール	아바타	N110			IT							jisjk:262024
 手とり足とり	하나하나 자상하게	A9D0			GN							jisjk:117817
 いたいけ盛り	한창 귀여운 어린이	N110	VHnUMe		GN							jisjk:125541
 小マメ	부지런%A1@	G8U0			GN							jisjk:121492
@@ -13587,7 +13587,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ナッツメッグ	nutmeg	N110			GN							jisjk:52283
 ナフトル	나프톨	N110			GN							jisjk:131883
 バセドウ病	바세도병	N110	QHP		GN							jisjk:132552
-ポリオーラフィン	폴리오레핀(polyolefin)	N110			BZ							jisjk:56902
+ポリオーラフィン	폴리오레핀	N110			BZ							jisjk:56902
 逢魔時	해질녘	N110	UMe		GN							jisjk:127940
 逢う魔が時	해질녘	N110	UMe		GN							jisjk:127940
 逢魔が刻	해질녘	N110	UMe		GN							jisjk:127940
@@ -14917,7 +14917,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神経尖らせ	신경을 곤두세&AI@	M447			GN							jisjk:136114
 神経とがらせ	신경을 곤두세&AI@	M447			GN							jisjk:136114
 ジャストインタイム	저스트 인 타임	N110			GN							jisjk:354598
-セントラル・ドグマ	센트럴 도그마(central dogma)	N110			GN							jisjk:130408
+セントラル・ドグマ	센트럴 도그마	N110			GN							jisjk:130408
 糸毬体	사구체	N110			GN							jisjk:233598
 種なし西瓜	씨없는 수박	N110			GN							jisjk:241598
 種なしスイカ	씨없는 수박	N110			GN							jisjk:241598
@@ -15241,7 +15241,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アイドル・インタラプト	idle interrupt	N110			GN							jisjk:42167
 アカデミック・パッケージ	아카데믹 패키지	N110			IT							jisjk:261010
 アクション・ゲーム	액션 게임	N110			IT							jisjk:261877
-アクセス・アーム	액세스 암(Access Arm)	N110			IT							jisjk:261878
+アクセス・アーム	액세스 암	N110			IT							jisjk:261878
 アクセス・コントロール・リスト	액세스 콘트롤 리스트	N110			IT							jisjk:259821
 アクセス・プロバイダ	액세스 프로바이더	N110			IT							jisjk:261884
 アクセラレータ・カード	accelerator card	N110			GN							jisjk:42353
@@ -15254,7 +15254,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アセンブリー言語	어셈블리 언어	N110			GN							jisjk:156987
 アドイン・ソフト	애드 인 소프트웨어	N110			IT							jisjk:262013
 アドウエア	애드웨어	N110	UTt		GN							w:1569
-アドオン・ボード	애드 온 보드(board)	N110			IT							jisjk:262015
+アドオン・ボード	애드 온 보드	N110			IT							jisjk:262015
 アドレス・バス	어드레스  버스	N110	VCm		IT							jisjk:259924
 アドレス・マスク	address mask	N110			GN							jisjk:42713
 アドレス・レジスタ	어드레스 레지스터	N110			IT							jisjk:262021
@@ -15275,13 +15275,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アレイ・プロセッサー	어레이프로세서	N110			GN							jisjk:43130
 アレイ・プロセッサ	어레이프로세서	N110			GN							jisjk:43130
 アンサー・モード	앤서 모드	N110			IT							jisjk:260001
-アンダフロー	언더 플로우(underflow)	N110			IT							jisjk:261978
+アンダフロー	언더 플로우	N110			IT							jisjk:261978
 アンチエリアシング	anti-aliasing	N110			IT							jisjk:260002
 イーサネット・アドレス	이서네트 어드레스	N110			IT							jisjk:261981
 イエロー・ケーブル	옐로우 케이블	N110			IT							jisjk:261982
 イオン・デポジション・プリンタ	ion-deposition printer	N110			GN							jisjk:266677
 イジェクト・ボタン	이젝트 버튼	N110			IT							jisjk:260017
-イニシャル・コスト	이니셜코스트(initial cost)	N110	VMo		BZ							jisjk:43440
+イニシャル・コスト	이니셜코스트	N110	VMo		BZ							jisjk:43440
 イベント・ドリブン	이벤트 드리븐	N110			IT							jisjk:260024
 インアクティブ・ウィンドウ	비활성 창	N110	VCm		IT							jisjk:260070
 インクリメンタル・サーチ	인크리멘탈 서치	N110			IT							jisjk:262525
@@ -15676,7 +15676,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハイ・シエラ・フォーマット	하이 시에라 포맷	N110			GN				xxx llm	1		w:6907
 ハイバーネーション	하이버네이션	N110			IT							jisjk:261052
 ハイバネイション	하이버네이션	N110			IT							jisjk:261052
-ハイパテキスト	하이퍼 텍스트(hyper text)	N110			IT							jisjk:132261
+ハイパテキスト	하이퍼 텍스트	N110			IT							jisjk:132261
 ハイパメディア	하이퍼 미디어	N110	VCm		GN							jisjk:132263
 ハウジング・サービス	하우징 서비스	N110			IT							jisjk:261055
 ハンディ・スキャナ	핸디 스캐너	N110			IT							jisjk:261106
@@ -15684,7 +15684,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハンディースキャナ	핸디 스캐너	N110			IT							jisjk:261106
 バースト・モード	버스트모드	N110			GN							jisjk:53273
 バーチャルコーポレーション	버추얼 코오퍼레이션	N110			BZ							jisjk:351072
-バーチャル・モール	버추얼 몰(virtual mall)	N110			BZ							jisjk:261031
+バーチャル・モール	버추얼 몰	N110			BZ							jisjk:261031
 バイト・オーダー	바이트 오더	N110			IT							jisjk:261048
 バイナリーデータ	이진 데이터	N110	UTt		GN							w:7095
 バイナリー・データ	이진 데이터	N110	UTt		GN							w:7095
@@ -16249,7 +16249,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 腟口	질구	N110	VBp		GN							jisjk:116586
 膣孔	질구	N110	VBp		GN							jisjk:116586
 いけ図々し	너무 뻔뻔스$G7@	H7U0			GN							jisjk:4853
-デカプリング	디커플링(decoupling)	N110			BZ							jisjk:360741
+デカプリング	디커플링	N110			BZ							jisjk:360741
 デコンストラクション	탈구축	N110			GN							jisjk:131317
 春ラン	춘란	N110	VPt		GN							jisjk:190463
 さび病	수병	N110	QHP		GN							jisjk:232686
@@ -16440,7 +16440,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 コットン・ペーパー	코튼지	N110			GN							jisjk:128521
 カントリー・エレベーター	대형 농업창고	N110	VBl		GN							jisjk:45696
 クーポン・レート	쿠폰 레이트	N110			BZ							jisjk:353202
-クローリングペッグ	크롤링 펙(crawling peg)	N110			BZ							jisjk:354778
+クローリングペッグ	크롤링 펙	N110			BZ							jisjk:354778
 クラウディング・アウト	크라우딩 아웃	N110	VMo		GN							jisjk:158992
 ダンス・セラピー	무용요법	N110			GN							jisjk:50434
 ダーク・チェンジ	다크 체인지	N110	UAr		GN							jisjk:130752
@@ -16485,7 +16485,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハンド・マネー	보증금	N110	VMo		GN							jisjk:53229
 ハンド・マネー	착수금	N110			GN							jisjk:53230
 障がい児	장애아	N110	VHn		GN							w:25359
-ハード・カレンシー	하드 커런시(hard currency)	N110	VMy		BZ							jisjk:132177
+ハード・カレンシー	하드 커런시	N110	VMy		BZ							jisjk:132177
 ハード・トレーニング	하드 트레이닝	N110			GN							jisjk:52958
 ハイ・ジャンプ	하이점프	N110	VRw		GN							jisjk:132225
 ハイ・ジャンプ	높이뛰기	N110	VRw		GN							jisjk:132226
@@ -16530,7 +16530,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オープン・リール	오픈 릴	N110	UArVPe		GN							jisjk:158173
 オープン・ショップ	오픈 숍	N110			GN							jisjk:158165
 オペレーション・ツイスト	오퍼레이션 트위스트	N110			EC							jisjk:45082
-オーダーエントリー	오더 엔트리(order entry)	N110			BZ							jisjk:351053
+オーダーエントリー	오더 엔트리	N110			BZ							jisjk:351053
 オーファン・ドラッグ	희소 질병약	N110	QHP		GN							jisjk:158153
 パッシング・ショット	패싱 숏	N110	VRw		GN							jisjk:132802
 パッシブ・ホーミング	패시브 호밍	N110	VPeVTw		GN							jisjk:132800
@@ -16725,7 +16725,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エキゾースト・パイプ	exhaust pipe	N110			GN							jisjk:44119
 エグゾースト	배기 가스	N110			GN							jisjk:157751
 ファクト・データベース	fact database	N110			IT							jisjk:262342
-フィジビリティ	피지빌리티(feasibility)	N110			BZ							jisjk:54700
+フィジビリティ	피지빌리티	N110			BZ							jisjk:54700
 フィード・ロット	곡물 비육장	N110	VBl		GN							jisjk:133273
 フィーデル	피들	N110			GN							w:7887
 フィスカル・イヤー	회계연도	N110	VMoUMe		GN							jisjk:133285
@@ -16819,7 +16819,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オイル・クロス	오일클로스	N110			GN							jisjk:44894
 オイル・クロース	오일클로스	N110			GN							jisjk:44894
 オーガニズム	오거니즘	N110			GN							jisjk:45194
-アウトレット・ストア	아울렛 스토어(outlet store)	N110			BZ							jisjk:112797
+アウトレット・ストア	아울렛 스토어	N110			BZ							jisjk:112797
 オーバーヘッド・キック	오버헤드 킥	N110	VRw		GN							jisjk:158145
 パーム・オイル	팜 오일	N110			GN							jisjk:132728
 パラドキシカル	역설적%D4@	G8L0			GN							jisjk:2380
@@ -16847,7 +16847,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ポエト	시인	N110			GN				xxx llm	1		w:9034
 ポリシー・ミックス	정책조정	N110			GN							jisjk:113439
 ポール・タックス	인두세	N110	VMoULw		GN							jisjk:134435
-ポリマーアロイ	폴리머 알로이(polymer alloy)	N110			BZ							jisjk:362857
+ポリマーアロイ	폴리머 알로이	N110			BZ							jisjk:362857
 ポートフォリオ・セレクション	portfolio selection	N110			GN							jisjk:56788
 ポジティブ・リスト	포지티브 리스트	N110	VMo		GN							jisjk:134457
 プラウン	식용새우	N110			GN							jisjk:56063
@@ -17054,7 +17054,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 セッツルメント	정착	N110			GN							jisjk:130315
 セッツルメント	인보사업	N110			GN				xxx llm	1		w:5392
 インベストメント・バンク	투자 은행	N110	VMoVBl		GN							jisjk:157484
-トラクション・コントロール	트랙션컨트롤(traction control)	N110			BZ							jisjk:51759
+トラクション・コントロール	트랙션컨트롤	N110			BZ							jisjk:51759
 セコンドハンド	중고품	N110			GN							jisjk:130260
 パワー・ウインドー	파워 윈도우	N110			GN							jisjk:53916
 チューンナップ	튠 업	N110			GN							jisjk:50586
@@ -17632,7 +17632,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 かぜ引き	감기환자	N110	VHn		GN							jisjk:342883
 頬嚢	볼주머니	N110	VBp		GN							jisjk:250806
 人足寄場	인부 수용소	N110	VBl		GN							jisjk:248384
-ディファレンシアル	디퍼렌셜(differential)	N110			GN							jisjk:51167
+ディファレンシアル	디퍼렌셜	N110			GN							jisjk:51167
 箱寿司	상자 모양으로 만들어낸 초밥	N110	VFd		GN							jisjk:249457
 箱ずし	상자 모양으로 만들어낸 초밥	N110	VFd		GN							jisjk:249457
 共同運行	공동운항	N110			BZ							jisjk:358135
@@ -17989,7 +17989,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ペーパーウエイト	문진	N110	VPe		GN							jisjk:134087
 ペーパーウェート	문진	N110	VPe		GN							jisjk:134087
 ペーパーウエート	문진	N110	VPe		GN							jisjk:134087
-レンタリース	렌탈 리스(rental lease )	N110			BZ							jisjk:362776
+レンタリース	렌탈 리스	N110			BZ							jisjk:362776
 太々	굵직굵직한	E301			GN							jisjk:2023
 平家建	단층집 구조	I110			GN							jisjk:87880
 否応なく	억지로	E300			GN							jisjk:122842
@@ -18038,7 +18038,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ボッキリ	똑	N110			GN				llm			w:9037
 ボキリ	똑	N110			GN				llm			w:9037
 ボキン	똑	N110			GN				llm			w:9037
-コード・シェアリング	코드쉐어링(code sharing)	N110			BZ							jisjk:362412
+コード・シェアリング	코드쉐어링	N110			BZ							jisjk:362412
 川太郎	가와타로	N110	VAm		GN							jisjk:229647
 川太郎	가타로	N110	VAm		GN							jisjk:230298
 鳴る神	천둥	N110	VSs		GN							jisjk:247478
@@ -18407,7 +18407,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 つづけ字	띄어 쓰지 않고 연달아 쓴 글씨	N110			GN							jisjk:244006
 葉群	우거진 나뭇잎	N110	VPt		GN							jisjk:250105
 葉むら	우거진 나뭇잎	N110	VPt		GN							jisjk:250105
-セレクト・ショップ	셀렉트 숍(select shop)	N110	VBlVMo		BZ							jisjk:130376
+セレクト・ショップ	셀렉트 숍	N110	VBlVMo		BZ							jisjk:130376
 据置型	거치형	N110			GN							jisjk:359604
 据置き型	거치형	N110			GN							jisjk:359604
 塩揉み	소금절임	I110			GN							jisjk:78326
@@ -18560,7 +18560,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ケア・マネジメント	케어메니지먼트	N110			GN							jisjk:103763
 ケアマネージメント	케어메니지먼트	N110			GN							jisjk:103763
 ケア・マネージメント	케어메니지먼트	N110			GN							jisjk:103763
-コーポラティヴ	코포러티브(cooperative)	N110	VBlVMo		GN							jisjk:128412
+コーポラティヴ	코포러티브	N110	VBlVMo		GN							jisjk:128412
 シンプル・ライフ	심플라이프	N110			GN							jisjk:112107
 デジタル・データ	디지털 데이타	N110			IT							jisjk:348107
 ディジタルデータ	디지털 데이타	N110			IT							jisjk:348107
@@ -18584,7 +18584,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロー・リスク	로우리스크 	N110			BZ							jisjk:363758
 コーン・ポタージュ	콘 포타주	N110	VFd		GN				llm			w:4240
 コンポタージュ	콘 포타주	N110	VFd		GN				llm			w:4240
-コンピテンス	컨피턴스(competence)	N110			BZ							jisjk:362460
+コンピテンス	컨피턴스	N110			BZ							jisjk:362460
 声々	제각기	N110			GN							jisjk:181637
 ジーザス・クライスト	예수 그리스도	N110	UClVHn		GN							jisjk:129460
 ノブレス・オブリージ	노블레스 오블리주	N110			GN							w:6850
@@ -18644,7 +18644,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 在るべき姿	본연의 모습	I110			GN							jisjk:40343
 ニュー・リッチ	뉴 리치	K110	VHn		GN							jisjk:265021
 石こうボード	석고보드	N110	VBl		GN							jisjk:239120
-ラップトップ・パソコン	랩탑(lap-top) PC	N110	VPe		IT							jisjk:360754
+ラップトップ・パソコン	랩톱 PC	N110	VPe		IT							jisjk:360754
 ベークトアラスカ	베이크트 알래스카	N110	VFd		GN							w:8618
 ベークト・アラスカ	베이크트 알래스카	N110	VFd		GN							w:8618
 余儀無くさせ	하지 않을 수 없게 &AV@	M447			GN							jisjk:147430
@@ -18914,8 +18914,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロック・オン	락온	N110			GN				xxx llm	1		w:10517
 ラッテアート	라테 아트	N110			GN							w:10065
 ラッテ・アート	라테 아트	N110			GN							w:10065
-イネイブラー	이너블러(enabler)	N110			IT							jisjk:260023
-イネイブラ	이너블러(enabler)	N110			IT							jisjk:260023
+イネイブラー	이너블러	N110			IT							jisjk:260023
+イネイブラ	이너블러	N110			IT							jisjk:260023
 と畜	도축	N110		Hd	GN							w:15462
 と畜	도축&AV@	M429			GN							w:15463
 ビデオキャプチャーカード	비디오 캡쳐 카드	N110			IT							jisjk:261933
@@ -18965,7 +18965,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フリー・カメラマン	프리 카메라맨	N110	VHn		GN							jisjk:133481
 窮理学	물리학	N110	UTh		GN							jisjk:173305
 フリー・アルバイター	프리 아르바이터	N110	VHn		GN							jisjk:133476
-テクニカルライター	테크니컬 라이터(writer)	N110			BZ							jisjk:362708
+テクニカルライター	테크니컬 라이터	N110			BZ							jisjk:362708
 ポップ・ライター	팝 라이터	N110	UAqVHn		GN							jisjk:134473
 干しナマコ	말린 해삼	N110	VFd		GN							jisjk:250900
 干しなまこ	말린 해삼	N110	VFd		GN							jisjk:250900
@@ -20132,7 +20132,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東京藝術大学	도쿄 예술대학	N110	VBl		GN							jisjk:245321
 南坊録	남방록	N110	VBkVSw		GN							jisjk:247625
 日本文藝家協会	일본 문예가 협회	N110	VBl		GN							jisjk:248169
-インターネット・ソサエティ	인터넷 소사이어티(ISOC)	N110			IT							jisjk:262460
+インターネット・ソサエティ	인터넷 소사이어티	N110			IT							jisjk:262460
 ピーター・パン	피터팬	N110	QPN		GN							jisjk:54349
 ニナ・リッチ	니나리치	N110	VCp		GN							jisjk:131944
 ヴォルヴォ	볼보	N110	VTp		GN							jisjk:56745
