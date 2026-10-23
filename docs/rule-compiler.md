@@ -138,12 +138,12 @@ local 3
 | `contradiction` | 같은 단어에서 함께 참일 수 없는 검사(표기끼리, 같은 값의 `==`와 `!=`, `+0`의 품사끼리) |
 | `neighbour-contradiction` | 이웃의 품사 검사 두 개가 고른 후보가 없을 때만 함께 참 |
 | `shadowed` | 앞 문장(또는 앞 전역 규칙)이 늘 먼저 참이라 참이 될 수 없는 문장, 규칙 |
-| `duplicate-statement`, `duplicate-test`, `duplicate-rule` | 같은 문장, 검사, 본문 |
+| `duplicate-statement`, `duplicate-test` | 같은 문장, 검사. 규칙끼리 본문이 같은 것은 알리지 않음(규칙은 그것을 이름한 행이 정하고, 본문이 같아도 다른 규칙) |
 | `key-mismatch`, `never-fires` | `+0` 표기 검사가 그 규칙을 가리키는 사전 행의 키와 맞지 않아 참이 될 수 없음 |
-| `unused-rule`, `missing-rule` | 어느 사전 행도 가리키지 않는 규칙, 없는 규칙을 가리키는 사전 행 |
+| `unused-rule`, `missing-rule` | 어느 사전 행도 가리키지 않는 규칙(엔진이 빈 번호를 채운 `\|\|0`은 제외), 없는 규칙을 가리키는 사전 행 |
 | `always-false`, `unreachable-test` | 엔진에 구현이 없는 `D= @d`, 그 뒤라서 돌지 않는 검사 |
 | `unreachable-global` | 범위(0<n<1000, 1000<n<5000) 밖이라 돌지 않는 어간 전역 규칙 |
-| `self-compare`, `delta-range`, `empty-pattern`, `literal-space` | 자기와 비교, 3칸 넘는 위치, 빈 패턴, 값 끝의 공백, 채움 |
+| `self-compare`, `delta-range`, `empty-pattern`, `literal-space` | 자기와 비교, 5칸(`-max-delta`) 넘는 위치, 빈 패턴(어미의 `U== ""`는 빈 어미라 제외), 검사 값 끝의 공백과 대입 값 끝의 공백 2칸 이상(`D=`의 4칸은 빈 활용 표지라 제외) |
 | `assign-then-test` | 대입 뒤에 검사가 오는 문장(지금 규칙에는 없음) |
 | `prio-tie` | PRIO가 같은 전역 규칙 |
 

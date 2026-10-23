@@ -150,7 +150,6 @@ std::string JoinSurface(Match m, std::string_view value);
 // The flat format. Errors are those rules::Load reports; parsing resumes at the next line.
 File ParseFlat(const Source& source, Diagnostics& diags);
 std::string PrintFlat(const File& file);
-std::string PrintFlatBody(const Expr& body);
 
 // The readable syntax.
 File ParseReadable(const Source& source, Diagnostics& diags);
@@ -185,7 +184,7 @@ struct Inventory {
 bool LoadInventory(const std::string& dictDir, Inventory& inventory, std::string& error);
 
 struct CheckOptions {
-    int maxDelta = 3;
+    int maxDelta = 5;
 };
 void Check(const File& file, const Inventory& inventory, const CheckOptions& options, Diagnostics& diags);
 

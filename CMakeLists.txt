@@ -258,6 +258,9 @@ if(NOT EMSCRIPTEN)
             -DRULEC=$<TARGET_FILE:hdrulec> -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts
             -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-unknown-codes
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_unknown_codes.cmake")
+        add_test(NAME rules.lint-checks COMMAND "${CMAKE_COMMAND}" -DRULEC=$<TARGET_FILE:hdrulec>
+            -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-lint-checks
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_lint_checks.cmake")
         add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
         add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals

@@ -354,12 +354,6 @@ File ParseFlat(const Source& source, Diagnostics& diags) {
     return file;
 }
 
-std::string PrintFlatBody(const Expr& body) {
-    std::string out;
-    PrintExpr(out, body);
-    return out;
-}
-
 std::string PrintFlat(const File& file) {
     std::string out = "rules 1 " + std::to_string(file.local.size()) + " " + std::to_string(file.global.size()) + "\n";
     for (const Rule& r : file.local) {
