@@ -646,7 +646,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&K3@", "놀", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K4@", "달", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K5@", "살", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
-    {"&K6@", "알", Pos::Verb, Class::Rieul, kNominalRieulMieum, 0x0fff, {}},
+    {"&K6@", "알", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K7@", "졸", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K8@", "팔", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K9@", "돌", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
