@@ -67,6 +67,14 @@ bool GrammarCode(std::string_view gattr, std::string_view code) {
     return false;
 }
 
+// Removes the two-byte grammar code from gattr.
+void DropGrammarCode(std::string& gattr, std::string_view code) {
+    for (std::size_t i = 0; i + 2 <= gattr.size();) {
+        if (gattr.compare(i, 2, code) == 0) gattr.erase(i, 2);
+        else i += 2;
+    }
+}
+
 // The target of the passive lemma of surface; false when surface has none.
 bool PassiveTarget(Flusher& f, std::string_view surface, std::string& target) {
     for (const PassiveLemma& p : kPassiveLemmas) {
@@ -590,8 +598,9 @@ std::string HonorificTarget(Flusher& f, std::string_view text) {
 }
 
 // The honorific target of the verb whose passive stem is surface (書かれ 書 쓰&AF@ 쓰시다), its
-// default record first; "" when the dictionary has no such verb.
-std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitive) {
+// default record first, and the verb's own target in plain; "" when the dictionary has no such
+// verb.
+std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitive, std::string& plain) {
     // The passive endings by the conjugation kinds (the last digit of the part code) of the verbs
     // they follow; '?' is 行く.
     constexpr std::string_view kEndings[][2] = {
@@ -614,9 +623,30 @@ std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitiv
         }
         if (verb == nullptr) return {};
         transitive = TransitiveCode(verb->partCode);
+        plain = verb->target;
         return HonorificTarget(f, verb->target);
     }
     return {};
+}
+
+// The respectful verb item it before the auxiliary いる of its て form in its token is the plain
+// verb with 고 and the honorific of いる (書かれている 쓰고 계신다, 置かれていた 두고 계셨다): the
+// auxiliary takes the honorific; false, with nothing changed, when no such auxiliary follows.
+bool HonorificProgressive(Flusher& f, Item* it) {
+    Item* aux = it->next;
+    if (aux == nullptr || aux->tokenIndex != it->tokenIndex || !aux->detail->Yougo() || aux->group->surface != "い" ||
+        aux->selected < 0 || it->DirectIndex() < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
+        return false;
+    }
+    const std::string_view ending = it->DirectText(it->DirectIndex());
+    if (ending != "6" && ending != "1고") return false;
+    const std::string honorific = HonorificTarget(f, aux->EntryText(aux->selected));
+    if (honorific.empty()) return false;
+    aux->AssignEntrySurface(aux->selected, honorific);
+    // 계시다 takes the present of a verb (계신다), not the 있다 of gram Va.
+    if (Entry* e = aux->group->At(aux->selected); e != nullptr) DropGrammarCode(e->gattr, "Va");
+    it->AssignDirectSlot(it->DirectIndex(), "1고");
+    return true;
 }
 
 }  // namespace
@@ -651,6 +681,10 @@ void RespectfulPassive(Flusher& f) {
                 }
             }
             if (!RespectfulReading(it, TransitiveCode(it->Code(it->selected)))) continue;
+            if (HonorificProgressive(f, it)) {
+                it->detail->record = 0;
+                continue;
+            }
             const int count = static_cast<int>(it->group->entries.size());
             std::vector<std::string> targets(static_cast<std::size_t>(count));
             bool ok = true;
@@ -692,8 +726,12 @@ void RespectfulPassive(Flusher& f) {
             continue;
         }
         bool transitive = false;
-        const std::string target = BaseVerbTarget(f, surface, transitive);
-        if (!target.empty() && RespectfulReading(it, transitive)) it->AssignEntrySurface(it->selected, target);
+        std::string plain;
+        const std::string target = BaseVerbTarget(f, surface, transitive, plain);
+        if (target.empty() || !RespectfulReading(it, transitive)) continue;
+        // The state of the passive (gram Dx, 書かれている 쓰여 있다) is no state of the active.
+        if (Entry* e = it->group->At(it->selected); e != nullptr) DropGrammarCode(e->gattr, "Dx");
+        it->AssignEntrySurface(it->selected, HonorificProgressive(f, it) ? plain : target);
     }
 }
 
@@ -1008,7 +1046,9 @@ void ResultState(Flusher& f) {
                 continue;
             }
         }
-        if (rest.starts_with(" 있") || (rest.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with("있"))) {
+        // The honorific 계시다 of the auxiliary is its 있다 (座られている 앉아 계신다).
+        const std::string auxiliary = rest.empty() && it->next != nullptr ? ItemLemma(f, it->next, it->next->selected) : "";
+        if (rest.starts_with(" 있") || auxiliary.starts_with("있") || auxiliary == "계시다") {
             it->AssignDirectSlot(it->DirectIndex(), "6" + std::string(rest));
         }
     }

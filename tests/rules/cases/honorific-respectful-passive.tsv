@@ -11,3 +11,8 @@ rewrite:respectful-passive	お姉様が参加を許されるのは王宮主催�
 rewrite:respectful-passive	教母様がシャーカーンに捕えられてしまってからは	교어머님이 샤칸에 잡혀 버리고 나서는	keep	rewrites
 rewrite:respectful-passive	王子様が召使さんたちによって庭にご案内されてきた。	왕자님이 하인 씨들에 의해 뜰에 안내되어 왔다.	keep	rewrites
 rewrite:respectful-passive	先輩方が卒業したら、私たちだけ残されるわけですから	선배님이 졸업하면, 저희만 남겨지는 것이니까	keep	rewrites
+rewrite:respectful-passive	陛下は手紙を書かれている。	폐하는 편지를 쓰고 계신다.	fix	rewrites
+rewrite:respectful-passive	先生は本を置かれている。	선생님은 책을 두고 계신다.	fix	rewrites
+rewrite:respectful-passive	陛下は座られている。	폐하는 앉아 계신다.	fix	rewrites
+rewrite:respectful-passive	手紙が書かれている。	편지가 쓰여져 있다.	keep	rewrites
+rewrite:respectful-passive	陛下は手紙を書かれた。	폐하는 편지를 쓰셨다.	keep	rewrites
