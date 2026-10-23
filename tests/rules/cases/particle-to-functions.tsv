@@ -43,6 +43,10 @@ dict:gram:taru:tari	学生たる者。	학생인 사람.	keep	local
 dict:gram:dato:focus-quote	社交界に入るのが当たり前だとしか思っていなかった。	사교계에 들어가는 것이 당연하다고밖에 생각하지 않았었다.	fix	local-ending
 dict:gram:dato:focus-quote	静かだと困る。	조용하다면 곤란하다.	keep	local-ending
 lexical:kato-spacing	はっきりいって頭がショートするかと思った。	분명히 말해 머리가 쇼트할 줄 알았다.	fix	local-ending
+dict:gram:yoku:continuative:1	王都の治安はよく、女性が一人で住める。	왕도의 치안은 좋고, 여성이 혼자서 살 수 있다.	fix	local
+dict:gram:yoku:continuative:2	パーツのバランスも良く、可愛らしい顔立ちだった。	파츠의 밸런스도 좋고, 사랑스러운 얼굴 생김새였다.	fix	local
+dict:gram:yoku:continuative:1	両家の親はよく、そんな話を了承したものだな。	양가의 부모는 잘, 그런 이야기를 승낙한 것이네.	keep	local
+dict:gram:yoku:continuative:1	昼はよく眠っていた。	낮은 잘 자고 있었다.	keep	local
 lexical:kato-spacing	悪戯かと思われたが、犯人が見つからない。	못된 장난일까 하고 생각되었지만, 범인이 발견되지 않는다.	fix	local
 lexical:kato-spacing	行こうかなと思う。	갈까라고 생각한다.	keep	local-ending
 dict:jisjk:118946	契約の解消と変更をお願いします。	계약 해소와 변경을 부탁드립니다.	fix	local
