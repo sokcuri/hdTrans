@@ -339,6 +339,12 @@ void DropSpaceBeforeClose(std::string& text) {
                     }
                 } else if (StartsWith(rest, kDashes)) {
                     tail = kDashes;
+                } else {
+                    // A closing corner bracket takes no space after a syllable (가겠다 」 → 가겠다」),
+                    // also where a word between them wrote nothing.
+                    for (const std::string_view c : {"」", "』"}) {
+                        if (StartsWith(rest, c)) tail = c;
+                    }
                 }
                 if (!tail.empty()) {
                     Move(text, w, i, r.size);

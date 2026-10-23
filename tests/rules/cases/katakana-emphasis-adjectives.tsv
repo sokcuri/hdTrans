@@ -9,3 +9,7 @@ katakana:emphasis-adjective	出さないとコロスぞ。	내지 않으면 죽�
 katakana:emphasis-adjective	アタシがコロスんだ。	내가 죽이는 거야.	fix	normalize
 katakana:emphasis-adjective	ダメッ！	안 돼!	fix	normalize
 katakana:emphasis-adjective	ウルサイッ！	시끄럽다!	fix	normalize
+katakana:emphasis-adjective	コワイッ、やめて。	무섭다, 그만두어.	fix	normalize
+katakana:emphasis-adjective	ダメッだよ。	안 돼.	fix	normalize
+katakana:emphasis-adjective	「ウルサイッ」と叫んだ。	「시끄럽다」라고 외쳤다.	fix	normalize
+katakana:emphasis-adjective	「ダメッ」と言った。	「안 돼」라고 말했다.	keep	normalize
