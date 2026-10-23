@@ -13277,7 +13277,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぎゃくよう	역용	N110		Hd	GN				jisjk:175257		-1
 ぎゃくりゅう	역류	N110	VPl	Hd	GN				jisjk:175258		-1
 ぎゃくろう	소용돌이 치는 물결	N110	VSs		GN				jisjk:175260		-1
-ぎゃくコース		N110	VPl		GN				jisjk:175262		
+ぎゃくコース	역코스	N110	VPl		GN				jisjk:175262		
 ぎゃくモーション	역모션	N110	VRw		GN				jisjk:175264		
 ぎゃっきょう	역경	N110			GN				jisjk:175265		-1
 ぎゃっこう	역행	N110		Hd	GN				jisjk:175266		-1
@@ -53111,7 +53111,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オート ショー	자동차 전시회	N110	VGt		GN				jisjk:44722		
 オート トラック	화물 자동차	N110	VTp		GN				jisjk:44723		
 オートさんりしゃ	삼륜차	N110	VTpVPe		GN				jisjk:158090		
-オートアンサーモード		N110			IT				jisjk:260292		
+オートアンサーモード	자동 응답 모드	N110			IT				jisjk:260292		
 オートエンドキャップ	오토피드	N110			GN				jisjk:44724		
 オートエンドキャップフィールド	오토 엔드캡 필드	N110			GN				jisjk:44725		
 オートオークション	오토 옥션	N110			BZ				jisjk:351086		
@@ -53403,7 +53403,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オーペア	오페어	N110	VHn		GN				jisjk:158174		
 オーボエ	오보에	N110	USoQMUVPe		GN				jisjk:158175		
 オーマン	오멘	N110			GN				jisjk:44854		
-オーマン首長国		N110	VPl		GN				jisjk:158176		
+オーマン首長国	오만 토후국	N110	VPl		GN				jisjk:158176		
 オーミー	오미	N130	QPN		GN				jisjk:119050		
 オーム	오옴	N110			GN				jisjk:13944		
 オーム社	오움사	N110	VPl		GN				jisjk:160257		
@@ -96840,17 +96840,17 @@ ttt	ttt	K110			GN				jisjk:201744
 三つ口	언청이	I110	VHn		GN				jisjk:72439		
 三つ子	세쌍둥이	I110	VHn		GN				jisjk:72443		
 三つ巴	삼파	N110			GN				jisjk:252473		
-三つ折り		N110			GN				jisjk:252450		
-三つ折れ人形		N110			GN				jisjk:252456		
+三つ折り	삼단 접기	N110			GN				jisjk:252450		
+三つ折れ人形	관절 인형	N110			GN				jisjk:252456		
 三つ指	세 손가락	N110	VBp		GN				jisjk:252497		
 三つ揃い	쓰리피스	N110			GN				jisjk:252467		
 三つ星	세 개의 별	N110	VSs		GN				jisjk:252489		
 三つ目	세번째	I110			GN				jisjk:72440		
 三つ目錐	세모 송곳	N110	VPe		GN				jisjk:252494		
 三つ組	세 개 한벌	N110			GN				jisjk:252463		
-三つ編み		N110			GN				jisjk:252448		
+三つ編み	세 가닥 땋기	N110			GN				jisjk:252448		
 三つ葉	세닢	I110	VMo		GN				jisjk:72441		
-三つ葵		N110			GN				jisjk:252447		
+三つ葵	미츠아오이	N110			GN				jisjk:252447		
 三の丸	산노마루	N130	QCTVPl		GN				jisjk:296796		
 三の倉町	산노쿠라쵸	I130	QCTVPl		GN				jisjk:296782		
 三の宮	산노미야	N130	QCTVPl		GN				jisjk:296799		
@@ -97124,7 +97124,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井善見	미쓰이 요시미	N130	VHn		GN				jisjk:226259		
 三井喜彦	미쓰이 요시히코	N130	VHn		GN				jisjk:226258		
 三井埠頭	미츠이 부두	I130	VBlVPl		GN				jisjk:72999		
-三井家		N110			GN				jisjk:252451		
+三井家	미츠이가	N110			GN				jisjk:252451		
 三井寺	미이데라	N130	VPl		GN				jisjk:221837		
 三井寺	미이데라	N130	VPl		GN				jisjk:221838		
 三井寺	미데라	N130	QCTVPl		GN				jisjk:330167		
@@ -97173,7 +97173,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井生命保険相互会社	미츠이 생명보험상호회사	I130			GN				jisjk:109455		
 三井田	미이다	N130	QPN	Wa	GN				jisjk:73019		
 三井田	미츠이다	N130	QPN	Wa	GN				jisjk:345424		
-三井甲之		N110			GN				jisjk:252452		
+三井甲之	미츠이 고시	N110			GN				jisjk:252452		
 三井町	미쵸	N130	QCTVPl		GN				jisjk:330165		
 三井町	미마치	N130	QCTVPl		GN				jisjk:330172		
 三井石化エンジニアリング	미츠이 석유화학엔지니어링	I130	QIDVGt		GN				jisjk:73011		
@@ -97191,7 +97191,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井親和	미쓰이 신나	N130	VHn		GN				jisjk:222036		
 三井観光開発	미츠이 관광개발	I130	QIDVGt		GN				jisjk:72963		
 三井記念病院	미츠이 기념병원	I130	QIDVGt		GN				jisjk:72969		
-三井財閥		N110			GN				jisjk:252453		
+三井財閥	미츠이 재벌	N110			GN				jisjk:252453		
 三井軽金属加工	미츠이 경금속가공	I130	QIDVGt		GN				jisjk:72961		
 三井農木	미쯔이농림	I110	VGt		GN				jisjk:72971		
 三井農林	미츠이 농림	I130	QIDVGt		GN				jisjk:72970		
@@ -98898,7 +98898,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三石	삼석	N130	QPN	Wb	GN				jisjk:345412		
 三石台	미츠이시다이	N130	QCTVPl		GN				jisjk:330984		
 三石商事	미츠이시 상사	I130	QIDVGt		GN				jisjk:72781		
-三石昆布		N110			GN				jisjk:252454		
+三石昆布	미츠이시 다시마	N110			GN				jisjk:252454		
 三石町	미츠이시쵸	N130	QCTVPl		GN				jisjk:330986		
 三石通	미츠이시도리	N130	QCTVPl		GN				jisjk:330987		
 三石郡	미츠이시군	N130	QCTVPl		GN				jisjk:330983		
@@ -128347,7 +128347,7 @@ ttt	ttt	K110			GN				jisjk:201744
 光山区	광산구	N130	QCT		GN				jisjk:375403		
 光山電気工業	미츠야마 전기공업	I130	QIDVGt		GN				jisjk:62321		
 光岡	미츠오카	N130	QPN	Wa	GN				jisjk:257785		
-光岡明		N110			GN				jisjk:252455		
+光岡明	미츠오카 아키라	N110			GN				jisjk:252455		
 光岡自動車	미츠오카 자동차	I130	QIDVGt		GN				jisjk:62296		
 光岳	데카리다케	N130	VPl		GN				jisjk:218107		
 光岸地	코우간지	N130	QCTVPl		GN				jisjk:292201		
@@ -149028,7 +149028,7 @@ ttt	ttt	K110			GN				jisjk:201744
 双葉電線	후타바전선	I110	VGt		GN				jisjk:77194		
 双軸結晶	쌍축결착	N110	VPe		GN				jisjk:240086		
 双里	소우리	N130	QCTVPl		GN				jisjk:304748		
-双鉤填墨		N110			GN				jisjk:240009		
+双鉤填墨	쌍구전묵	N110			GN				jisjk:240009		
 双門	쌍문	N130	QST		GN				jisjk:374114		
 双頭	쌍두	N110			GN				jisjk:28276		
 双頭の鷲	쌍두 독수리	N110	VAm		GN				jisjk:240177		
@@ -182809,7 +182809,7 @@ ttt	ttt	K110			GN				jisjk:201744
 密集	밀집	N110		Hd	GN				jisjk:22619		
 密集地	밀집지	N110	VPl		GN				jisjk:155267		
 密集地帯	밀집지대	N110	VPl		BZ				jisjk:358582		
-密雲		N110			GN				jisjk:252449		
+密雲	짙은 구름	N110			GN				jisjk:252449		
 富	풍부&AV@	M425			GN	394	||1 &&3 S-1== "に" P-1== "2**" D-1= "(이)가"	富 앞에 조사 に가 있으면 이를 이가로 바꾸고 풍부하다는 뜻을 고른다. (미발동: rare-word)	jisjk:13706		
 富	부	N110			GN				jisjk:116201		
 富	잘&K5@	M415			GN	1528	||1 &&3 S-1== "に" P-1== "2**" D-1= "에"	富는 앞말이 に 조사이면 잘살다로 고르면서 に를 에로 바꾼다. (미발동: rare-word) [의심] に만으로 잘살다를 고르면 資源に富む 같은 풍부하다 문맥을 자원에 잘살다로 읽는다.	jisjk:145801		
@@ -183593,7 +183593,7 @@ ttt	ttt	K110			GN				jisjk:201744
 寒竹	한죽	N110	VPt		GN				jisjk:230109		
 寒竹剛	간타케 쓰요시	N130	VHn		GN				jisjk:224627		
 寒紅梅	한홍매	N110	VPt		GN				jisjk:229854		
-寒緋桜		N110			GN				jisjk:230200		
+寒緋桜	칸히자쿠라	N110			GN				jisjk:230200		
 寒羊	한양	N110	VAm		GN				jisjk:230253		
 寒肥	한비	N110	VPe		GN				jisjk:170248		
 寒色	한색	N110	UCl		GN				jisjk:38450		
@@ -264304,7 +264304,7 @@ ttt	ttt	K110			GN				jisjk:201744
 湊川ツルタ薬品	미나토가와약품	I110	VGt		GN				jisjk:84269		
 湊川町	미나토가와쵸	N130	QCTVPl		GN				jisjk:331328		
 湊川神社	미나토가와 신사	N110	VBlUCl		GN				jisjk:252533		
-湊川神社		N110	VHn		GN				jisjk:252534		
+湊川神社	미나토가와 신사	N110	VHn		GN				jisjk:252534		
 湊建材工業	미나토켄자이코교	I110	VGt		GN				jisjk:84266		
 湊御殿	미나토고텐	N130	QCTVPl		GN				jisjk:331331		
 湊新地町	미나토신치마치	I130	QCTVPl		GN				jisjk:331334		
@@ -286417,7 +286417,7 @@ ttt	ttt	K110			GN				jisjk:201744
 磁場	자장	N110			GN				jisjk:194007		
 磁壁	자벽	N110			GN				jisjk:236841		
 磁変星	자변성	N110			GN				jisjk:236842		
-磁州窯		N110			GN				jisjk:236607		
+磁州窯	자주요	N110			GN				jisjk:236607		
 磁心記憶装置	자기 기억 장치	N110			GN				jisjk:236620		
 磁性	자성	N110			GN				jisjk:31874		
 磁性体	자성체	N110			GN				jisjk:236650		
@@ -294406,7 +294406,7 @@ ttt	ttt	K110			GN				jisjk:201744
 第六	제6	N110		Nd	GN				jisjk:159674		
 第六〇	제60	N110		Nd	GN				jisjk:159675		
 第六感	육감	N110	SFl		GN				jisjk:153289		
-第十八願		N110			GN				jisjk:242109		
+第十八願	제18원	N110			GN				jisjk:242109		
 第十新田	다이쥬우신덴	I130	QCTVPl		GN				jisjk:308139		
 第四に	4번째로	E300			GN				jisjk:123365		
 第四の	제４	I110			GN				jisjk:106115		
@@ -335382,7 +335382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 逆オイルショック	역오일 쇼크	N110			BZ				jisjk:352373		
 逆ギレ	분노	N110		Hd	GN				jisjk:344732		
 逆コンパイル	역 컴파일	I110			GN				jisjk:78203		
-逆コース		N110	VPl		GN				jisjk:175261		
+逆コース	역코스	N110	VPl		GN				jisjk:175261		
 逆ザヤ	역차액	N110			BZ				jisjk:352393		
 逆デュアル・カレンシー債	역듀얼 커런시 채권	N110	VMo		BZ				jisjk:352407		
 逆トーマス	역토마스	N110			BZ				jisjk:352413		
@@ -340232,7 +340232,7 @@ ttt	ttt	K110			GN				jisjk:201744
 采配蘭	난과의 다년초	N110	VPt		GN				jisjk:232128		
 釈	해석&AV@	M439			GN				jisjk:93493		
 釈奠	석전제	N110			GN				jisjk:234549		
-釈奠		N110	UCl		GN				jisjk:238987		
+釈奠	석전제	N110	UCl		GN				jisjk:238987		
 釈宗演	샤쿠 소엔	N130	VHn		GN				jisjk:216045		
 釈家	석가	N110	UClVBl		GN				jisjk:234600		
 釈尊	석가모니	N130	QPN		GN				jisjk:100909		
@@ -342796,7 +342796,7 @@ ttt	ttt	K110			GN				jisjk:201744
 金色	카나이로	N130	QCTVPl		GN				jisjk:282719		
 金色久保	카나이로쿠보	I130	QCTVPl		GN				jisjk:282720		
 金色堂	금색당	N110	VBl		GN				jisjk:231586		
-金色夜叉		N110			GN				jisjk:231587		
+金色夜叉	곤지키야샤	N110			GN				jisjk:231587		
 金芝河	김지하	N110	VHn		GN				jisjk:161527		
 金芳漢	김방한	N130	QPN		GN				jisjk:207502		
 金英子	김영자	N130	QPN		GN				jisjk:207568		
