@@ -1,0 +1,11 @@
+# 규칙: NUM-8
+rule	input	expected	kind	layer
+dict:jisjk:365553	一番好きな作家は？	제일 좋아하는 작가는?	fix	local
+dict:jisjk:365553	どの子が一番好きなの？	어느 아이가 제일 좋아해?	fix	local
+dict:jisjk:365553	先輩好きです。	rule:dict:jisjk:365553=(을)를 좋아%D1@	keep	local
+dict:jisjk:1859	駆逐艦の一番艦だ。	구축함의 1번함이다.	fix	local
+dict:jisjk:1859	一番目の問題。	첫번째의 문제.	keep	local
+dict:jisjk:1859	一番強い。	제일 강하다.	keep	defaults
+dict:jisjk:1859	一番になりたい。	제일이 되고 싶다.	keep	defaults
+dict:number-lexical-words	一つください。	하나 주세요.	keep	defaults
+dict:number-lexical-words	一人で行く。	혼자서 간다.	keep	defaults

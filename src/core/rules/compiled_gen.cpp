@@ -368,10 +368,11 @@ bool RuleL44([[maybe_unused]] Item* p) {
 }
 
 // local 45
-//     (src[+1] == "め" or src[+1] == "目")
+//     (src[+1] == "め" or src[+1] == "目" or src[+1] == "艦")
 bool RuleL45([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "め"sv) ||
-           SrcEq(p, 1, "目"sv));
+           SrcEq(p, 1, "目"sv) ||
+           SrcEq(p, 1, "艦"sv));
 }
 
 // local 46
@@ -4478,7 +4479,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL42, 0x81fb06832032cff9ull},
     {RuleL43, 0xa12ceabd944c4c13ull},
     {RuleL44, 0xc0cab0d798f0118bull},
-    {RuleL45, 0x555193f1128693dbull},
+    {RuleL45, 0x3cc5675bb3081c9aull},
     {RuleL46, 0x03deeef0c1304ae2ull},
     {RuleL47, 0xc5cdeb9946b1b355ull},
     {RuleL48, 0x3722e3ca808c5f41ull},
