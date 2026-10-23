@@ -107,7 +107,11 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
          "万\t만\tN110\t\tNj\tGN\t0\t2\n"
          "十五日\t십오일\tN110\t\t\tGN\t0\t3\n"
          "四十九日\t사십구일재\tN110\t\t\tGN\t0\t4\n"
-         "二十日\t스무날\tN110\t\t\tGN\t0\t5\n"},
+         "二十日\t스무날\tN110\t\t\tGN\t0\t5\n"
+         "番\t번\tN110\t\tCt\tGN\t0\t6\n"
+         "十八番\t십팔번\tN110\t\t\tGN\t0\t7\n"
+         "十八番\t장기\tN110\t\t\tGN\t0\t8\n"
+         "艦\t함\tN110\t\t\tGN\t0\t9\n"},
     };
     // A number that goes on after 万 is one number, written in groups of four digits.
     CheckImprovement(&hdTrans::word::Improvements::kanjiNumbers, files, "一万二千三百日", "1만2천3백일", "1만 2300일");
@@ -116,8 +120,12 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
     const auto loaded = hdTrans::dict::Load(files);
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    // A word with a sense of its own beside the spelled one keeps its reading where it stands
+    // alone, and reads the number inside a compound.
     for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"四十九日", "사십구일재"},
-                                          std::pair<std::string, std::string_view>{"二十日", "스무날"}}) {
+                                          std::pair<std::string, std::string_view>{"二十日", "스무날"},
+                                          std::pair<std::string, std::string_view>{"十八番", "십팔번"},
+                                          std::pair<std::string, std::string_view>{"十八番艦", "18번함"}}) {
         hdTrans::internal::TranslationOptions options;
         hdTrans::internal::Memory memory;
         const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);

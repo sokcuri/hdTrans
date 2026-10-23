@@ -6,6 +6,7 @@
 #include "core/output/cleanup.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
+#include "core/text/unicode.h"
 #include "core/tokenizer/canonical.h"
 #include "core/tokenizer/charsets.h"
 #include "core/tokenizer/classify.h"
@@ -686,14 +687,18 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
 // number, alone or with one counter read with its Sino-Korean syllable (五十 오십, 十五日
 // 십오일, 十二月 12월): the number is read as digits then (50, 15일, 12월). A word read
 // otherwise (四十九日 사십구일재, 二十歳 20살) or a longer word (五十肩, 八百屋, 二十四時間)
-// keeps its reading.
-bool Worker::SpellsNumber(Record* records, const Record& number) {
+// keeps its reading, and so does a word that also has a sense of its own beside the
+// spelled one, where no kanji goes on after it (十八番 십팔번 and 장기: 十八番を歌う, but
+// 十八番艦 18번함). text is the text the words start.
+bool Worker::SpellsNumber(Record* records, const Record& number, std::string_view text) {
     const std::string_view source = number.source;
     if (!settings.improvements.kanjiNumbers || source.empty() || static_cast<unsigned char>(source[0]) < 0x80 ||
         number.target.empty() || !IsDigit(number.target[0]) || text::RuneCount(source) < 2) {
         return false;
     }
     const std::string reading = SinoKoreanNumber(number.target);
+    bool spelled = false, own = false;
+    std::size_t length = 0;
     for (Record* r = records; r != nullptr; r = r->child) {
         if (r->source.size() <= source.size()) continue;
         if (!std::string_view(r->source).starts_with(source)) return false;
@@ -716,11 +721,23 @@ bool Worker::SpellsNumber(Record* records, const Record& number) {
         if (!target.starts_with(reading) && !target.starts_with(number.target) &&
             std::none_of(std::begin(kNativeTens), std::end(kNativeTens),
                          [&](std::string_view w) { return target.starts_with(w); })) {
+            const bool name = r->partCode.starts_with("N13") || r->semantic.starts_with("QPN") ||
+                              r->semantic.starts_with("QCT") || (r->user != nullptr && r->user->nameLayer);
+            if (!name && !target.empty()) {
+                own = true;
+                length = std::max(length, r->source.size());
+            }
             continue;
         }
         std::string unit;
         text::AppendRune(unit, *syllable);
         if (target != reading + unit && target != number.target + unit) return false;
+        spelled = true;
+        length = std::max(length, r->source.size());
+    }
+    if (spelled && own && length <= text.size() &&
+        (length == text.size() || !text::IsKanji(text::DecodeRune(text.substr(length)).cp))) {
+        return false;
     }
     return true;
 }
@@ -749,7 +766,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
             // A longer word at the number (a name) keeps the dictionary reading too.
             if (Record* number = ProbeNumericPrefix(token, rest); number != nullptr && !spelled) {
                 const Lookup after = DoLookup(rest, kModeGeneral);
-                spelled = after.count != 0 && !SpellsNumber(after.records, *number);
+                spelled = after.count != 0 && !SpellsNumber(after.records, *number, rest);
             }
             if (const Lookup l = DoLookup(kOrdinal, kModeGeneral); !spelled && l.count != 0) {
                 return ProcessCandidateRecord(full, cursor, token, l.records, parent);
@@ -758,7 +775,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     }
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         const Lookup dictionary = DoLookup(text, kModeGeneral);
-        if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric)) {
+        if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text)) {
             return ProcessCandidateRecord(full, cursor, token, numeric, parent);
         }
         found = dictionary;
