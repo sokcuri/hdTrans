@@ -133,15 +133,15 @@ cmake --build --preset wasm --parallel
 
 release-please가 태그를 만든 뒤 **Build**를 명시적으로 실행합니다. 전체 플랫폼 빌드와 테스트가 통과하면
 패키지와 SHA-256 목록을 기존 GitHub Release에 첨부하며, release-please의 릴리스 노트는 유지합니다.
-`develop` 푸시는 `nightly` 태그를 옮기고 같은 이름의 사전 릴리스 하나와 첨부 파일을 갱신합니다.
-nightly 노트는 이전 정식 태그 이후의 커밋 제목입니다.
+`develop` 푸시도 빌드와 테스트 뒤 패키지를 만들지만 `release-packages` CI 아티팩트로만 올리며,
+GitHub Release를 만들거나 태그를 옮기지 않습니다.
 
 Actions의 **Build → Run workflow**에서 `dry_run=true`로 실행하면 패키지를 `release-packages`
 아티팩트로만 올립니다. 정식 태그를 선택하고 `dry_run=false`로 실행하면 첨부 파일을 다시 올릴 수 있습니다.
 공개 배포는 `main`에 포함된 `vX.Y.Z` 태그에서만 허용하며, 브랜치에서 수동 실행하면 공개하지 않습니다.
 사용자 파일 견본의 스테이징 목록은 `build.yml`의 `HDTRANS_USER_FILES`에서 관리합니다.
 
-버전은 `git describe --tags`에서 가져오며 이동하는 `nightly` 태그는 제외하고 앞의 `v`를 뗍니다.
+버전은 `git describe --tags`로 찾은 가장 가까운 `v` 태그에서 앞의 `v`를 뗀 값입니다.
 태그가 없으면 `0.0.0-<짧은 SHA>`입니다. Git 정보가 없는 소스 압축본은 release-please가 관리하는
 `release-version.txt`를 쓰며, 그 파일도 없으면 `0.0.0-unknown`입니다.
 C API의 `hdTrans_Version`, TypeScript의 `version`, Windows EXE와 DLL의 버전 정보에 같은 엔진 버전 문자열을 씁니다.

@@ -110,14 +110,27 @@ test('dry runs, PRs and branch builds cannot publish stable releases or npm', ()
     ['workflow_dispatch', 'refs/heads/main', false, false],
     ['push', 'refs/heads/main', false, false],
     ['pull_request', 'refs/pull/1/merge', false, false],
-    ['push', 'refs/heads/develop', false, true],
+    ['push', 'refs/heads/develop', false, false],
+    ['workflow_dispatch', 'refs/heads/develop', false, false],
   ];
   for (const [event_name, ref, dry_run, expected] of cases) {
     const github = { event_name, ref };
     assert.equal(canRelease(github, { dry_run }, (a, b) => a.startsWith(b)), expected);
     if (expected) assert.equal(canPackage(github, (a, b) => a.startsWith(b)), true);
   }
-  assert.match(build, /dry_run: \$\{\{ inputs.dry_run \|\| false \}\}/);
+});
+
+test('a develop push packages as a dry run and never publishes or moves a tag', () => {
+  const startsWith = (a, b) => a.startsWith(b);
+  const passDryRun = new Function('github', 'inputs', 'startsWith',
+    `return (${build.match(/^      dry_run: \$\{\{ (.*) \}\}$/m)[1]});`);
+  const develop = { event_name: 'push', ref: 'refs/heads/develop' };
+  assert.equal(canPackage(develop, startsWith), true);
+  assert.equal(passDryRun(develop, {}, startsWith), true);
+  assert.equal(canRelease(develop, { dry_run: false }, startsWith), false);
+  assert.equal(passDryRun({ event_name: 'push', ref: 'refs/tags/v1.2.3' }, { dry_run: false }, startsWith), false);
+  assert.equal(passDryRun({ event_name: 'workflow_dispatch', ref: 'refs/heads/main' }, { dry_run: false }, startsWith), true);
+  assert.doesNotMatch(build + release, /nightly|updateRef|createRef|prerelease: true/);
 });
 
 test('publication uses this run artifact and only its job enters the global non-cancelling queue', () => {
@@ -142,10 +155,10 @@ test('source checks bind both tag pipelines to the checked out commit and main a
   assert.match(publisherJob, /npm publish "\$PACKAGE" --access public --provenance --tag "\$DIST_TAG"/);
 });
 
-test('only the release mutation job serializes stable and nightly publication separately', () => {
+test('only the release mutation job enters the release queue', () => {
   const mutation = release.slice(release.indexOf('\n  release:\n'));
   assert.doesNotMatch(release.slice(0, release.indexOf('\n  release:\n')), /concurrency:/);
-  assert.match(mutation, /group: github-release-\$\{\{ github.ref == 'refs\/heads\/develop' && 'nightly' \|\| 'stable' \}\}/);
+  assert.match(mutation, /group: github-release\n/);
   assert.match(mutation, /queue: max\n      cancel-in-progress: false/);
 });
 

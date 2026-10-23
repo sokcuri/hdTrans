@@ -1,6 +1,6 @@
 find_package(Git QUIET)
 if(GIT_FOUND)
-    execute_process(COMMAND "${GIT_EXECUTABLE}" describe --tags --match "v[0-9]*" --exclude nightly
+    execute_process(COMMAND "${GIT_EXECUTABLE}" describe --tags --match "v[0-9]*"
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         OUTPUT_VARIABLE HDTRANS_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
     if(NOT HDTRANS_VERSION)
