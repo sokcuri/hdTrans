@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:respectful-passive	先生が逮捕された。	선생님이 체포되었다.	fix	rewrites
-rewrite:respectful-passive	教母様が幽閉されているのは天守閣です。	교어머님이 유폐 되고 있는 것은 천수각입니다.	fix	rewrites
+rewrite:respectful-passive	教母様が幽閉されているのは天守閣です。	교어머님이 유폐되고 있는 것은 천수각입니다.	fix	rewrites
 rewrite:respectful-passive	陛下が誘拐された。	폐하가 유괴당했다.	fix	rewrites
 rewrite:respectful-passive	先生が到着された。	선생님이 도착하셨다.	keep	rewrites
 rewrite:respectful-passive	国王様が崩御されて。	국왕님이 붕어하셔.	keep	rewrites

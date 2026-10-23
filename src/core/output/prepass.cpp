@@ -1101,7 +1101,10 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 std::find(std::begin(kSuru), std::end(kSuru), next.surface) != std::end(kSuru)) {
                 return Result(std::move(t), false);
             }
-            if (verbalNoun && startsWithAny(next.surface, kSuruStarts) && startsWithAny(nextEntry, kDoing)) {
+            // される is written with the marker of 되다; its written Korean shows whether 되다
+            // follows the noun (マージされた 머지되었다, but 温存され過ぎた 온존 너무 되었다).
+            const bool passive = next.surface.starts_with("さ") && nextEntry == "&C6@" && startsWithAny(remainder, kDoing);
+            if (verbalNoun && startsWithAny(next.surface, kSuruStarts) && (startsWithAny(nextEntry, kDoing) || passive)) {
                 return Result(std::move(t), false);
             }
             if (nextFirst == ")") return Result(std::move(t), false);

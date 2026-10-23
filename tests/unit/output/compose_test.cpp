@@ -309,3 +309,12 @@ HD_TEST(compose_particle_joins_latin_word_across_space) {
         HD_CHECK_EQ(String(result), c.expected);
     }
 }
+
+// A katakana verbal noun joins the される after it when 되다 follows it in the Korean.
+HD_TEST(compose_verbal_noun_passive) {
+    const CompositionCase cases[] = {
+        {{{"マージ", "110", "", "머지"}, {"され", "427", "", "&C6@", "5다"}}, {1, 2}, "머지되었다."},
+        {{{"マージ", "110", "", "머지"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "머지했다."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
