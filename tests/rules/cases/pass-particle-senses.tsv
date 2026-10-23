@@ -42,13 +42,15 @@ cx:no-after-na:10	静かなので眠れる。	조용해서 잘 수 있다.	keep	
 rewrite:particle-in-next	水泳部なだけに	수영부인 만큼	fix	rewrites
 rewrite:particle-in-next	人気なだけに	인기인 만큼	fix	rewrites
 rewrite:particle-in-next	学生だけに話す。	학생에게만 이야기한다.	keep	rewrites
-rewrite:hodo-degree	武装も哀れなほどに貧弱で	무장도 불쌍할 정도로 빈약해	fix	rewrites
-rewrite:hodo-degree	耳が痛い程の沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
-rewrite:hodo-degree	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
-rewrite:hodo-degree	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
-rewrite:hodo-degree	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
-rewrite:hodo-degree	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
-rewrite:hodo-degree	血を吐く程に重苦しい声だった。	피를 토할 정도로 답답한 목소리였다.	fix	rewrites
+cx:hodo-degree:20	武装も哀れなほどに貧弱で	무장도 불쌍할 정도로 빈약해	fix	rewrites
+cx:hodo-degree:30	耳が痛い程の沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
+cx:hodo-degree:30	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
+cx:hodo-degree:20	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
+cx:hodo-degree:30	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
+cx:hodo-degree:30	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
+cx:hodo-degree:10	血を吐く程に重苦しい声だった。	피를 토할 정도로 답답한 목소리였다.	fix	rewrites
+cx:hodo-degree:10	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
+cx:hodo-degree:20	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 cx:kara-source:10	次からは本気だからね。	다음부터는 진심이니까.	fix	rewrites
 cx:kara-source:10	生まれた時からほぼ決まっている。	태어났을 때부터 거의 정해져 있다.	fix	rewrites
 cx:kara-source:10	彼からの手紙。	그로부터의 편지.	keep	rewrites

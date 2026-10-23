@@ -1637,33 +1637,6 @@ void TerminalBeforeQuote(Flusher& f) {
     }
 }
 
-namespace {
-
-}  // namespace
-
-void HodoDegree(Flusher& f) {
-    bool conditional = false;
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (it->DirectIndex() < 0) continue;
-        const std::string_view d = it->DirectSurface();
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (d.ends_with("ば")) conditional = true;
-        const bool ok = d.ends_with("に");
-        const std::string_view stem = ok ? d.substr(0, d.size() - std::string_view("に").size()) : d;
-        if (conditional || (!stem.ends_with("程") && !stem.ends_with("ほど")) || e == nullptr) continue;
-        const bool ni = it->next != nullptr && it->next->group->surface == "に";
-        bool degree = ok;
-        if (!degree && it->next != nullptr) {
-            for (const std::string_view p : dict::ClassMembers("particle.hodo-degree")) {
-                degree = degree || it->next->group->surface.starts_with(p);
-            }
-        }
-        if (!degree || (!Has(e->dst, "수록") && !(Has(e->dst, "만큼") && ni))) continue;
-        it->AssignDirectSlot(it->DirectIndex(), ok ? "3 정도로" : "3 정도");
-        if (!ok && ni) SelectLemma(f, it->next, "(으)로");
-    }
-}
-
 void QuestionCopula(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Item* p = it->prev;

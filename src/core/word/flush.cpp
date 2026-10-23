@@ -59,7 +59,6 @@ constexpr Pass kTextPasses[] = {
     {"QuoteTo", QuoteTo},
     {"NodaTo", NodaTo},
     {"TerminalBeforeQuote", TerminalBeforeQuote},
-    {"HodoDegree", HodoDegree},
     {"QuestionCopula", QuestionCopula},
     {"WonderingDarou", WonderingDarou},
     {"GenitiveBetweenNames", GenitiveBetweenNames},
