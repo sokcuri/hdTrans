@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-dict:w:26740	飲みやすいから、二樽は欲しいんだが	rule:dict:w:26740=통	fix	local
+dict:w:26756	飲みやすいから、二樽は欲しいんだが	rule:dict:w:26756=통	fix	local
 dict:jisjk:104697	ウォーベアの一頭が反撃を試みた。	워베아의 한 마리가 반격을 시도했다.	fix	lookup
 dict:jisjk:160410	二体の木彫りの神を祀る。	2체의 목각의 신을 모신다.	fix	lookup
