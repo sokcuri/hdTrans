@@ -1,3 +1,5 @@
 rule	input	expected	kind	layer
+names:numbered	サーライチとサーラニとサーラサンが来た。	사라이치와 사라니와 사라산이 왔다.	fix	normalize
+names:numbered	サーラサンが来た。	사라 씨가 왔다.	keep	normalize
 names:favour-doer	ヤカンに水を入れて母に作ってもらった。今日もヤカンに水を入れて母に作ってもらった。	주전자에 물을 넣어 어머니가 만들어 주었다. 오늘도 주전자에 물을 넣어 어머니가 만들어 주었다.	fix	normalize
 names:favour-doer	フトンに鞄を直してもらった。フトンが帽子を編んでくれた。	후톤이 가방을 고쳐 주었다. 후톤이 모자를 짜 주었다.	keep	normalize

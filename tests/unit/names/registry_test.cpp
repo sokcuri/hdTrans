@@ -86,7 +86,8 @@ const dict::Snapshot* Dictionary() {
          "がび\t가비\tN130\tQPNVHn\tWb\tGN\t24\n"
          "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
          "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"
-         "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"},
+         "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"
+         "サーラ\t사라\tN130\tQPNVHn\tWb\tGN\t62\n"},
     });
     return loaded.snapshot.get();
 }
@@ -578,6 +579,18 @@ HD_TEST(names_katakana_siblings) {
     HD_CHECK(!one.Named("ヨウタサン"));
     names::Registry honorifics = Scan(snap, "ヨウタクンは来た。\nヨウタチャンが来た。\nヨウタサンは来た。");
     HD_CHECK(!honorifics.Named("ヨウタサン"));
+}
+
+HD_TEST(names_numbered_names) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    // Two numbered runs of a name read as the name's reading and the number's.
+    names::Registry r = Scan(snap, "サーライチは新しい物が好きだ。\nサーラニは眠っている。\nサーラサンは背が高い。");
+    HD_CHECK_EQ(r.Render("サーライチ"), std::string("사라이치"));
+    HD_CHECK_EQ(r.Render("サーラサン"), std::string("사라산"));
+    // One numbered run is not enough (サン may be the honorific).
+    names::Registry one = Scan(snap, "サーラサンは来た。");
+    HD_CHECK_EQ(one.Render("サーラサン"), std::string());
 }
 
 HD_TEST(names_favour_doer) {

@@ -27,6 +27,9 @@ namespace {
 // The katakana honorifics a katakana name may end in (ヨウタサン).
 constexpr std::string_view kKatakanaHonorifics[] = {"サン", "サマ", "クン", "チャン", "ドノ"};
 
+// The numbers one to ten read in katakana, after a name in a numbered name (サーラサン).
+constexpr std::string_view kNumberReadings[] = {"イチ", "ニ", "サン", "ヨン", "ゴ", "ロク", "ナナ", "ハチ", "キュウ", "ジュウ"};
+
 // Thresholds of the evidence score.
 constexpr double kThreshold = 2.0;
 constexpr double kSingleThreshold = 3.0;  // single-kanji surfaces without a label
@@ -725,6 +728,33 @@ const std::map<std::string, Name>& Registry::Accepted() {
         j.person = true;
         j.hasParts = true;
         j.parts = parts;
+    }
+    // The numbered names of a name: two or more katakana runs of the document that are the
+    // name and a number read in katakana (サーライチ, サーラニ, サーラヨン beside サーラ), each of which
+    // no dictionary has, read as the name's reading and the number's.
+    numbered_.clear();
+    std::map<std::string, std::vector<std::string>> numbers;
+    for (const auto& [t, c] : kana_) {
+        (void)c;
+        for (const std::string_view y : kNumberReadings) {
+            if (t.size() <= y.size() || !std::string_view(t).ends_with(y)) continue;
+            const std::string x = t.substr(0, t.size() - y.size());
+            const DictFlags f = Flags(x);
+            if (RuneCount(x) >= 2 && AllRunes(x, IsKatakana) &&
+                (att.count(x) > 0 || f.person || f.layerGiven || f.layerSurname)) {
+                numbers[x].push_back(t);
+            }
+        }
+    }
+    for (const auto& [x, ts] : numbers) {
+        if (ts.size() < 2) continue;
+        for (const std::string& t : ts) {
+            if (Flags(t).records > 0 || (snap_ != nullptr && !snap_->NameRecords(t).empty())) continue;
+            numbered_[t] = x;
+            Name& n = all[t];
+            n.score = std::max(n.score, kThreshold);
+            n.person = true;
+        }
     }
     scores_.clear();
     FindSiblingNames();

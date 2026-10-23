@@ -1,6 +1,7 @@
 // Rendering of the accepted names as Hangul: the plain-dictionary rendering, the kana
-// reading of the document, the readings table, the head of a longer katakana name, the
-// name layer's person rendering, and the katakana transliteration.
+// reading of the document, the readings table, a numbered name as its name and number,
+// the head of a longer katakana name, the name layer's person rendering, and the katakana
+// transliteration.
 #include <string>
 #include <string_view>
 #include <vector>
@@ -85,6 +86,11 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         if (IsKanaText(v->second)) return text::FromKana(v->second, preset);
         return v->second;
     }
+    if (const auto x = numbered_.find(key); x != numbered_.end()) {
+        const std::string head = RenderPart(x->second, true);
+        const std::string number = text::FromKana(std::string_view(key).substr(x->second.size()), preset);
+        if (!head.empty() && IsHangulText(number)) return head + number;
+    }
     if (const std::string kr = PrefixForm(t); !kr.empty()) return kr;
     const std::string layer = Flags(t).layerName;
     if (snap_ != nullptr) {
@@ -123,7 +129,8 @@ std::string Registry::PersonName(std::string_view t) {
 std::string Registry::PrefixForm(std::string_view x) {
     if (!AllRunes(x, IsKatakana)) return "";
     for (const std::string& t : Names()) {
-        if (!t.starts_with(x) || t.size() == x.size() || !AllRunes(t, IsKatakana)) continue;
+        // A numbered name reads its head the way the head reads (RenderPart).
+        if (!t.starts_with(x) || t.size() == x.size() || !AllRunes(t, IsKatakana) || numbered_.count(t) > 0) continue;
         const std::string_view y = std::string_view(t).substr(x.size());
         const std::string h = SyllableHead(RenderPart(t), x, y);
         if (!h.empty()) return h;

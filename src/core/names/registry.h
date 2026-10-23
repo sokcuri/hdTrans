@@ -200,6 +200,7 @@ private:
     std::map<std::string, DictFlags> flags_;
     std::map<std::string, Name> scores_;                // accepted names, valid while scoresValid_
     std::set<std::string> siblings_;                    // SiblingNames, valid while scoresValid_
+    std::map<std::string, std::string> numbered_;       // numbered names to their name, valid while scoresValid_
     bool scoresValid_ = false;
 };
 
