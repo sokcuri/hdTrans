@@ -47,20 +47,22 @@ Match TagSpan(std::string_view s) {
 }
 
 // [name], [/name] or [name=value]: a letter, then letters, digits and _; the value
-// holds no ] and no line feed.
+// holds no ] and no line feed. The same in braces ({rb}, {/rt}, {k=-5.0}), the tags of
+// script markup.
 Match BbCodeSpan(std::string_view s) {
     size_t i = 0;
-    if (i >= s.size() || s[i] != '[') return {};
+    if (i >= s.size() || (s[i] != '[' && s[i] != '{')) return {};
+    const char close = s[i] == '[' ? ']' : '}';
     i++;
     if (i < s.size() && s[i] == '/') i++;
     if (i >= s.size() || !IsAsciiLetter(s[i])) return {};
     i++;
     while (i < s.size() && (IsAsciiAlnum(s[i]) || s[i] == '_')) i++;
     if (i < s.size() && s[i] == '=') {
-        const size_t close = s.find_first_of("]\n", i + 1);
-        if (close != std::string_view::npos && s[close] == ']') i = close;
+        const size_t end = s.find_first_of(close == ']' ? "]\n" : "}\n", i + 1);
+        if (end != std::string_view::npos && s[end] == close) i = end;
     }
-    if (i >= s.size() || s[i] != ']') return {};
+    if (i >= s.size() || s[i] != close) return {};
     const std::string_view m = s.substr(0, i + 1);
     if (text::RuneCount(m) > 128) return {};
     return {m.size(), m[1] == '/' ? output::SpanClose : output::SpanOpen};

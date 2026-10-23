@@ -4,7 +4,7 @@ dict:rare-words	蛇が庭を這いずり回っていた。	뱀이 뜰을 기어 
 dict:rare-words	虫が壁を這い回る。	벌레가 벽을 기어다닌다.	fix	lookup
 dict:rare-words	粘土を揉みしだく。	점토를 마구 주무른다.	fix	lookup
 dict:rare-words	風が枝をしならせる。	바람이 가지를 휘게 한다.	fix	lookup
-dict:rare-words	門はびくともしていない。	문은 꿈쩍도 하고 있지 않다.	fix	lookup
+dict:rare-words	門はびくともしていない。	문은 꿈쩍도 하지 않았다.	fix	lookup
 dict:rare-words	門はビクともせず立っていた。	문은 꿈쩍도 하지 않고 서 있었다.	fix	lookup
 dict:jisjk:360104	門はビクともしない。	문은 꿈쩍도 하지 않는다.	fix	lookup
 dict:rare-words	日焼けで皮剥けた。	썬탠으로 껍질이 벗겨졌다.	fix	lookup
@@ -105,3 +105,4 @@ sense:いたい	一緒にいかがですか。	함께 어떻습니까.	keep	sens
 sense:いたい	お腹がいたい。	배가 아프다.	keep	senses
 dict:rare-words	朝から頭がいたい。	아침부터 머리가 아프다.	fix	lookup
 dict:rare-words	彷徨える騎士に会った。	떠도는 기사를 만났다.	fix	lookup
+dict:rare-words	武器は剣と鉈。	무기는 검과 손도끼.	fix	lookup

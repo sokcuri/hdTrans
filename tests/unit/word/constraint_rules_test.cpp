@@ -84,7 +84,31 @@ const dict::Snapshot* Dictionary() {
          "そう言\t그렇게 말&AV@\tM420\t\t\tGN\t86\n"
          "いた\t아$AA@\tH7N0\t\t\tGN\t87\n"
          "いた\t손상&C6@\tM425\t\t\tGN\t88\n"
-         "い\t&HN@\tM417\t\t\tGN\t89\n"},
+         "い\t&HN@\tM417\t\t\tGN\t89\n"
+         "わけ\t이유\tN110\t\t\tGN\t90\n"
+         "わけ\t나&C4@\tM417\t\t\tGN\t91\n"
+         "とい\t그렇다고 &AV@\tM420\t\t\tGN\t92\n"
+         "ということで、\t그래서,\tP200\t\t\tGN\t93\n"
+         "歳\t세\tN110\t\t\tGN\t94\n"
+         "歳で\t세에\tN110\t\t\tGN\t95\n"
+         "ま\t\tQ110\t\t\tGN\t96\n"
+         "まで\t까지\tP200\t\t\tGN\t97\n"
+         "余り\t나머지\tN110\t\t\tGN\t98\n"
+         "余り\t별로\tN300\t\t\tGN\t99\n"
+         "余\t남&F4@\tM418\t\t\tGN\t100\n"
+         "お\t\tN110\t\tZ6\tGN\t101\n"
+         "お待ち\t대기\tN110\t\t\tGN\t102\n"
+         "お休み\t휴가\tN110\t\t\tGN\t103\n"
+         "いただけ\t받을 수 &HN@\tM427\t\t\tGN\t104\n"
+         "東雲\t새벽\tN110\tUMe\t\tGN\t105\n"
+         "情報屋\t정보상\tN110\t\t\tGN\t106\n"
+         "太陽\t태양\tN110\tVFr\t\tGN\t107\n"
+         "太陽\t태양\tN130\tQPNVHn\tWb\tGN\t108\n"
+         "碧\t$C2@\tH7M0\t\t\tGN\t109\n"
+         "碧\t아오이\tN130\tQPN\tWb\tGN\t110\n"
+         "したく\t준비\tN110\t\t\tGN\t111\n"
+         "した\t아래\tN110\t\t\tGN\t112\n"
+         "くらい\t정도\tP200\t\t\tGN\t113\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -98,7 +122,9 @@ const dict::Snapshot* Dictionary() {
          "つづ\t츠즈\tN130\tQPNVHn\tWb\tGN\t73\n"
          "あに\t아니\tN130\tQPNVHn\tWb\tGN\t74\n"
          "ねこ\t네코\tN130\tQPNVHn\tWb\tGN\t75\n"
-         "りん\t린\tN130\tQPNVHn\tWb\tGN\t76\n"},
+         "りん\t린\tN130\tQPNVHn\tWb\tGN\t76\n"
+         "東雲\t시노노메\tN130\tQPNVHn\tWa\tGN\t77\n"
+         "情報屋\t정보제공자\tN130\tQPNVHn\tWb\tGN\t78\n"},
     });
     return loaded.snapshot.get();
 }
@@ -137,7 +163,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{26});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{35});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -187,21 +213,29 @@ HD_TEST(constraint_honorific_hiragana) {
     });
 }
 
-// A kanji word before くん, 君, ちゃん or たん is its name sense when it has one and no
-// person sense; before another honorific, when its other senses are places. A verb as
-// long, a person noun, a common noun before さん, a word without a name sense, a word
-// after お and a word inside a kanji run stay.
+// A kanji word before an honorific is its name sense, or the name layer's person reading,
+// when it has one and no person sense. A verb as long, a person noun, a word without a name
+// sense, a name reading that is a Korean word of the word (태양, 정보제공자), a word after
+// お and a word inside a kanji run stay. An adjective stem blocks no name before くん and a
+// particle (碧くんが), only before its own ending (碧くない).
 HD_TEST(constraint_honorific_kanji) {
     CheckCases({
         {"翼くんが", "翼くんが", "翼", "츠바사!"},
         {"太郎殿、", "太郎殿、", "太郎", "타로!"},
         {"妹くんが", "妹くんが", "妹", "여동생 이모토"},
         {"続くんだ", "続くんだ", "続", "계속되&AA@ 츠즈키"},
-        {"空さんが", "空さんが", "空", "하늘 소라"},
+        {"空さんが", "空さんが", "空", "소라!"},
+        {"東雲さんが", "東雲さんが", "東雲", "시노노메!"},
+        {"東雲先生、", "東雲先生、", "東雲", "시노노메!"},
+        {"東雲が", "東雲が", "東雲", "새벽"},
+        {"情報屋さん", "情報屋さん", "情報屋", "정보상"},
+        {"太陽さん", "太陽さん", "太陽", "태양 태양"},
         {"猫ちゃん", "猫ちゃん", "猫", "고양이"},
         {"お空さん", "空さん", "空", "하늘 소라"},
         {"大空くん", "空くん", "空", "하늘 소라"},
         {"翼が", "翼が", "翼", "날개 츠바사"},
+        {"碧くんが", "碧くんが", "碧", "아오이!"},
+        {"碧くない", "碧くない", "碧", "$C2@ 아오이"},
     });
 }
 
@@ -298,6 +332,28 @@ HD_TEST(constraint_tachidachi_before_agaru) {
     });
 }
 
+// お and a verb stem before なさい is the order of the verb, not a noun (お待ちなさい); the
+// greeting お休みなさい and お待ち elsewhere keep the noun.
+HD_TEST(constraint_o_stem_nasai) {
+    CheckCases({
+        {"お待ちなさい", "お待ちなさい", "お待ち", ""},
+        {"お待ちなさいませ", "お待ちなさいませ", "お待ち", ""},
+        {"お待ちください", "お待ちください", "お待ち", "대기"},
+        {"お休みなさい", "お休みなさい", "お休み", "휴가"},
+    });
+}
+
+// いただけ before だ, で, じゃ, に, の or か is いた and だけ (待っていただけだ); before a verb
+// ending it stays (待っていただける).
+HD_TEST(constraint_itadake_dake) {
+    CheckCases({
+        {"待っていただけだ", "いただけだ", "いただけ", ""},
+        {"待っていただけですから", "いただけですから", "いただけ", ""},
+        {"待っていただける", "いただける", "いただけ", "받을 수 &HN@"},
+        {"待っていただけない", "いただけない", "いただけ", "받을 수 &HN@"},
+    });
+}
+
 // いた right after て or で is the past of いる unless an adjective ending, 致す or 頂く
 // follows it (見ていたい, でいたします, ていただく).
 HD_TEST(constraint_ita_after_te) {
@@ -359,5 +415,76 @@ HD_TEST(constraint_n_after_verb) {
         {"終わったん", "ん", "ん", ""},
         {"しとるん", "ん", "ん", ""},
         {"ん", "ん", "ん", "응 "},
+    });
+}
+
+// わけ before punctuation, a particle, a copula, ある or ない is the formal noun: the verb
+// わけ (分ける) goes, as does わ (沸く) before け. Before a verb ending (わけて, わけよう) or after a case particle
+// before a pause or ない (二つにわけ、) the verbs stay.
+HD_TEST(constraint_wake_formal_noun) {
+    CheckCases({
+        {"上なわけ。", "わけ。", "わけ", "이유"},
+        {"そういうわけだ", "わけだ", "わけ", "이유"},
+        {"わけあって", "わけあって", "わけ", "이유"},
+        {"本当にわけがない", "わけがない", "わけ", "이유"},
+        {"許すわけない", "わけない", "わけ", "이유"},
+        {"仲良くわけて", "わけて", "わけ", "나&C4@ 이유"},
+        {"みんなでわけよう", "わけよう", "わけ", "나&C4@ 이유"},
+        {"二つにわけ、", "わけ、", "わけ", "나&C4@ 이유"},
+        {"パンをわけない", "わけない", "わけ", "나&C4@ 이유"},
+        {"わけ合う", "わけ合う", "わけ", "나&C4@ 이유"},
+    });
+}
+
+// 余り right before a predicate is the adverb 별로, not the stem of 余る or the noun 나머지;
+// before a particle, a pause, an auxiliary of the continuative (余り過ぎる, 余ります) or after a
+// noun (在庫余り) it stays.
+HD_TEST(constraint_amari_before_predicate) {
+    CheckCases({
+        {"余り伸びない", "余り伸びない", "余", ""},
+        {"余り伸びない", "余り伸びない", "余り", "별로"},
+        {"余り好きじゃない", "余り好きじゃない", "余り", "별로"},
+        {"余りの", "余りの", "余り", "나머지 별로"},
+        {"余り、", "余り、", "余", "남&F4@"},
+        {"余り過ぎる", "余り過ぎる", "余", "남&F4@"},
+        {"余ります", "余ります", "余", "남&F4@"},
+        {"余りそうだ", "余りそうだ", "余", "남&F4@"},
+        {"余りそうは", "余りそうは", "余り", "별로"},
+        {"在庫余りばかり", "余りばかり", "余り", "나머지 별로"},
+    });
+}
+
+// ということで opening a line (past an opening bracket or an ellipsis) is the connective, so
+// the verb という goes; after a word it stays.
+HD_TEST(constraint_toiu_kotode_opening) {
+    CheckCases({
+        {"ということで、", "ということで、", "とい", ""},
+        {"「ということで、", "ということで、", "とい", ""},
+        {"……ということで、", "ということで、", "とい", ""},
+        {"ということです", "ということです", "とい", "그렇다고 &AV@"},
+        {"休みということで、", "ということで、", "とい", "그렇다고 &AV@"},
+        {"というと", "というと", "とい", "그렇다고 &AV@"},
+    });
+}
+
+// A word in く before らい gives way to the shorter word, so that く starts くらい (したくらい);
+// before other text it stays (したくをする).
+HD_TEST(constraint_ku_before_rai) {
+    CheckCases({
+        {"したくらいだ", "したくらいだ", "したく", ""},
+        {"したくらいだ", "したくらいだ", "した", "아래"},
+        {"したくをする", "したくをする", "したく", "준비"},
+    });
+}
+
+// A word in で before a form of ある gives way, so that で stays the copula である
+// (歳であり 세이며); before other text it stays (歳で死んだ 세에).
+HD_TEST(constraint_de_before_aru) {
+    CheckCases({
+        {"歳であり、", "歳であり、", "歳で", ""},
+        {"歳であった", "歳であった", "歳で", ""},
+        {"歳で死んだ", "歳で死んだ", "歳で", "세에"},
+        {"歳であり、", "歳であり、", "歳", "세"},
+        {"証拠まである", "まである", "まで", "까지"},
     });
 }

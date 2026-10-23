@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+builtin-ending:んですの	きゃぁっ！な、何をするんですの！？	꺄악! 무, 무엇을 하는 거예요!?	fix	builtin-ending
+builtin-ending:んですのよ	「あの子はいろいろとすごいんですのよ。」	「그 아이는 여러모로 대단한 거랍니다.」	fix	builtin-ending
+builtin-ending:んですのよね	この部屋は本当に静かなんですのよね。	이 방은 정말 조용한 거죠.	fix	builtin-ending
+builtin-ending:てますの	どうして人様の庭でゴザなんか広げてますのー？	왜 남의 뜰에서 돗자리는 펼치고 있어요~?	fix	builtin-ending
+builtin-ending:てますわ	あなたは甘えてますわ！	당신은 응석부리고 있어요!	fix	builtin-ending
+builtin-ending:ませんのに	まだ誰も来ませんのに	아직 아무도 오지 않는데요	fix	builtin-ending
+dict:honor:2	秋刀魚？ なんですのそれは？	꽁치? 무엇인가요 그것은?	fix	local
+dict:honor:2	「これは……、なんですの？」	「이건……, 뭔가요?」	fix	local
+sound:ですわよね	で、ですわよねぇ	그, 그렇죠	fix	sound
+sound:ですよね	「ですよね」	「그렇죠」	fix	sound
+sound:ですわよね	そうですわよね	그렇지요	keep	sound
+dict:honor:2	学生なんですの？	!rule:dict:honor:2	keep	local

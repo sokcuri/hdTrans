@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+sense:甘い	物を考える時には甘い物がいい。	물건을 생각할 때는 단 것이 좋다.	fix	senses
+sense:甘い	考えが甘い。	생각이 안이하다.	keep	senses

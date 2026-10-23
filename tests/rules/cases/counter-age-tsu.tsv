@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:357444	二つの種族は、それなりに仲良くしている。	!rule:dict:jisjk:357444	fix	local
+dict:jisjk:357444	二つの貴族家に伝わる神器。	!rule:dict:jisjk:357444	fix	local
+dict:jisjk:357444	二つ年上の兄が婚約した。	rule:dict:jisjk:357444=살	fix	local
+dict:jisjk:357444	七つの子供がいる。	rule:dict:jisjk:357444=살	keep	local

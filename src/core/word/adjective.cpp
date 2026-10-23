@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <algorithm>
 
+#include "core/output/inflect.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/token.h"
 #include "core/word/strings.h"
@@ -27,6 +28,27 @@ bool PredicativeAdverb(std::string_view s) {
 // Two width units of numerals (兆億万千百十九..一○).
 bool NumeralPair(const Window& w) { return !w.broken && WidthOf(w.text) == 2 && Has(kNumeralOrder, w.text); }
 
+// Whether an entry of the stem group g says no: a negative of the dictionary (gram Xn) or
+// a Korean whose last word is the predicate 없다, 않다 or 모르다 (知らない $C4@, 行けない
+// 갈 수 $FA@), not an adjective that only ends in one (馬鹿馬鹿しい 어처구니$FA@).
+bool NegativeStem(const Group& g) {
+    for (const Entry* e : g.entries) {
+        if (Has(e->gattr, "Xn")) return true;
+        const std::string_view t = e->dst;
+        if (t.size() < 4 || !t.ends_with("@") || (t.size() > 4 && t[t.size() - 5] != ' ')) continue;
+        const output::internal::KoreanFamily* f = output::internal::FindKoreanFamily(t.substr(t.size() - 4));
+        if (f != nullptr && (f->stem == "없" || f->stem == "않" || f->stem == "모르")) return true;
+    }
+    return false;
+}
+
+// An ending row in いことはない or いことは無い reads a double negative (知らないことはない 모르는
+// 것은 아니다); after a stem that does not say no, ことはない is a superlative (こんなに切ない
+// ことはない 이렇게 안타까운 일은 없다).
+bool DoubleNegativeRow(const Entry& e) {
+    return e.user != nullptr && At(e.user->codes->partText, 0) == 'T' && e.user->key.starts_with("いことは");
+}
+
 }  // namespace
 
 // Accepts a candidate without conjugation unless a validity rule rejects what follows
@@ -43,6 +65,11 @@ bool Item::RunDefaultTrieQuery() {
         return false;
     }
     if (group->entries.empty()) return false;
+    // A noun ending in ら before しい, しく or しかっ leaves ら to らしい (お前らしい: お前 + らしい).
+    if (marker == '1' && surface.ends_with("ら") &&
+        (remaining.starts_with("しい") || remaining.starts_with("しく") || remaining.starts_with("しかっ"))) {
+        return false;
+    }
     if (const Window first = Left(surface, 2); marker == '1' && WidthOf(surface) == 4 && NumeralPair(first)) {
         if (NumeralPair(Right(markerText, 2))) return false;
     }
@@ -58,6 +85,12 @@ bool Item::RunKeiyoTrieQuery() {
     const std::string_view remaining = From(text, surfaceLength + start);
     const int offset = base.scanOffset;
     if (!w->MatchDictionary(remaining, surface, '7', 'X')) return false;
+    // No adverbial く goes on into くらい or くせに: those follow a past in た (したくらい, not
+    // the stem of したい).
+    if (remaining.starts_with(kJaKurai) || remaining.starts_with(kJaKuseni)) return false;
+    // A stem in た (the desire たい, 冷たい) has no adnominal な, which only a few stems such
+    // as 大き and 小さ take: たな is the past and a particle (慣れてきたな, not 来たい).
+    if (surface.ends_with("た") && remaining.starts_with(kJaNa)) return false;
     length = base.kind == 'x' ? surfaceLength : offset + surfaceLength;
     const std::string_view second = From(remaining, offset);
     if (!w->MatchDictionary(second, "", '6', '7')) return false;
@@ -97,6 +130,7 @@ bool Item::RunKeiyoTrieQuery() {
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
                 if (Byte(At(e.code, 1)) != base.kind || (Has(e.gattr, "Sh") && Classify(remaining) != 0) ||
+                    (DoubleNegativeRow(e) && !NegativeStem(*group)) ||
                     !w->EndingApplies(e, after, tokenIndex) ||
                     w->CutsWord(remaining.substr(0, remaining.size() - second.size()), second.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), second.size())), after)) {
                     base.enabled[index] = false;
@@ -189,6 +223,10 @@ bool Item::RunDakeiyoCase8Query() {
         pseudo(ending, "");
         return true;
     }
+    if (const std::string_view ending = BareStemEnding(second); !ending.empty()) {
+        pseudo(ending, "");
+        return true;
+    }
     if (second.empty()) {
         if (StandsAlone()) {
             pseudo(PlainEnding(), "");
@@ -220,6 +258,12 @@ bool Item::RunDakeiyoCase8Query() {
         const std::string_view scanned = From(tail, scanOffset);
         for (int entry = 0; entry < static_cast<int>(g->entries.size()); entry++) {
             const Entry& e = *g->entries[static_cast<std::size_t>(entry)];
+            // The adnominal な goes before a noun, never before the particle って (こうなって is
+            // こう and なって, not こうな; the quote of an adjectival noun is だって).
+            if (g->surface == kJaNa && after.starts_with(kJaTte)) {
+                base.enabled[entry] = false;
+                continue;
+            }
             if ((Has(e.gattr, "Sh") && Classify(tail) != 0) || At(e.code, 0) != '5' || Byte(At(e.code, 1)) != base.kind ||
                 !w->EndingApplies(e, after, tokenIndex) ||
                 w->CutsWord(tail.substr(0, tail.size() - scanned.size()), scanned.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), scanned.size())), after)) {
@@ -288,6 +332,118 @@ bool Item::StandsAlone() const {
 }
 
 // The ending of a stem that stands alone: 어렵다, 어려워 before a question mark.
+namespace {
+
+bool SentenceMark(char32_t r) {
+    return r == U'。' || r == U'！' || r == U'？' || r == U'…' || r == U'‥' || r == U'．' || r == U'!' || r == U'?' ||
+           r == U'.' || r == U'♪';
+}
+
+bool Hiragana(char32_t r) { return r >= U'ぁ' && r <= U'ゖ'; }
+
+// Whether rest, a comma and the text after the word, goes on to another comma before
+// any mark that ends a clause: the word is then an item of a list (「陰険、脳筋、…」),
+// unless the item after it repeats it (駄目、駄目、…).
+bool ListsNouns(std::string_view word, std::string_view rest) {
+    rest.remove_prefix(text::DecodeRune(rest).size);
+    for (std::size_t i = 0; i < rest.size();) {
+        const text::Rune r = text::DecodeRune(rest.substr(i));
+        if (r.cp == U'、' || r.cp == U'，') return rest.substr(0, i) != word;
+        if (SentenceMark(r.cp) || r.cp == U'」' || r.cp == U'』') return false;
+        i += r.size;
+    }
+    return false;
+}
+
+}  // namespace
+
+// What stands right before the word: 0 the start of a sentence (nothing, a mark that
+// ends a sentence, a space, an opening quote), 1 another punctuation mark (、, （), 2 a
+// word.
+int Item::ContextBefore() const {
+    char32_t r = 0;
+    if (start > 0) {
+        r = DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp;
+    } else if (tokenIndex > 0) {
+        const tokenizer::TokenView before = w->Tok(tokenIndex - 1);
+        switch (before.type) {
+        case tokenizer::kTypeNewline:
+        case tokenizer::kTypeAsciiSpace:
+        case tokenizer::kTypeWideSpace:
+        case tokenizer::kTypeSentenceEnd: return 0;
+        case tokenizer::kTypeAsciiOpen: return 1;
+        case tokenizer::kTypeBracket:
+        case tokenizer::kTypeAsciiPunct:
+        case tokenizer::kTypeJapanese:
+        case tokenizer::kTypeSymbol: r = DecodeLastRune(before.text).cp; break;
+        default: return 2;
+        }
+    } else {
+        return 0;
+    }
+    if (SentenceMark(r) || r == U' ' || r == U'\u3000' || r == U'「' || r == U'『') return 0;
+    return text::IsPunct(r) ? 1 : 2;
+}
+
+// The plain ending of an adjectival-noun stem that ends a clause with its copula left
+// out (そんなの駄目！, 「綺麗」, もう駄目…): after the stem come only lengthening kana
+// (っ, ー, small vowels) and then a mark that ends the sentence, a closing quote or the
+// end of the text, or a comma when the stem opens the sentence. A one-kanji stem needs
+// a sentence mark after it and no kanji before it (「朧」 and 李雅微 are names). Stems
+// in hiragana are left to StandsAlone (下さいまし is not まし). "" when the stem does
+// not end a clause, ends in な, みたい or そう (the そう row reads 것 같다 there), or a
+// word of its length (a noun reading) exists.
+std::string_view Item::BareStemEnding(std::string_view after) const {
+    const std::string_view surface = group->surface;
+    if (surface.empty() || surface.ends_with(kJaNa) || surface.ends_with(kJaMitai) || surface.ends_with(kJaSou)) return {};
+    std::string_view rest = after;
+    while (!rest.empty()) {
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.cp != U'っ' && r.cp != U'ッ' && r.cp != U'ー' && r.cp != U'～' && r.cp != U'〜' && r.cp != U'ぁ' &&
+            r.cp != U'ぃ' && r.cp != U'ぅ' && r.cp != U'ぇ' && r.cp != U'ぉ') {
+            break;
+        }
+        rest.remove_prefix(r.size);
+    }
+    const text::Rune first = text::DecodeRune(surface);
+    const bool oneKanji = first.size == surface.size() && text::IsKanji(first.cp);
+    if (Hiragana(first.cp)) return {};
+    const int before = ContextBefore();
+    if (oneKanji && start > 0 && text::IsKanji(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return {};
+    bool question = false;
+    if (!rest.empty()) {
+        const char32_t r = text::DecodeRune(rest).cp;
+        if (r == U'、' || r == U'，') {
+            const std::string_view head = text.substr(0, static_cast<std::size_t>(start));
+            const bool repeated = head.ends_with(std::string(surface) + "、");
+            if ((before != 0 && !repeated) || ListsNouns(surface, rest)) return {};
+        } else if (r != U'」' && r != U'』') {
+            return {};
+        }
+        if (oneKanji) return {};
+    } else {
+        switch (detail->nextType) {
+        case tokenizer::kTypeAsciiPunct:
+        case tokenizer::kTypeSentenceEnd:
+        case tokenizer::kTypeNewline:
+        case tokenizer::kTypeEnd: break;
+        case tokenizer::kTypeSymbol:
+            if (!detail->nextText.starts_with("…") && !detail->nextText.starts_with("‥")) return {};
+            break;
+        case tokenizer::kTypeBracket:
+            if (oneKanji || !(detail->nextText.starts_with("」") || detail->nextText.starts_with("』"))) return {};
+            break;
+        default: return {};
+        }
+        const int p = detail->ClassifyTrailingPunctuation({});
+        if (p == 1 && (before != 0 || oneKanji)) return {};
+        question = p == 3;
+    }
+    const Item* other = w->InsertLateCandidate(text, start, tokenIndex, group->records);
+    if (other != nullptr && other->length >= group->length) return {};
+    return question ? "6" : "1다";
+}
+
 std::string_view Item::PlainEnding() const { return detail->ClassifyTrailingPunctuation({}) == 3 ? "6" : "1다"; }
 
 // A word ending in みたい that reads "like" (같다): みたい after a word, possibly across

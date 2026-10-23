@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+sound:lexicon	「ふいー、お疲れー」	「휴우, 수고했어~」	fix	sound
+sound:lexicon	「ふんぬっ」	「끄응」	fix	sound
+sound:lexicon	カランカラン──ふいに背後で音がした。	달그랑달그랑──돌연 뒤에서 소리가 났다.	fix	sound
+sound:lexicon	ファイルの山をぽん、と叩く。	파일의 산을 퐁, 하고 두드린다.	fix	sound
+sound:lexicon	「つっ……」	「읏……」	fix	sound
+sound:lexicon	「つ……」	「읏……」	fix	sound
+sound:lexicon	ふいに背後で音がした。	돌연 뒤에서 소리가 났다.	keep	sound
+sound:lexicon	肩をぽんぽんと叩く	어깨를 통통 두드린다	keep	sound
+sound:lexicon	にっぽんの夏	일본의 여름	keep	sound

@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+sound:after-word	俺は、無気力に、ただぼーっと歩いていく……。	나는, 무기력하게, 다만 멍하니 걸어간다…….	fix	sound
+sound:after-word	「お前さっきからぐさぐさ刺してくるよね」	「너 조금 전부터 푹푹 찔러 오지」	fix	sound
+sound:after-word	「気まぐれな娘だから、そのうちふらっと来るんじゃない？」	「변덕스러운 딸이니까, 머지않아 훌쩍 오지 않아?」	fix	sound
+sound:after-word	生きる理由がわからなくたって、まだ生きていようと思える。	사는 이유를 몰라도, 아직 살아 있든 생각된다.	keep	sound
+sound:after-word	彼はぶすっとした顔で答えた。	그는 뾰로통한 얼굴로 대답했다.	keep	sound
+sound:after-word	「しつこく聞いてくる」	「끈질기게 물어 온다」	keep	sound
+sound:after-word	「あいつはなにやってんのよ？」	「저 녀석은 뭐 하고 있어?」	keep	sound

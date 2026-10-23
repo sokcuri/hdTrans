@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+lookup:negated-adverb	上手くないと思う。	능숙하지 않다고 생각한다.	fix	lookup
+lookup:negated-adverb	「あんまり早くないけどね」	「별로 빠르지 않지만」	fix	lookup
+lookup:negated-adverb	話はあんまり上手くない。	이야기는 별로 능숙하지 않다.	fix	lookup
+lookup:negated-adverb	心臓の鼓動がさらに早くなった。	심장의 고동이 더욱 빨라졌다.	fix	lookup
+lookup:negated-adverb	全くない。	전혀 없다.	keep	lookup
+lookup:negated-adverb	よく無事で。	잘 무사해.	keep	lookup

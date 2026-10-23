@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+names:kana-speaker-line	かすみ	카스미	fix	lookup
+names:kana-speaker-line	しおり	시오리	fix	lookup
+names:kana-speaker-line	いつか	언젠가	keep	lookup
+names:kana-speaker-line	ひまわり	해바라기	keep	lookup

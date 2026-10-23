@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:sense:tsukkomu:1	ゲームかよと突っ込みたくなる。	게임인가라고 태클을 걸고 싶어진다.	fix	local
+dict:sense:tsukkomu:1	凄まじい速度で突っ込んでくる。	굉장한 속도로 돌진해 온다.	keep	local
+dict:sense:tsukkomu:1	仲間と突っ込んだ。	동료와 돌진했다.	keep	local
+dict:w:26788	真っ赤な顔でツッコむ。	새빨간 얼굴로 태클을 건다.	fix	defaults
+dict:jisjk:243984	脳内での突っ込みに疲れた。	머릿속에서의 태클에 지쳤다.	fix	defaults

@@ -1,0 +1,28 @@
+#! layer=words
+# 복합동사의 가나 표기와 이표기, 앞말로 고르는 관용 동사와 回る
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+きりだ	꺼&A6@	M423			GN							compound-verbs:1
+切りだ	꺼&A6@	M423			GN							compound-verbs:2
+かけずりまわ	분주하게 돌아다&A7@	M428	UMv		GN							compound-verbs:3
+駆けずりまわ	분주하게 돌아다&A7@	M428	UMv		GN							compound-verbs:4
+見降ろ	내려다 &AY@	M433			GN							compound-verbs:5
+もちきり	떠들썩%A1@	G8U0			GN							compound-verbs:6
+持ち切り	떠들썩%A1@	G8U0			GN							compound-verbs:7
+もちきり	화제	N110			GN							compound-verbs:8
+まわ	다&A7@	M448			GN	6502	||2 &&4 P-1== "4**" S-1!= "回" ||2 U-1== "Rて" U-1== "Rで" Y-1= "1고" &&3 P-1== "4**" S-1!= "回" S-1!= "まわ"	回る는 앞말이 다른 동사이면 ‘다니다’를 고르고, 앞 동사가 て형이면 그 어미를 ‘-고’로 바꾼다.				compound-verbs:9
+優れ	&Me@	M427		Va	GN	6504	||1 &&2 ||4 S-1== "が" S-1== "も" S-1== "は" S-1== "の" ||8 S-2== "気分" S-2== "体調" S-2== "顔色" S-2== "具合" S-2== "体の具合" S-2== "天気" S-2== "健康" S-2== "機嫌"	気分, 体調, 顔色, 具合, 天気, 健康, 機嫌 뒤의 優れる를 ‘좋다’로 고른다.				compound-verbs:10
+すぐれ	&Me@	M427		Va	GN	6504	||1 &&2 ||4 S-1== "が" S-1== "も" S-1== "は" S-1== "の" ||8 S-2== "気分" S-2== "体調" S-2== "顔色" S-2== "具合" S-2== "体の具合" S-2== "天気" S-2== "健康" S-2== "機嫌"	気分, 体調, 顔色, 具合, 天気, 健康, 機嫌 뒤의 優れる를 ‘좋다’로 고른다.				compound-verbs:11
+思いを馳せ	떠올&AA@	M427		Pn	GN	6505	||1 &&2 S-1== "に" D-1= "(을)를"	思いを馳せる는 앞이 に이면 그 に를 ‘(을)를’로 바꾸고 ‘떠올리다’로 고른다.				compound-verbs:12
+思いをはせ	떠올&AA@	M427		Pn	GN	6505	||1 &&2 S-1== "に" D-1= "(을)를"	思いを馳せる는 앞이 に이면 그 に를 ‘(을)를’로 바꾸고 ‘떠올리다’로 고른다.				compound-verbs:13
+思いを馳せ	생각을 떠올&AA@	M427	XXX	Pn	GN							compound-verbs:14
+思いをはせ	생각을 떠올&AA@	M427	XXX	Pn	GN							compound-verbs:15
+一目惚れ	한눈에 반&AV@	M429			GN							compound-verbs:16
+一目惚れ	한눈에 반함	N110			GN							compound-verbs:17
+一目ぼれ	한눈에 반함	N110			GN							compound-verbs:18
+一目惚れの	한눈에 반한	E0H0			GN							compound-verbs:19
+一目ぼれの	한눈에 반한	E0H0			GN							compound-verbs:20
+効	강&Mf@	M411		Va	GN	6506	||1 &&2 ||3 S-1== "が" S-1== "も" S-1== "の" ||19 S-2== "塩" S-2== "塩味" S-2== "塩気" S-2== "スパイス" S-2== "香辛料" S-2== "胡椒" S-2== "コショウ" S-2== "わさび" S-2== "ワサビ" S-2== "山葵" S-2== "辛子" S-2== "からし" S-2== "酸味" S-2== "ニンニク" S-2== "にんにく" S-2== "生姜" S-2== "隠し味" S-2== "出汁" S-2== "香り"	맛과 향 명사와 が, も, の 뒤의 効く를 ‘강하다’로 고른다.				compound-verbs:21
+回れ右	뒤로돌아	N110			GN							compound-verbs:22
+連れていかれ	끌려&A1@	M427			GN							compound-verbs:23
+つれていかれ	끌려&A1@	M427			GN							compound-verbs:24
+連れて行かれ	끌려&A1@	M427			GN							compound-verbs:25

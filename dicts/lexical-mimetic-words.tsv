@@ -1,0 +1,19 @@
+#! layer=base
+# 의태어 동사, 가타카나로 쓴 동사, 소리 읽기로 빠지던 한자 낱말
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+数歩	몇 걸음	N110			GN						すうほ	mimetic-words:4
+胡乱	수상%A1@	G8U0			GN						うろん	mimetic-words:5
+凪いでい	잔잔해져 &HN@	M427			GN						ないでい	mimetic-words:6
+もたつ	꾸물거&AA@	M421			GN						もたつく	mimetic-words:7
+ひくつ	실룩거&AA@	M421			GN						ひくつく	mimetic-words:8
+ピクつ	실룩거&AA@	M421			GN						ぴくつく	mimetic-words:9
+キレキレ	예리%A1@	G8U0			GN						きれきれ	mimetic-words:10
+キレッキレ	예리%A1@	G8U0			GN						きれっきれ	mimetic-words:11
+ズボラ	칠칠치 못%A1@	G8U0			GN						ずぼら	mimetic-words:12
+シゴ	훑어 &A6@	M431			GN						しごく	mimetic-words:13
+ハブ	따돌&AA@	M428			GN						はぶる	mimetic-words:14
+胡乱げ	수상%A1@	G8U0			GN						うろんげ	mimetic-words:15
+藍染	쪽빛 염색	N110			GN						あいぞめ	mimetic-words:16
+オトモダチ	친구	N110			GN						おともだち	mimetic-words:17
+ビラ	전단	N110			GN						びら	mimetic-words:18
+ポン酒	정종	N110			GN						ぽんしゅ	mimetic-words:19

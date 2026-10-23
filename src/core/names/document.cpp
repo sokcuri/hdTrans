@@ -340,6 +340,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     for (const std::string& t : r.Names()) doc->accepted.insert(t);
     doc->named = doc->accepted;
     for (const std::string& t : r.NamedSurfaces()) doc->named.insert(t);
+    for (const auto& [t, n] : r.ProseKatakana()) doc->prose.emplace(t, n);
 
     const std::string registryDict = r.Dict();
     userdict::Context ctx{doc->codes.get(), &doc->families, &snap.Base()};
@@ -357,12 +358,41 @@ std::string Utf8Of(char32_t c) {
     return out;
 }
 
+// A line that is a hiragana run of three to six kana and nothing else that the name layer
+// reads as a person, a speaker line (かすみ 카스미, しおり 시오리), read as that person; not
+// a run the base dictionary reads as an adverb, a creature, plant or food, or a place
+// (いつか, ひまわり, たんぽぽ).
+std::optional<std::string> KanaNameLine(const dict::Snapshot& snap, std::string_view line, std::string_view t) {
+    const std::size_t runes = names::internal::RuneCount(t);
+    if (runes < 3 || runes > 6 || !names::internal::AllRunes(t, names::internal::IsHiragana)) return std::nullopt;
+    std::string name;
+    for (const dict::Record& rec : snap.NameRecords(t)) {
+        if (rec.codes == nullptr || !rec.codes->sem.Text().starts_with("QPN") || !names::internal::IsHangulText(rec.target)) continue;
+        name = std::string(rec.target);
+        break;
+    }
+    if (name.empty()) return std::nullopt;
+    for (const dict::Candidate& c : snap.RetrieveRecords(t, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != t) continue;
+        const std::string_view sem = c.codes->sem.Text();
+        const char tag = c.codes->part.Empty() ? 0 : c.codes->part.Tag();
+        if (tag == 'E' || tag == 'P' || sem.starts_with("QA") || sem.starts_with("QCT") ||
+            sem.find("VPl") != std::string_view::npos) {
+            return std::nullopt;
+        }
+    }
+    const std::size_t at = line.find(t);
+    return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
+}
+
 // A line that is one name and nothing else, a speaker line before a quote: a run
-// of kanji with a person reading, read as that person (筧 카케이).
+// of kanji with a person reading, read as that person (筧 카케이), or a hiragana name
+// (KanaNameLine).
 std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line) {
     const std::string_view t = names::internal::TrimLineSpace(line);
     const std::size_t runes = names::internal::RuneCount(t);
     if (runes == 0 || runes > 6) return std::nullopt;
+    if (names::internal::AllRunes(t, names::internal::IsHiragana)) return KanaNameLine(snap, line, t);
     if (!names::internal::AllRunes(t, names::internal::IsKanji)) return std::nullopt;
     std::string surname, given;  // the first person readings of each kind
     bool word = false;           // a noun of its own beyond the kanji's Sino-Korean reading
@@ -405,8 +435,8 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
-    facts.text = names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female));
     names::Registry& r = *doc.registry;
+    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)));
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
         if (o.noun) {
@@ -428,6 +458,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
+    facts.prose = names::ProseRuns(names::StripRuby(line));
     return facts;
 }
 
@@ -458,6 +489,7 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     out.plain = found->second.plain.get();
     out.confirmed = facts.skip.empty() ? &doc.accepted : &found->second.confirmed;
     out.persons.insert(facts.persons.begin(), facts.persons.end());
+    out.prose = facts.prose;
     return out;
 }
 
@@ -470,6 +502,8 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     ctx.lookup.confirmed = lookup.confirmed;
     ctx.lookup.persons = &lookup.persons;
     ctx.named = &doc.named;
+    ctx.prose = &doc.prose;
+    ctx.lineProse = &lookup.prose;
     return ctx;
 }
 

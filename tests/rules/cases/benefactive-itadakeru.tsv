@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:jisjk:267097	お昼の残りでよろしいから、出していただけるかしら？	점심의 나머지로 좋으니까, 내 주실 수 있을까?	fix	local
+dict:jisjk:267096	たくさんの方に読んでいただけて、驚いております！	많은 분에게 읽어 주셔, 놀라고 있습니다!	fix	local
+dict:jisjk:267096	私こそ、侍女に選んでいただけて嬉しいです	저야말로, 시녀로 선택해 주셔서 기쁩니다	fix	local
+dict:jisjk:267096	わかっていただけましたか	알아 주셨습니까	fix	local
+dict:jisjk:267097	教えていただけませんか	가르쳐 주실 수 없습니까	keep	local
+dict:jisjk:267096	お金をいただける。	!rule:dict:jisjk:267096	keep	local

@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+pattern:書いてるはず	「歌のレッスンはしてるはずです」	「노래의 레슨은 하고 있을 것입니다」	fix	builtin-pattern
+pattern:書いてるはず	たぶん野菜が安くなってるはずだから	아마 야채가 싸져 있을 것이니까	fix	builtin-pattern
+pattern:書いてるはず	もう来てるはずなんすけど	이제 오고 있을 것인데요	fix	builtin-pattern
+pattern:書いてるはずがない	そんなこと知ってるはずがない。	그런 것 알고 있을 리가 없다.	fix	builtin-pattern
+pattern:書いてたはず	２ｍは離れてたはずだぞ	2m는 떨어져 있었을 것이다	fix	builtin-pattern
+pattern:書いてるはず	捨てるはずだった	버릴 것이었다	keep	builtin-pattern

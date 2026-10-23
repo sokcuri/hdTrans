@@ -197,7 +197,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 喉が乾	목이 &E4@	M421			GN				llm			i:192
 広い支持	폭넓은 지지	N110			GN				llm			i:193
 行ったり来り	오락가락	A9D0			GN				llm			i:194
-合点がい	납득이 &A1@	M421			GN				llm			i:195
+合点がい	납득이 &A1@	M42?			GN				llm			i:195
 合点が行	납득이 &A1@	M42?			GN				llm			i:196
 国民の休日	국민의 휴일	N110			GN							i:197
 コツを覚え	요령을 익&AW@	M427		Pn	GN				llm			i:198
@@ -1636,7 +1636,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 円で囲	동그라미를 &AO@	M425			GN				llm			i:1631
 丸で囲	동그라미를 &AO@	M425			GN				llm			i:1632
 満足が行	만족스&LX@	M42?			GN				llm			i:1633
-満足がい	만족스&LX@	M421			GN				llm			i:1634
+満足がい	만족스&LX@	M42?			GN				llm			i:1634
 満点を取	만점을 &FD@	M428		Pn	GN				llm			i:1635
 満点をと	만점을 &FD@	M428		Pn	GN				llm			i:1636
 見得を切	으스대며 폼을 &FK@	M428		Pn	GN				llm			i:1637
@@ -2180,7 +2180,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 憂うべき	우려스러운	A9D0			GN				llm			i:2175
 無ければ	없으면	A9D0			GN				llm			i:2176
 迎えに行	마중하러 &A1@	M42?			GN				llm			i:2177
-迎えにい	마중하러 &A1@	M421			GN				llm			i:2178
+迎えにい	마중하러 &A1@	M42?			GN				llm			i:2178
 減るもんじゃない	닳는 것도 아니잖아	A9D0			GN				llm			i:2179
 相済みません	정말 죄송합니다	E320			GN				llm			i:2180
 相すみません	정말 죄송합니다	E320			GN				llm			i:2181
@@ -3380,7 +3380,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カエサルの物はカエサルに	카이사르의 것은 카이사르에게	A9D0			GN				llm			i:3375
 蒙を啓	몽매함을 깨우&AO@	M421		Pn	GN				llm			i:3376
 悪影響を及ぼ	악영향을 미&AO@	M423		Pn	GN				llm			i:3377
-挨拶を交わ	통성명&AV@	M423		Pn	GN							i:3378
+挨拶を交わ	인사를 나&C4@	M423		Pn	GN							i:3378
 お里が知れ	밑바탕이 드러&A5@	M427			GN				llm			i:3379
 誕生日おめでとうございます	생일 축하드립니다	A9D0			GN				llm			i:3380
 米の祝い	미수 잔치	N110			GN				llm			i:3381
@@ -6854,7 +6854,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 狙いを定め	겨냥&AV@	M427		Pn	GN				llm			i:6850
 ねらいを定め	겨냥&AV@	M427		Pn	GN				llm			i:6851
 ワクチンを打	백신을 &FB@	M424		Pn	GN				llm			i:6852
-得心がい	납득이 &A1@	M421			GN				llm			i:6853
+得心がい	납득이 &A1@	M42?			GN				llm			i:6853
 埴生の宿	즐거운 나의 집	N110			GN							i:6854
 贖罪の山羊	희생양	N110			GN							i:6855
 分け隔てなく	차별 없이	E300			GN				llm			i:6856
@@ -7301,7 +7301,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 他人の不幸は蜜の味	남의 불행은 꿀맛	A9D0			GN				llm			i:7297
 忘却の彼方	망각의 저편	N110			GN				llm			i:7298
 上手を行	한 수 &CH@	M42?		Pn	GN				llm			i:7299
-上手をい	한 수 &CH@	M421		Pn	GN				llm			i:7300
+上手をい	한 수 &CH@	M42?		Pn	GN				llm			i:7300
 外堀が埋ま	외곽이 메워&AL@	M428			GN				llm			i:7301
 やさしい日本語	쉬운 일본어	N110			GN							i:7302
 歓喜雀躍	환희작약	N110			GN				llm			i:7303
@@ -7427,7 +7427,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 口をたた	입을 놀&AA@	M421		Pn	GN				llm			i:7423
 恩を返	은혜를 &F2@	M423		Pn	GN				llm			i:7424
 最先端を行	최첨단을 달&AA@	M42?		Pn	GN				llm			i:7425
-最先端をい	최첨단을 달&AA@	M421		Pn	GN				llm			i:7426
+最先端をい	최첨단을 달&AA@	M42?		Pn	GN				llm			i:7426
 外国の方	외국분	N110			GN				llm			i:7427
 恐れ入ります	황송합니다	A9D0			GN				llm			i:7428
 段階を踏	단계를 &FE@	M425		Pn	GN				llm			i:7429
@@ -7766,11 +7766,24 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 行間を読み取	행간을 &HK@	M428		Pn	GN				llm			i:7762
 足で稼	발로 &C9@	M422			GN				llm			i:7763
 先を見	앞을 내다&AY@	M427		Pn	GN				llm			i:7764
-なにかにつけて	걸핏하면	E300			GN							i:7765
-何かにつけて	걸핏하면	E300			GN							i:7766
+なにかにつけて	걸핏하면	E300			GN							i:7773
+何かにつけて	걸핏하면	E300			GN							i:7774
 なにかにつけ	걸핏하면	E300			GN							i:7767
 何かにつけ	걸핏하면	E300			GN							i:7768
 何かに付けて	걸핏하면	E300			GN							i:7769
 なにかに付けて	걸핏하면	E300			GN							i:7770
 とおぼしき	(으)로 보이는	E0H0		TuPj	GN							i:7771
 脇を締め	겨드랑이를 붙&AJ@	M437			GN						わきをしめ	i:7772
+癪に触	화가 &A5@	M428			GN						しゃくにさわ	i:7786
+癪に障	화가 &A5@	M428			GN						しゃくにさわ	i:7787
+曰く付きの	사연 있는	E0H0			GN						いわくつきの	i:7775
+いわく付きの	사연 있는	E0H0			GN						いわくつきの	i:7776
+いわくつきの	사연 있는	E0H0			GN						いわくつきの	i:7777
+何はともあれ	아무튼	E300			GN						なにはともあれ	i:7778
+所狭しと	빼곡히	E300			GN						ところせましと	i:7779
+元も子もな	다 소용$FA@	H7N0			GN						もともこもな	i:7780
+冗談じゃ済まな	웃고 넘길 일이 아$A3@	H7N0			GN						じょうだんじゃすまな	i:7781
+冗談では済まな	웃고 넘길 일이 아$A3@	H7N0			GN						じょうだんではすまな	i:7782
+タダじゃお	그냥 &C7@	M431			GN						ただじゃお	i:7783
+ただじゃお	그냥 &C7@	M431			GN						ただじゃお	i:7784
+そうはい	그렇게는 &C6@	M421			GN						そうはい	i:7785

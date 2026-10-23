@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+normalize:denakereba-start	でなければ、死ぬのはおまえだ……	그렇지 않으면, 죽는 것은 너다……	fix	normalize
+normalize:denakereba-start	性格を把握できていた。でなければ公安警察は勤まらない。	성격을 파악되어 있었다. 그렇지 않으면 공안경찰은 감당해 내지 못한다.	fix	normalize
+normalize:denakereba-start	学生でなければ入れない	학생이 아니면 넣지 않는다	keep	normalize

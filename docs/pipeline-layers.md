@@ -40,7 +40,7 @@
 | misread | 결정을 모두 계산한 뒤 적용(`-misread`) | 후보, 어미, 가나 소리 | 없음 | 모델 | `src/core/word/flush.cpp` `Flush` `FilterMisreads(f)` |
 | cg-lite | tier 오름차순, 각 tier는 고정점까지. REMOVE와 SELECT | 후보 제거, 선택 | 고른 후보가 지워지면 첫 살아 있는 후보 | `cg_rules.tsv`, `cg_learned.tsv` | `src/core/word/flush.cpp` `Flush` `FilterCg(f)` |
 | compose | 항목을 오른쪽에서 왼쪽으로 | 조사 형태, 활용 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateChunk` `s.composer.Compose(` |
-| cleanup | 모두 적용 | 출력 텍스트 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateBody` `output::Cleanup(sentences)` |
+| cleanup | 모두 적용 | 출력 텍스트 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateBody` `output::Cleanup(sentences, gaps)` |
 | restore | 차례로. `cleanup.tsv`는 위치마다 파일 순서의 첫 행 | 출력 텍스트 | 없음 | `src/core/dict/builtin/extra/cleanup.tsv` | `src/core/engine/driver.cpp` `TranslateBody` `pipeline::RestoreAll(` |
 | postfilter | 모든 행 적용 | 출력 줄 | 없음 | Ehnd 폴더의 postfilter | `src/core/engine/driver.cpp` `TranslateDocument` `filter::Stage::Post` |
 

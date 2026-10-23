@@ -112,6 +112,15 @@ public:
         return false;
     }
 
+    // An adjective stem of two or more characters that ends at character at of rs and
+    // starts at or after from (こわ in こわ～い).
+    bool AdjectiveStemBefore(std::u32string_view rs, size_t from, size_t at) const {
+        for (size_t j = from; j + 2 <= at; j++) {
+            if (Tags(rs.substr(j, at - j)).find('H') != std::string::npos) return true;
+        }
+        return false;
+    }
+
     // A verb or adjective stem of three or more characters that ends at character at
     // of rs and starts at or after from (うるさ in うるさ～い).
     bool LongStem(std::u32string_view rs, size_t from, size_t at) const {
@@ -679,6 +688,29 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(i + 2), kLengthenMark);
         changed = true;
     }
+    // A word drawn out syllable by syllable, a ー after two or more of its kana (とーにーかーく,
+    // だーかーらー): the word without the marks, drawn out at the end when the last mark
+    // ends the run, when the dictionary has it.
+    for (size_t p = 0; p + 3 < rs.size(); p++) {
+        if (!IsHiraganaRune(rs[p]) || (p > 0 && (IsHiraganaRune(rs[p - 1]) || IsKanjiRune(rs[p - 1]) || rs[p - 1] == U'ー'))) {
+            continue;
+        }
+        // Kana each followed by a mark, and one kana without it at the end.
+        std::u32string plain;
+        size_t q = p, marks = 0;
+        while (q < rs.size() && IsHiraganaRune(rs[q])) {
+            plain += rs[q++];
+            if (q >= rs.size() || rs[q] != U'ー') break;
+            marks++;
+            q++;
+        }
+        // Of two kana, a mark after a bare vowel lengthens it (いーなー いいな, あーあー).
+        if (marks < 2 || (plain.size() == 2 && In(plain[0], U"あいうえお")) || !e.WordKey(plain)) continue;
+        const bool drawn = rs[q - 1] == U'ー';
+        rs = Spliced(rs, p, drawn ? plain + U"～" : plain, q);
+        changed = true;
+        p += plain.size();
+    }
     for (size_t i = 1; i < rs.size(); i++) {
         const char32_t prev = rs[i - 1];
         if ((!IsHiraganaRune(prev) && !IsKanjiRune(prev)) || prev == U'っ') continue;
@@ -711,6 +743,18 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                     continue;
                 }
                 break;
+            }
+            // The long vowel of an adjective in しい spelled with ー or ～ (おいしー, うれしー,
+            // たのしーね): the stem of an adjective ends before the mark, which stands for its
+            // い; drawn out before a pause (おいしい～！) and plain before a particle.
+            if (!plainStart && v == 1 && prev != U'い' &&
+                std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー' || c == U'～'; }) &&
+                (end >= rs.size() || !IsHiraganaRune(rs[end]) || In(rs[end], U"よねなのじゃわしかさぞ")) &&
+                e.AdjectiveStemBefore(rs, from, i) && !e.StemTagged(rs, from, i, "N")) {
+                const bool pause = end >= rs.size() || IsPause(rs[end]);
+                rs = Spliced(rs, i, pause ? U"い～" : U"い", end);
+                changed = true;
+                continue;
             }
             if (end >= rs.size() || !IsHiraganaRune(rs[end])) {
                 // The tokenizer ends a hiragana run at a ー before other than kana or kanji, so there
@@ -771,8 +815,11 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             if (IsSmallVowel(rs[end]) ||
                 (rs[end] == U'っ' && (end + 1 >= rs.size() || !IsHiraganaRune(rs[end + 1]) || rs[end + 1] == U'て')) ||
                 (In(prev, U"かなねさわ") && rs[end] != U'ん' && !e.LongStem(rs, from, i) &&
+                 (IsSmallVowel(r) ||  // かぁいい
+                  (e.Reach(Spliced(rs, i, U"", end), from, i - 1) <= i &&       // in a word: なんとなーく, なさーい
+                   !(rs[end] == U'い' && e.AdjectiveStemBefore(rs, from, i)))) &&  // めんどくさーい
                  !(Nickname(std::u32string_view(rs).substr(end)) && inWord)) ||  // a particle: お花見か～いいわね
-                In(rs[end], U"おご") ||
+                (In(rs[end], U"おご") && !(v == 4 && e.Reach(Spliced(rs, i, U"う", end), from, i) > end + 1)) ||
                 (Nickname(std::u32string_view(rs).substr(end)) && !inWord)) {
                 continue;  // うーちゃん, むーお姉ちゃん
             }
@@ -816,7 +863,17 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 continue;
             }
         }
-        if ((IsSmallVowel(r) || r == U'ー') && end == i + 1 && SpelledWordStart(e, rs, from, i) != std::u32string::npos) continue;
+        if ((IsSmallVowel(r) || r == U'ー') && end == i + 1 && SpelledWordStart(e, rs, from, i) != std::u32string::npos) {
+            // A word spelled with the mark keeps it, unless the long vowel spelled out makes a
+            // longer word with what follows (おはよーございます おはようございます, not おはよー
+            // and ございます).
+            const size_t spelled = e.Reach(rs, from, i);
+            bool longer = false;
+            for (size_t k = 1; k < cands.size() && !longer; k++) {
+                longer = e.Reach(Spliced(rs, i, cands[k], end), from, i) > spelled + cands[k].size();
+            }
+            if (!longer) continue;
+        }
         const size_t before = e.Reach(rs, from, i);
         // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
         // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,
@@ -863,6 +920,23 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 if (reach > i + cands[k].size() && reach + (end - i - cands[k].size()) > plain) {
                     best = static_cast<int>(k);
                     wordEnd = reach;
+                }
+            }
+            // A word that starts after another inside the run of kana (あんな + しょーもない
+            // しょうもない): the long vowel spelled when it then goes past the mark.
+            for (size_t j = start + 1; j < i && best < 0; j++) {
+                if (!IsHiraganaRune(rs[start]) || !e.WordKey(std::u32string_view(rs).substr(start, j - start))) continue;
+                for (size_t k = 1; k < cands.size() && best < 0; k++) {
+                    bool stem = false;
+                    const std::u32string m = Spliced(rs, i, cands[k], end);
+                    const size_t n = e.WordAt(m, j, stem);
+                    // A stem before its ending, or a word that ends the run of kana (お年玉 +
+                    // ちょーだい); not one that stops inside it (しゅうりょ of しゅーりょー).
+                    if (!stem && j + n < m.size() && (IsHiraganaRune(m[j + n]) || m[j + n] == U'ー')) continue;
+                    if (j + n > i + cands[k].size()) {
+                        best = static_cast<int>(k);
+                        wordEnd = j + n;
+                    }
                 }
             }
             read = best >= 0;

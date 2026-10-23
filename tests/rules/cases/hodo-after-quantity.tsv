@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:jisjk:265559	それらの作業に五日ほど掛かった。	그러한 작업에 닷새 정도 걸렸다.	fix	local
+dict:jisjk:265559	十日ほど、色々な方角に進んでみた。	열흘 정도, 다양한 방향에 나아가 보았다.	fix	local
+dict:jisjk:265559	兎の身体が三つほど手に入った。	토끼의 몸이 세 개 정도 손에 들어 왔다.	fix	local
+dict:jisjk:265559	三人ほど来た。	세 명 정도 왔다.	fix	local
+dict:jisjk:265559	数日ほど待った。	며칠 정도 기다렸다.	fix	local
+dict:jisjk:265559	広さは四畳半ほど、決して広くは無い。	rule:dict:jisjk:265559=정도	fix	local
+dict:jisjk:265559	一時間ほど待った。	1시간 정도 기다렸다.	keep	local
+dict:jisjk:265559	昔ほどではない。	옛날만큼은 아니다.	keep	local
+dict:jisjk:265559	お前ほど強くない。	!rule:dict:jisjk:265559	keep	local
+dict:jisjk:265559	数学ほど難しいものはない。	!rule:dict:jisjk:265559	keep	local
+dict:jisjk:265559	百合ほど美しい花はない。	!rule:dict:jisjk:265559	fix	local
+dict:jisjk:265559	一流ほど上手くはない。	!rule:dict:jisjk:265559	fix	local
+dict:jisjk:265559	五月ほど暑くない。	!rule:dict:jisjk:265559	fix	local

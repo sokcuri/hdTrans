@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:136994	だが畑の敵は獣だけではない。	하지만 밭의 적은 짐승만이 아니다.	fix	lookup
+dict:jisjk:152709	日本のみならず	일본뿐만 아니라	fix	lookup
+dict:jisjk:364621	いや、狭いよりはいい。	아니, 좁은 것보다는 좋다.	fix	lookup
+dict:jisjk:364188	助けるだけでは、良い関係とは言えない。	돕는 것만으로는, 좋은 관계라고는 할 수 없다.	fix	lookup

@@ -133,7 +133,7 @@ local 3
 
 | lint | 뜻 |
 |---|---|
-| `unknown-code` | 어느 사전 행에도, 의미 계열 표에도 없는 코드(엔진이 붙이는 `Ow Hz Td Pi Sa Ka`는 앎). 필드를 잘못 쓴 경우가 많음 |
+| `unknown-code` | 어느 사전 행에도, 의미 계열 표에도 없는 코드(엔진이 정하거나 붙이는 `Ow Hz Td Oj Qt Qw Vp Pi Sa Ka Nm`은 앎). 필드를 잘못 쓴 경우가 많음 |
 | `lone-test` | 그리고-묶음 뒤에 코드 검사 하나만 있는 문장. 묶음 수가 하나 모자란 경우 |
 | `contradiction` | 같은 단어에서 함께 참일 수 없는 검사(표기끼리, 같은 값의 `==`와 `!=`, `+0`의 품사끼리) |
 | `neighbour-contradiction` | 이웃의 품사 검사 두 개가 고른 후보가 없을 때만 함께 참 |

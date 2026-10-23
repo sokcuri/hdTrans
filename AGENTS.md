@@ -46,8 +46,11 @@ README.md is for users; developer documentation is in docs/ (index: docs/README.
   then creates the release without another PR (docs/contributing.md).
 
 ## Fixing a translation
-- docs/fixing-translations.md has the steps. Data (dictionary rows, codes) before rules, rules
-  before engine code. Each fix gets a fix test and a keep test.
+- docs/fixing-translations.md has the steps. Fix the stage where the error first appears
+  (segmentation, analysis, selection, assembly), not its symptom downstream; count how many
+  words share the cause first, and fix the mechanism (codes, rules over classes, engine code)
+  when it spans many words. For the same cause, data (dictionary rows, codes) before rules,
+  rules before engine code. Each fix gets a fix test and a keep test.
 - Judge behaviour changes against a build of a fixed commit in its own worktree, not against
   a moving main; revert or narrow a change behind a line both judges call worse.
 - External user dictionaries (Ehnd) are never merged into dicts/.

@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:jisjk:259052	霧の中を歩く。	안개 속을 걷는다.	fix	local
+dict:jisjk:259052	闇の中に消えた。	rule:dict:jisjk:259052=속	fix	local
+dict:jisjk:259052	箱の中に入れた。	상자 안에 넣었다.	keep	local
+dict:jisjk:342783	絶望の中で生きる。	절망 속에서 산다.	fix	local
+dict:jisjk:342783	暗闇の中でよく頑張った。	어둠 속에서 잘 노력했다.	fix	local
+dict:jisjk:342783	部屋の中で	!rule:dict:jisjk:342783	keep	local
+dict:jisjk:342783	口の中で溶けていく。	입속에서 녹아 간다.	fix	lookup
+dict:jisjk:259052	夢の中で会った。	꿈속에서 만났다.	fix	lookup
+dict:jisjk:259052	海の中に潜る。	바닷속에 잠수한다.	fix	lookup
+dict:jisjk:259052	心の中で謝った。	마음속에서 사과했다.	fix	lookup
+dict:jisjk:202286	胸の中にしまう。	가슴속에 넣는다.	fix	local
+dict:jisjk:202286	箱の中にしまう。	상자 안에 넣는다.	keep	local
+dict:jisjk:202286	闇の中にしまう。	어둠 속에 넣는다.	fix	local

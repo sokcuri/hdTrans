@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+lookup:name-verb-stem	今居る場所は広い。	지금 있는 장소는 넓다.	fix	lookup
+lookup:name-verb-stem	今居た所に戻る。	지금 있던 곳으로 돌아간다.	fix	lookup
+lookup:name-verb-stem	今居さんが来た。	이마이 씨가 왔다.	keep	lookup
+lookup:name-verb-stem	沢渡さんが来た。	사와타리 씨가 왔다.	keep	lookup

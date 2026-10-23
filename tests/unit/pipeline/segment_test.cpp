@@ -127,3 +127,70 @@ HD_TEST(pipeline_conjunctive_conditional_endings) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Conjunctive(c.text), c.endsClause);
 }
+
+HD_TEST(pipeline_segment_column_gaps) {
+    // The chunks joined by | with the separator before each in [ ].
+    const auto cut = [](const output::Pieces& pieces) {
+        std::vector<std::string> gaps;
+        const std::vector<Chunk> chunks = Segment(pieces, &gaps);
+        HD_CHECK_EQ(gaps.size(), chunks.size());
+        if (gaps.size() != chunks.size()) return std::string();
+        std::string s;
+        for (size_t i = 0; i < chunks.size(); i++) {
+            if (i > 0) s += "|";
+            if (!gaps[i].empty()) s += "[" + gaps[i] + "]";
+            s += Show({chunks[i]});
+        }
+        return s;
+    };
+    const auto text = [&](const char* t) { return cut({{t, output::SpanText}}); };
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"17      医者      浮遊中", "17|[      ]医者|[      ]浮遊中"},
+        {"１７　　　医者　　　浮遊中", "１７|[　　　]医者|[　　　]浮遊中"},
+        {"名前\t職業", "名前|[\t]職業"},
+        {"山田綾　　 　太郎の母", "山田綾|[　　 　]太郎の母"},
+        {"wiki      の記事", "wiki|[      ]の記事"},
+        {"第一章１　　『始まり』", "第一章１|[　　]『始まり』"},
+        // The leading and trailing white space of a line, a single space and the padding of
+        // a two-character name are no separators.
+        {"　　製薬　　　：Lv.8", "　　製薬|[　　　]：Lv.8"},
+        {"終わり　　\n次", "終わり　　\n次"},
+        {"高橋　聖", "高橋|聖"},
+        {"山田 太郎", "山田 太郎"},
+        {"林  涛", "林  涛"},
+        {"林  涛  歌手", "林  涛|[  ]歌手"},
+        {"林業  涛", "林業|[  ]涛"},
+        // Two ASCII spaces inside a clause are no separator; three are, and so are two
+        // ideographic spaces.
+        {"猫が  好き  です", "猫が  好き  です"},
+        {"私は  学生です  。", "私は  学生です  。"},
+        {"学生  です", "学生  です"},
+        {"彼  は来た", "彼  は来た"},
+        {"1話  長めのプロローグ", "1話|[  ]長めのプロローグ"},
+        {"友人  : 「いつき！」", "友人|[  ]: 「いつき！」"},
+        {"名前  はじまり", "名前|[  ]はじまり"},
+        {"猫が   好き", "猫が|[   ]好き"},
+        {"猫が　　好き", "猫が|[　　]好き"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(text(c.in), std::string(c.want));
+    // A separator after a span, before one, and after a 、 that ends a chunk.
+    HD_CHECK_EQ(cut({{"<b>", output::SpanOpen}, {"  名前", output::SpanText}}), std::string("〖2<b>〗|[  ]名前"));
+    HD_CHECK_EQ(cut({{"名前  ", output::SpanText}, {"<b>", output::SpanOpen}}), std::string("名前|[  ]〖2<b>〗"));
+    HD_CHECK_EQ(cut({{"名前  ", output::SpanText}}), std::string("名前  "));
+
+    HD_CHECK_EQ(internal::ColumnGap("a  b", 1, false, false), size_t{3});
+    HD_CHECK_EQ(internal::ColumnGap("a b", 1, false, false), size_t{1});
+    HD_CHECK_EQ(internal::ColumnGap("a\tb", 1, false, false), size_t{2});
+    HD_CHECK_EQ(internal::ColumnGap("  b", 0, false, false), size_t{0});
+    HD_CHECK_EQ(internal::ColumnGap("  b", 0, true, false), size_t{2});
+    HD_CHECK_EQ(internal::ColumnGap("a  ", 1, false, true), size_t{3});
+    // Inside a run, and in leading or trailing white space, the run is not a separator.
+    HD_CHECK_EQ(internal::ColumnGap("a   b", 2, false, false), size_t{2});
+    HD_CHECK_EQ(internal::ColumnGap("a   ", 1, false, false), size_t{1});
+    // A long run of leading and trailing white space is cut in linear time.
+    const std::string blanks(1 << 20, ' ');
+    HD_CHECK_EQ(cut({{blanks + "猫" + blanks, output::SpanText}}), blanks + "猫" + blanks);
+}

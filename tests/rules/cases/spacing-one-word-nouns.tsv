@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:88796	電話の向こうの相手	전화 저편의 상대	fix	lookup
+dict:jisjk:41199	そちらの様子は知らない。	그쪽의 모습은 모른다.	fix	lookup
+dict:jisjk:201843	この森には牙の生えた兎が多いようだ。	이 숲에는 송곳니가 난 토끼가 많은 듯하다.	fix	lookup

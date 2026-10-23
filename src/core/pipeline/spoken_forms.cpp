@@ -7,7 +7,9 @@ namespace hdTrans::pipeline::internal {
 
 namespace {
 
-// Group 1 a stem of kKataStems in their order, group 2 its ending.
+// Group 1 a stem of kKataStems in their order, group 2 its ending. The adjective ending
+// written in katakana (マズイ) only ends a katakana word of the stem and イ alone (not
+// セコイア).
 bool KataStemPattern(std::string_view s, size_t pos, Match& m) {
     for (const KataStem& k : kKataStems) {
         size_t p = pos;
@@ -15,6 +17,10 @@ bool KataStemPattern(std::string_view s, size_t pos, Match& m) {
         for (std::string_view e : kKataEndings) {
             size_t q = p;
             if (!Lit(s, q, e)) continue;
+            if (e == kKataAdjectiveEnding &&
+                (IsKatakanaRune(LastRune(s.substr(0, pos)).cp) || (q < s.size() && IsKatakanaRune(At(s, q).cp)))) {
+                continue;
+            }
             m.group[1] = Span(s, pos, p);
             m.group[2] = Span(s, p, q);
             m.end = q;
@@ -299,7 +305,7 @@ bool ExclamationNa(std::string_view s, size_t pos, Match& m) {
         if (!Lit(s, p, "な")) return false;
         return Repeat(s, p, InSet(U"ぁあー～"), 0, kUnbounded, [&](size_t q) {
             size_t r = q;
-            if (!OneOf(s, r, U"！!？?。…‥」』）") && q != s.size()) return false;
+            if (!OneOf(s, r, U"！!？?。、…‥」』）") && q != s.size()) return false;
             m.group[2] = Span(s, p, q);
             m.group[3] = Span(s, q, r);
             m.end = r;
@@ -513,6 +519,36 @@ bool KashiraNe(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ワケ standing alone, after no katakana and before no katakana or kanji: the noun わけ
+// written in katakana (やられるワケにはいかない, そういうワケだ, ワケがわからない).
+bool KataWake(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && IsKatakanaRune(LastRune(s.substr(0, pos)).cp)) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ワケ")) return false;
+    if (p < s.size()) {
+        const char32_t after = At(s, p).cp;
+        if (IsKatakanaRune(after) || IsKanjiRune(after)) return false;
+    }
+    m.end = p;
+    return true;
+}
+
+// 判 or 解 for わか in わかる: after no kanji (評判らしい, 了解っす stay) and before ら, り, る,
+// った, って or, for 判, れ (判らない, 解った, 判れば).
+bool KanjiWakaru(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0 && IsKanjiRune(LastRune(s.substr(0, pos)).cp)) return false;
+    size_t p = pos;
+    const bool han = Lit(s, p, "判");
+    if (!han && !Lit(s, p, "解")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, han ? U"らりるれ" : U"らりる")) {
+        q = p;
+        if (!Lit(s, q, "っ") || !OneOf(s, q, U"たて")) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.group[1], mid, m.group[2]}); }
 
 }  // namespace
@@ -520,6 +556,10 @@ std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.gro
 std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectForms) {
     std::string text(in);
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
+    if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
+    if (Contains(text, "判") || Contains(text, "解")) {
+        text = ReplaceAll(text, KanjiWakaru, [](const Match&) { return std::string("わか"); });
+    }
     if (ContainsAny(text, kKataStemStarts)) {
         text = ReplaceAll(text, KataStemPattern, [](const Match& m) {
             const Match g = Rematch(m, KataStemPattern);
@@ -527,7 +567,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
             for (const KataStem& k : kKataStems) {
                 if (k.kata == g.group[1]) hira = k.hira;
             }
-            return Cat({hira, g.group[2]});
+            return Cat({hira, g.group[2] == kKataAdjectiveEnding ? std::string_view("い") : g.group[2]});
         });
     }
     if (Contains(text, "ね")) {

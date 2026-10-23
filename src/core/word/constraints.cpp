@@ -1,11 +1,13 @@
 // The constraint rules and the pass that applies them to the candidates of a lookup.
 #include <algorithm>
 #include <cstddef>
+#include <optional>
 #include <span>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/char_readings.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
@@ -21,9 +23,9 @@ constexpr ConstraintRule kRules[] = {
      "가타카나 단어 + 경칭(さん·くん·様 등): 사람·동물·직함 뜻이 없으면 일반 뜻을 버리고 인명 읽기 (ハル君 헐군 → 하루군)", {}},
     {"honorific-hiragana", ConstraintWord::Hiragana, "", ConstraintContext::FamiliarHonorific, ConstraintReject::NonPerson,
      "히라가나 형용사 어간과 くん, 君, ちゃん: 같은 음가의 기존 인명을 읽되 동사 활용은 보존", {}},
-    {"honorific-kanji-name", ConstraintWord::Kanji, "", ConstraintContext::FamiliarHonorific,
+    {"honorific-kanji-name", ConstraintWord::Kanji, "", ConstraintContext::Honorific,
      ConstraintReject::NonName,
-     "한자 단어 + くん·君·ちゃん·たん: 사전에 인명 뜻이 있고 사람 명사 뜻이 없으면 인명 뜻만 (翼くん 날개 군 → 츠바사군)", {}},
+     "한자 단어 + 경칭: 사전에 인명 뜻이 있고 사람 명사 뜻이 없으면 인명 뜻만 (翼くん 날개 군 → 츠바사군, 東雲さん 새벽 씨 → 시노노메 씨)", {}},
     {"honorific-kanji-name-place", ConstraintWord::Kanji, "", ConstraintContext::Honorific,
      ConstraintReject::NonNameBesidePlace,
      "한자 단어 + 경칭: 인명 뜻 말고는 지명 뜻뿐이면 인명 뜻만 (太郎殿 타로전 → 타로님)", {}},
@@ -55,6 +57,8 @@ constexpr ConstraintRule kRules[] = {
      ConstraintReject::OtherTargets, "この·その·あの 뒤의 先に는 앞에 (この先に 이 먼저 → 이 앞에). 先に行く는 그대로 먼저", "앞에"},
     {"tachisagari-before-agaru", ConstraintWord::Source, "一人立ち", ConstraintContext::BeforeAgaru,
      ConstraintReject::Word, "上が 앞의 一人立ち은 독립이 아니라 一人 + 立ち上がり (一人立ち上がり 독립 올라 → 혼자 일어서). 一人立ちする는 그대로 독립", {}},
+    {"ku-before-rai", ConstraintWord::EndsInKu, "", ConstraintContext::BeforeRai, ConstraintReject::Word,
+     "らい 앞에서 く로 끝나는 단어는 くらい를 끊음: 짧은 단어와 くらい로 (したくらい 준비등 → 한 정도, きたくらい 귀가등 → 온 정도)", {}},
     {"me-ordinal-without-number", ConstraintWord::Source, "め", ConstraintContext::NotAfterQuantity,
      ConstraintReject::Target, "수 없이 홀로 선 め는 서수 째가 아님 (化け物め 괴물째 → 괴물, ごめ 째). 三回め, 5人め는 그대로 째", "째"},
     {"me-yatsu-detached", ConstraintWord::Source, "め", ConstraintContext::Detached, ConstraintReject::Target,
@@ -69,8 +73,24 @@ constexpr ConstraintRule kRules[] = {
      "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
     {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
+    {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
+     "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
+    {"itadake-dake", ConstraintWord::Source, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
+     "だ, で, じゃ, に, の, か 앞의 いただけ는 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
+    {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
+     "줄 첫머리의 ということで、는 동사 という + ことで가 아니라 연결 표현 그래서 (그렇다고 하는 것으로, → 그래서,)", {}},
+    {"to-iu-kotode-opening", ConstraintWord::Source, "と言", ConstraintContext::OpeningKotode, ConstraintReject::Word,
+     "줄 첫머리의 と言うことで、는 동사 と言う + ことで가 아니라 연결 표현 그래서 (이렇게 말하는 것으로, → 그래서,)", {}},
+    {"de-before-aru", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeAru, ConstraintReject::Word,
+     "ある의 활용 앞에서 で로 끝나는 단어는 쓰지 않고 で를 계사 である에 남김 (十四歳であり 14세에 있어 → 14세이며)", {}},
+    {"amari-before-predicate", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::Verbs,
+     "술어가 바로 이어지는 余り는 余る의 연용형이 아니라 부사 (余り伸びなかった 남아 자라지 → 별로 자라지). 余りの, 余りに는 그대로", {}},
+    {"amari-adverb", ConstraintWord::Source, "余り", ConstraintContext::BeforeStem, ConstraintReject::OtherTargets,
+     "술어가 바로 이어지는 余り는 나머지가 아니라 별로 (余り好きじゃない 나머지를 → 별로)", "별로"},
+    {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
+     "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
 };
 
 struct HonorificSuffix {
@@ -104,9 +124,25 @@ constexpr std::string_view kDrawls[] = {"っ", "と", "ぉ", "ぁ", "ー", "～"
 constexpr std::string_view kSuruTails[] = {"ない", "なく", "なかっ", "なけ", "なきゃ", "なくちゃ", "なさ", "ねえ",
                                            "ねー", "ます", "ませ", "まし", "て", "ちゃ", "ちま", "たら",
                                            "たり", "たい", "たく", "よう", "つつ", "ながら"};
+// What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
+constexpr std::string_view kCopulaStarts[] = {"だ", "で", "じゃ", "に", "の", "か"};
 // What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします,
 // ていただく).
 constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "け", "し", "だ"};
+// What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって),
+// and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
+constexpr std::string_view kNounFollowers[] = {"だ", "で", "じゃ", "が", "の", "ね", "か", "や", "って",
+                                               "なん", "なの", "なら", "あっ", "あり", "ある", "さ", "よ"};
+constexpr std::string_view kStemFollowers[] = {"ない", "無い", "なく", "なかっ", "は", "も", "に"};
+// The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as
+// one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
+constexpr std::string_view kContinuativeSuffixes[] = {"ます", "まし", "ませ", "過ぎ", "すぎ", "始め", "はじめ",
+                                                      "続け", "つづけ", "がち", "気味", "つつ", "そうだ",
+                                                      "そうな", "そうです"};
+// The forms of ある after the で of である (であり, である, であった, であれば, であろう).
+constexpr std::string_view kAruForms[] = {"ある", "あり", "あっ", "あれ", "あろ"};
+// The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
+constexpr std::string_view kObjectParticles[] = {"を", "に", "へ", "で"};
 // The nouns that a quotation in って modifies (って奴 라는 녀석).
 constexpr std::string_view kQuotedNouns[] = {"奴", "やつ", "こと", "事", "もの", "物", "感じ", "話", "言葉", "のは", "のが"};
 
@@ -152,6 +188,15 @@ bool HiraganaHonorificAt(std::string_view s) {
     return false;
 }
 
+// Whether c is a verb or adjective as long as source, or longer, that reads the word
+// rather than a name before an honorific: not an adjective stem before くん that a particle,
+// a break or the end follows (碧くんが: not the 碧く of 碧い).
+bool PredicateBlocks(const dict::Candidate& c, std::string_view source, std::string_view after) {
+    if (c.codes == nullptr || !AnyOf("478", c.codes->part.ClassDigit()) || c.source.size() < source.size()) return false;
+    return !(c.codes->part.Tag() == 'H' && c.source.size() == source.size() && after.starts_with("くん") &&
+             HiraganaHonorificAt(after));
+}
+
 bool NameSense(const dict::Codes& c) {
     return c.sem.HasPrefix("QPN") || c.gram.HasPrefix("Wa") || c.gram.HasPrefix("Wb");
 }
@@ -184,6 +229,17 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return AllOfClass(source, kClassKanji) && NameClassOf(before) != kClassKanji && FindHonorificPrefix(before) == -1;
     case ConstraintWord::Source:
         return source == rule.source;
+    case ConstraintWord::EndsInDe:
+        return text::RuneCount(source) >= 2 && source.ends_with("で");
+    case ConstraintWord::OStem: {
+        // The greetings お帰りなさい and お休みなさい are no orders.
+        constexpr std::string_view kGreetings[] = {"お帰り", "おかえり", "お休み", "おやすみ"};
+        return source.starts_with("お") && text::RuneCount(source) >= 3 &&
+               NameClassOf(source.substr(source.size() - std::string_view("い").size())) == kClassHiragana &&
+               std::find(std::begin(kGreetings), std::end(kGreetings), source) == std::end(kGreetings);
+    }
+    case ConstraintWord::EndsInKu:
+        return text::RuneCount(source) >= 2 && source.ends_with("く");
     }
     return false;
 }
@@ -250,6 +306,12 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なる") && !after.starts_with("なるべく") && !after.starts_with("なるほど");
     case ConstraintContext::BeforeAgaru:
         return after.starts_with("上が");
+    case ConstraintContext::BeforeNasai:
+        return after.starts_with("なさい");
+    case ConstraintContext::BeforeCopula:
+        return StartsWithAny(after, kCopulaStarts);
+    case ConstraintContext::BeforeRai:
+        return after.starts_with("らい");
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });
@@ -262,6 +324,14 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;
     }
+    case ConstraintContext::BeforeStem: {
+        const int next = NameClassOf(FirstChar(after));
+        const int last = NameClassOf(before);
+        if (last == kClassKanji || last == kClassKatakana) return false;
+        return (next == kClassKanji || (next == kClassHiragana && !StartsWithAny(after, kNounFollowers) &&
+                                       !StartsWithAny(after, kStemFollowers) && !StartsWithAny(after, kObjectParticles))) &&
+               !StartsWithAny(after, kContinuativeSuffixes);
+    }
     case ConstraintContext::BeforeSuruForm:
         // した, but not たくさん: the past ends there or a particle or mark follows it.
         if (after.starts_with("たくさん")) return false;
@@ -271,6 +341,22 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
             return next == 0 || !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"のんよねかっけしわぞぜ").find(next) != std::u32string_view::npos;
         }
         return StartsWithAny(after, kSuruTails);
+    case ConstraintContext::BeforeAru:
+        // A noun fused with で (歳で), not a particle in で (まである).
+        return StartsWithAny(after, kAruForms) &&
+               std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                   return c.source == source && c.codes != nullptr && c.codes->part.Tag() != 'N';
+               });
+    case ConstraintContext::OpeningKotode:
+        return (previous.empty() || previous == "…" || previous == "‥" || StartsWithAny(previous, kOpeningBrackets)) &&
+               (after.starts_with("うことで、") || after.starts_with("うことで，"));
+    case ConstraintContext::NounSlot: {
+        if (after.starts_with("よう") || after.starts_with("させ") || after.starts_with("され")) return false;
+        if (StartsWithAny(after, kNounFollowers)) return true;
+        const int next = NameClassOf(FirstChar(after));
+        return (StartsWithAny(after, kStemFollowers) || (next != kClassHiragana && next != kClassKanji)) &&
+               !StartsWithAny(adjacent, kObjectParticles);
+    }
     case ConstraintContext::Detached:
         return adjacent.empty() || adjacent == " " || adjacent == "　" || adjacent == ":" || adjacent == "：" ||
                kQuantityBreaks.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
@@ -304,19 +390,45 @@ const dict::Record* PersonReading(const dict::Snapshot& snapshot, const std::vec
     return nullptr;
 }
 
+// Whether target, a name reading of the kanji word source of two kanji or more that also has
+// a sense of no name or place among same, is a Korean word rather than a reading: the Korean
+// of such a sense (太陽 태양), or a word that starts with the Sino-Korean reading of the
+// first two kanji (情報屋 정보제공자). A name of no such word reads as it is (摩耶 마야).
+bool TranslatedName(const std::vector<dict::Candidate>& list, const std::vector<std::size_t>& same,
+                    std::string_view source, std::string_view target) {
+    if (text::RuneCount(source) < 2) return false;
+    bool word = false;
+    for (const std::size_t k : same) {
+        const dict::Codes& c = *list[k].codes;
+        if (NameSense(c) || c.sem.HasCode("QCT") || c.sem.HasCode("VPl")) continue;
+        if (list[k].target == target) return true;
+        word = true;
+    }
+    if (!word) return false;
+    std::string sino;
+    for (int n = 0; n < 2; n++) {
+        const text::Rune r = text::DecodeRune(source);
+        const std::optional<char32_t> written = dict::Written(r.cp);
+        if (!written) return false;
+        text::AppendRune(sino, *written);
+        source.remove_prefix(r.size);
+    }
+    return target.starts_with(sino);
+}
+
 // The name sense among same that replaces the others, or same.end() when there is none or
 // a person noun, a verb or adjective as long as source, or (beside places) another sense
 // than a place is among the candidates.
 std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, const std::vector<dict::Candidate>& list,
-                                                    const std::vector<std::size_t>& same, std::string_view source) {
+                                                    const std::vector<std::size_t>& same, std::string_view source,
+                                                    std::string_view after) {
     auto codes = [&](std::size_t k) -> const dict::Codes& { return *list[k].codes; };
     const auto name = std::find_if(same.begin(), same.end(), [&](std::size_t k) {
-        return NameSense(codes(k)) && list[k].user == nullptr && HangulText(list[k].target);
+        return NameSense(codes(k)) && list[k].user == nullptr && HangulText(list[k].target) &&
+               !TranslatedName(list, same, source, list[k].target);
     });
     const bool blocked =
-        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
-            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) && c.source.size() >= source.size();
-        }) ||
+        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
         std::any_of(same.begin(), same.end(), [&](std::size_t k) { return PersonNoun(codes(k)) || list[k].user != nullptr; }) ||
         std::all_of(same.begin(), same.end(), [&](std::size_t k) { return NameSense(codes(k)); }) ||
         (rule.reject == ConstraintReject::NonNameBesidePlace && !std::all_of(same.begin(), same.end(), [&](std::size_t k) {
@@ -358,11 +470,10 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             const std::string_view source = list[i].source;
             const bool first = std::none_of(list.begin(), list.begin() + static_cast<std::ptrdiff_t>(i),
                                             [&](const dict::Candidate& c) { return c.source == source; });
+            const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
+                                                                         : std::string_view(following);
             if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before) ||
-                !ContextFits(rule, list, source,
-                             query.size() > source.size() ? From(query, static_cast<long>(source.size()))
-                                                          : std::string_view(following),
-                             before, previous, adjacent, preceding, lead)) {
+                !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)) {
                 i++;
                 continue;
             }
@@ -401,7 +512,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 break;
             case ConstraintReject::NonName:
             case ConstraintReject::NonNameBesidePlace:
-                if (const auto name = NameAmong(rule, list, same, source); name != same.end()) {
+                if (const auto name = NameAmong(rule, list, same, source, after); name != same.end()) {
                     nameCodes = list[*name].codes->asPlain, nameTarget = list[*name].target, nameId = list[*name].id;
                     rejected = same;
                 } else if (rule.reject == ConstraintReject::NonName) {
@@ -409,16 +520,17 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     // the word (千里ちゃん 치사토짱, not 천리), unless a person noun, a user
                     // entry or a verb or adjective as long reads it.
                     const bool blocked =
-                        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
-                            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) && c.source.size() >= source.size();
-                        }) ||
+                        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
                         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
                             return PersonNoun(*list[k].codes) || PersonSense(*list[k].codes) || list[k].user != nullptr;
                         });
                     if (blocked) break;
                     records = snapshot.NameRecords(source);
                     for (const dict::Record& r : records) {
-                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target)) continue;
+                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target) ||
+                            TranslatedName(list, same, source, r.target)) {
+                            continue;
+                        }
                         nameCodes = r.codes->asPlain, nameTarget = r.target, nameId = r.id;
                         rejected = same;
                         break;
@@ -463,6 +575,14 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     return c.source.size() < source.size() && source.starts_with(c.source);
                 });
                 if (shorter) rejected = same;
+                break;
+            }
+            case ConstraintReject::Verbs: {
+                auto verb = [&](std::size_t k) { return list[k].codes->part.Tag() == 'M'; };
+                if (std::all_of(same.begin(), same.end(), verb)) break;
+                for (std::size_t k = 0; k < list.size(); k++) {
+                    if (list[k].codes != nullptr && verb(k) && source.starts_with(list[k].source)) rejected.push_back(k);
+                }
                 break;
             }
             case ConstraintReject::NonQuote:

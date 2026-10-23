@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+sense:舐める	俺を舐めるなよ。	나를 얕보지 마.	fix	senses
+sense:舐める	人を舐めた態度	사람을 얕본 태도	fix	senses
+sense:舐める	乳首を舐めて	유두를 핥아	keep	senses
+rewrite:passive	不意打ち気味に鈴口を舐められて、腰が震えた。	기습 기색에 요도구를 핥이고, 허리가 떨렸다.	fix	rewrites
+rewrite:passive	後輩に舐められた。	후배에게 얕보였다.	keep	rewrites
+dict:adult:7	鈴口の上で舌を踊らせた。	요도구 위에서 혀를 춤추게 했다.	fix	defaults
+dict:adult:9	何度も裏スジを舐めあげてくる。	몇 번이나 뒷줄기를 핥아 온다.	fix	defaults
+dict:adult:10	耳を甘噛みした。	귀를 살짝 깨물었다.	fix	defaults
+dict:jisjk:137375	下着が透けている。	속옷이 비쳐 있다.	fix	defaults

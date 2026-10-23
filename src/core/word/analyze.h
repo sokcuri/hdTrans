@@ -22,6 +22,7 @@ struct SessionSenses;
 #define HDTRANS_IMPROVEMENTS(X) \
     X(extraBuiltin, true)             /* Additional builtin dictionary rows. */ \
     X(literalCleanup, true)           /* Literal output replacements. */ \
+    X(kanjiNumbers, true)             /* Kanji numbers with 百, 千 and of two or more characters as digits. */ \
     X(imperativeEu, true)             /* Imperative form of Korean stems ending in 으. */ \
     X(causativePassive, true)         /* Short causative-passive verb endings. */ \
     X(exclamationNa, true)            /* Exclamatory な after predicates. */ \

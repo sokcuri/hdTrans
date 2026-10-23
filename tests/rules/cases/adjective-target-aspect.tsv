@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+rewrite:simple-aspect	いらいらしている。	초조하다.	fix	rewrites
+rewrite:simple-aspect	いらいらしている人	초조한 사람	fix	rewrites
+rewrite:simple-aspect	いらいらしていた。	초조했다.	keep	rewrites
+rewrite:simple-aspect	空気がこんなにも澄んでいたこと	공기가 이렇게도 맑은 것	keep	rewrites
+rewrite:verb-negative	気分が優れない。	기분이 좋지 않다.	fix	rewrites
+rewrite:verb-negative	そうなりそうにない空気	그렇게 될 것 같지 않은 공기	fix	rewrites
+rewrite:verb-negative	良くない意味合い	좋지 않은 의미	keep	rewrites
+rewrite:verb-negative	行きたくない。	가고 싶지 않다.	keep	rewrites

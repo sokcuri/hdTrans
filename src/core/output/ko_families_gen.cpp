@@ -190,7 +190,6 @@ constexpr InflectionException kExceptions[] = {
     {'6', "해"},
     {'8', "한"},
     {'9', "했"},
-    {'A', "했"},
 };
 
 using Class = InflectionClass;
@@ -646,7 +645,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&K3@", "놀", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K4@", "달", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K5@", "살", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
-    {"&K6@", "알", Pos::Verb, Class::Rieul, kNominalRieulMieum, 0x0fff, {}},
+    {"&K6@", "알", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K7@", "졸", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K8@", "팔", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
     {"&K9@", "돌", Pos::Verb, Class::Rieul, 0, 0x0fff, {}},
@@ -749,7 +748,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&Mz@", "이", Pos::Adjective, Class::Copula, 0, 0x0fff, {}},
     {"&NA@", "나뉘", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&NB@", "엮", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
-    {"&NC@", "했", Pos::Verb, Class::Regular, kBareDeclarative, 0x0fff, std::span{kExceptions}.subspan(180, 6)},
+    {"&NC@", "했", Pos::Verb, Class::Regular, kBareDeclarative, 0x0fff, std::span{kExceptions}.subspan(180, 5)},
     {"&ND@", "붇", Pos::Verb, Class::Digeut, 0, 0x0fff, {}},
     {"&NE@", "꿇", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},
     {"&NF@", "않", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},

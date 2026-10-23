@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+sound:katakana-final-ru	コルミエールの家に行った。	코르미에르의 집에 갔다.	fix	sound
+sound:katakana-final-ru	ナルヌールの塔	나르누르의 탑	fix	sound
+sound:katakana-final-ru	メモリプールを空ける。	메모리풀을 비운다.	keep	sound

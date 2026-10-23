@@ -216,11 +216,12 @@ private:
             return false;
         }
         if (o.operand == Operand::Code2) {
-            // Position conditions of CheckGAttr, and the markers the word stage adds to rule
-            // candidates.
-            for (const char* engine : {"Ow", "Hz", "Td", "Pi", "Sa", "Ka"}) {
+            // Position conditions of CheckGAttr, the markers the word stage adds to rule
+            // candidates, and Nm of the records it makes for unknown words.
+            for (const char* engine : {"Ow", "Hz", "Td", "Oj", "Qt", "Qw", "Vp", "Pi", "Sa", "Ka", "Nm"}) {
                 if (c == engine) return true;
             }
+            if (c == "Nq") return true;  // a count, Item::ReadsCount
             return inv_.gramCodes.count(c) > 0;
         }
         const bool familyTest = o.flat == std::string_view("-=") || o.field == 'T';

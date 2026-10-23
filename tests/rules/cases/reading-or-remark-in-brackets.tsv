@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+names:reading	姉「うん」って言った。	언니 「응」이라고 말했다.	fix	normalize
+names:reading	母「はい」って言った。	어머니 「네」라고 말했다.	fix	normalize
+names:reading	理由（なし）	이유(없음)	fix	normalize
+names:reading	結果（ぎりぎり）合格だった。	결과(빠듯이) 합격이었다.	fix	normalize
+names:reading	刻「きざ」み続「つづ」けていた	계속 새기고 있었다	keep	normalize
+names:reading	動「うご」き出「だ」す	움직이기 시작한다	keep	normalize
+names:reading	あの日「ひ」の誓「ちか」いを	그 날의 맹세를	keep	normalize
+names:ruby	名前|田中(たなか)	이름|타나카	fix	normalize
+names:ruby	メニュー|設定(せってい)	메뉴|설정	fix	normalize
+names:ruby	｜灰狼（ハイロウ）が立つ。	하이로우가 선다.	keep	normalize

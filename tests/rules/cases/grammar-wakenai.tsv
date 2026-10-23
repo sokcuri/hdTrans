@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:gram:wakenai:わけ	「そうよね、でなければ三人も亡くなられるわけないわ」	「그렇지, 가 아니면 세 명도 돌아가실 리가 없어」	fix	local
+dict:gram:wakenai:わけ	「……忘れるわけないよ」	「……잊을 리가 없어」	fix	local
+dict:gram:wakenai:いわけ	高いわけないよ。	높을 리가 없어.	fix	local
+dict:gram:wakenai:わけ	来るわけではない。	오는 것은 아니다.	keep	local

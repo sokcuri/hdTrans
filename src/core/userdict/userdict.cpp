@@ -205,6 +205,8 @@ std::string Compile(std::string_view jp, std::string_view kr, std::string_view p
         add(std::string(jp), std::string(kr), "N130", "QPNVHn", "Wb");
     } else if (pos == "surname") {
         add(std::string(jp), std::string(kr), "N130", "QPNVHn", "Wa");
+    } else if (pos == "place") {
+        add(std::string(jp), std::string(kr), "N130", "QCTVPl");
     } else if (pos == "intj" || pos == "lead" || pos == "open") {
         add(std::string(jp), std::string(kr), "E000");
     } else if (pos == "hon") {
@@ -238,8 +240,9 @@ std::string Compile(std::string_view jp, std::string_view kr, std::string_view p
         if (slash != std::string_view::npos) {
             if (std::string err = Conjugating(kr.substr(slash + 1), '&', "", families, verb); !err.empty()) return err;
         }
-        add(std::string(jp), std::string(adverb), "E300");
+        // The verb goes first: it fits only where する follows, and the adverb elsewhere.
         add(std::string(jp), verb, "M429");
+        add(std::string(jp), std::string(adverb), "E300");
     } else if (pos == "end" || pos == "pat") {
         Rec r;
         if (std::string err = CompileEnding(jp, kr, r); !err.empty()) return err;

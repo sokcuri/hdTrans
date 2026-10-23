@@ -119,12 +119,41 @@ struct SkipContext {
     std::string_view query;
 };
 
+// An i-adjective row with かと after the ない of じゃない or ではない: that ない asks
+// whether it is so (行為なんじゃないかと 행위가 아닐까), so the guess or belief of the row
+// (높을 것 같습니다, 높은 줄 알았다) would turn it around.
+bool AskedNegativeGuess(const dict::UserEntry& u, std::string_view left, std::string_view query) {
+    if (At(u.codes->partText, 0) != 'T' || u.key.find("かと") == std::string_view::npos || left.size() < query.size()) {
+        return false;
+    }
+    const std::string_view before = left.substr(0, left.size() - query.size());
+    return before.ends_with("じゃな") || before.ends_with("ではな");
+}
+
+// The means ことで (送ることで 보냄으로써) neither after 言う (ということで, と言うことで: the
+// connective 그래서, 라는 것으로) nor before the negative copula (満たすことでなく
+// 채우는 것이 아니라); query is the text from ことで on, left its token.
+bool SaysOrNegates(std::string_view left, std::string_view query) {
+    const std::string_view rest = query.substr(std::min(query.size(), std::string_view("ことで").size()));
+    for (const std::string_view no : {"ない", "なく", "なけ", "なかっ", "無"}) {
+        if (rest.starts_with(no)) return true;
+    }
+    if (left.size() < query.size()) return false;
+    const std::string_view before = left.substr(0, left.size() - query.size());
+    for (const std::string_view say : {"いう", "言う", "云う", "ゆう"}) {
+        if (before.ends_with(say)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
+    // Pronouns and nouns that end in hiragana (予定通り).
     static constexpr std::string_view kPronouns[] = {"これ", "それ", "あれ", "どれ", "ここ", "そこ", "あそこ",
                                                      "どこ", "だれ", "みんな", "こいつ", "そいつ", "あいつ", "わたし",
-                                                     "あたし", "あなた", "おれ", "ぼく", "きみ", "かれ", "かのじょ"};
+                                                     "あたし", "あなた", "おれ", "ぼく", "きみ", "かれ", "かのじょ",
+                                                     "通り", "どおり"};
     const text::Rune last = DecodeLastRune(text);
     const char32_t r = last.cp;
     if (r >= 0x3041 && r <= 0x309F) {
@@ -175,7 +204,11 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         else last->child = r;
         last = r;
     }
-    if (mode == kModeGeneral && settings.text) DropBoundUtterances(l, query);
+    if (mode == kModeGeneral && settings.text) {
+        DropBoundUtterances(l, query);
+        DropNegatedAdverbs(l, query);
+        DropFinalAdnominals(l, query);
+    }
     if (settings.text) {
         DropModalSplits(l, query);
         TransliterateGlosses(l.records);
@@ -263,6 +296,7 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
     if (current < 0) return false;
     const std::string_view left = Tok(current).text;
     const std::string_view after = query.substr(std::min(u.key.size(), query.size()));
+    if (AskedNegativeGuess(u, left, query)) return false;
     if (At(u.codes->partText, 0) == 'P') {
         const long before = static_cast<long>(left.size()) - static_cast<long>(query.size());
         auto wordBefore = [&]() {
@@ -332,13 +366,16 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
     }
     const char tag = At(u.codes->partText, 0);
     if (!AnyOf("PSTU", tag) || query.empty() || current < 0) return true;
-    // A key ending in で does not split です, でしょう, でございます or でも (もんで).
+    // A key ending in で does not split です, でしょう, でございます, でも, では or である
+    // (もんで, ことではない, ことであれば).
     if (u.key.ends_with("で")) {
-        for (const std::string_view s : {"す", "し", "ご", "も"}) {
+        for (const std::string_view s : {"す", "し", "ご", "も", "は", "あ"}) {
             if (rest.starts_with(s)) return false;
         }
     }
     const std::string_view left = Tok(current).text;
+    if (AskedNegativeGuess(u, left, query)) return false;
+    if (u.key.ends_with("ことで") && SaysOrNegates(left, query)) return false;
     if (tag == 'P') {
         const long before = std::max(static_cast<long>(left.size()) - static_cast<long>(query.size()), 0L);
         if (!NounBefore(left.substr(0, static_cast<std::size_t>(before)))) return false;
@@ -417,6 +454,78 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
     l.records = out;
 }
 
+// Text path, mode 0: an adnominal record (part class 0) in the past (お腹が空いた 배가 고픈) is
+// dropped before the end of the line or of a sentence (。！？」』), where nothing follows for
+// it to modify, so that the predicate analysis ends the sentence (배가 고팠다). Before a
+// pause it stays (荒涼とした…工事現場).
+void Worker::DropFinalAdnominals(Lookup& l, std::string_view query) {
+    Record* out = nullptr;
+    Record* last = nullptr;
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        bool final = false;
+        if (At(r->partCode, 1) == '0' && query.size() >= r->source.size() &&
+            (r->source.ends_with("た") || r->source.ends_with("だ"))) {
+            std::string_view rest = query.substr(r->source.size());
+            if (rest.empty() && current >= 0) {
+                final = current + 1 >= TokenCount();
+                if (!final) {
+                    rest = NextText(current + 1);
+                    final = rest.empty();
+                }
+            }
+            for (const std::string_view p : {"。", "！", "？", "!", "?", "」", "』"}) {
+                final = final || rest.starts_with(p);
+            }
+        }
+        if (final) {
+            l.count--;
+            continue;
+        }
+        if (out == nullptr) out = r;
+        else last->child = r;
+        last = r;
+    }
+    if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
+// Text path, mode 0: an adverb record in く of an i-adjective of the lookup (上手く 잘, 早く
+// 빨리, with 上手 and 早 as adjectives) before ない, はない, もない or なる is dropped, so that the
+// adjective takes the ending (上手くない 능숙하지 않다, not 잘 없다). Other adverbs in く stay
+// (全くない 전혀 없다).
+void Worker::DropNegatedAdverbs(Lookup& l, std::string_view query) {
+    auto adjective = [&](std::string_view stem) {
+        for (const Record* r = l.records; r != nullptr; r = r->child) {
+            if (r->source == stem && At(r->partCode, 0) == 'H' && At(r->partCode, 1) == '7') return true;
+        }
+        return false;
+    };
+    Record* out = nullptr;
+    Record* last = nullptr;
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        bool negated = false;
+        if (r->source.ends_with("く") && At(r->partCode, 0) == 'E' && At(r->partCode, 1) == '3' &&
+            query.size() >= r->source.size() &&
+            adjective(std::string_view(r->source).substr(0, r->source.size() - std::string_view("く").size()))) {
+            std::string_view rest = query.substr(r->source.size());
+            if (rest.starts_with("は") || rest.starts_with("も")) rest.remove_prefix(std::string_view("は").size());
+            for (const std::string_view n : {"ない", "なく", "なかっ", "なけれ", "なさそ", "なる", "なり", "なれ", "なっ",
+                                             "なら", "なろ"}) {
+                negated = negated || rest.starts_with(n);
+            }
+        }
+        if (negated) {
+            l.count--;
+            continue;
+        }
+        if (out == nullptr) out = r;
+        else last->child = r;
+        last = r;
+    }
+    if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
 // Text path: the records that split the modal かもしれない or the sentence-final かしら
 // are dropped.
 void Worker::DropModalSplits(Lookup& l, std::string_view query) {
@@ -425,7 +534,7 @@ void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsVerb(*r, query)) {
             l.count--;
             continue;
         }
@@ -461,6 +570,51 @@ bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
     const std::string_view rest = query.substr(r.source.size());
     if (!rest.starts_with("しら")) return false;
     return SentenceFinal(TrimLeftChars(rest.substr(std::string_view("しら").size()), "ねよぁっー"), current, true);
+}
+
+// A person name of two kanji or more whose last kanji is the stem of an ichidan verb that
+// the hiragana after the name conjugates (る, た, て), the kanji before it being a word
+// (今居る: 今 and 居る, not the name 今居): the name takes the verb's stem. Not before a
+// person suffix (里見たち, 里見ちゃん).
+bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
+    if (!r.semantic.starts_with("QPN") || !query.starts_with(r.source) || text::RuneCount(r.source) < 2) return false;
+    const std::string_view rest = query.substr(r.source.size());
+    const text::Rune next = text::DecodeRune(rest);
+    if (next.cp < U'ぁ' || next.cp > U'ゖ' || StartsWithHonorific(rest) || PersonSuffixAt(rest)) return false;
+    const std::string_view last = LastChar(r.source);
+    const std::string_view head = r.source.substr(0, r.source.size() - last.size());
+    if (NameClassOf(last) != kClassKanji || snapshot.RetrieveRecords(head, dict::LookupMode::General).empty()) {
+        return false;
+    }
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(last, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        int branch = 0, length = 0;
+        if (pc.size() == 4 && pc.starts_with("M4") && pc[3] == '7' && AnalyseVerbTail(last, pc[3], rest, branch, length) &&
+            length > 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Whether s starts with a noun of persons of two kana or more that the dictionary
+// writes attached to the word before it (たち, ども: N1, VHn and Tu or Z7).
+bool Worker::PersonSuffixAt(std::string_view s) const {
+    std::size_t end = 0;
+    for (int n = 1; n <= 3 && end < s.size(); n++) {
+        const text::Rune c = text::DecodeRune(s.substr(end));
+        if (c.size == 0 || c.cp < U'ぁ' || c.cp > U'ゖ') break;
+        end += c.size;
+        if (n < 2) continue;
+        for (const dict::Candidate& rec : snapshot.RetrieveRecords(s.substr(0, end), dict::LookupMode::General)) {
+            const dict::Codes* codes = rec.codes;
+            if (codes != nullptr && codes->partText.starts_with("N1") && codes->sem.HasCode("VHn") &&
+                (codes->gram.HasCode("Tu") || codes->gram.HasCode("Z7"))) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Whether form is also the imperative of a godan verb of the dictionary: form without its
@@ -508,14 +662,14 @@ bool Worker::VerbUtterance(const Record& r) const {
 }
 
 // A predicate followed only by closing punctuation: rest, the text of its token after
-// the ending, is closing punctuation, or rest is empty and the next token ends the
-// sentence or the line, is closing punctuation (…) or laughter (www). With comma, a
-// comma after the predicate also ends it.
+// the ending, is closing punctuation or a dash, or rest is empty and the next token ends
+// the sentence or the line, is closing punctuation (…, ――) or laughter (www). With comma,
+// a comma after the predicate also ends it.
 bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     // The punctuation that may follow a sentence-final predicate in its token, and the
     // small kana that only lengthen or stop its last sound (書くなっ, 来たぁ).
     static constexpr std::string_view kClosing[] = {"。", "．", "！", "？", "…", "‥", "・", "」", "』", "）", "～",
-                                                    "ー", "♪", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
+                                                    "ー", "―", "—", "─", "♪", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
                                                     "ぁ", "ぃ", "ぅ", "ぇ", "ぉ", "ァ", "ィ", "ゥ", "ェ", "ォ"};
     auto closing = [](std::string_view t) {
         while (!t.empty()) {
@@ -569,9 +723,22 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 //   - the text after the ending starts with a small kana or ー, which no free word starts
 //     with, and is no particle or ending of the dictionary (って, っけ, っす);
 //   - that kana and the text after it are a dictionary noun of three or more characters.
+// An ending in です also gives its す to an adverb or interjection that starts with it
+// (寝込んだのですっかり: ので + すっかり, 遅れたのですみません: ので + すみません).
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
+    if (ending.ends_with("です") && !after.empty()) {
+        std::string query = "す";
+        query += after.substr(0, std::min<std::size_t>(after.size(), 24));
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const bool adverb = At(part, 0) == 'E' || At(part, 0) == 'A' || (At(part, 0) == 'P' && At(part, 1) != '2');
+            if ((c.user == nullptr || !c.user->nameLayer) && adverb && text::RuneCount(c.source) >= 2) {
+                return true;
+            }
+        }
+    }
     const text::Rune next = text::DecodeRune(after);
     if (next.size == 0 || ending.empty() ||
         std::u32string_view(U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー").find(next.cp) == std::u32string_view::npos) {

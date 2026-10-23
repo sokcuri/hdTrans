@@ -25,10 +25,10 @@ function fixture(t, packed = metadata) {
   write('release-version.txt', `${metadata.version}\n`);
   write('.release-please-manifest.json', { '.': metadata.version });
   write('archive/package/package.json', packed);
-  const path = join(packageDir, 'hdtrans-1.2.3.tgz');
+  const path = join(packageDir, 'hdTrans-1.2.3-wasm.tgz');
   execFileSync('tar', ['-czf', path, '-C', join(root, 'archive'), 'package']);
   const hash = createHash('sha256').update(readFileSync(path)).digest('hex');
-  write('packages/SHA256SUMS.txt', `${hash}  hdtrans-1.2.3.tgz\n`);
+  write('packages/SHA256SUMS.txt', `${hash}  hdTrans-1.2.3-wasm.tgz\n`);
   return { root, packageDir, ref, write };
 }
 
@@ -68,7 +68,7 @@ for (const patch of [{ name: 'other' }, { version: '1.2.4' }, { repository: { ur
 }
 test('checksum mismatch is rejected before registry access', t => {
   const f = fixture(t);
-  f.write('packages/SHA256SUMS.txt', `${'0'.repeat(64)}  hdtrans-1.2.3.tgz\n`);
+  f.write('packages/SHA256SUMS.txt', `${'0'.repeat(64)}  hdTrans-1.2.3-wasm.tgz\n`);
   assert.throws(() => verifyNpmPackage(f), /checksum does not match/);
 });
 
@@ -137,7 +137,6 @@ const missing = () => { throw Object.assign(new Error('Not found'), { status: 40
 function releaseHarness(t, options = {}) {
   const f = fixture(t);
   const calls = [];
-  let checks = 0;
   let release = options.existing;
   const github = { rest: { repos: {
     getReleaseByTag: async () => release && !options.hiddenDraft ? { data: release } : missing(),
@@ -162,18 +161,8 @@ function releaseHarness(t, options = {}) {
       release = { ...release, ...args, ...options.published };
       return { data: release };
     },
-  }, git: {
-    getRef: async args => {
-      assert.equal(args.ref, 'heads/develop');
-      checks++;
-      return { data: { object: { type: 'commit', sha: options.stale || checks === options.staleOnCheck ? 'b'.repeat(40) : sha } } };
-    },
-    updateRef: async args => {
-      calls.push(['move-nightly', args]);
-      if (options.noNightly) return missing();
-    },
-    createRef: async args => { calls.push(['create-nightly', args]); },
-  } }, paginate: async method => method === github.rest.repos.listReleases ? (release ? [release] : []) : options.assets ?? [] };
+  }, git: new Proxy({}, { get: (_, name) => async args => { calls.push([`git-${String(name)}`, args]); } }),
+  }, paginate: async method => method === github.rest.repos.listReleases ? (release ? [release] : []) : options.assets ?? [] };
   const run = () => publishRelease({ github, repo, ref: options.ref ?? ref, sha, packageDir: f.packageDir,
     notes: 'Release notes', root: f.root });
   return { run, github, calls, get release() { return release; } };
@@ -199,7 +188,7 @@ test('upload failure leaves a new release as a draft without a stable publicatio
 for (const draft of [true, false]) {
   test(`existing ${draft ? 'draft' : 'published'} releases are reused without deletion or redrafting`, async t => {
     const h = releaseHarness(t, { existing: { id: 7, tag_name: 'v1.2.3', draft, prerelease: false }, hiddenDraft: draft,
-      assets: [{ id: 9, name: 'hdtrans-1.2.3.tgz' }] });
+      assets: [{ id: 9, name: 'hdTrans-1.2.3-wasm.tgz' }] });
     assert.equal(await h.run(), true);
     assert.deepEqual(h.calls.map(([kind]) => kind), ['delete-asset', 'upload', 'upload', 'latest', 'publish']);
     assert.equal(h.calls.at(-1)[1].release_id, 7);
@@ -217,23 +206,13 @@ test('draft lookup fails closed on duplicate releases and non-404 API errors', a
   github.rest.repos.getReleaseByTag = () => { throw Object.assign(new Error('unavailable'), { status: 503 }); };
   await assert.rejects(findRelease(github, repo, 'v1.2.3'), /unavailable/);
 });
-test('a stale nightly cannot move its tag or mutate release assets', async t => {
-  const h = releaseHarness(t, { ref: 'refs/heads/develop', stale: true });
-  assert.equal(await h.run(), false);
-  assert.deepEqual(h.calls, []);
-  const advanced = releaseHarness(t, { ref: 'refs/heads/develop', staleOnCheck: 2,
-    existing: { id: 7, tag_name: 'nightly' }, assets: [{ id: 9, name: 'old.zip' }] });
-  assert.equal(await advanced.run(), false);
-  assert.deepEqual(advanced.calls.map(([kind]) => kind), ['move-nightly']);
-});
-test('nightly asset publication never emits a stable release output', async t => {
-  const h = releaseHarness(t, { ref: 'refs/heads/develop', noNightly: true });
-  assert.equal(await h.run(), false);
-  assert.deepEqual(h.calls.map(([kind]) => kind), ['move-nightly', 'create-nightly', 'create', 'upload', 'upload', 'publish']);
-  assert.equal(h.calls[0][1].force, true);
-  assert.equal(h.calls.at(-1)[1].make_latest, 'false');
-  assert.equal(h.release.prerelease, true);
-});
+for (const branch of ['refs/heads/develop', 'refs/heads/main']) {
+  test(`a branch push cannot create a release or move a tag: ${branch}`, async t => {
+    const h = releaseHarness(t, { ref: branch, existing: { id: 7, tag_name: 'nightly' }, assets: [{ id: 9, name: 'old.zip' }] });
+    await assert.rejects(h.run(), /release tag/);
+    assert.deepEqual(h.calls, []);
+  });
+}
 
 for (const [latest, makeLatest] of [['v1.2.2', 'true'], ['v1.2.3', 'true'], ['v1.2.4', 'false'], ['v2.0.0', 'false']]) {
   test(`GitHub latest remains monotonic after ${latest}: make_latest=${makeLatest}`, async t => {

@@ -1,4 +1,6 @@
-// Generated table; do not edit.
+// Word lists of the spoken-form normalizer (spoken_forms.cpp), kept by hand. Every
+// stem kKataStems writes is a stem of the dictionary (normalize_test checks it); one
+// whose hiragana would split other words (ださ of 出さない) stays in katakana.
 #pragma once
 #include <string_view>
 
@@ -14,7 +16,7 @@ inline constexpr KataStem kKataStems[] = {
     {"ショボ", "しょぼ"},
     {"ウルサ", "うるさ"},
     {"ウザ", "うざ"},
-    {"ダサ", "ださ"},
+    {"ダサ", "ダサ"},
     {"エグ", "えぐ"},
     {"ダル", "だる"},
     {"ヒド", "ひど"},
@@ -23,13 +25,17 @@ inline constexpr KataStem kKataStems[] = {
     {"マズ", "まず"},
     {"セコ", "せこ"},
     {"ムズ", "むず"},
-    {"ハズ", "はず"},
+    {"ツラ", "つら"},
+    {"エラ", "えら"},
 };
 
-inline constexpr std::u32string_view kKataStemStarts = U"イショウダエヒコマセム";
+inline constexpr std::u32string_view kKataStemStarts = U"イショウダエヒコマセムツ";
+
+inline constexpr std::string_view kKataAdjectiveEnding = "イ";
 
 inline constexpr std::string_view kKataEndings[] = {
     "い",
+    "イ",
     "く",
     "かっ",
     "かろ",

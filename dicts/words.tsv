@@ -600,7 +600,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 して遣	속&AJ@	M428			GN				llm		してやる	w:596
 しのび寄	몰래 다가&AH@	M428			GN				llm		しのびよる	w:597
 しのり鴨	흰줄박이오리	N110			GN						しのりがも	w:598
-しばらく	한동안	E300			GN				xxx llm	1		w:599
+しばらく	한동안	E300	UMe		GN				xxx llm	1		w:599
 しばらく後	얼마 뒤	N110			GN				llm			w:600
 しびれエイ	전기가오리	N110			GN						しびれエイ	w:601
 しまスカンク	줄무늬스컹크	N110			GN						しまスカンク	w:602
@@ -5601,7 +5601,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 タウンミーティング	타운 홀 미팅	N110			GN						タウンミーティング	w:5594
 タウン・ページ	옐로 페이지	N110			GN						タウン・ページ	w:5595
 タウン・ミーティング	타운 홀 미팅	N110			GN						タウン・ミーティング	w:5596
-タオル	타월	N110			GN				xxx llm	1		w:5597
+タオル	수건	N110			GN				xxx llm	1		w:5597
 タオル掛け	수건걸이	N110			GN						タオルかけ	w:5598
 タガログ語	타갈로그어	N110			GN						タガログご	w:5599
 タクト	지휘봉	N110			GN				xxx llm	1		w:5600
@@ -5981,13 +5981,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツェペリナイ	체펠리나이	N110	VFd		GN						ツェペリナイ	w:5974
 ツシマヤマネコ	쓰시마삵	N110			GN						ツシマヤマネコ	w:5975
 ツチノコ	쓰치노코	N110			GN						ツチノコ	w:5976
-ツッコ	처&MK@	M425			GN				xxx		ツッコむ	w:5977
+ツッコ	태클을 &L1@	M425			GN				xxx		ツッコむ	w:26788
+ツッコ	처&MK@	M425			GN						ツッコむ	w:5977
 ツッコ	돌입&AV@	M425			GN						ツッコむ	w:5978
 ツッコ	파고&L4@	M425			GN				llm		ツッコむ	w:5979
 ツッコ	추궁&AV@	M425			GN				llm		ツッコむ	w:5980
 ツッコ	참견&AV@	M425			GN				llm		ツッコむ	w:5981
 ツッコ	받아&AO@	M425			GN				llm		ツッコむ	w:5982
-ツッコミ	츳코미	N110	VHn		GN				llm		ツッコミ	w:5983
+ツッコミ	태클	N110			GN				llm		ツッコミ	w:5983
 ツツガムシ病	쓰쓰가무시증	N110	UTi		GN				llm		つつがむしびょう	w:5984
 ツツジ目	진달래목	N110			GN						ツツジもく	w:5985
 ツツジ科	진달래과	N110			GN						ツツジか	w:5986
@@ -6094,7 +6095,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テニス・ラケット	테니스 라켓	N110			GN						テニス・ラケット	w:6087
 テネシン	테네신	N110			GN						テネシン	w:6088
 テハンミングク	대한민국	N110			GN						テハンミングク	w:6089
-テメェ	네놈	N110			GN				llm			w:6090
+テメェ	네놈	N120	VHn		GN				llm			w:6090
 テメー	네놈	N110			GN				xxx llm			w:6091
 テメー	네놈	N120	VHn		GN				llm		テメー	w:6092
 テメー	나	N120	VHn		GN				llm		テメー	w:6093
@@ -6673,7 +6674,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ナゴラン	나도풍란	N110			GN						ナゴラン	w:6666
 ナザールボンジュウ	나자르 본주우	N110			GN						ナザールボンジュウ	w:6667
 ナザール・ボンジュウ	나자르 본주우	N110			GN						ナザール・ボンジュウ	w:6668
-ナシ	배	N110			GN						ナシ	w:6669
+ナシ	없음	N110			GN						ナシ	w:6669
+ナシ	배	N110	QAMVFd		GN						ナシ	w:26755
 ナシゴレン	나시 고렝	N110	VFd		GN						ナシゴレン	w:6670
 ナショナルリーグ	내셔널리그	N110			GN						ナショナルリーグ	w:6671
 ナショナル・リーグ	내셔널리그	N110			GN						ナショナル・リーグ	w:6672
@@ -11840,7 +11842,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 伏龍	복룡	N110			GN						ふくりゅう	w:11833
 伐	공격&AV@	M424			GN						うつ	w:11834
 休刊日	휴간일	N110	UMe	Tm	GN				llm		きゅうかんび	w:11835
-休憩	휴식	N110			GN				xxx llm	1		w:11836
+休憩	휴식	N110		Hi	GN				xxx llm	1		w:11836
 休憩所	휴게소	N110			GN						きゅうけいじょ	w:11837
 休憩時間	쉬는 시간	N110	UMe	Tm	GN				llm		きゅうけいじかん	w:11838
 休符	쉼표	N110	QMU		GN						きゅうふ	w:11839
@@ -12657,7 +12659,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 出版者	출판사	N110			GN						しゅっぱんしゃ	w:12646
 出直	다시 &AH@	M423			GN				xxx llm	1		w:12647
 出窓	돌출창	N110			GN				xxx llm	1		w:12648
-出立	출발	N110			GN				xxx llm	1		w:12649
+出立	출발	N110		Hi	GN				xxx llm	1		w:12649
 出自	출신	N110			GN				xxx llm	1		w:12650
 出逢い	만남	N110			GN						であい	w:12651
 出遭	만&A5@	M420			GN						であう	w:12652
@@ -13319,7 +13321,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 厳探	엄탐&AV@	M429			GN						げんたん	w:13308
 厳秘	극비	N110			GN				xxx llm	1		w:13309
 去勢不安	거세불안	N110			GN						きょせいふあん	w:13310
-参列	참석	N110			GN				xxx llm	1		w:13311
+参列	참석	N110		Hi	GN				xxx llm	1		w:13311
 参加賞	참가상	N110			GN						さんかしょう	w:13312
 参稼報酬	연봉	N110			GN				xxx llm	1		w:13313
 参考までに	참고로	A9D0			GN				llm		さんこうまでに	w:13314
@@ -16687,14 +16689,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成銀	성은	N110			GN						なりぎん	w:16673
 成長痛	성장통	N110			GN						せいちょうつう	w:16674
 我がこと	자기 일	N110			GN				llm		わがこと	w:16675
-我が侭	제멋대로 굶	N110			GN						わがまま	w:16676
+我が侭	제멋대로	N110			GN						わがまま	w:16676
 我が侭	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16677
-我が儘	제멋대로 굶	N110			GN						わがまま	w:16678
+我が儘	제멋대로	N110			GN						わがまま	w:16678
 我が儘	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16679
 我ながら	내가 생각해도	E300			GN				llm		われながら	w:16680
-我侭	제멋대로 굶	N110			GN						わがまま	w:16681
+我侭	제멋대로	N110			GN						わがまま	w:16681
 我侭	제멋대로%D4@	G8U0			GN				llm		わがまま	w:16682
-我儘	제멋대로 굶	N110			GN						わがまま	w:16683
+我儘	제멋대로	N110			GN						わがまま	w:16683
 我楽多	잡동사니	N110			GN						ガラクタ	w:16684
 我毛香	오이풀	N110			GN						われもこう	w:16685
 我流	자기류	N110			GN				xxx llm	1		w:16686
@@ -17446,7 +17448,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 数億年	수억 년	N110	UMe	Tm	GN				llm		すうおくねん	w:17432
 数合せ	숫자 맞추기	N110			GN				llm		かずあわせ	w:17433
 数学者	수학자	N110			GN						すうがくしゃ	w:17434
-数日	며칠	N110			GN				xxx llm	1		w:17435
+数日	며칠	N110	UMe		GN				xxx llm	1		w:17435
 数日前	며칠 전	I110			GN				xxx llm	1		w:17436
 数日後	며칠 후	I110			GN				xxx llm	1		w:17437
 数時間	몇 시간	N110	UMe	Tm	GN				llm		すうじかん	w:17438
@@ -18155,7 +18157,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 来援	도우러 &AH@	M429			GN				llm		らいえん	w:18141
 来月	내달	I110	UMe	Tm	GN				xxx	1	らいげつ	w:18142
 来航	내항	I110			GN				xxx llm	1		w:18143
-来訪	방문	I110			GN				xxx llm	1		w:18144
+来訪	방문	I110		Hi	GN				xxx llm	1		w:18144
 来訪神	내방신	N110			GN						らいほうしん	w:18145
 杭打ち機	항타기	N110			GN						くいうちき	w:18146
 杭打機	항타기	N110			GN						くいうちき	w:18147
@@ -18484,6 +18486,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 樺太鷲	항라머리검독수리	N110			GN						からふとわし	w:18469
 樺木科	자작나무과	N110			GN						かばのきか	w:18470
 樺黄小町蜘蛛	애어리염낭거미	N110			GN						かばきこまちぐも	w:18471
+樽	통	N110		Ct	GN	115	||1 G-1== "NjNd"	樽는 숫자나 何 뒤에서 통을 세는 통으로 고른다(二樽 두 통).		1	たる	w:26756
 樽	나무통	N110			GN				xxx llm	1		w:18472
 橈骨	노뼈	N110	VBp		GN						とうこつ	w:18473
 橋がかり	하시가카리	N110	VBl		GN				llm		はしがかり	w:18474
@@ -21185,7 +21188,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 竃	가마	N110			GN				xxx	1	かま	w:21167
 竈	부뚜막	N110			GN				xxx llm	1		w:21168
 竈神	조왕신	N110			GN				llm		かまどがみ	w:21169
-立ちい	유지&C6@	M421			GN				llm			w:21170
+立ちい	유지&C6@	M42?			GN				llm			w:21170
 立ちくらみ	현기증	N110	UTi	Hd	GN				llm		たちくらみ	w:21171
 立ちこめ	&A4@	M427			GN				xxx	1	たちこめる	w:21172
 立ち位置	포지션	N110			GN						たちいち	w:21173
@@ -22653,7 +22656,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 若衆組	청년단	N110			GN				xxx llm	1		w:22633
 若連中	청년단	N110			GN				xxx llm	1		w:22634
 若鶏	영계	N110			GN				xxx llm	1		w:22635
-苦労	고생	N110			GN				xxx llm	1		w:22636
+苦労	고생	N110		Hi	GN				xxx llm	1		w:22636
 苦参	클라라	N110			GN						くらら	w:22637
 苦塩	간수	N110			GN						にがり	w:22638
 苦境	곤경	N110			GN				xxx llm	1		w:22639
@@ -23155,7 +23158,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 行違い	엇갈림	N110			GN				xxx llm		いきちがい	w:23135
 行違い	어긋남	N110	UTh		GN				llm		いきちがい	w:23136
 行革	행정 개혁	N110			GN				xxx llm	1		w:23137
-術	술	N110			GN				xxx llm	1		w:23138
+術	술법	N110			GN				xxx llm	1		w:23138
 術者	시전자	N110			GN				llm			w:23139
 術語	전문 용어	N110			GN				xxx llm	1		w:23140
 街々	거리거리	N110			GN						まちまち	w:23141
@@ -24154,7 +24157,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 踏切り	건널목	N110			GN				xxx		ふみきり	w:24134
 踏切り	발구름	N110			GN				llm		ふみきり	w:24135
 踏切り	결단	N110	UTh		GN				llm		ふみきり	w:24136
-踵	발길	N110			GN				xxx llm	1		w:24137
+踵	뒤꿈치	N110			GN				xxx llm	1		w:24137
 踵骨	종골	N110	VBp		GN						しょうこつ	w:24138
 蹄葉炎	제엽염	N110	UTi		GN						ていようえん	w:24139
 蹄鉄	편자	N110			GN				xxx	1	ていてつ	w:24140
@@ -24373,7 +24376,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 追送	추송&AV@	M429			GN						ついそう	w:24353
 追随者	아류	N110			GN						ついずいしゃ	w:24354
 退け	물리&AO@	M427			GN				xxx llm	1		w:24355
-退出	퇴장	N110			GN				xxx llm	1		w:24356
+退出	퇴장	N110		Hi	GN				xxx llm	1		w:24356
 退屈	지루함	N110			GN				xxx llm	1		w:24357
 退屈凌ぎ	심심풀이	N110			GN						たいくつしのぎ	w:24358
 退職願い	사직서	N110			GN						たいしょくねがい	w:24359
@@ -26758,3 +26761,70 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 持久走	오래달리기	N110			GN						じきゅうそう	w:26736
 親父さん	아버지	N110	VHn		GN						おやじさん	w:26738
 新婚さん	신혼부부	N110	VHn		GN						しんこんさん	w:26739
+大岩	큰 바위	N110	XXX		GN						おおいわ	w:26740
+丸々と	통통하게	E300			GN						まるまると	w:26741
+丸々	꼬박	E301	XXX		GN						まるまる	w:26742
+すまぬ	미안하다	A9D0			GN						すまぬ	w:26743
+すまぬが	미안하지만	A9D0			GN						すまぬが	w:26744
+日持ち	오래 &A1@	M419			GN						ひもち	w:26745
+吊る	매&K4@	M443			GN						つるす	w:26746
+これでもかと	질릴 만큼	E300			GN						これでもかと	w:26747
+わけあって	사정이 있어	E311			GN						わけあって	w:26748
+訳あって	사정이 있어	E311			GN						わけあって	w:26749
+ダサ	촌스$G7@	H7U0			GN						ださい	w:26750
+むず	어$G8@	H7U0			GN						むずい	w:26751
+せこ	치사$AB@	H7U0			GN						せこい	w:26752
+ご馳走	대접&AV@	M419			GN						ごちそう	w:26753
+御馳走	대접&AV@	M419			GN						ごちそう	w:26754
+レープクーヘン	레프쿠헨	N110			GN							w:26771
+大広場	대광장	N110			GN							w:26772
+市井	저잣거리	N110	XXXVPl		GN					1		w:26773
+夜伽	밤시중	N110			GN						よとぎ	w:26774
+城内	성내	N110	XXXVPl		GN					1	じょうない	w:26775
+俺様	이 몸	N120	VHn		GN						おれさま	w:26776
+オレ様	이 몸	N120	VHn		GN							w:26777
+大蜘蛛	큰 거미	N110	VAm		GN						おおぐも	w:26778
+白月	백월	N110			GN						はくげつ	w:26779
+籠	바구니	N110	XXXVPe		GN						かご	w:26780
+ちょこっとした	자그마한	C0D1			GN							w:26781
+祟り	재앙	N110			GN							w:26782
+籠も	틀어박&AW@	M418			GN							w:26783
+篭も	틀어박&AW@	M418			GN							w:26784
+閉じ籠も	틀어박&AW@	M418			GN							w:26785
+元から	원래부터	E300			GN							w:26786
+くび	목	N110	VBp		GN				xxx	1		w:26757
+むき出しの	드러난	C0D1			GN							w:26758
+剥き出しの	드러난	C0D1			GN							w:26759
+呆然	망연	N110		Tr	GN						ぼうぜん	w:26760
+茫然	망연	N110		Tr	GN						ぼうぜん	w:26761
+颯爽	씩씩	N110		Tr	GN						さっそう	w:26762
+憤然	분연	N110		Tr	GN						ふんぜん	w:26763
+昂然	의기양양	N110		Tr	GN						こうぜん	w:26764
+淡々	담담	N110		Tr	GN						たんたん	w:26765
+凛とした	늠름한	E0H0			GN						りんとした	w:26766
+崩御	붕어	N110		HdHi	GN						ほうぎょ	w:26767
+薨去	훙거	N110		HdHi	GN						こうきょ	w:26768
+いわれのな	터무니$FA@	H7N0			GN							w:26769
+謂れのな	터무니$FA@	H7N0			GN							w:26770
+駄目駄目	안 돼 안 돼	I110			GN						だめだめ	w:26787
+笑	소	N110			GN						しょう	w:26799
+笑	ㅋㅋ	N110			GN	6904	||2 G+0== "Td" &&2 G+0== "Ow" P-1!= "13*"	문장에 혼자 있거나 고유 명사가 아닌 말 뒤 문장 끝에 붙은 笑는 웃음 표시 ‘ㅋㅋ’로 고른다(マジかよ笑).			わら	w:26789
+手近な	가까운	E0H0			GN						てぢかな	w:26790
+手近に	가까이에	E300			GN						てぢかに	w:26791
+横薙ぎ	가로베기	N110			GN						よこなぎ	w:26792
+横薙ぎに	옆으로	E300			GN						よこなぎに	w:26793
+ヘタに	섣불리	E300			GN						へたに	w:26794
+ヘタに	열매 꼭지에	E300			GN	6907	||1 S-1== "の"	の 뒤의 ヘタに는 꼭지(ヘタ)에 조사 に가 붙은 것으로 ‘열매 꼭지에’를 고른다(イチゴのヘタに).			へたに	w:26801
+財	재산	N110	XXX		GN						ざい	w:26795
+お目付	감시역	N110	VHn		GN						おめつけ	w:26796
+今だけ	지금만	N110			GN						いまだけ	w:26800
+いいとこ	좋은 데	N110			GN						いいとこ	w:26802
+いいとこ見せ	멋진 모습을 보&AJ@	M437			GN						いいとこみせ	w:26803
+いいとこを見せ	멋진 모습을 보&AJ@	M437			GN						いいとこをみせ	w:26804
+デプロイ	디플로이	N110		Hd	GN							w:26805
+プル	풀	N110		Hd	GN							w:26806
+起票	작성	N110		Hd	GN							w:26807
+コピペ	복붙	N110		Hd	GN							w:26808
+炎上	불타&E6@	M419			GN							w:26809
+炎上プロジェクト	불붙은 프로젝트	N110			GN							w:26810
+本番環境	운영 환경	N110			GN							w:26811

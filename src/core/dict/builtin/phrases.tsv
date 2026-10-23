@@ -13,6 +13,8 @@
 ご主人様	주인님	n	attr=VHn
 ごしゅじんさま	주인님	n	attr=VHn
 おかえりなさいませ	어서 오세요	intj
+おかえりなさいまし	어서 오세요	intj
+お帰りなさいまし	어서 오세요	intj
 おかえりなさーい	어서 오세요	intj
 おかえり	어서 와	intj
 いってきます	다녀오겠습니다	intj
@@ -49,6 +51,8 @@
 ざまぁみろ	꼴좋다	intj
 ざまーみろ	꼴좋다	intj
 おやすみなさい	안녕히 주무세요	intj
+おやすみなさいませ	안녕히 주무세요	intj
+お休みなさいませ	안녕히 주무세요	intj
 またいらっしゃってね	또 놀러 와요	intj
 それではまた	그럼 또 봐요	intj
 あらためまして	다시 인사드릴게요	intj
@@ -817,8 +821,8 @@
 いっけぇ	가라	intj
 いっくぜー	간다	intj
 いっくぜ	간다	intj
-やっべ	큰일났다	intj
-やば	큰일났다	intj
+やっべ	큰일 났다	intj
+やば	큰일 났다	intj
 そお	그래	intj
 そぉ	그래	intj
 どお	어때	intj
@@ -968,6 +972,7 @@
 
 // Narration and game vocabulary read in the wrong pieces (demo examples).
 そう言う	그렇게 말하다	v5
+そう言われる	그런 말을 듣다	v1
 いらっしゃいます	계십니다	phrase
 いらっしゃいますか	계십니까	phrase
 いらっしゃいますでしょうか	계십니까	phrase
@@ -1024,11 +1029,8 @@
 いっただっきまーす	잘 먹겠습니다	intj
 // V連用形 + たて: just made (淹れたての紅茶 갓 우려낸 홍차).
 淹れたての	갓 우려낸	phrase
-淹れたて	갓 우려낸 것	n
 焼きたての	갓 구운	phrase
-焼きたて	갓 구운 것	n
 出来たての	갓 만든	phrase
-出来たて	갓 만든 것	n
 作りたての	갓 만든	phrase
 炊きたての	갓 지은	phrase
 揚げたての	갓 튀긴	phrase
@@ -1044,6 +1046,7 @@
 // Words of court and household narration.
 人気のない	인적 없는	phrase
 人気の無い	인적 없는	phrase
+人気の少ない	인적이 드문	phrase
 自分付きの	자기 전속	phrase
 隣の国王	옆의 국왕	n
 虚仮にされて	바보 취급을 당하고	phrase
@@ -1282,6 +1285,8 @@
 何だっけ	뭐였더라	phrase
 何でもありません	아무것도 아니에요	intj
 なんでもありません	아무것도 아니에요	intj
+何でもありませんわ	아무것도 아니에요	intj
+なんでもありませんわ	아무것도 아니에요	intj
 何でもないです	아무것도 아니에요	intj
 なんでもないです	아무것도 아니에요	intj
 今のは	방금 그건	phrase

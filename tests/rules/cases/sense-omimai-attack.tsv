@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:sense:omimai:2	端正な顔に頭突きをお見舞いした。	단정한 얼굴에 박치기를 먹였다.	fix	local
+dict:sense:omimai:2	強烈なパンチをお見舞いしてやった。	강렬한 펀치를 먹여 주었다.	fix	local
+dict:sense:omimai:2	毎日お見舞いに行ってる。	매일 병문안 하러 가고 있다.	keep	local
+dict:sense:omimai:2	病院へお見舞いした。	병원에 병문안했다.	keep	local

@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+compose:emptied-verb-space	関係ないと思っていたが……	관계없다고 생각했지만……	fix	compose
+compose:emptied-verb-space	思っていたより……難しい。	생각했던 것보다……어렵다.	fix	compose
+compose:emptied-verb-space	店員さんは笑った。	점원은 웃었다.	keep	compose

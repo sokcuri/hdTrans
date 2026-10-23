@@ -1,0 +1,22 @@
+rule	input	expected	kind	layer
+G90	王子と会った時の私はまだ子供だった。	왕자와 만났을 때의 나는 아직 아이였다.	fix	global-stem
+G90	森に入ってしばらくしたところで	숲에 들어와 한동안 했더니	fix	global-stem
+G90	充分に店で休息を取り、	충분히 가게에서 휴식을 잡고,	fix	global-stem
+G90	鞄の中に入っている。	가방 안에 들어가 있다.	fix	global-stem
+G90	宮内に入る前は	궁내에 들어오기 전은	fix	global-stem
+G90	その前に立ち、周りを見回していた。	그 앞에 서, 주위를 둘러보고 있었다.	keep	global-stem
+dict:jisjk:202155	「え！？　あれカツラなのか！？」	「어!? 저거 가발이야!?」	fix	defaults
+dict:jisjk:202480	高原の避暑地もよかったけど、	고원의 피서지도 좋았지만,	fix	defaults
+dict:jisjk:202480	高原さんが来た。	타카하라 씨가 왔다.	keep	global-stem
+dict:w:26771	シュトーレンやレープクーヘンが楽しみ！	슈톨렌이나 레프쿠헨이 즐겨!	fix	defaults
+dict:w:26773	まあ、二年ほど働けば市井に戻れなくもない	뭐, 2년 정도 일하면 저잣거리로 돌아갈 수 없는 것도 아니다	fix	defaults
+dict:w:26773	市井の人々。	서민들.	keep	lookup
+dict:w:26774	一度でも夜伽を命じられれば	한 번이라도 밤시중을 명령받으면	fix	lookup
+dict:jisjk:259424	ちょっと藪に入ったところに祠	조금 덤불에 들어온 것에 사당	fix	defaults
+dict:jisjk:259424	藪医者	돌팔이	keep	lookup
+dict:w:26775	二度とネズミ共を城内に立ち入らせるな。	두 번 다시 쥐 모두를 성내에 들어가게 하지 마.	fix	defaults
+dict:w:26776	俺様の出番だ！	이 몸의 차례다!	fix	lookup
+dict:w:26779	緑金と白月石に飾られた廊下	녹금과 백월석에 장식된 복도	fix	lookup
+dict:w:26780	籠を持つ。	바구니를 가진다.	fix	defaults
+dict:w:26780	部屋に籠っていた。	방에 틀어박히고 있었다.	keep	defaults
+names:gloss	改装特I型駆逐艦「深雪改二」、出撃せよ！	개장특I형 구축함 「미유키 개2」, 출격하라!	fix	lookup

@@ -1,10 +1,13 @@
 // Table tests of the normalising rewrites, one table per rewrite, and of the whole
 // sequence of Normalize.
+#include <cstdlib>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/snapshot.h"
 #include "core/pipeline/normalize.h"
+#include "core/pipeline/spoken_forms_gen.h"
 #include "core/pipeline/stage_text.h"
 #include "hdtest.h"
 
@@ -148,8 +151,13 @@ HD_TEST(pipeline_join_paused_copula) {
 HD_TEST(pipeline_spoken_forms) {
     const Case cases[] = {
         {"マジでウザい！"sv, "マジでうざい！"sv},
-        {"ダサすぎます！"sv, "ださすぎます！"sv},
+        {"ダサすぎます！"sv, "ダサすぎます！"sv},
         {"ズルい！"sv, "ズルい！"sv},
+        {"これはマズイ。"sv, "これはまずい。"sv},
+        {"マズイっ！"sv, "まずいっ！"sv},
+        {"ツラい仕事"sv, "つらい仕事"sv},
+        {"セコイアの木"sv, "セコイアの木"sv},
+        {"ウマイボウ"sv, "ウマイボウ"sv},
         {"取るに足らない安物じゃね？"sv, "取るに足らない安物じゃない？"sv},
         {"いや、意外とお子ちゃまじゃねえ？"sv, "いや、意外とお子ちゃまじゃない？"sv},
         {"それあれじゃねーの、"sv, "それあれじゃないの、"sv},
@@ -179,7 +187,8 @@ HD_TEST(pipeline_spoken_forms) {
         {"させんなよ"sv, "させんなよ"sv},
         {"田中さん！"sv, "田中さん！"sv},
         {"ハズい"sv, "ハズい"sv},
-        {"ハズいしウザい"sv, "はずいしうざい"sv},
+        {"ハズいしウザい"sv, "ハズいしうざい"sv},
+        {"ムズイしダサイ"sv, "むずいしダサい"sv},
         {"それじゃねっって"sv, "それじゃないって"sv},
         {"決まってんだろ"sv, "決まってるんだろ"sv},
         {"そこにいんじゃ"sv, "そこにいるんじゃ"sv},
@@ -243,6 +252,14 @@ HD_TEST(pipeline_rewrite_casual) {
         {"置いてください"sv, "置いてください"sv},
         {"みんなよ"sv, "みんなよ"sv},
         {"見てねぇな"sv, "見ていないな"sv},
+        {"見てねーわ"sv, "見ていないわ"sv},
+        {"見てねー！"sv, "見てねー！"sv},
+        {"荒れねーから"sv, "荒れないから"sv},
+        {"言えねえのよ"sv, "言えないのよ"sv},
+        {"トイレいけねーよ"sv, "トイレいけないよ"sv},
+        {"夜明けねー。"sv, "夜明けねー。"sv},
+        {"いい感じねぇ～"sv, "いい感じねぇ～"sv},
+        {"もうすぐ夜明けねー"sv, "もうすぐ夜明けねー"sv},
         {"わかんねぇ"sv, "わからない"sv},
         {"やらねぇよ"sv, "やらないよ"sv},
         {"やらねー"sv, "やらない"sv},
@@ -348,6 +365,22 @@ HD_TEST(pipeline_rewrite_casual) {
         {"「なーにイチャついてんのよ。"sv, "「なにイチャついてんのよ。"sv},
         {"「え、ダメなんすか？"sv, "「え、ダメなんですか？"sv},
         {"なんすか？"sv, "なんすか？"sv},
+        {"抜け駆けすんなッ！"sv, "抜け駆けするな！"sv},
+        {"心配すんな・・・"sv, "心配するな・・・"sv},
+        {"交渉はすんなり進んだ"sv, "交渉はすんなり進んだ"sv},
+        {"でなければ、死ぬのはおまえだ"sv, "そうでなければ、死ぬのはおまえだ"sv},
+        {"できていた。でないと困る"sv, "できていた。そうでないと困る"sv},
+        {"学生でなければ入れない"sv, "学生でなければ入れない"sv},
+        {"それ、でなければ"sv, "それ、でなければ"sv},
+        {"大丈夫さ。寝りゃ治る"sv, "大丈夫さ。寝れば治る"sv},
+        {"俺が悪役になりゃ丸く収まる"sv, "俺が悪役になれば丸く収まる"sv},
+        {"それができりゃあ苦労しねえ"sv, "それができれば苦労しない"sv},
+        {"どこだかもわかりゃしない"sv, "どこだかもわかりはしない"sv},
+        {"金がありゃ買える"sv, "金があれば買える"sv},
+        {"ありゃなんだ"sv, "ありゃなんだ"sv},
+        {"そりゃそうだ"sv, "そりゃそうだ"sv},
+        {"うりゃっ！"sv, "うりゃっ！"sv},
+        {"見てりゃ分かる"sv, "見てりゃ分かる"sv},
     };
     Check(RewriteCasual, cases);
 }
@@ -378,17 +411,45 @@ HD_TEST(pipeline_rewrite_military_time) {
 
 HD_TEST(pipeline_strip_ruby) {
     const Case cases[] = {
-        {"|梨花《りか》ちゃん"sv, "梨花ちゃん"sv},
+        {"|桃花《ももか》ちゃん"sv, "桃花ちゃん"sv},
         {"｜幻晶騎士《シルエットナイト》"sv, "幻晶騎士"sv},
         {"猫猫《マオマオ》"sv, "猫猫"sv},
-        {"<ruby>梨花<rt>りか</rt></ruby>ちゃん"sv, "梨花ちゃん"sv},
-        {"<ruby><rb>梨花</rb><rp>（</rp><rt>りか</rt><rp>）</rp></ruby>"sv, "梨花"sv},
+        {"<ruby>桃花<rt>ももか</rt></ruby>ちゃん"sv, "桃花ちゃん"sv},
+        {"<ruby><rb>桃花</rb><rp>（</rp><rt>ももか</rt><rp>）</rp></ruby>"sv, "桃花"sv},
         {"《》だけ"sv, "《》だけ"sv},
         {"漢字《かな》と|ルビ《るび》"sv, "漢字とルビ"sv},
         {"|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv, "|あいうえおかきくけこさしすせそたちつてとな《よみ》"sv},
         {"a<b"sv, "a<b"sv},
     };
     Check(StripRuby, cases);
+}
+
+HD_TEST(pipeline_join_brace_ruby) {
+    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other bases are nouns.
+    const BaseContinues verbs = [](const void*, std::string_view base, std::string_view) {
+        return base == "背負" || base == "見惚";
+    };
+    const Case cases[] = {
+        {"{rb}悔{/rb}{rt}く{/rt}やんでも。"sv, "{rb}悔やんでも{/rb}{rt}くやんでも{/rt}。"sv},
+        {"{rb}微{/rb}{rt}かす{/rt}かに声"sv, "{rb}微かに{/rb}{rt}かすかに{/rt}声"sv},
+        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇ってくれた{/rb}{rt}かばってくれた{/rt}"sv},
+        {"{rb}背負{/rb}{rt}しょ{/rt}って"sv, "{rb}背負って{/rb}{rt}しょって{/rt}"sv},
+        {"{rb}見惚{/rb}{rt}みほ{/rt}れる。"sv, "{rb}見惚れる{/rb}{rt}みほれる{/rt}。"sv},
+        // A noun of two or more characters keeps the kana after the tags.
+        {"{rb}安堵{/rb}{rt}あんど{/rt}して"sv, "{rb}安堵{/rb}{rt}あんど{/rt}して"sv},
+        {"{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv, "{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv},
+        // A particle or a name suffix stays after the tags.
+        {"{rb}現実{/rb}{rt}ここ{/rt}にいる"sv, "{rb}現実{/rb}{rt}ここ{/rt}にいる"sv},
+        {"{rb}夢{/rb}{rt}ここ{/rt}で"sv, "{rb}夢{/rb}{rt}ここ{/rt}で"sv},
+        {"{rb}話{/rb}{rt}ばなし{/rt}だけど"sv, "{rb}話{/rb}{rt}ばなし{/rt}だけど"sv},
+        {"お{rb}前{/rb}{rt}め{/rt}ぇは"sv, "お{rb}前{/rb}{rt}め{/rt}ぇは"sv},
+        {"{rb}蒼{/rb}{rt}あおい{/rt}くーん"sv, "{rb}蒼{/rb}{rt}あおい{/rt}くーん"sv},
+        {"{rb}蒼{/rb}{rt}あおい{/rt}くん！"sv, "{rb}蒼{/rb}{rt}あおい{/rt}くん！"sv},
+        {"{rb}書{/rb}{rt}か{/rt}くんだ"sv, "{rb}書くんだ{/rb}{rt}かくんだ{/rt}"sv},
+        {"{rb}{/rb}{rt}く{/rt}や"sv, "{rb}{/rb}{rt}く{/rt}や"sv},
+        {"{k=-5.0}―――{/k}"sv, "{k=-5.0}―――{/k}"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, verbs, nullptr), std::string(c.want));
 }
 
 HD_TEST(pipeline_write_kin_terms) {
@@ -440,6 +501,15 @@ HD_TEST(pipeline_normalize_sequence) {
     for (const Case& c : text) HD_CHECK_EQ(Normalize(c.in, LineContext{.document = false, .female = false}), std::string(c.want));
 }
 
+HD_TEST(pipeline_emphatic_spellings) {
+    const Case cases[] = {
+        {"さっすが先輩！"sv, "さすが先輩！"sv},
+        {"しっかたねえ、やるぞ"sv, "しかたねえ、やるぞ"sv},
+        {"すんごく痛い"sv, "すごく痛い"sv},
+        {"すんなり進んだ"sv, "すんなり進んだ"sv},
+    };
+    Check(RewriteEmphaticSpellings, cases);
+}
 HD_TEST(pipeline_escape_stage_text) {
     const Case cases[] = {
         {"a\\b\x09" "c\x0a" "d\x0d" "e\x01\x7f\xff€"sv, "a\\\\b\\tc\\nd\\re\\x01\\x7f\\xff€"sv},
@@ -455,6 +525,8 @@ HD_TEST(pipeline_exclamation_na) {
         {"最近よく降るな…"sv, "最近よく降るなあ…"sv},
         {"まあ、そうなるな。"sv, "まあ、そうなるなあ。"sv},
         {"逃がすな！"sv, "逃がすな！"sv},
+        {"最近よく降るな、これは"sv, "最近よく降るなあ、これは"sv},
+        {"逃がすな、追え！"sv, "逃がすな、追え！"sv},
         {"お前が言うな！"sv, "お前が言うな！"sv},
         {"誰も動くな！"sv, "誰も動くな！"sv},
         {"さすが先生ですな。"sv, "さすが先生ですな。"sv},
@@ -546,4 +618,22 @@ HD_TEST(pipeline_normalize_doubled_wo) {
         {"本を読む"sv, "本を読む"sv},
     };
     Check(CollapseDoubledWo, cases);
+}
+
+// Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a
+// verb of the shipped dictionaries, so the rewrite never makes a word they lack (ムズイ
+// むずい). The dictionaries are needed, so the test skips without HDTRANS_DICTS.
+HD_TEST(pipeline_kata_stems_are_dictionary_stems) {
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    const auto loaded = hdTrans::dict::LoadFoldersTsv({dicts});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    for (const KataStem& k : kKataStems) {
+        bool stem = false;
+        for (const hdTrans::dict::Candidate& c : loaded.snapshot->RetrieveRecords(k.hira, hdTrans::dict::LookupMode::General)) {
+            const char tag = c.codes != nullptr ? c.codes->part.Tag() : 0;
+            stem = stem || tag == 'H' || tag == 'M';
+        }
+        HD_CHECK_EQ(std::string(k.hira) + (stem ? " stem" : " missing"), std::string(k.hira) + " stem");
+    }
 }

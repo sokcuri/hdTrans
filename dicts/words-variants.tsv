@@ -3559,7 +3559,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 為手	적격자	I110	VHn		GN							jisjk:41412
 為手	되려는 사람	I110			GN				xxx llm	1		w:916
 異句同音	이구동성	I110	UTs		GN							jisjk:80007
-映り行	경과&AV@	M411			GN							jisjk:94394
+映り行	경과&AV@	M41?			GN							jisjk:94394
 凋れ	풀이 &HT@	M417	VHnSFl		GN							jisjk:94307
 凋れ	시&L4@	M427	VPt		GN							jisjk:121850
 悄れ	풀이 &HT@	M417	VHnSFl		GN							jisjk:94307
@@ -5014,7 +5014,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 思いあが	잘난체&AV@	M428			GN							jisjk:93313
 思いあが	우쭐&AV@	M428	SFl		GN							jisjk:146707
 思わく買い	사재기	N110			GN							jisjk:166106
-上手く行	잘 되어&A1@	M421			GN							jisjk:146175
+上手く行	잘 되어&A1@	M42?			GN							jisjk:146175
 枝垂柳	수양버들	I110			GN							jisjk:111965
 ﾀﾋ亡	사망	N110	VTwVIv	Hd	GN							jisjk:25134
 しし唐	피망	I110	VFdQAL		GN							jisjk:72005
@@ -5066,9 +5066,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 持ちなお	회복&AV@	M433			GN							jisjk:95021
 持ちなお	되돌아&A1@	M413			GN							jisjk:354189
 持って行	가지고 &HN@	M447			GN							jisjk:263775
-持って行	가지고 &A1@	M441			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
+持って行	가져&A1@	M44?			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向, 方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
 もって行	가지고 &HN@	M447			GN							jisjk:263775
-もって行	가지고 &A1@	M441			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
+もって行	가져&A1@	M44?			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向, 方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
 持ちあが	솟아 &E6@	M428			GN							jisjk:118353
 持ちあが	부상&AV@	M428	XXX		GN							jisjk:265279
 持ちあが	들어 올&AA@	M448			GN	2520	||1 &&2 S-1== "重" P-1== "7**"	바로 앞말이 重 형용사이면 持ち上が를 들어 올리다로 고른다. (미발동: rare-word)				jisjk:266325
@@ -5694,7 +5694,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なる程	옳아	E320			GN							w:16686
 成るほど	옳아	E300			GN				xxx			w:16685
 成るほど	옳아	E320			GN							w:16686
-井然	정연	N110			GN							jisjk:197685
+井然	정연	N110		Tr	GN							jisjk:197685
 星ぞら	밤하늘	N110	VPl		GN							jisjk:26537
 正切	탄젠트	N110			GN							jisjk:197667
 正直もの	정직한 사람	N110	VHn		GN							jisjk:346705
@@ -5961,17 +5961,17 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 合槌	맞장구	N110			GN							jisjk:25911
 合づち	맞장구	N110			GN							jisjk:25911
 合鎚	맞장구	N110			GN							jisjk:25911
-あい変わらず	변함 없이	E311			GN							jisjk:1691
-あい変わらず	변함 없이	E310		J1	GN							jisjk:1692
+あい変わらず	변함없이	E311			GN							jisjk:1691
+あい変わらず	변함없이	E310		J1	GN							jisjk:1692
 あい変わらず	변함%B4@	G8U0			GN							jisjk:259890
-あい変らず	변함 없이	E311			GN							jisjk:1691
-あい変らず	변함 없이	E310		J1	GN							jisjk:1692
+あい変らず	변함없이	E311			GN							jisjk:1691
+あい変らず	변함없이	E310		J1	GN							jisjk:1692
 あい変らず	변함%B4@	G8U0			GN							jisjk:259890
-相かわらず	변함 없이	E311			GN							jisjk:1691
-相かわらず	변함 없이	E310		J1	GN							jisjk:1692
+相かわらず	변함없이	E311			GN							jisjk:1691
+相かわらず	변함없이	E310		J1	GN							jisjk:1692
 相かわらず	변함%B4@	G8U0			GN							jisjk:259890
-相不変	변함 없이	E311			GN							jisjk:1691
-相不変	변함 없이	E310		J1	GN							jisjk:1692
+相不変	변함없이	E311			GN							jisjk:1691
+相不変	변함없이	E310		J1	GN							jisjk:1692
 相不変	변함%B4@	G8U0			GN							jisjk:259890
 合棒	파트너	N110	VHn		GN							jisjk:25894
 相容れな	서로 맞지 $D7@	H7M0			GN							jisjk:119204
@@ -6548,7 +6548,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 入浸	틀어박혀 &HN@	M428			GN							jisjk:141107
 入浸	눌러&FI@	M428			GN				xxx llm	1		w:12271
 入目	경비	I110	VMo		GN							jisjk:81953
-函れ	&H5@	M437			GN	786	||5 &&2 S-1== "に" S-3== "を" &&2 S-1== "に" S-2== "中" &&2 P-2== "1**" ||2 A-2== "VFd" A-2== "VPe" A-3== "VFd" &&2 ||2 S+1== "すぎ" S+1== "過ぎ" P+1== "4**"	음식·용기·안쪽 위치 또는 過ぎる와 관련된 지정 문맥에서 入れ를 '넣다'로 고른다.				jisjk:94559
+函れ	&H5@	M437			GN	786	||5 &&2 S-1== "に" S-3== "を" &&3 S-1== "に" S-2== "R中" A-2!= "UMe" &&2 P-2== "1**" ||2 A-2== "VFd" A-2== "VPe" A-3== "VFd" &&2 ||2 S+1== "すぎ" S+1== "過ぎ" P+1== "4**"	음식·용기 뒤, 中으로 끝나는 안쪽 위치(口の中, 箱の中, 手中; 때를 뜻하는 말은 빼고) 뒤, 또는 過ぎる와 관련된 지정 문맥에서 入れ를 '넣다'로 고른다.				jisjk:94559
 函れ	고용&AV@	M437			GN							jisjk:94560
 函れ	들&AJ@	M437	UFl		GN							jisjk:94561
 函れ	&A6@	M447	VMy		GN							jisjk:141170
@@ -7125,7 +7125,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あけ渡	내&CJ@	M423			GN				xxx llm	1		w:17799
 鹹草	미나리과 다년초	N110	VPt		GN							jisjk:124354
 名茶	고급차	N110			GN							jisjk:253362
-啼き声	울음 소리	I110	UHr		GN							jisjk:68804
+啼き声	울음소리	I110	UHr		GN							jisjk:68804
 鳴響	울&AA@	M411			GN							jisjk:92760
 面食ら	얼떨떨&AV@	M420			GN							w:25590
 面くら	얼떨떨&AV@	M420			GN							w:25590
@@ -7278,7 +7278,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 溶けやす	잘 $Km@	H7N0			GN							jisjk:201469
 溶合	용해&C6@	M410			GN							jisjk:94262
 溶合	융합&AV@	M420			GN							jisjk:145208
-溶込	용해&AV@	M425			GN							jisjk:145210
+溶込	녹아&L4@	M425			GN							jisjk:145210
 解込	용해&AV@	M425			GN							jisjk:145210
 要慎	조심	N110		Hd	GN							jisjk:30081
 要慎	조심&AV@	M439			GN							jisjk:265605
@@ -7485,7 +7485,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 寃罪	원죄	N110	UClULw		GN							jisjk:127737
 寃罪	억울한 죄	N110			GN							jisjk:127738
 寃罪	누명	N110			GN				xxx llm	1		w:12523
-凜然	추위가 심함	N110			GN							jisjk:98116
+凜然	늠름	N110		Tr	GN							jisjk:98116
 くり舟	쪽배	N110			GN							w:12797
 ひょう窃	표절	N110		Hd	GN							jisjk:154471
 尤め	비난&AV@	M437			GN							jisjk:7023
@@ -7565,7 +7565,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 麾下	휘하	N110	VPl		GN							jisjk:17731
 シャレっ気	멋 부리는 기질	N110			GN							jisjk:234629
 かん腸	관장	N110		Hd	GN							jisjk:116633
-混然	혼연	N110	UFl		GN							jisjk:203639
+混然	혼연	N110	UFl	Tr	GN							jisjk:203639
 沪過	여과	N110		Hd	GN							jisjk:20279
 沪紙	여과지	N110			GN							jisjk:105220
 沪紙	거름종이	N110			GN				xxx	1		w:1306
@@ -7693,7 +7693,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 誰そ彼	황혼	N110	UMeVFr		GN							jisjk:39795
 綱麻	황마	N110	VPt		GN							jisjk:127939
 下々	서민	N110			GN							jisjk:38258
-過行	지나&A1@	M411			GN							jisjk:91979
+過行	지나&A1@	M41?			GN							jisjk:91979
 外がわ	외측	N110	VPl		GN							jisjk:29895
 外がわ	소토가와	N130	QCTVPl		GN							jisjk:304879
 外がわ	바깥쪽	N110			GN				xxx llm	1		w:14380
@@ -7846,7 +7846,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 荒れはて	몹시 황폐해&AL@	M427	VPl		GN							jisjk:138764
 荒果て	몹시 황폐해&AL@	M427	VPl		GN							jisjk:138764
 暗翳	암영	N110			GN							jisjk:28543
-意気揚々	의기양양	N110	SFl		GN							jisjk:125287
+意気揚々	의기양양	N110	SFl	Tr	GN							jisjk:125287
 いき渡	널리 퍼&AL@	M418			GN							jisjk:95904
 いき渡	골고루 미&AO@	M428			GN							jisjk:140623
 ゆき渡	널리 퍼&AL@	M418			GN							jisjk:95904
@@ -8288,7 +8288,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 すり硝子	불투명유리	N110			GN							jisjk:238227
 ズル休み	땡땡이 &AO@	M449			GN							jisjk:346980
 制御機	제어기	N110	VPe		GN							jisjk:197305
-正々堂々	정정당당	N110	SFl	Dd	GN							jisjk:197659
+正々堂々	정정당당	N110	SFl	DdTr	GN							jisjk:197659
 雪踏	셋타	N110	VCp		GN							jisjk:239153
 責め苛	괴롭&AW@	M445			GN							jisjk:138375
 仙郷	선경	N110	VPl		GN							jisjk:26215
@@ -8301,7 +8301,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 前前回	전전회	N110	UMe		GN							jisjk:199741
 全智	전지	N110			GN							jisjk:32680
 仄聞	풍문	N110	VCm		GN							jisjk:200659
-楚々	청초함	N110			GN							jisjk:240447
+楚々	청초	N110		Tr	GN							jisjk:240447
 卒先	솔선	N110		Hd	GN							jisjk:30868
 率爾	졸지	N110			GN							jisjk:240465
 卒都婆	졸탑파	I110			GN							jisjk:102336
@@ -8815,15 +8815,15 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 両々	양쪽이 다	N110			GN							jisjk:256105
 凜々し	늠름$AB@	H7N0			GN							jisjk:137059
 凜凜し	늠름$AB@	H7N0			GN							jisjk:137059
-凛々	늠름	N110			GN							jisjk:20972
-凜々	늠름	N110			GN							jisjk:20972
+凛々	늠름	N110		Tr	GN							jisjk:20972
+凜々	늠름	N110		Tr	GN							jisjk:20972
 凜凜	늠름	N110			GN							jisjk:20972
 類形	유형	N110			GN							jisjk:20892
 麗々し	번지르르$AB@	H7M0			GN							jisjk:5486
 麗々し	요란$AB@	H7N0	SFlVAc		GN							jisjk:137062
 歴々	역력%A1@	G8L0			GN							jisjk:2734
 歴々	역력함	N110			GN							jisjk:156614
-朗々	낭랑	N110			GN							jisjk:20030
+朗々	낭랑	N110		Tr	GN							jisjk:20030
 わかり切	뻔&AV@	M428			GN							w:12629
 分り切	뻔&AV@	M428			GN							w:12629
 分かり難	이해하기 어$G8@	H7N0			GN							jisjk:138407
@@ -8993,7 +8993,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 にも拘わらず	에도 불구하고	A9D0			GN							w:925
 にも関らず	0 것에도 불구하고	S500			GN							jisjk:373984
 にも関らず	에도 불구하고	A9D0			GN							w:925
-遣り切れな	해낼수 $FA@	H7U0			GN							jisjk:5300
+遣り切れな	해낼 수 $FA@	H7U0			GN							jisjk:5300
 遣り切れな	참을 수 $FA@	H7N0	SFl		GN							jisjk:136929
 ひとり暮らし	독신 생활	I110			GN							jisjk:107388
 ひとり暮らし	자취	I110			GN				xxx llm	1		w:10755
@@ -10284,7 +10284,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 彫物師	조각사	I110	UAq		GN							jisjk:83557
 調子はずれ	가락이 맞지 않음	N110			GN							jisjk:243251
 調べもの	조사	N110			GN							jisjk:235802
-滔々	도도	N110	QAB		GN							jisjk:205772
+滔々	도도	N110	QAB	Tr	GN							jisjk:205772
 濤々	도도	N110	QAB		GN							jisjk:205772
 濤濤	도도	N110	QAB		GN							jisjk:205772
 稲扱き	벼훑이	I110			GN							jisjk:66087
@@ -12044,8 +12044,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 洗いなお	재검토&AV@	M443			GN							jisjk:138588
 死に遅れ	살아&F4@	M417			GN							jisjk:93339
 死にそこな	죽을 뻔&AV@	M420			GN							jisjk:122527
-落行	도망&A1@	M411			GN							jisjk:92517
-落行	귀착&AV@	M421			GN							jisjk:146364
+落行	도망&A1@	M41?			GN							jisjk:92517
+落行	귀착&AV@	M42?			GN							jisjk:146364
 打ちたて	수립&AV@	M437			GN							jisjk:95610
 打ちたて	세&AI@	M447			GN							jisjk:141440
 うち立て	수립&AV@	M437			GN							jisjk:95610
@@ -13361,7 +13361,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チュウインガム	추잉껌	N110	VFd		GN							jisjk:130994
 長い事	오랫 동안	I110	UMe		GN							jisjk:82304
 永い事	오랫 동안	I110	UMe		GN							jisjk:82304
-生きて行	살아&A1@	M421			GN							jisjk:143902
+生きて行	살아&A1@	M42?			GN							jisjk:143902
 生きてゆ	살아&A1@	M421			GN							jisjk:143902
 逃馬	선행마	N110	VRwVAm		GN							jisjk:247750
 身振り手振り	몸짓 손짓	N110			GN							jisjk:151821
@@ -13695,7 +13695,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 受合い	보증	N110		Hd	GN							jisjk:12698
 早ね早おき	조기조침	I110			GN							jisjk:110901
 早ね早起き	조기조침	I110			GN							jisjk:110901
-遣って行	해 나&A1@	M441			GN							jisjk:266291
+遣って行	해 나&A1@	M44?			GN							jisjk:266291
 お手元	젓가락	N110	VPe		GN							jisjk:165497
 お手許	젓가락	N110	VPe		GN							jisjk:165497
 紙巻き煙草	궐련	N110			GN							w:21608
@@ -14165,7 +14165,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 足がすく	오금을 펴지 못&AV@	M425			GN							jisjk:117022
 御勤め	근무	K110		Hd	GN							jisjk:40556
 余儀無くされ	어쩔 수 없이 &AV@	H467			GN							jisjk:353370
-余儀無くされ	피할수 없게 &C6@	H467			GN	4300	||1 S-1== "を"	앞에 を가 오면 余儀なくされ를 피할 수 없게 되다로 고른다. (미발동: rare-word)				jisjk:363269
+余儀無くされ	피할 수 없게 &C6@	H467			GN	4300	||1 S-1== "を"	앞에 を가 오면 余儀なくされ를 피할 수 없게 되다로 고른다. (미발동: rare-word)				jisjk:363269
 話が分か	이해&AV@	M418			GN							jisjk:96031
 何にも増して	무엇보다도	A9D0			GN							jisjk:346898
 諸処	도처	N110			GN							jisjk:33452
@@ -14657,7 +14657,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猪狩り	사냥	N110			GN							jisjk:233735
 鹿狩	사냥	N110			GN							jisjk:233735
 猪狩	사냥	N110			GN							jisjk:233735
-納得が行	납득이 &A1@	M421		Pn	GN							jisjk:364237
+納得が行	납득이 &A1@	M42?		Pn	GN							jisjk:364237
 納得がゆ	납득이 &A1@	M421		Pn	GN							jisjk:364237
 エクスクラメーション・マーク	느낌표	N110	UTs		GN							jisjk:152050
 出埃及記	출 이집트기	N110	UClVBkVSw		GN							jisjk:234956
@@ -15018,7 +15018,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 眠りに就	잠&L4@	M421			GN				llm			w:20794
 眠りに着	잠&L4@	M421			GN				llm			w:20794
 ローン・テニス	lawn tennis	N110			GN							jisjk:59774
-興味無	흥미$FA@	H7U0			GN							jisjk:264141
+興味無	흥미 $FA@	H7U0			GN							jisjk:264141
 神経に障	신경을 건드&AA@	M428		Pn	GN							jisjk:373577
 開錠	문을 &LB@	M4U9			GN							jisjk:143009
 腹をわ	본심을 털어&F6@	M428	UTs		GN							jisjk:93068
@@ -17704,7 +17704,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 正面きって	맞대놓고	E300			GN							jisjk:149187
 やすみ時間	쉬는 시간	I110	UMe		GN							jisjk:89999
 鳥竜	우롱차	N110			GN							w:19598
-し所	해야할 경우	N110	UMe		GN							jisjk:234155
+し所	해야 할 경우	N110	UMe		GN							jisjk:234155
 脂っぽ	기름기가 $D4@	H7U0			GN							jisjk:119523
 歯止めを掛け	브레이크를 &L1@	M427		Pn	GN							jisjk:343229
 洋モク	외국산 담배	N110			GN							jisjk:255127
@@ -17781,7 +17781,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 膵ガン	췌암	N110	UTi		GN							w:22441
 煉り餌	떡밥	N110			GN							jisjk:248727
 ブドウ膜炎	포도막염	N110	UTi		GN							w:1100
-聴し色	아무나 마음대로 사용할수 있었	N110			GN							jisjk:254944
+聴し色	아무나 마음대로 사용할 수 있었	N110			GN							jisjk:254944
 聴し色	허용된 색	N110			GN				xxx llm	1		w:23655
 紫湿地	버섯	N110	VPt		GN							jisjk:253257
 みそ餡	된장 소	N110			GN							jisjk:252367
@@ -18472,7 +18472,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 煮抜き玉子	삶은 달걀	N110			GN							jisjk:248037
 ウオーズ	워즈	N110			GN							jisjk:157634
 甘々	감쪽같이	E300			GN							jisjk:122866
-消え行	사라져 &A1@	M411			GN							jisjk:93598
+消え行	사라져 &A1@	M41?			GN							jisjk:93598
 お汁	국	N110	VFd		GN							jisjk:28983
 船下り	배 유람	N110			GN							jisjk:346730
 虎眼石	호안석	N110	VSn		GN							jisjk:246194
@@ -18844,7 +18844,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 な行	나행	N110			GN							jisjk:341718
 フィン・スイミング	fin swimming	N110			GN							jisjk:54837
 涙をうかべ	눈물을 &MU@	M427			GN							jisjk:257373
-必要無	필요$FA@	H7N0			GN							jisjk:137733
+必要無	필요 $FA@	H7N0			GN							jisjk:137733
 沙汰やみ	계획이 중지	N110			GN							jisjk:185263
 折畳み式	접는 식	N110			GN							jisjk:166195
 お爨どん	식모	N110	VHn		GN							jisjk:165305
@@ -19936,7 +19936,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蔓日々草	빙카	N110	VPt		GN							jisjk:244211
 ハピネス	행복	N110	SFl		GN							jisjk:132306
 照空燈	탐조등	N110	VPe		GN							jisjk:190740
-としが行	한해가 &A1@	M421			GN							jisjk:143133
+としが行	한해가 &A1@	M42?			GN							jisjk:143133
 スリープ・モード	sleep 모드	N110			IT							jisjk:261315
 スリープ・モード	슬립 모드	N110			GN				xxx llm	1		w:5289
 ダイバーズウォッチ	다이버 시계	N110			GN							jisjk:130793
@@ -20601,3 +20601,23 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アタシたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:3
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
 ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
+ヒゲ	수염	N110	VBp		GN							variant:katakana:1
+バッチリ	딱	E300			GN							variant:katakana:2
+ダチ	친구	N110	VHn		GN							variant:katakana:3
+メシ	밥	N110	VFd		GN							variant:katakana:4
+ナニ	뭐	N110			GN							variant:katakana:5
+キライ	%BA@	G8U0			GN							variant:katakana:6
+ゼッタイ	절대	E300			GN							variant:katakana:7
+ジャマ	방해	N110		Hd	GN							variant:katakana:8
+センパイ	선배	N110	VHn		GN							variant:katakana:9
+ヤツラ	녀석들	I110	VHn		GN							variant:katakana:10
+オフクロ	어머니	I110	VHn		GN							variant:katakana:11
+アニキ	형님	N110	VHn		GN							variant:katakana:12
+ジジイ	할아범	I110	VHn		GN							variant:katakana:13
+ナマイキ	건방%C1@	G8U0			GN							variant:katakana:15
+カンペキ	완벽%A1@	G8L0			GN							variant:katakana:16
+テッペン	꼭대기	I110	VPl		GN							variant:katakana:17
+ヒヨコ	병아리	N110	VAm		GN							variant:katakana:19
+オトモダチ	친구	N110	VHn		GN							variant:katakana:20
+ヒルメシ	점심	N110	VFd		GN							variant:katakana:21
+トモダチ	친구	N110	VHn		GN							variant:katakana:22

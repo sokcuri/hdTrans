@@ -7,3 +7,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いますか	6 버릴까요	S5A0			GN							adult:4
 いますから	6 버릴 테니까요	S5A0			GN							adult:5
 揉め	다&CR@	M437			GN							adult:6
+鈴口	요도구	N110	VBp		GN						すずぐち	adult:7
+裏筋	뒷줄기	N110	VBp		GN						うらすじ	adult:8
+裏スジ	뒷줄기	N110	VBp		GN						うらすじ	adult:9
+甘噛み	살짝 깨&L5@	M419			GN						あまがみ	adult:10

@@ -41,7 +41,8 @@ namespace internal {
 // earlier match:
 //   - markup tags <...> of up to 1024 characters other than <BR> and <LI> (SpanOpen, a
 //     closing tag SpanClose);
-//   - BBCode tags [b], [/b], [color=red] of up to 128 characters (SpanOpen, SpanClose);
+//   - BBCode tags [b], [/b], [color=red] and the same in braces ({rb}, {/rt}) of up to
+//     128 characters (SpanOpen, SpanClose);
 //   - entities &amp; &#123; &#x1F;  (SpanOpen);
 //   - inline style codes (StyleCodeLength, SpanOpen);
 //   - the host markers, the longest that matches (SpanOpen);

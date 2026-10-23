@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+sound:paused-to	ぎゅっ、と少年は手にしがみついた。	꽉, 하고 소년은 손에 매달렸다.	fix	sound
+sound:paused-to	びくん、びくん、と身体を震わせた。	움찔, 움찔, 하고 몸을 떨었다.	fix	sound
+sound:paused-to	ぷいっ、と顔を背ける。	홱, 하고 얼굴을 돌린다.	fix	sound
+sound:paused-to	ああ、とか、うん、とか	아, 라든지, 응, 이라든지	keep	sound

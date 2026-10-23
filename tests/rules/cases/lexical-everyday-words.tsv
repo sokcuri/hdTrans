@@ -22,7 +22,7 @@ dict:everyday-words:5	頭にはちまきをした。	머리에 머리띠를 했�
 dict:everyday-words:5	鉢巻きをしめた。	머리띠를 매었다.	keep	lookup
 dict:everyday-words:6	昼ごろ雨がやんだ。	낮쯤 비가 그쳤다.	fix	lookup
 dict:everyday-words:6	3時ごろ家に帰った。	3시경 집에 돌아갔다.	keep	lookup
-dict:jisjk:40426	うちわを二つ買った。	부채를 2개 샀다.	fix	lookup
+dict:jisjk:40426	うちわを二つ買った。	부채를 두 개 샀다.	fix	lookup
 dict:jisjk:40426	内輪の話をした。	집안 이야기를 했다.	keep	lookup
 dict:names.110332	ガザ地区で水を配った。	가자 지구에서 물을 나눠주었다.	fix	lookup
 dict:names.110332	ガザ地区の子どもたち。	가자 지구의 아이들.	keep	lookup

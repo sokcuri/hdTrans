@@ -4,7 +4,7 @@ rewrite:result-state	「床は散らかってるからベッドがオススメ�
 rewrite:result-state	気がつくと、太陽がだいぶ傾いていた。	정신을 차려 보니, 태양이 많이 기울어 있었다.	fix	rewrites
 rewrite:result-state	陽が沈み、辺りは薄闇に包まれていた。	햇빛이 져, 근처는 박암에 싸여 있었다.	fix	rewrites
 rewrite:result-state	「よし、追加で何か作ろう。材料は余ってるし」	「좋아, 추가로 뭔가 만들자. 재료는 남아 있고」	fix	rewrites
-rewrite:result-state	悶々と寝転がっているうちに、時刻は５時近くになった。	민들과 드러누워 있는 동안에, 시각은 5시 가까이가 되었다.	fix	rewrites
+rewrite:result-state	悶々と寝転がっているうちに、時刻は５時近くになった。	민들하게 드러누워 있는 동안에, 시각은 5시 가까이가 되었다.	fix	rewrites
 rewrite:result-state	小太刀はまだ、ベッドに寝転がっていた。	작은 칼은 아직, 침대에 드러누워 있었다.	fix	rewrites
 rewrite:result-state	「じゃあ、私は……あおくんの理想になれてるってこと……？」	「그럼, 나는……아오 군의 이상이 될 수 있다는 거야……?」	keep	rewrites
 rewrite:result-state	液晶に千里の名前が表示されているのを見て、慌てて出る。	액정에 천리의 이름이 표시되어 있는 것을 보고, 황급히 나온다.	fix	rewrites

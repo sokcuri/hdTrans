@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:w:26769	医師にしてみれば、いわれのないと言いたい顔であるのだが。	의사로 해 보면, 터무니없다고 말하고 싶은 얼굴이지만.	fix	lookup
+dict:w:26769	いわれのない非難を受けた。	터무니없는 비난을 받았다.	fix	lookup

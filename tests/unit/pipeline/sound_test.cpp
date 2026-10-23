@@ -35,7 +35,18 @@ const dict::LoadResult& SoundDictionary() {
         "おも\t무겁\tH100\t17\n"
         "おめぇ\t너\tN120\t18\n"
         "てめー\t너\tN120\t19\n"
-        "てめぇ\t너\tN120\t20\n",
+        "てめぇ\t너\tN120\t20\n"
+        "なんとなく\t왠지\tE300\t21\n"
+        "かなり\t꽤\tE300\t22\n"
+        "花見\t꽃놀이\tN110\t23\n"
+        "おいし\t맛있\tH100\t24\n"
+        "わたし\t나\tN120\t25\n"
+        "とにかく\t어쨌든\tE300\t26\n"
+        "いな\t아니\tE300\t27\n"
+        "としてい\t(으)로 하고 있\tM100\t28\n"
+        "リスク\t리스크\tN110\t29\n"
+        "ついに\t마침내\tE300\t30\n"
+        "ただ\t다만\tE300\t31\n",
     }});
     return result;
 }
@@ -143,6 +154,12 @@ HD_TEST(pipeline_sound) {
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
         {"いくぅぅ", "가 버려~"},
+        // A ー inside an interjection may be longer; a two-syllable one in い may be
+        // lengthened before it, but not before a word.
+        {"わーーい！", "와아！"},
+        {"はぁーい……", "네에……"},
+        {"えーい！", "에잇！"},
+        {"えーいくら", "えーいくら"},
         {"な、なにを", "\xEE\x80\x80" "、なにを"},
         {"だっ、だめ", "\xEE\x80\x80" "、だめ"},
         {"お…お兄ちゃん", "\xEE\x80\x80" "…お兄ちゃん"},
@@ -276,11 +293,74 @@ HD_TEST(pipeline_sound) {
         {"ちょっと高い", "ちょっと高い"},
         {"これでよし。", "これでよし。"},
         {"<b>きゃあ</b>ぎゅっと", "<b>꺄아</b>꽉"},
+        // A と after a pause quotes the sound with 하고; not a stutter, a filler or する.
+        {"ぱさり、と落ちた", "툭、 하고 落ちた"},
+        {"ふむ、と頷く", "흠、 하고 頷く"},
+        {"ダンッ！　と音が", "쾅！　하고 音が"},
+        {"ひぃ…と叫ぶ", "히이… 하고 叫ぶ"},
+        {"ふむ、とは", "흠、とは"},
+        {"やっ……と、静か", "얏……と、静か"},
+        {"ぎゅっ、として", "꽉、として"},
+        {"ぱさり、と、落ちた", "툭、 하고、落ちた"},
+        // A と that starts a stutter after the pause is no quote (と、とと、溶ける).
+        {"ひいい！？　と、とと、溶ける", "히이이！？　\xEE\x80\x80" "、\xEE\x80\x80" "、溶ける"},
+        // Before a katakana word the と stays adverbial, but not between two sounds.
+        {"スタスタとベッド", "척척 ベッド"},
+        {"ドキドキとワクワク", "두근두근と두근두근"},
+        // A doubled hiragana unit no word reads is a sound before と (とてとてと 토테토테).
+        {"とてとてと歩く", "토테토테 歩く"},
+        {"彼はふるふると", "彼は후루후루"},
+        {"ふるふるという", "ふるふるという"},
+        // A call of the sound lexicon said twice stays words (ねえねえと, not 네에네에).
+        {"ねえねえと袖", "ねえねえと袖"},
+        {"ほらほらと急かす", "ほらほらと急かす"},
+        // In katakana it is the same word, written in hiragana for the word stage.
+        {"ホラホラと急かす", "ほらほらと急かす"},
+        {"ネエネエと袖", "ねえねえと袖"},
+        {"メキメキと", "메키메키"},
+        // と before する goes after a mimetic even where a key starts with it.
+        {"トロンとしていた", "몽롱していた"},
+        // A sound does not end inside the katakana word after it (するり).
+        {"損をするリスク", "損をするリスク"},
+        // A syllable said again straight into its word, and a vowel said again.
+        {"「つつつついに」", "「\xEE\x80\x80\xEE\x80\x80\xEE\x80\x80ついに」"},
+        {"「えええ怖い」", "「えええ怖い」"},
+        // に after a doubled mimetic is 하게; after another sound it stays.
+        {"くしゃくしゃに丸めた", "꼬깃꼬깃하게 丸めた"},
+        {"ボロボロになった", "너덜너덜하게 なった"},
+        {"ぐちゃぐちゃに", "엉망진창に"},
+        // A mimetic of a syllable or two and ッ before と stands right after a kanji word;
+        // a long vowel there is a volitional ending.
+        {"時折ぶるっと身", "時折부르르 身"},
+        {"休もうっと", "休もうっと"},
+        // A sound after a hiragana word: a mimetic in と or doubled, not grammar going on.
+        {"ただぼーっと道", "ただ멍하니 道"},
+        {"わからなくたって", "わからなくたって"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// A doubled hiragana unit that is a verb in the dictionary form stays words when the
+// dictionary reads its kana stem by default (いくいくと 가다 가다); a stem without a
+// default reading is no established kana word, and the unit is a sound (ふるふると).
+HD_TEST(pipeline_sound_doubled_kana_verb) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tsem\tid\n"
+                                     "い\t가\tM411\tXXX\t1\n"
+                                     "い\t가\tM411\t\t2\n"
+                                     "ふ\t흔들\tM418\t\t3\n"
+                                     "ふ\t내리\tM418\t\t4\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    HD_CHECK_EQ(Sound("いくいくと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
+    HD_CHECK_EQ(Sound("ふるふると震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
+    HD_CHECK_EQ(Sound("イクイクと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
+    HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
 // A verb cut off before a dash or an ellipsis, completed when the dictionary has it.
@@ -429,6 +509,18 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"てめーが黙ってろ", "てめーが黙ってろ"},
         {"てめー！", "てめぇ！"},
         {"だぞてめー、", "だぞてめぇ、"},
+        // After か, な, ね, さ, わ the mark lengthens a particle unless a word read before
+        // that kana goes on past the mark (なんとなく, かなり).
+        {"なんとなーく興味がある", "なんとなく興味がある"},
+        {"いや、かなーり危ない", "いや、かなり危ない"},
+        // The ー of an adjective in しい stands for its い (おいしー おいしい～).
+        {"おいしー！", "おいしい～！"},
+        {"おいしーよね", "おいしいよね"},
+        {"わたしー！", "わたし～！"},
+        // A word drawn out syllable by syllable reads without the marks.
+        {"とーにーかーく！", "とにかく！"},
+        {"いーなー", "いーなー"},
+        {"お花見か～いいわね", "お花見か～いいわね"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
@@ -566,4 +658,31 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"ぽい捨て", "ぽい捨て"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// A name-layer key that runs on from a sound into kanji, and a word the dictionary reads only
+// as a noun right before を or が, rule the sound out.
+HD_TEST(pipeline_sound_name_and_noun) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "ニコニコ\t싱글벙글\tE301\t1\n"
+                                     "ガチャ\t가챠\tN110\t2\n"
+                                     "モヤモヤ\t답답함\tN110\t3\n"
+                                     "モヤモヤ\t뿌옇게\tE300\t4\n"},
+                                    {1, "names.tsv",
+                                     "#! layer=names\n"
+                                     "key\tko\tpos\tid\n"
+                                     "ニコニコ動画\t니코니코 동화\tN110\tn1\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"ニコニコ動画で見た", "ニコニコ動画で見た"},
+        {"ニコニコ笑う", "싱글벙글 笑う"},
+        {"ガチャを回す", "ガチャを回す"},
+        {"ガチャと開く", "철컥 開く"},
+        {"モヤモヤが残る", "찜찜が残る"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

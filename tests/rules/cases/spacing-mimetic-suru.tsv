@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+compose:mimetic-suru	ちょっとどきどきした。	조금 두근두근했다.	fix	compose
+compose:mimetic-suru	口元を覆ってぷるぷるしている	입가를 덮어 부들부들하고 있다	fix	compose
+compose:mimetic-suru	今日はただぶらぶらしてる。	오늘은 다만 빈둥빈둥하고 있다.	fix	compose
+compose:mimetic-suru	そろそろしてほしい	슬슬 해 주었으면 한다	keep	compose

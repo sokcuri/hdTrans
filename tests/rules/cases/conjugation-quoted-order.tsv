@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+conjugation:quoted-order	帰れだと？	돌아가라고?	fix	conjugation
+conjugation:quoted-order	黙れだと！	입을 다물라고!	fix	conjugation
+conjugation:quoted-order	俺に死ねだなんて	나에게 죽으라니	fix	conjugation
+conjugation:quoted-order	待っていただけだって	기다리고 있었을 뿐이래	fix	conjugation
+conjugation:quoted-order	待っていただけだと思う。	기다리고 있었을 뿐이라고 생각한다.	keep	conjugation
+conjugation:quoted-order	見ていただけだなんて	보고 있었을 뿐이라니	keep	conjugation
+conjugation:quoted-order	帰れと言った。	돌아가라고 했다.	keep	conjugation

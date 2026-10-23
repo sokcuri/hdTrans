@@ -18,8 +18,25 @@ int Byte(char c) { return static_cast<unsigned char>(c); }
 
 bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 
-// たく of the desire after a stem (見たくない), not the た of the past before くせに (見たくせに).
-bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni); }
+// たく of the desire after a stem (見たくない), not the た of the past before くせに or くらい
+// (見たくせに, 見たくらい).
+bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni) && !s.starts_with(kJaTakurai); }
+
+// Whether も at the start of s is followed by a form of する that ends there (立ち上がりもせず,
+// 笑いもしない, 読みもした; not しても, していない): the continuative before it is the verb,
+// emphasised, not a noun.
+bool SuruAfterMo(std::string_view s) {
+    if (!s.starts_with("も")) return false;
+    const std::string_view r = s.substr(std::string_view("も").size());
+    if (r.starts_with("して") || r.starts_with("しち")) return false;
+    return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
+}
+
+// Whether s is a single hiragana (the stem で of 出る, which でもする is not).
+bool OneKana(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
+}
 
 }  // namespace
 
@@ -79,10 +96,20 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
             if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) continue;
             // A bare e-row form before a closing bracket, a full-width sentence mark or the
             // quoting って or と is the imperative (「撃て」, 「書け」の一点張り, 言えって言った):
-            // a potential stem cannot end there without its る.
+            // a potential stem cannot end there without its る. Neither form takes a copula
+            // or に, except the だの, だと (だとか), だって or だなんて that quote an order, and only
+            // an order takes の (背負えだとか, 帰れだと, 寝ろの一言). The imperative of いただく is
+            // no order (待っていただけだと is いた and だけ).
             if (branch == 4 && (Starts(rest, "」") || Starts(rest, "』") || Starts(rest, "）") || Starts(rest, "。") ||
                                 Starts(rest, "…") || Starts(rest, "‥") || Starts(rest, "！") || Starts(rest, "？") ||
                                 Starts(rest, "って") || Starts(rest, "と"))) {
+                continue;
+            }
+            const bool quoted = branch == 11 && recordText != "いただ" && recordText != "頂" &&
+                                (Starts(rest, "だの") || Starts(rest, "だと") || Starts(rest, "だって") || Starts(rest, "だなんて"));
+            if (!entry.empty() && !quoted &&
+                (Starts(rest, "だ") || Starts(rest, "で") || Starts(rest, "じゃ") || Starts(rest, "に") ||
+                 (branch == 4 && Starts(rest, "の")))) {
                 continue;
             }
             if (n < tail.size()) {
@@ -291,7 +318,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
-         two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || two == kJaMo ||
+         two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
          (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) || two == kJaYo || four == kJaNado ||
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
@@ -345,7 +372,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
-              two == kJaNasai || two == kJaNi)) {
+              two == kJaNasai || two == kJaNi || (SuruAfterMo(after()) && !OneKana(surface)))) {
             const std::pair<const Window*, std::string_view> compounds[] = {
                 {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
                 {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},
@@ -404,11 +431,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         queryAllowed = false;
     }
 
-    // The ending group at rest, the text after the conjugation pattern.
-    auto endingGroup = [&](std::string_view rest) -> Group* {
+    // The ending group at endingText, the text after the conjugation pattern.
+    auto endingGroup = [&](std::string_view endingText) -> Group* {
         Group* g = nullptr;
-        if (!queryAllowed || rest.empty()) return g;
-        const Lookup found = w->DoLookup(rest, kModeVerbEnding);
+        if (!queryAllowed || endingText.empty()) return g;
+        const Lookup found = w->DoLookup(endingText, kModeVerbEnding);
         if (found.count == 0) return g;
         g = w->NewGroup(found.records, ' ');
         if (g->length <= 0) return g;
@@ -417,23 +444,23 @@ bool Item::AcceptVerbContinuation(Record* following) {
             fill(g);
             bool accepted = false;
             if (base.patternKind == 7 && base.kind == 8 &&
-                (rest.starts_with(kJaMasu) || rest.starts_with(kJaMase) || rest.starts_with(kJaMashi) ||
-                 (w->settings.text && rest.starts_with(kJaYaga)))) {
+                (endingText.starts_with(kJaMasu) || endingText.starts_with(kJaMase) || endingText.starts_with(kJaMashi) ||
+                 (w->settings.text && endingText.starts_with(kJaYaga)))) {
                 base.kind = 10;
             } else {
                 restore();
             }
-            const std::string_view next = From(after(), g->length);
+            const std::string_view afterGroup = From(after(), g->length);
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
-                if ((Has(e.gattr, "Sh") && Classify(next) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
-                    !w->EndingApplies(e, next, tokenIndex) ||
-                    w->CutsWord(tail.substr(0, tail.size() - rest.size()), rest.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), rest.size())), next)) {
+                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
+                    !w->EndingApplies(e, afterGroup, tokenIndex) ||
+                    w->CutsWord(tail.substr(0, tail.size() - endingText.size()), endingText.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), endingText.size())), afterGroup)) {
                     base.enabled[index] = false;
                     continue;
                 }
                 base.group = g;
-                if (g->length <= 0 || w->MatchDictionary(next, g->surface, '5', '4')) accepted = true;
+                if (g->length <= 0 || w->MatchDictionary(afterGroup, g->surface, '5', '4')) accepted = true;
                 else keepScanning = false;
             }
             if (accepted) break;

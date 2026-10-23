@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+constraint:honorific-kanji-name	白木さんが来た。	시라키 씨가 왔다.	fix	lookup
+constraint:honorific-kanji-name	なら、どうして高峰先輩にだけ話をしたんですか？	그렇다면, 왜 타카미네 선배에게만 이야기를 했습니까?	fix	lookup
+constraint:honorific-kanji-name	東雲先生、おはようございます。	시노노메 선생님, 안녕하세요.	fix	lookup
+constraint:honorific-kanji-name	闇の情報屋さんみたいな台詞じゃなくて	어둠의 정보상같은 대사가 아니고	keep	lookup
+constraint:honorific-kanji-name	本屋さんに寄った。	서점에 들렀다.	keep	lookup
+constraint:honorific-kanji-name	摩耶様だ。	마야님이다.	keep	lookup
+constraint:honorific-kanji-name	東雲の頃に目が覚めた。	새벽 무렵에 깨어났다.	keep	lookup
+constraint:honorific-kanji-name	「碧くん、待って」	「아오이 군, 기다려」	fix	lookup
+constraint:honorific-kanji-name	「碧くんがそう言うなら」	「아오이 군이 그렇게 말한다면」	fix	lookup
+constraint:honorific-kanji-name	赤くない？	붉지 않아?	keep	lookup

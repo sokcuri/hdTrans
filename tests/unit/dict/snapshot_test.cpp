@@ -108,6 +108,34 @@ HD_TEST(SnapshotKanaPersonKeptForConfirmedLookups) {
     HD_CHECK(Show(snap.GetWordInfo("つぐみが", LookupMode::General, context)).find("츠구미") != std::string::npos);
 }
 
+// A name key that is a number and a counter word of the base dictionary reads as the
+// counter: after digits with any counter, after a kanji numeral with a counter of two
+// characters or more. A kanji numeral and a one-character word stays a name.
+HD_TEST(SnapshotCountedNameKeys) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\tid\n";
+    const LoadResult loaded = Load({
+        MakeFile("base.tsv", header + "時間\t시간\tN110\tUMe\tCt\tGN\t1\n"
+                                      "位\t위\tN110\t\tCt\tGN\t2\n"
+                                      "年生\t학년\tN110\t\tCt\tGN\t3\n"
+                                      "葉\t잎\tN110\t\tCt\tGN\t4\n"
+                                      "日目\t일째\tN110\t\t\tGN\t5\n"),
+        MakeFile("names.tsv", "#! layer=names\n" + header +
+                                  "24時間\t작품\tN130\tQWK\t\tGN\t6\n"
+                                  "1位\t1등\tN110\t\t\tGN\t7\n"
+                                  "四年生\t요네오\tN130\tQPNVHn\t\tGN\t8\n"
+                                  "千葉\t지바\tN130\tQCTVPl\t\tGN\t9\n"
+                                  "3日目\t작품\tN130\tQWK\t\tGN\t10\n"),
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const Snapshot& snap = *loaded.snapshot;
+    const LookupContext none;
+    HD_CHECK(Show(snap.GetWordInfo("24時間が", LookupMode::General, none)).find("작품") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("1位に", LookupMode::General, none)).find("1등") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("四年生の", LookupMode::General, none)).find("요네오") == std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("千葉に", LookupMode::General, none)).find("지바") != std::string::npos);
+    HD_CHECK(Show(snap.GetWordInfo("3日目に", LookupMode::General, none)).find("작품") != std::string::npos);
+}
+
 HD_TEST(SnapshotFolderLayers) {
     const LoadResult r = LoadFoldersTsv({Folder(), Folder() + "/over"});
     HD_REQUIRE(r.snapshot != nullptr);
@@ -576,16 +604,16 @@ HD_TEST(SnapshotCompiledPlainDictionaries) {
     HD_CHECK_EQ(s.PlainFiles().size(), size_t{4});
     // The builtin endings come first, then the plain files numbered in order; the
     // base dictionary resolves the る-verb 帰る as godan.
-    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{576});
+    HD_CHECK_EQ(CountFile(s.Plain(), -1), size_t{605});
     HD_CHECK_EQ(EntriesOf(s.Plain(), 0), "帰 돌아&A1@ M428 @1.0 | 猫 냥이 N110 @2.0");
     HD_CHECK_EQ(EntriesOf(s.Plain(), 1), "猫 고양이 N110 @1.0");
-    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{579});
+    HD_CHECK_EQ(s.Plain().Entries().size(), size_t{608});
     HD_CHECK(s.Plain().Entries()[0].end);
     // The text path adds the kana spellings, the phrases but the 343 interjections in
     // kana, and the patterns.
     HD_CHECK_EQ(EntriesOf(s.TextPlain(), -2), "あい 사랑 N110 @3.0");
-    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2412});
-    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2416});
+    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2503});
+    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2507});
     HD_CHECK(s.Senses().contains("腕"));
     const auto better = s.Senses().find("マシ");
     HD_REQUIRE(better != s.Senses().end());

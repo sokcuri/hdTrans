@@ -46,6 +46,9 @@ struct Settings {
     // too: a plain question in a quote of no style in 해체 (大丈夫か？ 괜찮아?), だろう before
     // ？ as agreement asked or a wonder.
     bool asked = false;
+    // Text path outside the reference mode: counts in native Korean (두 마리, 세 번) and the
+    // spacing of particle and free nouns (바위뿐, 키 정도, 작업 중).
+    bool literal = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
 };
@@ -154,6 +157,10 @@ private:
     std::string Context(std::string text) const;
     void WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker> markers);
     std::string KeepDropped(int i, std::string translated, std::string_view remainder);
+    // With settings.literal, the text of item i as a count is written: a count and its counter
+    // in one item (三回 세 번, 1番目 첫 번째), a number before a counter item (三 세), or a
+    // counter after a native count (回 번); other text as is. Spacing writes the space.
+    std::string WriteCount(int i, std::string text) const;
     std::pair<std::string, bool> Spacing(int i, std::string t, std::string_view tags, std::string_view nextTags,
                                          char kind, char nextKind, bool isLast, bool converted,
                                          std::string_view remainder) const;
@@ -178,6 +185,14 @@ private:
 // space; input whitespace tokens are kept as they are.
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& settings,
                            Pieces& out);
+
+// Empties the space token between a word in Latin letters, digits or a word span that
+// ends in no punctuation (junya: と stays apart) and a Japanese token of tokens
+// first..last that starts with a particle written in Korean: a
+// Korean particle joins its word also where the source puts a space (wiki の記事 wiki의
+// 기사, API です API입니다).
+void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector<TokenText>& tokens, int first,
+                             int last);
 
 // Appends a space after a sentence ending in ".", "!" or "?" (token types other than
 // 26 and 78) when the next token is not a sentence end itself and does not start with

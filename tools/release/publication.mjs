@@ -13,6 +13,8 @@ export function releaseVersion(ref) {
   return version;
 }
 
+export const npmAssetName = version => `hdTrans-${version}-wasm.tgz`;
+
 export function verifyNpmPackage({ root = process.cwd(), packageDir, ref }) {
   const version = releaseVersion(ref);
   const json = path => JSON.parse(readFileSync(join(root, path), 'utf8'));
@@ -24,7 +26,7 @@ export function verifyNpmPackage({ root = process.cwd(), packageDir, ref }) {
       lock.version !== version || lock.packages?.['']?.version !== version) {
     throw new Error('The source versions must match the release tag.');
   }
-  const name = `hdtrans-${version}.tgz`;
+  const name = npmAssetName(version);
   const path = join(packageDir, name);
   const bytes = readFileSync(path);
   const hash = createHash('sha256').update(bytes).digest('hex');
@@ -85,36 +87,22 @@ export async function findRelease(github, repo, tag) {
 }
 
 export async function publishRelease({ github, repo, ref, sha, packageDir, notes, root = process.cwd() }) {
-  const nightly = ref === 'refs/heads/develop';
-  const tag = nightly ? 'nightly' : `v${releaseVersion(ref)}`;
-  if (!nightly) verifyNpmPackage({ root, packageDir, ref });
+  const tag = `v${releaseVersion(ref)}`;
+  verifyNpmPackage({ root, packageDir, ref });
   const files = readdirSync(packageDir).sort();
   if (!files.includes('SHA256SUMS.txt') || files.length < 2) throw new Error('Release packages are missing.');
-  const currentNightly = async () => {
-    const head = (await github.rest.git.getRef({ ...repo, ref: 'heads/develop' })).data.object;
-    return head.type === 'commit' && head.sha === sha;
-  };
-  if (nightly) {
-    if (!await currentNightly()) return false;
-    try { await github.rest.git.updateRef({ ...repo, ref: 'tags/nightly', sha, force: true }); }
-    catch (error) {
-      if (error.status !== 404) throw error;
-      await github.rest.git.createRef({ ...repo, ref: 'refs/tags/nightly', sha });
-    }
-  }
   let release = await findRelease(github, repo, tag);
-  if (nightly && !await currentNightly()) return false;
   if (!release) {
     release = (await github.rest.repos.createRelease({
       ...repo, tag_name: tag, target_commitish: sha, name: tag,
-      body: notes, draft: true, prerelease: nightly, make_latest: 'false',
+      body: notes, draft: true, prerelease: false, make_latest: 'false',
     })).data;
   }
   const assets = await github.paginate(github.rest.repos.listReleaseAssets, {
     ...repo, release_id: release.id, per_page: 100,
   });
   for (const asset of assets) {
-    if (nightly || files.includes(asset.name)) {
+    if (files.includes(asset.name)) {
       await github.rest.repos.deleteReleaseAsset({ ...repo, asset_id: asset.id });
     }
   }
@@ -124,23 +112,20 @@ export async function publishRelease({ github, repo, ref, sha, packageDir, notes
       headers: { 'content-type': 'application/octet-stream', 'content-length': data.length },
     });
   }
-  let makeLatest = false;
-  if (!nightly) {
-    let latest;
-    let absent = false;
-    try { latest = (await github.rest.repos.getLatestRelease(repo)).data; }
-    catch (error) {
-      if (error.status !== 404) throw error;
-      absent = true;
-    }
-    makeLatest = absent || compareVersions(releaseVersion(ref), releaseVersion(`refs/tags/${latest?.tag_name}`)) >= 0;
+  let latest;
+  let absent = false;
+  try { latest = (await github.rest.repos.getLatestRelease(repo)).data; }
+  catch (error) {
+    if (error.status !== 404) throw error;
+    absent = true;
   }
+  const makeLatest = absent || compareVersions(releaseVersion(ref), releaseVersion(`refs/tags/${latest?.tag_name}`)) >= 0;
   const published = (await github.rest.repos.updateRelease({
     ...repo, release_id: release.id, name: tag, body: notes,
-    draft: false, prerelease: nightly, make_latest: String(makeLatest),
+    draft: false, prerelease: false, make_latest: String(makeLatest),
   })).data;
-  if (published.tag_name !== tag || published.draft !== false || published.prerelease !== nightly) {
+  if (published.tag_name !== tag || published.draft !== false || published.prerelease !== false) {
     throw new Error('The release was not published as requested.');
   }
-  return !nightly;
+  return true;
 }

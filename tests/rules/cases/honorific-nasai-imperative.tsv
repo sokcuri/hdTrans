@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:honor:3	「覚悟なさい！」	「각오해!」	fix	local
+dict:honor:3	だから直ちに攻撃を中止なさい	그러니까 즉시 공격을 중지해	fix	local
+dict:honor:3	少しは抵抗なさいよっ！	조금은 저항해!	fix	local
+dict:honor:5	大人しくなさい！！	얌전히 해!!	fix	lookup
+dict:honor:5	もう好きになさい……	이제 좋아하게 해……	fix	lookup
+dict:honor:7	最善の努力をなさいませ〜！	최선의 노력을 하십시오~!	fix	lookup
+constraint:o-stem-nasai	ちょーっとお待ちなさいな！	조금 기다려!	fix	lookup
+constraint:o-stem-nasai	お待ちなさいませ	기다리십시오	fix	lookup
+phrase:おやすみなさいませ	本当にお騒がせしました、おやすみなさいませ	정말 시끄럽게 했습니다, 안녕히 주무세요	fix	builtin-phrase
+phrase:おかえりなさいまし	おかえりなさいまし！	어서 오세요!	fix	builtin-phrase
+dict:honor:8	見てご覧なさいませーー！！	봐 보십시오--!!	fix	lookup
+dict:honor:4	何になさいますか	!rule:dict:honor:4	keep	local
+dict:honor:3	確認なさいます？	!rule:dict:honor:3	keep	local

@@ -53,11 +53,29 @@ bool Person(std::string_view attr);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
+// The passive or potential (ら)れ of a verb whose subject names someone the speaker honours is
+// the respectful form: 書かれた 쓰셨다, 来られた 오셨다.
+void RespectfulPassive(Flusher& f);
+// A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
+// with it instead of 어지다.
+void OwnPassives(Flusher& f);
+// The provider に before a て verb and もらう read as 주다 is its subject: 王子様に案内してもらう
+// 왕자님이 안내해 주다.
+void BenefactiveProvider(Flusher& f);
 void GoNotSay(Flusher& f);
 void PositiveIke(Flusher& f);
 void CopulaDeAru(Flusher& f);
 void NegativeCopula(Flusher& f);
 void SubjectBeforeGa(Flusher& f);
+// A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
+// plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
+void PluralPronoun(Flusher& f);
+// The counter 度 after a number of 10 or more or with a decimal point reads as the degree 도,
+// not the count 번, when the number is written in digits (180度 180도, 0.5度 0.5도) or in
+// kanji other than the bare 十 before a word of angle or temperature or after a noun of one
+// in the sentence (百八十度変わった 180도, 角度は四十五度 45도); 度 before も, ほど or 目
+// counts (十度も 열 번이나, 五度 5번, 十度目 열 번째).
+void DegreeAfterNumber(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
 void ChanAfterKatakana(Flusher& f);
 void InitialSoundRule(Flusher& f);
@@ -82,6 +100,11 @@ void PastProgressiveAdnominal(Flusher& f);
 // subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
 void PreparedState(Flusher& f);
 void NotYet(Flusher& f);
+// A verb stem not in the dictionary before 込む takes the ending of 込む, which writes nothing
+// (惚れ込む 반하다, 老け込んだ 늙었다): the Korean verb alone carries the action.
+void InwardAuxiliary(Flusher& f);
+// A verb continuative before も and する: V-지도 않다 with a negative する, V-기도 하다 otherwise.
+void EmphaticMo(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);
@@ -111,6 +134,12 @@ void ParallelNoka(Flusher& f);
 void OfferPromise(Flusher& f);
 void ComitativeTo(Flusher& f);
 void NounTo(Flusher& f);
+// A と that opens a line or follows a sentence end on it (と私が頭を下げると, バカな。と笑う)
+// quotes what was said before it: (이)라고 rather than (와)과 or (으)로. Not inside brackets,
+// where it stutters, nor before an ellipsis or another と, nor before なる or する, where it
+// starts a conjunction (となると, とすると), nor before a word of company, sameness or
+// difference (と一緒に, と同じ, と違って), where it is the comitative.
+void LineInitialTo(Flusher& f);
 
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);

@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+compose:noun-particles	岩ばかりだ。	바위뿐이다.	fix	compose
+compose:noun-particles	それ以降、ラミア族も巨人族も普段通り。	그 이후, 라미아족도 거인족도 평소대로.	fix	compose
+compose:noun-particles	普通の青年にしかみえない。	보통 청년밖에 보이지 않는다.	fix	compose
+compose:noun-particles	畑毎に種類が違う。	밭마다 종류가 다르다.	fix	compose
+compose:noun-particles	お前ほど強くない。	너만큼 강하지 않다.	keep	compose
+compose:free-nouns	長さが俺の身長ぐらいだった。	길이가 내 키 정도였다.	fix	compose
+compose:free-nouns	技術などない。	기술 같은 건 없다.	fix	compose
+compose:free-nouns	使用後に流す。	사용 후에 흘린다.	fix	compose
+compose:free-nouns	作業中は効果を発揮している。	작업 중은 효과를 발휘하고 있다.	fix	compose
+compose:free-nouns	トイレの中	화장실 안	keep	compose

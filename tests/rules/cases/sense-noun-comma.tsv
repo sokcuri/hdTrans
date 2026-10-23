@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+sense:背	背、伸びたね。	키, 자랐네.	fix	senses
+sense:角	角、生えてる。	뿔, 나 있다.	fix	senses
+sense:元気	元気、出た？	기운, 나왔어?	fix	senses
+sense:背	背、伸ばして。	등, 펴.	keep	senses
+sense:お盆	とりあえず、コップとお皿、お盆。	우선, 컵과 접시, 쟁반.	keep	senses

@@ -252,6 +252,7 @@ M41:	4	VERB	동사 어간		unnamed
 M41;	4	VERB	来る 계열 변격 동사 어간	verb-bound_possible,ka_irregular,verb-general,ka_irregular,動詞-一般,カ行変格,動詞-自立,カ変・クル,動詞-非自立,カ変・クル,動詞-非自立可能,カ行変格	named
 M41<	4	VERB	나행 5단 동사 어간	verb-bound_possible,godan-na,verb-general,godan-na,動詞-一般,五段-ナ行,動詞-自立,五段・ナ行,動詞-非自立,五段・ナ行,動詞-非自立可能,五段-ナ行	named
 M41=	4	VERB	동사 어간	動詞-自立,カ変・来ル,動詞-非自立,カ変・来ル	unnamed
+M41?	4	VERB	동사 어간		unnamed
 M420	4	VERB	와행 5단 동사 어간	verb-bound_possible,godan-wa,verb-general,godan-wa,動詞-一般,五段-ワア行,動詞-自立,五段・ワ行ウ音便,動詞-自立,五段・ワ行促音便,動詞-非自立,五段・ワ行ウ音便,動詞-非自立,五段・ワ行促音便,動詞-非自立可能,五段-ワア行	named
 M421	4	VERB	카행 5단 동사 어간	verb-bound_possible,godan-ka,verb-general,godan-ka,動詞-一般,五段-カ行,動詞-自立,五段・カ行イ音便,動詞-自立,五段・カ行促音便,動詞-自立,五段・カ行促音便ユク,動詞-非自立,五段・カ行イ音便,動詞-非自立,五段・カ行促音便,動詞-非自立,五段・カ行促音便ユク,動詞-非自立可能,五段-カ行	named
 M422	4	VERB	동사 어간		unnamed
@@ -278,6 +279,7 @@ M437	4	VERB	동사 어간		unnamed
 M438	4	VERB	동사 어간		unnamed
 M439	4	VERB	동사 어간		unnamed
 M43:	4	VERB	ずる 계열 변격 동사 어간	動詞-自立,サ変・−ズル,動詞-非自立,サ変・−ズル	named
+M43?	4	VERB	동사 어간		unnamed
 M440	4	VERB	동사 어간		unnamed
 M441	4	VERB	동사 어간		unnamed
 M442	4	VERB	가행 5단 동사 어간	verb-bound_possible,godan-ga,verb-general,godan-ga,動詞-一般,五段-ガ行,動詞-自立,五段・ガ行,動詞-非自立,五段・ガ行,動詞-非自立可能,五段-ガ行	named
@@ -290,6 +292,7 @@ M448	4	VERB	동사 어간		unnamed
 M449	4	VERB	동사 어간		unnamed
 M44:	4	VERB	동사 어간		unnamed
 M44;	4	VERB	동사 어간		unnamed
+M44?	4	VERB	동사 어간		unnamed
 M450	4	VERB	동사 어간		unnamed
 M451	4	VERB	동사 어간		unnamed
 M452	4	VERB	동사 어간		unnamed
@@ -301,6 +304,7 @@ M457	4	VERB	동사 어간		unnamed
 M458	4	VERB	동사 어간		unnamed
 M459	4	VERB	동사 어간		unnamed
 M45:	4	VERB	동사 어간		unnamed
+M45?	4	VERB	동사 어간		unnamed
 M460	4	VERB	동사 어간		unnamed
 M461	4	VERB	동사 어간		unnamed
 M462	4	VERB	동사 어간		unnamed
@@ -310,6 +314,7 @@ M466	4	VERB	동사 어간		unnamed
 M467	4	VERB	동사 어간		unnamed
 M468	4	VERB	동사 어간		unnamed
 M469	4	VERB	동사 어간		unnamed
+M46?	4	VERB	동사 어간		unnamed
 M4N7	4	VERB	동사 어간		unnamed
 M4U0	4	VERB	동사 어간		unnamed
 M4U1	4	VERB	동사 어간		unnamed
@@ -324,6 +329,7 @@ M4U9	4	VERB	동사 어간		unnamed
 M4U:	4	VERB	동사 어간		unnamed
 M4U;	4	VERB	동사 어간		unnamed
 M4U=	4	VERB	동사 어간		unnamed
+M4U?	4	VERB	동사 어간		unnamed
 M7M0	7	ADJ	い형용사		unnamed
 M7N0	7	ADJ	い형용사		unnamed
 M7U0	7	ADJ	い형용사		unnamed

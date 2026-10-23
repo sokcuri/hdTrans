@@ -29,7 +29,7 @@ compose:speech-quoted	「お前もだ！」	「너도다!」	keep	compose
 compose:speech-quoted	「しかし、だ。それは違う」	「하지만, 이다. 그건 달라」	fix	compose
 compose:speech-quoted	彼女は窓の外を見た。	그녀는 창 밖을 보았다.	keep	compose
 compose:speech-quoted	彼のモットーは「従う」だ。	그의 모토는 「따른다」다.	keep	compose
-compose:speech-quoted	想「おも」い出	구상 「도」있고 출	keep	compose
+compose:speech-quoted	想「おも」い出	추억	keep	compose
 compose:speech-quoted	「やらねばならない」	「해야 한다」	keep	compose
 compose:speech-quoted	「俺が行く」	「내가 갈게」	fix	compose
 compose:speech-quoted	「私は断る」	「나는 거절할게」	fix	compose

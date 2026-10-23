@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+constraint:amari-before-predicate	余り好きじゃない。	별로 좋아하지 않는다.	fix	lookup
+constraint:amari-before-predicate	余り食べない。	별로 먹지 않는다.	fix	lookup
+constraint:amari-before-predicate	余りにも遠い。	너무나 멀다.	keep	lookup
+constraint:amari-before-predicate	お金が余り、困った。	돈이 남아, 곤란했다.	keep	lookup
+constraint:amari-before-predicate	時間が余り過ぎる。	시간이 너무 남는다.	fix	lookup
+constraint:amari-before-predicate	お金が余ります。	돈이 남습니다.	fix	lookup
+constraint:amari-before-predicate	お金が余りそうだ。	돈이 남을 것 같다.	fix	lookup
+constraint:amari-before-predicate	余りそうは思わない。	별로 그렇게는 생각하지 않는다.	keep	lookup

@@ -1,0 +1,63 @@
+rule	input	expected	kind	layer
+sound:paused-to	　ぱさり、と、唯一持つことを許された日記帳が落ちた。	 툭, 하고, 유일 가지는 것이 용서된 일기장이 떨어졌다.	fix	sound
+sound:paused-to	ふむ、と彼が腕を組む。	흠, 하고 그가 팔짱을 낀다.	fix	sound
+sound:paused-to	　ダンッ！　ダンッ！　と豪快な音が断続的に響いてくる。	 쾅! 쾅! 하고 호쾌한 소리가 단속적으로 울려 온다.	fix	sound
+sound:paused-to	彼はニヒヒ…と笑いながら、	그는 니히히… 하고 웃으면서,	fix	sound
+sound:paused-to	やっ……と、静かになったぁ……。	얏……과 조용하게 되었다…….	keep	sound
+sound:paused-to	うん、とても良い。	응, 무척 좋다.	keep	sound
+sound:pon	　ぽん、と手を叩く。	 퐁, 하고 손뼉을 친다.	fix	sound
+sound:pon	ぽんと手を叩く。	탁 손뼉을 친다.	keep	sound
+sound:katakana-after-to	　スタスタとベッドから降りると、彼女は部屋を飛び出した。	 척척 침대에서 내리니, 그녀는 방을 뛰쳐나왔다.	fix	sound
+sound:katakana-after-to	舌を絡めて、チュッとキスをした。	혀를 걸고, 쪽 키스를 했다.	keep	sound
+sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 복도를 걸어간다.	fix	sound
+sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
+sound:hiragana-doubled	いろいろと考えた。	여러모로 생각했다.	keep	sound
+rewrite:line-initial-to	と私が殊勝に頭を下げると、王子はひどくびっくりした顔をする。	라고 내가 기특하게 고개를 숙이면, 왕자는 몹시 놀란 얼굴을 한다.	fix	rewrites
+rewrite:line-initial-to	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어 버리려고 했지만 그만두기로 했다.	fix	rewrites
+rewrite:line-initial-to	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
+rewrite:line-initial-to	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
+rewrite:line-initial-to	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites
+rewrite:past-sequence	　振り返ると彼女がいた。	 돌아보니 그녀가 있었다.	fix	rewrites
+rewrite:past-sequence	　ドアを開けると私服の彼女がいた。	 문을 열자 사복의 그녀가 있었다.	fix	rewrites
+rewrite:past-sequence	　スマホを見ると１７時半すぎだった。	 스마트폰을 보니 17너무 시다.	fix	rewrites
+rewrite:past-sequence	宦官を加えると三千の大所帯だった。	내시를 가세하면 3000의 대가족이었다.	keep	rewrites
+rewrite:past-sequence	両手で抱えたポリタンクは、歩いているとバランスを崩してしまうほど重かった。	양손으로 움켜 쥔 폴리탱크는, 걷고 있으면 밸런스를 무너뜨려 버릴 만큼 무거웠다.	keep	rewrites
+rewrite:past-sequence	自身が狙われる可能性があると深く理解していた。	자신이 노려질 가능성이 있으면 깊게 이해하고 있었다.	keep	rewrites
+rewrite:quote-to	思うこと、女の笑みほど恐ろしい毒はないと。	생각하는 것, 여자의 미소만큼 무서운 독은 없다고.	fix	rewrites
+rewrite:quote-to	時間がないと、彼は言った。	시간이 없다고, 그는 말했다.	fix	rewrites
+rewrite:quote-to	予測だけで物事を考えるのはいけないと、父は何度も言った。	예측만으로 일을 생각하는 것은 안 된다고, 아버지는 몇 번이나 말했다.	fix	rewrites
+rewrite:quote-to	早く行かないと。	빨리 가지 않으면.	keep	rewrites
+rewrite:quote-to	お金がないと、困る。	돈이 없으면 곤란하다.	keep	rewrites
+dict:gram:to:tari	彼女は朗々と歌い上げた。	그녀는 낭랑하게 노래했다.	fix	local
+dict:gram:to:tari	彼は憤然と席を立った。	그는 분연하게 자리에서 일어났다.	fix	local
+dict:gram:to:tari	正々堂々と戦いましょう。	정정당당하게 싸웁시다.	fix	local
+dict:gram:to:tari	飲み散らかした大人たちが意気揚々と部屋に戻っていく。	마셔 어지른 어른들이 의기양양하게 방으로 돌아간다.	fix	local
+dict:gram:to:tari	彼は黙然と空を見上げた。	그는 묵연하게 하늘을 올려다보았다.	fix	local
+dict:gram:to:tari	愕然とする私はそのまま医務室に運ばれた。	아연실색하는 나는 그대로 의무실에 옮겨졌다.	fix	local
+dict:gram:to:tari	友人と部屋に戻っていく。	친구와 방으로 돌아간다.	keep	local
+dict:gram:to:tari-comma	彼女は呆然と、本日2度目の呟きを吐き出した。	그녀는 멍하니, 오늘 두 번째 중얼거림을 토해냈다.	fix	local
+dict:gram:to:tari-comma	彼女は颯爽と、廊下を歩いていった。	그녀는 씩씩하게, 복도를 걸어갔다.	fix	local
+dict:gram:toshite:tari	愕然として言葉を失う。	아연실색하게 말을 잃는다.	fix	local
+dict:gram:toshite:tari	学生として当然だ。	학생으로서 당연하다.	keep	local
+dict:gram:toshite:adverb	執事までが唖然として固まった。	집사까지가 아연하게 굳어졌다.	fix	local
+dict:gram:taru:tari	これぞまさに搭乗者の歴然たる差ってやつ？	이거야 그야말로 탑승자의 역력한 차이는 녀석?	fix	local
+dict:gram:taru:tari	学生たる者。	학생인 사람.	keep	local
+dict:gram:dato:focus-quote	社交界に入るのが当たり前だとしか思っていなかった。	사교계에 들어가는 것이 당연하다고밖에 생각하지 않았다.	fix	local-ending
+dict:gram:dato:focus-quote	静かだと困る。	조용하다면 곤란하다.	keep	local-ending
+lexical:kato-spacing	はっきりいって頭がショートするかと思った。	분명히 말해 머리가 쇼트할 줄 알았다.	fix	local-ending
+dict:gram:yoku:continuative:1	王都の治安はよく、女性が一人で住める。	왕도의 치안은 좋고, 여성이 혼자서 살 수 있다.	fix	local
+dict:gram:yoku:continuative:2	パーツのバランスも良く、可愛らしい顔立ちだった。	파츠의 밸런스도 좋고, 사랑스러운 얼굴 생김새였다.	fix	local
+dict:gram:yoku:continuative:1	両家の親はよく、そんな話を了承したものだな。	양가의 부모는 잘, 그런 이야기를 승낙한 것이네.	keep	local
+dict:gram:yoku:continuative:1	昼はよく眠っていた。	낮은 잘 자고 있었다.	keep	local
+lexical:kato-spacing	悪戯かと思われたが、犯人が見つからない。	못된 장난일까 하고 생각되었지만, 범인이 발견되지 않는다.	fix	local
+lexical:kato-spacing	行こうかなと思う。	갈까라고 생각한다.	keep	local-ending
+dict:jisjk:118946	契約の解消と変更をお願いします。	계약 해소와 변경을 부탁드립니다.	fix	local
+dict:jisjk:118946	名前をタロウと変更した。	이름을 타로우라고 변경했다.	keep	local
+sense:short-stature	身長も低い訳ではない。	키도 작은 것은 아니다.	fix	senses
+sense:short-stature	声が低い。	목소리가 낮다.	keep	senses
+rewrite:quote-to	もっと時間がないと。	좀 더 시간이 없으면.	fix	rewrites
+rewrite:quote-to	「力がないと」	「힘이 없으면」	fix	rewrites
+rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도 없다고.	keep	rewrites
+rewrite:line-initial-to	と一緒に行こう。	와 함께 가자.	fix	rewrites
+rewrite:line-initial-to	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
+rewrite:line-initial-to	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites

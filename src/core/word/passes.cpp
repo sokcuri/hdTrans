@@ -15,6 +15,7 @@ namespace {
 
 constexpr std::string_view kNegativeFamily = "&NF@";
 constexpr std::string_view kNegativeAdjective = "$DH@";
+constexpr std::string_view kAbsentFamily = "&M9@";  // 없다
 
 // The text of the group's surface and the ending is not a sequence containing kanji.
 bool NoKanji(std::string_view s) {
@@ -63,6 +64,9 @@ bool PhraseFollowsNi(Item* ni) {
     }
     return true;
 }
+
+// Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
+constexpr std::string_view kTeAuxiliaryStems[] = {"い", "み", "き", "しま"};
 
 struct Phrase {
     std::string_view text;
@@ -171,6 +175,13 @@ Phrase FindPhrase(Flusher& f) {
                 break;
             }
             case 3: {
+                // After a verb in its て form a kana auxiliary stays a verb (増えていき: いく, not 息).
+                if (const Item* prev = it->prev;
+                    prev != nullptr && prev->detail->Yougo() && At(prev->Code(0), 0) == '4' &&
+                    (prev->DirectSurface().ends_with(kJaTe) || prev->DirectSurface().ends_with(kJaDe)) &&
+                    InSet(kTeAuxiliaryStems, it->group->surface)) {
+                    break;
+                }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
                 Record* record = it->group->records;
                 it->group->records = nullptr;
@@ -182,6 +193,9 @@ Phrase FindPhrase(Flusher& f) {
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
                             continue;
                         }
+                        // そう after the stem is the appearance, not a noun after a noun (泣きそう 울 것
+                        // 같다, not 울음 그렇게).
+                        if (next->group->surface == kJaSou) continue;
                     }
                     if (next == nullptr || next->group->surface != kJaNi || PhraseFollowsNi(next)) {
                         return {it->text, it->start, it->tokenIndex, record};
@@ -333,7 +347,11 @@ void CleanupClass3(Flusher& f) {
 void ApplyNegatives(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         Entry* e = it->group->At(it->selected);
-        if (e == nullptr || e->user == nullptr || e->user->negative.empty() || it->DirectIndex() == -1) continue;
+        if (e == nullptr || it->DirectIndex() == -1) continue;
+        // A word already read as 없다 (があ, がござ before ません) takes the negative ending
+        // as a form of its own: ありませんのに 없는데요, not 없지 않는데요.
+        const bool absent = it->EntryText(it->selected).ends_with(kAbsentFamily);
+        if (!absent && (e->user == nullptr || e->user->negative.empty())) continue;
         Entry* ending = it->DirectEntry(it->DirectIndex());
         if (ending == nullptr) continue;
         char code = 0;
@@ -351,6 +369,8 @@ void ApplyNegatives(Flusher& f) {
                 }
             }
             after = std::string(rest.substr(row.size()));
+        } else if (absent) {
+            continue;
         } else if (Item* n = it->next; ending->dst == std::string("1") + std::string(kKoJi) && n != nullptr &&
                                        n->DirectIndex() != -1 && n->EntryText(n->selected) == kNegativeAdjective) {
             const std::string_view text = n->DirectText(n->DirectIndex());
@@ -380,7 +400,7 @@ void ApplyNegatives(Flusher& f) {
                    !afterView.starts_with(kKoRyeo)) {
             code = 'A';
         }
-        it->AssignEntrySurface(it->selected, e->user->negative);
+        if (!absent) it->AssignEntrySurface(it->selected, e->user->negative);
         it->AssignDirectSlot(it->DirectIndex(), std::string(1, code) + after);
     }
 }

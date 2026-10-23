@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+family:NC	結婚しているから。	결혼했으니까.	fix	output
+family:NC	結婚している。	결혼했다.	keep	output

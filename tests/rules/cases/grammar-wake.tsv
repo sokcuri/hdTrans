@@ -1,10 +1,33 @@
 rule	input	expected	kind	layer
-pattern:書くわけないじゃない	「先に帰るわけないじゃない、もう」	「먼저 돌아갈 리가 없잖아, 이제」	fix	builtin-pattern
-pattern:書くわけないでしょ	「言うわけないでしょ、サプライズよ」	「말할 리가 없잖아, 써프라이즈야」	fix	builtin-pattern
-pattern:静かなわけないだろう	「ば、馬鹿、綺麗なわけないだろう」	「바, 바보, 예쁠 리가 없잖아」	fix	builtin-pattern
-pattern:書くわけないっしょ	「忘れるわけないっしょ」	「잊을 리가 없잖아」	fix	builtin-pattern
-pattern:書くわけないじゃないですか	「そんな事言えるわけないじゃないですか！」	「그런 일 말할 수 있을 리가 없잖아요!」	fix	builtin-pattern
-pattern:学生なわけだし	「お目付は仕事なわけだし、プライベートがあってもいいじゃない」	「위법감찰무사는 일인 거고, 프라이빗이 있어도 되잖아」	fix	builtin-pattern
-pattern:学生なわけで、	夢の中と言えども私は女の子なわけで、あおくんに好意を抱いているんだし	꿈 속이라고 해도 나는 여자아이라서, 아오 군에게 호의를 품고 있으니까	fix	builtin-pattern
-pattern:書いてもいいわけだ	とはいえ、これ以上メールが来ないのなら調査をやめてもいいわけだ。	그렇다고는 해도, 더 이상 메일이 오지 않는다면 조사를 그만두어도 되는 셈이다.	fix	builtin-pattern
-pattern:学生なわけではない	ね、寝不足なわけではないぞ！	저기, 수면 부족인 것은 아니야!	keep	builtin-pattern
+normalize:katakana-wake	やられるワケにはいかない。	당할 수는 없다.	fix	normalize
+normalize:katakana-wake	娯楽があるワケではない。	오락이 있는 것은 아니다.	fix	normalize
+normalize:katakana-wake	言いワケはしたくない。	변명은 하고 싶지 않다.	fix	normalize
+normalize:katakana-wake	ホンソメワケベラがいる。	청줄청소놀래기가 있다.	keep	normalize
+pattern:書くわけがないじゃないか	食べられないわけがないじゃないか。	먹을 수 없을 리가 없잖아.	fix	builtin-pattern
+pattern:静かなわけがない	簡単なわけがない。	간단할 리가 없다.	fix	builtin-pattern
+pattern:書くわけはなかったが	答えるわけはなかったが、黙っていた。	대답할 리는 없었지만, 입다물고 있었다.	fix	builtin-pattern
+pattern:学生なはず	本当なはずだ。	사실일 것이다.	fix	builtin-pattern
+pattern:学生なわけがない	見かけ通りなわけがない。	외관대로일 리가 없다.	fix	builtin-pattern
+dict:segmentation-b	そんなわけがない。	그럴 리가 없다.	fix	lookup
+normalize:katakana-wake	全部をやるワケにはいかない。	전부를 할 수는 없다.	fix	normalize
+normalize:katakana-wake	岩塩を諦めたワケではない。	암염을 포기한 것은 아니다.	fix	normalize
+normalize:katakana-wake	ワケギを植える。	실파를 심는다.	keep	normalize
+constraint:wake-formal-noun	雲の上の上なワケ。	구름 위 위인 것.	fix	lookup
+constraint:wake-formal-noun	中二病なわけ？	중2병인 것?	fix	lookup
+constraint:wake-formal-noun	そういうわけですか……	그런 것입니까……	fix	lookup
+constraint:wake-formal-noun	「そんなわけあるかいな……」	「그런 이유 있을까……」	fix	lookup
+constraint:wake-formal-noun	仲良くわけて食べた。	사이 좋게 나누어 먹었다.	keep	lookup
+constraint:wake-formal-noun	パンをわけ、食べた。	빵을 나누어 먹었다.	keep	lookup
+constraint:wake-formal-noun	みんなでわけよう。	모두 나누자.	keep	lookup
+dict:jisjk:373943	道理で手慣れてるわけだ。	rule:dict:jisjk:373943=것	fix	local
+dict:jisjk:373943	そのわけを話せ。	!rule:dict:jisjk:373943	keep	local
+dict:jisjk:373943	どんなわけなのか説明して。	!rule:dict:jisjk:373943	keep	local
+dict:jisjk:343497	今日は私が当番ってわけ。	오늘은 내가 당번이라는 것.	fix	local
+dict:jisjk:343497	当番ってことだ。	당번이라는 것이다.	keep	local
+dict:w:26748	わけあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
+dict:w:26748	ワケあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
+dict:w:26749	まあ、訳あって、あまり表には出てこない。	뭐, 사정이 있어, 그다지 겉에는 나오지 않는다.	fix	lookup
+sentence-final:dash	お母さんが許してくれるワケない―――	엄마가 용서해 줄 리가 없다―――	fix	builtin-pattern
+dict:jisjk:373943	え？ワケ？	어? 이유?	fix	local
+dict:jisjk:373943	何のワケ？	!rule:dict:jisjk:373943	fix	local
+dict:jisjk:373943	そのままの状態だったわけだ。	rule:dict:jisjk:373943=것	keep	local

@@ -51,6 +51,8 @@ HD_TEST(pipeline_cut_spans) {
         {"<b>김</b>", "〖2<b>〗〖1김〗〖3</b>〗"},
         {"[color=red]x[/color]", "〖2[color=red]〗x〖3[/color]〗"},
         {"[b x]y[color=a\nb]", "[b x]y[color=a\nb]"},
+        {"{rb}悔やむ{/rb}{rt}くやむ{/rt}{k=-5.0}―{/k}", "〖2{rb}〗悔やむ〖3{/rb}〗〖2{rt}〗くやむ〖3{/rt}〗〖2{k=-5.0}〗―〖3{/k}〗"},
+        {"{0}{rb]{x}", "{0}{rb]〖2{x}〗"},
         {"a&amp;b&#169;&#x1F363;&x;", "a〖2&amp;〗b〖2&#169;〗〖2&#x1F363;〗&x;"},
         {"&#12345678;&#X41;&a12345678901234567890123456789012;", "&#12345678;&#X41;&a12345678901234567890123456789012;"},
         // Inline style codes: a font, a colour and the reset.
@@ -202,6 +204,44 @@ HD_TEST(pipeline_nicknames_to_hangul) {
     }
 }
 
+// With the name layer: a nickname after a word and a particle inside a longer run, before
+// ちゃんと, and before くんの after a stem of a verb that does not end in く.
+HD_TEST(pipeline_nicknames_to_hangul_name_layer) {
+    dict::File base, names;
+    base.name = "base.tsv";
+    base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n"
+                "それ\t그것\tN120\t\t\tGN\t1\n"
+                "こと\t것\tN110\t\t\tGN\t2\n"
+                "はとこ\t육촌\tN110\tVHn\t\tGN\t3\n"
+                "あお\t부&AO@\tM452\t\t\tGN\t4\n"
+                "いつか\t언젠가\tE311\t\t\tGN\t5\n"
+                "話\t이야기&AV@\tM443\t\t\tGN\t6\n";
+    names.name = "names.tsv";
+    names.text = "#! layer=names\nkey\tko\tpos\tsem\tgram\tdict\tid\n"
+                 "まき\t마키\tN130\tQPNVHn\tWb\tGN\t7\n"
+                 "りこ\t리코\tN130\tQPNVHn\tWb\tGN\t8\n"
+                 "はとこ\t육촌\tN130\tQPNVHn\tWb\tGN\t9\n"
+                 "いつか\t이츠카\tN130\tQPNVHn\tWb\tGN\t11\n";
+    const auto snap = dict::Load({base, names}).snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"それはまきくんの夢", "それは〖1마키〗くんの夢"},
+        {"ことはりこちゃんに", "ことは〖1리코〗ちゃんに"},
+        {"それははとこちゃんに", "それははとこちゃんに"},
+        {"りこちゃんと会う", "〖1리코〗ちゃんと会う"},
+        {"あおくんの夢", "〖1아오〗くんの夢"},
+        {"いつかちゃんと話そう", "いつかちゃんと話そう"},
+        {"しろちゃんと。", "しろちゃんと。"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::NicknamesToHangul(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_kata_words) {
     const auto snap = Snapshot("からだ\t몸\tN110\t\t\tGN\t1\n");
     HD_REQUIRE(snap != nullptr);
@@ -222,10 +262,20 @@ HD_TEST(pipeline_kata_words) {
         {"せまいからダメ？", "せまいからダメ？"},  // からだ joins the text around it
         {"アレックスは来た。", "アレックスは来た。"},
         {"スゴイね。", "すごいね。"},
+        {"ウルサイッ！", "うるさいっ！"},  // a closing ッ is the sound of an adjective
+        {"ウルサイッ", "うるさいっ"},
+        {"コワイッ、やめて", "こわいっ、やめて"},  // a pause ends it as well
+        {"ヒドイッだよ", "ひどいだよ"},            // before a copula the ッ goes
+        {"アレッ？", "アレッ？"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
     }
+    // A dictionary word clipped of its ッ before punctuation reads as the adjective.
+    const auto dame = Snapshot("ダメ\t안 됨\tN111\t\t\tGN\t1\nバカ\t바보\tN110\t\t\tGN\t2\n");
+    HD_REQUIRE(dame != nullptr);
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("ダメッ！"), ctx, *dame)), std::string("だめ！"));
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("バカッ！"), ctx, *dame)), std::string("バカ！"));
     // The katakana stem of 行く, but not where a dictionary word reads the run: a noun before a
     // particle, a verb whose conjugation follows, also with its first kana in katakana.
     const auto iku = Snapshot("イカ\t오징어\tN110\t\t\tGN\t1\nイカれ\t미&AO@\tM427\t\t\tGN\t2\n");
@@ -365,6 +415,7 @@ HD_TEST(pipeline_katakana_dictionary) {
         {"ダメですよ。", "ダメですよ。"},  // the base word conjugates already
         {"ウルサイぞ。", "うるさいぞ。"},
         {"ヒドイよ！", "ひどいよ！"},
+        {"これはマズイって！", "これはまずいって！"},
         {"ダメよ。", "ダメよ。"},  // only an i-adjective before a sentence-final particle
         {"オレは行く。", "オレは行く。"},
         {"ドレスを着た。", "ドレスを着た。"},

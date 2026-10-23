@@ -90,6 +90,55 @@ bool RubyForm(std::string_view s, size_t pos, Match& m) {
     return HtmlRuby(s, pos, m);
 }
 
+// Whether s starts with a particle or the copula, which follow a noun base rather than
+// continuing its word (に, を, は, が, も, の, で, と, ね, よ, さ, だ, じゃ, から, まで, より), or
+// with a small vowel that draws out the base (お前ぇ).
+bool ParticleStart(std::string_view s) {
+    for (std::string_view w : {"から", "まで", "より", "じゃ"}) {
+        if (s.starts_with(w)) return true;
+    }
+    size_t p = 0;
+    return OneOf(s, p, U"にをはがものでとねよさだぁぃぅぇぉ");
+}
+
+// Whether s starts with a name suffix (くん, くーん, ちゃん, さん, さま, たん, ちゃま) that
+// ends a word or comes before a particle: the base is a name (蒼くーん, 蒼くんは).
+bool NameSuffixStart(std::string_view s) {
+    for (std::string_view w : {"くーん", "ちゃーん", "さーん", "くん", "ちゃん", "さん", "さま", "たん", "ちゃま"}) {
+        if (!s.starts_with(w)) continue;
+        const std::string_view rest = s.substr(w.size());
+        size_t p = 0;
+        // くんだ is also a verb ending (書くんだ).
+        const bool particle = ParticleStart(rest) && !rest.starts_with("だ");
+        if (rest.empty() || !Take(rest, p, IsHiraganaClass) || particle) return true;
+    }
+    return false;
+}
+
+// {rb}([^{}]{1,20}){/rb}{rt}([^{}]{1,30}){/rt}([ぁ-ゖ]*), the ruby tags of script markup:
+// base as group 1, reading as group 2, the kana after the tags as group 3 and the rest of
+// the line as group 4.
+bool BraceRuby(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "{rb}")) return false;
+    auto notBrace = [](char32_t c) { return c != U'{' && c != U'}'; };
+    return Repeat(s, p, notBrace, 1, 20, [&](size_t q) {
+        m.group[1] = Span(s, p, q);
+        if (!Lit(s, q, "{/rb}{rt}")) return false;
+        return Repeat(s, q, notBrace, 1, 30, [&](size_t r) {
+            m.group[2] = Span(s, q, r);
+            if (!Lit(s, r, "{/rt}")) return false;
+            size_t e = r;
+            while (Take(s, e, IsHiraganaClass)) {
+            }
+            m.group[3] = Span(s, r, e);
+            m.group[4] = s.substr(e);
+            m.end = e;
+            return true;
+        });
+    });
+}
+
 }  // namespace
 
 std::string StripRuby(std::string_view line) {
@@ -100,3 +149,19 @@ std::string StripRuby(std::string_view line) {
 }
 
 }  // namespace hdTrans::pipeline::internal
+
+namespace hdTrans::pipeline {
+
+std::string JoinBraceRuby(std::string_view line, BaseContinues continues, const void* context) {
+    if (line.find("{rb}") == std::string_view::npos) return std::string(line);
+    return internal::ReplaceAll(line, internal::BraceRuby, [&](const internal::Match& m) {
+        const std::string_view base = m.group[1], kana = m.group[3];
+        const std::string_view after = line.substr(line.size() - m.group[4].size() - kana.size());
+        const bool join = !kana.empty() && !internal::ParticleStart(kana) && !internal::NameSuffixStart(after) &&
+                          (text::RuneCount(base) == 1 || continues(context, base, kana));
+        if (!join) return internal::Cat({"{rb}", base, "{/rb}{rt}", m.group[2], "{/rt}", kana});
+        return internal::Cat({"{rb}", base, kana, "{/rb}{rt}", m.group[2], kana, "{/rt}"});
+    });
+}
+
+}  // namespace hdTrans::pipeline

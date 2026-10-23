@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+normalize:katakana-adjective	しかし、この硬い地面はマズイ。	하지만, 이 딱딱한 땅은 큰일이다.	fix	normalize
+normalize:katakana-adjective	マズイ飯は嫌だ。	맛이 없는 밥은 싫다.	fix	normalize
+normalize:katakana-adjective	それはマズイって！	그것은 큰일이라고!	fix	normalize
+normalize:katakana-adjective	ツラいな。	괴롭네.	fix	normalize
+normalize:katakana-adjective	セコイアの木だ。	세쿼이아의 나무다.	keep	normalize

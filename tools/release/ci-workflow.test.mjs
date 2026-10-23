@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import { npmAssetName } from './publication.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const build = readFileSync(join(root, '.github/workflows/build.yml'), 'utf8');
@@ -109,14 +110,27 @@ test('dry runs, PRs and branch builds cannot publish stable releases or npm', ()
     ['workflow_dispatch', 'refs/heads/main', false, false],
     ['push', 'refs/heads/main', false, false],
     ['pull_request', 'refs/pull/1/merge', false, false],
-    ['push', 'refs/heads/develop', false, true],
+    ['push', 'refs/heads/develop', false, false],
+    ['workflow_dispatch', 'refs/heads/develop', false, false],
   ];
   for (const [event_name, ref, dry_run, expected] of cases) {
     const github = { event_name, ref };
     assert.equal(canRelease(github, { dry_run }, (a, b) => a.startsWith(b)), expected);
     if (expected) assert.equal(canPackage(github, (a, b) => a.startsWith(b)), true);
   }
-  assert.match(build, /dry_run: \$\{\{ inputs.dry_run \|\| false \}\}/);
+});
+
+test('a develop push packages as a dry run and never publishes or moves a tag', () => {
+  const startsWith = (a, b) => a.startsWith(b);
+  const passDryRun = new Function('github', 'inputs', 'startsWith',
+    `return (${build.match(/^      dry_run: \$\{\{ (.*) \}\}$/m)[1]});`);
+  const develop = { event_name: 'push', ref: 'refs/heads/develop' };
+  assert.equal(canPackage(develop, startsWith), true);
+  assert.equal(passDryRun(develop, {}, startsWith), true);
+  assert.equal(canRelease(develop, { dry_run: false }, startsWith), false);
+  assert.equal(passDryRun({ event_name: 'push', ref: 'refs/tags/v1.2.3' }, { dry_run: false }, startsWith), false);
+  assert.equal(passDryRun({ event_name: 'workflow_dispatch', ref: 'refs/heads/main' }, { dry_run: false }, startsWith), true);
+  assert.doesNotMatch(build + release, /nightly|updateRef|createRef|prerelease: true/);
 });
 
 test('publication uses this run artifact and only its job enters the global non-cancelling queue', () => {
@@ -141,9 +155,56 @@ test('source checks bind both tag pipelines to the checked out commit and main a
   assert.match(publisherJob, /npm publish "\$PACKAGE" --access public --provenance --tag "\$DIST_TAG"/);
 });
 
-test('only the release mutation job serializes stable and nightly publication separately', () => {
+test('only the release mutation job enters the release queue', () => {
   const mutation = release.slice(release.indexOf('\n  release:\n'));
   assert.doesNotMatch(release.slice(0, release.indexOf('\n  release:\n')), /concurrency:/);
-  assert.match(mutation, /group: github-release-\$\{\{ github.ref == 'refs\/heads\/develop' && 'nightly' \|\| 'stable' \}\}/);
+  assert.match(mutation, /group: github-release\n/);
   assert.match(mutation, /queue: max\n      cancel-in-progress: false/);
+});
+
+test('the packed npm package is uploaded and summed under the name the publisher verifies', () => {
+  const name = npmAssetName('$version');
+  assert.ok(release.includes(`mv "build/release/hdtrans-$version.tgz" "build/release/${name}"`));
+  assert.ok(release.includes(`sha256sum "${name}" >> SHA256SUMS.txt`));
+});
+
+const deployWeb = readFileSync(join(root, '.github/workflows/deploy-web.yml'), 'utf8');
+const deployJob = deployWeb.slice(deployWeb.indexOf('\n  deploy:\n'));
+const canDeployWeb = new Function('github', `return (${foldedCondition(deployWeb)});`);
+
+test('the web deploy follows a successful tag pipeline of this repository or a manual run on develop', () => {
+  const triggers = deployWeb.slice(deployWeb.indexOf('\non:\n'), deployWeb.indexOf('\npermissions:'));
+  assert.match(triggers, /  workflow_run:\n    workflows: \[Publish npm\]\n    types: \[completed\]/);
+  assert.match(triggers, /  workflow_dispatch:/);
+  assert.doesNotMatch(triggers, /pull_request|push:|release:/);
+  const run = (event, conclusion, owner = 'sokcuri/hdTrans') => ({
+    repository: 'sokcuri/hdTrans', event_name: 'workflow_run', ref: 'refs/heads/develop',
+    event: { workflow_run: { event, conclusion, head_repository: { full_name: owner } } },
+  });
+  assert.equal(canDeployWeb(run('push', 'success')), true);
+  assert.equal(canDeployWeb(run('workflow_dispatch', 'success')), false);
+  assert.equal(canDeployWeb(run('push', 'failure')), false);
+  assert.equal(canDeployWeb(run('pull_request', 'success')), false);
+  assert.equal(canDeployWeb(run('push', 'success', 'someone/hdTrans')), false);
+  assert.equal(canDeployWeb({ ...run('push', 'success'), repository: 'someone/hdTrans' }), false);
+  const dispatch = ref => ({ repository: 'sokcuri/hdTrans', event_name: 'workflow_dispatch', ref, event: {} });
+  assert.equal(canDeployWeb(dispatch('refs/heads/develop')), true);
+  assert.equal(canDeployWeb(dispatch('refs/heads/ci/x')), false);
+  assert.equal(canDeployWeb(dispatch('refs/tags/v1.2.3')), false);
+});
+
+test('only the serialized web deploy job sees the deploy secrets and the example texts', () => {
+  assert.equal((deployWeb.match(/secrets\./g) ?? []).length, (deployJob.match(/secrets\./g) ?? []).length);
+  assert.match(deployJob, /environment:\n      name: web/);
+  assert.match(deployJob, /concurrency:\n      group: deploy-web\$\{\{ inputs.dry_run && '-dry-run' \|\| '' \}\}\n      cancel-in-progress: false/);
+  assert.doesNotMatch(deployJob, /upload-artifact/);
+  assert.match(deployJob, /web\/deploy\.sh examples "\$RUNNER_TEMP\/web-examples"/);
+  assert.match(deployJob, /StrictHostKeyChecking=yes/);
+  assert.doesNotMatch(deployJob.slice(0, deployJob.indexOf('\n    steps:\n')), /HDTRANS_WEB_HOST/);
+  assert.match(deployJob, /npm --prefix web ci --ignore-scripts/);
+  const recheck = deployJob.indexOf('- name: Confirm the release is still the latest');
+  assert.ok(recheck > 0 && recheck < deployJob.indexOf('- name: Deploy\n'));
+  assert.match(deployJob, /- name: Deploy\n        if: env.DRY_RUN != 'true' && env.SKIP_DEPLOY != 'true'/);
+  assert.match(deployWeb, /^permissions:\n  contents: read\n/m);
+  assert.doesNotMatch(deployWeb, /contents: write|id-token|secrets: inherit/);
 });
