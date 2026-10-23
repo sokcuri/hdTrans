@@ -233,14 +233,31 @@ bool Ordinal(const std::vector<ResolvedItem>& items, int k) {
 }
 
 // A native count and its counter as written (두 마리, 몇 번, 세 번째). One in an ordinal is
-// 첫 and is counted with 번 (첫 번째, not 한 번째 or 한 마리째).
+// 첫 and is counted with 번 (첫 번째, not 한 번째 or 한 마리째); people in an ordinal are
+// counted with 명 (두 명째, not 두 사람째).
 std::string WriteNativeCount(std::string_view count, const NativeCounter& c, bool ordinal) {
     std::string_view form = NativeForm(c);
     if (count == "한" && (ordinal || form.ends_with("째"))) {
         return form.ends_with("째") ? "첫 번째" : "첫 번";
     }
+    if (ordinal && form == "사람") form = "명";
     return std::string(count) + ' ' + std::string(form);
 }
+
+// Whether s is one word of Hangul syllables.
+bool HangulWord(std::string_view s) {
+    if (s.empty()) return false;
+    for (size_t k = 0; k < s.size();) {
+        const auto r = text::DecodeRune(s.substr(k));
+        if (r.cp < 0xAC00 || r.cp > 0xD7A3) return false;
+        k += r.size;
+    }
+    return true;
+}
+
+// A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
+constexpr std::string_view kOneDay = "하루";
+constexpr std::string_view kFirstDay = "첫날";
 
 std::string_view TextTail(const Pieces& p) {
     return !p.empty() && p.back().span == SpanText ? std::string_view(p.back().text) : std::string_view();
@@ -299,8 +316,14 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     const ResolvedItem& item = items[i];
     // A native count read as one word with its counter (一匹 한마리, ２人 두명, 何個 몇개)
     // stands apart from it (한 마리, 두 명, 몇 개).
+    // A count the dictionary reads apart from its counter (一度 한 번, 一枚 한 장, 二人 두 사람)
+    // is written as written but in an ordinal, where any counter after 한 is 첫 번.
+    const bool ordinal = Ordinal(items, i);
+    if (ordinal && t == kOneDay && HasRune(kCountLeads, text::DecodeRune(item.surface).cp)) return std::string(kFirstDay);
     for (const std::string_view count : kNativeCounts) {
-        if (!t.starts_with(count) || t.size() == count.size() || t[count.size()] == ' ') continue;
+        if (!t.starts_with(count) || t.size() == count.size()) continue;
+        const bool apart = t[count.size()] == ' ';
+        if (apart && !ordinal) continue;
         const std::string_view surface = item.surface;
         if (!HasRune(kCountLeads, text::DecodeRune(surface).cp)) break;
         size_t numeral = 0;
@@ -309,10 +332,13 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
             if (!HasRune(kCountLeads, r.cp)) break;
             numeral += r.size;
         }
-        const NativeCounter* c = FindNativeCounter(surface.substr(numeral), std::string_view(t).substr(count.size()));
-        if (c != nullptr && !(c->joins && count == "한" && !Ordinal(items, i))) {
-            t = WriteNativeCount(count, *c, Ordinal(items, i));
+        const std::string_view korean = std::string_view(t).substr(count.size() + (apart ? 1 : 0));
+        if (apart && count == "한") {
+            if (HangulWord(korean)) t = "첫 번";
+            break;
         }
+        const NativeCounter* c = FindNativeCounter(surface.substr(numeral), korean);
+        if (c != nullptr && !(c->joins && count == "한" && !ordinal)) t = WriteNativeCount(count, *c, ordinal);
         break;
     }
     size_t digits = 0;
@@ -554,6 +580,11 @@ std::string Composer::WriteCount(int i, std::string text) const {
     if (!settings_.literal) return text;
     const std::vector<ResolvedItem>& items = *items_;
     const std::vector<TokenText>& tokens = *tokens_;
+    // The 째 of 첫날 is in the count (一日目).
+    if (i > 0 && Ordinal(items, i - 1) && EntryText(items[i - 1]) == kOneDay && std::string_view(text).starts_with("째") &&
+        HasRune(kCountLeads, text::DecodeRune(items[i - 1].surface).cp)) {
+        return text.substr(std::string_view("째").size());
+    }
     text = CountWithin(tokens, items, i, std::move(text));
     const int count = static_cast<int>(items.size());
     if (AllDigits(text) && i + 1 < count && WritesNativeCount(items, tokens, i)) {
@@ -708,6 +739,10 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     const ResolvedItem& next = items[nextIndex];
     if (const int a = tokens[item.tokenIndex].type, b = tokens[next.tokenIndex].type;
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
+        return Result(std::move(t), false);
+    }
+    // The 째 of an ordinal joins the count before it (一度目 첫 번째, 二人目 두 명째).
+    if (nextIndex == i + 1 && Ordinal(items, i) && next.surface.starts_with("目") && EntryText(next).starts_with("째")) {
         return Result(std::move(t), false);
     }
     // The word before a native count stands apart from it (개 두 마리, not 개두 마리), also

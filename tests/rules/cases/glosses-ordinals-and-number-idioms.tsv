@@ -3,3 +3,9 @@ names:reading	猫（タマ）が鳴いた。	고양이(타마)가 울었다.	fix
 names:reading	妹（ゆき）が来た。	여동생(유키)이 왔다.	fix	normalize
 names:reading	誓「ちか」いの言葉と母「はい」の返事。	맹세의 말과 어머니 「네」의 대답.	fix	normalize
 names:reading	天井の梁（はり）から落ちた。	천장의 대들보로부터 떨어졌다.	keep	normalize
+compose:native-count	一日目の朝が来た。	첫날 아침이 왔다.	fix	compose
+compose:native-count	一度目の人生は短かった。	첫 번째의 인생은 짧았다.	fix	compose
+compose:native-count	二人目の子どもが生まれた。	두 명째의 아이가 태어났다.	fix	compose
+compose:native-count	五年目に入る。	5년째에 들어간다.	fix	compose
+compose:native-count	一日で終わった。	하루에 끝났다.	keep	compose
+compose:native-count	二度目のときは遅れた。	두 번째 때는 늦었다.	keep	compose
