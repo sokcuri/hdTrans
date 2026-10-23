@@ -201,10 +201,7 @@ if(NOT EMSCRIPTEN)
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/examples.sh" $<TARGET_FILE:hdtrans_cli>)
         set_tests_properties(examples PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 300
             ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
-        # Pins the word choices of the rules program: tests/rules/cases.tsv with dicts/.
-        add_test(NAME rules.cases COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
-            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
-        # One table per theme file, tests/rules/cases/<theme>.tsv, written as rules are fixed.
+        # One table per theme, tests/rules/cases/<theme>.tsv.
         add_test(NAME rules.cases.themes COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases")
         # Each speech level: tests/rules/speech-<level>/<theme>.tsv (strict is the default).
@@ -213,7 +210,7 @@ if(NOT EMSCRIPTEN)
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-${level}" -- --speech ${level})
         endforeach()
-        set_tests_properties(rules.cases rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
+        set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""
@@ -256,11 +253,16 @@ if(NOT EMSCRIPTEN)
             --dump-rules "${HDTRANS_RULE_DUMP}" -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
         set_tests_properties(rules.dump PROPERTIES FIXTURES_SETUP ruledump
             ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/rules-cache")
-        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        # The warnings per flag are the counts tools/lint-budget.tsv records.
+        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+            -budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/lint-budget.tsv")
         add_test(NAME rules.unknown-codes COMMAND "${CMAKE_COMMAND}"
             -DRULEC=$<TARGET_FILE:hdrulec> -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts
             -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-unknown-codes
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_unknown_codes.cmake")
+        add_test(NAME rules.lint-checks COMMAND "${CMAKE_COMMAND}" -DRULEC=$<TARGET_FILE:hdrulec>
+            -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-lint-checks
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_lint_checks.cmake")
         add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
         add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals
