@@ -58,3 +58,6 @@ sense:short-stature	声が低い。	목소리가 낮다.	keep	senses
 rewrite:quote-to	もっと時間がないと。	좀 더 시간이 없으면.	fix	rewrites
 rewrite:quote-to	「力がないと」	「힘이 없으면」	fix	rewrites
 rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도 없다고.	keep	rewrites
+rewrite:line-initial-to	と一緒に行こう。	와 함께 가자.	fix	rewrites
+rewrite:line-initial-to	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
+rewrite:line-initial-to	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites

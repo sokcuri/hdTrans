@@ -2583,6 +2583,13 @@ void LineInitialTo(Flusher& f) {
             continue;
         }
         const std::string_view next = n->group->surface;
+        // Before a word of company, sameness or difference the と is the comitative going on
+        // from the line before (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
+        constexpr std::string_view kPartnerWords[] = {"一緒", "いっしょ", "共に", "ともに", "同じ", "おなじ", "違",
+                                                      "ちが",  "比べ",     "くらべ", "異な", "似"};
+        if (std::any_of(std::begin(kPartnerWords), std::end(kPartnerWords), [&](std::string_view w) { return next.starts_with(w); })) {
+            continue;
+        }
         if (next.starts_with("…") || next.starts_with("‥") || next.starts_with("と") ||
             (At(n->Code(n->selected), 0) == '4' && (next.starts_with("な") || next.starts_with("す") || next.starts_with("し")))) {
             continue;

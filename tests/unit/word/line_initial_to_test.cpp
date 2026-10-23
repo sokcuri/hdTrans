@@ -14,7 +14,8 @@ HD_TEST(word_line_initial_to_quotes) {
          "と\t(와)과\tP200\tXXX\t\tGN\t0\t1\t\n"
          "と\t(이)라고\tP200\t\t\tGN\t0\t2\t\n"
          "私\t나\tN120\t\t\tGN\t0\t3\t\n"
-         "雨\t비\tN110\t\t\tGN\t0\t4\t\n"},
+         "雨\t비\tN110\t\t\tGN\t0\t4\t\n"
+         "一緒\t함께\tN110\t\t\tGN\t0\t5\t\n"},
     };
     const auto loaded = hdTrans::dict::Load(files);
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
@@ -32,6 +33,8 @@ HD_TEST(word_line_initial_to_quotes) {
         {"××と私", "××와 나"},
         {"「と私」", "「와 나」"},
         {"と……", "와……"},
+        // The comitative before a word of company.
+        {"と一緒", "와 함께"},
     };
     for (const Case& c : cases) {
         const std::string input = c.input;
