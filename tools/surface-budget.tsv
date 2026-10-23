@@ -25,10 +25,10 @@ src/core/output/josa.cpp	0	0	2	0	0	6	0	0	8
 src/core/output/korean.cpp	0	119	0	3	28	0	4	3	48
 src/core/output/marker.cpp	47	90	5	5	47	8	0	55	85
 src/core/output/particle.cpp	0	87	0	1	87	29	6	0	14
-src/core/output/prepass.cpp	135	164	22	14	219	25	8	4	119
+src/core/output/prepass.cpp	135	165	22	14	219	25	8	4	120
 src/core/output/text.cpp	0	0	0	0	0	0	2	0	0
-src/core/pipeline/casual.cpp	285	0	11	13	75	6	4	0	102
-src/core/pipeline/colloquial.cpp	117	0	7	7	53	135	0	0	185
+src/core/pipeline/casual.cpp	287	0	11	13	75	6	4	0	102
+src/core/pipeline/colloquial.cpp	117	0	7	7	53	127	0	0	177
 src/core/pipeline/katakana.cpp	257	0	4	6	223	26	0	2	62
 src/core/pipeline/kin_terms.cpp	10	10	4	2	24	0	0	0	0
 src/core/pipeline/masked.cpp	2	0	0	0	0	0	0	0	2
@@ -40,7 +40,7 @@ src/core/pipeline/restore.h	0	0	0	0	0	0	1	0	0
 src/core/pipeline/ruby.cpp	15	0	5	2	13	4	0	0	10
 src/core/pipeline/runes.h	0	0	1	0	0	0	18	0	2
 src/core/pipeline/segment.cpp	8	0	4	1	6	3	0	0	7
-src/core/pipeline/sound.cpp	195	30	44	12	132	101	18	0	224
+src/core/pipeline/sound.cpp	196	32	44	12	132	101	18	0	227
 src/core/pipeline/sound_lexicon.cpp	0	2	0	0	0	1	0	0	2
 src/core/pipeline/spans.cpp	5	0	0	0	0	15	10	2	14
 src/core/pipeline/speech.cpp	116	0	21	11	103	22	0	0	51

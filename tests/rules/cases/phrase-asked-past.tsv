@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+sound:asked-past	宿題、できた？	숙제, 다 됐어?	fix	sound
+sound:asked-past	「できた？」	「다 됐어?」	fix	sound
+sound:asked-past	ご飯、できた？	밥, 다 됐어?	fix	sound
+sound:asked-past	ヤッタ？	해냈어?	fix	sound
+sound:asked-past	できた！	다 됐다!	keep	sound
+sound:asked-past	できた。	다 됐다.	keep	sound
+sound:asked-past	やった！	해냈다!	keep	sound
+sound:asked-past	まじか？	진짜야?	keep	sound
+sound:exclaim	やった？	했어?	keep	sound
+sound:exclaim	よかった？	좋았어?	keep	sound
+sound:exclaim	よかった！	다행이다!	keep	sound
+sound:asked-past	できた……？	다 됐어……?	fix	sound
+sound:asked-past	できた……	다 됐다……	keep	sound

@@ -7073,7 +7073,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 盾にと	방패로 &FS@	M428			GN				llm			i:7069
 目を輝かせ	눈을 빛&A6@	M427		Pn	GN				llm			i:7070
 いざ行かん	자 가자	A9D0			GN				llm			i:7071
-目を開	눈을 &A8@	M421		Pn	GN				llm			i:7072
+目を開	눈을 &A8@	M421		Pn	GN	6911	||1 &&5 P-1== "1**" ||2 A-1== "VBk" &&3 G-1== "Ct" A-1!= "UMe" S-1!= "R間" P-2== "1**" G-2== "NjNd" D+0= "째를 &LB@"	수와 책, 물건을 세는 조수사 뒤의 目を開く는 서수 目와 開く이므로(시간 길이 뒤는 그대로) ‘째를 열다’로 번역을 바꾼다(3ページ目を開く 3페이지째를 연다).	llm			i:7072
 眼を開	눈을 &A8@	M421		Pn	GN				llm			i:7073
 機を織	베를 &AM@	M428		Pn	GN				llm			i:7074
 しのごの言わず	이러쿵저러쿵 말하지 말고	E300			GN				llm			i:7075

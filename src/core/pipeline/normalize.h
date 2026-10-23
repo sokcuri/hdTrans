@@ -76,7 +76,7 @@ std::string RewriteEmphaticSpellings(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
 // やらねー やらない, 渡しちまった 渡しちゃった, なめんなよ なめるなよ, 貰っとく 貰っておく,
-// 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす).
+// 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす, そだね そうだね).
 std::string RewriteCasual(std::string_view text);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル

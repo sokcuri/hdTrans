@@ -8,6 +8,7 @@
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -103,6 +104,23 @@ bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
 // really"; が、 is a particle), so X、<kanji> is a stutter only for others.
 constexpr std::u32string_view kNotStutters[] = {U"ア", U"ウ", U"エ", U"オ", U"ン", U"ネ", U"デ", U"マ", U"サ",
                                                 U"ヤ", U"ヨ", U"ム", U"ガ", U"ヲ", U"ト", U"ジャ", U"チョ"};
+
+// Whether a question mark stands at q of rs or after an ellipsis there (できた？, できた……？).
+bool AskedAt(std::u32string_view rs, size_t q) {
+    while (q < rs.size() && In(rs[q], U"…‥")) q++;
+    return q < rs.size() && In(rs[q], U"？?");
+}
+
+// korean asked as a casual question when it states a past event in the plain form (다 됐다
+// 다 됐어, 해냈다 해냈어); other Korean unchanged.
+std::string AskedPast(std::string korean) {
+    constexpr std::string_view kPlainEnd = "다";
+    if (!korean.ends_with(kPlainEnd)) return korean;
+    const std::u32string k = DecodeText(std::string_view(korean).substr(0, korean.size() - kPlainEnd.size()));
+    if (k.empty() || text::Final(k.back()) != text::kFinalSsangSiot) return korean;
+    korean.replace(korean.size() - kPlainEnd.size(), std::string_view::npos, "어");
+    return korean;
+}
 
 // A kanji numeral or an ASCII or full-width digit.
 bool NumeralRune(char32_t r) {
@@ -551,9 +569,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
         // (よかった？ 좋았어?); drawn out it stays the exclamation (よかったぁ? 다행이다~?),
         // and so does one in katakana, which no word of the dictionary reads (ヨカッタ？).
         if (ok && s.exclaim && end == p + s.key.size() && IsHiraganaRune(rs_[p])) {
-            size_t q = end;
-            while (q < rs_.size() && In(rs_[q], U"…‥")) q++;
-            if (q < rs_.size() && In(rs_[q], U"？?")) ok = false;
+            if (AskedAt(rs_, end)) ok = false;
+            // A predicate row after a noun in kanji or katakana marked as topic or subject and
+            // a comma or another pause is the predicate (あの頃は、よかった 좋았다); not after a
+            // pronoun in kana (それは、).
+            if (s.predicate && p >= 3 && In(rs_[p - 1], kSoundSeparators) && In(rs_[p - 2], U"はが") &&
+                (text::IsKanji(rs_[p - 3]) || IsKatakanaRune(rs_[p - 3]))) {
+                ok = false;
+            }
         }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
@@ -641,7 +664,9 @@ bool SoundText::NounAt(size_t p, size_t n) const {
 //   - いざ is 막상 in a conditional clause (いざ講義になると), 자 otherwise;
 //   - ただいま is 지금 before a clause (PresentTime), 다녀왔습니다 otherwise;
 //   - はん is a scoff (흥) where it opens an utterance before ！ 、 or 。 and no sound
-//     follows (Scoff), a moan (하앙) otherwise.
+//     follows (Scoff), a moan (하앙) otherwise;
+//   - a phrase that states a past event in the plain form is asked before ？ (できた？
+//     다 됐어?, できた……？, ヤッタ？ 해냈어?); an exclaim row in hiragana is no sound there (やった？).
 std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     const std::u32string_view key = s.key;
     if (key == U"ナッ") {
@@ -668,6 +693,7 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"ハン") {
         if (Scoff(p, end)) return "흥";
     }
+    if (s.phrase && AskedAt(rs_, end)) return AskedPast(s.korean);
     return s.korean;
 }
 

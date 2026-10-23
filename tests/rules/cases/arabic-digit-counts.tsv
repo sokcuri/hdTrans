@@ -19,6 +19,8 @@ compose:native-count	1つください。	1개 주세요.	fix	compose
 compose:native-count	1人目の勇者	1번째의 용사	fix	compose
 compose:native-count-idiom	1人残らず倒した。	한 명 남김없이 쓰러뜨렸다.	fix	compose
 compose:native-count-idiom	敵を1匹残らず倒す。	적을 한 마리 남김없이 넘어뜨린다.	fix	compose
+compose:native-count-idiom	1つ残らず食べた。	하나 남김없이 먹었다.	fix	compose
+compose:native-count-idiom	1つの願い	1개의 소원	keep	compose
 compose:native-count-idiom	1人また1人	한 명 또 한 명	fix	compose
 compose:native-count-idiom	100年に1度の天才。	100년에 한 번의 천재.	fix	compose
 compose:native-count-idiom	1日に1回飲む。	1일에 한 번 마신다.	fix	compose
@@ -29,3 +31,5 @@ compose:native-count-idiom	攻撃に1回耐える。	공격에 1회 참는다.	k
 compose:native-count-idiom	3回も言った。	3회나 말했다.	keep	compose
 compose:native-count-idiom	3度も言った。	3번이나 말했다.	keep	compose
 dict:jisjk:267304	2度と来るな。	두 번 다시 오지 마.	fix	lookup
+compose:native-count-ordinal	1杯目のコーヒー	1잔째의 커피	fix	compose
+compose:native-count-ordinal	1杯	한잔	keep	compose

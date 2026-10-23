@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+dict:no:after-phrase	どうだったの？	어땠어?	fix	local
+dict:no:after-phrase	「中学校はどうだったの？」	「중학교는 어땠어?」	fix	local
+dict:no:after-phrase	どうだったの、それ	어땠어, 그것	fix	local
+dict:no:after-phrase	何だったの？	무엇이었어?	keep	local
+dict:no:after-phrase	東京の人	도쿄의 사람	keep	local

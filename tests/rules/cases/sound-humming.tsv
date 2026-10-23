@@ -1,0 +1,7 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:humming	らんらん♪	란란♪	fix	sound
+sound:humming	らんらんらん♪	란란란♪	fix	sound
+sound:humming	ランランラン！	란란란!	fix	sound
+sound:humming	るんるん♪	룬룬♪	keep	sound
+sound:humming	もう♪	이제♪	keep	sound

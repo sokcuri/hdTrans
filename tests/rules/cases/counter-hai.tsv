@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:116138	2杯目	2잔째	fix	local
+dict:jisjk:116138	コーヒーを3杯飲んだ	커피를 3잔 마셨다	fix	local
+dict:jisjk:116138	優勝杯	우승배	keep	global-stem
+dict:jisjk:116138	二杯	두 잔	keep	local

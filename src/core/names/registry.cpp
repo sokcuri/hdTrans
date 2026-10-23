@@ -434,7 +434,12 @@ std::string Registry::DropReadings(std::string_view line) {
     std::string out;
     std::size_t at = 0;
     for (const Found& x : found) {
-        if (!BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) continue;
+        // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
+        // not 条件 (つよい) or 選択肢 (はい・いいえ)).
+        if (x.m.spaced ? !(SameWord(x.m.base, x.hiragana, line.substr(x.m.end)) || NamedWithSound(x.m.base, x.hiragana))
+                       : !BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) {
+            continue;
+        }
         out.append(line.substr(at, x.m.begin - at));
         out.append(x.m.base);
         at = x.m.end;
