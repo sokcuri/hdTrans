@@ -51,3 +51,5 @@ lexical:kato-spacing	悪戯かと思われたが、犯人が見つからない�
 lexical:kato-spacing	行こうかなと思う。	갈까라고 생각한다.	keep	local-ending
 dict:jisjk:118946	契約の解消と変更をお願いします。	계약 해소와 변경을 부탁드립니다.	fix	local
 dict:jisjk:118946	名前をタロウと変更した。	이름을 타로우라고 변경했다.	keep	local
+sense:short-stature	身長も低い訳ではない。	키도 작은 것은 아니다.	fix	senses
+sense:short-stature	声が低い。	목소리가 낮다.	keep	senses
