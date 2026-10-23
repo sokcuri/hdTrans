@@ -325,6 +325,19 @@ std::string QuotePassive(const Item* it, std::string_view head, std::string_view
     return h + (stative ? "라고들 &AV@" : comma ? "라고 &AV@" : "라는 말을 &J6@");
 }
 
+// The object of 듣다 for the Korean head of an object word in 言 before its 하다: the object
+// with its particle (비꼬는 말을), without the 말 of 말하다 after it (의견을 말 의견을), or a
+// bare noun of 하다 with 을/를 (불평 불평을).
+std::string HeardObject(std::string_view head) {
+    if (head.empty() || head.ends_with(" ")) return std::string(head);
+    for (const std::string_view p : {"을 말", "를 말"}) {
+        if (head.ends_with(p)) return std::string(head.substr(0, head.size() - std::string_view("말").size()));
+    }
+    const int final = text::Final(DecodeLastRune(head).cp);
+    if (final < 0) return std::string(head);
+    return std::string(head) + (final == text::kFinalNone ? "를 " : "을 ");
+}
+
 // The passive of a word in 言 (言う with what is said before it) has no 지다 passive in
 // Korean: after a quote it is 불리다 before a noun it describes (無口と言われた下女 과묵이라고
 // 불린 하녀) and otherwise QuotePassive; after an object 하다 becomes 듣다 (嫌味を言われる
@@ -343,7 +356,7 @@ void SayPassive(Item* it) {
                                                   : QuotePassive(it, t.substr(0, q), rest);
             targets.push_back(target.empty() ? std::string(t) : std::move(target));
         } else if (object && t.ends_with("&AV@")) {
-            targets.push_back(std::string(t.substr(0, t.size() - std::string_view("&AV@").size())) + "&J6@");
+            targets.push_back(HeardObject(t.substr(0, t.size() - std::string_view("&AV@").size())) + "&J6@");
         } else {
             return;
         }

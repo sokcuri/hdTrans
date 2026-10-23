@@ -9,3 +9,5 @@ rewrite:say-passive	その威力は圧倒的と言われていたけれど、出
 rewrite:say-passive	平が氏と言われ、一族のルーツを示す。	평이 씨라고 불려 일족의 루트를 나타낸다.	fix	rewrites
 rewrite:say-passive	王子は天才と言われている。	왕자는 천재라고 불리고 있다.	keep	rewrites
 rewrite:say-passive	382さんは10体くらいと言われていましたが	382 씨는 10체 정도라고 말했습니다만	keep	rewrites
+rewrite:say-passive	文句を言われた。	불평을 들었다.	fix	rewrites
+rewrite:say-passive	本音を言われると困る。	속마음을 들으면 곤란하다.	fix	rewrites
