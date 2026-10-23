@@ -1,0 +1,18 @@
+rule	input	expected	kind	layer
+compose:native-count	2回まで使用可能。	2회까지 사용 가능.	fix	compose
+compose:native-count	攻撃回数：2回	공격 횟수：2회	fix	compose
+compose:native-count	3回行動するまで持続。	3회 행동할 때까지 지속.	fix	compose
+compose:native-count	1日3回まで挑戦できる。	1일 3회까지 도전할 수 있다.	fix	compose
+compose:native-count	カードを7枚引く。	카드를 7장 뽑는다.	fix	compose
+compose:native-count	ポーションを1個手に入れた。	포션을 1개 손에 넣었다.	fix	compose
+compose:native-count	3人パーティー	3명 파티	fix	compose
+compose:native-count	10回敗北すると終了。	10회 패배하면 종료.	keep	compose
+compose:native-count	ポーションを25個手に入れた。	포션을 25개 손에 넣었다.	keep	compose
+compose:native-count	二匹の猫がいる。	두 마리의 고양이가 있다.	keep	compose
+compose:native-count	二人きりだ。	단둘이다.	keep	compose
+compose:native-count	一つください。	하나 주세요.	keep	compose
+dict:jisjk:264015	一度も見ていない。	한 번도 보지 않았다.	fix	lookup
+dict:jisjk:264868	1度も負けていない。	한 번도 지지 않았다.	fix	lookup
+compose:native-count	1度だけ見た。	1번만 보았다.	fix	compose
+compose:native-count	1つください。	1개 주세요.	fix	compose
+compose:native-count	1人目の勇者	1번째의 용사	fix	compose

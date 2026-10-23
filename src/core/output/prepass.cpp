@@ -225,18 +225,18 @@ const NativeCounter* FindNativeCounter(std::string_view counter, std::string_vie
 constexpr std::string_view kNativeCounts[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "몇", "여러"};
 constexpr std::u32string_view kCountLeads = U"0123456789０１２３４５６７８９一二三四五六七八九十何数幾";
 
-// The native Korean numeral that a count of one to nine written in digits or kanji
-// reads before a native counter (二 두, 3 세); 十 reads 열. Empty for any other number.
+// The native Korean numeral that a count of one to nine written in kanji reads before a
+// native counter (二 두, 三 세); 十 reads 열. Empty for any other number, and for a number
+// written in Arabic digits, which stays in digits (2回 2회, 7枚 7장, 1個 1개) as a number
+// does in a count, a table or a rule text, where the digits of one to nine and of larger
+// numbers would otherwise mix.
 std::string_view NativeNumeral(std::string_view digits, std::string_view surface) {
     constexpr std::string_view kNative[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉"};
     if (surface == "十" && digits == "10") return "열";
     if (digits.size() != 1 || digits[0] == '0') return {};
     for (size_t k = 0; k < surface.size();) {
         const auto r = text::DecodeRune(surface.substr(k));
-        if (!(r.cp >= U'0' && r.cp <= U'9') && !(r.cp >= U'０' && r.cp <= U'９') &&
-            !HasRune(U"一二三四五六七八九", r.cp)) {
-            return {};
-        }
+        if (!HasRune(U"一二三四五六七八九", r.cp)) return {};
         k += r.size;
     }
     return kNative[digits[0] - '1'];
@@ -285,6 +285,9 @@ bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
     return std::any_of(std::begin(kSuruStarts), std::end(kSuruStarts),
                        [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
 }
+
+// Kanji counters read in Sino-Korean that a number joins (2000년, 14일째, 3회).
+constexpr std::u32string_view kSinoCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
 
 // The kanji digits a number is written with digit by digit (二〇二六).
 constexpr std::u32string_view kNumerals = U"〇○一二三四五六七八九";
@@ -460,9 +463,10 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
            dict::Written(r.cp) == text::DecodeRune(EntryText(b)).cp;
 }
 
-// A number and its counter read as one word (三箇所 3군데, 八本 8 개, ２人 2명): a count
-// of one to nine counted natively is written in native Korean apart from the counter
-// (세 군데, 여덟 개, 두 명), a larger one in digits joined to it.
+// A number and its counter read as one word (三箇所 3군데, 八本 8 개, 二人 2명): a count
+// of one to nine in kanji counted natively is written in native Korean apart from the
+// counter (세 군데, 여덟 개, 두 명), a larger one or one in Arabic digits (２人 2명) in digits
+// joined to it.
 std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i,
                         std::string t) {
     const ResolvedItem& item = items[i];
@@ -509,7 +513,9 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     if (c == nullptr || numeral == surface.size()) return t;
     if (InsideNumber(tokens, item) || CompoundAfter(items, i, *c)) return t;
     const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
-    if (native.empty()) return t.substr(0, digits) + std::string(counter);
+    // A number in digits stays in digits; in an ordinal its counter is read as after a native
+    // numeral (1回目 1번째 as 2回目 2번째).
+    if (native.empty()) return t.substr(0, digits) + std::string(Ordinal(items, i) ? NativeForm(*c) : counter);
     return WriteNativeCount(native, *c, Ordinal(items, i));
 }
 
@@ -926,9 +932,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         }
         if (!EntryText(items[j]).empty()) break;
     }
-    // A count before a native counter: one to nine, written in native Korean by WriteCount,
-    // and 몇 or 여러 stand apart from the counter (二匹 두 마리, 3回 세 번, 何匹 몇 마리), a
-    // larger number in digits joins it (20마리). A number inside a longer one or a range
+    // A count before a native counter: one to nine in kanji, written in native Korean by
+    // WriteCount, and 몇 or 여러 stand apart from the counter (二匹 두 마리, 三回 세 번, 何匹 몇
+    // 마리), a number in digits joins it (20마리, 3回 3회). A number inside a longer one or a range
     // (第2回, 1、2個, 2～3本) or before a compound stays as it is.
     if (settings_.literal && FindNativeCounter(next.surface, EntryText(next)) != nullptr) {
         if (t.find(' ') == std::string::npos && WritesNativeCount(items, tokens, i)) return Result(std::move(t), true);
@@ -1009,10 +1015,9 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // 후, 14일째) unless it is the verbal noun of the predicate (1 회복했다), and an ordinal
     // after 第 joins the noun it numbers (제17구축대, 제1함대).
     if (settings_.literal && AllDigits(t) && nextKind == '1') {
-        constexpr std::u32string_view kCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
         const char32_t lead = text::DecodeRune(next.surface).cp;
         const bool ordinal = previous >= 0 && items[previous].surface == "第";
-        if (IsKanji(lead) && (ordinal || HasRune(kCounters, lead)) &&
+        if (IsKanji(lead) && (ordinal || HasRune(kSinoCounters, lead)) &&
             dict::Written(lead) == text::DecodeRune(EntryText(next)).cp && (ordinal || !PredicateNoun(items, nextIndex))) {
             return Result(std::move(t), false);
         }
@@ -1156,10 +1161,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                     item.tokenIndex - items[previous].tokenIndex == 1) {
                     t.insert(0, " ");
                 }
-                // A number is written apart from a following one-word predicate (12 올랐다,
-                // 0600 같다); a counter (3개, 10엔인) and a predicate that starts with the noun it
-                // counts (3시간 들였다) stay attached.
-                const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
+                // A number is written apart from a following one-word predicate or adverb (12 올랐다,
+                // 0600 같다, 1개 주세요); a counter (3개, 10엔인) and a predicate that starts with
+                // the noun it counts (3시간 들였다) stay attached.
+                const bool adverb = nextKind == '3' && !Contains(nextTags, "Ct") &&
+                                    !HasRune(kSinoCounters, text::DecodeRune(next.surface).cp);
+                const bool predicate = nextKind == '4' || adverb || (nextKind == '7' && next.surface != "円");
                 return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
             if (nd(nextTags)) return Result(std::move(t), true);

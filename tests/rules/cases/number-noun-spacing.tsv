@@ -16,9 +16,9 @@ compose:number-noun	≫372過疎	≫372 과소	fix	compose
 lookup:count-word	HPが1回復した。	HP가 1 회복했다.	fix	lookup
 lookup:count-word	HPが1回復。	HP가 1 회복.	fix	lookup
 lookup:count-word	1回転する。	1 회전한다.	fix	lookup
-lookup:count-word	1回復活した。	한 번 부활했다.	keep	lookup
+lookup:count-word	1回復活した。	1회 부활했다.	keep	lookup
 lookup:count-word	一回復習した。	한 번 복습했다.	keep	lookup
-lookup:count-word	1回見た。	한 번 보았다.	keep	lookup
+lookup:count-word	1回見た。	1회 보았다.	keep	lookup
 compose:number-noun	Lv2スキルを覚えた。	Lv2 스킬을 배웠다.	fix	compose
 compose:number-noun	レベル2魔法だ。	레벨 2 마법이다.	fix	compose
 compose:number-label	５/１４　２３：４０追記	5/14 23：40 추기	fix	compose

@@ -61,7 +61,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
 1号南	1고우미나미	N130	QCTVPl		GN				jisjk:268539		
 1回	1회	N110		CtNjNd	GN				jisjk:344600		
 1回	한번	N110		Ct	GN	3611	||1 S+1== "も"	1回 다음에 も가 오면 한번을 고른다. (미발동: rare-context)	jisjk:344601		
-1度も	한번도	I110			GN				jisjk:264868		
+1度も	한 번도	I110			GN				jisjk:264868		
 1戸建ての家	단독주택	I110	VBlVPl		GN				jisjk:260261		
 1条	1조	N110			GN				jisjk:268540		
 1杯	한잔	N110			GN				jisjk:103802		
@@ -94572,7 +94572,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一回	1회	N110	XXX	CtNjNd	GN				jisjk:125791		
 一回	1회	N110		Bh	GN	2456	||1 P+1== "4**7**8**"	一回는 동사·형용사·형용동사 앞에서 ‘1회’를 고른다.	jisjk:266039		
 一回きり	일회뿐	N110			GN				jisjk:125795		
-一回も	한번도	E300			GN				jisjk:257745		
+一回も	한 번도	E300			GN				jisjk:257745		
 一回り	한층	E300			GN				jisjk:80465		
 一回り以上大き	한층 $A9@	H7N0			GN				jisjk:137752		
 一回り小さ	한결 $DA@	H7N0			GN				jisjk:139092		
@@ -94784,7 +94784,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一度	한 번	E300	UMe		GN				jisjk:122812		
 一度だけの	한 번 뿐인	C0D1			GN				jisjk:4738		
 一度でいいから	한번만 이라도	E300			GN				jisjk:375359		
-一度も	한번도	E300			GN				jisjk:264015		
+一度も	한 번도	E300			GN				jisjk:264015		
 一度やられたことあ	한 번 당한 일이 &HN@	M428			GN				jisjk:144379		
 一座	일좌	N110			GN				jisjk:104724		
 一庫	히토구라	N130			GN				jisjk:104729		

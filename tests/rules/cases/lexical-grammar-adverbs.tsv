@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:w:26715	完全に忘れていた。	완전히 잊고 있었다.	fix	lookup
-dict:jisjk:267369	三年近く会っていない。	3년가까이 만나지 않았다.	fix	local
+dict:jisjk:267369	三年近く会っていない。	3년 가까이 만나지 않았다.	fix	local
 dict:gram:shintai:mom	身体が重い。	몸이 무겁다.	fix	local
 dict:gram:shintai:mom	身体強化の魔法を使う。	신체 강화의 마법을 쓴다.	keep	local
 rewrite:not-yet	彼は全然気付かない。	그는 전혀 깨닫지 못한다.	fix	rewrites
