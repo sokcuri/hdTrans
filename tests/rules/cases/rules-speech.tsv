@@ -6,3 +6,5 @@ compose:speech-old-marker	「これは私の剣である」	「이건 내 검이
 compose:speech-casual-marked	「そうじゃん。分かった」	「그렇잖아. 알았어」	fix	compose
 compose:speech-casual-marked	「行くの？」	「가는 거야?」	fix	compose
 compose:speech-polite	「今日は暑いですね。帰る」	「오늘은 덥네요. 돌아간다」	keep	compose
+compose:speech-ssu-polite	「了解っす」	「알겠어요」	keep	compose
+compose:speech-ssu-polite	「そうっすね」	「그렇네요」	keep	compose
