@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:i:7786	それは癪に触った。	그것은 화가 났다.	fix	defaults
 dict:i:7775	そんな曰く付きのビルらしい。	그런 사연 있는 빌딩인 것 같다.	fix	defaults
-dict:i:7778	何はともあれ、無事でよかった。	아무튼, 무사하고 잘되었다.	fix	defaults
+dict:i:7778	何はともあれ、無事でよかった。	아무튼, 무사해서 잘되었다.	fix	defaults
 dict:i:7779	本が所狭しと並んでいる。	책이 빼곡히 줄지어 있다.	fix	defaults
 dict:i:7780	身体を壊したら元も子もないですよ。	몸을 망가뜨리면 다 소용없어요.	fix	defaults
 dict:i:7781	失敗したら冗談じゃ済まないわよ。	실패하면 웃고 넘길 일이 아니야.	fix	defaults
