@@ -143,6 +143,30 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
     }
 }
 
+// A count word whose counter starts a verbal noun that goes on past it (1回 of 1回復) gives
+// way to the number and the noun; where the noun goes on with a kanji the count stays
+// (1回復活 한 번 부활).
+HD_TEST(word_count_word_before_verbal_noun) {
+    const auto loaded = hdTrans::dict::Load({{0, "base.tsv",
+        "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+        "1回\t1회\tN110\t\tCtNjNd\tGN\t0\t1\n"
+        "回\t회\tN110\t\tCt\tGN\t0\t2\n"
+        "回復\t회복\tN110\t\tHd\tGN\t0\t3\n"
+        "復\t갚&AA@\tM439\t\t\tGN\t0\t4\n"
+        "復活\t부활\tN110\t\tHd\tGN\t0\t5\n"
+        "。\t.\tE000\t\t\tGN\t0\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"1回復した。", "1 회복."},
+                                          std::pair<std::string, std::string_view>{"1回復活。", "한 번 부활."}}) {
+        hdTrans::internal::TranslationOptions options;
+        hdTrans::internal::Memory memory;
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        HD_REQUIRE(out.size() == 1);
+        HD_CHECK_EQ(out[0], std::string(expected));
+    }
+}
+
 HD_TEST(word_improvements_forward_terminal_order) {
     using namespace hdTrans;
     const auto loaded = dict::Load({{0, "base.tsv",

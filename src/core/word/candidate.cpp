@@ -748,6 +748,44 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
     return true;
 }
 
+// Whether the counter of a count word that is the longest word at the number (1回 of 1回復した,
+// but not of 一回転 일회전) starts a verbal noun of the dictionary that goes on past it (回復)
+// and is followed by its する, a particle, a mark or nothing: the number counts the action of
+// that noun (HPが1回復 1 회복), and the count word is no word there. text is the text the
+// words start; a noun that goes on with a kanji or a verb stem after the count keeps the count
+// (1回復活, 3回避けた).
+bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::string_view text) {
+    std::size_t count = 0, longest = 0;
+    for (Record* r = records; r != nullptr; r = r->child) {
+        longest = std::max(longest, r->source.size());
+        if (r->source.size() > number.source.size() && std::string_view(r->source).starts_with(number.source) &&
+            Has(r->attr, "Ct")) {
+            count = std::max(count, r->source.size());
+        }
+    }
+    if (count == 0 || count != longest ||
+        count != number.source.size() + FirstChar(text.substr(number.source.size())).size()) {
+        return false;
+    }
+    const std::string_view rest = text.substr(number.source.size());
+    const Lookup l = DoLookup(rest, kModeGeneral);
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        if (r->source.size() + number.source.size() <= count || !Has(r->attr, "Hd") || r->partCode.empty() ||
+            r->partCode[0] != 'N' || !rest.starts_with(r->source)) {
+            continue;
+        }
+        const std::string_view after = rest.substr(r->source.size());
+        constexpr std::string_view kFollowers[] = {"し", "す", "さ", "せ", "でき", "を", "が", "の", "に", "は", "も", "で", "と", "へ"};
+        const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
+        const bool mark = next != 0 && !text::IsKanji(next) && (next < U'\u3041' || next > U'\u30FF');
+        if (after.empty() || mark ||
+            std::any_of(std::begin(kFollowers), std::end(kFollowers), [&](std::string_view f) { return after.starts_with(f); })) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
 bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent) {
@@ -781,7 +819,8 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     }
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         const Lookup dictionary = DoLookup(text, kModeGeneral);
-        if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text)) {
+        if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text) ||
+            VerbalNounAtCounter(dictionary.records, *numeric, text)) {
             return ProcessCandidateRecord(full, cursor, token, numeric, parent);
         }
         found = dictionary;

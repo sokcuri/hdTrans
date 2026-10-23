@@ -110,6 +110,7 @@ private:
     void BuildSurfaceTransform(int token, std::string_view surface);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
+    bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);

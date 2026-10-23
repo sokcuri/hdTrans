@@ -255,6 +255,16 @@ bool HangulWord(std::string_view s) {
     return true;
 }
 
+// Whether item n is a verbal noun that is the predicate: one with する after it, or one that
+// ends its word run (HPが1回復した, HPが1回復).
+bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
+    if (!Contains(GAttr(items[n]), "Hd")) return false;
+    if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return true;
+    constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
+    return std::any_of(std::begin(kSuruStarts), std::end(kSuruStarts),
+                       [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
+}
+
 // The kanji digits a number is written with digit by digit (二〇二六).
 constexpr std::u32string_view kNumerals = U"〇○一二三四五六七八九";
 
@@ -306,16 +316,7 @@ bool CountedNoun(const std::vector<TokenText>& tokens, const std::vector<Resolve
     if (!IsKanji(lead) && tokenizer::Class(lead) != tokenizer::kClassKatakana) return false;
     const std::string_view code = Code(b), tags = GAttr(b);
     if (code.size() < 2 || code[0] != '1' || code[1] == '3' || Contains(tags, "Wa") || Contains(tags, "Wb")) return false;
-    if (Contains(tags, "Hd")) {
-        if (n + 1 >= static_cast<int>(items.size())) return false;
-        const ResolvedItem& c = items[n + 1];
-        constexpr std::string_view kSuruStarts[] = {"し", "す", "さ", "せ", "でき"};
-        if (c.tokenIndex != b.tokenIndex ||
-            std::any_of(std::begin(kSuruStarts), std::end(kSuruStarts), [&](std::string_view p) { return c.surface.starts_with(p); })) {
-            return false;
-        }
-    }
-    return true;
+    return !PredicateNoun(items, n);
 }
 
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.
@@ -909,13 +910,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         }
     }
     // A number joins a noun after it that starts with a counter read in Sino-Korean (2000년
-    // 후, 14일째), and an ordinal after 第 joins the noun it numbers (제17구축대, 제1함대).
+    // 후, 14일째) unless it is the verbal noun of the predicate (1 회복했다), and an ordinal
+    // after 第 joins the noun it numbers (제17구축대, 제1함대).
     if (settings_.literal && AllDigits(t) && nextKind == '1') {
         constexpr std::u32string_view kCounters = U"年日月週時分秒歳才回度個本匹頭枚冊台件名倍階号番章話巻隻杯体人";
         const char32_t lead = text::DecodeRune(next.surface).cp;
         const bool ordinal = previous >= 0 && items[previous].surface == "第";
         if (IsKanji(lead) && (ordinal || HasRune(kCounters, lead)) &&
-            dict::Written(lead) == text::DecodeRune(EntryText(next)).cp) {
+            dict::Written(lead) == text::DecodeRune(EntryText(next)).cp && (ordinal || !PredicateNoun(items, nextIndex))) {
             return Result(std::move(t), false);
         }
     }
