@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+dict:jisjk:265559	そうした作業に五日ほど掛かった。	그러한 작업에 닷새 정도 걸렸다.	fix	local
+dict:jisjk:265559	兎の体が三つほど手に入った。	rule:dict:jisjk:265559=정도	fix	local
+dict:jisjk:265559	お前ほど強くない。	!rule:dict:jisjk:265559	keep	local
+dict:w:26740	飲みやすいから、二樽は欲しいんだが	rule:dict:w:26740=통	fix	local
+dict:jisjk:104697	ウォーベアの一頭が反撃を試みた。	워베아의 한 마리가 반격을 시도했다.	fix	lookup
+dict:jisjk:160410	二体の木彫りの神を祀る。	두 체의 목각의 신을 모신다.	fix	lookup
