@@ -418,21 +418,30 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// そ before the copula at the start of a clause: そう said short (そだね, そだった, そであった,
-// そでもない, そじゃない). Not the verb 育つ (そだって, そだてる) nor the noun 袖 (そでを).
+// そ before the copula where a sentence or a clause starts after punctuation (spaces after it
+// allowed): そう said short (そだね, そだった, そであった, そでもない, そじゃない). そだった only
+// ends a sentence (before its end, ね, よ, っけ, 」 or …) and not after 、, where it is the
+// verb 育つ (大きく、そだった); そでも only before ない (not the noun 袖: そでも ぬれた). Not
+// after a word and a space (むらで そだった).
 bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
+    size_t start = pos;
+    while (start > 0 && In(Before(s, start), U" 　")) start -= LastRune(s.substr(0, start)).size;
+    const char32_t lead = Before(s, start);
+    if (start > 0 && !In(lead, U"「『（。！？!?…‥、")) return false;
     size_t p = pos;
-    if (!ClauseStart(s, pos) || !Lit(s, p, "そ")) return false;
+    if (!Lit(s, p, "そ")) return false;
     const size_t so = p;
     bool copula = false;
     if (size_t q = p; Lit(s, q, "だ")) {
         if (size_t r = q; Lit(s, r, "った")) {
-            copula = true;
+            size_t k = r;
+            copula = lead != U'、' && (r >= s.size() || In(At(s, r).cp, U"ねよ」』。！？!?…‥") || Lit(s, k, "っけ"));
         } else {
             copula = q >= s.size() || In(At(s, q).cp, U"ねよなけろ") || !IsHiraganaRune(At(s, q).cp);
         }
     } else if (size_t r = p; Lit(s, r, "で")) {
-        copula = r < s.size() && In(At(s, r).cp, U"あしも");
+        size_t n = r;
+        copula = r < s.size() && (In(At(s, r).cp, U"あし") || (Lit(s, n, "も") && Lit(s, n, "な")));
     } else if (size_t t = p; Lit(s, t, "じゃ")) {
         copula = true;
     }

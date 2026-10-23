@@ -4,3 +4,9 @@ normalize:so-copula	うん、そだね。	응, 그러게.	fix	fixed
 normalize:so-copula	そでもない？	그렇지도 않아?	fix	defaults
 normalize:so-copula	そでを捲る	소매를 걷는다	keep	defaults
 normalize:so-copula	子どもがそだつ	아이가 자란다	keep	defaults
+normalize:so-copula	そだったね	그랬네	fix	defaults
+normalize:so-copula	この むらで そだった	이 마을에서 자랐다	keep	defaults
+normalize:so-copula	そだった木	자란 나무	keep	defaults
+normalize:so-copula	大きく、そだった	크고, 자랐다	keep	defaults
+normalize:so-copula	服の そでも ぬれた	옷의 소매도 젖었다	keep	defaults
+normalize:so-copula	こどもは すくすく そだった	어린이는 무럭무럭 자랐다	keep	defaults
