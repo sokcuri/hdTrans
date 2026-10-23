@@ -56,3 +56,11 @@ sense:通らない	声が通らない。	목소리가 통하지 않는다.	keep	
 lexical:it-loanword	本番環境にデプロイした。	운영 환경에 디플로이했다.	fix	defaults
 lexical:it-loanword	イシューを閉じた。	이슈를 닫았다.	fix	defaults
 lexical:it-loanword	イシューをクローズした。	이슈를 클로즈했다.	fix	defaults
+sense:保存	古い写真の保存状態	오래된 사진 보존 상태	fix	senses
+sense:クラス	プログラムの授業で、クラスのみんなと	프로그램의 수업에서, 반 모두와	fix	senses
+sense:クラス	プログラマーはクラスで一番人気だ	프로그래머는 반에서 제일 인기다	fix	senses
+sense:クラス	クラスを定義する。	클래스를 정의한다.	keep	senses
+sense:クラス	クラスのメソッドを呼ぶ。	클래스의 메소드를 부른다.	keep	senses
+sense:保存	設定を保存した。	설정을 저장했다.	keep	senses
+sense:クラス	クラス名を変える。	클래스명을 바꾼다.	keep	senses
+sense:クラス	クラスに5名いる。	반에 다섯 명 있다.	keep	senses
