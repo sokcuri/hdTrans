@@ -125,6 +125,9 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         if (x != nullptr && x->group->surface == "、" && At(it->Code(it->selected), 0) == '1') {
             const Item* y = step(x);
             if (y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') return SenseTriggers(y, it, s);
+            // A comma right after the noun drops its particle (背、伸びたね): the predicate after it
+            // is still the noun's own.
+            if (n == 0 && s.side == userdict::Side::After) continue;
         }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
