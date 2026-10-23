@@ -27,3 +27,24 @@ lexical:it-loanword	後輩氏の炎上プロジェクトの後始末	후배 씨 
 lexical:it-loanword	資料もなく作業して炎上しない訳が無い。	자료도 없게 작업해 불타오르지 않을 리가 없다.	fix	defaults
 lexical:it-loanword	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
 lexical:it-loanword	ソフトをインストールした。	소프트를 설치했다.	keep	defaults
+sense:保存	データベースに保存する。	데이터베이스에 저장한다.	fix	senses
+sense:クラス	全部のクラスの入出力とコメントの記入完了	전부의 클래스 입출력과 코멘트 기입 완료	fix	senses
+sense:クラス	彼女はクラスの人気者だ。	그녀는 반의 인기인이다.	keep	senses
+sense:保存	ファイルを保存した。	파일을 저장했다.	fix	senses
+sense:保存	恐らくはその保存状態も良好かと。	아마도 그 보존 상태도 양호할 것 같습니다.	keep	senses
+sense:立てる	イシューを立ててください。	이슈를 오픈해 주세요.	fix	senses
+sense:起票	バグを報告するためにイシューを起票した。	버그를 보고하기 위해 이슈를 오픈했다.	fix	senses
+sense:立てる	スレを立てる。	스레를 세운다.	keep	senses
+sense:当てる	パッチを当てた。	패치를 적용했다.	fix	senses
+sense:取る	さて、必要な物はすべてバックアップを取りました。	자, 필요한 것은 모두 백업을 했습니다.	fix	senses
+sense:切る	ブランチを切って作業する。	브랜치를 만들어 작업한다.	fix	senses
+sense:落ちる	サーバーが落ちた。	서버가 다운되었다.	fix	senses
+sense:落ちる	崖から落ちた。	벼랑에서 떨어졌다.	keep	senses
+sense:通る	テストが通った。	테스트가 통과했다.	fix	senses
+sense:叩く	APIを叩く。	API를 호출한다.	fix	senses
+sense:叩く	ターミナルでコマンドを叩く。	터미널에서 커맨드를 입력한다.	fix	senses
+sense:叩く	ドアを叩く。	문을 두드린다.	keep	senses
+sense:配信	先月の公式配信に出てたよ！	지난달의 공식 방송하러 나왔어!	fix	senses
+sense:配信	ネット配信には「アップデートパッチ」という伝家の宝刀がある	넷 배포에는 「업데이트 패치」라는 전가의 보도가 있다	fix	senses
+sense:配信	今後二度とスパムメールを配信しないよう	향후 두 번 다시 스팜메일을 발송하지 않게	fix	senses
+sense:配信	りんかい線 運行情報を公式Xでも配信しています。	린카이선 운행 정보를 공식 X에서도 전달하고 있습니다.	keep	senses
