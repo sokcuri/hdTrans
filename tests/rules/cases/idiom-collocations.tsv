@@ -1,0 +1,36 @@
+rule	input	expected	kind	layer
+dict:compound-verbs:10	「気分が……優れませんわ」	「기분이……좋지 않아요」	fix	local
+dict:compound-verbs:10	少し体調が優れなくて……ごめんなさい。	조금 컨디션이 좋지 않아서……미안해요.	fix	local
+dict:compound-verbs:10	体調が優れない。	컨디션이 좋지 않다.	fix	local
+dict:compound-verbs:10	彼は優れた剣士だ。	그는 뛰어난 검사다.	keep	local
+dict:compound-verbs:21	卵サンドは、いつもより少しだけ塩味が効いている気がした。	달걀 샌드위치는, 평소보다 약간 짠맛이 강한 것 같았다.	fix	local
+dict:compound-verbs:21	トマトにニンニクが効いていて、美味しいです	토마토에 마늘이 강해, 맛있습니다	fix	local
+dict:compound-verbs:21	薬が効いてきた。	약이 들어 왔다.	keep	local
+dict:compound-verbs:12	すっかり前世に思いを馳せていた。	완전히 전생을 떠올리고 있었다.	fix	local
+dict:compound-verbs:13	すっかり前世に思いをはせていた。	완전히 전생을 떠올리고 있었다.	fix	local
+dict:compound-verbs:12	恒星間移動について思いを馳せている。	항성간 이동에 대해 생각을 떠올리고 있다.	keep	local
+dict:idiom:1	いえ、なんでもありませんわ。	아뇨, 아무것도 아니에요.	fix	local
+dict:idiom:1	ははは、別になんでもありませんよ。	하하하, 별로 아무것도 아니에요.	fix	local
+dict:idiom:1	ここにはなんでもある。	여기에는 뭐든 있다.	keep	local
+dict:idiom-verbs	食事ものどを通らなくって、ランチを食べることができなかった。	식사도 목구멍으로 넘어가지 않아서, 런치를 먹을 수가 없었다.	fix	lookup
+dict:idiom-verbs	野菜たっぷりのシチューを見て、頬をゆるめた。	야채 듬뿍의 스튜를 보고, 미소 지었다.	fix	lookup
+dict:idiom-verbs	窓から見える春の空は、目にしみるほど青かった。	창으로부터 보이는 봄의 하늘은, 눈을 찌를 만큼 푸르렀다.	fix	lookup
+dict:idiom-verbs	食指を動かされることなく適齢を過ぎた妃	관심이 생기는 일 없이 적령을 지난 왕비	fix	lookup
+dict:idiom-verbs	むせ返る化粧と香	숨이 막히는 화장과 향기	fix	lookup
+dict:idiom-verbs	ほんの少し興味をひかれて、トマトの欠片を口に入れてみた。	아주 조금 흥미가 생겨, 토마토의 조각을 입에 넣어 보았다.	fix	lookup
+dict:idiom-verbs	貧乏貴族の娘にビンタしたからだろうか？	가난 귀족의 딸에게 따귀를 때렸기 때문일까?	fix	lookup
+dict:idiom-verbs	王宮の素敵な庭園にて流血沙汰を起こした。	왕궁의 멋진 정원에서 유혈 사태를 일으켰다.	fix	lookup
+dict:idiom-verbs	色恋沙汰に巻き込まれ、	연애 사건에 말려 들어가	fix	lookup
+dict:compound-verbs	屋敷では噂でもちきりだ……	저택에서는 소문으로 떠들썩하다……	fix	lookup
+dict:compound-verbs	裏山をかけずりまわっていた。	뒷산을 분주하게 돌아다니고 있었다.	fix	lookup
+dict:compound-verbs	友人にきりだす。	친구에게 꺼낸다.	fix	lookup
+dict:compound-verbs	冷たい目で見降ろしていた。	차가운 눈으로 내려다 보고 있었다.	fix	lookup
+dict:compound-verbs	父に一目惚れし、	아버지에게 한눈에 반해,	fix	lookup
+dict:compound-verbs	ある日突然式場につれていかれて、	어느 날 갑자기 식장에 끌려가,	fix	lookup
+dict:jisjk:141769	下り坂ではさらに調子づいてペダルを回す。	내리막길에서는 더욱 신이 나 페달을 돌린다.	fix	lookup
+sense:skill	父は腕を認められ、名誉男爵の地位を受けていた。	아버지는 실력을 인정받아 명예 남작의 지위를 받고 있었다.	fix	senses
+sense:groan-voice	うなり声をあげ、ベッドの上を転がる。	신음 소리를 내 침대 위를 구른다.	fix	senses
+sense:groan-voice	大声をあげる。	큰 소리를 지른다.	keep	senses
+sense:groan-voice	お菓子をあげる。	과자를 준다.	keep	senses
+sense:chopsticks	前に座っている二人は箸も進めず、言っている。	전에 앉아 있는 두 사람은 젓가락도 움직이지 않고, 말한다.	fix	senses
+sense:chopsticks	計画を進める。	계획을 진행시킨다.	keep	senses
