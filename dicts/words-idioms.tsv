@@ -197,7 +197,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 喉が乾	목이 &E4@	M421			GN				llm			i:192
 広い支持	폭넓은 지지	N110			GN				llm			i:193
 行ったり来り	오락가락	A9D0			GN				llm			i:194
-合点がい	납득이 &A1@	M421			GN				llm			i:195
+合点がい	납득이 &A1@	M42?			GN				llm			i:195
 合点が行	납득이 &A1@	M42?			GN				llm			i:196
 国民の休日	국민의 휴일	N110			GN							i:197
 コツを覚え	요령을 익&AW@	M427		Pn	GN				llm			i:198
@@ -1636,7 +1636,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 円で囲	동그라미를 &AO@	M425			GN				llm			i:1631
 丸で囲	동그라미를 &AO@	M425			GN				llm			i:1632
 満足が行	만족스&LX@	M42?			GN				llm			i:1633
-満足がい	만족스&LX@	M421			GN				llm			i:1634
+満足がい	만족스&LX@	M42?			GN				llm			i:1634
 満点を取	만점을 &FD@	M428		Pn	GN				llm			i:1635
 満点をと	만점을 &FD@	M428		Pn	GN				llm			i:1636
 見得を切	으스대며 폼을 &FK@	M428		Pn	GN				llm			i:1637
@@ -2180,7 +2180,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 憂うべき	우려스러운	A9D0			GN				llm			i:2175
 無ければ	없으면	A9D0			GN				llm			i:2176
 迎えに行	마중하러 &A1@	M42?			GN				llm			i:2177
-迎えにい	마중하러 &A1@	M421			GN				llm			i:2178
+迎えにい	마중하러 &A1@	M42?			GN				llm			i:2178
 減るもんじゃない	닳는 것도 아니잖아	A9D0			GN				llm			i:2179
 相済みません	정말 죄송합니다	E320			GN				llm			i:2180
 相すみません	정말 죄송합니다	E320			GN				llm			i:2181
@@ -6854,7 +6854,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 狙いを定め	겨냥&AV@	M427		Pn	GN				llm			i:6850
 ねらいを定め	겨냥&AV@	M427		Pn	GN				llm			i:6851
 ワクチンを打	백신을 &FB@	M424		Pn	GN				llm			i:6852
-得心がい	납득이 &A1@	M421			GN				llm			i:6853
+得心がい	납득이 &A1@	M42?			GN				llm			i:6853
 埴生の宿	즐거운 나의 집	N110			GN							i:6854
 贖罪の山羊	희생양	N110			GN							i:6855
 分け隔てなく	차별 없이	E300			GN				llm			i:6856
@@ -7301,7 +7301,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 他人の不幸は蜜の味	남의 불행은 꿀맛	A9D0			GN				llm			i:7297
 忘却の彼方	망각의 저편	N110			GN				llm			i:7298
 上手を行	한 수 &CH@	M42?		Pn	GN				llm			i:7299
-上手をい	한 수 &CH@	M421		Pn	GN				llm			i:7300
+上手をい	한 수 &CH@	M42?		Pn	GN				llm			i:7300
 外堀が埋ま	외곽이 메워&AL@	M428			GN				llm			i:7301
 やさしい日本語	쉬운 일본어	N110			GN							i:7302
 歓喜雀躍	환희작약	N110			GN				llm			i:7303
@@ -7427,7 +7427,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 口をたた	입을 놀&AA@	M421		Pn	GN				llm			i:7423
 恩を返	은혜를 &F2@	M423		Pn	GN				llm			i:7424
 最先端を行	최첨단을 달&AA@	M42?		Pn	GN				llm			i:7425
-最先端をい	최첨단을 달&AA@	M421		Pn	GN				llm			i:7426
+最先端をい	최첨단을 달&AA@	M42?		Pn	GN				llm			i:7426
 外国の方	외국분	N110			GN				llm			i:7427
 恐れ入ります	황송합니다	A9D0			GN				llm			i:7428
 段階を踏	단계를 &FE@	M425		Pn	GN				llm			i:7429

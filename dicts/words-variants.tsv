@@ -3559,7 +3559,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 為手	적격자	I110	VHn		GN							jisjk:41412
 為手	되려는 사람	I110			GN				xxx llm	1		w:916
 異句同音	이구동성	I110	UTs		GN							jisjk:80007
-映り行	경과&AV@	M411			GN							jisjk:94394
+映り行	경과&AV@	M41?			GN							jisjk:94394
 凋れ	풀이 &HT@	M417	VHnSFl		GN							jisjk:94307
 凋れ	시&L4@	M427	VPt		GN							jisjk:121850
 悄れ	풀이 &HT@	M417	VHnSFl		GN							jisjk:94307
@@ -5014,7 +5014,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 思いあが	잘난체&AV@	M428			GN							jisjk:93313
 思いあが	우쭐&AV@	M428	SFl		GN							jisjk:146707
 思わく買い	사재기	N110			GN							jisjk:166106
-上手く行	잘 되어&A1@	M421			GN							jisjk:146175
+上手く行	잘 되어&A1@	M42?			GN							jisjk:146175
 枝垂柳	수양버들	I110			GN							jisjk:111965
 ﾀﾋ亡	사망	N110	VTwVIv	Hd	GN							jisjk:25134
 しし唐	피망	I110	VFdQAL		GN							jisjk:72005
@@ -5066,9 +5066,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 持ちなお	회복&AV@	M433			GN							jisjk:95021
 持ちなお	되돌아&A1@	M413			GN							jisjk:354189
 持って行	가지고 &HN@	M447			GN							jisjk:263775
-持って行	가지고 &A1@	M441			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
+持って行	가져&A1@	M44?			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
 もって行	가지고 &HN@	M447			GN							jisjk:263775
-もって行	가지고 &A1@	M441			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
+もって行	가져&A1@	M44?			GN	2200	||1 &&2 S-1== "に" ||2 S-2== "方向" S-2== "方"	持ってい는 方向·方 뒤 に가 앞에 있으면 가지고 가다로 고른다. (미발동: rare-context)				jisjk:264473
 持ちあが	솟아 &E6@	M428			GN							jisjk:118353
 持ちあが	부상&AV@	M428	XXX		GN							jisjk:265279
 持ちあが	들어 올&AA@	M448			GN	2520	||1 &&2 S-1== "重" P-1== "7**"	바로 앞말이 重 형용사이면 持ち上が를 들어 올리다로 고른다. (미발동: rare-word)				jisjk:266325
@@ -7693,7 +7693,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 誰そ彼	황혼	N110	UMeVFr		GN							jisjk:39795
 綱麻	황마	N110	VPt		GN							jisjk:127939
 下々	서민	N110			GN							jisjk:38258
-過行	지나&A1@	M411			GN							jisjk:91979
+過行	지나&A1@	M41?			GN							jisjk:91979
 外がわ	외측	N110	VPl		GN							jisjk:29895
 外がわ	소토가와	N130	QCTVPl		GN							jisjk:304879
 外がわ	바깥쪽	N110			GN				xxx llm	1		w:14380
@@ -12044,8 +12044,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 洗いなお	재검토&AV@	M443			GN							jisjk:138588
 死に遅れ	살아&F4@	M417			GN							jisjk:93339
 死にそこな	죽을 뻔&AV@	M420			GN							jisjk:122527
-落行	도망&A1@	M411			GN							jisjk:92517
-落行	귀착&AV@	M421			GN							jisjk:146364
+落行	도망&A1@	M41?			GN							jisjk:92517
+落行	귀착&AV@	M42?			GN							jisjk:146364
 打ちたて	수립&AV@	M437			GN							jisjk:95610
 打ちたて	세&AI@	M447			GN							jisjk:141440
 うち立て	수립&AV@	M437			GN							jisjk:95610
@@ -13361,7 +13361,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チュウインガム	추잉껌	N110	VFd		GN							jisjk:130994
 長い事	오랫 동안	I110	UMe		GN							jisjk:82304
 永い事	오랫 동안	I110	UMe		GN							jisjk:82304
-生きて行	살아&A1@	M421			GN							jisjk:143902
+生きて行	살아&A1@	M42?			GN							jisjk:143902
 生きてゆ	살아&A1@	M421			GN							jisjk:143902
 逃馬	선행마	N110	VRwVAm		GN							jisjk:247750
 身振り手振り	몸짓 손짓	N110			GN							jisjk:151821
@@ -13695,7 +13695,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 受合い	보증	N110		Hd	GN							jisjk:12698
 早ね早おき	조기조침	I110			GN							jisjk:110901
 早ね早起き	조기조침	I110			GN							jisjk:110901
-遣って行	해 나&A1@	M441			GN							jisjk:266291
+遣って行	해 나&A1@	M44?			GN							jisjk:266291
 お手元	젓가락	N110	VPe		GN							jisjk:165497
 お手許	젓가락	N110	VPe		GN							jisjk:165497
 紙巻き煙草	궐련	N110			GN							w:21608
@@ -14657,7 +14657,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猪狩り	사냥	N110			GN							jisjk:233735
 鹿狩	사냥	N110			GN							jisjk:233735
 猪狩	사냥	N110			GN							jisjk:233735
-納得が行	납득이 &A1@	M421		Pn	GN							jisjk:364237
+納得が行	납득이 &A1@	M42?		Pn	GN							jisjk:364237
 納得がゆ	납득이 &A1@	M421		Pn	GN							jisjk:364237
 エクスクラメーション・マーク	느낌표	N110	UTs		GN							jisjk:152050
 出埃及記	출 이집트기	N110	UClVBkVSw		GN							jisjk:234956
@@ -18472,7 +18472,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 煮抜き玉子	삶은 달걀	N110			GN							jisjk:248037
 ウオーズ	워즈	N110			GN							jisjk:157634
 甘々	감쪽같이	E300			GN							jisjk:122866
-消え行	사라져 &A1@	M411			GN							jisjk:93598
+消え行	사라져 &A1@	M41?			GN							jisjk:93598
 お汁	국	N110	VFd		GN							jisjk:28983
 船下り	배 유람	N110			GN							jisjk:346730
 虎眼石	호안석	N110	VSn		GN							jisjk:246194
@@ -19936,7 +19936,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蔓日々草	빙카	N110	VPt		GN							jisjk:244211
 ハピネス	행복	N110	SFl		GN							jisjk:132306
 照空燈	탐조등	N110	VPe		GN							jisjk:190740
-としが行	한해가 &A1@	M421			GN							jisjk:143133
+としが行	한해가 &A1@	M42?			GN							jisjk:143133
 スリープ・モード	sleep 모드	N110			IT							jisjk:261315
 スリープ・モード	슬립 모드	N110			GN				xxx llm	1		w:5289
 ダイバーズウォッチ	다이버 시계	N110			GN							jisjk:130793

@@ -11,4 +11,4 @@ ending:書きましたから	「もう約束しましたから」	「벌써 약�
 ending:高いですから	「この料理は少し辛いですから」	「이 요리는 조금 매우니까요」	fix	builtin-ending
 dict:kara-final:2	「二度と言いませんから」	「두 번 다시 말하지 않으니까요」	fix	local-ending
 dict:kara-final:1	「その答えはわかりませんから」	「그 대답은 모르니까요」	fix	local-ending
-ending:書いてるから	「雨が降ってるから、傘を持っていこう」	「비가 오고 있으니, 우산을 가지고 가자」	keep	builtin-ending
+ending:書いてるから	「雨が降ってるから、傘を持っていこう」	「비가 오고 있으니, 우산을 가져가자」	keep	builtin-ending

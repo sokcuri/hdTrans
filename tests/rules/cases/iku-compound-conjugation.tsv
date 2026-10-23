@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+dict:iku-compound	もう出て行っても構わない。	이제 나가도 상관없다.	fix	lookup
+dict:iku-compound	そう言うと、彼は出て行った。	그렇게 말하니, 그는 나갔다.	fix	lookup
+dict:iku-compound	彼と侍女が部屋を出ていった。	그와 시녀가 방을 나갔다.	fix	lookup
+dict:iku-compound	「ええ、お医者様が入っていったのを見たって」	「네, 의사님이 들어간 걸 보았대」	fix	lookup
+dict:iku-compound	この傘を持って行って。	이 우산을 가져가.	fix	lookup
+dict:iku-compound	医務室に連れて行ってあげて	의무실에 데려가 줘	fix	lookup
+dict:iku-compound	はやく持っていって。	빨리 가져가.	fix	lookup
+dict:iku-compound	彼は出て行く。	그는 나간다.	keep	lookup
+dict:iku-compound	学校に行った。	학교에 갔다.	keep	lookup
+dict:iku-compound	胸の奥が熱くなっていった。	가슴 안쪽이 뜨거워져 갔다.	keep	lookup
+sense:take-along	彼女だけを連れて部屋を出て行った。	그녀만을 데려 방을 나갔다.	fix	senses
+dict:jisjk:373280	えええどうやって行ったんだよ？	네네 어떻게 갔어?	keep	lookup
+dict:jisjk:4181	鳥の群れが北方向に飛んでいった。	새의 무리가 북방향으로 날아 갔다.	keep	local
+dict:jisjk:4181	海に飛び込む。	바다에 뛰어든다.	keep	local
+dict:jisjk:4087	手に入るようになっていった。	손에 들어 오게 되어 갔다.	keep	local-ending

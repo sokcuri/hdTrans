@@ -1392,10 +1392,10 @@ bool RuleL153([[maybe_unused]] Item* p) {
 }
 
 // local 154
-//     (src[+1] == "な" or src[+1] == "なって") and pos[+1] is 4**
+//     (src[+1] == "な" or src[+1] starts "なって") and pos[+1] is 4**
 bool RuleL154([[maybe_unused]] Item* p) {
     return ((SrcEq(p, 1, "な"sv) ||
-           SrcEq(p, 1, "なって"sv)) && PumsaEq(p, 1, "4**"sv));
+           SrcEq(p, 1, "Lなって"sv)) && PumsaEq(p, 1, "4**"sv));
 }
 
 // local 155
@@ -1583,7 +1583,7 @@ bool RuleL175([[maybe_unused]] Item* p) {
 
 // local 176
 //     pos[-1] is 1** and sem[-1] has UAq and src[-2] == "を" and pos[-2] is 2** and pos[-3] is 1** and sem[-3] has VHn|UAq
-//     pos[-1] is not 4** and sem[-1] lacks UMe and (src[+1] == "決ま" or src[+1] == "決め" or src[+1] == "迎え" or src[+1] == "直" or src[+1] == "割" or src[+1] == "つなが" or src[+1] ends "する" or src[+1] == "飛" or src[+1] == "乗り換え" or src[+1] == "選ばれ" or src[+1] == "思" or src[+1] == "思ってい") and pos[+1] is 4**
+//     pos[-1] is not 4** and sem[-1] lacks UMe and (src[+1] == "決ま" or src[+1] == "決め" or src[+1] == "迎え" or src[+1] == "直" or src[+1] == "割" or src[+1] == "つなが" or src[+1] ends "する" or src[+1] == "飛" or src[+1] starts "飛んで" or src[+1] == "乗り換え" or src[+1] == "選ばれ" or src[+1] == "思" or src[+1] == "思ってい") and pos[+1] is 4**
 //     src[-1] == "こと"
 //     src[+1] == "改良" and pos[+1] is 1**
 //     src[+2] == "飛" and pos[+2] is 4**
@@ -1597,6 +1597,7 @@ bool RuleL176([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "つなが"sv) ||
            SrcEq(p, 1, "Rする"sv) ||
            SrcEq(p, 1, "飛"sv) ||
+           SrcEq(p, 1, "L飛んで"sv) ||
            SrcEq(p, 1, "乗り換え"sv) ||
            SrcEq(p, 1, "選ばれ"sv) ||
            SrcEq(p, 1, "思"sv) ||
@@ -4589,7 +4590,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL151, 0x8d24d5e482ce8d81ull},
     {RuleL152, 0xf9c516d2cc396514ull},
     {RuleL153, 0x7ad5fbade5ac5671ull},
-    {RuleL154, 0x8df03e2176342b53ull},
+    {RuleL154, 0x4592fc84e5c3542bull},
     {RuleL155, 0xebb9d5c6788333bfull},
     {RuleL156, 0xf925d3b408f4250aull},
     {RuleL157, 0x63f82f61d54bb45full},
@@ -4611,7 +4612,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL173, 0x6722847ab575fd1cull},
     {RuleL174, 0x354d73e401bfab74ull},
     {RuleL175, 0x319420ee6f69e1eeull},
-    {RuleL176, 0x97935ca7ba7c7808ull},
+    {RuleL176, 0x8c3607ffd2fa82bcull},
     {RuleL177, 0x83662d50f72c48ddull},
     {RuleL178, 0xd3a2d9a092d309b9ull},
     {RuleL179, 0xe92575172a0a2872ull},
