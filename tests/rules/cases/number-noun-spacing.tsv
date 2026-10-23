@@ -29,3 +29,4 @@ compose:number-label	10cm砲を撃つ。	10cm포를 쏜다.	keep	compose
 compose:number-label	1000Gを貸して	1000G를 빌려 줘	keep	compose
 compose:number-label	Gato級潜水艦	Gato급 잠수함	keep	compose
 compose:number-label	１０００ｋｍも離れて	1000km도 떨어져	keep	compose
+compose:number-label	今日は私Houston特製、Java風sandwichをご用意しています。	오늘은 저 Houston 특제, Java풍sandwich를 준비하고 있습니다.	fix	compose
