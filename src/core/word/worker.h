@@ -137,6 +137,7 @@ private:
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);
+    void DropOpenUtterances(Lookup& l, std::string_view query);
     void DropModalSplits(Lookup& l, std::string_view query);
     bool SplitsModal(const Record& r, std::string_view query, bool afterKa) const;
     bool SplitsKashira(const Record& r, std::string_view query) const;

@@ -76,6 +76,7 @@
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
+//= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
@@ -129,6 +130,7 @@
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
+//= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
@@ -1347,6 +1349,11 @@ particle.after-name	よ
 particle.after-name	ね
 particle.after-name	さ
 
+particle.before-predicate	の
+particle.before-predicate	は
+particle.before-predicate	が
+particle.before-predicate	も
+
 particle.case-before-stem	を
 particle.case-before-stem	に
 particle.case-before-stem	へ
@@ -2298,6 +2305,10 @@ verb.writing	描
 verb.writing	記
 verb.writing	記し
 verb.writing	しるし
+
+word.closing-utterance	ゴメンな
+word.closing-utterance	ゴメンね
+word.closing-utterance	ゴメンよ
 
 word.comitative	合う
 word.comitative	戦う

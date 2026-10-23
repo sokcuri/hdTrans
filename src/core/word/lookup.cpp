@@ -219,6 +219,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         DropBoundUtterances(l, query);
         DropNegatedAdverbs(l, query);
         DropFinalAdnominals(l, query);
+        DropOpenUtterances(l, query);
     }
     if (settings.text) {
         DropModalSplits(l, query);
@@ -503,6 +504,35 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
 // dropped before the end of the line or of a sentence (。！？」』), where nothing follows for
 // it to modify, so that the predicate analysis ends the sentence (배가 고팠다). Before a
 // pause it stays (荒涼とした…工事現場).
+// Text path, mode 0: a word of word.closing-utterance (ゴメンな) is an utterance of its
+// own only where the sentence or a clause ends after it and no particle of
+// particle.before-predicate stands before it; elsewhere the words it starts with read it
+// (ゴメンなら, そんなのゴメンよ 싫어).
+void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
+    const std::string_view surface = transformSurface;
+    std::string_view before;
+    if (surface.ends_with(query) && surface.size() > query.size()) {
+        before = LastChar(surface.substr(0, surface.size() - query.size()));
+    } else if (current > 0) {
+        before = LastChar(Tok(current - 1).text);
+    }
+    const bool predicate = dict::InClass("particle.before-predicate", before);
+    Record* out = nullptr;
+    Record* last = nullptr;
+    for (Record* r = l.records; r != nullptr; r = r->child) {
+        if (r->source.size() <= query.size() && dict::InClass("word.closing-utterance", r->source) &&
+            (predicate || !SentenceFinal(query.substr(r->source.size()), current, true))) {
+            l.count--;
+            continue;
+        }
+        if (out == nullptr) out = r;
+        else last->child = r;
+        last = r;
+    }
+    if (last != nullptr) last->child = nullptr;
+    l.records = out;
+}
+
 void Worker::DropFinalAdnominals(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;

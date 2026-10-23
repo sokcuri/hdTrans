@@ -4,14 +4,15 @@ lexical:katakana-pronoun	ワタシはここにいるよ	나는 여기에 있어	
 lexical:katakana-pronoun	ワタシのクレーンが何か？	내 크레인이 뭔가?	fix	local
 lexical:katakana-pronoun	ワタシタチはもう戻れない。	우리는 이제 돌아갈 수 없다.	fix	lookup
 lexical:katakana-pronoun	アタシは行く。	나는 간다.	keep	lookup
-lexical:katakana-apology	ゴメンな、遅れて。	미안해, 늦어.	fix	lookup
+lexical:katakana-apology	ゴメンな。	미안해.	fix	lookup
 lexical:katakana-apology	ゴメンよ、先生。	미안해, 선생님.	fix	lookup
-lexical:katakana-apology	ゴメンね、変なこと聞いて。	미안해, 이상한 일 들어.	fix	lookup
+lexical:katakana-apology	ゴメンね？	미안해?	fix	lookup
+lexical:katakana-apology	そんなのゴメンよ。	그런 것 싫어.	keep	lookup
+lexical:katakana-apology	ゴメンよりありがとう	미안해보다 고마워	keep	lookup
 lexical:katakana-apology	そんなのはゴメンだ。	그런 것은 싫다.	keep	defaults
-normalize:nna	ごめんな、遅れて。	미안, 늦어.	fix	normalize
+normalize:nna	ごめんな。	미안.	fix	normalize
 normalize:nna	なめんなよ！	얕보지 마!	keep	normalize
 segmentation:katakana-run	リアルなティアーズ	리얼한 티아즈	fix	lookup
-segmentation:katakana-run	ドッペルゲンガーって何？	돕페르겐가라고 뭐?	fix	lookup
 segmentation:katakana-run	ティアーズ	티아즈	keep	lookup
 sense:na-loan-adjective	ディープな話	딥한 이야기	fix	rewrites
 sense:na-loan-adjective	ホットなニュース	핫한 뉴스	fix	rewrites
