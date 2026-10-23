@@ -1,9 +1,6 @@
 #! layer=base
 # 의태어 동사, 가타카나로 쓴 동사, 소리 읽기로 빠지던 한자 낱말
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
-曇天	흐린 하늘	N110			GN						どんてん	mimetic-words:1
-市井	저잣거리	N110			GN						しせい	mimetic-words:2
-夜伽	밤 시중	N110			GN						よとぎ	mimetic-words:3
 数歩	몇 걸음	N110			GN						すうほ	mimetic-words:4
 胡乱	수상%A1@	G8U0			GN						うろん	mimetic-words:5
 凪いでい	잔잔해져 &HN@	M427			GN						ないでい	mimetic-words:6

@@ -1,7 +1,4 @@
 rule	input	expected	kind	layer
-dict:mimetic-words:1	曇天を見上げた。	흐린 하늘을 올려다보았다.	fix	lookup
-dict:mimetic-words:2	二年働けば市井に戻れる。	2년 일하면 저잣거리에 돌아올 수 있다.	fix	lookup
-dict:mimetic-words:3	夜伽を命じられた。	밤 시중을 명령받았다.	fix	lookup
 dict:mimetic-words:4	数歩よろめいた。	몇 걸음 비틀거렸다.	fix	lookup
 dict:mimetic-words:5	胡乱な男だ。	수상한 남자다.	fix	lookup
 dict:mimetic-words:15	胡乱げにこちらを窺っている。	수상하게 이쪽을 살피고 있다.	fix	lookup
