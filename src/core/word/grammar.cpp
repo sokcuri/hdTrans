@@ -359,6 +359,20 @@ void OwnPassives(Flusher& f) {
     }
 }
 
+void SayingKotode(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
+        const Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || e->dst != "B으로써") continue;
+        const std::string_view s = it->group->surface;
+        const Item* p = it->prev;
+        const bool quoted = p != nullptr && (p->group->surface == "と" || p->group->surface.ends_with("って"));
+        if (s.ends_with("とい") || ((s == "言" || s == "い" || s == "云") && quoted)) {
+            it->AssignDirectSlot(it->DirectIndex(), "0 것으로");
+        }
+    }
+}
+
 void GoNotSay(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const Item* p = it->prev;

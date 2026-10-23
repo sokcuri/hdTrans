@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+pattern:書くことで	お前を別の世界に送ることで私に利がある。	너를 다른 세계에 보냄으로써 나에게 이익이 있다.	fix	builtin-pattern
+pattern:書くことで	書くことではない。	쓰는 것은 아니다.	keep	builtin-pattern
+pattern:書くことで	私にできることであれば。	내가 할 수 있는 것이면.	keep	builtin-pattern
+rewrite:saying-kotode	休みということで帰った。	휴일이라는 것으로 돌아갔다.	fix	rewrites

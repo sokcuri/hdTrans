@@ -358,9 +358,10 @@ bool Worker::PatternFits(const dict::UserEntry& u, std::string_view query) const
     }
     const char tag = At(u.codes->partText, 0);
     if (!AnyOf("PSTU", tag) || query.empty() || current < 0) return true;
-    // A key ending in で does not split です, でしょう, でございます or でも (もんで).
+    // A key ending in で does not split です, でしょう, でございます, でも, では or である
+    // (もんで, ことではない, ことであれば).
     if (u.key.ends_with("で")) {
-        for (const std::string_view s : {"す", "し", "ご", "も"}) {
+        for (const std::string_view s : {"す", "し", "ご", "も", "は", "あ"}) {
             if (rest.starts_with(s)) return false;
         }
     }
