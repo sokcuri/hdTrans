@@ -72,7 +72,7 @@ src/core/word/kana.cpp	21	5	0	0	0	20	1	0	51
 src/core/word/kana.h	0	0	0	0	0	3	0	0	1
 src/core/word/lookup.cpp	128	12	18	10	87	29	5	11	82
 src/core/word/misread.cpp	3	0	1	0	0	19	4	0	10
-src/core/word/neighbours.cpp	2	6	0	0	0	0	0	5	9
+src/core/word/neighbours.cpp	2	4	0	0	0	0	0	4	7
 src/core/word/passes.cpp	0	0	0	0	0	0	0	19	19
 src/core/word/selectors.cpp	0	0	0	0	0	0	0	6	3
 src/core/word/sense.cpp	20	7	19	3	24	3	2	8	27

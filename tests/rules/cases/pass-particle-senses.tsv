@@ -72,6 +72,8 @@ cx:ni-after-adverb:30	部屋に入る。	방에 들어간다.	keep	rewrites
 cx:ni-after-adverb:10	部屋に入る。	방에 들어간다.	keep	rewrites
 cx:ni-after-adverb:20	もう少し強めに。	!rule:cx:ni-after-adverb:20	keep	rewrites
 cx:no-after-na:10	元気そうなのが一番だ。	rule:cx:no-after-na:10=것	fix	rewrites
+cx:adjectival-ni:10	大事にいだたきます！	rule:cx:adjectival-ni:10=하게	fix	rewrites
+cx:adjectival-ni:10	部屋に入る。	방에 들어간다.	keep	rewrites
 cx:kara-source:20	中から小さなぬいぐるみが出てきた。	안에서 작은 봉제인형이 나왔다.	fix	rewrites
 cx:kara-source:20	町からも距離がある。	마을에서도 거리가 있다.	fix	rewrites
 cx:de-scene:20	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

@@ -45,6 +45,8 @@ constexpr NamedFeature kFeatures[] = {
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
     {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
+    // The sense table read the word as an adjectival noun (senses.tsv, adjective).
+    {"adjectival", [](Flusher&, const Item* it) { return it->adjectival; }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };
