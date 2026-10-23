@@ -118,6 +118,10 @@ HDTRANS_PASS_SHUFFLE=7 build/mac-passexp/hdtrans -dicts dicts -in in.txt     # �
   그대로 둡니다. 같은 씨앗은 같은 순서입니다.
 - 두 변수는 프로세스에서 처음 번역할 때 한 번 읽습니다.
 
+`tools/pass-mutation.py [-c CLI] [-j JOBS] [PASS...]`는 이 빌드(기본 `build/<프리셋>-passexp/hdtrans`)로 패스를
+하나씩 빼고 규칙 사례 네 묶음(`cases.tsv`, `cases/`, `speech-soft/`, `speech-strict/`)과 `examples/`를 돌려,
+패스마다 묶음별 실패 수와 어느 테스트도 잡지 못한 패스를 보입니다.
+
 ## 한 입력 살펴보기: 단계 기록 (-stages)
 
 ```sh
@@ -355,6 +359,7 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
 | `HDTRANS_PASS_SKIP`, `HDTRANS_PASS_SHUFFLE` | `HDTRANS_PASS_EXPERIMENTS` 빌드의 엔진 | 뺄 문장 패스, 패스 순서를 섞는 씨앗 ([패스 실험 빌드](#패스-실험-빌드)) |
+| `HDTRANS_EXAMPLES_OUT` | `examples.sh` | 출력 폴더 (기본 `build/examples`) |
 | `HDTRANS_HYGIENE_PATTERNS` | `hygiene.py` | 커밋하면 안 되는 말의 정규식 파일 (저장소 밖) |
 
 작업 절차와 그 도구(`gate.sh`, `measure.sh`, `pick.sh` 등)는 [skills/README.md](../skills/README.md)에 있습니다.

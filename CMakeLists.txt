@@ -170,7 +170,7 @@ if(NOT EMSCRIPTEN)
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
-            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene)
+            foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
