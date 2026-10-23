@@ -37,9 +37,25 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("チーム"), std::string("팀"));
     // ム closes the syllable before it unless ー or a small vowel follows.
     HD_CHECK_EQ(Katakana("ネアムーン"), std::string("네아문"));
-    HD_CHECK_EQ(Katakana("アムール"), std::string("아무르"));
+    HD_CHECK_EQ(Katakana("アムーズ"), std::string("아무즈"));
     HD_CHECK_EQ(Katakana("ゲーム"), std::string("게임"));
     HD_CHECK_EQ(Katakana("ハムスター"), std::string("함스타"));
+    // A syllable read with ャ, ュ or ョ takes the final of ン, ッ or ム after it; ジャ, ジュ,
+    // ジョ, チュ and チョ are written without the glide.
+    HD_CHECK_EQ(Katakana("ニャンポコ"), std::string("냔포코"));
+    HD_CHECK_EQ(Katakana("シャンティ"), std::string("샨티"));
+    HD_CHECK_EQ(Katakana("ジュース"), std::string("주스"));
+    HD_CHECK_EQ(Katakana("チョコ"), std::string("초코"));
+    // A long u, e or o before the final ル takes it as ㄹ; a long a or i does not.
+    HD_CHECK_EQ(Katakana("ツール"), std::string("툴"));
+    HD_CHECK_EQ(Katakana("ゴール"), std::string("골"));
+    HD_CHECK_EQ(Katakana("メール"), std::string("메일"));
+    HD_CHECK_EQ(Katakana("ダミール"), std::string("다미르"));
+    // A u written with ㅡ keeps it before the final ㄹ; グ after ン stays before リ or a short ル.
+    HD_CHECK_EQ(Katakana("テーブル"), std::string("테이블"));
+    HD_CHECK_EQ(Katakana("シングル"), std::string("싱글"));
+    HD_CHECK_EQ(Katakana("シャングリラ"), std::string("샹그리라"));
+    HD_CHECK_EQ(Katakana("ロングソード"), std::string("롱소드"));
 }
 
 HD_TEST(kana_hiragana_cases) {

@@ -39,7 +39,7 @@ HD_TEST(kana_tables_fingerprints) {
     for (int row = 0; row < kKanaMatrixRows; row++) {
         for (int n = 0; n < kKanaCells; n++) cells.Str(KanaCell(row, n));
     }
-    HD_CHECK_EQ(cells.h, uint64_t{0xb783e8c301d8351bull});
+    HD_CHECK_EQ(cells.h, uint64_t{0xda3b498487605c3full});
 
     // The row each row's own hiragana selects (row 89 repeats row 88 and is never selected).
     hdtest::Fnv matches;

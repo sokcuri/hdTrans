@@ -29,6 +29,7 @@ constexpr std::string_view kMarkN = "ン";
 constexpr std::string_view kMarkGu = "グ";
 constexpr std::string_view kMarkTsu = "ッ";
 constexpr std::string_view kMarkKRow = "カキクケコ";
+constexpr std::string_view kMarkRi = "リ";
 constexpr std::string_view kMarkKusu = "クス";
 constexpr std::string_view kMarkKu = "ク";
 constexpr std::string_view kMarkBPRows = "バビブベボパピプペポ";
@@ -46,6 +47,27 @@ void AppendCells(std::vector<std::string_view>& out, std::string_view s) {
 }
 
 bool KatakanaCell(std::string_view c) { return IsKatakana(text::DecodeRune(c).cp); }
+
+constexpr int kVowelU = 13;   // ㅜ
+constexpr int kVowelEu = 18;  // ㅡ
+
+// The vowel index of the syllable s, -1 when s is not one syllable.
+int Vowel(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (s.empty() || r.size != s.size() || text::Final(r.cp) < 0) return -1;
+    return static_cast<int>(r.cp - U'가') / 28 % 21;
+}
+
+// The syllable s with the final ㄹ and, for vowel >= 0, that vowel.
+std::string FinalL(std::string_view s, int vowel) {
+    const text::Rune r = text::DecodeRune(s);
+    if (s.empty() || r.size != s.size() || text::Final(r.cp) < 0) return std::string(s);
+    const int index = static_cast<int>(r.cp - U'가');
+    const int initial = index / 28 / 21;
+    std::string out;
+    text::AppendRune(out, static_cast<char32_t>(U'가' + (initial * 21 + (vowel >= 0 ? vowel : index / 28 % 21)) * 28 + 8));
+    return out;
+}
 
 // A katakana run edited as cells: one katakana, one Hangul syllable or the two spaces
 // of an empty cell of the kana rows.
@@ -105,10 +127,22 @@ struct Run {
 // cells further in the row, after the syllable's first cell in the row, replaces it,
 // and the kana that made it are dropped.
 void Run::ApplyFinal(long i, int row) {
+    // The cell n cells further in the row; a syllable read with ャ, ュ or ョ (cells 5, 7, 9)
+    // takes the final of block n (10 ㄱ, 15 ㄴ, 25 ㅁ, 30 ㅂ, 35 ㅅ, 40 ㅇ) on its own vowel
+    // (ジャン 잔, ジャック 잭).
     auto variant = [&](int n, std::string_view& v) {
         const std::string_view current = At(i);
         int j = 0;
         if (!current.empty()) j = FindKanaCell(row, current);
+        if (j == 5 || j == 7 || j == 9) {
+            const text::Rune r = text::DecodeRune(current);
+            if (text::Final(r.cp) != 0) return false;
+            constexpr int kFinals[] = {1, 4, 8, 16, 17, 19, 21};
+            std::string& withFinal = composed.emplace_back();
+            text::AppendRune(withFinal, text::SetFinal(r.cp, kFinals[(n - 10) / 5]));
+            v = withFinal;
+            return true;
+        }
         if (j < 0 || j + n >= kKanaCells) return false;
         v = KanaCell(row, j + n);
         return true;
@@ -117,9 +151,12 @@ void Run::ApplyFinal(long i, int row) {
     const std::string_view after = At(i + 1);
     if (after == kMarkN) {
         if (At(i + 2) == kMarkGu) {
+            // Before リ or a short ル the グ stays a syllable (シングル 싱글, ハングリー 헝그리);
+            // before ルー it starts the next word (モーニングルーティン 모닝 루틴).
+            const bool keepGu = (At(i + 3) == kMarkRu && At(i + 4) != kLongVowel) || At(i + 3) == kMarkRi;
             if (variant(40, v)) {
                 Replace(i, At(i), v);
-                Replace(i + 2, kMarkGu, "");
+                if (!keepGu) Replace(i + 2, kMarkGu, "");
                 Replace(i + 1, kMarkN, "");
             }
         } else if (variant(15, v)) {
@@ -185,13 +222,24 @@ void Run::Matrix(long cursor) {
         } else if (column == 0 && cursor >= Size() - 1) {
             Replace(cursor, search, KanaCell(row, 6));
             Replace(cursor + 1, kLongVowel, "");
+        } else if (column >= 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu)) {
+            // A long u or o before the final ル takes it as ㄹ (ツール 툴, ゴール 골); a long a or
+            // i keeps 르 (ダミール 다미르).
+            Replace(cursor, search, FinalL(KanaCell(row, column + 20), column == 2 ? kVowelU : -1));
+            Replace(cursor + 1, kLongVowel, "");
+            Replace(cursor + 1, kMarkRu, "");
         } else {
             Replace(cursor, search, KanaCell(row, column));
             Replace(cursor + 1, kLongVowel, "");
             ApplyFinal(cursor, row);
         }
     } else if (cursor >= Size() - 2 && next == kMarkRu) {
-        Replace(cursor, search, KanaCell(row, column + 20));
+        // A u written with ㅡ keeps it before the final ㄹ (テーブル 테이블, シンプル 심플); ルル
+        // stays 룰 (アルル 아룰).
+        const std::string_view plain = KanaCell(row, column);
+        Replace(cursor, search,
+                column == 2 && row != 12 && Vowel(plain) == kVowelEu ? FinalL(plain, -1)
+                                                                     : KanaCell(row, column + 20));
         Replace(cursor + 1, kMarkRu, "");
     } else if (column == 1 && (next == kMarkYa || next == kMarkYu || next == kMarkYo)) {
         const int cell = next == kMarkYa ? 5 : next == kMarkYu ? 7 : 9;
@@ -201,7 +249,12 @@ void Run::Matrix(long cursor) {
     } else if (column == 3 && longVowelNext) {
         Replace(cursor, search, KanaCell(row, 3));
         Replace(cursor + 1, kLongVowel, kSourceI);
-        ApplyFinal(cursor + 1, 0);
+        if (cursor + 3 == Size() && Has(cursor + 2, kMarkRu)) {
+            Replace(cursor + 1, kSourceI, KanaCell(0, 21));  // メール 메일
+            Replace(cursor + 2, kMarkRu, "");
+        } else {
+            ApplyFinal(cursor + 1, 0);
+        }
     } else if (row == 12 && column == 2 && cursor == 0) {
         Replace(cursor, search, KanaCell(12, 8));
         ApplyFinal(cursor, 12);
