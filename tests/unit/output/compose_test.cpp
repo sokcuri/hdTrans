@@ -212,3 +212,43 @@ HD_TEST(compose_native_counts) {
     };
     for (const auto& c : cases) CheckComposition(c, true);
 }
+
+// The ordinal prefix 제 at the end of a token is written with the number that starts the next one.
+HD_TEST(compose_ordinal_prefix_before_number_token) {
+    std::vector<TokenText> tokens = {
+        {tokenizer::kTypeJapanese, 0, "序章第", ""},
+        {tokenizer::kTypeJapanese, 0, "2話", ""},
+        {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+        {tokenizer::kTypeTruncated, 0, "", ""},
+    };
+    struct Placed {
+        int token, offset;
+        const char *surface, *code, *tags, *target;
+    };
+    const Placed placed[] = {
+        {0, 0, "序章", "110", "", "서장"},
+        {0, 6, "第", "110", "Z6Ha", "제"},
+        {1, 0, "2", "600", "Nd", "2"},
+        {1, 1, "話", "110", "Ct", "화"},
+    };
+    std::vector<ResolvedItem> items;
+    for (const Placed& p : placed) {
+        ResolvedItem item;
+        item.tokenIndex = p.token;
+        item.offset = p.offset;
+        item.surface = p.surface;
+        item.length = static_cast<int>(item.surface.size());
+        item.selected = 0;
+        item.first = item.entry = {p.code, p.tags, p.target};
+        items.push_back(std::move(item));
+    }
+    Nodes nodes;
+    BuildItems(items, tokens, nodes);
+    Composer composer;
+    Families families;
+    Settings settings;
+    settings.text = true;
+    Pieces result;
+    composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
+    HD_CHECK_EQ(String(result), "서장 제2화.");
+}

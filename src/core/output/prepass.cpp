@@ -961,6 +961,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         case '1': {
             const TokenText& tok = tokens[item.tokenIndex];
             if (t == "(" || tok.span != 0 || WidthOf(tok.text) == 1 || nextKind == '2') return Result(std::move(t), false);
+            // 第 read 제, the ordinal prefix, is written with the number after it, also when a word
+            // comes before it in the token or the row (제19구축대, 서장 제2화, 겸 제1함대).
+            if ((t == "제" || t.ends_with(" 제")) && (item.surface.ends_with("第") || Contains(tags, "Z6")) && nd(nextTags)) {
+                return Result(std::move(t), false);
+            }
             if (nextKind == '6') return Result(std::move(t), nd(nextTags));
             const std::string_view nextFirst = internal::EntryAt(next, 0).text;
             if (nextFirst == "(") break;
@@ -1053,8 +1058,6 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 const bool predicate = nextKind == '4' || (nextKind == '7' && next.surface != "円");
                 return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
             }
-            // 第 read 제 is a prefix of the number after it (제19구축대).
-            if (item.surface == "第" && t == "제" && nd(nextTags)) return Result(std::move(t), false);
             if (nd(nextTags)) return Result(std::move(t), true);
             if (WidthOf(t) == 2 && previous >= 0) {
                 if ((nd(GAttr(items[previous])) && Contains(tags, "Ct")) || nd(tags)) return Result(std::move(t), true);
