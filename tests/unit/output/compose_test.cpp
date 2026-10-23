@@ -168,14 +168,22 @@ HD_TEST(compose_sentence_token_ranges) {
     std::printf("compose 4000 sentences: %.3f ms\n", std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count());
 }
 
-// A number or a Latin letter joins the noun written straight after it in the source, also a
-// label or a name; a verbal noun that is the predicate stands apart.
+// A number or a Latin letter joins the noun written straight after it in the source; a label
+// (a reply number, a time, a four-digit number before kanji, a Latin word) and a verbal noun
+// that is the predicate stand apart.
 HD_TEST(compose_number_before_noun) {
     const CompositionCase cases[] = {
         {{{"1", "110", "Nd", "1"}, {"レベル", "110", "", "레벨"}}, {1, 2}, "1레벨."},
         {{{"3", "110", "Nd", "3"}, {"学期", "110", "", "학기"}}, {1, 2}, "3학기."},
         {{{"第五", "110", "", "제5"}, {"戦隊", "110", "", "전대"}}, {1, 2}, "제5전대."},
-        {{{"2026", "110", "Nd", "2026"}, {"特別", "110", "", "특별"}}, {1, 2}, "2026특별."},
+        {{{"2026", "110", "Nd", "2026"}, {"特別", "110", "", "특별"}}, {1, 2}, "2026 특별."},
+        {{{"2300", "110", "Nd", "2300"}, {"提督", "110", "", "제독"}}, {1, 2}, "2300 제독."},
+        {{{"≫372", "110", "Nd", "≫372"}, {"過疎", "110", "", "과소"}}, {1, 2}, "≫372 과소."},
+        {{{"23：40", "110", "Nd", "23：40"}, {"追記", "110", "", "추기"}}, {1, 2}, "23：40 추기."},
+        {{{"Bismarck", "110", "", "Bismarck"}, {"追撃戦", "110", "", "추격전"}}, {1, 2}, "Bismarck 추격전."},
+        {{{"Iowa", "110", "", "Iowa"}, {"級", "110", "CtZ7", "급"}}, {2}, "Iowa급."},
+        {{{"10cm", "110", "", "10cm"}, {"砲", "110", "", "포"}}, {2}, "10cm포."},
+        {{{"1000", "110", "Nd", "1000"}, {"G", "110", "", "G"}}, {1, 2}, "1000G."},
         {{{"キハ", "110", "", "키하"}, {"208", "110", "Nd", "208"}, {"車両", "110", "", "차량"}}, {1, 2, 3}, "키하 208차량."},
         {{{"9", "110", "Nd", "9"}, {"米国", "130", "", "미국"}}, {1, 2}, "9미국."},
         {{{"1", "110", "Nd", "1"}, {"回復", "110", "Hd", "회복"}}, {1, 2}, "1 회복."},

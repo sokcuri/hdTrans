@@ -11,7 +11,7 @@ compose:number-noun	Aランクの冒険者。	A랭크의 모험가.	keep	compose
 compose:number-noun	レベルが1上がった。	레벨이 1 올랐다.	keep	compose
 compose:number-noun	二匹の猫。	두 마리의 고양이.	keep	compose
 compose:number-noun	キハ208車両と	키하 208차량과	fix	compose
-compose:number-noun	≫372過疎	≫372과소	fix	compose
+compose:number-noun	≫372過疎	≫372 과소	fix	compose
 lookup:count-word	HPが1回復した。	HP가 1 회복했다.	fix	lookup
 lookup:count-word	HPが1回復。	HP가 1 회복.	fix	lookup
 lookup:count-word	1回転する。	1 회전한다.	fix	lookup
@@ -20,3 +20,12 @@ lookup:count-word	一回復習した。	한 번 복습했다.	keep	lookup
 lookup:count-word	1回見た。	한 번 보았다.	keep	lookup
 compose:number-noun	Lv2スキルを覚えた。	Lv2스킬을 배웠다.	fix	compose
 compose:number-noun	レベル2魔法だ。	레벨 2마법이다.	fix	compose
+compose:number-label	５/１４　２３：４０追記	5/14 23：40 추기	fix	compose
+compose:number-label	バレンタイン2026特別限定任務	발렌타인 2026 특별 한정 임무	fix	compose
+compose:number-label	Hi！ Essex class航空母艦、5番艦。	Hi! Essex class 항공모함, 5번함.	fix	compose
+compose:number-label	あの戦艦Bismarck追撃戦では	그 전함 Bismarck 추격전에서는	fix	compose
+compose:number-label	第二皇女だ。	제2황녀다.	keep	compose
+compose:number-label	10cm砲を撃つ。	10cm포를 쏜다.	keep	compose
+compose:number-label	1000Gを貸して	1000G를 빌려 줘	keep	compose
+compose:number-label	Gato級潜水艦	Gato급 잠수함	keep	compose
+compose:number-label	１０００ｋｍも離れて	1000km도 떨어져	keep	compose
