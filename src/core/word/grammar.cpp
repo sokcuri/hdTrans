@@ -731,6 +731,32 @@ constexpr std::string_view kResultVerbs[] = {
     "潜り込", "潜りこ", "入り込", "入りこ", "迷い込", "紛れ込", "溶け込", "溶けこ",
 };
 
+// Stems of the verbs of resultState whose state reads as the Korean past (亡くなっているから
+// 돌아가셨으니까, 亡くなっている人 돌아가신 사람).
+constexpr std::string_view kPastResultVerbs[] = {"亡くな"};
+
+std::string ExistentialToVerb(Flusher& f, std::string_view rest);
+
+// The past of a verb ending written for the existential 있 (A니까 → 5으니까, 0 → 8,
+// 0 것 같다 → 8 것 같다, 0데 → 5는데); "" for an ending it does not cover.
+std::string PastOfVerbEnding(std::string_view ending) {
+    if (ending.empty()) return {};
+    const std::string after(ending.substr(1));
+    switch (ending[0]) {
+        case '0': return after.empty() || after.starts_with(" ") ? "8" + after : "5는" + after;
+        case '1':
+        case '4':
+        case '5': return "5" + after;
+        case '2':
+        case 'A': return "5으" + after;
+        case '3': return "5을" + after;
+        case '6': return "5어" + after;
+        case '7': return "5습" + after;
+        case '8': return "8" + after;
+        default: return {};
+    }
+}
+
 // Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 constexpr std::string_view kOngoingNouns[] = {"話題", "噂", "評判", "問題", "人気", "注目", "議論", "流行"};
 
@@ -791,7 +817,8 @@ void ResultState(Flusher& f) {
         if ((stem == "な" || stem == "にな") && GradualBefore(it)) continue;
         if (stem == "にな" && it->prev != nullptr && InSet(kOngoingNouns, it->prev->group->surface)) continue;
         const bool nounPassive = stem == "され" && it->prev != nullptr && InSet(kResultNouns, it->prev->group->surface);
-        const bool state = (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
+        const bool past = it->detail->record == 0 && !it->lexical && InSet(kPastResultVerbs, stem);
+        const bool state = past || (it->detail->record == 0 && !it->lexical && (InSet(kResultVerbs, stem) || nounPassive) && !object) ||
                            ((it->detail->record == 1 || it->lexical) && InSet(kResultPassives, stem)) ||
                            (it->detail->record <= 1 && GrammarCode(it->GAttr(it->selected), "Dx") &&
                             !it->EntryText(it->selected).ends_with("&HN@"));
@@ -801,6 +828,22 @@ void ResultState(Flusher& f) {
         const std::string lemma = output::Lemma(e->dst, f.families);
         if (!lemma.starts_with("1고")) continue;
         const std::string_view rest = std::string_view(lemma).substr(std::string_view("1고").size());
+        if (past && rest.starts_with(" 있")) {
+            if (const std::string ending = PastOfVerbEnding(ExistentialToVerb(f, rest.substr(1))); !ending.empty()) {
+                it->AssignDirectSlot(it->DirectIndex(), ending);
+                continue;
+            }
+        }
+        if (Item* n = it->next; past && rest.empty() && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
+                                n->DirectIndex() >= 0 && ItemLemma(f, n, n->selected).starts_with("있")) {
+            const Entry* d = n->DirectEntry(n->DirectIndex());
+            if (const std::string ending = d != nullptr ? PastOfVerbEnding(d->dst) : std::string(); !ending.empty()) {
+                it->AssignDirectSlot(it->DirectIndex(), ending);
+                n->AssignEntrySurface(n->selected, "");
+                n->AssignDirectSlot(n->DirectIndex(), "");
+                continue;
+            }
+        }
         if (rest.starts_with(" 있") || (rest.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with("있"))) {
             it->AssignDirectSlot(it->DirectIndex(), "6" + std::string(rest));
         }
