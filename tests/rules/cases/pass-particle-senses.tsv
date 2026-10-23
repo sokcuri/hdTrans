@@ -48,6 +48,7 @@ rewrite:hodo-degree	かつてない程のテンションアップ。	전에 없�
 rewrite:hodo-degree	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
 rewrite:hodo-degree	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 rewrite:hodo-degree	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
+rewrite:hodo-degree	血を吐く程に重苦しい声だった。	피를 토할 정도로 답답한 목소리였다.	fix	rewrites
 cx:kara-source:10	次からは本気だからね。	다음부터는 진심이니까.	fix	rewrites
 cx:kara-source:10	生まれた時からほぼ決まっている。	태어났을 때부터 거의 정해져 있다.	fix	rewrites
 cx:kara-source:10	彼からの手紙。	그로부터의 편지.	keep	rewrites
