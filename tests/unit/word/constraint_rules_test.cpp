@@ -99,7 +99,11 @@ const dict::Snapshot* Dictionary() {
          "お\t\tN110\t\tZ6\tGN\t101\n"
          "お待ち\t대기\tN110\t\t\tGN\t102\n"
          "お休み\t휴가\tN110\t\t\tGN\t103\n"
-         "いただけ\t받을 수 &HN@\tM427\t\t\tGN\t104\n"},
+         "いただけ\t받을 수 &HN@\tM427\t\t\tGN\t104\n"
+         "東雲\t새벽\tN110\tUMe\t\tGN\t105\n"
+         "情報屋\t정보상\tN110\t\t\tGN\t106\n"
+         "太陽\t태양\tN110\tVFr\t\tGN\t107\n"
+         "太陽\t태양\tN130\tQPNVHn\tWb\tGN\t108\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -113,7 +117,9 @@ const dict::Snapshot* Dictionary() {
          "つづ\t츠즈\tN130\tQPNVHn\tWb\tGN\t73\n"
          "あに\t아니\tN130\tQPNVHn\tWb\tGN\t74\n"
          "ねこ\t네코\tN130\tQPNVHn\tWb\tGN\t75\n"
-         "りん\t린\tN130\tQPNVHn\tWb\tGN\t76\n"},
+         "りん\t린\tN130\tQPNVHn\tWb\tGN\t76\n"
+         "東雲\t시노노메\tN130\tQPNVHn\tWa\tGN\t77\n"
+         "情報屋\t정보제공자\tN130\tQPNVHn\tWb\tGN\t78\n"},
     });
     return loaded.snapshot.get();
 }
@@ -202,17 +208,22 @@ HD_TEST(constraint_honorific_hiragana) {
     });
 }
 
-// A kanji word before くん, 君, ちゃん or たん is its name sense when it has one and no
-// person sense; before another honorific, when its other senses are places. A verb as
-// long, a person noun, a common noun before さん, a word without a name sense, a word
-// after お and a word inside a kanji run stay.
+// A kanji word before an honorific is its name sense, or the name layer's person reading,
+// when it has one and no person sense. A verb as long, a person noun, a word without a name
+// sense, a name reading that is a Korean word of the word (태양, 정보제공자), a word after
+// お and a word inside a kanji run stay.
 HD_TEST(constraint_honorific_kanji) {
     CheckCases({
         {"翼くんが", "翼くんが", "翼", "츠바사!"},
         {"太郎殿、", "太郎殿、", "太郎", "타로!"},
         {"妹くんが", "妹くんが", "妹", "여동생 이모토"},
         {"続くんだ", "続くんだ", "続", "계속되&AA@ 츠즈키"},
-        {"空さんが", "空さんが", "空", "하늘 소라"},
+        {"空さんが", "空さんが", "空", "소라!"},
+        {"東雲さんが", "東雲さんが", "東雲", "시노노메!"},
+        {"東雲先生、", "東雲先生、", "東雲", "시노노메!"},
+        {"東雲が", "東雲が", "東雲", "새벽"},
+        {"情報屋さん", "情報屋さん", "情報屋", "정보상"},
+        {"太陽さん", "太陽さん", "太陽", "태양 태양"},
         {"猫ちゃん", "猫ちゃん", "猫", "고양이"},
         {"お空さん", "空さん", "空", "하늘 소라"},
         {"大空くん", "空くん", "空", "하늘 소라"},

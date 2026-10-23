@@ -1,11 +1,13 @@
 // The constraint rules and the pass that applies them to the candidates of a lookup.
 #include <algorithm>
 #include <cstddef>
+#include <optional>
 #include <span>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/char_readings.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
@@ -21,9 +23,9 @@ constexpr ConstraintRule kRules[] = {
      "가타카나 단어 + 경칭(さん·くん·様 등): 사람·동물·직함 뜻이 없으면 일반 뜻을 버리고 인명 읽기 (ハル君 헐군 → 하루군)", {}},
     {"honorific-hiragana", ConstraintWord::Hiragana, "", ConstraintContext::FamiliarHonorific, ConstraintReject::NonPerson,
      "히라가나 형용사 어간과 くん, 君, ちゃん: 같은 음가의 기존 인명을 읽되 동사 활용은 보존", {}},
-    {"honorific-kanji-name", ConstraintWord::Kanji, "", ConstraintContext::FamiliarHonorific,
+    {"honorific-kanji-name", ConstraintWord::Kanji, "", ConstraintContext::Honorific,
      ConstraintReject::NonName,
-     "한자 단어 + くん·君·ちゃん·たん: 사전에 인명 뜻이 있고 사람 명사 뜻이 없으면 인명 뜻만 (翼くん 날개 군 → 츠바사군)", {}},
+     "한자 단어 + 경칭: 사전에 인명 뜻이 있고 사람 명사 뜻이 없으면 인명 뜻만 (翼くん 날개 군 → 츠바사군, 東雲さん 새벽 씨 → 시노노메 씨)", {}},
     {"honorific-kanji-name-place", ConstraintWord::Kanji, "", ConstraintContext::Honorific,
      ConstraintReject::NonNameBesidePlace,
      "한자 단어 + 경칭: 인명 뜻 말고는 지명 뜻뿐이면 인명 뜻만 (太郎殿 타로전 → 타로님)", {}},
@@ -373,6 +375,32 @@ const dict::Record* PersonReading(const dict::Snapshot& snapshot, const std::vec
     return nullptr;
 }
 
+// Whether target, a name reading of the kanji word source of two kanji or more that also has
+// a sense of no name or place among same, is a Korean word rather than a reading: the Korean
+// of such a sense (太陽 태양), or a word that starts with the Sino-Korean reading of the
+// first two kanji (情報屋 정보제공자). A name of no such word reads as it is (摩耶 마야).
+bool TranslatedName(const std::vector<dict::Candidate>& list, const std::vector<std::size_t>& same,
+                    std::string_view source, std::string_view target) {
+    if (text::RuneCount(source) < 2) return false;
+    bool word = false;
+    for (const std::size_t k : same) {
+        const dict::Codes& c = *list[k].codes;
+        if (NameSense(c) || c.sem.HasCode("QCT") || c.sem.HasCode("VPl")) continue;
+        if (list[k].target == target) return true;
+        word = true;
+    }
+    if (!word) return false;
+    std::string sino;
+    for (int n = 0; n < 2; n++) {
+        const text::Rune r = text::DecodeRune(source);
+        const std::optional<char32_t> written = dict::Written(r.cp);
+        if (!written) return false;
+        text::AppendRune(sino, *written);
+        source.remove_prefix(r.size);
+    }
+    return target.starts_with(sino);
+}
+
 // The name sense among same that replaces the others, or same.end() when there is none or
 // a person noun, a verb or adjective as long as source, or (beside places) another sense
 // than a place is among the candidates.
@@ -380,7 +408,8 @@ std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, c
                                                     const std::vector<std::size_t>& same, std::string_view source) {
     auto codes = [&](std::size_t k) -> const dict::Codes& { return *list[k].codes; };
     const auto name = std::find_if(same.begin(), same.end(), [&](std::size_t k) {
-        return NameSense(codes(k)) && list[k].user == nullptr && HangulText(list[k].target);
+        return NameSense(codes(k)) && list[k].user == nullptr && HangulText(list[k].target) &&
+               !TranslatedName(list, same, source, list[k].target);
     });
     const bool blocked =
         std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
@@ -487,7 +516,10 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     if (blocked) break;
                     records = snapshot.NameRecords(source);
                     for (const dict::Record& r : records) {
-                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target)) continue;
+                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target) ||
+                            TranslatedName(list, same, source, r.target)) {
+                            continue;
+                        }
                         nameCodes = r.codes->asPlain, nameTarget = r.target, nameId = r.id;
                         rejected = same;
                         break;
