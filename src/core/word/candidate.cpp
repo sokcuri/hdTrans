@@ -936,6 +936,21 @@ constexpr Honorific kHonorifics[] = {
     {"たん", "짱", false}, {"先輩", "선배", true},  {"先生", "선생님", true},
 };
 
+// The nickname suffix すけ after a name (里奈すけ 리나스케) when a particle, the copula, a
+// break or the end follows it: not 許すけど (許す), 透ける or すけべ.
+bool NicknameSuke(std::string_view text) {
+    constexpr std::string_view kSuke = "すけ";
+    if (!text.starts_with(kSuke)) return false;
+    const std::string_view after = text.substr(kSuke.size());
+    if (after.empty()) return true;
+    const char32_t next = text::DecodeRune(after).cp;
+    if (next < U'ぁ' || next > U'ゖ') return next != U'ー' && !text::IsKanji(next);
+    for (const std::string_view p : {"は", "が", "を", "の", "に", "へ", "と", "も", "で", "だ", "か", "よ", "ね", "って"}) {
+        if (after.starts_with(p)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool Worker::StartsWithHonorific(std::string_view text) {
@@ -955,8 +970,11 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
             name = chain.tail;
         }
     }
-    if (name == nullptr || !name->IsNameItem()) return nullptr;
+    if (name == nullptr) return nullptr;
     const std::string_view text = From(full, cursor);
+    // The nickname すけ also follows a person name of the base dictionary (里奈すけ).
+    const bool person = !name->group->entries.empty() && std::string_view(name->group->entries[0]->attr).starts_with("QPN");
+    if (!name->IsNameItem() && !(person && NicknameSuke(text))) return nullptr;
     bool titleWord = false;
     for (const std::string_view t : kTitleWords) {
         if (text.starts_with(t)) titleWord = true;
@@ -967,6 +985,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
         if (h.jp.empty() || h.jp.size() <= key.size() || !text.starts_with(h.jp) || titleWord) continue;
         key = h.jp, kr = h.kr, space = h.space;
     }
+    if (key.empty() && !titleWord && NicknameSuke(text)) key = "すけ", kr = "스케";
     if (lookupContext.plain != nullptr) {
         if (const dict::UserEntry* e = lookupContext.plain->Honorific(text); e != nullptr && e->key.size() >= key.size()) {
             key = e->key, kr = e->target, space = e->codes->gram.Contains("Ha");
