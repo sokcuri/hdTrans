@@ -154,3 +154,44 @@ test('the packed npm package is uploaded and summed under the name the publisher
   assert.ok(release.includes(`mv "build/release/hdtrans-$version.tgz" "build/release/${name}"`));
   assert.ok(release.includes(`sha256sum "${name}" >> SHA256SUMS.txt`));
 });
+
+const deployWeb = readFileSync(join(root, '.github/workflows/deploy-web.yml'), 'utf8');
+const deployJob = deployWeb.slice(deployWeb.indexOf('\n  deploy:\n'));
+const canDeployWeb = new Function('github', `return (${foldedCondition(deployWeb)});`);
+
+test('the web deploy follows a successful tag pipeline of this repository or a manual run on develop', () => {
+  const triggers = deployWeb.slice(deployWeb.indexOf('\non:\n'), deployWeb.indexOf('\npermissions:'));
+  assert.match(triggers, /  workflow_run:\n    workflows: \[Publish npm\]\n    types: \[completed\]/);
+  assert.match(triggers, /  workflow_dispatch:/);
+  assert.doesNotMatch(triggers, /pull_request|push:|release:/);
+  const run = (event, conclusion, owner = 'sokcuri/hdTrans') => ({
+    repository: 'sokcuri/hdTrans', event_name: 'workflow_run', ref: 'refs/heads/develop',
+    event: { workflow_run: { event, conclusion, head_repository: { full_name: owner } } },
+  });
+  assert.equal(canDeployWeb(run('push', 'success')), true);
+  assert.equal(canDeployWeb(run('workflow_dispatch', 'success')), false);
+  assert.equal(canDeployWeb(run('push', 'failure')), false);
+  assert.equal(canDeployWeb(run('pull_request', 'success')), false);
+  assert.equal(canDeployWeb(run('push', 'success', 'someone/hdTrans')), false);
+  assert.equal(canDeployWeb({ ...run('push', 'success'), repository: 'someone/hdTrans' }), false);
+  const dispatch = ref => ({ repository: 'sokcuri/hdTrans', event_name: 'workflow_dispatch', ref, event: {} });
+  assert.equal(canDeployWeb(dispatch('refs/heads/develop')), true);
+  assert.equal(canDeployWeb(dispatch('refs/heads/ci/x')), false);
+  assert.equal(canDeployWeb(dispatch('refs/tags/v1.2.3')), false);
+});
+
+test('only the serialized web deploy job sees the deploy secrets and the example texts', () => {
+  assert.equal((deployWeb.match(/secrets\./g) ?? []).length, (deployJob.match(/secrets\./g) ?? []).length);
+  assert.match(deployJob, /environment:\n      name: web/);
+  assert.match(deployJob, /concurrency:\n      group: deploy-web\$\{\{ inputs.dry_run && '-dry-run' \|\| '' \}\}\n      cancel-in-progress: false/);
+  assert.doesNotMatch(deployJob, /upload-artifact/);
+  assert.match(deployJob, /web\/deploy\.sh examples "\$RUNNER_TEMP\/web-examples"/);
+  assert.match(deployJob, /StrictHostKeyChecking=yes/);
+  assert.doesNotMatch(deployJob.slice(0, deployJob.indexOf('\n    steps:\n')), /HDTRANS_WEB_HOST/);
+  assert.match(deployJob, /npm --prefix web ci --ignore-scripts/);
+  const recheck = deployJob.indexOf('- name: Confirm the release is still the latest');
+  assert.ok(recheck > 0 && recheck < deployJob.indexOf('- name: Deploy\n'));
+  assert.match(deployJob, /- name: Deploy\n        if: env.DRY_RUN != 'true' && env.SKIP_DEPLOY != 'true'/);
+  assert.match(deployWeb, /^permissions:\n  contents: read\n/m);
+  assert.doesNotMatch(deployWeb, /contents: write|id-token|secrets: inherit/);
+});
