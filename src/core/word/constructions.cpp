@@ -240,6 +240,71 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
     return error == nullptr;
 }
 
+// Adds to keys the surfaces one of which the word must have for the condition at node i to hold;
+// false when it needs none: an atom S+0== with an exact surface or a class, a list && or & with
+// such an operand (the one with the fewest), or a list || of such operands only.
+bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string_view>& keys) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) {
+        const CxAtom& a = t.atoms[n.count];
+        if (a.field != CxField::Surface || a.delta != 0 || a.negated) return false;
+        if (a.match == CxMatch::Member) {
+            keys.insert(keys.end(), a.set->members.begin(), a.set->members.end());
+            return true;
+        }
+        if (a.match != CxMatch::Literal) return false;
+        const std::string_view v = a.value;
+        if (v.starts_with("99")) {
+            keys.push_back(v.substr(2));
+            return true;
+        }
+        for (const std::string_view marker : {"L", "R", "11", "22", "00"}) {
+            if (v.starts_with(marker)) return false;
+        }
+        if (v.size() > 1 && v[0] == '~') return false;
+        keys.push_back(v);
+        return true;
+    }
+    if (n.kind != rules::BodyKind::Or && n.kind != rules::BodyKind::And && n.kind != rules::BodyKind::AndAll) return false;
+    bool found = false;
+    std::vector<std::string_view> best, own;
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) {
+        own.clear();
+        const bool has = SurfaceKeys(t, child, own);
+        if (n.kind == rules::BodyKind::Or) {
+            if (!has) return false;
+            best.insert(best.end(), own.begin(), own.end());
+            found = true;
+        } else if (has && (!found || own.size() < best.size())) {
+            best = own;
+            found = true;
+        }
+    }
+    if (found) keys.insert(keys.end(), best.begin(), best.end());
+    return found;
+}
+
+// Fills the surface index of family c.
+void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+    std::vector<std::vector<std::string_view>> keys(c.rows.size());
+    std::vector<bool> keyed(c.rows.size());
+    for (std::size_t k = 0; k < c.rows.size(); k++) {
+        keyed[k] = SurfaceKeys(t, t.rows[static_cast<std::size_t>(c.rows[k])].root, keys[k]);
+        if (!keyed[k]) c.open.push_back(c.rows[k]);
+        c.indexed = c.indexed || keyed[k];
+    }
+    for (std::size_t k = 0; k < c.rows.size(); k++) {
+        for (const std::string_view key : keys[k]) {
+            if (c.bySurface.contains(key)) continue;
+            std::vector<int>& rows = c.bySurface[std::string(key)];
+            for (std::size_t j = 0; j < c.rows.size(); j++) {
+                if (!keyed[j] || std::ranges::find(keys[j], key) != keys[j].end()) rows.push_back(c.rows[j]);
+            }
+        }
+    }
+}
+
 }  // namespace
 
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes) {
@@ -261,7 +326,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             } else if (!families.emplace(f[0], t.families.size()).second) {
                 fail(number, "a second line for the family " + std::string(f[0]));
             } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number});
+                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number, {}, {}, false});
             }
             continue;
         }
@@ -341,6 +406,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
                 fail(r.line, "two rows of " + c.name + " share a PRIO");
             }
         }
+        IndexFamily(t, c);
         int* slot = nullptr;
         if (const auto pass = std::ranges::find(passes, c.after); pass != passes.end()) {
             slot = &t.afterPass[static_cast<std::size_t>(pass - passes.begin())];
@@ -558,7 +624,13 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
         for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-            for (const int r : family.rows) {
+            // Rule counts try every row.
+            const std::vector<int>* rows = &family.rows;
+            if (family.indexed && tally == nullptr) {
+                const auto found = family.bySurface.find(std::string_view(it->group->surface));
+                rows = found != family.bySurface.end() ? &found->second : &family.open;
+            }
+            for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
                 if (skip != nullptr && skip(row.id)) continue;
                 const bool fired = Eval(f, t, row.root, it);

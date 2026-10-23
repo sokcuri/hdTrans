@@ -74,6 +74,26 @@ HD_TEST(constructions_parse_maps) {
     HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::MapTarget);
 }
 
+HD_TEST(constructions_surface_index) {
+    const std::vector<std::string_view> lines = {
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\t&&2 F+0== \"selected\" ||2 S+0== \"に\" S+0== \"99には\"\tselect-lemma \"에\"\t\n",
+        "cx:a:20\t\t&&2 S+0== \"Lから\" F+0== \"selected\"\tselect-lemma \"에서\"\t\n",
+        "cx:a:30\t\t&&3 S+0== \"に\" S+0!= \"で\" S+1== \"の\"\tselect-lemma \"의\"\t\n",
+        "cx:a:40\t\t||2 S+0== \"で\" F+0== \"selected\"\tselect-lemma \"\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.families.size() == 1);
+    const internal::CxFamily& c = t.families[0];
+    HD_CHECK(c.indexed);
+    // A prefix, a negated atom and a || with an operand that needs no surface give no key.
+    HD_CHECK(c.open == (std::vector<int>{1, 3}));
+    HD_REQUIRE(c.bySurface.size() == 2);
+    HD_CHECK(c.bySurface.find(std::string_view("に"))->second == (std::vector<int>{0, 1, 2, 3}));
+    HD_CHECK(c.bySurface.find(std::string_view("には"))->second == (std::vector<int>{0, 1, 3}));
+}
+
 HD_TEST(constructions_parse_map_errors) {
     const std::vector<std::string_view> lines = {
         "//~ m\t나=내\tdoc\n",

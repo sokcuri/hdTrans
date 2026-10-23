@@ -9,6 +9,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -83,12 +84,23 @@ struct CxRow {
     int line = 0;  // in the table
 };
 
+struct CxSurfaceHash {
+    using is_transparent = void;
+    std::size_t operator()(std::string_view s) const { return std::hash<std::string_view>{}(s); }
+};
+
 struct CxFamily {
     std::string name;
     std::string after;
     std::vector<int> rows;  // into rows, by PRIO
     int next = -1;          // the family anchored after this one
     int line = 0;           // of its //= line
+    // The rows worth trying on a word, by PRIO. A row whose condition needs the word to be one of a
+    // few surfaces (S+0== "で", S+0== @set) is listed under each of them; the other rows (open) are
+    // listed under every surface. A word whose surface is no key tries the open rows only.
+    std::unordered_map<std::string, std::vector<int>, CxSurfaceHash, std::equal_to<>> bySurface;
+    std::vector<int> open;
+    bool indexed = false;  // some row has surfaces
 };
 
 struct CxError {
