@@ -24,6 +24,24 @@ tokenizer::TokenView Worker::Tok(int j) const {
     return tokens.View(static_cast<std::size_t>(j), static_cast<std::size_t>(current));
 }
 
+int Worker::RubyPart(int j) {
+    if (rubyParts_.empty()) {
+        rubyParts_.assign(tokens.size(), 0);
+        uint8_t part = 0;
+        for (std::size_t i = 0; i < tokens.size(); i++) {
+            if (tokens[i].span == 0) {
+                rubyParts_[i] = part;
+                continue;
+            }
+            const std::string_view tag = tokens.Raw(i);
+            if (tag == "{rb}") part = 1;
+            else if (tag == "{rt}") part = 2;
+            else if (tag == "{/rb}" || tag == "{/rt}") part = 0;
+        }
+    }
+    return j >= 0 && static_cast<std::size_t>(j) < rubyParts_.size() ? rubyParts_[static_cast<std::size_t>(j)] : 0;
+}
+
 int Worker::QuoteDepth(int j) {
     if (quoteDepths_.empty()) {
         quoteDepths_.reserve(tokens.size() + 1);

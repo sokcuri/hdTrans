@@ -70,6 +70,9 @@ public:
     // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
     // and the raw text of the tokens before it; computed once for all tokens.
     int QuoteDepth(int j);
+    // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
+    // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
+    int RubyPart(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -105,6 +108,7 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+    std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);

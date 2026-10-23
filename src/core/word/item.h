@@ -191,7 +191,7 @@ public:
     int CheckDirectJ(int i) const;
 
     // The item delta items along the chain (leftwards for delta < 0), skipping
-    // parenthesised groups; a found neighbour gets compDI and compUmiDI -1, the item
+    // parenthesised groups and, rightwards from a ruby base, its reading; a found neighbour gets compDI and compUmiDI -1, the item
     // itself (delta 0) keeps this item's.
     Item* Object(int delta);
 
