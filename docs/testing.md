@@ -93,6 +93,8 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 - `--update`는 지금 수를 상한으로 씁니다. 낮추기와 지운 파일의 행 지우기는 그냥 되지만, 올리기는
   develop과의 merge base(`--base REF`) 뒤의 커밋 하나에 `Surface-Budget: <이유>` 트레일러가 있을 때만
   씁니다. 올려야 하면 코드를 그 트레일러와 함께 커밋하고, `--update`를 돌린 뒤 표를 커밋합니다.
+- `--report`는 열마다 합계, 표면형 비교와 코드 비교 조건의 비(`surface:code`), 문자열이 많은 파일을
+  보입니다. 구조를 바꾼 뒤 수가 줄었는지 볼 때 씁니다.
 - CI의 `release-tools` 작업은 `--self-test`와 `--check`를 돌립니다. PR에서는 `--check --base origin/<기준
   브랜치>`로, 기준 브랜치 뒤에 표의 수가 오르거나 행이 늘었는데 PR의 어느 커밋에도 트레일러가 없으면
   실패합니다.

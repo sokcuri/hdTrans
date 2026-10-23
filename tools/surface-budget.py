@@ -4,6 +4,8 @@ file at or below its ceiling in tools/surface-budget.tsv.
 
   tools/surface-budget.py [--check] [--base REF]   compare the sources with the ceilings
   tools/surface-budget.py --update [--base REF]    write the current counts as the ceilings
+  tools/surface-budget.py --report                 totals, the surface:code condition ratio and
+                                                   the files with the most literals
   tools/surface-budget.py --self-test
 
 Sources are the .cpp and .h files under src/core, except generated files (*_gen.*). Counts per file:
@@ -321,6 +323,22 @@ def update(root, base):
     return 0
 
 
+def report(root):
+    counts = measure_tree(root)
+    total = {k: sum(r[k] for r in counts.values()) for k in COLUMNS}
+    print(f"files\t{len(counts)}")
+    for k in COLUMNS:
+        print(f"{k}\t{total[k]}")
+    ratio = total["cond_surface"] / total["cond_code"] if total["cond_code"] else float("inf")
+    print(f"surface:code\t{ratio:.2f}:1")
+    print("\nfile\tliterals\tlist_items\tcond_surface\tcond_code")
+    top = sorted(counts.items(), key=lambda x: -(x[1]["lit_ja"] + x[1]["lit_ko"] + x[1]["lit_punct"]))[:15]
+    for f, r in top:
+        print(f"{f}\t{r['lit_ja'] + r['lit_ko'] + r['lit_punct']}\t{r['list_items']}\t{r['cond_surface']}\t"
+              f"{r['cond_code']}")
+    return 0
+
+
 def self_test():
     src = r'''
 // "コメント" is not counted
@@ -396,6 +414,8 @@ def main(argv):
         argv = argv[:i] + argv[i + 2:]
     if argv == ["--self-test"]:
         return self_test()
+    if argv == ["--report"]:
+        return report(ROOT)
     if argv == ["--update"]:
         return update(ROOT, base)
     if argv in ([], ["--check"]):
