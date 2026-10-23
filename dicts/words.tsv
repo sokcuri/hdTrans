@@ -1795,7 +1795,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アライグマ	아메리카너구리	N110			GN						アライグマ	w:1787
 アライグマ科	라쿤과	N110			GN						アライグマか	w:1788
 アラカン	아라칸	N110	VHn		GN						アラカン	w:1789
-アラサー	알라투르	N110	VHn		GN						アラサー	w:1790
+アラサー	서른 안팎	N110	VHn		GN						アラサー	w:1790
 アラスカンマラミュート	알래스칸 맬러뮤트	N110			GN						アラスカンマラミュート	w:1791
 アラスカン・マラミュート	알래스칸 맬러뮤트	N110			GN						アラスカン・マラミュート	w:1792
 アラック	아락	N110			GN						アラック	w:1793
@@ -2629,12 +2629,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 エンド・クレジット	엔딩 크레디트	N110			GN						エンド・クレジット	w:2621
 エンド・ライン	엔드라인	N110			GN				llm		エンド・ライン	w:2622
 エンバイロンメント	환경	N110			GN				xxx llm	1		w:2623
-エンバーミング	유체보존기술	N110			GN						エンバーミング	w:2624
+エンバーミング	시신 방부 처리	N110			GN						エンバーミング	w:2624
 エン麦	귀리	N110			GN						エンばく	w:2625
 エースパイロット	에이스 파일럿	N110			GN				llm			w:2626
 エーデルヴァイス	에델바이스	N110			GN						エーデルヴァイス	w:2627
 エール	에일	N110			GN				xxx llm	1		w:2628
-エーワックス	공중 조기 경보 통제기	N110			GN				xxx llm	1		w:2629
+エーワックス	조기경보통제기	N110			GN				xxx llm	1		w:2629
 オイオイ	어이어이	E320			GN				llm		オイオイ	w:2630
 オイキムチ	오이김치	N110			GN						オイキムチ	w:2631
 オイスターバー	오이스터 바	N110			GN						オイスターバー	w:2632
@@ -2756,10 +2756,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オリノコわに	오리노코악어	N110			GN						オリノコわに	w:2748
 オリノコワニ	오리노코악어	N110			GN						オリノコワニ	w:2749
 オリノコ鰐	오리노코악어	N110			GN						オリノコわに	w:2750
-オリハルコン	오레이칼코스	N110			GN						オリハルコン	w:2751
+オリハルコン	오리할콘	N110			GN						オリハルコン	w:2751
 オリンピズム	올림피즘	N110			GN						オリンピズム	w:2752
-オリンピックデー	올림픽 데이 런	N110			GN						オリンピックデー	w:2753
-オリンピック・デー	올림픽 데이 런	N110			GN						オリンピック・デー	w:2754
+オリンピックデー	올림픽 데이	N110			GN						オリンピックデー	w:2753
+オリンピック・デー	올림픽 데이	N110			GN						オリンピック・デー	w:2754
 オリーブオイル	올리브유	N110			GN						オリーブオイル	w:2755
 オリーブ・オイル	올리브유	N110			GN						オリーブ・オイル	w:2756
 オリーヴ	올리브	N110			GN						オリーヴ	w:2757
@@ -3429,7 +3429,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ギブスサンプリング	기브스 표집	N110	UTt		GN						ギブスサンプリング	w:3421
 ギブス・サンプリング	기브스 표집	N110	UTt		GN						ギブス・サンプリング	w:3422
 ギベレリン	지베렐린	N110			GN						ギベレリン	w:3423
-ギミック	장치	N110			GN				xxx llm	1		w:3424
+ギミック	기믹	N110			GN				xxx llm	1		w:3424
 ギムナジウム	김나지움	N110			GN				xxx llm	1		w:3425
 ギャスケット	개스킷	N110			GN						ギャスケット	w:3426
 ギャル	갸루	N110			GN				xxx llm	1		w:3427
@@ -3654,7 +3654,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 クロスステッチ	십자수	N110			GN				xxx llm	1		w:3647
 クロスティーニ	크로스티노	N110	VFd		GN						クロスティーニ	w:3648
 クロスバイク	크로스바이크	N110			GN				xxx llm			w:3649
-クロスバイク	하이브리드 자전거	N110			GN						クロスバイク	w:3650
+クロスバイク	크로스바이크	N110			GN						クロスバイク	w:3650
 クロスプラットフォーム	크로스 플랫폼	N110	UTt		GN						クロスプラットフォーム	w:3651
 クロスプラットホーム	크로스 플랫폼	N110	UTt		GN						クロスプラットホーム	w:3652
 クロスプレイ	이성 코스프레	N110			GN						クロスプレイ	w:3653
@@ -5853,7 +5853,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チップ	칩	N110			GN				xxx llm	1		w:5846
 チドリ目	도요목	N110			GN						チドリもく	w:5847
 チドリ科	물떼새	N110			GN						チドリか	w:5848
-チノパンツ	면바지	N110			GN				xxx llm	1		w:5849
+チノパンツ	치노팬츠	N110			GN				xxx llm	1		w:5849
 チビっこ	꼬마	N110			GN						チビっこ	w:5850
 チビっ子	꼬마	N110			GN						チビっこ	w:5851
 チビッこ	꼬마	N110			GN						チビッこ	w:5852
@@ -6098,7 +6098,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テメェ	네놈	N120	VHn		GN				llm			w:6090
 テメー	네놈	N110			GN				xxx llm			w:6091
 テメー	네놈	N120	VHn		GN				llm		テメー	w:6092
-テメー	나	N120	VHn		GN				llm		テメー	w:6093
+テメー	네놈	N120	VHn		GN				llm		テメー	w:6093
 テュニジア	튀니지	N110			GN						テュニジア	w:6094
 テューバ	튜바	N110			GN						テューバ	w:6095
 テラスハウス	테라스 하우스	N110			GN						テラスハウス	w:6096
@@ -6116,7 +6116,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 テルスター	텔스타	N110			GN						テルスター	w:6108
 テルペン	테르펜	N110			GN						テルペン	w:6109
 テルミン	테레민	N110			GN						テルミン	w:6110
-テルリド	텔루륨화 이온	N110			GN						テルリド	w:6111
+テルリド	텔루르화물	N110			GN						テルリド	w:6111
 テル・アビブ	텔아비브	N110	VPl		GN				llm		テル・アビブ	w:6112
 テレコネクション	텔레커넥션	N110			GN						テレコネクション	w:6113
 テレシネ	텔레시네	N110			GN						テレシネ	w:6114
@@ -6303,7 +6303,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 デファクトスタンダード	사실상 표준	N110			GN				xxx llm	1		w:6295
 デフォルト・ゲートウェイ	기본 게이트웨이	N110	UTt		GN						デフォルト・ゲートウェイ	w:6296
 デフリンピック	데플림픽	N110			GN						デフリンピック	w:6297
-デブリ	잔해	N110			GN				xxx llm	1		w:6298
+デブリ	데브리	N110			GN				xxx llm	1		w:6298
 デボンき	데본기	N110			GN						デボンき	w:6299
 デボン紀	데본기	N110			GN						デボンき	w:6300
 デミウルゴス	데미우르고스	N110			GN						デミウルゴス	w:6301
@@ -7099,7 +7099,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハード・リンク	하드 링크	N110	UTt		GN						ハード・リンク	w:7090
 ハード・ロック	하드 록	N110	QMU		GN						ハード・ロック	w:7091
 ハーフアンドハーフ	하프 앤 하프	N110			GN				xxx llm	1		w:7092
-ハーフウェーハウス	중간 시설	N110			GN				xxx llm	1		w:7093
+ハーフウェーハウス	하프웨이 하우스	N110			GN				xxx llm	1		w:7093
 ハーフサイズカメラ	하프 프레임 카메라	N110			GN						ハーフサイズカメラ	w:7094
 ハーフサイズ・カメラ	하프 프레임 카메라	N110			GN						ハーフサイズ・カメラ	w:7095
 ハーフハイト	하프 하이트	N110			GN				xxx llm	1		w:7096
@@ -7421,7 +7421,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 パッパルデッレ	파파르델레	N110			GN						パッパルデッレ	w:7412
 パップ・テスト	팹 테스트	N110	UTi		GN						パップ・テスト	w:7413
 パティシエ	파티시에	N110			GN				xxx llm			w:7414
-パティシエ	제과사	N110			GN						パティシエ	w:7415
+パティシエ	파티시에	N110			GN						パティシエ	w:7415
 パトリキ	파트리키	N110			GN						パトリキ	w:7416
 パドック	패독	N110			GN				xxx llm	1		w:7417
 パドドゥ	파 드 되	N110			GN						パドドゥ	w:7418
@@ -8035,7 +8035,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フジッリ	푸실리	N110	VFd		GN						フジッリ	w:8027
 フッカー	훅커	N110	VHn		GN				llm		フッカー	w:8028
 フットバッグ	풋백	N110			GN				xxx llm	1		w:8029
-フットワーク	발놀림	N110			GN				xxx llm	1		w:8030
+フットワーク	풋워크	N110			GN				xxx llm	1		w:8030
 フッ化	불화	N110		Hd	GN				xxx	1	フッか	w:8031
 フッ化物	불화물	N110			GN						フッかぶつ	w:8032
 フトモモ目	도금양목	N110			GN						フトモモもく	w:8033
@@ -8231,7 +8231,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブチ切れ	폭발	N110	UFl	Hd	GN				llm		ぶちぎれ	w:8223
 ブチ切れ	폭발&AV@	M427			GN				llm		ぶちぎれ	w:8224
 ブッカー	부커	N110	VHn		GN				llm		ブッカー	w:8225
-ブックメーカー	마권업자	N110			GN				xxx llm	1		w:8226
+ブックメーカー	북메이커	N110			GN				xxx llm	1		w:8226
 ブッシュカン	불수감	N110			GN						ブッシュカン	w:8227
 ブッラータ	부라타	N110	VFd		GN						ブッラータ	w:8228
 ブティックホテル	부티크 호텔	N110			GN						ブティックホテル	w:8229
@@ -8543,7 +8543,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プロタミン	프로타민	N110			GN						プロタミン	w:8535
 プロダクトプランニング	제품 기획	N110			GN				xxx llm	1		w:8536
 プロダクト・デザイン	제품 디자인	N110			GN						プロダクト・デザイン	w:8537
-プロテインパウダー	단백질 분말	N110			GN				xxx llm	1		w:8538
+プロテインパウダー	프로틴 파우더	N110			GN				xxx llm	1		w:8538
 プロデューサ	프로듀서	N110			GN						プロデューサ	w:8539
 プロトアクチニウム	프로트악티늄	N110			GN				xxx llm	1		w:8540
 プロトケラトプス	프로토케라톱스	N110			GN						プロトケラトプス	w:8541
@@ -8673,7 +8673,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベスト・セラー	베스트셀러	N110			GN						ベスト・セラー	w:8665
 ベスト・テン	베스트 텐	N110			GN				llm		ベスト・テン	w:8666
 ベッドタウン	베드타운	N110			GN				xxx llm	1		w:8667
-ベッド・イン	베드 인 포 피스	N110		Hd	GN						ベッド・イン	w:8668
+ベッド・イン	동침	N110		Hd	GN						ベッド・イン	w:8668
 ベッド・タウン	베드타운	N110			GN						ベッド・タウン	w:8669
 ベテルギウス	베텔게우스	N110			GN						ベテルギウス	w:8670
 ベトナム語	베트남어	N110			GN						ベトナムご	w:8671
@@ -9127,7 +9127,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ポリヌクレオチド	폴리뉴클레오타이드	N110			GN						ポリヌクレオチド	w:9119
 ポリビニルアルコール	폴리비닐 알코올	N110			GN						ポリビニルアルコール	w:9120
 ポリビニル・アルコール	폴리비닐 알코올	N110			GN						ポリビニル・アルコール	w:9121
-ポリフォニー	다성 음악	N110			GN				xxx llm	1		w:9122
+ポリフォニー	폴리포니	N110			GN				xxx llm	1		w:9122
 ポリプテルス	폴립테루스속	N110			GN						ポリプテルス	w:9123
 ポリリズム	폴리리듬	N110	QMU		GN						ポリリズム	w:9124
 ポルタメント	포르타멘토	N110			GN						ポルタメント	w:9125
@@ -9325,7 +9325,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マニュキア	매니큐어	N110			GN						マニュキア	w:9317
 マニュスクリプト	원고	N110			GN				xxx llm	1		w:9318
 マヌルネコ	마눌	N110			GN						マヌルネコ	w:9319
-マネーロンダリング	자금세탁	N110			GN				xxx llm	1		w:9320
+マネーロンダリング	자금 세탁	N110			GN				xxx llm	1		w:9320
 マハラジャ	마하라자	N110	UAqVHn		GN				llm		マハラジャ	w:9321
 マハラージャ	마하라자	N110	UAqVHn		GN				llm		マハラージャ	w:9322
 マハーラージャ	마하라자	N110	UAqVHn		GN				llm		マハーラージャ	w:9323
@@ -9562,7 +9562,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミートパイ	미트 파이	N110	VFd		GN						ミートパイ	w:9554
 ミートボール	미트볼	N110			GN						ミートボール	w:9555
 ミートローフ	미트로프	N110			GN						ミートローフ	w:9556
-ミート・パイ	고기 파이	N110	VFd		GN						ミート・パイ	w:9557
+ミート・パイ	미트 파이	N110	VFd		GN						ミート・パイ	w:9557
 ミート・ローフ	미트로프	N110			GN						ミート・ローフ	w:9558
 ミーノータウロス	미노타우르	N110			GN						ミーノータウロス	w:9559
 ミーハー	미하	N110	VHn		GN						ミーハー	w:9560
@@ -9834,8 +9834,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モロに	완전히	E300			GN				llm		モロに	w:9826
 モン	것	N110			GN				llm			w:9827
 モンキー・レンチ	몽키렌치	N110			GN						モンキー・レンチ	w:9828
-モンクサキ	수사사키	N110			GN						モンクサキ	w:9829
-モンク・サキ	수사사키	N110			GN						モンク・サキ	w:9830
+モンクサキ	몽크 사키	N110			GN						モンクサキ	w:9829
+モンク・サキ	몽크 사키	N110			GN						モンク・サキ	w:9830
 モンスター	몬스터	N110			GN				xxx llm	1		w:9831
 モンスタートラック	몬스터 트럭	N110			GN						モンスタートラック	w:9832
 モンスターペアレント	몬스터 부모	N110			GN						モンスターペアレント	w:9833
@@ -10049,7 +10049,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ライブ・ハウス	라이브하우스	N110			GN						ライブ・ハウス	w:10041
 ライマメ	리마콩	N110			GN						ライマメ	w:10042
 ラインシャフト	라인 샤프트	N110			GN						ラインシャフト	w:10043
-ラインドライブ	직선타	N110			GN				xxx llm	1		w:10044
+ラインドライブ	라인드라이브	N110			GN				xxx llm	1		w:10044
 ラインプリンター	라인 프린터	N110			GN						ラインプリンター	w:10045
 ライン・エディタ	라인 에디터	N110	UTt		GN						ライン・エディタ	w:10046
 ライン・エディター	라인 에디터	N110	UTt		GN						ライン・エディター	w:10047
@@ -10167,7 +10167,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ランディング・ページ	랜딩 페이지	N110	UTt		GN						ランディング・ページ	w:10159
 ランデヴー	랑데부	N110		Hd	GN						ランデヴー	w:10160
 ランデヴー	랑데부&AV@	M429			GN						ランデヴー	w:10161
-ランドアート	대지 예술	N110			GN				xxx llm	1		w:10162
+ランドアート	랜드 아트	N110			GN				xxx llm	1		w:10162
 ランドセル	책가방	N110			GN				xxx llm	1		w:10163
 ランドマーク	랜드마크	N110			GN				xxx llm	1		w:10164
 ランニング・シャツ	러닝셔츠	N110			GN						ランニング・シャツ	w:10165
@@ -10211,7 +10211,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リスクコミュニケーション	리스크 커뮤니케이션	N110			GN						リスクコミュニケーション	w:10203
 リスク・アセスメント	리스크 평가제도	N110			GN						リスク・アセスメント	w:10204
 リスク・コミュニケーション	리스크 커뮤니케이션	N110			GN						リスク・コミュニケーション	w:10205
-リスニング	듣기	N110			GN				llm			w:10206
+リスニング	리스닝	N110			GN				llm			w:10206
 リスペクト	리스펙트	N110			GN				llm			w:10207
 リスボア	리스본	N110			GN						リスボア	w:10208
 リスポーン	리스폰	N110		Hd	GN				llm		リスポーン	w:10209
@@ -10394,7 +10394,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レイキャビーク	레이캬비크	N110			GN						レイキャビーク	w:10386
 レイキャヴィク	레이캬비크	N110			GN						レイキャヴィク	w:10387
 レイキャヴィーク	레이캬비크	N110			GN						レイキャヴィーク	w:10388
-レイティング	등급	N110			GN				xxx llm	1		w:10389
+レイティング	레이팅	N110			GN				xxx llm	1		w:10389
 レイテンシー	레이턴시	N110	UTt		GN						レイテンシー	w:10390
 レイトショー	심야 상영	N110			GN				xxx llm	1		w:10391
 レイド	레이드	N110			GN				xxx llm	1		w:10392

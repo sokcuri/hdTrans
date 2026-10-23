@@ -4517,7 +4517,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 不思議なほど	신기할 정도로	A9D0			GN				llm			i:4513
 心のぶつかり合い	마음의 충돌	A9D0			GN				llm			i:4514
 花虎の尾	숙근 꼬리풀	N110			GN				llm			i:4515
-ハナトラノオ	피소스테기아	N110			GN				llm			i:4516
+ハナトラノオ	꽃범의꼬리	N110			GN				llm			i:4516
 鳩が豆鉄砲を食ったよう	놀라서 눈이 휘둥그레진 모습	A9D0			GN				llm			i:4517
 型にはま	틀에 박&AW@	M428			GN				llm			i:4518
 型に嵌ま	판에 박&AW@	M428			GN							i:4519
@@ -6714,7 +6714,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 頭がいっぱい	머릿속이 가득해	A9D0			GN				llm			i:6710
 傷の舐め合い	서로 상처를 핥아주기	A9D0			GN				llm			i:6711
 傷の舐めあい	서로 상처를 핥아주기	A9D0			GN				llm			i:6712
-ラットレース	노 브레인 레이스	N110			GN							i:6713
+ラットレース	무한 경쟁	N110			GN							i:6713
 ラット・レース	래트 레이스	N110			GN				llm			i:6714
 距離を詰め	거리를 좁&AW@	M427		Pn	GN				llm			i:6715
 お任せあれ	맡겨 주세요	A9D0			GN				llm			i:6716
