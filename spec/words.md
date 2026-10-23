@@ -61,3 +61,15 @@
 
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`
+
+## LEX-5 가타카나로 쓴 일반 낱말은 그 낱말로 읽는다
+
+대명사, 감탄사처럼 히라가나나 한자로 쓰는 낱말을 가타카나로 쓴 것은 그 낱말과 같게 읽는다. 소리대로 적지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| ワタシはここにいるよ | 나는 여기에 있어 | 고침 |
+| ゴメンな、遅れて。 | 미안해, 늦어. | 고침 |
+| そんなのはゴメンだ。 | 그런 것은 싫다. | 유지 |
+
+사례: `tests/rules/cases/lexical-katakana-spellings.tsv`

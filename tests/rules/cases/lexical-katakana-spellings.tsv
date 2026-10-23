@@ -1,0 +1,12 @@
+# 규칙: LEX-5
+rule	input	expected	kind	layer
+lexical:katakana-pronoun	ワタシはここにいるよ	나는 여기에 있어	fix	lookup
+lexical:katakana-pronoun	ワタシのクレーンが何か？	내 크레인이 뭔가?	fix	local
+lexical:katakana-pronoun	ワタシタチはもう戻れない。	우리는 이제 돌아갈 수 없다.	fix	lookup
+lexical:katakana-pronoun	アタシは行く。	나는 간다.	keep	lookup
+lexical:katakana-apology	ゴメンな、遅れて。	미안해, 늦어.	fix	lookup
+lexical:katakana-apology	ゴメンよ、先生。	미안해, 선생님.	fix	lookup
+lexical:katakana-apology	ゴメンね、変なこと聞いて。	미안해, 이상한 일 들어.	fix	lookup
+lexical:katakana-apology	そんなのはゴメンだ。	그런 것은 싫다.	keep	defaults
+normalize:nna	ごめんな、遅れて。	미안, 늦어.	fix	normalize
+normalize:nna	なめんなよ！	얕보지 마!	keep	normalize

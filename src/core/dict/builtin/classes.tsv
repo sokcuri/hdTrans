@@ -9,6 +9,7 @@
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
 //= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
+//= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
@@ -254,6 +255,8 @@ bound.column-whole	ぞ
 bound.column-whole	さ
 bound.column-whole	な
 bound.column-whole	たい
+
+casual.nna-word	ごめんな
 
 copula.after-dake	だ
 copula.after-dake	で
@@ -1374,6 +1377,7 @@ pronoun.first-person-genitive	わたし
 pronoun.first-person-genitive	わたくし
 pronoun.first-person-genitive	あたし
 pronoun.first-person-genitive	アタシ
+pronoun.first-person-genitive	ワタシ
 pronoun.first-person-genitive	ぼく
 pronoun.first-person-genitive	おれ
 pronoun.first-person-genitive	ボク
@@ -1407,6 +1411,7 @@ pronoun.humble-first-person	私
 pronoun.humble-first-person	わたし
 pronoun.humble-first-person	わたくし
 pronoun.humble-first-person	あたし
+pronoun.humble-first-person	ワタシ
 pronoun.humble-first-person	僕
 pronoun.humble-first-person	ぼく
 pronoun.humble-first-person	私たち
@@ -1443,6 +1448,7 @@ pronoun.topic-wa	私
 pronoun.topic-wa	わたし
 pronoun.topic-wa	あたし
 pronoun.topic-wa	アタシ
+pronoun.topic-wa	ワタシ
 pronoun.topic-wa	俺
 pronoun.topic-wa	おれ
 pronoun.topic-wa	オレ
