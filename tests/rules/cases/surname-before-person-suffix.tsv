@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+segmentation:name-suffix	里見たちが来た。	사토미들이 왔다.	fix	lookup
+segmentation:name-suffix	浅見たちと話した。	아사미들과 이야기했다.	fix	lookup
+segmentation:name-suffix	里見さんが来た。	사토미 씨가 왔다.	keep	lookup
+segmentation:name-suffix	今居るよ。	지금 있어.	keep	lookup

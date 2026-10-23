@@ -565,12 +565,13 @@ bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
 
 // A person name of two kanji or more whose last kanji is the stem of an ichidan verb that
 // the hiragana after the name conjugates (る, た, て), the kanji before it being a word
-// (今居る: 今 and 居る, not the name 今居): the name takes the verb's stem.
+// (今居る: 今 and 居る, not the name 今居): the name takes the verb's stem. Not before a
+// person suffix (里見たち, 里見ちゃん).
 bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
     if (!r.semantic.starts_with("QPN") || !query.starts_with(r.source) || text::RuneCount(r.source) < 2) return false;
     const std::string_view rest = query.substr(r.source.size());
     const text::Rune next = text::DecodeRune(rest);
-    if (next.cp < U'ぁ' || next.cp > U'ゖ') return false;
+    if (next.cp < U'ぁ' || next.cp > U'ゖ' || StartsWithHonorific(rest) || PersonSuffixAt(rest)) return false;
     const std::string_view last = LastChar(r.source);
     const std::string_view head = r.source.substr(0, r.source.size() - last.size());
     if (NameClassOf(last) != kClassKanji || snapshot.RetrieveRecords(head, dict::LookupMode::General).empty()) {
@@ -582,6 +583,26 @@ bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
         if (pc.size() == 4 && pc.starts_with("M4") && pc[3] == '7' && AnalyseVerbTail(last, pc[3], rest, branch, length) &&
             length > 0) {
             return true;
+        }
+    }
+    return false;
+}
+
+// Whether s starts with a noun of persons of two kana or more that the dictionary
+// writes attached to the word before it (たち, ども: N1, VHn and Tu or Z7).
+bool Worker::PersonSuffixAt(std::string_view s) const {
+    std::size_t end = 0;
+    for (int n = 1; n <= 3 && end < s.size(); n++) {
+        const text::Rune c = text::DecodeRune(s.substr(end));
+        if (c.size == 0 || c.cp < U'ぁ' || c.cp > U'ゖ') break;
+        end += c.size;
+        if (n < 2) continue;
+        for (const dict::Candidate& rec : snapshot.RetrieveRecords(s.substr(0, end), dict::LookupMode::General)) {
+            const dict::Codes* codes = rec.codes;
+            if (codes != nullptr && codes->partText.starts_with("N1") && codes->sem.HasCode("VHn") &&
+                (codes->gram.HasCode("Tu") || codes->gram.HasCode("Z7"))) {
+                return true;
+            }
         }
     }
     return false;

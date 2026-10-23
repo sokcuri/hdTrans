@@ -862,16 +862,25 @@ Item* Worker::ProtectedItem(int token) {
 // start of a token) the last item of the chain, is a name item that ends at the cursor;
 // otherwise null. The item is a fixed noun (code 110) with the grammar code Tu
 // (attached) or Ha (spaced).
+namespace {
+
+struct Honorific {
+    std::string_view jp, kr;
+    bool space;
+};
+constexpr Honorific kHonorifics[] = {
+    {"さん", "씨", false}, {"ちゃん", "짱", false}, {"くん", "군", false},     {"君", "군", false},
+    {"様", "님", false},   {"さま", "님", false},   {"氏", "씨", false},       {"殿", "님", false},
+    {"たん", "짱", false}, {"先輩", "선배", true},  {"先生", "선생님", true},
+};
+
+}  // namespace
+
+bool Worker::StartsWithHonorific(std::string_view text) {
+    return std::any_of(std::begin(kHonorifics), std::end(kHonorifics), [&](const Honorific& h) { return text.starts_with(h.jp); });
+}
+
 Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
-    struct Honorific {
-        std::string_view jp, kr;
-        bool space;
-    };
-    static constexpr Honorific kHonorifics[] = {
-        {"さん", "씨", false}, {"ちゃん", "짱", false}, {"くん", "군", false},     {"君", "군", false},
-        {"様", "님", false},   {"さま", "님", false},   {"氏", "씨", false},       {"殿", "님", false},
-        {"たん", "짱", false}, {"先輩", "선배", true},  {"先生", "선생님", true},
-    };
     // Words that start with an honorific: after a name they are the title.
     static constexpr std::string_view kTitleWords[] = {"殿下", "殿方", "様子", "様々", "君主", "君臨", "氏族"};
     // The Korean endings after which a following honorific is written as nothing.
