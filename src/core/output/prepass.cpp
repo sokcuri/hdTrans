@@ -743,6 +743,14 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         {"など", "같은", true},
     };
     if (settings_.literal && kind == '1' && AttachesToNoun(next.surface, nextEntry)) return Result(std::move(t), false);
+    // A direction noun and 쪽 make one word (위쪽, 앞쪽, 오른쪽); 쪽 after other nouns stands
+    // apart (목소리 쪽).
+    if (constexpr std::string_view kDirections[] = {"위", "아래", "앞", "뒤", "옆", "안", "밖", "바깥", "오른", "왼",
+                                                    "동", "서", "남", "북", "이", "그", "저"};
+        settings_.literal && kind == '1' && nextEntry == "쪽" &&
+        std::find(std::begin(kDirections), std::end(kDirections), t) != std::end(kDirections)) {
+        return Result(std::move(t), false);
+    }
     if (kind == '1' && !t.ends_with(' ') && Contains(GAttr(next), "Tu") == false) {
         for (const FreeNoun& f : kFreeNouns) {
             if (f.literal && !settings_.literal) continue;
@@ -836,9 +844,27 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                 return n >= 2 && kTimeStarts.find(first) == std::u32string_view::npos &&
                        kTimeEnds.find(last) == std::u32string_view::npos;
             };
+            // A noun made of a verb stem (長生き, 仲直り, お祝い) or お, ご and a kanji compound
+            // (お約束, ご案内) before する is a verbal noun too (장수하다, 화해하다, 약속할 수);
+            // お and one kanji (お茶) or a noun ending in a kanji (焼き芋) is not.
+            auto stemOrHonorific = [](std::string_view s) {
+                std::u32string rs;
+                for (std::size_t k = 0; k < s.size();) {
+                    const text::Rune r = text::DecodeRune(s.substr(k));
+                    rs.push_back(r.cp);
+                    k += r.size;
+                }
+                std::u32string_view body = rs;
+                if (!body.empty() && (body[0] == U'お' || body[0] == U'ご')) {
+                    body.remove_prefix(1);
+                    if (body.size() >= 2 && std::all_of(body.begin(), body.end(), IsKanji)) return true;
+                }
+                return body.size() >= 2 && IsKanji(body[0]) && HasRune(U"いきぎしちひびみりえけげせてでねべめれ", body.back()) &&
+                       std::none_of(body.begin(), body.end(), [](char32_t r) { return r == U'な' || r == U'の'; });
+            };
             const bool verbalNoun = Contains(tags, "Hd") ||
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
-                                    kanjiCompound(item.surface);
+                                    kanjiCompound(item.surface) || (settings_.literal && stemOrHonorific(item.surface));
             auto startsWithAny = [](std::string_view s, std::span<const std::string_view> list) {
                 return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
             };
