@@ -10,7 +10,8 @@ namespace hdTrans::dict {
 
 PartCode::PartCode(std::string_view text) {
     const std::size_t n = std::min<std::size_t>(text.size(), 4);
-    std::memcpy(bytes_.data(), text.data(), n);
+    // An empty view may have a null data pointer, which memcpy may not take.
+    if (n > 0) std::memcpy(bytes_.data(), text.data(), n);
     size_ = static_cast<uint8_t>(std::min<std::size_t>(text.size(), 255));
 }
 
