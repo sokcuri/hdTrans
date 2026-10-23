@@ -154,6 +154,13 @@ if(NOT EMSCRIPTEN)
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME tools.selfbase COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/selfbase.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        find_program(HDTRANS_PYTHON python3)
+        if(HDTRANS_PYTHON)
+            foreach(tool union-tsv accept-cases chrf rule-ids)
+                add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
+                    "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
+            endforeach()
+        endif()
     endif()
 
     # Translates examples/ with the dictionaries in HDTRANS_DICTS at test time; skipped when unset.

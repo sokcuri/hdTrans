@@ -9,6 +9,7 @@
 | `unit` | 단위 테스트 `hdtrans_tests` |
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
+| `tools.<이름>` | `tools/`의 작업 도구(`union-tsv.py`, `accept-cases.py`, `chrf.py`, `rule-ids.py`)의 `--self-test` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases` | `tests/rules/cases.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescasestsv)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`(같은 열)의 사례를 함께 확인 |
@@ -302,3 +303,8 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_DICTS_A` | `e2e.sh` | A 쪽 사전 |
 | `HDTRANS_DRIVER_DUMP` | CLI | `-stages`와 같음 |
 | `HDTRANS_CACHE_DIR`, `HDTRANS_SNAPSHOT`, `HDTRANS_VERIFY_DICTS` | 엔진 | 사전 캐시 ([dictionary-files.md](dictionary-files.md#캐시)) |
+| `HDTRANS_WORK` | `gate.sh`, `measure.sh` | 작업 출력 폴더 (기본 `build/work`) |
+| `HDTRANS_CORPUS`, `HDTRANS_GAME_SAMPLE` | `measure.sh` | 줄 단위 회귀 문장 파일, `ja.txt`와 사람 번역 `ref.txt` 폴더 (비공개) |
+| `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `pick.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
+
+작업 절차와 그 도구(`gate.sh`, `measure.sh`, `pick.sh` 등)는 [skills/README.md](../skills/README.md)에 있습니다.
