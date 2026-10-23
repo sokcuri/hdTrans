@@ -328,6 +328,10 @@ HD_TEST(pipeline_sound) {
         {"くしゃくしゃに丸めた", "꼬깃꼬깃하게 丸めた"},
         {"ボロボロになった", "너덜너덜하게 なった"},
         {"ぐちゃぐちゃに", "엉망진창に"},
+        // A mimetic of a syllable or two and ッ before と stands right after a kanji word;
+        // a long vowel there is a volitional ending.
+        {"時折ぶるっと身", "時折부르르 身"},
+        {"休もうっと", "休もうっと"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},

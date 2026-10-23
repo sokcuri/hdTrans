@@ -320,6 +320,7 @@ private:
     size_t NextWord(size_t i) const;
     std::string IyaReading(size_t p, size_t end) const;
     bool Stopped(const SoundMatch& m) const;
+    bool MimeticAfterWord(const SoundMatch& m) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle) const;
     bool Manner(const SoundMatch& m, size_t i) const;
@@ -685,6 +686,14 @@ bool SoundText::Stopped(const SoundMatch& m) const {
     return !IsKana(r) || In(r, U"トテー～") || r == f_[m.start];
 }
 
+// Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
+// kana of that shape never continue the word before them, so the sound stands after a
+// kanji word too. A long vowel in it may be a volitional ending (治そーっと, 休もうっと).
+bool SoundText::MimeticAfterWord(const SoundMatch& m) const {
+    return !m.intj && (m.keyLen == 2 || m.keyLen == 3) && f_[m.end - 1] == U'ッ' && !In(f_[m.start + 1], U"ーウ") &&
+           !In(rs_[m.start], kParticles) && m.end < rs_.size() && rs_[m.end] == U'と';
+}
+
 // The chain of sounds that starts at character p, the last one taking the と that
 // follows it, or an empty chain. afterParticle tells that the token before p is a lone
 // particle.
@@ -737,7 +746,8 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle) const {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
     } else if ((afterParticle && first.intj) ||
-               (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)))) {
+               (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
+                !MimeticAfterWord(first))) {
         return {};
     }
     while (!chain.empty()) {
