@@ -230,7 +230,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         output::Sentence done;
         done.chunk = index;
         {
-            std::lock_guard<std::mutex> lock(generated.mu);
+            std::unique_lock<std::mutex> lock(generated.mu, std::defer_lock);
+            if (options.ruleTally != nullptr) lock.lock();
             const rules::Program& program = options.rules ? *options.rules
                                              : generated.hasRules ? generated.rules : RulesProgram();
             ResolveSentence(program, generated.families, analysis, k);

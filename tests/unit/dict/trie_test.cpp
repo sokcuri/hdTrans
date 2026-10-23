@@ -1,6 +1,7 @@
 #include "core/dict/trie.h"
 
 #include <algorithm>
+#include <atomic>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -20,9 +21,10 @@ using hdTrans::dict::Trie;
 #pragma GCC diagnostic ignored "-Wmismatched-new-delete"
 #endif
 
-// Counts the allocations of the test program, to check that lookups make none.
+// Counts the allocations of the test program on all its threads, to check that lookups
+// make none.
 namespace {
-size_t allocations = 0;
+std::atomic<size_t> allocations{0};
 }  // namespace
 
 // Every form is replaced, so that each allocation and its release use the same allocator.
@@ -357,7 +359,7 @@ HD_TEST(trie_sample_keys) {
             t.Prefixes(rest, [&](int, size_t) { found++; });
             const auto longest = t.LongestPrefix(rest);
             const int exact = t.Find(rest);
-            HD_CHECK_EQ(allocations, before);
+            HD_CHECK_EQ(allocations.load(), before);
             (void)longest;
             (void)exact;
             t.Prefixes(rest, [&](int k, size_t n) { got.push_back({n, keyOf(k)}); });
@@ -369,7 +371,7 @@ HD_TEST(trie_sample_keys) {
     for (const auto& k : keys) {
         const size_t before = allocations;
         const int n = t.Find(k);
-        HD_CHECK_EQ(allocations, before);
+        HD_CHECK_EQ(allocations.load(), before);
         HD_REQUIRE(n >= 0);
         HD_CHECK_EQ(keyOf(n), k);
     }
@@ -381,7 +383,7 @@ HD_TEST(trie_borrowed_arrays_and_moves) {
     const Trie::ViewData arrays = owned.View();
     const size_t before = allocations;
     Trie borrowed = Trie::FromView(arrays);
-    HD_CHECK_EQ(allocations, before);
+    HD_CHECK_EQ(allocations.load(), before);
     HD_CHECK(borrowed.View().tree.data() == arrays.tree.data());
     HD_CHECK(borrowed.View().label.data() == arrays.label.data());
     HD_CHECK_EQ(borrowed.MemoryBytes(), owned.MemoryBytes());
@@ -554,7 +556,7 @@ HD_TEST(trie_guarded_views_and_validation) {
     int prefixes = 0;
     borrowed.Prefixes("学生です", [&](int, size_t) { prefixes++; });
     HD_CHECK_EQ(prefixes, 3);
-    HD_CHECK_EQ(allocations, before);
+    HD_CHECK_EQ(allocations.load(), before);
     state.readable = false;
     HD_CHECK_EQ(borrowed.Find("学生"), -1);
     HD_CHECK_EQ(borrowed.Next(0, U'学'), -1);
