@@ -186,6 +186,15 @@ bool HiraganaHonorificAt(std::string_view s) {
     return false;
 }
 
+// Whether c is a verb or adjective as long as source, or longer, that reads the word
+// rather than a name before an honorific: not an adjective stem before くん that a particle,
+// a break or the end follows (碧くんが: not the 碧く of 碧い).
+bool PredicateBlocks(const dict::Candidate& c, std::string_view source, std::string_view after) {
+    if (c.codes == nullptr || !AnyOf("478", c.codes->part.ClassDigit()) || c.source.size() < source.size()) return false;
+    return !(c.codes->part.Tag() == 'H' && c.source.size() == source.size() && after.starts_with("くん") &&
+             HiraganaHonorificAt(after));
+}
+
 bool NameSense(const dict::Codes& c) {
     return c.sem.HasPrefix("QPN") || c.gram.HasPrefix("Wa") || c.gram.HasPrefix("Wb");
 }
@@ -405,16 +414,15 @@ bool TranslatedName(const std::vector<dict::Candidate>& list, const std::vector<
 // a person noun, a verb or adjective as long as source, or (beside places) another sense
 // than a place is among the candidates.
 std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, const std::vector<dict::Candidate>& list,
-                                                    const std::vector<std::size_t>& same, std::string_view source) {
+                                                    const std::vector<std::size_t>& same, std::string_view source,
+                                                    std::string_view after) {
     auto codes = [&](std::size_t k) -> const dict::Codes& { return *list[k].codes; };
     const auto name = std::find_if(same.begin(), same.end(), [&](std::size_t k) {
         return NameSense(codes(k)) && list[k].user == nullptr && HangulText(list[k].target) &&
                !TranslatedName(list, same, source, list[k].target);
     });
     const bool blocked =
-        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
-            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) && c.source.size() >= source.size();
-        }) ||
+        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
         std::any_of(same.begin(), same.end(), [&](std::size_t k) { return PersonNoun(codes(k)) || list[k].user != nullptr; }) ||
         std::all_of(same.begin(), same.end(), [&](std::size_t k) { return NameSense(codes(k)); }) ||
         (rule.reject == ConstraintReject::NonNameBesidePlace && !std::all_of(same.begin(), same.end(), [&](std::size_t k) {
@@ -456,11 +464,10 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             const std::string_view source = list[i].source;
             const bool first = std::none_of(list.begin(), list.begin() + static_cast<std::ptrdiff_t>(i),
                                             [&](const dict::Candidate& c) { return c.source == source; });
+            const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
+                                                                         : std::string_view(following);
             if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before) ||
-                !ContextFits(rule, list, source,
-                             query.size() > source.size() ? From(query, static_cast<long>(source.size()))
-                                                          : std::string_view(following),
-                             before, previous, adjacent, preceding, lead)) {
+                !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)) {
                 i++;
                 continue;
             }
@@ -499,7 +506,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 break;
             case ConstraintReject::NonName:
             case ConstraintReject::NonNameBesidePlace:
-                if (const auto name = NameAmong(rule, list, same, source); name != same.end()) {
+                if (const auto name = NameAmong(rule, list, same, source, after); name != same.end()) {
                     nameCodes = list[*name].codes->asPlain, nameTarget = list[*name].target, nameId = list[*name].id;
                     rejected = same;
                 } else if (rule.reject == ConstraintReject::NonName) {
@@ -507,9 +514,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     // the word (千里ちゃん 치사토짱, not 천리), unless a person noun, a user
                     // entry or a verb or adjective as long reads it.
                     const bool blocked =
-                        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
-                            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) && c.source.size() >= source.size();
-                        }) ||
+                        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
                         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
                             return PersonNoun(*list[k].codes) || PersonSense(*list[k].codes) || list[k].user != nullptr;
                         });

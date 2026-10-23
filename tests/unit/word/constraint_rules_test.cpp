@@ -103,7 +103,9 @@ const dict::Snapshot* Dictionary() {
          "東雲\t새벽\tN110\tUMe\t\tGN\t105\n"
          "情報屋\t정보상\tN110\t\t\tGN\t106\n"
          "太陽\t태양\tN110\tVFr\t\tGN\t107\n"
-         "太陽\t태양\tN130\tQPNVHn\tWb\tGN\t108\n"},
+         "太陽\t태양\tN130\tQPNVHn\tWb\tGN\t108\n"
+         "碧\t$C2@\tH7M0\t\t\tGN\t109\n"
+         "碧\t아오이\tN130\tQPN\tWb\tGN\t110\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -211,7 +213,8 @@ HD_TEST(constraint_honorific_hiragana) {
 // A kanji word before an honorific is its name sense, or the name layer's person reading,
 // when it has one and no person sense. A verb as long, a person noun, a word without a name
 // sense, a name reading that is a Korean word of the word (태양, 정보제공자), a word after
-// お and a word inside a kanji run stay.
+// お and a word inside a kanji run stay. An adjective stem blocks no name before くん and a
+// particle (碧くんが), only before its own ending (碧くない).
 HD_TEST(constraint_honorific_kanji) {
     CheckCases({
         {"翼くんが", "翼くんが", "翼", "츠바사!"},
@@ -228,6 +231,8 @@ HD_TEST(constraint_honorific_kanji) {
         {"お空さん", "空さん", "空", "하늘 소라"},
         {"大空くん", "空くん", "空", "하늘 소라"},
         {"翼が", "翼が", "翼", "날개 츠바사"},
+        {"碧くんが", "碧くんが", "碧", "아오이!"},
+        {"碧くない", "碧くない", "碧", "$C2@ 아오이"},
     });
 }
 
