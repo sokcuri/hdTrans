@@ -158,7 +158,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // lets '!' give the last syllable the final ㅅ (아하하 + rr! 아하하하핫), then 'v' for each
 // lengthening character, '~' for each run of ～, '!' for a closing ッ. When the last syllable
 // carries the sound (the only syllable, or one without an initial consonant: 앙, 하아,
-// 우왓), each 'v' adds a syllable of its vowel, at most four, before the final
+// 우왓), each 'v' adds a syllable of its vowel, at most sixteen, before the final
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
 // (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~, and 't' (a ～ that
 // stood for the key's ー: う～ん) a ~ at the end.

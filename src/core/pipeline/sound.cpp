@@ -66,7 +66,7 @@ bool EndsInTo(std::u32string_view m) {
     return m[k] == U'と';
 }
 
-constexpr int kMaxLengthening = 4;
+constexpr int kMaxLengthening = 16;
 
 char32_t Syllable(int initial, int vowel, int final) {
     return static_cast<char32_t>(0xAC00 + (initial * 21 + vowel) * 28 + final);
