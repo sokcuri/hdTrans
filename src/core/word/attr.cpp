@@ -190,6 +190,21 @@ bool Item::KoreanSpan() const {
     return true;
 }
 
+bool Item::AfterPause() const {
+    // The text before the word without the spaces at its end, from the tokens before it
+    // when the word starts its token.
+    auto unspaced = [](std::string_view s) {
+        while (!s.empty() && text::IsSpace(DecodeLastRune(s).cp)) s.remove_suffix(DecodeLastRune(s).size);
+        return s;
+    };
+    std::string_view before = unspaced(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
+    for (int j = tokenIndex - 1; before.empty() && w != nullptr && j >= 0; j--) {
+        before = unspaced(w->tokens.Raw(static_cast<std::size_t>(j)));
+    }
+    const std::string_view last = LastChar(before);
+    return dict::InClass("mark.sentence-end", last) || dict::InClass("mark.pause", last);
+}
+
 // Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
 // with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
 // such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
@@ -319,6 +334,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Qt") return InQuote();
         // Kh: a word span of Hangul (두근두근, 정말), see KoreanSpan.
         if (c == "Kh") return KoreanSpan();
+        // Hp: a sentence end, an ellipsis or a dash right before the word.
+        if (c == "Hp") return AfterPause();
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
