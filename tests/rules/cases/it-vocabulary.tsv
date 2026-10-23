@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+sound:name-noun	ニコニコ動画で見た。	니코니코 동화로 보았다.	fix	sound
+sound:name-noun	ニコニコ大百科に載っている。	니코니코 대백과에 실려 있다.	fix	sound
+sound:name-noun	ニコニコ漫画で読んだ。	니코니코 만화로 읽었다.	fix	sound
+sound:name-noun	ガチャを回した。	가챠를 돌렸다.	fix	sound
+sound:name-noun	口調のトーンをぐっと落とした。	어조의 톤을 꾹 떨어뜨렸다.	fix	sound
+sound:name-noun	彼はニコニコ笑った。	그는 싱글벙글 웃었다.	keep	sound
+sound:name-noun	ガチャリと鍵を回した。	철컥 열쇠를 돌렸다.	keep	sound

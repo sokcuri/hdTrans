@@ -310,6 +310,7 @@ private:
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
+    bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PresentTime(size_t end) const;
@@ -553,6 +554,16 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     size_t keyLen = chosen->key.size();
     if (chosen->key.back() == U'ト') keyLen--;
     const size_t surface = best.end - p;
+    // A name-layer key that runs on from the sound into kanji and ends with the kanji word
+    // names a thing (ニコニコ動画 니코니코 동화, ニコニコ大百科).
+    const size_t nameEnd = p + name;
+    if (name > surface && IsKanjiRune(rs_[best.end]) && IsKanjiRune(rs_[nameEnd - 1]) &&
+        (nameEnd == rs_.size() || !IsKanjiRune(rs_[nameEnd]))) {
+        return false;
+    }
+    // Right before を or が the sound is a noun when the dictionary reads it only as one
+    // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb).
+    if (base == surface && best.end < rs_.size() && In(rs_[best.end], U"をが") && NounAt(p, surface)) return false;
     return !(base > surface || (base == surface && surface > best.keyLen) || user >= keyLen);
 }
 
@@ -567,6 +578,19 @@ bool SoundText::EndsInsideKatakana(size_t p, size_t end) const {
     size_t k = end;
     while (k > p && IsKatakanaRune(rs_[k - 1])) k--;
     return k > p && k < end;
+}
+
+// Whether the dictionary reads the n characters at p as a noun and as nothing else (kana
+// spellings and names aside).
+bool SoundText::NounAt(size_t p, size_t n) const {
+    const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup);
+    bool noun = false;
+    for (const dict::Candidate& c : rd.list) {
+        if ((c.user != nullptr && (c.user->kana || c.user->nameLayer)) || text::RuneCount(c.source) != n) continue;
+        if (!c.codes->partText.starts_with("N1")) return false;
+        noun = true;
+    }
+    return noun;
 }
 
 // The Korean of the sound s at characters [p, end), for the sounds whose reading
