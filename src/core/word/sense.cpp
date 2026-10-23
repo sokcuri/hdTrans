@@ -128,6 +128,13 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
         const char cls = At(x->Code(x->selected), 0);
+        // Before the word, an auxiliary verb written right after its verb (生えている角) lets
+        // that verb be the trigger.
+        const Item* main = x->prev;
+        if (cls == '4' && s.side == userdict::Side::Before && main != nullptr && main->selected >= 0 &&
+            At(main->Code(main->selected), 0) == '4' && main->JoinsNext() && SenseTriggers(main, it, s)) {
+            return true;
+        }
         if (cls == '6' || cls == '4' || cls == '7') return false;
     }
     return false;
