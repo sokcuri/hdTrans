@@ -3,7 +3,7 @@ pattern:書くことで	お前を別の世界に送ることで私に利があ�
 pattern:書くことで	書くことではない。	쓰는 것은 아니다.	keep	builtin-pattern
 pattern:書くことで	私にできることであれば。	내가 할 수 있는 것이면.	keep	builtin-pattern
 pattern:書くことで	休みということで帰った。	휴일이라는 것으로 돌아갔다.	fix	builtin-pattern
-pattern:書くことで	【万能農具】で引っ掛けることで	【만능 농기구】로 걺으로써	fix	builtin-pattern
+pattern:書くことで	棒で引っ掛けることで	봉으로 걺으로써	fix	builtin-pattern
 pattern:書くことで	料理を作ることで覚えた。	요리를 만듦으로써 기억했다.	fix	builtin-pattern
 pattern:書くことで	ですがまだ近場にいるだろうということで、ひとまず	그렇지만 아직 근처에 있을 것이라는 것으로, 일단	fix	builtin-pattern
 pattern:書くことで	知的好奇心を満たすことでなく	지적 호기심을 채우는 것이 아니고	fix	builtin-pattern

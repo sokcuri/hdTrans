@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-dict:onaji:ask	前に持ってきたヒカリイシと同じ？	전에 가져온 히카리이시와 같아?	fix	local
+dict:onaji:ask	前に持ってきた石と同じ？	전에 가져온 돌과 같아?	fix	local
 dict:jisjk:364219	同じクラスだ。	같은 반이다.	keep	local
 dict:jisjk:364221	同じ！	같다!	fix	local

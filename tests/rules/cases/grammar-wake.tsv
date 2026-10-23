@@ -22,8 +22,8 @@ constraint:wake-formal-noun	みんなでわけよう。	모두 나누자.	keep	l
 dict:jisjk:373943	道理で手慣れてるわけだ。	rule:dict:jisjk:373943=것	fix	local
 dict:jisjk:373943	そのわけを話せ。	!rule:dict:jisjk:373943	keep	local
 dict:jisjk:373943	どんなわけなのか説明して。	!rule:dict:jisjk:373943	keep	local
-dict:jisjk:343497	今日は私が秘書艦ってわけ。	오늘은 내가 비서함이라는 것.	fix	local
-dict:jisjk:343497	秘書艦ってことだ。	비서함이라는 것이다.	keep	local
+dict:jisjk:343497	今日は私が当番ってわけ。	오늘은 내가 당번이라는 것.	fix	local
+dict:jisjk:343497	当番ってことだ。	당번이라는 것이다.	keep	local
 dict:w:26748	わけあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
 dict:w:26748	ワケあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
 dict:w:26749	まあ、訳あって、あまり表には出てこない。	뭐, 사정이 있어, 그다지 겉에는 나오지 않는다.	fix	lookup
