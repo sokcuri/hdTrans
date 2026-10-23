@@ -13,6 +13,7 @@ enum SpanKind : int {
     SpanWord = 1,   // Hangul or foreign text, read as a noun
     SpanOpen = 2,   // tag, entity, host marker, stutter marks
     SpanClose = 3,  // closing tag
+    SpanGap = 4,    // a column separator between chunks, written as typed (pipeline::Segment)
 };
 
 // A particle mark at the end of a word span: the span takes the particles of a word

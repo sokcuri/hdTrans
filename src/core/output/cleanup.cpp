@@ -56,7 +56,7 @@ bool StartsWith(std::string_view s, std::string_view prefix) { return s.substr(0
 
 }  // namespace
 
-Pieces Cleanup(const std::vector<Sentence>& sentences) {
+Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::string> gaps) {
     Pieces out;
     Pieces got;
     int chunk = sentences.empty() ? 0 : sentences.front().chunk;
@@ -64,6 +64,14 @@ Pieces Cleanup(const std::vector<Sentence>& sentences) {
         if (s.chunk != chunk) {
             AppendChunk(out, std::move(got));
             got.clear();
+            std::string gap;
+            for (int c = chunk + 1; c <= s.chunk; c++) {
+                if (static_cast<size_t>(c) < gaps.size()) gap += gaps[static_cast<size_t>(c)];
+            }
+            if (!gap.empty()) {
+                TrimRight(out);
+                out.push_back({std::move(gap), SpanGap});
+            }
             chunk = s.chunk;
         }
         AppendSentence(got, s.pieces);
@@ -89,7 +97,9 @@ void AppendSentence(Pieces& result, const Pieces& sentence) {
 }
 
 void AppendChunk(Pieces& out, Pieces&& got) {
-    if (!out.empty() && !got.empty()) {
+    if (!out.empty() && out.back().span == SpanGap) {
+        TrimLeft(got);
+    } else if (!out.empty() && !got.empty()) {
         TrimRight(out);
         Add(out, " ");
         TrimLeft(got);

@@ -204,3 +204,21 @@ HD_TEST(output_cleanup_joins) {
     HD_CHECK_EQ(static_cast<int>(out[1].span), static_cast<int>(SpanWord));
     HD_CHECK_EQ(out[2].text, std::string(" 는 "));
 }
+
+HD_TEST(output_cleanup_column_gaps) {
+    // A column separator joins the chunks as typed, as a SpanGap piece, in place of the
+    // one space; chunks without sentences between pass theirs on.
+    const std::vector<Sentence> sentences = {
+        {0, {Text("의사 ")}},
+        {1, {Text(" 부유 중")}},
+        {3, {Text("상태")}},
+    };
+    const std::vector<std::string> gaps = {"", "　　 ", "  ", "\t"};
+    const Pieces out = Cleanup(sentences, gaps);
+    HD_CHECK_EQ(String(out), std::string("의사　　 부유 중  \t상태"));
+    HD_REQUIRE(out.size() == 5);
+    HD_CHECK_EQ(static_cast<int>(out[1].span), static_cast<int>(SpanGap));
+    HD_CHECK_EQ(out[3].text, std::string("  \t"));
+    // Without gaps the chunks take one space.
+    HD_CHECK_EQ(String(Cleanup(sentences)), std::string("의사 부유 중 상태"));
+}

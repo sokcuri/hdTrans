@@ -276,7 +276,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const output::Pieces marked = pipeline::MarkCornerBrackets(typed);
     if (observer.pieces) observer.pieces(observer.context, "P", -1, marked);
 
-    const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked);
+    std::vector<std::string> gaps;
+    const std::vector<pipeline::Chunk> chunks = pipeline::Segment(marked, &gaps);
     LineSpeech speech;
     if (!options.reference) {
         speech.asked = true;
@@ -301,13 +302,14 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
+            if (!gaps[i].empty()) before.clear();  // a column starts as a line does
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
             const std::string chunkText = output::String(chunks[i]);
             pass.quotes = output::QuotesAfter(pass.quotes, chunkText);
             if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
         }
-        const output::Pieces cleaned = output::Cleanup(sentences);
+        const output::Pieces cleaned = output::Cleanup(sentences, gaps);
         if (watch.cleaned) watch.cleaned(watch.context, cleaned);
         const pipeline::RestoreSteps steps = pipeline::RestoreAll(
             cleaned, typed, /*keepBrackets=*/true, !opts.reference && opts.wordImprovements.literalCleanup);
@@ -405,6 +407,24 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     return out;
 }
 
+// The columns of s, each with the column separator after it ("" after the last), as
+// pipeline::Segment cuts a line of the text path.
+std::vector<std::pair<std::string_view, std::string_view>> Columns(std::string_view s) {
+    std::vector<std::pair<std::string_view, std::string_view>> out;
+    std::size_t from = 0;
+    for (std::size_t i = 0; i < s.size();) {
+        if (const std::size_t end = pipeline::internal::ColumnGap(s, i, false, false); end != i) {
+            out.emplace_back(s.substr(from, i - from), s.substr(i, end - i));
+            from = i = end;
+            continue;
+        }
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        i += r.size == 0 ? 1 : r.size;
+    }
+    out.emplace_back(s.substr(from), std::string_view());
+    return out;
+}
+
 // The raw path of TranslateRawLine, without the filters.
 std::string RawLine(const dict::Snapshot& snap, Generated& generated, std::string_view line,
                     const StageObserver& observer, const TranslationOptions& options) {
@@ -420,13 +440,17 @@ std::string RawLine(const dict::Snapshot& snap, Generated& generated, std::strin
     if (options.filters) lookup.user = options.filters->User();
     std::string result;
     for (std::string_view piece : text::TranslationPieces(line)) {
-        output::Pieces chunk;
-        if (!piece.empty()) chunk.push_back({std::string(piece), output::SpanText});
-        std::vector<output::Sentence> sentences;
-        TranslateChunk(snap, lookup, chunk, 0, false, false, {}, LineSpeech{}, s, generated, observer, options, sentences);
-        output::Pieces composed;
-        for (const output::Sentence& sentence : sentences) output::Append(composed, sentence.pieces);
-        result += output::String(composed);
+        for (const auto& [column, gap] : Columns(piece)) {
+            output::Pieces chunk;
+            if (!column.empty()) chunk.push_back({std::string(column), output::SpanText});
+            std::vector<output::Sentence> sentences;
+            TranslateChunk(snap, lookup, chunk, 0, false, false, {}, LineSpeech{}, s, generated, observer, options,
+                           sentences);
+            output::Pieces composed;
+            for (const output::Sentence& sentence : sentences) output::Append(composed, sentence.pieces);
+            result += output::String(composed);
+            result += gap;
+        }
     }
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);

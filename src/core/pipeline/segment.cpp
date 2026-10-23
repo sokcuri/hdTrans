@@ -83,6 +83,30 @@ bool Conjunctive(std::string_view s) {
     return false;
 }
 
+size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) {
+    const size_t blanks = RunOf(s.substr(i), IsBlank);
+    const std::string_view run = s.substr(i, blanks);
+    if (blanks == 0 || (run.find('\t') == std::string_view::npos && LastRune(run).size == blanks)) return i;
+    const size_t end = i + blanks;
+    auto lineEnd = [](char32_t r) { return r == U'\n' || r == U'\r'; };
+    const text::Rune last = LastRune(s.substr(0, i));
+    if (i == 0 ? !lineBefore : (IsBlank(last.cp) || lineEnd(last.cp))) return i;
+    const text::Rune next = text::DecodeRune(s.substr(end));
+    if (end == s.size() ? !lineAfter : lineEnd(next.cp)) return i;
+    // A single kanji on each side, each standing alone: a two-character name padded to the
+    // width of three (林  涛).
+    const auto alone = [&](size_t at, bool more) {
+        if (at == 0 || at == s.size()) return !more;
+        const char32_t r = at < i ? LastRune(s.substr(0, at)).cp : text::DecodeRune(s.substr(at)).cp;
+        return IsBlank(r) || lineEnd(r);
+    };
+    if (IsKanjiRune(last.cp) && IsKanjiRune(next.cp) && alone(i - last.size, lineBefore) &&
+        alone(end + next.size, lineAfter)) {
+        return i;
+    }
+    return end;
+}
+
 bool BetweenWords(std::string_view s, size_t i) {
     auto word = [](char32_t r) { return r != text::kReplacement && !IsBlank(r) && r != U'\n' && r != U'\r'; };
     const text::Rune last = LastRune(s.substr(0, i));
@@ -95,10 +119,12 @@ bool BetweenWords(std::string_view s, size_t i) {
 
 }  // namespace internal
 
-std::vector<Chunk> Segment(const output::Pieces& pieces) {
+std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string>* gaps) {
     using namespace internal;
     std::vector<Chunk> parts;
+    std::vector<std::string> gapsBefore;
     Chunk part;
+    std::string gap;  // the column separator before part
     int count = 0;
     for (size_t k = 0; k < pieces.size(); k++) {
         const output::Piece& p = pieces[k];
@@ -110,10 +136,25 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
         size_t start = 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
+            if (const size_t end = ColumnGap(t, i, k > 0, k + 1 < pieces.size()); end != i) {
+                output::Add(part, t.substr(start, i - start));
+                if (!part.empty()) {
+                    parts.push_back(std::move(part));
+                    gapsBefore.push_back(std::move(gap));
+                    part.clear();
+                    gap.clear();
+                }
+                gap += t.substr(i, end - i);
+                start = i = end;
+                count = 0;
+                continue;
+            }
             if ((r.cp == U'　' || (r.cp == U' ' && KanaSpace(t, i))) && i > start && BetweenWords(t, i)) {
                 output::Add(part, t.substr(start, i - start));
                 parts.push_back(std::move(part));
+                gapsBefore.push_back(std::move(gap));
                 part.clear();
+                gap.clear();
                 start = i;
                 count = 0;
             } else if (IsSentenceEnd(r.cp)) {
@@ -123,7 +164,9 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
                 if (count >= kChunkBefore && Conjunctive(t.substr(0, i)) && CharsBeforeEnd(pieces, k, end) >= kChunkAfter) {
                     output::Add(part, t.substr(start, end - start));
                     parts.push_back(std::move(part));
+                    gapsBefore.push_back(std::move(gap));
                     part.clear();
+                    gap.clear();
                     start = end;
                     count = 0;
                 }
@@ -135,6 +178,7 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
         output::Add(part, t.substr(start));
     }
     parts.push_back(std::move(part));
+    gapsBefore.push_back(std::move(gap));
     for (size_t i = 1; i < parts.size(); i++) {
         Chunk& c = parts[i];
         if (c.empty() || c[0].span != output::SpanText) continue;
@@ -145,6 +189,7 @@ std::vector<Chunk> Segment(const output::Pieces& pieces) {
             c.erase(c.begin());
         }
     }
+    if (gaps != nullptr) *gaps = std::move(gapsBefore);
     return parts;
 }
 
