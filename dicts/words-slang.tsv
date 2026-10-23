@@ -7030,7 +7030,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 どうって事はない	별것 아니야	A9D0			GN				llm			s:7027
 何じゃそりゃ	뭐야 그게	A9D0			GN				llm			s:7028
 何じゃそら	뭐야 그게	A9D0			GN				llm			s:7029
-バツイチ	이혼 경력 한 번	N110			GN				llm			s:7030
+バツイチ	돌싱	N110			GN				llm			s:7030
 パイオツ	가슴	N110			GN				llm			s:7031
 ヘベレケ	곤드레만드레	N110			GN				llm			s:7032
 ヘボ医者	돌팔이 의사	N110			GN				llm			s:7033
@@ -7668,8 +7668,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウラシマ効果	우라시마 효과	N110			GN				llm			s:7665
 浦島効果	우라시마 효과	N110			GN				llm			s:7666
 コタツムリ	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7667
-こたつ虫	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7668
-炬燵虫	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7669
+こたつ虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7668
+炬燵虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7669
 早稲女	와세다 여학생	N110			GN				llm			s:7670
 ワセ女	와세다 여학생	N110			GN				llm			s:7671
 クソゲ	똥겜	N110			GN				llm			s:7672
@@ -9128,8 +9128,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 わかり手	공감해 주는 사람	N110			GN				llm			s:9125
 分かり手	공감해 주는 사람	N110			GN				llm			s:9126
 バチコリ	딱	E300			GN				llm			s:9127
-ミリ知ら	밀리도 모르는 척하는 사람	N110			GN				llm			s:9128
-ミリしら	밀리도 모르는 척하는 사람	N110			GN				llm			s:9129
+ミリ知ら	1도 모름	N110			GN				llm			s:9128
+ミリしら	1도 모름	N110			GN				llm			s:9129
 竿役	남자 상대역	N110			GN				llm			s:9130
 暗黒微笑	암흑 미소	N110			GN				llm			s:9131
 脱オタ	탈오타쿠	N110			GN				llm			s:9132

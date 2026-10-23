@@ -11,3 +11,7 @@ dict:jisjk:260094	二度とスパムメールを送らない。	두 번 다시 �
 dict:jisjk:55237	フライドポテトなら片手で食べられる。	감자튀김이라면 한 손으로 먹을 수 있다.	fix	lookup
 dict:jisjk:55945	最大の懸念だったプランターを並べる土地	최대의 염려였던 플랜터를 늘어놓는 토지	fix	lookup
 dict:jisjk:14060	ドアを開けた。	문을 열었다.	keep	lookup
+dict:jisjk:14539	「簡易書留の受領証明」	「간이 등기의 영수증명」	fix	lookup
+dict:jisjk:251973	豆撒きですね。	콩 뿌리기군요.	fix	lookup
+dict:jisjk:40363	製薬スキル、今いくつだっけ？	제약 스킬, 지금 몇 개였나?	fix	lookup
+dict:jisjk:222501	生来なんとなく身体は丈夫な方で、	본디부터 왠지 몸은 튼튼한 편으로,	keep	lookup
