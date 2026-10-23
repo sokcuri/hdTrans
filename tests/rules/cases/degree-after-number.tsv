@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+rewrite:degree-after-number	百八十度変わった。	180도 바뀌었다.	fix	rewrites
+rewrite:degree-after-number	三百六十度見渡す。	360도 둘러본다.	fix	rewrites
+rewrite:degree-after-number	煙突は九十度倒すことができる。	굴뚝은 90도 넘어뜨릴 수가 있다.	fix	rewrites
+rewrite:degree-after-number	冷暖房も0.5度単位で設定できる。	냉난방도 0.5도 단위로 설정할 수 있다.	fix	rewrites
+rewrite:degree-after-number	九十九さんが来た。	츠쿠모 씨가 왔다.	fix	rewrites
+rewrite:degree-after-number	五度ほど繰り返し読んだ。	다섯 번 정도 반복해 읽었다.	keep	rewrites
+rewrite:degree-after-number	十度目の挑戦だ。	열 번째 도전이다.	keep	rewrites
+rewrite:degree-after-number	九十九パーセントだ。	99퍼센트다.	keep	rewrites

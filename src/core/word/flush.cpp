@@ -17,6 +17,7 @@ void Flush(Flusher& f) {
         Select(f);
         RespectfulPassive(f);
         OwnPassives(f);
+        DegreeAfterNumber(f);
         BenefactiveProvider(f);
         ChooseInitialConjunctions(f);
         GoNotSay(f);

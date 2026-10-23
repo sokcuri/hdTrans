@@ -2121,6 +2121,24 @@ void ChanAfterKatakana(Flusher& f) {
     }
 }
 
+void DegreeAfterNumber(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const Item* p = it->prev;
+        if (it->group->surface != "度" || it->selected < 0 || p == nullptr || p->selected < 0 ||
+            ItemLemma(f, it, it->selected) != "번" || p->tokenIndex != it->tokenIndex) {
+            continue;
+        }
+        const std::string_view number = p->EntryText(p->selected);
+        const bool digits = !number.empty() && std::all_of(number.begin(), number.end(), [](char c) {
+            return (c >= '0' && c <= '9') || c == '.' || c == ',';
+        });
+        if (!digits || !IsDigit(number[0])) continue;
+        if (number.find('.') == std::string_view::npos && (number.size() < 2 || number[0] == '0')) continue;
+        if (const Item* n = it->next; n != nullptr && n->group->surface.starts_with("目")) continue;
+        SelectLemma(f, it, "도");
+    }
+}
+
 void PluralPronoun(Flusher& f) {
     static constexpr std::string_view kPluralSuffixes[] = {"たち", "達", "ら", "ども"};
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {

@@ -738,12 +738,21 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
 // otherwise (四十九日 사십구일재, 二十歳 20살) or a longer word (五十肩, 八百屋, 二十四時間)
 // keeps its reading, and so does a word that also has a sense of its own beside the
 // spelled one, where no kanji goes on after it (十八番 십팔번 and 장기: 十八番を歌う, but
-// 十八番艦 18번함). text is the text the words start.
+// 十八番艦 18번함), and a name before an honorific (九十九さん). text is the text the words
+// start.
 bool Worker::SpellsNumber(Record* records, const Record& number, std::string_view text) {
     const std::string_view source = number.source;
     if (!settings.improvements.kanjiNumbers || source.empty() || static_cast<unsigned char>(source[0]) < 0x80 ||
         number.target.empty() || !IsDigit(number.target[0]) || text::RuneCount(source) < 2) {
         return false;
+    }
+    // A name spelled like the number before an honorific (九十九さん) is the name.
+    constexpr std::string_view kHonorifics[] = {"さん", "様", "さま", "氏", "君", "くん", "ちゃん", "殿"};
+    const std::string_view after = text.substr(std::min(source.size(), text.size()));
+    if (std::any_of(std::begin(kHonorifics), std::end(kHonorifics), [&](std::string_view h) { return after.starts_with(h); })) {
+        for (const Record* r = records; r != nullptr; r = r->child) {
+            if (r->source == source && (r->partCode.starts_with("N13") || r->semantic.starts_with("QPN"))) return false;
+        }
     }
     const std::string reading = SinoKoreanNumber(number.target);
     bool spelled = false, own = false;
