@@ -334,4 +334,13 @@ HD_TEST(FilterKeepSpacesAfterNumbers) {
     HD_CHECK_EQ(keep("ステージ3 ボス戦", "ステージ3 ボス戦"), "ステージ3 ボス戦");
     // A character the filter rewrote leaves the space out.
     HD_CHECK_EQ(keep("3 ボス", "3魔"), "3魔");
+    // A full-width digit the filter wrote in ASCII is the same character.
+    HD_CHECK_EQ(keep("１２　月", "12月。⌒"), "12　月。⌒");
+    // A long line aligns on its common start and end.
+    std::string longSource(3000, 'x'), longFiltered(3000, 'x');
+    longSource += "ステージ3 ボス戦";
+    longFiltered += "ステージ3ボス戦";
+    HD_CHECK_EQ(keep(longSource, longFiltered), longSource);
+    // Unchanged text stays.
+    HD_CHECK_EQ(keep("3 ボス", "3 ボス"), "3 ボス");
 }

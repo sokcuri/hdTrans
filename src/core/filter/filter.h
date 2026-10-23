@@ -124,8 +124,11 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
 // removed between a digit or a Latin letter and a word in kanji, katakana or Latin letters
 // after it (ステージ3 ボス戦 → ステージ3ボス戦 → ステージ3 ボス戦). Ehnd dictionaries remove them
 // for a translator that ignores spaces; hdTrans reads such a space as the source's spacing
-// (3 보스전, 1 레벨). The two lines are aligned on their longest common subsequence of
-// characters; a space comes back only where both characters around it are kept and adjoin.
+// (3 보스전, 1 레벨). The two lines are aligned on their common start and end and, between
+// them, on their longest common subsequence of characters, the full-width forms of ASCII
+// matching their ASCII forms (１２　月 → 12月 → 12　月); a space comes back only where both
+// characters around it are kept and adjoin. Between a common start and end that leave more
+// than 2^22 character pairs, the spaces stay as the filter left them.
 void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered);
 
 // UTF-8 to and from UTF-16; invalid bytes and lone surrogates read as U+FFFD.

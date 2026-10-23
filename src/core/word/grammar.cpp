@@ -2114,6 +2114,23 @@ bool OnReading(const Item* it) {
     return it != nullptr && it->selected >= 0 && Has(it->GAttr(it->selected), "On");
 }
 
+// A counter that follows a number across spaces only (2026 年 2026 년, ３　歳): the number
+// it counts stands before it, so it does not start a word.
+bool CounterAfterSpacedNumber(const Flusher& f, const Item* it) {
+    const Item* p = it->prev;
+    if (p == nullptr || it->start != 0 || !Has(it->GAttr(it->selected), "Ct") || p->tokenIndex >= it->tokenIndex) {
+        return false;
+    }
+    const std::string_view ps = p->group->surface;
+    if (ps.empty() || !text::IsDigit(DecodeLastRune(ps).cp)) return false;
+    if (p->start + p->length != static_cast<int>(p->text.size())) return false;
+    for (int t = p->tokenIndex + 1; t < it->tokenIndex; t++) {
+        const int type = f.w.Tok(t).type;
+        if (type != tokenizer::kTypeAsciiSpace && type != tokenizer::kTypeWideSpace) return false;
+    }
+    return p->tokenIndex + 1 < it->tokenIndex;
+}
+
 // s with the initial sound rule on its first syllable: ㄹ before ㅑ ㅕ ㅖ ㅛ ㅠ ㅣ and ㄴ before
 // those vowels become ㅇ, another ㄹ becomes ㄴ (륭 융, 녀 여, 로 노).
 std::string InitialSound(std::string_view s) {
@@ -2149,6 +2166,7 @@ void InitialSoundRule(Flusher& f) {
             const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
             if (!particle && (text::IsLetter(last) || text::IsDigit(last))) continue;
         }
+        if (CounterAfterSpacedNumber(f, it)) continue;
         const std::string target(it->EntryText(it->selected));
         if (const std::string ruled = InitialSound(target); ruled != target) {
             TakeTarget(it, At(it->Code(it->selected), 0), ruled);
