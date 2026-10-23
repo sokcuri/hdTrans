@@ -14,7 +14,6 @@ lexical:loanword-spelling	データベースを調べた。	데이터베이스�
 lexical:loanword-spelling	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
 lexical:it-loanword	リポジトリをクローンしてください。	리포지토리를 클론해 주세요.	fix	defaults
 lexical:it-loanword	プルリクエストを送った。	풀 리퀘스트를 보냈다.	fix	defaults
-lexical:it-loanword	本番環境にデプロイした。	실전 환경에 디플로이했다.	fix	defaults
 lexical:it-loanword	ソースコードを読む。	소스 코드를 읽는다.	fix	defaults
 lexical:it-loanword	コンパイルエラーが出た。	컴파일 에러가 나왔다.	fix	defaults
 lexical:it-loanword	フレームワークを選ぶ。	프레임워크를 선택한다.	fix	defaults
@@ -52,3 +51,6 @@ compose:verbal-noun-passive	プルリクエストがマージされた。	풀 �
 compose:verbal-noun-passive	ドアはロックされている。	문은 락되고 있다.	fix	compose
 compose:verbal-noun-passive	部室のドアがノックされた。	동아리방의 문이 노크되었다.	fix	compose
 compose:verbal-noun-passive	ちょっと温存され過ぎたけど	조금 온존 너무 되었지만	keep	compose
+sense:通らない	ビルドが通らない。	빌드가 통과하지 않는다.	fix	senses
+sense:通らない	声が通らない。	목소리가 통하지 않는다.	keep	senses
+lexical:it-loanword	本番環境にデプロイした。	운영 환경에 디플로이했다.	fix	defaults
