@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:jisjk:259268	1ゲーム目が始まった。	1게임째가 시작되었다.	fix	local
+dict:jisjk:259268	３ゲーム目も負け。	3게임째도 패배.	fix	local
+dict:jisjk:259268	1層目に着いた。	1층째에 닿았다.	fix	local
+dict:jisjk:259268	7連発目。	7연발째.	fix	local
+dict:jisjk:259268	目が痛い。	눈이 아프다.	keep	local
+dict:jisjk:259268	二つの目。	두 개의 눈.	keep	local
+dict:jisjk:259268	一目で分かった。	한눈에 알았다.	keep	local
+dict:jisjk:259268	二匹目の猫。	두 마리째의 고양이.	keep	local
