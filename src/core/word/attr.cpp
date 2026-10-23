@@ -210,9 +210,9 @@ bool Item::IsQuestionWord() const {
         if (s.starts_with(n) && !(n.ends_with("か") && s.substr(n.size()).starts_with("ら"))) return false;
     }
     const char cls = At(Code(std::max(selected, 0)), 0);
-    for (const std::string_view w : kWonderWords) {
-        if (!s.starts_with(w)) continue;
-        const std::string_view rest = s.substr(w.size());
+    for (const std::string_view wonder : kWonderWords) {
+        if (!s.starts_with(wonder)) continue;
+        const std::string_view rest = s.substr(wonder.size());
         if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
         for (const std::string_view part : kWonderParticles) {
             if (rest.starts_with(part)) return true;
