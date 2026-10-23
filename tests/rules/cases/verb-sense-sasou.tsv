@@ -1,3 +1,8 @@
 rule	input	expected	kind	layer
-dict:jisjk:365678	田中でも誘うか	타나카에서도 부를까	fix	global-stem
+dict:jisjk:365678	友達も誘うか	친구도 부를까	fix	local
 dict:jisjk:365678	眠気を誘う。	졸음을 유발한다.	keep	senses
+dict:lex:sasou-lead	奥へと誘ってくれる。	안쪽으로 이끌어 준다.	fix	local
+dict:lex:sasou-lead	幸福の絶頂へと誘う。	rule:dict:lex:sasou-lead=이&L2@	fix	local
+dict:lex:sasou-lead	友達を家に誘う。	!rule:dict:lex:sasou-lead	keep	local
+dict:jisjk:263873	誘うような動き	유혹하는 것 같은 움직임	fix	local
+dict:jisjk:263873	誘うのはやめた。	!rule:dict:jisjk:263873	keep	local
