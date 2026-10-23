@@ -600,7 +600,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 して遣	속&AJ@	M428			GN				llm		してやる	w:596
 しのび寄	몰래 다가&AH@	M428			GN				llm		しのびよる	w:597
 しのり鴨	흰줄박이오리	N110			GN						しのりがも	w:598
-しばらく	한동안	E300			GN				xxx llm	1		w:599
+しばらく	한동안	E300	UMe		GN				xxx llm	1		w:599
 しばらく後	얼마 뒤	N110			GN				llm			w:600
 しびれエイ	전기가오리	N110			GN						しびれエイ	w:601
 しまスカンク	줄무늬스컹크	N110			GN						しまスカンク	w:602
@@ -17447,7 +17447,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 数億年	수억 년	N110	UMe	Tm	GN				llm		すうおくねん	w:17432
 数合せ	숫자 맞추기	N110			GN				llm		かずあわせ	w:17433
 数学者	수학자	N110			GN						すうがくしゃ	w:17434
-数日	며칠	N110			GN				xxx llm	1		w:17435
+数日	며칠	N110	UMe		GN				xxx llm	1		w:17435
 数日前	며칠 전	I110			GN				xxx llm	1		w:17436
 数日後	며칠 후	I110			GN				xxx llm	1		w:17437
 数時間	몇 시간	N110	UMe	Tm	GN				llm		すうじかん	w:17438
