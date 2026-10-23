@@ -120,10 +120,11 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
     for (int n = 0; n < kSenseWindow; n++) {
         x = step(x);
         if (x != nullptr && IsQuoteMark(x->group->surface)) continue;
-        // A comma between two nouns lists them (コップとお皿、お盆); it is no boundary.
+        // A comma between two nouns lists them (コップとお皿、お盆): the noun across it can be
+        // the trigger, but not the words of its own phrase (沖姉、朝ちゃん).
         if (x != nullptr && x->group->surface == "、" && At(it->Code(it->selected), 0) == '1') {
             const Item* y = step(x);
-            if (y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') continue;
+            if (y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') return SenseTriggers(y, it, s);
         }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;

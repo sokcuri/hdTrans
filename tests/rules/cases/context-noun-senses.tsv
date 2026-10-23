@@ -17,3 +17,5 @@ sense:背	背で影が伸びた。	등으로 그림자가 뻗었다.	fix	senses
 sense:背	彼の背に影が伸びる。	그의 등에 그림자가 뻗는다.	fix	senses
 sense:角	私の知ってる鹿は、あんな輝きを放つ角はしていなかった。	내가 알고 있는 사슴은, 저런 빛을 발하는 뿔은 하고 있지 않았다.	keep	senses
 sense:お盆	とりあえず、コップとお皿、お盆。	우선, 컵과 접시, 쟁반.	keep	senses
+sense:姉	姉、ミキちゃん、おはよう。	언니, 미키짱, 좋은 아침.	fix	senses
+sense:姉	姉ちゃん、待って。	누나, 기다려.	keep	senses
