@@ -2085,43 +2085,6 @@ void HumbleFirstPerson(Flusher& f) {
 
 namespace {
 
-// Whether the predicate after it is a verb of verb.means-de: the first verb, past nouns and their を
-// but not past punctuation or another particle (夢で、すべてが終わった is no means).
-bool MeansVerbFollows(const Item* it) {
-    for (; it != nullptr; it = it->next) {
-        if (it->selected < 0) return false;
-        const Entry* e = it->group->At(it->selected);
-        const char code = At(it->Code(it->selected), 0);
-        if (!it->detail->Yougo() && (code == '6' || (e != nullptr && e->cls == 'P' && it->group->surface != "を"))) {
-            return false;
-        }
-        if (it->detail->cls != kDetailVerb) continue;
-        const std::string_view stem = it->group->surface;
-        return std::ranges::any_of(dict::ClassMembers("verb.means-de"), [&](std::string_view v) { return stem.ends_with(v); });
-    }
-    return false;
-}
-
-}  // namespace
-
-void DeScene(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "で" || it->selected < 0 || p->selected < 0 || p->detail->Yougo() ||
-            ItemLemma(f, it, it->selected) != "(으)로") {
-            continue;
-        }
-        if (p->group->surface == "一瞬" || p->group->surface == "瞬時") {
-            SelectLemma(f, it, "에");
-        } else if (dict::InClass("noun.scene", p->group->surface) &&
-                   !(dict::InClass("noun.scene-means", p->group->surface) && MeansVerbFollows(it->next))) {
-            SelectLemma(f, it, "에서");
-        }
-    }
-}
-
-namespace {
-
 // The Korean of a のか word: its ending, or the word itself when it has none (なのか).
 std::string_view NokaText(const Item* it) {
     if (const Entry* d = it->DirectEntry(it->DirectIndex())) return d->dst;

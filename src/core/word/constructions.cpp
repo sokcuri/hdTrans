@@ -31,6 +31,7 @@ constexpr NamedFeature kFeatures[] = {
     {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }},
     {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
     {"last", [](Flusher&, const Item* it) { return it->next == nullptr; }},
+    {"verb", [](Flusher&, const Item* it) { return it->detail->cls == kDetailVerb; }},
     {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }},
     // The Korean of the next word starts with this word's Korean and a space.
     {"lemma-starts-next",

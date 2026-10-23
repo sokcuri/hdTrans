@@ -19,7 +19,10 @@ cx:ni-after-adverb:20		&&7 S+0== "に" F+0== "selected" F-1== "selected" L+0== "
 cx:ni-after-adverb:30		&&6 S+0== "に" F+0== "selected" F-1== "selected" L+0== "에" F-1!= "conjugating" ||3 L-1== "R껏" L-1== "R으로" L-1== "R지로"	select-lemma ""	無理やりに 억지로
 //= no-after-na	after ni-after-adverb	The の read 의 after a な adjective read in 한 is the noun 것.
 cx:no-after-na:10		&&7 S+0== "の" F+0== "selected" F-1== "selected" F-1!= "conjugating" S-1== "Rな" L-1== "R한" L+0== "의"	select-lemma "것"	元気そうなのが 씩씩한 것이
-//= particle-in-next	after DeScene	A particle whose Korean starts the Korean of the next word writes nothing, the next word carrying it.
+//= de-scene	after ShortPossessive	The で read (으)로 after a noun of a place or scene is 에서, unless the noun can be a means (noun.scene-means) and the first verb after it, with no punctuation or other particle between, is one of verb.means-de; after an instant it is 에.
+cx:de-scene:10		&&6 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" ||2 S-1== "一瞬" S-1== "瞬時"	select-lemma "에"	一瞬で 한순간에
+cx:de-scene:20		&&7 S+0== "で" F+0== "selected" F-1== "selected" F-1!= "conjugating" L+0== "(으)로" S-1== @noun.scene !1 &&2 S-1== @noun.scene-means >0 &&3 F+0== "selected" F+0== "verb" S+0== @Rverb.means-de ||3 F+0!= "selected" &&2 F+0!= "conjugating" ||2 P+0== "6" &&2 K+0== "P" S+0!= "を" F+0== "verb"	select-lemma "에서"	後ろで 뒤에서; not 夢で終わった, where the first verb after it makes 夢 the means
+//= particle-in-next	after de-scene	A particle whose Korean starts the Korean of the next word writes nothing, the next word carrying it.
 cx:particle-in-next:10		&&5 F+0== "selected" F+1== "selected" F+0!= "conjugating" K+0== "P" F+0== "lemma-starts-next"	set-target ""	人気なだけに 인기인 만큼
 //= ji-before-jiman	after particle-in-next	The けど read in 지만 after an ending in 겠지 is 만 alone.
 cx:ji-before-jiman:10		&&4 F+1== "selected" ||2 S+1== "Lけど" S+1== "Lけれど" L+1== "R지만" Y+0== "R겠지"	set-target@+1 "만"	ないのだろうけど 없겠지만

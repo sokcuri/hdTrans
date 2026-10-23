@@ -1,17 +1,19 @@
 rule	input	expected	kind	layer
-rewrite:de-scene	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 소중한 것은 하나뿐이다.	fix	rewrites
-rewrite:de-scene	こんな状況で言うのもなんだが	이런 상황에서 말하는 것도 좀 그렇지만	fix	rewrites
-rewrite:de-scene	何かが後ろで光った気がした。	뭔가가 뒤에서 빛난 것 같았다.	fix	rewrites
-rewrite:de-scene	中でお待ちしております。	안에서 기다리고 있습니다.	fix	rewrites
-rewrite:de-scene	冷蔵庫の前で立ち止まる。	냉장고 앞에서 멈춰 선다.	fix	rewrites
-rewrite:de-scene	夢で雨が降るのはおかしい？	꿈에서 비가 오는 것은 이상해?	fix	rewrites
-rewrite:de-scene	ナイフで切った。	나이프로 잘랐다.	keep	rewrites
-rewrite:de-scene	電車で学校に行く。	전철로 학교에 간다.	keep	rewrites
-rewrite:de-scene	一瞬で消えた。	한순간에 사라졌다.	keep	rewrites
-rewrite:de-scene	欺く夢で取り繕った	속이는 꿈으로 꾸몄다	fix	rewrites
-rewrite:de-scene	夢で終わった。	꿈으로 끝났다.	fix	rewrites
-rewrite:de-scene	夢で会おう。	꿈에서 만나자.	keep	rewrites
-rewrite:de-scene	この状況で誤魔化した。	이 상황에서 속였다.	keep	rewrites
+cx:de-scene:20	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 소중한 것은 하나뿐이다.	fix	rewrites
+cx:de-scene:20	こんな状況で言うのもなんだが	이런 상황에서 말하는 것도 좀 그렇지만	fix	rewrites
+cx:de-scene:20	何かが後ろで光った気がした。	뭔가가 뒤에서 빛난 것 같았다.	fix	rewrites
+cx:de-scene:20	中でお待ちしております。	안에서 기다리고 있습니다.	fix	rewrites
+cx:de-scene:20	冷蔵庫の前で立ち止まる。	냉장고 앞에서 멈춰 선다.	fix	rewrites
+cx:de-scene:20	夢で雨が降るのはおかしい？	꿈에서 비가 오는 것은 이상해?	fix	rewrites
+cx:de-scene:20	ナイフで切った。	나이프로 잘랐다.	keep	rewrites
+cx:de-scene:20	電車で学校に行く。	전철로 학교에 간다.	keep	rewrites
+cx:de-scene:20	一瞬で消えた。	한순간에 사라졌다.	keep	rewrites
+cx:de-scene:10	一瞬…で消えた。	rule:cx:de-scene:10=에	fix	rewrites
+cx:de-scene:10	ナイフで切った。	나이프로 잘랐다.	keep	rewrites
+cx:de-scene:20	欺く夢で取り繕った	속이는 꿈으로 꾸몄다	fix	rewrites
+cx:de-scene:20	夢で終わった。	꿈으로 끝났다.	fix	rewrites
+cx:de-scene:20	夢で会おう。	꿈에서 만나자.	keep	rewrites
+cx:de-scene:20	この状況で誤魔化した。	이 상황에서 속였다.	keep	rewrites
 cx:return-to:10	場面は開幕の宣言に戻る。	장면은 개막 선언으로 돌아온다.	fix	rewrites
 cx:return-to:10	彼は自分の仕事に戻った。	그는 자신의 일로 돌아왔다.	fix	rewrites
 cx:return-to:10	昔みたいな関係に戻れないかな	옛날 같은 관계로 돌아갈 수 없을까	fix	rewrites
@@ -65,4 +67,4 @@ cx:ni-after-adverb:20	もう少し強めに。	!rule:cx:ni-after-adverb:20	keep	
 cx:no-after-na:10	元気そうなのが一番だ。	rule:cx:no-after-na:10=것	fix	rewrites
 cx:kara-source:20	中から小さなぬいぐるみが出てきた。	안에서 작은 봉제인형이 나왔다.	fix	rewrites
 cx:kara-source:20	町からも距離がある。	마을에서도 거리가 있다.	fix	rewrites
-rewrite:de-scene	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites
+cx:de-scene:20	夢で、すべてが終わった。	꿈에서, 모든 것이 끝났다.	keep	rewrites

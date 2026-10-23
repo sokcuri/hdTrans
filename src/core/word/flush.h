@@ -123,7 +123,6 @@ void QuestionCopula(Flusher& f);
 void WonderingDarou(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
 void ShortPossessive(Flusher& f);
-void DeScene(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
