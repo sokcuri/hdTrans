@@ -18,6 +18,9 @@ std::uint8_t StyleOf(std::string_view text) {
     for (const std::string_view m : dict::ClassMembers("speech.polite")) {
         if (text.find(m) != std::string_view::npos) style |= kPoliteSpeech;
     }
+    for (const std::string_view m : dict::ClassMembers("speech.polite-talk")) {
+        if (text.find(m) != std::string_view::npos) style |= kPoliteTalk;
+    }
     for (const std::string_view m : dict::ClassMembers("speech.old")) {
         if (text.find(m) != std::string_view::npos) style |= kOldSpeech;
     }

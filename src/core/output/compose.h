@@ -27,6 +27,7 @@ struct QuoteState {
 // casual speech (pipeline::CasualQuotes).
 constexpr std::uint8_t kCasualSpeech = 32;
 constexpr std::uint8_t kPoliteStyle = 1;  // pipeline::kPoliteSpeech, a quote in です and ます
+constexpr std::uint8_t kPoliteTalkStyle = 64;  // pipeline::kPoliteTalk
 
 // The switches of the stage.
 struct Settings {

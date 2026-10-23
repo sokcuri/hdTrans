@@ -16,7 +16,7 @@ src/core/names/registry.cpp	36	0	21	4	23	3	0	0	31
 src/core/names/registry.h	0	1	0	0	0	0	0	0	0
 src/core/names/render.cpp	2	0	1	0	0	0	0	0	4
 src/core/names/ruby.cpp	2	0	15	0	0	17	8	0	25
-src/core/output/casual.cpp	151	270	10	25	275	46	1	0	172
+src/core/output/casual.cpp	152	274	10	25	275	46	1	0	175
 src/core/output/cleanup.cpp	0	12	2	1	7	10	11	0	10
 src/core/output/compose.h	0	0	0	0	0	0	1	0	0
 src/core/output/families.cpp	0	1	0	0	0	0	0	0	0

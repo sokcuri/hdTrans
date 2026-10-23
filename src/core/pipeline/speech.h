@@ -19,6 +19,9 @@ constexpr std::uint8_t kOldSpeech = 2;
 constexpr std::uint8_t kWritten = 4;
 constexpr std::uint8_t kReading = 8;
 constexpr std::uint8_t kCited = 16;
+// Polite talk proper, with です or ます (speech.polite-talk), not only a polite request or なさい;
+// always with kPoliteSpeech.
+constexpr std::uint8_t kPoliteTalk = 64;
 
 // The styles of line: element 0 for its text outside 「」 and 『』, element k for its k-th
 // quote (a 「 or 『 outside any quote, with the quotes inside it); 「 and 『 open a quote,
