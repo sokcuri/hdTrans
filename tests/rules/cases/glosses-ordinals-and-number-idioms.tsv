@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+names:reading	猫（タマ）が鳴いた。	고양이(타마)가 울었다.	fix	normalize
+names:reading	妹（ゆき）が来た。	여동생(유키)이 왔다.	fix	normalize
+names:reading	誓「ちか」いの言葉と母「はい」の返事。	맹세의 말과 어머니 「네」의 대답.	fix	normalize
+names:reading	天井の梁（はり）から落ちた。	천장의 대들보로부터 떨어졌다.	keep	normalize

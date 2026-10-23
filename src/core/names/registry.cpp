@@ -293,6 +293,25 @@ std::vector<std::size_t> KanaEnds(std::string_view after) {
     return ends;
 }
 
+// Whether every kanji run of line has a reading in 「」 after it, written straight after the
+// run or after its closing ＞ (心「こころ」に刻「きざ」んだ, ＜場所＞「ばしょ」), two runs at
+// least: a line styled with readings, whose 「」 after one kanji are readings too.
+bool Styled(std::string_view line) {
+    std::size_t runs = 0;
+    for (std::size_t i = 0; i < line.size();) {
+        if (!IsKanji(RuneAt(line, i).cp)) {
+            i += RuneAt(line, i).size;
+            continue;
+        }
+        while (i < line.size() && IsKanji(RuneAt(line, i).cp)) i += RuneAt(line, i).size;
+        std::string_view rest = line.substr(i);
+        if (rest.starts_with("＞")) rest.remove_prefix(std::string_view("＞").size());
+        if (!rest.starts_with("「")) return false;
+        runs++;
+    }
+    return runs >= 2;
+}
+
 }  // namespace
 
 // Whether s and t are nouns of a kind: N11 records of both share a semantic code, or both
@@ -332,23 +351,26 @@ bool Registry::SameWord(std::string_view base, std::string_view reading, std::st
 
 // Whether reading, in hiragana, is the reading of the kanji run base of a line that goes on
 // with after. It is when it is the same word (SameWord), or the reading of a name
-// (園崎詩音（しおん）); over one kanji, a word of the same class (梁（はり）, 駆「か」け), or in
-// 「」 any reading in a styled line, one with other 「」 readings (日「ひ」の誓「ちか」い); in
-// parentheses, over a word of no dictionary (夾叉(きょうさ)), a noun of the same kind as the
-// base (朝餉(あさがれい), 輜重(しちょう)), or no word at all (鮭（しゃけ）, 黄泉戸喫(よもつへぐい)),
-// with a mora for each kanji of a word. A remark (結果（まあまあ）, 理由(なし)), a quote
-// after a speaker (姉「うん」って), a name after a noun (店「さくら」で) or one that is
-// shorter than its word (長良川鉄道株式会社（ながてつ）) is none.
+// (水野澄香（すみか）); over one kanji, a word of the same class with the kana the word goes
+// on with (駆「か」け), or with none a word of the same class that is no name (梁（はり）,
+// but 猫（たま）, 妹（ゆき）), or in 「」 any reading in a styled line, one whose every kanji
+// run has a 「」 reading (日「ひ」の誓「ちか」い); in parentheses, over a word of no
+// dictionary (夾叉(きょうさ)), a noun of the same kind as the base (朝餉(あさがれい),
+// 輜重(しちょう)), or no word at all (鮭（しゃけ）, 黄泉戸喫(よもつへぐい)), with a mora for
+// each kanji of a word. A remark (結果（まあまあ）, 理由(なし)), a quote after a speaker
+// (姉「うん」って), a name after a noun (店「さくら」で) or one that is shorter than its word
+// (長良川鉄道株式会社（ながてつ）) is none.
 bool Registry::BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket,
                            bool styled) {
     if (SameWord(base, reading, after)) return true;
     const DictFlags b = Flags(base), f = Flags(reading);
-    // A person of any dictionary, the name layer's too.
-    const bool person = b.person || !b.layerName.empty();
+    const bool single = RuneCount(base) == 1;
+    // A person of any dictionary, the name layer's too, but a common noun of one kanji that
+    // is a name as well (猫（たま）).
+    const bool person = (b.person || !b.layerName.empty()) && !(single && b.common);
     if (person && (f.person || !f.layerName.empty())) return true;
     // A quote after a person (姉「はい」って) is no reading of a word of the same class.
     if (bracket && after.starts_with("って") && (b.role || b.human || b.person)) return false;
-    const bool single = RuneCount(base) == 1;
     if (bracket && styled && single) return true;
     if (single) {
         // A verb or adjective stem that is no noun goes on with its okurigana: what stands
@@ -359,8 +381,10 @@ bool Registry::BaseReading(std::string_view base, std::string_view reading, std:
             return true;
         }
         const bool particle = !after.empty() && InRunes(RuneAt(after, 0).cp, "のにをはがでへもかや");
+        // A name written over a noun (猫（たま）, 妹（ゆき）) names it.
+        const bool name = f.person || f.layerGiven || f.layerSurname;
         for (const std::size_t k : KanaEnds(after)) {
-            if (bracket && k == 0 && particle) continue;
+            if (k == 0 && ((bracket && particle) || name)) continue;
             const std::string_view ok = after.substr(0, k);
             const std::string bk = std::string(base) + std::string(ok), rk = std::string(reading) + std::string(ok);
             if ((WordClasses(bk) & WordClasses(rk)) != 0) return true;
@@ -384,14 +408,13 @@ std::string Registry::DropReadings(std::string_view line) {
         bool bracket;
     };
     std::vector<Found> found;
-    bool styled = false;
+    const bool styled = Styled(line);
     RubyMatch m;
     for (std::size_t from = 0; FindReading(line, from, m); from = m.end) {
         Found x{m, ToHiragana(m.reading), line.substr(m.begin + m.base.size()).starts_with("「")};
         const DictFlags f = Flags(x.hiragana);
         if (IsKatakana(FirstRune(m.reading).cp) && (!f.common || f.person)) continue;
         if (f.pronoun && Flags(m.base).human) continue;
-        styled = styled || (x.bracket && BaseReading(m.base, x.hiragana, line.substr(m.end), true, false));
         found.push_back(std::move(x));
     }
     std::string out;

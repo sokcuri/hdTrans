@@ -73,7 +73,16 @@ const dict::Snapshot* Dictionary() {
          "うち\t집\tN110\tVPl\t\tGN\t58\n"
          "ウチ\t우리\tN110\t\t\tGN\t59\n"
          "フトン\t이불\tN110\t\t\tGN\t60\n"
-         "ふとん\t이부자리\tN110\t\t\tGN\t61\n"},
+         "ふとん\t이부자리\tN110\t\t\tGN\t61\n"
+         "猫\t고양이\tN110\t\t\tGN\t68\n"
+         "猫\t네코\tN130\tQPN\tWb\tGN\t69\n"
+         "たま\t구슬\tN110\t\t\tGN\t70\n"
+         "妹\t여동생\tN110\tVHn\t\tGN\t71\n"
+         "ゆき\t눈\tN110\t\t\tGN\t72\n"
+         "誓\t맹세&AV@\tM440\t\t\tGN\t73\n"
+         "ちか\t맹세&AV@\tM440\t\t\tGN\t74\n"
+         "母\t어머니\tN110\tVHn\t\tGN\t75\n"
+         "日\t날\tN110\t\t\tGN\t76\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -87,7 +96,9 @@ const dict::Snapshot* Dictionary() {
          "あおい\t아오이\tN130\tQPNVHn\tWb\tGN\t27\n"
          "ひかり\t히카리\tN130\tQPNVHn\tWb\tGN\t28\n"
          "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"
-         "サーラ\t사라\tN130\tQPNVHn\tWb\tGN\t62\n"},
+         "サーラ\t사라\tN130\tQPNVHn\tWb\tGN\t62\n"
+         "たま\t타마\tN130\tQPNVHn\tWb\tGN\t77\n"
+         "ゆき\t유키\tN130\tQPNVHn\tWb\tGN\t78\n"},
     });
     return loaded.snapshot.get();
 }
@@ -157,6 +168,8 @@ HD_TEST(names_drop_readings) {
         {"朝餉(あさがれい)を", "朝餉を"},
         {"夾叉(きょうさ)か", "夾叉か"},
         {"心「こころ」に", "心に"},
+        // In 「」 after one kanji, a reading in a line whose every kanji run has one.
+        {"あの日「ひ」の誓「ちか」いを", "あの日の誓いを"},
         // A name quoted after a noun, a quote before と, a quote that ends the line.
         {"戦艦「やまと」の", "戦艦「やまと」の"},
         {"私「こんびに」とやら", "私「こんびに」とやら"},
@@ -169,6 +182,11 @@ HD_TEST(names_drop_readings) {
         {"結果（まあまあ）だった。", "結果（まあまあ）だった。"},
         {"理由(なし)", "理由(なし)"},
         {"鉄道株式会社（ながてつ）の人", "鉄道株式会社（ながてつ）の人"},
+        // A name over a noun, and a word in 「」 beside a reading in a line with other
+        // kanji that have none.
+        {"猫（タマ）が鳴いた", "猫（タマ）が鳴いた"},
+        {"妹（ゆき）が来た", "妹（ゆき）が来た"},
+        {"誓「ちか」いの言葉と母「はい」の返事", "誓いの言葉と母「はい」の返事"},
         // A katakana word over the kanji, a pronoun over a person noun, an aside.
         {"炎（ブレス）", "炎（ブレス）"},
         {"提督(あなた)、", "提督(あなた)、"},
