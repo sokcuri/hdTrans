@@ -1,8 +1,11 @@
 #include <algorithm>
+#include <span>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
+#include "core/text/unicode.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -418,42 +421,40 @@ bool NdeStart(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// そ before the copula where a sentence or a clause starts after punctuation (spaces after it
-// allowed): そう said short (そだね, そだった, そであった, そでもない, そじゃない). そだった only
-// ends a sentence (before its end, ね, よ, っけ, 」 or …) and not after 、, where it is the
-// verb 育つ (大きく、そだった); そでも only before ない (not the noun 袖: そでも ぬれた). Not
-// after a word and a space (むらで そだった).
+// Whether a comma stands right before pos.
+bool AfterComma(std::string_view s, size_t pos) { return pos > 0 && In(Before(s, pos), U"、"); }
+
+// そ before a copula form of copula.short-so where a clause starts (spaces after its
+// punctuation allowed, not after a word and a space: むらで そだった): そう said short. A form of
+// copula.short-so-final only before the end of the sentence (あ、そだ。), and one of
+// copula.short-so-sentence also not after a comma (大きく、そだった is the verb 育つ).
 bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
     size_t start = pos;
-    while (start > 0 && In(Before(s, start), U" 　")) start -= LastRune(s.substr(0, start)).size;
-    const char32_t lead = Before(s, start);
-    if (start > 0 && !In(lead, U"「『（。！？!?…‥、")) return false;
+    while (start > 0 && text::IsSpace(Before(s, start))) start -= LastRune(s.substr(0, start)).size;
     size_t p = pos;
-    if (!Lit(s, p, "そ")) return false;
-    const size_t so = p;
-    bool copula = false;
-    if (size_t q = p; Lit(s, q, "だ")) {
-        if (size_t r = q; Lit(s, r, "った")) {
-            size_t k = r;
-            copula = lead != U'、' && (r >= s.size() || In(At(s, r).cp, U"ねよ」』。！？!?…‥") || Lit(s, k, "っけ"));
-        } else {
-            copula = q >= s.size() || In(At(s, q).cp, U"ねよなけろ") || !IsHiraganaRune(At(s, q).cp);
+    if (!ClauseStart(s, start) || !Lit(s, p, "そ")) return false;
+    const std::string_view rest = s.substr(p);
+    auto starts = [&](std::span<const std::string_view> forms, bool end) {
+        for (const std::string_view f : forms) {
+            if (!rest.starts_with(f)) continue;
+            if (!end || f.size() == rest.size()) return true;
+            const char32_t next = text::DecodeRune(rest.substr(f.size())).cp;
+            return !IsHiraganaRune(next) && !IsKanji(next);
         }
-    } else if (size_t r = p; Lit(s, r, "で")) {
-        size_t n = r;
-        copula = r < s.size() && (In(At(s, r).cp, U"あし") || (Lit(s, n, "も") && Lit(s, n, "な")));
-    } else if (size_t t = p; Lit(s, t, "じゃ")) {
-        copula = true;
+        return false;
+    };
+    if (!starts(dict::ClassMembers("copula.short-so"), false) && !starts(dict::ClassMembers("copula.short-so-final"), true) &&
+        (AfterComma(s, start) || !starts(dict::ClassMembers("copula.short-so-sentence"), true))) {
+        return false;
     }
-    if (!copula) return false;
-    m.end = so;
+    m.end = p;
     return true;
 }
 
 // でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
 // without its subject, said for そうでなければ (でなければ、すぐに死ぬ 그렇지 않으면).
 bool DenakerebaStart(std::string_view s, size_t pos, Match& m) {
-    if (!ClauseStart(s, pos) || (pos > 0 && In(Before(s, pos), U"、"))) return false;
+    if (!ClauseStart(s, pos) || AfterComma(s, pos)) return false;
     for (std::string_view w : {"でなければ", "でないと", "でなきゃ"}) {
         size_t p = pos;
         if (Lit(s, p, w)) {

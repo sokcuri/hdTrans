@@ -10,6 +10,10 @@
 //= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
 //= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
+//= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
+//= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
+//= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
+//= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
@@ -252,7 +256,22 @@ copula.after-dake	じゃ
 copula.after-dake	に
 copula.after-dake	の
 copula.after-dake	か
+copula.short-so	だね
+copula.short-so	だよ
+copula.short-so	だな
+copula.short-so	だけど
+copula.short-so	だろ
+copula.short-so	だったね
+copula.short-so	だったよ
+copula.short-so	だったっけ
+copula.short-so	であ
+copula.short-so	でし
+copula.short-so	でもな
+copula.short-so	じゃ
+copula.short-so-final	だ
+copula.short-so-sentence	だった
 
+counter.bare-native-one	つ
 ending.conjunctive	て
 ending.conjunctive	ば
 ending.conjunctive	たら

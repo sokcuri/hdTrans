@@ -584,7 +584,9 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     // numeral (1回目 1번째 as 2回目 2번째).
     if (native.empty()) return t.substr(0, digits) + std::string(Ordinal(items, i) ? NativeForm(*c) : counter);
     // つ counts with the bare native numeral, as 一つ reads 하나 (1つ残らず 하나 남김없이).
-    if (native == "한" && surface.substr(numeral).starts_with("つ") && !Ordinal(items, i)) return "하나";
+    if (native == kNativeCounts[0] && dict::InClass("counter.bare-native-one", surface.substr(numeral)) && !Ordinal(items, i)) {
+        return "하나";
+    }
     return WriteNativeCount(native, *c, Ordinal(items, i));
 }
 
