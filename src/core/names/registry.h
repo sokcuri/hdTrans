@@ -131,6 +131,7 @@ private:
     unsigned WordClasses(std::string_view s);
     bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
     bool SameKind(std::string_view s, std::string_view t);
+    bool NamedWithSound(std::string_view base, std::string_view reading);
     bool BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket, bool styled);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);

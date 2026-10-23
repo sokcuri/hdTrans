@@ -349,11 +349,36 @@ bool Registry::SameWord(std::string_view base, std::string_view reading, std::st
     return false;
 }
 
+// Whether a name or place record of base, in either dictionary, is written with the sound
+// of reading (空 소라 and そら, 星 호시 and ほし): the dictionary reads base so.
+bool Registry::NamedWithSound(std::string_view base, std::string_view reading) {
+    if (snap_ == nullptr) return false;
+    const std::string sound = text::FromKana(reading, text::Preset::Fan);
+    if (sound.empty()) return false;
+    auto named = [&](const dict::Codes* codes, std::string_view target) {
+        if (codes == nullptr || target.empty()) return false;
+        const dict::SemCodes& sem = codes->sem;
+        const std::string_view attr = codes->gram.Text();
+        if (!sem.HasPrefix("QPN") && !sem.HasPrefix("QCT") && !attr.starts_with("Wa") && !attr.starts_with("Wb")) {
+            return false;
+        }
+        return text::SameSound(target, sound);
+    };
+    for (const dict::Candidate& rec : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
+        if (rec.source == base && named(rec.codes, rec.target)) return true;
+    }
+    for (const dict::Record& rec : snap_->NameRecords(base)) {
+        if (named(rec.codes, rec.target)) return true;
+    }
+    return false;
+}
+
 // Whether reading, in hiragana, is the reading of the kanji run base of a line that goes on
-// with after. It is when it is the same word (SameWord), or the reading of a name
-// (水野澄香（すみか）); over one kanji, a word of the same class with the kana the word goes
-// on with (駆「か」け), or with none a word of the same class that is no name (梁（はり）,
-// but 猫（たま）, 妹（ゆき）), or in 「」 any reading in a styled line, one whose every kanji
+// with after. It is when it is the same word (SameWord), the sound a name record of base
+// is written with (NamedWithSound: 空（そら）), or the reading of a name (水野澄香（すみか）);
+// over one kanji, a word of the same class with the kana the word goes on with (駆「か」け),
+// or with none a word of the same class that is no name (梁（はり）, but 猫（たま）,
+// 妹（ゆき）), or in 「」 any reading in a styled line, one whose every kanji
 // run has a 「」 reading (日「ひ」の誓「ちか」い); in parentheses, over a word of no
 // dictionary (夾叉(きょうさ)), a noun of the same kind as the base (朝餉(あさがれい),
 // 輜重(しちょう)), or no word at all (鮭（しゃけ）, 黄泉戸喫(よもつへぐい)), with a mora for
@@ -362,7 +387,7 @@ bool Registry::SameWord(std::string_view base, std::string_view reading, std::st
 // (長良川鉄道株式会社（ながてつ）) is none.
 bool Registry::BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket,
                            bool styled) {
-    if (SameWord(base, reading, after)) return true;
+    if (SameWord(base, reading, after) || NamedWithSound(base, reading)) return true;
     const DictFlags b = Flags(base), f = Flags(reading);
     const bool single = RuneCount(base) == 1;
     // A person of any dictionary, the name layer's too, but a common noun of one kanji that
@@ -455,20 +480,18 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
     }
     line = StripRuby(line);
     // A hiragana run in parentheses after kanji that is no reading of them and no word
-    // (長良川鉄道株式会社（ながてつ）) is a name given to what they name: it reads as one.
+    // (長良川鉄道株式会社（ながてつ）), or after one kanji a name of the name layer that is no
+    // noun (猫（たま）), is a name given to what they name: it reads as one.
     for (std::size_t from = 0; from <= line.size();) {
         RubyMatch m;
         if (!FindReading(line, from, m)) break;
         from = m.end;
-        if (line.substr(m.begin + m.base.size()).starts_with("「") || !AllRunes(m.reading, IsHiragana) ||
-            ReadingMorae(m.reading) < 3) {
-            continue;
-        }
+        if (line.substr(m.begin + m.base.size()).starts_with("「") || !AllRunes(m.reading, IsHiragana)) continue;
         const DictFlags f = Flags(m.reading);
-        if (f.records > 0 || f.layerSurname || f.layerGiven ||
-            BaseReading(m.base, m.reading, std::string_view(line).substr(m.end), false, false)) {
-            continue;
-        }
+        const bool layerName = (f.layerSurname || f.layerGiven) && !f.person && RuneCount(m.base) == 1 &&
+                               (WordClasses(m.reading) & kNounClass) == 0;
+        if (!layerName && (ReadingMorae(m.reading) < 3 || f.records > 0 || f.layerSurname || f.layerGiven)) continue;
+        if (BaseReading(m.base, m.reading, std::string_view(line).substr(m.end), false, false)) continue;
         count(gloss_, std::string(m.reading), 3);
     }
     bool script = false;

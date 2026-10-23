@@ -82,7 +82,12 @@ const dict::Snapshot* Dictionary() {
          "誓\t맹세&AV@\tM440\t\t\tGN\t73\n"
          "ちか\t맹세&AV@\tM440\t\t\tGN\t74\n"
          "母\t어머니\tN110\tVHn\t\tGN\t75\n"
-         "日\t날\tN110\t\t\tGN\t76\n"},
+         "日\t날\tN110\t\t\tGN\t76\n"
+         "空\t하늘\tN110\t\t\tGN\t79\n"
+         "そら\t자\tN110\t\t\tGN\t80\n"
+         "星\t별\tN110\t\t\tGN\t81\n"
+         "星\t호시\tN130\tQPN\tWa\tGN\t82\n"
+         "犬\t개\tN110\t\t\tGN\t83\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -98,7 +103,11 @@ const dict::Snapshot* Dictionary() {
          "ひよこ\t히요코\tN130\tQPNVHn\tWb\tGN\t31\n"
          "サーラ\t사라\tN130\tQPNVHn\tWb\tGN\t62\n"
          "たま\t타마\tN130\tQPNVHn\tWb\tGN\t77\n"
-         "ゆき\t유키\tN130\tQPNVHn\tWb\tGN\t78\n"},
+         "ゆき\t유키\tN130\tQPNVHn\tWb\tGN\t78\n"
+         "空\t소라\tN130\tQPNVHn\tWb\tGN\t84\n"
+         "そら\t소라\tN130\tQPNVHn\tWb\tGN\t85\n"
+         "ほし\t호시\tN130\tQPNVHn\tWb\tGN\t86\n"
+         "ぽち\t포치\tN130\tQPNVHn\tWb\tGN\t87\n"},
     });
     return loaded.snapshot.get();
 }
@@ -168,6 +177,9 @@ HD_TEST(names_drop_readings) {
         {"朝餉(あさがれい)を", "朝餉を"},
         {"夾叉(きょうさ)か", "夾叉か"},
         {"心「こころ」に", "心に"},
+        // A name reading the kanji is written with in either dictionary.
+        {"空（そら）を見上げた", "空を見上げた"},
+        {"星（ほし）が綺麗だ", "星が綺麗だ"},
         // In 「」 after one kanji, a reading in a line whose every kanji run has one.
         {"あの日「ひ」の誓「ちか」いを", "あの日の誓いを"},
         // A name quoted after a noun, a quote before と, a quote that ends the line.
@@ -186,6 +198,7 @@ HD_TEST(names_drop_readings) {
         // kanji that have none.
         {"猫（タマ）が鳴いた", "猫（タマ）が鳴いた"},
         {"妹（ゆき）が来た", "妹（ゆき）が来た"},
+        {"猫（たま）が鳴いた", "猫（たま）が鳴いた"},
         {"誓「ちか」いの言葉と母「はい」の返事", "誓いの言葉と母「はい」の返事"},
         // A katakana word over the kanji, a pronoun over a person noun, an aside.
         {"炎（ブレス）", "炎（ブレス）"},
@@ -209,6 +222,10 @@ HD_TEST(names_kana_name_in_parentheses) {
     const std::vector<std::string> found = r.Names();
     HD_CHECK(std::find(found.begin(), found.end(), "ながてつ") != found.end());
     HD_CHECK_EQ(r.Render("ながてつ"), "나가테츠");
+    // A name of the name layer over one kanji, when it is no noun.
+    const std::vector<std::string> pet = Scan(snap, "犬（ぽち）が鳴いた").Names();
+    HD_CHECK(std::find(pet.begin(), pet.end(), "ぽち") != pet.end());
+    HD_CHECK(Scan(snap, "妹（ゆき）が来た").Names().empty());
     HD_CHECK(Scan(snap, "理由(なし)").Names().empty());
     HD_CHECK(Scan(snap, "天井の梁（はり）から").Names().empty());
 }
