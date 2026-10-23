@@ -875,6 +875,24 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     }
     const std::u32string_view x = f.substr(p, n);
     if (n > 1 && IsSoundKey(x, ctx_.extraBuiltin)) return 0;
+    // A syllable said three or more times straight into the word it starts (つつつついに,
+    // どどどどうしよう, ぼぼぼボク) or before a word in kanji (けけけ圭一): a piece without a
+    // separator for each repeat, unless a word reads the run or a sound reads it before a
+    // kanji or past it (むむむ, ははは笑う, くくくっ). A vowel said again is a cry (えええ).
+    if (n == 1 && smallOf == 0 && !In(f[p], U"アイウエオ")) {
+        size_t m = 1;
+        while (p + m < rs.size() && f[p + m] == f[p] && IsKana(rs[p + m])) m++;
+        if (m >= 3 && p + m < rs.size()) {
+            const bool kanji = IsKanjiRune(rs[p + m]) && !NumeralRune(rs[p + m]);
+            const size_t start = kanji ? p + m : p + m - 1;
+            SoundMatch sound;
+            const bool heard = MatchAt(p, sound) && (kanji || sound.end > p + m);
+            if (!heard && !WordAt(p, m) && (kanji || start + WordLen(start) > p + m)) {
+                pieces.assign(start - p, StutterPiece{});
+                return start;
+            }
+        }
+    }
     size_t i = p;
     while (f.substr(i, n) == x) {
         const size_t k = StutterSeparator(rs, i + n);

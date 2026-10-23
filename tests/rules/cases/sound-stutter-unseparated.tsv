@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+sound:stutter	「つつつつついに来たの？」	「마마마마마침내 왔어?」	fix	sound
+sound:stutter	「そそそそうです」	「그그그그렇습니다」	fix	sound
+sound:stutter	「ちちちがうよぉ！」	「아아아니야!」	fix	sound
+sound:stutter	「えええ怖い」	「네네 무섭다」	keep	sound
+sound:stutter	「むむむ」	「으으음」	keep	sound
+sound:stutter	「ままま。で、」	「마마마. 그래서,」	keep	sound

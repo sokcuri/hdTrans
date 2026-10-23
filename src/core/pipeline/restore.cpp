@@ -388,7 +388,8 @@ std::string WriteStutters(std::string_view s) {
         while (j + word < rs.size() && IsSyllable(rs[j + word])) word++;
         if (word == 0) continue;
         if (rest == 0) {
-            out.push_back(rs[j] - (rs[j] - text::kBase) % text::kFinalsCount);
+            // Marks without separators between them stand for a syllable said again each.
+            for (size_t m = 0; m < marks; m++) out.push_back(rs[j] - (rs[j] - text::kBase) % text::kFinalsCount);
         } else {
             const size_t share = (marks * word + marks + rest - 1) / (marks + rest);
             out += rs.substr(j, std::max<size_t>(1, std::min(share, word - 1)));

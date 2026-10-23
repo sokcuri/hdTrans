@@ -44,7 +44,8 @@ const dict::LoadResult& SoundDictionary() {
         "とにかく\t어쨌든\tE300\t26\n"
         "いな\t아니\tE300\t27\n"
         "としてい\t(으)로 하고 있\tM100\t28\n"
-        "リスク\t리스크\tN110\t29\n",
+        "リスク\t리스크\tN110\t29\n"
+        "ついに\t마침내\tE300\t30\n",
     }});
     return result;
 }
@@ -320,6 +321,9 @@ HD_TEST(pipeline_sound) {
         {"トロンとしていた", "몽롱していた"},
         // A sound does not end inside the katakana word after it (するり).
         {"損をするリスク", "損をするリスク"},
+        // A syllable said again straight into its word, and a vowel said again.
+        {"「つつつついに」", "「\xEE\x80\x80\xEE\x80\x80\xEE\x80\x80ついに」"},
+        {"「えええ怖い」", "「えええ怖い」"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},
