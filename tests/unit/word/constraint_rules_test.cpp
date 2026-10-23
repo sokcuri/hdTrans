@@ -392,7 +392,8 @@ HD_TEST(constraint_wake_formal_noun) {
 }
 
 // 余り right before a predicate is the adverb 별로, not the stem of 余る or the noun 나머지;
-// before a particle, a pause or after a noun (在庫余り) it stays.
+// before a particle, a pause, an auxiliary of the continuative (余り過ぎる, 余ります) or after a
+// noun (在庫余り) it stays.
 HD_TEST(constraint_amari_before_predicate) {
     CheckCases({
         {"余り伸びない", "余り伸びない", "余", ""},
@@ -400,6 +401,10 @@ HD_TEST(constraint_amari_before_predicate) {
         {"余り好きじゃない", "余り好きじゃない", "余り", "별로"},
         {"余りの", "余りの", "余り", "나머지 별로"},
         {"余り、", "余り、", "余", "남&F4@"},
+        {"余り過ぎる", "余り過ぎる", "余", "남&F4@"},
+        {"余ります", "余ります", "余", "남&F4@"},
+        {"余りそうだ", "余りそうだ", "余", "남&F4@"},
+        {"余りそうは", "余りそうは", "余り", "별로"},
         {"在庫余りばかり", "余りばかり", "余り", "나머지 별로"},
     });
 }

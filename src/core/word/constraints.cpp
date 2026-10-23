@@ -124,6 +124,11 @@ constexpr std::string_view kAdjectiveOrHumbleTails[] = {"い", "か", "く", "�
 constexpr std::string_view kNounFollowers[] = {"だ", "で", "じゃ", "が", "の", "ね", "か", "や", "って",
                                                "なん", "なの", "なら", "あっ", "あり", "ある", "さ", "よ"};
 constexpr std::string_view kStemFollowers[] = {"ない", "無い", "なく", "なかっ", "は", "も", "に"};
+// The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as
+// one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
+constexpr std::string_view kContinuativeSuffixes[] = {"ます", "まし", "ませ", "過ぎ", "すぎ", "始め", "はじめ",
+                                                      "続け", "つづけ", "がち", "気味", "つつ", "そうだ",
+                                                      "そうな", "そうです"};
 // The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 constexpr std::string_view kAruForms[] = {"ある", "あり", "あっ", "あれ", "あろ"};
 // The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
@@ -289,8 +294,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         const int next = NameClassOf(FirstChar(after));
         const int last = NameClassOf(before);
         if (last == kClassKanji || last == kClassKatakana) return false;
-        return next == kClassKanji || (next == kClassHiragana && !StartsWithAny(after, kNounFollowers) &&
-                                       !StartsWithAny(after, kStemFollowers) && !StartsWithAny(after, kObjectParticles));
+        return (next == kClassKanji || (next == kClassHiragana && !StartsWithAny(after, kNounFollowers) &&
+                                       !StartsWithAny(after, kStemFollowers) && !StartsWithAny(after, kObjectParticles))) &&
+               !StartsWithAny(after, kContinuativeSuffixes);
     }
     case ConstraintContext::BeforeSuruForm:
         // した, but not たくさん: the past ends there or a particle or mark follows it.
