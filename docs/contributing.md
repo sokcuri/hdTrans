@@ -48,6 +48,7 @@ PR 제목은 CI에서 검사합니다. 원인, 테스트, 번역 판정 숫자�
 
 ## 릴리스
 
-- `develop` 빌드는 CI 아티팩트로만 남고 GitHub Release나 태그를 만들지 않습니다. `main` PR 병합의 **Build**가 성공하면 봇이 버전과 CHANGELOG를 `[skip ci]` 커밋으로 저장하고 일반 push한 뒤 태그, GitHub Release, 정식 Build와 npm 게시를 자동 실행합니다. 별도 릴리스 PR은 없습니다.
+- `develop` 빌드는 CI 아티팩트로만 남고 GitHub Release나 태그를 만들지 않습니다. `main` PR 병합의 **Build**가 성공하면 봇이 버전과 CHANGELOG를 커밋해 일반 push하고 태그와 GitHub Release 초안을 만듭니다. 태그 push의 **Publish npm**이 그 커밋을 전체 빌드, 테스트한 뒤 GitHub Release와 npm에 게시합니다. 별도 릴리스 PR은 없습니다.
+- 버전 커밋의 `main` push **Build**는 matrix를 건너뜁니다. 같은 커밋을 태그 빌드가 테스트하기 때문입니다. 이 커밋에 `[skip ci]`를 붙이면 같은 커밋의 태그 push도 건너뛰므로 붙이지 않습니다.
 - 최종 버전은 병합된 `main` PR 제목이 결정합니다. `feat`는 minor, `fix`/`perf`/`revert`는 patch, `!`나 PR 본문의 `BREAKING CHANGE:`는 major입니다. 문서나 CI 제목만으로는 릴리스하지 않으며, 개별 커밋은 변경 내역에 씁니다. 첫 기준은 이미 게시된 `0.1.0`이고 `develop` 빌드와 `dry_run=true`는 npm에 게시하지 않습니다.
 - 버전 갱신 재시도는 **Release main**에서 `main`과 성공한 main push Build의 `build_run_id`를 지정합니다. 패키지 재시도는 **Build**에서 같은 태그와 `dry_run=false`, npm만 재시도하려면 **Publish npm**에서 같은 태그와 성공한 태그 Build의 실행 ID를 지정합니다.
