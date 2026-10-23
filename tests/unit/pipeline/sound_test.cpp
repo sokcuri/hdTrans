@@ -564,6 +564,10 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"冷たいぃぃ", "冷たい"},
         {"いいいい！", "いいいい！"},
         {"うるさいいね", "うるさいいね"},
+        // A shout's っ after the lengthening of a word ends the phrase: the run is ～ and the
+        // っ goes; a cry (no word before the mark) keeps it for the cry pass.
+        {"まかせてーーっ！", "まかせて～！"},
+        {"ぎやぁーっ！", "ぎやぁーっ！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }

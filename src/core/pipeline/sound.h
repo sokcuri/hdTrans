@@ -166,8 +166,8 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // A drawn run of small vowels that ends a phrase after て, で, の, る, だ, く, ぐ or よ is
 // dropped (ていとくぅ, ないでぇ, なのぉ), and so is a run of い and ぃ after the い that ends
 // an adjective, before a pause or a shout's っ (ずるいぃ, 痛いぃぃ, きもちいいいいい; not the
-// cry いいいいい). A run with ー that ends a phrase after a word is
-// written ～ (提督ー！, 待ってー, だよねー), its small vowels dropped after a kanji or those
+// cry いいいいい). A run with ー that ends a phrase, also before a shout's っ, after a word
+// is written ～ (提督ー！, 待ってー, だよねー, だめーーっ), its small vowels dropped after a kanji or those
 // kana and kept after others (だなぁー だなぁ～); the e row spelled with ー becomes い when
 // that makes a word of four or more characters (せんせー せんせい). Neither touches a
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
