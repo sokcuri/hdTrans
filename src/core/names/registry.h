@@ -78,7 +78,7 @@ public:
     // Reads the evidence of one line.
     struct Evidence {
         uint64_t id = 0;
-        std::array<std::vector<std::string>, 10> counts;
+        std::array<std::vector<std::string>, 11> counts;
         std::vector<std::array<std::string, 3>> joined;
         std::vector<std::string> readings, actors;
     };
@@ -138,6 +138,7 @@ private:
     // クロニ): one name, a numbered or derived one, not the head and an honorific.
     const std::set<std::string>& SiblingNames();
     bool NicknameCompound(std::string_view t);
+    bool TranslatedWord(std::string_view w);
     void FindSiblingNames();
 
     // Scores, splits and the accepted names (registry.cpp).
@@ -184,6 +185,7 @@ private:
     std::map<std::array<std::string, 3>, int> joined_;  // kanji and katakana pairs
     std::map<std::string, int> chains_;                 // katakana runs joined by ・ or ＝
     std::map<std::string, int> prose_;                  // katakana runs of lines mostly not katakana
+    std::map<std::string, int> agents_;                 // katakana runs that do a favour (AgentCue)
     struct FlagCache {
         std::map<std::string, DictFlags> values;
         std::size_t bytes = 0;

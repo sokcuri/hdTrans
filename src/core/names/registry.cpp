@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <initializer_list>
 #include <set>
 #include <span>
 #include <utility>
@@ -39,6 +40,25 @@ std::vector<std::size_t> RuneStarts(std::string_view s) {
 }
 
 bool IsRuneStartByte(char c) { return (static_cast<unsigned char>(c) & 0xC0) != 0x80; }
+
+// Whether the text after a word makes it the doer of a favour: に with てもらう or 頼む
+// (Xに作ってもらった, Xに頼んで), or が with てくれる (Xが作ってくれた), in its sentence.
+bool AgentCue(std::string_view after) {
+    std::string_view sentence = after;
+    for (const std::string_view end : {"。", "！", "？", "」", "『", "「"}) {
+        const std::size_t at = sentence.find(end);
+        if (at != std::string_view::npos) sentence = sentence.substr(0, at);
+    }
+    auto has = [&](std::initializer_list<std::string_view> list) {
+        for (const std::string_view w : list) {
+            if (sentence.find(w) != std::string_view::npos) return true;
+        }
+        return false;
+    };
+    if (sentence.starts_with("に")) return has({"てもら", "でもら", "頼"});
+    if (sentence.starts_with("が")) return has({"てくれ", "でくれ"});
+    return false;
+}
 
 // Whether text ends with suffix as a whole string with a non-empty head.
 bool HasSuffixOf(std::string_view text, std::string_view suffix) {
@@ -119,7 +139,8 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 }
 
 void Registry::Forget(const Evidence& evidence) {
-    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_, &gloss_, &runs_, &ended_, &kana_, &chains_, &kanaHon_, &prose_};
+    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_,     &gloss_, &runs_,  &ended_,
+                                            &kana_,   &chains_,   &kanaHon_, &prose_, &agents_};
     for (std::size_t i = 0; i < evidence.counts.size(); i++) {
         for (const std::string& key : evidence.counts[i]) {
             auto it = counts[i]->find(key);
@@ -292,6 +313,9 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             chain = i + 1;
         }
         if (const std::string t = HonorificRun(line, run); !t.empty()) count(hon_, t, 2);
+        if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
+            count(agents_, std::string(run.text), 10);
+        }
         if (!run.kanji && RuneCount(run.text) >= 2 && line.substr(run.end).starts_with("と名乗") && !RoleLike(run.text) &&
             !Flags(run.text).role) {
             count(gloss_, std::string(run.text), 3);
@@ -416,6 +440,12 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (rd != tables_->readings.end() && !rd->second.empty() && RuneCount(t) >= 2 && Flags(t).records == 0) {
             all[t].score += static_cast<double>(std::min(c, 2));
         }
+    }
+    for (const auto& [t, c] : agents_) {
+        if (c < 2 || !TranslatedWord(t)) continue;
+        Name& n = all[t];
+        n.score += static_cast<double>(std::min(c, kHonorificCap));
+        n.person = true;
     }
     for (const auto& [t, c] : prose_) {
         if (c >= 2 && NicknameCompound(t)) {
@@ -670,6 +700,30 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     }
 }
 
+// Whether the katakana word w is a Japanese word written in katakana, which its hiragana
+// spells too, and the dictionary translates rather than transliterates (クズ くず 쓰레기,
+// ザブトン 방석).
+bool Registry::TranslatedWord(std::string_view w) {
+    if (snap_ == nullptr) return false;
+    const DictFlags f = Flags(w);
+    if (!f.common || f.person || f.role) return false;
+    std::string hiragana;
+    for (std::size_t i = 0; i < w.size(); i += RuneAt(w, i).size) {
+        const char32_t c = RuneAt(w, i).cp;
+        if (c < U'ァ' || c > U'ヶ') return false;
+        text::AppendRune(hiragana, c - 0x60);
+    }
+    if (!Flags(hiragana).common) return false;
+    const std::string sound = text::FromKana(w, text::Preset::Fan);
+    bool any = false;
+    for (const dict::Candidate& c : snap_->RetrieveRecords(w, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.codes->sem.HasPrefix("QPN") || !IsHangulText(c.target)) continue;
+        if (text::SameSound(c.target, sound)) return false;
+        any = true;
+    }
+    return any;
+}
+
 // Whether the katakana run t, no word of the dictionaries, splits into a Japanese word
 // written in katakana that the dictionary translates rather than transliterates (クズ
 // くず 쓰레기) and a person name (デン): a nickname joined to a name (クズデン), which reads
@@ -679,26 +733,6 @@ bool Registry::NicknameCompound(std::string_view t) {
         !snap_->NameRecords(t).empty()) {
         return false;
     }
-    auto translated = [&](std::string_view w) {
-        const DictFlags f = Flags(w);
-        if (!f.common || f.person || f.role) return false;
-        // A Japanese word written in katakana, which its hiragana spells too (クズ くず).
-        std::string hiragana;
-        for (std::size_t i = 0; i < w.size(); i += RuneAt(w, i).size) {
-            const char32_t c = RuneAt(w, i).cp;
-            if (c < U'ァ' || c > U'ヶ') return false;
-            text::AppendRune(hiragana, c - 0x60);
-        }
-        if (!Flags(hiragana).common) return false;
-        const std::string sound = text::FromKana(w, text::Preset::Fan);
-        bool any = false;
-        for (const dict::Candidate& c : snap_->RetrieveRecords(w, dict::LookupMode::General)) {
-            if (c.codes == nullptr || c.codes->sem.HasPrefix("QPN") || !IsHangulText(c.target)) continue;
-            if (text::SameSound(c.target, sound)) return false;
-            any = true;
-        }
-        return any;
-    };
     auto name = [&](std::string_view w) {
         const DictFlags f = Flags(w);
         return f.person && !f.common && RuneCount(w) >= 2;
@@ -706,7 +740,7 @@ bool Registry::NicknameCompound(std::string_view t) {
     const std::vector<std::size_t> starts = RuneStarts(t);
     for (std::size_t k = 2; k + 2 <= starts.size(); k++) {
         const std::string_view a = t.substr(0, starts[k]), b = t.substr(starts[k]);
-        if ((translated(a) && name(b)) || (name(a) && translated(b))) return true;
+        if ((TranslatedWord(a) && name(b)) || (name(a) && TranslatedWord(b))) return true;
     }
     return false;
 }
