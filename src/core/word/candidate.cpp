@@ -277,6 +277,55 @@ bool NounEnd(std::string_view text) {
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
+// Text path: candidates are ordered by part tag before length, so an adnominal in の
+// written from a kanji (大の, 大粒の) came before a longer dictionary noun it starts
+// (大の字, 大粒の雨). That noun moves to the front when a particle, punctuation or the
+// end of the text follows it. Demonstratives (あの人, この世) and adverbs keep their
+// order: their compound rows read worse than the parts. Plain-dictionary records stay
+// in front.
+Record* LongerNounFirst(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    if (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
+        !text::IsKanji(text::DecodeRune(first->source).cp)) {
+        return records;
+    }
+    std::string_view noun;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->user == nullptr && At(r->partCode, 1) == '1' && r->source.size() > first->source.size() &&
+            r->source.size() > noun.size() && r->source.starts_with(first->source) && text.starts_with(r->source) &&
+            NounEnd(text.substr(r->source.size()))) {
+            noun = r->source;
+        }
+    }
+    if (noun.empty()) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '1' && r->source == noun) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
 // Text path: the noun records of records move ahead of a verb whose continuative they
 // spell, the stem and one kana of the i or e row (争い, not 争 + い), when no record is
 // longer, the word before is a modifier a verb cannot follow (の, a word in な, この) and
@@ -844,6 +893,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
+    if (settings.text) records = LongerNounFirst(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
