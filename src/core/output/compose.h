@@ -157,8 +157,9 @@ private:
     std::string Context(std::string text) const;
     void WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker> markers);
     std::string KeepDropped(int i, std::string translated, std::string_view remainder);
-    // With settings.literal, the text of item i as a count is written (二匹 두 마리, 三回 세
-    // 번); other text as is.
+    // With settings.literal, the text of item i as a count is written: a count and its counter
+    // in one item (三回 세 번, 1番目 첫 번째), a number before a counter item (三 세), or a
+    // counter after a native count (回 번); other text as is. Spacing writes the space.
     std::string WriteCount(int i, std::string text) const;
     std::pair<std::string, bool> Spacing(int i, std::string t, std::string_view tags, std::string_view nextTags,
                                          char kind, char nextKind, bool isLast, bool converted,

@@ -26,7 +26,7 @@ struct CompositionCase {
     const char* expected;
 };
 
-void CheckComposition(const CompositionCase& c) {
+void CheckComposition(const CompositionCase& c, bool literal = false) {
     std::vector<TokenText> tokens = {
         {tokenizer::kTypeJapanese, 0, "", ""},
         {tokenizer::kTypeSentenceEnd, 0, ".", ""},
@@ -59,6 +59,7 @@ void CheckComposition(const CompositionCase& c) {
     Families families;
     Settings settings;
     settings.text = true;
+    settings.literal = literal;
     Pieces result;
     composer.Compose(items, tokens, 0, 1, {}, settings, families, result);
     HD_CHECK_EQ(String(result), c.expected);
@@ -165,4 +166,19 @@ HD_TEST(compose_sentence_token_ranges) {
     HD_CHECK_EQ(String(result).size(), std::size_t{48000});
     for (const TokenText& token : tokens) HD_CHECK_EQ(token.text, "text");
     std::printf("compose 4000 sentences: %.3f ms\n", std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count());
+}
+
+HD_TEST(compose_native_counts) {
+    const CompositionCase cases[] = {
+        {{{"三", "110", "NjNd", "3"}, {"匹", "110", "Ct", "마리"}}, {2}, "세 마리."},
+        {{{"何回", "110", "", "몇회"}}, {1}, "몇 번."},
+        {{{"三", "110", "NjNd", "3"}, {"回", "110", "Ct", "회"}}, {2}, "세 번."},
+        // One in an ordinal is 첫, counted with 번.
+        {{{"一", "110", "NjNd", "1"}, {"回", "110", "Ct", "회"}, {"目", "110", "Ct", "째"}}, {3}, "첫 번째."},
+        {{{"一", "110", "NjNd", "1"}, {"匹", "110", "Ct", "마리"}, {"目", "110", "Ct", "째"}}, {3}, "첫 번째."},
+        {{{"1番目", "110", "Ct", "1번째"}}, {1}, "첫 번째."},
+        {{{"二", "110", "NjNd", "2"}, {"匹", "110", "Ct", "마리"}, {"目", "110", "Ct", "째"}}, {3}, "두 마리째."},
+        {{{"二十", "110", "NjNd", "20"}, {"匹", "110", "Ct", "마리"}}, {2}, "20마리."},
+    };
+    for (const auto& c : cases) CheckComposition(c, true);
 }

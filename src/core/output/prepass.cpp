@@ -203,10 +203,6 @@ const NativeCounter* FindNativeCounter(std::string_view counter, std::string_vie
 constexpr std::string_view kNativeCounts[] = {"한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "몇", "여러"};
 constexpr std::u32string_view kCountLeads = U"0123456789０１２３４５６７８９一二三四五六七八九十何数幾";
 
-bool CountsNatively(std::string_view counter, std::string_view korean) {
-    return FindNativeCounter(counter, korean) != nullptr;
-}
-
 // The native Korean numeral that a count of one to nine written in digits or kanji
 // reads before a native counter (二 두, 3 세); 十 reads 열. Empty for any other number.
 std::string_view NativeNumeral(std::string_view digits, std::string_view surface) {
@@ -222,6 +218,27 @@ std::string_view NativeNumeral(std::string_view digits, std::string_view surface
         k += r.size;
     }
     return kNative[digits[0] - '1'];
+}
+
+// Whether counter item k counts an order: the 째 of an ordinal is part of its text or the
+// item after it (1番目 1번째, 1回目 1회 + 째, 1匹目 1 + 마리 + 째).
+bool Ordinal(const std::vector<ResolvedItem>& items, int k) {
+    if (k < 0 || k >= static_cast<int>(items.size())) return false;
+    if (EntryText(items[k]).ends_with("째")) return true;
+    if (k + 1 >= static_cast<int>(items.size())) return false;
+    const ResolvedItem& a = items[k];
+    const ResolvedItem& b = items[k + 1];
+    return b.tokenIndex == a.tokenIndex && b.offset == a.offset + a.length && EntryText(b).starts_with("째");
+}
+
+// A native count and its counter as written (두 마리, 몇 번, 세 번째). One in an ordinal is
+// 첫 and is counted with 번 (첫 번째, not 한 번째 or 한 마리째).
+std::string WriteNativeCount(std::string_view count, const NativeCounter& c, bool ordinal) {
+    std::string_view form = NativeForm(c);
+    if (count == "한" && (ordinal || form.ends_with("째"))) {
+        return form.ends_with("째") ? "첫 번째" : "첫 번";
+    }
+    return std::string(count) + ' ' + std::string(form);
 }
 
 std::string_view TextTail(const Pieces& p) {
@@ -292,7 +309,9 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
             numeral += r.size;
         }
         const NativeCounter* c = FindNativeCounter(surface.substr(numeral), std::string_view(t).substr(count.size()));
-        if (c != nullptr && !(c->joins && count == "한")) t.insert(count.size(), " ");
+        if (c != nullptr && !(c->joins && count == "한" && !Ordinal(items, i))) {
+            t = WriteNativeCount(count, *c, Ordinal(items, i));
+        }
         break;
     }
     size_t digits = 0;
@@ -311,7 +330,7 @@ std::string CountWithin(const std::vector<TokenText>& tokens, const std::vector<
     if (InsideNumber(tokens, item) || CompoundAfter(items, i, *c)) return t;
     const std::string_view native = NativeNumeral(std::string_view(t).substr(0, digits), surface.substr(0, numeral));
     if (native.empty()) return t.substr(0, digits) + std::string(counter);
-    return std::string(native) + ' ' + std::string(NativeForm(*c));
+    return WriteNativeCount(native, *c, Ordinal(items, i));
 }
 
 // A word of two kanji and 中, 後 or 前 read with their Sino-Korean syllables (作業中 작업중,
@@ -535,10 +554,15 @@ std::string Composer::WriteCount(int i, std::string text) const {
     const std::vector<ResolvedItem>& items = *items_;
     const std::vector<TokenText>& tokens = *tokens_;
     text = CountWithin(tokens, items, i, std::move(text));
-    // A counter after a native count takes its native form (三回 세 번).
-    if (const NativeCounter* c = FindNativeCounter(items[i].surface, text);
-        c != nullptr && !c->native.empty() && WritesNativeCount(items, tokens, i - 1)) {
-        text = c->native;
+    const int count = static_cast<int>(items.size());
+    if (AllDigits(text) && i + 1 < count && WritesNativeCount(items, tokens, i)) {
+        const std::string_view native = NativeNumeral(text, items[i].surface);
+        if (!native.empty()) text = native == "한" && Ordinal(items, i + 1) ? "첫" : native;
+    } else if (const NativeCounter* c = FindNativeCounter(items[i].surface, text);
+               c != nullptr && WritesNativeCount(items, tokens, i - 1)) {
+        const std::string written =
+            WriteNativeCount(NativeNumeral(EntryText(items[i - 1]), items[i - 1].surface), *c, Ordinal(items, i));
+        text = written.substr(written.find(' ') + 1);
     }
     return text;
 }
@@ -694,21 +718,13 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         }
         if (!EntryText(items[j]).empty()) break;
     }
-    // A count before a native counter: one to nine is written in native Korean apart from
-    // the counter (二匹 두 마리, 3回 세 번), a larger number in digits joined to it (20마리).
-    // A number inside a longer one or a range (第2回, 1、2個, 2～3本) or before a compound
-    // stays as it is.
-    if (const NativeCounter* c = FindNativeCounter(next.surface, EntryText(next));
-        settings_.literal && AllDigits(t) && c != nullptr) {
-        if (!InsideNumber(tokens, item) && !CompoundAfter(items, nextIndex, *c)) {
-            if (const std::string_view native = NativeNumeral(t, item.surface); !native.empty()) {
-                return Result(std::string(native), true);
-            }
-        }
-        return Result(std::move(t), false);
-    }
-    if (settings_.literal && (t == "몇" || t == "여러") && CountsNatively(next.surface, EntryText(next))) {
-        return Result(std::move(t), true);
+    // A count before a native counter: one to nine, written in native Korean by WriteCount,
+    // and 몇 or 여러 stand apart from the counter (二匹 두 마리, 3回 세 번, 何匹 몇 마리), a
+    // larger number in digits joins it (20마리). A number inside a longer one or a range
+    // (第2回, 1、2個, 2～3本) or before a compound stays as it is.
+    if (settings_.literal && FindNativeCounter(next.surface, EntryText(next)) != nullptr) {
+        if (t.find(' ') == std::string::npos && WritesNativeCount(items, tokens, i)) return Result(std::move(t), true);
+        if (AllDigits(t)) return Result(std::move(t), false);
     }
     // A number word in Hangul stands apart from the counter after it (수십 명, 몇백 년).
     if (constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
