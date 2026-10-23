@@ -81,7 +81,7 @@ constexpr std::array<std::string_view, 31> kParticleTails = {
 // The particles and honorifics that follow a name.
 constexpr std::array<std::string_view, 20> kNameFollowers = {"は", "が", "を", "の", "に", "へ", "と", "も", "や", "で",
                                                               "か", "だ", "って", "から", "まで", "より", "さん", "ちゃん", "くん", "さま"};
-// Endings of a sentence, not of a name (陽炎型十番艦の時津風だよ).
+// Endings of a sentence, not of a name (同じ班の田中だよ).
 constexpr std::array<std::string_view, 12> kSentenceTails = {"だよ", "だね", "だぞ", "です", "ですか", "ます",
                                                               "ますか", "ました", "ません", "でした", "だもん", "ないもん"};
 // Familiar honorifics after a key that make it a person's name (桃花ちゃん, 恭平くん).
