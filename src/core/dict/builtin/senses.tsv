@@ -1351,6 +1351,7 @@
 制する	제지하다	手	before	v
 埋まる	파묻히다	壁,土,地面,雪,砂,瓦礫,土砂,泥	before	v5
 主	주인	の	before	n
+主	주인
 
 // Argument classes and case particles; literal collocations above take precedence.
 に	에게	sem:QPN@に/gram:Rc,sem:QNP@に/gram:Rc,sem:VHn@に/gram:Rc,sem:VAm@に/gram:Rc,sem:VGn@に/gram:Rc,sem:VQw@に/gram:Rc,sem:VQm@に/gram:Rc,sem:QAA@に/gram:Rc,sem:QAB@に/gram:Rc,sem:QAC@に/gram:Rc,sem:QAD@に/gram:Rc,sem:QAE@に/gram:Rc,sem:QAF@に/gram:Rc,sem:QAG@に/gram:Rc,sem:QAH@に/gram:Rc	before	p
