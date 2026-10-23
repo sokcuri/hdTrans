@@ -109,30 +109,47 @@ cmake --build --preset wasm --parallel
 
 `.github/workflows/`의 워크플로가 GitHub Actions에서 돌아갑니다.
 
-- **build.yml**: `linux`, `windows-x64`, `windows-x86`, `mac`, `wasm` 프리셋을 각 OS 러너에서
+- **build.yml**(Build): 풀 리퀘스트, `main`과 `develop` push, 수동 실행에서 돌고, 태그에서는 **Publish npm**이
+  불러 씁니다. `linux`, `windows-x64`, `windows-x86`, `mac`, `wasm` 프리셋을 각 OS 러너에서
   빌드합니다. 모든 플랫폼에서 Ninja를 쓰고, 컴파일 캐시는 네이티브 빌드가 sccache, `wasm`이 ccache입니다
   (sccache는 Emscripten의 `-Xclang` 인자를 캐시하지 못합니다). Windows는 프리셋에 `-G Ninja`를 덧붙이고
   `vcvarsall`로 MSVC 환경을 설정합니다. 네이티브 프리셋은 `HDTRANS_DICTS=dicts`로 `ctest`를 실행하고, `wasm`은
   Node로 `tools/wasm_smoke.mjs`를 실행해 작은 사전으로 한 번 번역해 봅니다(셋째 인자로 그 사전을
-  컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). 결과물은
-  `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
+  컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
+  ([testing.md](testing.md#ci)). 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
+- Build의 `gate` job이 matrix(릴리스 도구 테스트 포함)를 돌릴지 정합니다. 아래 경우에만 건너뛰고, 그 밖의 경우와
+  확인 중 오류는 전체를 빌드합니다. 릴리스 파일은 `CHANGELOG.md`, `.release-please-manifest.json`,
+  `release-version.txt`, `npm/package.json`, `npm/package-lock.json`입니다.
+  - `main` push가 릴리스 봇의 버전 커밋 하나입니다. 작성자와 커미터가 봇이고, 메시지가 릴리스 커밋 형식이며,
+    부모가 `Release-Source`의 커밋이고, 릴리스 파일만 바꿉니다. 같은 커밋을 태그 빌드가 테스트합니다.
+  - `main` push의 트리를 이 저장소의 성공한 Build가 이미 테스트했습니다.
+  - `develop`→`main` PR의 병합 트리가 `develop` head 트리와 릴리스 파일만 다르고(`npm/package.json`과 lock은
+    버전만), `develop` 트리를 성공한 Build가 테스트했습니다.
+
+  matrix가 통과한 풀 리퀘스트와 브랜치 push의 Build, 그리고 셋째 경우의 PR Build는
+  `tested-tree-<트리 해시>` 아티팩트(30일)를 남기며, gate는 이 기록을 찾습니다. 포크의 기록은 쓰지 않습니다.
+- 컴파일 캐시는 `develop` push와 풀 리퀘스트만 저장합니다. `main`, 태그, 수동 실행은 읽기만 하므로 `develop`의
+  최신 캐시를 씁니다. Emscripten(`EMSDK_VERSION`)은 버전과 러너마다 캐시 한 벌을 모든 워크플로가 함께 쓰고,
+  ccache는 컴파일러를 그 버전으로 식별합니다.
 - **release.yml**: `build.yml`의 결과를 받아 Windows ZIP과 Linux, macOS tar.gz, `SHA256SUMS.txt`를
   만듭니다. Windows는 x86 `J2KEngine.dll`, x64 CLI, GUI, C API와 별도의 x86 CLI, C API를 담습니다.
   WASM 아티팩트에는 엔진, TypeScript용 JavaScript와 `.d.ts`를 포함합니다. 빌드한 엔진, JavaScript 래퍼와 기본 사전을 담은 npm 패키지는 `hdTrans-<버전>-wasm.tgz`로 릴리스에 첨부합니다.
-- **e2e.yml**: 풀 리퀘스트와 `main`, `develop` 푸시 때, 현재 커밋의 CLI로 비공개 테스트 데이터를 번역해 기대 출력과
-  달라진 줄을 보고합니다. 자세한 내용은 [testing.md](testing.md#ci)에 있습니다.
+- **release-please.yml**(Release main): `main` push의 Build가 성공하면 버전 커밋, 태그, GitHub Release 초안을 만듭니다.
+- **publish-npm.yml**(Publish npm): `v*` 태그 push에서 Build 전체를 실행하고, 그 run의 패키지로 GitHub Release와
+  npm(OIDC, provenance)에 게시합니다.
+- **deploy-web.yml**(Deploy web): Publish npm이 성공하면 그 릴리스의 CLI와 npm 패키지로 웹 데모를 배포합니다
+  ([web.md](web.md#자동-배포)).
+- **pr-title.yml**: PR 제목을 검사합니다.
 
 로컬 빌드에는 sccache와 ccache 모두 필요 없습니다.
 
 ## 릴리스
 
-`develop`을 `main`에 병합하면 release-please가 여러 변경을 릴리스 PR 하나에 모읍니다.
-그 PR을 합칠 때만 버전, `CHANGELOG.md`, 태그와 GitHub Release를 만듭니다.
-`fix`는 patch, `feat`는 minor, `!`나 `BREAKING CHANGE:`는 major를 올립니다. 첫 GitHub 릴리스 버전은 `0.1.1`입니다.
-커밋과 PR 제목, 병합 방법은 [contributing.md](contributing.md)에 있습니다.
-
-release-please가 태그를 만든 뒤 **Build**를 명시적으로 실행합니다. 전체 플랫폼 빌드와 테스트가 통과하면
-패키지와 SHA-256 목록을 기존 GitHub Release에 첨부하며, release-please의 릴리스 노트는 유지합니다.
+`develop`을 `main`에 병합하는 PR의 제목이 다음 버전을 정합니다. 커밋과 PR 제목, 병합 방법은
+[contributing.md](contributing.md)에 있습니다. 병합 커밋의 Build가 성공하면 **Release main**이 버전 파일과
+`CHANGELOG.md`를 커밋해 `main`에 push하고, `vX.Y.Z` 태그와 GitHub Release 초안을 만듭니다. 태그 push의
+**Publish npm**이 그 커밋을 전체 플랫폼에서 빌드, 테스트한 뒤 패키지와 SHA-256 목록을 Release에 올려 게시하고
+같은 패키지를 npm에 게시합니다.
 `develop` 푸시도 빌드와 테스트 뒤 패키지를 만들지만 `release-packages` CI 아티팩트로만 올리며,
 GitHub Release를 만들거나 태그를 옮기지 않습니다.
 
@@ -142,7 +159,7 @@ Actions의 **Build → Run workflow**에서 `dry_run=true`로 실행하면 패�
 사용자 파일 견본의 스테이징 목록은 `build.yml`의 `HDTRANS_USER_FILES`에서 관리합니다.
 
 버전은 `git describe --tags`로 찾은 가장 가까운 `v` 태그에서 앞의 `v`를 뗀 값입니다.
-태그가 없으면 `0.0.0-<짧은 SHA>`입니다. Git 정보가 없는 소스 압축본은 release-please가 관리하는
+태그가 없으면 `0.0.0-<짧은 SHA>`입니다. Git 정보가 없는 소스 압축본은 릴리스 봇이 관리하는
 `release-version.txt`를 쓰며, 그 파일도 없으면 `0.0.0-unknown`입니다.
 C API의 `hdTrans_Version`, TypeScript의 `version`, Windows EXE와 DLL의 버전 정보에 같은 엔진 버전 문자열을 씁니다.
 CLI의 `--version`은 선택한 사전도 로드해서 `hdTrans v<엔진> (native 또는 wasm) / dict <사전>`을 한 줄로 출력합니다.

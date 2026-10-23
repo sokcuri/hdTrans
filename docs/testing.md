@@ -164,8 +164,8 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
 
 ### CI
 
-`.github/workflows/e2e.yml`은 풀 리퀘스트와 `main` 푸시마다 현재 커밋의 CLI만 빌드해 `--expected`로
-비교합니다. 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
+Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `--expected` 비교를 합니다. gate가
+matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
 로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다.
 
