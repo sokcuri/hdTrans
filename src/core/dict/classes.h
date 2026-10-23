@@ -10,6 +10,8 @@
 #include <utility>
 #include <vector>
 
+#include "classes_gen.h"
+
 namespace hdTrans::dict {
 
 namespace internal {
@@ -21,19 +23,32 @@ constexpr std::uint64_t ClassHash(std::string_view s) {
     return h;
 }
 
+constexpr bool KnownClass(std::string_view s) {
+    for (const std::string_view n : kClassNames) {
+        if (n == s) return true;
+    }
+    return false;
+}
+
+// Not constexpr: a name that classes.tsv lacks reaches it while the program is compiled, which
+// fails the compilation.
+void UnknownClassName();
+
 }  // namespace internal
 
-// The name of a word class: a string literal, hashed when the program is compiled. The
-// constructor is implicit so that a literal names the class.
+// The name of a word class: a string literal of a set of classes.tsv, hashed when the program is
+// compiled. The constructor is implicit so that a literal names the class.
 struct ClassName {
     std::string_view name;
     std::uint64_t hash;
-    consteval ClassName(const char* s) : name(s), hash(internal::ClassHash(s)) {}
+    consteval ClassName(const char* s) : name(s), hash(internal::ClassHash(s)) {
+        if (!internal::KnownClass(name)) internal::UnknownClassName();
+    }
 };
 
-// Whether surface is a member of the class named set; false for a set the table lacks.
+// Whether surface is a member of the class named set.
 bool InClass(ClassName set, std::string_view surface);
-// The members of the class named set in table order; empty for a set the table lacks.
+// The members of the class named set in table order.
 std::span<const std::string_view> ClassMembers(ClassName set);
 
 namespace internal {

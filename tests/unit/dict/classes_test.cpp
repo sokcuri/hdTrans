@@ -75,8 +75,8 @@ HD_TEST(classes_builtin) {
         HD_CHECK(!c.doc.empty());
     }
     HD_CHECK(Find(t, "none") == nullptr);
-    HD_CHECK(!InClass("none", ""));
-    HD_CHECK(ClassMembers("none").empty());
+    HD_CHECK_EQ(t.classes.size(), std::size(internal::kClassNames));
+    for (const std::string_view n : internal::kClassNames) HD_CHECK(Find(t, n) != nullptr);
     HD_CHECK(InClass("particle.case-before-stem", "を"));
     HD_CHECK(!InClass("particle.case-before-stem", "が"));
 }
