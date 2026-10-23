@@ -2151,21 +2151,6 @@ void YounaBeforeModifier(Flusher& f) {
     }
 }
 
-void JiBeforeJiman(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
-        if (n == nullptr || n->selected < 0 || it->DirectIndex() < 0 ||
-            (!n->group->surface.starts_with("けど") && !n->group->surface.starts_with("けれど")) ||
-            !ItemLemma(f, n, n->selected).ends_with("지만")) {
-            continue;
-        }
-        const Entry* direct = it->DirectEntry(it->DirectIndex());
-        if (direct != nullptr && direct->dst.ends_with("겠지")) {
-            if (n->group->At(n->selected) != nullptr) n->AssignEntrySurface(n->selected, "만");
-        }
-    }
-}
-
 namespace {
 
 // The Korean of a のか word: its ending, or the word itself when it has none (なのか).
@@ -2340,17 +2325,6 @@ void OfferPromise(Flusher& f) {
         const int to = close >= 0 ? close : f.w.TokenCount() - 1;
         for (int k = from; k <= to; k++) quote += f.w.Tok(k).text;
         it->AssignDirectSlot(it->DirectIndex(), OldSpeech(quote) || surface.ends_with("くれてや") ? "1마" : "3게");
-    }
-}
-
-void ParticleInNext(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* n = it->next;
-        if (n == nullptr || it->selected < 0 || n->selected < 0 || it->detail->Yougo()) continue;
-        Entry* e = it->group->At(it->selected);
-        if (e == nullptr || e->cls != 'P') continue;
-        const std::string lemma = ItemLemma(f, it, it->selected);
-        if (!lemma.empty() && ItemLemma(f, n, n->selected).starts_with(lemma + " ")) it->AssignEntrySurface(it->selected, "");
     }
 }
 

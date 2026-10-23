@@ -66,8 +66,6 @@ constexpr Pass kTextPasses[] = {
     {"ShortPossessive", ShortPossessive},
     {"DeScene", DeScene},
     {"YounaBeforeModifier", YounaBeforeModifier},
-    {"ParticleInNext", ParticleInNext},
-    {"JiBeforeJiman", JiBeforeJiman},
     {"ParallelNoka", ParallelNoka},
     {"OfferPromise", OfferPromise},
     {"EvenBeforePassive", EvenBeforePassive},

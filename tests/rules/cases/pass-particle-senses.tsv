@@ -39,9 +39,9 @@ cx:no-after-na:10	元気そうなのが一番だ。	씩씩한 것이 제일이�
 cx:no-after-na:10	幸せそうなのが分かる。	행복한 것을 알 수 있다.	current	rewrites
 cx:no-after-na:10	嫌なのを我慢した。	싫은 것을 참았다.	keep	rewrites
 cx:no-after-na:10	静かなので眠れる。	조용해서 잘 수 있다.	keep	rewrites
-rewrite:particle-in-next	水泳部なだけに	수영부인 만큼	fix	rewrites
-rewrite:particle-in-next	人気なだけに	인기인 만큼	fix	rewrites
-rewrite:particle-in-next	学生だけに話す。	학생에게만 이야기한다.	keep	rewrites
+cx:particle-in-next:10	水泳部なだけに	수영부인 만큼	fix	rewrites
+cx:particle-in-next:10	人気なだけに	인기인 만큼	fix	rewrites
+cx:particle-in-next:10	学生だけに話す。	학생에게만 이야기한다.	keep	rewrites
 cx:hodo-degree:20	武装も哀れなほどに貧弱で	무장도 불쌍할 정도로 빈약해	fix	rewrites
 cx:hodo-degree:30	耳が痛い程の沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
 cx:hodo-degree:30	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites

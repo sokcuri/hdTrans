@@ -1,6 +1,7 @@
 #include "core/word/constructions.h"
 
 #include <algorithm>
+#include <string>
 #include <unordered_map>
 
 #include "core/dict/builtin.h"
@@ -31,6 +32,12 @@ constexpr NamedFeature kFeatures[] = {
     {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
     {"last", [](Flusher&, const Item* it) { return it->next == nullptr; }},
     {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }},
+    // The Korean of the next word starts with this word's Korean and a space.
+    {"lemma-starts-next",
+     [](Flusher& f, const Item* it) {
+         const std::string lemma = ItemLemma(f, it, it->selected);
+         return !lemma.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with(lemma + " ");
+     }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
 };

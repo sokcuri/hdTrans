@@ -124,8 +124,6 @@ void LongVowelAfterKatakana(Flusher& f);
 void ShortPossessive(Flusher& f);
 void DeScene(Flusher& f);
 void YounaBeforeModifier(Flusher& f);
-void ParticleInNext(Flusher& f);
-void JiBeforeJiman(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
