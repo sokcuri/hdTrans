@@ -171,6 +171,8 @@ HD_TEST(output_fix_spacing) {
         {{Text("「시끄럽다 」라고 『가자  』")}, "「시끄럽다」라고 『가자』"},
         {{Text("「(웃음) )")}, "「(웃음) )"},
         {{Text("? "), Tag("<b>"), Text(" 」")}, "? <b> 」"},
+        {{Text("했다 "), Tag("<k>"), Text("――")}, "했다<k>――"},
+        {{Text("했다 "), Tag("<k>"), Text("가")}, "했다 <k>가"},
     };
     for (const auto& c : cases) {
         Pieces p = c.in;

@@ -45,7 +45,8 @@ Pieces CleanupText(Pieces text);
 
 // In each text piece, in this order: ∼ written as ~, the spaces before a comma
 // dropped, the spaces between ? or ! and a closing bracket (『무엇?』) and between a
-// syllable and ―― dropped, full-width digits written in ASCII.
+// syllable and ―― dropped (also with an opening tag between them), full-width digits
+// written in ASCII.
 void FixSpacing(Pieces& pieces);
 
 // The target of a word span: its text when it ends in a syllable, otherwise the

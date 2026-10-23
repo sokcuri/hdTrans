@@ -115,6 +115,12 @@ void FixSpacing(Pieces& pieces) {
         internal::NarrowTilde(t);
         internal::DropSpaceBeforeComma(t);
         internal::DropSpaceBeforeClose(t);
+        // The same across an opening tag: 했다 <k>―― 했다<k>――.
+        if (k + 2 < pieces.size() && pieces[k + 1].span == SpanOpen && pieces[k + 2].span == SpanText &&
+            StartsWith(pieces[k + 2].text, "――")) {
+            const size_t end = t.find_last_not_of(' ') + 1;
+            if (end > 0 && end < t.size() && IsSyllable(LastRune(std::string_view(t).substr(0, end)))) t.resize(end);
+        }
         internal::NarrowWideDigits(t);
         Keep(pieces, w, k);
     }

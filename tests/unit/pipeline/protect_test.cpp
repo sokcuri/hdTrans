@@ -51,6 +51,8 @@ HD_TEST(pipeline_cut_spans) {
         {"<b>김</b>", "〖2<b>〗〖1김〗〖3</b>〗"},
         {"[color=red]x[/color]", "〖2[color=red]〗x〖3[/color]〗"},
         {"[b x]y[color=a\nb]", "[b x]y[color=a\nb]"},
+        {"{rb}悔やむ{/rb}{rt}くやむ{/rt}{k=-5.0}―{/k}", "〖2{rb}〗悔やむ〖3{/rb}〗〖2{rt}〗くやむ〖3{/rt}〗〖2{k=-5.0}〗―〖3{/k}〗"},
+        {"{0}{rb]{x}", "{0}{rb]〖2{x}〗"},
         {"a&amp;b&#169;&#x1F363;&x;", "a〖2&amp;〗b〖2&#169;〗〖2&#x1F363;〗&x;"},
         {"&#12345678;&#X41;&a12345678901234567890123456789012;", "&#12345678;&#X41;&a12345678901234567890123456789012;"},
         // Inline style codes: a font, a colour and the reset.
