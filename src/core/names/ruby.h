@@ -11,6 +11,7 @@ namespace hdTrans::names::internal {
 struct RubyMatch {
     std::size_t begin = 0, end = 0;
     std::string_view base, reading;
+    bool spaced = false;  // a space stands between the base and the parenthesis (FindReading)
 };
 
 // The leftmost ruby markup in s at or after from: |漢字《かな》, ｜漢字（かな）, 漢字《かな》

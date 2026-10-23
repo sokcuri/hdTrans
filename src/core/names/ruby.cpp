@@ -4,6 +4,7 @@
 
 #include "core/names/chars.h"
 #include "core/names/registry.h"
+#include "core/text/unicode.h"
 
 namespace hdTrans::names {
 
@@ -240,11 +241,14 @@ bool ReadingAt(std::string_view s, std::size_t pos, RubyMatch& m) {
     const std::size_t baseEnd = p;
     if (kanji < 1) return false;
     const bool bracket = Lit(s, p, "「");
+    bool spaced = false;
     if (!bracket) {
-        std::size_t q = p;
-        if (!Lit(s, q, " ")) Lit(s, q, "　");  // one space may stand before the parenthesis: 山田 (やまだ)
-        if (!OpenParen(s, q)) return false;
-        p = q;
+        // One space may stand before the parenthesis: 山田 (やまだ).
+        if (p < s.size() && text::IsSpace(RuneAt(s, p).cp)) {
+            p += RuneAt(s, p).size;
+            spaced = true;
+        }
+        if (!OpenParen(s, p)) return false;
     }
     const std::size_t readStart = p;
     const std::size_t k = Take(s, p, 17, [](char32_t c) { return NotParen(c) && c != U'「' && c != U'」'; });
@@ -263,6 +267,7 @@ bool ReadingAt(std::string_view s, std::size_t pos, RubyMatch& m) {
     m.end = p;
     m.base = s.substr(pos, baseEnd - pos);
     m.reading = reading;
+    m.spaced = spaced;
     return true;
 }
 

@@ -4,3 +4,5 @@ names:reading	田中 (たなか) さん	타나카 씨	fix	names
 names:reading	東京 (とうきょう) に行く	도쿄에 간다	fix	names
 names:reading	山田(やまだ)は来た。	야마다는 왔다.	keep	names
 names:reading	山田 (仮名) は	야마다 (가명)는	keep	names
+names:reading	選択肢 (はい/いいえ) がある	선택지 (네/아니요)가 있다	keep	names
+names:reading	条件 (つよい) の場合	조건 (강하다)의 경우	keep	names
