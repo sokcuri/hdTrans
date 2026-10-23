@@ -28,3 +28,6 @@ dict:w:26748	わけあって旅に出た。	사정이 있어 여행을 떠났다
 dict:w:26748	ワケあって旅に出た。	사정이 있어 여행을 떠났다.	fix	lookup
 dict:w:26749	まあ、訳あって、あまり表には出てこない。	뭐, 사정이 있어, 그다지 겉에는 나오지 않는다.	fix	lookup
 sentence-final:dash	お母さんが許してくれるワケない―――	엄마가 용서해 줄 리가 없다―――	fix	builtin-pattern
+dict:jisjk:373943	え？ワケ？	어? 이유?	fix	local
+dict:jisjk:373943	何のワケ？	!rule:dict:jisjk:373943	fix	local
+dict:jisjk:373943	そのままの状態だったわけだ。	rule:dict:jisjk:373943=것	keep	local
