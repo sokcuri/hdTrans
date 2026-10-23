@@ -277,3 +277,11 @@ HD_TEST(inflect_frozen_rows) {
         CheckRow(c.key, MarkerRowFor(c.key), c.surface);
     }
 }
+
+// The 으 stem of the past-state family 했 keeps 으 (결혼했으니까).
+HD_TEST(inflect_past_state_eu_stem) {
+    const auto* family = FindKoreanFamily("&NC@");
+    HD_REQUIRE(family != nullptr);
+    HD_CHECK_EQ(Inflect(*family, 'A') + "니까", std::string("했으니까"));
+    HD_CHECK_EQ(Inflect(*family, '5') + "다", std::string("했다"));
+}

@@ -190,7 +190,6 @@ constexpr InflectionException kExceptions[] = {
     {'6', "해"},
     {'8', "한"},
     {'9', "했"},
-    {'A', "했"},
 };
 
 using Class = InflectionClass;
@@ -749,7 +748,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&Mz@", "이", Pos::Adjective, Class::Copula, 0, 0x0fff, {}},
     {"&NA@", "나뉘", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
     {"&NB@", "엮", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
-    {"&NC@", "했", Pos::Verb, Class::Regular, kBareDeclarative, 0x0fff, std::span{kExceptions}.subspan(180, 6)},
+    {"&NC@", "했", Pos::Verb, Class::Regular, kBareDeclarative, 0x0fff, std::span{kExceptions}.subspan(180, 5)},
     {"&ND@", "붇", Pos::Verb, Class::Digeut, 0, 0x0fff, {}},
     {"&NE@", "꿇", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},
     {"&NF@", "않", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},
