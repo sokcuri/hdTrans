@@ -1,0 +1,5 @@
+#! layer=words
+# 동사 뒤에서 돌아다니는 동작의 回る
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+まわ	다&A7@	M448			GN	6502	||2 &&4 P-1== "4**" S-1!= "回" ||2 U-1== "Rて" U-1== "Rで" Y-1= "1고" &&3 P-1== "4**" S-1!= "回" S-1!= "まわ"	回る는 앞말이 다른 동사이면 ‘다니다’를 고르고, 앞 동사가 て형이면 그 어미를 ‘-고’로 바꾼다.				compound-verbs:9
+回れ右	뒤로돌아	N110			GN							compound-verbs:22
