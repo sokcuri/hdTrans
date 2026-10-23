@@ -16,3 +16,7 @@ rewrite:respectful-passive	先生は本を置かれている。	선생님은 책
 rewrite:respectful-passive	陛下は座られている。	폐하는 앉아 계신다.	fix	rewrites
 rewrite:respectful-passive	手紙が書かれている。	편지가 쓰여져 있다.	keep	rewrites
 rewrite:respectful-passive	陛下は手紙を書かれた。	폐하는 편지를 쓰셨다.	keep	rewrites
+rewrite:respectful-passive	先生の言われる通りです。	선생님이 말씀하시는 대로입니다.	fix	rewrites
+rewrite:respectful-passive	陛下が言われたことだ。	폐하가 말씀하신 것이다.	fix	rewrites
+rewrite:respectful-passive	言われた通りにした。	들은 대로 했다.	keep	rewrites
+rewrite:respectful-passive	彼が言われた通りにした。	그가 들은 대로 했다.	keep	rewrites

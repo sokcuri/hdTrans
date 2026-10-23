@@ -28,7 +28,9 @@ std::string Translate(std::string_view text) {
                                             "され\t&C6@\tM447\tXXX\tTu\tGN\t0\t15\n"
                                             "され\t하&AE@\tM427\t\t\tGN\t0\t16\n"
                                             "逮捕\t체포\tN110\t\tHd\tGN\t0\t17\n"
-                                            "到着\t도착\tN110\t\tHdHi\tGN\t0\t18\n"}});
+                                            "到着\t도착\tN110\t\tHdHi\tGN\t0\t18\n"
+                                            "の\t의\tP200\t\t\tGN\t0\t19\n"
+                                            "言われ\t&J6@\tM427\t\t\tGN\t0\t20\n"}});
     HD_CHECK(loaded.errors.empty());
     if (loaded.snapshot == nullptr) return {};
     const auto generated = internal::NewGenerated(*loaded.snapshot);
@@ -66,4 +68,12 @@ HD_TEST(word_respectful_passive_of_a_sino_noun) {
     HD_CHECK_EQ(Translate("陛下が逮捕された。"), "폐하가 체포되었다.");
     HD_CHECK_EQ(Translate("陛下が手紙を逮捕された。"), "폐하가 편지를 체포하셨다.");
     HD_CHECK_EQ(Translate("陛下が到着された。"), "폐하가 도착하셨다.");
+}
+
+HD_TEST(word_respectful_say_of_an_honoured_subject) {
+    // 言われ read as 듣다 is the respectful 말씀하시다 after an honoured subject, also after a
+    // subject の right before it; without one it stays 듣다.
+    HD_CHECK_EQ(Translate("陛下が言われた。"), "폐하가 말씀하셨다.");
+    HD_CHECK(Translate("陛下の言われた手紙").find("말씀하") != std::string::npos);
+    HD_CHECK_EQ(Translate("彼が言われた。"), "그가 들었다.");
 }

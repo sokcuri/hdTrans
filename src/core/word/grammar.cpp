@@ -536,8 +536,9 @@ constexpr std::string_view kReceiverVerbs[] = {"許", "任", "託", "奪", "盗"
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
-// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた). A
-// transitive verb also needs its object before that subject: without one its subject is what
+// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), and so
+// does a subject の right before an intransitive verb that holds no object (先生の言われる通り).
+// A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
@@ -550,6 +551,8 @@ bool RespectfulReading(const Item* it, bool transitive) {
             if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
         } else if (s == "を") {
             object = true;
+        } else if (s == "の" && p == it->prev && !transitive && !Has(it->group->surface, "を")) {
+            return HonouredPerson(p->prev);
         } else if (transitive && !object && (s == "は" || s == "が" || s == "も")) {
             return false;
         } else if (s == "は" || s == "が" || s == "も") {
@@ -701,6 +704,15 @@ void RespectfulPassive(Flusher& f) {
         // A word written as a passive or potential stem (され, 来られ, 書かれ): its honorific
         // candidate, or the honorific of the verb it is made from.
         if (record != 0 || !surface.ends_with("れ") || it->EntryText(it->selected).ends_with("&AE@")) continue;
+        // 言われ read as 듣다 (言われた通り 들은 대로) after an honoured subject is the respectful
+        // 言う, 말씀하시다 (陛下が言われたこと 말씀하신 것); what is said is often left out, so it
+        // needs no object.
+        if (surface == "言われ" && ItemLemma(f, it, it->selected) == "듣다") {
+            if (const std::string target = HonorificTarget(f, "말&AV@"); !target.empty() && RespectfulReading(it, false)) {
+                it->AssignEntrySurface(it->selected, target);
+            }
+            continue;
+        }
         // Only a passive or potential Korean (쓰여지다, 결정되다, 올 수 있다), not a verb of its own
         // (生まれ 태어나다).
         const std::string chosen = ItemLemma(f, it, it->selected);
