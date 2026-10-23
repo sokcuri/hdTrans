@@ -139,7 +139,8 @@ void Run::ApplyFinal(long i, int row) {
             if (n == 10 && Has(i + 1, kMarkKusu)) Replace(i + 1, kMarkKu, "");
         }
     }
-    if (At(i + 1) == kMarkMu && variant(25, v)) {
+    // ム before the long mark is a syllable of its own (スムーズ, ムーン).
+    if (At(i + 1) == kMarkMu && At(i + 2) != kLongVowel && variant(25, v)) {
         Replace(i, At(i), v);
         Replace(i + 1, kMarkMu, "");
     }

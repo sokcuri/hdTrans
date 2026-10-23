@@ -33,6 +33,8 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("ルール"), std::string("룰"));
     HD_CHECK_EQ(Katakana("ルーン"), std::string("룬"));
     HD_CHECK_EQ(Katakana("ビッグ"), std::string("빅"));
+    HD_CHECK_EQ(Katakana("スムーズ"), std::string("스무즈"));
+    HD_CHECK_EQ(Katakana("チーム"), std::string("팀"));
 }
 
 HD_TEST(kana_hiragana_cases) {
