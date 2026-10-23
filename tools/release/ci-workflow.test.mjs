@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -409,7 +410,10 @@ function stepScript(workflow, name) {
   return body.match(/        run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '');
 }
 
-function releaseFixture(t, { version = '1.2.3', npmName = `hdTrans-${version}-wasm.tgz`, engineVersion = version, tamper } = {}) {
+function releaseFixture(t, {
+  version = '1.2.3', npmName = `hdTrans-${version}-wasm.tgz`, engineVersion = version, cliVersion = version,
+  tamper, missing, unsummed, registry = 'match', viewFails = false,
+} = {}) {
   const base = mkdtempSync(join(tmpdir(), 'hdtrans-web-release-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
   const assets = join(base, 'assets');
@@ -417,7 +421,8 @@ function releaseFixture(t, { version = '1.2.3', npmName = `hdTrans-${version}-wa
   const work = join(base, 'work');
   const bin = join(base, 'bin');
   for (const dir of [assets, `${stage}/hdTrans-${version}`, `${stage}/package/dist`, work, bin]) mkdirSync(dir, { recursive: true });
-  writeFileSync(`${stage}/hdTrans-${version}/hdtrans`, '#!/bin/sh\n', { mode: 0o755 });
+  writeFileSync(`${stage}/hdTrans-${version}/hdtrans`,
+    `#!/bin/sh\n[ "$1 $3" = "--dicts --version" ] || exit 64\necho "hdTrans v${cliVersion} (native) / dict ${version}+abc"\n`, { mode: 0o755 });
   writeFileSync(`${stage}/hdTrans-${version}/README.txt`, 'readme\n');
   writeFileSync(`${stage}/package/dist/hdtrans_engine.js`,
     `export default async function create() { return { version: () => '${engineVersion}' }; }\n`);
@@ -427,11 +432,15 @@ function releaseFixture(t, { version = '1.2.3', npmName = `hdTrans-${version}-wa
   tar('-czf', join(assets, `hdTrans-${version}-linux-x64.tar.gz`), `hdTrans-${version}`);
   tar('-czf', join(assets, npmName), 'package');
   writeFileSync(join(assets, `hdTrans-${version}-windows.zip`), 'zip');
+  const integrity = registry === 'match'
+    ? `sha512-${createHash('sha512').update(readFileSync(join(assets, npmName))).digest('base64')}`
+    : 'sha512-AAAA';
   const sums = spawnSync('sh', ['-c', 'sha256sum *'], { cwd: assets, encoding: 'utf8' }).stdout;
-  writeFileSync(join(assets, 'SHA256SUMS.txt'), sums);
+  writeFileSync(join(assets, 'SHA256SUMS.txt'), sums.split('\n').filter(line => !unsummed || !line.endsWith(unsummed)).join('\n'));
   if (tamper) writeFileSync(join(assets, tamper), 'tampered');
+  if (missing) rmSync(join(assets, missing));
   writeFileSync(join(bin, 'gh'), `#!/bin/bash
-[ "$1 $2 $3" = "release view v${version}" ] && { ls '${assets}'; exit 0; }
+[ "$1 $2 $3" = "release view v${version}" ] && { ${viewFails ? 'echo "HTTP 502" >&2; exit 1' : `ls '${assets}'; exit 0`}; }
 [ "$1 $2 $3" = "release download v${version}" ] || exit 64
 shift 3
 while [ $# -gt 0 ]; do
@@ -442,6 +451,14 @@ while [ $# -gt 0 ]; do
   esac
 done
 `, { mode: 0o755 });
+  const npmView = {
+    match: `echo ${integrity}`, mismatch: `echo ${integrity}`,
+    absent: 'echo "npm error code E404" >&2; exit 1', down: 'echo "npm error code ECONNRESET" >&2; exit 1',
+  }[registry];
+  writeFileSync(join(bin, 'npm'), `#!/bin/bash
+[ "$1 $2 $3" = "view hdtrans@${version} dist.integrity" ] || exit 64
+${npmView}
+`, { mode: 0o755 });
   const run = name => spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', stepScript(deployWeb, name)], {
     cwd: work,
     env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, TAG: `v${version}`, RUNNER_TEMP: base, GITHUB_REPOSITORY: 'o/r' },
@@ -451,33 +468,50 @@ done
 }
 
 test('the web deploy takes the CLI and the engine from the checked release packages', t => {
-  for (const npmName of ['hdTrans-1.2.3-wasm.tgz', 'hdtrans-1.2.3.tgz']) {
-    const { work, run } = releaseFixture(t, { npmName });
+  for (const [npmName, registry] of [['hdTrans-1.2.3-wasm.tgz', 'match'], ['hdtrans-1.2.3.tgz', 'match'],
+    ['hdTrans-1.2.3-wasm.tgz', 'absent']]) {
+    const { work, run } = releaseFixture(t, { npmName, registry });
     const download = run('Download the release packages');
     assert.equal(download.status, 0, download.stderr);
+    if (registry === 'absent') assert.match(download.stdout, /not on npm/);
     assert.deepEqual(readdirSync(join(work, 'build/linux')), ['hdtrans']);
     assert.deepEqual(readdirSync(join(work, 'build/wasm')).sort(), ['hdtrans_engine.js', 'hdtrans_engine.wasm']);
-    const check = run('Check the engine version');
+    const check = run('Check the release versions');
     assert.equal(check.status, 0, check.stderr);
   }
-  for (const tamper of ['hdTrans-1.2.3-linux-x64.tar.gz', 'hdTrans-1.2.3-wasm.tgz']) {
-    const { work, run } = releaseFixture(t, { tamper });
+  const refused = {
+    'a tampered CLI': [{ tamper: 'hdTrans-1.2.3-linux-x64.tar.gz' }, /does not match SHA256SUMS/],
+    'a tampered package': [{ tamper: 'hdTrans-1.2.3-wasm.tgz' }, /does not match SHA256SUMS/],
+    'no CLI': [{ missing: 'hdTrans-1.2.3-linux-x64.tar.gz' }, /has no hdTrans-1\.2\.3-linux-x64\.tar\.gz/],
+    'no package under either name': [{ missing: 'hdTrans-1.2.3-wasm.tgz' }, /has no hdtrans-1\.2\.3\.tgz/],
+    'no checksum list': [{ missing: 'SHA256SUMS.txt' }, /has no SHA256SUMS\.txt/],
+    'no checksum line for the CLI': [{ unsummed: 'hdTrans-1.2.3-linux-x64.tar.gz' }, /does not match SHA256SUMS/],
+    'no checksum line for the package': [{ unsummed: 'hdTrans-1.2.3-wasm.tgz' }, /does not match SHA256SUMS/],
+    'another package on npm': [{ registry: 'mismatch' }, /does not match hdtrans@1\.2\.3 on npm/],
+    'an unreachable registry': [{ registry: 'down' }, /Cannot read hdtrans@1\.2\.3 from npm/],
+    'an unreadable release': [{ viewFails: true }, /Cannot list the assets of the v1\.2\.3 release/],
+  };
+  for (const [name, [options, message]] of Object.entries(refused)) {
+    const { work, run } = releaseFixture(t, options);
     const download = run('Download the release packages');
-    assert.notEqual(download.status, 0, tamper);
-    assert.match(download.stderr, /does not match SHA256SUMS/);
-    assert.equal(existsSync(join(work, 'build/wasm/hdtrans_engine.wasm')), false);
+    assert.notEqual(download.status, 0, name);
+    assert.match(download.stderr, message, name);
+    assert.equal(existsSync(join(work, 'build/wasm/hdtrans_engine.wasm')), false, name);
   }
-  const { run } = releaseFixture(t, { engineVersion: '0.0.0-abcdef0' });
-  assert.equal(run('Download the release packages').status, 0);
-  const check = run('Check the engine version');
-  assert.notEqual(check.status, 0);
-  assert.match(check.stderr, /reports version 0\.0\.0-abcdef0, not 1\.2\.3/);
+  for (const [options, message] of [[{ engineVersion: '0.0.0-abcdef0' }, /engine reports version 0\.0\.0-abcdef0, not 1\.2\.3/],
+    [{ cliVersion: '0.0.0-abcdef0' }, /CLI reports hdTrans v0\.0\.0-abcdef0 \(native\) \/ dict 1\.2\.3\+abc, not version 1\.2\.3/]]) {
+    const { run } = releaseFixture(t, options);
+    assert.equal(run('Download the release packages').status, 0);
+    const check = run('Check the release versions');
+    assert.notEqual(check.status, 0);
+    assert.match(check.stderr, message);
+  }
 });
 
 test('the web deploy builds nothing and checks the live engine against the release engine', () => {
   assert.doesNotMatch(deployWeb, /\n  build:\n|cmake|emsdk|sccache|ccache|actions\/cache|download-artifact/);
   assert.match(deployJob, /^    needs: release$/m);
-  const order = ['Verify the release source', 'Download the release packages', 'Check the engine version', 'Build the site']
+  const order = ['Verify the release source', 'Download the release packages', 'Check the release versions', 'Build the site']
     .map(name => deployJob.indexOf(`- name: ${name}\n`));
   assert.deepEqual([...order].sort((a, b) => a - b), order);
   assert.ok(order[0] > 0);

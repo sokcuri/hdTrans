@@ -122,25 +122,53 @@ jobs:
           version="${TAG#v}"
           dir="$RUNNER_TEMP/release"
           mkdir -p "$dir" build/linux build/wasm
-          cli="hdTrans-$version-linux-x64.tar.gz"
-          npm="hdTrans-$version-wasm.tgz"
-          # Releases before 0.4.5 name the npm package hdtrans-<version>.tgz.
-          if ! gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' | grep -qxF "$npm"; then
-            npm="hdtrans-$version.tgz"
+          if ! assets="$(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name')"; then
+            echo "::error::Cannot list the assets of the $TAG release." >&2
+            exit 1
           fi
-          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -D "$dir" -p SHA256SUMS.txt -p "$cli" -p "$npm"
-          for file in "$cli" "$npm"; do
+          cli="hdTrans-$version-linux-x64.tar.gz"
+          pkg="hdTrans-$version-wasm.tgz"
+          # Releases before 0.4.5 name the npm package hdtrans-<version>.tgz.
+          if ! grep -qxF "$pkg" <<< "$assets"; then pkg="hdtrans-$version.tgz"; fi
+          for file in SHA256SUMS.txt "$cli" "$pkg"; do
+            if ! grep -qxF "$file" <<< "$assets"; then
+              echo "::error::The $TAG release has no $file." >&2
+              exit 1
+            fi
+          done
+          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -D "$dir" -p SHA256SUMS.txt -p "$cli" -p "$pkg"
+          for file in "$cli" "$pkg"; do
             if ! grep -qxF "$(cd "$dir" && sha256sum "$file")" "$dir/SHA256SUMS.txt"; then
               echo "::error::$file does not match SHA256SUMS.txt of $TAG." >&2
               exit 1
             fi
           done
+          # The registry's integrity of the same version, unless it was never published.
+          if integrity="$(npm view "hdtrans@$version" dist.integrity 2> "$dir/npm-view.log")"; then
+            if [[ "$integrity" != "sha512-$(openssl dgst -sha512 -binary "$dir/$pkg" | openssl base64 -A)" ]]; then
+              echo "::error::$pkg does not match hdtrans@$version on npm." >&2
+              exit 1
+            fi
+          elif grep -q E404 "$dir/npm-view.log"; then
+            echo "::notice::hdtrans@$version is not on npm; $pkg is checked against SHA256SUMS.txt only."
+          else
+            cat "$dir/npm-view.log" >&2
+            echo "::error::Cannot read hdtrans@$version from npm." >&2
+            exit 1
+          fi
           tar -xzf "$dir/$cli" -C build/linux --strip-components=1 "hdTrans-$version/hdtrans"
-          tar -xzf "$dir/$npm" -C build/wasm --strip-components=2 \
+          tar -xzf "$dir/$pkg" -C build/wasm --strip-components=2 \
             package/dist/hdtrans_engine.js package/dist/hdtrans_engine.wasm
           rm -rf "$dir"
-      - name: Check the engine version
+      - name: Check the release versions
         run: |
+          home="$(mktemp -d)"
+          cli="$(HOME="$home" HDTRANS_CACHE_DIR=off build/linux/hdtrans --dicts "$PWD/dicts" --version)"
+          rm -rf "$home"
+          if [[ "$cli" != "hdTrans v${TAG#v} (native) / dict "* ]]; then
+            echo "::error::The release CLI reports $cli, not version ${TAG#v}." >&2
+            exit 1
+          fi
           engine="$(node --input-type=module - "$PWD/build/wasm" <<'JS'
           import { readFileSync } from 'node:fs';
           import { join } from 'node:path';
