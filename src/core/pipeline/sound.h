@@ -26,6 +26,8 @@
 //     lone particle; the text between sounds is read as the longest dictionary words;
 //   - sounds in a row are written with a space between those of two or more syllables
 //     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어);
+//   - katakana that only draw out the vowel of the hiragana before them are no sound of
+//     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
 //     (はわわユウキ); an ono row may be followed by anything, and と or the て of って
 //     after it is dropped (ぎゅっと 꽉), also before a katakana word that is no sound
@@ -79,7 +81,8 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs, WriteSounds, then
 // RewriteCasualAdjectives;
-// when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead.
+// when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
+// WriteCries.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
 // use ctx.lookup.
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap);
@@ -109,6 +112,20 @@ std::string WriteMasked(std::string_view text, const LineContext& ctx, const dic
 // (see the comment at the top). Invalid UTF-8 bytes are kept and read as neither kana
 // nor letters.
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The cries of text that the lexicon lacks written in Korean as heard: a run of kana
+// that starts with hiragana (katakana speech and names are left to later stages) where an
+// utterance starts or after a comma, an ellipsis, a dash or a mark of tone (not after a
+// closing bracket: 「左手」だぁああ is the copula), of one to three syllables and then two
+// or more kana that draw out its last vowel (ひぃやあああ 히이야아아아, のおおお 노오오오,
+// おりゃあああっ 오랴아아앗, ひぃやアアア; ー counts too), with ッ after them as the final ㅅ,
+// before a pause, an ellipsis, a dash, a mark of tone or the end. Two or more syllables
+// before the vowel must not start a dictionary key that reaches the vowel (てめーー), nor
+// read, in hiragana, as a word of two or more characters or a stem followed by words,
+// particles and endings (やったあああ, なんでよーーっ are words drawn out; おりゃあああ,
+// のわあああ are cries). It runs on the text that RewriteEmphasis has left, so a word
+// that it reads with the vowel dropped (やめてぇぇぇ) is no cry.
+std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // A verb cut off before a dash or an ellipsis (― — … ‥, ・・ or ーー) completed to the form
 // it starts, when the dictionary has the verb with its kanji: a part of the te form to the
@@ -158,7 +175,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // lets '!' give the last syllable the final ㅅ (아하하 + rr! 아하하하핫), then 'v' for each
 // lengthening character, '~' for each run of ～, '!' for a closing ッ. When the last syllable
 // carries the sound (the only syllable, or one without an initial consonant: 앙, 하아,
-// 우왓), each 'v' adds a syllable of its vowel, at most sixteen, before the final
+// 우왓), each 'v' adds a syllable of its vowel, at most four, before the final
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
 // (하아 하앗); other words take one ~ instead (정말 정말~). '~' adds ~, and 't' (a ～ that
 // stood for the key's ー: う～ん) a ~ at the end.

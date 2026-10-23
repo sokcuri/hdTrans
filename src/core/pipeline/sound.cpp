@@ -300,6 +300,7 @@ public:
     }
 
     std::string Write();
+    std::string WriteCries();
 
 private:
     std::string_view Bytes(size_t from, size_t to) const {
@@ -335,6 +336,8 @@ private:
     size_t PausedTo(size_t i) const;
     size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
+    size_t Cry(size_t p, std::string& korean) const;
+    bool ReadsAsWords(std::u32string_view kana) const;
     size_t MimeticTo(size_t p, size_t end, bool& hiragana) const;
     bool KanaWord(size_t p) const;
     size_t HiraganaMimeticTo(size_t p) const;
@@ -749,6 +752,13 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     afterWord = afterWord && IsHiraganaRune(r) && !runStart && !afterParticle;
     std::vector<SoundMatch> chain;
     if (!katakana && !runStart && !afterParticle && !afterWord) return chain;
+    // Katakana that only draw out the vowel of the hiragana before them belong to it
+    // (ひぃやアアア).
+    if (katakana && IsHiraganaRune(prev)) {
+        size_t k = p;
+        while (k < rs.size() && IsKatakanaRune(rs[k]) && Lengthens(f_[k], f_[p - 1])) k++;
+        if (k == KatakanaEnd(rs, p)) return chain;
+    }
     bool loose = false;  // the first sound took a ッ that the next sound starts from
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
@@ -1124,6 +1134,106 @@ size_t SoundText::Burst(size_t p) const {
     return i;
 }
 
+// The most syllables before the drawn vowel of a cry.
+constexpr size_t kMaxCryHead = 3;
+
+// The kana that may follow a word as a particle or an ending.
+constexpr std::u32string_view kGrammarKana = U"ッテタダデルロヨゾゼカナネノワサイクケレバウ";
+
+// Whether the dictionary reads kana (katakana), in hiragana, as words: a key of two or
+// more characters or the stem of a verb or adjective, then keys or the kana of particles
+// and endings to the end (いやだ, なんでよ, やってるよ, ヤメテヨ; not おり+ゃ, の+わ).
+bool SoundText::ReadsAsWords(std::u32string_view kana) const {
+    std::u32string h(kana);
+    for (char32_t& r : h) {
+        if (r >= U'ァ' && r <= U'ヶ') r -= 0x60;
+    }
+    size_t n0 = 0;  // the length of the first key
+    for (size_t k = 0; k < h.size();) {
+        const std::string text = EncodeText(std::u32string_view(h).substr(k));
+        const dict::Candidates rd = snap_.GetWordInfo(text, dict::LookupMode::General, ctx_.lookup);
+        size_t n = 0;
+        bool stem = false;
+        for (const dict::Candidate& c : rd.list) {
+            if (c.user != nullptr && (c.user->kana || c.user->nameLayer)) continue;
+            const size_t m = text::RuneCount(c.source);
+            const bool s = c.codes != nullptr && !c.codes->part.Empty() && In(static_cast<char32_t>(c.codes->part.Tag()), U"MH");
+            if (m > n) {
+                n = m;
+                stem = s;
+            } else if (m == n) {
+                stem = stem || s;
+            }
+        }
+        if (k == 0 && n < 2 && !(n == 1 && stem)) return false;
+        // A stem of one kana goes on with its ending (や+ってるよ; not ひ+ぃや).
+        if (k == 1 && n0 == 1 && !In(kana[k], U"ッテタダデルロレナカケバウクグスツヌブム")) return false;
+        if (k == 0) n0 = n;
+        if (n == 0) {
+            if (!In(kana[k], kGrammarKana)) return false;
+            n = 1;
+        }
+        k += n;
+    }
+    return true;
+}
+
+// The end of a cry at p (see WriteCries) and its Korean, or 0.
+size_t SoundText::Cry(size_t p, std::string& korean) const {
+    const std::u32string_view rs = rs_, f = f_;
+    if (!IsHiraganaRune(rs[p]) || In(f[p], U"ッンーァィゥェォャュョヮ")) return 0;
+    if (!UtteranceStart(p) && !In(rs[p - 1], U"、，,…‥─—・♡♥☆★～~")) return 0;
+    size_t e = p;
+    while (e < rs.size() && (IsHiraganaRune(rs[e]) || IsKatakanaRune(rs[e]))) e++;
+    size_t end = e;
+    while (e > p && f[e - 1] == U'ー') e--;
+    const size_t closing = e;
+    while (e > p && f[e - 1] == U'ッ') e--;
+    if (e == closing) e = end;  // ー after the vowel without ッ draws it too
+    if (end < rs.size() && !PauseAt(end) && !In(rs[end], U"…‥―─—♡♥♪☆★～~ 　")) return 0;
+    // The drawn vowel: the kana from h to e each lengthen the kana before h.
+    size_t h = e;
+    while (h - 1 > p && f[h - 1] != U'ン' && Lengthens(f[h - 1], f[h - 2])) h--;
+    if (e - h < 2) return 0;
+    size_t syllables = 0;
+    for (size_t k = p; k < h; k++) {
+        if (!In(f[k], U"ッンーァィゥェォャュョヮ")) syllables++;
+    }
+    if (syllables > kMaxCryHead) return 0;
+    if (syllables > 1) {
+        size_t base = 0, user = 0, name = 0;
+        LongestKeys(p, base, user, name);
+        if (std::max(base, user) >= h - p || ReadsAsWords(f.substr(p, h - p))) return 0;
+    }
+    std::u32string ko;
+    int vowel = -1;      // the Korean vowel of the last syllable
+    char32_t last = 0;  // the last kana that is no lengthening
+    int added = 0;
+    for (size_t k = p; k < e; k++) {
+        const char32_t r = f[k];
+        if (r == U'ッ' || r == U'ン') {
+            if (!ko.empty() && (ko.back() - 0xAC00) % 28 == 0) ko.back() += r == U'ッ' ? 19 : 21;  // ㅅ, ㅇ
+            continue;
+        }
+        if (last != 0 && Lengthens(r, last)) {
+            if (k < h || added < kMaxLengthening) ko.push_back(Syllable(11, kLongVowel[vowel], 0));
+            if (k >= h) added++;
+            continue;
+        }
+        std::u32string kana(1, r);
+        if (k + 1 < e && In(f[k + 1], U"ャュョ")) kana += f[++k];
+        if (const char32_t plain = PlainVowel(r); plain != 0) kana = plain;
+        const std::u32string syllable = DecodeText(text::FromKana(EncodeText(kana), text::Preset::Fan));
+        if (syllable.size() != 1 || syllable[0] < 0xAC00 || syllable[0] > 0xD7A3) return 0;
+        ko += syllable;
+        vowel = static_cast<int>(syllable[0] - 0xAC00) % 588 / 28;
+        last = kana.size() == 1 ? kana[0] : kana[1];
+    }
+    if (e < closing && (ko.back() - 0xAC00) % 28 == 0) ko.back() += 19;  // ㅅ
+    korean = EncodeText(ko);
+    return end;
+}
+
 // The end of a lone っ or ッ run at p that an utterance holds after nothing but an
 // ellipsis or a dash, before a pause, an ellipsis, a dash or the end (……ッ！, ――っ、), or 0:
 // a caught breath, written 읏.
@@ -1411,6 +1521,28 @@ std::string SoundText::Write() {
     return b;
 }
 
+std::string SoundText::WriteCries() {
+    std::string b;
+    b.reserve(text_.size());
+    std::string cry;
+    for (size_t i = 0; i < rs_.size();) {
+        if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
+            b += text_.substr(offsets_[i], skip);
+            const size_t end = offsets_[i] + skip;
+            while (i < rs_.size() && offsets_[i] < end) i++;
+            continue;
+        }
+        if (const size_t end = Cry(i, cry); end > 0) {
+            b += cry;
+            i = end;
+            continue;
+        }
+        b += Bytes(i, i + 1);
+        i++;
+    }
+    return b;
+}
+
 }  // namespace
 
 namespace {
@@ -1587,6 +1719,11 @@ std::string WriteSounds(std::string_view text, const LineContext& ctx, const dic
     return t.Write();
 }
 
+std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    SoundText t(text, ctx, snap);
+    return t.WriteCries();
+}
+
 namespace {
 
 // Whether a dash or an ellipsis starts at rs[i]: ― — … ‥, or a run of two ・ or ー.
@@ -1647,7 +1784,7 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
-    return sounded;
+    return internal::WriteCries(sounded, ctx, snap);
 }
 
 }  // namespace hdTrans::pipeline

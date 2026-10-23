@@ -471,6 +471,35 @@ HD_TEST(pipeline_sound_markers) {
     HD_CHECK_EQ(internal::WriteSounds("ドキドキ", ctx, *snap), std::string("ドキドキ"));
 }
 
+HD_TEST(pipeline_write_cries) {
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        // A cry the lexicon lacks, as heard, its drawn vowel kept and ッ as ㅅ.
+        {"「ひぃやあああ！」", "「히이야아아아！」"},
+        {"「ひぃやアアア！」", "「히이야아아아！」"},
+        {"のおおおお……", "노오오오오……"},
+        {"おりゃあああっ！", "오랴아아앗！"},
+        {"あ、どわあああ！", "あ、도와아아아！"},
+        {"いいいい！", "이이이이！"},
+        // A word drawn out, a key that reaches the vowel, one vowel kana, ン and a run after a
+        // closing bracket or a word stay.
+        {"やめてぇぇぇ！", "やめてぇぇぇ！"},
+        {"すごいいい！", "すごいいい！"},
+        {"ひぃや！", "ひぃや！"},
+        {"うんんんっ！", "うんんんっ！"},
+        {"「手」だぁああ！", "「手」だぁああ！"},
+        {"花見ああああ！", "花見ああああ！"},
+        {"ひぃやあああ", "히이야아아아"},
+        {"ひぃやあああね", "ひぃやあああね"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::WriteCries(c.in, ctx, *snap), std::string(c.want));
+}
+
 HD_TEST(pipeline_rewrite_emphasis) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());

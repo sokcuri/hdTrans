@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+sound:cry	「ひぃやあああああああああああああ！」	「히이야아아아아아아아아아아아아아!」	fix	sound
+sound:cry	「ひぃやアアアアア！」	「히이야아아아아아!」	fix	sound
+sound:cry	「のわあああっ！？」	「노와아아앗!?」	fix	sound
+sound:cry	「おりゃあああああっ！」	「오랴아아아아앗!」	fix	sound
+sound:cry	「ええええ！」	「에에에에!」	fix	sound
+sound:cry	「えぇぇ……またぁ？」	「에에에……또?」	fix	sound
+sound:cry	「いいいいい！」	「이이이이이!」	fix	sound
+sound:cry	「やめてぇぇぇ！」	「그만둬!」	keep	sound
+sound:cry	「待ってぇぇぇ！」	「기다려!」	keep	sound
+sound:cry	「答えは「左手」だぁあぁああ！」	「대답은 「왼손」이다아!」	keep	sound
+sound:cry	「うんんんっ！」	「응!」	keep	sound
