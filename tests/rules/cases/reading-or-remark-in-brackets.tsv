@@ -6,3 +6,6 @@ names:reading	結果（ぎりぎり）合格だった。	결과(빠듯이) 합�
 names:reading	刻「きざ」み続「つづ」けていた	계속 새기고 있었다	keep	normalize
 names:reading	動「うご」き出「だ」す	움직이기 시작한다	keep	normalize
 names:reading	あの日「ひ」の誓「ちか」いを	그 날의 맹세를	keep	normalize
+names:ruby	名前|田中(たなか)	이름|타나카	fix	normalize
+names:ruby	メニュー|設定(せってい)	메뉴|설정	fix	normalize
+names:ruby	｜魔導騎士（マジックナイト）が立つ。	마짓쿠나이토가 선다.	keep	normalize

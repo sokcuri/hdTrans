@@ -1,6 +1,5 @@
 #include "core/names/ruby.h"
 
-#include <cctype>
 #include <vector>
 
 #include "core/names/chars.h"
@@ -71,19 +70,14 @@ bool OpenParen(std::string_view s, std::size_t& p) { return Lit(s, p, "（") || 
 bool CloseParen(std::string_view s, std::size_t& p) { return Lit(s, p, "）") || Lit(s, p, ")"); }
 bool NotParen(char32_t c) { return c != U'（' && c != U'）' && c != U'(' && c != U')'; }
 
-// [|｜]([一-龥々〆ヶぁ-ゖァ-ヺーA-Za-z0-9]{1,20})[（(]([ぁ-ゖァ-ヺー・]{1,30})[）)]: a bar
-// that also separates (メニュー | 運行情報(...)) leaves a space or a mark before the
-// parenthesis.
+// ｜([一-龥々〆ヶ]{1,20})[（(]([ぁ-ゖァ-ヺー・]{1,30})[）)]: ruby markup only after the full-width
+// bar and over kanji, as a half-width bar or one before kana or letters separates
+// (名前|田中(たなか), メニュー | 運行情報(...)).
 bool BarParenRuby(std::string_view s, std::size_t pos, RubyMatch& m) {
     std::size_t p = pos;
-    if (p >= s.size()) return false;
-    const char32_t lead = RuneAt(s, p).cp;
-    if (lead != U'|' && lead != U'｜') return false;
-    p += RuneAt(s, p).size;
+    if (!Lit(s, p, "｜")) return false;
     const std::size_t baseStart = p;
-    const std::size_t n = Take(s, p, 21, [](char32_t c) {
-        return IsKanji(c) || IsHiragana(c) || IsKatakana(c) || (c < 0x80 && std::isalnum(static_cast<int>(c)) != 0);
-    });
+    const std::size_t n = Take(s, p, 21, IsRubyKanji);
     const std::size_t baseEnd = p;
     if (n < 1 || n > 20 || !OpenParen(s, p)) return false;
     const std::size_t readStart = p;

@@ -134,6 +134,9 @@ HD_TEST(names_strip_ruby) {
         {"｜魔導騎士（マジックナイト）が", "魔導騎士が"},
         {"運行情報 | 京都(北部)へ", "運行情報 | 京都(北部)へ"},
         {"｜騎士（の話）", "｜騎士（の話）"},
+        // A half-width bar, or one before kana, separates.
+        {"名前|田中(たなか)", "名前|田中(たなか)"},
+        {"｜メニュー(めにゅう)", "｜メニュー(めにゅう)"},
     };
     for (const auto& [in, want] : cases) HD_CHECK_EQ(names::StripRuby(in), want);
 }

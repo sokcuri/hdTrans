@@ -13,7 +13,7 @@ struct RubyMatch {
     std::string_view base, reading;
 };
 
-// The leftmost ruby markup in s at or after from: |漢字《かな》, |漢字（かな）, 漢字《かな》
+// The leftmost ruby markup in s at or after from: |漢字《かな》, ｜漢字（かな）, 漢字《かな》
 // or HTML <ruby>. base and reading are the parts of the alternative that matched.
 bool FindRuby(std::string_view s, std::size_t from, RubyMatch& m);
 
