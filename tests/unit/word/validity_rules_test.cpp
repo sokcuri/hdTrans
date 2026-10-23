@@ -24,8 +24,8 @@ HD_TEST(validity_rules_fingerprint) {
         h.Byte(static_cast<uint8_t>(r.followClass));
         h.Str(r.first);
     }
-    HD_CHECK_EQ(h.h, uint64_t{0xa0344065f7c8b802ull});
-    HD_CHECK_EQ(rules.size(), size_t{743});
+    HD_CHECK_EQ(h.h, uint64_t{0x3585b46207cabb39ull});
+    HD_CHECK_EQ(rules.size(), size_t{744});
     HD_REQUIRE(!rules.empty());
     HD_CHECK_EQ(std::string(rules[0].source), std::string("でも"));
     HD_CHECK_EQ(rules[0].sourceClass, '2');
@@ -57,6 +57,8 @@ HD_TEST(validity_match_dictionary) {
         // ところで does not end before the copula である (回ったところである: ところ + である).
         // The verb だ(く) in its potential past does not run into ため (だけため息: だけ + ため息).
         {"けため息", "だ", '4', 'X', false}, {"けた。", "だ", '4', 'X', true},
+        // An adjective ending かったと does not run into ころ (しなかったところ: ところ).
+        {"ころは", "かったと", '5', '7', false},
         {"ある。", "ところで", '5', '4', false}, {"あろう", "ところで", '3', 'X', false}, {"、", "ところで", '5', '4', true},
     };
     for (const Case& c : cases) {
