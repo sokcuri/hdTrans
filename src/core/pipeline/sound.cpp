@@ -473,7 +473,10 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             if (s.open) {
                 while (from > 0 && In(rs_[from - 1], U"…‥")) from--;  // ……ってか
             }
-            bool start = UtteranceStart(from), pause = PauseAt(end);
+            // No word starts with っ, so a key in っ (ったく, ってか) also starts a clause after a
+            // comma (なんだよ、ったく…).
+            bool start = UtteranceStart(from) || (s.key.front() == U'ッ' && from > 0 && In(rs_[from - 1], U"、，,")),
+                 pause = PauseAt(end);
             if (s.key == U"ハ" || s.key == U"ヘ") {
                 // A bare は or へ is the particle after a word, a dash or a space ((人形) は、,
                 // 私――は――) and before a closing bracket (「は」); it is a lead only where it
@@ -493,6 +496,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 pause = true;
             }
             if (!start || (!pause && !s.open) || IsKatakanaRune(rs_[p])) continue;
+            // Nor where it ends inside a word in katakana (、ってカンジ: the quoting って).
+            if (end < rs_.size() && IsKatakanaRune(rs_[end - 1]) && IsKatakanaRune(rs_[end]) && rs_[end] != U'ー') continue;
             if (s.open && end < rs_.size() && In(rs_[end], U"？?")) continue;  // 見ゆ！ってか？ quotes
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
         }
