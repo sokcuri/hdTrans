@@ -40,7 +40,9 @@ const dict::LoadResult& SoundDictionary() {
         "かなり\t꽤\tE300\t22\n"
         "花見\t꽃놀이\tN110\t23\n"
         "おいし\t맛있\tH100\t24\n"
-        "わたし\t나\tN120\t25\n",
+        "わたし\t나\tN120\t25\n"
+        "とにかく\t어쨌든\tE300\t26\n"
+        "いな\t아니\tE300\t27\n",
     }});
     return result;
 }
@@ -493,6 +495,9 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"おいしー！", "おいしい～！"},
         {"おいしーよね", "おいしいよね"},
         {"わたしー！", "わたし～！"},
+        // A word drawn out syllable by syllable reads without the marks.
+        {"とーにーかーく！", "とにかく！"},
+        {"いーなー", "いーなー"},
         {"お花見か～いいわね", "お花見か～いいわね"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
