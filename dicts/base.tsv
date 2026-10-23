@@ -156708,7 +156708,7 @@ ttt	ttt-exam-data	K110			GN				jisjk:201744
 哀調	애조	N110			GN				jisjk:28591		
 哀願	애원	N110		Hd	GN				jisjk:28590		
 品	물건	N110	XXX		GN				jisjk:116196		
-品	가지	N110		Ct	GN	6051	||1 G-1== "NjNd"	品를 숫자나 何, 数 뒤에서 가짓수를 세는 가지로 고른다(三品 세 가지, 何品か 몇 가지).	counter-hin		
+品	가지	N110		Ct	GN	115	||1 G-1== "NjNd"	品를 숫자나 何, 数 뒤에서 가짓수를 세는 가지로 고른다(三品 세 가지, 何品か 몇 가지).	counter-hin		
 品	품	N110		Z7	GN	1123	||1 G-1== "NjNd"	品를 수사 문법 코드 Nj·Nd가 있는 앞말 뒤에서 품으로 고른다. (미발동: rare-context)	jisjk:116197		
 品	품	N110		On	GN				jisjk:259191		
 品がい	품질이 $DE@	H7N0			GN				jisjk:137780		
