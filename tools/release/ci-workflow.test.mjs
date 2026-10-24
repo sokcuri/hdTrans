@@ -800,3 +800,59 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
     }
   });
 }
+
+const ciOkJob = build.slice(build.indexOf('\n  ci-ok:\n'));
+// Jobs of Build that test nothing: the tested-tree record and the packaging of pushes.
+const notTestJobs = ['tested', 'release'];
+
+test('ci-ok needs every job of Build that tests code', () => {
+  const jobs = [...build.slice(build.indexOf('\njobs:\n')).matchAll(/^  ([\w-]+):$/gm)].map(match => match[1]);
+  assert.ok(jobs.includes('build') && jobs.includes('ci-ok'));
+  for (const job of notTestJobs) assert.ok(jobs.includes(job), job);
+  const needs = ciOkJob.match(/^    needs: \[(.*)\]$/m)[1].split(', ');
+  assert.deepEqual([...needs].sort(), jobs.filter(job => job !== 'ci-ok' && !notTestJobs.includes(job)).sort());
+  assert.match(ciOkJob, /^    name: ci-ok$/m);
+  assert.match(ciOkJob, /^    runs-on: ubuntu-latest$/m);
+  assert.match(ciOkJob, /^    timeout-minutes: 5$/m);
+  assert.match(ciOkJob, /^    permissions: \{\}$/m);
+  assert.doesNotMatch(ciOkJob, /continue-on-error|secrets\./);
+});
+
+test('only Build and the PR title check run on pull requests', () => {
+  const dir = join(root, '.github/workflows');
+  const onPullRequests = readdirSync(dir).filter(name => {
+    const workflow = readFileSync(join(dir, name), 'utf8');
+    return /^  pull_request(_target)?:/m.test(workflow.slice(workflow.indexOf('\non:\n'), workflow.indexOf('\njobs:\n')));
+  });
+  assert.deepEqual(onPullRequests.sort(), ['build.yml', 'pr-title.yml']);
+});
+
+test('ci-ok runs on every pull request and push, even after failures and cancellations', () => {
+  const runs = new Function('github', 'always', `return (${ciOkJob.match(/^    if: \$\{\{ (.*) \}\}$/m)[1]});`);
+  assert.match(ciOkJob.match(/^    if: (.*)$/m)[1], /^\$\{\{ always\(\) && /);
+  for (const event_name of ['pull_request', 'push']) assert.equal(runs({ event_name }, () => true), true, event_name);
+  for (const event_name of ['workflow_dispatch', 'workflow_call']) assert.equal(runs({ event_name }, () => true), false, event_name);
+});
+
+const passed = { gate: 'success', 'release-tools': 'success', build: 'success', sanitize: 'success', fuzz: 'success' };
+for (const [results, ok] of [
+  [passed, true],
+  [{ ...passed, 'release-tools': 'skipped', build: 'skipped', sanitize: 'skipped', fuzz: 'skipped' }, true],
+  [{ ...passed, build: 'failure' }, false],
+  [{ ...passed, fuzz: 'cancelled' }, false],
+  [{ ...passed, sanitize: 'skipped', 'release-tools': 'failure' }, false],
+  [{ ...passed, gate: 'failure' }, false],
+  [{ ...passed, gate: 'cancelled' }, false],
+  [{ gate: 'skipped', 'release-tools': 'skipped', build: 'skipped', sanitize: 'skipped', fuzz: 'skipped' }, false],
+]) {
+  test(`ci-ok ${ok ? 'passes' : 'fails'}: ${JSON.stringify(results)}`, () => {
+    const needs = Object.fromEntries(Object.entries(results).map(([job, result]) => [job, { result, outputs: {} }]));
+    const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', stepScript(ciOkJob, 'Check the needed jobs')], {
+      env: { ...process.env, NEEDS: JSON.stringify(needs, null, 2) },
+      encoding: 'utf8',
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status === 0, ok, result.stdout + result.stderr);
+    for (const [job, value] of Object.entries(results)) assert.match(result.stdout, new RegExp(`^${job}: ${value}$`, 'm'));
+  });
+}

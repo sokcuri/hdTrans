@@ -138,6 +138,9 @@ cmake --build --preset wasm --parallel
   아티팩트로 올라갑니다.
 - Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
   [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트와 push에서 matrix와 함께 돕니다.
+- Build의 `ci-ok` 작업은 풀 리퀘스트와 push에서 항상 돌고, `gate`가 성공하지 않았거나 테스트 작업 하나가
+  실패, 취소되면 실패합니다. 건너뛴 작업은 통과로 칩니다. 테스트 작업을 새로 만들면 `ci-ok`의 `needs`에 넣습니다
+  (`tools/release/ci-workflow.test.mjs`가 검사합니다).
 - 성능 예산과 퍼징이 실패로 치는 것과 알리기만 하는 것:
 
   | 단계 | 실패 | 경고만(작업은 통과) |
