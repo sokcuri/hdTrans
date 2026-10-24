@@ -12,6 +12,13 @@
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
+//= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
+//= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 遊んでってよ, 持ってけよ).
+//= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
+//= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ, 持ってってね); otherwise the quoting って (やめてってよ).
+//= contraction.te-iku-not	Starts of the text after a て form that are no contracted いく: the quoting ったら (待ってったら).
+//= contraction.u-onbin	Starts of the text after the kanji stem of a godan verb in う that say its past or て form with う for っ (言うた, 思うて).
+//= contraction.u-onbin-not	Starts of the text of contraction.u-onbin that go on as another word (救うため, 戦うたび, 歌うたい).
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
@@ -228,6 +235,58 @@ copula.short-so	でもな
 copula.short-so	じゃ
 copula.short-so-final	だ
 copula.short-so-sentence	だった
+
+contraction.n-no	ん中
+contraction.n-no	んところ
+contraction.n-no	んとこ
+
+contraction.te-iku	った
+contraction.te-iku	っちゃ
+contraction.te-iku	っちま
+contraction.te-iku	かない
+contraction.te-iku	かなかっ
+contraction.te-iku	かなきゃ
+contraction.te-iku	かなく
+contraction.te-iku	かなけ
+contraction.te-iku	かねー
+contraction.te-iku	かねぇ
+contraction.te-iku	かねえ
+contraction.te-iku	かれる
+contraction.te-iku	かれた
+contraction.te-iku	かれて
+contraction.te-iku	かれちゃ
+contraction.te-iku	かれな
+contraction.te-iku	かれま
+contraction.te-iku	かれそ
+contraction.te-iku	ってくれ
+contraction.te-iku	ってくだ
+contraction.te-iku	ってあげ
+contraction.te-iku	ってもら
+contraction.te-iku	ってやる
+contraction.te-iku	ってやれ
+contraction.te-iku	ってやっ
+contraction.te-iku	ってやろ
+contraction.te-iku	ってほし
+contraction.te-iku	ってちょうだい
+contraction.te-iku	けよ
+contraction.te-iku	けば
+
+contraction.te-iku-final	って
+contraction.te-iku-final	け
+
+contraction.te-iku-listed	ってよ
+contraction.te-iku-listed	ってね
+contraction.te-iku-listed	ってる
+
+contraction.te-iku-not	ったら
+
+contraction.u-onbin	うた
+contraction.u-onbin	うて
+
+contraction.u-onbin-not	うため
+contraction.u-onbin-not	うたび
+contraction.u-onbin-not	うたい
+contraction.u-onbin-not	うたう
 
 counter.bare-native-one	つ
 ending.conjunctive	て

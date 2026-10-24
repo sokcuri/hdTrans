@@ -786,3 +786,74 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
+
+// The いく after a て form contracted is written in full before its forms; before a mark only
+// when the dictionary holds the verb with ていく, else the quoting って stays.
+HD_TEST(pipeline_contracted_iku) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "連れ\t데리&AA@\tM447\t1\n"
+                                     "連れてい\t데려&A1@\tM44?\t2\n"
+                                     "置\t두&AA@\tM421\t3\n"
+                                     "やめ\t그만두&AA@\tM447\t4\n"
+                                     "や\t하&AA@\tM438\t5\n"
+                                     "どうやって\t어떻게\tM301\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"「連れてって」", "「連れていって」"},
+        {"連れてってくれ", "連れていってくれ"},
+        {"置いてかないで", "置いていかないで"},
+        {"置いてった", "置いていった"},
+        {"やめてって", "やめてって"},          // the quoting って: no やめていく
+        {"やめてってよ", "やめてってよ"},
+        {"連れてってよ", "連れていってよ"},
+        {"連れてってば", "連れてってば"},      // not before a mark
+        {"置いてったら", "置いてったら"},      // the quoting ったら
+        {"どうやってって", "どうやってって"},  // the end of どうやって
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(internal::RewriteContractedIku(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    }
+}
+
+// The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
+HD_TEST(pipeline_contracted_no) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "頭\t머리\tN110\t1\n"
+                                     "真\t참\tN110\t2\n"
+                                     "真ん中\t한가운데\tN110\t3\n"
+                                     "先生\t선생님\tN110\t4\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const Case cases[] = {
+        {"頭ん中が", "頭の中が"},
+        {"先生んとこ", "先生のとこ"},
+        {"先生んとこ行く", "先生のとこ行く"},  // only ん中 needs no kanji after it
+        {"真ん中に", "真ん中に"},
+        {"頭ん中断", "頭ん中断"},
+        {"走ん中", "走ん中"},  // no noun
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedNo(c.in, *loaded.snapshot), std::string(c.want));
+}
+
+// The う of the past and the て form of a godan verb in う is っ; not before ため, nor in a noun.
+HD_TEST(pipeline_onbin_u) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "言\t말&AV@\tM430\t1\n"
+                                     "救\t구&AV@\tM430\t2\n"
+                                     "名うて\t이름난\tN110\t3\n"
+                                     "名\t이름\tN110\t4\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"言うたやろ", "言ったやろ"},
+        {"言うてる", "言ってる"},
+        {"救うために", "救うために"},
+        {"名うての", "名うての"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteOnbinU(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}

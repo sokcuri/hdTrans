@@ -1,0 +1,23 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+sound:contracted-iku	「連れてって」	「데려가」	fix	sound
+sound:contracted-iku	「置いてかないで」	「두고 가지 마」	fix	sound
+sound:contracted-iku	「お皿持ってって」	「접시 가져가」	fix	sound
+sound:contracted-iku	「早く連れてってくれよ」	「빨리 데려가 줘」	fix	sound
+sound:contracted-iku	「出てった後」	「나간 후」	fix	sound
+sound:contracted-iku	「ほら、持ってけ」	「자, 가져가라」	fix	sound
+sound:contracted-iku	「やめてって言ったのに」	「그만두라고 했는데」	keep	sound
+sound:contracted-iku	「どうやってって」	「어떻게는」	keep	sound
+sound:contracted-iku	「やめてってよ！」	「그만두라고!」	keep	sound
+sound:contracted-iku	「連れてってよ」	「데려가」	fix	sound
+sound:contracted-iku	「待ってったら！」	「기다려도 참!」	current	sound
+sound:contracted-no	頭ん中が真っ白だ。	머릿속이 새하얗다.	fix	sound
+sound:contracted-no	海ん中に潜った。	바닷속에 잠수했다.	fix	sound
+sound:contracted-no	「先生んとこ行こう」	「선생님의 곳 가자」	fix	sound
+sound:contracted-no	真ん中に置いた。	한가운데에 두었다.	keep	sound
+sound:contracted-no	いったん中断する。	일단 중단한다.	keep	sound
+sound:onbin-u	「最初に言うたやろ」	「처음에 말했지」	fix	sound
+sound:onbin-u	「新しい水着、買うたんや」	「새로운 수영복, 산 거야」	fix	sound
+sound:onbin-u	「問うている」	「묻고 있다」	fix	sound
+sound:onbin-u	救うために戦う。	구하기 위해 싸운다.	keep	sound
+sound:onbin-u	「言うて、それは違う」	「그렇긴 해도, 그건 다르다」	keep	sound

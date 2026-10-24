@@ -8,4 +8,4 @@ cx:chan-after-katakana:10	アリスちゃんが来た。	앨리스짱이 왔다.
 cx:chan-after-katakana:10	お姉ちゃんが来た。	누나가 왔다.	keep	rewrites
 protect:hiragana-nickname	ここにちゃんと書いた。	여기에 제대로 썼다.	keep	lookup
 protect:hiragana-nickname	特売に群がるおばちゃん。	특매에 몰려드는 아줌마.	keep	lookup
-protect:hiragana-nickname	内容にしとくんで、持ってって。	내용에 해 두기 때문에, 가지라고.	keep	lookup
+protect:hiragana-nickname	内容にしとくんで、持ってって。	내용에 해 두기 때문에, 가져가.	keep	lookup

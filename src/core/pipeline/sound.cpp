@@ -1,10 +1,12 @@
 #include "core/pipeline/sound.h"
 
 #include <algorithm>
+#include <span>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -1836,6 +1838,36 @@ std::string Completion(std::u32string_view frag, size_t kanjiEnd, const LineCont
     return "";
 }
 
+// The longest stem, noun or て form that the contractions look back over, in characters.
+constexpr size_t kLongestStem = 8;
+
+// The byte offset of each character of rs in its UTF-8 text, and the text's size last.
+std::vector<size_t> RuneOffsets(std::u32string_view rs) {
+    std::vector<size_t> at(rs.size() + 1, 0);
+    for (size_t k = 0; k < rs.size(); k++) at[k + 1] = at[k] + EncodeText(rs.substr(k, 1)).size();
+    return at;
+}
+
+// The length of the first of members that starts s, 0 for none.
+size_t StartLength(std::string_view s, std::span<const std::string_view> members) {
+    for (const std::string_view m : members) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
+// Whether rs[from, to) is the て form of a verb the dictionary has (連れて, 持って, 遊んで).
+bool TeForm(std::u32string_view rs, size_t from, size_t to, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::string text = EncodeText(rs.substr(from, to - from));
+    const dict::Candidates rd = snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.codes == nullptr || c.codes->part.Tag() != 'M' || c.codes->part.ClassDigit() != '4') continue;
+        if (!text.starts_with(c.source) || c.source.size() == text.size()) continue;
+        if (std::string_view(text).substr(c.source.size()) == word::Conjugation(c.codes->part.VerbKind(), 7)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -1858,13 +1890,155 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
     return out + EncodeText(std::u32string_view(rs).substr(done));
 }
 
+std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kI = "い";
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = RuneOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!IsHiraganaRune(rs[i - 1])) continue;
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        if (StartLength(rest, dict::ClassMembers("contraction.te-iku-not")) > 0) continue;
+        bool compound = false;  // only when the dictionary holds the verb with ていく
+        if (StartLength(rest, dict::ClassMembers("contraction.te-iku")) == 0) {
+            compound = true;
+            if (StartLength(rest, dict::ClassMembers("contraction.te-iku-listed")) == 0) {
+                const size_t n = StartLength(rest, dict::ClassMembers("contraction.te-iku-final"));
+                if (n == 0) continue;
+                const size_t after = byte[i] + n;
+                if (after < s.size()) {
+                    const char32_t next = text::DecodeRune(std::string_view(s).substr(after)).cp;
+                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) continue;
+                }
+            }
+        }
+        // The longest て form of a verb before i, not the end of a longer word that is no verb
+        // (どうやって 어떻게).
+        size_t start = i;
+        while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsHiraganaRune(rs[start - 1]))) start--;
+        size_t from = start;
+        while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
+        if (from + 1 >= i) continue;
+        bool inWord = false;
+        for (size_t w = start; w < from && !inWord; w++) {
+            const std::string key = s.substr(byte[w], byte[i] - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                inWord = inWord || (c.codes != nullptr && !(c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4'));
+            }
+        }
+        bool found = !inWord && !compound;
+        if (!inWord && compound) {
+            const std::string key = s.substr(byte[from], byte[i] - byte[from]) + std::string(kI);
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                found = found || (c.codes != nullptr && c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4');
+            }
+        }
+        if (!found) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kI;
+        done = i;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
+std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
+    constexpr std::string_view kNo = "の";
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = RuneOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!IsKanjiRune(rs[i - 1]) && !IsKatakanaRune(rs[i - 1])) continue;
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        size_t length = 0;  // characters of the member
+        for (const std::string_view m : dict::ClassMembers("contraction.n-no")) {
+            if (rest.starts_with(m)) {
+                length = DecodeText(m).size();
+                break;
+            }
+        }
+        // A member that ends in kanji goes on as a word before more kanji (いったん中断).
+        if (length == 0 || (IsKanjiRune(rs[i + length - 1]) && i + length < rs.size() && IsKanjiRune(rs[i + length]))) continue;
+        size_t start = i;
+        while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsKatakanaRune(rs[start - 1]))) start--;
+        bool noun = false, word = false;
+        for (size_t w = start; w < i && !word; w++) {
+            const std::string spanned = s.substr(byte[w], byte[i + length] - byte[w]);
+            word = !snap.RetrieveRecords(spanned, dict::LookupMode::General).empty();
+            const std::string head = s.substr(byte[w], byte[i] - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(head, dict::LookupMode::General)) {
+                noun = noun || (c.codes != nullptr && c.codes->part.Tag() == 'N');
+            }
+        }
+        if (!noun || word) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kNo;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
+std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kSmallTsu = "っ";
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = RuneOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!IsKanjiRune(rs[i - 1])) continue;
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        const size_t n = StartLength(rest, dict::ClassMembers("contraction.u-onbin"));
+        if (n == 0 || StartLength(rest, dict::ClassMembers("contraction.u-onbin-not")) > 0) continue;
+        const size_t end = byte[i] + n;  // the byte after the member
+        const char32_t next = end < s.size() ? text::DecodeRune(std::string_view(s).substr(end)).cp : 0;
+        const bool goesOn = IsHiraganaRune(next) || IsKanjiRune(next);
+        size_t start = i - 1;
+        while (start > 0 && i - start < kLongestStem && IsKanjiRune(rs[start - 1])) start--;
+        bool verb = false, word = false;
+        for (size_t w = start; w < i && !word; w++) {
+            // A noun that spans the form (名うて), or another word there before no kana or kanji (言うて、
+            // 그렇긴 해도; not 言うてる).
+            const std::string spanned = s.substr(byte[w], end - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(spanned, dict::LookupMode::General)) {
+                word = word || (c.codes != nullptr && (c.codes->part.Tag() == 'N' || !goesOn));
+            }
+            const std::string stem = s.substr(byte[w], byte[i] - byte[w]);
+            const dict::Candidates rd = snap.GetWordInfo(stem, dict::LookupMode::General, ctx.lookup);
+            for (const dict::Candidate& c : rd.list) {
+                verb = verb || (c.source == stem && c.codes != nullptr && c.codes->part.Tag() == 'M' &&
+                                c.codes->part.ClassDigit() == '4' && c.codes->part.VerbKind() == 0);
+            }
+        }
+        if (!verb || word) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kSmallTsu;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 }  // namespace internal
 
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed =
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
     std::string sounded =
-        internal::RewriteCasualAdjectives(internal::WriteSounds(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap);
+        internal::RewriteCasualAdjectives(internal::WriteSounds(
+                                              internal::RewriteOnbinU(
+                                              internal::RewriteContractedNo(
+                                                  internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), snap),
+                                              ctx, snap), ctx, snap),
+                                          ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
