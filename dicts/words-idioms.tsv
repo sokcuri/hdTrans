@@ -1891,7 +1891,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 取り舵を取	좌현으로 키를 돌&AA@	M428		Pn	GN				llm			i:1886
 取舵を取	좌현으로 키를 돌&AA@	M428		Pn	GN				llm			i:1887
 相当な注意	상당한 주의	A9D0			GN				llm			i:1888
-まな板の鯉	도마에 오른 고기	N110			GN							i:1889
+まな板の鯉	도마 위의 잉어	N110			GN							i:1889
 俎板の鯉	도마 위의 잉어	N110			GN				llm			i:1890
 大なり小なり	많든 적든	A9D0			GN				llm			i:1891
 有意義に過ごしてください	뜻깊게 보내세요	A9D0			GN				llm			i:1892
@@ -6468,7 +6468,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 先生と言われるほどの馬鹿でなし	선생님 소리에 넘어갈 만큼 바보는 아니야	A9D0			GN				llm			i:6464
 大口を開け	입을 크게 벌&AA@	M427		Pn	GN				llm			i:6465
 その他もろもろ	기타 등등	N110			GN				llm			i:6466
-その他諸々	기타 등등	N110			GN				llm			i:6467
+その他諸々	기타 여러 가지	N110			GN				llm			i:6467
 不幸にも	불행하게도	E300			GN				llm			i:6468
 借りを返	빚을 &F2@	M423		Pn	GN				llm			i:6469
 礼ははず	사례를 후하게 &AV@	M425			GN				llm			i:6470
@@ -7590,7 +7590,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 雪中送炭	설중송탄	N110			GN				llm			i:7587
 任しとき	나한테 맡겨	A9D0			GN				llm			i:7588
 相手を選	상대를 가&AA@	M426		Pn	GN				llm			i:7589
-手のひらの上	손바닥 안	N110			GN				llm			i:7590
+手のひらの上	손바닥 위	N110	VPl		GN				llm			i:7590
 和のこころ	화합의 마음	N110			GN				llm			i:7591
 手の舞い足の踏むところを知らず	기뻐서 어쩔 줄 몰라	A9D0			GN				llm			i:7592
 手の舞い足の踏む所を知らず	기뻐서 어쩔 줄 몰라	A9D0			GN				llm			i:7593

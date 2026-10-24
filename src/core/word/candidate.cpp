@@ -1,6 +1,8 @@
 // The per-token step: segmentation of a token into dictionary words, candidate groups
 // and the record of words the dictionary does not know.
 #include <algorithm>
+#include <bit>
+#include <cstdint>
 #include <vector>
 
 #include "core/dict/char_readings.h"
@@ -279,13 +281,57 @@ bool NounEnd(std::string_view text) {
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
-// Text path: candidates are ordered by part tag before length, so an adnominal in の
-// written from a kanji (大の, 大粒の) came before a longer dictionary noun it starts
-// (大の字, 大粒の雨). That noun moves to the front when a particle, punctuation or the
-// end of the text follows it. Demonstratives (あの人, この世) and adverbs keep their
-// order: their compound rows read worse than the parts. Plain-dictionary records stay
-// in front.
-Record* LongerNounFirst(Record* records, std::string_view text) {
+// The lengths in characters of the keys of tag letter tag that start text in mode, as
+// a bit set (lengths of 63 or more share the top bit).
+uint64_t KeyLengths(const dict::Snapshot& snapshot, std::string_view text, dict::LookupMode mode, char tag) {
+    uint64_t lengths = 0;
+    for (const dict::Candidate& c : snapshot.GetWordInfo(text, mode, {}).list) {
+        if (c.codes->part.Tag() == tag) lengths |= uint64_t{1} << std::min<std::size_t>(text::RuneCount(c.source), 63);
+    }
+    return lengths;
+}
+
+// Whether text starts with what follows a noun rather than a verb form: a particle of
+// two or more characters (から, まで), or a key that is both a particle and an ending
+// after an adjectival noun (だ, です, か, よ), with no longer verb ending at text (ない,
+// なさい over な; て, た and ます are verb endings only).
+bool NounGoesOn(const dict::Snapshot& snapshot, std::string_view text) {
+    const uint64_t particle = KeyLengths(snapshot, text, dict::LookupMode::General, 'P');
+    const uint64_t noun = (particle & KeyLengths(snapshot, text, dict::LookupMode::AdjectivalNounEnding, 'U')) |
+                          (particle & ~uint64_t{3});
+    const uint64_t verb = KeyLengths(snapshot, text, dict::LookupMode::VerbEnding, 'S');
+    return noun != 0 && std::bit_width(noun) >= std::bit_width(verb);
+}
+
+// Whether a key that ends in hiragana runs into kana or a kanji that a noun cannot take
+// (経験あり + ます, 取り分け + て, 経験あり + そうだ, 追って書き + 込んで): the key spells a
+// verb form there. A noun takes a particle, punctuation or a copula form.
+bool RunsIntoWord(const dict::Snapshot& snapshot, std::string_view key, std::string_view after) {
+    const int next = NameClassOf(after);
+    return NameClassOf(LastChar(key)) == kClassHiragana && next != kClassKatakana && next != kClassOther &&
+           !NounEnd(after) && !NounGoesOn(snapshot, after);
+}
+
+// A noun row of tag letter I, K or N: a common or proper noun. The other letters of
+// class-1 rows mark phrase and function rows (すみません, このあと, ぶり).
+bool NounRow(const Record& r) { return At(r.partCode, 1) == '1' && Has("IKN", FirstChar(r.partCode)); }
+
+// Whether the noun row r at text is read whole after a shorter noun row.
+bool ReadsWhole(const dict::Snapshot& snapshot, const Record& r, std::string_view text) {
+    return NounRow(r) && !RunsIntoWord(snapshot, r.source, text.substr(r.source.size()));
+}
+
+// Text path: candidates are ordered by part tag before length, so a shorter record
+// came before a longer dictionary noun it starts. That noun moves to the front:
+// - after a noun row of another letter, unless the noun runs on as a verb form: the
+//   letters of noun rows do not rank word boundaries, length does, as within one
+//   letter (治験薬, not 治験 + 薬);
+// - after an adnominal in の written from a kanji (大の, 大粒の), when a particle,
+//   punctuation or the end of the text follows it (大の字, 大粒の雨). Demonstratives
+//   (あの人, この世) and adverbs keep their order: their compound rows read worse than
+//   the parts.
+// Plain-dictionary records stay in front.
+Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
     while (first != nullptr && first->user != nullptr) {
@@ -293,15 +339,17 @@ Record* LongerNounFirst(Record* records, std::string_view text) {
         first = first->child;
     }
     if (first == nullptr) return records;
-    if (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
-        !text::IsKanji(text::DecodeRune(first->source).cp)) {
+    const bool afterNoun = NounRow(*first);
+    if (!afterNoun && (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
+                       !text::IsKanji(text::DecodeRune(first->source).cp))) {
         return records;
     }
     std::string_view noun;
     for (const Record* r = first; r != nullptr; r = r->child) {
-        if (r->user == nullptr && At(r->partCode, 1) == '1' && r->source.size() > first->source.size() &&
-            r->source.size() > noun.size() && r->source.starts_with(first->source) && text.starts_with(r->source) &&
-            NounEnd(text.substr(r->source.size()))) {
+        if (r->user == nullptr && r->source.size() > first->source.size() && r->source.size() > noun.size() &&
+            r->source.starts_with(first->source) && text.starts_with(r->source) &&
+            (afterNoun ? ReadsWhole(snapshot, *r, text)
+                       : At(r->partCode, 1) == '1' && NounEnd(text.substr(r->source.size())))) {
             noun = r->source;
         }
     }
@@ -1126,7 +1174,7 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
-    if (settings.text) records = LongerNounFirst(records, From(full, cursor));
+    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));

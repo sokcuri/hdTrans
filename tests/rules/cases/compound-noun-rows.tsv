@@ -1,0 +1,32 @@
+# 규칙: LEX-12
+rule	input	expected	kind	layer
+lookup:longer-noun	治験薬を飲んだ。	임상 시험약을 먹었다.	fix	lookup
+lookup:longer-noun	治験薬の効果は不明だ。	임상 시험약의 효과는 불명하다.	fix	lookup
+lookup:longer-noun	治験に参加した。	임상 시험에 참가했다.	fix	lookup
+lookup:longer-noun	俺は、最後の気力を振り絞って、最重要事項を伝えた。	나는, 마지막 기력을 쥐어짜고, 가장 중요한 사항을 전했다.	fix	lookup
+lookup:longer-noun	髪結い係もお願い」	머리 손질 담당도 부탁」	fix	lookup
+lookup:longer-noun	記入済みの離婚届まで	기입 완료의 이혼신고까지	fix	lookup
+lookup:longer-noun	チョコの、お・か・え・し♪ くれるの？	초콜릿의, 답·례♪ 주는 거야?	fix	lookup
+lookup:longer-noun	やかん頭がピーピー泣くぞっ	대머리가 삐삐 운다	fix	lookup
+lookup:longer-noun	身の程知らずは滅びる運命なのだよ。	주제넘음은 멸망하는 운명이야.	fix	lookup
+lookup:longer-noun	経験値上昇中☆	경험치 상승 중☆	fix	lookup
+lookup:longer-noun	俺がじっさいはどこで	내가 실제는 어디서	fix	lookup
+lookup:longer-noun	むしろ柏木の方がそっち系に見える。	오히려 카시와기가 그쪽 사람으로 보인다.	fix	lookup
+lookup:longer-noun	カーキ色の軍用車両が駐車し	카키색 군용 차량이 주차해	fix	lookup
+lookup:longer-noun	マルヨンマルマル…夜明け前が一番眠い。	0400…동트기 전이 제일 졸리다.	fix	lookup
+lookup:longer-noun	諦めて、まな板の鯉になることにした。	포기해, 도마 위의 잉어가 되기로 했다.	fix	lookup
+lookup:longer-noun	沙都子の売り言葉に買い言葉で	사토코의 오는 말에 가는 말로	fix	lookup
+lookup:longer-noun	少しは経験ありますよぉ。	조금은 경험 있어요.	keep	lookup
+lookup:longer-noun	隣のおばさんがひょっこり現れた。	옆의 아줌마가 불쑥 나타났다.	keep	lookup
+lookup:longer-noun	二日ぶりに会った。	이틀만에 만났다.	keep	lookup
+lookup:longer-noun	半月ぶりに会った。	보름만에 만났다.	keep	lookup
+lookup:longer-noun	二人分の食事。	두 사람분의 식사.	keep	lookup
+lookup:longer-noun	序章 第2話 手のひらの上で	서장 제2화 손바닥 위에서	keep	lookup
+lookup:longer-noun	箸を相手の弁当箱に突っ込む。	젓가락을 상대의 도시락통에 집어넣는다.	keep	lookup
+lookup:longer-noun	確かにレナの弁当箱はこの食卓の花だった。	확실히 레나의 도시락통은 이 식탁의 꽃이었다.	keep	lookup
+lookup:longer-noun	「はい、ここまで。おまえらは帰っていいぞ」	「네, 여기까지. 너희는 돌아가도 좋아」	keep	lookup
+lookup:longer-noun	吹奏楽部部長	취주악부 부장	keep	lookup
+lookup:longer-noun	部下は来訪者の名前を告げる。	부하는 방문자의 이름을 말한다.	keep	lookup
+lookup:longer-noun	宇宙飛行士同士	우주비행사끼리	keep	lookup
+lookup:longer-noun	経験ありそうだ。	경험 있을 것이다.	keep	lookup
+lookup:longer-noun	運動が嫌いな人向けの授業だ。	운동이 싫은 사람용 수업이다.	keep	lookup

@@ -5077,7 +5077,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 向精神薬	향정신성의약품	N110			GN							s:5074
 吸虫	흡충	N110			GN				llm			s:5075
 吸血姫	흡혈희	N110			GN				llm			s:5076
-吹奏楽部	관악부	N110			GN				llm			s:5077
+吹奏楽部	취주악부	N110			GN				llm			s:5077
 吹部	관악부	N110			GN				llm			s:5078
 周期ゼミ	주기매미	N110			GN							s:5079
 周飾頭類	주식두류	N110			GN							s:5080
@@ -5347,7 +5347,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 尼さん	비구니	N110			GN							s:5344
 尿路結石	요로결석	N110			GN				llm			s:5345
 尿道口	요도구멍	N110			GN							s:5346
-局地戦闘機	요격기	N110			GN							s:5347
+局地戦闘機	국지전투기	N110			GN							s:5347
 履帯	무한궤도	N110			GN							s:5348
 山口弁	야마구치 방언	N110			GN							s:5349
 山吹色のお菓子	뇌물	N110			GN							s:5350
@@ -5712,7 +5712,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 未来形	미래시제	N110			GN							s:5709
 未申	남서쪽	N110			GN							s:5710
 未確認生命体	미확인 생명체	N110			GN				llm			s:5711
-未確認生物	미확인동물	N110			GN							s:5712
+未確認生物	미확인 생물	N110			GN							s:5712
 末期症状	말기 증상	N110			GN							s:5713
 本初子午線	본초 자오선	N110			GN							s:5714
 本命チョコ	진심 초콜릿	N110			GN				llm			s:5715
@@ -6627,7 +6627,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 軌間可変電車	궤간가변열차	N110			GN							s:6624
 軍事パレード	열병식	N110			GN							s:6625
 軍用ヘリコプター	군용 헬리콥터	N110			GN							s:6626
-軍用車両	군용차	N110			GN							s:6627
+軍用車両	군용 차량	N110			GN							s:6627
 軍隊アリ	군대개미	N110			GN							s:6628
 軍隊蟻	군대개미	N110			GN							s:6629
 軟体生物	연체동물	N110			GN							s:6630
