@@ -27030,10 +27030,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いっちょまえに	제법	E300			GN							w:28558
 まっぴらごめん	딱 질색	N110			GN							w:28559
 なんざ	따위	P251		Ha	GN							w:28560
-っぷり	모습	M110	VHn		GN							w:28561
+徹底っぷり	철저함	N110			GN							w:28561
 いっちょ	한번	E300			GN							w:28562
 もういっちょ	한 번 더	E300			GN							w:28563
-ようやっと	간신히	E300			GN							w:28564
+ようやっと	드디어	E300			GN							w:28564
 ついぞ	끝내	E300			GN							w:28565
 すっぱり	깨끗이	E300			GN							w:28566
 ちょびっと	조금	E300			GN							w:28567
@@ -27047,7 +27047,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 痛ったぁ	아야	E000			GN							w:28582
 恥ずべき	부끄러운	E0H0			GN							w:28583
 食いっぷり	먹는 모습	N110			GN							w:28585
-萌え	모에	N110			GN							w:28586
+萌え	모에	N110	XXX		GN							w:28586
 たっぷり	듬뿍	N110			GN							w:28587
 身罷られ	돌아가&AE@	M417			GN							w:28588
 身まかられ	돌아가&AE@	M417			GN							w:28589
@@ -27055,3 +27055,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 っち	치	N110	VHn	Tu	GN							w:28402
 俺っち	나	N120	VHn		GN						おれっち	w:28404
 俺っち	내	N120	VHn		GN	7422	||1 &&2 S+1== "が" P+1== "2**"	조사 が 앞의 俺っち를 내로 고른다.			おれっち	w:28405
+道化っぷり	광대 짓	N110			GN							w:28591
+間抜けっぷり	얼간이 짓	N110			GN							w:28592
+非道っぷり	악랄함	N110			GN							w:28593
+うるせえ	시끄러워	A9D0			GN							w:28594
+うるせー	시끄러워	A9D0			GN							w:28595
+コッソリ	몰래	E300			GN							w:28596
+萌え	싹트고 	N110			GN	6993	||1 &&2 S-1== "が" ||4 S-2== "R草" S-2== "R芽" S-2== "R木" S-2== "R葉"	풀, 싹, 나무, 잎이 주어인 萌える는 ‘싹트다’를 고른다(草が萌え).				w:28597
