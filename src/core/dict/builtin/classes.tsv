@@ -73,6 +73,7 @@
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
 //= honorific.prepass-spaced	Honorifics read 씨 or 군 that are written apart from the noun before them (田中さん 다나카 씨).
 //= kana.drawn-out	Small kana and marks that draw out the kana before them (マルマルぅ, くぅん, ちゃーん).
+//= kana.ending-start-only	Kana that start the ending of an end row but no word, so that such an ending is no piece of a katakana run read as words (っしゅ of トリッシュ).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
@@ -992,6 +993,8 @@ kana.drawn-out	ゅ
 kana.drawn-out	ょ
 kana.drawn-out	ー
 kana.drawn-out	～
+
+kana.ending-start-only	っ
 
 kana.kin-before-chan	にい
 kana.kin-before-chan	にー
