@@ -221,6 +221,7 @@
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
+//= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 방법도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
@@ -3346,6 +3347,24 @@ verb.thinking-start	感じ
 verb.thinking-start	考え
 verb.thinking-start	信じ
 verb.thinking-start	確信
+
+verb.way-of-doing	ようが
+verb.way-of-doing	ようも
+verb.way-of-doing	ようの
+verb.way-of-doing	ようは
+verb.way-of-doing	ように
+verb.way-of-doing	ようを
+verb.way-of-doing	ようで
+verb.way-of-doing	ようだ
+verb.way-of-doing	ようじゃ
+verb.way-of-doing	よう！
+verb.way-of-doing	よう。
+verb.way-of-doing	よう、
+verb.way-of-doing	よう」
+verb.way-of-doing	よう』
+verb.way-of-doing	よう…
+verb.way-of-doing	よう？
+verb.way-of-doing	よう）
 
 verb.writing	書
 verb.writing	か

@@ -34,6 +34,19 @@ bool SuruAfterMo(std::string_view s) {
     return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
 }
 
+// Whether a godan continuative (pattern kind not ichidan, する, ずる or くる) is the noun of
+// manner before s: the よう of 疑いようもない, やりようがない, 品のないなさりよう！ (verb.way-of-doing).
+// An ichidan stem keeps its volitional よう.
+bool WayOfDoing(int patternKind, std::string_view s, std::string_view next) {
+    if (patternKind == 7 || patternKind == 9 || patternKind == 10 || patternKind == 11 || patternKind == 13) return false;
+    for (const std::string_view m : dict::ClassMembers("verb.way-of-doing")) {
+        if (s.starts_with(m)) return true;
+        // the mark or particle after the bare form starts the next token
+        if (!s.empty() && m.size() > s.size() && m.starts_with(s) && next.starts_with(m.substr(s.size()))) return true;
+    }
+    return false;
+}
+
 // Whether s is a single hiragana (the stem で of 出る, which でもする is not).
 bool OneKana(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
@@ -364,6 +377,21 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
     if (!w->MatchDictionary(tail, surface, '4', 'X')) return false;
+    // A noun of the dictionary that ends with the よう of manner and starts inside the stem
+    // takes the text (ありよう 상태, 救いよう).
+    auto NounOfManner = [&](std::string_view stem) {
+        const std::string_view way = after();
+        const std::size_t first = text::DecodeRune(way).size;
+        const std::string_view rest =
+            tail.substr(0, static_cast<std::size_t>(pattern()) + first + text::DecodeRune(way.substr(first)).size);
+        for (std::size_t i = 0; i < stem.size(); i += text::DecodeRune(stem.substr(i)).size) {
+            const std::string query = std::string(stem.substr(i)) + std::string(rest);
+            for (const Record* r = w->DoLookup(w->arena.Keep(query), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source == query && At(r->partCode, 0) == 'N') return true;
+            }
+        }
+        return false;
+    };
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
@@ -375,7 +403,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
-         (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) || two == kJaYo || four == kJaNado ||
+         (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) ||
+         (two == kJaYo && !(WayOfDoing(base.patternKind, after(), base.nextText) && !NounOfManner(surface))) ||
+         four == kJaNado ||
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
         return false;
     }
