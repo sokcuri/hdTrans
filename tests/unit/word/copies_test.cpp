@@ -1,5 +1,5 @@
 // A unit said two or more times is read copy by copy: no word of one copy takes the start of
-// the next, and a word of the dictionary that spells the copies keeps them.
+// the next, and a word of the dictionary that spells all the copies keeps them.
 #include <string>
 #include <vector>
 
@@ -21,6 +21,9 @@ HD_TEST(word_copies_read_one_by_one) {
          "海辺町\t바닷가 마을\tN110\tXXX\t\tGN\t0\t8\t\n"
          "い\t위\tN110\tXXX\t\tGN\t0\t9\t\n"
          "かお\t얼굴\tN110\tXXX\t\tGN\t0\t11\t\n"
+         "まだ\t아직\tE300\tXXX\t\tGN\t0\t12\t\n"
+         "まだまだ\t아직도\tE300\tXXX\t\tGN\t0\t13\t\n"
+         "まだま\t마다마\tN110\tXXX\t\tGN\t0\t14\t\n"
          "は\t(은)는\tP200\tXXX\t\tGN\t0\t10\t\n"},
     };
     const auto loaded = hdTrans::dict::Load(files);
@@ -33,7 +36,9 @@ HD_TEST(word_copies_read_one_by_one) {
     const Case cases[] = {
         {"あいあい", "사랑 사랑"},    // not あいあ + い
         {"海辺、海辺", "해변, 해변"},
-        {"はいはいはい", "네네네"},   // the word of two copies, then the third, written as one
+        {"はいはいはい", "네네네"},   // each copy, written as one
+        {"まだまだまだ", "아직 아직 아직"},  // not the word of two copies, nor まだま inside the run
+        {"まだまだ", "아직도"},
         {"いろいろ", "여러 가지"},     // the word of the copies
         {"海辺、海辺町", "해변, 바닷가 마을"},  // the next copy starts a longer word
     };

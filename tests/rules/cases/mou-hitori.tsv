@@ -1,0 +1,39 @@
+# 규칙: LEX-21
+rule	input	expected	kind	layer
+lookup:mou-hitori-no	もう一人のワタシ	또 다른 나	fix	lookup
+lookup:mou-hitori-no	もう一人の私	또 다른 나	fix	lookup
+lookup:mou-hitori-no	もう一人の自分	또 다른 자신	fix	lookup
+lookup:mou-hitori-no	もうひとりの自分がいる	또 다른 자신이 있다	fix	lookup
+lookup:mou-hitori-no	もう一人の少年が言った。	또 다른 소년이 말했다.	fix	lookup
+lookup:mou-hitori-no	もう一人の当事者である男は	또 다른 당사자인 남자는	fix	lookup
+lookup:mou-hitori-no	もう一人の部下の悲鳴に振り返った。	또 다른 부하의 비명에 돌아보았다.	fix	lookup
+lookup:mou-hitori-no	光と共に、もう一人の少女が現れた。	빛과 함께, 또 다른 소녀가 나타났다.	fix	lookup
+dict:jisjk:41726	「まあ待ちたまえ。もう一人来る」	「뭐 기다리게. 한 명 더 온다」	fix	local
+dict:jisjk:41726	「俺のミスだ、もう一人いたが見過ごしていた」	「내 실수다, 한 명 더 있었지만 간과하고 있었다」	fix	local
+dict:jisjk:41726	「男役がもう一人必要だったんですよ」	rule:dict:jisjk:41726=한 명 더	fix	local
+dict:jisjk:41726	「ならもう一人」	!rule:dict:jisjk:41726	keep	local
+dict:jisjk:41726	もう一人が、振り返って俺たちにオーダーを通す。	rule:dict:jisjk:41726=다른 한 명	fix	local
+dict:jisjk:41726	その隙を突いて、もう一人がこちらへ襲いかかってきた。	그 허점을 찔러, 다른 한 명이 이쪽으로 덤벼들어 왔다.	fix	local
+dict:jisjk:41726	「そしてもう一人は……」	「그리고 다른 한 명은……」	fix	local
+dict:jisjk:41726	仲間ともう一人を捜していて	동료와 다른 한 명을 찾고 있어	fix	local
+dict:jisjk:41726	「もう一人でお買い物に行ける歳なんですよ」	rule:dict:jisjk:41726=이제 혼자	fix	local
+dict:jisjk:264338	これなら、もうひとりでやれるだろう。	이것이라면, 이제 혼자서 할 수 있을 것이다.	fix	local
+dict:jisjk:264338	もうひとりじゃない	이제 혼자가 아니다	fix	local
+dict:jisjk:264338	いや、もうひとり残ってる。	아니, 한 명 더 남아 있다.	keep	local
+lookup:hitori-spacing	「一人一人は礼儀正しいよ」	「한 사람 한 사람은 예의 발라」	fix	lookup
+lookup:hitori-spacing	部員ひとりあたり25票	부원 한 사람당 25표	fix	lookup
+lookup:hitori-spacing	一人ひとりの名前を	한 사람 한 사람의 이름을	fix	lookup
+lookup:mou-hitori-no	一人で行く。	혼자서 간다.	keep	lookup
+lookup:mou-hitori-no	もう一度言って。	한번 더 말해.	keep	lookup
+lookup:mou-hitori-no	もう一つください。	하나 더 주세요.	keep	lookup
+cx:mou-hitori-no:10	もう一人の顔を見た	다른 한 사람의 얼굴을 보았다	fix	rewrites
+cx:mou-hitori-no:10	もう一人の名前は	다른 한 사람의 이름은	fix	rewrites
+cx:mou-hitori-no:10	もう一人の声がした	rule:cx:mou-hitori-no:10=다른 한 사람의	fix	rewrites
+cx:mou-hitori-no:10	もう一人の少年が言った。	!rule:cx:mou-hitori-no:10	keep	rewrites
+cx:mou-hitori-no:10	もう一人のワタシ	!rule:cx:mou-hitori-no:10	keep	rewrites
+cx:mou-hitori-no:10	光と共に、もう一人のエルが現れた。	!rule:cx:mou-hitori-no:10	keep	rewrites
+cx:mou-hitori-no:10	もう一人の私	!rule:cx:mou-hitori-no:10	keep	rewrites
+dict:jisjk:41726	もう一人だ	또 한 명이다	keep	local
+dict:jisjk:41726	もう一人まで	또 한 명까지	keep	local
+dict:jisjk:41726	もう一人になった	이제 혼자가 되었다	fix	local
+dict:jisjk:41726	もう一人必要だ	한 명 더 필요하다	fix	local

@@ -189,8 +189,9 @@ private:
 // are trimmed unless the previous token is a space; a space separates a token from a preceding
 // "</A>", "</a>" or "&#CS". A span token writes its span text as a span piece, then
 // what compose added to its text; a space written before a closing-tag span moves after
-// it. With settings.cleanup a space the engine wrote never forms a run with another
-// space; input whitespace tokens are kept as they are.
+// it. An opening bracket token other than 〔 (【 〈 《 ［ ‘ ｛) after a syllable, a Latin letter, a digit, a
+// word span or a comma takes a space before it. With settings.cleanup a space the engine wrote
+// never forms a run with another space; input whitespace tokens are kept as they are.
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& settings,
                            Pieces& out);
 

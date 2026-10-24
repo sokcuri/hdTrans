@@ -49,6 +49,8 @@ const Item* CopyBefore(const Item* it) {
     return p;
 }
 
+}  // namespace
+
 // The word after it that repeats it.
 const Item* CopyAfter(const Item* it) {
     const Item* n = it->next;
@@ -56,6 +58,7 @@ const Item* CopyAfter(const Item* it) {
     return n != nullptr && CopyBefore(n) != nullptr ? n : nullptr;
 }
 
+namespace {
 
 // The last copy of the run that it starts or goes on.
 const Item* LastCopy(const Item* it) {

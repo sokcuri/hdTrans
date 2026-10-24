@@ -70,7 +70,7 @@ bool Item::RunDefaultTrieQuery() {
         (remaining.starts_with("しい") || remaining.starts_with("しく") || remaining.starts_with("しかっ"))) {
         return false;
     }
-    if (const Window first = Left(surface, 2); marker == '1' && WidthOf(surface) == 4 && NumeralPair(first)) {
+    if (const Window first = Left(surface, 2); marker == '1' && NumeralPair(first) && WidthOf(surface) == 4) {
         if (NumeralPair(Right(markerText, 2))) return false;
     }
     return true;
@@ -129,7 +129,13 @@ bool Item::RunKeiyoTrieQuery() {
             bool matched = false;
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
+                // An ending that makes a noun (gram Pn: the nominal み) stands only before a
+                // particle, punctuation or the end, and only where the stem and the ending are no
+                // verb form or noun of the dictionary (楽しみ、 苦しみながら, 高み, 甘み), which the
+                // later records then read.
                 if (Byte(At(e.code, 1)) != base.kind || (Has(e.gattr, "Sh") && Classify(remaining) != 0) ||
+                    (Has(e.gattr, "Pn") &&
+                     (!NounEndAt(after) || VerbOrNounKey(w->snapshot, surface, g->surface))) ||
                     (DoubleNegativeRow(e) && !NegativeStem(*group)) ||
                     !w->EndingApplies(e, after, tokenIndex) ||
                     w->CutsWord(remaining.substr(0, remaining.size() - second.size()), second.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), second.size())), after)) {

@@ -262,13 +262,13 @@ dict:jisjk:227500	蒸し物を食べた。	찜을 먹었다.	keep	lookup
 dict:s:97	ちゃんこを作った。	창코를 만들었다.	fix	lookup
 dict:s:97	ちゃんこを食べた。	창코를 먹었다.	fix	lookup
 dict:s:97	ちゃんこがおいしい。	창코가 맛있다.	fix	lookup
-dict:s:9436	ちゃんこ鍋を作った。	창코나베를 만들었다.	fix	lookup
-dict:s:9436	ちゃんこ鍋を食べた。	창코나베를 먹었다.	fix	global-stem
-dict:s:9436	ちゃんこ鍋がおいしい。	창코나베가 맛있다.	fix	lookup
-dict:s:9436	ちゃんこ鍋を注文した。	창코나베를 주문했다.	fix	lookup
-dict:s:9436	ちゃんこ鍋ではない。	창코나베가 아니다.	fix	lookup
+dict:s:9452	ちゃんこ鍋を作った。	창코나베를 만들었다.	fix	lookup
+dict:s:9452	ちゃんこ鍋を食べた。	창코나베를 먹었다.	fix	global-stem
+dict:s:9452	ちゃんこ鍋がおいしい。	창코나베가 맛있다.	fix	lookup
+dict:s:9452	ちゃんこ鍋を注文した。	창코나베를 주문했다.	fix	lookup
+dict:s:9452	ちゃんこ鍋ではない。	창코나베가 아니다.	fix	lookup
 dict:s:97	ちゃんこは食べない。	창코는 먹지 않는다.	fix	lookup
-dict:s:9436	ちゃんこ鍋を食べない。	창코나베를 먹지 않는다.	fix	global-stem
+dict:s:9452	ちゃんこ鍋を食べない。	창코나베를 먹지 않는다.	fix	global-stem
 dict:s:97	鍋料理を食べた。	전골을 먹었다.	keep	global-stem
 dict:s:97	鍋を買った。	냄비를 샀다.	keep	lookup
 dict:s:97	ちゃんと食べた。	제대로 먹었다.	keep	lookup
@@ -1137,5 +1137,5 @@ dict:jisjk:152803	泡の立ち過ぎの原因。	거품이 지나치게 이는 �
 dict:jisjk:152803	泡が消えた。	거품이 사라졌다.	keep	lookup
 dict:jisjk:152803	水があふれた。	물이 넘쳤다.	keep	lookup
 dict:s:97	ちゃんこの献立を考える。	창코의 메뉴를 생각한다.	fix	lookup
-dict:s:9436	ちゃんこ鍋を注文する。	창코나베를 주문한다.	fix	lookup
+dict:s:9452	ちゃんこ鍋を注文する。	창코나베를 주문한다.	fix	lookup
 lookup:food-contrast	カレーを作った。	카레를 만들었다.	keep	defaults

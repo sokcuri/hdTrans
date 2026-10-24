@@ -8156,7 +8156,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ハガキ職人	엽서 투고 고수	N110			GN				llm			s:8153
 脈なし	가망 없음	N110			GN				llm			s:8154
 脈無し	가망 없음	N110			GN				llm			s:8155
-陰キャラ	인싸 반대 찐따	N110			GN				llm			s:8156
+陰キャラ	아싸	N110			GN							s:8156
 タコパ	타코야키 파티	N110			GN				llm			s:8157
 たこパ	타코야키 파티	N110			GN				llm			s:8158
 スカーチョ	치마바지	N110			GN				llm			s:8159
@@ -8210,7 +8210,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 反り立	우뚝 &FG@	M424			GN				llm			s:8207
 そマ	그게 진짜야	A9D0			GN				llm			s:8208
 絶起	늦잠 절망	N110			GN				llm			s:8209
-陰キャ	인싸 아닌 사람	N110			GN				llm			s:8210
+陰キャ	아싸	N110			GN							s:8210
 最旬	가장 유행하는	N110			GN				llm			s:8211
 鍵垢	비공개 계정	N110			GN				llm			s:8212
 鍵アカ	비공개 계정	N110			GN				llm			s:8213
@@ -9436,4 +9436,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チン騎士	화이트 나이트	N110			GN				llm			s:9433
 しばきあげ	두들겨 &MM@	M437			GN							s:9434
 しばき上げ	두들겨 &MM@	M437			GN							s:9435
-ちゃんこ鍋	창코나베	N110	VFd		GN						ちゃんこなべ	s:9436
+推し	최애	N110			GN							s:9436
+わかりみ	공감	N110			GN							s:9437
+分かりみ	공감	N110			GN							s:9438
+陽キャラ	인싸	N110			GN							s:9442
+ガチ	진짜	N110			GN							s:9443
+ワンチャン	가능성	N110			GN							s:9444
+厨二病	중2병	N110			GN							s:9445
+厨二	중2	N110			GN							s:9446
+ディス	디스&AV@	M428			GN							s:9448
+草	ㅋㅋ	N110			GN							s:9449
+詰	망&AV@	M415			GN	6948	||4 U+0== "Lん" U+0== "Lむ" U+0== "Lだ" U+0== "Lで"	詰む의 ん 활용과 기본형은 일이 끝장난 뜻의 망하다로 고른다(人生詰んだ 인생 망했다).				s:9450
+ワンチャンス	원 찬스	N110			GN							s:9451
+ちゃんこ鍋	창코나베	N110	VFd		GN						ちゃんこなべ	s:9452

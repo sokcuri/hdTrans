@@ -1,0 +1,50 @@
+# 규칙: LEX-23
+rule	input	expected	kind	layer
+cx:archaic-shi:20	封印されし力が目覚める。	봉인된 힘이 눈을 뜬다.	fix	rewrites
+cx:archaic-shi:20	逃さないと背後を追ってくるのは、全身に血の衣を纏いし異常者たち。	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	雨音に溺れし朝や初嵐	빗소리에 빠진 아침이나 첫폭풍우	fix	rewrites
+cx:archaic-shi:20	長き旅路の果て、我が庭園へ至りし客人よ」	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	（まったく、これで英知を極めし賢者だと言うのだから恐れ入る）	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	はるか昔、王国が瘴気に覆われ、魔物が蔓延りし時、いずこかより現れた乙女あり。	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	特に、灼熱竜の司りし炎の眷属による魔法は無駄と言って良いだろう。	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	色褪せることを恐れし花野かな	rule:cx:archaic-shi:20=8	fix	rewrites
+cx:archaic-shi:20	呪われし剣。	저주받은 검.	fix	rewrites
+cx:archaic-shi:20	失われし記憶を取り戻す。	없어진 기억을 되찾는다.	fix	rewrites
+cx:archaic-shi:20	決心し今朝の計画を提案した	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:20	携帯を操作し一通のメールを表示させた	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:20	全てをお任せし安心した	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:20	あいつに任せしよう	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:20	天音はなおもマキに幅寄せし、ほとんど車体が擦れるほど接近している。	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:20	座布団を強く握りしめるのぞみ。	!rule:cx:archaic-shi:20	keep	rewrites
+cx:archaic-shi:10	悪しき性格を備えし者、ですね	rule:cx:archaic-shi:10=8	fix	rewrites
+cx:archaic-shi:10	同じ血を受け継ぎし者ならば	같은 피를 계승한 자라면	fix	rewrites
+cx:archaic-shi:10	我に従いし者よ。	나에 따른 자야.	fix	rewrites
+cx:archaic-shi:10	闇に堕ちし者。	어둠에 떨어진 자.	fix	rewrites
+cx:archaic-shi:10	導かれし者たち。	이끌린 자들.	fix	rewrites
+cx:archaic-shi:10	選ばれし者にしか入る事が許されない	선택된 자밖에 들어오는 것이 허락되지 않는다	fix	rewrites
+cx:archaic-shi:10	はっきり言って、晒し者だ。	!rule:cx:archaic-shi:10	keep	rewrites
+cx:archaic-shi:10	俺たちみたいなはみ出し者	!rule:cx:archaic-shi:10	keep	rewrites
+cx:archaic-shi:10	選ばれた者	!rule:cx:archaic-shi:10	keep	rewrites
+dict:names.529078	封印されし者よ。	봉인된 자야.	fix	lookup
+pattern:学生ごとき	「お前ごときが私に選ばれたことを感謝すべき立場なのだぞ！」	「너 따위가 나로 선택된 걸 감사해야 할 입장인 것이다!」	fix	lookup
+pattern:学生ごとき	伯爵令息ごときに、侮られる訳にはいかないのだ	백작 영식 따위에, 경시될 수는 없는 것이다	fix	lookup
+pattern:学生ごとき	駆逐艦ごとき、我の主砲で…。	구축함 따위, 나의 주포로….	fix	lookup
+pattern:学生ごとき	人間ごときに負けるものか。	인간 따위에 질까 보냐.	fix	lookup
+pattern:学生ごとき	白崎が、菩薩のごとき笑みを浮かべる。	시라사키가, 보살과 같은 미소를 짓는다.	keep	lookup
+pattern:学生ごとき	ことごとく失敗した	죄다 실패했다	keep	lookup
+pattern:学生のごとし	夢のごとし。	꿈 같다.	fix	lookup
+pattern:書くが如き	それは騎士が主君に誓いを立てるが如き行為。	그것은 기사가 주군에게 맹세하는 듯한 행위.	fix	lookup
+pattern:書くかのごとき	未来を知るかのごとき神算鬼謀で天下統一！	미래를 아는 듯한 매우 뛰어난 계략으로 천하통일!	fix	lookup
+pattern:学生の如き	相変わらず氷の如き無表情のままだ。	변함없이 얼음 같은 무표정인 채다.	keep	lookup
+dict:jisjk:127001	汝の名を問う。	그대의 이름을 묻는다.	fix	lookup
+dict:jisjk:127001	汝を歓喜させるために、愛をもって注がれたのだ、インドラよ。	그대를 환희시키기 위해, 사랑을 가지고 따라졌다, 인드라야.	fix	lookup
+dict:jisjk:240449	「其方は常にツェントの剣であるダンケルフェルガーとしての誇りを忘れず」	「그대는 항상 젠트의 검인 단케르페르가로서의 자랑을 잊지 않고」	fix	lookup
+dict:jisjk:240449	其方は我が柴田家の嫡男なのだから、常に武芸を磨け	그대는 우리 시바타가의 적장자니까, 항상 무예를 닦아라	fix	lookup
+dict:jisjk:200790	其方此方	사방	keep	lookup
+cx:archaic-pronoun:10	余の定義に異議があるか？	짐의 정의에 이의가 있을까?	fix	rewrites
+cx:archaic-pronoun:10	……ところで貴様、いつから余の眷属になった？	……그런데 네놈, 언제부터 짐의 친족이 됐어?	fix	rewrites
+cx:archaic-pronoun:10	十年余の歳月	!rule:cx:archaic-pronoun:10	keep	rewrites
+cx:archaic-pronoun:10	百余の国	!rule:cx:archaic-pronoun:10	keep	rewrites
+phrase:余は	余は王である。	짐은 왕이다.	keep	builtin-phrase
+cx:archaic-pronoun:10	「余の申したことを覚えておるであろう？」	「짐이 말씀드린 것을 기억하고 있겠지?」	fix	rewrites
+cx:archaic-pronoun:10	余の者どもは下がれ	!rule:cx:archaic-pronoun:10	keep	rewrites

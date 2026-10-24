@@ -453,7 +453,7 @@ bool ValidateCandidate(std::string_view source, int start, int token, const Reco
         const text::Rune r = text::DecodeRune(s);
         return r.size == s.size() && tokenizer::IsSjisHighLead(r.cp);
     };
-    if (WidthOf(surface) != 2 || !highLeadPair(surface)) return true;
+    if (!highLeadPair(surface) || WidthOf(surface) != 2) return true;
     const Window l = Right(prefix, 2), r = Left(tail, 2);
     if (prefix.ends_with("□") || tail.starts_with("□")) return false;
     auto hanja = [&](const Window& s) { return !s.broken && WidthOf(s.text) == 2 && highLeadPair(s.text); };
@@ -482,6 +482,19 @@ std::string_view CanonicalPair(char32_t r, std::string& scratch, bool& cut) {
 }
 
 }  // namespace
+
+bool NounEndAt(std::string_view text) { return NounEnd(text); }
+
+bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal) {
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4') return true;
+    }
+    const std::string noun = std::string(stem) + std::string(nominal);
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(noun, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.ClassDigit() == '1') return true;
+    }
+    return false;
+}
 
 // Rewrites a synthetic target: kanji become their Hangul reading (hanjaToHangul),
 // hiragana, katakana and 、 are written in their canonical forms or dropped
@@ -1015,8 +1028,8 @@ struct DepthScope {
 // The end of the first copy of a unit said two or more times at the start of text
 // (CopiesAt), or 0: there each copy is a word or words of its own, so that an ending or
 // a word of one copy does not take the start of the next (いやだ|いやだ, not いや+だい).
-// A dictionary word that spells two copies or more keeps them (いろいろ, はいはい); after
-// one that spells some of three or more copies the next copy starts (はいはい|はい).
+// A dictionary word that spells all the copies keeps them (いろいろ, はいはい); one that
+// spells only some of them does not (はい|はい|はい).
 std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
     const Copies c = CopiesAt(text);
     if (c.count < 2) return 0;
@@ -1062,19 +1075,23 @@ std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
     // form that goes on there (流れ流れて, 照れ照れに), which the copy alone would misread.
     if (bareStem && tokenizer::Class(text::DecodeRune(text.substr(c.end)).cp) == tokenizer::kClassHiragana) return 0;
     if (!word && !inflected) return 0;
+    // A dictionary word that spells fewer copies than are said straight (好き好き of 好き好き好き,
+    // also where a copy stands right before it) is no reading of the run: each copy is read on its own
+    // when the unit is a word; a unit that is only a stem (そろ of そろそろ) leaves the dictionary
+    // word the first copies.
     if (longest >= 2 * c.unit + c.separator) {
-        if (c.separator == 0 && SpellsCopies(text.substr(0, longest), unit) &&
-            longest / c.unit < static_cast<std::size_t>(c.count)) {
-            return longest;
+        const bool fewer = longest / c.unit < static_cast<std::size_t>(c.count);
+        if (c.separator != 0 || !SpellsCopies(text.substr(0, longest), unit) || !(fewer || before.ends_with(unit))) {
+            return 0;
         }
-        return 0;
+        if (!word) return fewer ? longest : 0;
     }
-    // The next copy is no start of a longer word (抜け、抜け際). The separator stays with
-    // the copy before it.
+    // The next copy is no start of a longer word that reaches past the last copy (抜け、抜け際;
+    // not the stem 好き好 of 好き好む inside 好き好き好き). The separator stays with the copy before it.
     const std::size_t next = c.unit + c.separator;
     if (const Lookup l = DoLookup(text.substr(next), kModeGeneral); l.count != 0) {
         for (const Record* r = l.records; r != nullptr; r = r->child) {
-            if (r->source.size() > c.unit && !SpellsCopies(r->source, unit)) return 0;
+            if (r->source.size() > c.unit && next + r->source.size() > c.end && !SpellsCopies(r->source, unit)) return 0;
         }
     }
     return next;

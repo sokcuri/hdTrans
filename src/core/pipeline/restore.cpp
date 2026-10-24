@@ -7,9 +7,12 @@
 #include <vector>
 
 #include "core/dict/builtin.h"
+#include "core/dict/classes.h"
 #include "core/dict/tsv.h"
+#include "core/pipeline/runes.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/tokenizer/canonical.h"
 
@@ -584,6 +587,100 @@ std::string RetortIdioms(std::string_view line) {
     return out;
 }
 
+namespace {
+
+// The runes of s with their byte offsets.
+struct RuneAt {
+    char32_t cp;
+    std::size_t at;
+};
+std::vector<RuneAt> RunesAt(std::string_view s) {
+    std::vector<RuneAt> rs;
+    for (std::size_t i = 0; i < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(i));
+        rs.push_back({r.cp, i});
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return rs;
+}
+
+// A run of laughing letters in rs: [start, end).
+struct LaughRun {
+    std::size_t start, end;
+};
+
+// The runs of mark.laughter letters in rs that no Latin letter, digit or one of . / @ _ : touches.
+std::vector<LaughRun> LaughRuns(const std::vector<RuneAt>& rs, std::u32string_view laughs) {
+    auto touches = [](char32_t r) {
+        return ((text::IsLetter(r) || text::IsDigit(r)) && !internal::IsJapaneseRune(r) && !IsSyllable(r)) ||
+               Contains(U"./@_:", r);
+    };
+    std::vector<LaughRun> runs;
+    for (std::size_t i = 0; i < rs.size();) {
+        if (!Contains(laughs, rs[i].cp) || (i > 0 && touches(rs[i - 1].cp))) {
+            i++;
+            continue;
+        }
+        std::size_t end = i;
+        while (end < rs.size() && Contains(laughs, rs[end].cp)) end++;
+        if (end == rs.size() || !touches(rs[end].cp)) runs.push_back({i, end});
+        i = end;
+    }
+    return runs;
+}
+
+}  // namespace
+
+std::string WriteLaughter(std::string_view line, std::string_view source) {
+    bool any = false;
+    for (const std::string_view m : dict::ClassMembers("mark.laughter")) any = any || line.find(m) != std::string_view::npos;
+    if (!any) return std::string(line);
+    std::u32string laughs, before;
+    for (const std::string_view m : dict::ClassMembers("mark.laughter")) laughs += text::DecodeRune(m).cp;
+    for (const std::string_view m : dict::ClassMembers("mark.before-laughter")) before += text::DecodeRune(m).cp;
+    const std::string_view korean = dict::ClassMembers("ko.laughter").front();
+    const char32_t koreanRune = text::DecodeRune(korean).cp;
+    auto particle = [](char32_t r) {
+        std::string one;
+        text::AppendRune(one, r);
+        return dict::InClass("particle.after-letter", one);
+    };
+    // Whether the source run is a letter used as a word: one letter after a kanji, katakana, the
+    // start or a particle, before a particle (変数wの値), or after a particle before kanji or
+    // katakana (のwキー).
+    const std::vector<RuneAt> src = RunesAt(source);
+    std::vector<bool> words;
+    for (const LaughRun& run : LaughRuns(src, laughs)) {
+        const char32_t p = run.start == 0 ? 0 : src[run.start - 1].cp;
+        const char32_t n = run.end == src.size() ? 0 : src[run.end].cp;
+        const bool after = p == 0 || p == U' ' || internal::IsKanjiRune(p) || internal::IsKatakanaRune(p) || particle(p);
+        words.push_back(run.end - run.start == 1 && after &&
+                        (particle(n) || (particle(p) && (internal::IsKanjiRune(n) || internal::IsKatakanaRune(n)))));
+    }
+    const std::vector<RuneAt> rs = RunesAt(line);
+    const std::vector<LaughRun> runs = LaughRuns(rs, laughs);
+    const bool aligned = runs.size() == words.size();
+    std::string out;
+    std::size_t copied = 0;  // bytes of line written to out
+    for (std::size_t k = 0; k < runs.size(); k++) {
+        const LaughRun& run = runs[k];
+        std::size_t prev = run.start;
+        while (prev > 0 && rs[prev - 1].cp == U' ') prev--;
+        const bool opens = prev == 0;
+        const char32_t p = opens ? 0 : rs[prev - 1].cp;
+        const char32_t n = run.end < rs.size() ? rs[run.end].cp : 0;
+        const bool after = opens || IsSyllable(p) || p == koreanRune || Contains(before, p);
+        const bool word = (aligned && words[k]) || (opens && IsSyllable(n));
+        if (!after || word) continue;
+        out.append(line, copied, rs[run.start].at - copied);
+        for (std::size_t i = run.start; i < run.end; i++) out += korean;
+        copied = run.end < rs.size() ? rs[run.end].at : line.size();
+    }
+    if (copied == 0) return std::string(line);
+    out.append(line, copied, std::string_view::npos);
+    return out;
+}
+
 RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBrackets, bool literalCleanup) {
     RestoreSteps st;
     st.spaced = DropAddedSpaces(typed, cleaned);
@@ -592,8 +689,10 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
-    st.line = UnescapePrivateUse(DropEchoedGlosses(DropParticleMarks(
-        WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))));
+    st.line = UnescapePrivateUse(WriteLaughter(
+        DropEchoedGlosses(DropParticleMarks(
+            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))),
+        output::String(typed)));
     if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;
 }
