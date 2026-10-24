@@ -88,6 +88,8 @@
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
+//= noun.honored-person	Nouns of the people a shop or a host speaks to or of: after ご, a verbal noun and の they are the ones who did it (ご予約のお客様 예약하신 손님, ご参加の皆様 참가하신 여러분).
+//= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
@@ -1190,6 +1192,30 @@ noun.do-angle	摂氏
 noun.do-angle	華氏
 noun.do-angle	零下
 noun.do-angle	氷点下
+noun.honored-person	お客様
+noun.honored-person	お客さま
+noun.honored-person	お客さん
+noun.honored-person	客様
+noun.honored-person	方
+noun.honored-person	方々
+noun.honored-person	皆様
+noun.honored-person	皆さま
+noun.honored-person	皆さん
+noun.honored-person	みなさま
+noun.honored-person	みなさん
+noun.honored-person	皆
+noun.honorific-ongoing	利用
+noun.honorific-ongoing	希望
+noun.honorific-ongoing	使用
+noun.honorific-ongoing	検討
+noun.honorific-ongoing	愛用
+noun.honorific-ongoing	在住
+noun.honorific-ongoing	在籍
+noun.honorific-ongoing	所有
+noun.honorific-ongoing	所持
+noun.honorific-ongoing	加入
+noun.honorific-ongoing	滞在
+noun.honorific-ongoing	視聴
 
 noun.inside-medium	水
 noun.inside-medium	口

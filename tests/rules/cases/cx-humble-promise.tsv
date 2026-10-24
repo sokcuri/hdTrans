@@ -1,0 +1,20 @@
+# 규칙: SPC-5, SPC-10
+rule	input	expected	kind	layer
+cx:humble-promise:30	された方のために軽く説明させていただきますね	된 편을 위해 가볍게 설명할게요	fix	rewrites
+cx:humble-promise:30	ご一緒させていただきますね	함께 할게요	fix	rewrites
+cx:humble-promise:30	お夕飯をご準備させていただきますね	저녁을 준비할게요	fix	rewrites
+cx:humble-promise:30	お側でお仕事をサポートさせていただきますね	곁에서 일을 서포트할게요	fix	rewrites
+cx:humble-promise:30	香取が秘書を務めさせていただきますね	카토리가 비서를 맡을게요	fix	rewrites
+cx:humble-promise:30	ご夕食も私がご用意させていただきますね	저녁식사도 제가 준비할게요	fix	rewrites
+cx:humble-promise:30	後ほど正式に依頼をさせていただきますね	잠시 후에 정식으로 의뢰를 할게요	fix	rewrites
+cx:humble-promise:10	私がお手伝いさせていただきますね	제가 도와 드릴게요	fix	rewrites
+cx:humble-promise:20	お手伝いさせていただきます	도와 드리겠습니다	fix	rewrites
+cx:humble-promise:20	お手伝いさせていただきました	도와 드렸습니다	fix	rewrites
+cx:humble-promise:30	本日は私がサポートさせていただきます	오늘은 제가 서포트하겠습니다	keep	rewrites
+cx:humble-promise:30	そろそろ失礼させていただきます	슬슬 실례하겠습니다	keep	rewrites
+cx:humble-promise:30	討論会のルールを説明させていただきます	토론회의 룰을 설명하겠습니다	keep	rewrites
+cx:humble-promise:30	「お茶を淹れますね」	「차를 끓이네요」	keep	rewrites
+cx:humble-promise:30	「先に行きますね」	「먼저 가네요」	keep	rewrites
+cx:humble-promise:20	ご挨拶させていただいております	!rule:cx:humble-promise:20	keep	rewrites
+cx:humble-promise:10	お手伝いさせていただきます	!rule:cx:humble-promise:10	keep	rewrites
+cx:humble-promise:10	私がお手伝いさせていただいてもよろしいですか？	!rule:cx:humble-promise:10	keep	rewrites
