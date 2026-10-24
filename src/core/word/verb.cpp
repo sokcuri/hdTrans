@@ -654,6 +654,40 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
+    // A past form whose た is the て before あげる with its あ dropped (作ったげる, 見せたげよう): the
+    // kana after the た are the ichidan forms of あげる without it, written for 주 after the て
+    // form (6 줄게). Without an ending of its own the form takes the empty ending below.
+    std::string_view auxHead;
+    if (ending == nullptr && base.kind == 6 && w->settings.text && queryAllowed &&
+        Conjugation(base.patternKind, 7).size() == Conjugation(base.patternKind, 6).size()) {
+        const std::size_t stem = StartLength(rest, dict::ClassMembers("contraction.te-ageru"));
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.benefactive-head");
+        const std::string_view form = rest.substr(stem);
+        int branch = 0;
+        while (branch < kConjugationBranches && !form.starts_with(Conjugation(7, branch))) branch++;
+        for (int later = 9; branch == 8 && later < kConjugationBranches; later++) {
+            const std::string_view e = Conjugation(7, later);
+            if (later != 11 && later != 12 && later != 13 && !e.empty() && form.starts_with(e)) branch = later;
+        }
+        if (stem > 0 && !head.empty() && branch < kConjugationBranches) {
+            const int pastWidth = patternWidth;
+            patternWidth += WidthOf(rest.substr(0, stem)) + WidthOf(Conjugation(7, branch));
+            base.patternKind = 7;
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else if (after().empty() || Classify(after()) != 0) {
+                auxHead = head.front();
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = pastWidth;
+                base.patternKind = oldKind;
+                base.kind = 6;
+            }
+        }
+    }
+
     if (ending == nullptr) {
         if (following != nullptr && base.patternKind == 7 && base.kind == 8) {
             if (Has(GAttr(0), "Ke") && !(!two.Empty() && Classify(two) != 0)) return false;
@@ -691,6 +725,10 @@ bool Item::AcceptVerbContinuation(Record* following) {
         for (int index = 0; index < static_cast<int>(ending->entries.size()); index++) {
             if (applies(*ending->entries[static_cast<std::size_t>(index)])) base.group = ending;
             else base.enabled[index] = false;
+        }
+        if (!auxHead.empty() && !ProgressiveEndings(*ending, base, auxHead)) {
+            base.group = nullptr;
+            return false;
         }
     }
 

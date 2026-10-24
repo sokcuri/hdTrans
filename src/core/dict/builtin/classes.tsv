@@ -20,6 +20,7 @@
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
 //= contraction.te-irassharu	Starts of the text after a て form that are the いらっしゃる after it contracted (ついてらっしゃい, 気に入ってらっしゃる).
 //= contraction.ra-less-kuru	The forms of the potential of くる without its ら that follow a て form (帰ってこれた, ついてこれる, 戻ってこれました); not これなら or これまで, where これ is the pronoun.
+//= contraction.te-ageru	The start of the あげる after a て form said with its あ dropped, its て then said た (作ったげる, 見せたげよう, 読んだげる).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
@@ -82,6 +83,7 @@
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
+//= ko.benefactive-head	The Korean of the あげる after a て form whose あ is dropped (作ったげる 만들어 줄게), ending in the marker family that the ending after it conjugates.
 //= ko.progressive-head	The Korean of the いる after a て form whose い is dropped (見てた 보고 있었다), ending in the marker family that the ending after it conjugates.
 //= ko.progressive-honorific-head	The same for いらっしゃる (見てらっしゃる 보고 계시다).
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
@@ -413,6 +415,8 @@ contraction.ra-less-kuru	これまし
 contraction.ra-less-kuru	これれば
 contraction.ra-less-kuru	これず
 contraction.ra-less-kuru	これそう
+
+contraction.te-ageru	げ
 
 contraction.te-iku-final	って
 contraction.te-iku-final	け
@@ -1223,6 +1227,8 @@ ko.doing	될
 ko.doing	된
 ko.doing	됐
 ko.doing	돼
+
+ko.benefactive-head	6 &CJ@
 
 ko.progressive-head	1고 &HN@
 

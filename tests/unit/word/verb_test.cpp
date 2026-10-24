@@ -362,7 +362,8 @@ HD_TEST(word_su_verb_passive_guard) {
     HD_CHECK(!worker.SuVerb("が"));
 }
 
-// The form of いる without its い after a て form, and the endings read on it and on いらっしゃる.
+// The form of いる without its い after a て form, and the endings read on it, on いらっしゃる and on
+// あげる.
 HD_TEST(verb_contracted_iru) {
     const std::pair<std::string_view, int> branches[] = {
         {"たが", 6}, {"たんだろ", 6}, {"るぞ", 0}, {"てね", 7}, {"ろ", 11}, {"ればいい", 3},
@@ -391,6 +392,14 @@ HD_TEST(verb_contracted_iru) {
     hd.enabled.assign(1, 1);
     HD_CHECK(word::ProgressiveEndings(h, hd, "1고 계&AE@"));
     HD_CHECK_EQ(honorific.dst, std::string("1고 계셨다"));
+    word::Entry benefactive;
+    benefactive.dst = "2니까";
+    word::Group b;
+    b.entries = {&benefactive};
+    word::Detail bd;
+    bd.enabled.assign(1, 1);
+    HD_CHECK(word::ProgressiveEndings(b, bd, "6 &CJ@"));
+    HD_CHECK_EQ(benefactive.dst, std::string("6 주니까"));
 
     word::Entry none;
     none.dst = "";
