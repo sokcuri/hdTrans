@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Judge changed Japanese/Korean line pairs through the Anthropic Messages API.
 
-Usage: tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS.txt] [--effort low|high]
+Usage: tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS.txt] [--effort low|high] [--grade]
 PAIRS.tsv has key, ja, old, new (no header); OUT.tsv appends key, verdict, model.
+--grade grades the old column alone (correct, minor or wrong) instead of comparing it with new,
+as tools/audit.py expects.
 Completed keys for the same model are skipped on restart. Credentials stay in the
 ANTHROPIC_AUTH_TOKEN (Bearer) or ANTHROPIC_API_KEY environment variable.
 """
@@ -21,22 +23,28 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 
-SCHEMA = {
-    "type": "object",
-    "properties": {"verdicts": {"type": "array", "items": {
+def schema(field, values):
+    return {
         "type": "object",
-        "properties": {"id": {"type": "integer"},
-                       "better": {"type": "string", "enum": ["X", "Y", "same"]}},
-        "required": ["id", "better"], "additionalProperties": False}}},
-    "required": ["verdicts"], "additionalProperties": False,
-}
+        "properties": {"verdicts": {"type": "array", "items": {
+            "type": "object",
+            "properties": {"id": {"type": "integer"},
+                           field: {"type": "string", "enum": list(values)}},
+            "required": ["id", field], "additionalProperties": False}}},
+        "required": ["verdicts"], "additionalProperties": False,
+    }
 
 
-def ask(prompt, model, effort, url, headers, size):
+COMPARE = ("better", ("X", "Y", "same"))
+GRADE = ("grade", ("correct", "minor", "wrong"))
+
+
+def ask(prompt, model, effort, url, headers, size, kind=COMPARE):
+    field, values = kind
     body = json.dumps({
         "model": model, "max_tokens": 16000,
         "output_config": {"effort": effort,
-                          "format": {"type": "json_schema", "schema": SCHEMA}},
+                          "format": {"type": "json_schema", "schema": schema(field, values)}},
         "messages": [{"role": "user", "content": prompt}],
     }).encode()
     for attempt in range(6):
@@ -51,7 +59,7 @@ def ask(prompt, model, effort, url, headers, size):
             ids = [v["id"] for v in verdicts]
             if (len(ids) != size or any(type(i) is not int for i in ids)
                     or set(ids) != set(range(size))
-                    or any(v["better"] not in ("X", "Y", "same") for v in verdicts)):
+                    or any(v[field] not in values for v in verdicts)):
                 raise ValueError("incomplete or invalid judge verdicts")
             return verdicts
         except urllib.error.HTTPError as error:
@@ -74,6 +82,7 @@ def main():
     parser.add_argument("--only", type=Path, metavar="KEYS.txt")
     parser.add_argument("--effort", choices=("low", "high"),
                         default=os.environ.get("JUDGE_EFFORT", "low"))
+    parser.add_argument("--grade", action="store_true")
     args = parser.parse_args()
     if args.effort not in ("low", "high"):
         parser.error("JUDGE_EFFORT must be low or high")
@@ -114,6 +123,24 @@ def main():
         parser.error("set ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY")
     lock = threading.Lock()
 
+    def grade(batch):
+        lines = [
+            "Japanese lines, each out of its context, with a Korean machine translation. Grade each "
+            "translation: correct when it is a faithful, natural Korean rendering a reader would "
+            "accept as is; minor when the meaning is right but a particle, ending, spacing, word "
+            "choice or register is visibly off; wrong when meaning is lost, changed or added, "
+            "Japanese is left untranslated, or the Korean is garbled or ungrammatical. "
+            "Loanword transliterations are acceptable, and a reading that could be right in some "
+            "context is not an error.", "",
+        ]
+        for i, (_, ja, out, _) in enumerate(batch):
+            lines += [f"[{i}] JA: {ja}", f"KO: {out}", ""]
+        verdicts = ask("\n".join(lines), args.model, args.effort, url, headers, len(batch), GRADE)
+        result = [(batch[v["id"]][0], v["grade"], args.model)
+                  for v in sorted(verdicts, key=lambda v: v["id"])]
+        with lock, args.out.open("a", encoding="utf-8", newline="") as output:
+            csv.writer(output, delimiter="\t", lineterminator="\n").writerows(result)
+
     def run(batch):
         rnd = random.Random(hashlib.md5(batch[0][0].encode()).hexdigest())
         lines = [
@@ -141,7 +168,7 @@ def main():
 
     batches = [rows[i:i + 10] for i in range(0, len(rows), 10)]
     with ThreadPoolExecutor(8) as executor:
-        list(executor.map(run, batches))
+        list(executor.map(grade if args.grade else run, batches))
 
 
 if __name__ == "__main__":

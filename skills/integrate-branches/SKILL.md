@@ -67,8 +67,13 @@ Conflict policy:
    ```
 3. `tools/shadow.py <base>`. Only warnings on lines the integration added or edited count.
 4. Measure the integration against the base build and each branch's run (fix-translation step 11).
-   - Judge every line that no single branch changed, which means only the combination produced it,
-     and every line where two branches disagree (fix-translation step 12).
+   - Judge, blind, every line that no single branch changed, which means only the combination
+     produced it, and every line where two branches disagree (fix-translation step 12).
+     `tools/new-pairs.py OUT.tsv INTEGRATION.pairs.tsv <branch pairs>...` keeps the first kind: it
+     drops a line a branch already judged with the same before and after. Add the second kind with
+     `tools/new-pairs.py --differ DIFF.tsv INTEGRATION.pairs.tsv <branch pairs>...`: keys that two
+     branch pair files hold with different after, even when the integration matches one. The two
+     can overlap, so judge `OUT.tsv` and what `tools/new-pairs.py MORE.tsv DIFF.tsv OUT.tsv` keeps.
    - The same thresholds apply: improved:worse at least 2:1, and chrF not lower than the base.
 5. `tools/hygiene.py <base>` covers markers, stray paths, absolute paths and instruction wording
    over the whole diff and its messages.

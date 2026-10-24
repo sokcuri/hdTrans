@@ -16,8 +16,17 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
 - `tools/gate.sh` prints `GATE OK`.
 - `tools/shadow.py` reports no new warning.
 - If the tree has `mac-asan` or `linux-asan` presets, the sanitizer ctest passes too.
-- Translation changes were measured and every changed line was judged (fix-translation steps
-  11–12). Keep the numbers for the PR body.
+- Translation changes were measured and every changed line was judged blind by judges that did not
+  write the change (fix-translation steps 11–12). Keep the numbers for the PR body.
+- For a develop → main promotion, run the cycle check (section 2) on the develop head and judge
+  its new lines; the lines of earlier checks are already judged. Report the cycle totals since
+  the last release (changed, improved, same, worse; docs/testing.md "주기 누적 확인").
+- For a develop → main promotion, run the error-rate audit on the develop head (docs/testing.md
+  "오류율 감사"): `tools/measure.sh` on all four sets, `tools/audit.py draw` with the default seed and
+  size, grade every line, `tools/audit.py rate`. Lines, grades and rates stay in
+  `$HDTRANS_WORK/audit/<version>/`.
+  Report wrong % and not-correct % per set next to the sample chrF, with the previous release's
+  numbers from its audit folder.
 - `tools/hygiene.py <remote>/develop` has no real hit. Read the PR title and body for the same things.
 
 ## Merging any PR
@@ -39,6 +48,17 @@ gh pr checks N
 
 ## 2. Work branch → develop
 
+A PR that changes translations is measured against the develop it branched from, so PRs merged in
+the same cycle can interact (docs/testing.md "주기 누적 확인"). Before merging such a PR, if develop
+moved since it was measured:
+
+1. Rebase the branch on the current develop and rebuild.
+2. Measure it against a run of the current develop head, built in its own worktree:
+   `tools/measure.sh -b develop-<short sha> <branch>`.
+3. Judge, blind, only the lines `tools/new-pairs.py OUT.tsv <set>.pairs.tsv <earlier pairs of this
+   PR>...` keeps. A line two judges call worse blocks the merge, as in fix-translation step 12.
+4. Push the rebased branch and wait for its checks again.
+
 ```sh
 git push -u <remote> <branch>
 gh pr create --base develop --title 'fix(<scope>): <summary>' --body-file body.md --milestone X.Y.Z
@@ -50,6 +70,12 @@ gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain s
   improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
 - The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
+
+After merging a PR that changes translations, run the cycle check: measure the merge commit of
+develop against the run of the last release tag on all four sets, with the runs in
+`$HDTRANS_WORK/cycle/<next version>/`, keep only the lines no earlier check of the cycle judged
+(`tools/new-pairs.py`), and judge them blind into that check's `final.tsv`. The release review
+then judges only what changed since the last check.
 
 ## 3. develop → main
 
