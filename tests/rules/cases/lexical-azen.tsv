@@ -1,0 +1,9 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:w:13879	まるで遊びに行くような雰囲気に唖然とする。	마치 놀러 가는 것 같은 분위기에 아연실색한다.	fix	lookup
+dict:w:13879	唖然とする佳奈すけ。	아연실색하는 카나스케.	fix	lookup
+dict:w:13879	唖然とした顔になる凪。	아연실색한 얼굴이 되는 지.	fix	lookup
+dict:w:13879	唖然として見送る。	아연실색하고 배웅한다.	fix	lookup
+dict:w:13879	そして唖然とした後に感嘆する。	그리고 아연실색한 후에 감탄한다.	fix	lookup
+dict:w:13879	執事のエスパーダまでが唖然として固まった。	집사의 에스파다까지가 아연실색해 굳어졌다.	fix	lookup
+dict:w:13879	私は口を唖然と開けた。	나는 입을 아연하게 열었다.	keep	lookup

@@ -11,7 +11,7 @@ lookup:te-imperative	「待て！」	「기다려!」	keep	lookup
 conjugation:potential-imperative	「さっさと食えよ」	「빨리 먹어」	fix	conjugation
 conjugation:potential-imperative	「先に言えよ」	「먼저 말해」	fix	conjugation
 conjugation:potential-imperative	「お前ももっと飯食えよ」	「너도 좀 더 밥 먹어」	fix	conjugation
-conjugation:potential-imperative	「なんとか言えよ！」	「어떻게든 말해!」	fix	conjugation
+conjugation:potential-imperative	「なんとか言えよ！」	「뭐라고 말해!」	fix	conjugation
 conjugation:potential-imperative	「本道を行けよ」	「정도를 가」	fix	conjugation
 conjugation:potential-imperative	「遠慮なく言えよ。」	「거리낌 없이 말해.」	fix	conjugation
 conjugation:potential-imperative	「会いに行けよ」	「만나러 가」	fix	conjugation

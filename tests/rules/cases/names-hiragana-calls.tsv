@@ -1,0 +1,21 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+constraint:cued-name	つむぎ、こっちに来て。	츠무기, 여기에 와.	fix	lookup
+constraint:cued-name	「わたし、つむぎです」	「저, 츠무기입니다」	fix	lookup
+constraint:cued-name	「あ、あの……としょ、図書部、部長の……白崎、つぐみです……」	「그, 그……도서, 도서부, 부장의……시라사키, 츠구미입니다……」	fix	lookup
+constraint:cued-name	……つぐみ、悪い。	……츠구미, 미안하다.	fix	lookup
+constraint:cued-name	「く……つぐみ、そろそろ……っ」	「크……츠구미, 슬슬……」	fix	lookup
+constraint:cued-name	「みちる、待って」	「미치루, 기다려」	fix	lookup
+constraint:cued-name	「わたし、みちるです」	「저, 미치루입니다」	fix	lookup
+constraint:cued-name	「みちる様……」	「미치루님……」	fix	lookup
+constraint:cued-name	「ここをタップするんですよ、みちる様」	「여기를 탭하는 거예요, 미치루님」	fix	lookup
+constraint:cued-name	「周防天音さんに松嶋みちるさん。それと入巣蒔菜さんと小嶺幸さんですよね？」	「스오 아마네 씨에게 마츠시마 미치루 씨. 그것과 이리스 마키나 씨와 고미네 사치 씨군요?」	fix	lookup
+constraint:cued-name	「さより、学校はもう慣れた？」	「사요리, 학교는 벌써 익숙해졌어?」	fix	lookup
+constraint:cued-name	ん？しおん、行けます、よ？	응? 시온, 갈 수 있습니다,?	fix	lookup
+constraint:cued-name	秘めたる力をつむぎ出す！！	은밀한인 힘을 뽑기 시작한다!!	keep	lookup
+constraint:cued-name	糸をつむぎ、布を織る。	실을 뽑고, 천을 짠다.	keep	lookup
+constraint:cued-name	「じゃあ……いくよ、未散……」	「그럼……가, 미치루……」	keep	lookup
+constraint:cued-name	いつか、千里はトラウマから、解放される日が来るんだろうか？	언젠가, 천리는 트라우마로부터, 해방되는 날이 오는 걸까?	keep	lookup
+constraint:cued-name	It's 7 o'clock now. Hi, Victorious! ここね、Pub Mamiya! 楽しみだわ。	It's 7 o'clock now. Hi, Victorious! 여기네, Pub Mamiya! 기다려지구나.	keep	lookup
+constraint:cued-name	……！？きみか、D区画の！	……!? 너인가, D구획!	keep	lookup
+constraint:cued-name	「では圭一さんは私と同じではございませんこと？「お花見」ですのよ！」	「그럼 케이이치 씨는 저와 같은 거 이지 않습니다 일? 「꽃놀이」예요!」	keep	lookup

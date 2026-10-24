@@ -43,3 +43,10 @@ cx:ne-promise:22	毎日猫にご飯をあげますね	lacks:줄게요	keep	rewri
 cx:ne-promise:22	母は毎朝花に水をやりますね	lacks:줄게요	keep	rewrites
 cx:humble-give:34	もうすぐこの会場にご到着します	lacks:드리	keep	rewrites
 cx:humble-give:24	お台所お借りします	lacks:드리	keep	rewrites
+conjugation:godan-causative	真帆を迷わせているのは、俺だ。	lacks:수 있	fix	lookup
+conjugation:godan-causative	舌を絡ませていく。	lacks:수 있	fix	lookup
+conjugation:godan-causative	『馬車？』を引かせていた巨大なトカゲ	lacks:수 있	fix	lookup
+conjugation:godan-causative	その瞬間を逃さずに、舌を滑り込ませる。	lacks:수 있	fix	lookup
+conjugation:godan-causative	「あと何日か通わせてもらえると嬉しい」	has:다니게 해	fix	lookup
+conjugation:godan-causative	よし。左肩は痛むけど、何とか動かせる。	has:움직일 수 있다	keep	lookup
+conjugation:godan-causative	≪いいから、飛ばせるだけ飛ばして≫	has:날릴 수 있을	keep	lookup

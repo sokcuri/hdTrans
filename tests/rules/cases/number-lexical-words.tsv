@@ -74,7 +74,7 @@ dict:jisjk:1859	大型高速駆逐艦、その級の一番艦です。	rule:dict
 # 맞는 출력: 일반적으로 어엿하다고 불리는 마술사는,
 dict:number-lexical-words	一般的に一人前と呼ばれている魔術師は、	일반적으로 한 사람 몫으로 불리고 있는 마술사는,	current	defaults
 # 맞는 출력: 한 사람 몫을 하기에는 아직 멀었습니다만
-dict:number-lexical-words	一人前にはまだほど遠いでありますが	한 사람 몫에게는 아직 멀고 있습니다만	current	defaults
+dict:number-lexical-words	一人前にはまだほど遠いでありますが	한 사람 몫에게는 아직 멉니다만	current	defaults
 # 맞는 출력: 일등을 목표로 할 거야~!
 dict:jisjk:1859	一番目指すよー！	첫번째 가리켜~!	current	defaults
 dict:number-lexical-words	また…私が一番先なの？	또…내가 맨 앞이야?	fix	defaults

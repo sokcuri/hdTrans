@@ -39,7 +39,7 @@ dict:gram:to:tari-comma	彼女は呆然と、本日2度目の呟きを吐き出�
 dict:gram:to:tari-comma	彼女は颯爽と、廊下を歩いていった。	그녀는 씩씩하게, 복도를 걸어갔다.	fix	local
 dict:gram:toshite:tari	愕然として言葉を失う。	아연실색하게 말을 잃는다.	fix	local
 dict:gram:toshite:tari	学生として当然だ。	학생으로서 당연하다.	keep	local
-dict:gram:toshite:adverb	執事までが唖然として固まった。	집사까지가 아연하게 굳어졌다.	fix	local
+dict:gram:toshite:adverb	執事までが唖然として固まった。	집사까지가 아연실색해 굳어졌다.	fix	local
 dict:gram:taru:tari	これぞまさに搭乗者の歴然たる差ってやつ？	이거야 그야말로 탑승자의 역력한 차이라는 녀석?	fix	local
 dict:gram:taru:tari	学生たる者。	학생인 사람.	keep	local
 dict:gram:dato:focus-quote	社交界に入るのが当たり前だとしか思っていなかった。	사교계에 들어가는 것이 당연하다고밖에 생각하지 않았다.	fix	local-ending

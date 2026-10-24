@@ -144,6 +144,17 @@ bool HiraganaPredicate(const dict::Snapshot& snap, std::string_view key) {
     return false;
 }
 
+// Whether a hiragana key may be a name that introduces itself or is called: no word of the
+// dictionary (いつか、, ですの) and no word or plain predicate closed by a final particle (ここね、,
+// きみか、, いくよ、).
+bool HiraganaCall(const dict::Snapshot& snap, std::string_view key) {
+    if (snap.DictionaryWord(key)) return false;
+    const text::Rune last = RuneBefore(key, key.size());
+    const std::string_view rest = key.substr(0, key.size() - last.size);
+    return !(InRunes(last.cp, "かよぞぜわねなさ") &&
+             (snap.DictionaryWord(rest) || InRunes(RuneBefore(rest, rest.size()).cp, "うくぐすつぬぶむるい")));
+}
+
 // Whether what follows a word after a title ends a name there: a mark or the end, a bracket, a
 // particle, a copula, a self-introduction, a suffix or an honorific (駆逐艦時雨、, 戦艦大和です;
 // not 海防艦計3隻).
@@ -380,9 +391,23 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         const bool hiragana = internal::AllRunes(key, IsHiragana);
         // A kana name is a whole run of its script, a hiragana one of three kana or more.
         if ((katakana && (IsKatakana(last) || IsKatakana(next))) ||
-            (hiragana && (IsHiragana(last) || text::RuneCount(key) < 3 || HiraganaPredicate(snap, key)))) {
+            (hiragana && (IsHiragana(last) || text::RuneCount(key) < 3))) {
             i += step;
             continue;
+        }
+        // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
+        // called at the start of an utterance (つむぎ、こっちに来て). Only these cues make a name of
+        // one that starts a verb or an adjective (つむぎ, つぐみ).
+        if (hiragana) {
+            if (HiraganaCall(snap, key) &&
+                (IntroductionAt(TrimEndSpaces(before).ends_with("、") ? std::string_view() : before, after, true) ||
+                 (UtteranceStart(before) && after.starts_with("、")))) {
+                add(key, false);
+            }
+            if (HiraganaPredicate(snap, key)) {
+                i += step;
+                continue;
+            }
         }
         // A word right after a number is a counter (32駆改二).
         if (InRunes(last, kNumerals)) {

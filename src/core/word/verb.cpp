@@ -407,6 +407,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     const bool shortCausativePassive = w->settings.text && w->settings.improvements.causativePassive && !matched &&
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
+    if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
     if (!matched && (oldState == 1 || oldState == 2 || oldState == 4 || shortCausativePassive)) {
         base.record = oldState;
         adjusted = true;
