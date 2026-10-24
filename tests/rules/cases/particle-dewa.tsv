@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:jisjk:202009	私では勝てません。	저로는 이길 수 없습니다.	fix	local
-dict:jisjk:202009	それぐらいでは怯えたりしません。	그것 정도로는 무서워하거나 하지 않습니다.	fix	local
+dict:jisjk:202009	それぐらいでは怯えたりしません。	그 정도로는 무서워하거나 하지 않습니다.	fix	local
 dict:jisjk:202009	日が昇る前では、迷惑だ。	해가 뜨기 전에는, 성가시다.	fix	local
 dict:jisjk:202009	ここからでは見えない。	여기에서는 안 보인다.	fix	local
 dict:jisjk:202009	私ではない。	내가 아니다.	keep	local

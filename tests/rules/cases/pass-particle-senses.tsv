@@ -52,13 +52,11 @@ cx:particle-in-next:10	水泳部なだけに	수영부인 만큼	fix	rewrites
 cx:particle-in-next:10	人気なだけに	인기인 만큼	fix	rewrites
 cx:particle-in-next:10	学生だけに話す。	학생에게만 이야기한다.	keep	rewrites
 cx:hodo-degree:20	武装も哀れなほどに貧弱で	무장도 불쌍할 정도로 빈약해	fix	rewrites
-cx:hodo-degree:30	耳が痛い程の沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
-cx:hodo-degree:30	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
-cx:hodo-degree:20	その肩は痛ましい程に震えていて	그 어깨는 참혹할 정도로 떨고 있어	fix	rewrites
+cx:hodo-degree:30	さすがに苦しくなるほどの緊張はなくなった	아무래도 괴로울 정도의 긴장은 없어졌다	fix	rewrites
+cx:hodo-degree:30	喉をかきむしりたくなるほどの熱	목을 쥐어뜯고 싶을 정도의 열	fix	rewrites
+cx:hodo-degree:20	目眩がしそうな程に染みこんで	현기증이 날 것 같을 정도로 스며들어	fix	rewrites
 cx:hodo-degree:30	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 cx:hodo-degree:30	三日ほど休んだ。	3일 정도 쉬었다.	keep	rewrites
-cx:hodo-degree:10	血を吐く程に重苦しい声だった。	피를 토할 정도로 답답한 목소리였다.	fix	rewrites
-cx:hodo-degree:10	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 cx:hodo-degree:20	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 cx:kara-source:10	次からは本気だからね。	다음부터는 진심이니까.	fix	rewrites
 cx:kara-source:10	生まれた時からほぼ決まっている。	태어났을 때부터 거의 정해져 있다.	fix	rewrites

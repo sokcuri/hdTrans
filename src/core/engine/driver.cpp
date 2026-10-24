@@ -18,11 +18,13 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
+#include "core/pipeline/runes.h"
 #include "core/pipeline/segment.h"
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/lines.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/util.h"
 
@@ -40,6 +42,84 @@ bool BaseContinues(const void* context, std::string_view base, std::string_view 
         const char cls = c.codes ? c.codes->part.ClassDigit() : '\0';
         return c.source.size() >= base.size() && (cls == '4' || cls == '7' || cls == '8');
     });
+}
+
+// The dictionary as the line's lookup sees it, for pipeline::RespellVariants.
+struct RespellLookup {
+    const dict::Snapshot& snap;
+    const dict::LookupContext& lookup;
+};
+
+dict::Candidates Find(const RespellLookup& d, std::string_view text) {
+    return d.snap.GetWordInfo(text, dict::LookupMode::General, d.lookup);
+}
+
+bool HasKey(const RespellLookup& d, std::string_view key) {
+    const dict::Candidates found = Find(d, key);
+    return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) { return c.source == key; });
+}
+
+// Whether the candidate is an ending (S, T) or a particle (P) row rather than a word of its own.
+bool Grammar(const dict::Candidate& c) { return c.codes != nullptr && c.codes->part.TagIn("STP"); }
+
+// Words are looked for from up to this many runes before a variant, and the respelled text is
+// looked up with this many bytes after it; a longer key around a variant is not seen.
+constexpr int kLookBackRunes = 4;
+constexpr size_t kLookAheadBytes = 192;
+
+// Whether a dictionary word cuts across line[at, end) or holds it (pipeline::RespellVariants): a word
+// that starts before it and ends inside it, one that starts inside it and ends past it, or one that
+// holds all of it and more (身の程, 先程, ときめく), or a word other than an ending or particle that
+// the respelled text would make before it (ある時 from あるとき). An ending or particle row holding
+// the variant does not keep one respelled in kana when its kana respelling is also a key (程に ほどに).
+bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std::string_view variant,
+                      std::string_view spelling) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const size_t end = at + variant.size();
+    const bool toKana = !text::IsKanji(text::DecodeRune(spelling).cp);
+    const auto keeps = [&](size_t start) {
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            const size_t stop = start + c.source.size();
+            if (stop <= at || (start == at && stop <= end)) continue;
+            if (start > at) {
+                if (stop > end) return true;
+                continue;
+            }
+            if (stop < end || !toKana || !Grammar(c)) return true;
+            std::string respelled(c.source.substr(0, at - start));
+            respelled += spelling;
+            respelled += c.source.substr(end - start);
+            if (!HasKey(d, respelled)) return true;
+        }
+        return false;
+    };
+    size_t first = at;
+    for (int back = 0; back < kLookBackRunes && first > 0; back++) first -= pipeline::internal::LastRune(line.substr(0, first)).size;
+    // The respelled text from first, so that the spelling starts at at - first.
+    std::string respelled(line.substr(first, at - first));
+    respelled += spelling;
+    respelled += line.substr(end, kLookAheadBytes);
+    const size_t spelled = at - first;
+    const auto joins = [&](size_t from) {
+        for (const dict::Candidate& c : Find(d, std::string_view(respelled).substr(from)).list) {
+            if (from + c.source.size() < spelled + spelling.size() || Grammar(c)) continue;
+            std::string original(c.source.substr(0, spelled - from));
+            original += variant;
+            original += c.source.substr(spelled - from + spelling.size());
+            if (!HasKey(d, original)) return true;
+        }
+        return false;
+    };
+    for (size_t start = at;; start -= pipeline::internal::LastRune(line.substr(0, start)).size) {
+        if (start < at && joins(start - first)) return true;
+        if (keeps(start)) return true;
+        if (start == first) break;
+    }
+    for (size_t inner = at + text::DecodeRune(line.substr(at)).size; !toKana && inner < end;
+         inner += text::DecodeRune(line.substr(inner)).size) {
+        if (keeps(inner)) return true;
+    }
+    return false;
 }
 
 auto FallbackOf(const dict::Snapshot& snap) {
@@ -282,7 +362,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), BaseContinues, &snap);
+    std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), BaseContinues, &snap);
+    if (!options.reference) {
+        const RespellLookup respell{snap, ctx.lookup};
+        normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
+    }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
     if (observer.text) observer.text(observer.context, "SN", sounded);
