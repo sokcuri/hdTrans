@@ -1,0 +1,70 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:jisjk:236195	心臓カテーテル法	심장 카테터법	fix	defaults
+dict:jisjk:236195	心臓カテーテル法の検査。	심장 카테터법의 검사.	fix	defaults
+dict:jisjk:236195	心臓カテーテル法を用いる。	심장 카테터법을 이용한다.	fix	defaults
+dict:jisjk:236195	心臓カテーテル法について。	심장 카테터법에 대해.	fix	defaults
+dict:jisjk:236195	心臓移植	심장이식	keep	defaults
+dict:jisjk:236195	心臓外科	심장외과	keep	defaults
+dict:jisjk:236195	心臓カテーテル法の説明。	심장 카테터법의 설명.	fix	defaults
+dict:jisjk:236195	心臓カテーテル法を学ぶ。	심장 카테터법을 배운다.	fix	defaults
+dict:jisjk:236195	心臓カテーテル法の歴史。	심장 카테터법의 역사.	fix	defaults
+dict:jisjk:77059	心身耗弱	심신 미약	fix	defaults
+dict:jisjk:77059	心身耗弱の状態。	심신 미약 상태.	fix	defaults
+dict:jisjk:77059	心身耗弱と判断する。	심신 미약이라고 판단한다.	fix	defaults
+dict:jisjk:77059	心身耗弱を認める。	심신 미약을 인정한다.	fix	defaults
+dict:jisjk:77059	心神耗弱	심신미약	keep	defaults
+dict:jisjk:77059	心身	심신	keep	defaults
+dict:jisjk:77059	心神喪失	심신상실	keep	defaults
+dict:jisjk:77059	心身耗弱の影響。	심신 미약의 영향.	fix	defaults
+dict:jisjk:77059	心身耗弱について。	심신 미약에 대해.	fix	defaults
+dict:jisjk:77059	心身耗弱の原因。	심신 미약의 원인.	fix	defaults
+dict:jisjk:237693	忍冬	인동덩굴	fix	defaults
+dict:jisjk:237693	忍冬の花。	인동덩굴의 꽃.	fix	defaults
+dict:jisjk:237693	忍冬を植える。	인동덩굴을 심는다.	fix	defaults
+dict:jisjk:237693	忍冬が咲く。	인동덩굴이 핀다.	fix	defaults
+dict:jisjk:237693	忍冬文	인동문	keep	defaults
+dict:jisjk:237693	忍冬の葉。	인동덩굴의 잎.	fix	defaults
+dict:jisjk:237693	忍冬の香り。	인동덩굴의 향기.	fix	defaults
+dict:jisjk:237693	忍冬を育てる。	인동덩굴을 기른다.	fix	defaults
+dict:jisjk:39361	忽ち	금세	fix	defaults
+dict:jisjk:39361	忽ち消えた。	금세 사라졌다.	fix	defaults
+dict:jisjk:39361	忽ち広がる。	금세 퍼진다.	fix	defaults
+dict:jisjk:39361	忽ち暗くなった。	금세 어두워졌다.	fix	defaults
+dict:jisjk:39361	忽然	홀연히	keep	defaults
+dict:jisjk:39361	忽ち姿を消す。	금세 자취를 감춘다.	fix	defaults
+dict:jisjk:39361	忽ち人気が出た。	금세 인기를 얻었다.	fix	defaults
+dict:jisjk:39361	忽ち終わった。	금세 끝났다.	fix	defaults
+dict:jisjk:146831	思い詰める。	깊이 생각한다.	fix	defaults
+dict:jisjk:146831	思い詰めた。	깊이 생각했다.	fix	defaults
+dict:jisjk:146831	思い詰めている。	깊이 생각하고 있다.	fix	defaults
+dict:jisjk:146831	思い詰めない。	깊이 생각하지 않는다.	fix	defaults
+dict:jisjk:146831	思い悩む。	고민한다.	keep	defaults
+dict:jisjk:146831	思い返す。	회상한다.	keep	defaults
+dict:jisjk:146831	思い詰める人。	깊이 생각하는 사람.	fix	defaults
+dict:jisjk:146831	思い詰めれば。	깊이 생각하면.	fix	defaults
+dict:jisjk:146831	一人で思い詰めた。	혼자서 깊이 생각했다.	fix	defaults
+dict:jisjk:108083	急場しのぎ	임시 변통	fix	defaults
+dict:jisjk:108083	急場しのぎにすぎない。	임시 변통에 지나지 않는다.	fix	defaults
+dict:jisjk:108083	急場しのぎの対応。	임시 변통의 대응.	fix	defaults
+dict:jisjk:108083	急場凌ぎ	임시 변통	keep	defaults
+dict:jisjk:108083	急場	위기	keep	defaults
+dict:jisjk:108083	急場しのぎで終わる。	임시 변통으로 끝난다.	fix	defaults
+dict:jisjk:108083	急場しのぎの対策。	임시 변통의 대책.	fix	defaults
+dict:jisjk:108083	急場しのぎだ。	임시 변통이다.	fix	defaults
+dict:jisjk:238858	性フェロモン	성페로몬	fix	defaults
+dict:jisjk:238858	性フェロモンを放出する。	성페로몬을 방출한다.	fix	defaults
+dict:jisjk:238858	性フェロモンの作用。	성페로몬의 작용.	fix	defaults
+dict:jisjk:238858	性フェロモンを調べる。	성페로몬을 조사한다.	fix	defaults
+dict:jisjk:238858	フェロモン	페로몬	keep	defaults
+dict:jisjk:238858	性フェロモンの研究。	성페로몬의 연구.	fix	defaults
+dict:jisjk:238858	性フェロモンを検出する。	성페로몬을 검출한다.	fix	defaults
+dict:jisjk:74476	性ホルモン	성 호르몬	fix	defaults
+dict:jisjk:74476	性ホルモンの分泌。	성 호르몬의 분비.	fix	defaults
+dict:jisjk:74476	性ホルモンを調べる。	성 호르몬을 조사한다.	fix	defaults
+dict:jisjk:74476	性ホルモンの作用。	성 호르몬의 작용.	fix	defaults
+dict:jisjk:74476	ホルモン	호르몬	keep	defaults
+dict:jisjk:74476	成長ホルモン	성장 호르몬	keep	defaults
+dict:jisjk:74476	性ホルモンの量。	성 호르몬의 양.	fix	defaults
+dict:jisjk:74476	性ホルモンの変化。	성 호르몬의 변화.	fix	defaults
+dict:jisjk:74476	性ホルモンが減る。	성 호르몬이 줄어든다.	fix	defaults

@@ -1,0 +1,35 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:252034	丸耳象の群れ。	둥근귀코끼리의 무리.	fix	defaults
+dict:jisjk:252034	丸耳象を見た。	둥근귀코끼리를 보았다.	fix	defaults
+dict:jisjk:252034	丸耳象は森に住む。	둥근귀코끼리는 숲에 산다.	fix	defaults
+dict:jisjk:252034	これは丸耳象だ。	이것은 둥근귀코끼리다.	fix	defaults
+dict:jisjk:252011	丸酸塊の実。	구즈베리의 열매.	fix	defaults
+dict:jisjk:252011	丸酸塊のジャム。	구즈베리의 잼.	fix	defaults
+dict:jisjk:252011	丸酸塊を育てる。	구즈베리를 기른다.	fix	defaults
+dict:jisjk:252011	丸酸塊の苗を植えた。	구즈베리의 모종을 심었다.	fix	defaults
+dict:jisjk:251347	乏尿の症状。	핍뇨의 증상.	fix	defaults
+dict:jisjk:251347	乏尿の原因を調べる。	핍뇨 원인을 조사한다.	fix	defaults
+dict:jisjk:251347	乏尿の患者。	핍뇨의 환자.	fix	defaults
+dict:jisjk:251347	これは乏尿だ。	이것은 핍뇨다.	fix	defaults
+dict:jisjk:76177	乗換切符を買う。	환승권을 산다.	fix	defaults
+dict:jisjk:76177	乗換切符を見せた。	환승권을 보였다.	fix	defaults
+dict:jisjk:76177	乗換切符が必要だ。	환승권이 필요하다.	fix	defaults
+dict:jisjk:76177	これは乗換切符だ。	이것은 환승권이다.	fix	defaults
+dict:jisjk:252034	アフリカゾウを見た。	아프리카 코끼리를 보았다.	keep	defaults
+dict:jisjk:252034	マルミミゾウを見た。	둥근귀코끼리를 보았다.	keep	defaults
+dict:jisjk:252034	象の群れ。	코끼리의 무리.	keep	defaults
+dict:jisjk:252011	グーズベリーの実。	구즈베리의 열매.	keep	defaults
+dict:jisjk:252011	セイヨウスグリを育てる。	구즈베리를 기른다.	keep	defaults
+dict:jisjk:252011	グースベリーのジャム。	구즈베리의 잼.	keep	defaults
+dict:jisjk:251347	頻尿の症状。	빈뇨의 증상.	keep	defaults
+dict:jisjk:251347	無尿の患者。	무뇨의 환자.	keep	defaults
+dict:jisjk:251347	尿量を調べる。	요량을 조사한다.	keep	defaults
+dict:jisjk:76177	乗換券を買う。	환승권을 산다.	keep	defaults
+dict:jisjk:76177	乗車券を見せた。	승차권을 보였다.	keep	defaults
+dict:jisjk:76177	切符が必要だ。	표가 필요하다.	keep	defaults
+dict:jisjk:149477	久しぶりに帰った。	오랜만에 돌아갔다.	keep	defaults
+dict:jisjk:149477	久々に会った。	오래간만에 만났다.	keep	defaults
+dict:jisjk:252011	丸酸塊を刻んだ。	구즈베리를 잘게 썰었다.	fix	global-stem
+dict:jisjk:252011	丸酸塊を刻んでいる。	구즈베리를 잘게 썰고 있다.	fix	global-stem
+dict:jisjk:252011	丸酸塊の枝を刻んだ。	구즈베리의 가지를 새겼다.	fix	defaults

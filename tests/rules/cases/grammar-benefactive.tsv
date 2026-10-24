@@ -11,7 +11,7 @@ cx:benefactive-agent:10	山本さんという人に武器を支給してもら�
 cx:benefactive-agent:10	医者に診察してもらった。	의사에게 진찰을 받았다.	keep	rewrites
 cx:benefactive-agent:10	看病してもらった。	간병받았다.	keep	rewrites
 cx:benefactive-agent:10	時々、英会話の指導をしてもらっていた。	가끔, 영어회화 지도를 받고 있었다.	keep	rewrites
-cx:benefactive-agent:10	尻ぬぐいをしてもらって恩義を感じている部下もいる	뒷처리를 받아 은의를 느끼고 있는 부하도 있다	keep	rewrites
+cx:benefactive-agent:10	尻ぬぐいをしてもらって恩義を感じている部下もいる	뒤처리를 받아 은의를 느끼고 있는 부하도 있다	keep	rewrites
 cx:benefactive-agent:20	先輩に優しくしてもらったから	선배가 다정하게 해 주었으니까	fix	rewrites
 cx:benefactive-agent:20	入院してるときから優しくしてもらってて	입원하고 있을 때부터 다정하게 해 주고 있어	fix	rewrites
 cx:benefactive-agent:20	室内を覗くことは出来るようにしてもらった。	실내를 들여다 볼 수 있도록 해 주었다.	fix	rewrites

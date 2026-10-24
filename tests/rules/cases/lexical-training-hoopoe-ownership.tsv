@@ -1,0 +1,36 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:111086	戦闘訓練	전투훈련	fix	defaults
+dict:jisjk:111086	戦闘訓練の説明。	전투훈련의 설명.	fix	defaults
+dict:jisjk:111086	戦闘訓練について。	전투훈련에 대해.	fix	defaults
+dict:jisjk:111086	戦闘訓練の内容。	전투훈련의 내용.	fix	defaults
+dict:jisjk:111086	戦闘準備	전투준비	keep	defaults
+dict:jisjk:111086	戦闘服	전투복	keep	defaults
+dict:jisjk:254227	戴勝	후투티	fix	defaults
+dict:jisjk:254227	戴勝の羽。	후투티의 날개.	fix	defaults
+dict:jisjk:254227	戴勝が飛ぶ。	후투티가 난다.	fix	defaults
+dict:jisjk:254227	戴勝の写真。	후투티의 사진.	fix	defaults
+dict:jisjk:363967	所有主持分	소유주 지분	fix	defaults
+dict:jisjk:363967	所有主持分の説明。	소유주 지분의 설명.	fix	defaults
+dict:jisjk:363967	所有主持分について。	소유주 지분에 대해.	fix	defaults
+dict:jisjk:363967	所有主持分の内容。	소유주 지분의 내용.	fix	defaults
+dict:jisjk:363967	所有者	소유자	keep	defaults
+dict:jisjk:363967	持分	지분	keep	defaults
+dict:jisjk:363967	所有権	소유권	keep	defaults
+dict:jisjk:26849	所論	소론	fix	defaults
+dict:jisjk:26849	所論の説明。	소론의 설명.	fix	defaults
+dict:jisjk:26849	所論について。	소론에 대해.	fix	global-stem
+dict:jisjk:26849	所論の内容。	소론의 내용.	fix	defaults
+dict:jisjk:26849	序論	서론	keep	defaults
+dict:jisjk:111086	戦闘訓練の研究。	전투훈련의 연구.	fix	defaults
+dict:jisjk:111086	戦闘訓練の特徴。	전투훈련의 특징.	fix	defaults
+dict:jisjk:111086	戦闘訓練を調べる。	전투훈련을 조사한다.	fix	defaults
+dict:jisjk:254227	戴勝の生態。	후투티의 생태.	fix	defaults
+dict:jisjk:254227	戴勝の餌。	후투티의 먹이.	fix	defaults
+dict:jisjk:254227	戴勝を観察する。	후투티를 관찰한다.	fix	defaults
+dict:jisjk:363967	所有主持分の研究。	소유주 지분의 연구.	fix	defaults
+dict:jisjk:363967	所有主持分の特徴。	소유주 지분의 특징.	fix	defaults
+dict:jisjk:363967	所有主持分を調べる。	소유주 지분을 조사한다.	fix	defaults
+dict:jisjk:26849	所論の研究。	소론의 연구.	fix	defaults
+dict:jisjk:26849	所論の特徴。	소론의 특징.	fix	defaults
+dict:jisjk:26849	所論を調べる。	소론을 조사한다.	fix	defaults

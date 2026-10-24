@@ -1,0 +1,63 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:names.114038	「キエン・グエン「色分けされた手術」」	「끼엔 응우옌: 색이 보이는 수술」	fix	fixed
+dict:jisjk:42339	アクセサリ。	액세서리.	fix	defaults
+dict:jisjk:42339	アクセサリを買った。	액세서리를 샀다.	fix	defaults
+dict:jisjk:42339	新しいアクセサリ。	새로운 액세서리.	fix	defaults
+dict:jisjk:42339	アクセサリーを買った。	액세서리를 샀다.	keep	defaults
+dict:jisjk:42339	アクセント。	악센트.	keep	defaults
+dict:jisjk:87524	破れ鍋。	금간 냄비.	fix	defaults
+dict:jisjk:87524	破れ鍋を使う。	금간 냄비를 쓴다.	fix	defaults
+dict:jisjk:87524	古い破れ鍋。	낡은 금간 냄비.	fix	defaults
+dict:jisjk:87524	破れた紙。	찢어진 종이.	keep	defaults
+dict:jisjk:40473	おくびょう。	겁쟁이.	fix	defaults
+dict:jisjk:40473	おくびょうな人。	겁이 많은 사람.	fix	defaults
+dict:jisjk:40473	おくびょうだ。	겁이 많다.	fix	defaults
+dict:jisjk:187407	静岡第一テレビ。	시즈오카 다이이치 테레비.	fix	defaults
+dict:jisjk:43738	インピーダンス。	임피던스.	keep	defaults
+dict:jisjk:43738	インピーダンスを測る。	임피던스를 측정한다.	keep	defaults
+dict:jisjk:43738	高いインピーダンス。	높은 임피던스.	keep	defaults
+dict:jisjk:43738	ダンス。	댄스.	keep	defaults
+dict:jisjk:43896	ウエット。	웨트.	keep	defaults
+dict:jisjk:43896	ウエットティッシュ。	물티슈.	keep	defaults
+dict:jisjk:43896	ウエットスーツ。	잠수복.	keep	defaults
+dict:jisjk:43896	ウェット。	웨트.	keep	defaults
+dict:jisjk:45942	キツツキ。	딱따구리.	keep	defaults
+dict:jisjk:45942	キツツキを見た。	딱따구리를 보았다.	keep	defaults
+dict:jisjk:45942	森のキツツキ。	숲의 딱따구리.	keep	defaults
+dict:jisjk:46443	クリフハンガー。	클리프행어.	keep	defaults
+dict:jisjk:46443	クリフハンガーの結末。	클리프행어의 결말.	keep	defaults
+dict:jisjk:46443	クリフハンガーを見た。	클리프행어를 보았다.	keep	defaults
+dict:jisjk:46443	ハンガー。	행거.	keep	defaults
+dict:jisjk:46443	クリップ。	클립.	keep	defaults
+dict:jisjk:49808	ソーセージ。	소시지.	fix	defaults
+dict:jisjk:49808	ソーセージを食べた。	소시지를 먹었다.	fix	defaults
+dict:jisjk:49808	焼いたソーセージ。	구운 소시지.	fix	defaults
+dict:jisjk:49808	ソース。	소스.	keep	defaults
+dict:jisjk:51528	トーテムポール。	토템폴.	fix	defaults
+dict:jisjk:51528	トーテムポールを見た。	토템폴을 보았다.	fix	defaults
+dict:jisjk:51528	大きなトーテムポール。	큰 토템폴.	fix	defaults
+dict:jisjk:51528	ポールを立てた。	폴을 세웠다.	keep	defaults
+dict:jisjk:51528	トーテム。	토템.	keep	defaults
+dict:jisjk:53976	ヒーリング。	힐링.	keep	defaults
+dict:jisjk:53976	ヒーリングの音楽。	힐링의 음악.	keep	defaults
+dict:jisjk:53976	ヒーリングを楽しむ。	힐링을 즐긴다.	keep	defaults
+dict:jisjk:53976	ヒール。	힐.	keep	defaults
+dict:jisjk:53976	リング。	링.	keep	defaults
+dict:jisjk:349483	営業利益率。	영업 이익률.	fix	defaults
+dict:jisjk:349483	営業利益率を調べる。	영업 이익률을 조사한다.	fix	defaults
+dict:jisjk:349483	営業利益率が高い。	영업 이익률이 높다.	fix	defaults
+dict:jisjk:349483	利益を調べる。	이익을 조사한다.	keep	defaults
+dict:jisjk:349483	営業利益。	영업이익.	keep	defaults
+dict:jisjk:230070	完全平方式。	완전제곱식.	keep	defaults
+dict:jisjk:230070	完全平方式を作る。	완전제곱식을 만든다.	keep	defaults
+dict:jisjk:230070	この完全平方式。	이 완전제곱식.	keep	defaults
+dict:jisjk:230070	完全平方。	완전 평방.	keep	defaults
+dict:jisjk:230070	平方式。	평방식.	keep	defaults
+dict:jisjk:109662	山形県経済農業協同組合連合。	야마가타현 경제농업협동조합연합.	keep	defaults
+dict:jisjk:109662	山形県経済農業協同組合連合の事務所。	야마가타현 경제농업협동조합연합의 사무소.	keep	defaults
+dict:jisjk:109662	山形県経済農業協同組合連合に行く。	야마가타현 경제농업협동조합연합에 간다.	keep	defaults
+dict:jisjk:109662	山形県。	야마가타현.	keep	defaults
+dict:jisjk:109662	農業協同組合。	농업협동조합.	keep	defaults
+dict:jisjk:29068	臆病。	겁쟁이.	fix	defaults
+dict:jisjk:29068	臆病風。	겁.	keep	defaults

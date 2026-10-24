@@ -2,7 +2,7 @@
 # 일본 지명: 역·노선·도도부현·시정촌·명소 (Wikidata)
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 DMMかりゆし水族館	DMM 카리유시 수족관	N130	QCTVPl		GN				replace			places:1
-IRいしかわ鉄道線	IR 이시카와 철도 IR 이시카와 철도선	N130	VTp		GN				replace			places:2
+IRいしかわ鉄道線	IR 이시카와 철도선	N130	VTp		GN				replace			places:2
 JAビル	JA 빌딩	N130	QCTVPl		GN				replace			places:3
 JPタワー	JP 타워	N130	QCTVPl		GN				replace			places:4
 JRゲートタワー	JR 게이트 타워	N130	QCTVPl		GN				replace			places:5
@@ -75,7 +75,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 あいの里公園駅	아이노사토코엔역	N130	QCTVPl		GN				replace			places:72
 あいの里教育大	아이노사토쿄이쿠다이	N130	QCTVPl		GN							places:73
 あいの里教育大駅	아이노사토쿄이쿠다이역	N130	QCTVPl		GN				replace			places:74
-あいの風とやま鉄道線	아이노카제토야마 철도 아이노카제토야마 철도선	N130	VTp		GN				replace			places:75
+あいの風とやま鉄道線	아이노카제토야마 철도선	N130	VTp		GN				replace			places:75
 あおなみ線	아오나미선	N130	VTp		GN				replace			places:76
 あおば通	아오바도리	N130	QCTVPl		GN							places:77
 あおば通駅	아오바도리역	N130	QCTVPl		GN				replace			places:78
@@ -2826,7 +2826,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 二子新地駅	후타코신치역	N130	QCTVPl		GN				replace			places:2823
 二子玉川	후타코타마가와	N130	QCTVPl		GN							places:2824
 二子玉川駅	후타코타마가와역	N130	QCTVPl		GN				replace			places:2825
-二子神社	후타코진자신사	N130	QCTVPl		GN				replace			places:2826
+二子神社	후타코 신사	N130	QCTVPl		GN				replace			places:2826
 二子駅	후타고역	N130	QCTVPl		GN				replace			places:2827
 二宮	니노미야	N130	QCTVPl		GN				replace			places:2828
 二宮町	니노미야정	N130	QCTVPl		GN				replace			places:2829
@@ -3202,7 +3202,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 京都女子大学	교토 여자 대학	N130	QCTVPl		GN				replace			places:3199
 京都女子専門学校	교토 여자 대학	N130	QCTVPl		GN				replace			places:3200
 京都女子高等専門学校	교토 여자 대학	N130	QCTVPl		GN				replace			places:3201
-京都嵯峨御髪神社	교토 사가 미카미 진자	N130	QCTVPl		GN				replace			places:3202
+京都嵯峨御髪神社	교토 사가 미카미 신사	N130	QCTVPl		GN				replace			places:3202
 京都工芸繊維大学	교토 공예섬유대학	N130	QCTVPl		GN				replace			places:3203
 京都市	교토시	N130	QCTVPl		GN				replace			places:3204
 京都市京セラ美術館	교토시 미술관	N130	QCTVPl		GN				replace			places:3205
@@ -4441,7 +4441,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 八王子みなみ野	하치오지미나미노	N130	QCTVPl		GN							places:4438
 八王子みなみ野駅	하치오지미나미노역	N130	QCTVPl		GN				replace			places:4439
 八王子城	하치오지성	N130	QCTVPl		GN				replace			places:4440
-八王子城合戦	하치오지성	N130	QCTVPl		GN				replace			places:4441
+八王子城合戦	하치오지성 전투	N130	QCTVPl		GN				replace			places:4441
 八王子城址	하치오지성	N130	QCTVPl		GN				replace			places:4442
 八王子市	하치오지시	N130	QCTVPl		GN				replace			places:4443
 八王子線	하치오지선	N130	VTp		GN				replace			places:4444
@@ -4595,10 +4595,10 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 兵庫県立三木総合防災公園陸上競技場	미키 육상 경기장	N130	QCTVPl		GN				replace			places:4592
 兵庫県立三木防災公園	미키 종합 방재 공원	N130	QCTVPl		GN				replace			places:4593
 兵庫県立大学	효고 현립 대학	N130	QCTVPl		GN				replace			places:4594
-兵庫県立大学大学院	효고 현립 대학	N130	QCTVPl		GN				replace			places:4595
+兵庫県立大学大学院	효고 현립 대학 대학원	N130	QCTVPl		GN				replace			places:4595
 兵庫県立明石西公園	아카시니시 공원	N130	QCTVPl		GN				replace			places:4596
 兵庫県立歴史博物館	효고현립 역사박물관	N130	QCTVPl		GN				replace			places:4597
-兵庫県立看護大学	효고 현립 대학	N130	QCTVPl		GN				replace			places:4598
+兵庫県立看護大学	효고 현립 간호대학	N130	QCTVPl		GN				replace			places:4598
 兵庫県立美術館	효고 현립 미술관	N130	QCTVPl		GN				replace			places:4599
 兵庫県立美術館/ひょうごけんりつびじゅつかん	효고 현립 미술관	N130	QCTVPl		GN				replace			places:4600
 兵庫県立考古博物館	효고 현립 고고박물관	N130	QCTVPl		GN				replace			places:4601
@@ -4734,7 +4734,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 函館ハリストス正教会	하코다테 하리스토스 정교회	N130	QCTVPl		GN				replace			places:4731
 函館ハリストス正教会復活聖堂	하코다테 하리스토스 정교회	N130	QCTVPl		GN				replace			places:4732
 函館山	하코다테산	N130	QCTVPl		GN				replace			places:4733
-函館山緑地	하코다테산	N130	QCTVPl		GN				replace			places:4734
+函館山緑地	하코다테산 녹지	N130	QCTVPl		GN				replace			places:4734
 函館市	하코다테시	N130	QCTVPl		GN				replace			places:4735
 函館市文学館	하코다테시 문학관	N130	QCTVPl		GN				replace			places:4736
 函館本線	하코다테 본선	N130	VTp		GN				replace			places:4737
@@ -4742,7 +4742,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 函館空港	하코다테 공항	N130	QCTVPl		GN				replace			places:4739
 函館競馬場	하코다테 경마장	N130	QCTVPl		GN				replace			places:4740
 函館線	하코다테선	N130	VTp		GN				replace			places:4741
-函館航空基地	하코다테 공항	N130	QCTVPl		GN				replace			places:4742
+函館航空基地	하코다테 항공기지	N130	QCTVPl		GN				replace			places:4742
 函館駅	하코다테역	N130	QCTVPl		GN				replace			places:4743
 刀根	도네	N130	QCTVPl		GN				replace			places:4744
 刀根駅	도네역	N130	QCTVPl		GN				replace			places:4745
@@ -4796,7 +4796,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 別府タワー	벳푸 타워	N130	QCTVPl		GN				replace			places:4793
 別府大学	벳푸 대학	N130	QCTVPl		GN				replace			places:4794
 別府大学駅	벳푸다이가쿠역	N130	QCTVPl		GN				replace			places:4795
-別府女子大学	벳푸 대학	N130	QCTVPl		GN				replace			places:4796
+別府女子大学	벳푸 여자대학	N130	QCTVPl		GN				replace			places:4796
 別府市	벳푸시	N130	QCTVPl		GN				replace			places:4797
 別府駅	베후역	N130	QCTVPl		GN				replace			places:4798
 別当賀	벳토가	N130	QCTVPl		GN							places:4799
@@ -5065,7 +5065,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 北久里浜	기타쿠리하마	N130	QCTVPl		GN							places:5062
 北久里浜駅	기타쿠리하마역	N130	QCTVPl		GN				replace			places:5063
 北九州	기타큐슈	N130	QCTVPl		GN				replace			places:5064
-北九州外国語大学	기타큐슈 시립 대학	N130	QCTVPl		GN				replace			places:5065
+北九州外国語大学	기타큐슈 외국어대학	N130	QCTVPl		GN				replace			places:5065
 北九州大学	기타큐슈 시립 대학	N130	QCTVPl		GN				replace			places:5066
 北九州市	기타큐슈시	N130	QCTVPl		GN				replace			places:5067
 北九州市立いのちのたび博物館	기타큐슈시립 자연사·역사 박물관	N130	QCTVPl		GN				replace			places:5068
@@ -5317,16 +5317,16 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 北海道学芸大学	홋카이도 교육대학	N130	QCTVPl		GN				replace			places:5314
 北海道島	홋카이도	N130	QCTVPl		GN				replace			places:5315
 北海道教育大学	홋카이도 교육대학	N130	QCTVPl		GN				replace			places:5316
-北海道教育大学札幌校	홋카이도 교육대학	N130	QCTVPl		GN				replace			places:5317
+北海道教育大学札幌校	홋카이도 교육대학 삿포로 캠퍼스	N130	QCTVPl		GN				replace			places:5317
 北海道新幹線	홋카이도 신칸센	N130	VTp		GN				replace			places:5318
 北海道本島	홋카이도	N130	QCTVPl		GN				replace			places:5319
 北海道浅井学園大学	호쿠쇼 대학	N130	QCTVPl		GN				replace			places:5320
 北海道浅井学園大学短期大学部	호쿠쇼 대학 단기대학부	N130	QCTVPl		GN				replace			places:5321
 北海道神宮	홋카이도 신궁	N130	QCTVPl		GN				replace			places:5322
-北海道神宮例大祭	홋카이도 신궁	N130	QCTVPl		GN				replace			places:5323
+北海道神宮例大祭	홋카이도 신궁 예대제	N130	QCTVPl		GN				replace			places:5323
 北海道立近代美術館	홋카이도 도립 근대미술관	N130	QCTVPl		GN				replace			places:5324
 北海道開拓の村	홋카이도 역사 마을	N130	QCTVPl		GN				replace			places:5325
-北海道開拓神社	홋카이도 신궁	N130	QCTVPl		GN				replace			places:5326
+北海道開拓神社	홋카이도 개척 신사	N130	QCTVPl		GN				replace			places:5326
 北海道駒ケ岳	홋카이도 고마가다케산	N130	QCTVPl		GN				replace			places:5327
 北海道駒ヶ岳	홋카이도 고마가다케산	N130	QCTVPl		GN				replace			places:5328
 北湧	기타유	N130	QCTVPl		GN							places:5329
@@ -6484,7 +6484,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 同志社前駅	도시샤마에역	N130	QCTVPl		GN				replace			places:6481
 同志社大学	도시샤 대학	N130	QCTVPl		GN				replace			places:6482
 同志社女子大学	도시샤 여자대학	N130	QCTVPl		GN				replace			places:6483
-同志社女学校	도시샤 여자대학	N130	QCTVPl		GN				replace			places:6484
+同志社女学校	도시샤 여학교	N130	QCTVPl		GN				replace			places:6484
 名取	나토리	N130	QCTVPl		GN				replace			places:6485
 名取市	나토리시	N130	QCTVPl		GN				replace			places:6486
 名取駅	나토리역	N130	QCTVPl		GN				replace			places:6487
@@ -6492,7 +6492,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 名古屋けいば	나고야 경마장	N130	QCTVPl		GN				replace			places:6489
 名古屋テレビ塔	나고야 테레비 타워	N130	QCTVPl		GN				replace			places:6490
 名古屋ルーセントタワー	나고야 루센트 타워	N130	QCTVPl		GN				replace			places:6491
-名古屋医科大学	나고야 대학	N130	QCTVPl		GN				replace			places:6492
+名古屋医科大学	나고야 의과대학	N130	QCTVPl		GN				replace			places:6492
 名古屋城	나고야성	N130	QCTVPl		GN				replace			places:6493
 名古屋城駅	나고야조역	N130	QCTVPl		GN				replace			places:6494
 名古屋大学	나고야 대학	N130	QCTVPl		GN				replace			places:6495
@@ -6500,7 +6500,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 名古屋工業大学	나고야 공업대학	N130	QCTVPl		GN				replace			places:6497
 名古屋市	나고야시	N130	QCTVPl		GN				replace			places:6498
 名古屋市瑞穂公園	나고야시 미즈호 공원	N130	QCTVPl		GN				replace			places:6499
-名古屋市瑞穂公園レクリエーション広場	나고야시 미즈호 공원	N130	QCTVPl		GN				replace			places:6500
+名古屋市瑞穂公園レクリエーション広場	나고야시 미즈호 공원 레크리에이션 광장	N130	QCTVPl		GN				replace			places:6500
 名古屋市瑞穂公園陸上競技場	나고야시 미즈호공원 육상경기장	N130	QCTVPl		GN				replace			places:6501
 名古屋市科学館	나고야시 과학관	N130	QCTVPl		GN				replace			places:6502
 名古屋市立大学	나고야 시립 대학	N130	QCTVPl		GN				replace			places:6503
@@ -6518,7 +6518,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 名古屋駅	나고야역	N130	QCTVPl		GN				replace			places:6515
 名和	나와	N130	QCTVPl		GN				replace			places:6516
 名和昆虫博物館	나와 곤충박물관	N130	QCTVPl		GN				replace			places:6517
-名和昆虫研究所	나와 곤충박물관	N130	QCTVPl		GN				replace			places:6518
+名和昆虫研究所	나와 곤충연구소	N130	QCTVPl		GN				replace			places:6518
 名和駅	나와역	N130	QCTVPl		GN				replace			places:6519
 名城公園駅	메이조코엔역	N130	QCTVPl		GN				replace			places:6520
 名城大	메이조 대학	N130	QCTVPl		GN				replace			places:6521
@@ -6939,7 +6939,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 四国中央	시코쿠추오	N130	QCTVPl		GN							places:6936
 四国中央市	시코쿠추오시	N130	QCTVPl		GN				replace			places:6937
 四国大学	시코쿠 대학	N130	QCTVPl		GN				replace			places:6938
-四国女子大学	시코쿠 대학	N130	QCTVPl		GN				replace			places:6939
+四国女子大学	시코쿠 여자대학	N130	QCTVPl		GN				replace			places:6939
 四国新幹線	시코쿠 신칸센	N130	VTp		GN				replace			places:6940
 四国村	시코쿠무라	N130	QCTVPl		GN				replace			places:6941
 四国村ミウゼアム	시코쿠무라	N130	QCTVPl		GN				replace			places:6942
@@ -7008,7 +7008,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 国営ひたち海浜公園	국영 히타치 해빈공원	N130	QCTVPl		GN				replace			places:7005
 国営昭和記念公園	국영 쇼와 기념공원	N130	QCTVPl		GN				replace			places:7006
 国営武蔵丘陵森林公園	국영 무사시큐료 삼림공원	N130	QCTVPl		GN				replace			places:7007
-国営沖縄海洋博覧会記念公園	국영 오키나와 기념공원	N130	QCTVPl		GN				replace			places:7008
+国営沖縄海洋博覧会記念公園	국영 오키나와 해양박람회 기념공원	N130	QCTVPl		GN				replace			places:7008
 国営沖縄記念公園	국영 오키나와 기념공원	N130	QCTVPl		GN				replace			places:7009
 国場	고쿠바	N130	QCTVPl		GN							places:7010
 国場駅	고쿠바역	N130	QCTVPl		GN				replace			places:7011
@@ -7017,7 +7017,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 国士大	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7014
 国士舘	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7015
 国士舘大学	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7016
-国士舘大学剣道部	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7017
+国士舘大学剣道部	고쿠시칸 대학 검도부	N130	QCTVPl		GN				replace			places:7017
 国士舘大學	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7018
 国士館大学	고쿠시칸 대학	N130	QCTVPl		GN				replace			places:7019
 国安	구니야스	N130	QCTVPl		GN							places:7020
@@ -7044,10 +7044,10 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 国母駅	고쿠보역	N130	QCTVPl		GN				replace			places:7041
 国立	구니타치	N130	QCTVPl		GN				replace			places:7042
 国立代々木競技場	국립 요요기 경기장	N130	QCTVPl		GN				replace			places:7043
-国立代々木競技場第一体育館	국립 요요기 경기장	N130	QCTVPl		GN				replace			places:7044
-国立代々木競技場第二体育館	국립 요요기 경기장	N130	QCTVPl		GN				replace			places:7045
-国立代々木第一体育館	국립 요요기 경기장	N130	QCTVPl		GN				replace			places:7046
-国立代々木第二体育館	국립 요요기 경기장	N130	QCTVPl		GN				replace			places:7047
+国立代々木競技場第一体育館	국립 요요기 경기장 제1체육관	N130	QCTVPl		GN				replace			places:7044
+国立代々木競技場第二体育館	국립 요요기 경기장 제2체육관	N130	QCTVPl		GN				replace			places:7045
+国立代々木第一体育館	국립 요요기 제1체육관	N130	QCTVPl		GN				replace			places:7046
+国立代々木第二体育館	국립 요요기 제2체육관	N130	QCTVPl		GN				replace			places:7047
 国立国際美術館	국립국제미술관	N130	QCTVPl		GN				replace			places:7048
 国立工芸館	국립공예관	N130	QCTVPl		GN				replace			places:7049
 国立市	구니타치시	N130	QCTVPl		GN				replace			places:7050
@@ -7063,7 +7063,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 国立霞ヶ丘競技場陸上競技場	국립 가스미가오카 육상 경기장	N130	QCTVPl		GN				replace			places:7060
 国立霞ヶ丘陸上競技場	국립 가스미가오카 육상 경기장	N130	QCTVPl		GN				replace			places:7061
 国立音楽大学	구니타치 음악대학	N130	QCTVPl		GN				replace			places:7062
-国立音楽学校	구니타치 음악대학	N130	QCTVPl		GN				replace			places:7063
+国立音楽学校	구니타치 음악학교	N130	QCTVPl		GN				replace			places:7063
 国立駅	구니타치역	N130	QCTVPl		GN				replace			places:7064
 国縫	군누이	N130	QCTVPl		GN				replace			places:7065
 国縫駅	군누이역	N130	QCTVPl		GN				replace			places:7066
@@ -7081,7 +7081,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 国際センター駅	고쿠사이센터역	N130	QCTVPl		GN				replace			places:7078
 国際会館駅	고쿠사이카이칸역	N130	QCTVPl		GN				replace			places:7079
 国際基督教大学	국제 기독교 대학	N130	QCTVPl		GN				replace			places:7080
-国際基督教大学教会	국제 기독교 대학	N130	QCTVPl		GN				replace			places:7081
+国際基督教大学教会	국제 기독교 대학 교회	N130	QCTVPl		GN				replace			places:7081
 国際大学	고쿠사이 대학	N130	QCTVPl		GN				replace			places:7082
 国際展示場駅	고쿠사이텐지조역	N130	QCTVPl		GN				replace			places:7083
 国際文化公園都市モノレール線	오사카 모노레일 사이토선	N130	VTp		GN				replace			places:7084
@@ -7289,8 +7289,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 垂水駅	다루미역	N130	QCTVPl		GN				replace			places:7286
 城ケ島	조가섬	N130	QCTVPl		GN				replace			places:7287
 城ヶ倉大橋	조가쿠라대교	N130	QCTVPl		GN				replace			places:7288
-城ヶ島	조가섬	N130	QCTVPl		GN				replace			places:7289
-城ヶ島公園	조가섬	N130	QCTVPl		GN				replace			places:7290
+城ヶ島	조가시마	N130	QCTVPl		GN				replace			places:7289
+城ヶ島公園	조가시마 공원	N130	QCTVPl		GN				replace			places:7290
 城ヶ崎海岸	조가사키카이간	N130	QCTVPl		GN							places:7291
 城ヶ崎海岸駅	조가사키카이간역	N130	QCTVPl		GN				replace			places:7292
 城下	시로시타	N130	QCTVPl		GN				replace			places:7293
@@ -7340,14 +7340,14 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 埼玉スタジアム2002第3グラウンド	사이타마 스타디움 2002	N130	QCTVPl		GN				replace			places:7337
 埼玉スタジアム2002第4グラウンド	사이타마 스타디움 2002	N130	QCTVPl		GN				replace			places:7338
 埼玉大学	사이타마 대학	N130	QCTVPl		GN				replace			places:7339
-埼玉大学教育学部	사이타마 대학	N130	QCTVPl		GN				replace			places:7340
+埼玉大学教育学部	사이타마 대학 교육학부	N130	QCTVPl		GN				replace			places:7340
 埼玉新都市交通大宮	오미야	N130	QCTVPl		GN							places:7341
 埼玉新都市交通大宮駅	오미야역	N130	QCTVPl		GN				replace			places:7342
 埼玉県	사이타마현	N130	QCTVPl		GN				replace			places:7343
 埼玉県営大宮公園野球場	사이타마 현영 오미야 공원 야구장	N130	QCTVPl		GN				replace			places:7344
 埼玉県立川の博物館	사이타마현립 하천 박물관	N130	QCTVPl		GN				replace			places:7345
 埼玉県立歴史と民俗の博物館	사이타마 현립 역사민속박물관	N130	QCTVPl		GN				replace			places:7346
-埼玉高速鉄道線	사이타마 고속 철도 사이타마 고속 철도선	N130	VTp		GN				replace			places:7347
+埼玉高速鉄道線	사이타마 고속 철도선	N130	VTp		GN				replace			places:7347
 堀ノ内	호리노우치	N130	QCTVPl		GN							places:7348
 堀ノ内駅	호리노우치역	N130	QCTVPl		GN				replace			places:7349
 堀之内	호리노우치	N130	QCTVPl		GN				replace			places:7350
@@ -7523,7 +7523,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 夏吉	나쓰요시	N130	QCTVPl		GN				replace			places:7520
 夏吉駅	나쓰요시역	N130	QCTVPl		GN				replace			places:7521
 夕張	유바리	N130	QCTVPl		GN				replace			places:7522
-夕張の石炭大露頭	유바리시 석탄 박물관	N130	QCTVPl		GN				replace			places:7523
+夕張の石炭大露頭	유바리의 석탄 대노두	N130	QCTVPl		GN				replace			places:7523
 夕張市	유바리시	N130	QCTVPl		GN				replace			places:7524
 夕張市石炭博物館	유바리시 석탄 박물관	N130	QCTVPl		GN				replace			places:7525
 夕張駅	유바리역	N130	QCTVPl		GN				replace			places:7526
@@ -7589,7 +7589,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 多摩川線	다마가와선	N130	VTp		GN				replace			places:7586
 多摩川駅	다마가와역	N130	QCTVPl		GN				replace			places:7587
 多摩市	다마시	N130	QCTVPl		GN				replace			places:7588
-多摩帝国美術学校	다마 미술대학	N130	QCTVPl		GN				replace			places:7589
+多摩帝国美術学校	다마 제국 미술학교	N130	QCTVPl		GN				replace			places:7589
 多摩湖	다마코	N130	QCTVPl		GN				replace			places:7590
 多摩湖線	다마코선	N130	VTp		GN				replace			places:7591
 多摩湖駅	다마코역	N130	QCTVPl		GN				replace			places:7592
@@ -7740,7 +7740,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大分マリーンパレス水族館	오이타 마린팰리스 수족관	N130	QCTVPl		GN				replace			places:7737
 大分大学	오이타 대학	N130	QCTVPl		GN				replace			places:7738
 大分大学前駅	오이타다이가쿠마에역	N130	QCTVPl		GN				replace			places:7739
-大分大学附属学校	오이타 대학	N130	QCTVPl		GN				replace			places:7740
+大分大学附属学校	오이타 대학 부속학교	N130	QCTVPl		GN				replace			places:7740
 大分市	오이타시	N130	QCTVPl		GN				replace			places:7741
 大分市立美術館	오이타시 미술관	N130	QCTVPl		GN				replace			places:7742
 大分市美術館	오이타시 미술관	N130	QCTVPl		GN				replace			places:7743
@@ -7912,8 +7912,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大嵐駅	오조레역	N130	QCTVPl		GN				replace			places:7909
 大嶺	오미네	N130	QCTVPl		GN				replace			places:7910
 大嶺駅	오미네역	N130	QCTVPl		GN				replace			places:7911
-大巌院	다이간인 사면석탑	N130	QCTVPl		GN				replace			places:7912
-大巖院	다이간인 사면석탑	N130	QCTVPl		GN				replace			places:7913
+大巌院	다이간인	N130	QCTVPl		GN				replace			places:7912
+大巖院	다이간인	N130	QCTVPl		GN				replace			places:7913
 大川	오카와	N130	QCTVPl		GN				replace			places:7914
 大川ダム公園駅	오카와다무코엔역	N130	QCTVPl		GN				replace			places:7915
 大川寺	다이센지	N130	QCTVPl		GN							places:7916
@@ -8100,7 +8100,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大浜公園	오하마 공원	N130	QCTVPl		GN				replace			places:8097
 大浦	오우라	N130	QCTVPl		GN				replace			places:8098
 大浦天主堂	오우라 천주당	N130	QCTVPl		GN				replace			places:8099
-大浦支線	지선	N130	VTp		GN				replace			places:8100
+大浦支線	오우라 지선	N130	VTp		GN				replace			places:8100
 大浦町	오우라초	N130	QCTVPl		GN				replace			places:8101
 大浦駅	오우라역	N130	QCTVPl		GN				replace			places:8102
 大海	오미	N130	QCTVPl		GN				replace			places:8103
@@ -8173,8 +8173,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大石田	오이시다	N130	QCTVPl		GN				replace			places:8170
 大石田町	오이시다정	N130	QCTVPl		GN				replace			places:8171
 大石田駅	오이시다역	N130	QCTVPl		GN				replace			places:8172
-大石社	오이시진자신사	N130	QCTVPl		GN				replace			places:8173
-大石神社	오이시진자신사	N130	QCTVPl		GN				replace			places:8174
+大石社	오오이시 신사	N130	QCTVPl		GN				replace			places:8173
+大石神社	오오이시 신사	N130	QCTVPl		GN				replace			places:8174
 大石駅	오이시역	N130	QCTVPl		GN				replace			places:8175
 大磯	오이소	N130	QCTVPl		GN				replace			places:8176
 大磯町	오이소정	N130	QCTVPl		GN				replace			places:8177
@@ -8352,8 +8352,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大阪交通大学	오사카 산업대학	N130	QCTVPl		GN				replace			places:8349
 大阪伊丹空港	오사카 공항	N130	QCTVPl		GN				replace			places:8350
 大阪公立大学	오사카 공립대학	N130	QCTVPl		GN				replace			places:8351
-大阪公立大学工業高等専門学校	오사카부립대학 공업고등전문학교	N130	QCTVPl		GN				replace			places:8352
-大阪医学校	오사카 대학	N130	QCTVPl		GN				replace			places:8353
+大阪公立大学工業高等専門学校	오사카 공립대학 공업고등전문학교	N130	QCTVPl		GN				replace			places:8352
+大阪医学校	오사카 의학교	N130	QCTVPl		GN				replace			places:8353
 大阪国際空港	오사카 국제공항	N130	QCTVPl		GN				replace			places:8354
 大阪城	오사카성	N130	QCTVPl		GN				replace			places:8355
 大阪城ホール	오사카성 홀	N130	QCTVPl		GN				replace			places:8356
@@ -8368,10 +8368,10 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大阪外語大学	오사카 외국어대학	N130	QCTVPl		GN				replace			places:8365
 大阪外語学校	오사카 외국어대학	N130	QCTVPl		GN				replace			places:8366
 大阪大学	오사카 대학	N130	QCTVPl		GN				replace			places:8367
-大阪大学吹田キャンパス	오사카 대학	N130	QCTVPl		GN				replace			places:8368
-大阪大学豊中キャンパス	오사카 대학	N130	QCTVPl		GN				replace			places:8369
+大阪大学吹田キャンパス	오사카 대학 스이타 캠퍼스	N130	QCTVPl		GN				replace			places:8368
+大阪大学豊中キャンパス	오사카 대학 도요나카 캠퍼스	N130	QCTVPl		GN				replace			places:8369
 大阪大谷大学	오사카 오타니 대학	N130	QCTVPl		GN				replace			places:8370
-大阪大谷大学大学院	오사카 오타니 대학	N130	QCTVPl		GN				replace			places:8371
+大阪大谷大学大学院	오사카 오타니 대학 대학원	N130	QCTVPl		GN				replace			places:8371
 大阪大谷大学短期大学部	오사카 오타니 단기대학	N130	QCTVPl		GN				replace			places:8372
 大阪天満宮	오사카텐만구	N130	QCTVPl		GN							places:8373
 大阪天満宮駅	오사카텐만구역	N130	QCTVPl		GN				replace			places:8374
@@ -8395,8 +8395,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大阪市長居陸上競技場	얀마 스타디움 나가이	N130	QCTVPl		GN				replace			places:8392
 大阪府	오사카부	N130	QCTVPl		GN				replace			places:8393
 大阪府咲洲庁舎	오사카부 사키시마청사	N130	QCTVPl		GN				replace			places:8394
-大阪府女子師範学校	오사카 교육대학	N130	QCTVPl		GN				replace			places:8395
-大阪府尋常師範学校	오사카 교육대학	N130	QCTVPl		GN				replace			places:8396
+大阪府女子師範学校	오사카부 여자사범학교	N130	QCTVPl		GN				replace			places:8395
+大阪府尋常師範学校	오사카부 심상사범학교	N130	QCTVPl		GN				replace			places:8396
 大阪府立大学	오사카 부립 대학	N130	QCTVPl		GN				replace			places:8397
 大阪府立大学工業高等専門学校	오사카부립대학 공업고등전문학교	N130	QCTVPl		GN				replace			places:8398
 大阪府立工業高等専門学校	오사카부립대학 공업고등전문학교	N130	QCTVPl		GN				replace			places:8399
@@ -8434,7 +8434,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 大阪難波	오사카난바	N130	QCTVPl		GN							places:8431
 大阪難波駅	오사카난바역	N130	QCTVPl		GN				replace			places:8432
 大阪音楽大学	오사카 음악대학	N130	QCTVPl		GN				replace			places:8433
-大阪音楽学校	오사카 음악대학	N130	QCTVPl		GN				replace			places:8434
+大阪音楽学校	오사카 음악학교	N130	QCTVPl		GN				replace			places:8434
 大阪駅	오사카역	N130	QCTVPl		GN				replace			places:8435
 大阿太	오아다	N130	QCTVPl		GN				replace			places:8436
 大阿太駅	오아다역	N130	QCTVPl		GN				replace			places:8437
@@ -8649,7 +8649,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 太田城	오타성	N130	QCTVPl		GN				replace			places:8646
 太田山公園	오다야마 공원	N130	QCTVPl		GN				replace			places:8647
 太田川	오타강	N130	QCTVPl		GN				replace			places:8648
-太田川改修事業	오타강	N130	QCTVPl		GN				replace			places:8649
+太田川改修事業	오타강 정비사업	N130	QCTVPl		GN				replace			places:8649
 太田川駅	오타가와역	N130	QCTVPl		GN				replace			places:8650
 太田市	오타시	N130	QCTVPl		GN				replace			places:8651
 太田浜	오타하마	N130	QCTVPl		GN							places:8652
@@ -8679,7 +8679,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 奄美大島空港	아마미 공항	N130	QCTVPl		GN				replace			places:8676
 奄美市	아마미시	N130	QCTVPl		GN				replace			places:8677
 奄美空港	아마미 공항	N130	QCTVPl		GN				replace			places:8678
-奄美群島国立公園	아마미군도국정공원	N130	QCTVPl		GN				replace			places:8679
+奄美群島国立公園	아마미군도국립공원	N130	QCTVPl		GN				replace			places:8679
 奈井江	나이에	N130	QCTVPl		GN				replace			places:8680
 奈井江町	나이에정	N130	QCTVPl		GN				replace			places:8681
 奈井江駅	나이에역	N130	QCTVPl		GN				replace			places:8682
@@ -9323,7 +9323,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 宮崎台駅	미야자키다이역	N130	QCTVPl		GN				replace			places:9320
 宮崎国際大学	미야자키 국제대학교	N130	QCTVPl		GN				replace			places:9321
 宮崎大学	미야자키 대학	N130	QCTVPl		GN				replace			places:9322
-宮崎大学附属学校	미야자키 대학	N130	QCTVPl		GN				replace			places:9323
+宮崎大学附属学校	미야자키 대학 부속학교	N130	QCTVPl		GN				replace			places:9323
 宮崎市	미야자키시	N130	QCTVPl		GN				replace			places:9324
 宮崎県	미야자키현	N130	QCTVPl		GN				replace			places:9325
 宮崎県立美術館	미야자키 현립 미술관	N130	QCTVPl		GN				replace			places:9326
@@ -9744,7 +9744,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 小松	고마쓰	N130	QCTVPl		GN				replace			places:9741
 小松原	고마쓰바라	N130	QCTVPl		GN							places:9742
 小松原駅	고마쓰바라역	N130	QCTVPl		GN				replace			places:9743
-小松基地	고마쓰 공항	N130	QCTVPl		GN				replace			places:9744
+小松基地	고마쓰 기지	N130	QCTVPl		GN				replace			places:9744
 小松島	고마쓰시마	N130	QCTVPl		GN				replace			places:9745
 小松島市	고마쓰시마시	N130	QCTVPl		GN				replace			places:9746
 小松川	고마쓰카와	N130	QCTVPl		GN				replace			places:9747
@@ -10050,8 +10050,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 屈足	굿타리	N130	QCTVPl		GN				replace			places:10047
 屈足駅	굿타리역	N130	QCTVPl		GN				replace			places:10048
 屋久島	야쿠시마	N130	QCTVPl		GN				replace			places:10049
-屋久島スギ原始林	야쿠시마	N130	QCTVPl		GN				replace			places:10050
-屋久島杉原始林	야쿠시마	N130	QCTVPl		GN				replace			places:10051
+屋久島スギ原始林	야쿠시마 삼나무 원시림	N130	QCTVPl		GN				replace			places:10050
+屋久島杉原始林	야쿠시마 삼나무 원시림	N130	QCTVPl		GN				replace			places:10051
 屋久島町	야쿠시마정	N130	QCTVPl		GN				replace			places:10052
 屋代	야시로	N130	QCTVPl		GN							places:10053
 屋代駅	야시로역	N130	QCTVPl		GN				replace			places:10054
@@ -10128,7 +10128,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 山形城	야마가타성	N130	QCTVPl		GN				replace			places:10125
 山形大	야마가타 대학	N130	QCTVPl		GN				replace			places:10126
 山形大学	야마가타 대학	N130	QCTVPl		GN				replace			places:10127
-山形大学附属学校	야마가타 대학	N130	QCTVPl		GN				replace			places:10128
+山形大学附属学校	야마가타 대학 부속학교	N130	QCTVPl		GN				replace			places:10128
 山形市	야마가타시	N130	QCTVPl		GN				replace			places:10129
 山形村	야마가타촌	N130	QCTVPl		GN				replace			places:10130
 山形県	야마가타현	N130	QCTVPl		GN				replace			places:10131
@@ -10149,8 +10149,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 山梨	야마나시	N130	QCTVPl		GN				replace			places:10146
 山梨大学	야마나시 대학	N130	QCTVPl		GN				replace			places:10147
 山梨学院大学	야마나시가쿠인대학교	N130	QCTVPl		GN				replace			places:10148
-山梨学院大学体育館	야마나시가쿠인대학교	N130	QCTVPl		GN				replace			places:10149
-山梨学院大学法科大学院	야마나시가쿠인대학교	N130	QCTVPl		GN				replace			places:10150
+山梨学院大学体育館	야마나시가쿠인대학교 체육관	N130	QCTVPl		GN				replace			places:10149
+山梨学院大学法科大学院	야마나시가쿠인대학교 법과대학원	N130	QCTVPl		GN				replace			places:10150
 山梨市	야마나시시	N130	QCTVPl		GN				replace			places:10151
 山梨市駅	야마나시시역	N130	QCTVPl		GN				replace			places:10152
 山梨県	야마나시현	N130	QCTVPl		GN				replace			places:10153
@@ -10389,7 +10389,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 岩手刈屋駅	이와테카리야역	N130	QCTVPl		GN				replace			places:10386
 岩手大	이와테 대학	N130	QCTVPl		GN				replace			places:10387
 岩手大学	이와테 대학	N130	QCTVPl		GN				replace			places:10388
-岩手大学附属学校	이와테 대학	N130	QCTVPl		GN				replace			places:10389
+岩手大学附属学校	이와테 대학 부속학교	N130	QCTVPl		GN				replace			places:10389
 岩手山	이와테산	N130	QCTVPl		GN				replace			places:10390
 岩手川口駅	이와테카와구치역	N130	QCTVPl		GN				replace			places:10391
 岩手町	이와테정	N130	QCTVPl		GN				replace			places:10392
@@ -10976,7 +10976,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 幕別町	마쿠베쓰정	N130	QCTVPl		GN				replace			places:10973
 幕別駅	마쿠베쓰역	N130	QCTVPl		GN				replace			places:10974
 幕張	마쿠하리	N130	QCTVPl		GN				replace			places:10975
-幕張イベントホール	마쿠하리 멧세	N130	QCTVPl		GN				replace			places:10976
+幕張イベントホール	마쿠하리 이벤트홀	N130	QCTVPl		GN				replace			places:10976
 幕張メッセ	마쿠하리 멧세	N130	QCTVPl		GN				replace			places:10977
 幕張本郷	마쿠하리혼고	N130	QCTVPl		GN							places:10978
 幕張本郷駅	마쿠하리혼고역	N130	QCTVPl		GN				replace			places:10979
@@ -11540,7 +11540,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 徳島県	도쿠시마현	N130	QCTVPl		GN				replace			places:11537
 徳島空港	도쿠시마 공항	N130	QCTVPl		GN				replace			places:11538
 徳島線	도쿠시마선	N130	VTp		GN				replace			places:11539
-徳島航空基地	도쿠시마 공항	N130	QCTVPl		GN				replace			places:11540
+徳島航空基地	도쿠시마 항공기지	N130	QCTVPl		GN				replace			places:11540
 徳島阿波おどり空港	도쿠시마 공항	N130	QCTVPl		GN				replace			places:11541
 徳島駅	도쿠시마역	N130	QCTVPl		GN				replace			places:11542
 徳庵	도쿠안	N130	QCTVPl		GN				replace			places:11543
@@ -11720,7 +11720,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 愛大医学部南口駅	아이다이이가쿠부미나미구치역	N130	QCTVPl		GN				replace			places:11717
 愛媛	에히메	N130	QCTVPl		GN				replace			places:11718
 愛媛大学	에히메 대학	N130	QCTVPl		GN				replace			places:11719
-愛媛大学附属学校	에히메 대학	N130	QCTVPl		GN				replace			places:11720
+愛媛大学附属学校	에히메 대학 부속학교	N130	QCTVPl		GN				replace			places:11720
 愛媛県	에히메현	N130	QCTVPl		GN				replace			places:11721
 愛媛県立美術館	에히메현 미술관	N130	QCTVPl		GN				replace			places:11722
 愛媛県美術館	에히메현 미술관	N130	QCTVPl		GN				replace			places:11723
@@ -11757,7 +11757,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 愛知御津駅	아이치미토역	N130	QCTVPl		GN				replace			places:11754
 愛知環状鉄道線	아이치 환상 철도선	N130	VTp		GN				replace			places:11755
 愛知産業大学	아이치산업대학	N130	QCTVPl		GN				replace			places:11756
-愛知産業大学短期大学部	아이치산업대학	N130	QCTVPl		GN				replace			places:11757
+愛知産業大学短期大学部	아이치산업대학 단기대학부	N130	QCTVPl		GN				replace			places:11757
 愛知県	아이치현	N130	QCTVPl		GN				replace			places:11758
 愛知県美術館	아이치현 미술관	N130	QCTVPl		GN				replace			places:11759
 愛荘	아이쇼	N130	QCTVPl		GN							places:11760
@@ -12270,8 +12270,8 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 新宿Lタワー	신주쿠 엘타워	N130	QCTVPl		GN				replace			places:12267
 新宿NSビル	신주쿠 NS 빌딩	N130	QCTVPl		GN				replace			places:12268
 新宿アイランド	신주쿠 아이랜드타워	N130	QCTVPl		GN				replace			places:12269
-新宿アイランドタワー	신주쿠 아이랜드타워	N130	QCTVPl		GN				replace			places:12270
-新宿アイランドホール	신주쿠 아이랜드타워	N130	QCTVPl		GN				replace			places:12271
+新宿アイランドタワー	신주쿠 아일랜드타워	N130	QCTVPl		GN				replace			places:12270
+新宿アイランドホール	신주쿠 아일랜드홀	N130	QCTVPl		GN				replace			places:12271
 新宿エルタワー	신주쿠 엘타워	N130	QCTVPl		GN				replace			places:12272
 新宿オークタワー	신주쿠 오크 타워	N130	QCTVPl		GN				replace			places:12273
 新宿ゴールデン街	신주쿠 골든가이	N130	QCTVPl		GN				replace			places:12274
@@ -12299,7 +12299,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 新富士駅	신후지역	N130	QCTVPl		GN				replace			places:12296
 新富山	신토미야마	N130	QCTVPl		GN							places:12297
 新富山口駅	신토야마구치역	N130	QCTVPl		GN				replace			places:12298
-新富山駅	신토미야마역	N130	QCTVPl		GN				replace			places:12299
+新富山駅	신토야마역	N130	QCTVPl		GN				replace			places:12299
 新富町	신토미정	N130	QCTVPl		GN				replace			places:12300
 新富町駅	신토미초역	N130	QCTVPl		GN				replace			places:12301
 新小岩	신코이와	N130	QCTVPl		GN							places:12302
@@ -12402,7 +12402,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 新旭川駅	신아사히카와역	N130	QCTVPl		GN				replace			places:12399
 新旭駅	신아사히역	N130	QCTVPl		GN				replace			places:12400
 新曽	기타다치군	N130	QCTVPl		GN							places:12401
-新曽村	기타다치군촌	N130	QCTVPl		GN				replace			places:12402
+新曽村	니조촌	N130	QCTVPl		GN				replace			places:12402
 新月	니쓰키	N130	QCTVPl		GN							places:12403
 新月駅	니쓰키역	N130	QCTVPl		GN				replace			places:12404
 新有馬	신아리마	N130	QCTVPl		GN							places:12405
@@ -12494,7 +12494,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 新潟県立鳥屋野潟公園新潟スタジアム	니가타 스타디움 빅 스완	N130	QCTVPl		GN				replace			places:12491
 新潟空港	니가타 공항	N130	QCTVPl		GN				replace			places:12492
 新潟競馬場	니가타 경마장	N130	QCTVPl		GN				replace			places:12493
-新潟航空基地	니가타 공항	N130	QCTVPl		GN				replace			places:12494
+新潟航空基地	니가타 항공기지	N130	QCTVPl		GN				replace			places:12494
 新潟駅	니가타역	N130	QCTVPl		GN				replace			places:12495
 新瀬戸	신세토	N130	QCTVPl		GN				replace			places:12496
 新瀬戸駅	신세토역	N130	QCTVPl		GN				replace			places:12497
@@ -12908,7 +12908,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 旦過	단가	N130	QCTVPl		GN							places:12905
 旦過駅	단가역	N130	QCTVPl		GN				replace			places:12906
 旧中川	규나카가와강	N130	QCTVPl		GN				replace			places:12907
-旧中川灯籠流し	규나카가와강	N130	QCTVPl		GN				replace			places:12908
+旧中川灯籠流し	규나카가와강 등불 띄우기	N130	QCTVPl		GN				replace			places:12908
 旧仲宗根氏庭園	구 나카소네 씨 정원	N130	QCTVPl		GN				replace			places:12909
 旧居留地	구 거류지	N130	QCTVPl		GN				replace			places:12910
 旧岩崎邸庭園	구 이와사키 저택 정원	N130	QCTVPl		GN				replace			places:12911
@@ -13687,7 +13687,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 東三条駅	히가시산조역	N130	QCTVPl		GN				replace			places:13684
 東上	도조	N130	QCTVPl		GN				replace			places:13685
 東上本線	도조 본선	N130	VTp		GN				replace			places:13686
-東上線	본선	N130	VTp		GN				replace			places:13687
+東上線	도조선	N130	VTp		GN				replace			places:13687
 東上野	히가시우에노	N130	QCTVPl		GN				replace			places:13688
 東上駅	도조역	N130	QCTVPl		GN				replace			places:13689
 東下条	히가시게조	N130	QCTVPl		GN							places:13690
@@ -13739,7 +13739,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 東京デイズニーランド	도쿄 디즈니랜드	N130	QCTVPl		GN				replace			places:13736
 東京ドイツ村	도쿄 도이쓰무라	N130	QCTVPl		GN				replace			places:13737
 東京ドーム	도쿄 돔	N130	QCTVPl		GN				replace			places:13738
-東京ドームグループ	도쿄 돔	N130	QCTVPl		GN				replace			places:13739
+東京ドームグループ	도쿄 돔 그룹	N130	QCTVPl		GN				replace			places:13739
 東京ドームシティ	도쿄 돔 시티	N130	QCTVPl		GN				replace			places:13740
 東京ドームシティアトラクションズ	도쿄 돔 시티 어트랙션스	N130	QCTVPl		GN				replace			places:13741
 東京ドームシティー	도쿄 돔 시티	N130	QCTVPl		GN				replace			places:13742
@@ -13791,7 +13791,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 東京国際大学	도쿄 국제대학	N130	QCTVPl		GN				replace			places:13788
 東京国際空港	도쿄 국제공항	N130	QCTVPl		GN				replace			places:13789
 東京外国語大学	도쿄 외국어대학	N130	QCTVPl		GN				replace			places:13790
-東京外国語大学国際学術戦略本部	도쿄 외국어대학	N130	QCTVPl		GN				replace			places:13791
+東京外国語大学国際学術戦略本部	도쿄 외국어대학 국제학술전략본부	N130	QCTVPl		GN				replace			places:13791
 東京外大	도쿄 외국어대학	N130	QCTVPl		GN				replace			places:13792
 東京外語大	도쿄 외국어대학	N130	QCTVPl		GN				replace			places:13793
 東京外語大学	도쿄 외국어대학	N130	QCTVPl		GN				replace			places:13794
@@ -13807,7 +13807,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 東京工業大学	도쿄 공업대학	N130	QCTVPl		GN				replace			places:13804
 東京工科大	도쿄 공과대학	N130	QCTVPl		GN				replace			places:13805
 東京工科大学	도쿄 공과대학	N130	QCTVPl		GN				replace			places:13806
-東京工科大学大学院	도쿄 공과대학	N130	QCTVPl		GN				replace			places:13807
+東京工科大学大学院	도쿄 공과대학 대학원	N130	QCTVPl		GN				replace			places:13807
 東京工芸大学	도쿄 공예대학	N130	QCTVPl		GN				replace			places:13808
 東京帝室博物館	도쿄 국립박물관	N130	QCTVPl		GN				replace			places:13809
 東京府尋常師範学校	도쿄 학예 대학	N130	QCTVPl		GN				replace			places:13810
@@ -15760,7 +15760,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 江の浦駅	에노우라역	N130	QCTVPl		GN				replace			places:15757
 江ノ島	에노시마	N130	QCTVPl		GN				replace			places:15758
 江ノ島線	에노시마선	N130	VTp		GN				replace			places:15759
-江ノ島電鉄線	에노시마 전철 에노시마 전철선	N130	VTp		GN				replace			places:15760
+江ノ島電鉄線	에노시마 전철선	N130	VTp		GN				replace			places:15760
 江ノ島駅	에노시마역	N130	QCTVPl		GN				replace			places:15761
 江井ヶ島	에이가시마	N130	QCTVPl		GN							places:15762
 江井ヶ島駅	에이가시마역	N130	QCTVPl		GN				replace			places:15763
@@ -16312,7 +16312,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 津軽石	쓰가루이시	N130	QCTVPl		GN				replace			places:16309
 津軽石駅	쓰가루이시역	N130	QCTVPl		GN				replace			places:16310
 津軽線	쓰가루선	N130	VTp		GN				replace			places:16311
-津軽鉄道線	쓰가루 철도 쓰가루 철도선	N130	VTp		GN				replace			places:16312
+津軽鉄道線	쓰가루 철도선	N130	VTp		GN				replace			places:16312
 津軽飯詰	쓰가루이즈메	N130	QCTVPl		GN							places:16313
 津軽飯詰駅	쓰가루이즈메역	N130	QCTVPl		GN				replace			places:16314
 津野	쓰노	N130	QCTVPl		GN				replace			places:16315
@@ -17175,7 +17175,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 熊川	구마가와	N130	QCTVPl		GN				replace			places:17172
 熊川駅	구마가와역	N130	QCTVPl		GN				replace			places:17173
 熊本	구마모토	N130	QCTVPl		GN				replace			places:17174
-熊本マスジド	이스티크라르 오사카 모스크	N130	QCTVPl		GN				replace			places:17175
+熊本マスジド	구마모토 모스크	N130	QCTVPl		GN				replace			places:17175
 熊本医科大学	구마모토 대학	N130	QCTVPl		GN				replace			places:17176
 熊本城	구마모토성	N130	QCTVPl		GN				replace			places:17177
 熊本城跡	구마모토성	N130	QCTVPl		GN				replace			places:17178
@@ -20465,7 +20465,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 芝山千代田	시바야마치요다	N130	QCTVPl		GN							places:20462
 芝山千代田駅	시바야마치요다역	N130	QCTVPl		GN				replace			places:20463
 芝山町	시바야마정	N130	QCTVPl		GN				replace			places:20464
-芝山鉄道線	시바야마 철도 시바야마 철도선	N130	VTp		GN				replace			places:20465
+芝山鉄道線	시바야마 철도선	N130	VTp		GN				replace			places:20465
 芝川	시바카와	N130	QCTVPl		GN							places:20466
 芝川駅	시바카와역	N130	QCTVPl		GN				replace			places:20467
 芝浦	시바우라	N130	QCTVPl		GN				replace			places:20468
@@ -22714,7 +22714,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 道ノ尾駅	미치노오역	N130	QCTVPl		GN				replace			places:22711
 道上	미치노우에	N130	QCTVPl		GN							places:22712
 道上駅	미치노우에역	N130	QCTVPl		GN				replace			places:22713
-道南いさりび鉄道線	도난 이사리비 철도 도난 이사리비 철도선	N130	VTp		GN				replace			places:22714
+道南いさりび鉄道線	도난 이사리비 철도선	N130	VTp		GN				replace			places:22714
 道場	도조	N130	QCTVPl		GN				replace			places:22715
 道場南口駅	도조미나미구치역	N130	QCTVPl		GN				replace			places:22716
 道場駅	도조역	N130	QCTVPl		GN				replace			places:22717
@@ -23261,7 +23261,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 銚子口駅	조시구치역	N130	QCTVPl		GN				replace			places:23258
 銚子大橋	조시 대교	N130	QCTVPl		GN				replace			places:23259
 銚子市	조시시	N130	QCTVPl		GN				replace			places:23260
-銚子電気鉄道線	조시 전기 철도 조시 전기 철도선	N130	VTp		GN				replace			places:23261
+銚子電気鉄道線	조시 전기 철도선	N130	VTp		GN				replace			places:23261
 銚子駅	조시역	N130	QCTVPl		GN				replace			places:23262
 銭函	제니바코	N130	QCTVPl		GN							places:23263
 銭函駅	제니바코역	N130	QCTVPl		GN				replace			places:23264
@@ -23767,7 +23767,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 阿武	아부	N130	QCTVPl		GN				replace			places:23764
 阿武町	아부정	N130	QCTVPl		GN				replace			places:23765
 阿武隈川	아부쿠마강	N130	QCTVPl		GN				replace			places:23766
-阿武隈急行線	아부쿠마 급행 아부쿠마 급행선	N130	VTp		GN				replace			places:23767
+阿武隈急行線	아부쿠마 급행선	N130	VTp		GN				replace			places:23767
 阿母崎	아보자키	N130	QCTVPl		GN							places:23768
 阿母崎駅	아보자키역	N130	QCTVPl		GN				replace			places:23769
 阿波	아와	N130	QCTVPl		GN				replace			places:23770
@@ -24495,7 +24495,7 @@ YRP野比駅	YRP 노비역	N130	QCTVPl		GN				replace			places:71
 馬田駅	마다역	N130	QCTVPl		GN				replace			places:24492
 馬立	우마타테	N130	QCTVPl		GN				replace			places:24493
 馬立駅	우마타테역	N130	QCTVPl		GN				replace			places:24494
-馬絹神社	마기누진자신사	N130	QCTVPl		GN				replace			places:24495
+馬絹神社	마기누 신사	N130	QCTVPl		GN				replace			places:24495
 馬路	우마지	N130	QCTVPl		GN				replace			places:24496
 馬路村	우마지촌	N130	QCTVPl		GN				replace			places:24497
 馬路駅	마지역	N130	QCTVPl		GN				replace			places:24498

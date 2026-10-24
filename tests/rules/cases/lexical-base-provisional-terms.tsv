@@ -1,0 +1,36 @@
+# 규칙: LEX-1, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:352791	仮勘定を使う。	가계정을 쓴다.	fix	defaults
+dict:jisjk:352791	仮勘定に記入する。	가계정에 기입한다.	fix	defaults
+dict:jisjk:352791	仮勘定が残る。	가계정이 남는다.	fix	defaults
+dict:jisjk:352791	「仮勘定を確認した」	「가계정을 확인했다」	fix	defaults
+dict:jisjk:352791	仮計定を使う。	가계정을 쓴다.	keep	defaults
+dict:jisjk:352791	勘定科目を調べる。	계정과목을 조사한다.	keep	defaults
+dict:jisjk:352791	仮計算をする。	가계산을 한다.	keep	defaults
+dict:jisjk:60120	仮小屋を建てる。	임시 오두막을 짓는다.	fix	defaults
+dict:jisjk:60120	仮小屋で休む。	임시 오두막에서 쉰다.	fix	defaults
+dict:jisjk:60120	仮小屋に住む。	임시 오두막에 산다.	fix	defaults
+dict:jisjk:60120	「仮小屋を建てた」	「임시 오두막을 지었다」	fix	defaults
+dict:jisjk:60120	小屋を建てる。	오두막을 짓는다.	keep	defaults
+dict:jisjk:60120	仮屋に住む。	임시 오두막집에 산다.	keep	defaults
+dict:jisjk:60120	仮建物を調べる。	가건물을 조사한다.	keep	defaults
+dict:jisjk:228716	仮性クループを治療する。	가성 크루프를 치료한다.	fix	defaults
+dict:jisjk:228716	仮性クループの症状。	가성 크루프의 증상.	fix	defaults
+dict:jisjk:228716	仮性クループと診断された。	가성 크루프라고 진단되었다.	fix	defaults
+dict:jisjk:228716	「仮性クループの症状を調べた」	「가성 크루프의 증상을 조사했다」	fix	defaults
+dict:jisjk:228716	クループの症状。	크룹의 증상.	keep	defaults
+dict:jisjk:228716	仮性近視を調べる。	가성 근시를 조사한다.	keep	defaults
+dict:jisjk:228716	グループを作る。	그룹을 만든다.	keep	defaults
+dict:jisjk:352783	仮格付けを発表する。	잠정 등급을 발표한다.	fix	defaults
+dict:jisjk:352783	仮格付けを確認する。	잠정 등급을 확인한다.	fix	defaults
+dict:jisjk:352783	仮格付けが決まった。	잠정 등급이 정해졌다.	fix	defaults
+dict:jisjk:352783	「仮格付けを発表した」	「잠정 등급을 발표했다」	fix	defaults
+dict:jisjk:352783	格付けを発表する。	등급설정을 발표한다.	keep	defaults
+dict:jisjk:352783	値付けを確認する。	가격매김을 확인한다.	keep	defaults
+dict:jisjk:352783	仮決定を発表する。	가결정을 발표한다.	keep	defaults
+dict:jisjk:229010	仮道管を観察する。	헛물관을 관찰한다.	fix	defaults
+dict:jisjk:229010	仮道管の構造。	헛물관의 구조.	fix	defaults
+dict:jisjk:229010	仮道管を調べる。	헛물관을 조사한다.	fix	defaults
+dict:jisjk:229010	「仮道管の構造を調べた」	「헛물관 구조를 조사했다」	fix	defaults
+dict:jisjk:229010	仮導管を観察する。	헛물관을 관찰한다.	keep	defaults
+dict:jisjk:229010	導管を観察する。	물관을 관찰한다.	keep	defaults

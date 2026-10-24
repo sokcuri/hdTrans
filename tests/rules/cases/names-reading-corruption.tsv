@@ -1,0 +1,24 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:reading-corruption	瀬尾光世	세오 미츠요	fix	lookup
+names:reading-corruption	瀬田奏恵	세타 카나에	fix	lookup
+names:reading-corruption	炎天家冷奴	엔텐카 히야얏코	fix	lookup
+names:reading-corruption	炎天家冷奴氏が来た。	엔텐카 히야얏코 씨가 왔다.	fix	lookup
+names:reading-corruption	炎天家冷奴さん	엔텐카 히야얏코 씨	fix	lookup
+names:reading-corruption	炎天家冷奴を見た。	엔텐카 히야얏코를 보았다.	fix	lookup
+names:reading-corruption	炎天家冷奴の名前	엔텐카 히야얏코의 이름	fix	lookup
+names:reading-corruption	炎天家冷奴です。	엔텐카 히야얏코입니다.	fix	lookup
+names:reading-corruption	炎天家冷奴様	엔텐카 히야얏코님	fix	lookup
+names:reading-corruption	炎天家冷奴に会った。	엔텐카 히야얏코를 만났다.	fix	lookup
+names:reading-corruption	炎天家冷奴と話した。	엔텐카 히야얏코와 이야기했다.	fix	lookup
+names:reading-corruption	「炎天家冷奴」	「엔텐카 히야얏코」	fix	lookup
+names:reading-corruption	炎天家冷奴君	엔텐카 히야얏코 군	fix	lookup
+names:reading-corruption	炎天家冷奴氏	엔텐카 히야얏코 씨	fix	lookup
+names:reading-corruption	炎天家冷奴へ	엔텐카 히야얏코에게	fix	lookup
+names:reading-corruption	炎天家冷奴！	엔텐카 히야얏코!	fix	lookup
+names:reading-corruption	炎天家冷奴？	엔텐카 히야얏코?	fix	lookup
+names:reading-corruption	炎天家冷奴。	엔텐카 히야얏코.	fix	lookup
+names:reading-corruption	炎天家冷奴という名前	엔텐카 히야얏코라는 이름	fix	lookup
+names:reading-corruption	炎天家冷奴の本	엔텐카 히야얏코의 책	fix	lookup
+names:reading-corruption	瀬田 薫	세타 카오루	keep	lookup
+names:reading-corruption	炎天下冷奴	엔텐카 히야얏코	keep	lookup

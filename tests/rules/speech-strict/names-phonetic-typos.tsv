@@ -1,0 +1,6 @@
+# 규칙: SPC-1
+rule	input	expected	kind	layer
+names:phonetic-target	「猫背椿を知っている」	「네코제 츠바키를 알고 있다」	fix	lookup
+names:phonetic-target	「猪本ハルオを知っている」	「이노모토 하루오를 알고 있다」	fix	lookup
+names:phonetic-target	「猫宮ひなたを知っている」	「네코미야 히나타를 알고 있다」	keep	lookup
+names:phonetic-target	「猪本ナツキを知っている」	「이노모토 나츠키를 알고 있다」	keep	lookup

@@ -1,0 +1,25 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:phonetic-target	猫背椿	네코제 츠바키	fix	lookup
+names:phonetic-target	猫背椿。	네코제 츠바키.	fix	lookup
+names:phonetic-target	猫背椿氏	네코제 츠바키 씨	fix	lookup
+names:phonetic-target	猫背椿氏が来た。	네코제 츠바키 씨가 왔다.	fix	lookup
+names:phonetic-target	猫背椿さん	네코제 츠바키 씨	fix	lookup
+names:phonetic-target	猫背椿様	네코제 츠바키님	fix	lookup
+names:phonetic-target	猫背椿の名前	네코제 츠바키의 이름	fix	lookup
+names:phonetic-target	猫背椿の写真	네코제 츠바키의 사진	fix	lookup
+names:phonetic-target	猫背椿です。	네코제 츠바키입니다.	fix	lookup
+names:phonetic-target	「猫背椿」	「네코제 츠바키」	fix	lookup
+names:phonetic-target	猫背	새우등	keep	lookup
+names:phonetic-target	猪本ハルオ	이노모토 하루오	fix	lookup
+names:phonetic-target	猪本ハルオ。	이노모토 하루오.	fix	lookup
+names:phonetic-target	猪本ハルオ氏	이노모토 하루오 씨	fix	lookup
+names:phonetic-target	猪本ハルオ氏が来た。	이노모토 하루오 씨가 왔다.	fix	lookup
+names:phonetic-target	猪本ハルオさん	이노모토 하루오 씨	fix	lookup
+names:phonetic-target	猪本ハルオ様	이노모토 하루오님	fix	lookup
+names:phonetic-target	猪本ハルオの名前	이노모토 하루오의 이름	fix	lookup
+names:phonetic-target	猪本ハルオの写真	이노모토 하루오의 사진	fix	lookup
+names:phonetic-target	猪本ハルオです。	이노모토 하루오입니다.	fix	lookup
+names:phonetic-target	「猪本ハルオ」	「이노모토 하루오」	fix	lookup
+names:phonetic-target	猪本ナツキ	이노모토 나츠키	keep	lookup
+names:phonetic-target	井本	이모토	keep	lookup

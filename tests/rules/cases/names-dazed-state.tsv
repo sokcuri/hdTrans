@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:names.569622	放心状態	멍한 상태	fix	fixed
+dict:names.569622	放心状態になった。	멍한 상태가 되었다.	fix	fixed
+dict:names.569622	放心状態で座っている。	멍한 상태로 앉아 있다.	fix	fixed
+dict:names.569622	放心状態が続く。	멍한 상태가 계속된다.	fix	fixed
+dict:names.569622	放心状態から回復した。	멍한 상태로부터 회복했다.	fix	fixed
+dict:names.569622	放心状態のまま。	멍한 상태인 채.	fix	fixed
+dict:names.569622	彼は放心状態だった。	그는 멍한 상태였다.	fix	fixed
+dict:names.569622	放心状態に見える。	멍한 상태로 보인다.	fix	fixed
+dict:names.569622	油断していた。	방심하고 있었다.	keep	fixed

@@ -1,0 +1,38 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:352745	業績予想を下方修正した。	실적예상을 하향수정했다.	fix	defaults
+dict:jisjk:352745	利益を下方修正する。	이익을 하향수정한다.	fix	defaults
+dict:jisjk:352745	下方修正が必要だ。	하향수정이 필요하다.	fix	defaults
+dict:jisjk:352745	目標を下方修正した。	목표를 하향수정했다.	fix	defaults
+dict:jisjk:262361	不完全性定理を学ぶ。	불완전성 정리를 배운다.	fix	defaults
+dict:jisjk:262361	これは不完全性定理だ。	이것은 불완전성 정리다.	fix	defaults
+dict:jisjk:262361	不完全性定理について話した。	불완전성 정리에 대해 이야기했다.	fix	defaults
+dict:jisjk:71418	不撓不屈の精神。	불요 불굴의 정신.	fix	defaults
+dict:jisjk:71418	不撓不屈の意志。	불요 불굴의 의지.	fix	defaults
+dict:jisjk:71418	不撓不屈で戦う。	불요 불굴로 싸운다.	fix	defaults
+dict:jisjk:202923	不況時代を生きた。	불황시대를 살았다.	fix	defaults
+dict:jisjk:202923	不況時代の記録。	불황시대의 기록.	fix	defaults
+dict:jisjk:202923	長い不況時代だった。	긴 불황시대였다.	fix	defaults
+dict:jisjk:71477	不準備が原因だ。	준비 미비가 원인이다.	fix	defaults
+dict:jisjk:71477	不準備のまま始めた。	준비 미비인 채 시작했다.	fix	defaults
+dict:jisjk:71477	不準備を反省した。	준비 미비를 반성했다.	fix	defaults
+dict:jisjk:262360	不確定性原理を学ぶ。	불확정성 원리를 배운다.	fix	defaults
+dict:jisjk:262360	これは不確定性原理だ。	이것은 불확정성 원리다.	fix	defaults
+dict:jisjk:262360	不確定性原理について話した。	불확정성 원리에 대해 이야기했다.	fix	defaults
+dict:jisjk:262361	不完全な説明。	불완전한 설명.	keep	defaults
+dict:jisjk:262361	この定理を証明した。	이 정리를 증명했다.	keep	defaults
+dict:jisjk:71418	不屈の精神。	불굴의 정신.	keep	defaults
+dict:jisjk:202923	不況が続いた。	불황이 계속되었다.	keep	defaults
+dict:jisjk:71477	準備が必要だ。	준비가 필요하다.	keep	defaults
+dict:jisjk:71477	事前準備をした。	사전 준비를 했다.	keep	defaults
+dict:jisjk:262360	不確実な情報。	불확실한 정보.	keep	defaults
+dict:jisjk:262360	その原理を説明した。	그 원리를 설명했다.	keep	defaults
+dict:jisjk:118879	山頂から下山できる。	산정에서 하산할 수 있다.	fix	defaults
+dict:jisjk:118879	暗くて下山できない。	어두워서 하산할 수 없다.	fix	defaults
+dict:jisjk:118879	一人では下山できなかった。	혼자서는 하산할 수 없었다.	fix	defaults
+dict:jisjk:118879	下山できれば安心だ。	하산할 수 있으면 안심이다.	fix	defaults
+dict:jisjk:118879	安全に下山できる。	안전하게 하산할 수 있다.	fix	defaults
+dict:jisjk:118879	明日は下山できる。	내일은 하산할 수 있다.	fix	defaults
+dict:jisjk:118879	山から下山した。	산에서 하산했다.	keep	defaults
+dict:jisjk:118879	登山できる。	등산할 수 있다.	keep	defaults
+dict:jisjk:118879	下山しなかった。	하산하지 않았다.	keep	defaults

@@ -1,0 +1,20 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:proper-surname-target	潮健児	우시오 켄지	fix	lookup
+names:proper-surname-target	潮健児氏が来た。	우시오 켄지 씨가 왔다.	fix	lookup
+names:proper-surname-target	潮健児さん	우시오 켄지 씨	fix	lookup
+names:proper-surname-target	潮健児を見た。	우시오 켄지를 보았다.	fix	lookup
+names:proper-surname-target	潮健児の名前	우시오 켄지의 이름	fix	lookup
+names:proper-surname-target	潮健磁	우시오 켄지	fix	lookup
+names:proper-surname-target	潮健磁氏が来た。	우시오 켄지 씨가 왔다.	fix	lookup
+names:proper-surname-target	潮健磁さん	우시오 켄지 씨	fix	lookup
+names:proper-surname-target	潮健磁を見た。	우시오 켄지를 보았다.	fix	lookup
+names:proper-surname-target	潮健磁の名前	우시오 켄지의 이름	fix	lookup
+names:proper-surname-target	潮建志	우시오 켄지	fix	lookup
+names:proper-surname-target	潮建志氏が来た。	우시오 켄지 씨가 왔다.	fix	lookup
+names:proper-surname-target	潮建志さん	우시오 켄지 씨	fix	lookup
+names:proper-surname-target	潮建志を見た。	우시오 켄지를 보았다.	fix	lookup
+names:proper-surname-target	潮建志の名前	우시오 켄지의 이름	fix	lookup
+names:proper-surname-target	潮建磁さん	우시오 켄지 씨	fix	lookup
+names:proper-surname-target	潮哲也さん	우시오 테츠야 씨	keep	lookup
+names:proper-surname-target	潮紗理菜さん	우시오 사리나 씨	keep	lookup

@@ -1,0 +1,21 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:242978	中国パセリを使う。	고수를 쓴다.	fix	defaults
+dict:jisjk:242978	中国パセリの香り。	고수의 향기.	fix	defaults
+dict:jisjk:242978	中国パセリを料理に入れた。	고수를 요리에 넣었다.	fix	defaults
+dict:jisjk:242978	これは中国パセリだ。	이것은 고수다.	fix	defaults
+dict:jisjk:242966	中国食器を洗う。	중국 식기를 씻는다.	fix	defaults
+dict:jisjk:242966	これは中国食器だ。	이것은 중국 식기다.	fix	defaults
+dict:jisjk:242966	中国食器の店。	중국 식기의 가게.	fix	defaults
+dict:jisjk:242966	中国食器を買った。	중국 식기를 샀다.	fix	defaults
+dict:jisjk:104964	中座の理由。	중도 퇴석의 이유.	fix	defaults
+dict:jisjk:104964	中座は失礼だ。	중도 퇴석은 실례다.	fix	defaults
+dict:jisjk:104964	突然の中座だった。	갑작스러운 중도 퇴석이었다.	fix	defaults
+dict:jisjk:104964	中座した。	자리를 떴다.	keep	defaults
+dict:jisjk:242978	パセリを刻む。	파슬리를 잘게 썬다.	keep	defaults
+dict:jisjk:242978	コリアンダーを使う。	고수를 쓴다.	keep	defaults
+dict:jisjk:242966	中国料理を食べた。	중국 요리를 먹었다.	keep	defaults
+dict:jisjk:242966	食器を洗う。	식기를 씻는다.	keep	defaults
+dict:jisjk:242966	中国茶を飲んだ。	중국차를 마셨다.	keep	defaults
+dict:jisjk:242978	中国パセリを刻んだ。	고수를 잘게 썰었다.	fix	defaults
+dict:jisjk:242978	中国パセリを刻んでいる。	고수를 잘게 썰고 있다.	fix	defaults

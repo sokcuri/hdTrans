@@ -1,0 +1,5 @@
+# 규칙: LEX-3, LEX-13, SPC-1
+rule	input	expected	kind	layer
+dict:jisjk:194156	「じゃくはいものだ」と言った。	「풋내기야」라고 말했다.	fix	defaults
+lookup:lexical-spelling	「連続函数だ」と言った。	「연속 함수야」라고 말했다.	keep	defaults
+lookup:lexical-spelling	「炉心溶融だ」と言った。	「노심 용융이야」라고 말했다.	fix	defaults

@@ -1,0 +1,85 @@
+# 규칙: LEX-3, LEX-25
+rule	input	expected	kind	layer
+dict:jisjk:244422	手描き	손그림	fix	defaults
+dict:jisjk:244422	手描きの作品。	손으로 그린 작품.	keep	defaults
+dict:jisjk:244422	手描きで描く。	손그림으로 그린다.	fix	defaults
+dict:jisjk:244422	手描きの絵。	손으로 그린 그림.	keep	defaults
+dict:jisjk:244422	手書き	손글씨	keep	defaults
+dict:jisjk:244422	手描きで描いた。	손그림으로 그렸다.	fix	defaults
+dict:jisjk:244422	手描きによる作品。	손그림에 의한 작품.	fix	defaults
+dict:jisjk:244422	手描きイラスト。	손그림 일러스트.	fix	defaults
+dict:jisjk:244422	手描きが好きだ。	손그림을 좋아한다.	fix	defaults
+dict:jisjk:75734	手裏剣	수리검	fix	defaults
+dict:jisjk:75734	手裏剣を投げる。	수리검을 던진다.	fix	defaults
+dict:jisjk:75734	手裏剣を使う。	수리검을 쓴다.	fix	defaults
+dict:jisjk:75734	手裏剣の形。	수리검의 형태.	fix	defaults
+dict:jisjk:75734	手裏剣が飛ぶ。	수리검이 난다.	fix	defaults
+dict:jisjk:75734	手裏剣を拾った。	수리검을 주웠다.	fix	defaults
+dict:jisjk:75734	忍者の手裏剣。	닌자의 수리검.	fix	defaults
+dict:jisjk:106154	手間賃	품삯	fix	defaults
+dict:jisjk:106154	手間賃を払う。	품삯을 지불한다.	fix	defaults
+dict:jisjk:106154	手間賃を受け取る。	품삯을 받는다.	fix	defaults
+dict:jisjk:106154	手間賃が必要だ。	품삯이 필요하다.	fix	defaults
+dict:jisjk:106154	手間	수고	keep	defaults
+dict:jisjk:106154	手間賃を渡す。	품삯을 건네준다.	fix	defaults
+dict:jisjk:106154	手間賃をもらった。	품삯을 받았다.	fix	defaults
+dict:jisjk:106154	手間賃の支払い。	품삯의 지불.	fix	defaults
+dict:jisjk:106154	手間賃は高い。	품삯은 높다.	fix	defaults
+dict:jisjk:87061	打撃率	타격률	fix	defaults
+dict:jisjk:87061	打撃率の説明。	타격률의 설명.	fix	defaults
+dict:jisjk:87061	打撃率について。	타격률에 대해.	fix	defaults
+dict:jisjk:87061	打撃率の話。	타격률의 이야기.	fix	defaults
+dict:jisjk:87061	打率	타율	keep	defaults
+dict:jisjk:87061	打撃	타격	keep	defaults
+dict:jisjk:87061	打撃率が高い。	타격률이 높다.	fix	defaults
+dict:jisjk:87061	打撃率を比べる。	타격률을 비교한다.	fix	defaults
+dict:jisjk:87061	打撃率の計算。	타격률의 계산.	fix	defaults
+dict:jisjk:87061	打撃率を調べる。	타격률을 조사한다.	fix	defaults
+dict:jisjk:160994	承諾料	승낙료	fix	defaults
+dict:jisjk:160994	承諾料の説明。	승낙료의 설명.	fix	defaults
+dict:jisjk:160994	承諾料について。	승낙료에 대해.	fix	defaults
+dict:jisjk:160994	承諾料の話。	승낙료의 이야기.	fix	defaults
+dict:jisjk:160994	承諾	승낙	keep	defaults
+dict:jisjk:160994	承諾書	승낙서	keep	defaults
+dict:jisjk:160994	承諾料を払う。	승낙료를 지불한다.	fix	defaults
+dict:jisjk:160994	承諾料が必要だ。	승낙료가 필요하다.	fix	defaults
+dict:jisjk:160994	承諾料の金額。	승낙료의 금액.	fix	defaults
+dict:jisjk:160994	承諾料を支払った。	승낙료를 지불했다.	fix	defaults
+dict:jisjk:63736	技術屋	기술자	fix	defaults
+dict:jisjk:63736	技術屋の説明。	기술자의 설명.	fix	defaults
+dict:jisjk:63736	技術屋について。	기술자에 대해.	fix	defaults
+dict:jisjk:63736	技術屋の話。	기술자의 이야기.	fix	defaults
+dict:jisjk:63736	技術者	기술자	keep	defaults
+dict:jisjk:63736	技術士	기술사	keep	defaults
+dict:jisjk:63736	技術師	기술사	keep	defaults
+dict:jisjk:63736	全員技術屋だ。	전원 기술자다.	fix	defaults
+dict:jisjk:63736	技術屋ばかりだ。	기술자뿐이다.	fix	defaults
+dict:jisjk:63736	技術屋として働く。	기술자로서 일한다.	fix	defaults
+dict:jisjk:63736	技術屋の意見。	기술자의 의견.	fix	defaults
+dict:jisjk:78096	抑うつ	우울	fix	defaults
+dict:jisjk:78096	抑うつの説明。	우울의 설명.	fix	defaults
+dict:jisjk:78096	抑うつについて。	우울에 대해.	fix	defaults
+dict:jisjk:78096	抑うつの話。	우울의 이야기.	fix	defaults
+dict:jisjk:78096	抗うつ剤	항우울제	keep	defaults
+dict:jisjk:78096	抑うつ症状。	우울 증상.	fix	defaults
+dict:jisjk:78096	抑うつ状態。	우울 상태.	fix	defaults
+dict:jisjk:78096	抑うつと不安。	우울과 불안.	fix	defaults
+dict:jisjk:78096	抑うつが続く。	우울이 계속된다.	fix	defaults
+dict:jisjk:361695	投写型テレビ	투사형 텔레비전	fix	defaults
+dict:jisjk:361695	投写型テレビの説明。	투사형 텔레비전의 설명.	fix	defaults
+dict:jisjk:361695	投写型テレビについて。	투사형 텔레비전에 대해.	fix	defaults
+dict:jisjk:361695	投写型テレビの話。	투사형 텔레비전의 이야기.	fix	defaults
+dict:jisjk:361695	投写型テレビを買う。	투사형 텔레비전을 산다.	fix	defaults
+dict:jisjk:361695	投写型テレビの画面。	투사형 텔레비전의 화면.	fix	defaults
+dict:jisjk:361695	投写型テレビを使う。	투사형 텔레비전을 쓴다.	fix	defaults
+dict:jisjk:361695	投写型テレビの映像。	투사형 텔레비전의 영상.	fix	defaults
+dict:jisjk:359429	投資利益率	투자 수익률	fix	defaults
+dict:jisjk:359429	投資利益率の説明。	투자 수익률의 설명.	fix	defaults
+dict:jisjk:359429	投資利益率について。	투자 수익률에 대해.	fix	defaults
+dict:jisjk:359429	投資利益率の話。	투자 수익률의 이야기.	fix	defaults
+dict:jisjk:359429	投資収益率	투자 수익률	keep	defaults
+dict:jisjk:359429	投資	투자	keep	defaults
+dict:jisjk:359429	投資利益率が高い。	투자 수익률이 높다.	fix	defaults
+dict:jisjk:359429	投資利益率を比べる。	투자 수익률을 비교한다.	fix	defaults
+dict:jisjk:359429	投資利益率の計算。	투자 수익률의 계산.	fix	defaults
+dict:jisjk:359429	投資利益率を調べる。	투자 수익률을 조사한다.	fix	defaults

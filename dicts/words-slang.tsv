@@ -97,7 +97,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 だんご頭	시뇽	N110			GN							s:94
 ちばらき	지바라키	N110			GN							s:95
 ちびキャラ	치비	N110			GN							s:96
-ちゃんこ	잔코나베	N110			GN							s:97
+ちゃんこ	창코	N110			GN							s:97
 ちゃんちゃん焼き	찬찬야키	N110			GN							s:98
 ちょうおんぱ	초음파	N110			GN							s:99
 ちょうちょ	나비	N110			GN							s:100
@@ -9448,3 +9448,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 草	ㅋㅋ	N110			GN							s:9449
 詰	망&AV@	M415			GN	6948	||4 U+0== "Lん" U+0== "Lむ" U+0== "Lだ" U+0== "Lで"	詰む의 ん 활용과 기본형은 일이 끝장난 뜻의 망하다로 고른다(人生詰んだ 인생 망했다).				s:9450
 ワンチャンス	원 찬스	N110			GN							s:9451
+ちゃんこ鍋	창코나베	N110	VFd		GN						ちゃんこなべ	s:9452

@@ -1,0 +1,91 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-25
+rule	input	expected	kind	layer
+dict:jisjk:84389	中京テレビ放送。	주쿄 테레비 방송.	fix	defaults
+dict:jisjk:84389	中京テレビ放送を見る。	주쿄 테레비 방송을 본다.	fix	defaults
+dict:jisjk:84389	中京テレビ放送の番組。	주쿄 테레비 방송의 프로그램.	fix	defaults
+dict:jisjk:88537	割れなべ。	깨진 냄비.	fix	defaults
+dict:jisjk:88537	これは割れなべだ。	이것은 깨진 냄비다.	fix	defaults
+dict:jisjk:88537	割れなべを使う。	깨진 냄비를 쓴다.	fix	defaults
+dict:jisjk:233563	四季桜。	시키자쿠라.	fix	defaults
+dict:jisjk:233563	四季桜を見る。	시키자쿠라를 본다.	fix	defaults
+dict:jisjk:233563	これは四季桜だ。	이것은 시키자쿠라다.	fix	defaults
+dict:jisjk:352684	株主資本利益率。	자기자본이익률.	fix	defaults
+dict:jisjk:352684	株主資本利益率を調べる。	자기자본이익률을 조사한다.	fix	defaults
+dict:jisjk:352684	株主資本利益率が上がる。	자기자본이익률이 오른다.	fix	defaults
+dict:jisjk:30916	隠元。	강낭콩.	fix	defaults
+dict:jisjk:30916	隠元を食べる。	강낭콩을 먹는다.	fix	defaults
+dict:jisjk:30916	これは隠元だ。	이것은 강낭콩이다.	fix	defaults
+dict:jisjk:192001	白々明け。	새벽녘.	fix	defaults
+dict:jisjk:192001	白々明けに出る。	새벽녘에 나온다.	fix	defaults
+dict:jisjk:192001	白々明けの空。	새벽녘의 하늘.	fix	defaults
+dict:jisjk:145911	腕を組む。	팔짱을 낀다.	keep	defaults
+dict:jisjk:145911	腕を組んだ。	팔짱을 꼈다.	keep	defaults
+dict:jisjk:145911	腕を組んでいる。	팔짱을 끼고 있다.	keep	defaults
+dict:jisjk:145911	彼は腕を組んだ。	그는 팔짱을 꼈다.	keep	defaults
+dict:jisjk:145911	腕を組まない。	팔짱을 끼지 않는다.	keep	defaults
+dict:jisjk:145911	腕を組んだ人。	팔짱을 낀 사람.	keep	defaults
+dict:jisjk:145911	腕を伸ばす。	팔을 뻗는다.	keep	defaults
+dict:jisjk:145911	手を組む。	손을 잡는다.	keep	defaults
+dict:jisjk:145911	腕をくむ。	팔짱을 낀다.	keep	defaults
+dict:jisjk:260857	あれから。	그때부터.	keep	defaults
+dict:jisjk:260857	あれから一年が過ぎた。	그때부터 일년이 지났다.	keep	defaults
+dict:jisjk:260857	あれから何も変わらない。	그때부터 아무것도 변함없다.	keep	defaults
+dict:jisjk:260737	むくれる。	뾰로통해진다.	fix	defaults
+dict:jisjk:260737	むくれた。	뾰로통해졌다.	fix	defaults
+dict:jisjk:260737	むくれない。	뾰로통해지지 않는다.	fix	defaults
+dict:jisjk:260737	むくれた顔。	뾰로통해진 얼굴.	fix	defaults
+dict:jisjk:133893	プロトン。	프로톤.	fix	defaults
+dict:jisjk:133893	これはプロトンだ。	이것은 프로톤이다.	fix	defaults
+dict:jisjk:133893	プロトンを見る。	프로톤을 본다.	fix	defaults
+dict:jisjk:113528	ヤブジラミ。	뱀도랏.	keep	defaults
+dict:jisjk:113528	これはヤブジラミだ。	이것은 뱀도랏이다.	keep	defaults
+dict:jisjk:113528	ヤブジラミを見る。	뱀도랏을 본다.	keep	defaults
+dict:jisjk:58991	リアクター。	리액터.	fix	defaults
+dict:jisjk:58991	これはリアクターだ。	이것은 리액터다.	fix	defaults
+dict:jisjk:58991	リアクターを見る。	리액터를 본다.	fix	defaults
+dict:jisjk:40373	いずみ製菓。	이즈미 제과.	fix	defaults
+dict:jisjk:40373	「いずみ製菓」	「이즈미 제과」	fix	defaults
+dict:jisjk:40373	いずみ製菓を見る。	이즈미 제과를 본다.	fix	defaults
+dict:jisjk:40374	いせえび。	닭새우.	fix	defaults
+dict:jisjk:40374	これはいせえびだ。	이것은 닭새우다.	fix	defaults
+dict:jisjk:40984	これはこぶまきだ。	이것은 다시마말이다.	fix	defaults
+dict:jisjk:160652	介助者。	도우미.	fix	defaults
+dict:jisjk:170351	甘藷。	고구마.	fix	defaults
+dict:jisjk:170351	これは甘藷だ。	이것은 고구마다.	fix	defaults
+dict:places:7589	多摩帝国美術学校。	다마 제국 미술학교.	fix	defaults
+dict:places:7589	「多摩帝国美術学校」	「다마 제국 미술학교」	fix	defaults
+dict:places:7589	多摩帝国美術学校を見る。	다마 제국 미술학교를 본다.	fix	defaults
+dict:places:8368	大阪大学吹田キャンパス。	오사카 대학 스이타 캠퍼스.	fix	defaults
+dict:places:8368	「大阪大学吹田キャンパス」	「오사카 대학 스이타 캠퍼스」	fix	defaults
+dict:places:8368	大阪大学吹田キャンパスを見る。	오사카 대학 스이타 캠퍼스를 본다.	fix	defaults
+dict:places:10149	山梨学院大学体育館。	야마나시가쿠인대학교 체육관.	fix	defaults
+dict:places:10149	「山梨学院大学体育館」	「야마나시가쿠인대학교 체육관」	fix	defaults
+dict:places:10149	山梨学院大学体育館を見る。	야마나시가쿠인대학교 체육관을 본다.	fix	defaults
+dict:places:11540	徳島航空基地。	도쿠시마 항공기지.	fix	defaults
+dict:places:11540	「徳島航空基地」	「도쿠시마 항공기지」	fix	defaults
+dict:places:11540	徳島航空基地を見る。	도쿠시마 항공기지를 본다.	fix	defaults
+dict:names.107064	カンダブ水路。	칸다부 수로.	fix	defaults
+dict:names.107064	カンダブ水路を見る。	칸다부 수로를 본다.	fix	defaults
+dict:names.113730	ガールとロボットを見る。	걸과 로봇을 본다.	keep	defaults
+dict:names.312950	ブライアン・マイケル・スミス。	브라이언 마이클 스미스.	fix	defaults
+dict:names.312950	ブライアン・マイケル・スミスを見る。	브라이언 마이클 스미스를 본다.	fix	defaults
+dict:names.314408	ブラッド・フレイザー。	브래드 프레이저.	fix	defaults
+dict:names.314408	ブラッド・フレイザーを見る。	브래드 프레이저를 본다.	fix	defaults
+dict:names.572553	新井毫。	아라이 고.	keep	defaults
+dict:names.572553	新井毫を見る。	아라이 고를 본다.	keep	defaults
+dict:names.712064	誠直也を見る。	마코토 나오야를 본다.	fix	defaults
+dict:jisjk:260857	あれ以来。	그 이후로.	keep	defaults
+dict:jisjk:40374	えび。	새우.	keep	defaults
+dict:names.572553	新井さん。	아라이 씨.	keep	defaults
+dict:names.189701	ジョージア・ダグラス・ジョンソン。	조지아 더글라스 존슨.	fix	defaults
+dict:names.189701	「ジョージア・ダグラス・ジョンソン」	「조지아 더글라스 존슨」	fix	defaults
+dict:names.189701	ジョージア・ダグラス・ジョンソンが来た。	조지아 더글라스 존슨이 왔다.	fix	defaults
+dict:names.396800	リライジングガンダム。	리라이징 건담.	fix	defaults
+dict:names.396800	「リライジングガンダム」	「리라이징 건담」	fix	defaults
+dict:names.396800	リライジングガンダムを見る。	리라이징 건담을 본다.	fix	defaults
+dict:names.560953	怪人☆仮面マスク。	괴인☆가면 마스크.	keep	defaults
+dict:names.560953	「怪人☆仮面マスク」	「괴인☆가면 마스크」	keep	defaults
+dict:names.560953	怪人☆仮面マスクを見る。	괴인☆가면 마스크를 본다.	keep	defaults
+dict:names.753612	馬鹿者。	바보.	keep	defaults
+dict:names.753612	この馬鹿者。	이 바보.	keep	defaults
+dict:names.753612	馬鹿者だ。	바보다.	keep	defaults
