@@ -14198,7 +14198,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 地位協定	지위협정	N110			GN						ちいきょうてい	w:14190
 地元	현지	N110	VPl		GN				xxx llm	1		w:14191
 地元民	현지인	I110			GN				xxx llm	1		w:14192
-地力	기본 실력	N110			GN				xxx llm	1		w:14193
+地力	기본 실력	N110	UPc		GN				xxx llm	1		w:14193
 地名学	지명학	N110			GN						ちめいがく	w:14194
 地回り	건달	N110			GN				xxx llm	1		w:14195
 地図学	지도학	N110			GN						ちずがく	w:14196
@@ -23659,7 +23659,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 誘導加熱	유도가열	N110			GN						ゆうどうかねつ	w:23642
 誘電正接	유전정접	N110			GN						ゆうでんせいせつ	w:23643
 語例	용례	N110			GN				xxx llm	1		w:23644
-語学力	어학 실력	N110			GN				llm		ごがくりょく	w:23645
+語学力	어학 실력	N110	UPc		GN				llm		ごがくりょく	w:23645
 語彙力	어휘력	N110			GN						ごいりょく	w:23646
 語彙機能文法	어휘기능문법	N110	QLG		GN						ごいきのうぶんぽう	w:23647
 語彙素	어휘소	N110	QLG		GN						ごいそ	w:23648
@@ -26891,3 +26891,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 見られちゃ	들켜 버&AA@	M460			GN							w:27274
 もう一人の	또 다른	E0H0			GN			한 사람을 더 가리키며 뒤 명사를 꾸미는 もう一人の(もう一人の自分 또 다른 자신)			もうひとりの	w:27275
 もうひとりの	또 다른	E0H0			GN			한 사람을 더 가리키며 뒤 명사를 꾸미는 もう一人の(もう一人の自分 또 다른 자신)				w:27276
+つけ狙	노&AA@	M440			GN						つけねらう	w:27327

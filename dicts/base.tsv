@@ -11171,7 +11171,7 @@ ttt	ttt	K110			GN				jisjk:201744
 がくようひん	학용품	N110	VPe		GN				jisjk:171337		-1
 がくり	학리	N110	UTh		GN				jisjk:171338		
 がくりょう	학교 기숙사	N110	VBl		GN				jisjk:171339		-1
-がくりょく	학력	N110	VMo		GN				jisjk:171340		-1
+がくりょく	학력	N110	VMoUPc		GN				jisjk:171340		-1
 がくれい	취학 연령	N110	UMe		GN				jisjk:171344		-1
 がくれき	학력	N110	VMo		GN				jisjk:171345		-1
 がくわり	학생 할인	N110	VMo		GN				jisjk:171346		-1
@@ -17062,7 +17062,6 @@ ttt	ttt	K110			GN				jisjk:201744
 こくりつ	국립	N110	VBl		GN				jisjk:182017		-1
 こくりつこうえん	국립공원	N110	VBl		GN				jisjk:182019		-1
 こくりょく	국력	N110	UPc		GN				jisjk:182020		-1
-こくりょくをつけ	국력을 향상시&AQ@	M447			GN				jisjk:119280		
 こくるい	곡류	N110			GN				jisjk:182021		-1
 こくれん	국제 연합	N110	VBl		GN				jisjk:182022		
 こくれんぐん	국제 연합군	N110	VHn		GN				jisjk:182024		-1
@@ -122985,8 +122984,7 @@ ttt	ttt	K110			GN				jisjk:201744
 体制下	체제하	N110	VBl		GN				jisjk:152932		
 体制作り	체제조직	I110			GN				jisjk:110803		
 体制固め	체제 굳히기	N110			GN				jisjk:151319		
-体力	체력	N110			GN				jisjk:35822		
-体力をつけ	체력을 &E8@	M447			GN				jisjk:261812		
+体力	체력	N110	UPc		GN				jisjk:35822		
 体力テスト	체력 테스트	N110	VRw		GN				jisjk:241085		
 体勢	몸의 자세	N110			GN				jisjk:35830		
 体協	체육협회	N110	VBl		GN				jisjk:240804		
@@ -128724,7 +128722,7 @@ ttt	ttt	K110			GN				jisjk:201744
 免疫不全症候群	면역부전 증후군	N110	QHP		GN				jisjk:253513		
 免疫体	면역체	N110	QHP		GN				jisjk:155603		
 免疫促進剤	면역 촉진제	N110	QHP		GN				jisjk:253511		
-免疫力	면역력	N110			GN				jisjk:155605		
+免疫力	면역력	N110	UPc		GN				jisjk:155605		
 免疫化	면역화	N110			BZ				jisjk:360708		
 免疫反応	면역 반응	N110	QHP		GN				jisjk:253512		
 免疫寛容	면역 관용	N110			GN				jisjk:253509		
@@ -138430,7 +138428,7 @@ ttt	ttt	K110			GN				jisjk:201744
 劔木	켄노키	N130	QPN	Wa	GN				jisjk:352117		
 劔田	켄다	N130	QPN	Wa	GN				jisjk:352116		
 力	힘&CJ@	M415			GN				jisjk:13677		
-力	힘	N110	XXX		GN	1143	||6 P-1== "4**" &&2 S-1== "の" P-1== "2**" P-1== "3**" G+0== "Hz" S-1== "としての" P-1== "0**"	力는 문장 처음이나 동사·부사·연체사 및 の·としての 뒤에서 독립 명사 ‘힘’으로 고른다.	jisjk:116353		
+力	힘	N110	XXXUPc		GN	1143	||6 P-1== "4**" &&2 S-1== "の" P-1== "2**" P-1== "3**" G+0== "Hz" S-1== "としての" P-1== "0**"	力는 문장 처음이나 동사·부사·연체사 및 の·としての 뒤에서 독립 명사 ‘힘’으로 고른다.	jisjk:116353		
 力	치카라	N130	VHnQPN	Wb	GN				jisjk:265643		
 力	츠토무	N130	VHnQPN	Wb	GN				jisjk:339790		
 力	력	N110	 	Z7On	GN				jisjk:339794		
@@ -138453,9 +138451,6 @@ ttt	ttt	K110			GN				jisjk:201744
 力の能率	힘의 능률	N110			GN				jisjk:242520		
 力の限り	힘껏	E311			GN				jisjk:1595		
 力をこめ	힘을 &CJ@	M427		Pn	GN				jisjk:349567		
-力をつけ	힘을 발휘&AV@	M447			GN				jisjk:139763		
-力をつけつつあ	힘을 북돋우고 &HN@	M428			GN				jisjk:139762		
-力を付け	힘을 돋&AI@	M417			GN				jisjk:92552		
 力を入れ	힘을 &AF@	M417			GN				jisjk:92553		
 力を入れ	힘을 기울&AJ@	M447			GN				jisjk:139759		
 力を入れ始め	힘을 쏟기 시작&AV@	M427			GN				jisjk:139758		
@@ -159953,7 +159948,6 @@ ttt	ttt	K110			GN				jisjk:201744
 国則	쿠니노리	N130	QPN	Wa	GN				jisjk:7123		
 国劇	국극	N110	UAr		GN				jisjk:16902		
 国力	국력	N110	UPc		GN				jisjk:16910		
-国力をつけ	국력을 향상시&AQ@	M447			GN				jisjk:119279		
 国労法	국로법	N110	ULw		BZ				jisjk:354262		
 国務	국무	N110			GN				jisjk:16919		
 国務会議	국무회의	N110	VGt		GN				jisjk:206426		
@@ -177815,7 +177809,7 @@ ttt	ttt	K110			GN				jisjk:201744
 学制	학제	N110			GN				jisjk:38418		
 学則	학칙	N110	ULw		GN				jisjk:38421		
 学割	학생할인	N110			GN				jisjk:38424		
-学力	학력	N110			GN				jisjk:38379		
+学力	학력	N110	UPc		GN				jisjk:38379		
 学務	학무	N110			GN				jisjk:38387		
 学匠	학자	N110	VHnUTh		GN				jisjk:171260		
 学区	학구	N110	VPl		GN				jisjk:38369		
@@ -214292,7 +214286,7 @@ ttt	ttt	K110			GN				jisjk:201744
 抵抗	저항	N110		Hd	GN				jisjk:32470		
 抵抗値	저항값	I110		Ct	GN				jisjk:82512		
 抵抗制御	저항제어	N110			GN				jisjk:244303		
-抵抗力	저항력	I110			GN				jisjk:82510		
+抵抗力	저항력	I110	UPc		GN				jisjk:82510		
 抵抗器	저항기	N110	VPe		GN				jisjk:244298		
 抵抗性	저항성	N110			BZ				jisjk:351691		
 抵抗性	저항성	N110			GN				jisjk:351692		
@@ -284088,7 +284082,7 @@ ttt	ttt	K110			GN				jisjk:201744
 知内町	시리우치쵸	N130	QCTVPl		GN				jisjk:301246		
 知利別	치리베쓰	I110	QCT		GN				jisjk:85166		
 知利別町	치리베츠쵸	I130	QCTVPl		GN				jisjk:309074		
-知力	지력	N110			GN				jisjk:34730		
+知力	지력	N110	UPc		GN				jisjk:34730		
 知勇	지용	N110			GN				jisjk:34739		
 知博	토모히로	N110			GN				jisjk:102588		
 知友	치카토모	N130	QPN		GN				jisjk:102613		
@@ -299307,7 +299301,7 @@ ttt	ttt	K110			GN				jisjk:201744
 経済制度	경제제도	N110	UMn		GN				jisjk:206803		
 経済制裁	경제제재	N110	ULm		BZ				jisjk:206802		
 経済副総理	경제부총리	N110	QPN		GN				jisjk:207164		
-経済力	경제력	I110			GN				jisjk:61128		
+経済力	경제력	I110	UPc		GN				jisjk:61128		
 経済協力	경제협력	I110			BZ				jisjk:108361		
 経済協力機構	경제협력기구	I110	VGt		BZ				jisjk:354464		
 経済協力白書	경제 협력 백서	N110	VSw		BZ				jisjk:353004		
@@ -306197,7 +306191,7 @@ ttt	ttt	K110			GN				jisjk:201744
 腕利き	실력가	I110	VHn		GN				jisjk:78697		
 腕前	솜씨	N110			GN				jisjk:29760		
 腕前が上が	솜씨가 &LM@	M428			GN				jisjk:145887		
-腕力	완력	N110			GN				jisjk:29753		
+腕力	완력	N110	UPc		GN				jisjk:29753		
 腕力に訴え	완력에 호소&AV@	M437			GN				jisjk:94206		
 腕力沙汰	완력 사태	N110			GN				jisjk:257105		
 腕力相場	완력 시장	N110			BZ				jisjk:359655		
@@ -360945,7 +360939,7 @@ ttt	ttt	K110			GN				jisjk:201744
 魔乳	기유	N110	QHP		GN				jisjk:251909		
 魔人	마인	N110	VHn		GN				jisjk:21240		
 魔利	마키키	N130			GN				jisjk:99385		
-魔力	마력	N110			GN				jisjk:21234		
+魔力	마력	N110	UPc		GN				jisjk:21234		
 魔境	마경	N110			GN				jisjk:99377		
 魔女	마녀	N110	VBpVHn		GN				jisjk:155134		
 魔女狩り	마녀 재판	N110	VBlUCl		GN				jisjk:251703		
