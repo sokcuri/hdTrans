@@ -2913,9 +2913,9 @@ bool RuleL320([[maybe_unused]] Item* p) {
 }
 
 // local 321
-//     gram[-1] has "VHn"
+//     sem[-1] has VHn
 bool RuleL321([[maybe_unused]] Item* p) {
-    return GramEq(p, -1, "VHn"sv);
+    return AttrEq(p, -1, "VHn"sv);
 }
 
 // local 322
@@ -4761,7 +4761,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL318, 0x872d2f05cbd26e89ull},
     {RuleL319, 0x9b60c74099f030d8ull},
     {RuleL320, 0x76026702cf1fedf5ull},
-    {RuleL321, 0x29966042bffcf281ull},
+    {RuleL321, 0xc5fee671fe3258a7ull},
     {RuleL322, 0x086eb9bbb735a277ull},
     {RuleL323, 0xbab77c26b0e3414cull},
     {RuleL324, 0xb64e47ce2a2bc78aull},
