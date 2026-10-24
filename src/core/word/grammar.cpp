@@ -122,16 +122,6 @@ bool Transitive(const Item* it) {
     return false;
 }
 
-// Whether item it is followed by a noun that the verb describes, not at the end of the
-// utterance (楽しみにしてたさ); before selection the first candidate of the next item counts.
-bool DescribedNoun(const Worker& w, const Item* it) {
-    const Item* n = it->next;
-    return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
-           !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
-           !std::ranges::any_of(dict::ClassMembers("noun.clause"),
-                                [&](std::string_view c) { return n->group->surface.starts_with(c); });
-}
-
 // The passive reading of a られた, られて or られ、 with no other cue.
 bool NarrativePassive(const Item* it, std::string_view rest) {
     if (!rest.starts_with("た") && !rest.starts_with("て") && !rest.starts_with(kJaComma)) return false;
@@ -376,6 +366,14 @@ bool Contrast(std::string_view rest) {
 }
 
 }  // namespace
+
+bool DescribedNoun(const Worker& w, const Item* it) {
+    const Item* n = it->next;
+    return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
+           !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
+           !std::ranges::any_of(dict::ClassMembers("noun.clause"),
+                                [&](std::string_view c) { return n->group->surface.starts_with(c); });
+}
 
 // Dictionary attributes of a thing: some, none of them a person, an animal or a god.
 std::string ItemLemma(Flusher& f, const Item* it, int slot) {
@@ -953,17 +951,6 @@ void InwardAuxiliary(Flusher& f) {
 
 namespace {
 
-// Whether lemma is one of ko-verb.holding or a phrase that ends in one (이를 악물다).
-bool HoldingVerb(std::string_view lemma) {
-    return std::ranges::any_of(dict::ClassMembers("ko-verb.holding"), [&](std::string_view v) {
-        return lemma == v || (lemma.ends_with(v) && lemma.substr(0, lemma.size() - v.size()).ends_with(" "));
-    });
-}
-
-}  // namespace
-
-namespace {
-
 // The perfect of an ending of the existential 있다 that follows a て form, for a verb whose
 // state is the result of what it did: the present reads as done (4다 5다, 0 8, 7니다 5습니다,
 // 2니까 5으니까); a condition (2면), a connective 6 that goes on and the past keep their form.
@@ -1060,33 +1047,6 @@ void PreparedState(Flusher& f) {
         if (prepared.empty()) continue;
         n->AssignEntrySurface(n->selected, "&C7@");
         n->AssignDirectSlot(n->DirectIndex(), prepared);
-    }
-}
-
-void PastProgressiveAdnominal(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb || it->detail->record != 0) {
-            continue;
-        }
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr) continue;
-        if (HoldingVerb(ItemLemma(f, it, it->selected))) continue;
-        if ((e->dst == "1고 있었던" || e->dst == "1고 있던") && DescribedNoun(f.w, it)) {
-            it->AssignDirectSlot(it->DirectIndex(), "1던");
-            continue;
-        }
-        const std::string_view te = it->DirectSurface();
-        Item* n = it->next;
-        if (e->dst != "1고" || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr || n->group->surface != "い" ||
-            n->selected < 0 || n->DirectIndex() < 0 || n->DirectSurface() != "た" ||
-            !ItemLemma(f, n, n->selected).starts_with("있") || !DescribedNoun(f.w, n)) {
-            continue;
-        }
-        const Entry* d = n->DirectEntry(n->DirectIndex());
-        if (d == nullptr || d->dst != "8") continue;
-        it->AssignDirectSlot(it->DirectIndex(), "1던");
-        n->AssignEntrySurface(n->selected, "");
-        n->AssignDirectSlot(n->DirectIndex(), "");
     }
 }
 

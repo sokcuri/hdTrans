@@ -95,6 +95,18 @@ constexpr NamedFeature kFeatures[] = {
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
     // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
     {"predicate-follows", [](Flusher&, const Item* it) { return PredicateFollows(it); }},
+    // The verb was analysed with no passive, potential or causative.
+    {"plain-voice", [](Flusher&, const Item* it) { return it->detail->record == 0; }},
+    // A noun that the word describes follows it in its token (DescribedNoun).
+    {"described-noun", [](Flusher& f, const Item* it) { return DescribedNoun(f.w, it); }},
+    // The Korean lemma is one of ko-verb.holding or a phrase that ends in one (이를 악물다).
+    {"holding-verb",
+     [](Flusher& f, const Item* it) {
+         const std::string lemma = ItemLemma(f, it, it->selected);
+         return std::ranges::any_of(dict::ClassMembers("ko-verb.holding"), [&](std::string_view v) {
+             return lemma == v || (lemma.ends_with(v) && std::string_view(lemma).substr(0, lemma.size() - v.size()).ends_with(" "));
+         });
+     }},
     // The surface holds a hiragana.
     {"hiragana",
      [](Flusher&, const Item* it) {

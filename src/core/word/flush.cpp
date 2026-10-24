@@ -38,7 +38,6 @@ constexpr Pass kTextPasses[] = {
     {"VerseTe", VerseTe},
     {"ResultState", ResultState},
     {"SimpleAspect", SimpleAspect},
-    {"PastProgressiveAdnominal", PastProgressiveAdnominal},
     {"PreparedState", PreparedState},
     {"NotYet", NotYet},
     {"TeThanks", TeThanks},

@@ -68,6 +68,10 @@ bool QuoteEnd(const Worker& w, const Item* it);
 bool ContrastFollows(const Item* it);
 // Whether s is katakana ァ..ヶ and ー only, and not empty (grammar.cpp).
 bool KatakanaSurface(std::string_view s);
+// Whether the item is followed in its token by a noun that it describes, not at the end of the
+// utterance (楽しみにしてたさ); before selection the first candidate of the next item counts
+// (grammar.cpp).
+bool DescribedNoun(const Worker& w, const Item* it);
 // Whether a verb follows it in its sentence (not an auxiliary of its て form), with only words and
 // particles between (connective.cpp).
 bool PredicateFollows(const Item* it);
@@ -101,9 +105,6 @@ void ResultState(Flusher& f);
 // as the simple form (思っている 생각한다, 見えている 보인다); that of a verb of saying or of
 // 付き合う except in the plain present and in 지 (言っていた 말했다, 付き合っている人 사귀는 사람).
 void SimpleAspect(Flusher& f);
-// The progressive ていた of a verb of the dictionary, not one the passive or potential pass
-// rewrote, before a noun it describes read as 던 (読んでいた本 읽던 책).
-void PastProgressiveAdnominal(Flusher& f);
 // The てある of an action done beforehand read as 어 두었다 (用意してある 준비해 두었다); after a が
 // subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
 void PreparedState(Flusher& f);
