@@ -198,6 +198,7 @@ cx:copies:10		&&2 S+0== "だって" ||2 F+0== "copy" F+0== "copied"	select-lemma
 cx:copies:20		&&2 S+0== "でも" ||2 F+0== "copy" F+0== "copied"	select-lemma "하지만"	でもでも 하지만 하지만
 cx:copies:25		&&3 F+0== "copied-straight" F+0!= "conjugating" ||2 K+0== "E" K+0== "P"	copy-word	なんでなんで 왜 왜
 cx:copies:30		&&5 F+0== "copied-straight" F+0== "connective-copies" ||2 U+0== "Rて" U+0== "Rで" ||2 F+0!= "verb" F+0!= "exclaimed" ||2 F+0!= "copies-end" &&2 F+0== "verb" F+0== "narrated"	set-ending "1고 또"	歩いて歩いて、町に着いた 걷고 또 걸어
+cx:copies:31	SND-2	&&5 F+0== "predicate-copies" F+0== "copies-end" F+0!= "copula-target" F+0== "drawn-ending" F+0!= "clipped"	copy-word set-ending "6" draw-ending	すごいすごーい 대단해 대단해~
 cx:copies:34	SND-2	&&5 F+0== "predicate-copies" F+0== "copies-end" F+0== "copied" F+0!= "cried-copies" B+0== @adjective.grumble	copy-word set-ending "1다"	寒い寒い 춥다 추워
 cx:copies:35	SND-2	&&4 F+0== "predicate-copies" F+0== "copies-end" F+0!= "cried-copies" B+0== @adjective.grumble	set-ending "6"	寒い寒い 춥다 추워
 cx:copies:36	SND-2	&&3 F+0== "predicate-copies" F+0== "copies-end" F+0!= "copula-target"	copy-word set-ending "6"	痛い痛い 아파 아파; だめだだめだ 안돼 안돼

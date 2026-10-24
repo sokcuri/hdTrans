@@ -415,7 +415,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
   `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
-  `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),
+  `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `drawn-ending`(어미가 `kana.drawn-out`의 부호로 시작함: すご|ーい), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),
   `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `lengthened`(단어 바로 뒤에 `mark.lengthening`의 늘임 표시가 옴: 思うなぁ, 思うなー), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
   `prompt-after`(단어 뒤의 글이 공백 다음에 `mark.prompt-follow`의 말로 시작하거나 `mark.prompt-answer`의 답을 담음: 화면에 띄운 물음 뒤의 と, 》, はい, やめる).
   표에 없는 판정이 필요하면 `constructions.cpp`의 `kFeatures`에 이름과 함께 더합니다.
@@ -451,6 +451,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
 | `set-active` | 수동이나 사역 수동으로 분석된 동사를 능동으로 씀(`어지다`, `게 되다`를 붙이지 않고 그 동사의 번역 그대로 활용함) |
 | `clip-ending` | 어미 뒤(어미가 없으면 번역 뒤)에 끝 음절을 받침 ㅅ으로 닫는 표지를 붙임(아파 아팟) |
 | `set-base-verb` | `lexical-passive`인 단어를 그 수동형을 만든 사전 동사(그 활용 부류의 행 가운데 기본 행)의 번역으로 씀(使われ 사용되다 → 쓰다) |
+| `draw-ending` | 어미 뒤(어미가 없으면 번역 뒤)에 늘임 표지를 붙임. 구 끝에서 `~`로 씀(대단해 대단해~) |
 | `set-sound` | 고른 후보의 번역을 단어의 가나 표기를 소리대로 적은 한글로 씀(ワタシ 와타시) |
 
 ### -why, 사례, 검사

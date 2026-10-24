@@ -132,6 +132,7 @@
 //= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.lengthening	Marks that draw out the word before them: after a final な of 思う they make it the speaker's opinion (思うなぁ, 思うなー).
+//= mark.long-vowel	Long marks that draw out a kana inside a word: a copy of a word drawn out with them is the same word (すごい|すごーい).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
@@ -1704,6 +1705,9 @@ mark.drawn	え
 mark.exclaim	！
 mark.exclaim	!
 
+mark.long-vowel	ー
+mark.long-vowel	～
+mark.long-vowel	〜
 mark.pause	…
 mark.pause	‥
 mark.pause	―
