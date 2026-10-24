@@ -181,6 +181,7 @@ private:
     Settings settings_;
     std::vector<Scratch> state_;
     std::vector<std::string> source_;  // with settings.text, the token texts before composing
+    int first_ = 0;                    // the first token of the sentence being composed
     std::vector<Written> written_;     // with settings.text, the items written so far
     Nodes nodes_;
 };

@@ -16,7 +16,7 @@
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
-| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
+| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
@@ -125,10 +125,13 @@ ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 �
 
 - ctest `rules.drops`는 규칙 사례와 `tests/rules/drops/`의 입력을 보고, `known-gaps.txt`의 입력만 봐줍니다.
   고친 입력은 그 목록에서 지웁니다.
-- `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 줄 수와 글이 빠지는 서로 다른 입력 수를 씁니다.
+- `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 줄 수, 글이 빠지는 서로 다른 입력 수,
+  자리를 정하지 못한 가나가 남은 서로 다른 입력 수를 씁니다. 자리를 정하지 못한 가나는 단어 단계가 사전 낱말 없이
+  한 글자씩 만들어 비운 가나 항목으로, 홀로 소리가 없는 가나(spec MNG-5)는 빼고, 뒤 단계가 들리는 대로 쓴 것도
+  셉니다(`--trace`로 찾음).
   문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
-  ctest `sets.drops`는 그 수가 `tools/drops-budget.tsv`의 행과 같아야 통과합니다. 빠지는 입력을 줄인 변경은
-  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
+  ctest `sets.drops`는 두 수가 `tools/drops-budget.tsv`의 행(`drops`, `unplaced`)과 같아야 통과합니다. 수를 줄인
+  변경은 `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
   경고만 남깁니다(GitHub Actions에서는 주석). 데이터가 바뀐 것이므로 그 데이터로 `--update`해 행을 다시 씁니다. CI의 `linux` 작업은 테스트 데이터를 받은 뒤 문서 세트만
   이 검사로 봅니다(웹 예제는 테스트 데이터에 없습니다).
 

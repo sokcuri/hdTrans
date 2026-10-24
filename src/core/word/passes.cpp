@@ -2,6 +2,7 @@
 // runs and noun phrases are replaced by one longer item, class-3 words take the
 // selection of the word they attach to, and negated plain verbs take their negative.
 #include <algorithm>
+#include <iterator>
 #include <functional>
 #include <string>
 #include <string_view>
@@ -346,7 +347,55 @@ int InsertionBudget(const Chain& chain) {
     return 2 * count + 2;
 }
 
+// An item of kana the analysis could not place: a synthetic hiragana word, made for a
+// character no dictionary word covers, whose target the lookup left empty.
+bool UnplacedKana(const Item* it) {
+    if (it == nullptr || it->group == nullptr || it->group->entries.size() != 1) return false;
+    const Entry* e = it->group->entries.front();
+    return e->dst.empty() && e->field.empty() && Has(e->gattr, "Nm") && Classify(it->group->surface) == 13;
+}
+
+constexpr std::string_view kCaseParticles[] = {"が", "を", "に", "は", "も", "で", "と", "へ", "や", "の"};
+
+// Whether b starts where a ends in the same token.
+bool Adjacent(const Item* a, const Item* b) {
+    return a != nullptr && b != nullptr && a->tokenIndex == b->tokenIndex && a->text.data() == b->text.data() &&
+           a->start + a->length == b->start;
+}
+
 }  // namespace
+
+// A case particle the analysis could not place between a noun and a placed word is read as the
+// particle (鼻がもげる with もげる unknown leaves が alone; MNG-5).
+void ReadUnplacedParticles(Flusher& f) {
+    Worker& w = f.w;
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        if (!UnplacedKana(it) || std::find(std::begin(kCaseParticles), std::end(kCaseParticles), it->group->surface) ==
+                                     std::end(kCaseParticles)) {
+            continue;
+        }
+        Item* prev = it->prev;
+        Item* next = it->next;
+        if (!Adjacent(prev, it) || !Adjacent(it, next) || UnplacedKana(prev) || UnplacedKana(next) ||
+            At(prev->Code(0), 0) != '1' || prev->EntryText(0).empty()) {
+            continue;
+        }
+        const std::string_view particle = it->group->surface;
+        Record* records = nullptr;
+        Record** tail = &records;
+        for (Record* r = w.DoLookup(particle, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (r->source != particle || At(r->partCode, 1) != '2') continue;
+            *tail = r;
+            tail = &r->child;
+        }
+        *tail = nullptr;
+        if (records == nullptr) continue;
+        Item* read = w.InsertLateCandidate(it->text, it->start, it->tokenIndex, records);
+        if (read == nullptr || read->length != it->length) continue;
+        w.chain.Insert(read, true);
+        it = read;
+    }
+}
 
 void DrainNmTail(Flusher& f) {
     Worker& w = f.w;

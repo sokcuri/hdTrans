@@ -1,0 +1,52 @@
+# 규칙: MNG-5
+rule	input	expected	kind	layer
+pre-select:unplaced-particle	おいっ！その変態を黙らせろ！	has:변태를	fix	pre-select
+pre-select:unplaced-particle	女性と見まごうような繊細な輪郭	has:여성과	fix	pre-select
+pre-select:unplaced-particle	噂は聞けど姿は見えず	has:소문은	fix	pre-select
+pre-select:unplaced-particle	落胆を隠せぬまま	has:낙담을	fix	pre-select
+pre-select:unplaced-particle	愛情を持ってたくて	has:애정을	fix	pre-select
+pre-select:unplaced-particle	気を遣われたくもない	has:기분을	fix	pre-select
+pre-select:unplaced-particle	まさか穴を掘るってんじゃないだろうな	has:구멍을	fix	pre-select
+pre-select:unplaced-particle	ゲームを待っててにゃ	has:게임을	fix	pre-select
+pre-select:unplaced-particle	どういう風の吹きまわしだ？	has:바람의	fix	pre-select
+pre-select:unplaced-particle	鼻がぽぺるまで	lacks:코가 까지	keep	pre-select
+pre-select:unplaced-particle	助けてもらおうってのにちょっと違うくね？	lacks:와 위	keep	pre-select
+pre-select:unplaced-particle	ガラスがわれた	유리가 깨졌다	keep	pre-select
+compose:sound-before-comma	「む、無理です」	「무, 무리입니다」	fix	compose
+compose:sound-before-comma	「う、撃たないでください」	「쏘, 쏘지 말아 주세요」	fix	compose
+compose:sound-before-comma	「ち、千里……」	has:치, 	fix	compose
+compose:sound-before-comma	む、道理だな。	음, 당연하네.	fix	compose
+compose:sound-before-comma	「そ、アプリオのコックさんに教えてもらったの」	has:「소, 	fix	compose
+compose:sound-before-comma	す、と俺の頭を小さな手が撫でた。	has:스, 	fix	compose
+compose:sound-before-comma	「…ぷ、あーっはっはっはっはっは！！！」	has:「…푸, 	fix	compose
+compose:sound-before-comma	っと！………お、誰かが下に来るぞ。	has:………오, 누군가가	fix	compose
+compose:sound-before-comma	「あ、と……お、起きた？」	has:……이, 일어났어	fix	compose
+compose:sound-before-comma	≪び、びっくりしたー。≫	has:≪비, 놀랐다	fix	compose
+compose:sound-before-comma	そう言って、ぽ、と頬を紅潮させる。	has:, 포, 	fix	compose
+compose:sound-before-comma	がばり、と御園が身体を起こした。	lacks:리,	keep	compose
+compose:sound-before-comma	がばり、起き上がった。	벌떡, 일어났다.	keep	compose
+compose:sound-before-comma	「[・]人[・]間[・]な[・]ら[・]ば、ね」	lacks:바,	keep	compose
+compose:sound-before-comma	司令官！新しい艦娘が…あ、はい！	has:…아, 네	fix	compose
+compose:sound-before-comma	「よ、よかった」	「다, 다행이다」	keep	compose
+compose:sound-before-comma	あ、そうだ。	아, 맞다.	keep	compose
+lexical:spoken-words	ネジの鼻がもげるまで～	나사의 코가 떨어질 때까지~	fix	lookup
+lexical:spoken-words	嫌な音がして、腕がもげた。	has:팔이 떨어졌다	fix	lookup
+lexical:spoken-words	「ぶっちゃけさ、私、出番少なくない？」	has:「솔직히 말해서, 나,	fix	lookup
+lexical:spoken-words	ぶっちゃけただの学食だ。	솔직히 말해서 그냥 학생식당이다.	fix	lookup
+lexical:spoken-words	ぶっちゃけ、俺は集団行動が苦手だし	has:솔직히 말해서, 나는	keep	lookup
+lexical:spoken-words	彼に全部ぶっちゃけた。	그에게 전부 털어 놓았다.	fix	lookup
+lexical:spoken-words	ぶっちゃけしんどい。	솔직히 말해서 힘들다.	fix	lookup
+lexical:spoken-words	「それすっげぇ大変じゃねぇか！」	「그거 굉장히 힘들잖아!」	fix	lookup
+lexical:spoken-words	今日はすっげぇ大切な日じゃねぇか！	오늘은 굉장히 중요한 날이잖아!	fix	lookup
+lexical:spoken-words	すんげぇ長いやつ。	굉장히 긴 녀석.	fix	lookup
+lexical:spoken-words	これはすげぇな	이것은 대단해	keep	lookup
+lexical:spoken-words	小さな引っかかりを覚えた。	has:걸리는 점을	fix	lookup
+lexical:spoken-words	抵抗する引っかかりに、一気に力を入れる。	has:걸리는 점에	fix	lookup
+lexical:spoken-words	何かが引っかかる	뭔가가 걸린다	keep	lookup
+lexical:spoken-words	状況が飲みこめずわたわたするレナ。	has:허둥지둥	fix	lookup
+lexical:spoken-words	わたわたと興奮する	허둥지둥 흥분한다	keep	lookup
+lexical:spoken-words	フフッ…ヤッテシマエ…。カエリウチダ！	has:반격이다	fix	lookup
+lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
+lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
+lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup
+lexical:spoken-words	皿がわれる	접시가 깨진다	keep	lookup
