@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 G30	くらくら頭が痛い。	어질어질 머리가 아프다.	fix	global-stem
 G30	ぽんぽんと頭を撫でた。	통통 머리를 쓰다듬었다.	fix	global-stem
-G30	「うう……頭が痛い」	「우우……머리가 아프다」	fix	global-stem
+G30	「うう……頭が痛い」	「으으……머리가 아프다」	fix	global-stem
 G30	あぁ…水が入ってきた。	아아…물이 들어 왔다.	fix	global-stem
 G30	くんくん……女の匂いがする	킁킁……여자의 냄새가 난다	fix	global-stem
 G30	くいっと上に持ち上げる	까딱 위에 들어 올린다	fix	global-stem
