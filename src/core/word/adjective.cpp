@@ -438,7 +438,11 @@ std::string_view Item::BareStemEnding(std::string_view after) const {
         case tokenizer::kTypeNewline:
         case tokenizer::kTypeEnd: break;
         case tokenizer::kTypeSymbol:
-            if (!detail->nextText.starts_with("…") && !detail->nextText.starts_with("‥")) return {};
+            // An ellipsis, or a note or heart that closes an utterance (素敵♪ 멋지다♪).
+            if (!detail->nextText.starts_with("…") && !detail->nextText.starts_with("‥") &&
+                !detail->nextText.starts_with("♪") && !detail->nextText.starts_with("♡") && !detail->nextText.starts_with("♥")) {
+                return {};
+            }
             break;
         case tokenizer::kTypeBracket:
             if (oneKanji || !(detail->nextText.starts_with("」") || detail->nextText.starts_with("』"))) return {};

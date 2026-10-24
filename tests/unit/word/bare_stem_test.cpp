@@ -1,5 +1,6 @@
 // An adjectival-noun stem that ends a clause with its copula left out reads as the
-// word in its plain form wherever it stands; a noun of the same length still wins.
+// word in its plain form wherever it stands, also before a note or a heart; a noun of the
+// same length still wins.
 #include <string>
 #include <vector>
 
@@ -32,6 +33,7 @@ HD_TEST(word_bare_adjectival_noun_stem) {
         {"綺麗。", "예쁘다."},
         {"花が綺麗！", "꽃이 예쁘다!"},
         {"花が綺麗…", "꽃이 예쁘다…"},
+        {"花が綺麗♪", "꽃이 예쁘다♪"},
         {"花が綺麗っ！", "꽃이 예쁘다!"},
         {"「花が綺麗」", "「꽃이 예쁘다」"},
         {"花が綺麗？", "꽃이 예뻐?"},

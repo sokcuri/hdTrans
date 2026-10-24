@@ -1,0 +1,17 @@
+# 규칙: LEX-50
+rule	input	expected	kind	layer
+lexical:suteki-adjective	「でも、素敵」	「하지만, 멋지다」	fix	lookup
+lexical:suteki-adjective	今日も司令、朝から素敵。	오늘도 사령, 아침부터 멋지다.	fix	lookup
+lexical:suteki-adjective	あらぁ～…素敵。	어머나~…멋지다.	fix	lookup
+lexical:suteki-adjective	C'est bon! 素敵。	C'est bon! 멋지다.	fix	lookup
+lexical:suteki-adjective	素敵！Honey, 問題ないよね？	멋지다! Honey, 문제없지?	fix	lookup
+lexical:suteki-adjective	秋……秋祭り…！ 素敵！	가을……가을 축제…! 멋지다!	fix	lookup
+lexical:suteki-adjective	九三式酸素魚雷って…冷たくて、素敵♪	93식 산소어뢰는…차갑고, 멋지다♪	fix	lookup
+lexical:suteki-adjective	うん、うん。あら、素敵♪ じゃあ、来年ね！	응, 응. 어머, 멋지다♪ 그럼, 내년이네!	fix	lookup
+lexical:suteki-adjective	提督、海ってやっぱり…素敵。わたくしも、好き。	제독, 바다는 역시…멋지다. 저도, 좋아.	fix	lookup
+lexical:suteki-adjective	見て、夕日が綺麗♪	봐, 석양이 예쁘다♪	fix	lookup
+lexical:suteki-adjective	素敵な装備ですわ。	멋진 장비예요.	keep	lookup
+lexical:suteki-adjective	「素敵です」	「멋집니다」	keep	lookup
+lexical:suteki-adjective	素敵な生き方だ	멋진 삶의 방식이다	keep	lookup
+lexical:suteki-adjective	素敵じゃねぇ♪	멋지지 않다♪	keep	lookup
+lexical:suteki-adjective	いいね！素敵だ。	좋네! 멋지다.	keep	lookup
