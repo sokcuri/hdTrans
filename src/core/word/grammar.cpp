@@ -787,6 +787,11 @@ void RespectfulPassive(Flusher& f) {
             // (gram Hi): 陛下が幽閉された is the passive, 国王様が崩御された the respectful form.
             if (!RespectfulReading(it, surface == "され" && SinoNounTakesObject(it->prev))) continue;
             it->SelectCandidate(honorific, {Provenance::Rewrite});
+            // Before いる it is the plain verb with 고 and 계시다 (来られてる 오고 계신다).
+            if (const std::string plain = PlainOfHonorific(f, surface, it->EntryText(honorific));
+                !plain.empty() && HonorificProgressive(f, it)) {
+                it->AssignEntrySurface(honorific, plain);
+            }
             // The object the passive made a subject is the object again (本を説明された 책을).
             for (Item* p = it->prev; p != nullptr; p = p->prev) {
                 if (p->group->surface != "を") continue;
@@ -878,11 +883,16 @@ Item* InwardVerb(Item* n) {
 }
 
 // Whether verb item it is an honorific before the いる of its て form: its Korean is an honorific
-// (돌아가&AE@), or the auxiliary after it is 계시다.
+// (돌아가&AE@), or the いる is 계시다, in the auxiliary after it or in its ending (来られてる 1고
+// 계신다).
 bool HonorificAspect(Flusher& f, const Item* it) {
     if (it->selected >= 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) return true;
-    const Item* n = it->next;
-    return n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == HonorificExistence(f);
+    const std::string honorific = HonorificExistence(f);
+    if (const Item* n = it->next; n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == honorific) {
+        return true;
+    }
+    const std::string ending = std::string(kProgressiveHead) + honorific.substr(0, honorific.size() - kHonorificMarker.size());
+    return honorific.size() > kHonorificMarker.size() && it->DirectIndex() >= 0 && it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
 }  // namespace

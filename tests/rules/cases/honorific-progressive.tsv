@@ -19,3 +19,10 @@ rewrite:respectful-passive	彼は昼から酒を飲んでいる。	그는 낮부
 rewrite:respectful-passive	彼は神を祀っていた	그는 신을 모시고 있었다	keep	rewrites
 rewrite:respectful-passive	先生は本を読んでおられる	선생님은 책을 읽고 계신다	keep	rewrites
 rewrite:respectful-passive	父は亡くなっている	아버지는 돌아가셨다	keep	rewrites
+rewrite:respectful-passive	先生は来られてる。	선생님은 와 계신다.	fix	rewrites
+rewrite:respectful-passive	先生は来られている。	선생님은 와 계신다.	fix	rewrites
+rewrite:respectful-passive	先生は来られていた。	선생님은 와 계셨다.	fix	rewrites
+rewrite:respectful-passive	先生は部屋に入られてる	선생님은 방에 들어가 계신다	fix	rewrites
+rewrite:respectful-passive	先生は東京に行かれている	선생님은 도쿄에 가고 계신다	fix	lookup
+rewrite:respectful-passive	先生が来られた。	선생님이 오셨다.	keep	rewrites
+rewrite:respectful-passive	電話が来ている	전화가 와 있다	keep	lookup
