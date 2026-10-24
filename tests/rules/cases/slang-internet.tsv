@@ -1,0 +1,78 @@
+# 규칙: LEX-22
+rule	input	expected	kind	layer
+dict:s:9436	推しが尊い。	최애가 고귀하다.	fix	lookup
+dict:s:9436	私の推しは彼です。	제 최애는 그입니다.	fix	lookup
+dict:s:9436	「世界規模の通信障害より推しの配信かよ」	「세계 규모 통신 장애보다 최애 방송인가」	fix	lookup
+dict:s:9436	「く、あなたのせいで、私の推しが激変しちゃったじゃない！」	「크, 당신의 탓으로, 내 최애가 격변해 버렸다잖아!」	fix	lookup
+dict:s:9436	彼を推した。	그를 추천했다.	keep	lookup
+dict:s:9436	推し進める。	추진한다.	keep	lookup
+dict:s:8707	推し活が楽しい。	덕질이 즐겁다.	keep	lookup
+dict:s:9437	わかりみが深い。	공감이 깊다.	fix	lookup
+dict:s:9437	わかりみ。	공감.	fix	lookup
+dict:s:9438	分かりみが深い	공감이 깊다	keep	lookup
+adjective:nominal-mi	つらみ……。	괴로움…….	fix	lookup
+adjective:nominal-mi	つらみが深い。	괴로움이 깊다.	fix	lookup
+adjective:nominal-mi	やばみが強い。	위험함이 강하다.	fix	lookup
+adjective:nominal-mi	嬉しみが深い。	기쁨이 깊다.	fix	lookup
+adjective:nominal-mi	おいしみ	맛있음	fix	lookup
+adjective:nominal-mi	小さいながらも乳房には十分な柔らかみと弾力があった。	작으면서 유방에는 충분한 부드러움과 탄력이 있었다.	fix	lookup
+adjective:nominal-mi	まずは目でそれを楽しみ…口へと運ぶ。	우선은 눈으로 그것을 즐겨…입으로 옮긴다.	keep	lookup
+adjective:nominal-mi	酒を飲み、料理を楽しみ、会話を交し合う。	술을 마시고, 요리를 즐기고, 대화를 서로 교환한다.	keep	lookup
+adjective:nominal-mi	頭が痛みます	머리가 욱신거립니다	keep	lookup
+adjective:nominal-mi	苦しみながら	괴로워하면서	keep	lookup
+adjective:nominal-mi	悲しみました	슬퍼했습니다	keep	lookup
+lookup:noun-before-nominal	高みの見物。	강 건너 불구경.	keep	lookup
+lookup:noun-before-nominal	高みを目指す	높은 곳을 목표로 한다	keep	lookup
+lookup:noun-before-nominal	甘みがある。	단맛이 있다.	keep	lookup
+lookup:noun-before-nominal	重みがある	무게가 있다	keep	lookup
+lookup:noun-before-nominal	嫌みを言う	싫은소리를 말한다	keep	lookup
+lookup:noun-before-nominal	ここでギャン泣きでもされて事件が明るみになったらまずい。	여기서 엉엉 울기라도 되어 사건이 표면화되면 큰일이다.	keep	lookup
+lookup:noun-before-nominal	楽しみにしてる。	기대하고 있다.	keep	lookup
+pattern:学生しか勝たん	猫しか勝たん。	고양이가 최고다.	fix	lookup
+pattern:学生しか勝たない	君しか勝たない	네가 최고다	fix	lookup
+pattern:学生しか勝たん	彼しか勝たなかった	그밖에 이기지 않았다	keep	lookup
+dict:s:8210	「でも先輩、パソコンとか好きでしょ？　めがねだし、陰キャだし」	「하지만 선배, PC라든지 좋아하지? 안경이고, 아싸이고」	fix	lookup
+dict:s:8210	「世の中から陰キャがいなくなったら、陽キャは全員普通になるわけで」	「세상에서 아싸가 없어지면, 인싸는 전원 보통으로 되는 걸로」	fix	lookup
+dict:s:8210	「陰キャがいなきゃ陽キャもいない」	「아싸가 없으면 인싸도 없다」	fix	lookup
+dict:s:8210	　そうです陰キャです。	 그렇습니다 아싸입니다.	fix	lookup
+dict:s:8470	陽キャは苦手。	인싸는 골칫거리.	keep	lookup
+dict:s:9442	「ガチ！」	「진짜!」	fix	lookup
+dict:s:9442	ガチの軍用機だ	진짜의 군용기다	fix	lookup
+dict:s:9442	ガチでやばい。	진짜로 위험하다.	keep	lookup
+dict:s:8315	ガチ勢がいる。	찐 마니아가 있다.	keep	lookup
+sound:がちっ	ガチッ！	딱!	fix	sound
+sound:がちっ	俺もかなりガチガチになっている	나도 꽤 딱딱하게 되어 있다	keep	sound
+dict:s:9443	ワンチャンあるかも。	가능성 있을지도.	fix	lookup
+dict:s:9444	厨二かよ	중2인가	fix	lookup
+dict:s:9445	厨二病。	중2병.	fix	lookup
+dict:s:9448	ディスるなよ。	디스하지 마.	fix	lookup
+dict:s:9448	ディスってる	디스하고 있다	fix	lookup
+dict:s:9450	人生詰んだ。	인생 망했다.	fix	local
+dict:s:9450	俺の人生が詰む	rule:dict:s:9450=망&AV@	fix	local
+dict:s:9450	レナは言葉を詰めらせ赤面する。	!rule:dict:s:9450	keep	local
+dict:s:9450	どう考えても状況的に完全に詰んでいる	rule:dict:s:9450=망&AV@	fix	local
+dict:s:9450	荷物を箱に詰めた	!rule:dict:s:9450	keep	local
+dict:s:9450	息が詰まる	!rule:dict:s:9450	keep	local
+phrase:それな	それな！	그러니까!	fix	builtin-phrase
+phrase:それな	「それな」	「그러니까」	fix	builtin-phrase
+phrase:それな	それな、今回はマジで、飛ばされた方が4人で良かったよな	그러니까, 이번에는 진짜로, 날아간 편이 4명이 좋았지	fix	builtin-phrase
+phrase:それな	それなら行く。	그렇다면 간다.	keep	builtin-phrase
+phrase:それな	それなりに多彩な異国風料理	그 나름대로 다채로운 이국풍 요리	keep	builtin-phrase
+phrase:ぴえん	ぴえん。	힝.	fix	builtin-phrase
+phrase:あざっす	あざっす！	땡큐!	fix	builtin-phrase
+phrase:あざす	あざす！	땡큐!	fix	builtin-phrase
+phrase:あざーす	あざーす！	땡큐!	fix	builtin-phrase
+phrase:おけ	おけ。	오케이.	fix	builtin-phrase
+phrase:おけおけ	おけおけ	오케이 오케이	fix	builtin-phrase
+phrase:おけ	次はないぞ、覚えておけ。	다음은 없어, 기억해 두어라.	keep	builtin-phrase
+phrase:おけ	時報も任せておけ。	시보도 맡겨 두어라.	keep	builtin-phrase
+phrase:ワロタ	ワロタ	ㅋㅋㅋ	fix	builtin-phrase
+phrase:てぇてぇ	てぇてぇ	존귀해	fix	builtin-phrase
+phrase:ウケる	「無理に決まってるじゃん。ウケる」	「무리일 게 뻔하잖아. 웃겨」	fix	builtin-phrase
+phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 다르고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
+dict:i:7788	幼なじみの観察眼、恐るべし。	소꿉친구 관찰안, 대단하다.	fix	lookup
+dict:i:7788	王子様恐るべし……	왕자님 대단하다……	fix	lookup
+dict:i:7788	恐るべき力	무서운 힘	keep	lookup
+dict:s:1500	ググる	구글링	keep	lookup
+dict:s:9451	「ワンチャンスだと？ ルールを説明しろ。」	「원 찬스라고? 룰을 설명해라.」	keep	lookup
+dict:variant:kana:oshihaka	気持ちを推しはかる	기분을 헤아린다	keep	lookup
