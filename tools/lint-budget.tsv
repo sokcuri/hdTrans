@@ -4,8 +4,8 @@
 always-false	1
 empty-pattern	1
 key-mismatch	9
-literal-space	1
+literal-space	0
 lone-test	201
 never-fires	2
 self-compare	3
-unknown-code	6
+unknown-code	5
