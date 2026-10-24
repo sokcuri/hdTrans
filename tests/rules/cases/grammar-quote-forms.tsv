@@ -24,3 +24,4 @@ compose:ani-quote	学生ではないという	학생이 아니라고 한다	keep
 compose:ani-quote	そうじゃないって	그렇지 않다고	keep	compose
 compose:ani-quote	彼じゃないなら	그가 아니면	keep	compose
 compose:ani-quote	彼は学生ではない。	그는 학생이 아니다.	keep	compose
+cx:question-tte:10	こういう業種への営業も面白いかなって思って、名刺をばらまいてた	이런 업종에의 영업도 재미있을까 하고 생각해, 명함을 뿌렸다	current	rewrites

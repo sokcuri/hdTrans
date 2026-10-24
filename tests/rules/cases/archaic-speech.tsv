@@ -21,3 +21,5 @@ dict:archaic-speech	……むう、仕方がないのぅ。	……무우, 어쩔
 dict:archaic-speech	祭りのいいところじゃのお。	축제의 좋은 곳이로구먼.	fix	lookup
 dict:archaic-speech	今すぐ死のう、	바로 지금 죽자,	keep	lookup
 dict:archaic-speech	学生じゃな	학생이군	keep	lookup
+dict:archaic-speech	新しい艦が入ってきたのう	새로운 함이 들어 왔구먼	current	lookup
+dict:archaic-speech	なんか眠くなってきおったんじゃ…お茶が飲みたいのぅ。	왠지 졸려져 있었지…차를 마시고 싶구먼.	current	lookup

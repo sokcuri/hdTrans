@@ -37,3 +37,5 @@ ending:monna	お前は強いもんな	너는 강하잖아	fix	builtin-ending
 ending:monna	そうだもんな	그렇잖아	fix	builtin-ending
 ending:monna	お前は強いもんな、だから	lacks:잖아	keep	builtin-ending
 ending:monna	知ってるもん	lacks:잖아	keep	builtin-ending
+dict:gram:beki-rhetorical:1	むしろもっと自分に好かれるように気を使うべきではないか、と増長したのだ。	오히려 좀 더 자신에게 사랑받도록 신경을 써야 하지 않나, 라고 증대했다.	current	local
+ending:monna	男の重婚はＯＫだけど女は駄目だもんな。	남자의 중혼은 OK이지만 여자는 안되잖아.	current	builtin-ending
