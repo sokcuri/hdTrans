@@ -80,7 +80,7 @@ lookup:copies-predicate	えぇ、やだやだぁ！	네, 싫어 싫어!	keep	loo
 lookup:copies-predicate	楽しい……楽しい！	즐겁다……즐겁다!	keep	lookup
 lookup:copies-predicate	聞いてる聞いてる	듣고 있다 듣고 있다	fix	rewrites
 lookup:copies-predicate	すまない……すまない……	미안하다……미안하다……	keep	lookup
-lookup:copies-predicate	違いない違いない！	틀림없다 틀림없다!	keep	lookup
+lookup:copies-predicate	違いない違いない！	틀림없어 틀림없어!	keep	lookup
 lookup:copies-predicate	ちっ…まだまだいける、嘗めるな。	쳇…아직도 갈 수 있다, 얕보지 마.	keep	lookup
 lookup:copies-predicate	そんなことない……そんなことないよ……	그렇지 않다……그렇지 않아……	keep	lookup
 lookup:copies-predicate	ああ～食べた食べた。	아~먹었다 먹었다.	keep	lookup
@@ -97,7 +97,7 @@ lookup:copies-noun	絶対絶対！	절대 절대!	keep	lookup
 lookup:copies-noun	微妙、微妙すぎる	미묘, 너무 미묘하다	keep	lookup
 lookup:copies-noun	大丈夫大丈夫、こっちには強力なコ	괜찮아 괜찮아, 여기에는 강력한 코	keep	lookup
 lookup:copies-noun	大丈夫、大丈夫。	괜찮아, 괜찮아.	keep	lookup
-lookup:copies-noun	猫か、ダメね……集中、集中！	고양이인가, 안 되네……집중, 집중!	keep	lookup
+lookup:copies-noun	猫か、ダメね……集中、集中！	고양이인가, 안되네……집중, 집중!	keep	lookup
 lookup:copies-noun	しっかし、毎日毎日、よく飽きもせず飲む	하지만, 매일매일, 잘 질리지도 않고 마신다	keep	lookup
 lookup:copies-noun	大丈夫大丈夫。	괜찮아 괜찮아.	keep	lookup
 lookup:copies-noun	思考実験、思考実験だって	사고실험, 사고실험이래	keep	lookup
@@ -118,7 +118,7 @@ lookup:copies-other	にゃーん、にゃーん	냐앙, 냐앙	keep	lookup
 lookup:copies-other	ぶーぶー	꿀꿀	keep	lookup
 lookup:copies-other	うんたんうんたん……	운탄운탄……	keep	lookup
 lookup:copies-other	へーきへーき、ボスから何か言われ	괜찮아 괜찮아, 보스에게서 뭔가 말해	keep	lookup
-lookup:copies-other	ホントにだめ、ホントにだめですからぁぁぁっ……！	정말로 안 돼, 정말로 안 되니까아아아……!	keep	lookup
+lookup:copies-other	ホントにだめ、ホントにだめですからぁぁぁっ……！	정말로 안돼, 정말로 안되니까아아앗……!	keep	lookup
 lookup:copies-other	ごめんね、ごめんね……	미안해, 미안해……	keep	lookup
 lookup:copies-other	いえ、ホントにホントに、出ませんから	아뇨, 정말로 정말로, 나오지 않으니까요	keep	lookup
 lookup:copies-other	ふーん……なるほどなるほど。	흐응……그렇구나 그렇구나.	keep	lookup
@@ -127,7 +127,7 @@ lookup:copies-stutter	は、はい……	네, 네……	keep	lookup
 lookup:copies-stutter	お、おい、まずいって	어, 어이, 큰일이라고	keep	lookup
 lookup:copies-stutter	あ、ありがとうございます	가, 감사합니다	keep	lookup
 lookup:copies-stutter	ど、どうやってやるの……？	어, 어떻게 하는 거야……?	keep	lookup
-lookup:copies-stutter	い、いつかは、越えなきゃ、いけな	어, 언젠가는, 넘지 않으면, 안 되는 거야	keep	lookup
+lookup:copies-stutter	い、いつかは、越えなきゃ、いけな	어, 언젠가는, 넘지 않으면, 안되는 거야	keep	lookup
 lookup:copies-stutter	だ、だから……女子の、制服着て	그, 그러니까……여자의, 제복 입어	keep	lookup
 lookup:copies-stutter	そ、そんなことは……	그, 그런 일은……	keep	lookup
 lookup:copies-stutter	う、うそでしょ……そんなことない	거, 거짓말이겠지……그렇지 않다	keep	lookup

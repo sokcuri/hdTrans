@@ -1,9 +1,9 @@
 rule	input	expected	kind	layer
 cx:te-request:20	「待って」	「기다려」	fix	rewrites
-cx:te-request:10	「忘れてしまって」	「잊어 버려서」	fix	rewrites
+cx:te-request:10	「忘れてしまって」	「잊어버려서」	fix	rewrites
 cx:te-request:20	待って行く。	기다려 간다.	keep	rewrites
 cx:see-and:10	私を見て言う。	나를 보고 말한다.	fix	rewrites
-cx:see-and:10	私を見てはいけない。	나를 봐선 안 된다.	keep	rewrites
+cx:see-and:10	私を見てはいけない。	나를 봐선 안된다.	keep	rewrites
 cx:see-and:10	「それを見て」と言った。	「그걸 봐」라고 말했다.	keep	rewrites
 cx:te-sequence:10	手を洗って寝る。	손을 씻고 잔다.	fix	rewrites
 cx:te-sequence:10	食べないで寝る。	먹지 않고 잔다.	keep	rewrites

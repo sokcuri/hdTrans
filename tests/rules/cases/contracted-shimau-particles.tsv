@@ -1,81 +1,81 @@
 # 규칙: SPC-7
 rule	input	expected	kind	layer
-ending:chau-particles	「食べちゃったよ」	「먹어 버렸어」	fix	builtin-ending
-ending:chau-particles	「あっ、ごめん……驚かせちゃったね」	「앗, 미안……놀라게 해 버렸네」	fix	builtin-ending
-ending:chau-particles	悪い事をしちゃったなぁ。	나쁜 일을 해 버렸네.	fix	builtin-ending
-ending:chau-particles	「飲んじゃったぞ」	「마셔 버렸어」	fix	builtin-ending
-ending:chau-particles	「食べちまったよ」	「먹어 버렸어」	fix	builtin-ending
-ending:chau-particles	「バレちゃうよ？」	「들켜 버릴 거야?」	fix	builtin-ending
-ending:chau-particles	「暗くなっちゃうなぁ！」	「어두워져 버리네!」	fix	builtin-ending
-ending:chau-particles	「お肌が荒れちゃうね」	「피부가 거칠어져 버리네」	fix	builtin-ending
-ending:chau-particles	食べちゃったよ	먹어 버렸어	fix	builtin-ending
-ending:chau-particles	「食べちゃったわ」	「먹어 버렸어」	keep	builtin-ending
-ending:chau-particles	「食べてしまったよ」	「먹어 버렸어」	keep	builtin-ending
+ending:chau-particles	「食べちゃったよ」	「먹어버렸어」	fix	builtin-ending
+ending:chau-particles	「あっ、ごめん……驚かせちゃったね」	「앗, 미안……놀라게 해버렸네」	fix	builtin-ending
+ending:chau-particles	悪い事をしちゃったなぁ。	나쁜 일을 해버렸네.	fix	builtin-ending
+ending:chau-particles	「飲んじゃったぞ」	「마셔버렸어」	fix	builtin-ending
+ending:chau-particles	「食べちまったよ」	「먹어버렸어」	fix	builtin-ending
+ending:chau-particles	「バレちゃうよ？」	「들켜버릴 거야?」	fix	builtin-ending
+ending:chau-particles	「暗くなっちゃうなぁ！」	「어두워져버리네!」	fix	builtin-ending
+ending:chau-particles	「お肌が荒れちゃうね」	「피부가 거칠어져버리네」	fix	builtin-ending
+ending:chau-particles	食べちゃったよ	먹어버렸어	fix	builtin-ending
+ending:chau-particles	「食べちゃったわ」	「먹어버렸어」	keep	builtin-ending
+ending:chau-particles	「食べてしまったよ」	「먹어버렸어」	keep	builtin-ending
 ending:chau-particles	「食べたね」	「먹었네」	keep	builtin-ending
-ending:chau-particles	「バ、バレちゃうよ？」	「드, 들켜 버릴 거야?」	fix	builtin-ending
-ending:chau-particles	片付けちゃうよ？	정리해 버릴 거야?	fix	builtin-ending
-ending:chau-particles	アニメって死んじゃうよ」	애니메이션은 죽어 버릴 거야」	fix	builtin-ending
-ending:chau-particles	燃料が……あふれちゃうよぉ……。	연료가……넘쳐 버릴 거야…….	fix	builtin-ending
-ending:chau-particles	また姉に笑われちゃうよぉ	또 언니에게 비웃음을 당해 버릴 거야	fix	builtin-ending
-ending:chau-particles	潜っちゃうよ！	잠수해 버릴 거야!	fix	builtin-ending
-ending:chau-particles	大の大人が泣いちゃうよ！？	다 큰 어른이 울어 버릴 거야!?	fix	builtin-ending
-ending:chau-particles	始めちゃうよ	시작해 버릴 거야	fix	builtin-ending
-ending:chau-particles	私、出撃しちゃうよー！	나, 출격해 버릴 거야~!	fix	builtin-ending
-ending:chau-particles	疲れたまま出ると、死んじゃうよ。	지친 채로 나오면, 죽어 버릴 거야.	fix	builtin-ending
-ending:chau-particles	早く来ないとお祭り終っちゃうよ。	빨리 오지 않으면 축제 끝나 버릴 거야.	fix	builtin-ending
-ending:chau-particles	こんなに暇だと体がくさっちまうよ。	이렇게 한가하다면 몸이 썩어 버릴 거야.	fix	builtin-ending
-ending:chau-particles	このままじゃ、戦場に送られちまうよ。	이대로는, 전장에 보내져 버릴 거야.	fix	builtin-ending
-ending:chau-particles	がんばっちゃうよ～！	열심히 해 버릴 거야~!	fix	builtin-ending
-ending:chau-particles	フッ、襲っちゃうよ？	훗, 덮쳐 버릴 거야?	fix	builtin-ending
-ending:chau-particles	見参しちゃうよぉ！	알현해 버릴 거야!	fix	builtin-ending
-ending:chau-particles	じゃあ、勝手に机とか見ちゃうよ？	그럼, 마음대로 책상이라든지 봐 버릴 거야?	fix	builtin-ending
-ending:chau-particles	「と、とと、溶けちゃうよ！？」	「노, 노, 녹아 버릴 거야!?」	fix	builtin-ending
-ending:chau-particles	「すぐに尽きちゃうよ」	「곧바로 다해 버릴 거야」	fix	builtin-ending
-ending:chau-particles	「何も出来なくなっちゃうよ」	「아무것도 할 수 없게 돼 버릴 거야」	fix	builtin-ending
-ending:chau-particles	「まとめて読んじゃうよぉ」	「정리해 읽어 버릴 거야」	fix	builtin-ending
-ending:chau-particles	「息抜きしないとパンクしちゃうよ？」	「기분 전환하지 않으면 펑크나 버릴 거야?」	fix	builtin-ending
-ending:chau-particles	「わたし、おかしくなっちゃうよ……ぅ」	「나, 이상해져 버릴 거야……으」	fix	builtin-ending
-ending:chau-particles	「そっちの趣味があるのかと思っちゃうよ」	「그쪽의 취미가 있는 건가 하고 생각해 버릴 거야」	fix	builtin-ending
-ending:chau-particles	「お布団が汚れちゃうよ……」	「이불이 더러워져 버릴 거야……」	fix	builtin-ending
-ending:chau-particles	「学校、遅刻しちゃうよ」	「학교, 지각해 버릴 거야」	fix	builtin-ending
-ending:chau-particles	「身体おかしくしちゃうよ……？」	「신체 이상하게 해 버릴 거야……?」	fix	builtin-ending
-ending:chau-particles	「いいから遅刻しちゃうよ？」	「됐으니까 지각해 버릴 거야?」	fix	builtin-ending
-ending:chau-particles	疲れちゃうよぉ？	지쳐 버릴 거야?	fix	builtin-ending
-ending:chau-particles	体が鈍っちまうよぉー	몸이 무디어져 버릴 거야~	fix	builtin-ending
-ending:chau-particles	「なんでもしまっちゃうよ☆」	「뭐든 끝내 버릴 거야☆」	fix	builtin-ending
+ending:chau-particles	「バ、バレちゃうよ？」	「드, 들켜버릴 거야?」	fix	builtin-ending
+ending:chau-particles	片付けちゃうよ？	정리해버릴 거야?	fix	builtin-ending
+ending:chau-particles	アニメって死んじゃうよ」	애니메이션은 죽어버릴 거야」	fix	builtin-ending
+ending:chau-particles	燃料が……あふれちゃうよぉ……。	연료가……넘쳐버릴 거야…….	fix	builtin-ending
+ending:chau-particles	また姉に笑われちゃうよぉ	또 언니에게 비웃음을 당해버릴 거야	fix	builtin-ending
+ending:chau-particles	潜っちゃうよ！	잠수해버릴 거야!	fix	builtin-ending
+ending:chau-particles	大の大人が泣いちゃうよ！？	다 큰 어른이 울어버릴 거야!?	fix	builtin-ending
+ending:chau-particles	始めちゃうよ	시작해버릴 거야	fix	builtin-ending
+ending:chau-particles	私、出撃しちゃうよー！	나, 출격해버릴 거야~!	fix	builtin-ending
+ending:chau-particles	疲れたまま出ると、死んじゃうよ。	지친 채로 나오면, 죽어버릴 거야.	fix	builtin-ending
+ending:chau-particles	早く来ないとお祭り終っちゃうよ。	빨리 오지 않으면 축제 끝나버릴 거야.	fix	builtin-ending
+ending:chau-particles	こんなに暇だと体がくさっちまうよ。	이렇게 한가하다면 몸이 썩어버릴 거야.	fix	builtin-ending
+ending:chau-particles	このままじゃ、戦場に送られちまうよ。	이대로는, 전장에 보내져버릴 거야.	fix	builtin-ending
+ending:chau-particles	がんばっちゃうよ～！	열심히 해버릴 거야~!	fix	builtin-ending
+ending:chau-particles	フッ、襲っちゃうよ？	훗, 덮쳐버릴 거야?	fix	builtin-ending
+ending:chau-particles	見参しちゃうよぉ！	알현해버릴 거야!	fix	builtin-ending
+ending:chau-particles	じゃあ、勝手に机とか見ちゃうよ？	그럼, 마음대로 책상이라든지 봐버릴 거야?	fix	builtin-ending
+ending:chau-particles	「と、とと、溶けちゃうよ！？」	「노, 노, 녹아버릴 거야!?」	fix	builtin-ending
+ending:chau-particles	「すぐに尽きちゃうよ」	「곧바로 다해버릴 거야」	fix	builtin-ending
+ending:chau-particles	「何も出来なくなっちゃうよ」	「아무것도 할 수 없게 돼버릴 거야」	fix	builtin-ending
+ending:chau-particles	「まとめて読んじゃうよぉ」	「정리해 읽어버릴 거야」	fix	builtin-ending
+ending:chau-particles	「息抜きしないとパンクしちゃうよ？」	「기분 전환하지 않으면 펑크나버릴 거야?」	fix	builtin-ending
+ending:chau-particles	「わたし、おかしくなっちゃうよ……ぅ」	「나, 이상해져버릴 거야……으」	fix	builtin-ending
+ending:chau-particles	「そっちの趣味があるのかと思っちゃうよ」	「그쪽의 취미가 있는 건가 하고 생각해버릴 거야」	fix	builtin-ending
+ending:chau-particles	「お布団が汚れちゃうよ……」	「이불이 더러워져버릴 거야……」	fix	builtin-ending
+ending:chau-particles	「学校、遅刻しちゃうよ」	「학교, 지각해버릴 거야」	fix	builtin-ending
+ending:chau-particles	「身体おかしくしちゃうよ……？」	「신체 이상하게 해버릴 거야……?」	fix	builtin-ending
+ending:chau-particles	「いいから遅刻しちゃうよ？」	「됐으니까 지각해버릴 거야?」	fix	builtin-ending
+ending:chau-particles	疲れちゃうよぉ？	지쳐버릴 거야?	fix	builtin-ending
+ending:chau-particles	体が鈍っちまうよぉー	몸이 무디어져버릴 거야~	fix	builtin-ending
+ending:chau-particles	「なんでもしまっちゃうよ☆」	「뭐든 끝내버릴 거야☆」	fix	builtin-ending
 # 맞는 출력: 「이불 걷어 버린다~?」
-ending:chau-particles	「お布団めくっちゃうよー？」	「이불 넘겨 버릴 거야~?」	current	builtin-ending
+ending:chau-particles	「お布団めくっちゃうよー？」	「이불 넘겨버릴 거야~?」	current	builtin-ending
 # 맞는 출력: 잠깐, 초조해지네…
-ending:chau-particles	ちょっと、あせっちゃうよぉ…	잠깐, 서둘러 버릴 거야…	current	builtin-ending
+ending:chau-particles	ちょっと、あせっちゃうよぉ…	잠깐, 서둘러버릴 거야…	current	builtin-ending
 # 맞는 출력: 이상한데, 몸이 떠 버려!?
-ending:chau-particles	おかしいな、体が浮いちゃうよ！？	이상한데, 몸이 떠 버릴 거야!?	current	builtin-ending
-ending:chau-particles	なんかもう空見上げちゃうねー。	왠지 이제 하늘 올려다봐 버리네~.	fix	builtin-ending
-ending:chau-particles	（小声）死んじゃうね	(작은 소리) 죽어 버리네	fix	builtin-ending
-ending:chau-particles	眠くなっちゃうねー…	졸려져 버리네~…	fix	builtin-ending
+ending:chau-particles	おかしいな、体が浮いちゃうよ！？	이상한데, 몸이 떠버릴 거야!?	current	builtin-ending
+ending:chau-particles	なんかもう空見上げちゃうねー。	왠지 이제 하늘 올려다봐버리네~.	fix	builtin-ending
+ending:chau-particles	（小声）死んじゃうね	(작은 소리) 죽어버리네	fix	builtin-ending
+ending:chau-particles	眠くなっちゃうねー…	졸려져버리네~…	fix	builtin-ending
 # 맞는 출력: 좀 더 일해 버릴게?
-ending:chau-particles	もっと働いちゃうねっ？	좀 더 일해 버리네?	current	builtin-ending
+ending:chau-particles	もっと働いちゃうねっ？	좀 더 일해버리네?	current	builtin-ending
 # 맞는 출력: 나, 출격해 버릴게
-ending:chau-particles	私、出撃しちゃうねっ	나, 출격해 버리네	current	builtin-ending
-ending:chau-particles	「幸せでふわふわしてきちゃうな」	「행복해 푹신푹신해 와 버리네」	fix	builtin-ending
-ending:chau-particles	何とかしてくれるって思っちゃうな	어떻게든 해 준다고 생각해 버리네	fix	builtin-ending
-ending:chau-particles	ちょっと期待しちゃうなー♪	조금 기대해 버리네~♪	fix	builtin-ending
+ending:chau-particles	私、出撃しちゃうねっ	나, 출격해버리네	current	builtin-ending
+ending:chau-particles	「幸せでふわふわしてきちゃうな」	「행복해 푹신푹신해 와버리네」	fix	builtin-ending
+ending:chau-particles	何とかしてくれるって思っちゃうな	어떻게든 해 준다고 생각해버리네	fix	builtin-ending
+ending:chau-particles	ちょっと期待しちゃうなー♪	조금 기대해버리네~♪	fix	builtin-ending
 # 맞는 출력: 나도! 살쪄 버리겠네~, 뭐 어때!
-ending:chau-particles	あたしも！ 太っちゃうなー、まあいいか！	나도! 살쪄 버리네~, 뭐 좋은가!	current	builtin-ending
-ending:chau-particles	「死んじゃうな」	「죽어 버리네」	fix	builtin-ending
-ending:chau-particles	忘れちゃうね…	잊어 버리네…	fix	builtin-ending
-ending:chau-particles	「ケーキって死んじゃうぜ」	「케이크는 죽어 버린다」	keep	builtin-ending
-ending:chau-particles	探照灯で照らしちゃうぜぇ～	탐조등으로 비추어 버린다~	keep	builtin-ending
-ending:chau-particles	いいぜぇ、頑張っちゃうぜぇ！	좋아, 노력해 버린다!	keep	builtin-ending
-ending:chau-particles	あの子、悪い事をしちゃったなぁ。	그 아이, 나쁜 일을 해 버렸네.	fix	builtin-ending
-ending:chau-particles	「ほら、寝ちゃったね」	「자, 자 버렸네」	fix	builtin-ending
-ending:chau-particles	「もう、ドキドキしちゃったよ」	「이제, 두근두근해 버렸어」	fix	builtin-ending
-ending:chau-particles	「驚かせちゃったね」	「놀라게 해 버렸네」	fix	builtin-ending
+ending:chau-particles	あたしも！ 太っちゃうなー、まあいいか！	나도! 살쪄버리네~, 뭐 좋은가!	current	builtin-ending
+ending:chau-particles	「死んじゃうな」	「죽어버리네」	fix	builtin-ending
+ending:chau-particles	忘れちゃうね…	잊어버리네…	fix	builtin-ending
+ending:chau-particles	「ケーキって死んじゃうぜ」	「케이크는 죽어버린다」	keep	builtin-ending
+ending:chau-particles	探照灯で照らしちゃうぜぇ～	탐조등으로 비추어버린다~	keep	builtin-ending
+ending:chau-particles	いいぜぇ、頑張っちゃうぜぇ！	좋아, 노력해버린다!	keep	builtin-ending
+ending:chau-particles	あの子、悪い事をしちゃったなぁ。	그 아이, 나쁜 일을 해버렸네.	fix	builtin-ending
+ending:chau-particles	「ほら、寝ちゃったね」	「자, 자버렸네」	fix	builtin-ending
+ending:chau-particles	「もう、ドキドキしちゃったよ」	「이제, 두근두근해버렸어」	fix	builtin-ending
+ending:chau-particles	「驚かせちゃったね」	「놀라게 해버렸네」	fix	builtin-ending
 # 맞는 출력: 먹어 버렸어, 전부
-ending:chau-particles	食べちゃったよ、全部	먹어 버렸다, 전부	current	builtin-ending
+ending:chau-particles	食べちゃったよ、全部	먹어버렸다, 전부	current	builtin-ending
 ending:chau-particles	行っちまうよ	가버려	keep	builtin-ending
 ending:chau-particles	行っちゃうよ	가버려	keep	builtin-ending
 ending:chau-particles	先に行っちまうよ。	먼저 가버려.	keep	builtin-ending
 ending:chau-particles	行っちまうよぉ	가버려	keep	builtin-ending
-ending:chau-particles	死んじまうよぉ	죽어 버릴 거야	keep	builtin-ending
-ending:chau-particles	食べてしまうよぉ	먹어 버려	keep	builtin-ending
+ending:chau-particles	死んじまうよぉ	죽어버릴 거야	keep	builtin-ending
+ending:chau-particles	食べてしまうよぉ	먹어버려	keep	builtin-ending
 ending:chau-particles	歌うよぉ	노래해	keep	builtin-ending

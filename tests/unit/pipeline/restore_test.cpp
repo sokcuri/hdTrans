@@ -267,9 +267,15 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
     // A drawn mark draws out the vowel of the syllable before it, the final moved last.
     HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼애"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼에"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00B\uE00B\uE00C!"), std::string("안돼에엣!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배님\uE00B\uE00B"), std::string("선배니이임"));
     HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00B선배"), std::string("!선배"));
+    // A clip mark closes the open syllable before it with ㅅ and is dropped elsewhere.
+    HD_CHECK_EQ(pipeline::WriteLengthening("아파아파\uE00C!"), std::string("아파아팟!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00C"), std::string("안됏"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("없\uE00C"), std::string("없"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00C"), std::string("!"));
 }
 
 HD_TEST(pipeline_drop_particle_marks) {

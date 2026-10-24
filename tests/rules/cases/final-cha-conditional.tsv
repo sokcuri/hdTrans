@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
 dict:jisjk:114827	「医務室を出ちゃ！」	「의무실을 나오면!」	fix	local-ending
-dict:jisjk:114827	「だめだよぉそんなことしちゃ」	「안 돼 그런 일 하면」	fix	local-ending
+dict:jisjk:114827	「だめだよぉそんなことしちゃ」	「안돼 그런 일 하면」	fix	local-ending
 dict:jisjk:114827	「触っちゃ……」	「만지면……」	fix	local-ending

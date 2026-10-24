@@ -5,7 +5,9 @@
 // after them (する, の, に) and drop a following と; lead rows are
 // interjections only at the start of an utterance and before a pause
 // (おい、 ちょっと…, but not ちょっと高い); open rows are lead rows that need no pause
-// (ってかなんで 그보다, 왜).
+// (ってかなんで 그보다, 왜). cry in the fourth column marks an intj row that is a predicate said
+// as a cry (やだ 싫어), whose last copy said again and clipped with っ closes its last syllable
+// with ㅅ (やだやだっ 싫어 싫엇).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -605,12 +607,12 @@
 うーむ	으음	intj
 いやぁ	이야	intj
 いやあ	이야	intj
-いやーっ	싫어엇	intj
-いやっ	싫어	intj
-やだぁ	싫어	intj
-やだあ	싫어	intj
-やだっ	싫어	intj
-やだ	싫어	intj
+いやーっ	싫어엇	intj	cry
+いやっ	싫어	intj	cry
+やだぁ	싫어	intj	cry
+やだあ	싫어	intj	cry
+やだっ	싫어	intj	cry
+やだ	싫어	intj	cry
 やーだ	싫어	intj
 やっ	얏	intj
 やぁ	야아	intj
@@ -620,9 +622,9 @@
 やん	앙	intj
 いやん	이양	intj
 いやーん	이야앙	intj
-らめ	안 돼	intj
-らめぇ	안 돼	intj
-だめぇ	안 돼	intj
+らめ	안돼	intj
+らめぇ	안돼	intj
+だめぇ	안돼	intj	cry
 へっくし	에취	intj
 へっくしゅ	에취	intj
 へっくしょん	에취	intj
@@ -3004,8 +3006,8 @@
 ほーっほっほ	오호호호	intj
 おーっほっほ	오호호호	intj
 おっほっほ	오호호	intj
-いやぁぁ	싫어어	intj
-いやぁっ	싫엇	intj
+いやぁぁ	싫어어	intj	cry
+いやぁっ	싫엇	intj	cry
 ふきふき	쓱쓱	ono
 さらさら	찰랑찰랑	ono
 びーびー	앙앙	ono

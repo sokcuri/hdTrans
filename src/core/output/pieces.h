@@ -42,6 +42,11 @@ constexpr char32_t kLengthenMark = 0xE00A;
 // sentence end after it is still the end of the word's sentence.
 constexpr char32_t kDrawnMark = 0xE00B;
 
+// The mark a construction writes after the ending of the last copy of a cry clipped with っ
+// (痛い痛いっ), which the restore stage drops, closing the open Hangul syllable before it with ㅅ
+// (아파아팟).
+constexpr char32_t kClipMark = 0xE00C;
+
 struct Piece {
     std::string text;
     SpanKind span = SpanText;

@@ -91,6 +91,14 @@
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
 //= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
 //= mark.question	Question marks, after which a row read only where the utterance ends asks instead (また明日？ 또 내일?).
+//= ending.copies-bare	The bare endings of the last copy of an adjective or adjectival noun said again as a predicate (痛い痛い, 嫌だ嫌だ).
+//= ending.copies-plain	The Korean endings of that last copy that the copies may recast: the plain 1다 and the exclamative 6.
+//= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
+//= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안돼 안됏).
+//= ko.joined-before-doe	Korean words written joined to a form of 되다 right after them (안 돼 안돼, 안 된다 안된다).
+//= ko-aux.joined	Korean auxiliary verbs, by their selected Korean, written joined to the 아/어 form before them (먹어 버렸다 먹어버렸다).
+//= mark.cry	Marks right after the last copy of an adjective of adjective.grumble said twice that make the copies a cry (寒い寒いっ, 寒い寒い！, 寒い寒いー, 寒い寒い……, 寒い寒い♪).
+//= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
@@ -1230,6 +1238,38 @@ mark.comma	,
 mark.question	？
 mark.question	?
 
+ending.copies-bare	い
+ending.copies-bare	だ
+ending.copies-plain	1다
+ending.copies-plain	6
+adjective.grumble	忙しい
+adjective.grumble	いそがしい
+adjective.grumble	寒い
+adjective.grumble	さむい
+adjective.grumble	暑い
+adjective.grumble	眠い
+adjective.grumble	ねむい
+adjective.grumble	面倒くさい
+adjective.grumble	めんどくさい
+noun.predicate	だめ
+noun.predicate	ダメ
+noun.predicate	駄目
+ko.joined-before-doe	안
+ko-aux.joined	버&AA@
+mark.cry	っ
+mark.cry	ッ
+mark.cry	！
+mark.cry	!
+mark.cry	‼
+mark.cry	～
+mark.cry	~
+mark.cry	〜
+mark.cry	ー
+mark.cry	♪
+mark.cry	…
+mark.cry	‥
+mark.clip	っ
+mark.clip	ッ
 mark.drawn	ぇ
 mark.drawn	ェ
 mark.drawn	え

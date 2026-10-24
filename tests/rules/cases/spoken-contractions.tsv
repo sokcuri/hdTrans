@@ -32,7 +32,7 @@ dict:colloq:yacchau-past	「やっちゃって！」	!rule:dict:colloq:yacchau-p
 dict:colloq:yacchau-past	「やっちゃおうか」	「해 치울까」	keep	local
 sound:contracted-iku	「待って、置いてかないで」	「기다려, 두고 가지 마」	fix	sound
 sound:contracted-iku	「突っ込んでった」	「돌진해 갔다」	fix	sound
-sound:contracted-iku	「ついてっちゃ駄目だぞ」	「따라가면 안 된다」	fix	sound
+sound:contracted-iku	「ついてっちゃ駄目だぞ」	「따라가면 안된다」	fix	sound
 sound:contracted-iku	「はい、お皿持ってって。」	「네, 접시 가져가.」	fix	sound
 sound:contracted-iku	「持ってってください」	「가져가 주세요」	fix	sound
 sound:contracted-iku	「たくさん買ってってくれ」	「많이 사 가 줘」	fix	sound
@@ -45,7 +45,7 @@ sound:contracted-iku	「今夜は食べてってね」	「오늘 밤은 먹어 �
 sound:contracted-iku	「後から入ってったはずだよ」	「나중에 들어갔을 거야」	fix	sound
 sound:contracted-iku	「時間が浪費されてってるんですけど」	「시간이 낭비돼 가고 있는데요」	fix	sound
 sound:contracted-iku	「先に帰ってった」	「먼저 돌아갔다」	fix	sound
-sound:contracted-iku	「みんな出てっちゃった」	「모두 나가 버렸어」	fix	sound
+sound:contracted-iku	「みんな出てっちゃった」	「모두 나가버렸어」	fix	sound
 sound:contracted-iku	「内緒にしてって言ったのに」	「비밀로 하라고 했는데」	keep	sound
 sound:contracted-iku	「待てって」	「기다리라고」	keep	sound
 sound:contracted-iku	「すぐ戻ってくる」	「바로 돌아온다」	keep	sound

@@ -3,7 +3,7 @@ dict:dama-ninaru	小麦粉がだまになった。	밀가루가 뭉쳤다.	fix	l
 dict:dama-ninaru	小麦粉がだまになりにくい。	밀가루가 뭉치기 어렵다.	fix	lookup
 dict:dama-ninaru	小麦粉がだまになる。	밀가루가 뭉친다.	fix	lookup
 dict:dama-ninaru	だまって。	가만히 있어.	keep	lookup
-dict:dama-ninaru	だましてはいけない。	속여선 안 된다.	keep	lookup
+dict:dama-ninaru	だましてはいけない。	속여선 안된다.	keep	lookup
 dict:dama-ninaru	だましながら話した。	속이면서 이야기했다.	keep	lookup
 dict:dama-ninaru	友人にだまされた。	친구에게 속았다.	keep	lookup
 dict:kami-osage	髪をおさげにする。	머리를 땋아 늘어뜨린다.	fix	lookup

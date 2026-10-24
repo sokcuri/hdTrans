@@ -28,7 +28,7 @@ src/core/output/particle.cpp	0	87	0	1	87	29	6	0	14
 src/core/output/prepass.cpp	135	165	22	14	219	25	9	4	120
 src/core/output/text.cpp	0	0	0	0	0	0	2	0	0
 src/core/pipeline/casual.cpp	287	0	11	13	75	6	4	0	102
-src/core/pipeline/colloquial.cpp	119	0	7	7	53	128	0	0	179
+src/core/pipeline/colloquial.cpp	119	0	7	7	53	127	0	0	178
 src/core/pipeline/katakana.cpp	257	0	4	6	223	26	0	2	62
 src/core/pipeline/kin_terms.cpp	10	10	4	2	24	0	0	0	0
 src/core/pipeline/masked.cpp	2	0	0	0	0	0	0	0	2

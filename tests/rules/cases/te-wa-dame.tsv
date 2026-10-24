@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:114533	戦っては駄目だ。	싸워선 안 된다.	fix	local
-dict:jisjk:114533	読んでは駄目だ。	읽어선 안 된다.	fix	local
+dict:jisjk:114533	戦っては駄目だ。	싸워선 안된다.	fix	local
+dict:jisjk:114533	読んでは駄目だ。	읽어선 안된다.	fix	local
 dict:jisjk:114533	戦って駄目だった。	!rule:dict:jisjk:114533	keep	local
-dict:jisjk:114533	それは駄目だ。	그것은 안 된다.	keep	local
+dict:jisjk:114533	それは駄目だ。	그것은 안된다.	keep	local

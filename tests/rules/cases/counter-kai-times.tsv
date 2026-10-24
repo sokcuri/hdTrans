@@ -26,7 +26,7 @@ dict:jisjk:115519	1日に2回、1回あたり5ミリリットルを服用する�
 dict:jisjk:115519	計５回行ったイベントの入場者は	!rule:dict:jisjk:115519	keep	global-stem
 dict:jisjk:115519	「第１０回、納涼カラオケ大会！」	「제10회, 납량 가라오케 대회!」	keep	global-stem
 dict:jisjk:344600	『第１回チキチキ、いったい誰の真似なのよ？』	『제1회 치키치키, 도대체 누구의 흉내야?』	keep	defaults
-dict:jisjk:344600	「1回戦で負けちまったのさ」	「1회전에서 져 버렸어」	keep	defaults
+dict:jisjk:344600	「1回戦で負けちまったのさ」	「1회전에서 져버렸어」	keep	defaults
 dict:jisjk:344600	「１回２錠で１０回分あります。」	「1회 2정으로 10회분 있습니다.」	keep	defaults
 dict:jisjk:344600	「部内で行うだけでなく、年に１回は近くの学校と合同で行う。」	「부내에서 실시할 뿐만 아니라, 1년에 한 번은 근처 학교와 합동으로 실시한다.」	keep	compose
 dict:jisjk:344600	「１回も勝てなかった」	!rule:dict:jisjk:344600	keep	local

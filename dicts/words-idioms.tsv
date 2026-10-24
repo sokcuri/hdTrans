@@ -2605,8 +2605,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 満たない	채 안 되는	A9D0			GN				llm			i:2600
 満たざる	채 안 되는	A9D0			GN				llm			i:2601
 逆鱗に触れ	역린을 건드&AA@	M427			GN				llm			i:2602
-闇から闇に葬	몰래 덮어 버&AA@	M428			GN				llm			i:2603
-やみからやみに葬	몰래 덮어 버&AA@	M428			GN				llm			i:2604
+闇から闇に葬	몰래 덮어버&AA@	M428			GN				llm			i:2603
+やみからやみに葬	몰래 덮어버&AA@	M428			GN				llm			i:2604
 位人臣を極め	최고의 지위에 &E6@	M427		Pn	GN				llm			i:2605
 為にする	속셈이 있는	A9D0			GN				llm			i:2606
 危機を脱する	위기를 벗어나	A9D0			GN				llm			i:2607

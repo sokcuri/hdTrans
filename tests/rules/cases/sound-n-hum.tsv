@@ -19,7 +19,7 @@ sound:n-hum	「うんっ、んっ……はあぁっ……」	「응, 읏……�
 sound:n-hum	「んむっ、んっ……はっ……あんっ……」	「으읍, 읏……헉……앙……」	keep	sound
 sound:n-hum	「んっ……ぁ……」	「읏……아……」	keep	sound
 sound:n-hum	「ふうっ……あっ、んん……ん」	「후우……앗, 으응……응」	fix	sound
-sound:n-hum	「んんぅ……っ、だめ……」	「으으응……, 안 돼……」	fix	sound
+sound:n-hum	「んんぅ……っ、だめ……」	「으으응……, 안돼……」	fix	sound
 sound:n-hum	「ん、そうだね」	「응, 그러게」	keep	sound
 sound:n-hum	「ん？　どうしたの」	「응? 무슨 일이야」	keep	sound
 sound:n-hum	「うん、行こう」	「응, 가자」	keep	sound

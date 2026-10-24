@@ -3,9 +3,9 @@
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いっちゃ	가버&AA@	M420			GN							adult:1
 いっちま	가버&AA@	M420			GN							adult:2
-います	6 버립니다	S5A0			GN							adult:3
-いますか	6 버릴까요	S5A0			GN							adult:4
-いますから	6 버릴 테니까요	S5A0			GN							adult:5
+います	6버립니다	S5A0			GN							adult:3
+いますか	6버릴까요	S5A0			GN							adult:4
+いますから	6버릴 테니까요	S5A0			GN							adult:5
 揉め	다&CR@	M437			GN							adult:6
 鈴口	요도구	N110	VBp		GN						すずぐち	adult:7
 裏筋	뒷줄기	N110	VBp		GN						うらすじ	adult:8

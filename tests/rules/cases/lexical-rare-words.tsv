@@ -12,12 +12,12 @@ dict:rare-words	崖を這い上がる。	벼랑을 기어오른다.	keep	lookup
 dict:rare-words	門はびくともしない。	문은 꿈쩍도 하지 않는다.	keep	lookup
 dict:rare-words	皮剥ぎを釣った。	쥐치를 낚시했다.	keep	lookup
 dict:rare-words	りんごの皮が剥けた。	사과의 껍질이 벗겨졌다.	keep	lookup
-ending:ちゃってるわ	靴が汚れちゃってるわよ。	구두가 더러워져 버렸어.	fix	builtin-ending
-ending:ちゃってるわ	ケーキを食べちゃったわ。	케이크를 먹어 버렸어.	fix	builtin-ending
-ending:ちゃってるわ	もう寝ちゃってるね。	이제 자 버렸네.	fix	builtin-ending
-ending:ちゃってるわ	全部忘れちゃうわよ。	전부 잊어 버릴 거야.	fix	builtin-ending
+ending:ちゃってるわ	靴が汚れちゃってるわよ。	구두가 더러워져버렸어.	fix	builtin-ending
+ending:ちゃってるわ	ケーキを食べちゃったわ。	케이크를 먹어버렸어.	fix	builtin-ending
+ending:ちゃってるわ	もう寝ちゃってるね。	이제 자버렸네.	fix	builtin-ending
+ending:ちゃってるわ	全部忘れちゃうわよ。	전부 잊어버릴 거야.	fix	builtin-ending
 ending:ちゃってるわ	彼は帰ったわね。	그는 돌아갔네.	fix	builtin-ending
-ending:ちゃってるわ	ケーキを食べちゃった。	케이크를 먹어 버렸다.	keep	builtin-ending
+ending:ちゃってるわ	ケーキを食べちゃった。	케이크를 먹어버렸다.	keep	builtin-ending
 ending:ちゃってるわ	本を読んでるわよ。	책을 읽고 있어.	keep	builtin-ending
 ending:ちゃってるわ	私が行くわよ。	내가 갈 거야.	keep	builtin-ending
 dict:rare-words	竿が大きくしなった。	장대가 크게 휘었다.	keep	lookup

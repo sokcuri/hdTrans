@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-phrase:だめよ	そんなのダメよ。	그런 것 안 돼.	fix	builtin-phrase
-phrase:だめよ	ダメよねぇ？	안 되지~?	fix	builtin-phrase
-phrase:だめよ	ダメだわ。	안 되겠어.	keep	builtin-phrase
+phrase:だめよ	そんなのダメよ。	그런 것 안돼.	fix	builtin-phrase
+phrase:だめよ	ダメよねぇ？	안되지~?	fix	builtin-phrase
+phrase:だめよ	ダメだわ。	안되겠어.	keep	builtin-phrase

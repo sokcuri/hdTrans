@@ -64,7 +64,7 @@ sound:short-answer	「へ？」	「어?」	fix	sound
 sound:short-answer	「いいの？」	「괜찮아?」	fix	sound
 sound:short-answer	「んなわけあるか」	「그럴 리가 있냐」	fix	sound
 dict:chatte	「忘れちゃって、ごめん」	「잊어서, 미안」	fix	lookup
-dict:chatte	「言っちゃってもいい？」	「말해 버려도 좋아?」	fix	local-ending
+dict:chatte	「言っちゃってもいい？」	「말해버려도 좋아?」	fix	local-ending
 dict:jisjk:93288	「買おうと思って来た」	「사려고 왔다」	fix	local
 dict:jisjk:93288	明日行こうと思います。	내일 가려고 합니다.	fix	local
 dict:jisjk:93288	行こうと思って家を出た。	가려고 집을 나갔다.	fix	local

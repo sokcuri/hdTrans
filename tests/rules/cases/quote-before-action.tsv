@@ -36,7 +36,7 @@ cx:final-quote-to:20	彼が来たと同じ	!rule:cx:final-quote-to:20	keep	rewri
 cx:final-quote-to:20	犬が死んだと同時に流れたアナウンス。	!rule:cx:final-quote-to:20	keep	rewrites
 cx:final-quote-to:20	彼が来たと一緒に帰った	!rule:cx:final-quote-to:20	keep	rewrites
 cx:final-quote-to:20	他のスキルもきっとLV1はしようもない効果しか出なかったんだと。	다른 스킬도 분명 LV1은 어쩔 수 없는 효과밖에 나오지 않았다고.	fix	rewrites
-cx:final-quote-to:20	「従業員は、客と同じ場所で食べちゃいけないんだと」	「종업원은, 손님과 같은 장소에서 먹으면 안 된다고」	fix	rewrites
+cx:final-quote-to:20	「従業員は、客と同じ場所で食べちゃいけないんだと」	「종업원은, 손님과 같은 장소에서 먹으면 안된다고」	fix	rewrites
 cx:final-quote-to:20	子になりそうだなぁと、彼はどこかずれた事を考えていた。	아이가 될 것 같다고 그는 어딘가 어긋난 일을 생각하고 있었다.	fix	rewrites
 cx:final-quote-to:20	そうだろうと思った。	그럴 것이라고 생각했다.	keep	rewrites
 cx:final-quote-to:20	これを受け取っていただけますと、幸い…です…。	!rule:cx:final-quote-to:20	keep	rewrites
@@ -66,6 +66,6 @@ cx:final-quote-to:50	単なる先輩後輩と恋人同士じゃ関係の格が�
 cx:final-quote-to:50	試合だろうとなんだろうと、可能性があるならやる	!rule:cx:final-quote-to:50	keep	rewrites
 cx:final-quote-to:30	頂ければと……ありがとう存じます。	주시면……감사합니다.	fix	rewrites
 cx:final-quote-to:45	爆発するような積み荷はどうかと…はい…	폭발하는 것 같은 적하는 어떨까…네…	fix	rewrites
-cx:final-quote-to:45	それを忘れてしまうのはどうかと…	그것을 잊어 버리는 것은 어떨까…	fix	rewrites
+cx:final-quote-to:45	それを忘れてしまうのはどうかと…	그것을 잊어버리는 것은 어떨까…	fix	rewrites
 cx:final-quote-to:45	頑張れと手を振った。	!rule:cx:final-quote-to:45	keep	rewrites
 cx:final-quote-to:50	お疲れさまでしたとゲームのキャラたちがお別れのしぐさをしている。	수고하셨습니다 하고 게임의 캐릭터들이 작별의 행동을 하고 있다.	fix	rewrites

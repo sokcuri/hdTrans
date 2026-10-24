@@ -11,10 +11,12 @@
 #include "core/output/compose.h"
 #include "core/output/korean.h"
 #include "core/output/particle.h"
+#include "core/output/pieces.h"
 #include "core/output/inflect.h"
 #include "core/rules/match.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
+#include "core/text/utf8.h"
 #include "core/tokenizer/classify.h"
 #include "core/tokenizer/token.h"
 #include "core/word/flush.h"
@@ -93,6 +95,42 @@ bool ConnectiveCopies(const Item* it) {
     const int from = last->DirectIndex();
     return it->detail->Yougo() && from >= 0 && last->DirectText(from).starts_with("6") &&
            last->DirectCode(from).find(';') == std::string_view::npos;
+}
+
+// The first copy of the run that it ends or goes on.
+const Item* FirstCopy(const Item* it) {
+    const Item* first = it;
+    while (const Item* p = CopyBefore(first)) first = p;
+    return first;
+}
+
+// Whether it is a copy of a run of an adjective or an adjectival noun said again whose last
+// copy ends bare in い or だ, read 1다 or the exclamative 6 (痛い痛い, いやだいやだ, すごいすごい).
+bool PredicateCopies(const Item* it) {
+    if (CopyBefore(it) == nullptr && CopyAfter(it) == nullptr) return false;
+    if (it->detail->cls != kDetailKeiyo && it->detail->cls != kDetailDakeiyo) return false;
+    const Item* last = LastCopy(it);
+    const int from = last->DirectIndex();
+    if (from < 0) return false;
+    return dict::InClass("ending.copies-bare", last->DirectSurface()) && dict::InClass("ending.copies-plain", last->DirectText(from));
+}
+
+// The text right after the word: the rest of its token, or the text after the token.
+std::string_view TextAfter(const Item* it) {
+    const std::string_view rest = From(it->text, it->start + it->length);
+    return rest.empty() ? it->detail->nextText : rest;
+}
+
+// Whether its run of copies is a cry whatever the words: three copies or more, or a mark of
+// mark.cry right after the last copy (寒い寒い寒い, 寒い寒いっ, 寒い寒い！, 寒い寒い……).
+bool CriedCopies(const Item* it) {
+    int copies = 1;
+    for (const Item* c = FirstCopy(it); (c = CopyAfter(c)) != nullptr;) copies++;
+    if (copies >= 3) return true;
+    const std::string_view rest = TextAfter(LastCopy(it));
+    const std::string_view mark = rest.substr(0, text::DecodeRune(rest).size);
+    const char32_t cp = text::DecodeRune(rest).cp;
+    return dict::InClass("mark.cry", mark) || cp == output::kLengthenMark || cp == output::kDrawnMark;
 }
 
 bool Exclaimed(Flusher& f, const Item* it) {
@@ -202,6 +240,16 @@ constexpr NamedFeature kFeatures[] = {
     {"copied-straight", [](Flusher&, const Item* it) { return CopiedStraight(it); }},
     {"copies-end", [](Flusher&, const Item* it) { return CopiesEnd(it); }},
     {"connective-copies", [](Flusher&, const Item* it) { return ConnectiveCopies(it); }},
+    // The copies are an adjective or adjectival noun whose last copy ends in 1다 or 6
+    // (PredicateCopies); the run is a cry (CriedCopies).
+    {"predicate-copies", [](Flusher&, const Item* it) { return PredicateCopies(it); }},
+    {"cried-copies", [](Flusher&, const Item* it) { return CriedCopies(it); }},
+    // A clipping っ or ッ (mark.clip) follows the word right after it (痛いっ).
+    {"clipped",
+     [](Flusher&, const Item* it) {
+         const std::string_view rest = TextAfter(it);
+         return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
+     }},
     // The sentence of the word ends in ! or ? (an utterance, not a narrated sentence).
     {"exclaimed", [](Flusher& f, const Item* it) { return Exclaimed(f, it); }},
     // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis
@@ -458,6 +506,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"copy-word", CxVerb::CopyWord},
         {"set-sound", CxVerb::SetSound},
         {"set-active", CxVerb::SetActive},
+        {"clip-ending", CxVerb::ClipEnding},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -497,7 +546,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         }
         const char* bad = nullptr;
         if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
-            a.verb == CxVerb::SetActive) {
+            a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding) {
             out.push_back(std::move(a));
             continue;
         }
@@ -933,6 +982,21 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             it->choice = source;
             break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
+        case internal::CxVerb::ClipEnding: {
+            // The mark after the ending, or after the word that has none; the restore stage writes it
+            // as ㅅ closing the last syllable (아팟, 안됏).
+            if (const int at = it->DirectIndex(); at >= 0) {
+                std::string ending(it->DirectText(at));
+                text::AppendRune(ending, output::kClipMark);
+                it->AssignDirectSlot(at, ending, source);
+            } else if (it->selected >= 0) {
+                std::string word(it->EntryText(it->selected));
+                text::AppendRune(word, output::kClipMark);
+                it->AssignEntrySurface(it->selected, word, source);
+            }
+            break;
+        }
+
         case internal::CxVerb::ReplaceHead: {
             const std::string_view target = it->EntryText(it->selected);
             if (target.starts_with(a.value)) {

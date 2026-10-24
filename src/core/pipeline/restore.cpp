@@ -502,9 +502,9 @@ std::string WriteEmphasis(std::string_view s) {
 
 std::string WriteLengthening(std::string_view s) {
     const std::u32string rs = Runes(s);
-    if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark)) return std::string(s);
-    // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅐ, ㅝ ㅓ), by jamo index.
-    static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 1, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+    if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark) && !Contains(rs, output::kClipMark)) return std::string(s);
+    // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
+    static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
     std::u32string out;
     for (const char32_t r : rs) {
         if (r == kDrawnMark) {
@@ -512,6 +512,8 @@ std::string WriteLengthening(std::string_view s) {
             const int syllable = static_cast<int>(out.back() - 0xAC00), final = syllable % 28;
             out.back() -= static_cast<char32_t>(final);
             out.push_back(static_cast<char32_t>(0xAC00 + (11 * 21 + kLongVowel[syllable % 588 / 28]) * 28 + final));
+        } else if (r == output::kClipMark) {
+            if (!out.empty() && text::Final(out.back()) == 0) out.back() += static_cast<char32_t>(text::kFinalSiot);
         } else if (r != kLengthenMark) {
             out.push_back(r);
         } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {

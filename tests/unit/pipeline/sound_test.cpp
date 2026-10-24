@@ -77,7 +77,7 @@ HD_TEST(pipeline_lengthen) {
         // A ～ that stood for the key's ー adds one ~ at the end.
         {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
         // 'd' lets the last syllable of a word carry the lengthening.
-        {"안 돼", "vvvd", "안 돼애애애"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
+        {"안 돼", "vvvd", "안 돼에에에"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
         // 'u': a ッ that closes a drawn う writes 읏, other closing 우 stay (わおっ 와웃).
         {"하우", "!u", "하읏"}, {"하우", "v!u", "하우읏"}, {"와우", "!", "와웃"}, {"우우", "rr!u", "우우우읏"},
     };
@@ -147,7 +147,7 @@ HD_TEST(pipeline_sound) {
     LineContext ctx;
     ctx.lookup.plain = &snap->TextPlain();
     const Case cases[] = {
-        {"あんっ、だめぇ", "앙、안 돼"},
+        {"あんっ、だめぇ", "앙、안돼"},
         {"うわ…柔らかい", "우와…柔らかい"},
         {"フキフキ", "쓱쓱"},
         {"肉がジュージューと焼ける。", "肉が지글지글 焼ける。"},
@@ -159,6 +159,7 @@ HD_TEST(pipeline_sound) {
         {"ひぃやあっ！", "히이야앗！"},
         {"ふぁーふぁー", "후아아후아아"},
         {"やだやだ", "싫어 싫어"},
+        {"やだやだっ", "싫어 싫엇"},  // the clipped last copy of a cry closes with ㅅ
         // Of two keys as long, the one whose Korean draws the vowel out (ひぎぃ, not ひぎっ).
         {"ひぎぃぃぃっ！", "히기이이익！"},
         {"ひぎっ！", "히긱！"},
@@ -167,7 +168,7 @@ HD_TEST(pipeline_sound) {
         {"うわぁー！", "우와아아！"},
         {"きゃああっ！", "꺄아악！"},
         {"やだ～～！", "싫어~！"},
-        {"いくぅぅ", "가 버려~"},
+        {"いくぅぅ", "가버려~"},
         // A phrase that states a past event is asked before ？; before ！ or 。 it stays.
         {"できた？", "다 됐어？"},
         {"できた！", "다 됐다！"},
@@ -220,7 +221,7 @@ HD_TEST(pipeline_sound) {
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
         // A drawn よ after a て form at the start of the text: no character before the て.
         {"てよー", "てよ～"},
         {"でよーーー。聞いてるの？", "でよ～。聞いてるの？"},
@@ -631,10 +632,14 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // っ goes; a cry (no word before the mark) keeps it for the cry pass.
         {"まかせてーーっ！", "まかせて～！"},
         {"ぎやぁーっ！", "ぎやぁーっ！"},
-        // A dropped run of three or more vowel kana leaves a drawn mark for each.
+        // A dropped run of three or more vowel kana leaves a drawn mark for each, and a clip mark
+        // for the shout's っ the marks take.
         {"まかせてぇぇぇ！", "まかせて\uE00B\uE00B\uE00B！"},
-        {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B！"},
-        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B\uE00C！"},
+        // Two kana after a word said twice draw it out too.
+        {"待って待ってぇぇ", "待って待って\uE00B\uE00B"},
+        {"待ってぇぇ", "待って"},
+        {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
         // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
         // drawl of the particle is ～.
         {"歌うよぉー！", "歌うよ～！"},

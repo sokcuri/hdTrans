@@ -411,6 +411,8 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
+  `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
+  `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴),
   `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
   `prompt-after`(단어 뒤의 글이 공백 다음에 `mark.prompt-follow`의 말로 시작하거나 `mark.prompt-answer`의 답을 담음: 화면에 띄운 물음 뒤의 と, 》, はい, やめる).
   표에 없는 판정이 필요하면 `constructions.cpp`의 `kFeatures`에 이름과 함께 더합니다.
@@ -441,6 +443,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
 | `select-map @맵` | 고른 후보의 사전형 한국어가 맵의 앞말이면 사전형이 뒷말인 첫 후보를 고름(없으면 그대로) |
 | `set-verb "말다"` | 고른 후보의 번역을 동사 `말다`의 활용 표지 붙은 꼴(사전 행의 `&` 표지와 같음)로 씀 |
 | `set-active` | 수동으로 분석된 동사를 능동으로 씀(`어지다`를 붙이지 않고 그 동사의 번역 그대로 활용함) |
+| `clip-ending` | 어미 뒤(어미가 없으면 번역 뒤)에 끝 음절을 받침 ㅅ으로 닫는 표지를 붙임(아파 아팟) |
 | `set-sound` | 고른 후보의 번역을 단어의 가나 표기를 소리대로 적은 한글로 씀(ワタシ 와타시) |
 
 ### -why, 사례, 검사

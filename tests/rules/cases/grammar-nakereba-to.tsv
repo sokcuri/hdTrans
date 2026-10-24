@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 pattern:書かなければと	行かなきゃと思った。	가야 한다고 생각했다.	fix	builtin-pattern
 pattern:書かなければと	守らねばと誓った。	지켜야 한다고 맹세했다.	fix	builtin-pattern
-dict:jisjk:265671	どうにかしなければと思った。	어떻게든 하지 않으면 안 된다고 생각했다.	fix	local
+dict:jisjk:265671	どうにかしなければと思った。	어떻게든 하지 않으면 안된다고 생각했다.	fix	local
 dict:jisjk:265671	早ければと思う。	빠르면 하고 생각한다.	keep	local

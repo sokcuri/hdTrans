@@ -131,6 +131,19 @@ bool JoinedCopies(const std::vector<ResolvedItem>& items, int i, int next) {
     return text::RuneCount(EntryText(items[i])) > 1 || JoinedCopies(items, i - 1, i);
 }
 
+// t with the space dropped between a word of ko.joined-before-doe that starts t or follows a
+// space and a form of 되다 after it (안 돼 안돼, 안 된다 안된다; LAY-11).
+void JoinBeforeDoe(std::string& t) {
+    for (const std::string_view w : dict::ClassMembers("ko.joined-before-doe")) {
+        for (std::size_t at = t.find(w); at != std::string::npos; at = t.find(w, at + 1)) {
+            const std::size_t space = at + w.size();
+            if ((at > 0 && t[at - 1] != ' ') || space >= t.size() || t[space] != ' ') continue;
+            const auto doe = text::Split(text::DecodeRune(std::string_view(t).substr(space + 1)).cp);
+            if (doe && doe->initial == 3 && (doe->vowel == 10 || doe->vowel == 11)) t.erase(space, 1);  // ㄷ, ㅙ ㅚ
+        }
+    }
+}
+
 // Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
 bool Doubled(std::string_view s, size_t min) {
     const size_t half = s.size() / 2;
@@ -1073,6 +1086,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         t.insert(0, " ");
     }
     using Result = std::pair<std::string, bool>;
+    JoinBeforeDoe(t);
+    // An auxiliary of ko-aux.joined after the 아/어 form is written joined to it (먹어버렸다; LAY-11).
+    if (nextIndex == i + 1 && First(item.ending.text) == '6' && dict::InClass("ko-aux.joined", EntryText(items[nextIndex]))) {
+        return Result(std::move(t), false);
+    }
     // A comma keeps its space before a run of symbols as before a word (마인, ％＆＄＃).
     if (settings_.text && kind == '6' && t == "," && SymbolsFollow(tokens, items, i)) {
         return Result(std::move(t), true);

@@ -11,7 +11,7 @@ dict:jisjk:354151	彼はのんきなことを言っている。	그는 팔자 �
 dict:jisjk:354151	今はのんきなことを言わない。	지금은 팔자 좋은 소리를 하지 않는다.	fix	defaults
 dict:jisjk:354151	「のんきなことを言うな」	「팔자 좋은 소리를 하지 마」	fix	defaults
 dict:jisjk:354151	のんきなことを言っていた。	팔자 좋은 소리를 했다.	fix	defaults
-dict:jisjk:354151	のんきなことを言ってしまった。	팔자 좋은 소리를 해 버렸다.	fix	defaults
+dict:jisjk:354151	のんきなことを言ってしまった。	팔자 좋은 소리를 해버렸다.	fix	defaults
 dict:jisjk:354151	のんきなことを言ってもいい。	팔자 좋은 소리를 해도 괜찮다.	fix	defaults
 lexical:stored-target-spelling	呑気なことを言う。	팔자 좋은 소리를 한다.	keep	defaults
 lexical:stored-target-spelling	呑気だ。	태평하다.	keep	defaults

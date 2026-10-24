@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 dict:jisjk:64890	砂浜に大の字になる。	모래 사장에 큰댓자가 된다.	fix	defaults
-dict:i:5122	大の大人が泣いちゃうよ。	다 큰 어른이 울어 버릴 거야.	fix	defaults
+dict:i:5122	大の大人が泣いちゃうよ。	다 큰 어른이 울어버릴 거야.	fix	defaults
 dict:i:7248	苦渋の決断を下した。	고뇌에 찬 결단을 내렸다.	fix	defaults
 dict:jisjk:64890	あの人は来ない。	그 사람은 오지 않는다.	keep	defaults
