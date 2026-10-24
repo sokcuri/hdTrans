@@ -93,10 +93,10 @@ then judges only what changed since the last check.
   Use `fix:` unless a feature release is intended.
 - Write a new title and body as a release summary, grouped by area (words, speech, numbers, layout,
   sounds, tools). Do not copy the develop PR.
-- State how the counts in the `Performance budget` summary moved from
+- State how the counts of the `perf-budget` artifact of the latest develop push Build moved from
   `git show vX.Y.Z:tools/perf-budget.tsv` of the last release, with the `Perf-Budget:` reasons of
-  `git log vX.Y.Z..develop`. The summary is in the linux job of the develop push Build that the
-  gate reused, when the gate skipped the matrix of this PR.
+  `git log vX.Y.Z..develop`, and commit that artifact as `tools/perf-budget.tsv` on develop
+  before the promotion.
 - Open it with `gh pr create --base main --head develop --milestone X.Y.Z`.
 - Wait for its checks (see "Merging any PR"), then merge with a merge commit, not a squash:
   `gh pr merge N --merge`.
