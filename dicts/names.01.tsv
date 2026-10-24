@@ -268801,7 +268801,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦闘ロボット軍団	전투 로봇 군단	N110			GN							names.566558
 戦闘不能	전투불능	N130	QPNVHn	Wb	GN						せんとうふのう	names.566559
 戦闘人形 マヤ	전투형 마야	N110			GN							names.566560
-戦闘力	전투력	N130	QPNVHn	Wb	GN							names.566561
+戦闘力	전투력	N130	QPNVHnUPc	Wb	GN							names.566561
 戦闘力1ゾイド	전투력 1 조이드	N110			GN							names.566562
 戦闘力530000	프리저	N130	QPNVHn	Wb	GN							names.566563
 戦闘員	전투원	N110			GN							names.566564

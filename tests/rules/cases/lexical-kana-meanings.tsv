@@ -200,8 +200,6 @@ dict:jisjk:119276	こくびをひねっている。	고개를 갸우뚱하고 �
 dict:jisjk:119276	こくびをひねらない。	고개를 갸우뚱하지 않는다.	fix	defaults
 dict:jisjk:119276	首をひねる。	고개를 갸우뚱한다.	keep	defaults
 dict:jisjk:119276	首を回す。	목을 돌린다.	keep	defaults
-dict:jisjk:119280	国力がある。	국력이 있다.	keep	defaults
-dict:jisjk:119280	能力を向上させる。	능력을 향상시킨다.	keep	defaults
 dict:jisjk:111702	こけら落とし。	개관 첫 공연.	fix	defaults
 dict:jisjk:111702	劇場のこけら落とし。	극장의 개관 첫 공연.	fix	defaults
 dict:jisjk:111702	こけら落としを行う。	개관 첫 공연을 실시한다.	fix	defaults
@@ -324,40 +322,9 @@ dict:jisjk:189085	しゅうあけの朝。	주초 아침.	fix	defaults
 dict:jisjk:189085	週末の会議。	주말의 회의.	keep	defaults
 dict:jisjk:189085	年末に帰る。	연말에 돌아간다.	keep	defaults
 dict:jisjk:189085	来月の予定。	내달의 예정.	keep	defaults
-dict:jisjk:119279	国力をつける。	국력을 향상시킨다.	fix	defaults
-dict:jisjk:119279	国力をつけた。	국력을 향상시켰다.	fix	defaults
 lookup:national-strength	こくりょくを高める。	국력을 높인다.	keep	defaults
 lookup:national-strength	こくりょくを強める。	국력을 강하게 한다.	keep	defaults
-sense:capacity-growth	こくりょくをつける。	국력을 향상시킨다.	fix	senses
-sense:capacity-growth	こくりょくをつけた。	국력을 향상시켰다.	fix	senses
-sense:capacity-growth	こくりょくをつけている。	국력을 향상시키고 있다.	fix	senses
-sense:capacity-growth	こくりょくをつけない。	국력을 향상시키지 않는다.	fix	senses
-dict:jisjk:119279	国力をつけている。	국력을 향상시키고 있다.	fix	defaults
-dict:jisjk:119279	国力をつけない。	국력을 향상시키지 않는다.	fix	defaults
-sense:capacity-growth	体力をつける。	체력을 기른다.	keep	senses
-sense:capacity-growth	実力をつける。	실력을 향상시킨다.	fix	senses
-sense:capacity-growth	筋力をつける。	근력을 향상시킨다.	fix	senses
-sense:capacity-growth	能力をつける。	능력을 향상시킨다.	fix	senses
 sense:capacity-growth	のりをつける。	풀을 붙인다.	keep	senses
-sense:capacity-growth	ラベルをつける。	라벨을 붙인다.	keep	senses
-sense:capacity-growth	手をつける。	손을 댄다.	keep	senses
-sense:capacity-growth	じつりょくをつける。	실력을 향상시킨다.	fix	senses
-sense:capacity-growth	こくりょくを付ける。	국력을 향상시킨다.	fix	senses
-sense:capacity-growth	国力を付ける。	국력을 향상시킨다.	fix	senses
-sense:capacity-growth	国力をもっとつける。	국력을 좀 더 향상시킨다.	fix	senses
-sense:capacity-growth	実力をつけた。	실력을 향상시켰다.	fix	senses
-sense:capacity-growth	実力をつけている。	실력을 향상시키고 있다.	fix	senses
-sense:capacity-growth	実力をつけない。	실력을 향상시키지 않는다.	fix	senses
-sense:capacity-growth	筋力をつけた。	근력을 향상시켰다.	fix	senses
-sense:capacity-growth	能力をつけない。	능력을 향상시키지 않는다.	fix	senses
-sense:capacity-growth	ラベルをつけた。	라벨을 붙였다.	keep	senses
-sense:capacity-growth	ラベルをつけている。	라벨을 붙이고 있다.	keep	senses
-sense:capacity-growth	ラベルをつけない。	라벨을 붙이지 않는다.	keep	senses
 sense:capacity-growth	のりをつけた。	풀을 붙였다.	keep	senses
 sense:capacity-growth	のりをつけている。	풀을 붙이고 있다.	keep	senses
 sense:capacity-growth	のりをつけない。	풀을 붙이지 않는다.	keep	senses
-sense:capacity-growth	電気をつける。	불을 켠다.	keep	senses
-sense:capacity-growth	値段をつける。	가격을 매긴다.	keep	senses
-sense:capacity-growth	薬をつける。	약을 바른다.	keep	senses
-sense:capacity-growth	体力をつけない。	체력을 기르지 않는다.	keep	senses
-sense:capacity-growth	ラベルをもっとつける。	라벨을 좀 더 붙인다.	keep	senses

@@ -1455,7 +1455,10 @@
 いっぱい	가득	class:verb.filling	after	adv
 おかしい	이상하다	が,は	before	adj
 おかしい	웃기다	class:ko-sound.laugh	sentence	adj
-つける	향상시키다	sem:UPc@を	before	v1
-付ける	향상시키다	sem:UPc@を	before	v1
+// つける after a capacity noun (sem UPc) is building it up.
+つける	기르다	sem:UPc@を	before	v1
+付ける	기르다	sem:UPc@を	before	v1
+つけさせる	기르게 하다	sem:UPc@を	before	v1
+付けさせる	기르게 하다	sem:UPc@を	before	v1
 // 解放 of memory, a resource or a lock is 해제.
 解放	해제	メモリ,メモリー,リソース,ロック,ハンドル,バッファ,バッファー,オブジェクト,インスタンス,領域,キャッシュ,ポインタ,ポインター,セマフォ,ミューテックス,ファイルハンドル,コネクション,ソケット	before	n

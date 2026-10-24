@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3, SPC-1
 rule	input	expected	kind	layer
 dict:jisjk:352791	「仮勘定を確認した」	「가계정을 확인했어」	fix	defaults
 dict:jisjk:60120	「仮小屋を建てた」	「임시 오두막을 지었어」	fix	defaults

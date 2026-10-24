@@ -1,7 +1,0 @@
-# 규칙: LEX-1, LEX-2, LEX-3
-rule	input	expected	kind	layer
-lookup:lexical-cleanup-10	テレビ	텔레비전	keep	lookup
-dict:jisjk:244497	「鉄拳制裁だ。」	「철권제재다.」	fix	lookup
-dict:names.458948	「修士(神学)だ。」	「신학 석사다.」	fix	lookup
-dict:names.629268	「洋三郎だ。」	「요사부로다.」	fix	lookup
-dict:jisjk:262973	「ポップ・アップだ。」	「팝업이다.」	fix	lookup

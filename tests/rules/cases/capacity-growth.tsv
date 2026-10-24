@@ -1,0 +1,37 @@
+# 규칙: LEX-3, LEX-13
+rule	input	expected	kind	layer
+sense:capacity-growth	国力をつける。	국력을 기른다.	fix	senses
+sense:capacity-growth	国力をつけた。	국력을 길렀다.	fix	senses
+sense:capacity-growth	国力を付ける。	국력을 기른다.	fix	senses
+sense:capacity-growth	こくりょくをつけている。	국력을 기르고 있다.	fix	senses
+sense:capacity-growth	国力をもっとつける。	국력을 좀 더 기른다.	fix	senses
+sense:capacity-growth	実力をつけた。	실력을 길렀다.	fix	senses
+sense:capacity-growth	じつりょくをつける。	실력을 기른다.	fix	senses
+sense:capacity-growth	能力をつけない。	능력을 기르지 않는다.	fix	senses
+sense:capacity-growth	筋力をつけたい。	근력을 기르고 싶다.	fix	senses
+sense:capacity-growth	学力をつける。	학력을 기른다.	fix	senses
+sense:capacity-growth	力をつけてきた。	힘을 길러 왔다.	fix	senses
+sense:capacity-growth	アタシも力を付けた。	나도 힘을 길렀다.	fix	senses
+sense:capacity-growth	力をつけつつある。	힘을 기르고 있다.	fix	senses
+sense:capacity-growth	戦闘力をつける。	전투력을 기른다.	fix	senses
+sense:capacity-growth	魔力をつけた。	마력을 길렀다.	fix	senses
+sense:capacity-growth	免疫力をつける。	면역력을 기른다.	fix	senses
+sense:capacity-growth	経済力をつけた。	경제력을 길렀다.	fix	senses
+sense:capacity-growth	語学力をつける。	어학 실력을 기른다.	fix	senses
+sense:capacity-growth	実力をつけさせる。	실력을 기르게 한다.	fix	senses
+sense:capacity-growth	「国力をもっとつけたい」	「국력을 좀 더 기르고 싶다」	fix	senses
+sense:capacity-growth	「もっと力をつけなきゃ」	「좀 더 힘을 길러야 한다」	fix	senses
+dict:w:27327	敵をつけ狙う。	적을 노린다.	fix	defaults
+sense:capacity-growth	体力をつける。	체력을 기른다.	keep	senses
+sense:capacity-growth	体力をつけない。	체력을 기르지 않는다.	keep	senses
+sense:capacity-growth	体力をつけさせる。	체력을 기르게 한다.	keep	senses
+sense:capacity-growth	ラベルをつけている。	라벨을 붙이고 있다.	keep	defaults
+sense:capacity-growth	薬をつける。	약을 바른다.	keep	defaults
+sense:capacity-growth	電気をつける。	불을 켠다.	keep	global-stem
+sense:capacity-growth	値段をつける。	가격을 매긴다.	keep	local
+sense:capacity-growth	手をつける。	손을 댄다.	keep	defaults
+sense:capacity-growth	能力に目をつける。	능력에 주목한다.	keep	defaults
+sense:capacity-growth	一言付け加える。	한마디 덧붙인다.	keep	defaults
+sense:capacity-growth	技術を身につける。	기술을 익힌다.	keep	defaults
+sense:capacity-growth	能力を見つける。	능력을 찾아낸다.	keep	defaults
+sense:capacity-growth	車に気をつける。	차를 조심한다.	keep	defaults
