@@ -1,0 +1,20 @@
+# 규칙: SPC-12
+rule	input	expected	kind	layer
+cx:tte-quote:30	2時です。丑三つ時ってやつだよ。	has:오밤중시라는 녀석이야	fix	rewrites
+cx:tte-quote:30	肝試しってヤツ？	has:간시험이라는 녀석	fix	rewrites
+cx:tte-quote:30	お前って奴は、どうしていつもそうなんだ。	has:너라는 놈은	fix	rewrites
+cx:tte-quote:30	ミドリさんって人が霊能力者だよ！	has:씨라는 사람이	fix	rewrites
+cx:tte-quote:30	…本当に梨花ちゃんって子は…。	has:리카짱이라는 아이는	fix	rewrites
+cx:tte-quote:30	「二年半ぐらいって話だ」	has:정도라는 이야기다	fix	rewrites
+cx:tte-quote:30	総統暗殺って噂も流れてるからな。	has:암살이라는 소문도	fix	rewrites
+cx:tte-quote:30	「多分、それって『ワープ』って奴でしょう」	has:워프』라는 놈이죠	fix	rewrites
+cx:tte-quote:30	運命ってやつはわかんねぇよ。	has:운명이라는 녀석은	fix	rewrites
+cx:tte-quote:30	私だって、恥って言葉くらい知っているのだ。	has:수치라는 말	fix	rewrites
+cx:tte-quote:30	日本語ってヤツはさ、どうしてこう味に対する賛辞が少ないんだろうな！	has:일본어라는 녀석은	fix	rewrites
+cx:tte-quote:30	あのね、お姉ちゃんにはフィアンセって人がいるの。	has:피앙세라는 사람이	fix	rewrites
+cx:tte-quote:30	それって、どういうこと？	has:그거,	keep	rewrites
+cx:tte-quote:30	ここって人が皆無な場所なんじゃないかな。	lacks:여기라는	keep	rewrites
+cx:tte-quote:30	それって人のせい？	lacks:라는	keep	rewrites
+cx:tte-quote:30	猫って可愛い。	고양이는 귀엽다.	keep	rewrites
+cx:tte-quote:30	俺の好みがどーちゃらってやつ	lacks:라라는	keep	rewrites
+cx:tte-quote:30	秋ってもの悲しくない？	lacks:라는	keep	rewrites
