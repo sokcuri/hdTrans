@@ -100,7 +100,11 @@ pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::
         // A stem key that goes on into the kana past their first character is an idiom
         // (人気があ), not the base's inflection.
         r.inflected = static_cast<std::size_t>(first->group->length) <= okurigana;
-        if (const std::size_t end = BaseWordEnd(snap, text, *first); end > 0) r.wordEnd = end - base.size();
+        // The end cuts the kana, so it must fall inside them on a character boundary.
+        const std::size_t end = BaseWordEnd(snap, text, *first);
+        if (end > base.size() && end < text.size() && (static_cast<unsigned char>(text[end]) & 0xC0) != 0x80) {
+            r.wordEnd = end - base.size();
+        }
     }
     return r;
 }
