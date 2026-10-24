@@ -80,6 +80,7 @@
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
+//= ko.progressive-head	The ending that writes a verb before the existential 있 of its progressive (1고 있었다), for the て forms whose いる lost its い (見てた).
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.laughter	Latin letters a run of which laughs after Korean in the output (없어ｗｗ 없어ㅋㅋ).
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
@@ -1202,6 +1203,8 @@ ko.doing	될
 ko.doing	된
 ko.doing	됐
 ko.doing	돼
+
+ko.progressive-head	1고
 
 ko.title-end	님
 ko.title-end	씨

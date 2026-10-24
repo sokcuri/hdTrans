@@ -361,3 +361,33 @@ HD_TEST(word_su_verb_passive_guard) {
     HD_CHECK(!worker.SuVerb("驚か"));
     HD_CHECK(!worker.SuVerb("が"));
 }
+
+// The form of いる without its い after a て form, and the endings read on it.
+HD_TEST(verb_contracted_iru) {
+    const std::pair<std::string_view, int> branches[] = {
+        {"たが", 6}, {"たんだろ", 6}, {"るぞ", 0}, {"てね", 7}, {"ろ", 11}, {"ればいい", 3},
+        {"ようか", 5}, {"ちゃだめ", 17}, {"ないぞ", -1}, {"ます", -1}, {"", -1}, {"が", -1},
+    };
+    for (const auto& [rest, branch] : branches) HD_CHECK_EQ(word::ContractedIruBranch(rest), branch);
+
+    word::Entry past, plain, bare;
+    past.dst = "5지만";
+    plain.dst = "1고";
+    bare.dst = "";
+    word::Group g;
+    g.entries = {&past, &plain, &bare};
+    word::Detail d;
+    d.enabled.assign(3, 1);
+    HD_CHECK(word::ProgressiveEndings(g, d));
+    HD_CHECK_EQ(past.dst, std::string("1고 있었지만"));
+    HD_CHECK_EQ(plain.dst, std::string("1고 있고"));
+    HD_CHECK_EQ(int(d.enabled[2]), 0);
+
+    word::Entry none;
+    none.dst = "";
+    word::Group empty;
+    empty.entries = {&none};
+    word::Detail e;
+    e.enabled.assign(1, 1);
+    HD_CHECK(!word::ProgressiveEndings(empty, e));
+}

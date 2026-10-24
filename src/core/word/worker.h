@@ -183,6 +183,15 @@ bool NounEndAt(std::string_view text);
 // nominal are the key of a noun (高み, 甘み).
 bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal);
 
+// The ichidan branch of いる without its い that starts rest, the text after a て form: the
+// longest of る, れば, よう, た, て, ろ and ちゃ (見てる, 見てた, 見てて, 見てろ); -1 for none.
+int ContractedIruBranch(std::string_view rest);
+
+// The enabled endings of g, read on a form of いる, rewritten for the verb before it: 고 and
+// the form of 있 that the ending's class digit gives (5지만 → 1고 있었지만). An ending whose
+// class has no form of 있 is disabled; false when none is left.
+bool ProgressiveEndings(Group& g, Detail& d);
+
 // Whether a verb record of conjugation class sub may join a group whose first record
 // has class first, for conjugation branch mode.
 bool VerbClassJoins(char mode, char first, char sub);

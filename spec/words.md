@@ -614,3 +614,25 @@
 `tests/rules/cases/names-title-passive.tsv`, `tests/rules/cases/names-fragmented-targets.tsv`,
 `tests/rules/cases/names-place-facility-type.tsv`, `tests/rules/cases/names-title-separators.tsv`,
 `tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`, `tests/rules/cases/names-broadcaster-tv.tsv`
+
+
+## LEX-34 て 뒤에서 い가 빠진 いる는 ている로 읽는다
+
+동사의 て형 뒤에서 보조 동사 いる의 い가 빠진 꼴(見てた, 寝てたぞ, してたんだろ)은 ている와 같이 `-고 있다`로 옮기고,
+그 뒤의 어미는 いる의 활용에 붙은 어미로 읽는다. 상태 동사의 `-고 있다`를 단순형으로 바꾸는 규칙은 그대로 따른다. 어간이
+て로 끝나는 동사(捨てた, 育てた)의 た는 과거다.
+
+현재: 따름. ちゃう의 て형 뒤에서 줄인 꼴(寝ちゃってた)은 아직 따르지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 分からない俺は道を歩いてただけだ | 모르는 나는 길을 걷고 있었을 뿐이다 | 고침 |
+| 午前3時。今寝てたぞ | 오전 3시. 지금 자고 있었어 | 고침 |
+| アンドレイが呼んでたぞ | 안드레이가 부르고 있었어 | 고침 |
+| 「……見てたんですね」 | 「……보고 있었군요」 | 고침 |
+| 思ってたよりは元気だったよ。 | 생각했던 것보다는 건강했어. | 고침 |
+| 見てた。 | 보았다. | 유지 |
+| 見てるだけだ。 | 보고 있을 뿐이다. | 유지 |
+| ゴミを捨てたが、まだ臭う。 | 쓰레기를 버렸지만, 아직 냄새난다. | 유지 |
+
+사례: `tests/rules/cases/contracted-iru.tsv`

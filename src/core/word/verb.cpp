@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "core/dict/classes.h"
+#include "core/output/markers.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -40,6 +41,38 @@ bool OneKana(std::string_view s) {
 }
 
 }  // namespace
+
+int ContractedIruBranch(std::string_view rest) {
+    int best = -1;
+    std::size_t longest = 0;
+    for (const int branch : {0, 3, 5, 6, 7, 11, 17}) {
+        const std::string_view form = Conjugation(7, branch);
+        if (!form.empty() && rest.starts_with(form) && form.size() > longest) {
+            best = branch;
+            longest = form.size();
+        }
+    }
+    return best;
+}
+
+bool ProgressiveEndings(Group& g, Detail& d) {
+    constexpr std::string_view kExistence = "&HN@";
+    const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-head");
+    if (head.empty()) return false;
+    bool any = false;
+    for (std::size_t i = 0; i < g.entries.size(); i++) {
+        if (i < d.enabled.size() && !d.enabled[i]) continue;
+        Entry& e = *g.entries[i];
+        const std::string_view row = e.dst.empty() ? std::string_view() : output::SourceMarkerRow(std::string(kExistence) + e.dst[0]);
+        if (row.empty()) {
+            if (i < d.enabled.size()) d.enabled[i] = false;
+            continue;
+        }
+        e.dst = std::string(head.front()) + " " + std::string(row) + e.dst.substr(1);
+        any = true;
+    }
+    return any;
+}
 
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop) {
     stop = records;
@@ -519,6 +552,28 @@ bool Item::AcceptVerbContinuation(Record* following) {
             base.kind = branch;
             length = sourceLength + pattern();
             ending = endingGroup(after());
+        }
+    }
+    // A て form whose auxiliary いる has lost its い (見てたが, 忘れてたぞ, してたんだろ): when no
+    // ending row of the て form covers it, or only a shorter row of its past does (た of 見てたぞ),
+    // the kana after the て are a form of いる and the ending after them is read on that form,
+    // written for 있 after 고 (5지만 → 1고 있었지만) as the full form reads in its two words.
+    if (base.kind == 7 && w->settings.text && queryAllowed) {
+        const int teWidth = patternWidth, branch = ContractedIruBranch(rest);
+        if (branch >= 0 && (ending == nullptr || (branch == 6 && ending->length < static_cast<int>(rest.size())))) {
+            const std::size_t form = Conjugation(7, branch).size();
+            patternWidth += WidthOf(Conjugation(7, branch));
+            base.kind = branch;
+            Group* g = endingGroup(after());
+            if (g != nullptr && (ending == nullptr || static_cast<int>(form) + g->length > ending->length) &&
+                ProgressiveEndings(*g, base)) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = teWidth;
+                base.kind = 7;
+                if (ending != nullptr) ending = endingGroup(rest);
+            }
         }
     }
 
