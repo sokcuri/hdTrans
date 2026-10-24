@@ -204,6 +204,13 @@ std::string PartPatternOf(char field, std::string_view value);
 // target without a family and for a match.
 std::string MarkerClassError(std::string_view target, PartCode part);
 
+// Why the target of a noun line of key is not the noun it should be: one word that ends in
+// 하기, a 하다 verb made a noun (출항하기), which before する reads as the noun of 하다 again.
+// The target is the noun (출항). Empty for other targets, for a phrase (직장 구하기), for
+// 하기 itself, a proper noun (part 13x or semantic codes sem of a name, Q..) and a key ending
+// in 期 (夏期 하기, 氷河期 빙하기).
+std::string VerbNounError(std::string_view key, std::string_view target, PartCode part, std::string_view sem);
+
 namespace internal {
 
 struct PosTag {

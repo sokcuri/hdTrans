@@ -351,6 +351,25 @@ HD_TEST(compose_verbal_noun_passive) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// A noun written as a 하다 verb made a noun is that verb before a する read 하다: 하기 goes
+// and the noun joins the する. Elsewhere, and for 하기 itself and a noun in 期, it stays.
+HD_TEST(compose_hada_noun_before_suru) {
+    const CompositionCase cases[] = {
+        {{{"抜錨", "110", "Hd", "출항하기"}, {"し", "427", "", "&AV@", "7니다"}}, {1, 2}, "출항합니다."},
+        {{{"職探し", "110", "", "직장 구하기"}, {"する", "427", "", "&AV@", "4다"}}, {1, 2}, "직장 구한다."},
+        {{{"長風呂", "110", "", "오래 목욕하기"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "오래 목욕했다."},
+        {{{"遣り直し", "110", "", "다시 고쳐 하기"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "다시 고쳐 했다."},
+        {{{"職探し", "110", "", "직장 구하기"}, {"を", "211", "", "(을)를"}, {"する", "427", "", "&AV@", "4다"}},
+         {2, 3}, "직장 구하기를 한다."},
+        {{{"抜錨", "110", "Hd", "출항하기"}, {"の", "230", "", "의"}, {"時間", "110", "", "시간"}}, {2, 3},
+         "출항하기의 시간."},
+        {{{"夏期", "110", "", "하기"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "하기했다."},
+        {{{"氷河期", "110", "", "빙하기"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "빙하기했다."},
+        {{{"矢作", "130", "", "야하기"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "야하기했다."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // The auxiliary 버리다 (gram Ds) joins the 아/어 form before it; the main verb stays apart.
 HD_TEST(compose_auxiliary_beorida_join) {
     const CompositionCase cases[] = {

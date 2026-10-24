@@ -359,6 +359,11 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
         if (std::string why = NegationEndingError(s.key, s.ko, codes.At(code)->part); !why.empty()) {
             notices.push_back({f.name, LoadErrorKind::NegationEnding, rows.Line(), TsvErrorKind::Read, std::move(why)});
         }
+        if (f.layer == FileLayer::Base || f.layer == FileLayer::Words) {
+            if (std::string why = VerbNounError(s.key, s.ko, codes.At(code)->part, s.sem); !why.empty()) {
+                notices.push_back({f.name, LoadErrorKind::VerbNoun, rows.Line(), TsvErrorKind::Read, std::move(why)});
+            }
+        }
 
         if (s.rule > 0) bodies.named++;
         if (!s.ctx.empty() && s.rule <= 0) {

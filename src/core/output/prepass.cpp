@@ -541,6 +541,25 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
 // words or more ending in 기 (대강 읽기, 함부로 버리기).
 bool VerbPhraseNoun(std::string_view t) { return t.find(' ') != std::string_view::npos && t.ends_with("기"); }
 
+constexpr std::string_view kHagi = "하기";
+
+// Whether item i is a noun whose Korean t is a 하다 verb made a noun (출항하기, 직장 구하기)
+// written straight before a する read 하다: the noun is then that verb, written without
+// 하기 and joined to the する (출항합니다, 직장 구한다). 하기 itself, a proper noun and a noun
+// ending in 期 (夏期 하기, 氷河期 빙하기) are Sino-Korean nouns.
+bool HadaNounBeforeSuru(const std::vector<ResolvedItem>& items, int i, std::string_view t) {
+    const ResolvedItem& noun = items[i];
+    if (First(Code(noun)) != '1' || At(Code(noun), 1) == '3' || !t.ends_with(kHagi) || t == kHagi ||
+        noun.surface.ends_with("期") || i + 1 >= static_cast<int>(items.size()) || !Adjoins(items, i + 1)) {
+        return false;
+    }
+    const ResolvedItem& next = items[i + 1];
+    if (EntryText(next) != "&AV@") return false;
+    const auto starts = dict::ClassMembers("suru.verbal-noun-start");
+    return dict::InClass("suru.verbal-noun-whole", next.surface) ||
+           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+}
+
 // Whether the next item that writes something, written straight after item i, attaches to
 // the last syllable of i: a particle or the copula (not one written as a space), a word
 // written attached (Tu) that starts with a syllable and is no counter (들, 에 대한), or the
@@ -936,10 +955,13 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
+    const bool hadaNoun = HadaNounBeforeSuru(items, i, translated);
+    if (hadaNoun) translated.resize(translated.size() - kHagi.size());
     std::string composed;
     if (record) composed = translated;
-    auto [spaced, space] = Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
-    if (!space && AttachesAfter(items, tokens, i)) {
+    auto [spaced, space] = hadaNoun ? std::pair{std::move(translated), false}
+                                    : Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
+    if (!space && !hadaNoun && AttachesAfter(items, tokens, i)) {
         const size_t end = spaced.find_last_not_of(' ');
         if (end != std::string::npos) spaced.erase(end + 1);
     }

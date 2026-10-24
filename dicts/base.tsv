@@ -8054,7 +8054,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お過ごしのことと	잘 계시리라	A9D0			GN				jisjk:340239		
 お達し	지시	N110			GN				jisjk:165485		
 お邪魔	실례&AV@	M449		Pn	GN				jisjk:266616		
-お部屋探し	집구하기	N110			GN				jisjk:165949		
+お部屋探し	집 구하기	N110			GN				jisjk:165949		
 お酌	&E3@	M4U9			GN				jisjk:146125		
 お酒	술	N110	VFd		GN				jisjk:13868		
 お酒を飲みかわ	술을 주고 &FD@	M423			GN				jisjk:201884		
@@ -47858,7 +47858,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アース	지구	N110	VPl		GN				jisjk:41927		
 アース サイエンス	지구과학	N110	USu		GN				jisjk:41928		
 アース ダム	어스 댐	N110	VBl		GN				jisjk:41929		
-アースとり	접지하기	N110			GN				jisjk:162882		
+アースとり	접지	N110			GN				jisjk:162882		
 アースカラー	얼스 칼라	N110	UCl		GN				jisjk:41930		
 アースケーブル	어스 케이블	N110			GN				jisjk:41931		
 アースコンシャス	얼스컨셔스	N110			GN				jisjk:41932		
@@ -47869,7 +47869,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アースファースト	얼스패스트	N110			GN				jisjk:41934		
 アースブレードストラップ	어스 브레이드 스트랩	N110			GN				jisjk:41935		
 アースワーク	얼스워크	N110			GN				jisjk:41936		
-アース取り	접지하기	N110			GN				jisjk:162881		
+アース取り	접지	N110			GN				jisjk:162881		
 アース板	접지판	N110			GN				jisjk:162880		
 アース線	어드선	N110			GN				jisjk:112704		
 アース製薬	아스제약	N110			GN				jisjk:112708		
@@ -107056,7 +107056,7 @@ ttt	ttt	K110			GN				jisjk:201744
 不要不急	불요불급	N110			GN				jisjk:362103		
 不要論	불요론	N110	USm		GN				jisjk:351478		
 不見上	후미가미	N130	QCTVPl		GN				jisjk:326949		
-不見識	경솔하기	I110			GN				jisjk:71327		
+不見識	몰지각	I110			GN				jisjk:71327		
 不規則	불규칙%A1@	G8L0			GN				jisjk:2979		
 不規則	불규칙	I110		Hd	GN				jisjk:2980		
 不規律	불규율	I110	ULw		GN				jisjk:71336		
@@ -139409,7 +139409,7 @@ ttt	ttt	K110			GN				jisjk:201744
 努力されてい	노력하게 &C6@	M427			GN				jisjk:264962		
 努力してい	노력해 &A1@	M44?			GN				jisjk:143932		
 努力に負	노력에 힘&HM@	M420		Pn	GN				jisjk:267280		
-努力の積み上げ	노력하기	N110			GN				jisjk:151545		
+努力の積み上げ	노력의 축적	N110			GN				jisjk:151545		
 努力を払	노력&AV@	M410			GN				jisjk:92286		
 努力家	노력가	N110	VHn		GN				jisjk:153843		
 努力義務	노력 의무	N110			BZ				jisjk:350757		
@@ -162941,7 +162941,7 @@ ttt	ttt	K110			GN				jisjk:201744
 埋め込	&H9@	M445			GN				jisjk:144572		
 埋め込まれ	파묻&AW@	M427			GN				jisjk:148619		
 埋め込み	매입	N110			GN				jisjk:162385		
-埋め込み	내장하기	N110			IT				jisjk:262586		-1
+埋め込み	내장	N110			IT				jisjk:262586		-1
 埋め込みキー	패드 키	N110	VPe		GN				jisjk:163827		
 埋め込み磁石	매설 자석	N110			GN				jisjk:162394		
 埋もれ	파묻&AW@	M417			GN				jisjk:92688		
@@ -214190,7 +214190,7 @@ ttt	ttt	K110			GN				jisjk:201744
 抜足	살금살금 걸음	N110			GN				jisjk:22871		
 抜都	바투	N130	QPN		GN				jisjk:205107		
 抜里	누쿠리	N130	QCTVPl		GN				jisjk:318843		
-抜錨	출항하기	N110		Hd	GN				jisjk:250384		
+抜錨	출항	N110		Hd	GN				jisjk:250384		
 抜隊得勝	밧스이 도쿠쇼	N130	VHn		GN				jisjk:219921		
 抜頭	아악의 곡명	N110	USoQMU		GN				jisjk:250386		
 択	선택&AV@	M446			GN				jisjk:145047		
@@ -275141,7 +275141,7 @@ ttt	ttt	K110			GN				jisjk:201744
 生茶	생차	N110	VLqVFd		GN				jisjk:364333		
 生菌	생균	N110	QHP		GN				jisjk:238393		
 生菓子	생과자	N110	VFd		GN				jisjk:153887		
-生萩	오하기	N110			GN				jisjk:100864		
+生萩	오하기	N130			GN				jisjk:100864		
 生萱	이키가야	N130	QCTVPl		GN				jisjk:271569		
 生蕃	생번	N110	VHn		GN				jisjk:238702		
 生薬	생약	N110	VFdVMd		GN				jisjk:25989		
@@ -339009,7 +339009,7 @@ ttt	ttt	K110			GN				jisjk:201744
 部屋じゅう	온 방안	N110	VBl		GN				jisjk:151757		
 部屋付き親方	합숙 감독	I110			GN				jisjk:202291		
 部屋代	방세	I110	VMo		GN				jisjk:70946		
-部屋探し	집구하기	N110			GN				jisjk:358730		
+部屋探し	집 구하기	N110			GN				jisjk:358730		
 部屋着	실내복	I110	VAcVCp		GN				jisjk:70947		
 部属	부속	N110			GN				jisjk:24330		
 部崎	헤사키	N110	VPl		GN				jisjk:24320		
