@@ -145,11 +145,12 @@ from concurrent.futures import FIRST_EXCEPTION, ThreadPoolExecutor, wait
 from pathlib import Path
 here, out, base, dicts, home, timeout, jobs, name, *options = sys.argv[1:]
 here, out, home = Path(here), Path(out), Path(home)
-running, lock = set(), threading.Lock()
+running, lock, stopping = set(), threading.Lock(), threading.Event()
 
 
-def stop(*_):
-    signal.signal(signal.SIGTERM, signal.SIG_IGN)
+def stop():
+    """Stops the translations and exits; no translation starts after stopping is set."""
+    stopping.set()
     with lock:
         for process in running:
             process.terminate()
@@ -158,7 +159,9 @@ def stop(*_):
     os._exit(2)
 
 
-signal.signal(signal.SIGTERM, stop)
+# The handler only records the TERM; the main loop below stops. Doing the work in the handler
+# could run it again inside itself, holding the lock, when a second TERM arrives.
+signal.signal(signal.SIGTERM, lambda *_: stopping.set())
 
 
 def fail(message):
@@ -210,6 +213,8 @@ def translate(number, doc, path, header):
     to = output(doc)
     to.parent.mkdir(parents=True, exist_ok=True)
     with lock:
+        if stopping.is_set():
+            raise RuntimeError("stopped")
         process = subprocess.Popen(
             [str(here / "tools/with-timeout.sh"), timeout, str(out / "hdtrans"), "--dicts", dicts,
              "--userdict", "", *options, "--in", str(body), "--out", str(to)], env=env)
@@ -227,10 +232,12 @@ def translate(number, doc, path, header):
 
 pool = ThreadPoolExecutor(int(jobs) or os.cpu_count())
 futures = [pool.submit(translate, i, *doc) for i, doc in enumerate(docs)]
-# Timed waits, so that the TERM handler runs while the translations are still going.
-while wait(futures, timeout=0.5, return_when=FIRST_EXCEPTION).not_done and \
-        not any(f.done() and f.exception() for f in futures):
+# Timed waits, so that a TERM is seen while the translations are still going.
+while not stopping.is_set() and wait(futures, timeout=0.2, return_when=FIRST_EXCEPTION).not_done \
+        and not any(f.done() and f.exception() for f in futures):
     pass
+if stopping.is_set():
+    stop()
 for future in futures:
     if future.done() and future.exception():
         pool.shutdown(wait=False, cancel_futures=True)

@@ -74,7 +74,7 @@ def alive(pid):
 def give_up(message):
     listing = subprocess.run(["ps", "-ax", "-o", "pid,ppid,pgid,stat,command"],
                              capture_output=True, text=True).stdout.splitlines()
-    print("\n".join(l for l in listing if tmp in l or "documents.py" in l), file=sys.stderr)
+    print("\n".join(l for l in listing if tmp in l or "documents.py" in l or "tail -f /dev/null" in l), file=sys.stderr)
     for x in started():
         if alive(x):
             os.kill(x, signal.SIGKILL)
@@ -94,7 +94,13 @@ def until(test, seconds):
 
 if not until(lambda: len(started()) >= 6 or p.poll() is not None, 60) or p.poll() is not None:
     give_up(f"{len(started())} translations started, measure.sh status {p.poll()}")
-os.killpg(p.pid, signal.SIGTERM)
+# Several TERMs in a row, as an impatient caller or a timeout would send them.
+for _ in range(5):
+    try:
+        os.killpg(p.pid, signal.SIGTERM)
+    except OSError:
+        break
+    time.sleep(0.02)
 if not until(lambda: p.poll() is not None, 60):
     give_up("measure.sh did not stop")
 if not until(lambda: not any(alive(x) for x in started()), 10):
