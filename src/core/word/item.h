@@ -194,6 +194,10 @@ public:
     // parenthesised groups and, rightwards from a ruby base, its reading; a found neighbour gets compDI and compUmiDI -1, the item
     // itself (delta 0) keeps this item's.
     Item* Object(int delta);
+    // The word after this one as the passes read it: next, or past the reading when this is
+    // the last word of a ruby base, so that the base and the reading read the same words after
+    // them (as Object does). Walks over the chain step on with next.
+    Item* After() const;
 
     // rules::Item
     void SetRuleContext(bool global, int number) override;

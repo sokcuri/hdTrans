@@ -223,17 +223,12 @@ int Item::CheckDirectJ(int i) const {
     return digit == DirectClassifier(i) + '0' ? 1 : 0;
 }
 
-namespace {
-
-// The item after from, past the reading when from is a ruby base and to would be in it.
-Item* NextPastReading(Worker& w, const Item& from) {
-    Item* to = from.next;
-    if (w.RubyPart(from.tokenIndex) != 1) return to;
-    while (to != nullptr && w.RubyPart(to->tokenIndex) == 2) to = to->next;
+Item* Item::After() const {
+    Item* to = next;
+    if (w == nullptr || w->RubyPart(tokenIndex) != 1) return to;
+    while (to != nullptr && w->RubyPart(to->tokenIndex) == 2) to = to->next;
     return to;
 }
-
-}  // namespace
 
 Item* Item::Object(int delta) {
     Item* item = this;
@@ -243,7 +238,7 @@ Item* Item::Object(int delta) {
     if (delta >= 0) {
         for (int i = 0; i < delta; i++) {
             if (item == nullptr) return nullptr;
-            item = base ? NextPastReading(*w, *item) : item->next;
+            item = base ? item->After() : item->next;
             if (item != nullptr) {
                 if (item->EntryText(0) == "(") {
                     while (item != nullptr && item->EntryText(0) != ")") item = item->next;

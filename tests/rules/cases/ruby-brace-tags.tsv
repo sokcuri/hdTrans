@@ -19,3 +19,9 @@ normalize:ruby	ぶつぶつ{rb}呟{/rb}{rt}つぶや{/rt}いたあと、立ち�
 normalize:ruby	{rb}寂{/rb}{rt}さみ{/rt}しいけれど、平気。	{rb}외롭지만{/rb}{rt}외롭지만{/rt}, 괜찮아.	keep	normalize
 normalize:ruby	{rb}夢{/rb}{rt}ここ{/rt}で目が覚めた。	{rb}꿈{/rb}{rt}여기{/rt}에서 깨어났다.	keep	normalize
 normalize:ruby	{rb}人気{/rb}{rt}ひとけ{/rt}がない。	{rb}인기척{/rb}{rt}인기척{/rt}이 없다.	keep	normalize
+word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べてくれた。	{rb}먹어{/rb}{rt}먹어{/rt} 주었다.	fix	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt} 버렸다.	fix	rewrites
+word:ruby-neighbour	涙を{rb}拭{/rb}{rt}ぬぐ{/rt}ってくれた。	눈물을 {rb}닦아{/rb}{rt}닦아{/rt} 주었다.	fix	rewrites
+word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べたい。	{rb}먹고 싶다{/rb}{rt}먹고 싶다{/rt}.	fix	local-ending
+word:ruby-neighbour	パンを{rb}食{/rb}{rt}た{/rt}べて寝た。	빵을 {rb}먹고{/rb}{rt}먹고{/rt} 잤다.	keep	rewrites
+word:ruby-neighbour	涙を拭ってくれた。	눈물을 닦아 주었다.	keep	rewrites

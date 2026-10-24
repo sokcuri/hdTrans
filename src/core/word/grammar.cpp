@@ -225,11 +225,11 @@ std::string KoreanPassiveLemma(std::string_view lemma) {
 // names no clause (と言われた下女, not と言われるのが or と言われたこと); an auxiliary いる after
 // its て form ends it instead (と言われている騎士団長).
 bool ModifiesNoun(const Item* it) {
-    if (const Item* aux = it->next; aux != nullptr && aux->tokenIndex == it->tokenIndex && aux->detail->Yougo() &&
+    if (const Item* aux = it->After(); aux != nullptr && aux->tokenIndex == it->tokenIndex && aux->detail->Yougo() &&
                                     (aux->group->surface == "い" || aux->group->surface == "お")) {
         it = aux;
     }
-    const Item* n = it->next;
+    const Item* n = it->After();
     const std::string_view own = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
     return n != nullptr && n->tokenIndex == it->tokenIndex && (own.ends_with("る") || own.ends_with("た")) &&
            At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
@@ -375,7 +375,7 @@ bool Contrast(std::string_view rest) {
 }  // namespace
 
 bool DescribedNoun(const Worker& w, const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
            !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
            !std::ranges::any_of(dict::ClassMembers("noun.clause"),
@@ -678,7 +678,7 @@ std::string HonorificExistential(Flusher& f, std::string_view rest) {
 bool HonorificProgressive(Flusher& f, Item* it) {
     if (it->DirectIndex() < 0) return false;
     const std::string_view ending = it->DirectText(it->DirectIndex());
-    Item* aux = it->next;
+    Item* aux = it->After();
     if (aux == nullptr || aux->tokenIndex != it->tokenIndex || !aux->detail->Yougo() || aux->group->surface != "い" ||
         aux->selected < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
         for (const std::string_view head : {kProgressiveHead, kResultativeHead}) {
@@ -888,7 +888,7 @@ Item* InwardVerb(Item* n) {
 bool HonorificAspect(Flusher& f, const Item* it) {
     if (it->selected >= 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) return true;
     const std::string honorific = HonorificExistence(f);
-    if (const Item* n = it->next; n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == honorific) {
+    if (const Item* n = it->After(); n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == honorific) {
         return true;
     }
     const std::string ending = std::string(kProgressiveHead) + honorific.substr(0, honorific.size() - kHonorificMarker.size());
@@ -938,7 +938,7 @@ void ResultState(Flusher& f) {
                 continue;
             }
         }
-        if (Item* n = it->next; past && rest.empty() && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
+        if (Item* n = it->After(); past && rest.empty() && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
                                 n->DirectIndex() >= 0 && ItemLemma(f, n, n->selected).starts_with("있")) {
             const Entry* d = n->DirectEntry(n->DirectIndex());
             if (const std::string ending = d != nullptr ? PastOfVerbEnding(d->dst) : std::string(); !ending.empty()) {
@@ -949,7 +949,7 @@ void ResultState(Flusher& f) {
             }
         }
         // The honorific 계시다 of the auxiliary is its 있다 (座られている 앉아 계신다).
-        const std::string auxiliary = rest.empty() && it->next != nullptr ? ItemLemma(f, it->next, it->next->selected) : "";
+        const std::string auxiliary = rest.empty() && it->After() != nullptr ? ItemLemma(f, it->After(), it->After()->selected) : "";
         const std::string honorific = HonorificExistence(f);
         const bool honorificRest = honorific.size() > 4 && rest.starts_with(" " + honorific.substr(0, honorific.size() - 4));
         if (rest.starts_with(" 있") || honorificRest || auxiliary.starts_with("있") || auxiliary == "계시다") {
@@ -1028,7 +1028,7 @@ void SimpleAspect(Flusher& f) {
             if (!simple.empty() && !KeepsProgressive(aspect, simple)) it->AssignDirectSlot(it->DirectIndex(), simple);
             continue;
         }
-        Item* n = it->next;
+        Item* n = it->After();
         if ((e->dst != "1고" && e->dst != "6") || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
             n->group->surface != "い" || n->selected < 0 || n->DirectIndex() < 0 ||
             !ItemLemma(f, n, n->selected).starts_with("있") || n->DirectSurface().ends_with("っけ")) {
@@ -1057,7 +1057,7 @@ void EmphaticMo(Flusher& f) {
             it->DirectText(it->DirectIndex()) != jido || !it->DirectSurface().starts_with("も")) {
             continue;
         }
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || !n->detail->Yougo() || n->group->surface != "する" || n->selected < 0 ||
             n->DirectIndex() < 0) {
             continue;
@@ -1164,7 +1164,7 @@ void PreparedState(Flusher& f) {
         }
         const Entry* e = it->DirectEntry(it->DirectIndex());
         const std::string_view te = it->DirectSurface();
-        Item* n = it->next;
+        Item* n = it->After();
         if (e == nullptr || e->dst != "6" || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
             n->group->surface != "あ" || n->selected < 0 || n->DirectIndex() < 0 ||
             n->EntryText(n->selected) != "&HN@") {
@@ -1181,7 +1181,7 @@ void PreparedState(Flusher& f) {
 
 void NotYet(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());
         if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || (n->group->surface != "いな" && n->group->surface != "な") ||
@@ -1259,7 +1259,7 @@ bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
         (it->prev != nullptr && (it->prev->group->surface == "から" || it->prev->group->surface == "か"))) {
         return false;
     }
-    for (const Item* x = it->next; x != nullptr; x = x->next) {
+    for (const Item* x = it->After(); x != nullptr; x = x->next) {
         if (x->selected < 0 || QuoteVerbFollows(x) || Has(x->Attr(x->selected), "UTh") || Has(x->Attr(x->selected), "UTs")) {
             return false;
         }
@@ -1307,8 +1307,8 @@ void PastSequence(Flusher& f) {
                                                       it->prev->group->surface.ends_with("から"));
         if (tried) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
-        } else if (it->next == nullptr ||
-                   (it->next->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
+        } else if (it->After() == nullptr ||
+                   (it->After()->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
             continue;
         } else if (seeing && !viewpoint) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
@@ -1354,7 +1354,7 @@ namespace {
 // Whether a verb of thinking stands within four items after it, with no predicate and no clause
 // boundary in between.
 bool ThinkingVerbAhead(const Item* it) {
-    const Item* x = it->next;
+    const Item* x = it->After();
     for (int n = 0; n < 5 && x != nullptr && x->selected >= 0; n++, x = x->next) {
         for (const std::string_view v : dict::ClassMembers("verb.thinking-start")) {
             if (x->group->surface.starts_with(v)) return n > 0;
@@ -1403,9 +1403,9 @@ void QuoteTo(Flusher& f) {
         if (it->DirectIndex() < 0) {
             if (it->group->surface == "だと" && it->prev != nullptr &&
                 (!it->prev->detail->Yougo() || it->prev->DirectSurface().ends_with("の")) &&
-                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->next) || ThinkingVerbAhead(it))) {
+                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->After()) || ThinkingVerbAhead(it))) {
                 SelectLemma(f, it, "(이)라고");
-                HearSense(f, it->next);
+                HearSense(f, it->After());
             }
             continue;
         }
@@ -1416,25 +1416,25 @@ void QuoteTo(Flusher& f) {
         // thinking follows in the clause (時間がないと、彼は言った 시간이 없다고, 그는 말했다).
         const bool paused = d.ends_with(std::string("と") + std::string(kJaComma));
         if (paused) d.remove_suffix(kJaComma.size());
-        if (d.ends_with("と")) HearSense(f, it->next);
+        if (d.ends_with("と")) HearSense(f, it->After());
         if (!d.ends_with("と") || (!e->dst.starts_with("2면") && !e->dst.starts_with("1다면"))) continue;
         const bool end = QuoteEnd(f.w, it);
         const std::string ja = it->group->surface + std::string(d);
         if (paused) {
-            if (At(it->Code(it->selected), 0) == '7' && QuoteVerbAhead(it->next)) {
+            if (At(it->Code(it->selected), 0) == '7' && QuoteVerbAhead(it->After())) {
                 it->AssignDirectSlot(it->DirectIndex(), "1다고,");
             }
             continue;
         }
         // たらと思う keeps the condition as an unfinished wish (行けたらと思う 갈 수 있으면 하고 생각한다);
         // before a verb of saying it is a suggestion (行ったらと言われた) and stays a quote.
-        if ((d == "らと" || d.ends_with("たらと") || d.ends_with("だらと")) && WishVerbNext(it->next)) {
+        if ((d == "らと" || d.ends_with("たらと") || d.ends_with("だらと")) && WishVerbNext(it->After())) {
             it->AssignDirectSlot(it->DirectIndex(), std::string(e->dst.starts_with("1다면") ? "1다면" : "2면") + " 하고");
             continue;
         }
         const bool thought = (At(it->Code(it->selected), 0) == '7' || ja.ends_with("ないと") || d.starts_with("た")) &&
                              (ThinkingVerbAhead(it) ||
-                              (it->next != nullptr && it->next->group->surface == kJaComma && QuoteVerbAhead(it->next->next)));
+                              (it->After() != nullptr && it->After()->group->surface == kJaComma && QuoteVerbAhead(it->After()->next)));
         // ないと that ends the utterance is a duty or a need (行かないと 가지 않으면, 時間がないと
         // 시간이 없으면), but the adjective ない after the topic は or も there closes a quotation
         // (毒はないと 독은 없다고, 何もないと 아무것도 없다고).
@@ -1443,7 +1443,7 @@ void QuoteTo(Flusher& f) {
                             (it->prev->group->surface.ends_with("は") || it->prev->group->surface.ends_with("も")) &&
                             ItemLemma(f, it, it->selected).ends_with("없다");
         const bool duty = ja.ends_with("ないと") && !absent;
-        if ((!end && !QuoteVerbFollows(it->next) && !thought) || (end && (duty || SayingConditional(it))) ||
+        if ((!end && !QuoteVerbFollows(it->After()) && !thought) || (end && (duty || SayingConditional(it))) ||
             Has(d, "ます")) {
             continue;
         }
@@ -1461,7 +1461,7 @@ namespace {
 
 // Whether an attributive (綺麗な, 赤い, 走る, 走った) and a noun follow it, past punctuation (とても、キレイな裸).
 bool ModifierFollows(const Item* it) {
-    const Item* m = it->next;
+    const Item* m = it->After();
     while (m != nullptr && !m->detail->Yougo() && m->selected >= 0 && At(m->Code(m->selected), 0) == '6') m = m->next;
     if (m == nullptr || m->DirectIndex() < 0) return false;
     const Entry* e = m->DirectEntry(m->DirectIndex());
@@ -1474,7 +1474,7 @@ bool ModifierFollows(const Item* it) {
 
 void TerminalBeforeQuote(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* next = it->next;
+        Item* next = it->After();
         bool pause = false;
         while (next != nullptr && InSet(kCommaItems, next->group->surface)) {
             next = next->next;
@@ -1558,7 +1558,7 @@ bool WonderBefore(const Item* it) {
 // Whether only closing marks, an ellipsis, a comma or a question mark follow the item, or a
 // final な left without a translation before them (どこに行ったんだろうな).
 bool WonderEnd(const Worker& w, const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     if (n != nullptr && n->tokenIndex == it->tokenIndex && n->start == it->start + it->length &&
         (n->group->surface == "な" || n->group->surface == "なぁ" || n->group->surface == "なあ") && n->selected >= 0 &&
         n->group->At(n->selected) != nullptr && n->EntryText(n->selected).empty()) {
@@ -1639,7 +1639,7 @@ bool PoliteSurface(std::string_view s) {
 bool PoliteAfter(const Item* it) {
     int depth = 0;
     const Item* last = nullptr;
-    for (const Item* q = it->next; q != nullptr; q = q->next) {
+    for (const Item* q = it->After(); q != nullptr; q = q->next) {
         const std::string_view s = q->group->surface;
         // The text of q up to the next word, which holds the brackets no word took.
         const size_t from = std::min(static_cast<size_t>(q->start), q->text.size());
@@ -1783,7 +1783,7 @@ void DegreeAfterNumber(Flusher& f) {
 
 void PluralPronoun(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || it->selected < 0 || n->selected < 0 || it->detail->Yougo() ||
             !dict::InClass("suffix.plural-pronoun", n->group->surface) || n->tokenIndex != it->tokenIndex ||
             it->start + it->length != n->start) {
@@ -1842,8 +1842,8 @@ void HumbleFirstPerson(Flusher& f) {
         else if (lemma == "우리들") target = "저희들";
         else continue;
         if (!PoliteAfter(it)) continue;
-        if (target == "저" && it->next != nullptr && it->next->selected >= 0 &&
-            ItemLemma(f, it->next, it->next->selected).starts_with("(이)가")) {
+        if (target == "저" && it->After() != nullptr && it->After()->selected >= 0 &&
+            ItemLemma(f, it->After(), it->After()->selected).starts_with("(이)가")) {
             target = "제";
         }
         TakeTarget(it, At(it->Code(it->selected), 0), target);
@@ -1895,14 +1895,14 @@ void WriteNoka(Item* it, std::string_view s) {
 void ParallelNoka(Flusher& f) {
     std::vector<Item*> run;
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!Noka(it) || (it->next != nullptr && !PunctuationItem(it->next))) continue;
+        if (!Noka(it) || (it->After() != nullptr && !PunctuationItem(it->After()))) continue;
         run.push_back(it);
     }
     if (run.size() < 2) return;
     // Every clause but the last is followed by a comma.
     for (std::size_t k = 0; k + 1 < run.size(); k++) {
-        const std::string_view s = run[k]->next->group->surface;
-        if (s != "、" && s != ",") return;
+        const Item* n = run[k]->After();
+        if (n == nullptr || (n->group->surface != "、" && n->group->surface != ",")) return;
     }
     std::vector<std::string> forms;
     for (const Item* it : run) {
@@ -2049,15 +2049,15 @@ bool AdjectiveNegative(std::string_view lemma) {
 void ExclaimedAdjective(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->DirectIndex() < 0 || OwnedGroup(it->DirectGroup()) || At(it->Code(it->selected), 0) != '7' ||
-            it->DirectText(it->DirectIndex()) != "4" || !IsOneOf(it->next, kCommaItems)) {
+            it->DirectText(it->DirectIndex()) != "4" || !IsOneOf(it->After(), kCommaItems)) {
             continue;
         }
         if (const Item* p = it->prev; p != nullptr && !IsOneOf(p, kExclaimOpeners)) continue;
-        if (const Item* n = it->next->next; n != nullptr && n->selected >= 0 && At(n->Code(n->selected), 0) == '7' &&
+        if (const Item* n = it->After()->next; n != nullptr && n->selected >= 0 && At(n->Code(n->selected), 0) == '7' &&
                                             !IsWord(n, it->group->surface)) {
             continue;
         }
-        if (const Item* n = it->next->next; n != nullptr && n->selected >= 0 &&
+        if (const Item* n = it->After()->next; n != nullptr && n->selected >= 0 &&
                                             (At(n->Code(n->selected), 0) == '1' || n->group->surface.starts_with("で") ||
                                              n->group->surface.starts_with("だ"))) {
             continue;

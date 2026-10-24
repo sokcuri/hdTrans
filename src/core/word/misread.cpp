@@ -98,7 +98,7 @@ char ClassDigit(const Item* it) {
 // The nearest item before or after it that is not punctuation or a symbol and whose class
 // digit is not in skip, or null.
 const Item* NearestWord(const Item* it, bool forward, std::string_view skip) {
-    for (const Item* n = forward ? it->next : it->prev; n != nullptr; n = forward ? n->next : n->prev) {
+    for (const Item* n = forward ? it->After() : it->prev; n != nullptr; n = forward ? n->next : n->prev) {
         if (ScriptOf(n->group->surface) != 'P' && !AnyOf(skip, ClassDigit(n))) return n;
     }
     return nullptr;

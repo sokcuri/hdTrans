@@ -249,7 +249,8 @@ bool Item::AfterQuestionWord() const {
         if (x != this && (s == "か" || x->EndingAsks())) break;
         // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
         // alone or before a particle; から, かな and かしら keep the question.
-        const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();
+        const Item* xn = x->After();
+        const std::string_view after = xn != nullptr ? xn->group->surface : std::string_view();
         const bool indefiniteKa =
             after.starts_with("か") &&
             (after == "か" ||
@@ -273,8 +274,9 @@ bool Item::WrittenBeforeNext() const {
 
 bool Item::ClosingTsu() const {
     if (group->surface != "っ" || !EntryText(0).empty()) return false;
-    if (next == nullptr) return true;
-    const char32_t c = text::DecodeRune(next->group->surface).cp;
+    const Item* n = After();
+    if (n == nullptr) return true;
+    const char32_t c = text::DecodeRune(n->group->surface).cp;
     return !text::IsLetter(c) && !text::IsDigit(c);
 }
 
@@ -338,7 +340,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Hp") return AfterPause(true);
         // Hl: an ellipsis or a dash right before the word.
         if (c == "Hl") return AfterPause(false);
-        if (c == "Td" && next == nullptr && prev == nullptr) return true;
+        if (c == "Td" && After() == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
         // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
@@ -366,7 +368,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
 // Whether the next item (after a parenthesised group) is missing or its first target
 // starts with ) 」 ! ” = or -.
 bool Item::IsRuleRightBoundary() const {
-    const Item* n = next;
+    const Item* n = After();
     if (n == nullptr) return true;
     if (n->EntryText(0) == "(") {
         while (n != nullptr && n->EntryText(0) != ")") n = n->next;
@@ -530,7 +532,7 @@ bool Item::CheckGobiGAttr(std::string_view s, int di) {
     auto chunkMatches = [&](std::string_view c, std::string_view attrs) {
         if (c == "Ow") return IsRuleRightBoundary();
         if (c == "Hz") return StartsSentence();
-        if (c == "Td" && next == nullptr && prev == nullptr) return true;
+        if (c == "Td" && After() == nullptr && prev == nullptr) return true;
         return Has(attrs, c);
     };
     const int sel = DirectIndex();
