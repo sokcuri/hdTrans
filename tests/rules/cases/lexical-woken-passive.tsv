@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:jisjk:343491	母に起こされた。	어머니가 깨워서 일어났다.	fix	local
+dict:jisjk:343491	弟に起こされて、朝食を食べた。	has:남동생이 깨워서 일어나	fix	local
+dict:jisjk:343491	朝早く兄に起こされた。	has:형이 깨워서 일어났다	fix	local
+dict:passive:2	部屋に差し込む朝焼けに起こされる。	has:아침 놀에 깬다	fix	local
+dict:passive:2	目覚ましに起こされた。	has:자명종에 깨었다	fix	local
+dict:passive:2	物音に起こされて目が覚めた。	has:소리에 깨어	fix	local
+dict:passive:2	百姓一揆など起こされては、生産性が格段に落ちてしまう。	has:일으켜져서는	keep	local
+dict:passive:2	「歴史上の大きな悲劇も、そうやって引き起こされたものが少なくない」	has:일으켜진	keep	local
+dict:passive:2	ふと、京太郎の顔が思い起こされた。	has:떠올려졌다	keep	local
+dict:passive:2	溜息をつくと、白崎の表情が思い起こされた。	has:떠올려졌다	keep	local
