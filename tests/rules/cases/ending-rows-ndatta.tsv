@@ -1,0 +1,19 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+lookup:ending-rows-conj	（あ、俺の車、インド人に貸してやったんだった……）	(아, 내 차, 인도인에 빌려 주었다……)	fix	lookup
+lookup:ending-rows-conj	そういえば戦国時代は諱を言っちゃいけないんだったー！	그러고 보니 전국시대는 휘를 말하면 안 되었다~!	fix	lookup
+lookup:ending-rows-conj	七瀬ママはお母さんのことを『とこちゃん』って呼んでるんだった。	나나세 엄마는 엄마를 『토코짱』이라고 부르고 있었다.	fix	lookup
+lookup:ending-rows-conj	金剛さん主催のティーパーティーに誘われてるんだった！	콘고 씨주최의 티 파티에 이끌리고 있었다!	fix	lookup
+lookup:ending-rows-conj	だからこの二人、問題児集団の武力担当って言われてるんだっけ。	그러니까 이 두 사람, 문제아 집단의 무력 담당이라고 말을 듣고 있는 거였지.	fix	lookup
+lookup:ending-rows-conj	そうだったミドリさんケガしてるんだっけ…	그랬던 미도리 씨 상처를 입고 있는 거였지…	fix	lookup
+lookup:ending-rows-conj	ご先祖様が助けてくれたんだったらすごく嬉しいな。	선조님이 도와 주었다면 정말 기쁘네.	fix	lookup
+lookup:ending-rows-conj	「仕事の道具を持ってるんだったら、泊まっていけよ」	「일의 도구를 가지고 있다면, 묵어 가」	fix	lookup
+lookup:ending-rows-conj	「寵妃の願いとあらば、必ずや見つけねばならぬな」	「총비의 소원이라면, 반드시 찾아내지 않으면 되지 않는」	fix	lookup
+lookup:ending-rows-conj	もちろん任務とあらば出撃するよ。	물론 임무라면 출격할게.	fix	lookup
+lookup:ending-rows-conj	いや、俺もネトゲプロの端くれ、必要とあらば不眠で六日間狩りをし続ける事もできた男だ。	아니, 나도 온라인 게임 프로의 토막, 필요라면 불면으로 엿새간 사냥을 계속 하는 일도 할 수 있던 남자다.	fix	lookup
+lookup:ending-rows-conj	「お止めください。ご自身とは言えど、お父様を卑下する言葉など聞きたくありません！」	「멈추어 주세요. 자신이라고는 해도, 아버님을 비하하는 말 등 듣고 싶지는 않습니다!」	fix	lookup
+lookup:ending-rows-conj	「ところでエルは、シンダリオンと会った事はないんだったな？」	「그런데 엘은, 신다리온과 만난 일은 없었다?」	fix	lookup
+lookup:ending-rows-conj	行くんだったら	가려면	keep	lookup
+lookup:ending-rows-conj	見たんだ	본 거야	keep	lookup
+lookup:ending-rows-conj	見たんだっけ	본 거지	keep	lookup
+lookup:ending-rows-conj	それとあらゆる手を使う。	그것과 모든 손을 쓴다.	keep	lookup

@@ -26960,3 +26960,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 付いてらっしゃい	따라와	E320			GN							w:28301
 覚えてらっしゃい	두고 봐	E320			GN							w:28302
 いってらっしゃい	잘 다녀와	E320			GN							w:28303
+とあらば	(이)라면	P200			GN							w:28304
+とは言えど	(이)라고는 해도	P200			GN							w:28306
+とはいえど	(이)라고는 해도	P200			GN							w:28307
