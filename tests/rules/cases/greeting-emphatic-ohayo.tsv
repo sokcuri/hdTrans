@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+phrase:おっはよ	おっはよー	좋은 아침~	fix	fixed
+phrase:おっはよ	「おっはよーっ！」	「좋은 아침~!」	fix	fixed
+phrase:おっはよ	「おっはよ――っ！！」	「좋은 아침――!!」	fix	fixed
+phrase:おっはよ	「おっはよ、健太」	「좋은 아침, 켄타」	fix	fixed
+phrase:おっはよ	「おっはよ～～。」	「좋은 아침~.」	fix	fixed
+phrase:おっはよ	「おっはよー……」	「좋은 아침~……」	fix	fixed
+phrase:おっはよ	「おっはよーっ！　ご飯出来てるー？」	「좋은 아침~! 밥 돼있어~?」	fix	fixed
+phrase:おっはよ	「先輩、みんな、おっはよーっ！」	「선배, 모두, 좋은 아침~!」	fix	fixed
+phrase:おっはよ	おっはよう	좋은 아침	fix	fixed
+phrase:おっはよ	おはよー	안녕~	keep	fixed
+phrase:おっはよ	こんにちはー	안녕하세요~	keep	fixed
+phrase:おっはよ	おやすみー	잘 자~	keep	fixed
