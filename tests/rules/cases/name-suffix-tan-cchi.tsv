@@ -1,0 +1,36 @@
+# 규칙: LEX-30
+rule	input	expected	kind	layer
+lookup:suffix-after-person	田中っち、部隊は	타나카치, 부대는	fix	lookup
+lookup:suffix-after-person	ねー田中っち、私もアレ、作ろっかな。	그런데-타나카치, 나도 그것, 만들까.	fix	lookup
+lookup:suffix-after-person	こんなの見られたら、田中っちが大笑いするよ。	이런 건 볼 수 있으면, 타나카치가 폭소해.	fix	lookup
+lookup:suffix-after-person	田中っちの方は大丈夫？	타나카치는 괜찮아?	fix	lookup
+lookup:suffix-after-person	小沢っちは元気かなぁ？	오자와치는 건강한가?	fix	lookup
+lookup:suffix-after-person	もしかしてリサっちかな？	혹시 리사치일까?	fix	lookup
+lookup:suffix-after-person	佐藤っち、おはよ。	사토치, 안녕.	fix	lookup
+lookup:suffix-after-person	先輩、モモっち、お茶淹れました！	선배, 모모치, 차 끓였습니다!	fix	lookup
+dict:w:28405	俺っちがあんなことするなんて。	내가 저런 일 하다니.	fix	local
+dict:w:28404	俺っちは獣人っすよ、兄貴！	나는 수인입니다, 형!	fix	defaults
+dict:w:28404	この俺っちに任しといて下さいっす！	이 나에게 맡겨 두어 주세요!	fix	defaults
+dict:w:28404	晴れて俺っち達は無罪放免！！	정식으로 우리는 무죄 방면!!	fix	defaults
+lookup:suffix-after-person	Lv.13 先生たん「寝ちゃった」	Lv.13 선생님짱 「자 버렸어」	fix	lookup
+lookup:suffix-after-person	Lv.67 姫たん「寝ちゃった」	Lv.67 공주짱 「자 버렸어」	fix	lookup
+lookup:suffix-after-person	アリスたん「尊い！」	앨리스짱 「고귀하다!」	fix	lookup
+lookup:suffix-after-person	「……お姉ちゃんたん、放課後を死んじゃうね」	「……언니짱, 방과 후를 죽어 버리네」	fix	lookup
+lookup:suffix-after-person	「……勇者たん、お弁当は」	「……용사짱, 도시락은」	fix	lookup
+lookup:suffix-after-person	「きゃー♪メイドたん、デートに」	「꺄아♪메이드짱, 데이트에」	fix	lookup
+lookup:suffix-after-person	「むールナたん、屋上に」	「-루나짱, 옥상에」	fix	lookup
+lookup:suffix-after-person	お兄ちゃんたん、魔法って好きなの？	형짱, 마법은 좋아해?	fix	lookup
+lookup:suffix-after-person	アリスたんはケーキが欲しい。	앨리스짱은 케이크를 갖고 싶다.	fix	lookup
+lookup:suffix-after-person	魔王たんの夢を作ってあげるの	마왕짱의 꿈을 만들어 줘	fix	lookup
+lookup:suffix-after-person	たまごっちを買った	다마고치를 샀다	keep	lookup
+lookup:suffix-after-person	「はいはい、うんたんうんたん」	「네네, 운탄운탄」	keep	lookup
+lookup:suffix-after-person	見たとたん、走り出した。	보자마자, 달리기 시작했다.	keep	lookup
+lookup:suffix-after-person	いったん戻ろう。	일단 돌아오자.	keep	lookup
+lookup:suffix-after-person	こっちは任せて。	여기는 맡겨.	keep	lookup
+lookup:suffix-after-person	「どっちがいい？」	「어느 쪽이 좋아?」	keep	lookup
+lookup:suffix-after-person	一人ぼっちだ。	외톨이다.	keep	lookup
+lookup:suffix-after-person	田中さん、部隊は	타나카 씨, 부대는	keep	lookup
+dict:w:28404	俺は獣人だ。	나는 수인이다.	keep	local
+dict:w:28405	俺が行く。	내가 간다.	keep	local
+lookup:suffix-after-person	警察署で会ったんだけど	경찰서에서 만났는데	keep	lookup
+lookup:suffix-after-person	「こっちだよ」	「여기야」	keep	lookup

@@ -27051,3 +27051,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 たっぷり	듬뿍	N110			GN							w:28587
 身罷られ	돌아가&AE@	M417			GN							w:28588
 身まかられ	돌아가&AE@	M417			GN							w:28589
+たん	짱	N110	VHn	Tu	GN							w:28400
+っち	치	N110	VHn	Tu	GN							w:28402
+俺っち	나	N120	VHn		GN						おれっち	w:28404
+俺っち	내	N120	VHn		GN	7422	||1 &&2 S+1== "が" P+1== "2**"	조사 が 앞의 俺っち를 내로 고른다.			おれっち	w:28405

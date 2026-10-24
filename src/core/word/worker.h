@@ -137,6 +137,10 @@ private:
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);
+    // The word that ends where the word at cursor starts: parent, or the last word of the chain
+    // when it ends there in the token or is a protected token right before it; else null.
+    Item* WordBefore(int cursor, int token, Item* parent) const;
+    Record* DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent);
 
     // Lookup filters.
     bool Skip(const dict::UserEntry& u, std::string_view query) const;
