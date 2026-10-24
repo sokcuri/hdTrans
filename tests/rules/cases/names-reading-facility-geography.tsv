@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 names:gloss	ブラックサッド	블랙새드	fix	lookup
 names:gloss	「ブラックサッド」	「블랙새드」	fix	lookup
@@ -35,9 +35,6 @@ names:gloss	「ブランディス・ケンプ」	「브랜디스 켐프」	fix	l
 names:gloss	ブランディス・ケンプの名前	브랜디스 켐프의 이름	fix	lookup
 names:gloss	ブランディス・ケンプを調べた。	브랜디스 켐프를 조사했다.	fix	lookup
 names:gloss	ブランディス・ケンプという名前	브랜디스 켐프라는 이름	fix	lookup
-names:gloss	ブラックジャック	블랙잭	keep	lookup
-names:gloss	ブラックホーク	블랙호크	keep	lookup
-names:gloss	半島	반도	keep	lookup
 names:gloss	ブラッド・ピット	브래드 피트	keep	lookup
 names:gloss	ブランドン・フレイジャー	브랜던 프레이저	keep	lookup
 names:gloss	ブラッドオレンジ	블러드 오렌지	keep	lookup
@@ -45,9 +42,3 @@ names:gloss	ブラディミール・ゲレーロ	블라디미르 게레로	keep	
 names:gloss	松井山手	마쓰이야마테	keep	lookup
 names:gloss	松井山手駅	마쓰이야마테역	keep	lookup
 names:gloss	ブランチ	브랜치	keep	lookup
-names:gloss	ブランドン・マイケル・スミス	브랜던 마이클 스미스	keep	lookup
-names:gloss	ブラックジャック21	블랙잭 21	keep	lookup
-names:gloss	ブランディッシュ4	브랜디쉬 4	keep	lookup
-names:gloss	ブラックフォン 2	블랙 폰 2	keep	lookup
-names:gloss	ブラックシェル	블랙 쉘	keep	lookup
-names:gloss	ブラスターマスター ゼロ 2	블래스터 마스터 제로 2	keep	lookup

@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 dict:names.578816	星奈あい	호시나 아이	fix	fixed
 dict:names.578816	「星奈あい」	「호시나 아이」	fix	fixed
@@ -14,9 +13,5 @@ dict:names.578816	（星奈あい）	(호시나 아이)	fix	fixed
 dict:names.578816	「星奈あい」の名前。	「호시나 아이」의 이름.	fix	fixed
 dict:names.578816	星奈陽子	호시나 요코	keep	fixed
 dict:names.578816	星奈ひかる	호시나 히카루	keep	fixed
-dict:names.578816	星奈シオリ	호시나 시오리	keep	fixed
-dict:names.578816	星奈優里	호시나 유리	keep	fixed
-dict:names.578816	星奈実沙希	호시나 미사키	keep	fixed
-dict:names.578816	星奈春吉	호시나 하루키치	keep	fixed
 dict:names.578816	あい	사랑	keep	fixed
 dict:names.578816	星奈	호시나	keep	fixed

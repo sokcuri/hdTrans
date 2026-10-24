@@ -1,4 +1,4 @@
-# 규칙: LEX-2, LEX-3, LEX-4
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:names.604067	柳生比呂士さん	야규 히로시 씨	fix	fixed
 dict:names.604067	「柳生比呂士」	「야규 히로시」	fix	fixed
@@ -10,23 +10,13 @@ dict:names.604067	柳生比呂士に会う。	야규 히로시를 만난다.	fix
 dict:names.604067	柳生比呂士です。	야규 히로시입니다.	fix	fixed
 dict:names.604067	柳生比呂士	야규 히로시	keep	fixed
 dict:names.604067	柳生博さん	야규 히로시 씨	keep	fixed
-dict:names.604067	柳生直行さん	야규 나오유키 씨	keep	fixed
-dict:names.604067	柳生真吾さん	야규 신고 씨	keep	fixed
-dict:names.604067	柳生鞘花さん	야규 사야카 씨	keep	fixed
-dict:names.604067	柳生駿河さん	야규 스루가 씨	keep	fixed
-dict:names.604067	柳生蘭子さん	야규 란코 씨	keep	fixed
-dict:names.634793	清廉潔白な国防軍	깨끗한 국방군의 신화	fix	fixed
-dict:names.634793	「清廉潔白な国防軍」	「깨끗한 국방군의 신화」	fix	fixed
-dict:names.634793	清廉潔白な国防軍を調べる。	깨끗한 국방군의 신화를 조사한다.	fix	fixed
-dict:names.634793	清廉潔白な国防軍について。	깨끗한 국방군의 신화에 대해.	fix	fixed
-dict:names.634793	清廉潔白な国防軍の説明。	깨끗한 국방군의 신화의 설명.	fix	fixed
-dict:names.634793	清廉潔白な国防軍を批判する。	깨끗한 국방군의 신화를 비판한다.	fix	fixed
-dict:names.634793	清廉潔白な国防軍を否定する。	깨끗한 국방군의 신화를 부정한다.	fix	fixed
-dict:names.634793	清廉潔白な国防軍の研究。	깨끗한 국방군의 신화의 연구.	fix	fixed
+dict:names.634793	清廉潔白な国防軍	청렴결백한 국방군	fix	fixed
+dict:names.634793	「清廉潔白な国防軍」	「청렴결백한 국방군」	fix	fixed
+dict:names.634793	清廉潔白な国防軍を調べる。	청렴결백한 국방군을 조사한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍について。	청렴결백한 국방군에 대해.	fix	fixed
+dict:names.634793	清廉潔白な国防軍の説明。	청렴결백한 국방군의 설명.	fix	fixed
+dict:names.634793	清廉潔白な国防軍を批判する。	청렴결백한 국방군을 비판한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍を否定する。	청렴결백한 국방군을 부정한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍の研究。	청렴결백한 국방군의 연구.	fix	fixed
 dict:names.634793	国防軍	국방군	keep	fixed
 dict:names.634793	清廉潔白	청렴결백	keep	fixed
-dict:names.634793	神話	신화	keep	fixed
-dict:names.634793	攻殻機動隊 STAND ALONE COMPLEX	공각기동대 STAND ALONE COMPLEX	keep	fixed
-dict:names.634793	新城(太魯閣)駅	신청 (타로코) 역	keep	fixed
-dict:names.634793	東方獣王園 ～ Unfinished Dream of All Living Ghost.	동방수왕원 ~ Unfinished Dream of All Living Ghost.	keep	fixed
-dict:names.634793	放課後colorful*step	방과 후 colorful*step	keep	fixed

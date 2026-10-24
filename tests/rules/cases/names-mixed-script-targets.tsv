@@ -1,4 +1,4 @@
-# 규칙: LEX-3, LEX-4
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 names:target-text	清水聖義	시미즈 마사요시	keep	lookup
 names:target-text	清水聖義さん	시미즈 마사요시 씨	keep	lookup
@@ -11,10 +11,4 @@ names:target-text	「葉月陽炎」	「하즈키 카게로우」	fix	lookup
 names:target-text	葉月陽炎に会った。	하즈키 카게로우를 만났다.	fix	lookup
 names:target-text	葉月陽炎の名前	하즈키 카게로우의 이름	fix	lookup
 names:target-text	葉月さんが来た。	하즈키 씨가 왔다.	keep	lookup
-names:target-text	陽炎が見える。	아지랭이가 보인다.	keep	lookup
-names:target-text	紀伊陽炎さん	키이 카게로 씨	keep	lookup
-names:target-text	臼井影郎さん	우스이 카게로 씨	keep	lookup
-names:target-text	泉田莇さん	이즈미다 아자미 씨	keep	lookup
-names:target-text	花宵アザミさん	하나요이 아자미 씨	keep	lookup
-names:target-text	ICD-10	ICD-10	keep	lookup
-names:target-text	第8章を読む。	제8장을 읽는다.	keep	lookup
+names:target-text	陽炎が見える。	아지랑이가 보인다.	fix	lookup

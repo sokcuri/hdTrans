@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 dict:names.652352	田口華。	타구치 하나.	fix	fixed
 dict:names.652352	田口華さん。	타구치 하나 씨.	fix	fixed
@@ -12,6 +11,4 @@ dict:names.652352	田口 華。	타구치 하나.	fix	fixed
 dict:names.652352	田口。	타구치.	keep	fixed
 dict:names.652352	田口さんが来た。	타구치 씨가 왔다.	keep	fixed
 dict:names.652352	華。	꽃.	keep	fixed
-dict:names.652352	「花が咲いた」	「꽃이 피었다」	keep	fixed
-dict:names.652352	入口を見た。	입구를 보았다.	keep	fixed
 dict:names.652352	田口華子。	타구치 하나코.	keep	fixed

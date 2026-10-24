@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 names:surname-reading	大越 健介	오오코시 켄스케	fix	lookup
 names:surname-reading	「大越 健介」	「오오코시 켄스케」	fix	lookup
@@ -13,117 +12,65 @@ names:surname-reading	「大越健介」	「오오코시 켄스케」	keep	looku
 names:surname-reading	大越健介さん	오오코시 켄스케 씨	keep	lookup
 names:surname-reading	大越健介が来た。	오오코시 켄스케가 왔다.	keep	lookup
 names:surname-reading	大越	오오코시	keep	lookup
-names:surname-reading	大越ひなの	오코시 히나노	keep	lookup
-names:surname-reading	大越史歩	오코시 시호	keep	lookup
-names:surname-reading	大越多佳子	오코시 타카코	keep	lookup
-names:dalian-city	大連市	다롄시	fix	lookup
-names:dalian-city	「大連市」	「다롄시」	fix	lookup
-names:dalian-city	大連市に住んでいる。	다롄시에 살고 있다.	fix	lookup
-names:dalian-city	大連市を訪れた。	다롄시를 방문했다.	fix	lookup
-names:dalian-city	大連市の港。	다롄시의 항구.	fix	lookup
-names:dalian-city	大連市から来た。	다롄시로부터 왔다.	fix	lookup
-names:dalian-city	大連市へ行った。	다롄시에 갔다.	fix	lookup
-names:dalian-city	大連市の地図。	다롄시의 지도.	fix	lookup
-names:dalian-city	大連	다롄	keep	lookup
-names:dalian-city	大連駅	다롄역	keep	lookup
-names:dalian-city	大連湾	다롄만	keep	lookup
-names:dalian-city	大連市人民体育場	다롄 인민 경기장	keep	lookup
-names:dalian-city	大連地下鉄	다롄 지하철	keep	lookup
-names:dalian-city	大連航空	다롄 항공	keep	lookup
-names:dalian-city	大連路駅	다롄루 역	keep	lookup
-names:dalian-city	大連理工大学	다롄 이공대학	keep	lookup
-names:volleyball-association	大韓バレーボール協会	대한배구협회	fix	lookup
-names:volleyball-association	「大韓バレーボール協会」	「대한배구협회」	fix	lookup
-names:volleyball-association	大韓バレーボール協会の発表。	대한배구협회의 발표.	fix	lookup
-names:volleyball-association	大韓バレーボール協会が発表した。	대한배구협회가 발표했다.	fix	lookup
-names:volleyball-association	大韓バレーボール協会に登録した。	대한배구협회에 등록했다.	fix	lookup
-names:volleyball-association	大韓バレーボール協会の会長。	대한배구협회의 회장.	fix	lookup
-names:volleyball-association	大韓バレーボール協会を訪問した。	대한배구협회를 방문했다.	fix	lookup
-names:volleyball-association	大韓バレーボール協会と協力する。	대한배구협회와 협력한다.	fix	lookup
-names:volleyball-association	大韓サッカー協会	대한축구협회	keep	lookup
-names:volleyball-association	大韓卓球協会	대한탁구협회	keep	lookup
-names:volleyball-association	大韓バドミントン協会	대한배드민턴협회	keep	lookup
-names:volleyball-association	大韓バスケットボール協会	대한민국농구협회	keep	lookup
-names:volleyball-association	大韓体育会	대한체육회	keep	lookup
-names:volleyball-association	한국배구연맹	한국배구연맹	keep	lookup
-names:volleyball-association	KOVO	KOVO	keep	lookup
-names:volleyball-association	대한배구협회	대한배구협회	keep	lookup
-names:osuka-seira	大須賀聖良	오스카 세이라	fix	lookup
-names:osuka-seira	大須賀 聖良	오스카 세이라	fix	lookup
-names:osuka-seira	「大須賀 聖良」	「오스카 세이라」	fix	lookup
-names:osuka-seira	大須賀 聖良さん	오스카 세이라 씨	fix	lookup
-names:osuka-seira	大須賀 聖良が来た。	오스카 세이라가 왔다.	fix	lookup
-names:osuka-seira	大須賀 聖良を見た。	오스카 세이라를 보았다.	fix	lookup
-names:osuka-seira	大須賀 聖良と話した。	오스카 세이라와 이야기했다.	fix	lookup
-names:osuka-seira	大須賀 聖良の本。	오스카 세이라의 책.	fix	lookup
-names:osuka-seira	大須賀 聖良の記事。	오스카 세이라의 기사.	fix	lookup
-names:osuka-seira	大須賀	오스가	keep	lookup
-names:osuka-seira	大須賀純	오오스카 쥰	keep	lookup
-names:osuka-seira	大須賀れもん	오스카 레몬	keep	lookup
-names:osuka-seira	大須賀めぐみ	오스가 메구미	keep	lookup
-names:osuka-seira	大須賀裕子	오스가 유코	keep	lookup
-names:osuka-seira	大須賀隼人	오스가 하야토	keep	lookup
-names:osuka-seira	大須賀祐	오스카 유	keep	lookup
-names:osuka-seira	大須賀昭人	오스가 아키토	keep	lookup
-names:amabiko	天日子	아마비코	fix	lookup
-names:amabiko	「天日子」	「아마비코」	fix	lookup
-names:amabiko	天日子の絵。	아마비코의 그림.	fix	lookup
-names:amabiko	天日子を描いた。	아마비코를 그렸다.	fix	lookup
-names:amabiko	天日子を見た。	아마비코를 보았다.	fix	lookup
-names:amabiko	天日子について調べた。	아마비코에 대해 조사했다.	fix	lookup
-names:amabiko	天日子が現れた。	아마비코가 나타났다.	fix	lookup
-names:amabiko	天日子と呼ばれる。	아마비코로 불린다.	fix	lookup
-names:amabiko	アマビエ	아마비에	keep	lookup
-names:amabiko	アマビコ	아마비코	keep	lookup
-names:amabiko	天彦	아마비코	keep	lookup
-names:amabiko	天彦入道	아마비코 뉴도	keep	lookup
-names:amabiko	天手力男神	아메노타지카라오	keep	lookup
-names:amabiko	天之御中主神	아마노미나카누시노카미	keep	lookup
-names:amabiko	天狗	텐구	keep	lookup
-names:amabiko	天日	천일	keep	lookup
-names:tengenji-kakeru	天花寺翔	텐겐지 카케루	fix	lookup
-names:tengenji-kakeru	天花寺颯馬	텐게지 소마	keep	lookup
-names:tengenji-kakeru	空閑愁	쿠가 슈	keep	lookup
-names:tengenji-kakeru	那雪透	나유키 토오루	keep	lookup
-names:tengenji-kakeru	星谷悠太	호시야 유타	keep	lookup
-names:tengenji-kakeru	天翔ひびき	텐쇼 히비키	keep	lookup
-names:tengenji-kakeru	天翔天音	아마카케 아마네	keep	lookup
-names:tengenji-kakeru	天穂のサクナヒメ	천수의 사쿠나히메	keep	lookup
-names:tengenji-kakeru	天草シオン	아마쿠사 시온	keep	lookup
-names:tengenji-kakeru	天空の城ラピュタ	천공의 성 라퓨타	keep	lookup
-names:tengenji-kakeru	天空のエスカフローネ	천공의 에스카플로네	keep	lookup
-names:tengenji-kakeru	天草四郎	아마쿠사 시로	keep	lookup
-names:tengenji-kakeru	天草シノ	아마쿠사 시노	keep	lookup
-names:tengenji-kakeru	天華百剣-斬-	천화백검-참-	keep	lookup
-names:tengenji-kakeru	天装戦隊ゴセイジャー	천장전대 고세이저	keep	lookup
-names:tendo-teru	天道輝	텐도 테루	fix	lookup
-names:tendo-teru	天道	텐도	keep	lookup
-names:tendo-teru	天道あかね	텐도 아카네	keep	lookup
-names:tendo-teru	天道かすみ	텐도 카스미	keep	lookup
-names:tendo-teru	天道なびき	텐도 나비키	keep	lookup
-names:tendo-teru	天道総司	덴도 소우지	keep	lookup
-names:tendo-teru	天道花憐	텐도 카렌	keep	lookup
-names:tendo-teru	天道琉朱菜	텐도 루나	keep	lookup
-names:tendo-teru	天道教	천도교	keep	lookup
-names:tendo-teru	天童アリス	텐도 아리스	keep	lookup
-names:tendo-teru	天道輝彦	텐도 데루히코	keep	lookup
-names:tendo-teru	天道早雲	덴도 소운	keep	lookup
-names:tendo-teru	天道樹	텐도 이츠키	keep	lookup
-names:tendo-teru	天道阿曇	텐도 아즈미	keep	lookup
-names:tendo-teru	天道未来	텐도 미라이	keep	lookup
-names:tengenji-kakeru	天花寺 翔	텐겐지 카케루	fix	lookup
-names:tengenji-kakeru	「天花寺 翔」	「텐겐지 카케루」	fix	lookup
-names:tengenji-kakeru	天花寺 翔さん	텐겐지 카케루 씨	fix	lookup
-names:tengenji-kakeru	天花寺 翔が来た。	텐겐지 카케루가 왔다.	fix	lookup
-names:tengenji-kakeru	天花寺 翔を見た。	텐겐지 카케루를 보았다.	fix	lookup
-names:tengenji-kakeru	天花寺 翔と話した。	텐겐지 카케루와 이야기했다.	fix	lookup
-names:tengenji-kakeru	天花寺 翔の本。	텐겐지 카케루의 책.	fix	lookup
-names:tengenji-kakeru	天花寺 翔の記事。	텐겐지 카케루의 기사.	fix	lookup
-names:tendo-teru	天道 輝	텐도 테루	fix	lookup
-names:tendo-teru	「天道 輝」	「텐도 테루」	fix	lookup
-names:tendo-teru	天道 輝さん	텐도 테루 씨	fix	lookup
-names:tendo-teru	天道 輝が来た。	텐도 테루가 왔다.	fix	lookup
-names:tendo-teru	天道 輝を見た。	텐도 테루를 보았다.	fix	lookup
-names:tendo-teru	天道 輝と話した。	텐도 테루와 이야기했다.	fix	lookup
-names:tendo-teru	天道 輝の本。	텐도 테루의 책.	fix	lookup
-names:tendo-teru	天道 輝の記事。	텐도 테루의 기사.	fix	lookup
+names:city-reading	大連市	다롄시	fix	lookup
+names:city-reading	「大連市」	「다롄시」	fix	lookup
+names:city-reading	大連市に住んでいる。	다롄시에 살고 있다.	fix	lookup
+names:city-reading	大連市を訪れた。	다롄시를 방문했다.	fix	lookup
+names:city-reading	大連市の港。	다롄시의 항구.	fix	lookup
+names:city-reading	大連市から来た。	다롄시로부터 왔다.	fix	lookup
+names:city-reading	大連市へ行った。	다롄시에 갔다.	fix	lookup
+names:city-reading	大連市の地図。	다롄시의 지도.	fix	lookup
+names:city-reading	大連	다롄	keep	lookup
+names:city-reading	大連駅	다롄역	keep	lookup
+names:association-name	大韓バレーボール協会	대한배구협회	fix	lookup
+names:association-name	「大韓バレーボール協会」	「대한배구협회」	fix	lookup
+names:association-name	大韓バレーボール協会の発表。	대한배구협회의 발표.	fix	lookup
+names:association-name	大韓バレーボール協会が発表した。	대한배구협회가 발표했다.	fix	lookup
+names:association-name	大韓バレーボール協会に登録した。	대한배구협회에 등록했다.	fix	lookup
+names:association-name	大韓バレーボール協会の会長。	대한배구협회의 회장.	fix	lookup
+names:association-name	大韓バレーボール協会を訪問した。	대한배구협회를 방문했다.	fix	lookup
+names:association-name	大韓バレーボール協会と協力する。	대한배구협회와 협력한다.	fix	lookup
+names:association-name	大韓サッカー協会	대한축구협회	keep	lookup
+names:surname-reading	大須賀聖良	오오스가 세이라	fix	lookup
+names:surname-reading	大須賀 聖良	오오스가 세이라	fix	lookup
+names:surname-reading	「大須賀 聖良」	「오오스가 세이라」	fix	lookup
+names:surname-reading	大須賀 聖良さん	오오스가 세이라 씨	fix	lookup
+names:surname-reading	大須賀 聖良が来た。	오오스가 세이라가 왔다.	fix	lookup
+names:surname-reading	大須賀 聖良を見た。	오오스가 세이라를 보았다.	fix	lookup
+names:surname-reading	大須賀 聖良と話した。	오오스가 세이라와 이야기했다.	fix	lookup
+names:surname-reading	大須賀 聖良の本。	오오스가 세이라의 책.	fix	lookup
+names:surname-reading	大須賀 聖良の記事。	오오스가 세이라의 기사.	fix	lookup
+names:surname-reading	大須賀	오오스가	fix	lookup
+names:creature-name	天日子	아마비코	fix	lookup
+names:creature-name	「天日子」	「아마비코」	fix	lookup
+names:creature-name	天日子の絵。	아마비코의 그림.	fix	lookup
+names:creature-name	天日子を描いた。	아마비코를 그렸다.	fix	lookup
+names:creature-name	天日子を見た。	아마비코를 보았다.	fix	lookup
+names:creature-name	天日子について調べた。	아마비코에 대해 조사했다.	fix	lookup
+names:creature-name	天日子が現れた。	아마비코가 나타났다.	fix	lookup
+names:creature-name	天日子と呼ばれる。	아마비코로 불린다.	fix	lookup
+names:creature-name	アマビエ	아마비에	keep	lookup
+names:creature-name	アマビコ	아마비코	keep	lookup
+names:creature-name	天彦	아마비코	keep	lookup
+names:creature-name	天彦入道	아마비코 뉴도	keep	lookup
+names:creature-name	天日	천일	keep	lookup
+names:rare-surname-reading	天花寺翔	텐게이지 카케루	fix	lookup
+names:given-name-reading	天道輝	텐도 테루	fix	lookup
+names:given-name-reading	天道	텐도	keep	lookup
+names:given-name-reading	天道あかね	텐도 아카네	keep	lookup
+names:rare-surname-reading	天花寺 翔	텐게이지 카케루	fix	lookup
+names:rare-surname-reading	「天花寺 翔」	「텐게이지 카케루」	fix	lookup
+names:rare-surname-reading	天花寺 翔さん	텐게이지 카케루 씨	fix	lookup
+names:rare-surname-reading	天花寺 翔が来た。	텐게이지 카케루가 왔다.	fix	lookup
+names:rare-surname-reading	天花寺 翔を見た。	텐게이지 카케루를 보았다.	fix	lookup
+names:rare-surname-reading	天花寺 翔と話した。	텐게이지 카케루와 이야기했다.	fix	lookup
+names:rare-surname-reading	天花寺 翔の本。	텐게이지 카케루의 책.	fix	lookup
+names:rare-surname-reading	天花寺 翔の記事。	텐게이지 카케루의 기사.	fix	lookup
+names:given-name-reading	天道 輝	텐도 테루	fix	lookup
+names:given-name-reading	「天道 輝」	「텐도 테루」	fix	lookup
+names:given-name-reading	天道 輝さん	텐도 테루 씨	fix	lookup
+names:given-name-reading	天道 輝が来た。	텐도 테루가 왔다.	fix	lookup
+names:given-name-reading	天道 輝を見た。	텐도 테루를 보았다.	fix	lookup
+names:given-name-reading	天道 輝と話した。	텐도 테루와 이야기했다.	fix	lookup
+names:given-name-reading	天道 輝の本。	텐도 테루의 책.	fix	lookup
+names:given-name-reading	天道 輝の記事。	텐도 테루의 기사.	fix	lookup

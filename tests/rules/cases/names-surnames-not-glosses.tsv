@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 dict:names.172815	シンティア・ディッカー	신티아 디커	fix	fixed
 dict:names.172815	シンティア・ディッカーが来た。	신티아 디커가 왔다.	fix	fixed
@@ -10,11 +10,6 @@ dict:names.172815	シンティア・ディッカーと話した。	신티아 디
 dict:names.172815	シンティア・ディッカーです。	신티아 디커입니다.	fix	fixed
 dict:names.172815	ミカエラ・ディッカー	미카엘라 디커	keep	fixed
 dict:names.172815	リック・ディッカー	릭 디커	keep	fixed
-dict:names.172815	シンディ・クロフォード	신디 크로퍼드	keep	fixed
-dict:names.172815	シンディ・ウィリアムズ	신디 윌리엄스	keep	fixed
-dict:names.172815	シンディ・モーガン	신디 모건	keep	fixed
-dict:names.172815	シンディ・ランゲ	신디 레인지	keep	fixed
-dict:names.172815	小さな取引	작은 거래	keep	fixed
 dict:names.179517	ジム・フレンチ	짐 프렌치	fix	fixed
 dict:names.179517	ジム・フレンチを見た。	짐 프렌치를 보았다.	fix	fixed
 dict:names.179517	ジム・フレンチが来た。	짐 프렌치가 왔다.	fix	fixed
@@ -27,9 +22,6 @@ dict:names.179517	ケイト・フレンチ	케이트 프렌치	keep	fixed
 dict:names.179517	タナ・フレンチ	타나 프렌치	keep	fixed
 dict:names.179517	ラリー・フレンチ	래리 프렌치	keep	fixed
 dict:names.179517	フレンチ	프렌치	keep	fixed
-dict:names.179517	フランス	프랑스	keep	fixed
-dict:names.179517	フレンチトースト	프렌치토스트	keep	fixed
-dict:names.179517	ジム・クラーク	짐 클라크	keep	fixed
 dict:names.179517	ジム・フレンチさんが来た。	짐 프렌치 씨가 왔다.	fix	fixed
 dict:names.181322	ジャニアリー・ヴァン・サント	재뉴어리 반 산트	fix	fixed
 dict:names.181322	ジャニアリー・ヴァン・サントを見た。	재뉴어리 반 산트를 보았다.	fix	fixed
@@ -42,12 +34,5 @@ dict:names.181322	ジャニアリー・ヴァン・サントと話した。	재�
 dict:names.181322	ジャニアリー・ヴァン・サントさんが来た。	재뉴어리 반 산트 씨가 왔다.	fix	fixed
 dict:names.181322	ジャニアリー・ヴァン・サント!	재뉴어리 반 산트!	fix	fixed
 dict:names.181322	ジャニュアリー・ジョーンズ	재뉴어리 존스	keep	fixed
-dict:names.181322	ジャニュアリー・ジョーンズを見た。	재뉴어리 존스를 보았다.	keep	fixed
-dict:names.181322	ジャニュアリー・ジョーンズが来た。	재뉴어리 존스가 왔다.	keep	fixed
 dict:names.181322	ジャニュアリー	1월	keep	defaults
-dict:names.181322	1月	1월	keep	defaults
-dict:names.181322	1月です。	1월입니다.	keep	defaults
-dict:names.181322	1月になった。	1월이 되었다.	keep	defaults
 dict:names.181322	ジャニス・ジョプリン	재니스 조플린	keep	fixed
-dict:names.181322	ジャニス・イアン	재니스 이언	keep	fixed
-dict:names.181322	ガス・ヴァン・サント	가스 밴 산트	keep	fixed

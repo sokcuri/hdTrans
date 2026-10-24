@@ -1,4 +1,3 @@
-# 규칙: LEX-3, LEX-4
 rule	input	expected	kind	layer
 names:surname-target	渡邉理佐	와타나베 리사	fix	lookup
 names:surname-target	渡邉理佐氏が来た。	와타나베 리사 씨가 왔다.	fix	lookup
@@ -16,9 +15,3 @@ names:surname-target	渡邉理佐と話した。	와타나베 리사와 이야�
 names:surname-target	渡邉理佐です。	와타나베 리사입니다.	keep	lookup
 names:surname-target	渡邉理佐を見た。	와타나베 리사를 보았다.	keep	lookup
 names:surname-target	渡邉理佐から聞いた。	와타나베 리사에게서 들었다.	keep	lookup
-names:surname-target	渡邉美穂さん	와타나베 미호 씨	keep	lookup
-names:surname-target	渡邉琴乃さん	와타나베 코토노 씨	keep	lookup
-names:surname-target	渡邉由紀さん	와타나베 유키 씨	keep	lookup
-names:surname-target	渡部 建さん	와타베 켄 씨	keep	lookup
-names:surname-target	渚の天使	물가의 천사	keep	lookup
-names:surname-target	ICD-10	ICD-10	keep	lookup

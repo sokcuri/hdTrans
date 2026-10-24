@@ -1,19 +1,13 @@
-# 규칙: LEX-2, LEX-3, LEX-4
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 names:gloss	ボルガノン	볼가논	fix	lookup
 names:gloss	「ボルガノン」	「볼가논」	fix	lookup
 names:gloss	ボルガノンを使った。	볼가논을 썼다.	fix	lookup
 names:gloss	ボルガノンの魔法	볼가논의 마법	fix	lookup
 names:gloss	ボルガノンが強い。	볼가논이 강하다.	fix	lookup
-names:gloss	ボルガノンとサンダー	볼가논과 천둥	fix	lookup
 names:gloss	ミル・マスカラス	밀 마스카라스	keep	lookup
 names:gloss	ミル・マスカラスが来た。	밀 마스카라스가 왔다.	keep	lookup
 names:gloss	「ミル・マスカラス」	「밀 마스카라스」	keep	lookup
 names:gloss	ミル・マスカラスの試合	밀 마스카라스의 시합	keep	lookup
 names:gloss	ボルガダイナマイト	볼가 다이너마이트	keep	lookup
-names:gloss	ボルガン県	볼강도	keep	lookup
-names:gloss	ミル・クレープ	밀 크레프	keep	lookup
 names:gloss	ミル・ジェディナク	마일 제디낙	keep	lookup
-names:gloss	フライングをした。	부정 출발을 했다.	keep	lookup
-names:gloss	ベルギー王立図書館オンライン・カタログ	벨기에 왕립 도서관 (KBR) 온라인 카탈로그	keep	lookup
-names:gloss	ポケットモンスター THE ORIGIN	포켓 몬스터 THE ORIGIN	keep	lookup

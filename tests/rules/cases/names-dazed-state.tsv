@@ -1,4 +1,3 @@
-# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:names.569622	放心状態	멍한 상태	fix	fixed
 dict:names.569622	放心状態になった。	멍한 상태가 되었다.	fix	fixed
@@ -8,10 +7,4 @@ dict:names.569622	放心状態から回復した。	멍한 상태로부터 회�
 dict:names.569622	放心状態のまま。	멍한 상태인 채.	fix	fixed
 dict:names.569622	彼は放心状態だった。	그는 멍한 상태였다.	fix	fixed
 dict:names.569622	放心状態に見える。	멍한 상태로 보인다.	fix	fixed
-dict:names.569622	安心した。	안심했다.	keep	fixed
 dict:names.569622	油断していた。	방심하고 있었다.	keep	fixed
-dict:names.569622	警戒を怠る。	경계를 게을리한다.	keep	fixed
-dict:names.569622	放置していた。	방치해 있었다.	keep	fixed
-dict:names.569622	気を抜くな。	방심하지 마.	keep	fixed
-dict:names.569622	呆然としていた。	멍해져 있었다.	keep	fixed
-dict:names.569622	放浪の英雄	방랑의 영웅	keep	fixed

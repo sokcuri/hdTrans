@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+dict:names.574495	方文琳	팡원린	fix	fixed
+dict:names.574495	方文琳さん	팡원린 씨	fix	fixed
+dict:names.574495	「方文琳」	「팡원린」	fix	fixed
+dict:names.574495	方文琳の歌。	팡원린의 노래.	fix	fixed
+dict:names.574495	方文琳が来た。	팡원린이 왔다.	fix	fixed
+dict:names.574495	方文琳と話す。	팡원린과 이야기한다.	fix	fixed
+dict:names.574495	方文琳に会う。	팡원린을 만난다.	fix	fixed
+dict:names.574495	方文琳の名前。	팡원린의 이름.	fix	fixed
+dict:names.574495	方文琳の演技。	팡원린의 연기.	fix	fixed
+dict:names.574495	方文琳の出演。	팡원린의 출연.	fix	fixed
+dict:names.574494	方文山	팡원산	keep	fixed
+dict:names.574495	方文圭	방문규	keep	fixed
+dict:names.574496	方斌	팡빈	keep	fixed
+dict:names.574451	方励之	팡리즈	keep	fixed
+dict:names.574450	方力鈞	팡리쥔	keep	fixed
+dict:names.574468	方大同	팡다퉁	fix	fixed

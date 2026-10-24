@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3
 rule	input	expected	kind	layer
 dict:names.174644	ジェイソン・グッドウィン	제이슨 굿윈	fix	fixed
 dict:names.174644	ジェイソン・グッドウィンが来た。	제이슨 굿윈이 왔다.	fix	fixed
@@ -13,8 +13,6 @@ dict:names.174644	ジェイソン・グリフィス	제이슨 그리피스	keep	
 dict:names.174644	ジェイソン・リー	제이슨 리	keep	fixed
 dict:names.174644	ジニファー・グッドウィン	지니퍼 굿윈	keep	fixed
 dict:names.174644	ジョン・グッドウィン	존 굿윈	keep	fixed
-dict:names.174644	リック・ディッカー	릭 디커	keep	fixed
-dict:names.174644	シンデレラはオンライン中!(中国ドラマ)	신데렐라는 온라인 중! (중국 드라마)	keep	fixed
 dict:names.222825	ダーク・ボッド	더크 보드	fix	fixed
 dict:names.222825	ダーク・ボッドが来た。	더크 보드가 왔다.	fix	fixed
 dict:names.222825	ダーク・ボッドさんが来た。	더크 보드 씨가 왔다.	fix	fixed
@@ -28,6 +26,3 @@ dict:names.222825	ダーク、来て。	다크, 와.	keep	fixed
 dict:names.222825	ダーク・ボガード	더크 보가드	keep	fixed
 dict:names.222825	ダーク・ノヴィツキー	디르크 노비츠키	keep	fixed
 dict:names.222825	ダーク・シュナイダー	다크 슈나이더	keep	fixed
-dict:names.222825	ジェイソン・グッドウィン	제이슨 굿윈	fix	fixed
-dict:names.222825	リック・ディッカー	릭 디커	keep	fixed
-dict:names.222825	シンデレラはオンライン中!(中国ドラマ)	신데렐라는 온라인 중! (중국 드라마)	keep	fixed

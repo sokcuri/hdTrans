@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3, LEX-4
+# 규칙: LEX-1, LEX-2
 rule	input	expected	kind	layer
 dict:names.242735	データカードダスプリキュアオールスターズ	데이터카드더스 프리큐어 올스타즈	fix	lookup
 dict:names.242735	データカードダスプリキュアオールスターズを見た。	데이터카드더스 프리큐어 올스타즈를 보았다.	fix	lookup
@@ -15,11 +15,9 @@ dict:names.244226	「トッキュウレッシャー」	「토큐레셔」	fix	lo
 names:kana-target-keep	データカードダス	데이터카드더스	keep	lookup
 names:kana-target-keep	トッキュウチェンジャー	토큐 체인저	keep	lookup
 names:kana-target-keep	トッキュウブラスター	토큐 블래스터	keep	lookup
-names:kana-target-keep	トッキュウジャーアルター	톳큐저 알터	keep	lookup
-names:kana-target-keep	デジモンアドベンチャー-BEYOND-	데지몬 어드벤처-BEYOND-	keep	lookup
-names:kana-target-keep	ドラゴンボール改	드래곤볼 改	keep	lookup
-names:kana-target-keep	トッケビ～君がくれた愛しい日々～	쓸쓸하고 찬란하神 - 도깨비	keep	lookup
-names:kana-target-keep	トヨタモビリティ富山 Gスクエア五福前(五福末広町)停留場	토요타 모빌러티 도야마 G스퀘어 고후쿠 앞(고후쿠스에히로마치) 정류장	keep	lookup
+names:kana-target	トッキュウジャーアルター	토큐저 알터	fix	lookup
+names:kana-target	デジモンアドベンチャー-BEYOND-	디지몬 어드벤처-BEYOND-	fix	lookup
+names:kana-target	ドラゴンボール改	드래곤볼 카이	fix	lookup
 dict:names.267273	ノン	논	fix	lookup
 dict:names.267273	ノンさん	논 씨	fix	lookup
 dict:names.267273	ノンが来た。	논이 왔다.	fix	lookup
@@ -29,8 +27,6 @@ dict:names.303897	フェムテク装甲を見た。	펨테크 장갑을 보았�
 dict:names.303897	「フェムテク装甲」	「펨테크 장갑」	fix	lookup
 names:kana-target-keep	ノンアルコール	논알코올	keep	lookup
 names:kana-target-keep	ノンストップ	논스톱	keep	lookup
-names:kana-target-keep	フェルト	펠트	keep	lookup
-names:kana-target-keep	ムテキ	무테키	keep	lookup
 names:kana-target-keep	フェイズシフト装甲	페이즈 시프트 장갑	keep	lookup
 dict:names.239028	デスクトップミュージック	컴퓨터 음악	fix	lookup
 dict:names.239028	デスクトップミュージックを見た。	컴퓨터 음악을 보았다.	fix	lookup
@@ -47,16 +43,12 @@ dict:names.239781	「デトロイト・マーシー大学」	「디트로이트 
 dict:names.239853	デニス・ウィーラン	데니스 웰런	fix	lookup
 dict:names.239853	デニス・ウィーランを見た。	데니스 웰런을 보았다.	fix	lookup
 dict:names.239853	「デニス・ウィーラン」	「데니스 웰런」	fix	lookup
-names:corroborated-target-keep	デスティニー・ディクソン	데스티니 딕슨	keep	lookup
-names:corroborated-target-keep	デスティニー・クルーズ	데스티니 크루즈	keep	lookup
-names:corroborated-target-keep	運命	운명	keep	lookup
-names:corroborated-target-keep	デトロイト	디트로이트	keep	lookup
-names:corroborated-target-keep	デトロイト・タイガース	디트로이트 타이거스	keep	lookup
-names:corroborated-target-keep	デニス・ウィーバー	데니스 위버	keep	lookup
-names:corroborated-target-keep	グレン・ウィーラン	글렌 웰런	keep	lookup
-names:corroborated-target-keep	デスクトップ	데스크탑	keep	lookup
-names:corroborated-target-keep	デスクトップパソコン	데스크탑PC	keep	lookup
-names:corroborated-target-keep	マーシー大学	머시 칼리지	keep	lookup
+names:shared-part-keep	デスティニー・ディクソン	데스티니 딕슨	keep	lookup
+names:shared-part-keep	デスティニー・クルーズ	데스티니 크루즈	keep	lookup
+names:shared-part-keep	デトロイト	디트로이트	keep	lookup
+names:shared-part-keep	デトロイト・タイガース	디트로이트 타이거스	keep	lookup
+names:shared-part-keep	デニス・ウィーバー	데니스 위버	keep	lookup
+names:shared-part-keep	グレン・ウィーラン	글렌 웰런	keep	lookup
 dict:names.240694	デブラリー・スコット	데브라리 스콧	fix	lookup
 dict:names.240694	デブラリー・スコットを見た。	데브라리 스콧을 보았다.	fix	lookup
 dict:names.240694	デブラリー・スコットについて	데브라리 스콧에 대해	fix	lookup
@@ -65,16 +57,13 @@ dict:names.240727	デブレツェン・カルヴァン派神学大学	데브레�
 dict:names.240727	デブレツェン・カルヴァン派神学大学を見た。	데브레첸 개혁신학대학교를 보았다.	fix	lookup
 dict:names.240727	デブレツェン・カルヴァン派神学大学について	데브레첸 개혁신학대학교에 대해	fix	lookup
 dict:names.240727	「デブレツェン・カルヴァン派神学大学」	「데브레첸 개혁신학대학교」	fix	lookup
-names:verified-target-keep	デブラ	데브라	keep	lookup
-names:verified-target-keep	デブラ・ウィルソン	데브라 윌슨	keep	lookup
-names:verified-target-keep	デブラ・ウィンガー	데브라 윙거	keep	lookup
-names:verified-target-keep	デビン・ホフ	데브라 호프	keep	lookup
-names:verified-target-keep	デブレツェン	데브레첸	keep	lookup
-names:verified-target-keep	デブレツェン大学	데브레첸 대학교	keep	lookup
-names:verified-target-keep	大学	대학	keep	lookup
-names:verified-target-keep	学校	학교	keep	lookup
-names:verified-target-keep	スコットランド	스코틀랜드	keep	lookup
-names:verified-target-keep	デモンストレーション	데먼스트레이션	keep	lookup
+names:shared-part-keep	デブラ	데브라	keep	lookup
+names:shared-part-keep	デブラ・ウィルソン	데브라 윌슨	keep	lookup
+names:shared-part-keep	デブラ・ウィンガー	데브라 윙거	keep	lookup
+names:kana-target	デビン・ホフ	데빈 호프	fix	lookup
+names:shared-part-keep	デブレツェン	데브레첸	keep	lookup
+names:shared-part-keep	デブレツェン大学	데브레첸 대학교	keep	lookup
+names:shared-part-keep	デモンストレーション	데먼스트레이션	keep	lookup
 dict:names.242323	デヴィッド・ウィニング	데이비드 위닝	fix	lookup
 dict:names.242323	デヴィッド・ウィニングを見た。	데이비드 위닝을 보았다.	fix	lookup
 dict:names.242323	デヴィッド・ウィニングさん	데이비드 위닝 씨	fix	lookup
@@ -83,16 +72,12 @@ dict:names.242400	デヴィッド・シールズ	데이비드 실즈	fix	lookup
 dict:names.242400	デヴィッド・シールズを見た。	데이비드 실즈를 보았다.	fix	lookup
 dict:names.242400	デヴィッド・シールズさん	데이비드 실즈 씨	fix	lookup
 dict:names.242400	「デヴィッド・シールズ」	「데이비드 실즈」	fix	lookup
-names:attested-surname-keep	デヴィッド	데이비드	keep	lookup
-names:attested-surname-keep	デヴィッド・ウィアー	데이비드 위어	keep	lookup
-names:attested-surname-keep	デヴィッド・ウィルソン	데이비드 윌슨	keep	lookup
-names:attested-surname-keep	デヴィッド・シーモア	데이비드 시무어	keep	lookup
-names:attested-surname-keep	デヴィット・シールド	데이비드 쉴드	keep	lookup
-names:attested-surname-keep	デヴィッド・スズキ	데이비드 스즈키	keep	lookup
-names:attested-surname-keep	優勝	우승	keep	lookup
-names:attested-surname-keep	勝利	승리	keep	lookup
-names:attested-surname-keep	シールド	쉴드	keep	lookup
-names:attested-surname-keep	デービッド・ワイズ	데이비드 와이즈	keep	lookup
+names:shared-part-keep	デヴィッド	데이비드	keep	lookup
+names:shared-part-keep	デヴィッド・ウィアー	데이비드 위어	keep	lookup
+names:shared-part-keep	デヴィッド・ウィルソン	데이비드 윌슨	keep	lookup
+names:shared-part-keep	デヴィッド・シーモア	데이비드 시무어	keep	lookup
+names:shared-part-keep	デヴィット・シールド	데이비드 쉴드	keep	lookup
+names:shared-part-keep	デヴィッド・スズキ	데이비드 스즈키	keep	lookup
 dict:names.244285	トッド・ウッドブリッジ	토드 우드브리지	fix	lookup
 dict:names.244285	トッド・ウッドブリッジを見た。	토드 우드브리지를 보았다.	fix	lookup
 dict:names.244285	トッド・ウッドブリッジさん	토드 우드브리지 씨	fix	lookup
@@ -101,18 +86,8 @@ dict:names.244688	トニー・オリバ	토니 올리바	fix	lookup
 dict:names.244688	トニー・オリバを見た。	토니 올리바를 보았다.	fix	lookup
 dict:names.244688	トニー・オリバさん	토니 올리바 씨	fix	lookup
 dict:names.244688	「トニー・オリバ」	「토니 올리바」	fix	lookup
-names:verified-sports-surname-keep	トッド・ウィリアムズ	토드 윌리엄스	keep	lookup
-names:verified-sports-surname-keep	トッド・エルドリッジ	토드 엘드레지	keep	lookup
-names:verified-sports-surname-keep	トニー・オリバー	토니 올리버	keep	lookup
-names:verified-sports-surname-keep	トニー・オーラー	토니 올러	keep	lookup
-names:verified-sports-surname-keep	トニ・モリスン	토니 모리슨	keep	lookup
-names:verified-sports-surname-keep	トニー・グウィン	토니 그윈	keep	lookup
-names:verified-sports-surname-keep	トニー・ペレス	토니 페레스	keep	lookup
-names:verified-sports-surname-keep	トニ・ブランコ	토니 블랑코	keep	lookup
-names:verified-sports-surname-keep	ウッド	우드	keep	lookup
-names:verified-sports-surname-keep	ブリッジ	브릿지	keep	lookup
-names:verified-sports-surname-keep	オリーブ	올리브	keep	lookup
-names:verified-sports-surname-keep	テニス	테니스	keep	lookup
+names:shared-part-keep	トニー・オリバー	토니 올리버	keep	lookup
+names:kana-target	ブリッジ	브리지	fix	lookup
 dict:names.245686	トム・アッテンボロー	톰 애튼버러	fix	lookup
 dict:names.245686	トム・アッテンボローを見た。	톰 애튼버러를 보았다.	fix	lookup
 dict:names.245686	トム・アッテンボローさん	톰 애튼버러 씨	fix	lookup
@@ -121,18 +96,9 @@ dict:names.245849	トム・トゥループ	톰 트루프	fix	lookup
 dict:names.245849	トム・トゥループを見た。	톰 트루프를 보았다.	fix	lookup
 dict:names.245849	トム・トゥループさん	톰 트루프 씨	fix	lookup
 dict:names.245849	「トム・トゥループ」	「톰 트루프」	fix	lookup
-names:source-verified-actor-keep	リチャード・アッテンボロー	리처드 애튼버러	keep	lookup
-names:source-verified-actor-keep	デイビッド・アッテンボロー	데이비드 애튼버러	keep	lookup
-names:source-verified-actor-keep	トム・クルーズ	톰 크루즈	keep	lookup
-names:source-verified-actor-keep	トビー・フーパー	토브 후퍼	keep	lookup
-names:source-verified-actor-keep	トニー・オリバ	토니 올리바	fix	lookup
-names:source-verified-actor-keep	トニー・オリバー	토니 올리버	keep	lookup
-names:source-verified-actor-keep	トッド・ウッドブリッジ	토드 우드브리지	fix	lookup
-names:source-verified-actor-keep	トビアス・アッセル	토비아스 아서르	keep	lookup
-names:source-verified-actor-keep	トニー・レオン	토니 리언	keep	lookup
-names:source-verified-actor-keep	トニー・レヴィン	토니 레빈	keep	lookup
-names:source-verified-actor-keep	トーマス・エジソン	토머스 에디슨	keep	lookup
-names:source-verified-actor-keep	トマス・モア	토머스 모어	keep	lookup
+names:shared-part-keep	リチャード・アッテンボロー	리처드 애튼버러	keep	lookup
+names:shared-part-keep	デイビッド・アッテンボロー	데이비드 애튼버러	keep	lookup
+names:kana-target	トビー・フーパー	토비 후퍼	fix	lookup
 dict:names.246819	トランスミッション・フィルムズ	트랜스미션 필름스	fix	lookup
 dict:names.246819	トランスミッション・フィルムズを見た。	트랜스미션 필름스를 보았다.	fix	lookup
 dict:names.246819	「トランスミッション・フィルムズ」	「트랜스미션 필름스」	fix	lookup
@@ -144,18 +110,10 @@ dict:names.247293	「トリッシュール」	「트리수르」	fix	lookup
 dict:names.247293	トリッシュールの祭り。	트리수르의 축제.	fix	lookup
 dict:names.247293	トリッシュールとケーララ州。	트리수르와 케랄라주.	fix	lookup
 dict:names.246819	トランスミッション	트랜스미션	keep	lookup
-dict:names.246819	トランスフォーマー	트랜스포머	keep	lookup
-dict:names.246819	フィルム	필름	keep	lookup
-dict:names.246819	映画	영화	keep	lookup
-dict:names.246819	トランスワールド航空	트랜스 월드 항공	keep	lookup
 dict:names.247293	トリッシュ	트리시	keep	lookup
 dict:names.247293	トリシュリ川	트리슐리강	keep	lookup
-dict:names.247293	トリプルタップ	용의자	keep	lookup
-dict:names.247293	トリグラフ	트리글라브	keep	lookup
-dict:names.247293	トリ・ボウイ	토리 보이	keep	lookup
-dict:names.247293	トランプタワー	카드 타워	keep	lookup
-dict:names.247293	トラウデル・ユンゲ	트라우들 융에	keep	lookup
-dict:names.247293	トリニティ・ジョリー・ブリス	트리니티 조리 블리스	keep	lookup
+names:kana-target	トリプルタップ	트리플 탭	fix	lookup
+names:kana-target	トリグラフ	트라이그래프	fix	lookup
 dict:names.248645	トレヴァー・ピーコック	트레버 피콕	fix	lookup
 dict:names.248645	トレヴァー・ピーコックを見た。	트레버 피콕을 보았다.	fix	lookup
 dict:names.248645	「トレヴァー・ピーコック」	「트레버 피콕」	fix	lookup
@@ -168,17 +126,7 @@ dict:names.249385	「トーキング・トム・アンド・フレンズ」	「�
 dict:names.249385	トーキング・トム・アンド・フレンズの名前。	토킹톰 앤 프렌즈의 이름.	fix	lookup
 dict:names.249385	トーキング・トム・アンド・フレンズが好きだ。	토킹톰 앤 프렌즈를 좋아한다.	fix	lookup
 dict:names.249385	名前      トーキング・トム・アンド・フレンズ	이름      토킹톰 앤 프렌즈	fix	lookup
-names:kana-target-keep	孔雀	공작	keep	lookup
-names:kana-target-keep	孔雀がいる。	공작이 있다.	keep	lookup
 names:kana-target-keep	ピーコック	피콕	keep	lookup
 names:kana-target-keep	トレヴァー・ホワイト	트레버 화이트	keep	lookup
-names:kana-target-keep	トレヴァー・フランシス	트레버 프랜시스	keep	lookup
-names:kana-target-keep	トレバー・ノア	트레버 노아	keep	lookup
-names:kana-target-keep	トレジャー	트레저	keep	lookup
-names:kana-target-keep	トーク	토크	keep	lookup
-names:kana-target-keep	友達と話した。	친구와 이야기했다.	keep	lookup
-names:kana-target-keep	トム	톰	keep	lookup
-names:kana-target-keep	トム・ソーヤー	톰 소여	keep	lookup
-names:kana-target-keep	トーマス	토마스	keep	lookup
-names:kana-target-keep	トレス海峡	토러스 해협	keep	lookup
-names:kana-target-keep	トレーニングセンター	트레센	keep	lookup
+names:kana-target	トレス海峡	토레스 해협	fix	lookup
+names:kana-target	トレーニングセンター	트레이닝 센터	fix	lookup

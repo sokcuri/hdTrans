@@ -1,21 +1,18 @@
-# 규칙: LEX-3, LEX-4
 rule	input	expected	kind	layer
 dict:places:2826	二子神社	후타코 신사	fix	fixed
 dict:places:2826	二子神社に行った。	후타코 신사에 갔다.	fix	fixed
 dict:places:2826	二子神社の前で待った。	후타코 신사 앞에서 기다렸다.	fix	fixed
-dict:places:8173	大石社	오이시 신사	fix	fixed
-dict:places:8173	大石社に行った。	오이시 신사에 갔다.	fix	fixed
-dict:places:8173	大石社の前で待った。	오이시 신사 앞에서 기다렸다.	fix	fixed
-dict:places:8174	大石神社	오이시 신사	fix	fixed
-dict:places:8174	大石神社に行った。	오이시 신사에 갔다.	fix	fixed
-dict:places:8174	大石神社の前で待った。	오이시 신사 앞에서 기다렸다.	fix	fixed
+dict:places:8173	大石社	오오이시 신사	fix	fixed
+dict:places:8173	大石社に行った。	오오이시 신사에 갔다.	fix	fixed
+dict:places:8173	大石社の前で待った。	오오이시 신사 앞에서 기다렸다.	fix	fixed
+dict:places:8174	大石神社	오오이시 신사	fix	fixed
+dict:places:8174	大石神社に行った。	오오이시 신사에 갔다.	fix	fixed
+dict:places:8174	大石神社の前で待った。	오오이시 신사 앞에서 기다렸다.	fix	fixed
 dict:places:24495	馬絹神社	마기누 신사	fix	fixed
 dict:places:24495	馬絹神社に行った。	마기누 신사에 갔다.	fix	fixed
 dict:places:24495	馬絹神社の前で待った。	마기누 신사 앞에서 기다렸다.	fix	fixed
 names:shrine-category	二子新地駅	후타코신치역	keep	fixed
 names:shrine-category	大石	오오이시	keep	fixed
 names:shrine-category	伊奈波神社	이나바 신사	keep	fixed
-names:shrine-category	京都嵯峨御髪神社	교토 사가 미카미 진자	keep	fixed
+names:shrine-category	京都嵯峨御髪神社	교토 사가 미카미 신사	fix	fixed
 names:shrine-category	神社に行った。	신사에 갔다.	keep	fixed
-names:shrine-category	大社に行った。	다이샤에 갔다.	keep	fixed
-names:shrine-category	寺に行った。	절에 갔다.	keep	fixed

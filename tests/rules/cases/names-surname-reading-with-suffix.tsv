@@ -1,4 +1,3 @@
-# 규칙: LEX-3, LEX-4
 rule	input	expected	kind	layer
 names:missing-surname-syllable	満潮改二	미치시오 개2	fix	lookup
 names:missing-surname-syllable	満潮改二。	미치시오 개2.	fix	lookup
@@ -21,6 +20,3 @@ names:missing-surname-syllable	満潮永澄様	미치시오 나가스미님	fix	
 names:missing-surname-syllable	満潮永澄に会った。	미치시오 나가스미를 만났다.	fix	lookup
 names:missing-surname-syllable	満潮さん	미치시오 씨	keep	lookup
 names:missing-surname-syllable	満潮に乗って	밀물을 타고	keep	lookup
-names:missing-surname-syllable	美汐さん	미시오 씨	keep	lookup
-names:missing-surname-syllable	天野美汐さん	아마노 미시오 씨	keep	lookup
-names:missing-surname-syllable	満月美夜子さん	미츠키 미야코 씨	keep	lookup

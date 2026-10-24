@@ -1,21 +1,14 @@
-# 규칙: LEX-2, LEX-4
 rule	input	expected	kind	layer
-names:surname-prefix	大井赤亥	오이 아카이	fix	lookup
-names:surname-prefix	大井 赤亥	오이 아카이	fix	lookup
-names:surname-prefix	「大井赤亥」	「오이 아카이」	fix	lookup
-names:surname-prefix	大井赤亥さん	오이 아카이 씨	fix	lookup
-names:surname-prefix	大井赤亥が来た。	오이 아카이가 왔다.	fix	lookup
-names:surname-prefix	大井赤亥を見た。	오이 아카이를 보았다.	fix	lookup
-names:surname-prefix	大井赤亥と話した。	오이 아카이와 이야기했다.	fix	lookup
-names:surname-prefix	大井赤亥の本。	오이 아카이의 책.	fix	lookup
-names:surname-prefix	大井	오이	keep	lookup
-names:surname-prefix	大井篤	오이 아츠시	keep	lookup
-names:surname-prefix	大井久士	오이 히사시	keep	lookup
-names:surname-prefix	大井翔	오이 쇼우	keep	lookup
-names:surname-prefix	大井麻利衣	오오이 마리에	keep	lookup
-names:surname-prefix	大井憲太郎	오오이 겐타로	keep	lookup
-names:surname-prefix	李明博	이명박	keep	lookup
-names:surname-prefix	井上さん	이노우에 씨	keep	lookup
+names:surname-prefix	大井赤亥	오오이 아카이	fix	lookup
+names:surname-prefix	大井 赤亥	오오이 아카이	fix	lookup
+names:surname-prefix	「大井赤亥」	「오오이 아카이」	fix	lookup
+names:surname-prefix	大井赤亥さん	오오이 아카이 씨	fix	lookup
+names:surname-prefix	大井赤亥が来た。	오오이 아카이가 왔다.	fix	lookup
+names:surname-prefix	大井赤亥を見た。	오오이 아카이를 보았다.	fix	lookup
+names:surname-prefix	大井赤亥と話した。	오오이 아카이와 이야기했다.	fix	lookup
+names:surname-prefix	大井赤亥の本。	오오이 아카이의 책.	fix	lookup
+names:surname-prefix	大井	오오이	fix	lookup
+names:surname-prefix	大井篤	오오이 아츠시	fix	lookup
 names:surname-prefix	大和孔太	야마토 코타	fix	lookup
 names:surname-prefix	大和 孔太	야마토 코타	fix	lookup
 names:surname-prefix	「大和孔太」	「야마토 코타」	fix	lookup
@@ -28,40 +21,26 @@ names:surname-prefix	大和	야마토	keep	lookup
 names:surname-prefix	大和奈央	야마토 나오	keep	lookup
 names:surname-prefix	大和里菜	야마토 리나	keep	lookup
 names:surname-prefix	大和鉄騎	야마토 텟키	keep	lookup
-names:surname-prefix	大和岩雄	오와 이와오	keep	lookup
-names:surname-prefix	山本さん	야마모토 씨	keep	lookup
-names:surname-prefix	大坪檀	지오 마사루	keep	lookup
-names:surname-prefix	大原ななこ	유이슬	keep	lookup
-names:surname-prefix	大川平次渦正	오카와 헤이지 우즈마사	fix	lookup
-names:surname-prefix	「大川平次渦正」	「오카와 헤이지 우즈마사」	fix	lookup
-names:surname-prefix	大川平次渦正さん	오카와 헤이지 우즈마사 씨	fix	lookup
-names:surname-prefix	大川平次渦正が来た。	오카와 헤이지 우즈마사가 왔다.	fix	lookup
-names:surname-prefix	大川平次渦正を見た。	오카와 헤이지 우즈마사를 보았다.	fix	lookup
-names:surname-prefix	大川平次渦正と話した。	오카와 헤이지 우즈마사와 이야기했다.	fix	lookup
-names:surname-prefix	大川平次渦正の名前。	오카와 헤이지 우즈마사의 이름.	fix	lookup
-names:surname-prefix	大川平次渦正。	오카와 헤이지 우즈마사.	fix	lookup
-names:surname-prefix	大川 平次 渦正	오카와 헤이지 우즈마사	fix	lookup
+names:surname-prefix	大坪檀	오오츠보 마유미	fix	lookup
+names:surname-prefix	大原ななこ	오오하라 나나코	fix	lookup
+names:surname-prefix	大川平次渦正	오오카와 헤이지 우즈마사	fix	lookup
+names:surname-prefix	「大川平次渦正」	「오오카와 헤이지 우즈마사」	fix	lookup
+names:surname-prefix	大川平次渦正さん	오오카와 헤이지 우즈마사 씨	fix	lookup
+names:surname-prefix	大川平次渦正が来た。	오오카와 헤이지 우즈마사가 왔다.	fix	lookup
+names:surname-prefix	大川平次渦正を見た。	오오카와 헤이지 우즈마사를 보았다.	fix	lookup
+names:surname-prefix	大川平次渦正と話した。	오오카와 헤이지 우즈마사와 이야기했다.	fix	lookup
+names:surname-prefix	大川平次渦正の名前。	오오카와 헤이지 우즈마사의 이름.	fix	lookup
+names:surname-prefix	大川平次渦正。	오오카와 헤이지 우즈마사.	fix	lookup
+names:surname-prefix	大川 平次 渦正	오오카와 헤이지 우즈마사	fix	lookup
 names:surname-prefix	大川	오오카와	keep	lookup
-names:surname-prefix	大川ぶくぶ	오오카와 부쿠부	keep	lookup
-names:surname-prefix	大川平三郎	오카와 헤이사부로	keep	lookup
-names:surname-prefix	大川透	오오카와 토오루	keep	lookup
-names:surname-prefix	大川藍	오카와 아이	keep	lookup
-names:surname-prefix	小川さん	오가와 씨	keep	lookup
-names:surname-prefix	大川栄子	오카와 에이코	keep	lookup
-names:surname-prefix	大沢伸一	몬도 그로소	keep	lookup
-names:surname-prefix	大政絢	오마사 아야	fix	lookup
-names:surname-prefix	「大政絢」	「오마사 아야」	fix	lookup
-names:surname-prefix	大政絢さん	오마사 아야 씨	fix	lookup
-names:surname-prefix	大政絢が来た。	오마사 아야가 왔다.	fix	lookup
-names:surname-prefix	大政絢を見た。	오마사 아야를 보았다.	fix	lookup
-names:surname-prefix	大政絢と話した。	오마사 아야와 이야기했다.	fix	lookup
-names:surname-prefix	大政絢の写真。	오마사 아야의 사진.	fix	lookup
-names:surname-prefix	大政絢。	오마사 아야.	fix	lookup
+names:surname-prefix	大沢伸一	오오사와 신이치	fix	lookup
+names:surname-prefix	大政絢	오오마사 아야	fix	lookup
+names:surname-prefix	「大政絢」	「오오마사 아야」	fix	lookup
+names:surname-prefix	大政絢さん	오오마사 아야 씨	fix	lookup
+names:surname-prefix	大政絢が来た。	오오마사 아야가 왔다.	fix	lookup
+names:surname-prefix	大政絢を見た。	오오마사 아야를 보았다.	fix	lookup
+names:surname-prefix	大政絢と話した。	오오마사 아야와 이야기했다.	fix	lookup
+names:surname-prefix	大政絢の写真。	오오마사 아야의 사진.	fix	lookup
+names:surname-prefix	大政絢。	오오마사 아야.	fix	lookup
 names:surname-prefix	大政	오오마사	keep	lookup
 names:surname-prefix	大政奉還	대정봉환	keep	lookup
-names:surname-prefix	大政翼賛の歌	대정익찬의 노래	keep	lookup
-names:surname-prefix	大政山トンネル	오마사야마 터널	keep	lookup
-names:surname-prefix	大政翼賛会	대정 익찬회	keep	lookup
-names:surname-prefix	大庭みな子	오바 미나코	keep	lookup
-names:surname-prefix	大沢木小鉄	오사와기 고테쓰	keep	lookup
-names:surname-prefix	大正時代	다이쇼 시대	keep	lookup

@@ -1,13 +1,10 @@
-# 규칙: LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3
 rule	input	expected	kind	layer
 names:target-corruption	ガンダムキュリオス	건담 큐리오스	fix	fixed
 names:target-corruption	ガンダムキュリオスだ。	건담 큐리오스다.	fix	fixed
 names:target-corruption	「ガンダムキュリオス」	「건담 큐리오스」	fix	fixed
 names:target-corruption	ガンダムキュリオスを見た。	건담 큐리오스를 보았다.	fix	fixed
 names:target-corruption	コミックマーケット91	코믹마켓 91	keep	fixed
-names:target-corruption	コミックマーケット91だ。	코믹마켓 91이다.	keep	fixed
-names:target-corruption	「コミックマーケット91」	「코믹마켓 91」	keep	fixed
-names:target-corruption	コミックマーケット91を見た。	코믹마켓 91을 보았다.	keep	fixed
 names:target-corruption	ゴルディオンモーター	골디온 모터	fix	fixed
 names:target-corruption	ゴルディオンモーターだ。	골디온 모터다.	fix	fixed
 names:target-corruption	「ゴルディオンモーター」	「골디온 모터」	fix	fixed
@@ -17,17 +14,8 @@ names:target-corruption	サバーニャだ。	사바냐다.	fix	fixed
 names:target-corruption	「サバーニャ」	「사바냐」	fix	fixed
 names:target-corruption	サバーニャを見た。	사바냐를 보았다.	fix	fixed
 names:target-corruption	シェゾ・ウィグィィ	셰죠 위그이	keep	fixed
-names:target-corruption	シェゾ・ウィグィィだ。	셰죠 위그이다.	keep	fixed
-names:target-corruption	「シェゾ・ウィグィィ」	「셰죠 위그이」	keep	fixed
-names:target-corruption	シェゾ・ウィグィィを見た。	셰죠 위그이를 보았다.	keep	fixed
-names:target-corruption	コミックマーケット90	코믹마켓 90	keep	fixed
-names:target-corruption	コミックマーケット92	코믹마켓 92	keep	fixed
 names:target-corruption	ゴルディオンハンマー	골디온 해머	keep	fixed
 names:target-corruption	ゴルディオンフィンガー	골디온 핑거	keep	fixed
-names:target-corruption	ガンダムAGE-FX	건담 AGE-FX	keep	fixed
-names:target-corruption	ガンダムSEED	건담 SEED	keep	fixed
-names:target-corruption	ガンダムGT-FOUR	건담 GT-FOUR	keep	fixed
-names:target-corruption	ガンダムビルドダイバーズ Re:RISE	건담 빌드 다이버즈 Re:RISE	keep	fixed
 names:target-corruption	カール・アンデションの父	칼 안데르손의 아버지	fix	fixed
 names:target-corruption	カール・アンデションの父だ。	칼 안데르손의 아버지다.	fix	fixed
 names:target-corruption	「カール・アンデションの父」	「칼 안데르손의 아버지」	fix	fixed
@@ -40,14 +28,7 @@ names:target-corruption	カール・アンデションの父の絵	칼 안데르
 names:target-corruption	カール・アンデション	칼 안데르손	keep	fixed
 names:target-corruption	カール・アンデション・エクスネヴァード	칼 안데르손 외크스네바드	keep	fixed
 names:target-corruption	カール・アンデション・プリッス	칼 안데르손 프리스	keep	fixed
-names:target-corruption	カール・アンダーソン	칼 앤더슨	keep	fixed
 names:target-corruption	カール・アントン・アンデション	칼 안톤 안데르손	keep	fixed
-names:target-corruption	カール・ウィリアム・カップ	칼 윌리엄 캡	keep	fixed
-names:target-corruption	ガゼッタ・デロ・スポルト	가젯타 데로 스포르트	keep	fixed
-names:target-corruption	ガゼッタ・デロ・スポルトだ。	가젯타 데로 스포르트다.	keep	fixed
-names:target-corruption	ガゼッタ・デロ・スポルトを見た。	가젯타 데로 스포르트를 보았다.	keep	fixed
-names:target-corruption	ガゼッタ・デロ・スポルトについて調べた。	가젯타 데로 스포르트에 대해 조사했다.	keep	fixed
-names:target-corruption	ガゼッタ・デロ・スポルトの記事を読んだ。	가젯타 데로 스포르트의 기사를 읽었다.	keep	fixed
 names:target-corruption	ガラルギャロップ	가라르 날쌩마	fix	fixed
 names:target-corruption	ガラルギャロップだ。	가라르 날쌩마다.	fix	fixed
 names:target-corruption	ガラルギャロップを見た。	가라르 날쌩마를 보았다.	fix	fixed
@@ -63,7 +44,6 @@ names:target-corruption	ガラルマッスグマだ。	가라르 직구리다.	f
 names:target-corruption	ガラルマッスグマを見た。	가라르 직구리를 보았다.	fix	fixed
 names:target-corruption	ガラルマッスグマについて調べた。	가라르 직구리에 대해 조사했다.	fix	fixed
 names:target-corruption	ガラルマッスグマの記事を読んだ。	가라르 직구리의 기사를 읽었다.	fix	fixed
-names:target-corruption	「ガゼッタ・デロ・スポルト」	「가젯타 데로 스포르트」	keep	fixed
 names:target-corruption	「ガラルギャロップ」	「가라르 날쌩마」	fix	fixed
 names:target-corruption	「ガラルダルマッカ」	「가라르 달막화」	fix	fixed
 names:target-corruption	「ガラルマッスグマ」	「가라르 직구리」	fix	fixed
@@ -72,13 +52,6 @@ names:target-corruption	マッスグマ	직구리	keep	fixed
 names:target-corruption	ガラルポニータ	가라르 포니타	keep	fixed
 names:target-corruption	ガラルデスマス	가라르 데스마스	keep	fixed
 names:target-corruption	ガラルヤドン	가라르 야돈	keep	fixed
-names:target-corruption	ガラル地方	가라르지방	keep	fixed
-names:target-corruption	ガラルサンダー	가라르 썬더	keep	fixed
-names:target-corruption	ガゼット	가제트	keep	fixed
-names:target-corruption	ガゼット・デ・ボザール	가젯트 데 보자르	keep	fixed
-names:target-corruption	ガゼット・ド・フランス	라 가제트	keep	fixed
-names:target-corruption	スポルト	스포르트	keep	fixed
-names:target-corruption	ガリバー	걸리버	keep	fixed
 names:target-corruption	ガルフストリーム・エアロスペース	걸프스트림 항공우주	fix	fixed
 names:target-corruption	ガルフストリーム・エアロスペースだ。	걸프스트림 항공우주다.	fix	fixed
 names:target-corruption	ガルフストリーム・エアロスペースを見た。	걸프스트림 항공우주를 보았다.	fix	fixed
@@ -98,28 +71,10 @@ names:target-corruption	ガンダムルブリスウルの写真。	건담 루브
 names:target-corruption	「ガンダムルブリスウル」	「건담 루브리스울」	fix	fixed
 names:target-corruption	ガルフストリーム笹本	걸프스트림 사사모토	keep	fixed
 names:target-corruption	ガルフ・エア	걸프 에어	keep	fixed
-names:target-corruption	ガルフ郡	걸프군	keep	fixed
 names:target-corruption	ガンジス川	갠지스강	keep	fixed
 names:target-corruption	ナイル川デルタ	나일강 삼각주	keep	fixed
 names:target-corruption	ガンダム	건담	keep	fixed
 names:target-corruption	ガンダム・ルブリス・ジウ	건담 루브리스 지우	keep	fixed
-names:target-corruption	ガンダルフ	간달프	keep	fixed
-names:target-corruption	ガンダーラ	간다라	keep	fixed
-names:target-corruption	航空宇宙	항공우주	keep	fixed
-names:target-corruption	ガルフ・エアだ。	걸프 에어다.	keep	fixed
-names:target-corruption	ガンジス川だ。	갠지스강이다.	keep	fixed
-names:target-corruption	ナイル川デルタだ。	나일강 삼각주다.	keep	fixed
-names:target-corruption	ガンダムだ。	건담이다.	keep	fixed
-names:target-corruption	ガンダルフだ。	간달프다.	keep	fixed
-names:target-corruption	ガンダーラだ。	간다라다.	keep	fixed
-names:target-corruption	ガールとロボット	걸과 로봇	keep	local
-names:target-corruption	ガールとロボット。	걸과 로봇.	keep	local
-names:target-corruption	「ガールとロボット」	「걸과 로봇」	keep	local
-names:target-corruption	ガールとロボットです。	걸과 로봇입니다.	keep	local
-names:target-corruption	ガールとロボットを見た。	걸과 로봇을 보았다.	keep	local
-names:target-corruption	ガールとロボットの名前。	걸과 로봇의 이름.	keep	local
-names:target-corruption	これはガールとロボットです。	이것은 걸과 로봇입니다.	keep	local
-names:target-corruption	ガールとロボットについて。	걸과 로봇에 대해.	keep	local
 names:target-corruption	キッコーマン総合病院	깃코만 종합 병원	fix	fixed
 names:target-corruption	キッコーマン総合病院。	깃코만 종합 병원.	fix	fixed
 names:target-corruption	「キッコーマン総合病院」	「깃코만 종합 병원」	fix	fixed
@@ -136,37 +91,22 @@ names:target-corruption	キッドプールを見た。	키드풀을 보았다.	f
 names:target-corruption	キッドプールの名前。	키드풀의 이름.	fix	fixed
 names:target-corruption	これはキッドプールです。	이것은 키드풀입니다.	fix	fixed
 names:target-corruption	キッドプールについて。	키드풀에 대해.	fix	fixed
-names:target-corruption	ガール・アンド・スパイダー	소녀와 거미	keep	fixed
-names:target-corruption	キエルとディアナ	키엘과 디아나	keep	fixed
-names:target-corruption	キツツキと雨	딱따구리와 비	keep	fixed
-names:target-corruption	ガールミーツボーイ	걸 미츠 보이	keep	fixed
-names:target-corruption	キッコーマン	키코망	keep	fixed
+names:target-corruption	キッコーマン	깃코만	fix	fixed
 names:target-corruption	キッコーマンの豆乳飲料	깃코만 두유 음료	keep	fixed
 names:target-corruption	総合病院	종합병원	keep	fixed
-names:target-corruption	病院	병원	keep	fixed
 names:target-corruption	デッドプール	데드풀	keep	fixed
-names:target-corruption	ガールプール	걸풀	keep	fixed
 names:target-corruption	キッド	키드	keep	fixed
 names:target-corruption	プール	풀	keep	fixed
-names:target-corruption	キミノヨゾラ哨戒班	너의 밤하늘 초계반	fix	fixed
-names:target-corruption	キミノヨゾラ哨戒班。	너의 밤하늘 초계반.	fix	fixed
-names:target-corruption	「キミノヨゾラ哨戒班」	「너의 밤하늘 초계반」	fix	fixed
-names:target-corruption	キミノヨゾラ哨戒班です。	너의 밤하늘 초계반입니다.	fix	fixed
-names:target-corruption	キミノヨゾラ哨戒班を聞いた。	너의 밤하늘 초계반을 들었다.	fix	fixed
-names:target-corruption	キミノヨゾラ哨戒班の名前。	너의 밤하늘 초계반의 이름.	fix	fixed
-names:target-corruption	これはキミノヨゾラ哨戒班です。	이것은 너의 밤하늘 초계반입니다.	fix	fixed
-names:target-corruption	キミノヨゾラ哨戒班について。	너의 밤하늘 초계반에 대해.	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班	키미노요조라 초계반	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班。	키미노요조라 초계반.	fix	fixed
+names:target-corruption	「キミノヨゾラ哨戒班」	「키미노요조라 초계반」	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班です。	키미노요조라 초계반입니다.	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班を聞いた。	키미노요조라 초계반을 들었다.	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班の名前。	키미노요조라 초계반의 이름.	fix	fixed
+names:target-corruption	これはキミノヨゾラ哨戒班です。	이것은 키미노요조라 초계반입니다.	fix	fixed
+names:target-corruption	キミノヨゾラ哨戒班について。	키미노요조라 초계반에 대해.	fix	fixed
 names:target-corruption	アスノヨゾラ哨戒班	아스노요조라 초계반	keep	fixed
-names:target-corruption	アスノヨゾラ哨戒班。	아스노요조라 초계반.	keep	fixed
 names:target-corruption	「アスノヨゾラ哨戒班」	「아스노요조라 초계반」	keep	fixed
-names:target-corruption	アスノヨゾラ哨戒班を聞いた。	아스노요조라 초계반을 들었다.	keep	fixed
-names:target-corruption	キミの記憶	너의 기억	keep	fixed
-names:target-corruption	キミの冒険	너의 모험	keep	fixed
-names:target-corruption	キミノタメボクノタメ	너를 위해 나를 위해	keep	fixed
-names:target-corruption	キミからのEcho	너로부터의 Echo	keep	fixed
-names:target-corruption	キミだけの魔法	너만의 마법	keep	fixed
-names:target-corruption	夜空	밤하늘	keep	fixed
-names:target-corruption	哨戒班	초계반	keep	fixed
 names:target-corruption	キム・ギルテ事件	김길태 사건	fix	fixed
 names:target-corruption	キム・ギルテ事件。	김길태 사건.	fix	fixed
 names:target-corruption	「キム・ギルテ事件」	「김길태 사건」	fix	fixed
@@ -175,17 +115,6 @@ names:target-corruption	キム・ギルテ事件を調べた。	김길태 사건
 names:target-corruption	キム・ギルテ事件の記録。	김길태 사건의 기록.	fix	fixed
 names:target-corruption	これはキム・ギルテ事件です。	이것은 김길태 사건입니다.	fix	fixed
 names:target-corruption	キム・ギルテ事件について。	김길태 사건에 대해.	fix	fixed
-names:target-corruption	事件	사건	keep	fixed
-names:target-corruption	キム・ミンジの怪談	김민지 괴담	keep	fixed
-names:target-corruption	キム・ジョンウンのチョコレート	김정은의 초콜릿	keep	fixed
-names:target-corruption	キム・スンウの乗勝長駆	김승우의 승승장구	keep	fixed
-names:target-corruption	事件の記録。	사건의 기록.	keep	fixed
-names:target-corruption	事件を調べた。	사건을 조사했다.	keep	fixed
-names:target-corruption	キム・ミンジの怪談。	김민지 괴담.	keep	fixed
-names:target-corruption	「キム・ミンジの怪談」	「김민지 괴담」	keep	fixed
-names:target-corruption	キム・ジョンウンのチョコレート。	김정은의 초콜릿.	keep	fixed
-names:target-corruption	キム・スンウの乗勝長駆。	김승우의 승승장구.	keep	fixed
-names:target-corruption	「キム・スンウの乗勝長駆」	「김승우의 승승장구」	keep	fixed
 names:target-corruption	キャシディ・ギフォード	캐시디 기포드	fix	fixed
 names:target-corruption	キャシディ・ギフォード。	캐시디 기포드.	fix	fixed
 names:target-corruption	「キャシディ・ギフォード」	「캐시디 기포드」	fix	fixed
@@ -194,15 +123,7 @@ names:target-corruption	キャシディ・ギフォードを見た。	캐시디 
 names:target-corruption	キャシディ・ギフォードの名前。	캐시디 기포드의 이름.	fix	fixed
 names:target-corruption	これはキャシディ・ギフォードです。	이것은 캐시디 기포드입니다.	fix	fixed
 names:target-corruption	キャシディ・ギフォードについて。	캐시디 기포드에 대해.	fix	fixed
-names:target-corruption	キャサリン・マコーマック	캐서린 매코맥	keep	fixed
-names:target-corruption	キャサリン・マクブライド	캐서린 맥브라이드	keep	fixed
-names:target-corruption	キャサリン・マクナマラ	캐서린 맥너마라	keep	fixed
-names:target-corruption	キャサリン・マクニール	캐서린 맥닐	keep	fixed
-names:target-corruption	キャサリン・マクフィー	캐서린 맥피	keep	fixed
 names:target-corruption	キャシディ・フリーマン	캐시디 프리먼	keep	fixed
 names:target-corruption	キャシディ・バンクス	캐시디 뱅크스	keep	fixed
 names:target-corruption	キャシディ・クライン	캐시디 클레인	keep	fixed
-names:target-corruption	キャサリン	캐서린	keep	fixed
 names:target-corruption	キャシディ	캐시디	keep	fixed
-names:target-corruption	キャサリン・クラーク	캐서린 클라크	keep	fixed
-names:target-corruption	キャシー・リー・クロスビー	캐시 리 크로스비	keep	fixed

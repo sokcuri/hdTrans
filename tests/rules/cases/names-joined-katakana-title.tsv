@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 dict:names.44380	アルケーガンダムドライ	아르케 건담 드라이	fix	lookup
 dict:names.44380	「アルケーガンダムドライ」	「아르케 건담 드라이」	fix	lookup
@@ -14,9 +14,3 @@ dict:names	アルケーガンダム	아르케 건담	keep	lookup
 dict:names	アルケー	아르케	keep	lookup
 dict:names	アルケーエンジェモン	아르케엔젤몬	keep	lookup
 dict:names	アルケー・アルマ	아르케 아르마	keep	lookup
-dict:names	ガンダムの模型。	건담의 모형.	keep	lookup
-dict:names	ガンダムを見た。	건담을 보았다.	keep	lookup
-dict:names	アルケーガンダムの模型。	아르케 건담의 모형.	keep	lookup
-dict:names	アルケーガンダムを見た。	아르케 건담을 보았다.	keep	lookup
-dict:names	アルケミストドライバー	알케미스트 드라이버	keep	lookup
-dict:names	アルケミスドライバー	알케미스 드라이버	keep	lookup

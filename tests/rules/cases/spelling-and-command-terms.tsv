@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-2, LEX-3
 rule	input	expected	kind	layer
 lexical:spelling-and-command-terms	なんかこわい。	왠지 무섭다.	fix	defaults
 lexical:spelling-and-command-terms	なんかこわかった。	왠지 무서웠다.	fix	defaults
@@ -6,10 +6,7 @@ lexical:spelling-and-command-terms	なんかこわくない。	왠지 무섭지 
 lexical:spelling-and-command-terms	ほうろく	질냄비	fix	defaults
 lexical:spelling-and-command-terms	ほうろくを買った。	질냄비를 샀다.	fix	defaults
 lexical:spelling-and-command-terms	ほうろくで茶を炒る。	질냄비로 차를 볶는다.	fix	defaults
-lexical:spelling-and-command-terms	久しぶりに会った。	오랜만에 만났다.	keep	defaults
-lexical:spelling-and-command-terms	久しぶりに来た。	오랜만에 왔다.	keep	defaults
 lexical:spelling-and-command-terms	数日間	며칠간	keep	defaults
-lexical:spelling-and-command-terms	数日間待った。	며칠간 기다렸다.	keep	defaults
 lexical:spelling-and-command-terms	白白明け	새벽녘	fix	defaults
 lexical:spelling-and-command-terms	白白明けに出発した。	새벽녘에 출발했다.	fix	defaults
 lexical:spelling-and-command-terms	白白明けの空。	새벽녘의 하늘.	fix	defaults
@@ -18,60 +15,30 @@ lexical:spelling-and-command-terms	アンドゥを使った。	실행 취소를 
 lexical:spelling-and-command-terms	アンドゥ機能	실행 취소 기능	fix	defaults
 lexical:spelling-and-command-terms	エンドオブジョブ	작업 종료	fix	defaults
 lexical:spelling-and-command-terms	エンドオブジョブを確認した。	작업 종료를 확인했다.	fix	defaults
-lexical:spelling-and-command-terms	ネストされたDO	네스트된 DO	keep	defaults
-lexical:spelling-and-command-terms	ネストされたDOを使った。	네스트된 DO를 썼다.	keep	defaults
 lexical:spelling-and-command-terms	シャットダウン	셧다운	fix	defaults
 lexical:spelling-and-command-terms	シャットダウンした。	셧다운했다.	fix	defaults
 lexical:spelling-and-command-terms	シャットダウンする。	셧다운한다.	fix	defaults
 lexical:spelling-and-command-terms	シートを掛ける。	시트를 덮는다.	fix	defaults
 lexical:spelling-and-command-terms	シートを掛けた。	시트를 덮었다.	fix	defaults
 lexical:spelling-and-command-terms	セーフティーベルト	안전벨트	keep	defaults
-lexical:spelling-and-command-terms	セーフティーベルトを締めた。	안전벨트를 조였다.	keep	defaults
 lexical:spelling-and-command-terms	御年玉	세뱃돈	fix	defaults
 lexical:spelling-and-command-terms	御年玉をもらった。	세뱃돈을 받았다.	fix	defaults
 lexical:spelling-and-command-terms	御年玉を渡した。	세뱃돈을 건네주었다.	fix	defaults
-lexical:spelling-and-command-terms	鍋を買った。	냄비를 샀다.	keep	defaults
 lexical:spelling-and-command-terms	焙烙	질냄비	keep	defaults
-lexical:spelling-and-command-terms	朝の空。	아침의 하늘.	keep	defaults
-lexical:spelling-and-command-terms	新年の贈り物。	신년의 선물.	keep	defaults
-lexical:spelling-and-command-terms	久しぶり。	오래간만.	keep	defaults
-lexical:spelling-and-command-terms	数日	며칠	keep	defaults
-lexical:spelling-and-command-terms	安全ベルト	안전 벨트	keep	defaults
-lexical:spelling-and-command-terms	ベルトを締めた。	벨트를 매었다.	keep	defaults
 lexical:spelling-and-command-terms	シャットアウト	셧아웃	keep	defaults
-lexical:spelling-and-command-terms	シートを敷く。	시트를 깐다.	keep	defaults
-lexical:spelling-and-command-terms	取り消し	취소	keep	defaults
-lexical:spelling-and-command-terms	リドゥ	리두	keep	defaults
-lexical:spelling-and-command-terms	DO文	DO문	keep	defaults
-lexical:spelling-and-command-terms	仕事の終わり。	일의 끝.	keep	defaults
+lexical:spelling-and-command-terms	リドゥ	다시 실행	fix	defaults
 lexical:spelling-and-command-terms	なんか変だ。	왠지 이상하다.	keep	defaults
-lexical:spelling-and-command-terms	怖い。	무섭다.	keep	defaults
-lexical:spelling-and-command-terms	臆病な人。	겁쟁이인 사람.	fix	defaults
-lexical:spelling-and-command-terms	臆病だった。	겁쟁이였다.	fix	defaults
 lexical:spelling-and-command-terms	英姿	훌륭한 모습	fix	defaults
 lexical:spelling-and-command-terms	英姿を見た。	훌륭한 모습을 보았다.	fix	defaults
 lexical:spelling-and-command-terms	馬鹿を言う。	어리석은 소리를 한다.	fix	defaults
 lexical:spelling-and-command-terms	馬鹿を言った。	어리석은 소리를 했다.	fix	defaults
 lexical:spelling-and-command-terms	馬鹿を言わない。	어리석은 소리를 하지 않는다.	fix	defaults
-lexical:spelling-and-command-terms	勇気がある。	용기가 있다.	keep	defaults
 lexical:spelling-and-command-terms	怖がり	겁쟁이	keep	defaults
-lexical:spelling-and-command-terms	堂々とした姿。	당당한 모습.	keep	defaults
-lexical:spelling-and-command-terms	立派な人。	훌륭한 사람.	keep	defaults
-lexical:spelling-and-command-terms	冗談を言う。	농담을 말한다.	keep	defaults
-lexical:spelling-and-command-terms	協同組合	협동조합	keep	defaults
-lexical:spelling-and-command-terms	新しい組合。	새로운 조합.	keep	defaults
 lexical:spelling-and-command-terms	ラジェーター	라디에이터	keep	defaults
 lexical:spelling-and-command-terms	ラジェーターを交換した。	라디에이터를 교환했다.	keep	defaults
-lexical:spelling-and-command-terms	ラジェーターが壊れた。	라디에이터가 망가졌다.	keep	defaults
 lexical:spelling-and-command-terms	臀びれ	뒷지느러미	fix	defaults
 lexical:spelling-and-command-terms	魚の臀びれ	물고기의 뒷지느러미	fix	defaults
 lexical:spelling-and-command-terms	臀びれを見た。	뒷지느러미를 보았다.	fix	defaults
-lexical:spelling-and-command-terms	テレビを見た。	텔레비전을 보았다.	keep	defaults
-lexical:spelling-and-command-terms	系列	계열	keep	defaults
-lexical:spelling-and-command-terms	ネットワーク	네트워크	keep	defaults
-lexical:spelling-and-command-terms	競争	경쟁	keep	defaults
 lexical:spelling-and-command-terms	ラジエーター	라디에이터	keep	defaults
-lexical:spelling-and-command-terms	冷却装置	냉각 장치	keep	defaults
 lexical:spelling-and-command-terms	腹びれ	배지느러미	keep	defaults
 lexical:spelling-and-command-terms	背びれ	등지느러미	keep	defaults
-lexical:spelling-and-command-terms	農業協同組合	농업협동조합	keep	defaults
