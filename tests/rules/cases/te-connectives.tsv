@@ -22,3 +22,16 @@ cx:te-request:30	ついてくれ。	뒤따라 줘.	fix	rewrites
 cx:te-request:30	貸してくれ……	빌려 줘……	fix	rewrites
 cx:te-request:30	貸してくれた。	!rule:cx:te-request:30	keep	rewrites
 cx:te-request:30	貸してくれる？	!rule:cx:te-request:30	keep	rewrites
+cx:te-request:15	中に、出して	안에, 내 줘	fix	rewrites
+cx:te-request:15	「中に出して」	「안에 내 줘」	fix	rewrites
+cx:te-request:15	「外に出して」	「밖에 내 줘」	fix	rewrites
+cx:te-request:15	「ここから出して！」	「여기에서 내 줘!」	fix	rewrites
+cx:te-request:15	「早く出して」	「빨리 내 줘」	fix	rewrites
+cx:te-request:15	「手を出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「取り出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「入れて」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「待って」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「出して、それから」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「出して？」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「心配ないから、元気出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	良太が車出して、5人で出かけた	!rule:cx:te-request:15	keep	rewrites
