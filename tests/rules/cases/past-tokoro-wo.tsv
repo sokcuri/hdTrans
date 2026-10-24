@@ -1,0 +1,8 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+dict:drops-conj:11	人が散ったところを見計らい、白崎に	사람이 진 곳을 가늠해, 시라사키에	fix	ending-defaults
+dict:drops-conj:11	抗議しようとしたところを、唇でふさがれた	항의하려고 한 곳을, 입술로 채워졌다	fix	ending-defaults
+dict:drops-conj:11	大ぶりになって体勢が崩れたところを狙った	큼직하게 되어 몸의 자세가 무너진 곳을 노렸다	fix	ending-defaults
+dict:drops-conj:11	そこからお前が住んでたところを割り出して、後は	거기에서 네가 살고 있던 곳을 산출해, 나머지는	fix	ending-defaults
+dict:drops-conj:11	予定してたところを全部回ったと思った	예정하고 있던 곳을 전부 돌았다고 생각했다	fix	ending-defaults
+dict:drops-conj:11	見たところ	보아하니	keep	ending-defaults
