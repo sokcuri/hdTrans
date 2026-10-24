@@ -1,0 +1,13 @@
+# 규칙: LEX-20
+rule	input	expected	kind	layer
+cx:value-after-loanword:10	デフォルト値を設定する。	디폴트값을 설정한다.	fix	rewrites
+cx:value-after-loanword:10	パラメータ値を変更する。	파라미터값을 변경한다.	fix	rewrites
+cx:value-after-loanword:10	シンクロ値が上がった。	싱크로값이 올랐다.	fix	rewrites
+cx:value-after-loanword:10	ハッシュ値を比較する。	해시값을 비교한다.	fix	rewrites
+cx:value-after-loanword:10	ステータス値である。	스테이터스값이다.	fix	rewrites
+cx:value-after-loanword:10	プロパティ値を取得する。	프롭퍼티값을 취득한다.	fix	rewrites
+cx:value-after-loanword:10	経験値を獲得した。	경험치를 획득했다.	keep	rewrites
+cx:value-after-loanword:10	数値が高い。	수치가 높다.	keep	rewrites
+cx:value-after-loanword:10	キーと値のペア。	키와 값의 페어.	keep	rewrites
+cx:value-after-loanword:10	改修値が上がった。	개수치가 올랐다.	keep	rewrites
+cx:value-after-loanword:10	その値段は高い。	그 가격은 비싸다.	keep	rewrites

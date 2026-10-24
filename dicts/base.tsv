@@ -133218,7 +133218,7 @@ ttt	ttt	K110			GN				jisjk:201744
 円天井	둥근 천정	I110			GN				jisjk:78158		
 円子	마루코	N130	QCTVPl		GN				jisjk:329988		
 円孔部	원형구멍부	I110			GN				jisjk:78148		
-円安	엔하락	N110		Ct	GN				jisjk:355835		
+円安	엔저	N110		Ct	GN				jisjk:355835		
 円安インプレ	엔화 약세 인플레이션	N110			BZ				jisjk:349696		
 円安ドル高	엔하락 달러상승	N110		Ct	GN				jisjk:357562		
 円安・ドル高	엔 하락, 달러 상승	N110			GN				jisjk:362181		
@@ -173186,7 +173186,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大難	대난	N110			GN				jisjk:18888		
 大雨	큰 비	N110	VFr		GN				jisjk:19001		
 大雨注意報	호우 주의보	I110	UTsUHr		GN				jisjk:65415		
-大雨警報	대우 경보	I110			GN				jisjk:111069		
+大雨警報	호우 경보	I110			GN				jisjk:111069		
 大雪	폭설	N110	VFr		GN				jisjk:18958		
 大雪山	다이세츠산	I110	QCT		GN				jisjk:65247		
 大雪山国立公園	다이세츠산 국립공원	N110	VPl		GN				jisjk:239682		
@@ -182400,7 +182400,7 @@ ttt	ttt	K110			GN				jisjk:201744
 容易にはおさま	용이하게는 가라&FI@	M428			GN				jisjk:148433		
 容易性	용이성	I110			GN				jisjk:78824		
 容止	기거 동작	N110			GN				jisjk:255020		
-容疑	용의	N110			GN	476	||1 &&3 P-1== "4**" M-1== "500" Y-1= "8"	기본형 동사 뒤에서 「容疑」를 고르고 앞 동사의 어미 번역을 활용형 8로 바꾼다. (미발동: rare-word)	jisjk:30042		
+容疑	혐의	N110			GN	476	||1 &&3 P-1== "4**" M-1== "500" Y-1= "8"	기본형 동사 뒤에서 「容疑」를 고르고 앞 동사의 어미 번역을 활용형 8로 바꾼다. (미발동: rare-word)	jisjk:30042		
 容疑者	용의자	I110	VHnUQf		GN				jisjk:78823		
 容積	용적	N110			GN				jisjk:30045		
 容積トン	용적톤	N110			GN				jisjk:255071		
@@ -229843,7 +229843,7 @@ ttt	ttt	K110			GN				jisjk:201744
 書類の山	서류 뭉치	N110			GN				jisjk:191929		
 書類入れ	서류넣은 것	I110			GN				jisjk:73833		
 書類箱	가라치	N110	VSt		GN				jisjk:203362		
-書類送検	서류 송검	N110	ULw	Hd	GN				jisjk:191927		
+書類送検	서류 송치	N110	ULw	Hd	GN				jisjk:191927		
 書風	서풍	N110			GN				jisjk:26065		
 曹こん	소콘	N110	VHn		GN				jisjk:240014		
 曹フンヒョン	조훈현	N130	QPN		GN				jisjk:209706		
@@ -230261,7 +230261,7 @@ ttt	ttt	K110			GN				jisjk:201744
 最重要視	가장 중요시	N110		Hd	GN				jisjk:184367		
 最長	최장	N110			GN				jisjk:36110		
 最長不倒距離	최장불도 거리	N110	VRw		GN				jisjk:232082		
-最頻値	최대 빈수	N110			GN				jisjk:232148		
+最頻値	최빈값	N110			GN				jisjk:232148		
 最首	사이슈	N130	QPN	Wa	GN				jisjk:12847		
 最首良夫	사이슈 요시오	N130	VHn		GN				jisjk:224900		
 最高	최고	N110			GN				jisjk:36095		
@@ -335290,8 +335290,8 @@ ttt	ttt	K110			GN				jisjk:201744
 送料	우송료	N110	VMo		GN				jisjk:27083		
 送料別	송료 별도	N110			GN				jisjk:200527		
 送本	서책 발송	N110		Hd	GN				jisjk:200467		
-送検	송검	N110			GN				jisjk:27077		
-送検	송검&AV@	M439			GN				jisjk:257429		
+送検	송치	N110			GN				jisjk:27077		
+送検	송치&AV@	M439			GN				jisjk:257429		
 送橋	오쿠리하시	N130	QCTVPl		GN				jisjk:279704		
 送毛山道	오쿠리게산도	I110	QCT		GN				jisjk:75600		
 送気筒	송기통	N110	VPe		GN				jisjk:239959		
