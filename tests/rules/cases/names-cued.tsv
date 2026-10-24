@@ -43,7 +43,7 @@ constraint:cued-name	「さすが、お姫様を守るナイトだね」	「역�
 constraint:cued-name	蛟が神と名乗って生贄を食らってた	has:신이라고	keep	lookup
 constraint:cued-name	鍛冶屋「剣の手入れなら任せとけ。」	has:대장간 「	keep	lookup
 constraint:cued-name	チェック、ワン、ツー…よーし。	has:원, 투	keep	lookup
-constraint:cued-name	げ、マジ！？	진짜!?	keep	lookup
+constraint:cued-name	げ、マジ！？	게, 진짜!?	keep	lookup
 constraint:cued-name	…富山、名古屋はまぁいいとして……千葉？！	has:도야마	keep	lookup
 constraint:cued-name	抜錨！鳥海、出撃します！	has:초카이	keep	lookup
 constraint:cued-name	「蛇ちゃんと蟹ちゃんをふたつずつですねー」	lacks:카니	keep	lookup
