@@ -813,7 +813,27 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
     return EncodeText(out);
 }
 
+namespace {
+
+// Whether text has the stem of a member of honorific.drawn-out (the member without its last
+// character) followed by ー, ～ or a vowel kana: the only places RewriteDrawnHonorifics changes.
+bool HasDrawnStem(std::string_view text) {
+    for (const std::string_view member : dict::ClassMembers("honorific.drawn-out")) {
+        const std::u32string h = DecodeText(member);
+        if (h.size() < 2) continue;
+        const std::string stem = EncodeText(std::u32string_view(h).substr(0, h.size() - 1));
+        for (size_t at = text.find(stem); at != std::string_view::npos; at = text.find(stem, at + 1)) {
+            const std::u32string next = DecodeText(text.substr(at + stem.size(), 4));
+            if (!next.empty() && (IsDash(next[0]) || IsSmallVowel(next[0]) || IsSmallVowel(next[0] - 1))) return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
 std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!HasDrawnStem(text)) return std::string(text);
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;

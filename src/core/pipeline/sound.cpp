@@ -394,7 +394,9 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
-    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false) const;
+    // With ending, the end rows go there instead of into user.
+    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
+                     size_t* ending = nullptr) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
@@ -463,13 +465,19 @@ bool SoundText::PauseAt(size_t p) const {
 // The length in characters of the longest base key, plain-dictionary key and name-layer
 // key that start at character p; kana spellings do not count, nor with skipEnds the
 // endings of end rows.
-void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds) const {
+void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds, size_t* ending) const {
     base = user = name = 0;
+    if (ending != nullptr) *ending = 0;
     const size_t end = std::min(rs_.size(), p + 24);
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && (c.user->kana || (skipEnds && c.user->end))) continue;
+        if (c.user != nullptr && c.user->kana) continue;
         const size_t n = text::RuneCount(c.source);
+        if (c.user != nullptr && c.user->end && ending != nullptr) {
+            *ending = std::max(*ending, n);
+            continue;
+        }
+        if (c.user != nullptr && skipEnds && c.user->end) continue;
         if (c.user != nullptr && c.user->nameLayer) {
             name = std::max(name, n);
         } else if (c.user != nullptr) {
@@ -1106,10 +1114,10 @@ size_t SoundText::WordLen(size_t p) const {
 // counts only where the sentence may end after it, not before kana or a kanji that go on
 // (関連でちょこっと: で, not the でち of 朝でち).
 size_t SoundText::RunningWordLen(size_t p) const {
-    const size_t all = WordLen(p);
-    size_t base = 0, user = 0, name = 0;
-    LongestKeys(p, base, user, name, true);
+    size_t base = 0, user = 0, name = 0, ending = 0;
+    LongestKeys(p, base, user, name, false, &ending);
     const size_t words = std::max({base, user, name, size_t{1}});
+    const size_t all = std::max(words, ending);
     const size_t e = p + all;
     if (words < all && e < rs_.size() &&
         (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])))) {

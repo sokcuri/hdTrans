@@ -308,6 +308,11 @@ bool SuffixHost(const Item* before) {
 // starts at that noun and goes past it (たまご + っち of たまごっち); elsewhere its records
 // leave the candidates, so that the longer word or the kana around it are read instead.
 Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
+    bool suffix = false;
+    for (const Record* r = records; r != nullptr && !suffix; r = r->child) {
+        suffix = dict::InClass("honorific.after-person", r->source);
+    }
+    if (!suffix) return records;
     const Item* before = WordBefore(cursor, token, parent);
     bool covered = false;
     if (before != nullptr && before->tokenIndex == token && before->start < cursor) {
