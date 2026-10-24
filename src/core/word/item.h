@@ -138,6 +138,7 @@ public:
     int selectionFlag = 0;  // set by the output stage
     bool adjectival = false;
     bool lexical = false;
+    std::string appended;  // Korean written right after the word, outside its count and conjugation (append-target)
 
     // Entry accessors: i is an entry of the group; outside it (-1) they read empty.
     std::string_view EntryText(int i) const;

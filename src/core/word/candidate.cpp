@@ -483,6 +483,17 @@ std::string_view CanonicalPair(char32_t r, std::string& scratch, bool& cut) {
 
 }  // namespace
 
+bool FractionAt(std::string_view text, std::size_t size) {
+    if (size > text.size()) return false;
+    const std::string_view after = text.substr(size);
+    for (const std::string_view of : dict::ClassMembers("fraction.of")) {
+        if (!after.starts_with(of) || after.size() == of.size()) continue;
+        const std::string_view rest = after.substr(of.size());
+        if (IsDigit(rest[0]) || dict::InClass("fraction.numerator-lead", FirstChar(rest))) return true;
+    }
+    return false;
+}
+
 bool NounEndAt(std::string_view text) { return NounEnd(text); }
 
 bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal) {
@@ -888,6 +899,54 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
     return true;
 }
 
+// Whether the dictionary words at a number of one kanji only spell it with one counter read
+// with its Sino-Korean syllable (四面 사면, 一面 일면) and a follower.count member comes after
+// them or the times sign before them: the words count there (四面×四面 네 면×네 면, 一面ずつ
+// 한 면씩). Elsewhere they keep their reading (四面を囲まれた 사면을 둘러싸인). text is the
+// text the words start in token.
+bool Worker::CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token) {
+    const std::string_view source = number.source;
+    if (!settings.improvements.kanjiNumbers || text::RuneCount(source) != 1 || number.target.empty() ||
+        !IsDigit(number.target[0])) {
+        return false;
+    }
+    const std::string reading = SinoKoreanNumber(number.target);
+    std::size_t length = 0;
+    for (Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() <= source.size()) continue;
+        if (!std::string_view(r->source).starts_with(source)) return false;
+        const std::string_view rest = std::string_view(r->source).substr(source.size());
+        if (FirstChar(rest).size() != rest.size()) return false;
+        // A name spelled with the count (三面 미즈라) is no other reading of it.
+        if (r->partCode.starts_with("N13") || r->semantic.starts_with("QPN") || r->semantic.starts_with("QCT")) continue;
+        bool counter = false;
+        if (const Lookup l = DoLookup(rest, kModeGeneral); l.count != 0) {
+            for (Record* c = l.records; c != nullptr && !counter; c = c->child) counter = c->source == rest && Has(c->attr, "Ct");
+        }
+        const std::optional<char32_t> syllable = dict::Written(text::DecodeRune(rest).cp);
+        if (!counter || reading.empty() || !syllable) return false;
+        std::string unit;
+        text::AppendRune(unit, *syllable);
+        std::string target;
+        for (const char c : std::string_view(r->target)) {
+            if (c != ' ') target += c;
+        }
+        if (target != reading + unit) return false;
+        length = r->source.size();
+    }
+    if (length == 0 || length > text.size()) return false;
+    // The times sign is a token of its own; the count after it counts too (四面×四面).
+    const auto follower = [](std::string_view s) {
+        return std::ranges::any_of(dict::ClassMembers("follower.count"), [&](std::string_view f) { return s.starts_with(f); });
+    };
+    std::string_view after = text.substr(length);
+    if (after.empty() && token + 1 < TokenCount()) after = tokens.Canonical(static_cast<std::size_t>(token + 1));
+    const std::string_view before = token > 0 ? tokens.Canonical(static_cast<std::size_t>(token - 1)) : std::string_view();
+    const bool timesBefore = dict::InClass("mark.times", before) &&
+                             text.size() == tokens.Canonical(static_cast<std::size_t>(token)).size();
+    return follower(after) || timesBefore;
+}
+
 // Whether the counter of a count word that is the longest word at the number (1回 of 1回復した,
 // but not of 一回転 일회전) starts a verbal noun of the dictionary that goes on past it (回復)
 // and is followed by its する, a particle, a mark or nothing: the number counts the action of
@@ -1167,7 +1226,8 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         const Lookup dictionary = DoLookup(text, kModeGeneral);
         if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text) ||
-            VerbalNounAtCounter(dictionary.records, *numeric, text)) {
+            VerbalNounAtCounter(dictionary.records, *numeric, text) || FractionAt(text, numeric->source.size()) ||
+            CountBeforeFollower(dictionary.records, *numeric, text, token)) {
             return ProcessCandidateRecord(full, cursor, token, numeric, parent);
         }
         found = dictionary;

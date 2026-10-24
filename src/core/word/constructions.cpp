@@ -446,6 +446,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"select-target", CxVerb::SelectTarget},
         {"take-target", CxVerb::TakeTarget},
         {"set-target", CxVerb::SetTarget},
+        {"append-target", CxVerb::AppendTarget},
         {"set-ending", CxVerb::SetEnding},
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
@@ -802,7 +803,11 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
         }
         case CxField::Gram: {
             const std::string_view codes = it->GAttr(it->selected);
-            for (std::size_t off = 0; off < a.value.size() && !v; off += 2) v = Has(codes, std::string_view(a.value).substr(off, 2));
+            for (std::size_t off = 0; off < a.value.size() && !v; off += 2) {
+                const std::string_view code = std::string_view(a.value).substr(off, 2);
+                // Qw: a question word is the word or comes before it in its sentence, as in rules.
+                v = code == "Qw" ? it->AfterQuestionWord() : Has(codes, code);
+            }
             break;
         }
         case CxField::FirstWord: {
@@ -922,6 +927,11 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         }
         case internal::CxVerb::TakeTarget: TakeTarget(it, At(it->Code(it->selected), 0), a.value, source); break;
         case internal::CxVerb::SetTarget: it->AssignEntrySurface(it->selected, a.value, source); break;
+        case internal::CxVerb::AppendTarget:
+            // The word keeps its candidate; -why names the row that wrote after it.
+            it->appended += a.value;
+            it->choice = source;
+            break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
         case internal::CxVerb::ReplaceHead: {
             const std::string_view target = it->EntryText(it->selected);

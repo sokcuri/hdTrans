@@ -881,7 +881,7 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
             remainder = FilterKana(remainder, settings_);
         }
     }
-    std::string translated = WriteCount(i, ApplyParenthesisTextFilter(Build(i, 0, {}), i));
+    std::string translated = WriteCount(i, ApplyParenthesisTextFilter(Build(i, 0, {}), i)) + item.appended;
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);

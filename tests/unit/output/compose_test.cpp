@@ -18,6 +18,7 @@ struct Word {
     const char* target;
     const char* ending = "";
     const char* firstTarget = nullptr;
+    const char* appended = "";
 };
 
 struct CompositionCase {
@@ -48,6 +49,7 @@ void CheckComposition(const CompositionCase& c, bool literal = false, bool clean
             item.directIndex = 0;
             item.ending = {"500", "", word.ending};
         }
+        item.appended = word.appended;
         tokens[0].text += item.surface;
         items.push_back(std::move(item));
     }
@@ -238,6 +240,10 @@ HD_TEST(compose_native_counts) {
         {{{"1杯", "110", "", "한잔"}, {"目", "110", "Ct", "째"}}, {2}, "1잔째."},
         {{{"年", "110", "Ct", "년"}, {"に", "200", "", "에"}, {"1", "110", "Nd", "1"}, {"度", "110", "Ct", "번"}}, {2, 4}, "년에 한 번."},
         {{{"1", "110", "Nd", "1"}, {"人", "110", "Ct", "명"}}, {2}, "1명."},
+        // Korean written after a count stays after the count as written (もう一匹 한 마리 더).
+        {{{"一匹", "110", "", "한마리", "", nullptr, " 더"}}, {1}, "한 마리 더."},
+        {{{"三", "110", "NjNd", "3"}, {"匹", "110", "Ct", "마리", "", nullptr, " 더"}}, {2}, "세 마리 더."},
+        {{{"1", "110", "Nd", "1"}, {"錠", "110", "Ct", "정", "", nullptr, " 더"}}, {2}, "1정 더."},
     };
     for (const auto& c : cases) CheckComposition(c, true);
 }

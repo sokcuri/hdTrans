@@ -330,6 +330,76 @@ HD_TEST(pipeline_kata_words) {
     HD_CHECK_EQ(internal::KeyTags("から", ctx, *snap), std::string());
 }
 
+HD_TEST(pipeline_kata_native_words) {
+    // Native words in katakana for emphasis read as their hiragana spelling where no katakana
+    // word reads the run: verb and adjective stems that the text after them conjugates or runs
+    // on from, and adverbs of the native shapes.
+    const auto snap = Snapshot(
+        "かぶれ\t짓무르&AA@\tM417\t\t\tGN\t1\nなめ\t깔&AY@\tM437\t\t\tGN\t2\n"
+        "しっかり\t제대로\tE300\t\t\tGN\t3\nそろそろ\t슬슬\tE300\t\t\tGN\t4\n"
+        "ぶち殺\t때려죽&AJ@\tM443\t\t\tGN\t5\nパラパラ\t파라파라\tN110\t\t\tGN\t6\n"
+        "ぱらぱら\t훌훌\tE311\t\t\tGN\t7\nクラス\t반\tN110\t\t\tGN\t8\nくら\t살&AA@\tM423\t\t\tGN\t9\n"
+        "びび\t쫄&AA@\tM418\t\t\tGN\t10\nくさ\t$AA@\tH7U0\t\t\tGN\t11\nまるまる\t꼬박\tE301\t\t\tGN\t12\n");
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"カブれない", "かぶれない"},
+        {"ナメられた", "なめられた"},
+        {"ビビッた", "びびった"},          // the closing ッ starts the conjugation
+        {"ブチ殺す", "ぶち殺す"},          // the stem runs on into the kanji
+        {"超クサい", "超くさい"},
+        {"シッカリと結ぶ", "しっかりと結ぶ"},
+        {"ソロソロ帰る", "そろそろ帰る"},
+        {"パラパラと降る", "ぱらぱらと降る"},  // a row that spells the sound is no reading
+        {"マルマルです", "マルマルです"},      // a unit said twice before the copula
+        {"パラパラという", "パラパラという"},  // と that quotes
+        {"ナメちゃん", "ナメちゃん"},          // an honorific
+        {"ナメくぅん", "ナメくぅん"},          // a drawn honorific
+        {"ビビの", "ビビの"},                  // a particle
+        {"クラスの皆", "クラスの皆"},          // the stem does not cover the run
+        {"クロ・カブれない", "クロ・カブれない"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+    const dict::KeySet named = {"カブ"};
+    ctx.named = &named;
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("カブれない"), ctx, *snap)), std::string("カブれない"));
+    ctx.named = nullptr;
+}
+
+HD_TEST(pipeline_kata_native_words_names) {
+    // A person of the name layer before し, さ, す or せ is the name, which a form of する or a
+    // word of its own follows (ナオして, ナオすごい); other endings still make it a stem (ナメた).
+    dict::File base, names;
+    base.name = "base.tsv";
+    base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n"
+                "なお\t고&AO@\tM433\t\t\tGN\t1\n"
+                "なめ\t깔&AY@\tM437\t\t\tGN\t2\n";
+    names.name = "names.tsv";
+    names.text = "#! layer=names\nkey\tko\tpos\tsem\tgram\tdict\tid\n"
+                 "ナオ\t나오\tN130\tQPNVHn\tWb\tGN\t3\n"
+                 "ナメ\t나메\tN130\tQPNVHn\tWb\tGN\t4\n";
+    const auto snap = dict::Load({base, names}).snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ナオして", "ナオして"},
+        {"ナオすごい", "ナオすごい"},
+        {"ナメた", "なめた"},
+        {"ナメられた", "なめられた"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+}
+
 HD_TEST(pipeline_kata_speech) {
     const auto snap = Snapshot("わたし\t나\tN110\t\t\tGN\t1\nねこ\t고양이\tN110\t\t\tGN\t2\nロボット\t로봇\tN110\t\t\tGN\t3\n");
     HD_REQUIRE(snap != nullptr);

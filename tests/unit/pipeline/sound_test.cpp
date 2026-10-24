@@ -345,6 +345,9 @@ HD_TEST(pipeline_sound) {
         {"ホラホラと急かす", "ほらほらと急かす"},
         {"ネエネエと袖", "ねえねえと袖"},
         {"メキメキと", "메키메키"},
+        // A sound in ッ ends before the copula, which no verb ending starts after ッ.
+        {"手応えはサクッだった", "手応えは싹둑だった"},
+        {"サクッで終わる", "싹둑で終わる"},
         // と before する goes after a mimetic even where a key starts with it.
         {"トロンとしていた", "몽롱していた"},
         // A sound does not end inside the katakana word after it (するり).

@@ -126,6 +126,7 @@ private:
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
+    bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
     // (noun.realm-compound, and noun.realm-province-compound after a province) gives it its 国 (美濃国境
@@ -192,5 +193,10 @@ bool NounBefore(std::string_view text);
 
 // A plain-dictionary ending group.
 bool OwnedGroup(const Group* g);
+
+// Whether the number at the start of text, of size bytes, is the denominator of a fraction:
+// fraction.of and a number or a question word for one follow it (十分の一 10분의 1, 三分の二
+// 3분의 2, 十二分の一 12분의 1), so that a word spelled with the number (十分 충분히) gives way.
+bool FractionAt(std::string_view text, std::size_t size);
 
 }  // namespace hdTrans::word

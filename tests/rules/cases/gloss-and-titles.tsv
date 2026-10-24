@@ -17,7 +17,7 @@ phrase:今のは	「……！　……今のは」	「……! ……방금 그�
 names:name-line	高峰	타카미네	fix	normalize
 names:name-line	小太刀	코다치	fix	normalize
 names:name-line	慶	케이	fix	normalize
-names:name-line	愛	애	keep	normalize
+names:name-line	愛	사랑	keep	normalize
 names:name-line	クマ	곰	keep	normalize
 names:name-line	糸	실	keep	normalize
 dict:jisjk:101466	新編「第二航空戦隊」出撃せよ！	신편 「제2항공전대」출격하라!	fix	lookup

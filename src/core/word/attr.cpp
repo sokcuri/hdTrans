@@ -297,10 +297,8 @@ bool Item::ReadsCount(int i) {
     std::string_view rest = s.substr(k);
     if (rest.empty()) return numeral;
     // A fraction (五分の一) and a count with a half (四畳半, 一時間半) are counts too.
-    if (rest.starts_with("分の")) {
-        const std::string_view m = rest.substr(std::string_view("分の").size());
-        const char32_t r = text::DecodeRune(m).cp;
-        return text::IsDigit(r) || std::u32string_view(U"一二三四五六七八九十百千").find(r) != std::u32string_view::npos;
+    if (std::ranges::any_of(dict::ClassMembers("fraction.of"), [&](std::string_view of) { return rest.starts_with(of); })) {
+        return FractionAt(s, k);
     }
     if (rest.size() > std::string_view("半").size() && rest.ends_with("半")) rest.remove_suffix(std::string_view("半").size());
     if (w == nullptr || rest == "月" || rest == "時") return false;
@@ -338,6 +336,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Kh") return KoreanSpan();
         // Hp: a sentence end, an ellipsis or a dash right before the word.
         if (c == "Hp") return AfterPause(true);
+        // Rw: the word repeats the word written right before it (the second 畑 of 畑畑).
+        if (c == "Rw") return prev != nullptr && prev->JoinsNext() && prev->group->surface == group->surface;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;

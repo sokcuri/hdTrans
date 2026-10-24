@@ -1,0 +1,54 @@
+# 규칙: LEX-26
+rule	input	expected	kind	layer
+defaults:lone-kanji	　朝。	 아침.	fix	defaults
+defaults:lone-kanji	川	강	fix	defaults
+defaults:lone-kanji	畑	밭	fix	defaults
+defaults:lone-kanji	池	연못	fix	defaults
+defaults:lone-kanji	家	집	fix	defaults
+defaults:lone-kanji	人	사람	fix	defaults
+defaults:lone-kanji	総員起こし！朝です！朝！	총원 기상! 아침입니다! 아침!	fix	defaults
+defaults:lone-kanji	後部に直撃！？ 嘘！	후부에 직격!? 거짓말!	fix	defaults
+defaults:lone-kanji	「……聞こえてた？　話」	「……들렸어? 이야기」	fix	defaults
+defaults:lone-kanji	「あー。海」	「아―. 바다」	fix	defaults
+defaults:lone-kanji	「夢っ！　夢！　気が早い！！」	「꿈! 꿈! 성질이 급하다!!」	fix	defaults
+defaults:lone-kanji	≪噂。私っていつからこんな人気者になったのかしら≫	≪소문. 나는 언제부터 이런 인기인이 된 걸까≫	fix	defaults
+defaults:lone-kanji	ない。次。ない。次。	없다. 다음. 없다. 다음.	fix	defaults
+defaults:lone-kanji	んああ！昔！昔だ！	응아아! 옛날! 옛날이다!	fix	defaults
+defaults:lone-kanji	雨。梅雨	비. 장마	fix	defaults
+defaults:lone-kanji	春。桜が綺麗。	봄. 벚꽃이 예쁘다.	fix	defaults
+defaults:lone-kanji	何も言えなくて...夏	아무것도 말할 수 없어서...여름	fix	defaults
+defaults:lone-kanji	フタヒトマルマル。夜......。	2100. 밤.......	fix	defaults
+defaults:lone-kanji	　　　　犬　　倉庫として作ったけどクロたちの家になった	    개　　창고로서 만들었지만 쿠로들의 집이 되었다	fix	defaults
+dict:jisjk:361288	15:06着	15:06착	keep	local
+dict:jisjk:361288	東京着	도쿄착	keep	local
+dict:jisjk:115844	― 序 ―	― 서 ―	keep	defaults
+dict:jisjk:115844	第一章　序	제1장 서	keep	defaults
+defaults:lone-kanji	敵！発見！	적! 발견!	keep	defaults
+defaults:lone-kanji	男	남자	keep	defaults
+defaults:lone-kanji	女	여자	keep	defaults
+defaults:lone-kanji	続	속	keep	defaults
+defaults:lone-kanji	一	1	fix	defaults
+defaults:lone-kanji	（月）	(월)	keep	defaults
+G70	月、水、金に通う	월, 수, 금에 다닌다	keep	global-stem
+defaults:lone-kanji	― 梅 ―	― 매화 ―	fix	defaults
+dict:jisjk:361288	服を二着買った。	옷을 두 벌 샀다.	keep	global-stem
+dict:jisjk:116242	　　　　便　　トイレ	rule:dict:jisjk:116242=변	fix	local
+dict:jisjk:116242	次の便で行く。	!rule:dict:jisjk:116242	keep	local
+dict:jisjk:344381	中	중	keep	local
+dict:jisjk:344381	【中】	【중】	keep	local
+dict:jisjk:344381	中。	중.	keep	local
+dict:jisjk:344381	中は暗い	!rule:dict:jisjk:344381	keep	local
+dict:jisjk:344381	その中	!rule:dict:jisjk:344381	keep	local
+dict:jisjk:363622	弱	약	keep	local
+dict:jisjk:363622	【弱】	【약】	keep	local
+dict:jisjk:363622	震度5弱	rule:dict:jisjk:363622=약	keep	local
+dict:jisjk:363622	攻撃には、強、中、弱、の3つがあって、	공격에는, 강, 중, 약, 의 3개가 있어,	keep	global-stem
+dict:jisjk:362066	丙	병	keep	local
+dict:jisjk:362066	【丙】	【병】	keep	local
+dict:jisjk:362066	甲、乙、丙	갑, 을, 병	keep	global-stem
+dict:jisjk:337694	吉	길	keep	local
+dict:jisjk:337694	【吉】	【길】	keep	local
+dict:jisjk:337694	吉と出るか凶と出るか	!rule:dict:jisjk:337694	keep	local
+dict:jisjk:259274	訳	역	keep	local
+dict:jisjk:259274	【訳】	【역】	keep	local
+dict:jisjk:259274	そういう訳だ。	!rule:dict:jisjk:259274	keep	local
