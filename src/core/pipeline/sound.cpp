@@ -689,13 +689,15 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
-    // (見て！ぽい～！ 포이~!), nor is a sound with no word right before it, which an ending
-    // would follow, that ends in its と or before no kanji or katakana (敬礼！ぴょん！ 뿅,
-    // ぴょんと跳ねた 폴짝; not ぽい捨て).
-    const bool beforePause = PauseAt(best.end) || (best.end < rs_.size() && In(rs_[best.end], U"…‥"));
+    // (見て！ぽい～！ 포이~!), nor is a sound that an ending cannot follow: after another sound
+    // of its chain, at the start of an utterance or after a pause or an ellipsis, when it ends
+    // in its と or comes before no kanji or katakana (ありがとぴょん 고마워뿅, 敬礼！ぴょん！ 뿅,
+    // ぴょんと跳ねた 폴짝; not ぽい捨て, nor やん after another mark: た↓ん↑やん↓).
+    const auto pauseAt = [&](size_t k) { return PauseAt(k) || (k < rs_.size() && In(rs_[k], U"…‥")); };
+    const bool beforePause = pauseAt(best.end);
     size_t keyLen = chosen->key.size();
     if (chosen->key.back() == U'ト') keyLen--;
-    const bool alone = (p == 0 || !text::IsLetter(f_[p - 1])) &&
+    const bool alone = (inChain || UtteranceStart(p) || pauseAt(p - 1)) &&
                        (keyLen < chosen->key.size() || best.end >= rs_.size() ||
                         (!IsKanjiRune(rs_[best.end]) && !IsKatakanaRune(rs_[best.end])));
     size_t base = 0, user = 0, name = 0;

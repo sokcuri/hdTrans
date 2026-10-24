@@ -1299,12 +1299,14 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
     return out;
 }
 
-std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows) {
     std::string tags;
     for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
         if (c.codes != nullptr && !c.codes->part.Empty()) tags += c.codes->part.Tag();
     }
-    ForUserEntries(s, ctx, [&](const dict::UserEntry& e) { tags += e.Part().Tag(); });
+    ForUserEntries(s, ctx, [&](const dict::UserEntry& e) {
+        if (endRows || !e.end) tags += e.Part().Tag();
+    });
     return tags;
 }
 

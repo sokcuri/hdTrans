@@ -786,6 +786,7 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"ぴょんと跳ねた", "폴짝 跳ねた"},
         {"凄いぴょん！", "凄いぴょん！"},
         {"学校でちらっと見た", "学校で힐끗 見た"},
+        {"ありがとぴょん！", "고마워뿅！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
@@ -983,12 +984,16 @@ HD_TEST(pipeline_onbin_u) {
 }
 
 // An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
-// a longer word it starts takes the mark after that word, also with no word before it.
+// a longer word it starts takes the mark after that word, also with no word before it. A verb
+// stem and its continuative kana before it are no name (かみつき).
 HD_TEST(pipeline_drawn_honorifics) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
                                      "ちゃんと\t제대로\tE300\t1\n"
-                                     "ちゃう\t아니\tM100\t2\n"}});
+                                     "ちゃう\t아니\tM100\t2\n"
+                                     "かみつ\t물\tM100\t3\n"
+                                     "みつき\t미츠키\tN130\t4\n"
+                                     "みどり\t미도리\tN130\t5\n"}});
     HD_REQUIRE(loaded.errors.empty());
     HD_REQUIRE(loaded.snapshot != nullptr);
     LineContext ctx;
@@ -1005,6 +1010,8 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"うくぅんんっ！", "うくぅんんっ！"},
         {"びちゃーん！", "びちゃーん！"},
         {"田中さん", "田中さん"},
+        {"かみつきさあん", "かみつきさあん"},
+        {"みどりさああん", "みどりさん\uE00A"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

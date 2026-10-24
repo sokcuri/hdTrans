@@ -67,7 +67,9 @@ class Emphasis {
 public:
     Emphasis(const LineContext& ctx, const dict::Snapshot& snap) : ctx_(ctx), snap_(snap) {}
 
-    std::string Tags(std::u32string_view s) const { return KeyTags(EncodeText(s), ctx_, snap_); }
+    // The tags of the keys spelled s; the ending of an end row is no word a drawl belongs to
+    // (逆転負けぇえぇッ: 負け drawn out, not the けぇ of 書くけぇ).
+    std::string Tags(std::u32string_view s) const { return KeyTags(EncodeText(s), ctx_, snap_, false); }
 
     // The length of the longest dictionary key (base or plain) that starts rs.
     size_t LongestKey(std::u32string_view rs) const {
@@ -823,8 +825,21 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             const size_t word = e.LongestKey(std::u32string_view(plain).substr(i));
             // A name before it: kanji or katakana, or two or more hiragana (みどりさああん; not the
             // cry うくぅんん or the sound びちゃーん).
-            const bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
-                                             (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
+            bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
+                                       (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
+            // Not after a verb in its continuative, a stem and one kana, where the stem starts
+            // before any noun that ends at the honorific (かみつきさあん; not みどりさああん).
+            if (afterWord && IsHiraganaRune(rs[i - 1])) {
+                size_t from = i - 1;
+                while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+                for (size_t j = from; j + 1 < i; j++) {
+                    if (e.Tags(std::u32string_view(rs).substr(j, i - j)).find('N') != std::string::npos) break;
+                    if (e.Tags(std::u32string_view(rs).substr(j, i - 1 - j)).find_first_of("MH") != std::string::npos) {
+                        afterWord = false;
+                        break;
+                    }
+                }
+            }
             if (word <= h.size() && !afterWord) continue;
             const size_t mark = i + std::max(word, h.size());
             plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);

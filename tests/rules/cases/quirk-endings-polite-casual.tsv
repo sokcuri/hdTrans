@@ -32,3 +32,4 @@ ending:kee	学生じゃけえ	학생이니까	keep	builtin-ending
 ending:dechi	これは本当です。	이것은 사실입니다.	keep	builtin-ending
 sound:end-row-key-goes-on	婚約関連でちょこっと両親が登場した。	약혼 관련으로 살짝 부모님이 등장했다.	keep	sound
 sound:end-row-key-goes-on	学校でちらっと見た	학교에서 힐끗 보았다	keep	sound
+normalize:drawl-not-ending	「えぇえぇッ？！ 逆転負けぇえぇッ？！？！」	「에에에엣?! 역전패애애애?!?!」	keep	normalize
