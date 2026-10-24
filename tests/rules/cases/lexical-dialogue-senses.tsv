@@ -136,3 +136,4 @@ builtin:phrases	サラももっと頑張ろ！	has:좀 더 힘내자!	fix	builti
 builtin:phrases	一緒に頑張ろ？	has:힘내자?	fix	builtin-phrase
 builtin:phrases	明日も頑張ろう。	내일도 노력하자.	keep	builtin-phrase
 builtin:phrases	頑張ろうね	lacks:힘내자	keep	builtin-phrase
+dict:jisjk:40671	「お風呂、電気付いてなかったよ」	「목욕, 전기 붙지 않았어」	current	lookup
