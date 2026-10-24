@@ -67,7 +67,6 @@ chmod +x "$tmp/slow"
 python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" "$tmp/pids" "$tmp" <<'PY'
 import os, signal, subprocess, sys, time
 measure, slow, dicts, pids, tmp = sys.argv[1:]
-work = os.path.join(tmp, "work", "slow")
 p = subprocess.Popen(["sh", measure, "-c", slow, "-d", dicts, "slow"], start_new_session=True,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
