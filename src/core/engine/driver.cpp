@@ -658,13 +658,15 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     return out;
 }
 
-// The columns of s, each with the column separator after it ("" after the last), as
-// pipeline::Segment cuts a line of the text path.
+// The columns of s, each with the column separator or escape after it ("" after the last),
+// as pipeline::Segment cuts a line of the text path.
 std::vector<std::pair<std::string_view, std::string_view>> Columns(std::string_view s) {
     std::vector<std::pair<std::string_view, std::string_view>> out;
     std::size_t from = 0;
     for (std::size_t i = 0; i < s.size();) {
-        if (const std::size_t end = pipeline::internal::ColumnGap(s, i, false, false); end != i) {
+        std::size_t end = pipeline::internal::ColumnGap(s, i, false, false);
+        if (end == i) end = pipeline::internal::EscapeGap(s, i, false, false);
+        if (end != i) {
             out.emplace_back(s.substr(from, i - from), s.substr(i, end - i));
             from = i = end;
             continue;

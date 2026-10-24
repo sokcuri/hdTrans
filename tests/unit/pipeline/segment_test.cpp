@@ -173,6 +173,17 @@ HD_TEST(pipeline_segment_column_gaps) {
         {"友人  : 「いつき！」", "友人|[  ]: 「いつき！」"},
         {"名前  はじまり", "名前|[  ]はじまり"},
         {"猫が   好き", "猫が|[   ]好き"},
+        // An escape typed as two characters, with the blanks around it, and a run of them.
+        {"「むー\\n食べてる」", "「むー|[\\n]食べてる」"},
+        {"好き \\n だよ", "好き|[ \\n ]だよ"},
+        {"あ\\r\\nい", "あ|[\\r\\n]い"},
+        {"名前\\t職業", "名前|[\\t]職業"},
+        // Not at the edges of a line, in Latin text or before a Latin word.
+        {"\\nこんにちは", "\\nこんにちは"},
+        {"こんにちは\\n", "こんにちは\\n"},
+        {"C:\\temp\\nに保存", "C:\\temp\\nに保存"},
+        {"本当\\\\nだよ", "本当\\\\nだよ"},
+        {"式\\notagを", "式\\notagを"},
         {"猫が　　好き", "猫が|[　　]好き"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(text(c.in), std::string(c.want));

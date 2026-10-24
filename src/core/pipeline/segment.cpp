@@ -110,6 +110,28 @@ size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) 
     return end;
 }
 
+size_t EscapeGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter) {
+    // Only the first blank of a run reads the run, so that a long run costs one pass.
+    if (i >= s.size() || (s[i] != '\\' && !IsBlank(text::DecodeRune(s.substr(i)).cp))) return i;
+    const text::Rune last = LastRune(s.substr(0, i));
+    if (i == 0 ? !lineBefore : (last.cp == U'\n' || last.cp == U'\r')) return i;
+    if (s[i] != '\\' && IsBlank(last.cp)) return i;
+    const auto lower = [](char c) { return c >= 'a' && c <= 'z'; };
+    const auto escape = [&](size_t at) {
+        return at + 1 < s.size() && s[at] == '\\' && (s[at + 1] == 'n' || s[at + 1] == 'r' || s[at + 1] == 't') &&
+               (at + 2 == s.size() || !lower(s[at + 2]));
+    };
+    size_t at = i + RunOf(s.substr(i), IsBlank);
+    // An escape, not a backslash in Latin text (C:\temp, \\n) or before a Latin word (\notag).
+    const char before = at > 0 ? s[at - 1] : ' ';
+    if (lower(before) || (before >= 'A' && before <= 'Z') || (before >= '0' && before <= '9') || before == '\\') return i;
+    if (!escape(at)) return i;
+    // A run of escapes (\r\n) with the blanks between them.
+    while (escape(at)) at += 2 + RunOf(s.substr(at + 2), IsBlank);
+    if (at == s.size() ? !lineAfter : (s[at] == '\n' || s[at] == '\r')) return i;
+    return at;
+}
+
 bool BetweenWords(std::string_view s, size_t i) {
     auto word = [](char32_t r) { return r != text::kReplacement && !IsBlank(r) && r != U'\n' && r != U'\r'; };
     const text::Rune last = LastRune(s.substr(0, i));
@@ -140,7 +162,9 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
         size_t start = 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
-            if (const size_t end = ColumnGap(t, i, k > 0, k + 1 < pieces.size()); end != i) {
+            size_t end = ColumnGap(t, i, k > 0, k + 1 < pieces.size());
+            if (end == i) end = EscapeGap(t, i, k > 0, k + 1 < pieces.size());
+            if (end != i) {
                 output::Add(part, t.substr(start, i - start));
                 if (!part.empty()) {
                     parts.push_back(std::move(part));
