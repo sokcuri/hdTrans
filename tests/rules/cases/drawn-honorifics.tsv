@@ -64,3 +64,8 @@ sound:drawn-honorific	ちゃーんと覚えてるんだから	제대로~ 기억�
 sound:drawn-honorific	お休みはちゃーんと取らないとー！	휴가는 제대로~ 취하지 않으면~!	keep	sound
 sound:drawn-honorific	ちゃーんと目で追ってたさ	제대로~ 눈으로 쫓고 있었어	keep	sound
 sound:drawn-honorific	ちゃ～んと果汁が入ってるんだから	제대로~ 과즙이 들어가 있으니까	keep	sound
+sound:drawn-honorific	「お待たせちゃーん」	「기다렸지~」	fix	sound
+sound:drawn-honorific	おまたせちゃ～ん♪	기다렸지~♪	fix	sound
+sound:drawn-honorific	お待たせちゃん！	기다렸지!	fix	sound
+sound:drawn-honorific	お待たせー	기다렸지~	keep	sound
+sound:drawn-honorific	「ゆるさーーーん！」	「용서하지 않아~!」	keep	sound

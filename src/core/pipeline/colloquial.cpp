@@ -918,18 +918,22 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
                                        (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
             // Not after a verb in its continuative, a stem of two or more characters that is no
-            // noun and one kana, where the stem starts before any noun or person name that ends at
-            // the honorific (かみつきさあん; not みどりさああん, つぐみちゃーん, みなさーん).
+            // noun and one kana, or after a verb form of two or more characters that is no noun,
+            // where the stem starts before any noun or person name that ends at the honorific
+            // (かみつきさあん, お待たせちゃーん; not みどりさああん, つぐみちゃーん, みなさーん).
             if (afterWord && IsHiraganaRune(rs[i - 1])) {
                 size_t from = i - 1;
                 while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
                 for (size_t j = from; j + 1 < i; j++) {
-                    if (e.NounOrPerson(std::u32string_view(rs).substr(j, i - j)) ||
-                        e.NounOrPerson(std::u32string_view(plain).substr(j, i - j + h.size()))) {
-                        break;  // a noun before the honorific, or one with it (おとうちゃん)
+                    const std::u32string_view with = std::u32string_view(plain).substr(j, i - j + h.size());
+                    if (e.NounOrPerson(std::u32string_view(rs).substr(j, i - j)) || e.NounOrPerson(with) || !e.Tags(with).empty()) {
+                        break;  // a noun before the honorific, or a word with it (おとうちゃん, みなさん)
                     }
-                    const std::string tags = e.Tags(std::u32string_view(rs).substr(j, i - 1 - j));
-                    if (i - 1 - j >= 2 && tags.find_first_of("MH") != std::string::npos && tags.find('N') == std::string::npos) {
+                    const auto verb = [&](size_t to) {
+                        const std::string tags = e.Tags(std::u32string_view(rs).substr(j, to - j));
+                        return to - j >= 2 && tags.find_first_of("MH") != std::string::npos && tags.find('N') == std::string::npos;
+                    };
+                    if (verb(i - 1) || verb(i)) {
                         afterWord = false;
                         break;
                     }
