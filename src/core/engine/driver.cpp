@@ -234,6 +234,26 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
     return false;
 }
 
+// Keys holding a run are looked for from up to this many runes before it (a long name).
+constexpr int kRunLookBackRunes = 32;
+
+// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns): a key that starts at
+// or up to kRunLookBackRunes letters before it and goes on past it.
+bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t end) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    size_t start = at;
+    for (int back = 0;; back++) {
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            if (start + c.source.size() >= end) return true;
+        }
+        if (back == kRunLookBackRunes || start == 0) break;
+        const text::Rune last = pipeline::internal::LastRune(line.substr(0, start));
+        if (!pipeline::internal::IsJapaneseRune(last.cp) && last.cp != U'・') break;
+        start -= last.size;
+    }
+    return false;
+}
+
 auto FallbackOf(const dict::Snapshot& snap) {
     const auto fallback = snap.Fallback();
     return std::pair{fallback, fallback ? NewGenerated(*fallback) : nullptr};
@@ -474,9 +494,10 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), ReadBase, &snap);
+    const RespellLookup respell{snap, ctx.lookup};
+    std::string normalized =
+        pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx, WordHoldsRun, &respell), ReadBase, &snap);
     if (!options.reference) {
-        const RespellLookup respell{snap, ctx.lookup};
         normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
@@ -496,7 +517,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
-        casual = pipeline::CasualQuotes(facts.text, carry.depth);
+        casual = pipeline::CasualQuotes(pipeline::internal::CollapseTsuRuns(facts.text, WordHoldsRun, &respell),
+                                        carry.depth);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
             // (知らねえ, 言っとく).

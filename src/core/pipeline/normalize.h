@@ -9,9 +9,14 @@
 
 namespace hdTrans::pipeline {
 
+// Whether a dictionary word holds the run line[at, end) (じっっくり), so that it stays as written.
+using WordHoldsRun = bool (*)(const void* context, std::string_view line, size_t at, size_t end);
+
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
 // in normalize.cpp. A line that is written whole from the line table is not passed here.
-std::string Normalize(std::string_view line, const LineContext& ctx);
+// holds, when given, keeps the runs of CollapseTsuRuns that a dictionary word holds.
+std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds = nullptr,
+                      const void* context = nullptr);
 
 // How the dictionary reads a ruby base with the kana after it.
 struct BaseReading {
@@ -60,6 +65,11 @@ namespace internal {
 // ‼ ⁉ ⁈ as two marks (！！ ！？ ？！) without a variation selector after them; U+0000..U+0003 as
 // spaces. Invalid UTF-8 bytes are kept.
 std::string NormalizeForms(std::string_view text);
+
+// A run of two or more っ or ッ after a letter and before a letter other than a small kana, ー
+// or ～ as its first character (褒められちゃっっっった 褒められちゃった, とっっても とっても),
+// unless holds says a dictionary word holds the run. A run that ends a word (あっっ！) stays.
+std::string CollapseTsuRuns(std::string_view text, WordHoldsRun holds = nullptr, const void* context = nullptr);
 
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.
 std::string JoinNasai(std::string_view text);
