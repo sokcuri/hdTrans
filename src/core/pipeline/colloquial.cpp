@@ -349,12 +349,14 @@ bool Volitional(std::u32string_view rs, size_t i) {
     return false;
 }
 
-// A key of the sound lexicon that starts between from and i, holds the mark at character
-// i and goes past it (おーい, えーっと, くらいのちょこっと), and does not start inside a
-// verb or adjective stem that ends at the mark (not the ゴォ inside すご of すごぉぉい).
-bool SoundCovers(const Emphasis& e, std::u32string_view rs, size_t from, size_t i, bool extra) {
+// The end of the furthest key of the sound lexicon that starts between from and i, holds
+// the mark at character i and goes past it (おーい, えーっと, くらいのちょこっと), and does
+// not start inside a verb or adjective stem that ends at the mark (not the ゴォ inside すご
+// of すごぉぉい), or 0.
+size_t SoundCoverEnd(const Emphasis& e, std::u32string_view rs, size_t from, size_t i, bool extra) {
     const std::u32string f = ToKatakana(rs);
     std::string units;
+    size_t far = 0;
     for (size_t j = from; j < i; j++) {
         bool inStem = false;
         for (size_t k = from; k < j && !inStem; k++) {
@@ -363,10 +365,12 @@ bool SoundCovers(const Emphasis& e, std::u32string_view rs, size_t from, size_t 
         if (inStem) continue;
         for (const SoundRow& s : SoundRows(f[j], extra)) {
             size_t end = 0;
-            if (MatchSound(s, f, j, end, units) && end > i + 1 && s.key.find(f[i]) != std::u32string::npos) return true;
+            if (MatchSound(s, f, j, end, units) && end > i + 1 && s.key.find(f[i]) != std::u32string::npos) {
+                far = std::max(far, end);
+            }
         }
     }
-    return false;
+    return far;
 }
 
 // Text that starts with a familiar honorific, which follows a lengthened nickname
@@ -1241,7 +1245,24 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         // おっかしい; not あっぶね, さっお).
         const bool sound = SoundWord(rs, from, end, ctx.extraBuiltin);
         const bool soundTsu = sound && r == U'っ' && rs[end] != U'と';
-        if (before > end || SoundCovers(e, rs, from, i, ctx.extraBuiltin) || (sound && !soundTsu)) continue;  // もっと, せーの, おーい
+        const size_t covered = SoundCoverEnd(e, rs, from, i, ctx.extraBuiltin);
+        if (before <= end && (covered > 0 || (sound && !soundTsu)) && !vowelRun && r != U'っ' && end < rs.size() &&
+            IsHiraganaRune(rs[end]) && !IsSmallVowel(rs[end])) {
+            // A sound that holds the run gives it up to a word that the dictionary reads with the
+            // run dropped, two or more characters past it, further than the sound and at least as
+            // far as the word after the run, further for a run that starts with a small vowel,
+            // the spelling of a drawn interjection (べーつに べつに, ほーんと ほんと; not
+            // へーそうなんだ, えーっと, さぁて, まぁでも).
+            const std::u32string m = Spliced(rs, i, U"", end);
+            const size_t reach = e.KanaReach(m, from, i);
+            const size_t next = i + e.LongestKey(std::u32string_view(m).substr(i)) + (IsDash(r) ? 0 : 1);
+            if (reach >= i + 2 && reach >= next && reach + (end - i) > covered) {
+                rs = m;
+                changed = true;
+                continue;
+            }
+        }
+        if (before > end || covered > 0 || (sound && !soundTsu)) continue;  // もっと, せーの, おーい
         if (cands.empty()) continue;
         int best = -1;
         bool spelled = false;

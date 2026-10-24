@@ -15,3 +15,7 @@ ending:negative	食べられない	has:먹을 수 없다	keep	ending-defaults
 ending:negative	行かずに帰った	has:가지 않고	keep	ending-defaults
 ending:negative	雨は降らないだろう	has:내리지 않을	keep	ending-defaults
 ending:negative	彼は嘘をつかない	has:거짓말하지 않는다	keep	ending-defaults
+analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	lacks:없고	fix	analysis
+analysis:adnominal-na-word	ようなクドい話	lacks:없고	fix	analysis
+analysis:adnominal-na-word	遠慮なく食べて	has:없이	keep	analysis
+analysis:adnominal-na-word	元気なく笑った	has:없게	keep	analysis

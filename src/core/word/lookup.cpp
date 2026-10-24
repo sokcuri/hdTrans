@@ -868,6 +868,35 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
     return false;
 }
 
+// Whether the hiragana after an adnominal な, after, start with く and a word of the
+// dictionary of two or more kana, no ending, that reaches further than the keys that start
+// at the な, which are all forms of a verb or an adjective (なく of ない): the な stays the
+// adnominal before it where the validity rule of な before く reads なく (ような + くさい, not
+// なく + さい; but 遠慮 + なく, and 遠慮 + なくして, whose なくし reaches as far as くし).
+bool Worker::WordAfterAdnominal(std::string_view after) const {
+    if (!settings.text || !after.starts_with("く")) return false;
+    const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+    std::size_t word = 0;
+    for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+        if ((c.user != nullptr && (c.user->nameLayer || c.user->end)) || c.codes == nullptr || c.codes->part.TagIn("PSTU")) {
+            continue;
+        }
+        word = std::max(word, text::RuneCount(c.source));
+    }
+    if (word < 2) return false;
+    std::string query(kJaNa);
+    query += rest;
+    std::size_t na = 0;
+    for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+        if (c.user != nullptr && c.user->nameLayer) continue;
+        const std::size_t n = text::RuneCount(c.source);
+        // A word of its own at the な (なし, など, 内容 of ないよう) keeps the rule.
+        if (n >= 2 && (c.codes == nullptr || !c.codes->part.TagIn("HM"))) return false;
+        na = std::max(na, n);
+    }
+    return 1 + word > na;
+}
+
 bool OwnedGroup(const Group* g) { return g != nullptr && !g->entries.empty() && g->entries[0]->user != nullptr; }
 
 // Whether no validity rule rejects the text that follows source (a word of class first,
