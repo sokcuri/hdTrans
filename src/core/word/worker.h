@@ -156,7 +156,8 @@ private:
 // same length from records on, sets d.patternKind and d.kind (the branch), and returns
 // whether one matched; stop is the record it stopped at.
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop);
-bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record);
+bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record,
+               bool potential = false);
 
 // The conjugation analysis of a verb with key and kind (part code byte 3) on tail, the
 // text after the key: the branch (endings attaching to it have part code byte 2
