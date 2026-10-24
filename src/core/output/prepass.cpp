@@ -877,6 +877,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
                                   const Settings& settings, const Families& generated) {
     Start(items, settings, generated);
     tokens_ = &tokens;
+    first_ = first;
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
@@ -1040,8 +1041,19 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         const std::string_view head = src.substr(0, start - beforeRune.size);
         kanjiBefore = IsKanji(DecodeLastRune(TextBefore(head), head.size()).cp);
     }
+    // A sound said on its own before a comma (む、無理 무, 무리): the token of the sentence before it, if
+    // any, ends in a space, an opening or other mark, not in a word or a closing mark (がば|り、 벌떡|り、,
+    // [・]ば、).
+    bool opens = true;
+    for (int t = token - 1; start == 0 && t >= first_; t--) {
+        if (source_[t].empty()) continue;
+        const char32_t last = DecodeLastRune(TextBefore(source_[t]), source_[t].size()).cp;
+        opens = Opens(last) || (text::IsSymbol(last) && !Closes(last));
+        break;
+    }
     const bool alone = settings_.text && pos == runEnd &&
-                       (pos == static_cast<int>(src.size()) || Closes(after) || HasRune(U"…‥！？!?", after)) &&
+                       (pos == static_cast<int>(src.size()) || Closes(after) || HasRune(U"…‥！？!?", after) ||
+                        (HasRune(U"、，,", after) && opens)) &&
                        kFinalParticles.find(run) == std::string_view::npos;
     bool onlySmall = true;  // run is only っ, ッ and ー
     for (size_t k = 0; k < run.size();) {
