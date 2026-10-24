@@ -12,3 +12,4 @@ constraint:tanto-after-tsu	言ったんと同じ	말한 과 같다	current	looku
 constraint:tanto-after-tsu	待ったんと	기다린 과	current	lookup
 dict:w:28610	姫たんと遊ぶ	has:짱	keep	lookup
 dict:w:28610	田中たんと話した	has:짱	keep	lookup
+dict:w:28610	猫たんと遊ぶ	고양이짱과 논다	fix	lookup

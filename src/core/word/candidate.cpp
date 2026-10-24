@@ -282,13 +282,13 @@ bool NounEnd(std::string_view text) {
 }
 
 // Whether before, the word ahead of a suffix, is a name or a noun of the dictionary with a sense
-// of persons among its candidates, those of its group or the other records of its surface
+// of persons or animals among its candidates, those of its group or the other records of its surface
 // (モモ 복숭아 beside the name モモ); not itself a suffix written attached (ら, たち).
 bool SuffixHost(const Item* before) {
     if (before == nullptr) return false;
     if (before->IsNameItem()) return true;
     auto person = [](std::string_view code, std::string_view sem, std::string_view gram) {
-        return code.starts_with('1') && (Has(sem, "VHn") || Has(sem, "QPN")) && !Has(gram, "Tu");
+        return code.starts_with('1') && (Has(sem, "VHn") || Has(sem, "QPN") || Has(sem, "QAA")) && !Has(gram, "Tu");
     };
     for (const Entry* e : before->group->entries) {
         if (person(e->code, e->attr, e->gattr)) return true;
@@ -304,12 +304,12 @@ bool SuffixHost(const Item* before) {
 }  // namespace
 
 // Text path: a suffix of honorific.after-person (たん, っち) at full[cursor:] is a word only
-// after a name or a noun of persons (先生たん, 小林っち) and when no longer dictionary word
-// starts at that noun and goes past it (たまご + っち of たまごっち), nor a longer noun at the
-// suffix that ends before a particle, a mark or a character other than hiragana (たんこぶ,
-// たんす); elsewhere its records leave the candidates, so that the longer word or the kana
-// around it are read instead. Where the suffix is a word, a longer word other than a noun that
-// starts with it leaves instead (姫たん + と, not the adverb たんと).
+// after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん) and when no longer
+// dictionary word starts at that noun and goes past it (たまご + っち of たまごっち), nor a longer
+// noun at the suffix that ends before a particle, a mark or a character other than hiragana
+// (たんこぶ, たんす); elsewhere its records leave the candidates, so that the longer word or the
+// kana around it are read instead. Where the suffix is a word, a longer word other than a noun
+// that starts with it leaves instead (姫たん + と, not the adverb たんと).
 Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
     std::size_t suffix = 0;
     for (const Record* r = records; r != nullptr; r = r->child) {
