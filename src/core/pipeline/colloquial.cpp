@@ -1073,25 +1073,33 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         rs = Spliced(rs, k, marks, to);
         changed = true;
     }
-    // A word drawn out syllable by syllable, a ー after two or more of its kana (とーにーかーく,
-    // だーかーらー): the word without the marks, drawn out at the end when the last mark
-    // ends the run, when the dictionary has it.
+    // A word drawn out syllable by syllable, a run of ー or ～ after two or more of its kana
+    // (とーにーかーく, だーかーらー, か～わ～い～い～): the word without the marks, drawn out at
+    // the end when the last mark ends the run, when the dictionary has it or, drawn out to its
+    // end, reads it as a verb or adjective stem with its ending (す～ご～い～, つーかーれーたー).
     for (size_t p = 0; p + 3 < rs.size(); p++) {
-        if (!IsHiraganaRune(rs[p]) || (p > 0 && (IsHiraganaRune(rs[p - 1]) || IsKanjiRune(rs[p - 1]) || rs[p - 1] == U'ー'))) {
+        if (!IsHiraganaRune(rs[p]) || (p > 0 && (IsHiraganaRune(rs[p - 1]) || IsKanjiRune(rs[p - 1]) || IsDash(rs[p - 1])))) {
             continue;
         }
-        // Kana each followed by a mark, and one kana without it at the end.
+        // Kana each followed by marks, and one kana without them at the end.
         std::u32string plain;
         size_t q = p, marks = 0;
         while (q < rs.size() && IsHiraganaRune(rs[q])) {
             plain += rs[q++];
-            if (q >= rs.size() || rs[q] != U'ー') break;
+            if (q >= rs.size() || !IsDash(rs[q])) break;
             marks++;
-            q++;
+            while (q < rs.size() && IsDash(rs[q])) q++;
         }
         // Of two kana, a mark after a bare vowel lengthens it (いーなー いいな, あーあー).
-        if (marks < 2 || (plain.size() == 2 && In(plain[0], U"あいうえお")) || !e.WordKey(plain)) continue;
-        const bool drawn = rs[q - 1] == U'ー';
+        if (marks < 2 || (plain.size() == 2 && In(plain[0], U"あいうえお"))) continue;
+        const bool drawn = IsDash(rs[q - 1]);
+        bool stem = false;
+        const size_t key = e.WordAt(plain, 0, stem);
+        // A stem read with its ending is drawn out to its end, and it does not start with あ, う or
+        // え, which a mark draws out as a sound of its own (あーそーだー).
+        if (key != plain.size() && !(drawn && stem && key >= 2 && !In(plain[0], U"あうえ") && e.ReadsFrom(plain))) {
+            continue;
+        }
         rs = Spliced(rs, p, drawn ? plain + U"～" : plain, q);
         changed = true;
         p += plain.size();
