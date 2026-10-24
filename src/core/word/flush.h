@@ -54,8 +54,15 @@ std::string ItemLemma(Flusher& f, const Item* it, int slot);
 bool Person(std::string_view attr);
 // Whether the item is a comma, a sentence-end mark, a closing quote or bracket, or 。 (grammar.cpp).
 bool PauseOrEnd(const Item* it);
+// The text before the item on its line without the spaces next to it: the rest of the item's token
+// before it, or else the nearest earlier token that is not only spaces; empty at the line start.
+// token receives the index of the token the text is from (grammar.cpp).
+std::string_view TextBefore(const Worker& w, const Item* it, int& token);
 // Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
+// Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
+// item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
+bool AfterRestart(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).

@@ -1,0 +1,28 @@
+# 규칙: LEX-5
+rule	input	expected	kind	layer
+cx:second-self:10	さて、ワタシと私が融合して	자, 와타시와 내가 융합해	fix	rewrites
+cx:second-self:10	すんなりワタシと私は融合して今に至る	순조롭게 와타시와 나는 융합해 지금에 이르다	fix	rewrites
+cx:second-self:10	ワタシも私も知識として知っている。	와타시도 나도 지식으로서 알고 있다.	fix	rewrites
+cx:second-self:10	ワタシの記憶を取り戻す前にあった私の怒り	와타시의 기억을 되찾기 전에 있던 내 분노	fix	rewrites
+cx:second-self:10	ワタシと私が融合して	rule:cx:second-self:10=와타시	fix	rewrites
+cx:second-self:10	私とワタシは違う。	rule:cx:second-self:10=와타시	fix	rewrites
+cx:second-self:10	ボクと僕は同じだ。	보쿠와 나는 같다.	fix	rewrites
+cx:second-self:10	オレも俺も知らない。	오레도 나도 모른다.	fix	rewrites
+cx:second-self:10	アタシとあたしは別人だ。	아타시와 나는 딴사람이다.	fix	rewrites
+cx:second-self:10	ワタクシとわたくし	와타쿠시와 저	fix	rewrites
+cx:second-self:10	ワタシはここにいるよ	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	そんなワタシは前世で乙女ゲームに嵌った。	그런 나는 전생에서 여성향 게임에 빠졌다.	keep	local
+cx:second-self:10	正にワタシが昔にしたゲームの世界観とそっくり同じなのだ。	정말로 내가 옛날로 한 게임의 세계관과 전부 같다.	keep	local
+cx:second-self:10	「イエス！　ワタシに任せてください！」	「예스! 저에게 맡겨 주세요!」	keep	local
+cx:second-self:10	ワタシは帰る。私は残る。	나는 돌아간다. 나는 남는다.	keep	local
+cx:second-self:10	「ワタシは行く」と私は言った。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	ワタシとアナタは違う。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	このワタシ、待機しているのよ！	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	私と僕は友達だ。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	ボクは知っている。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	ワタシが…私がここで…やられた	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	僕は……ボクは平気だ。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	『ワタシは行く』と私は言った。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	ワタシ・・・私は平気だ。	!rule:cx:second-self:10	keep	rewrites
+cx:second-self:10	ワタシと俺は違う。	rule:cx:second-self:10=와타시	fix	rewrites
+cx:second-self:10	……ワタシと私が融合した。	rule:cx:second-self:10=와타시	fix	rewrites

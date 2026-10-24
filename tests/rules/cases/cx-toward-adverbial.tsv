@@ -1,0 +1,28 @@
+# 규칙: LEX-9
+rule	input	expected	kind	layer
+cx:toward-adverbial:10	その進行方向を地球に向け加速していた。	그 진행 방향을 지구를 향해 가속하고 있었다.	fix	rewrites
+cx:toward-adverbial:10	地球に向けて加速した。	지구를 향해 가속했다.	fix	rewrites
+cx:toward-adverbial:10	空に向けて撃った。	하늘을 향해 쏘았다.	fix	rewrites
+cx:toward-adverbial:10	彼女に向けて手を振った。	그녀를 향해 손을 흔들었다.	fix	rewrites
+cx:toward-adverbial:10	少女を抱えながら窓に向かって走る	rule:cx:toward-adverbial:10=(을)를 향&AV@	fix	rewrites
+cx:toward-adverbial:10	全力で右のビルに向かって走り出した	전력으로 오른쪽의 빌딩을 향해 달리기 시작했다	fix	rewrites
+cx:toward-adverbial:10	階段に向かい急いで駆け上がる	rule:cx:toward-adverbial:10=(을)를 향&AV@	fix	rewrites
+cx:toward-adverbial:10	私のいた場所に向けて短剣を振るう	rule:cx:toward-adverbial:10=(을)를 향&AV@	fix	rewrites
+cx:toward-adverbial:10	飛翔体が各地に向けて発射された模様です	비상체가 각지를 향해 발사된 모양입니다	fix	rewrites
+cx:toward-adverbial:10	カメラに向かってしゃべり続けていた	rule:cx:toward-adverbial:10=(을)를 향&AV@	fix	rewrites
+cx:toward-adverbial:10	天井に向かって手を伸ばしてみる	천장을 향해 손을 뻗어 본다	fix	rewrites
+cx:toward-adverbial:10	俺は駅に向かって走り出した	나는 역을 향해 달리기 시작했다	fix	rewrites
+cx:toward-adverbial:10	正門に向かって遠ざかっていく	정문을 향해 멀어져 간다	fix	rewrites
+cx:toward-adverbial:10	中央に向かって転がりはじめた	중앙을 향해 구르기 시작했다	fix	rewrites
+cx:toward-adverbial:10	地球に向かって落ちてくる。	지구를 향해 떨어져 내린다.	fix	rewrites
+cx:toward-adverbial:10	手を空に向けて伸ばした。	손을 하늘을 향해 늘렸다.	fix	rewrites
+cx:toward-adverbial:10	銃口を男に向けて撃った。	총구를 남자를 향해 쏘았다.	fix	rewrites
+cx:toward-adverbial:10	学校に向かった。	!rule:cx:toward-adverbial:10	keep	defaults
+cx:toward-adverbial:10	急いで部室に向かった。	서둘러 동아리방으로 향했다.	keep	defaults
+cx:toward-adverbial:10	早足で玄関に向かう。	!rule:cx:toward-adverbial:10	keep	defaults
+cx:toward-adverbial:10	銃口をこちらに向けていた。	!rule:cx:toward-adverbial:10	keep	local
+cx:toward-adverbial:10	手のひらを空に向けている	!rule:cx:toward-adverbial:10	keep	local
+cx:toward-adverbial:10	銃口を男に向け、胸を撃つ	!rule:cx:toward-adverbial:10	keep	local
+cx:toward-adverbial:10	学校に向かうと言った。	!rule:cx:toward-adverbial:10	keep	defaults
+cx:toward-adverbial:10	本選に向けての戦い	본선을 향한 싸워	keep	defaults
+cx:toward-adverbial:10	視線を夕日に向けたまま	!rule:cx:toward-adverbial:10	keep	local

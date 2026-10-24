@@ -115,6 +115,7 @@ cmake --build --preset wasm --parallel
 |---|---|---|
 | `HDTRANS_WERROR` | `ON` | 경고를 오류로 처리합니다 (MSVC `/WX`, clang, gcc `-Werror`). `third_party/`의 코드는 경고 없이 빌드합니다 |
 | `HDTRANS_PCRE2_JIT` | `OFF` | PCRE2 JIT 컴파일러를 넣습니다. WebAssembly에서는 쓰지 않습니다 |
+| `HDTRANS_FUZZ` | `OFF` | libFuzzer 대상 `hdtrans_fuzz`를 만들고 모든 타깃에 커버리지 계측을 넣습니다. Clang만 됩니다([퍼징](#퍼징)) |
 
 `cmake --preset linux -DHDTRANS_WERROR=OFF`처럼 끌 수 있지만, 저장소의 코드는 경고 없이 빌드되어야
 합니다. 경고는 플래그가 아니라 코드를 고쳐서 없앱니다.
@@ -133,7 +134,20 @@ cmake --build --preset wasm --parallel
   `vcvarsall`로 MSVC 환경을 설정합니다. 네이티브 프리셋은 `HDTRANS_DICTS=dicts`로 `ctest`를 실행하고, `wasm`은
   Node로 `tools/wasm_smoke.mjs`를 실행해 작은 사전으로 한 번 번역해 봅니다(셋째 인자로 그 사전을
   컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
-  ([testing.md](testing.md#ci)). 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
+  ([testing.md](testing.md#ci)). `linux`는 [성능 예산](#성능-예산)도 잽니다. 결과물은 `hdtrans-<프리셋>`
+  아티팩트로 올라갑니다.
+- Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
+  [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트와 push에서 matrix와 함께 돕니다.
+- 성능 예산과 퍼징이 실패로 치는 것과 알리기만 하는 것:
+
+  | 단계 | 실패 | 경고만(작업은 통과) |
+  |---|---|---|
+  | `linux`의 Performance budget | PR에서 어느 행이 비교 대상보다 1% 넘게 많고 PR의 커밋에 `Perf-Budget:` 트레일러가 없을 때, 표와 비교할 때 표의 기준값을 트레일러 없이 올렸을 때 | valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때(exit 2), 기준 빌드도 같은 도구 체인의 표도 없을 때, push의 모든 결과 |
+  | `linux-fuzz`의 Replay | 시드나 `tests/fuzz/regressions/`의 입력 하나가 멈추거나 sanitizer 보고, 메모리 초과를 낼 때 | - |
+  | `linux-fuzz`의 Fuzz | push에서 무작위 퍼징이 찾은 입력이 있을 때 | PR에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
+
+  경고는 작업 요약과 주석(annotation)에 남습니다. 인프라 문제로 보이면 그 작업만 다시 실행합니다(**Re-run
+  failed jobs** 또는 `gh run rerun <run> --failed`).
 - Build의 `gate` job이 풀 리퀘스트와 브랜치 push에서 matrix(릴리스 도구 테스트 포함)를 돌릴지 정합니다. 아래
   경우에만 건너뛰고, 그 밖의 경우와 확인 중 오류는 전체를 빌드합니다. 태그와 수동 실행에서는 판단하지 않고 늘
   전체를 빌드합니다. 릴리스 파일은 `CHANGELOG.md`, `.release-please-manifest.json`, `release-version.txt`,
@@ -161,6 +175,70 @@ cmake --build --preset wasm --parallel
 - **pr-title.yml**: PR 제목을 검사합니다.
 
 로컬 빌드에는 sccache와 ccache 모두 필요 없습니다.
+
+## 성능 예산
+
+`tools/perf-budget.py`는 고정 입력을 번역하는 CLI의 명령어 수를 valgrind(`cachegrind --cache-sim=no`)로 셉니다.
+벽시계 시간이 아니라서 같은 빌드는 어느 러너에서 재도 수가 거의 같습니다.
+
+| 행 | 입력 |
+|---|---|
+| `load` | 빈 입력. 사전 읽기 |
+| `each` | 규칙 사례(`tests/rules/cases`, `tests/rules/speech-strict`)의 입력을 `--each`로 |
+| `document` | `examples/*.ja.txt`(첫 줄 제외)를 한 문서로 |
+
+- 입력은 `tools/perf-budget.tsv`의 `inputs` 커밋(develop의 커밋)에서 읽으므로 사례와 예문이 늘어도 수가
+  움직이지 않습니다. 사전은 각 빌드의 것을 쓰므로 사전을 바꾸면 세 행이 모두 움직일 수 있습니다. `each`와 `document`는
+  `load`를 뺀 수입니다.
+- 수는 컴파일러, C 라이브러리, 아키텍처, valgrind(도구 체인)에 따라 다릅니다. 표의 `toolchain` 줄이 기준값을
+  잰 도구 체인입니다.
+- `--check CLI DICTS --against CLI DICTS`는 두 빌드를 함께 재고, 도구 체인이 같으면 둘째 빌드(기준 커밋)와
+  비교합니다. 기준 빌드가 없거나 도구 체인이 다르면 표와 비교하고, 표의 도구 체인도 다르면 알리기만 합니다.
+  어느 행이든 비교 대상보다 1% 넘게 많으면 실패하고, 1% 넘게 적으면 알립니다. `--base REF`를 주면 REF..HEAD의
+  커밋에 `Perf-Budget: <이유>` 트레일러가 있을 때 많아도 통과합니다. 표와 비교할 때는 트레일러 없이 표의
+  기준값이 오르거나 행이 늘거나 `inputs`가 바뀌어도 실패합니다. 기준 빌드를 재지 못하면 경고하고 표와
+  비교합니다. 이 빌드를 재지 못하면(멈춤 포함) 비교하지 않고 경고합니다(종료 코드 2).
+- CI의 `linux` 작업은 PR에서 기준 커밋(PR 빌드가 병합한 develop 커밋, 곧 병합 커밋의 첫 부모)의 develop push
+  Build가 올린 `hdtrans-linux` 아티팩트(`linux` 작업의 테스트가 통과했을 때 올라갑니다)를 내려받아 같은 러너에서
+  함께 잽니다. 그 아티팩트가 없으면(그 Build가 matrix를 건너뛰었거나 아직 끝나지 않았으면) 표와 비교합니다.
+  push에서는 표와 비교해 알리기만 합니다.
+- 느려지는 것이 맞는 변경이면 PR의 커밋 하나에 트레일러로 이유를 적습니다. squash 병합의 본문에도 그
+  트레일러를 남깁니다.
+- 표는 기록이자 기준 빌드가 없을 때의 비교 대상입니다. 요약이 표에서 1% 넘게 움직였다고 하거나 러너의 도구
+  체인이 바뀌었으면, 작업 요약의 측정표를 `tools/perf-budget.tsv`에 옮겨 커밋합니다(올리는 값은 트레일러와 함께).
+  `--update CLI DICTS`는 같은 도구 체인에서 잰 수를 직접 씁니다.
+- 실패나 경고를 다시 보려면 `linux` 작업만 다시 실행합니다. 같은 빌드의 수는 다시 재도 같습니다.
+
+## 퍼징
+
+`tests/fuzz/translate.cpp`는 libFuzzer 대상입니다. 입력 하나를 새 세션에서 문서로 번역하고, 입력의 해시로
+말투(soft, strict)와 같은 세션에서 한 번 더 번역할지를 고릅니다. 변이기는 글자 단위로 가나, 한자, 반각 가나,
+문장부호, 루비 표기(`｜漢字《かんじ》`, `<ruby>`), 한 글자의 긴 반복, 공백 덩어리, 줄바꿈, 잘못된 UTF-8을
+넣거나 지우고 구간을 반복, 교환합니다. 가끔은 libFuzzer의 바이트 변이를 씁니다. `HDTRANS_FUZZ`를 켜지 않은
+빌드도 이 소스를 컴파일합니다.
+
+```sh
+CC=clang CXX=clang++ cmake --preset linux-asan -B build/linux-fuzz -DHDTRANS_FUZZ=ON
+cmake --build build/linux-fuzz --target hdtrans_fuzz hdtrans_cli
+HOME=$(mktemp -d) HDTRANS_CACHE_DIR=off build/linux-fuzz/hdtrans --dicts "$PWD/dicts" \
+  --compile-snapshot "$PWD/build/linux-fuzz/dicts.hdsnap"
+python3 -I tools/fuzz.py build/linux-fuzz/hdtrans_fuzz build/linux-fuzz/dicts.hdsnap --replay
+python3 -I tools/fuzz.py build/linux-fuzz/hdtrans_fuzz build/linux-fuzz/dicts.hdsnap --seconds 150
+```
+
+- 시드는 예문 본문, 규칙 사례 입력 25개마다 하나, `tests/fuzz/regressions/`의 파일, 긴 반복, 공백 덩어리,
+  루비, 짝 없는 괄호로 만든 짧은 글입니다.
+- `--replay`는 시드를 하나씩 60초 제한으로 번역하고 가장 느린 시드의 시간을 보입니다. 결과는 트리에만
+  달렸습니다.
+- 무작위 퍼징은 먼저 같은 재생을 하고, 프로세서 수만큼 퍼저를 돌립니다(`--jobs`, 난수 시드는 `--seed`부터
+  하나씩). 입력 하나가 가장 느린 시드의 10배(적어도 10초, `--timeout`으로 바꿉니다)를 넘으면 멈춤으로 봅니다.
+  ASan, UBSan 보고와 메모리 초과도 실패입니다. CI는 실행 번호를 난수 시드로 쓰므로(다시 실행해도 같습니다)
+  `--seed <실행 번호> --jobs <작업 수>`(요약의 `fuzz:` 줄)로 같은 변이를 되풀이합니다. 찾는 입력은 기계 속도에 따라 다를 수 있습니다.
+- 실패한 입력은 `--out`(기본 `build/fuzz`)에 남고 이스케이프한 글과 16진수로 출력됩니다. CI에서는 작업 요약과
+  `fuzz-findings` 아티팩트에 있습니다. 고친 뒤 그 입력을 `tests/fuzz/regressions/`에 넣고 번역을 규칙 사례로
+  더합니다. 그러면 PR마다 재생 단계와 sanitizer 작업의 규칙 사례가 같은 오류를 막습니다.
+- `HDTRANS_FUZZ`는 Clang과 `HDTRANS_SANITIZE`가 있어야 합니다. 커버리지 계측의 기본 함수가 sanitizer 런타임에
+  있어서 같은 빌드의 CLI도 링크됩니다.
 
 ## 릴리스
 
