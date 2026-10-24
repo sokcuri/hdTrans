@@ -47,6 +47,11 @@ constexpr char32_t kDrawnMark = 0xE00B;
 // (아파아팟).
 constexpr char32_t kClipMark = 0xE00C;
 
+// The mark normalize writes before a word said with a run of っ inside (すっっっごい), an opening
+// span that the restore stage writes as the first syllable of the Korean after it drawn out by
+// two syllables of its vowel (대애애단해, WriteStress).
+constexpr char32_t kStressMark = 0xE00D;
+
 // Whether c is a mark the sound stage writes at the drawn-out end of a word (kLengthenMark,
 // kDrawnMark, kClipMark).
 constexpr bool IsDrawnEndMark(char32_t c) { return c == kLengthenMark || c == kDrawnMark || c == kClipMark; }

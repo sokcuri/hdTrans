@@ -795,7 +795,17 @@ HD_TEST(pipeline_normalize_tsu_runs) {
     };
     Check([](std::string_view text) { return CollapseTsuRuns(text); }, cases);
     const auto holdsAll = [](const void*, std::string_view, size_t, size_t) { return true; };
-    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", holdsAll, nullptr), "じっっくり");
+    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", {.holds = holdsAll}), "じっっくり");
+    // The stress mark goes before the word the lookup finds, once for each word.
+    const auto lineStart = [](const void*, std::string_view line, size_t at) {
+        return line.substr(0, at).ends_with("と") ? std::string::npos : size_t{0};
+    };
+    HD_CHECK_EQ(CollapseTsuRuns("すっっっごい", {.start = lineStart}), "\uE00Dすっごい");
+    HD_CHECK_EQ(CollapseTsuRuns("すっっごっっい", {.start = lineStart}), "\uE00Dすっごっい");
+    HD_CHECK_EQ(CollapseTsuRuns("とっっても", {.start = lineStart}), "とっても");
+    // A later run whose word starts before the word of an earlier one.
+    const auto back = [](const void*, std::string_view, size_t at) { return at > 6 ? size_t{0} : size_t{3}; };
+    HD_CHECK_EQ(CollapseTsuRuns("あいっっうえっっお", {.start = back}), "\uE00Dあ\uE00Dいっうえっお");
 }
 
 // Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a

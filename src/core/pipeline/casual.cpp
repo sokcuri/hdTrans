@@ -2,6 +2,7 @@
 #include <span>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -25,8 +26,15 @@ bool CharOrEnd(std::string_view s, size_t p, std::u32string_view set, Match& m, 
     return false;
 }
 
-// The character before byte pos of s; 0 at the start.
-char32_t Before(std::string_view s, size_t pos) { return pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp; }
+// The character before byte pos of s, past a stress mark (CollapseTsuRuns); 0 at the start.
+char32_t Before(std::string_view s, size_t pos) {
+    while (pos > 0) {
+        const text::Rune r = LastRune(s.substr(0, pos));
+        if (r.cp != output::kStressMark) return r.cp;
+        pos -= r.size;
+    }
+    return 0;
+}
 
 // かも(しれ|知れ)(?:ん|ね[ぇえー]+)
 bool Shiren(std::string_view s, size_t pos, Match& m) {
@@ -404,10 +412,8 @@ bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
 // Whether pos starts a sentence or a clause: the start of s, or after 「『（。！？!?…‥、
 // or a space.
 bool ClauseStart(std::string_view s, size_t pos) {
-    if (pos == 0) return true;
-    size_t p = pos - 1;
-    while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) p--;
-    return In(At(s, p).cp, U"「『（。！？!?…‥、 　");
+    const char32_t c = Before(s, pos);
+    return c == 0 || In(c, U"「『（。！？!?…‥、 　");
 }
 
 // んで at the start of a clause before 、，？?！!…‥」: それで (んで、どうする).

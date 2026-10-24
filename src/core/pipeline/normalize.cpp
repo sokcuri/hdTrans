@@ -17,6 +17,9 @@
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
+#include <algorithm>
+#include <vector>
+
 #include "core/dict/classes.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
@@ -27,10 +30,10 @@ namespace hdTrans::pipeline {
 
 using namespace internal;
 
-std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds, const void* context) {
+std::string Normalize(std::string_view line, const LineContext& ctx, const RunLookup& runs) {
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
-    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), holds, context)));
+    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
@@ -282,12 +285,15 @@ std::string DrawlSpan(std::string_view marks, char32_t mark) {
     return out;
 }
 
-// The character before pos, U+0000 at the start of s.
+// The character before pos, past a stress mark (CollapseTsuRuns), U+0000 at the start of s.
 char32_t Before(std::string_view s, size_t pos) {
-    if (pos == 0) return 0;
-    size_t q = pos - 1;
-    while (q > 0 && (static_cast<unsigned char>(s[q]) & 0xC0) == 0x80) q--;
-    return At(s, q).cp;
+    while (pos > 0) {
+        size_t q = pos - 1;
+        while (q > 0 && (static_cast<unsigned char>(s[q]) & 0xC0) == 0x80) q--;
+        if (At(s, q).cp != output::kStressMark) return At(s, q).cp;
+        pos = q;
+    }
+    return 0;
 }
 
 // (?<=^|[\n「『（。！？!?])([ 　―…‥]*) as group 2 (group 1 empty), then rest(end of group 2).
@@ -541,8 +547,9 @@ std::string NormalizeForms(std::string_view text) {
     return out;
 }
 
-std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void* context) {
+std::string CollapseTsuRuns(std::string_view in, const RunLookup& runs) {
     std::string out;
+    std::vector<size_t> kept;  // where the っ kept of each run is in out
     size_t copied = 0;
     char32_t prev = 0;
     for (size_t pos = 0; pos < in.size();) {
@@ -555,8 +562,11 @@ std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void*
         const size_t end = pos + RunOf(in.substr(pos), TsuRune);
         const char32_t next = end < in.size() ? text::DecodeRune(in.substr(end)).cp : 0;
         const bool small = RuneIn(next, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮヵヶー");
-        if (end - pos > r.size && LetterRune(prev) && LetterRune(next) && !small && !(holds && holds(context, in, pos, end))) {
-            out.append(in.substr(copied, pos + r.size - copied));
+        if (end - pos > r.size && LetterRune(prev) && LetterRune(next) && !small &&
+            !(runs.holds && runs.holds(runs.context, in, pos, end))) {
+            out.append(in.substr(copied, pos - copied));
+            kept.push_back(out.size());
+            out.append(in.substr(pos, r.size));
             copied = end;
         }
         prev = r.cp;
@@ -564,6 +574,18 @@ std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void*
     }
     if (copied == 0) return std::string(in);
     out.append(in.substr(copied));
+    if (runs.start == nullptr) return out;
+    std::vector<size_t> starts;
+    for (const size_t at : kept) {
+        if (const size_t start = runs.start(runs.context, out, at); start != std::string::npos) starts.push_back(start);
+    }
+    std::sort(starts.begin(), starts.end());
+    starts.erase(std::unique(starts.begin(), starts.end()), starts.end());
+    for (size_t k = starts.size(); k-- > 0;) {
+        std::string mark;
+        text::AppendRune(mark, output::kStressMark);
+        out.insert(starts[k], mark);
+    }
     return out;
 }
 

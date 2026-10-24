@@ -269,6 +269,22 @@ HD_TEST(pipeline_write_emphasis) {
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteEmphasis(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_write_stress) {
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D대단해!"), std::string("대애애단해!"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D정말로"), std::string("저어엉말로"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D절대"), std::string("저어얼대"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D위험했다"), std::string("위이이험했다"));
+    // A final that is not held (ㄱ, ㅎ, two consonants), no final before a syllable with ㅇ, or
+    // no syllable after the mark: the mark is dropped.
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D확실히"), std::string("확실히"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D매우"), std::string("매우"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D당연하지"), std::string("다아앙연하지"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D많이"), std::string("많이"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D좋은"), std::string("좋은"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00DOK"), std::string("OK"));
+    HD_CHECK_EQ(pipeline::WriteStress("대단해"), std::string("대단해"));
+}
+
 HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
