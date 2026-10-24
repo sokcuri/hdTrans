@@ -110,8 +110,9 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
        `rules.constructions`).
      - `kind`: `fix`, `keep` or `current`.
      - `layer`: the docs/pipeline-layers.md name of the layer that decides the line.
-   - **Inputs.** Short excerpts of real lines or the relevant part of a line, not invented sentences.
-     Name no source or work, and copy no whole passages. Use neutral names.
+   - **Inputs.** Mostly short excerpts of real lines or the relevant part of a line. Add invented
+     sentences only for shapes the data lacks or for pairs that differ in one condition. Name no
+     source or work, and copy no whole passages. Use neutral names.
    - **Coverage.** A widened rule needs keep rows on the other side of its condition. Engine
      changes also get a unit test next to the stage (`tests/unit`, `hdtest.h`).
    - **Spec.** A change that contradicts a spec rule updates the rule and its cases in the same
