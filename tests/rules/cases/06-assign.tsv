@@ -16,7 +16,7 @@ dict:jisjk:341089	どうもありがとうございます。	대단히 고맙습
 dict:jisjk:342993	パンは食べねぇ。	빵은 먹지 않는다.	fix	local
 dict:jisjk:342993	鳥は飛べねぇよ。	새는 날 수 없어.	fix	local
 dict:jisjk:342993	本当にねぇ。	정말.	fix	local
-dict:jisjk:342993	よく走るねぇ。	잘 달리는군.	fix	local
+dict:jisjk:342993	よく走るねぇ。	잘 달리네.	fix	local
 dict:jisjk:346800	まさかの成功だ。	뜻밖의 성공이다.	fix	local
 dict:jisjk:346800	まさか忘れないだろう。	설마 잊지 않을 것이다.	fix	local
 dict:jisjk:340827	静かにしないでください。	!rule:dict:jisjk:340827	keep	local

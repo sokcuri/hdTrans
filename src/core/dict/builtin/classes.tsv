@@ -3,6 +3,7 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
@@ -173,6 +174,17 @@ adverb.gradual	益々
 adverb.gradual	日に日に
 adverb.gradual	少しずつ
 adverb.gradual	みるみる
+
+adverb.observation	よく
+adverb.observation	いつも
+adverb.observation	随分
+adverb.observation	ずいぶん
+adverb.observation	なかなか
+adverb.observation	結構
+adverb.observation	けっこう
+adverb.observation	さすが
+adverb.observation	流石
+adverb.observation	意外と
 
 aru.after-de	ある
 aru.after-de	あり
@@ -1992,6 +2004,22 @@ verb.casual-state	すぎ
 verb.casual-state	過ぎ
 verb.casual-state	見え
 verb.casual-state	聞こえ
+verb.casual-state	感じ
+verb.casual-state	思
+verb.casual-state	かか
+verb.casual-state	掛か
+verb.casual-state	叶
+verb.casual-state	疲れ
+verb.casual-state	助か
+verb.casual-state	目立
+verb.casual-state	分か
+verb.casual-state	わか
+verb.casual-state	解か
+verb.casual-state	知
+verb.casual-state	疑
+verb.casual-state	流行
+verb.casual-state	はや
+verb.casual-state	似合
 
 verb.entrust	頼む
 verb.entrust	たのむ

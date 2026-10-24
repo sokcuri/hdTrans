@@ -1,0 +1,27 @@
+# 규칙: SPC-5
+rule	input	expected	kind	layer
+cx:ne-promise:10	「違うね」	「다르네」	fix	rewrites
+cx:ne-promise:10	「静かだね」	!rule:cx:ne-promise:10	keep	rewrites
+cx:ne-promise:20	「感じるね」	「느끼네」	fix	rewrites
+cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites
+cx:ne-promise:20	「頼りになるね」	「의지가 되네」	fix	rewrites
+cx:ne-promise:20	「ここにあるね」	「여기에 있네」	fix	rewrites
+cx:ne-promise:20	「潜れるね！」	「잠수할 수 있네!」	fix	rewrites
+cx:ne-promise:20	「冷えるねー」	「차가워지네~」	fix	rewrites
+cx:ne-promise:20	「よく食べるね」	「잘 먹네」	fix	rewrites
+cx:ne-promise:20	「お茶淹れるね」	!rule:cx:ne-promise:20	keep	rewrites
+cx:ne-promise:30	「電車が来るね」	「전철이 오네」	fix	rewrites
+cx:ne-promise:30	「私が行くね」	「내가 갈게」	keep	rewrites
+cx:ne-promise:30	「時間がないから先に行くね」	「시간이 없으니까 먼저 갈게」	keep	rewrites
+cx:ne-promise:20	「お腹空くね」	「배고프네」	fix	rewrites
+cx:ne-promise:20	「キラキラ光るね」	「반짝반짝 빛나네」	fix	rewrites
+cx:ne-promise:20	「ゴミ、捨てるね」	!rule:cx:ne-promise:20	keep	rewrites
+cx:ne-promise:30	「お茶が冷めないうちに飲むね」	!rule:cx:ne-promise:30	keep	rewrites
+cx:ne-promise:30	「彼が来たら呼ぶね」	!rule:cx:ne-promise:30	keep	rewrites
+cx:ne-promise:40	「先に行くね」	「먼저 갈게」	fix	rewrites
+cx:ne-promise:40	「お茶淹れるね」	「차 끓일게」	fix	rewrites
+cx:ne-promise:40	「紹介するね」	「소개할게」	fix	rewrites
+cx:ne-promise:40	「食べたね」	「먹었네」	keep	rewrites
+cx:ne-promise:40	「行かないね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「行きますね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「本当に行くね？」	!rule:cx:ne-promise:40	keep	rewrites
