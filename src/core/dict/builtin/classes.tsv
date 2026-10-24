@@ -167,6 +167,7 @@
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
 //= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
+//= noun.vehicle	Vehicles: their で is the means only before a verb of verb.vehicle-travel, and elsewhere the place where it happens (電車で行く 전철로 가다, 電車で足を踏まれた 전철에서 발을 밟혔다).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-letter	Particles after which, or before which after a kanji or katakana, a single Latin letter of mark.laughter is a word, not laughter (変数wの値, のwキー).
@@ -262,6 +263,7 @@
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
+//= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
@@ -2380,6 +2382,25 @@ noun.scene	空間
 
 noun.scene-means	夢
 
+noun.vehicle	電車
+noun.vehicle	バス
+noun.vehicle	列車
+noun.vehicle	新幹線
+noun.vehicle	地下鉄
+noun.vehicle	飛行機
+noun.vehicle	タクシー
+noun.vehicle	馬車
+noun.vehicle	汽車
+noun.vehicle	車
+noun.vehicle	自動車
+noun.vehicle	船
+noun.vehicle	自転車
+noun.vehicle	バイク
+noun.vehicle	トラック
+noun.vehicle	ヘリ
+noun.vehicle	ヘリコプター
+noun.vehicle	終電
+noun.vehicle	始発
 noun.time-end	時
 noun.time-end	頃
 noun.time-end	日
@@ -3787,6 +3808,63 @@ verb.way-of-doing	よう…
 verb.way-of-doing	よう？
 verb.way-of-doing	よう）
 
+verb.vehicle-travel	行
+verb.vehicle-travel	いらっしゃ
+verb.vehicle-travel	伺
+verb.vehicle-travel	離れ
+verb.vehicle-travel	救助
+verb.vehicle-travel	搬送
+verb.vehicle-travel	輸送
+verb.vehicle-travel	近づ
+verb.vehicle-travel	近付
+verb.vehicle-travel	寄
+verb.vehicle-travel	飛
+verb.vehicle-travel	クルージング
+verb.vehicle-travel	ツーリング
+verb.vehicle-travel	登校
+verb.vehicle-travel	下校
+verb.vehicle-travel	出勤
+verb.vehicle-travel	退勤
+verb.vehicle-travel	参
+verb.vehicle-travel	出
+verb.vehicle-travel	やって
+verb.vehicle-travel	乗
+verb.vehicle-travel	来
+verb.vehicle-travel	帰
+verb.vehicle-travel	戻
+verb.vehicle-travel	向か
+verb.vehicle-travel	移動
+verb.vehicle-travel	進
+verb.vehicle-travel	通
+verb.vehicle-travel	送
+verb.vehicle-travel	迎え
+verb.vehicle-travel	連れ
+verb.vehicle-travel	運
+verb.vehicle-travel	越し
+verb.vehicle-travel	出かけ
+verb.vehicle-travel	出掛け
+verb.vehicle-travel	走
+verb.vehicle-travel	逃げ
+verb.vehicle-travel	去
+verb.vehicle-travel	着
+verb.vehicle-travel	到着
+verb.vehicle-travel	駆け
+verb.vehicle-travel	通勤
+verb.vehicle-travel	通学
+verb.vehicle-travel	帰宅
+verb.vehicle-travel	出発
+verb.vehicle-travel	旅
+verb.vehicle-travel	旅行
+verb.vehicle-travel	回
+verb.vehicle-travel	巡
+verb.vehicle-travel	渡
+verb.vehicle-travel	往復
+verb.vehicle-travel	上京
+verb.vehicle-travel	帰省
+verb.vehicle-travel	帰郷
+verb.vehicle-travel	ドライブ
+verb.vehicle-travel	かか
+verb.vehicle-travel	掛か
 verb.transfer	あげ
 verb.transfer	差し上げ
 verb.transfer	さしあげ
