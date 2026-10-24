@@ -162,6 +162,13 @@ phrase:leave-taking	「また明日……」	「내일 보자……」	fix	sound
 phrase:leave-taking	「また明日～」	「내일 보자~」	fix	sound
 phrase:leave-taking	「ありがとう　またあした」	「고마워 내일 보자」	fix	sound
 phrase:leave-taking	「また明日！おやすみ！」	「내일 보자! 잘 자!」	fix	sound
+phrase:leave-taking	「また明日？」	「또 내일?」	keep	sound
+phrase:leave-taking	「えっ、また明日？」	「어, 또 내일?」	keep	sound
+phrase:leave-taking	「また明日? 本当に?」	「또 내일? 정말?」	keep	sound
+phrase:leave-taking	「また来週？」	「또 다음주?」	keep	sound
+phrase:leave-taking	「また後で？」	「또 나중에?」	keep	sound
+phrase:leave-taking	「またあした？」	「또 내일?」	keep	sound
+phrase:leave-taking	「また明日。」	「내일 보자.」	fix	sound
 cx:ne-promise:17	「にいちゃん、やるね。」	rule:cx:ne-promise:17=1네	fix	rewrites
 cx:ne-promise:17	「よし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
 cx:ne-promise:40	「放課後とか頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites

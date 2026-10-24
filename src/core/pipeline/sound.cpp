@@ -601,12 +601,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 ok = false;
             }
         }
-        // A final row needs the end of the utterance after it and any spaces: no letter, digit or comma.
+        // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
+        // question mark.
         if (ok && s.final) {
             size_t q = end;
             while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
-            if (q < rs_.size() &&
-                (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass("mark.comma", EncodeText(f.substr(q, 1))))) {
+            const std::string next = q < rs_.size() ? EncodeText(f.substr(q, 1)) : std::string();
+            if (q < rs_.size() && (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass("mark.comma", next) ||
+                                   dict::InClass("mark.question", next))) {
                 ok = false;
             }
         }

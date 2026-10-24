@@ -840,6 +840,8 @@ HD_TEST(pipeline_sound_final_phrase) {
         {"また明日来る", "また明日来る"},
         {"また明日 来る", "また明日 来る"},
         {"また明日、学校で", "また明日、学校で"},
+        {"また明日？", "また明日？"},  // a question, not the farewell
+        {"また明日 ?", "また明日 ?"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

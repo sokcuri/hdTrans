@@ -64,6 +64,7 @@
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
 //= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
+//= mark.question	Question marks, after which a row read only where the utterance ends asks instead (また明日？ 또 내일?).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
@@ -852,6 +853,8 @@ mark.restart	··
 mark.comma	、
 mark.comma	，
 mark.comma	,
+mark.question	？
+mark.question	?
 
 mark.drawn	ぇ
 mark.drawn	ェ
