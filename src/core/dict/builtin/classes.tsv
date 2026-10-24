@@ -86,8 +86,10 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
-//= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내, 出羽国人 데와 고쿠진); 国中, 国府, 国主 keep the name with its 国.
+//= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
+//= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
+//= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
@@ -1254,7 +1256,10 @@ noun.realm-compound	国境
 noun.realm-compound	国内
 noun.realm-compound	国外
 noun.realm-compound	国民
-noun.realm-compound	国人
+
+noun.realm-province-compound	国人
+
+noun.realm-country	日本
 
 noun.realm-name	日本
 noun.realm-name	山城

@@ -1188,7 +1188,8 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     const std::string_view name = word.substr(0, word.size() - last.size);
     const std::string_view after = text.substr(word.size());
     const std::string_view compound = text.substr(name.size(), last.size + text::DecodeRune(after).size);
-    if (!dict::InClass("noun.realm-name", name) || !dict::InClass("noun.realm-compound", compound)) return records;
+    const bool province = !dict::InClass("noun.realm-country", name) && dict::InClass("noun.realm-province-compound", compound);
+    if (!dict::InClass("noun.realm-name", name) || !(province || dict::InClass("noun.realm-compound", compound))) return records;
     for (const Record* r = DoLookup(after, kModeGeneral).records; r != nullptr; r = r->child) {
         if (after.starts_with(r->source) && text::RuneCount(r->source) > 1) return records;
     }
