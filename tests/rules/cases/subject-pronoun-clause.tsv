@@ -16,3 +16,28 @@ cx:subject-before-ga:40	彼の好きな歌	그가 좋아하는 노래	keep	rewri
 cx:subject-no:10	人の少ない町	사람이 적은 마을	fix	rewrites
 cx:subject-no:10	気持ちのよい朝	기분이 좋은 아침	fix	rewrites
 cx:subject-no:10	人の話を聞く。	사람의 이야기를 듣는다.	keep	rewrites
+cx:subject-no:10	誰の知らない話をしよう。	누가 모르는 이야기를 하자.	fix	rewrites
+cx:short-possessive:10	誰の知らない間に	누가 모르는 사이에	fix	rewrites
+cx:subject-before-ga:40	誰の好きな歌	누가 좋아하는 노래	fix	rewrites
+cx:subject-before-ga:40	誰に聞かれても困る。	누가 물어도 곤란하다.	fix	rewrites
+cx:subject-before-ga:40	誰に言われた？	누구에게 들었어?	keep	rewrites
+cx:subject-before-ga:40	誰のせいだ。	누구의 탓이다.	keep	rewrites
+cx:subject-before-ga:20	問題は誰じゃなくて何をしたかだ。	문제는 누가 아니고 무엇을 했는지다.	fix	rewrites
+cx:subject-before-ga:10	誰が好き？	누구를 좋아해?	keep	rewrites
+cx:subject-before-ga:10	ヌーが好き	누를 좋아해	keep	rewrites
+cx:subject-before-ga:40	誰が来た。	누가 왔다.	fix	rewrites
+cx:subject-before-ga:40	俺の方が得意だ。	내가 자신있다.	fix	rewrites
+cx:subject-before-ga:40	僕に使えるか？	내가 쓸 수 있을까?	fix	rewrites
+cx:subject-no:10	誰の来ない部屋	누가 오지 않는 방	fix	rewrites
+cx:subject-no:10	人の来ない部屋	사람이 오지 않는 방	fix	rewrites
+cx:subject-no:10	君の来ない夜は長い。	네가 오지 않는 밤은 길다.	fix	rewrites
+cx:subject-no:10	自分のダメなところ	!rule:cx:subject-no:10	keep	rewrites
+cx:subject-no:10	朝の来ない夜	아침이 오지 않는 밤	fix	rewrites
+cx:subject-before-ga:40	誰の見た夢	누가 본 꿈	fix	rewrites
+cx:subject-before-ga:40	誰の言った言葉	누가 말한 말	fix	rewrites
+cx:subject-before-ga:40	誰の住む家	누가 사는 집	fix	rewrites
+cx:subject-before-ga:40	誰の行かない店	누가 가지 않는 가게	fix	rewrites
+cx:subject-before-ga:40	誰の本	누구의 책	keep	rewrites
+cx:subject-before-ga:40	誰の笑顔が好き	누구의 웃는 얼굴을 좋아해	keep	rewrites
+cx:subject-no:10	自分の良くない癖	!rule:cx:subject-no:10	keep	rewrites
+cx:negative-copula:10	犯人は誰ではない。	범인은 누가 아니다.	fix	rewrites

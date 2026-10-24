@@ -3605,12 +3605,8 @@ bool RuleL417([[maybe_unused]] Item* p) {
 }
 
 // local 418
-//     src[+1] == "が" and pos[+1] is 2**
-//     src[+1] == "に" and pos[+2] is 4** and src[+2] != "話" and end.pos[+2] is 57* and (src[+3] == "もら" or src[+3] == "いただ")
 bool RuleL418([[maybe_unused]] Item* p) {
-    return (SrcEq(p, 1, "が"sv) && PumsaEq(p, 1, "2**"sv)) ||
-           (SrcEq(p, 1, "に"sv) && PumsaEq(p, 2, "4**"sv) && SrcNe(p, 2, "話"sv) && GobiPumsaEq(p, 2, "57*"sv) && (SrcEq(p, 3, "もら"sv) ||
-           SrcEq(p, 3, "いただ"sv)));
+    return false;
 }
 
 // local 419
@@ -4850,7 +4846,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL415, 0x2ed5a4e8f80ac045ull},
     {RuleL416, 0x2a1603358ac2dfa0ull},
     {RuleL417, 0xa4b4ef4da6745a3aull},
-    {RuleL418, 0x6dc4321637757b4dull},
+    {RuleL418, 0xb962ce0622e33be6ull},
     {RuleL419, 0x1a54fc1c3c85beedull},
     {RuleL420, 0xc53a9a2cb615c8d1ull},
     {RuleL421, 0x53277a94087e6c3cull},
