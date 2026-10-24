@@ -410,6 +410,7 @@ private:
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
                      size_t* ending = nullptr) const;
     bool LongerWordAt(size_t p, size_t n) const;
+    bool DrawnInWord(size_t p, size_t end) const;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
@@ -538,6 +539,31 @@ bool SoundText::LongerWordAt(size_t p, size_t n) const {
     size_t base = 0, user = 0, name = 0;
     LongestKeys(p, base, user, name);
     return base > n || user > n;
+}
+
+// Whether the sound at [p, end), in hiragana, draws out a kana of a word with its first run
+// of ー or ～: a dictionary word reads the text from p without the run, goes two or more
+// characters past it, further than the sound with its adverbial と and at least as far as
+// the word right after the run (べーつに べつに, ざーんねん ざんねん; not へーそうなんだ,
+// えーっと or どーんと).
+bool SoundText::DrawnInWord(size_t p, size_t end) const {
+    if (!IsHiraganaRune(rs_[p])) return false;
+    size_t i = p + 1;
+    while (i < end && !In(rs_[i], U"ー～")) i++;
+    size_t j = i;
+    while (j < rs_.size() && In(rs_[j], U"ー～")) j++;
+    if (i >= end || j == i || j >= rs_.size() || !IsHiraganaRune(rs_[j]) || In(rs_[j], U"ぁぃぅぇぉっ")) return false;
+    const std::string plain = std::string(Bytes(p, i)) + std::string(Bytes(j, std::min(rs_.size(), j + 24)));
+    size_t n = 0;
+    for (const dict::Candidate& c : snap_.GetWordInfo(plain, dict::LookupMode::General, ctx_.lookup).list) {
+        if (c.user != nullptr && (c.user->kana || c.user->nameLayer)) continue;
+        n = std::max(n, text::RuneCount(c.source));
+    }
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(j, base, user, name);
+    const size_t before = i - p;
+    const size_t to = end + Adverbial(end);  // どーんと: the sound with its と reads as far as どんと
+    return n >= before + 2 && n > to - p - (j - i) && n >= before + std::max(base, user);
 }
 
 // The sound at character p: the longest key, then the longest match. A dictionary word
@@ -710,6 +736,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (!Stopped(best) && !(inChain && best.intj && !chosen->phrase)) return false;
     // A phrase does not end at a ッ before テ: that is its verb in the te-form (イっちゃってぇ).
     if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
+    if (DrawnInWord(p, best.end)) return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
     // (見て！ぽい～！ 포이~!), nor is a sound that an ending cannot follow: after another sound

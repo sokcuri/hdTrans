@@ -48,7 +48,11 @@ const dict::LoadResult& SoundDictionary() {
         "ついに\t마침내\tE300\t30\n"
         "ただ\t다만\tE300\t31\n"
         "歌\t노래하\tM100\t32\n"
-        "うよ\t6 버릴 거야\tS5A0\t33\n",
+        "うよ\t6 버릴 거야\tS5A0\t33\n"
+        "べつに\t딱히\tE300\t34\n"
+        "ざんねん\t유감\tN110\t35\n"
+        "へそ\t배꼽\tN110\t36\n"
+        "そう\t그렇게\tE300\t37\n",
     }});
     return result;
 }
@@ -155,6 +159,12 @@ HD_TEST(pipeline_sound) {
         {"司書が本を運ぶ", "司書が本を運ぶ"},
         {"ししょかん", "ししょかん"},
         {"ああああん", "아아아앙"},
+        // A sound gives a ー up to a word that reads the kana without it and goes on two
+        // kana past it (べーつに べつに, ざーんねん ざんねん); not to one that ends one kana
+        // past it before a word of its own (へーそうなんだ).
+        {"べーつに", "べつに"},
+        {"ざーんねん", "ざんねん"},
+        {"へーそうなんだ", "へーそうなんだ"},
         // A cry that ends drawing out its vowel runs on into the next cry; words stay apart.
         {"ひぃやあっ！", "히이야앗！"},
         {"ふぁーふぁー", "후아아후아아"},
@@ -249,6 +259,9 @@ HD_TEST(pipeline_sound) {
         {"よー！", "よー！"},
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},
+        // A sound that holds the mark gives it up to a longer word read without it.
+        {"べーつに", "べつに"},
+        {"へーそうなんだ", "へーそうなんだ"},
         {"うーちゃん！", "うーちゃん！"},
         {"休もうっと。", "休もうっと。"},
         {"うるせぇな", "うるさいな"},
