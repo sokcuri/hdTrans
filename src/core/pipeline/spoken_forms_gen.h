@@ -285,12 +285,4 @@ inline constexpr std::string_view kExclamationNaStems[] = {
     "落ち着く",
 };
 
-inline constexpr std::string_view kExclamationNaExcludedEndings[] = {
-    "言う",
-    "よう",
-    "そう",
-    "です",
-    "ます",
-};
-
 }  // namespace hdTrans::pipeline::internal

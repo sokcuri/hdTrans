@@ -103,7 +103,7 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
      - `rule`: `dict:<row id>` for a dictionary row's local rule, `L<n>`, `G<prio>`,
        `cx:<family>:<prio>` for a construction row, or `<stage>:<name>` for other changes
        (`sound:`, `constraint:`, `rewrite:`, `compose:`, `normalize:`, `sense:`).
-     - `expected`: the whole output; `rule:dict:<row id>=<ko>` (the rule that row carries chose
+     - `expected`: the whole output; `has:<ko>` or `lacks:<ko>` (the output holds or lacks it); `rule:dict:<row id>=<ko>` (the rule that row carries chose
        `<ko>`); `rule:L<n>=<ko>`; `rule:cx:<family>:<prio>=<ko>`; or `!rule:dict:<row id>` and
        `!rule:cx:<family>:<prio>` (it chooses nothing). Assert only what the fix decides unless the
        whole line is right. Every construction row needs a `fix` and a `keep` case (ctest
@@ -115,9 +115,17 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
      source or work, and copy no whole passages. Use neutral names.
    - **Coverage.** A widened rule needs keep rows on the other side of its condition. Engine
      changes also get a unit test next to the stage (`tests/unit`, `hdtest.h`).
+   - **Critical.** A fix of a meaning flip (a negation lost or added, a tense or aspect flipped, a
+     prohibition, permission or opinion turned around, doer and done-to swapped, a word dropped)
+     adds `fix` and `keep` rows to `tests/rules/critical/<kind>.tsv` (spec/meaning.md), asserting the
+     words that carry the meaning with `has:<ko>` and `lacks:<ko>` or the whole output. Every row
+     there must pass (ctest `rules.critical`, in the gate). Never delete, weaken or re-kind a
+     critical row: do not drop or shorten the words it asserts, do not turn a whole output into a
+     `has:` that misses them, do not make it `current`. A whole output may follow a change of other
+     words only when the asserted meaning stays. A change that makes one fail is fixed or reverted.
    - **Spec.** A change that contradicts a spec rule updates the rule and its cases in the same
      commit.
-   - **Run.** `tools/rule-cases.sh CLI dicts tests/rules/cases`, then the same with
+   - **Run.** `tools/rule-cases.sh CLI dicts tests/rules/critical --no-current`, `tools/rule-cases.sh CLI dicts tests/rules/cases`, then the same with
      `tests/rules/speech-soft -- --speech soft` and with `tests/rules/speech-strict -- --speech strict`.
 10. **Gate.** `tools/gate.sh` must print `GATE OK`. Act on its exit status; never pipe it through
     `tail`. It skips the `testdata` comparison, which is a report.

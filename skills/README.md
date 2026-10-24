@@ -21,7 +21,7 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 
 | Tool | Does |
 |---|---|
-| `tools/gate.sh [NAME]` | Build and ctest (without `testdata`) with dicts/ and a fresh HOME; the case and example tests must pass; prints `GATE OK` |
+| `tools/gate.sh [NAME]` | Build and ctest (without `testdata`) with dicts/ and a fresh HOME; the critical, case and example tests must pass; prints `GATE OK` |
 | `tools/measure.sh [-c CLI] [-d DICTS] [-b BASE] NAME` | Translate the private sets (lines, sample, test-data documents, web examples) at once, write the changed lines as judge pairs, print the sample chrF |
 | `tools/audit.py draw RUN OUT \| rate LINES GRADES` | A fixed seeded sample of current outputs for grading, and its error rate per set (docs/testing.md) |
 | `tools/chrf.py REF A [B]` | Corpus chrF, and changed, better and worse line counts between two outputs |

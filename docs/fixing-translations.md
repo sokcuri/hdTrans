@@ -167,6 +167,7 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 |---|---|
 | `tests/rules/cases/<주제>.tsv` | 규칙의 결과. `expected`는 번역 전체, `rule:dict:<id>=<번역>`은 그 규칙이 고른 번역, `!rule:dict:<id>`는 그 규칙이 고르지 않아야 함. kind는 `fix`, `keep` |
 | `examples/` | 문서 단위 결과. 출력이 바뀌면 `.ko.txt`를 고치되 첫 줄 주석은 그대로 |
+| `tests/rules/critical/<갈래>.tsv` | 뜻이 뒤집히는 오역(부정, 시제, 금지와 허락, 하는 사람, 빠진 낱말)의 사례. 기대값은 번역 전체나 뜻을 지는 말(`has:생각하지 마`, `lacks:내가 이길`)이고, 한 행도 실패하지 않아야 합니다. 행을 지우거나 약하게 바꾸지 않습니다([MNG](../spec/meaning.md)) |
 | `tests/rules/drops/` | 낱말이 번역에서 사라지면 안 되는 입력(활용형 격자 등). ctest `rules.drops`(`tools/drops.py`)가 이 입력과 규칙 사례의 입력에서 한 글자씩 읽혀 번역이 빈 글자 두 개 이상을 찾고, `known-gaps.txt`의 입력만 봐줍니다. 측정 세트의 빠짐 수는 ctest `sets.drops`가 `tools/drops-budget.tsv`로 봅니다([testing.md](testing.md#낱말-빠짐-dropspy)) |
 
 예문은 실제 글에서 짧게 발췌한 것(한 줄이나 그 일부)을 기본으로 합니다. 데이터에 없는 모양이나 조건 하나만 다른 짝이 필요할 때는 직접 지은 문장을 더하되, 사례의 대부분은 발췌입니다. 출처, 제목, 작품 이름은 적지 않고, 긴 대목을 통째로 옮기지 않습니다.

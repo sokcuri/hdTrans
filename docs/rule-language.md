@@ -413,7 +413,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
   `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
   `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴),
-  `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
+  `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `lengthened`(단어 바로 뒤에 `mark.lengthening`의 늘임 표시가 옴: 思うなぁ, 思うなー), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
   `prompt-after`(단어 뒤의 글이 공백 다음에 `mark.prompt-follow`의 말로 시작하거나 `mark.prompt-answer`의 답을 담음: 화면에 띄운 물음 뒤의 と, 》, はい, やめる).
   표에 없는 판정이 필요하면 `constructions.cpp`의 `kFeatures`에 이름과 함께 더합니다.
 - 구문 표에서만 쓰는 묶음: `!1 E`는 E가 거짓이면 참. `<N 목표 막이`와 `>N 목표 막이`는 왼쪽(오른쪽)으로 N 단어까지

@@ -209,19 +209,23 @@ if(NOT EMSCRIPTEN)
         # One table per theme, tests/rules/cases/<theme>.tsv.
         add_test(NAME rules.cases.themes COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases")
+        # Meaning flips, tests/rules/critical/<kind>.tsv: every row passes, none is current.
+        add_test(NAME rules.critical COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/critical"
+            --no-current)
         # Each speech level: tests/rules/speech-<level>/<theme>.tsv (strict is the default).
         foreach(level soft strict)
             add_test(NAME rules.cases.speech-${level} COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-${level}" -- --speech ${level})
         endforeach()
-        set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
+        set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
         if(HDTRANS_PYTHON)
             add_test(NAME rules.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
-                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/critical"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-soft"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-strict" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops"
                 --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")

@@ -335,7 +335,7 @@ bool ExclamationNa(std::string_view s, size_t pos, Match& m) {
 
 std::string ReplaceExclamationNa(const Match& m) {
     const Match g = Rematch(m, ExclamationNa);
-    for (std::string_view ending : kExclamationNaExcludedEndings) {
+    for (std::string_view ending : dict::ClassMembers("ending.no-exclamation-na")) {
         if (g.group[1].ends_with(ending)) return std::string(m.group[0]);
     }
     size_t trim = 0;

@@ -1,0 +1,17 @@
+# 규칙: MNG-1
+rule	input	expected	kind	layer
+dict:gram:ku-nanka-nai:1	悔しくなんかないもん！！	has:않	keep	local-ending
+dict:gram:ku-nanka-nai:1	今は別に寂しくなんかない。	has:외롭지도 않다	keep	local-ending
+dict:gram:ku-nanka-nai:2	「大丈夫、怖くなんてないよ」	has:무섭지도 않아	keep	local-ending
+cx:omou-na:10	二度と会えないと思うな	has:만날 수 없다	keep	rewrites
+cx:omou-na:10	お前ごときが勝てないと思うな	has:이길 수 없다	keep	rewrites
+ending:negative	まだ終わっていない	has:끝나지 않았다	keep	ending-defaults
+ending:negative	彼は来なかった	has:오지 않았다	keep	ending-defaults
+ending:negative	誰もいません	has:없습니다	keep	ending-defaults
+ending:negative	何も知らない	has:모른다	keep	ending-defaults
+ending:negative	一度も見たことがない	has:본 적이 없다	keep	ending-defaults
+ending:negative	絶対に許さない	has:용서하지 않는다	keep	ending-defaults
+ending:negative	食べられない	has:먹을 수 없다	keep	ending-defaults
+ending:negative	行かずに帰った	has:가지 않고	keep	ending-defaults
+ending:negative	雨は降らないだろう	has:내리지 않을	keep	ending-defaults
+ending:negative	彼は嘘をつかない	has:거짓말하지 않는다	keep	ending-defaults
