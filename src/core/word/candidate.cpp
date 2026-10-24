@@ -483,6 +483,19 @@ std::string_view CanonicalPair(char32_t r, std::string& scratch, bool& cut) {
 
 }  // namespace
 
+bool NounEndAt(std::string_view text) { return NounEnd(text); }
+
+bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal) {
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4') return true;
+    }
+    const std::string noun = std::string(stem) + std::string(nominal);
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(noun, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.ClassDigit() == '1') return true;
+    }
+    return false;
+}
+
 // Rewrites a synthetic target: kanji become their Hangul reading (hanjaToHangul),
 // hiragana, katakana and 、 are written in their canonical forms or dropped
 // (deleteJapan; 、 and ・ are always written), other characters are copied.

@@ -14,7 +14,7 @@ struct RestoreSteps {
     output::Pieces spaced;     // DropAddedSpaces
     output::Pieces bracketed;  // RestoreBrackets; equal to spaced without keepBrackets
     output::Pieces korean;     // KoreanForms and optional spelling replacements on text pieces
-    std::string line;          // UnescapePrivateUse(DropParticleMarks(WriteLengthening(WriteEmphasis(...))))
+    std::string line;          // UnescapePrivateUse(WriteLaughter(DropParticleMarks(WriteLengthening(...)), typed))
 };
 
 // cleaned is the output of the cleanup, typed the pieces of the line as the protected
@@ -90,6 +90,16 @@ std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
 std::string DropParticleMarks(std::string_view s);
+
+// line with each run of a letter of mark.laughter that laughs written as one ko.laughter per letter
+// (없어ｗｗ 없어ㅋㅋ): the run follows a Hangul syllable, ko.laughter or a mark of
+// mark.before-laughter, past spaces, or opens the line, and no Latin letter, digit or one of
+// . / @ _ : touches it (www.example.com). source is the typed text of the line; when it has as many
+// such runs, a run that is one letter used as a word there stays: after a kanji, katakana, the
+// start or a particle of particle.after-letter, before such a particle (変数wの値 변수 w의 값), or
+// after such a particle before kanji or katakana (のwキー); a run opening the line before a Hangul
+// syllable stays as well (w를 입력). The other bytes of line are copied as they are.
+std::string WriteLaughter(std::string_view line, std::string_view source);
 
 // The offset of the kana the composer writes for kana it drops.
 constexpr char32_t kDropShift = 0xC000;

@@ -174,6 +174,14 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
 // '0'+branch) and the length of the conjugation pattern; false when no branch matches.
 bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int& branch, int& length);
 
+// Whether text starts with a particle or punctuation after a noun, or is empty.
+bool NounEndAt(std::string_view text);
+
+// Whether the adjective stem with its nominal ending is a word of the dictionary already: stem is
+// also the key of a verb, whose continuative it then spells (楽し of 楽しむ: 楽しみ), or stem and
+// nominal are the key of a noun (高み, 甘み).
+bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal);
+
 // Whether a verb record of conjugation class sub may join a group whose first record
 // has class first, for conjugation branch mode.
 bool VerbClassJoins(char mode, char first, char sub);
