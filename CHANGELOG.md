@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.5.0](https://github.com/sokcuri/hdTrans/compare/v0.4.7...v0.5.0) (2026-10-24)
+
+
+### Features
+
+* **release:** read spoken Japanese, repeated words and compounds naturally and move special cases into tables ([b962937](https://github.com/sokcuri/hdTrans/commit/b9629375265b1a7978e939a295dc88f5924e82ad))
+* **tools:** measure the test-data documents and web examples, and audit an error rate per release ([#59](https://github.com/sokcuri/hdTrans/issues/59)) ([3169c5f](https://github.com/sokcuri/hdTrans/commit/3169c5f4e6e886161c245016c2b37af9b8ecd468))
+
+
+### Bug Fixes
+
+* **dict:** read a dictionary compound noun whole after a shorter noun row ([#69](https://github.com/sokcuri/hdTrans/issues/69)) ([c3260af](https://github.com/sokcuri/hdTrans/commit/c3260af34caa5419856d9bc13eb6a90658486c68))
+* **dict:** read katakana spellings, phrase titles and idioms as the words they are ([#55](https://github.com/sokcuri/hdTrans/issues/55)) ([f6b1d58](https://github.com/sokcuri/hdTrans/commit/f6b1d58b5d17d496f0f91128d9c9d49bb918213d))
+* **dict:** read 経験豊富 as an adjective noun before だ, な and よ ([#75](https://github.com/sokcuri/hdTrans/issues/75)) ([b79f46c](https://github.com/sokcuri/hdTrans/commit/b79f46c7eed881aad693c72bbb6857254fa62ad9))
+* **rules:** resolve the rule lint warnings that change translations, or record why they stay ([#57](https://github.com/sokcuri/hdTrans/issues/57)) ([f1f95dd](https://github.com/sokcuri/hdTrans/commit/f1f95ddc5b8dac4ba3c42269c72db1471e2e487a))
+* **sound:** stop four out-of-range reads in the contraction and drawl steps, and narrow farewell, 出る and quoting って readings ([#76](https://github.com/sokcuri/hdTrans/issues/76)) ([e061376](https://github.com/sokcuri/hdTrans/commit/e06137660f7610ceabeafe203e59dcb580f6614c))
+* **translation:** attach particle-start glosses, read でーす as the copula and という after a sound as 하는 ([#74](https://github.com/sokcuri/hdTrans/issues/74)) ([6478f76](https://github.com/sokcuri/hdTrans/commit/6478f765ebff39e3804e57369ad544fb59eacc64))
+* **translation:** attach particles and endings after a gloss that ends in a space ([#67](https://github.com/sokcuri/hdTrans/issues/67)) ([067117e](https://github.com/sokcuri/hdTrans/commit/067117ec30f43ab8ea45d128e822756ff214b385))
+* **translation:** keep a katakana second self, read に向けて before a verb as 를 향해, XもYも as 도…도 and 後は before entrusting as 나머지는 ([#70](https://github.com/sokcuri/hdTrans/issues/70)) ([eb21876](https://github.com/sokcuri/hdTrans/commit/eb21876d59847c772d1694d5f4d7e4b4156ab3cb))
+* **translation:** read kanji and kana spellings of grammatical words alike ([#71](https://github.com/sokcuri/hdTrans/issues/71)) ([408f590](https://github.com/sokcuri/hdTrans/commit/408f5907ef6d701e3cdc6ad63ecb993a5121191a))
+* **translation:** read Latin-word particles, ruby spans, と、そうだ, ちゃったよ, いっぱい, honorific progressives, 頭 and province names ([#66](https://github.com/sokcuri/hdTrans/issues/66)) ([8315e27](https://github.com/sokcuri/hdTrans/commit/8315e27380433252dbe5ff8b7ae5e9230d1c325c))
+* **translation:** read repeated words copy by copy and keep the spaces of the source ([#58](https://github.com/sokcuri/hdTrans/issues/58)) ([79f3958](https://github.com/sokcuri/hdTrans/commit/79f39582902be6eaeb049b64e1843e50577c8663))
+* **translation:** read spoken contractions, sentence-final ね, ばいい questions and imperative よ ([#62](https://github.com/sokcuri/hdTrans/issues/62)) ([d71b9d3](https://github.com/sokcuri/hdTrans/commit/d71b9d3ef5daac6c6a8a5a245a7537adac5731d5))
+* **translation:** read いう after a place as 言う and 누구 before the subject 가 as 누가 ([#56](https://github.com/sokcuri/hdTrans/issues/56)) ([05ef028](https://github.com/sokcuri/hdTrans/commit/05ef028fa8600986648c89a142c6236751b011a3))
+* **translation:** read 回 after a number as 번 when it is stressed or counts an action in dialogue, and document the number rules ([#68](https://github.com/sokcuri/hdTrans/issues/68)) ([89870ed](https://github.com/sokcuri/hdTrans/commit/89870ed4340dac3d9e222f2611f4a013202b5fb9))
+* **translation:** read 見て before ！ or ？ at the end of a sentence as 봐, not 보고 ([#64](https://github.com/sokcuri/hdTrans/issues/64)) ([87f89d3](https://github.com/sokcuri/hdTrans/commit/87f89d38cb2165e8fc288b64c3775968fe36830a))
+
 ## [0.4.7](https://github.com/sokcuri/hdTrans/compare/v0.4.6...v0.4.7) (2026-10-23)
 
 
