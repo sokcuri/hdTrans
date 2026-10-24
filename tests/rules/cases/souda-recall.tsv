@@ -50,3 +50,12 @@ cx:souda-recall:10	「んー、そうだ」	「음, 그래」	keep	rewrites
 cx:souda-recall:30	　……そうだ。	!rule:cx:souda-recall:30	keep	rewrites
 cx:souda-recall:30	……そうだ！！	!rule:cx:souda-recall:30	keep	rewrites
 cx:souda-recall:30	マルフタマルマル。そうだ、甘いものは？	!rule:cx:souda-recall:30	keep	rewrites
+cx:souda-recall:30	「……そうだ」	「……그래」	fix	rewrites
+cx:souda-recall:30	「本当なの？」「……そうだ」	!rule:cx:souda-recall:30	fix	rewrites
+cx:souda-recall:30	「……そうだ」と彼は答えた。	!rule:cx:souda-recall:30	fix	rewrites
+cx:souda-recall:30	「……そうだ。」	!rule:cx:souda-recall:30	fix	rewrites
+cx:souda-recall:30	「……そうだ！！」	!rule:cx:souda-recall:30	fix	rewrites
+cx:souda-recall:30	「……そうだ！　田中さん、うちの自転車貸してあげるよ」	rule:cx:souda-recall:30=%Dn@	keep	rewrites
+cx:souda-recall:30	「確か……そうだ、花子が落とした本を拾ったんだ」	rule:cx:souda-recall:30=%Dn@	keep	rewrites
+cx:souda-recall:30	ほんとによく降りますね。……そうだ。佐藤さん、一緒にてるてる坊主作りませんか？	rule:cx:souda-recall:30=%Dn@	fix	rewrites
+cx:souda-recall:30	今晩は何がいいかしら？ ……そうだ！ ビフテキ、なんてどうですか？	rule:cx:souda-recall:30=%Dn@	fix	rewrites

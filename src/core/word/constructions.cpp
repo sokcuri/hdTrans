@@ -1,6 +1,7 @@
 #include "core/word/constructions.h"
 
 #include <algorithm>
+#include <span>
 #include <string>
 #include <unordered_map>
 
@@ -103,6 +104,43 @@ bool Exclaimed(Flusher& f, const Item* it) {
     return false;
 }
 
+// The size of the mark of marks that starts s, 0 for none.
+std::size_t MarkAt(std::string_view s, std::span<const std::string_view> marks) {
+    for (const std::string_view m : marks) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
+// Whether s holds only marks that end or pause a sentence and spaces.
+bool OnlyMarks(std::string_view s) {
+    while (!s.empty()) {
+        std::size_t n = MarkAt(s, dict::ClassMembers("mark.sentence-end"));
+        if (n == 0) n = MarkAt(s, dict::ClassMembers("mark.pause"));
+        if (n == 0 && text::IsSpace(text::DecodeRune(s).cp)) n = text::DecodeRune(s).size;
+        if (n == 0) return false;
+        s.remove_prefix(n);
+    }
+    return true;
+}
+
+// Whether the speech goes on after the item past the marks that end or pause its sentence:
+// a word follows on its line that is not a closing bracket, or its sentence ends inside a
+// quote that the next sentence goes on (「……そうだ！　青海さん」, ……そうだ、ほら; not
+// 「……そうだ」, ……そうだ。).
+bool SpeechGoesOn(Worker& w, const Item* it) {
+    const std::string_view rest = From(it->text, it->start + it->length);
+    if (!rest.empty() && !OnlyMarks(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
+    for (int j = it->tokenIndex + 1; j < w.TokenCount(); j++) {
+        const int type = w.Tok(j).type;
+        if (type == tokenizer::kTypeEnd) return w.QuoteDepth(j) > 0;
+        if (type == tokenizer::kTypeNewline) return false;
+        const std::string_view raw = w.tokens.Raw(static_cast<std::size_t>(j));
+        if (!OnlyMarks(raw)) return MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+    }
+    return false;
+}
+
 bool Narrated(Flusher& f, const Item* it) {
     if (it->InQuote()) return false;
     const Item* tail = it;
@@ -200,6 +238,8 @@ constexpr NamedFeature kFeatures[] = {
     // a dash or a small つ.
     {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
+    // More words follow on the line past the end of the sentence (SpeechGoesOn).
+    {"speech-goes-on", [](Flusher& f, const Item* it) { return SpeechGoesOn(f.w, it); }},
     // The item ends its sentence: the end of the utterance, or ！？!? after it (SentenceEnd).
     {"sentence-end", [](Flusher& f, const Item* it) { return SentenceEnd(f.w, it); }},
     // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
