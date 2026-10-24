@@ -40,6 +40,14 @@ bool OneKana(std::string_view s) {
     return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
 }
 
+// The length of the first of members that starts s, 0 for none.
+std::size_t StartLength(std::string_view s, std::span<const std::string_view> members) {
+    for (const std::string_view m : members) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
 }  // namespace
 
 int ContractedIruBranch(std::string_view rest) {
@@ -55,20 +63,19 @@ int ContractedIruBranch(std::string_view rest) {
     return best;
 }
 
-bool ProgressiveEndings(Group& g, Detail& d) {
-    constexpr std::string_view kExistence = "&HN@";
-    const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-head");
-    if (head.empty()) return false;
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
+    if (head.size() < 4) return false;
+    const std::string_view prefix = head.substr(0, head.size() - 4), family = head.substr(head.size() - 4);
     bool any = false;
     for (std::size_t i = 0; i < g.entries.size(); i++) {
         if (i < d.enabled.size() && !d.enabled[i]) continue;
         Entry& e = *g.entries[i];
-        const std::string_view row = e.dst.empty() ? std::string_view() : output::SourceMarkerRow(std::string(kExistence) + e.dst[0]);
+        const std::string_view row = e.dst.empty() ? std::string_view() : output::SourceMarkerRow(std::string(family) + e.dst[0]);
         if (row.empty()) {
             if (i < d.enabled.size()) d.enabled[i] = false;
             continue;
         }
-        e.dst = std::string(head.front()) + " " + std::string(row) + e.dst.substr(1);
+        e.dst = std::string(prefix) + std::string(row) + e.dst.substr(1);
         any = true;
     }
     return any;
@@ -565,8 +572,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
             patternWidth += WidthOf(Conjugation(7, branch));
             base.kind = branch;
             Group* g = endingGroup(after());
+            const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-head");
             if (g != nullptr && (ending == nullptr || static_cast<int>(form) + g->length > ending->length) &&
-                ProgressiveEndings(*g, base)) {
+                !head.empty() && ProgressiveEndings(*g, base, head.front())) {
                 ending = g;
                 length = sourceLength + pattern();
             } else {
@@ -576,7 +584,6 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
     }
-
     // The potential of that いる (待ってられない, やってられません) is the potential of the verb, as
     // a potential form reads (기다릴 수 없다): the ending after the ichidan form of られ.
     bool potentialStem = false;
@@ -615,6 +622,35 @@ bool Item::AcceptVerbContinuation(Record* following) {
             base.patternKind = oldKind;
             base.kind = 7;
             base.record = 0;
+        }
+    }
+
+    // The same for いらっしゃる (気に入ってらっしゃる, 溜まってらっしゃった, 見てらっしゃいます), written
+    // for 계시 after 고: its い before ます is the polite form of the stem, as for the verb.
+    if (ending == nullptr && base.kind == 7 && w->settings.text && queryAllowed && !potentialStem) {
+        const std::size_t stem = StartLength(rest, dict::ClassMembers("contraction.te-irassharu"));
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-honorific-head");
+        int branch = -1, n = 0;
+        if (stem > 0 && !head.empty()) {
+            const std::string_view form = rest.substr(stem);
+            if (form.starts_with(Conjugation(0, 10))) {
+                branch = 10;
+                n = static_cast<int>(Conjugation(0, 10).size());
+            } else if (!AnalyseVerbTail(rest.substr(0, stem), '8', form, branch, n)) {
+                branch = -1;
+            }
+        }
+        if (branch >= 0) {
+            const int teWidth = patternWidth;
+            patternWidth += WidthOf(rest.substr(0, stem + static_cast<std::size_t>(n)));
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = teWidth;
+                base.kind = 7;
+            }
         }
     }
 
