@@ -76,10 +76,18 @@ namespace internal {
 // 2 m 미터), is left as it is.
 std::string AlternateParticles(std::string_view text, std::string_view context);
 
-// Whether a word ending in the ASCII characters a3 a2 a1 (a1 last) is read with a
-// final consonant: digits by their Korean reading (0 1 3 6 7 8 yes), Latin letters
-// by English spelling rules.
-bool EndingConsonant(char a1, char a2, char a3);
+// The number of last letters LatinWordClass reads.
+constexpr size_t kLatinWindow = 8;
+
+// The particle class ('v', 'c' or 'l') of the word spelled by the ASCII letters that
+// end letters, read the way Korean writes English loanwords (Tom 톰 'c', Paul 폴 'l',
+// Mike 마이크 'v'). Only the last kLatinWindow letters are read; fewer letters are the
+// whole word.
+char LatinWordClass(std::string_view letters);
+
+// Whether a word ending in the ASCII characters tail is read with a final consonant:
+// a digit by its Korean reading (0 1 3 6 7 8 yes), Latin letters by LatinWordClass.
+bool EndingConsonant(std::string_view tail);
 
 }  // namespace internal
 

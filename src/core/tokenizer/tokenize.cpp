@@ -43,8 +43,8 @@ bool OneOf(char32_t c, std::u32string_view set) { return c != 0 && set.find(c) !
 // ― － to ー), and later look-behinds see the rewritten characters.
 class Scanner {
 public:
-    Scanner(Tokens& out, std::span<const Piece> pieces, bool dashes)
-        : out_(out), s_(out.chars), pieces_(pieces), dashes_(dashes) {}
+    Scanner(Tokens& out, std::span<const Piece> pieces, bool dashes, const SpaceJoins* joins)
+        : out_(out), s_(out.chars), pieces_(pieces), dashes_(dashes), joins_(joins) {}
 
     void Run() {
         const size_t n = s_.size();
@@ -92,6 +92,45 @@ private:
             }
         }
         return false;
+    }
+
+    // Whether the space or ideographic space at i between two kanji parts two words (SpaceJoins).
+    bool KeptSpace(size_t i) const {
+        const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
+        if (joins_ == nullptr || !blank(s_[i]) || !text::IsKanji(Before(i)) || !text::IsKanji(At(i + 1))) return false;
+        // A name of one kanji and one or two more is often written apart (林 涛, 林 香生): two such
+        // pieces alone between other text stay one name.
+        size_t start = i, end = i + 1;
+        while (start > 0 && Class(s_[start - 1]) != 0) start--;
+        while (end < s_.size() && Class(s_[end]) != 0) end++;
+        const bool alone = (start == 0 || !blank(s_[start - 1])) && (end == s_.size() || !blank(s_[end]));
+        if (alone && i - start == 1 && end - i - 1 <= 2 && text::IsKanji(At(end - 1))) return false;
+        // Kanji written on to katakana before the space (ジモ得 週まとめ割) end a name or a title,
+        // whose reading the space does not part.
+        size_t kanji = i;
+        while (kanji > start && text::IsKanji(s_[kanji - 1])) kanji--;
+        if (kanji > start && Class(s_[kanji - 1]) == kClassKatakana) return false;
+        // The text on each side reaches over single spaces, so that a word of text spaced out
+        // character by character is seen whole (通 知 表).
+        constexpr size_t kBefore = 10, kAfter = 10;
+        size_t from = i;
+        while (from > 0 && i - from < kBefore &&
+               (Class(s_[from - 1]) != 0 || (blank(s_[from - 1]) && from > 1 && Class(s_[from - 2]) != 0))) {
+            from--;
+        }
+        size_t to = i + 1;
+        while (to < s_.size() && to < i + 1 + kAfter &&
+               (Class(s_[to]) != 0 || (blank(s_[to]) && to + 1 < s_.size() && Class(s_[to + 1]) != 0))) {
+            to++;
+        }
+        std::string before, after;
+        for (size_t k = from; k < i; k++) {
+            if (!blank(s_[k])) text::AppendRune(before, s_[k]);
+        }
+        for (size_t k = i + 1; k < to; k++) {
+            if (!blank(s_[k])) text::AppendRune(after, s_[k]);
+        }
+        return !(*joins_)(before, after);
     }
 
     size_t BufSize() const { return out_.text.size() - bufStart_; }
@@ -163,7 +202,7 @@ private:
             Add(c);
         } else if (cur_ == kTypeAsciiSymbol && type == kTypeNumber) {
             Add(c);
-        } else if (cur_ == kTypeJapanese && type == kTypeAsciiSpace && IsSkippableTranslateRun(p_ + 1)) {
+        } else if (cur_ == kTypeJapanese && type == kTypeAsciiSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A space between Japanese text is dropped.
         } else {
             AsciiBoundary(type);
@@ -336,8 +375,13 @@ private:
             Add(c);
         } else if (cur_ == kTypeJapanese && type == kTypeNumber) {
             Add(Fold(c));
-        } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && IsSkippableTranslateRun(p_ + 1)) {
+        } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A full-width space between Japanese text is dropped.
+        } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && KeptSpace(p_)) {
+            // A kept space between two words (KeptSpace) is a space, not a break of the sentence.
+            if (BufSize() > 0) Emit(cur_);
+            Start(kTypeAsciiSpace);
+            Add(U' ');
         } else {
             if (BufSize() > 0) Emit(cur_);
             Start(type);
@@ -363,6 +407,7 @@ private:
     std::vector<char32_t>& s_;
     std::span<const Piece> pieces_;
     bool dashes_;
+    const SpaceJoins* joins_;
     size_t p_ = 0;
     size_t span_ = 0;      // next entry of out_.spans
     size_t bufStart_ = 0;  // the text of the token being built is out_.text from here
@@ -396,7 +441,7 @@ bool AppendChars(Tokens& out, std::string_view s, uint32_t& offset) {
     return nul == std::string_view::npos;
 }
 
-void Scan(Tokens& out, std::span<const Piece> pieces, bool dashes, uint32_t offset) {
+void Scan(Tokens& out, std::span<const Piece> pieces, bool dashes, uint32_t offset, const SpaceJoins* joins) {
     out.offsets.push_back(offset);
     if (out.chars.empty()) {
         out.offsets.clear();
@@ -409,7 +454,7 @@ void Scan(Tokens& out, std::span<const Piece> pieces, bool dashes, uint32_t offs
         out.chars.pop_back();
         out.offsets.pop_back();
     }
-    Scanner(out, pieces, dashes).Run();
+    Scanner(out, pieces, dashes, joins).Run();
     Prepare(out);
 }
 
@@ -540,7 +585,7 @@ bool CanonicalType(int type) {
 }
 
 
-void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out) {
+void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins) {
     Reset(out);
     uint32_t offset = 0;
     for (size_t k = 0; k < pieces.size(); k++) {
@@ -554,14 +599,14 @@ void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out) {
         }
         if (!AppendChars(out, p.text, offset)) break;
     }
-    Scan(out, pieces, dashes, offset);
+    Scan(out, pieces, dashes, offset, joins);
 }
 
 void Tokenize(std::string_view input, Tokens& out) {
     Reset(out);
     uint32_t offset = 0;
     AppendChars(out, input, offset);
-    Scan(out, {}, false, offset);
+    Scan(out, {}, false, offset, nullptr);
 }
 
 void Prepare(Tokens& tokens) {

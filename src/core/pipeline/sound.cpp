@@ -1,10 +1,13 @@
 #include "core/pipeline/sound.h"
 
 #include <algorithm>
+#include <initializer_list>
+#include <span>
 #include <string>
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -79,6 +82,9 @@ constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 1, 5, 8, 13, 4, 5,
 // The particles that may stand before an ono row inside a hiragana run.
 constexpr std::u32string_view kParticles = U"がをにはもでとへやのて";
 
+// The kana that start a form of する.
+constexpr std::u32string_view kSuruKana = U"しすさせ";
+
 // Cue words; kana in katakana.
 constexpr std::u32string_view kEatingCues[] = {U"食", U"喰", U"カジ", U"齧", U"噛", U"音", U"漬", U"センベイ", U"煎餅"};
 constexpr std::u32string_view kScratchingCues[] = {U"頭", U"掻", U"搔", U"痒", U"カユ", U"首", U"背中", U"頬"};
@@ -91,6 +97,8 @@ constexpr std::u32string_view kConditionals[] = {U"ナルト", U"ナッタラ", 
 
 // The characters that may stand between いやぁ and the words that decide its reading.
 constexpr std::u32string_view kSoundSeparators = U"、，…‥・ 　";
+// The characters before a comma that PoliteAt reads for an honoured person called (陛下, お疲れさま).
+constexpr size_t kLongestCall = 8;
 
 template <size_t N>
 bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
@@ -205,8 +213,23 @@ bool EndsDrawn(std::string_view s) {
 // Whether two sounds in a row are written apart: both have two or more syllables, b does
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
 // drawing out its vowel before another cry (ひぃ+やあっ 히이야앗, ふぁー+ふぁー 후아아후아아).
+// Whether s is one Hangul syllable written one or more times (네, 네네).
+bool OneSyllableRepeated(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (s.empty() || r.cp < text::kBase || r.cp > text::kLast) return false;
+    for (std::size_t at = 0; at < s.size(); at += r.size) {
+        if (s.substr(at, r.size) != s.substr(0, r.size)) return false;
+    }
+    return true;
+}
+
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) {
+        return false;
+    }
+    // A word of two kana or more read as one syllable, said again right after itself, is
+    // written as one word (はいはい|はいはい 네네네네; not a drawn-out あ).
+    if (a.end == b.start && a.key == b.key && a.key.size() >= 2 && a.korean == b.korean && OneSyllableRepeated(a.korean)) {
         return false;
     }
     return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&
@@ -345,6 +368,10 @@ private:
     bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
+    bool PoliteAt(size_t p) const;
+    // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
+    mutable size_t politeFrom_ = 1, politeTo_ = 0;
+    mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
     bool Scoff(size_t p, size_t end) const;
     std::u32string_view Clause(size_t i) const;
@@ -359,6 +386,8 @@ private:
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
     bool Manner(const SoundMatch& m, size_t i) const;
+    size_t QuotingAt(size_t i) const;
+    size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
@@ -578,6 +607,17 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 ok = false;
             }
         }
+        // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
+        // question mark.
+        if (ok && s.final) {
+            size_t q = end;
+            while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
+            const std::string next = q < rs_.size() ? EncodeText(f.substr(q, 1)) : std::string();
+            if (q < rs_.size() && (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass("mark.comma", next) ||
+                                   dict::InClass("mark.question", next))) {
+                ok = false;
+            }
+        }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&
@@ -694,7 +734,43 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
         if (Scoff(p, end)) return "흥";
     }
     if (s.phrase && AskedAt(rs_, end)) return AskedPast(s.korean);
+    if (!s.polite.empty() && PoliteAt(p)) {
+        const size_t space = s.korean.rfind(' ');
+        return (space == std::string::npos ? std::string() : s.korean.substr(0, space + 1)) + s.polite;
+    }
     return s.korean;
+}
+
+// Whether the row at character p is said politely: its quote, or the line outside quotes, holds
+// a mark of speech.polite-grammar outside the words of speech.polite-lookalike (ありがとうございました。
+// では、また明日; not ますます), or an honoured person is called with a comma right before it
+// (先生、また来週; not the greeting お疲れさま of greeting.honorific-end). The quote is read once.
+bool SoundText::PoliteAt(size_t p) const {
+    constexpr std::u32string_view kQuoteEnds = U"「『」』\n";
+    if (p < politeFrom_ || p > politeTo_) {
+        size_t start = p, end = p;
+        while (start > 0 && !In(rs_[start - 1], kQuoteEnds)) start--;
+        while (end < rs_.size() && !In(rs_[end], kQuoteEnds)) end++;
+        std::string quote = EncodeText(std::u32string_view(rs_).substr(start, end - start));
+        for (const std::string_view w : dict::ClassMembers("speech.polite-lookalike")) {
+            for (size_t at = quote.find(w); at != std::string::npos; at = quote.find(w, at + w.size())) {
+                quote.replace(at, w.size(), w.size(), ' ');
+            }
+        }
+        politeFrom_ = start;
+        politeTo_ = end;
+        politeQuote_ = std::ranges::any_of(dict::ClassMembers("speech.polite-grammar"),
+                                           [&](std::string_view m) { return quote.find(m) != std::string::npos; });
+    }
+    if (politeQuote_) return true;
+    size_t q = p;
+    while (q > politeFrom_ && text::IsSpace(rs_[q - 1])) q--;
+    if (q == politeFrom_ || !dict::InClass("mark.comma", EncodeText(std::u32string_view(rs_).substr(q - 1, 1)))) return false;
+    const size_t from = std::max(politeFrom_, q - 1 > kLongestCall ? q - 1 - kLongestCall : 0);
+    const std::string called = EncodeText(std::u32string_view(rs_).substr(from, q - 1 - from));
+    const auto ends = [&](std::string_view m) { return called.ends_with(m); };
+    return std::ranges::any_of(dict::ClassMembers("honorific.honoured-person"), ends) &&
+           std::ranges::none_of(dict::ClassMembers("greeting.honorific-end"), ends);
 }
 
 // Whether the ただいま that ends at character end means "now": a kanji follows it
@@ -896,14 +972,10 @@ bool SoundText::WordStartsSound(size_t p, const SoundMatch& last, size_t end) co
     return key.size() >= 4 && key.size() % 2 == 0 && key.substr(0, key.size() / 2) == key.substr(key.size() / 2);
 }
 
-// Whether the ono sound m is followed at i by the に of manner or result that Korean writes
-// as 하게 after a doubled mimetic (くしゃくしゃに丸める 꼬깃꼬깃하게, がちがちに固い 딱딱하게):
-// m's Korean is two equal halves of Hangul, and に stands before no hiragana but a form of
-// する or なる.
-bool SoundText::Manner(const SoundMatch& m, size_t i) const {
-    if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
-    if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
-    const std::u32string k = DecodeText(m.korean);
+// Whether the Korean of a sound is two equal halves of Hangul (꼬깃꼬깃), a mimetic that
+// takes 하다 as one word.
+bool DoubledHangul(std::string_view korean) {
+    const std::u32string k = DecodeText(korean);
     if (k.size() < 2 || k.size() % 2 != 0) return false;
     for (const char32_t r : k) {
         if (r < U'가' || r > U'힣') return false;
@@ -911,13 +983,46 @@ bool SoundText::Manner(const SoundMatch& m, size_t i) const {
     return k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
 }
 
+// Whether the ono sound m is followed at i by the に of manner or result that Korean writes
+// as 하게 after a doubled mimetic (くしゃくしゃに丸める 꼬깃꼬깃하게, がちがちに固い 딱딱하게):
+// m's Korean is two equal halves of Hangul, and に stands before no hiragana but a form of
+// する or なる.
+bool SoundText::Manner(const SoundMatch& m, size_t i) const {
+    if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
+    if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
+    return DoubledHangul(m.korean);
+}
+
+// The end of the quoting form at character i (sound.quoting: という) that describes the word in
+// kanji or katakana after a sound (カタカタという音 달각달각하는 소리, ドンという衝撃 쾅 하는 충격),
+// or 0.
+size_t SoundText::QuotingAt(size_t i) const {
+    const size_t end = Quoting(i);
+    if (end == 0 || end >= rs_.size()) return 0;
+    return IsKanjiRune(rs_[end]) || (IsKatakanaRune(rs_[end]) && !Lengthens(rs_[end], rs_[end - 1])) ? end : 0;
+}
+
+// The end of the member of sound.quoting at character i, or 0.
+size_t SoundText::Quoting(size_t i) const {
+    if (i >= rs_.size()) return 0;
+    const std::string_view at = text_.substr(offsets_[i]);
+    for (const std::string_view q : dict::ClassMembers("sound.quoting")) {
+        if (!at.starts_with(q)) continue;
+        size_t end = i;
+        while (end < rs_.size() && offsets_[end] < offsets_[i] + q.size()) end++;
+        return end;
+    }
+    return 0;
+}
+
 // Whether a space goes between a sound and rs[i]: a kanji, katakana after hiragana, or
-// kana that start a verb other than する, or follow a dropped と or て.
+// kana that start a verb other than する or the quoting form (sound.quoting: カタカタという。
+// 달각달각이라고 한다), or follow a dropped と or て.
 bool SoundText::Spaced(size_t i) const {
     const std::u32string_view rs = rs_;
-    if (i >= rs.size()) return false;
+    if (i >= rs.size() || Quoting(i) > 0) return false;
     if (IsKanjiRune(rs[i]) || (IsKatakanaRune(rs[i]) && IsHiraganaRune(rs[i - 1]))) return true;
-    if (!IsKana(rs[i]) || In(rs[i], U"しすさせ")) return false;
+    if (!IsKana(rs[i]) || In(rs[i], kSuruKana)) return false;
     if (In(rs[i - 1], U"とて")) return true;
     return IsHiraganaRune(rs[i]) && StartsVerb(i);
 }
@@ -959,7 +1064,7 @@ size_t SoundText::Adverbial(size_t i) const {
     if (i >= rs.size()) return 0;
     if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
-    if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], U"しすさせ")) return 1;
+    if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], kSuruKana)) return 1;
     return StartsLongerWord(i) ? 0 : 1;
 }
 
@@ -1392,7 +1497,7 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     }
     // An adverb with と in hiragana (じっと), but not before する (じっとして); a doubled
     // katakana unit is the sound rather than the hiragana adverb (メキメキと, not めきめきと).
-    if (i < rs_.size() && In(rs_[i], U"しすさせ")) return 0;
+    if (i < rs_.size() && In(rs_[i], kSuruKana)) return 0;
     if (!tsu) return i;
     // The candidates point into the key, so it lives as long as they do.
     const std::string key = EncodeText(h);
@@ -1449,7 +1554,7 @@ size_t SoundText::HiraganaMimeticTo(size_t p) const {
     for (const std::u32string_view q : {U"いう", U"いっ", U"言", U"思", U"か", U"は", U"も", U"の"}) {
         if (rest.starts_with(q)) return 0;
     }
-    if (i < rs.size() && In(rs[i], U"しすさせ")) return 0;
+    if (i < rs.size() && In(rs[i], kSuruKana)) return 0;
     if (KanaWord(p)) return 0;
     const dict::Candidates rd =
         snap_.GetWordInfo(Bytes(p, std::min(rs.size(), i + 4)), dict::LookupMode::General, ctx_.lookup);
@@ -1492,7 +1597,11 @@ std::string SoundText::Write() {
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
-            const bool doing = next < rs.size() && In(rs[next], U"しすさせ");
+            // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
+            // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
+            const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
+            if (quoted == 0 && !chain.back().intj && Quoting(next - 1) > 0) next--;
+            const bool doing = quoted > 0 || (next < rs.size() && In(rs[next], kSuruKana));
             for (size_t k = 0; k < chain.size(); k++) {
                 SoundMatch& m = chain[k];
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
@@ -1509,6 +1618,12 @@ std::string SoundText::Write() {
                 b += "하고";
                 next = to;
                 if (next < rs.size() && !In(rs[next], U"、。，！？!?…‥」』）)")) b += ' ';
+            } else if (quoted > 0) {
+                // The という that quotes a sound reads as する: one word with a 하다 stem or a doubled
+                // mimetic (달각달각하는 소리), apart from other sounds (쾅 하는 소리).
+                if (chain.back().root.empty() && !DoubledHangul(chain.back().korean)) b += ' ';
+                b += "する";
+                next = quoted;
             } else if (Manner(chain.back(), next)) {
                 // An adverb of manner or result: 꼬깃꼬깃하게 말다, 딱딱하게 굳다.
                 b += "하게";
@@ -1821,6 +1936,72 @@ std::string Completion(std::u32string_view frag, size_t kanjiEnd, const LineCont
     return "";
 }
 
+// The longest stem, noun or て form that the contractions look back over, in characters.
+constexpr size_t kLongestStem = 8;
+
+// Where needle first occurs in text from from on, npos for none. Japanese characters share their
+// first byte, so the search goes by the last byte of needle.
+size_t FindFrom(std::string_view text, std::string_view needle, size_t from) {
+    if (needle.empty()) return from <= text.size() ? from : std::string_view::npos;
+    for (size_t at = from + needle.size() - 1; (at = text.find(needle.back(), at)) != std::string_view::npos; at++) {
+        if (text.substr(at + 1 - needle.size(), needle.size()) == needle) return at + 1 - needle.size();
+    }
+    return std::string_view::npos;
+}
+
+// Whether text holds a member of one of sets, right after one of the strings of before when that is
+// not empty: the contractions look closer only then. The members are compared only where one of
+// before, or else their first character, occurs.
+bool HoldsMember(std::string_view text, std::initializer_list<std::span<const std::string_view>> sets,
+                 std::initializer_list<std::string_view> before = {}) {
+    const auto startsMember = [&](size_t at) {
+        for (const std::span<const std::string_view> set : sets) {
+            for (const std::string_view m : set) {
+                if (text.substr(at).starts_with(m)) return true;
+            }
+        }
+        return false;
+    };
+    for (const std::string_view b : before) {
+        for (size_t at = FindFrom(text, b, 0); at != std::string_view::npos; at = FindFrom(text, b, at + 1)) {
+            if (startsMember(at + b.size())) return true;
+        }
+    }
+    if (before.size() > 0) return false;
+    std::string_view previous;  // the first character of the members before, searched already
+    for (const std::span<const std::string_view> set : sets) {
+        for (const std::string_view m : set) {
+            const std::string_view lead = m.substr(0, text::DecodeRune(m).size);
+            if (lead == previous) continue;
+            previous = lead;
+            for (size_t at = FindFrom(text, lead, 0); at != std::string_view::npos; at = FindFrom(text, lead, at + 1)) {
+                if (startsMember(at)) return true;
+            }
+        }
+    }
+    return false;
+}
+
+// The length of the first of members that starts s, 0 for none.
+size_t StartLength(std::string_view s, std::span<const std::string_view> members) {
+    for (const std::string_view m : members) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
+// Whether rs[from, to) is the て form of a verb the dictionary has (連れて, 持って, 遊んで).
+bool TeForm(std::u32string_view rs, size_t from, size_t to, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::string text = EncodeText(rs.substr(from, to - from));
+    const dict::Candidates rd = snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.codes == nullptr || c.codes->part.Tag() != 'M' || c.codes->part.ClassDigit() != '4') continue;
+        if (!text.starts_with(c.source) || c.source.size() == text.size()) continue;
+        if (std::string_view(text).substr(c.source.size()) == word::Conjugation(c.codes->part.VerbKind(), 7)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -1843,13 +2024,169 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
     return out + EncodeText(std::u32string_view(rs).substr(done));
 }
 
+std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kI = "い";
+    constexpr std::string_view kTe = "て", kDe = "で";  // the end of a て form
+    if (!HoldsMember(text,
+                     {dict::ClassMembers("contraction.te-iku"), dict::ClassMembers("contraction.te-iku-listed"),
+                      dict::ClassMembers("contraction.te-iku-final")},
+                     {kTe, kDe})) {
+        return std::string(text);
+    }
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        if (StartLength(rest, dict::ClassMembers("contraction.te-iku-not")) > 0) continue;
+        bool compound = false;  // only when the dictionary holds the verb with ていく
+        if (StartLength(rest, dict::ClassMembers("contraction.te-iku")) == 0) {
+            compound = true;
+            if (StartLength(rest, dict::ClassMembers("contraction.te-iku-listed")) == 0) {
+                const size_t n = StartLength(rest, dict::ClassMembers("contraction.te-iku-final"));
+                if (n == 0) continue;
+                const size_t after = byte[i] + n;
+                if (after < s.size()) {
+                    const char32_t next = text::DecodeRune(std::string_view(s).substr(after)).cp;
+                    if (IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next)) continue;
+                }
+            }
+        }
+        // The longest て form of a verb before i, not the end of a longer word that is no verb
+        // (どうやって 어떻게).
+        size_t start = i;
+        while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsHiraganaRune(rs[start - 1]))) start--;
+        size_t from = start;
+        while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
+        if (from + 1 >= i) continue;
+        // The ってね after a request to stop or wait quotes it (やめてってね 그만두라고).
+        bool quoted = false;
+        for (size_t w = from; w < i && !quoted; w++) {
+            quoted = StartLength(std::string_view(s).substr(byte[w]), dict::ClassMembers("contraction.te-iku-quoted")) > 0;
+        }
+        if (quoted) continue;
+        bool inWord = false;
+        for (size_t w = start; w < from && !inWord; w++) {
+            const std::string key = s.substr(byte[w], byte[i] - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                inWord = inWord || (c.codes != nullptr && !(c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4'));
+            }
+        }
+        bool found = !inWord && !compound;
+        if (!inWord && compound) {
+            const std::string key = s.substr(byte[from], byte[i] - byte[from]) + std::string(kI);
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                found = found || (c.codes != nullptr && c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4');
+            }
+        }
+        if (!found) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kI;
+        done = i;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
+std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
+    constexpr std::string_view kNo = "の";
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!IsKanjiRune(rs[i - 1]) && !IsKatakanaRune(rs[i - 1])) continue;
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        size_t length = 0;  // characters of the member
+        for (const std::string_view m : dict::ClassMembers("contraction.n-no")) {
+            if (rest.starts_with(m)) {
+                length = DecodeText(m).size();
+                break;
+            }
+        }
+        // A member that ends in kanji goes on as a word before more kanji (いったん中断).
+        if (length == 0 || (IsKanjiRune(rs[i + length - 1]) && i + length < rs.size() && IsKanjiRune(rs[i + length]))) continue;
+        size_t start = i;
+        while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsKatakanaRune(rs[start - 1]))) start--;
+        bool noun = false, word = false;
+        for (size_t w = start; w < i && !word; w++) {
+            const std::string spanned = s.substr(byte[w], byte[i + length] - byte[w]);
+            word = !snap.RetrieveRecords(spanned, dict::LookupMode::General).empty();
+            const std::string head = s.substr(byte[w], byte[i] - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(head, dict::LookupMode::General)) {
+                noun = noun || (c.codes != nullptr && c.codes->part.Tag() == 'N');
+            }
+        }
+        if (!noun || word) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kNo;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
+std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kSmallTsu = "っ";
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.u-onbin")})) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!IsKanjiRune(rs[i - 1])) continue;
+        const std::string_view rest = std::string_view(s).substr(byte[i]);
+        const size_t n = StartLength(rest, dict::ClassMembers("contraction.u-onbin"));
+        if (n == 0 || StartLength(rest, dict::ClassMembers("contraction.u-onbin-not")) > 0) continue;
+        const size_t end = byte[i] + n;  // the byte after the member
+        const char32_t next = end < s.size() ? text::DecodeRune(std::string_view(s).substr(end)).cp : 0;
+        const bool goesOn = IsHiraganaRune(next) || IsKanjiRune(next);
+        size_t start = i - 1;
+        while (start > 0 && i - start < kLongestStem && IsKanjiRune(rs[start - 1])) start--;
+        bool verb = false, word = false;
+        for (size_t w = start; w < i && !word; w++) {
+            // A noun that spans the form (名うて), or another word there before no kana or kanji (言うて、
+            // 그렇긴 해도; not 言うてる).
+            const std::string spanned = s.substr(byte[w], end - byte[w]);
+            for (const dict::Candidate& c : snap.RetrieveRecords(spanned, dict::LookupMode::General)) {
+                word = word || (c.codes != nullptr && (c.codes->part.Tag() == 'N' || !goesOn));
+            }
+            const std::string stem = s.substr(byte[w], byte[i] - byte[w]);
+            const dict::Candidates rd = snap.GetWordInfo(stem, dict::LookupMode::General, ctx.lookup);
+            for (const dict::Candidate& c : rd.list) {
+                verb = verb || (c.source == stem && c.codes != nullptr && c.codes->part.Tag() == 'M' &&
+                                c.codes->part.ClassDigit() == '4' && c.codes->part.VerbKind() == 0);
+            }
+        }
+        if (!verb || word) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += kSmallTsu;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 }  // namespace internal
 
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed =
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
     std::string sounded =
-        internal::RewriteCasualAdjectives(internal::WriteSounds(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap);
+        internal::RewriteCasualAdjectives(internal::WriteSounds(
+                                              internal::RewriteOnbinU(
+                                              internal::RewriteContractedNo(
+                                                  internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), snap),
+                                              ctx, snap), ctx, snap),
+                                          ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }

@@ -191,9 +191,13 @@ public:
     int CheckDirectJ(int i) const;
 
     // The item delta items along the chain (leftwards for delta < 0), skipping
-    // parenthesised groups; a found neighbour gets compDI and compUmiDI -1, the item
+    // parenthesised groups and, rightwards from a ruby base, its reading; a found neighbour gets compDI and compUmiDI -1, the item
     // itself (delta 0) keeps this item's.
     Item* Object(int delta);
+    // The word after this one as the passes read it: next, or past the reading when this is
+    // the last word of a ruby base, so that the base and the reading read the same words after
+    // them (as Object does). Walks over the chain step on with next.
+    Item* After() const;
 
     // rules::Item
     void SetRuleContext(bool global, int number) override;
@@ -215,6 +219,13 @@ public:
     bool StartsSentence() const;
     // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
     bool InQuote() const;
+    // Whether the word is a word span of Hangul syllables and spaces only (rule code Kh): Korean
+    // the sound stage wrote or the input holds, whose part of speech is unknown; a span with a
+    // mask (자○) is a noun.
+    bool KoreanSpan() const;
+    // Whether an ellipsis or a dash, or with sentenceEnd also a sentence end, stands right
+    // before the word, spaces between them aside (でしょ。と、, 行く……と、, そう――と).
+    bool AfterPause(bool sentenceEnd) const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
     // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
     bool AfterQuestionWord() const;
@@ -225,6 +236,9 @@ public:
     // (何人), not an indefinite (何か, 誰も, いつでも).
     bool IsQuestionWord() const;
     bool JoinsNext() const;
+    // JoinsNext, or the word ends its token and the next word starts the next token, with no
+    // space between them (超 and Ａ級 of 超Ａ級).
+    bool WrittenBeforeNext() const;
     // Whether candidate i reads the word as a count (rule code Nq): a number or 半, or a number
     // (kanji or digits, or 数, 何, 幾 before it) and a counter coded Ct, read with digits or a
     // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時

@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+dict:jisjk:373880	食べるだけ食べて寝た。	먹을 만큼 먹고 잤다.	keep	local-ending

@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+dict:jisjk:6399	これを元に作った。	!rule:dict:jisjk:6399	keep	local
+dict:jisjk:260433	大変なことになった。	rule:dict:jisjk:260433=것이 &C6@	keep	local
+dict:jisjk:260433	面倒なことになる。	귀찮은 것이 된다.	keep	local
+dict:jisjk:260433	行くことになった。	!rule:dict:jisjk:260433	keep	local

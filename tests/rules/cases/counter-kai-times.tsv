@@ -1,0 +1,49 @@
+# 규칙: NUM-5, NUM-7
+rule	input	expected	kind	layer
+dict:jisjk:115519	100回も言った。	100번이나 말했다.	fix	local
+dict:jisjk:115519	３回も言われた。	3번이나 들었다.	fix	local
+dict:jisjk:115519	それがあと６０回も繰り返されるなんて	그것이 앞으로 60번이나 반복되다니	fix	local
+dict:jisjk:115519	映画をぶっ通しで５回も観た	rule:dict:jisjk:115519=번	fix	local
+dict:jisjk:115519	裏切った……２回も……	배반했다……2번이나……	fix	local
+dict:jisjk:115519	「初めてなのに２回も３回もしただろ？」	「처음인데 2번도 3번도 했지?」	fix	local
+dict:jisjk:115519	「あんたなんか百回でも千回でもボコボコにしてやるわ！」	rule:dict:jisjk:115519=번	fix	local
+dict:jisjk:115519	「なんで２回言ったぁ！？」	「왜 2번 말했어!?」	fix	local
+dict:jisjk:115519	「ふたりでいるところに２回くらい出会ったじゃない？」	「둘이서 있는 곳에 2번 정도 만났잖아?」	fix	local
+dict:jisjk:115519	「冒頭が全然決まらなくて、もう１０回は書き直してます」	「서두가 전혀 정해지지 않아서, 이제 10번은 고쳐 쓰고 있습니다」	fix	local
+dict:jisjk:115519	「ゴルフクラブでゾンビの頭を１８回ぶん殴るだけです」	「골프채로 좀비의 머리를 18번 후려칠 뿐입니다」	fix	local
+dict:jisjk:115519	「このような大規模テロを、あと６回起こすつもりでしょうか」	「이러한 대규모 테러를, 앞으로 6번 일으킬 생각입니까」	fix	local
+dict:jisjk:344600	「ま、誰でも１回は考えるよな」	「뭐, 누구라도 1번은 생각하지」	fix	local
+dict:jisjk:344600	「最後の１回だと思ってさ」	「마지막 1번이라고 생각해」	fix	local
+dict:jisjk:115519	「じゃあ……あと、５９回か６０回は更新があるわけか……」	「그럼……앞으로, 59회나 60회는 갱신이 있는 건가……」	keep	global-stem
+dict:jisjk:115519	攻撃回数：2回	공격 횟수：2회	keep	global-stem
+dict:jisjk:115519	敵艦隊を10回邀撃せよ！	적함대를 10회 요격하라!	keep	global-stem
+dict:jisjk:115519	「遠征」を３回成功させよう！	「원정」을 3회 성공시키자!	keep	global-stem
+dict:jisjk:115519	本日中に「演習」で3回以上「勝利」をおさめよう！	오늘 중에 「연습」으로 3회 이상 「승리」를 거두자!	keep	global-stem
+dict:jisjk:115519	近代化改修を実施して、２回以上これを成功させよ！	근대화 개수를 실시해, 2회 이상 이것을 성공시켜라!	keep	global-stem
+dict:jisjk:115519	同じキャラを3回選べば1人パーティーになります。	같은 캐릭터를 3회 선택하면 1명 파티가 됩니다.	keep	global-stem
+dict:jisjk:115519	○ボタンと△ボタンを組み合わせて連続3回まで攻撃が可能なのよ！	○버튼과△버튼을 조합해 연속 3회까지 공격이 가능해!	keep	global-stem
+dict:jisjk:115519	1日に2回、1回あたり5ミリリットルを服用する。	1일에 2회, 1회당 5밀리리터를 복용한다.	keep	global-stem
+dict:jisjk:115519	計５回行ったイベントの入場者は	!rule:dict:jisjk:115519	keep	global-stem
+dict:jisjk:115519	「第１０回、納涼カラオケ大会！」	「제10회, 납량 가라오케 대회!」	keep	global-stem
+dict:jisjk:344600	『第１回チキチキ、いったい誰の真似なのよ？』	『제1회 치키치키, 도대체 누구의 흉내야?』	keep	defaults
+dict:jisjk:344600	「1回戦で負けちまったのさ」	「1회전에서 져 버렸어」	keep	defaults
+dict:jisjk:344600	「１回２錠で１０回分あります。」	「1회 2정으로 10회분 있습니다.」	keep	defaults
+dict:jisjk:344600	「部内で行うだけでなく、年に１回は近くの学校と合同で行う。」	「부내에서 실시할 뿐만 아니라, 1년에 한 번은 근처 학교와 합동으로 실시한다.」	keep	compose
+dict:jisjk:344600	「１回も勝てなかった」	!rule:dict:jisjk:344600	keep	local
+compose:native-count	実際、会うのはこれで2回目なんすけど	실제, 만나는 것은 이것으로 2번째인데요	keep	compose
+compose:native-count	毎年来てるんだ。これで3回目さ。	매년 오고 있어. 이것으로 3번째야.	keep	compose
+dict:jisjk:115519	何回も言った。	몇 번이나 말했다.	keep	defaults
+dict:jisjk:115519	第2回も開催された。	rule:dict:jisjk:115519=회	keep	local
+dict:jisjk:115519	「第3回も中止だ」	rule:dict:jisjk:115519=회	keep	local
+dict:jisjk:115519	「2回か3回は言った」	「2회나 3회는 말했다」	keep	local
+dict:jisjk:115519	「5回中4回は負けた」	「5회 중 4회는 졌다」	keep	local
+dict:jisjk:115519	「1回、2回、3回と数えた」	「1회, 2회, 3회로 세었다」	keep	local
+dict:jisjk:344600	「3回のうち1回は負ける」	rule:dict:jisjk:344600=1회	keep	local
+dict:jisjk:344600	「第1回も中止だ」	「제1회도 중지다」	fix	local
+dict:jisjk:344600	「1回でも勝てば」	rule:dict:jisjk:344600=1회	keep	local
+dict:jisjk:115519	「3回攻撃する」	「3회 공격한다」	keep	global-stem
+dict:jisjk:115519	2回まで使用可能。	2회까지 사용 가능.	keep	global-stem
+dict:jisjk:115519	1日3回まで挑戦できる。	1일 3회까지 도전할 수 있다.	keep	global-stem
+dict:jisjk:115519	3回言った。	3회 말했다.	keep	global-stem
+dict:jisjk:115519	「大会で3回勝った」	「대회에서 3번 이겼다」	fix	local
+dict:jisjk:115519	「再会して2回も泣いた」	rule:dict:jisjk:115519=번	fix	local

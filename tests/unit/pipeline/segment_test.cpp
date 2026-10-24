@@ -163,12 +163,12 @@ HD_TEST(pipeline_segment_column_gaps) {
         {"林  涛", "林  涛"},
         {"林  涛  歌手", "林  涛|[  ]歌手"},
         {"林業  涛", "林業|[  ]涛"},
-        // Two ASCII spaces inside a clause are no separator; three are, and so are two
-        // ideographic spaces.
-        {"猫が  好き  です", "猫が  好き  です"},
-        {"私は  学生です  。", "私は  学生です  。"},
-        {"学生  です", "学生  です"},
-        {"彼  は来た", "彼  は来た"},
+        // Two ASCII spaces are a separator inside a clause too, and so are two ideographic
+        // spaces.
+        {"君と  僕と", "君と|[  ]僕と"},
+        {"私は  学生です  。", "私は|[  ]学生です|[  ]。"},
+        {"学生  です", "学生|[  ]です"},
+        {"彼  は来た", "彼|[  ]は来た"},
         {"1話  長めのプロローグ", "1話|[  ]長めのプロローグ"},
         {"友人  : 「いつき！」", "友人|[  ]: 「いつき！」"},
         {"名前  はじまり", "名前|[  ]はじまり"},

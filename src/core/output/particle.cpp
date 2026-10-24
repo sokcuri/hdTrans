@@ -154,10 +154,10 @@ constexpr UnitClass kUnitClasses[] = {
 
 // The class of the Latin word that ends the first end bytes of text: a unit after a
 // number by its reading, a single letter or a word in capitals (an abbreviation: BGM
-// 비지엠) by the name of its last letter, another word by its English spelling, with a
-// final l or le read as ㄹ (Google 구글).
+// 비지엠) by the name of its last letter, another word by its English spelling
+// (internal::LatinWordClass).
 char LatinClass(const TextBefore& text, size_t end) {
-    char last[3] = {0, 0, 0};  // the last letters, upper case, last first
+    char last[internal::kLatinWindow] = {};  // the last letters, upper case, last first
     size_t count = 0;
     bool lower = false;
     size_t i = end;
@@ -166,37 +166,41 @@ char LatinClass(const TextBefore& text, size_t end) {
         const char c = LatinValue(r.cp);
         if (c == 0 || r.size == 0 || r.size > i) break;
         lower = lower || IsLowerLatin(r.cp);
-        if (count < 3) last[count] = c;
+        if (count < internal::kLatinWindow) last[count] = c;
         count++;
         i -= r.size;
     }
     size_t before = i;
     if (before > 0 && text.At(before - 1) == ' ') before--;
+    char word[internal::kLatinWindow];
+    const size_t kept = count < internal::kLatinWindow ? count : internal::kLatinWindow;
+    for (size_t n = 0; n < kept; n++) word[n] = last[kept - 1 - n];
     if (count <= 3 && DigitValue(DecodeLastRune(text, before).cp) >= 0) {
-        char word[3];
-        for (size_t n = 0; n < count; n++) word[n] = last[count - 1 - n];
         const std::string_view unit(word, count);
         for (const auto& u : kUnitClasses) {
             if (u.unit == unit) return u.final;
         }
     }
     if (count == 1 || !lower) return kLetterNameClasses[last[0] - 'A'];
-    if (!internal::EndingConsonant(last[0], last[1], last[2])) return 'v';
-    if (last[0] == 'L' || (last[0] == 'E' && last[1] == 'L')) return 'l';
-    return 'c';
+    return internal::LatinWordClass(std::string_view(word, kept));
 }
 
 bool IsAlpha(char c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+
 bool IsDigit(char c) { return c >= '0' && c <= '9'; }
 
-// 0 for an ASCII vowel letter (AEIOU, upper case only), 1 for another ASCII letter and
-// 2 for anything else.
-int LetterClass(char c) {
-    if (!IsAlpha(c)) return 2;
-    return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' ? 0 : 1;
-}
+char ToLower(char c) { return c >= 'A' && c <= 'Z' ? static_cast<char>(c - 'A' + 'a') : c; }
 
-char ToUpper(char c) { return c >= 'a' && c <= 'z' ? static_cast<char>(c - 'a' + 'A') : c; }
+// Whether the letter at i of the lower-case word w spells a vowel: a e i o u, and y
+// after a consonant (gym, happy).
+bool SpellsVowel(std::string_view w, size_t i) {
+    if (i >= w.size()) return false;
+    switch (w[i]) {
+        case 'a': case 'e': case 'i': case 'o': case 'u': return true;
+        case 'y': return i > 0 && !SpellsVowel(w, i - 1);
+    }
+    return false;
+}
 
 // Whether text is only Latin letters and digits, and not empty.
 bool Alphanumeric(std::string_view text) {
@@ -309,67 +313,55 @@ std::string AlternateParticles(std::string_view text, std::string_view context) 
     return out;
 }
 
-bool EndingConsonant(char a1, char a2, char a3) {
+char LatinWordClass(std::string_view letters) {
+    char buf[kLatinWindow];
+    size_t n = 0;
+    for (size_t i = letters.size(); i > 0 && n < kLatinWindow && IsAlpha(letters[i - 1]); i--) n++;
+    if (n == 0) return 'v';
+    for (size_t k = 0; k < n; k++) buf[k] = ToLower(letters[letters.size() - n + k]);
+    const std::string_view w(buf, n);
+    // The letter k places before the last one, 0 before the word.
+    auto at = [&](size_t k) { return k < n ? w[n - 1 - k] : '\0'; };
+    auto vowel = [&](size_t k) { return k < n && SpellsVowel(w, n - 1 - k); };
+    const char last = at(0);
+    switch (last) {
+        case 'm': case 'n': return 'c';  // 룸, 톰, 레인, bomb 밤, sign 사인
+        case 'l': return 'l';            // 폴, 툴, 쿨
+        case 'g': return at(1) == 'n' ? 'c' : 'v';  // 킹; 도그
+        case 'e':
+            // e sounds after a vowel and in a word of two letters (트리, 블루, 미); otherwise
+            // it is silent and the consonant before it decides: 게임, 라인, 애플, 실루엣, but
+            // 케이스, 파이어, 사이트.
+            if (n <= 2 || vowel(1)) return 'v';
+            if (at(1) == 'l') return 'l';
+            if (at(1) == 'm' || at(1) == 'n') return 'c';
+            if (at(1) == 't' && at(2) == 't') return vowel(3) ? 'c' : 'v';
+            return 'v';
+        case 'b': case 'c': case 'k': case 'p': case 't':
+            // A stop is written as a final consonant after a short vowel: a single vowel
+            // letter with a consonant before it (캣, 봇, 웹, 매직), a doubled stop (앱, 맷), ck
+            // (잭) and oo before k (북). After a vowel pair (보트, 위크) and after another
+            // consonant (파트, 램프) it takes 으; mb is m (밤).
+            if (last == 'b' && at(1) == 'm') return 'c';
+            if (last == 'k' && at(1) == 'c') return vowel(2) ? 'c' : 'v';
+            if (n >= 3 && at(1) == last) return vowel(2) ? 'c' : 'v';
+            if (n <= 2 || !vowel(1)) return 'v';
+            if (!vowel(2)) return 'c';
+            return last == 'k' && at(1) == 'o' && at(2) == 'o' ? 'c' : 'v';
+    }
+    return 'v';  // vowels, r, s, x, z, f, v, d, h, w, y and the rest: 카, 버스, 레드, 쇼
+}
+
+bool EndingConsonant(std::string_view tail) {
+    if (tail.empty()) return false;
+    const char a1 = tail.back();
     if (IsDigit(a1)) {
         switch (a1) {
             case '0': case '1': case '3': case '6': case '7': case '8': return true;
         }
         return false;
     }
-    const char v = ToUpper(a1);
-    a2 = ToUpper(a2);
-    a3 = ToUpper(a3);
-    if (v == '%') return false;
-    if (LetterClass(a3) == 0) {
-        if ((a2 >= 'L' && a2 <= 'N' && v == 'N') || (a2 == 'C' && v == 'K') || (a2 == 'N' && v == 'G') ||
-            (a2 == 'R' && (v == 'L' || v == 'M' || v == 'N')) || (a2 == 'W' && (v == 'L' || v == 'N')) ||
-            (a2 == 'L' && (v == 'L' || v == 'M' || v == 'N')) || (a2 == 'S' && v == 'M') || (a2 == 'G' && v == 'N') ||
-            (a2 == 'M' && (v == 'B' || v == 'N')) || (a2 == 'H' && v == 'M')) {
-            return true;
-        }
-        if ((a2 == 'C' || a2 == 'G' || a2 == 'P' || a2 == 'S') && v == 'H') return false;
-        if (a2 == 'R' && v == 'B') return false;
-        switch (a2) {
-            case 'D': case 'L': case 'M': case 'N': case 'P': case 'R': case 'T':
-                if (v == 'E') return true;
-        }
-        if (((a2 == 'E' || a2 == 'O') && v == 'K') || (a2 == 'U' && (v == 'T' || v == 'P'))) return true;
-    }
-    if (a3 == 'T' && a2 == 'H' && v == 'M') return true;
-    if (LetterClass(a3) == 1 && a2 == 'C' && v == 'H') return false;
-    if (a3 == 'G' && ((a2 == 'H' && v == 'T') || (a2 == 'T' && v == 'H'))) return false;
-    if (a3 == 'T' && a2 == 'T' && v == 'E') return true;
-    if (a3 == 'D' && a2 == 'G' && v == 'E') return false;
-    if (LetterClass(a3) == 1) {
-        if (((a2 == 'O' || a2 == 'E') && v == 'K') || (a2 == 'A' && v == 'G') || (LetterClass(a2) == 0 && v == 'L') ||
-            ((a2 == 'I' || a2 == 'E' || a2 == 'U' || a2 == 'Y') && v == 'M') || ((a2 == 'O' || a2 == 'A') && v == 'N') ||
-            ((a2 == 'O' || a2 == 'A' || a2 == 'U' || a2 == 'I') && v == 'B') ||
-            ((a2 == 'A' || a2 == 'I' || a2 == 'E') && v == 'C') ||
-            ((a2 == 'A' || a2 == 'I' || a2 == 'E' || a2 == 'O' || a2 == 'U' || a2 == 'Y') && v == 'P')) {
-            return true;
-        }
-        if (LetterClass(a2) == 0 && LetterClass(v) == 0) return false;
-    }
-    if (LetterClass(a2) == 1 && LetterClass(v) == 1 && a2 != v) {
-        switch (a2) {
-            case 'S': return v == 'M';
-            case 'H': return v == 'M' || v == 'N';
-            case 'G': return v == 'N';
-            case 'R': return v == 'L';
-            case 'M': return v == 'N' || v == 'B';
-        }
-        return a2 == 'W' && v == 'L';
-    }
-    if ((LetterClass(a2) == 0 &&
-         (v == 'S' || v == 'T' || v == 'G' || v == 'D' || v == 'F' || v == 'R' || v == 'X' || v == 'W')) ||
-        (LetterClass(a2) == 1 && v == 'S')) {
-        return false;
-    }
-    switch (a2) {
-        case 'C': case 'F': case 'L': case 'N': case 'P': case 'R': case 'X':
-            if (v == 'T') return false;
-    }
-    return a3 == 'G' && a2 == 'L' && v == 'E';
+    return LatinWordClass(tail) != 'v';
 }
 
 }  // namespace internal

@@ -3,3 +3,5 @@
 * text=auto eol=lf
 # Test fixtures are checked out exactly as committed (some hold CRLF or a BOM on purpose).
 tests/unit/dict/testdata/** -text
+# Fuzz inputs are raw bytes, invalid UTF-8 among them: no line-end conversion and no text diff.
+tests/fuzz/regressions/** binary

@@ -1,0 +1,24 @@
+# 규칙: LEX-11
+rule	input	expected	kind	layer
+dict:jisjk:347161	父も母も最終的には許したのだろう。	아버지도 어머니도 최종적으로는 용서했을 것이다.	fix	defaults
+dict:jisjk:347161	家族も友人もなく、ただ一人。	가족도 친구도 없고, 다만 한 사람.	fix	defaults
+dict:jisjk:347161	女子も男子も、恋愛感情も関係ない。	여자도 남자도, 연애 감정도 관계없다.	fix	defaults
+dict:jisjk:347161	明日も明後日も、未来永劫！	내일도 모레도, 미래 영겁!	fix	defaults
+dict:jisjk:347161	でも、昨日も一昨日もいたし	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	壁も天井も、ベッドも、全てが白だった。	벽도 천장도, 침대도, 모두가 흰색이었다.	fix	defaults
+dict:jisjk:347161	武器も防具もスキルも簡単に手に入る。	무기도 방어구도 스킬도 간단하게 손에 들어 온다.	fix	defaults
+dict:jisjk:347161	騎士様も私も死には至ってない。	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	ワタシも私も知識として知っている。	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	この学園も生徒会も甘くない。	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	同性も異性も関係ないんじゃない？	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	胸も尻もぶるぶると震える。	!rule:dict:jisjk:347161	fix	defaults
+dict:jisjk:347161	三年以上も待った。	rule:dict:jisjk:347161=(이)나	keep	local
+dict:jisjk:347161	三人以上も来た。	rule:dict:jisjk:347161=(이)나	keep	local
+dict:jisjk:347161	何週間も待った。	rule:dict:jisjk:347161=(이)나	keep	local
+dict:jisjk:347161	十年間も待った。	rule:dict:jisjk:347161=(이)나	keep	local
+dict:jisjk:347161	私も行く。	!rule:dict:jisjk:347161	keep	defaults
+dict:jisjk:354152	父も母も最終的には許したのだろう。	!rule:dict:jisjk:354152	fix	defaults
+dict:jisjk:354152	武器も防具もスキルも簡単に手に入る。	!rule:dict:jisjk:354152	fix	defaults
+dict:jisjk:354152	でも、昨日も一昨日もいたし	!rule:dict:jisjk:354152	fix	defaults
+dict:jisjk:354152	何年も待った。	rule:dict:jisjk:354152=(이)나	keep	local
+dict:jisjk:354152	二人とも一時間も遅れた。	rule:dict:jisjk:354152=(이)나	keep	local

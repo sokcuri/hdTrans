@@ -77,7 +77,7 @@ check() {
 check 0 '1 run, 0 failed, 0 skipped' pass 1
 check 0 '1 run, 0 failed, 1 skipped' skip 0
 ! grep '^ok .*skip' "$tmp/log"
-grep '^SKIP skip: fixture absent$' "$tmp/log" > /dev/null
+grep -E '^SKIP skip: fixture absent \([0-9.]+s\)$' "$tmp/log" > /dev/null
 check 1 '1 run, 0 failed, 1 skipped' skip 1
 check 1 '1 run, 1 failed, 0 skipped' fail 0
 check 1 '1 run, 1 failed, 1 skipped' mixed 0

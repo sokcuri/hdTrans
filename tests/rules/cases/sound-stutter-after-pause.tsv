@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-sound:paused-to-stutter	「ひいいいい！？　と、とと、溶けちゃうよ！？」	「히이이이이!? 노, 노, 녹아버린다!?」	fix	sound
+sound:paused-to-stutter	「ひいいいい！？　と、とと、溶けちゃうよ！？」	「히이이이이!? 노, 노, 녹아 버릴 거야!?」	fix	sound
 sound:paused-to-stutter	ふむ、と彼が腕を組む。	흠, 하고 그가 팔짱을 낀다.	keep	sound
 sound:paused-to-stutter	「ダンッ！　と扉が開いた。」	「쾅! 하고 문이 열렸다.」	keep	sound

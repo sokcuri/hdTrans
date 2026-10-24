@@ -135,12 +135,16 @@ public:
 
     // A dictionary key of two or more characters, or with a kanji, that ends at
     // character at of rs and starts at or after from, and no key of the sound lexicon
-    // that does (どしゃ).
+    // that does (どしゃ). An ending of the contracted しまう (うよ of 食べちゃうよ) ends a word
+    // only after the ゃ or ま of its contraction (not 歌うよ).
     bool WordEnds(std::u32string_view rs, size_t from, size_t at) const {
         bool word = false;
         for (size_t j = from; j < at; j++) {
             if (LexiconKey(ToKatakana(rs.substr(j, at - j)), ctx_.extraBuiltin)) return false;
-            word = word || ((at - j >= 2 || IsKanjiRune(rs[j])) && !Tags(rs.substr(j, at - j)).empty());
+            if (at - j < 2 && !IsKanjiRune(rs[j])) continue;
+            const std::string tags = Tags(rs.substr(j, at - j));
+            const bool contracted = tags.find_first_not_of('S') == std::string::npos && rs[j] == U'う';
+            word = word || (!tags.empty() && (!contracted || (j > 0 && In(rs[j - 1], U"ゃま"))));
         }
         return word;
     }
@@ -315,7 +319,12 @@ bool Volitional(std::u32string_view rs, size_t i) {
         const int v = HiraganaVowel(rs[i - 2]);
         return v != 1 && v != 3;  // やろー, 帰ろー; not the imperative やめろー, 見ろー
     }
-    if (prev == U'よ') return rs[i - 2] == U'し' || HiraganaVowel(rs[i - 2]) == 3;
+    if (prev == U'よ') {
+        // て or で ends an ichidan stem only after its kanji (捨てよー); after kana it is a て form
+        // and よ the particle (連れていってよー, 見ててよー, 遊んでよー).
+        if (In(rs[i - 2], U"てで") && (i < 3 || !IsKanjiRune(rs[i - 3]))) return false;
+        return rs[i - 2] == U'し' || HiraganaVowel(rs[i - 2]) == 3;
+    }
     return false;
 }
 
@@ -944,7 +953,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 } else if (!plainStart && (end >= rs.size() || IsPause(rs[end]) || longTsu) &&
                            (In(prev, kDrawlKana) || (!Drawn(rs, i, end).empty() && e.ReadsTo(rs, i))) &&
                            !(prev == U'て' && i >= 3 && rs[i - 2] == U'っ' && rs[i - 3] == U'だ') &&  // 何だってぇ
-                           std::all_of(rs.begin() + i, rs.begin() + end, [&](char32_t c) { return c == kEmphasisVowels[v][0]; }) &&
+                           v >= 0 && std::all_of(rs.begin() + i, rs.begin() + end,
+                                                 [&](char32_t c) { return c == kEmphasisVowels[v][0]; }) &&
                            !SoundRun(rs, i, end, ctx.extraBuiltin) && LengthensWord(e, rs, from, i)) {
                     // A drawl: ていとくぅ, ないでぇ, なのぉ; a shout's っ goes with a long one.
                     size_t to = end;

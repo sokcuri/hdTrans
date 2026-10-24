@@ -1,8 +1,8 @@
 #!/bin/sh
-# Checks the rule cases in tests/rules/cases.tsv (or every table in a directory) against a built CLI.
+# Checks a table of rule cases (or every table in a directory) against a built CLI.
 #   tools/rule-cases.sh CLI DICTS [CASES] [--accept] [-- CLI-OPTIONS...]
-# CASES is a TSV with the header `rule input expected kind layer`. Every input is translated as its
-# own session (-each -why). `expected` is one of
+# CASES (default tests/rules/cases/) is a TSV with the header `rule input expected kind layer`, or a
+# directory of them. Every input is translated as its own session (-each -why). `expected` is one of
 #   the whole Korean output;
 #   rule:dict:<row id>=<target>  some word of the line is chosen by the local rule that the
 #                                dictionary row <row id> carries, with that target (the dictionary
@@ -27,7 +27,7 @@ LC_ALL=C; export LC_ALL
 [ $# -ge 2 ] || { echo "usage: tools/rule-cases.sh CLI DICTS [CASES] [--accept]" >&2; exit 2; }
 cli=$1 dicts=$2; shift 2
 here=$(cd "$(dirname "$0")/.." && pwd)
-cases=$here/tests/rules/cases.tsv accept=
+cases=$here/tests/rules/cases accept=
 while [ $# -gt 0 ]; do
     case $1 in
         --accept) accept=1 ;;

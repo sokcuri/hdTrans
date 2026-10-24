@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:jisjk:259052	霧の中を歩く。	안개 속을 걷는다.	fix	local
-dict:jisjk:259052	闇の中に消えた。	rule:dict:jisjk:259052=속	fix	local
+cx:naka-sok:10	闇の中に消えた。	rule:cx:naka-sok:10=속	fix	rewrites
 dict:jisjk:259052	箱の中に入れた。	상자 안에 넣었다.	keep	local
 dict:jisjk:342783	絶望の中で生きる。	절망 속에서 산다.	fix	local
 dict:jisjk:342783	暗闇の中でよく頑張った。	어둠 속에서 잘 노력했다.	fix	local

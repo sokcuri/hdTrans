@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/spoken_forms_gen.h"
@@ -381,6 +382,8 @@ HD_TEST(pipeline_rewrite_casual) {
         {"抜け駆けすんなッ！"sv, "抜け駆けするな！"sv},
         {"心配すんな・・・"sv, "心配するな・・・"sv},
         {"交渉はすんなり進んだ"sv, "交渉はすんなり進んだ"sv},
+        {"ごめんな、遅れて"sv, "ごめんな、遅れて"sv},
+        {"やめんな！"sv, "やめるな！"sv},
         {"でなければ、死ぬのはおまえだ"sv, "そうでなければ、死ぬのはおまえだ"sv},
         {"できていた。でないと困る"sv, "できていた。そうでないと困る"sv},
         {"学生でなければ入れない"sv, "学生でなければ入れない"sv},
@@ -438,16 +441,26 @@ HD_TEST(pipeline_strip_ruby) {
 }
 
 HD_TEST(pipeline_join_brace_ruby) {
-    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other bases are nouns.
-    const BaseContinues verbs = [](const void*, std::string_view base, std::string_view) {
-        return base == "背負" || base == "見惚";
+    // A stand-in for the dictionary: 背負 and 見惚 start verbs, other longer bases are
+    // nouns; 剥 inflects in が; after 庇 and 掬 a word follows the verb inside the kana.
+    const ReadBase read = [](const void*, std::string_view base, std::string_view kana) {
+        BaseReading r;
+        r.continues = base == "背負" || base == "見惚";
+        r.inflected = base == "剥";
+        if (base == "庇" && kana.starts_with("ってくれ")) r.wordEnd = std::string_view("って").size();
+        if (base == "掬" && kana.starts_with("ったまぐろ")) r.wordEnd = std::string_view("った").size();
+        return r;
     };
     const Case cases[] = {
         {"{rb}悔{/rb}{rt}く{/rt}やんでも。"sv, "{rb}悔やんでも{/rb}{rt}くやんでも{/rt}。"sv},
         {"{rb}微{/rb}{rt}かす{/rt}かに声"sv, "{rb}微かに{/rb}{rt}かすかに{/rt}声"sv},
-        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇ってくれた{/rb}{rt}かばってくれた{/rt}"sv},
         {"{rb}背負{/rb}{rt}しょ{/rt}って"sv, "{rb}背負って{/rb}{rt}しょって{/rt}"sv},
         {"{rb}見惚{/rb}{rt}みほ{/rt}れる。"sv, "{rb}見惚れる{/rb}{rt}みほれる{/rt}。"sv},
+        // Only the base's own word moves when another word follows it in the kana.
+        {"{rb}庇{/rb}{rt}かば{/rt}ってくれた"sv, "{rb}庇って{/rb}{rt}かばって{/rt}くれた"sv},
+        {"{rb}掬{/rb}{rt}すく{/rt}ったまぐろの"sv, "{rb}掬った{/rb}{rt}すくった{/rt}まぐろの"sv},
+        // Okurigana that start like a particle move when the base inflects in them.
+        {"{rb}剥{/rb}{rt}は{/rt}がそうと"sv, "{rb}剥がそうと{/rb}{rt}はがそうと{/rt}"sv},
         // A noun of two or more characters keeps the kana after the tags.
         {"{rb}安堵{/rb}{rt}あんど{/rt}して"sv, "{rb}安堵{/rb}{rt}あんど{/rt}して"sv},
         {"{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv, "{rb}杞憂{/rb}{rt}きゆう{/rt}ってもの"sv},
@@ -462,7 +475,44 @@ HD_TEST(pipeline_join_brace_ruby) {
         {"{rb}{/rb}{rt}く{/rt}や"sv, "{rb}{/rb}{rt}く{/rt}や"sv},
         {"{k=-5.0}―――{/k}"sv, "{k=-5.0}―――{/k}"sv},
     };
-    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, verbs, nullptr), std::string(c.want));
+    for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, read, nullptr), std::string(c.want));
+}
+
+HD_TEST(pipeline_respell_variants) {
+    // A stand-in for the dictionary: 身の程 and ときめく are words that hold a variant.
+    const WordKeepsVariant words = [](const void*, std::string_view line, size_t at, std::string_view variant,
+                                      std::string_view) {
+        const std::string_view rest = line.substr(at);
+        return rest.starts_with("程度") ||
+               (rest.starts_with("程") && at >= "身の"sv.size() && line.substr(at - "身の"sv.size()).starts_with("身の")) ||
+               (variant == "とき"sv && rest.starts_with("ときめ"));
+    };
+    const Case cases[] = {
+        {"痛い程に赤い。"sv, "痛いほどに赤い。"sv},
+        {"子供程の背丈"sv, "子供ほどの背丈"sv},
+        {"程度の差"sv, "程度の差"sv},
+        {"身の程を知れ"sv, "身の程を知れ"sv},
+        {"それぐらいに近い"sv, "それぐらいに近い"sv},
+        {"人の為に"sv, "人のために"sv},
+        {"何を為そうと"sv, "何を為そうと"sv},
+        {"死ぬ迄"sv, "死ぬまで"sv},
+        {"見たときに分かった"sv, "見た時に分かった"sv},
+        {"もっときれいになる"sv, "もっときれいになる"sv},
+        {"胸がときめく"sv, "胸がときめく"sv},
+        {"信じられない位淡白"sv, "信じられないくらい淡白"sv},
+        {"神の位から落ちた"sv, "神の位から落ちた"sv},
+        {"知らない事が多い"sv, "知らない事が多い"sv},
+        {"仕事を終えた"sv, "仕事を終えた"sv},
+        {"行かせない等、"sv, "行かせないなど、"sv},
+        {"時間がない"sv, "時間がない"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellVariants(c.in, words, nullptr), std::string(c.want));
+    // Every member is VARIANT=SPELLING with both sides written.
+    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.variant")) {
+        const size_t eq = pair.find('=');
+        HD_CHECK(eq != std::string_view::npos && eq > 0 && eq + 1 < pair.size() &&
+                 pair.find('=', eq + 1) == std::string_view::npos);
+    }
 }
 
 HD_TEST(pipeline_write_kin_terms) {

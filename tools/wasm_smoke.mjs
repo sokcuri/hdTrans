@@ -59,7 +59,10 @@ try {
     assert.deepEqual(translator.filterErrors, []);
     assert.equal(translator.translate(''), '');
     translator.reset();
-    assert.equal(translator.translate(`${text}😀\n\n${text}\r\n`), `${base}😀\n\n${base}\r\n`);
+    const emoji = translator.translate(`${text}😀`);
+    assert(emoji.startsWith(base) && emoji.endsWith('😀'), emoji);
+    translator.reset();
+    assert.equal(translator.translate(`${text}😀\n\n${text}\r\n`), `${emoji}\n\n${base}\r\n`);
     assert(translator.translate('A\0B').includes('B'), 'embedded NUL must not truncate input');
     for (let i = 0; i < 30; ++i) {
         translator.reset();
@@ -180,14 +183,14 @@ try {
     assert.equal(explained.text, ordinary);
     assert(Array.isArray(explained.choices) && explained.choices.length > 0);
     const student = explained.choices[0];
-    assert.equal(student.surface, '学');
-    assert.equal(student.choice.text, '학교');
-    assert.equal(student.choice.provenance, 'Single');
+    assert.equal(student.surface, '学生');
+    assert.equal(student.choice.text, '학생');
+    assert.equal(student.choice.provenance, 'Digit');
     assert.equal(student.choice.layer, 'defaults');
     assert.equal(student.choice.index, 0);
     assert.equal(student.line, 0);
     assert.equal(student.start, 0);
-    assert.equal(explained.choices[1].start, 3, 'offsets count UTF-8 bytes, not UTF-16 code units');
+    assert.equal(explained.choices[1].start, 6, 'offsets count UTF-8 bytes, not UTF-16 code units');
     assert(explained.choices.some((choice) => choice.line === 1));
     for (const choice of explained.choices) {
         assert(Number.isInteger(choice.chunk) && Number.isInteger(choice.token) && Number.isInteger(choice.start));

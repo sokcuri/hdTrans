@@ -1,0 +1,83 @@
+# 규칙: NUM-8
+rule	input	expected	kind	layer
+dict:number-lexical-words	七つ道具を持ってきた。	필수 도구를 가져왔다.	fix	defaults
+dict:number-lexical-words	八つ裂きの刑だ。	갈기갈기 찢기의 형이다.	fix	defaults
+dict:number-lexical-words	一騒動あった。	한바탕 소동 있었다.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかない相手だ。	보통 수단으로는 안 되는 상대다.	fix	defaults
+dict:number-lexical-words	一人前のレディとして扱ってよね！	어엿한 레이디로서 취급해!	fix	defaults
+dict:number-lexical-words	三日坊主で終わった。	작심삼일로 끝났다.	fix	defaults
+dict:w:27029	一人前の寿司を頼む。	1인분의 스시를 부탁한다.	keep	local
+dict:jisjk:365553	一番好きな作家は？	제일 좋아하는 작가는?	fix	local
+dict:jisjk:365553	どの子が一番好きなの？	어느 아이가 제일 좋아해?	fix	local
+dict:jisjk:365553	先輩好きです。	rule:dict:jisjk:365553=(을)를 좋아%D1@	keep	local
+dict:jisjk:1859	駆逐艦の一番艦だ。	구축함의 1번함이다.	fix	local
+dict:jisjk:1859	一番目の問題。	첫번째의 문제.	keep	local
+dict:jisjk:1859	一番強い。	제일 강하다.	keep	defaults
+dict:jisjk:1859	一番になりたい。	제일이 되고 싶다.	keep	defaults
+dict:number-lexical-words	八つ当たりするな。	엉뚱한 화풀이하지 마.	keep	defaults
+dict:number-lexical-words	一つください。	하나 주세요.	keep	defaults
+dict:number-lexical-words	一人で行く。	혼자서 간다.	keep	defaults
+dict:jisjk:1859	地元から一番近いショッピングモールまで出た。	동네에서 제일 가까운 쇼핑 몰까지 나왔다.	keep	defaults
+dict:jisjk:1859	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 소중한 것은 하나뿐이다.	keep	defaults
+dict:jisjk:1859	一番最初に脱落しそうだと思っていた。	제일 처음에 탈락할 것 같다고 생각했다.	keep	defaults
+dict:jisjk:1859	厨房に一番近い席。	주방에 제일 가까운 자리.	keep	defaults
+dict:jisjk:1859	一番上の兄が婚約した。	맨 위의 형이 약혼했다.	keep	defaults
+dict:jisjk:1859	検索するのが一番手っ取り早いぞ。	검색하는 것이 제일 빨라.	keep	defaults
+dict:jisjk:1859	一番最初にやった罰ゲームが残っている。	제일 처음에 한 벌칙 게임이 남아 있다.	keep	defaults
+dict:jisjk:1859	オレが一番強いんだからよ！	내가 제일 강하거든!	keep	defaults
+dict:jisjk:1859	この瞬間が、私は一番好き！	이 순간이, 나는 제일 좋아해!	keep	defaults
+dict:jisjk:1859	誰が一番強いか決めるってわけだ。	누가 제일 강한가 결정하는 것이다.	keep	defaults
+dict:jisjk:1859	やはり飛行甲板が一番大事。	역시 비행갑판이 제일 중요.	keep	defaults
+dict:jisjk:1859	私が一番上手なんだから。	내가 가장 잘하니까.	keep	defaults
+dict:jisjk:1859	一番乗りぃ！	제일 먼저 도착!	keep	defaults
+dict:number-lexical-words	追撃戦は私の十八番よ！	추격전은 내 십팔번이야!	keep	defaults
+dict:number-lexical-words	ボスの要求に二つ返事か。	보스의 요구에 흔쾌한 승낙인가.	keep	defaults
+dict:number-lexical-words	四つん這いのような低い姿勢で跳びはねる。	납죽 엎드림 같은 낮은 자세로 펄쩍펄쩍 뛴다.	keep	defaults
+dict:number-lexical-words	父に一目惚れした。	아버지에게 한눈에 반했다.	keep	defaults
+dict:number-lexical-words	八百屋などの商店はほとんど店じまいしていた。	야채가게 등의 상점은 거의 폐점하고 있었다.	keep	defaults
+dict:jisjk:365553	あたしが一番好きなものって？	내가 제일 좋아하는 것은?	fix	local
+dict:jisjk:365553	彼が一番好きだった料理ですね。	그가 제일 좋아했던 요리군요.	fix	local
+dict:number-lexical-words	一人前のレディーとして扱ってよね！	어엿한 레이디로서 취급해!	fix	defaults
+dict:number-lexical-words	一人前のレディとして頂くわ。	어엿한 레이디로서 받아.	fix	defaults
+dict:number-lexical-words	八つ裂きにしてやろう！	갈기갈기 찢기로 해 주자!	fix	defaults
+dict:number-lexical-words	今年の試合、一波乱あり。	금년 시합, 한바탕 파란 있어.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかない者たちと行動を共にする。	보통 수단으로는 안 되는 사람들과 행동을 같이 한다.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかないわよ？	보통 수단으로는 안 돼?	fix	defaults
+dict:jisjk:1859	軽巡洋艦、その長女、一番艦の子よ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	あたし、一番艦の、ヒトマルマル…	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	防空駆逐艦、一番艦、参りました。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	改型一番艦となる子です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	改型一番艦、抜錨します！	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	駆逐艦七番艦、改型としては一番艦となる子です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	駆逐艦一番艦です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	駆逐艦、一番艦、着任しました。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	この級の戦艦一番艦よ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	潜水艦一番艦、出撃します！	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	潜水艦、その一番艦です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	重巡洋艦、一番艦。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	私がこの級の一番艦だ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	ロシアの弩級戦艦、その一番艦だ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	この級の一番艦、近代化改装は完了済みだ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	海防艦、一番艦です！	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	海防艦、一番艦！	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	戦艦一番艦、ここに。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	私はあのBig7の、そしてその一番艦なのよ。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	潜特型の長女、一番艦です！	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	海防艦、一番艦、参ります。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	海防艦、一番艦。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	潜水母艦一番艦と申します。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	丁型駆逐艦、松型一番艦です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	重巡の一番艦、ここに。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	潜高型一番艦、了解。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	駆逐艦一番艦、健在です。	rule:dict:jisjk:1859=1번	fix	local
+dict:jisjk:1859	大型高速駆逐艦、その級の一番艦です。	rule:dict:jisjk:1859=1번	fix	local
+# 맞는 출력: 일반적으로 어엿하다고 불리는 마술사는,
+dict:number-lexical-words	一般的に一人前と呼ばれている魔術師は、	일반적으로 한 사람 몫으로 불리고 있는 마술사는,	current	defaults
+# 맞는 출력: 한 사람 몫을 하기에는 아직 멀었습니다만
+dict:number-lexical-words	一人前にはまだほど遠いでありますが	한 사람 몫에게는 아직 멀고 있습니다만	current	defaults
+# 맞는 출력: 일등을 목표로 할 거야~!
+dict:jisjk:1859	一番目指すよー！	첫번째 가리켜~!	current	defaults
+dict:number-lexical-words	また…私が一番先なの？	또…내가 맨 앞이야?	fix	defaults
+dict:number-lexical-words	一番先の家。	맨 앞의 집.	fix	defaults
+dict:number-lexical-words	一番先に、敵艦発見！	제일 먼저, 적함 발견!	keep	defaults
+dict:number-lexical-words	先に行く。	먼저 간다.	keep	defaults

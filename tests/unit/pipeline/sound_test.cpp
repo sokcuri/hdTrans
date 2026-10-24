@@ -46,7 +46,9 @@ const dict::LoadResult& SoundDictionary() {
         "としてい\t(으)로 하고 있\tM100\t28\n"
         "リスク\t리스크\tN110\t29\n"
         "ついに\t마침내\tE300\t30\n"
-        "ただ\t다만\tE300\t31\n",
+        "ただ\t다만\tE300\t31\n"
+        "歌\t노래하\tM100\t32\n"
+        "うよ\t6 버릴 거야\tS5A0\t33\n",
     }});
     return result;
 }
@@ -217,6 +219,9 @@ HD_TEST(pipeline_sound) {
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        // A drawn よ after a て form at the start of the text: no character before the て.
+        {"てよー", "てよ～"},
+        {"でよーーー。聞いてるの？", "でよ～。聞いてるの？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -381,6 +386,34 @@ HD_TEST(pipeline_sound_doubled_kana_verb) {
     HD_CHECK_EQ(Sound("ふるふると震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
     HD_CHECK_EQ(Sound("イクイクと叫ぶ", ctx, *loaded.snapshot), std::string("いくいくと叫ぶ"));
     HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
+}
+
+// The という that quotes a sound before a word in kanji or katakana reads as する, joined to a
+// doubled mimetic and apart from other sounds, also after a key that ends in と; elsewhere
+// という follows the sound with no space and takes back the と of such a key, and another verb
+// is written apart.
+HD_TEST(pipeline_sound_quoting_to_iu) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tgram\tid\n"
+                                     "とい\t(이)라고 &AV@\tM4U0\tTuPj\t1\n"
+                                     "音\t소리\tN110\t\t2\n"
+                                     "うご\t움직이\tM411\t\t3\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"カタカタという音", "달각달각する音"},
+        {"ドォーーンという衝撃", "콰아아앙 する衝撃"},
+        {"ドンという音", "쾅 する音"},
+        {"カタカタという。", "달각달각という。"},
+        {"カタカタというか", "달각달각というか"},
+        {"カタカタというわけ", "달각달각というわけ"},
+        {"ドンという。", "쾅という。"},
+        {"ぼーっという音", "멍する音"},
+        {"カタカタうごく", "달각달각 うごく"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
 // A verb cut off before a dash or an ellipsis, completed when the dictionary has it.
@@ -592,6 +625,9 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"まかせてぇぇぇ！", "まかせて\uE00B\uE00B\uE00B！"},
         {"まかせてぇぇぇっ！", "まかせて\uE00B\uE00B\uE00B！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
+        // drawl of the particle is ～.
+        {"歌うよぉー！", "歌うよ～！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
@@ -785,4 +821,114 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
         {"それは、よかった。", "それは、다행이다。"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// A final phrase row (また明日 내일 보자) is read only where the utterance ends after it.
+HD_TEST(pipeline_sound_final_phrase) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'マ')) flagged = flagged || (r.key == U"マタ明日" && r.final);
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"また明日。", "내일 보자。"},
+        {"また明日……", "내일 보자……"},
+        {"また明日来る", "また明日来る"},
+        {"また明日 来る", "また明日 来る"},
+        {"また明日、学校で", "また明日、学校で"},
+        {"また明日？", "また明日？"},  // a question, not the farewell
+        {"また明日 ?", "また明日 ?"},
+        // In polite speech, or after an honoured person called, the farewell is polite.
+        {"ありがとうございました。また明日", "ありがとうございました。내일 봬요"},
+        {"先生、また明日", "先生、내일 봬요"},
+        {"「行きます」また明日", "「行きます」내일 보자"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
+// The いく after a て form contracted is written in full before its forms; before a mark only
+// when the dictionary holds the verb with ていく, else the quoting って stays.
+HD_TEST(pipeline_contracted_iku) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "連れ\t데리&AA@\tM447\t1\n"
+                                     "連れてい\t데려&A1@\tM44?\t2\n"
+                                     "置\t두&AA@\tM421\t3\n"
+                                     "やめ\t그만두&AA@\tM447\t4\n"
+                                     "や\t하&AA@\tM438\t5\n"
+                                     "どうやって\t어떻게\tM301\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"「連れてって」", "「連れていって」"},
+        {"連れてってくれ", "連れていってくれ"},
+        {"置いてかないで", "置いていかないで"},
+        {"置いてった", "置いていった"},
+        {"やめてって", "やめてって"},          // the quoting って: no やめていく
+        {"やめてってよ", "やめてってよ"},
+        {"連れてってよ", "連れていってよ"},
+        {"連れてってば", "連れてってば"},      // not before a mark
+        {"置いてったら", "置いてったら"},      // the quoting ったら
+        {"どうやってって", "どうやってって"},  // the end of どうやって
+        {"連れてってね", "連れていってね"},
+        {"やめてってね", "やめてってね"},  // the quoted request (contraction.te-iku-quoted)
+        // The text ends right after the contraction; an invalid byte before it takes one byte.
+        {"連れてって", "連れていって"},
+        {"連れて", "連れて"},
+        {"\xcd連れてって", "\xcd連れていって"},
+        {"\xcd\xb3\xb3連れてって。", "\xcd\xb3\xb3連れていって。"},
+        {"\xed\xa0\x80連れてって", "\xed\xa0\x80連れていって"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(internal::RewriteContractedIku(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    }
+}
+
+// The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
+HD_TEST(pipeline_contracted_no) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "頭\t머리\tN110\t1\n"
+                                     "真\t참\tN110\t2\n"
+                                     "真ん中\t한가운데\tN110\t3\n"
+                                     "先生\t선생님\tN110\t4\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const Case cases[] = {
+        {"頭ん中が", "頭の中が"},
+        {"先生んとこ", "先生のとこ"},
+        {"先生んとこ行く", "先生のとこ行く"},  // only ん中 needs no kanji after it
+        {"真ん中に", "真ん中に"},
+        {"頭ん中断", "頭ん中断"},
+        {"走ん中", "走ん中"},  // no noun
+        {"頭ん中", "頭の中"},
+        {"\xcd頭ん中", "\xcd頭の中"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedNo(c.in, *loaded.snapshot), std::string(c.want));
+}
+
+// The う of the past and the て form of a godan verb in う is っ; not before ため, nor in a noun.
+HD_TEST(pipeline_onbin_u) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "言\t말&AV@\tM430\t1\n"
+                                     "救\t구&AV@\tM430\t2\n"
+                                     "名うて\t이름난\tN110\t3\n"
+                                     "名\t이름\tN110\t4\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"言うたやろ", "言ったやろ"},
+        {"言うてる", "言ってる"},
+        {"救うために", "救うために"},
+        {"名うての", "名うての"},
+        {"言うた", "言った"},
+        {"\xcd言うた", "\xcd言った"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteOnbinU(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

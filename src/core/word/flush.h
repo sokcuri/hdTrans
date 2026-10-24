@@ -44,23 +44,47 @@ void ApplyNegatives(Flusher& f);
 
 // Helpers of the text-path passes. TakeTarget (sense.cpp) selects the candidate of class
 // with target, or writes target over the selected one. SelectLemma (grammar.cpp) selects
-// the first entry whose dictionary form is lemma (or starts with prefix) and reports
-// whether there was one. Thing and Person classify dictionary attributes.
+// the first entry whose dictionary form is lemma and reports whether there was one. Thing
+// and Person classify dictionary attributes.
 void TakeTarget(Item* it, char cls, std::string_view target, Selection source = {Provenance::Rewrite});
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma);
-bool SelectLemmaPrefix(Flusher& f, Item* it, std::string_view prefix);
 bool Thing(std::string_view attr);
 // The dictionary form of entry slot of it (an empty string for no entry).
 std::string ItemLemma(Flusher& f, const Item* it, int slot);
 bool Person(std::string_view attr);
 // Whether the item is a comma, a sentence-end mark, a closing quote or bracket, or 。 (grammar.cpp).
 bool PauseOrEnd(const Item* it);
+// The text before the item on its line without the spaces next to it: the rest of the item's token
+// before it, or else the nearest earlier token that is not only spaces; empty at the line start.
+// token receives the index of the token the text is from (grammar.cpp).
+std::string_view TextBefore(const Worker& w, const Item* it, int& token);
 // Whether nothing but spaces stands before the item on its line, or a sentence end does (grammar.cpp).
 bool OpensLine(const Worker& w, const Item* it);
+// Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
+// item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
+bool AfterRestart(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
 bool QuoteVerbFollows(const Item* it);
+// Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
+// span boundary (grammar.cpp).
+bool QuoteEnd(const Worker& w, const Item* it);
+// Whether the item ends its sentence: the end of the utterance (UtteranceEnd), or ！？!? after it
+// (grammar.cpp).
+bool SentenceEnd(const Worker& w, const Item* it);
+// Whether the text after the stem of the item is い or かった, a comma or none, and a particle of
+// particle.contrast: a contrast that goes on (大した傷ではないが) (grammar.cpp).
+bool ContrastFollows(const Item* it);
+// Whether s is katakana ァ..ヶ and ー only, and not empty (grammar.cpp).
+bool KatakanaSurface(std::string_view s);
+// Whether the item is followed in its token by a noun that it describes, not at the end of the
+// utterance (楽しみにしてたさ); before selection the first candidate of the next item counts
+// (grammar.cpp).
+bool DescribedNoun(const Worker& w, const Item* it);
+// Whether a verb follows it in its sentence (not an auxiliary of its て form), with only words and
+// particles between (connective.cpp).
+bool PredicateFollows(const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
@@ -70,14 +94,6 @@ void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
-// The provider に before a て verb and もらう read as 주다 is its subject: 王子様に案内してもらう
-// 왕자님이 안내해 주다.
-void BenefactiveProvider(Flusher& f);
-void GoNotSay(Flusher& f);
-void PositiveIke(Flusher& f);
-void CopulaDeAru(Flusher& f);
-void NegativeCopula(Flusher& f);
-void SubjectBeforeGa(Flusher& f);
 // A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
 // plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
 void PluralPronoun(Flusher& f);
@@ -88,25 +104,17 @@ void PluralPronoun(Flusher& f);
 // counts (十度も 열 번이나, 五度 5번, 十度目 열 번째).
 void DegreeAfterNumber(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
-void ChanAfterKatakana(Flusher& f);
 void InitialSoundRule(Flusher& f);
-void SubjectNo(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end
 // of the utterance (closing punctuation, a pause or the end of the chunk).
-void TeRequest(Flusher& f);
 void TeThanks(Flusher& f);
-// The て or 連用 form of a verb with an object before a comma reads 고 (電話を切って、 전화를 끊고,).
-void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 // The ている of a verb of thinking or perceiving, or of one whose Korean is an adjective, read
 // as the simple form (思っている 생각한다, 見えている 보인다); that of a verb of saying or of
 // 付き合う except in the plain present and in 지 (言っていた 말했다, 付き合っている人 사귀는 사람).
 void SimpleAspect(Flusher& f);
-// The progressive ていた of a verb of the dictionary, not one the passive or potential pass
-// rewrote, before a noun it describes read as 던 (読んでいた本 읽던 책).
-void PastProgressiveAdnominal(Flusher& f);
 // The てある of an action done beforehand read as 어 두었다 (用意してある 준비해 두었다); after a が
 // subject, the state, and for a Korean passive it stays 있다 (窓が開けてある 창이 열려 있다).
 void PreparedState(Flusher& f);
@@ -116,17 +124,13 @@ void NotYet(Flusher& f);
 void InwardAuxiliary(Flusher& f);
 // A verb continuative before も and する: V-지도 않다 with a negative する, V-기도 하다 otherwise.
 void EmphaticMo(Flusher& f);
-void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);
-void NodaTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
-void QuestionCopula(Flusher& f);
 // A sentence-final だろう after a question word in its clause asks (何だろう 뭘까, どっちだろう
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
 void LongVowelAfterKatakana(Flusher& f);
-void ShortPossessive(Flusher& f);
 // Two or more のか clauses side by side (良かったのか、悪かったのか) read alike, in 지.
 void ParallelNoka(Flusher& f);
 // An offer that ends a quoted sentence, or any sentence with a final particle (教えてやるよ,
@@ -137,12 +141,7 @@ void OfferPromise(Flusher& f);
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);
 void VerbNegative(Flusher& f);
-void TeSequence(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
-
-// Text-path adjectival neighbours (neighbours.cpp).
-void AdjectiveNeighbours(Flusher& f);
-void GeotBeforeMitai(Flusher& f);
 
 // Whether the item's surface is one of set.
 template <std::size_t N>

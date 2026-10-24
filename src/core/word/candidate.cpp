@@ -1,6 +1,9 @@
 // The per-token step: segmentation of a token into dictionary words, candidate groups
 // and the record of words the dictionary does not know.
 #include <algorithm>
+#include <bit>
+#include <cstdint>
+#include <vector>
 
 #include "core/dict/char_readings.h"
 #include "core/dict/classes.h"
@@ -278,13 +281,57 @@ bool NounEnd(std::string_view text) {
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
-// Text path: candidates are ordered by part tag before length, so an adnominal in の
-// written from a kanji (大の, 大粒の) came before a longer dictionary noun it starts
-// (大の字, 大粒の雨). That noun moves to the front when a particle, punctuation or the
-// end of the text follows it. Demonstratives (あの人, この世) and adverbs keep their
-// order: their compound rows read worse than the parts. Plain-dictionary records stay
-// in front.
-Record* LongerNounFirst(Record* records, std::string_view text) {
+// The lengths in characters of the keys of tag letter tag that start text in mode, as
+// a bit set (lengths of 63 or more share the top bit).
+uint64_t KeyLengths(const dict::Snapshot& snapshot, std::string_view text, dict::LookupMode mode, char tag) {
+    uint64_t lengths = 0;
+    for (const dict::Candidate& c : snapshot.GetWordInfo(text, mode, {}).list) {
+        if (c.codes->part.Tag() == tag) lengths |= uint64_t{1} << std::min<std::size_t>(text::RuneCount(c.source), 63);
+    }
+    return lengths;
+}
+
+// Whether text starts with what follows a noun rather than a verb form: a particle of
+// two or more characters (から, まで), or a key that is both a particle and an ending
+// after an adjectival noun (だ, です, か, よ), with no longer verb ending at text (ない,
+// なさい over な; て, た and ます are verb endings only).
+bool NounGoesOn(const dict::Snapshot& snapshot, std::string_view text) {
+    const uint64_t particle = KeyLengths(snapshot, text, dict::LookupMode::General, 'P');
+    const uint64_t noun = (particle & KeyLengths(snapshot, text, dict::LookupMode::AdjectivalNounEnding, 'U')) |
+                          (particle & ~uint64_t{3});
+    const uint64_t verb = KeyLengths(snapshot, text, dict::LookupMode::VerbEnding, 'S');
+    return noun != 0 && std::bit_width(noun) >= std::bit_width(verb);
+}
+
+// Whether a key that ends in hiragana runs into kana or a kanji that a noun cannot take
+// (経験あり + ます, 取り分け + て, 経験あり + そうだ, 追って書き + 込んで): the key spells a
+// verb form there. A noun takes a particle, punctuation or a copula form.
+bool RunsIntoWord(const dict::Snapshot& snapshot, std::string_view key, std::string_view after) {
+    const int next = NameClassOf(after);
+    return NameClassOf(LastChar(key)) == kClassHiragana && next != kClassKatakana && next != kClassOther &&
+           !NounEnd(after) && !NounGoesOn(snapshot, after);
+}
+
+// A noun row of tag letter I, K or N: a common or proper noun. The other letters of
+// class-1 rows mark phrase and function rows (すみません, このあと, ぶり).
+bool NounRow(const Record& r) { return At(r.partCode, 1) == '1' && Has("IKN", FirstChar(r.partCode)); }
+
+// Whether the noun row r at text is read whole after a shorter noun row.
+bool ReadsWhole(const dict::Snapshot& snapshot, const Record& r, std::string_view text) {
+    return NounRow(r) && !RunsIntoWord(snapshot, r.source, text.substr(r.source.size()));
+}
+
+// Text path: candidates are ordered by part tag before length, so a shorter record
+// came before a longer dictionary noun it starts. That noun moves to the front:
+// - after a noun row of another letter, unless the noun runs on as a verb form: the
+//   letters of noun rows do not rank word boundaries, length does, as within one
+//   letter (治験薬, not 治験 + 薬);
+// - after an adnominal in の written from a kanji (大の, 大粒の), when a particle,
+//   punctuation or the end of the text follows it (大の字, 大粒の雨). Demonstratives
+//   (あの人, この世) and adverbs keep their order: their compound rows read worse than
+//   the parts.
+// Plain-dictionary records stay in front.
+Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
     while (first != nullptr && first->user != nullptr) {
@@ -292,15 +339,17 @@ Record* LongerNounFirst(Record* records, std::string_view text) {
         first = first->child;
     }
     if (first == nullptr) return records;
-    if (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
-        !text::IsKanji(text::DecodeRune(first->source).cp)) {
+    const bool afterNoun = NounRow(*first);
+    if (!afterNoun && (At(first->partCode, 1) != '0' || !first->source.ends_with("の") ||
+                       !text::IsKanji(text::DecodeRune(first->source).cp))) {
         return records;
     }
     std::string_view noun;
     for (const Record* r = first; r != nullptr; r = r->child) {
-        if (r->user == nullptr && At(r->partCode, 1) == '1' && r->source.size() > first->source.size() &&
-            r->source.size() > noun.size() && r->source.starts_with(first->source) && text.starts_with(r->source) &&
-            NounEnd(text.substr(r->source.size()))) {
+        if (r->user == nullptr && r->source.size() > first->source.size() && r->source.size() > noun.size() &&
+            r->source.starts_with(first->source) && text.starts_with(r->source) &&
+            (afterNoun ? ReadsWhole(snapshot, *r, text)
+                       : At(r->partCode, 1) == '1' && NounEnd(text.substr(r->source.size())))) {
             noun = r->source;
         }
     }
@@ -683,14 +732,15 @@ Record* Worker::ProbeNumericPrefix(int token, std::string_view source, bool afte
 // Splits a Japanese token into dictionary words, inserting each into the chain;
 // unknown characters become synthetic words.
 void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
-    const std::string_view full = surface;
     transformSurface = surface;
-    int cursor = 0;
+    resumeCursor = -1;
+    CoverSurface(token, surface, 0, nullptr);
+}
+
+void Worker::CoverSurface(int token, std::string_view full, int cursor, Item* parent) {
     const int size = static_cast<int>(full.size());
     // Where a search that reached kMaxWordDepth stopped: the search goes on there.
-    Item* parent = nullptr;
     int retries = 0;
-    resumeCursor = -1;
     auto resumed = [&] {
         if (resumeCursor < 0) return false;
         cursor = resumeCursor;
@@ -865,6 +915,93 @@ bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::str
 
 namespace {
 
+// A kanji, kana or ー: a character a word unit may hold.
+bool UnitRune(char32_t r) { return tokenizer::Class(r) != 0; }
+
+// The length of the mark at the start of s that may stand between two copies (pause.copy), or 0.
+std::size_t CopyPauseAt(std::string_view s) {
+    for (const std::string_view p : dict::ClassMembers("pause.copy")) {
+        if (s.starts_with(p)) return p.size();
+    }
+    return 0;
+}
+
+// The copies at the start of text of a unit of two to ten characters said again straight
+// after it or after a pause.copy mark (いやだいやだ, 待って、待って): the bytes of the unit,
+// the bytes of the mark after the first copy, the number of copies and the end of the last;
+// count 0 where none is. The shortest unit wins; a unit of one character repeated (ああ) is none.
+struct Copies {
+    std::size_t unit = 0;
+    std::size_t separator = 0;
+    int count = 0;
+    std::size_t end = 0;  // the end of the last copy
+};
+
+// Whether s is non-empty and only hiragana.
+bool AllHiragana(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (tokenizer::Class(r.cp) != tokenizer::kClassHiragana) return false;
+        t.remove_prefix(r.size);
+    }
+    return !s.empty();
+}
+
+bool HasKanji(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (text::IsKanji(r.cp)) return true;
+        t.remove_prefix(r.size);
+    }
+    return false;
+}
+
+// Whether s is unit written two or more times (はいはい of はい).
+bool SpellsCopies(std::string_view s, std::string_view unit) {
+    if (unit.empty() || s.size() < 2 * unit.size() || s.size() % unit.size() != 0) return false;
+    for (std::size_t at = 0; at < s.size(); at += unit.size()) {
+        if (s.substr(at, unit.size()) != unit) return false;
+    }
+    return true;
+}
+
+// Whether text before a word ends in a copy of unit, with or without a pause.copy mark.
+bool AfterCopy(std::string_view before, std::string_view unit) {
+    if (before.ends_with(unit)) return true;
+    for (const std::string_view p : dict::ClassMembers("pause.copy")) {
+        if (before.ends_with(p) && before.substr(0, before.size() - p.size()).ends_with(unit)) return true;
+    }
+    return false;
+}
+
+Copies CopiesAt(std::string_view text) {
+    constexpr int kMaxUnit = 10;
+    std::size_t unit = 0;
+    char32_t first = 0;
+    bool mixed = false;
+    for (int k = 1; k <= kMaxUnit && unit < text.size(); k++) {
+        const text::Rune r = text::DecodeRune(text.substr(unit));
+        if (!UnitRune(r.cp)) break;
+        if (k == 1) first = r.cp;
+        mixed = mixed || r.cp != first;
+        unit += r.size;
+        if (k < 2 || !mixed) continue;
+        const std::string_view u = text.substr(0, unit);
+        const std::size_t separator = CopyPauseAt(text.substr(unit));
+        if (!text.substr(unit + separator).starts_with(u)) continue;
+        Copies c{unit, separator, 1, unit};
+        for (std::size_t at = unit;;) {
+            const std::size_t s = CopyPauseAt(text.substr(at));
+            if (!text.substr(at + s).starts_with(u)) break;
+            c.count++;
+            at += s + unit;
+            c.end = at;
+        }
+        return c;
+    }
+    return {};
+}
+
 struct DepthScope {
     explicit DepthScope(int& d) : depth(d) { ++depth; }
     ~DepthScope() { --depth; }
@@ -874,6 +1011,74 @@ struct DepthScope {
 };
 
 }  // namespace
+
+// The end of the first copy of a unit said two or more times at the start of text
+// (CopiesAt), or 0: there each copy is a word or words of its own, so that an ending or
+// a word of one copy does not take the start of the next (いやだ|いやだ, not いや+だい).
+// A dictionary word that spells two copies or more keeps them (いろいろ, はいはい); after
+// one that spells some of three or more copies the next copy starts (はいはい|はい).
+std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
+    const Copies c = CopiesAt(text);
+    if (c.count < 2) return 0;
+    const std::string_view unit = text.substr(0, c.unit);
+    const bool kanji = HasKanji(unit);
+    // A unit in katakana alone said again is a sound word as a rule (テレテレ, ゴロゴロ).
+    // A unit in hiragana alone starts a phrase or repeats a copy before it: inside a run of
+    // words it is as often the end of one word and the start of the next (見ていないな,
+    // 他にいないなんて: い+ない+な, not いな twice).
+    if (!kanji) {
+        if (!AllHiragana(unit)) return 0;
+        if (!before.empty() && UnitRune(DecodeLastRune(before).cp) && !AfterCopy(before, unit)) return 0;
+    }
+    // The unit is one word: a word of the dictionary that is neither an ending nor a bare
+    // stem nor a name in kana (はい, だめ; not the stem きよ of 清い), or the stem of an
+    // inflected word with kana after it (いや+だ, 待+って, い+た) that is no particle (not
+    // の+も of のものも); in kana alone, with one kana after the stem (not そう+やろ). A kana noun that also reads as such a stem and ending is either
+    // (きた 북 or 왔다), and no unit.
+    bool word = false, noun = false, bareStem = false;
+    std::size_t longest = 0;
+    std::vector<std::string_view> stems, particles;
+    if (const Lookup l = DoLookup(text, kModeGeneral); l.count != 0) {
+        for (const Record* r = l.records; r != nullptr; r = r->child) {
+            longest = std::max(longest, r->source.size());
+            const char part = At(r->partCode, 0);
+            if (part == 'P') particles.push_back(r->source);
+            if (r->source == unit) {
+                const bool name = part == 'N' && At(r->partCode, 2) == '3';
+                word = word || (part != 'S' && part != 'T' && part != 'M' && part != 'H' && (kanji || !name));
+                noun = noun || part == 'N';
+                bareStem = bareStem || part == 'M' || part == 'H';
+            } else if (unit.starts_with(r->source) && !r->source.empty() && (part == 'M' || part == 'H' || part == 'G') &&
+                       AllHiragana(unit.substr(r->source.size())) &&
+                       (kanji || text::RuneCount(unit.substr(r->source.size())) == 1)) {
+                stems.push_back(r->source);
+            }
+        }
+    }
+    bool inflected = false;
+    for (const std::string_view stem : stems) inflected = inflected || std::ranges::find(particles, stem) == particles.end();
+    if (!kanji && noun && inflected) return 0;
+    // A unit that is also a bare stem, with kana after the last copy, is the stem of a verb
+    // form that goes on there (流れ流れて, 照れ照れに), which the copy alone would misread.
+    if (bareStem && tokenizer::Class(text::DecodeRune(text.substr(c.end)).cp) == tokenizer::kClassHiragana) return 0;
+    if (!word && !inflected) return 0;
+    if (longest >= 2 * c.unit + c.separator) {
+        if (c.separator == 0 && SpellsCopies(text.substr(0, longest), unit) &&
+            longest / c.unit < static_cast<std::size_t>(c.count)) {
+            return longest;
+        }
+        return 0;
+    }
+    // The next copy is no start of a longer word (抜け、抜け際). The separator stays with
+    // the copy before it.
+    const std::size_t next = c.unit + c.separator;
+    if (const Lookup l = DoLookup(text.substr(next), kModeGeneral); l.count != 0) {
+        for (const Record* r = l.records; r != nullptr; r = r->child) {
+            if (r->source.size() > c.unit && !SpellsCopies(r->source, unit)) return 0;
+        }
+    }
+    return next;
+}
 
 // Looks up the words at full[cursor:] and processes them; parent is the word before,
 // whose candidates may be reordered.
@@ -889,6 +1094,33 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
         return true;
     }
     const DepthScope scope(wordDepth);
+    if (const std::size_t end = settings.text ? CopyEnd(text, full.substr(0, static_cast<std::size_t>(cursor))) : 0; end != 0) {
+        // Each copy is read on its own, as if the text stopped after it: the words behind
+        // first, as the recursion inserts a word after the words behind it. At the depth
+        // limit the copies start again from the top, where the search of a copy has room.
+        if (wordDepth >= kMaxWordDepth) {
+            resumeCursor = cursor;
+            resumeParent = parent;
+            resumeRetries = candidateRetryCount;
+            return true;
+        }
+        const int next = cursor + static_cast<int>(end);
+        if (!TranslateCandidateAt(full, next, token, nullptr)) return false;
+        const std::string_view whole = transformSurface;
+        const int inserted = insertedLength, retries = candidateRetryCount, resume = resumeCursor;
+        Item* const resumeAfter = resumeParent;
+        const int resumeAfterRetries = resumeRetries;
+        transformSurface = full.substr(0, static_cast<std::size_t>(next));
+        resumeCursor = -1;
+        CoverSurface(token, transformSurface, cursor, parent);
+        transformSurface = whole;
+        insertedLength = inserted + (next - cursor);
+        candidateRetryCount = retries;
+        resumeCursor = resume;
+        resumeParent = resumeAfter;
+        resumeRetries = resumeAfterRetries;
+        return true;
+    }
     if (Item* hon = HonorificItem(full, cursor, token, parent)) {
         TranslateCandidateAt(full, cursor + hon->length, token, hon);
         Insert(hon);
@@ -939,10 +1171,74 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     return ProcessCandidateRecord(full, cursor, token, CreateSyntheticRecord(token, surface, emptyTarget), parent);
 }
 
+Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    std::string_view word;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (At(r->partCode, 1) == '1' && text.starts_with(r->source) && r->source.size() > word.size()) word = r->source;
+    }
+    if (word.empty()) return records;
+    const text::Rune last = DecodeLastRune(word);
+    const std::string_view name = word.substr(0, word.size() - last.size);
+    const std::string_view after = text.substr(word.size());
+    const std::string_view compound = text.substr(name.size(), last.size + text::DecodeRune(after).size);
+    if (!dict::InClass("noun.realm-name", name) || !dict::InClass("noun.realm-compound", compound)) return records;
+    for (const Record* r = DoLookup(after, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (after.starts_with(r->source) && text::RuneCount(r->source) > 1) return records;
+    }
+    // The compound as a common noun (国境 국경), not a name (国中 쿠니나카).
+    bool common = false;
+    for (const Record* r = DoLookup(compound, kModeGeneral).records; r != nullptr && !common; r = r->child) {
+        common = r->source == compound && At(r->partCode, 1) == '1' && At(r->partCode, 2) == '1';
+    }
+    if (!common) return records;
+    // The reading of the name that the name with 国 starts with (越中 엣추 of 越中国 엣추국), not
+    // another word written the same (甲斐 보람).
+    const auto realm = [&](const Record* n) {
+        if (n->source != name || At(n->partCode, 1) != '1' || n->target.empty()) return false;
+        for (const Record* r = first; r != nullptr; r = r->child) {
+            if (r->source == word && std::string_view(r->target).starts_with(n->target)) return true;
+        }
+        return false;
+    };
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (realm(r)) {
+            *frontTail = r;
+            frontTail = &r->child;
+        } else {
+            *backTail = r;
+            backTail = &r->child;
+        }
+        r = next;
+    }
+    if (front == nullptr) {
+        if (owned == nullptr) return back;
+        owned->child = back;
+        return records;
+    }
+    *frontTail = back;
+    if (owned == nullptr) return front;
+    owned->child = front;
+    return records;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
-    if (settings.text) records = LongerNounFirst(records, From(full, cursor));
+    if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
+    if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));

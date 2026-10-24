@@ -63,6 +63,10 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
                 const size_t sp = opts.find(' ');
                 row.exclaim = row.exclaim || opts.substr(0, sp) == "exclaim";
                 row.predicate = row.predicate || opts.substr(0, sp) == "predicate";
+                row.final = row.final || opts.substr(0, sp) == "final";
+                if (const std::string_view opt = opts.substr(0, sp); opt.starts_with("polite=")) {
+                    row.polite = std::string(opt.substr(std::string_view("polite=").size()));
+                }
                 opts = sp == std::string_view::npos ? std::string_view() : opts.substr(sp + 1);
             }
         }
@@ -123,17 +127,35 @@ std::u32string DecodeText(std::string_view s) {
     return out;
 }
 
+namespace {
+
+// Appends the UTF-8 of the character r of DecodeText, or the invalid byte it stands for.
+void AppendEncoded(std::string& out, char32_t r) {
+    if (r >= kInvalidByte) {
+        out.push_back(static_cast<char>(r - kInvalidByte));
+    } else {
+        text::AppendRune(out, r);
+    }
+}
+
+}  // namespace
+
 std::string EncodeText(std::u32string_view rs) {
     std::string out;
     out.reserve(rs.size() * 3);
-    for (const char32_t r : rs) {
-        if (r >= kInvalidByte) {
-            out.push_back(static_cast<char>(r - kInvalidByte));
-        } else {
-            text::AppendRune(out, r);
-        }
-    }
+    for (const char32_t r : rs) AppendEncoded(out, r);
     return out;
+}
+
+std::vector<size_t> EncodedOffsets(std::u32string_view rs) {
+    std::vector<size_t> at(rs.size() + 1, 0);
+    std::string one;
+    for (size_t k = 0; k < rs.size(); k++) {
+        one.clear();
+        AppendEncoded(one, rs[k]);
+        at[k + 1] = at[k] + one.size();
+    }
+    return at;
 }
 
 std::u32string ToKatakana(std::u32string_view rs) {

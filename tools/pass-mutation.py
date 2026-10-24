@@ -9,10 +9,10 @@ CLI is an experiment build (CMake -DHDTRANS_PASS_EXPERIMENTS=ON, docs/testing.md
 build/<preset>-passexp/hdtrans with HDTRANS_PRESET as in the other tools). DICTS defaults to dicts/.
 The passes are the names in src/core/word/flush.cpp and the row ids (cx:FAMILY:PRIO) of
 src/core/dict/builtin/constructions.tsv; PASS... limits the run to some of them. Each is left out
-with HDTRANS_PASS_SKIP while tests/rules/cases.tsv, tests/rules/cases/,
-tests/rules/speech-soft/ (--speech soft), tests/rules/speech-strict/ (--speech strict) and
-examples/ run, JOBS at a time (default: the number of CPUs), each with a fresh HOME, a time limit
-of SECONDS (default 900) and one dictionary cache that a run without a left-out pass fills first.
+with HDTRANS_PASS_SKIP while tests/rules/cases/, tests/rules/speech-soft/ (--speech soft),
+tests/rules/speech-strict/ (--speech strict) and examples/ run, JOBS at a time (default: the number
+of CPUs), each with a fresh HOME, a time limit of SECONDS (default 900) and one dictionary cache that
+a run without a left-out pass fills first.
 A suite whose CLI fails (crash) or that runs out of time counts as catching the pass.
 Prints a TSV line per pass (pass, failed rows of each suite or crash or timeout, and caught,
 uncaught or not exercised: a pass that only an option off by default runs, src/core/word/analyze.h),
@@ -33,7 +33,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SUITES = [
-    ("cases", ["tests/rules/cases.tsv"]),
     ("themes", ["tests/rules/cases"]),
     ("soft", ["tests/rules/speech-soft", "--", "--speech", "soft"]),
     ("strict", ["tests/rules/speech-strict", "--", "--speech", "strict"]),
@@ -114,9 +113,9 @@ def self_test():
     assert pass_names(src) == ["Select", "NounTo", "DrainNmTail"], pass_names(src)
     table = "// a\n//= de\tafter X\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
     assert construction_ids(table) == ["cx:de:10", "cx:de:20"], construction_ids(table)
-    assert failures("cases", 1, "== layer local: 2 failed\nrule cases: 40 rows, 2 failed (local 2)\n", "") == 2
-    assert failures("cases", 2, "", "CLI failed\n") == "crash"
-    assert failures("cases", 2, "", "no cases at x\n") is None
+    assert failures("themes", 1, "== layer local: 2 failed\nrule cases: 40 rows, 2 failed (local 2)\n", "") == 2
+    assert failures("themes", 2, "", "CLI failed\n") == "crash"
+    assert failures("themes", 2, "", "no cases at x\n") is None
     assert failures("examples", 1, "3c3\n< a\n---\n> b\nnovel: output differs from examples/novel.ko.txt\n", "") == 1
     assert failures("examples", 1, "", "novel: CLI failed\n") == "crash"
     assert failures("examples", 0, "", "") == 0

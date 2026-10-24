@@ -78,14 +78,16 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/dict/snapshot.h"
 #include "core/pipeline/line_context.h"
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs, WriteSounds, then
-// RewriteCasualAdjectives;
+// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedNo,
+// RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
@@ -137,6 +139,25 @@ std::string WriteCries(std::string_view text, const LineContext& ctx, const dict
 // te form (待っ―― 待って――, 書い…… 書いて……), the negative stem with な to ない
 // (行かな…… 行かない……). A stem or a fragment without kanji stays.
 std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The いく after a て form contracted (連れてって 連れていって, 置いてかないで 置いていかないで,
+// 出てった 出ていった) written in full: before the forms of contraction.te-iku; when the dictionary
+// holds the verb with ていく (連れてい), also before those of contraction.te-iku-listed and, with a
+// mark or the end after them, of contraction.te-iku-final (not やめてって, the quoting って). Not
+// before contraction.te-iku-not (待ってったら).
+// The て form is a verb of the dictionary that ends in its て or で.
+std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The の after a noun in kanji or katakana said ん before a member of contraction.n-no
+// (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that
+// spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
+std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap);
+
+// The past and the て form of a godan verb in う said with う for っ (言うた 言った, 思うて 思って,
+// 問うて), when the dictionary has the kanji stem as such a verb and no word that spans the
+// form (名うて): before a member of contraction.u-onbin and not one of contraction.u-onbin-not
+// (救うため).
+std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // そっか after kanji written そうか where the longest end of the kanji run that the dictionary
 // has is the stem of a verb in す: the volitional cut short (流そっか, 見逃そっか); after a noun
@@ -212,6 +233,12 @@ struct SoundRow {
     // An exclaim row that is no sound after a noun topic and a comma either, where it is the
     // predicate (fourth column predicate: あの頃は、よかった 좋았다).
     bool predicate = false;
+    // An intj row read only where the utterance ends after it (fourth column final: また明日
+    // 내일 보자, not また明日来る).
+    bool final = false;
+    // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
+    // where the quote speaks politely or an honoured person is called right before the row.
+    std::string polite;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys
@@ -226,6 +253,9 @@ constexpr char32_t kInvalidByte = 0x110000;
 std::u32string DecodeText(std::string_view s);
 // The inverse of DecodeText.
 std::string EncodeText(std::u32string_view rs);
+// The byte offset of each character of rs in EncodeText(rs), and its size last: an invalid byte
+// takes one byte.
+std::vector<size_t> EncodedOffsets(std::u32string_view rs);
 // rs with the hiragana ぁ..ゖ in katakana.
 std::u32string ToKatakana(std::u32string_view rs);
 

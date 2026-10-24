@@ -7,7 +7,7 @@
 
 ```sh
 hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in   # 조립한 프로그램 (rules.dump)
-hdrulec lint build/rules.txt -dicts dicts [-tsv]   # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
+hdrulec lint build/rules.txt -dicts dicts [-tsv] [-budget tools/lint-budget.tsv]   # 진단 (file:line:col, 또는 kind, index로 이을 수 있는 TSV)
 hdrulec convert build/rules.txt -o build/rules.hdr # 읽기 쉬운 문법으로 (설명 주석 포함)
 hdrulec flat build/rules.hdr -o build/rules.txt    # 되돌리기
 hdrulec verify build/rules.txt [-paths N]          # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
@@ -26,6 +26,9 @@ hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen
 | 동작을 바꿨을 때 | `hdrulec dump build/rules.txt -hash > src/core/rules/program.hash` | `rules.identity` |
 | 늘 | `hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
 | 큰 변환 뒤 | `hdrulec verify build/rules.txt -paths 4096` | `rules.verify` |
+
+`rules.lint`는 플래그마다 경고 수가 `tools/lint-budget.tsv`에 적힌 수와 같아야 통과합니다(`-budget`). 경고를 없앤
+변경은 그 줄을 새 수로 낮추고, 경고가 늘면 그 경고를 고칩니다. 남은 경고는 번역을 바꿔야 고칠 수 있는 것들입니다.
 
 해시는 주석을 보지 않습니다. 동작을 바꿀 생각이
 없었는데 `rules.identity`가 깨지면 `hdrulec dump build/rules.txt` 출력을 이전 커밋과 비교합니다.
@@ -133,17 +136,17 @@ local 3
 
 | lint | 뜻 |
 |---|---|
-| `unknown-code` | 어느 사전 행에도, 의미 계열 표에도 없는 코드(엔진이 정하거나 붙이는 `Ow Hz Td Oj Qt Qw Vp Pi Sa Ka Nm`은 앎). 필드를 잘못 쓴 경우가 많음 |
+| `unknown-code` | 어느 사전 행에도, 의미 계열 표에도 없는 코드(엔진이 정하거나 붙이는 `Ow Hz Hp Td Oj Qt Qw Vp Pi Sa Ka Nm Kh`은 앎). 필드를 잘못 쓴 경우가 많음 |
 | `lone-test` | 그리고-묶음 뒤에 코드 검사 하나만 있는 문장. 묶음 수가 하나 모자란 경우 |
 | `contradiction` | 같은 단어에서 함께 참일 수 없는 검사(표기끼리, 같은 값의 `==`와 `!=`, `+0`의 품사끼리) |
 | `neighbour-contradiction` | 이웃의 품사 검사 두 개가 고른 후보가 없을 때만 함께 참 |
 | `shadowed` | 앞 문장(또는 앞 전역 규칙)이 늘 먼저 참이라 참이 될 수 없는 문장, 규칙 |
-| `duplicate-statement`, `duplicate-test`, `duplicate-rule` | 같은 문장, 검사, 본문 |
+| `duplicate-statement`, `duplicate-test` | 같은 문장, 검사. 규칙끼리 본문이 같은 것은 알리지 않음(규칙은 그것을 이름한 행이 정하고, 본문이 같아도 다른 규칙) |
 | `key-mismatch`, `never-fires` | `+0` 표기 검사가 그 규칙을 가리키는 사전 행의 키와 맞지 않아 참이 될 수 없음 |
-| `unused-rule`, `missing-rule` | 어느 사전 행도 가리키지 않는 규칙, 없는 규칙을 가리키는 사전 행 |
+| `unused-rule`, `missing-rule` | 어느 사전 행도 가리키지 않는 규칙(엔진이 빈 번호를 채운 `\|\|0`은 제외), 없는 규칙을 가리키는 사전 행 |
 | `always-false`, `unreachable-test` | 엔진에 구현이 없는 `D= @d`, 그 뒤라서 돌지 않는 검사 |
 | `unreachable-global` | 범위(0<n<1000, 1000<n<5000) 밖이라 돌지 않는 어간 전역 규칙 |
-| `self-compare`, `delta-range`, `empty-pattern`, `literal-space` | 자기와 비교, 3칸 넘는 위치, 빈 패턴, 값 끝의 공백, 채움 |
+| `self-compare`, `delta-range`, `empty-pattern`, `literal-space` | 자기와 비교, 5칸(`-max-delta`) 넘는 위치, 빈 패턴(어미의 `U== ""`는 빈 어미라 제외), 검사 값 끝의 공백과 대입 값 끝의 공백 2칸 이상(`D=`의 4칸은 빈 활용 표지라 제외) |
 | `assign-then-test` | 대입 뒤에 검사가 오는 문장(지금 규칙에는 없음) |
 | `prio-tie` | PRIO가 같은 전역 규칙 |
 
@@ -194,7 +197,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 |---|---|---|
 | 전역 규칙 텍스트 → 라이브러리 | `cmake/builtin_tables.cmake`(CMake 스크립트) | 같음 |
 | 생성 코드 `compiled_gen.cpp` | 커밋된 파일을 컴파일, ctest `rules.generated`가 다시 만들어 비교 | 커밋된 파일 |
-| 검사 | ctest `rules.dump`가 쓴 프로그램에 `rules.lint`(오류만 실패), `rules.verify`, `rules.identity` | 없음 |
+| 검사 | ctest `rules.dump`가 쓴 프로그램에 `rules.lint`(오류, 또는 플래그별 경고 수가 `tools/lint-budget.tsv`와 다르면 실패), `rules.verify`, `rules.identity` | 없음 |
 
 `hdrulec`는 라이브러리에 링크하지 않고 규칙, 코드 소스(`load.cpp`, `eval.cpp`, `match.cpp`, `codes.cpp` …)만으로
 빌드합니다. 그래서 생성 코드가 깨져도 생성기는 빌드됩니다. Windows의 x86 빌드도 x64 호스트에서 그대로 돌릴 수 있지만,

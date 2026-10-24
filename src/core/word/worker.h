@@ -70,6 +70,9 @@ public:
     // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
     // and the raw text of the tokens before it; computed once for all tokens.
     int QuoteDepth(int j);
+    // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
+    // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
+    int RubyPart(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -105,6 +108,7 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+    std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
@@ -116,10 +120,18 @@ private:
     // afterMyriad: the text before source ends with 万 or 億.
     Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
+    // The words of full from cursor to its end; parent is the word before cursor.
+    void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
+    std::size_t CopyEnd(std::string_view text, std::string_view before);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
+    // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
+    // (noun.realm-compound) gives it its 国 (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the reading of
+    // the name that the name with 国 starts with moves to the front, when no longer word starts
+    // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
+    Record* NounBeforeCompound(Record* records, std::string_view text);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);
@@ -131,11 +143,13 @@ private:
     bool Asks(std::string_view rest) const;
     bool PatternFits(const dict::UserEntry& u, std::string_view query) const;
     bool KanaBounded(std::string_view key, std::string_view query) const;
+    bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);
+    void DropOpenUtterances(Lookup& l, std::string_view query);
     void DropModalSplits(Lookup& l, std::string_view query);
     bool SplitsModal(const Record& r, std::string_view query, bool afterKa) const;
     bool SplitsKashira(const Record& r, std::string_view query) const;
@@ -151,7 +165,8 @@ private:
 // same length from records on, sets d.patternKind and d.kind (the branch), and returns
 // whether one matched; stop is the record it stopped at.
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop);
-bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record);
+bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record,
+               bool potential = false);
 
 // The conjugation analysis of a verb with key and kind (part code byte 3) on tail, the
 // text after the key: the branch (endings attaching to it have part code byte 2

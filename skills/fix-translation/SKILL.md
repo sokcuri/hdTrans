@@ -90,7 +90,12 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
    first. Do not cycle through apply, revert and retry.
 8. **Rules.** After editing a `ctx` column or `src/core/rules/globals.txt`, run
    `tools/regen-rules.sh`. Never hand-edit generated files (`*_gen.*`, `program.hash`).
-9. **Tests.** Every fix gets at least one `fix` and one `keep` row.
+9. **Tests.** Every fix gets `fix` and `keep` rows for its whole class, not one example.
+   - **Amount.** Where the data has them, 15–30 rows per class: `fix` rows for the shapes the change
+     corrects and `keep` rows for near misses on the other side of its condition. Mine them from the
+     corpus, the sample and the game and novel texts of the test data.
+   - **Lines that went wrong.** Every line a judge called worse in any round, and every line a review
+     sent back, becomes a row with its correct output.
    - **Where.** Default speech goes in `tests/rules/cases/<content-name>.tsv`. Lines that depend on
      the speech level also go in `tests/rules/speech-soft/` or `tests/rules/speech-strict/`.
    - **First line.** `# 규칙: <spec ids>`. Columns are `rule input expected kind layer` (header in
@@ -105,7 +110,9 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
        `rules.constructions`).
      - `kind`: `fix`, `keep` or `current`.
      - `layer`: the docs/pipeline-layers.md name of the layer that decides the line.
-   - **Inputs.** Short excerpts of real lines or the relevant part of a line. Use neutral names.
+   - **Inputs.** Mostly short excerpts of real lines or the relevant part of a line. Add invented
+     sentences only for shapes the data lacks or for pairs that differ in one condition. Name no
+     source or work, and copy no whole passages. Use neutral names.
    - **Coverage.** A widened rule needs keep rows on the other side of its condition. Engine
      changes also get a unit test next to the stage (`tests/unit`, `hdtest.h`).
    - **Spec.** A change that contradicts a spec rule updates the rule and its cases in the same
@@ -121,20 +128,39 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
     - For examples, use `tools/examples.sh CLI dicts --accept`.
 11. **Measure.** Do not rebuild during a run (measure.sh copies the CLI it uses into the run).
     Runs go to `$HDTRANS_WORK/<name>`, and a `/` in the name becomes `-`.
-    - `tools/measure.sh -b base-<short sha> <branch>` writes `corpus.pairs.tsv` and
-      `sample.pairs.tsv` and prints sample chrF before → after.
-    - For chapters in `$HDTRANS_TESTDATA`, `tools/e2e-pairs.py` writes the same pairs (docs/testing.md).
-      Keep the chapters you looked at while fixing (dev set) apart from the ones you did not
-      (held-out set), and report them separately.
-12. **Judge every changed line.** Do not sample.
-    - The first judge reads every pair; the second re-reads the lines the first called worse or same.
-      With API access, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS] [--effort high]` does
-      this (docs/testing.md "변경 판정").
+    - `tools/measure.sh -b base-<short sha> <branch>` translates every set whose variable is set
+      (`HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE`, `HDTRANS_TESTDATA`, `HDTRANS_EXAMPLES`), writes
+      `corpus.pairs.tsv`, `sample.pairs.tsv`, `docs.pairs.tsv` and `examples.pairs.tsv`, and prints
+      the changed lines per set and sample chrF before → after. Measure the baseline with the same
+      variables, or its run lacks the sets.
+    - The folder in a `docs:<folder>/<name>:<line>` key tells the chapters you looked at while fixing
+      (dev set) from the ones you did not (held-out set); report them separately. Other chapter
+      folders go through `tools/e2e-pairs.py` (docs/testing.md).
+12. **Judge every changed line.** Do not sample. You wrote the fix, so you do not judge it, and
+    no judge learns which side is new (docs/testing.md "변경 판정").
+    - With API access to both models, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS]
+      [--effort high]` asks blind (X/Y shuffled per line): the first model reads every pair, the
+      second re-reads the lines the first called worse or same.
+    - Otherwise judge blind with sub-agents (docs/testing.md "블라인드 판정"):
+      1. Give each judge a fresh folder outside the run (`mktemp -d`). `tools/blind.py make PAIRS.tsv
+         KEY.tsv J1/blind.tsv` writes the blind file (`id ja X Y`) there and the key next to the pairs;
+         copy the blind file into J2.
+      2. Two sub-agents that did not take part in the fix each read only their `blind.tsv` and write
+         `answers.tsv` (`id X|Y|same [note]`) in their folder. Give them that path and the criteria
+         of `tools/judge.py` (faithful, natural Korean; judge only the differing parts; loanword
+         transliterations are fine). Tell them not to read the key, the pairs, the run folder, the
+         repository or the other judge's folder, and not to run the engine.
+      3. `tools/blind.py disagree J1/blind.tsv J1/answers.tsv J2/answers.tsv J3/blind.tsv`, then a
+         third such sub-agent reads only `J3/blind.tsv` and writes `J3/answers.tsv`. When that file
+         is empty, the two agreed everywhere; leave the third answers empty.
+      4. `tools/blind.py final KEY.tsv J1/answers.tsv J2/answers.tsv J3/answers.tsv > FINAL.tsv`;
+         a `worse` there is a line two judges called worse. Keep the answers with the run.
     - For large sets, split the pairs (`split -l 500 PAIRS.tsv part.`) across parallel judges and
       concatenate their outputs.
     - Verdict files have the columns `key verdict judge [note]`, with verdict `improved`, `same` or `worse`.
     - `tools/verdicts.py PAIRS FIRST [SECOND]` prints changed, improved, same, worse and every key
-      both judges call worse.
+      both judges call worse; for blind judging it is `tools/verdicts.py PAIRS FINAL.tsv FINAL.tsv`,
+      and every `worse` is listed as both-worse.
     - A line both judges call worse means reverting or narrowing the change.
     - Keep the change only if improved:worse is at least 2:1, no class of lines gets worse as a
       group, and the sample chrF is not lower than the baseline.

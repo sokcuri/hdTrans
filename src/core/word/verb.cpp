@@ -52,20 +52,34 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
         (prefix.ends_with(kJaTe) || prefix.ends_with(kJaDe))) {
         return false;
     }
+    // A stem that one of its records reads as a potential and that is the imperative of a shorter
+    // godan record (笑え, 言え) is no ichidan stem before the よ of an imperative: a potential
+    // has none.
+    bool potential = false, imperative = false;
+    const bool imperativeYo = Starts(tail, Conjugation(7, 12)) && !Starts(tail, Conjugation(7, 5));
+    for (const Record* r = imperativeYo ? records : nullptr; r != nullptr; r = r->child) {
+        if (r->source.size() == recordText.size()) potential = potential || Has(r->attr, "Ke");
+        if (r->source.size() < recordText.size() && At(r->partCode, 1) == '4' && recordText.starts_with(r->source)) {
+            const int k = Byte(At(r->partCode, 3)) - '0';
+            imperative = imperative || (k != 7 && recordText.substr(r->source.size()) == Conjugation(k, 11));
+        }
+    }
+    potential = potential && imperative;
     int previousKind = -1;
     for (Record* record = records; record != nullptr; record = record->child) {
         stop = record;
         if (recordText.size() != record->source.size() || At(record->partCode, 1) != '4') return false;
         d.patternKind = Byte(At(record->partCode, 3)) - '0';
-        if (d.patternKind != previousKind && MatchKind(d, tail, recordText, *record)) return true;
+        if (d.patternKind != previousKind && MatchKind(d, tail, recordText, *record, potential)) return true;
         previousKind = d.patternKind;
     }
     stop = nullptr;
     return false;
 }
 
-bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record) {
+bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record, bool potential) {
     const int kind = d.patternKind;
+    if (potential && kind == 7) return false;
     if (kind == kKindDirect) {
         d.patternMatched = 1;
         d.patternLength = static_cast<int>(recordText.size());

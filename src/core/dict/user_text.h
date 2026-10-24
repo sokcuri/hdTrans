@@ -46,6 +46,8 @@ struct UserEntry {
     uint8_t registerLevel = 0;
     bool polite = false;
     bool stative = false;
+    // An intj row read only where the utterance ends right after it (option final).
+    bool utteranceEnd = false;
     bool euImperative = false;  // a verb model form starting with 쓰라; form code 2 rather than 1
 
     // The target (with stem marker) of the Korean verb that negates a conjugating

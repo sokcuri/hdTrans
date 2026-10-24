@@ -253,7 +253,7 @@
 学生せよ	학생하라	end	prio=-1
 学生をせよ	학생을 하라	end	prio=-1
 静かじゃぞ	조용하니라	end	prio=-1
-// Character tics: 〜っす, 〜ッス, 〜だべ, 〜にゃ, 〜なのです, 〜ですぅ, and a child's doubled polite
+// Character tics: 〜っす, 〜ッス, 〜だべ, 〜にゃ, 〜なのです, 〜ですぅ, the です after a plain verb, and a child's doubled polite
 // 〜ますです, kept doubled as 〜습니다요.
 学生っす	학생이에요	end	prio=-1
 学生っすか	학생인가요	end	prio=-1
@@ -298,6 +298,8 @@
 書くんですぅ	쓰는 거예요	end	prio=-1
 書かないんですぅ	쓰지 않는 거예요	end	prio=-1
 書きますです	씁니다요	end	prio=-1
+書くです	씁니다	end	prio=-1
+書くですか	씁니까	end	prio=-1
 書きますですよ	씁니다요	end	prio=-1
 書きますですの	씁니다요	end	prio=-1
 書きましたです	썼습니다요	end	prio=-1

@@ -152,15 +152,19 @@ std::string StripRuby(std::string_view line) {
 
 namespace hdTrans::pipeline {
 
-std::string JoinBraceRuby(std::string_view line, BaseContinues continues, const void* context) {
+std::string JoinBraceRuby(std::string_view line, ReadBase read, const void* context) {
     if (line.find("{rb}") == std::string_view::npos) return std::string(line);
     return internal::ReplaceAll(line, internal::BraceRuby, [&](const internal::Match& m) {
-        const std::string_view base = m.group[1], kana = m.group[3];
+        const std::string_view base = m.group[1], reading = m.group[2], kana = m.group[3];
         const std::string_view after = line.substr(line.size() - m.group[4].size() - kana.size());
-        const bool join = !kana.empty() && !internal::ParticleStart(kana) && !internal::NameSuffixStart(after) &&
-                          (text::RuneCount(base) == 1 || continues(context, base, kana));
-        if (!join) return internal::Cat({"{rb}", base, "{/rb}{rt}", m.group[2], "{/rt}", kana});
-        return internal::Cat({"{rb}", base, kana, "{/rb}{rt}", m.group[2], kana, "{/rt}"});
+        const auto kept = [&] { return internal::Cat({"{rb}", base, "{/rb}{rt}", reading, "{/rt}", kana}); };
+        if (kana.empty() || internal::NameSuffixStart(after)) return kept();
+        const BaseReading r = read(context, base, kana);
+        const bool join = text::RuneCount(base) == 1 ? !internal::ParticleStart(kana) || r.inflected
+                                                     : r.continues && !internal::ParticleStart(kana);
+        if (!join) return kept();
+        const std::string_view in = kana.substr(0, r.wordEnd > 0 && r.wordEnd < kana.size() ? r.wordEnd : kana.size());
+        return internal::Cat({"{rb}", base, in, "{/rb}{rt}", reading, in, "{/rt}", kana.substr(in.size())});
     });
 }
 

@@ -238,7 +238,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 住み心地の良い	살기 좋은	A9D0			GN				llm			i:233
 住み心地のよい	살기 좋은	A9D0			GN				llm			i:234
 出しに使	핑계로 &FS@	M420			GN				llm			i:235
-出来る限り	되는대로	N110			GN							i:236
+出来る限り	가능한 한	N110			GN							i:236
 出来る限り早期	가능한 한 빨리	A9D0			GN				llm			i:237
 春眠暁を覚えず	춘면불각효	A9D0			GN				llm			i:238
 初志貫徹	초지일관	N110			GN							i:239
@@ -276,7 +276,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 寸分違わず	털끝만큼도 다르지 않게	A9D0			GN				llm			i:271
 寸分たがわず	털끝만큼도 다르지 않게	A9D0			GN				llm			i:272
 世に立	세상에 나&AD@	M424			GN				llm			i:273
-世事に疎	순진스$G7@	H7N0			GN							i:274
+世事に疎	세상 물정에 어$G6@	H7N0			GN							i:274
 世話をや	보살&CM@	M421		Pn	GN				llm			i:275
 晴れ後雨	맑은 뒤 비	A9D0			GN				llm			i:276
 生まれた場所	태어난 곳	N110			GN				llm			i:277
@@ -403,7 +403,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おんぶに抱っこ	남에게 전적으로 의존함	N110			GN				llm			i:398
 負んぶに抱っこ	남에게 전적으로 의존함	N110			GN				llm			i:399
 風紀紊乱	풍기문란	N110			GN				llm			i:400
-覆水盆に返らず	깨어진 그릇	A9D0			GN							i:401
+覆水盆に返らず	엎질러진 물	A9D0			GN							i:401
 クソミソに言	신랄하게 헐&Hd@	M420			GN				llm			i:402
 糞味噌に言	신랄하게 헐&Hd@	M420			GN				llm			i:403
 聞き分けのいい	말을 잘 듣는	A9D0			GN				llm			i:404
@@ -608,7 +608,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 豪華絢爛	호화찬란	N110			GN				llm			i:603
 士魂商才	사혼상재	N110			GN				llm			i:604
 草の根民主主義	풀뿌리 민주주의	N110			GN							i:605
-草の根運動	기본적인	N110			GN							i:606
+草の根運動	풀뿌리 운동	N110			GN							i:606
 妖怪変化	요괴변화	N110			GN				llm			i:607
 濡れ手で粟	땀 안 흘리고 얻는 이익	N110			GN				llm			i:608
 濡れ手であわ	땀 안 흘리고 얻는 이익	N110			GN				llm			i:609
@@ -758,7 +758,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 生まれの良い	좋은 집안에서 태어난	A9D0			GN				llm			i:753
 得るところがあ	얻는 바가 &HN@	M428			GN				llm			i:754
 得る所が有	얻는 바가 &HN@	M428			GN				llm			i:755
-熟れた果実	섹스의 반대말	N110			GN							i:756
+熟れた果実	잘 익은 과일	N110			GN							i:756
 噂に上	입에 오르내&AA@	M428			GN							i:757
 噂を立てられ	소문이 &A5@	M427		Pn	GN				llm			i:758
 噂を流	소문을 퍼뜨&AA@	M423		Pn	GN				llm			i:759
@@ -1292,7 +1292,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 祖先の霊を祭	조상의 혼을 모&AE@	M428		Pn	GN				llm			i:1287
 育ちがいい	곱게 자랐어	A9D0			GN				llm			i:1288
 育ちが良い	곱게 자랐어	A9D0			GN				llm			i:1289
-粗末に扱	돌&AA@	M420			GN							i:1290
+粗末に扱	함부로 다&CB@	M420			GN							i:1290
 空を覆	하늘을 뒤&Hj@	M420		Pn	GN				llm			i:1291
 空を蓋	하늘을 뒤&Hj@	M420		Pn	GN				llm			i:1292
 損失を償	손실을 보상&AV@	M420		Pn	GN				llm			i:1293
@@ -1315,7 +1315,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ただれた皮膚	짓무른 피부	N110			GN				llm			i:1310
 爛れた皮膚	짓무른 피부	N110			GN				llm			i:1311
 たちの良い	심성이 좋은	A9D0			GN				llm			i:1312
-質の良い	심성이 좋은	A9D0			GN				llm			i:1313
+質の良い	질 좋은	A9D0			GN				llm			i:1313
 掌を指	불 보듯 뻔&AV@	M423		Pn	GN				llm			i:1314
 累を及ぼ	피해를 끼&AO@	M423		Pn	GN				llm			i:1315
 単位を落と	학점을 못 &Md@	M423		Pn	GN				llm			i:1316
@@ -1528,7 +1528,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 要求に添	요구에 부응&AV@	M420			GN				llm			i:1523
 瞳を凝ら	눈을 부릅뜨고 &AY@	M423		Pn	GN				llm			i:1524
 人を得	적임자를 &HH@	M427		Pn	GN				llm			i:1525
-ひどい仕打ち	칼바람	A9D0			GN							i:1526
+ひどい仕打ち	가혹한 처사	A9D0			GN							i:1526
 酷い仕打ち	가혹한 처사	A9D0			GN				llm			i:1527
 非難の目を向け	비난의 눈길을 보&A6@	M427		Pn	GN				llm			i:1528
 批難の目を向け	비난의 눈길을 보&A6@	M427		Pn	GN				llm			i:1529
@@ -1838,7 +1838,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 断崖絶壁	단애절벽	N110			GN				llm			i:1833
 文人墨客	문인묵객	N110			GN				llm			i:1834
 要を得	요점을 파악&AV@	M427		Pn	GN				llm			i:1835
-見境なし	주책바가지	A9D0			GN							i:1836
+見境なし	분별없음	A9D0			GN							i:1836
 見境無し	분별없음	A9D0			GN				llm			i:1837
 どこら辺り	어디쯤	N110			GN				llm			i:1838
 アヴェマリア	아베 마리아	A9D0			GN				llm			i:1839
@@ -1891,7 +1891,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 取り舵を取	좌현으로 키를 돌&AA@	M428		Pn	GN				llm			i:1886
 取舵を取	좌현으로 키를 돌&AA@	M428		Pn	GN				llm			i:1887
 相当な注意	상당한 주의	A9D0			GN				llm			i:1888
-まな板の鯉	도마에 오른 고기	N110			GN							i:1889
+まな板の鯉	도마 위의 잉어	N110			GN							i:1889
 俎板の鯉	도마 위의 잉어	N110			GN				llm			i:1890
 大なり小なり	많든 적든	A9D0			GN				llm			i:1891
 有意義に過ごしてください	뜻깊게 보내세요	A9D0			GN				llm			i:1892
@@ -2575,7 +2575,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手にの	속임수에 넘어&A1@	M428			GN				llm			i:2570
 この世を去	이승을 떠&A5@	M428		Pn	GN							i:2571
 英気を養	기력을 &E8@	M420		Pn	GN				llm			i:2572
-縁起の悪	드$AK@	H7N0			GN							i:2573
+縁起の悪	불길$AB@	H7N0			GN							i:2573
 道を探	길을 모색&AV@	M428		Pn	GN				llm			i:2574
 理にかな	이치에 &FB@	M420			GN				llm			i:2575
 理に適	이치에 &FB@	M420			GN				llm			i:2576
@@ -2818,7 +2818,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御預けを食ら	기다리게 &C6@	M420		Pn	GN				llm			i:2813
 冷や飯を食	찬밥 신세가 &C6@	M420		Pn	GN				llm			i:2814
 フイにな	허사가 &C6@	M428		Dx	GN				llm			i:2815
-不興を買	벗어&A5@	M420		Pn	GN							i:2816
+不興を買	눈 밖에 &A5@	M420		Pn	GN							i:2816
 やらずの雨	손님을 붙잡는 비	N110			GN				llm			i:2817
 遣らずの雨	손님을 붙잡는 비	N110			GN				llm			i:2818
 止むに止まれず	어쩔 수 없이	A9D0			GN				llm			i:2819
@@ -3104,7 +3104,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 闇夜の鉄砲	무모한 시도	N110			GN				llm			i:3099
 闇夜の礫	무모한 시도	N110			GN				llm			i:3100
 山高きが故に貴からず	산이 높다고 귀한 것은 아니지	A9D0			GN				llm			i:3101
-病は気から	상상병 환자	A9D0			GN							i:3102
+病は気から	병은 마음먹기 나름	A9D0			GN							i:3102
 柳の下にいつも泥鰌はおらぬ	버드나무 아래 늘 미꾸라지가 있지는 않아	A9D0			GN				llm			i:3103
 柳の下に何時も泥鰌は居らぬ	버드나무 아래 늘 미꾸라지가 있지는 않아	A9D0			GN				llm			i:3104
 柳に雪折れなし	부드러운 것이 오래가는 법	A9D0			GN				llm			i:3105
@@ -3118,7 +3118,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 目の上のたんこぶ	눈엣가시	A9D0			GN				llm			i:3113
 目の上のたん瘤	눈엣가시	A9D0			GN				llm			i:3114
 企業の社会的責任	기업의 사회적 책임	N110			GN							i:3115
-終の棲家	종의 서가	N110			GN							i:3116
+終の棲家	마지막 보금자리	N110			GN							i:3116
 終の住処	마지막 보금자리	N110			GN				llm			i:3117
 近日発売	곧 발매	N110			GN				llm			i:3118
 お尻ペンペン	엉덩이 때리기	N110			GN				llm			i:3119
@@ -3236,7 +3236,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 靴を磨	구두를 &F7@	M421		Pn	GN				llm			i:3231
 瞋恚の炎	분노의 불꽃	N110			GN				llm			i:3232
 愚痴の闇	어리석음의 어둠	A9D0			GN				llm			i:3233
-濃縮還元	농축물	A9D0			GN							i:3234
+濃縮還元	농축 환원	A9D0			GN							i:3234
 許可を与え	허가를 내&CJ@	M427		Pn	GN				llm			i:3235
 担任の先生	담임 교사	N110			GN							i:3236
 息がつま	숨이 막&AW@	M428			GN				llm			i:3237
@@ -3402,7 +3402,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 背が立	발이 &F9@	M424			GN				llm			i:3397
 出来る限り早く	가능한 한 빨리	E300			GN				llm			i:3398
 忠誠を誓	충성을 맹세&AV@	M420		Pn	GN				llm			i:3399
-日光を見ずして結構と言うなかれ	닛코를 보지 않고서는 결구하다고 말하지 마라	A9D0			GN				llm			i:3400
+日光を見ずして結構と言うなかれ	닛코를 보지 않고서는 훌륭하다고 말하지 마라	A9D0			GN				llm			i:3400
 改過自新	개과자신	N110			GN				llm			i:3401
 持ちの良い	오래 가는	A9D0			GN				llm			i:3402
 持ちのいい	오래 가는	A9D0			GN				llm			i:3403
@@ -3466,7 +3466,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 眼鏡にかな	눈에 &L4@	M420			GN				llm			i:3461
 眼鏡に適	눈에 &L4@	M420			GN				llm			i:3462
 折曲厳禁	접지 마시오	A9D0			GN				llm			i:3463
-大学全入時代	대학 전입 시대	A9D0			GN				llm			i:3464
+大学全入時代	대학 전원 입학 시대	A9D0			GN				llm			i:3464
 骨肉の争い	골육상쟁	A9D0			GN				llm			i:3465
 器が大き	화통$AB@	H7N0			GN							i:3466
 思いやり予算	배려 예산	N110			GN				llm			i:3467
@@ -3879,7 +3879,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 楯の両面を見よ	방패의 양면을 보라	A9D0			GN				llm			i:3874
 初心忘るべからず	초심을 잊지 마라	A9D0			GN				llm			i:3875
 初心忘る可からず	초심을 잊지 마라	A9D0			GN				llm			i:3876
-暑さ寒さも彼岸迄	더위도 추위도 피안까지	A9D0			GN				llm			i:3877
+暑さ寒さも彼岸迄	더위도 추위도 춘분 추분까지	A9D0			GN				llm			i:3877
 女は弱しされど母は強し	여자는 약하지만 어머니는 강해	A9D0			GN				llm			i:3878
 女は弱し然れど母は強し	여자는 약하지만 어머니는 강해	A9D0			GN				llm			i:3879
 将を射んと欲すれば先ず馬を射よ	장수를 쏘려면 먼저 말을 쏴라	A9D0			GN				llm			i:3880
@@ -4007,7 +4007,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 他愛の無	시시$AB@	H7N0			GN				llm			i:4002
 記憶をたど	기억을 더&H7@	M428		Pn	GN				llm			i:4003
 記憶を辿	기억을 더&H7@	M428		Pn	GN				llm			i:4004
-カモネギ	파오리	A9D0			GN							i:4005
+カモネギ	제 발로 찾아온 봉	A9D0			GN							i:4005
 序でながら	말이 나온 김에	E300			GN				llm			i:4006
 燗をつけ	술을 데&AI@	M427		Pn	GN				llm			i:4007
 気を奪われ	넋을 빼앗&A2@	M427		Pn	GN				llm			i:4008
@@ -4512,11 +4512,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 弁当を使	도시락을 &HU@	M420		Pn	GN				llm			i:4508
 休み明け	휴일 직후	A9D0			GN				llm			i:4509
 不思議なくらい	신기할 정도로	A9D0			GN				llm			i:4510
-賢者の石	마법사의 돌	N110			GN							i:4511
+賢者の石	현자의 돌	N110			GN							i:4511
 哲学者の石	현자의 돌	N110			GN				llm			i:4512
 不思議なほど	신기할 정도로	A9D0			GN				llm			i:4513
 心のぶつかり合い	마음의 충돌	A9D0			GN				llm			i:4514
-花虎の尾	숙근 꼬리풀	N110			GN				llm			i:4515
+花虎の尾	꽃범의꼬리	N110			GN				llm			i:4515
 ハナトラノオ	꽃범의꼬리	N110			GN				llm			i:4516
 鳩が豆鉄砲を食ったよう	놀라서 눈이 휘둥그레진 모습	A9D0			GN				llm			i:4517
 型にはま	틀에 박&AW@	M428			GN				llm			i:4518
@@ -4601,7 +4601,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 母なる大地	어머니 대지	N110			GN				llm			i:4597
 関係者以外立入禁止	관계자 외 출입금지	A9D0			GN				llm			i:4598
 関係者以外立入り禁止	관계자 외 출입금지	A9D0			GN				llm			i:4599
-見るに見かね	모양이 &Ml@	M427			GN							i:4600
+見るに見かね	차마 보고만 있을 수 &M9@	M427			GN							i:4600
 見るに見兼ね	차마 보고만 있을 수 &M9@	M427			GN				llm			i:4601
 国民不在	국민은 안중에 없음	A9D0			GN				llm			i:4602
 好評を得	호평을 &FD@	M427		Pn	GN				llm			i:4603
@@ -4929,7 +4929,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 我と思わんもの	자신 있는 자들	N110			GN				llm			i:4925
 語るに足	이야기할 만&AV@	M428			GN				llm			i:4926
 下手をすると	자칫하면	A9D0			GN				llm			i:4927
-驚異の部屋	진품실	N110			GN							i:4928
+驚異の部屋	경이의 방	N110			GN							i:4928
 目をかけ	눈여겨&AY@	M427		Pn	GN				llm			i:4929
 重きをな	무게를 지&A7@	M423		Pn	GN				llm			i:4930
 仇をな	해를 끼&AO@	M423		Pn	GN				llm			i:4931
@@ -5086,7 +5086,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あれよあれよという内に	어어 하는 사이에	A9D0			GN				llm			i:5082
 あれよあれよと見る間に	어어 하는 사이에	A9D0			GN				llm			i:5083
 逆立ちしても	물구나무를 서도	A9D0			GN				llm			i:5084
-関心を持	마음에 &HN@	M424		Pn	GN							i:5085
+関心を持	관심을 가&AL@	M424		Pn	GN							i:5085
 期待に沿	기대에 부응&AV@	M420			GN				llm			i:5086
 期待にそ	기대에 부응&AV@	M420			GN				llm			i:5087
 期待に応え	기대에 부응&AV@	M427			GN				llm			i:5088
@@ -5227,8 +5227,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 沙汰の外	말도 안 되는 소리	A9D0			GN				llm			i:5223
 トイレに立	화장실에 &A1@	M424			GN				llm			i:5224
 角縁の眼鏡	뿔테 안경	N110			GN				llm			i:5225
-真っ平ごめん	딱 질색이야	A9D0			GN				llm			i:5226
-真っ平御免	딱	A9D0			GN							i:5227
+真っ平ごめん	딱 질색	A9D0			GN				llm			i:5226
+真っ平御免	딱 질색	A9D0			GN							i:5227
 機が熟	때가 무르&He@	M423			GN				llm			i:5228
 期が熟	때가 무르&He@	M423			GN				llm			i:5229
 目の届くところに	눈이 닿는 곳에	E300			GN				llm			i:5230
@@ -5336,7 +5336,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ゆるしの秘跡	고해	N110			GN							i:5332
 赦しの秘跡	고해성사	N110			GN				llm			i:5333
 手を入れ	손&C5@	M427		Pn	GN							i:5334
-身の程知らず	푼수	N110			GN							i:5335
+身の程知らず	주제넘음	N110			GN							i:5335
 身のほど知らず	주제넘음	N110			GN				llm			i:5336
 濡れ衣を晴ら	누명을 &HB@	M423		Pn	GN				llm			i:5337
 ぬれぎぬを晴ら	누명을 &HB@	M423		Pn	GN				llm			i:5338
@@ -5455,7 +5455,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 身も心も	몸도 마음도	A9D0			GN				llm			i:5451
 下衆の後知恵	사후약방문	A9D0			GN				llm			i:5452
 下種の後知恵	사후약방문	A9D0			GN				llm			i:5453
-風説の流布	펌프 앤 덤프	N110			GN							i:5454
+風説の流布	풍문 유포	N110			GN							i:5454
 木から落ちた猿	나무에서 떨어진 원숭이	N110			GN				llm			i:5455
 アンティキティラ島の機械	안티키테라 메커니즘	N110			GN							i:5456
 ボタンを掛け違え	첫 단추를 잘못 끼&AI@	M427		Pn	GN							i:5457
@@ -5509,7 +5509,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 使い心地	사용감	N110			GN				llm			i:5505
 命が惜しければ	목숨이 아깝거든	A9D0			GN				llm			i:5506
 大恥をか	크게 망신을 당&AV@	M421		Pn	GN				llm			i:5507
-大恥を掻	큰코다&AO@	M421		Pn	GN							i:5508
+大恥を掻	크게 망신을 당&AV@	M421		Pn	GN							i:5508
 気持ちを汲	마음을 헤아&AA@	M425		Pn	GN				llm			i:5509
 気持ちをく	마음을 헤아&AA@	M425		Pn	GN				llm			i:5510
 ただで済	무사히 넘어&A1@	M425			GN				llm			i:5511
@@ -5908,7 +5908,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 肉を切らせて骨を断	살을 내주고 뼈를 취&AV@	M424		Pn	GN				llm			i:5904
 肉を切らせて骨を切	살을 내주고 뼈를 취&AV@	M428		Pn	GN				llm			i:5905
 燕雀安んぞ鴻鵠の志を知らんや	연작이 어찌 대붕의 뜻을 알랴	A9D0			GN				llm			i:5906
-面子が立	생색&A5@	M424			GN							i:5907
+面子が立	체면이 &AD@	M424			GN							i:5907
 面子がた	체면이 &AD@	M424			GN				llm			i:5908
 己に如かざる者を友とするなかれ	나보다 못한 자를 벗으로 삼지 마라	A9D0			GN				llm			i:5909
 己に如かざる者を友とする勿れ	나보다 못한 자를 벗으로 삼지 마라	A9D0			GN				llm			i:5910
@@ -5954,7 +5954,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 コモンズの悲劇	공유지의 비극	N110			GN							i:5950
 共有地の悲劇	공유지의 비극	N110			GN				llm			i:5951
 希望の党	희망의 당	N110			GN							i:5952
-日本のこころ	차세대당	N110			GN							i:5953
+日本のこころ	일본의 마음	N110			GN							i:5953
 無所属クラブ	무소속 모임	N110			GN				llm			i:5954
 高い高い	아이를 높이 들어올리기	N110			GN				llm			i:5955
 虎口を逃れて竜穴に入	범의 아가리를 벗어나 용의 굴로 들어&A1@	M428		Pn	GN				llm			i:5956
@@ -6174,7 +6174,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いい大人	다 큰 어른	N110			GN				llm			i:6170
 良い大人	다 큰 어른	N110			GN				llm			i:6171
 虫が騒	좀이 쑤&AE@	M422			GN				llm			i:6172
-手癖が悪	거$J7@	H7N0			GN							i:6173
+手癖が悪	손버릇이 나$AG@	H7N0			GN							i:6173
 半分冗談	반쯤 농담	N110			GN				llm			i:6174
 勘定を済ませ	계산을 마&AO@	M427		Pn	GN				llm			i:6175
 嫌われ役	미움받는 역할	N110			GN				llm			i:6176
@@ -6185,7 +6185,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 胃袋を掴	입맛을 사로&FK@	M425		Pn	GN				llm			i:6181
 良い年をお迎えください	좋은 새해 맞으세요	A9D0			GN				llm			i:6182
 良い年をお迎え下さい	좋은 새해 맞으세요	A9D0			GN				llm			i:6183
-都合をつけ	돌&AA@	M427		Pn	GN							i:6184
+都合をつけ	시간을 &A6@	M427		Pn	GN							i:6184
 都合を付け	시간을 &A6@	M427		Pn	GN				llm			i:6185
 目を背け	시선을 돌&AA@	M427		Pn	GN				llm			i:6186
 兜を脱	두 손 &L4@	M422		Pn	GN				llm			i:6187
@@ -6312,8 +6312,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 逆に言うと	거꾸로 말하면	A9D0			GN				llm			i:6308
 逆にいうと	거꾸로 말하면	A9D0			GN				llm			i:6309
 笑いのネタ	웃음거리	N110			GN				llm			i:6310
-心に刺さ	가슴을 도려&A6@	M428			GN							i:6311
-胸に刺さ	가슴을 도려&A6@	M428			GN							i:6312
+心に刺さ	마음에 꽂&AW@	M428			GN							i:6311
+胸に刺さ	가슴에 꽂&AW@	M428			GN							i:6312
 胸に突き刺さ	가슴에 꽂&AW@	M428			GN				llm			i:6313
 心に突き刺さ	마음에 꽂&AW@	M428			GN				llm			i:6314
 心に響	마음에 와&F9@	M421			GN				llm			i:6315
@@ -6468,7 +6468,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 先生と言われるほどの馬鹿でなし	선생님 소리에 넘어갈 만큼 바보는 아니야	A9D0			GN				llm			i:6464
 大口を開け	입을 크게 벌&AA@	M427		Pn	GN				llm			i:6465
 その他もろもろ	기타 등등	N110			GN				llm			i:6466
-その他諸々	기타 등등	N110			GN				llm			i:6467
+その他諸々	기타 여러 가지	N110			GN				llm			i:6467
 不幸にも	불행하게도	E300			GN				llm			i:6468
 借りを返	빚을 &F2@	M423		Pn	GN				llm			i:6469
 礼ははず	사례를 후하게 &AV@	M425			GN				llm			i:6470
@@ -6711,7 +6711,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いい子にする	착하게 있어	A9D0			GN				llm			i:6707
 良い子にする	착하게 있어	A9D0			GN				llm			i:6708
 教皇の座	교황좌	N110			GN				llm			i:6709
-頭がいっぱい	머릿속이 가득해	A9D0			GN				llm			i:6710
+頭がいっぱい	머릿속이 가득%A1@	G8U0			GN				llm			i:6710
 傷の舐め合い	서로 상처를 핥아주기	A9D0			GN				llm			i:6711
 傷の舐めあい	서로 상처를 핥아주기	A9D0			GN				llm			i:6712
 ラットレース	무한 경쟁	N110			GN							i:6713
@@ -6770,7 +6770,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 小回りがき	유연하게 대응&AV@	M421			GN				llm			i:6766
 小回りが利	유연하게 대응&AV@	M421			GN				llm			i:6767
 だらりの帯	늘어뜨린 오비	N110			GN				llm			i:6768
-知らぬ間に	고만	A9D0			GN							i:6769
+知らぬ間に	어느새	A9D0			GN							i:6769
 尻に帆かけ	줄행랑을 &AO@	M427			GN				llm			i:6770
 尻に帆掛け	줄행랑을 &AO@	M427			GN				llm			i:6771
 尻に帆をかけ	줄행랑을 &AO@	M427		Pn	GN				llm			i:6772
@@ -6823,7 +6823,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自分独り	혼자서	N110			GN				llm			i:6819
 巷で話題	세간에서 화제	N110			GN				llm			i:6820
 ちまたで話題	세간에서 화제	N110			GN				llm			i:6821
-手に負え	놀놀&AV@	M427			GN							i:6822
+手に負え	감당할 수 &HN@	M427			GN							i:6822
 手におえ	감당할 수 &HN@	M427			GN				llm			i:6823
 当て所なく	정처 없이	E300			GN				llm			i:6824
 当てどなく	정처 없이	E300			GN				llm			i:6825
@@ -6934,7 +6934,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 天国から地獄	천국에서 지옥으로	A9D0			GN				llm			i:6930
 腹に落ち	납득이 &A1@	M427			GN				llm			i:6931
 商売にな	장사가 &C6@	M428		Dx	GN				llm			i:6932
-それが何か	머	A9D0			GN							i:6933
 年の差カップル	나이 차이 커플	N110			GN				llm			i:6934
 夜が更け	밤이 깊어&AL@	M427			GN				llm			i:6935
 夜がふけ	밤이 깊어&AL@	M427			GN				llm			i:6936
@@ -7257,7 +7256,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 下に出	저자세로 나&AH@	M427			GN				llm			i:7253
 口を封じ	입을 &FA@	M427		Pn	GN				llm			i:7254
 清水の舞台	기요미즈 무대	N110			GN				llm			i:7255
-辛酸をなめ	쓴맛 단맛 다 &AY@	M427		Pn	GN							i:7256
+辛酸をなめ	쓴맛을 &AY@	M427		Pn	GN							i:7256
 辛酸を舐め	쓴맛을 &AY@	M427		Pn	GN				llm			i:7257
 愛を込め	사랑을 &LR@	M427		Pn	GN				llm			i:7258
 日の目を浴び	빛을 &AY@	M427		Pn	GN				llm			i:7259
@@ -7323,7 +7322,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 邪魔を入れ	훼방&AV@	M427		Pn	GN							i:7319
 後がつかえ	뒤가 밀&AA@	M427			GN				llm			i:7320
 後が支え	뒤가 밀&AA@	M427			GN				llm			i:7321
-能書きを垂れ	능청을 &LG@	M427		Pn	GN				llm			i:7322
+能書きを垂れ	잘난 척을 &LG@	M427		Pn	GN				llm			i:7322
 能書きをたれ	능청을 &LG@	M427		Pn	GN				llm			i:7323
 疑惑の総合商社	의혹의 종합상사	N110			GN				llm			i:7324
 外国にルーツを持	외국에 뿌리를 &C7@	M424		Pn	GN				llm			i:7325
@@ -7367,7 +7366,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 スイッチを入れ	스위치를 &AP@	M427		Pn	GN				llm			i:7363
 遣り甲斐のある	보람 있는	A9D0			GN				llm			i:7364
 好意の返報性	호의의 반보성	N110			GN				llm			i:7365
-無名戦士の墓	무명 독립 전쟁 군인의 무덤	N110			GN							i:7366
+無名戦士の墓	무명용사의 묘	N110			GN							i:7366
 平素より	평소부터	A9D0			GN				llm			i:7367
 腰をいわ	허리를 다&AO@	M423		Pn	GN				llm			i:7368
 弱きを助け強きをくじ	약자를 돕고 강자를 &H2@	M421		Pn	GN				llm			i:7369
@@ -7469,7 +7468,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 化けの皮が剥がれ	꼬리가 드러&A5@	M427			GN							i:7465
 化けの皮がはがれ	가면을 &HB@	M427			GN							i:7466
 格好の的	안성맞춤인 표적	N110			GN				llm			i:7467
-産後の肥立ち	산후격리	N110			GN							i:7468
+産後の肥立ち	산후 회복	N110			GN							i:7468
 手が届かないところ	손이 닿지 않는 곳	N110			GN				llm			i:7469
 手が届かない所	손이 닿지 않는 곳	N110			GN				llm			i:7470
 ゴーホーム	고 홈	E320			GN				llm			i:7471
@@ -7503,7 +7502,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 聞いての通り	들으신 대로	A9D0			GN				llm			i:7499
 聞いてのとおり	들으신 대로	A9D0			GN				llm			i:7500
 デミニミス	디 미니미스	A9D0			GN				llm			i:7501
-デ・ミニミス	부수적 복제	A9D0			GN							i:7502
+デ・ミニミス	디 미니미스	A9D0			GN							i:7502
 交渉カード	협상 카드	N110			GN				llm			i:7503
 言い方は悪いですが	말이 좀 심하지만	A9D0			GN				llm			i:7504
 生活の質	삶의 질	N110			GN				llm			i:7505
@@ -7518,7 +7517,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 温泉の素	온천 입욕제	N110			GN				llm			i:7514
 温泉の元	온천 입욕제	N110			GN				llm			i:7515
 ノートを取	노트를 &AV@	M428		Pn	GN				llm			i:7516
-ラプラスの悪魔	라플라스의 도깨비	N110			GN							i:7517
+ラプラスの悪魔	라플라스의 악마	N110			GN							i:7517
 返答に困	대답하기 곤란&AV@	M428			GN				llm			i:7518
 頬をつね	볼을 꼬&Hb@	M428		Pn	GN				llm			i:7519
 頬を抓	볼을 꼬&Hb@	M428		Pn	GN				llm			i:7520
@@ -7539,7 +7538,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 堪まるか	참을 수 있겠냐	A9D0			GN				llm			i:7535
 武士は相身互い	무사는 서로 돕는 법	A9D0			GN				llm			i:7536
 海の記念日	바다의 날	N110			GN				llm			i:7537
-目が泳	눈이 헤엄&AO@	M422			GN				llm			i:7538
+目が泳	시선이 흔들&AA@	M422			GN				llm			i:7538
 生活の本拠	생활의 근거지	N110			GN				llm			i:7539
 オヴァートンの窓	오버턴 창	N110			GN							i:7540
 身を捧げ	바&AO@	M427		Pn	GN							i:7541
@@ -7591,7 +7590,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 雪中送炭	설중송탄	N110			GN				llm			i:7587
 任しとき	나한테 맡겨	A9D0			GN				llm			i:7588
 相手を選	상대를 가&AA@	M426		Pn	GN				llm			i:7589
-手のひらの上	손바닥 안	N110			GN				llm			i:7590
+手のひらの上	손바닥 위	N110	VPl		GN				llm			i:7590
 和のこころ	화합의 마음	N110			GN				llm			i:7591
 手の舞い足の踏むところを知らず	기뻐서 어쩔 줄 몰라	A9D0			GN				llm			i:7592
 手の舞い足の踏む所を知らず	기뻐서 어쩔 줄 몰라	A9D0			GN				llm			i:7593

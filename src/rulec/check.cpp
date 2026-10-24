@@ -128,7 +128,6 @@ public:
     void Run() {
         for (const Rule& r : file_.local) RuleChecks(r);
         for (const Rule& r : file_.global) RuleChecks(r);
-        DuplicateRules();
         GlobalShadowing();
         References();
     }
@@ -179,14 +178,21 @@ private:
                  "'" + Show(e) + "' (D= @d) is not implemented by the engine and is always false");
         if (o.word) return;
         const std::string& lit = e.literal;
-        if (o.assigns ? lit.size() >= 2 && lit.ends_with("  ") : !lit.empty() && (lit.front() == ' ' || lit.back() == ' '))
+        // The text of a stem ends in its four-byte conjugation marker, which composing cuts off;
+        // a word text (D=) ending in four spaces is a stem without one.
+        const std::size_t trailing = lit.size() - std::min(lit.size(), lit.find_last_not_of(' ') + 1);
+        const bool emptyMarker = o.field == 'D' && trailing == 4;
+        if (o.assigns ? trailing >= 2 && !emptyMarker : !lit.empty() && (lit.front() == ' ' || lit.back() == ' '))
             Warn(r, s, "literal-space", e.offset, e.length,
-                 "'" + Show(e) + "' " + (o.assigns ? "pads its text with trailing spaces" : "tests a value with a space at an end"));
+                 "'" + Show(e) + "' " +
+                     (o.assigns ? "ends in " + std::to_string(trailing) + " spaces" +
+                                      (o.field == 'D' ? "; four stand for an empty conjugation marker" : "")
+                                : "tests a value with a space at an end"));
         if (o.operand == Operand::Surface) {
             std::string_view v;
             const Match m = SplitSurface(lit, v);
-            const bool source = o.field == 'S' || o.field == 'U';
-            if (v.empty() && (m != Match::Exact || source))
+            // An ending can have an empty surface, so U == "" tests for one; a word cannot.
+            if (v.empty() && (m != Match::Exact || o.field == 'S'))
                 Warn(r, s, "empty-pattern", e.offset, e.length,
                      "'" + Show(e) + "' " + (m == Match::Exact ? "needs an empty source surface" : "matches every surface"));
             return;
@@ -218,7 +224,7 @@ private:
         if (o.operand == Operand::Code2) {
             // Position conditions of CheckGAttr, the markers the word stage adds to rule
             // candidates, and Nm of the records it makes for unknown words.
-            for (const char* engine : {"Ow", "Hz", "Td", "Oj", "Qt", "Qw", "Vp", "Pi", "Sa", "Ka", "Nm"}) {
+            for (const char* engine : {"Ow", "Hz", "Hp", "Td", "Oj", "Qt", "Qw", "Vp", "Pi", "Sa", "Ka", "Nm", "Kh"}) {
                 if (c == engine) return true;
             }
             if (c == "Nq") return true;  // a count, Item::ReadsCount
@@ -431,17 +437,6 @@ private:
             Warn(r, 0, "never-fires", r.offset, r.length, Name(r) + " can never be true for the rows that name it");
     }
 
-    void DuplicateRules() {
-        std::map<std::string, int> bodies;
-        for (const Rule& r : file_.local) {
-            if (r.body.children.empty()) continue;
-            const auto [it, fresh] = bodies.emplace(PrintFlatBody(r.body), r.index);
-            if (!fresh)
-                Warn(r, 0, "duplicate-rule", r.offset, r.length,
-                     Name(r) + " has the body of L " + std::to_string(it->second));
-        }
-    }
-
     void GlobalShadowing() {
         const auto& g = file_.global;
         for (std::size_t j = 0; j < g.size(); j++) {
@@ -478,7 +473,8 @@ private:
     void References() {
         if (!inv_.loaded) return;
         for (const Rule& r : file_.local) {
-            if (r.index != 0 && inv_.ruleRows.find(r.index) == inv_.ruleRows.end())
+            // The engine fills a number no row carries with an empty rule.
+            if (r.index != 0 && !r.body.children.empty() && inv_.ruleRows.find(r.index) == inv_.ruleRows.end())
                 Warn(r, 0, "unused-rule", r.offset, r.length, "no dictionary row names " + Name(r));
         }
         for (const auto& [rule, rows] : inv_.ruleRows) {

@@ -1,0 +1,17 @@
+# 규칙: LEX-14
+rule	input	expected	kind	layer
+dict:jisjk:262217	頑張っただけ報われる。	노력한 만큼 보답받는다.	fix	local-ending
+dict:jisjk:262217	やればやっただけ伸びる。	하면 한 만큼 자란다.	fix	local-ending
+dict:jisjk:262217	努力しただけ強くなる。	!rule:dict:jisjk:262217	keep	local-ending
+dict:jisjk:344588	胸がうるさいくらいに高鳴る。	가슴이 시끄러울 정도로 크게 울린다.	fix	ending-defaults
+dict:jisjk:344588	考えられないくらいに賃料が安い。	생각할 수 없을 정도로 임대료가 싸다.	fix	ending-defaults
+dict:jisjk:347309	慰める時にしか頭を撫でない。	위로할 때밖에 머리를 쓰다듬지 않는다.	fix	defaults
+dict:jisjk:347309	慰めるときにしか頭を撫でない。	위로할 때밖에 머리를 쓰다듬지 않는다.	keep	defaults
+dict:jisjk:347309	お前にしか頼めない。	너밖에 부탁할 수 없다.	keep	defaults
+dict:jisjk:260396	信長を呼ぶ時くらいしかないのだから。	노부나가를 부를 때 정도밖에 없으니까.	fix	defaults
+dict:jisjk:260396	これしかないんだ。	이것밖에 없다.	keep	defaults
+dict:jisjk:260396	逃げるしかないんだ。	도망칠 수밖에 없다.	keep	defaults
+dict:jisjk:262212	見ただけ得した気分だ。	본 만큼 이득을 본 기분이다.	fix	local-ending
+dict:jisjk:260396	あと一回しかないんだ。	앞으로 한 번밖에 없다.	keep	defaults
+dict:jisjk:347309	冗談にしか聞こえない。	농담밖에 들리지 않는다.	keep	defaults
+dict:jisjk:260396	少しだけ休むしかない。	약간 쉴 수밖에 없다.	keep	defaults

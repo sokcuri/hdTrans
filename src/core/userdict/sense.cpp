@@ -1,5 +1,6 @@
 #include "core/userdict/sense.h"
 
+#include "core/dict/classes.h"
 #include "core/userdict/compile.h"
 
 namespace hdTrans::userdict {
@@ -27,6 +28,10 @@ bool ValidTag(std::string_view tag) {
 }
 
 bool ValidTrigger(std::string_view trigger, Side side) {
+    if (trigger.starts_with("class:")) {
+        const std::string_view name = trigger.substr(std::string_view("class:").size());
+        return dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name)) != nullptr;
+    }
     if (!trigger.starts_with("sem:") && !trigger.starts_with("gram:")) return true;
     const std::size_t at = trigger.find('@');
     if (at == std::string_view::npos) return ValidTag(trigger);
@@ -55,9 +60,11 @@ std::string ParseSense(std::string_view line, Families& families, Sense& s, bool
         pos = pos.substr(0, colon);
     }
     if (pos.empty()) pos = SensePos(jp);
-    if (pos != "n" && pos != "v" && pos != "v1" && pos != "v5" && pos != "adj" && pos != "na" && pos != "p") {
-        return "POS " + internal::Quote(pos) + ", want n, v, v1, v5, adj, na or p";
+    if (pos != "n" && pos != "v" && pos != "v1" && pos != "v5" && pos != "adj" && pos != "na" && pos != "p" && pos != "adv") {
+        return "POS " + internal::Quote(pos) + ", want n, v, v1, v5, adj, na, adv or p";
     }
+    // Particles and adverbs keep their Korean as written; only their class differs from a noun's.
+    const bool unconjugated = pos == "p" || pos == "adv";
     Side sideValue = Side::Before;
     const bool known = side == "before" || side == "after" || side == "sentence";
     if (side == "after") sideValue = Side::After;
@@ -70,11 +77,11 @@ std::string ParseSense(std::string_view line, Families& families, Sense& s, bool
     adjective = adjective && pos == "n" && !root.empty();
     if (adjective) kr = root;
     std::vector<internal::Rec> recs;
-    if (std::string err = internal::Compile(jp, kr, pos == "p" ? "n" : pos, cls, false, nullptr, families, recs); !err.empty()) return err;
+    if (std::string err = internal::Compile(jp, kr, unconjugated ? "n" : pos, cls, false, nullptr, families, recs); !err.empty()) return err;
     const internal::Rec& e = recs[0];
     s = Sense();
     s.key = e.key;
-    s.classDigit = pos == "p" ? '2' : e.part.size() > 1 ? e.part[1] : 0;
+    s.classDigit = pos == "p" ? '2' : pos == "adv" ? '3' : e.part.size() > 1 ? e.part[1] : 0;
     s.target = e.target;
     s.side = sideValue;
     s.adjective = adjective;
@@ -82,7 +89,9 @@ std::string ParseSense(std::string_view line, Families& families, Sense& s, bool
         for (std::string_view t : internal::Split(triggers, ',')) {
             t = internal::TrimSpace(t);
             if (t.empty()) return "empty trigger";
-            if (!ValidTrigger(t, sideValue)) return "invalid semantic trigger " + internal::Quote(t);
+            if (!ValidTrigger(t, sideValue)) {
+                return (t.starts_with("class:") ? "unknown class trigger " : "invalid semantic trigger ") + internal::Quote(t);
+            }
             s.triggers.emplace_back(t);
         }
     }

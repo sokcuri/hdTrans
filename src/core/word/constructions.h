@@ -9,6 +9,8 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "core/rules/body.h"
@@ -31,7 +33,8 @@ std::string_view ConstructionId(int index);
 namespace internal {
 
 enum class CxField : uint8_t {
-    Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature,
+    Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature, Candidate, Gram,
+    FirstWord, Tail,
 };
 
 // How an atom compares: with a literal (rule surface markers, code patterns), with the members of a
@@ -57,12 +60,22 @@ struct CxNode {
     uint32_t end = 0;    // one past the subtree
 };
 
-enum class CxVerb : uint8_t { SelectLemma, TakeTarget, SetTarget, SetEnding, ReplaceHead };
+enum class CxVerb : uint8_t {
+    SelectLemma, SelectTarget, TakeTarget, SetTarget, SetEnding, ReplaceHead, ReplaceEndingTail, MapLemma, MapTarget, SelectMap,
+    SetVerb, CopyEnding, CopyWord, SetSound,
+};
 
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
-    std::string value, with;  // with: the new head of replace-head
+    std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail
+    int map = -1;             // map-lemma, map-target, select-map: into maps
+};
+
+// A word map declared by "//~ NAME <TAB> FROM=TO ... <TAB> what it is for".
+struct CxMap {
+    std::string name;
+    std::vector<std::pair<std::string, std::string>> pairs;
 };
 
 struct CxRow {
@@ -74,12 +87,23 @@ struct CxRow {
     int line = 0;  // in the table
 };
 
+struct CxSurfaceHash {
+    using is_transparent = void;
+    std::size_t operator()(std::string_view s) const { return std::hash<std::string_view>{}(s); }
+};
+
 struct CxFamily {
     std::string name;
     std::string after;
     std::vector<int> rows;  // into rows, by PRIO
     int next = -1;          // the family anchored after this one
     int line = 0;           // of its //= line
+    // The rows worth trying on a word, by PRIO. A row whose condition needs the word to be one of a
+    // few surfaces (S+0== "で", S+0== @set) is listed under each of them; the other rows (open) are
+    // listed under every surface. A word whose surface is no key tries the open rows only.
+    std::unordered_map<std::string, std::vector<int>, CxSurfaceHash, std::equal_to<>> bySurface;
+    std::vector<int> open;
+    bool indexed = false;  // some row has surfaces
 };
 
 struct CxError {
@@ -92,6 +116,7 @@ struct ConstructionTable {
     std::vector<CxFamily> families;
     std::vector<CxNode> nodes;
     std::vector<CxAtom> atoms;
+    std::vector<CxMap> maps;
     std::vector<int> afterPass;  // the family anchored after each pass, -1 for none
     std::vector<CxError> errors;
 };

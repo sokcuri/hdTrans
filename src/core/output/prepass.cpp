@@ -92,6 +92,45 @@ bool RepeatedMimetic(const ResolvedItem& a, const ResolvedItem& b) {
            half > 0 && ko.size() % 2 == 0 && ko.substr(0, half) == ko.substr(half);
 }
 
+// Whether a word without an ending is said again right after itself as one syllable or that
+// syllable repeated (はいはい|はい 네네|네, うん|うん 응|응): both sources repeat one unit of two
+// characters or more (not a drawn-out あ) and both Koreans one syllable.
+bool RepeatedSyllable(const ResolvedItem& a, const ResolvedItem& b) {
+    if (a.directIndex >= 0 || b.directIndex >= 0 || a.tokenIndex != b.tokenIndex || a.offset + a.length != b.offset) {
+        return false;
+    }
+    const auto repeats = [](std::string_view s, std::string_view unit) {
+        if (s.empty() || unit.empty() || s.size() % unit.size() != 0) return false;
+        for (std::size_t at = 0; at < s.size(); at += unit.size()) {
+            if (s.substr(at, unit.size()) != unit) return false;
+        }
+        return true;
+    };
+    // The shortest unit that s repeats.
+    const auto unitOf = [&](std::string_view s) {
+        for (std::size_t n = 0; n < s.size();) {
+            n += std::max<std::size_t>(1, text::DecodeRune(s.substr(n)).size);
+            if (repeats(s, s.substr(0, n))) return s.substr(0, n);
+        }
+        return s;
+    };
+    const std::string_view ko = EntryText(b), source = unitOf(b.surface);
+    const text::Rune r = text::DecodeRune(ko);
+    if (ko.empty() || r.cp < text::kBase || r.cp > text::kLast || text::RuneCount(source) < 2) return false;
+    const std::string_view syllable = ko.substr(0, r.size);
+    return repeats(ko, syllable) && repeats(EntryText(a), syllable) && repeats(a.surface, source);
+}
+
+// Whether item i and item next are written as one: copies of one syllable (RepeatedSyllable)
+// after a word the dictionary already writes doubled (はいはい|はい 네네네, はいはい|はいはい|はい
+// 네네네네네; not ほら|ほら 자 자).
+bool JoinedCopies(const std::vector<ResolvedItem>& items, int i, int next) {
+    if (i < 0 || next != i + 1 || next >= static_cast<int>(items.size()) || !RepeatedSyllable(items[i], items[next])) {
+        return false;
+    }
+    return text::RuneCount(EntryText(items[i])) > 1 || JoinedCopies(items, i - 1, i);
+}
+
 // Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
 bool Doubled(std::string_view s, size_t min) {
     const size_t half = s.size() / 2;
@@ -470,6 +509,40 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
            dict::Written(r.cp) == text::DecodeRune(EntryText(b)).cp;
 }
 
+// Whether Korean t is a verb phrase made a noun, which stays apart from a する after it: two
+// words or more ending in 기 (대강 읽기, 함부로 버리기).
+bool VerbPhraseNoun(std::string_view t) { return t.find(' ') != std::string_view::npos && t.ends_with("기"); }
+
+// Whether the next item that writes something, written straight after item i, attaches to
+// the last syllable of i: a particle or the copula (not one written as a space), a word
+// written attached (Tu) that starts with a syllable and is no counter (들, 에 대한), or the
+// する of a noun the dictionary writes with a space at its end. That space then goes (백년
+// 해로를, 백년 해로한다, 싶을 정도입니다, 우리에 대한); before a word it stays (백년 해로 생활).
+bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens, int i) {
+    int n = i + 1;
+    const int count = static_cast<int>(items.size());
+    while (n < count && EntryText(items[n]).empty() && (items[n].directIndex < 0 || items[n].ending.text.empty())) {
+        n++;
+    }
+    if (n >= count || TokenDistance(tokens, items[i].tokenIndex, items[n].tokenIndex) >= 2) return false;
+    const ResolvedItem& next = items[n];
+    const std::string_view text = EntryText(next);
+    if (text.empty() || text.front() == ' ') return false;
+    if (First(Code(next)) == '2' ||
+        (Contains(GAttr(next), "Tu") && !Contains(GAttr(next), "Ct") && text::Final(text::DecodeRune(text).cp) >= 0)) {
+        return true;
+    }
+    const std::string_view gloss = EntryText(items[i]);
+    const std::string_view word = gloss.substr(0, gloss.find_last_not_of(' ') + 1);
+    if (First(Code(items[i])) != '1' || word.size() == gloss.size() || First(Code(next)) != '4' ||
+        VerbPhraseNoun(word)) {
+        return false;
+    }
+    const auto starts = dict::ClassMembers("suru.verbal-noun-start");
+    return dict::InClass("suru.verbal-noun-whole", next.surface) ||
+           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+}
+
 // Whether item k follows item k - 1 with nothing between them: in the same token, or at the
 // start of the next one (a number token after a word).
 bool Follows(const std::vector<ResolvedItem>& items, int k) {
@@ -712,6 +785,7 @@ std::string EncodeNumericPair(std::string_view text) {
 
 void Composer::Start(std::vector<ResolvedItem>& items, const Settings& settings, const Families& generated) {
     items_ = &items;
+    tokens_ = nullptr;
     settings_ = settings;
     generated_ = &generated;
     state_.resize(items.size());
@@ -799,6 +873,10 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     std::string composed;
     if (record) composed = translated;
     auto [spaced, space] = Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
+    if (!space && AttachesAfter(items, tokens, i)) {
+        const size_t end = spaced.find_last_not_of(' ');
+        if (end != std::string::npos) spaced.erase(end + 1);
+    }
     if (record) inflected.push_back({i, std::move(composed), spaced, space});
     if (protectedToken) {
         spaced = tokenText;
@@ -1039,6 +1117,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     const std::string_view nextEntry = EntryText(next);
     if (RepeatedMimetic(item, next)) return Result(std::move(t), false);  // 부슬부슬부슬부슬
+    if (JoinedCopies(items, i, nextIndex)) return Result(std::move(t), false);  // 네네네
     if (MimeticBeforeSuru(item, next, nextEntry)) return Result(std::move(t), false);
     if (nextEntry == "「") return Result(std::move(t), true);
     if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
@@ -1125,6 +1204,24 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
     if (!isLast) {
+        // A pronoun written in kanji or two kana or more forms no compound with a noun next
+        // to it (誰か僕を 누군가 나를, そもそも俺は 원래 나는), but takes a suffix or a word of one
+        // syllable (僕ら 우리, 自分と 자신과, 私流 나류).
+        const auto pronoun = [](const ResolvedItem& w) {
+            return Code(w).starts_with("12") && (text::RuneCount(w.surface) >= 2 || IsKanji(FirstRune(w.surface)));
+        };
+        // A pronoun the token ends with before Latin, digits or a symbol is part of a name
+        // written on (カフェ俺@cafe 카페나); after a digit or a Latin letter the source spacing
+        // holds (A私 A내가).
+        const bool namedOn = next.tokenIndex + 1 < static_cast<int>(tokens.size()) &&
+                             (nextIndex + 1 >= count || items[nextIndex + 1].tokenIndex != next.tokenIndex) &&
+                             (tokens[next.tokenIndex + 1].type == tokenizer::kTypeAlpha ||
+                              tokens[next.tokenIndex + 1].type == tokenizer::kTypeNumber ||
+                              tokens[next.tokenIndex + 1].type == tokenizer::kTypeAsciiSymbol);
+        if (kind == '1' && nextKind == '1' && !Contains(nextTags, "Z7") && !Contains(tags, "Z6") &&
+            ((pronoun(item) && WidthOf(nextEntry) > 2) || (pronoun(next) && !namedOn && !DigitOrLatin(LastRune(t))))) {
+            return Result(std::move(t), true);
+        }
         if (kind != '1' || WidthOf(t) != 2) return Result(std::move(t), false);
         if (nextKind != '1' || WidthOf(nextEntry) <= 2) return Result(std::move(t), false);
         const bool space = Contains(tags, "Z7") || !Contains(tags, "Z6");
@@ -1189,7 +1286,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                        std::none_of(body.begin(), body.end(), [](char32_t r) { return r == U'な' || r == U'の'; });
             };
             // Its Korean must not be a verb phrase made a noun (流し読み 대강 읽기, お留守番 집 지키기).
-            const bool koreanVerbalNoun = t.find(' ') == std::string::npos || !t.ends_with("기");
+            const bool koreanVerbalNoun = !VerbPhraseNoun(t);
             const bool verbalNoun = Contains(tags, "Hd") ||
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
                                     kanjiCompound(item.surface) ||

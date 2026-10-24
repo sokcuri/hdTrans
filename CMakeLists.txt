@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(HDTRANS_WERROR "Treat compiler warnings as errors" ON)
 option(HDTRANS_INTERPRET_RULES "Evaluate every selection rule with the interpreter, ignoring compiled rules" OFF)
+option(HDTRANS_FUZZ "Build the libFuzzer target hdtrans_fuzz and instrument every target for it (Clang)" OFF)
 option(HDTRANS_PASS_EXPERIMENTS "Read HDTRANS_PASS_SKIP and HDTRANS_PASS_SHUFFLE to leave out or reorder sentence passes (measurement builds only)" OFF)
 
 if(MSVC)
@@ -47,6 +48,13 @@ else()
             add_compile_options(-fno-sanitize=vptr)
         endif()
         add_link_options(-fsanitize=${HDTRANS_SANITIZE})
+    endif()
+    if(HDTRANS_FUZZ)
+        # The sanitizer runtimes also define the coverage hooks for the targets that do not link libFuzzer.
+        if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR NOT HDTRANS_SANITIZE)
+            message(FATAL_ERROR "HDTRANS_FUZZ needs Clang, its libFuzzer and HDTRANS_SANITIZE")
+        endif()
+        add_compile_options(-fsanitize=fuzzer-no-link)
     endif()
 endif()
 
@@ -178,11 +186,13 @@ if(NOT EMSCRIPTEN)
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases)
+                    construction-cases audit blind new-pairs perf-budget perf-base fuzz)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            add_test(NAME tools.measure COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/measure.sh"
+                "$<TARGET_FILE:hdtrans_cli>")
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)
@@ -201,10 +211,7 @@ if(NOT EMSCRIPTEN)
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/examples.sh" $<TARGET_FILE:hdtrans_cli>)
         set_tests_properties(examples PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 300
             ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
-        # Pins the word choices of the rules program: tests/rules/cases.tsv with dicts/.
-        add_test(NAME rules.cases COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
-            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
-        # One table per theme file, tests/rules/cases/<theme>.tsv, written as rules are fixed.
+        # One table per theme, tests/rules/cases/<theme>.tsv.
         add_test(NAME rules.cases.themes COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases")
         # Each speech level: tests/rules/speech-<level>/<theme>.tsv (strict is the default).
@@ -213,13 +220,19 @@ if(NOT EMSCRIPTEN)
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-${level}" -- --speech ${level})
         endforeach()
-        set_tests_properties(rules.cases rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
+        set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/e2e.sh" $<TARGET_FILE:hdtrans_cli>
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(testdata PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 600)
+        # Checks the unit test runner itself; it compiles a probe with the C++ compiler.
+        if(NOT WIN32)
+            add_test(NAME tests.runner COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/runner.sh")
+            set_tests_properties(tests.runner PROPERTIES TIMEOUT 300
+                ENVIRONMENT "CXX=${CMAKE_CXX_COMPILER}")
+        endif()
     endif()
 
     add_executable(config_host tests/host/config.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp)
@@ -256,11 +269,16 @@ if(NOT EMSCRIPTEN)
             --dump-rules "${HDTRANS_RULE_DUMP}" -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
         set_tests_properties(rules.dump PROPERTIES FIXTURES_SETUP ruledump
             ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/rules-cache")
-        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        # The warnings per flag are the counts tools/lint-budget.tsv records.
+        add_test(NAME rules.lint COMMAND hdrulec lint "${HDTRANS_RULE_DUMP}" -dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+            -budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/lint-budget.tsv")
         add_test(NAME rules.unknown-codes COMMAND "${CMAKE_COMMAND}"
             -DRULEC=$<TARGET_FILE:hdrulec> -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts
             -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-unknown-codes
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_unknown_codes.cmake")
+        add_test(NAME rules.lint-checks COMMAND "${CMAKE_COMMAND}" -DRULEC=$<TARGET_FILE:hdrulec>
+            -DWORK=${CMAKE_CURRENT_BINARY_DIR}/rules-lint-checks
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_lint_checks.cmake")
         add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
         add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals
@@ -269,6 +287,17 @@ if(NOT EMSCRIPTEN)
             FIXTURES_REQUIRED ruledump)
         # The rule tests are rows of tests/rules/cases/, run by rules.cases.themes.
     endif()
+
+    # Translates mutated text (tests/fuzz/translate.cpp); tools/fuzz.py runs it. Other builds only
+    # compile the source.
+    if(HDTRANS_FUZZ)
+        add_executable(hdtrans_fuzz tests/fuzz/translate.cpp)
+        target_link_options(hdtrans_fuzz PRIVATE -fsanitize=fuzzer)
+    else()
+        add_library(hdtrans_fuzz OBJECT tests/fuzz/translate.cpp)
+    endif()
+    target_include_directories(hdtrans_fuzz PRIVATE src)
+    target_link_libraries(hdtrans_fuzz PRIVATE hdtrans)
 
     # Dumps compiled dictionary entries and lookups over input lines.
     add_executable(snapshot_check tests/snapshot_check/main.cpp)

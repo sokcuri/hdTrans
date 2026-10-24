@@ -1,0 +1,19 @@
+# 규칙: LEX-15
+rule	input	expected	kind	layer
+rewrite:wondering-darou	どっち道、彼は来るだろう。	어차피, 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	何方道、彼は来るだろう。	어차피, 그는 올 것이다.	fix	rewrites
+rewrite:wondering-darou	今まで何度となく言われてきた言葉だろう。	지금까지 여러 번 들어 온 말일 것이다.	fix	rewrites
+rewrite:wondering-darou	もう何度となく聞いただろう。	벌써 여러 번 들었을 것이다.	fix	rewrites
+rewrite:wondering-darou	何度と無く繰り返しただろう。	여러 번 반복했을 것이다.	fix	rewrites
+rewrite:wondering-darou	どの道、帰る場所はなくなるってことよ。	어차피, 돌아가는 장소는 없어진다는 것.	keep	rewrites
+rewrite:wondering-darou	どのみち、彼は来るだろう。	어쨌든, 그는 올 것이다.	keep	rewrites
+rewrite:wondering-darou	どっちみち、脱出するには会場を経由するだろう。	결국은, 탈출하려면 회장을 경유할 것이다.	keep	rewrites
+rewrite:wondering-darou	どの辺りに彼はいるだろう。	어느 근처에 그는 있을까.	keep	rewrites
+rewrite:wondering-darou	さあ、どっちだろう。	자, 어느 쪽일까.	keep	rewrites
+rewrite:wondering-darou	何度言えばわかるのだろう。	몇 번 말하면 아는 걸까.	keep	rewrites
+rewrite:wondering-darou	どの人が来るだろう。	어느 사람이 올까.	keep	rewrites
+rewrite:wondering-darou	何度となく夢に見ただろう。	여러 번 꿈에 보았을 것이다.	fix	rewrites
+rewrite:wondering-darou	どっち道、俺には関係ないだろう。	어차피, 나에게는 관계없을 것이다.	fix	rewrites
+rewrite:wondering-darou	どの道、無駄だろう。	어차피, 쓸데없을 것이다.	keep	rewrites
+rewrite:wondering-darou	いつ帰るだろう。	언제 돌아갈까.	keep	rewrites
+rewrite:wondering-darou	誰が来るだろう。	누가 올까.	keep	rewrites

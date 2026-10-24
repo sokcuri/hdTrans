@@ -1,20 +1,27 @@
 rule	input	expected	kind	layer
-rewrite:positive-ike	まだまだいける	아직도 갈 수 있다	fix	rewrites
-rewrite:positive-ike	いつでもいけますよ	언제라도 갈 수 있어요	fix	rewrites
-rewrite:positive-ike	これならいけそうです！	이것이라면 갈 수 있을 것 같습니다!	fix	rewrites
-rewrite:positive-ike	いけるかも…	갈 수 있을지도…	fix	rewrites
-rewrite:positive-ike	ここで遊んではいけない。	여기서 놀아선 안 된다.	keep	rewrites
-rewrite:positive-ike	いけません。	안 됩니다.	keep	rewrites
-rewrite:positive-ike	行かなければいけない。	가야 한다.	keep	rewrites
-rewrite:go-not-say	どこまでいったんですか？	어디까지 갔습니까?	fix	rewrites
-rewrite:go-not-say	学校までいった。	학교까지 갔다.	fix	rewrites
-rewrite:go-not-say	後頭部からいったしな	후두부에서 갔고	fix	rewrites
-rewrite:go-not-say	先生にいった。	선생님에게 말했다.	keep	rewrites
-rewrite:go-not-say	彼にいっても無駄だ。	그에게 말해도 쓸데없다.	keep	rewrites
-rewrite:go-not-say	そういっても	그렇게 말해도	keep	rewrites
-rewrite:go-not-say	端的にいえば	단적으로 말하면	fix	rewrites
-rewrite:go-not-say	王都にいった。	왕도에 갔다.	keep	rewrites
-rewrite:go-not-say	公園にいく	공원에 간다	keep	rewrites
-rewrite:go-not-say	駅までいく	역까지 간다	keep	rewrites
-rewrite:go-not-say	異世界にいった。	이세계에 갔다.	keep	rewrites
-rewrite:go-not-say	正直にいって	정직하게 말해	keep	rewrites
+cx:positive-ike:10	まだまだいける	아직도 갈 수 있다	fix	rewrites
+cx:positive-ike:10	いつでもいけますよ	언제라도 갈 수 있어요	fix	rewrites
+cx:positive-ike:10	これならいけそうです！	이것이라면 갈 수 있을 것 같습니다!	fix	rewrites
+cx:positive-ike:10	いけるかも…	갈 수 있을지도…	fix	rewrites
+cx:positive-ike:10	ここで遊んではいけない。	여기서 놀아선 안 된다.	keep	rewrites
+cx:positive-ike:10	いけません。	안 됩니다.	keep	rewrites
+cx:positive-ike:10	行かなければいけない。	가야 한다.	keep	rewrites
+cx:go-not-say:10	どこまでいったんですか？	어디까지 갔습니까?	fix	rewrites
+cx:go-not-say:10	学校までいった。	학교까지 갔다.	fix	rewrites
+cx:go-not-say:10	後頭部からいったしな	후두부에서 갔고	fix	rewrites
+cx:go-not-say:10	先生にいった。	선생님에게 말했다.	keep	rewrites
+cx:go-not-say:10	彼にいっても無駄だ。	그에게 말해도 쓸데없다.	keep	rewrites
+cx:go-not-say:10	そういっても	그렇게 말해도	keep	rewrites
+cx:go-not-say:10	端的にいえば	단적으로 말하면	keep	rewrites
+cx:go-not-say:10	王都にいった。	왕도에 갔다.	fix	rewrites
+cx:go-not-say:10	公園にいく	공원에 간다	keep	rewrites
+cx:go-not-say:10	駅までいく	역까지 간다	keep	rewrites
+cx:go-not-say:10	異世界にいった。	이세계에 갔다.	fix	rewrites
+cx:go-not-say:10	正直にいって	정직하게 말해	keep	rewrites
+cx:go-not-say:10	学校までいった。	rule:cx:go-not-say:10=&A1@	fix	rewrites
+cx:go-not-say:10	巷にいう噂	항간에 말하는 소문	fix	defaults
+cx:go-not-say:10	町にいわない	마을에 말하지 않는다	fix	defaults
+cx:go-not-say:10	東京からいえば、遠い。	도쿄에서 말하면, 멀다.	fix	defaults
+cx:go-not-say:10	東京からいえば	!rule:cx:go-not-say:10	fix	defaults
+cx:go-not-say:10	駅にいって	역에 가	keep	local
+cx:go-not-say:10	彼にいうと	그에게 말한다고	keep	rewrites

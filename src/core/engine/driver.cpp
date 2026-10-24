@@ -18,11 +18,13 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
+#include "core/pipeline/runes.h"
 #include "core/pipeline/segment.h"
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/lines.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/util.h"
 
@@ -30,16 +32,159 @@ namespace hdTrans::internal {
 
 namespace {
 
-// Whether the dictionary has a verb or adjective whose key is base, alone or with the
-// first of the kana after it (pipeline::JoinBraceRuby).
-bool BaseContinues(const void* context, std::string_view base, std::string_view kana) {
+// The class digit of a dictionary candidate ('4' a verb, '1' a noun, '2' a particle).
+char ClassOf(const dict::Candidate& c) {
+    return c.codes ? c.codes->part.ClassDigit() : '\0';
+}
+
+// Whether the dictionary has an ending row whose key is text (こと, もの, ところ): a noun
+// that the ending of the word before it reads with it.
+bool EndingKey(const dict::Snapshot& snap, std::string_view text) {
+    const dict::Candidates found = snap.GetWordInfo(text, dict::LookupMode::VerbEnding, dict::LookupContext{});
+    return std::any_of(found.list.begin(), found.list.end(),
+                       [&](const dict::Candidate& c) { return c.source == text; });
+}
+
+// The first word of the word analysis of base + kana when it is a verb or adjective that
+// starts the text and takes some of the kana; null otherwise.
+const word::Item* InflectedBase(const word::Analysis& analysis, std::size_t base) {
+    if (analysis.sentences.empty()) return nullptr;
+    const word::Item* first = analysis.sentences.front().chain.head;
+    if (first == nullptr || first->tokenIndex != 0 || first->start != 0) return nullptr;
+    const int kind = first->detail->cls;
+    if (kind != word::kDetailVerb && kind != word::kDetailKeiyo) return nullptr;
+    return static_cast<std::size_t>(first->length) > base ? first : nullptr;
+}
+
+// The bytes of base + kana that the inflected base word takes when the next word inside the
+// kana is a dictionary noun that is not also an ending (掬った|まぐろ, not 躓いてるって|こと)
+// or an auxiliary verb (Ds, Du, Da: 庇って|くれた, 囚われて|いる); 0 otherwise. Endings read
+// with the word (呟いたあと, 寂しいけれど) and verbs it compounds with (尋ね|かける) stay with it.
+std::size_t BaseWordEnd(const dict::Snapshot& snap, std::string_view text, const word::Item& first) {
+    const auto end = static_cast<std::size_t>(first.length);
+    const word::Item* next = first.next;
+    if (end >= text.size() || next == nullptr || next->tokenIndex != 0 || static_cast<std::size_t>(next->start) != end) {
+        return 0;
+    }
+    const std::string_view code = next->Code(0);
+    const char cls = code.empty() ? '\0' : code[0];
+    if (cls == '1') return word::Has(next->GAttr(0), "Nm") || EndingKey(snap, next->group->surface) ? 0 : end;
+    if (cls != '4') return 0;
+    for (int i = 0; next->group->At(i) != nullptr; i++) {
+        const std::string_view g = next->GAttr(i);
+        if (word::Has(g, "Ds") || word::Has(g, "Du") || word::Has(g, "Da")) return end;
+    }
+    return 0;
+}
+
+// How the dictionary reads a ruby base with the kana after it (pipeline::JoinBraceRuby).
+pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::string_view kana) {
     const auto& snap = *static_cast<const dict::Snapshot*>(context);
     const std::string text = std::string(base) + std::string(kana);
+    const std::size_t okurigana = base.size() + text::DecodeRune(kana).size;
+    pipeline::BaseReading r;
     const dict::Candidates found = snap.GetWordInfo(text, dict::LookupMode::General, dict::LookupContext{});
-    return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) {
-        const char cls = c.codes ? c.codes->part.ClassDigit() : '\0';
-        return c.source.size() >= base.size() && (cls == '4' || cls == '7' || cls == '8');
-    });
+    for (const dict::Candidate& c : found.list) {
+        const char cls = ClassOf(c);
+        if (cls == '4' || cls == '7' || cls == '8') r.continues = r.continues || c.source.size() >= base.size();
+    }
+
+    tokenizer::Tokens tokens;
+    tokenizer::Tokenize(text, tokens);
+    word::Settings settings;
+    settings.text = true;
+    word::Arena arena;
+    word::Analysis analysis;
+    word::Analyze(tokens, snap, dict::LookupContext{}, settings, arena, analysis);
+    if (const word::Item* first = InflectedBase(analysis, base.size())) {
+        // A stem key that goes on into the kana past their first character is an idiom
+        // (人気があ), not the base's inflection.
+        r.inflected = static_cast<std::size_t>(first->group->length) <= okurigana;
+        // The end cuts the kana, so it must fall inside them on a character boundary.
+        const std::size_t end = BaseWordEnd(snap, text, *first);
+        if (end > base.size() && end < text.size() && (static_cast<unsigned char>(text[end]) & 0xC0) != 0x80) {
+            r.wordEnd = end - base.size();
+        }
+    }
+    return r;
+}
+
+// The dictionary as the line's lookup sees it, for pipeline::RespellVariants.
+struct RespellLookup {
+    const dict::Snapshot& snap;
+    const dict::LookupContext& lookup;
+};
+
+dict::Candidates Find(const RespellLookup& d, std::string_view text) {
+    return d.snap.GetWordInfo(text, dict::LookupMode::General, d.lookup);
+}
+
+bool HasKey(const RespellLookup& d, std::string_view key) {
+    const dict::Candidates found = Find(d, key);
+    return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) { return c.source == key; });
+}
+
+// Whether the candidate is an ending (S, T) or a particle (P) row rather than a word of its own.
+bool Grammar(const dict::Candidate& c) { return c.codes != nullptr && c.codes->part.TagIn("STP"); }
+
+// Words are looked for from up to this many runes before a variant, and the respelled text is
+// looked up with this many bytes after it; a longer key around a variant is not seen.
+constexpr int kLookBackRunes = 4;
+constexpr size_t kLookAheadBytes = 192;
+
+// Whether a dictionary word cuts across line[at, end) or holds it (pipeline::RespellVariants): a word
+// that starts before it and ends inside it, one that starts inside it and ends past it, or one that
+// holds all of it and more (身の程, 先程, ときめく), or a word other than an ending or particle that
+// the respelled text would make before it (ある時 from あるとき). An ending or particle row holding
+// the variant does not keep one respelled in kana when its kana respelling is also a key (程に ほどに).
+bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std::string_view variant,
+                      std::string_view spelling) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const size_t end = at + variant.size();
+    const bool toKana = !text::IsKanji(text::DecodeRune(spelling).cp);
+    const auto keeps = [&](size_t start) {
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            const size_t stop = start + c.source.size();
+            if (stop <= at || (start == at && stop <= end)) continue;
+            if (start > at) {
+                if (stop > end) return true;
+                continue;
+            }
+            if (stop < end || !toKana || !Grammar(c)) return true;
+            std::string respelled(c.source.substr(0, at - start));
+            respelled += spelling;
+            respelled += c.source.substr(end - start);
+            if (!HasKey(d, respelled)) return true;
+        }
+        return false;
+    };
+    size_t first = at;
+    for (int back = 0; back < kLookBackRunes && first > 0; back++) first -= pipeline::internal::LastRune(line.substr(0, first)).size;
+    // The respelled text from first, so that the spelling starts at at - first.
+    std::string respelled(line.substr(first, at - first));
+    respelled += spelling;
+    respelled += line.substr(end, kLookAheadBytes);
+    const size_t spelled = at - first;
+    const auto joins = [&](size_t from) {
+        for (const dict::Candidate& c : Find(d, std::string_view(respelled).substr(from)).list) {
+            if (from + c.source.size() < spelled + spelling.size() || Grammar(c)) continue;
+            std::string original(c.source.substr(0, spelled - from));
+            original += variant;
+            original += c.source.substr(spelled - from + spelling.size());
+            if (!HasKey(d, original)) return true;
+        }
+        return false;
+    };
+    for (size_t start = at;; start -= pipeline::internal::LastRune(line.substr(0, start)).size) {
+        if (start < at && joins(start - first)) return true;
+        if (keeps(start)) return true;
+        if (start == first) break;
+    }
+    for (size_t inner = at + text::DecodeRune(line.substr(at)).size; !toKana && inner < end;
+         inner += text::DecodeRune(line.substr(inner)).size) {
+        if (keeps(inner)) return true;
+    }
+    return false;
 }
 
 auto FallbackOf(const dict::Snapshot& snap) {
@@ -203,7 +348,21 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     std::vector<output::Sentence>& out) {
     s.texts.clear();
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
-    tokenizer::TokenizeSpans(pieces, text, s.tokens);
+    // A word of the dictionary that starts in the text before a space and goes on past it.
+    const tokenizer::SpaceJoins joins = [&](std::string_view before, std::string_view after) {
+        for (std::size_t start = 0; start < before.size();) {
+            const std::string_view left = before.substr(start);
+            // The candidates point into the query, so it lives as long as they do.
+            const std::string query = std::string(left) + std::string(after);
+            const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
+            for (const dict::Candidate& c : words.list) {
+                if (c.source.size() > left.size()) return true;
+            }
+            start += std::max<std::size_t>(1, text::DecodeRune(left).size);
+        }
+        return false;
+    };
+    tokenizer::TokenizeSpans(pieces, text, s.tokens, text && !options.reference ? &joins : nullptr);
     if (observer.tokens) observer.tokens(observer.context, index, s.tokens);
 
     word::Analysis analysis;
@@ -268,7 +427,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), BaseContinues, &snap);
+    std::string normalized = pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx), ReadBase, &snap);
+    if (!options.reference) {
+        const RespellLookup respell{snap, ctx.lookup};
+        normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
+    }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
     if (observer.text) observer.text(observer.context, "SN", sounded);

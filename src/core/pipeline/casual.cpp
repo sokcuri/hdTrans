@@ -173,12 +173,16 @@ bool NaTsu(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥・」]|$)
+// ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥・」]|$), not where the んな ends a
+// word of casual.nna-word.
 bool Nna(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "んな")) return false;
+    for (const std::string_view w : dict::ClassMembers("casual.nna-word")) {
+        if (p >= w.size() && s.substr(p - w.size(), w.size()) == w) return false;
+    }
     size_t q = p;
     if (OneOf(s, q, U"よぁー")) return Done(s, m, p, q, 2);
     const bool ok = Repeat(s, p, InSet(U"っッ"), 0, 1, [&](size_t r) {

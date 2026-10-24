@@ -1,0 +1,32 @@
+# 규칙: LAY-8
+rule	input	expected	kind	layer
+sound:stretched-copula	ふぅ、お豆輸送中でーす！	후우, 콩수송 중입니다~!	fix	sound
+sound:stretched-copula	艦隊帰投でーす。	함대귀투입니다~.	fix	sound
+sound:stretched-copula	お手紙でーす。	편지입니다~.	fix	sound
+sound:stretched-copula	7時でーす！	7시입니다~!	fix	sound
+sound:stretched-copula	正解でーす♪	정답입니다~♪	fix	sound
+sound:stretched-copula	はい、お水とメニューでーす	네, 물과 메뉴입니다~	fix	sound
+sound:stretched-copula	はい、サラダでーすっ	네, 샐러드입니다	fix	sound
+sound:stretched-copula	ういーす、お茶でーす	안녕, 차입니다~	fix	sound
+sound:stretched-copula	そ、そうでーす。	그, 그렇습니다~.	fix	sound
+sound:stretched-copula	さすが先輩、優しいでーす	역시 선배, 다정합니다~	fix	sound
+sound:stretched-copula	何を言ってるか聞こえないでーす！	무슨 말을 해 들리지 않습니다~!	fix	sound
+sound:stretched-copula	嘘なんてついてないでーす	거짓말 같은 건 하지 않습니다~	fix	sound
+sound:stretched-copula	８勝１８４敗でーす……	8승 184패입니다~……	fix	sound
+sound:stretched-copula	マップアプリでーす	맵 앱입니다~	fix	sound
+sound:stretched-copula	プライバシーの侵害でーす！	프라이버시의 침해입니다~!	fix	sound
+sound:stretched-copula	朝でーす、朝が来ましたー！	아침입니다~, 아침이 왔습니다~!	fix	sound
+sound:stretched-copula	「死人デース」と言いつつ	「죽은 사람 데스」라고 말하면서	fix	sound
+sound:stretched-copula	私に任せるデース！	나에게 맡기는 데스!	fix	sound
+sound:stretched-copula	正解です	정답입니다	keep	sound
+sound:stretched-copula	彼女ですー	그녀입니다~	keep	sound
+sound:stretched-copula	正解でーーす	정답입니다~	keep	sound
+sound:stretched-copula	そんなっ！ダメですぅ！	그런! 안 됩니다!	keep	sound
+sound:stretched-copula	正解で～す	정답이에요	keep	sound
+sound:stretched-copula	いただきまーす。	잘 먹겠습니다.	keep	sound
+sound:stretched-copula	すみませーん、お願いしまーす！	죄송합니다~, 부탁드립니다~!	keep	sound
+sound:stretched-copula	ういーす	안녕	keep	sound
+sound:stretched-copula	お、落ち着くでーす	오, 침착합니다~	fix	sound
+sound:stretched-copula	ランチの前にやる伝統イベントがあるでーす！	런치 앞에 하는 전통 이벤트가 있습니다~!	fix	sound
+sound:stretched-copula	一緒に行くです	함께 갑니다	fix	sound
+sound:stretched-copula	まな板と罵るですか	도마와 매도합니까	fix	sound

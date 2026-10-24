@@ -299,7 +299,7 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
     char finalClass = 0;
     bool hasAttr = false, hasGattr = false;
     std::string_view attr, gattr, negative;
-    bool force = false, hidden = false, space = false, stative = false;
+    bool force = false, hidden = false, space = false, stative = false, utteranceEnd = false;
     std::uint8_t registerLevel = 0;
     for (const std::string_view opt : internal::Fields(fields[3])) {
         const std::size_t eq = opt.find('=');
@@ -325,6 +325,10 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             stative = true;
         } else if ((opt == "exclaim" || opt == "predicate") && pos == "intj") {
             // Read by the sound stage (an exclamation is no sound before a question mark).
+        } else if (opt == "final" && pos == "intj") {
+            utteranceEnd = true;
+        } else if (key == "polite" && hasValue && pos == "intj") {
+            // Read by the sound stage (the last word of the Korean in polite speech).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {
@@ -363,6 +367,7 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
         e.polite = r.polite;
         e.euImperative = r.euImperative;
         e.stative = stative;
+        e.utteranceEnd = utteranceEnd;
         if (i == 0) e.negative = negativeTarget;
         out.push_back(std::move(e));
     }

@@ -5,8 +5,10 @@
 
 #include "core/dict/classes.h"
 #include "core/rules/match.h"
+#include "core/text/hangul.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/token.h"
 #include "core/word/conjugation.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
@@ -176,6 +178,33 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
+bool Item::KoreanSpan() const {
+    if (w == nullptr || w->Span(tokenIndex) != tokenizer::kSpanWord) return false;
+    const std::string_view s = group->surface;
+    if (s.empty()) return false;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (!text::Split(r.cp) && !text::IsSpace(r.cp)) return false;
+        k += r.size;
+    }
+    return true;
+}
+
+bool Item::AfterPause(bool sentenceEnd) const {
+    // The text before the word without the spaces at its end, from the tokens before it
+    // when the word starts its token.
+    auto unspaced = [](std::string_view s) {
+        while (!s.empty() && text::IsSpace(DecodeLastRune(s).cp)) s.remove_suffix(DecodeLastRune(s).size);
+        return s;
+    };
+    std::string_view before = unspaced(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))));
+    for (int j = tokenIndex - 1; before.empty() && w != nullptr && j >= 0; j--) {
+        before = unspaced(w->tokens.Raw(static_cast<std::size_t>(j)));
+    }
+    const std::string_view last = LastChar(before);
+    return (sentenceEnd && dict::InClass("mark.sentence-end", last)) || dict::InClass("mark.pause", last);
+}
+
 // Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
 // with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
 // such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
@@ -220,7 +249,8 @@ bool Item::AfterQuestionWord() const {
         if (x != this && (s == "か" || x->EndingAsks())) break;
         // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
         // alone or before a particle; から, かな and かしら keep the question.
-        const std::string_view after = x->next != nullptr ? x->next->group->surface : std::string_view();
+        const Item* xn = x->After();
+        const std::string_view after = xn != nullptr ? xn->group->surface : std::string_view();
         const bool indefiniteKa =
             after.starts_with("か") &&
             (after == "か" ||
@@ -236,10 +266,17 @@ bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
 
+bool Item::WrittenBeforeNext() const {
+    if (JoinsNext()) return true;
+    return next != nullptr && static_cast<std::size_t>(start + length) == text.size() &&
+           next->tokenIndex == tokenIndex + 1 && next->start == 0;
+}
+
 bool Item::ClosingTsu() const {
     if (group->surface != "っ" || !EntryText(0).empty()) return false;
-    if (next == nullptr) return true;
-    const char32_t c = text::DecodeRune(next->group->surface).cp;
+    const Item* n = After();
+    if (n == nullptr) return true;
+    const char32_t c = text::DecodeRune(n->group->surface).cp;
     return !text::IsLetter(c) && !text::IsDigit(c);
 }
 
@@ -291,10 +328,16 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Ow") return IsRuleRightBoundary();
         // Oj: the On reading of a word written right before the next one (事私, not 事…私).
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
+        // Z6: a prefix, written right before the next word (光影, 超Ａ級; not 光 影).
+        if (c == "Z6") return Has(attrs, "Z6") && WrittenBeforeNext();
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
         // Qt: the word stands inside a quote (G!= "Qt" for narration).
         if (c == "Qt") return InQuote();
+        // Kh: a word span of Hangul (두근두근, 정말), see KoreanSpan.
+        if (c == "Kh") return KoreanSpan();
+        // Hp: a sentence end, an ellipsis or a dash right before the word.
+        if (c == "Hp") return AfterPause(true);
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
@@ -323,7 +366,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
 // Whether the next item (after a parenthesised group) is missing or its first target
 // starts with ) 」 ! ” = or -.
 bool Item::IsRuleRightBoundary() const {
-    const Item* n = next;
+    const Item* n = After();
     if (n == nullptr) return true;
     if (n->EntryText(0) == "(") {
         while (n != nullptr && n->EntryText(0) != ")") n = n->next;

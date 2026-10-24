@@ -1,0 +1,14 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:i:6769	知らぬ間に眠っていた。	어느새 자고 있었다.	fix	lookup
+dict:i:312	知らない間に眠っていた。	모르는 사이에 자고 있었다.	keep	lookup
+dict:i:2573	縁起の悪い話だ。	불길한 이야기다.	fix	lookup
+dict:i:2816	彼の不興を買った。	그의 눈 밖에 났다.	fix	lookup
+dict:i:7538	目が泳いでいる。	시선이 흔들리고 있다.	fix	lookup
+dict:i:6173	手癖が悪い男だ。	손버릇이 나쁜 남자다.	fix	lookup
+dict:i:6311	言葉が心に刺さった。	말이 마음에 꽂혔다.	fix	lookup
+dict:i:5227	真っ平御免だ。	딱 질색이다.	fix	lookup
+dict:jisjk:61975	タイヤが空回りして進まない。	타이어가 공회전해 나아가지 않는다.	fix	lookup
+lexical:space-place	この地球で君に出会えた。	이 지구에서 너를 만날 수 있었다.	fix	local
+lexical:space-place	雨で電車が止まった。	비로 전철이 멈추었다.	keep	local
+lexical:space-place	地球を守る。	지구를 지킨다.	keep	lookup

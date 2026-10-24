@@ -1,0 +1,34 @@
+# 규칙: LAY-8
+rule	input	expected	kind	layer
+compose:particle-start-gloss	腰よりやや短いロング	허리보다 약간 짧은 롱	fix	compose
+compose:particle-start-gloss	エルは標準よりやや小柄だ	엘은 표준보다 약간 몸집이 작다	fix	compose
+compose:particle-start-gloss	それよりもっとわかりやすい形で	그것보다 더 알기 쉬운 형태로	fix	compose
+compose:particle-start-gloss	それよりさらに白い下着	그것보다 더 흰 속옷	fix	compose
+compose:particle-start-gloss	五月よりさらにひと回り大きい	5월보다 더 한층 크다	fix	compose
+compose:particle-start-gloss	本人にその意志がなくとも	본인에게 그 의지가 없더라도	fix	compose
+compose:particle-start-gloss	君のためだけにやろうとしている	너를 위해서만 하려 하고 있다	fix	compose
+compose:particle-start-gloss	少し古いモデルっていわれるけど	조금 낡은 모델이라고 말을 듣는데	fix	compose
+compose:particle-start-gloss	それでも人であってほしくない	그래도 사람이었으면 하지 않다	fix	compose
+compose:particle-start-gloss	運命であってほしいから	운명이었으면 하니까	fix	compose
+compose:particle-start-gloss	国境監視隊に毛の生えた程度	국경 감시대보다 좀더 나은 정도	fix	compose
+compose:particle-start-gloss	強いにこしたことはない	강한 것보다 좋은 것은 없다	fix	compose
+compose:particle-start-gloss	彼とちがって	그와 달리	fix	compose
+compose:particle-start-gloss	仕事をしてきたと言う	일을 해 왔다고 말한다	fix	compose
+compose:particle-start-gloss	雨の降り始めから	비에 내리기 시작하여	fix	compose
+compose:particle-start-gloss	彼とはこういう人だ	그와는 이런 사람이다	fix	compose
+compose:particle-start-gloss	人をより良い未来に導く	사람을 더 나은 미래에 이끈다	keep	compose
+compose:particle-start-gloss	その美しさをより一層神秘的に	그 아름다움을 보다 한층 신비적으로	keep	compose
+compose:particle-start-gloss	猫とは関係がない	고양이와는 관계가 없다	keep	compose
+compose:particle-start-gloss	学生でありながら	학생이면서	keep	compose
+compose:particle-start-gloss	友達とは別の道	친구와는 다른 길	keep	compose
+compose:particle-start-gloss	去年より一層寒い	작년보다 한층 춥다	fix	compose
+compose:particle-start-gloss	笑顔で答えるとよりさらに怪訝な顔をされた	웃는 얼굴로 대답하니 보다 더 의아스러운 표정을 하셨다	keep	compose
+compose:particle-start-gloss	何故か耳元で話しているかの如く	어째서인지 귓가로 이야기할까 와 같이	current	compose
+dict:yori-after-noun:4	去年より一層寒い	rule:dict:yori-after-noun:4=보다 한층	fix	local
+dict:yori-after-noun:4	その美しさをより一層神秘的に	!rule:dict:yori-after-noun:4	keep	local
+dict:yori-after-noun:3	それよりさらに白い下着	rule:dict:yori-after-noun:3=보다 더	fix	local
+dict:yori-after-noun:3	笑顔で答えるとよりさらに怪訝な顔をされた	!rule:dict:yori-after-noun:3	keep	local
+dict:yori-after-noun:2	腰よりやや短いロング	rule:dict:yori-after-noun:2=보다 약간	fix	local
+dict:yori-after-noun:1	それよりもっとわかりやすい形で	rule:dict:yori-after-noun:1=보다 더	fix	local
+compose:particle-start-gloss	猫なのではなく犬だ	고양이가 아니라 개다	fix	compose
+compose:particle-start-gloss	子供ならともかく大人が	아이라면 몰라도 어른이	fix	compose

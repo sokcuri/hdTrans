@@ -6,19 +6,19 @@ rewrite:terminal-before-quote	痛い時は休む。	아플 때는 쉰다.	keep	r
 rewrite:terminal-before-quote	ラインができあがった、とても綺麗な裸だった。	라인이 완성된, 무척 예쁜 알몸이었다.	fix	rewrites
 rewrite:terminal-before-quote	頭が痛い、と言わんばかりに	머리가 아프다, 라고 말하듯이	keep	rewrites
 rewrite:terminal-before-quote	わからない、とか……？	모른다, 라든지……?	keep	rewrites
-rewrite:noda-to	そうだろうと思ったよ…。	그럴 것이라고 생각했어….	fix	rewrites
-rewrite:noda-to	無理はなかっただろうと思うんですよ。	무리는 없었을 것이라고 생각하는 거예요.	fix	rewrites
-rewrite:noda-to	ひたすら恥ずかしかったのだと思います	오로지 부끄러웠던 것이라고 생각합니다	fix	rewrites
-rewrite:noda-to	そうだと思った。	그렇다고 생각했다.	keep	rewrites
-rewrite:noda-to	行くと思う。	간다고 생각한다.	keep	rewrites
+cx:noda-to:10	そうだろうと思ったよ…。	그럴 것이라고 생각했어….	fix	rewrites
+cx:noda-to:10	無理はなかっただろうと思うんですよ。	무리는 없었을 것이라고 생각하는 거예요.	fix	rewrites
+cx:noda-to:10	ひたすら恥ずかしかったのだと思います	오로지 부끄러웠던 것이라고 생각합니다	fix	rewrites
+cx:noda-to:10	そうだと思った。	그렇다고 생각했다.	keep	rewrites
+cx:noda-to:10	行くと思う。	간다고 생각한다.	keep	rewrites
 cx:ji-before-jiman:10	そこまで深い意味はないのだろうけど。	거기까지 깊은 의미는 없겠지만.	fix	rewrites
 cx:ji-before-jiman:10	衰退するだろけど	쇠퇴하겠지만	fix	rewrites
 cx:ji-before-jiman:10	高いけど買う。	비싸지만 산다.	keep	rewrites
-rewrite:geot-before-mitai	随分悔しがってたみたいだけど	상당히 분해하고 있었던 것 같지만	fix	rewrites
-rewrite:geot-before-mitai	早々に見抜かれてたみたいですけど	일찌감치 간파되고 있었던 것 같지만	fix	rewrites
-rewrite:geot-before-mitai	夏休み前にも来てたみたいだけど	여름 방학 전에도 오고 있었던 것 같지만	fix	rewrites
-rewrite:geot-before-mitai	来たみたいだ。	온 것 같다.	keep	rewrites
-rewrite:geot-before-mitai	子供みたいだ。	아이 같다.	keep	rewrites
+cx:geot-before-mitai:10	随分悔しがってたみたいだけど	상당히 분해하고 있었던 것 같지만	fix	rewrites
+cx:geot-before-mitai:10	早々に見抜かれてたみたいですけど	일찌감치 간파되고 있었던 것 같지만	fix	rewrites
+cx:geot-before-mitai:10	夏休み前にも来てたみたいだけど	여름 방학 전에도 오고 있었던 것 같지만	fix	rewrites
+cx:geot-before-mitai:10	来たみたいだ。	온 것 같다.	keep	rewrites
+cx:geot-before-mitai:10	子供みたいだ。	아이 같다.	keep	rewrites
 rewrite:terminal-before-quote	疲れた、とうとう倒れた。	지쳤다, 드디어 쓰러졌다.	keep	rewrites
 rewrite:terminal-before-quote	終わった、とにかく帰ろう。	끝났다, 어쨌든 돌아가자.	keep	rewrites
 rewrite:terminal-before-quote	終わった、ところで君は？	끝났다, 그런데 너는?	keep	rewrites
