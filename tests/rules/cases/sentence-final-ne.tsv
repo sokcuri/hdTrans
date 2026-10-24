@@ -32,9 +32,9 @@ phrase:leave-taking	「では、また後で」	「그럼, 나중에 보자」	f
 phrase:leave-taking	「また明日来る」	「또 내일 온다」	keep	sound
 phrase:leave-taking	「また明日 来る」	「또 내일 온다」	keep	sound
 phrase:leave-taking	「また今度、買いに来るね」	「다음에 또, 사러 올게」	keep	sound
-phrase:yaru-ne	ぐあぁ！やるね！	크아아! 제법이네!	fix	sound
-phrase:yaru-ne	「私がやるね」	「내가 할게」	keep	sound
-phrase:yaru-ne	「よし、やるね」	「좋아, 할게」	keep	sound
+cx:ne-promise:17	ぐあぁ！やるね！	크아아! 제법이네!	fix	rewrites
+cx:ne-promise:17	「私がやるね」	「내가 할게」	keep	rewrites
+cx:ne-promise:17	「よし、やるね」	「좋아, 할게」	keep	rewrites
 cx:ne-promise:40	「伝えておくね」	rule:cx:ne-promise:40=3게	fix	rewrites
 cx:ne-promise:40	「また、漫画読み終わったら言うね」	rule:cx:ne-promise:40=3게	fix	rewrites
 cx:ne-promise:40	「お茶淹れるね」	rule:cx:ne-promise:40=3게	fix	rewrites
@@ -186,6 +186,21 @@ phrase:leave-taking	「おつかれさま、また明日ね」	「수고했어, 
 phrase:leave-taking	「お疲れ様でした。また明日」	「수고하셨습니다. 내일 봬요」	fix	sound
 cx:ne-promise:17	「にいちゃん、やるね。」	rule:cx:ne-promise:17=1네	fix	rewrites
 cx:ne-promise:17	「よし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
+cx:ne-promise:17	「やるね」	「제법이네」	fix	rewrites
+cx:ne-promise:17	「やるねぇ。あたしも負けてらんない」	rule:cx:ne-promise:17=1네	fix	rewrites
+cx:ne-promise:17	「田中さん、やるね」	「타나카 씨, 제법이네」	fix	rewrites
+cx:ne-promise:17	「先輩、やるね！」	「선배, 제법이네!」	fix	rewrites
+cx:ne-promise:17	「にいちゃん、やるね。」	「형, 제법이네.」	fix	rewrites
+cx:ne-promise:17	「それ、やるね」	「그거, 할게」	keep	rewrites
+cx:ne-promise:17	「それ、やるね」	!rule:cx:ne-promise:17	keep	rewrites
+cx:ne-promise:17	やるね、あんた	제법이네, 너	fix	rewrites
+cx:ne-promise:17	「やるね、君」	「제법이네, 너」	fix	rewrites
+cx:ne-promise:17	「あたし、やるね」	「나, 할게」	keep	rewrites
+cx:ne-promise:17	「あたし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
+cx:ne-promise:18	「その仕事、やるね？」	「그 일, 하네?」	fix	rewrites
+cx:ne-promise:18	「その仕事、やるね？」	rule:cx:ne-promise:18=1네	fix	rewrites
+cx:ne-promise:18	「やるね？」	!rule:cx:ne-promise:18	keep	rewrites
+cx:ne-promise:18	「お前、やるね？」	!rule:cx:ne-promise:18	keep	rewrites
 cx:ne-promise:40	「放課後とか頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites
 cx:promise-go-out:10	「先に出るね」	「먼저 나갈게」	fix	rewrites
 cx:promise-go-out:10	「私が出るね」	「내가 나갈게」	fix	rewrites
