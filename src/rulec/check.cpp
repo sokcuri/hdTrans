@@ -224,7 +224,7 @@ private:
         if (o.operand == Operand::Code2) {
             // Position conditions of CheckGAttr, the markers the word stage adds to rule
             // candidates, and Nm of the records it makes for unknown words.
-            for (const char* engine : {"Ow", "Hz", "Hp", "Td", "Oj", "Qt", "Qw", "Vp", "Pi", "Sa", "Ka", "Nm", "Kh"}) {
+            for (const char* engine : {"Ow", "Hz", "Hp", "Hl", "Td", "Oj", "Qt", "Qw", "Vp", "Pi", "Sa", "Ka", "Nm", "Kh"}) {
                 if (c == engine) return true;
             }
             if (c == "Nq") return true;  // a count, Item::ReadsCount

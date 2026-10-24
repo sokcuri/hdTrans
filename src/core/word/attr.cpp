@@ -190,7 +190,7 @@ bool Item::KoreanSpan() const {
     return true;
 }
 
-bool Item::AfterPause() const {
+bool Item::AfterPause(bool sentenceEnd) const {
     // The text before the word without the spaces at its end, from the tokens before it
     // when the word starts its token.
     auto unspaced = [](std::string_view s) {
@@ -202,7 +202,7 @@ bool Item::AfterPause() const {
         before = unspaced(w->tokens.Raw(static_cast<std::size_t>(j)));
     }
     const std::string_view last = LastChar(before);
-    return dict::InClass("mark.sentence-end", last) || dict::InClass("mark.pause", last);
+    return (sentenceEnd && dict::InClass("mark.sentence-end", last)) || dict::InClass("mark.pause", last);
 }
 
 // Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
@@ -335,7 +335,9 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         // Kh: a word span of Hangul (두근두근, 정말), see KoreanSpan.
         if (c == "Kh") return KoreanSpan();
         // Hp: a sentence end, an ellipsis or a dash right before the word.
-        if (c == "Hp") return AfterPause();
+        if (c == "Hp") return AfterPause(true);
+        // Hl: an ellipsis or a dash right before the word.
+        if (c == "Hl") return AfterPause(false);
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;

@@ -219,9 +219,9 @@ public:
     // the sound stage wrote or the input holds, whose part of speech is unknown; a span with a
     // mask (자○) is a noun.
     bool KoreanSpan() const;
-    // Whether a sentence end, an ellipsis or a dash stands right before the word, spaces
-    // between them aside (でしょ。と、, 行く……と、, そう――と).
-    bool AfterPause() const;
+    // Whether an ellipsis or a dash, or with sentenceEnd also a sentence end, stands right
+    // before the word, spaces between them aside (でしょ。と、, 行く……と、, そう――と).
+    bool AfterPause(bool sentenceEnd) const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
     // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
     bool AfterQuestionWord() const;

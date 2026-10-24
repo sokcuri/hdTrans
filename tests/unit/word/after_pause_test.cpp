@@ -13,6 +13,8 @@ HD_TEST(word_after_pause_fragment) {
          "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n"
          "犬\t가\tN110\tXXX\t\tGN\t0\t1\t\n"
          "犬\t나\tN110\t\t\tGN\t2\t2\t||1 G+0== \"Hp\"\n"
+         "鳥\t새\tN110\tXXX\t\tGN\t0\t4\t\n"
+         "鳥\t참새\tN110\t\t\tGN\t3\t5\t||1 G+0== \"Hl\"\n"
          "猫\t고양이\tN110\t\t\tGN\t0\t3\t\n"},
     };
     const auto loaded = hdTrans::dict::Load(files);
@@ -29,6 +31,9 @@ HD_TEST(word_after_pause_fragment) {
         {"猫。 犬", "고양이. 나"},
         {"猫犬", "고양이가"},
         {"犬", "가"},
+        // Hl: an ellipsis or a dash only.
+        {"猫……鳥", "고양이……참새"},
+        {"猫。鳥", "고양이. 새"},
     };
     for (const Case& c : cases) {
         hdTrans::internal::Memory memory;
