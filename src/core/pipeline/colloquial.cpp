@@ -67,9 +67,23 @@ class Emphasis {
 public:
     Emphasis(const LineContext& ctx, const dict::Snapshot& snap) : ctx_(ctx), snap_(snap) {}
 
-    // The tags of the keys spelled s; the ending of an end row is no word a drawl belongs to
-    // (逆転負けぇえぇッ: 負け drawn out, not the けぇ of 書くけぇ).
-    std::string Tags(std::u32string_view s) const { return KeyTags(EncodeText(s), ctx_, snap_, false); }
+    // The tags of the keys spelled s. A syllable and the vowel that draws it out (けぇ) is no
+    // word as the ending of an end row there: 逆転負けぇえぇッ is 負け drawn out, not the けぇ of
+    // 書くけぇ.
+    std::string Tags(std::u32string_view s) const {
+        const bool drawn = s.size() == 2 && HiraganaVowel(s[0]) >= 0 && HiraganaVowel(s[0]) == HiraganaVowel(s[1]) &&
+                           (IsSmallVowel(s[1]) || IsSmallVowel(s[1] - 1));
+        return KeyTags(EncodeText(s), ctx_, snap_, !drawn);
+    }
+
+    // Whether s is a noun of the dictionary or a person of the name layer.
+    bool NounOrPerson(std::u32string_view s) const {
+        if (Tags(s).find('N') != std::string::npos) return true;
+        for (const dict::Record& rec : snap_.NameRecords(EncodeText(s))) {
+            if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
+        }
+        return false;
+    }
 
     // The length of the longest dictionary key (base or plain) that starts rs.
     size_t LongestKey(std::u32string_view rs) const {
@@ -827,14 +841,19 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             // cry うくぅんん or the sound びちゃーん).
             bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
                                        (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
-            // Not after a verb in its continuative, a stem and one kana, where the stem starts
-            // before any noun that ends at the honorific (かみつきさあん; not みどりさああん).
+            // Not after a verb in its continuative, a stem of two or more characters that is no
+            // noun and one kana, where the stem starts before any noun or person name that ends at
+            // the honorific (かみつきさあん; not みどりさああん, つぐみちゃーん, みなさーん).
             if (afterWord && IsHiraganaRune(rs[i - 1])) {
                 size_t from = i - 1;
                 while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
                 for (size_t j = from; j + 1 < i; j++) {
-                    if (e.Tags(std::u32string_view(rs).substr(j, i - j)).find('N') != std::string::npos) break;
-                    if (e.Tags(std::u32string_view(rs).substr(j, i - 1 - j)).find_first_of("MH") != std::string::npos) {
+                    if (e.NounOrPerson(std::u32string_view(rs).substr(j, i - j)) ||
+                        e.NounOrPerson(std::u32string_view(plain).substr(j, i - j + h.size()))) {
+                        break;  // a noun before the honorific, or one with it (おとうちゃん)
+                    }
+                    const std::string tags = e.Tags(std::u32string_view(rs).substr(j, i - 1 - j));
+                    if (i - 1 - j >= 2 && tags.find_first_of("MH") != std::string::npos && tags.find('N') == std::string::npos) {
                         afterWord = false;
                         break;
                     }

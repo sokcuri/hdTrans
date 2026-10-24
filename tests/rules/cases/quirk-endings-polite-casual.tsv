@@ -34,3 +34,4 @@ sound:end-row-key-goes-on	婚約関連でちょこっと両親が登場した。
 sound:end-row-key-goes-on	学校でちらっと見た	학교에서 힐끗 보았다	keep	sound
 ending:dechi	みんなも全力でお祝いでち！	모두도 전력으로 축하예요!	fix	builtin-ending
 normalize:drawl-not-ending	「えぇえぇッ？！ 逆転負けぇえぇッ？！？！」	「에에에엣?! 역전패애애애?!?!」	keep	normalize
+normalize:drawl-not-ending	夜の海は危ないけぇ。	밤의 바다는 위험하니까.	keep	builtin-ending
