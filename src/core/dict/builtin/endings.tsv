@@ -117,6 +117,9 @@
 書いてるでござる	쓰고 있소	end	prio=-1
 書いちゃうでござる	써버리오	end	prio=-1
 学生でござる	학생이오	end	prio=-1
+静かでござる	조용하오	end	prio=-1
+静かでござった	조용했소	end	prio=-1
+静かでござるよ	조용하오	end	prio=-1
 // ぜ, ぞ (the dictionary endings of 書くぞ, 書いたぞ stay)
 書くぜ	쓴다	end	prio=-1
 書いたぜ	썼다	end	prio=-1
@@ -366,6 +369,10 @@
 静かね	조용하네	end	prio=-1
 書いちゃいましたか	써 버렸습니까	end	prio=-1
 学生でございます	학생입니다	end	prio=-1
+静かでございます	조용합니다	end	prio=-1
+静かでござります	조용합니다	end	prio=-1
+静かでございました	조용했습니다	end	prio=-1
+静かでございますか	조용합니까	end	prio=-1
 // だろ: seeking agreement (言っただろ 말했지, そうだろ？ 그렇지?); だろう
 // stays a guess
 書いただろ	썼지	end	prio=-1

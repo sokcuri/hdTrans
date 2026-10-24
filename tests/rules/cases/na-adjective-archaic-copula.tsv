@@ -1,0 +1,15 @@
+# 규칙: SPC-7, NUM-9
+rule	input	expected	kind	layer
+ending:静かでござる	シーン………頭がいっぱいでござる	장면………머릿속이 가득하오	fix	builtin-ending
+ending:静かでござる	お腹いっぱいでござる	배부르오	fix	builtin-ending
+ending:静かでござる	胸が一杯でござる	가슴이 벅차오	fix	builtin-ending
+ending:静かでござる	拙者は元気でござる。	졸자는 건강하오.	fix	builtin-ending
+ending:静かでござった	大丈夫でござった。	괜찮았소.	fix	builtin-ending
+ending:静かでございます	大丈夫でございます。	괜찮습니다.	fix	builtin-ending
+ending:静かでござります	お腹いっぱいでござります。	배부릅니다.	fix	builtin-ending
+ending:静かでございますか	大丈夫でございますか？	괜찮습니까?	fix	builtin-ending
+ending:静かでございました	大丈夫でございました。	괜찮았습니다.	fix	builtin-ending
+ending:静かでござるな	この刀は見事でござるな。	이 칼은 훌륭하구려.	fix	builtin-ending
+ending:静かでござる	静かでござるが、怖い。	조용하지만, 무섭다.	keep	local-ending
+ending:静かでござる	先生でござる。	선생님이오.	keep	fixed
+ending:静かでござる	お腹いっぱいであります。	배부릅니다.	keep	ending-defaults
