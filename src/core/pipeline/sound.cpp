@@ -1136,7 +1136,12 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         return p + n;
     }
     const std::u32string_view x = f.substr(p, n);
-    if (n > 1 && IsSoundKey(x, ctx_.extraBuiltin)) return 0;
+    // A sound of two or more kana says itself (あっ、), but a lead row may start the word it
+    // stutters (ちょ、ちょっと).
+    const auto rows = SoundRows(x[0], ctx_.extraBuiltin);
+    if (n > 1 && std::any_of(rows.begin(), rows.end(), [&](const SoundRow& s) { return s.key == x && !s.phrase && !s.lead; })) {
+        return 0;
+    }
     // A syllable said three or more times straight into the word it starts (つつつついに,
     // どどどどうしよう, ぼぼぼボク) or before a word in kanji (けけけ圭一): a piece without a
     // separator for each repeat, unless a word reads the run or a sound reads it before a

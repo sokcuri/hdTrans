@@ -1,0 +1,25 @@
+# 규칙: SND-3
+rule	input	expected	kind	layer
+sound:taunt-tag	わかりましたよーだ	알았어요~	fix	sound
+sound:taunt-tag	「はいはい、あたしはケチですよーだ。」	「네네, 저는 구두쇠예요~.」	fix	sound
+sound:taunt-tag	「ぶー、どうせ貫禄ないですよーだ」	「부우, 어차피 관록 없어요~」	fix	sound
+sound:taunt-tag	「別に怒ってないですよーだ」	「별로 화내지 않아요~」	fix	sound
+sound:taunt-tag	オイラも忙しいよ～だ！	나도 바빠~!	fix	sound
+sound:taunt-tag	バーカ、知らないよーっだ	바보, 몰라~	fix	sound
+sound:taunt-tag	わかったよーだ	알았어~	fix	sound
+sound:taunt-tag	分かりましたよーーだっ！	알았어요~!	fix	sound
+sound:taunt-tag	行かないもんねーだ	가지 않는 걸―	fix	sound
+sound:taunt-tag	いいもんねーっだ	좋은 걸―	fix	sound
+sound:taunt-tag	行くよー	가~	keep	sound
+sound:taunt-tag	そうだよ	그래	keep	sound
+sound:taunt-tag	行くようだ	가는 것 같다	keep	sound
+sound:taunt-tag	「してねーだろ、そんなことっ！」	「하고 있지 않겠지, 그런 일!」	keep	sound
+sound:taunt-bee	「べーっだ。ほんと可愛くないんだから」	「메롱. 정말 귀엽지 않으니까」	fix	fixed
+sound:taunt-bee	「べーーっだ！」	「메롱!」	fix	fixed
+sound:taunt-bee	覗くなよ！ べ～っ！	들여다 보지 마! 메롱~!	fix	fixed
+sound:taunt-bee	あっかんべー	메롱	fix	fixed
+sound:taunt-bee	あっかんべーだ	메롱	fix	fixed
+sound:taunt-bee	ベーコン	베이컨	keep	fixed
+sound:taunt-bee	行くべー	가자―	keep	fixed
+sound:taunt-tag	夢のよーだ！	꿈의 것-이다!	current	sound
+sound:taunt-tag	静かなよーだ	조용한-이다	current	sound

@@ -24,8 +24,10 @@
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
-//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
+//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
+//= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
+//= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
@@ -57,6 +59,7 @@
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
+//= ko-sound.laugh	Korean laughs the sound stage writes (아하하, 후후), after which おかしい is funny, not strange (あはは、おかしい 아하하, 웃겨).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
@@ -349,6 +352,7 @@ ending.rare-passive	てい
 ending.rare-passive	てる
 ending.rare-passive	てお
 ending.rare-passive	てた
+ending.rare-passive	ちゃ
 
 ending.rare-potential	な
 ending.rare-potential	ず
@@ -360,6 +364,18 @@ ending.rare-potential	れば
 ending.rare-potential	よう
 ending.rare-potential	たら
 ending.rare-potential	たり
+
+ending.taunt	よーだ
+ending.taunt	よーっだ
+ending.taunt	よーだっ
+ending.taunt	よーっだっ
+ending.taunt	もんねーだ
+ending.taunt	もんねーっだ
+ending.taunt	もんねーだっ
+ending.taunt	もんねーっだっ
+
+ending.taunt-not-after	の
+ending.taunt-not-after	な
 
 follower.contracted-iru	の
 follower.contracted-iru	だ
@@ -743,6 +759,58 @@ ko-noun.passive-eojida	말
 ko-noun.passive-eojida	의지
 ko-noun.passive-eojida	생각
 ko-noun.passive-eojida	일
+ko-sound.laugh	후후
+ko-sound.laugh	후훗
+ko-sound.laugh	후후후
+ko-sound.laugh	훗
+ko-sound.laugh	훗훗훗
+ko-sound.laugh	우후
+ko-sound.laugh	우후후
+ko-sound.laugh	우훗
+ko-sound.laugh	우후훗
+ko-sound.laugh	무후후
+ko-sound.laugh	에헤
+ko-sound.laugh	에헤헤
+ko-sound.laugh	에헷
+ko-sound.laugh	에헤헷
+ko-sound.laugh	헤헤
+ko-sound.laugh	헤헷
+ko-sound.laugh	헤헤헤
+ko-sound.laugh	데헤
+ko-sound.laugh	데헷
+ko-sound.laugh	데헤헤
+ko-sound.laugh	아하
+ko-sound.laugh	아핫
+ko-sound.laugh	아하하
+ko-sound.laugh	아하핫
+ko-sound.laugh	아하하하
+ko-sound.laugh	하하
+ko-sound.laugh	하핫
+ko-sound.laugh	하하하
+ko-sound.laugh	와하하
+ko-sound.laugh	와하하하
+ko-sound.laugh	푸핫
+ko-sound.laugh	푸하하
+ko-sound.laugh	풉
+ko-sound.laugh	푸풋
+ko-sound.laugh	크크
+ko-sound.laugh	크큭
+ko-sound.laugh	크크크
+ko-sound.laugh	큭큭큭
+ko-sound.laugh	큭
+ko-sound.laugh	킥킥
+ko-sound.laugh	히히
+ko-sound.laugh	히히히
+ko-sound.laugh	히힛
+ko-sound.laugh	니히
+ko-sound.laugh	니히히
+ko-sound.laugh	니힛
+ko-sound.laugh	니시시
+ko-sound.laugh	호호호
+ko-sound.laugh	오호호
+ko-sound.laugh	오호호호
+ko-sound.laugh	우하하
+ko-sound.laugh	우하하하
 
 ko-verb.casual-state	된다
 ko-verb.casual-state	모른다
