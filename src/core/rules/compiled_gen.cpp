@@ -4212,10 +4212,11 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**)
 //     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv)) ||
+    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv) && (GramNe(p, 0, "Hp"sv) ||
+           PumsaEq(p, 1, "6**"sv))) ||
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
 
@@ -4952,7 +4953,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG2, 0x80a377d931160ae0ull},
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0x50734a4f6e17f2d1ull},
+    {RuleG30, 0xcec84dffa0f89fbcull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
