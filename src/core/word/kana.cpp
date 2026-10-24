@@ -82,8 +82,8 @@ std::string FinalL(std::string_view s, int vowel) { return WithFinal(s, vowel, 8
 
 // A katakana run edited as cells: one katakana, one Hangul syllable or the two spaces
 // of an empty cell of the kana rows. The cells are kept on both sides of a gap, the
-// cells after it last first, and an edit moves the gap to itself, so edits that follow
-// the cursor move few cells.
+// cells after it last first. An edit first moves the gap to its position, so edits
+// that follow the cursor move few cells.
 struct Run {
     std::vector<std::string_view> lead;    // the cells before the gap
     std::vector<std::string_view> trail;   // the cells after the gap, last first
