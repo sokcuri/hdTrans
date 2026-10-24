@@ -144,3 +144,12 @@ cx:container-full:10	NUM-9	&&5 ||2 S+0== "いっぱい" S+0== "一杯" L+0== "�
 //= tokoro-near-miss	after container-full	A dictionary form with ところだった or ところでした read 려던 참이었다 is a narrow miss, (으)ㄹ 뻔했다, after a word of word.near-miss or a negative condition earlier in its sentence (危うく, いなかったら), on a passive in される or られる, on しまう or on 忘れる (忘れるところだった 잊을 뻔했다); else it stays the moment before an act (ちょうど帰るところだった 막 돌아가려던 참이었다).
 cx:tokoro-near-miss:10	GRM-5	&&3 F+0== "conjugating" Y+0== "2려던 참이었다" ||5 S+0== "Rされ" S+0== "Rられ" S+0== "しま" B+0== "忘れる" <0 ||3 I+0== @word.near-miss I+0== "Rなかったら" I+0== "Rなければ" S+0== "00。！？!?「」『』"	set-ending "3 뻔했다"	危うく落ちるところだった 하마터면 떨어질 뻔했다
 cx:tokoro-near-miss:20	GRM-5	&&3 F+0== "conjugating" Y+0== "2려던 참이었습니다" ||5 S+0== "Rされ" S+0== "Rられ" S+0== "しま" B+0== "忘れる" <0 ||3 I+0== @word.near-miss I+0== "Rなかったら" I+0== "Rなければ" S+0== "00。！？!?「」『』"	set-ending "3 뻔했습니다"	忘れるところでした 잊을 뻔했습니다
+//= kuseni-clause	after tokoro-near-miss	A くせに or くせして (word.kuseni, or 癖 before に) after a verb or adjective whose ending is an adnominal is -(으)면서, the predicate going on into what goes against it (知ってるくせに 알고 있으면서, 言ったくせに 말했으면서), and after a noun and の it is N 주제에 with no 의 (子供のくせに 아이 주제에).
+cx:kuseni-clause:10	GRM-6	&&4 ||2 S+0== @word.kuseni &&2 S+0== "癖" S+1== "に" F-1== "conjugating" Y-1== "R있는" S-1!= "の"	replace-ending-tail@-1 "있는" "있으면서" set-target ""	知ってるくせに 알고 있으면서
+cx:kuseni-clause:15	GRM-6	&&4 ||2 S+0== @word.kuseni &&2 S+0== "癖" S+1== "に" F-1== "conjugating" Y-1== "R있었던" S-1!= "の"	replace-ending-tail@-1 "있었던" "있었으면서" set-target ""	負けてたくせに 지고 있었으면서
+cx:kuseni-clause:20	GRM-6	&&4 ||2 S+0== @word.kuseni &&2 S+0== "癖" S+1== "に" F-1== "conjugating" Y-1== "R버리는" S-1!= "の"	replace-ending-tail@-1 "버리는" "버리면서" set-target ""	喜んじゃうくせに 기뻐해 버리면서
+cx:kuseni-clause:30	GRM-6	&&4 ||2 S+0== @word.kuseni &&2 S+0== "癖" S+1== "に" F-1== "conjugating" Y-1== "0" S-1!= "の"	set-ending@-1 "2면서" set-target ""	走るくせして 달리면서
+cx:kuseni-clause:40	GRM-6	&&4 ||2 S+0== @word.kuseni &&2 S+0== "癖" S+1== "に" F-1== "conjugating" Y-1== "8" S-1!= "の"	set-ending@-1 "5으면서" set-target ""	言ったくせして 말했으면서
+cx:kuseni-clause:45	GRM-6	&&4 S+0== "に" S-1== "癖" F-1== "blank" F-2== "conjugating"	set-target ""	喜んじゃう癖に 기뻐해 버리면서
+cx:kuseni-clause:50	GRM-6	&&3 S+0== @word.kuseni S-1== "の" P-2== "1"	set-target@-1 " "	子供のくせに 아이 주제에
+cx:kuseni-clause:60	GRM-6	&&4 S+0== "癖" S+1== "に" S-1== "の" P-2== "1"	set-target@-1 " " set-target "" set-target@+1 "주제에"	子供の癖に 아이 주제에

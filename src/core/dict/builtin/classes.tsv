@@ -178,6 +178,7 @@
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
+//= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
@@ -2979,6 +2980,11 @@ word.kara-source-keep	解放
 word.kara-source-keep	避
 word.kara-source-keep	離
 word.kara-source-keep	身を
+word.kuseni	くせに
+word.kuseni	クセに
+word.kuseni	くせして
+word.kuseni	クセして
+word.kuseni	癖して
 
 word.meet-partner	と
 word.meet-partner	ここ
