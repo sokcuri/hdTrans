@@ -15,11 +15,13 @@ drop. Prints each input that drops text with the dropped characters. With --know
 gaps: they are not reported, but a listed input that no longer drops is, so the list only shrinks.
 With --sets the inputs are the measured sets of tools/measure.sh whose variables are set: the lines of
 HDTRANS_CORPUS, of HDTRANS_REF_SAMPLE/ja.txt, of the documents HDTRANS_TESTDATA/*/*.ja.txt after their
-first line and of the web examples web/examples.tsv lists (from web/examples/ or HDTRANS_EXAMPLES). It
-prints the inputs (lines) and the distinct inputs that drop text of each set; every line is translated on its
-own (-each), the documents too. With --budget (rows `set inputs drops`) a
-set whose input count matches its row fails when its count of dropping inputs differs from the row:
-more is a regression, fewer is a fix that lowers the row. --update writes the counts into the file.
+first line and, when HDTRANS_EXAMPLES is set, of the web examples web/examples.tsv lists (each from
+web/examples/, else from HDTRANS_EXAMPLES). It prints the inputs (lines) and the distinct inputs that drop
+text of each set; every line is translated on its own (-each), the documents too. With --budget (rows
+`set inputs drops`) a set fails when its count of dropping inputs differs from its row (more is a
+regression, fewer is a fix that lowers the row), when its input count differs from the row (the data
+changed: --update with that data writes the row again) or when it has no row. --update writes the counts
+of the sets into the file and keeps the other rows.
 Exit: 0 nothing new, 1 an input drops text, a known gap is fixed or a set is off its budget, 2 invalid
 arguments, no set or a failed CLI; with --sets and no set variable, 77.
 """
@@ -222,27 +224,49 @@ def check_sets(argv, options):
         print(f"drops: {cli} failed", file=sys.stderr)
         return 2
     counts = {name: (len(texts), len({texts[n - 1] for n in found})) for (name, texts), found in zip(sets, results)}
-    budget = budget_of(budget_path) if budget_path and os.path.exists(budget_path) else {}
-    bad = 0
+    if update:
+        for name, (inputs, count) in counts.items():
+            print(f"drops: {name} {inputs} inputs, {count} drop text")
+        write_budget(budget_path, counts)
+        return 0
+    lines, bad = compare(counts, budget_of(budget_path) if budget_path else None)
+    for line in lines:
+        print(line)
+    return 1 if bad else 0
+
+
+def compare(counts, budget):
+    """The report lines of counts ({set: (inputs, drops)}) against budget ({set: (inputs, drops)}, None
+    for no budget) and the number of sets off it."""
+    lines, bad = [], 0
     for name, (inputs, count) in counts.items():
         line = f"drops: {name} {inputs} inputs, {count} drop text"
-        if budget_path and not update:
-            row = budget.get(name)
-            if row is None or row[0] != inputs:
-                line += ", not in the budget" if row is None else f", not checked (the budget is for {row[0]} inputs)"
-            elif count != row[1]:
-                line += f", budget {row[1]}: " + ("more than the budget" if count > row[1] else "lower the budget")
-                bad += 1
-        print(line)
-    if update:
-        budget.update(counts)
-        head = []
-        if os.path.exists(budget_path):
-            with open(budget_path, encoding="utf-8") as f:
-                head = [l for l in f.read().split("\n") if l.startswith("#")]
-        with open(budget_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(head + ["set\tinputs\tdrops"] + [f"{n}\t{i}\t{d}" for n, (i, d) in budget.items()]) + "\n")
-    return 1 if bad else 0
+        row = budget.get(name) if budget is not None else None
+        if budget is None:
+            pass
+        elif row is None:
+            line += ", FAIL: no row in the budget (--update)"
+            bad += 1
+        elif row[0] != inputs:
+            line += f", FAIL: the budget is for {row[0]} inputs (the set changed; --update with this data)"
+            bad += 1
+        elif count != row[1]:
+            line += f", FAIL: budget {row[1]}, " + ("more than the budget" if count > row[1] else "lower the budget (--update)")
+            bad += 1
+        lines.append(line)
+    return lines, bad
+
+
+def write_budget(path, counts):
+    """Writes counts into the budget file at path, keeping its comment lines and the rows of other sets."""
+    budget = budget_of(path) if os.path.exists(path) else {}
+    budget.update(counts)
+    head = []
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            head = [l for l in f.read().split("\n") if l.startswith("#")]
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(head + ["set\tinputs\tdrops"] + [f"{n}\t{i}\t{d}" for n, (i, d) in budget.items()]) + "\n")
 
 
 def dropping(cli, dicts, texts, options):
@@ -311,6 +335,24 @@ def self_test():
         with open(budget, "w", encoding="utf-8") as f:
             f.write("# c\nset\tinputs\tdrops\ncorpus\t3\t1\n")
         assert budget_of(budget) == {"corpus": (3, 1)}, budget_of(budget)
+        rows = budget_of(budget)
+        assert compare({"corpus": (3, 1)}, rows) == (["drops: corpus 3 inputs, 1 drop text"], 0)
+        lines, bad = compare({"corpus": (3, 2)}, rows)
+        assert bad == 1 and "more than the budget" in lines[0], lines
+        lines, bad = compare({"corpus": (3, 0)}, rows)
+        assert bad == 1 and "lower the budget" in lines[0], lines
+        lines, bad = compare({"corpus": (4, 1)}, rows)
+        assert bad == 1 and "for 3 inputs" in lines[0], lines
+        lines, bad = compare({"docs": (2, 0)}, rows)
+        assert bad == 1 and "no row" in lines[0], lines
+        assert compare({"corpus": (4, 2)}, None) == (["drops: corpus 4 inputs, 2 drop text"], 0)
+        write_budget(budget, {"docs": (2, 0)})
+        write_budget(budget, {"corpus": (4, 0)})
+        with open(budget, encoding="utf-8") as f:
+            assert f.read() == "# c\nset\tinputs\tdrops\ncorpus\t4\t0\ndocs\t2\t0\n"
+        fresh = os.path.join(tmp, "fresh.tsv")
+        write_budget(fresh, {"sample": (5, 1)})
+        assert budget_of(fresh) == {"sample": (5, 1)}, budget_of(fresh)
         os.makedirs(os.path.join(tmp, "data", "a"))
         with open(os.path.join(tmp, "data", "a", "x.ja.txt"), "w", encoding="utf-8") as f:
             f.write("# header\n行く\n\n来る\n")

@@ -128,7 +128,9 @@ ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 �
 - `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 줄 수와 글이 빠지는 서로 다른 입력 수를 씁니다.
   문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
   ctest `sets.drops`는 그 수가 `tools/drops-budget.tsv`의 행과 같아야 통과합니다. 빠지는 입력을 줄인 변경은
-  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다른 세트는 다른 데이터라서 보지 않습니다.
+  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트도 실패합니다. 데이터가
+  바뀐 것이므로 그 데이터로 `--update`해 행을 다시 씁니다. CI의 `linux` 작업은 테스트 데이터를 받은 뒤 문서 세트만
+  이 검사로 봅니다(웹 예제는 테스트 데이터에 없습니다).
 
 ```sh
 tools/drops.py build/mac/hdtrans dicts --sets --budget tools/drops-budget.tsv [--update]
@@ -253,7 +255,9 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
 Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `--expected` 비교를 합니다. gate가
 matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
-로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다.
+로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다. 이어서 같은 데이터의
+문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 예산과 다르면 실패합니다. ctest
+`sets.drops`는 테스트 데이터를 받기 전에 돌아 CI에서는 건너뜁니다.
 
 ## 변경 판정 (e2e + 모델 판정)
 
