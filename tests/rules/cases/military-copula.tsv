@@ -1,0 +1,26 @@
+# 규칙: SPC-8
+rule	input	expected	kind	layer
+dict:military-copula	「安心させてあげたいであります」	「안심시켜 주고 싶습니다」	fix	lookup
+dict:military-copula	「でも……それ以上に、最後の最後に『ウザい』って思われたくないであります」	「하지만……그 이상으로, 마지막의 마지막에 『시끄럽다』라고 생각되고 싶지 않습니다」	fix	lookup
+dict:military-copula	「遠慮なく頼って欲しいであります！」	「거리낌 없이 의지했으면 좋습니다!」	fix	lookup
+dict:military-copula	「そうかもしれないでありますが……」	「그럴지도 모릅니다만……」	fix	lookup
+dict:military-copula	「もちろん死んで欲しくないでありますよ？」	「물론 죽기를 원하지 않습니다?」	fix	lookup
+dict:military-copula	「……ですが、バイクで逃げられてしまったであります」	「……그렇지만, 오토바이로 도망가버렸습니다」	fix	lookup
+dict:military-copula	「あれ！？　褒めたのに怒られたであります！？」	「어라!? 칭찬했는데 혼났습니다!?」	fix	lookup
+dict:military-copula	「おぉ、さすがトーカ先輩！　格好いいであります！」	「오오, 역시 토카 선배! 멋집니다!」	fix	lookup
+dict:military-copula	「あれ！？　自分、間違ったでありますか！？」	「어라!? 자신, 잘못했습니까!?」	fix	lookup
+dict:military-copula	「いつもポコポコ当ててるのに、らしくないでありますな」	「언제나 보글보글 맞혀, 답지 않군요」	fix	lookup
+dict:military-copula	「苛立ってるようにしか見えなかったであります」	「초조하고 있는 걸로밖에 안 보였습니다」	fix	lookup
+dict:military-copula	「自分は……たぶん何も言えないと思うであります」	「자신은……아마 아무것도 말할 수 없다고 생각합니다」	fix	lookup
+dict:military-copula	「……といっても、一人前にはまだほど遠いでありますが」	「……그렇다고 해도, 한 사람 몫에게는 아직 멉니다만」	fix	lookup
+dict:military-copula	「それでも……何か答えを見つけられる可能性を信じて、そばにいたいであります」	「그래도……뭔가 대답을 찾아내질 가능성을 믿고, 곁에 있고 싶습니다」	fix	lookup
+dict:military-copula	もう少し近づいて乗り込むであります！	좀 더 가까워져 탑니다!	fix	lookup
+dict:military-copula	自分、最近この艦隊の雰囲気に呑まれているであります…反省。	자신, 최근 이 함대의 분위기에 삼켜지고 있습니다…반성.	fix	lookup
+dict:military-copula	「ずいぶん曖昧な言い方でありますな」	「꽤 애매한 말투군요」	fix	lookup
+dict:military-copula	「おおー、レナ殿の完全勝利であります」	「오오오, 레나님의 완전 승리입니다」	keep	lookup
+dict:military-copula	「何がでありますか？」	「무엇이입니까?」	keep	lookup
+dict:military-copula	艦隊が帰投したのであります。	함대가 귀환한 것입니다.	keep	lookup
+dict:military-copula	「トーカ先輩と狙撃の訓練をしていたのであります」	「토카 선배와 저격 훈련을 하고 있던 것입니다」	keep	lookup
+dict:military-copula	「皆さんのカリキュラムも組んでありますよ」	「여러분의 커리큘럼도 짜 뒀어요」	keep	lookup
+dict:military-copula	　どうか騎士様の眠りが安らかでありますように。	 제발 기사님의 잠이 편하기를.	keep	lookup
+dict:military-copula	これは重要であります。	이것은 중요합니다.	keep	lookup
