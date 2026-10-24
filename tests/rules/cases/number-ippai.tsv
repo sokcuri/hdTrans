@@ -98,3 +98,4 @@ sense:いっぱい	目にいっぱい涙をためた。	눈에 가득 눈물을 
 sense:いっぱい	目にいっぱい涙を浮かべた。	눈에 가득 눈물을 머금었다.	fix	senses
 sense:いっぱい	皿にいっぱい盛った。	접시에 가득 담았다.	fix	senses
 sense:一杯	仕事の後の一杯はたまんないわー	일 뒤의 한 잔은 견딜 수 없어~	keep	senses
+cx:container-full:10	彼にいっぱい入れた。	!rule:cx:container-full:10	keep	rewrites

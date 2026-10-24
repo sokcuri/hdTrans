@@ -134,5 +134,5 @@ cx:souda-recall:20	LEX-17	&&4 S+0== "そう" U+0== "だ" Y+0== "6" S-1== @word.r
 cx:souda-recall:30	LEX-17	&&5 S+0== "そう" U+0== "だ" Y+0== "6" F+0== "after-pause" ||2 &&2 F-1== "exists" P-1!= "6" F+0== "speech-goes-on"	set-target "%Dn@" set-ending "1다"	……そうだ、ほら 맞다, 자
 //= promise-go-out	after baii-question	The 出る read 나오다 that the speaker promises with ね (3게: 先に出るね, 私が出るね) is going out, 나가다.
 cx:promise-go-out:10	SPC-5	&&3 S+0== "出" L+0== "나오다" Y+0== "3게"	take-target "나&A1@"	先に出るね 먼저 나갈게
-//= container-full	after souda-recall	An いっぱい or 一杯 read 많이 right after a に and right before a verb of verb.putting-in is how full the container before the に gets: 가득 (箱にいっぱい入れた 상자에 가득 넣었다). Without that に it stays 많이 (お砂糖、いっぱい入れていい？).
-cx:container-full:10	NUM-9	&&4 ||2 S+0== "いっぱい" S+0== "一杯" L+0== "많이" S-1== "に" B+1== @verb.putting-in	take-target "가득"	箱にいっぱい入れた 상자에 가득 넣었다
+//= container-full	after souda-recall	An いっぱい or 一杯 read 많이 right after a に and right before a verb of verb.putting-in is how full the container before the に gets: 가득 (箱にいっぱい入れた 상자에 가득 넣었다). Without that に, or after a person (彼にいっぱい入れた), it stays 많이 (お砂糖、いっぱい入れていい？).
+cx:container-full:10	NUM-9	&&5 ||2 S+0== "いっぱい" S+0== "一杯" L+0== "많이" S-1== "に" !1 F-2== "person" B+1== @verb.putting-in	take-target "가득"	箱にいっぱい入れた 상자에 가득 넣었다
