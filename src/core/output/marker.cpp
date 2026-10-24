@@ -882,6 +882,8 @@ bool Composer::TextGate(int i, std::string_view key) {
         }
         // A continuative with も before する keeps its ending (疑いもした 의심하기도 했다).
         if (it.endingSurface == "も") return false;
+        // An ending of intent makes the 하다 after it a verb of its own (言いかけた 말하려고 했다).
+        if (DirectText(it).ends_with("려고")) return false;
         // A connective said again (泣いて泣いて 울어 울어) is written each time.
         if (cls == '7') return WidthOf(DirectText(it)) <= 1 && (it.surface != next.surface || it.endingSurface != next.endingSurface);
         return true;
