@@ -277,7 +277,8 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
      --only "$RUN/dev.rejudge.keys.txt" --effort high
    ```
 
-   - `judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS.txt] [--effort low|high]`.
+   - `judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS.txt] [--effort low|high] [--grade]`
+     (`--grade`는 [오류율 감사](#오류율-감사-auditpy)).
      `--only`는 키를 한 줄에 하나씩 적은 파일입니다. 출력은 머리줄 없는 `key verdict model`이며
      `verdict`는 `improved`, `same`, `worse`입니다. X/Y 순서를 섞어 판정한 뒤 old/new 기준으로 돌립니다.
    - 출력에 같은 모델로 판정한 키가 있으면 건너뛰고 이어 씁니다. 입력이나 판정 설정을 바꾸면 새 출력 파일을 씁니다.
@@ -295,8 +296,44 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
    나빠지지 않을 때 남깁니다.
 6. held-out에도 3~5를 별도로 실행하고, 개발 세트와 held-out의 변경 줄, 개선, 동률, 악화 및 쌍방 악화 수를 **분리 보고**합니다.
    held-out을 보고 규칙을 맞췄으면 더는 held-out이 아니므로 새 평가 세트가 필요합니다.
-7. 줄 단위 회귀 문장과 참조 샘플은 `tools/measure.sh`가 같은 형식의 판정 입력(`corpus.pairs.tsv`, `sample.pairs.tsv`)을
-   쓰므로 3~5를 똑같이 합니다. 참조 샘플의 chrF는 기준보다 낮지 않아야 합니다.
+7. `tools/measure.sh`는 변수가 있는 세트를 한꺼번에 번역하고 같은 형식의 판정 입력을 쓰므로 3~5를 똑같이 합니다.
+   기준 run도 같은 변수로 잽니다. 참조 샘플의 chrF는 기준보다 낮지 않아야 합니다.
+
+   | 세트 | 변수 | 번역 | 판정 입력, 키 |
+   |---|---|---|---|
+   | 줄 단위 회귀 문장 | `HDTRANS_CORPUS` | 줄마다 따로(`--each`) | `corpus.pairs.tsv`, `corpus:줄` |
+   | 참조 샘플 | `HDTRANS_REF_SAMPLE` | 줄마다 따로 | `sample.pairs.tsv`, `sample:줄` |
+   | 테스트 데이터 문서 | `HDTRANS_TESTDATA` | `e2e.sh`처럼 `#` 머리줄을 빼고 한 문서로 | `docs.pairs.tsv`, `docs:폴더/이름:줄` |
+   | 웹 예제 | `HDTRANS_EXAMPLES` | `web/examples.tsv`의 파일을 `web/examples/`나 이 폴더에서 찾아 한 문서로 | `examples.pairs.tsv`, `examples:파일:줄` |
+
+   줄 번호는 입력 파일에서 셉니다. 네 세트는 동시에 돌고, 문서는 `HDTRANS_JOBS`(기본 CPU 수)개씩 번역합니다.
+   `docs:` 키의 폴더로 개발 세트와 held-out을 나눠 셉니다.
+
+## 오류율 감사 (audit.py)
+
+변경 판정은 바뀐 줄만 봅니다. 감사는 릴리스마다 같은 줄을 뽑아 현재 출력에 등급을 매겨, 릴리스끼리 비교할 수 있는
+오류율을 냅니다. 결과는 `$HDTRANS_WORK/audit/<버전>/`에 두고 커밋하지 않습니다.
+
+```sh
+V=0.4.8                                    # 릴리스 버전, develop이면 develop-<짧은 해시>
+tools/measure.sh "audit-$V"                # 네 세트의 현재 출력
+A=$HDTRANS_WORK/audit/$V; mkdir -p "$A"
+python3 tools/audit.py draw "$HDTRANS_WORK/audit-$V" "$A/lines.tsv"
+python3 tools/judge.py claude-sonnet-5-5 "$A/grades.tsv" "$A/lines.tsv" --grade
+python3 tools/audit.py rate "$A/lines.tsv" "$A/grades.tsv" > "$A/rate.tsv"
+```
+
+- `draw RUN OUT.tsv [--seed S] [--per-set N]`: measure.sh run에서 변수가 있는 세트마다 N줄(기본 75, 네 세트면
+  300줄)을 뽑습니다. 가나나 한자가 있는 줄만, 같은 일본어는 세트에 한 번만 셉니다. 씨앗(기본 1), 세트, 일본어의 해시로
+  고르므로 같은 씨앗은 어느 run에서나 같은 줄을 뽑고, 세트에 줄이 늘어도 뽑힌 줄은 거의 그대로입니다. 출력은
+  `judge.py` 입력 형식(`key ja 출력`, 넷째 열은 비움)이고 키는 measure.sh와 같습니다.
+- 등급은 `correct`(그대로 받아들일 번역), `minor`(뜻은 맞지만 조사, 어미, 띄어쓰기, 낱말, 말투가 눈에 띄게 어긋남),
+  `wrong`(뜻이 빠지거나 바뀌거나 더해짐, 일본어가 남음, 깨진 한국어)입니다. 줄은 문맥 없이 보며, 어떤 문맥에서 맞을 수
+  있는 읽기는 오류로 치지 않습니다. `judge.py --grade`는 둘째 열과 셋째 열만 보고 `key 등급 model`을 씁니다. 사람이나
+  에이전트의 등급도 같은 열(`key grade judge`, 넷째 열에 메모)로 씁니다.
+- `rate LINES.tsv GRADES.tsv`: 세트마다 줄 수, 등급별 개수, `wrong %`, `correct`가 아닌 비율을 냅니다. 한 키의 마지막
+  행이 쓰이고, 등급이 없는 줄이 있으면 1로 끝납니다.
+- 씨앗, 세트 크기, 등급을 매긴 판정이 같은 감사끼리만 비교합니다.
 
 ### 나쁜 구간을 고른 층 찾기 (attribute.py)
 
@@ -363,12 +400,14 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_REQUIRE_ALL` | 단위 테스트 | `1`이면 건너뛴 테스트를 실패로 |
 | `HDTRANS_TEST_EXCLUDE` | 단위 테스트 | 건너뛸 테스트 이름 (쉼표 구분) |
 | `HDTRANS_DATA`, `HDTRANS_INPUTS`, `HDTRANS_RUNS`, `HDTRANS_BIN` | `snapshot.sh`, `compare.sh` | 입력, 기록 위치와 CLI |
-| `HDTRANS_TESTDATA` | `e2e.sh`, `fetch-syosetu.sh`, ctest `testdata` | 테스트 데이터 폴더 |
+| `HDTRANS_TESTDATA` | `e2e.sh`, `fetch-syosetu.sh`, `measure.sh`, `audit.py`, ctest `testdata` | 테스트 데이터 폴더 |
+| `HDTRANS_EXAMPLES` | `measure.sh`, `audit.py` | `web/examples/`에 없는 웹 예제 텍스트 폴더 (웹 빌드의 `HDTRANS_WEB_EXAMPLES`와 같은 폴더, 비공개) |
+| `HDTRANS_JOBS` | `measure.sh` | 한꺼번에 번역할 문서 수 (기본 CPU 수) |
 | `HDTRANS_DICTS_A` | `e2e.sh` | A 쪽 사전 |
 | `HDTRANS_DRIVER_DUMP` | CLI | `-stages`와 같음 |
 | `HDTRANS_CACHE_DIR`, `HDTRANS_SNAPSHOT`, `HDTRANS_VERIFY_DICTS` | 엔진 | 사전 캐시 ([dictionary-files.md](dictionary-files.md#캐시)) |
 | `HDTRANS_WORK` | `gate.sh`, `measure.sh` | 작업 출력 폴더 (기본 `build/work`) |
-| `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
+| `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `audit.py`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
 | `HDTRANS_PASS_SKIP`, `HDTRANS_PASS_SHUFFLE` | `HDTRANS_PASS_EXPERIMENTS` 빌드의 엔진 | 뺄 문장 패스, 패스 순서를 섞는 씨앗 ([패스 실험 빌드](#패스-실험-빌드)) |

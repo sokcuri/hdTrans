@@ -18,6 +18,12 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
 - If the tree has `mac-asan` or `linux-asan` presets, the sanitizer ctest passes too.
 - Translation changes were measured and every changed line was judged (fix-translation steps
   11–12). Keep the numbers for the PR body.
+- For a develop → main promotion, run the error-rate audit on the develop head (docs/testing.md
+  "오류율 감사"): `tools/measure.sh` on all four sets, `tools/audit.py draw` with the default seed and
+  size, grade every line, `tools/audit.py rate`. Lines, grades and rates stay in
+  `$HDTRANS_WORK/audit/<version>/`.
+  Report wrong % and not-correct % per set next to the sample chrF, with the previous release's
+  numbers from its audit folder.
 - `tools/hygiene.py <remote>/develop` has no real hit. Read the PR title and body for the same things.
 
 ## Merging any PR

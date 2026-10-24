@@ -178,11 +178,13 @@ if(NOT EMSCRIPTEN)
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases)
+                    construction-cases audit)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
+            add_test(NAME tools.measure COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/measure.sh"
+                "$<TARGET_FILE:hdtrans_cli>")
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)

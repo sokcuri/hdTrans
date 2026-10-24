@@ -121,11 +121,14 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
     - For examples, use `tools/examples.sh CLI dicts --accept`.
 11. **Measure.** Do not rebuild during a run (measure.sh copies the CLI it uses into the run).
     Runs go to `$HDTRANS_WORK/<name>`, and a `/` in the name becomes `-`.
-    - `tools/measure.sh -b base-<short sha> <branch>` writes `corpus.pairs.tsv` and
-      `sample.pairs.tsv` and prints sample chrF before → after.
-    - For chapters in `$HDTRANS_TESTDATA`, `tools/e2e-pairs.py` writes the same pairs (docs/testing.md).
-      Keep the chapters you looked at while fixing (dev set) apart from the ones you did not
-      (held-out set), and report them separately.
+    - `tools/measure.sh -b base-<short sha> <branch>` translates every set whose variable is set
+      (`HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE`, `HDTRANS_TESTDATA`, `HDTRANS_EXAMPLES`), writes
+      `corpus.pairs.tsv`, `sample.pairs.tsv`, `docs.pairs.tsv` and `examples.pairs.tsv`, and prints
+      the changed lines per set and sample chrF before → after. Measure the baseline with the same
+      variables, or its run lacks the sets.
+    - The folder in a `docs:<folder>/<name>:<line>` key tells the chapters you looked at while fixing
+      (dev set) from the ones you did not (held-out set); report them separately. Other chapter
+      folders go through `tools/e2e-pairs.py` (docs/testing.md).
 12. **Judge every changed line.** Do not sample.
     - The first judge reads every pair; the second re-reads the lines the first called worse or same.
       With API access, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS] [--effort high]` does
