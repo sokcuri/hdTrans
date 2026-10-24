@@ -17,6 +17,9 @@ the outputs before and after when behaviour is involved. Report findings by sect
   on the other side of its condition.
 - Two mechanisms that decide the same thing, or duplicate case files across branches: keep one.
 - Cases assert what the change decides. They must not pin unrelated wrong output.
+- Cases cover the class (fix-translation step 9): rows from real lines for each shape the change
+  corrects and for its near misses. A finding that sends a line back asks for that line, and the
+  others like it, as cases with the correct output.
 - Rule lint: `hdrulec lint build/rules.txt -dicts dicts` adds no new warnings for the changed rules; ctest
   `rules.lint` holds the count per flag to `tools/lint-budget.tsv`, and a lowered count lowers that line.
 

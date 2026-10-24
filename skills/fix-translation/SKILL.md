@@ -90,7 +90,12 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
    first. Do not cycle through apply, revert and retry.
 8. **Rules.** After editing a `ctx` column or `src/core/rules/globals.txt`, run
    `tools/regen-rules.sh`. Never hand-edit generated files (`*_gen.*`, `program.hash`).
-9. **Tests.** Every fix gets at least one `fix` and one `keep` row.
+9. **Tests.** Every fix gets `fix` and `keep` rows for its whole class, not one example.
+   - **Amount.** Where the data has them, 15–30 rows per class: `fix` rows for the shapes the change
+     corrects and `keep` rows for near misses on the other side of its condition. Mine them from the
+     corpus, the sample and the game and novel texts of the test data.
+   - **Lines that went wrong.** Every line a judge called worse in any round, and every line a review
+     sent back, becomes a row with its correct output.
    - **Where.** Default speech goes in `tests/rules/cases/<content-name>.tsv`. Lines that depend on
      the speech level also go in `tests/rules/speech-soft/` or `tests/rules/speech-strict/`.
    - **First line.** `# 규칙: <spec ids>`. Columns are `rule input expected kind layer` (header in
@@ -105,7 +110,8 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
        `rules.constructions`).
      - `kind`: `fix`, `keep` or `current`.
      - `layer`: the docs/pipeline-layers.md name of the layer that decides the line.
-   - **Inputs.** Short excerpts of real lines or the relevant part of a line. Use neutral names.
+   - **Inputs.** Short excerpts of real lines or the relevant part of a line, not invented sentences.
+     Name no source or work, and copy no whole passages. Use neutral names.
    - **Coverage.** A widened rule needs keep rows on the other side of its condition. Engine
      changes also get a unit test next to the stage (`tests/unit`, `hdtest.h`).
    - **Spec.** A change that contradicts a spec rule updates the rule and its cases in the same
