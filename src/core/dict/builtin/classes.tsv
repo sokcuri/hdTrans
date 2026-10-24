@@ -87,6 +87,7 @@
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
+//= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
@@ -216,6 +217,7 @@
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
+//= verb.ni-partner	Verbs whose own argument is a person in に, the one met, beaten, followed or leaned on (勝つ, 会う, 頼る, 逆らう): their potential does not make that person the one who can (私に勝てる 나를 이길 수 있다, not 내가).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
@@ -3832,6 +3834,51 @@ pronoun.rough-second-person	あんた
 pronoun.rough-second-person	アンタ
 pronoun.rough-second-person	あんたら
 pronoun.rough-second-person	アンタら
+verb.ni-partner	勝つ
+verb.ni-partner	打ち勝つ
+verb.ni-partner	負ける
+verb.ni-partner	敵う
+verb.ni-partner	かなう
+verb.ni-partner	会う
+verb.ni-partner	逢う
+verb.ni-partner	出会う
+verb.ni-partner	出逢う
+verb.ni-partner	追いつく
+verb.ni-partner	追い付く
+verb.ni-partner	追い越す
+verb.ni-partner	似る
+verb.ni-partner	仕える
+verb.ni-partner	頼る
+verb.ni-partner	たよる
+verb.ni-partner	縋る
+verb.ni-partner	すがる
+verb.ni-partner	甘える
+verb.ni-partner	あまえる
+verb.ni-partner	逆らう
+verb.ni-partner	さからう
+verb.ni-partner	刃向かう
+verb.ni-partner	歯向かう
+verb.ni-partner	抗う
+verb.ni-partner	立ち向かう
+verb.ni-partner	挑む
+verb.ni-partner	謝る
+verb.ni-partner	あやまる
+verb.ni-partner	従う
+verb.ni-partner	したがう
+verb.ni-partner	近づく
+verb.ni-partner	近付く
+verb.ni-partner	寄り添う
+verb.ni-partner	懐く
+verb.ni-partner	なつく
+verb.ni-partner	惚れる
+verb.ni-partner	憧れる
+verb.ni-partner	尽くす
+verb.ni-partner	掴まる
+verb.ni-partner	つかまる
+verb.ni-partner	溶け込む
+verb.ni-partner	誇る
+verb.ni-partner	話しかける
+verb.ni-partner	話し掛ける
 word.belittling	ごとき
 word.belittling	如き
 word.belittling	ふぜい
@@ -3856,6 +3903,12 @@ adverb.negative-polarity	少しも
 adverb.negative-polarity	ちっとも
 adverb.negative-polarity	微塵も
 adverb.negative-polarity	毛頭
+ko-verb.person-object	이기다
+ko-verb.person-object	만나다
+ko-verb.person-object	따라잡다
+ko-verb.person-object	앞지르다
+ko-verb.person-object	닮다
+ko-verb.person-object	섬기다
 mark.lengthening	ぁ
 mark.lengthening	あ
 mark.lengthening	ー

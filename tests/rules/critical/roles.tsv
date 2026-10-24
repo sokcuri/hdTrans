@@ -1,7 +1,37 @@
 # 규칙: MNG-4, GRM-9
 rule	input	expected	kind	layer
+cx:ni-partner:20	お前ごときが私に勝てると思うな	has:나를 이길	fix	rewrites
+cx:ni-partner:20	私に勝てる	has:나를 이길 수 있다	fix	rewrites
+cx:ni-partner:20	もし私に勝てたら考えてあげるわ	has:나를 이길	fix	rewrites
+cx:ni-partner:20	どうやったら姉に勝てるんだ？	has:언니를 이길	fix	rewrites
+cx:ni-partner:20	おまえ一人で私に勝てると本気で思っているのか？	has:나를 이길	fix	rewrites
+cx:ni-partner:20	お前に勝てるわけがない	has:너를 이길	fix	rewrites
+cx:ni-partner:20	俺に勝てると思っているのか	has:나를 이길	fix	rewrites
+cx:ni-partner:20	彼に勝った	has:그를 이겼다	fix	rewrites
+cx:ni-partner:20	先輩に追いつける	has:선배를 따라	keep	local
+cx:ni-partner:20	彼にかなう人はいない。	has:그에게 필적	keep	local
+cx:ni-partner:20	敵に負けた	has:적에게 졌다	keep	rewrites
+cx:ni-partner:10	彼女に頼れる	lacks:그녀가	fix	rewrites
+cx:ni-partner:10	親に逆らえる	lacks:부모가	fix	rewrites
+cx:ni-partner:10	彼に謝れる	lacks:그가	fix	rewrites
+cx:ni-partner:10	母に甘えられる	lacks:어머니가	fix	rewrites
+cx:ni-partner:10	「俺に掴まれるか……？」	lacks:내가	fix	rewrites
+cx:ni-partner:10	私が人に誇れるものなど、家柄くらいでしたわ	has:사람에게 자랑	fix	rewrites
+cx:ni-partner:10	うまくみんなに溶け込めるかどうか不安だけど	lacks:모두가	fix	rewrites
+cx:ni-partner:10	「俺に手伝えることある？」	has:내가 도울	keep	rewrites
+cx:ni-partner:10	これは、僕に使えるか？	has:내가 쓸	keep	rewrites
+cx:ni-partner:10	私にできることなら	has:내가 할 수	keep	local
 voice:passive-agent	母に叱られた。	has:어머니에게 야단맞았다	keep	rewrites
 voice:passive-agent	犬に噛まれた。	has:개에게 물렸다	keep	rewrites
 cx:voice-agent:10	それを姉に見透かされた。	has:언니가 간파했다	keep	rewrites
 cx:benefactive-provider:10	先生に説明していただいた。	has:선생님이 설명해 주셨다	keep	rewrites
 voice:causative	母が子供に野菜を食べさせた。	has:아이에게 야채를 먹였다	keep	rewrites
+cx:ni-partner:30	小柄なわたしの身体が姉に勝てるはずがない。	has:내 몸이 언니를 이길	fix	rewrites
+cx:ni-partner:30	この剣が奴に勝てるか	has:검이 놈을 이길	fix	rewrites
+cx:ni-partner:30	日本語が話せる	has:일본어를	keep	rewrites
+cx:ni-partner:30	英語が話せる人に会える	has:영어를	keep	rewrites
+cx:ni-partner:10	君に話せてよかった	has:너에게	keep	rewrites
+cx:ni-partner:10	先輩に聞ける	has:선배에게	keep	rewrites
+cx:ni-partner:10	彼女に渡せる	has:그녀에게	keep	rewrites
+cx:ni-partner:10	親に送れる	has:부모에게	keep	rewrites
+cx:ni-partner:10	お前に話せることはない	has:너에게	keep	rewrites
