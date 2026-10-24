@@ -151,7 +151,7 @@ dict:jisjk:361956	花がにおう。	꽃이 향기난다.	fix	local
 dict:jisjk:341029	船がへった。	!rule:dict:jisjk:341029	keep	local
 dict:jisjk:341029	梨がへった。	!rule:dict:jisjk:341029	keep	local
 dict:jisjk:341029	おなかがへった。	배가 고파졌다.	fix	local
-dict:jisjk:354893	百円を割った。	백엔미만으로 하락했다.	fix	local
+dict:jisjk:354893	百円を割った。	백 엔미만으로 하락했다.	fix	local
 dict:jisjk:354893	ガラスを割った。	유리를 깨었다.	fix	local
 dict:jisjk:257502	大学を受けました。	대학 시험을 치렀습니다.	fix	local
 dict:jisjk:257502	大学で授業を受けました。	대학에서 수업을 받았습니다.	fix	local

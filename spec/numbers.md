@@ -4,6 +4,8 @@
 
 숫자나 라틴 문자 낱말 바로 뒤에 그것을 세거나 재는 조수사, 단위, 접미사가 오면 붙여 쓴다. 등급 글자는 뒤의 등급
 낱말에 붙여 쓴다.
+한자 수를 한글 수(백, 천, 만)로 쓴 말은 숫자가 아니므로 뒤의 조수사, 단위와 띄어 쓴다(百回 백 번, 千人 천 명).
+숫자 뒤에 이어 쓴 万, 億은 그 숫자와 한 수라서 조수사를 붙인다(三万円 3만엔).
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -15,9 +17,12 @@
 | 1000Gを貸して | 1000G를 빌려 줘 | 유지 |
 | コミックス第9巻 | 코믹스 제9권 | 유지 |
 | Aランクの冒険者。 | A랭크의 모험가. | 유지 |
+| 千人規模の | 천 명 규모의 | 고침 |
+| 荒れるより千倍マシだわ | 거칠어지는 것보다 천 배 낫구나 | 고침 |
+| 値段は三万円だ。 | 가격은 3만엔이다. | 유지 |
 
 사례: `tests/rules/cases/number-noun-spacing.tsv`, `tests/rules/cases/ordinal-number-spacing.tsv`,
-`tests/rules/cases/rules-numbers.tsv`
+`tests/rules/cases/rules-numbers.tsv`, `tests/rules/cases/compose-hangul-number-space.tsv`
 
 ## NUM-2 앞말에 딸린 번호와 라틴 문자 이름은 뒤 명사와 띄운다
 
