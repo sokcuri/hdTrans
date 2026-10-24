@@ -1,0 +1,80 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+constraint:cued-name	駆逐艦夕立、出撃よ！	구축함 유다치, 출격이야!	fix	lookup
+constraint:cued-name	はいはーい！ 白露型駆逐艦「村雨」だよ。	has:「무라사메」	fix	lookup
+constraint:cued-name	夕雲型駆逐艦、六番艦の高波です。	유구모급 구축함, 6번함의 타카나미입니다.	fix	lookup
+constraint:cued-name	航空戦艦日向、推参！	has:항공전함 휴가	fix	lookup
+constraint:cued-name	マルキューマルマル。村雨姉さんは元気にやってるかな。	has:무라사메 언니	fix	lookup
+constraint:cued-name	第十五駆逐隊「早潮改二」「親潮改二」「黒潮改二」	has:「오야시오 개2」	fix	lookup
+constraint:cued-name	浦波「撃ち方、はーじめ！」	has:우라나미 「	fix	lookup
+constraint:cued-name	朧: 七駆の行くところ、作戦成功間違いなし…たぶん！	has:오보로:	fix	lookup
+constraint:cued-name	如月、出撃します。	키사라기, 출격합니다.	fix	lookup
+constraint:cued-name	若葉、出撃する。	와카바, 출격한다.	fix	lookup
+constraint:cued-name	狭霧、参ります！	사기리, 갑니다!	fix	lookup
+constraint:cued-name	　聖女アヤメ。	 성녀 아야메.	fix	lookup
+constraint:cued-name	睦月です。はりきって、まいりましょー！	has:무츠키입니다.	fix	lookup
+constraint:cued-name	満潮よ。私、なんでこんな部隊に配属されたのかしら。	미치시오야. 나, 왜 이런 부대에 배속된 걸까.	fix	lookup
+constraint:cued-name	だから、モグラじゃないですよ！まるゆです！	그러니까, 두더지가 아니에요! 마루유입니다!	fix	lookup
+constraint:cued-name	「大丈夫か、エナ」	「괜찮은가, 에나」	fix	lookup
+constraint:cued-name	「霞」「霰」「陽炎」「不知火」4隻による第十八駆逐隊を編成せよ！	has:「카게로우」	fix	lookup
+constraint:cued-name	お疲れ様です。給糧艦伊良湖です。	수고하셨습니다. 급양함 이라코입니다.	fix	lookup
+constraint:cued-name	水上機母艦、秋津洲よ！	수상기모함, 아키츠시마야!	fix	lookup
+constraint:cued-name	「おはよう、千里」	「좋은 아침, 치사토」	fix	lookup
+constraint:cued-name	扶桑型戦艦山城。出撃します！	후소급 전함 야마시로. 출격합니다!	fix	lookup
+constraint:cued-name	大井、出ます！みんな、遅れないで！	오오이, 나옵니다! 모두, 늦지 마!	fix	lookup
+constraint:cued-name	駆逐艦時雨、出撃。時雨が降ってきた。	구축함 시구레, 출격. 늦가을 비가 내리기 시작했다.	keep	lookup
+constraint:cued-name	時雨が降ってきた。	늦가을 비가 내리기 시작했다.	keep	lookup
+constraint:cued-name	雷が落ちた。	벼락이 떨어졌다.	keep	lookup
+constraint:cued-name	陽炎が立つ。	아지랑이가 선다.	keep	lookup
+constraint:cued-name	潮が満ちる。	조수가 가득 찬다.	keep	lookup
+constraint:cued-name	いいこと？暁の水平線に勝利を刻みなさいっ！	has:새벽의 수평선	keep	lookup
+constraint:cued-name	雷が走ったかのように脊髄が跳ね、	has:번개가	keep	lookup
+constraint:cued-name	明日、行こう。	내일, 가자.	keep	lookup
+constraint:cued-name	　正直、俺でも書けそうなものばかりだった。	has:솔직히,	keep	lookup
+constraint:cued-name	刹那、さっと俺から離れる。	has:찰나,	keep	lookup
+constraint:cued-name	「夢だよ、夢」	「꿈이야, 꿈」	keep	lookup
+constraint:cued-name	「春は？」「霞です」	「봄은?」「안개입니다」	keep	lookup
+constraint:cued-name	海防艦計3隻以上を含む艦隊	lacks:카즈	keep	lookup
+constraint:cued-name	32駆改二及び「風雲改二」	lacks:카케루	keep	lookup
+constraint:cued-name	「どこ行くんだ？」	「어디 가는 거야?」	keep	lookup
+constraint:cued-name	外したら許さんぞ！	has:용서하지 않아	keep	lookup
+constraint:cued-name	ねぇマスター、ほんとに撃っちゃっていいの？	lacks:게키	keep	lookup
+constraint:cued-name	「さすが、お姫様を守るナイトだね」	「역시, 공주님을 지키는 나이트구나」	keep	lookup
+constraint:cued-name	蛟が神と名乗って生贄を食らってた	has:신이라고	keep	lookup
+constraint:cued-name	鍛冶屋「剣の手入れなら任せとけ。」	has:대장간 「	keep	lookup
+constraint:cued-name	チェック、ワン、ツー…よーし。	has:원, 투	keep	lookup
+constraint:cued-name	げ、マジ！？	게, 진짜!?	keep	lookup
+constraint:cued-name	…富山、名古屋はまぁいいとして……千葉？！	has:도야마	keep	lookup
+constraint:cued-name	抜錨！鳥海、出撃します！	has:초카이	keep	lookup
+constraint:cued-name	「蛇ちゃんと蟹ちゃんをふたつずつですねー」	lacks:카니	keep	lookup
+constraint:cued-name	「アラタ、うちの隊員を救助してくれた事」	has:우리 대원	keep	lookup
+constraint:cued-name	「それもありますけど、漆葉さんの場合」	lacks:요우	keep	lookup
+constraint:cued-name	妙高、参ります。	묘오코, 갑니다.	keep	lookup
+constraint:chan-after-word	夕立ちゃん、遅いよ	has:유다치짱	fix	lookup
+constraint:chan-after-word	「鈴木さんといちゃいちゃしていた」	has:스즈키 씨와	keep	lookup
+constraint:cued-name	「宇宙、そこは最後のフロンティア」	has:「우주,	keep	lookup
+constraint:cued-name	夏だよ、司令官。スイカ、食べる？	has:수박,	keep	lookup
+constraint:cued-name	司令官……あの……義理よ、義理。	lacks:요시사토	keep	lookup
+constraint:cued-name	いつか……私も出撃よ……あっ！ 夢です！ 夢！	lacks:유메	keep	lookup
+constraint:cued-name	それに私は、ほら。元気よ。	lacks:겐키	keep	lookup
+constraint:cued-name	大切なハチミツ、たっぷり入れてあるの。元気、出るでしょ？	lacks:겐키	keep	lookup
+constraint:cued-name	いえ、親潮がご用意いたします。和洋、どちらがよろしいですか？	lacks:가즈히로	keep	lookup
+constraint:cued-name	ツー、ユー(to you)…て言うの。	lacks:츠,	keep	lookup
+constraint:cued-name	何なのよ！…マジ、こっち来んな！	lacks:마지	keep	lookup
+constraint:cued-name	なんか奥の方で揉めてるけど、スルー。	lacks:스루	keep	lookup
+constraint:cued-name	何でしょうか、安心する…季節です。	has:계절입니다	keep	lookup
+constraint:cued-name	こら！「鬼なのです」じゃねえよ！	lacks:오니	keep	lookup
+constraint:cued-name	箒よーし！ ちりとりよーし！	lacks:호우키	keep	lookup
+constraint:cued-name	敵の潜水艦等に襲われないように注意しないと。	lacks:히토시	keep	lookup
+constraint:cued-name	新「三川艦隊」を編成せよ！	lacks:아라타	keep	lookup
+constraint:cued-name	続：装備の改修強化	lacks:츠즈키	keep	lookup
+constraint:cued-name	光「ひかり」 散「ち」らす	lacks:미츠루	keep	lookup
+constraint:cued-name	松、了解！突撃する！	lacks:마츠	keep	lookup
+constraint:cued-name	提督、明日も頑張ろう！ いつか姉貴も……一緒に、なっ？	lacks:이츠카	keep	lookup
+constraint:cued-name	択捉型海防艦の三番艦、佐渡だぜ。	has:사도	keep	lookup
+constraint:cued-name	第十一戦隊、旗艦比叡！ 霧島、行くよ！	has:기리시마	keep	lookup
+constraint:cued-name	同二番艦「加賀」の第一航空戦隊	has:「가가」	keep	lookup
+constraint:cued-name	「大丈夫か、玉藻」	「괜찮은가, 타마모」	fix	lookup
+constraint:cued-name	「暁」「響」「雷」「電」4隻による第六駆逐隊を編成せよ！	has:「새벽」	keep	lookup
+dict:gram:kara:person	「曙」「潮」「漣」「朧」から成る「第七駆逐隊」	has:로부터 완성되는	fix	local
+dict:gram:kara:person	田中さんからなら受け取る。	has:에게서라면	keep	local

@@ -31,6 +31,10 @@ constexpr ConstraintRule kRules[] = {
     {"honorific-kanji-name-place", ConstraintWord::Kanji, "", ConstraintContext::Honorific,
      ConstraintReject::NonNameBesidePlace,
      "한자 단어 + 경칭: 인명 뜻 말고는 지명 뜻뿐이면 인명 뜻만 (太郎殿 타로전 → 타로님)", {}},
+    {"cued-name", ConstraintWord::Cued, "", ConstraintContext::NotCommonSense, ConstraintReject::NonCuedName,
+     "줄이나 문서의 단서(함종 뒤, 자매 호칭과 개조와 급 앞, 화자 표시, 자기소개)가 이름이라 한 단어는 인명 뜻만, 날씨나 하늘이나 바다 뜻을 살리는 서술어 앞은 제외 (駆逐艦村雨 구축함 소나기 → 무라사메, 時雨が降る는 그대로)", {}},
+    {"chan-after-word", ConstraintWord::WithKanji, "", ConstraintContext::BeforeChan, ConstraintReject::Word,
+     "ゃん 바로 앞에서 ち로 끝나는 한자 단어는 쓰지 않음: 그 ち는 ちゃん의 첫 글자 (夕立ちゃん 소나기 → 夕立 + ちゃん)", {}},
     {"kimi-after-katakana", ConstraintWord::Source, "君", ConstraintContext::AfterKatakana, ConstraintReject::Pronoun,
      "가타카나 바로 뒤의 君은 대명사(너·네)가 아니라 접미사 군 (バカ君が 바보네가 → 바보군이)", {}},
     {"kimito-after-mask", ConstraintWord::Source, "君と", ConstraintContext::AfterMask, ConstraintReject::OtherTargets,
@@ -138,6 +142,16 @@ bool AllOfClass(std::string_view s, int cls) {
     return true;
 }
 
+bool HasKanji(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const std::string_view c = FirstChar(t);
+        if (c.empty()) return false;
+        if (NameClassOf(c) == kClassKanji) return true;
+        t.remove_prefix(c.size());
+    }
+    return false;
+}
+
 bool HangulText(std::string_view s) {
     if (s.empty()) return false;
     while (!s.empty()) {
@@ -198,8 +212,12 @@ bool PersonNoun(const dict::Codes& c) {
 }
 
 // Whether the word source, after the character before, is the kind of word rule is for.
-bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_view before) {
+bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_view before, const dict::KeySet* cued) {
     switch (rule.word) {
+    case ConstraintWord::Cued:
+        return cued != nullptr && cued->find(source) != cued->end();
+    case ConstraintWord::WithKanji:
+        return text::RuneCount(source) >= 2 && HasKanji(source);
     case ConstraintWord::Katakana:
         return text::RuneCount(source) >= 2 && AllOfClass(source, kClassKatakana) &&
                NameClassOf(before) != kClassKatakana;
@@ -312,6 +330,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
         return DakeEnds(after);
+    case ConstraintContext::NotCommonSense:
+        return !StartsWithAny(after, dict::ClassMembers("name.common-after")) && !HonorificAt(after, false);
+    case ConstraintContext::BeforeChan:
+        return source.ends_with("ち") && after.starts_with("ゃん") && !after.starts_with("ゃんと");
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
     case ConstraintContext::AfterPredicate:
@@ -446,6 +468,125 @@ std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, c
     return blocked ? same.end() : name;
 }
 
+
+// Whether a predicate as long as a word goes on inflecting after it: hiragana follows that
+// starts no particle (but さ, which also inflects: 許さん), copula or self-introduction, and
+// for an adjectival noun no honorific (朧な, 許さん; but 朧です, 朧は, 朧ちゃん).
+bool InflectsAfter(std::string_view after, bool adjectival) {
+    if (NameClassOf(FirstChar(after)) != kClassHiragana) return false;
+    if (adjectival && StartsWithAny(after, dict::ClassMembers("honorific.name"))) return false;
+    if (StartsWithAny(after, dict::ClassMembers("name.introduction-copula"))) return false;
+    for (const std::string_view p : dict::ClassMembers("particle.after-name")) {
+        if (p != "さ" && after.starts_with(p)) return false;
+    }
+    return !after.starts_with("だ") && !after.starts_with("って");
+}
+
+// Whether a and b spell one name but for the initial of the first syllable (기리시마 키리시마,
+// 가가 카가), the convention of a word-initial kana; not 오이 오오이 or 이라고 이라코.
+bool SpellingVariant(std::string_view a, std::string_view b) {
+    if (a == b) return true;
+    if (a.empty() || b.empty() || !text::SameSound(a, b)) return false;
+    return a.substr(text::DecodeRune(a).size) == b.substr(text::DecodeRune(b).size);
+}
+
+struct CuedReading {
+    const dict::Codes* codes = nullptr;
+    std::string_view target;
+    int id = 0;
+};
+
+// The name a cue gives the word source (ConstraintReject::NonCuedName); none when a person
+// noun, a user entry or a verb or adjective that inflects past the word reads it.
+CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Candidate>& list,
+                     const std::vector<std::size_t>& same, std::string_view source, std::string_view after,
+                     std::vector<dict::Record>& records) {
+    const bool blocked =
+        std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+            return c.codes != nullptr && AnyOf("478", c.codes->part.ClassDigit()) &&
+                   (c.source.size() > source.size() ||
+                    (c.source.size() == source.size() && InflectsAfter(after, c.codes->part.ClassDigit() == '8')));
+        }) ||
+        std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+            return PersonNoun(*list[k].codes) || (list[k].user != nullptr && !list[k].user->nameLayer);
+        });
+    if (blocked) return {};
+    const bool kana = AllOfClass(source, kClassKatakana) || AllOfClass(source, kClassHiragana);
+    const std::string reading = kana ? text::FromKana(source, text::Preset::Fan) : std::string();
+    records = snapshot.NameRecords(source);
+    // A kana word the dictionary already reads as a person, as one of the name's own spellings
+    // or by its sound (エル 엘, フラン 프랑), is read that way; the cue replaces only words of
+    // another meaning (アヤメ 붓꽃).
+    if (kana && (same.empty() || std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+            return (PersonSense(*list[k].codes) && list[k].user == nullptr) || text::SameSound(list[k].target, reading) ||
+                   std::any_of(records.begin(), records.end(), [&](const dict::Record& r) {
+                       return r.codes != nullptr && r.codes->sem.HasPrefix("QPN") && r.target == list[k].target;
+                   });
+        }))) {
+        return {};
+    }
+    const auto fits = [&](const dict::Codes* codes, std::string_view target) {
+        return codes != nullptr && codes->sem.HasPrefix("QPN") && !TranslatedName(list, same, source, target) &&
+               (kana ? text::SameSound(target, reading) : text::JapaneseSpelling(target));
+    };
+    // A person sense among the candidates comes first (佐渡 사도); then a person reading of the name
+    // layer that sounds like the dictionary's first place name of the key (大井 오오이, 暁
+    // 아카츠키). A word the dictionary reads first as a place that no person reading sounds like
+    // reads as that proper noun already (鳥海 초카이, 富山 도야마).
+    CuedReading found;
+    for (const std::size_t k : same) {
+        if (fits(list[k].codes, list[k].target)) {
+            found = {list[k].codes->asPlain, list[k].target, list[k].id};
+            break;
+        }
+    }
+    std::string_view place;
+    bool placeFirst = false;
+    bool firstRecord = true;
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(source, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != source) continue;
+        const bool named = c.codes->sem.HasCode("QCT") || c.codes->sem.HasCode("QNN");
+        if (firstRecord) placeFirst = named;
+        firstRecord = false;
+        if (named) {
+            place = c.target;
+            break;
+        }
+    }
+    if (found.codes == nullptr && !place.empty()) {
+        for (const dict::Record& r : records) {
+            if (fits(r.codes, r.target) && text::SameSound(r.target, place)) {
+                found = {r.codes->asPlain, r.target, r.id};
+                break;
+            }
+        }
+    }
+    if (found.codes == nullptr && !placeFirst) {
+        for (const dict::Record& r : records) {
+            if (fits(r.codes, r.target)) {
+                found = {r.codes->asPlain, r.target, r.id};
+                break;
+            }
+        }
+    }
+    // A name the default candidate already writes, or writes with another initial of its first
+    // syllable, is left as the dictionary spells it (「天龍」 텐류, 霧島 기리시마), but for a name
+    // before a class, which takes the name's codes (長門型 나가토급).
+    if (found.codes == nullptr) return found;
+    std::size_t first = same.front();
+    for (const std::size_t k : same) {
+        if (list[k].codes->sem.HasCode("XXX")) {
+            first = k;
+            break;
+        }
+    }
+    if (SpellingVariant(list[first].target, found.target)) {
+        if (!StartsWithAny(after, dict::ClassMembers("name.class-after"))) return {};
+        found.target = list[first].target;
+    }
+    return found;
+}
+
 }  // namespace
 
 std::span<const ConstraintRule> ConstraintRules() { return kRules; }
@@ -481,7 +622,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                                             [&](const dict::Candidate& c) { return c.source == source; });
             const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                                          : std::string_view(following);
-            if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before) ||
+            if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before, lookupContext.cued) ||
                 !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)) {
                 i++;
                 continue;
@@ -544,6 +685,12 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                         rejected = same;
                         break;
                     }
+                }
+                break;
+            case ConstraintReject::NonCuedName:
+                if (const CuedReading name = CuedName(snapshot, list, same, source, after, records); name.codes != nullptr) {
+                    nameCodes = name.codes, nameTarget = name.target, nameId = name.id;
+                    rejected = same;
                 }
                 break;
             case ConstraintReject::Pronoun:

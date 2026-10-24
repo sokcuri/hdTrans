@@ -78,4 +78,8 @@ constexpr int FinalClass(char32_t r) {
 // 자 쟈 and 조 죠, ㅐ and ㅔ, and long vowels written or not (유우키, 유키; 케이코, 케코).
 bool SameSound(std::string_view a, std::string_view b);
 
+// Whether s is Hangul syllables with the vowels of kana and no final but ㄴ and ㅅ, the
+// spelling of a Japanese reading (무라사메, 신지, 핫토리), not of a Chinese or Korean one (펑, 러, 김).
+bool JapaneseSpelling(std::string_view s);
+
 }  // namespace hdTrans::text

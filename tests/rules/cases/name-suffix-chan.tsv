@@ -1,0 +1,26 @@
+# 규칙: LEX-30
+rule	input	expected	kind	layer
+dict:jisjk:41287	「……魅ぃちゃんは、なんとか巻いたけど……」	has:짱은	fix	defaults
+dict:jisjk:41287	≫719ちゃんが出てきませんねぇ？	has:719짱이	fix	defaults
+dict:jisjk:41287	アリスちゃんが来た。	앨리스짱이 왔다.	keep	defaults
+dict:jisjk:41287	田中ちゃんが来た。	타나카짱이 왔다.	keep	defaults
+cx:chan-kin:10	姉ちゃんが来た。	누나가 왔다.	fix	rewrites
+cx:chan-kin:10	母ちゃんが来た。	어머니가 왔다.	fix	rewrites
+cx:chan-kin:10	田中ちゃんたちが来た。	타나카짱들이 왔다.	keep	rewrites
+cx:chan-kin:10	お姉ちゃんが来た。	누나가 왔다.	keep	rewrites
+cx:chan-kin:10	赤ちゃんが泣いている。	아기가 울고 있다.	keep	rewrites
+cx:chan-kin:20	ちゃんと閉まっているならとりあえず落ち着け	lacks:짱	fix	rewrites
+cx:chan-kin:20	「あのね、千莉ちゃん」	has:짱	keep	rewrites
+compose:name-suffix-space	那珂ちゃんお仕事続けるよ。	has:짱 일	fix	compose
+compose:name-suffix-space	「わーい、筧さん大好きっ」	「와아, 카케이 씨 너무 좋아」	fix	compose
+compose:name-suffix-space	ミドリさん即レス	미도리 씨 즉답	fix	compose
+compose:name-suffix-space	「みいちゃんおはよー」	「미이짱 안녕~」	fix	compose
+compose:name-suffix-space	ポポちゃん@GOLDEN_is_GOD☆	포포짱@GOLDEN_is_GOD☆	keep	compose
+compose:name-suffix-space	田中さんの家に行く。	타나카 씨의 집에 간다.	keep	compose
+cx:chan-kin:10	ガンガン撃って！ 長10cm砲ちゃん、頑張って！	lacks:포짱	fix	rewrites
+cx:chan-kin:10	正解の賞品は、飴ちゃん！	lacks:엿짱	fix	rewrites
+cx:chan-kin:10	メイドちゃんは告白が苦手。	has:메이드짱	keep	rewrites
+compose:name-suffix-space	「あら残念ですわね…。圭一さんにしてはなかなか慎重でしてよ？」	has:씨치고는	keep	compose
+cx:chan-kin:10	おバカ2人と美香ちゃんは良太の車で帰ってきたって	has:미카짱은	keep	rewrites
+cx:chan-kin:10	特別に、大艇ちゃんにつかまってもいいよ～♪	has:대정양에게	keep	rewrites
+cx:chan-kin:10	神聖かまってちゃん	lacks:짱	fix	rewrites

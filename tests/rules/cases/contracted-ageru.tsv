@@ -1,7 +1,7 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
 sound:contracted-auxiliaries	いいよ、私作ったげるから。	좋아, 나 만들어 주니까.	fix	sound
-sound:contracted-auxiliaries	さぁて、みんないい？改装陽炎型の威力、見せたげるから！	자, 모두 좋아? 개장 아지랑이형의 위력, 보여 주니까!	fix	sound
+sound:contracted-auxiliaries	さぁて、みんないい？改装陽炎型の威力、見せたげるから！	자, 모두 좋아? 개장 카게로우급의 위력, 보여 주니까!	fix	sound
 sound:contracted-auxiliaries	そっかぁ。情報だね。持ってきたげるよ！	그렇구나~. 정보구나. 가져와 줄게!	fix	sound
 sound:contracted-auxiliaries	提督の絵、描いたげようか～？	제독의 그림, 그려 줄까~?	fix	sound
 sound:contracted-auxiliaries	提督、お茶飲む？ 淹れたげよっか？	제독, 차 마셔? 끓여 줄까?	fix	sound

@@ -1,0 +1,17 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+cx:name-class:10	陽炎型駆逐艦一番艦、陽炎よ。	카게로우급 구축함 1번함, 카게로우야.	fix	rewrites
+cx:name-class:10	うらぁ、改陽炎型はちょこっと違うよぉ！	has:카게로우급	fix	rewrites
+cx:name-class:10	血液型はA型です。	혈액형은 A형입니다.	keep	rewrites
+cx:name-class:10	最新型の駆逐艦だ。	최신형의 구축함이다.	keep	rewrites
+cx:name-class:10	グルグル型のお香を焚きましょう。	has:형의 향	keep	rewrites
+cx:name-class:10	同じ陽炎型の野分とは仲良しよ。	같은 카게로우급의 노와키와는 사이가 좋아.	fix	rewrites
+cx:name-class:10	……そうよ、親潮姉と同じ、初期陽炎型よ。	has:초기 카게로우급이야	fix	rewrites
+cx:name-class:10	阿賀野型軽巡二番艦、能代。	has:아가노급 경순	fix	rewrites
+cx:name-class:10	古鷹型重巡の2番艦、加古ってんだ	has:후루타카급	fix	rewrites
+cx:name-class:10	長門型の装甲は伊達ではないよ。	나가토급의 장갑은 다테가 아니야.	fix	rewrites
+cx:name-class:10	そう、これが本当の大淀型の力よ！	그래, 이것이 진정한 오요도급의 힘이야!	fix	rewrites
+cx:name-class:10	人型ロボットが歩く。	인간형 로봇이 걷는다.	keep	rewrites
+cx:name-class:10	大型の船が来た。	has:대형	keep	rewrites
+cx:name-class:10	星型の飾りを付けた。	has:형의 장식	keep	rewrites
+cx:name-class:10	「彗星一二型甲」搭載	lacks:이치지급	keep	rewrites
