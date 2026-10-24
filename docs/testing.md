@@ -36,7 +36,7 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
 
 러너는 `HOME`, `LOCALAPPDATA`, `XDG_CACHE_HOME`을 임시 폴더로 바꾸고, `HDTRANS_CACHE_DIR`가 없으면 임시
 캐시 폴더를 지정합니다. 실행 중 사용자 캐시 폴더가 바뀌면 실패합니다. `tests/runner.sh`는 이 러너
-동작 자체를 확인합니다.
+동작 자체를 확인하며, Windows가 아닌 빌드에서 ctest `tests.runner`로 돕니다.
 
 | 환경 변수 | 설명 |
 |---|---|
