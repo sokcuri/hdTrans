@@ -31,3 +31,11 @@ rewrite:respectful-passive	先生は毎日ここに来られている	선생님�
 rewrite:respectful-passive	先生は東京に行かれていた	선생님은 도쿄에 가 계셨다	fix	lookup
 rewrite:respectful-passive	先生はどこに行かれているんですか？	선생님은 어디에 가 계십니까?	fix	lookup
 rewrite:respectful-passive	毎日座っている	매일 앉아 있다	keep	rewrites
+rewrite:respectful-passive	「チョコレートを召し上がってたわ。」	「초콜릿을 드시고 계셨어.」	fix	rewrites
+rewrite:respectful-passive	「あたしで間違いないよー」とおっしゃってます	「나로 틀림없어~」라고 말씀하고 계십니다	fix	rewrites
+rewrite:respectful-passive	まだ、少しお休みになっていて下さい。	아직, 조금 쉬고 계셔 주세요.	fix	rewrites
+rewrite:respectful-passive	よくお休みになっていたので、上着をおかけしておきました。	잘 쉬고 계셨으므로, 윗도리를 덮어 두었습니다.	fix	rewrites
+rewrite:respectful-passive	あ、お休みになってる。	아, 쉬고 계신다.	fix	rewrites
+rewrite:respectful-passive	ワイン、先にお飲みになってます？	와인, 먼저 드시고 계십니까?	fix	rewrites
+rewrite:respectful-passive	求婚したけれど断られたと仰っていたわ」	청혼했지만 거절당했다고 말씀하고 계셨어」	fix	rewrites
+rewrite:respectful-passive	何を読まれているんですか？	무엇을 읽고 계십니까?	fix	rewrites
