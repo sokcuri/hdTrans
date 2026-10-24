@@ -1,6 +1,6 @@
 # 규칙: SPC-5
 rule	input	expected	kind	layer
-cx:ne-promise:10	「違うね」	「다르네」	fix	rewrites
+cx:ne-promise:10	「違うね」	「아니네」	fix	rewrites
 cx:ne-promise:10	「静かだね」	!rule:cx:ne-promise:10	keep	rewrites
 cx:ne-promise:20	「感じるね」	「느끼네」	fix	rewrites
 cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites

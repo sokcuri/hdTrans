@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:ne-promise:10	「銀色の髪のお姉さんを知っているね？」	「은빛 머리카락의 언니를 알고 있네?」	fix	rewrites
 cx:ne-polite:10	「お茶を淹れますね」	「차를 끓일게요」	fix	rewrites
-cx:ne-promise:10	「違いますね」	「다르네요」	keep	rewrites
+cx:ne-promise:10	「違いますね」	「아니네요」	keep	rewrites
 cx:ne-promise:10	「ここにありますね」	「여기에 있네요」	keep	rewrites
 cx:ne-promise:40	「そうですね。じゃあ、先に行くね」	「그렇네요. 그럼, 먼저 갈게」	fix	rewrites
 cx:ne-promise:40	「ありがとうございます。頑張るね」	「감사합니다. 노력할게」	fix	rewrites

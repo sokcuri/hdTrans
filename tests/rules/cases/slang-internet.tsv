@@ -69,7 +69,7 @@ phrase:おけ	時報も任せておけ。	시보도 맡겨 두어라.	keep	built
 phrase:ワロタ	ワロタ	ㅋㅋㅋ	fix	builtin-phrase
 phrase:てぇてぇ	てぇてぇ	존귀해	fix	builtin-phrase
 phrase:ウケる	「無理に決まってるじゃん。ウケる」	「무리일 게 뻔하잖아. 웃겨」	fix	builtin-phrase
-phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 다르고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
+phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 아니고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
 dict:i:7788	幼なじみの観察眼、恐るべし。	소꿉친구 관찰안, 대단하다.	fix	lookup
 dict:i:7788	王子様恐るべし……	왕자님 대단하다……	fix	lookup
 dict:i:7788	恐るべき力	무서운 힘	keep	lookup

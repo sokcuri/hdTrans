@@ -350,6 +350,7 @@
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
+//= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
 //= word.toha-define	Starts of the words right after a とは that ask or tell what or who it names, so it defines, (이)란, even after a person (先生とは誰ですか, メイドとは一体何).
 //= word.toha-partner	Starts of the words of difference, comparison and relationship that take what とは names as their partner, (와)과는 (それとは違う 그것과는 다르다, 答えとは裏腹に, あいつとは仲がいい); without one later in its clause とは defines, (이)란.
@@ -5434,6 +5435,19 @@ word.recall-interjection	あー
 word.recall-interjection	あーっ
 word.recall-interjection	と、
 
+word.denial-lead	いや
+word.denial-lead	いいや
+word.denial-lead	いえ
+word.denial-lead	いいえ
+word.denial-lead	ううん
+word.denial-lead	え
+word.denial-lead	えっ
+word.denial-lead	ええ
+word.denial-lead	えー
+word.denial-lead	あ
+word.denial-lead	あっ
+word.denial-lead	あの
+word.denial-lead	いやいや
 word.supposing	仮定
 word.supposing	表現
 word.supposing	判断
