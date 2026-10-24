@@ -50,10 +50,12 @@
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
 //     entry at least as long as the sound's key (without a final と), win; the ending
-//     of an end row does not win over an intj row before a pause or an ellipsis, nor over
+//     of an end row wins only after no lone particle and where no kana that are no
+//     lengthening go on after it (うさぎがぴょんと 폴짝, 読んでぴょん 뿅, 猫ぴょんと 폴짝;
+//     報告ぴょん 보고다뿅), not over an intj row before a pause or an ellipsis, nor over
 //     a sound with no word right before it that ends in its と or comes before no kanji or
-//     katakana (敬礼！ぴょん！ 뿅), and it is no word where kana that are no lengthening or a
-//     kanji go on after it (関連でちょこっと: で + ちょこっと).
+//     katakana (敬礼！ぴょん！ 뿅), and it is no word where it may not end the sentence
+//     (関連でちょこっと: で + ちょこっと).
 //
 // A katakana word that starts an utterance or follows 、 or an ellipsis, before ！と or
 // ！っと, that an ono row reads alone or with ッ is that sound even where a dictionary word
