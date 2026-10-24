@@ -1,0 +1,26 @@
+# 규칙: GRM-19
+rule	input	expected	kind	layer
+cx:question-tte:10	実はこういうことなんじゃないかなって思ったら書かずにいられなかった。	실은 이런 것이 아닐까 하고 생각하면 쓰지 않을 수 없었다.	fix	rewrites
+cx:question-tte:10	彼が犯人なんじゃないかって思った	그가 범인이 아닌가 하고 생각했다	fix	rewrites
+cx:question-tte:10	もしかして嫌われてるんじゃないかって思って	혹시 미움받고 있는 것이 아닌가 하고 생각해	fix	rewrites
+cx:question-tte:10	行かないって言った	가지 않는다고 말했다	keep	rewrites
+cx:question-tte:10	なんでだって思った	lacks:하고	keep	rewrites
+cx:question-tte:20	これが魔法ってのか	이것이 마법이라는 건가	fix	rewrites
+cx:question-tte:20	お前ってのは	너라는 것은	keep	rewrites
+dict:gram:tte-noka:1	やるってのか！	한다는 건가!	fix	local
+dict:gram:tte-noka:1	俺が悪いってのか	내가 나쁘다는 건가	fix	local
+dict:gram:tte-noka:1	人が住んでいるってのか？	사람이 살고 있다는 건가?	fix	local
+dict:gram:tte-noka:1	何が起きたのか分からない	무슨 일이 일어났는지 모른다	keep	local
+dict:gram:tte-noka:1	それは何なのか	그것은 무엇인지	keep	local
+compose:ani-quote	「彼女じゃないって！」	「그녀가 아니라고!」	fix	compose
+compose:ani-quote	夢だからってなんでもできるわけじゃないって、わかった？	꿈이라고 해서 뭐든 할 수 있는 것이 아니라고, 알았어?	fix	compose
+compose:ani-quote	現実じゃないんだって、わかってる。	현실이 아니라고, 알고 있다.	fix	compose
+compose:ani-quote	「屁理屈じゃないって」	「억지 이론이 아니라고」	fix	compose
+compose:ani-quote	さっき、できなくもないって言わなかった？	조금 전, 할 수 없는 것도 아니라고 말하지 않았어?	fix	compose
+compose:ani-quote	魔法が万能なもんじゃないってのもお約束か。	has:아니라고	fix	compose
+compose:ani-quote	嘘ではないのなら、	거짓말이 아니라면,	fix	compose
+compose:ani-quote	一人じゃないって……仲間が	has:아니라는	fix	compose
+compose:ani-quote	学生ではないという	학생이 아니라고 한다	keep	compose
+compose:ani-quote	そうじゃないって	그렇지 않다고	keep	compose
+compose:ani-quote	彼じゃないなら	그가 아니면	keep	compose
+compose:ani-quote	彼は学生ではない。	그는 학생이 아니다.	keep	compose

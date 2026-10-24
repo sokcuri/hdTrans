@@ -1,8 +1,23 @@
+# 규칙: SPC-13
 rule	input	expected	kind	layer
-dict:archaic-speech	見れば見るほど父親に似ておらぬのう・・・」	보면 볼수록 아버지를 닮아 있지 않구나···」	fix	lookup
+dict:archaic-speech	見れば見るほど父親に似ておらぬのう・・・」	보면 볼수록 아버지를 닮아 있지 않구먼···」	fix	lookup
 dict:archaic-speech	「面倒じゃな」	「귀찮군」	fix	lookup
 dict:archaic-speech	補給は大切じゃな	보급은 중요하군	fix	lookup
 dict:archaic-speech	いよいよ、わらわの本領発揮じゃな！	드디어, 이 몸의 본령 발휘군!	fix	lookup
 dict:archaic-speech	これも冗談じゃよ。	이것도 농담이라네.	fix	lookup
 dict:archaic-speech	わしの幼なじみじゃよ。	나의 소꿉친구라네.	fix	lookup
-dict:archaic-speech	ありがたいのう。	고맙구나.	keep	lookup
+dict:archaic-speech	ありがたいのう。	고맙구먼.	keep	lookup
+dict:archaic-speech	子供を見ていると心がなごむのお。	아이를 보고 있으면 마음이 누그러지는구먼.	fix	lookup
+dict:archaic-speech	……よい面構えになったのう。	……좋은 낯짝이 되었구먼.	fix	lookup
+dict:archaic-speech	めでたいのう。	경사스럽구먼.	fix	lookup
+dict:archaic-speech	夜の戦じゃのう。	밤의 싸움이로구먼.	fix	lookup
+dict:archaic-speech	文が届いておるのう。	has:있구먼.	fix	lookup
+dict:archaic-speech	ここは涼しいのう。	여기는 시원하구먼.	fix	lookup
+dict:archaic-speech	仕方ないのう…	어쩔 수 없구먼…	fix	lookup
+dict:archaic-speech	ここのしきたりみたいじゃのう。	여기의 관례 같구먼.	fix	lookup
+dict:archaic-speech	お主なかなか暇そうじゃの。	그대 꽤 한가한 것 같구먼.	fix	lookup
+dict:archaic-speech	わしの孫じゃの	나의 손자로구먼	fix	lookup
+dict:archaic-speech	……むう、仕方がないのぅ。	……무우, 어쩔 수 없구먼.	fix	lookup
+dict:archaic-speech	祭りのいいところじゃのお。	축제의 좋은 곳이로구먼.	fix	lookup
+dict:archaic-speech	今すぐ死のう、	바로 지금 죽자,	keep	lookup
+dict:archaic-speech	学生じゃな	학생이군	keep	lookup

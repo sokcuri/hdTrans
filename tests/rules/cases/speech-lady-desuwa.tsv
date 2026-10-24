@@ -1,0 +1,16 @@
+# 규칙: SPC-14
+rule	input	expected	kind	layer
+ending:lady-desuwa	とっても楽しいですの～！	매우 즐거워요~!	keep	builtin-ending
+ending:lady-desuwa	ガタッ……お腹が鳴ったですわ	덜컥……배가 꼬르륵거렸어요	fix	builtin-ending
+ending:lady-desuwa	佐藤様のスマホを見せてあげるですわ	사토님의 스마트폰을 보여 줘요	fix	builtin-ending
+ending:lady-desuwa	田中様の学校を作ってあげるですわ	타나카님의 학교를 만들어 줘요	fix	builtin-ending
+ending:lady-desuwa	って書いて角を折ってあるですの	has:뒀어요	fix	builtin-ending
+ending:lady-desuwa	「むー\n食べてるですわ」	「무우\n 먹고 있어요」	fix	builtin-ending
+ending:lady-desuwa	食べるですわ	먹어요	fix	builtin-ending
+ending:lady-desuwa	大丈夫ですの？	괜찮아요?	fix	builtin-ending
+ending:lady-desuwa	素敵ですの	멋져요	fix	builtin-ending
+ending:lady-desuwa	ひどいですわ	심해요	keep	builtin-ending
+ending:lady-desuwa	よろしいですわ	좋아요	keep	builtin-ending
+dict:gram:desuno:1	何ですの	뭐예요	fix	lookup
+dict:gram:desuno:1	それは何ですの？	그것은 뭐예요?	fix	lookup
+dict:gram:desuno:1	何ですか？	무엇입니까?	keep	lookup

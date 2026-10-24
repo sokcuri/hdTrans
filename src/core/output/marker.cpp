@@ -758,6 +758,11 @@ void Composer::BuildAdjective(int i) {
         }
     }
     if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
+    // 아니다 takes 라 before the quoting endings, as the copula does (아니라고, 아니라는, 아니라면).
+    std::string_view quoted, after;
+    if (key.ends_with('1') && Cat({stem, replacement}).ends_with("아니") && CutQuoting(suffix, quoted, after)) {
+        suffix = Cat({"라", quoted, after});
+    }
     sc.text = Cat({stem, replacement, suffix});
 }
 

@@ -38,8 +38,8 @@ compose:latin-particle-form	Sunsetだ...綺麗だ...	Sunset이다...예쁘다...
 compose:latin-particle-form	この綺麗なsunsetを、	이 예쁜 sunset을,	fix	compose
 compose:latin-particle-form	私はJanetよ。	나는 Janet이야.	fix	compose
 compose:latin-particle-form	Marion……じゃない。	Marion……이 아니다.	fix	compose
-compose:latin-particle-form	今日は、kaltes Essenで良いですか？	오늘은, kaltes Essen으로 좋습니까?	fix	compose
-compose:latin-particle-form	Sirloinで良い？	Sirloin으로 좋아?	fix	compose
+compose:latin-particle-form	今日は、kaltes Essenで良いですか？	오늘은, kaltes Essen이면 됩니까?	fix	compose
+compose:latin-particle-form	Sirloinで良い？	Sirloin이면 돼?	fix	compose
 compose:latin-particle-form	Instagramを見る	Instagram을 본다	fix	compose
 compose:latin-particle-form	night battleは～。	night battle은~.	fix	compose
 compose:latin-particle-form	そのtableが壊れた。	그 table이 망가졌다.	fix	compose
@@ -49,7 +49,7 @@ compose:latin-particle-form	5th Memorialというやつね。	5th Memorial이라
 compose:latin-particle-form	Operationが完了したわ。	Operation이 완료했어.	fix	compose
 compose:latin-particle-form	どんなoperationだって言うの？	어떤 operation이라고 말하는 거야?	fix	compose
 compose:latin-particle-form	いつもinformationは大切！	언제나 information은 중요!	fix	compose
-compose:latin-particle-form	steak plateで良い？	steak plate로 좋아?	fix	compose
+compose:latin-particle-form	steak plateで良い？	steak plate면 돼?	fix	compose
 compose:latin-particle-form	albacoreはともかく	albacore는 차치하고	fix	compose
 compose:latin-particle-form	Kateが作ってくれた。	Kate가 만들어 주었다.	fix	compose
 compose:latin-particle-form	Tomcatやphantomはもちろん	Tomcat이나 phantom은 물론	fix	compose

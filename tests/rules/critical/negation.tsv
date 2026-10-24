@@ -27,3 +27,14 @@ compose:potential-negation	本来有り得ぬ天文学的確率で	has:있을 �
 compose:potential-negation	うっっくぅ～、なんもいえねぇ～…	has:말할 수 없다	fix	compose
 compose:potential-negation	これなら聞けるんじゃないかな？	has:들을 수 있지 않을까	keep	compose
 compose:potential-negation	だって信頼できんじゃん？	lacks:수 없	keep	compose
+ending:rhetorical-ja-nai	し、仕方ないではないか！	has:어쩔 수 없잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	「庭？　何も無いではないか！」	has:없잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	遅いではないか！	has:늦잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	痛いじゃないの！	has:아프잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	嫌いじゃない	has:싫지 않	keep	builtin-ending
+ending:rhetorical-ja-nai	嫌いじゃないの？	has:싫지 않	keep	builtin-ending
+dict:gram:beki-rhetorical:7	ここに住む者として祝福すべきではないでしょうか。	has:축복해야 하지 않을까요	fix	local
+dict:gram:beki-rhetorical:7	そうすべきではないかと思う	has:해야 하지 않을까	fix	local
+dict:gram:beki-rhetorical:2	行くべきではないのか	has:가야 하지 않나	fix	local
+dict:gram:beki-rhetorical:7	すべきではない。	has:해서는 안된다	keep	local
+dict:gram:beki-rhetorical:8	行くべきではない	has:가서는 안된다	keep	local

@@ -310,6 +310,32 @@ bool Teeka(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// すかい before [？?、。！!」』…‥ー～] or the end, and るかい before 、: a question in かい after
+// です, ます or a dictionary form, its い a softening particle (お仲間ですかい, 元気してるかい、).
+// Not after a noun (佐藤くんかい) nor のかい, which the end rows read.
+bool QuestionKai(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const bool su = Lit(s, p, "す");
+    if (!su && !Lit(s, p, "る")) return false;
+    if (!Lit(s, p, "か")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "い")) return false;
+    return CharOrEnd(s, p, su ? U"？?、。！!」』…‥ー～" : U"、", m, 2);
+}
+
+// ([こそあど]んな)ん(?=[でじだがはもをに]): the の after こんな, そんな, あんな, どんな said ん
+// (こんなんで 이런 것으로, そんなんじゃ).
+bool KonnaN(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"こそあど") || !Lit(s, p, "んな")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ん")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, U"でじだがはもをに")) return false;
+    m.end = p;
+    return true;
+}
+
 // いっか([！!。、…‥？?」]|$)
 bool Ikka(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -391,18 +417,24 @@ bool JanKa(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// ([ぁ-ゖ一-龥々])([こごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
-// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな). Not そっか: after kana
-// (そっか, あそっか) it is そうか read as an answer, and after kanji the sound stage asks the
-// dictionary (RewriteVolitionalSo).
+// ([ぁ-ゖ一-龥々])([おこごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
+// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな, しちゃおっかな). Not
+// そっか: after kana (そっか, あそっか) it is そうか read as an answer, and after kanji the sound
+// stage asks the dictionary (RewriteVolitionalSo). Not おっかない, おっかなびっくり, おっかねぇ (scary).
 bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!Take(s, p, [](char32_t c) { return IsHiraganaClass(c) || IsKanjiClass(c); })) return false;
     const size_t kana = p;
-    if (!OneOf(s, p, U"こごそとのぼもろよ")) return false;
+    if (!OneOf(s, p, U"おこごそとのぼもろよ")) return false;
     if (Span(s, kana, p) == "そ") return false;
+    const bool o = Span(s, kana, p) == "お";
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "っか")) return false;
+    if (o) {
+        for (const std::string_view w : {"ない", "なく", "なび", "ね"}) {
+            if (s.substr(p).starts_with(w)) return false;
+        }
+    }
     size_t q = p;
     if (q < s.size() && !OneOf(s, q, U"なねぁあー～？?！!。、…‥」』）)")) return false;
     m.end = p;
@@ -774,6 +806,8 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
     text = ReplaceAll(text, Nsu, [](const Match& m) { return Cat({m.group[1], "んです", m.group[2]}); });
+    text = ReplaceAll(text, KonnaN, [](const Match& m) { return Cat({m.group[1], "の"}); });
+    text = ReplaceAll(text, QuestionKai, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     text = ReplaceAll(text, Ikka, [](const Match& m) { return Cat({"いいか", m.group[1]}); });
     text = ReplaceAll(text, Tondemo, [](const Match&) { return std::string("とんでもない"); });
     text = ReplaceAll(text, Mashou, [](const Match& m) { return Cat({m.group[1], "しょう"}); });

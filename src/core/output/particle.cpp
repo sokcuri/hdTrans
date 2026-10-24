@@ -38,6 +38,7 @@ constexpr JosaForms kJosaTable[kJosaRows] = {
     {"(이)랍", "이랍", "랍"},
     {"(이)네", "이네", "네"},
     {"(이)잖", "이잖", "잖"},
+    {"(이)로", "이로", "로"},
 };
 
 // The text a piece reads as in a TextBefore.
