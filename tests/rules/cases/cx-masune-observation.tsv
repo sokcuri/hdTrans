@@ -1,0 +1,13 @@
+# 규칙: SPC-5
+rule	input	expected	kind	layer
+cx:ne-promise:22	慣れない業務は少し…緊張しますね。	익숙해지지 않는 업무는 조금…긴장하네요.	fix	rewrites
+cx:ne-promise:22	感謝しますね	감사하네요	fix	rewrites
+cx:ne-promise:22	ほっとしますね。	안심하네요.	fix	rewrites
+cx:ne-promise:22	毎日猫にご飯をあげますね	매일고양이에 밥을 주네요	fix	rewrites
+cx:ne-promise:22	夏ですね、夏！ …って、ああ。毎日行ってますね！	여름이군요, 여름! …라고, 아. 매일 가네요!	fix	rewrites
+cx:ne-promise:22	「まあ何でも読みますね」	「뭐 뭐든 읽네요」	fix	rewrites
+cx:ne-promise:22	「実は甘いものが好きなので、洋菓子を時々買いますね」	「실은 단 걸 좋아해서, 양과자를 가끔 사네요」	fix	rewrites
+cx:ne-promise:22	「お茶を淹れますね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	私、箒持ってきますね。	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	毎日電話するね	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	しっかり傷を直しますね	!rule:cx:ne-promise:22	keep	rewrites

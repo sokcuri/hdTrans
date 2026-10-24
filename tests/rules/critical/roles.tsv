@@ -35,3 +35,6 @@ cx:ni-partner:10	先輩に聞ける	has:선배에게	keep	rewrites
 cx:ni-partner:10	彼女に渡せる	has:그녀에게	keep	rewrites
 cx:ni-partner:10	親に送れる	has:부모에게	keep	rewrites
 cx:ni-partner:10	お前に話せることはない	has:너에게	keep	rewrites
+cx:ne-promise:20	いつも妹に花をあげますね	lacks:줄게요	keep	rewrites
+cx:ne-promise:22	毎日猫にご飯をあげますね	lacks:줄게요	keep	rewrites
+cx:ne-promise:22	母は毎朝花に水をやりますね	lacks:줄게요	keep	rewrites
