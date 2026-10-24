@@ -1632,19 +1632,6 @@ void InitialSoundRule(Flusher& f) {
     }
 }
 
-// ちゃん right after a katakana noun as 짱 where it was left empty (ナッちゃん 낫짱); the
-// empty ちゃん of a kin word (お姉ちゃん 언니) stays.
-void ChanAfterKatakana(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* p = it->prev;
-        if (p == nullptr || it->selected < 0 || it->group->surface != "ちゃん" || !TrimSpace(it->EntryText(it->selected)).empty() ||
-            p->start + p->length != it->start || p->tokenIndex != it->tokenIndex || p->group->surface.empty()) {
-            continue;
-        }
-        if (KatakanaSurface(p->group->surface) && p->selected >= 0 && At(p->Code(p->selected), 0) == '1') SelectLemma(f, it, "짱");
-    }
-}
-
 namespace {
 
 // Whether the sentence part before the number names an angle or a temperature.

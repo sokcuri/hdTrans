@@ -90,7 +90,6 @@ void PluralPronoun(Flusher& f);
 // counts (十度も 열 번이나, 五度 5번, 十度目 열 번째).
 void DegreeAfterNumber(Flusher& f);
 void HumbleFirstPerson(Flusher& f);
-void ChanAfterKatakana(Flusher& f);
 void InitialSoundRule(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end

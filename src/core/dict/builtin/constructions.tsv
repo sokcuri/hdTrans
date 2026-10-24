@@ -96,3 +96,5 @@ cx:naka-sok:20		&&3 S+0== "の中で" F+0== "selected" S-1== @noun.inside-medium
 cx:naka-sok:30		&&3 S+0== "の中から" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	炎の中から 불길 속에서
 //= koto-nante	after naka-sok	The なんて or なんか after a のこと that follows a noun belittles the noun: 같은 건 after the noun, or after 의 일 where the rules read のこと so (昨日のこと 어제의 일).
 cx:koto-nante:10		&&6 ||2 S+0== "なんて" S+0== "なんか" F+0== "selected" F+0!= "fixed" S-1== "のこと" F-1== "selected" F-2== "selected"	set-target " 같은 건"	あたしのことなんて 나 같은 건
+//= chan-after-katakana	after HumbleFirstPerson	A ちゃん left empty right after a katakana noun in the same token is 짱 (ナッちゃん 낫짱); the empty ちゃん of a kin word (お姉ちゃん 누나) stays.
+cx:chan-after-katakana:10		&&8 S+0== "ちゃん" F+0== "selected" F+0== "blank" F+0== "touches-prev" H+0!= "" F-1== "selected" P-1== "1" F-1== "katakana"	select-lemma "짱"	アリスちゃん 앨리스짱
