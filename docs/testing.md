@@ -17,6 +17,7 @@
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
 | `sets.drops` | 측정 세트에서 글이 빠지는 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
+| `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
@@ -69,6 +70,31 @@ tools/rule-cases.sh build/mac/hdtrans dicts tests/rules/cases/<주제>.tsv --acc
 ```
 
 규칙을 고칠 때는 `fix` 행과 `keep` 행을 하나 이상씩 더하고, 커밋 전에 표 전체와 `examples/`를 돌립니다.
+
+## 구문 변형 (tests/variants/)
+
+규칙 사례가 고친 문장 하나를 보는 것과 달리, 변형 표는 같은 구문에 다른 낱말을 넣은 문장들로 구문 가족이 얼마나 넓게 맞는지
+봅니다. `tools/variants.py`가 표의 틀에 사전의 낱말(사람 명사, 동사, 형용사)을 넣어 가족마다 문장을 만들고(기본 20개, 씨앗이
+정해져 있어 늘 같음), 번역해서 출력이 그 구문의 한국어 모양(정규식)에 맞는지 셉니다.
+
+```
+family	causer-ni	GRM-1	90
+slot	P	person	母 父 先生
+slot	VP	vp	本を+読む 荷物を+持つ
+case	{P}に{VP:cp-ta}。	^{P.ko} 때문에 억지로 	당했|되었
+```
+
+- `slot 이름 종류 낱말…`: 종류는 `person`, `noun`, `verb`, `vp`(목적어+동사), `adj`, `list`. 사전에서 그 종류가 아닌 낱말은
+  경고하고 뺍니다.
+- `case 틀 기대 [거부]`: `{이름:형}`은 동사, 형용사의 활용형(`te`, `ta`, `cp-ta`, `teireba`, `chatta` …), 기대와 거부의
+  `{이름.ko}`는 그 명사의 사전 번역 중 하나입니다.
+- `family`의 넷째 칸은 그 가족의 통과율 하한(%)이고, ctest `rules.variants`가 `--check`로 확인합니다. 하한은 잰 통과율보다
+  한두 문장 낮게 둡니다(90%를 넘으면 90, 90%이면 85).
+
+```sh
+tools/variants.py build/mac/hdtrans --fails                                   # 가족별 통과율과 틀린 줄
+tools/variants.py build/mac/hdtrans --base "$BASE/build/mac/hdtrans" "$BASE/dicts"   # 기준 → 지금
+```
 
 ## 예제 문서 (examples/)
 

@@ -26,6 +26,7 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 | `tools/audit.py draw RUN OUT \| rate LINES GRADES` | A fixed seeded sample of current outputs for grading, and its error rate per set (docs/testing.md) |
 | `tools/chrf.py REF A [B]` | Corpus chrF, and changed, better and worse line counts between two outputs |
 | `tools/count-class.py REGEX [FILE...]` | Lines and distinct keys that share a failure shape |
+| `tools/variants.py CLI [--base CLI DICTS] [--fails]` | Variant sentences of each construction family from slot templates (`tests/variants/`), pass rate per family |
 | `tools/verdicts.py PAIRS FIRST [SECOND]` | Judgment counts and the lines two judges both call worse |
 | `tools/blind.py make \| disagree \| final` | Blind judge input (X/Y per line, private key), the lines two judges answer differently, and the verdicts mapped back |
 | `tools/new-pairs.py OUT NEW [OLD...]` | Judge pairs not judged before with the same before and after (rebased PRs, cycle checks) |

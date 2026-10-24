@@ -192,7 +192,7 @@ if(NOT EMSCRIPTEN)
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases audit blind new-pairs perf-budget perf-base fuzz)
+                    construction-cases audit blind new-pairs perf-budget perf-base fuzz variants)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
@@ -236,6 +236,10 @@ if(NOT EMSCRIPTEN)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-strict" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops"
                 --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")
             set_tests_properties(rules.drops PROPERTIES TIMEOUT 300)
+            # Each family of tests/variants/ passes at least its minimum rate.
+            add_test(NAME rules.variants COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/variants.py"
+                $<TARGET_FILE:hdtrans_cli> -d "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --check)
+            set_tests_properties(rules.variants PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
             # The inputs of the measured sets that drop text stay at tools/drops-budget.tsv; skipped
             # when no set variable is set.
