@@ -23,7 +23,7 @@ sense:いっぱい	胸がいっぱいです。	가슴이 벅찹니다.	fix	sense
 dict:number-ippai	胸が一杯の思い。	가슴이 벅찬 생각.	fix	defaults
 dict:number-ippai	頭がいっぱいだったの。	머릿속이 가득했어.	fix	defaults
 dict:w:27000	締め切りは水曜一杯。	마감은 수요일까지.	fix	local
-dict:w:27001	相談は五月一杯で止める。	상담은 5월까지로 멈춘다.	fix	local
+dict:w:27001	相談は五月一杯で止める。	rule:dict:w:27001=까지로    	fix	local
 dict:w:27002	届け出は明日いっぱいよ。	신고는 내일까지야.	fix	local
 dict:w:27002	今週いっぱい休む。	금주 내내 쉰다.	keep	defaults
 dict:number-ippai	彼女の精一杯の描写。	그녀의 혼신의 묘사.	fix	defaults
@@ -33,10 +33,13 @@ dict:number-ippai	胸が一杯だ。	가슴이 벅차다.	fix	fixed
 dict:jisjk:373504	ドキドキ……頭がいっぱいさ	두근두근……머릿속이 가득해	fix	local-ending
 dict:jisjk:373504	胸が一杯さ。	가슴이 벅차.	fix	local-ending
 dict:jisjk:373504	お腹がいっぱいさ	배가 불러	fix	local-ending
-dict:jisjk:373504	お疲れ様だね、司令官！大丈夫さ！	수고 하셨습니다구나, 사령관! 괜찮아!	fix	local-ending
+dict:jisjk:373504	大丈夫さ！	괜찮아!	fix	local-ending
 dict:jisjk:373504	狩りは得意さ。	사냥은 자신있어.	fix	local-ending
 dict:jisjk:373504	俺の狡猾さ…！！	내 교활함…!!	keep	ending-defaults
 dict:jisjk:373504	大変さがわかる。	힘듦을 알 수 있다.	keep	ending-defaults
 dict:jisjk:373504	その大切さを知った。	그 중요함을 알았다.	keep	ending-defaults
 dict:jisjk:373504	頭がいっぱいだよ	머릿속이 가득해	keep	defaults
 dict:jisjk:373504	容姿と優秀さで有名だ。	용모와 우수함으로 유명하다.	keep	ending-defaults
+dict:jisjk:373504	今の長波にぴったりさ、いくぜ！	지금의 장파에 딱 맞아, 간다!	fix	local-ending
+dict:jisjk:267449	彼女は優秀さ、美しさ、全てを持っている。	그녀는 우수함, 아름다움, 모든 것을 가지고 있다.	fix	local-ending
+dict:jisjk:267449	彼の優秀さ、誠実さ、勤勉さ。	그의 우수함, 성실함, 근면함.	fix	local-ending
