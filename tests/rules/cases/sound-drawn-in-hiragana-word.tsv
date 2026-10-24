@@ -1,0 +1,43 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:drawn-in-word	「かーしこまりましたー」	「알겠습니다~」	fix	sound
+sound:drawn-in-word	「寒くなーい？」	「춥지 않아~?」	fix	sound
+sound:drawn-in-word	だいじょぶ？ 疲れてなーい？	괜찮아? 지치지 않아~?	fix	sound
+sound:drawn-in-word	むー、聞いてなーい！	무우, 듣지 않아~!	fix	sound
+sound:drawn-in-word	この時間が一番眠くなーい？	이 시간이 제일 졸리지 않아~?	fix	sound
+sound:drawn-in-word	お姉さまにこんな顔見せられな～い…。	has:없어~	fix	sound
+sound:drawn-in-word	「あれ？　蒼せんぱーい」	has:선배~	fix	sound
+sound:drawn-in-word	おかーさーん！	어머니~!	fix	sound
+sound:drawn-in-word	それで君島のじーさんがびっくりして	has:할아버지가	fix	sound
+sound:drawn-in-word	いつも、のんきなことばっかり言ってやがるんだ、じーさん。	has:할아버지.	fix	sound
+sound:drawn-in-word	田村ならしょーがない。	타무라라면 어쩔 수 없다.	fix	sound
+sound:drawn-in-word	「へー、なんかおいしそーだけど」	「헤에, 왠지 맛있을 것 같지만」	fix	sound
+sound:drawn-in-word	「私の狙いとはちょーっと違ったけど……」	「내 목적과는 조금 달랐지만……」	fix	sound
+sound:drawn-in-word	最後に、アイス頼んでもいーい？	마지막으로, 아이스 부탁해도 괜찮아~?	fix	sound
+sound:drawn-in-word	準備はい～い？	준비는 됐어~?	fix	sound
+sound:drawn-in-word	はぁ、おなかいっぱ～い。	하아, 배불러~.	fix	sound
+sound:drawn-in-word	さーいくぜ、オーッ！	간다, 오오!	fix	sound
+sound:drawn-in-word	敵を騙すには味方からって言うじゃ〜ん？	적을 속이려면 아군에게서라고 말하잖아~?	fix	sound
+sound:drawn-in-word	「へーそうなんだ」	「에-그렇구나」	keep	sound
+sound:drawn-in-word	「あーそうなんだ」	「아-그렇구나」	keep	sound
+sound:drawn-in-word	「えーまさか」	has:설마	keep	sound
+sound:drawn-in-word	しーちゃん、わかる？	시짱, 알아?	keep	sound
+sound:drawn-in-word	ふーちゃん、起きてよ	후짱, 일어나	keep	sound
+sound:drawn-in-word	「ふーん？」	「흐응?」	keep	sound
+sound:drawn-in-word	「まぁいいか……」	「뭐 됐나……」	keep	sound
+sound:drawn-in-word	おお～また出てきたとかｗｗ	has:오오~	keep	sound
+sound:drawn-in-word	「よーし、早速買い物行こっか」	「좋아~, 곧바로 쇼핑 갈까」	keep	sound
+sound:drawn-in-word	よーしよし、気持ちが上向いてきたぞ。	옳지 옳지, 기분이 나아져 왔어.	keep	sound
+sound:drawn-in-word	しれーかんっ、明けましておめでとっ！	has:사령관	keep	sound
+sound:drawn-in-word	司令官、もっともーっとがんばりますね！	has:좀더 좀더	keep	sound
+sound:volitional-dash	提督、がんばろーぜ！	제독, 힘내자구!	fix	sound
+sound:volitional-dash	後で雪風たちと一緒に、しれーが寝たら探ろーっと。	has:찾아야지.	fix	sound
+sound:volitional-dash	お風呂でイラスト描こ～っと	욕실로 일러스트 그려야지	fix	sound
+sound:volitional-dash	帰ったら青葉に自慢してやろーっと	돌아가면 아오바에 자랑해 주어야지	fix	sound
+sound:volitional-dash	みんなで一緒にしよーや	has:하자	fix	sound
+sound:volitional-dash	「早く行こーよ」	「빨리 가자」	fix	sound
+sound:volitional-dash	「行こー！」	「가자!」	keep	sound
+sound:drawn-in-word	うひっ、敵さんかーい？しっかたねぇ	lacks:적산	keep	sound
+sound:drawn-in-word	もしかして、さんそーぎょらーい（酸素魚雷）？	has:산소	keep	sound
+sound:drawn-in-word	提督、連れて行ってほしいかもーって。	has:지도라고	keep	sound
+sound:drawn-in-word	フェイクじゃなければすぐに分かるだろーね	lacks:것이다	keep	sound
