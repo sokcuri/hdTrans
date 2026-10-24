@@ -1,26 +1,15 @@
-find_package(Git QUIET)
-if(GIT_FOUND)
-    execute_process(COMMAND "${GIT_EXECUTABLE}" describe --tags --match "v[0-9]*"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-        OUTPUT_VARIABLE HDTRANS_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-    if(NOT HDTRANS_VERSION)
-        execute_process(COMMAND "${GIT_EXECUTABLE}" rev-parse --short HEAD
-            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-            OUTPUT_VARIABLE shortHash OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-    endif()
+include("${CMAKE_CURRENT_LIST_DIR}/detect_version.cmake")
+hdtrans_detect_version("${CMAKE_CURRENT_SOURCE_DIR}")
+# HDTRANS_VERSION is the engine version of the APIs; the CLI and the Windows version strings show
+# the commit after it, and hdtrans-version.txt names the release packages.
+set(HDTRANS_VERSION_TEXT "${HDTRANS_VERSION}")
+set(packageVersion "${HDTRANS_VERSION}")
+if(HDTRANS_COMMIT)
+    set(HDTRANS_VERSION_TEXT "${HDTRANS_VERSION} (${HDTRANS_COMMIT})")
+    set(packageVersion "${HDTRANS_VERSION}-${HDTRANS_COMMIT}")
 endif()
-if(NOT HDTRANS_VERSION)
-    if(shortHash)
-        set(HDTRANS_VERSION "0.0.0-${shortHash}")
-    elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/release-version.txt")
-        file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/release-version.txt" HDTRANS_VERSION LIMIT_COUNT 1)
-    else()
-        set(HDTRANS_VERSION "0.0.0-unknown")
-    endif()
-endif()
-string(REGEX REPLACE "^v([0-9])" "\\1" HDTRANS_VERSION "${HDTRANS_VERSION}")
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/hdtrans-version.txt" "${HDTRANS_VERSION}\n")
-message(STATUS "hdTrans version: ${HDTRANS_VERSION}")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/hdtrans-version.txt" "${packageVersion}\n")
+message(STATUS "hdTrans version: ${HDTRANS_VERSION_TEXT}")
 
 set(HDTRANS_VERSION_NUMERIC "0,0,0,0")
 if(HDTRANS_VERSION MATCHES "^([0-9]+)\\.([0-9]+)\\.([0-9]+)")
