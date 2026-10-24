@@ -305,16 +305,25 @@ bool SuffixHost(const Item* before) {
 
 // Text path: a suffix of honorific.after-person (たん, っち) at full[cursor:] is a word only
 // after a name or a noun of persons (先生たん, 小林っち) and when no longer dictionary word
-// starts at that noun and goes past it (たまご + っち of たまごっち); elsewhere its records
-// leave the candidates, so that the longer word or the kana around it are read instead.
+// starts at that noun and goes past it (たまご + っち of たまごっち), nor a longer noun at the
+// suffix that ends before a particle, a mark or a character other than hiragana (たんこぶ,
+// たんす); elsewhere its records leave the candidates, so that the longer word or the kana
+// around it are read instead.
 Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
-    bool suffix = false;
-    for (const Record* r = records; r != nullptr && !suffix; r = r->child) {
-        suffix = dict::InClass("honorific.after-person", r->source);
+    std::size_t suffix = 0;
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (dict::InClass("honorific.after-person", r->source)) suffix = std::max(suffix, r->source.size());
     }
-    if (!suffix) return records;
-    const Item* before = WordBefore(cursor, token, parent);
+    if (suffix == 0) return records;
     bool covered = false;
+    for (const Record* r = records; r != nullptr && !covered; r = r->child) {
+        const std::string_view at = From(full, cursor);
+        if (At(r->partCode, 1) != '1' || r->source.size() <= suffix || !at.starts_with(r->source)) continue;
+        const std::string_view after = at.substr(r->source.size());
+        const text::Rune next = text::DecodeRune(after);
+        covered = NounEnd(after) || next.cp < U'ぁ' || next.cp > U'ゖ';
+    }
+    const Item* before = WordBefore(cursor, token, parent);
     if (before != nullptr && before->tokenIndex == token && before->start < cursor) {
         for (const dict::Candidate& c : snapshot.GetWordInfo(From(full, before->start), dict::LookupMode::General, {}).list) {
             covered = covered || static_cast<int>(c.source.size()) > cursor - before->start;

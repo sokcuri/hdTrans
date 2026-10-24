@@ -1,6 +1,7 @@
 // A familiar suffix of honorific.after-person (たん, っち) is a word only after a name or a
-// noun of persons, and not where a longer dictionary word starts at that noun and goes on past
-// it; elsewhere the kana around it are read.
+// noun of persons (a plural written as one word too), and not where a longer dictionary word
+// starts at that noun and goes on past it or a longer noun starts at the suffix; elsewhere the
+// kana around it are read.
 #include <string>
 #include <vector>
 
@@ -17,6 +18,9 @@ HD_TEST(word_person_suffix_after_person_only) {
              "たまご\t달걀\tI110\t\t\tGN\t0\t2\t\n"
              "たまごっち\t다마고치\tK130\t\t\tGN\t0\t3\t\n"
              "机\t책상\tN110\t\t\tGN\t0\t4\t\n"
+             "たんこぶ\t혹\tI110\t\t\tGN\t0\t7\t\n"
+             "子供\t아이\tN110\tVHn\t\tGN\t0\t8\t\n"
+             "子供たち\t아이들\tN110\tVHn\t\tGN\t0\t9\t\n"
              "が\t(이)가\tP200\t\t\tGN\t0\t5\t\n"
              "の\t의\tP200\t\t\tGN\t0\t6\t\n"},
         {0, "words.tsv",
@@ -33,6 +37,9 @@ HD_TEST(word_person_suffix_after_person_only) {
         {"先生たんが", "선생님짱이"},
         {"先生っちの", "선생님치의"},
         {"たまごっちが", "다마고치가"},
+        {"先生たんこぶが", "선생님 혹이"},
+        {"子供たちたんが", "아이들짱이"},
+        {"子供たちたんこぶが", "아이들 혹이"},
     };
     for (const Case& c : cases) {
         const std::string input = c.input;
