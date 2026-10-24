@@ -44,3 +44,20 @@ foreach(case IN LISTS cases)
     math(EXPR i "${i} + 1")
 endforeach()
 message(STATUS "${i} lint cases")
+
+# -budget: a flag above its line fails, one at or below it passes; a flag without a line has 0.
+file(WRITE "${WORK}/budget-case.txt" "rules 1 4 0\nL 0 ||0\nL 1 ||1 S-6== \"何\"\nL 2 ||0\nL 3 ||0\n")
+set(budgets "delta-range\t1@0@-" "delta-range\t2@0@may be lowered to 1" "delta-range\t0@1@fix the new ones"
+    "empty-pattern\t0@1@fix the new ones")
+foreach(budget IN LISTS budgets)
+    string(REPLACE "@" ";" parts "${budget}")
+    list(GET parts 0 line)
+    list(GET parts 1 expected)
+    list(GET parts 2 note)
+    file(WRITE "${WORK}/budget.tsv" "# test\n${line}\n")
+    execute_process(COMMAND "${RULEC}" lint "${WORK}/budget-case.txt" -dicts "${WORK}/dicts"
+        -budget "${WORK}/budget.tsv" RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE error)
+    if(NOT result EQUAL expected OR (NOT note STREQUAL "-" AND NOT error MATCHES "${note}"))
+        message(FATAL_ERROR "budget ${line}: expected exit ${expected} and \"${note}\", got ${result}:\n${output}${error}")
+    endif()
+endforeach()

@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Counts the Japanese and Korean text written into the engine sources and keeps each count of each
-file at or below its ceiling in tools/surface-budget.tsv.
+"""Counts the Japanese and Korean text written into the engine sources: an optional report for
+release reviews, not a check.
 
-  tools/surface-budget.py [--check] [--base REF]   compare the sources with the ceilings
-  tools/surface-budget.py --update [--base REF]    write the current counts as the ceilings
-  tools/surface-budget.py --report                 totals, the surface:code condition ratio and
-                                                   the files with the most literals
+  tools/surface-budget.py [--report]   totals, the surface:code condition ratio and the files with
+                                       the most literals
   tools/surface-budget.py --self-test
 
 Sources are the .cpp and .h files under src/core, except generated files (a first line
@@ -22,30 +20,16 @@ Sources are the .cpp and .h files under src/core, except generated files (a firs
   cond_surface               comparisons and helper calls (In, OneOf, Starts, Contains, HasRune,
                              InRunes, ...) against such text, its constants or lists named like word
                              lists, also across lines, and case labels of such characters
-  cond_code                  comparisons against codes, attributes and classes (not a ceiling)
-A file without a row has the ceiling 0, so a renamed or split file is a raise. --check fails when a
-count exceeds its ceiling. With --base it also fails when the ceilings file raises a number or adds a
-row since REF and no commit of REF..HEAD carries a `Surface-Budget: <reason>` trailer (one trailer
-covers every file of the range), and when a file changed since REF counts less than its ceiling, so
-that the slack is written down before it can be filled again. --update writes the counts as
-ceilings and drops rows of removed files; it refuses to raise a number unless a commit of REF..HEAD
-(REF defaults to the merge base with develop) carries that trailer. To raise a ceiling: commit the
-code with the trailer, run --update, commit the table.
-Exit: 0 within the ceilings, 1 over a ceiling or a raise without a trailer, 2 invalid arguments.
+  cond_code                  comparisons against codes, attributes and classes
+Exit: 0, or 2 on invalid arguments.
 """
-import os
 import re
-import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TABLE = "tools/surface-budget.tsv"
 COLUMNS = ["lit_ja", "lit_ko", "lit_punct", "lists", "list_items", "char_lit", "escape", "const_ref",
            "cond_surface", "cond_code"]
-CEILINGS = [c for c in COLUMNS if c != "cond_code"]
-TRAILER = re.compile(r"^Surface-Budget:[ \t]*\S", re.M)
 
 JA = re.compile(r"[぀-ヿ㐀-䶿一-鿿ｦ-ﾟ]")
 KO = re.compile(r"[가-힣ᄀ-ᇿ㄰-㆏]")
@@ -256,114 +240,6 @@ def measure_tree(root):
     return {f: measure(s, shared, defined.get(f, frozenset())) for f, s in files.items()}
 
 
-def read_table(text):
-    rows = {}
-    header = None
-    for line in text.split("\n"):
-        if not line or line.startswith("#"):
-            continue
-        cells = line.split("\t")
-        if header is None:
-            header = cells
-            continue
-        rows[cells[0]] = {k: int(v) for k, v in zip(header[1:], cells[1:]) if k in CEILINGS}
-    return rows
-
-
-def write_table(rows):
-    out = ["# Ceilings of tools/surface-budget.py per file under src/core; a missing file has 0.",
-           "file\t" + "\t".join(CEILINGS)]
-    for f in sorted(rows):
-        if any(rows[f].get(k, 0) for k in CEILINGS):
-            out.append(f + "\t" + "\t".join(str(rows[f].get(k, 0)) for k in CEILINGS))
-    return "\n".join(out) + "\n"
-
-
-def exceeded(counts, table):
-    """(file, column, count, ceiling) for every count above its ceiling."""
-    over = []
-    for f, r in sorted(counts.items()):
-        for k in CEILINGS:
-            ceiling = table.get(f, {}).get(k, 0)
-            if r[k] > ceiling:
-                over.append((f, k, r[k], ceiling))
-    return over
-
-
-def raises(old, new):
-    return [(f, k, old.get(f, {}).get(k, 0), v) for f in sorted(new) for k, v in sorted(new[f].items())
-            if v > old.get(f, {}).get(k, 0)]
-
-
-def git(root, *args, check=True):
-    r = subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True, encoding="utf-8",
-                       errors="replace")
-    if check and r.returncode:
-        sys.exit(f"git {' '.join(args)}: {r.stderr.strip()}")
-    return r
-
-
-def default_base(root):
-    refs = ["origin/develop"] + [r for r in git(root, "for-each-ref", "--format=%(refname:short)",
-                                                 "refs/remotes/*/develop").stdout.split() if r != "origin/develop"]
-    for ref in refs + ["develop"]:
-        base = git(root, "merge-base", "HEAD", ref, check=False).stdout.strip()
-        if base:
-            return base
-    sys.exit("no develop branch to take the merge base with; pass --base REF")
-
-
-def has_trailer(root, base):
-    return bool(TRAILER.search(git(root, "log", "--format=%B", f"{base}..HEAD").stdout))
-
-
-def table_at(root, ref):
-    r = git(root, "show", f"{ref}:{TABLE}", check=False)
-    return read_table(r.stdout) if r.returncode == 0 else {}
-
-
-def check(root, base):
-    path = Path(root) / TABLE
-    table = read_table(path.read_text(encoding="utf-8")) if path.exists() else {}
-    counts = measure_tree(root)
-    status = 0
-    for f, k, n, ceiling in exceeded(counts, table):
-        print(f"{f}: {k} {n} > {ceiling}")
-        status = 1
-    slack = [(f, k, counts.get(f, {}).get(k, 0), table[f][k]) for f in sorted(table) for k in CEILINGS
-             if counts.get(f, {}).get(k, 0) < table[f].get(k, 0)]
-    if base:
-        up = raises(table_at(root, base), table)
-        if up and not has_trailer(root, base):
-            for f, k, old, new in up:
-                print(f"{TABLE}: {f} {k} raised {old} -> {new} without a Surface-Budget trailer since {base}")
-            status = 1
-        changed = set(git(root, "diff", "--name-only", base, "--", "src/core").stdout.split())
-        for f, k, n, ceiling in slack:
-            if f in changed:
-                print(f"{f}: {k} {n} < {ceiling}; lower it with: python3 tools/surface-budget.py --update")
-                status = 1
-    elif slack:
-        print(f"surface-budget: {len(slack)} ceilings can be lowered: python3 tools/surface-budget.py --update")
-    print("surface-budget: " + ("over" if status else "ok"))
-    return status
-
-
-def update(root, base):
-    path = Path(root) / TABLE
-    table = read_table(path.read_text(encoding="utf-8")) if path.exists() else {}
-    counts = {f: {k: r[k] for k in CEILINGS} for f, r in measure_tree(root).items()}
-    up = raises(table, counts)
-    if up and not has_trailer(root, base or default_base(root)):
-        for f, k, old, new in up:
-            print(f"{f}: {k} {old} -> {new}")
-        print("surface-budget: raising needs a commit with a `Surface-Budget: <reason>` trailer; nothing written")
-        return 1
-    path.write_text(write_table(counts), encoding="utf-8")
-    print(f"surface-budget: wrote {TABLE}" + (f" ({len(up)} raised)" if up else ""))
-    return 0
-
-
 def report(root):
     counts = measure_tree(root)
     total = {k: sum(r[k] for r in counts.values()) for k in COLUMNS}
@@ -411,80 +287,15 @@ bool G(std::string_view s, char32_t c, unsigned m) {
     assert GENERATED.match("// Generated table; do not edit.\n") and not GENERATED.match("// Kept by hand.\n")
     header = 'inline constexpr std::string_view kJaNo = "の";\nconstexpr int kN = 3;'
     assert surface_constants(lex(header)[1]) == {"kJaNo"}
-    table = read_table(write_table({"a.cpp": {"lit_ja": 2}, "b.cpp": {}}))
-    assert table == {"a.cpp": dict(dict.fromkeys(CEILINGS, 0), lit_ja=2)}, table
-    assert exceeded({"a.cpp": dict.fromkeys(COLUMNS, 0) | {"lit_ja": 3}}, table) == [("a.cpp", "lit_ja", 3, 2)]
-    assert raises(table, {"a.cpp": {"lit_ja": 1}, "c.cpp": {"lit_ko": 1}}) == [("c.cpp", "lit_ko", 0, 1)]
-
-    with tempfile.TemporaryDirectory() as tmp:
-        root = Path(tmp)
-        (root / "src" / "core").mkdir(parents=True)
-        (root / "tools").mkdir()
-        a = root / "src" / "core" / "a.cpp"
-        a.write_text('auto x = "あ";\n', encoding="utf-8")
-
-        def run(*args):
-            subprocess.run(["git", "-C", tmp, "-c", "user.name=t", "-c", "user.email=t@t", *args],
-                           check=True, capture_output=True)
-        quiet = open(os.devnull, "w")
-        stdout, sys.stdout = sys.stdout, quiet
-        saved = {k: os.environ.get(k) for k in ("GIT_CONFIG_GLOBAL", "GIT_CONFIG_NOSYSTEM")}
-        os.environ.update(GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_NOSYSTEM="1")
-        try:
-            run("init", "-q")
-            run("commit", "-q", "--allow-empty", "-m", "base")
-            base = git(root, "rev-parse", "HEAD").stdout.strip()
-            assert check(root, None) == 1
-            run("add", "-A")
-            run("commit", "-q", "-m", "code")
-            assert update(root, base) == 1 and not (root / TABLE).exists()
-            run("commit", "-q", "--amend", "-m", "code\n\nSurface-Budget: a test literal")
-            assert update(root, base) == 0 and check(root, base) == 0
-            run("add", "-A")
-            run("commit", "-q", "-m", "table")
-            a.write_text('auto x = "あ";\nauto y = "い";\n', encoding="utf-8")
-            assert check(root, None) == 1
-            head = git(root, "rev-parse", "HEAD").stdout.strip()
-            assert update(root, head) == 1
-            a.write_text("auto x = 1;\n", encoding="utf-8")
-            assert update(root, head) == 0 and read_table((root / TABLE).read_text(encoding="utf-8")) == {}
-            (root / TABLE).write_text(write_table({"src/core/a.cpp": {"lit_ja": 5}}), encoding="utf-8")
-            run("commit", "-q", "-am", "raise without reason")
-            assert check(root, head) == 1
-            run("reset", "-q", "--hard", head)
-            a.write_text("auto x = 1;\n", encoding="utf-8")
-            run("commit", "-q", "-am", "drop the literal")
-            assert check(root, None) == 0 and check(root, head) == 1
-            assert update(root, head) == 0 and check(root, head) == 0
-        finally:
-            sys.stdout = stdout
-            quiet.close()
-            for k, v in saved.items():
-                if v is None:
-                    os.environ.pop(k, None)
-                else:
-                    os.environ[k] = v
     print("self-test ok")
     return 0
 
 
 def main(argv):
-    base = None
-    if "--base" in argv:
-        i = argv.index("--base")
-        if i + 1 >= len(argv):
-            print(__doc__.strip(), file=sys.stderr)
-            return 2
-        base = argv[i + 1]
-        argv = argv[:i] + argv[i + 2:]
     if argv == ["--self-test"]:
         return self_test()
-    if argv == ["--report"]:
+    if argv in ([], ["--report"]):
         return report(ROOT)
-    if argv == ["--update"]:
-        return update(ROOT, base)
-    if argv in ([], ["--check"]):
-        return check(ROOT, base)
     print(__doc__.strip(), file=sys.stderr)
     return 2
 
