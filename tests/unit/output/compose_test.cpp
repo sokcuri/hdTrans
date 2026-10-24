@@ -347,6 +347,16 @@ HD_TEST(compose_verbal_noun_passive) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// The auxiliary 버리다 (gram Ds) joins the 아/어 form before it; the main verb stays apart.
+HD_TEST(compose_auxiliary_beorida_join) {
+    const CompositionCase cases[] = {
+        {{{"食べ", "410", "", "&HU@", "6"}, {"しま", "410", "DuDs", "버&AA@", "5다"}}, {1, 2}, "먹어버렸다."},
+        {{{"食べ", "410", "", "&HU@", "6"}, {"捨て", "437", "", "버&AA@", "5다"}}, {1, 2}, "먹어 버렸다."},
+        {{{"捨て", "437", "", "버&AA@", "6"}, {"捨て", "437", "", "버&AA@", "6"}}, {1, 2}, "버려 버려."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // A gloss that ends in a space joins what attaches to its last syllable, and keeps the
 // space before a word.
 HD_TEST(compose_gloss_space_before_attached_word) {
