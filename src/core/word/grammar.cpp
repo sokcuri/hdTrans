@@ -2575,16 +2575,21 @@ bool OldSpeech(std::string_view q) {
     return false;
 }
 
-// Whether the sentence before it names a doer other than the speaker in が, は or も (彼が, 母は)
-// or a habit (adverb.habit: 毎日): its giving then tells what someone does, no promise.
+// Whether the sentence before it names a doer other than the speaker, a kin term or a person noun
+// (noun.role or noun.other-giver, not pronoun.speaker) in が, は or も (彼が, 母は), or a habit
+// (adverb.habit: 毎日): its giving then tells what someone does, no promise. A time word or a name
+// before the particle does not (今日も, 長鯨が: a speaker often names herself).
 bool OtherGiver(const Item* it) {
     for (const Item* x = it->prev; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (s == "。" || s == "！" || s == "？" || s == "!" || s == "?" || s == "「" || s == "『") break;
         if (dict::InClass("adverb.habit", s)) return true;
-        if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr &&
-            !dict::InClass("pronoun.speaker", x->prev->group->surface)) {
-            return true;
+        if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr) {
+            const std::string_view doer = x->prev->group->surface;
+            if (!dict::InClass("pronoun.speaker", doer) &&
+                (dict::InClass("noun.role", doer) || dict::InClass("noun.other-giver", doer))) {
+                return true;
+            }
         }
     }
     return false;
@@ -2650,8 +2655,11 @@ void OfferPromise(Flusher& f) {
         // A final particle marks speech outside brackets too (a line of dialogue), and so does an
         // exclamation mark after the あげる of a て form with no other doer or habit before it
         // (見せてあげる！; not 母が作ってあげる！ nor the shouted 見せてやる！).
-        const bool afterTe = it->prev != nullptr && it->prev->selected >= 0 &&
-                             (it->prev->DirectSurface().ends_with("て") || it->prev->DirectSurface().ends_with("で"));
+        // The て form may be the item before or the start of the item itself (してあげ).
+        const std::string_view lead = gives ? surface.substr(0, surface.size() - std::string_view("あげ").size()) : "";
+        const bool afterTe = lead.ends_with("て") || lead.ends_with("で") ||
+                             (it->prev != nullptr && it->prev->selected >= 0 &&
+                              (it->prev->DirectSurface().ends_with("て") || it->prev->DirectSurface().ends_with("で")));
         const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
                             ending == "ぞ" ||
                             (gives && afterTe && !OtherGiver(it) &&

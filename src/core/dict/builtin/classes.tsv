@@ -189,6 +189,7 @@
 //= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.return-here	Ends of the nouns of here, of a ship's home port and of one's right mind (正気): 戻る to them, or in a sentence that names here after it, comes back, 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다, 正気に戻る 제정신으로 돌아오다, 車に戻ったんだ、ここも 차로 돌아왔어).
+//= noun.other-giver	Person nouns beyond noun.role (あの人, 誰か, お母さん, あいつ): a が, は or も after one of them before an offer of あげる names another giver (あの人が作ってあげる！ 그 사람이 만들어 준다!).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.unit	Ends of the nouns of a fleet, a unit or a team that acts as one: で after one before a verb of verb.unit-operation is the group that does it, (으)로 (艦隊で出撃する 함대로 출격한다), not the scope (艦隊で一番 함대에서 제일).
 //= noun.goto-unit	Ends of the words of a span or a unit before which ごと shares out, 마다 (数時間ごと 몇 시간마다, 三ページごと), not 째.
@@ -2689,6 +2690,25 @@ noun.result-sareru	拘束
 noun.result-sareru	掲載
 noun.result-sareru	確保
 
+noun.other-giver	人
+noun.other-giver	誰か
+noun.other-giver	友達
+noun.other-giver	彼ら
+noun.other-giver	お母さん
+noun.other-giver	お父さん
+noun.other-giver	母さん
+noun.other-giver	父さん
+noun.other-giver	兄さん
+noun.other-giver	姉さん
+noun.other-giver	お兄さん
+noun.other-giver	お姉さん
+noun.other-giver	おばあちゃん
+noun.other-giver	おじいちゃん
+noun.other-giver	あいつ
+noun.other-giver	こいつ
+noun.other-giver	そいつ
+noun.other-giver	奴
+noun.other-giver	みんな
 noun.role	父
 noun.role	母
 noun.role	兄
