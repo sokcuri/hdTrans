@@ -69,8 +69,7 @@
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
-//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons (先生たん, 小林っち; not たまごっち, 顔合わせたんだ, 母たんこぶ).
-//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん; not たまごっち, 顔合わせたんだ).
+//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん; not たまごっち, 顔合わせたんだ, 母たんこぶ).
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
