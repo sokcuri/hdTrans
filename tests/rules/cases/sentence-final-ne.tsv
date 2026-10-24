@@ -122,9 +122,9 @@ cx:ne-promise:20	「若い人の間で流行るね」	rule:cx:ne-promise:20=1네
 cx:ne-promise:20	「休むのはしょうがない気もするね」	rule:cx:ne-promise:20=1네	fix	rewrites
 cx:ne-promise:20	「それは仕方ないと疑うね」	rule:cx:ne-promise:20=1네	fix	rewrites
 cx:ne-promise:20	「その時そう思ってしまうね」	rule:cx:ne-promise:20=1네	fix	rewrites
-cx:ne-promise:12	「お前、やるね」	rule:cx:ne-promise:12=1네	fix	rewrites
-cx:ne-promise:12	「先輩、やるね！」	rule:cx:ne-promise:12=1네	fix	rewrites
-cx:ne-promise:12	「じゃあ、やるね」	!rule:cx:ne-promise:12	keep	rewrites
+cx:ne-promise:17	「お前、やるね」	rule:cx:ne-promise:17=1네	fix	rewrites
+cx:ne-promise:17	「先輩、やるね！」	rule:cx:ne-promise:17=1네	fix	rewrites
+cx:ne-promise:17	「じゃあ、やるね」	!rule:cx:ne-promise:17	keep	rewrites
 cx:ne-promise:15	「私が出るね」	rule:cx:ne-promise:15=3게	fix	rewrites
 cx:ne-promise:15	「私は先に帰るね」	rule:cx:ne-promise:15=3게	fix	rewrites
 cx:ne-promise:15	「僕は分かるね」	!rule:cx:ne-promise:15	keep	rewrites
@@ -153,3 +153,15 @@ phrase:leave-taking	「じゃあ、また来週ね」	「그럼, 다음 주에 �
 phrase:leave-taking	「うん、またな」	「응, 또 보자」	fix	sound
 phrase:leave-taking	「危ないからまた後で」	「위험하니까 또 나중에」	keep	sound
 phrase:leave-taking	「明日また来る」	「내일 또 온다」	keep	sound
+phrase:leave-taking	「それじゃ、また明日」	「그럼, 내일 보자」	fix	sound
+phrase:leave-taking	「おやすみ、太郎。また明日ね」	「잘 자, 타로. 내일 보자」	fix	sound
+phrase:leave-taking	「ああ、また明日」	「아, 내일 보자」	fix	sound
+phrase:leave-taking	「また明日!!」	「내일 보자!!」	fix	sound
+phrase:leave-taking	「また明日！」	「내일 보자!」	fix	sound
+phrase:leave-taking	「また明日……」	「내일 보자……」	fix	sound
+phrase:leave-taking	「また明日～」	「내일 보자~」	fix	sound
+phrase:leave-taking	「ありがとう　またあした」	「고마워 내일 보자」	fix	sound
+phrase:leave-taking	「また明日！おやすみ！」	「내일 보자! 잘 자!」	fix	sound
+cx:ne-promise:17	「にいちゃん、やるね。」	rule:cx:ne-promise:17=1네	fix	rewrites
+cx:ne-promise:17	「よし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
+cx:ne-promise:40	「放課後とか頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites
