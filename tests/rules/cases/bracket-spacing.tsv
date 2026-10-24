@@ -1,0 +1,47 @@
+# 규칙: LAY-10
+rule	input	expected	kind	layer
+compose:bracket-apart	言われた通りに【万能農具】を	들은 대로 【만능 농기구】를	fix	compose
+compose:bracket-apart	次に【万能農具】を使ってみる。	다음에 【만능 농기구】를 써 본다.	fix	compose
+compose:bracket-apart	知った【聖女召喚の儀】についての話	안 【성녀 소환의 의식】에 대한 이야기	fix	compose
+compose:bracket-apart	型番は【ＡＳＸ‐０８ Ｋｒｉｓｈｎａ】だ。	제품번호는 【ASX‐08 Krishna】다.	fix	compose
+compose:bracket-apart	兵站強化遠征任務【基本作戦】	병참 강화 원정 임무 【기본 작전】	fix	compose
+compose:bracket-apart	菱餅【6個】を準備して	히시모치 【6개】를 준비해	fix	compose
+compose:bracket-apart	体験集まれ127【厳禁】	체험 모여라 127 【엄금】	fix	compose
+compose:bracket-apart	運行時刻予定表【2026年9月7日～9月20日分】	운행 시각 일정표 【2026년 9월 7일~9월 20일분】	fix	compose
+compose:bracket-apart	彼は【鑑定】を使った。	그는 【감정】을 썼다.	fix	compose
+compose:bracket-apart	俺の【スキル】が光った。	나의 【스킬】이 빛났다.	fix	compose
+compose:bracket-apart	それは【万能農具】だ。	그것은 【만능 농기구】다.	fix	compose
+compose:bracket-apart	アイテムボックスに【万能農具】を	아이템 박스에 【만능 농기구】를	fix	compose
+compose:bracket-apart	彼は、【鑑定】を使った。	그는, 【감정】을 썼다.	fix	compose
+compose:bracket-apart	スキル【鑑定】を発動する。	스킬 【감정】을 발동한다.	fix	compose
+compose:bracket-apart	レベル3【鑑定】を得た。	레벨 3 【감정】을 얻었다.	fix	compose
+compose:bracket-apart	彼は【鑑定】と【解析】を持っている。	그는 【감정】과 【해석】을 가지고 있다.	fix	compose
+compose:bracket-apart	彼は〈勇者〉だった。	그는 〈용사〉였다.	fix	compose
+compose:bracket-apart	ブログ［日記］を更新した。	블로그 [일기]를 갱신했다.	fix	compose
+compose:bracket-apart	条件を満たしました。スキル《星読み》を獲得しました	조건을 충족했습니다. 스킬 《별읽기》를 획득했습니다	fix	compose
+compose:bracket-apart	画面の端に表示された［既読］の二文字を見ながら	화면의 구석에 표시된 [읽음]의 두 글자를 보면서	fix	compose
+compose:bracket-apart	手書きの看板が出ていて、【本日の新作】の文字の下に	손글씨의 간판이 나와 있어, 【오늘의 신작】의 문자 아래에	fix	compose
+compose:bracket-apart	何が、《ユニークスキル『鑑定』》だ。	무엇이, 《유니크 스킬 『감정』》이다.	fix	compose
+compose:bracket-apart	彼の‘剣’は	그의 ‘검’은	fix	compose
+compose:bracket-apart	支援コンピュータ〈カグヤ〉が	지원 컴퓨터 〈카구야〉가	fix	compose
+compose:bracket-apart	ギルド【クッキングファーム】の	길드 【쿠킹 팜】의	fix	compose
+compose:bracket-apart	彼は｛勇者｝だ	그는 {용사}다	fix	compose
+compose:bracket-apart	【鑑定】を使った。	【감정】을 썼다.	keep	compose
+compose:bracket-apart	えっと……【鑑定】	음……【감정】	keep	compose
+compose:bracket-apart	「【鑑定】！」	「【감정】!」	keep	compose
+compose:bracket-apart	【鑑定】【解析】【隠蔽】	【감정】【해석】【은폐】	keep	compose
+compose:bracket-apart	【創作】怖い話	【창작】무서운 이야기	keep	compose
+compose:bracket-apart	彼は 【鑑定】を使った。	그는 【감정】을 썼다.	keep	compose
+compose:bracket-apart	名前  【鑑定】	이름  【감정】	keep	compose
+compose:bracket-apart	彼は（多分）大丈夫だ。	그는(아마) 괜찮다.	keep	compose
+compose:bracket-apart	彼は〔勇者〕だ。	그는〔용사〕다.	keep	compose
+compose:bracket-apart	地上人＜ラムズ＞	지상인<람즈>	keep	compose
+compose:bracket-apart	[b]大切な[/b]ものは、いつも手の届かないところにある。	[b]중요한[/b] 것은, 언제나 손이 닿지 않는 곳에 있다.	keep	compose
+compose:bracket-apart	彼は「こんにちは」と言った。	그는 「안녕하세요」라고 말했다.	keep	compose
+compose:bracket-apart	彼は『魔王』と呼ばれた。	그는 『마왕』으로 불렸다.	keep	compose
+compose:bracket-apart	[日間]コメディー〔文芸〕	[일간]코미디〔문예〕	keep	compose
+compose:bracket-apart	彼は来た。\n【鑑定】を使った。	그는 왔다. \n【감정】을 썼다.	keep	compose
+compose:bracket-apart	名前は%s【鑑定】	이름은 %s【감정】	keep	compose
+compose:bracket-apart	<b>彼</b>【鑑定】	<b>그</b>【감정】	keep	compose
+compose:bracket-apart	【鑑定】スキルを使った。	【감정】스킬을 썼다.	current	compose
+compose:bracket-apart	魔法〈マジック〉を使う	마법 〈매직〉을 쓴다	current	compose
