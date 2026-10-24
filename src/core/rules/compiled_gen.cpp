@@ -1666,13 +1666,16 @@ bool RuleL180([[maybe_unused]] Item* p) {
 }
 
 // local 181
+//     (src == "出" and src[-1] == "が" or src ends "が出") and pos[+1] is 7** and end.ko := "3 정도로"
 //     end.pos[-1] is 53* and (src[+1] == "美味し" or src[+1] == "おいし" or src[+1] == "難し" or src[+1] == "い" or src[+1] == "おもしろ" or src[+1] == "面白") and pos[+1] is 7**
 //     pos[-1] is 4** and end.ko[-1] == "2면" and end.pos[-1] is 53*
 //     (src[+1] == "美味し" or src[+1] == "おいし" or src[+1] == "難し" or src[+1] == "い" or src[+1] == "おもしろ" or src[+1] == "面白" or src[+1] == "むずかし") and pos[+1] is 7**
 //     pos[+1] is 7** and end.src[+1] == "く" and src[+2] == "な" and pos[+2] is 4**
 //     end.src[+3] == "く"
 bool RuleL181([[maybe_unused]] Item* p) {
-    return (GobiPumsaEq(p, -1, "53*"sv) && (SrcEq(p, 1, "美味し"sv) ||
+    return (((SrcEq(p, 0, "出"sv) && SrcEq(p, -1, "が"sv)) ||
+           SrcEq(p, 0, "Rが出"sv)) && PumsaEq(p, 1, "7**"sv) && GobiDstSet(p, 0, "3 정도로"sv)) ||
+           (GobiPumsaEq(p, -1, "53*"sv) && (SrcEq(p, 1, "美味し"sv) ||
            SrcEq(p, 1, "おいし"sv) ||
            SrcEq(p, 1, "難し"sv) ||
            SrcEq(p, 1, "い"sv) ||
@@ -4609,7 +4612,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL178, 0xd3a2d9a092d309b9ull},
     {RuleL179, 0xe92575172a0a2872ull},
     {RuleL180, 0xcb14b6a9db55cd88ull},
-    {RuleL181, 0xf48878a00762f704ull},
+    {RuleL181, 0x3a44e41643288c21ull},
     {RuleL182, 0xea8c60e63ae96765ull},
     {RuleL183, 0x584a44fc32c3367aull},
     {RuleL184, 0x68d289ed25b03601ull},

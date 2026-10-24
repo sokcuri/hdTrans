@@ -24,6 +24,19 @@ using BaseContinues = bool (*)(const void* context, std::string_view base, std::
 // longer base when continues says so. Run after Normalize, with the dictionary.
 std::string JoinBraceRuby(std::string_view line, BaseContinues continues, const void* context);
 
+// Whether the variant at line[at, at + variant.size()) is part of another dictionary word and so
+// stays as written (身の程, ときめく).
+using WordKeepsVariant = bool (*)(const void* context, std::string_view line, size_t at, std::string_view variant,
+                                  std::string_view spelling);
+
+// line with each spelling of a grammatical word in classes.tsv spelling.variant (VARIANT=SPELLING)
+// written in the spelling it names, so that both are read alike (痛い程に 痛いほどに, 見たとき
+// 見た時): a kanji variant after hiragana, or after a kanji or katakana when
+// spelling.variant-after-word lists it; a kana variant written in kanji only after a kana of
+// spelling.variant-kana-after; another kana variant anywhere. A variant in a context of spelling.variant-kept (神の位) stays, and so does one where
+// keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
+std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
+
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced

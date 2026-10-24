@@ -1,0 +1,78 @@
+# 규칙: LEX-13
+rule	input	expected	kind	layer
+normalize:spelling-variant	痛い程に赤い。	아플 정도로 붉다.	keep	normalize
+normalize:spelling-variant	耳が痛い程の沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	keep	normalize
+normalize:spelling-variant	付き合っている程暇ではない。	사귈 만큼 한가하지 않다.	fix	normalize
+normalize:spelling-variant	付き合っているほど暇ではない。	사귈 만큼 한가하지 않다.	keep	normalize
+normalize:spelling-variant	皆が自宅へと急ぐ程の雨だった。	모두가 자택으로 서두를 정도의 비였다.	keep	normalize
+normalize:spelling-variant	思い出せば思い出す程、今の価値観に馴染めずに	생각해 내면 생각해 낼수록, 지금의 가치관에 친숙해지지 못하고	keep	normalize
+normalize:spelling-variant	身の程を知れ。	분수를 알아라.	keep	normalize
+normalize:spelling-variant	信じられない位淡白で	믿을 수 없을 정도 담박해	fix	normalize
+normalize:spelling-variant	信じられないくらい淡白で	믿을 수 없을 정도 담박해	keep	normalize
+normalize:spelling-variant	秋刀魚を三枚におろす位、造作も無いこと。	꽁치를 석장에 내릴 정도로, 문제없는 일.	fix	normalize
+normalize:spelling-variant	ミヅチも神の位から落ちたらしい	미즈치도 신의 위로부터 떨어진 것 같다	keep	normalize
+normalize:spelling-variant	行かせない等、執拗で悪質なものもあった	가게 하지 않는 등, 집요하고 악질적인 것도 있었다	keep	normalize
+normalize:spelling-variant	行かせないなど、執拗で悪質なものもあった	가게 하지 않는 등, 집요하고 악질적인 것도 있었다	keep	normalize
+normalize:spelling-variant	プライドが高かった為、夫の裏切りを許せなかった	프라이드가 높았기 때문에, 남편의 배반을 용서할 수 없었다	fix	normalize
+normalize:spelling-variant	プライドが高かったため、夫の裏切りを許せなかった	프라이드가 높았기 때문에, 남편의 배반을 용서할 수 없었다	keep	normalize
+normalize:spelling-variant	確実に芸術学部に行く為に内部進学を狙う	확실히 예술 학부에 가기 위해 내부 진학을 노린다	keep	normalize
+normalize:spelling-variant	貴方はその道の果てに何を為そうとしているのですか？	당신은 그 길의 끝에 무엇을 하려 하고 있습니까?	keep	normalize
+normalize:spelling-variant	呉で朽ち果てる迄、戦うつもりだ。	오로 헛되이 죽을 때까지, 싸울 생각이다.	fix	normalize
+normalize:spelling-variant	呉で朽ち果てるまで、戦うつもりだ。	오로 헛되이 죽을 때까지, 싸울 생각이다.	keep	normalize
+normalize:spelling-variant	追い詰められてるときは周りが全然見えてなかった	몰리고 있을 때는 주위가 전혀 보이지 않았다	fix	normalize
+normalize:spelling-variant	これはまずい、と思ったときには遅かった。	이것은 큰일이다, 라고 생각했을 때는 늦었다.	keep	normalize
+normalize:spelling-variant	これはまずい、と思った時には遅かった。	이것은 큰일이다, 라고 생각했을 때는 늦었다.	keep	normalize
+normalize:spelling-variant	時間あるときは、電池の確認と整備をしないと	시간 있을 때는, 전지 확인과 정비를 하지 않으면	keep	normalize
+normalize:spelling-variant	胸がときめく。	가슴이 두근거린다.	keep	normalize
+lookup:demonstrative-gurai	それぐらいは出来ると思った。	그 정도는 할 수 있다고 생각했다.	fix	lookup
+lookup:demonstrative-gurai	それくらいは出来ると思った。	그 정도는 할 수 있다고 생각했다.	keep	lookup
+lookup:demonstrative-gurai	これぐらいの車に乗って見栄を張る	이 정도의 차를 타 허세를 부린다	fix	lookup
+cx:ni-after-adverb:10	それぐらいに近い。	그 정도로 가깝다.	fix	rewrites
+cx:ni-after-adverb:10	それくらいに近い。	그 정도로 가깝다.	fix	rewrites
+cx:ni-after-adverb:10	気持ちが痛いくらいによくわかる。	기분이 아플 정도로 잘 안다.	fix	rewrites
+cx:ttae-adnominal:10	追い詰められてる時は周りが全然見えてなかった	몰리고 있을 때는 주위가 전혀 보이지 않았다	fix	rewrites
+cx:ttae-adnominal:10	今は喧嘩してる時じゃないよ！！	지금은 싸움하고 있을 때가 아니야!!	fix	rewrites
+cx:ttae-adnominal:10	カタリナの記憶しかなかった時は、	카타리나의 기억밖에 없었을 때는,	fix	rewrites
+cx:ttae-adnominal:10	上級職にクラスチェンジした時の感動	!rule:cx:ttae-adnominal:10	keep	rewrites
+cx:ttae-adnominal:10	知っている人がいる。	!rule:cx:ttae-adnominal:10	keep	rewrites
+dict:jisjk:265559	下品にもほどがあるぞ！	천하게도 정도가 있겠어!	fix	local
+dict:jisjk:265559	お人好しにもほどがある！	호인에게도 정도가 있다!	fix	local
+dict:jisjk:265559	無礼にも程があるな。	무례하게도 정도가 있구나.	keep	local
+dict:jisjk:265559	三日ほど休んだ。	3일 정도 쉬었다.	keep	local
+dict:jisjk:265559	彼ほど強い人はいない。	!rule:dict:jisjk:265559	keep	local
+dict:jisjk:4198	声が出るほど面白い。	목소리가 나올 정도로 재미있다.	fix	local-ending
+dict:jisjk:4198	声が出る程面白い。	목소리가 나올 정도로 재미있다.	keep	local-ending
+cx:hodo-degree:10	痛いほどに赤い。	아플 정도로 붉다.	fix	rewrites
+cx:hodo-degree:10	冗談ではないほどに美しい少女だ。	농담이 아닐 정도로 아름다운 소녀다.	fix	rewrites
+cx:hodo-degree:10	耐えがたいほどに眠い……。	참기 어려울 정도로 졸리다…….	fix	rewrites
+cx:hodo-degree:10	恥ずかしいほどに硬直した。	부끄러울 정도로 경직되었다.	fix	rewrites
+cx:hodo-degree:10	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
+cx:hodo-degree:15	耳が痛いほどの沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
+cx:hodo-degree:15	彼ほどの人はいない。	그 정도의 사람은 없다.	keep	rewrites
+cx:hodo-degree:30	膝から崩れ落ちそうな程だった	무릎에서 무너져 내릴 것 같을 정도였다	fix	rewrites
+cx:hodo-degree:30	修復不可能な程までに断裂した	수복 불가능할 정도까지 단열했다	fix	rewrites
+cx:hodo-degree:30	付き合っているほど暇ではない。	사귈 만큼 한가하지 않다.	keep	rewrites
+normalize:spelling-variant	私の置かれている状況について等を聞いた。	내가 놓여져 있는 상황에 대해 등을 들었다.	keep	lookup
+normalize:spelling-variant	私の置かれている状況についてなどを聞いた。	내가 놓여져 있는 상황에 대해 등을 들었다.	fix	lookup
+normalize:spelling-variant	バスの遅れ等による運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	keep	lookup
+normalize:spelling-variant	バスの遅れなどによる運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	fix	lookup
+dict:jisjk:118867	この時の為、今、ここにいます。	rule:dict:jisjk:118867=(을)를 위해	fix	local
+dict:jisjk:118867	その日のために生きてきた。	그날을 위해 살아 왔다.	fix	local
+dict:jisjk:118867	君のため、頑張る。	너를 위해, 노력한다.	keep	local
+dict:jisjk:118867	雨のため、中止した。	!rule:dict:jisjk:118867	keep	local
+dict:jisjk:92631	離れる時に見せた、あの瞳	!rule:dict:jisjk:92631	fix	local
+dict:jisjk:92631	離れるときに見せた、あの瞳	떨어질 때 보인, 그 눈동자	keep	local
+dict:jisjk:92631	家から離れる。	rule:dict:jisjk:92631=멀어&AL@	keep	local
+cx:hodo-degree:10	玉石混交という言葉が生ぬるい程に混沌としていた	옥석혼효라는 말이 미지근할 정도로 혼돈되고 있었다	fix	rewrites
+cx:hodo-degree:15	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
+cx:hodo-degree:15	並のギアでは倒せない程の怪物なんですよ。	보통의 기어에서는 넘어뜨릴 수 없을 정도의 괴물이랍니다.	fix	rewrites
+normalize:spelling-variant	その数同数な程自衛官とともに存在した。	그 수동수인 정도 자위관과 함께 존재했다.	keep	normalize
+normalize:spelling-variant	そんなことに付き合ってられる程俺は暇じゃない！！	그런 일로 어울릴 수 있다만큼 나는 한가하지 않다!!	current	normalize
+normalize:spelling-variant	子供程の背丈しかない。	아이 정도의 키밖에 없다.	fix	normalize
+normalize:spelling-variant	ある程度は分かる。	어느 정도는 안다.	keep	normalize
+normalize:spelling-variant	為替が動いた。	환율이 움직였다.	keep	normalize
+normalize:spelling-variant	先程の件だが。	조금 전의 건이지만.	keep	normalize
+normalize:spelling-variant	もっときれいになる。	좀 더 예쁘게 된다.	keep	normalize
+normalize:spelling-variant	程なく雨が止んだ。	곧 비가 그쳤다.	keep	normalize
+normalize:spelling-variant	あいつ等が来た。	저놈들이 왔다.	keep	normalize
+normalize:spelling-variant	国の為となる。	나라를 위한 것이 된다.	fix	normalize

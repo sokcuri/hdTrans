@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/spoken_forms_gen.h"
@@ -465,6 +466,43 @@ HD_TEST(pipeline_join_brace_ruby) {
         {"{k=-5.0}―――{/k}"sv, "{k=-5.0}―――{/k}"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(JoinBraceRuby(c.in, verbs, nullptr), std::string(c.want));
+}
+
+HD_TEST(pipeline_respell_variants) {
+    // A stand-in for the dictionary: 身の程 and ときめく are words that hold a variant.
+    const WordKeepsVariant words = [](const void*, std::string_view line, size_t at, std::string_view variant,
+                                      std::string_view) {
+        const std::string_view rest = line.substr(at);
+        return rest.starts_with("程度") ||
+               (rest.starts_with("程") && at >= "身の"sv.size() && line.substr(at - "身の"sv.size()).starts_with("身の")) ||
+               (variant == "とき"sv && rest.starts_with("ときめ"));
+    };
+    const Case cases[] = {
+        {"痛い程に赤い。"sv, "痛いほどに赤い。"sv},
+        {"子供程の背丈"sv, "子供ほどの背丈"sv},
+        {"程度の差"sv, "程度の差"sv},
+        {"身の程を知れ"sv, "身の程を知れ"sv},
+        {"それぐらいに近い"sv, "それぐらいに近い"sv},
+        {"人の為に"sv, "人のために"sv},
+        {"何を為そうと"sv, "何を為そうと"sv},
+        {"死ぬ迄"sv, "死ぬまで"sv},
+        {"見たときに分かった"sv, "見た時に分かった"sv},
+        {"もっときれいになる"sv, "もっときれいになる"sv},
+        {"胸がときめく"sv, "胸がときめく"sv},
+        {"信じられない位淡白"sv, "信じられないくらい淡白"sv},
+        {"神の位から落ちた"sv, "神の位から落ちた"sv},
+        {"知らない事が多い"sv, "知らない事が多い"sv},
+        {"仕事を終えた"sv, "仕事を終えた"sv},
+        {"行かせない等、"sv, "行かせないなど、"sv},
+        {"時間がない"sv, "時間がない"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellVariants(c.in, words, nullptr), std::string(c.want));
+    // Every member is VARIANT=SPELLING with both sides written.
+    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.variant")) {
+        const size_t eq = pair.find('=');
+        HD_CHECK(eq != std::string_view::npos && eq > 0 && eq + 1 < pair.size() &&
+                 pair.find('=', eq + 1) == std::string_view::npos);
+    }
 }
 
 HD_TEST(pipeline_write_kin_terms) {

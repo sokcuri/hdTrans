@@ -20627,3 +20627,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 トモダチ	친구	N110	VHn		GN							variant:katakana:22
 ゴメンな	미안해	A9H0			GN						ごめんな	variant:katakana:23
 ゴメンよ	미안해	A9H0			GN						ごめんよ	variant:katakana:24
+それぐらい	그 정도	E311			GN						それぐらい	variant:voiced:1
+これぐらい	이 정도	N110			GN						これぐらい	variant:voiced:2
+そのぐらい	그 정도	C0H0			GN						そのぐらい	variant:voiced:3
+このぐらい	이 정도	C0H0			GN						このぐらい	variant:voiced:4
+あのぐらい	그 정도	C0H0			GN						あのぐらい	variant:voiced:5

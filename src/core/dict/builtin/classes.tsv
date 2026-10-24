@@ -113,6 +113,10 @@
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
+//= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
+//= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
+//= spelling.variant-kept	Contexts in which a variant of spelling.variant is another word and stays: 位 of rank after の or before が, を (神の位, 位が下げられる), 等 read ら after a pronoun (それ等, あいつ等), the verb 為す or 為る (何を為そう), and 程 after the adnominal な, which the kana rows read as an attached 만큼 (同数な程).
 //= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
 //= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
@@ -1848,6 +1852,52 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
+spelling.variant	程=ほど
+spelling.variant	位=くらい
+spelling.variant	等=など
+spelling.variant	為=ため
+spelling.variant	迄=まで
+spelling.variant	とき=時
+spelling.variant-after-word	程
+spelling.variant-kana-after	た
+spelling.variant-kana-after	だ
+spelling.variant-kana-after	る
+spelling.variant-kana-after	い
+spelling.variant-kana-after	う
+spelling.variant-kana-after	く
+spelling.variant-kana-after	す
+spelling.variant-kana-after	つ
+spelling.variant-kana-after	ぬ
+spelling.variant-kana-after	む
+spelling.variant-kana-after	ぶ
+spelling.variant-kana-after	ぐ
+spelling.variant-kana-after	な
+spelling.variant-kana-after	の
+spelling.variant-kept	の位
+spelling.variant-kept	な程
+spelling.variant-kept	位が
+spelling.variant-kept	位を
+spelling.variant-kept	それ等
+spelling.variant-kept	あれ等
+spelling.variant-kept	これ等
+spelling.variant-kept	あんた等
+spelling.variant-kept	こいつ等
+spelling.variant-kept	そいつ等
+spelling.variant-kept	あいつ等
+spelling.variant-kept	おまえ等
+spelling.variant-kept	てめえ等
+spelling.variant-kept	あたし等
+spelling.variant-kept	わたし等
+spelling.variant-kept	ぼく等
+spelling.variant-kept	おれ等
+spelling.variant-kept	為さ
+spelling.variant-kept	為し
+spelling.variant-kept	為す
+spelling.variant-kept	為せ
+spelling.variant-kept	為そ
+spelling.variant-kept	為る
+spelling.variant-kept	為れ
+spelling.variant-kept	為ろ
 
 stem.compound-particle	つ
 stem.compound-particle	対し
