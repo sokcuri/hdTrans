@@ -334,3 +334,28 @@ HD_TEST(pipeline_literal_cleanup) {
     HD_CHECK_EQ(pipeline::RestoreAll(translated, typed, true, true).line, "몇 번몇번");
     HD_CHECK_EQ(pipeline::RestoreAll(translated, typed, true).line, "몇번몇번");
 }
+
+HD_TEST(pipeline_laughter_letters) {
+    const struct { const char* in; const char* want; } cases[] = {
+        {"그것은 없어 w", "그것은 없어 ㅋ"},
+        {"진짜야www", "진짜야ㅋㅋㅋ"},
+        {"진짜야! ww", "진짜야! ㅋㅋ"},
+        {"ㅋㅋ wwww", "ㅋㅋ ㅋㅋㅋㅋ"},
+        {"www", "ㅋㅋㅋ"},
+        {"송wwww 그런가", "송ㅋㅋㅋㅋ 그런가"},
+        {"www.example.com", "www.example.com"},
+        {"w를 입력", "w를 입력"},
+        {"OK www", "OK www"},
+        {"twwwitter", "twwwitter"},
+        {"게임의 wiki", "게임의 wiki"},
+        {"3w", "3w"},
+        {"\xff 진짜야www", "\xff 진짜야ㅋㅋㅋ"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteLaughter(c.in, ""), std::string(c.want));
+    // With the typed text: a letter used as a word stays, laughter before the next words goes.
+    HD_CHECK_EQ(pipeline::WriteLaughter("변수 w의 값", "変数wの値"), std::string("변수 w의 값"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("www의 의미", "wwwの意味"), std::string("www의 의미"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("키보드의 w키", "キーボードのwキー"), std::string("키보드의 w키"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("있어w미도리 씨w", "あるよなｗミドリさんｗ"), std::string("있어ㅋ미도리 씨ㅋ"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("웃은 wwww미안해", "笑ったｗｗｗｗゴメン"), std::string("웃은 ㅋㅋㅋㅋ미안해"));
+}

@@ -1,0 +1,41 @@
+# 규칙: SND-5
+rule	input	expected	kind	layer
+restore:laughter	何でそんな発想になったんだよｗｗｗｗｗｗ	왜 그런 발상이 되었어 ㅋㅋㅋㅋㅋㅋ	fix	restore
+restore:laughter	キツネのお面被った変な人が祓ってくれたやつでしょwww	여우의 가면 쓴 이상한 사람이 정화해 준 녀석이지 ㅋㅋㅋ	fix	restore
+restore:laughter	いや女王様のせいだろｗ	아니 여왕님 탓이지 ㅋ	fix	restore
+restore:laughter	これは創作だろｗ	이것은 창작이지 ㅋ	fix	restore
+restore:laughter	いやいや、神様が憑いてたら確かに最強じゃんｗｗ	아니아니, 신이 빙의하고 있으면 확실히 최강이잖아 ㅋㅋ	fix	restore
+restore:laughter	でもフードにグラサンはちょっと怖いですｗｗ	하지만 후드에 선글라스는 조금 무섭습니다 ㅋㅋ	fix	restore
+restore:laughter	テンションｗｗｗｗ	텐션 ㅋㅋㅋㅋ	fix	restore
+restore:laughter	ミツルのテンションwwwww	미츠루의 텐션 ㅋㅋㅋㅋㅋ	fix	restore
+restore:laughter	ｗｗｗ	ㅋㅋㅋ	fix	restore
+restore:laughter	マジかｗｗｗ	진짜야ㅋㅋㅋ	fix	restore
+restore:laughter	www.example.com	www.example.com	keep	restore
+restore:laughter	wを入力	w를 입력	keep	restore
+restore:laughter	ゲームのwiki	게임의 wiki	keep	restore
+restore:laughter	これは『Ｆｌｏｗｅｒｉｎｇ Ｓｅａｓｏｎ』というＢＬゲームの世界だ	이것은 『Flowering Season』이라는 BL 게임의 세계다	keep	restore
+restore:laughter	Wi-Fiを使う	Wi-Fi를 쓴다	keep	restore
+cx:laughing-kusa:10	　コメント：枠2時間で200円はブラックで草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	　コメント：兄者めっちゃ棒読みで草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	マジで草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	これは草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	【ツッコミのキレ凄すぎて草ｗｗｗｗｗｗ】	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	庭で草を刈った	!rule:cx:laughing-kusa:10	keep	rewrites
+cx:laughing-kusa:10	草が生えた。	!rule:cx:laughing-kusa:10	keep	rewrites
+cx:laughing-kusa:10	　コメント：これだけで配信成り立つの草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	　コメント：身内に身代金払うの草	rule:cx:laughing-kusa:10=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:10	庭の草。	!rule:cx:laughing-kusa:10	keep	rewrites
+cx:laughing-kusa:10	それに、深守村の古い儀式で使う魂縛り草。	!rule:cx:laughing-kusa:10	keep	rewrites
+cx:laughing-kusa:30	さくらくん「草…夢まじ忘れてたでしょ」	rule:cx:laughing-kusa:30=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:30	草。	rule:cx:laughing-kusa:30=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:30	「草」	rule:cx:laughing-kusa:30=ㅋㅋ	fix	rewrites
+cx:laughing-kusa:30	風に揺れる草、遠くに見える低い丘。	!rule:cx:laughing-kusa:30	keep	rewrites
+cx:laughing-kusa:30	草を刈る。	!rule:cx:laughing-kusa:30	keep	rewrites
+restore:laughter	変数wの値	변수 w의 값	keep	restore
+restore:laughter	キーボードのwキーを押す	키보드의 w키를 누른다	keep	restore
+restore:laughter	幅wと高さhを入力する	폭w와 높이 h를 입력한다	keep	restore
+restore:laughter	wwwはワールドワイドウェブの略です	www는 월드 와이드 웹의 약어입니다	keep	restore
+restore:laughter	wwwの意味	www의 의미	keep	restore
+restore:laughter	wwwって何	www는 무엇	keep	restore
+restore:laughter	w数を数える	w수를 센다	keep	restore
+restore:laughter	ｗ杯に出る	w배에 나온다	keep	restore
