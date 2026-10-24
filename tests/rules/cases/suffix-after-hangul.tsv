@@ -18,3 +18,14 @@ lookup:province	越前国旗頭	에치젠국 우두머리	fix	lookup
 lookup:province	尾張国の旗頭	오와리국의 우두머리	fix	lookup
 lookup:province	国旗を掲げる。	국기를 게양한다.	keep	lookup
 lookup:province	筆頭家老	필두 가로	keep	lookup
+lookup:province	越中国境	엣추 국경	fix	lookup
+lookup:province	美濃国境	미노 국경	fix	lookup
+lookup:province	越後国内	에치고 국내	fix	lookup
+lookup:province	日本国内でも	일본 국내에서도	fix	lookup
+lookup:province	上総国内	가즈사 국내	fix	lookup
+lookup:province	中国国内	중국 국내	keep	lookup
+lookup:province	日本国民に必要量の	일본 국민에게 필요량의	keep	lookup
+lookup:province	王国中から	왕국 중에서	keep	lookup
+lookup:province	外国産の品	외국산의 물건	keep	lookup
+lookup:province	建国後	건국 후	keep	lookup
+lookup:province	紀伊国屋は	키노쿠니야는	keep	lookup

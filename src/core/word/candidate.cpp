@@ -1171,10 +1171,64 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     return ProcessCandidateRecord(full, cursor, token, CreateSyntheticRecord(token, surface, emptyTarget), parent);
 }
 
+Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    std::string_view word;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (At(r->partCode, 1) == '1' && text.starts_with(r->source) && r->source.size() > word.size()) word = r->source;
+    }
+    if (word.empty()) return records;
+    const text::Rune last = DecodeLastRune(word);
+    if (text::RuneCount(word) < 3 || !dict::InClass("noun.realm-end", word.substr(word.size() - last.size))) return records;
+    const std::string_view shorter = word.substr(0, word.size() - last.size);
+    const std::string_view after = text.substr(word.size());
+    if (!text::IsKanji(text::DecodeRune(after).cp)) return records;
+    bool found = false;
+    for (const Record* r = first; r != nullptr && !found; r = r->child) found = r->source == shorter && At(r->partCode, 1) == '1';
+    if (!found) return records;
+    for (const Record* r = DoLookup(after, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (after.starts_with(r->source) && text::RuneCount(r->source) > 1) return records;
+    }
+    const std::string_view rest = text.substr(shorter.size());
+    const std::string_view compound = rest.substr(0, last.size + text::DecodeRune(after).size);
+    bool noun = false;
+    for (const Record* r = DoLookup(rest, kModeGeneral).records; r != nullptr && !noun; r = r->child) {
+        noun = r->source == compound && At(r->partCode, 1) == '1';
+    }
+    if (!noun) return records;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == shorter && At(r->partCode, 1) == '1') {
+            *frontTail = r;
+            frontTail = &r->child;
+        } else {
+            *backTail = r;
+            backTail = &r->child;
+        }
+        r = next;
+    }
+    *frontTail = back;
+    if (owned == nullptr) return front;
+    owned->child = front;
+    return records;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
+    if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));

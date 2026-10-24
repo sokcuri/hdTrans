@@ -83,6 +83,7 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
+//= noun.realm-end	The last kanji of a country or province name (日本国, 美濃国) that a noun after the name starting with that kanji takes over (美濃国境 미노 국경, 日本国内 일본 국내).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
@@ -1224,6 +1225,8 @@ noun.quoted	話
 noun.quoted	言葉
 noun.quoted	のは
 noun.quoted	のが
+
+noun.realm-end	国
 
 noun.result-sareru	舗装
 noun.result-sareru	設置
