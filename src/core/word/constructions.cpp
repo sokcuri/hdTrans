@@ -1150,6 +1150,10 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
+// The marker a verb written into the word takes: '$' on an i-adjective, whose families conjugate
+// with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
+char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
+
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
     Item* it = Neighbour(origin, a.delta);
     if (it == nullptr) return;
@@ -1305,7 +1309,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             break;
         }
         case internal::CxVerb::SetVerb:
-            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, VerbSigil(it), "", f.families).target, source);
             break;
         case internal::CxVerb::SetVerbFrom: {
             // A translation that ends in the old tail is the verb whose dictionary form is its head
@@ -1313,7 +1317,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const std::string_view target = it->EntryText(it->selected);
             if (target.size() > a.value.size() && target.ends_with(a.value)) {
                 const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
-                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, '&', "", f.families).target, source);
+                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, VerbSigil(it), "", f.families).target, source);
             }
             break;
         }
