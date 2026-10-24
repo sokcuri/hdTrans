@@ -237,8 +237,8 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
 // Keys holding a run are looked for from up to this many runes before it (a long name).
 constexpr int kRunLookBackRunes = 32;
 
-// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns): a key that starts at
-// or up to kRunLookBackRunes letters before it and goes on past it.
+// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns, pipeline::RespellOldForms):
+// a key that starts at or up to kRunLookBackRunes letters before it and reaches its end.
 bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t end) {
     const auto& d = *static_cast<const RespellLookup*>(context);
     size_t start = at;
@@ -501,6 +501,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
         normalized = pipeline::RespellKatakanaEndings(normalized);
         normalized = pipeline::RespellKanjiCries(normalized);
+        normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
