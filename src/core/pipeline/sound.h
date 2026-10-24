@@ -93,7 +93,8 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedNo,
+// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedAuxiliaries, RewriteRaLessKuru,
+// RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
@@ -154,6 +155,20 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 // before contraction.te-iku-not (待ってったら).
 // The て form is a verb of the dictionary that ends in its て or で.
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The kana that casual speech drops of an auxiliary after a て form written back, so that the form
+// reads as said in full: the い of いる and いらっしゃる before contraction.te-iru (見てたところ
+// 見ていたところ, 待ってられない 待っていられない), also after the て form of ちゃう (寝ちゃってた
+// 寝ちゃっていた); the あ of あげる before contraction.ta-ageru and the や of やる before
+// contraction.ta-yaru, or contraction.ta-yaru-final before no letter, where the て before them is said
+// た or だ (作ったげるから 作ってあげるから, やったるわ やってやるわ; not 秘めたる力). The て form is a verb
+// of the dictionary, or する or くる, that ends in て or で. Not written back: before a word of the
+// dictionary that reaches two or more characters past the contracted form (負けてたまるか,
+// 割ってちゃわん), after a verb stem that ends there (捨てた, 育てる), inside
+// a word of the dictionary (来たる, いってらっしゃい), where an ending row of the dictionary spells the
+// contraction (見てるの, 見てた。, 作ったげる。; for the past た of いる any row longer than it, which the
+// word stage reads on the past of いる: 見てたぞ) and before contraction.te-iru-past.
+std::string RewriteContractedAuxiliaries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The potential of the くる after a て form said without its ら (帰ってこれた 帰ってこられた, 逃げてこれる)
 // written in full: before the forms of contraction.ra-less-kuru when the dictionary has the verb

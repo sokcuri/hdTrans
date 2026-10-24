@@ -938,6 +938,59 @@ HD_TEST(pipeline_contracted_iku) {
     }
 }
 
+// The kana an auxiliary after a て form drops come back: the い of いる and いらっしゃる, the あ of
+// あげる and the や of やる after a て form said た; not after a verb stem that ends in て (捨てた), before
+// a word after the て form (負けてたまるか), inside a longer word (来たる, 秘めたる力) nor where an
+// ending row of the て form spells the contraction (見てた。).
+HD_TEST(pipeline_contracted_auxiliaries) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "見\t&AY@\tM437\t1\n"
+                                     "捨て\t버리&AA@\tM437\t2\n"
+                                     "待\t기다리&AA@\tM424\t3\n"
+                                     "読\t읽&AA@\tM425\t4\n"
+                                     "作\t만들&AA@\tM428\t5\n"
+                                     "や\t하&AA@\tM438\t6\n"
+                                     "来\t오&AA@\tM43=\t7\n"
+                                     "来たる\t오는\tN110\t8\n"
+                                     "寝\t자&AA@\tM437\t9\n"
+                                     "歩いて\t걸어 &AH@\tM41;\t10\n"
+                                     "歩\t걷&AA@\tM421\t11\n"
+                                     "た\t5다\tS570\t12\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"見てたところ", "見ていたところ"},
+        {"見てた。", "見てた。"},            // an ending row of the て form spells it
+        {"待ってるんだ", "待っているんだ"},
+        {"待ってられない", "待っていられない"},
+        {"読んでらっしゃるのに", "読んでいらっしゃるのに"},
+        {"読んでらっしゃる。", "読んでらっしゃる。"},  // a pattern row spells it where the sentence ends
+        {"見てろよ", "見ていろよ"},
+        {"してたところ", "していたところ"},
+        {"寝ちゃってた", "寝ちゃっていた"},
+        {"歩いてたところ", "歩いていたところ"},  // 歩いて of 歩いてくる conjugates no た
+        {"作ったげるから", "作ってあげるから"},
+        {"読んだげよう", "読んであげよう"},
+        {"作ったげる", "作ったげる"},        // an end row of the past spells it
+        {"やったるぜ！", "やってやるぜ！"},
+        {"やったる！", "やってやる！"},
+        {"やったります", "やってやります"},
+        {"捨てた", "捨てた"},                // the past of 捨てる
+        {"捨てて", "捨てて"},
+        {"待ってたまるか", "待ってたまるか"},  // contraction.te-iru-not
+        {"来たる", "来たる"},                // a word of the dictionary
+        {"作ったるは", "作ったるは"},        // the attributive before a particle
+        {"見たげな", "見たげな"},            // the げ of a look
+        {"見て", "見て"},
+        {"\xcd見てたところ", "\xcd見ていたところ"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(internal::RewriteContractedAuxiliaries(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    }
+}
+
 // The potential of くる without its ら after the て form of a verb of the dictionary takes its ら
 // back; これ is the pronoun before なら and まで, and after no て form.
 HD_TEST(pipeline_ra_less_kuru) {

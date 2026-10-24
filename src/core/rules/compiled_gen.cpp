@@ -1802,7 +1802,7 @@ bool RuleL190([[maybe_unused]] Item* p) {
 //     pos[+1] is 7** and end.src[+1] == "くて" and end.ko[+1] == "6서"
 //     (src[+1] == "楽し" or src[+1] == "ばかりい") and pos[+1] is 4**
 //     (src == "めぐ" or src == "も")
-//     src == src[+1]
+//     src == src[+1] and ko[+1] != "&CJ@"
 bool RuleL191([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "忘れ"sv) && SrcEq(p, 1, "くる"sv) && PumsaEq(p, 1, "4**"sv)) ||
            ((SrcEq(p, 0, "住"sv) ||
@@ -1813,7 +1813,7 @@ bool RuleL191([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "ばかりい"sv)) && PumsaEq(p, 1, "4**"sv)) ||
            (SrcEq(p, 0, "めぐ"sv) ||
            SrcEq(p, 0, "も"sv)) ||
-           SrcEqW(p, 0, 1);
+           (SrcEqW(p, 0, 1) && DstNe(p, 1, "&CJ@"sv));
 }
 
 // local 192
@@ -4642,7 +4642,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL188, 0xbb6faa8b3061dbbeull},
     {RuleL189, 0x0d5204dcb3322d1full},
     {RuleL190, 0x5220ce1b72a4b4d1ull},
-    {RuleL191, 0x4ac0f3ed4e6043e4ull},
+    {RuleL191, 0x3d166da12191cddfull},
     {RuleL192, 0xe94592d2a75aaa92ull},
     {RuleL193, 0xae55e76227f71160ull},
     {RuleL194, 0xbfcbe8239bbdce43ull},
