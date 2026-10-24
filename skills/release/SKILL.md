@@ -16,6 +16,10 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
 - `tools/gate.sh` prints `GATE OK`.
 - `tools/shadow.py` reports no new warning.
 - If the tree has `mac-asan` or `linux-asan` presets, the sanitizer ctest passes too.
+- The CI `Performance budget` step (linux) and the `linux-fuzz` job pass, and their warnings are read
+  (docs/build.md "CI", "성능 예산", "퍼징"). A slowdown that is intended has a `Perf-Budget: <reason>`
+  trailer. An input the fuzzer printed is fixed, kept in `tests/fuzz/regressions/` and covered by a
+  rule case, or filed as an issue when it is an older bug.
 - Translation changes were measured and every changed line was judged blind by judges that did not
   write the change (fix-translation steps 11–12). Keep the numbers for the PR body.
 - For a develop → main promotion, run the cycle check (section 2) on the develop head and judge
@@ -39,7 +43,7 @@ gh pr checks N
 ```
 
 - The second command must show `gate` and `title` as `pass`, and the matrix (`linux`, `mac`,
-  `windows-x64`, `windows-x86`, `wasm`, `release-tools`) as `pass`.
+  `windows-x64`, `windows-x86`, `wasm`, `release-tools`) and `linux-asan`, `linux-fuzz` as `pass`.
   - The matrix may show `skipping` only when `gate` passed and decided the tree was already tested
     (docs/build.md "CI").
   - `release` and `tested` may show `skipping`.
@@ -70,6 +74,7 @@ gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain s
   improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
 - The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
+- Keep the branch's `Surface-Budget:` and `Perf-Budget:` trailers as trailers of the squash body.
 
 After merging a PR that changes translations, run the cycle check: measure the merge commit of
 develop against the run of the last release tag on all four sets, with the runs in
@@ -88,6 +93,10 @@ then judges only what changed since the last check.
   Use `fix:` unless a feature release is intended.
 - Write a new title and body as a release summary, grouped by area (words, speech, numbers, layout,
   sounds, tools). Do not copy the develop PR.
+- State how the counts in the `Performance budget` summary moved from
+  `git show vX.Y.Z:tools/perf-budget.tsv` of the last release, with the `Perf-Budget:` reasons of
+  `git log vX.Y.Z..develop`. The summary is in the linux job of the develop push Build that the
+  gate reused, when the gate skipped the matrix of this PR.
 - Open it with `gh pr create --base main --head develop --milestone X.Y.Z`.
 - Wait for its checks (see "Merging any PR"), then merge with a merge commit, not a squash:
   `gh pr merge N --merge`.

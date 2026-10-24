@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(HDTRANS_WERROR "Treat compiler warnings as errors" ON)
 option(HDTRANS_INTERPRET_RULES "Evaluate every selection rule with the interpreter, ignoring compiled rules" OFF)
+option(HDTRANS_FUZZ "Build the libFuzzer target hdtrans_fuzz and instrument every target for it (Clang)" OFF)
 option(HDTRANS_PASS_EXPERIMENTS "Read HDTRANS_PASS_SKIP and HDTRANS_PASS_SHUFFLE to leave out or reorder sentence passes (measurement builds only)" OFF)
 
 if(MSVC)
@@ -47,6 +48,13 @@ else()
             add_compile_options(-fno-sanitize=vptr)
         endif()
         add_link_options(-fsanitize=${HDTRANS_SANITIZE})
+    endif()
+    if(HDTRANS_FUZZ)
+        # The sanitizer runtimes also define the coverage hooks for the targets that do not link libFuzzer.
+        if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR NOT HDTRANS_SANITIZE)
+            message(FATAL_ERROR "HDTRANS_FUZZ needs Clang, its libFuzzer and HDTRANS_SANITIZE")
+        endif()
+        add_compile_options(-fsanitize=fuzzer-no-link)
     endif()
 endif()
 
@@ -178,7 +186,7 @@ if(NOT EMSCRIPTEN)
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases audit blind new-pairs)
+                    construction-cases audit blind new-pairs perf-budget fuzz)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
@@ -279,6 +287,17 @@ if(NOT EMSCRIPTEN)
             FIXTURES_REQUIRED ruledump)
         # The rule tests are rows of tests/rules/cases/, run by rules.cases.themes.
     endif()
+
+    # Translates mutated text (tests/fuzz/translate.cpp); tools/fuzz.py runs it. Other builds only
+    # compile the source.
+    if(HDTRANS_FUZZ)
+        add_executable(hdtrans_fuzz tests/fuzz/translate.cpp)
+        target_link_options(hdtrans_fuzz PRIVATE -fsanitize=fuzzer)
+    else()
+        add_library(hdtrans_fuzz OBJECT tests/fuzz/translate.cpp)
+    endif()
+    target_include_directories(hdtrans_fuzz PRIVATE src)
+    target_link_libraries(hdtrans_fuzz PRIVATE hdtrans)
 
     # Dumps compiled dictionary entries and lookups over input lines.
     add_executable(snapshot_check tests/snapshot_check/main.cpp)
