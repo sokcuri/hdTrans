@@ -856,6 +856,13 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
             // The honorific spelled plainly, and the longest dictionary word it starts there.
             std::u32string plain = Spliced(rs, i, h, last);
+            const auto holdsNone = [&](std::string_view w) {
+                const std::u32string word = DecodeText(w);
+                return word.size() >= h.size() && i + h.size() >= word.size() &&
+                       std::u32string_view(plain).substr(i + h.size() - word.size(), word.size()) == word;
+            };
+            const auto none = dict::ClassMembers("honorific.drawn-out-word");
+            if (std::any_of(none.begin(), none.end(), holdsNone)) continue;
             const size_t word = e.LongestKey(std::u32string_view(plain).substr(i));
             // A name before it: kanji or katakana, or two or more hiragana (みどりさああん; not the
             // cry うくぅんん or the sound びちゃーん).
