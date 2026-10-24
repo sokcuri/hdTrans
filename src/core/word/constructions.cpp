@@ -125,17 +125,20 @@ constexpr NamedFeature kFeatures[] = {
     {"conjugating", [](Flusher&, const Item* it) { return it->detail->Yougo(); }},
     {"fixed", [](Flusher&, const Item* it) { return it->Fixed(); }},
     {"first", [](Flusher&, const Item* it) { return it->prev == nullptr; }},
-    {"last", [](Flusher&, const Item* it) { return it->next == nullptr; }},
+    {"last", [](Flusher&, const Item* it) { return it->After() == nullptr; }},
     {"verb", [](Flusher&, const Item* it) { return it->detail->cls == kDetailVerb; }},
     {"boundary", [](Flusher&, const Item* it) { return PauseOrEnd(it); }},
     // The Korean of the next word starts with this word's Korean and a space.
     {"lemma-starts-next",
      [](Flusher& f, const Item* it) {
          const std::string lemma = ItemLemma(f, it, it->selected);
-         return !lemma.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with(lemma + " ");
+         const Item* n = it->After();
+         return !lemma.empty() && n != nullptr && ItemLemma(f, n, n->selected).starts_with(lemma + " ");
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
+    // An ellipsis or a dash stands right before the word (……そうだ).
+    {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
@@ -645,8 +648,11 @@ using internal::CxField;
 using internal::CxMatch;
 using internal::CxNode;
 
-const Item* Neighbour(const Item* it, int delta) {
-    for (; it != nullptr && delta > 0; delta--) it = it->next;
+// The item delta items away; rightwards from a ruby base, past its reading (Item::Object).
+template <typename T>
+T* Neighbour(T* it, int delta) {
+    const bool base = it != nullptr && it->w != nullptr && it->w->RubyPart(it->tokenIndex) == 1;
+    for (; it != nullptr && delta > 0; delta--) it = base ? it->After() : it->next;
     for (; it != nullptr && delta < 0; delta++) it = it->prev;
     return it;
 }
@@ -761,9 +767,7 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
 }
 
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
-    Item* it = origin;
-    for (int d = a.delta; it != nullptr && d > 0; d--) it = it->next;
-    for (int d = a.delta; it != nullptr && d < 0; d++) it = it->prev;
+    Item* it = Neighbour(origin, a.delta);
     if (it == nullptr) return;
     switch (a.verb) {
         case internal::CxVerb::SelectLemma:

@@ -223,12 +223,22 @@ int Item::CheckDirectJ(int i) const {
     return digit == DirectClassifier(i) + '0' ? 1 : 0;
 }
 
+Item* Item::After() const {
+    Item* to = next;
+    if (w == nullptr || w->RubyPart(tokenIndex) != 1) return to;
+    while (to != nullptr && w->RubyPart(to->tokenIndex) == 2) to = to->next;
+    return to;
+}
+
 Item* Item::Object(int delta) {
     Item* item = this;
+    // The words a ruby base reads after it are those after its reading, so that the base
+    // and the reading each read the sentence; the words around them read them as written.
+    const bool base = w->RubyPart(tokenIndex) == 1;
     if (delta >= 0) {
         for (int i = 0; i < delta; i++) {
             if (item == nullptr) return nullptr;
-            item = item->next;
+            item = base ? item->After() : item->next;
             if (item != nullptr) {
                 if (item->EntryText(0) == "(") {
                     while (item != nullptr && item->EntryText(0) != ")") item = item->next;

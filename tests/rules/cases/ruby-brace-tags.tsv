@@ -7,3 +7,57 @@ normalize:ruby	そうか……{rb}現実{/rb}{rt}ここ{/rt}に彼女はいな�
 normalize:ruby	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	normalize
 normalize:ruby	カモがネギを{rb}背負{/rb}{rt}しょ{/rt}って……？	카모가 파를 {rb}짊어져{/rb}{rt}짊어져{/rt}……?	fix	normalize
 normalize:ruby	なんとなく俺も{rb}安堵{/rb}{rt}あんど{/rt}する。	왠지 나도 {rb}안도{/rb}{rt}안도{/rt}한다.	keep	normalize
+compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt} 버렸다.	fix	compose
+compose:text-gate	皿を割ってしまった。	접시를 깨어 버렸다.	keep	compose
+word:ruby-neighbour	彼は窓の外を{rb}眺めて{/rb}{rt}ながめて{/rt}いる。	그는 창 밖을 {rb}바라보고{/rb}{rt}바라보고{/rt} 있다.	fix	global-ending
+word:ruby-neighbour	{rb}現実{/rb}{rt}ここ{/rt}に彼女はいない。	{rb}현실{/rb}{rt}여기{/rt}에 그녀는 없다.	keep	defaults
+normalize:ruby	先生が俺を{rb}庇{/rb}{rt}かば{/rt}ってくれた。	선생님이 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주었다.	fix	normalize
+normalize:ruby	{rb}掬{/rb}{rt}すく{/rt}ったまぐろの上に、わさびを乗せた。	{rb}떠올린{/rb}{rt}건져올린{/rt} 참치 위에, 와사비를 실었다.	fix	normalize
+normalize:ruby	布団を{rb}剥{/rb}{rt}は{/rt}がした。	이불을 {rb}벗겼다{/rb}{rt}벗겼다{/rt}.	fix	normalize
+normalize:ruby	{rb}委{/rb}{rt}ゆだ{/rt}ねる。	{rb}맡긴다{/rb}{rt}맡긴다{/rt}.	fix	normalize
+normalize:ruby	ぶつぶつ{rb}呟{/rb}{rt}つぶや{/rt}いたあと、立ち上がった。	투덜투덜{rb}중얼거린 뒤{/rb}{rt}중얼거린 뒤{/rt}, 일어섰다.	keep	normalize
+normalize:ruby	{rb}寂{/rb}{rt}さみ{/rt}しいけれど、平気。	{rb}외롭지만{/rb}{rt}외롭지만{/rt}, 괜찮아.	keep	normalize
+normalize:ruby	{rb}夢{/rb}{rt}ここ{/rt}で目が覚めた。	{rb}꿈{/rb}{rt}여기{/rt}에서 깨어났다.	keep	normalize
+normalize:ruby	{rb}人気{/rb}{rt}ひとけ{/rt}がない。	{rb}인기척{/rb}{rt}인기척{/rt}이 없다.	keep	normalize
+word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べてくれた。	{rb}먹어{/rb}{rt}먹어{/rt} 주었다.	fix	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt} 버렸다.	fix	rewrites
+word:ruby-neighbour	涙を{rb}拭{/rb}{rt}ぬぐ{/rt}ってくれた。	눈물을 {rb}닦아{/rb}{rt}닦아{/rt} 주었다.	fix	rewrites
+word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べたい。	{rb}먹고 싶다{/rb}{rt}먹고 싶다{/rt}.	fix	local-ending
+word:ruby-neighbour	パンを{rb}食{/rb}{rt}た{/rt}べて寝た。	빵을 {rb}먹고{/rb}{rt}먹고{/rt} 잤다.	keep	rewrites
+word:ruby-neighbour	涙を拭ってくれた。	눈물을 닦아 주었다.	keep	rewrites
+normalize:ruby	少し{rb}見惚{/rb}{rt}みほ{/rt}れる。	조금 {rb}넋을 잃고 본다{/rb}{rt}넋을 잃고 본다{/rt}.	keep	normalize
+normalize:ruby	拳を握ってぐっと{rb}堪{/rb}{rt}こら{/rt}えた。	주먹을 쥐어 꾹 {rb}참았다{/rb}{rt}참았다{/rt}.	keep	normalize
+normalize:ruby	身体を{rb}捻{/rb}{rt}ねじ{/rt}って周りを見てみても、	몸을 {rb}비틀어{/rb}{rt}비틀어{/rt} 주위를 봐도,	keep	normalize
+normalize:ruby	{rb}挫{/rb}{rt}くじ{/rt}けたり……	{rb}꺾이거나{/rb}{rt}꺾이거나{/rt}……	keep	normalize
+normalize:ruby	あれって{rb}剥{/rb}{rt}は{/rt}がせるのか？	그건 {rb}벗길 수 있는 건가{/rb}{rt}벗길 수 있는 건가{/rt}?	fix	normalize
+normalize:ruby	あの{rb}蔑{/rb}{rt}さげす{/rt}んだ目。	그 {rb}업신여긴{/rb}{rt}업신여긴{/rt} 눈.	keep	normalize
+word:ruby-neighbour	なんで{rb}寂{/rb}{rt}さみ{/rt}しそうなの？	왜 {rb}외로운 것 같아{/rb}{rt}외로운 것 같아{/rt}?	fix	rewrites
+normalize:ruby	通知表を{rb}剥{/rb}{rt}は{/rt}がそうとまでしてくるとは……	성적표를 {rb}벗기려고까지 해 오다니{/rb}{rt}벗기려고까지 해 오다니{/rt}……	fix	normalize
+normalize:ruby	手に持った{rb}瓶{/rb}{rt}びん{/rt}を落とさないで済んだ。	손에 가진 {rb}병{/rb}{rt}병{/rt}을 떨어뜨리지 않고 끝났다.	keep	normalize
+normalize:ruby	頬から{rb}滴{/rb}{rt}しずく{/rt}が一粒落ちる。	뺨에서 {rb}물방울{/rb}{rt}물방울{/rt}이 한 알 떨어진다.	keep	normalize
+normalize:ruby	{rb}軽蔑{/rb}{rt}けいべつ{/rt}と哀れみが混じったような、	{rb}경멸{/rb}{rt}경멸{/rt}과 동정이 섞인 것 같은,	keep	normalize
+normalize:ruby	俺は少し{rb}安堵{/rb}{rt}あんど{/rt}して、	나는 조금 {rb}안도{/rb}{rt}안도{/rt}해,	keep	normalize
+normalize:ruby	{rb}他人{/rb}{rt}ひと{/rt}に見られないなら……	{rb}타인{/rb}{rt}사람{/rt}에게 보이지 않으면……	keep	normalize
+normalize:ruby	{rb}夢{/rb}{rt}むこう{/rt}では眠りについたような気がする。	{rb}꿈{/rb}{rt}저쪽{/rt}에서는 잠든 것 같다.	keep	normalize
+normalize:ruby	やっぱり{rb}体面{/rb}{rt}そこ{/rt}を気にするんだな。	역시 {rb}체면{/rb}{rt}거기{/rt}를 신경 쓰는구나.	keep	normalize
+normalize:ruby	まさか先生が{rb}庇{/rb}{rt}かば{/rt}ってくれるとも思わなかった	설마 선생님이 {rb}감싸{/rb}{rt}감싸{/rt} 준다고도 생각하지 않았다	fix	normalize
+normalize:ruby	{rb}庇{/rb}{rt}かば{/rt}ってくれたんだよ……	{rb}감싸{/rb}{rt}감싸{/rt} 줬어……	fix	normalize
+normalize:ruby	先生も俺を{rb}庇{/rb}{rt}かば{/rt}ってくれて、	선생님도 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주어,	fix	normalize
+normalize:ruby	そこに頭を{rb}委{/rb}{rt}ゆだ{/rt}ねてみる。	거기에 머리를 {rb}맡겨{/rb}{rt}맡겨{/rt} 본다.	fix	normalize
+word:ruby-neighbour	そして正しく{rb}裁{/rb}{rt}さば{/rt}いてほしい。	그리고 올바르게 {rb}재판하면 좋겠다{/rb}{rt}처리하면 좋겠다{/rt}.	fix	local-ending
+word:ruby-neighbour	希望が{rb}溢{/rb}{rt}あふ{/rt}れてる。	희망이 {rb}흘러넘치고 있다{/rb}{rt}넘치고 있다{/rt}.	fix	local-ending
+word:ruby-neighbour	どうしてこうも無責任に{rb}裁{/rb}{rt}さば{/rt}くのか。	왜 이렇게도 무책임하게 {rb}재판하는 건가{/rb}{rt}처리하는 건가{/rt}.	keep	local-ending
+normalize:ruby	ずっと、{rb}囚{/rb}{rt}とら{/rt}われているんだな……	계속, {rb}붙잡히고{/rb}{rt}얽매이고{/rt} 있는구나……	current	normalize
+normalize:ruby	一応、{rb}訊{/rb}{rt}き{/rt}いておくけど	일단, {rb}물어{/rb}{rt}물어{/rt} 두는데	fix	normalize
+normalize:ruby	彼女は買い物袋を{rb}提{/rb}{rt}さ{/rt}げていて、	그녀는 장바구니를 {rb}들고{/rb}{rt}낮추고{/rt} 있어,	current	normalize
+normalize:ruby	サラダ作りに{rb}勤{/rb}{rt}いそ{/rt}しんでくれている。	샐러드 만들기에 {rb}힘써{/rb}{rt}해변 죽어{/rt} 주고 있다.	current	normalize
+word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べて、走った。	{rb}먹어{/rb}{rt}먹어{/rt}, 달렸다.	current	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んで、走った。	{rb}마셔{/rb}{rt}마셔{/rt}, 달렸다.	current	rewrites
+word:ruby-neighbour	{rb}読{/rb}{rt}よ{/rt}んで、走った。	{rb}읽어{/rb}{rt}읽어{/rt}, 달렸다.	current	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt} 버린다.	fix	rewrites
+G100	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
+G100	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
+G100	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
+G100	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
+G100	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
+G100	夢	몽	keep	global-stem

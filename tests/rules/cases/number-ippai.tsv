@@ -1,0 +1,87 @@
+# 규칙: NUM-9, SPC-7
+rule	input	expected	kind	layer
+dict:w:27004	いっぱい食べてね！	많이 먹어!	fix	local
+dict:w:27004	写真をいっぱい撮った。	사진을 많이 찍었다.	fix	local
+dict:w:27004	お客さんがいっぱい来るわ。	손님이 많이 와.	fix	local
+dict:w:27004	観光客でいっぱいだ。	관광객으로 가득하다.	keep	defaults
+dict:w:27004	口いっぱいに広がった。	입 가득 퍼졌다.	keep	defaults
+dict:w:27005	一杯食べてね。	많이 먹어.	fix	local
+dict:w:27005	一杯あるよね？	많이 있지?	keep	senses
+sense:一杯	一杯飲もう。	한 잔 마시자.	keep	senses
+sense:一杯	起きて一杯行きます？	일어나 한 잔 갑니까?	keep	senses
+sense:一杯	機銃を一杯積んだよ。	기관총을 가득 탑재했어.	keep	senses
+dict:w:27005	コップ一杯の水。	컵 한 잔의 물.	keep	defaults
+dict:w:27005	もう一杯いる？	한잔 더 있어?	keep	defaults
+dict:w:27008	お腹いっぱい食べました。	배불리 먹었습니다.	fix	local
+dict:w:27019	腹一杯食べた。	배불리 먹었다.	fix	local
+dict:number-ippai	お腹いっぱいだよ。	배불러.	fix	defaults
+dict:number-ippai	お腹いっぱい！	배불러!	fix	defaults
+sense:いっぱい	お腹がいっぱいです。	배가 부릅니다.	fix	senses
+dict:w:27022	腹もいっぱいになったし、働くか。	배도 부르게 되었고, 일할까.	fix	local
+dict:w:27022	庭いっぱいに並んでいた。	뜰 가득 줄지어 있었다.	keep	defaults
+sense:いっぱい	胸がいっぱいです。	가슴이 벅찹니다.	fix	senses
+dict:number-ippai	胸が一杯の思い。	가슴이 벅찬 생각.	fix	defaults
+dict:number-ippai	頭がいっぱいだったの。	머릿속이 가득했어.	fix	defaults
+dict:w:27000	締め切りは水曜一杯。	마감은 수요일까지.	fix	local
+dict:w:27001	相談は五月一杯で止める。	상담은 5월까지로 멈춘다.	fix	local
+dict:w:27002	届け出は明日いっぱいよ。	신고는 내일까지야.	fix	local
+dict:w:27002	今週いっぱい休む。	금주 내내 쉰다.	keep	defaults
+dict:number-ippai	彼女の精一杯の描写。	그녀의 혼신의 묘사.	fix	defaults
+dict:number-ippai	精一杯頑張ります！	힘껏 노력하겠습니다!	keep	defaults
+dict:number-ippai	お腹が痛い。	배가 아프다.	keep	defaults
+dict:number-ippai	胸が一杯だ。	가슴이 벅차다.	fix	fixed
+dict:jisjk:373504	ドキドキ……頭がいっぱいさ	두근두근……머릿속이 가득해	fix	local-ending
+dict:jisjk:373504	胸が一杯さ。	가슴이 벅차.	fix	local-ending
+dict:jisjk:373504	お腹がいっぱいさ	배가 불러	fix	local-ending
+dict:jisjk:373504	大丈夫さ！	괜찮아!	fix	local-ending
+dict:jisjk:373504	狩りは得意さ。	사냥은 자신있어.	fix	local-ending
+dict:jisjk:373504	俺の狡猾さ…！！	내 교활함…!!	keep	ending-defaults
+dict:jisjk:373504	大変さがわかる。	힘듦을 알 수 있다.	keep	ending-defaults
+dict:jisjk:373504	その大切さを知った。	그 중요함을 알았다.	keep	ending-defaults
+dict:jisjk:373504	頭がいっぱいだよ	머릿속이 가득해	keep	defaults
+dict:jisjk:373504	容姿と優秀さで有名だ。	용모와 우수함으로 유명하다.	keep	ending-defaults
+dict:jisjk:373504	今の長波にぴったりさ、いくぜ！	지금의 장파에 딱 맞아, 간다!	fix	local-ending
+dict:jisjk:373504	彼女は優秀さ、美しさ、全てを持っている。	그녀는 우수함, 아름다움, 모든 것을 가지고 있다.	fix	local-ending
+dict:jisjk:267449	彼の優秀さ、誠実さ、勤勉さ。	그의 우수함, 성실함, 근면함.	fix	local-ending
+sense:いっぱい	目に涙をいっぱい浮かべた。	눈에 눈물을 가득 띄웠다.	fix	senses
+sense:いっぱい	箱にいっぱい詰めた。	상자에 가득 채웠다.	fix	senses
+sense:いっぱい	コップにいっぱい注ぐ。	컵에 가득 따른다.	fix	senses
+sense:いっぱい	お砂糖、いっぱい入れていい？	설탕, 많이 넣어도 좋아?	keep	local
+sense:一杯	コーヒーを一杯注ぐ。	커피를 한 잔 따른다.	keep	senses
+sense:いっぱい	経験もいっぱい積んだ。	경험도 많이 쌓았다.	keep	senses
+sense:いっぱい	演習もたくさんやったし、経験もいっぱい積んだし。	연습도 많이 했고, 경험도 많이 쌓았고.	fix	senses
+dict:w:27004	そう、足にいっぱい付いたんですよ！	그래, 다리에 많이 붙은 거예요!	fix	local
+dict:w:27004	明かりをいっぱいつけて、北方の海域に出ていく。	rule:dict:w:27004=많이	fix	local
+dict:w:27004	いっぱい握っておいたから。	rule:dict:w:27004=많이	fix	local
+sense:いっぱい	艦載機いっぱい積めていいなー。	함재기 가득 탑재할 수 있어도 좋네~.	keep	senses
+dict:w:27004	おにぎりいっぱい作りますね。	주먹밥 많이 만드네요.	fix	local
+dict:w:27004	料理いっぱい作るかも。	요리 많이 만들지도.	fix	local
+dict:w:27004	お祝いで健康ケーキ、いっぱい作りますね！	축하로 건강 케이크, 많이 만드네요!	fix	local
+dict:w:27004	豆をいっぱいお持ちしました。	콩을 많이 가져왔습니다.	fix	local
+dict:w:27004	お水いっぱい飲んだら、醒めました…。	물 많이 마셨더니, 깨었습니다….	fix	local
+dict:w:27004	……いっぱい出たね	……많이 나왔네	fix	local
+dict:w:27004	やることいっぱいあって大変！	rule:dict:w:27004=많이	fix	local
+dict:jisjk:373504	ゴロゴロ……お腹がいっぱいさ	데굴데굴……배가 불러	fix	local-ending
+dict:number-ippai	チュッ……頭がいっぱいぞ	쪽……머릿속이 가득해	keep	defaults
+dict:number-ippai	ピンポーン……頭がいっぱいぜ	딩동……머릿속이 가득해	keep	defaults
+# 맞는 출력: 배가 부르면…졸려 버렸어
+dict:number-ippai	お腹いっぱいになったら…眠くなっちゃった	배부르게 되면…졸려져 버렸다	current	defaults
+# 맞는 출력: 쏴아쏴아……머릿속이 가득하네
+dict:number-ippai	ザーザー……頭がいっぱいな	쏴아쏴아……머릿속이 가득한	current	defaults
+# 맞는 출력: 싱글벙글……머릿속이 가득한 거야
+dict:number-ippai	ニコニコ……頭がいっぱいの	싱글벙글……머릿속이 가득해의	current	defaults
+# 맞는 출력: 싱글벙글……머릿속이 가득해
+dict:number-ippai	ニコニコ……頭がいっぱいわよ	싱글벙글……머릿속이 가득해야	current	defaults
+# 맞는 출력: 딩동……머릿속이 가득한 거야
+dict:number-ippai	ピンポーン……頭がいっぱいのよ	딩동……머릿속이 가득해의 것	current	defaults
+# 맞는 출력: 조용함, 그것이 제일이다.
+dict:jisjk:373504	静かさ、それが一番だ。	조용해, 그것이 제일이다.	current	local-ending
+dict:jisjk:373504	大丈夫さ、大丈夫さ。	괜찮아, 괜찮아.	keep	local-ending
+dict:jisjk:373504	「大丈夫さ、平気さ」	「괜찮아, 괜찮아」	keep	local-ending
+dict:jisjk:373504	簡単さ、楽勝さ！	간단해, 간단히 이겨!	keep	local-ending
+dict:jisjk:373504	平気さ、平気さ。	괜찮아, 괜찮아.	keep	local-ending
+dict:jisjk:373504	うん、大丈夫だ、平気さ。	응, 괜찮다, 괜찮아.	keep	local-ending
+dict:jisjk:373504	いやー、簡単さーこんなの…。	이야, 간단해-이런 건….	keep	local-ending
+dict:jisjk:373504	優秀さ、美しさ。	우수함, 아름다움.	fix	ending-defaults
+dict:jisjk:373504	優秀さ、高さ、全てを持っている。	우수함, 높이, 모든 것을 가지고 있다.	fix	ending-defaults
+dict:jisjk:373504	大丈夫さ、静かだ。	괜찮아, 조용하다.	keep	local-ending

@@ -41,7 +41,7 @@ Item* BuildNmTail(Flusher& f) {
         int start = it->start;
         int length = it->length;
         int neighbours = 0;
-        if (Item* n = it->next; n != nullptr && katakana(n) && it->tokenIndex == n->tokenIndex) {
+        if (Item* n = it->After(); n != nullptr && katakana(n) && it->tokenIndex == n->tokenIndex) {
             neighbours = 1;
             length += n->length;
         }
@@ -92,12 +92,12 @@ Phrase FindPhrase(Flusher& f) {
                 if (!it->detail->enabled[slot]) continue;
                 const char sub = At(it->DirectCode(slot), 1);
                 if (sub == '0' || sub == '6') {
-                    if (it->next != nullptr && At(it->next->Code(0), 0) == '4') mode = 2;
+                    if (it->After() != nullptr && At(it->After()->Code(0), 0) == '4') mode = 2;
                     break;
                 }
                 if (sub == ':') {
                     Item* prev = it->prev;
-                    Item* next = it->next;
+                    Item* next = it->After();
                     if (prev != nullptr && prev->group->surface == kJaO && next != nullptr &&
                         next->group->surface.starts_with(PrefixGate(14))) {
                         mode = 0;
@@ -135,7 +135,7 @@ Phrase FindPhrase(Flusher& f) {
                     bool accepted = false;
                     if (noun && raw == record->source) {
                         Item* prev = it->prev;
-                        Item* next = it->next;
+                        Item* next = it->After();
                         if (prev != nullptr && prev->group->surface.ends_with(kJaNo) && At(prev->Code(0), 0) == '2') {
                             accepted = true;
                         } else if (next != nullptr) {
@@ -165,7 +165,7 @@ Phrase FindPhrase(Flusher& f) {
                 break;
             }
             case 2: {
-                Item* next = it->next;
+                Item* next = it->After();
                 if (next == nullptr || !next->detail->Yougo()) break;
                 const std::string combined = next->group->surface + std::string(next->DirectSurface());
                 Record* record = next->group->records;
@@ -190,7 +190,7 @@ Phrase FindPhrase(Flusher& f) {
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
                     if (combined != record->source || At(record->partCode, 0) != 'N') continue;
-                    Item* next = it->next;
+                    Item* next = it->After();
                     if (next != nullptr) {
                         const char k = At(next->Code(0), 0);
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
@@ -221,7 +221,7 @@ void CleanupClass3Item(Item* it) {
     for (int index = 0; index < count; index++) {
         if (!Has(it->GAttr(index), "Zn")) continue;
         bool accepted = false;
-        for (Item* next = it->next; next != nullptr; next = next->next) {
+        for (Item* next = it->After(); next != nullptr; next = next->next) {
             const char kind = At(next->Code(next->selected), 0);
             bool marker = false;
             switch (kind) {
@@ -389,7 +389,7 @@ void ApplyNegatives(Flusher& f) {
             after = std::string(rest.substr(row.size()));
         } else if (absent) {
             continue;
-        } else if (Item* n = it->next; ending->dst == std::string("1") + std::string(kKoJi) && n != nullptr &&
+        } else if (Item* n = it->After(); ending->dst == std::string("1") + std::string(kKoJi) && n != nullptr &&
                                        n->DirectIndex() != -1 && n->EntryText(n->selected) == kNegativeAdjective) {
             const std::string_view text = n->DirectText(n->DirectIndex());
             if (text.empty()) continue;

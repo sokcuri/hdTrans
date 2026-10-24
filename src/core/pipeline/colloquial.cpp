@@ -135,12 +135,16 @@ public:
 
     // A dictionary key of two or more characters, or with a kanji, that ends at
     // character at of rs and starts at or after from, and no key of the sound lexicon
-    // that does (どしゃ).
+    // that does (どしゃ). An ending of the contracted しまう (うよ of 食べちゃうよ) ends a word
+    // only after the ゃ or ま of its contraction (not 歌うよ).
     bool WordEnds(std::u32string_view rs, size_t from, size_t at) const {
         bool word = false;
         for (size_t j = from; j < at; j++) {
             if (LexiconKey(ToKatakana(rs.substr(j, at - j)), ctx_.extraBuiltin)) return false;
-            word = word || ((at - j >= 2 || IsKanjiRune(rs[j])) && !Tags(rs.substr(j, at - j)).empty());
+            if (at - j < 2 && !IsKanjiRune(rs[j])) continue;
+            const std::string tags = Tags(rs.substr(j, at - j));
+            const bool contracted = tags.find_first_not_of('S') == std::string::npos && rs[j] == U'う';
+            word = word || (!tags.empty() && (!contracted || (j > 0 && In(rs[j - 1], U"ゃま"))));
         }
         return word;
     }

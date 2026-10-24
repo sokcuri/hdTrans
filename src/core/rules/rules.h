@@ -44,7 +44,8 @@ namespace hdTrans::rules {
 // candidate under consideration for the base word and for its ending.
 //
 // GetObject(delta) returns the item delta positions away (delta != 0, negative is
-// leftwards), skipping parenthesised groups, and resets that item's
+// leftwards), skipping parenthesised groups and, rightwards from a ruby base, its
+// reading, and resets that item's
 // GetCurrentCompDI and GetCurrentCompUmiDI to -1; nullptr when there is none. The
 // wi argument of the LL methods is nullptr in that case too.
 class Item {

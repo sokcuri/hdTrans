@@ -1,0 +1,47 @@
+# 규칙: LEX-16
+rule	input	expected	kind	layer
+lookup:realm	越前国旗頭	에치젠국 우두머리	fix	lookup
+lookup:realm	尾張国の旗頭	오와리국의 우두머리	fix	lookup
+lookup:realm	国旗を掲げる。	국기를 게양한다.	keep	lookup
+lookup:realm	筆頭家老	필두 가로	keep	lookup
+lookup:realm	越中国境	엣추 국경	fix	lookup
+lookup:realm	美濃国境	미노 국경	fix	lookup
+lookup:realm	越後国内	에치고 국내	fix	lookup
+lookup:realm	日本国内でも	일본 국내에서도	fix	lookup
+lookup:realm	上総国内	가즈사 국내	fix	lookup
+lookup:realm	中国国内	중국 국내	keep	lookup
+lookup:realm	日本国民に必要量の	일본 국민에게 필요량의	keep	lookup
+lookup:realm	王国中から	왕국 중에서	keep	lookup
+lookup:realm	外国産の品	외국산의 물건	keep	lookup
+lookup:realm	建国後	건국 후	keep	lookup
+lookup:realm	紀伊国屋は	키노쿠니야는	keep	lookup
+lookup:realm	日本国内	일본 국내	fix	lookup
+lookup:realm	中国人	중국인	keep	lookup
+lookup:realm	韓国語	한국어	keep	lookup
+lookup:realm	外国人	외국인	keep	lookup
+lookup:realm	全国大会	전국 대회	keep	lookup
+lookup:realm	帝国軍	제국군	keep	lookup
+lookup:realm	王国内	왕국내	keep	lookup
+lookup:realm	天国	천국	keep	lookup
+lookup:realm	母国語	모국어	keep	lookup
+lookup:realm	祖国	조국	keep	lookup
+lookup:realm	隣国	이웃나라	keep	lookup
+lookup:realm	英国	영국	keep	lookup
+lookup:realm	共和国内	공화국내	keep	lookup
+lookup:realm	同盟国軍	동맹국군	keep	lookup
+lookup:realm	連合国軍の勝利	연합국군의 승리	keep	lookup
+lookup:realm	合衆国民の権利	합중국민의 권리	keep	lookup
+lookup:realm	参加国中、	참가국 중,	keep	lookup
+lookup:realm	相手国内	상대국내	keep	lookup
+lookup:realm	加盟国内	회원국내	keep	lookup
+lookup:realm	先進国内	선진국내	keep	lookup
+lookup:realm	共和国民	공화국민	keep	lookup
+lookup:realm	戦勝国民	전승국민	keep	lookup
+lookup:realm	同盟国内	동맹국내	keep	lookup
+lookup:realm	発展途上国内	개발 도상국내	keep	lookup
+lookup:realm	甲斐国主の座	가이국주의 자리	keep	lookup
+lookup:realm	美濃国府に	미노노쿠니부에	keep	lookup
+lookup:realm	出羽国人	데와 고쿠진	keep	lookup
+lookup:realm	尾張国中に	오와리국안에	keep	lookup
+lookup:realm	日本国民に	일본 국민에게	keep	lookup
+lookup:realm	越中国人	엣추 고쿠진	keep	lookup

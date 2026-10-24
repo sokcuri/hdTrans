@@ -4,6 +4,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
 #include "core/text/utf8.h"
 #include "core/word/flush.h"
@@ -52,7 +53,7 @@ bool InKanjiCompound(const Item* it) {
     const bool beforeKanji = !before.empty() && kanji(DecodeLastRune(before).cp);
     const bool afterKanji = !after.empty() && kanji(text::DecodeRune(after).cp);
     const Item* prev = it->prev;
-    const Item* next = it->next;
+    const Item* next = it->After();
     return (noun(prev) && prev->start + prev->length == it->start && beforeKanji) ||
            (noun(next) && it->start + it->length == next->start && afterKanji);
 }
@@ -71,6 +72,17 @@ bool HasTag(const Item* it, std::string_view tag) {
 }
 
 bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
+    // class:SET matches a member of a word class of classes.tsv, written as a word trigger.
+    if (trigger.starts_with("class:")) {
+        const std::string_view name = trigger.substr(std::string_view("class:").size());
+        const dict::internal::WordClass* c =
+            dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name));
+        if (c == nullptr) return false;
+        for (const std::string_view member : c->members) {
+            if (IsWord(x, member)) return true;
+        }
+        return false;
+    }
     if (!trigger.starts_with("sem:") && !trigger.starts_with("gram:")) return IsWord(x, trigger);
     const std::size_t at = trigger.find('@');
     if (!HasTag(x, trigger.substr(0, at))) return false;
@@ -78,7 +90,7 @@ bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
     if (At(x->Code(x->selected), 0) != '1') return false;
     const std::string_view argument = trigger.substr(at + 1);
     const std::size_t slash = argument.find('/');
-    const Item* particle = x->next;
+    const Item* particle = x->After();
     if (particle == nullptr || particle->selected < 0 || At(particle->Code(particle->selected), 0) != '2' ||
         particle->group->surface != argument.substr(0, slash)) return false;
     // A particle sense must use its own argument, not a neighbouring case phrase.
@@ -116,7 +128,10 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         return false;
     }
     const Item* x = it;
-    auto step = [&](const Item* y) { return s.side == userdict::Side::After ? y->next : y->prev; };
+    auto step = [&](const Item* y) -> const Item* {
+        if (s.side == userdict::Side::After) return y == it ? y->After() : y->next;
+        return y->prev;
+    };
     for (int n = 0; n < kSenseWindow; n++) {
         x = step(x);
         if (x != nullptr && IsQuoteMark(x->group->surface)) continue;
@@ -167,7 +182,7 @@ bool EndsInPause(std::string_view s, bool ellipsis) {
 // bracket or a dash, or after an ellipsis when the utterance goes on after it (……でも、
 // but not ……だって」).
 bool SentenceInitial(Flusher& f, const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     const bool ellipsis = n != nullptr && n->group->surface != "。" && !InSet(kClosingQuoteItems, n->group->surface) &&
                           !InSet(kSentenceEndItems, n->group->surface);
     if (EndsInPause(std::string_view(it->text).substr(0, static_cast<std::size_t>(it->start)), ellipsis)) return true;
@@ -260,7 +275,7 @@ void ChooseInitialConjunctions(Flusher& f) {
         for (const InitialConjunction& c : kInitialConjunctions) {
             if (c.surface != surface) continue;
             // 왜 takes no copula or particle (なんでだ 어째서야, なんでって 어째서냐니, not 왜야).
-            const Item* n = it->next;
+            const Item* n = it->After();
             const char32_t first = n != nullptr ? text::DecodeRune(n->group->surface).cp : 0;
             const bool joined = n != nullptr && n->selected >= 0 && n->tokenIndex == it->tokenIndex &&
                                 At(n->Code(n->selected), 0) == '2' && first >= U'ぁ' && first <= U'ゖ';
@@ -270,7 +285,7 @@ void ChooseInitialConjunctions(Flusher& f) {
             break;
         }
         if (done) continue;
-        Item* ni = it->next;
+        Item* ni = it->After();
         if (surface == "とき" && ni != nullptr && ni->selected >= 0 && !ni->Fixed() && ni->group->surface == "に" &&
             ni->next != nullptr && ni->next->group->surface == "、") {
             TakeTarget(it, At(it->Code(it->selected), 0), "그런데", {Provenance::Initial});
@@ -281,7 +296,7 @@ void ChooseInitialConjunctions(Flusher& f) {
 
 void HanBeforeNa(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
+        Item* n = it->After();
         if (n != nullptr && (n->group->surface == "』" || n->group->surface == "」")) n = n->next;
         if (n == nullptr || it->selected < 0 || n->selected < 0 || n->Fixed() || At(it->Code(it->selected), 0) != '1' ||
             !n->group->surface.starts_with(kJaNa) || !n->EntryText(n->selected).starts_with(kKoIn) ||

@@ -1,5 +1,7 @@
 // The composer's marker rules: an item's Korean text from its entry, its ending and its
 // neighbours.
+#include <algorithm>
+#include <cstddef>
 #include <cstdint>
 #include "core/output/compose.h"
 #include "core/output/inflect.h"
@@ -778,13 +780,22 @@ void Composer::BuildAction(int i, int action, std::string_view mode) {
     sc.text = Cat({adverb, pending, carried, stemText, replacement, suffixText});
 }
 
+bool Composer::SpanBetween(const ResolvedItem& a, const ResolvedItem& b) const {
+    if (tokens_ == nullptr) return false;
+    const auto end = std::min(static_cast<std::size_t>(b.tokenIndex), tokens_->size());
+    for (auto t = static_cast<std::size_t>(std::max(a.tokenIndex + 1, 0)); t < end; t++) {
+        if ((*tokens_)[t].span != 0) return true;
+    }
+    return false;
+}
+
 bool Composer::TextGate(int i, std::string_view key) {
     const std::vector<ResolvedItem>& items = *items_;
     const ResolvedItem& it = items[i];
     if (i + 1 >= static_cast<int>(items.size())) return false;
     const ResolvedItem& next = items[i + 1];
     const std::string_view marker = CutFirst(key, 4).head;
-    if (CutFirst(EntryText(next), 4).head == marker) {
+    if (CutFirst(EntryText(next), 4).head == marker && !SpanBetween(it, next)) {
         const char cls = At(DirectCode(it), 1);
         if (cls == '3' || cls == '0' || cls == '6' || cls == ';' || cls == '5' || At(DirectCode(next), 1) == '3') {
             return false;

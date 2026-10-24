@@ -70,6 +70,9 @@ public:
     // The depth of 「」 and 『』 quotes open at the start of token j, from settings.quoteDepth
     // and the raw text of the tokens before it; computed once for all tokens.
     int QuoteDepth(int j);
+    // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
+    // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
+    int RubyPart(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -105,6 +108,7 @@ public:
 
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
+    std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);
@@ -123,6 +127,11 @@ private:
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
+    // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
+    // (noun.realm-compound) gives it its 国 (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the reading of
+    // the name that the name with 国 starts with moves to the front, when no longer word starts
+    // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
+    Record* NounBeforeCompound(Record* records, std::string_view text);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);

@@ -61,6 +61,13 @@ constexpr KoreanPassive kKoreanPassives[] = {
     {"핥다", "핥이다"},
 };
 
+// The heads of a て ending that holds the existential 있 (1고 있다, 6 있다), the family of 있다 and
+// the family of the honorifics in 시.
+constexpr std::string_view kProgressiveHead = "1고 ";
+constexpr std::string_view kResultativeHead = "6 ";
+constexpr std::string_view kExistenceMarker = "&HN@";
+constexpr std::string_view kHonorificMarker = "&AE@";
+
 // Whether the 2-byte grammar codes gattr hold code.
 bool GrammarCode(std::string_view gattr, std::string_view code) {
     for (std::size_t i = 0; i + 2 <= gattr.size(); i += 2) {
@@ -218,11 +225,11 @@ std::string KoreanPassiveLemma(std::string_view lemma) {
 // names no clause (と言われた下女, not と言われるのが or と言われたこと); an auxiliary いる after
 // its て form ends it instead (と言われている騎士団長).
 bool ModifiesNoun(const Item* it) {
-    if (const Item* aux = it->next; aux != nullptr && aux->tokenIndex == it->tokenIndex && aux->detail->Yougo() &&
+    if (const Item* aux = it->After(); aux != nullptr && aux->tokenIndex == it->tokenIndex && aux->detail->Yougo() &&
                                     (aux->group->surface == "い" || aux->group->surface == "お")) {
         it = aux;
     }
-    const Item* n = it->next;
+    const Item* n = it->After();
     const std::string_view own = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
     return n != nullptr && n->tokenIndex == it->tokenIndex && (own.ends_with("る") || own.ends_with("た")) &&
            At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
@@ -368,7 +375,7 @@ bool Contrast(std::string_view rest) {
 }  // namespace
 
 bool DescribedNoun(const Worker& w, const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
            !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
            !std::ranges::any_of(dict::ClassMembers("noun.clause"),
@@ -549,18 +556,29 @@ bool SinoNounTakesObject(const Item* n) {
 // Whether a verb part code takes an object (class 3 to 6, M431 書く; not M418 帰る).
 bool TransitiveCode(std::string_view code) { return At(code, 1) >= '3' && At(code, 1) <= '6'; }
 
+// How an honorific word of its own takes the いる of its て form: as the plain verb of its stem
+// (말씀하고 계신다), as itself (드시고 계신다), or not at all (계시다 is the いる; 돌아가셨다 the state).
+enum class OwnProgressive { Stem, Itself, None };
+
+struct Suppletive {
+    std::string_view plain, honorific;
+    OwnProgressive progressive;
+};
+
+// Verbs with their own honorific word.
+constexpr Suppletive kSuppletive[] = {
+    {"말하다", "말씀하시다", OwnProgressive::Stem}, {"먹다", "드시다", OwnProgressive::Itself},
+    {"마시다", "드시다", OwnProgressive::Itself},   {"자다", "주무시다", OwnProgressive::Itself},
+    {"있다", "계시다", OwnProgressive::None},       {"죽다", "돌아가시다", OwnProgressive::None},
+};
+
 // The honorific target of the conjugating verb target text (쓰&AF@ 쓰시다); "" when it has none.
 std::string HonorificTarget(Flusher& f, std::string_view text) {
-    // Verbs with their own honorific word.
-    constexpr std::string_view kSuppletive[][2] = {
-        {"말하다", "말씀하시다"}, {"먹다", "드시다"}, {"마시다", "드시다"}, {"자다", "주무시다"}, {"있다", "계시다"},
-        {"죽다", "돌아가시다"},
-    };
     if (text.size() < 4 || text.back() != '@' || text[text.size() - 4] != '&') return {};
     const std::string_view head = text.substr(0, text.size() - 4);
     std::string lemma;
     const std::string plain = output::Lemma(text, f.families);
-    for (const auto& [verb, honorific] : kSuppletive) {
+    for (const auto& [verb, honorific, progressive] : kSuppletive) {
         if (plain == verb || plain.ends_with(" " + std::string(verb))) {
             lemma = plain.substr(0, plain.size() - verb.size()) + std::string(honorific);
         }
@@ -609,16 +627,69 @@ std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitiv
     return {};
 }
 
+// The plain verb of the honorific verb target text (읽으&AE@ 읽다, 입원하&AE@ 입원하다) as a
+// conjugating target: the verb of the passive stem surface when the dictionary has one (作られ
+// 만들다), else the verb whose honorific is text (its stem without the 으 before 시, or the
+// stem itself), or the honorific itself as kSuppletive says (드시고 계신다); "" for an honorific
+// suffix alone, 계시다 and 돌아가시다.
+std::string PlainOfHonorific(Flusher& f, std::string_view surface, std::string_view text) {
+    const std::string lemma = output::Lemma(text, f.families);
+    constexpr std::string_view kSi = "시다";
+    if (!lemma.ends_with(kSi) || lemma.size() == kSi.size()) return {};
+    for (const Suppletive& own : kSuppletive) {
+        if (!lemma.ends_with(own.honorific)) continue;
+        if (own.progressive == OwnProgressive::None) return {};
+        if (own.progressive == OwnProgressive::Itself) return std::string(text);
+    }
+    bool transitive = false;
+    std::string plain;
+    if (!BaseVerbTarget(f, surface, transitive, plain).empty() && !plain.empty()) return plain;
+    const std::string_view head = std::string_view(lemma).substr(0, lemma.size() - kSi.size());
+    constexpr std::string_view kEu = "으";
+    for (const std::string_view stem : {head.ends_with(kEu) ? head.substr(0, head.size() - kEu.size()) : head, head}) {
+        output::Conjugated c = output::Conjugating(std::string(stem) + std::string(kKoDa), '&', "", f.families);
+        if (!c.error.empty()) continue;
+        if (output::Lemma(HonorificTarget(f, c.target), f.families) == lemma) return std::move(c.target);
+    }
+    return {};
+}
+
+std::string ExistentialToVerb(Flusher& f, std::string_view rest);
+
+// The honorific of the existential 있다 (계&AE@ 계시다).
+std::string HonorificExistence(Flusher& f) { return HonorificTarget(f, kExistenceMarker); }
+
+// The ending written for the existential 있 in rest (있다, 있으니까, 있었다) for its honorific
+// 계시다 (계신다, 계시니까, 계셨다); "" for an ending ExistentialToVerb does not cover.
+std::string HonorificExistential(Flusher& f, std::string_view rest) {
+    const std::string verb = ExistentialToVerb(f, rest);
+    const std::string honorific = HonorificExistence(f);
+    if (verb.empty() || honorific.size() < 4) return {};
+    const std::string_view family = std::string_view(honorific).substr(honorific.size() - 4);
+    const std::string_view row = LookupSource(std::string(family) + verb[0], f.families);
+    if (row.empty()) return {};
+    return honorific.substr(0, honorific.size() - 4) + std::string(row) + verb.substr(1);
+}
+
 // The respectful verb item it before the auxiliary いる of its て form in its token is the plain
 // verb with 고 and the honorific of いる (書かれている 쓰고 계신다, 置かれていた 두고 계셨다): the
-// auxiliary takes the honorific; false, with nothing changed, when no such auxiliary follows.
+// auxiliary takes the honorific. A verb whose ending holds the いる (書かれてる 1고 있다) takes
+// 고 and 계시다 in its ending. False, with nothing changed, when no such auxiliary follows.
 bool HonorificProgressive(Flusher& f, Item* it) {
-    Item* aux = it->next;
+    if (it->DirectIndex() < 0) return false;
+    const std::string_view ending = it->DirectText(it->DirectIndex());
+    Item* aux = it->After();
     if (aux == nullptr || aux->tokenIndex != it->tokenIndex || !aux->detail->Yougo() || aux->group->surface != "い" ||
-        aux->selected < 0 || it->DirectIndex() < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
+        aux->selected < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
+        for (const std::string_view head : {kProgressiveHead, kResultativeHead}) {
+            if (!ending.starts_with(head)) continue;
+            const std::string honorific = HonorificExistential(f, ending.substr(head.size()));
+            if (honorific.empty()) return false;
+            it->AssignDirectSlot(it->DirectIndex(), std::string(kProgressiveHead) + honorific);
+            return true;
+        }
         return false;
     }
-    const std::string_view ending = it->DirectText(it->DirectIndex());
     if (ending != "6" && ending != "1고") return false;
     const std::string honorific = HonorificTarget(f, aux->EntryText(aux->selected));
     if (honorific.empty()) return false;
@@ -678,9 +749,19 @@ void RespectfulPassive(Flusher& f) {
             for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
             continue;
         }
+        // A (ら)れ word or a respectful verb (verb.respectful) read as an honorific already (読まれ
+        // 읽으시다, 入院され 입원하시다, 仰 말씀하시다) before the auxiliary いる is the plain verb with
+        // 고 and the honorific of いる.
+        const bool stemRe = surface.ends_with("れ");
+        if (record == 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) {
+            if (!stemRe && !dict::InClass("verb.respectful", surface)) continue;
+            const std::string plain = PlainOfHonorific(f, surface, it->EntryText(it->selected));
+            if (!plain.empty() && HonorificProgressive(f, it)) it->AssignEntrySurface(it->selected, plain);
+            continue;
+        }
         // A word written as a passive or potential stem (され, 来られ, 書かれ): its honorific
         // candidate, or the honorific of the verb it is made from.
-        if (record != 0 || !surface.ends_with("れ") || it->EntryText(it->selected).ends_with("&AE@")) continue;
+        if (record != 0 || !stemRe) continue;
         // 言われ read as 듣다 (言われた通り 들은 대로) after an honoured subject is the respectful
         // 言う, 말씀하시다 (陛下が言われたこと 말씀하신 것); what is said is often left out, so it
         // needs no object.
@@ -706,6 +787,11 @@ void RespectfulPassive(Flusher& f) {
             // (gram Hi): 陛下が幽閉された is the passive, 国王様が崩御された the respectful form.
             if (!RespectfulReading(it, surface == "され" && SinoNounTakesObject(it->prev))) continue;
             it->SelectCandidate(honorific, {Provenance::Rewrite});
+            // Before いる it is the plain verb with 고 and 계시다 (読まれてる 읽고 계신다).
+            if (const std::string plain = PlainOfHonorific(f, surface, it->EntryText(honorific));
+                !plain.empty() && HonorificProgressive(f, it)) {
+                it->AssignEntrySurface(honorific, plain);
+            }
             // The object the passive made a subject is the object again (本を説明された 책을).
             for (Item* p = it->prev; p != nullptr; p = p->prev) {
                 if (p->group->surface != "を") continue;
@@ -779,6 +865,13 @@ bool GradualBefore(const Item* it) {
     return false;
 }
 
+// Whether verb item v is an auxiliary after the て form of the verb before it (近づいて来る).
+bool AfterTeForm(const Item* v) {
+    const Item* p = v->prev;
+    return p != nullptr && p->tokenIndex == v->tokenIndex && p->detail->Yougo() &&
+           (p->DirectSurface().ends_with(kJaTe) || p->DirectSurface().ends_with(kJaDe));
+}
+
 // The verb in its 連用形 (the bare stem or its one i-row kana) that an unlisted 込む, item n,
 // follows in the same token (詰め込む, 惚れ込んでいる); nullptr when n is no such 込む.
 Item* InwardVerb(Item* n) {
@@ -794,6 +887,20 @@ Item* InwardVerb(Item* n) {
     constexpr std::string_view kIRow = "いきしちにひみりぎじび";
     if (!stem.empty() && (text::RuneCount(stem) != 1 || kIRow.find(stem) == std::string_view::npos)) return nullptr;
     return it;
+}
+
+// Whether verb item it is an honorific before the いる of its て form: its Korean is an honorific
+// (돌아가&AE@), or the いる is 계시다, in the auxiliary after it or in its ending (来られてる 1고
+// 계신다).
+bool HonorificAspect(Flusher& f, const Item* it) {
+    if (it->selected >= 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) return true;
+    const std::string honorific = HonorificExistence(f);
+    if (const Item* n = it->After(); n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == honorific) {
+        return true;
+    }
+    if (honorific.size() <= kHonorificMarker.size() || it->DirectIndex() < 0) return false;
+    const std::string ending = std::string(kProgressiveHead) + honorific.substr(0, honorific.size() - kHonorificMarker.size());
+    return it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
 }  // namespace
@@ -814,12 +921,23 @@ void ResultState(Flusher& f) {
         }
         const bool nounPassive =
             stem == "され" && v->prev != nullptr && dict::InClass("noun.result-sareru", v->prev->group->surface);
-        const bool past = v->detail->record == 0 && !v->lexical && dict::InClass("verb.result-state-past", stem);
-        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(stem) || nounPassive) && !object) ||
+        // A られ word of a kanji verb read as an honorific (亡くなられている, 倒れられている) has the
+        // aspect of its verb; the なる of お慕いになられる is the respectful form.
+        std::string_view verb = stem;
+        if (constexpr std::string_view kRare = "られ"; v->detail->record == 0 && stem.size() > kRare.size() &&
+                                                     stem.ends_with(kRare) && text::IsKanji(text::DecodeRune(stem).cp) &&
+                                                     HonorificAspect(f, it)) {
+            verb.remove_suffix(kRare.size());
+        }
+        const bool past = v->detail->record == 0 && !v->lexical && dict::InClass("verb.result-state-past", verb);
+        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass("verb.result-passive", stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
                             !v->EntryText(v->selected).ends_with("&HN@"));
         if (!state) continue;
+        // A verb that is also a て auxiliary (来る) is a change or approach after a て form
+        // (近づいて来られている 가까워져 오고 계신다), no state of its own.
+        if (dict::InClass("aux.te-start", verb) && AfterTeForm(v)) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         const std::string lemma = output::Lemma(e->dst, f.families);
@@ -831,7 +949,7 @@ void ResultState(Flusher& f) {
                 continue;
             }
         }
-        if (Item* n = it->next; past && rest.empty() && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
+        if (Item* n = it->After(); past && rest.empty() && n != nullptr && n->group->surface == "い" && n->selected >= 0 &&
                                 n->DirectIndex() >= 0 && ItemLemma(f, n, n->selected).starts_with("있")) {
             const Entry* d = n->DirectEntry(n->DirectIndex());
             if (const std::string ending = d != nullptr ? PastOfVerbEnding(d->dst) : std::string(); !ending.empty()) {
@@ -842,8 +960,10 @@ void ResultState(Flusher& f) {
             }
         }
         // The honorific 계시다 of the auxiliary is its 있다 (座られている 앉아 계신다).
-        const std::string auxiliary = rest.empty() && it->next != nullptr ? ItemLemma(f, it->next, it->next->selected) : "";
-        if (rest.starts_with(" 있") || auxiliary.starts_with("있") || auxiliary == "계시다") {
+        const std::string auxiliary = rest.empty() && it->After() != nullptr ? ItemLemma(f, it->After(), it->After()->selected) : "";
+        const std::string honorific = HonorificExistence(f);
+        const bool honorificRest = honorific.size() > 4 && rest.starts_with(" " + honorific.substr(0, honorific.size() - 4));
+        if (rest.starts_with(" 있") || honorificRest || auxiliary.starts_with("있") || auxiliary == "계시다") {
             it->AssignDirectSlot(it->DirectIndex(), "6" + std::string(rest));
         }
     }
@@ -909,8 +1029,8 @@ void SimpleAspect(Flusher& f) {
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (aspect == Aspect::None || e == nullptr) continue;
         const std::string_view te = it->DirectSurface();
-        const std::string progressive = "1고 ";
-        const std::string resultative = "6 ";
+        const std::string progressive(kProgressiveHead);
+        const std::string resultative(kResultativeHead);
         const bool contracted = std::string_view(e->dst).starts_with(progressive) ||
                                 (std::string_view(e->dst).starts_with(resultative) && AdjectiveTarget(it->EntryText(it->selected)));
         if (contracted) {
@@ -919,7 +1039,7 @@ void SimpleAspect(Flusher& f) {
             if (!simple.empty() && !KeepsProgressive(aspect, simple)) it->AssignDirectSlot(it->DirectIndex(), simple);
             continue;
         }
-        Item* n = it->next;
+        Item* n = it->After();
         if ((e->dst != "1고" && e->dst != "6") || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
             n->group->surface != "い" || n->selected < 0 || n->DirectIndex() < 0 ||
             !ItemLemma(f, n, n->selected).starts_with("있") || n->DirectSurface().ends_with("っけ")) {
@@ -948,7 +1068,7 @@ void EmphaticMo(Flusher& f) {
             it->DirectText(it->DirectIndex()) != jido || !it->DirectSurface().starts_with("も")) {
             continue;
         }
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || !n->detail->Yougo() || n->group->surface != "する" || n->selected < 0 ||
             n->DirectIndex() < 0) {
             continue;
@@ -1055,7 +1175,7 @@ void PreparedState(Flusher& f) {
         }
         const Entry* e = it->DirectEntry(it->DirectIndex());
         const std::string_view te = it->DirectSurface();
-        Item* n = it->next;
+        Item* n = it->After();
         if (e == nullptr || e->dst != "6" || (!te.ends_with("て") && !te.ends_with("で")) || n == nullptr ||
             n->group->surface != "あ" || n->selected < 0 || n->DirectIndex() < 0 ||
             n->EntryText(n->selected) != "&HN@") {
@@ -1072,7 +1192,7 @@ void PreparedState(Flusher& f) {
 
 void NotYet(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || !it->detail->Yougo() || it->DirectIndex() < 0) continue;
         const Entry* direct = it->DirectEntry(it->DirectIndex());
         if (direct == nullptr || direct->dst != std::string("1") + std::string(kKoJi) || (n->group->surface != "いな" && n->group->surface != "な") ||
@@ -1150,7 +1270,7 @@ bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
         (it->prev != nullptr && (it->prev->group->surface == "から" || it->prev->group->surface == "か"))) {
         return false;
     }
-    for (const Item* x = it->next; x != nullptr; x = x->next) {
+    for (const Item* x = it->After(); x != nullptr; x = x->next) {
         if (x->selected < 0 || QuoteVerbFollows(x) || Has(x->Attr(x->selected), "UTh") || Has(x->Attr(x->selected), "UTs")) {
             return false;
         }
@@ -1190,16 +1310,15 @@ void PastSequence(Flusher& f) {
         // 出会ったのは 나가 보니 만난 것은).
         const std::string_view stem = it->group->surface;
         const bool tried = seeing && (stem.ends_with("てみ") || stem.ends_with("でみ") ||
-                                      (stem == "み" && it->prev != nullptr && it->prev->detail->Yougo() &&
-                                       (it->prev->DirectSurface().ends_with(kJaTe) || it->prev->DirectSurface().ends_with(kJaDe))));
+                                      (stem == "み" && AfterTeForm(it)));
         // A point of view (長期的に見れば, 目で見れば, 外から見れば) is no step of the story.
         const bool viewpoint = it->prev != nullptr && (it->prev->group->surface.ends_with("的に") ||
                                                       it->prev->group->surface.ends_with("目で") ||
                                                       it->prev->group->surface.ends_with("から"));
         if (tried) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
-        } else if (it->next == nullptr ||
-                   (it->next->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
+        } else if (it->After() == nullptr ||
+                   (it->After()->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
             continue;
         } else if (seeing && !viewpoint) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
@@ -1245,7 +1364,7 @@ namespace {
 // Whether a verb of thinking stands within four items after it, with no predicate and no clause
 // boundary in between.
 bool ThinkingVerbAhead(const Item* it) {
-    const Item* x = it->next;
+    const Item* x = it->After();
     for (int n = 0; n < 5 && x != nullptr && x->selected >= 0; n++, x = x->next) {
         for (const std::string_view v : dict::ClassMembers("verb.thinking-start")) {
             if (x->group->surface.starts_with(v)) return n > 0;
@@ -1294,9 +1413,9 @@ void QuoteTo(Flusher& f) {
         if (it->DirectIndex() < 0) {
             if (it->group->surface == "だと" && it->prev != nullptr &&
                 (!it->prev->detail->Yougo() || it->prev->DirectSurface().ends_with("の")) &&
-                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->next) || ThinkingVerbAhead(it))) {
+                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->After()) || ThinkingVerbAhead(it))) {
                 SelectLemma(f, it, "(이)라고");
-                HearSense(f, it->next);
+                HearSense(f, it->After());
             }
             continue;
         }
@@ -1307,25 +1426,25 @@ void QuoteTo(Flusher& f) {
         // thinking follows in the clause (時間がないと、彼は言った 시간이 없다고, 그는 말했다).
         const bool paused = d.ends_with(std::string("と") + std::string(kJaComma));
         if (paused) d.remove_suffix(kJaComma.size());
-        if (d.ends_with("と")) HearSense(f, it->next);
+        if (d.ends_with("と")) HearSense(f, it->After());
         if (!d.ends_with("と") || (!e->dst.starts_with("2면") && !e->dst.starts_with("1다면"))) continue;
         const bool end = QuoteEnd(f.w, it);
         const std::string ja = it->group->surface + std::string(d);
         if (paused) {
-            if (At(it->Code(it->selected), 0) == '7' && QuoteVerbAhead(it->next)) {
+            if (At(it->Code(it->selected), 0) == '7' && QuoteVerbAhead(it->After())) {
                 it->AssignDirectSlot(it->DirectIndex(), "1다고,");
             }
             continue;
         }
         // たらと思う keeps the condition as an unfinished wish (行けたらと思う 갈 수 있으면 하고 생각한다);
         // before a verb of saying it is a suggestion (行ったらと言われた) and stays a quote.
-        if ((d == "らと" || d.ends_with("たらと") || d.ends_with("だらと")) && WishVerbNext(it->next)) {
+        if ((d == "らと" || d.ends_with("たらと") || d.ends_with("だらと")) && WishVerbNext(it->After())) {
             it->AssignDirectSlot(it->DirectIndex(), std::string(e->dst.starts_with("1다면") ? "1다면" : "2면") + " 하고");
             continue;
         }
         const bool thought = (At(it->Code(it->selected), 0) == '7' || ja.ends_with("ないと") || d.starts_with("た")) &&
                              (ThinkingVerbAhead(it) ||
-                              (it->next != nullptr && it->next->group->surface == kJaComma && QuoteVerbAhead(it->next->next)));
+                              (it->After() != nullptr && it->After()->group->surface == kJaComma && QuoteVerbAhead(it->After()->next)));
         // ないと that ends the utterance is a duty or a need (行かないと 가지 않으면, 時間がないと
         // 시간이 없으면), but the adjective ない after the topic は or も there closes a quotation
         // (毒はないと 독은 없다고, 何もないと 아무것도 없다고).
@@ -1334,7 +1453,7 @@ void QuoteTo(Flusher& f) {
                             (it->prev->group->surface.ends_with("は") || it->prev->group->surface.ends_with("も")) &&
                             ItemLemma(f, it, it->selected).ends_with("없다");
         const bool duty = ja.ends_with("ないと") && !absent;
-        if ((!end && !QuoteVerbFollows(it->next) && !thought) || (end && (duty || SayingConditional(it))) ||
+        if ((!end && !QuoteVerbFollows(it->After()) && !thought) || (end && (duty || SayingConditional(it))) ||
             Has(d, "ます")) {
             continue;
         }
@@ -1352,7 +1471,7 @@ namespace {
 
 // Whether an attributive (綺麗な, 赤い, 走る, 走った) and a noun follow it, past punctuation (とても、キレイな裸).
 bool ModifierFollows(const Item* it) {
-    const Item* m = it->next;
+    const Item* m = it->After();
     while (m != nullptr && !m->detail->Yougo() && m->selected >= 0 && At(m->Code(m->selected), 0) == '6') m = m->next;
     if (m == nullptr || m->DirectIndex() < 0) return false;
     const Entry* e = m->DirectEntry(m->DirectIndex());
@@ -1365,7 +1484,7 @@ bool ModifierFollows(const Item* it) {
 
 void TerminalBeforeQuote(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* next = it->next;
+        Item* next = it->After();
         bool pause = false;
         while (next != nullptr && InSet(kCommaItems, next->group->surface)) {
             next = next->next;
@@ -1449,7 +1568,7 @@ bool WonderBefore(const Item* it) {
 // Whether only closing marks, an ellipsis, a comma or a question mark follow the item, or a
 // final な left without a translation before them (どこに行ったんだろうな).
 bool WonderEnd(const Worker& w, const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     if (n != nullptr && n->tokenIndex == it->tokenIndex && n->start == it->start + it->length &&
         (n->group->surface == "な" || n->group->surface == "なぁ" || n->group->surface == "なあ") && n->selected >= 0 &&
         n->group->At(n->selected) != nullptr && n->EntryText(n->selected).empty()) {
@@ -1530,7 +1649,7 @@ bool PoliteSurface(std::string_view s) {
 bool PoliteAfter(const Item* it) {
     int depth = 0;
     const Item* last = nullptr;
-    for (const Item* q = it->next; q != nullptr; q = q->next) {
+    for (const Item* q = it->After(); q != nullptr; q = q->next) {
         const std::string_view s = q->group->surface;
         // The text of q up to the next word, which holds the brackets no word took.
         const size_t from = std::min(static_cast<size_t>(q->start), q->text.size());
@@ -1674,7 +1793,7 @@ void DegreeAfterNumber(Flusher& f) {
 
 void PluralPronoun(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* n = it->next;
+        Item* n = it->After();
         if (n == nullptr || it->selected < 0 || n->selected < 0 || it->detail->Yougo() ||
             !dict::InClass("suffix.plural-pronoun", n->group->surface) || n->tokenIndex != it->tokenIndex ||
             it->start + it->length != n->start) {
@@ -1733,8 +1852,8 @@ void HumbleFirstPerson(Flusher& f) {
         else if (lemma == "우리들") target = "저희들";
         else continue;
         if (!PoliteAfter(it)) continue;
-        if (target == "저" && it->next != nullptr && it->next->selected >= 0 &&
-            ItemLemma(f, it->next, it->next->selected).starts_with("(이)가")) {
+        if (target == "저" && it->After() != nullptr && it->After()->selected >= 0 &&
+            ItemLemma(f, it->After(), it->After()->selected).starts_with("(이)가")) {
             target = "제";
         }
         TakeTarget(it, At(it->Code(it->selected), 0), target);
@@ -1786,14 +1905,14 @@ void WriteNoka(Item* it, std::string_view s) {
 void ParallelNoka(Flusher& f) {
     std::vector<Item*> run;
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!Noka(it) || (it->next != nullptr && !PunctuationItem(it->next))) continue;
+        if (!Noka(it) || (it->After() != nullptr && !PunctuationItem(it->After()))) continue;
         run.push_back(it);
     }
     if (run.size() < 2) return;
     // Every clause but the last is followed by a comma.
     for (std::size_t k = 0; k + 1 < run.size(); k++) {
-        const std::string_view s = run[k]->next->group->surface;
-        if (s != "、" && s != ",") return;
+        const Item* n = run[k]->After();
+        if (n == nullptr || (n->group->surface != "、" && n->group->surface != ",")) return;
     }
     std::vector<std::string> forms;
     for (const Item* it : run) {
@@ -1940,15 +2059,15 @@ bool AdjectiveNegative(std::string_view lemma) {
 void ExclaimedAdjective(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (it->DirectIndex() < 0 || OwnedGroup(it->DirectGroup()) || At(it->Code(it->selected), 0) != '7' ||
-            it->DirectText(it->DirectIndex()) != "4" || !IsOneOf(it->next, kCommaItems)) {
+            it->DirectText(it->DirectIndex()) != "4" || !IsOneOf(it->After(), kCommaItems)) {
             continue;
         }
         if (const Item* p = it->prev; p != nullptr && !IsOneOf(p, kExclaimOpeners)) continue;
-        if (const Item* n = it->next->next; n != nullptr && n->selected >= 0 && At(n->Code(n->selected), 0) == '7' &&
+        if (const Item* n = it->After()->next; n != nullptr && n->selected >= 0 && At(n->Code(n->selected), 0) == '7' &&
                                             !IsWord(n, it->group->surface)) {
             continue;
         }
-        if (const Item* n = it->next->next; n != nullptr && n->selected >= 0 &&
+        if (const Item* n = it->After()->next; n != nullptr && n->selected >= 0 &&
                                             (At(n->Code(n->selected), 0) == '1' || n->group->surface.starts_with("で") ||
                                              n->group->surface.starts_with("だ"))) {
             continue;

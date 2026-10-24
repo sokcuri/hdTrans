@@ -368,10 +368,11 @@ bool RuleL44([[maybe_unused]] Item* p) {
 }
 
 // local 45
-//     (src[+1] == "め" or src[+1] == "目")
+//     (src[+1] == "め" or src[+1] == "目" or src[+1] == "艦")
 bool RuleL45([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "め"sv) ||
-           SrcEq(p, 1, "目"sv));
+           SrcEq(p, 1, "目"sv) ||
+           SrcEq(p, 1, "艦"sv));
 }
 
 // local 46
@@ -4200,9 +4201,11 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh
+//     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "Pn"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv)) ||
+           (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
 
 // global 1004 stem pos 1 prio 40
@@ -4476,7 +4479,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL42, 0x81fb06832032cff9ull},
     {RuleL43, 0xa12ceabd944c4c13ull},
     {RuleL44, 0xc0cab0d798f0118bull},
-    {RuleL45, 0x555193f1128693dbull},
+    {RuleL45, 0x3cc5675bb3081c9aull},
     {RuleL46, 0x03deeef0c1304ae2ull},
     {RuleL47, 0xc5cdeb9946b1b355ull},
     {RuleL48, 0x3722e3ca808c5f41ull},
@@ -4938,7 +4941,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG2, 0x80a377d931160ae0ull},
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0x689e9ee7a39de957ull},
+    {RuleG30, 0x50734a4f6e17f2d1ull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},

@@ -18,7 +18,7 @@ std::string_view ItemText(const Item* it) { return Slice(it->text, it->start, it
 }  // namespace
 
 bool PredicateFollows(const Item* it) {
-    const Item* n = it->next;
+    const Item* n = it->After();
     if (n == nullptr) return false;
     constexpr std::string_view kStops[] = {"ゆ", "こ", "ね"};
     const std::string_view next = n->group->surface;
@@ -53,7 +53,7 @@ void TeThanks(Flusher& f) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
-        const Item* n = it->next;
+        const Item* n = it->After();
         if (n != nullptr && n->group->surface == "、") n = n->next;
         if (n != nullptr && std::ranges::any_of(dict::ClassMembers("adverb.degree-feeling"), [&](std::string_view d) {
                 return n->group->surface == d;

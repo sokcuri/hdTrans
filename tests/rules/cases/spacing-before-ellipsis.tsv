@@ -2,5 +2,5 @@ rule	input	expected	kind	layer
 output:closing-symbol	「それはっ……」	「그건……」	fix	output
 output:closing-symbol	「もっとぉ♪」	「좀 더♪」	fix	output
 output:closing-symbol	「もっとぉ♡」	「좀 더♡」	fix	output
-output:closing-symbol	「そうだ。……でも」	「그렇다. ……하지만」	keep	output
+output:closing-symbol	「そうだ。……でも」	「그래. ……하지만」	keep	output
 output:closing-symbol	「それは ……」	「그건 ……」	keep	output

@@ -159,11 +159,16 @@ std::string ApplyJosaAlternation(std::string_view text, std::string_view context
         } else {
             e = ScanEnding(cells, before, trailing);
         }
-        char a1 = 0, a2 = 0, a3 = 0;
+        char tail[internal::kLatinWindow];  // the ASCII letters or the digit before the particle
+        size_t tailSize = 0;
         auto read = [&](const std::vector<Cell>& cs, int n) {
-            a1 = Letter(CellAt(cs, n - 1));
-            a2 = Letter(CellAt(cs, n - 2));
-            a3 = Letter(CellAt(cs, n - 3));
+            tailSize = 0;
+            for (int k = n - 1; k >= 0 && tailSize < internal::kLatinWindow; k--) {
+                const char c = Letter(CellAt(cs, k));
+                if (!IsAlpha(c) && (tailSize > 0 || c < '0' || c > '9')) break;
+                tail[internal::kLatinWindow - 1 - tailSize++] = c;
+                if (!IsAlpha(c)) break;
+            }
         };
         if (e.kind == 2) {
             switch (EndingClass(e.r)) {
@@ -189,7 +194,8 @@ std::string ApplyJosaAlternation(std::string_view text, std::string_view context
                 read(contextCells, before - trailing);
             }
         }
-        pos = replace(pos, row, internal::EndingConsonant(a1, a2, a3) ? 1 : 2);
+        const std::string_view letters(tail + internal::kLatinWindow - tailSize, tailSize);
+        pos = replace(pos, row, internal::EndingConsonant(letters) ? 1 : 2);
         if (pos < v.size()) pos = skipChar(pos);
     }
     return v;

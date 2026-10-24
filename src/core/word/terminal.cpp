@@ -53,10 +53,10 @@ char NominalForm(char cls) {
 // closing quotes), or ends in 다 before a comma.
 bool EndsClause(const Item* it) {
     if (!IsPredicate(it)) return false;
-    while (it->next != nullptr && IsPredicate(it->next)) it = it->next;
+    while (it->After() != nullptr && IsPredicate(it->After())) it = it->After();
     const std::string_view ending = it->DirectText(it->DirectIndex());
     if (At(ending, 0) == NominalForm(At(it->Code(it->selected), 0))) return false;
-    const Item* next = it->next;
+    const Item* next = it->After();
     while (IsOneOfClosing(next)) next = next->next;
     if (next == nullptr || IsOneOfSentenceEnds(next)) return true;
     return IsOneOfCommas(next) && it->DirectIndex() >= 0 && it->DirectText(it->DirectIndex()).ends_with(kKoDa);
@@ -82,7 +82,7 @@ bool PauseMarks(std::string_view s) {
 // noun not ending the sentence (知らない……本当に, 分からない……でも, 帰る――それでいい,
 // 熱すぎる・・・勘弁して, but 行く……ことにした, いた――んだけど, 消えた……直後。).
 bool PausedClause(const Flusher& f, const Item* it) {
-    const Item* next = it->next;
+    const Item* next = it->After();
     if (!f.w.settings.text || next == nullptr || next->tokenIndex <= it->tokenIndex + 1 ||
         static_cast<std::size_t>(it->start + it->length) != it->text.size()) {
         return false;
@@ -119,7 +119,7 @@ void PreferTerminal(Flusher& f) {
             bool endsWithForm = false;
             for (int i = 0; i < form.lastCount; i++) endsWithForm = endsWithForm || LastChar(ja) == form.last[i];
             if (!endsWithForm) continue;
-            const Item* next = it->next;
+            const Item* next = it->After();
             bool comma = false;
             while (IsOneOfCommas(next) || IsOneOfClosing(next)) {
                 comma = comma || IsOneOfCommas(next);
