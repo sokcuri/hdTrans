@@ -59,7 +59,7 @@ cp "$cli" "$out/hdtrans"
 home=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-measure.XXXXXX")
 pids=
 trap 'rm -rf "$home"' EXIT
-trap '[ -z "$pids" ] || { kill $pids 2> /dev/null; wait; }; exit 2' HUP INT TERM
+trap 'trap "" HUP INT TERM; [ -z "$pids" ] || { kill $pids 2> /dev/null || :; wait; }; exit 2' HUP INT TERM
 
 # Each set runs in a background subshell, where `stoppable` starts its long command; a TERM then
 # stops that command too.
@@ -73,8 +73,8 @@ stoppable() { # COMMAND [ARG...]
 # leaves $! unset in a subshell where no job has started.
 stops() {
     last=${!-}
-    trap '[ "${!-}" = "$last" ] || child=${child:-$!}
-        [ -z "$child" ] || { kill "$child" 2> /dev/null; wait "$child"; }; exit 2' TERM
+    trap 'trap "" TERM; [ "${!-}" = "$last" ] || child=${child:-$!}
+        [ -z "$child" ] || { kill "$child" 2> /dev/null || :; wait "$child" || :; }; exit 2' TERM
 }
 
 # Line count with LF as the only break; a missing final LF still ends a line.
@@ -146,10 +146,13 @@ from pathlib import Path
 here, out, base, dicts, home, timeout, jobs, name, *options = sys.argv[1:]
 here, out, home = Path(here), Path(out), Path(home)
 running, lock = set(), threading.Lock()
+stopping = False  # set by a TERM; no translation starts afterwards
 
 
-def stop(*_):
-    signal.signal(signal.SIGTERM, signal.SIG_IGN)
+def stop():
+    """Stops the translations and exits."""
+    global stopping
+    stopping = True
     with lock:
         for process in running:
             process.terminate()
@@ -158,7 +161,14 @@ def stop(*_):
     os._exit(2)
 
 
-signal.signal(signal.SIGTERM, stop)
+def on_term(*_):
+    # Only a plain assignment: the handler runs between any two bytecodes of the main thread,
+    # also while it holds a lock, and another TERM can arrive at any time.
+    global stopping
+    stopping = True
+
+
+signal.signal(signal.SIGTERM, on_term)
 
 
 def fail(message):
@@ -210,6 +220,8 @@ def translate(number, doc, path, header):
     to = output(doc)
     to.parent.mkdir(parents=True, exist_ok=True)
     with lock:
+        if stopping:
+            raise RuntimeError("stopped")
         process = subprocess.Popen(
             [str(here / "tools/with-timeout.sh"), timeout, str(out / "hdtrans"), "--dicts", dicts,
              "--userdict", "", *options, "--in", str(body), "--out", str(to)], env=env)
@@ -227,10 +239,12 @@ def translate(number, doc, path, header):
 
 pool = ThreadPoolExecutor(int(jobs) or os.cpu_count())
 futures = [pool.submit(translate, i, *doc) for i, doc in enumerate(docs)]
-# Timed waits, so that the TERM handler runs while the translations are still going.
-while wait(futures, timeout=0.5, return_when=FIRST_EXCEPTION).not_done and \
-        not any(f.done() and f.exception() for f in futures):
+# Timed waits, so that a TERM is seen while the translations are still going.
+while not stopping and wait(futures, timeout=0.2, return_when=FIRST_EXCEPTION).not_done \
+        and not any(f.done() and f.exception() for f in futures):
     pass
+if stopping:
+    stop()
 for future in futures:
     if future.done() and future.exception():
         pool.shutdown(wait=False, cancel_futures=True)
