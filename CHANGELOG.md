@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.5.1](https://github.com/sokcuri/hdTrans/compare/v0.5.0...v0.5.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* **dict:** read internet slang, laughter and archaic attributive speech ([#83](https://github.com/sokcuri/hdTrans/issues/83)) ([c9449d2](https://github.com/sokcuri/hdTrans/commit/c9449d2a3a6ec9688cd05344ed90d9bc0beae757))
+* **dict:** spell アルガルド as 아르가르드 and ユフィリア as 유필리아 in the name rows ([#85](https://github.com/sokcuri/hdTrans/issues/85)) ([e66745a](https://github.com/sokcuri/hdTrans/commit/e66745a746ac584747c6ae9682b974ec8fbf9150))
+* **dict:** write Japanese broadcaster names as Korean usage does ([#95](https://github.com/sokcuri/hdTrans/issues/95)) ([bf45757](https://github.com/sokcuri/hdTrans/commit/bf457573e424d881425fb7d4fff39df3c3ac79c4))
+* **layout:** keep symbol runs whole in their width and space them after a comma ([#77](https://github.com/sokcuri/hdTrans/issues/77)) ([6abda28](https://github.com/sokcuri/hdTrans/commit/6abda2807c5768a07980a4cb546f9ded1414eb34))
+* **layout:** keep the main verb 捨てる spaced after a て form ([#97](https://github.com/sokcuri/hdTrans/issues/97)) ([ee1b5a8](https://github.com/sokcuri/hdTrans/commit/ee1b5a8a44089d4f1b6bebf8da1ae43121dd3d7f))
+* **layout:** space an opening bracket after a word ([#89](https://github.com/sokcuri/hdTrans/issues/89)) ([fbb2c6b](https://github.com/sokcuri/hdTrans/commit/fbb2c6bfb6a97c53e1dde5c7b10dfcc80d241071))
+* **release:** read causative-passives, repeated cries, slang and registers naturally and stop dropping source text ([8f906f3](https://github.com/sokcuri/hdTrans/commit/8f906f30dc4ca1e2dacdab4dd7f4f2c61af607ac))
+* **sound:** write moans and cries as Korean writing does ([#88](https://github.com/sokcuri/hdTrans/issues/88)) ([7b923f4](https://github.com/sokcuri/hdTrans/commit/7b923f4e7f2f5492ceae2063cb29d15e1f6de0d9))
+* **speech:** turn drawn predicates that end in っ into the soft form again ([#98](https://github.com/sokcuri/hdTrans/issues/98)) ([1e1123e](https://github.com/sokcuri/hdTrans/commit/1e1123e9475a3ee7a6563a0ec001abab9e4b4062))
+* **translation:** correct lexical data, name renderings and capacity verb senses ([#91](https://github.com/sokcuri/hdTrans/issues/91)) ([8d70d81](https://github.com/sokcuri/hdTrans/commit/8d70d81a9e931a1bcb3a013f67ac183315c1f6bc))
+* **translation:** keep ruby idioms outside the tag, read bag/big with a final consonant, いっぱい before filling verbs, and narrow そうだ and 国人 ([#79](https://github.com/sokcuri/hdTrans/issues/79)) ([ef66288](https://github.com/sokcuri/hdTrans/commit/ef662882c1dbc2f37468a8229a05de90aac132b4))
+* **translation:** keep who acts in causative-passives, passives and giving verbs, and read ところだった, くせに and past counterfactuals ([#82](https://github.com/sokcuri/hdTrans/issues/82)) ([2f2b386](https://github.com/sokcuri/hdTrans/commit/2f2b3861b7b12a7b4d891f0bfe36b8929b8754dd))
+* **translation:** keep words after passive and causative stems, and read なんかない, よーだ, ちょ、待っ and stretched greetings ([#78](https://github.com/sokcuri/hdTrans/issues/78)) ([cb0c1f7](https://github.com/sokcuri/hdTrans/commit/cb0c1f7fe7f3ec298b24f4103a6041db07031528))
+* **translation:** read lone and repeated kanji, 〜先, kanji-noun な, katakana-spelled native words, もう before counts and quoting って as Korean writes them ([#92](https://github.com/sokcuri/hdTrans/issues/92)) ([4a7fc39](https://github.com/sokcuri/hdTrans/commit/4a7fc39835287e88ddc862bf5b5c0d285fa3e138))
+* **translation:** read repeated predicates as cries and join 안 되다 and the auxiliary 버리다 ([#96](https://github.com/sokcuri/hdTrans/issues/96)) ([00dba3e](https://github.com/sokcuri/hdTrans/commit/00dba3e82d3ecf6bc41e09ea178756fafeca6d49))
+* **translation:** read UI prompts, keigo, business mail, news and tech terms the way Korean writes them ([#84](https://github.com/sokcuri/hdTrans/issues/84)) ([0e8a83c](https://github.com/sokcuri/hdTrans/commit/0e8a83c4997b9b97f90492a2b4c5f8225ea79b06))
+* **translation:** read 好き好き好き copy by copy, emphatic counts with も as (이)나, ちょっと before a request as 잠깐 and もう一人の as 또 다른 ([#81](https://github.com/sokcuri/hdTrans/issues/81)) ([46978eb](https://github.com/sokcuri/hdTrans/commit/46978eb10be12091390c5ee8cc228e5c8ce262b3))
+* **translation:** stop dropping contracted forms, missing words, name suffixes and sentence-final tics, and ratchet the drops of the measured sets ([#94](https://github.com/sokcuri/hdTrans/issues/94)) ([b52917d](https://github.com/sokcuri/hdTrans/commit/b52917dea85e4e4119a7336f553e9f21367fe5c6))
+* **web:** give the example menu a fixed width ([#93](https://github.com/sokcuri/hdTrans/issues/93)) ([e1e1b68](https://github.com/sokcuri/hdTrans/commit/e1e1b6895c8c0724dfa15547dec5e9182c335398))
+* **word:** transliterate a joined katakana run once instead of at every step ([#87](https://github.com/sokcuri/hdTrans/issues/87)) ([a6f4205](https://github.com/sokcuri/hdTrans/commit/a6f4205d379372c23574f3f2c123c186b975e402))
+
 ## [0.5.0](https://github.com/sokcuri/hdTrans/compare/v0.4.7...v0.5.0) (2026-10-24)
 
 
