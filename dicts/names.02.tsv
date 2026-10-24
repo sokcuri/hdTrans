@@ -8469,7 +8469,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 清広	키요히로	N130	QPNVHn	Wb	GN						きよひろ	names.634790
 清廉	키요카도	N110			GN						きよかど	names.634791
 清廉潔白	청렴결백	N110			GN						せいれんけっぱく	names.634792
-清廉潔白な国防軍	깨끗한 국방군의 신화	N130	QWK		GN							names.634793
+清廉潔白な国防軍	청렴결백한 국방군	N130	QWK		GN							names.634793
 清延	키요노부	N130	QPNVHn	Wb	GN							names.634794
 清弁	청변	N130	QPNVHn	Wb	GN							names.634795
 清弘	키요히로	N130	QPNVHn	Wb	GN						きよひろ	names.634796
@@ -13088,7 +13088,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 潮州鎮	차오저우진	N130	QCTVPl		GN							names.639409
 潮州駅	차오저우 역	N130	QCTVPl		GN							names.639410
 潮建志	우시오 켄지	N130	QPNVHn		GN							names.639411
-潮建磁	우시오 겐지	N130	QPNVHn		GN						うしおけんじ	names.639412
+潮建磁	우시오 켄지	N130	QPNVHn		GN						うしおけんじ	names.639412
 潮恵之輔	우시오 시게노스케	N130	QPNVHn		GN							names.639413
 潮改二	우시오 개2	N110			GN						うしお かいに	names.639414
 潮木	우시오기	N130	QPNVHn	Wa	GN							names.639415
@@ -21178,7 +21178,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 玉ちゃん	타마짱	N110			GN							names.647499
 玉の海	다마노우미	N130	QPNVHn	Wa	GN							names.647500
 玉の海正洋	다마노우미 마사히로	N130	QPNVHn		GN							names.647501
-玉ネギ男	타마 네기오	N130	QPNVHn		GN							names.647502
+玉ネギ男	타마네기오토코	N130	QPNVHn		GN							names.647502
 玉ノ井もなか	타마노이 모나카	N130	QPNVHn		GN						たまのい もなか	names.647503
 玉ノ井村	다마노이촌	N130	QCTVPl		GN							names.647504
 玉ノ富士	다마노후지	N130	QPNVHn	Wa	GN							names.647505
@@ -94558,8 +94558,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 逆トイレトレーニング	역 배변 훈련	N110			GN							names.720879
 逆トリップ	역트립	N110			GN							names.720880
 逆ハー	역하렘	N110			GN						ぎゃくはー	names.720881
-逆バニー	역바니걸	N110			GN							names.720882
-逆バニーガール	역 바니걸	N110			GN						ぎゃくばにーがーる	names.720883
+逆バニー	역바니	N110			GN							names.720882
+逆バニーガール	역바니걸	N110			GN						ぎゃくばにーがーる	names.720883
 逆バージョン	역버전	N110			GN							names.720884
 逆パターン	역 패턴	N110			GN							names.720885
 逆パワハラ	역갑질	N110			GN							names.720886

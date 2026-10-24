@@ -18,7 +18,7 @@ names:kana-ending	中村せいら	나카무라 세이라	keep	lookup
 names:kana-ending	中村たかし	나카무라 타카시	keep	lookup
 names:kana-ending	中村かな	나카무라 카나	keep	lookup
 names:kana-ending	中村みどり	나카무라 미도리	keep	lookup
-names:kana-ending	中村ゆり	성우리	keep	lookup
+names:kana-ending	中村ゆり	나카무라 유리	fix	lookup
 names:kana-ending	中村ちせ	나카무라 치세	keep	lookup
 names:kana-ending	中村うさぎ	나카무라 우사기	keep	lookup
 names:voiced-kana	丸目千熊	마루메 치구마	fix	lookup
@@ -30,93 +30,63 @@ names:voiced-kana	丸目千熊です。	마루메 치구마입니다.	fix	lookup
 names:voiced-kana	丸目クロウド	마루메 쿠로우도	keep	lookup
 names:voiced-kana	丸目聖人	마루메 키요히토	keep	lookup
 names:voiced-kana	丸目長恵	마루메 나가에	keep	lookup
-names:voiced-kana	丸井ひとは	마루이 히토하	keep	lookup
-names:voiced-kana	丸井ふたば	마루이 후타바	keep	lookup
-names:voiced-kana	丸井みつば	마루이 미츠바	keep	lookup
-names:voiced-kana	丸尾みほ	마루오 미호	keep	lookup
-names:voiced-kana	中谷あくる	나카타니 아쿠루	keep	lookup
-names:voiced-kana	主系列星	주계열성	keep	lookup
-names:verified-reading-keep	中西雷人	나카니시 라이도	keep	lookup
-names:verified-reading-keep	「中西雷人」	「나카니시 라이도」	keep	lookup
-names:verified-reading-keep	中西雷人が来た。	나카니시 라이도가 왔다.	keep	lookup
-names:verified-reading-keep	中西雷人の写真。	나카니시 라이도의 사진.	keep	lookup
-names:verified-reading-keep	中西雷人を呼んだ。	나카니시 라이도를 불렀다.	keep	lookup
-names:verified-reading-keep	中西雷人です。	나카니시 라이도입니다.	keep	lookup
-names:verified-surname	久元喜造	히사모토 키조	fix	lookup
-names:verified-surname	「久元喜造」	「히사모토 키조」	keep	lookup
-names:verified-surname	久元喜造が来た。	히사모토 키조가 왔다.	keep	lookup
-names:verified-surname	久元喜造の写真。	히사모토 키조의 사진.	keep	lookup
-names:verified-surname	久元喜造を呼んだ。	히사모토 키조를 불렀다.	keep	lookup
-names:verified-surname	久元喜造です。	히사모토 키조입니다.	keep	lookup
-names:verified-surname	久元	히사모토	keep	lookup
-names:verified-surname	久本	히사모토	keep	lookup
-names:verified-surname	久本朋子	히사모토 토모코	keep	lookup
-names:verified-surname	久本雅美	히사모토 마사미	keep	lookup
-names:verified-surname	久保ひとみ	쿠보 히토미	keep	lookup
-names:verified-surname	久川凪	히사카와 나기	keep	lookup
-names:verified-surname	久川颯	히사카와 하야테	keep	lookup
-names:verified-surname	久保ユリカ	쿠보 유리카	keep	lookup
-names:verified-surname	久元喜造さん	히사모토 키조 씨	keep	lookup
-names:verified-given-name	亀田 和毅	카메다 토모키	fix	lookup
-names:verified-given-name	「亀田 和毅」	「카메다 토모키」	fix	lookup
-names:verified-given-name	亀田 和毅が来た。	카메다 토모키가 왔다.	fix	lookup
-names:verified-given-name	亀田和毅選手	카메다 토모키 선수	fix	lookup
-names:verified-given-name	亀田	카메다	keep	lookup
-names:verified-given-name	和毅	카즈키	keep	lookup
-names:verified-given-name	亀田興毅	카메다 코키	keep	lookup
-names:verified-given-name	亀田大毅	카메다 다이키	keep	lookup
-names:verified-given-name	亀田姫月	가메다 히메키	keep	lookup
-names:verified-given-name	亀田史郎	가메다 시로	keep	lookup
-names:verified-given-name	亀田佳明	카메다 요시아키	keep	lookup
-names:verified-given-name	亀田祥倫	카메다 요시미치	keep	lookup
-names:verified-given-name	亀田誠治	카메다 세이지	keep	lookup
-names:verified-given-name	亀田製菓	카메다 제과	keep	lookup
-names:verified-given-name	亀井聖矢	가메이 마사야	keep	lookup
-names:verified-given-name	「亀井聖矢」	「가메이 마사야」	keep	lookup
-names:verified-given-name	亀井聖矢が来た。	가메이 마사야가 왔다.	keep	lookup
-names:verified-given-name	九条 尚忠	구조 히사타다	keep	lookup
-names:verified-given-name	九条尚忠	구조 히사타다	keep	lookup
-names:verified-given-name	二保旭	니호 아사히	keep	lookup
-names:verified-character-reading	五虎退	고코타이	fix	lookup
-names:verified-character-reading	「五虎退」	「고코타이」	fix	lookup
-names:verified-character-reading	五虎退が来た。	고코타이가 왔다.	fix	lookup
-names:verified-character-reading	五虎退の写真。	고코타이의 사진.	fix	lookup
-names:verified-character-reading	五虎退を呼んだ。	고코타이를 불렀다.	fix	lookup
-names:verified-character-reading	五虎退です。	고코타이입니다.	fix	lookup
-names:verified-character-reading	五虎大将	오호대장	keep	lookup
-names:verified-character-reading	五虎大将軍	오호대장군	keep	lookup
-names:verified-character-reading	五虎将	오호대장군	keep	lookup
-names:verified-character-reading	五虎将軍	오호대장군	keep	lookup
-names:verified-character-reading	五虎	오호	keep	lookup
-names:verified-character-reading	五龍	오룡	keep	lookup
-names:verified-character-reading	五龍神	오룡신	keep	lookup
-names:verified-character-reading	五穀	오곡	keep	lookup
-names:verified-character-reading	五郎	고로	keep	lookup
-names:verified-character-reading	五十嵐	이가라시	keep	lookup
-names:verified-character-reading	五十鈴	이스즈	keep	lookup
-names:verified-character-reading	五十鈴れん	이스즈 렌	keep	lookup
-names:verified-character-reading	五木ひろし	이쓰키 히로시	keep	lookup
-names:verified-character-reading	五河士道	이츠카 시도	keep	lookup
-names:verified-name-parts	井浦愛	이우라 아이	fix	lookup
-names:verified-name-parts	「井浦愛」	「이우라 아이」	keep	lookup
-names:verified-name-parts	井浦愛が来た。	이우라 아이가 왔다.	keep	lookup
-names:verified-name-parts	井浦愛の写真。	이우라 아이의 사진.	keep	lookup
-names:verified-name-parts	井浦愛を呼んだ。	이우라 아이를 불렀다.	keep	lookup
-names:verified-name-parts	井浦愛です。	이우라 아이입니다.	keep	lookup
-names:verified-name-parts	井浦	이우라	keep	lookup
-names:verified-name-parts	愛	애	keep	lookup
-names:verified-name-parts	井浦新	이우라 아라타	keep	lookup
-names:verified-name-parts	井浦基子	이우라 모토코	keep	lookup
-names:verified-name-parts	井浦秀	이우라 슈	keep	lookup
-names:verified-name-parts	井浦秀夫	이우라 히데오	keep	lookup
-names:verified-name-parts	井浦秀知	이우라 히데노리	keep	lookup
-names:verified-name-parts	井上玲音	이노우에 레이	keep	lookup
-names:verified-name-parts	「井上玲音」	「이노우에 레이」	keep	lookup
-names:verified-name-parts	井上晴哉	이노우에 세이야	keep	lookup
-names:verified-name-parts	井之上たきな	이노우에 타키나	keep	lookup
-names:verified-name-parts	亜白ミナ	아시로 미나	keep	lookup
-names:verified-name-parts	亜北ネル	아키타 네루	keep	lookup
-names:verified-name-parts	井山裕太	이야마 유우타	keep	lookup
+names:unusual-given-name-reading	中西雷人	나카니시 라이도	keep	lookup
+names:unusual-given-name-reading	「中西雷人」	「나카니시 라이도」	keep	lookup
+names:unusual-given-name-reading	中西雷人が来た。	나카니시 라이도가 왔다.	keep	lookup
+names:unusual-given-name-reading	中西雷人の写真。	나카니시 라이도의 사진.	keep	lookup
+names:unusual-given-name-reading	中西雷人を呼んだ。	나카니시 라이도를 불렀다.	keep	lookup
+names:unusual-given-name-reading	中西雷人です。	나카니시 라이도입니다.	keep	lookup
+names:surname-reading	久元喜造	히사모토 키조	fix	lookup
+names:surname-reading	「久元喜造」	「히사모토 키조」	keep	lookup
+names:surname-reading	久元喜造が来た。	히사모토 키조가 왔다.	keep	lookup
+names:surname-reading	久元喜造の写真。	히사모토 키조의 사진.	keep	lookup
+names:surname-reading	久元喜造を呼んだ。	히사모토 키조를 불렀다.	keep	lookup
+names:surname-reading	久元喜造です。	히사모토 키조입니다.	keep	lookup
+names:surname-reading	久元	히사모토	keep	lookup
+names:surname-reading	久本	히사모토	keep	lookup
+names:surname-reading	久本朋子	히사모토 토모코	keep	lookup
+names:surname-reading	久本雅美	히사모토 마사미	keep	lookup
+names:surname-reading	久川凪	히사카와 나기	keep	lookup
+names:surname-reading	久川颯	히사카와 하야테	keep	lookup
+names:surname-reading	久元喜造さん	히사모토 키조 씨	keep	lookup
+names:given-name-reading	亀田 和毅	카메다 토모키	fix	lookup
+names:given-name-reading	「亀田 和毅」	「카메다 토모키」	fix	lookup
+names:given-name-reading	亀田 和毅が来た。	카메다 토모키가 왔다.	fix	lookup
+names:given-name-reading	亀田和毅選手	카메다 토모키 선수	fix	lookup
+names:given-name-reading	亀田	카메다	keep	lookup
+names:given-name-reading	和毅	카즈키	keep	lookup
+names:given-name-reading	亀田興毅	카메다 코키	keep	lookup
+names:given-name-reading	亀田大毅	카메다 다이키	keep	lookup
+names:given-name-reading	亀田佳明	카메다 요시아키	keep	lookup
+names:given-name-reading	亀田祥倫	카메다 요시미치	keep	lookup
+names:given-name-reading	亀田誠治	카메다 세이지	keep	lookup
+names:given-name-reading	亀田製菓	카메다 제과	keep	lookup
+names:character-name-reading	五虎退	고코타이	fix	lookup
+names:character-name-reading	「五虎退」	「고코타이」	fix	lookup
+names:character-name-reading	五虎退が来た。	고코타이가 왔다.	fix	lookup
+names:character-name-reading	五虎退の写真。	고코타이의 사진.	fix	lookup
+names:character-name-reading	五虎退を呼んだ。	고코타이를 불렀다.	fix	lookup
+names:character-name-reading	五虎退です。	고코타이입니다.	fix	lookup
+names:character-name-reading	五虎大将	오호대장	keep	lookup
+names:character-name-reading	五虎大将軍	오호대장군	keep	lookup
+names:character-name-reading	五虎将	오호대장군	keep	lookup
+names:character-name-reading	五虎将軍	오호대장군	keep	lookup
+names:character-name-reading	五虎	오호	keep	lookup
+names:character-name-reading	五龍	오룡	keep	lookup
+names:character-name-reading	五龍神	오룡신	keep	lookup
+names:name-order	井浦愛	이우라 아이	fix	lookup
+names:name-order	「井浦愛」	「이우라 아이」	keep	lookup
+names:name-order	井浦愛が来た。	이우라 아이가 왔다.	keep	lookup
+names:name-order	井浦愛の写真。	이우라 아이의 사진.	keep	lookup
+names:name-order	井浦愛を呼んだ。	이우라 아이를 불렀다.	keep	lookup
+names:name-order	井浦愛です。	이우라 아이입니다.	keep	lookup
+names:name-order	井浦	이우라	keep	lookup
+names:name-order	愛	애	keep	lookup
+names:name-order	井浦新	이우라 아라타	keep	lookup
+names:name-order	井浦基子	이우라 모토코	keep	lookup
+names:name-order	井浦秀	이우라 슈	keep	lookup
+names:name-order	井浦秀夫	이우라 히데오	keep	lookup
+names:name-order	井浦秀知	이우라 히데노리	keep	lookup
 names:municipal-office	京都市役所	교토시청	fix	lookup
 names:municipal-office	「京都市役所」	「교토시청」	fix	lookup
 names:municipal-office	京都市役所に行った。	교토시청에 갔다.	fix	lookup
@@ -131,10 +101,6 @@ names:municipal-office	京都府	교토부	keep	lookup
 names:municipal-office	京都市交通局	교토시 교통국	keep	lookup
 names:municipal-office	京都市消防局	교토시 소방국	keep	lookup
 names:municipal-office	京都府立大学	교토 부립 대학	keep	lookup
-names:municipal-office	京都府警	교토부 경찰	keep	lookup
-names:municipal-office	京都御所	교토고쇼	keep	lookup
-names:municipal-office	京都アニメーション	교토 애니메이션	keep	lookup
-names:municipal-office	京都市営バス	교토 시영 버스	keep	lookup
 names:municipal-office	京都府庁に行った。	교토부청에 갔다.	keep	lookup
 names:municipal-office	京都市役所前駅に行った。	교토시야쿠쇼마에역에 갔다.	keep	lookup
 names:agency-reading	人力舎	진리키샤	fix	lookup
@@ -149,7 +115,3 @@ names:agency-reading	人力舎を紹介した。	진리키샤를 소개했다.	f
 names:agency-reading	人力舎の写真。	진리키샤의 사진.	fix	lookup
 names:agency-reading	人力車	인력거	keep	lookup
 names:agency-reading	人力飛行機	인력비행기	keep	lookup
-names:agency-reading	人力VOCALOID	인력 VOCALOID	keep	lookup
-names:agency-reading	人工知能	인공지능	keep	lookup
-names:agency-reading	人間性	인간성	keep	lookup
-names:agency-reading	人類	인류	keep	lookup

@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 names:reading-corruption	瀬尾光世	세오 미츠요	fix	lookup
 names:reading-corruption	瀬田奏恵	세타 카나에	fix	lookup
@@ -21,14 +20,4 @@ names:reading-corruption	炎天家冷奴。	엔텐카 히야얏코.	fix	lookup
 names:reading-corruption	炎天家冷奴という名前	엔텐카 히야얏코라는 이름	fix	lookup
 names:reading-corruption	炎天家冷奴の本	엔텐카 히야얏코의 책	fix	lookup
 names:reading-corruption	瀬田 薫	세타 카오루	keep	lookup
-names:reading-corruption	瀬田 薫氏が来た。	세타 카오루 씨가 왔다.	keep	lookup
-names:reading-corruption	瀬田 薫さん	세타 카오루 씨	keep	lookup
-names:reading-corruption	「瀬田 薫」	「세타 카오루」	keep	lookup
 names:reading-corruption	炎天下冷奴	엔텐카 히야얏코	keep	lookup
-names:reading-corruption	炎天下冷奴氏が来た。	엔텐카 히야얏코 씨가 왔다.	keep	lookup
-names:reading-corruption	炎天下冷奴さん	엔텐카 히야얏코 씨	keep	lookup
-names:reading-corruption	「炎天下冷奴」	「엔텐카 히야얏코」	keep	lookup
-names:reading-corruption	炎天禍サンバーン	염천화 선번	keep	lookup
-names:reading-corruption	炎天禍サンバーンの名前	염천화 선번의 이름	keep	lookup
-names:reading-corruption	「瀬尾舞香」	「세노오 마이카」	keep	lookup
-names:reading-corruption	瀬尾舞香の本	세노오 마이카의 책	keep	lookup

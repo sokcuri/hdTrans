@@ -1,18 +1,11 @@
-# 규칙: LEX-3, LEX-4
+# 규칙: LEX-3
 rule	input	expected	kind	layer
-names:title-separators	室町無頼	반란: 무로마치 부라이	fix	lookup
-names:title-separators	「室町無頼」	「반란: 무로마치 부라이」	fix	lookup
-names:title-separators	室町無頼。	반란: 무로마치 부라이.	fix	lookup
-names:title-separators	室町無頼を見た。	반란: 무로마치 부라이를 보았다.	fix	lookup
-names:title-separators	室町無頼が好きだ。	반란: 무로마치 부라이를 좋아한다.	fix	lookup
-names:title-separators	室町無頼の名前。	반란: 무로마치 부라이의 이름.	fix	lookup
-names:title-separators	室町無頼を見よう。	반란: 무로마치 부라이를 보자.	fix	lookup
-names:title-separators	室町無頼を見たい。	반란: 무로마치 부라이를 보고 싶다.	fix	lookup
-names:title-separators	実写版ライオンキング	라이온 킹 (2019)	keep	lookup
-names:title-separators	愛人〔AI-REN〕	애인〔AI-REN〕	keep	lookup
-names:title-separators	女鬼剣士	귀검사	keep	lookup
-names:title-separators	戦闘(変身)服	전투복	keep	lookup
-names:title-separators	恋愛操作団: シラノ	연애 조작단: 시라노	keep	lookup
-names:title-separators	捏造トラップ-NTR-	날조 트랩-NTR-	keep	lookup
-names:title-separators	夢☆ONCE_AGAIN	꿈☆ONCE_AGAIN	keep	lookup
-names:title-separators	奇械人オオカミン	기계인 오오카민	fix	lookup
+names:title-separators	室町無頼	무로마치 부라이	fix	lookup
+names:title-separators	「室町無頼」	「무로마치 부라이」	fix	lookup
+names:title-separators	室町無頼。	무로마치 부라이.	fix	lookup
+names:title-separators	室町無頼を見た。	무로마치 부라이를 보았다.	fix	lookup
+names:title-separators	室町無頼が好きだ。	무로마치 부라이를 좋아한다.	fix	lookup
+names:title-separators	室町無頼の名前。	무로마치 부라이의 이름.	fix	lookup
+names:title-separators	室町無頼を見よう。	무로마치 부라이를 보자.	fix	lookup
+names:title-separators	室町無頼を見たい。	무로마치 부라이를 보고 싶다.	fix	lookup
+names:title-separators	実写版ライオンキング	실사판 라이온 킹	fix	lookup

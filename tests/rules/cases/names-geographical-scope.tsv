@@ -1,4 +1,3 @@
-# 규칙: LEX-2
 rule	input	expected	kind	layer
 dict:names.41172	アメリカ地中海	아메리카 지중해	fix	lookup
 dict:names.41172	「アメリカ地中海」	「아메리카 지중해」	fix	lookup
@@ -13,9 +12,6 @@ dict:names	アメリカ大陸	아메리카 대륙	keep	lookup
 dict:names	アメリカ大陸の地図。	아메리카 대륙의 지도.	keep	lookup
 dict:names	アメリカ合衆国	아메리카 합중국	keep	lookup
 dict:names	アメリカ海軍	미국 해군	keep	lookup
-dict:names	アメリカ海軍が来た。	미국 해군이 왔다.	keep	lookup
-dict:names	カリブ海	카리브해	keep	lookup
-dict:names	メキシコ湾	멕시코만	keep	lookup
 dict:names.44781	アルゼンチン系カナダ人	아르헨티나계 캐나다인	fix	lookup
 dict:names.44781	「アルゼンチン系カナダ人」	「아르헨티나계 캐나다인」	fix	lookup
 dict:names.44781	アルゼンチン系カナダ人。	아르헨티나계 캐나다인.	fix	lookup
@@ -28,11 +24,5 @@ dict:names.44781	アルゼンチン系カナダ人の歴史。	아르헨티나�
 dict:names	アルゼンチン	아르헨티나	keep	lookup
 dict:names	アルゼンチン人	아르헨티나인	keep	lookup
 dict:names	カナダ人	캐나다인	keep	lookup
-dict:names	アルゼンチン海	아르헨티나해	keep	lookup
-dict:names	アルゼンチン海軍	아르헨티나 해군	keep	lookup
-dict:names	アルゼンチン航空	아르헨티나 항공	keep	lookup
-dict:names	カナダ	캐나다	keep	lookup
 dict:names	ラテンアメリカ	라틴 아메리카	keep	lookup
 dict:names	日系カナダ人	일본계 캐나다인	keep	lookup
-dict:names	アルゼンチン人の家族。	아르헨티나인의 가족.	keep	lookup
-dict:names	カナダ人が来た。	캐나다인이 왔다.	keep	lookup

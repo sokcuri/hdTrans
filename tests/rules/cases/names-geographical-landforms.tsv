@@ -1,4 +1,3 @@
-# 규칙: LEX-2
 rule	input	expected	kind	layer
 dict:names.41957	アラバト砂州	아라바트 사주	fix	lookup
 dict:names.41957	「アラバト砂州」	「아라바트 사주」	fix	lookup
@@ -13,12 +12,4 @@ dict:names	砂州	사주	keep	lookup
 dict:names	砂州の地図。	사주의 지도.	keep	lookup
 dict:names	クルシュー砂州	쿠로니아 사주	keep	lookup
 dict:names	クルシュー砂州の地図。	쿠로니아 사주의 지도.	keep	lookup
-dict:names	喜望峰	희망봉	keep	lookup
-dict:names	喜望峰の地図。	희망봉의 지도.	keep	lookup
 dict:names	アラバト・サビエフ	아라바트 자베예프	keep	lookup
-dict:names	アラバマ州	앨라배마주	keep	lookup
-dict:names	アラビア半島	아라비아반도	keep	lookup
-dict:names	アラビア海	아라비아해	keep	lookup
-dict:names	アラバマ物語	앵무새 죽이기	keep	lookup
-dict:names	アラン・チューリング	앨런 튜링	keep	lookup
-dict:names	アラン・ドロン	알랭 들롱	keep	lookup

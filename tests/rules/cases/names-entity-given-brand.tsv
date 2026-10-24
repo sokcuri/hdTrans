@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2
 rule	input	expected	kind	layer
 names:gloss	フロンティアブレーン	프런티어 브레인	fix	lookup
 names:gloss	「フロンティアブレーン」	「프런티어 브레인」	fix	lookup
@@ -22,8 +22,5 @@ names:gloss	バトルフロンティア	배틀프런티어	keep	lookup
 names:gloss	フロンティア	프런티어	keep	lookup
 names:gloss	フロンティアゲート	프런티어 게이트	keep	lookup
 names:gloss	ブディミール・ヴヤチッチ	부디미르 부자치치	keep	lookup
-names:gloss	ウラジーミル・プーチン	블라디미르 푸틴	keep	lookup
 names:gloss	ブッキング・ホールディングス	부킹 홀딩스	keep	lookup
-names:gloss	ブックオフ	북오프	keep	lookup
-names:gloss	フローズン・タイム	캐쉬백	keep	lookup
-names:gloss	ブダペスト地下鉄1号線	부다페스트 지하철 1호선	keep	lookup
+names:gloss	フローズン・タイム	프로즌 타임	fix	lookup

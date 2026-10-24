@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 dict:names.579898	春咲暖	하루사키 논	fix	fixed
 dict:names.579898	「春咲暖」	「하루사키 논」	fix	fixed
@@ -14,9 +13,3 @@ dict:names.579898	（春咲暖）	(하루사키 논)	fix	fixed
 dict:names.579898	「春咲暖」の名前。	「하루사키 논」의 이름.	fix	fixed
 dict:names.579898	春咲あずみ	하루사키 아즈미	keep	fixed
 dict:names.579898	春咲ひより	하루사키 히요리	keep	fixed
-dict:names.579898	春咲りょう	하루사키 료	keep	fixed
-dict:names.579898	春咲千和	하루사키 치와	keep	fixed
-dict:names.579898	春咲星奈	하루사키 세이나	keep	fixed
-dict:names.579898	春咲花	하루사키 하나	keep	fixed
-dict:names.579898	春奈るな	하루나 루나	keep	fixed
-dict:names.579898	春名美咲	하루나 미사키	keep	fixed

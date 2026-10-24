@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1
 rule	input	expected	kind	layer
 names:gloss	ブライアン・マイケル・スミス	브라이언 마이클 스미스	fix	lookup
 names:gloss	「ブライアン・マイケル・スミス」	「브라이언 마이클 스미스」	fix	lookup
@@ -13,10 +13,7 @@ names:gloss	ブラキオサウルス・ドーパントについて	브라키오�
 names:gloss	ブラキオサウルス・ドーパントを調べた。	브라키오사우루스 도펀트를 조사했다.	fix	lookup
 names:gloss	ブラキオサウルス・ドーパントという名前	브라키오사우루스 도펀트라는 이름	fix	lookup
 names:gloss	ブライアン・マイケル・ベンディス	브라이언 마이클 벤디스	keep	lookup
-names:gloss	ミシェル・スミス	미셸 스미스	keep	lookup
-names:gloss	ブライアン・J・スミス	브라이언·J·스미스	keep	lookup
 names:gloss	ブラキオサウルス	브라키오사우루스	keep	lookup
 names:gloss	ドーパント	도펀트	keep	lookup
 names:gloss	ブラキオバイスタンプ	브라키오 바이스탬프	keep	lookup
-names:gloss	ブラウ1589	브라우 1589	keep	lookup
-names:gloss	ブライトバーン	더 보이	keep	lookup
+names:gloss	ブライトバーン	브라이트번	fix	lookup

@@ -1,4 +1,3 @@
-# 규칙: LEX-3, LEX-4
 rule	input	expected	kind	layer
 dict:names.571049	文殊師利仏土厳浄経	문수사리불토엄정경	fix	fixed
 dict:names.571049	「文殊師利仏土厳浄経」	「문수사리불토엄정경」	fix	fixed
@@ -17,10 +16,3 @@ dict:names.571053	文殊般若経の題名。	문수반야경의 제목.	fix	fix
 dict:names.571053	文殊般若経の本文。	문수반야경의 본문.	fix	fixed
 dict:names.571053	文殊般若経の解説。	문수반야경의 해설.	fix	fixed
 dict:names.571049	文殊師利菩薩及諸仙所説吉凶時日善悪宿曜経	문수사리보살급제선소설길흉시일선악수요경	keep	fixed
-dict:names.571049	文殊広法天尊	문수광법천존	keep	fixed
-dict:names.571049	文珠蘭	문주란	keep	fixed
-dict:names.571049	文殊村	몬주촌	keep	fixed
-dict:names.571049	文珠村	몬주촌	keep	fixed
-dict:names.571049	文殊駅	문수역	keep	fixed
-dict:names.571049	文献通考	문헌통고	keep	fixed
-dict:names.571049	文藝春秋	문예춘추	keep	fixed

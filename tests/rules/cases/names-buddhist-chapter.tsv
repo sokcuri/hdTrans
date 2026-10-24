@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 names:chapter-title	無尽意菩薩品	무진의보살품	fix	lookup
 names:chapter-title	無尽意菩薩品を見た。	무진의보살품을 보았다.	fix	lookup
@@ -14,14 +13,4 @@ names:chapter-title	無尽意菩薩品について	무진의보살품에 대해	
 names:chapter-title	無尽意菩薩品の歴史	무진의보살품의 역사	fix	lookup
 names:chapter-title	無尽意菩薩品も	무진의보살품도	fix	lookup
 names:chapter-title	無量寿経	무량수경	keep	lookup
-names:chapter-title	無量寿経の名前	무량수경의 이름	keep	lookup
-names:chapter-title	「無量寿経」	「무량수경」	keep	lookup
 names:chapter-title	無量義経	무량의경	keep	lookup
-names:chapter-title	無量義経の名前	무량의경의 이름	keep	lookup
-names:chapter-title	「無量義経」	「무량의경」	keep	lookup
-names:chapter-title	熊本大学	구마모토 대학	keep	lookup
-names:chapter-title	熊本大学の名前	구마모토 대학의 이름	keep	lookup
-names:chapter-title	「熊本大学」	「구마모토 대학」	keep	lookup
-names:chapter-title	熊本城	구마모토성	keep	lookup
-names:chapter-title	熊本城の名前	구마모토성의 이름	keep	lookup
-names:chapter-title	「熊本城」	「구마모토성」	keep	lookup

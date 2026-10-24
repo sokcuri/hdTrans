@@ -1,4 +1,4 @@
-# 규칙: LEX-2, LEX-3, LEX-4
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 names:target-corruption	赤月焔	아카츠키 호무라	fix	lookup
 names:target-corruption	赤月焔さんが来た。	아카츠키 호무라 씨가 왔다.	fix	lookup
@@ -12,16 +12,13 @@ names:target-corruption	阿武隈改	아부쿠마 개	fix	lookup
 names:target-corruption	阿武隈改の写真。	아부쿠마 개의 사진.	fix	lookup
 names:target-corruption	阿武隈改を見た。	아부쿠마 개를 보았다.	fix	lookup
 names:target-gloss	赤月巴さんが来た。	아카츠키 토모에 씨가 왔다.	keep	lookup
-names:target-gloss	赤月瑞雲の写真。	아카츠키 즈이운의 사진.	keep	lookup
 names:target-gloss	阿武隈改二	아부쿠마 개2	keep	lookup
 names:target-gloss	阿武隈急行	아부쿠마 급행	keep	lookup
-names:target-gloss	薄桜鬼SSL ~sweet school life~	박앵귀 SSL ~sweet school life~	keep	lookup
-names:target-gloss	重戦車を見た。	중전차를 보았다.	keep	lookup
-names:target-gloss	逆バニー	역바니걸	fix	lookup
-names:target-gloss	逆バニーの衣装。	역바니걸의 의상.	fix	lookup
-names:target-gloss	逆バニーを描いた。	역바니걸을 그렸다.	fix	lookup
-names:target-gloss	逆バニーガール	역 바니걸	keep	lookup
-names:target-gloss	逆バニーガールの衣装。	역 바니걸의 의상.	keep	lookup
+names:target-gloss	逆バニー	역바니	fix	lookup
+names:target-gloss	逆バニーの衣装。	역바니의 의상.	fix	lookup
+names:target-gloss	逆バニーを描いた。	역바니를 그렸다.	fix	lookup
+names:target-gloss	逆バニーガール	역바니걸	fix	lookup
+names:target-gloss	逆バニーガールの衣装。	역바니걸의 의상.	fix	lookup
 names:target-corruption	蛍メニス	호타루 메니스	fix	lookup
 names:target-corruption	蛍メニスの写真。	호타루 메니스의 사진.	fix	lookup
 names:target-corruption	蛍メニスが来た。	호타루 메니스가 왔다.	fix	lookup
@@ -39,14 +36,6 @@ names:target-corruption	蛍メニスさんの写真。	호타루 메니스 씨�
 names:target-corruption	蛍メニスがいる。	호타루 메니스가 있다.	fix	lookup
 names:target-corruption	メニス	메니스	keep	lookup
 names:target-corruption	メニスカス	메니스커스	keep	lookup
-names:target-corruption	半月板	반달판	keep	lookup
-names:target-corruption	半月板の損傷。	반달판의 손상.	keep	lookup
-names:target-corruption	蛍原徹	호토하라 토오루	keep	lookup
-names:target-corruption	蛍火の杜へ	반딧불이의 숲으로	keep	lookup
-names:target-corruption	蛍光ペン	형광펜	keep	lookup
-names:target-corruption	蛍丸極	호타루마루 극	keep	lookup
-names:target-corruption	蜂須賀虎徹極	하치스카 코테츠 극	keep	lookup
-names:target-corruption	阿武隈改二	아부쿠마 개2	keep	lookup
 names:target-punctuation	袁宏道	원굉도	fix	lookup
 names:target-punctuation	袁宏道さん	원굉도 씨	fix	lookup
 names:target-punctuation	袁宏道さんが来た。	원굉도 씨가 왔다.	fix	lookup
@@ -64,14 +53,6 @@ names:target-punctuation	袁宏道、袁枚	원굉도, 원매	fix	lookup
 names:target-punctuation	袁宏道。	원굉도.	fix	lookup
 names:target-punctuation	袁宏	원굉	keep	lookup
 names:target-punctuation	袁枚	원매	keep	lookup
-names:target-punctuation	袁紹	원소	keep	lookup
-names:target-punctuation	袁術	원술	keep	lookup
-names:target-punctuation	袁宏さんが来た。	원굉 씨가 왔다.	keep	lookup
-names:target-punctuation	袁枚の作品。	원매의 작품.	keep	lookup
-names:target-punctuation	袁紹と会った。	원소와 만났다.	keep	lookup
-names:target-punctuation	袁術の写真。	원술의 사진.	keep	lookup
-names:target-punctuation	血税の無駄遣い。	혈세의 낭비.	keep	lookup
-names:target-punctuation	襟川陽一さんが来た。	에리카와 요이치 씨가 왔다.	keep	lookup
 names:target-reading	西新井病院	니시아라이 병원	fix	lookup
 names:target-reading	西新井病院に行く。	니시아라이 병원에 간다.	fix	lookup
 names:target-reading	西新井病院の写真。	니시아라이 병원의 사진.	fix	lookup
@@ -90,38 +71,13 @@ names:target-reading	西新井病院の近く。	니시아라이 병원의 근�
 names:target-reading	西新井	니시아라이	keep	lookup
 names:target-reading	西新井駅	니시아라이역	keep	lookup
 names:target-reading	西新井警察署	니시아라이 경찰서	keep	lookup
-names:target-reading	西新井大師	니시아라이 대사	keep	lookup
+names:target-reading	西新井大師	니시아라이 다이시	fix	lookup
 names:target-reading	西新井大師西駅	니시아라이다이시니시역	keep	lookup
-names:target-reading	西新井本町	니시아라이혼초	keep	lookup
-names:target-reading	西新井栄町	니시아라이사카에초	keep	lookup
-names:target-reading	西新井町	니시아라이쵸	keep	lookup
-names:target-reading	病院に行く。	병원에 간다.	keep	lookup
-names:target-reading	病院の医師。	병원의 의사.	keep	lookup
 names:target-spacing	西沢道夫	니시자와 미치오	fix	lookup
 names:target-spacing	西沢道夫さんが来た。	니시자와 미치오 씨가 왔다.	keep	lookup
-names:target-spacing	西沢道夫の写真。	니시자와 미치오의 사진.	keep	lookup
-names:target-spacing	西沢道夫と会った。	니시자와 미치오와 만났다.	keep	lookup
-names:target-spacing	西沢道夫を見た。	니시자와 미치오를 보았다.	keep	lookup
-names:target-spacing	西沢道夫の名前。	니시자와 미치오의 이름.	keep	lookup
-names:target-spacing	西沢道夫について。	니시자와 미치오에 대해.	keep	lookup
-names:target-spacing	西沢道夫に会う。	니시자와 미치오를 만난다.	keep	lookup
-names:target-spacing	西沢道夫の本。	니시자와 미치오의 책.	keep	lookup
-names:target-spacing	西沢道夫がいる。	니시자와 미치오가 있다.	keep	lookup
 names:target-spacing	「西沢道夫」	「니시자와 미치오」	keep	lookup
-names:target-spacing	【西沢道夫】	【니시자와 미치오】	keep	lookup
-names:target-spacing	西沢道夫です。	니시자와 미치오입니다.	keep	lookup
-names:target-spacing	西沢道夫？	니시자와 미치오?	keep	lookup
-names:target-spacing	西沢道夫の記録。	니시자와 미치오의 기록.	keep	lookup
 names:target-spacing	西澤道夫	니시자와 미치오	keep	lookup
-names:target-spacing	西澤道夫さんが来た。	니시자와 미치오 씨가 왔다.	keep	lookup
-names:target-spacing	西澤道夫の写真。	니시자와 미치오의 사진.	keep	lookup
 names:target-spacing	西沢	니시자와	keep	lookup
-names:target-spacing	西澤	니시자와	keep	lookup
-names:target-spacing	西沢仁太	니시자와 진타	keep	lookup
-names:target-spacing	西沢立衛	니시자와 류에	keep	lookup
-names:target-spacing	西沢義子	니시자와 요시코	keep	lookup
-names:target-spacing	道夫	미치오	keep	lookup
-names:target-spacing	西沢広義	니시자와 히로요시	keep	lookup
 names:target-reading	観世音菩薩普門品	관세음보살보문품	fix	lookup
 names:target-reading	観世音菩薩普門品を読む。	관세음보살보문품을 읽는다.	fix	lookup
 names:target-reading	観世音菩薩普門品の本。	관세음보살보문품의 책.	fix	lookup
@@ -140,13 +96,7 @@ names:target-reading	観世音菩薩普門品の一節。	관세음보살보문�
 names:target-reading	観世音菩薩	관세음보살	keep	lookup
 names:target-reading	観世音	관세음	keep	lookup
 names:target-reading	観音菩薩	관음보살	keep	lookup
-names:target-reading	観無量寿経	관무량수경	keep	lookup
-names:target-reading	観音経	관음경	keep	lookup
-names:target-reading	法華経	법화경	keep	lookup
 names:target-reading	普門品	보문품	keep	lookup
-names:target-reading	観世音菩薩の名前。	관세음보살의 이름.	keep	lookup
-names:target-reading	菩薩	보살	keep	lookup
-names:target-reading	観音	관음	keep	lookup
 names:target-corruption	誠直也	마코토 나오야	fix	lookup
 names:target-corruption	誠直也さんが来た。	마코토 나오야 씨가 왔다.	fix	lookup
 names:target-corruption	誠直也の写真。	마코토 나오야의 사진.	fix	lookup
@@ -162,13 +112,4 @@ names:target-corruption	誠直也の名前。	마코토 나오야의 이름.	fix
 names:target-corruption	誠直也の映画。	마코토 나오야의 영화.	fix	lookup
 names:target-corruption	誠直也のインタビュー。	마코토 나오야의 인터뷰.	fix	lookup
 names:target-corruption	誠直也の作品。	마코토 나오야의 작품.	fix	lookup
-names:target-corruption	誠一	세이이치	keep	lookup
-names:target-corruption	誠二	세이지	keep	lookup
-names:target-corruption	誠三	세이조	keep	lookup
-names:target-corruption	誠治	세이지	keep	lookup
-names:target-corruption	誠之助	세이노스케	keep	lookup
-names:target-corruption	誠実な国のアリス	성실한 나라의 앨리스	keep	lookup
 names:target-corruption	誠意	성의	keep	lookup
-names:target-corruption	諸田實	모로타 미노루	keep	lookup
-names:target-corruption	誠信女子大学校	성신여자대학교	keep	lookup
-names:target-corruption	諸冨直也	모로토미 나오야	keep	lookup

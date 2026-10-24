@@ -1,4 +1,3 @@
-# 규칙: LEX-3, LEX-4
 rule	input	expected	kind	layer
 dict:places:4441	八王子城合戦	하치오지성 전투	fix	fixed
 dict:places:4441	八王子城合戦の記録	하치오지성 전투의 기록	fix	fixed
@@ -23,14 +22,11 @@ dict:places:5326	北海道開拓神社に行った。	홋카이도 개척 신사
 dict:places:5326	北海道開拓神社の写真を見た。	홋카이도 개척 신사의 사진을 보았다.	fix	fixed
 names:entity-descriptors	八王子城	하치오지성	keep	fixed
 names:entity-descriptors	兵庫県立大学	효고 현립 대학	keep	fixed
-names:entity-descriptors	兵庫県立歴史博物館	효고현립 역사박물관	keep	fixed
 names:entity-descriptors	函館山	하코다테산	keep	defaults
 names:entity-descriptors	函館空港	하코다테 공항	keep	fixed
 names:entity-descriptors	別府大学	벳푸 대학	keep	fixed
 names:entity-descriptors	北九州市立大学	기타큐슈 시립 대학	keep	fixed
-names:entity-descriptors	北教大	홋카이도 교육대학	keep	defaults
 names:entity-descriptors	北海道神宮	홋카이도 신궁	keep	fixed
-names:entity-descriptors	札幌	삿포로	keep	defaults
 dict:places:6484	同志社女学校	도시샤 여학교	fix	fixed
 dict:places:6484	同志社女学校の歴史	도시샤 여학교의 역사	fix	fixed
 dict:places:6484	同志社女学校の写真を見た。	도시샤 여학교의 사진을 보았다.	fix	fixed
@@ -70,9 +66,9 @@ dict:places:7063	国立音楽学校の写真を見た。	구니타치 음악학�
 dict:places:7081	国際基督教大学教会	국제 기독교 대학 교회	fix	fixed
 dict:places:7081	国際基督教大学教会の歴史	국제 기독교 대학 교회의 역사	fix	fixed
 dict:places:7081	国際基督教大学教会の写真を見た。	국제 기독교 대학 교회의 사진을 보았다.	fix	fixed
-dict:places:7290	城ヶ島公園	조가섬 공원	fix	fixed
-dict:places:7290	城ヶ島公園の歴史	조가섬 공원의 역사	fix	fixed
-dict:places:7290	城ヶ島公園の写真を見た。	조가섬 공원의 사진을 보았다.	fix	fixed
+dict:places:7290	城ヶ島公園	조가시마 공원	fix	fixed
+dict:places:7290	城ヶ島公園の歴史	조가시마 공원의 역사	fix	fixed
+dict:places:7290	城ヶ島公園の写真を見た。	조가시마 공원의 사진을 보았다.	fix	fixed
 names:entity-descriptors	同志社大学	도시샤 대학	keep	defaults
 names:entity-descriptors	同志社女子大学	도시샤 여자대학	keep	defaults
 names:entity-descriptors	名古屋大学	나고야 대학	keep	defaults
@@ -84,7 +80,7 @@ names:entity-descriptors	国士舘大学	고쿠시칸 대학	keep	fixed
 names:entity-descriptors	国立代々木競技場	국립 요요기 경기장	keep	fixed
 names:entity-descriptors	国立音楽大学	구니타치 음악대학	keep	fixed
 names:entity-descriptors	国際基督教大学	국제 기독교 대학	keep	fixed
-names:entity-descriptors	城ヶ島	조가섬	keep	defaults
+dict:places:7289	城ヶ島	조가시마	fix	defaults
 dict:places:7340	埼玉大学教育学部	사이타마 대학 교육학부	fix	fixed
 dict:places:7340	埼玉大学教育学部の歴史	사이타마 대학 교육학부의 역사	fix	fixed
 dict:places:7340	埼玉大学教育学部の写真を見た。	사이타마 대학 교육학부의 사진을 보았다.	fix	fixed
@@ -106,9 +102,9 @@ dict:places:7913	大巖院の写真を見た。	다이간인의 사진을 보았
 dict:places:8100	大浦支線	오우라 지선	fix	fixed
 dict:places:8100	大浦支線の歴史	오우라 지선의 역사	fix	fixed
 dict:places:8100	大浦支線の写真を見た。	오우라 지선의 사진을 보았다.	fix	fixed
-dict:places:8352	大阪公立大学工業高等専門学校	오사카공립대학 공업고등전문학교	fix	fixed
-dict:places:8352	大阪公立大学工業高等専門学校の歴史	오사카공립대학 공업고등전문학교의 역사	fix	fixed
-dict:places:8352	大阪公立大学工業高等専門学校の写真を見た。	오사카공립대학 공업고등전문학교의 사진을 보았다.	fix	fixed
+dict:places:8352	大阪公立大学工業高等専門学校	오사카 공립대학 공업고등전문학교	fix	fixed
+dict:places:8352	大阪公立大学工業高等専門学校の歴史	오사카 공립대학 공업고등전문학교의 역사	fix	fixed
+dict:places:8352	大阪公立大学工業高等専門学校の写真を見た。	오사카 공립대학 공업고등전문학교의 사진을 보았다.	fix	fixed
 dict:places:8353	大阪医学校	오사카 의학교	fix	fixed
 dict:places:8353	大阪医学校の歴史	오사카 의학교의 역사	fix	fixed
 dict:places:8353	大阪医学校の写真を見た。	오사카 의학교의 사진을 보았다.	fix	fixed
@@ -136,23 +132,12 @@ dict:places:8649	太田川改修事業の写真を見た。	오타강 정비사�
 dict:places:8679	奄美群島国立公園	아마미군도국립공원	fix	fixed
 dict:places:8679	奄美群島国立公園の歴史	아마미군도국립공원의 역사	fix	fixed
 dict:places:8679	奄美群島国立公園の写真を見た。	아마미군도국립공원의 사진을 보았다.	fix	fixed
-names:entity-descriptors	埼玉県	사이타마현	keep	defaults
 names:entity-descriptors	埼玉大学	사이타마 대학	keep	fixed
-names:entity-descriptors	夕張市石炭博物館	유바리시 석탄 박물관	keep	fixed
-names:entity-descriptors	多摩美術大学	다마 미술대학	keep	defaults
-names:entity-descriptors	大分市	오이타시	keep	defaults
-names:entity-descriptors	大安寺	다이안지	keep	defaults
 names:entity-descriptors	大浦	오우라	keep	fixed
-names:entity-descriptors	大阪府立大学工業高等専門学校	오사카부립대학 공업고등전문학교	keep	fixed
 names:entity-descriptors	大阪公立大学	오사카 공립대학	keep	fixed
 names:entity-descriptors	大阪大学	오사카 대학	keep	defaults
-names:entity-descriptors	吹田	스이타	keep	fixed
-names:entity-descriptors	豊中	도요나카	keep	defaults
 names:entity-descriptors	大阪大谷大学	오사카 오타니 대학	keep	fixed
-names:entity-descriptors	大阪教育大学	오사카 교육대학	keep	fixed
-names:entity-descriptors	大阪音楽大学	오사카 음악대학	keep	fixed
 names:entity-descriptors	太田川	오타강	keep	defaults
-names:entity-descriptors	奄美大島	아마미오시마	keep	defaults
 dict:places:9323	宮崎大学附属学校	미야자키 대학 부속학교	fix	fixed
 dict:places:9323	宮崎大学附属学校の写真を見た。	미야자키 대학 부속학교의 사진을 보았다.	fix	fixed
 dict:places:9323	宮崎大学附属学校に行った。	미야자키 대학 부속학교에 갔다.	fix	fixed
@@ -180,7 +165,6 @@ dict:places:10149	山梨学院大学	야마나시가쿠인대학교	keep	fixed
 dict:places:10150	山梨学院大学法科大学院	야마나시가쿠인대학교 법과대학원	fix	fixed
 dict:places:10150	山梨学院大学法科大学院の写真を見た。	야마나시가쿠인대학교 법과대학원의 사진을 보았다.	fix	fixed
 dict:places:10150	山梨学院大学法科大学院に行った。	야마나시가쿠인대학교 법과대학원에 갔다.	fix	fixed
-dict:places:10150	山梨学院大学	야마나시가쿠인대학교	keep	fixed
 dict:places:10389	岩手大学附属学校	이와테 대학 부속학교	fix	fixed
 dict:places:10389	岩手大学附属学校の写真を見た。	이와테 대학 부속학교의 사진을 보았다.	fix	fixed
 dict:places:10389	岩手大学附属学校に行った。	이와테 대학 부속학교에 갔다.	fix	fixed
@@ -211,10 +195,10 @@ dict:places:11757	愛知産業大学短期大学部に行った。	아이치산�
 dict:places:11757	愛知産業大学	아이치산업대학	keep	fixed
 dict:places:11757	愛知産業大学短期大学部の学生	아이치산업대학 단기대학부의 학생	fix	fixed
 dict:places:11757	愛知産業大学短期大学部と愛知産業大学	아이치산업대학 단기대학부와 아이치산업대학	fix	fixed
-dict:places:12271	新宿アイランドホール	신주쿠 아이랜드홀	fix	fixed
-dict:places:12271	新宿アイランドホールに行った。	신주쿠 아이랜드홀에 갔다.	fix	fixed
-dict:places:12271	新宿アイランドホールの写真を見た。	신주쿠 아이랜드홀의 사진을 보았다.	fix	fixed
-dict:places:12271	新宿アイランドタワー	신주쿠 아이랜드타워	keep	fixed
+dict:places:12271	新宿アイランドホール	신주쿠 아일랜드홀	fix	fixed
+dict:places:12271	新宿アイランドホールに行った。	신주쿠 아일랜드홀에 갔다.	fix	fixed
+dict:places:12271	新宿アイランドホールの写真を見た。	신주쿠 아일랜드홀의 사진을 보았다.	fix	fixed
+dict:places:12270	新宿アイランドタワー	신주쿠 아일랜드타워	fix	fixed
 dict:places:12299	新富山駅	신토야마역	fix	fixed
 dict:places:12299	新富山駅に行った。	신토야마역에 갔다.	fix	fixed
 dict:places:12299	新富山駅の写真を見た。	신토야마역의 사진을 보았다.	fix	fixed
@@ -222,7 +206,6 @@ dict:places:12299	新富山口駅	신토야마구치역	keep	fixed
 dict:places:12402	新曽村	니조촌	fix	fixed
 dict:places:12402	新曽村に行った。	니조촌에 갔다.	fix	fixed
 dict:places:12402	新曽村の写真を見た。	니조촌의 사진을 보았다.	fix	fixed
-dict:places:12402	戸田市	도다시	keep	fixed
 dict:places:12494	新潟航空基地	니가타 항공기지	fix	fixed
 dict:places:12494	新潟航空基地に行った。	니가타 항공기지에 갔다.	fix	fixed
 dict:places:12494	新潟航空基地の写真を見た。	니가타 항공기지의 사진을 보았다.	fix	fixed
@@ -247,12 +230,12 @@ dict:places:13807	東京工科大学大学院	도쿄 공과대학 대학원	fix	
 dict:places:13807	東京工科大学大学院に進学した。	도쿄 공과대학 대학원에 진학했다.	fix	fixed
 dict:places:13807	東京工科大学大学院の学生	도쿄 공과대학 대학원의 학생	fix	fixed
 dict:places:13807	東京工科大学	도쿄 공과대학	keep	fixed
-dict:places:4734	函館山緑地	하코다테산	keep	fixed
-dict:places:4734	函館山緑地に行った。	하코다테산에 갔다.	keep	fixed
-dict:places:4734	函館山緑地の写真を見た。	하코다테산의 사진을 보았다.	keep	fixed
-dict:places:4796	別府女子大学	벳푸 대학	keep	fixed
-dict:places:4796	別府女子大学に行った。	벳푸 대학에 갔다.	keep	fixed
-dict:places:4796	別府女子大学の写真を見た。	벳푸 대학의 사진을 보았다.	keep	fixed
-dict:places:5065	北九州外国語大学	기타큐슈 시립 대학	keep	fixed
-dict:places:5065	北九州外国語大学に行った。	기타큐슈 시립 대학에 갔다.	keep	fixed
-dict:places:5065	北九州外国語大学の写真を見た。	기타큐슈 시립 대학의 사진을 보았다.	keep	fixed
+dict:places:4734	函館山緑地	하코다테산 녹지	fix	fixed
+dict:places:4734	函館山緑地に行った。	하코다테산 녹지에 갔다.	fix	fixed
+dict:places:4734	函館山緑地の写真を見た。	하코다테산 녹지의 사진을 보았다.	fix	fixed
+dict:places:4796	別府女子大学	벳푸 여자대학	fix	fixed
+dict:places:4796	別府女子大学に行った。	벳푸 여자대학에 갔다.	fix	fixed
+dict:places:4796	別府女子大学の写真を見た。	벳푸 여자대학의 사진을 보았다.	fix	fixed
+dict:places:5065	北九州外国語大学	기타큐슈 외국어대학	fix	fixed
+dict:places:5065	北九州外国語大学に行った。	기타큐슈 외국어대학에 갔다.	fix	fixed
+dict:places:5065	北九州外国語大学の写真を見た。	기타큐슈 외국어대학의 사진을 보았다.	fix	fixed

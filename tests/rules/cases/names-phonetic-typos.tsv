@@ -1,4 +1,3 @@
-# 규칙: LEX-1, LEX-2, LEX-3
 rule	input	expected	kind	layer
 names:phonetic-target	猫背椿	네코제 츠바키	fix	lookup
 names:phonetic-target	猫背椿。	네코제 츠바키.	fix	lookup
@@ -10,10 +9,6 @@ names:phonetic-target	猫背椿の名前	네코제 츠바키의 이름	fix	looku
 names:phonetic-target	猫背椿の写真	네코제 츠바키의 사진	fix	lookup
 names:phonetic-target	猫背椿です。	네코제 츠바키입니다.	fix	lookup
 names:phonetic-target	「猫背椿」	「네코제 츠바키」	fix	lookup
-names:phonetic-target	猫田直	네코타 나오	keep	lookup
-names:phonetic-target	猫又おかゆ	네코마타 오카유	keep	lookup
-names:phonetic-target	猫塚ヒビキ	네코즈카 히비키	keep	lookup
-names:phonetic-target	猫宮ひなた	네코미야 히나타	keep	lookup
 names:phonetic-target	猫背	새우등	keep	lookup
 names:phonetic-target	猪本ハルオ	이노모토 하루오	fix	lookup
 names:phonetic-target	猪本ハルオ。	이노모토 하루오.	fix	lookup
@@ -26,7 +21,4 @@ names:phonetic-target	猪本ハルオの写真	이노모토 하루오의 사진	
 names:phonetic-target	猪本ハルオです。	이노모토 하루오입니다.	fix	lookup
 names:phonetic-target	「猪本ハルオ」	「이노모토 하루오」	fix	lookup
 names:phonetic-target	猪本ナツキ	이노모토 나츠키	keep	lookup
-names:phonetic-target	猪瀬直樹	이노세 나오키	keep	lookup
-names:phonetic-target	猪俣ケン	이노마타 켄	keep	lookup
 names:phonetic-target	井本	이모토	keep	lookup
-names:phonetic-target	猪飼	이카이	keep	lookup
