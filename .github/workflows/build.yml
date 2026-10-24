@@ -439,7 +439,7 @@ jobs:
               cat "build/${{ matrix.preset }}/sccache.log"
               echo '```'
             } >> "$GITHUB_STEP_SUMMARY"
-            sccache --stop-server
+            sccache --stop-server || true
           fi
       - name: Save native compiler cache
         if: >-
