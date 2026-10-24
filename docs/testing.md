@@ -116,7 +116,8 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 
 - ctest `rules.drops`는 규칙 사례와 `tests/rules/drops/`의 입력을 보고, `known-gaps.txt`의 입력만 봐줍니다.
   고친 입력은 그 목록에서 지웁니다.
-- `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 수와 글이 빠지는 입력 수를 씁니다.
+- `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 줄 수와 글이 빠지는 서로 다른 입력 수를 씁니다.
+  문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
   ctest `sets.drops`는 그 수가 `tools/drops-budget.tsv`의 행과 같아야 통과합니다. 빠지는 입력을 줄인 변경은
   `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다른 세트는 다른 데이터라서 보지 않습니다.
 

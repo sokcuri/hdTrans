@@ -16,7 +16,8 @@ gaps: they are not reported, but a listed input that no longer drops is, so the 
 With --sets the inputs are the measured sets of tools/measure.sh whose variables are set: the lines of
 HDTRANS_CORPUS, of HDTRANS_REF_SAMPLE/ja.txt, of the documents HDTRANS_TESTDATA/*/*.ja.txt after their
 first line and of the web examples web/examples.tsv lists (from web/examples/ or HDTRANS_EXAMPLES). It
-prints the inputs and the inputs that drop text of each set. With --budget (rows `set inputs drops`) a
+prints the inputs (lines) and the distinct inputs that drop text of each set; every line is translated on its
+own (-each), the documents too. With --budget (rows `set inputs drops`) a
 set whose input count matches its row fails when its count of dropping inputs differs from the row:
 more is a regression, fewer is a fix that lowers the row. --update writes the counts into the file.
 Exit: 0 nothing new, 1 an input drops text, a known gap is fixed or a set is off its budget, 2 invalid
@@ -167,7 +168,7 @@ def main(argv):
     if len(argv) < 3:
         return usage()
     if "--sets" in argv:
-        return check_sets(argv, options)
+        return usage() if known_path else check_sets(argv, options)
     cli, dicts, files = argv[0], argv[1], argv[2:]
     texts = []
     for path in files:
@@ -207,6 +208,9 @@ def check_sets(argv, options):
     argv = [a for a in argv if a not in ("--sets", "--update")]
     if len(argv) != 2 or (update and budget_path is None):
         return usage()
+    if budget_path and not update and not os.path.exists(budget_path):
+        print(f"drops: no budget at {budget_path}", file=sys.stderr)
+        return 2
     cli, dicts = argv
     sets = measured_sets(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not sets:

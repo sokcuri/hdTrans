@@ -1,16 +1,14 @@
 # 규칙: SND-1
 rule	input	expected	kind	layer
 sound:shout-tsu	「だ、誰かぁーッ！」	「누, 누군가~!」	fix	sound
-sound:shout-tsu	「騒がしいから来てみれば……これは何ですのーッ？！？！」	「소란스러우니까 와 보면……이건 뭡니다의~?!?!」	fix	sound
-sound:shout-tsu	「ななッ！！！ なぜにメイド服ーーーッ！！！！！」	「없는!!! 왜 메이드복~!!!!!」	fix	sound
+sound:shout-tsu	なぜにメイド服ーーーッ！！！！！	왜 메이드복~!!!!!	fix	sound
 sound:shout-tsu	もちろん母さんには内緒でだーーーーッ！！！	물론 어머니에게는 비밀로다~!!!	fix	sound
 sound:shout-tsu	チャンスなんてそうそうないのだーッ！！！	찬스 같은 건 그렇게 자주 없는 것이다~!!!	fix	sound
-sound:shout-tsu	けぇ、警戒ーッ！！ 転舵ぁ！	케에, 경계~!! 전사!	fix	sound
-sound:shout-tsu	艦隊！総員、起こし！起床ーッ！	함대! 총원, 일으켜! 기상~!	fix	sound
-sound:shout-tsu	……みんな食い殺してやりますですのーッ！！	……모두 물어 죽여 줍니다요~!!	fix	sound
+sound:shout-tsu	警戒ーッ！！	경계~!!	fix	sound
+sound:shout-tsu	総員、起こし！起床ーッ！	총원, 일으켜! 기상~!	fix	sound
 sound:shout-tsu	「だめーっ！」	「안 돼~!」	keep	sound
 sound:shout-tsu	「いぐぅっ！？」	「이구웃!?」	keep	sound
-sound:shout-tsu	天龍様の攻撃だ！うっしゃぁっ！	텐류님의 공격이다! 웃샤앗!	keep	sound
+sound:shout-tsu	うっしゃぁっ！	웃샤앗!	keep	sound
 sound:shout-tsu	「やめてぇ！」	「그만둬!」	keep	sound
 sound:shout-tsu	「あぁっ！」	「아앗!」	keep	sound
 sound:shout-tsu	「ねぇっ！」	「저기!」	keep	sound
