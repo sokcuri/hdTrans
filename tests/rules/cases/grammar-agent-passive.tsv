@@ -43,3 +43,7 @@ cx:voice-agent:10	父に傘を使われた。	rule:cx:voice-agent:10=(이)가	fi
 cx:voice-agent:25	皆に顔を知られている。	모두에게 얼굴을 알려져 있다.	keep	rewrites
 cx:voice-agent:25	彼に答えを知られていた。	!rule:cx:voice-agent:25	keep	rewrites
 cx:voice-agent:10	みんなに顔を知られている有名人。	!rule:cx:voice-agent:10	keep	rewrites
+cx:voice-agent:20	弟にケーキを食べられた。	남동생이 케이크를 먹었다.	fix	rewrites
+cx:voice-agent:20	ケーキを弟に食べられた。	케이크를 남동생이 먹었다.	fix	rewrites
+cx:voice-agent:20	全滅するところを…駆逐艦達に助けられました。	!rule:cx:voice-agent:20	keep	rewrites
+cx:voice-agent:20	電車で足を踏まれた。	!rule:cx:voice-agent:20	keep	rewrites

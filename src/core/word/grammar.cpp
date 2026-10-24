@@ -372,6 +372,17 @@ bool ObjectBefore(const Item* it) {
     return false;
 }
 
+// Whether an object を stands before the item in its clause with no pause between (not 全滅するところを…
+// 助けられた, where the を before the ellipsis is the moment, not what was done).
+bool ActedObjectBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        if (p->AfterPause(false) && p->prev != nullptr && p->prev->group->surface == "を") return false;
+        if (p->group->surface == "を") return true;
+        if (ClauseBreak(p)) return false;
+    }
+    return false;
+}
+
 // Writes a passive verb item of kPassiveLemmas as its Korean passive in the active voice.
 void WriteLexicalPassive(Flusher& f, Item* it) {
     std::string lexical;
@@ -1068,7 +1079,10 @@ void DecideVoice(Flusher& f) {
                     if (e->gattr.ends_with("Ka")) e->gattr = e->gattr.substr(0, e->gattr.size() - 2) + "Pi";
                 }
             }
-            if (passiveVoice) WriteLexicalPassive(f, it);
+            // A passive with a person before に and an object is that person's act (voice-agent,
+            // GRM-2): no Korean passive word is written for it (弟にケーキを食べられた 남동생이
+            // 케이크를 먹었다, not 먹혔다).
+            if (passiveVoice && !(agent != nullptr && ni && ActedObjectBefore(it))) WriteLexicalPassive(f, it);
         }
         // The agent of a passive after a person or an animal is 에게 (猫に引っかかれた 고양이에게).
         if (passiveVoice && agent != nullptr && ni && !agent->Fixed()) {
