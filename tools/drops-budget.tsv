@@ -3,6 +3,6 @@
 # fixes them instead. A row is checked only against a set with the same number of inputs.
 set	inputs	drops
 corpus	64615	1094
-sample	39999	309
+sample	39999	308
 docs	18517	182
-examples	3635	17
+examples	3635	16

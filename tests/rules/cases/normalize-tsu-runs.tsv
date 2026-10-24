@@ -1,0 +1,11 @@
+# 규칙: SND-6
+rule	input	expected	kind	layer
+normalize:tsu-run	「えへへ、褒められちゃっっっった♪」	「에헤헤, 칭찬받아버렸어♪」	fix	normalize
+normalize:tsu-run	やっっっと会えた	드디어 만날 수 있었다	fix	normalize
+normalize:tsu-run	ちょっっっと待って	잠깐 기다려	fix	normalize
+normalize:tsu-run	「行っっっくぞ！」	「가겠어!」	fix	normalize
+normalize:tsu-run	「とっってもいい天気だね」	「매우 좋은 날씨구나」	fix	normalize
+normalize:tsu-run	「いっっぱい食べた」	「많이 먹었다」	fix	normalize
+normalize:tsu-run	「あっっ！」	「앗!」	keep	normalize
+normalize:tsu-run	「ああッッッ！！」	「아앗!!」	keep	normalize
+normalize:tsu-run	「っっ……」	「읏……」	keep	normalize
