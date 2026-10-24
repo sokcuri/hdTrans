@@ -506,6 +506,7 @@ std::string WriteLengthening(std::string_view s) {
     // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
     static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
     std::u32string out;
+    int lengthenings = 0;  // the lengthenings right before r
     for (const char32_t r : rs) {
         if (const auto last = out.size() >= 2 && out.back() == U'~' ? text::Split(out[out.size() - 2]) : std::nullopt;
             r == kDrawnMark && last) {
@@ -526,7 +527,10 @@ std::string WriteLengthening(std::string_view s) {
             out.push_back(r);
         } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
             out.push_back(U'~');
+        } else if (lengthenings == 1) {
+            out.push_back(U'~');  // two lengthenings in a row (くぅぅん 군~~)
         }
+        lengthenings = r == kLengthenMark ? lengthenings + 1 : 0;
     }
     return Utf8(out);
 }

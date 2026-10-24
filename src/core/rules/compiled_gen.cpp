@@ -1354,6 +1354,7 @@ bool RuleL148([[maybe_unused]] Item* p) {
 //     (gram[-1] has Ct and gram[-2] has Nj|Nd or gram[-1] has Nq and src[-1] not starts "何" and src[-1] not starts "数" and src[-1] not starts "幾") and pos[+1] is 4** and (src[+2] == "な" or src[+2] == "いな") and pos[+2] is 7**
 //     (gram[-1] has Ct and gram[-2] has Nj|Nd or gram[-1] has Nq and src[-1] not starts "何" and src[-1] not starts "数" and src[-1] not starts "幾") and src[+1] == "な" and pos[+1] is 7**
 //     pos[-1] is 1** and pos[+1] is 3**
+//     (src[-1] ends "歳" or src[-1] ends "才") and pos[+1] is 4** and (end.src[+1] ends "なければ" or end.src[+1] ends "なきゃ" or end.src[+1] ends "なくちゃ" or end.src[+1] ends "なくては")
 bool RuleL149([[maybe_unused]] Item* p) {
     return (((GramEq(p, -1, "Ct"sv) && GramEq(p, -2, "NjNd"sv)) ||
            (GramEq(p, -1, "Nq"sv) && SrcNe(p, -1, "L何"sv) && SrcNe(p, -1, "L数"sv) && SrcNe(p, -1, "L幾"sv))) && GramEq(p, 1, "Xn"sv)) ||
@@ -1364,7 +1365,12 @@ bool RuleL149([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "いな"sv)) && PumsaEq(p, 2, "7**"sv)) ||
            (((GramEq(p, -1, "Ct"sv) && GramEq(p, -2, "NjNd"sv)) ||
            (GramEq(p, -1, "Nq"sv) && SrcNe(p, -1, "L何"sv) && SrcNe(p, -1, "L数"sv) && SrcNe(p, -1, "L幾"sv))) && SrcEq(p, 1, "な"sv) && PumsaEq(p, 1, "7**"sv)) ||
-           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "3**"sv));
+           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "3**"sv)) ||
+           ((SrcEq(p, -1, "R歳"sv) ||
+           SrcEq(p, -1, "R才"sv)) && PumsaEq(p, 1, "4**"sv) && (GobiSrcEq(p, 1, "Rなければ"sv) ||
+           GobiSrcEq(p, 1, "Rなきゃ"sv) ||
+           GobiSrcEq(p, 1, "Rなくちゃ"sv) ||
+           GobiSrcEq(p, 1, "Rなくては"sv)));
 }
 
 // local 150
@@ -4594,7 +4600,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL146, 0xdc913148b3ee2169ull},
     {RuleL147, 0x250613dfe0dd370dull},
     {RuleL148, 0xd8392698fda548b2ull},
-    {RuleL149, 0x8a87243f9fa0a383ull},
+    {RuleL149, 0xd32f716a25279140ull},
     {RuleL150, 0xa92fff2098338ff5ull},
     {RuleL151, 0x8d24d5e482ce8d81ull},
     {RuleL152, 0xf9c516d2cc396514ull},

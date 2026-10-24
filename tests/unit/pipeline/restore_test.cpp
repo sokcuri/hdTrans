@@ -264,6 +264,9 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A!"), std::string("군~~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군\uE00A\uE00A\uE00A!"), std::string("군~~!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("군~\uE00A\uE00A!"), std::string("군~~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("케이짱\uE00A\uE00B!"), std::string("케이짜~앙!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("여러분\uE00A\uE00B"), std::string("여러부~운"));
     HD_CHECK_EQ(pipeline::WriteLengthening("씨\uE00A\uE00B"), std::string("씨이"));

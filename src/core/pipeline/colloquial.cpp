@@ -850,10 +850,21 @@ bool HasDrawnStem(std::string_view text) {
     return false;
 }
 
+// Whether text has a member of honorific.drawn-after followed by ー, ～ or a small vowel.
+bool HasDrawnAfter(std::string_view text) {
+    for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
+        for (size_t at = text.find(member); at != std::string_view::npos; at = text.find(member, at + 1)) {
+            const std::u32string next = DecodeText(text.substr(at + member.size(), 4));
+            if (!next.empty() && (IsDash(next[0]) || IsSmallVowel(next[0]))) return true;
+        }
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
-    if (!HasDrawnStem(text)) return std::string(text);
+    if (!HasDrawnStem(text) && !HasDrawnAfter(text)) return std::string(text);
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
@@ -913,21 +924,39 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (word > h.size()) {
                 plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);  // ちゃーんと 제대로~
             } else {
-                // Drawn out by one ー or ～, the lengthening and a drawn mark (ちゃ～ん 짜~앙, くーん 구~운);
-                // by more, or by vowel kana, a drawn mark for each (くーーーん 구우우운, ちゃあああん 짜아아앙).
+                // Drawn out by up to three stretch marks, the honorific keeps its syllable and takes one
+                // lengthening, two for two or three marks (くーん 군~, くぅぅん 군~~); by four or more, its
+                // syllable is drawn out with a drawn mark for each (くぅぅぅぅん 구우우우운, ちゃぁあぁあぁん 짜아아아아앙).
                 const size_t run = end - i - stem.size();
-                std::u32string marks;
-                if (run == 1 && IsDash(rs[i + stem.size()])) {
-                    marks = {kLengthenMark, kDrawnMark};
-                } else {
-                    marks.assign(std::min<size_t>(run, 16), kDrawnMark);
-                }
+                const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
+                                                      : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
                 plain.insert(static_cast<size_t>(mark), marks);
                 i = mark + marks.size() - 1;
             }
             rs = std::move(plain);
             changed = true;
             if (word > h.size()) i = mark;
+        }
+    }
+    // An honorific of honorific.drawn-after drawn out after itself before a pause or the end (姫さまぁ
+    // 공주님~, 様ーっ), with the marks of the drawn honorifics above.
+    for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
+        const std::u32string h = DecodeText(member);
+        const int v = HiraganaVowel(h.back());
+        for (size_t i = 0; i + h.size() < rs.size(); i++) {
+            if (std::u32string_view(rs).substr(i, h.size()) != h || i == 0) continue;
+            size_t end = i + h.size();
+            while (end < rs.size() && (IsDash(rs[end]) || (v >= 0 && HiraganaVowel(rs[end]) == v && (IsSmallVowel(rs[end]) || IsSmallVowel(rs[end] - 1))))) end++;
+            if (end == i + h.size()) continue;
+            size_t after = end;
+            while (after < rs.size() && rs[after] == U'っ') after++;
+            if (after < rs.size() && !IsPause(rs[after])) continue;
+            const size_t run = end - i - h.size();
+            const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
+                                                  : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
+            rs = Spliced(rs, i + h.size(), marks, after);
+            i += h.size() + marks.size() - 1;
+            changed = true;
         }
     }
     return changed ? EncodeText(rs) : std::string(text);
