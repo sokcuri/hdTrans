@@ -3574,7 +3574,7 @@ ABCオーディオ	ABC 오디오	N130	VGt		GN							names.3590
 ABCスタジオ	ABC 스튜디오	N130	VGt		GN							names.3591
 ABCストア	ABC 스토어	N130	VGt		GN							names.3592
 ABCスープ	ABC 수프	N110			GN							names.3593
-ABCテレビ	ABC 테레비	N110			GN							names.3594
+ABCテレビ	ABC TV	N110			GN							names.3594
 ABCトリオ	ABC 트리오	N110			GN							names.3595
 ABCファミリー	ABC 패밀리	N130	VGt		GN							names.3596
 ABCマント	ABC 망토	N110			GN							names.3597
@@ -4214,7 +4214,7 @@ BSよしもと	BS 요시모토	N110			GN						びーえすよしもと	names.423
 BSジャパン	BS 재팬	N110			GN							names.4231
 BSゼブラ	BS 제브라	N130	QPNVHn		GN							names.4232
 BSゼルダの伝説	BS 젤다의 전설	N130	QWK		GN							names.4233
-BSテレビ東京	BS TV 도쿄	N130	VGt		GN							names.4234
+BSテレビ東京	BS TV도쿄	N130	VGt		GN							names.4234
 BSニュースWorld	BS 뉴스 월드	N110			GN							names.4235
 BSニュースWorld	NHK BS 뉴스	N110			GN							names.4236
 BSフジ	BS후지	N110			GN							names.4237
@@ -4388,9 +4388,9 @@ CAリーベル・プレート	CA 리버 플레이트	N130	VGt		GN							names.44
 CAリーベル・プレート・プエルトリコ	CA 리버 플레이트 푸에르토리코	N130	VGt		GN							names.4405
 CAレンティスタス	CA 렌티스타스	N130	VGt		GN							names.4406
 CB-01チーター	CB-01 치타	N110			GN							names.4407
-CBCテレビ	CBC 텔레비전	N130	VGt		GN							names.4408
-CBCテレビ	CBC테레비	N130	VGt		GN							names.4409
-CBCテレビジョン	CBC 텔레비전	N130	VGt		GN							names.4410
+CBCテレビ	CBC TV	N130	VGt		GN							names.4408
+CBCテレビ	CBC TV	N130	VGt		GN							names.4409
+CBCテレビジョン	CBC TV	N130	VGt		GN							names.4410
 CBC賞	CBC상	N110			GN							names.4411
 CBRN防衛センター	국방 CBRN센터	N130	QCTVPl		GN							names.4412
 CBSイブニングニュース	CBS 이브닝뉴스	N130	QWK		GN							names.4413
@@ -8236,8 +8236,8 @@ NHK恐竜CG	NHK 공룡 CG	N110			GN							names.8252
 NHK放送センター	NHK 방송 센터	N130	VGt		GN							names.8253
 NHK放送技術研究所	NHK 방송 기술 연구소	N130	VGt		GN							names.8254
 NHK教育	NHK 교육 텔레비전	N110			GN							names.8255
-NHK教育テレビ	NHK 교육 텔레비전	N110			GN							names.8256
-NHK教育テレビジョン	NHK 교육 텔레비전	N110			GN							names.8257
+NHK教育テレビ	NHK 교육TV	N110			GN							names.8256
+NHK教育テレビジョン	NHK 교육TV	N110			GN							names.8257
 NHK新人お笑い大賞	NHK 신인 개그 대상	N110			GN							names.8258
 NHK新人演芸大賞	NHK 신인연예대상	N110			GN							names.8259
 NHK新潟放送局	NHK 니가타 방송국	N130	VGt		GN							names.8260
@@ -8266,7 +8266,7 @@ NHK秋田放送局	NHK 아키타 방송국	N130	VGt		GN							names.8282
 NHK米子支局	NHK 요나고 지국	N130	VGt		GN							names.8283
 NHK紅白歌合戦	NHK 홍백가합전	N130	QWK		GN							names.8284
 NHK総合	NHK 종합 TV	N110			GN							names.8285
-NHK総合テレビジョン	NHK 종합 텔레비전	N130	VGt		GN							names.8286
+NHK総合テレビジョン	NHK 종합TV	N130	VGt		GN							names.8286
 NHK豊橋支局	NHK 도요하시 지국	N130	VGt		GN							names.8287
 NHK郡山支局	NHK 고리야마 지국	N130	VGt		GN							names.8288
 NHK金沢放送局	NHK 가나자와 방송국	N130	VGt		GN							names.8289
@@ -8351,7 +8351,7 @@ NRGスタジアム	NRG 스타디움	N130	QCTVPl		GN							names.8367
 NRJ ミュージック・アワード	NRJ 뮤직 어워드	N130	QWK		GN							names.8368
 NSGグループ	NSG 그룹	N130	VGt		GN							names.8369
 NSOグループ	NSO 그룹	N130	VGt		GN							names.8370
-NST新潟総合テレビ	니가타 종합 TV	N110			GN							names.8371
+NST新潟総合テレビ	NST 니가타 종합TV	N110			GN							names.8371
 NSファーファ・ジャパン	NS 파파 재팬	N110			GN						えぬえすふぁーふぁ・じゃぱん	names.8372
 NSマグネットキャノン	NS 마그넷 캐논	N110			GN							names.8373
 NSマグフォン	NS 매그폰	N110			GN							names.8374
@@ -9683,7 +9683,7 @@ TBC 8 ニュース	TBC 8 뉴스	N130	QWK		GN							names.9699
 TBCグループ	TBC 그룹	N130	VGt		GN							names.9700
 TBC銀行	TBC 은행	N130	VGt		GN							names.9701
 TBSスパークル	TBS 스파클	N130	VGt		GN							names.9702
-TBSテレビ	TBS 텔레비전	N110			GN							names.9703
+TBSテレビ	TBS	N110			GN							names.9703
 TBSホールディングス	TBS 홀딩스	N130	VGt		GN							names.9704
 TBSラジオ	TBS 라디오	N130	VGt		GN							names.9705
 TBS土曜8時枠の連続ドラマ	TBS 토요일 밤 8시 드라마	N130	QWK		GN							names.9706
@@ -11146,7 +11146,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 あいろん	아이론	N130	QPNVHn	Wb	GN						あいろん	names.11163
 あいん	아인	N110			GN						あいん	names.11164
 あいん・あすとらいあ	아인 아스트리아	N110			GN						あいん・あすとらいあ	names.11165
-あいテレビ	아이 TV	N110			GN						あいてれび	names.11166
+あいテレビ	아이TV	N110			GN						あいてれび	names.11166
 あいミス	아이미스	N130	QWK		GN						あいみす	names.11167
 あい君	아이 군	N130	QPNVHn		GN						あいくん	names.11168
 あい子	아이코	N130	QPNVHn	Wb	GN							names.11169
@@ -16076,7 +16076,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 くまみこ	쿠마미코	N130	QWK		GN						くまみこ	names.16093
 くまみね	쿠마미네	N130	QPNVHn	Wb	GN						くまみね	names.16094
 くまもっこす	쿠마못코스	N130	QPNVHn	Wb	GN						くまもっこす	names.16095
-くまもと県民テレビ	구마모토현민 TV	N110			GN							names.16096
+くまもと県民テレビ	구마모토현민TV	N110			GN							names.16096
 くまもん	쿠마몬	N130	QCTVPl		GN						くまもん	names.16097
 くまゆる	쿠마유루	N130	QPNVHn	Wb	GN						くまゆる	names.16098
 くまりんこ	쿠마링코	N130	QPNVHn	Wb	GN						くまりんこ	names.16099
@@ -17318,8 +17318,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 さくらわかな	사쿠라 와카나	N130	QPNVHn		GN							names.17335
 さくらんぼの実る頃	체리가 익어갈 무렵	N130	QWK		GN							names.17336
 さくらんぼキッス	체리 키스	N130	QWK		GN						さくらんぼきっす	names.17337
-さくらんぼテレビ	사쿠란보 TV	N110			GN						さくらんぼてれび	names.17338
-さくらんぼテレビジョン	사쿠란보 TV	N130	VGt		GN							names.17339
+さくらんぼテレビ	사쿠란보TV	N110			GN						さくらんぼてれび	names.17338
+さくらんぼテレビジョン	사쿠란보TV	N130	VGt		GN							names.17339
 さくらカード	사쿠라 카드	N130	QPNVHn		GN						さくらかーど	names.17340
 さくらシュトラッセ	사쿠라 슈트랏세	N110			GN						さくらしゅとらっせ	names.17341
 さくらシンデレラ	사쿠라 신데렐라	N110			GN						さくらしんでれら	names.17342
@@ -20587,7 +20587,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 とちおとめ	토치오토메	N110			GN						とちおとめ	names.20604
 とちぎ640	도치기 640	N130	QWK		GN							names.20605
 とちぎん	도치긴	N110			GN						とちぎん	names.20606
-とちぎテレビ	도치기 TV	N110			GN						とちぎてれび	names.20607
+とちぎテレビ	도치기TV	N110			GN						とちぎてれび	names.20607
 とちのきファミリーランド	도치노키 패밀리 랜드	N110			GN						とちのきファミリーランド	names.20608
 とっくり	도쿠리	N110			GN						とっくり	names.20609
 とっちん	토친	N130	QPNVHn	Wb	GN							names.20610
@@ -27519,7 +27519,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 よまわりさん	요마와리 씨	N110			GN						よまわりさん	names.27537
 よみ	요미	N130	QPNVHn	Wb	GN						よみ	names.27538
 よみうり	요미우리	N110			GN						よみうり	names.27539
-よみうりテレビ	요미우리 TV 방송	N110			GN						よみうりてれび	names.27540
+よみうりテレビ	요미우리TV	N110			GN						よみうりてれび	names.27540
 よみうりランド	요미우리랜드	N130	VGt		GN						よみうりランド	names.27541
 よみがえり ～レザレクション～	레저렉션	N130	QWK		GN							names.27542
 よみがえる声	되살아나는 목소리	N130	QWK		GN							names.27543
@@ -73648,7 +73648,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ウジダ	우지다	N130	QCTVPl		GN							names.73667
 ウジツェ	우지체	N130	QCTVPl		GN							names.73668
 ウジツェ共和国	우지체 공화국	N130	QCTVPl		GN							names.73669
-ウジテレビ	우지 TV	N110			GN						うじてれび	names.73670
+ウジテレビ	우지TV	N110			GN						うじてれび	names.73670
 ウジャ	우쟈	N130	QPNVHn	Wb	GN						うじゃ	names.73671
 ウジャエ環礁	우자에 환초	N130	QCTVPl		GN							names.73672
 ウジャダニ	우자다니	N110			GN						うじゃだに	names.73673
@@ -114349,7 +114349,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キス・ユア・ハンド	키스 유어 핸드	N110			GN						きす・ゆあ・はんど	names.114369
 キス島撤退作戦	키스섬 철수작전	N110			GN							names.114370
 キス待ち	키스 대기	N110			GN						きすまち	names.114371
-キス濱テレビ	키스하마테레비	N130	QWK		GN							names.114372
+キス濱テレビ	키스하마TV	N130	QWK		GN							names.114372
 キス濱ラーニング	키스하마러닝	N130	QWK		GN							names.114373
 キス直前	키스 직전	N110			GN							names.114374
 キズ	키즈	N130	QPNVHn	Wb	GN						きず	names.114375
@@ -141923,7 +141923,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ケーブル	케이블	N130	QPNVHn	Wb	GN						ケーブル	names.141943
 ケーブルカー	강삭철도	N110			GN						ケーブルカー	names.141944
 ケーブルガイ	케이블 가이	N130	QWK		GN							names.141945
-ケーブルテレビ	케이블 텔레비전	N110			GN						ケーブルテレビ	names.141946
+ケーブルテレビ	케이블TV	N110			GN						ケーブルテレビ	names.141946
 ケーブルニット	케이블 니트	N110			GN						けーぶるにっと	names.141947
 ケーブルフェリー	케이블 페리	N130	QCTVPl		GN							names.141948
 ケーブル・アンド・ワイヤレス	케이블 앤드 와이어리스	N130	VGt		GN							names.141949
@@ -153986,7 +153986,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 サガダホク郡	사가다호크군	N130	QCTVPl		GN							names.154007
 サガット	사가트	N130	QPNVHn	Wb	GN						サガット	names.154008
 サガット・チャローユー	상앗 찰로유	N130	QPNVHn		GN							names.154009
-サガテレビ	사가 TV	N110			GN						さがてれび	names.154010
+サガテレビ	사가TV	N110			GN						さがてれび	names.154010
 サガノヘルマー	사가노 헬마	N130	QPNVHn		GN						さがのへるまー	names.154011
 サガフロ	사가 프론티어	N130	QWK		GN						サガフロ	names.154012
 サガフロ1	사가 프론티어	N130	QWK		GN							names.154013
@@ -159485,8 +159485,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 サンテリーア・フィウメラーピド	산텔리아피우메라피도	N130	QCTVPl		GN							names.159506
 サンテルピーディオ・ア・マーレ	산텔피디오아마레	N130	QCTVPl		GN							names.159507
 サンテルモ	세인트 엘모의	N110			GN							names.159508
-サンテレビ	선 TV	N110			GN						さんてれび	names.159509
-サンテレビジョン	선 TV	N110			GN						さんてれびじょん	names.159510
+サンテレビ	선TV	N110			GN						さんてれび	names.159509
+サンテレビジョン	선TV	N110			GN						さんてれびじょん	names.159510
 サンテ・カトリーヌ	생콩스탕	N130	QCTVPl		GN							names.159511
 サンテ・ガイアルドーニ	산테 가이아르도니	N130	QPNVHn		GN							names.159512
 サンテ・マリーエ	산테마리에	N130	QCTVPl		GN							names.159513
@@ -225069,7 +225069,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 チバウ文化センター	티바우 문화센터	N130	QCTVPl		GN							names.225092
 チバエナガ	지바 에나가	N110			GN						ちばえなが	names.225093
 チバテレ	지바 TV	N110			GN						ちばてれ	names.225094
-チバテレビ	지바 TV	N110			GN						ちばてれび	names.225095
+チバテレビ	지바TV	N110			GN						ちばてれび	names.225095
 チバナ	치바나	N130	QPNVHn	Wb	GN						ちばな	names.225096
 チバニアン	지바절	N110			GN						ちばにあん	names.225097
 チバニャン	치바냥	N130	QPNVHn	Wb	GN						ちばにゃん	names.225098
@@ -227863,7 +227863,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 チューリッヒ美術館	취리히 미술관	N130	VGt		GN							names.227886
 チューリップ	튤립	N110			GN						チューリップ	names.227887
 チューリップの形	튤립 모양	N130	QWK		GN							names.227888
-チューリップテレビ	튤립 TV	N110			GN						ちゅーりっぷてれび	names.227889
+チューリップテレビ	튤립TV	N110			GN						ちゅーりっぷてれび	names.227889
 チューリップハット	튤립 햇	N110			GN						ちゅーりっぷはっと	names.227890
 チューリップホッパー	튤립 호퍼	N110			GN						ちゅーりっぷほっぱー	names.227891
 チューリップ・フィーバー	튤립 피버	N130	QWK		GN							names.227892
@@ -234672,8 +234672,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレパトリス	텔레파트리스	N110			GN						てれぱとりす	names.234695
 テレビ	텔레비전	N110			GN						テレビ	names.234696
 テレビくん	텔레비 군	N110			GN						てれびくん	names.234697
-テレビせとうち	TV 세토우치	N110			GN						てれびせとうち	names.234698
-テレビせとうち株式会社	테레비 세토우치	N130	VGt		GN							names.234699
+テレビせとうち	TV세토우치	N110			GN						てれびせとうち	names.234698
+テレビせとうち株式会社	TV세토우치	N130	VGt		GN							names.234699
 テレビで中国語	TV로 중국어	N110			GN							names.234700
 テレビとりもち	텔레비전 끈끈이	N130	QPNVHn		GN						てれびとりもち	names.234701
 テレビのジョン	텔레비전의 존	N130	QPNVHn		GN						てれびのじょん	names.234702
@@ -234697,66 +234697,66 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレビパワー	TV 파워	N110			GN						てれびぱわー	names.234720
 テレビマガジン	텔레비매거진	N110			GN						てれびまがじん	names.234721
 テレビマン	TV맨	N130	QPNVHn	Wb	GN						てれびまん	names.234722
-テレビユー	테레비 유	N110			GN						てれびゆー	names.234723
-テレビユー富山	튤립 TV	N110			GN							names.234724
+テレビユー	TV-U	N110			GN						てれびゆー	names.234723
+テレビユー富山	TV-U 도야마	N110			GN							names.234724
 テレビユー山形	TV-U 야마가타	N110			GN							names.234725
 テレビユー福島	TV-U 후쿠시마	N110			GN							names.234726
 テレビランド	텔레비랜드	N110			GN						てれびらんど	names.234727
 テレビ仮面	TV 가면	N110			GN							names.234728
-テレビ信州	TV 신슈	N110			GN							names.234729
-テレビ北海道	TV 홋카이도	N110			GN							names.234730
+テレビ信州	TV신슈	N110			GN							names.234729
+テレビ北海道	TV홋카이도	N110			GN							names.234730
 テレビ千鳥	테레비 지도리	N110			GN						てれびちどり	names.234731
-テレビ和歌山	TV 와카야마	N110			GN						てれびわかやま	names.234732
-テレビ埼玉	TV 사이타마	N110			GN							names.234733
-テレビ大分	TV 오이타	N110			GN						てれびおおいた	names.234734
-テレビ大阪	TV 오사카	N110			GN							names.234735
-テレビ大阪株式会社	테레비 오사카	N130	VGt		GN							names.234736
-テレビ宮崎	TV 미야자키	N110			GN							names.234737
+テレビ和歌山	TV와카야마	N110			GN						てれびわかやま	names.234732
+テレビ埼玉	TV사이타마	N110			GN							names.234733
+テレビ大分	TV오이타	N110			GN						てれびおおいた	names.234734
+テレビ大阪	TV오사카	N110			GN							names.234735
+テレビ大阪株式会社	TV오사카	N130	VGt		GN							names.234736
+テレビ宮崎	TV미야자키	N110			GN							names.234737
 テレビ局	텔레비전 방송국	N130	VGt		GN							names.234738
 テレビ局擬人化	방송국 의인화	N110			GN							names.234739
 テレビ局殺人事件	방송국 살인 사건	N130	QPNVHn		GN							names.234740
-テレビ山口	TV 야마구치	N110			GN							names.234741
-テレビ山梨	TV 야마나시	N110			GN							names.234742
-テレビ岩手	TV 이와테	N110			GN						てれびいわて	names.234743
-テレビ愛媛	TV 에히메	N110			GN							names.234744
-テレビ愛知	TV 아이치	N110			GN							names.234745
-テレビ愛知株式会社	TV 아이치	N130	VGt		GN							names.234746
-テレビ愛知株式会社	테레비 아이치	N130	VGt		GN							names.234747
+テレビ山口	TV야마구치	N110			GN							names.234741
+テレビ山梨	TV야마나시	N110			GN							names.234742
+テレビ岩手	TV이와테	N110			GN						てれびいわて	names.234743
+テレビ愛媛	TV에히메	N110			GN							names.234744
+テレビ愛知	TV아이치	N110			GN							names.234745
+テレビ愛知株式会社	TV아이치	N130	VGt		GN							names.234746
+テレビ愛知株式会社	TV아이치	N130	VGt		GN							names.234747
 テレビ探偵団	텔레비전 탐정단	N110			GN							names.234748
-テレビ新広島	TV 신히로시마	N110			GN						てれびしんひろしま	names.234749
-テレビ新潟	TV 니가타 방송망	N110			GN							names.234750
-テレビ新潟放送網	TV 니가타 방송망	N130	VGt		GN							names.234751
-テレビ朝日	TV 아사히	N110			GN						てれびあさひ	names.234752
-テレビ朝日	테레비 아사히	N110			GN						てれびあさひ	names.234753
-テレビ朝日・ABC金曜9時枠の連続ドラマ	TV 아사히 ABC 금요일 9시  연속 드라마	N130	QWK		GN							names.234754
-テレビ朝日土曜時代劇	TV 아사히 토요일 밤 8시 시대극	N130	QWK		GN							names.234755
-テレビ朝日日曜8時連続ドラマ	TV 아사히 일요일 밤 8시 드라마	N130	QWK		GN							names.234756
-テレビ朝日木曜時代劇	TV 아사히 목요시대극	N130	QWK		GN							names.234757
-テレビ朝日水曜21時枠刑事ドラマ	TV 아사히 수요 21시 형사 드라마	N130	QWK		GN							names.234758
-テレビ朝日火曜9時枠の連続ドラマ	TV 아사히 화요일 9시 드라마	N130	QWK		GN							names.234759
-テレビ朝日火曜時代劇	TV 아사히 화요시대극	N130	QWK		GN							names.234760
-テレビ東京	TV 도쿄	N110			GN						てれびとうきょう	names.234761
-テレビ東京日曜9時連続ドラマ	TV 도쿄 일요일 밤 9시 드라마	N130	QWK		GN							names.234762
-テレビ東京月曜10時枠の連続ドラマ	TV 도쿄 월요일 밤 10시 드라마	N130	QWK		GN							names.234763
-テレビ東京水曜8時枠の連続ドラマ	TV 도쿄 수요일 밤 8시 드라마	N130	QWK		GN							names.234764
-テレビ東京火曜8時枠の連続ドラマ	TV 도쿄 화요일 8시 드라마	N130	QWK		GN							names.234765
-テレビ東京系土曜深夜ドラマ	TV 도쿄 토요일 심야 드라마	N130	QWK		GN							names.234766
-テレビ東京金曜8時枠の連続ドラマ	TV 도쿄 금요일 밤 8시 드라마	N130	QWK		GN							names.234767
-テレビ東京金曜夜8時枠時代劇	TV 도쿄 금요일 밤 8시 시대극	N130	QWK		GN							names.234768
-テレビ東京金曜夜9時枠時代劇	TV 도쿄 금요일 밤 9시 시대극	N130	QWK		GN							names.234769
+テレビ新広島	TV신히로시마	N110			GN						てれびしんひろしま	names.234749
+テレビ新潟	TV니가타	N110			GN							names.234750
+テレビ新潟放送網	TV니가타 방송망	N130	VGt		GN							names.234751
+テレビ朝日	TV아사히	N110			GN						てれびあさひ	names.234752
+テレビ朝日	TV아사히	N110			GN						てれびあさひ	names.234753
+テレビ朝日・ABC金曜9時枠の連続ドラマ	TV아사히 ABC 금요일 9시 연속 드라마	N130	QWK		GN							names.234754
+テレビ朝日土曜時代劇	TV아사히 토요일 밤 8시 시대극	N130	QWK		GN							names.234755
+テレビ朝日日曜8時連続ドラマ	TV아사히 일요일 밤 8시 드라마	N130	QWK		GN							names.234756
+テレビ朝日木曜時代劇	TV아사히 목요시대극	N130	QWK		GN							names.234757
+テレビ朝日水曜21時枠刑事ドラマ	TV아사히 수요 21시 형사 드라마	N130	QWK		GN							names.234758
+テレビ朝日火曜9時枠の連続ドラマ	TV아사히 화요일 9시 드라마	N130	QWK		GN							names.234759
+テレビ朝日火曜時代劇	TV아사히 화요시대극	N130	QWK		GN							names.234760
+テレビ東京	TV도쿄	N110			GN						てれびとうきょう	names.234761
+テレビ東京日曜9時連続ドラマ	TV도쿄 일요일 밤 9시 드라마	N130	QWK		GN							names.234762
+テレビ東京月曜10時枠の連続ドラマ	TV도쿄 월요일 밤 10시 드라마	N130	QWK		GN							names.234763
+テレビ東京水曜8時枠の連続ドラマ	TV도쿄 수요일 밤 8시 드라마	N130	QWK		GN							names.234764
+テレビ東京火曜8時枠の連続ドラマ	TV도쿄 화요일 8시 드라마	N130	QWK		GN							names.234765
+テレビ東京系土曜深夜ドラマ	TV도쿄 토요일 심야 드라마	N130	QWK		GN							names.234766
+テレビ東京金曜8時枠の連続ドラマ	TV도쿄 금요일 밤 8시 드라마	N130	QWK		GN							names.234767
+テレビ東京金曜夜8時枠時代劇	TV도쿄 금요일 밤 8시 시대극	N130	QWK		GN							names.234768
+テレビ東京金曜夜9時枠時代劇	TV도쿄 금요일 밤 9시 시대극	N130	QWK		GN							names.234769
 テレビ東京金曜深夜1時枠の深夜ドラマ	금요 25시	N130	QWK		GN							names.234770
 テレビ欄パロ	TV 편성표 패러디	N110			GN							names.234771
 テレビ演劇サクセス荘	TV 연극 석세스장	N110			GN						てれびえんげきさくせすそう	names.234772
-テレビ熊本	TV 구마모토	N110			GN						てれびくまもと	names.234773
+テレビ熊本	TV구마모토	N110			GN						てれびくまもと	names.234773
 テレビ王子	TV 왕자	N130	QPNVHn		GN						てれびおうじ	names.234774
 テレビ番組	텔레비전 프로그램	N110			GN							names.234775
-テレビ神奈川	TV 가나가와	N110			GN							names.234776
+テレビ神奈川	TV가나가와	N110			GN							names.234776
 テレビ絵本	TV 그림책	N110			GN							names.234777
-テレビ西日本	TV 니시닛폰	N110			GN							names.234778
-テレビ金沢	TV 가나자와	N110			GN						てれびかなざわ	names.234779
-テレビ長崎	TV 나가사키	N110			GN							names.234780
-テレビ静岡	TV 시즈오카	N110			GN							names.234781
-テレビ高知	TV 고치	N110			GN							names.234782
+テレビ西日本	TV니시닛폰	N110			GN							names.234778
+テレビ金沢	TV가나자와	N110			GN						てれびかなざわ	names.234779
+テレビ長崎	TV나가사키	N110			GN							names.234780
+テレビ静岡	TV시즈오카	N110			GN							names.234781
+テレビ高知	TV고치	N110			GN							names.234782
 テレフェ・ノティシアス	텔레페 노티시아스	N130	QWK		GN							names.234783
 テレフォトグラフィー	텔레포토그래피	N110			GN						てれふぉとぐらふぃー	names.234784
 テレフォニカ	텔레포니카	N130	VGt		GN							names.234785
@@ -234888,7 +234888,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレーゼ・マルファッティ	테레제 말파티	N130	QPNVHn		GN							names.234911
 テレーロ	테레로	N130	QPNVHn	Wb	GN							names.234912
 テレ朝	TV 아사히	N110			GN						てれあさ	names.234913
-テレ朝	테레비 아사히	N110			GN							names.234914
+テレ朝	TV아사히	N110			GN							names.234914
 テレ朝チャンネル	테레아사 채널	N110			GN							names.234915
 テレ東	TV 도쿄	N110			GN						てれとう	names.234916
 テレ東規制	테레토 규제	N110			GN							names.234917

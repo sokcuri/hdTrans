@@ -8,9 +8,9 @@ dict:jisjk:42371	「アクチンの量は多い。」	「액틴의 양은 많다
 dict:jisjk:51239	デジタイザを使う。	디지타이저를 쓴다.	fix	defaults
 dict:jisjk:51239	このデジタイザは新しい。	이 디지타이저는 새롭다.	fix	defaults
 dict:jisjk:51239	「デジタイザを買った。」	「디지타이저를 샀다.」	fix	defaults
-dict:jisjk:55137	フジテレビジョン	후지테레비전	fix	defaults
-dict:jisjk:55137	フジテレビジョンを見た。	후지테레비전을 보았다.	fix	defaults
-dict:jisjk:55137	「フジテレビジョン」	「후지테레비전」	fix	defaults
+dict:jisjk:55137	フジテレビジョン	후지TV	fix	defaults
+dict:jisjk:55137	フジテレビジョンを見た。	후지TV를 보았다.	fix	defaults
+dict:jisjk:55137	「フジテレビジョン」	「후지TV」	fix	defaults
 dict:jisjk:119273	小首を傾ける。	고개를 갸우뚱한다.	fix	defaults
 dict:jisjk:119273	小首を傾けた。	고개를 갸우뚱했다.	fix	defaults
 dict:jisjk:119273	小首を傾けて聞く。	고개를 갸우뚱해 듣는다.	fix	defaults

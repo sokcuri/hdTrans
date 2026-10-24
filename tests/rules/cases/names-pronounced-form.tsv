@@ -1,7 +1,7 @@
 # 규칙: LEX-29
 rule	input	expected	kind	layer
-dict:jisjk:133418	フジテレビを見た。	후지테레비를 보았다.	fix	defaults
-names:pronounced-form	中京テレビ放送	주쿄 테레비 방송	fix	defaults
+dict:jisjk:133418	フジテレビを見た。	후지TV를 보았다.	fix	defaults
+names:pronounced-form	中京テレビ放送	주쿄TV 방송	fix	defaults
 names:pronounced-form	キッコーマンの醤油	깃코만의 간장	fix	defaults
 names:pronounced-form	デジモンが好きだ。	디지몬을 좋아한다.	fix	defaults
 names:pronounced-form	大井さんが来た。	오오이 씨가 왔다.	fix	fixed
