@@ -596,8 +596,8 @@ dict:w:5751	ダディーが来た。	대디가 왔다.	fix	lookup
 dict:w:5751	ダディーと話した。	대디와 이야기했다.	fix	lookup
 dict:w:5751	ダディーを呼んだ。	대디를 불렀다.	fix	lookup
 dict:w:5751	私のダディーだ。	내 대디다.	fix	lookup
-dict:w:5751	パパが来た。	아빠가 왔다.	keep	lookup
-dict:w:5751	ママが来た。	엄마가 왔다.	keep	lookup
+dict:jisjk:105356	パパが来た。	아빠가 왔다.	fix	defaults
+dict:w:9325	ママが来た。	엄마가 왔다.	keep	defaults
 dict:w:5779	ダンマリが続いた。	침묵이 계속되었다.	fix	lookup
 dict:w:5779	ダンマリを続けた。	침묵을 계속했다.	fix	lookup
 dict:w:5779	ダンマリは長かった。	침묵은 길었다.	fix	lookup
