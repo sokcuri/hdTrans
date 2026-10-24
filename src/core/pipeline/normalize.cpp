@@ -391,8 +391,8 @@ bool StartJaa(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン", "ゴー",
-                                               "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ"};
+constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン",   "ゴー",
+                                               "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ", "キュ"};
 constexpr std::string_view kMilitaryKana[] = {"まる", "ひと", "ふた", "さん", "よん",
                                               "ごー", "ろく", "なな", "はち", "きゅう"};
 
@@ -414,16 +414,21 @@ bool AnyWord(std::string_view s, size_t& pos, const std::string_view (&words)[N]
     return false;
 }
 
-// W([、・ ー]?W){3} with W a katakana digit word, or four hiragana digit words. A word
-// never begins with a separator or ー, so the first word that fits is the only one
-// that lets the rest match.
+// The separators a katakana military time may have between its words: ヒトマルーマルマル and
+// ヒトハチ～マルマル draw a word out, マルサン…マルマル and マルサン・・マルマル pause.
+constexpr std::u32string_view kMilitarySeparators = U"、・ ー～…‥";
+
+// W(S?P*W){3} with W a katakana digit word, S one of kMilitarySeparators and P one of …‥・, or
+// four hiragana digit words. A word never begins with a separator or ー, so the first word that
+// fits is the only one that lets the rest match.
 bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (AnyWord(s, p, kMilitaryWords)) {
         int n = 1;
         for (; n < 4; n++) {
             size_t q = p;
-            OneOf(s, q, U"、・ ー");  // ヒトマルーマルマル draws a word out
+            OneOf(s, q, kMilitarySeparators);
+            while (OneOf(s, q, U"…‥・")) {}  // マルサン……マルマル
             if (!AnyWord(s, q, kMilitaryWords)) break;
             p = q;
         }
@@ -446,7 +451,8 @@ bool IsKanaOrMark(char32_t c) {
 
 // The end of a katakana time of day (hour 00 to 29 read as マル, ヒト or フタ first, not
 // マルマルマルマル) before hiragana, or after a run of ー～ and small ゥッ that the time takes
-// in, before anything but katakana: ヒトサンマルマルです, フタサンマルマルー！. 0 otherwise.
+// in, before anything but katakana: ヒトサンマルマルです, フタサンマルマルー！; before a ～ and
+// another time, before the ～. 0 otherwise.
 size_t TimeEnd(std::string_view text, const Match& m) {
     const std::string_view w = m.group[0];
     if (!w.starts_with("マル") && !w.starts_with("ヒト") && !w.starts_with("フタ")) return 0;
@@ -455,6 +461,8 @@ size_t TimeEnd(std::string_view text, const Match& m) {
     while (p < text.size() && In(At(text, p).cp, U"ー～ゥッ")) p += At(text, p).size;
     const char32_t c = p < text.size() ? At(text, p).cp : 0;
     if (p == m.end) return c >= U'ぁ' && c <= U'ゖ' ? p : 0;
+    // A ～ before another time is a range (ヒトサンマルマル～フタマルマルマル 1300～2000).
+    if (Match next; At(text, m.end).cp == U'～' && MilitaryTime(text, p, next)) return m.end;
     return (c >= U'ァ' && c <= U'ヶ') || (c >= U'一' && c <= U'鿿') ? 0 : p;
 }
 
@@ -605,7 +613,7 @@ std::string RewriteMilitaryTime(std::string_view text) {
         for (size_t i = 0; i < m.group[0].size();) {
             const text::Rune r = At(m.group[0], i);
             i += r.size;
-            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ' || r.cp == U'ー') continue;
+            if (In(r.cp, kMilitarySeparators)) continue;
             text::AppendRune(words, r.cp >= U'ぁ' && r.cp <= U'ゖ' ? r.cp + 0x60 : r.cp);
         }
         out.append(text.substr(at, m.begin - at));
