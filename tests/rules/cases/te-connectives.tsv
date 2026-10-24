@@ -9,3 +9,7 @@ cx:te-sequence:10	手を洗って寝る。	손을 씻고 잔다.	fix	rewrites
 cx:te-sequence:10	食べないで寝る。	먹지 않고 잔다.	keep	rewrites
 cx:te-sequence:10	飲んで、寝よう	마셔, 자자	keep	rewrites
 cx:te-request:10	「忘れて」	「잊어」	keep	rewrites
+cx:see-and:10	「これを見て！」	「이걸 봐!」	fix	rewrites
+cx:see-and:10	「ほら、空を見て！」	「자, 하늘을 봐!」	fix	rewrites
+cx:see-and:10	私を見て！と叫んだ。	나를 봐!라고 외쳤다.	fix	rewrites
+cx:see-and:10	これを見て、驚いた。	이것을 보고, 놀랐다.	keep	rewrites

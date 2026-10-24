@@ -982,13 +982,6 @@ std::string PerfectEnding(std::string_view ending, bool utteranceEnd) {
     return {};
 }
 
-// Whether item it ends its sentence: the end of the utterance, or ！ or ？ after it.
-bool SentenceEnd(const Worker& w, const Item* it) {
-    std::string_view after = From(it->text, it->start + it->length);
-    if (after.empty() && it->tokenIndex + 1 < w.TokenCount()) after = w.Tok(it->tokenIndex + 1).text;
-    return UtteranceEnd(w, it) || RuneIn(text::DecodeRune(after).cp, "！？!?");
-}
-
 // Whether a verb stem ends in the passive れ of a verb (書かれ, 包まれ, され), which takes no 두다.
 bool PassiveStem(std::string_view stem) {
     if (!stem.ends_with("れ")) return false;
@@ -1195,6 +1188,12 @@ void PastSequence(Flusher& f) {
     }
 }
 
+
+bool SentenceEnd(const Worker& w, const Item* it) {
+    std::string_view after = From(it->text, it->start + it->length);
+    if (after.empty() && it->tokenIndex + 1 < w.TokenCount()) after = w.Tok(it->tokenIndex + 1).text;
+    return UtteranceEnd(w, it) || RuneIn(text::DecodeRune(after).cp, "！？!?");
+}
 
 bool QuoteEnd(const Worker& w, const Item* it) {
     std::string_view rest = From(it->text, it->start + it->length);

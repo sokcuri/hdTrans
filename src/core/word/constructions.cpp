@@ -93,6 +93,8 @@ constexpr NamedFeature kFeatures[] = {
     // a dash or a small つ.
     {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
+    // The item ends its sentence: the end of the utterance, or ！ or ？ after it (SentenceEnd).
+    {"sentence-end", [](Flusher& f, const Item* it) { return SentenceEnd(f.w, it); }},
     // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
     {"predicate-follows", [](Flusher&, const Item* it) { return PredicateFollows(it); }},
     // The verb was analysed with no passive, potential or causative.
