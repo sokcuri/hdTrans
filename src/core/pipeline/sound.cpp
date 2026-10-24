@@ -394,7 +394,9 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
-    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false) const;
+    // With ending, the end rows go there instead of into user.
+    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
+                     size_t* ending = nullptr) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
@@ -423,6 +425,7 @@ private:
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
+    size_t RunningWordLen(size_t p) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
@@ -462,13 +465,19 @@ bool SoundText::PauseAt(size_t p) const {
 // The length in characters of the longest base key, plain-dictionary key and name-layer
 // key that start at character p; kana spellings do not count, nor with skipEnds the
 // endings of end rows.
-void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds) const {
+void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds, size_t* ending) const {
     base = user = name = 0;
+    if (ending != nullptr) *ending = 0;
     const size_t end = std::min(rs_.size(), p + 24);
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && (c.user->kana || (skipEnds && c.user->end))) continue;
+        if (c.user != nullptr && c.user->kana) continue;
         const size_t n = text::RuneCount(c.source);
+        if (c.user != nullptr && c.user->end && ending != nullptr) {
+            *ending = std::max(*ending, n);
+            continue;
+        }
+        if (c.user != nullptr && skipEnds && c.user->end) continue;
         if (c.user != nullptr && c.user->nameLayer) {
             name = std::max(name, n);
         } else if (c.user != nullptr) {
@@ -688,12 +697,19 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
-    // (見て！ぽい～！ 포이~!).
-    const bool beforePause = PauseAt(best.end) || (best.end < rs_.size() && In(rs_[best.end], U"…‥"));
-    size_t base = 0, user = 0, name = 0;
-    LongestKeys(p, base, user, name, best.intj && beforePause);
+    // (見て！ぽい～！ 포이~!), nor is a sound that an ending cannot follow: after another sound
+    // of its chain, at the start of an utterance or after a pause or an ellipsis, when it ends
+    // in its と or comes before no kanji or katakana (ありがとぴょん 고마워뿅, 敬礼！ぴょん！ 뿅,
+    // ぴょんと跳ねた 폴짝; not ぽい捨て, nor やん after another mark: た↓ん↑やん↓).
+    const auto pauseAt = [&](size_t k) { return PauseAt(k) || (k < rs_.size() && In(rs_[k], U"…‥")); };
+    const bool beforePause = pauseAt(best.end);
     size_t keyLen = chosen->key.size();
     if (chosen->key.back() == U'ト') keyLen--;
+    const bool alone = (inChain || UtteranceStart(p) || pauseAt(p - 1)) &&
+                       (keyLen < chosen->key.size() || best.end >= rs_.size() ||
+                        (!IsKanjiRune(rs_[best.end]) && !IsKatakanaRune(rs_[best.end])));
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(p, base, user, name, (best.intj && beforePause) || alone);
     const size_t surface = best.end - p;
     // A name-layer key that runs on from the sound into kanji and ends with the kanji word
     // names a thing (ニコニコ動画 니코니코 동화, ニコニコ大百科).
@@ -1092,6 +1108,22 @@ size_t SoundText::WordLen(size_t p) const {
     size_t base = 0, user = 0, name = 0;
     LongestKeys(p, base, user, name);
     return std::max({base, user, name, size_t{1}});
+}
+
+// WordLen of the word the text goes on with at character p, where the ending of an end row
+// counts only where the sentence may end after it, not before kana or a kanji that go on
+// (関連でちょこっと: で, not the でち of 朝でち).
+size_t SoundText::RunningWordLen(size_t p) const {
+    size_t base = 0, user = 0, name = 0, ending = 0;
+    LongestKeys(p, base, user, name, false, &ending);
+    const size_t words = std::max({base, user, name, size_t{1}});
+    const size_t all = std::max(words, ending);
+    const size_t e = p + all;
+    if (words < all && e < rs_.size() &&
+        (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])))) {
+        return words;
+    }
+    return all;
 }
 
 // The length of the と, or the て of って, that makes an ono row ending at character i
@@ -1735,7 +1767,7 @@ std::string SoundText::Write() {
                     continue;
                 }
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
-                next = std::min(rs.size(), i + WordLen(i));
+                next = std::min(rs.size(), i + RunningWordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
                 word = next > i + 1 && IsHiraganaRune(rs[i]) && IsHiraganaRune(rs[next - 1]) && !StemAt(i, next - i);
                 if (next > i + 1) wordEnd = next;
@@ -2165,6 +2197,31 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     return out;
 }
 
+std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.ra-less-kuru")})) return std::string(text);
+    // The ら that the potential られ of an ichidan verb starts with.
+    const std::string_view potential = word::Conjugation(7, 4);
+    const std::string_view ra = potential.substr(0, text::DecodeRune(potential).size);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (StartLength(std::string_view(s).substr(byte[i]), dict::ClassMembers("contraction.ra-less-kuru")) == 0) continue;
+        size_t from = i;
+        while (from > 0 && i - from < kLongestStem && (IsKanjiRune(rs[from - 1]) || IsHiraganaRune(rs[from - 1]))) from--;
+        while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
+        if (from + 1 >= i) continue;
+        out.append(s, byte[done], byte[i + 1] - byte[done]);
+        out += ra;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
     constexpr std::string_view kNo = "の";
     if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
@@ -2252,13 +2309,14 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 }  // namespace internal
 
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
-    const std::string completed =
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
+    const std::string completed = internal::RewriteDrawnHonorifics(
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap),
+        ctx, snap);
     std::string sounded =
         internal::RewriteCasualAdjectives(internal::WriteSounds(
                                               internal::RewriteOnbinU(
                                               internal::RewriteContractedNo(
-                                                  internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), snap),
+                                                  internal::RewriteRaLessKuru(internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), snap),
                                               ctx, snap), ctx, snap),
                                           ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {

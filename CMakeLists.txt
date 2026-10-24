@@ -232,6 +232,12 @@ if(NOT EMSCRIPTEN)
                 --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")
             set_tests_properties(rules.drops PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
+            # The inputs of the measured sets that drop text stay at tools/drops-budget.tsv; skipped
+            # when no set variable is set.
+            add_test(NAME sets.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --sets
+                --budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops-budget.tsv")
+            set_tests_properties(sets.drops PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 900)
         endif()
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""

@@ -1,0 +1,15 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+lookup:verb-before-polite	あの子達も、喜びます。	그 아이들도, 기뻐합니다.	fix	lookup
+lookup:verb-before-polite	「食べたのでしょうか。きっとセリカが喜びます」	「먹었을까요. 분명 세리카가 기뻐합니다」	fix	lookup
+lookup:verb-before-polite	少しだけ修理させてください。急ぎます。	약간 수리시켜 주세요. 서두릅니다.	fix	lookup
+lookup:verb-before-polite	もう港よ。私たちも急ぎましょう。	이제 항구야. 저희도 서두릅시다.	fix	lookup
+lookup:verb-before-polite	さあ、急ぎましょうか。時間は刻一刻と迫っている。	자, 서두를까요. 시간은 시시각각 다가오고 있다.	fix	lookup
+lookup:verb-before-polite	でも、あなたと一緒だったら…もっと頑張れます！	하지만, 당신과 함께라면…좀 더 노력할 수 있겠습니다!	fix	lookup
+lookup:verb-before-polite	彼は喜びました	그는 기뻐했습니다	fix	lookup
+lookup:verb-before-polite	喜びを感じます。	기쁨을 느낍니다.	keep	lookup
+lookup:verb-before-polite	頑張れ！	힘내라!	keep	lookup
+lookup:verb-before-polite	休みます。	쉽니다.	keep	lookup
+lookup:verb-before-polite	お休みします。	쉽니다.	keep	lookup
+lookup:verb-before-polite	喜びのあまり泣いた。	기쁜 나머지 울었다.	keep	lookup
+lookup:verb-before-polite	通りを歩きます。	대로를 걷습니다.	keep	lookup

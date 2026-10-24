@@ -1,0 +1,39 @@
+# 규칙: LEX-31
+rule	input	expected	kind	layer
+ending:nya	私も突撃にゃ。	나도 돌격이다냥.	fix	builtin-ending
+ending:nya	手紙にゃ。	편지다냥.	fix	builtin-ending
+ending:nya	準備完了、用意にゃ！	준비 완료, 준비다냥!	fix	builtin-ending
+ending:nya	そこにゃ！	거기다냥!	fix	builtin-ending
+ending:nya	年末かにゃ？	연말일까냥?	fix	builtin-ending
+ending:nya	効いたかにゃ？	효과가 있었을까냥?	fix	builtin-ending
+ending:nya	情報を見るのかにゃ？	정보를 보는 걸까냥?	fix	builtin-ending
+ending:nya	このケーキもおいしいにゃあ♪	이 케이크도 맛있다냥♪	fix	builtin-ending
+ending:nya	夏を乗り切ったにゃしぃ！	여름을 극복했다냥!	fix	builtin-ending
+ending:nya	みんなも参加するにゃし！	모두도 참가한다냥!	fix	builtin-ending
+ending:nya	ご主人様、疲れたのにゃ？	주인님, 지친 거다냥?	fix	builtin-ending
+ending:nya	「うぅ…やめてにゃ」	「으으…그만둬냥」	fix	builtin-ending
+ending:nya	「えっ！？忘れてたにゃ」	「어!? 잊고 있었다냥」	fix	builtin-ending
+ending:nya	「寝ちゃったにゃ」	「자 버렸다냥」	fix	builtin-ending
+ending:pyon	凄いぴょん！	굉장하다뿅!	fix	builtin-ending
+ending:pyon	雨の日は苦手だぴょん……	비오는 날은 서투르다뿅……	fix	builtin-ending
+ending:pyon	攻撃、開始するぴょん！	공격, 개시한다뿅!	fix	builtin-ending
+ending:pyon	大勝利ぴょん！	대승리다뿅!	fix	builtin-ending
+ending:pyon	やられたぴょん……	당했다뿅……	fix	builtin-ending
+ending:pyon	元気がないぴょん……。	기운이 없다뿅…….	fix	builtin-ending
+ending:pyon	大丈夫ぴょん♪	괜찮다뿅♪	fix	builtin-ending
+ending:pyon	余裕でクリアしたっぴょん！	여유로 클리어했다뿅!	fix	builtin-ending
+ending:pyon	おいしいっぴょん♪	맛있다뿅♪	fix	builtin-ending
+ending:pyon	逃がさないっぴょ～ん！	놓치지 않는다뿅~!	fix	builtin-ending
+ending:pyon	嬉しいぴょ～ん！	기쁘다뿅~!	fix	builtin-ending
+ending:pyon	つまらないぴょーん……	시시하다뿅~……	fix	builtin-ending
+ending:nya	とても寒いにゃ。	무척 춥다냥.	keep	builtin-ending
+ending:nya	秋は頑張るにゃ！	가을은 노력한다냥!	keep	builtin-ending
+sound:alone-before-end-row	……にゃ！	……냐!	keep	sound
+sound:alone-before-end-row	「にゃー」	「냐아」	keep	sound
+sound:alone-before-end-row	敬礼！ぴょん！	경례! 뿅!	keep	sound
+sound:alone-before-end-row	ぴょんと跳ねた。	폴짝 뛰었다.	keep	sound
+sound:alone-before-end-row	ぴょんぴょん跳ねる。	폴짝폴짝 뛴다.	keep	sound
+sound:alone-before-end-row	ふにゃふにゃになった	흐물흐물하게 되었다	keep	sound
+sound:alone-before-end-row	ありがとぴょん！	고마워뿅!	keep	sound
+sound:alone-before-end-row	陳(ち↓ん↑やん↓)です。	진(치↓응↑얀↓)입니다.	keep	sound
+sound:alone-before-end-row	先生にご報告、ぴょん♪	선생님에게 보고, 뿅♪	keep	sound

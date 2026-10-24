@@ -18,6 +18,10 @@
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
+//= contraction.te-irassharu	Starts of the text after a て form that are the いらっしゃる after it contracted (ついてらっしゃい, 気に入ってらっしゃる).
+//= contraction.ra-less-kuru	The forms of the potential of くる without its ら that follow a て form (帰ってこれた, ついてこれる, 戻ってこれました); not これなら or これまで, where これ is the pronoun.
+//= contraction.te-ageru	The start of the あげる after a て form said with its あ dropped, its て then said た (作ったげる, 見せたげよう, 読んだげる).
+//= contraction.te-yaru-after	What follows the る of the やる after a て form said with its や dropped (やったるぜ, やったるわ, 調整したるから); not は, が, の or a noun, where たる is the attributive (取り出したるは).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
@@ -33,6 +37,7 @@
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
+//= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
@@ -52,10 +57,13 @@
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
+//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons (先生たん, 小林っち; not たまごっち, 顔合わせたんだ).
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
 //= greeting.honorific-end	Greetings that end like an honoured person in 様 or さま and call no one (お疲れさま、また明日 수고했어, 내일 보자).
+//= honorific.drawn-out	Honorifics that a name may draw out before their final ん, with ー, ～ or the vowel of the kana before it (圭ちゃ～ん, 田中さぁあん, アルくぅん).
+//= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -66,6 +74,7 @@
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
 //= honorific.prepass-spaced	Honorifics read 씨 or 군 that are written apart from the noun before them (田中さん 다나카 씨).
 //= kana.drawn-out	Small kana and marks that draw out the kana before them (マルマルぅ, くぅん, ちゃーん).
+//= kana.ending-start-only	Kana that start the ending of an end row but no word, so that such an ending is no piece of a katakana run read as words (っしゅ of トリッシュ).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
@@ -80,6 +89,11 @@
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
+//= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
+//= ko.benefactive-head	The Korean of the あげる after a て form whose あ is dropped (作ったげる 만들어 줄게), ending in the marker family that the ending after it conjugates.
+//= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버렸던 거야), ending in the marker family that the ending after it conjugates.
+//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped (見てた 보고 있었다), ending in the marker family that the ending after it conjugates.
+//= ko.progressive-honorific-head	The same for いらっしゃる (見てらっしゃる 보고 계시다).
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.laughter	Latin letters a run of which laughs after Korean in the output (없어ｗｗ 없어ㅋㅋ).
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
@@ -213,6 +227,7 @@
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
+//= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 방법도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
@@ -392,6 +407,40 @@ contraction.te-iku	ってね
 contraction.te-iku	ってる
 contraction.te-iku	けよ
 contraction.te-iku	けば
+
+contraction.te-irassharu	らっしゃ
+
+contraction.ra-less-kuru	これる
+contraction.ra-less-kuru	これた
+contraction.ra-less-kuru	これて
+contraction.ra-less-kuru	これない
+contraction.ra-less-kuru	これなかっ
+contraction.ra-less-kuru	これなく
+contraction.ra-less-kuru	これなけれ
+contraction.ra-less-kuru	これなきゃ
+contraction.ra-less-kuru	これます
+contraction.ra-less-kuru	これませ
+contraction.ra-less-kuru	これまし
+contraction.ra-less-kuru	これれば
+contraction.ra-less-kuru	これず
+contraction.ra-less-kuru	これそう
+
+contraction.te-ageru	げ
+
+contraction.te-yaru-after	ぜ
+contraction.te-yaru-after	で
+contraction.te-yaru-after	わ
+contraction.te-yaru-after	よ
+contraction.te-yaru-after	ぞ
+contraction.te-yaru-after	さ
+contraction.te-yaru-after	ね
+contraction.te-yaru-after	から
+contraction.te-yaru-after	けど
+contraction.te-yaru-after	って
+contraction.te-yaru-after	っ
+contraction.te-yaru-after	かい
+contraction.te-yaru-after	かな
+contraction.te-yaru-after	か
 
 contraction.te-iku-final	って
 contraction.te-iku-final	け
@@ -591,6 +640,10 @@ ending.taunt	もんねーっだっ
 
 ending.taunt-not-after	の
 ending.taunt-not-after	な
+
+follower.polite-masu	ます
+follower.polite-masu	ませ
+follower.polite-masu	まし
 
 follower.contracted-iru	の
 follower.contracted-iru	だ
@@ -803,6 +856,7 @@ honorific.constraint	くん
 honorific.constraint	君
 honorific.constraint	ちゃん
 honorific.constraint	たん
+honorific.constraint	っち
 
 honorific.constraint-familiar	くん
 honorific.constraint-familiar	君
@@ -864,6 +918,14 @@ honorific.katakana-name	サマ
 honorific.katakana-name	クン
 honorific.katakana-name	チャン
 honorific.katakana-name	ドノ
+
+honorific.drawn-out	さん
+honorific.drawn-out	ちゃん
+honorific.drawn-out	くん
+honorific.drawn-out-word	かいさん
+
+honorific.after-person	たん
+honorific.after-person	っち
 
 honorific.name	さん
 honorific.name	ちゃん
@@ -933,6 +995,8 @@ kana.drawn-out	ゅ
 kana.drawn-out	ょ
 kana.drawn-out	ー
 kana.drawn-out	～
+
+kana.ending-start-only	っ
 
 kana.kin-before-chan	にい
 kana.kin-before-chan	にー
@@ -1202,6 +1266,16 @@ ko.doing	될
 ko.doing	된
 ko.doing	됐
 ko.doing	돼
+
+ko.adjective-past-adnominal	5던
+
+ko.benefactive-head	6 &CJ@
+
+ko.completive-head	6 버&AA@
+
+ko.progressive-head	1고 &HN@
+
+ko.progressive-honorific-head	1고 계&AE@
 
 ko.title-end	님
 ko.title-end	씨
@@ -3255,6 +3329,8 @@ verb.result-state	老け
 verb.result-state-past	亡くな
 verb.result-state-past	生き残
 verb.result-state-past	古び
+verb.result-state-past	身罷
+verb.result-state-past	身まか
 
 verb.say-teiru	話
 verb.say-teiru	お話
@@ -3307,6 +3383,24 @@ verb.thinking-start	感じ
 verb.thinking-start	考え
 verb.thinking-start	信じ
 verb.thinking-start	確信
+
+verb.way-of-doing	ようが
+verb.way-of-doing	ようも
+verb.way-of-doing	ようの
+verb.way-of-doing	ようは
+verb.way-of-doing	ように
+verb.way-of-doing	ようを
+verb.way-of-doing	ようで
+verb.way-of-doing	ようだ
+verb.way-of-doing	ようじゃ
+verb.way-of-doing	よう！
+verb.way-of-doing	よう。
+verb.way-of-doing	よう、
+verb.way-of-doing	よう」
+verb.way-of-doing	よう』
+verb.way-of-doing	よう…
+verb.way-of-doing	よう？
+verb.way-of-doing	よう）
 
 verb.writing	書
 verb.writing	か

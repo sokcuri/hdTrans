@@ -113,8 +113,9 @@ output::Pieces RewriteConjunctions(const output::Pieces& text);
 std::string_view TextOf(const output::Piece& p);
 
 // The part-of-speech tags (first part-code bytes) of the base records and the plain
-// entries stored under exactly s, kana spellings left out; "" when s is no key.
-std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap);
+// entries stored under exactly s, kana spellings left out, and end rows too when endRows is
+// false; "" when s is no key.
+std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows = true);
 
 }  // namespace internal
 

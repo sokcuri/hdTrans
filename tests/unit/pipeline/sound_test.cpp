@@ -640,6 +640,8 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"待って待ってぇぇ", "待って待って\uE00B\uE00B"},
         {"待ってぇぇ", "待って"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
+        // A shout's ッ ends the phrase as っ does.
+        {"まかせてぇぇぇッ！", "まかせて\uE00B\uE00B\uE00B\uE00C！"},
         // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
         // drawl of the particle is ～.
         {"歌うよぉー！", "歌うよ～！"},
@@ -764,7 +766,9 @@ HD_TEST(pipeline_sound_extra_isolation) {
 }
 
 // An interjection before a pause or an ellipsis is read as a sound although an end row
-// has the same key; before other text the end row's key still rules it out.
+// has the same key, and so is a sound with no word before it that ends in its と or before
+// no kanji or katakana; after a word or before other text the end row's key still rules it out.
+// An end row's key that kana go on from is no word there, so a sound may start inside it.
 HD_TEST(pipeline_sound_before_pause_over_end_row) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());
@@ -778,6 +782,11 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"ぽい…", "포이…"},
         {"ぽいぽい。", "포이포이。"},
         {"ぽい捨て", "ぽい捨て"},
+        {"敬礼！ぴょん！", "敬礼！뿅！"},
+        {"ぴょんと跳ねた", "폴짝 跳ねた"},
+        {"凄いぴょん！", "凄いぴょん！"},
+        {"学校でちらっと見た", "学校で힐끗 見た"},
+        {"ありがとぴょん！", "고마워뿅！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
@@ -904,6 +913,32 @@ HD_TEST(pipeline_contracted_iku) {
     }
 }
 
+// The potential of くる without its ら after the て form of a verb of the dictionary takes its ら
+// back; これ is the pronoun before なら and まで, and after no て form.
+HD_TEST(pipeline_ra_less_kuru) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "帰\t돌아&A1@\tM428\t1\n"
+                                     "見\t&AY@\tM437\t2\n"
+                                     "これ\t이것\tN110\t3\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"帰ってこれた", "帰ってこられた"},
+        {"帰ってこれました。", "帰ってこられました。"},
+        {"見てこれない", "見てこられない"},
+        {"帰ってこれる？", "帰ってこられる？"},
+        {"見てこれなら", "見てこれなら"},
+        {"見てこれまで", "見てこれまで"},
+        {"これた", "これた"},
+        {"ここにこれた", "ここにこれた"},
+        {"帰ってこれ", "帰ってこれ"},
+        {"\xcd帰ってこれた", "\xcd帰ってこられた"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteRaLessKuru(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
 HD_TEST(pipeline_contracted_no) {
     const auto loaded = dict::Load({{0, "base.tsv",
@@ -946,4 +981,40 @@ HD_TEST(pipeline_onbin_u) {
         {"\xcd言うた", "\xcd言った"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteOnbinU(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
+// a longer word it starts takes the mark after that word, also with no word before it. A verb
+// stem and its continuative kana before it are no name (かみつき).
+HD_TEST(pipeline_drawn_honorifics) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "ちゃんと\t제대로\tE300\t1\n"
+                                     "ちゃう\t아니\tM100\t2\n"
+                                     "かみつ\t물\tM100\t3\n"
+                                     "みつき\t미츠키\tN130\t4\n"
+                                     "みどり\t미도리\tN130\t5\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"圭ちゃ～ん！", "圭ちゃん\uE00A\uE00B！"},
+        {"田中さぁあぁあん…", "田中さん\uE00B\uE00B\uE00B\uE00B…"},
+        {"アルくぅん！", "アルくん\uE00B！"},
+        {"みどりさああんん！", "みどりさん\uE00B\uE00B！"},
+        {"ちゃーんと見て", "ちゃんと\uE00A見て"},
+        {"がちゃ～んと", "がちゃんと\uE00A"},
+        {"…くぅん", "…くぅん"},
+        {"そうちゃうん？", "そうちゃうん？"},
+        {"うくぅんんっ！", "うくぅんんっ！"},
+        {"びちゃーん！", "びちゃーん！"},
+        {"田中さん", "田中さん"},
+        {"かみつきさあん", "かみつきさあん"},
+        {"みどりさああん", "みどりさん\uE00B\uE00B"},
+        // Drawn out by vowel kana or by two or more ー, a drawn mark for each.
+        {"圭ちゃーん！", "圭ちゃん\uE00A\uE00B！"},
+        {"あおくーーーん", "あおくん\uE00B\uE00B\uE00B"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

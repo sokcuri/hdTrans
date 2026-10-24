@@ -281,6 +281,61 @@ bool NounEnd(std::string_view text) {
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
+// Whether before, the word ahead of a suffix, is a name or a noun of the dictionary with a sense
+// of persons among its candidates, those of its group or the other records of its surface
+// (モモ 복숭아 beside the name モモ); not itself a suffix written attached (ら, たち).
+bool SuffixHost(const Item* before) {
+    if (before == nullptr) return false;
+    if (before->IsNameItem()) return true;
+    auto person = [](std::string_view code, std::string_view sem, std::string_view gram) {
+        return code.starts_with('1') && (Has(sem, "VHn") || Has(sem, "QPN")) && !Has(gram, "Tu");
+    };
+    for (const Entry* e : before->group->entries) {
+        if (person(e->code, e->attr, e->gattr)) return true;
+    }
+    for (const Record* r = before->group->records; r != nullptr; r = r->child) {
+        if (r->source == before->group->surface && person(From(r->partCode, 1), r->semantic, r->attr)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
+// Text path: a suffix of honorific.after-person (たん, っち) at full[cursor:] is a word only
+// after a name or a noun of persons (先生たん, 小林っち) and when no longer dictionary word
+// starts at that noun and goes past it (たまご + っち of たまごっち); elsewhere its records
+// leave the candidates, so that the longer word or the kana around it are read instead.
+Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
+    bool suffix = false;
+    for (const Record* r = records; r != nullptr && !suffix; r = r->child) {
+        suffix = dict::InClass("honorific.after-person", r->source);
+    }
+    if (!suffix) return records;
+    const Item* before = WordBefore(cursor, token, parent);
+    bool covered = false;
+    if (before != nullptr && before->tokenIndex == token && before->start < cursor) {
+        for (const dict::Candidate& c : snapshot.GetWordInfo(From(full, before->start), dict::LookupMode::General, {}).list) {
+            covered = covered || static_cast<int>(c.source.size()) > cursor - before->start;
+        }
+    }
+    Record* out = nullptr;
+    Record** tail = &out;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!dict::InClass("honorific.after-person", r->source) || (!covered && SuffixHost(before))) {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = next;
+    }
+    return out;
+}
+
+namespace {
+
 // The lengths in characters of the keys of tag letter tag that start text in mode, as
 // a bit set (lengths of 63 or more share the top bit).
 uint64_t KeyLengths(const dict::Snapshot& snapshot, std::string_view text, dict::LookupMode mode, char tag) {
@@ -427,6 +482,54 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
     *nounTail = rest;
     if (owned == nullptr) return nouns;
     owned->child = nouns;
+    return records;
+}
+
+// Text path: the verb records of records move ahead of a longer record that is no verb but
+// spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
+// 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
+// Plain-dictionary records stay in front.
+Record* VerbBeforePolite(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 1) == '4' || !text.starts_with(first->source)) return records;
+    bool polite = false;
+    for (const std::string_view m : dict::ClassMembers("follower.polite-masu")) {
+        polite = polite || text.substr(first->source.size()).starts_with(m);
+    }
+    if (!polite) return records;
+    bool spelled = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > first->source.size()) return records;
+        if (At(r->partCode, 1) != '4' || r->partCode.size() != 4 || !first->source.starts_with(r->source)) continue;
+        const std::string_view form = first->source.substr(r->source.size());
+        const int kind = r->partCode[3] - '0';
+        spelled = spelled || (!form.empty() && (form == Conjugation(kind, 10) || form == Conjugation(kind, 4)));
+    }
+    if (!spelled) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '4') {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
     return records;
 }
 
@@ -1234,6 +1337,10 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     } else {
         found = DoLookup(text, kModeGeneral);
     }
+    if (found.count != 0 && settings.text) {
+        found.records = DropStraySuffixes(found.records, full, cursor, token, parent);
+        if (found.records == nullptr) found.count = 0;
+    }
     if (found.count != 0) return ProcessCandidateRecord(full, cursor, token, found.records, parent);
     std::string_view surface = FirstChar(text);
     const bool emptyTarget = FindHonorificPrefix(surface) != -1;
@@ -1317,6 +1424,7 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
+    if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
@@ -1430,15 +1538,19 @@ bool Worker::StartsWithHonorific(std::string_view text) {
     return std::any_of(std::begin(kHonorifics), std::end(kHonorifics), [&](const Honorific& h) { return text.starts_with(h.jp); });
 }
 
-Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
-    Item* name = parent;
-    if (const Item* tail = chain.tail; name == nullptr && tail != nullptr) {
-        if ((tail->tokenIndex == token && tail->start + tail->length == cursor) ||
-            (cursor == 0 && tail->tokenIndex == token - 1 &&
-             tokens[static_cast<std::size_t>(tail->tokenIndex)].type == tokenizer::kTypeProtected)) {
-            name = chain.tail;
-        }
+Item* Worker::WordBefore(int cursor, int token, Item* parent) const {
+    if (parent != nullptr) return parent;
+    Item* tail = chain.tail;
+    if (tail != nullptr && ((tail->tokenIndex == token && tail->start + tail->length == cursor) ||
+                            (cursor == 0 && tail->tokenIndex == token - 1 &&
+                             tokens[static_cast<std::size_t>(tail->tokenIndex)].type == tokenizer::kTypeProtected))) {
+        return tail;
     }
+    return nullptr;
+}
+
+Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
+    Item* name = WordBefore(cursor, token, parent);
     if (name == nullptr) return nullptr;
     const std::string_view text = From(full, cursor);
     // The nickname すけ also follows a person name of the base dictionary (里奈すけ).

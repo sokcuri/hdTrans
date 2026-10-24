@@ -1,0 +1,62 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:w:28515	そうだとしたらあたしが萌えるよね	그렇다고 하면 내가 설레지	fix	defaults
+dict:w:28515	先輩に萌えればいいのか、	선배에게 설레면 좋은 건지,	fix	defaults
+dict:w:28515	何それ庇って怪我とかわたしも萌えます	그게 뭐야 감싸 상처라든지 저도 설렙니다	fix	defaults
+dict:w:28584	若葉が萌える季節になった	새잎이 싹트는 계절이 되었다	fix	local
+dict:w:28586	先輩萌えに完全同意	선배 모에에 완전 동의	fix	defaults
+dict:w:28516	さらに秘部をまさぐり続けると	더욱 비부를 계속 더듬는다고	fix	defaults
+dict:w:28516	スーツの胸ポケットをまさぐってスマートフォンを取り出し	슈트의 가슴 포켓을 더듬어 스마트폰을 꺼내	fix	defaults
+dict:w:28560	服なんざ脱いで、泳ぎに行こうぜ！	옷 따위 벗어, 헤엄치러 가자구!	fix	defaults
+dict:w:28560	俺たちの手におえないものなんざ沢山いる	우리의 겨운 것 따위 많이 있다	fix	defaults
+dict:w:28549	ひぐらしの声がゆっくりと空気を冷やして行く。	쓰르라미의 목소리가 천천히 공기를 차게 해 간다.	fix	defaults
+dict:w:28561	その徹底っぷりは	그 철저함은	fix	defaults
+dict:w:28585	お袋は俺の見事な食いっぷりを見ながら	어머니는 내 훌륭한 먹는 모습을 보면서	fix	defaults
+dict:w:28550	この土まみれの作業着にほっかむりで	이 흙투성이의 작업복에 머릿수건으로	fix	defaults
+dict:w:28568	王子様恐るべし……	왕자님 대단하다……	fix	defaults
+dict:w:28553	うっそまじ？神様が憑いてるん？	거짓말 진심? 신이 빙의해?	fix	defaults
+dict:w:28540	あいつ……どこに隱れたんだろう。	저 녀석……어디에 숨었을까.	fix	defaults
+dict:w:28517	砕いたパンの粉をまぶして油で揚げた料理。	부순 빵의 가루를 묻혀 기름에 튀긴 요리.	fix	defaults
+dict:w:28552	こんな荒々しい口調のおにゃのこがいたら	이런 대강 강요하고 어조의 여자애가 있으면	fix	defaults
+dict:w:28562	「さて、いっちょやるか」	「자, 한번 할까」	fix	defaults
+dict:w:28563	ええぃ、もういっちょ！	에잇, 한 번 더!	fix	defaults
+dict:w:28578	痛たた……。	아야야…….	fix	defaults
+dict:w:28576	あけおめことよろ！	새해 복 많이 받아 올해도 잘 부탁해!	fix	defaults
+dict:w:28520	目をしばたかせながら	눈을 깜빡이면서	fix	defaults
+dict:w:28521	乳幼児のころに身罷った	영유아의 무렵에 세상을 떠났다	fix	defaults
+dict:w:28523	それを見て彼が訝しむ。	그것을 보고 그가 의아해한다.	fix	defaults
+dict:w:28524	下女たちはいぶかしみながら	하녀들은 의아해하면서	fix	defaults
+dict:w:28525	暗闇にマズルフラッシュが爆ぜる。	어둠에 총구 섬광이 터진다.	fix	defaults
+dict:w:28564	ようやっと貯めた金が	드디어 모은 돈이	fix	defaults
+dict:w:28543	とかく政治というものはまどろっこしい。	대체로 정치라는 것은 답답하다.	fix	defaults
+dict:w:28526	淫らに舌をくねらせている。	추잡하게 혀를 비틀고 있다.	fix	defaults
+dict:w:28528	「おばちゃんが、しらばっくれたらどうするんですか？」	「아줌마가, 시치미를 떼면 어떻게 합니까?」	fix	defaults
+dict:w:28529	濡れそぼった	흠뻑 젖었다	fix	defaults
+dict:w:28530	と声を荒げた。	라고 목소리를 높였다.	fix	defaults
+dict:w:28539	戦争をして、そして敗けました。	전쟁을 하고, 그리고 졌습니다.	fix	defaults
+dict:w:28542	よし、往くぞ！	좋아, 가겠어!	fix	defaults
+dict:w:28565	その美少女が誰なのかついぞ知ることは出来なかった。	그 미소녀가 누구인가 끝내 알 수 없었다.	fix	defaults
+dict:w:28583	その通り、恥ずべき行いだと存じますわ。	그대로, 부끄러운 행동이라고 알아요.	fix	defaults
+dict:w:28532	蛇口をひねり、口をゆすぐ。	수도꼭지를 비틀고, 입을 헹군다.	fix	defaults
+dict:w:28537	どんな被害をこうむるか分からない。	어떤 피해를 입는지 모른다.	fix	defaults
+dict:w:28538	キャンディのスティックを摘まむ。	캔디의 스틱을 집는다.	fix	defaults
+dict:w:28587	野菜たっぷりです！	야채 듬뿍입니다!	fix	defaults
+lookup:missing-words	いくらあのねちっこい日中の屈辱	아무리 그 끈질긴 낮의 굴욕	keep	lookup
+lookup:missing-words	光がまぶしい	빛이 눈부시다	keep	lookup
+lookup:missing-words	こうむいんになった	공무원이 되었다	keep	lookup
+lookup:missing-words	うっそうとした森	울창한 숲	keep	lookup
+lookup:missing-words	時間はたっぷりある	시간은 듬뿍 있다	keep	lookup
+lookup:missing-words	見事な食べっぷり	훌륭한 먹는 모습	keep	lookup
+lookup:missing-words	体をゆすって起こした	몸을 흔들어 일으켰다	keep	lookup
+dict:w:28586	くやしいが先輩萌えは同意するわ	분하지만 선배 모에는 동의해	fix	lookup
+dict:w:28586	２次はもちろん激萌えだった	2차는 물론 격모에였다	fix	lookup
+dict:w:28589	東宮が身まかられたという話	동궁이 돌아가셨다고 하는 이야기	fix	defaults
+dict:w:28589	乳幼児のころに身まかられている	영유아의 무렵에 돌아가셨다	fix	defaults
+dict:w:28591	『恋は人を愚かにすると言うけれど、とんだ道化っぷりね。	『사랑은 사람을 어리석게 한다고 하지만, 터무니 없는 광대 짓이네.	fix	defaults
+dict:w:28561	ほどの徹底っぷりだった。	정도의 철저함이었다.	fix	defaults
+dict:w:28564	少しして局員が戻ってきたので、ようやっと俺も尋問室から解放される。	조금 해 국원이 돌아왔으므로, 드디어 나도 심문실에서 해방된다.	fix	defaults
+dict:w:28597	草が萌え鳥が鳴く春からは	풀이 싹트고 새가 우는 봄부터는	fix	local
+dict:w:28515	姐さんに萌えればいいのか	누님에 설레면 좋은 건가	fix	defaults
+dict:w:28594	382『うるせえぶっ×してやる!!』	382 『시끄러워 확×해 줄게!!』	fix	defaults
+dict:w:28594	うるせえぶっ殺すぞ	시끄러워 확 죽이겠어	fix	defaults
+lookup:missing-words	うるせえ！	시끄러!	keep	sound

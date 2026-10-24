@@ -507,7 +507,15 @@ std::string WriteLengthening(std::string_view s) {
     static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
     std::u32string out;
     for (const char32_t r : rs) {
-        if (r == kDrawnMark) {
+        if (const auto last = out.size() >= 2 && out.back() == U'~' ? text::Split(out[out.size() - 2]) : std::nullopt;
+            r == kDrawnMark && last) {
+            // After a lengthening the drawn syllable goes after the ~ when the syllable before has a final
+            // consonant (짱~ 짜~앙, 군~ 구~운), and right after it without the ~ when it has none (씨~ 씨이).
+            out.pop_back();
+            out.back() = text::Join(last->initial, last->vowel, 0);
+            if (last->final != 0) out.push_back(U'~');
+            out.push_back(text::Join(11, kLongVowel[last->vowel], last->final));
+        } else if (r == kDrawnMark) {
             if (out.empty() || out.back() < 0xAC00 || out.back() > 0xD7A3) continue;
             const int syllable = static_cast<int>(out.back() - 0xAC00), final = syllable % 28;
             out.back() -= static_cast<char32_t>(final);

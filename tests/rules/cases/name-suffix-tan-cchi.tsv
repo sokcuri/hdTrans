@@ -1,0 +1,39 @@
+# 규칙: LEX-30
+rule	input	expected	kind	layer
+lookup:suffix-after-person	田中っち、元気？	타나카치, 건강?	fix	lookup
+lookup:suffix-after-person	ねー田中っち、私も作ろっかな。	그런데-타나카치, 나도 만들까.	fix	lookup
+lookup:suffix-after-person	田中っちが笑うよ。	타나카치가 웃어.	fix	lookup
+lookup:suffix-after-person	小沢っちは元気？	오자와치는 건강?	fix	lookup
+lookup:suffix-after-person	もしかしてリサっちかな？	혹시 리사치일까?	fix	lookup
+lookup:suffix-after-person	佐藤っち、おはよ。	사토치, 안녕.	fix	lookup
+lookup:suffix-after-person	先輩、モモっち、お茶淹れました！	선배, 모모치, 차 끓였습니다!	fix	lookup
+lookup:suffix-after-person	先生たん「寝ちゃった」	선생님짱 「자버렸어」	fix	lookup
+lookup:suffix-after-person	姫たん「帰ろう」	공주짱 「돌아가자」	fix	lookup
+lookup:suffix-after-person	アリスたん「尊い！」	앨리스짱 「고귀하다!」	fix	lookup
+lookup:suffix-after-person	「お姉ちゃんたん、宿題を」	「언니짱, 숙제를」	fix	lookup
+lookup:suffix-after-person	「勇者たん、お弁当は」	「용사짱, 도시락은」	fix	lookup
+lookup:suffix-after-person	「メイドたん、デートに行こう」	「메이드짱, 데이트에 가자」	fix	lookup
+lookup:suffix-after-person	お兄ちゃんたん、魔法って好きなの？	형짱, 마법은 좋아해?	fix	lookup
+lookup:suffix-after-person	アリスたんはケーキが欲しい。	앨리스짱은 케이크를 갖고 싶다.	fix	lookup
+lookup:suffix-after-person	魔王たんの夢	마왕짱의 꿈	fix	lookup
+dict:w:28404	俺っちは獣人っすよ、兄貴！	나는 수인입니다, 형!	fix	defaults
+dict:w:28404	俺っちに任せてください。	나에게 맡겨 주세요.	fix	defaults
+dict:w:28404	俺っち達は無罪だ！	우리는 무죄다!	fix	defaults
+dict:w:28405	俺っちがやります。	내가 합니다.	fix	local
+lookup:suffix-after-person	たまごっちを買った	다마고치를 샀다	keep	lookup
+lookup:suffix-after-person	「はいはい、うんたんうんたん」	「네네, 운탄운탄」	keep	lookup
+lookup:suffix-after-person	見たとたん、走り出した。	보자마자, 달리기 시작했다.	keep	lookup
+lookup:suffix-after-person	いったん戻ろう。	일단 돌아오자.	keep	lookup
+lookup:suffix-after-person	こっちは任せて。	여기는 맡겨.	keep	lookup
+lookup:suffix-after-person	「どっちがいい？」	「어느 쪽이 좋아?」	keep	lookup
+lookup:suffix-after-person	一人ぼっちだ。	외톨이다.	keep	lookup
+lookup:suffix-after-person	田中さん、部隊は	타나카 씨, 부대는	keep	lookup
+dict:w:28404	俺は獣人だ。	나는 수인이다.	keep	local
+dict:w:28405	俺が行く。	내가 간다.	keep	local
+lookup:suffix-after-person	警察署で会ったんだけど	경찰서에서 만났는데	keep	lookup
+lookup:suffix-after-person	「こっちだよ」	「여기야」	keep	lookup
+dict:w:28600	田中ちゃん！	타나카짱!	fix	local
+dict:w:28600	美雪ちゃん	미유키짱	fix	local
+dict:w:28600	美雪ちゃ～ん、食べて直ぐ寝ると	미유키짜~앙, 먹고 곧 잔다고	fix	local
+dict:w:28600	姉ちゃん、待って。	누나, 기다려.	keep	local
+dict:w:28600	魔王ちゃんの本だ。	마왕의 책이다.	keep	local

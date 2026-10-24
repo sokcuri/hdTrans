@@ -137,6 +137,10 @@ private:
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);
+    // The word that ends where the word at cursor starts: parent, or the last word of the chain
+    // when it ends there in the token or is a protected token right before it; else null.
+    Item* WordBefore(int cursor, int token, Item* parent) const;
+    Record* DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent);
 
     // Lookup filters.
     bool Skip(const dict::UserEntry& u, std::string_view query) const;
@@ -182,6 +186,16 @@ bool NounEndAt(std::string_view text);
 // also the key of a verb, whose continuative it then spells (楽し of 楽しむ: 楽しみ), or stem and
 // nominal are the key of a noun (高み, 甘み).
 bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal);
+
+// The ichidan branch of いる without its い that starts rest, the text after a て form: the
+// longest of る, れば, よう, た, て, ろ and ちゃ (見てる, 見てた, 見てて, 見てろ); -1 for none.
+int ContractedIruBranch(std::string_view rest);
+
+// The enabled endings of g, read on a form of an auxiliary after a て form, rewritten for the
+// verb before it: head is the Korean of the auxiliary ending in its marker family (1고 &HN@), and
+// the ending's class digit picks the form of that family (5지만 → 1고 있었지만). An ending whose
+// class has no such form is disabled; false when none is left.
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head);
 
 // Whether a verb record of conjugation class sub may join a group whose first record
 // has class first, for conjugation branch mode.

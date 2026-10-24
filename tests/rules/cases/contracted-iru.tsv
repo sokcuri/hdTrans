@@ -1,0 +1,47 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+lookup:contracted-iru	「別に。おれは、ただ見てただけだ。」	「별로. 나는, 다만 보고 있었을 뿐이야.」	fix	lookup
+lookup:contracted-iru	分からない俺は道を歩いてただけだ	모르는 나는 길을 걷고 있었을 뿐이다	fix	lookup
+lookup:contracted-iru	覚悟はしてたが罪悪感で胸が締め付けられるからやめろ！	각오는 하고 있었지만 죄책감으로 가슴이 단단히 조여지기 때문 그만두어라!	fix	lookup
+lookup:contracted-iru	午前3時。今寝てたぞ	오전 3시. 지금 자고 있었어	fix	lookup
+lookup:contracted-iru	（小声）忘れてたぞ	(작은 소리) 잊고 있었어	fix	lookup
+lookup:contracted-iru	「あ、い、いや……油断してただけだから……」	「아, 아, 아니……방심하고 있었을 뿐이니까……」	fix	lookup
+lookup:contracted-iru	「私達は横で聞いてただけじゃない」	「저희들은 옆에서 듣고 있었을 뿐이 아니야」	fix	lookup
+lookup:contracted-iru	「んなバカな。裏は俺が抑えてたんだぞ？」	「응인 시시한. 뒤는 내가 억제하고 있던 거야?」	fix	lookup
+lookup:contracted-iru	そのウェブカメラとパソコンでこっちの様子を窺って操作してたんだろ	그 웹캠과 PC로 여기의 모습을 살피어 조작하고 있던 거지	fix	lookup
+lookup:contracted-iru	アンドレイが呼んでたぞ	안드레이가 부르고 있었어	fix	lookup
+lookup:contracted-iru	待ってたぜレナ！！	기다리고 있었다구 레나!!	fix	lookup
+lookup:contracted-iru	「……見てたんですね」	「……보고 있었군요」	fix	lookup
+lookup:contracted-iru	「芹沢さん、けっこう応援してくれてたんですね」	「세리자와 씨, 꽤 응원해 주고 있었군요」	fix	lookup
+lookup:contracted-iru	「……たぶん、みんなの合流地点が攻撃を受けてたんだと思う」	「……아마, 모두의 합류 지점이 공격을 받고 있던 거라고 생각한다」	fix	lookup
+lookup:contracted-iru	「あぁ、もちろん行ったよ……まぁ想像はしてたが、すごい現場だったな」	「아아, 물론 갔어……뭐 상상은 하고 있었지만, 대단한 현장이었네」	fix	lookup
+lookup:contracted-iru	「勘弁してくれっ！！　これまでずっと妹か、それこそ娘のように思って接してきてたんだぞ！？」	「봐줘!! 지금까지 계속 여동생인가, 그야말로 딸처럼 생각해 접해 오고 있던 거야!?」	fix	lookup
+lookup:contracted-iru	「でも……俺だけを見てたわけじゃないよな？」	「하지만……나만을 보고 있던 게 아니지?」	fix	lookup
+lookup:contracted-iru	「べ、べつに、ケンカしてたわけじゃないし……」	「따, 딱히, 싸움하고 있던 게 아니고……」	fix	lookup
+lookup:contracted-iru	見てた。	보았다.	keep	lookup
+lookup:contracted-iru	見てたの？	봤어?	keep	lookup
+lookup:contracted-iru	見てるだけだ。	보고 있을 뿐이다.	keep	lookup
+lookup:contracted-iru	見ていたが、何も言わなかった。	보고 있었지만, 아무것도 말하지 않았다.	keep	lookup
+lookup:contracted-iru	ゴミを捨てたが、まだ臭う。	쓰레기를 버렸지만, 아직 냄새난다.	keep	lookup
+lookup:contracted-iru	子供を育てたぞ。	아이를 길렀어.	keep	lookup
+lookup:contracted-iru	答えを当てたけど	대답을 맞혔지만	keep	lookup
+lookup:contracted-iru	待ってろ。	기다려라.	keep	lookup
+lookup:contracted-iru	「ちゃんと寝ててね、マイン」	「제대로 자고 있어, 마인」	keep	lookup
+lookup:contracted-iru	思ってたよりは元気だったよ。	생각했던 것보다는 건강했어.	fix	lookup
+lookup:contracted-iru	「ふぇ？魔王ちゃん、デートを言ってたじゃんにゃ★」	「후에? 마왕, 데이트를 말했잖아냥★」	fix	lookup
+lookup:contracted-iru	翔太ちゃん「ガチ、放課後とか言ってたじゃんにゃ」	쇼타짱 「진짜, 방과 후라든가 말했잖아냥」	fix	lookup
+lookup:contracted-iru	「ガチ！宿題とか言ってたじゃんぞ」	「진짜! 숙제라든가 말했잖아」	fix	lookup
+lookup:contracted-iru	（心の声）言ってたじゃんぞ	(마음의 소리) 말했잖아	fix	lookup
+lookup:contracted-iru	「べ、別にお兄ちゃん、魔法に忘れてたさ☆」	「벼, 별로 형, 마법에 잊고 있었어☆」	fix	lookup
+lookup:contracted-iru	「むーメイドくん、デートが忘れてたのだーー」	「-메이드 군, 데이트가 잊고 있었던 거다~」	fix	lookup
+lookup:contracted-iru	お姉ちゃんさん「推し！放課後って忘れてたのだ」	언니 씨 「최애! 방과 후는 잊고 있었던 거다」	fix	lookup
+lookup:contracted-iru	ユウキ「マジで、宿題とか忘れてたのだ」	유우키 「진짜로, 숙제라든지 잊고 있었던 거다」	fix	lookup
+lookup:contracted-iru	あ！後ろから見てたの？スマホとかで遊んでたんじゃないからね。	아! 뒤에서 봤어? 스마트폰등으로 놀고 있었던 게 아니니까.	fix	lookup
+lookup:contracted-iru	「……なにか、俺たちに用があって、待ってたんじゃないのか？」	「……뭔가, 우리에게 용무가 있어, 기다리고 있었던 게 아닌 건가?」	fix	lookup
+lookup:contracted-iru	遊んだんじゃないからね。	논 게 아니니까.	fix	lookup
+lookup:contracted-iru	言ったじゃんぞ	말했잖아	fix	lookup
+lookup:contracted-iru	言ってたじゃん	말했잖아	keep	lookup
+lookup:contracted-iru	大学に買い食いしながら通ったりしてたんだよねｗ	대학에 군것질하면서 다니거나 하고 있었지 ㅋ	fix	lookup
+lookup:contracted-iru	ずっと見てたんだよな	계속 보고 있었지	fix	lookup
+lookup:contracted-iru	毎日練習してたんだよね。	매일 연습하고 있었지.	fix	lookup
+lookup:contracted-iru	捨てたんだよね	버렸어	keep	lookup

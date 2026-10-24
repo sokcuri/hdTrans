@@ -366,7 +366,10 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
                 if (f != nullptr && (i == 0 || Follows(h[i - 1], f->after))) {
                     relax(2 * j, s, c + kCostFunc[std::clamp(m, 1, 2) - 1], PieceKind::Func, "");
                 }
-                const std::string tags = KeyTags(word, ctx, snap);
+                // An ending that starts with a kana of kana.ending-start-only (っしゅ, っしょ) is no
+                // piece of the run: after a word it would cut a katakana word whose ッ is part of
+                // it (トリッシュ).
+                const std::string tags = KeyTags(word, ctx, snap, !dict::InClass("kana.ending-start-only", Utf8(w.substr(0, 1))));
                 if (m == 1) {
                     // A one-mora verb stem is a piece with its conjugation.
                     if (j < n && HasTag(tags, "M") && RuneIn(h[j], kConjKana) && plain(i, j + 1)) {
@@ -1299,12 +1302,14 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
     return out;
 }
 
-std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows) {
     std::string tags;
     for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
         if (c.codes != nullptr && !c.codes->part.Empty()) tags += c.codes->part.Tag();
     }
-    ForUserEntries(s, ctx, [&](const dict::UserEntry& e) { tags += e.Part().Tag(); });
+    ForUserEntries(s, ctx, [&](const dict::UserEntry& e) {
+        if (endRows || !e.end) tags += e.Part().Tag();
+    });
     return tags;
 }
 
