@@ -406,7 +406,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `큰일$AH@`), `mitai-like`(절 뒤에 올 수 있는 みたい), `contrast`(어간 뒤가 い나 かった, 쉼표, 대조의 조사
   `particle.contrast`: ではないが), `quote-end`(뒤가 글 끝, 닫는 부호 ！？。」』）나 구간 경계), `utterance-end`(뒤가 글 끝이거나
   말줄임, 닫는 따옴표, 쉼표, ー, っ 같은 것뿐임),
-  `sentence-end`(`utterance-end`이거나 뒤에 ！？!?가 옴), `predicate-follows`(문장에서 뒤에 동사가 옴, て형의 보조 동사는 아님),
+  `sentence-end`(`utterance-end`이거나 뒤에 ！？!?가 옴), `speech-goes-on`(말줄임과 공백을 건너 같은 문장에, 또는 대사 안의 ！？ 뒤 다음 문장에 닫는 부호가 아닌 글이 더 옴: ……そうだ、ほら, 「……そうだ！　ねえ」), `predicate-follows`(문장에서 뒤에 동사가 옴, て형의 보조 동사는 아님),
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),

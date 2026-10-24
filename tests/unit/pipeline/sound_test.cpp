@@ -361,6 +361,11 @@ HD_TEST(pipeline_sound) {
         // A sound after a hiragana word: a mimetic in と or doubled, not grammar going on.
         {"ただぼーっと道", "ただ멍하니 道"},
         {"わからなくたって", "わからなくたって"},
+        // A particle after the reading of brace ruby goes with its base (声がして); a sound after
+        // it, or a doubled sound that starts with it, stays one.
+        {"{rb}声{/rb}{rt}こえ{/rt}がして", "{rb}声{/rb}{rt}こえ{/rt}がして"},
+        {"{rb}彼{/rb}{rt}かれ{/rt}はドキドキ", "{rb}彼{/rb}{rt}かれ{/rt}は두근두근"},
+        {"{rb}彼{/rb}{rt}かれ{/rt}がしがしと", "{rb}彼{/rb}{rt}かれ{/rt}벅벅"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},

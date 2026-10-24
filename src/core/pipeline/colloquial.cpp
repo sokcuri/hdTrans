@@ -136,16 +136,17 @@ public:
 
     // A dictionary key of two or more characters, or with a kanji, that ends at
     // character at of rs and starts at or after from, and no key of the sound lexicon
-    // that does (どしゃ). An ending of the contracted しまう (うよ of 食べちゃうよ) ends a word
-    // only after the ゃ or ま of its contraction (not 歌うよ).
+    // that does (どしゃ). An ending that starts with the dictionary ending of しまう (うよ of
+    // 食べちゃうよ) ends a word only after a contraction of stem.contracted-shimau (not 歌うよ).
     bool WordEnds(std::u32string_view rs, size_t from, size_t at) const {
+        const std::string_view shimauEnd = word::Conjugation(word::kKindWa, 0);
         bool word = false;
         for (size_t j = from; j < at; j++) {
             if (LexiconKey(ToKatakana(rs.substr(j, at - j)), ctx_.extraBuiltin)) return false;
             if (at - j < 2 && !IsKanjiRune(rs[j])) continue;
             const std::string tags = Tags(rs.substr(j, at - j));
-            const bool contracted = tags.find_first_not_of('S') == std::string::npos && rs[j] == U'う';
-            word = word || (!tags.empty() && (!contracted || (j > 0 && In(rs[j - 1], U"ゃま"))));
+            const bool contracted = tags.find_first_not_of('S') == std::string::npos && EncodeText(rs.substr(j, 1)) == shimauEnd;
+            word = word || (!tags.empty() && (!contracted || (j >= 2 && dict::InClass("stem.contracted-shimau", EncodeText(rs.substr(j - 2, 2))))));
         }
         return word;
     }
