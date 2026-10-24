@@ -1457,3 +1457,5 @@
 おかしい	웃기다	class:ko-sound.laugh	sentence	adj
 つける	향상시키다	sem:UPc@を	before	v1
 付ける	향상시키다	sem:UPc@を	before	v1
+// 解放 of memory, a resource or a lock is 해제.
+解放	해제	メモリ,メモリー,リソース,ロック,ハンドル,バッファ,バッファー,オブジェクト,インスタンス,領域,キャッシュ,ポインタ,ポインター,セマフォ,ミューテックス,ファイルハンドル,コネクション,ソケット	before	n

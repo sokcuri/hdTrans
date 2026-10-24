@@ -410,7 +410,8 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
-  `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴).
+  `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
+  `prompt-after`(단어 뒤의 글이 공백 다음에 `mark.prompt-follow`의 말로 시작하거나 `mark.prompt-answer`의 답을 담음: 화면에 띄운 물음 뒤의 と, 》, はい, やめる).
   표에 없는 판정이 필요하면 `constructions.cpp`의 `kFeatures`에 이름과 함께 더합니다.
 - 구문 표에서만 쓰는 묶음: `!1 E`는 E가 거짓이면 참. `<N 목표 막이`와 `>N 목표 막이`는 왼쪽(오른쪽)으로 N 단어까지
   (`0`은 사슬 끝까지) 가까운 것부터 보며, 그 단어에서 `목표`가 참이면 참, `막이`가 참이면 거짓입니다. 한 단어에서는

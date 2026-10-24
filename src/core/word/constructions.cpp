@@ -310,6 +310,33 @@ constexpr NamedFeature kFeatures[] = {
          if (rest.empty()) rest = it->detail->nextText;
          return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
      }},
+    // An exclamation mark of mark.exclaim is one of the two characters after the word
+    // (待ち伏せますか！, ますか？！, ますかっ！).
+    {"exclaim-after",
+     [](Flusher&, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         if (rest.empty()) rest = it->detail->nextText;
+         for (int n = 0; n < 2 && !rest.empty(); n++) {
+             const std::size_t size = text::DecodeRune(rest).size;
+             if (size == 0) break;
+             if (dict::InClass("mark.exclaim", rest.substr(0, size))) return true;
+             rest.remove_prefix(size);
+         }
+         return false;
+     }},
+    // The text after the word, past white space, starts with one of mark.prompt-follow, which shows
+    // a question as a prompt on screen: a quoting と, a closing 》 or the answers (開始しますか？という,
+    // はい／いいえ, （はい／いいえ）), or holds one of the answers of mark.prompt-answer (乗るやめる).
+    {"prompt-after",
+     [](Flusher&, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         if (rest.empty()) rest = it->detail->nextText;
+         rest = TrimSpace(rest);
+         return std::ranges::any_of(dict::ClassMembers("mark.prompt-follow"),
+                                    [&](std::string_view m) { return rest.starts_with(m); }) ||
+                std::ranges::any_of(dict::ClassMembers("mark.prompt-answer"),
+                                    [&](std::string_view m) { return rest.find(m) != std::string_view::npos; });
+     }},
 };
 
 struct FieldSpelling {

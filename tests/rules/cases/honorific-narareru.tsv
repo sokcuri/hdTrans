@@ -5,6 +5,6 @@ dict:jisjk:374698	御味方が、御目見得になられたようです。	아�
 dict:jisjk:374698	東宮時代に一人、皇帝になられてから二人	!rule:dict:jisjk:374698	keep	local
 dict:jisjk:342433	アルベルト王子が国王様になられる可能性だってあります。	알베르트 왕자가 국왕님이 되실 가능성이라도 있습니다.	fix	local
 dict:jisjk:120069	ニュースはご覧になられましたか？	뉴스는 보셨습니까?	fix	lookup
-rewrite:respectful-passive	私の飛行甲板で少しお休みになられますか？	제 비행갑판으로 조금 쉬십니까?	fix	rewrites
+rewrite:respectful-passive	私の飛行甲板で少しお休みになられますか？	제 비행갑판으로 조금 쉬시겠습니까?	fix	rewrites
 rewrite:respectful-passive	ほんの少しだけ、お休みになられていて…	아주 조금만, 쉬시고 있어…	fix	rewrites
 rewrite:respectful-passive	同性をお慕いになられていると	동성을 따르시고 있다고	keep	rewrites

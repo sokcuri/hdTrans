@@ -1,0 +1,33 @@
+# 규칙: SPC-11
+rule	input	expected	kind	layer
+phrase:いつもお世話になっております	いつもお世話になっております。	항상 신세 지고 있습니다.	fix	lookup
+phrase:お世話になっております	お世話になっております。株式会社山田の田中です。	항상 신세 지고 있습니다. 주식회사 야마다의 타나카입니다.	keep	lookup
+phrase:お時間をいただき	本日はお時間をいただき、ありがとうございました。	오늘은 시간을 내주셔서, 감사합니다.	fix	lookup
+phrase:お時間をいただき	貴重なお時間をいただきありがとうございます。	귀중한 시간을 내주셔서 감사합니다.	fix	lookup
+phrase:お時間をいただけますでしょうか	少しお時間をいただけますでしょうか。	조금 시간을 내주실 수 있을까요.	fix	lookup
+phrase:ご不明な点	ご不明な点がございましたら、お気軽にお問い合わせください。	궁금한 점이 있으면, 부담없이 문의해 주세요.	fix	lookup
+phrase:ご不明な点	ご不明な点があればご連絡ください。	궁금한 점이 있으면 연락해 주십시오.	fix	lookup
+phrase:ご不明な点	不明な点が多い。	불명한 점이 많다.	keep	lookup
+phrase:恐れ入りますが	恐れ入りますが、少々お待ちください。	죄송합니다만, 조금 기다려 주세요.	fix	lookup
+phrase:お手数をおかけしますが	お手数をおかけしますが、よろしくお願いします。	번거로우시겠지만, 잘 부탁드립니다.	fix	lookup
+phrase:お手数ですが	お手数ですが、ご返信ください。	번거로우시겠지만, 답장해 주십시오.	fix	lookup
+phrase:取り急ぎご連絡まで	取り急ぎご連絡まで。	우선 연락드립니다.	fix	lookup
+phrase:取り急ぎお礼まで	取り急ぎお礼まで。	우선 감사 인사드립니다.	fix	lookup
+phrase:何卒よろしくお願い申し上げます	何卒よろしくお願い申し上げます。	부디 잘 부탁드립니다.	fix	lookup
+phrase:よろしくお願いいたします	引き続きよろしくお願いいたします。	계속 잘 부탁드립니다.	keep	lookup
+phrase:お任せください	お任せください！	맡겨 주세요!	fix	lookup
+phrase:お任せください	提督、この私にお任せ下さい。	제독, 이 저에게 맡겨 주세요.	fix	lookup
+phrase:お任せを	私にお任せを！	나에게 맡겨 주세요!	fix	lookup
+phrase:お任せ	お任せ！	맡겨라!	keep	lookup
+phrase:お持ちでいらっしゃる	相当なコネをお持ちでいらっしゃる。	상당한 커넥션을 가지고 계신다.	fix	lookup
+phrase:お待ちでいらっしゃる	お客様がお待ちでいらっしゃいます。	손님이 기다리고 계십니다.	fix	lookup
+pattern:学生でいらっしゃいますか	田中様でいらっしゃいますか？	타나카님이십니까?	fix	builtin-pattern
+pattern:学生でいらっしゃいますね	奥様でいらっしゃいますね。	사모님이시군요.	fix	builtin-pattern
+pattern:静かでいらっしゃいますか	先生はお元気でいらっしゃいますか？	선생님은 건강하십니까?	fix	builtin-pattern
+pattern:静かでいらっしゃる	ご立派でいらっしゃる。	훌륭하시다.	fix	builtin-pattern
+pattern:学生でいらっしゃいます	あの方は社長でいらっしゃいます。	그 분은 사장이십니다.	keep	builtin-pattern
+lookup:お見えにな	社長がお見えになりました。	사장이 오셨습니다.	fix	lookup
+lookup:お越しにな	先生がお越しになりました。	선생님이 오셨습니다.	fix	lookup
+lookup:お話しにな	先生がお話しになる。	선생님이 이야기하신다.	fix	lookup
+lookup:おかけにな	先生がおかけになりました。	선생님이 앉으셨습니다.	fix	lookup
+lookup:お読みにな	お読みになりましたか？	읽으셨습니까?	keep	lookup
