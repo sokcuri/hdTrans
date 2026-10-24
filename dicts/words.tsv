@@ -14805,7 +14805,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奴ら	놈들	N120	VHn		GN				llm		やつら	w:14797
 奴等	놈들	N120	VHn		GN				llm		やつら	w:14798
 奴隷船	노예선	N110			GN						どれいせん	w:14799
-好き	좋아해	N110	UFl		GN	4455	||1 P-1== "1**"	명사 뒤의 好き에 대해 words.tsv에 있는 '좋아해' 후보를 고른다.			すき	w:14800
+好き	좋아해	N110	UFl		GN	4455	||1 &&3 P-1== "1**" S-1!= "R好き" S-1!= "Rすき"	명사 뒤의 好き에 대해 words.tsv에 있는 '좋아해' 후보를 고르되, 앞 명사가 되풀이한 好き이면 고르지 않는다.			すき	w:14800
 好きずき	취향 차이	N110	UYi		GN				llm		すきずき	w:14801
 好さ	좋음	N110			GN						よさ	w:14802
 好もし	믿음직$AB@	H7U0			GN						このもしい	w:14803
