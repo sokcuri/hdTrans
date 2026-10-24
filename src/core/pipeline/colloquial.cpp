@@ -889,6 +889,24 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (std::any_of(spans.begin(), spans.end(), [&](const auto& sp) { return sp.first < i && sp.second > end; })) continue;
             size_t last = end + 1;
             while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
+            // After a greeting or an interjection that starts a word, a familiar tag: the phrase with
+            // the lengthening (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
+            if (dict::InClass("honorific.phrase-tag", EncodeText(h))) {
+                bool phrase = false;
+                for (size_t j = i; j > 0 && i - j < kMaxKeyRunes && !phrase && (IsHiraganaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1]));) {
+                    j--;
+                    if (j > 0 && (IsHiraganaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1]) || IsKatakanaRune(rs[j - 1]))) continue;
+                    const std::u32string_view p = std::u32string_view(rs).substr(j, i - j);
+                    const std::u32string key = ToKatakana(p);
+                    for (const SoundRow& s : SoundRows(key[0], ctx.extraBuiltin)) phrase = phrase || (s.phrase && s.intj && s.key == key);
+                    phrase = phrase || e.Tags(p).find('A') != std::string::npos;
+                }
+                if (phrase) {
+                    rs = Spliced(rs, i, std::u32string(1, kLengthenMark), last);
+                    changed = true;
+                    continue;
+                }
+            }
             // The honorific spelled plainly, and the longest dictionary word it starts there.
             std::u32string plain = Spliced(rs, i, h, last);
             const auto holdsNone = [&](std::string_view w) {

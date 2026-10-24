@@ -66,7 +66,7 @@ sound:drawn-honorific	ちゃーんと目で追ってたさ	제대로~ 눈으로 
 sound:drawn-honorific	ちゃ～んと果汁が入ってるんだから	제대로~ 과즙이 들어가 있으니까	keep	sound
 sound:drawn-honorific	「お待たせちゃーん」	「기다렸지~」	fix	sound
 sound:drawn-honorific	おまたせちゃ～ん♪	기다렸지~♪	fix	sound
-sound:drawn-honorific	お待たせちゃん！	기다렸지!	fix	sound
+sound:drawn-honorific	お待たせちゃん！	기다리게 하면!	current	sound
 sound:drawn-honorific	お待たせー	기다렸지~	keep	sound
 sound:drawn-honorific	「ゆるさーーーん！」	「용서하지 않아~!」	keep	sound
 sound:drawn-honorific	こどもがちゃーんと見てる	has:제대로~	keep	sound
@@ -74,3 +74,15 @@ sound:drawn-honorific	いもうとがちゃーんと起きた	has:제대로~	kee
 sound:drawn-honorific	おとうとがちゃーんとやった	has:제대로~	keep	sound
 sound:drawn-honorific	あにがちゃーんと言った	has:제대로~	keep	sound
 sound:drawn-honorific	ともがちゃーんと来た	has:제대로~	keep	sound
+sound:drawn-honorific	おはようちゃーん	좋은 아침~	fix	sound
+sound:drawn-honorific	ありがとちゃーん！	고마워~!	fix	sound
+sound:drawn-honorific	よろしくちゃーん	잘 부탁드립니다~	fix	sound
+sound:drawn-honorific	おやすみちゃーん	잘 자~	fix	sound
+sound:drawn-honorific	ただいまちゃーん	다녀왔어~	fix	sound
+sound:drawn-honorific	おつかれちゃーん	수고했어~	fix	sound
+sound:drawn-honorific	ごめんちゃーん	미아~안	current	sound
+sound:drawn-honorific	「お疲れちゃーんっ！」	「수고했어~!」	fix	sound
+phrases:greeting	作戦完了だよ！おつかれ！	작전 완료야! 수고했어!	fix	phrases
+phrases:greeting	おつかれぴょん！	수고했어뿅!	fix	phrases
+phrases:greeting	提督、おつかれ。明日もよろしくな！	has:수고했어	fix	phrases
+phrases:greeting	おつかれさま	수고했어	keep	phrases
