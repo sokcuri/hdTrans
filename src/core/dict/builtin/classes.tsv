@@ -69,7 +69,7 @@
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
-//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons (先生たん, 小林っち; not たまごっち, 顔合わせたんだ, 母たんこぶ).
+//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons or animals (先生たん, 小林っち, 猫たん; not たまごっち, 顔合わせたんだ, 母たんこぶ).
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
@@ -77,6 +77,7 @@
 //= honorific.drawn-out	Honorifics that a name may draw out before their final ん, with ー, ～ or the vowel of the kana before it (圭ちゃ～ん, 田中さぁあん, アルくぅん).
 //= honorific.drawn-after	Honorifics without a final ん that a speaker draws out after themselves before a pause (姫さまぁ 공주님~, 様ーっ), marked as the drawn honorifics are.
 //= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~).
+//= honorific.phrase-tag	Drawn-out honorifics that a greeting or an interjection takes as a familiar tag: the phrase keeps its reading and the drawl (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -1243,6 +1244,7 @@ honorific.drawn-out	くん
 honorific.drawn-after	さま
 honorific.drawn-after	様
 honorific.drawn-out-word	かいさん
+honorific.phrase-tag	ちゃん
 
 honorific.after-person	たん
 honorific.after-person	っち

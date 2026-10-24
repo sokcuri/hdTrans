@@ -32,3 +32,57 @@ sound:drawn-honorific	さまざまな人がいる	다양한 사람이 있다	kee
 sound:drawn-honorific	太郎くぅぅぅん！	타로 군~~!	fix	sound
 sound:drawn-honorific	太郎くぅぅぅぅん！	타로 구우우우운!	fix	sound
 sound:drawn-honorific	太郎くぅぅぅぅぅん！	타로 구우우우우운!	fix	sound
+sound:drawn-honorific	石がぽちゃーんと落ちた	돌이 퐁당~ 떨어졌다	fix	sound
+sound:drawn-honorific	水がばちゃーんと跳ねた	has:첨벙~	fix	sound
+sound:drawn-honorific	皿ががちゃーんと割れた	접시가 와장창 깨졌다	fix	sound
+sound:drawn-honorific	ドアをがちゃーんと閉めた	문을 와장창 닫았다	fix	sound
+sound:drawn-honorific	ぴちゃーんと水が落ちた	퐁당~ 물이 떨어졌다	fix	sound
+sound:drawn-honorific	コップがかちゃーんと鳴った	컵이 달그라앙 울렸다	fix	sound
+sound:drawn-honorific	石がぽちゃーん！	돌이 퐁당~!	fix	sound
+sound:drawn-honorific	ドアががちゃーん！	문이 와장창!	fix	sound
+sound:drawn-honorific	心臓がどくーんと跳ねた	심장이 두근~ 뛰었다	fix	sound
+sound:drawn-honorific	体がびくーんと跳ねた	몸이 움찔~ 뛰었다	fix	sound
+sound:drawn-honorific	唾をごくーんと飲んだ	침을 꿀꺽~ 삼켰다	fix	sound
+sound:drawn-honorific	背中がぞくーんとした	등이 오싹~했다	fix	sound
+sound:drawn-honorific	指がぴくーんと動いた	손가락이 움찔~ 움직였다	fix	sound
+sound:drawn-honorific	胸がとくーんと跳ねた	가슴이 두근~ 뛰었다	fix	sound
+sound:drawn-honorific	「がちゃーん」	「와장창」	keep	sound
+sound:drawn-honorific	石がぽちゃんと落ちた	돌이 퐁당 떨어졌다	keep	sound
+sound:drawn-honorific	皿ががちゃんと割れた	접시가 쨍그랑 깨졌다	keep	sound
+sound:drawn-honorific	私がちゃーんと手作りした	내가 제대로~ 직접 만들었다	keep	sound
+sound:drawn-honorific	アイドルは朝はちゃーんと食べないと	아이돌은 아침은 제대로~ 먹지 않으면	keep	sound
+sound:drawn-honorific	彼がちゃーんと見た	그가 제대로~ 보았다	keep	sound
+sound:drawn-honorific	みんながちゃーんと聞いた	모두가 제대로~ 들었다	keep	sound
+sound:drawn-honorific	それがちゃーんと動く	그것이 제대로~ 움직인다	keep	sound
+sound:drawn-honorific	で……ちゃあんと	그리고……제대로~	keep	sound
+sound:drawn-honorific	私がちゃんと見た	내가 제대로 보았다	keep	sound
+sound:drawn-honorific	「ゆかちゃ〜ん」	「유카짱~」	keep	sound
+sound:drawn-honorific	なあ田中ちゃーん	나아 타나카짱~	keep	sound
+sound:drawn-honorific	「あおくーん？」	「아오 군~?」	keep	sound
+sound:drawn-honorific	大丈夫だしぃ、ちゃ～んと出撃しますよ～♪	괜찮고, 제대로~ 출격해요~♪	fix	sound
+sound:drawn-honorific	ちゃーんと覚えてるんだから	제대로~ 기억하고 있으니까	keep	sound
+sound:drawn-honorific	お休みはちゃーんと取らないとー！	휴가는 제대로~ 취하지 않으면~!	keep	sound
+sound:drawn-honorific	ちゃーんと目で追ってたさ	제대로~ 눈으로 쫓고 있었어	keep	sound
+sound:drawn-honorific	ちゃ～んと果汁が入ってるんだから	제대로~ 과즙이 들어가 있으니까	keep	sound
+sound:drawn-honorific	「お待たせちゃーん」	「기다렸지~」	fix	sound
+sound:drawn-honorific	おまたせちゃ～ん♪	기다렸지~♪	fix	sound
+sound:drawn-honorific	お待たせちゃん！	기다리게 하면!	current	sound
+sound:drawn-honorific	お待たせー	기다렸지~	keep	sound
+sound:drawn-honorific	「ゆるさーーーん！」	「용서하지 않아~!」	keep	sound
+sound:drawn-honorific	こどもがちゃーんと見てる	has:제대로~	keep	sound
+sound:drawn-honorific	いもうとがちゃーんと起きた	has:제대로~	keep	sound
+sound:drawn-honorific	おとうとがちゃーんとやった	has:제대로~	keep	sound
+sound:drawn-honorific	あにがちゃーんと言った	has:제대로~	keep	sound
+sound:drawn-honorific	ともがちゃーんと来た	has:제대로~	keep	sound
+sound:drawn-honorific	おはようちゃーん	좋은 아침~	fix	sound
+sound:drawn-honorific	ありがとちゃーん！	고마워~!	fix	sound
+sound:drawn-honorific	よろしくちゃーん	잘 부탁드립니다~	fix	sound
+sound:drawn-honorific	おやすみちゃーん	잘 자~	fix	sound
+sound:drawn-honorific	ただいまちゃーん	다녀왔어~	fix	sound
+sound:drawn-honorific	おつかれちゃーん	수고했어~	fix	sound
+sound:drawn-honorific	ごめんちゃーん	미안~	current	sound
+sound:drawn-honorific	「お疲れちゃーんっ！」	「수고했어~!」	fix	sound
+phrases:greeting	作戦完了だよ！おつかれ！	작전 완료야! 수고했어!	fix	phrases
+phrases:greeting	おつかれぴょん！	수고했어뿅!	fix	phrases
+phrases:greeting	提督、おつかれ。明日もよろしくな！	has:수고했어	fix	phrases
+phrases:greeting	おつかれさま	수고했어	keep	phrases

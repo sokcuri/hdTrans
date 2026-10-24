@@ -1079,8 +1079,12 @@ HD_TEST(pipeline_onbin_u) {
 }
 
 // An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
-// a longer word it starts takes the mark after that word, also with no word before it. A verb
-// stem and its continuative kana before it are no name (かみつき).
+// a longer word it starts takes the mark after its shortest key (ちゃんと, not ちゃんと出), also
+// with no word before it. A verb stem and its continuative kana before it are no name
+// (かみつき), nor is a verb form (お待たせ); a word with the honorific is (みなさん). The end of a
+// sound that the sound stage reads from before it is no honorific (がちゃーん, ぽちゃーんと,
+// どくーんと; not こども + がちゃーんと). After a greeting or an interjection the drawn ちゃん is a
+// familiar tag that leaves the lengthening (おはようちゃーん).
 HD_TEST(pipeline_drawn_honorifics) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -1088,7 +1092,13 @@ HD_TEST(pipeline_drawn_honorifics) {
                                      "ちゃう\t아니\tM100\t2\n"
                                      "かみつ\t물\tM100\t3\n"
                                      "みつき\t미츠키\tN130\t4\n"
-                                     "みどり\t미도리\tN130\t5\n"}});
+                                     "みどり\t미도리\tN130\t5\n"
+                                     "ちゃんと出\t잘 나\tC427\t6\n"
+                                     "お待たせ\t기다리게\tM429\t7\n"
+                                     "みな\t간주\tM443\t8\n"
+                                     "みなさん\t여러분\tI120\t9\n"
+                                     "こども\t어린이\tN110\t10\n"
+                                     "おはよう\t좋은 아침\tA9H1\t11\n"}});
     HD_REQUIRE(loaded.errors.empty());
     HD_REQUIRE(loaded.snapshot != nullptr);
     LineContext ctx;
@@ -1099,7 +1109,16 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"アルくぅん！", "アルくん\uE00A！"},
         {"みどりさああんん！", "みどりさん\uE00A\uE00A！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
-        {"がちゃ～んと", "がちゃんと\uE00A"},
+        {"私がちゃーんと", "私がちゃんと\uE00A"},
+        {"ちゃ～んと出撃", "ちゃんと\uE00A出撃"},
+        {"お待たせちゃーん", "お待たせ\uE00A"},
+        {"おはようちゃーん", "おはよう\uE00A"},
+        {"こどもがちゃーんと", "こどもがちゃんと\uE00A"},
+        {"みなさーん", "みなさん\uE00A"},
+        {"がちゃ～んと", "がちゃ～んと"},
+        {"皿ががちゃーんと", "皿ががちゃーんと"},
+        {"石がぽちゃーんと", "石がぽちゃーんと"},
+        {"心臓がどくーんと", "心臓がどくーんと"},
         {"…くぅん", "…くぅん"},
         {"そうちゃうん？", "そうちゃうん？"},
         {"うくぅんんっ！", "うくぅんんっ！"},

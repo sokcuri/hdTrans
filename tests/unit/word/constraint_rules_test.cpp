@@ -108,7 +108,9 @@ const dict::Snapshot* Dictionary() {
          "碧\t아오이\tN130\tQPN\tWb\tGN\t110\n"
          "したく\t준비\tN110\t\t\tGN\t111\n"
          "した\t아래\tN110\t\t\tGN\t112\n"
-         "くらい\t정도\tP200\t\t\tGN\t113\n"},
+         "くらい\t정도\tP200\t\t\tGN\t113\n"
+         "たんと\t듬뿍\tE300\t\t\tGN\t114\n"
+         "た\t밭\tN110\t\t\tGN\t115\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -163,7 +165,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{42});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{43});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -363,6 +365,15 @@ HD_TEST(constraint_ita_after_te) {
         {"見ていたい", "いたい", "いた", "아$AA@ 손상&C6@"},
         {"部屋でいたします", "いたします", "いた", "아$AA@ 손상&C6@"},
         {"肩がいたんだ", "いたんだ", "いた", "아$AA@ 손상&C6@"},
+    });
+}
+
+// たんと right after っ is the た of a past form (行ったんと); elsewhere it is the adverb.
+HD_TEST(constraint_tanto_after_tsu) {
+    CheckCases({
+        {"行ったんと", "たんと", "たんと", ""},
+        {"ご飯をたんと", "たんと", "たんと", "듬뿍"},
+        {"さあ、たんと", "たんと", "たんと", "듬뿍"},
     });
 }
 

@@ -12,3 +12,6 @@ lookup:suffix-after-person	友達たんと遊ぶ	has:친구짱	keep	lookup
 lookup:suffix-after-person	友達っちに会った	has:친구치	keep	lookup
 lookup:suffix-after-person	彼らたん、待って	has:그들짱	keep	lookup
 lookup:suffix-after-person	子供たちたん	has:아이들짱	keep	lookup
+dict:w:28610	麦飯たーんと炊いておいたわ。	has:듬뿍	fix	defaults
+dict:w:28610	どうぞ、たんと召し上がって。	has:듬뿍	fix	defaults
+constraint:tanto-after-tsu	行ったんと違う	lacks:듬뿍	keep	lookup

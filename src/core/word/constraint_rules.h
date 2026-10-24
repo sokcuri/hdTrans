@@ -46,6 +46,7 @@ enum class ConstraintContext : uint8_t {
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
     AfterTe,            // right after て or で (待っていろ, 黙っていたんだ)
     AfterTeBeforeTa,    // the same with た after the word (待っていたって)
+    AfterSmallTsu,      // right after っ or ッ (行ったんと: the た of a past form)
     Detached,           // nothing, a space or punctuation right before the word (名前: め)
     BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
     OpeningKotode,      // only spaces, opening brackets or an ellipsis before the word in its line, うことで、

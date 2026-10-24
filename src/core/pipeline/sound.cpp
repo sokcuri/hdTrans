@@ -429,6 +429,8 @@ public:
 
     std::string Write();
     std::string WriteCries();
+    // The spans [from, to) in characters that the last Write read as sound lexicon keys.
+    const std::vector<std::pair<size_t, size_t>>& Spans() const { return spans_; }
 
 private:
     std::string_view Bytes(size_t from, size_t to) const {
@@ -447,6 +449,7 @@ private:
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PoliteAt(size_t p) const;
     // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
+    std::vector<std::pair<size_t, size_t>> spans_;
     mutable size_t politeFrom_ = 1, politeTo_ = 0;
     mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
@@ -1842,6 +1845,7 @@ std::string SoundText::Write() {
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
+            spans_.emplace_back(i, next);
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
             // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
@@ -2159,6 +2163,12 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     SoundText t(text, ctx, snap);
     return t.Write();
+}
+
+std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    SoundText t(text, ctx, snap);
+    t.Write();
+    return t.Spans();
 }
 
 std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
