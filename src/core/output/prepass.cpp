@@ -749,13 +749,13 @@ std::string FilterKana(std::string_view text, const Settings& s) {
             continue;
         }
         const int type = tokenizer::Class(r);
+        const bool kana = type == tokenizer::kClassHiragana || type == tokenizer::kClassKatakana;
         if (type == tokenizer::kTypeJapanese && s.hanjaToHangul == 1) {
             if (const auto w = dict::Written(r)) r = *w;
             text::AppendRune(out, r);
-        } else if (type == tokenizer::kTypeJapanese ||
-                   (type != tokenizer::kClassHiragana && type != tokenizer::kClassKatakana && r != U'、')) {
+        } else if (type == tokenizer::kTypeJapanese || (!kana && r != U'、')) {
             text::AppendRune(out, r);
-        } else if (s.deleteJapan != 1 || r == U'・' || r == U'、') {
+        } else if (s.deleteJapan != 1 || r == U'・' || !kana) {  // r is kana or 、 here
             // The canonical form cut to two width units; a shorter form ends the text.
             std::string canonical;
             if (const auto f = tokenizer::CanonicalForm(r)) {
@@ -1411,6 +1411,20 @@ bool SpacedAfterSyllable(const Pieces& out) {
            text::Final(DecodeLastRune(TextBefore(t.substr(0, end + 1)), end + 1).cp) >= 0;
 }
 
+// Whether out ends in a word or a comma: a syllable, a run of Latin letters and digits that
+// does not follow \ or % (an escape such as \n or %s), the particle mark of a word span, or ",".
+bool EndsInWord(const Pieces& out) {
+    if (out.empty() || (out.back().span != SpanText && out.back().span != SpanWord)) return false;
+    const std::string_view t = out.back().text;
+    if (t.empty()) return false;
+    const char32_t r = DecodeLastRune(TextBefore(t), t.size()).cp;
+    if (text::Final(r) >= 0 || r == U',' || r == kVowelMark || r == kConsonantMark || r == kRieulMark) return true;
+    size_t k = t.size();
+    const auto latin = [](char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); };
+    while (k > 0 && latin(t[k - 1])) k--;
+    return k < t.size() && (k == 0 || (t[k - 1] != '\\' && t[k - 1] != '%'));
+}
+
 }  // namespace
 
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& s, Pieces& out) {
@@ -1431,6 +1445,10 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             default:
                 if (tok.span == 0 && !out.empty() && i - 1 >= 0 && tokens[i - 1].type != tokenizer::kTypeAsciiSpace) {
                     TrimRight(out);
+                    if (const char32_t r = tok.text.empty() ? 0 : text::DecodeRune(tok.text).cp;
+                        tok.type == tokenizer::kTypeBracket && IsOpening(r) && r != U'〔' && EndsInWord(out)) {
+                        Add(out, " ");
+                    }
                 }
         }
         if (const std::string_view t = TextTail(out); t.ends_with("</A>") || t.ends_with("</a>") || t.ends_with("&#CS")) {
