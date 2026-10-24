@@ -1,0 +1,27 @@
+# 규칙: SND-2
+rule	input	expected	kind	layer
+lookup:copies-cried-noun	「好き好き好き、大好き」	「좋아 좋아 좋아, 너무 좋아」	fix	lookup
+lookup:copies-cried-noun	「好き、好き、好き」	「좋아, 좋아, 좋아」	fix	lookup
+lookup:copies-cried-noun	あなたが好き好き好き	당신이 좋아 좋아 좋아	fix	lookup
+lookup:copies-cried-noun	「好き好き好き、」	「좋아 좋아 좋아,」	fix	lookup
+lookup:copies-cried-noun	「ずっと好き好き好き」	「계속 좋아 좋아 좋아」	fix	lookup
+lookup:copies-cried-noun	「先輩が好き好き好き」	「선배가 좋아 좋아 좋아」	fix	lookup
+lookup:copies-cried-noun	「好き好き好き…好き」	「좋아 좋아 좋아…좋아」	fix	lookup
+lookup:copies-cried-noun	「好き好き好き、愛してる」	has:좋아 좋아 좋아,	fix	lookup
+lookup:copies-cried-noun	「もう好き好き好き」	「이제 좋아 좋아 좋아」	fix	lookup
+lookup:copies-cried-noun	「好き好き好き好き、大好き」	「좋아 좋아 좋아 좋아, 너무 좋아」	fix	lookup
+lookup:copies-cried-noun	「好き好き好き」	「좋아 좋아 좋아」	keep	lookup
+lookup:copies-cried-noun	「好き好き好き！」	「좋아 좋아 좋아!」	keep	lookup
+lookup:copies-cried-noun	「好き好き好き　大好き」	「좋아 좋아 좋아 너무 좋아」	keep	lookup
+lookup:copies-cried-noun	「好き好き、大好き」	「좋아 좋아, 너무 좋아」	keep	lookup
+lookup:copies-cried-noun	「好き、大好き」	「좋아해, 너무 좋아」	keep	lookup
+lookup:copies-cried-noun	「あなたが好き」	「당신을 좋아해」	keep	lookup
+lookup:copies-cried-noun	「好きで、好きで……たまらないのに」	「좋아해, 좋아해서……견딜 수 없는데」	keep	lookup
+lookup:copies-cried-noun	「迷い迷い、歩いた」	「헤매어 헤매어, 걸었다」	keep	lookup
+lookup:copies-cried-noun	「好きです、好き好き……」	「좋아합니다, 좋아 좋아……」	keep	lookup
+lookup:copies-cried-noun	好き好きだ	각자 기호다	keep	lookup
+lookup:copies-cried-noun	「嫌い嫌い嫌い」	「싫어 싫어 싫어」	keep	lookup
+lookup:copies-cried-noun	「好き、好き、好き、大好き」	「좋아, 좋아, 좋아, 너무 좋아」	fix	lookup
+lookup:copies-cried-noun	「好き、好き、好き、ずっと好き」	「좋아, 좋아, 좋아, 계속 좋아해」	fix	lookup
+lookup:copies-cried-noun	「迷い迷い迷い、歩いた」	「헤매어 헤매어 헤매어, 걸었다」	keep	lookup
+lookup:copies-cried-noun	きたきたきたー！	lacks:북북북	keep	lookup

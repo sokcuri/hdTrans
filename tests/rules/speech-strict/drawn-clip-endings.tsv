@@ -4,8 +4,8 @@ compose:speech-strict	「嫌だぁぁぁっ」	「싫다아아앗」	keep	compos
 compose:speech-strict	「嫌だぁぁぁっ！」	「싫다아아앗!」	keep	compose
 compose:speech-strict	「行くぅぅぅっ」	「간다아아앗」	keep	compose
 compose:speech-strict	「勝ったぁぁぁっ」	「이겼다아아앗」	keep	compose
-compose:speech-strict	「熱いぃぃぃっ」	「뜨겁다아아앗」	keep	compose
-compose:speech-strict	「痛いいいいっ！」	「아프다아아앗!」	keep	compose
+cx:drawn-cry:10	「熱いぃぃぃっ」	「뜨거워어어엇」	fix	rewrites
+cx:drawn-cry:10	「痛いいいいっ！」	「아파아아앗!」	fix	rewrites
 compose:speech-strict	「好きだぁぁぁっ！」	「좋아한다아아앗!」	keep	compose
 compose:speech-strict	「最高だぁぁぁっ！」	「최고다아아앗!」	keep	compose
 compose:speech-strict	「嫌だぁぁぁ」	「싫다아아아」	keep	compose

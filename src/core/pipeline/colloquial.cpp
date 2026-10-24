@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <iterator>
+#include <span>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -866,18 +867,69 @@ bool HasDrawnStem(std::string_view text) {
     return false;
 }
 
-// Whether text has a member of honorific.drawn-after followed by ー, ～ or a small vowel.
+// Whether text has a member of honorific.drawn-after followed by ー, ～ or a vowel kana.
 bool HasDrawnAfter(std::string_view text) {
     for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
         for (size_t at = text.find(member); at != std::string_view::npos; at = text.find(member, at + 1)) {
             const std::u32string next = DecodeText(text.substr(at + member.size(), 4));
-            if (!next.empty() && (IsDash(next[0]) || IsSmallVowel(next[0]))) return true;
+            if (!next.empty() && (IsDash(next[0]) || IsSmallVowel(next[0]) || IsSmallVowel(next[0] - 1))) return true;
         }
     }
     return false;
 }
 
 }  // namespace
+
+// Whether a name stands before the honorific at rs[i], which plain spells plainly in its h
+// characters there: kanji or katakana, or two or more hiragana (みどりさああん; not the cry
+// うくぅんん or the sound びちゃーん); not after a verb in its continuative, a stem of two or more
+// characters that is no noun and one kana, or after a verb form of two or more characters that is
+// no noun, where the stem starts before any noun or person name that ends at the honorific
+// (かみつきさあん, お待たせちゃーん; not みどりさああん, つぐみちゃーん, みなさーん).
+bool NameBefore(const Emphasis& e, std::u32string_view rs, std::u32string_view plain, size_t i, size_t h) {
+    if (i == 0 || !(IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
+                    (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])))) {
+        return false;
+    }
+    if (!IsHiraganaRune(rs[i - 1])) return true;
+    size_t from = i - 1;
+    while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+    for (size_t j = from; j + 1 < i; j++) {
+        // A noun before the honorific, or a word with it (おとうちゃん, みなさん).
+        const std::u32string_view with = plain.substr(j, i - j + h);
+        if (e.NounOrPerson(rs.substr(j, i - j)) || e.NounOrPerson(with) || !e.Tags(with).empty()) return true;
+        const auto verb = [&](size_t to) {
+            const std::string tags = e.Tags(rs.substr(j, to - j));
+            return to - j >= 2 && tags.find_first_of("MH") != std::string::npos && tags.find('N') == std::string::npos;
+        };
+        if (verb(i - 1) || verb(i)) return false;
+    }
+    return true;
+}
+
+// Whether text before the honorific at rs[i], with the h characters of the honorific, ends in one
+// of the words: those of honorific.drawn-out-word, which hold none (かいさん, 貴様, 俺様), or of
+// greeting.honorific-end (おつかれさま).
+bool EndsInWordOf(std::span<const std::string_view> words, std::u32string_view plain, size_t i, size_t h) {
+    for (const std::string_view w : words) {
+        const std::u32string word = DecodeText(w);
+        if (word.size() >= h && i + h >= word.size() && plain.substr(i + h - word.size(), word.size()) == word) return true;
+    }
+    return false;
+}
+
+// The vowel the speaker draws an honorific of honorific.drawn-after out with: that of its last
+// kana, or of its reading in honorific.kanji-reading (様=さま).
+int DrawnVowel(std::u32string_view h) {
+    for (const std::string_view pair : dict::ClassMembers("honorific.kanji-reading")) {
+        const std::u32string p = DecodeText(pair);
+        const size_t eq = p.find(U'=');
+        if (eq != std::u32string::npos && eq + 1 < p.size() && std::u32string_view(p).substr(0, eq) == h) {
+            return HiraganaVowel(p.back());
+        }
+    }
+    return HiraganaVowel(h.back());
+}
 
 std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     if (!HasDrawnStem(text) && !HasDrawnAfter(text)) return std::string(text);
@@ -941,41 +993,9 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             }
             // The honorific spelled plainly, and the longest dictionary word it starts there.
             std::u32string plain = Spliced(rs, i, h, last);
-            const auto holdsNone = [&](std::string_view w) {
-                const std::u32string word = DecodeText(w);
-                return word.size() >= h.size() && i + h.size() >= word.size() &&
-                       std::u32string_view(plain).substr(i + h.size() - word.size(), word.size()) == word;
-            };
-            const auto none = dict::ClassMembers("honorific.drawn-out-word");
-            if (std::any_of(none.begin(), none.end(), holdsNone)) continue;
+            if (EndsInWordOf(dict::ClassMembers("honorific.drawn-out-word"), plain, i, h.size())) continue;
             const size_t word = e.LongestKey(std::u32string_view(plain).substr(i));
-            // A name before it: kanji or katakana, or two or more hiragana (みどりさああん; not the
-            // cry うくぅんん or the sound びちゃーん).
-            bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
-                                       (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
-            // Not after a verb in its continuative, a stem of two or more characters that is no
-            // noun and one kana, or after a verb form of two or more characters that is no noun,
-            // where the stem starts before any noun or person name that ends at the honorific
-            // (かみつきさあん, お待たせちゃーん; not みどりさああん, つぐみちゃーん, みなさーん).
-            if (afterWord && IsHiraganaRune(rs[i - 1])) {
-                size_t from = i - 1;
-                while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
-                for (size_t j = from; j + 1 < i; j++) {
-                    const std::u32string_view with = std::u32string_view(plain).substr(j, i - j + h.size());
-                    if (e.NounOrPerson(std::u32string_view(rs).substr(j, i - j)) || e.NounOrPerson(with) || !e.Tags(with).empty()) {
-                        break;  // a noun before the honorific, or a word with it (おとうちゃん, みなさん)
-                    }
-                    const auto verb = [&](size_t to) {
-                        const std::string tags = e.Tags(std::u32string_view(rs).substr(j, to - j));
-                        return to - j >= 2 && tags.find_first_of("MH") != std::string::npos && tags.find('N') == std::string::npos;
-                    };
-                    if (verb(i - 1) || verb(i)) {
-                        afterWord = false;
-                        break;
-                    }
-                }
-            }
-            if (word <= h.size() && !afterWord) continue;
+            if (word <= h.size() && !NameBefore(e, rs, plain, i, h.size())) continue;
             // A longer word takes the lengthening after the shortest key that goes on past the
             // honorific (ちゃんと in ちゃ～んと出撃, not the key ちゃんと出).
             size_t shortest = word;
@@ -994,6 +1014,10 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                 // Drawn out by up to three stretch marks, the honorific keeps its syllable and takes one
                 // lengthening, two for two or three marks (くーん 군~, くぅぅん 군~~); by four or more, its
                 // syllable is drawn out with a drawn mark for each (くぅぅぅぅん 구우우우운, ちゃぁあぁあぁん 짜아아아아앙).
+                // A ー or ～ right after the honorific ends the stretch and adds no mark (くぅぅん～ 군~~).
+                size_t tail = 0;
+                while (mark + tail < plain.size() && IsDash(plain[mark + tail])) tail++;
+                plain.erase(mark, tail);
                 const size_t run = end - i - stem.size();
                 const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
                                                       : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
@@ -1004,20 +1028,33 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (word > h.size()) i = mark;
         }
     }
-    // An honorific of honorific.drawn-after drawn out after itself before a pause or the end (姫さまぁ
-    // 공주님~, 様ーっ), with the marks of the drawn honorifics above.
+    // An honorific of honorific.drawn-after drawn out after itself and a name before a pause or the
+    // end (姫さまぁ 공주님~, 様ーっ), with the marks of the drawn honorifics above.
     for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
         const std::u32string h = DecodeText(member);
-        const int v = HiraganaVowel(h.back());
+        const int v = DrawnVowel(h);
         for (size_t i = 0; i + h.size() < rs.size(); i++) {
             if (std::u32string_view(rs).substr(i, h.size()) != h || i == 0) continue;
+            // After a name, maybe drawn out with small vowels, or ending a greeting only (姫様ぁ,
+            // 田中様ぁぁぁ, 姉ぇさまぁ, お疲れさまぁ), and not ending a word that holds no honorific
+            // (貴様ぁ, 俺様ぁ).
+            size_t name = i;
+            while (name > 1 && IsSmallVowel(rs[name - 1]) && !IsHiraganaRune(rs[name - 2])) name--;
+            if (EndsInWordOf(dict::ClassMembers("honorific.drawn-out-word"), rs, i, h.size()) ||
+                !(NameBefore(e, rs, rs, name, h.size()) || EndsInWordOf(dict::ClassMembers("greeting.honorific-end"), rs, i, h.size()))) {
+                continue;
+            }
             size_t end = i + h.size();
             while (end < rs.size() && (IsDash(rs[end]) || (v >= 0 && HiraganaVowel(rs[end]) == v && (IsSmallVowel(rs[end]) || IsSmallVowel(rs[end] - 1))))) end++;
             if (end == i + h.size()) continue;
             size_t after = end;
             while (after < rs.size() && rs[after] == U'っ') after++;
             if (after < rs.size() && !IsPause(rs[after])) continue;
-            const size_t run = end - i - h.size();
+            // The vowel kana are the marks; a ー or ～ after them ends the stretch (様ぁ～ 님~), and a ー or ～
+            // alone counts (様ーっ 님~).
+            size_t run = 0;
+            for (size_t k = i + h.size(); k < end; k++) run += !IsDash(rs[k]);
+            if (run == 0) run = end - i - h.size();
             const std::u32string marks = run <= 3 ? std::u32string(std::min<size_t>(run, 2), kLengthenMark)
                                                   : std::u32string(std::min<size_t>(run, 16), kDrawnMark);
             rs = Spliced(rs, i + h.size(), marks, after);
@@ -1045,12 +1082,37 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         changed = true;
     }
     // An adjective drawn out at the end of a phrase: the い and ぃ after the い that ends it,
-    // before a pause or a shout's っ, dropped (ずるいぃ, 痛いぃぃ, おいしいいっ). The adjective
+    // before a pause or a shout's っ, written as drawn marks or a cry mark (ずるいぃ, 痛いぃぃ,
+    // おいしいいっ), which make the adjective a cry (cx:drawn-cry). The adjective
     // is a stem that is not い alone, いい after a word (きもち+いいいいい), たい after a verb
     // stem (見てみたいいい) or a kana stem said again (こわいこわいいいい); a run of い alone is a
     // cry (いいいいい).
+    // An い-adjective drawn out after its い with ー or ～ before a pause, the end or a shout's っ
+    // before one: the run, with the っ, one lengthening mark, which keeps the word and a copy said
+    // again after a comma in one phrase (暑いー！, 暑い～っ！, 痛いー、痛いー 아파~, 아파~), and
+    // makes the adjective a cry (cx:drawn-cry). A run of two or more of one mark stays written
+    // before it, which the restore stage then drops, as it writes every ～ (痛い～～～ 아파~~~).
     for (size_t k = 1; k < rs.size(); k++) {
-        if (rs[k - 1] != U'い' || !In(rs[k], U"いぃ")) continue;
+        if (rs[k - 1] != U'い' || !(In(rs[k], U"いぃ") || IsDash(rs[k]))) continue;
+        if (IsDash(rs[k])) {
+            size_t end = k;
+            while (end < rs.size() && IsDash(rs[end])) end++;
+            size_t q = end;
+            while (q < rs.size() && In(rs[q], kTsu)) q++;
+            if (q < rs.size() && !IsPause(rs[q])) continue;
+            size_t from = k - 1;
+            while (from > 0 && k - 1 - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) {
+                from--;
+            }
+            if (!e.StemTagged(rs, from, k - 1, "H") || !NotAllI(std::u32string_view(rs).substr(from, k - 1 - from))) continue;
+            const bool same = std::all_of(rs.begin() + static_cast<std::ptrdiff_t>(k), rs.begin() + static_cast<std::ptrdiff_t>(end),
+                                          [&](char32_t c) { return c == rs[k]; });
+            std::u32string marks = end - k >= 2 && same ? rs.substr(k, end - k) : std::u32string();
+            marks.push_back(kLengthenMark);
+            rs = Spliced(rs, k, marks, q);
+            changed = true;
+            continue;
+        }
         size_t end = k;
         while (end < rs.size() && In(rs[end], U"いぃ")) end++;
         size_t q = end;
@@ -1071,10 +1133,19 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             copy = own == std::u32string_view(rs).substr(k - 2 - 2 * n, n + 1) && e.Tags(own.substr(0, n)).find('H') != std::string::npos;
         }
         if (!stem && !good && !wish && !copy) continue;
+        // One or two drawn kana after a word not said again leave the cry mark alone, which
+        // takes the shout's っ without writing it (熱いいいっ 뜨거워; the clipped cry mark);
+        // copies said straight are a cry already, and a ー or ～ after the kana lengthens the word
+        // as it does without them.
         std::u32string marks = Drawn(rs, k, end);
-        const size_t to = AbsorbClip(rs, end, marks);
+        size_t to = AbsorbClip(rs, end, marks);
+        if (marks.empty() && !copy && !(end < rs.size() && IsDash(rs[end]))) {
+            while (to < rs.size() && In(rs[to], kTsu)) to++;
+            marks.push_back(to > end ? output::kClippedCryMark : output::kCryMark);
+        }
         rs = Spliced(rs, k, marks, to);
         changed = true;
+        if (marks.empty()) k--;  // a ー or ～ after the kana, now right after the い (冷たいぃ～)
     }
     // A word drawn out syllable by syllable, a run of ー or ～ after two or more of its kana
     // (とーにーかーく, だーかーらー, か～わ～い～い～): the word without the marks, drawn out at
@@ -1186,7 +1257,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 changed = true;
             }
             const bool tsuEnd = end < rs.size() && In(rs[end], kTsu) && ShoutEnd(rs, end);
-            const bool dashed = std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー'; });
+            const bool dashed = std::any_of(rs.begin() + i, rs.begin() + end, IsDash);
             const bool shoutTsu = tsuEnd && dashed && e.ReadsTo(rs, i);
             // Two kana that draw out a word said twice (待って待ってぇぇ) are drawn out like three.
             const bool copyDrawl = end - i == 2 && CopiedBefore(rs, i);
@@ -1310,9 +1381,9 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         } else {
             continue;
         }
-        if (!vowelRun && rs[i] != U'っ' && rs[end] == U'い' && e.StemTagged(rs, from, i, "H")) {
-            cands.resize(1);  // すごーい, おそーい
-        }
+        // The mark lengthens an adjective stem before its い (すごーい, おそーい).
+        const bool adjective = rs[end] == U'い' && e.StemTagged(rs, from, i, "H");
+        if (!vowelRun && rs[i] != U'っ' && adjective) cands.resize(1);
         if (v == 3 && LongE(rs, i, end)) {
             // A word of the e row spelled with ー that goes on two or more characters past it to
             // the end of the kana, over a sound that the mark would otherwise belong to: てーとく
@@ -1448,9 +1519,15 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             if (q < rs.size() && In(rs[q], U"ゃゅょ")) q++;
             const bool pause = q == rs.size() || (IsPause(rs[q]) && rs[q] != U'～' && rs[q] != kLengthenMark &&
                                                   !(rs[q] == U'、' && rs[i] == U'い' && e.StemTagged(rs, from, i, "H")));
-            if (IsHiraganaRune(rs[i]) && (q == i + 1 || wordEnd >= q) && (pause || (!drawn.empty() && ShoutEnd(rs, q)))) {
+            // An adjective lengthened before its い ends its phrase before a shout's っ too, which the
+            // lengthening takes (痛ーいっ！ 아파~!).
+            const bool shout = ShoutEnd(rs, q) &&
+                               (!drawn.empty() || (q < rs.size() && In(rs[q], kTsu) && adjective && cands[best].empty()));
+            if (IsHiraganaRune(rs[i]) && (q == i + 1 || wordEnd >= q) && (pause || shout)) {
                 if (drawn.empty()) {
-                    rs.insert(rs.begin() + q, kLengthenMark);
+                    size_t to = q;
+                    while (to < rs.size() && In(rs[to], kTsu)) to++;
+                    rs = Spliced(rs, q, std::u32string(1, kLengthenMark), to);
                 } else {
                     std::u32string marks = drawn;
                     const size_t to = AbsorbClip(rs, q, marks);  // いたぁぁぁいっ 아파아아앗

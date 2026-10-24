@@ -82,6 +82,36 @@ bool PhraseFollowsNi(Item* ni) {
     return true;
 }
 
+// Whether it is one of three or more copies of a word said again (internal::CopyAfter: 好き of
+// 好き好き好き, 好き、好き、好き) that the dictionary also reads as an adjectival noun. Such a run
+// is a cry whatever the words (SND-2): each copy reads as the word said alone, whatever stands
+// before or after the run, the last copy before a comma and another word too (好き、好き、好き、大好き).
+bool CriedCopy(const Item* it) {
+    // The copy right before c: a word up to three words back whose copy after it is c
+    // (好き|、|好き, 痛い|っ|、|痛い).
+    auto before = [](const Item* c) -> const Item* {
+        const Item* p = c->prev;
+        for (int k = 0; k < 3 && p != nullptr; k++, p = p->prev) {
+            if (internal::CopyAfter(p) == c && Slice(p->text, p->start, p->length) == Slice(c->text, c->start, c->length)) {
+                return p;
+            }
+        }
+        return nullptr;
+    };
+    // Two other copies on either side are enough to see three.
+    int others = 0;
+    for (const Item* c = it; others < 2 && (c = before(c)) != nullptr;) others++;
+    for (const Item* c = it; others < 2 && (c = internal::CopyAfter(c)) != nullptr;) others++;
+    if (others < 2 || it->w == nullptr) return false;
+    // Only a word the dictionary also reads as an adjectival noun says a feeling (好き, 嫌い); a
+    // verb stem that is also a noun stays the verb (迷い迷い迷い 헤매어, 休み休み休み).
+    const std::string combined = it->group->surface + std::string(it->DirectSurface());
+    for (const Record* r = it->w->DoLookup(combined, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (r->source == combined && At(r->partCode, 0) == 'G') return true;
+    }
+    return false;
+}
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -98,7 +128,9 @@ Phrase FindPhrase(Flusher& f) {
     for (Item* it = chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo()) continue;
         int mode = 1;
-        if (it->DirectCount() >= 20) {
+        if (it->DirectCount() >= 20 && CriedCopy(it)) {
+            mode = 3;
+        } else if (it->DirectCount() >= 20) {
             for (int slot = 0; slot < it->DirectCount(); slot++) {
                 if (!it->detail->enabled[slot]) continue;
                 const char sub = At(it->DirectCode(slot), 1);
@@ -197,6 +229,7 @@ Phrase FindPhrase(Flusher& f) {
                     break;
                 }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
+                const bool cry = CriedCopy(it);
                 Record* record = it->group->records;
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
@@ -208,7 +241,7 @@ Phrase FindPhrase(Flusher& f) {
                         copy = next;
                         next = next->After();
                     }
-                    if (next != nullptr) {
+                    if (next != nullptr && !cry) {
                         const char k = At(next->Code(0), 0);
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
                             continue;

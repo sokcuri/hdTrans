@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 sound:lengthened-word	「まだ、なんとなーく興味があるってレベルなのに」	「아직, 왠지 흥미가 있다는 레벨인데」	fix	sound
 sound:lengthened-word	いや、かなーりやばい事実に気づいた。	아니, 꽤 위험한 사실을 눈치챘다.	fix	sound
 sound:lengthened-word	「車で行くから早くしなさーい。」	「차로 가니까 빨리 해~.」	fix	sound
-sound:lengthened-word	あ～めんどくさ～い。	아~귀찮다~.	fix	sound
+sound:lengthened-word	あ～めんどくさ～い。	아~귀찮아~.	fix	sound
 sound:lengthened-word	だーかーらー！何なの？	그러니까~! 뭐야 대체?	fix	sound
 sound:lengthened-word	お花見か～いいわね	꽃놀이인가~좋네	keep	sound
 sound:lengthened-word	「そうねー、いいね」	「그래~, 좋네」	keep	sound
@@ -15,8 +15,8 @@ sound:lengthened-interjection	「う、うぅん、こっちこそごめんね�
 sound:adjective-long-i	「おいしー！　やっぱり、お料理は最高だね」	「맛있어~! 역시, 요리는 최고구나」	fix	sound
 sound:adjective-long-i	間宮は朝食、おいしーよねー。	마미야는 아침 식사, 맛있지~.	fix	sound
 sound:adjective-long-i	夕食、おいしーじゃん！	저녁식사, 맛있잖아!	fix	sound
-sound:adjective-long-i	うれしー	기쁘다~	fix	sound
-sound:adjective-long-i	意外と難しー…。	의외로 어렵다~….	fix	sound
+sound:adjective-long-i	うれしー	기뻐~	fix	sound
+sound:adjective-long-i	意外と難しー…。	의외로 어려워~….	fix	sound
 sound:adjective-long-i	んもぅ、恥ずかしー事言わないでよねっ！	응도, 부끄러운 말 말하지 말아!	fix	sound
 sound:adjective-long-i	わたしー、行く	나~, 간다	keep	sound
 sound:adjective-long-i	もしもしー	여보세요~	keep	sound
@@ -37,13 +37,13 @@ sound:stretched-word	「いっきまぁーす！」	「갑니다~!」	fix	sound
 sound:stretched-word	「しれいかーん！」	「사령관~!」	fix	sound
 sound:stretched-word	壁伝いにそーっと近づき	벽 따라에 살며시 다가가	fix	sound
 sound:stretched-word	こんな額のちょこっとした傷	이런 이마의 자그마한 상처	keep	sound
-sound:drawn-adjective	「ずるいぃ！」	「치사하다!」	fix	sound
-sound:drawn-adjective	「痛いぃぃ……」	「아프다……」	fix	sound
-sound:drawn-adjective	「きもちいいいいい！」	「기분 좋다아아아!」	fix	sound
-sound:drawn-adjective	うらやましいいいいいいい！！！	부럽다아아아아아아!!!	fix	sound
+sound:drawn-adjective	「ずるいぃ！」	「치사해!」	fix	sound
+sound:drawn-adjective	「痛いぃぃ……」	「아파……」	fix	sound
+sound:drawn-adjective	「きもちいいいいい！」	「기분 좋아아아아!」	fix	sound
+sound:drawn-adjective	うらやましいいいいいいい！！！	부러워어어어어어어!!!	fix	sound
 sound:drawn-adjective	「知らないぃ？」	「몰라?」	fix	sound
 sound:drawn-adjective	「いいいいい！」	「이이이이이!」	keep	sound
-sound:drawn-adjective	「かわいーー！」	「귀엽다~!」	fix	sound
+sound:drawn-adjective	「かわいーー！」	「귀여워~!」	fix	sound
 sound:drawn-adjective	「長いオフ貰ってい～い？」	「긴 오프 받아도 좋아~?」	fix	sound
 sound:drawn-adjective	「ああー！」	「아아아!」	keep	sound
 sound:shout-tilde	「だめーーーっ！」	「안돼~!」	fix	sound

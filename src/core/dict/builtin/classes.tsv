@@ -88,8 +88,9 @@
 //= greeting.honorific-end	Greetings that end like an honoured person in 様 or さま and call no one (お疲れさま、また明日 수고했어, 내일 보자).
 //= honorific.drawn-out	Honorifics that a name may draw out before their final ん, with ー, ～ or the vowel of the kana before it (圭ちゃ～ん, 田中さぁあん, アルくぅん).
 //= honorific.drawn-after	Honorifics without a final ん that a speaker draws out after themselves before a pause (姫さまぁ 공주님~, 様ーっ), marked as the drawn honorifics are.
-//= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~).
+//= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~), pronouns that end in 様 or さま (貴様ぁ, 俺様ぁ, きさまぁ), and words that end in 様 and name no one (有様ぁ, 同様あ).
 //= honorific.phrase-tag	Drawn-out honorifics that a greeting or an interjection takes as a familiar tag: the phrase keeps its reading and the drawl (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
+//= honorific.kanji-reading	Kanji honorifics of honorific.drawn-after with their kana reading, KANJI=KANA, whose last vowel the speaker draws them out with (様=さま: 姫様ぁ 공주님~).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -153,6 +154,9 @@
 //= mark.cry	Marks right after the last copy of an adjective of adjective.grumble said twice that make the copies a cry (寒い寒いっ, 寒い寒い！, 寒い寒いー, 寒い寒い……, 寒い寒い♪).
 //= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
+//= mark.thought-open	Marks that open a thought, which an adjective drawn out in it does not make a cry (（む、難しい〜〜） 어렵다~~).
+//= mark.thought-close	Marks that close what mark.thought-open opens.
+//= mark.stretch	Marks that stretch an い-adjective at the end of its phrase into a cry (暑いー！ 더워~!, 痛い～ 아파~).
 //= mark.lengthening	Marks that draw out the word before them: after a final な of 思う they make it the speaker's opinion (思うなぁ, 思うなー).
 //= mark.long-vowel	Long marks that draw out a kana inside a word: a copy of a word drawn out with them is the same word (すごい|すごーい).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
@@ -230,6 +234,7 @@
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
+//= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
@@ -1357,6 +1362,15 @@ honorific.drawn-after	さま
 honorific.drawn-after	様
 honorific.drawn-out-word	かいさん
 honorific.phrase-tag	ちゃん
+honorific.drawn-out-word	貴様
+honorific.drawn-out-word	俺様
+honorific.drawn-out-word	オレ様
+honorific.drawn-out-word	おれさま
+honorific.drawn-out-word	きさま
+honorific.drawn-out-word	有様
+honorific.drawn-out-word	同様
+honorific.drawn-out-word	様様
+honorific.kanji-reading	様=さま
 
 honorific.after-person	たん
 honorific.after-person	っち
@@ -3312,6 +3326,10 @@ question.wonder-not	何度と無く
 question.wonder-not	どれでも
 question.wonder-not	いくらか
 question.wonder-not	いくらでも
+question.indefinite-after	も
+question.indefinite-after	でも
+question.indefinite-after	にでも
+question.indefinite-after	であれ
 
 speech.female	わたくし
 speech.female	ですわ
@@ -6026,6 +6044,14 @@ ko-verb.person-object	따라잡다
 ko-verb.person-object	앞지르다
 ko-verb.person-object	닮다
 ko-verb.person-object	섬기다
+mark.thought-open	（
+mark.thought-open	(
+mark.thought-close	）
+mark.thought-close	)
+mark.stretch	ー
+mark.stretch	～
+mark.stretch	〜
+mark.stretch	~
 mark.lengthening	ぁ
 mark.lengthening	あ
 mark.lengthening	ー

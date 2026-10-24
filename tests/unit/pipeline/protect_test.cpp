@@ -82,6 +82,8 @@ HD_TEST(pipeline_cut_spans) {
         // The lengthening mark closes a span.
         {"せんぱい\uE00A！", "せんぱい〖3\uE00A〗！"},
         {"やめて\uE00B\uE00B\uE00B！", "やめて〖3\uE00B\uE00B\uE00B〗！"},
+        {"熱い\uE00E！", "熱い〖3\uE00E〗！"},
+        {"熱い\uE00F！", "熱い〖3\uE00F〗！"},
         // Foreign runs end at white space; ASCII, half-width forms and CP932 symbols are
         // not foreign; invalid bytes are.
         {"Ωé αβ☆ｱ ไทย", "Ω〖1é〗 αβ☆ｱ 〖1ไทย〗"},

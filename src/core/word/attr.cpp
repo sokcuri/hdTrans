@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/rules/match.h"
 #include "core/text/hangul.h"
 #include "core/text/unicode.h"
@@ -241,13 +242,14 @@ bool Item::EndingAsks() const {
     return tail.ends_with("か");
 }
 
-bool Item::AfterQuestionWord() const {
+bool Item::AfterQuestionWord(bool clause) const {
     for (const Item* x = this; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
+        if (clause && x != this && dict::InClass("mark.comma", s)) break;
         // A question closed by か before the word is embedded (どうなるか……ってのもあるだろうな).
         if (x != this && (s == "か" || x->EndingAsks())) break;
-        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
+        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで, 誰であれ). The か of an indefinite stands
         // alone or before a particle; から, かな and かしら keep the question.
         const Item* xn = x->After();
         const std::string_view after = xn != nullptr ? xn->group->surface : std::string_view();
@@ -256,7 +258,10 @@ bool Item::AfterQuestionWord() const {
             (after == "か" ||
              std::u32string_view(U"がをにでもはのとへか").find(text::DecodeRune(after.substr(std::string_view("か").size())).cp) !=
                  std::u32string_view::npos);
-        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || indefiniteKa) continue;
+        const auto indefinite = dict::ClassMembers("question.indefinite-after");
+        if (indefiniteKa || std::any_of(indefinite.begin(), indefinite.end(), [&](std::string_view m) { return after.starts_with(m); })) {
+            continue;
+        }
         if (x->IsQuestionWord()) return true;
     }
     return false;
@@ -345,6 +350,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Nq") return ReadsCount(i);
         // Qw: a question word is the word or comes before it in its sentence.
         if (c == "Qw") return AfterQuestionWord();
+        // Qc: Qw within the clause, no comma between (何するのよ; not 何よ、行くのよ).
+        if (c == "Qc") return AfterQuestionWord(true);
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {
@@ -362,6 +369,21 @@ bool Item::CheckGAttr(std::string_view s, int di) {
     }
     return false;
 }
+
+namespace {
+
+// Whether t is a run of the closing marks of the sound stage (output::IsClosingMark).
+bool ClosingMarks(std::string_view t) {
+    if (t.empty()) return false;
+    for (std::string_view r = t; !r.empty();) {
+        const text::Rune c = text::DecodeRune(r);
+        if (!output::IsClosingMark(c.cp)) return false;
+        r.remove_prefix(c.size);
+    }
+    return true;
+}
+
+}  // namespace
 
 // Whether the next item (after a parenthesised group) is missing or its first target
 // starts with ) 」 ! ” = or -.
@@ -421,14 +443,21 @@ bool Item::IsRuleRightBoundary() const {
     }
     const char32_t punct = text::DecodeRune(n->group->surface).cp;
     const bool mark = std::u32string_view(U"?？!！。、」』").find(punct) != std::u32string_view::npos;
-    const Item* closed = tsu != nullptr ? tsu : (terminal && !bound && !mark ? this : nullptr);
+    // A predicate drawn out at its end, with the closing marks of the sound stage right after
+    // it, has ended its phrase: no noun after the pause takes it as a modifier (痛いぃ……いや).
+    const bool drawn = w != nullptr && From(text, start + length).empty() &&
+                       ClosingMarks(w->tokens.Raw(static_cast<std::size_t>(tokenIndex + 1)));
+    const Item* closed = tsu != nullptr ? tsu : (terminal && (!bound || drawn) && !mark ? this : nullptr);
+    // The closing marks of the sound stage after a drawn word (痛いぃ……) stand between too.
     if (closed != nullptr && w != nullptr && n->tokenIndex > closed->tokenIndex + 1) {
-        bool ellipsis = true;
+        bool ellipsis = true, dots = false;
         for (int k = closed->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
             const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
-            ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
+            const bool run = !t.empty() && TrimRunes(t, "…‥・.").empty();
+            dots = dots || run;
+            ellipsis = run || ClosingMarks(t);
         }
-        if (ellipsis) return true;
+        if (ellipsis && dots) return true;
     }
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),

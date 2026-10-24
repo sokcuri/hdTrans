@@ -249,7 +249,7 @@ cx:ne-polite:20	秋は、落ち着きますね。	!rule:cx:ne-polite:10	fix	rewr
 cx:ne-promise:20	ほっとしますね。	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「ありがたいことに、そう言われますね」	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「無茶苦茶言いますね」	!rule:cx:ne-polite:10	fix	rewrites
-cx:ne-promise:22	「まぁ、田中さん。お野菜もしっかり食べますね」	「뭐, 타나카 씨. 야채도 확실히 먹네요」	fix	rewrites
+cx:ne-promise:22	「まぁ、田中さん。お野菜もしっかり食べますね」	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:22	「佐藤さん、今日はたくさん食べますね」	「사토 씨, 오늘은 많이 먹네요」	fix	rewrites
 cx:ne-promise:20	提督、日が、落ちますね。夜…か…	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「こうも外すと自信を失いますね」	!rule:cx:ne-polite:10	fix	rewrites
