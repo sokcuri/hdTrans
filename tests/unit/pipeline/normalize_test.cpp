@@ -1,6 +1,7 @@
 // Table tests of the normalising rewrites, one table per rewrite, and of the whole
 // sequence of Normalize.
 #include <cstdlib>
+#include <set>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -10,6 +11,7 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/spoken_forms_gen.h"
 #include "core/pipeline/stage_text.h"
+#include "core/text/utf8.h"
 #include "hdtest.h"
 
 using namespace std::literals;
@@ -562,6 +564,30 @@ HD_TEST(pipeline_respell_kanji_cries) {
         {"嫌！"sv, "嫌！"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(RespellKanjiCries(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_respell_old_forms) {
+    // A stand-in for the dictionary: 赤澤 and 龍 are words that hold an old form.
+    const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
+        return line.substr(at).starts_with("龍") ||
+               (at >= "赤"sv.size() && line.substr(at - "赤"sv.size()).starts_with("赤澤"));
+    };
+    const Case cases[] = {
+        {"格好惡いだろ"sv, "格好悪いだろ"sv},
+        {"隱れた樣子"sv, "隠れた様子"sv},
+        {"赤澤さんと澤田さん"sv, "赤澤さんと沢田さん"sv},
+        {"悪い"sv, "悪い"sv},
+        {"神龍"sv, "神龍"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellOldForms(c.in, words, nullptr), std::string(c.want));
+    // Every member is OLD=NEW, one kanji on each side, each old form once.
+    std::set<std::string_view> olds;
+    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.old-form")) {
+        const size_t eq = pair.find('=');
+        HD_CHECK(eq != std::string_view::npos && hdTrans::text::RuneCount(pair.substr(0, eq)) == 1 &&
+                 hdTrans::text::RuneCount(pair.substr(eq + 1)) == 1);
+        HD_CHECK(olds.insert(pair.substr(0, eq)).second);
+    }
 }
 
 HD_TEST(pipeline_write_kin_terms) {

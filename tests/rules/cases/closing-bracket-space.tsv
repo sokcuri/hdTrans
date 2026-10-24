@@ -1,0 +1,32 @@
+# 규칙: LAY-12
+rule	input	expected	kind	layer
+restore:closing-space	（これが死ぬって事か・・・思ったほど、寂しくないな。）	lacks:. )	fix	restore
+restore:closing-space	《罰ゲームは、怖くないかー！》	《벌칙 게임은, 두렵지 않은가~!》	fix	restore
+restore:closing-space	《続いて第二競技は、〇×泥水クイズです！》	lacks:! 》	fix	restore
+restore:closing-space	取得しますか？》	취득하시겠습니까?》	fix	restore
+restore:closing-space	黒い染みのようなもの(血痕？)が点々とついています	has:(핏자국?)이	fix	restore
+restore:closing-space	あっそーなん？(リア充どもめ)	lacks: )	fix	restore
+restore:closing-space	（だからといって呪いはねえ）	lacks: )	fix	restore
+restore:closing-space	白木は（勘弁してくれよ～）と苦笑いを浮かべる。	has:(봐줘)	fix	restore
+restore:closing-space	“…それは警告のつもりかい？”	lacks:? ”	fix	restore
+restore:closing-space	“上下１枚ずつ脱衣。”	“상하 1장씩 탈의.”	fix	restore
+restore:closing-space	花子と美咲がにっこり（ニヤリ？）と笑い合う。	has:(씨익?)과	fix	restore
+restore:closing-space	ピッピッピ。（わかればいいのです。）	lacks:. )	fix	restore
+restore:closing-space	『遥かな太古、神代と呼ばれる時代があった。』	lacks:. 』	fix	restore
+restore:closing-space	『申し訳ございません。』	『죄송합니다.』	fix	restore
+restore:closing-space	（準備中です。）	(준비 중입니다.)	fix	restore
+restore:closing-space	大船ルミネウィング【NEW！】DHC	has:【NEW!】	fix	restore
+restore:closing-space	『調べてみれば？』と言わんばかりだ。	has:『조사해 보면?』이라고	fix	restore
+restore:closing-space	そうすれば片方は『内申点！』って怒鳴られて	has:『내신점!』이라고	fix	restore
+restore:closing-space	「それもそれでしょうがないね、”読みたい！”って祈るしか？」	has:”읽고 싶다!”라고	fix	restore
+restore:closing-space	〔準備中です。〕	〔준비 중입니다.〕	fix	restore
+restore:closing-space	＜準備中です。＞	<준비 중입니다.>	fix	restore
+restore:closing-space	地上人＜ラムズ＞の伝説。	지상인<람즈>의 전설.	keep	restore
+restore:closing-space	車内に流れる音楽は「 Hello Vietnam 」鬼軍曹で有名な	has:「 Hello Vietnam 」	keep	restore
+restore:closing-space	【 国民保護に関する情報：発射情報 】	【 국민 보호에 관한 정보：발사 정보 】	keep	restore
+restore:closing-space	“ 先生の家この先すぐ ↑ ”	has:↑ ”	keep	restore
+restore:closing-space	主電源、起動します。＞＞＞＞＞＞ OK正常に、動作中	has:기동합니다. >>>>>>	keep	restore
+restore:closing-space	もっと見る ＞	좀 더 본다 >	keep	restore
+restore:closing-space	排気ダクト配管後方へ回り込み、”プロの人”とやらに	has:, ”프로의 사람”	keep	restore
+restore:closing-space	私じゃなくて、”未来”とくっつかないと！　”現実の未来”と！！	has:않으면! ”현실의 미래”	keep	restore
+restore:closing-space	彼は（多分）大丈夫だ。	그는(아마) 괜찮다.	keep	restore

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <span>
+#include <unordered_map>
 
 #include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
@@ -181,6 +182,32 @@ std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const
             break;
         }
         pos += taken > 0 ? taken : std::max<size_t>(1, text::DecodeRune(line.substr(pos)).size);
+    }
+    if (copied == 0) return std::string(line);
+    out.append(line.substr(copied));
+    return out;
+}
+
+std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context) {
+    static const auto forms = [] {
+        std::unordered_map<char32_t, std::string_view> m;
+        for (const std::string_view pair : dict::ClassMembers("spelling.old-form")) {
+            const size_t eq = pair.find('=');
+            m.emplace(text::DecodeRune(pair).cp, pair.substr(eq + 1));
+        }
+        return m;
+    }();
+    std::string out;
+    size_t copied = 0;
+    for (size_t pos = 0; pos < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(pos));
+        const size_t end = pos + std::max<size_t>(1, r.size);
+        if (const auto it = forms.find(r.cp); it != forms.end() && !holds(context, line, pos, end)) {
+            out.append(line.substr(copied, pos - copied));
+            out.append(it->second);
+            copied = end;
+        }
+        pos = end;
     }
     if (copied == 0) return std::string(line);
     out.append(line.substr(copied));

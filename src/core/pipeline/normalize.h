@@ -70,6 +70,11 @@ std::string RespellKatakanaEndings(std::string_view line);
 // (嫌ぁ！, not 嫌ぁ……).
 std::string RespellKanjiCries(std::string_view line);
 
+// line with each old form of a kanji in classes.tsv spelling.old-form (OLD=NEW) written in its
+// new form, so that both read alike (格好惡い 格好悪い), unless holds says a dictionary word holds
+// the old form (赤澤, 澤 on its own). Run after Normalize, with the dictionary.
+std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context);
+
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced

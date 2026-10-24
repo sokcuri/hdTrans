@@ -237,8 +237,8 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
 // Keys holding a run are looked for from up to this many runes before it (a long name).
 constexpr int kRunLookBackRunes = 32;
 
-// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns): a key that starts at
-// or up to kRunLookBackRunes letters before it and goes on past it.
+// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns, pipeline::RespellOldForms):
+// a key that starts at or up to kRunLookBackRunes letters before it and reaches its end.
 bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t end) {
     const auto& d = *static_cast<const RespellLookup*>(context);
     size_t start = at;
@@ -501,6 +501,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
         normalized = pipeline::RespellKatakanaEndings(normalized);
         normalized = pipeline::RespellKanjiCries(normalized);
+        normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
@@ -658,13 +659,15 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     return out;
 }
 
-// The columns of s, each with the column separator after it ("" after the last), as
-// pipeline::Segment cuts a line of the text path.
+// The columns of s, each with the column separator or escape after it ("" after the last),
+// as pipeline::Segment cuts a line of the text path.
 std::vector<std::pair<std::string_view, std::string_view>> Columns(std::string_view s) {
     std::vector<std::pair<std::string_view, std::string_view>> out;
     std::size_t from = 0;
     for (std::size_t i = 0; i < s.size();) {
-        if (const std::size_t end = pipeline::internal::ColumnGap(s, i, false, false); end != i) {
+        std::size_t end = pipeline::internal::ColumnGap(s, i, false, false);
+        if (end == i) end = pipeline::internal::EscapeGap(s, i, false, false);
+        if (end != i) {
             out.emplace_back(s.substr(from, i - from), s.substr(i, end - i));
             from = i = end;
             continue;

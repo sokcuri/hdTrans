@@ -28,7 +28,7 @@ sound:long-vowel-before-word	「ごけっこん、おめでとーございます
 dict:colloq:daijobu	「だいじょぶ、だいじょぶ、気合い気合いっ」	「괜찮아, 괜찮아, 기합 기합」	fix	lookup
 dict:jisjk:257391	よし、これでいつ出番が来てもだいじょぶ！	좋아, 이것으로 언제 차례가 와도 괜찮아!	fix	lookup
 dict:jisjk:259061	そーなんだ	그렇군	fix	lookup
-sound:long-vowel-after-word	『あんなしょーもないグループ抜けちゃいなよ。』	『저런 시시한 그룹 빠져버릴. 』	fix	sound
+sound:long-vowel-after-word	『あんなしょーもないグループ抜けちゃいなよ。』	『저런 시시한 그룹 빠져버릴.』	fix	sound
 sound:long-vowel-after-word	まあしょーがない、起きよ。	뭐 어쩔 수 없다, 일어나라.	fix	sound
 sound:long-vowel-after-word	お金ちょーだい、お金！	돈 줘, 돈!	fix	sound
 sound:long-vowel-after-word	お仕事しゅーりょー。	일-~.	keep	sound

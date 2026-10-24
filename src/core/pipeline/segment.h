@@ -22,8 +22,9 @@ using Chunk = output::Pieces;
 //     and at an ASCII space that ends a phrase (internal::KanaSpace), unless the words
 //     on both sides stand alone between spaces as in text spaced out character by
 //     character (こ　の　展　開).
-//   - at a column separator (internal::ColumnGap); gaps, when given, receives for each
-//     chunk the separator before it as typed, "" after the other cuts and for the first.
+//   - at a column separator (internal::ColumnGap) and at an escape \n, \r or \t typed as two
+//     characters (internal::EscapeGap); gaps, when given, receives for each chunk the
+//     separator or escape before it as typed, "" after the other cuts and for the first.
 // The white space after a cut is dropped. Spans are never cut and stay with the text
 // before them.
 std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string>* gaps = nullptr);
@@ -48,6 +49,13 @@ bool Conjunctive(std::string_view s);
 // or after s), unless a kanji standing alone is on each side, a two-character name
 // padded to the width of three (林  涛). The leading white space of a line is none.
 size_t ColumnGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter);
+
+// The end of the escape \n, \r or \t typed as two characters that starts at s[i], with the
+// spaces, ideographic spaces and tabs before and after it, or i where none does: with
+// characters of the line on both sides (lineBefore, lineAfter as for ColumnGap), the
+// backslash after neither an ASCII letter or digit nor a backslash and the escape before no
+// lowercase ASCII letter (C:\temp, \notag).
+size_t EscapeGap(std::string_view s, size_t i, bool lineBefore, bool lineAfter);
 
 // Whether the white space at s[i] stands between two words of a line: characters other
 // than white space on both sides, not both of them alone between spaces.

@@ -1571,7 +1571,13 @@ void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pie
         case tokenizer::kTypeSentenceEnd: case tokenizer::kTypeTruncated: case tokenizer::kTypeWideSpace: case 78:
             return;
     }
-    if (tokens[next].span != 0 || !std::string_view(tokens[next].text).starts_with("」")) Add(out, " ");
+    if (tokens[next].span == 0) {
+        const std::string_view text = tokens[next].text;
+        for (const std::string_view close : dict::ClassMembers("mark.close-after-space")) {
+            if (text.starts_with(close)) return;
+        }
+    }
+    Add(out, " ");
 }
 
 }  // namespace hdTrans::output

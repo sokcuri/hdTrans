@@ -54,6 +54,15 @@ HD_TEST(pipeline_drop_added_spaces) {
          {{"「"}, {"우와", SpanWord}, {"…부드럽다」"}}},
         {{{"<b>", SpanOpen}, {"「あ」"}}, {{"<b>", SpanOpen}, {" 「 아」"}}, {{"<b>", SpanOpen}, {" 「아」"}}},
         {{{"딸랑", SpanWord}}, {{"( 딸랑", SpanWord}, {" ( 소리"}}, {{"( 딸랑", SpanWord}, {" (소리"}}},
+        // Spaces before a closing bracket go unless the line typed white space before one.
+        {{{"『ございません。』"}}, {{"「없습니다. 」"}}, {{"「없습니다.」"}}},
+        {{{"（呪いはねえ）"}}, {{"(저주는 말이야 )"}}, {{"(저주는 말이야)"}}},
+        {{{"《お待たせしました！》"}}, {{"《기다렸습니다! 》"}}, {{"《기다렸습니다!》"}}},
+        {{{"＜準備中です。＞"}}, {{"<준비 중입니다. >"}}, {{"<준비 중입니다.>"}}},
+        {{{"「 Hello 」鬼"}}, {{"「 Hello 」귀신 )"}}, {{"「 Hello 」귀신 )"}}},
+        // A ” opens the quote it does not close, and a > closes only after a <.
+        {{{"、”プロの人”と"}}, {{", ”프로의 사람 ”과"}}, {{", ”프로의 사람”과"}}},
+        {{{"します。＞＞"}}, {{"합니다. >>"}}, {{"합니다. >>"}}},
     };
     for (const auto& c : cases) {
         const Pieces got = pipeline::DropAddedSpaces(c.typed, c.out);

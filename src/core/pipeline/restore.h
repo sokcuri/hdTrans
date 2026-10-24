@@ -26,9 +26,11 @@ RestoreSteps RestoreAll(const output::Pieces& cleaned, const output::Pieces& typ
 // The output line: RestoreAll(...).line.
 std::string Restore(const output::Pieces& cleaned, const output::Pieces& typed, bool keepBrackets);
 
-// out without the ASCII spaces the engine writes at the start of a line or after an
-// opening bracket (「 나는 -> 「나는) where the matching line of typed has none there;
-// out as it is when the line counts differ. Spans are left as they are.
+// out without the ASCII spaces the engine writes at the start of a line, after an opening
+// bracket (「 나는 -> 「나는) or before a closing bracket (없습니다. 』 -> 없습니다.』, 말이야 ) ->
+// 말이야)) where the matching line of typed has no white space there; out as it is when the
+// line counts differ. A ” or ’ closes only a quote opened before it, a > or ＞ only after a <
+// or ＜. Spans are left as they are.
 output::Pieces DropAddedSpaces(const output::Pieces& typed, const output::Pieces& out);
 
 // The brackets of typed written over the forms the engine writes for them, line by line

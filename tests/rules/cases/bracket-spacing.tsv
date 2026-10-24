@@ -40,7 +40,7 @@ compose:bracket-apart	[b]大切な[/b]ものは、いつも手の届かないと
 compose:bracket-apart	彼は「こんにちは」と言った。	그는 「안녕하세요」라고 말했다.	keep	compose
 compose:bracket-apart	彼は『魔王』と呼ばれた。	그는 『마왕』으로 불렸다.	keep	compose
 compose:bracket-apart	[日間]コメディー〔文芸〕	[일간]코미디〔문예〕	keep	compose
-compose:bracket-apart	彼は来た。\n【鑑定】を使った。	그는 왔다. \n【감정】을 썼다.	keep	compose
+compose:bracket-apart	彼は来た。\n【鑑定】を使った。	그는 왔다.\n【감정】을 썼다.	keep	compose
 compose:bracket-apart	名前は%s【鑑定】	이름은 %s【감정】	keep	compose
 compose:bracket-apart	<b>彼</b>【鑑定】	<b>그</b>【감정】	keep	compose
 compose:bracket-apart	【鑑定】スキルを使った。	【감정】스킬을 썼다.	current	compose
