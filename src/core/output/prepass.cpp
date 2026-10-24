@@ -1331,6 +1331,15 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
+    // A name suffix written onto the name (짱, 군) ends it: a noun after it in the same token
+    // that is no suffix and starts with no particle stands apart (田中ちゃんお仕事 타나카짱 일,
+    // 魅ぃちゃんごめんね 매짱 미안해; not 圭一さんにしては 케이이치 씨치고는).
+    if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && Contains(tags, "Tu") &&
+        dict::InClass("honorific.candidate", item.surface) &&
+        !Contains(nextTags, "Tu") && !Contains(nextTags, "Z7") && WidthOf(nextEntry) >= 2 &&
+        std::ranges::none_of(dict::ClassMembers("particle.after-name"), [&](std::string_view p) { return next.surface.starts_with(p); })) {
+        return Result(std::move(t), true);
+    }
     // A noun that starts with a kanji and is said again right after itself is a word of its own
     // (終わり終わり 끝 끝).
     if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && next.surface == item.surface &&

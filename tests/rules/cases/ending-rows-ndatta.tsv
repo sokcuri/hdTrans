@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 lookup:ending-rows-conj	（あ、俺の車、インド人に貸してやったんだった……）	(아, 내 차, 인도인에 빌려 주었다……)	fix	lookup
 lookup:ending-rows-conj	そういえば戦国時代は諱を言っちゃいけないんだったー！	그러고 보니 전국시대는 휘를 말하면 안되었다~!	fix	lookup
 lookup:ending-rows-conj	七瀬ママはお母さんのことを『とこちゃん』って呼んでるんだった。	나나세 엄마는 엄마를 『토코짱』이라고 부르고 있었다.	fix	lookup
-lookup:ending-rows-conj	金剛さん主催のティーパーティーに誘われてるんだった！	콘고 씨주최의 티 파티에 이끌리고 있었다!	fix	lookup
+lookup:ending-rows-conj	金剛さん主催のティーパーティーに誘われてるんだった！	콘고 씨 주최의 티 파티에 이끌리고 있었다!	fix	lookup
 lookup:ending-rows-conj	だからこの二人、問題児集団の武力担当って言われてるんだっけ。	그러니까 이 두 사람, 문제아 집단의 무력 담당이라고 말을 듣고 있는 거였지.	fix	lookup
 lookup:ending-rows-conj	そうだったミドリさんケガしてるんだっけ…	그랬던 미도리 씨 상처를 입고 있는 거였지…	fix	lookup
 lookup:ending-rows-conj	ご先祖様が助けてくれたんだったらすごく嬉しいな。	선조님이 도와 주었다면 정말 기쁘네.	fix	lookup

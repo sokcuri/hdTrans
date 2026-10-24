@@ -106,6 +106,7 @@
 //= name.action-after	What follows 、 after a speaker's own name at the start of an utterance: a call to action (時雨、出撃するよ, 狭霧、参ります).
 //= name.introduction-copula	The copulas and よ that make a self-introduction of a name before the end of the sentence (睦月です。, 陽炎よ。, まるゆでち！).
 //= name.common-after	Starts of the text after a word whose common sense is weather, the sky or the sea, that keep that sense though a cue names the word (時雨が降る, 雷が落ちた, 陽炎が立つ, 潮が満ちる).
+//= char.ascii-alnum	ASCII digits and letters: a kanji right after one in its token follows a number or a unit (10cm砲).
 //= kana.drawn-out	Small kana and marks that draw out the kana before them (マルマルぅ, くぅん, ちゃーん).
 //= kana.ending-start-only	Kana that start the ending of an end row but no word, so that such an ending is no piece of a katakana run read as words (っしゅ of トリッシュ).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
@@ -1510,6 +1511,68 @@ name.common-after	の音
 name.common-after	の中
 name.common-after	に打たれ
 name.common-after	に濡れ
+char.ascii-alnum	0
+char.ascii-alnum	1
+char.ascii-alnum	2
+char.ascii-alnum	3
+char.ascii-alnum	4
+char.ascii-alnum	5
+char.ascii-alnum	6
+char.ascii-alnum	7
+char.ascii-alnum	8
+char.ascii-alnum	9
+char.ascii-alnum	a
+char.ascii-alnum	b
+char.ascii-alnum	c
+char.ascii-alnum	d
+char.ascii-alnum	e
+char.ascii-alnum	f
+char.ascii-alnum	g
+char.ascii-alnum	h
+char.ascii-alnum	i
+char.ascii-alnum	j
+char.ascii-alnum	k
+char.ascii-alnum	l
+char.ascii-alnum	m
+char.ascii-alnum	n
+char.ascii-alnum	o
+char.ascii-alnum	p
+char.ascii-alnum	q
+char.ascii-alnum	r
+char.ascii-alnum	s
+char.ascii-alnum	t
+char.ascii-alnum	u
+char.ascii-alnum	v
+char.ascii-alnum	w
+char.ascii-alnum	x
+char.ascii-alnum	y
+char.ascii-alnum	z
+char.ascii-alnum	A
+char.ascii-alnum	B
+char.ascii-alnum	C
+char.ascii-alnum	D
+char.ascii-alnum	E
+char.ascii-alnum	F
+char.ascii-alnum	G
+char.ascii-alnum	H
+char.ascii-alnum	I
+char.ascii-alnum	J
+char.ascii-alnum	K
+char.ascii-alnum	L
+char.ascii-alnum	M
+char.ascii-alnum	N
+char.ascii-alnum	O
+char.ascii-alnum	P
+char.ascii-alnum	Q
+char.ascii-alnum	R
+char.ascii-alnum	S
+char.ascii-alnum	T
+char.ascii-alnum	U
+char.ascii-alnum	V
+char.ascii-alnum	W
+char.ascii-alnum	X
+char.ascii-alnum	Y
+char.ascii-alnum	Z
 
 honorific.prepass	ちゃん
 honorific.prepass	さん
