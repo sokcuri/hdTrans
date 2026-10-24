@@ -1384,19 +1384,6 @@ void QuoteTo(Flusher& f) {
     }
 }
 
-void NodaTo(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        const Item* n = it->next;
-        if (n == nullptr || it->DirectIndex() < 0 || n->selected < 0 || !n->group->surface.starts_with("と")) continue;
-        const std::string lemma = ItemLemma(f, n, n->selected);
-        if (!lemma.starts_with("(이)라고") && !lemma.starts_with("라고")) continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e != nullptr && e->dst.ends_with(" 것이다")) {
-            it->AssignDirectSlot(it->DirectIndex(), std::string_view(e->dst).substr(0, e->dst.size() - std::string_view("다").size()));
-        }
-    }
-}
-
 namespace {
 
 // Whether an attributive (綺麗な, 赤い, 走る, 走った) and a noun follow it, past punctuation (とても、キレイな裸).
@@ -1455,27 +1442,6 @@ void TerminalBeforeQuote(Flusher& f) {
                 }
             }
         }
-    }
-}
-
-void QuestionCopula(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        if (p == nullptr || it->group->surface != "だ" || ItemLemma(f, it, it->selected) != "(이)다" ||
-            !dict::InClass("question.copula", p->group->surface)) {
-            continue;
-        }
-        if (!QuoteEnd(f.w, it) && !From(it->text, it->start + it->length).starts_with(kJaComma)) continue;
-        std::string word = ItemLemma(f, p, p->selected);
-        if (word == "무엇") {
-            if (p->group->At(p->selected) != nullptr) p->AssignEntrySurface(p->selected, "뭐");
-            word = "뭐";
-        }
-        Entry* e = it->group->At(it->selected);
-        if (e == nullptr) continue;
-        it->AssignEntrySurface(it->selected, "냐");
-        const char particle = output::ParticleClass(word);
-        if (particle == 'c' || particle == 'l') it->AssignEntrySurface(it->selected, "이냐");
     }
 }
 

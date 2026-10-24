@@ -120,9 +120,7 @@ void EmphaticMo(Flusher& f);
 void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);
-void NodaTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
-void QuestionCopula(Flusher& f);
 // A sentence-final だろう after a question word in its clause asks (何だろう 뭘까, どっちだろう
 // 어느 쪽일까); a concessive も, (よ)うと or (よ)うが or a か between keeps the guess.
 void WonderingDarou(Flusher& f);
