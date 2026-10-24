@@ -1,4 +1,4 @@
-# 규칙: NUM-5
+# 규칙: NUM-5, NUM-7
 rule	input	expected	kind	layer
 compose:native-count	2回まで使用可能。	2회까지 사용 가능.	fix	compose
 compose:native-count	攻撃回数：2回	공격 횟수：2회	fix	compose
@@ -28,7 +28,7 @@ compose:native-count-idiom	11人残らず	11명 남김없이	keep	compose
 compose:native-count-idiom	3人また3人	3명 또 3명	keep	compose
 compose:native-count-idiom	21人また1人	21명 또 1명	keep	compose
 compose:native-count-idiom	攻撃に1回耐える。	공격에 1회 참는다.	keep	compose
-compose:native-count-idiom	3回も言った。	3회나 말했다.	keep	compose
+dict:jisjk:115519	3回も言った。	3번이나 말했다.	fix	local
 compose:native-count-idiom	3度も言った。	3번이나 말했다.	keep	compose
 dict:jisjk:267304	2度と来るな。	두 번 다시 오지 마.	fix	lookup
 compose:native-count-ordinal	1杯目のコーヒー	1잔째의 커피	fix	compose
@@ -46,3 +46,16 @@ dict:jisjk:357444	3つの頃	3살 무렵	fix	local
 dict:jisjk:357444	八つの頃	여덟 살 무렵	fix	local
 dict:jisjk:357444	六つの箱	여섯 개의 상자	keep	local
 dict:jisjk:357444	3つのころ	3살 무렵	fix	local
+compose:native-count	やくそうを3個手に入れた！	약초를 3개 손에 넣었다!	keep	compose
+compose:native-count	他の料理より銅貨2枚ほど安い。	다른 요리보다 동화 2장 정도 싸다.	keep	compose
+compose:native-count	今や残り1個となってしまった	지금은 남아 1개가 되어 버렸다	keep	compose
+compose:native-count	初期スキルは最大で8個まで取得可能だ。	초기 스킬은 최대로 8개까지 취득 가능하다.	keep	compose
+compose:native-count	パソコンのフォルダー14個	PC의 폴더 14개	keep	compose
+compose:native-count	130箇所を回った。	130군데를 돌았다.	keep	compose
+compose:native-count	130時間かかった。	130시간 걸렸다.	keep	compose
+compose:native-count	111ヶ所の拠点	111군데의 거점	keep	compose
+compose:native-count	聞き返したら、さっきの1.5倍くらいの台詞が返ってきた	되물었더니, 조금 전의 1.5배 정도의 대사가 되돌아 왔다	keep	compose
+compose:native-count	3.5キロ歩いた。	3.5킬로 걸었다.	keep	compose
+compose:native-count	2回目の挑戦	2번째의 도전	keep	compose
+compose:native-count	第3王子が来た。	제3왕자가 왔다.	keep	compose
+compose:native-count	二つください。	두 개 주세요.	keep	compose
