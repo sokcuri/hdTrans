@@ -453,7 +453,7 @@ bool ValidateCandidate(std::string_view source, int start, int token, const Reco
         const text::Rune r = text::DecodeRune(s);
         return r.size == s.size() && tokenizer::IsSjisHighLead(r.cp);
     };
-    if (WidthOf(surface) != 2 || !highLeadPair(surface)) return true;
+    if (!highLeadPair(surface) || WidthOf(surface) != 2) return true;
     const Window l = Right(prefix, 2), r = Left(tail, 2);
     if (prefix.ends_with("□") || tail.starts_with("□")) return false;
     auto hanja = [&](const Window& s) { return !s.broken && WidthOf(s.text) == 2 && highLeadPair(s.text); };

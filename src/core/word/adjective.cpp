@@ -70,7 +70,7 @@ bool Item::RunDefaultTrieQuery() {
         (remaining.starts_with("しい") || remaining.starts_with("しく") || remaining.starts_with("しかっ"))) {
         return false;
     }
-    if (const Window first = Left(surface, 2); marker == '1' && WidthOf(surface) == 4 && NumeralPair(first)) {
+    if (const Window first = Left(surface, 2); marker == '1' && NumeralPair(first) && WidthOf(surface) == 4) {
         if (NumeralPair(Right(markerText, 2))) return false;
     }
     return true;

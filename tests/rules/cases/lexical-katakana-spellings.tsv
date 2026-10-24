@@ -14,6 +14,8 @@ normalize:nna	ごめんな。	미안.	fix	normalize
 normalize:nna	なめんなよ！	얕보지 마!	keep	normalize
 segmentation:katakana-run	リアルなティアーズ	리얼한 티아즈	fix	lookup
 segmentation:katakana-run	ティアーズ	티아즈	keep	lookup
+segmentation:katakana-run	メメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメメ	메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메메	keep	lookup
+segmentation:katakana-run	アイスメメメメメメメメメメメメメメメメメメメメだ。	아이스메메메메메메메메메메메메메메메메메메메메다.	keep	lookup
 sense:na-loan-adjective	ディープな話	딥한 이야기	fix	rewrites
 sense:na-loan-adjective	ホットなニュース	핫한 뉴스	fix	rewrites
 sense:na-loan-adjective	ロンリーなハートが	론리한 하트가	fix	rewrites
