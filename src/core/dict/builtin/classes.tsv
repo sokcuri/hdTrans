@@ -7,8 +7,6 @@
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
-//= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
-//= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
 //= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
@@ -202,65 +200,6 @@ aux.te-start	差し
 aux.te-start	行
 aux.te-start	ちょうだい
 
-bound.column-start	です
-bound.column-start	でし
-bound.column-start	である
-bound.column-start	じゃ
-bound.column-start	だっ
-bound.column-start	だろ
-bound.column-start	だよ
-bound.column-start	だね
-bound.column-start	だな
-bound.column-start	ます
-bound.column-start	まし
-bound.column-start	ませ
-bound.column-start	ない
-bound.column-start	なかっ
-bound.column-start	らしい
-bound.column-start	みたい
-bound.column-start	ような
-bound.column-start	ように
-bound.column-start	ようだ
-bound.column-start	そうだ
-bound.column-start	そうな
-bound.column-start	たいで
-bound.column-start	たかっ
-bound.column-start	から
-bound.column-start	まで
-bound.column-start	より
-bound.column-start	だけ
-bound.column-start	しか
-bound.column-start	ばかり
-bound.column-start	など
-bound.column-start	くらい
-bound.column-start	ぐらい
-bound.column-start	ほど
-bound.column-start	には
-bound.column-start	では
-bound.column-start	とは
-bound.column-start	にも
-bound.column-start	でも
-bound.column-start	って
-
-bound.column-whole	だ
-bound.column-whole	が
-bound.column-whole	を
-bound.column-whole	に
-bound.column-whole	へ
-bound.column-whole	で
-bound.column-whole	と
-bound.column-whole	も
-bound.column-whole	は
-bound.column-whole	の
-bound.column-whole	や
-bound.column-whole	か
-bound.column-whole	よ
-bound.column-whole	ね
-bound.column-whole	わ
-bound.column-whole	ぞ
-bound.column-whole	さ
-bound.column-whole	な
-bound.column-whole	たい
 
 casual.nna-word	ごめんな
 
