@@ -338,6 +338,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Kh") return KoreanSpan();
         // Hp: a sentence end, an ellipsis or a dash right before the word.
         if (c == "Hp") return AfterPause(true);
+        // Rw: the word repeats the word written right before it (the second 畑 of 畑畑).
+        if (c == "Rw") return prev != nullptr && prev->JoinsNext() && prev->group->surface == group->surface;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;

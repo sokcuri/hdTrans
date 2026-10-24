@@ -4212,11 +4212,11 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**)
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw
 //     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv) && (GramNe(p, 0, "Hp"sv) ||
-           PumsaEq(p, 1, "6**"sv))) ||
+           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv)) ||
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
 
@@ -4298,15 +4298,15 @@ bool RuleG150([[maybe_unused]] Item* p) {
 }
 
 // global 4000 stem pos 1 prio 160
-//     pos is 1** and gram has Oj and pos[+1] is 1** and gram[+1] has On
+//     pos is 1** and gram has Oj and pos[+1] is 1** and gram[+1] has On and gram[+1] lacks Rw and gram lacks Rw
 bool RuleG160([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Oj"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Oj"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv) && GramNe(p, 1, "Rw"sv) && GramNe(p, 0, "Rw"sv));
 }
 
 // global 4001 stem pos 1 prio 170
-//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has Oj
+//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has Oj and gram lacks Rw and gram[-1] lacks Rw
 bool RuleG170([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Oj"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Oj"sv) && GramNe(p, 0, "Rw"sv) && GramNe(p, -1, "Rw"sv));
 }
 
 // global 4100 stem pos 1 prio 180
@@ -4947,7 +4947,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG2, 0x80a377d931160ae0ull},
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0xcec84dffa0f89fbcull},
+    {RuleG30, 0x3814c2a55021b968ull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
@@ -4959,8 +4959,8 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG130, 0x60209eb785257c06ull},
     {RuleG140, 0xef64f925c202219dull},
     {RuleG150, 0x2405743392f641fcull},
-    {RuleG160, 0x57e4fc1b141b133eull},
-    {RuleG170, 0x93d3d56cf23cf026ull},
+    {RuleG160, 0xae87505005903c01ull},
+    {RuleG170, 0x6ceda183d481fe45ull},
     {RuleG180, 0xb147e1d8e11a4f76ull},
     {RuleG190, 0x20c67167c24a264bull},
     {RuleG200, 0x6b080de836eac7c3ull},
