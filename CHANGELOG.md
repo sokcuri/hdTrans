@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.2](https://github.com/sokcuri/hdTrans/compare/v0.5.1...v0.5.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* **release:** keep meanings from flipping, decide (ら)れ once and read stretched spellings and laughter as words ([cc37a84](https://github.com/sokcuri/hdTrans/commit/cc37a84e86fcfefc7ffbd41e3f4b1451b39b1580))
+* **release:** keep meanings from flipping, decide (ら)れ once and read stretched spellings and laughter as words ([#129](https://github.com/sokcuri/hdTrans/issues/129)) ([cc37a84](https://github.com/sokcuri/hdTrans/commit/cc37a84e86fcfefc7ffbd41e3f4b1451b39b1580))
+
 ## [0.5.1](https://github.com/sokcuri/hdTrans/compare/v0.5.0...v0.5.1) (2026-10-24)
 
 
