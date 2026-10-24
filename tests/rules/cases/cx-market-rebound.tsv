@@ -1,4 +1,4 @@
-# 규칙: LEX-20
+# 규칙: LEX-25
 rule	input	expected	kind	layer
 cx:market-rebound:10	東京株式市場で日経平均株価は反発した。	도쿄 주식시장에서 닛케이 평균주가는 반등했다.	fix	rewrites
 cx:market-rebound:10	円相場は対ドルで反発した。	엔 시세는 대달러로 반등했다.	fix	rewrites

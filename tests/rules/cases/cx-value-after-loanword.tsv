@@ -1,4 +1,4 @@
-# 규칙: LEX-20
+# 규칙: LEX-25
 rule	input	expected	kind	layer
 cx:value-after-loanword:10	デフォルト値を設定する。	디폴트값을 설정한다.	fix	rewrites
 cx:value-after-loanword:10	パラメータ値を変更する。	파라미터값을 변경한다.	fix	rewrites

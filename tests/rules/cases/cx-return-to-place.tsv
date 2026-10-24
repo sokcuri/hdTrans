@@ -1,4 +1,4 @@
-# 규칙: LEX-19
+# 규칙: LEX-24
 rule	input	expected	kind	layer
 cx:return-to:20	タイトル画面に戻ります	타이틀 화면으로 돌아갑니다	fix	rewrites
 cx:return-to:20	メニューに戻ります。	메뉴로 돌아갑니다.	fix	rewrites

@@ -1,4 +1,4 @@
-# 규칙: LEX-20
+# 규칙: LEX-25
 rule	input	expected	kind	layer
 sense:解放	リソースを解放する。	리소스를 해제한다.	fix	senses
 sense:解放	メモリを解放する必要がある。	메모리를 해제할 필요가 있다.	fix	senses

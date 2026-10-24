@@ -1,4 +1,4 @@
-# 규칙: LEX-20
+# 규칙: LEX-25
 rule	input	expected	kind	layer
 lookup:円安が進む	円安が進んでいる。	엔저가 진행되고 있다.	fix	lookup
 lookup:円安が進む	円高が進み、輸出が減った。	엔고가 진행되어, 수출이 줄어들었다.	fix	lookup

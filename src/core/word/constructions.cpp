@@ -326,14 +326,16 @@ constexpr NamedFeature kFeatures[] = {
      }},
     // The text after the word, past white space, starts with one of mark.prompt-follow, which shows
     // a question as a prompt on screen: a quoting と, a closing 》 or the answers (開始しますか？という,
-    // はい／いいえ, （はい／いいえ）).
+    // はい／いいえ, （はい／いいえ）), or holds one of the answers of mark.prompt-answer (乗るやめる).
     {"prompt-after",
      [](Flusher&, const Item* it) {
          std::string_view rest = From(it->text, it->start + it->length);
          if (rest.empty()) rest = it->detail->nextText;
          rest = TrimSpace(rest);
          return std::ranges::any_of(dict::ClassMembers("mark.prompt-follow"),
-                                    [&](std::string_view m) { return rest.starts_with(m); });
+                                    [&](std::string_view m) { return rest.starts_with(m); }) ||
+                std::ranges::any_of(dict::ClassMembers("mark.prompt-answer"),
+                                    [&](std::string_view m) { return rest.find(m) != std::string_view::npos; });
      }},
 };
 

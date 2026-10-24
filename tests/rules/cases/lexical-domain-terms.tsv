@@ -1,4 +1,4 @@
-# 규칙: LEX-20
+# 규칙: LEX-25
 rule	input	expected	kind	layer
 lookup:最大値	最大値と最小値を求める。	최댓값과 최솟값을 구한다.	fix	lookup
 lookup:返り値	返り値はnullです。	반환값은 null입니다.	fix	lookup

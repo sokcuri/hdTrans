@@ -74,6 +74,7 @@
 //= mark.before-laughter	Marks after which a run of mark.laughter still laughs (진짜야!ｗ).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.exclaim	Exclamation marks: a question with one after it is a surprised remark, not an offer (待ち伏せますか！).
+//= mark.prompt-answer	Answers a prompt on a screen lists after its question, anywhere in the text that follows it (乗りますか？乗るやめる, やりますか？やるやらない).
 //= mark.prompt-follow	What follows the question mark of a prompt shown on a screen: a quoting と, a closing 》 and the answers (開始しますか？という, 取得しますか？》, はい／いいえ, （はい／いいえ）).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
 //= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
@@ -199,7 +200,7 @@
 //= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
-//= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener: 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
+//= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -1022,6 +1023,10 @@ mark.pause	‥
 mark.pause	―
 mark.pause	─
 mark.pause	—
+mark.prompt-answer	やめる
+mark.prompt-answer	いらない
+mark.prompt-answer	やらない
+mark.prompt-answer	しない
 mark.prompt-follow	と
 mark.prompt-follow	》
 mark.prompt-follow	はい
@@ -2664,7 +2669,6 @@ noun.return-here	ここら
 noun.return-here	この場
 noun.return-here	母港
 noun.return-here	鎮守府
-noun.return-here	ここ
 noun.return-here	こちら
 
 verb.naming	呼ぶ
@@ -3321,6 +3325,7 @@ word.confirm-action	止め
 word.confirm-action	やめ
 word.confirm-action	続け
 word.confirm-action	み
+word.confirm-action	修理
 word.offer-cue	さて
 word.offer-cue	じゃあ
 word.offer-cue	じゃ
@@ -3350,3 +3355,14 @@ word.offer-cue	そろそろ
 word.offer-cue	자
 word.offer-cue	그럼
 word.offer-cue	좋아
+word.offer-cue	私達
+word.offer-cue	私たち
+word.offer-cue	我々
+word.offer-cue	僕ら
+word.offer-cue	僕たち
+word.offer-cue	俺たち
+word.offer-cue	俺達
+word.offer-cue	みんなで
+word.offer-cue	皆で
+word.offer-cue	いったん
+word.offer-cue	一旦

@@ -1,4 +1,4 @@
-# 규칙: SPC-10
+# 규칙: SPC-11
 rule	input	expected	kind	layer
 cx:honorific-doer:20	ご予約のお客様でいらっしゃいますか	예약하신 손님이십니까	fix	rewrites
 cx:honorific-doer:20	ご来店のお客様に粗品を差し上げます。	rule:cx:honorific-doer:20=하신	fix	rewrites

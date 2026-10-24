@@ -1,4 +1,4 @@
-# 규칙: SPC-10
+# 규칙: SPC-11
 rule	input	expected	kind	layer
 phrase:いつもお世話になっております	いつもお世話になっております。	항상 신세 지고 있습니다.	fix	lookup
 phrase:お世話になっております	お世話になっております。株式会社山田の田中です。	항상 신세 지고 있습니다. 주식회사 야마다의 타나카입니다.	keep	lookup
