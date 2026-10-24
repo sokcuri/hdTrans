@@ -2767,6 +2767,8 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
                  (from + 2 < i && TeForm(rs, from, i - 1, ctx, snap)))) {
                 return kRe;
             }
+            // After かも the し is that of しれない, not of 知らない (かもしんない).
+            if (s == "し" && from >= 2 && rs[from - 2] == U'か' && rs[from - 1] == U'も') return kRe;
             if (VerbFormIs(s + std::string(kRa), kNegativeStem, RaGodanKind, ctx, snap)) return kRa;
             if (VerbFormIs(s + std::string(kRe), kStemForm, IchidanKind, ctx, snap)) return kRe;
             return {};
@@ -2843,9 +2845,10 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             if (from > 0 && IsKanjiRune(rs[from - 1]) && InsideWord(s, byte, start, from, ctx, snap)) continue;
             // No word of the dictionary that starts with the stem and spans the ん (こんな, みんな,
             // ごめんな, すんなり); after the て of a て form a lone kana starts the auxiliary (してくんない
-            // is no くん).
+            // is no くん), and after かも the し is that of しれない (かもしんない, かもしんねえ).
             bool spanned = false;
-            const bool afterTe = i - from == 1 && from > 0 && rs[from - 1] == U'て';
+            const bool afterTe = i - from == 1 && from > 0 &&
+                                 (rs[from - 1] == U'て' || (rs[from] == U'し' && from > 1 && rs[from - 2] == U'か' && rs[from - 1] == U'も'));
             const dict::Candidates rd = snap.GetWordInfo(std::string_view(s).substr(byte[from]), dict::LookupMode::General, ctx.lookup);
             for (const dict::Candidate& c : rd.list) {
                 spanned = spanned || (c.codes != nullptr && byte[from] + c.source.size() > byte[i] &&
