@@ -63,7 +63,7 @@ bool QuoteVerbFollows(const Item* it);
 // Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
 // span boundary (grammar.cpp).
 bool QuoteEnd(const Worker& w, const Item* it);
-// Whether the item ends its sentence: the end of the utterance (UtteranceEnd), or ！ or ？ after it
+// Whether the item ends its sentence: the end of the utterance (UtteranceEnd), or ！？!? after it
 // (grammar.cpp).
 bool SentenceEnd(const Worker& w, const Item* it);
 // Whether the text after the stem of the item is い or かった, a comma or none, and a particle of

@@ -13,3 +13,5 @@ cx:see-and:10	「これを見て！」	「이걸 봐!」	fix	rewrites
 cx:see-and:10	「ほら、空を見て！」	「자, 하늘을 봐!」	fix	rewrites
 cx:see-and:10	私を見て！と叫んだ。	나를 봐!라고 외쳤다.	fix	rewrites
 cx:see-and:10	これを見て、驚いた。	이것을 보고, 놀랐다.	keep	rewrites
+cx:see-and:10	「これを見て？」	「이걸 봐?」	fix	rewrites
+cx:see-and:10	「何を見て？」	「뭘 보고?」	keep	rewrites
