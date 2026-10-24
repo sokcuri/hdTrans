@@ -108,6 +108,8 @@ then judges only what changed since the last check.
    draft release. No separate release PR exists, and develop pushes publish nothing.
 3. **Publish npm** on the tag runs the full Build, then publishes the GitHub Release and the npm
    package. Check its log for the published `hdtrans@X.Y.Z`; if the registry failed, rerun the job.
+   - The random fuzz run of this Build only warns; the seed and regression replay still fails it. Read
+     the `linux-fuzz` summary and handle an input it found as in section 1.
 4. **Deploy web** after Publish npm deploys that release to the web demo.
    - Check that the page's version line shows the release engine version, the dictionary version and the commit.
    - Never deploy from a work branch by hand.
