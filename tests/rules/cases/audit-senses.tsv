@@ -12,6 +12,6 @@ dict:pronoun-standalone	君	너	fix	lookup
 dict:pronoun-standalone	誰	누구	fix	lookup
 dict:pronoun-standalone	私の本	내 책	keep	lookup
 dict:pronoun-standalone	俺は行く。	나는 간다.	keep	lookup
-dict:pronoun-standalone	一	일	keep	lookup
+dict:pronoun-standalone	一	1	keep	lookup
 dict:pronoun-standalone	員	원	keep	lookup
-dict:pronoun-standalone	世	세	keep	lookup
+dict:pronoun-standalone	世	세상	keep	lookup

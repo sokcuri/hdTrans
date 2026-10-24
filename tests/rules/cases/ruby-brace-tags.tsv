@@ -55,12 +55,12 @@ word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べて、走った。	{rb}먹어{/rb
 word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んで、走った。	{rb}마셔{/rb}{rt}마셔{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}読{/rb}{rt}よ{/rt}んで、走った。	{rb}읽어{/rb}{rt}읽어{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt} 버린다.	fix	rewrites
-G100	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
-G100	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
-G100	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
-G100	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
-G100	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
-G100	夢	몽	keep	global-stem
+defaults:lone-kanji	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
+defaults:lone-kanji	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
+defaults:lone-kanji	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
+defaults:lone-kanji	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
+defaults:lone-kanji	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
+defaults:lone-kanji	夢	꿈	fix	defaults
 rewrite:ruby-idiom-verb	遠くで{rb}声{/rb}{rt}こえ{/rt}がした	먼 곳에서 {rb}목소리{/rb}{rt}목소리{/rt}가 들렸다	fix	rewrites
 rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}がする	{rb}목소리{/rb}{rt}목소리{/rt}가 들린다	fix	rewrites
 rewrite:ruby-idiom-verb	どこからか母の{rb}声{/rb}{rt}こえ{/rt}がして	어디에선가 어머니의 {rb}목소리{/rb}{rt}목소리{/rt}가 들려	fix	rewrites
