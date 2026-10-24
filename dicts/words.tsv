@@ -864,7 +864,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ともあろう	씩이나 되는	E010			GN				llm			w:857
 とも言われ	라고도 불&AA@	M427			GN				xxx llm	1		w:858
 とりな	무마&AV@	M423			GN				xxx llm	1		w:859
-と聞かれ	라고 물어&AY@	M427		Tu	GN				xxx llm	1		w:860
+と聞かれ	(이)라고 물어&AY@	M427		Tu	GN				xxx llm	1		w:860
 どういう訳か	왠지	A9D0			GN				llm		どういうわけか	w:861
 どうかしましたか	무슨 일 있으세요	A9D0			GN				llm			w:862
 どうこう	이러쿵저러쿵	E300			GN				llm		どうこう	w:863

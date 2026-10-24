@@ -18102,7 +18102,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 切りもち	네모 떡	K110	VFd		GN							jisjk:343360
 手許金	용돈	I110	VMo		GN							jisjk:75764
 炭焼窯	숯가마	N110	VPe		GN							jisjk:196889
-ぢゃ無	(이)가 아$A3@	H7N0			GN							jisjk:136611
+ぢゃ無	(이)가 아$A3@	H7N0		Tu	GN							jisjk:136611
 白黒つけ	흑백을 가&AA@	M447			GN							jisjk:136087
 白黒付け	흑백을 가&AA@	M447			GN							jisjk:136087
 白黒を付け	흑백을 가&AA@	M447			GN							jisjk:136087
@@ -19158,7 +19158,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロマンチスム	낭만주의	N110			GN							jisjk:159160
 デングリ返し	제주넘기	N110			GN							jisjk:153659
 もみ洗い	손빨래	N110			GN							jisjk:253851
-に引き換え	(와) 반대로	N110			GN							jisjk:151594
+に引き換え	(와)과 반대로	N110		Tu	GN							jisjk:151594
 祭囃子	페스티발 뮤직	N110	USoQMU		GN							jisjk:251884
 祭ばやし	페스티발 뮤직	N110	USoQMU		GN							jisjk:251884
 祭りばやし	페스티발 뮤직	N110	USoQMU		GN							jisjk:251884
