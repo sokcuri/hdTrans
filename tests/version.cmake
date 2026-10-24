@@ -8,6 +8,12 @@ set(repo "${WORK}/repo")
 file(MAKE_DIRECTORY "${repo}")
 # The test folder is inside the build tree, which may itself be inside a checkout.
 set(ENV{GIT_CEILING_DIRECTORIES} "${WORK}")
+# A caller such as `git rebase -x` exports these; they would point every command below at
+# the caller's repository.
+foreach(var GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_COMMON_DIR
+        GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_PREFIX)
+    unset(ENV{${var}})
+endforeach()
 
 function(git)
     execute_process(COMMAND "${GIT_EXECUTABLE}" -c user.name=hdtrans -c user.email=hdtrans@localhost

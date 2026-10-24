@@ -2,6 +2,9 @@
 # tools/pick.sh in a scratch repository: union of independent rows, and stops on a merge commit,
 # a cherry-pick blocked by an untracked file, two sides changing the same row id and a stray path.
 set -eu
+# A caller such as `git rebase -x` exports GIT_DIR and friends; without this the scratch
+# repository's init and config would land in the caller's repository.
+unset $(git rev-parse --local-env-vars)
 here=$(cd "$(dirname "$0")/.." && pwd)
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-pick-test.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
