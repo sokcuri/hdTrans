@@ -613,13 +613,17 @@ bool ShoutEnd(std::u32string_view rs, size_t i) {
 
 // The length of the tail of a sulky tag of ending.taunt (よーだ, もんねーっだ) whose drawn mark
 // starts at i and ends at end, after a word and before a pause or the end; 0 when there is none.
+// After a kana of ending.taunt-not-after the tag is ようだ spelled long (夢のよーだ).
 size_t TauntTail(std::u32string_view rs, size_t i, size_t end) {
     for (const std::string_view member : dict::ClassMembers("ending.taunt")) {
         const std::u32string t = DecodeText(member);
         const size_t d = static_cast<size_t>(std::find_if(t.begin(), t.end(), IsDash) - t.begin());
         if (d == 0 || d >= t.size() || i < d + 1) continue;
         const std::u32string_view head = std::u32string_view(t).substr(0, d), tail = std::u32string_view(t).substr(d + 1);
-        if (rs.substr(i - d, d) != head || !IsWordRune(rs[i - d - 1]) || rs.substr(end, tail.size()) != tail) continue;
+        if (rs.substr(i - d, d) != head || !IsWordRune(rs[i - d - 1]) || rs.substr(end, tail.size()) != tail ||
+            dict::InClass("ending.taunt-not-after", EncodeText(rs.substr(i - d - 1, 1)))) {
+            continue;
+        }
         if (end + tail.size() >= rs.size() || IsPause(rs[end + tail.size()])) return tail.size();
     }
     return 0;
