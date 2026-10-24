@@ -7,7 +7,9 @@
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/codes.h"
+#include "core/output/compose.h"
 #include "core/output/korean.h"
+#include "core/output/particle.h"
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/classify.h"
@@ -71,6 +73,28 @@ constexpr NamedFeature kFeatures[] = {
          const char32_t r = text::DecodeRune(it->group->surface).cp;
          return text::IsLetter(r) || text::IsDigit(r);
      }},
+    // The surface is katakana only, with ー (KatakanaSurface).
+    {"katakana", [](Flusher&, const Item* it) { return KatakanaSurface(it->group->surface); }},
+    // The Korean of the selected candidate is empty or spaces.
+    {"blank", [](Flusher&, const Item* it) { return TrimSpace(it->EntryText(it->selected)).empty(); }},
+    // The Korean lemma of the selected candidate ends in a final consonant (어떤 것, 책).
+    {"final-consonant",
+     [](Flusher& f, const Item* it) {
+         const char c = output::ParticleClass(ItemLemma(f, it, it->selected));
+         return c == 'c' || c == 'l';
+     }},
+    // The Korean of the selected candidate is in a copula family (큰일$AH@, output::CopulaTarget).
+    {"copula-target", [](Flusher& f, const Item* it) { return output::CopulaTarget(it->EntryText(it->selected), f.families); }},
+    // The word is a みたい that can follow a clause (Item::MitaiLike).
+    {"mitai-like", [](Flusher&, const Item* it) { return it->MitaiLike(); }},
+    // A contrast goes on after the stem: ではないが (ContrastFollows).
+    {"contrast", [](Flusher&, const Item* it) { return ContrastFollows(it); }},
+    // The item ends the utterance or the quote (QuoteEnd); UtteranceEnd also passes over a comma,
+    // a dash or a small つ.
+    {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
+    {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
+    // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
+    {"predicate-follows", [](Flusher&, const Item* it) { return PredicateFollows(it); }},
     // The surface holds a hiragana.
     {"hiragana",
      [](Flusher&, const Item* it) {
@@ -94,12 +118,14 @@ constexpr FieldSpelling kFields[] = {
     {'U', CxField::EndingSurface}, {'Y', CxField::EndingTarget}, {'B', CxField::Word},
     {'I', CxField::Text},    {'H', CxField::Head},          {'F', CxField::Feature},
     {'C', CxField::Candidate}, {'G', CxField::Gram},        {'O', CxField::FirstWord},
+    {'T', CxField::Tail},
 };
 
 bool SetField(CxField field) {
     return field == CxField::Surface || field == CxField::Lemma || field == CxField::Target ||
            field == CxField::EndingSurface || field == CxField::EndingTarget || field == CxField::Text ||
-           field == CxField::Head || field == CxField::Word || field == CxField::Candidate || field == CxField::FirstWord;
+           field == CxField::Head || field == CxField::Word || field == CxField::Candidate || field == CxField::FirstWord ||
+           field == CxField::Tail;
 }
 
 // The nodes and atoms of one condition appended to a table.
@@ -184,9 +210,16 @@ bool FamilyName(std::string_view s) {
 
 bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::vector<CxAction>& out, const char*& error) {
     constexpr std::pair<std::string_view, CxVerb> kVerbs[] = {
-        {"select-lemma", CxVerb::SelectLemma}, {"take-target", CxVerb::TakeTarget}, {"set-target", CxVerb::SetTarget},
-        {"set-ending", CxVerb::SetEnding},     {"replace-head", CxVerb::ReplaceHead}, {"map-lemma", CxVerb::MapLemma},
-        {"map-target", CxVerb::MapTarget},     {"set-verb", CxVerb::SetVerb},
+        {"select-lemma", CxVerb::SelectLemma},
+        {"select-target", CxVerb::SelectTarget},
+        {"take-target", CxVerb::TakeTarget},
+        {"set-target", CxVerb::SetTarget},
+        {"set-ending", CxVerb::SetEnding},
+        {"replace-head", CxVerb::ReplaceHead},
+        {"replace-ending-tail", CxVerb::ReplaceEndingTail},
+        {"map-lemma", CxVerb::MapLemma},
+        {"map-target", CxVerb::MapTarget},
+        {"set-verb", CxVerb::SetVerb},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -229,8 +262,9 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
         }
-        if (a.verb == CxVerb::ReplaceHead && (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
-            tokens.Fail(bad != nullptr ? bad : "replace-head takes the old and the new head");
+        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail) &&
+            (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
+            tokens.Fail(bad != nullptr ? bad : "a replace action takes the old and the new text");
             break;
         }
         out.push_back(std::move(a));
@@ -462,12 +496,16 @@ const Item* Neighbour(const Item* it, int delta) {
     return it;
 }
 
+// Whether v matches the literal of a condition: "~…" holds the value somewhere; the rest are the
+// surface markers of the rules.
+bool MatchesLiteral(std::string_view v, std::string_view literal) {
+    if (literal.size() > 1 && literal[0] == '~') return Has(v, literal.substr(1));
+    return rules::MatchRuleSurface(v, literal);
+}
+
 bool MatchesValue(const CxAtom& a, std::string_view v) {
     switch (a.match) {
-        case CxMatch::Literal:
-            // "~…" holds the value somewhere; the rest are the markers of the rules.
-            if (a.value.size() > 1 && a.value[0] == '~') return Has(v, std::string_view(a.value).substr(1));
-            return rules::MatchRuleSurface(v, a.value);
+        case CxMatch::Literal: return MatchesLiteral(v, a.value);
         case CxMatch::Member: return a.set->index.contains(v);
         case CxMatch::MemberStart:
             return std::ranges::any_of(a.set->members, [&](std::string_view m) { return v.starts_with(m); });
@@ -510,6 +548,7 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
             break;
         case CxField::Text: v = MatchesValue(a, Slice(it->text, it->start, it->length)); break;
         case CxField::Head: v = MatchesValue(a, Slice(it->text, 0, it->start)); break;
+        case CxField::Tail: v = MatchesValue(a, From(it->text, it->start + it->length)); break;
         case CxField::Feature: v = a.feature(f, it); break;
         case CxField::Candidate: {
             const int count = static_cast<int>(it->group->entries.size());
@@ -572,10 +611,13 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
     for (int d = a.delta; it != nullptr && d < 0; d++) it = it->prev;
     if (it == nullptr) return;
     switch (a.verb) {
-        case internal::CxVerb::SelectLemma: {
+        case internal::CxVerb::SelectLemma:
+        case internal::CxVerb::SelectTarget: {
             const int count = static_cast<int>(it->group->entries.size());
             for (int slot = 0; slot < count; slot++) {
-                if (ItemLemma(f, it, slot) == a.value) {
+                const bool match = a.verb == internal::CxVerb::SelectLemma ? MatchesLiteral(ItemLemma(f, it, slot), a.value)
+                                                                           : MatchesLiteral(it->EntryText(slot), a.value);
+                if (match) {
                     it->SelectCandidate(slot, source);
                     break;
                 }
@@ -589,6 +631,13 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const std::string_view target = it->EntryText(it->selected);
             if (target.starts_with(a.value)) {
                 it->AssignEntrySurface(it->selected, a.with + std::string(target.substr(a.value.size())), source);
+            }
+            break;
+        }
+        case internal::CxVerb::ReplaceEndingTail: {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e != nullptr && e->dst.ends_with(a.value)) {
+                it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - a.value.size()) + a.with, source);
             }
             break;
         }

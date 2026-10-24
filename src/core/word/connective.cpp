@@ -15,8 +15,8 @@ namespace {
 // The item's text as typed, from its start over its length.
 std::string_view ItemText(const Item* it) { return Slice(it->text, it->start, it->length); }
 
-// Whether a verb follows it in its sentence (not an auxiliary of its て form), with only words
-// and particles between.
+}  // namespace
+
 bool PredicateFollows(const Item* it) {
     const Item* n = it->next;
     if (n == nullptr) return false;
@@ -35,8 +35,6 @@ bool PredicateFollows(const Item* it) {
     }
     return false;
 }
-
-}  // namespace
 
 bool UtteranceEnd(const Worker& w, const Item* it) {
     std::string_view rest = From(it->text, it->start + it->length);

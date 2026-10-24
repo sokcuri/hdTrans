@@ -34,7 +34,7 @@ namespace internal {
 
 enum class CxField : uint8_t {
     Surface, Lemma, Target, Part, Sem, Class, EndingSurface, EndingTarget, Word, Text, Head, Feature, Candidate, Gram,
-    FirstWord,
+    FirstWord, Tail,
 };
 
 // How an atom compares: with a literal (rule surface markers, code patterns), with the members of a
@@ -60,12 +60,14 @@ struct CxNode {
     uint32_t end = 0;    // one past the subtree
 };
 
-enum class CxVerb : uint8_t { SelectLemma, TakeTarget, SetTarget, SetEnding, ReplaceHead, MapLemma, MapTarget, SetVerb };
+enum class CxVerb : uint8_t {
+    SelectLemma, SelectTarget, TakeTarget, SetTarget, SetEnding, ReplaceHead, ReplaceEndingTail, MapLemma, MapTarget, SetVerb,
+};
 
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
-    std::string value, with;  // with: the new head of replace-head
+    std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail
     int map = -1;             // map-lemma, map-target: into maps
 };
 

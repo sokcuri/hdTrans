@@ -74,6 +74,28 @@ HD_TEST(constructions_parse_maps) {
     HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::MapTarget);
 }
 
+HD_TEST(constructions_parse_select_and_tail) {
+    const std::vector<std::string_view> lines = {
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\t&&2 T+0== \"L、\" F+0== \"final-consonant\"\tselect-lemma \"L(이)가 아니\" select-target@-1 \"L갈 수\"\t\n",
+        "cx:a:20\t\tT+0== @Lparticle.contrast\treplace-ending-tail \" 것이다\" \" 것이\"\t\n",
+        "cx:a:30\t\tF+0== \"selected\"\treplace-ending-tail \"던\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string("4: actions: record ends early\n"));
+    HD_REQUIRE(t.rows.size() == 2);
+    HD_REQUIRE(t.rows[0].actions.size() == 2);
+    HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::SelectLemma);
+    HD_CHECK_EQ(t.rows[0].actions[0].value, std::string("L(이)가 아니"));
+    HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::SelectTarget);
+    HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[1].delta), -1);
+    HD_CHECK(t.atoms[t.nodes[t.rows[0].root + 1].count].field == internal::CxField::Tail);
+    HD_REQUIRE(t.rows[1].actions.size() == 1);
+    HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::ReplaceEndingTail);
+    HD_CHECK_EQ(t.rows[1].actions[0].value, std::string(" 것이다"));
+    HD_CHECK_EQ(t.rows[1].actions[0].with, std::string(" 것이"));
+}
+
 HD_TEST(constructions_surface_index) {
     const std::vector<std::string_view> lines = {
         "//= a\tafter First\tdoc\n",

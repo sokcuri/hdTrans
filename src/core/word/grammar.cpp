@@ -411,6 +411,19 @@ bool Thing(std::string_view attr) {
 
 bool Person(std::string_view attr) { return !attr.empty() && !Thing(attr); }
 
+bool ContrastFollows(const Item* it) {
+    return Contrast(From(it->text, it->start + static_cast<long>(it->group->surface.size())));
+}
+
+bool KatakanaSurface(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!((r.cp >= U'ァ' && r.cp <= U'ヶ') || r.cp == U'ー')) return false;
+        t.remove_prefix(r.size == 0 ? 1 : r.size);
+    }
+    return !s.empty();
+}
+
 bool PauseOrEnd(const Item* it) {
     const std::string_view s = it->group->surface;
     return InSet(kCommaItems, s) || InSet(kSentenceEndItems, s) || InSet(kClosingQuoteItems, s) || s == "。";
@@ -1309,10 +1322,6 @@ void PastSequence(Flusher& f) {
 }
 
 
-namespace {
-
-// Whether an item's text, as far as the chain goes, ends the utterance: the item is followed by
-// the end of the text or by closing punctuation, a pause or a span boundary.
 bool QuoteEnd(const Worker& w, const Item* it) {
     std::string_view rest = From(it->text, it->start + it->length);
     if (rest.empty() && it->tokenIndex + 1 < w.TokenCount()) {
@@ -1321,8 +1330,6 @@ bool QuoteEnd(const Worker& w, const Item* it) {
     }
     return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)");
 }
-
-}  // namespace
 
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
@@ -1754,13 +1761,7 @@ void ChanAfterKatakana(Flusher& f) {
             p->start + p->length != it->start || p->tokenIndex != it->tokenIndex || p->group->surface.empty()) {
             continue;
         }
-        bool katakana = true;
-        for (size_t i = 0; i < p->group->surface.size();) {
-            const text::Rune r = text::DecodeRune(p->group->surface.substr(i));
-            katakana = katakana && ((r.cp >= U'ァ' && r.cp <= U'ヶ') || r.cp == U'ー');
-            i += r.size == 0 ? 1 : r.size;
-        }
-        if (katakana && p->selected >= 0 && At(p->Code(p->selected), 0) == '1') SelectLemma(f, it, "짱");
+        if (KatakanaSurface(p->group->surface) && p->selected >= 0 && At(p->Code(p->selected), 0) == '1') SelectLemma(f, it, "짱");
     }
 }
 

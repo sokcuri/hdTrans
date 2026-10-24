@@ -61,6 +61,17 @@ bool OpensLine(const Worker& w, const Item* it);
 bool NumberSurface(std::string_view s);
 // Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
 bool QuoteVerbFollows(const Item* it);
+// Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
+// span boundary (grammar.cpp).
+bool QuoteEnd(const Worker& w, const Item* it);
+// Whether the text after the stem of the item is い or かった, a comma or none, and a particle of
+// particle.contrast: a contrast that goes on (大した傷ではないが) (grammar.cpp).
+bool ContrastFollows(const Item* it);
+// Whether s is katakana ァ..ヶ and ー only, and not empty (grammar.cpp).
+bool KatakanaSurface(std::string_view s);
+// Whether a verb follows it in its sentence (not an auxiliary of its て form), with only words and
+// particles between (connective.cpp).
+bool PredicateFollows(const Item* it);
 
 // Text-path grammar (grammar.cpp).
 void PassiveRecords(Flusher& f);
