@@ -692,7 +692,7 @@ function fuzzStep(name) {
 const fuzzBlocking = new Function('github', 'startsWith',
   `return (${fuzzJob.match(/^      FUZZ_BLOCKING: \$\{\{ (.*) \}\}$/m)[1]});`);
 
-test('the random fuzz run fails branch pushes and only warns on pull requests, tags and manual runs', () => {
+test('the random fuzz run fails branch pushes and only warns on pull requests and tags', () => {
   const startsWith = (s, prefix) => s.startsWith(prefix);
   // Publish npm calls Build on the tag push, so a tag build has the push event and the tag ref.
   for (const [event_name, ref, blocking] of [
@@ -700,11 +700,10 @@ test('the random fuzz run fails branch pushes and only warns on pull requests, t
     ['push', 'refs/heads/main', true],
     ['pull_request', 'refs/pull/7/merge', false],
     ['push', 'refs/tags/v1.2.3', false],
-    ['workflow_dispatch', 'refs/tags/v1.2.3', false],
-    ['workflow_dispatch', 'refs/heads/develop', false],
   ]) {
     assert.equal(fuzzBlocking({ event_name, ref }, startsWith), blocking, `${event_name} ${ref}`);
   }
+  assert.match(fuzzJob, /\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' && \(github\.event_name == 'push' \|\| github\.event_name == 'pull_request'\) \}\}\n/);
   assert.match(fuzzStep('Fuzz'), /\n        continue-on-error: \$\{\{ env\.FUZZ_BLOCKING != 'true' \}\}\n/);
   assert.doesNotMatch(fuzzStep('Replay the seeds and regression inputs'), /continue-on-error/);
   assert.match(fuzzStep('Upload the failing inputs and fuzzer logs'), /steps\.fuzz\.outcome == 'failure'/);
