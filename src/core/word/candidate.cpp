@@ -180,7 +180,17 @@ std::string SinoKoreanNumber(std::string_view digits) {
 
 // After a noun parent, the particle records (kind 2) that follow the first verb or
 // adjective record move to the front (behind the leading plain-dictionary records).
-Record* ReorderAfterNoun(const Item& parent, Record* records) {
+bool AllHiragana(std::string_view s);
+
+// Whether every particle among records is a single character.
+bool OneKanaParticles(const Record* records) {
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (At(r->partCode, 1) == '2' && text::RuneCount(r->source) > 1) return false;
+    }
+    return true;
+}
+
+Record* ReorderAfterNoun(const Item& parent, Record* records, const dict::Snapshot& snapshot, std::string_view text) {
     if (parent.EntryText(0) == kKoCloseQuote || parent.EntryText(0) == ")" || At(parent.Code(0), 0) != '1') {
         return records;
     }
@@ -213,6 +223,13 @@ Record* ReorderAfterNoun(const Item& parent, Record* records) {
             }
         } else if (k > '6' && k <= '8') {
             if (Has(p->attr, "Pj")) break;
+            // An adjective stem of three or more kana keeps its place before particles of one kana
+            // after which no word of two characters or more starts: the particle would leave a piece
+            // of the adjective as a word (水着かわいい, not か + わ + いい; but それはかなわない).
+            if (k == '7' && text::RuneCount(p->source) >= 3 && AllHiragana(p->source) && OneKanaParticles(first)) {
+                const std::string_view rest = text.substr(text::DecodeRune(text).size);
+                if (text::RuneCount(rest.substr(0, snapshot.WordAt(rest))) < 2) break;
+            }
             reorder = true;
         }
         if (!reorder) continue;
@@ -1511,7 +1528,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (parent != nullptr) {
-        records = ReorderAfterNoun(*parent, records);
+        records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
     }

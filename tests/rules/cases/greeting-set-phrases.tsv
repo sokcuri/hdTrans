@@ -1,4 +1,4 @@
-# 규칙: LEX-49
+# 규칙: LEX-50
 rule	input	expected	kind	layer
 dict:jisjk:362273	「では、いただきます」	「그럼, 잘 먹겠습니다」	fix	local
 dict:jisjk:362273	「んじゃ、いただきます」	「그럼, 잘 먹겠습니다」	fix	local

@@ -1,4 +1,4 @@
-# 규칙: LEX-49
+# 규칙: LEX-50
 rule	input	expected	kind	layer
 dict:nantoka-iu:1	「なんとか言えよ！！」	「뭐라고 말해!!」	fix	local
 dict:nantoka-iu:1	「おいコラっ！　なんとか言えやっ！」	「야 이놈아! 어떻게든 말할 수 있고야!」	fix	local

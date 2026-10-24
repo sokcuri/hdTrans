@@ -1,4 +1,4 @@
-# 규칙: LEX-50
+# 규칙: LEX-51
 rule	input	expected	kind	layer
 dict:copula-predicates:1	「ばっちりですよ」	「완벽해요」	fix	lookup
 dict:copula-predicates:1	「ああ、覚えてますよ。もちろん覚えてます、ばっちりです」	「아, 기억하고 있어요. 물론 기억하고 있습니다, 완벽합니다」	fix	lookup

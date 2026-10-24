@@ -1,4 +1,4 @@
-# 규칙: LEX-50
+# 규칙: LEX-51
 rule	input	expected	kind	layer
 lexical:suteki-adjective	「でも、素敵」	「하지만, 멋지다」	fix	lookup
 lexical:suteki-adjective	今日も司令、朝から素敵。	오늘도 사령, 아침부터 멋지다.	fix	lookup

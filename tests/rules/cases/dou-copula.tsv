@@ -1,4 +1,4 @@
-# 규칙: LEX-50
+# 규칙: LEX-51
 rule	input	expected	kind	layer
 dict:dou-copula	「どうなの？」	「어때?」	fix	lookup
 dict:dou-copula	「そういうみちるはどうなのよ？」	「그렇게 말하는 흩어지고는 어떤데?」	fix	lookup
