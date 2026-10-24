@@ -917,6 +917,16 @@ bool AdverseCondition(const Item* it, std::string_view rest) {
     return n != nullptr && StartsWithMember(n->group->surface, dict::ClassMembers("stem.adverse-outcome"));
 }
 
+// Whether a noun of noun.suffered-act, or a noun that ends in こと (同じこと), stands right before
+// item it, or before a を right before it (どんなことされた, 何をされた).
+bool SufferedActBefore(const Item* it) {
+    const Item* p = it->prev;
+    if (p != nullptr && p->group->surface == "を") p = p->prev;
+    if (p == nullptr || p->detail->Yougo()) return false;
+    const std::string_view s = p->group->surface;
+    return dict::InClass("noun.suffered-act", s) || s.ends_with("こと");
+}
+
 // The voice that candidate slot of item it reads: the potential (볼 수 있다, gram Ke), the
 // respectful form in 시, or else none.
 Voice CandidateVoice(Flusher& f, const Item* it, int slot) {
@@ -1034,7 +1044,9 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
                         CompoundAction(surface) || Transitive(it) || ObjectBefore(it) || Has(surface, "を");
     if (agent != nullptr && object) return Voice::Passive;
     if (Respectful(f, it, form, stem, rest, passive, ichidan)) return Voice::Respectful;
-    if (form == VoiceForm::Godan) return Voice::Passive;
+    if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
+        return Voice::Passive;
+    }
     if (object && StartsWithMember(rest, dict::ClassMembers("ending.voice-desire"))) return Voice::Passive;
     if (AbilityScope(it, rest)) return Voice::Potential;
     // A trouble and a verb of feeling tell the passive from the potential, which only the られ of an

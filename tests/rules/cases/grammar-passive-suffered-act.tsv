@@ -1,0 +1,27 @@
+# 규칙: GRM-10
+rule	input	expected	kind	layer
+voice:suffered-act	どんなことされたの？	어떤 일을 당했어?	fix	voice
+voice:suffered-act	ひどいことされた。	심한 일을 당했다.	fix	voice
+voice:suffered-act	変なことされたら困る	이상한 일을 당하면 곤란하다	fix	voice
+voice:suffered-act	何をされたの？	무슨 일을 당했어?	fix	voice
+voice:suffered-act	咬みつきさん、ストーカーってどんなことされたの？	has:어떤 일을 당했어	fix	voice
+voice:suffered-act	「でも、私、慶になら何されても大丈夫だから」	has:무슨 일을 당해도	fix	voice
+voice:suffered-act	「何されるかわかりませんからね……」	has:무슨 일을 당할	fix	voice
+voice:suffered-act	一体、何をされたんだろう。	has:무슨 일을 당했을까	fix	voice
+voice:suffered-act	「筧先輩なら、何をされてもいいんです」	has:무슨 일을 당해도	fix	voice
+voice:suffered-act	「誘拐するには手間が掛かりそうだし、何より手元に置いておけば何をされるかわからないと思わない？」	has:무슨 일을 당할지	fix	voice
+voice:suffered-act	「私の知らないところで変なことをされてないか心配だっただけよっ」	has:이상한 일을 당하지	fix	voice
+voice:suffered-act	「私はこれから、なにか……目をそむけたくなるような、酷いことをされるわけだな？」	has:심한 일을 당하는	fix	voice
+voice:suffered-act	「また余計なことをされても面倒だからね」	has:쓸데없는 일을 당해도	fix	voice
+voice:suffered-act	今度は腹に同じことをされる。	has:같은 것을 당한다	fix	voice
+voice:suffered-act	「大人の男か……最近、大人にはずいぶんなことされてるから、ちょっとイヤだな……」	has:일을 당하고 있으니	fix	voice
+voice:suffered-act	「もしかして……筧先輩に変なことされた、とか？」	has:이상한 일을 당했다	fix	voice
+voice:suffered-act	「させません。そんなことされたら、マスターに報告できなくなってしまいます」	has:그런 일을 당하면	fix	voice
+voice:suffered-act	それでも、どんなことをされても守りたいプライバシーがあるのなら、	has:어떤 일을 당해도	keep	voice
+voice:suffered-act	「また学食でショッキングなことをされては困りますから、ここにしたんです」	has:쇼킹한 일을 당해서는	keep	voice
+voice:suffered-act	「あの、お嬢様。一体なにをされているのですか？」	lacks:당하	keep	voice
+voice:suffered-act	先生は何をされたんですか？	선생님은 무엇을 하셨습니까?	keep	voice
+voice:suffered-act	柏木さんは、ビジネス・ネゴシエイターというお仕事をされてるただのガンマニアです」	has:일을 하고 계시는	keep	voice
+voice:suffered-act	司令官様、まだまだお仕事されるのですね。	has:일하시는군요	keep	voice
+voice:suffered-act	「まことに言いづらいことなのですが、お昼の食事をされずに、おやつを出すというわけにはいきません」	has:식사를 하시지	keep	voice
+voice:suffered-act	「ノストラの跡目争いで余計な邪魔をされないためだよ」	has:방해를 당하지	keep	voice

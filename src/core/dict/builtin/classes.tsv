@@ -168,6 +168,7 @@
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
 //= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
 //= noun.vehicle	Vehicles: their で is the means only before a verb of verb.vehicle-travel, and elsewhere the place where it happens (電車で行く 전철로 가다, 電車で足を踏まれた 전철에서 발을 밟혔다).
+//= noun.suffered-act	Nouns of what is done to someone (こと, 何): a bare される right after one, or after its を, is the passive of する, 당하다 (どんなことされたの 어떤 일을 당했어), unless GRM-10 reads it respectful.
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-letter	Particles after which, or before which after a kanji or katakana, a single Latin letter of mark.laughter is a word, not laughter (変数wの値, のwキー).
@@ -2401,6 +2402,11 @@ noun.vehicle	ヘリ
 noun.vehicle	ヘリコプター
 noun.vehicle	終電
 noun.vehicle	始発
+noun.suffered-act	こと
+noun.suffered-act	事
+noun.suffered-act	何
+noun.suffered-act	なに
+noun.suffered-act	なん
 noun.time-end	時
 noun.time-end	頃
 noun.time-end	日
