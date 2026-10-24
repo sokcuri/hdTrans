@@ -2,14 +2,14 @@
 rule	input	expected	kind	layer
 dict:w:27100	「と、その前に」	「아, 그 전에」	fix	local
 dict:w:27100	「と、それじゃ、今日はこの辺で」	rule:dict:w:27100=아,	fix	local
-dict:w:27100	「だからー、ずっと忙しかったでしょ。と、そうだ」	「그러니까~, 계속 바빴잖아. 아, 그렇지」	fix	local
+dict:w:27100	「だからー、ずっと忙しかったでしょ。と、そうだ」	「그러니까~, 계속 바빴잖아. 아, 맞다」	fix	local
 dict:w:27100	「いや、謝る必要はないし……と、そうだ、ひとつお願いしていい？」	rule:dict:w:27100=아,	fix	local
 dict:w:27100	「と、言いますと？」	!rule:dict:w:27100	keep	local
 dict:w:27100	「是非、いただくわ……と、言いたいところなのですが……」	!rule:dict:w:27100	keep	local
 dict:w:27100	と、自分のメイド服を見せる。	!rule:dict:w:27100	keep	local
 dict:w:27100	スパン……と、自分の胸を叩いた音が響いた。	!rule:dict:w:27100	keep	local
-dict:w:27101	「と、そうだ」	「아, 그렇지」	fix	local
-dict:w:27101	「あ、そうだ」	「아, 그렇지」	fix	local
+dict:w:27101	「と、そうだ」	「아, 맞다」	fix	local
+dict:w:27101	「あ、そうだ」	「아, 맞다」	fix	local
 dict:w:27101	「そうだ、これも何かの役に立つかもしれません」	rule:dict:w:27101=그%C5@	fix	local
 dict:w:27101	そうだ。	그래.	fix	local
 dict:w:27101	「うん、そうだ」	「응, 그래」	fix	local
@@ -18,3 +18,15 @@ dict:w:27101	「本当にそうだ」	「정말 그렇다」	keep	local
 dict:w:27101	　きっと、そうだ。	!rule:dict:w:27101	keep	local
 dict:w:27101	「そうだと思う」	「그렇다고 생각한다」	keep	local
 dict:w:27101	「そうだっけ？」	「그랬나?」	keep	local
+dict:w:27102	と、そうだ、あたしが戻ってくるまで、仕切ってよ」	rule:dict:w:27102=아,	fix	local
+dict:w:27102	このまま置いておいてもいいんだけど……と、そうだっ！	rule:dict:w:27102=아,	fix	local
+dict:w:27102	「っと、そうだ……今、何時ですか？」	「아, 맞다……지금, 몇시입니까?」	fix	local
+dict:w:27102	「っと、危ない」	rule:dict:w:27102=아,	fix	local
+dict:w:27102	と、そのとき。	!rule:dict:w:27102	keep	local
+dict:w:27102	と、そうだったのか。	!rule:dict:w:27102	keep	local
+dict:w:27102	ぎゅっと、抱きしめた。	!rule:dict:w:27102	keep	local
+dict:w:27101	「なるさ……そうだ、ほら、これ」	rule:dict:w:27101=%Dn@	fix	local
+dict:w:27101	マルフタマルマル。そうだ、甘いものはいかがですか？	0200. 그래, 단 것은 어떻습니까?	keep	local
+dict:w:27101	……そうだ。	……그래.	keep	local
+dict:w:27101	「ああ、そうだ」	「아, 그래」	keep	local
+dict:w:27101	そうだ、ここが正解だ。	그래, 여기가 정답이다.	keep	local
