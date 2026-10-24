@@ -1,0 +1,136 @@
+# 규칙: SND-1, SND-2
+rule	input	expected	kind	layer
+lookup:copies-te-form	さぁ、食べて、食べて！	자, 먹어, 먹어!	keep	lookup
+lookup:copies-te-form	何で、何でここにいるの？	왜, 왜 여기에 있는 거야?	keep	lookup
+lookup:copies-te-form	食べて食べてぇ！	먹어 먹어!	fix	rewrites
+lookup:copies-te-form	え、待って待って。	어, 기다려 기다려.	fix	rewrites
+lookup:copies-te-form	見て見てー♪	봐 봐~♪	fix	rewrites
+lookup:copies-te-form	褒めて褒めてぇ！	칭찬해 칭찬해!	fix	rewrites
+lookup:copies-te-form	見て見てこの成績！	봐 봐 이 성적!	fix	rewrites
+lookup:copies-te-form	わっ、見せて見せてっ	왓, 보여 줘 보여 줘	fix	rewrites
+lookup:copies-te-form	ない人間になり、歩いて歩いて……	없는 인간이 되어, 걷고 또 걸어……	fix	rewrites
+lookup:copies-te-form	いや、マジでマジで！	아니, 진짜로 진짜로!	keep	lookup
+lookup:copies-te-form	待て待て待て	잠깐 잠깐 잠깐	keep	lookup
+lookup:copies-te-form	いや、いいっていいって、わかってくれれば	아니, 됐어 됐어, 알아 준다면	keep	lookup
+lookup:copies-te-form	になっていて……それで……それで……あぅぅ	가 되어 있어……그래서……그래서……아우우	keep	lookup
+lookup:copies-te-form	なでなでなでなで	쓰담쓰담쓰담쓰담	keep	lookup
+lookup:copies-te-form	待て待て、実は深刻な話題だよ	기다려 기다려, 실은 심각한 화제야	keep	lookup
+lookup:copies-te-form	提督、見せて見せて！	제독, 보여 줘 보여 줘!	fix	rewrites
+lookup:copies-te-form	総員、起きて起きて！	총원, 일어나 일어나!	fix	rewrites
+lookup:copies-te-form	待て……待て待て、ちょっと待ってくれ	기다려……기다려 기다려, 잠깐 기다려 줘	keep	lookup
+lookup:copies-te-form	みてみて～、この輝く肌。	봐 봐~, 이 빛나는 피부.	fix	rewrites
+lookup:copies-te-form	さ、急いで急いで。	자, 서둘러 서둘러.	keep	lookup
+lookup:copies-te-form	わー、待って待って。	와아, 기다려 기다려.	fix	rewrites
+lookup:copies-te-form	何で何で？	왜 왜?	keep	lookup
+lookup:copies-ku-adverb	ああ……だから、ちょくちょくヘンな感じになってた	아……니까, 가끔 이상한 기분이 들었다	keep	lookup
+lookup:copies-ku-adverb	よくよく見れば、寝袋に入って	자세히 보면, 침낭에 들어가	keep	lookup
+lookup:copies-ku-adverb	いや、よくよく見れば足が震えていた。	아니, 자세히 보면 다리가 떨고 있었다.	keep	lookup
+lookup:copies-ku-adverb	わくわくするっていうか、建物	두근두근한다고 하는지, 건물	keep	lookup
+lookup:copies-ku-adverb	ひっく……ひっく……	딸꾹……딸꾹……	keep	lookup
+lookup:copies-ku-adverb	もなかったから、ろくろく印象がない。	도 없었으니까, 변변히 인상이 없다.	keep	lookup
+lookup:copies-ku-adverb	早く早くっ！	빨리 빨리!	keep	lookup
+lookup:copies-ku-adverb	ぞくぞくします	오싹오싹합니다	keep	lookup
+lookup:copies-imperative	頑張れ頑張れ、できるできるできる	힘내라 힘내라, 할 수 있다 할 수 있다 할 수 있다	fix	rewrites
+lookup:copies-imperative	うーん……重ね重ね残念だなぁ……	으음……거듭해서 유감이구나……	keep	lookup
+lookup:copies-imperative	さ、食え食え！	자, 먹어라 먹어라!	fix	rewrites
+lookup:copies-imperative	おう、食え食え	어, 먹어라 먹어라	fix	rewrites
+lookup:copies-imperative	重ね重ね、ご好意に感謝します	거듭해서, 호의에 감사합니다	keep	lookup
+lookup:copies-imperative	重ね重ね、お詫び申し上げます	거듭해서, 사과 말씀드립니다	keep	lookup
+lookup:copies-interjection	はいはい。	네네.	keep	lookup
+lookup:copies-interjection	そうそう、ちょっとおしゃれな	맞아 맞아, 조금 세련된	keep	lookup
+lookup:copies-interjection	え……ちょ、ちょっと……っ	어……조, 조금……	keep	lookup
+lookup:copies-interjection	覗き込みながら、うやうやしく言った。	들여다보면서, 공손하게 말했다.	keep	lookup
+lookup:copies-interjection	し狭いですけど、どうぞどうぞ	해 좁지만, 자, 어서 어서	keep	lookup
+lookup:copies-interjection	じゃ、じゃあ、もうちょっとだけ	그, 그럼, 좀 더 만	keep	lookup
+lookup:copies-interjection	そろそろ到着する、車内で可能	슬슬 도착하는, 차내에서 가능	keep	lookup
+lookup:copies-interjection	あ、そうそう！	아, 맞아 맞아!	keep	lookup
+lookup:copies-interjection	いやいや、そんなものは望んで	아니아니, 그런 것은 바래	keep	lookup
+lookup:copies-interjection	とうとう俺の夢はここまできて	드디어 내 꿈은 여기까지 와	keep	lookup
+lookup:copies-interjection	はいはい、いいから遅刻しちゃ	네네, 됐으니까 지각하면	keep	lookup
+lookup:copies-interjection	まあまあ。	자자.	keep	lookup
+lookup:copies-interjection	じゃ、じゃあ、また明日ね	그, 그럼, 또 내일이네	keep	lookup
+lookup:copies-interjection	と化した食堂は、わいわいといつになく騒がしい。	화한 식당은, 와글와글 평소와 다르게 소란스럽다.	keep	lookup
+lookup:copies-interjection	なかなか興味深い展開でしたね。	꽤 흥미로운 전개였죠.	keep	lookup
+lookup:copies-conjunction	でも、でも……あああ、おケガは	하지만, 하지만……아아아, 상처는	keep	lookup
+lookup:copies-conjunction	でもでも、みんなに言うのって	하지만 하지만, 모두에게 말하는 것은	fix	rewrites
+lookup:copies-conjunction	あ、でもでも、相乗効果で意外に楽	아, 하지만 하지만, 상승효과로 의외로 편하다	fix	rewrites
+lookup:copies-conjunction	ううん、でも、でも	아니, 하지만, 하지만	keep	lookup
+lookup:copies-conjunction	でもでも！	하지만 하지만!	fix	rewrites
+lookup:copies-conjunction	でもでも、目立つのはいいこと	하지만 하지만, 눈에 띄는 것은 좋은 일	fix	rewrites
+lookup:copies-conjunction	でも……でも……私……うれしい…	하지만……하지만……나……기쁘다…	keep	lookup
+lookup:copies-conjunction	でも、でもぉ……っ	하지만, 하지만……	keep	lookup
+lookup:copies-conjunction	でもでも、良かった	하지만 하지만, 좋았다	fix	rewrites
+lookup:copies-conjunction	でも……でも……うっ……お姉ちゃ	하지만……하지만……윽……언니	keep	lookup
+lookup:copies-conjunction	でもでも、格闘だと互角っぽい	하지만 하지만, 격투라면 호각 같다	fix	rewrites
+lookup:copies-conjunction	でも……でも……あたしだって……	하지만……하지만……나도……	keep	lookup
+lookup:copies-conjunction	でもでも、師匠とのせっかくの	하지만 하지만, 스승과의 모처럼의	fix	rewrites
+lookup:copies-conjunction	でもでも、ほら、音、大きくな	하지만 하지만, 자, 소리, 크고	fix	rewrites
+lookup:copies-conjunction	でもでも、お茶、美味しくない	하지만 하지만, 차, 맛있지 않다	fix	rewrites
+lookup:copies-conjunction	でもでも、お互いの気持ちがわ	하지만 하지만, 서로의 기분이 와	fix	rewrites
+lookup:copies-conjunction	でも……でも、もし……別のところ	하지만……하지만, 만약……다른 곳	keep	lookup
+lookup:copies-predicate	手伝う、手伝う！	돕는다, 돕는다!	keep	lookup
+lookup:copies-predicate	はむっ…うむ、美味い、美味いぞ！	앙…음, 맛있다, 맛있어!	keep	lookup
+lookup:copies-predicate	まだまだ戦えます！	아직도 싸울 수 있습니다!	keep	lookup
+lookup:copies-predicate	お、来た来た。	오, 왔다 왔다.	fix	rewrites
+lookup:copies-predicate	頑張る、頑張るから	노력한다, 노력하니까	keep	lookup
+lookup:copies-predicate	でも、まだまだやれるよ！	하지만, 아직도 할 수 있을게!	keep	lookup
+lookup:copies-predicate	違う違う。	아니다 아니다.	keep	lookup
+lookup:copies-predicate	まだまだ！	아직도!	keep	lookup
+lookup:copies-predicate	えぇ、やだやだぁ！	네, 싫어 싫어!	keep	lookup
+lookup:copies-predicate	楽しい……楽しい！	즐겁다……즐겁다!	keep	lookup
+lookup:copies-predicate	聞いてる聞いてる	듣고 있다 듣고 있다	fix	rewrites
+lookup:copies-predicate	すまない……すまない……	미안하다……미안하다……	keep	lookup
+lookup:copies-predicate	違いない違いない！	틀림없다 틀림없다!	keep	lookup
+lookup:copies-predicate	ちっ…まだまだいける、嘗めるな。	쳇…아직도 갈 수 있다, 얕보지 마.	keep	lookup
+lookup:copies-predicate	そんなことない……そんなことないよ……	그렇지 않다……그렇지 않아……	keep	lookup
+lookup:copies-predicate	ああ～食べた食べた。	아~먹었다 먹었다.	keep	lookup
+lookup:copies-predicate	ことを考えると、まだまだですよ	일을 생각하면, 아직 멀었습니다	keep	lookup
+lookup:copies-predicate	俺も、まだまだ修行が足りない。	나도, 아직도 수행이 부족하다.	keep	lookup
+lookup:copies-predicate	は～食った食ったー！	는~먹었다 먹었다~!	keep	lookup
+lookup:copies-predicate	まだまだだよ	아직도야	keep	lookup
+lookup:copies-noun	うん……大丈夫……大丈夫、だから……	응……괜찮아……괜찮아, 그러니까……	keep	lookup
+lookup:copies-noun	無理無理	무리 무리	keep	lookup
+lookup:copies-noun	大丈夫大丈夫、誰も聞いてないから	괜찮아 괜찮아, 아무도 듣지 않으니까	keep	lookup
+lookup:copies-noun	個人個人の経済状態にあわせて	개개인의 경제 상태에 맞추어	keep	lookup
+lookup:copies-noun	ふう、休憩休憩	후우, 휴식 휴식	keep	lookup
+lookup:copies-noun	絶対絶対！	절대 절대!	keep	lookup
+lookup:copies-noun	微妙、微妙すぎる	미묘, 너무 미묘하다	keep	lookup
+lookup:copies-noun	大丈夫大丈夫、こっちには強力なコ	괜찮아 괜찮아, 여기에는 강력한 코	keep	lookup
+lookup:copies-noun	大丈夫、大丈夫。	괜찮아, 괜찮아.	keep	lookup
+lookup:copies-noun	猫か、ダメね……集中、集中！	고양이인가, 안 되네……집중, 집중!	keep	lookup
+lookup:copies-noun	しっかし、毎日毎日、よく飽きもせず飲む	하지만, 매일매일, 잘 질리지도 않고 마신다	keep	lookup
+lookup:copies-noun	大丈夫大丈夫。	괜찮아 괜찮아.	keep	lookup
+lookup:copies-noun	思考実験、思考実験だって	사고실험, 사고실험이래	keep	lookup
+lookup:copies-noun	無理無理無理、俺、馬鹿だし	무리 무리 무리, 나, 바보같고	keep	lookup
+lookup:copies-noun	大事大事！	중요 중요!	keep	lookup
+lookup:copies-noun	班長、班長──っ	반장, 반장──	keep	lookup
+lookup:copies-noun	全然、全然よ！	전혀, 전혀!	keep	lookup
+lookup:copies-noun	大丈夫よ……大丈夫……大丈夫なんだから……あたし	괜찮아……괜찮아……괜찮으니까……나	keep	lookup
+lookup:copies-noun	大丈夫、大丈夫、すぐ慣れるから	괜찮아, 괜찮아, 바로 익숙해지니까	keep	lookup
+lookup:copies-noun	うん、大丈夫大丈夫≫	응, 괜찮아 괜찮아≫	keep	lookup
+lookup:copies-noun	大丈夫大丈夫、そのうちわかるって	괜찮아 괜찮아, 머지않아 안다니까	keep	lookup
+lookup:copies-noun	全部、全部！	전부, 전부!	keep	lookup
+lookup:copies-noun	大丈夫大丈夫、ただの考え事だから	괜찮아 괜찮아, 그냥 생각이니까	keep	lookup
+lookup:copies-noun	大掃除、大掃除しないと！	대청소, 대청소하지 않으면!	keep	lookup
+lookup:copies-other	好き、好き、そういうの！	좋아해, 좋아해, 그러한 것!	keep	lookup
+lookup:copies-other	う♪ てーとく、そのままそのまま♪	우♪ 제독, 그대로 그대로♪	keep	lookup
+lookup:copies-other	にゃーん、にゃーん	냐앙, 냐앙	keep	lookup
+lookup:copies-other	ぶーぶー	꿀꿀	keep	lookup
+lookup:copies-other	うんたんうんたん……	운탄운탄……	keep	lookup
+lookup:copies-other	へーきへーき、ボスから何か言われ	괜찮아 괜찮아, 보스에게서 뭔가 말해	keep	lookup
+lookup:copies-other	ホントにだめ、ホントにだめですからぁぁぁっ……！	정말로 안 돼, 정말로 안 되니까아아아……!	keep	lookup
+lookup:copies-other	ごめんね、ごめんね……	미안해, 미안해……	keep	lookup
+lookup:copies-other	いえ、ホントにホントに、出ませんから	아뇨, 정말로 정말로, 나오지 않으니까요	keep	lookup
+lookup:copies-other	ふーん……なるほどなるほど。	흐응……그렇구나 그렇구나.	keep	lookup
+lookup:copies-other	ごめんね……ごめんね……	미안해……미안해……	keep	lookup
+lookup:copies-stutter	は、はい……	네, 네……	keep	lookup
+lookup:copies-stutter	お、おい、まずいって	어, 어이, 큰일이라고	keep	lookup
+lookup:copies-stutter	あ、ありがとうございます	가, 감사합니다	keep	lookup
+lookup:copies-stutter	ど、どうやってやるの……？	어, 어떻게 하는 거야……?	keep	lookup
+lookup:copies-stutter	い、いつかは、越えなきゃ、いけな	어, 언젠가는, 넘지 않으면, 안 되는 거야	keep	lookup
+lookup:copies-stutter	だ、だから……女子の、制服着て	그, 그러니까……여자의, 제복 입어	keep	lookup
+lookup:copies-stutter	そ、そんなことは……	그, 그런 일은……	keep	lookup
+lookup:copies-stutter	う、うそでしょ……そんなことない	거, 거짓말이겠지……그렇지 않다	keep	lookup
+lookup:copies-stutter	そ、そうなの？	그, 그래?	keep	lookup
+lookup:copies-stutter	そ、そうだな……	그, 그래……	keep	lookup
+lookup:copies-stutter	な、なんだ、この凄まじい殺気は	뭐, 뭐야, 이 굉장한 살기는	keep	lookup

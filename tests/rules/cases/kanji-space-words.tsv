@@ -1,0 +1,11 @@
+# 규칙: LAY-2
+rule	input	expected	kind	layer
+lookup:kanji-space	光 影 光 影	빛 그림자 빛 그림자	fix	lookup
+lookup:kanji-space	光　影　光　影	빛 그림자 빛 그림자	fix	lookup
+lookup:kanji-space	副総理 兼 外務大臣	부총리 겸 외무 대신	fix	lookup
+lookup:kanji-space	未 来	미래	keep	lookup
+lookup:kanji-space	年 輪	연륜	keep	lookup
+lookup:kanji-space	通 知 表が来た。	성적표가 왔다.	keep	lookup
+lookup:kanji-space	林　涛	임도	keep	lookup
+G40	光影	광영	keep	global-stem
+G40	超Ａ級スナイパー	초A급 스나이퍼	keep	global-stem

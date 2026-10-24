@@ -203,7 +203,21 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     std::vector<output::Sentence>& out) {
     s.texts.clear();
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
-    tokenizer::TokenizeSpans(pieces, text, s.tokens);
+    // A word of the dictionary that starts in the text before a space and goes on past it.
+    const tokenizer::SpaceJoins joins = [&](std::string_view before, std::string_view after) {
+        for (std::size_t start = 0; start < before.size();) {
+            const std::string_view left = before.substr(start);
+            // The candidates point into the query, so it lives as long as they do.
+            const std::string query = std::string(left) + std::string(after);
+            const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
+            for (const dict::Candidate& c : words.list) {
+                if (c.source.size() > left.size()) return true;
+            }
+            start += std::max<std::size_t>(1, text::DecodeRune(left).size);
+        }
+        return false;
+    };
+    tokenizer::TokenizeSpans(pieces, text, s.tokens, text && !options.reference ? &joins : nullptr);
     if (observer.tokens) observer.tokens(observer.context, index, s.tokens);
 
     word::Analysis analysis;

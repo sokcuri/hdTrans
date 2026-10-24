@@ -20,7 +20,7 @@ segment:indentation	　彼は来た。	 그는 왔다.	keep	segment
 segment:indentation	　　日本の首都は東京です。	  일본의 수도는 도쿄입니다.	keep	segment
 segment:column-gap	男    : 「なんだよ。」	남자    : 「뭐야.」	fix	segment
 segment:column-gap	女    : 「なんでもない。」	여자    : 「아무것도 아니다.」	fix	segment
-segment:clause-spacing	猫が  好き  です	고양이를 좋아합니다	fix	segment
-segment:clause-spacing	私は  学生です  。	저는 학생입니다  .	fix	segment
+segment:column-gap	君と  僕と  世界と	너와  나와  세계와	fix	segment
+segment:column-gap	私は  学生です  。	나는  학생입니다  .	fix	segment
 segment:column-gap	1話  長めのプロローグ	1화  약간 긴 프롤로그	keep	segment
 segment:column-gap	友人  : 「知ってる」	친구  : 「알고 있어」	keep	segment

@@ -27,7 +27,7 @@ builtin-ending:ze	楽しかったぜ、ありがとう。	즐거웠어, 고마�
 sound:particle-nee	「やだねぇ、もう」	「싫어, 이제」	fix	sound
 sound:particle-nee	「ねぇ、先生」	「저기, 선생님」	keep	sound
 sound:particle-nee	「えへへ、ねぇ」	「에헤헤, 저기」	keep	sound
-sound:particle-nee	「ねぇねぇねぇ、先生」	「저기 저기 저기, 선생님」	keep	sound
+sound:particle-nee	「ねぇねぇねぇ、先生」	「있잖아 있잖아 있잖아, 선생님」	keep	sound
 builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 모른다」	fix	builtin-phrase
 restore:retort-idiom	「彼に何を言うの？」	「그에게 무슨 말을 하는 거야?」	keep	restore
 restore:retort-idiom	何を言っていいか分からない	무슨 말을 해도 좋은가 모른다	keep	restore

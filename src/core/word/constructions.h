@@ -62,7 +62,7 @@ struct CxNode {
 
 enum class CxVerb : uint8_t {
     SelectLemma, SelectTarget, TakeTarget, SetTarget, SetEnding, ReplaceHead, ReplaceEndingTail, MapLemma, MapTarget, SelectMap,
-    SetVerb,
+    SetVerb, CopyEnding, CopyWord,
 };
 
 struct CxAction {

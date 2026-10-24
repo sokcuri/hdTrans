@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 names:nickname-suke	そう言って、里奈すけは席に着いた。	그렇게 말해, 리나스케는 자리에 앉았다.	fix	lookup
 names:nickname-suke	「里奈すけ、お疲れ。清書は俺がやっとく」	「리나스케, 수고했어. 정서는 내가 해 둔다」	fix	lookup
-names:nickname-suke	里奈すけがちらりと俺を見る。	리나스케가 힐끗나를 본다.	fix	lookup
+names:nickname-suke	里奈すけがちらりと俺を見る。	리나스케가 힐끗 나를 본다.	fix	lookup
 names:nickname-suke	許すけど、次はない。	용서하지만, 다음은 없다.	keep	lookup
 names:nickname-suke	服が透けて見える。	옷이 비쳐 보인다.	keep	lookup

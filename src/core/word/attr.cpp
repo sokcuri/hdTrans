@@ -236,6 +236,12 @@ bool Item::JoinsNext() const {
     return next != nullptr && next->tokenIndex == tokenIndex && next->start == start + length;
 }
 
+bool Item::WrittenBeforeNext() const {
+    if (JoinsNext()) return true;
+    return next != nullptr && static_cast<std::size_t>(start + length) == text.size() &&
+           next->tokenIndex == tokenIndex + 1 && next->start == 0;
+}
+
 bool Item::ClosingTsu() const {
     if (group->surface != "っ" || !EntryText(0).empty()) return false;
     if (next == nullptr) return true;
@@ -291,6 +297,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Ow") return IsRuleRightBoundary();
         // Oj: the On reading of a word written right before the next one (事私, not 事…私).
         if (c == "Oj") return Has(attrs, "On") && JoinsNext();
+        // Z6: a prefix, written right before the next word (光影, 超Ａ級; not 光 影).
+        if (c == "Z6") return Has(attrs, "Z6") && WrittenBeforeNext();
         if (c == "Hz" && hzOnly) return StartsSentence();
         if (c == "Hz" && StartsSentence()) return true;
         // Qt: the word stands inside a quote (G!= "Qt" for narration).
