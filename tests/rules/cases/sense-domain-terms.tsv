@@ -10,15 +10,3 @@ sense:解放	人質を解放した。	인질을 해방했다.	keep	senses
 sense:解放	奴隷を解放する。	노예를 해방한다.	keep	senses
 sense:解放	力を解放する。	힘을 해방한다.	keep	senses
 sense:解放	彼らを牢から解放した。	그들을 감옥으로부터 해방했다.	keep	senses
-sense:反発	東京株式市場で日経平均株価は反発した。	도쿄 주식시장에서 닛케이 평균주가는 반등했다.	fix	senses
-sense:反発	円相場は対ドルで反発した。	엔 시세는 대달러로 반등했다.	fix	senses
-sense:反発	株価が3日ぶりに反発した。	주가가 3일만에 반등했다.	fix	senses
-sense:反発	原油価格は小幅に反発した。	원유가격은 소폭적으로 반등했다.	fix	senses
-sense:反発	長期金利が反発した。	장기금리가 반등했다.	fix	senses
-sense:反発	住民の反発を招いた。	주민의 반발을 불렀다.	keep	senses
-sense:反発	磁石が反発する。	자석이 반발한다.	keep	senses
-sense:反発	親に反発して家を出た。	부모에게 반발해 집을 나갔다.	keep	senses
-sense:反発	決定に反発した。	결정에 반발했다.	keep	senses
-sense:反発	入場料が五百円になり、ファンが反発した。	입장료가 500엔이 되어, 팬이 반발했다.	keep	senses
-sense:反発	株で失敗した父に彼は反発した。	주식으로 실패한 아버지에게 그는 반발했다.	keep	senses
-sense:反発	ドルに対する反発が強まった。	달러에 대한 반발이 강해졌다.	keep	senses

@@ -94,6 +94,7 @@
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
+//= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
 //= noun.ni-not-goal	Ends of the nouns before に that tell a point in time or what else, not the place or state one goes back to (三時に戻る 3시에 돌아오다, 一時間後に戻る, それ以外に戻る理由).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
@@ -1351,6 +1352,21 @@ noun.manner-ni	大まか
 noun.manner-ni	一般的
 noun.manner-ni	有り体
 noun.manner-ni	ありてい
+noun.market-price	株価
+noun.market-price	平均
+noun.market-price	相場
+noun.market-price	為替
+noun.market-price	終値
+noun.market-price	指数
+noun.market-price	先物
+noun.market-price	価格
+noun.market-price	金利
+noun.market-price	債券
+noun.market-price	ダウ
+noun.market-price	東証
+noun.market-price	株式
+noun.market-price	市場
+noun.market-price	ナスダック
 noun.ni-not-goal	時
 noun.ni-not-goal	時半
 noun.ni-not-goal	分

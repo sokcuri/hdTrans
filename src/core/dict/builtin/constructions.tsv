@@ -202,3 +202,6 @@ cx:honorific-doer:30		&&5 S+0== "方" F+0== "selected" D+0== "(분)편" ||2 D-1=
 cx:humble-promise:10		&&6 F+0== "selected" S+0== "させていただ" D+0== "&AV@" F-1== "conjugating" Y-1== "6" U+0== "ますね"	set-verb "드리다" set-ending "3게요"	お手伝いさせていただきますね 도와 드릴게요
 cx:humble-promise:20		&&5 F+0== "selected" S+0== "させていただ" D+0== "&AV@" F-1== "conjugating" Y-1== "6"	set-verb "드리다"	お手伝いさせていただきます 도와 드리겠습니다
 cx:humble-promise:30		&&5 F+0== "selected" ||2 S+0== "Rさせていただ" S+0== "いただ" D+0== "R&AV@" U+0== "ますね" Y+0== "1네요"	set-ending "3게요"	ご準備させていただきますね 준비할게요
+//= market-rebound	after value-after-loanword	The 反発 read 반발 whose subject, before it in its clause with が or は, is a price, a rate or a market (noun.market-price) rebounds: 반등 (株価が3日ぶりに反発した 주가가 3일만에 반등했다), and so does the 反発 of one after の (株価の反発). Not a person who resists (彼は上司に反発した).
+cx:market-rebound:10		&&3 S+0== "反発" L+0== "반발" <0 &&2 S+0== @Rnoun.market-price ||2 S+1== "が" S+1== "は" S+0== "00、。！？!?「」『』"	select-target "반등"	株価が反発した 주가가 반등했다
+cx:market-rebound:20		&&4 S+0== "反発" L+0== "반발" S-1== "の" S-2== @Rnoun.market-price	select-target "반등"	株価の反発 주가의 반등

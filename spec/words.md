@@ -435,7 +435,7 @@
 ## LEX-20 분야 낱말은 그 분야에서 쓰는 말로 옮긴다
 
 문맥이 분야를 정하는 낱말은 그 분야의 한국어로 옮긴다. 메모리, 리소스, 락을 解放하는 것은 `해제`, 주가, 시세가
-反発하는 것은 `반등`이다. 容疑는 `혐의`(容疑者는 `용의자`), 送検은 `송치`, 円安은 `엔저`다. 값을 나타내는 値는 가타카나
+反発하는 것(주어가 값, 시세, 시장인 反発)은 `반등`이다. 容疑는 `혐의`(容疑者는 `용의자`), 送検은 `송치`, 円安은 `엔저`다. 값을 나타내는 値는 가타카나
 외래어 뒤와 프로그램, 수학의 복합어에서 `값`이고(디폴트값, 최댓값, 초깃값, 반환값), 경험치, 수치, 기대치처럼 굳은 말은
 그대로 둔다. 업무 편지의 査収는 `확인`이다.
 
@@ -451,5 +451,5 @@
 | 容疑者は黙秘している。 | 용의자는 묵비하고 있다. | 유지 |
 | 経験値を獲得した。 | 경험치를 획득했다. | 유지 |
 
-사례: `tests/rules/cases/sense-domain-terms.tsv`, `tests/rules/cases/cx-value-after-loanword.tsv`,
+사례: `tests/rules/cases/sense-domain-terms.tsv`, `tests/rules/cases/cx-market-rebound.tsv`, `tests/rules/cases/cx-value-after-loanword.tsv`,
 `tests/rules/cases/lexical-domain-terms.tsv`, `tests/rules/cases/lexical-news-terms.tsv`
