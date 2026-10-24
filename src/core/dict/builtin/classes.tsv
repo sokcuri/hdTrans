@@ -228,6 +228,7 @@
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
+//= word.liking	Starts of words of liking and delight that make a やばい right before or after them praise, 대박 (かわいすぎてやばい, やばい、可愛い).
 //= verb.polite-remark	Starts of verbs of eating and drinking whose polite ますね after an adverb of amount (adverb.amount) remarks on how much the listener eats, not a promise (たくさん食べますね 많이 먹네요; ここで食べますね 먹을게요).
 //= adverb.amount	Adverbs of amount that make a polite ますね of eating or drinking a remark (たくさん食べますね, しっかり食べますね).
 //= adverb.polite-observation	Adverbs before which a polite ますね comments on what the listener does (急に切り替えますね 갑자기 바꾸네요); with a plain ね they may still promise (急に出かけるね).
@@ -360,6 +361,24 @@ adverb.amount	いっぱい
 adverb.amount	一杯
 adverb.polite-observation	急に
 adverb.polite-observation	無茶苦茶
+word.liking	嬉し
+word.liking	うれし
+word.liking	可愛
+word.liking	かわい
+word.liking	カワイ
+word.liking	美味し
+word.liking	おいし
+word.liking	美味
+word.liking	うま
+word.liking	かっこい
+word.liking	カッコい
+word.liking	格好良
+word.liking	格好い
+word.liking	最高
+word.liking	楽し
+word.liking	綺麗
+word.liking	きれい
+word.liking	素敵
 verb.passive-end	われ
 verb.passive-end	かれ
 verb.passive-end	され
