@@ -75,12 +75,17 @@ bool ERowImperative(std::string_view key) {
 }
 
 // A plain interjection row in て, an imperative (待て 기다려), that query continues as
-// a verb: with ない (待てない) or a quoting って (待てって); or an e-row imperative
-// continued by hiragana other than よ, っ and ぇ (落ち着ける).
+// a verb by a start of follower.te-imperative (待てない, 待てって, 待てば, 待てる); or an
+// e-row imperative continued by hiragana other than よ, っ and ぇ (落ち着ける).
 bool BoundImperative(const dict::UserEntry& u, std::string_view query) {
     if (!u.codes->partText.starts_with("E") || !query.starts_with(u.key)) return false;
     const std::string_view after = query.substr(u.key.size());
-    if (u.key.ends_with("て")) return after.starts_with("な") || after.starts_with("って");
+    if (u.key.ends_with("て")) {
+        for (const std::string_view f : dict::ClassMembers("follower.te-imperative")) {
+            if (after.starts_with(f)) return true;
+        }
+        return false;
+    }
     return ERowImperative(u.key) && NameClassOf(FirstChar(after)) == kClassHiragana && !after.starts_with("よ") &&
            !after.starts_with("っ") && !after.starts_with("ぇ");
 }

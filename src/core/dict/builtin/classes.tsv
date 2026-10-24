@@ -28,6 +28,7 @@
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
+//= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
@@ -374,6 +375,16 @@ follower.stem	なかっ
 follower.stem	は
 follower.stem	も
 follower.stem	に
+
+follower.te-imperative	な
+follower.te-imperative	って
+follower.te-imperative	ば
+follower.te-imperative	る
+follower.te-imperative	た
+follower.te-imperative	ます
+follower.te-imperative	ませ
+follower.te-imperative	まし
+follower.te-imperative	ず
 
 follower.verbal-noun	し
 follower.verbal-noun	す
