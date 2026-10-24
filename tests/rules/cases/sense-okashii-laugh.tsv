@@ -1,10 +1,12 @@
 rule	input	expected	kind	layer
 sense:おかしい	あはは、おかしい	아하하, 웃기다	fix	senses
 sense:おかしい	「ふふ、おかしいね」	「후후, 웃기네」	fix	senses
-sense:おかしい	「あはは、それはおかしいよ」	「아하하, 그건 웃겨」	fix	senses
+sense:おかしい	「あはは、それはおかしいよ」	「아하하, 그건 이상해」	keep	senses
 sense:おかしい	えへへ、おかしいかな？	에헤헤, 웃길까?	fix	senses
 sense:おかしい	おかしい	이상하다	keep	defaults
 sense:おかしい	体の調子がおかしい	몸의 상태가 이상하다	keep	defaults
 sense:おかしい	笑うのはおかしい	웃는 것은 이상하다	keep	defaults
 sense:おかしい	「ふふふ、おかしな佐藤さん」	「후후후, 이상한 사토 씨」	keep	defaults
 sense:おかしい	「あはは、そうだね。でも体の調子がおかしい」	「아하하, 그러게. 하지만 몸의 상태가 이상해」	keep	defaults
+sense:おかしい	あはは、体の調子がおかしい	아하하, 몸의 상태가 이상하다	keep	senses
+sense:おかしい	ふふ、君は頭がおかしいね	후후, 너는 머리가 이상하네	keep	senses
