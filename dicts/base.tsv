@@ -90327,7 +90327,7 @@ ttt	ttt	K110			GN				jisjk:201744
 リアリティ	리얼리티	N110			GN				jisjk:135605		
 リアリティ	리얼리티	N110			BZ				jisjk:362476		
 リアリティー	리얼리티	N110			GN				jisjk:58997		
-リアル	리얼%A1@	G8U0			GN				jisjk:2407		
+リアル	리얼%A1@	G8U0		Ns	GN				jisjk:2407		
 リアル	리얼	N110		Dd	GN				jisjk:135606		
 リアルウエイジ	실질 임금	N110	VMyVMo		GN				jisjk:135607		
 リアルタイム	리얼타임	N110	UMe		GN				jisjk:58998		
@@ -106516,7 +106516,7 @@ ttt	ttt	K110			GN				jisjk:201744
 不可知	불가지	I110			GN				jisjk:71317		
 不可知	알 수 %B4@	G8U0			GN				jisjk:144227		
 不可知論	불가지론	I110	UTs		GN				jisjk:71318		
-不可能	불가능%A1@	G8L0			GN				jisjk:2961		
+不可能	불가능%A1@	G8L0		Ns	GN				jisjk:2961		
 不可能	불가능	I110			GN				jisjk:2962		
 不可視	불가시	I110			GN				jisjk:71316		
 不可解	불가해%A1@	G8L0			GN				jisjk:2966		
@@ -153950,7 +153950,7 @@ ttt	ttt	K110			GN				jisjk:201744
 同符番	동일 부호	I110	VSw		GN				jisjk:66302		
 同笵鏡	동람경	N110	VPe		GN				jisjk:246485		
 同筆	동필	N110		Hd	GN				jisjk:246493		
-同等	동등%A1@	G8L0			GN				jisjk:2696		
+同等	동등%A1@	G8L0		Ns	GN				jisjk:2696		
 同等	동등	N110			GN				jisjk:2697		
 同筋	소식통	N110			GN				jisjk:202363		
 同精	동정	N110	UFl		GN				jisjk:19641		
@@ -179680,7 +179680,7 @@ ttt	ttt	K110			GN				jisjk:201744
 完泳	끝까지 헤엄침	N110		Hd	GN				jisjk:229734		
 完済	완제	N110		Hd	GN				jisjk:29738		
 完熟	완숙	N110		Hd	GN				jisjk:29734		
-完璧	완벽%A1@	G8L0			GN				jisjk:3409		
+完璧	완벽%A1@	G8L0		Ns	GN				jisjk:3409		
 完璧	완벽	N110			GN				jisjk:3410		
 完納	완납	N110		Hd	GN				jisjk:29726		
 完結	완결	N110		Hd	GN				jisjk:29724		
@@ -198584,7 +198584,7 @@ ttt	ttt	K110			GN				jisjk:201744
 平穏温泉郷	히라오온센코	I110	QCT		GN				jisjk:87881		
 平端	히라하타	N110	QCT		GN				jisjk:37569		
 平笠	히라카사	N130	QCTVPl		GN				jisjk:324942		
-平等	평등%A1@	G8L0			GN				jisjk:3863		
+平等	평등%A1@	G8L0		Ns	GN				jisjk:3863		
 平等	평등	N110			GN				jisjk:3864		
 平等	타이라	N130	QCTVPl		GN				jisjk:305277		
 平等	다이라	N130	QCTVPl		GN				jisjk:308312		
@@ -268458,7 +268458,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無蓋	무개	N110			GN				jisjk:155385		
 無蓋車	무개차	N110	VTp		GN				jisjk:205392		
 無血	무혈	N110			GN				jisjk:22155		
-無表情	무표정%A1@	G8L0			GN				jisjk:2887		
+無表情	무표정%A1@	G8L0		Ns	GN				jisjk:2887		
 無表情	무표정	N110	VBpSFl	Dd	GN				jisjk:155484		
 無袋栽培	무대재배	N110	UMn		GN				jisjk:205377		
 無規律	규율이 %B4@	G8U0			GN				jisjk:146976		
@@ -268569,7 +268569,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無闇	터무니 %B4@	G8U0			GN				jisjk:2845		
 無闇に	함부로	E311			GN				jisjk:1626		
 無防備	무방비	I110			GN				jisjk:69123		
-無限	무한%A1@	G8L0			GN				jisjk:2888		
+無限	무한%A1@	G8L0		Ns	GN				jisjk:2888		
 無限	무한	N110			GN				jisjk:2889		
 無限ループ	엔들레스 루프	I110			IT				jisjk:263103		
 無限大	무한대	N110	VSsUMe		GN				jisjk:155412		
@@ -282680,7 +282680,7 @@ ttt	ttt	K110			GN				jisjk:201744
 真宗	마무네	N130	QPN	Wa	GN				jisjk:12170		
 真宗	진종	N110	USo		GN				jisjk:12171		
 真宗	사노무네	N130	QCTVPl		GN				jisjk:296320		
-真実	진실%A1@	G8L0			GN				jisjk:3720		
+真実	진실%A1@	G8L0		Ns	GN				jisjk:3720		
 真実	진실	N110	UTs		GN				jisjk:3721		
 真実と信ずる相当	진실하다고 믿는 상당	N110			GN				jisjk:151211		
 真実なんて	진실 같은 것	E300			GN				jisjk:356761		
@@ -297831,7 +297831,7 @@ ttt	ttt	K110			GN				jisjk:201744
 純真無垢	순진무구	N110		Dd	GN				jisjk:237155		
 純章	스미아키	N130	QPN	Wb	GN				jisjk:9767		
 純米酒	순미주	N110	VFd		GN				jisjk:237185		
-純粋	순수%A1@	G8U0			GN				jisjk:136974		
+純粋	순수%A1@	G8U0		Ns	GN				jisjk:136974		
 純粋	순수	N110		Dd	GN				jisjk:194929		
 純粋培養	순수배양	N110			GN				jisjk:237163		
 純粋性	순수성	N110			GN				jisjk:237162		
@@ -335544,7 +335544,7 @@ ttt	ttt	K110			GN				jisjk:201744
 透徹	투철	N110			GN				jisjk:37209		
 透徹	훤히 비&AO@	M423			GN				jisjk:137256		
 透撤	비쳐 보&AJ@	M427			GN				jisjk:137268		
-透明	투명%A1@	G8L0			GN				jisjk:3835		
+透明	투명%A1@	G8L0		Ns	GN				jisjk:3835		
 透明	투명	N110			GN				jisjk:3836		
 透明化	투명화	N110		Hd	GN				jisjk:153716		
 透明度	투명도	N110			GN				jisjk:245599		

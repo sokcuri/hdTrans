@@ -4437,6 +4437,13 @@ bool RuleG360([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Gk"sv) && GobiSrcEq(p, 0, "に"sv) && SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && GobiDstSet(p, 0, " 에"sv));
 }
 
+// global 2001 stem pos 8 prio 365
+//     gram has Ns and end.src == "に" and (src[+1] == "近" or src[+1] == "等し") and end.ko := " 에"
+bool RuleG365([[maybe_unused]] Item* p) {
+    return (GramEq(p, 0, "Ns"sv) && GobiSrcEq(p, 0, "に"sv) && (SrcEq(p, 1, "近"sv) ||
+           SrcEq(p, 1, "等し"sv)) && GobiDstSet(p, 0, " 에"sv));
+}
+
 namespace {
 
 constexpr CompiledRule kLocal[] = {
@@ -4980,6 +4987,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG340, 0x8a1a46ab1e4c6071ull},
     {RuleG350, 0x63da7fe4796ebe29ull},
     {RuleG360, 0x839f4f04a155b041ull},
+    {RuleG365, 0xfdedf27fa821c389ull},
 };
 
 }  // namespace

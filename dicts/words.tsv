@@ -12246,6 +12246,31 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 帰省先	귀성지	N110	VPl		GN							w:27354
 遠征先	원정지	N110	VPl		GN							w:27355
 潜伏先	은신처	N110	VPl		GN							w:27356
+皆無	전무%A1@	G8L0		Ns	GN							w:27357
+無数	무수%A1@	G8L0			GN							w:27358
+清楚	청초%A1@	G8L0			GN							w:27359
+精強	정강%A1@	G8L0			GN							w:27360
+稀有	희유%A1@	G8L0			GN							w:27361
+端麗	단려%A1@	G8L0			GN							w:27362
+美麗	미려%A1@	G8L0			GN							w:27363
+眉目秀麗	미목수려%A1@	G8L0			GN							w:27364
+平穏	평온%A1@	G8L0			GN							w:27365
+平穏無事	평온무사%A1@	G8L0			GN							w:27366
+支離滅裂	지리멸렬%A1@	G8L0			GN							w:27367
+滅裂	멸렬%A1@	G8L0			GN							w:27368
+明晰	명석%A1@	G8L0			GN							w:27369
+頭脳明晰	두뇌 명석%A1@	G8L0			GN							w:27370
+愚直	우직%A1@	G8L0			GN							w:27371
+無価値	무가치%A1@	G8L0			GN							w:27372
+息災	무탈%A1@	G8L0			GN							w:27373
+前途有望	전도유망%A1@	G8L0			GN							w:27374
+屈強	건장%A1@	G8L0			GN							w:27375
+甚大	심대%A1@	G8L0			GN							w:27376
+稀少	희소%A1@	G8L0			GN							w:27378
+潔白	결백%A1@	G8L0			GN							w:27379
+無害	무해%A1@	G8L0			GN							w:27380
+不純	불순%A1@	G8L0			GN							w:27381
+明朗	명랑%A1@	G8L0			GN							w:27382
 先々代	선선대	N110			GN				llm			w:12232
 先々月	지지난달	N110			GN						せんせんげつ	w:12233
 先々週	지지난주	N110			GN						せんせんしゅう	w:12234
@@ -20705,7 +20730,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真剣	진지	N110			GN				xxx llm	1		w:20684
 真名鶴	재두루미	N110			GN						まなづる	w:20685
 真因	진짜 원인	N110			GN				xxx llm	1		w:20686
-真実	진실%D4@	G8U0			GN				xxx llm	1		w:20687
+真実	진실%D4@	G8U0		Ns	GN				xxx llm	1		w:20687
 真実味	진실성	N110			GN						しんじつみ	w:20688
 真実性	진정성	N110			GN						しんじつせい	w:20689
 真摯	진지%A1@	G8U0			GN				llm		しんし	w:20690
