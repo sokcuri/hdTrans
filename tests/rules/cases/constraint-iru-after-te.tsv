@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-constraint:iru-form-after-te	うふふっ♪ 司令の寝顔、可愛い♪ ずっと見ていようかな…あ、そうだ。	우후훗♪ 사령의 잠자는 얼굴, 귀여운♪ 계속 보고 있을까…, 맞다.	fix	lookup
+constraint:iru-form-after-te	うふふっ♪ 司令の寝顔、可愛い♪ ずっと見ていようかな…あ、そうだ。	우후훗♪ 사령의 잠자는 얼굴, 귀여운♪ 계속 보고 있을까…아, 맞다.	fix	lookup
 constraint:iru-form-after-te	貴様は黙っていろ	네놈은 입을 다물고 있어라	fix	lookup
 constraint:iru-form-after-te	聞いていらっしゃいます？	듣고 계십니까?	fix	lookup
 constraint:iru-form-after-te	ミドリさんの服装や見た目を書き込むんだと思われていたみたいです	미도리 씨의 복장이나 외형을 기입한다고 생각되고 있던 것 같습니다	fix	lookup
