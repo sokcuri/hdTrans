@@ -515,9 +515,9 @@ bool VerbPhraseNoun(std::string_view t) { return t.find(' ') != std::string_view
 
 // Whether the next item that writes something, written straight after item i, attaches to
 // the last syllable of i: a particle or the copula (not one written as a space), a word
-// written attached (Tu) that starts with a syllable (들, 에 대한), or the する of a noun the
-// dictionary writes with a space at its end. That space then goes (백년 해로를, 백년
-// 해로한다, 싶을 정도입니다, 우리에 대한); before a word it stays (백년 해로 생활).
+// written attached (Tu) that starts with a syllable and is no counter (들, 에 대한), or the
+// する of a noun the dictionary writes with a space at its end. That space then goes (백년
+// 해로를, 백년 해로한다, 싶을 정도입니다, 우리에 대한); before a word it stays (백년 해로 생활).
 bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens, int i) {
     int n = i + 1;
     const int count = static_cast<int>(items.size());
@@ -528,7 +528,8 @@ bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<Tok
     const ResolvedItem& next = items[n];
     const std::string_view text = EntryText(next);
     if (text.empty() || text.front() == ' ') return false;
-    if (First(Code(next)) == '2' || (Contains(GAttr(next), "Tu") && text::Final(text::DecodeRune(text).cp) >= 0)) {
+    if (First(Code(next)) == '2' ||
+        (Contains(GAttr(next), "Tu") && !Contains(GAttr(next), "Ct") && text::Final(text::DecodeRune(text).cp) >= 0)) {
         return true;
     }
     const std::string_view gloss = EntryText(items[i]);
