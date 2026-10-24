@@ -242,13 +242,14 @@ bool Item::EndingAsks() const {
     return tail.ends_with("か");
 }
 
-bool Item::AfterQuestionWord() const {
+bool Item::AfterQuestionWord(bool clause) const {
     for (const Item* x = this; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (x != this && (s == "。" || s == "？" || s == "?" || s == "！" || s == "!")) break;
+        if (clause && x != this && dict::InClass("mark.comma", s)) break;
         // A question closed by か before the word is embedded (どうなるか……ってのもあるだろうな).
         if (x != this && (s == "か" || x->EndingAsks())) break;
-        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで). The か of an indefinite stands
+        // Not an indefinite (どこにでも, 何か, 誰も, いつも, どこかで, 誰であれ). The か of an indefinite stands
         // alone or before a particle; から, かな and かしら keep the question.
         const Item* xn = x->After();
         const std::string_view after = xn != nullptr ? xn->group->surface : std::string_view();
@@ -257,7 +258,10 @@ bool Item::AfterQuestionWord() const {
             (after == "か" ||
              std::u32string_view(U"がをにでもはのとへか").find(text::DecodeRune(after.substr(std::string_view("か").size())).cp) !=
                  std::u32string_view::npos);
-        if (after.starts_with("も") || after.starts_with("でも") || after.starts_with("にでも") || indefiniteKa) continue;
+        const auto indefinite = dict::ClassMembers("question.indefinite-after");
+        if (indefiniteKa || std::any_of(indefinite.begin(), indefinite.end(), [&](std::string_view m) { return after.starts_with(m); })) {
+            continue;
+        }
         if (x->IsQuestionWord()) return true;
     }
     return false;
@@ -346,6 +350,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Nq") return ReadsCount(i);
         // Qw: a question word is the word or comes before it in its sentence.
         if (c == "Qw") return AfterQuestionWord();
+        // Qc: Qw within the clause, no comma between (何するのよ; not 何よ、行くのよ).
+        if (c == "Qc") return AfterQuestionWord(true);
         return Has(attrs, c);
     };
     if (di == -1 && selected == -1) {
