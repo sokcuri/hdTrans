@@ -889,12 +889,12 @@ std::string SoundText::IyaReading(size_t p, size_t end) const {
 }
 
 // Whether a sound that ends in ッ ends there: what follows is no kana, or ト, テ, ー, ～,
-// or the sound's first kana again (ぶるっぶる); otherwise the ッ belongs to a verb
-// (くらっちゃった).
+// the copula ダ or デ, which no verb ending starts with after ッ (サクッだった), or the
+// sound's first kana again (ぶるっぶる); otherwise the ッ belongs to a verb (くらっちゃった).
 bool SoundText::Stopped(const SoundMatch& m) const {
     if (f_[m.end - 1] != U'ッ' || m.end == f_.size()) return true;
     const char32_t r = f_[m.end];
-    return !IsKana(r) || In(r, U"トテー～") || r == f_[m.start];
+    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start];
 }
 
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
