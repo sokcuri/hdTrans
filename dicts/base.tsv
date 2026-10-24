@@ -177255,7 +177255,7 @@ ttt	ttt	K110			GN				jisjk:201744
 子どもたち	아이들	N110	VHn		GN				jisjk:151087		
 子どもづれ	어린이동반	I110			GN				jisjk:82020		
 子どもの日	어린이 날	N110			GN				jisjk:201986		
-子どもの頃	어릴 적	K110			GN				jisjk:114863		
+子どもの頃	어릴 적	K110	UMe		GN				jisjk:114863		
 子どもら	아이들	N110	VHn		GN				jisjk:182723		
 子どもを下ろ	아이를 &C8@	M413			GN				jisjk:94575		
 子どもを預か	아이를 &FC@	M428			GN				jisjk:259642		
@@ -177289,7 +177289,7 @@ ttt	ttt	K110			GN				jisjk:201744
 子供のごろ	어렸을 때	N110			GN				jisjk:368804		
 子供の情景	아이의 정경	N110	USoQMU		GN				jisjk:231311		
 子供の日	어린이 날	I110			GN				jisjk:82024		
-子供の頃	어릴 적	K110			GN				jisjk:264913		
+子供の頃	어릴 적	K110	UMe		GN				jisjk:264913		
 子供らし	어린이$G4@	H7N0	SFl		GN				jisjk:120720		
 子供会	어린이회	N110	VBl		GN				jisjk:231307		
 子供向き	어린이용	N110			GN				jisjk:151089		
@@ -199372,7 +199372,7 @@ ttt	ttt	K110			GN				jisjk:201744
 幼いころ	어렸을 적	E311	UMe		GN				jisjk:265943		
 幼いころから	어릴 때부터	E311			GN				jisjk:1820		
 幼い女の子のてがら	도투락 댕기	N110	VAc		GN				jisjk:204483		
-幼い頃	어릴 적	H110			GN				jisjk:202334		
+幼い頃	어릴 적	H110	UMe		GN				jisjk:202334		
 幼き子供	어린 아이	N110	VHn		GN				jisjk:347897		
 幼なじみ	소꼽 친구	I110	VHn		GN				jisjk:79453		
 幼主	나이 어린 군주	N110	VHn		GN				jisjk:255022		
