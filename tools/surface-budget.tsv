@@ -63,10 +63,10 @@ src/core/word/adjective.cpp	17	5	5	1	10	28	1	34	70
 src/core/word/attr.cpp	47	49	9	2	61	3	0	1	47
 src/core/word/candidate.cpp	52	36	3	6	62	9	2	14	49
 src/core/word/conjugation.cpp	3	0	0	0	0	0	0	0	0
-src/core/word/connective.cpp	28	9	4	1	3	0	0	0	31
+src/core/word/connective.cpp	20	4	3	1	3	0	0	0	20
 src/core/word/constraints.cpp	136	16	23	6	120	5	0	0	69
 src/core/word/document_senses.cpp	0	18	0	2	18	1	2	0	1
-src/core/word/grammar.cpp	338	310	44	12	253	18	10	23	371
+src/core/word/grammar.cpp	334	308	42	12	253	18	10	22	363
 src/core/word/item.cpp	0	0	6	0	0	6	0	1	13
 src/core/word/kana.cpp	21	5	0	0	0	20	1	0	51
 src/core/word/kana.h	0	0	0	0	0	3	0	0	1

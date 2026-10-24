@@ -83,6 +83,7 @@
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
 //= particle.phrase	Particles that, after the first character of an item, make a phrase that starts with a noun.
+//= particle.see-te-keep	Particles and final particles after the て of 見る before which it stays the 어 of a て form, not the 고 of an action done first (見てはいけない, 見てよ).
 //= particle.title-phrase	Case particles that, between two kanji or katakana of a name-layer key, make the key a phrase that reads as a title only standing apart (星に願いを, 世界を救う).
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
@@ -1416,6 +1417,19 @@ particle.phrase	と
 particle.phrase	も
 particle.phrase	へ
 particle.phrase	の
+particle.see-te-keep	は
+particle.see-te-keep	も
+particle.see-te-keep	を
+particle.see-te-keep	が
+particle.see-te-keep	の
+particle.see-te-keep	に
+particle.see-te-keep	と
+particle.see-te-keep	で
+particle.see-te-keep	や
+particle.see-te-keep	か
+particle.see-te-keep	よ
+particle.see-te-keep	ね
+particle.see-te-keep	な
 
 particle.title-phrase	を
 particle.title-phrase	に

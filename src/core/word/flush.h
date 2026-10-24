@@ -95,10 +95,7 @@ void InitialSoundRule(Flusher& f);
 
 // Text-path て forms (connective.cpp). UtteranceEnd reports an item followed by the end
 // of the utterance (closing punctuation, a pause or the end of the chunk).
-void TeRequest(Flusher& f);
 void TeThanks(Flusher& f);
-// The て or 連用 form of a verb with an object before a comma reads 고 (電話を切って、 전화를 끊고,).
-void TeObjectComma(Flusher& f);
 void VerseTe(Flusher& f);
 void ResultState(Flusher& f);
 // The ている of a verb of thinking or perceiving, or of one whose Korean is an adjective, read
@@ -117,7 +114,6 @@ void NotYet(Flusher& f);
 void InwardAuxiliary(Flusher& f);
 // A verb continuative before も and する: V-지도 않다 with a negative する, V-기도 하다 otherwise.
 void EmphaticMo(Flusher& f);
-void SeeAnd(Flusher& f);
 void PastSequence(Flusher& f);
 void QuoteTo(Flusher& f);
 void TerminalBeforeQuote(Flusher& f);
@@ -135,7 +131,6 @@ void OfferPromise(Flusher& f);
 // Text-path terminal and negative passes (grammar.cpp).
 void ExclaimedAdjective(Flusher& f);
 void VerbNegative(Flusher& f);
-void TeSequence(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
 
 // Whether the item's surface is one of set.

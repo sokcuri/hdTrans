@@ -35,6 +35,15 @@ cx:subject-before-ga:30		&&5 S+0== "の" F-1== "selected" L+0== "(이)가" F+1==
 cx:subject-before-ga:40		&&4 ||2 S+0== "が" S+0== "の" F-1== "selected" L+0== "(이)가" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺が 내가
 //= subject-no	after subject-before-ga	The の read 의 after a noun and before a predicate of existence, quantity or knowing (stem.subject-predicate), or before an adjective after a noun of a quality (noun.attribute), with a noun after the predicate, is the subject (이)가.
 cx:subject-no:10		&&7 S+0== "の" L+0== "의" P-1== "1" F+1== "selected" P+2== "1" ||2 S+1== @stem.subject-predicate &&2 S-1== @noun.attribute P+1== "7" C+0== "(이)가"	select-lemma "(이)가" map-lemma@-1 @subject-pronoun	人の少ない町 사람이 적은 마을
+//= te-request	after VerseTe	A て form read 며 that ends the utterance is a request: 어 (待って 기다려), and 어서 after しまう or ちゃう (忘れてしまって 잊어 버려서). Not a て of 있다.
+cx:te-request:10		&&6 F+0== "conjugating" Y+0== "2며" ||2 I+0== "Rて" I+0== "Rで" D+0!= "L있" F+0== "utterance-end" ||2 S+0== "Rしま" S+0== "Rちゃ"	set-ending "6서"	忘れてしまって 잊어 버려서
+cx:te-request:20		&&5 F+0== "conjugating" Y+0== "2며" ||2 I+0== "Rて" I+0== "Rで" D+0!= "L있" F+0== "utterance-end"	set-ending "6"	待って 기다려
+//= see-and	after NotYet	The て of 見る read 보다 after を is 고, an action done before the next one (私を見て言う 나를 보고 말한다), unless the utterance ends after it with no comma, or a closing quote, an auxiliary of the て form or one of particle.see-te-keep follows it.
+cx:see-and:10		&&8 S+0== "R見" U+0== "て" Y+0== "6" S-1== "を" F+0== "conjugating" L+0== "보다" ||2 F+0!= "utterance-end" T+0== "L、" ||2 !1 F+1== "exists" &&4 S+1!= "L」" S+1!= "L』" S+1!= @Laux.te-start S+1!= @particle.see-te-keep	set-ending "1고"	私を見て言う 나를 보고 말한다
+//= te-sequence	after see-and	The て form read 어 of a verb whose Korean is an action of ko-verb.sequence is 고 when a verb follows in the sentence (手を洗って寝る 손을 씻고 잔다); not ないで.
+cx:te-sequence:10		&&7 F+0== "conjugating" F+0== "verb" Y+0== "6" ||2 I+0== "Rて" I+0== "Rで" I+0!= "Rないで" L+0== @ko-verb.sequence F+0== "predicate-follows"	set-ending "1고"	手を洗って寝る 손을 씻고 잔다
+//= te-object-comma	after TeThanks	The て or 連用 form read 어 of a verb with an object before a comma is 고 (本を開いて、 책을 펴고,), unless the verb gives a means (verb.means: 道具を使って、 도구를 써,).
+cx:te-object-comma:10		&&6 S-1== "を" S+1== "、" F+0== "conjugating" F+0== "verb" Y+0== "6" S+0!= @Rverb.means	set-ending "1고"	本を開いて、 책을 펴고,
 //= noda-to	after QuoteTo	An ending in 것이다 before a quoting と read (이)라고 drops its 다: そうだろうと思った 그럴 것이라고 생각했다.
 cx:noda-to:10		&&4 Y+0== "R 것이다" S+1== "Lと" F+1== "selected" ||2 L+1== "L(이)라고" L+1== "L라고"	replace-ending-tail " 것이다" " 것이"	そうだろうと思った 그럴 것이라고 생각했다
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.

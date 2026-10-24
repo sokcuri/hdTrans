@@ -45,21 +45,6 @@ bool UtteranceEnd(const Worker& w, const Item* it) {
     return TrimRunes(rest, "…‥」』）)。．、ーっッ～").empty();
 }
 
-void TeSequence(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr) continue;
-        const std::string_view d = ItemText(it);
-        if (e->dst != "6" || (!d.ends_with("て") && !d.ends_with("で")) || d.ends_with("ないで") ||
-            !dict::InClass("ko-verb.sequence", output::Lemma(it->EntryText(it->selected), f.families)) ||
-            !PredicateFollows(it)) {
-            continue;
-        }
-        it->AssignDirectSlot(it->DirectIndex(), "1고");
-    }
-}
-
 // Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:
 // 와 줘서 기뻐, 도와줘서 살았다). The て of 借りる (この場を借りて 이 자리를 빌려) keeps its form.
 
@@ -88,23 +73,6 @@ void TeThanks(Flusher& f) {
                                 [&](std::string_view t) { return next.starts_with(t); })) {
             it->AssignDirectSlot(it->DirectIndex(), "6서");
         }
-    }
-}
-
-void TeObjectComma(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
-        const std::string_view stem = it->group->surface;
-        if (std::ranges::any_of(dict::ClassMembers("verb.means"),
-                                [&](std::string_view v) { return stem.ends_with(v); })) {
-            continue;
-        }
-        const Item* p = it->prev;
-        const Item* n = it->next;
-        if (p == nullptr || n == nullptr || p->group->surface != "を" || n->group->surface != "、") continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr || e->dst != "6") continue;
-        it->AssignDirectSlot(it->DirectIndex(), "1고");
     }
 }
 
@@ -139,21 +107,6 @@ void VerseTe(Flusher& f) {
         return;
     }
     it->AssignDirectSlot(it->DirectIndex(), "1고");
-}
-
-void TeRequest(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr) continue;
-        const std::string_view surface = ItemText(it);
-        if (output::Lemma(e->dst, f.families) != "2며" || (!surface.ends_with("て") && !surface.ends_with("で")) ||
-            it->EntryText(it->selected).starts_with("있") || !UtteranceEnd(f.w, it)) {
-            continue;
-        }
-        const std::string_view s = it->group->surface;
-        it->AssignDirectSlot(it->DirectIndex(), s.ends_with("しま") || s.ends_with("ちゃ") ? "6서" : "6");
-    }
 }
 
 }  // namespace hdTrans::word

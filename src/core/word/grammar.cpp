@@ -754,9 +754,6 @@ bool GradualBefore(const Item* it) {
     return false;
 }
 
-// The particles and punctuation of seeAnd (before the 見る て they do not change).
-constexpr std::string_view kSeeAndFollowers = " は も を が の に と で や か よ ね な ";
-
 // The verb in its 連用形 (the bare stem or its one i-row kana) that an unlisted 込む, item n,
 // follows in the same token (詰め込む, 惚れ込んでいる); nullptr when n is no such 込む.
 Item* InwardVerb(Item* n) {
@@ -1138,25 +1135,6 @@ void NotYet(Flusher& f) {
                 break;
             }
         }
-    }
-}
-
-void SeeAnd(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || ItemLemma(f, it, it->selected) != "보다" ||
-            !it->group->surface.ends_with("見") || it->DirectSurface() != "て") {
-            continue;
-        }
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr || e->dst != "6" || it->prev == nullptr || it->prev->group->surface != "を") continue;
-        if (UtteranceEnd(f.w, it) && !From(it->text, it->start + it->length).starts_with(kJaComma)) continue;
-        if (const Item* n = it->next; n != nullptr) {
-            const std::string_view next = n->group->surface;
-            bool stop = next.starts_with("」") || next.starts_with("』");
-            for (const std::string_view a : dict::ClassMembers("aux.te-start")) stop = stop || next.starts_with(a);
-            if (stop || Has(kSeeAndFollowers, " " + std::string(next) + " ")) continue;
-        }
-        it->AssignDirectSlot(it->DirectIndex(), "1고");
     }
 }
 
