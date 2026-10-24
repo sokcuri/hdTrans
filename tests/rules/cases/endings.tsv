@@ -56,7 +56,7 @@ dict:jisjk:117698	ここで待つの。	여기서 기다려.	keep	local-ending
 dict:jisjk:4395	確認してみるのみだ。	확인해 볼 뿐이다.	fix	local-ending
 dict:jisjk:4395	待つのみだ。	기다릴 뿐이다.	keep	local-ending
 dict:jisjk:4231	考えてない。	생각하지 않았다.	fix	local-ending
-dict:jisjk:4231	歩いて歩いて、町に着いた。	걷고 걸어, 마을에 도착했다.	keep	local-ending
+dict:jisjk:4231	歩いて歩いて、町に着いた。	걷고 또 걸어, 마을에 도착했다.	keep	local-ending
 dict:jisjk:341739	今食べていない。	지금 먹지 않는다.	fix	local-ending
 dict:jisjk:341739	まだ食べていない。	아직 먹지 않았다.	keep	local-ending
 dict:jisjk:341739	今食べてない。	지금 먹지 않는다.	fix	local-ending

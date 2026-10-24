@@ -205,8 +205,23 @@ bool EndsDrawn(std::string_view s) {
 // Whether two sounds in a row are written apart: both have two or more syllables, b does
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
 // drawing out its vowel before another cry (ひぃ+やあっ 히이야앗, ふぁー+ふぁー 후아아후아아).
+// Whether s is one Hangul syllable written one or more times (네, 네네).
+bool OneSyllableRepeated(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    if (s.empty() || r.cp < text::kBase || r.cp > text::kLast) return false;
+    for (std::size_t at = 0; at < s.size(); at += r.size) {
+        if (s.substr(at, r.size) != s.substr(0, r.size)) return false;
+    }
+    return true;
+}
+
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) {
+        return false;
+    }
+    // A word of two kana or more read as one syllable, said again right after itself, is
+    // written as one word (はいはい|はいはい 네네네네; not a drawn-out あ).
+    if (a.end == b.start && a.key == b.key && a.key.size() >= 2 && a.korean == b.korean && OneSyllableRepeated(a.korean)) {
         return false;
     }
     return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&

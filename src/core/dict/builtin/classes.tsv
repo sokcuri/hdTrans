@@ -84,6 +84,7 @@
 //= particle.see-te-keep	Particles and final particles after the て of 見る before which it stays the 어 of a て form, not the 고 of an action done first (見てはいけない, 見てよ).
 //= particle.title-phrase	Case particles that, between two kanji or katakana of a name-layer key, make the key a phrase that reads as a title only standing apart (星に願いを, 世界を救う).
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
+//= pause.copy	The marks that may stand between two copies of a word said again (待って、待って).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
 //= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
@@ -1387,6 +1388,9 @@ particle.wonder	から
 particle.wonder	まで
 particle.wonder	くらい
 particle.wonder	ぐらい
+
+pause.copy	、
+pause.copy	，
 
 pronoun.first-person-genitive	私
 pronoun.first-person-genitive	僕

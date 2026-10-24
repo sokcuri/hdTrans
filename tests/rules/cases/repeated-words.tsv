@@ -1,0 +1,65 @@
+# 규칙: SND-2
+rule	input	expected	kind	layer
+lookup:copies	いやだいやだ	싫다 싫다	fix	lookup
+lookup:copies	いやだいやだいやだー	싫다 싫다 싫다~	fix	lookup
+lookup:copies	だめだめ！	안 돼 안 돼!	fix	lookup
+lookup:copies	さむいさむい	춥다 춥다	fix	lookup
+lookup:copies	いたいた！	있었다 있었다!	fix	lookup
+lookup:copies	いろいろ	여러 가지	keep	lookup
+lookup:copies	時々	가끔	keep	lookup
+lookup:copies	それぞれ	각각	keep	lookup
+lookup:copies	まだまだ	아직도	keep	lookup
+lookup:copies	他にいないなんて	그 밖에 없다니	keep	lookup
+lookup:copies	『黒髪』のものもいない。	『흑발』의 것도 없다.	keep	lookup
+lookup:copies	キラキラ光る	반짝반짝 빛난다	keep	lookup
+compose:repeated-syllable	はいはいはい！	네네네!	fix	compose
+compose:repeated-syllable	はいはいはいはいはい	네네네네네	fix	compose
+compose:repeated-syllable	ほいほい、待ってて	!rule:cx:copies:40	keep	compose
+sound:repeated-syllable	はいはいはいはい	네네네네	fix	sound
+sound:doubled-call	ねえねえ、さっきから	있잖아, 조금 전부터	fix	sound
+sound:doubled-call	だってだって	그치만 그치만	fix	sound
+cx:copies:10	だってだってだってしょうがないじゃん	그치만 그치만 그치만 어쩔 수 없잖아	fix	rewrites
+cx:copies:10	だって、だって、心配なんだもん	그치만, 그치만, 걱정인걸	fix	rewrites
+cx:copies:10	だって私は	!rule:cx:copies:10	keep	rewrites
+cx:copies:20	でもでも！	하지만 하지만!	fix	rewrites
+cx:copies:20	でも、行く	!rule:cx:copies:20	keep	rewrites
+cx:copies:30	歩いて歩いて、町に着いた。	걷고 또 걸어, 마을에 도착했다.	fix	rewrites
+cx:copies:30	「悲しくて悲しくて仕方ないんだろう」	「슬프고 또 슬퍼 어쩔 수 없겠지」	fix	rewrites
+cx:copies:30	お姉様とは長く長く話した。	!rule:cx:copies:30	keep	rewrites
+cx:copies:30	待って待って！	!rule:cx:copies:30	keep	rewrites
+cx:copies:40	待って待って！	기다려 기다려!	fix	rewrites
+cx:copies:40	「物、美味しいから食べて食べて」	「물건, 맛있으니까 먹어 먹어」	fix	rewrites
+cx:copies:40	みてみて、どう？	봐 봐, 어때?	fix	rewrites
+cx:copies:40	お姉様とは長く長く話した。	누님과는 길고 길게 이야기했다.	keep	rewrites
+cx:copies:40	ほう、そうかい、そうかい。	!rule:cx:copies:40	keep	rewrites
+cx:copies:50	「嬉しくて、嬉しくてっ……」	「기뻐서, 기뻐서……」	fix	rewrites
+cx:copies:50	「待って、待って」	「기다려, 기다려」	keep	rewrites
+cx:copies:25	「なんでなんで？」	「왜 왜?」	fix	rewrites
+cx:copies:25	どうぞどうぞ！	!rule:cx:copies:30	keep	rewrites
+cx:copies:25	まさかまさかの大逆転	!rule:cx:copies:25	keep	rewrites
+cx:copies:25	なんだ、なんだ？？	!rule:cx:copies:25	keep	rewrites
+cx:copies:50	「好きで、好きで……たまらないのに……」	「좋아해, 좋아해서……견딜 수 없는데……」	keep	rewrites
+cx:copies:30	人になり、歩いて歩いて……	사람이 되어, 걷고 또 걸어……	fix	rewrites
+cx:copies:50	ほう、そうかい、そうかい。	!rule:cx:copies:50	keep	rewrites
+compose:repeated-connective	「泣いて泣いて！」	「울어 울어!」	fix	compose
+cx:copies:30	泣いて泣いて、泣き疲れた。	울고 또 울어, 울어 지쳤다.	fix	rewrites
+cx:copies:40	見て見て	봐 봐	fix	rewrites
+dict:jisjk:345201	あぁ～、そうやろそうやろ～♪	아아~, 그렇지 그렇지~♪	fix	local
+dict:jisjk:345201	雨が降るそうだ	rule:dict:jisjk:345201=%D1@	keep	local
+dict:jisjk:342186	好きでたまらない	좋아해서 견딜 수 없다	fix	local-ending
+dict:jisjk:342186	好きで仕方ない	좋아해서 어쩔 수 없다	fix	local-ending
+dict:jisjk:342186	心配でたまらない	걱정되어 견딜 수 없다	keep	local-ending
+dict:jisjk:342186	静かで穏やかだ	조용하고 온화하다	keep	local-ending
+cx:copies:40	「待って待って、途中が抜けてない？」	「기다려 기다려, 도중이 빠지지 않아?」	fix	rewrites
+sound:doubled-call	ねえねえねえ、提督？	있잖아 있잖아 있잖아, 제독?	fix	sound
+cx:copies:30	寝ろ寝ろうるさい	!rule:cx:copies:30	keep	rewrites
+cx:copies:30	願って願って、ようやく手に入れた……	바라고 또 바라, 드디어 손에 넣었다……	fix	rewrites
+cx:copies:30	「いいよいいよ、半分食べるの？」	!rule:cx:copies:30	keep	rewrites
+cx:copies:40	「さ、入って入って」	「자, 들어가 들어가」	fix	rewrites
+cx:copies:40	「わっ、見せて見せてっ」	「왓, 보여 줘 보여 줘」	fix	rewrites
+cx:copies:30	「逃げて逃げて、どんな窮地にあっても」	「도망치고 또 도망쳐, 어떤 궁지에 있어도」	fix	rewrites
+sound:doubled-call	「ねえねえ、さっきから見てるんだけど」	「있잖아, 조금 전부터 보고 있었지만」	fix	sound
+cx:copies:40	「それでそれで、何か分かった？」	「그래서 그래서, 뭔가 알았어?」	keep	rewrites
+cx:copies:50	「早く、早くーっ！！」	「빨리, 빨리~!!」	keep	rewrites
+cx:copies:50	「許して、許して……」	「용서해, 용서해……」	keep	rewrites
+cx:copies:30	「待て待て、冗談だって」	!rule:cx:copies:30	keep	rewrites

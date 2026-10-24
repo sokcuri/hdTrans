@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 word:tsu-clause-end	「い、いいっ、奥が、痺れるっ……」	「조, 좋다, 안쪽이, 저린다……」	fix	local
 word:tsu-clause-end	「すごいっ、先輩のっ……すごいですっ」	「대단해, 선배의……대단합니다」	fix	local
-word:tsu-clause-end	「それ、気持ちいいっ、だめだめっ」	「그거, 기분 좋다, 안 된다」	fix	local
+word:tsu-clause-end	「それ、気持ちいいっ、だめだめっ」	「그거, 기분 좋다, 안 돼 안 돼」	fix	local
 word:tsu-clause-end	「参加させていただきますっ、あはっ！」	「참가하겠습니다, 아핫!」	fix	local
