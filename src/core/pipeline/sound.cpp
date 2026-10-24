@@ -1,6 +1,7 @@
 #include "core/pipeline/sound.h"
 
 #include <algorithm>
+#include <initializer_list>
 #include <span>
 #include <string>
 #include <string_view>
@@ -1853,8 +1854,21 @@ constexpr size_t kLongestStem = 8;
 // The byte offset of each character of rs in its UTF-8 text, and the text's size last.
 std::vector<size_t> RuneOffsets(std::u32string_view rs) {
     std::vector<size_t> at(rs.size() + 1, 0);
-    for (size_t k = 0; k < rs.size(); k++) at[k + 1] = at[k] + EncodeText(rs.substr(k, 1)).size();
+    for (size_t k = 0; k < rs.size(); k++) {
+        const char32_t c = rs[k];
+        at[k + 1] = at[k] + (c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : 4);
+    }
     return at;
+}
+
+// Whether text holds a member of one of sets anywhere: the contractions look closer only then.
+bool HoldsMember(std::string_view text, std::initializer_list<std::span<const std::string_view>> sets) {
+    for (const std::span<const std::string_view> set : sets) {
+        for (const std::string_view m : set) {
+            if (text.find(m) != std::string_view::npos) return true;
+        }
+    }
+    return false;
 }
 
 // The length of the first of members that starts s, 0 for none.
@@ -1901,6 +1915,10 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kI = "い";
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.te-iku"), dict::ClassMembers("contraction.te-iku-listed"),
+                            dict::ClassMembers("contraction.te-iku-final")})) {
+        return std::string(text);
+    }
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
     const std::vector<size_t> byte = RuneOffsets(rs);
@@ -1956,6 +1974,7 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
 
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
     constexpr std::string_view kNo = "の";
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
     const std::vector<size_t> byte = RuneOffsets(rs);
@@ -1996,6 +2015,7 @@ std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& sna
 
 std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kSmallTsu = "っ";
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.u-onbin")})) return std::string(text);
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
     const std::vector<size_t> byte = RuneOffsets(rs);
