@@ -112,11 +112,10 @@ std::size_t MarkAt(std::string_view s, std::span<const std::string_view> marks) 
     return 0;
 }
 
-// Whether s holds only marks that end or pause a sentence and spaces.
-bool OnlyMarks(std::string_view s) {
+// Whether s holds only marks of a pause and spaces.
+bool OnlyPauses(std::string_view s) {
     while (!s.empty()) {
-        std::size_t n = MarkAt(s, dict::ClassMembers("mark.sentence-end"));
-        if (n == 0) n = MarkAt(s, dict::ClassMembers("mark.pause"));
+        std::size_t n = MarkAt(s, dict::ClassMembers("mark.pause"));
         if (n == 0 && text::IsSpace(text::DecodeRune(s).cp)) n = text::DecodeRune(s).size;
         if (n == 0) return false;
         s.remove_prefix(n);
@@ -124,19 +123,26 @@ bool OnlyMarks(std::string_view s) {
     return true;
 }
 
-// Whether the speech goes on after the item past the marks that end or pause its sentence:
-// a word follows on its line that is not a closing bracket, or its sentence ends inside a
-// quote that the next sentence goes on (「……そうだ！　青海さん」, ……そうだ、ほら; not
-// 「……そうだ」, ……そうだ。).
+// Whether the speech goes on after the item, past pause marks and spaces, within its sentence
+// or past a ！ or ？ that ends it inside a quote the next sentence goes on: a word follows that
+// is not a closing bracket (……そうだ、ほら, 「……そうだ！　田中さん」; not ……そうだ。 間違いない,
+// 「……そうだ」 or an unclosed 「……そうだ at the end of the text).
 bool SpeechGoesOn(Worker& w, const Item* it) {
     const std::string_view rest = From(it->text, it->start + it->length);
-    if (!rest.empty() && !OnlyMarks(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
+    if (!rest.empty() && !OnlyPauses(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
+    bool exclaimed = false;
     for (int j = it->tokenIndex + 1; j < w.TokenCount(); j++) {
         const int type = w.Tok(j).type;
-        if (type == tokenizer::kTypeEnd) return w.QuoteDepth(j) > 0;
+        if (type == tokenizer::kTypeEnd) return exclaimed && w.QuoteDepth(j) > 0;
         if (type == tokenizer::kTypeNewline) return false;
+        if (type == tokenizer::kTypeSentenceEnd || type == tokenizer::kTypeAsciiPunct) {
+            const std::string_view mark = w.tokens.Canonical(static_cast<std::size_t>(j));
+            if (!mark.starts_with("!") && !mark.starts_with("?")) return false;
+            exclaimed = true;
+            continue;
+        }
         const std::string_view raw = w.tokens.Raw(static_cast<std::size_t>(j));
-        if (!OnlyMarks(raw)) return MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+        if (!OnlyPauses(raw)) return MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
     }
     return false;
 }
