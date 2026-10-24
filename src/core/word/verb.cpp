@@ -61,6 +61,14 @@ std::size_t StartLength(std::string_view s, std::span<const std::string_view> me
     return 0;
 }
 
+// Whether one of records is longer than n bytes: a word starts at the text they were looked up at.
+bool StartsLongerWord(const Record* records, std::size_t n) {
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() > n) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 int ContractedIruBranch(std::string_view rest) {
@@ -686,7 +694,10 @@ bool Item::AcceptVerbContinuation(Record* following) {
 
     // The ちゃ form whose ちゃう is in its て form before いる with its い dropped (寝ちゃってた,
     // 言いそびれちゃってたんですけど): done and past, as ちゃった; the ending after the た is read on
-    // the past and written for 버리 after the verb (5지만 → 6 버렸지만).
+    // the past and written for 버리 after the verb (5지만 → 6 버렸지만). Without an ending of its own
+    // the form takes the empty ending below, unless its た starts a longer word (寝ちゃってたまらない:
+    // て and たまらない).
+    std::string_view auxHead;
     if (base.kind == 17 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(0, 7)) &&
         rest.substr(Conjugation(0, 7).size()).starts_with(Conjugation(7, 6)) &&
         (ending == nullptr || ending->length < static_cast<int>(rest.size()))) {
@@ -698,6 +709,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         if (g != nullptr && !head.empty() && ProgressiveEndings(*g, base, head.front())) {
             ending = g;
             length = sourceLength + pattern();
+        } else if (!head.empty() && !StartsLongerWord(w->DoLookup(rest.substr(Conjugation(0, 7).size()), kModeGeneral).records,
+                                                         Conjugation(7, 6).size())) {
+            ending = nullptr;
+            auxHead = head.front();
+            length = sourceLength + pattern();
         } else {
             patternWidth = chaWidth;
             base.kind = 17;
@@ -708,8 +724,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // A past form whose た is the て before あげる with its あ dropped (作ったげる, 見せたげよう): the
     // kana after the た are the ichidan forms of あげる without it, written for 주 after the て
     // form (6 줄게). Without an ending of its own the form takes the empty ending below.
-    std::string_view auxHead;
-    if (ending == nullptr && base.kind == 6 && w->settings.text && queryAllowed &&
+    if (ending == nullptr && auxHead.empty() && base.kind == 6 && w->settings.text && queryAllowed &&
         Conjugation(base.patternKind, 7).size() == Conjugation(base.patternKind, 6).size()) {
         const std::size_t stem = StartLength(rest, dict::ClassMembers("contraction.te-ageru"));
         const std::span<const std::string_view> head = dict::ClassMembers("ko.benefactive-head");

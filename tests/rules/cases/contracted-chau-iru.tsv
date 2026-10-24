@@ -9,3 +9,6 @@ lookup:contracted-chau-iru	寝ちゃってたけど	자 버렸지만	fix	lookup
 lookup:contracted-chau-iru	寝ちゃってたんだ	자 버린 거야	fix	lookup
 lookup:contracted-chau-iru	寝ちゃった	자 버렸다	keep	lookup
 lookup:contracted-chau-iru	寝ちゃってる	자 버렸다	keep	lookup
+lookup:contracted-chau-iru	寝ちゃってたまらない	자서 견딜 수 없다	keep	lookup
+lookup:contracted-chau-iru	忘れちゃってたまに	잊어서 이따금	keep	lookup
+lookup:contracted-chau-iru	「いや、ごめん……ここで寝ちゃってたみたいで……」	「아니, 미안……여기서 자 버린 것 같아……」	fix	lookup
