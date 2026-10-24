@@ -59,7 +59,7 @@ cp "$cli" "$out/hdtrans"
 home=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-measure.XXXXXX")
 pids=
 trap 'rm -rf "$home"' EXIT
-trap 'trap "" HUP INT TERM; [ -z "$pids" ] || { kill $pids 2> /dev/null; wait; }; exit 2' HUP INT TERM
+trap 'trap "" HUP INT TERM; [ -z "$pids" ] || { kill $pids 2> /dev/null || :; wait; }; exit 2' HUP INT TERM
 
 # Each set runs in a background subshell, where `stoppable` starts its long command; a TERM then
 # stops that command too.
@@ -74,7 +74,7 @@ stoppable() { # COMMAND [ARG...]
 stops() {
     last=${!-}
     trap 'trap "" TERM; [ "${!-}" = "$last" ] || child=${child:-$!}
-        [ -z "$child" ] || { kill "$child" 2> /dev/null; wait "$child"; }; exit 2' TERM
+        [ -z "$child" ] || { kill "$child" 2> /dev/null || :; wait "$child" || :; }; exit 2' TERM
 }
 
 # Line count with LF as the only break; a missing final LF still ends a line.
