@@ -11,7 +11,7 @@ segmentation:kakubeya	各部屋には窓がない。	각 방에는 창이 없다
 segmentation:kakubeya	各部屋番号を確認した。	각 방 번호를 확인했다.	fix	lookup
 segmentation:kakubeya	各部屋のドアを閉めた。	각 방의 문을 닫았다.	fix	lookup
 segmentation:kakubeya	各部は屋外で練習した。	각부는 옥외에서 연습했다.	keep	lookup
-segmentation:kakubeya	各部 屋根 壁を調べた。	각부 지붕벽을 조사했다.	keep	lookup
+segmentation:kakubeya	各部 屋根 壁を調べた。	각부 지붕 벽을 조사했다.	keep	lookup
 segmentation:kakubeya	部屋着を洗った。	실내복을 씻었다.	keep	lookup
 segmentation:kakubeya	各部の屋台を見た。	각부의 포장마차를 보았다.	keep	lookup
 segmentation:hanikamu	彼女ははにかむ。	그녀는 수줍어한다.	fix	lookup

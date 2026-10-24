@@ -466,3 +466,34 @@ HD_TEST(tokenizer_mark_run) {
     HD_CHECK_EQ(MarkRun("‼⁉⁈"), std::string("!!!?") + "?!");
     HD_CHECK_EQ(MarkRun("。"), std::string());
 }
+
+// With SpaceJoins, a single space between two kanji parts two words unless a word joins
+// them; two lone pieces of a name stay one token.
+HD_TEST(tokenize_kept_kanji_space) {
+    // The words 未来 and 通知表, starting anywhere in the text before the space.
+    const SpaceJoins joins = [](std::string_view before, std::string_view after) {
+        for (const std::string_view word : {"未来"sv, "通知表"sv}) {
+            for (std::size_t start = 0; start < before.size(); start++) {
+                const std::string text = std::string(before.substr(start)) + std::string(after);
+                if (text.starts_with(word) && word.size() > before.size() - start) return true;
+            }
+        }
+        return false;
+    };
+    const auto scan = [&](std::string_view input) {
+        const std::vector<Piece> pieces = {{std::string(input), 0}};
+        Tokens t;
+        TokenizeSpans(pieces, true, t, &joins);
+        return Scanned(t);
+    };
+    HD_CHECK_EQ(scan("光 影 光 影"), std::string("24/0:光 7/0:  24/0:影 7/0:  24/0:光 7/0:  24/0:影 9/0:"));
+    HD_CHECK_EQ(scan("光　影　光　影"), std::string("24/0:光 7/0:  24/0:影 7/0:  24/0:光 7/0:  24/0:影 9/0:"));
+    HD_CHECK_EQ(scan("副総理 兼 外務大臣"), std::string("24/0:副総理 7/0:  24/0:兼 7/0:  24/0:外務大臣 9/0:"));
+    HD_CHECK_EQ(scan("未 来"), std::string("24/0:未来 9/0:"));
+    HD_CHECK_EQ(scan("通 知 表"), std::string("24/0:通知表 9/0:"));
+    HD_CHECK_EQ(scan("林　涛"), std::string("24/0:林涛 9/0:"));
+    HD_CHECK_EQ(scan("君の 夢"), std::string("24/0:君の夢 9/0:"));
+    HD_CHECK_EQ(scan("ジモ得 週"), std::string("24/0:ジモ得週 9/0:"));  // a word of kana and kanji before it
+    // Without joins every such space is dropped.
+    HD_CHECK_EQ(ScanText("光 影", true), std::string("24/0:光影 9/0:"));
+}

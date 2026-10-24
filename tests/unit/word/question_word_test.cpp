@@ -33,7 +33,7 @@ HD_TEST(word_question_word_fragment) {
         {"どこから犬", "어디에서나"},
         {"どこかな犬", "어디일까 나"},
         {"どこか犬", "어디인가 가"},
-        {"どこ猫か犬", "어디고양이인가 가"},
+        {"どこ猫か犬", "어디 고양이인가 가"},
         {"どこ行くか犬", "어디 가는지 가"},  // the か after the verb's own kana closes a question
     };
     for (const Case& c : cases) {

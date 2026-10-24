@@ -225,6 +225,9 @@ public:
     // (何人), not an indefinite (何か, 誰も, いつでも).
     bool IsQuestionWord() const;
     bool JoinsNext() const;
+    // JoinsNext, or the word ends its token and the next word starts the next token, with no
+    // space between them (超 and Ａ級 of 超Ａ級).
+    bool WrittenBeforeNext() const;
     // Whether candidate i reads the word as a count (rule code Nq): a number or 半, or a number
     // (kanji or digits, or 数, 何, 幾 before it) and a counter coded Ct, read with digits or a
     // Korean numeral first (三 3, 三人 세 명, 十日 열흘, 数日 며칠, 一時間半, 五分の一). 月 and 時

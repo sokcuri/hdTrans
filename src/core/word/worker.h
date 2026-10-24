@@ -116,6 +116,9 @@ private:
     // afterMyriad: the text before source ends with 万 or 億.
     Record* ProbeNumericPrefix(int token, std::string_view source, bool afterMyriad = false);
     void BuildSurfaceTransform(int token, std::string_view surface);
+    // The words of full from cursor to its end; parent is the word before cursor.
+    void CoverSurface(int token, std::string_view full, int cursor, Item* parent);
+    std::size_t CopyEnd(std::string_view text, std::string_view before);
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);

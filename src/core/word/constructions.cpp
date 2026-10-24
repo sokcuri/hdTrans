@@ -23,6 +23,94 @@ namespace internal {
 
 namespace {
 
+// Whether the word is only marks that may stand between copies (pause.copy: 、).
+bool CopyPause(const Item* it) {
+    const std::string_view text = Slice(it->text, it->start, it->length);
+    for (std::string_view t = text; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!dict::InClass("pause.copy", t.substr(0, r.size))) return false;
+        t.remove_prefix(r.size);
+    }
+    return !text.empty();
+}
+
+// The word before it that it repeats: the same text with the same ending, of two
+// characters or more, in the same token with nothing or a CopyPause word between (いや|いや,
+// 待って、待って).
+const Item* CopyBefore(const Item* it) {
+    const Item* p = it->prev;
+    if (p != nullptr && p->tokenIndex == it->tokenIndex && CopyPause(p)) p = p->prev;
+    if (p == nullptr || p->tokenIndex != it->tokenIndex) return nullptr;
+    const std::string_view text = Slice(it->text, it->start, it->length);
+    if (text::RuneCount(text) < 2 || Slice(p->text, p->start, p->length) != text) return nullptr;
+    return p;
+}
+
+// The word after it that repeats it.
+const Item* CopyAfter(const Item* it) {
+    const Item* n = it->next;
+    if (n != nullptr && n->tokenIndex == it->tokenIndex && CopyPause(n)) n = n->next;
+    return n != nullptr && CopyBefore(n) != nullptr ? n : nullptr;
+}
+
+
+// The last copy of the run that it starts or goes on.
+const Item* LastCopy(const Item* it) {
+    const Item* last = it;
+    while (const Item* n = CopyAfter(last)) last = n;
+    return last;
+}
+
+// Whether the copy after it follows it with no pause between (いやだいやだ, not 好き、好き).
+bool CopiedStraight(const Item* it) {
+    const Item* n = CopyAfter(it);
+    return n != nullptr && it->next == n;
+}
+
+// Whether the copies of its run are the last predicate of their sentence: no word after the
+// last copy conjugates and writes something, except one that modifies the noun after it
+// (見て見て可愛いお菓子).
+bool CopiesEnd(const Item* it) {
+    for (const Item* n = LastCopy(it)->next; n != nullptr; n = n->next) {
+        const Item* after = n->next;
+        const bool modifies = after != nullptr && after->selected >= 0 && At(after->Code(after->selected), 0) == '1' &&
+                              tokenizer::Class(text::DecodeRune(after->group->surface).cp) != 0;
+        if (n->detail->Yougo() && n->selected >= 0 && !n->EntryText(n->selected).empty() && !modifies) return false;
+    }
+    return true;
+}
+
+// Whether the last copy of its run ends in a connective of form 6 (歩いて 걸어, 嬉しくて 기뻐서;
+// not an imperative of the ; class, 寝ろ 자라).
+bool ConnectiveCopies(const Item* it) {
+    const Item* last = LastCopy(it);
+    const int from = last->DirectIndex();
+    return it->detail->Yougo() && from >= 0 && last->DirectText(from).starts_with("6") &&
+           last->DirectCode(from).find(';') == std::string_view::npos;
+}
+
+bool Exclaimed(Flusher& f, const Item* it) {
+    const Item* tail = it;
+    while (tail->next != nullptr) tail = tail->next;
+    // The mark is the last word of the sentence, or the token after it.
+    for (std::size_t j = static_cast<std::size_t>(tail->tokenIndex); j <= static_cast<std::size_t>(tail->tokenIndex) + 1; j++) {
+        if (j >= f.w.tokens.size()) break;
+        const std::string_view mark = f.w.tokens.Canonical(j);
+        if (mark.starts_with("!") || mark.starts_with("?")) return true;
+    }
+    return false;
+}
+
+bool Narrated(Flusher& f, const Item* it) {
+    if (it->InQuote()) return false;
+    const Item* tail = it;
+    while (tail->next != nullptr) tail = tail->next;
+    const auto j = static_cast<std::size_t>(tail->tokenIndex + 1);
+    if (j >= f.w.tokens.size()) return false;
+    const std::string_view mark = f.w.tokens.Canonical(j);
+    return !mark.empty() && text::IsPunct(text::DecodeRune(mark).cp) && f.w.tokens.tokens[j].type == tokenizer::kTypeSymbol;
+}
+
 struct NamedFeature {
     std::string_view name;
     CxFeature test;
@@ -51,6 +139,19 @@ constexpr NamedFeature kFeatures[] = {
     {"word-span", [](Flusher& f, const Item* it) { return it->Fixed() && f.w.Span(it->tokenIndex) == tokenizer::kSpanWord; }},
     // The sense table read the word as an adjectival noun (senses.tsv, adjective).
     {"adjectival", [](Flusher&, const Item* it) { return it->adjectival; }},
+    // The word repeats the word before it (CopyBefore), or the word after it repeats it.
+    {"copy", [](Flusher&, const Item* it) { return CopyBefore(it) != nullptr; }},
+    {"copied", [](Flusher&, const Item* it) { return CopyAfter(it) != nullptr; }},
+    // The copy after it follows with no pause (CopiedStraight); the copies are the last
+    // predicate of their sentence (CopiesEnd); they end in the connective form 6 (ConnectiveCopies).
+    {"copied-straight", [](Flusher&, const Item* it) { return CopiedStraight(it); }},
+    {"copies-end", [](Flusher&, const Item* it) { return CopiesEnd(it); }},
+    {"connective-copies", [](Flusher&, const Item* it) { return ConnectiveCopies(it); }},
+    // The sentence of the word ends in ! or ? (an utterance, not a narrated sentence).
+    {"exclaimed", [](Flusher& f, const Item* it) { return Exclaimed(f, it); }},
+    // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis
+    // (a て form that ends a sentence with a period is a request: え、待って待って。).
+    {"narrated", [](Flusher& f, const Item* it) { return Narrated(f, it); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
@@ -235,6 +336,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
         {"set-verb", CxVerb::SetVerb},
+        {"copy-ending", CxVerb::CopyEnding},
+        {"copy-word", CxVerb::CopyWord},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -273,6 +376,10 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             continue;
         }
         const char* bad = nullptr;
+        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord) {
+            out.push_back(std::move(a));
+            continue;
+        }
         if (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.value, bad)) {
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
@@ -636,6 +743,59 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
                     it->SelectCandidate(slot, source);
                     break;
                 }
+            }
+            break;
+        }
+        case internal::CxVerb::CopyWord: {
+            // The copy takes the word of the last copy of its run (なんでなんで 왜 왜).
+            // Not before a particle or a copula, whose word the last copy may read in a bound form
+            // (まさかまさかの 설마 뜻밖의, ばかりばかりだ), nor from a last copy that writes nothing.
+            const Item* last = internal::LastCopy(it);
+            if (last == it || last->selected < 0 || it->selected < 0 || last->EntryText(last->selected).empty()) break;
+            if (const Item* n = last->next; n != nullptr && n->selected >= 0) {
+                if (const Entry* e = n->group->At(n->selected); e != nullptr && e->cls == 'P') break;
+            }
+            const std::string lemma = ItemLemma(f, last, last->selected);
+            if (lemma == ItemLemma(f, it, it->selected)) break;
+            bool found = false;
+            for (int slot = 0; slot < static_cast<int>(it->group->entries.size()) && !found; slot++) {
+                if (ItemLemma(f, it, slot) == lemma) {
+                    it->SelectCandidate(slot, source);
+                    found = true;
+                }
+            }
+            // A pass may have rewritten the candidate the last copy reads (なんで 어째서 at the
+            // start of a sentence): the copy then writes the last copy's Korean.
+            if (!found) it->AssignEntrySurface(it->selected, std::string(last->EntryText(last->selected)), source);
+            break;
+        }
+        case internal::CxVerb::CopyEnding: {
+            // The copy takes the ending of the last copy of its run (copies rows). A copy reads
+            // its own word: the same word may be written apart before a particle (私、私が 나, 내가).
+            const Item* last = internal::LastCopy(it);
+            if (last == it || last->selected < 0 || it->selected < 0 ||
+                it->EntryText(it->selected) != last->EntryText(last->selected)) {
+                break;
+            }
+            // The ending of the same kind as the last copy's: the slot with its code and Korean,
+            // or the chosen slot of that code rewritten to its Korean.
+            const int from = last->DirectIndex(), to = it->DirectIndex();
+            if (from < 0 || to < 0) break;
+            const std::string_view code = last->DirectCode(from), ending = last->DirectText(from);
+            // Only an ending that starts with its form (6, 1고): a rule's own marker belongs to
+            // the words after the last copy (照れ照れになり).
+            if (ending.empty() || !text::IsDigit(static_cast<unsigned char>(ending[0])) ||
+                (it->DirectCode(to) == code && it->DirectText(to) == ending)) {
+                break;
+            }
+            int same = -1;
+            for (int slot = 0; slot < it->DirectCount() && same < 0; slot++) {
+                if (it->DirectCode(slot) == code && it->DirectText(slot) == ending) same = slot;
+            }
+            if (same >= 0) {
+                it->SetDirectIndex(same, source);
+            } else if (it->DirectCode(to) == code) {
+                it->AssignDirectSlot(to, ending, source);
             }
             break;
         }
