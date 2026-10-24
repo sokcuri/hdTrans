@@ -83,6 +83,8 @@ constexpr ConstraintRule kRules[] = {
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 でい로 끝나는 말도 같다 (読んでいらっしゃる)", {}},
+    {"tanto-after-tsu", ConstraintWord::Source, "たんと", ConstraintContext::AfterSmallTsu, ConstraintReject::Word,
+     "っ 바로 뒤의 たんと는 부사 듬뿍이 아니라 과거 た + んと (行ったんと違う 간 듬뿍 다르다)", {}},
     {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
@@ -317,6 +319,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                            [&](std::string_view e) { return lead.ends_with(e); });
     case ConstraintContext::NotAfterQuantity:
         return !EndsInQuantity(lead);
+    case ConstraintContext::AfterSmallTsu:
+        return preceding.ends_with("っ") || preceding.ends_with("ッ");
     case ConstraintContext::AfterTeNotAdjective:
         return (preceding.ends_with("て") || preceding.ends_with("で")) &&
                !StartsWithAny(after, dict::ClassMembers("follower.ita"));

@@ -755,6 +755,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 たちまち	금세	E300			GN				xxx llm	1		w:750
 たった一人	단 한 사람	N110			GN				llm			w:751
 たっぷり	듬뿍	E300			GN				xxx llm	1		w:752
+たんと	듬뿍	E300			GN					1		w:28610
 たて座	방패자리	N110			GN						たてざ	w:753
 たて状地	순상지	N110			GN						たてじょうち	w:754
 たて糸	날실	N110			GN				llm		たていと	w:755
