@@ -137,6 +137,8 @@ constexpr NamedFeature kFeatures[] = {
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
+    // An ellipsis or a dash stands right before the word (……そうだ).
+    {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).

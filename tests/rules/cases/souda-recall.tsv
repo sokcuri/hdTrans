@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:souda-recall:10	「あ、そうだ」	rule:cx:souda-recall:10=%Dn@	fix	rewrites
 cx:souda-recall:10	「あっ、そうだ！」	「앗, 맞다!」	fix	rewrites
-cx:souda-recall:10	「えっと、そうだ！」	「음, 맞다!」	fix	rewrites
+cx:souda-recall:10	「えっと、そうだ！」	!rule:cx:souda-recall:10	keep	rewrites
 cx:souda-recall:10	「ああ、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
 cx:souda-recall:10	「うん、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
 cx:souda-recall:10	「あぁ、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
@@ -28,3 +28,25 @@ cx:souda-recall:20	「と、そうだ、おばちゃんは？」	「아, 맞다,
 cx:souda-recall:20	「いや、謝る必要はないし……と、そうだ、お願いしていい？」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
 cx:souda-recall:20	置いておいてもいいんだけど……と、そうだっ！	놓아두어도 괜찮은데……아, 맞다!	fix	rewrites
 cx:souda-recall:20	「と、言いますと？」	!rule:cx:souda-recall:20	keep	rewrites
+cx:souda-recall:30	「なるさ……そうだ、ほら、これ」	rule:cx:souda-recall:30=%Dn@	fix	rewrites
+cx:souda-recall:30	うぅーーん……そうだっ！	으으으응……맞다!	fix	rewrites
+cx:souda-recall:30	美味しいですよねぇ。…そうだ、今度カレーに入れてみるのはどうでしょう！？	맛있죠. …맞다, 이번에 카레에 넣어 보는 것은 어떨까요!?	fix	rewrites
+cx:souda-recall:30	エェ？コノヒカリハ…アッ…ソウダ！	에? 이 빛은…앗…맞다!	fix	rewrites
+cx:souda-recall:30	竹の炊き込み飯だ。……そうだ、うまいぞ。	rule:cx:souda-recall:30=%Dn@	fix	rewrites
+# 맞는 출력: 자, 오늘 밤은 어떻게 하지? …그래, 피자는 어떨까?
+cx:souda-recall:30	さ、今晩はどうしようか？…そうだ、pizzaはどうかな？	자, 오늘 밤은 어떻게 하지? …맞다, pizza는 어떨까?	current	rewrites
+# 맞는 출력: 제독…받은 과자…그래, 차를 끓일게요.
+cx:souda-recall:30	提督…戴いたお菓子…そうだ、お茶を入れますね。	rule:cx:souda-recall:30=%Dn@	current	rewrites
+# 맞는 출력: 기운이 없을 때는…그래!
+cx:souda-recall:30	元気がないときゃ…そうだ！	rule:cx:souda-recall:30=%Dn@	current	rewrites
+# 맞는 출력: ……그래, 그 폭발에 나는……그걸로 의식을……, 그런가.
+cx:souda-recall:30	……そうだ、あの爆発に俺は……あれで意識を……、そうか。	……맞다, 그 폭발에 나는……저것으로 의식을……, 그런가.	current	rewrites
+cx:souda-recall:30	「なるさ……そうだ、ほら、これ」	「되고 말이야……맞다, 자, 이거」	fix	rewrites
+cx:souda-recall:30	「みんなと一緒に……そうだ、あの子も誘うか？」	「모두와 함께……맞다, 그 아이도 부를까?」	fix	rewrites
+cx:souda-recall:30	……そうだ、ボクは2階に上がっててもいい？	……맞다, 나는 2층에 올라도 좋아?	fix	rewrites
+cx:souda-recall:30	昨日の敵は今日の……そうだ、日本語でなんと言ったかなぁ……	rule:cx:souda-recall:30=%Dn@	fix	rewrites
+cx:souda-recall:10	「うむ、そうだ」	「음, 그래」	keep	rewrites
+cx:souda-recall:10	「んー、そうだ」	「음, 그래」	keep	rewrites
+cx:souda-recall:30	　……そうだ。	!rule:cx:souda-recall:30	keep	rewrites
+cx:souda-recall:30	……そうだ！！	!rule:cx:souda-recall:30	keep	rewrites
+cx:souda-recall:30	マルフタマルマル。そうだ、甘いものは？	!rule:cx:souda-recall:30	keep	rewrites

@@ -338,8 +338,6 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Kh") return KoreanSpan();
         // Hp: a sentence end, an ellipsis or a dash right before the word.
         if (c == "Hp") return AfterPause(true);
-        // Hl: an ellipsis or a dash right before the word.
-        if (c == "Hl") return AfterPause(false);
         if (c == "Td" && After() == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
