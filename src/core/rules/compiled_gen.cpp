@@ -4212,10 +4212,11 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw
 //     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv)) ||
+    return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv) && (GramNe(p, 0, "Hp"sv) ||
+           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv)) ||
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
 
@@ -4258,12 +4259,6 @@ bool RuleG90([[maybe_unused]] Item* p) {
            GramNe(p, -1, "NjNd"sv)));
 }
 
-// global 1015 stem pos 1 prio 100
-//     gram has Td and gram has On and src != "私" and src != "俺" and src != "僕" and src != "君" and src != "誰" and src != "何" and src != "男" and src != "女"
-bool RuleG100([[maybe_unused]] Item* p) {
-    return (GramEq(p, 0, "Td"sv) && GramEq(p, 0, "On"sv) && SrcNe(p, 0, "私"sv) && SrcNe(p, 0, "俺"sv) && SrcNe(p, 0, "僕"sv) && SrcNe(p, 0, "君"sv) && SrcNe(p, 0, "誰"sv) && SrcNe(p, 0, "何"sv) && SrcNe(p, 0, "男"sv) && SrcNe(p, 0, "女"sv));
-}
-
 // global 1020 stem pos 1 prio 110
 //     pos is 1** and gram within Z7 and gram[-1] within Nd|Nj
 bool RuleG110([[maybe_unused]] Item* p) {
@@ -4303,15 +4298,15 @@ bool RuleG150([[maybe_unused]] Item* p) {
 }
 
 // global 4000 stem pos 1 prio 160
-//     pos is 1** and gram has Oj and pos[+1] is 1** and gram[+1] has On
+//     pos is 1** and gram has Oj and pos[+1] is 1** and gram[+1] has On and gram[+1] lacks Rw and gram lacks Rw
 bool RuleG160([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Oj"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Oj"sv) && PumsaEq(p, 1, "1**"sv) && GramEq(p, 1, "On"sv) && GramNe(p, 1, "Rw"sv) && GramNe(p, 0, "Rw"sv));
 }
 
 // global 4001 stem pos 1 prio 170
-//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has Oj
+//     pos is 1** and gram has On and pos[-1] is 1** and gram[-1] has Oj and gram lacks Rw and gram[-1] lacks Rw
 bool RuleG170([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Oj"sv));
+    return (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "On"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Oj"sv) && GramNe(p, 0, "Rw"sv) && GramNe(p, -1, "Rw"sv));
 }
 
 // global 4100 stem pos 1 prio 180
@@ -4440,6 +4435,13 @@ bool RuleG350([[maybe_unused]] Item* p) {
 //     gram has Gk and end.src == "に" and src[-1] == "の" and pos[-1] is 2** and end.ko := " 에"
 bool RuleG360([[maybe_unused]] Item* p) {
     return (GramEq(p, 0, "Gk"sv) && GobiSrcEq(p, 0, "に"sv) && SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && GobiDstSet(p, 0, " 에"sv));
+}
+
+// global 2001 stem pos 8 prio 365
+//     gram has Ns and end.src == "に" and (src[+1] == "近" or src[+1] == "等し") and end.ko := " 에"
+bool RuleG365([[maybe_unused]] Item* p) {
+    return (GramEq(p, 0, "Ns"sv) && GobiSrcEq(p, 0, "に"sv) && (SrcEq(p, 1, "近"sv) ||
+           SrcEq(p, 1, "等し"sv)) && GobiDstSet(p, 0, " 에"sv));
 }
 
 namespace {
@@ -4952,21 +4954,20 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG2, 0x80a377d931160ae0ull},
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0x50734a4f6e17f2d1ull},
+    {RuleG30, 0x3814c2a55021b968ull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
     {RuleG70, 0xe40c44a1aa1685dbull},
     {RuleG80, 0xf28c1a884fcacd15ull},
     {RuleG90, 0xd168e3592ff5cec5ull},
-    {RuleG100, 0xa01516a7e8557ccbull},
     {RuleG110, 0xb07ac6a5914ffa49ull},
     {RuleG120, 0xbc2cb445fafca77dull},
     {RuleG130, 0x60209eb785257c06ull},
     {RuleG140, 0xef64f925c202219dull},
     {RuleG150, 0x2405743392f641fcull},
-    {RuleG160, 0x57e4fc1b141b133eull},
-    {RuleG170, 0x93d3d56cf23cf026ull},
+    {RuleG160, 0xae87505005903c01ull},
+    {RuleG170, 0x6ceda183d481fe45ull},
     {RuleG180, 0xb147e1d8e11a4f76ull},
     {RuleG190, 0x20c67167c24a264bull},
     {RuleG200, 0x6b080de836eac7c3ull},
@@ -4986,6 +4987,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG340, 0x8a1a46ab1e4c6071ull},
     {RuleG350, 0x63da7fe4796ebe29ull},
     {RuleG360, 0x839f4f04a155b041ull},
+    {RuleG365, 0xfdedf27fa821c389ull},
 };
 
 }  // namespace

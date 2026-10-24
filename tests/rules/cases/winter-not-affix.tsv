@@ -1,0 +1,13 @@
+# 규칙: LEX-16
+rule	input	expected	kind	layer
+dict:jisjk:259366	冬到来	겨울 도래	fix	defaults
+dict:jisjk:259366	冬東京	겨울 도쿄	fix	defaults
+dict:jisjk:259366	立山線 冬のPR動画	다테야마선 겨울의 PR 동영상	fix	defaults
+dict:jisjk:259366	冬季大演習：冬の一日中に	동계대연습：겨울의 하루종일에	fix	defaults
+dict:jisjk:259366	冬服を着る	동복을 입는다	keep	lookup
+dict:jisjk:259366	冬将軍	동장군	keep	lookup
+dict:jisjk:259366	真冬の夜	한겨울 밤	keep	lookup
+dict:jisjk:259366	初冬	초겨울	keep	lookup
+dict:jisjk:259366	冬支度	월동준비	keep	lookup
+dict:jisjk:259366	冬季限定	동계 한정	keep	lookup
+dict:jisjk:259366	冬の準備と新しい住人	겨울 준비와 새로운 주민	keep	defaults

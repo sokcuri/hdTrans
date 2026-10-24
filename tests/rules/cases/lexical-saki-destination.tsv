@@ -1,0 +1,41 @@
+# 규칙: LEX-16
+rule	input	expected	kind	layer
+dict:w:27350	転移先……人の少ない場所って希望したけど	rule:dict:w:27350=할 곳	fix	local
+dict:w:27350	転移先は森だった。	전이할 곳은 숲이었다.	fix	local
+dict:w:27350	転生先は貴族や金持ちが多数で、	rule:dict:w:27350=할 곳	fix	local
+dict:w:27350	高校二年の春、転校先の教室で初めて出会った。	rule:dict:w:27350=할 곳	fix	local
+dict:w:27350	新しい移住先を探す。	새로운 이주할 곳을 찾는다.	fix	local
+dict:w:27350	引っ越し先が決まった。	이사할 곳이 정해졌다.	fix	local
+dict:w:27350	異動先の部署に挨拶した。	rule:dict:w:27350=할 곳	fix	local
+dict:w:27350	移籍先のチームが決まった。	이적할 곳의 팀이 정해졌다.	fix	local
+dict:w:27350	亡命先の国で死んだ。	망명할 곳의 나라에서 죽었다.	fix	local
+dict:w:27350	移動先を決めてください。	이동할 곳을 결정해 주세요.	fix	local
+dict:w:27350	連絡先を交換しましょう	!rule:dict:w:27350	keep	defaults
+dict:w:27350	連絡先を交換しましょう	연락처를 교환합시다	keep	defaults
+dict:w:27350	取引先の会社に行く。	거래처의 회사에 간다.	keep	defaults
+dict:w:27350	勤務先の会社から打診されていた	!rule:dict:w:27350	keep	defaults
+dict:w:27350	販売先らしきメールアドレスはないな	!rule:dict:w:27350	keep	global-stem
+dict:w:27350	派遣先の会社。	파견처의 회사.	keep	global-stem
+dict:w:27350	避難先の学校。	피난처의 학교.	keep	defaults
+dict:w:27350	行き先を知らせていなかった。	행선지를 알리고 있지 않았다.	keep	defaults
+dict:w:27350	今後の嫁ぎ先にも影響が出る。	!rule:dict:w:27350	keep	defaults
+dict:w:27350	常に一歩先を計算して生きてきた	!rule:dict:w:27350	keep	global-stem
+dict:w:27350	先に行く。	먼저 간다.	keep	defaults
+dict:w:27350	給料日は半月先で、	!rule:dict:w:27350	keep	local
+dict:w:27350	お前が転移する先を考慮しよう	네가 전이하는 곳을 고려하자	keep	defaults
+dict:w:27350	転移した先は森だった。	!rule:dict:w:27350	keep	defaults
+dict:w:27384	転移先に食料も水も無いから、	전이할 곳에 식량도 물도 없으니까,	fix	local
+dict:w:27384	転校先には友達がいない。	전학할 곳에는 친구가 없다.	fix	local
+dict:w:27384	移動先にある町。	이동할 곳에 있는 마을.	fix	local
+dict:w:27384	彼が先に行く。	그가 먼저 간다.	keep	defaults
+dict:w:27384	一歩先に進む。	!rule:dict:w:27384	keep	defaults
+dict:w:27384	移住するより先に準備する。	이주하는 것보다 먼저 준비한다.	keep	defaults
+dict:w:27384	派遣先に行く。	!rule:dict:w:27384	keep	defaults
+lexical:saki-place	旅行先で写真を撮った。	여행지에서 사진을 찍었다.	fix	lookup
+lexical:saki-place	出張先のホテルに泊まる。	출장지의 호텔에 묵는다.	fix	lookup
+lexical:saki-place	留学先で友達ができた。	유학지에서 친구가 생겼다.	fix	lookup
+lexical:saki-place	赴任先から戻った。	부임지에서 돌아왔다.	fix	lookup
+lexical:saki-place	ターゲットの潜伏先を包囲できません	타겟의 은신처를 포위할 수 없습니다	fix	lookup
+lexical:saki-place	就職先を選ぶのはあなたでしょう	취직처를 선택하는 것은 당신이지요	keep	lookup
+lexical:saki-place	転居先を教えてください。	이사할 곳을 가르쳐 주세요.	fix	lookup
+lexical:saki-place	就職先としては悪くないのだが	취직처로서는 나쁘지 않지만	keep	lookup

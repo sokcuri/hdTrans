@@ -1,0 +1,45 @@
+# 규칙: LEX-6
+rule	input	expected	kind	layer
+lexical:na-adjective	ここって人が皆無な場所なんじゃないかな。	여기는 사람이 전무한 장소가 아닐까.	fix	lookup
+lexical:na-adjective	騒音トラブルは皆無だ。	소음 트러블은 전무하다.	fix	lookup
+lexical:na-adjective	大人の色香こそ皆無だが、	어른의 색과 향기야말로 전무하지만,	fix	lookup
+lexical:na-adjective	清楚な林檎の白い花、風に揺れる	청초한 사과의 흰 꽃, 바람에 흔들린다	fix	lookup
+lexical:na-adjective	清楚で奥ゆかしい和服の中を、	청초하고 그윽한 일본식 옷 안을,	fix	lookup
+lexical:na-adjective	歴代稀に見る稀有な才能じゃないですか！	역대 드물게 보는 희유한 재능이잖아요!	fix	lookup
+lexical:na-adjective	更に端麗な容姿と美麗な肢体を	더욱 단려한 용모와 미려한 몸을	fix	lookup
+lexical:na-adjective	後輩の中にも前途有望なヤツがいるようだな	후배중에도 전도유망한 녀석이 있는 것 같네	fix	lookup
+lexical:na-adjective	お姉様が言った言葉を私は愚直に守り続けてきた	누님이 말한 말을 나는 우직하게 계속 지켜 왔다	fix	lookup
+lexical:na-adjective	屈強な警官が衛士に立ち、	건장한 경관이 위사에게 서,	fix	lookup
+lexical:na-adjective	動機が不純です	동기가 불순합니다	fix	lookup
+lexical:na-adjective	頭脳明晰な少年。	두뇌 명석한 소년.	fix	lookup
+lexical:na-adjective	ああいう平穏な日々がやってくる	저런 평온한 날들이 온다	fix	lookup
+lexical:na-adjective	昔、平穏だけど退屈なここの雰囲気に	옛날, 평온하지만 지루한 여기의 분위기에	fix	lookup
+lexical:na-adjective	あまりに滅裂なことを言い出すので	너무나 멸렬한 일을 말하기 시작하므로	fix	lookup
+lexical:na-adjective	精強な艦隊を編成、	정강한 함대를 편성,	fix	lookup
+lexical:na-adjective	企業都市が無数に存在する	기업 도시가 무수하게 존재한다	fix	lookup
+lexical:na-adjective	日常の平穏が崩れた。	일상의 평온이 무너졌다.	keep	lookup
+lexical:na-adjective	平穏を取り戻した。	평온을 되찾았다.	keep	lookup
+lexical:na-adjective	無数の星。	무수한 별.	keep	lookup
+lexical:na-adjective	可能性は皆無。	가능성은 전무.	keep	lookup
+lexical:na-adjective	身の潔白を証明する。	몸의 결백을 증명한다.	keep	lookup
+lexical:na-adjective	ファンタジーな時点で	판타지인 시점에서	keep	rewrites
+lexical:na-adjective	気がつけば清楚系の服ばかりだ。	정신을 차려 보니 청초계의 옷뿐이다.	keep	lookup
+lexical:na-adjective	普通な感じだ。	보통인 느낌이다.	keep	local
+lexical:na-adjective	最悪な気分だ。	최악의 기분이다.	keep	lookup
+G365	皆無に近い。	전무에 가깝다.	fix	global-stem
+G365	皆無に等しい。	전무에 다름없다.	fix	global-stem
+G365	攻撃を発射後に避けるのは実質的には不可能に近い。	공격을 발사 후에 피하는 것은 실질적으로는 불가능에 가깝다.	fix	global-stem
+G365	静かに近づいてきた。	조용하게 다가왔다.	keep	global-stem
+G365	強引に近づく。	억지로 가까워진다.	keep	global-stem
+lexical:na-adjective	「動機が不純です」	「동기가 불순합니다」	fix	lookup
+G365	このゲームのアバターは極めてリアルに近い動き	이 게임의 아바타는 지극히 리얼에 가까운 움직임	fix	global-stem
+G365	完璧に近い出来だ。	완벽에 가까운 성과다.	fix	global-stem
+G365	無限に近い時間	무한에 가까운 시간	fix	global-stem
+G365	透明に近い色	투명에 가까운 색	fix	global-stem
+G365	なにが真実に近いよ	뭐가 진실에 가까워	fix	global-stem
+G365	無表情に近い顔	무표정에 가까운 얼굴	fix	global-stem
+G365	真っ白に近い	새하얗게 가깝다	keep	global-stem
+G365	微妙に近い	미묘하게 가깝다	keep	global-stem
+G365	異常に近い	이상하게 가깝다	keep	global-stem
+G365	異様に近い距離	이상하게 가까운 거리	keep	global-stem
+G365	極端に近い	극단적으로 가깝다	keep	global-stem

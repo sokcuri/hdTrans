@@ -1,0 +1,32 @@
+# 규칙: NUM-5, NUM-10
+rule	input	expected	kind	layer
+lookup:fraction	　十分の一。	 10분의 1.	fix	lookup
+lookup:fraction	収穫は十分の一だった。	수확은 10분의 1이었다.	fix	lookup
+lookup:fraction	人口の十分の一が死んだ。	인구의 10분의 1이 죽었다.	fix	lookup
+lookup:fraction	三分の二	3분의 2	fix	lookup
+lookup:fraction	十二分の一	12분의 1	fix	lookup
+lookup:count-follower	　これで畑を二面分使った。	 이것으로 밭을 두 면분 썼다.	fix	lookup
+lookup:count-word	　次に、トマトを二面。	 다음에, 토마토를 두 면.	fix	lookup
+lookup:count-word	畑はトマトを二面だけ作り、他は空けておく。	밭은 토마토를 두 면만 만들어, 나머지는 비워 둔다.	fix	lookup
+lookup:count-follower	トマトとジャガイモをそれぞれ二面ずつ。	토마토와 감자를 각각 두 면씩.	fix	lookup
+lookup:count-word	残りは二面。	나머지는 두 면.	fix	lookup
+lookup:count-follower	畑四面×四面の十六面分ぐらいの大きなスペース	밭 네 면×네 면의 16면분 정도의 큰 스페이스	fix	lookup
+lookup:count-follower	サイズは畑四面分ぐらい	사이즈는 밭 네 면분 정도	fix	lookup
+lookup:count-word	畑は十六面になった。	밭은 16면이 되었다.	fix	lookup
+lookup:count-word	八割の人が賛成した。	8할의 사람이 찬성했다.	fix	lookup
+lookup:count-word	三分待つ。	3분 기다린다.	fix	lookup
+lookup:count-follower	一面ずつ耕した。	한 면씩 경작했다.	fix	lookup
+lookup:fraction	十分だ。	충분하다.	keep	lookup
+lookup:fraction	十分に注意する。	충분히 주의한다.	keep	lookup
+lookup:fraction	十分な量	충분한 양	keep	lookup
+lookup:fraction	五分の一の確率	5분의 1의 확률	keep	lookup
+lookup:count-word	画面を見る。	화면을 본다.	keep	lookup
+lookup:count-word	地面を掘る。	땅을 판다.	keep	lookup
+lookup:count-word	二面性がある。	양면성이 있다.	fix	lookup
+lookup:count-word	一面の雪だった。	일면의 눈이었다.	keep	lookup
+lookup:count-word	一面に広がる。	일면에 퍼진다.	keep	lookup
+lookup:count-word	意外な一面	의외의 일면	keep	lookup
+lookup:count-word	四面を海に囲まれた。	사면을 바다에 둘러싸였다.	keep	lookup
+lookup:count-word	四面楚歌だ。	사면초가다.	keep	lookup
+lookup:count-follower	一人ずつ入れ。	한 사람씩 들어와라.	keep	lookup
+lookup:count-follower	一日分の食料	하루분의 식량	keep	lookup

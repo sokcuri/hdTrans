@@ -51,6 +51,7 @@ output::ResolvedItem ItemOf(const word::Item& it) {
     if (r.directIndex >= 0 && r.directIndex < it.DirectCount()) r.ending = DirectOf(it, r.directIndex);
     r.endingSurface = std::string(it.DirectSurface());
     r.endingLength = it.DirectLength();
+    r.appended = it.appended;
     r.ownedEnding = it.DirectCount() > 0 && it.DirectEntry(0)->user != nullptr;
     for (int i = 0; it.Code(i) != "" || it.EntryText(i) != ""; i++) {
         if (i == 0 || i == it.selected) continue;

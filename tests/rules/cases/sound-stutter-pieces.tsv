@@ -12,7 +12,7 @@ sound:stutter-pieces	「お、おのれ、おのれぇーっ！」	「다, 당�
 sound:stutter-pieces	「そ、そんな……嘘でしょ？」	「그, 그런……거짓말이지?」	keep	sound
 sound:stutter-pieces	「で、でも、本当」	「하, 하지만, 사실」	keep	sound
 sound:stutter-pieces	「う――痛い」	「우――아프다」	keep	sound
-sound:stutter-pieces	「あ、あと、三分」	「그, 그리고, 3 분」	keep	sound
+sound:stutter-pieces	「あ、あと、三分」	「그, 그리고, 3분」	keep	sound
 sound:stutter-pieces	「ご、ごめ、ごめんなさいいいい」	「미, 미안, 미안해요 좋은 있고」	current	sound
 sound:stutter-pieces	　が……本当に良いのか？	 하지만……정말 좋은 건가?	fix	sound
 sound:stutter-pieces	「が……頑張ります」	「노……노력하겠습니다」	keep	sound

@@ -1,0 +1,5 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:sound-before-copula	手応えはサクッだった。	반응은 싹둑이었다.	fix	sound
+sound:sound-before-copula	サクッで終わった。	싹둑으로 끝났다.	fix	sound
+sound:sound-before-copula	サクッと切った。	싹둑 잘랐다.	keep	sound

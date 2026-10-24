@@ -113,6 +113,21 @@ HD_TEST(constructions_parse_set_sound) {
     HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[1].delta), 1);
 }
 
+HD_TEST(constructions_parse_append_target) {
+    const std::vector<std::string_view> lines = {
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\tS+0== \"もう\"\tset-target \"\" append-target@+1 \" 더\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.rows.size() == 1);
+    HD_REQUIRE(t.rows[0].actions.size() == 2);
+    HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::SetTarget);
+    HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::AppendTarget);
+    HD_CHECK_EQ(t.rows[0].actions[1].value, std::string(" 더"));
+    HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[1].delta), 1);
+}
+
 HD_TEST(constructions_surface_index) {
     const std::vector<std::string_view> lines = {
         "//= a\tafter First\tdoc\n",
