@@ -1,0 +1,20 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:drawl-shout	『翻訳機能、仕事しろぉっ』！	『번역 기능, 일해라』!	fix	sound
+sound:drawl-shout	「……この……ッ、馬鹿者がぁッ!!」	「……이……, 바보가!!」	fix	sound
+sound:drawl-shout	「誰が上手い事を言えと願いましたかぁッ!!」	「누가 능숙한 말을 말하라고 바랐습니까!!」	fix	sound
+sound:drawl-shout	許さない…許さないんだからぁっ！	용서하지 않는다…용서하지 않을 거니까!	fix	sound
+sound:drawl-shout	いただきぃっ！	받아!	fix	sound
+sound:drawl-shout	やめてぇっ！	그만두어!	fix	sound
+sound:drawl-shout	完全に夏ね。毎日暑いわ。ばかぁっ！！	완전히 여름이네. 매일 더워. 바보!!	fix	sound
+sound:drawl-shout	「ていとくぅっ！」	「제독!」	fix	sound
+sound:drawl-shout	内容にしとくんだなぁッ！！	내용에 해 두는구나!!	fix	sound
+sound:drawl-shout	入れてぇぇっ！	넣어!	fix	sound
+sound:drawl-shout	「やめてぇ！」	「그만둬!」	keep	sound
+sound:drawl-shout	「いやぁっ、んんんっ……」	「싫엇, 으으읏……」	keep	sound
+sound:drawl-shout	「あぁっ！」	「아앗!」	keep	sound
+sound:drawl-shout	「ねぇっ！」	「저기!」	keep	sound
+sound:drawl-shout	「ふぅっ……」	「후웃……」	keep	sound
+sound:drawl-shout	「うーん……残念だなぁ……」	「으음……유감이구나……」	keep	sound
+sound:drawl-shout	犬ぇぇぇ	개	keep	sound
+sound:drawl-shout	「わぁっ……」	「와앗……」	keep	sound

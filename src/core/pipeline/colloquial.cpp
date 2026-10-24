@@ -15,6 +15,9 @@ namespace hdTrans::pipeline::internal {
 
 namespace {
 
+// The small tsu in hiragana and katakana.
+constexpr std::u32string_view kTsu = U"っッ";
+
 bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32string_view::npos; }
 
 bool IsSmallVowel(char32_t r) { return In(r, U"ぁぃぅぇぉ"); }
@@ -463,7 +466,7 @@ size_t SpelledPiece(std::u32string_view rs, size_t p, bool first) {
     if (p >= rs.size()) return p;
     const char32_t c = rs[p];
     const bool small = In(c, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ");
-    if ((!IsHiraganaRune(c) && !IsKatakanaRune(c) && !IsKanjiRune(c)) || (first && (c == U'ー' || small || In(c, U"っッ")))) {
+    if ((!IsHiraganaRune(c) && !IsKatakanaRune(c) && !IsKanjiRune(c)) || (first && (c == U'ー' || small || In(c, kTsu)))) {
         return p;
     }
     if (c == U'ー' || small) return p + 1;  // a lone small kana or ー after the first piece: き・ゃ・あ, す・ー・ご・い
@@ -820,7 +823,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         size_t end = k;
         while (end < rs.size() && In(rs[end], U"いぃ")) end++;
         size_t q = end;
-        while (q < rs.size() && In(rs[q], U"っッ")) q++;
+        while (q < rs.size() && In(rs[q], kTsu)) q++;
         if (q < rs.size() && !IsPause(rs[q])) continue;
         size_t from = k - 1;
         while (from > 0 && k - 1 - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) {
@@ -943,7 +946,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                 rs = Spliced(rs, end, std::u32string(), end + taunt);
                 changed = true;
             }
-            const bool tsuEnd = end < rs.size() && rs[end] == U'っ' && ShoutEnd(rs, end);
+            const bool tsuEnd = end < rs.size() && In(rs[end], kTsu) && ShoutEnd(rs, end);
             const bool dashed = std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー'; });
             const bool shoutTsu = tsuEnd && dashed && e.ReadsTo(rs, i);
             // Two kana that draw out a word said twice (待って待ってぇぇ) are drawn out like three.
@@ -977,7 +980,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                             // Three or more plain vowel kana after words, before a pause or a ッ
                             // (待ったああああっ, 言うなあああっ: a key such as なあ may take one).
                             (plainStart && !Drawn(rs, i, end).empty() && e.Reach(rs, from, i) <= i + 1 &&
-                             e.ReadsTo(rs, i) && (end >= rs.size() || IsPause(rs[end]) || In(rs[end], U"ッっ"))))) {
+                             e.ReadsTo(rs, i) && (end >= rs.size() || IsPause(rs[end]) || In(rs[end], kTsu))))) {
                     // A shout: そりゃああぁあッ, 何ぃいいぃッ, 待ったああああっ, its vowel kana
                     // drawn marks when there are three or more, which take the ッ after them.
                     std::u32string marks = Drawn(rs, i, end);
