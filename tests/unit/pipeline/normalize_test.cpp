@@ -181,6 +181,8 @@ HD_TEST(pipeline_spoken_forms) {
         {"いいじゃない？"sv, "いいじゃない？"sv},
         {"何それ怖っ！"sv, "何それ怖い！"sv},
         {"寒っ"sv, "寒い"sv},
+        {"足が痛っ"sv, "足が痛い"sv},
+        {"痛っ！"sv, "痛っ！"sv},  // the cry, a word of the dictionary
         {"ずるっ"sv, "ずるっ"sv},
         {"感心できんぞ！"sv, "感心できないぞ！"sv},
         {"あり得ん！"sv, "あり得ない！"sv},

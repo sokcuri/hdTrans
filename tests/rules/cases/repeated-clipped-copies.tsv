@@ -1,0 +1,51 @@
+# 규칙: SND-2, LAY-11
+rule	input	expected	kind	layer
+sound:cry-copies	「やだっ、やだっ！」	「싫엇, 싫엇!」	fix	sound
+sound:cry-copies	「やだっ、やだっ！　来ないでっ！」	has:「싫엇, 싫엇!	fix	sound
+sound:cry-copies	やだっやだっやだっ	싫엇 싫엇 싫엇	fix	sound
+sound:cry-copies	いやっいやっ	싫엇 싫엇	fix	sound
+sound:cry-copies	「イヤッ、イヤッ」	「싫엇, 싫엇」	fix	sound
+sound:cry-copies	やだやだっ	싫어 싫엇	keep	sound
+sound:cry-copies	「やだっ」	「싫어」	keep	sound
+sound:cry-copies	「やだっ、それ」	「싫어, 그거」	keep	sound
+sound:cry-copies	「いやっ、やだっ」	「싫어, 싫어」	keep	sound
+sound:cry-copies	「やだっ……やだっ」	「싫어……싫어」	keep	sound
+sound:cry-copies	やだっ、やだ	싫어, 싫어	keep	sound
+sound:cry-copies	あっあっあっ	앗앗앗	keep	sound
+sound:cry-copies	んっんっ	읏읏	keep	sound
+cx:clipped-copies:10	「うるさいっ、うるさいっ、うるさいっ！！」	「시끄러웟, 시끄러웟, 시끄러웟!!」	fix	rewrites
+cx:clipped-copies:10	「んっ、気持ちいいっ、気持ちいいっ！」	「읏, 기분 좋앗, 기분 좋앗!」	fix	rewrites
+cx:clipped-copies:10	「許してっ、許してっ……」	「용서햇, 용서햇……」	fix	rewrites
+cx:clipped-copies:10	待って待ってっ	기다려 기다렷	fix	rewrites
+cx:clipped-copies:10	「痛いっ、痛いっ！」	「아팟, 아팟!」	fix	rewrites
+cx:clipped-copies:10	「痛いっ、痛いっ……」	「아팟, 아팟……」	fix	rewrites
+cx:clipped-copies:10	「痛いっ！」	「아프다!」	keep	rewrites
+cx:clipped-copies:10	待って待って	!rule:cx:clipped-copies:10	keep	rewrites
+cx:clipped-copies:10	「先輩っ、先輩っ……」	「선배, 선배……」	keep	rewrites
+cx:clipped-copies:10	「ウソつきっ、ウソつきっ」	「거짓말쟁이, 거짓말쟁이」	keep	rewrites
+cx:clipped-copies:10	「ないっ、ない、ない……ないっ……」	「없어, 없어, 없어……없다……」	keep	rewrites
+cx:clipped-copies:10	「来てっ、来てえ……っ！」	「와, 와……!」	keep	rewrites
+cx:clipped-copies:20	「だめっ、だめっ！」	「안됏, 안됏!」	fix	rewrites
+cx:clipped-copies:20	だめっだめっ	안됏 안됏	fix	rewrites
+cx:clipped-copies:20	「みゃあああっ、だめっ、だめっ……ああっ」	「먀아아앗, 안됏, 안됏……아앗」	fix	rewrites
+cx:clipped-copies:20	「ひんっ、だめっ、だめだめっ……」	「히잉, 안됏, 안돼 안됏……」	fix	rewrites
+cx:clipped-copies:20	「だめっ……だめっ、もうっ」	「안돼……안돼, 정말」	keep	rewrites
+cx:clipped-copies:20	「だめっ」	「안돼」	keep	rewrites
+cx:clipped-copies:20	だめっ、だめ	안돼, 안돼	keep	rewrites
+cx:clipped-copies:20	だめだめ	!rule:cx:clipped-copies:20	keep	rewrites
+compose:clipped-copies	先輩っ先輩っ	선배 선배	fix	compose
+compose:clipped-copies	「私は、ぜんっぜん仕事しなくても」	lacks:갑자기일하지	keep	compose
+dict:w:28610	「痛っ！」	「아얏!」	fix	lookup
+dict:w:28610	「ちょ、あっ、痛っ！？」	「잠깐, 앗, 아얏!?」	fix	lookup
+dict:w:28610	痛っ…マジ痛い	아얏…진짜 아프다	fix	lookup
+dict:w:28610	痛っ、痛いってばっ	아얏, 아프다니까	fix	lookup
+dict:w:28610	痛っ！よくもやったわね！？	아얏! 잘도 했네!?	fix	lookup
+dict:w:28610	痛っ……まだ、発着艦は出来る？	has:아얏……아직	fix	lookup
+dict:w:28610	痛っ痛っ	아얏 아얏	fix	lookup
+dict:w:28610	「痛っ、痛っ！」	「아얏, 아얏!」	fix	lookup
+dict:w:28610	足が痛っ	다리가 아프다	keep	lookup
+dict:w:28610	高っ！	비싸다!	keep	lookup
+dict:w:28610	痛い。	아프다.	keep	lookup
+dict:w:28611	あ痛っ！	아얏!	fix	lookup
+dict:w:28612	「痛ってぇ――――っ！！」	「아파――――!!」	fix	lookup
+dict:w:28612	「痛ってっ！」	「아파!」	fix	lookup

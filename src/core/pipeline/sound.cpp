@@ -228,12 +228,24 @@ bool EndsDrawn(std::string_view s) {
            (k.back() - 0xAC00) % 28 == 0;
 }
 
-// Whether b says the cry a again right after it with the same Korean, as it is or drawn out or
-// clipped (やだ+やだぁ, やだ+やだっ); a clipped copy closes its last syllable with ㅅ.
-bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
-    return a.cry && b.cry && a.end == b.start && a.korean == b.korean && b.key.starts_with(a.key);
+// The text of the sound without the small kana, ー and ～ that draw it out or clip it (ヤダ of
+// ヤダァッ; keys are in katakana).
+std::u32string_view CryStem(const SoundMatch& m) {
+    std::u32string_view k = m.key;
+    while (!k.empty() && In(k.back(), U"ッァィゥェォー～")) k.remove_suffix(1);
+    return k;
 }
 
+// Whether b says the cry a again with the same Korean, as it is, drawn out or clipped (やだ+やだぁ,
+// やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
+bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
+    return a.cry && b.cry && a.korean == b.korean && CryStem(a) == CryStem(b);
+}
+
+// Whether the text of the sound ends in a clipping っ or ッ of mark.clip (やだっ).
+bool ClippedSound(const SoundMatch& m) {
+    return !m.key.empty() && dict::InClass("mark.clip", EncodeText(m.key.substr(m.key.size() - 1)));
+}
 
 // Whether two sounds in a row are written apart: both have two or more syllables, b does
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
@@ -419,6 +431,9 @@ private:
     bool StemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
+    bool CryCopyBefore(const SoundMatch& before, const SoundMatch& m) const;
+    bool CryCopyAfter(const SoundMatch& m, SoundMatch& next) const;
+    bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
     bool Manner(const SoundMatch& m, size_t i) const;
     size_t QuotingAt(size_t i) const;
     size_t Quoting(size_t i) const;
@@ -1647,6 +1662,42 @@ size_t SoundText::HiraganaMimeticTo(size_t p) const {
     return i;
 }
 
+// Whether the sound before, which ended an earlier chain, is the cry m said with only marks of
+// pause.copy between (やだっ、やだっ).
+bool SoundText::CryCopyBefore(const SoundMatch& before, const SoundMatch& m) const {
+    if (!CryCopies(before, m) || before.end > m.start) return false;
+    for (size_t k = before.end; k < m.start; k++) {
+        if (!dict::InClass("pause.copy", EncodeText(std::u32string_view(rs_).substr(k, 1)))) return false;
+    }
+    return true;
+}
+
+// Whether the cry m is said again right after it, or after marks of pause.copy, as next
+// (やだっやだっ, やだっ、やだっ).
+bool SoundText::CryCopyAfter(const SoundMatch& m, SoundMatch& next) const {
+    size_t q = m.end;
+    while (q < rs_.size() && dict::InClass("pause.copy", EncodeText(std::u32string_view(rs_).substr(q, 1)))) q++;
+    if (q >= rs_.size()) return false;
+    if (q == m.end) return MatchAt(q, next, true) && CryCopies(m, next);
+    const std::vector<SoundMatch> after = Sounds(q, false);
+    if (after.empty()) return false;
+    next = after.front();
+    return CryCopies(m, next);
+}
+
+// Whether the clipped cry m closes with ㅅ: it is said again before or after it, and the last
+// copy of the run is clipped too (やだっ、やだっ 싫엇, 싫엇; not やだっ、やだ).
+bool SoundText::ClippedCryCopy(const SoundMatch& m, bool copyBefore) const {
+    if (!ClippedSound(m)) return false;
+    SoundMatch last = m, next;
+    bool copyAfter = false;
+    for (int n = 0; n < 64 && CryCopyAfter(last, next); n++) {
+        last = next;
+        copyAfter = true;
+    }
+    return (copyBefore || copyAfter) && ClippedSound(last);
+}
+
 std::string SoundText::Write() {
     const std::u32string_view rs = rs_;
     std::string b;
@@ -1655,6 +1706,7 @@ std::string SoundText::Write() {
     bool afterWord = false;      // the token before rs[i] is a hiragana word of 2+ kana
     size_t wordEnd = 0;          // the end of the last word of more than one character
     std::vector<StutterPiece> pieces;
+    SoundMatch lastCry;  // the last sound of the last chain
     for (size_t i = 0; i < rs.size();) {
         if (const size_t skip = OpaqueLength(text_.substr(offsets_[i]), offsets_[i] > 0 ? text_[offsets_[i] - 1] : '\0', ctx_.markers); skip > 0) {
             afterParticle = afterWord = false;
@@ -1700,13 +1752,13 @@ std::string SoundText::Write() {
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
                 if (k == chain.size() - 1 && doing && !m.root.empty()) {
                     b += m.root;
-                } else if (k > 0 && CryCopies(chain[k - 1], m) &&
-                           dict::InClass("mark.clip", EncodeText(m.key.substr(chain[k - 1].key.size())))) {
-                    b += Lengthen(m.korean, "d!");  // the clipped last copy of a cry closes with ㅅ (싫어 싫엇)
+                } else if (ClippedCryCopy(m, k > 0 ? CryCopies(chain[k - 1], m) : CryCopyBefore(lastCry, m))) {
+                    b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
                 } else {
                     b += m.korean;
                 }
             }
+            lastCry = chain.back();
             // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
             if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
                 b += Bytes(next, to - 1);

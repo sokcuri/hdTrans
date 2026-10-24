@@ -39,12 +39,25 @@ bool CopyPause(const Item* it) {
     return !text.empty();
 }
 
+// Whether the word is only the clipping っ or ッ of mark.clip (だめ|っ|だめっ).
+bool ClipWord(const Item* it) {
+    const std::string_view text = Slice(it->text, it->start, it->length);
+    for (std::string_view t = text; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!dict::InClass("mark.clip", t.substr(0, r.size))) return false;
+        t.remove_prefix(r.size);
+    }
+    return !text.empty();
+}
+
 // The word before it that it repeats: the same text with the same ending, of two
-// characters or more, in the same token with nothing or a CopyPause word between (いや|いや,
-// 待って、待って).
+// characters or more, in the same token with nothing, a CopyPause word, or the ClipWord of
+// the copy before it and maybe a CopyPause word after that between (いや|いや, 待って、待って,
+// だめっ、だめっ).
 const Item* CopyBefore(const Item* it) {
     const Item* p = it->prev;
     if (p != nullptr && p->tokenIndex == it->tokenIndex && CopyPause(p)) p = p->prev;
+    if (p != nullptr && p->tokenIndex == it->tokenIndex && ClipWord(p)) p = p->prev;
     if (p == nullptr || p->tokenIndex != it->tokenIndex) return nullptr;
     const std::string_view text = Slice(it->text, it->start, it->length);
     if (text::RuneCount(text) < 2 || Slice(p->text, p->start, p->length) != text) return nullptr;
@@ -56,6 +69,7 @@ const Item* CopyBefore(const Item* it) {
 // The word after it that repeats it.
 const Item* CopyAfter(const Item* it) {
     const Item* n = it->next;
+    if (n != nullptr && n->tokenIndex == it->tokenIndex && ClipWord(n)) n = n->next;
     if (n != nullptr && n->tokenIndex == it->tokenIndex && CopyPause(n)) n = n->next;
     return n != nullptr && CopyBefore(n) != nullptr ? n : nullptr;
 }
@@ -69,10 +83,11 @@ const Item* LastCopy(const Item* it) {
     return last;
 }
 
-// Whether the copy after it follows it with no pause between (いやだいやだ, not 好き、好き).
+// Whether the copy after it follows it with no pause between, or only its clipping っ
+// (いやだいやだ, だめっだめっ, not 好き、好き).
 bool CopiedStraight(const Item* it) {
     const Item* n = CopyAfter(it);
-    return n != nullptr && it->next == n;
+    return n != nullptr && (it->next == n || (ClipWord(it->next) && it->next->next == n));
 }
 
 // Whether the copies of its run are the last predicate of their sentence: no word after the
@@ -119,6 +134,12 @@ bool PredicateCopies(const Item* it) {
 std::string_view TextAfter(const Item* it) {
     const std::string_view rest = From(it->text, it->start + it->length);
     return rest.empty() ? it->detail->nextText : rest;
+}
+
+// Whether a clipping っ or ッ of mark.clip follows the word right after it (痛いっ).
+bool Clipped(const Item* it) {
+    const std::string_view rest = TextAfter(it);
+    return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
 }
 
 // Whether its run of copies is a cry whatever the words: three copies or more, or a mark of
@@ -245,11 +266,9 @@ constexpr NamedFeature kFeatures[] = {
     {"predicate-copies", [](Flusher&, const Item* it) { return PredicateCopies(it); }},
     {"cried-copies", [](Flusher&, const Item* it) { return CriedCopies(it); }},
     // A clipping っ or ッ (mark.clip) follows the word right after it (痛いっ).
-    {"clipped",
-     [](Flusher&, const Item* it) {
-         const std::string_view rest = TextAfter(it);
-         return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
-     }},
+    {"clipped", [](Flusher&, const Item* it) { return Clipped(it); }},
+    // The last copy of its run is Clipped (だめっ、だめっ; not ないっ、ない、ない).
+    {"copies-clipped", [](Flusher&, const Item* it) { return Clipped(LastCopy(it)); }},
     // The sentence of the word ends in ! or ? (an utterance, not a narrated sentence).
     {"exclaimed", [](Flusher& f, const Item* it) { return Exclaimed(f, it); }},
     // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis

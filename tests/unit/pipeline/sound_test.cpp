@@ -160,6 +160,11 @@ HD_TEST(pipeline_sound) {
         {"ふぁーふぁー", "후아아후아아"},
         {"やだやだ", "싫어 싫어"},
         {"やだやだっ", "싫어 싫엇"},  // the clipped last copy of a cry closes with ㅅ
+        {"やだっやだっ", "싫엇 싫엇"},  // so does every clipped copy
+        {"やだっ、やだっ！", "싫엇、싫엇！"},  // also across a comma
+        {"いやっ、やだっ", "싫어、싫어"},  // two cries, no copies
+        {"やだっ", "싫어"},  // said once
+        {"やだっ、やだ", "싫어、싫어"},  // the last copy is not clipped
         // Of two keys as long, the one whose Korean draws the vowel out (ひぎぃ, not ひぎっ).
         {"ひぎぃぃぃっ！", "히기이이익！"},
         {"ひぎっ！", "히긱！"},
