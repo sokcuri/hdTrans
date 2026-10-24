@@ -4,7 +4,7 @@ dict:jisjk:354152	三回も言った。	세 번이나 말했다.	fix	local
 dict:jisjk:354152	二度も言った。	두 번이나 말했다.	fix	local
 dict:jisjk:354152	数時間も話した。	몇 시간이나 이야기했다.	fix	local
 dict:jisjk:354152	「馬鹿なことを二度も言うな！」	rule:dict:jisjk:354152=(이)나	fix	local
-dict:jisjk:354152	帝の子を四人も失わせてしまった。	황제의 아이를 네 명이나 잃게 해 버렸다.	fix	local
+dict:jisjk:354152	帝の子を四人も失わせてしまった。	황제의 아이를 네 명이나 잃게 해버렸다.	fix	local
 dict:jisjk:354152	その体で三人も倒したそうじゃない。	rule:dict:jisjk:354152=(이)나	fix	local
 dict:jisjk:354152	侵入を二度も許したのは	rule:dict:jisjk:354152=(이)나	fix	local
 dict:jisjk:354152	魔法使いが幾人もおられるとか。	마법사가 몇 사람이나 계신다든가.	fix	local

@@ -85,7 +85,8 @@ std::string WriteEmphasis(std::string_view s);
 // Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!); each
 // kDrawnMark after a Hangul syllable written as a syllable of its vowel, the final
 // consonant moved to the last one (그만둬\uE00B\uE00B 그만둬어어, 님\uE00B 니임), and
-// dropped elsewhere.
+// dropped elsewhere; each output::kClipMark dropped, closing an open Hangul syllable before it
+// with ㅅ (아파\uE00C 아팟, 돼\uE00B\uE00B\uE00C 돼에엣).
 std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).

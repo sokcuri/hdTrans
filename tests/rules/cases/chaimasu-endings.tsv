@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-lexical:chaimasu	「出てきちゃいます……」	「나와 버립니다……」	fix	lookup
-lexical:chaimasu	「肌がかぶれちゃいますよ」	「피부가 물들어 버립니다」	fix	lookup
-lexical:chaimasu	「授業は、サボっちゃいますか」	「수업은, 게으름 피워 버릴까요」	fix	lookup
+lexical:chaimasu	「出てきちゃいます……」	「나와버립니다……」	fix	lookup
+lexical:chaimasu	「肌がかぶれちゃいますよ」	「피부가 물들어버립니다」	fix	lookup
+lexical:chaimasu	「授業は、サボっちゃいますか」	「수업은, 게으름 피워버릴까요」	fix	lookup

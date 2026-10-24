@@ -27,7 +27,8 @@
 //   - sounds in a row are written with a space between those of two or more syllables
 //     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어), but not after a cry that ends
 //     in a kana drawing out the vowel before it, before another cry (ひぃやあっ 히이야앗,
-//     ふぁーふぁー 후아아후아아; not やだやだ 싫어 싫어);
+//     ふぁーふぁー 후아아후아아); the last copy of a cry row said again and clipped with ッ closes
+//     its last syllable with ㅅ (やだやだっ 싫어 싫엇);
 //   - katakana that only draw out the vowel of the hiragana before them are no sound of
 //     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
@@ -237,6 +238,9 @@ struct SoundRow {
     // An intj row read only where the utterance ends after it (fourth column final: また明日
     // 내일 보자, not また明日来る).
     bool final = false;
+    // An intj row that is a predicate said as a cry (fourth column cry: やだ 싫어), whose last copy
+    // clipped with ッ closes its last syllable with ㅅ (SND-2: やだやだっ 싫어 싫엇).
+    bool cry = false;
     // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
     // where the quote speaks politely or an honoured person is called right before the row.
     std::string polite;

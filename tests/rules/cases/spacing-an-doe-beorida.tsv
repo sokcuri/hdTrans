@@ -1,0 +1,36 @@
+# 규칙: LAY-11
+rule	input	expected	kind	layer
+compose:joined-before-doe	「ダメですよ」	「안돼요」	fix	compose
+compose:joined-before-doe	それはいけない	그것은 안된다	fix	compose
+compose:joined-before-doe	見てはいけません	봐서는 안됩니다	fix	compose
+compose:joined-before-doe	だめ	안돼	fix	compose
+compose:joined-before-doe	だめだ	안된다	fix	compose
+compose:joined-before-doe	ならない	안된다	fix	compose
+compose:joined-before-doe	行かない	가지 않는다	keep	compose
+compose:joined-before-doe	案内	안내	keep	compose
+compose:joined-before-doe	安心できない	안심할 수 없다	keep	compose
+compose:joined-aux	忘れてしまった	잊어버렸다	fix	compose
+compose:joined-aux	寝てしまいました	자버렸습니다	fix	compose
+compose:joined-aux	やってしまおう	해버리자	fix	compose
+compose:joined-aux	行ってしまえ	가버려라	fix	compose
+compose:joined-aux	食べちゃった	먹어버렸다	fix	compose
+compose:joined-aux	切り捨てた	버렸다	keep	compose
+compose:joined-aux	ゴミを捨てる	쓰레기를 버린다	keep	compose
+compose:joined-aux	捨てた	버렸다	keep	compose
+compose:joined-before-doe	「部員の依頼はダメですか？」	「부원의 의뢰는 안됩니까?」	fix	compose
+compose:joined-before-doe	降りかかる火の粉は…払わないといけませんね！	닥치는 불똥은…털지 않으면 안되겠네요!	fix	compose
+compose:joined-before-doe	「……もう、だめかも……」	「……이제, 안될지도……」	fix	compose
+compose:joined-before-doe	「ダメじゃん！」と柏木。	「안되잖아!」라고 카시와기.	fix	compose
+compose:joined-before-doe	カケル、思い込みで友人を失ったら駄目だぞ	카케루, 선입견으로 친구를 잃으면 안된다	fix	compose
+compose:joined-before-doe	おっと、いかんいかん。	어이쿠, 안돼 안돼.	fix	compose
+compose:joined-before-doe	　抵抗しなくちゃいけないんだ。	 저항하지 않으면 안된다.	fix	compose
+compose:joined-before-doe	（ああ、これはいかん…）	(아, 이것은 안돼…)	fix	compose
+compose:joined-before-doe	ヤケ酒はだめだ、ってあれほど言ったのに……。	홧술은 안된다, 는 그토록 말했는데…….	fix	compose
+compose:joined-aux	「制服、汚れちゃったか」	「제복, 더러워져버렸나」	fix	compose
+compose:joined-aux	「筧くん、寝ちゃったね」	「카케이 군, 자버렸네」	fix	compose
+compose:joined-aux	「もう、本当にドキドキしちゃったよ」	「이제, 정말 두근두근해버렸어」	fix	compose
+compose:joined-aux	丸一日以上経っちまったな	꼬박 하루 이상 지나버렸네	fix	compose
+compose:joined-aux	また強くなってしまった……	또 강해져버렸다……	fix	compose
+compose:joined-aux	少し服が汚れてしまったわ。待ってて。	조금 옷이 더러워져버렸어. 기다리고 있어.	fix	compose
+compose:joined-aux	つい熱くなって、声に出してしまった。	무심코 뜨거워져, 목소리에 내버렸다.	fix	compose
+compose:joined-aux	結局最後は、辰巳と同じ主張になってしまった。	결국 마지막은, 타츠미와 같은 주장이 되어버렸다.	fix	compose

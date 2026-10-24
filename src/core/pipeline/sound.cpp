@@ -94,7 +94,7 @@ char32_t WeakU(char32_t r) {
 }
 
 // The vowel that lengthens a vowel (ㅑ ㅏ, ㅘ ㅏ, ㅟ ㅣ).
-constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 1, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
 
 // The particles that may stand before an ono row inside a hiragana run.
 constexpr std::u32string_view kParticles = U"がをにはもでとへやのて";
@@ -217,6 +217,7 @@ struct SoundMatch {
     bool spaceAfter = false;  // a word that starts inside the match took its end
     bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
     bool drawn = false;       // the text ends in a kana that draws out the vowel before it (ひぃ, ふぁー)
+    bool cry = false;         // a predicate said as a cry (SoundRow::cry)
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -226,6 +227,13 @@ bool EndsDrawn(std::string_view s) {
     return k.size() > 1 && k.back() >= 0xAC00 && k.back() <= 0xD7A3 && (k.back() - 0xAC00) / 588 == 11 &&
            (k.back() - 0xAC00) % 28 == 0;
 }
+
+// Whether b says the cry a again right after it with the same Korean, as it is or drawn out or
+// clipped (やだ+やだぁ, やだ+やだっ); a clipped copy closes its last syllable with ㅅ.
+bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
+    return a.cry && b.cry && a.end == b.start && a.korean == b.korean && b.key.starts_with(a.key);
+}
+
 
 // Whether two sounds in a row are written apart: both have two or more syllables, b does
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
@@ -670,7 +678,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 }
             }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2])};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry};
             chosen = &s;
         }
     }
@@ -1660,6 +1668,9 @@ std::string SoundText::Write() {
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
                 if (k == chain.size() - 1 && doing && !m.root.empty()) {
                     b += m.root;
+                } else if (k > 0 && CryCopies(chain[k - 1], m) &&
+                           dict::InClass("mark.clip", EncodeText(m.key.substr(chain[k - 1].key.size())))) {
+                    b += Lengthen(m.korean, "d!");  // the clipped last copy of a cry closes with ㅅ (싫어 싫엇)
                 } else {
                     b += m.korean;
                 }

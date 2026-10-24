@@ -1,9 +1,9 @@
 # 규칙: SND-2
 rule	input	expected	kind	layer
-lookup:copies	いやだいやだ	싫다 싫다	fix	lookup
-lookup:copies	いやだいやだいやだー	싫다 싫다 싫다~	fix	lookup
-lookup:copies	だめだめ！	안 돼 안 돼!	fix	lookup
-lookup:copies	さむいさむい	춥다 춥다	fix	lookup
+lookup:copies	いやだいやだ	싫어 싫어	fix	lookup
+lookup:copies	いやだいやだいやだー	싫어 싫어 싫어~	fix	lookup
+lookup:copies	だめだめ！	안돼 안돼!	fix	lookup
+lookup:copies	さむいさむい	춥다 추워	fix	lookup
 lookup:copies	いたいた！	있었다 있었다!	fix	lookup
 lookup:copies	いろいろ	여러 가지	keep	lookup
 lookup:copies	時々	가끔	keep	lookup

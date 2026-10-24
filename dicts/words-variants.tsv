@@ -5447,7 +5447,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 松葉づえ	목발	I110	VPe		GN							jisjk:75509
 木伐	나뭇꾼	I110	UAq		GN							jisjk:68869
 消しごむ	지우개	I110	VSw		GN							jisjk:75319
-消しと	날아가 버&AA@	M416			GN							jisjk:93604
+消しと	날아가버&AA@	M416			GN							jisjk:93604
 焼豚	돼지고기구이	I110	VFd		GN							jisjk:75352
 焼付	인상 지어&AL@	M421			GN							jisjk:344441
 焼けこげ	탄 자국	I110	VPl		GN							jisjk:75382
@@ -5636,8 +5636,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 吹き貫き	바람이 잘 통하는 곳	I110	VPl		GN							jisjk:86847
 吹き貫	바람이 잘 통하는 곳	I110	VPl		GN							jisjk:86847
 吹貫き	바람이 잘 통하는 곳	I110	VPl		GN							jisjk:86847
-吹飛ば	날려 버&AA@	M433			GN							jisjk:95516
-吹飛ば	날려 버&AA@	M423			GN				xxx llm	1		w:13702
+吹飛ば	날려버&AA@	M433			GN							jisjk:95516
+吹飛ば	날려버&AA@	M423			GN				xxx llm	1		w:13702
 吹飛	물리&AO@	M435			GN							jisjk:95515
 吹飛	날아&A1@	M426			GN				xxx llm	1		w:13701
 吹きと	물리&AO@	M435			GN							jisjk:95515
@@ -6101,8 +6101,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大目にみ	너그럽게 &AY@	M427	SFl		GN							jisjk:145531
 叩き起こ	흔들어 깨&AI@	M443			GN							jisjk:139476
 叩き起	흔들어 깨&AI@	M443			GN							jisjk:139476
-たたき切	베어 버&AA@	M428			GN				llm			w:13492
-たたき斬	베어 버&AA@	M428			GN				llm			w:13492
+たたき切	베어버&AA@	M428			GN				llm			w:13492
+たたき斬	베어버&AA@	M428			GN				llm			w:13492
 叩きつぶ	때려 부&CF@	M423			GN				xxx llm			w:13494
 叩きつぶ	박살&A6@	M423			GN				llm			w:13495
 たたき潰	때려 부&CF@	M423			GN				xxx llm			w:13494
@@ -6977,7 +6977,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 別誂え	특별 주문	I110			GN							jisjk:70109
 偏辺	벽촌	N110	VPl		GN							jisjk:168671
 変わり易	변하기 $GF@	H7N0	SFl		GN							jisjk:120224
-変わりはて	변해 버&AA@	M417			GN							jisjk:93028
+変わりはて	변해버&AA@	M417			GN							jisjk:93028
 変りもの	괴짜	I110			GN							jisjk:70089
 変わりもん	괴짜	I110			GN							jisjk:70089
 替り目	변환기	I110	VGt		GN							jisjk:70088
@@ -8374,10 +8374,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 つき従	뒤&E3@	M420			GN							jisjk:142408
 つき従	&E3@	M420			GN				xxx llm	1		w:11675
 附添い	시중드는 사람	N110	QHPVHnVMo		GN							jisjk:153527
-つき放	떼어 버&AA@	M433			GN							jisjk:92444
+つき放	떼어버&AA@	M433			GN							jisjk:92444
 つき放	냉정&Mf@	M4U3		Va	GN	1364	||1 ||2 S+1== "空気" S+1== "見方"	突き放 뒤에 空気·見方가 오면 냉정하다를 고른다. (미발동: rare-word)				jisjk:118998
 つき放	뿌리&AO@	M443			GN							jisjk:142588
-突き離	떼어 버&AA@	M433			GN							jisjk:92444
+突き離	떼어버&AA@	M433			GN							jisjk:92444
 突き離	냉정&Mf@	M4U3		Va	GN	1364	||1 ||2 S+1== "空気" S+1== "見方"	突き放 뒤에 空気·見方가 오면 냉정하다를 고른다. (미발동: rare-word)				jisjk:118998
 突き離	뿌리&AO@	M443			GN							jisjk:142588
 造り手	제작자	N110	UAq		GN							jisjk:361334
@@ -12006,7 +12006,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 言古	많이들어&AH@	M443	SFl		GN							jisjk:140287
 いい古	많이들어&AH@	M443	SFl		GN							jisjk:140287
 云い古	많이들어&AH@	M443	SFl		GN							jisjk:140287
-言尽く	다 말해 버&AA@	M443			GN							jisjk:139251
+言尽く	다 말해버&AA@	M443			GN							jisjk:139251
 言いしれぬ	말할 수 없는	C0D1			GN							jisjk:4720
 いい知れぬ	말할 수 없는	C0D1			GN							jisjk:4720
 言知れぬ	말할 수 없는	C0D1			GN							jisjk:4720

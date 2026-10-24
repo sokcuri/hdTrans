@@ -18,7 +18,7 @@ dict:jisjk:265166	帰るって話だ。	돌아간다는 이야기다.	fix	local-
 dict:jisjk:265166	帰るって思った。	돌아간다고 생각했다.	keep	local-ending
 dict:jisjk:263175	泳ぐなんて噂だ。	헤엄친다는 소문이다.	fix	local-ending
 dict:jisjk:263175	泳ぐなんて変だ。	헤엄치다니 이상하다.	keep	local-ending
-dict:jisjk:364677	ダメなの？	안 돼?	fix	local-ending
+dict:jisjk:364677	ダメなの？	안돼?	fix	local-ending
 dict:jisjk:364677	静かなの。	조용해.	keep	local-ending
 dict:jisjk:340817	無理なのよ。	무리야.	fix	local-ending
 dict:jisjk:340817	一般的なのよ。	일반적이야.	keep	local-ending

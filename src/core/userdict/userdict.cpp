@@ -323,7 +323,7 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             space = opt == "space";
         } else if (opt == "stative" && pos == "end") {
             stative = true;
-        } else if ((opt == "exclaim" || opt == "predicate") && pos == "intj") {
+        } else if ((opt == "exclaim" || opt == "predicate" || opt == "cry") && pos == "intj") {
             // Read by the sound stage (an exclamation is no sound before a question mark).
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;

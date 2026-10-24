@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:s:9436	推しが尊い。	최애가 고귀하다.	fix	lookup
 dict:s:9436	私の推しは彼です。	제 최애는 그입니다.	fix	lookup
 dict:s:9436	「世界規模の通信障害より推しの配信かよ」	「세계 규모 통신 장애보다 최애 방송인가」	fix	lookup
-dict:s:9436	「く、あなたのせいで、私の推しが激変しちゃったじゃない！」	「크, 당신의 탓으로, 내 최애가 격변해 버렸다잖아!」	fix	lookup
+dict:s:9436	「く、あなたのせいで、私の推しが激変しちゃったじゃない！」	「크, 당신의 탓으로, 내 최애가 격변해버렸다잖아!」	fix	lookup
 dict:s:9436	彼を推した。	그를 추천했다.	keep	lookup
 dict:s:9436	推し進める。	추진한다.	keep	lookup
 dict:s:8707	推し活が楽しい。	덕질이 즐겁다.	keep	lookup

@@ -13557,8 +13557,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 句作	하이쿠를 &JA@	M429			GN				llm		くさく	w:13518
 句点	마침표	N110			GN				xxx llm	1		w:13519
 叩き出され	쫓겨&A5@	M427			GN				llm			w:13520
-叩き切	베어 버&AA@	M428			GN				llm		たたききる	w:13521
-叩き斬	베어 버&AA@	M428			GN				llm		たたききる	w:13522
+叩き切	베어버&AA@	M428			GN				llm		たたききる	w:13521
+叩き斬	베어버&AA@	M428			GN				llm		たたききる	w:13522
 叩き潰	때려 부&CF@	M423			GN				xxx llm		たたきつぶす	w:13523
 叩き潰	박살&A6@	M423			GN				llm		たたきつぶす	w:13524
 叩き落	쳐서 떨어뜨&AA@	M423			GN				llm		たたきおとす	w:13525
@@ -13756,9 +13756,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 吹き溜り	눈더미	N110			GN				xxx llm		ふきだまり	w:13717
 吹き溜り	낙오자들의 소굴	N110	VPl		GN				llm		ふきだまり	w:13718
 吹き飛	날아&A1@	M426			GN				xxx llm	1		w:13719
-吹き飛ば	날려 버&AA@	M423			GN				xxx llm	1		w:13720
+吹き飛ば	날려버&AA@	M423			GN				xxx llm	1		w:13720
 吹っ切	떨쳐&A6@	M428			GN				xxx llm	1		w:13721
-吹っ飛ば	날려 버&AA@	M423			GN				llm			w:13722
+吹っ飛ば	날려버&AA@	M423			GN				llm			w:13722
 吹上げ	바람받이	N110	VPl		GN				xxx llm		ふきあげ	w:13723
 吹上げ	분수	N110	VBl		GN				llm		ふきあげ	w:13724
 吹出物	뾰루지	N110			GN						ふきでもの	w:13725
@@ -22856,7 +22856,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 葡萄根油虫	포도뿌리혹벌레	N110			GN						ぶどうねあぶらむし	w:22808
 葡萄畑	포도밭	N110			GN						ぶどうばたけ	w:22809
 葡萄膜炎	포도막염	N110	UTi		GN						ぶどうまくえん	w:22810
-葬り去	묻어 버&AA@	M428			GN				llm		ほうむりさる	w:22811
+葬り去	묻어버&AA@	M428			GN				llm		ほうむりさる	w:22811
 葬儀	장례	N110			GN				xxx	1	そうぎ	w:22812
 葬儀場	장례식장	N110			GN						そうぎじょう	w:22813
 葬儀社	장의사	N110			GN						そうぎしゃ	w:22814
@@ -26831,7 +26831,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 薨去	훙거	N110		HdHi	GN						こうきょ	w:26768
 いわれのな	터무니$FA@	H7N0			GN							w:26769
 謂れのな	터무니$FA@	H7N0			GN							w:26770
-駄目駄目	안 돼 안 돼	I110			GN						だめだめ	w:26787
+駄目駄目	안돼 안돼	I110			GN						だめだめ	w:26787
 笑	소	N110			GN						しょう	w:26799
 笑	ㅋㅋ	N110			GN	6904	||2 G+0== "Td" &&2 G+0== "Ow" P-1!= "13*"	문장에 혼자 있거나 고유 명사가 아닌 말 뒤 문장 끝에 붙은 笑는 웃음 표시 ‘ㅋㅋ’로 고른다(マジかよ笑).			わら	w:26789
 手近な	가까운	E0H0			GN						てぢかな	w:26790
@@ -26919,7 +26919,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一番先に	제일 먼저	E311			GN						いちばんさきに	w:27051
 越中	엣추	N130	QCTVPl		GN							w:27272
 上総	가즈사	N130	QCTVPl		GN							w:27273
-見られちゃ	들켜 버&AA@	M460			GN							w:27274
+見られちゃ	들켜버&AA@	M460			GN							w:27274
 もう一人の	또 다른	E0H0			GN			한 사람을 더 가리키며 뒤 명사를 꾸미는 もう一人の(もう一人の自分 또 다른 자신)			もうひとりの	w:27275
 もうひとりの	또 다른	E0H0			GN			한 사람을 더 가리키며 뒤 명사를 꾸미는 もう一人の(もう一人の自分 또 다른 자신)				w:27276
 つけ狙	노&AA@	M440			GN						つけねらう	w:27327
@@ -26951,3 +26951,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 様様	덕분%D4@	G8L0			GN	6970	||2 &&3 P-1== "1**" U+0!= "な" U+0!= "に" &&2 P-1== "1**" G+0== "Ow"	명사 바로 뒤에서 な, に로 이어지지 않는 様様는 그 명사 덕분이라는 뜻이다.			さまさま	w:27512
 近くの	가까운	C0H0			GN	6971	||3 G-1== "Nq" G-1== "Ct" A-1== "UMe"	수량이나 때를 나타내는 말 바로 뒤의 近くの는 가까운으로 옮긴다.			ちかくの	w:27513
 近くまで	가까이까지	E300			GN	6972	||3 G-1== "Nq" G-1== "Ct" A-1== "UMe"	수량이나 때를 나타내는 말 바로 뒤의 近くまで는 가까이까지로 옮긴다.			ちかくまで	w:27514
+ダメ出し	지적	N110		Hd	GN						だめだし	w:27515
+駄目出し	지적	N110		Hd	GN						だめだし	w:27516
+だめ出し	지적	N110		Hd	GN						だめだし	w:27517
+ダメもと	밑져야 본전	N110			GN						だめもと	w:27518
+だめもと	밑져야 본전	N110			GN						だめもと	w:27519

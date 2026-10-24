@@ -62,16 +62,16 @@ lookup:jisjk:67276	東海テレビ放送の番組だ。	도카이TV 방송의 �
 lookup:jisjk:67276	東海テレビ放送を見た。	도카이TV 방송을 보았다.	fix	defaults
 lookup:jisjk:67276	東海テレビ放送で働く。	도카이TV 방송에서 일한다.	fix	defaults
 lookup:jisjk:67276	東海テレビを見た。	도카이TV를 보았다.	keep	defaults
-lookup:jisjk:136469	死ななきゃいけない。	죽지 않으면 안 된다.	fix	defaults
-lookup:jisjk:136469	死ななきゃいけなかった。	죽지 않으면 안 되었다.	fix	defaults
-lookup:jisjk:136469	死ななきゃいけなくなる。	죽지 않으면 안 되게 된다.	fix	defaults
-lookup:jisjk:136469	死ななきゃいけません。	죽지 않으면 안 됩니다.	keep	defaults
-lookup:jisjk:136469	死んではいけない。	죽어선 안 된다.	keep	defaults
+lookup:jisjk:136469	死ななきゃいけない。	죽지 않으면 안된다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけなかった。	죽지 않으면 안되었다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけなくなる。	죽지 않으면 안되게 된다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけません。	죽지 않으면 안됩니다.	keep	defaults
+lookup:jisjk:136469	死んではいけない。	죽어선 안된다.	keep	defaults
 lookup:jisjk:136469	生きなきゃいけない。	살아야 한다.	keep	defaults
 lookup:jisjk:136469	死ななくてもいい。	죽지 않아도 된다.	keep	defaults
 lookup:jisjk:136469	死ななきゃ。	죽어야 한다.	keep	defaults
 lookup:jisjk:265639	真っ白になる。	새하얗게 된다.	keep	defaults
-lookup:jisjk:265639	真っ白にならない。	새하얗게 안 된다.	keep	defaults
+lookup:jisjk:265639	真っ白にならない。	새하얗게 안된다.	keep	defaults
 lookup:jisjk:265639	白くなった。	희어졌다.	keep	defaults
 lookup:jisjk:240437	粗製濫造	조제남조	fix	defaults
 lookup:jisjk:240437	粗製濫造を避ける。	조제남조를 피한다.	fix	defaults
@@ -99,8 +99,8 @@ lookup:names.614413	横浜駅へ行く。	요코하마역에 간다.	keep	defaul
 lookup:jisjk:137374	「取り組もうともしない。」	「착수하려고도 하지 않는다.」	fix	defaults
 lookup:jisjk:136507	「実務に当たる。」	「실무를 맡는다.」	fix	defaults
 lookup:jisjk:67276	「東海テレビ放送を見た。」	「도카이TV 방송을 보았다.」	fix	defaults
-lookup:jisjk:136469	「死ななきゃいけない。」	「죽지 않으면 안 된다.」	fix	defaults
+lookup:jisjk:136469	「死ななきゃいけない。」	「죽지 않으면 안된다.」	fix	defaults
 lookup:jisjk:240437	「粗製濫造を避ける。」	「조제남조를 피한다.」	fix	defaults
 lookup:names.5359	「ESPNワイド・ワールド・オブ・スポーツ・コンプレックスへ行く。」	「ESPN 와이드 월드 오브 스포츠 콤플렉스에 간다.」	fix	fixed
 lookup:names.397720	「リンダ・デイ・ジョージさんだ。」	「린다 데이 조지 씨다.」	fix	fixed
-lookup:jisjk:136469	「死んではいけない。」	「죽어선 안 된다.」	keep	defaults
+lookup:jisjk:136469	「死んではいけない。」	「죽어선 안된다.」	keep	defaults

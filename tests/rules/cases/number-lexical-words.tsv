@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:number-lexical-words	七つ道具を持ってきた。	필수 도구를 가져왔다.	fix	defaults
 dict:number-lexical-words	八つ裂きの刑だ。	갈기갈기 찢기의 형이다.	fix	defaults
 dict:number-lexical-words	一騒動あった。	한바탕 소동 있었다.	fix	defaults
-dict:number-lexical-words	一筋縄ではいかない相手だ。	보통 수단으로는 안 되는 상대다.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかない相手だ。	보통 수단으로는 안되는 상대다.	fix	defaults
 dict:number-lexical-words	一人前のレディとして扱ってよね！	어엿한 레이디로서 취급해!	fix	defaults
 dict:number-lexical-words	三日坊主で終わった。	작심삼일로 끝났다.	fix	defaults
 dict:w:27029	一人前の寿司を頼む。	1인분의 스시를 부탁한다.	keep	local
@@ -41,8 +41,8 @@ dict:number-lexical-words	一人前のレディーとして扱ってよね！	�
 dict:number-lexical-words	一人前のレディとして頂くわ。	어엿한 레이디로서 받아.	fix	defaults
 dict:number-lexical-words	八つ裂きにしてやろう！	갈기갈기 찢기로 해 주자!	fix	defaults
 dict:number-lexical-words	今年の試合、一波乱あり。	금년 시합, 한바탕 파란 있어.	fix	defaults
-dict:number-lexical-words	一筋縄ではいかない者たちと行動を共にする。	보통 수단으로는 안 되는 사람들과 행동을 같이 한다.	fix	defaults
-dict:number-lexical-words	一筋縄ではいかないわよ？	보통 수단으로는 안 돼?	fix	defaults
+dict:number-lexical-words	一筋縄ではいかない者たちと行動を共にする。	보통 수단으로는 안되는 사람들과 행동을 같이 한다.	fix	defaults
+dict:number-lexical-words	一筋縄ではいかないわよ？	보통 수단으로는 안돼?	fix	defaults
 dict:jisjk:1859	軽巡洋艦、その長女、一番艦の子よ。	rule:dict:jisjk:1859=1번	fix	local
 dict:jisjk:1859	あたし、一番艦の、ヒトマルマル…	rule:dict:jisjk:1859=1번	fix	local
 dict:jisjk:1859	防空駆逐艦、一番艦、参りました。	rule:dict:jisjk:1859=1번	fix	local

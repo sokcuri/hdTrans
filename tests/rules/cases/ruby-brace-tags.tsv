@@ -7,8 +7,8 @@ normalize:ruby	そうか……{rb}現実{/rb}{rt}ここ{/rt}に彼女はいな�
 normalize:ruby	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	normalize
 normalize:ruby	カモがネギを{rb}背負{/rb}{rt}しょ{/rt}って……？	카모가 파를 {rb}짊어져{/rb}{rt}짊어져{/rt}……?	fix	normalize
 normalize:ruby	なんとなく俺も{rb}安堵{/rb}{rt}あんど{/rt}する。	왠지 나도 {rb}안도{/rb}{rt}안도{/rt}한다.	keep	normalize
-compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt} 버렸다.	fix	compose
-compose:text-gate	皿を割ってしまった。	접시를 깨어 버렸다.	keep	compose
+compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt}버렸다.	fix	compose
+compose:text-gate	皿を割ってしまった。	접시를 깨어버렸다.	keep	compose
 word:ruby-neighbour	彼は窓の外を{rb}眺めて{/rb}{rt}ながめて{/rt}いる。	그는 창 밖을 {rb}바라보고{/rb}{rt}바라보고{/rt} 있다.	fix	global-ending
 word:ruby-neighbour	{rb}現実{/rb}{rt}ここ{/rt}に彼女はいない。	{rb}현실{/rb}{rt}여기{/rt}에 그녀는 없다.	keep	defaults
 normalize:ruby	先生が俺を{rb}庇{/rb}{rt}かば{/rt}ってくれた。	선생님이 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주었다.	fix	normalize
@@ -20,7 +20,7 @@ normalize:ruby	{rb}寂{/rb}{rt}さみ{/rt}しいけれど、平気。	{rb}외롭
 normalize:ruby	{rb}夢{/rb}{rt}ここ{/rt}で目が覚めた。	{rb}꿈{/rb}{rt}여기{/rt}에서 깨어났다.	keep	normalize
 normalize:ruby	{rb}人気{/rb}{rt}ひとけ{/rt}がない。	{rb}인기척{/rb}{rt}인기척{/rt}이 없다.	keep	normalize
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べてくれた。	{rb}먹어{/rb}{rt}먹어{/rt} 주었다.	fix	rewrites
-word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt} 버렸다.	fix	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt}버렸다.	fix	rewrites
 word:ruby-neighbour	涙を{rb}拭{/rb}{rt}ぬぐ{/rt}ってくれた。	눈물을 {rb}닦아{/rb}{rt}닦아{/rt} 주었다.	fix	rewrites
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べたい。	{rb}먹고 싶다{/rb}{rt}먹고 싶다{/rt}.	fix	local-ending
 word:ruby-neighbour	パンを{rb}食{/rb}{rt}た{/rt}べて寝た。	빵을 {rb}먹고{/rb}{rt}먹고{/rt} 잤다.	keep	rewrites
@@ -54,7 +54,7 @@ normalize:ruby	サラダ作りに{rb}勤{/rb}{rt}いそ{/rt}しんでくれて�
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べて、走った。	{rb}먹어{/rb}{rt}먹어{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んで、走った。	{rb}마셔{/rb}{rt}마셔{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}読{/rb}{rt}よ{/rt}んで、走った。	{rb}읽어{/rb}{rt}읽어{/rt}, 달렸다.	current	rewrites
-word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt} 버린다.	fix	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt}버린다.	fix	rewrites
 defaults:lone-kanji	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
 defaults:lone-kanji	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
 defaults:lone-kanji	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults

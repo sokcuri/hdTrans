@@ -65,7 +65,7 @@ dict:jisjk:373504	ゴロゴロ……お腹がいっぱいさ	데굴데굴……�
 dict:number-ippai	チュッ……頭がいっぱいぞ	쪽……머릿속이 가득해	keep	defaults
 dict:number-ippai	ピンポーン……頭がいっぱいぜ	딩동……머릿속이 가득해	keep	defaults
 # 맞는 출력: 배가 부르면…졸려 버렸어
-dict:number-ippai	お腹いっぱいになったら…眠くなっちゃった	배부르게 되면…졸려져 버렸다	current	defaults
+dict:number-ippai	お腹いっぱいになったら…眠くなっちゃった	배부르게 되면…졸려져버렸다	current	defaults
 # 맞는 출력: 쏴아쏴아……머릿속이 가득하네
 dict:number-ippai	ザーザー……頭がいっぱいな	쏴아쏴아……머릿속이 가득한	current	defaults
 # 맞는 출력: 싱글벙글……머릿속이 가득한 거야

@@ -8,6 +8,6 @@ dict:gram:iware:speaker	「……言われなくても分かってる」	「…�
 dict:gram:iware:speaker	言われるまま、帽子を脱いだ。	말하는 대로, 모자를 벗었다.	keep	local
 dict:gram:iware:speaker	社交界でも言われてるんでしょ	사교계에서도 말하고 있는 이지	keep	local
 dict:gram:iware:quote	人間が食べれば病になるとすら言われていた。	인간이 먹으면 병에 걸리면조차 하고 있었다.	fix	local
-dict:gram:iware:quote	ダメとは言われないと思います。	안 된다고는 하지 않는다고 생각합니다.	fix	local
+dict:gram:iware:quote	ダメとは言われないと思います。	안된다고는 하지 않는다고 생각합니다.	fix	local
 dict:gram:iware:called	先代の側室の呪いだと言われたそれは怪奇でもなかった。	선대의 측실의 저주라고 불린 그것은 괴기도 아니었다.	fix	local
 dict:gram:iware:called	「ここには何もいない」と言われた。	「여기에는 아무것도 없다」라고 했다.	keep	local

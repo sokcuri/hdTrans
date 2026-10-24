@@ -13,7 +13,7 @@ sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 �
 sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
 sound:hiragana-doubled	いろいろと考えた。	여러모로 생각했다.	keep	sound
 cx:line-initial-to:10	と私が殊勝に頭を下げると、王子はひどくびっくりした顔をする。	라고 내가 기특하게 고개를 숙이면, 왕자는 몹시 놀란 얼굴을 한다.	fix	rewrites
-cx:line-initial-to:10	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어 버리려고 했지만 그만두기로 했다.	fix	rewrites
+cx:line-initial-to:10	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어버리려고 했지만 그만두기로 했다.	fix	rewrites
 cx:line-initial-to:10	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
 cx:line-initial-to:10	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
 cx:line-initial-to:10	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites
@@ -21,11 +21,11 @@ rewrite:past-sequence	　振り返ると彼女がいた。	 돌아보니 그녀�
 rewrite:past-sequence	　ドアを開けると私服の彼女がいた。	 문을 열자 사복의 그녀가 있었다.	fix	rewrites
 rewrite:past-sequence	　スマホを見ると１７時半すぎだった。	 스마트폰을 보니 17너무 시다.	fix	rewrites
 rewrite:past-sequence	宦官を加えると三千の大所帯だった。	내시를 가세하면 3000의 대가족이었다.	keep	rewrites
-rewrite:past-sequence	両手で抱えたポリタンクは、歩いているとバランスを崩してしまうほど重かった。	양손으로 움켜 쥔 폴리탱크는, 걷고 있으면 밸런스를 무너뜨려 버릴 만큼 무거웠다.	keep	rewrites
+rewrite:past-sequence	両手で抱えたポリタンクは、歩いているとバランスを崩してしまうほど重かった。	양손으로 움켜 쥔 폴리탱크는, 걷고 있으면 밸런스를 무너뜨려버릴 만큼 무거웠다.	keep	rewrites
 rewrite:past-sequence	自身が狙われる可能性があると深く理解していた。	자신이 노려질 가능성이 있으면 깊게 이해하고 있었다.	keep	rewrites
 rewrite:quote-to	思うこと、女の笑みほど恐ろしい毒はないと。	생각하는 것, 여자의 미소만큼 무서운 독은 없다고.	fix	rewrites
 rewrite:quote-to	時間がないと、彼は言った。	시간이 없다고, 그는 말했다.	fix	rewrites
-rewrite:quote-to	予測だけで物事を考えるのはいけないと、父は何度も言った。	예측만으로 일을 생각하는 것은 안 된다고, 아버지는 몇 번이나 말했다.	fix	rewrites
+rewrite:quote-to	予測だけで物事を考えるのはいけないと、父は何度も言った。	예측만으로 일을 생각하는 것은 안된다고, 아버지는 몇 번이나 말했다.	fix	rewrites
 rewrite:quote-to	早く行かないと。	빨리 가지 않으면.	keep	rewrites
 rewrite:quote-to	お金がないと、困る。	돈이 없으면 곤란하다.	keep	rewrites
 dict:gram:to:tari	彼女は朗々と歌い上げた。	그녀는 낭랑하게 노래했다.	fix	local

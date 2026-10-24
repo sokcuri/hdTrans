@@ -1,6 +1,6 @@
 # 규칙: LEX-1, LEX-3, LEX-25
 rule	input	expected	kind	layer
-lexical:spelling	それはだめよ。	그것은 안 돼요.	fix	defaults
+lexical:spelling	それはだめよ。	그것은 안돼요.	fix	defaults
 lexical:spelling	つくづくと	곰곰이	fix	defaults
 lexical:spelling	つくづくと考えた。	곰곰이 생각했다.	fix	defaults
 lexical:spelling	「つくづくと考えた」	「곰곰이 생각했다」	fix	defaults
