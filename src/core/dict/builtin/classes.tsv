@@ -19,6 +19,15 @@
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
+//= contraction.n-ru	Starts of the text after a ん that says the る of a verb's dictionary form, the な of a prohibition with what may follow it (見んなよ 見るなよ, 来んなって).
+//= contraction.n-ru-final	The same before no kana, kanji or letter (こっち見んな 見るな, 邪魔すんな); not ごめんな or こんな, words that span the ん.
+//= contraction.n-nai	Starts of the text after a ん that says the ら of a godan verb's negative stem, the られ of a potential or the れ that ends an ichidan stem (分かんない 分からない, 信じらんない 信じられない, してくんない してくれない).
+//= contraction.n-nee	The same with ねえ for ない, which is written as ない (変わんねえ 変わらない, やってらんねえ やってられない).
+//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 許せんから 許せないから, 食べんか 食べないか).
+//= contraction.n-negative-not	Starts of contraction.n-negative after which the ん is no such ない (食べんかった, the past said with ん).
+//= contraction.n-kana-stem-after	The kana after which a verb stem of one kana starts a contracted form (気にすんな, してくんない, かもしんない, 俺がやっから); elsewhere a lone kana is no stem.
+//= contraction.tsu-ru	Starts of the text after a っ that says the る of a verb's dictionary form (やっから やるから, すっから するから).
+//= contraction.te-oru	Starts of the text after the と or ど that a て form says for its て or で and the お of おる (聞いとる 聞いておる, 読んどった 読んでおった, 聞いとらん 聞いておらん).
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
 //= contraction.ra-less-kuru	The forms of the potential of くる without its ら that follow a て form (帰ってこれた, ついてこれる, 戻ってこれました); not これなら or これまで, where これ is the pronoun.
 //= contraction.te-iru	Starts of the text after a て form that are the いる or いらっしゃる after it with its い dropped (見てる, 見てた, 見てて, 見てれば, 見てよう, 見てろ, 見てちゃ, 待ってられない, ついてらっしゃい).
@@ -480,6 +489,52 @@ copula.short-so	でもな
 copula.short-so	じゃ
 copula.short-so-final	だ
 copula.short-so-sentence	だった
+
+contraction.n-ru	なよ
+contraction.n-ru	なぁ
+contraction.n-ru	なあ
+contraction.n-ru	なー
+contraction.n-ru	な～
+contraction.n-ru	なって
+
+contraction.n-ru-final	な
+
+contraction.n-nai	ない
+contraction.n-nai	なかっ
+contraction.n-nai	なく
+contraction.n-nai	なきゃ
+contraction.n-nai	なけれ
+
+contraction.n-nee	ねえ
+contraction.n-nee	ねぇ
+contraction.n-nee	ねー
+
+
+contraction.n-negative	ぞ
+contraction.n-negative	わ
+contraction.n-negative	から
+contraction.n-negative	か
+contraction.n-negative	けど
+contraction.n-negative	けれど
+
+contraction.n-negative-not	かっ
+
+contraction.n-kana-stem-after	て
+contraction.n-kana-stem-after	も
+contraction.n-kana-stem-after	に
+contraction.n-kana-stem-after	を
+contraction.n-kana-stem-after	が
+contraction.n-kana-stem-after	は
+contraction.n-kana-stem-after	と
+
+contraction.te-oru	る
+contraction.te-oru	ら
+contraction.te-oru	り
+contraction.te-oru	っ
+contraction.te-oru	れ
+contraction.te-oru	ろ
+
+contraction.tsu-ru	から
 
 contraction.n-no	ん中
 contraction.n-no	んところ

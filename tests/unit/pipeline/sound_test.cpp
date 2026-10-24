@@ -1088,6 +1088,85 @@ HD_TEST(pipeline_contracted_no) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedNo(c.in, *loaded.snapshot), std::string(c.want));
 }
 
+// A ん or っ said for a kana of a verb form takes it back: る before the な of a prohibition, ら, れ
+// or られ before ない (and ねえ, written ない), the negative ない after an ichidan or potential stem
+// before ぞ, から or か, る before から; not after a verb of ability, a godan negative stem or a
+// dictionary form, in a word, nor after a lone kana elsewhere or kana alone.
+HD_TEST(pipeline_contracted_n) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tgram\tid\n"
+                                     "見\t&AY@\tM437\t\t1\n"
+                                     "帰\t돌아&A1@\tM428\t\t2\n"
+                                     "許\t용서&AV@\tM433\t\t3\n"
+                                     "くれ\t&CJ@\tM457\t\t4\n"
+                                     "信じ\t믿&AA@\tM437\t\t5\n"
+                                     "や\t&AV@\tM438\t\t6\n"
+                                     "知\t알&AA@\tM428\t\t7\n"
+                                     "負け\t지&AA@\tM437\t\t8\n"
+                                     "でき\t할 수 &HN@\tM417\tKe\t9\n"
+                                     "書\t쓰&AA@\tM421\t\t10\n"
+                                     "こんな\t이런\tE0H0\t\t11\n"
+                                     "ごめん\t미안\tK110\t\t12\n"
+                                     "最初\t처음\tN110\t\t13\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"見んな", "見るな"},
+        {"見んなよ", "見るなよ"},
+        {"帰んなよ", "帰んなよ"},  // a godan verb in る: as often the imperative 帰りな
+        {"邪魔すんな", "邪魔するな"},  // する by its forms after a noun
+        {"想像できんな", "想像できんな"},  // できる: a verb of ability takes no prohibition
+        {"帰んない", "帰らない"},
+        {"帰んねえ", "帰らない"},
+        {"信じらんない", "信じられない"},
+        {"してくんない", "してくれない"},
+        {"負けんぞ", "負けないぞ"},
+        {"許せんから", "許せないから"},
+        {"負けん。", "負けん。"},  // the word stage reads the negative ん before a mark
+        {"見んかった", "見んかった"},  // the past said with ん
+        {"知らんぞ", "知らんぞ"},      // already the negative of a godan verb
+        {"書くんなら", "書くんなら"},  // the の after a dictionary form
+        {"こんな", "こんな"},
+        {"ごめんな", "ごめんな"},
+        {"俺がやっから", "俺がやるから"},
+        {"最初っから", "最初っから"},
+        {"怖いんです", "怖いんです"},  // い after kanji ends another word
+        {"もがみんねえ", "もがみんねえ"},  // kana alone
+        {"\xcd見んな", "\xcd見るな"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// The と or ど that a て form says for its て or で and the お of おる takes them back after the て
+// form of a verb of the dictionary or する; not after a lone kana (でとれた is で and とれた), nor in a
+// word that spans the と.
+HD_TEST(pipeline_contracted_oru) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "聞\t듣&A1@\tM421\t1\n"
+                                     "読\t읽&AA@\tM425\t2\n"
+                                     "見\t&AY@\tM437\t3\n"
+                                     "出\t나&A1@\tM437\t4\n"
+                                     "とれ\t잡&AA@\tM437\t5\n"
+                                     "見とれ\t넋을 잃고 보&AA@\tM437\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"聞いとる", "聞いておる"},
+        {"聞いとらんかった", "聞いておらんかった"},
+        {"読んどった", "読んでおった"},
+        {"見とった", "見ておった"},
+        {"見とれていた", "見とれていた"},  // 見とれる, a word that spans the と
+        {"苦労しとる", "苦労しておる"},
+        {"海でとれた", "海でとれた"},
+        {"聞いと", "聞いと"},
+        {"\xcd聞いとる", "\xcd聞いておる"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedOru(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The う of the past and the て form of a godan verb in う is っ; not before ため, nor in a noun.
 HD_TEST(pipeline_onbin_u) {
     const auto loaded = dict::Load({{0, "base.tsv",
