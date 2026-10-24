@@ -35,6 +35,10 @@ constexpr ConstraintRule kRules[] = {
      "줄이나 문서의 단서(함종 뒤, 자매 호칭과 개조와 급 앞, 화자 표시, 자기소개)가 이름이라 한 단어는 인명 뜻만, 날씨나 하늘이나 바다 뜻을 살리는 서술어 앞은 제외 (駆逐艦村雨 구축함 소나기 → 무라사메, 時雨が降る는 그대로)", {}},
     {"chan-after-word", ConstraintWord::WithKanji, "", ConstraintContext::BeforeChan, ConstraintReject::Word,
      "ゃん 바로 앞에서 ち로 끝나는 한자 단어는 쓰지 않음: 그 ち는 ちゃん의 첫 글자 (夕立ちゃん 소나기 → 夕立 + ちゃん)", {}},
+    {"chau-after-verb", ConstraintWord::KansaiNegative, "", ConstraintContext::NotAfterNoun, ConstraintReject::Word,
+     "명사 뒤가 아닌 ちゃう, ちゃいます(관서 말 아니다)는 쓰지 않음: 동사 뒤의 ちゃう, ちゃい는 てしまう (やっちゃうね 해 버리네; マザコンちゃうわ 마더 콤플렉스 아니거든은 그대로)", {}},
+    {"chau-before-kana", ConstraintWord::Source, "ちゃう", ConstraintContext::BeforeHiragana, ConstraintReject::Word,
+     "히라가나가 바로 뒤따르는 ちゃう는 아니다가 아님: 그 ちゃう는 동사 활용의 일부 (肌荒れちゃうね 피부가 거칠어져 버리네)", {}},
     {"kimi-after-katakana", ConstraintWord::Source, "君", ConstraintContext::AfterKatakana, ConstraintReject::Pronoun,
      "가타카나 바로 뒤의 君은 대명사(너·네)가 아니라 접미사 군 (バカ君が 바보네가 → 바보군이)", {}},
     {"kimito-after-mask", ConstraintWord::Source, "君と", ConstraintContext::AfterMask, ConstraintReject::OtherTargets,
@@ -241,6 +245,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return text::RuneCount(source) >= 2 && source.ends_with("く");
     case ConstraintWord::IruForm:
         return dict::InClass("word.iru-form", source);
+    case ConstraintWord::KansaiNegative:
+        return dict::InClass("copula.kansai-negative", source);
     }
     return false;
 }
@@ -332,6 +338,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return DakeEnds(after);
     case ConstraintContext::NotCommonSense:
         return !StartsWithAny(after, dict::ClassMembers("name.common-after")) && !HonorificAt(after, false);
+    case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
+        return false;
+    case ConstraintContext::BeforeHiragana:
+        return NameClassOf(FirstChar(after)) == kClassHiragana;
     case ConstraintContext::BeforeChan:
         return source.ends_with("ち") && after.starts_with("ゃん") && !after.starts_with("ゃんと");
     case ConstraintContext::BeforeRai:
@@ -591,6 +601,27 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
 
 std::span<const ConstraintRule> ConstraintRules() { return kRules; }
 
+bool Worker::NotAfterNoun(std::string_view head) {
+    if (head.empty()) return false;
+    const std::string_view last = LastChar(head);
+    // The nominalizer ん takes it too (行くんちゃう 가는 거 아니야).
+    if (last == "ん") return false;
+    if (last == "て" || last == "で" || last == "っ" || last == "ッ") return true;
+    // The longest dictionary word of up to eight characters with a kanji or a katakana that ends
+    // where head ends, by its first sense as the dictionary orders them (嘘 거짓말, 見 보다, バレ 들키다).
+    std::string_view word = head;
+    while (text::RuneCount(word) > 8) word.remove_prefix(FirstChar(word).size());
+    for (; !word.empty(); word.remove_prefix(FirstChar(word).size())) {
+        if (!HasKanji(word) && NameClassOf(FirstChar(word)) != kClassKatakana) continue;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(word, dict::LookupMode::General, {}).list) {
+            if (c.source == word && c.codes != nullptr) return c.codes->part.TagIn("MHG");
+        }
+    }
+    // A word in kana alone ends in a verb stem as often (汗かい, 荒れ); a kanji or a katakana word
+    // the dictionary lacks is a noun.
+    return NameClassOf(last) != kClassKatakana && !text::IsKanji(text::DecodeRune(last).cp);
+}
+
 // Text path, mode 0. For each rule and each source of the candidates that the rule's word
 // and context fit, the rejected candidates leave the list; a name made from a person
 // reading takes the place of the first of them.
@@ -623,7 +654,9 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
             const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                                          : std::string_view(following);
             if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before, lookupContext.cued) ||
-                !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead)) {
+                (rule.context == ConstraintContext::NotAfterNoun
+                     ? !NotAfterNoun(head)
+                     : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
                 i++;
                 continue;
             }

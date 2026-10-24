@@ -153,6 +153,9 @@ private:
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
+    // Whether the text head that a word follows in its token ends in something other than a noun
+    // (ConstraintContext::NotAfterNoun).
+    bool NotAfterNoun(std::string_view head);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);
