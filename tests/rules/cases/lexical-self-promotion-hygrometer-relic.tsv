@@ -1,0 +1,23 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:236568	自己宣伝	자기선전	fix	defaults
+dict:jisjk:236568	自己宣伝をする。	자기선전을 한다.	fix	defaults
+dict:jisjk:236568	自己宣伝が多い。	자기선전이 많다.	fix	defaults
+dict:jisjk:236568	自己宣伝のためだ。	자기선전을 위해서다.	fix	defaults
+dict:jisjk:236568	自己紹介	자기 소개	keep	defaults
+dict:jisjk:236568	自己表現	자기표현	keep	defaults
+dict:jisjk:236568	宣言	선언	keep	defaults
+dict:jisjk:236479	自記湿度計	자기습도계	fix	defaults
+dict:jisjk:236479	自記湿度計を使う。	자기습도계를 쓴다.	fix	defaults
+dict:jisjk:236479	自記湿度計の記録。	자기습도계의 기록.	fix	defaults
+dict:jisjk:236479	自記湿度計を設置した。	자기습도계를 설치했다.	fix	defaults
+dict:jisjk:236479	自記温度計	자기온도계	keep	defaults
+dict:jisjk:236479	湿度計	습도계	keep	defaults
+dict:jisjk:236479	自記気圧計	자기기압계	keep	defaults
+dict:jisjk:189047	舎利骨	사리	fix	defaults
+dict:jisjk:189047	舎利骨の保管。	사리의 보관.	fix	defaults
+dict:jisjk:189047	舎利骨を安置する。	사리를 안치한다.	fix	defaults
+dict:jisjk:189047	舎利骨を見た。	사리를 보았다.	fix	defaults
+dict:jisjk:189047	舎利	사리	keep	defaults
+dict:jisjk:189047	舎利塔	사리탑	keep	defaults
+dict:jisjk:189047	頭蓋骨	머리뼈	keep	defaults

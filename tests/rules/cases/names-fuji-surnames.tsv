@@ -1,0 +1,51 @@
+# 규칙: LEX-3, LEX-4
+rule	input	expected	kind	layer
+names:fuji-surnames	藤あかね	후지 아카네	fix	lookup
+names:fuji-surnames	藤あかねと会った。	후지 아카네와 만났다.	fix	lookup
+names:fuji-surnames	藤あかねが来た。	후지 아카네가 왔다.	fix	lookup
+names:fuji-surnames	「藤あかね」	「후지 아카네」	fix	lookup
+names:fuji-surnames	藤かんな	후지 칸나	fix	lookup
+names:fuji-surnames	藤かんなと会った。	후지 칸나와 만났다.	fix	lookup
+names:fuji-surnames	「藤かんな」	「후지 칸나」	fix	lookup
+names:fuji-surnames	藤井あいさ	후지이 아이사	fix	lookup
+names:fuji-surnames	藤井あいさが来た。	후지이 아이사가 왔다.	fix	lookup
+names:fuji-surnames	「藤井あいさ」	「후지이 아이사」	fix	lookup
+names:fuji-surnames	藤小雪	후지 코유키	fix	lookup
+names:fuji-surnames	藤小雪と会った。	후지 코유키와 만났다.	fix	lookup
+names:fuji-surnames	藤小雪が来た。	후지 코유키가 왔다.	fix	lookup
+names:fuji-surnames	「藤小雪」	「후지 코유키」	fix	lookup
+names:fuji-surnames	富士山を見た。	후지산을 보았다.	keep	lookup
+names:fuji-surnames	赤富士	붉은 후지산	keep	lookup
+names:fuji-surnames	藤かんなさんが来た。	후지 칸나 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤あかねさんが来た。	후지 아카네 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤井さんが来た。	후지이 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤さんが来た。	후지 씨가 왔다.	keep	lookup
+names:fuji-surnames	薄桜鬼真改	박앵귀 진개	keep	lookup
+names:fuji-surnames	阿武隈改二	아부쿠마 개2	keep	lookup
+names:fuji-surnames	バラ色の人生	장밋빛 인생	keep	lookup
+names:fuji-surnames	薔薇色の人生	장밋빛 인생	keep	lookup
+names:fuji-surnames	藤原得郎	후지와라 도쿠로	fix	lookup
+names:fuji-surnames	藤原 得郎	후지와라 도쿠로	fix	lookup
+names:fuji-surnames	藤原 得郎さんが来た。	후지와라 도쿠로 씨가 왔다.	fix	lookup
+names:fuji-surnames	藤林杏	후지바야시 쿄	fix	lookup
+names:fuji-surnames	藤林 杏	후지바야시 쿄	fix	lookup
+names:fuji-surnames	藤平尚真	후지히라 쇼마	fix	lookup
+names:fuji-surnames	藤平 尚真	후지히라 쇼마	fix	lookup
+names:fuji-surnames	藤平尚真さんが来た。	후지히라 쇼마 씨가 왔다.	fix	lookup
+names:fuji-surnames	藤平尚真と会った。	후지히라 쇼마와 만났다.	fix	lookup
+names:fuji-surnames	「藤平尚真」	「후지히라 쇼마」	fix	lookup
+names:fuji-surnames	【藤平尚真】	【후지히라 쇼마】	fix	lookup
+names:fuji-surnames	藤平尚真。	후지히라 쇼마.	fix	lookup
+names:fuji-surnames	藤平尚真が来た。	후지히라 쇼마가 왔다.	fix	lookup
+names:fuji-surnames	藤平尚真です。	후지히라 쇼마입니다.	fix	lookup
+names:fuji-surnames	名前      藤平尚真	이름      후지히라 쇼마	fix	lookup
+names:fuji-surnames	藤原聡	후지하라 사토시	keep	lookup
+names:fuji-surnames	藤原歌劇団	후지와라 가극단	keep	lookup
+names:fuji-surnames	藤原義江	후지와라 요시에	keep	lookup
+names:fuji-surnames	藤原義江のふるさと	후지와라 요시에의 고향	keep	lookup
+names:fuji-surnames	藤林椋	후지바야시 료	keep	lookup
+names:fuji-surnames	藤平華乃	후지히라 카노	keep	lookup
+names:fuji-surnames	藤林さんが来た。	후지바야시 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤平さんが来た。	도히라 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤原さんが来た。	후지와라 씨가 왔다.	keep	lookup
+names:fuji-surnames	藤林しいな	후지바야시 시이나	keep	lookup

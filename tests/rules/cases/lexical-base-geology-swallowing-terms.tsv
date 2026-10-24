@@ -1,0 +1,23 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:243022	中生界の地層。	중생계의 지층.	fix	defaults
+dict:jisjk:243022	中生界を調べる。	중생계를 조사한다.	fix	defaults
+dict:jisjk:243022	これは中生界だ。	이것은 중생계다.	fix	defaults
+dict:jisjk:243022	中生界の分布。	중생계의 분포.	fix	defaults
+dict:jisjk:111492	中間搾取を禁止する。	중간착취를 금지한다.	fix	defaults
+dict:jisjk:111492	中間搾取の問題。	중간착취의 문제.	fix	defaults
+dict:jisjk:111492	中間搾取をなくす。	중간착취를 없앤다.	fix	defaults
+dict:jisjk:111492	これは中間搾取だ。	이것은 중간착취다.	fix	defaults
+dict:jisjk:89406	丸のみは危険だ。	통째로 삼킴은 위험하다.	fix	defaults
+dict:jisjk:89406	丸のみを防ぐ。	통째로 삼킴을 막는다.	fix	defaults
+dict:jisjk:89406	丸のみは禁止だ。	통째로 삼킴은 금지다.	fix	defaults
+dict:jisjk:243022	中生代の恐竜。	중생대의 공룡.	keep	defaults
+dict:jisjk:243022	古生界の地層。	고생계의 지층.	keep	defaults
+dict:jisjk:243022	新生界の地層。	신생계의 지층.	keep	defaults
+dict:jisjk:111492	中間報告を読む。	중간 보고를 읽는다.	keep	defaults
+dict:jisjk:111492	搾取を禁止する。	착취를 금지한다.	keep	defaults
+dict:jisjk:111492	中間層の問題。	중간층의 문제.	keep	defaults
+dict:jisjk:89406	丸呑みは危険だ。	통째로 삼킴은 위험하다.	keep	defaults
+dict:jisjk:89406	丸飲みを防ぐ。	통째로 삼킴을 막는다.	keep	defaults
+dict:jisjk:89406	説明を理解する。	설명을 이해한다.	keep	defaults
+dict:jisjk:89406	丸ごと食べた。	통째로 먹었다.	keep	defaults

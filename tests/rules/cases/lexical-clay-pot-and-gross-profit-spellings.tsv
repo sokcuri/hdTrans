@@ -1,0 +1,62 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+lexical:spelling	それはだめよ。	그것은 안 돼요.	fix	defaults
+lexical:spelling	つくづくと	곰곰이	fix	defaults
+lexical:spelling	つくづくと考えた。	곰곰이 생각했다.	fix	defaults
+lexical:spelling	つくづくと感じた。	곰곰이 느꼈다.	fix	defaults
+lexical:spelling	「つくづくと考えた」	「곰곰이 생각했다」	fix	defaults
+lexical:spelling	土鍋	질냄비	fix	defaults
+lexical:spelling	土鍋で料理した。	질냄비로 요리했다.	fix	defaults
+lexical:spelling	土鍋を使う。	질냄비를 쓴다.	fix	defaults
+lexical:spelling	「これは土鍋だ。」	「이건 질냄비다.」	fix	defaults
+lexical:spelling	粗利益率	총이익률	fix	defaults
+lexical:spelling	粗利益率を計算した。	총이익률을 계산했다.	fix	defaults
+lexical:spelling	粗利益率の数字。	총이익률의 숫자.	fix	defaults
+lexical:spelling	「粗利益率だ。」	「총이익률이다.」	fix	defaults
+lexical:spelling	臆病者	겁쟁이	fix	defaults
+lexical:spelling	臆病者が来た。	겁쟁이가 왔다.	fix	defaults
+lexical:spelling	臆病者ではない。	겁쟁이가 아니다.	fix	defaults
+lexical:spelling	「彼は臆病者だ。」	「그는 겁쟁이다.」	fix	defaults
+lexical:spelling	関東大震災	관동대지진	fix	defaults
+lexical:spelling	関東大震災の記録。	관동대지진의 기록.	fix	defaults
+lexical:spelling	関東大震災を調べた。	관동대지진을 조사했다.	fix	defaults
+lexical:spelling	「これは関東大震災だ。」	「이건 관동대지진이다.」	fix	defaults
+lexical:spelling	38(t)戦車	38(t) 전차	keep	defaults
+lexical:spelling	女尊男卑	여존남비	keep	defaults
+lexical:spelling	S級の魔物だ。	S급의 마물이다.	keep	defaults
+lexical:spelling	だめですよ。	안 돼요.	keep	defaults
+lexical:spelling	鍋を使う。	냄비를 쓴다.	keep	defaults
+lexical:spelling	口を閉じた。	입을 다물었다.	keep	defaults
+lexical:spelling	関西地方	관서지방	keep	defaults
+lexical:spelling	平泳ぎ	평영	keep	defaults
+lexical:spelling	平泳ぎを練習する。	평영을 연습한다.	keep	defaults
+lexical:spelling	「平泳ぎが得意だ。」	「평영이 자신있다.」	keep	defaults
+lexical:spelling	抗力	항력	keep	defaults
+lexical:spelling	抗力を計算する。	항력을 계산한다.	keep	defaults
+lexical:spelling	「抗力が大きい。」	「항력이 크다.」	keep	defaults
+lexical:spelling	索道	삭도	keep	defaults
+lexical:spelling	索道に乗る。	삭도를 탄다.	keep	defaults
+lexical:spelling	「索道を使う。」	「삭도를 쓴다.」	keep	defaults
+lexical:spelling	鹿児島県共済農業協同組合連合	카고시마현 공제농업협동조합연합	keep	defaults
+lexical:spelling	鹿児島県共済農業協同組合連合の資料。	카고시마현 공제농업협동조합연합의 자료.	keep	defaults
+lexical:spelling	「鹿児島県共済農業協同組合連合」	「카고시마현 공제농업협동조합연합」	keep	defaults
+lexical:spelling	客観	객관	keep	defaults
+lexical:spelling	客観的な判断だ。	객관적인 판단이다.	keep	defaults
+lexical:spelling	「客観的に考えた。」	「객관적으로 생각했다.」	keep	defaults
+lexical:spelling	セーフティー・ベルト	안전벨트	keep	defaults
+lexical:spelling	セーフティー・ベルトを使う。	안전벨트를 쓴다.	keep	defaults
+lexical:spelling	「セーフティー・ベルトだ。」	「안전벨트다.」	keep	defaults
+lexical:spelling	自由形を練習する。	자유형을 연습한다.	keep	defaults
+lexical:spelling	背泳ぎが得意だ。	배영이 자신있다.	keep	defaults
+lexical:spelling	平衡を保つ。	평형을 유지한다.	keep	defaults
+lexical:spelling	推力を計算する。	추진력을 계산한다.	keep	defaults
+lexical:spelling	抵抗が大きい。	저항이 크다.	keep	defaults
+lexical:spelling	色度を調べる。	색도를 조사한다.	keep	defaults
+lexical:spelling	鉄道に乗る。	철도를 탄다.	keep	defaults
+lexical:spelling	鹿児島県の資料。	가고시마현의 자료.	keep	defaults
+lexical:spelling	農業協同組合の資料。	농업협동조합의 자료.	keep	defaults
+lexical:spelling	主体と客体を区別する。	주체와 객체를 구별한다.	keep	defaults
+lexical:spelling	主観的な判断だ。	주관적인 판단이다.	keep	defaults
+lexical:spelling	シートベルトを締める。	안전 벨트를 조인다.	keep	defaults
+lexical:spelling	安全ベルトを使う。	안전 벨트를 쓴다.	keep	defaults
+lexical:spelling	ベルトの金具。	벨트의 쇠장식.	keep	defaults

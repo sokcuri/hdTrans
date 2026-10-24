@@ -1,0 +1,58 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:118253	恐ろしげだ。	으스스하다.	fix	defaults
+dict:jisjk:118253	恐ろしげな声。	으스스한 목소리.	fix	defaults
+dict:jisjk:118253	恐ろしげな顔。	으스스한 얼굴.	fix	defaults
+dict:jisjk:118253	恐ろしげに笑う。	으스스하게 웃는다.	fix	defaults
+dict:jisjk:118253	恐ろしい。	무섭다.	keep	defaults
+dict:jisjk:118253	恐る恐る近づく。	조심조심 가까워진다.	keep	defaults
+dict:jisjk:118253	不気味な音。	섬뜩한 소리.	keep	defaults
+dict:jisjk:373486	恥を知れ。	부끄러운 줄 알아라.	fix	defaults
+dict:jisjk:373486	恥を知れ！	부끄러운 줄 알아라!	fix	defaults
+dict:jisjk:373486	「恥を知れ」	「부끄러운 줄 알아라」	fix	defaults
+dict:jisjk:373486	恥をかく。	창피를 당한다.	keep	defaults
+dict:jisjk:373486	恥を知らない。	부끄러움을 알지 않는다.	keep	defaults
+dict:jisjk:373486	恥ずかしい。	부끄럽다.	keep	defaults
+dict:jisjk:124124	悪太郎	개구쟁이	fix	defaults
+dict:jisjk:124124	悪太郎の話。	개구쟁이의 이야기.	fix	defaults
+dict:jisjk:124124	悪太郎と呼ぶ。	개구쟁이라고 부른다.	fix	defaults
+dict:jisjk:124124	悪太郎だった。	개구쟁이였다.	fix	defaults
+dict:jisjk:124124	悪党	악당	keep	defaults
+dict:jisjk:124124	悪童	악동	keep	defaults
+dict:jisjk:124124	悪女	악녀	keep	defaults
+dict:jisjk:125563	悪戯小僧	개구쟁이	fix	defaults
+dict:jisjk:125563	悪戯小僧の話。	개구쟁이의 이야기.	fix	defaults
+dict:jisjk:125563	悪戯小僧と呼ぶ。	개구쟁이라고 부른다.	fix	defaults
+dict:jisjk:125563	悪戯小僧だった。	개구쟁이였다.	fix	defaults
+dict:jisjk:125563	悪戯	못된 장난	keep	defaults
+dict:jisjk:125563	小僧	애송이	keep	defaults
+dict:jisjk:125563	悪人	악인	keep	defaults
+dict:jisjk:341846	意志疎通	의사소통	fix	defaults
+dict:jisjk:341846	意志疎通を図る。	의사소통을 꾀한다.	fix	defaults
+dict:jisjk:341846	意志疎通が難しい。	의사소통이 어렵다.	fix	defaults
+dict:jisjk:341846	意志疎通の問題。	의사소통의 문제.	fix	defaults
+dict:jisjk:341846	意思疎通	의사소통	keep	defaults
+dict:jisjk:341846	意志決定	의지결정	keep	defaults
+dict:jisjk:341846	意思決定	의사결정	keep	defaults
+dict:jisjk:358458	意気がる。	허세를 부린다.	fix	defaults
+dict:jisjk:358458	意気がった。	허세를 부렸다.	fix	defaults
+dict:jisjk:358458	意気がっている。	허세를 부리고 있다.	fix	defaults
+dict:jisjk:358458	意気がらない。	허세를 부리지 않는다.	fix	defaults
+dict:jisjk:358458	意気込み	자세	keep	defaults
+dict:jisjk:358458	意気投合	의기 투합	keep	defaults
+dict:jisjk:358458	意気が合う。	기개가 맞는다.	keep	defaults
+dict:jisjk:118253	恐ろしげな森。	으스스한 숲.	fix	defaults
+dict:jisjk:118253	恐ろしげな話。	으스스한 이야기.	fix	defaults
+dict:jisjk:118253	恐ろしげな姿。	으스스한 모습.	fix	defaults
+dict:jisjk:124124	悪太郎の子供。	개구쟁이의 아이.	fix	defaults
+dict:jisjk:124124	悪太郎が笑う。	개구쟁이가 웃는다.	fix	defaults
+dict:jisjk:124124	悪太郎の冒険。	개구쟁이의 모험.	fix	defaults
+dict:jisjk:125563	悪戯小僧の子供。	개구쟁이의 아이.	fix	defaults
+dict:jisjk:125563	悪戯小僧が笑う。	개구쟁이가 웃는다.	fix	defaults
+dict:jisjk:125563	悪戯小僧の冒険。	개구쟁이의 모험.	fix	defaults
+dict:jisjk:341846	意志疎通の方法。	의사소통의 방법.	fix	defaults
+dict:jisjk:341846	意志疎通が大切だ。	의사소통이 중요하다.	fix	defaults
+dict:jisjk:341846	意志疎通について。	의사소통에 대해.	fix	defaults
+dict:jisjk:358458	意気がれば。	허세를 부리면.	fix	defaults
+dict:jisjk:358458	意気がる人。	허세를 부리는 사람.	fix	defaults
+dict:jisjk:358458	意気がっていた。	허세를 부리고 있었다.	fix	defaults

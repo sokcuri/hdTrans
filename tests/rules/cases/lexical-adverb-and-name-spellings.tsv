@@ -1,0 +1,43 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:682	たちまちに	금세	fix	defaults
+dict:jisjk:682	たちまちに終わった。	금세 끝났다.	fix	defaults
+dict:jisjk:682	たちまちに広がった。	금세 퍼졌다.	fix	defaults
+dict:jisjk:682	たちまちに消えた。	금세 사라졌다.	fix	defaults
+dict:jisjk:682	たちまち	금세	keep	defaults
+dict:jisjk:88538	割れ鍋	깨진 냄비	fix	defaults
+dict:jisjk:88538	割れ鍋を見た。	깨진 냄비를 보았다.	fix	defaults
+dict:jisjk:88538	割れ鍋がある。	깨진 냄비가 있다.	fix	defaults
+dict:jisjk:88538	「割れ鍋」	「깨진 냄비」	fix	defaults
+dict:jisjk:88538	鍋を洗った。	냄비를 씻었다.	keep	defaults
+dict:jisjk:173403	暁雲	새벽녘의 구름	fix	defaults
+dict:jisjk:173403	暁雲を見た。	새벽녘의 구름을 보았다.	fix	defaults
+dict:jisjk:173403	暁雲が見える。	새벽녘의 구름이 보인다.	fix	defaults
+dict:jisjk:173403	「暁雲」	「새벽녘의 구름」	fix	defaults
+dict:jisjk:173403	雲を見た。	구름을 보았다.	keep	defaults
+dict:jisjk:83693	爪切り	손톱깎이	keep	defaults
+dict:jisjk:83693	爪切りを買った。	손톱깎이를 샀다.	keep	defaults
+dict:jisjk:83693	爪切りがある。	손톱깎이가 있다.	keep	defaults
+dict:jisjk:83693	「爪切り」	「손톱깎이」	keep	defaults
+dict:jisjk:83693	爪切りばさみ	손톱깎이	keep	defaults
+dict:jisjk:253307	目アカ	눈곱	fix	defaults
+dict:jisjk:253307	目アカがある。	눈곱이 있다.	fix	defaults
+dict:jisjk:253307	「目アカ」	「눈곱」	fix	defaults
+dict:jisjk:253307	目ヤニ	눈곱	keep	defaults
+dict:jisjk:253307	目アカを見た。	눈곱을 보았다.	fix	defaults
+dict:jisjk:82642	跡かたづけ	뒷정리	fix	defaults
+dict:jisjk:82642	跡かたづけ。	뒷정리.	fix	defaults
+dict:jisjk:82642	「跡かたづけ」	「뒷정리」	fix	defaults
+dict:jisjk:82642	跡かたづけをする。	뒷정리를 한다.	fix	defaults
+dict:jisjk:82642	食事の跡かたづけ。	식사의 뒷정리.	fix	defaults
+dict:jisjk:82642	食事の跡かたづけをする。	식사의 뒷정리를 한다.	fix	defaults
+dict:jisjk:82642	夕食の跡かたづけを終えた。	저녁식사의 뒷정리를 끝냈다.	fix	defaults
+dict:jisjk:82642	跡かたづけが終わった。	뒷정리가 끝났다.	fix	defaults
+dict:jisjk:82642	後片付け	뒷정리	keep	defaults
+dict:jisjk:82642	後片付けをする。	뒷정리를 한다.	keep	defaults
+dict:jisjk:82642	部屋の後片付け。	방의 뒷정리.	keep	defaults
+dict:jisjk:82642	あとかたづけ	뒷정리	keep	defaults
+dict:jisjk:82642	机を片付ける。	책상을 정리한다.	keep	defaults
+dict:jisjk:82642	皿を洗った。	접시를 씻었다.	keep	defaults
+dict:jisjk:82642	皿洗い	접시닦이	keep	defaults
+dict:jisjk:82642	雨仕舞い	빗물막이	keep	defaults

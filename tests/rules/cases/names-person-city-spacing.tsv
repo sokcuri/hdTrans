@@ -1,0 +1,23 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:gloss	フロリアン・ゲルトナー	플로리안 게르트너	fix	lookup
+names:gloss	「フロリアン・ゲルトナー」	「플로리안 게르트너」	fix	lookup
+names:gloss	フロリアン・ゲルトナーが来た。	플로리안 게르트너가 왔다.	fix	lookup
+names:gloss	フロリアン・ゲルトナーの名前	플로리안 게르트너의 이름	fix	lookup
+names:gloss	フロリアン・ゲルトナーと会った。	플로리안 게르트너와 만났다.	fix	lookup
+names:gloss	監督フロリアン・ゲルトナー	감독 플로리안 게르트너	fix	lookup
+names:gloss	フロレンティーネ・ラーメ	플로렌틴 라메	fix	lookup
+names:gloss	「フロレンティーネ・ラーメ」	「플로렌틴 라메」	fix	lookup
+names:gloss	フロレンティーネ・ラーメが来た。	플로렌틴 라메가 왔다.	fix	lookup
+names:gloss	フロレンティーネ・ラーメの名前	플로렌틴 라메의 이름	fix	lookup
+names:gloss	フロレンティーネ・ラーメと会った。	플로렌틴 라메와 만났다.	fix	lookup
+names:gloss	俳優フロレンティーネ・ラーメ	배우 플로렌틴 라메	fix	lookup
+names:gloss	フロリアン・クライン	플로리안 클라인	keep	lookup
+names:gloss	フロリアン・フィッツ	플로리안 피츠	keep	lookup
+names:gloss	フロレンティン・ホフマン	플로렌타인 호프만	keep	lookup
+names:gloss	フロレンティーネ・ロスト・ファン・トニンヘン	플로렌틴 로스트 판 토닝언	keep	lookup
+names:gloss	フィレンツェ	피렌체	keep	lookup
+names:gloss	フィレンツェに行った。	피렌체에 갔다.	keep	lookup
+names:gloss	フロレンス・ナイチンゲール	플로렌스 나이팅게일	keep	lookup
+names:gloss	フロリダ州道A1A号線	플로리다주도 A1A호선	keep	lookup
+names:gloss	フレンチ・コネクション2	프렌치 커넥션 2	keep	lookup

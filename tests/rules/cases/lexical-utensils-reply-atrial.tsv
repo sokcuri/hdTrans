@@ -1,0 +1,36 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:28976	御箸	젓가락	fix	defaults
+dict:jisjk:28976	御箸を使う。	젓가락을 쓴다.	fix	defaults
+dict:jisjk:28976	御箸で食べる。	젓가락으로 먹는다.	fix	defaults
+dict:jisjk:28976	割り箸	소독저	keep	defaults
+dict:jisjk:28976	御飯	밥	keep	defaults
+dict:jisjk:28976	御箸を並べる。	젓가락을 늘어놓는다.	fix	defaults
+dict:jisjk:28976	御箸が落ちた。	젓가락이 떨어졌다.	fix	defaults
+dict:jisjk:28943	御鍋	냄비	fix	defaults
+dict:jisjk:28943	御鍋を洗う。	냄비를 씻는다.	fix	defaults
+dict:jisjk:28943	御鍋の蓋。	냄비의 뚜껑.	fix	defaults
+dict:jisjk:28943	鍋料理	전골	keep	defaults
+dict:jisjk:28943	御釜	솥	keep	defaults
+dict:jisjk:28943	御鍋を買った。	냄비를 샀다.	fix	defaults
+dict:jisjk:28943	御鍋に水を入れる。	냄비에 물을 넣는다.	fix	defaults
+dict:jisjk:28943	御鍋が熱い。	냄비가 뜨겁다.	fix	defaults
+dict:jisjk:23842	復啓	복계	fix	defaults
+dict:jisjk:23842	復啓と書く。	복계라고 쓴다.	fix	defaults
+dict:jisjk:23842	手紙の復啓。	편지의 복계.	fix	defaults
+dict:jisjk:23842	復啓の意味。	복계의 의미.	fix	defaults
+dict:jisjk:23842	拝啓	삼가 아뢰옵니다	keep	defaults
+dict:jisjk:23842	敬具	삼가 말씀 드렸습니다	keep	defaults
+dict:jisjk:23842	復命	복명	keep	defaults
+dict:jisjk:23842	復啓で始まる。	복계로 시작된다.	fix	defaults
+dict:jisjk:23842	復啓という言葉。	복계라는 말.	fix	defaults
+dict:jisjk:23842	復啓を使う。	복계를 쓴다.	fix	defaults
+dict:jisjk:236332	心房細動	심방세동	fix	defaults
+dict:jisjk:236332	心房細動の治療。	심방세동의 치료.	fix	defaults
+dict:jisjk:236332	心房細動を診断する。	심방세동을 진단한다.	fix	defaults
+dict:jisjk:236332	心房細動が起きる。	심방세동이 일어난다.	fix	defaults
+dict:jisjk:236332	心室細動	심실세동	keep	defaults
+dict:jisjk:236332	心房粗動	심방조동	keep	defaults
+dict:jisjk:236332	心房	심방	keep	defaults
+dict:jisjk:236332	心房細動の症状。	심방세동의 증상.	fix	defaults
+dict:jisjk:236332	心房細動を防ぐ。	심방세동을 막는다.	fix	defaults

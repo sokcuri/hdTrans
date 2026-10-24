@@ -1,0 +1,38 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.575553	日本エス・エイチ・エル	일본 에스에이치엘	fix	fixed
+dict:names.575553	「日本エス・エイチ・エル」	「일본 에스에이치엘」	fix	fixed
+dict:names.575553	日本エス・エイチ・エルの会社。	일본 에스에이치엘의 회사.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルの資料。	일본 에스에이치엘의 자료.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルの名前。	일본 에스에이치엘의 이름.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルが発表した。	일본 에스에이치엘이 발표했다.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルに連絡する。	일본 에스에이치엘에게 연락한다.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルと話す。	일본 에스에이치엘과 이야기한다.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルについて調べる。	일본 에스에이치엘에 대해 조사한다.	fix	fixed
+dict:names.575553	日本エス・エイチ・エルの社員。	일본 에스에이치엘의 사원.	fix	fixed
+dict:names.575553	ピーター・サヴィル	피터 새빌	keep	fixed
+dict:names.575553	日本アートメディア	일본아트미디어	keep	fixed
+dict:names.575553	日本分析工業	일본 분석 공업	keep	fixed
+dict:names.575553	日本コロムビア	일본 콜럼비아	keep	fixed
+dict:names.575553	日本電気	일본 전기	keep	fixed
+dict:names.575553	日本ゲーム大賞	일본 게임 대상	keep	fixed
+dict:names.575553	日本アカデミー賞	일본 아카데미상	keep	fixed
+dict:names.575553	日本アジア航空	일본 아시아 항공	keep	fixed
+dict:names.576038	日本野球連盟	일본 야구 연맹	fix	fixed
+dict:names.576038	「日本野球連盟」	「일본 야구 연맹」	fix	fixed
+dict:names.576038	日本野球連盟の大会。	일본 야구 연맹의 대회.	fix	fixed
+dict:names.576038	日本野球連盟の規則。	일본 야구 연맹의 규칙.	fix	fixed
+dict:names.576038	日本野球連盟の名前。	일본 야구 연맹의 이름.	fix	fixed
+dict:names.576038	日本野球連盟が発表した。	일본 야구 연맹이 발표했다.	fix	fixed
+dict:names.576038	日本野球連盟に連絡する。	일본 야구 연맹에 연락한다.	fix	fixed
+dict:names.576038	日本野球連盟と話す。	일본 야구 연맹과 이야기한다.	fix	fixed
+dict:names.576038	日本野球連盟について調べる。	일본 야구 연맹에 대해 조사한다.	fix	fixed
+dict:names.576038	日本野球連盟の選手。	일본 야구 연맹의 선수.	fix	fixed
+dict:names.576038	日本野球機構	일본 프로 야구	keep	fixed
+dict:names.576038	日本プロ野球	일본 프로 야구	keep	fixed
+dict:names.576038	日本高等学校野球連盟	일본 고등학교 야구 연맹	keep	fixed
+dict:names.576038	日本サッカー協会	일본 축구 협회	keep	fixed
+dict:names.576038	日本プロサッカーリーグ	일본 프로 축구 리그	keep	fixed
+dict:names.576038	日本ソフトボールリーグ	일본 소프트볼 리그	keep	fixed
+dict:names.576038	日本独立リーグ野球機構	일본독립리그야구기구	keep	fixed
+dict:names.576038	日本プロ野球選手会	일본프로야구선수회	keep	fixed

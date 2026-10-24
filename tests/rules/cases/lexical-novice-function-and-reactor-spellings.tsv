@@ -1,0 +1,69 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:194156	じゃくはいものだ。	풋내기다.	fix	defaults
+dict:jisjk:194156	あのじゃくはいものが来た。	그 풋내기가 왔다.	fix	defaults
+dict:jisjk:194156	じゃくはいものを呼んだ。	풋내기를 불렀다.	fix	defaults
+lookup:lexical-spelling	たちまち消えた。	금세 사라졌다.	keep	defaults
+lookup:lexical-spelling	たちまち雨が降った。	금세 비가 왔다.	keep	defaults
+lookup:lexical-spelling	たちまち集まった。	금세 모였다.	keep	defaults
+lookup:lexical-spelling	数日後に戻る。	며칠 후에 돌아온다.	keep	defaults
+lookup:lexical-spelling	数日後に帰った。	며칠 후에 돌아갔다.	keep	defaults
+lookup:lexical-spelling	数日後だった。	며칠 후였다.	keep	defaults
+lookup:lexical-spelling	あおにさいだ。	풋내기다.	keep	defaults
+lookup:lexical-spelling	ウッドペッカーが鳴いた。	딱따구리가 울었다.	keep	defaults
+lookup:lexical-spelling	石川啄木の本を読む。	이시카와 다쿠보쿠의 책을 읽는다.	keep	defaults
+lookup:lexical-spelling	テレビを見る。	텔레비전을 본다.	keep	defaults
+lookup:lexical-spelling	アイティーブイを使う。	공업용텔레비전을 쓴다.	keep	defaults
+lookup:lexical-spelling	数日前に会った。	며칠 전에 만났다.	keep	defaults
+lookup:lexical-spelling	数日間待った。	며칠간 기다렸다.	keep	defaults
+lookup:lexical-spelling	すぐに消えた。	곧바로 사라졌다.	keep	defaults
+lookup:lexical-spelling	一年後に会う。	일년 후에 만난다.	keep	defaults
+lookup:lexical-spelling	若者が来た。	젊은이가 왔다.	keep	defaults
+lookup:lexical-spelling	キツツキが鳴いた。	딱따구리가 울었다.	keep	defaults
+lookup:lexical-spelling	突然雨が降った。	갑자기 비가 왔다.	keep	defaults
+lookup:lexical-spelling	映像を見た。	영상을 보았다.	keep	defaults
+lookup:lexical-spelling	二日後に会う。	이틀 후에 만난다.	keep	defaults
+dict:jisjk:194156	彼はじゃくはいものだった。	그는 풋내기였다.	fix	defaults
+dict:jisjk:194156	そのじゃくはいものと話した。	그 풋내기와 이야기했다.	fix	defaults
+dict:jisjk:194156	じゃくはいものの話を聞いた。	풋내기의 이야기를 들었다.	fix	defaults
+dict:jisjk:194156	じゃくはいものも来た。	풋내기도 왔다.	fix	defaults
+dict:jisjk:194156	じゃくはいものだけが残った。	풋내기만이 남았다.	fix	defaults
+dict:jisjk:194156	じゃくはいものに教えた。	풋내기에게 가르쳤다.	fix	defaults
+dict:jisjk:194156	まだじゃくはいものです。	아직 풋내기입니다.	fix	defaults
+dict:jisjk:194156	「じゃくはいものだ」と言った。	「풋내기다」라고 말했다.	fix	defaults
+dict:jisjk:194156	じゃくはいものなら分かる。	풋내기라면 안다.	fix	defaults
+dict:jisjk:194156	じゃくはいものでも知っている。	풋내기라도 알고 있다.	fix	defaults
+dict:jisjk:194156	じゃくはいものではない。	풋내기가 아니다.	fix	defaults
+dict:jisjk:194156	じゃくはいものたちが集まった。	풋내기들이 모였다.	fix	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売。	카나가와 미쓰비시후소자동차판매.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売の資料。	카나가와 미쓰비시후소자동차판매의 자료.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売に行く。	카나가와 미쓰비시후소자동차판매에 간다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売を見る。	카나가와 미쓰비시후소자동차판매를 본다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売から来た。	카나가와 미쓰비시후소자동차판매로부터 왔다.	keep	defaults
+lookup:lexical-spelling	連続函数。	연속 함수.	keep	defaults
+lookup:lexical-spelling	連続函数を調べる。	연속 함수를 조사한다.	keep	defaults
+lookup:lexical-spelling	連続函数のグラフ。	연속 함수의 그래프.	keep	defaults
+lookup:lexical-spelling	連続函数を使う。	연속 함수를 쓴다.	keep	defaults
+lookup:lexical-spelling	連続函数がある。	연속 함수가 있다.	keep	defaults
+lookup:lexical-spelling	連続函数について学ぶ。	연속 함수에 대해 배운다.	keep	defaults
+lookup:lexical-spelling	炉心溶融。	노심 용융.	fix	defaults
+lookup:lexical-spelling	炉心溶融を防ぐ。	노심 용융을 막는다.	fix	defaults
+lookup:lexical-spelling	炉心溶融の原因。	노심 용융의 원인.	fix	defaults
+lookup:lexical-spelling	炉心溶融が起きた。	노심 용융이 일어났다.	fix	defaults
+lookup:lexical-spelling	炉心溶融について学ぶ。	노심 용융에 대해 배운다.	fix	defaults
+lookup:lexical-spelling	炉心溶融を調べる。	노심 용융을 조사한다.	fix	defaults
+lookup:lexical-spelling	連続関数を使う。	연속 함수를 쓴다.	keep	defaults
+lookup:lexical-spelling	函数を使う。	함수를 쓴다.	keep	defaults
+lookup:lexical-spelling	灌水を行う。	관수를 실시한다.	keep	defaults
+lookup:lexical-spelling	溶解を調べる。	용해를 조사한다.	keep	defaults
+lookup:lexical-spelling	融解を調べる。	융해를 조사한다.	keep	defaults
+lookup:lexical-spelling	JRバスに乗る。	JR 버스를 탄다.	keep	defaults
+lookup:lexical-spelling	CFカードを使う。	CF 카드를 쓴다.	keep	defaults
+lookup:lexical-spelling	1/fゆらぎを調べる。	1/f 흔들림을 조사한다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売は会社だ。	카나가와 미쓰비시후소자동차판매는 회사다.	keep	defaults
+lookup:lexical-spelling	「連続函数だ」と言った。	「연속 함수다」라고 말했다.	keep	defaults
+lookup:lexical-spelling	「炉心溶融だ」と言った。	「노심 용융이다」라고 말했다.	fix	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売ではない。	카나가와 미쓰비시후소자동차판매는 아니다.	keep	defaults
+lookup:lexical-spelling	連続函数ではない。	연속 함수가 아니다.	keep	defaults
+lookup:lexical-spelling	炉心溶融ではない。	노심 용융이 아니다.	fix	defaults
+lookup:reactor	原子炉を停止した。	원자로를 정지했다.	keep	defaults

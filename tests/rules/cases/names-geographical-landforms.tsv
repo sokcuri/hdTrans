@@ -1,0 +1,24 @@
+# 규칙: LEX-2
+rule	input	expected	kind	layer
+dict:names.41957	アラバト砂州	아라바트 사주	fix	lookup
+dict:names.41957	「アラバト砂州」	「아라바트 사주」	fix	lookup
+dict:names.41957	アラバト砂州。	아라바트 사주.	fix	lookup
+dict:names.41957	アラバト砂州の地図。	아라바트 사주의 지도.	fix	lookup
+dict:names.41957	アラバト砂州を調べた。	아라바트 사주를 조사했다.	fix	lookup
+dict:names.41957	アラバト砂州に着いた。	아라바트 사주에 도착했다.	fix	lookup
+dict:names.41957	アラバト砂州を歩いた。	아라바트 사주를 걸었다.	fix	lookup
+dict:names.41957	アラバト砂州は長い。	아라바트 사주는 길다.	fix	lookup
+dict:names.41957	アラバト砂州の写真を見た。	아라바트 사주의 사진을 보았다.	fix	lookup
+dict:names	砂州	사주	keep	lookup
+dict:names	砂州の地図。	사주의 지도.	keep	lookup
+dict:names	クルシュー砂州	쿠로니아 사주	keep	lookup
+dict:names	クルシュー砂州の地図。	쿠로니아 사주의 지도.	keep	lookup
+dict:names	喜望峰	희망봉	keep	lookup
+dict:names	喜望峰の地図。	희망봉의 지도.	keep	lookup
+dict:names	アラバト・サビエフ	아라바트 자베예프	keep	lookup
+dict:names	アラバマ州	앨라배마주	keep	lookup
+dict:names	アラビア半島	아라비아반도	keep	lookup
+dict:names	アラビア海	아라비아해	keep	lookup
+dict:names	アラバマ物語	앵무새 죽이기	keep	lookup
+dict:names	アラン・チューリング	앨런 튜링	keep	lookup
+dict:names	アラン・ドロン	알랭 들롱	keep	lookup

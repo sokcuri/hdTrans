@@ -1,0 +1,6 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+lexical:cleanup-11	「なんか怖い。」	「왠지 무서워.」	fix	defaults
+lexical:cleanup-11	「何か怖い。」	「왠지 무서워.」	fix	defaults
+lexical:cleanup-11	何かが怖い。	뭔가가 무섭다.	keep	defaults
+lexical:cleanup-11	なんとなく怖い。	왠지 무섭다.	keep	defaults

@@ -1,0 +1,18 @@
+# 규칙: LEX-1, LEX-3, LEX-4
+rule	input	expected	kind	layer
+names:terminal-kana	奇械人オオカミン	기계인 오오카민	fix	lookup
+names:terminal-kana	「奇械人オオカミン」	「기계인 오오카민」	fix	lookup
+names:terminal-kana	奇械人オオカミン。	기계인 오오카민.	fix	lookup
+names:terminal-kana	奇械人オオカミンが来た。	기계인 오오카민이 왔다.	fix	lookup
+names:terminal-kana	奇械人オオカミンは強い。	기계인 오오카민은 강하다.	fix	lookup
+names:terminal-kana	奇械人オオカミンを見た。	기계인 오오카민을 보았다.	fix	lookup
+names:terminal-kana	奇械人オオカミンと戦った。	기계인 오오카민과 싸웠다.	fix	lookup
+names:terminal-kana	奇械人オオカミンの名前。	기계인 오오카민의 이름.	fix	lookup
+names:terminal-kana	奇械人アルマジロン	기계인 아르마지론	keep	lookup
+names:terminal-kana	奇械人エレキイカ	기계인 에레키이카	keep	lookup
+names:terminal-kana	奇械人カメレオーン	기계인 카멜레온	keep	lookup
+names:terminal-kana	奇械人ハゲタカンが来た。	기계인 하게타칸이 왔다.	keep	lookup
+names:terminal-kana	奇械人ゴロンガメ	기계인 고롱가메	keep	lookup
+names:terminal-kana	奇械人メカゴリラ	기계인 메카고릴라	keep	lookup
+names:terminal-kana	小宵こなん	고요이 고난	keep	lookup
+names:terminal-kana	小宵 こなん	고요이 고난	keep	lookup

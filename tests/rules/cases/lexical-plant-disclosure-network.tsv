@@ -1,0 +1,23 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:206767	継子の尻拭い	며느리밑씻개	fix	defaults
+dict:jisjk:206767	継子の尻拭いの花。	며느리밑씻개의 꽃.	fix	defaults
+dict:jisjk:206767	継子の尻拭いが咲いた。	며느리밑씻개가 피었다.	fix	defaults
+dict:jisjk:206767	継子の尻拭いを見た。	며느리밑씻개를 보았다.	fix	defaults
+dict:jisjk:206767	継子の尻拭	며느리밑씻개	keep	defaults
+dict:jisjk:206767	継母	의붓어머니	keep	defaults
+dict:jisjk:206767	花が咲いた。	꽃이 피었다.	keep	defaults
+dict:jisjk:353813	継続開示	계속 공시	fix	defaults
+dict:jisjk:353813	継続開示の義務。	계속 공시의 의무.	fix	defaults
+dict:jisjk:353813	継続開示制度。	계속 공시 제도.	fix	defaults
+dict:jisjk:353813	継続開示を確認した。	계속 공시를 확인했다.	fix	defaults
+dict:jisjk:353813	業務を開始した。	업무를 개시했다.	keep	defaults
+dict:jisjk:353813	継続的な取引。	계속적인 거래.	keep	defaults
+dict:jisjk:353813	開始	개시	keep	defaults
+dict:jisjk:262032	網制御装置	네트워크 제어장치	fix	defaults
+dict:jisjk:262032	網制御装置を交換した。	네트워크 제어장치를 교환했다.	fix	defaults
+dict:jisjk:262032	網制御装置の故障。	네트워크 제어장치의 고장.	fix	defaults
+dict:jisjk:262032	網制御装置が必要だ。	네트워크 제어장치가 필요하다.	fix	defaults
+dict:jisjk:262032	制御装置	제어장치	keep	defaults
+dict:jisjk:262032	網戸	망창	keep	defaults
+dict:jisjk:262032	網目	그물코	keep	defaults

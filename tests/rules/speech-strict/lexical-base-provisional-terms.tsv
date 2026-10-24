@@ -1,0 +1,7 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:352791	「仮勘定を確認した」	「가계정을 확인했다」	fix	defaults
+dict:jisjk:60120	「仮小屋を建てた」	「임시 오두막을 지었다」	fix	defaults
+dict:jisjk:228716	「仮性クループの症状を調べた」	「가성 크루프의 증상을 조사했다」	fix	defaults
+dict:jisjk:352783	「仮格付けを発表した」	「잠정 등급을 발표했다」	fix	defaults
+dict:jisjk:229010	「仮道管の構造を調べた」	「헛물관 구조를 조사했다」	fix	defaults

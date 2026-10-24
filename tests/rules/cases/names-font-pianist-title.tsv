@@ -1,0 +1,26 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-4
+rule	input	expected	kind	layer
+names:gloss	フォント	폰트	keep	lookup
+names:gloss	フォントを選ぶ。	폰트를 선택한다.	keep	lookup
+names:gloss	このフォントを使う。	이 폰트를 쓴다.	keep	lookup
+names:gloss	フォントの名前。	폰트의 이름.	keep	lookup
+names:gloss	「フォント」	「폰트」	keep	lookup
+names:gloss	フジコ・ヘミング	후지코 헤밍	keep	lookup
+names:gloss	「フジコ・ヘミング」	「후지코 헤밍」	keep	lookup
+names:gloss	フジコ・ヘミングの演奏。	후지코 헤밍의 연주.	keep	lookup
+names:gloss	フジコ・ヘミングを知っている。	후지코 헤밍을 알고 있다.	keep	lookup
+names:gloss	フジ子・ヘミング	후지코 헤밍	keep	lookup
+names:gloss	フラガールと犬のチョコ	훌라 걸과 강아지 초코	fix	lookup
+names:gloss	「フラガールと犬のチョコ」	「훌라 걸과 강아지 초코」	fix	lookup
+names:gloss	フラガールと犬のチョコを見た。	훌라 걸과 강아지 초코를 보았다.	fix	lookup
+names:gloss	フラガールと犬のチョコの話。	훌라 걸과 강아지 초코의 이야기.	fix	lookup
+names:gloss	これはフラガールと犬のチョコだ。	이것은 훌라 걸과 강아지 초코다.	fix	lookup
+names:gloss	フラガール	훌라 걸스	keep	lookup
+names:gloss	ガールフレンド	걸프렌드	keep	lookup
+names:gloss	犬と猫	개와 고양이	keep	lookup
+names:gloss	フジテレビ	후지텔레비	keep	lookup
+names:gloss	フォンテーヌブロー	퐁텐블로	keep	lookup
+names:gloss	フォントン	폰톤	keep	lookup
+names:gloss	フラガリアメモリーズ	프라가리아 메모리즈	keep	lookup
+names:gloss	フライパン	프라이팬	keep	lookup
+names:gloss	フライング・ダッチマン	플라잉 더치맨	keep	lookup

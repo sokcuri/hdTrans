@@ -1,0 +1,22 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.44380	アルケーガンダムドライ	아르케 건담 드라이	fix	lookup
+dict:names.44380	「アルケーガンダムドライ」	「아르케 건담 드라이」	fix	lookup
+dict:names.44380	アルケーガンダムドライ。	아르케 건담 드라이.	fix	lookup
+dict:names.44380	アルケーガンダムドライの模型。	아르케 건담 드라이의 모형.	fix	lookup
+dict:names.44380	アルケーガンダムドライを見た。	아르케 건담 드라이를 보았다.	fix	lookup
+dict:names.44380	アルケーガンダムドライを調べた。	아르케 건담 드라이를 조사했다.	fix	lookup
+dict:names.44380	アルケーガンダムドライの写真。	아르케 건담 드라이의 사진.	fix	lookup
+dict:names.44380	アルケーガンダムドライが来た。	아르케 건담 드라이가 왔다.	fix	lookup
+dict:names.44380	アルケーガンダムドライとガンダム。	아르케 건담 드라이와 건담.	fix	lookup
+dict:names	ガンダム	건담	keep	lookup
+dict:names	アルケーガンダム	아르케 건담	keep	lookup
+dict:names	アルケー	아르케	keep	lookup
+dict:names	アルケーエンジェモン	아르케엔젤몬	keep	lookup
+dict:names	アルケー・アルマ	아르케 아르마	keep	lookup
+dict:names	ガンダムの模型。	건담의 모형.	keep	lookup
+dict:names	ガンダムを見た。	건담을 보았다.	keep	lookup
+dict:names	アルケーガンダムの模型。	아르케 건담의 모형.	keep	lookup
+dict:names	アルケーガンダムを見た。	아르케 건담을 보았다.	keep	lookup
+dict:names	アルケミストドライバー	알케미스트 드라이버	keep	lookup
+dict:names	アルケミスドライバー	알케미스 드라이버	keep	lookup

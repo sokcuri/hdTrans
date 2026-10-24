@@ -1,0 +1,10 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+lookup:jisjk:137374	「取り組もうともしない。」	「몰두하려고도 하지 않아.」	fix	defaults
+lookup:jisjk:136507	「実務に当たる。」	「실무를 맡을 거야.」	fix	defaults
+lookup:jisjk:67276	「東海テレビ放送を見た。」	「토카이 텔레비전방송을 봤어.」	fix	defaults
+lookup:jisjk:136469	「死ななきゃいけない。」	「죽지 않으면 안 돼.」	fix	defaults
+lookup:jisjk:240437	「粗製濫造を避ける。」	「조제남조를 피할 거야.」	fix	defaults
+lookup:names.5359	「ESPNワイド・ワールド・オブ・スポーツ・コンプレックスへ行く。」	「ESPN 와이드 월드 오브 스포츠 콤플렉스에 갈 거야.」	fix	fixed
+lookup:names.397720	「リンダ・デイ・ジョージさんだ。」	「린다 데이 조지 씨야.」	fix	fixed
+lookup:jisjk:136469	「死んではいけない。」	「죽어선 안 돼.」	keep	defaults

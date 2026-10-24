@@ -28,3 +28,1114 @@ dict:jisjk:128323	二人のケミストリー。	두 사람의 케미스트리.	
 dict:jisjk:43750	インフラストラクチャーを整える。	인프라스트럭처를 정돈한다.	fix	lookup
 dict:jisjk:261958	ファット	팻	fix	lookup
 dict:jisjk:158445	カジュアルドラッグ	가벼운 마약	keep	lookup
+dict:jisjk:227931	家蚊に刺された。	집모기에게 물렸다.	fix	global-stem
+dict:jisjk:227931	家蚊が飛ぶ。	집모기가 난다.	keep	defaults
+dict:jisjk:227931	家蚊を見つけた。	집모기를 찾아냈다.	keep	defaults
+dict:jisjk:227931	家蚊の幼虫だ。	집모기의 유충이다.	keep	defaults
+dict:jisjk:227931	家蚊は昆虫だ。	집모기는 곤충이다.	keep	defaults
+dict:jisjk:227931	小さな家蚊がいる。	작은 집모기가 있다.	keep	defaults
+dict:jisjk:227931	家蚊を調べる。	집모기를 조사한다.	keep	defaults
+dict:jisjk:227931	家蚊が多い。	집모기가 많다.	keep	defaults
+dict:jisjk:227931	家蚊に注意する。	집모기에 주의한다.	keep	defaults
+dict:jisjk:227931	家蚊と家蝿。	집모기와 집파리.	keep	defaults
+dict:jisjk:227931	蚊に刺された。	모기에 물렸다.	keep	defaults
+dict:jisjk:227931	家紋を調べる。	문장을 조사한다.	keep	defaults
+dict:jisjk:227931	家門を守る。	가문을 지킨다.	keep	defaults
+dict:jisjk:227931	地下家蚊の幼虫だ。	지하집모기의 유충이다.	keep	defaults
+dict:jisjk:227931	赤家蚊の幼虫だ。	집모기의 유충이다.	keep	defaults
+dict:jisjk:227931	家蝙蝠が飛ぶ。	집박쥐가 난다.	keep	defaults
+dict:jisjk:227931	家蝿が飛ぶ。	집파리가 난다.	keep	defaults
+dict:jisjk:227931	家蠅が飛ぶ。	집파리가 난다.	keep	defaults
+dict:jisjk:227931	家猫がいる。	집고양이가 있다.	keep	defaults
+dict:jisjk:227931	家蚊に刺される。	집모기에게 물린다.	fix	global-stem
+dict:jisjk:227931	小さな家蚊に刺された。	작은 집모기에게 물렸다.	fix	global-stem
+dict:jisjk:227931	その家蚊に刺された。	그 집모기에게 물렸다.	fix	global-stem
+dict:jisjk:170351	甘藷を食べる。	고구마를 먹는다.	fix	global-stem
+dict:jisjk:170351	甘藷が育つ。	고구마가 자란다.	fix	defaults
+dict:jisjk:170351	甘藷の栽培。	고구마의 재배.	fix	defaults
+dict:jisjk:170351	甘蔗を栽培する。	사탕수수를 재배한다.	keep	defaults
+dict:jisjk:170351	甘蔗の畑。	사탕수수의 밭.	keep	defaults
+dict:jisjk:170351	サトウキビを育てる。	사탕수수를 기른다.	keep	defaults
+dict:jisjk:110626	生息する。	서식한다.	keep	defaults
+dict:jisjk:110626	魚が生息する。	물고기가 서식한다.	keep	defaults
+dict:jisjk:110626	この森に生息する。	이 숲에 서식한다.	keep	defaults
+dict:jisjk:110626	生息している動物。	서식하고 있는 동물.	keep	defaults
+dict:jisjk:110626	生息動物を調べる。	서식 동물을 조사한다.	fix	defaults
+dict:jisjk:110626	生息動物の数。	서식 동물의 수.	fix	defaults
+dict:jisjk:110626	生殖を研究する。	생식을 연구한다.	keep	defaults
+dict:jisjk:110626	棲息している。	서식하고 있다.	keep	defaults
+dict:jisjk:110626	生息動物を守る。	서식 동물을 지킨다.	fix	defaults
+dict:jisjk:97082	球果を拾う。	구과를 줍는다.	fix	defaults
+dict:jisjk:97082	球果の形。	구과의 형태.	fix	defaults
+dict:jisjk:97082	丸い果実を拾う。	둥근 과실을 줍는다.	keep	defaults
+dict:jisjk:97082	果物を食べる。	과일을 먹는다.	keep	defaults
+dict:jisjk:97082	球果を調べる。	구과를 조사한다.	fix	defaults
+dict:jisjk:358796	生物多様性条約を守る。	생물 다양성 조약을 지킨다.	fix	defaults
+dict:jisjk:358796	生物多様性条約に参加する。	생물 다양성 조약에 참가한다.	fix	defaults
+dict:jisjk:358796	生物多様性条約の締結。	생물 다양성 조약의 체결.	fix	defaults
+dict:jisjk:358796	条約を守る。	조약을 지킨다.	keep	defaults
+dict:jisjk:358796	条件を確認する。	조건을 확인한다.	keep	defaults
+dict:w:26	あっと言う間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
+dict:w:26	あっと言う間に終わった。	순식간에 끝났다.	fix	lookup
+dict:w:26	あっと言う間に消えた。	순식간에 사라졌다.	fix	lookup
+dict:w:26	あっと言う間だった。	순식간이었다.	keep	lookup
+dict:w:26	あっという間に夏が終わった。	순식간에 여름이 끝났다.	keep	lookup
+dict:jisjk:106853	御新香を食べた。	채소 절임을 먹었다.	fix	lookup
+dict:jisjk:106853	朝食に御新香を添えた。	아침 식사에 채소 절임을 곁들였다.	fix	lookup
+dict:jisjk:106853	御新香を注文した。	채소 절임을 주문했다.	fix	lookup
+dict:jisjk:106853	キムチを食べた。	김치를 먹었다.	keep	lookup
+dict:jisjk:106853	漬物を食べた。	채소 절임을 먹었다.	keep	lookup
+dict:w:12590	准許を得た。	허가를 얻었다.	fix	lookup
+dict:w:12590	准許が必要だ。	허가가 필요하다.	fix	lookup
+dict:w:12590	准許を求めた。	허가를 구했다.	fix	lookup
+dict:w:12590	許可を得た。	허가를 얻었다.	keep	lookup
+dict:w:12590	許可が必要だ。	허가가 필요하다.	keep	lookup
+dict:jisjk:267604	なま干しにした。	반건조로 했다.	fix	lookup
+dict:jisjk:267604	生乾にした。	반건조로 했다.	fix	lookup
+dict:jisjk:267604	これはなま干しだ。	이것은 반건조다.	fix	lookup
+dict:jisjk:267604	これは生乾だ。	이것은 반건조다.	fix	lookup
+dict:jisjk:267604	なま干しが好きだ。	반건조를 좋아한다.	fix	lookup
+dict:jisjk:267604	生乾が好きだ。	반건조를 좋아한다.	fix	lookup
+dict:jisjk:267604	生魚を食べた。	날생선을 먹었다.	keep	lookup
+dict:jisjk:267604	干物を食べた。	건어물을 먹었다.	keep	lookup
+dict:jisjk:267604	魚を干した。	물고기를 말렸다.	keep	lookup
+dict:jisjk:267604	魚を焼いた。	생선을 구웠다.	keep	lookup
+dict:jisjk:249543	柱掛けを置いた。	기둥 장식을 두었다.	fix	lookup
+dict:jisjk:249543	柱掛けがある。	기둥 장식이 있다.	fix	lookup
+dict:jisjk:249543	柱掛けを買った。	기둥 장식을 샀다.	fix	lookup
+dict:jisjk:249543	柱掛けを見た。	기둥 장식을 보았다.	fix	lookup
+dict:jisjk:249543	古い柱掛け。	낡은 기둥 장식.	fix	lookup
+dict:jisjk:249543	柱掛けの絵。	기둥 장식의 그림.	fix	lookup
+dict:jisjk:249543	柱に絵を掛けた。	기둥에 그림을 걸었다.	keep	lookup
+dict:jisjk:249543	壁に絵を掛けた。	벽에 그림을 걸었다.	keep	lookup
+dict:jisjk:254248	宿入りの日を待った。	귀향 휴가의 날을 기다렸다.	fix	lookup
+dict:jisjk:254248	宿入りは明日だ。	귀향 휴가는 내일이다.	fix	lookup
+dict:jisjk:254248	宿入りが楽しみだ。	귀향 휴가가 기다려진다.	fix	lookup
+dict:jisjk:254248	宿入りを終えた。	귀향 휴가를 끝냈다.	fix	lookup
+dict:jisjk:254248	宿入りの支度。	귀향 휴가의 준비.	fix	lookup
+dict:jisjk:254248	次の宿入り。	다음 귀향 휴가.	fix	lookup
+dict:jisjk:254248	宿を探した。	숙소를 찾았다.	keep	lookup
+dict:jisjk:254248	休暇を取った。	휴가를 얻었다.	keep	lookup
+dict:jisjk:250151	早蒔きを試した。	조기 파종을 시험했다.	fix	lookup
+dict:jisjk:250151	早蒔きが必要だ。	조기 파종이 필요하다.	fix	lookup
+dict:jisjk:250151	早蒔きの準備。	조기 파종의 준비.	fix	lookup
+dict:jisjk:250151	今年は早蒔きだ。	금년은 조기 파종이다.	fix	lookup
+dict:jisjk:250151	早蒔きに適した品種。	조기 파종에 적합한 품종.	fix	lookup
+dict:jisjk:250151	早蒔きの時期。	조기 파종의 시기.	fix	lookup
+dict:jisjk:250151	春に種を蒔いた。	봄에 씨를 뿌렸다.	keep	lookup
+dict:jisjk:250151	畑へ行った。	밭에 갔다.	keep	lookup
+dict:jisjk:254033	訳業に専念した。	번역 작업에 전념했다.	fix	lookup
+dict:jisjk:254033	彼の訳業を支えた。	그의 번역 작업을 지탱했다.	fix	lookup
+dict:jisjk:254033	訳業を続けた。	번역 작업을 계속했다.	fix	lookup
+dict:jisjk:254033	長年の訳業。	오랜 세월의 번역 작업.	fix	lookup
+dict:jisjk:254033	訳業を完成させた。	번역 작업을 완성시켰다.	fix	lookup
+dict:jisjk:254033	訳業の成果。	번역 작업의 성과.	fix	lookup
+dict:jisjk:254033	翻訳を読んだ。	번역을 읽었다.	keep	lookup
+dict:jisjk:254033	仕事を終えた。	일을 끝냈다.	keep	lookup
+dict:jisjk:250151	今年は早蒔きした。	금년은 조기 파종했다.	fix	lookup
+dict:jisjk:250151	来年も早蒔きする。	내년도 조기 파종한다.	fix	lookup
+dict:jisjk:250151	早蒔きして育てた。	조기 파종해 길렀다.	fix	lookup
+dict:jisjk:250151	早蒔きをした。	조기 파종을 했다.	fix	lookup
+dict:jisjk:254248	宿入りから帰ってきた。	귀향 휴가로부터 돌아왔다.	fix	lookup
+dict:jisjk:254248	奉公人は宿入りを願った。	고용인은 귀향 휴가를 바랐다.	fix	lookup
+dict:jisjk:249543	柱掛けを壁に移した。	기둥 장식을 벽으로 옮겼다.	fix	lookup
+dict:jisjk:249543	新しい柱掛けがほしい。	새로운 기둥 장식을 갖고 싶다.	fix	lookup
+dict:jisjk:254033	この訳業は十年かかった。	이 번역 작업은 10년 걸렸다.	fix	lookup
+dict:jisjk:254033	訳業に励んだ。	번역 작업에 힘썼다.	fix	lookup
+dict:jisjk:124310	あさぶろを楽しむ。	아침 목욕을 즐긴다.	fix	defaults
+dict:jisjk:124310	あさぶろの時間。	아침 목욕의 시간.	fix	defaults
+dict:jisjk:124310	あさぶろが好きだ。	아침 목욕을 좋아한다.	fix	defaults
+dict:jisjk:124310	あさぶろの習慣。	아침 목욕의 습관.	fix	defaults
+dict:jisjk:124310	あさぶろは気持ちがいい。	아침 목욕은 기분이 좋다.	fix	defaults
+dict:jisjk:124310	朝風呂を楽しむ。	아침 목욕을 즐긴다.	keep	defaults
+dict:jisjk:124310	朝ぶろが好きだ。	아침 목욕을 좋아한다.	keep	defaults
+dict:jisjk:124310	風呂に入る。	목욕한다.	keep	defaults
+dict:jisjk:124813	あみどを閉める。	방충망을 닫는다.	fix	defaults
+dict:jisjk:124813	あみどを開ける。	방충망을 연다.	fix	defaults
+dict:jisjk:124813	あみどを洗う。	방충망을 씻는다.	fix	defaults
+dict:jisjk:124813	あみどが壊れた。	방충망이 망가졌다.	fix	defaults
+dict:jisjk:124813	あみどを買う。	방충망을 산다.	fix	defaults
+dict:jisjk:124813	網戸を閉める。	망창을 닫는다.	keep	defaults
+dict:jisjk:124813	窓を閉める。	창을 닫는다.	keep	defaults
+dict:jisjk:124813	門を閉める。	문을 닫는다.	keep	defaults
+dict:jisjk:124813	戸を開ける。	문을 연다.	keep	defaults
+dict:jisjk:103359	W杯で優勝した。	월드컵에서 우승했다.	fix	defaults
+dict:jisjk:103359	W杯に出場する。	월드컵에 출전한다.	fix	defaults
+dict:jisjk:103359	W杯の決勝。	월드컵의 결승.	fix	defaults
+dict:jisjk:103359	W杯が始まる。	월드컵이 시작된다.	fix	defaults
+dict:jisjk:103359	W杯を観戦する。	월드컵을 관전한다.	fix	defaults
+dict:jisjk:103359	ワールドカップで優勝した。	월드컵에서 우승했다.	keep	defaults
+dict:jisjk:103359	カップを持つ。	컵을 가진다.	keep	defaults
+dict:jisjk:103359	杯を持つ。	잔을 가진다.	keep	defaults
+dict:jisjk:103359	W杯の予選。	월드컵의 예선.	fix	defaults
+dict:jisjk:103359	今年のW杯。	금년의 월드컵.	fix	defaults
+dict:jisjk:103359	サッカーのW杯。	축구의 월드컵.	fix	defaults
+dict:jisjk:103359	W杯の試合。	월드컵의 시합.	fix	defaults
+dict:jisjk:103359	ワールドカップを観戦する。	월드컵을 관전한다.	keep	defaults
+dict:jisjk:103359	Wを入力する。	W를 입력한다.	keep	defaults
+dict:jisjk:103359	Ｗ杯の決勝。	월드컵의 결승.	fix	defaults
+dict:jisjk:198735	せみしぐれが聞こえる。	매미 떼의 울음소리가 들린다.	fix	lookup
+dict:jisjk:198735	せみしぐれを聞いた。	매미 떼의 울음소리를 들었다.	fix	lookup
+dict:jisjk:198735	遠くのせみしぐれ。	먼 매미 떼의 울음소리.	fix	lookup
+dict:jisjk:198735	せみしぐれがやんだ。	매미 떼의 울음소리가 그쳤다.	fix	lookup
+dict:jisjk:198735	夏のせみしぐれ。	여름의 매미 떼의 울음소리.	fix	lookup
+dict:jisjk:198735	せみしぐれに包まれた。	매미 떼의 울음소리에 싸였다.	fix	lookup
+dict:jisjk:198735	蝉の声が聞こえる。	매미의 소리가 들린다.	keep	lookup
+dict:jisjk:198735	雨の音が聞こえる。	비의 소리가 들린다.	keep	lookup
+dict:jisjk:176678	彼はくろうしょうだ。	그는 걱정 많은 성격이다.	fix	lookup
+dict:jisjk:176678	くろうしょうの父。	걱정 많은 성격의 아버지.	fix	lookup
+dict:jisjk:176678	生まれつきくろうしょうだ。	선천적으로 걱정 많은 성격이다.	fix	lookup
+dict:jisjk:176678	くろうしょうは変わらない。	걱정 많은 성격은 변함없다.	fix	lookup
+dict:jisjk:176678	くろうしょうの母。	걱정 많은 성격의 어머니.	fix	lookup
+dict:jisjk:176678	くろうしょうを直したい。	걱정 많은 성격을 고치고 싶다.	fix	lookup
+dict:jisjk:176678	彼は苦労性だ。	그는 걱정 많은 성격이다.	keep	lookup
+dict:jisjk:176678	心配する必要はない。	걱정할 필요는 없다.	keep	lookup
+dict:i:5844	長いものには巻かれろ。	강자에게는 굽혀라.	fix	lookup
+dict:i:5845	長い物には巻かれろ。	강자에게는 굽혀라.	fix	lookup
+dict:i:5846	長い物には巻かれよ。	강자에게는 굽혀라.	fix	lookup
+dict:i:5844	「長いものには巻かれろ」と言った。	「강자에게는 굽혀라」라고 말했다.	fix	lookup
+dict:i:5845	「長い物には巻かれろ」と言った。	「강자에게는 굽혀라」라고 말했다.	fix	lookup
+dict:i:5846	「長い物には巻かれよ」と言った。	「강자에게는 굽혀라」라고 말했다.	fix	lookup
+dict:i:5844	長い物を運んだ。	긴 것을 옮겼다.	keep	lookup
+dict:i:5845	布を体に巻いた。	천을 몸에 감았다.	keep	lookup
+dict:i:5846	短いものを選んだ。	짧은 것을 선택했다.	keep	lookup
+dict:jisjk:40374	いせえびを食べる。	닭새우를 먹는다.	fix	defaults
+dict:jisjk:40374	いせえびを捕まえる。	닭새우를 잡는다.	fix	defaults
+dict:jisjk:40374	いせえびがいる。	닭새우가 있다.	fix	defaults
+dict:jisjk:40374	いせえびの料理。	닭새우의 요리.	fix	defaults
+dict:jisjk:40374	いせえびの殻。	닭새우의 껍질.	fix	defaults
+dict:jisjk:40374	イセエビを食べる。	닭새우를 먹는다.	keep	defaults
+dict:jisjk:40374	エビを食べる。	새우를 먹는다.	keep	defaults
+dict:jisjk:40374	大きなエビを見た。	큰 새우를 보았다.	keep	defaults
+dict:jisjk:125992	いとざくらが咲く。	수양벚나무가 핀다.	fix	defaults
+dict:jisjk:125992	いとざくらを植える。	수양벚나무를 심는다.	fix	defaults
+dict:jisjk:125992	いとざくらの花。	수양벚나무의 꽃.	fix	defaults
+dict:jisjk:125992	いとざくらが揺れる。	수양벚나무가 흔들린다.	fix	defaults
+dict:jisjk:125992	いとざくらを見た。	수양벚나무를 보았다.	fix	defaults
+dict:jisjk:125992	いとやなぎが揺れる。	수양 버들이 흔들린다.	keep	defaults
+dict:jisjk:125992	桜が咲く。	벚꽃이 핀다.	keep	defaults
+dict:jisjk:125992	木を植える。	나무를 심는다.	keep	defaults
+dict:jisjk:126269	引き潮を待つ。	썰물을 기다린다.	keep	defaults
+dict:jisjk:126269	満ち潮を待つ。	밀물을 기다린다.	keep	defaults
+dict:jisjk:126269	潮が引く。	조수가 빠진다.	keep	defaults
+dict:jisjk:40373	いずみ製菓の菓子。	이즈미 제과의 과자.	fix	defaults
+dict:jisjk:40373	いずみ製菓の工場。	이즈미 제과의 공장.	fix	defaults
+dict:jisjk:40373	いずみ製菓で働く。	이즈미 제과에서 일한다.	fix	defaults
+dict:jisjk:40373	いずみ製菓の商品。	이즈미 제과의 상품.	fix	defaults
+dict:jisjk:40373	いずみ製菓がある。	이즈미 제과가 있다.	fix	defaults
+dict:jisjk:40373	いずみ製菓の名前。	이즈미 제과의 이름.	fix	defaults
+dict:jisjk:40373	製菓会社で働く。	제과 회사에서 일한다.	keep	defaults
+dict:jisjk:40373	製菓会社の工場。	제과 회사의 공장.	keep	defaults
+dict:jisjk:40373	製菓の技術。	제과의 기술.	keep	defaults
+dict:jisjk:40373	除草剤を使う。	제초제를 쓴다.	keep	defaults
+dict:jisjk:40373	除草する。	제초한다.	keep	defaults
+dict:jisjk:40373	草を刈る。	풀을 벤다.	keep	defaults
+dict:jisjk:40373	いずみさんが来た。	이즈미 씨가 왔다.	keep	defaults
+dict:jisjk:40373	お菓子を作る。	과자를 만든다.	keep	defaults
+dict:jisjk:40373	工場で働く。	공장에서 일한다.	keep	defaults
+dict:jisjk:126338	色直しを終えた。	의상 교체를 끝냈다.	fix	lookup
+dict:jisjk:126338	色直しの時間だ。	의상 교체의 시간이다.	fix	lookup
+dict:jisjk:126338	花嫁が色直しした。	신부가 의상 교체했다.	fix	lookup
+dict:jisjk:126338	色直しを済ませた。	의상 교체를 끝마쳤다.	fix	lookup
+dict:jisjk:126338	色直しが必要だ。	의상 교체가 필요하다.	fix	lookup
+dict:jisjk:126338	色直しの準備。	의상 교체의 준비.	fix	lookup
+dict:jisjk:126338	色直しを待った。	의상 교체를 기다렸다.	fix	lookup
+dict:jisjk:126338	色直しを始めた。	의상 교체를 시작했다.	fix	lookup
+dict:jisjk:126338	色直しして戻った。	의상 교체해 돌아왔다.	fix	lookup
+dict:jisjk:126338	二度目の色直し。	두 번째의 의상 교체.	fix	lookup
+dict:jisjk:126338	出産後の色直し。	출산 후의 의상 교체.	fix	lookup
+dict:jisjk:126338	色直しは三回だ。	의상 교체는 세 번이다.	fix	lookup
+dict:jisjk:126338	服を替えた。	옷을 바꾸었다.	keep	lookup
+dict:jisjk:126338	花嫁は白い服を着た。	신부는 흰 옷을 입었다.	keep	lookup
+dict:jisjk:126338	衣装を選んだ。	의상을 선택했다.	keep	lookup
+dict:jisjk:126338	着物を染め直した。	기모노를 다시 염색했다.	keep	lookup
+dict:jisjk:227500	油いためを作った。	기름볶음을 만들었다.	fix	lookup
+dict:jisjk:227500	油いためを食べた。	기름볶음을 먹었다.	fix	lookup
+dict:jisjk:227500	油いためを注文した。	기름볶음을 주문했다.	fix	lookup
+dict:jisjk:227500	油いためにした。	기름볶음으로 했다.	fix	lookup
+dict:jisjk:227500	油いためが好きだ。	기름볶음을 좋아한다.	fix	lookup
+dict:jisjk:227500	これは油いためだ。	이것은 기름볶음이다.	fix	lookup
+dict:jisjk:227500	炒め物を作った。	볶음 요리를 만들었다.	keep	lookup
+dict:jisjk:227500	揚げ物を作った。	튀김을 만들었다.	keep	lookup
+dict:jisjk:227500	煮物を食べた。	조림을 먹었다.	keep	lookup
+dict:jisjk:227500	蒸し物を食べた。	찜을 먹었다.	keep	lookup
+dict:s:97	ちゃんこを作った。	창코를 만들었다.	fix	lookup
+dict:s:97	ちゃんこを食べた。	창코를 먹었다.	fix	lookup
+dict:s:97	ちゃんこがおいしい。	창코가 맛있다.	fix	lookup
+dict:s:9436	ちゃんこ鍋を作った。	창코나베를 만들었다.	fix	lookup
+dict:s:9436	ちゃんこ鍋を食べた。	창코나베를 먹었다.	fix	global-stem
+dict:s:9436	ちゃんこ鍋がおいしい。	창코나베가 맛있다.	fix	lookup
+dict:s:9436	ちゃんこ鍋を注文した。	창코나베를 주문했다.	fix	lookup
+dict:s:9436	ちゃんこ鍋ではない。	창코나베가 아니다.	fix	lookup
+dict:s:97	ちゃんこは食べない。	창코는 먹지 않는다.	fix	lookup
+dict:s:9436	ちゃんこ鍋を食べない。	창코나베를 먹지 않는다.	fix	global-stem
+dict:s:97	鍋料理を食べた。	전골을 먹었다.	keep	global-stem
+dict:s:97	鍋を買った。	냄비를 샀다.	keep	lookup
+dict:s:97	ちゃんと食べた。	제대로 먹었다.	keep	lookup
+dict:jisjk:244968	出突っ張りの役だ。	전 장면 출연의 역이다.	fix	lookup
+dict:jisjk:244968	彼は出突っ張りだった。	그는 전 장면 출연이었다.	fix	lookup
+dict:jisjk:244968	出突っ張りの俳優。	전 장면 출연의 배우.	fix	lookup
+dict:jisjk:244968	出突っ張りを避けた。	전 장면 출연을 피했다.	fix	lookup
+dict:jisjk:244968	舞台で出突っ張りだ。	무대에서 전 장면 출연이다.	fix	lookup
+dict:jisjk:244968	出突っ張りで疲れた。	전 장면 출연으로 지쳤다.	fix	lookup
+dict:jisjk:244977	出突っ張りの配役。	전 장면 출연의 배역.	fix	lookup
+dict:jisjk:244977	出突っ張りは大変だ。	전 장면 출연은 힘들다.	fix	lookup
+dict:jisjk:244977	今回は出突っ張りだ。	이번에는 전 장면 출연이다.	fix	lookup
+dict:jisjk:244977	出突っ張りが続いた。	전 장면 출연이 계속되었다.	fix	lookup
+dict:jisjk:244977	出突っ張りに驚いた。	전 장면 출연에 놀랐다.	fix	lookup
+dict:jisjk:244977	出突っ張りを覚悟した。	전 장면 출연을 각오했다.	fix	lookup
+dict:jisjk:244968	舞台に出た。	무대에 나왔다.	keep	lookup
+dict:jisjk:244968	俳優が出演した。	배우가 출연했다.	keep	lookup
+dict:jisjk:244977	出ずっぱりが続いた。	연속 출연이 계속되었다.	keep	lookup
+dict:jisjk:244977	朝から外出していた。	아침부터 외출하고 있었다.	keep	lookup
+dict:jisjk:40414	うぐいすが鳴く。	휘파람새가 운다.	fix	defaults
+dict:jisjk:40414	うぐいすを見た。	휘파람새를 보았다.	fix	defaults
+dict:jisjk:40414	うぐいすの声。	휘파람새의 목소리.	fix	defaults
+dict:jisjk:40414	うぐいすが飛ぶ。	휘파람새가 난다.	fix	defaults
+dict:jisjk:40414	うぐいすの巣。	휘파람새의 둥지.	fix	defaults
+dict:jisjk:40414	ウグイスが鳴く。	휘파람새가 운다.	keep	defaults
+dict:jisjk:40414	カッコウが鳴く。	뻐꾸기가 운다.	keep	defaults
+dict:jisjk:40414	鳥が鳴く。	새가 운다.	keep	defaults
+dict:jisjk:164911	おおやけのばで話す。	공개석상에서 이야기한다.	fix	defaults
+dict:jisjk:164911	おおやけのばで発言する。	공개석상에서 발언한다.	fix	defaults
+dict:jisjk:164911	おおやけのばに出る。	공개석상에 나온다.	fix	defaults
+dict:jisjk:164911	おおやけのばの発言。	공개석상의 발언.	fix	defaults
+dict:jisjk:164911	おおやけのばを避ける。	공개석상을 피한다.	fix	defaults
+dict:jisjk:164911	秘密の場所で話す。	비밀의 장소에서 이야기한다.	keep	defaults
+dict:jisjk:164911	国家機関の職員。	국가기관의 직원.	keep	defaults
+dict:jisjk:164911	公園で話す。	공원에서 이야기한다.	keep	defaults
+dict:jisjk:365522	うっとりする。	넋을 잃는다.	fix	defaults
+dict:jisjk:365522	うっとりした。	넋을 잃었다.	fix	defaults
+dict:jisjk:365522	うっとりしている。	넋을 잃고 있다.	fix	defaults
+dict:jisjk:365523	うっとりとした。	넋을 잃었다.	fix	defaults
+dict:jisjk:365523	うっとりとする。	넋을 잃는다.	fix	defaults
+dict:jisjk:365523	うっとりと見つめる。	넋을 잃고 바라본다.	keep	defaults
+dict:jisjk:365522	うっとりしてしまった。	황홀해졌다.	keep	defaults
+dict:jisjk:365522	歌にうっとりする。	노래에 넋을 잃는다.	fix	defaults
+dict:jisjk:365522	うっとりしない。	넋을 잃지 않는다.	fix	defaults
+dict:jisjk:365523	うっとりとしない。	넋을 잃지 않는다.	fix	defaults
+dict:jisjk:365522	うっとり見つめる。	넋을 잃고 바라본다.	keep	defaults
+dict:jisjk:365522	魂を失う。	영혼을 잃는다.	keep	defaults
+dict:jisjk:365522	気を失う。	정신을 잃는다.	keep	defaults
+dict:jisjk:365522	魂を失った。	영혼을 잃었다.	keep	defaults
+dict:jisjk:365522	気を失った。	정신을 잃었다.	keep	defaults
+dict:jisjk:365523	うっとりと見とれる。	넋을 잃고 바라본다.	keep	defaults
+dict:jisjk:40477	おさななじみと話す。	소꿉친구와 이야기한다.	fix	defaults
+dict:jisjk:40477	おさななじみと遊ぶ。	소꿉친구와 논다.	fix	defaults
+dict:jisjk:40477	おさななじみと会った。	소꿉친구와 만났다.	fix	defaults
+dict:jisjk:40477	おさななじみと暮らす。	소꿉친구와 산다.	fix	defaults
+dict:jisjk:40477	おさななじみと出かける。	소꿉친구와 나간다.	fix	defaults
+dict:jisjk:40477	おさななじみと歩く。	소꿉친구와 걷는다.	fix	defaults
+dict:jisjk:40477	おさななじみと話した。	소꿉친구와 이야기했다.	fix	defaults
+dict:jisjk:40477	幼なじみ。	소꿉친구.	keep	defaults
+dict:jisjk:40477	幼馴染。	소꿉친구.	keep	defaults
+dict:jisjk:40477	幼なじみと話す。	소꿉친구와 이야기한다.	keep	defaults
+dict:jisjk:40477	友達と話す。	친구와 이야기한다.	keep	defaults
+dict:jisjk:40477	親友に会った。	친구를 만났다.	keep	defaults
+dict:jisjk:40477	同級生が来た。	동급생이 왔다.	keep	defaults
+dict:jisjk:40477	昔の友達。	옛 친구.	keep	defaults
+dict:jisjk:40477	古い友人。	오랜 친구.	keep	defaults
+dict:jisjk:165717	おととし。	재작년.	fix	defaults
+dict:jisjk:165717	おととしの夏。	재작년 여름.	fix	defaults
+dict:jisjk:165717	おととしの冬。	재작년 겨울.	fix	defaults
+dict:jisjk:165717	おととしに来た。	재작년에 왔다.	fix	defaults
+dict:jisjk:165717	おととしから住んでいる。	재작년부터 살고 있다.	fix	defaults
+dict:jisjk:165717	おととしまで働いた。	재작년까지 일했다.	fix	defaults
+dict:jisjk:165717	これはおととしの写真だ。	이것은 재작년의 사진이다.	fix	defaults
+dict:jisjk:165717	去年。	작년.	keep	defaults
+dict:jisjk:165717	一昨年。	재작년.	keep	defaults
+dict:jisjk:165717	来年。	내년.	keep	defaults
+dict:jisjk:165717	今年。	금년.	keep	defaults
+dict:jisjk:165717	昨年。	작년.	keep	defaults
+dict:jisjk:165717	再来年。	후년.	keep	defaults
+dict:jisjk:165717	おととい。	그저께.	keep	defaults
+dict:jisjk:165717	昨日。	어제.	keep	defaults
+dict:jisjk:106678	おはし。	젓가락.	fix	defaults
+dict:jisjk:106678	おはしを使う。	젓가락을 쓴다.	fix	defaults
+dict:jisjk:106678	おはしを持つ。	젓가락을 가진다.	fix	defaults
+dict:jisjk:106678	おはしで食べる。	젓가락으로 먹는다.	fix	defaults
+dict:jisjk:106678	おはしがない。	젓가락이 없다.	fix	defaults
+dict:jisjk:106678	おはしを洗う。	젓가락을 씻는다.	fix	defaults
+dict:jisjk:106678	おはしを買った。	젓가락을 샀다.	fix	defaults
+dict:jisjk:106678	箸を使う。	젓가락을 쓴다.	keep	defaults
+dict:jisjk:106678	割り箸。	소독저.	keep	defaults
+dict:jisjk:106678	橋を渡る。	다리를 건넌다.	keep	defaults
+dict:jisjk:106678	端に置く。	구석에 둔다.	keep	defaults
+dict:jisjk:106678	お菓子を食べる。	과자를 먹는다.	keep	defaults
+dict:jisjk:106678	おはよう。	좋은 아침.	keep	defaults
+dict:jisjk:106678	スプーンを使う。	스푼을 쓴다.	keep	defaults
+dict:jisjk:106678	茶碗を洗う。	밥공기를 씻는다.	keep	defaults
+dict:jisjk:162647	おが粉。	톱밥.	fix	defaults
+dict:jisjk:162647	おが粉を集める。	톱밥을 모은다.	fix	defaults
+dict:jisjk:162647	おが粉を燃やす。	톱밥을 태운다.	fix	defaults
+dict:jisjk:162647	おが粉が飛ぶ。	톱밥이 난다.	fix	defaults
+dict:jisjk:162647	おが粉の山。	톱밥의 산.	fix	defaults
+dict:jisjk:162647	おが粉を掃除する。	톱밥을 청소한다.	fix	defaults
+dict:jisjk:162647	木から出たおが粉。	나무로부터 나온 톱밥.	fix	defaults
+dict:jisjk:162647	おがくず。	톱밥.	keep	defaults
+dict:jisjk:162647	おが屑。	톱밥.	keep	defaults
+dict:jisjk:162647	木屑を集める。	톱밥을 모은다.	keep	defaults
+dict:jisjk:162647	花粉が飛ぶ。	꽃가루가 난다.	keep	defaults
+dict:jisjk:162647	花を買う。	꽃을 산다.	keep	defaults
+dict:jisjk:162647	植木鉢。	화분.	keep	defaults
+dict:jisjk:162647	花瓶を買う。	꽃병을 산다.	keep	defaults
+dict:jisjk:162647	木を切る。	나무를 자른다.	keep	defaults
+dict:jisjk:266080	おばぁちゃん。	할머니.	fix	defaults
+dict:jisjk:266080	おばぁちゃんが来た。	할머니가 왔다.	fix	defaults
+dict:jisjk:266080	おばぁちゃんと話す。	할머니와 이야기한다.	fix	defaults
+dict:jisjk:266080	おばぁちゃんに会った。	할머니를 만났다.	fix	defaults
+dict:jisjk:266080	おばぁちゃんの家。	할머니의 집.	fix	defaults
+dict:jisjk:266080	おばぁちゃんを待つ。	할머니를 기다린다.	fix	defaults
+dict:jisjk:266080	おばぁちゃんから聞いた。	할머니에게서 들었다.	fix	defaults
+dict:jisjk:266080	おばあちゃん。	할머니.	keep	defaults
+dict:jisjk:266080	おばあさん。	할머니.	keep	defaults
+dict:jisjk:266080	おばあさま。	할머님.	keep	defaults
+dict:jisjk:266080	おばちゃん。	아줌마.	keep	defaults
+dict:jisjk:266080	おばさん。	아줌마.	keep	defaults
+dict:jisjk:266080	おじいちゃん。	할아버지.	keep	defaults
+dict:jisjk:266080	おじさん。	아저씨.	keep	defaults
+dict:jisjk:266080	お母さん。	엄마.	keep	defaults
+dict:jisjk:40560	お年玉。	세뱃돈.	fix	defaults
+dict:jisjk:40560	お年玉をもらった。	세뱃돈을 받았다.	fix	defaults
+dict:jisjk:40560	お年玉を渡す。	세뱃돈을 건네준다.	fix	defaults
+dict:jisjk:40560	お年玉をあげる。	세뱃돈을 준다.	fix	defaults
+dict:jisjk:40560	お年玉が欲しい。	세뱃돈을 갖고 싶다.	fix	defaults
+dict:jisjk:40560	お年玉をちょうだい。	세뱃돈을 줘.	fix	defaults
+dict:jisjk:40560	お年玉の袋。	세뱃돈의 봉투.	fix	defaults
+dict:jisjk:40560	おとしだま。	세뱃돈.	keep	defaults
+dict:jisjk:40560	年賀状。	연하장.	keep	defaults
+dict:jisjk:40560	給料をもらった。	급료를 받았다.	keep	defaults
+dict:jisjk:40560	賞金をもらった。	상금을 받았다.	keep	defaults
+dict:jisjk:40560	お歳暮。	연말 선물.	keep	defaults
+dict:jisjk:40560	正月。	정월.	keep	defaults
+dict:jisjk:40560	貯金する。	저금한다.	keep	defaults
+dict:jisjk:40560	小遣い。	용돈.	keep	defaults
+dict:jisjk:105257	お箸。	젓가락.	fix	defaults
+dict:jisjk:105257	お箸を使う。	젓가락을 쓴다.	fix	defaults
+dict:jisjk:105257	お箸を持つ。	젓가락을 가진다.	fix	defaults
+dict:jisjk:105257	お箸で食べる。	젓가락으로 먹는다.	fix	defaults
+dict:jisjk:105257	お箸がない。	젓가락이 없다.	fix	defaults
+dict:jisjk:105257	お箸を洗う。	젓가락을 씻는다.	fix	defaults
+dict:jisjk:105257	お箸を買った。	젓가락을 샀다.	fix	defaults
+dict:jisjk:105257	おはし。	젓가락.	fix	defaults
+dict:jisjk:105257	箸を使う。	젓가락을 쓴다.	keep	defaults
+dict:jisjk:105257	割り箸。	소독저.	keep	defaults
+dict:jisjk:105257	橋を渡る。	다리를 건넌다.	keep	defaults
+dict:jisjk:105257	お皿。	접시.	keep	defaults
+dict:jisjk:105257	お茶碗。	밥공기.	keep	defaults
+dict:jisjk:105257	スプーンを使う。	스푼을 쓴다.	keep	defaults
+dict:jisjk:105257	箸箱。	수저통.	keep	defaults
+dict:jisjk:105258	お鍋。	냄비.	fix	defaults
+dict:jisjk:105258	お鍋を洗う。	냄비를 씻는다.	fix	defaults
+dict:jisjk:105258	お鍋を買った。	냄비를 샀다.	fix	defaults
+dict:jisjk:105258	お鍋に水を入れる。	냄비에 물을 넣는다.	fix	defaults
+dict:jisjk:105258	お鍋で煮る。	냄비로 익힌다.	fix	defaults
+dict:jisjk:105258	お鍋の蓋。	냄비의 뚜껑.	fix	defaults
+dict:jisjk:105258	お鍋を持つ。	냄비를 가진다.	fix	defaults
+dict:jisjk:105258	鍋を洗う。	냄비를 씻는다.	keep	defaults
+dict:jisjk:105258	なべを買った。	냄비를 샀다.	keep	defaults
+dict:jisjk:105258	鍋を買う。	냄비를 산다.	keep	defaults
+dict:jisjk:105258	フライパン。	프라이팬.	keep	defaults
+dict:jisjk:105258	食器を洗う。	식기를 씻는다.	keep	defaults
+dict:jisjk:105258	皿を洗う。	접시를 씻는다.	keep	defaults
+dict:jisjk:105258	台所。	부엌.	keep	defaults
+dict:jisjk:105258	やかん。	주전자.	keep	defaults
+dict:jisjk:114965	かくれんぼう。	숨바꼭질.	fix	defaults
+dict:jisjk:114965	かくれんぼうをする。	숨바꼭질을 한다.	fix	defaults
+dict:jisjk:114965	かくれんぼうをしている。	숨바꼭질을 하고 있다.	fix	defaults
+dict:jisjk:114965	かくれんぼうはやめた。	숨바꼭질은 그만두었다.	fix	defaults
+dict:jisjk:114965	かくれんぼうに夢中だ。	숨바꼭질에 열중하다.	fix	defaults
+dict:jisjk:114965	かくれんぼうが好きだ。	숨바꼭질을 좋아한다.	fix	defaults
+dict:jisjk:114965	かくれんぼうで遊ぶ。	숨바꼭질로 논다.	fix	defaults
+dict:jisjk:114965	隠れんぼ。	숨바꼭질.	keep	defaults
+dict:jisjk:114965	隠れ家。	은둔지.	keep	defaults
+dict:jisjk:114965	隠し持つ。	숨겨 가진다.	keep	defaults
+dict:jisjk:114965	子供の遊び。	아이의 놀이.	keep	defaults
+dict:jisjk:114965	庭に隠れる。	뜰에 숨는다.	keep	defaults
+dict:jisjk:114965	鬼を探す。	귀신을 찾는다.	keep	defaults
+dict:jisjk:114965	隠し芸。	숨은 재주.	keep	defaults
+dict:jisjk:114965	隠れ里。	벽촌.	keep	defaults
+dict:jisjk:106853	お新香。	채소 절임.	fix	defaults
+dict:jisjk:106853	お新香を食べる。	채소 절임을 먹는다.	fix	defaults
+dict:jisjk:106853	お新香を買った。	채소 절임을 샀다.	fix	defaults
+dict:jisjk:106853	ご飯とお新香。	밥과 채소 절임.	fix	defaults
+dict:jisjk:106853	お新香を注文する。	채소 절임을 주문한다.	fix	defaults
+dict:jisjk:106853	お新香の皿。	채소 절임의 접시.	fix	defaults
+dict:jisjk:106853	お新香が好きだ。	채소 절임을 좋아한다.	fix	defaults
+dict:jisjk:106853	キムチ。	김치.	keep	defaults
+dict:jisjk:106853	キムチを食べる。	김치를 먹는다.	keep	defaults
+dict:jisjk:106853	おしんこ。	야채절이.	keep	defaults
+dict:jisjk:106853	野菜を切る。	야채를 자른다.	keep	defaults
+dict:jisjk:106853	大根。	무.	keep	defaults
+dict:jisjk:106853	漬物。	채소 절임.	keep	defaults
+dict:jisjk:106853	醤油。	간장.	keep	defaults
+dict:jisjk:106853	酢。	초.	keep	defaults
+dict:jisjk:166825	かいじょうほあんちょう。	해상보안청.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうの職員。	해상보안청의 직원.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうが調査する。	해상보안청이 조사한다.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうの発表。	해상보안청의 발표.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうに報告する。	해상보안청에 보고한다.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうに連絡する。	해상보안청에 연락한다.	fix	defaults
+dict:jisjk:166825	かいじょうほあんちょうの船。	해상보안청의 배.	fix	defaults
+dict:jisjk:166825	海上保険。	해상보험.	keep	defaults
+dict:jisjk:166825	保険会社。	보험회사.	keep	defaults
+dict:jisjk:166825	生命保険。	생명보험.	keep	defaults
+dict:jisjk:166825	海上自衛隊。	해상 자위대.	keep	defaults
+dict:jisjk:166825	警察署。	경찰서.	keep	defaults
+dict:jisjk:166825	消防署。	소방서.	keep	defaults
+dict:jisjk:166825	海軍。	해군.	keep	defaults
+dict:jisjk:166825	海上。	해상.	keep	defaults
+dict:jisjk:168587	かたくりこ。	녹말가루.	fix	defaults
+dict:jisjk:168587	かたくりこを入れる。	녹말가루를 넣는다.	fix	defaults
+dict:jisjk:168587	かたくりこを買う。	녹말가루를 산다.	fix	defaults
+dict:jisjk:168587	かたくりこを水で溶く。	녹말가루를 물로 푼다.	fix	defaults
+dict:jisjk:168587	かたくりこの袋。	녹말가루의 봉투.	fix	defaults
+dict:jisjk:168587	かたくりこを使う。	녹말가루를 쓴다.	fix	defaults
+dict:jisjk:168587	かたくりこの量。	녹말가루의 양.	fix	defaults
+dict:jisjk:168587	片栗粉。	녹말.	keep	defaults
+dict:jisjk:168587	小麦粉。	소맥분.	keep	defaults
+dict:jisjk:168587	小麦粉を入れる。	소맥분을 넣는다.	keep	defaults
+dict:jisjk:168587	粉砂糖。	분당.	keep	defaults
+dict:jisjk:168587	粉末。	분말.	keep	defaults
+dict:jisjk:168587	さつまいも。	고구마.	keep	defaults
+dict:jisjk:168587	じゃがいも。	감자.	keep	defaults
+dict:jisjk:168587	米粉。	쌀가루.	keep	defaults
+dict:jisjk:342399	かつおだし。	가다랭이포 국물.	fix	defaults
+dict:jisjk:342399	かつおだしを使う。	가다랭이포 국물을 쓴다.	fix	defaults
+dict:jisjk:342399	かつおだしを入れる。	가다랭이포 국물을 넣는다.	fix	defaults
+dict:jisjk:342399	かつおだしの香り。	가다랭이포 국물의 향기.	fix	defaults
+dict:jisjk:342399	かつおだしを買う。	가다랭이포 국물을 산다.	fix	defaults
+dict:jisjk:342399	かつおだしで煮る。	가다랭이포 국물로 익힌다.	fix	defaults
+dict:jisjk:342399	かつおだしが好きだ。	가다랭이포 국물을 좋아한다.	fix	defaults
+dict:jisjk:342399	かつお節。	가다랭이포.	keep	defaults
+dict:jisjk:342399	うどん。	우동.	keep	defaults
+dict:jisjk:342399	出汁。	국물.	keep	defaults
+dict:jisjk:342399	スープ。	스프.	keep	defaults
+dict:jisjk:342399	味噌汁。	된장국.	keep	defaults
+dict:jisjk:342399	魚を煮る。	생선을 익힌다.	keep	defaults
+dict:jisjk:342399	昆布。	다시마.	keep	defaults
+dict:jisjk:342399	お吸い物。	국.	keep	defaults
+dict:jisjk:150807	かけたでんわ。	건 전화.	fix	defaults
+dict:jisjk:150807	私がかけたでんわ。	내가 건 전화.	fix	defaults
+dict:jisjk:150807	昨日かけたでんわ。	어제 건 전화.	fix	defaults
+dict:jisjk:150807	かけたでんわの番号。	건 전화의 번호.	fix	defaults
+dict:jisjk:150807	かけたでんわを調べる。	건 전화를 조사한다.	fix	defaults
+dict:jisjk:150807	かけたでんわを忘れた。	건 전화를 잊었다.	fix	defaults
+dict:jisjk:150807	さっきかけたでんわ。	조금 전 건 전화.	fix	defaults
+dict:jisjk:150807	電話をかけた。	전화를 걸었다.	keep	defaults
+dict:jisjk:150807	電話がかかってきた。	전화가 걸려왔다.	keep	defaults
+dict:jisjk:150807	着信。	착신.	keep	defaults
+dict:jisjk:150807	電話番号。	전화번호.	keep	defaults
+dict:jisjk:150807	かかってきた電話。	걸려 온 전화.	keep	defaults
+dict:jisjk:150807	電話を受ける。	전화를 받는다.	keep	defaults
+dict:jisjk:150807	電話を切る。	전화를 끊는다.	keep	defaults
+dict:jisjk:150807	発信履歴。	발신 이력.	keep	defaults
+dict:jisjk:150806	かけた電話。	건 전화.	fix	defaults
+dict:jisjk:150806	私がかけた電話。	내가 건 전화.	fix	defaults
+dict:jisjk:150806	昨日かけた電話。	어제 건 전화.	fix	defaults
+dict:jisjk:150806	かけた電話の番号。	건 전화의 번호.	fix	defaults
+dict:jisjk:150806	かけた電話を調べる。	건 전화를 조사한다.	fix	defaults
+dict:jisjk:150806	かけた電話を忘れた。	건 전화를 잊었다.	fix	defaults
+dict:jisjk:150806	さっきかけた電話。	조금 전 건 전화.	fix	defaults
+dict:jisjk:150806	電話をかける。	전화를 건다.	keep	defaults
+dict:jisjk:150806	電話を受けた。	전화를 받았다.	keep	defaults
+dict:jisjk:150806	着信履歴。	착신 이력.	keep	defaults
+dict:jisjk:150806	電話に出る。	전화를 받는다.	keep	defaults
+dict:jisjk:150806	かかってきた電話。	걸려 온 전화.	keep	defaults
+dict:jisjk:150806	電話が鳴る。	전화가 울린다.	keep	defaults
+dict:jisjk:150806	電話を待つ。	전화를 기다린다.	keep	defaults
+dict:jisjk:150806	携帯電話。	핸드폰.	keep	defaults
+dict:jisjk:123932	あおむしが葉を食べる。	애벌레가 잎을 먹는다.	fix	defaults
+dict:jisjk:123932	あおむしを見つけた。	애벌레를 찾아냈다.	fix	defaults
+dict:jisjk:123932	あおむしの体。	애벌레의 몸.	fix	defaults
+dict:jisjk:123932	あおむしを育てる。	애벌레를 기른다.	fix	defaults
+dict:jisjk:123932	あおむしを探す。	애벌레를 찾는다.	fix	defaults
+dict:jisjk:123932	庭にあおむしがいる。	뜰에 애벌레가 있다.	fix	defaults
+dict:jisjk:123932	あおむしは緑色だ。	애벌레는 녹색이다.	fix	defaults
+dict:jisjk:123932	青虫。	배추벌레.	keep	defaults
+dict:jisjk:123932	毛虫。	모충.	keep	defaults
+dict:jisjk:123932	幼虫。	유충.	keep	defaults
+dict:jisjk:123932	蝶が飛ぶ。	나비가 난다.	keep	defaults
+dict:jisjk:123932	葉を食べる。	잎을 먹는다.	keep	defaults
+dict:jisjk:123932	青い葉。	푸른 잎.	keep	defaults
+dict:jisjk:123932	さなぎ。	번데기.	keep	defaults
+dict:jisjk:123932	虫の卵。	벌레의 알.	keep	defaults
+dict:jisjk:123989	あかつきやみ。	새벽녘.	fix	defaults
+dict:jisjk:123989	あかつきやみの道。	새벽녘의 길.	fix	defaults
+dict:jisjk:123989	あかつきやみに出発した。	새벽녘에 출발했다.	fix	defaults
+dict:jisjk:123989	あかつきやみの空。	새벽녘의 하늘.	fix	defaults
+dict:jisjk:123989	あかつきやみを歩く。	새벽녘을 걷는다.	fix	defaults
+dict:jisjk:123989	あかつきやみの中。	새벽녘 안.	fix	defaults
+dict:jisjk:123989	あかつきやみが続く。	새벽녘이 계속된다.	fix	defaults
+dict:jisjk:123989	あけがた。	새벽녘.	keep	defaults
+dict:jisjk:123989	あさぼらけ。	새벽녘.	keep	defaults
+dict:jisjk:123989	夜明け。	새벽.	keep	defaults
+dict:jisjk:123989	深夜。	심야.	keep	defaults
+dict:jisjk:123989	夕闇。	땅거미.	keep	defaults
+dict:jisjk:123989	暗闇。	어둠.	keep	defaults
+dict:jisjk:123989	朝が来る。	아침이 온다.	keep	defaults
+dict:jisjk:123989	夜が明ける。	날이 샌다.	keep	defaults
+dict:jisjk:139852	あかを落とす。	때를 벗긴다.	fix	defaults
+dict:jisjk:139852	あかを落とした。	때를 벗겼다.	fix	defaults
+dict:jisjk:139852	あかを落としている。	때를 벗기고 있다.	fix	defaults
+dict:jisjk:139852	あかを落とさない。	때를 벗기지 않는다.	fix	defaults
+dict:jisjk:139852	あかを落とせば。	때를 벗기면.	fix	defaults
+dict:jisjk:139852	あかを落としたい。	때를 벗기고 싶다.	fix	defaults
+dict:jisjk:139852	あかを落とします。	때를 벗깁니다.	fix	defaults
+dict:jisjk:139852	垢を落とす。	때를 민다.	keep	defaults
+dict:jisjk:139852	汚れを落とす。	더러움을 뺀다.	keep	defaults
+dict:jisjk:139852	服を脱ぐ。	옷을 벗는다.	keep	defaults
+dict:jisjk:139852	垢を洗う。	때를 씻는다.	keep	defaults
+dict:jisjk:139852	泥を落とす。	진흙을 턴다.	keep	defaults
+dict:jisjk:139852	群れを追う。	무리를 쫓는다.	keep	defaults
+dict:jisjk:139852	汗を流す。	땀을 흘린다.	keep	defaults
+dict:jisjk:139852	体を洗う。	몸을 씻는다.	keep	defaults
+dict:jisjk:124516	あだ櫻。	덧없는 벚꽃.	fix	defaults
+dict:jisjk:124516	あだ櫻の花。	덧없는 벚꽃의 꽃.	fix	defaults
+dict:jisjk:124516	あだ櫻が咲く。	덧없는 벚꽃이 핀다.	fix	global-stem
+dict:jisjk:124516	あだ櫻を見た。	덧없는 벚꽃을 보았다.	fix	defaults
+dict:jisjk:124516	あだ櫻が散る。	덧없는 벚꽃이 진다.	fix	global-stem
+dict:jisjk:124516	あだ櫻の色。	덧없는 벚꽃의 색.	fix	defaults
+dict:jisjk:124516	あだ櫻は美しい。	덧없는 벚꽃은 아름답다.	fix	defaults
+dict:jisjk:124516	桜の木。	벚나무.	keep	defaults
+dict:jisjk:124516	桜の花。	벚꽃.	keep	defaults
+dict:jisjk:124516	桜が咲く。	벚꽃이 핀다.	keep	defaults
+dict:jisjk:124516	花見。	꽃놀이.	keep	defaults
+dict:jisjk:124516	あだざくら。	덧없는 것.	keep	defaults
+dict:jisjk:124516	山桜。	산벚나무.	keep	defaults
+dict:jisjk:124516	梅の花。	매화의 꽃.	keep	defaults
+dict:jisjk:124516	友達。	친구.	keep	defaults
+dict:s:7217	彼はガリ専だ。	그는 마른 사람을 좋아하는 사람이다.	keep	lookup
+dict:s:7217	彼女はガリ専らしい。	그녀는 마른 사람을 좋아하는 사람인 것 같다.	keep	lookup
+dict:s:7217	ガリ専だった。	마른 사람을 좋아하는 사람이었다.	keep	lookup
+dict:s:7217	ガリ専ではない。	마른 사람을 좋아하는 사람이 아니다.	keep	lookup
+dict:s:7217	ガリ専で有名だ。	마른 사람을 좋아하는 사람으로 유명하다.	keep	lookup
+dict:s:7217	彼は痩せている。	그는 야위어 있다.	keep	lookup
+dict:s:7217	彼はフケ専だ。	그는 연상 취향이다.	keep	lookup
+dict:w:1156	またたく間に夏が終わった。	순식간에 여름이 끝났다.	fix	lookup
+dict:w:1156	またたく間に消えた。	순식간에 사라졌다.	fix	lookup
+dict:w:1156	またたく間に広がった。	순식간에 퍼졌다.	fix	lookup
+dict:w:1156	またたく間に売り切れた。	순식간에 품절되었다.	fix	lookup
+dict:w:1156	またたく間だった。	순식간이었다.	keep	lookup
+dict:w:1156	あっという間に夏が終わった。	순식간에 여름이 끝났다.	keep	lookup
+dict:w:1156	ゆっくり歩いた。	천천히 걸었다.	keep	lookup
+dict:w:1156	後片付けをさっさと済ませた。	뒷정리를 빨리 끝마쳤다.	keep	lookup
+dict:w:1594	アナモフィックレンズを使う。	아나모픽 렌즈를 쓴다.	fix	lookup
+dict:w:1594	アナモフィックレンズで撮影した。	아나모픽 렌즈로 촬영했다.	fix	lookup
+dict:w:1594	新しいアナモフィックレンズを買った。	새로운 아나모픽 렌즈를 샀다.	fix	lookup
+dict:w:1595	アナモフィック・レンズを使う。	아나모픽 렌즈를 쓴다.	fix	lookup
+dict:w:1595	アナモフィック・レンズで撮影した。	아나모픽 렌즈로 촬영했다.	fix	lookup
+dict:w:1595	新しいアナモフィック・レンズを買った。	새로운 아나모픽 렌즈를 샀다.	fix	lookup
+dict:w:1594	広角レンズで撮影した。	광각렌즈로 촬영했다.	keep	lookup
+dict:w:1594	レンズを交換した。	렌즈를 교환했다.	keep	lookup
+dict:w:1618	アノテーションを追加した。	어노테이션을 추가했다.	fix	lookup
+dict:w:1618	画像にアノテーションを付けた。	이미지에 어노테이션을 붙였다.	fix	lookup
+dict:w:1618	Javaのアノテーションを使う。	Java의 어노테이션을 쓴다.	fix	lookup
+dict:w:1618	Pythonのアノテーションを読む。	Python의 어노테이션을 읽는다.	fix	lookup
+dict:w:1618	注釈を追加した。	주석을 추가했다.	keep	lookup
+dict:w:1618	Javaを使う。	Java를 쓴다.	keep	lookup
+dict:w:1618	画像を保存した。	이미지를 저장했다.	keep	lookup
+dict:w:1670	アプリケーションサーバを停止した。	애플리케이션 서버를 정지했다.	fix	lookup
+dict:w:1670	アプリケーションサーバが必要だ。	애플리케이션 서버가 필요하다.	fix	lookup
+dict:w:1671	アプリケーションサーバーを停止した。	애플리케이션 서버를 정지했다.	fix	lookup
+dict:w:1671	アプリケーションサーバーが必要だ。	애플리케이션 서버가 필요하다.	fix	lookup
+dict:w:1675	アプリケーション・サーバを停止した。	애플리케이션 서버를 정지했다.	fix	lookup
+dict:w:1675	アプリケーション・サーバが必要だ。	애플리케이션 서버가 필요하다.	fix	lookup
+dict:w:1676	アプリケーション・サーバーを停止した。	애플리케이션 서버를 정지했다.	fix	lookup
+dict:w:1676	アプリケーション・サーバーが必要だ。	애플리케이션 서버가 필요하다.	fix	lookup
+dict:w:1671	Webのアプリケーションサーバーを使う。	Web의 애플리케이션 서버를 쓴다.	fix	lookup
+dict:w:1671	アプリケーションサーバーとデータベースを接続した。	애플리케이션 서버와 데이터베이스를 접속했다.	fix	lookup
+dict:w:1671	ウェブアプリケーションを作る。	웹 애플리케이션을 만든다.	keep	lookup
+dict:w:1671	データベースサーバーを停止した。	데이터 베이스 서버를 정지했다.	keep	lookup
+dict:w:1671	ウェブサーバーを停止した。	웹 서버를 정지했다.	keep	lookup
+dict:w:1671	サーバーを停止した。	서버를 정지했다.	keep	lookup
+dict:w:2118	インスタントメッセージを送った。	인스턴트 메시지를 보냈다.	fix	lookup
+dict:w:2118	インスタントメッセージを受信した。	인스턴트 메시지를 수신했다.	fix	lookup
+dict:w:2118	インスタントメッセージを削除した。	인스턴트 메시지를 삭제했다.	fix	lookup
+dict:w:2121	インスタント・メッセージを送った。	인스턴트 메시지를 보냈다.	fix	lookup
+dict:w:2121	インスタント・メッセージを受信した。	인스턴트 메시지를 수신했다.	fix	lookup
+dict:w:2121	インスタント・メッセージを削除した。	인스턴트 메시지를 삭제했다.	fix	lookup
+dict:w:2118	インスタントメッセンジャーを使う。	인스턴트 메신저 클라이언트를 쓴다.	keep	lookup
+dict:w:2118	インスタント・メッセンジャーを使う。	인스턴트 메신저 클라이언트를 쓴다.	keep	lookup
+dict:w:2118	メッセージを送った。	메시지를 보냈다.	keep	lookup
+dict:w:2118	インスタントコーヒーを飲む。	인스턴트커피를 마신다.	keep	lookup
+dict:w:2950	カツあげは犯罪だ。	금품 갈취는 범죄다.	fix	lookup
+dict:w:2950	カツあげの被害が増えた。	금품 갈취의 피해가 늘어났다.	fix	lookup
+dict:w:2950	カツあげをやめた。	금품 갈취를 그만두었다.	fix	lookup
+dict:w:2954	カツ上げは犯罪だ。	금품 갈취는 범죄다.	fix	lookup
+dict:w:2954	カツ上げの被害が増えた。	금품 갈취의 피해가 늘어났다.	fix	lookup
+dict:w:2954	カツ上げをやめた。	금품 갈취를 그만두었다.	fix	lookup
+dict:w:2950	カツアゲは犯罪だ。	삥뜯기는 범죄다.	keep	lookup
+dict:w:2950	カツ丼を食べた。	가쓰돈을 먹었다.	keep	lookup
+dict:w:2950	カツを揚げた。	커틀릿을 튀겼다.	keep	lookup
+dict:w:2950	金を奪った。	돈을 빼앗았다.	keep	lookup
+dict:w:2993	カビくさい部屋だ。	퀴퀴한 방이다.	fix	lookup
+dict:w:2993	この部屋はカビくさい。	이 방은 퀴퀴하다.	fix	lookup
+dict:w:2993	カビくさい服を洗った。	퀴퀴한 옷을 빨았다.	fix	lookup
+dict:w:2993	カビくさかった。	퀴퀴했다.	fix	lookup
+dict:w:2993	カビくさくない。	퀴퀴하지 않다.	fix	lookup
+dict:w:2994	カビ臭い部屋だ。	퀴퀴한 방이다.	fix	lookup
+dict:w:2994	この部屋はカビ臭い。	이 방은 퀴퀴하다.	fix	lookup
+dict:w:2994	カビ臭い服を洗った。	퀴퀴한 옷을 빨았다.	fix	lookup
+dict:w:2994	カビ臭かった。	퀴퀴했다.	fix	lookup
+dict:w:2994	カビ臭くない。	퀴퀴하지 않다.	fix	lookup
+dict:w:2994	煙が臭い。	연기가 구리다.	keep	lookup
+dict:w:2994	カビが生えた。	곰팡이가 피었다.	keep	lookup
+dict:w:2994	煙で目が痛い。	연기로 눈이 아프다.	keep	lookup
+dict:w:3066	カラーコンタクトレンズを買った。	컬러 콘택트 렌즈를 샀다.	fix	lookup
+dict:w:3066	青いカラーコンタクトレンズを使う。	푸른 컬러 콘택트 렌즈를 쓴다.	fix	lookup
+dict:w:3071	カラー・コンタクトレンズを買った。	컬러 콘택트 렌즈를 샀다.	fix	lookup
+dict:w:3071	青いカラー・コンタクトレンズを使う。	푸른 컬러 콘택트 렌즈를 쓴다.	fix	lookup
+dict:w:3066	サークルレンズを使う。	서클 렌즈를 쓴다.	keep	lookup
+dict:w:3066	青い眼鏡を買った。	푸른 안경을 샀다.	keep	lookup
+dict:w:3568	クリスマスソングが聞こえる。	크리스마스 노래가 들린다.	fix	lookup
+dict:w:3568	クリスマスソングを作った。	크리스마스 노래를 만들었다.	fix	lookup
+dict:w:3575	クリスマス・ソングが聞こえる。	크리스마스 노래가 들린다.	fix	lookup
+dict:w:3575	クリスマス・ソングを作った。	크리스마스 노래를 만들었다.	fix	lookup
+dict:w:3568	クリスマスツリーを飾った。	크리스마스 트리를 장식했다.	keep	lookup
+dict:w:3568	歌を歌った。	노래를 불렀다.	keep	lookup
+dict:w:3574	クリスマス・ケーキを食べた。	크리스마스 케이크를 먹었다.	fix	lookup
+dict:w:3574	クリスマス・ケーキを作った。	크리스마스 케이크를 만들었다.	fix	lookup
+dict:w:3574	クリスマスケーキを食べた。	크리스마스 케이크를 먹었다.	keep	lookup
+dict:w:3574	チーズケーキを食べた。	치즈 케이크를 먹었다.	keep	lookup
+dict:w:3111	カレー粉を入れた。	카레 가루를 넣었다.	fix	lookup
+dict:w:3111	カレー粉を買った。	카레 가루를 샀다.	fix	lookup
+dict:w:3111	カレー粉をこぼした。	카레 가루를 흘렸다.	fix	lookup
+dict:w:3111	カレーを食べた。	카레를 먹었다.	keep	lookup
+dict:w:3111	カレーパンを食べた。	카레빵을 먹었다.	keep	lookup
+dict:w:3111	粉を入れた。	가루를 넣었다.	keep	lookup
+dict:w:4087	コルク栓を抜いた。	코르크 마개를 뽑았다.	fix	lookup
+dict:w:4087	コルク栓を買った。	코르크 마개를 샀다.	fix	lookup
+dict:w:4087	コルク栓を閉めた。	코르크 마개를 닫았다.	fix	lookup
+dict:w:4087	コルクを使う。	코르크를 쓴다.	keep	lookup
+dict:w:4087	栓を抜いた。	마개를 뽑았다.	keep	lookup
+dict:w:4087	瓶を開けた。	병을 땄다.	keep	lookup
+dict:w:2984	カニ味噌を食べた。	게 내장을 먹었다.	fix	lookup
+dict:w:2984	カニ味噌が好きだ。	게 내장을 좋아한다.	fix	lookup
+dict:w:2984	カニ味噌の缶詰を買った。	게 내장의 통조림을 샀다.	fix	lookup
+dict:w:2984	味噌を買った。	된장을 샀다.	keep	lookup
+dict:w:2984	カニを食べた。	게를 먹었다.	keep	lookup
+dict:w:2984	カニミソを食べた。	카니미소를 먹었다.	keep	lookup
+dict:w:26186	黴臭い部屋だ。	퀴퀴한 방이다.	fix	lookup
+dict:w:26186	この部屋は黴臭い。	이 방은 퀴퀴하다.	fix	lookup
+dict:w:26186	黴臭い服を洗った。	퀴퀴한 옷을 빨았다.	fix	lookup
+dict:w:26186	黴臭かった。	퀴퀴했다.	fix	lookup
+dict:w:26186	黴臭くない。	퀴퀴하지 않다.	fix	lookup
+dict:w:26186	カビが生えた。	곰팡이가 피었다.	keep	lookup
+dict:w:4203	コンベアーを使う。	컨베이어를 쓴다.	fix	lookup
+dict:w:4203	コンベアーが止まった。	컨베이어가 멈추었다.	fix	lookup
+dict:w:4203	コンベアーを点検した。	컨베이어를 점검했다.	fix	lookup
+dict:w:4203	荷物をコンベアーに載せた。	짐을 컨베이어에 실었다.	fix	lookup
+dict:w:4203	コンベアを使う。	컨베이어를 쓴다.	keep	lookup
+dict:w:4203	ベルトコンベアを使う。	벨트 컨베이어를 쓴다.	keep	lookup
+dict:w:4290	ゴルフ倶楽部に入会した。	골프 클럽에 입회했다.	fix	lookup
+dict:w:4290	ゴルフ倶楽部の会員だ。	골프 클럽의 회원이다.	fix	lookup
+dict:w:4290	ゴルフ倶楽部に行く。	골프 클럽에 간다.	fix	lookup
+dict:w:4290	新しいゴルフ倶楽部だ。	새로운 골프 클럽이다.	fix	lookup
+dict:w:4290	ゴルフクラブを買った。	골프채를 샀다.	keep	lookup
+dict:w:4290	ゴルフ場に行く。	골프장에 간다.	keep	lookup
+dict:w:4585	シカ科の動物だ。	사슴과의 동물이다.	fix	lookup
+dict:w:4585	シカ科に属する。	사슴과에 속한다.	fix	lookup
+dict:w:4585	シカ科の生態を調べた。	사슴과의 생태를 조사했다.	fix	lookup
+dict:w:4585	シカ科を調べる。	사슴과를 조사한다.	fix	lookup
+dict:w:4585	シカを見た。	사슴을 보았다.	keep	lookup
+dict:w:4585	ウシ科の動物だ。	소과의 동물이다.	keep	lookup
+dict:w:4614	シストロンを調べる。	시스트론을 조사한다.	fix	lookup
+dict:w:4614	シストロンの構造だ。	시스트론 구조다.	fix	lookup
+dict:w:4614	これはシストロンだ。	이것은 시스트론이다.	fix	lookup
+dict:w:4614	シストロンの数を調べた。	시스트론의 수를 조사했다.	fix	lookup
+dict:w:4614	遺伝子を調べる。	유전자를 조사한다.	keep	lookup
+dict:w:4614	シトシンの構造だ。	시토신 구조다.	keep	lookup
+dict:w:4637	髪をシニョンにした。	머리카락을 시뇽으로 했다.	fix	lookup
+dict:w:4637	シニョンの髪型だ。	시뇽의 머리 모양이다.	fix	lookup
+dict:w:4637	シニョンが好きだ。	시뇽을 좋아한다.	fix	lookup
+dict:w:4637	大きなシニョンだ。	큰 시뇽이다.	fix	lookup
+dict:w:4637	ポニーテールにした。	포니테일로 했다.	keep	lookup
+dict:w:4637	お団子を食べた。	경단을 먹었다.	keep	lookup
+dict:w:4850	ジェスチャで伝える。	제스처로 전한다.	fix	lookup
+dict:w:4850	ジェスチャを使う。	제스처를 쓴다.	fix	lookup
+dict:w:4850	大きなジェスチャだ。	큰 제스처다.	fix	lookup
+dict:w:4850	ジェスチャの意味だ。	제스처 의미다.	fix	lookup
+dict:w:4850	ジェスチャーで伝える。	제스추어로 전한다.	keep	lookup
+dict:w:4850	ゲームを始めた。	게임을 시작했다.	keep	lookup
+dict:w:4862	ジェントルキツネザル属の動物だ。	대나무여우원숭이속의 동물이다.	fix	lookup
+dict:w:4862	ジェントルキツネザル属に属する。	대나무여우원숭이속에 속한다.	fix	lookup
+dict:w:4862	ジェントルキツネザル属の分類だ。	대나무여우원숭이속 분류다.	fix	lookup
+dict:w:4862	ジェントルキツネザル属を調べる。	대나무여우원숭이속을 조사한다.	fix	lookup
+dict:w:4862	キツネザルを見た。	여우원숭이를 보았다.	keep	lookup
+dict:w:4862	キツネザルがいる。	여우원숭이가 있다.	keep	lookup
+dict:w:4988	スカンク科の動物だ。	스컹크과의 동물이다.	fix	lookup
+dict:w:4988	スカンク科に属する。	스컹크과에 속한다.	fix	lookup
+dict:w:4988	スカンク科の生態を調べた。	스컹크과의 생태를 조사했다.	fix	lookup
+dict:w:4988	スカンク科を調べる。	스컹크과를 조사한다.	fix	lookup
+dict:w:4988	スカンクを見た。	스컹크를 보았다.	keep	lookup
+dict:w:4988	イタチ科の動物だ。	족제비과의 동물이다.	keep	lookup
+dict:w:5042	スケーラーを使う。	스케일러를 쓴다.	fix	lookup
+dict:w:5042	スケーラーの先端だ。	스케일러의 끝이다.	fix	lookup
+dict:w:5042	スケーラーを交換した。	스케일러를 교환했다.	fix	lookup
+dict:w:5042	超音波スケーラーだ。	초음파 스케일러다.	fix	lookup
+dict:w:5042	スカラー量だ。	스칼라량이다.	keep	lookup
+dict:w:5042	スケールを変える。	스케일을 바꾼다.	keep	lookup
+dict:w:5243	私はスポーツファンだ。	나는 스포츠 팬이다.	fix	lookup
+dict:w:5243	スポーツファンが来た。	스포츠 팬이 왔다.	fix	lookup
+dict:w:5243	スポーツファンが集まった。	스포츠 팬이 모였다.	fix	lookup
+dict:w:5243	スポーツファンの一人だ。	스포츠 팬의 한 사람이다.	fix	lookup
+dict:w:5243	スポーツ選手だ。	운동선수다.	keep	lookup
+dict:w:5243	ファンが集まった。	팬이 모였다.	keep	lookup
+dict:w:5248	私はスポーツ・ファンだ。	나는 스포츠 팬이다.	fix	lookup
+dict:w:5248	スポーツ・ファンが来た。	스포츠 팬이 왔다.	fix	lookup
+dict:w:5248	スポーツ・ファンが集まった。	스포츠 팬이 모였다.	fix	lookup
+dict:w:5248	スポーツ・ファンの一人だ。	스포츠 팬의 한 사람이다.	fix	lookup
+dict:w:5248	スポーツ・カーを買った。	스포츠카를 샀다.	keep	lookup
+dict:w:5248	スポーツ新聞を読む。	스포츠 신문을 읽는다.	keep	lookup
+dict:w:5751	ダディーが来た。	대디가 왔다.	fix	lookup
+dict:w:5751	ダディーと話した。	대디와 이야기했다.	fix	lookup
+dict:w:5751	ダディーを呼んだ。	대디를 불렀다.	fix	lookup
+dict:w:5751	私のダディーだ。	내 대디다.	fix	lookup
+dict:w:5751	パパが来た。	파파가 왔다.	keep	lookup
+dict:w:5751	ママが来た。	엄마가 왔다.	keep	lookup
+dict:w:5779	ダンマリが続いた。	침묵이 계속되었다.	fix	lookup
+dict:w:5779	ダンマリを続けた。	침묵을 계속했다.	fix	lookup
+dict:w:5779	ダンマリは長かった。	침묵은 길었다.	fix	lookup
+dict:w:5779	ダンマリの理由だ。	침묵의 이유다.	fix	lookup
+dict:w:5779	無断で出かけた。	무단으로 나갔다.	keep	lookup
+dict:w:5779	沈黙が続いた。	침묵이 계속되었다.	keep	lookup
+dict:w:5848	チドリ科の鳥だ。	물떼새과의 새다.	fix	lookup
+dict:w:5848	チドリ科に属する。	물떼새과에 속한다.	fix	lookup
+dict:w:5848	チドリ科を調べる。	물떼새과를 조사한다.	fix	lookup
+dict:w:5848	チドリ科の生態だ。	물떼새과의 생태다.	fix	lookup
+dict:w:5848	鳥を見た。	새를 보았다.	keep	lookup
+dict:w:5848	カモ科の鳥だ。	오리과의 새다.	keep	lookup
+dict:w:5916	チラっと見た。	슬쩍 보았다.	fix	lookup
+dict:w:5916	チラっと見る。	슬쩍 본다.	fix	lookup
+dict:w:5916	チラっと窓を見た。	슬쩍 창을 보았다.	fix	lookup
+dict:w:5916	チラっと顔を見た。	슬쩍 얼굴을 보았다.	fix	lookup
+dict:w:5916	チラっと言った。	슬쩍 말했다.	fix	lookup
+dict:w:5916	チラっと聞いた。	슬쩍 들었다.	fix	lookup
+dict:w:5916	チラっと話した。	슬쩍 이야기했다.	fix	lookup
+dict:w:5916	チラっと顔を出した。	슬쩍 얼굴을 내밀었다.	fix	lookup
+dict:w:5916	チラッと見た。	흘깃했다.	keep	lookup
+dict:w:5916	窓を見た。	창을 보았다.	keep	lookup
+dict:w:6182	ディスティニーという言葉だ。	데스티니라는 말이다.	fix	lookup
+dict:w:6182	ディスティニーという名前だ。	데스티니라는 이름이다.	fix	lookup
+dict:w:6182	ディスティニーと書いてある。	데스티니라고 써 있다.	fix	lookup
+dict:w:6182	ディスティニーが好きだ。	데스티니를 좋아한다.	fix	lookup
+dict:w:6182	ディスティニーモジュールだ。	데스티니 모듈이다.	fix	lookup
+dict:w:6182	運命を信じる。	운명을 믿는다.	keep	lookup
+dict:w:6182	モジュールを交換した。	모듈을 교환했다.	keep	lookup
+dict:w:6268	デスティニーという言葉だ。	데스티니라는 말이다.	fix	lookup
+dict:w:6268	デスティニーという名前だ。	데스티니라는 이름이다.	fix	lookup
+dict:w:6268	デスティニーと書いてある。	데스티니라고 써 있다.	fix	lookup
+dict:w:6268	デスティニーが好きだ。	데스티니를 좋아한다.	fix	lookup
+dict:w:6268	デスティニー実験モジュールだ。	데스티니 실험 모듈이다.	fix	lookup
+dict:w:6268	運命の人だ。	운명의 사람이다.	keep	lookup
+dict:w:6268	モジュールを使う。	모듈을 쓴다.	keep	lookup
+dict:w:6583	ドライブ・レターを変更した。	드라이브 문자를 변경했다.	fix	lookup
+dict:w:6583	ドライブ・レターは文字だ。	드라이브 문자는 문자다.	fix	lookup
+dict:w:6583	ドライブ・レターを確認した。	드라이브 문자를 확인했다.	fix	lookup
+dict:w:6583	ドライブ・レターを表示する。	드라이브 문자를 표시한다.	fix	lookup
+dict:w:6583	ドライブ・レターの割り当てだ。	드라이브 문자 할당이다.	fix	lookup
+dict:w:6583	ドライブを変更した。	드라이브를 변경했다.	keep	lookup
+dict:w:6583	文字を確認した。	문자를 확인했다.	keep	lookup
+dict:w:6939	ハイティーを楽しむ。	하이 티를 즐긴다.	fix	lookup
+dict:w:6939	ハイティーの時間だ。	하이 티의 시간이다.	fix	lookup
+dict:w:6939	ハイティーを予約した。	하이 티를 예약했다.	fix	lookup
+dict:w:6939	ハイティーが好きだ。	하이 티를 좋아한다.	fix	lookup
+dict:w:6939	アフタヌーンティーを楽しむ。	애프터눈 티를 즐긴다.	keep	lookup
+dict:w:6939	紅茶を飲んだ。	홍차를 마셨다.	keep	lookup
+dict:w:6939	ハイ・ティーを楽しむ。	하이 티를 즐긴다.	keep	lookup
+dict:w:6939	ハイ・ティーの時間だ。	하이 티의 시간이다.	keep	lookup
+dict:w:7038	ハリモグラ科の動物だ。	가시두더지과의 동물이다.	fix	lookup
+dict:w:7038	ハリモグラ科に属する。	가시두더지과에 속한다.	fix	lookup
+dict:w:7038	ハリモグラ科を調べる。	가시두더지과를 조사한다.	fix	lookup
+dict:w:7038	ハリモグラ科の生態だ。	가시두더지과의 생태다.	fix	lookup
+dict:w:7038	ハリモグラを見た。	짧은코가시두더지를 보았다.	keep	lookup
+dict:w:7038	カモノハシ科の動物だ。	오리너구리과의 동물이다.	keep	lookup
+dict:w:7082	ハードディスクレコーディングを行う。	하드 디스크 레코딩을 실시한다.	fix	lookup
+dict:w:7082	ハードディスクレコーディングの方法だ。	하드 디스크 레코딩의 방법이다.	fix	lookup
+dict:w:7082	ハードディスクレコーディングを始めた。	하드 디스크 레코딩을 시작했다.	fix	lookup
+dict:w:7082	ハードディスクレコーディングを終えた。	하드 디스크 레코딩을 끝냈다.	fix	lookup
+dict:w:7082	ハードディスクレコーダーを買った。	하드 디스크 레코더를 샀다.	keep	lookup
+dict:w:7082	レコーダーを使う。	레코더를 쓴다.	keep	lookup
+dict:w:7088	ハード・ディスク・レコーディングを行う。	하드 디스크 레코딩을 실시한다.	fix	lookup
+dict:w:7088	ハード・ディスク・レコーディングの方法だ。	하드 디스크 레코딩의 방법이다.	fix	lookup
+dict:w:7088	ハード・ディスク・レコーディングを始めた。	하드 디스크 레코딩을 시작했다.	fix	lookup
+dict:w:7088	ハード・ディスク・レコーディングを終えた。	하드 디스크 레코딩을 끝냈다.	fix	lookup
+dict:w:7088	ハード・ディスクを使う。	하드디스크를 쓴다.	keep	lookup
+dict:w:7088	レコーディングを始めた。	레코딩을 시작했다.	keep	lookup
+dict:w:7120	バイソンの群れだ。	바이슨의 무리다.	fix	lookup
+dict:w:7120	バイソンを見た。	바이슨을 보았다.	fix	lookup
+dict:w:7120	バイソンが歩く。	바이슨이 걷는다.	fix	lookup
+dict:w:7120	絶滅したバイソンだ。	멸종한 바이슨이다.	fix	lookup
+dict:w:7120	現代のバイソンだ。	현대의 바이슨이다.	fix	lookup
+dict:w:7120	現代の動物だ。	현대의 동물이다.	keep	lookup
+dict:w:7120	アメリカバイソンを見た。	아메리카들소를 보았다.	keep	lookup
+dict:w:7389	パスファインダという言葉だ。	패스파인더라는 말이다.	fix	lookup
+dict:w:7389	パスファインダを選ぶ。	패스파인더를 선택한다.	fix	lookup
+dict:w:7389	パスファインダを起動した。	패스파인더를 기동했다.	fix	lookup
+dict:w:7389	火星のパスファインダだ。	화성의 패스파인더다.	fix	lookup
+dict:w:7389	パスファインダ宇宙船だ。	패스파인더 우주선이다.	fix	lookup
+dict:w:7389	宇宙船を見た。	우주선을 보았다.	keep	lookup
+dict:w:7389	道案内を頼む。	길잡이를 부탁한다.	keep	lookup
+dict:w:7390	パセリガエル科の動物だ。	파슬리개구리과의 동물이다.	fix	lookup
+dict:w:7390	パセリガエル科に属する。	파슬리개구리과에 속한다.	fix	lookup
+dict:w:7390	パセリガエル科を調べる。	파슬리개구리과를 조사한다.	fix	lookup
+dict:w:7390	パセリガエル科の生態だ。	파슬리개구리과의 생태다.	fix	lookup
+dict:w:7390	パセリを使う。	파슬리를 쓴다.	keep	lookup
+dict:w:7390	アマガエル科の動物だ。	청개구리과의 동물이다.	keep	lookup
+dict:w:7860	ファウンドリを使う。	파운드리를 쓴다.	fix	lookup
+dict:w:7860	ファウンドリに依頼した。	파운드리에 의뢰했다.	fix	lookup
+dict:w:7860	ファウンドリの工場だ。	파운드리의 공장이다.	fix	lookup
+dict:w:7860	ファウンドリを建設した。	파운드리를 건설했다.	fix	lookup
+dict:w:7860	ファウンドリモデルだ。	파운드리 모델이다.	fix	lookup
+dict:w:7860	モデルを選ぶ。	모델을 선택한다.	keep	lookup
+dict:w:7860	半導体を製造する。	반도체를 제조한다.	keep	lookup
+dict:w:7861	ファウンドリーを使う。	파운드리를 쓴다.	fix	lookup
+dict:w:7861	ファウンドリーに依頼した。	파운드리에 의뢰했다.	fix	lookup
+dict:w:7861	ファウンドリーの工場だ。	파운드리의 공장이다.	fix	lookup
+dict:w:7861	ファウンドリーを建設した。	파운드리를 건설했다.	fix	lookup
+dict:w:7861	ファウンドリーモデルだ。	파운드리 모델이다.	fix	lookup
+dict:w:7861	工場を建設した。	공장을 건설했다.	keep	lookup
+dict:w:7861	製造を依頼した。	제조를 의뢰했다.	keep	lookup
+dict:w:7864	ファシスト党の党員だ。	파시스트당의 당원이다.	fix	lookup
+dict:w:7864	ファシスト党に入った。	파시스트당에 들어갔다.	fix	lookup
+dict:w:7864	ファシスト党を研究する。	파시스트당을 연구한다.	fix	lookup
+dict:w:7864	ファシスト党の歴史だ。	파시스트당의 역사다.	fix	lookup
+dict:w:7864	政党に入った。	정당에 들어갔다.	keep	lookup
+dict:w:7864	ファシズムを研究する。	파시즘을 연구한다.	keep	lookup
+dict:w:8127	フルサイズのカメラだ。	풀 사이즈의 카메라다.	fix	lookup
+dict:w:8127	フルサイズの画像だ。	풀 사이즈의 이미지다.	fix	lookup
+dict:w:8127	フルサイズを選ぶ。	풀 사이즈를 선택한다.	fix	lookup
+dict:w:8127	フルサイズで表示する。	풀 사이즈로 표시한다.	fix	lookup
+dict:w:8127	フルサイズの車だ。	풀 사이즈의 차다.	fix	lookup
+dict:w:8127	カメラを買った。	카메라를 샀다.	keep	lookup
+dict:w:8127	小型の車だ。	소형의 차다.	keep	lookup
+dict:w:8132	フル・サイズのカメラだ。	풀 사이즈의 카메라다.	fix	lookup
+dict:w:8132	フル・サイズの画像だ。	풀 사이즈의 이미지다.	fix	lookup
+dict:w:8132	フル・サイズを選ぶ。	풀 사이즈를 선택한다.	fix	lookup
+dict:w:8132	フル・サイズで表示する。	풀 사이즈로 표시한다.	fix	lookup
+dict:w:8132	フル・サイズの車だ。	풀 사이즈의 차다.	fix	lookup
+dict:w:8132	画像を表示する。	이미지를 표시한다.	keep	lookup
+dict:w:8132	サイズを選ぶ。	사이즈를 선택한다.	keep	lookup
+dict:w:8303	ブリーズという名前だ。	브리즈라는 이름이다.	fix	lookup
+dict:w:8303	ブリーズと書いてある。	브리즈라고 써 있다.	fix	lookup
+dict:w:8303	ブリーズを選んだ。	브리즈를 선택했다.	fix	lookup
+dict:w:8303	ブリーズロケットだ。	브리즈 로켓이다.	fix	lookup
+dict:w:8303	ロケットを打ち上げた。	로켓을 발사했다.	keep	lookup
+dict:w:8303	風が吹く。	바람이 분다.	keep	lookup
+dict:w:8552	プログラムのプロファイリングだ。	프로그램 프로파일링이다.	fix	lookup
+dict:w:8552	プロファイリングの結果だ。	프로파일링의 결과다.	fix	lookup
+dict:w:8552	プロファイリングを実行する。	프로파일링을 실행한다.	fix	lookup
+dict:w:8552	プロファイリングした。	프로파일링했다.	fix	lookup
+dict:w:8552	プロファイリングしている。	프로파일링하고 있다.	fix	lookup
+dict:w:8552	プロファイリングする。	프로파일링한다.	fix	lookup
+dict:w:8552	犯罪者をプロファイリングする。	범죄자를 프로파일링한다.	fix	lookup
+dict:w:8552	犯罪者のプロファイリングだ。	범죄자의 프로파일링이다.	fix	lookup
+dict:w:8552	犯罪者を調べる。	범죄자를 조사한다.	keep	lookup
+dict:w:8552	プログラムを実行する。	프로그램을 실행한다.	keep	lookup
+dict:w:8579	プーティンを食べた。	푸틴을 먹었다.	fix	lookup
+dict:w:8579	プーティンを注文した。	푸틴을 주문했다.	fix	lookup
+dict:w:8579	プーティンにはチーズが入る。	푸틴에는 치즈가 들어간다.	fix	lookup
+dict:w:8579	プーティンのソースだ。	푸틴의 소스다.	fix	lookup
+dict:w:8579	チーズを食べた。	치즈를 먹었다.	keep	lookup
+dict:w:8579	ポテトを注文した。	포테이토를 주문했다.	keep	lookup
+dict:w:8843	ホスティングサーバを再起動した。	호스팅 서버를 재기동했다.	fix	lookup
+dict:w:8843	ホスティングサーバの設定だ。	호스팅 서버 설정이다.	fix	lookup
+dict:w:8843	ホスティングサーバを交換した。	호스팅 서버를 교환했다.	fix	lookup
+dict:w:8843	ホスティングサーバを停止した。	호스팅 서버를 정지했다.	fix	lookup
+dict:w:8843	ホスティングサーバのサービスだ。	호스팅 서버 서비스다.	fix	lookup
+dict:w:8843	サーバーを再起動した。	서버를 재기동했다.	keep	lookup
+dict:w:8843	ウェブサービスを利用する。	웹 서비스를 이용한다.	keep	lookup
+dict:w:8844	ホスティングサーバーを再起動した。	호스팅 서버를 재기동했다.	fix	lookup
+dict:w:8844	ホスティングサーバーの設定だ。	호스팅 서버 설정이다.	fix	lookup
+dict:w:8844	ホスティングサーバーを交換した。	호스팅 서버를 교환했다.	fix	lookup
+dict:w:8844	ホスティングサーバーを停止した。	호스팅 서버를 정지했다.	fix	lookup
+dict:w:8844	ホスティングサーバーのサービスだ。	호스팅 서버 서비스다.	fix	lookup
+dict:w:8845	ホスティング・サーバを再起動した。	호스팅 서버를 재기동했다.	fix	lookup
+dict:w:8845	ホスティング・サーバの設定だ。	호스팅 서버 설정이다.	fix	lookup
+dict:w:8845	ホスティング・サーバを交換した。	호스팅 서버를 교환했다.	fix	lookup
+dict:w:8845	ホスティング・サーバを停止した。	호스팅 서버를 정지했다.	fix	lookup
+dict:w:8845	ホスティング・サーバのサービスだ。	호스팅 서버 서비스다.	fix	lookup
+dict:w:8846	ホスティング・サーバーを再起動した。	호스팅 서버를 재기동했다.	fix	lookup
+dict:w:8846	ホスティング・サーバーの設定だ。	호스팅 서버 설정이다.	fix	lookup
+dict:w:8846	ホスティング・サーバーを交換した。	호스팅 서버를 교환했다.	fix	lookup
+dict:w:8846	ホスティング・サーバーを停止した。	호스팅 서버를 정지했다.	fix	lookup
+dict:w:8846	ホスティング・サーバーのサービスだ。	호스팅 서버 서비스다.	fix	lookup
+dict:w:9057	ボールガールがボールを拾った。	볼 걸이 공을 주웠다.	fix	lookup
+dict:w:9057	ボールガールを呼んだ。	볼 걸을 불렀다.	fix	lookup
+dict:w:9057	ボールガールの仕事だ。	볼 걸 일이다.	fix	lookup
+dict:w:9057	ボールガールは選手を助ける。	볼 걸은 선수를 돕는다.	fix	lookup
+dict:w:9057	ボールを拾った。	공을 주웠다.	keep	lookup
+dict:w:9057	女の子が来た。	여자아이가 왔다.	keep	lookup
+dict:w:9060	ボール・ガールがボールを拾った。	볼 걸이 공을 주웠다.	fix	lookup
+dict:w:9060	ボール・ガールを呼んだ。	볼 걸을 불렀다.	fix	lookup
+dict:w:9060	ボール・ガールの仕事だ。	볼 걸 일이다.	fix	lookup
+dict:w:9060	ボール・ガールは選手を助ける。	볼 걸은 선수를 돕는다.	fix	lookup
+dict:w:9090	ポップスターの歌を聞いた。	팝스타의 노래를 들었다.	fix	lookup
+dict:w:9090	ポップスターになった。	팝스타가 되었다.	fix	lookup
+dict:w:9090	ポップスターが歌った。	팝스타가 노래했다.	fix	lookup
+dict:w:9090	ポップスターという名前だ。	팝스타라는 이름이다.	fix	lookup
+dict:w:9090	スターになった。	스타가 되었다.	keep	lookup
+dict:w:9090	歌を聞いた。	노래를 들었다.	keep	lookup
+dict:w:9092	ポップ・スターの歌を聞いた。	팝스타의 노래를 들었다.	fix	lookup
+dict:w:9092	ポップ・スターになった。	팝스타가 되었다.	fix	lookup
+dict:w:9092	ポップ・スターが歌った。	팝스타가 노래했다.	fix	lookup
+dict:w:9092	ポップ・スターという名前だ。	팝스타라는 이름이다.	fix	lookup
+dict:jisjk:262041	アンパサンドを入力した。	앰퍼샌드를 입력했다.	fix	lookup
+dict:jisjk:262041	アンパサンドを使う。	앰퍼샌드를 쓴다.	fix	lookup
+dict:jisjk:262041	アンパサンドを表示した。	앰퍼샌드를 표시했다.	fix	lookup
+dict:jisjk:262041	アンパサンドを削除した。	앰퍼샌드를 삭제했다.	fix	lookup
+dict:jisjk:262041	アンパサンドを追加した。	앰퍼샌드를 추가했다.	fix	lookup
+dict:jisjk:262041	アンパサンドの位置。	앰퍼샌드의 위치.	fix	lookup
+dict:jisjk:262041	文字列にアンパサンドがある。	문자열에 앰퍼샌드가 있다.	fix	lookup
+dict:jisjk:262041	アンパサンドが見える。	앰퍼샌드가 보인다.	fix	lookup
+dict:jisjk:262041	アンパサンドを二つ並べた。	앰퍼샌드를 두 개 늘어놓았다.	fix	lookup
+dict:jisjk:262041	アンパサンドは記号だ。	앰퍼샌드는 기호다.	fix	lookup
+dict:jisjk:262041	アンパサンドを選んだ。	앰퍼샌드를 선택했다.	fix	lookup
+dict:jisjk:262041	アンパサンドが必要だ。	앰퍼샌드가 필요하다.	fix	lookup
+dict:jisjk:262041	アンパーサンドを入力した。	앰퍼샌드를 입력했다.	keep	lookup
+dict:jisjk:262041	アンパーサンドを使う。	앰퍼샌드를 쓴다.	keep	lookup
+dict:jisjk:262041	アンパーサンドを表示した。	앰퍼샌드를 표시했다.	keep	lookup
+dict:jisjk:262041	アンパーサンドを削除した。	앰퍼샌드를 삭제했다.	keep	lookup
+dict:jisjk:262041	アンパーサンドを追加した。	앰퍼샌드를 추가했다.	keep	lookup
+dict:jisjk:262041	アンパーサンドの位置。	앰퍼샌드의 위치.	keep	lookup
+dict:jisjk:262041	アンパーサンドが見える。	앰퍼샌드가 보인다.	keep	lookup
+dict:jisjk:262041	アンパーサンドは記号だ。	앰퍼샌드는 기호다.	keep	lookup
+dict:jisjk:262041	アンパイアが来た。	심판이 왔다.	keep	lookup
+dict:jisjk:262041	アンパンを買った。	팥빵을 샀다.	keep	lookup
+dict:jisjk:262041	括弧を使う。	괄호를 쓴다.	keep	lookup
+dict:jisjk:262041	記号を入力した。	기호를 입력했다.	keep	lookup
+dict:jisjk:240728	属人給を導入した。	속인급을 도입했다.	keep	lookup
+dict:jisjk:240728	属人給の制度。	속인급의 제도.	keep	lookup
+dict:jisjk:240728	属人給を見直した。	속인급을 다시 보았다.	keep	lookup
+dict:jisjk:240728	属人給を廃止した。	속인급을 폐지했다.	keep	lookup
+dict:jisjk:240728	属人給を採用した。	속인급을 채용했다.	keep	lookup
+dict:jisjk:240728	属人給が問題だ。	속인급이 문제다.	keep	lookup
+dict:jisjk:240728	属人給の仕組み。	속인급의 구조.	keep	lookup
+dict:jisjk:240728	属人給について説明した。	속인급에 대해 설명했다.	keep	lookup
+dict:jisjk:240688	象著玉杯の話。	상저옥배의 이야기.	keep	lookup
+dict:jisjk:240688	象著玉杯を知った。	상저옥배를 알았다.	keep	lookup
+dict:jisjk:240688	象著玉杯という言葉。	상저옥배라는 말.	keep	lookup
+dict:jisjk:240688	象著玉杯の意味。	상저옥배의 의미.	keep	lookup
+dict:jisjk:240688	象著玉杯を説明した。	상저옥배를 설명했다.	keep	lookup
+dict:jisjk:240688	象著玉杯を学んだ。	상저옥배를 배웠다.	keep	lookup
+dict:jisjk:240688	象著玉杯は故事だ。	상저옥배는 고사다.	keep	lookup
+dict:jisjk:240688	象著玉杯の教訓。	상저옥배의 교훈.	keep	lookup
+dict:jisjk:240728	職務給を導入した。	직무급을 도입했다.	keep	lookup
+dict:jisjk:240728	給与を見直した。	급여를 다시 보았다.	keep	lookup
+dict:jisjk:240728	賃金を支払った。	임금을 지불했다.	keep	lookup
+dict:jisjk:240728	基本給が上がった。	기본급이 올랐다.	keep	lookup
+dict:jisjk:240688	象牙の箸を使った。	상아의 젓가락을 썼다.	keep	lookup
+dict:jisjk:240688	杯を見た。	잔을 보았다.	keep	lookup
+dict:jisjk:240688	贅沢な生活。	사치스러운 생활.	keep	lookup
+dict:jisjk:240688	括弧を使う。	괄호를 쓴다.	keep	lookup
+dict:jisjk:43869	ウェッブを利用した。	웹을 이용했다.	fix	lookup
+dict:jisjk:43869	ウェッブで調べた。	웹으로 조사했다.	fix	lookup
+dict:jisjk:43869	ウェッブの情報。	웹의 정보.	fix	lookup
+dict:jisjk:43869	ウェッブに公開した。	웹에 공개했다.	fix	lookup
+dict:jisjk:43869	ウェッブを検索した。	웹을 검색했다.	fix	lookup
+dict:jisjk:43869	ウェッブの技術。	웹의 기술.	fix	lookup
+dict:jisjk:55960	プリセットを選んだ。	프리셋을 선택했다.	fix	lookup
+dict:jisjk:55960	プリセットを読み込んだ。	프리셋을 읽어들였다.	fix	lookup
+dict:jisjk:55960	プリセットを変更した。	프리셋을 변경했다.	fix	lookup
+dict:jisjk:55960	プリセットを削除した。	프리셋을 삭제했다.	fix	lookup
+dict:jisjk:55960	新しいプリセット。	새로운 프리셋.	fix	lookup
+dict:jisjk:55960	プリセットがある。	프리셋이 있다.	fix	lookup
+dict:jisjk:56561	ホットキーを設定した。	핫키를 설정했다.	fix	lookup
+dict:jisjk:56561	ホットキーを押した。	핫키를 눌렀다.	fix	lookup
+dict:jisjk:56561	ホットキーを変更した。	핫키를 변경했다.	fix	lookup
+dict:jisjk:56561	ホットキーを登録した。	핫키를 등록했다.	fix	lookup
+dict:jisjk:56561	ホットキーが使える。	핫키를 쓸 수 있다.	fix	lookup
+dict:jisjk:56561	ホットキーの一覧。	핫키의 일람.	fix	lookup
+dict:jisjk:262973	ポップアップを閉じた。	팝업을 닫았다.	fix	lookup
+dict:jisjk:262973	ポップアップを表示した。	팝업을 표시했다.	fix	lookup
+dict:jisjk:262973	ポップアップを禁止した。	팝업을 금지했다.	fix	lookup
+dict:jisjk:262973	ポップアップを開いた。	팝업을 열었다.	fix	lookup
+dict:jisjk:262973	ポップアップが出た。	팝업이 나왔다.	fix	lookup
+dict:jisjk:262973	ポップアップの設定。	팝업의 설정.	fix	lookup
+dict:jisjk:43869	ウェブを利用した。	웹을 이용했다.	keep	lookup
+dict:jisjk:43869	ウエブを利用した。	웹을 이용했다.	keep	lookup
+dict:jisjk:43869	ウェッブサイトを開いた。	웹사이트를 열었다.	keep	lookup
+dict:jisjk:43869	ウェッブ上の情報。	웹상의 정보.	keep	lookup
+dict:jisjk:55960	プリセットパラメタを変更した。	프리셋 파라미터를 변경했다.	keep	lookup
+dict:jisjk:55960	プリセットパラメターを設定した。	프리셋 파라미터를 설정했다.	keep	lookup
+dict:jisjk:55960	設定を保存した。	설정을 저장했다.	keep	lookup
+dict:jisjk:56561	キーを押した。	키를 눌렀다.	keep	lookup
+dict:jisjk:56561	キーボードを使う。	키보드를 쓴다.	keep	lookup
+dict:jisjk:262973	ポップアップメニューを開いた。	팝업 메뉴를 열었다.	keep	lookup
+dict:jisjk:262973	ポップアップ・メニューを表示した。	팝업 메뉴를 표시했다.	keep	lookup
+dict:jisjk:262973	メニューを閉じた。	메뉴를 닫았다.	keep	lookup
+dict:jisjk:260347	カット＆ペーストを使う。	컷＆페이스트를 쓴다.	keep	lookup
+dict:jisjk:260347	カット＆ペーストで編集した。	컷＆페이스트로 편집했다.	keep	lookup
+dict:jisjk:260347	カット＆ペーストの操作。	컷＆페이스트의 조작.	keep	lookup
+dict:jisjk:260347	カット＆ペーストが便利だ。	컷＆페이스트가 편리하다.	keep	lookup
+dict:jisjk:260347	カットアンドペーストを使う。	컷 앤드 페이스트를 쓴다.	keep	lookup
+dict:jisjk:260347	カットアンドペーストの操作。	컷 앤드 페이스트의 조작.	keep	lookup
+dict:jisjk:260347	ペーストを使う。	페이스트를 쓴다.	keep	lookup
+dict:jisjk:260347	カットを使う。	컷을 쓴다.	keep	lookup
+dict:jisjk:240927	体積弾性	체적탄성	fix	lookup
+dict:jisjk:240927	体積弾性を調べる。	체적탄성을 조사한다.	fix	lookup
+dict:jisjk:240927	体積弾性の値を調べた。	체적탄성의 값을 조사했다.	fix	lookup
+dict:jisjk:240927	体積弾性が変わった。	체적탄성이 바뀌었다.	fix	lookup
+dict:jisjk:240927	この体積弾性は大きい。	이 체적탄성은 크다.	fix	lookup
+dict:jisjk:240927	体積弾性と圧力の関係を調べる。	체적탄성과 압력 관계를 조사한다.	fix	lookup
+dict:jisjk:240927	体積弾性です。	체적탄성입니다.	fix	lookup
+dict:jisjk:240927	体積弾性だった。	체적탄성이었다.	fix	lookup
+dict:jisjk:240927	体積弾性ではない。	체적탄성이 아니다.	fix	lookup
+dict:jisjk:240927	体積弾性を調べてください。	체적탄성을 조사해 주세요.	fix	lookup
+dict:jisjk:240927	「体積弾性」と書いた。	「체적탄성」이라고 썼다.	fix	lookup
+dict:jisjk:240927	お急ぎですか	급하십니까?	keep	lookup
+dict:jisjk:240927	おいそぎですか	급하십니까?	keep	lookup
+dict:jisjk:240927	クークラックスクラン	K.K.K.	keep	lookup
+dict:jisjk:240927	クー・クラックス・クラン	쿠 쿠락스 크란	keep	lookup
+dict:jisjk:240927	(土)	(토)	keep	lookup
+dict:jisjk:240927	（日）	(일)	keep	lookup
+dict:jisjk:240927	（笑）	(웃음)	keep	lookup
+dict:jisjk:240927	10 bps	10 bps	keep	lookup
+dict:jisjk:240927	A&B	A&B	keep	lookup
+dict:jisjk:240927	三種の神器。	삼종 신기.	keep	lookup
+dict:jisjk:240927	弾性を調べる。	탄성을 조사한다.	keep	lookup
+dict:jisjk:240927	体積を調べる。	체적을 조사한다.	keep	lookup
+dict:jisjk:48491	ジャンクメール	정크 메일	keep	lookup
+dict:jisjk:48491	ジャンクメールを削除した。	정크 메일을 삭제했다.	keep	lookup
+dict:jisjk:48491	ジャンクメールが多い。	정크 메일이 많다.	keep	lookup
+dict:jisjk:48491	ジャンクメールの数。	정크 메일의 수.	keep	lookup
+dict:jisjk:48491	ジャンクメールだった。	정크 메일이었다.	keep	lookup
+dict:jisjk:48491	「ジャンクメール」と書いた。	「정크 메일」이라고 썼다.	keep	lookup
+dict:jisjk:49776	ソーシャル	소셜	keep	lookup
+dict:jisjk:49776	ソーシャルです。	소셜입니다.	keep	lookup
+dict:jisjk:49776	ソーシャルだった。	소셜이었다.	keep	lookup
+dict:jisjk:49776	ソーシャルではない。	소셜이 아니다.	keep	lookup
+dict:jisjk:49776	「ソーシャル」と書いた。	「소셜」이라고 썼다.	keep	lookup
+dict:jisjk:49776	ソーシャルの意味。	소셜의 의미.	keep	lookup
+dict:jisjk:48491	ジャンク・メールを削除した。	정크 메일을 삭제했다.	keep	lookup
+dict:jisjk:49776	ソシアル	소셜	keep	lookup
+dict:jisjk:49776	ソシャル	소셜	keep	lookup
+dict:jisjk:49776	ソーシャルメディアを使う。	소셜 미디어를 쓴다.	keep	lookup
+dict:jisjk:261443	μーlaw形式	μ-law 형식	keep	lookup
+dict:jisjk:261969	アルトキーを押した。	Alt 키를 눌렀다.	keep	lookup
+dict:jisjk:107005	パソ通	pc통신	keep	lookup
+dict:jisjk:57950	メインNetWareマニュアル	메인 NetWare매뉴얼	keep	lookup
+dict:jisjk:113765	モジュロnカウンタ	모듈로 n카운터	keep	lookup
+dict:jisjk:247323	七半	750cc 오토바이	keep	lookup
+dict:jisjk:267367	電話を切った。	전화를 끊었다.	keep	lookup
+dict:jisjk:162740	Ｐｉａキャロ	Pia캐로	keep	lookup
+dict:jisjk:152804	泡の立ちすぎを防ぐ。	거품이 지나치게 이는 것을 막는다.	keep	lookup
+dict:jisjk:152804	泡の立ちすぎが原因だ。	거품이 지나치게 이는 것이 원인이다.	keep	lookup
+dict:jisjk:152804	泡の立ちすぎに注意した。	거품이 지나치게 이는 것에 주의했다.	keep	lookup
+dict:jisjk:152804	泡の立ちすぎを抑える。	거품이 지나치게 이는 것을 억제한다.	keep	lookup
+dict:jisjk:152804	泡の立ちすぎが問題だ。	거품이 지나치게 이는 것이 문제다.	keep	lookup
+dict:jisjk:152804	泡の立ちすぎの原因。	거품이 지나치게 이는 것의 원인.	keep	lookup
+dict:jisjk:152804	泡が立った。	거품이 일었다.	keep	lookup
+dict:jisjk:152804	水を混ぜた。	물을 섞었다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎを防ぐ。	거품이 지나치게 이는 것을 막는다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎが原因だ。	거품이 지나치게 이는 것이 원인이다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎに注意した。	거품이 지나치게 이는 것에 주의했다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎを抑える。	거품이 지나치게 이는 것을 억제한다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎが問題だ。	거품이 지나치게 이는 것이 문제다.	keep	lookup
+dict:jisjk:152803	泡の立ち過ぎの原因。	거품이 지나치게 이는 것의 원인.	keep	lookup
+dict:jisjk:152803	泡が消えた。	거품이 사라졌다.	keep	lookup
+dict:jisjk:152803	水があふれた。	물이 넘쳤다.	keep	lookup
+dict:s:97	ちゃんこの献立を考える。	창코의 메뉴를 생각한다.	fix	lookup
+dict:s:9436	ちゃんこ鍋を注文する。	창코나베를 주문한다.	fix	lookup
+lookup:food-contrast	カレーを作った。	카레를 만들었다.	keep	defaults

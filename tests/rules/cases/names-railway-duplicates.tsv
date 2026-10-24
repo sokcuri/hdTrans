@@ -1,0 +1,39 @@
+# 규칙: LEX-3, LEX-4
+rule	input	expected	kind	layer
+dict:places:7347	埼玉高速鉄道線	사이타마 고속 철도선	fix	fixed
+dict:places:7347	埼玉高速鉄道線に乗った。	사이타마 고속 철도선을 탔다.	fix	fixed
+dict:places:7347	埼玉高速鉄道線の駅に着いた。	사이타마 고속 철도선의 역에 도착했다.	fix	fixed
+dict:places:15760	江ノ島電鉄線	에노시마 전철선	fix	fixed
+dict:places:15760	江ノ島電鉄線に乗った。	에노시마 전철선을 탔다.	fix	fixed
+dict:places:15760	江ノ島電鉄線の駅に着いた。	에노시마 전철선의 역에 도착했다.	fix	fixed
+dict:places:16312	津軽鉄道線	쓰가루 철도선	fix	fixed
+dict:places:16312	津軽鉄道線に乗った。	쓰가루 철도선을 탔다.	fix	fixed
+dict:places:16312	津軽鉄道線の駅に着いた。	쓰가루 철도선의 역에 도착했다.	fix	fixed
+dict:places:20465	芝山鉄道線	시바야마 철도선	fix	fixed
+dict:places:20465	芝山鉄道線に乗った。	시바야마 철도선을 탔다.	fix	fixed
+dict:places:20465	芝山鉄道線の駅に着いた。	시바야마 철도선의 역에 도착했다.	fix	fixed
+dict:places:22714	道南いさりび鉄道線	도난 이사리비 철도선	fix	fixed
+dict:places:22714	道南いさりび鉄道線に乗った。	도난 이사리비 철도선을 탔다.	fix	fixed
+dict:places:22714	道南いさりび鉄道線の駅に着いた。	도난 이사리비 철도선의 역에 도착했다.	fix	fixed
+dict:places:23261	銚子電気鉄道線	조시 전기 철도선	fix	fixed
+dict:places:23261	銚子電気鉄道線に乗った。	조시 전기 철도선을 탔다.	fix	fixed
+dict:places:23261	銚子電気鉄道線の駅に着いた。	조시 전기 철도선의 역에 도착했다.	fix	fixed
+dict:places:23767	阿武隈急行線	아부쿠마 급행선	fix	fixed
+dict:places:23767	阿武隈急行線に乗った。	아부쿠마 급행선을 탔다.	fix	fixed
+dict:places:23767	阿武隈急行線の駅に着いた。	아부쿠마 급행선의 역에 도착했다.	fix	fixed
+dict:places:7347	遠州鉄道鉄道線	엔슈 철도 철도선	keep	fixed
+dict:places:15760	遠州鉄道鉄道線に乗った。	엔슈 철도 철도선을 탔다.	keep	fixed
+dict:places:16312	山手線に乗った。	야마노테선을 탔다.	keep	fixed
+dict:places:20465	江ノ島電鉄に乗った。	에노시마 전철을 탔다.	keep	fixed
+dict:places:22714	津軽鉄道に乗った。	쓰가루 철도를 탔다.	keep	fixed
+dict:places:23261	銚子電気鉄道に乗った。	조시 전기 철도를 탔다.	keep	fixed
+dict:places:23767	阿武隈急行に乗った。	아부쿠마 급행을 탔다.	keep	fixed
+dict:places:2	IRいしかわ鉄道線	IR 이시카와 철도선	fix	fixed
+dict:places:2	IRいしかわ鉄道線に乗った。	IR 이시카와 철도선을 탔다.	fix	fixed
+dict:places:2	IRいしかわ鉄道線の駅に着いた。	IR 이시카와 철도선의 역에 도착했다.	fix	fixed
+dict:places:75	あいの風とやま鉄道線	아이노카제토야마 철도선	fix	fixed
+dict:places:75	あいの風とやま鉄道線に乗った。	아이노카제토야마 철도선을 탔다.	fix	fixed
+dict:places:75	あいの風とやま鉄道線の駅に着いた。	아이노카제토야마 철도선의 역에 도착했다.	fix	fixed
+names:railway-duplicates	IRいしかわ鉄道	IR 이시카와 철도	keep	fixed
+names:railway-duplicates	あいの風とやま鉄道	아이노카제토야마 철도	keep	fixed
+names:railway-duplicates	遠州鉄道鉄道線	엔슈 철도 철도선	keep	fixed

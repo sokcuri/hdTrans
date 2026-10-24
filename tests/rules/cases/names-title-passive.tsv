@@ -1,0 +1,22 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.578102	明智光秀～神に愛されなかった男～	아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~	fix	fixed
+dict:names.578102	「明智光秀～神に愛されなかった男～」	「아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~」	fix	fixed
+dict:names.578102	『明智光秀～神に愛されなかった男～』	『아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~』	fix	fixed
+dict:names.578102	【明智光秀～神に愛されなかった男～】	【아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~】	fix	fixed
+dict:names.578102	（明智光秀～神に愛されなかった男～）	(아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~)	fix	fixed
+dict:names.578102	明智光秀～神に愛されなかった男～。	아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~.	fix	fixed
+dict:names.578102	明智光秀～神に愛されなかった男～！	아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~!	fix	fixed
+dict:names.578102	明智光秀～神に愛されなかった男～？	아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~?	fix	fixed
+dict:names.578102	『明智光秀～神に愛されなかった男～』。	『아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~』.	fix	fixed
+dict:names.578102	《明智光秀～神に愛されなかった男～》	《아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~》	fix	fixed
+dict:names.578102	「明智光秀～神に愛されなかった男～」を見た。	「아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~」를 보았다.	fix	fixed
+dict:names.578102	『明智光秀～神に愛されなかった男～』を見た。	『아케치 미츠히데 ~ 신에게 사랑받지 않았던 남자 ~』를 보았다.	fix	fixed
+dict:names.578102	明智光秀	아케치 미쓰히데	keep	fixed
+dict:names.578102	明智 光秀	아케치 미쓰히데	keep	fixed
+dict:names.578102	明智秀満	아케치 히데미쓰	keep	fixed
+dict:names.578102	明智小五郎	아케치 코고로	keep	fixed
+dict:names.578102	愛されなかった。	사랑받지 않았다.	keep	fixed
+dict:names.578102	愛された。	사랑받았다.	keep	fixed
+dict:names.578102	愛した。	사랑했다.	keep	fixed
+dict:names.578102	愛される。	사랑받는다.	keep	fixed

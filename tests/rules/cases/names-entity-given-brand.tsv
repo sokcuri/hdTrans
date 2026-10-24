@@ -1,0 +1,29 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:gloss	フロンティアブレーン	프런티어 브레인	fix	lookup
+names:gloss	「フロンティアブレーン」	「프런티어 브레인」	fix	lookup
+names:gloss	フロンティアブレーンの名前	프런티어 브레인의 이름	fix	lookup
+names:gloss	フロンティアブレーンについて	프런티어 브레인에 대해	fix	lookup
+names:gloss	フロンティアブレーンを調べた。	프런티어 브레인을 조사했다.	fix	lookup
+names:gloss	フロンティアブレーンという名前	프런티어 브레인이라는 이름	fix	lookup
+names:gloss	ブジミール・メタリニコフ	부디미르 메탈니코프	fix	lookup
+names:gloss	「ブジミール・メタリニコフ」	「부디미르 메탈니코프」	fix	lookup
+names:gloss	ブジミール・メタリニコフの名前	부디미르 메탈니코프의 이름	fix	lookup
+names:gloss	ブジミール・メタリニコフについて	부디미르 메탈니코프에 대해	fix	lookup
+names:gloss	ブジミール・メタリニコフを調べた。	부디미르 메탈니코프를 조사했다.	fix	lookup
+names:gloss	ブジミール・メタリニコフという名前	부디미르 메탈니코프라는 이름	fix	lookup
+names:gloss	ブッキングドットコム	부킹닷컴	fix	lookup
+names:gloss	「ブッキングドットコム」	「부킹닷컴」	fix	lookup
+names:gloss	ブッキングドットコムの名前	부킹닷컴의 이름	fix	lookup
+names:gloss	ブッキングドットコムについて	부킹닷컴에 대해	fix	lookup
+names:gloss	ブッキングドットコムを調べた。	부킹닷컴을 조사했다.	fix	lookup
+names:gloss	ブッキングドットコムという名前	부킹닷컴이라는 이름	fix	lookup
+names:gloss	バトルフロンティア	배틀프런티어	keep	lookup
+names:gloss	フロンティア	프런티어	keep	lookup
+names:gloss	フロンティアゲート	프런티어 게이트	keep	lookup
+names:gloss	ブディミール・ヴヤチッチ	부디미르 부자치치	keep	lookup
+names:gloss	ウラジーミル・プーチン	블라디미르 푸틴	keep	lookup
+names:gloss	ブッキング・ホールディングス	부킹 홀딩스	keep	lookup
+names:gloss	ブックオフ	북오프	keep	lookup
+names:gloss	フローズン・タイム	캐쉬백	keep	lookup
+names:gloss	ブダペスト地下鉄1号線	부다페스트 지하철 1호선	keep	lookup

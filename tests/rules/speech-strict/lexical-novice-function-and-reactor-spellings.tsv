@@ -1,0 +1,6 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:194156	「じゃくはいものだ」と言った。	「풋내기다」라고 말했다.	fix	defaults
+lookup:lexical-spelling	あおにさいだ。	풋내기다.	keep	defaults
+lookup:lexical-spelling	「連続函数だ」と言った。	「연속 함수다」라고 말했다.	keep	defaults
+lookup:lexical-spelling	「炉心溶融だ」と言った。	「노심 용융이다」라고 말했다.	fix	defaults

@@ -1,0 +1,39 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:kumamoto-mosque	熊本マスジド	구마모토 모스크	fix	lookup
+names:kumamoto-mosque	熊本マスジドの名前	구마모토 모스크의 이름	fix	lookup
+names:kumamoto-mosque	「熊本マスジド」	「구마모토 모스크」	fix	lookup
+names:kumamoto-mosque	熊本マスジドです。	구마모토 모스크입니다.	fix	lookup
+names:kumamoto-mosque	熊本マスジドを見た。	구마모토 모스크를 보았다.	fix	lookup
+names:kumamoto-mosque	熊本マスジドの写真	구마모토 모스크의 사진	fix	lookup
+names:kumamoto-mosque	熊本マスジド。	구마모토 모스크.	fix	lookup
+names:kumamoto-mosque	熊本マスジド！	구마모토 모스크!	fix	lookup
+names:kumamoto-mosque	熊本マスジドも	구마모토 모스크도	fix	lookup
+names:kumamoto-mosque	熊本マスジドに行った。	구마모토 모스크에 갔다.	fix	lookup
+names:kumamoto-mosque	熊本マスジドの本	구마모토 모스크의 책	fix	lookup
+names:kumamoto-mosque	熊本マスジドへ	구마모토 모스크에	fix	lookup
+names:kumamoto-mosque	熊本マスジド？	구마모토 모스크?	fix	lookup
+names:kumamoto-mosque	熊本マスジドという名前	구마모토 모스크라는 이름	fix	lookup
+names:kumamoto-mosque	熊本マスジドから	구마모토 모스크에서	fix	lookup
+names:kumamoto-mosque	熊本マスジドの歴史	구마모토 모스크의 역사	fix	lookup
+names:kumamoto-mosque	熊本大学	구마모토 대학	keep	lookup
+names:kumamoto-mosque	熊本大学の名前	구마모토 대학의 이름	keep	lookup
+names:kumamoto-mosque	「熊本大学」	「구마모토 대학」	keep	lookup
+names:kumamoto-mosque	熊本城	구마모토성	keep	lookup
+names:kumamoto-mosque	熊本城の名前	구마모토성의 이름	keep	lookup
+names:kumamoto-mosque	「熊本城」	「구마모토성」	keep	lookup
+names:kumamoto-mosque	熊本	구마모토	keep	lookup
+names:kumamoto-mosque	熊本の名前	구마모토의 이름	keep	lookup
+names:kumamoto-mosque	「熊本」	「구마모토」	keep	lookup
+names:kumamoto-mosque	大阪	오사카	keep	lookup
+names:kumamoto-mosque	大阪の名前	오사카의 이름	keep	lookup
+names:kumamoto-mosque	「大阪」	「오사카」	keep	lookup
+names:kumamoto-mosque	イスタクラル大阪モスク	이스타크랄 오사카 모스크	keep	lookup
+names:kumamoto-mosque	イスタクラル大阪モスクの名前	이스타크랄 오사카 모스크의 이름	keep	lookup
+names:kumamoto-mosque	「イスタクラル大阪モスク」	「이스타크랄 오사카 모스크」	keep	lookup
+names:kumamoto-mosque	熊本アイ	구마모토 아이	keep	lookup
+names:kumamoto-mosque	熊本アイの名前	구마모토 아이의 이름	keep	lookup
+names:kumamoto-mosque	「熊本アイ」	「구마모토 아이」	keep	lookup
+names:kumamoto-mosque	熊本地震	구마모토 지진	keep	lookup
+names:kumamoto-mosque	熊本地震の名前	구마모토 지진의 이름	keep	lookup
+names:kumamoto-mosque	「熊本地震」	「구마모토 지진」	keep	lookup

@@ -1,0 +1,35 @@
+# 규칙: LEX-1, LEX-2
+rule	input	expected	kind	layer
+dict:names	イオク・クジャン	이오쿠 쿠잔	keep	lookup
+dict:names	イオク・クジャンが来た。	이오쿠 쿠잔이 왔다.	keep	lookup
+dict:names	「イオク・クジャン」	「이오쿠 쿠잔」	keep	lookup
+dict:names	イルザ・ハウプシュタイン	이르자 하우프슈타인	keep	lookup
+dict:names	イルザ・ハウプシュタインが来た。	이르자 하우프슈타인이 왔다.	keep	lookup
+dict:names	「イルザ・ハウプシュタイン」	「이르자 하우프슈타인」	keep	lookup
+dict:names.71854	ウェビギャザ	웨비갸자	fix	lookup
+dict:names.71854	ウェビギャザが来た。	웨비갸자가 왔다.	fix	lookup
+dict:names.71854	「ウェビギャザ」	「웨비갸자」	fix	lookup
+dict:names.77674	エイリアン・キング	에이리언 킹	fix	lookup
+dict:names.77674	エイリアン・キングが来た。	에이리언 킹이 왔다.	fix	lookup
+dict:names.77674	「エイリアン・キング」	「에이리언 킹」	fix	lookup
+dict:names.100991	カタビロアメンボ	카타비로아멘보	fix	lookup
+dict:names.100991	カタビロアメンボが来た。	카타비로아멘보가 왔다.	fix	lookup
+dict:names.100991	「カタビロアメンボ」	「카타비로아멘보」	fix	lookup
+dict:names.103830	カメレオンジュネ	카멜레온 쥬네	fix	lookup
+dict:names.103830	カメレオンジュネが来た。	카멜레온 쥬네가 왔다.	fix	lookup
+dict:names.103830	「カメレオンジュネ」	「카멜레온 쥬네」	fix	lookup
+dict:names.104508	カリギュラオーバードーズ	카리규라 오버도즈	fix	lookup
+dict:names.104508	カリギュラオーバードーズが来た。	카리규라 오버도즈가 왔다.	fix	lookup
+dict:names.104508	「カリギュラオーバードーズ」	「카리규라 오버도즈」	fix	lookup
+dict:names	イオク	이오크	keep	lookup
+dict:names	クジャン	쿠잔	keep	lookup
+dict:names	イルザ	이르사	keep	lookup
+dict:names	ハウプシュタイン	하우프슈타인	keep	lookup
+dict:names	エイリアン	에이리언	keep	lookup
+dict:names	キング	킹	keep	lookup
+dict:names	カタビロ	카타비로	keep	lookup
+dict:names	アメンボ	소금쟁이	keep	lookup
+dict:names	カメレオン	카멜레온	keep	lookup
+dict:names	ジュネ	쥬네	keep	lookup
+dict:names	カリギュラ	칼리굴라	keep	lookup
+dict:names	オーバードーズ	오버도스	keep	lookup

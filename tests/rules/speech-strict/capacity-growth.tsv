@@ -1,0 +1,11 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+sense:capacity-growth	こくりょくをつける。	국력을 향상시킨다.	fix	senses
+sense:capacity-growth	こくりょくをつけた。	국력을 향상시켰다.	fix	senses
+sense:capacity-growth	こくりょくをつけている。	국력을 향상시키고 있다.	fix	senses
+sense:capacity-growth	こくりょくをつけない。	국력을 향상시키지 않는다.	fix	senses
+sense:capacity-growth	国力をもっとつける。	국력을 좀 더 향상시킨다.	fix	senses
+sense:capacity-growth	ラベルをもっとつける。	라벨을 좀 더 붙인다.	keep	senses
+sense:capacity-growth	ラベルをつけている。	라벨을 붙이고 있다.	keep	senses
+sense:capacity-growth	体力をつけない。	체력을 기르지 않는다.	keep	senses
+sense:capacity-growth	「国力をもっとつけたい」	「국력을 좀 더 향상시키고 싶다」	fix	senses

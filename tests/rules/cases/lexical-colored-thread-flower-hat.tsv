@@ -1,0 +1,16 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:126312	色糸	색실	fix	defaults
+dict:jisjk:126312	色糸を使う。	색실을 쓴다.	fix	defaults
+dict:jisjk:126312	色糸で縫う。	색실로 꿰맨다.	fix	defaults
+dict:jisjk:126312	色糸の刺繍。	색실의 자수.	fix	defaults
+dict:jisjk:126312	白糸	백사	keep	defaults
+dict:jisjk:126312	色鉛筆	색연필	keep	defaults
+dict:jisjk:126312	縫い糸	재봉실	keep	defaults
+dict:jisjk:249898	花笠	꽃 삿갓	fix	defaults
+dict:jisjk:249898	花笠をかぶる。	꽃 삿갓을 쓴다.	fix	defaults
+dict:jisjk:249898	花笠を作る。	꽃 삿갓을 만든다.	fix	defaults
+dict:jisjk:249898	花笠の踊り。	꽃 삿갓의 춤.	fix	defaults
+dict:jisjk:249898	花笠祭り	꽃삿갓 축제	keep	defaults
+dict:jisjk:249898	花笠踊り	꽃삿갓 춤	keep	defaults
+dict:jisjk:249898	花瓶	꽃병	keep	defaults

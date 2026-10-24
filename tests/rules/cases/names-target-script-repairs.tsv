@@ -1,0 +1,172 @@
+# 규칙: LEX-1, LEX-3, LEX-4
+rule	input	expected	kind	layer
+dict:names.375039	ヤキン・ドゥーエ	야킨 두에	keep	fixed
+dict:names.375039	ヤキン・ドゥーエ。	야킨 두에.	keep	fixed
+dict:names.375039	ヤキン・ドゥーエを見た。	야킨 두에를 보았다.	keep	fixed
+dict:names.396278	リュカ・ヴィエルジ	류카 비에르지	keep	fixed
+dict:names.396278	リュカ・ヴィエルジ。	류카 비에르지.	keep	fixed
+dict:names.396278	リュカ・ヴィエルジを見た。	류카 비에르지를 보았다.	keep	fixed
+dict:names.409976	ロイド・ベラドンナ	로이드 벨라돈나	fix	fixed
+dict:names.409976	ロイド・ベラドンナ。	로이드 벨라돈나.	fix	fixed
+dict:names.409976	ロイド・ベラドンナを見た。	로이드 벨라돈나를 보았다.	fix	fixed
+dict:names.410787	ロザリアード	로자리아드	fix	fixed
+dict:names.410787	ロザリアード。	로자리아드.	fix	fixed
+dict:names.410787	ロザリアードを見た。	로자리아드를 보았다.	fix	fixed
+dict:names.414836	ロマンシング佐賀	로맨싱 사가	fix	fixed
+dict:names.414836	ロマンシング佐賀。	로맨싱 사가.	fix	fixed
+dict:names.414836	ロマンシング佐賀を見た。	로맨싱 사가를 보았다.	fix	fixed
+dict:names.375039	第二次ヤキン・ドゥーエ攻防戦	제2차 야킨 두에 공방전	keep	fixed
+dict:names.396278	リュカ	류카	keep	fixed
+dict:names.410787	ロザリア・アリーン	로자리아 알린	keep	fixed
+dict:names.409976	ベラドンナ	벨라돈나풀	keep	defaults
+dict:names.414827	ロマンシング サ・ガ	로맨싱 사가	fix	fixed
+dict:names.414827	ユーリ!!! on ICE	유리!!! on ICE	keep	defaults
+dict:names.410787	ルフレ♀	루프레♀	keep	fixed
+dict:names.414827	ロマンシング サ・ガを見た。	로맨싱 사가를 보았다.	fix	fixed
+dict:names.414836	ロマンシング佐賀の本	로맨싱 사가의 책	fix	fixed
+dict:names.414827	ロマンシングサガ	로맨싱 사가	keep	fixed
+dict:names.414836	ロマンシングサガ2	로맨싱 사가 2	keep	fixed
+dict:names.396463	リュナン	류난	fix	fixed
+dict:names.396463	リュナン。	류난.	fix	fixed
+dict:names.396463	リュナンが来た。	류난이 왔다.	fix	fixed
+dict:names.396463	リュナンを見た。	류난을 보았다.	fix	fixed
+dict:names.396463	リュナンさん	류난 씨	fix	fixed
+dict:names.396463	「リュナン」	「류난」	fix	fixed
+dict:names.410951	ロシア宇宙主義	러시아 우주주의	fix	fixed
+dict:names.410951	ロシア宇宙主義。	러시아 우주주의.	fix	fixed
+dict:names.410951	ロシア宇宙主義を学ぶ。	러시아 우주주의를 배운다.	fix	fixed
+dict:names.410951	ロシア宇宙主義について	러시아 우주주의에 대해	fix	fixed
+dict:names.410951	「ロシア宇宙主義」	「러시아 우주주의」	fix	fixed
+dict:names.410951	ロシア宇宙主義の本	러시아 우주주의의 책	fix	fixed
+dict:names.396463	リュカ	류카	keep	fixed
+dict:names.396463	ナンさん	난 씨	keep	fixed
+dict:names.410951	ロシア語	러시아어	keep	defaults
+dict:names.410951	宇宙旅行	우주여행	keep	defaults
+dict:names.410951	資本主義	자본주의	keep	defaults
+dict:names.410951	ユーリ!!! on ICE	유리!!! on ICE	keep	defaults
+dict:names.371394	モシャナ・ハルバート	모샤나 할버트	fix	fixed
+dict:names.371394	モシャナ・ハルバート。	모샤나 할버트.	fix	fixed
+dict:names.371394	モシャナ・ハルバートを見た。	모샤나 할버트를 보았다.	fix	fixed
+dict:names.371466	モスクワのこだま	모스크바의 메아리	fix	fixed
+dict:names.371466	モスクワのこだま。	모스크바의 메아리.	fix	fixed
+dict:names.371466	モスクワのこだまを見た。	모스크바의 메아리를 보았다.	fix	fixed
+dict:names.371648	モチコチキン	모치코 치킨	fix	fixed
+dict:names.371648	モチコチキン。	모치코 치킨.	fix	fixed
+dict:names.371648	モチコチキンを見た。	모치코 치킨을 보았다.	fix	fixed
+dict:names.372044	モニカ・ミゲル	모니카 미구엘	fix	fixed
+dict:names.372044	モニカ・ミゲル。	모니카 미구엘.	fix	fixed
+dict:names.372044	モニカ・ミゲルを見た。	모니카 미구엘을 보았다.	fix	fixed
+dict:names.372084	モニク・ヴァン・デ・ヴェン	모니크 판 더 벤	fix	fixed
+dict:names.372084	モニク・ヴァン・デ・ヴェン。	모니크 판 더 벤.	fix	fixed
+dict:names.372084	モニク・ヴァン・デ・ヴェンを見た。	모니크 판 더 벤을 보았다.	fix	fixed
+dict:names.372447	モビルグーン	모빌군	fix	fixed
+dict:names.372447	モビルグーン。	모빌군.	fix	fixed
+dict:names.372447	モビルグーンを見た。	모빌군을 보았다.	fix	fixed
+dict:names.372472	モビルラゴゥ	라고우	fix	fixed
+dict:names.372472	モビルラゴゥ。	라고우.	fix	fixed
+dict:names.372472	モビルラゴゥを見た。	라고우를 보았다.	fix	fixed
+dict:names.371394	ホーマー・ハルバート	호머 헐버트	keep	fixed
+dict:names.371394	ハルバート	할버트	keep	fixed
+dict:names.371466	共感	공감	keep	defaults
+dict:names.371466	こだま	메아리	keep	defaults
+dict:names.371466	モスクワ	모스크바	keep	defaults
+dict:names.371648	から揚げ	닭튀김	keep	defaults
+dict:names.371648	フライドチキン	프라이드치킨	keep	defaults
+dict:names.372044	モニカ・ベルッチ	모니카 벨루치	keep	fixed
+dict:names.372044	モニカ・ゲラー	모니카 겔러	keep	fixed
+dict:names.372084	モニク・ルディエール	모니크 루디에르	keep	fixed
+dict:names.372084	モニーク・コールマン	모니크 콜먼	keep	fixed
+dict:names.372472	モビルバクゥ	바쿠	keep	fixed
+dict:names.372447	モビルザウート	모빌자우트	keep	fixed
+dict:names.372447	グーン	쑤욱	keep	fixed
+dict:names.372447	モビルスーツ	모빌슈트	keep	fixed
+dict:names.373070	モルデカイ・ゼエヴ・オレンステイン	모르데카이 제에브 오렌스테인	fix	fixed
+dict:names.373070	モルデカイ・ゼエヴ・オレンステイン。	모르데카이 제에브 오렌스테인.	fix	fixed
+dict:names.373070	モルデカイ・ゼエヴ・オレンステインを見た。	모르데카이 제에브 오렌스테인을 보았다.	fix	fixed
+dict:names.373070	モルデカイ・ゼエヴ・オレンステインが来た。	모르데카이 제에브 오렌스테인이 왔다.	fix	fixed
+dict:names.373070	モルデカイ・ゼエヴ・オレンステインの本。	모르데카이 제에브 오렌스테인의 책.	fix	fixed
+dict:names.373070	モルデカイ	모르드개	keep	fixed
+dict:names.373070	モルデハイ・グル	모르데하이 구르	keep	fixed
+dict:names.373070	モルデハイ・シュピーグラー	모르데하이 슈피글레르	keep	fixed
+dict:names.373070	モリス・スワデシュ	모리스 스와데시	keep	fixed
+dict:names.373070	モモンガ中将	모몬가	keep	fixed
+dict:names.373070	モンスターハンター3	몬스터 헌터 3	keep	fixed
+dict:names.373070	モンスターハンター3G	몬스터 헌터 3G	keep	fixed
+dict:names.373070	家を見た。	집을 보았다.	keep	defaults
+dict:names.373070	モホーク族	모호크족	keep	fixed
+dict:names.373070	モンテ・クリスト伯	몬테크리스토 백작	keep	fixed
+dict:names.374274	モーガー県	모가 디스트릭트	fix	fixed
+dict:names.374274	モーガー県。	모가 디스트릭트.	fix	fixed
+dict:names.374274	モーガー県に行った。	모가 디스트릭트에 갔다.	fix	fixed
+dict:names.374274	モーガー県の地図。	모가 디스트릭트의 지도.	fix	fixed
+dict:names.374274	モーガー県を見た。	모가 디스트릭트를 보았다.	fix	fixed
+dict:names.374274	モーガー	모가	keep	fixed
+dict:names.374274	モーガン	모건	keep	fixed
+dict:names.374274	モーガン郡	모건군	keep	fixed
+dict:names.374274	モンタナ州	몬태나주	keep	fixed
+dict:names.374274	モーリシャス	모리셔스	keep	fixed
+dict:names.374274	モーリタニア	모리타니아	keep	fixed
+dict:names.374274	ヤクプの書物	야고보서	keep	fixed
+dict:names.374274	ヤッシャ・ホーレンシュタイン	얏샤 호렌슈타인	keep	fixed
+dict:names.374274	モーツァルト	모차르트	keep	fixed
+dict:names.374274	ヤクーツク	야쿠츠크	keep	fixed
+dict:names.376210	ヤルミラ・グロート	야르밀라 가이도쇼바	fix	fixed
+dict:names.376210	ヤルミラ・グロート。	야르밀라 가이도쇼바.	fix	fixed
+dict:names.376210	ヤルミラ・グロートが来た。	야르밀라 가이도쇼바가 왔다.	fix	fixed
+dict:names.376210	ヤルミラ・グロートを見た。	야르밀라 가이도쇼바를 보았다.	fix	fixed
+dict:names.376210	ヤルミラ・グロートの写真。	야르밀라 가이도쇼바의 사진.	fix	fixed
+dict:names.376210	ヤルミラ・クラトフビロバ	야르밀라 크라토츠빌로바	keep	fixed
+dict:names.376210	ヤルミラ・クラトフビロバを見た。	야르밀라 크라토츠빌로바를 보았다.	keep	fixed
+dict:names.376210	ヤルマル・ヨハンセン	얄마르 요한센	keep	fixed
+dict:names.376210	ヤルマリ・ヘランダー	얄마리 헬란데르	keep	fixed
+dict:names.376210	ヤニーナ・ライプツィヒ	야니나 라이치히	keep	fixed
+dict:names.376210	ヤムナーナガル	야무나 나가	keep	fixed
+dict:names.376210	ヤング・ストリート	영가	keep	fixed
+dict:names.376210	ヤルムーク	야르무크 수용소	keep	fixed
+dict:names.376210	ヤン・ヤンセ・ウェルテフレー	얀 얀세 웨르테후레이	keep	fixed
+dict:names.376210	ヤング・ブラッド	머스킷티어	keep	fixed
+dict:names.377346	ユウトのカルボウ	유토의 카르본	fix	fixed
+dict:names.377346	ユウトのカルボウ。	유토의 카르본.	fix	fixed
+dict:names.377346	ユウトのカルボウを見た。	유토의 카르본을 보았다.	fix	fixed
+dict:names.377346	ユウトのカルボウが来た。	유토의 카르본이 왔다.	fix	fixed
+dict:names.377346	ユウトのカルボウの写真。	유토의 카르본의 사진.	fix	fixed
+dict:names.377346	カルボウ	카르본	keep	fixed
+dict:names.377346	ヒコザル	불꽃숭이	keep	fixed
+dict:names.377346	サトシのヒコザル	한지우의 불꽃숭이	keep	fixed
+dict:names.377346	ヒコザルの写真。	불꽃숭이의 사진.	keep	fixed
+dict:names.377346	ソウブレイズ	파라블레이즈	keep	fixed
+dict:names.377346	ユウト	유우토	keep	fixed
+dict:names.377346	ユウキ	유우키	keep	fixed
+dict:names.377346	ユウリ	우리	keep	fixed
+dict:names.377346	ホゲータ	뜨아거	keep	fixed
+dict:names.377346	ニャオハ	나오하	keep	fixed
+dict:names.378012	ユニコーン・ドーパント	유니콘 도펀트	fix	fixed
+dict:names.378012	ユニコーン・ドーパント。	유니콘 도펀트.	fix	fixed
+dict:names.378012	ユニコーン・ドーパントを見た。	유니콘 도펀트를 보았다.	fix	fixed
+dict:names.378012	ユニコーン・ドーパントの名前	유니콘 도펀트의 이름	fix	fixed
+dict:names.378012	「ユニコーン・ドーパント」	「유니콘 도펀트」	fix	fixed
+dict:names.378012	ユニコーン・ドーパントと戦う。	유니콘 도펀트와 싸운다.	fix	fixed
+dict:names.378012	ドーパント	도펀트	keep	defaults
+dict:names.378012	ユートピア・ドーパント	유토피아 도펀트	keep	fixed
+dict:names.378012	ホッパー・ドーパント	호퍼 도펀트	keep	fixed
+dict:names.378012	マネー・ドーパント	머니 도펀트	keep	fixed
+dict:names.378012	ユニコーンガンダム	유니콘 건담	keep	fixed
+dict:names.378012	ユニコーンメモリ	유니콘 메모리	keep	fixed
+dict:names.378012	ユニコーン・ゾディアーツ	유니콘 조디악스	keep	fixed
+dict:names.378012	ユニコーンマイナソー	유니콘 마이나소	keep	fixed
+dict:names.378012	ユニコーンヤミー	유니콘 야미	keep	fixed
+dict:names.379836	ユーノス駅	유노스 역	fix	fixed
+dict:names.379836	ユーノス駅。	유노스 역.	fix	fixed
+dict:names.379836	ユーノス駅に行った。	유노스 역에 갔다.	fix	fixed
+dict:names.379836	ユーノス駅の地図。	유노스 역의 지도.	fix	fixed
+dict:names.379836	ユーノス駅を見た。	유노스 역을 보았다.	fix	fixed
+dict:names.379836	「ユーノス駅」	「유노스 역」	fix	fixed
+dict:names.379836	ユーノス	유노스	keep	fixed
+dict:names.379836	ユーノス300	유노스 300	keep	fixed
+dict:names.379836	ユーノスコスモ	유노스 코스모	keep	fixed
+dict:names.379836	ノース	노스	keep	defaults
+dict:names.379836	ユートピア	유토피아	keep	fixed
+dict:names.379836	駅	역	keep	defaults
+dict:names.379836	シンガポール	싱가폴	keep	defaults
+dict:names.379836	ユーノ・スクライア	유노 스크라이어	keep	fixed
+dict:names.379836	ユーロ	유로	keep	defaults

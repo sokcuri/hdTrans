@@ -1,0 +1,33 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:presidential-office	大統領職	대통령직	fix	lookup
+names:presidential-office	「大統領職」	「대통령직」	fix	lookup
+names:presidential-office	大統領職を辞任した。	대통령직을 사임했다.	fix	lookup
+names:presidential-office	大統領職の任期。	대통령직의 임기.	fix	lookup
+names:presidential-office	大統領職を務めた。	대통령직을 맡았다.	fix	lookup
+names:presidential-office	大統領職を失った。	대통령직을 잃었다.	fix	lookup
+names:presidential-office	大統領職は重要だ。	대통령직은 중요하다.	fix	lookup
+names:presidential-office	大統領	대통령	keep	lookup
+names:presidential-office	大統領選挙	대통령 선거	keep	lookup
+names:presidential-office	総監督	총감독	keep	lookup
+names:presidential-office	監督	감독	keep	lookup
+names:presidential-office	大統領府	대통령부	keep	lookup
+names:presidential-office	大統領自由勲章	대통령 자유 훈장	keep	lookup
+names:presidential-office	大統領制	대통령제	keep	lookup
+names:presidential-office	大統領閣下	대통령 각하	keep	lookup
+names:sumo-bouts	大相撲・幕内の全取組	스모, 마쿠우치의 모든 경기	fix	lookup
+names:sumo-bouts	「大相撲・幕内の全取組」	「스모, 마쿠우치의 모든 경기」	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組を見た。	스모, 마쿠우치의 모든 경기를 보았다.	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組を見る。	스모, 마쿠우치의 모든 경기를 본다.	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組を放送する。	스모, 마쿠우치의 모든 경기를 방송한다.	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組の放送。	스모, 마쿠우치의 모든 경기의 방송.	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組が始まった。	스모, 마쿠우치의 모든 경기가 시작되었다.	fix	lookup
+names:sumo-bouts	大相撲・幕内の全取組を録画した。	스모, 마쿠우치의 모든 경기를 녹화했다.	fix	lookup
+names:sumo-bouts	大相撲	스모 대회	keep	lookup
+names:sumo-bouts	大相撲ダイジェスト	스모 다이제스트	keep	lookup
+names:sumo-bouts	幕内	마쿠우치	keep	lookup
+names:sumo-bouts	取組	대전	keep	lookup
+names:sumo-bouts	取り組み	대처	keep	lookup
+names:sumo-bouts	取組を見た。	대전을 보았다.	keep	lookup
+names:sumo-bouts	仕事に取り組む。	일에 임한다.	keep	lookup
+names:sumo-bouts	全日本選手権	전일본선수권	keep	lookup

@@ -1,0 +1,20 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:gloss	フラビオ・カッタネーオ	플라비오 카타네오	fix	lookup
+names:gloss	「フラビオ・カッタネーオ」	「플라비오 카타네오」	fix	lookup
+names:gloss	フラビオ・カッタネーオが来た。	플라비오 카타네오가 왔다.	fix	lookup
+names:gloss	フラビオ・カッタネーオの発言。	플라비오 카타네오의 발언.	fix	lookup
+names:gloss	フラビオ・カッタネーオを知っている。	플라비오 카타네오를 알고 있다.	fix	lookup
+names:gloss	フランク・センジャー	프랭크 센저	fix	lookup
+names:gloss	「フランク・センジャー」	「프랭크 센저」	fix	lookup
+names:gloss	フランク・センジャーが来た。	프랭크 센저가 왔다.	fix	lookup
+names:gloss	フランク・センジャーの演技。	프랭크 센저의 연기.	fix	lookup
+names:gloss	フランク・センジャーを見た。	프랭크 센저를 보았다.	fix	lookup
+names:gloss	フラビオ・コンセイソン	플라비우 콘세이상	keep	lookup
+names:gloss	フラビオ・マンツォーニ	플라비오 만초니	keep	lookup
+names:gloss	フラビア・ペンネッタ	플라비아 펜네타	keep	lookup
+names:gloss	フランク・シナトラ	프랭크 시나트라	keep	lookup
+names:gloss	フランク・ザッパ	프랭크 자파	keep	lookup
+names:gloss	フランク・ターナー	프랭크 터너	keep	lookup
+names:gloss	フラワー	플라워	keep	lookup
+names:gloss	フランス	프랑스	keep	lookup

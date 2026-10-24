@@ -1,0 +1,44 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:102953	聴導犬	청각장애인 보조견	fix	defaults
+dict:jisjk:102953	聴導犬を育てる。	청각장애인 보조견을 기른다.	fix	defaults
+dict:jisjk:102953	聴導犬と暮らす。	청각장애인 보조견과 산다.	fix	defaults
+dict:jisjk:102953	聴導犬の訓練。	청각장애인 보조견의 훈련.	fix	defaults
+dict:jisjk:102953	盲導犬	안내견	keep	defaults
+dict:jisjk:102953	介助犬	시중드는 개	keep	defaults
+dict:jisjk:102953	警察犬	경찰견	keep	defaults
+dict:jisjk:235552	職業訓練校	직업훈련학교	fix	defaults
+dict:jisjk:235552	職業訓練校に通う。	직업훈련학교에 다닌다.	fix	defaults
+dict:jisjk:235552	職業訓練校を卒業した。	직업훈련학교를 졸업했다.	fix	defaults
+dict:jisjk:235552	職業訓練校の学生。	직업훈련학교의 학생.	fix	defaults
+dict:jisjk:235552	職業	직업	keep	defaults
+dict:jisjk:235552	訓練	훈련	keep	defaults
+dict:jisjk:235552	学校	학교	keep	defaults
+dict:jisjk:249214	肺塞栓症	폐색전증	fix	defaults
+dict:jisjk:249214	肺塞栓症の治療。	폐색전증의 치료.	fix	defaults
+dict:jisjk:249214	肺塞栓症を疑う。	폐색전증을 의심한다.	fix	defaults
+dict:jisjk:249214	肺塞栓症の患者。	폐색전증의 환자.	fix	defaults
+dict:jisjk:249214	肺炎	폐렴	keep	defaults
+dict:jisjk:249214	肺水腫	폐수종	keep	defaults
+dict:jisjk:249214	塞栓症	색전증	keep	defaults
+dict:jisjk:249210	肺線維症	폐섬유증	fix	defaults
+dict:jisjk:249210	肺線維症の検査。	폐섬유증의 검사.	fix	defaults
+dict:jisjk:249210	肺線維症の患者。	폐섬유증의 환자.	fix	defaults
+dict:jisjk:249210	肺線維症を調べる。	폐섬유증을 조사한다.	fix	defaults
+dict:jisjk:249210	肺癌	폐암	keep	defaults
+dict:jisjk:249210	繊維	섬유	keep	defaults
+dict:jisjk:249210	肺結核	폐결핵	keep	defaults
+dict:jisjk:79417	胃膓病	위장병	fix	defaults
+dict:jisjk:79417	胃膓病の治療。	위장병의 치료.	fix	defaults
+dict:jisjk:79417	胃膓病だった。	위장병이었다.	fix	defaults
+dict:jisjk:79417	胃膓病の患者。	위장병의 환자.	fix	defaults
+dict:jisjk:79417	胃壁	위벽	keep	defaults
+dict:jisjk:79417	胃腸薬	위장약	keep	defaults
+dict:jisjk:79417	胃膓炎	위장염	keep	defaults
+dict:jisjk:203751	胸筋	가슴근육	fix	defaults
+dict:jisjk:203751	胸筋を鍛える。	가슴근육을 단련한다.	fix	defaults
+dict:jisjk:203751	胸筋の痛み。	가슴근육의 아픔.	fix	defaults
+dict:jisjk:203751	胸筋が痛い。	가슴근육이 아프다.	fix	defaults
+dict:jisjk:203751	胸骨	흉골	keep	defaults
+dict:jisjk:203751	筋肉	근육	keep	defaults
+dict:jisjk:203751	胸腔	흉강	keep	defaults

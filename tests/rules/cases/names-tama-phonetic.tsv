@@ -1,0 +1,33 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.647502	玉ネギ男	타마 네기오	fix	fixed
+dict:names.647502	玉ネギ男氏	타마 네기오 씨	fix	fixed
+dict:names.647502	玉ネギ男さん	타마 네기오 씨	fix	fixed
+dict:names.647502	玉ネギ男さま	타마 네기오님	fix	fixed
+dict:names.647502	玉ネギ男君	타마 네기오 군	fix	fixed
+dict:names.647502	玉ネギ男先生	타마 네기오 선생님	fix	fixed
+dict:names.647502	玉ネギ男の名前	타마 네기오의 이름	fix	fixed
+dict:names.647502	玉ネギ男の写真	타마 네기오의 사진	fix	fixed
+dict:names.647502	玉ネギ男について	타마 네기오에 대해	fix	fixed
+dict:names.647502	「玉ネギ男」	「타마 네기오」	fix	fixed
+dict:names.647502	玉	옥	keep	fixed
+dict:names.647502	ネギ	파	keep	fixed
+dict:names.647502	玉ネギ	양파	keep	fixed
+dict:names.647502	玉ノ井もなか	타마노이 모나카	keep	fixed
+dict:names.647502	玉ねぎ	양파	keep	fixed
+dict:names.647502	玉井	타마이	keep	fixed
+dict:names.647879	玉藻京介	타마모 쿄스케	fix	fixed
+dict:names.647879	玉藻京介氏	타마모 쿄스케 씨	fix	fixed
+dict:names.647879	玉藻京介さん	타마모 쿄스케 씨	fix	fixed
+dict:names.647879	玉藻京介さま	타마모 쿄스케님	fix	fixed
+dict:names.647879	玉藻京介君	타마모 쿄스케 군	fix	fixed
+dict:names.647879	玉藻京介先生	타마모 쿄스케 선생님	fix	fixed
+dict:names.647879	玉藻京介の名前	타마모 쿄스케의 이름	fix	fixed
+dict:names.647879	玉藻京介の写真	타마모 쿄스케의 사진	fix	fixed
+dict:names.647879	玉藻京介について	타마모 쿄스케에 대해	fix	fixed
+dict:names.647879	「玉藻京介」	「타마모 쿄스케」	fix	fixed
+dict:names.647879	京介	쿄스케	keep	fixed
+dict:names.647879	玉藻の前	다마모노마에	keep	fixed
+dict:names.647879	玉藻銀丸	타마모 긴마루	keep	fixed
+dict:names.647879	玉虫	비단벌레	keep	fixed
+dict:names.647879	玄野計	쿠로노 케이	keep	fixed

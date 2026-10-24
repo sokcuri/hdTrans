@@ -1,0 +1,40 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+names:place-entity-type	カンダブ水路	칸다부 수로	fix	fixed
+names:place-entity-type	カンダブ水路だ。	칸다부 수로다.	fix	fixed
+names:place-entity-type	「カンダブ水路」	「칸다부 수로」	fix	fixed
+names:place-entity-type	カンダブ水路に行く。	칸다부 수로에 간다.	fix	fixed
+names:place-entity-type	カンダブ水路を調べた。	칸다부 수로를 조사했다.	fix	fixed
+names:place-entity-type	カンザス・シティ都市圏	캔자스시티 도시권	fix	fixed
+names:place-entity-type	カンザス・シティ都市圏だ。	캔자스시티 도시권이다.	fix	fixed
+names:place-entity-type	「カンザス・シティ都市圏」	「캔자스시티 도시권」	fix	fixed
+names:place-entity-type	カンザス・シティ都市圏に行く。	캔자스시티 도시권에 간다.	fix	fixed
+names:place-entity-type	カンザス・シティ都市圏を調べた。	캔자스시티 도시권을 조사했다.	fix	fixed
+names:place-entity-type	カンダブ島	칸다부섬	keep	fixed
+names:place-entity-type	カンザスシティ	캔자스시티	keep	fixed
+names:place-entity-type	カンザス・シティ	캔자스시티	keep	fixed
+names:place-entity-type	カンザス州	캔자스주	keep	fixed
+names:place-entity-type	カンザス川	캔자스강	keep	fixed
+names:place-entity-type	カンザスシティ国際空港	캔자스시티 국제공항	keep	fixed
+names:place-entity-type	カンザス・シティ・サザン鉄道	캔자스시티 서던 철도	keep	fixed
+names:place-entity-type	カントー大学	껀터 대학교	keep	fixed
+names:place-entity-type	カンボジア・デイリー	더 캄보디아 데일리	keep	fixed
+names:place-entity-type	アケメネス朝	아케메네스 왕조	keep	fixed
+names:place-entity-type	アイユーブ朝	아이유브 왕조	keep	fixed
+names:place-entity-type	カーカス	카카스	keep	fixed
+names:place-entity-type	カーンケール県	간케르구	fix	fixed
+names:place-entity-type	カーンケール県だ。	간케르구다.	fix	fixed
+names:place-entity-type	「カーンケール県」	「간케르구」	fix	fixed
+names:place-entity-type	カーンケール県に行く。	간케르구에 간다.	fix	fixed
+names:place-entity-type	カーンケール県の人口	간케르구의 인구	fix	fixed
+names:place-entity-type	カーンケール県を調べた。	간케르구를 조사했다.	fix	fixed
+names:place-entity-type	カーンケール県の地図	간케르구의 지도	fix	fixed
+names:place-entity-type	ガイバンダ県	가이반다구	keep	fixed
+names:place-entity-type	ガジプル県	가지푸르구	keep	fixed
+names:place-entity-type	カーロウ県	칼로주	keep	fixed
+names:place-entity-type	カーン郡	컨군	keep	fixed
+names:place-entity-type	ガサ県	가사현	keep	fixed
+names:place-entity-type	ガザ県	가자주	keep	fixed
+names:place-entity-type	カーンプル	칸푸르	keep	fixed
+names:place-entity-type	カーンチャナブリー県	깐짜나부리주	keep	fixed
+names:place-entity-type	ディストリクト線	디스트릭트선	keep	fixed

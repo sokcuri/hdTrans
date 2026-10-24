@@ -1,0 +1,10 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:237572	「人工放射性元素を調べた」	「인공 방사성 원소를 조사했어」	fix	defaults
+dict:jisjk:160652	「介助者を呼んだ」	「도우미를 불렀어」	fix	defaults
+dict:jisjk:233407	「仕上げ代を残した」	「다듬질 여유를 남겼어」	fix	defaults
+dict:jisjk:108920	「仕事中毒だと思う」	「일 중독이라고 생각해」	fix	defaults
+dict:jisjk:363532	「仕入戻り高を確認した」	「매입 반품액을 확인했어」	fix	defaults
+dict:jisjk:71741	「仕掛かり在庫を減らした」	「재공품 재고를 줄였어」	fix	defaults
+dict:jisjk:242128	「代数和を求めた」	「대수합을 구했어」	fix	defaults
+dict:jisjk:242122	「代数関数を学んだ」	「대수함수를 배웠어」	fix	defaults

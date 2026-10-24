@@ -1,0 +1,228 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.174153	シールドレッシャー	실드 렛샤	fix	fixed
+dict:names.174153	シールドレッシャーを見た。	실드 렛샤를 보았다.	fix	fixed
+dict:names.174153	シールドレッシャーが来た。	실드 렛샤가 왔다.	fix	fixed
+dict:names.174153	「シールドレッシャー」	「실드 렛샤」	fix	fixed
+dict:names.174153	シールドレッシャーの名前。	실드 렛샤의 이름.	fix	fixed
+dict:names.230483	ツェペリ	체펠리	fix	fixed
+dict:names.230483	ツェペリさんが来た。	체펠리 씨가 왔다.	fix	fixed
+dict:names.230483	ツェペリを見た。	체펠리를 보았다.	fix	fixed
+dict:names.230483	「ツェペリ」	「체펠리」	fix	fixed
+dict:names.230483	ツェペリの名前。	체펠리의 이름.	fix	fixed
+dict:names.174153	シールドレイズバックル	실드 레이즈 버클	keep	fixed
+dict:names.174153	シールドライガー	실드 라이거	keep	fixed
+dict:names.230483	ジャイロ・ツェペリ	자이로 체펠리	keep	fixed
+dict:names.230483	ツェリスカ	체리스카	keep	fixed
+dict:names.230483	センさんが来た。	센 씨가 왔다.	keep	fixed
+dict:names.230483	ズ・グムン・バ	즈 금 바	keep	fixed
+dict:names.230483	ソレイユ・エインズリー	소레이유 에인즈리	keep	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュ	제임스 스미스 부시	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュが来た。	제임스 스미스 부시가 왔다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュさんが来た。	제임스 스미스 부시 씨가 왔다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュを見た。	제임스 스미스 부시를 보았다.	fix	fixed
+dict:names.178044	「ジェームズ・スミス・ブッシュ」	「제임스 스미스 부시」	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュの名前。	제임스 스미스 부시의 이름.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュに会った。	제임스 스미스 부시를 만났다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュです。	제임스 스미스 부시입니다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュ、来て。	제임스 스미스 부시, 와.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュと話した。	제임스 스미스 부시와 이야기했다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュから手紙が来た。	제임스 스미스 부시에게서 편지가 왔다.	fix	fixed
+dict:names.178044	ジェームズ・スミス・ブッシュの本。	제임스 스미스 부시의 책.	fix	fixed
+dict:names.178044	ジョン・スミス	존 스미스	keep	fixed
+dict:names.178044	ジョン・スミス大佐	존 스미스 대령	keep	fixed
+dict:names.178044	ジェイムズ・スミス	제임스 스미스	keep	fixed
+dict:names.178044	ジェームズ・ボンド	제임스 본드	keep	fixed
+dict:names.178044	ジェブ・ブッシュ	젭 부시	keep	fixed
+dict:names.178044	ジョージ・ブッシュ	조지 부시	keep	fixed
+dict:names.178044	ジェームズ、来て。	제임스, 와.	keep	fixed
+dict:names.178044	ジョン、来て。	존, 와.	keep	fixed
+dict:names.178611	ジオン公国軍	지온 공국군	fix	fixed
+dict:names.178611	ジオン公国軍を見た。	지온 공국군을 보았다.	fix	fixed
+dict:names.178611	ジオン公国軍が来た。	지온 공국군이 왔다.	fix	fixed
+dict:names.178611	「ジオン公国軍」	「지온 공국군」	fix	fixed
+dict:names.178611	ジオン公国軍の名前。	지온 공국군의 이름.	fix	fixed
+dict:names.178611	ジオン公国軍です。	지온 공국군입니다.	fix	fixed
+dict:names.178619	ジオン軍	지온군	fix	fixed
+dict:names.178619	ジオン軍を見た。	지온군을 보았다.	fix	fixed
+dict:names.178619	ジオン軍が来た。	지온군이 왔다.	fix	fixed
+dict:names.178619	「ジオン軍」	「지온군」	fix	fixed
+dict:names.178619	ジオン軍の名前。	지온군의 이름.	fix	fixed
+dict:names.178619	ジオン軍です。	지온군입니다.	fix	fixed
+dict:names.179326	ジムスナイパーカスタム	짐 스나이퍼 커스텀	fix	fixed
+dict:names.179326	ジムスナイパーカスタムを見た。	짐 스나이퍼 커스텀을 보았다.	fix	fixed
+dict:names.179326	ジムスナイパーカスタムが来た。	짐 스나이퍼 커스텀이 왔다.	fix	fixed
+dict:names.179326	「ジムスナイパーカスタム」	「짐 스나이퍼 커스텀」	fix	fixed
+dict:names.179326	ジムスナイパーカスタムの名前。	짐 스나이퍼 커스텀의 이름.	fix	fixed
+dict:names.179326	ジムスナイパーカスタムです。	짐 스나이퍼 커스텀입니다.	fix	fixed
+dict:names.179505	ジム・ビーム	짐 빔	fix	fixed
+dict:names.179505	ジム・ビームを見た。	짐 빔을 보았다.	fix	fixed
+dict:names.179505	ジム・ビームが来た。	짐 빔이 왔다.	fix	fixed
+dict:names.179505	「ジム・ビーム」	「짐 빔」	fix	fixed
+dict:names.179505	ジム・ビームの名前。	짐 빔의 이름.	fix	fixed
+dict:names.179505	ジム・ビームです。	짐 빔입니다.	fix	fixed
+dict:names.178611	ジオン公国	지온 공국	keep	fixed
+dict:names.178611	ジオン共和国	지온 공화국	keep	fixed
+dict:names.178611	ジオン残党軍	지온 잔당군	keep	fixed
+dict:names.178611	ジオン兵	지온 병사	keep	fixed
+dict:names.178619	ジオンの再興	지온의 재흥	keep	fixed
+dict:names.178619	ジオンの幻陽	지온의 환양	keep	fixed
+dict:names.178619	ジオンの残光	지온의 잔광	keep	fixed
+dict:names.178619	ジオンの系譜	지온의 계보	keep	fixed
+dict:names.179326	ジムスナイパー	짐 스나이퍼	keep	fixed
+dict:names.179326	ジムスナイパーII	짐 스나이퍼 II	keep	fixed
+dict:names.179326	ジムスナイパーK9	짐 스나이퍼 K9	keep	fixed
+dict:names.179326	ジムキャノン	짐 캐논	keep	fixed
+dict:names.179326	ジムキャノンII	짐 캐논 II	keep	fixed
+dict:names.179326	ジム・カスタム	짐 커스텀	keep	fixed
+dict:names.179505	ジムビーム	짐 빔	keep	fixed
+dict:names.179505	ジム・キャリー	짐 캐리	keep	fixed
+dict:names.179505	ビーム	빔	keep	fixed
+dict:names.179505	ジン	진	keep	fixed
+dict:names.179505	ジム・ヘンソン	짐 헨슨	keep	fixed
+dict:names.179505	ジミー・ペイジ	지미 페이지	keep	fixed
+dict:names.179326	ジム スナイパー カスタム	짐 스나이퍼 커스텀	fix	fixed
+dict:names.179505	ジム・ビームを飲んだ。	짐 빔을 마셨다.	fix	fixed
+dict:names.178611	ジオン公国軍の兵士。	지온 공국군의 병사.	fix	fixed
+dict:names.178619	ジオン軍の兵士。	지온군의 병사.	fix	fixed
+dict:names.179505	ジムビームを飲んだ。	짐 빔을 마셨다.	keep	fixed
+dict:names.181111	ジャック・ホワイト	잭 화이트	fix	fixed
+dict:names.181111	ジャック・ホワイトを見た。	잭 화이트를 보았다.	fix	fixed
+dict:names.181111	ジャック・ホワイトが来た。	잭 화이트가 왔다.	fix	fixed
+dict:names.181111	「ジャック・ホワイト」	「잭 화이트」	fix	fixed
+dict:names.181111	ジャック・ホワイトの名前。	잭 화이트의 이름.	fix	fixed
+dict:names.181111	ジャック・ホワイトです。	잭 화이트입니다.	fix	fixed
+dict:names.181111	ジャック・ホワイトに会った。	잭 화이트를 만났다.	fix	fixed
+dict:names.181111	ジャック・ホワイトと話した。	잭 화이트와 이야기했다.	fix	fixed
+dict:names.181111	ジャック・ホワイトさんが来た。	잭 화이트 씨가 왔다.	fix	fixed
+dict:names.181111	ジャック・ホワイト!	잭 화이트!	fix	fixed
+dict:names.181111	メグ・ホワイト	메그 화이트	keep	fixed
+dict:names.181111	メグ・ホワイトを見た。	메그 화이트를 보았다.	keep	fixed
+dict:names.181111	メグ・ホワイトが来た。	메그 화이트가 왔다.	keep	fixed
+dict:names.181111	ジャック・ホワイトホール	잭 화이트홀	keep	fixed
+dict:names.181111	ジャック・ホワイトホールが来た。	잭 화이트홀이 왔다.	keep	fixed
+dict:names.181111	ジャック・オズワルド・ホワイト	잭 오스왈드 화이트	keep	fixed
+dict:names.181111	ジャック・ブラック	잭 블랙	keep	fixed
+dict:names.181111	ジャック・ブラックを見た。	잭 블랙을 보았다.	keep	fixed
+dict:names.181111	ジャック・ジョンソン	잭 존슨	keep	fixed
+dict:names.181111	ジャック・スミス	잭 스미스	keep	fixed
+dict:names.182679	ジャンニ・カヴィーナ	지아니 카비나	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナを見た。	지아니 카비나를 보았다.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナが来た。	지아니 카비나가 왔다.	fix	fixed
+dict:names.182679	「ジャンニ・カヴィーナ」	「지아니 카비나」	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナの名前。	지아니 카비나의 이름.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナに会った。	지아니 카비나를 만났다.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナと話した。	지아니 카비나와 이야기했다.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナの記事。	지아니 카비나의 기사.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナは俳優だ。	지아니 카비나는 배우다.	fix	fixed
+dict:names.182679	ジャンニ・カヴィーナについて。	지아니 카비나에 대해.	fix	fixed
+dict:names.182679	ジャンニ・ガルコ	지아니 가르코	keep	fixed
+dict:names.182679	ジャンニ・エスポジト	지아니 에스포지토	keep	fixed
+dict:names.182679	ジャンニ・ルッソ	지아니 루소	keep	fixed
+dict:names.182679	ジャンニ・アメリオ	잔니 아멜리오	keep	fixed
+dict:names.182679	ジャンニ・モランディ	잔니 모란디	keep	fixed
+dict:names.182679	ジャンニ・スキッキ	쟌니 스킥키	keep	fixed
+dict:names.182679	ジャンニ・ブルーノ	잔니 브루노	keep	fixed
+dict:names.182679	ジャンニ・ヴェルサーチ	잔니 베르사체	keep	fixed
+dict:names.182679	ジャンニ・ロダーリ	잔니 로다리	keep	fixed
+dict:names.182679	ジャンニ・プッチーニ	잔니 푸치니	keep	fixed
+dict:names.182932	ジャンルカ・イアコノ	지안루카 이아코노	fix	fixed
+dict:names.182932	ジャンルカ・イアコノを見た。	지안루카 이아코노를 보았다.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノが来た。	지안루카 이아코노가 왔다.	fix	fixed
+dict:names.182932	「ジャンルカ・イアコノ」	「지안루카 이아코노」	fix	fixed
+dict:names.182932	ジャンルカ・イアコノの名前。	지안루카 이아코노의 이름.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノに会った。	지안루카 이아코노를 만났다.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノと話した。	지안루카 이아코노와 이야기했다.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノの記事。	지안루카 이아코노의 기사.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノは俳優だ。	지안루카 이아코노는 배우다.	fix	fixed
+dict:names.182932	ジャンルカ・イアコノについて。	지안루카 이아코노에 대해.	fix	fixed
+dict:names.182932	ジャンルカ・カプラーリ	잔루카 카프라리	keep	fixed
+dict:names.182932	ジャンルカ・マンチーニ	잔루카 만치니	keep	fixed
+dict:names.182932	ジャンルカ・ヴィアッリ	잔루카 비알리	keep	fixed
+dict:names.182932	ジャンルカ・スカマッカ	잔루카 스카마카	keep	fixed
+dict:names.182932	ジャンルカ・クルチ	잔루카 쿠르치	keep	fixed
+dict:names.182932	ジャンルカ・バジーレ	잔루카 바실레	keep	fixed
+dict:names.182932	ジャンルカ・ロッキ	잔루카 로키	keep	fixed
+dict:names.182932	ジャンルカ・ガウディーノ	잔루카 가우디노	keep	fixed
+dict:names.182932	ジャンルカ・ラパドゥーラ	잔루카 라파둘라	keep	fixed
+dict:names.182932	ジャンルカ・ペゴーロ	잔루카 페골로	keep	fixed
+dict:names.183198	ジャン・ヒギンズ	진 히긴스	fix	fixed
+dict:names.183198	ジャン・ヒギンズを見た。	진 히긴스를 보았다.	fix	fixed
+dict:names.183198	ジャン・ヒギンズが来た。	진 히긴스가 왔다.	fix	fixed
+dict:names.183198	「ジャン・ヒギンズ」	「진 히긴스」	fix	fixed
+dict:names.183198	ジャン・ヒギンズの名前。	진 히긴스의 이름.	fix	fixed
+dict:names.183198	ジャン・ヒギンズに会った。	진 히긴스를 만났다.	fix	fixed
+dict:names.183198	ジャン・ヒギンズと話した。	진 히긴스와 이야기했다.	fix	fixed
+dict:names.183198	ジャン・ヒギンズの記事。	진 히긴스의 기사.	fix	fixed
+dict:names.183198	ジャン・ヒギンズの写真。	진 히긴스의 사진.	fix	fixed
+dict:names.183198	ジャン・ヒギンズについて。	진 히긴스에 대해.	fix	fixed
+dict:names.183198	ジャック・ヒギンズ	잭 히긴스	keep	fixed
+dict:names.183198	ジョン・ヒギンズ	존 히긴스	keep	fixed
+dict:names.183198	カイル・ヒギンズ	카일 히긴스	keep	fixed
+dict:names.183198	クレイ・ヒギンズ	클레이 히긴스	keep	fixed
+dict:names.183198	コリン・ヒギンズ	콜린 히긴스	keep	fixed
+dict:names.183198	スティーヴ・ヒギンズ	스티브 히긴스	keep	fixed
+dict:names.183198	チャック・ヒギンズ	척 히긴스	keep	fixed
+dict:names.183198	ヒギンズ	히긴스	keep	fixed
+dict:names.183198	ジャン・ピアジェ	장 피아제	keep	fixed
+dict:names.183198	ジャン・バルジャン	장 발장	keep	fixed
+dict:names.184406	ジュリアン・テンプル	줄리앙 템플	fix	fixed
+dict:names.184406	ジュリアン・テンプルを見た。	줄리앙 템플을 보았다.	fix	fixed
+dict:names.184406	ジュリアン・テンプルが来た。	줄리앙 템플이 왔다.	fix	fixed
+dict:names.184406	「ジュリアン・テンプル」	「줄리앙 템플」	fix	fixed
+dict:names.184406	ジュリアン・テンプルの名前。	줄리앙 템플의 이름.	fix	fixed
+dict:names.184406	ジュリアン・テンプルに会った。	줄리앙 템플을 만났다.	fix	fixed
+dict:names.184406	ジュリアン・テンプルと話した。	줄리앙 템플과 이야기했다.	fix	fixed
+dict:names.184406	ジュリアン・テンプルの記事。	줄리앙 템플의 기사.	fix	fixed
+dict:names.184406	ジュリアン・テンプルの写真。	줄리앙 템플의 사진.	fix	fixed
+dict:names.184406	ジュリアン・テンプルについて。	줄리앙 템플에 대해.	fix	fixed
+dict:names.184406	神殿	신전	keep	fixed
+dict:names.184406	神殿の名前。	신전의 이름.	keep	fixed
+dict:names.184406	湖を見た。	호수를 보았다.	keep	fixed
+dict:names.184406	湖の名前。	호수의 이름.	keep	fixed
+dict:names.184406	ジュノー・テンプル	주노 템플	keep	fixed
+dict:names.184406	シャーリー・テンプル	셜리 템플	keep	fixed
+dict:names.184406	ジュリアン・レノン	줄리언 레넌	keep	fixed
+dict:names.184406	ジュリアン・アサンジ	줄리언 어산지	keep	fixed
+dict:names.184406	ジュリアン・グローヴァー	줄리언 글러버	keep	fixed
+dict:names.184406	ジュリアン・ハクスリー	줄리언 헉슬리	keep	fixed
+dict:names.184838	ジュリー・レイク	줄리 레이크	fix	fixed
+dict:names.184838	ジュリー・レイクを見た。	줄리 레이크를 보았다.	fix	fixed
+dict:names.184838	ジュリー・レイクが来た。	줄리 레이크가 왔다.	fix	fixed
+dict:names.184838	「ジュリー・レイク」	「줄리 레이크」	fix	fixed
+dict:names.184838	ジュリー・レイクの名前。	줄리 레이크의 이름.	fix	fixed
+dict:names.184838	ジュリー・レイクに会った。	줄리 레이크를 만났다.	fix	fixed
+dict:names.184838	ジュリー・レイクと話した。	줄리 레이크와 이야기했다.	fix	fixed
+dict:names.184838	ジュリー・レイクの記事。	줄리 레이크의 기사.	fix	fixed
+dict:names.184838	ジュリー・レイクの写真。	줄리 레이크의 사진.	fix	fixed
+dict:names.184838	ジュリー・レイクについて。	줄리 레이크에 대해.	fix	fixed
+dict:names.184838	レイク	레이크	keep	fixed
+dict:names.184838	ヴェロニカ・レイク	베로니카 레이크	keep	fixed
+dict:names.184838	リッキー・レイク	리키 레이크	keep	fixed
+dict:names.184838	湖を見た。	호수를 보았다.	keep	fixed
+dict:names.184838	湖の名前。	호수의 이름.	keep	fixed
+dict:names.184838	ジュリー・ロンドン	줄리 런던	keep	fixed
+dict:names.184838	ジュリー・ワーナー	줄리 워너	keep	fixed
+dict:names.184838	ジュリー・ホワイト	줄리 화이트	keep	fixed
+dict:names.184838	ジュリー・ハリス	줄리 해리스	keep	fixed
+dict:names.184838	ジュリー・ボーウェン	줄리 보언	keep	fixed
+dict:names.185160	ジューン・ブラウン	준 브라운	fix	fixed
+dict:names.185160	ジューン・ブラウンを見た。	준 브라운을 보았다.	fix	fixed
+dict:names.185160	ジューン・ブラウンが来た。	준 브라운이 왔다.	fix	fixed
+dict:names.185160	「ジューン・ブラウン」	「준 브라운」	fix	fixed
+dict:names.185160	ジューン・ブラウンの名前。	준 브라운의 이름.	fix	fixed
+dict:names.185160	ジューン・ブラウンに会った。	준 브라운을 만났다.	fix	fixed
+dict:names.185160	ジューン・ブラウンと話した。	준 브라운과 이야기했다.	fix	fixed
+dict:names.185160	ジューン・ブラウンの記事。	준 브라운의 기사.	fix	fixed
+dict:names.185160	ジューン・ブラウンの写真。	준 브라운의 사진.	fix	fixed
+dict:names.185160	ジューン・ブラウンについて。	준 브라운에 대해.	fix	fixed
+dict:names.185160	ブラウン	브라운	keep	fixed
+dict:names.185160	ジュリー・ブラウン	줄리 브라운	keep	fixed
+dict:names.185160	ジューン・アリソン	준 앨리슨	keep	fixed
+dict:names.185160	ジューン・アンダーソン	준 앤더슨	keep	fixed
+dict:names.185160	ジューン・カーター・キャッシュ	준 카터 캐시	keep	fixed
+dict:names.185160	ジューン・ウォーカー	준 워커	keep	fixed
+dict:names.185160	ジューン・スペンサー	준 스펜서	keep	fixed
+dict:names.185160	ジューン・ロックハート	준 록하트	keep	fixed
+dict:names.185160	ジュリアン・テンプル	줄리앙 템플	fix	fixed
+dict:names.185160	ジュリー・レイク	줄리 레이크	fix	fixed

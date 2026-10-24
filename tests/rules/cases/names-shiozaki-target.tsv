@@ -1,0 +1,22 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:surname-spelling	潮崎なの	시오자키 나노	fix	lookup
+names:surname-spelling	潮崎なの氏が来た。	시오자키 나노 씨가 왔다.	fix	lookup
+names:surname-spelling	潮崎なのの名前	시오자키 나노의 이름	fix	lookup
+names:surname-spelling	潮崎なの様	시오자키 나노님	fix	lookup
+names:surname-spelling	潮崎なのと話した。	시오자키 나노와 이야기했다.	fix	lookup
+names:surname-spelling	「潮崎なの」	「시오자키 나노」	fix	lookup
+names:surname-spelling	潮崎なの君	시오자키 나노 군	fix	lookup
+names:surname-spelling	潮崎なの氏	시오자키 나노 씨	fix	lookup
+names:surname-spelling	潮崎なのへ	시오자키 나노에게	fix	lookup
+names:surname-spelling	潮崎なの！	시오자키 나노!	fix	lookup
+names:surname-spelling	潮崎なの？	시오자키 나노?	fix	lookup
+names:surname-spelling	潮崎なの。	시오자키 나노.	fix	lookup
+names:surname-spelling	潮崎なのという名前	시오자키 나노라는 이름	fix	lookup
+names:surname-spelling	潮崎なのの本	시오자키 나노의 책	fix	lookup
+names:surname-spelling	潮崎かずきさん	시오자키 카즈키 씨	keep	lookup
+names:surname-spelling	篠崎愛さん	시노자키 아이 씨	keep	lookup
+names:surname-spelling	篠崎真琴さん	시노자키 마코토 씨	keep	lookup
+names:surname-spelling	篠崎咲世子さん	시노자키 사요코 씨	keep	lookup
+names:surname-spelling	潮崎かずき	시오자키 카즈키	keep	lookup
+names:surname-spelling	潮崎 哲士さん	시오자키 테츠시 씨	keep	lookup

@@ -1,0 +1,33 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.174644	ジェイソン・グッドウィン	제이슨 굿윈	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンが来た。	제이슨 굿윈이 왔다.	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンさんが来た。	제이슨 굿윈 씨가 왔다.	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンを見た。	제이슨 굿윈을 보았다.	fix	fixed
+dict:names.174644	「ジェイソン・グッドウィン」	「제이슨 굿윈」	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンの名前。	제이슨 굿윈의 이름.	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンに会った。	제이슨 굿윈을 만났다.	fix	fixed
+dict:names.174644	ジェイソン・グッドウィンです。	제이슨 굿윈입니다.	fix	fixed
+dict:names.174644	ジェイソン、来て。	제이슨, 와.	keep	fixed
+dict:names.174644	ジェイソン・グリフィス	제이슨 그리피스	keep	fixed
+dict:names.174644	ジェイソン・リー	제이슨 리	keep	fixed
+dict:names.174644	ジニファー・グッドウィン	지니퍼 굿윈	keep	fixed
+dict:names.174644	ジョン・グッドウィン	존 굿윈	keep	fixed
+dict:names.174644	リック・ディッカー	릭 디커	keep	fixed
+dict:names.174644	シンデレラはオンライン中!(中国ドラマ)	신데렐라는 온라인 중! (중국 드라마)	keep	fixed
+dict:names.222825	ダーク・ボッド	더크 보드	fix	fixed
+dict:names.222825	ダーク・ボッドが来た。	더크 보드가 왔다.	fix	fixed
+dict:names.222825	ダーク・ボッドさんが来た。	더크 보드 씨가 왔다.	fix	fixed
+dict:names.222825	ダーク・ボッドを見た。	더크 보드를 보았다.	fix	fixed
+dict:names.222825	「ダーク・ボッド」	「더크 보드」	fix	fixed
+dict:names.222825	ダーク・ボッドの名前。	더크 보드의 이름.	fix	fixed
+dict:names.222825	ダーク・ボッドに会った。	더크 보드를 만났다.	fix	fixed
+dict:names.222825	ダーク・ボッドです。	더크 보드입니다.	fix	fixed
+dict:names.222825	ダーク・ボッド、来て。	더크 보드, 와.	fix	fixed
+dict:names.222825	ダーク、来て。	다크, 와.	keep	fixed
+dict:names.222825	ダーク・ボガード	더크 보가드	keep	fixed
+dict:names.222825	ダーク・ノヴィツキー	디르크 노비츠키	keep	fixed
+dict:names.222825	ダーク・シュナイダー	다크 슈나이더	keep	fixed
+dict:names.222825	ジェイソン・グッドウィン	제이슨 굿윈	fix	fixed
+dict:names.222825	リック・ディッカー	릭 디커	keep	fixed
+dict:names.222825	シンデレラはオンライン中!(中国ドラマ)	신데렐라는 온라인 중! (중국 드라마)	keep	fixed

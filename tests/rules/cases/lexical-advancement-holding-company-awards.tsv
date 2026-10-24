@@ -1,0 +1,122 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:93990	計画を押し進める。	계획을 추진한다.	fix	defaults
+dict:jisjk:93990	改革を押し進めた。	개혁을 추진했다.	fix	defaults
+dict:jisjk:93990	研究を押し進めている。	연구를 추진하고 있다.	fix	defaults
+dict:jisjk:93990	事業を押し進めたい。	사업을 추진하고 싶다.	fix	defaults
+dict:jisjk:93990	計画を押し進めればよい。	계획을 추진하면 좋다.	fix	defaults
+dict:jisjk:93990	改革を押し進めてください。	개혁을 추진해 주세요.	fix	defaults
+dict:jisjk:93990	「計画を押し進める。」	「계획을 추진한다.」	fix	defaults
+dict:jisjk:93990	計画を推し進める。	계획을 추진한다.	keep	defaults
+dict:jisjk:93990	彼を推薦する。	그를 추천한다.	keep	defaults
+dict:jisjk:93990	仕事を押し付ける。	일을 떠넘긴다.	keep	defaults
+dict:jisjk:93990	「計画を推し進める。」	「계획을 추진한다.」	keep	defaults
+dict:jisjk:109098	拡大レンズを使う。	확대 렌즈를 쓴다.	fix	defaults
+dict:jisjk:109098	拡大レンズで見る。	확대 렌즈로 본다.	fix	defaults
+dict:jisjk:109098	拡大レンズが必要だ。	확대 렌즈가 필요하다.	fix	defaults
+dict:jisjk:109098	拡大レンズを買った。	확대 렌즈를 샀다.	fix	defaults
+dict:jisjk:109098	拡大レンズを交換する。	확대 렌즈를 교환한다.	fix	defaults
+dict:jisjk:109098	拡大レンズは大きい。	확대 렌즈는 크다.	fix	defaults
+dict:jisjk:109098	「拡大レンズを使う。」	「확대 렌즈를 쓴다.」	fix	defaults
+dict:jisjk:109098	接眼レンズを使う。	접안 렌즈를 쓴다.	keep	defaults
+dict:jisjk:109098	拡大鏡を使う。	확대경을 쓴다.	keep	defaults
+dict:jisjk:109098	レンズを交換する。	렌즈를 교환한다.	keep	defaults
+dict:jisjk:109098	「接眼レンズを使う。」	「접안 렌즈를 쓴다.」	keep	defaults
+dict:jisjk:348593	持ち株会社を設立する。	지주 회사를 설립한다.	fix	defaults
+dict:jisjk:348593	持ち株会社の社長だ。	지주 회사의 사장이다.	fix	defaults
+dict:jisjk:348593	持ち株会社に移行する。	지주 회사로 이행한다.	fix	defaults
+dict:jisjk:348593	持ち株会社がある。	지주 회사가 있다.	fix	defaults
+dict:jisjk:348593	持ち株会社を作った。	지주 회사를 만들었다.	fix	defaults
+dict:jisjk:348593	持ち株会社の株を買う。	지주 회사의 주식을 산다.	fix	defaults
+dict:jisjk:348593	「持ち株会社を設立する。」	「지주 회사를 설립한다.」	fix	defaults
+dict:jisjk:348593	持株会社を設立する。	지주회사를 설립한다.	keep	defaults
+dict:jisjk:348593	株主が集まる。	주주가 모인다.	keep	defaults
+dict:jisjk:348593	「持株会社を設立する。」	「지주회사를 설립한다.」	keep	defaults
+dict:jisjk:120474	彼は何を指してらっしゃるのですか。	그는 무엇을 가리키고 계십니까.	fix	defaults
+dict:jisjk:120474	どこを指してらっしゃるのですか。	어디를 가리키고 계십니까.	fix	defaults
+dict:jisjk:120474	地図を指してらっしゃる。	지도를 가리키고 계신다.	fix	defaults
+dict:jisjk:120474	指してらっしゃった。	가리키고 계셨다.	fix	defaults
+dict:jisjk:120474	指してらっしゃる場所。	가리키고 계시는 장소.	fix	defaults
+dict:jisjk:120474	「彼は何を指してらっしゃるのですか。」	「그는 뭘 가리키고 계십니까.」	fix	defaults
+dict:jisjk:120474	彼は地図を指している。	그는 지도를 가리키고 있다.	keep	defaults
+dict:jisjk:120474	先生が教えていらっしゃる。	선생님이 가르치고 계신다.	keep	defaults
+dict:jisjk:120474	指先が冷たい。	손가락끝이 차갑다.	keep	defaults
+dict:jisjk:120474	「彼は地図を指している。」	「그는 지도를 가리키고 있다.」	keep	defaults
+dict:jisjk:262530	指揮をとられた。	지휘를 맡으셨다.	fix	defaults
+dict:jisjk:262530	指揮をとられる。	지휘를 맡으신다.	fix	defaults
+dict:jisjk:262530	誰が指揮をとられますか。	누가 지휘를 맡으십니까.	fix	defaults
+dict:jisjk:262530	現場の指揮をとられた。	현장의 지휘를 맡으셨다.	fix	defaults
+dict:jisjk:262530	指揮をとられるのですか。	지휘를 맡으십니까.	fix	defaults
+dict:jisjk:262530	「指揮をとられた。」	「지휘를 맡으셨다.」	fix	defaults
+dict:jisjk:262530	彼が指揮をとる。	그가 지휘를 한다.	keep	defaults
+dict:jisjk:262530	指揮官が来た。	지휘관이 왔다.	keep	defaults
+dict:jisjk:262530	地位を守る。	지위를 지킨다.	keep	defaults
+dict:jisjk:262530	「彼が指揮をとる。」	「그가 지휘를 한다.」	keep	defaults
+dict:jisjk:16523	掛持をしている。	겸임을 하고 있다.	fix	defaults
+dict:jisjk:16523	掛持は難しい。	겸임은 어렵다.	fix	defaults
+dict:jisjk:16523	掛持が必要だ。	겸임이 필요하다.	fix	defaults
+dict:jisjk:16523	掛持を禁止する。	겸임을 금지한다.	fix	defaults
+dict:jisjk:16523	仕事の掛持だ。	일의 겸임이다.	fix	defaults
+dict:jisjk:16523	掛持を続けた。	겸임을 계속했다.	fix	defaults
+dict:jisjk:16523	「掛持をしている。」	「겸임을 하고 있다.」	fix	defaults
+dict:jisjk:16523	掛持ちをしている。	겸임을 하고 있다.	keep	defaults
+dict:jisjk:16523	掛け持ちは難しい。	겸임은 어렵다.	keep	defaults
+dict:jisjk:16523	兼任する。	겸임한다.	keep	defaults
+dict:jisjk:16523	「掛持ちをしている。」	「겸임을 하고 있다.」	keep	defaults
+dict:jisjk:201714	記事を掲載しておく。	기사를 게재해 둔다.	keep	defaults
+dict:jisjk:201714	写真を掲載しておいた。	사진을 게재해 두었다.	keep	defaults
+dict:jisjk:201714	雑誌に掲載しておきます。	잡지에 게재해 둡니다.	keep	defaults
+dict:jisjk:201714	説明を掲載しておけばよい。	설명을 게재해 두면 좋다.	keep	defaults
+dict:jisjk:201714	広告を掲載しておきたい。	광고를 게재해 두고 싶다.	keep	defaults
+dict:jisjk:201714	記事を掲載しておいてください。	기사를 게재해 둬 주세요.	keep	defaults
+dict:jisjk:201714	記事を掲載しております。	기사를 게재하고 있습니다.	fix	defaults
+dict:jisjk:201714	広告を掲載しておりました。	광고를 게재하고 있었습니다.	fix	defaults
+dict:jisjk:201714	案内を掲載しておりません。	안내를 게재하고 있지 않습니다.	fix	defaults
+dict:jisjk:201714	「記事を掲載しております。」	「기사를 게재하고 있습니다.」	fix	defaults
+dict:jisjk:201714	記事を掲載する。	기사를 게재한다.	keep	defaults
+dict:jisjk:201714	記事を掲載した。	기사를 게재했다.	keep	defaults
+dict:jisjk:201714	名前を掲示する。	이름을 게시한다.	keep	defaults
+dict:jisjk:201714	「記事を掲載する。」	「기사를 게재한다.」	keep	defaults
+dict:jisjk:110919	操り人形を作る。	꼭두각시를 만든다.	fix	defaults
+dict:jisjk:110919	操り人形のようだ。	꼭두각시 같다.	fix	defaults
+dict:jisjk:110919	彼は操り人形だ。	그는 꼭두각시다.	fix	defaults
+dict:jisjk:110919	操り人形を動かす。	꼭두각시를 움직인다.	fix	defaults
+dict:jisjk:110919	操り人形が踊る。	꼭두각시가 춤춘다.	fix	defaults
+dict:jisjk:110919	操り人形を見た。	꼭두각시를 보았다.	fix	defaults
+dict:jisjk:110919	「操り人形を作る。」	「꼭두각시를 만든다.」	fix	defaults
+dict:jisjk:110919	人形を作る。	인형을 만든다.	keep	defaults
+dict:jisjk:110919	操り芝居を見る。	인형극을 본다.	keep	defaults
+dict:jisjk:110919	操縦士が来た。	조종사가 왔다.	keep	defaults
+dict:jisjk:110919	「人形を作る。」	「인형을 만든다.」	keep	defaults
+dict:jisjk:239983	操業率が上がる。	조업률이 오른다.	fix	defaults
+dict:jisjk:239983	操業率が低い。	조업률이 낮다.	fix	defaults
+dict:jisjk:239983	操業率を調べる。	조업률을 조사한다.	fix	defaults
+dict:jisjk:239983	工場の操業率だ。	공장의 조업률이다.	fix	defaults
+dict:jisjk:239983	操業率を維持する。	조업률을 유지한다.	fix	defaults
+dict:jisjk:239983	「操業率が上がる。」	「조업률이 오른다.」	fix	defaults
+dict:jisjk:239983	操業日数を調べる。	조업 일수를 조사한다.	keep	defaults
+dict:jisjk:239983	稼働率が高い。	가동률이 높다.	keep	defaults
+dict:jisjk:239983	失業率が低い。	실업률이 낮다.	keep	defaults
+dict:jisjk:239983	「操業日数を調べる。」	「조업 일수를 조사한다.」	keep	defaults
+dict:jisjk:27266	授賞する。	시상한다.	fix	defaults
+dict:jisjk:27266	授賞の理由だ。	시상의 이유다.	fix	defaults
+dict:jisjk:27266	授賞を決めた。	시상을 결정했다.	fix	defaults
+dict:jisjk:27266	授賞がある。	시상이 있다.	fix	defaults
+dict:jisjk:27266	授賞の対象だ。	시상의 대상이다.	fix	defaults
+dict:jisjk:27266	授賞を行う。	시상을 실시한다.	fix	defaults
+dict:jisjk:27266	「授賞する。」	「시상한다.」	fix	defaults
+dict:jisjk:27266	受賞する。	수상한다.	keep	defaults
+dict:jisjk:27266	受賞者が来た。	수상자가 왔다.	keep	defaults
+dict:jisjk:27266	賞を授与する。	상을 수여한다.	keep	defaults
+dict:jisjk:27266	「受賞する。」	「수상한다.」	keep	defaults
+dict:jisjk:75821	授賞式に出席する。	시상식에 출석한다.	fix	defaults
+dict:jisjk:75821	授賞式が始まる。	시상식이 시작된다.	fix	defaults
+dict:jisjk:75821	授賞式を開く。	시상식을 연다.	fix	defaults
+dict:jisjk:75821	授賞式で会った。	시상식에서 만났다.	fix	defaults
+dict:jisjk:75821	授賞式の会場だ。	시상식의 회장이다.	fix	defaults
+dict:jisjk:75821	授賞式は明日だ。	시상식은 내일이다.	fix	defaults
+dict:jisjk:75821	「授賞式に出席する。」	「시상식에 출석한다.」	fix	defaults
+dict:jisjk:75821	受賞した。	수상했다.	keep	defaults
+dict:jisjk:75821	入学式に出席する。	입학식에 출석한다.	keep	defaults
+dict:jisjk:75821	表彰式が始まる。	표창식이 시작된다.	keep	defaults
+dict:jisjk:75821	「受賞した。」	「수상했다.」	keep	defaults

@@ -1,0 +1,7 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+lexical:spelling	「つくづくと考えた」	「곰곰이 생각했다」	fix	defaults
+lexical:spelling	「これは土鍋だ。」	「이건 질냄비다.」	fix	defaults
+lexical:spelling	「粗利益率だ。」	「총이익률이다.」	fix	defaults
+lexical:spelling	「彼は臆病者だ。」	「그는 겁쟁이다.」	fix	defaults
+lexical:spelling	「これは関東大震災だ。」	「이건 관동대지진이다.」	fix	defaults

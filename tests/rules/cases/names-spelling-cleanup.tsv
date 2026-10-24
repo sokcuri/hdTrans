@@ -1,0 +1,20 @@
+# 규칙: LEX-2, LEX-3, LEX-4
+rule	input	expected	kind	layer
+names:gloss	フォルカー・ヴィッシング	폴커 비싱	fix	lookup
+names:gloss	「フォルカー・ヴィッシング」	「폴커 비싱」	fix	lookup
+names:gloss	フォルカー・ヴィッシングが来た。	폴커 비싱이 왔다.	fix	lookup
+names:gloss	フォルカー・ヴィッシングの演説	폴커 비싱의 연설	fix	lookup
+names:gloss	フォルカー・ヴィッシングを見た。	폴커 비싱을 보았다.	fix	lookup
+names:gloss	フォルトゥナート・デペーロ	포르투나토 데페로	fix	lookup
+names:gloss	「フォルトゥナート・デペーロ」	「포르투나토 데페로」	fix	lookup
+names:gloss	フォルトゥナート・デペーロの作品	포르투나토 데페로의 작품	fix	lookup
+names:gloss	フォルトゥナート・デペーロが描いた。	포르투나토 데페로가 그렸다.	fix	lookup
+names:gloss	フォルトゥナート・デペーロを知っている。	포르투나토 데페로를 알고 있다.	fix	lookup
+names:gloss	フォルカー・シュトラッセン	포커 슈트라센	keep	lookup
+names:gloss	フォルカー・ブルッフ	볼커 브루흐	keep	lookup
+names:gloss	フォルトゥナート・バルデッリ	포르투나토 발델리	keep	lookup
+names:gloss	フォルトゥナの瞳	포르투나의 눈동자	keep	lookup
+names:gloss	フォルクスワーゲン	폭스바겐	keep	lookup
+names:gloss	フォレスト・ウィテカー	포리스트 휘터커	keep	lookup
+names:gloss	フォルテ.EXE	포르테. EXE	keep	lookup
+names:gloss	フォトン・クラッシャー	포톤 크래셔	keep	lookup

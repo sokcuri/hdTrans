@@ -1,0 +1,34 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+names:canonical-name	片桐順一郎	카타기리 쥰이치로	fix	lookup
+names:canonical-name	片桐順一郎氏	카타기리 쥰이치로 씨	fix	lookup
+names:canonical-name	牧原大成	마키하라 타이세이	fix	lookup
+names:canonical-name	牧原大成氏	마키하라 타이세이 씨	fix	lookup
+names:canonical-name	牧原 大成	마키하라 타이세이	fix	lookup
+names:canonical-name	牧原 大成の名前	마키하라 타이세이의 이름	fix	lookup
+names:canonical-name	「牧原 大成」	「마키하라 타이세이」	fix	lookup
+names:canonical-name	片桐順一郎さん	카타기리 쥰이치로우 씨	keep	lookup
+names:canonical-name	片桐順一郎の名前	카타기리 쥰이치로우의 이름	keep	lookup
+names:canonical-name	「片桐順一郎」	「카타기리 쥰이치로우」	keep	lookup
+names:canonical-name	片桐順一郎です。	카타기리 쥰이치로우입니다.	keep	lookup
+names:canonical-name	片桐順一郎を見た。	카타기리 쥰이치로우를 보았다.	keep	lookup
+names:canonical-name	片桐順一郎の写真	카타기리 쥰이치로우의 사진	keep	lookup
+names:canonical-name	片桐順一郎。	카타기리 쥰이치로우.	keep	lookup
+names:canonical-name	片桐順一郎！	카타기리 쥰이치로우!	keep	lookup
+names:canonical-name	片桐順一郎について	카타기리 쥰이치로우에 대해	keep	lookup
+names:canonical-name	片桐順一郎も	카타기리 쥰이치로우도	keep	lookup
+names:canonical-name	片桐仁	카타기리 히토시	keep	lookup
+names:canonical-name	片桐仁の名前	카타기리 히토시의 이름	keep	lookup
+names:canonical-name	「片桐仁」	「카타기리 히토시」	keep	lookup
+names:canonical-name	片桐はいり	카타기리 하이리	keep	lookup
+names:canonical-name	片桐はいりの名前	카타기리 하이리의 이름	keep	lookup
+names:canonical-name	「片桐はいり」	「카타기리 하이리」	keep	lookup
+names:canonical-name	片桐隆明	카타기리 타카아키	keep	lookup
+names:canonical-name	片桐隆明の名前	카타기리 타카아키의 이름	keep	lookup
+names:canonical-name	「片桐隆明」	「카타기리 타카아키」	keep	lookup
+names:canonical-name	牧秀悟	마키 슈고	keep	lookup
+names:canonical-name	牧秀悟の名前	마키 슈고의 이름	keep	lookup
+names:canonical-name	「牧秀悟」	「마키 슈고」	keep	lookup
+names:canonical-name	牧之原翔子	마키노하라 쇼코	keep	lookup
+names:canonical-name	牧之原翔子の名前	마키노하라 쇼코의 이름	keep	lookup
+names:canonical-name	「牧之原翔子」	「마키노하라 쇼코」	keep	lookup

@@ -1,0 +1,20 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+dict:names.574495	方文琳	팡 웬린	fix	fixed
+dict:names.574495	方文琳さん	팡 웬린 씨	fix	fixed
+dict:names.574495	「方文琳」	「팡 웬린」	fix	fixed
+dict:names.574495	方文琳の歌。	팡 웬린의 노래.	fix	fixed
+dict:names.574495	方文琳が来た。	팡 웬린이 왔다.	fix	fixed
+dict:names.574495	方文琳と話す。	팡 웬린과 이야기한다.	fix	fixed
+dict:names.574495	方文琳に会う。	팡 웬린을 만난다.	fix	fixed
+dict:names.574495	方文琳の名前。	팡 웬린의 이름.	fix	fixed
+dict:names.574495	方文琳の演技。	팡 웬린의 연기.	fix	fixed
+dict:names.574495	方文琳の出演。	팡 웬린의 출연.	fix	fixed
+dict:names.574495	方文山	팡원산	keep	fixed
+dict:names.574495	方文圭	방문규	keep	fixed
+dict:names.574495	方斌	팡빈	keep	fixed
+dict:names.574495	方励之	팡리즈	keep	fixed
+dict:names.574495	方力鈞	팡리쥔	keep	fixed
+dict:names.574495	方大同	방대동	keep	fixed
+dict:names.574495	宋慧喬	송혜교	keep	fixed
+dict:names.574495	宋仲基	송중기	keep	fixed

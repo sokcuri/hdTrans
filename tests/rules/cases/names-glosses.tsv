@@ -6,3 +6,50 @@ names:gloss	ドヴォルザークの交響曲を聴いた。	드보르자크의 
 names:gloss	あの…魔王様、剣は忘れてた	그…마왕님, 검은 잊었다	fix	lookup
 names:gloss	ジョン・スミスが来た。	존 스미스가 왔다.	keep	lookup
 names:gloss	現在、玉葉妃と梨花妃の二人の子どもだけが生き残っている。	현재, 교쿠요비와 리화비의 두 사람의 아이만이 살아남았다.	fix	lookup
+names:short-title	十字架降架	십자가에서 내림	fix	lookup
+names:short-title	「十字架降架」	「십자가에서 내림」	fix	lookup
+names:short-title	十字架降架を見た。	십자가에서 내림을 보았다.	fix	lookup
+names:short-title	十字架降架の写真。	십자가에서 내림의 사진.	fix	lookup
+names:short-title	十字架降架について。	십자가에서 내림에 대해.	fix	lookup
+names:short-title	十字架降架という作品。	십자가에서 내림이라는 작품.	fix	lookup
+names:short-title	十字架	십자가	keep	lookup
+names:short-title	十字架を見た。	십자가를 보았다.	keep	lookup
+names:short-title	十字架の写真。	십자가의 사진.	keep	lookup
+names:short-title	最後の晩餐	최후의 만찬	keep	lookup
+names:short-title	君が代	기미가요	keep	lookup
+names:short-title	君が代丸	기미가요마루	keep	lookup
+names:short-title	仮面ライダー BLACK	가면 라이더 BLACK	keep	lookup
+names:short-title	卒業 ～Graduation～	졸업 ~Graduation~	keep	lookup
+names:short-title	俺の彼女は飼主様、妹はご主人様	내 그녀는 주인님, 여동생은 주인님	keep	lookup
+names:target-debris	二天一流	이천일류	keep	lookup
+names:target-debris	八十八箇所巡礼	88개소 순례	fix	lookup
+names:target-debris	「八十八箇所巡礼」	「88개소 순례」	fix	lookup
+names:target-debris	八十八箇所巡礼の旅。	88개소 순례의 여행.	fix	lookup
+names:target-debris	八十八ヶ所巡礼	하치주하치카쇼 준레이	keep	lookup
+names:target-debris	塔和子	토 카즈코	fix	lookup
+names:target-debris	塔和子さん	토 카즈코 씨	fix	lookup
+names:target-debris	塔和子の詩。	토 카즈코의 시.	fix	lookup
+names:target-debris	塔和子が来た。	토 카즈코가 왔다.	fix	lookup
+names:target-debris	「塔和子」	「토 카즈코」	fix	lookup
+names:target-debris	塔和モナカ	도와 모나카	keep	lookup
+names:target-debris	塔和灰慈	토와 하이지	keep	lookup
+names:target-debris	付録:朝鮮語の数詞一覧	부록:조선어의 수사 일람	keep	lookup
+names:target-debris	九鼎記:禹皇の宝物	구정기:우황의 보물	keep	lookup
+names:target-debris	분류:88개소 순례	분류:88개소 순례	keep	lookup
+names:target-debris	토 카즈코,	토 카즈코,	keep	lookup
+names:published-title	人生がときめく片づけの魔法	인생이 빛나는 정리의 마법	fix	lookup
+names:published-title	「人生がときめく片づけの魔法」	「인생이 빛나는 정리의 마법」	fix	lookup
+names:published-title	人生がときめく片づけの魔法を見た。	인생이 빛나는 정리의 마법을 보았다.	fix	lookup
+names:published-title	人生がときめく片づけの魔法の話。	인생이 빛나는 정리의 마법의 이야기.	fix	lookup
+names:published-title	人生がときめく片づけの魔法です。	인생이 빛나는 정리의 마법입니다.	fix	lookup
+names:published-title	人生がときめく片づけの魔法がある。	인생이 빛나는 정리의 마법이 있다.	fix	lookup
+names:published-title	人生がときめく片づけの魔法について。	인생이 빛나는 정리의 마법에 대해.	fix	lookup
+names:published-title	人生がときめく片づけの魔法と呼ぶ。	인생이 빛나는 정리의 마법이라고 부른다.	fix	lookup
+names:published-title	人生がときめく片づけの魔法を紹介した。	인생이 빛나는 정리의 마법을 소개했다.	fix	lookup
+names:published-title	人生がときめく片づけの魔法の写真。	인생이 빛나는 정리의 마법의 사진.	fix	lookup
+names:published-title	人生の約束	인생의 약속	keep	lookup
+names:published-title	人生は美しい	인생은 아름다워	keep	lookup
+names:published-title	人生ゲーム	인생 게임	keep	lookup
+names:published-title	人形霊	인형사	keep	lookup
+names:published-title	人形師	인형사	keep	lookup
+names:published-title	人形館の殺人	인형관의 살인	keep	lookup

@@ -1,0 +1,81 @@
+# 규칙: LEX-1, LEX-2, LEX-3
+rule	input	expected	kind	layer
+lexical:cleanup-11	おく病	겁쟁이	fix	defaults
+lexical:cleanup-11	おく病だ。	겁쟁이다.	fix	defaults
+lexical:cleanup-11	「おく病」	「겁쟁이」	fix	defaults
+lexical:cleanup-11	おく病を見た。	겁쟁이를 보았다.	fix	defaults
+lexical:cleanup-11	なんか怖い。	왠지 무섭다.	fix	defaults
+lexical:cleanup-11	なんか怖かった。	왠지 무서웠다.	fix	defaults
+lexical:cleanup-11	なんか怖くない。	왠지 무섭지 않다.	fix	defaults
+lexical:cleanup-11	「なんか怖い。」	「왠지 무섭다.」	fix	defaults
+lexical:cleanup-11	なんか怖くて困った。	왠지 무서워서 곤란했다.	fix	defaults
+lexical:cleanup-11	何か怖い。	왠지 무섭다.	fix	defaults
+lexical:cleanup-11	何か怖かった。	왠지 무서웠다.	fix	defaults
+lexical:cleanup-11	何か怖くない。	왠지 무섭지 않다.	fix	defaults
+lexical:cleanup-11	「何か怖い。」	「왠지 무섭다.」	fix	defaults
+lexical:cleanup-11	何か怖くて困った。	왠지 무서워서 곤란했다.	fix	defaults
+lexical:cleanup-11	売上高税引き利益率	매상고 세금공제 이익률	fix	defaults
+lexical:cleanup-11	売上高税引き利益率だ。	매상고 세금공제 이익률이다.	fix	defaults
+lexical:cleanup-11	「売上高税引き利益率」	「매상고 세금공제 이익률」	fix	defaults
+lexical:cleanup-11	売上高税引き利益率を見た。	매상고 세금공제 이익률을 보았다.	fix	defaults
+lexical:cleanup-11	鍋屋	냄비 요리집	fix	defaults
+lexical:cleanup-11	鍋屋だ。	냄비 요리집이다.	fix	defaults
+lexical:cleanup-11	「鍋屋」	「냄비 요리집」	fix	defaults
+lexical:cleanup-11	鍋屋を見た。	냄비 요리집을 보았다.	fix	defaults
+lexical:cleanup-11	食物繊維	식이 섬유	fix	defaults
+lexical:cleanup-11	食物繊維だ。	식이 섬유다.	fix	defaults
+lexical:cleanup-11	「食物繊維」	「식이 섬유」	fix	defaults
+lexical:cleanup-11	食物繊維を見た。	식이 섬유를 보았다.	fix	defaults
+lexical:cleanup-11	怖い。	무섭다.	keep	defaults
+lexical:cleanup-11	何かが怖い。	뭔가가 무섭다.	keep	defaults
+lexical:cleanup-11	なんとなく怖い。	왠지 무섭다.	keep	defaults
+lexical:cleanup-11	久しぶりに会った。	오랜만에 만났다.	keep	defaults
+lexical:cleanup-11	何日ですか。	며칠입니까.	keep	defaults
+lexical:cleanup-11	数日後	며칠 후	keep	defaults
+lexical:cleanup-11	関数	함수	keep	defaults
+lexical:cleanup-11	三角関数	삼각함수	keep	defaults
+lexical:cleanup-11	売上高	매출액	keep	defaults
+lexical:cleanup-11	根を切った。	뿌리를 잘랐다.	keep	defaults
+lexical:cleanup-11	根こそぎ	모조리	keep	defaults
+lexical:cleanup-11	鍋を見た。	냄비를 보았다.	keep	defaults
+lexical:cleanup-11	鍋屋町	나베야쵸	keep	defaults
+lexical:cleanup-11	長老	장로	keep	defaults
+lexical:cleanup-11	長老派	장로파	keep	defaults
+lexical:cleanup-11	韻	운	keep	defaults
+lexical:cleanup-11	植物繊維	식물 섬유	keep	defaults
+lexical:cleanup-11	食物	음식	keep	defaults
+lexical:cleanup-11	鹿児島県	가고시마현	keep	defaults
+lexical:cleanup-11	農業協同組合	농업협동조합	keep	defaults
+lexical:cleanup-11	API	API	keep	defaults
+lexical:cleanup-11	ジェフ・アボット	제프 애벗	keep	defaults
+lexical:cleanup-11	ジェフ・イリフ	제프 이리후	keep	defaults
+dict:names.5525	F5ネットワークス	F5 네트워크	fix	fixed
+dict:names.5525	F5ネットワークスの会社	F5 네트워크의 회사	fix	fixed
+dict:names.5525	F5ネットワークスを調べる。	F5 네트워크를 조사한다.	fix	fixed
+dict:names.5525	F5ネットワークスの製品です。	F5 네트워크의 제품입니다.	fix	fixed
+dict:names.5525	GMAネットワーク	GMA 네트워크	keep	fixed
+dict:names.5525	DIYネットワーク	DIY 네트워크	keep	fixed
+dict:names.5525	ネットワーク	네트워크	keep	defaults
+dict:names.5525	F5	F5	keep	defaults
+lexical:cleanup-11	バイオレンス・ドーパント	바이올런스 도펀트	fix	fixed
+lexical:cleanup-11	バイオレンス・ドーパントの名前	바이올런스 도펀트의 이름	fix	fixed
+lexical:cleanup-11	バイオレンス・ドーパントが現れた。	바이올런스 도펀트가 나타났다.	fix	fixed
+lexical:cleanup-11	バイオレンス・ドーパントを見た。	바이올런스 도펀트를 보았다.	fix	fixed
+lexical:cleanup-11	ドーパント	도펀트	keep	fixed
+lexical:cleanup-11	バイオレンス	폭력	keep	fixed
+lexical:cleanup-11	F5ネットワークス	F5 네트워크	fix	fixed
+lexical:cleanup-11	トーテム・ポール	토템폴	fix	defaults
+lexical:cleanup-11	トーテム・ポールを見る。	토템폴을 본다.	fix	defaults
+lexical:cleanup-11	トーテム・ポールの写真	토템폴의 사진	fix	defaults
+lexical:cleanup-11	トーテム・ポールです。	토템폴입니다.	fix	defaults
+lexical:cleanup-11	トーテム	토템	keep	defaults
+lexical:cleanup-11	ポール	폴	keep	defaults
+lexical:cleanup-11	塔	탑	keep	defaults
+lexical:cleanup-11	ソシアル	소셜	keep	defaults
+lexical:cleanup-11	ソシアルの意味	소셜의 의미	keep	defaults
+lexical:cleanup-11	ソシアルな話	소셜한 이야기	keep	defaults
+lexical:cleanup-11	ソシアルです。	소셜입니다.	keep	defaults
+lexical:cleanup-11	ソシアルダンス	사교춤	keep	defaults
+lexical:cleanup-11	ソーシャルメディア	소셜 미디어	keep	defaults
+lexical:cleanup-11	社会	사회	keep	defaults
+lexical:cleanup-11	ネットワーク	네트워크	keep	defaults
