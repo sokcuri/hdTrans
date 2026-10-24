@@ -29,3 +29,24 @@ compose:sound-before-comma	「[・]人[・]間[・]な[・]ら[・]ば、ね」	
 compose:sound-before-comma	司令官！新しい艦娘が…あ、はい！	has:…아, 네	fix	compose
 compose:sound-before-comma	「よ、よかった」	「다, 다행이다」	keep	compose
 compose:sound-before-comma	あ、そうだ。	아, 맞다.	keep	compose
+lexical:spoken-words	ネジの鼻がもげるまで～	나사의 코가 떨어질 때까지~	fix	lookup
+lexical:spoken-words	嫌な音がして、腕がもげた。	has:팔이 떨어졌다	fix	lookup
+lexical:spoken-words	「ぶっちゃけさ、私、出番少なくない？」	has:「솔직히 말해서, 나,	fix	lookup
+lexical:spoken-words	ぶっちゃけただの学食だ。	솔직히 말해서 그냥 학생식당이다.	fix	lookup
+lexical:spoken-words	ぶっちゃけ、俺は集団行動が苦手だし	has:솔직히 말해서, 나는	keep	lookup
+lexical:spoken-words	彼に全部ぶっちゃけた。	그에게 전부 털어 놓았다.	fix	lookup
+lexical:spoken-words	ぶっちゃけしんどい。	솔직히 말해서 힘들다.	fix	lookup
+lexical:spoken-words	「それすっげぇ大変じゃねぇか！」	「그거 굉장히 힘들잖아!」	fix	lookup
+lexical:spoken-words	今日はすっげぇ大切な日じゃねぇか！	오늘은 굉장히 중요한 날이잖아!	fix	lookup
+lexical:spoken-words	すんげぇ長いやつ。	굉장히 긴 녀석.	fix	lookup
+lexical:spoken-words	これはすげぇな	이것은 대단해	keep	lookup
+lexical:spoken-words	小さな引っかかりを覚えた。	has:걸리는 점을	fix	lookup
+lexical:spoken-words	抵抗する引っかかりに、一気に力を入れる。	has:걸리는 점에	fix	lookup
+lexical:spoken-words	何かが引っかかる	뭔가가 걸린다	keep	lookup
+lexical:spoken-words	状況が飲みこめずわたわたするレナ。	has:허둥지둥	fix	lookup
+lexical:spoken-words	わたわたと興奮する	허둥지둥 흥분한다	keep	lookup
+lexical:spoken-words	フフッ…ヤッテシマエ…。カエリウチダ！	has:반격이다	fix	lookup
+lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
+lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
+lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup
+lexical:spoken-words	皿がわれる	접시가 깨진다	keep	lookup

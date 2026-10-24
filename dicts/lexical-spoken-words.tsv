@@ -1,0 +1,14 @@
+#! layer=words
+# 구어 낱말과 가나 표기: 힘준 형용사 すっげ와 すんげ, 속어 동사, 동사에서 온 명사, 한자 낱말의 가나 표기
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+もげ	떨어&AL@	M427			GN							spoken-words:1
+ぶっちゃけ	솔직히 말해서	E300			GN							spoken-words:2
+ぶっちゃけ	털어 &F6@	M427			GN							spoken-words:3
+すっげ	굉장히	E300	UTs		GN							spoken-words:4
+すっげ	굉장$AB@	H7U0			GN							spoken-words:5
+すんげ	굉장히	E300	UTs		GN							spoken-words:6
+すんげ	굉장$AB@	H7U0			GN							spoken-words:7
+引っかかり	걸리는 점	N110			GN							spoken-words:8
+わたわた	허둥지둥	E311			GN							spoken-words:9
+かえりうち	반격	N110			GN					1		spoken-words:10
+われ	나	I120	VHn		GN							spoken-words:11
