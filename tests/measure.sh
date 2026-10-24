@@ -43,7 +43,8 @@ HDTRANS_TESTDATA=$tmp/sample "$here/tools/measure.sh" -c "$cli" -d "$dicts" thir
     status=$?
 [ "$status" -eq 2 ]
 grep -F 'corpus: 2 lines' "$tmp/third.log" > /dev/null
-# A TERM to the whole process group stops every set and leaves no translation running.
+# A TERM to the whole process group stops every set and leaves no translation running. Only where
+# GNU timeout moves the CLI into its own group does this show that measure.sh stops it itself.
 printf '#!/bin/sh\necho $$ >> "%s/pids"\nexec sleep 30\n' "$tmp" > "$tmp/slow"
 chmod +x "$tmp/slow"
 python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" "$tmp/pids" <<'PY'
@@ -64,7 +65,7 @@ def alive(pid):
     try:
         os.kill(pid, 0)
         return True
-    except ProcessLookupError:
+    except (ProcessLookupError, PermissionError):
         return False
 
 

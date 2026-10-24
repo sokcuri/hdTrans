@@ -61,14 +61,19 @@ def make(pairs, key_path, blind_path):
         flip = secrets.randbelow(2)
         blind.append((i, ja, *((after, before) if flip else (before, after))))
         key.append((i, k, flip))
-    write(blind_path, blind)
     try:
-        with open(key_path, "x", encoding="utf-8", newline="") as f:
-            csv.writer(f, delimiter="\t", lineterminator="\n").writerows(key)
+        f = open(key_path, "x", encoding="utf-8", newline="")
     except FileExistsError:
-        Path(blind_path).unlink()
         fail(f"{key_path} exists; answers belong to the key they were made with")
     except OSError as error:
+        fail(str(error))
+    try:
+        with f:
+            csv.writer(f, delimiter="\t", lineterminator="\n").writerows(key)
+        with open(blind_path, "w", encoding="utf-8", newline="") as b:
+            csv.writer(b, delimiter="\t", lineterminator="\n").writerows(blind)
+    except OSError as error:
+        Path(key_path).unlink()
         fail(str(error))
     print(f"{len(rows)} lines in {blind_path}", file=sys.stderr)
 
@@ -136,12 +141,21 @@ def self_test():
         assert [r[0] for r in rows] == ["1", "2", "3", "4"]
         assert all({r[2], r[3]} == {f"old{r[0]}", f"new{r[0]}"} for r in rows)
         assert "s:1" not in blind.read_text(encoding="utf-8")
+        before = blind.read_bytes()
         with contextlib.redirect_stderr(io.StringIO()):
+            for target in (blind, d / "again.tsv"):
+                try:
+                    make(pairs, key, target)
+                    raise AssertionError("make reused a key")
+                except SystemExit as error:
+                    assert error.code == 2
             try:
-                make(pairs, key, d / "again.tsv")
-                raise AssertionError("make reused a key")
+                make(pairs, d / "k2.tsv", d / "missing" / "blind.tsv")
+                raise AssertionError("make wrote into a missing folder")
             except SystemExit as error:
                 assert error.code == 2
+        assert blind.read_bytes() == before and not (d / "again.tsv").exists()
+        assert not (d / "k2.tsv").exists()
         new = {r[0]: ("X" if r[2].startswith("new") else "Y") for r in rows}
         old = {i: ("Y" if a == "X" else "X") for i, a in new.items()}
         write(d / "a1.tsv", [("1", new["1"], "n1"), ("2", old["2"]), ("3", new["3"]), ("4", "same")])

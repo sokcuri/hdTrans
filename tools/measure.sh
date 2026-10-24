@@ -69,7 +69,11 @@ stoppable() { # COMMAND [ARG...]
     child=$!
     wait "$child"
 }
-stops() { trap 'child=${child:-$!}; [ -z "$child" ] || { kill "$child" 2> /dev/null; wait "$child"; }; exit 2' TERM; }
+stops() {
+    last=${!-}
+    trap '[ "${!-}" = "$last" ] || child=${child:-$!}
+        [ -z "$child" ] || { kill "$child" 2> /dev/null; wait "$child"; }; exit 2' TERM
+}
 
 # Line count with LF as the only break; a missing final LF still ends a line.
 count() { python3 -I -c 'import sys; d = open(sys.argv[1], "rb").read(); print(d.count(b"\n") + (not d.endswith(b"\n") and d != b""))' "$1"; }
