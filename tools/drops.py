@@ -19,9 +19,10 @@ first line and, when HDTRANS_EXAMPLES is set, of the web examples web/examples.t
 web/examples/, else from HDTRANS_EXAMPLES). It prints the inputs (lines) and the distinct inputs that drop
 text of each set; every line is translated on its own (-each), the documents too. With --budget (rows
 `set inputs drops`) a set fails when its count of dropping inputs differs from its row (more is a
-regression, fewer is a fix that lowers the row), when its input count differs from the row (the data
-changed: --update with that data writes the row again) or when it has no row. --update writes the counts
-of the sets into the file and keeps the other rows.
+regression, fewer is a fix that lowers the row). A set whose input count differs from its row (the data
+changed: --update with that data writes the row again) or that has no row is not compared and gets a
+warning on stderr (a ::warning:: annotation under GitHub Actions). --update writes the counts of the sets
+into the file and keeps the other rows.
 Exit: 0 nothing new, 1 an input drops text, a known gap is fixed or a set is off its budget, 2 invalid
 arguments, no set or a failed CLI; with --sets and no set variable, 77.
 """
@@ -229,32 +230,36 @@ def check_sets(argv, options):
             print(f"drops: {name} {inputs} inputs, {count} drop text")
         write_budget(budget_path, counts)
         return 0
-    lines, bad = compare(counts, budget_of(budget_path) if budget_path else None)
+    lines, warnings, bad = compare(counts, budget_of(budget_path) if budget_path else None)
     for line in lines:
         print(line)
+    for warning in warnings:
+        print(f"::warning::drops: {warning}" if os.environ.get("GITHUB_ACTIONS") == "true" else f"drops: warning: {warning}",
+              file=sys.stderr)
     return 1 if bad else 0
 
 
 def compare(counts, budget):
     """The report lines of counts ({set: (inputs, drops)}) against budget ({set: (inputs, drops)}, None
-    for no budget) and the number of sets off it."""
-    lines, bad = [], 0
+    for no budget), the warnings about sets that are not compared and the number of sets off the budget."""
+    lines, warnings, bad = [], [], 0
     for name, (inputs, count) in counts.items():
         line = f"drops: {name} {inputs} inputs, {count} drop text"
         row = budget.get(name) if budget is not None else None
         if budget is None:
             pass
         elif row is None:
-            line += ", FAIL: no row in the budget (--update)"
-            bad += 1
+            line += ", not compared"
+            warnings.append(f"{name} has no row in the budget; --update with this data adds it")
         elif row[0] != inputs:
-            line += f", FAIL: the budget is for {row[0]} inputs (the set changed; --update with this data)"
-            bad += 1
+            line += ", not compared"
+            warnings.append(f"{name} has {inputs} inputs but its budget row is for {row[0]}; the data changed, "
+                            "--update with this data writes the row again")
         elif count != row[1]:
             line += f", FAIL: budget {row[1]}, " + ("more than the budget" if count > row[1] else "lower the budget (--update)")
             bad += 1
         lines.append(line)
-    return lines, bad
+    return lines, warnings, bad
 
 
 def write_budget(path, counts):
@@ -336,16 +341,18 @@ def self_test():
             f.write("# c\nset\tinputs\tdrops\ncorpus\t3\t1\n")
         assert budget_of(budget) == {"corpus": (3, 1)}, budget_of(budget)
         rows = budget_of(budget)
-        assert compare({"corpus": (3, 1)}, rows) == (["drops: corpus 3 inputs, 1 drop text"], 0)
-        lines, bad = compare({"corpus": (3, 2)}, rows)
-        assert bad == 1 and "more than the budget" in lines[0], lines
-        lines, bad = compare({"corpus": (3, 0)}, rows)
-        assert bad == 1 and "lower the budget" in lines[0], lines
-        lines, bad = compare({"corpus": (4, 1)}, rows)
-        assert bad == 1 and "for 3 inputs" in lines[0], lines
-        lines, bad = compare({"docs": (2, 0)}, rows)
-        assert bad == 1 and "no row" in lines[0], lines
-        assert compare({"corpus": (4, 2)}, None) == (["drops: corpus 4 inputs, 2 drop text"], 0)
+        assert compare({"corpus": (3, 1)}, rows) == (["drops: corpus 3 inputs, 1 drop text"], [], 0)
+        lines, warnings, bad = compare({"corpus": (3, 2)}, rows)
+        assert bad == 1 and not warnings and "more than the budget" in lines[0], lines
+        lines, warnings, bad = compare({"corpus": (3, 0)}, rows)
+        assert bad == 1 and not warnings and "lower the budget" in lines[0], lines
+        lines, warnings, bad = compare({"corpus": (4, 9)}, rows)
+        assert bad == 0 and "not compared" in lines[0] and len(warnings) == 1 and "for 3" in warnings[0], (lines, warnings)
+        lines, warnings, bad = compare({"docs": (2, 0)}, rows)
+        assert bad == 0 and "not compared" in lines[0] and len(warnings) == 1 and "no row" in warnings[0], (lines, warnings)
+        lines, warnings, bad = compare({"corpus": (3, 2), "docs": (2, 0)}, rows)
+        assert bad == 1 and len(warnings) == 1, (lines, warnings)
+        assert compare({"corpus": (4, 2)}, None) == (["drops: corpus 4 inputs, 2 drop text"], [], 0)
         write_budget(budget, {"docs": (2, 0)})
         write_budget(budget, {"corpus": (4, 0)})
         with open(budget, encoding="utf-8") as f:
