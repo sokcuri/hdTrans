@@ -385,6 +385,34 @@ HD_TEST(pipeline_sound_doubled_kana_verb) {
     HD_CHECK_EQ(Sound("フルフルと震える", ctx, *loaded.snapshot), std::string("후루후루 震える"));
 }
 
+// The という that quotes a sound before a word in kanji or katakana reads as する, joined to a
+// doubled mimetic and apart from other sounds, also after a key that ends in と; elsewhere
+// という follows the sound with no space and takes back the と of such a key, and another verb
+// is written apart.
+HD_TEST(pipeline_sound_quoting_to_iu) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tgram\tid\n"
+                                     "とい\t(이)라고 &AV@\tM4U0\tTuPj\t1\n"
+                                     "音\t소리\tN110\t\t2\n"
+                                     "うご\t움직이\tM411\t\t3\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"カタカタという音", "달각달각する音"},
+        {"ドォーーンという衝撃", "콰아아앙 する衝撃"},
+        {"ドンという音", "쾅 する音"},
+        {"カタカタという。", "달각달각という。"},
+        {"カタカタというか", "달각달각というか"},
+        {"カタカタというわけ", "달각달각というわけ"},
+        {"ドンという。", "쾅という。"},
+        {"ぼーっという音", "멍する音"},
+        {"カタカタうごく", "달각달각 うごく"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // A verb cut off before a dash or an ellipsis, completed when the dictionary has it.
 // Masked words: rows of masked.tsv with the mask as written and a particle mark when
 // the Korean ends in the mask, katakana transliterated around a mask, and masks that

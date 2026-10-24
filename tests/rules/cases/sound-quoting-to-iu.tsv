@@ -1,0 +1,34 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:quoting-to-iu	スンッという感じで表情が消えた	킁 하는 느낌으로 표정이 사라졌다	fix	sound
+sound:quoting-to-iu	ガチャガチャという音がするわけでもない	달그락달그락하는 소리가 나는 것도 아니다	fix	sound
+sound:quoting-to-iu	その刹那、ドォーーンという衝撃が走る	그 찰나, 콰아아앙 하는 충격이 퍼진다	fix	sound
+sound:quoting-to-iu	カサカサという音が微かに聞こえる	바스락바스락하는 소리가 희미하게 들린다	fix	sound
+sound:quoting-to-iu	カタカタという音	달각달각하는 소리	fix	sound
+sound:quoting-to-iu	ゴトンという大きな音がした	덜컹 하는 큰 소리가 났다	fix	sound
+sound:quoting-to-iu	キリキリという音と共に	지끈지끈하는 소리와 함께	fix	sound
+sound:quoting-to-iu	ドンという音	쾅 하는 소리	fix	sound
+sound:quoting-to-iu	バタンという音	쾅 하는 소리	fix	sound
+sound:quoting-to-iu	ピンポーンというチャイムが鳴った	딩동 하는 차임이 울렸다	fix	sound
+sound:quoting-to-iu	ドキドキという気持ち	두근두근하는 기분	fix	sound
+sound:quoting-to-iu	ゴゴゴという地響きが聞こえた	우우웅 하는 땅울림이 들렸다	fix	sound
+sound:quoting-to-iu	カチャカチャという食器の音	달그락달그락하는 식기의 소리	fix	sound
+sound:quoting-to-iu	カタカタという。	달각달각이라고 한다.	fix	sound
+sound:quoting-to-iu	カタカタというのは	달각달각이라는 것은	fix	sound
+sound:quoting-to-iu	カタカタというか	달각달각이라고 할까	keep	sound
+sound:quoting-to-iu	猫という動物	고양이라는 동물	keep	sound
+sound:quoting-to-iu	ニャーという声	야옹이라는 목소리	keep	sound
+sound:quoting-to-iu	「ドン」という音	「돈」이라는 소리	keep	sound
+sound:quoting-to-iu	カタカタと鳴る	달각달각 울린다	keep	sound
+sound:quoting-to-iu	ドンとぶつかる	쾅 부딪친다	keep	sound
+sound:quoting-to-iu	モヤモヤというよりムカムカ	찜찜이라는 것보다 울컥울컥	fix	sound
+sound:quoting-to-iu	ドキドキが止まらない	두근두근이 멈추지 않는다	keep	sound
+sound:quoting-to-iu	バタンとドアが閉まる	쾅 문이 닫힌다	keep	sound
+sound:quoting-to-iu	くしゃくしゃに丸めた	꼬깃꼬깃하게 말았다	keep	sound
+sound:quoting-to-iu	ドンという。	쾅이라고 한다.	fix	sound
+sound:quoting-to-iu	ドンというか	쾅이라고 할까	fix	sound
+sound:quoting-to-iu	ガタンという音	덜컹 하는 소리	fix	sound
+sound:quoting-to-iu	ぼーっという音	멍하는 소리	current	sound
+sound:quoting-to-iu	カタカタというしかない	달각달각이라고 할 수밖에 없다	fix	sound
+sound:quoting-to-iu	カタカタというわけ	달각달각이라는 것	fix	sound
+sound:quoting-to-iu	ガタンという	덜컹이라고 한다	fix	sound

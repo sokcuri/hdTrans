@@ -82,6 +82,9 @@ constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 1, 5, 8, 13, 4, 5,
 // The particles that may stand before an ono row inside a hiragana run.
 constexpr std::u32string_view kParticles = U"がをにはもでとへやのて";
 
+// The kana that start a form of する.
+constexpr std::u32string_view kSuruKana = U"しすさせ";
+
 // Cue words; kana in katakana.
 constexpr std::u32string_view kEatingCues[] = {U"食", U"喰", U"カジ", U"齧", U"噛", U"音", U"漬", U"センベイ", U"煎餅"};
 constexpr std::u32string_view kScratchingCues[] = {U"頭", U"掻", U"搔", U"痒", U"カユ", U"首", U"背中", U"頬"};
@@ -377,6 +380,8 @@ private:
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
     bool Manner(const SoundMatch& m, size_t i) const;
+    size_t QuotingAt(size_t i) const;
+    size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
@@ -923,14 +928,10 @@ bool SoundText::WordStartsSound(size_t p, const SoundMatch& last, size_t end) co
     return key.size() >= 4 && key.size() % 2 == 0 && key.substr(0, key.size() / 2) == key.substr(key.size() / 2);
 }
 
-// Whether the ono sound m is followed at i by the に of manner or result that Korean writes
-// as 하게 after a doubled mimetic (くしゃくしゃに丸める 꼬깃꼬깃하게, がちがちに固い 딱딱하게):
-// m's Korean is two equal halves of Hangul, and に stands before no hiragana but a form of
-// する or なる.
-bool SoundText::Manner(const SoundMatch& m, size_t i) const {
-    if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
-    if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
-    const std::u32string k = DecodeText(m.korean);
+// Whether the Korean of a sound is two equal halves of Hangul (꼬깃꼬깃), a mimetic that
+// takes 하다 as one word.
+bool DoubledHangul(std::string_view korean) {
+    const std::u32string k = DecodeText(korean);
     if (k.size() < 2 || k.size() % 2 != 0) return false;
     for (const char32_t r : k) {
         if (r < U'가' || r > U'힣') return false;
@@ -938,13 +939,46 @@ bool SoundText::Manner(const SoundMatch& m, size_t i) const {
     return k.substr(0, k.size() / 2) == k.substr(k.size() / 2);
 }
 
+// Whether the ono sound m is followed at i by the に of manner or result that Korean writes
+// as 하게 after a doubled mimetic (くしゃくしゃに丸める 꼬깃꼬깃하게, がちがちに固い 딱딱하게):
+// m's Korean is two equal halves of Hangul, and に stands before no hiragana but a form of
+// する or なる.
+bool SoundText::Manner(const SoundMatch& m, size_t i) const {
+    if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
+    if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
+    return DoubledHangul(m.korean);
+}
+
+// The end of the quoting form at character i (sound.quoting: という) that describes the word in
+// kanji or katakana after a sound (カタカタという音 달각달각하는 소리, ドンという衝撃 쾅 하는 충격),
+// or 0.
+size_t SoundText::QuotingAt(size_t i) const {
+    const size_t end = Quoting(i);
+    if (end == 0 || end >= rs_.size()) return 0;
+    return IsKanjiRune(rs_[end]) || (IsKatakanaRune(rs_[end]) && !Lengthens(rs_[end], rs_[end - 1])) ? end : 0;
+}
+
+// The end of the member of sound.quoting at character i, or 0.
+size_t SoundText::Quoting(size_t i) const {
+    if (i >= rs_.size()) return 0;
+    const std::string_view at = text_.substr(offsets_[i]);
+    for (const std::string_view q : dict::ClassMembers("sound.quoting")) {
+        if (!at.starts_with(q)) continue;
+        size_t end = i;
+        while (end < rs_.size() && offsets_[end] < offsets_[i] + q.size()) end++;
+        return end;
+    }
+    return 0;
+}
+
 // Whether a space goes between a sound and rs[i]: a kanji, katakana after hiragana, or
-// kana that start a verb other than する, or follow a dropped と or て.
+// kana that start a verb other than する or the quoting form (sound.quoting: カタカタという。
+// 달각달각이라고 한다), or follow a dropped と or て.
 bool SoundText::Spaced(size_t i) const {
     const std::u32string_view rs = rs_;
-    if (i >= rs.size()) return false;
+    if (i >= rs.size() || Quoting(i) > 0) return false;
     if (IsKanjiRune(rs[i]) || (IsKatakanaRune(rs[i]) && IsHiraganaRune(rs[i - 1]))) return true;
-    if (!IsKana(rs[i]) || In(rs[i], U"しすさせ")) return false;
+    if (!IsKana(rs[i]) || In(rs[i], kSuruKana)) return false;
     if (In(rs[i - 1], U"とて")) return true;
     return IsHiraganaRune(rs[i]) && StartsVerb(i);
 }
@@ -986,7 +1020,7 @@ size_t SoundText::Adverbial(size_t i) const {
     if (i >= rs.size()) return 0;
     if (SoundMatch next; i + 1 < rs.size() && IsKatakanaRune(rs[i + 1]) && MatchAt(i + 1, next)) return 0;
     if (rs[i] != U'と' && !(rs[i] == U'て' && (rs[i - 1] == U'っ' || rs[i - 1] == U'ッ'))) return 0;
-    if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], U"しすさせ")) return 1;
+    if (rs[i] == U'と' && i + 1 < rs.size() && In(rs[i + 1], kSuruKana)) return 1;
     return StartsLongerWord(i) ? 0 : 1;
 }
 
@@ -1419,7 +1453,7 @@ size_t SoundText::MimeticTo(size_t p, size_t end, bool& hiragana) const {
     }
     // An adverb with と in hiragana (じっと), but not before する (じっとして); a doubled
     // katakana unit is the sound rather than the hiragana adverb (メキメキと, not めきめきと).
-    if (i < rs_.size() && In(rs_[i], U"しすさせ")) return 0;
+    if (i < rs_.size() && In(rs_[i], kSuruKana)) return 0;
     if (!tsu) return i;
     // The candidates point into the key, so it lives as long as they do.
     const std::string key = EncodeText(h);
@@ -1476,7 +1510,7 @@ size_t SoundText::HiraganaMimeticTo(size_t p) const {
     for (const std::u32string_view q : {U"いう", U"いっ", U"言", U"思", U"か", U"は", U"も", U"の"}) {
         if (rest.starts_with(q)) return 0;
     }
-    if (i < rs.size() && In(rs[i], U"しすさせ")) return 0;
+    if (i < rs.size() && In(rs[i], kSuruKana)) return 0;
     if (KanaWord(p)) return 0;
     const dict::Candidates rd =
         snap_.GetWordInfo(Bytes(p, std::min(rs.size(), i + 4)), dict::LookupMode::General, ctx_.lookup);
@@ -1519,7 +1553,11 @@ std::string SoundText::Write() {
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
-            const bool doing = next < rs.size() && In(rs[next], U"しすさせ");
+            // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
+            // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
+            const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
+            if (quoted == 0 && !chain.back().intj && Quoting(next - 1) > 0) next--;
+            const bool doing = quoted > 0 || (next < rs.size() && In(rs[next], kSuruKana));
             for (size_t k = 0; k < chain.size(); k++) {
                 SoundMatch& m = chain[k];
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
@@ -1536,6 +1574,12 @@ std::string SoundText::Write() {
                 b += "하고";
                 next = to;
                 if (next < rs.size() && !In(rs[next], U"、。，！？!?…‥」』）)")) b += ' ';
+            } else if (quoted > 0) {
+                // The という that quotes a sound reads as する: one word with a 하다 stem or a doubled
+                // mimetic (달각달각하는 소리), apart from other sounds (쾅 하는 소리).
+                if (chain.back().root.empty() && !DoubledHangul(chain.back().korean)) b += ' ';
+                b += "する";
+                next = quoted;
             } else if (Manner(chain.back(), next)) {
                 // An adverb of manner or result: 꼬깃꼬깃하게 말다, 딱딱하게 굳다.
                 b += "하게";
