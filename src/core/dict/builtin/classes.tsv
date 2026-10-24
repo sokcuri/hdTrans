@@ -102,6 +102,7 @@
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
 //= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
+//= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
@@ -128,6 +129,7 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
+//= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (出るね, 始まるね, 思い出すね, 照れるね).
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -1564,6 +1566,34 @@ pronoun.second-person-genitive	お前
 pronoun.second-person-genitive	おまえ
 pronoun.second-person-genitive	きみ
 
+pronoun.speaker	私
+pronoun.speaker	僕
+pronoun.speaker	俺
+pronoun.speaker	わたし
+pronoun.speaker	あたし
+pronoun.speaker	アタシ
+pronoun.speaker	ぼく
+pronoun.speaker	おれ
+pronoun.speaker	ボク
+pronoun.speaker	オレ
+pronoun.speaker	わたくし
+pronoun.speaker	うち
+pronoun.speaker	ウチ
+pronoun.speaker	自分
+pronoun.speaker	私たち
+pronoun.speaker	私達
+pronoun.speaker	わたしたち
+pronoun.speaker	あたしたち
+pronoun.speaker	僕たち
+pronoun.speaker	僕達
+pronoun.speaker	僕ら
+pronoun.speaker	俺たち
+pronoun.speaker	俺達
+pronoun.speaker	俺ら
+pronoun.speaker	我々
+pronoun.speaker	うちら
+pronoun.speaker	ウチら
+
 pronoun.topic-wa	こっち
 pronoun.topic-wa	そっち
 pronoun.topic-wa	あっち
@@ -2030,6 +2060,50 @@ verb.entrust	まかせる
 verb.entrust	任す
 verb.entrust	託す
 verb.entrust	委ねる
+verb.happening	出
+verb.happening	始ま
+verb.happening	はじま
+verb.happening	起き
+verb.happening	起こ
+verb.happening	降
+verb.happening	晴れ
+verb.happening	曇
+verb.happening	増え
+verb.happening	減
+verb.happening	冷え
+verb.happening	燃え
+verb.happening	痺れ
+verb.happening	しびれ
+verb.happening	染み
+verb.happening	しみ
+verb.happening	照れ
+verb.happening	テレ
+verb.happening	惚れ
+verb.happening	憧れ
+verb.happening	済
+verb.happening	思い出
+verb.happening	光
+verb.happening	揺
+verb.happening	震え
+verb.happening	生まれ
+verb.happening	消え
+verb.happening	見つか
+verb.happening	溢れ
+verb.happening	響
+verb.happening	鳴
+verb.happening	輝
+verb.happening	決ま
+verb.happening	慣れ
+verb.happening	飽き
+verb.happening	イケ
+verb.happening	いけ
+verb.happening	沈
+verb.happening	浮か
+verb.happening	暮れ
+verb.happening	明け
+verb.happening	咲
+verb.happening	散
+verb.happening	吹
 
 verb.means	使
 verb.means	用い
