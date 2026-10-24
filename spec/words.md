@@ -505,7 +505,6 @@
 사례: `tests/rules/cases/sense-domain-terms.tsv`, `tests/rules/cases/cx-market-rebound.tsv`, `tests/rules/cases/cx-value-after-loanword.tsv`,
 `tests/rules/cases/lexical-domain-terms.tsv`, `tests/rules/cases/lexical-news-terms.tsv`
 
-
 ## LEX-26 홀로 선 한자 한 글자는 그 낱말로 읽는다
 
 문장에 홀로 선 한자 한 글자(朝。, 嘘！, 川)는 그 낱말(아침, 거짓말, 강)로 옮기고, 붙여 쓴 한자어의 한 글자처럼
@@ -571,3 +570,47 @@
 | もう二度と来ない。 | 이제 두 번 다시 오지 않는다. | 유지 |
 
 사례: `tests/rules/cases/more-count.tsv`
+
+## LEX-29 고유 명사는 발음을 살린다
+
+인명, 지명, 회사와 방송국 이름, 상표, 작품 제목은 일본어 발음대로 옮기고, 한국에서 부르는 다른 이름이나 뜻으로 바꾸지
+않는다(アメリカ合衆国은 `아메리카 합중국`). 한국에서 쓰는 공식 이름이 그 발음을 옮긴 것이면
+그 이름을 쓴다(デジモン `디지몬`). 일본 인명에서 장음을 모음 두 개로 적는 おお는 줄이지 않는다(大石 `오오이시`,
+大川 `오오카와`). 굳어진 지명은 늘 쓰는 꼴을 쓴다(東京 `도쿄`, 大阪 `오사카`).
+
+- 가타카나로 쓴 외국 이름은 LEX-1대로 원어 발음을 적는다(キエン・グエン「色分けされた手術」 `끼엔 응우옌: 색이 보이는 수술`).
+- 이름 뒤에서 종류를 나타내는 말(駅, 県, 神社, 大学, マスジド)은 한국어로 옮긴다(カーンケール県 `칸케르현`,
+  熊本マスジド `구마모토 모스크`).
+- 구나 문장으로 된 제목과 부제는 뜻으로 옮기고, 그 안의 이름만 발음대로 둔다(明智光秀～神に愛されなかった男～
+  `아케치 미쓰히데 ~ 신에게 사랑받지 못한 남자 ~`). 이름과 지어낸 말로 된 제목은 발음대로 둔다(室町無頼 `무로마치 부라이`).
+- 일본 방송국 이름의 テレビ는 한국에서 쓰는 대로 `TV`로 적어 앞뒤 이름에 붙인다(フジテレビ `후지TV`,
+  テレビ朝日 `TV아사히`, テレビ東京 `TV도쿄`, 日本テレビ `니혼TV`). テレビジョン도 `TV`로 적는다(フジテレビジョン
+  `후지TV`, 共同テレビジョン `교도TV`). 뒤에 오는 말(放送, 放送網, 系列, 塔)은 띄어 옮기고(中京テレビ放送
+  `주쿄TV 방송`, 日本テレビ系列 `니혼TV 계열`), 라틴 문자 이름 뒤의 TV만 띄운다(ABCテレビ `ABC TV`). TBSテレビ는
+  한국에서 부르는 대로 `TBS`로 적는다. 보통 명사 ケーブルテレビ도 한국에서 쓰는 대로 `케이블TV`로 적고, 그 밖의
+  보통 명사 テレビ는 LEX-1대로 `텔레비전`으로 적는다. 외국 방송국은 그 나라에서 쓰는 이름을 쓴다.
+- 한국어판 공식 이름이 있는 작품 속 생물과 인물은 같은 작품의 다른 이름과 맞춰 그 이름을 쓴다(ダルマッカ `달막화`,
+  ガラルダルマッカ `가라르 달막화`).
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| フジテレビを見た。 | 후지TV를 보았다. | 고침 |
+| 中京テレビ放送 | 주쿄TV 방송 | 고침 |
+| キッコーマンの醤油 | 깃코만의 간장 | 고침 |
+| デジモンが好きだ。 | 디지몬을 좋아한다. | 고침 |
+| 大井さんが来た。 | 오오이 씨가 왔다. | 고침 |
+| カーンケール県に行く。 | 칸케르현에 간다. | 고침 |
+| アメリカ合衆国の大統領が来た。 | 아메리카 합중국의 대통령이 왔다. | 유지 |
+| 大石さんが来た。 | 오오이시 씨가 왔다. | 유지 |
+| 東京に行く。 | 도쿄에 간다. | 유지 |
+
+현재: おお를 줄여 적은 사전 행(大野 `오노`, 大須賀 `오스가`)이 아직 많다. おう, えい 꼴의 장음(佐藤, 優一)은
+정하지 않았다. 사전 행은 대부분 줄여 적고(佐藤 `사토`, 優一 `유이치`),
+가타카나로 쓴 이름은 엔진이 장음을 살려 적는다(サトウさん `사토우 씨`).
+
+사례: `tests/rules/cases/names-pronounced-form.tsv`, `tests/rules/cases/names-surname-prefix.tsv`,
+`tests/rules/cases/names-kana-targets.tsv`, `tests/rules/cases/names-katakana-word-and-title.tsv`,
+`tests/rules/cases/names-geographical-scope.tsv`, `tests/rules/cases/names-place-entity-types.tsv`,
+`tests/rules/cases/names-title-passive.tsv`, `tests/rules/cases/names-fragmented-targets.tsv`,
+`tests/rules/cases/names-place-facility-type.tsv`, `tests/rules/cases/names-title-separators.tsv`,
+`tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`, `tests/rules/cases/names-broadcaster-tv.tsv`

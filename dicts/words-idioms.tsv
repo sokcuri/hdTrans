@@ -5845,9 +5845,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成すべきこと	해야 할 일	N110			GN				llm			i:5841
 成すべき事	해야 할 일	N110			GN				llm			i:5842
 地獄で仏に会ったよう	지옥에서 부처를 만난 듯이	E300			GN				llm			i:5843
-長いものには巻かれろ	긴 것에는 감겨라	A9D0			GN				llm			i:5844
-長い物には巻かれろ	긴 것에는 감겨라	A9D0			GN				llm			i:5845
-長い物には巻かれよ	긴 것에는 감겨라	A9D0			GN				llm			i:5846
+長いものには巻かれろ	강자에게는 굽혀라	A9D0			GN				llm			i:5844
+長い物には巻かれろ	강자에게는 굽혀라	A9D0			GN				llm			i:5845
+長い物には巻かれよ	강자에게는 굽혀라	A9D0			GN				llm			i:5846
 ねじを巻	태엽을 &F1@	M421		Pn	GN				llm			i:5847
 ネジを巻	태엽을 &F1@	M421		Pn	GN				llm			i:5848
 お猪口にな	뒤집어&AL@	M428			GN				llm			i:5849
@@ -7148,7 +7148,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベイズの定理	베이즈 정리	N110			GN							i:7145
 やきもち焼	질투&AV@	M421			GN				llm			i:7146
 ちょっかいを掛け	집적거&AA@	M427		Pn	GN				llm			i:7147
-いい塩梅に	다행히	E300			GN				llm			i:7148
+いい塩梅に	알맞게	E300			GN				llm			i:7148
 良い塩梅に	다행히	E300			GN				llm			i:7149
 先見の目	선견지명	N110			GN				llm			i:7150
 先見の眼	선견지명	N110			GN				llm			i:7151

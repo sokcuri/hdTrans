@@ -1,0 +1,115 @@
+# 규칙: LEX-3, LEX-29
+rule	input	expected	kind	layer
+names:target-corruption	赤月焔	아카츠키 호무라	fix	lookup
+names:target-corruption	赤月焔さんが来た。	아카츠키 호무라 씨가 왔다.	fix	lookup
+names:target-corruption	赤月焔の写真。	아카츠키 호무라의 사진.	fix	lookup
+names:target-corruption	赤月焔と会った。	아카츠키 호무라와 만났다.	fix	lookup
+names:target-corruption	飛段	히단	keep	lookup
+names:target-corruption	飛段が来た。	히단이 왔다.	fix	lookup
+names:target-corruption	飛段の写真。	히단의 사진.	fix	lookup
+names:target-corruption	飛段と会った。	히단과 만났다.	fix	lookup
+names:target-corruption	阿武隈改	아부쿠마 개	fix	lookup
+names:target-corruption	阿武隈改の写真。	아부쿠마 개의 사진.	fix	lookup
+names:target-corruption	阿武隈改を見た。	아부쿠마 개를 보았다.	fix	lookup
+names:target-gloss	赤月巴さんが来た。	아카츠키 토모에 씨가 왔다.	keep	lookup
+names:target-gloss	阿武隈改二	아부쿠마 개2	keep	lookup
+names:target-gloss	阿武隈急行	아부쿠마 급행	keep	lookup
+names:target-gloss	逆バニー	역바니	fix	lookup
+names:target-gloss	逆バニーの衣装。	역바니의 의상.	fix	lookup
+names:target-gloss	逆バニーを描いた。	역바니를 그렸다.	fix	lookup
+names:target-gloss	逆バニーガール	역바니걸	fix	lookup
+names:target-gloss	逆バニーガールの衣装。	역바니걸의 의상.	fix	lookup
+names:target-corruption	蛍メニス	호타루 메니스	fix	lookup
+names:target-corruption	蛍メニスの写真。	호타루 메니스의 사진.	fix	lookup
+names:target-corruption	蛍メニスが来た。	호타루 메니스가 왔다.	fix	lookup
+names:target-corruption	蛍メニスを見た。	호타루 메니스를 보았다.	fix	lookup
+names:target-corruption	「蛍メニス」	「호타루 메니스」	fix	lookup
+names:target-corruption	【蛍メニス】	【호타루 메니스】	fix	lookup
+names:target-corruption	蛍メニスさん	호타루 메니스 씨	fix	lookup
+names:target-corruption	蛍メニスさんが来た。	호타루 메니스 씨가 왔다.	fix	lookup
+names:target-corruption	蛍メニスと会った。	호타루 메니스와 만났다.	fix	lookup
+names:target-corruption	蛍メニスの名前。	호타루 메니스의 이름.	fix	lookup
+names:target-corruption	蛍メニスの声。	호타루 메니스의 목소리.	fix	lookup
+names:target-corruption	蛍メニスです。	호타루 메니스입니다.	fix	lookup
+names:target-corruption	蛍メニス？	호타루 메니스?	fix	lookup
+names:target-corruption	蛍メニスさんの写真。	호타루 메니스 씨의 사진.	fix	lookup
+names:target-corruption	蛍メニスがいる。	호타루 메니스가 있다.	fix	lookup
+names:target-corruption	メニス	메니스	keep	lookup
+names:target-corruption	メニスカス	메니스커스	keep	lookup
+names:target-punctuation	袁宏道	원굉도	fix	lookup
+names:target-punctuation	袁宏道さん	원굉도 씨	fix	lookup
+names:target-punctuation	袁宏道さんが来た。	원굉도 씨가 왔다.	fix	lookup
+names:target-punctuation	袁宏道の写真。	원굉도의 사진.	fix	lookup
+names:target-punctuation	袁宏道を見た。	원굉도를 보았다.	fix	lookup
+names:target-punctuation	袁宏道と会った。	원굉도와 만났다.	fix	lookup
+names:target-punctuation	袁宏道の名前。	원굉도의 이름.	fix	lookup
+names:target-punctuation	袁宏道の本。	원굉도의 책.	fix	lookup
+names:target-punctuation	袁宏道の作品。	원굉도의 작품.	fix	lookup
+names:target-punctuation	「袁宏道」	「원굉도」	fix	lookup
+names:target-punctuation	【袁宏道】	【원굉도】	fix	lookup
+names:target-punctuation	袁宏道です。	원굉도입니다.	fix	lookup
+names:target-punctuation	袁宏道？	원굉도?	fix	lookup
+names:target-punctuation	袁宏道、袁枚	원굉도, 원매	fix	lookup
+names:target-punctuation	袁宏道。	원굉도.	fix	lookup
+names:target-punctuation	袁宏	원굉	keep	lookup
+names:target-punctuation	袁枚	원매	keep	lookup
+names:target-reading	西新井病院	니시아라이 병원	fix	lookup
+names:target-reading	西新井病院に行く。	니시아라이 병원에 간다.	fix	lookup
+names:target-reading	西新井病院の写真。	니시아라이 병원의 사진.	fix	lookup
+names:target-reading	西新井病院で働く。	니시아라이 병원에서 일한다.	fix	lookup
+names:target-reading	西新井病院の前。	니시아라이 병원 앞.	fix	lookup
+names:target-reading	西新井病院の医師。	니시아라이 병원의 의사.	fix	lookup
+names:target-reading	西新井病院を見た。	니시아라이 병원을 보았다.	fix	lookup
+names:target-reading	西新井病院を探す。	니시아라이 병원을 찾는다.	fix	lookup
+names:target-reading	西新井病院の名前。	니시아라이 병원의 이름.	fix	lookup
+names:target-reading	西新井病院へ行く。	니시아라이 병원에 간다.	fix	lookup
+names:target-reading	「西新井病院」	「니시아라이 병원」	fix	lookup
+names:target-reading	【西新井病院】	【니시아라이 병원】	fix	lookup
+names:target-reading	西新井病院です。	니시아라이 병원입니다.	fix	lookup
+names:target-reading	西新井病院？	니시아라이 병원?	fix	lookup
+names:target-reading	西新井病院の近く。	니시아라이 병원의 근처.	fix	lookup
+names:target-reading	西新井	니시아라이	keep	lookup
+names:target-reading	西新井駅	니시아라이역	keep	lookup
+names:target-reading	西新井警察署	니시아라이 경찰서	keep	lookup
+names:target-reading	西新井大師	니시아라이 다이시	fix	lookup
+names:target-reading	西新井大師西駅	니시아라이다이시니시역	keep	lookup
+names:target-spacing	西沢道夫	니시자와 미치오	fix	lookup
+names:target-spacing	西沢道夫さんが来た。	니시자와 미치오 씨가 왔다.	keep	lookup
+names:target-spacing	「西沢道夫」	「니시자와 미치오」	keep	lookup
+names:target-spacing	西澤道夫	니시자와 미치오	keep	lookup
+names:target-spacing	西沢	니시자와	keep	lookup
+names:target-reading	観世音菩薩普門品	관세음보살보문품	fix	lookup
+names:target-reading	観世音菩薩普門品を読む。	관세음보살보문품을 읽는다.	fix	lookup
+names:target-reading	観世音菩薩普門品の本。	관세음보살보문품의 책.	fix	lookup
+names:target-reading	観世音菩薩普門品を読んだ。	관세음보살보문품을 읽었다.	fix	lookup
+names:target-reading	観世音菩薩普門品の名前。	관세음보살보문품의 이름.	fix	lookup
+names:target-reading	観世音菩薩普門品を見た。	관세음보살보문품을 보았다.	fix	lookup
+names:target-reading	観世音菩薩普門品の全文。	관세음보살보문품의 전문.	fix	lookup
+names:target-reading	観世音菩薩普門品の意味。	관세음보살보문품의 의미.	fix	lookup
+names:target-reading	「観世音菩薩普門品」	「관세음보살보문품」	fix	lookup
+names:target-reading	【観世音菩薩普門品】	【관세음보살보문품】	fix	lookup
+names:target-reading	観世音菩薩普門品です。	관세음보살보문품입니다.	fix	lookup
+names:target-reading	観世音菩薩普門品？	관세음보살보문품?	fix	lookup
+names:target-reading	観世音菩薩普門品について。	관세음보살보문품에 대해.	fix	lookup
+names:target-reading	観世音菩薩普門品を調べる。	관세음보살보문품을 조사한다.	fix	lookup
+names:target-reading	観世音菩薩普門品の一節。	관세음보살보문품의 한 구절.	fix	lookup
+names:target-reading	観世音菩薩	관세음보살	keep	lookup
+names:target-reading	観世音	관세음	keep	lookup
+names:target-reading	観音菩薩	관음보살	keep	lookup
+names:target-reading	普門品	보문품	keep	lookup
+names:target-corruption	誠直也	마코토 나오야	fix	lookup
+names:target-corruption	誠直也さんが来た。	마코토 나오야 씨가 왔다.	fix	lookup
+names:target-corruption	誠直也の写真。	마코토 나오야의 사진.	fix	lookup
+names:target-corruption	誠直也と会った。	마코토 나오야와 만났다.	fix	lookup
+names:target-corruption	誠直也を見た。	마코토 나오야를 보았다.	fix	lookup
+names:target-corruption	誠直也に会った。	마코토 나오야를 만났다.	fix	lookup
+names:target-corruption	「誠直也」	「마코토 나오야」	fix	lookup
+names:target-corruption	誠直也。	마코토 나오야.	fix	lookup
+names:target-corruption	誠直也、誠直也。	마코토 나오야, 마코토 나오야.	fix	lookup
+names:target-corruption	誠 直也	마코토 나오야	fix	lookup
+names:target-corruption	誠 直也さんが来た。	마코토 나오야 씨가 왔다.	fix	lookup
+names:target-corruption	誠直也の名前。	마코토 나오야의 이름.	fix	lookup
+names:target-corruption	誠直也の映画。	마코토 나오야의 영화.	fix	lookup
+names:target-corruption	誠直也のインタビュー。	마코토 나오야의 인터뷰.	fix	lookup
+names:target-corruption	誠直也の作品。	마코토 나오야의 작품.	fix	lookup
+names:target-corruption	誠意	성의	keep	lookup

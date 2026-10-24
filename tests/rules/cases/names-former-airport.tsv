@@ -1,0 +1,14 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.576765	旧広州白雲国際空港	구 광저우 바이윈 국제공항	fix	fixed
+dict:names.576765	「旧広州白雲国際空港」	「구 광저우 바이윈 국제공항」	fix	fixed
+dict:names.576765	旧広州白雲国際空港の閉鎖。	구 광저우 바이윈 국제공항의 폐쇄.	fix	fixed
+dict:names.576765	旧広州白雲国際空港の名前。	구 광저우 바이윈 국제공항의 이름.	fix	fixed
+dict:names.576765	旧広州白雲国際空港の場所。	구 광저우 바이윈 국제공항의 장소.	fix	fixed
+dict:names.576765	旧広州白雲国際空港の写真。	구 광저우 바이윈 국제공항의 사진.	fix	fixed
+dict:names.576765	旧広州白雲国際空港の滑走路。	구 광저우 바이윈 국제공항의 활주로.	fix	fixed
+dict:names.576765	旧広州白雲国際空港に着いた。	구 광저우 바이윈 국제공항에 도착했다.	fix	fixed
+dict:names.576765	旧広州白雲国際空港を利用した。	구 광저우 바이윈 국제공항을 이용했다.	fix	fixed
+dict:names.576765	旧広州白雲国際空港から出発する。	구 광저우 바이윈 국제공항에서 출발한다.	fix	fixed
+dict:names.576765	広州白雲国際空港	광저우 바이윈 국제공항	keep	fixed
+dict:names.576765	桂林両江国際空港	구이린 량장 국제공항	keep	fixed

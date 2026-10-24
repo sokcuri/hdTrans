@@ -1,0 +1,29 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.41172	アメリカ地中海	아메리카 지중해	fix	lookup
+dict:names.41172	「アメリカ地中海」	「아메리카 지중해」	fix	lookup
+dict:names.41172	アメリカ地中海。	아메리카 지중해.	fix	lookup
+dict:names.41172	アメリカ地中海を調べた。	아메리카 지중해를 조사했다.	fix	lookup
+dict:names.41172	アメリカ地中海の地図。	아메리카 지중해의 지도.	fix	lookup
+dict:names.41172	アメリカ地中海にはカリブ海とメキシコ湾が含まれる。	아메리카 지중해에는 카리브해와 멕시코만이 포함된다.	fix	lookup
+dict:names	地中海	지중해	keep	lookup
+dict:names	「地中海」	「지중해」	keep	lookup
+dict:names	地中海の地図。	지중해의 지도.	keep	lookup
+dict:names	アメリカ大陸	아메리카 대륙	keep	lookup
+dict:names	アメリカ大陸の地図。	아메리카 대륙의 지도.	keep	lookup
+dict:names	アメリカ合衆国	아메리카 합중국	keep	lookup
+dict:names	アメリカ海軍	미국 해군	keep	lookup
+dict:names.44781	アルゼンチン系カナダ人	아르헨티나계 캐나다인	fix	lookup
+dict:names.44781	「アルゼンチン系カナダ人」	「아르헨티나계 캐나다인」	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人。	아르헨티나계 캐나다인.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人の人口。	아르헨티나계 캐나다인의 인구.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人を調べた。	아르헨티나계 캐나다인을 조사했다.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人が来た。	아르헨티나계 캐나다인이 왔다.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人の家族。	아르헨티나계 캐나다인의 가족.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人と会った。	아르헨티나계 캐나다인과 만났다.	fix	lookup
+dict:names.44781	アルゼンチン系カナダ人の歴史。	아르헨티나계 캐나다인의 역사.	fix	lookup
+dict:names	アルゼンチン	아르헨티나	keep	lookup
+dict:names	アルゼンチン人	아르헨티나인	keep	lookup
+dict:names	カナダ人	캐나다인	keep	lookup
+dict:names	ラテンアメリカ	라틴 아메리카	keep	lookup
+dict:names	日系カナダ人	일본계 캐나다인	keep	lookup

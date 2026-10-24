@@ -1,0 +1,8 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:77255	芽キャベツ	방울양배추	fix	defaults
+dict:jisjk:77255	芽キャベツを食べる。	방울양배추를 먹는다.	fix	defaults
+dict:jisjk:77255	芽キャベツのスープ。	방울양배추의 스프.	fix	defaults
+dict:jisjk:77255	芽キャベツを育てる。	방울양배추를 기른다.	fix	defaults
+dict:jisjk:77255	キャベツ	양배추	keep	defaults
+dict:jisjk:77255	カリフラワー	콜리플라워	keep	defaults

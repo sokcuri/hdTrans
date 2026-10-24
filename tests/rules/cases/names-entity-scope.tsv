@@ -1,0 +1,84 @@
+# 규칙: LEX-1, LEX-29
+rule	input	expected	kind	layer
+dict:names.46428	アルフレッド・パッカー事件	앨프리드 패커 사건	fix	lookup
+dict:names.46428	「アルフレッド・パッカー事件」	「앨프리드 패커 사건」	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件。	앨프리드 패커 사건.	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件の記録。	앨프리드 패커 사건의 기록.	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件を調べた。	앨프리드 패커 사건을 조사했다.	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件の歴史。	앨프리드 패커 사건의 역사.	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件の資料。	앨프리드 패커 사건의 자료.	fix	lookup
+dict:names.46428	アルフレッド・パッカー事件について。	앨프리드 패커 사건에 대해.	fix	lookup
+dict:names	事件	사건	keep	lookup
+dict:names	アルフレッド・ヒッチコック	앨프리드 히치콕	keep	lookup
+dict:names	アルベルト・フリードリヒ・シュペーア	알베르트 프리드리히 슈페어	keep	lookup
+dict:names.47561	アル・クリスティ	앨 크리스티	fix	lookup
+dict:names.47561	「アル・クリスティ」	「앨 크리스티」	fix	lookup
+dict:names.47561	アル・クリスティ。	앨 크리스티.	fix	lookup
+dict:names.47561	アル・クリスティの映画。	앨 크리스티의 영화.	fix	lookup
+dict:names.47561	アル・クリスティの作品。	앨 크리스티의 작품.	fix	lookup
+dict:names.47561	アル・クリスティを調べた。	앨 크리스티를 조사했다.	fix	lookup
+dict:names.47561	アル・クリスティが来た。	앨 크리스티가 왔다.	fix	lookup
+dict:names.47561	アル・クリスティと会った。	앨 크리스티와 만났다.	fix	lookup
+dict:names	アル・クリスティー	앨 크리스티	keep	lookup
+dict:names	アガサ・クリスティー	애거사 크리스티	keep	lookup
+dict:names	兄弟	형제	keep	lookup
+dict:names.49146	アレックス・ギルバート	알렉스 길버트	fix	lookup
+dict:names.49146	「アレックス・ギルバート」	「알렉스 길버트」	fix	lookup
+dict:names.49146	アレックス・ギルバート。	알렉스 길버트.	fix	lookup
+dict:names.49146	アレックス・ギルバートが来た。	알렉스 길버트가 왔다.	fix	lookup
+dict:names.49146	アレックス・ギルバートの家族。	알렉스 길버트의 가족.	fix	lookup
+dict:names.49146	アレックス・ギルバートを調べた。	알렉스 길버트를 조사했다.	fix	lookup
+dict:names.49146	アレックス・ギルバートと会った。	알렉스 길버트와 만났다.	fix	lookup
+dict:names.49146	アレックス・ギルバートは来た。	알렉스 길버트는 왔다.	fix	lookup
+dict:names.49146	アレックス・ギルバートの作品。	알렉스 길버트의 작품.	fix	lookup
+dict:names	アレックス	알렉스	keep	lookup
+dict:names	アレックス・ギブニー	알렉스 기브니	keep	lookup
+dict:names.50294	アングル・レイク駅	앵글 레이크역	fix	lookup
+dict:names.50294	「アングル・レイク駅」	「앵글 레이크역」	fix	lookup
+dict:names.50294	アングル・レイク駅。	앵글 레이크역.	fix	lookup
+dict:names.50294	アングル・レイク駅の写真。	앵글 레이크역의 사진.	fix	lookup
+dict:names.50294	アングル・レイク駅の入口。	앵글 레이크역의 입구.	fix	lookup
+dict:names.50294	アングル・レイク駅に着いた。	앵글 레이크역에 도착했다.	fix	lookup
+dict:names.50294	アングル・レイク駅から出た。	앵글 레이크역에서 나왔다.	fix	lookup
+dict:names.50294	アングル・レイク駅まで歩いた。	앵글 레이크역까지 걸었다.	fix	lookup
+dict:names	アングル	앵글	keep	lookup
+dict:names	レイク	레이크	keep	lookup
+dict:names	アンカラ駅	앙카라역	fix	lookup
+dict:names.49981	アローラライチュウ	알로라 라이츄	fix	lookup
+dict:names.49981	「アローラライチュウ」	「알로라 라이츄」	fix	lookup
+dict:names.49981	アローラライチュウ。	알로라 라이츄.	fix	lookup
+dict:names.49981	アローラライチュウの姿。	알로라 라이츄의 모습.	fix	lookup
+dict:names.49981	アローラライチュウの写真。	알로라 라이츄의 사진.	fix	lookup
+dict:names.49981	アローラライチュウを見た。	알로라 라이츄를 보았다.	fix	lookup
+dict:names.49981	アローラライチュウとピカチュウ。	알로라 라이츄와 피카츄.	fix	lookup
+dict:names.49981	アローラライチュウの名前。	알로라 라이츄의 이름.	fix	lookup
+dict:names	ライチュー	라이츄	keep	lookup
+dict:names	アローラロコン	알로라 식스테일	keep	lookup
+dict:names.52076	アントニア・レイ	안토니아 레이	fix	lookup
+dict:names.52076	「アントニア・レイ」	「안토니아 레이」	fix	lookup
+dict:names.52076	アントニア・レイ。	안토니아 레이.	fix	lookup
+dict:names.52076	アントニア・レイの作品。	안토니아 레이의 작품.	fix	lookup
+dict:names.52076	アントニア・レイの写真。	안토니아 레이의 사진.	fix	lookup
+dict:names.52076	アントニア・レイが来た。	안토니아 레이가 왔다.	fix	lookup
+dict:names.52076	アントニア・レイを調べた。	안토니아 레이를 조사했다.	fix	lookup
+dict:names.52076	アントニア・レイと会った。	안토니아 레이와 만났다.	fix	lookup
+dict:names	アントニア	안토니아	keep	lookup
+dict:names	レイ	레이	keep	lookup
+dict:names.52069	アントニア・トゥルッポ	안토니아 트루포	fix	lookup
+dict:names.52069	「アントニア・トゥルッポ」	「안토니아 트루포」	fix	lookup
+dict:names.52069	アントニア・トゥルッポ。	안토니아 트루포.	fix	lookup
+dict:names.52069	アントニア・トゥルッポの作品。	안토니아 트루포의 작품.	fix	lookup
+dict:names.52069	アントニア・トゥルッポの写真。	안토니아 트루포의 사진.	fix	lookup
+dict:names.52069	アントニア・トゥルッポが来た。	안토니아 트루포가 왔다.	fix	lookup
+dict:names.52069	アントニア・トゥルッポを調べた。	안토니아 트루포를 조사했다.	fix	lookup
+dict:names.52069	アントニア・トゥルッポと会った。	안토니아 트루포와 만났다.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダ	안토넬로 마나코르다	fix	lookup
+dict:names.52414	「アントネッロ・マナコルダ」	「안토넬로 마나코르다」	fix	lookup
+dict:names.52414	アントネッロ・マナコルダ。	안토넬로 마나코르다.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダの作品。	안토넬로 마나코르다의 작품.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダの写真。	안토넬로 마나코르다의 사진.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダが来た。	안토넬로 마나코르다가 왔다.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダを調べた。	안토넬로 마나코르다를 조사했다.	fix	lookup
+dict:names.52414	アントネッロ・マナコルダと会った。	안토넬로 마나코르다와 만났다.	fix	lookup
+dict:names	アントネッラ・コスタ	안토넬라 코스타	keep	lookup
+dict:names	アントネッロ・クックレドゥ	안토넬로 쿠쿠레두	keep	lookup

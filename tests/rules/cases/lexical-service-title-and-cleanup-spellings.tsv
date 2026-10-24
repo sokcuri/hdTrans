@@ -1,0 +1,77 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:jisjk:347451	アット・ニフティ	앳니프티	fix	defaults
+dict:jisjk:347451	アット・ニフティ。	앳니프티.	fix	defaults
+dict:jisjk:347451	アット・ニフティを使う。	앳니프티를 쓴다.	fix	defaults
+dict:jisjk:347451	アット・ニフティのサービス。	앳니프티의 서비스.	fix	defaults
+dict:jisjk:347451	これはアット・ニフティだ。	이것은 앳니프티다.	fix	defaults
+dict:names.360770	ミック・コーネット: 肥満都市の100万ポンド減量法	믹 코넷: 비만 도시의 100만 파운드 감량법	keep	fixed
+dict:names.360770	「ミック・コーネット: 肥満都市の100万ポンド減量法」	「믹 코넷: 비만 도시의 100만 파운드 감량법」	keep	fixed
+dict:names.360770	ミック・コーネット: 肥満都市の100万ポンド減量法を見た。	믹 코넷: 비만 도시의 100만 파운드 감량법을 보았다.	keep	fixed
+dict:jisjk:373289	おだてられる。	치켜세워진다.	keep	defaults
+dict:jisjk:373289	おだてられた。	치켜세워졌다.	keep	defaults
+dict:jisjk:373289	おだてられている。	치켜세워지고 있다.	keep	defaults
+dict:jisjk:373289	彼はおだてられた。	그는 치켜세워졌다.	keep	defaults
+dict:jisjk:373289	おだてられない。	치켜세워지지 않는다.	keep	defaults
+dict:jisjk:264500	しばらくぶりに会った。	오랜만에 만났다.	keep	defaults
+dict:jisjk:264500	しばらくぶりに来た。	오랜만에 왔다.	keep	defaults
+dict:jisjk:264500	しばらくぶりに話す。	오랜만에 이야기한다.	keep	defaults
+dict:jisjk:264500	しばらくぶりに見た。	오랜만에 보았다.	keep	defaults
+dict:jisjk:264500	しばらくぶりに帰った。	오랜만에 돌아갔다.	keep	defaults
+dict:jisjk:109648	尻拭い	뒤처리	fix	defaults
+dict:jisjk:109648	尻拭いをした。	뒤처리를 했다.	fix	defaults
+dict:jisjk:109648	彼の尻拭いだ。	그의 뒤처리다.	fix	defaults
+dict:jisjk:109648	尻拭いをする。	뒤처리를 한다.	fix	defaults
+dict:jisjk:109648	尻拭いの仕事。	뒤처리의 일.	fix	defaults
+dict:names.677753	第5水陸両用軍団	제5수륙양용 군단	keep	defaults
+dict:names.677753	第5水陸両用軍団の記録。	제5수륙양용 군단의 기록.	keep	defaults
+dict:jisjk:347451	@NIFTY	@NIFTY	keep	defaults
+dict:jisjk:347451	ニフティ	니프티	keep	defaults
+dict:names.360770	ミック・コーネット	믹 코넷	keep	fixed
+dict:names.360770	肥満都市	비만 도시	keep	fixed
+dict:jisjk:373289	おだてる。	치켜세운다.	keep	defaults
+dict:jisjk:373289	褒められた。	칭찬받았다.	keep	defaults
+dict:jisjk:264500	しばらく待つ。	한동안 기다린다.	keep	defaults
+dict:jisjk:109648	後始末をした。	뒤처리를 했다.	keep	defaults
+dict:jisjk:109648	尻を拭く。	엉덩이를 닦는다.	keep	defaults
+dict:jisjk:48216	ショッピングカート	쇼핑카트	fix	defaults
+dict:jisjk:48216	ショッピングカートを使う。	쇼핑카트를 쓴다.	fix	defaults
+dict:jisjk:48216	ショッピングカートの中。	쇼핑카트 안.	fix	defaults
+dict:jisjk:48216	新しいショッピングカート。	새로운 쇼핑카트.	fix	defaults
+dict:jisjk:48216	これはショッピングカートだ。	이것은 쇼핑카트다.	fix	defaults
+dict:jisjk:109744	宮崎県経済農業協同組合連合	미야자키현 경제농업협동조합연합	keep	defaults
+dict:jisjk:109744	宮崎県経済農業協同組合連合の資料。	미야자키현 경제농업협동조합연합의 자료.	keep	defaults
+dict:jisjk:109744	宮崎県経済農業協同組合連合を訪問する。	미야자키현 경제농업협동조합연합을 방문한다.	keep	defaults
+dict:jisjk:109833	岡山県酪農農業協同組合連合	오카야마현 낙농농업협동조합연합	keep	defaults
+dict:jisjk:109833	岡山県酪農農業協同組合連合の資料。	오카야마현 낙농농업협동조합연합의 자료.	keep	defaults
+dict:jisjk:109833	岡山県酪農農業協同組合連合を訪問する。	오카야마현 낙농농업협동조합연합을 방문한다.	keep	defaults
+dict:jisjk:48216	カードを使う。	카드를 쓴다.	keep	defaults
+dict:jisjk:48216	カートを押す。	카트를 민다.	keep	defaults
+dict:jisjk:48216	ショッピングバッグ	쇼핑 가방	keep	defaults
+dict:jisjk:117890	口が酸っぱい。	입이 시다.	keep	defaults
+dict:jisjk:109833	酪農農業協同組合	낙농 농업협동조합	keep	defaults
+dict:jisjk:117890	口を酸っぱくした。	입이 닳도록 말했다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくしている。	입이 닳도록 말하고 있다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくしない。	입이 닳도록 말하지 않는다.	fix	defaults
+dict:names.584545	有坂亜里紗	아리사카 아리사	fix	lookup
+dict:names.584545	有坂亜里紗さん	아리사카 아리사 씨	keep	fixed
+dict:names.584545	有坂亜里紗が来た。	아리사카 아리사가 왔다.	keep	fixed
+dict:names.584545	有坂亜里紗と話した。	아리사카 아리사와 이야기했다.	keep	fixed
+dict:names.584545	有坂亜里紗を呼ぶ。	아리사카 아리사를 부른다.	keep	fixed
+dict:names.584545	有坂亜里紗の名前	아리사카 아리사의 이름	keep	fixed
+dict:jisjk:55434	フレーヴァー	플레이버	keep	defaults
+dict:jisjk:55434	このフレーヴァー	이 플레이버	keep	defaults
+dict:jisjk:55434	新しいフレーヴァーだ。	새로운 플레이버다.	keep	defaults
+dict:jisjk:55434	好きなフレーヴァーを選ぶ。	좋아하는 플레이버를 선택한다.	keep	defaults
+dict:jisjk:55434	フレーヴァーが違う。	플레이버가 다르다.	keep	defaults
+dict:jisjk:55434	フレーヴァーの名前	플레이버의 이름	keep	defaults
+dict:jisjk:49776	このソシャル	이 소셜	keep	defaults
+dict:jisjk:49776	ソシャルの話	소셜의 이야기	keep	defaults
+dict:jisjk:49776	ソシャルゲーム	소셜 게임	keep	defaults
+dict:jisjk:49776	ソシャルサービス	소셜 서비스	keep	defaults
+dict:jisjk:49776	ソシャルネットワーク	소셜 네트워크	keep	defaults
+dict:names.584545	有坂	아리사카	keep	fixed
+dict:names.584545	亜里紗	아리사	keep	fixed
+dict:jisjk:55434	フレーバーの名前	플레이버의 이름	keep	defaults
+dict:jisjk:49776	ソーシャルゲーム	소셜 게임	keep	defaults
+dict:jisjk:49776	ソーシャルネットワーク	소셜 네트워크	keep	defaults

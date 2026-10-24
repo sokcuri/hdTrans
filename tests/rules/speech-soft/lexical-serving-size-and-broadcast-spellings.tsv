@@ -1,0 +1,4 @@
+# 규칙: LEX-1, SPC-1
+rule	input	expected	kind	layer
+lookup:names.397720	「リンダ・デイ・ジョージさんだ。」	「린다 데이 조지 씨야.」	fix	fixed
+lookup:jisjk:136469	「死んではいけない。」	「죽어선 안 돼.」	keep	defaults

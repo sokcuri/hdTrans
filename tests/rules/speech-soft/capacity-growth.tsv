@@ -1,0 +1,6 @@
+# 규칙: LEX-3, SPC-1
+rule	input	expected	kind	layer
+sense:capacity-growth	「国力をもっとつけたい」	「국력을 좀 더 기르고 싶어」	fix	senses
+sense:capacity-growth	「実力をつけた」	「실력을 길렀어」	fix	senses
+sense:capacity-growth	「もっと力をつけなきゃ」	「좀 더 힘을 길러야 해」	fix	senses
+sense:capacity-growth	「能力をつけている」	「능력을 기르고 있어」	fix	senses

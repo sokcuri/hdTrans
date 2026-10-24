@@ -1,0 +1,23 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:missing-surname-syllable	満潮改二	미치시오 개2	fix	lookup
+names:missing-surname-syllable	満潮改二。	미치시오 개2.	fix	lookup
+names:missing-surname-syllable	満潮改二が来た。	미치시오 개2가 왔다.	fix	lookup
+names:missing-surname-syllable	満潮改二さん	미치시오 개2 씨	fix	lookup
+names:missing-surname-syllable	満潮改二氏が来た。	미치시오 개2 씨가 왔다.	fix	lookup
+names:missing-surname-syllable	満潮改二を見た。	미치시오 개2를 보았다.	fix	lookup
+names:missing-surname-syllable	満潮改二の名前	미치시오 개2의 이름	fix	lookup
+names:missing-surname-syllable	満潮改二です。	미치시오 개2입니다.	fix	lookup
+names:missing-surname-syllable	満潮改二に会った。	미치시오 개2를 만났다.	fix	lookup
+names:missing-surname-syllable	満潮永澄	미치시오 나가스미	fix	lookup
+names:missing-surname-syllable	満潮永澄。	미치시오 나가스미.	fix	lookup
+names:missing-surname-syllable	満潮永澄が来た。	미치시오 나가스미가 왔다.	fix	lookup
+names:missing-surname-syllable	満潮永澄さん	미치시오 나가스미 씨	fix	lookup
+names:missing-surname-syllable	満潮永澄氏が来た。	미치시오 나가스미 씨가 왔다.	fix	lookup
+names:missing-surname-syllable	満潮永澄を見た。	미치시오 나가스미를 보았다.	fix	lookup
+names:missing-surname-syllable	満潮永澄の名前	미치시오 나가스미의 이름	fix	lookup
+names:missing-surname-syllable	満潮永澄です。	미치시오 나가스미입니다.	fix	lookup
+names:missing-surname-syllable	満潮永澄様	미치시오 나가스미님	fix	lookup
+names:missing-surname-syllable	満潮永澄に会った。	미치시오 나가스미를 만났다.	fix	lookup
+names:missing-surname-syllable	満潮さん	미치시오 씨	keep	lookup
+names:missing-surname-syllable	満潮に乗って	밀물을 타고	keep	lookup

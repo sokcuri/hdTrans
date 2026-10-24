@@ -1,0 +1,17 @@
+# 규칙: LEX-1, LEX-29
+rule	input	expected	kind	layer
+names:gloss	フリスト・ジフコフ	흐리스토 지프코프	fix	lookup
+names:gloss	「フリスト・ジフコフ」	「흐리스토 지프코프」	fix	lookup
+names:gloss	フリスト・ジフコフが来た。	흐리스토 지프코프가 왔다.	fix	lookup
+names:gloss	フリスト・ジフコフの名前	흐리스토 지프코프의 이름	fix	lookup
+names:gloss	フリスト・ジフコフと会った。	흐리스토 지프코프와 만났다.	fix	lookup
+names:gloss	俳優フリスト・ジフコフ	배우 흐리스토 지프코프	fix	lookup
+names:gloss	フリッツ・カルクブレンナー	프리츠 칼크브레너	fix	lookup
+names:gloss	「フリッツ・カルクブレンナー」	「프리츠 칼크브레너」	fix	lookup
+names:gloss	フリッツ・カルクブレンナーが来た。	프리츠 칼크브레너가 왔다.	fix	lookup
+names:gloss	フリッツ・カルクブレンナーの名前	프리츠 칼크브레너의 이름	fix	lookup
+names:gloss	フリッツ・カルクブレンナーと会った。	프리츠 칼크브레너와 만났다.	fix	lookup
+names:gloss	音楽家フリッツ・カルクブレンナー	음악가 프리츠 칼크브레너	fix	lookup
+names:gloss	フリスト・ストイチコフ	흐리스토 스토이치코프	keep	lookup
+names:gloss	フリッツ・クライスラー	프리츠 크라이슬러	keep	lookup
+names:gloss	フリードリヒ・カルクブレンナー	프리드리히 칼크브레너	keep	lookup

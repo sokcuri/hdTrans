@@ -1,0 +1,16 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.579898	春咲暖	하루사키 논	fix	fixed
+dict:names.579898	「春咲暖」	「하루사키 논」	fix	fixed
+dict:names.579898	『春咲暖』	『하루사키 논』	fix	fixed
+dict:names.579898	【春咲暖】	【하루사키 논】	fix	fixed
+dict:names.579898	春咲暖。	하루사키 논.	fix	fixed
+dict:names.579898	春咲暖！	하루사키 논!	fix	fixed
+dict:names.579898	春咲暖？	하루사키 논?	fix	fixed
+dict:names.579898	 春咲暖	 하루사키 논	fix	fixed
+dict:names.579898	春咲暖 	하루사키 논 	fix	fixed
+dict:names.579898	春咲 暖	하루사키 논	fix	fixed
+dict:names.579898	（春咲暖）	(하루사키 논)	fix	fixed
+dict:names.579898	「春咲暖」の名前。	「하루사키 논」의 이름.	fix	fixed
+dict:names.579898	春咲あずみ	하루사키 아즈미	keep	fixed
+dict:names.579898	春咲ひより	하루사키 히요리	keep	fixed

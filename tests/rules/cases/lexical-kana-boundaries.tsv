@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
-dict:dama-ninaru	小麦粉がだまになった。	소맥분이 뭉쳤다.	fix	lookup
-dict:dama-ninaru	小麦粉がだまになりにくい。	소맥분이 뭉치기 어렵다.	fix	lookup
-dict:dama-ninaru	小麦粉がだまになる。	소맥분이 뭉친다.	fix	lookup
+dict:dama-ninaru	小麦粉がだまになった。	밀가루가 뭉쳤다.	fix	lookup
+dict:dama-ninaru	小麦粉がだまになりにくい。	밀가루가 뭉치기 어렵다.	fix	lookup
+dict:dama-ninaru	小麦粉がだまになる。	밀가루가 뭉친다.	fix	lookup
 dict:dama-ninaru	だまって。	가만히 있어.	keep	lookup
 dict:dama-ninaru	だましてはいけない。	속여선 안 된다.	keep	lookup
 dict:dama-ninaru	だましながら話した。	속이면서 이야기했다.	keep	lookup

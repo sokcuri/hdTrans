@@ -45,7 +45,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ピーター・アクロイド	피터 애크로이드	N130	QPNVHn		GN							names.297797
 ピーター・アグレ	피터 아그레	N130	QPNVHn		GN							names.297798
 ピーター・アッシャー	피터 애셔	N130	QPNVHn		GN							names.297799
-ピーター・アッティア: もし糖尿病を誤解していたら	피터 아티아 (Peter Attia): 비만은 더 심층적인 문제의 표면적 증상이 아닐까요?	N130	QWK		GN							names.297800
+ピーター・アッティア: もし糖尿病を誤解していたら	피터 아티아: 비만은 더 심층적인 문제의 표면적 증상이 아닐까요?	N130	QWK		GN							names.297800
 ピーター・アドリアンセン・ファルクネル	피터 아드리안센 팔크네르	N130	QPNVHn		GN							names.297801
 ピーター・アブラハムソン・ランネル	피터 압라함손 라네르	N130	QPNVHn		GN							names.297802
 ピーター・アレン	피터 앨런	N130	QPNVHn		GN							names.297803
@@ -6142,7 +6142,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フェムケ・ブローダース=ボル	펨커 볼	N130	QPNVHn		GN							names.303894
 フェムケ・マース	펨커 마스	N130	QPNVHn		GN							names.303895
 フェムシンム	페무심무	N110			GN						ふぇむしんむ	names.303896
-フェムテク装甲	페ムテク 장갑	N110			GN						ふぇむてくそうこう	names.303897
+フェムテク装甲	펨테크 장갑	N110			GN						ふぇむてくそうこう	names.303897
 フェムト	펨토	N130	QPNVHn	Wb	GN						ふぇむと	names.303898
 フェムトファイバー	펨토 파이버	N110			GN						ふぇむとふぁいばー	names.303899
 フェムドム	펨돔	N110			GN						ふぇむどむ	names.303900
@@ -7405,7 +7405,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フォルカー・アクセル・フォン・ビューロー	폴커 악셀 폰 부로	N130	QPNVHn		GN						フォルカー・アクセル・フォン・ビューロー	names.305157
 フォルカー・カウダー	폴커 카우더	N130	QPNVHn		GN							names.305158
 フォルカー・シュタンツェル	폴커 슈탄첼	N130	QPNVHn		GN							names.305159
-フォルカー・シュトラッセン	포커 슈트라센	N130	QPNVHn		GN							names.305160
+フォルカー・シュトラッセン	폴커 슈트라센	N130	QPNVHn		GN							names.305160
 フォルカー・シュペングラー	폴커 슈펭글러	N130	QPNVHn		GN							names.305161
 フォルカー・シュレンドルフ	폴커 슐뢴도르프	N130	QPNVHn		GN							names.305162
 フォルカー・ツェルベ	폴커 체르베	N130	QPNVHn		GN							names.305163
@@ -7417,14 +7417,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フォルカー・フィンケ	폴커 핀케	N130	QPNVHn		GN							names.305169
 フォルカー・フリート	폴커 프리트	N130	QPNVHn		GN							names.305170
 フォルカー・ブラウン	폴커 브라운	N130	QPNVHn		GN							names.305171
-フォルカー・ブルッフ	볼커 브루흐	N130	QPNVHn		GN							names.305172
+フォルカー・ブルッフ	폴커 브루흐	N130	QPNVHn		GN							names.305172
 フォルカー・ヘロルド	볼커 헤롤드	N130	QPNVHn		GN							names.305173
 フォルカー・ベック	폴커 베크	N130	QPNVHn		GN							names.305174
 フォルカー・ボウフィアー	폴커 부피어	N130	QPNVHn		GN							names.305175
 フォルカー・ボーネット	폴커 보넷	N130	QPNVHn		GN							names.305176
 フォルカー・ルートヴィヒ	폴커 루트비히	N130	QPNVHn		GN							names.305177
 フォルカー・レヒテンブリンク	볼커 레츠텐브린크	N130	QPNVHn		GN							names.305178
-フォルカー・ヴィッシング	폴커 미싱	N130	QPNVHn		GN							names.305179
+フォルカー・ヴィッシング	폴커 비싱	N130	QPNVHn		GN							names.305179
 フォルカー・ヴィーカー	폴커 비커	N130	QPNVHn		GN							names.305180
 フォルガーン団	포르칸 그룹	N130	VGt		GN							names.305181
 フォルガー・シェイクスピア図書館	폴거 셰익스피어 도서관	N130	QCTVPl		GN							names.305182
@@ -7515,7 +7515,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フォルトゥナ・シッタート	포르튀나 시타르트	N130	VGt		GN							names.305267
 フォルトゥナ・デュッセルドルフ	포르투나 뒤셀도르프	N130	VGt		GN							names.305268
 フォルトゥナータとハシンタ	포르투나타와 하신타	N130	QWK		GN							names.305269
-フォルトゥナート・デペーロ	포트루나토 데페로	N130	QPNVHn		GN							names.305270
+フォルトゥナート・デペーロ	포르투나토 데페로	N130	QPNVHn		GN							names.305270
 フォルトゥナート・バルデッリ	포르투나토 발델리	N130	QPNVHn		GN							names.305271
 フォルトゥーナ	포르투나	N110			GN						フォルトゥーナ	names.305272
 フォルトゥーニョ	포르투뇨	N130	QPNVHn	Wb	GN							names.305273
@@ -7690,7 +7690,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フォンディ	폰디	N130	QCTVPl		GN							names.305442
 フォンディエン県	퐁디엔현	N130	QCTVPl		GN							names.305443
 フォンデュ	퐁뒤	N110			GN						フォンデュ	names.305444
-フォント	만들다	N110			GN						フォント	names.305445
+フォント	폰트	N110			GN						フォント	names.305445
 フォントネー=スー=ボワ	퐁트네수부아	N130	QCTVPl		GN							names.305446
 フォントネー=ル=コント	퐁트네르콩트	N130	QCTVPl		GN							names.305447
 フォントラン	폰트랑	N130	QPNVHn	Wb	GN						ふぉんとらん	names.305448
@@ -8333,7 +8333,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フジキド・ケンジ	후지키도 켄지	N130	QPNVHn		GN						ふじきどけんじ	names.306085
 フジキマコト	후지키 마코토	N130	QPNVHn		GN							names.306086
 フジコの奇妙な処世術ーホワイトスネイクの誤算ー	후지코의 기묘한 처세술 -화이트스네이크의 오산-	N130	QWK		GN							names.306087
-フジコ・ヘミング	프지코 헤밍	N110			GN						ふじこ へみんぐ	names.306088
+フジコ・ヘミング	후지코 헤밍	N110			GN						ふじこ へみんぐ	names.306088
 フジサワ・アヤ	후지사와 아야	N130	QPNVHn		GN						ふじさわ あや	names.306089
 フジサンケイグループ	후지산케이 커뮤니케이션 그룹	N110			GN						ふじさんけいぐるーぷ	names.306090
 フジサン特急	후지산 특급	N110			GN						ふじさんとっきゅう	names.306091
@@ -8347,23 +8347,23 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フジツモン	후지츠몬	N110			GN						ふじつもん	names.306099
 フジツー・シーメンス・コンピューターズ	후지쯔 지멘스 컴퓨터스	N130	VGt		GN							names.306100
 フジテック	후지테크	N130	VGt		GN							names.306101
-フジテレビ	후지 TV	N110			GN						ふじてれび	names.306102
-フジテレビONE	후지 TV ONE	N110			GN							names.306103
-フジテレビTWO	후지 TV TWO	N110			GN							names.306104
-フジテレビオンデマンド	후지테레비 온디맨드	N110			GN						ふじてれびおんでまんど	names.306105
-フジテレビジョン	후지 TV	N130	VGt		GN							names.306106
-フジテレビジョン	후지 테레비	N130	VGt		GN						フジテレビジョン	names.306107
-フジテレビ土曜7時30分枠の連続ドラマ	후지 TV 토요일 밤 7시 30분 드라마	N130	QWK		GN							names.306108
-フジテレビ土曜7時枠の連続ドラマ	후지 TV 토요일 밤 7시 드라마	N130	QWK		GN							names.306109
-フジテレビ月曜7時枠の連続ドラマ	후지 TV 월요일 밤 7시 드라마	N130	QWK		GN							names.306110
-フジテレビ月曜9時枠の連続ドラマ	후지 TV 월요일 밤 9시 드라마	N130	QWK		GN							names.306111
-フジテレビ木曜7時枠の連続ドラマ	후지 TV 목요일 밤 7시 드라마	N130	QWK		GN							names.306112
-フジテレビ木曜8時枠の連続ドラマ	후지 TV 목요일 밤 8시 드라마	N130	QWK		GN							names.306113
-フジテレビ水曜10時枠の連続ドラマ	후지 TV 수요일 밤 10시 드라마	N130	QWK		GN							names.306114
-フジテレビ水曜夜8時枠時代劇	후지 TV 수요일 밤 8시 시대극	N130	QWK		GN							names.306115
-フジテレビ火曜9時枠の連続ドラマ	후지 TV 화요일 밤 9시 드라마	N130	QWK		GN							names.306116
-フジテレビ系列日曜夜9時枠の連続ドラマ	후지 TV 일요일 밤 9시 드라마	N130	QWK		GN							names.306117
-フジテレビ金曜8時枠の連続ドラマ	후지 TV 금요일 밤 8시 드라마	N130	QWK		GN							names.306118
+フジテレビ	후지TV	N110			GN						ふじてれび	names.306102
+フジテレビONE	후지TV ONE	N110			GN							names.306103
+フジテレビTWO	후지TV TWO	N110			GN							names.306104
+フジテレビオンデマンド	후지TV 온디맨드	N110			GN						ふじてれびおんでまんど	names.306105
+フジテレビジョン	후지TV	N130	VGt		GN							names.306106
+フジテレビジョン	후지TV	N130	VGt		GN						フジテレビジョン	names.306107
+フジテレビ土曜7時30分枠の連続ドラマ	후지TV 토요일 밤 7시 30분 드라마	N130	QWK		GN							names.306108
+フジテレビ土曜7時枠の連続ドラマ	후지TV 토요일 밤 7시 드라마	N130	QWK		GN							names.306109
+フジテレビ月曜7時枠の連続ドラマ	후지TV 월요일 밤 7시 드라마	N130	QWK		GN							names.306110
+フジテレビ月曜9時枠の連続ドラマ	후지TV 월요일 밤 9시 드라마	N130	QWK		GN							names.306111
+フジテレビ木曜7時枠の連続ドラマ	후지TV 목요일 밤 7시 드라마	N130	QWK		GN							names.306112
+フジテレビ木曜8時枠の連続ドラマ	후지TV 목요일 밤 8시 드라마	N130	QWK		GN							names.306113
+フジテレビ水曜10時枠の連続ドラマ	후지TV 수요일 밤 10시 드라마	N130	QWK		GN							names.306114
+フジテレビ水曜夜8時枠時代劇	후지TV 수요일 밤 8시 시대극	N130	QWK		GN							names.306115
+フジテレビ火曜9時枠の連続ドラマ	후지TV 화요일 밤 9시 드라마	N130	QWK		GN							names.306116
+フジテレビ系列日曜夜9時枠の連続ドラマ	후지TV 일요일 밤 9시 드라마	N130	QWK		GN							names.306117
+フジテレビ金曜8時枠の連続ドラマ	후지TV 금요일 밤 8시 드라마	N130	QWK		GN							names.306118
 フジトミ証券	후지토미 증권	N130	VGt		GN							names.306119
 フジドリームエアラインズ	후지드림 항공	N130	VGt		GN						フジドリームエアラインズ	names.306120
 フジナッツ健	후지나쓰 겐	N130	QPNVHn		GN							names.306121
@@ -9064,8 +9064,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フラガリア	프라가리아	N110			GN						ふらがりあ	names.306816
 フラガリアの騎士	프라가리아의 기사	N130	QPNVHn		GN							names.306817
 フラガリアメモリーズ	프라가리아 메모리즈	N130	QPNVHn		GN						ふらがりあめもりーず	names.306818
-フラガール	훌라 걸스	N110			GN						ふらがーる	names.306819
-フラガールと犬のチョコ	훌라 걸와 강아지 초코	N130	QWK		GN							names.306820
+フラガール	훌라 걸	N110			GN						ふらがーる	names.306819
+フラガールと犬のチョコ	훌라 걸과 강아지 초코	N130	QWK		GN							names.306820
 フラガ一族	플래가 일족	N110			GN							names.306821
 フラクシス	플락시스	N130	QPNVHn	Wb	GN						ふらくしす	names.306822
 フラクタス	프락타스	N130	QPNVHn	Wb	GN						ふらくたす	names.306823
@@ -9260,7 +9260,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フラビオソアレス	플라비오 소아레스	N130	QPNVHn		GN							names.307012
 フラビオ・エリアス・コルデイロ	플라비오 엘리아스 코르데이루	N130	QPNVHn		GN							names.307013
 フラビオ・エンリケ・デ・パイバ・カンポス	플라비우 캄푸스	N130	QPNVHn		GN							names.307014
-フラビオ・カッタネーオ	플라 비오 카타 네오	N130	QPNVHn		GN							names.307015
+フラビオ・カッタネーオ	플라비오 카타네오	N130	QPNVHn		GN							names.307015
 フラビオ・カント	플라비우 칸투	N130	QPNVHn		GN							names.307016
 フラビオ・コンセイソン	플라비우 콘세이상	N130	QPNVHn		GN							names.307017
 フラビオ・サンドナ	플라비오 산도나	N130	QPNVHn		GN							names.307018
@@ -9380,7 +9380,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フラワー・サンシャイン	플라워 선샤인	N110			GN						ふらわー・さんしゃいん	names.307132
 フラワー・トゥッチ	플라워 투치	N130	QPNVHn		GN							names.307133
 フラワー・トラベリン・バンド	플라워 트래블링 밴드	N130	VGt		GN							names.307134
-フラワー・ドーパント	플라워 도퍼트	N110			GN						ふらわー・どーぱんと	names.307135
+フラワー・ドーパント	플라워 도펀트	N110			GN						ふらわー・どーぱんと	names.307135
 フラワー・メグ	플라워 메그	N130	QPNVHn		GN							names.307136
 フラワー姫	플라워 공주	N130	QPNVHn		GN						ふらわーひめ	names.307137
 フラワー王国	플라워 왕국	N130	QCTVPl		GN							names.307138
@@ -9686,7 +9686,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フランク・スリング	프랭크 드링	N130	QPNVHn		GN							names.307438
 フランク・セルヴィ	프랭크 셀비	N130	QPNVHn		GN							names.307439
 フランク・セレー	프랭크 셀리	N130	QPNVHn		GN							names.307440
-フランク・センジャー	고6프랭크 센저	N130	QPNVHn		GN							names.307441
+フランク・センジャー	프랭크 센저	N130	QPNVHn		GN							names.307441
 フランク・ゼーン	프랭크 제인	N130	QPNVHn		GN							names.307442
 フランク・ソゼー	프랑스 소제	N130	QPNVHn		GN							names.307443
 フランク・ソルティス	프랭크 솔티스	N130	QPNVHn		GN							names.307444
@@ -11419,7 +11419,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フリストス・パツァツォグル	흐리스토스 파차초글루	N130	QPNVHn		GN							names.309171
 フリストドゥロス	흐리스토둘로스	N130	QPNVHn	Wb	GN						ふりすとどぅろす	names.309172
 フリスト・ショポフ	흐리스토 쇼포브	N130	QPNVHn		GN							names.309173
-フリスト・ジフコフ	크리스토 지브 코브	N130	QPNVHn		GN							names.309174
+フリスト・ジフコフ	흐리스토 지프코프	N130	QPNVHn		GN							names.309174
 フリスト・ストイチコフ	흐리스토 스토이치코프	N130	QPNVHn		GN							names.309175
 フリスト・ボテフ	흐리스토 보테프	N130	QPNVHn		GN							names.309176
 フリスト・ボネフ	흐리스토 보네프	N130	QPNVHn		GN							names.309177
@@ -11478,7 +11478,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フリッツ・ウィーヴァー	프리츠 위버	N130	QPNVHn		GN							names.309230
 フリッツ・オデマー	프리츠 오데마어	N130	QPNVHn		GN							names.309231
 フリッツ・カスパレク	프리츠 카스파레크	N130	QPNVHn		GN							names.309232
-フリッツ・カルクブレンナー	프리츠 칼크브레너 음악가	N130	QPNVHn		GN							names.309233
+フリッツ・カルクブレンナー	프리츠 칼크브레너	N130	QPNVHn		GN							names.309233
 フリッツ・カンパース	프리츠 캄퍼스	N130	QPNVHn		GN							names.309234
 フリッツ・カール	프리츠 칼	N130	QPNVHn		GN							names.309235
 フリッツ・キアーズチ	프리츠 키르 흐	N130	QPNVHn		GN							names.309236
@@ -13532,7 +13532,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フロリアン・ガイエル	플로리안 가이어 폰 기벨슈타트	N130	QPNVHn		GN							names.311284
 フロリアン・クライン	플로리안 클라인	N130	QPNVHn		GN							names.311285
 フロリアン・グリリッチュ	플로리안 그릴리치	N130	QPNVHn		GN							names.311286
-フロリアン・ゲルトナー	플로리안 게르 트너	N130	QPNVHn		GN							names.311287
+フロリアン・ゲルトナー	플로리안 게르트너	N130	QPNVHn		GN							names.311287
 フロリアン・コーフェルト	플로리안 코펠트	N130	QPNVHn		GN							names.311288
 フロリアン・スクーバ	플로리안 스쿠바	N130	QPNVHn		GN							names.311289
 フロリアン・ズナニェツキ	플로리안 즈나니에츠키	N130	QPNVHn		GN							names.311290
@@ -13652,7 +13652,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フロレンス・シモンズ	플로렌스 사이먼즈	N130	QPNVHn		GN							names.311404
 フロレンス・ナイチンゲール	플로렌스 나이팅게일	N130	QPNVHn		GN						ふろれんす・ないちんげーる	names.311405
 フロレンティン・ホフマン	플로렌타인 호프만	N130	QPNVHn		GN							names.311406
-フロレンティーネ・ラーメ	피렌체 라메	N130	QPNVHn		GN							names.311407
+フロレンティーネ・ラーメ	플로렌티네 라메	N130	QPNVHn		GN							names.311407
 フロレンティーネ・ロスト・ファン・トニンヘン	플로렌틴 로스트 판 토닝언	N130	QPNVHn		GN							names.311408
 フロレンティーノ・ペレス	플로렌티노 페레스	N130	QPNVHn		GN							names.311409
 フロレンティーノ・ルイス	플로렌티누 루이스	N130	QPNVHn		GN							names.311410
@@ -13674,7 +13674,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フロンティアセッター	프런티어 세터	N110			GN						ふろんてぃあせったー	names.311426
 フロンティアダイアリー	프런티어 다이어리	N130	QWK		GN						ふろんてぃあだいありー	names.311427
 フロンティアドレス	프론티어 드레스	N110			GN						ふろんてぃあどれす	names.311428
-フロンティアブレーン	배틀프런티어	N110			GN						フロンティアブレーン	names.311429
+フロンティアブレーン	프런티어 브레인	N110			GN						フロンティアブレーン	names.311429
 フロンティアリーグ	프런티어 리그	N130	VGt		GN							names.311430
 フロンティアワークス	프론티어 웍스	N130	VGt		GN						フロンティアワークス	names.311431
 フロンティア・フィールド	프런티어필드	N130	QCTVPl		GN							names.311432
@@ -13721,7 +13721,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フローズンズンやま	프로즌즌산	N110			GN						ふろーずんずんやま	names.311473
 フローズンハーフ	프로즌 하프	N130	QPNVHn		GN						ふろーずんはーふ	names.311474
 フローズン・グラウンド	프로즌 그라운드	N130	QWK		GN							names.311475
-フローズン・タイム	캐쉬백	N130	QWK		GN							names.311476
+フローズン・タイム	프로즌 타임	N130	QWK		GN							names.311476
 フローズン・バッファリオ	프로즌 버팔리오	N110			GN						ふろーずん・ばっふぁりお	names.311477
 フローズン・ライター	빌로우 제로	N130	QWK		GN							names.311478
 フローズン・リバー	프로즌 리버	N130	QWK		GN							names.311479
@@ -14510,7 +14510,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブジェチスラフ・ポヤル	브제티슬라브 포야르	N130	QPNVHn		GN							names.312262
 ブジェツラフ	브르제츨라프	N130	QCTVPl		GN							names.312263
 ブジェツラフ郡	브르제츨라프구	N130	QCTVPl		GN							names.312264
-ブジミール・メタリニコフ	블라디미르 메탈니코프	N130	QPNVHn		GN							names.312265
+ブジミール・メタリニコフ	부디미르 메탈니코프	N130	QPNVHn		GN							names.312265
 ブジム	부짐	N130	QCTVPl		GN							names.312266
 ブジャイ	부자이	N130	QPNVHn	Wb	GN							names.312267
 ブジャスポル	부자스포르	N130	VGt		GN							names.312268
@@ -14652,7 +14652,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブッカー・ピットマン	부커 피트먼	N130	QPNVHn		GN							names.312404
 ブッカー・ブラッドシャウ	부커 브래드쇼	N130	QPNVHn		GN							names.312405
 ブッキアーニコ	부키아니코	N130	QCTVPl		GN							names.312406
-ブッキングドットコム	북킹닷컴	N130	VGt		GN							names.312407
+ブッキングドットコム	부킹닷컴	N130	VGt		GN							names.312407
 ブッキング・ホールディングス	부킹 홀딩스	N130	VGt		GN							names.312408
 ブッキースケベ	벗키 스케베	N110			GN						ぶっきーすけべ	names.312410
 ブック	부크	N110			GN						ブック	names.312411
@@ -15194,7 +15194,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブライアン・ボーランド	브라이언 볼런드	N130	QPNVHn		GN							names.312947
 ブライアン・ポセーン	브라이언 포센	N130	QPNVHn		GN							names.312948
 ブライアン・ポール	브라이언 폴	N130	QPNVHn		GN							names.312949
-ブライアン・マイケル・スミス	브라이언 미셸 스미스	N130	QPNVHn		GN							names.312950
+ブライアン・マイケル・スミス	브라이언 마이클 스미스	N130	QPNVHn		GN							names.312950
 ブライアン・マイケル・ベンディス	브라이언 마이클 벤디스	N130	QPNVHn		GN							names.312951
 ブライアン・マクダーモット	브라이언 맥더멋	N130	QPNVHn		GN							names.312952
 ブライアン・マクナマラ	브라이언 맥나마라	N130	QPNVHn		GN							names.312953
@@ -15323,7 +15323,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブライトネス	브라이트니스	N110			GN						ぶらいとねす	names.313076
 ブライトバニー	브라이트 바니	N130	QPNVHn		GN						ぶらいとばにー	names.313077
 ブライトバート・ニュース・ネットワーク	브라이트바트 뉴스	N130	QWK		GN							names.313078
-ブライトバーン	더 보이	N130	QWK		GN						ブライトバーン	names.313079
+ブライトバーン	브라이트번	N130	QWK		GN						ブライトバーン	names.313079
 ブライトヒーロー	브라이트 히어로	N110			GN						ぶらいとひーろー	names.313080
 ブライトピオニー	브라이트 피오니	N110			GN						ぶらいとぴおにー	names.313081
 ブライトフェザー	브라이트페더	N110			GN						ぶらいとふぇざー	names.313082
@@ -15497,7 +15497,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラキオウィップ	브라키오 윕OW 5-70Nr	N110			GN						ブラキオウィップ	names.313250
 ブラキオゲノム	브라키오 게놈	N110			GN						ぶらきおげのむ	names.313251
 ブラキオサウルス	브라키오사우루스	N110			GN						ブラキオサウルス	names.313252
-ブラキオサウルス・ドーパント	브라키오사우루스 도퍼트	N110			GN						ぶらきおさうるす・どーぱんと	names.313253
+ブラキオサウルス・ドーパント	브라키오사우루스 도펀트	N110			GN						ぶらきおさうるす・どーぱんと	names.313253
 ブラキオサウルス・ドーパント	브라키오사우루스 도펀트	N110			GN						ブラキオサウルス・ドーパント	names.313254
 ブラキオサウルス科	브라키오사우루스과	N110			GN							names.313255
 ブラキオス	브라키오스	N110			GN						ぶらきおす	names.313256
@@ -15893,7 +15893,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラックサタン	블랙사탄	N110			GN						ぶらっくさたん	names.313646
 ブラックサタン大首領	블랙 사탄 대수령	N110			GN						ぶらっくさたんだいしゅりょう	names.313647
 ブラックサタン戦闘員	블랙사탄 전투원	N110			GN							names.313648
-ブラックサッド	블랙색	N130	QWK		GN						ぶらっくさっど	names.313649
+ブラックサッド	블랙새드	N130	QWK		GN						ぶらっくさっど	names.313649
 ブラックサバイバル	블랙 서바이벌	N130	QWK		GN						ぶらっくさばいばる	names.313650
 ブラックサレナ	블랙 살레나	N110			GN						ぶらっくされな	names.313651
 ブラックサレナ	블랙 사레나	N110			GN						ブラックサレナ	names.313652
@@ -16214,7 +16214,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラック・M	블락 M	N130	QPNVHn		GN							names.313967
 ブラック・アイド・ ピルスン	블랙아이드필승	N130	VGt		GN							names.313968
 ブラック・アイド・ピーズ	블랙 아이드 피스	N130	VGt		GN							names.313969
-ブラック・アイル半島	블랙 섬	N130	QCTVPl		GN							names.313970
+ブラック・アイル半島	블랙아일반도	N130	QCTVPl		GN							names.313970
 ブラック・アイ・キッズ	블랙 아이드 키즈	N130	QCTVPl		GN						ぶらっく・あい・きっず	names.313971
 ブラック・アズ・ナイト	암흑 같은 밤	N130	QWK		GN							names.313972
 ブラック・アニス	블랙 애니스	N110			GN						ぶらっく・あにす	names.313973
@@ -16652,7 +16652,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラッド・フォード駅	브래드퍼드역	N130	QCTVPl		GN							names.314405
 ブラッド・フラー	브래드 풀러	N130	QPNVHn		GN							names.314406
 ブラッド・フリーデル	브래드 프리델	N130	QPNVHn		GN							names.314407
-ブラッド・フレイザー	브래드 패스터	N130	QPNVHn		GN							names.314408
+ブラッド・フレイザー	브래드 프레이저	N130	QPNVHn		GN							names.314408
 ブラッド・ブラック	브래드 브랙	N130	QPNVHn		GN							names.314409
 ブラッド・ブラックストーン	블러드 블랙스톤	N130	QPNVHn		GN						ぶらっど・ぶらっくすとーん	names.314410
 ブラッド・ブラックストーン	브래드 블랙스톤	N130	QPNVHn		GN						ブラッド・ブラックストーン	names.314411
@@ -16677,7 +16677,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラッド・モリス	브래드 모리스	N130	QPNVHn		GN							names.314430
 ブラッド・ライト	브래드 라이트	N130	QPNVHn		GN							names.314431
 ブラッド・ラッフェンスパーガー	브래드 래펀스퍼거	N130	QPNVHn		GN							names.314432
-ブラッド・リチャーズ	블러드 리처즈	N130	QPNVHn		GN						ぶらっど・りちゃーず	names.314433
+ブラッド・リチャーズ	브래드 리처즈	N130	QPNVHn		GN						ぶらっど・りちゃーず	names.314433
 ブラッド・リッジ	브래드 리지	N130	QPNVHn		GN							names.314434
 ブラッド・リトル	브래드 리틀	N130	QPNVHn		GN							names.314435
 ブラッド・リンカーン	브래드 링컨	N130	QPNVHn		GN							names.314436
@@ -16707,7 +16707,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブラディミール・カステリョン	블라디미르 카스테욘	N130	QPNVHn		GN							names.314460
 ブラディミール・ゲレーロ	블라디미르 게레로	N130	QPNVHn		GN							names.314461
 ブラディミール・ゲレーロ・ジュニア	블라디미르 게레로 주니어	N130	QPNVHn		GN							names.314462
-ブラディミール・パドリーノ・ロペス	블라디미르 파드리노 로베스	N130	QPNVHn		GN							names.314463
+ブラディミール・パドリーノ・ロペス	블라디미르 파드리노 로페스	N130	QPNVHn		GN							names.314463
 ブラディミール・フランツ	블라디미르 프란츠	N130	QPNVHn		GN							names.314464
 ブラディミール・ベロソフ	블라디미르 벨로우소프	N130	QPNVHn		GN							names.314465
 ブラディメル・キンチェガシャビリ	블라디메르 힌체가슈빌리	N130	QPNVHn		GN							names.314466
@@ -16928,14 +16928,14 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ブランチ・ベイカー	블랜치 베이커	N130	QPNVHn		GN							names.314681
 ブランチ・リッキー	브랜치 리키	N130	QPNVHn		GN							names.314682
 ブランチ・リンカーン	블랜치 링컨	N130	QPNVHn		GN							names.314683
-ブランチ松井山手	지점 松井山手	N130	VGt		GN							names.314684
+ブランチ松井山手	브랜치 마쓰이야마테	N130	VGt		GN							names.314684
 ブランチ郡	브랜치군	N130	QCTVPl		GN							names.314685
 ブランツィ	브란치	N130	QCTVPl		GN							names.314686
 ブランディ	브란디	N130	QPNVHn	Wb	GN							names.314687
 ブランディア	브랜디아	N130	QWK		GN						ぶらんでぃあ	names.314688
 ブランディス	브란디스	N130	QPNVHn	Wb	GN						ぶらんでぃす	names.314689
 ブランディス	블랑디스	N130	QPNVHn	Wb	GN						ブランディス	names.314690
-ブランディス・ケンプ	밴디스 켐프	N130	QPNVHn		GN							names.314691
+ブランディス・ケンプ	브랜디스 켐프	N130	QPNVHn		GN							names.314691
 ブランディッシュ	브랜디쉬	N110			GN						ぶらんでぃっしゅ	names.314692
 ブランディッシュ4	브랜디쉬 4	N110			GN							names.314693
 ブランディッシュ4	브랜디쉬 4- 잠든 신의 탑	N110			GN							names.314694
@@ -31510,7 +31510,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベン・コーエン	벤 코언	N130	QPNVHn		GN							names.329263
 ベン・ゴッドフリー	벤 고드프리	N130	QPNVHn		GN							names.329264
 ベン・ゴールドエイカー	벤 골드에이커	N130	QPNVHn		GN							names.329265
-ベン・ゴールドエイカー: 医者も知らない薬の秘密	Ben Goldacre(벤 골드에이커) : 의사들이 처방약에 대해 알아야 할 것	N130	QWK		GN							names.329266
+ベン・ゴールドエイカー: 医者も知らない薬の秘密	벤 골드에이커: 의사들이 처방약에 대해 알아야 할 것	N130	QWK		GN							names.329266
 ベン・ゴールドバーグ	벤 골드버그	N130	QPNVHn		GN							names.329267
 ベン・サス	벤 새스	N130	QPNVHn		GN							names.329268
 ベン・サッチャー	벤 새처	N130	QPNVHn		GN							names.329269
@@ -32062,7 +32062,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ペギタニスト	페기타니스트	N110			GN						ぺぎたにすと	names.329815
 ペギタン	페기탄	N130	QPNVHn	Wb	GN						ぺぎたん	names.329816
 ペギタン	페기땅	N130	QPNVHn	Wb	GN						ペギタン	names.329817
-ペギミンH	페ギミンH	N110			GN							names.329818
+ペギミンH	페기민H	N110			GN							names.329818
 ペギラ	페기라	N130	QPNVHn	Wb	GN						ぺぎら	names.329819
 ペギー	페기	N130	QPNVHn	Wb	GN						ぺぎー	names.329820
 ペギー 松山	페기 마츠야마	N130	QPNVHn		GN						ぺぎーまつやま	names.329821
@@ -39620,7 +39620,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ボルガタンガ	볼가탕가	N130	QCTVPl		GN							names.337373
 ボルガダイナマイト	볼가 다이너마이트	N110			GN						ぼるがだいなまいと	names.337374
 ボルガニオ	볼가니오	N130	QCTVPl		GN						ぼるがにお	names.337375
-ボルガノン	볼가노ン	N110			GN						ぼるがのん	names.337376
+ボルガノン	볼가논	N110			GN						ぼるがのん	names.337376
 ボルガライス	보루가라이스	N110			GN						ボルガライス	names.337377
 ボルガル	볼가르	N130	QCTVPl		GN							names.337378
 ボルガルネース	보르가르네스	N130	QCTVPl		GN							names.337379
@@ -47515,7 +47515,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マグマ・アクシス	마그마 악시스	N130	QPNVHn		GN						まぐま・あくしす	names.345268
 マグマ・サラマンダス	마그마 샐러맨더스	N110			GN						まぐま・さらまんだす	names.345269
 マグマ・ドラゴン	마그마 드래곤	N130	QPNVHn		GN						まぐま・どらごん	names.345270
-マグマ・ドーパント	마그마 도퍼트	N110			GN						まぐま・どーぱんと	names.345271
+マグマ・ドーパント	마그마 도펀트	N110			GN						まぐま・どーぱんと	names.345271
 マグマ・ドーパント	마그마 도펀트	N110			GN						マグマ・ドーパント	names.345272
 マグマード・ドラグーン	마그마드 드라군	N130	QPNVHn		GN						まぐまーど どらぐーん	names.345273
 マグマ侵略軍	마그마 침략군	N130	VGt		GN							names.345274
@@ -48814,7 +48814,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マスカルポーロ	마스카르포네	N110			GN						ますかるぽーろ	names.346567
 マスカレイド	마스커레이드	N110			GN						マスカレイド	names.346568
 マスカレイドミラージュ	마스커레이드 미라주	N110			GN						ますかれいどみらーじゅ	names.346569
-マスカレイド・ドーパント	마스커레이드 도퍼트	N110			GN						ますかれいど・どーぱんと	names.346570
+マスカレイド・ドーパント	마스커레이드 도펀트	N110			GN						ますかれいど・どーぱんと	names.346570
 マスカレイド・ドーパント	마스카레이드 도펀트	N110			GN						マスカレイド・ドーパント	names.346571
 マスカレオン	마스카레온	N110			GN						ますかれおん	names.346572
 マスカレード	마스커레이드	N130	QPNVHn	Wb	GN						ますかれーど	names.346573
@@ -48823,7 +48823,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マスカレードナイト	마스커레이드 나이트	N130	QWK		GN						ますかれーどないと	names.346576
 マスカレードホテル	매스커레이드 호텔	N130	QWK		GN						ますかれーどほてる	names.346577
 マスカレードボール	마스커레이드 볼	N130	QPNVHn		GN						ますかれーどぼーる	names.346578
-マスカレード・ドーパント	마스커레이드 도퍼트	N110			GN						ますかれーど・どーぱんと	names.346579
+マスカレード・ドーパント	마스커레이드 도펀트	N110			GN						ますかれーど・どーぱんと	names.346579
 マスカレード・ドーパント	마스카레이드 도펀트	N110			GN							names.346580
 マスカレード・ナイト	매스커레이드 나이트	N130	QWK		GN							names.346581
 マスカレード・ホテル	매스커레이드 호텔	N130	QWK		GN						マスカレード・ホテル	names.346582
@@ -59480,7 +59480,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マーク・ベントン	마크 벤턴	N130	QPNVHn		GN							names.357234
 マーク・ペリントン	마크 펠링튼	N130	QPNVHn		GN							names.357235
 マーク・ペルグリノ	마크 펠레그리노	N130	QPNVHn		GN							names.357236
-マーク・ホイットフィールド	마크  휫필드	N130	QPNVHn		GN							names.357237
+マーク・ホイットフィールド	마크 휫필드	N130	QPNVHn		GN							names.357237
 マーク・ホッパス	마크 호퍼스	N130	QPNVHn		GN							names.357238
 マーク・ホフマン	마크 호프먼	N130	QPNVHn		GN						マーク・ホフマン	names.357239
 マーク・ホプキンズ	마크 홉킨스	N130	QPNVHn		GN							names.357240
@@ -63013,7 +63013,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミック・ギャリス	믹 가리스	N130	QPNVHn		GN							names.360767
 ミック・グッドリック	믹 구드릭	N130	QPNVHn		GN							names.360768
 ミック・コーネット	믹 코넷	N130	QPNVHn		GN							names.360769
-ミック・コーネット: 肥満都市の100万ポンド減量法	믹 코넷 (Mick Cornett ): 어느 도시의 비만 탈출기	N130	QWK		GN							names.360770
+ミック・コーネット: 肥満都市の100万ポンド減量法	믹 코넷: 어느 도시의 비만 탈출기	N130	QWK		GN							names.360770
 ミック・ザ・ジャガー	믹 더 재규어	N130	QPNVHn		GN						みっく・ざ・じゃがー	names.360771
 ミック・ザ・ニック	믹 더 닉	N130	QPNVHn		GN						みっく・ざ・にっく	names.360772
 ミック・シューマッハ	미크 슈마허	N130	QPNVHn		GN							names.360773
@@ -64663,7 +64663,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミヤえもん	사이토 미야코	N130	QPNVHn		GN							names.362417
 ミヤちゃん	미야짱	N130	QCTVPl		GN						みやちゃん	names.362418
 ミヤイリガイ	미야이리가이	N110			GN						みやいりがい	names.362419
-ミヤギテレビ	미야기 TV 방송	N110			GN						みやぎてれび	names.362420
+ミヤギテレビ	미야기TV	N110			GN						みやぎてれび	names.362420
 ミヤギロドリゴ	미야기 로드리고	N110			GN						みやぎろどりご	names.362421
 ミヤグミ	미야구미	N130	QPNVHn	Wb	GN						みやぐみ	names.362422
 ミヤコ	미야코	N130	QPNVHn	Wb	GN						ミヤコ	names.362423
@@ -66121,7 +66121,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミル・ジェディナク	마일 제디낙	N130	QPNVHn		GN							names.363875
 ミル・ド・レイユ	밀 드 레이유	N130	QPNVHn		GN						みる・ど・れいゆ	names.363876
 ミル・ホルスタイン	미루 홀스타인	N130	QPNVHn		GN						みる・ほるすたいん	names.363877
-ミル・マスカラス	미ル 마스카라스	N110			GN						みる・ますからす	names.363878
+ミル・マスカラス	밀 마스카라스	N110			GN						みる・ますからす	names.363878
 ミル・ヨークス	미르 요크스	N130	QPNVHn		GN						みるよーくす	names.363879
 ミル・ラクス郡	밀랙스군	N130	QCTVPl		GN							names.363880
 ミル・ロック	밀 록	N130	QCTVPl		GN							names.363881
@@ -70470,7 +70470,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 メタモルフォ	메타모르포	N130	QPNVHn	Wb	GN						めたもるふぉ	names.368225
 メタモルフォーゼ	메타모르포제	N110			GN						めたもるふぉーぜ	names.368226
 メタモルフォーゼ 変身	변신	N130	QWK		GN							names.368227
-メタモルフォーゼの縁側	메타모르포제의_툇마루	N130	QWK		GN							names.368228
+メタモルフォーゼの縁側	메타모르포제의 툇마루	N130	QWK		GN							names.368228
 メタモルフォーゼン	메타모르포젠	N130	QWK		GN							names.368229
 メタモルブラック	메타모르 블랙	N110			GN						めたもるぶらっく	names.368230
 メタモルブルー	메타몰 블루	N130	QPNVHn		GN						めたもるぶるー	names.368231
@@ -70711,7 +70711,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 メタル・デビルゾア	메탈 데빌조아	N130	QPNVHn		GN						めたる・でびるぞあ	names.368466
 メタル・デビルゾアX	메탈 데빌조아X	N130	QPNVHn		GN							names.368467
 メタル・ドラゴン	메탈 드래곤	N130	QPNVHn		GN						めたる・どらごん	names.368468
-メタル・ドーパント	메탈 도퍼트	N110			GN						めたる・どーぱんと	names.368469
+メタル・ドーパント	메탈 도펀트	N110			GN						めたる・どーぱんと	names.368469
 メタル・ブルー	아이언 이글 2	N130	QWK		GN							names.368470
 メタル・ブレイド・レコーズ	메탈 블레이드 레코드	N130	VGt		GN							names.368471
 メタル・ユルラン	메탈 위를랑	N130	QWK		GN							names.368472
@@ -71667,7 +71667,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 メモリー・ジーン	메모리 진	N130	QPNVHn		GN						めもりー・じーん	names.369422
 メモリー・スナッチャー	메모리 스내처	N130	QPNVHn		GN						めもりーすなっちゃー	names.369423
 メモリー・デフラグ	메모리 디프래그	N130	QWK		GN						めもりー でふらぐ	names.369424
-メモリー・ドーパント	메모리 도퍼트	N110			GN						めもりー・どーぱんと	names.369425
+メモリー・ドーパント	메모리 도펀트	N110			GN						めもりー・どーぱんと	names.369425
 メモリー女王	메모리 여왕	N130	QPNVHn		GN						めもりーじょおう	names.369426
 メモリー拡張パック	메모리 확장 팩	N110			GN							names.369427
 メモル	메모르	N130	QPNVHn	Wb	GN						めもる	names.369428
@@ -73636,7 +73636,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モシェ・ワインバーグ	모셰 웨인베르그	N130	QPNVHn		GN							names.371391
 モシコ州	모시쿠주	N130	QCTVPl		GN							names.371392
 モシャス	모샤스	N110			GN						もしゃす	names.371393
-モシャナ・ハルバート	모샤나 미늘창	N130	QPNVHn		GN							names.371394
+モシャナ・ハルバート	모샤나 할버트	N130	QPNVHn		GN							names.371394
 モシャー	모샤	N130	QPNVHn	Wb	GN						もしゃー	names.371395
 モシャーノ・サンタンジェロ	모시아노산탄젤로	N130	QCTVPl		GN							names.371396
 モシュコフスキ	모리츠 모슈코프스키	N130	QPNVHn		GN						もしゅこふすき	names.371397
@@ -73708,7 +73708,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モスクワ - カザン高速鉄道計画	모스크바-카잔 고속철도	N130	QCTVPl		GN							names.371463
 モスクワ - サンクトペテルブルク高速鉄道計画	모스크바-상트페테르부르크 고속철도	N130	QCTVPl		GN							names.371464
 モスクワ2160	모스크바 2160	N110			GN							names.371465
-モスクワのこだま	모스크바 공감	N130	QWK		GN							names.371466
+モスクワのこだま	모스크바의 메아리	N130	QWK		GN							names.371466
 モスクワの日本庭園	모스크바의 일본 정원	N130	QCTVPl		GN							names.371467
 モスクワの海	모스크바의 바다	N130	QCTVPl		GN							names.371468
 モスクワは涙を信じない	모스크바는 눈물을 믿지 않는다	N130	QWK		GN							names.371469
@@ -73890,7 +73890,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モダーンズ	모던스	N130	QWK		GN							names.371645
 モチ	모치	N130	QPNVHn	Wb	GN						もち	names.371646
 モチアン	모치안	N130	QPNVHn	Wb	GN						もちあん	names.371647
-モチコチキン	가라아게	N110			GN						モチコチキン	names.371648
+モチコチキン	모치코 치킨	N110			GN						モチコチキン	names.371648
 モチゴン	모치곤	N110			GN						もちごん	names.371649
 モチヅキ	모치즈키	N130	QPNVHn	Wb	GN						もちづき	names.371650
 モチノキ科	감탕나무과	N110			GN							names.371651
@@ -74286,7 +74286,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モニカ・マットス	모니카 마투스	N130	QPNVHn		GN							names.372041
 モニカ・マルピーギ	모니카 말피기	N130	QPNVHn		GN						もにか・まるぴーぎ	names.372042
 モニカ・マーティン	모니카 마르틴	N130	QPNVHn		GN							names.372043
-モニカ・ミゲル	모미카 미구엘	N130	QPNVHn		GN							names.372044
+モニカ・ミゲル	모니카 미구엘	N130	QPNVHn		GN							names.372044
 モニカ・ミハリク	모니카 미할리크	N130	QPNVHn		GN							names.372045
 モニカ・メイシー	모니카 메이시	N130	QPNVHn		GN						もにか・めいしー	names.372046
 モニカ・メイヘム	모니카 메이헴	N130	QPNVHn		GN							names.372047
@@ -74326,7 +74326,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モニク・メルキュール	모니크 메르퀴르	N130	QPNVHn		GN							names.372081
 モニク・ルディエール	모니크 루디에르	N130	QPNVHn		GN							names.372082
 モニク・ワロキエ	모니크 와로키에	N130	QPNVHn		GN						もにく・わろきえ	names.372083
-モニク・ヴァン・デ・ヴェン	모니크버 판 더 벤	N130	QPNVHn		GN							names.372084
+モニク・ヴァン・デ・ヴェン	모니크 판 더 벤	N130	QPNVHn		GN							names.372084
 モニシナ	모니시나	N130	QPNVHn	Wb	GN						もにしな	names.372085
 モニタ	모니터	N110			GN						モニタ	names.372086
 モニタモン	모니타몬	N110			GN						もにたもん	names.372087
@@ -74689,7 +74689,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モビルウェポン	모빌 웨폰	N110			GN						もびるうぇぽん	names.372444
 モビルガズウート	모빌 가주트	N110			GN						もびるがずうーと	names.372445
 モビルクラフト	모빌 크래프트	N110			GN						もびるくらふと	names.372446
-モビルグーン	모빌구인	N110			GN						もびるぐーん	names.372447
+モビルグーン	모빌군	N110			GN						もびるぐーん	names.372447
 モビルグーン	군	N110			GN							names.372448
 モビルザウート	모빌자우트	N110			GN						もびるざうーと	names.372449
 モビルザウート	자우트	N110			GN							names.372450
@@ -74714,7 +74714,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モビルフォースガンガル	모빌 포스 간갈	N110			GN						もびるふぉーすがんがる	names.372469
 モビルフォース・ガンガル	모빌 포스 간가르	N110			GN						もびるふぉーす・がんがる	names.372470
 モビルフラット	모빌 플랫	N110			GN						もびるふらっと	names.372471
-モビルラゴゥ	바쿠	N110			GN							names.372472
+モビルラゴゥ	라고우	N110			GN							names.372472
 モビルラゴゥ	라고우	N110			GN							names.372473
 モビルワーカー	모빌 워커	N110			GN						もびるわーかー	names.372474
 モビ・オパラク	모비 오파라쿠	N130	QPNVHn		GN							names.372475
@@ -75312,7 +75312,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モルデウス	모르데우스	N130	QPNVHn	Wb	GN						もるでうす	names.373067
 モルデカイ	모르드개	N130	QPNVHn	Wb	GN						もるでかい	names.373068
 モルデカイザー	모데카이저	N130	QPNVHn	Wb	GN							names.373069
-モルデカイ・ゼエヴ・オレンステイン	모르데카이 집 오렌스테인	N130	QPNVHn		GN							names.373070
+モルデカイ・ゼエヴ・オレンステイン	모르데카이 제에브 오렌스테인	N130	QPNVHn		GN							names.373070
 モルデカイ・リッチラー	모르데카이 리슬러	N130	QPNVHn		GN						もるでかい・りっちらー	names.373071
 モルデハイ・グル	모르데하이 구르	N130	QPNVHn		GN							names.373072
 モルデハイ・ゲルション・カッツ	모르데차이 게르손 카츠	N130	QPNVHn		GN							names.373073
@@ -76516,7 +76516,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 モーガン大佐	모건	N130	QPNVHn	Wb	GN							names.374271
 モーガン大統領	모건 대통령	N130	QPNVHn		GN						もーがんだいとうりょう	names.374272
 モーガン郡	모건군	N130	QCTVPl		GN							names.374273
-モーガー県	모가 디스트릭	N130	QCTVPl		GN							names.374274
+モーガー県	모가 디스트릭트	N130	QCTVPl		GN							names.374274
 モークの最期	모크의 최후	N110			GN							names.374275
 モーク星人	모크 성인	N110			GN							names.374276
 モーグ	모그	N130	QPNVHn	Wb	GN							names.374277
@@ -77947,7 +77947,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヤニー	야니	N130	QPNVHn	Wb	GN							names.375702
 ヤニーズ	야니즈	N130	QWK		GN						やにーず	names.375703
 ヤニーナ・ウーゼ	야니나 우제	N130	QPNVHn		GN							names.375704
-ヤニーナ・ライプツィヒ	야니나 라이치히	N130	QPNVHn		GN							names.375705
+ヤニーナ・ライプツィヒ	야니나 라이프치히	N130	QPNVHn		GN							names.375705
 ヤニー・ブリレスレイペル	야니 브란더스브릴레슬레이퍼르	N130	QPNVHn		GN							names.375706
 ヤヌア	야누아	N130	QPNVHn	Wb	GN						やぬあ	names.375707
 ヤヌアリウス	야누아리오	N130	QPNVHn	Wb	GN							names.375708
@@ -78452,7 +78452,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヤルミナ	얄미나	N130	QWK		GN						やるみな	names.376207
 ヤルミナティー	야루미나티	N130	QWK		GN						やるみなてぃー	names.376208
 ヤルミラ・クラトフビロバ	야르밀라 크라토츠빌로바	N130	QPNVHn		GN							names.376209
-ヤルミラ・グロート	야르빌라 가이도쇼바	N130	QPNVHn		GN							names.376210
+ヤルミラ・グロート	야르밀라 그로트	N130	QPNVHn		GN							names.376210
 ヤルムティエル・ハラルドソン	할므티에르 하랄드손	N130	QPNVHn		GN							names.376211
 ヤルムーク	야르무크 수용소	N130	QCTVPl		GN						やるむーく	names.376212
 ヤルムーク川	야르무크강	N130	QCTVPl		GN							names.376213
@@ -78659,7 +78659,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヤング・ジャスティス	영 저스티스	N110			GN						やんぐじゃすてぃす	names.376414
 ヤング・ジョック	영 조크	N130	QPNVHn		GN							names.376415
 ヤング・ジョー・スー	영 주 서	N130	QPNVHn		GN							names.376416
-ヤング・ストリート	영가	N130	QCTVPl		GN							names.376417
+ヤング・ストリート	영 스트리트	N130	QCTVPl		GN							names.376417
 ヤング・スーパーマン	스몰빌	N130	QWK		GN							names.376418
 ヤング・ゼネレーション	브레이킹 어웨이	N130	QWK		GN							names.376419
 ヤング・チョップ	영 촙	N130	QPNVHn		GN							names.376420
@@ -78670,7 +78670,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヤング・ファーザーズ	영 파더스	N130	VGt		GN							names.376425
 ヤング・フランケンシュタイン	영 프랑켄슈타인	N130	QWK		GN							names.376426
 ヤング・フレッシュ	영 프레시	N110			GN						やんぐ・ふれっしゅ	names.376427
-ヤング・ブラッド	머스킷티어	N130	QWK		GN							names.376428
+ヤング・ブラッド	영 블러드	N130	QWK		GN							names.376428
 ヤング・ブリティッシュ・アーティスト	영 브리티시 아티스트	N130	VGt		GN							names.376429
 ヤング・ベイン	영 베인	N130	QPNVHn		GN							names.376430
 ヤング・ポール	영 폴	N130	QPNVHn		GN							names.376431
@@ -79588,7 +79588,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユウディアス・ベルギャー	유디아스 벨기어	N130	QPNVHn		GN						ゆうでぃあす・べるぎゃー	names.377343
 ユウディアス・ベルギャー	유디아스 벨갸	N130	QPNVHn		GN						ユウディアス・ベルギャー	names.377344
 ユウト	유우토	N130	QPNVHn	Wb	GN						ユウト	names.377345
-ユウトのカルボウ	유토의 불꽃숭이	N110			GN						ゆうとのかるぼう	names.377346
+ユウトのカルボウ	유토의 카르본	N110			GN						ゆうとのかるぼう	names.377346
 ユウドウブレイカー	유도 브레이커	N110			GN						ゆうどうぶれいかー	names.377347
 ユウナ	유우나	N110			GN						ゆうな	names.377348
 ユウナハウス	유우나 하우스	N110			GN						ゆうなはうす	names.377349
@@ -79607,7 +79607,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユウヤ	유우야	N130	QPNVHn	Wb	GN						ゆうや	names.377362
 ユウヤ・ブリッジス	유우야 브릿지스	N130	QPNVHn		GN						ゆうや・ぶりっじす	names.377363
 ユウラス	유라스	N110			GN						ゆうらす	names.377364
-ユウリ	우리	N110			GN						ゆうり	names.377365
+ユウリ	유리	N110			GN						ゆうり	names.377365
 ユウリ	유리	N110			GN						ユウリ	names.377366
 ユウリィ・アートレイデ	유리 아트레이데	N130	QPNVHn		GN						ゆうりぃ・あーとれいで	names.377367
 ユウリ・アジッサ	유리 아지사	N130	QPNVHn		GN						ゆうり・あじっさ	names.377368
@@ -80254,7 +80254,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユニコーン・ストア	유니콘 스토어	N130	QWK		GN							names.378009
 ユニコーン・ゾディアーツ	유니콘 조디악스	N130	QPNVHn		GN						ゆにこーん・ぞでぃあーつ	names.378010
 ユニコーン・チャン	소기린	N130	QPNVHn	Wb	GN							names.378011
-ユニコーン・ドーパント	유니콘 도퍼트	N110			GN						ゆにこーん・どーぱんと	names.378012
+ユニコーン・ドーパント	유니콘 도펀트	N110			GN						ゆにこーん・どーぱんと	names.378012
 ユニコーン・ニコ	유니콘 니코	N110			GN						ゆにこーん・にこ	names.378013
 ユニコーン機関	유니콘 기관	N130	VGt		GN							names.378014
 ユニコーン狩りのタペストリー	유니콘 사냥	N130	QWK		GN							names.378015
@@ -82077,7 +82077,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユーノス	유노스	N130	VGt		GN						ゆーのす	names.379833
 ユーノス300	유노스 300	N110			GN							names.379834
 ユーノスコスモ	유노스 코스모	N130	QPNVHn		GN						ゆーのすこすも	names.379835
-ユーノス駅	노스 역	N130	QCTVPl		GN							names.379836
+ユーノス駅	유노스역	N130	QCTVPl		GN							names.379836
 ユーノ・スクライア	유노 스크라이어	N130	QPNVHn		GN						ゆーの すくらいあ	names.379837
 ユーノー	유노	N110			GN						ユーノー	names.379838
 ユーハバッハ	유하바흐	N130	QPNVHn	Wb	GN						ゆーはばっは	names.379839
@@ -85288,7 +85288,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ライアーダンサー	라이어 댄서	N130	QWK		GN						らいあーだんさー	names.383044
 ライアーダンス	라이어 댄스	N130	QWK		GN						ライアーダンス	names.383045
 ライアーノ	라이아노	N130	QCTVPl		GN							names.383046
-ライアー・ドーパント	라이어 도퍼트	N110			GN						らいあー・どーぱんと	names.383047
+ライアー・ドーパント	라이어 도펀트	N110			GN						らいあー・どーぱんと	names.383047
 ライアー・ドーパント	라이어 도펀트	N110			GN						ライアー・ドーパント	names.383048
 ライアー・ハウス	브레드레스	N130	QWK		GN							names.383049
 ライアー・フォン・エルティアナ	라이어 폰 에르티아나	N130	QPNVHn		GN						らいあー・ふぉん・えるてぃあな	names.383050
@@ -90703,7 +90703,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ラマト・ダヴィド空軍基地	라맛 다비드 공군기지	N130	QCTVPl		GN							names.388459
 ラマト・ハシャロン	라마트하샤론	N130	QCTVPl		GN							names.388460
 ラマナガラ	라마나가라	N130	QCTVPl		GN							names.388461
-ラマナン・ラクシュミーナラヤン: 迫り来る抗生物質の危機	라마난 락스미나라얀 (Ramanan Laxminarayan): 다가오는 항생제의 위기	N130	QWK		GN							names.388462
+ラマナン・ラクシュミーナラヤン: 迫り来る抗生物質の危機	라마난 락스미나라얀: 다가오는 항생제의 위기	N130	QWK		GN							names.388462
 ラマナ・マハルシ	라마나 마하르시	N130	QPNVHn		GN							names.388463
 ラマニ・ピラ	라마니 필라	N130	QPNVHn		GN							names.388464
 ラマルファ	라마르파	N130	QPNVHn	Wb	GN						らまるふぁ	names.388465
@@ -98704,7 +98704,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リュドヴィック・ルピック伯爵と娘たち	르피크 백작과 그의 딸들	N130	QWK		GN							names.396460
 リュドヴィート・シュトゥール	류도비트 슈투르	N130	QPNVHn		GN							names.396461
 リュナリュナ	류나류나	N130	QPNVHn	Wb	GN						りゅなりゅな	names.396462
-リュナン	리ュナン	N130	QPNVHn	Wb	GN						りゅなん	names.396463
+リュナン	류난	N130	QPNVHn	Wb	GN						りゅなん	names.396463
 リュナ・ワイゼン	류나 와이젠	N130	QPNVHn		GN						りゅな・わいぜん	names.396464
 リュニェ・ポー	오렐리앙 뤼네 포	N130	QPNVHn		GN							names.396465
 リュネット・パッチェ	뤼네트 파체	N130	QPNVHn		GN						りゅねっと・ぱっちぇ	names.396466
@@ -99041,7 +99041,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リライアンス・コミュニケーションズ	릴라이언스 커뮤니케이션	N130	VGt		GN							names.396797
 リライアント・アリーナ	NRG 아레나	N130	QCTVPl		GN							names.396798
 リライアント・ロビン	리라이언트 로빈	N110			GN						りらいあんと ろびん	names.396799
-リライジングガンダム	라이징 건담	N110			GN						りらいじんぐがんだむ	names.396800
+リライジングガンダム	리라이징 건담	N110			GN						りらいじんぐがんだむ	names.396800
 リライジングガンダム	리라이징 건담	N110			GN						リライジングガンダム	names.396801
 リライト	리라이트	N110			GN						りらいと	names.396802
 リラクゼーション	릴랙세이션	N110			GN						りらくぜーしょん	names.396803
@@ -99961,7 +99961,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リンダ・ダンバース	린다 댄버스	N130	QPNVHn		GN							names.397717
 リンダ・ダーネル	린다 다넬	N130	QPNVHn		GN							names.397718
 リンダ・チョン	린다 청	N130	QPNVHn		GN							names.397719
-リンダ・デイ・ジョージ	린다 데이 데이조지	N130	QPNVHn		GN							names.397720
+リンダ・デイ・ジョージ	린다 데이 조지	N130	QPNVHn		GN							names.397720
 リンダ・トマス=グリーンフィールド	린다 토머스그린필드	N130	QPNVHn		GN							names.397721
 リンダ・トリップ	린다 트립	N130	QPNVHn		GN							names.397722
 リンダ・トンプソン	린다 톰슨	N130	QPNVHn		GN							names.397723
@@ -100446,7 +100446,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 リ・ウンスク	리은숙	N130	QPNVHn	Wb	GN							names.398202
 リ・ウータオ	리 우타오	N130	QPNVHn		GN						りうーたお	names.398203
 リ・ガズィ	리가지	N110			GN						リ・ガズィ	names.398204
-リ・ガズィ カスタム	리가즈ィ 커스텀	N110			GN						り・がずぃ かすたむ	names.398205
+リ・ガズィ カスタム	리가지 커스텀	N110			GN						り・がずぃ かすたむ	names.398205
 リ・ガズィ カスタム	리가지 커스텀	N110			GN						リ・ガズィ カスタム	names.398206
 リ・ガズィ・カスタム	리가지	N110			GN						リ・ガズィ・カスタム	names.398207
 リ・キョンオク	리경옥	N130	QPNVHn	Wb	GN							names.398208
@@ -110314,7 +110314,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レナード・クラインロック	레너드 클라인록	N130	QPNVHn		GN							names.408070
 レナード・コーエン	레너드 코언	N130	QPNVHn		GN							names.408071
 レナード・ゴールドバーグ	레너드 골드버그	N130	QPNVHn		GN							names.408072
-レナード・サスキンド:友人リチャード・ファインマン	레너드 서스킨드 : 내 친구 '리처드 파인만(Richard Feynman)'	N130	VGt		GN							names.408073
+レナード・サスキンド:友人リチャード・ファインマン	레너드 서스킨드: 내 친구 '리처드 파인만'	N130	VGt		GN							names.408073
 レナード・サックス	레오나드 삭스	N130	QPNVHn		GN							names.408074
 レナード・サヴェッジ	레너드 지미 새비지	N130	QPNVHn		GN							names.408075
 レナード・シフリート	레나드 시플릿	N130	QPNVHn		GN							names.408076
@@ -110815,7 +110815,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 レベッカ・ウォーカー	리베카 워커	N130	QPNVHn		GN							names.408571
 レベッカ・エヴァンズ	리베카 에번스	N130	QPNVHn		GN							names.408572
 レベッカ・オニー	레베카 오니	N130	QPNVHn		GN							names.408573
-レベッカ・オニー: 私たちの健康を維持する医療システムとは?	레베카 오니(Rebecca Onie): 만약 건강복지시스템이 사람들을 건강하게 했었더라면.	N130	QWK		GN							names.408574
+レベッカ・オニー: 私たちの健康を維持する医療システムとは?	레베카 오니: 만약 건강복지시스템이 사람들을 건강하게 했었더라면.	N130	QWK		GN							names.408574
 レベッカ・オマラ	레베카 오마라	N130	QPNVHn		GN							names.408575
 レベッカ・カスパルスドッテル・フォルブス	레베카 카스파르스도테르 포르부스	N130	QPNVHn		GN							names.408576
 レベッカ・カタリナ	레베카 카타리나	N130	QPNVHn		GN						れべっか かたりな	names.408577
@@ -112217,7 +112217,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロイド・ブリッジス	로이드 브리지스	N130	QPNVHn		GN						ロイド・ブリッジス	names.409973
 ロイド・ブレーム	로이드 브렘	N130	QPNVHn		GN						ろいど・ぶれーむ	names.409974
 ロイド・プライス	로이드 프라이스	N130	QPNVHn		GN							names.409975
-ロイド・ベラドンナ	로이드 벨라donna	N130	QPNVHn		GN						ろいど・べらどんな	names.409976
+ロイド・ベラドンナ	로이드 벨라돈나	N130	QPNVHn		GN						ろいど・べらどんな	names.409976
 ロイド・ベンツェン	로이드 벤슨	N130	QPNVHn		GN							names.409977
 ロイド・ベーコン	로이드 베이컨	N130	QPNVHn		GN							names.409978
 ロイド・ボックナー	로이드 보크너	N130	QPNVHn		GN							names.409979
@@ -113028,7 +113028,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロザリア・ハート	로자리아 하트	N130	QPNVHn		GN						ろざりあ・はーと	names.410784
 ロザリア・ル・フリーデ	로자리아 르 프리데	N130	QPNVHn		GN						ろざりあ・る・ふりーで	names.410785
 ロザリア・ロンバルド	로잘리아 롬바르도	N110			GN						ろざりあ・ろんばるど	names.410786
-ロザリアード	로ザ리아드	N130	QCTVPl		GN						ろざりあーど	names.410787
+ロザリアード	로자리아드	N130	QCTVPl		GN						ろざりあーど	names.410787
 ロザリオ	묵주	N110			GN						ロザリオ	names.410788
 ロザリオとバンパイア	로자리오와 뱀파이어	N130	QWK		GN						ロザリオとバンパイア	names.410789
 ロザリオ・ドーソン	로사리오 도슨	N130	QPNVHn		GN							names.410790
@@ -113192,7 +113192,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロシア大統領府	러시아 대통령부	N130	VGt		GN							names.410948
 ロシア女子サッカー選手権	쳄피오나트 로시 포 푸트볼루 스레디 젠신	N130	VGt		GN							names.410949
 ロシア女性ファシスト運動	러시아 여성 파시스트 운동	N130	VGt		GN							names.410950
-ロシア宇宙主義	러시아 Сosmism	N130	VGt		GN							names.410951
+ロシア宇宙主義	러시아 우주주의	N130	VGt		GN							names.410951
 ロシア宇宙科学研究所	러시아 우주 연구소	N130	VGt		GN							names.410952
 ロシア宇宙軍	러시아 우주군	N130	VGt		GN							names.410953
 ロシア対外情報庁	해외정보국	N130	VGt		GN							names.410954
@@ -115498,7 +115498,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロバート・グスタフソン	로베르트 구스타프손	N130	QPNVHn		GN							names.413254
 ロバート・グッドウィル	로버트 굿윌	N130	QPNVHn		GN							names.413255
 ロバート・グッドマン	로버트 굿맨	N130	QPNVHn		GN							names.413256
-ロバート・グプタ:音楽と医学の間で	로버트 굽타(Robert Gupta): 음악과 치료의 사이	N130	QWK		GN							names.413257
+ロバート・グプタ:音楽と医学の間で	로버트 굽타: 음악과 치료의 사이	N130	QWK		GN							names.413257
 ロバート・グラブ	로버트 그러브	N130	QPNVHn		GN							names.413258
 ロバート・グラブス	로버트 그럽스	N130	QPNVHn		GN							names.413259
 ロバート・グラント	로버트 그랜트	N130	QPNVHn		GN							names.413260
@@ -117068,7 +117068,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロマンシングサガ	로맨싱 사가	N130	QWK		GN						ろまんしんぐさが	names.414824
 ロマンシングサガ2	로맨싱 사가 2	N130	QWK		GN							names.414825
 ロマンシングサガ3	로맨싱 사가 3	N130	QWK		GN							names.414826
-ロマンシングサ・ガ	로망シング 사가	N130	QWK		GN						ろまんしんぐさが	names.414827
+ロマンシングサ・ガ	로맨싱 사가	N130	QWK		GN						ろまんしんぐさが	names.414827
 ロマンシングサ・ガ2	로맨싱 사가 2	N130	QWK		GN							names.414828
 ロマンシングサ・ガ3	로맨싱 사가 3	N130	QWK		GN							names.414829
 ロマンシングトリップ	로맨싱 트립	N110			GN						ろまんしんぐとりっぷ	names.414830
@@ -117077,7 +117077,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロマンシング・サガ3	로맨싱 사가 3	N130	QWK		GN							names.414833
 ロマンシング・ストーン 秘宝の谷	로맨싱 스톤	N130	QWK		GN							names.414834
 ロマンシング・トレジャー/遺産相続・40億の罠	최후의 승자	N130	QWK		GN							names.414835
-ロマンシング佐賀	로망시ング 사가	N110			GN							names.414836
+ロマンシング佐賀	로맨싱 사가	N110			GN							names.414836
 ロマンス	로맨스	N110			GN						ろまんす	names.414837
 ロマンス	트립 투 하코네	N110			GN						ロマンス	names.414838
 ロマンス、イラネ	로망스, 이라네	N130	QWK		GN							names.414839
@@ -117283,7 +117283,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロミナ・ラドリオ	로미나 라드리오	N130	QPNVHn		GN						ろみな・らどりお	names.415039
 ロミナ・リッチ	로미나 리치	N130	QPNVHn		GN							names.415040
 ロミュアルド・ワダニ	로뮈알드 와다니	N130	QPNVHn		GN							names.415041
-ロミュラス・ウィトカー「水中に潜む本当の危機」	로물루스 휘태커 (Romulus Whitaker): 물 속에 숨은있는것의 진짜 위험	N130	QWK		GN							names.415042
+ロミュラス・ウィトカー「水中に潜む本当の危機」	로물루스 휘태커: 물 속에 숨은 진짜 위험	N130	QWK		GN							names.415042
 ロミュラン	로뮬런	N110			GN						ろみゅらん	names.415043
 ロミラ・サパー	로밀라 타파르	N130	QPNVHn		GN							names.415044
 ロミルダ・ガルド	로밀다 가르도	N130	QPNVHn		GN						ろみるだ・がるど	names.415045
@@ -133061,7 +133061,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三穂田村	미호타촌	N130	QCTVPl		GN							names.430817
 三穂県	싼쑤이현	N130	QCTVPl		GN							names.430818
 三穂野せいら	미호노 세이라	N130	QPNVHn		GN						みほのせいら	names.430819
-三立テレビ	산리 텔레비젼	N130	VGt		GN							names.430820
+三立テレビ	산리 텔레비전	N130	VGt		GN							names.430820
 三立製菓	산리쓰 제과	N130	VGt		GN						さんりつせいか	names.430821
 三立都会台	산리 도회 채널	N130	VGt		GN							names.430822
 三章	미츠아키	N130	QPNVHn	Wb	GN						みつあき	names.430823
@@ -133565,8 +133565,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三重あい	미에 아이	N130	QPNVHn		GN						みえあい	names.431321
 三重の壁	삼중의 벽	N130	QPNVHn		GN							names.431322
 三重エフエム放送	미에 FM 방송	N130	VGt		GN							names.431323
-三重テレビ	미에 TV 방송	N110			GN							names.431324
-三重テレビ放送	미에 TV 방송	N110			GN							names.431325
+三重テレビ	미에TV	N110			GN							names.431324
+三重テレビ放送	미에TV 방송	N110			GN							names.431325
 三重ノ海	미에노우미	N130	QPNVHn	Wa	GN							names.431326
 三重ノ海剛司	미에노우미 쓰요시	N130	QPNVHn		GN							names.431327
 三重交通	미에 교통	N130	VGt		GN							names.431328
@@ -138100,8 +138100,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中井雅之	나카이 마사유키	N130	QPNVHn		GN							names.435856
 中井麗一	나카이 레이이치	N130	QPNVHn		GN						なかいれいいち	names.435857
 中亥歳男	나카 이사오	N130	QPNVHn		GN							names.435858
-中京テレビ	주쿄 TV 방송	N110			GN							names.435859
-中京テレビ放送	주쿄 TV 방송	N130	VGt		GN							names.435860
+中京テレビ	주쿄TV	N110			GN							names.435859
+中京テレビ放送	주쿄TV 방송	N130	VGt		GN							names.435860
 中京圏	주쿄권	N130	QCTVPl		GN							names.435861
 中京大学	주쿄 대학	N130	VGt		GN							names.435862
 中京工業地帯	주쿄 공업지대	N130	QCTVPl		GN							names.435863
@@ -140087,7 +140087,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中村かなこ	나카무라 가나코	N130	QPNVHn		GN							names.437843
 中村こずえ	나카무라 코즈에	N130	QPNVHn		GN							names.437844
 中村さら	나카무라 사라	N130	QPNVHn		GN							names.437845
-中村しのぶ	나카무라 시노	N130	QPNVHn		GN							names.437846
+中村しのぶ	나카무라 시노부	N130	QPNVHn		GN							names.437846
 中村せいら	나카무라 세이라	N130	QPNVHn		GN							names.437847
 中村たかし	나카무라 타카시	N130	QPNVHn		GN							names.437848
 中村たつ	나카무라 타츠	N130	QPNVHn		GN							names.437849
@@ -140111,7 +140111,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中村ゆうじ	나카무라 유지	N110			GN						なかむらゆうじ	names.437867
 中村ゆう子	나카무라 유코	N130	QPNVHn		GN							names.437868
 中村ゆしか	나카무라 유시카	N130	QPNVHn		GN							names.437869
-中村ゆり	성우리	N130	QPNVHn	Wb	GN							names.437870
+中村ゆり	나카무라 유리	N130	QPNVHn	Wb	GN							names.437870
 中村ゆり	나카무라 유리	N130	QPNVHn		GN							names.437871
 中村ゆりか	나카무라 유리카	N130	QPNVHn		GN							names.437872
 中村れい子	나카무라 레이코	N130	QPNVHn		GN							names.437873
@@ -142595,7 +142595,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 丸甲村	마루코촌	N130	QCTVPl		GN							names.440351
 丸男	마루오	N130	QPNVHn	Wb	GN						まるお	names.440352
 丸目クロウド	마루메 쿠로우도	N130	QPNVHn		GN						まるめ くろうど	names.440353
-丸目千熊	마루메 치쿠마	N130	QPNVHn		GN						まるめ ちぐま	names.440354
+丸目千熊	마루메 치구마	N130	QPNVHn		GN						まるめ ちぐま	names.440354
 丸目聖人	마루메 키요히토	N130	QPNVHn		GN							names.440355
 丸目長恵	마루메 나가에	N110			GN						まるめ ながえ	names.440356
 丸石燈花	마루이시 토카	N130	QPNVHn		GN						まるいしとうか	names.440357
@@ -143488,7 +143488,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 久保龍一	쿠보 류이치	N130	QPNVHn		GN							names.441244
 久信	히사노부	N130	QPNVHn	Wb	GN							names.441245
 久元	히사모토	N130	QPNVHn	Wa	GN						ひさもと	names.441246
-久元喜造	히사노리 키조	N130	QPNVHn		GN							names.441247
+久元喜造	히사모토 키조	N130	QPNVHn		GN							names.441247
 久光	히사미쓰	N130	QPNVHn	Wb	GN							names.441248
 久光スプリングス	히사미츠 스프링스	N130	VGt		GN							names.441249
 久光製薬	히사미쓰 제약	N130	VGt		GN							names.441250
@@ -145053,7 +145053,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 乳内監禁	유방 내 감금	N110			GN							names.442809
 乳城鎮	루쳉	N130	QCTVPl		GN							names.442810
 乳山市	루산시	N130	QCTVPl		GN							names.442811
-乳幼児	유아	N110			GN							names.442812
+乳幼児	영유아	N110			GN							names.442812
 乳性飲料	유성 음료	N110			GN							names.442813
 乳房	유방	N110			GN						ちぶさ	names.442814
 乳房切断	유방 절단	N110			GN							names.442815
@@ -145424,7 +145424,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 亀田博	카메다 히로시	N130	QPNVHn		GN							names.443180
 亀田史郎	가메다 시로	N130	QPNVHn		GN							names.443181
 亀田和久	카메다 카즈히사	N110			GN						かめだ かずひさ	names.443182
-亀田和毅	카메다 토모아키	N110			GN						かめだともき	names.443183
+亀田和毅	카메다 토모키	N110			GN						かめだともき	names.443183
 亀田大毅	카메다 다이키	N110			GN						かめだだいき	names.443184
 亀田姫月	가메다 히메키	N130	QPNVHn		GN							names.443185
 亀田尚己	가메다 나오키	N130	QPNVHn		GN							names.443186
@@ -147298,7 +147298,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 五虎大将軍	오호대장군	N110			GN							names.445054
 五虎将	오호대장군	N110			GN							names.445055
 五虎将軍	오호대장군	N110			GN							names.445056
-五虎退	고코노토라	N110			GN						ごこのとら	names.445057
+五虎退	고코타이	N110			GN						ごこたい	names.445057
 五虫	오충	N110			GN						ごちゅう	names.445058
 五蛇将	오사장	N110			GN						ごだしょう	names.445059
 五行	고교	N130	QPNVHn	Wa	GN							names.445060
@@ -148441,7 +148441,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 井浦 秀	이우라 슈	N130	QPNVHn		GN						いうらしゅう	names.446197
 井浦兄妹	이우라 남매	N110			GN						いうらきょうだい	names.446198
 井浦基子	이우라 모토코	N130	QPNVHn		GN						いうら もとこ	names.446199
-井浦愛	아이 우라	N130	QPNVHn		GN							names.446200
+井浦愛	이우라 아이	N130	QPNVHn		GN							names.446200
 井浦新	이우라 아라타	N130	QPNVHn		GN							names.446201
 井浦秀	이우라 슈	N130	QPNVHn		GN						いうらしゅう	names.446202
 井浦秀夫	이우라 히데오	N130	QPNVHn		GN						いうら ひでお	names.446203
@@ -149147,7 +149147,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 京坂七穂	쿄사카 나나호	N130	QPNVHn		GN						きょうさか ななほ	names.446903
 京城	경성	N110			GN						けいじょう	names.446904
 京城クリーチャー	경성크리처	N130	QWK		GN							names.446905
-京城クリーチャー2	京城 크리처2	N130	QWK		GN							names.446906
+京城クリーチャー2	경성 크리처2	N130	QWK		GN							names.446906
 京城スキャンダル	경성스캔들	N130	QWK		GN							names.446907
 京城医学専門学校	경성의학전문학교	N130	VGt		GN							names.446908
 京城学校 消えた少女たち	경성학교: 사라진 소녀들	N130	QWK		GN							names.446909
@@ -149546,7 +149546,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 京都市営バス	교토 시영 버스	N130	VGt		GN							names.447302
 京都市平安京創生館	교토시 헤이안쿄 창생관	N130	VGt		GN							names.447303
 京都市庁舎	교토시청	N130	QCTVPl		GN							names.447304
-京都市役所	교토부역소	N130	VGt		GN							names.447305
+京都市役所	교토시청	N130	VGt		GN							names.447305
 京都市消防局	교토시 소방국	N130	VGt		GN							names.447306
 京都市立芸術大学	교토시립 예술대학	N130	VGt		GN							names.447307
 京都府庁	교토부청	N130	VGt		GN						きょうとふちょう	names.447308
@@ -149758,7 +149758,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 人倫の形而上学の基礎づけ	윤리형이상학 정초	N130	QWK		GN							names.447514
 人偶化	인형화	N110			GN							names.447515
 人力VOCALOID	인력 보컬로이드	N130	QPNVHn		GN							names.447516
-人力舎	닌리키샤	N130	VGt		GN						にんりきしゃ	names.447517
+人力舎	진리키샤	N130	VGt		GN						にんりきしゃ	names.447517
 人力車	인력거	N110			GN							names.447518
 人力車の生徒	인력거 학생	N110			GN							names.447519
 人力車発祥の日	인력거 발상의 날	N110			GN							names.447520
@@ -150047,7 +150047,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 人生Blues/青春Night	인생 Blues	N130	QWK		GN							names.447803
 人生、サイコー!	딜리버리 맨	N130	QWK		GN							names.447804
 人生、ブラボー!	Mr.스타벅	N130	QWK		GN							names.447805
-人生がときめく片づけの魔法	인생이 설레는 치워의 마법	N130	QWK		GN							names.447806
+人生がときめく片づけの魔法	인생이 빛나는 정리의 마법	N130	QWK		GN							names.447806
 人生げぇむ	인생 게임	N130	QWK		GN						じんせいげぇむ	names.447807
 人生つみこ	진세이 츠미코	N130	QPNVHn		GN						じんせい つみこ	names.447808
 人生で最も輝く時間	인생에서 가장 빛나는 시간	N130	QWK		GN							names.447809
@@ -161189,7 +161189,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 修嗣	슈지	N130	QPNVHn	Wb	GN							names.458945
 修士(工学)	공학 석사	N130	QWK		GN							names.458946
 修士(理学)	이학석사	N130	QWK		GN							names.458947
-修士(神学)	M.div 비성경적	N130	QWK		GN							names.458948
+修士(神学)	신학 석사	N130	QWK		GN							names.458948
 修士号ディプロマン	수사호 디플로맨	N130	QPNVHn		GN							names.458949
 修多羅	슈다라	N130	QPNVHn	Wb	GN						しゅだら	names.458950
 修多羅千手丸	슈다라 센주마루	N130	QPNVHn		GN						しゅうだら せんじゅまる	names.458951
@@ -162624,7 +162624,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 傷物語〈III 冷血篇〉	키즈모노가타리 III 냉혈편	N130	QWK		GN							names.460380
 傷痍軍人	상이군인	N110			GN							names.460381
 傷痕のドッペル	상흔의 도펠	N130	QPNVHn		GN						きずあとのどっぺる	names.460382
-傷薬	상처	N110			GN							names.460383
+傷薬	상처약	N110			GN							names.460383
 傾向	경향	N110			GN							names.460384
 傾向と対策	경향과 대책	N110			GN							names.460385
 傾国のローブ	경국의 로브	N110			GN							names.460386
@@ -165924,7 +165924,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 八十八ヶ所巡礼	하치주하치카쇼 준레이	N130	VGt		GN							names.463680
 八十八十八	야소 야소야	N130	QPNVHn		GN						やそ やそや	names.463681
 八十八夜	팔십팔야	N110			GN							names.463682
-八十八箇所巡礼	분류:88개소 순례	N130	QCTVPl		GN							names.463683
+八十八箇所巡礼	88개소 순례	N130	QCTVPl		GN							names.463683
 八十吉	야소키치	N130	QPNVHn	Wb	GN							names.463684
 八十島美咲	야소지마 미사키	N130	QPNVHn		GN						やそじま みさき	names.463685
 八十川	야소카와	N130	QPNVHn	Wa	GN							names.463686
@@ -167594,7 +167594,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 共侯	채 공후	N130	QPNVHn		GN						きょうこう	names.465350
 共公	공공	N130	QPNVHn	Wb	GN						きょうこう	names.465351
 共同の機関	공동 기관	N130	VGt		GN							names.465352
-共同テレビジョン	쿄도 텔레비전	N130	VGt		GN							names.465353
+共同テレビジョン	교도TV	N130	VGt		GN							names.465353
 共同リスト	공동 명단	N130	VGt		GN							names.465354
 共同主権	공동통치령	N130	VGt		GN							names.465355
 共同体	공동체	N110			GN							names.465356
@@ -178056,10 +178056,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 北海道サッカーリーグ	홋카이도 사커 리그	N130	VGt		GN							names.475812
 北海道スプリントカップ	홋카이도 스프린트 컵	N110			GN							names.475813
 北海道スペシャル	홋카이도 스페셜	N130	QWK		GN							names.475814
-北海道テレビ	홋카이도 TV 방송	N110			GN							names.475815
-北海道テレビ放送	홋카이도 TV 방송	N110			GN						ほっかいどうてれびほうそう	names.475816
-北海道テレビ放送株式会社	홋카이도 TV 방송	N130	VGt		GN							names.475817
-北海道テレビ放送株式会社	홋카이도 테레비 방송	N130	VGt		GN							names.475818
+北海道テレビ	홋카이도TV	N110			GN							names.475815
+北海道テレビ放送	홋카이도TV 방송	N110			GN						ほっかいどうてれびほうそう	names.475816
+北海道テレビ放送株式会社	홋카이도TV 방송	N130	VGt		GN							names.475817
+北海道テレビ放送株式会社	홋카이도TV 방송	N130	VGt		GN							names.475818
 北海道中央バス	홋카이도 중앙 버스	N110			GN							names.475819
 北海道中央電鉄	홋카이도 중앙전철	N110			GN							names.475820
 北海道公安委員会	홋카이도 공안위원회	N130	VGt		GN							names.475821
@@ -179089,7 +179089,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 十字架を担うキリスト	십자가를 지고 가는 그리스도	N130	QWK		GN							names.476845
 十字架上のキリストの最後の7つの言葉	십자가 위의 일곱 말씀	N130	QWK		GN							names.476846
 十字架天使	십자가 천사	N130	QPNVHn		GN							names.476847
-十字架降架	십자가에서 내림을 묘사한 부조	N130	QWK		GN							names.476848
+十字架降架	십자가에서 내림	N130	QWK		GN							names.476848
 十字目	십자눈	N130	VGt		GN							names.476849
 十字砲火	십자포화	N130	QWK		GN							names.476850
 十字街まな	주지가이 마나	N130	QPNVHn		GN						じゅうじがいまな	names.476851
@@ -180107,10 +180107,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 千葉ジェッツ	지바 제츠	N130	VGt		GN							names.477863
 千葉セントラルタワー	지바 센트럴 타워	N130	QCTVPl		GN						ちばせんとらるたわー	names.477864
 千葉ダービー	치바 더비	N110			GN						ちばだーびー	names.477865
-千葉テレビ	지바 TV	N110			GN							names.477866
-千葉テレビ放送	지바 TV	N110			GN							names.477867
-千葉テレビ放送株式会社	지바 TV	N130	VGt		GN							names.477868
-千葉テレビ放送株式会社	치바 테레비	N130	VGt		GN							names.477869
+千葉テレビ	지바TV	N110			GN							names.477866
+千葉テレビ放送	지바TV 방송	N110			GN							names.477867
+千葉テレビ放送株式会社	지바TV 방송	N130	VGt		GN							names.477868
+千葉テレビ放送株式会社	지바TV 방송	N130	VGt		GN							names.477869
 千葉トロン	치바 트론	N110			GN						ちば とろん	names.477870
 千葉ニュータウン鉄道	지바 뉴타운 철도	N130	VGt		GN							names.477871
 千葉ニュータウン鉄道 9100形 電車	치바 뉴타운 철도 9100형 전동차	N110			GN							names.477872
@@ -189984,11 +189984,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 名古屋コミティア	나고야 코미티아	N110			GN						なごやこみてぃあ	names.487740
 名古屋コミティア44	나고야 코미티아 44	N110			GN							names.487741
 名古屋コミティア45	나고야 코미티아 45	N110			GN							names.487742
-名古屋テレビ	나고야 TV 방송	N110			GN							names.487743
-名古屋テレビ塔	나고야 테레비 타워	N110			GN							names.487744
-名古屋テレビ放送	나고야 TV 방송	N130	VGt		GN							names.487745
-名古屋テレビ放送株式会社	나고야 TV 방송	N130	VGt		GN							names.487746
-名古屋テレビ放送株式会社	나고야 테레비	N130	VGt		GN							names.487747
+名古屋テレビ	나고야TV	N110			GN							names.487743
+名古屋テレビ塔	나고야TV 타워	N110			GN							names.487744
+名古屋テレビ放送	나고야TV 방송	N130	VGt		GN							names.487745
+名古屋テレビ放送株式会社	나고야TV 방송	N130	VGt		GN							names.487746
+名古屋テレビ放送株式会社	나고야TV 방송	N130	VGt		GN							names.487747
 名古屋ドラゴンズ	나고야 드래건스	N110			GN						なごやどらごんず	names.487748
 名古屋三吉	나고야 산키치	N130	QPNVHn		GN							names.487749
 名古屋南IC	나고야미나미 IC	N110			GN						なごやみなみ	names.487750
@@ -195353,7 +195353,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 四季映華	시키 에이카	N130	QPNVHn		GN						しきえいか	names.493109
 四季映華・ヤマザナドゥ	시키에이키 야마자나두	N130	QPNVHn		GN						しきえいき やまざなどゥ	names.493110
 四季春夏	시키 하루카	N130	QPNVHn		GN						しき はるか	names.493111
-四季桜	사계벚나무	N110			GN						しきざくら	names.493112
+四季桜	시키자쿠라	N110			GN						しきざくら	names.493112
 四季桜花	시키 오카	N130	QPNVHn		GN						しきおうか	names.493113
 四季様	시키 님	N110			GN						しきさま	names.493114
 四季礼花	시키 레이카	N130	QPNVHn		GN						しき れいか	names.493115
@@ -202917,8 +202917,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 塔乃花鈴	토노 카린	N130	QPNVHn		GN							names.500673
 塔原明日葉	토하라 아스하	N130	QPNVHn		GN						とうはらあすは	names.500674
 塔原直哉	토하라 나오야	N130	QPNVHn		GN						とうはらなおや	names.500675
-塔和モナカ	도와 모나카	N130	QPNVHn		GN						とうわ もなか	names.500676
-塔和子	토 카즈코,	N130	QPNVHn		GN							names.500677
+塔和モナカ	토와 모나카	N130	QPNVHn		GN						とうわ もなか	names.500676
+塔和子	토 카즈코	N130	QPNVHn		GN							names.500677
 塔和灰慈	토와 하이지	N130	QPNVHn		GN						とうわ はいじ	names.500678
 塔城小猫	토죠 코네코	N130	QPNVHn		GN						とうじょう こねこ	names.500679
 塔城霞月	토죠 카즈키	N130	QPNVHn		GN						とうじょうかづき	names.500680
@@ -207151,7 +207151,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大五	다이고	N130	QPNVHn	Wb	GN						だいご	names.504907
 大五川駅	대오천역	N130	QCTVPl		GN							names.504908
 大五郎	다이고로	N130	QPNVHn	Wb	GN							names.504909
-大井	오이	N130	QPNVHn	Wa	GN							names.504910
+大井	오오이	N130	QPNVHn	Wa	GN							names.504910
 大井こころ	오이 코코로	N130	QPNVHn		GN						おおい こころ	names.504911
 大井とんぼ	오이 톤보	N130	QPNVHn		GN						おおい とんぼ	names.504912
 大井の方	오이노카타	N110			GN						おおいのかた	names.504913
@@ -207195,7 +207195,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大井記念	오이 기념	N110			GN							names.504951
 大井警察署	오이 경찰서	N130	QCTVPl		GN							names.504952
 大井貴之	오이 다카시	N130	QPNVHn		GN							names.504953
-大井赤亥	이 아카이	N130	QPNVHn		GN							names.504954
+大井赤亥	오오이 아카이	N130	QPNVHn		GN							names.504954
 大井車両基地	오이 차량기지	N130	QCTVPl		GN							names.504955
 大井駅	오이역	N130	QCTVPl		GN						おおいえき	names.504956
 大井麻利衣	오오이 마리에	N130	QPNVHn		GN						おおいまりえ	names.504957
@@ -207611,7 +207611,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大原すず	오오하라 스즈	N130	QPNVHn		GN						おおはら すず	names.505367
 大原その子	오하라 소노코	N130	QPNVHn		GN							names.505368
 大原なな	오하라 나나	N130	QPNVHn		GN						おおはら なな	names.505369
-大原ななこ	유이슬	N130	QPNVHn	Wb	GN							names.505370
+大原ななこ	오오하라 나나코	N130	QPNVHn	Wb	GN							names.505370
 大原のりえ	오하라 노리에	N130	QPNVHn		GN							names.505371
 大原はじめ	오오하라 하지메	N130	QPNVHn		GN						おおはら はじめ	names.505372
 大原ひなた	오하라 히나타	N130	QPNVHn		GN							names.505373
@@ -207855,7 +207855,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大和塾	야마토주쿠	N130	VGt		GN							names.505611
 大和奈央	야마토 나오	N130	QPNVHn		GN							names.505612
 大和姫呂未	마츠우라 히로미	N130	QPNVHn		GN							names.505613
-大和孔太	야마모토 코타	N130	QPNVHn		GN							names.505614
+大和孔太	야마토 코타	N130	QPNVHn		GN							names.505614
 大和守安定	야마토노카미 야스사다	N130	QPNVHn		GN						やまとのかみやすさだ	names.505615
 大和守安定極	야마토노카미 야스사다 극	N110			GN						やまとのかみやすさだきわめ	names.505616
 大和守正	야마토 모리마사	N130	QPNVHn		GN							names.505617
@@ -208093,7 +208093,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大坪康亮	오츠보 코스케	N130	QPNVHn		GN							names.505849
 大坪日出代	오쓰보 히데요	N130	QPNVHn		GN							names.505850
 大坪村	오쓰보촌	N130	QCTVPl		GN							names.505851
-大坪檀	지오 마사루	N130	QPNVHn		GN							names.505852
+大坪檀	오오츠보 마유미	N130	QPNVHn		GN							names.505852
 大坪正則	오쓰보 마사노리	N130	QPNVHn		GN							names.505853
 大坪瑠実	오츠보 루미	N130	QPNVHn		GN							names.505854
 大坪由佳	오오츠보 유카	N130	QPNVHn		GN							names.505855
@@ -209116,7 +209116,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大川富雄	오카와 도미오	N130	QPNVHn		GN						おおかわ とみお	names.506872
 大川常吉	오카와 츠네키치	N130	QPNVHn		GN							names.506873
 大川平三郎	오카와 헤이자부로	N130	QPNVHn		GN							names.506874
-大川平次渦正	오가와 헤이지 우즈마사	N130	QPNVHn		GN						おおかわへいじうずまさ	names.506875
+大川平次渦正	오오카와 헤이지 우즈마사	N130	QPNVHn		GN						おおかわへいじうずまさ	names.506875
 大川征義	오카와 마사요시	N130	QPNVHn		GN							names.506876
 大川従道	오오카와 쓰구미치	N130	QPNVHn		GN							names.506877
 大川恵子	오카와 케이코	N130	QPNVHn		GN							names.506878
@@ -209367,7 +209367,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大悪魔召喚士ラピス	대악마 소환사 라피스	N130	QPNVHn		GN							names.507124
 大悲心陀羅尼	신묘장구대다라니	N130	QWK		GN							names.507125
 大悲経	대비경	N130	QWK		GN							names.507126
-大愛電視	다아이 텔레비젼	N130	VGt		GN							names.507127
+大愛電視	다아이 뎬스	N130	VGt		GN							names.507127
 大慈弥	오지미	N130	QPNVHn	Wa	GN							names.507128
 大慈弥レイ	오지미 레이	N130	QPNVHn		GN							names.507129
 大慈彌功	오지미 이사오	N130	QPNVHn		GN						おおじみ いさお	names.507130
@@ -209446,7 +209446,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大政奉還	대정봉환	N110			GN							names.507203
 大政山トンネル	오마사야마 터널	N110			GN						おおまさやま	names.507204
 大政所	오만도코로	N110			GN						おおまんどころ	names.507205
-大政絢	오사마 아야	N130	QPNVHn		GN							names.507206
+大政絢	오오마사 아야	N130	QPNVHn		GN							names.507206
 大政翼賛の歌	대정익찬의 노래	N130	QWK		GN							names.507207
 大政翼賛会	대정익찬회	N110			GN							names.507208
 大政翼贊會	대정익찬회	N130	QPNVHn	Wb	GN							names.507209
@@ -209555,7 +209555,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大星淡	오호시 아와이	N130	QPNVHn		GN						おおほし あわい	names.507312
 大映	다이에이	N130	VGt		GN							names.507313
 大映スターズ	다이에이 유니온스	N130	VGt		GN							names.507314
-大映テレビ	다이에이 텔레비전	N110			GN							names.507315
+大映テレビ	다이에이TV	N110			GN							names.507315
 大映ドラマ	다이에이 드라마	N110			GN							names.507316
 大映ユニオンズ	다이에이 유니온스	N130	VGt		GN							names.507317
 大映怪獣	다이에이 괴수	N110			GN							names.507318
@@ -210407,8 +210407,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大沢ユズ	오사와 유즈	N130	QPNVHn		GN						おうさわ ゆず	names.508164
 大沢一起	오사와 잇키	N130	QPNVHn		GN							names.508165
 大沢事務所	오사와 사무소	N130	VGt		GN							names.508166
-大沢伸一	몬도 그로소	N130	QPNVHn		GN							names.508167
-大沢伸一	오사와 신이치	N130	QPNVHn		GN							names.508168
+大沢伸一	오오사와 신이치	N130	QPNVHn		GN							names.508167
+大沢伸一	오오사와 신이치	N130	QPNVHn		GN							names.508168
 大沢信号場	오사와 신호장	N130	QCTVPl		GN							names.508169
 大沢健	오사와 켄	N130	QPNVHn		GN							names.508170
 大沢千恵子	오사와 치에코	N130	QPNVHn		GN							names.508171
@@ -211228,7 +211228,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大直駅	다즈역	N130	QCTVPl		GN							names.508985
 大相撲	오즈모	N110			GN							names.508986
 大相撲ダイジェスト	스모 다이제스트	N130	QWK		GN							names.508987
-大相撲・幕内の全取組	스모 · 마쿠우치의 모든 노력	N130	QWK		GN							names.508988
+大相撲・幕内の全取組	스모, 마쿠우치의 모든 경기	N130	QWK		GN							names.508988
 大相撲令嬢	스모 영애	N130	QWK		GN						おおずもうれいじょう	names.508989
 大相撲刑事	스모 형사	N130	QWK		GN							names.508990
 大相模村	오사가미촌	N130	QCTVPl		GN							names.508991
@@ -211714,7 +211714,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大統領暗殺	대통령의 죽음	N110			GN							names.509471
 大統領暗殺裁判 16日間の真実	행복의 나라	N130	QWK		GN							names.509472
 大統領経済諮問委員会	대통령 경제자문위원회	N130	VGt		GN							names.509473
-大統領職	총감독	N130	QPNVHn	Wb	GN							names.509474
+大統領職	대통령직	N130	QPNVHn	Wb	GN							names.509474
 大統領自由勲章	대통령 자유 훈장	N130	QWK		GN							names.509475
 大統領選挙	대통령 선거	N110			GN							names.509476
 大統領閣下	대통령 각하	N130	QWK		GN							names.509477
@@ -212371,7 +212371,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大越	오코시	N130	QPNVHn	Wa	GN							names.510128
 大越 ひなの	오오코시 히나노	N130	QPNVHn		GN						おおこし ひなの	names.510129
 大越ひなの	오코시 히나노	N130	QPNVHn		GN							names.510130
-大越健介	오오이시 켄스케	N110			GN						おおこしけんすけ	names.510131
+大越健介	오오코시 켄스케	N110			GN						おおこしけんすけ	names.510131
 大越史歩	오코시 시호	N130	QPNVHn		GN							names.510132
 大越史記全書	대월사기전서	N130	QWK		GN							names.510133
 大越多佳子	오코시 타카코	N130	QPNVHn		GN							names.510134
@@ -212470,7 +212470,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大連地下鉄	다롄 지하철	N130	QCTVPl		GN							names.510227
 大連実徳足球倶楽部	다롄 스더	N130	VGt		GN							names.510228
 大連寺鈴鹿	다이렌지 스즈카	N130	QPNVHn		GN						だいれんじすずか	names.510229
-大連市	오무라지	N110			GN							names.510230
+大連市	다롄시	N110			GN							names.510230
 大連市人民体育場	다롄 인민 경기장	N130	QCTVPl		GN							names.510231
 大連撃竜ドラギアス・バースト	대연격룡 드라기아스 버스트	N130	QPNVHn		GN							names.510232
 大連有軌電車	다롄 노면전차	N130	QCTVPl		GN							names.510233
@@ -213052,7 +213052,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大阪ソーダ	오사카 소다	N130	VGt		GN							names.510809
 大阪タコちゃんラブちゃん	오사카 타코짱 러브짱	N110			GN							names.510810
 大阪ダービー	오사카 더비	N110			GN							names.510811
-大阪テレビ放送	오사카 텔레비전 방송	N110			GN							names.510812
+大阪テレビ放送	오사카TV 방송	N110			GN							names.510812
 大阪ドーム	오사카 돔	N110			GN						おおさかどーむ	names.510813
 大阪パフォーマンスドール	오사카 퍼포먼스 돌	N130	VGt		GN							names.510814
 大阪ブルテオン	오사카 블루테온	N130	VGt		GN							names.510815
@@ -213314,7 +213314,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大韓ニュース	대한뉴스	N130	QWK		GN							names.511071
 大韓バスケットボール協会	대한민국농구협회	N130	VGt		GN							names.511072
 大韓バドミントン協会	대한배드민턴협회	N130	VGt		GN							names.511073
-大韓バレーボール協会	한국배구연맹	N130	VGt		GN							names.511074
+大韓バレーボール協会	대한배구협회	N130	VGt		GN							names.511074
 大韓ラグビー協会	대한럭비협회	N130	VGt		GN							names.511075
 大韓仏教弥勒宗	대한불교미륵종	N130	VGt		GN							names.511076
 大韓仏教振興院	대한불교진흥원	N130	VGt		GN							names.511077
@@ -213548,7 +213548,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大須戸村	오스도촌	N130	QCTVPl		GN							names.511305
 大須村	오스촌	N130	QCTVPl		GN							names.511306
 大須観音	오스칸논	N130	VGt		GN							names.511307
-大須賀	오스카	N130	QPNVHn	Wa	GN							names.511308
+大須賀	오오스가	N130	QPNVHn	Wa	GN							names.511308
 大須賀ひでき	오스가 히데키	N130	QPNVHn		GN							names.511309
 大須賀めぐみ	오스가 메구미	N130	QPNVHn		GN							names.511310
 大須賀れもん	오스카 레몬	N110			GN						おおすかれもん	names.511311
@@ -213565,7 +213565,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大須賀祐	오스카 유	N130	QPNVHn		GN							names.511322
 大須賀純	오오스카 쥰	N130	QPNVHn		GN						おおすかじゅん	names.511323
 大須賀純	오스카 준	N130	QPNVHn		GN							names.511324
-大須賀聖良	아스카 세이라	N130	QPNVHn		GN							names.511325
+大須賀聖良	오오스가 세이라	N130	QPNVHn		GN							names.511325
 大須賀裕子	오스가 유코	N130	QPNVHn		GN							names.511326
 大須賀隼人	오스가 하야토	N130	QPNVHn		GN							names.511327
 大預言書	대예언서	N130	QWK		GN							names.511328
@@ -214771,7 +214771,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 天方美帆	아마가타 미호	N130	QPNVHn		GN						あまかた みほ	names.512528
 天族	천족	N110			GN							names.512529
 天日テラス	아마히 테라스	N130	QPNVHn		GN						あまひ てらす	names.512530
-天日子	아마비에	N110			GN						あまびこ	names.512531
+天日子	아마비코	N110			GN						あまびこ	names.512531
 天旺駅	천왕역	N130	QCTVPl		GN							names.512532
 天昇星テンマ	천승성 텐마	N130	QPNVHn		GN						てんしょうせい てんま	names.512533
 天昇脚	천승각	N110			GN						てんしょうきゃく	names.512534
@@ -215581,7 +215581,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 天花寺	텐게이지	N130	QPNVHn	Wa	GN						てんげいじ	names.513338
 天花寺 翔	텐카지 쇼	N130	QPNVHn		GN						てんかじ しょう	names.513339
 天花寺 翔	텐겐지 카케루	N130	QPNVHn		GN							names.513340
-天花寺翔	텐게지 쇼	N130	QPNVHn		GN						てんげいじ しょう	names.513341
+天花寺翔	텐게이지 카케루	N130	QPNVHn		GN						てんげいじ かける	names.513341
 天花寺颯馬	텐게지 소마	N130	QPNVHn		GN						てんげじそうま	names.513342
 天苑社	천원사	N130	VGt		GN							names.513343
 天若清弦	아마와카 세이겐	N130	QPNVHn		GN						あまわかせいげん	names.513344
@@ -215751,7 +215751,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 天道翔馬	텐도 쇼우마	N130	QPNVHn		GN						てんどうしょうま	names.513508
 天道花憐	텐도 카렌	N130	QPNVHn		GN						てんどうかれん	names.513509
 天道葵	텐도 아오이	N110			GN						てんどうあおい	names.513510
-天道輝	텐도 아키라	N130	QPNVHn		GN						てんどうあきら	names.513511
+天道輝	텐도 테루	N130	QPNVHn		GN						てんどうあきら	names.513511
 天道阿曇	텐도 아즈미	N110			GN						てんどう あずみ	names.513512
 天那光汰	아마나 코타	N130	QPNVHn		GN							names.513513
 天邪狐空	아마노자쿠 소라	N130	QPNVHn		GN						あまのじゃく そら	names.513514
@@ -217210,7 +217210,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奇械人アリジゴク	기계인 개미지옥	N110			GN							names.514967
 奇械人アルマジロン	기계인 아르마지론	N110			GN						きかいじん あるまじろん	names.514968
 奇械人エレキイカ	기계인 에레키이카	N110			GN						きかいじんエレキイカ	names.514969
-奇械人オオカミン	기계인 오오카미ン	N110			GN							names.514970
+奇械人オオカミン	기계인 오오카민	N110			GN							names.514970
 奇械人カメレオーン	기계인 카멜레온	N110			GN						きかいじんかめれおーん	names.514971
 奇械人ガンガル	기계인 간갈	N110			GN						きかいじんがんがる	names.514972
 奇械人ケムンガ	기계인 케문가	N110			GN						きかいじんけむんが	names.514973
@@ -217492,8 +217492,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奈良シカダイ	나라 시카다이	N130	QPNVHn		GN						なら しかだい	names.515249
 奈良シカマル	나라 시카마루	N130	QPNVHn		GN							names.515250
 奈良テマリ	테마리	N130	QPNVHn	Wb	GN							names.515251
-奈良テレビ	나라 TV 방송	N110			GN							names.515252
-奈良テレビ放送	나라 TV 방송	N110			GN							names.515253
+奈良テレビ	나라TV	N110			GN							names.515252
+奈良テレビ放送	나라TV 방송	N110			GN							names.515253
 奈良ドリームランド	나라 드림랜드	N110			GN							names.515254
 奈良ホテル	나라 호텔	N130	VGt		GN							names.515255
 奈良ヨシノ	나라 요시노	N130	QPNVHn		GN						なら よしの	names.515256
@@ -226917,7 +226917,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 実写版	실사판	N110			GN							names.524674
 実写版デビルマン	실사판 데빌맨	N130	QWK		GN							names.524675
 実写版ポケモン	실사판 포켓몬	N110			GN							names.524676
-実写版ライオンキング	라이온 킹 (2019)	N130	QWK		GN							names.524677
+実写版ライオンキング	실사판 라이온 킹	N130	QWK		GN							names.524677
 実写銀魂	실사 은혼	N130	QPNVHn		GN							names.524678
 実凜	미노리	N130	QPNVHn	Wb	GN						みのり	names.524679
 実利論	아르타샤스트라	N130	QWK		GN							names.524680
@@ -227136,7 +227136,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 客席	객석	N110			GN							names.524893
 客星	객성	N130	QPNVHn	Wb	GN							names.524894
 客村駅	커춘 역	N130	QCTVPl		GN							names.524895
-客観	객체	N110			GN							names.524896
+客観	객관	N110			GN							names.524896
 客観性	객관성	N110			GN							names.524897
 客観的	객관적	N110			GN							names.524898
 客観視	객관시	N110			GN							names.524899
@@ -227372,7 +227372,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 室町時代	무로마치 시대	N110			GN							names.525129
 室町殿	무로마치도노	N110			GN						むろまちどの	names.525130
 室町澄子	무로마치 스미코	N130	QPNVHn		GN							names.525131
-室町無頼	반란:_무로마치_부라이	N130	QWK		GN							names.525132
+室町無頼	무로마치 부라이	N130	QWK		GN							names.525132
 室町由紀子	무로마치 유키코	N130	QPNVHn		GN						むろまち ゆきこ	names.525133
 室矢まんぺい	무로야 만페이	N130	QPNVHn		GN							names.525134
 室積	무로즈미	N130	QPNVHn	Wa	GN							names.525135
@@ -227834,7 +227834,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宮城ジョージ	미야기 조지	N130	QPNVHn		GN						みやき じょーじ	names.525591
 宮城ソータ	미야기 소타	N130	QPNVHn		GN						みやき そーた	names.525592
 宮城タマヨ	미야기 타마요	N130	QPNVHn		GN							names.525593
-宮城テレビ放送	미야기 TV 방송	N130	VGt		GN							names.525594
+宮城テレビ放送	미야기TV 방송	N130	VGt		GN							names.525594
 宮城ナナ	미야기 나나	N130	QPNVHn		GN							names.525595
 宮城リク	미야기 리쿠	N130	QPNVHn		GN						みやき りく	names.525596
 宮城リク	미야구스쿠 리쿠	N130	QPNVHn		GN							names.525597
@@ -229776,8 +229776,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 富山	토미야마	N130	QPNVHn	Wa	GN							names.527533
 富山あかり	토미야마 아카리	N130	QPNVHn		GN							names.527534
 富山エフエム放送	도야마 FM 방송	N130	VGt		GN							names.527535
-富山テレビ	도야마 TV 방송	N110			GN							names.527536
-富山テレビ放送	도야마 TV 방송	N110			GN							names.527537
+富山テレビ	도야마TV	N110			GN							names.527536
+富山テレビ放送	도야마TV 방송	N110			GN							names.527537
 富山ブラック	도야마 블랙	N110			GN							names.527538
 富山ライトレール	도야마 라이트 레일	N130	VGt		GN							names.527539
 富山信号場	푸산 신호장	N130	QCTVPl		GN							names.527540
@@ -232474,7 +232474,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 小宮逸人	코미야 하야토	N130	QPNVHn		GN							names.530231
 小宮隆太郎	고미야 류타로	N130	QPNVHn		GN							names.530232
 小宵	코요이	N130	QPNVHn	Wb	GN						こよい	names.530233
-小宵 こなん	코요이 코나ン	N130	QPNVHn		GN						こよい こなん	names.530234
+小宵 こなん	코요이 코난	N130	QPNVHn		GN						こよい こなん	names.530234
 小宵 こなん	코요이 코난	N130	QPNVHn		GN						こよい こなん	names.530235
 小宵こなん	고요이 고난	N130	QPNVHn		GN							names.530236
 小家山	코이에야마	N130	QPNVHn	Wa	GN							names.530237
@@ -240835,7 +240835,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山形みらい	야마가타 미라이	N130	QPNVHn		GN						やまかた みらい	names.538592
 山形りんご	야마가타 사과	N130	QCTVPl		GN						やまがたりんご	names.538593
 山形スクリーム	야마가타 스크림	N130	QWK		GN							names.538594
-山形テレビ	야마가타 TV	N110			GN							names.538595
+山形テレビ	야마가타TV	N110			GN							names.538595
 山形ユキオ	야마가타 유키오	N130	QPNVHn		GN							names.538596
 山形亜裕子	야마가타 아유코	N130	QPNVHn		GN							names.538597
 山形健	야마가타 켄	N130	QPNVHn		GN							names.538598
@@ -242976,8 +242976,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山門郁夫	야마카도 이쿠오	N130	QPNVHn		GN						やまかどいくお	names.540733
 山門郡	야마토군	N130	QCTVPl		GN							names.540734
 山陰	산인	N130	QCTVPl		GN							names.540735
-山陰中央テレビ	산인 중앙 TV 방송	N110			GN							names.540736
-山陰中央テレビジョン放送	산인 중앙 TV 방송	N130	VGt		GN							names.540737
+山陰中央テレビ	산인 중앙TV	N110			GN							names.540736
+山陰中央テレビジョン放送	산인 중앙TV 방송	N130	VGt		GN							names.540737
 山陰中央新報	산인 중앙 신보	N110			GN							names.540738
 山陰加春夫	야마카게 가즈오	N130	QPNVHn		GN							names.540739
 山陰地方	산인 지방	N130	QCTVPl		GN							names.540740
@@ -244924,7 +244924,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 岩戸華帆	이와토 가호	N130	QPNVHn		GN						いわとかほ	names.542681
 岩手	이와테	N130	QPNVHn	Wa	GN							names.542682
 岩手さちこ	이와테 사치코	N130	QPNVHn		GN						いわて さちこ	names.542683
-岩手めんこいテレビ	이와테 멘코이 TV	N110			GN							names.542684
+岩手めんこいテレビ	이와테 멘코이TV	N110			GN							names.542684
 岩手・宮城内陸地震	이와테·미야기 내륙지진	N110			GN							names.542685
 岩手・宮城内陸地震	이와테 미야기 내륙 지진	N110			GN							names.542686
 岩手一戸トンネル	이와테이치노헤 터널	N130	QCTVPl		GN							names.542687
@@ -244933,7 +244933,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 岩手大学	이와테 대학	N130	VGt		GN							names.542690
 岩手太郎	이와테 타로	N130	QPNVHn		GN							names.542691
 岩手日報	이와테 일보	N110			GN						いわてにっぽう	names.542692
-岩手朝日テレビ	이와테 아사히 TV	N110			GN							names.542693
+岩手朝日テレビ	이와테 아사히TV	N110			GN							names.542693
 岩手村	이와데촌	N130	QCTVPl		GN							names.542694
 岩手県交通	이와테 현교통	N130	VGt		GN							names.542695
 岩手県交通株式会社	이와테현교통	N130	VGt		GN							names.542696
@@ -254503,7 +254503,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 幼	유	N110			GN							names.552260
 幼い依頼人	어린 의뢰인	N130	QWK		GN							names.552261
 幼きチャレンジャーたち	나어린 도전자들	N130	QWK		GN							names.552262
-幼なじみが絶対に負けないラブコメ	소꼽친구가 절대로 지지 않는 러브 코미디	N130	QWK		GN							names.552263
+幼なじみが絶対に負けないラブコメ	소꿉친구가 절대로 지지 않는 러브 코미디	N130	QWK		GN							names.552263
 幼な子われらに生まれ	친애하는 우리 아이	N130	QWK		GN							names.552264
 幼主	유주	N110			GN						ようしゅ	names.552265
 幼体	유체	N110			GN							names.552266
@@ -254884,13 +254884,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 広島サンダーズ	히로시마 선더스	N130	VGt		GN							names.552641
 広島サンダーズ	히로시마 썬더즈	N130	VGt		GN							names.552642
 広島シティネットワーク	히로시마 시티 네트워크	N130	QCTVPl		GN							names.552643
-広島テレビ	히로시마 TV 방송	N110			GN							names.552644
-広島テレビ放送	히로시마 TV 방송	N130	VGt		GN							names.552645
-広島テレビ放送株式会社	히로시마 텔레비전 방송	N130	VGt		GN							names.552646
-広島テレビ放送株式会社	히로시마 TV 방송	N130	VGt		GN							names.552647
+広島テレビ	히로시마TV	N110			GN							names.552644
+広島テレビ放送	히로시마TV 방송	N130	VGt		GN							names.552645
+広島テレビ放送株式会社	히로시마TV 방송	N130	VGt		GN							names.552646
+広島テレビ放送株式会社	히로시마TV 방송	N130	VGt		GN							names.552647
 広島ドラゴンフライズ	히로시마 드래곤플라이즈	N130	VGt		GN							names.552648
 広島バス	히로시마 버스	N130	VGt		GN							names.552649
-広島ホームテレビ	히로시마 홈 TV	N110			GN						ひろしまほーむてれび	names.552650
+広島ホームテレビ	히로시마 홈TV	N110			GN						ひろしまほーむてれび	names.552650
 広島・長崎原子爆弾投下	히로시마·나가사키 원자폭탄 투하	N110			GN							names.552651
 広島一家失踪事件	히로시마 일가족 실종 사건	N110			GN						ひろしまいっかしっそうじけん	names.552652
 広島世那	히로시마 세나	N130	QPNVHn		GN						ひろしま せな	names.552653
@@ -256778,7 +256778,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 式波アスカラングレー	시키나미 아스카 랑그레이	N130	QPNVHn		GN							names.554535
 式波タイプ	시키나미 타입	N110			GN						しきなみたいぷ	names.554536
 式波ヴンダー	시키나미 분더	N110			GN						しきなみヴンダー	names.554537
-式波・アスカ・ラングレー	소류 아스카 랑그레이	N130	QPNVHn		GN							names.554538
+式波・アスカ・ラングレー	시키나미 아스카 랑그레이	N130	QPNVHn		GN							names.554538
 式波・アスカ・ラングレー	시키나미 아스카 랑그레이	N130	QPNVHn		GN						しきなみ・アスカ・ラングレー	names.554539
 式狼縁	시키 로우엔	N130	QPNVHn		GN						しきろうえん	names.554540
 式田	시키다	N130	QPNVHn	Wa	GN							names.554541
@@ -262605,7 +262605,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 忠州女子高等学校	충주여자고등학교	N130	VGt		GN							names.560362
 忠州崔氏	충주 최씨	N130	VGt		GN							names.560363
 忠州市	충주시	N130	QCTVPl		GN							names.560364
-忠州市民FC	연천 FC	N130	VGt		GN							names.560365
+忠州市民FC	충주 시민 FC	N130	VGt		GN							names.560365
 忠州市立図書館	충주시립도서관	N130	VGt		GN							names.560366
 忠州朴氏	충주 박씨	N130	VGt		GN							names.560367
 忠州梁氏	충주 양씨	N130	VGt		GN							names.560368
@@ -263193,7 +263193,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 怪人	괴인	N110			GN							names.560950
 怪人A	괴인 A	N130	QPNVHn		GN						かいじんえー	names.560951
 怪人☆仮面マスク	괴인☆가면마스크	N130	QPNVHn	Wb	GN						かいじん かめんますく	names.560952
-怪人☆仮面マスク	괴도☆가면마스크	N130	QPNVHn	Wb	GN							names.560953
+怪人☆仮面マスク	괴인☆가면마스크	N130	QPNVHn	Wb	GN							names.560953
 怪人☆仮面マスク2世	괴도☆가면마스크 2세	N130	QPNVHn		GN							names.560954
 怪人の正体	괴인의 정체	N130	QWK		GN							names.560955
 怪人アンサー	괴인 앤서	N110			GN							names.560956
@@ -266167,7 +266167,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 愛媛オレンジバイキングス	에히메 오렌지 바이킹스	N130	VGt		GN							names.563924
 愛媛マンダリンパイレーツ	에히메 만다린 파이리츠	N130	VGt		GN							names.563925
 愛媛マンダリンパイレーツ	에히메 만다린 파이렛츠	N130	VGt		GN							names.563926
-愛媛朝日テレビ	에히메 아사히 TV	N110			GN							names.563927
+愛媛朝日テレビ	에히메 아사히TV	N110			GN							names.563927
 愛媛県がんセンター	에히메현 암센터	N130	VGt		GN							names.563928
 愛媛県第1区	에히메현 제1구	N130	QCTVPl		GN							names.563929
 愛媛県第2区	에히메현 제2구	N130	QCTVPl		GN							names.563930
@@ -268801,7 +268801,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦闘ロボット軍団	전투 로봇 군단	N110			GN							names.566558
 戦闘不能	전투불능	N130	QPNVHn	Wb	GN						せんとうふのう	names.566559
 戦闘人形 マヤ	전투형 마야	N110			GN							names.566560
-戦闘力	전투력	N130	QPNVHn	Wb	GN							names.566561
+戦闘力	전투력	N130	QPNVHnUPc	Wb	GN							names.566561
 戦闘力1ゾイド	전투력 1 조이드	N110			GN							names.566562
 戦闘力530000	프리저	N130	QPNVHn	Wb	GN							names.566563
 戦闘員	전투원	N110			GN							names.566564
@@ -271457,7 +271457,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 摩尼教下部讃	마니교 하부찬	N130	QWK		GN							names.569214
 摩擦	마찰력	N110			GN							names.569215
 摩擦係数	마찰계수	N110			GN							names.569216
-摩擦熱	마찰력	N110			GN							names.569217
+摩擦熱	마찰열	N110			GN							names.569217
 摩文仁	마부니	N130	QPNVHn	Wa	GN							names.569218
 摩文仁村	마부니촌	N130	QCTVPl		GN							names.569219
 摩文仁賢和	마부니 겐와	N130	QPNVHn		GN							names.569220
@@ -271862,7 +271862,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 放屁	방귀	N110			GN							names.569619
 放屁論	방귀론	N110			GN						ほうひろん	names.569620
 放心	방심	N110			GN							names.569621
-放心状態	방심 상태	N110			GN							names.569622
+放心状態	멍한 상태	N110			GN							names.569622
 放恣	방자	N110			GN							names.569623
 放水	방수	N110			GN						ほうすい	names.569624
 放流	방류	N110			GN							names.569625
@@ -273289,11 +273289,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 文武高校	분부 고등학교	N130	VGt		GN						ぶんぶ	names.571046
 文殊	몬주	N130	QPNVHn	Wb	GN							names.571047
 文殊山	문수산	N130	QCTVPl		GN							names.571048
-文殊師利仏土厳浄経	문주사리불토엄정경	N130	QWK		GN							names.571049
+文殊師利仏土厳浄経	문수사리불토엄정경	N130	QWK		GN							names.571049
 文殊師利菩薩及諸仙所説吉凶時日善悪宿曜経	문수사리보살급제선소설길흉시일선악수요경	N130	QWK		GN							names.571050
 文殊広法天尊	문수광법천존	N130	QPNVHn	Wb	GN							names.571051
 文殊村	몬주촌	N130	QCTVPl		GN							names.571052
-文殊般若経	문주반야경	N130	QWK		GN							names.571053
+文殊般若経	문수반야경	N130	QWK		GN							names.571053
 文殊駅	문수역	N130	QCTVPl		GN							names.571054
 文水洞	문수동	N130	QCTVPl		GN							names.571055
 文水県	원수이현	N130	QCTVPl		GN							names.571056
@@ -274793,7 +274793,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新井正人	아라이 마사토	N110			GN						あらいまさと	names.572550
 新井正則	아라이 마사노리	N130	QPNVHn		GN							names.572551
 新井正幸	아라이 마사유키	N130	QPNVHn		GN						あらい まさゆき	names.572552
-新井毫	가다 아라이	N130	QPNVHn		GN							names.572553
+新井毫	아라이 고	N130	QPNVHn		GN							names.572553
 新井泰貴	아라이 다이키	N130	QPNVHn		GN							names.572554
 新井洋行	아라이 히로유키	N130	QPNVHn		GN							names.572555
 新井浩一	아라이 코이치	N130	QPNVHn		GN						あらいこういち	names.572556
@@ -275996,7 +275996,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新潟PA	니가타 PA	N110			GN							names.573753
 新潟アルビレックス・ベースボール・クラブ	니가타 알비렉스 베이스볼 클럽	N130	VGt		GN							names.573754
 新潟ジャンプステークス	니가타 점프 스테이크스	N110			GN						にいがたじゃんぷすてーくす	names.573755
-新潟テレビ21	니가타 TV21	N110			GN							names.573756
+新潟テレビ21	니가타TV21	N110			GN							names.573756
 新潟トランシス	니가타 트랜시스	N110			GN						にいがたとらんしす	names.573757
 新潟ニュース610	니가타 뉴스 610	N130	QWK		GN							names.573758
 新潟ニュース845	니가타 뉴스 845	N130	QWK		GN							names.573759
@@ -276025,7 +276025,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新潟県道565号	니가타현도 제565호선	N130	QCTVPl		GN							names.573782
 新潟県選挙区	니가타현 선거구	N130	QCTVPl		GN							names.573783
 新潟競馬場	니가타 경마장	N110			GN						にいがたけいばじょう	names.573784
-新潟総合テレビ	니가타 종합 TV	N110			GN							names.573785
+新潟総合テレビ	니가타 종합TV	N110			GN							names.573785
 新潟色	니가타색	N110			GN						にいがたいろ	names.573786
 新潟記念	니가타 기념	N110			GN							names.573787
 新潟鐵工所	니가타 철공소	N110			GN						にいがたてっこうしょ	names.573788
@@ -276708,7 +276708,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 方在胤	방재윤	N130	QPNVHn	Wb	GN							names.574465
 方城町	호조정	N130	QCTVPl		GN							names.574466
 方城県	팡청현	N130	QCTVPl		GN							names.574467
-方大同	방대동	N130	QPNVHn	Wb	GN							names.574468
+方大同	팡다퉁	N130	QPNVHn	Wb	GN							names.574468
 方天	방천	N130	QPNVHn	Wb	GN						ほうてん	names.574469
 方天豊	팡톈펑	N130	QPNVHn	Wb	GN							names.574470
 方夫	카타오	N130	QPNVHn	Wb	GN						かたお	names.574471
@@ -276735,7 +276735,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 方政	팡정	N130	QPNVHn	Wb	GN							names.574492
 方文圭	방문규	N130	QPNVHn	Wb	GN							names.574493
 方文山	팡원산	N130	QCTVPl		GN							names.574494
-方文琳	송 웬린	N130	QPNVHn		GN						ほう ぶんりん	names.574495
+方文琳	팡원린	N130	QPNVHn		GN						ほう ぶんりん	names.574495
 方斌	팡빈	N130	QPNVHn	Wb	GN							names.574496
 方斗煥	방두환	N130	QPNVHn	Wb	GN							names.574497
 方斗燮	방두섭	N130	QPNVHn	Wb	GN							names.574498
@@ -277535,7 +277535,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日堂	니치도	N130	QPNVHn	Wb	GN						にちどう	names.575292
 日報	일간신문	N110			GN							names.575293
 日塩有料道路	니치엔 유료도로	N110			GN						にちえんゆうりょうどうろ	names.575294
-日売テレビ	니치우리 TV	N130	QPNVHn		GN						にちうりてれび	names.575295
+日売テレビ	니치우리TV	N130	QPNVHn		GN						にちうりてれび	names.575295
 日夏	히나츠	N130	QPNVHn	Wa	GN						ひなつ	names.575296
 日夏ともえ	히나츠 토모에	N130	QPNVHn		GN							names.575297
 日夏村	히나쓰촌	N130	QCTVPl		GN							names.575298
@@ -277793,7 +277793,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本エアシステム	재팬 에어 시스템	N130	VGt		GN							names.575550
 日本エアシステム	일본에어시스템	N130	VGt		GN							names.575551
 日本エスペラント協会	일본 에스페란토 협회	N130	VGt		GN							names.575552
-日本エス・エイチ・エル	피터 새빌	N130	QPNVHn		GN							names.575553
+日本エス・エイチ・エル	일본 에스에이치엘	N130	QPNVHn		GN							names.575553
 日本エレキテル連合	니혼 에레키테루 렌고	N110			GN						にほんえれきてるれんごう	names.575554
 日本オイルターミナル	일본 오일 터미널	N110			GN							names.575555
 日本オリンピック委員会	일본 올림픽 위원회	N110			GN						にほんおりんぴっくいいんかい	names.575556
@@ -277827,16 +277827,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本ダービー記念日	일본 더비 기념일	N110			GN							names.575584
 日本チーム	일본 팀	N130	VGt		GN							names.575585
 日本テレネット	텔레넷 재팬	N130	VGt		GN							names.575586
-日本テレビ	닛폰 TV	N110			GN						にほんてれび	names.575587
-日本テレビ放送網	닛폰 TV 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
-日本テレビ放送網株式会社	닛폰 TV 방송망	N130	VGt		GN							names.575589
-日本テレビ放送網株式会社	닛폰 테레비	N130	VGt		GN							names.575590
-日本テレビ日曜10時30分枠連続ドラマ	닛폰 TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
-日本テレビ火曜8時枠時代劇	닛폰 TV 화요일 8시 시대극	N130	QWK		GN							names.575592
-日本テレビ盃	니혼테레비배	N110			GN						にほんてれびはい	names.575593
-日本テレビ系列	닛폰 TV 게이레쓰	N130	VGt		GN							names.575594
-日本テレビ系土曜深夜ドラマ	일본 TV 토요 심야 드라마	N130	QWK		GN							names.575595
-日本テレビ金曜8時連続ドラマ	니혼 TV 금요일 8시 연속 드라마	N130	QWK		GN							names.575596
+日本テレビ	니혼TV	N110			GN						にほんてれび	names.575587
+日本テレビ放送網	니혼TV 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
+日本テレビ放送網株式会社	니혼TV 방송망	N130	VGt		GN							names.575589
+日本テレビ放送網株式会社	니혼TV 방송망	N130	VGt		GN							names.575590
+日本テレビ日曜10時30分枠連続ドラマ	니혼TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
+日本テレビ火曜8時枠時代劇	니혼TV 화요일 8시 시대극	N130	QWK		GN							names.575592
+日本テレビ盃	니혼TV배	N110			GN						にほんてれびはい	names.575593
+日本テレビ系列	니혼TV 계열	N130	VGt		GN							names.575594
+日本テレビ系土曜深夜ドラマ	니혼TV 토요 심야 드라마	N130	QWK		GN							names.575595
+日本テレビ金曜8時連続ドラマ	니혼TV 금요일 8시 연속 드라마	N130	QWK		GN							names.575596
 日本デザイナー学院	일본 디자이너 학원	N130	VGt		GN							names.575597
 日本トンデモ本大賞	일본 엉터리 책 대상	N130	QPNVHn		GN						にほんとんでもぼんたいしょう	names.575598
 日本トーター野球場	닛폰토타 야구장	N110			GN							names.575599
@@ -278054,7 +278054,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本放送映画	일본방송영화	N130	VGt		GN							names.575811
 日本政府	일본국 정부	N110			GN							names.575812
 日本教職員組合	일본교직원조합	N110			GN						にほんきょうしょくいんくみあい	names.575813
-日本教育テレビ	TV 아사히	N130	VGt		GN							names.575814
+日本教育テレビ	니혼 교육TV	N130	VGt		GN							names.575814
 日本敬神崇祖自修団	일본경신숭조자수단	N130	VGt		GN							names.575815
 日本数学会	일본수학회	N130	VGt		GN							names.575816
 日本文化	일본의 문화	N110			GN							names.575817
@@ -278113,8 +278113,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本海 ・ 日本海	동해	N130	QCTVPl		GN						にほんかい ・ にっぽんかい	names.575870
 日本海オセアンリーグ	니혼카이 오세안 리그	N110			GN							names.575871
 日本海スプリント	니혼카이 스프린트	N110			GN							names.575872
-日本海テレビ	니혼카이 TV	N110			GN							names.575873
-日本海テレビジョン放送	니혼카이 TV	N130	VGt		GN							names.575874
+日本海テレビ	니혼카이TV	N110			GN							names.575873
+日本海テレビジョン放送	니혼카이TV 방송	N130	VGt		GN							names.575874
 日本海大海戦	일본해 대해전	N130	QWK		GN							names.575875
 日本海山地落葉樹林	니혼카이 산악 낙엽수림	N130	QCTVPl		GN							names.575876
 日本海常緑樹林	니혼카이 상록수림	N130	QCTVPl		GN							names.575877
@@ -278277,8 +278277,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本郵政建築	일본우정건축	N130	VGt		GN							names.576034
 日本郵船	일본우선	N130	VGt		GN							names.576035
 日本野兎	일본멧토끼	N110			GN							names.576036
-日本野球機構	일본 프로 야구	N130	VGt		GN							names.576037
-日本野球連盟	일본 야구 리그	N130	VGt		GN							names.576038
+日本野球機構	일본야구기구	N130	VGt		GN							names.576037
+日本野球連盟	일본 야구 연맹	N130	VGt		GN							names.576038
 日本野鳥の会	일본야조회	N110			GN							names.576039
 日本鉄道	일본철도	N130	VGt		GN							names.576040
 日本鉄道労働組合連合会	일본철도노동조합연합회	N130	VGt		GN							names.576041
@@ -279005,7 +279005,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 旧帝一工	구제일공	N110			GN							names.576762
 旧帝国海軍	일본 제국 해군	N130	VGt		GN							names.576763
 旧帝国陸軍	일본 제국 육군	N130	VGt		GN							names.576764
-旧広州白雲国際空港	구이린 치펑링 공항	N130	QCTVPl		GN							names.576765
+旧広州白雲国際空港	구 광저우 바이윈 국제공항	N130	QCTVPl		GN							names.576765
 旧広西派	구계계	N130	VGt		GN							names.576766
 旧式	구식	N110			GN						きゅうしき	names.576767
 旧式妖魔	구식 요마	N110			GN							names.576768
@@ -280342,7 +280342,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 明智光月	아케치 미츠키	N130	QPNVHn		GN						あけちみつき	names.578099
 明智光理	아케치 히카리	N130	QPNVHn		GN						あけちひかり	names.578100
 明智光秀	아케치 미쓰히데	N130	QPNVHn		GN							names.578101
-明智光秀～神に愛されなかった男～	아케치 미츠히데 ~ 신에게 사랑 않았던 남자 ~	N130	QWK		GN							names.578102
+明智光秀～神に愛されなかった男～	아케치 미쓰히데 ~ 신에게 사랑받지 못한 남자 ~	N130	QWK		GN							names.578102
 明智十三郎	아케치 쥬자부로	N130	QPNVHn		GN							names.578103
 明智吾郎	아케치 고로	N130	QPNVHn		GN							names.578104
 明智咲	아케치 사키	N130	QPNVHn		GN						あけ ちさき	names.578105
@@ -281056,7 +281056,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 星奈 春吉	호시나 하루키치	N130	QPNVHn		GN						ほしな はるきち	names.578813
 星奈 輝美	호시나 테루미	N130	QPNVHn		GN						ほしな てるみ	names.578814
 星奈々	호시 나나	N130	QPNVHn		GN						ほし なな	names.578815
-星奈あい	호시나 일체 포함	N130	QPNVHn		GN							names.578816
+星奈あい	호시나 아이	N130	QPNVHn		GN							names.578816
 星奈ひかる	호시나 히카루	N130	QPNVHn		GN							names.578817
 星奈シオリ	호시나 시오리	N130	QPNVHn		GN						ほしな しおり	names.578818
 星奈優里	호시나 유리	N130	QPNVHn		GN							names.578819
@@ -281886,7 +281886,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 映画 おしりたんてい カレーなる じけん	극장판 엉덩이 탐정: 화려한 사건 수첩	N130	QWK		GN							names.579643
 映画 おしりたんてい テントウムシいせきの なぞ	영화 엉덩이 탐정 무당벌레 유적의 수수께끼	N130	QWK		GN							names.579644
 映画 おジャ魔女どれみ♯	꼬마마법사 레미 샵: 극장판	N130	QWK		GN							names.579645
-映画 からかい上手の高木さん	장난을_잘_치는_타카기_양_	N130	QWK		GN							names.579646
+映画 からかい上手の高木さん	장난을 잘 치는 타카기 양	N130	QWK		GN							names.579646
 映画 この素晴らしい世界に祝福を!紅伝説	이 멋진 세계에 축복을! 붉은 전설	N130	QWK		GN							names.579647
 映画 としまえん	헌티드 파크	N130	QWK		GN							names.579648
 映画 ひつじのショーン ～バック・トゥ・ザ・ホーム～	숀더쉽	N130	QWK		GN							names.579649
@@ -282138,7 +282138,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 春咲りょう	하루사키 료	N130	QPNVHn		GN							names.579895
 春咲千和	하루사키 치와	N130	QPNVHn		GN						はるさきちわ	names.579896
 春咲星奈	하루사키 세이나	N130	QPNVHn		GN						はるさきせいな	names.579897
-春咲暖	논하루사키	N130	QPNVHn	Wb	GN							names.579898
+春咲暖	하루사키 논	N130	QPNVHn	Wb	GN							names.579898
 春咲花	하루사키 하나	N130	QPNVHn		GN							names.579899
 春喜	하루키	N130	QPNVHn	Wb	GN						はるき	names.579900
 春園ショウ	하루소노 쇼	N130	QPNVHn		GN							names.579901
@@ -286785,7 +286785,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 有坂 心花	아리사카 코하나	N130	QPNVHn		GN							names.584542
 有坂あこ	아리사카 아코	N130	QPNVHn		GN						ありさか あこ	names.584543
 有坂ちあき	아리사카 치아키	N130	QPNVHn		GN							names.584544
-有坂亜里紗	아리사 아리사	N130	QPNVHn		GN							names.584545
+有坂亜里紗	아리사카 아리사	N130	QPNVHn		GN							names.584545
 有坂初音	아리사카 하츠네	N130	QPNVHn		GN						ありさか はつね	names.584546
 有坂千夏	아리사카 치나츠	N130	QPNVHn		GN						ありさか ちなつ	names.584547
 有坂圭一郎	아리사카 케이이치로	N130	QPNVHn		GN						ありさか けいいちろう	names.584548
@@ -288339,9 +288339,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 朝日平吾	아사히 헤이고	N130	QPNVHn		GN							names.586096
 朝日悠俊	아사히 유토시	N130	QPNVHn		GN							names.586097
 朝日放送	아사히 방송	N110			GN						あさひほうそう	names.586098
-朝日放送テレビ	아사히 방송 테레비	N110			GN							names.586099
-朝日放送テレビ株式会社	아사히방송텔레비전	N130	VGt		GN							names.586100
-朝日放送テレビ株式会社	아사히 방송 테레비	N130	VGt		GN							names.586101
+朝日放送テレビ	아사히방송TV	N110			GN							names.586099
+朝日放送テレビ株式会社	아사히방송TV	N130	VGt		GN							names.586100
+朝日放送テレビ株式会社	아사히방송TV	N130	VGt		GN							names.586101
 朝日放送ラジオ	아사히 방송 라디오	N130	VGt		GN							names.586102
 朝日放送ラジオ株式会社	아사히 방송 라디오	N130	VGt		GN							names.586103
 朝日新聞	아사히 신문	N110			GN						あさひしんぶん	names.586104
@@ -291958,8 +291958,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 札幌エクセルホテル東急	삿포로 엑셀 호텔 도큐	N130	VGt		GN							names.589715
 札幌グランドホテル	삿포로 그랜드 호텔	N130	VGt		GN							names.589716
 札幌ステラプレイス	삿포로 스텔라 플레이스	N130	VGt		GN							names.589717
-札幌テレビ	삿포로 TV 방송	N110			GN							names.589718
-札幌テレビ放送	삿포로 TV 방송	N130	VGt		GN							names.589719
+札幌テレビ	삿포로TV	N110			GN							names.589718
+札幌テレビ放送	삿포로TV 방송	N130	VGt		GN							names.589719
 札幌ド	삿포로 돔	N110			GN						さっぽろど	names.589720
 札幌ドーム	삿포로 돔	N110			GN							names.589721
 札幌パークホテル	삿포로 파크 호텔	N130	VGt		GN							names.589722
@@ -293039,7 +293039,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 朴珠賢	박주현	N130	QPNVHn	Wb	GN							names.590796
 朴珪寿	박규수	N130	QPNVHn	Wb	GN							names.590797
 朴珪鶴	박규학	N130	QPNVHn	Wb	GN							names.590798
-朴珪鶴	박규수	N130	QPNVHn	Wb	GN							names.590799
+朴珪鶴	박규학	N130	QPNVHn	Wb	GN							names.590799
 朴琦緖	박기서	N130	QPNVHn	Wb	GN							names.590800
 朴瑞生	박서생	N130	QPNVHn	Wb	GN							names.590801
 朴瑞陽	박서양	N130	QPNVHn	Wb	GN							names.590802
@@ -299736,7 +299736,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東映ジョイ・エンタテインメント	티조이	N130	VGt		GN							names.597493
 東映スパイダーマン	도에이판 스파이더맨	N130	QWK		GN							names.597494
 東映チャンネル	도에이 채널	N130	VGt		GN							names.597495
-東映テレビ・プロダクション	도에이 TV 프로덕션	N130	VGt		GN							names.597496
+東映テレビ・プロダクション	도에이TV 프로덕션	N130	VGt		GN							names.597496
 東映ビデオ	도에이 비디오	N130	VGt		GN							names.597497
 東映フライヤーズ	도에이 플라이어스	N130	VGt		GN							names.597498
 東映ロボットガールズ	토에이 로봇 걸즈	N130	QWK		GN						とうえいろぼっとがーるず	names.597499
@@ -299999,11 +299999,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東海なな	도카이 나나	N130	QPNVHn		GN						とうかい なな	names.597756
 東海オンエア	도카이 온에아	N130	QPNVHn		GN						とうかい おんえあ	names.597757
 東海サンタ列車	동해산타열차	N130	QCTVPl		GN							names.597758
-東海テレビ	도카이 테레비	N130	QPNVHn		GN						とうかい てれび	names.597759
-東海テレビ制作昼の帯ドラマ	동해 TV 제작 낮의 일일 연속극	N130	QWK		GN							names.597760
-東海テレビ放送	도카이 TV	N130	VGt		GN							names.597761
-東海テレビ放送株式会社	도카이 TV	N130	VGt		GN						とうかいてれびほうそう	names.597762
-東海テレビ放送株式会社	도카이 테레비	N130	VGt		GN							names.597763
+東海テレビ	도카이TV	N130	QPNVHn		GN						とうかい てれび	names.597759
+東海テレビ制作昼の帯ドラマ	도카이TV 제작 낮의 일일 연속극	N130	QWK		GN							names.597760
+東海テレビ放送	도카이TV 방송	N130	VGt		GN							names.597761
+東海テレビ放送株式会社	도카이TV 방송	N130	VGt		GN						とうかいてれびほうそう	names.597762
+東海テレビ放送株式会社	도카이TV 방송	N130	VGt		GN							names.597763
 東海ラジオ放送	도카이 라디오 방송	N130	VGt		GN							names.597764
 東海ラジオ放送株式会社	도카이 라디오 방송	N130	VGt		GN							names.597765
 東海ラジオ放送株式会社	도카이 라디오	N130	VGt		GN							names.597766
@@ -306217,7 +306217,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 柳瀬さき	야나세 사키	N130	QPNVHn		GN							names.603974
 柳瀬さつき	야나세 사츠키	N130	QPNVHn		GN						やなせ さつき	names.603975
 柳瀬ちゃみ	야나세 챠미	N130	QPNVHn		GN						やなせ ちゃみ	names.603976
-柳瀬ちゃみ	야나가세 챠미	N130	QPNVHn		GN							names.603977
+柳瀬ちゃみ	야나세 챠미	N130	QPNVHn		GN							names.603977
 柳瀬なつみ	야나세 나츠미	N130	QPNVHn		GN							names.603978
 柳瀬佳世	야나세 카요	N130	QPNVHn		GN						やなせ かよ	names.603979
 柳瀬信号所	야나세 신호소	N130	QCTVPl		GN							names.603980
@@ -306307,7 +306307,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 柳生望	야규 노조무	N130	QPNVHn		GN							names.604064
 柳生村	야규촌	N130	QCTVPl		GN							names.604065
 柳生武芸帳 双龍秘剣	쌍룡비검	N130	QWK		GN							names.604066
-柳生比呂士	야기ュ 히로시	N130	QPNVHn		GN						やぎゅうひろし	names.604067
+柳生比呂士	야규 히로시	N130	QPNVHn		GN						やぎゅうひろし	names.604067
 柳生比呂士	야규 히로시	N130	QPNVHn		GN						やぎゅうひろし	names.604068
 柳生直行	야규 나오유키	N130	QPNVHn		GN							names.604069
 柳生真吾	야규 신고	N130	QPNVHn		GN							names.604070
@@ -307659,8 +307659,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社 Art Shell	주식회사 Art Shell	N130	VGt		GN							names.605416
 株式会社 JR東日本ウォータービジネス	주식회사 JR동일본 워터비즈니스	N130	VGt		GN							names.605417
 株式会社 JR東日本ウォータービジネス	JR 동일본 워터 비즈니스	N130	VGt		GN							names.605418
-株式会社 TBS テレビ	주식회사 TBS 텔레비전	N130	VGt		GN							names.605419
-株式会社 TBS テレビ	TBS 테레비	N130	VGt		GN							names.605420
+株式会社 TBS テレビ	TBS	N130	VGt		GN							names.605419
+株式会社 TBS テレビ	TBS	N130	VGt		GN							names.605420
 株式会社 TBS ラジオ	TBS 라디오	N130	VGt		GN							names.605421
 株式会社 アクロス エンタテインメント	아크로스 엔터테인먼트	N130	QPNVHn		GN							names.605422
 株式会社 エイジアプロモーション	에이지아 프로모션	N130	VGt		GN							names.605423
@@ -307788,22 +307788,22 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社タカラトミー	다카라토미	N130	VGt		GN							names.605545
 株式会社タニタ	다니다	N130	VGt		GN							names.605546
 株式会社チーム国光	팀 쿠니미츠	N130	VGt		GN							names.605547
-株式会社テレビBS東京	BS 테레비 도쿄	N130	VGt		GN							names.605548
-株式会社テレビ埼玉	TV 사이타마	N130	VGt		GN							names.605549
-株式会社テレビ埼玉	테레비 사이타마	N130	VGt		GN							names.605550
-株式会社テレビ大分	TV 오이타	N130	VGt		GN							names.605551
-株式会社テレビ大分	테레비 오이타	N130	VGt		GN							names.605552
-株式会社テレビ山梨	테레비 야마나시	N130	VGt		GN							names.605553
-株式会社テレビ新潟放送網	테레비 니가타	N130	VGt		GN							names.605554
-株式会社テレビ朝日	TV 아사히	N130	VGt		GN							names.605555
-株式会社テレビ朝日	테레비 아사히	N130	VGt		GN							names.605556
-株式会社テレビ東京	테레비 도쿄	N130	VGt		GN							names.605557
-株式会社テレビ神奈川	TV 가나가와	N130	VGt		GN							names.605558
-株式会社テレビ神奈川	테레비 가나가와	N130	VGt		GN							names.605559
-株式会社テレビ西日本	TV 니시닛폰	N130	VGt		GN							names.605560
-株式会社テレビ金沢	테레비 가나자와	N130	VGt		GN							names.605561
-株式会社テレビ長崎	TV 나가사키	N130	VGt		GN							names.605562
-株式会社テレビ長崎	테레비 나가사키	N130	VGt		GN							names.605563
+株式会社テレビBS東京	BS TV도쿄	N130	VGt		GN							names.605548
+株式会社テレビ埼玉	TV사이타마	N130	VGt		GN							names.605549
+株式会社テレビ埼玉	TV사이타마	N130	VGt		GN							names.605550
+株式会社テレビ大分	TV오이타	N130	VGt		GN							names.605551
+株式会社テレビ大分	TV오이타	N130	VGt		GN							names.605552
+株式会社テレビ山梨	TV야마나시	N130	VGt		GN							names.605553
+株式会社テレビ新潟放送網	TV니가타 방송망	N130	VGt		GN							names.605554
+株式会社テレビ朝日	TV아사히	N130	VGt		GN							names.605555
+株式会社テレビ朝日	TV아사히	N130	VGt		GN							names.605556
+株式会社テレビ東京	TV도쿄	N130	VGt		GN							names.605557
+株式会社テレビ神奈川	TV가나가와	N130	VGt		GN							names.605558
+株式会社テレビ神奈川	TV가나가와	N130	VGt		GN							names.605559
+株式会社テレビ西日本	TV니시닛폰	N130	VGt		GN							names.605560
+株式会社テレビ金沢	TV가나자와	N130	VGt		GN							names.605561
+株式会社テレビ長崎	TV나가사키	N130	VGt		GN							names.605562
+株式会社テレビ長崎	TV나가사키	N130	VGt		GN							names.605563
 株式会社ディオメディア	디오미디어	N130	VGt		GN							names.605564
 株式会社ディンプス	딤프스	N130	VGt		GN							names.605565
 株式会社デンソー	덴소	N130	VGt		GN							names.605566
@@ -307903,7 +307903,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社次世代	주식회사 차세대	N130	VGt		GN							names.605660
 株式会社毎日放送	마이니치 방송	N130	VGt		GN							names.605661
 株式会社熊本放送	구마모토 방송	N130	VGt		GN							names.605662
-株式会社熊本県民テレビ	구마모토 현민 TV	N130	VGt		GN						くまもとけんみんテレビ	names.605663
+株式会社熊本県民テレビ	구마모토현민TV	N130	VGt		GN						くまもとけんみんテレビ	names.605663
 株式会社童夢	다우메	N130	VGt		GN							names.605664
 株式会社童夢	도우무	N130	VGt		GN							names.605665
 株式会社総合車両製作所	종합차량제작소	N130	VGt		GN							names.605666
@@ -316653,7 +316653,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 横浜開港資料館	요코하마 개항자료관	N130	VGt		GN							names.614410
 横浜青葉IC・JCT	요코하마아오바 IC·JCT	N110			GN						よこはまあおば	names.614411
 横浜青葉出入口	요코하마아오바 출입구	N110			GN							names.614412
-横浜駅SF	요코야마 역 SF	N130	QWK		GN							names.614413
+横浜駅SF	요코하마 역 SF	N130	QWK		GN							names.614413
 横浜駐屯地	요코하마 주둔지	N130	VGt		GN							names.614414
 横浜高校	요코하마 고등학교	N130	VGt		GN							names.614415
 横浜高速鉄道	요코하마 고속 철도	N130	VGt		GN							names.614416
@@ -319011,7 +319011,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 欧州石炭鉄鋼共同体	유럽 석탄 철강 공동체	N130	QCTVPl		GN							names.616768
 欧州社会党	유럽 사회당	N130	VGt		GN							names.616769
 欧州社会民主党	유럽사회민주당	N130	VGt		GN							names.616770
-欧州競争ネットワーク	유럽 경쟁 네크워크	N130	VGt		GN							names.616771
+欧州競争ネットワーク	유럽 경쟁 네트워크	N130	VGt		GN							names.616771
 欧州経済共同体	유럽 경제 공동체	N130	VGt		GN							names.616772
 欧州経済協力機構	유럽경제협력기구	N130	VGt		GN							names.616773
 欧州経済領域	유럽 경제 지역	N130	QCTVPl		GN							names.616774
@@ -326234,7 +326234,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 汐理	시오리	N130	QPNVHn	Wb	GN							names.623991
 汐留	시오도메	N130	QPNVHn	Wa	GN							names.623992
 汐留 白亜	시오도메 하쿠아	N130	QPNVHn		GN						しおどめはくあ	names.623993
-汐留ケーブルテレビ	시오도메 케이블 텔레비전	N110			GN							names.623994
+汐留ケーブルテレビ	시오도메 케이블TV	N110			GN							names.623994
 汐留出入口	시오도메 출입구	N130	QCTVPl		GN						しおどめでいりぐち	names.623995
 汐科駅	시커 역	N130	QCTVPl		GN						しおしなえき	names.623996
 汐花	시오카	N130	QPNVHn	Wb	GN						しおか	names.623997
@@ -328487,8 +328487,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 沖縄セルラー電話	오키나와 셀룰러 전화	N130	VGt		GN							names.626244
 沖縄セルラー電話株式会社	오키나와 셀룰러 전화	N130	VGt		GN							names.626245
 沖縄タイムス	오키나와 타임스	N110			GN							names.626246
-沖縄テレビ	오키나와 TV 방송	N110			GN							names.626247
-沖縄テレビ放送	오키나와 TV 방송	N130	VGt		GN							names.626248
+沖縄テレビ	오키나와TV	N110			GN							names.626247
+沖縄テレビ放送	오키나와TV 방송	N130	VGt		GN							names.626248
 沖縄トラフ	오키나와 해곡	N130	QCTVPl		GN							names.626249
 沖縄バス	오키나와 버스	N130	VGt		GN							names.626250
 沖縄バス株式会社	오키나와 버스	N130	VGt		GN						おきなわばす	names.626251

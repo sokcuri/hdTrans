@@ -1,0 +1,106 @@
+# 규칙: LEX-1, LEX-3
+rule	input	expected	kind	layer
+lookup:jisjk:164898	おおもりです。	곱빼기입니다.	fix	defaults
+lookup:jisjk:164898	おおもりを頼んだ。	곱빼기를 부탁했다.	fix	defaults
+lookup:jisjk:164898	おおもりにした。	곱빼기로 했다.	fix	defaults
+lookup:jisjk:164898	これはおおもりだ。	이것은 곱빼기다.	fix	defaults
+lookup:jisjk:164898	大森さんが来た。	오오모리 씨가 왔다.	keep	defaults
+lookup:jisjk:768	つらつら考える。	곰곰이 생각한다.	fix	defaults
+lookup:jisjk:768	つらつら考えた。	곰곰이 생각했다.	fix	defaults
+lookup:jisjk:768	つらつら考えている。	곰곰이 생각하고 있다.	fix	defaults
+lookup:jisjk:768	彼はつらつら考えた。	그는 곰곰이 생각했다.	fix	defaults
+lookup:jisjk:768	つるつるした石だ。	매끈매끈한 돌이다.	keep	defaults
+lookup:jisjk:90997	雨にそぼぬれた。	비에 흠뻑 젖었다.	fix	defaults
+lookup:jisjk:90997	服がそぼぬれた。	옷이 흠뻑 젖었다.	fix	defaults
+lookup:jisjk:90997	髪がそぼぬれている。	머리카락이 흠뻑 젖어 있다.	fix	defaults
+lookup:jisjk:90997	そぼぬれた道だ。	흠뻑 젖은 길이다.	fix	defaults
+lookup:jisjk:90997	雨に濡れた。	비에 젖었다.	keep	defaults
+lookup:jisjk:42403	アコースティックです。	어쿠스틱입니다.	fix	defaults
+lookup:jisjk:42403	アコースティックギターを弾いた。	통기타를 연주했다.	keep	defaults
+lookup:jisjk:42403	アコースティックの音だ。	어쿠스틱의 소리다.	fix	defaults
+lookup:jisjk:42403	アコースティックが好きだ。	어쿠스틱을 좋아한다.	fix	defaults
+lookup:jisjk:42403	エレキギターを弾いた。	일렉트릭 기타를 연주했다.	keep	defaults
+lookup:jisjk:114446	プディングを食べた。	푸딩을 먹었다.	fix	defaults
+lookup:jisjk:114446	プディングです。	푸딩입니다.	fix	defaults
+lookup:jisjk:114446	プディングを作った。	푸딩을 만들었다.	fix	defaults
+lookup:jisjk:114446	プディングが好きだ。	푸딩을 좋아한다.	fix	defaults
+lookup:jisjk:107017	ラドンです。	라돈입니다.	fix	defaults
+lookup:jisjk:107017	ラドンを測った。	라돈을 측정했다.	fix	defaults
+lookup:jisjk:107017	ラドンの濃度だ。	라돈의 농도다.	fix	defaults
+lookup:jisjk:107017	ラドンがある。	라돈이 있다.	fix	defaults
+lookup:jisjk:321452	原宿	하라주쿠	keep	defaults
+lookup:jisjk:321452	原宿へ行く。	하라주쿠에 간다.	keep	defaults
+lookup:jisjk:321452	原宿の駅だ。	하라주쿠의 역이다.	keep	defaults
+lookup:jisjk:321452	原宿で会った。	하라주쿠에서 만났다.	keep	defaults
+lookup:jisjk:137374	取り組もうともしない。	착수하려고도 하지 않는다.	fix	defaults
+lookup:jisjk:137374	彼は取り組もうともしなかった。	그는 착수하려고도 하지 않았다.	fix	defaults
+lookup:jisjk:137374	問題に取り組もうともしない。	문제에 착수하려고도 하지 않는다.	fix	defaults
+lookup:jisjk:137374	問題に取り組んだ。	문제에 임했다.	keep	defaults
+lookup:jisjk:137374	取り組もうとしている。	임하려 하고 있다.	keep	defaults
+lookup:jisjk:256934	和集合	합집합	keep	defaults
+lookup:jisjk:256934	和集合を求める。	합집합을 구한다.	keep	defaults
+lookup:jisjk:256934	二つの集合の和集合だ。	두 개의 집합의 합집합이다.	keep	defaults
+lookup:jisjk:256934	和集合について話した。	합집합에 대해 이야기했다.	keep	defaults
+lookup:jisjk:256934	積集合を求める。	교집합을 구한다.	keep	defaults
+lookup:jisjk:256934	共通部分を求める。	공통 부분을 구한다.	keep	defaults
+lookup:jisjk:87075	啄木鳥	딱따구리	keep	defaults
+lookup:jisjk:87075	啄木鳥がいる。	딱따구리가 있다.	keep	defaults
+lookup:jisjk:87075	森の啄木鳥だ。	숲의 딱따구리다.	keep	defaults
+lookup:jisjk:136507	実務に当たる。	실무를 맡는다.	fix	defaults
+lookup:jisjk:136507	実務に当たった。	실무를 맡았다.	fix	defaults
+lookup:jisjk:136507	実務に当たっている。	실무를 맡고 있다.	fix	defaults
+lookup:jisjk:136507	実務に当たらない。	실무를 맡지 않는다.	fix	defaults
+lookup:jisjk:136507	実務を担当した。	실무를 담당했다.	keep	defaults
+lookup:jisjk:61893	控訴状	항소장	keep	defaults
+lookup:jisjk:61893	控訴状を出す。	항소장을 보낸다.	keep	defaults
+lookup:jisjk:61893	控訴状を提出した。	항소장을 제출했다.	keep	defaults
+lookup:jisjk:61893	控訴状を読んだ。	항소장을 읽었다.	keep	defaults
+lookup:jisjk:61893	公訴状を読んだ。	공소장을 읽었다.	keep	defaults
+lookup:jisjk:61893	起訴状を読んだ。	기소장을 읽었다.	keep	defaults
+lookup:jisjk:67276	東海テレビ放送	도카이TV 방송	fix	defaults
+lookup:jisjk:67276	東海テレビ放送の番組だ。	도카이TV 방송의 프로그램이다.	fix	defaults
+lookup:jisjk:67276	東海テレビ放送を見た。	도카이TV 방송을 보았다.	fix	defaults
+lookup:jisjk:67276	東海テレビ放送で働く。	도카이TV 방송에서 일한다.	fix	defaults
+lookup:jisjk:67276	東海テレビを見た。	도카이TV를 보았다.	keep	defaults
+lookup:jisjk:136469	死ななきゃいけない。	죽지 않으면 안 된다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけなかった。	죽지 않으면 안 되었다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけなくなる。	죽지 않으면 안 되게 된다.	fix	defaults
+lookup:jisjk:136469	死ななきゃいけません。	죽지 않으면 안 됩니다.	keep	defaults
+lookup:jisjk:136469	死んではいけない。	죽어선 안 된다.	keep	defaults
+lookup:jisjk:136469	生きなきゃいけない。	살아야 한다.	keep	defaults
+lookup:jisjk:136469	死ななくてもいい。	죽지 않아도 된다.	keep	defaults
+lookup:jisjk:136469	死ななきゃ。	죽어야 한다.	keep	defaults
+lookup:jisjk:265639	真っ白になる。	새하얗게 된다.	keep	defaults
+lookup:jisjk:265639	真っ白にならない。	새하얗게 안 된다.	keep	defaults
+lookup:jisjk:265639	白くなった。	희어졌다.	keep	defaults
+lookup:jisjk:240437	粗製濫造	조제남조	fix	defaults
+lookup:jisjk:240437	粗製濫造を避ける。	조제남조를 피한다.	fix	defaults
+lookup:jisjk:240437	粗製濫造の商品だ。	조제남조의 상품이다.	fix	defaults
+lookup:jisjk:240437	粗製濫造が問題だ。	조제남조가 문제다.	fix	defaults
+lookup:jisjk:109689	鹿児島県信用農業協同組合連合	가고시마현 신용농업협동조합연합	keep	defaults
+lookup:jisjk:109689	鹿児島県信用農業協同組合連合の資料だ。	가고시마현 신용농업협동조합연합의 자료다.	keep	defaults
+lookup:jisjk:109689	鹿児島県信用農業協同組合連合に勤める。	가고시마현 신용농업협동조합연합에 근무한다.	keep	defaults
+lookup:jisjk:109689	鹿児島県信用農業協同組合連合から届いた。	가고시마현 신용농업협동조합연합으로부터 도착했다.	keep	defaults
+lookup:jisjk:109689	鹿児島県の資料だ。	가고시마현의 자료다.	keep	defaults
+lookup:names.5359	ESPNワイド・ワールド・オブ・スポーツ・コンプレックス	ESPN 와이드 월드 오브 스포츠 콤플렉스	fix	fixed
+lookup:names.5359	ESPNワイド・ワールド・オブ・スポーツ・コンプレックスへ行く。	ESPN 와이드 월드 오브 스포츠 콤플렉스에 간다.	fix	fixed
+lookup:names.5359	ESPNワイド・ワールド・オブ・スポーツ・コンプレックスの地図だ。	ESPN 와이드 월드 오브 스포츠 콤플렉스의 지도다.	fix	fixed
+lookup:names.5359	ESPNワイド・ワールド・オブ・スポーツ・コンプレックスで会う。	ESPN 와이드 월드 오브 스포츠 콤플렉스에서 만난다.	fix	fixed
+lookup:names.5359	ESPNの番組だ。	ESPN의 프로그램이다.	keep	fixed
+lookup:names.397720	リンダ・デイ・ジョージ	린다 데이 조지	fix	fixed
+lookup:names.397720	リンダ・デイ・ジョージさんだ。	린다 데이 조지 씨다.	fix	fixed
+lookup:names.397720	リンダ・デイ・ジョージの写真だ。	린다 데이 조지의 사진이다.	fix	fixed
+lookup:names.397720	リンダ・デイ・ジョージに会う。	린다 데이 조지를 만난다.	fix	fixed
+lookup:names.614413	横浜駅SF	요코하마역 SF	keep	defaults
+lookup:names.614413	横浜駅SFを読んだ。	요코하마역 SF를 읽었다.	keep	defaults
+lookup:names.614413	横浜駅SFの本だ。	요코하마역 SF의 책이다.	keep	defaults
+lookup:names.614413	横浜駅SFについて話した。	요코하마역 SF에 대해 이야기했다.	keep	defaults
+lookup:names.614413	横浜駅へ行く。	요코하마역에 간다.	keep	defaults
+lookup:jisjk:137374	「取り組もうともしない。」	「착수하려고도 하지 않는다.」	fix	defaults
+lookup:jisjk:136507	「実務に当たる。」	「실무를 맡는다.」	fix	defaults
+lookup:jisjk:67276	「東海テレビ放送を見た。」	「도카이TV 방송을 보았다.」	fix	defaults
+lookup:jisjk:136469	「死ななきゃいけない。」	「죽지 않으면 안 된다.」	fix	defaults
+lookup:jisjk:240437	「粗製濫造を避ける。」	「조제남조를 피한다.」	fix	defaults
+lookup:names.5359	「ESPNワイド・ワールド・オブ・スポーツ・コンプレックスへ行く。」	「ESPN 와이드 월드 오브 스포츠 콤플렉스에 간다.」	fix	fixed
+lookup:names.397720	「リンダ・デイ・ジョージさんだ。」	「린다 데이 조지 씨다.」	fix	fixed
+lookup:jisjk:136469	「死んではいけない。」	「죽어선 안 된다.」	keep	defaults

@@ -1,0 +1,13 @@
+# 규칙: LEX-1, LEX-29
+rule	input	expected	kind	layer
+names:gloss	ボルガノン	볼가논	fix	lookup
+names:gloss	「ボルガノン」	「볼가논」	fix	lookup
+names:gloss	ボルガノンを使った。	볼가논을 썼다.	fix	lookup
+names:gloss	ボルガノンの魔法	볼가논의 마법	fix	lookup
+names:gloss	ボルガノンが強い。	볼가논이 강하다.	fix	lookup
+names:gloss	ミル・マスカラス	밀 마스카라스	keep	lookup
+names:gloss	ミル・マスカラスが来た。	밀 마스카라스가 왔다.	keep	lookup
+names:gloss	「ミル・マスカラス」	「밀 마스카라스」	keep	lookup
+names:gloss	ミル・マスカラスの試合	밀 마스카라스의 시합	keep	lookup
+names:gloss	ボルガダイナマイト	볼가 다이너마이트	keep	lookup
+names:gloss	ミル・ジェディナク	마일 제디낙	keep	lookup

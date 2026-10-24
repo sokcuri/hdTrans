@@ -1,0 +1,32 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:broadcaster-tv	フジテレビの番組を見た。	후지TV의 프로그램을 보았다.	fix	defaults
+names:broadcaster-tv	フジテレビジョンで働く。	후지TV에서 일한다.	fix	defaults
+names:broadcaster-tv	日本テレビを見た。	니혼TV를 보았다.	fix	fixed
+names:broadcaster-tv	日本テレビ系列で放送された。	니혼TV 계열에서 방송되었다.	fix	fixed
+names:broadcaster-tv	日本テレビ放送網に入った。	니혼TV 방송망에 들어갔다.	fix	defaults
+names:broadcaster-tv	中京テレビの番組	주쿄TV의 프로그램	fix	fixed
+names:broadcaster-tv	共同テレビジョンの番組	교도TV의 프로그램	fix	defaults
+names:broadcaster-tv	テレビ朝日の番組を見た。	TV아사히의 프로그램을 보았다.	fix	defaults
+names:broadcaster-tv	テレビ東京に出た。	TV도쿄에 나왔다.	fix	defaults
+names:broadcaster-tv	「テレビ大阪」	「TV오사카」	fix	defaults
+names:broadcaster-tv	テレビ神奈川を見た。	TV가나가와를 보았다.	fix	defaults
+names:broadcaster-tv	テレビ愛知の番組	TV아이치의 프로그램	fix	defaults
+names:broadcaster-tv	テレビ西日本	TV니시닛폰	fix	defaults
+names:broadcaster-tv	ABCテレビの番組	ABC TV의 프로그램	fix	fixed
+names:broadcaster-tv	CBCテレビで見た。	CBC TV에서 보았다.	fix	fixed
+names:broadcaster-tv	BSテレビ東京を見た。	BS TV도쿄를 보았다.	fix	fixed
+names:broadcaster-tv	TBSテレビの番組	TBS의 프로그램	fix	fixed
+names:broadcaster-tv	関西テレビ放送	간사이TV 방송	fix	defaults
+names:broadcaster-tv	読売テレビの番組	요미우리TV의 프로그램	fix	fixed
+names:broadcaster-tv	札幌テレビ放送	삿포로TV 방송	fix	defaults
+names:broadcaster-tv	さっぽろテレビほうそう	삿포로TV 방송	fix	defaults
+names:broadcaster-tv	北海道テレビを見た。	홋카이도TV를 보았다.	fix	fixed
+names:broadcaster-tv	「東海テレビ」	「도카이TV」	fix	fixed
+names:broadcaster-tv	静岡朝日テレビ	시즈오카 아사히TV	fix	fixed
+names:broadcaster-tv	名古屋テレビ塔に登った。	나고야TV 타워에 올랐다.	fix	fixed
+names:broadcaster-tv	ケーブルテレビを見た。	케이블TV를 보았다.	fix	defaults
+names:broadcaster-tv	ケーブル・テレビの契約	케이블TV의 계약	fix	defaults
+names:broadcaster-tv	テレビを見た。	텔레비전을 보았다.	keep	defaults
+names:broadcaster-tv	テレビゲームをした。	텔레비전 게임을 했다.	keep	defaults
+names:broadcaster-tv	チェコ・テレビの番組	체코 텔레비전 방송공사의 프로그램	keep	fixed

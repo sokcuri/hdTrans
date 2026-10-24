@@ -1,0 +1,18 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.578816	星奈あい	호시나 아이	fix	fixed
+dict:names.578816	「星奈あい」	「호시나 아이」	fix	fixed
+dict:names.578816	『星奈あい』	『호시나 아이』	fix	fixed
+dict:names.578816	【星奈あい】	【호시나 아이】	fix	fixed
+dict:names.578816	星奈あい。	호시나 아이.	fix	fixed
+dict:names.578816	星奈あい！	호시나 아이!	fix	fixed
+dict:names.578816	星奈あい？	호시나 아이?	fix	fixed
+dict:names.578816	 星奈あい	 호시나 아이	fix	fixed
+dict:names.578816	星奈あい 	호시나 아이	fix	fixed
+dict:names.578816	星奈 あい	호시나 아이	fix	fixed
+dict:names.578816	（星奈あい）	(호시나 아이)	fix	fixed
+dict:names.578816	「星奈あい」の名前。	「호시나 아이」의 이름.	fix	fixed
+dict:names.578816	星奈陽子	호시나 요코	keep	fixed
+dict:names.578816	星奈ひかる	호시나 히카루	keep	fixed
+dict:names.578816	あい	사랑	keep	fixed
+dict:names.578816	星奈	호시나	keep	fixed
