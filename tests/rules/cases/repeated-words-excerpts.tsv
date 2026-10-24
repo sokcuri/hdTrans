@@ -59,7 +59,7 @@ lookup:copies-conjunction	でもでも！	하지만 하지만!	fix	rewrites
 lookup:copies-conjunction	でもでも、目立つのはいいこと	하지만 하지만, 눈에 띄는 것은 좋은 일	fix	rewrites
 lookup:copies-conjunction	でも……でも……私……うれしい…	하지만……하지만……나……기쁘다…	keep	lookup
 lookup:copies-conjunction	でも、でもぉ……っ	하지만, 하지만……	keep	lookup
-lookup:copies-conjunction	でもでも、良かった	하지만 하지만, 좋았다	fix	rewrites
+lookup:copies-conjunction	でもでも、良かった	하지만 하지만, 다행이다	fix	rewrites
 lookup:copies-conjunction	でも……でも……うっ……お姉ちゃ	하지만……하지만……윽……언니	keep	lookup
 lookup:copies-conjunction	でもでも、格闘だと互角っぽい	하지만 하지만, 격투라면 호각 같다	fix	rewrites
 lookup:copies-conjunction	でも……でも……あたしだって……	하지만……하지만……나도……	keep	lookup

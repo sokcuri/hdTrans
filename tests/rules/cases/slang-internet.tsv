@@ -55,7 +55,7 @@ dict:s:9450	荷物を箱に詰めた	!rule:dict:s:9450	keep	local
 dict:s:9450	息が詰まる	!rule:dict:s:9450	keep	local
 phrase:それな	それな！	그러니까!	fix	builtin-phrase
 phrase:それな	「それな」	「그러니까」	fix	builtin-phrase
-phrase:それな	それな、今回はマジで、飛ばされた方が4人で良かったよな	그러니까, 이번에는 진짜로, 날아간 편이 4명이 좋았지	fix	builtin-phrase
+phrase:それな	それな、今回はマジで、飛ばされた方が4人で良かったよな	그러니까, 이번에는 진짜로, 날아간 편이 4명이라서 다행이었지	fix	builtin-phrase
 phrase:それな	それなら行く。	그렇다면 간다.	keep	builtin-phrase
 phrase:それな	それなりに多彩な異国風料理	그 나름대로 다채로운 이국풍 요리	keep	builtin-phrase
 phrase:ぴえん	ぴえん。	힝.	fix	builtin-phrase

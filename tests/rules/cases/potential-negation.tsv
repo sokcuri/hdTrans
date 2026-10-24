@@ -1,0 +1,27 @@
+# 규칙: MNG-1
+rule	input	expected	kind	layer
+compose:potential-negation	おや？寝付けませんか？	어라? 잠들 수 없습니까?	fix	compose
+compose:potential-negation	「まいどあり…それとお嬢さん、これを頼めませんかね？」	has:부탁할 수 없습니까	fix	compose
+compose:potential-negation	その婚約破棄のお話はちょっと後にできませんか？	has:할 수 없습니까	fix	compose
+compose:potential-negation	お夕食も、私がお作りしましょう。侮れませんよ…？	has:경시할 수 없어요	fix	compose
+compose:potential-negation	我々はこの間の祭りには帰ってこれませんでしたからね。	has:돌아올 수 없었으니까	fix	compose
+compose:potential-negation	深夜三時ですって！？ ありえませんわ	has:있을 수 없어요	fix	compose
+compose:potential-negation	深夜4時よ。付き合ってられませんわ	has:수 없어요	fix	compose
+compose:potential-negation	触ったらマジで怒るから。あり得ないからっ！	has:있을 수 없으니까	fix	compose
+compose:potential-negation	本来有り得ぬ天文学的確率で	본래 있을 수 없는 천문학적 확률로	fix	compose
+compose:potential-negation	どこが奇妙か口では言えぬ奇妙な果実	has:말할 수 없는	fix	compose
+compose:potential-negation	うっっくぅ～、なんもいえねぇ～…	has:말할 수 없다	fix	compose
+compose:potential-negation	「そんなことは許せませんのー！！！」	has:용서할 수 없어요	fix	compose
+compose:potential-negation	ん、何だよ司令、もう食えねぇ…	has:먹을 수 없다	fix	compose
+compose:potential-negation	「おう、そうそう鳥なんて生で食えんだろ」	has:먹을 수 없	fix	compose
+compose:potential-negation	ミドリさんの食生活とか想像できんなそういえばｗ	has:상상할 수 없지	fix	compose
+compose:potential-negation	文章だけで今日もう仕事できん	has:일할 수 없다	keep	compose
+compose:potential-negation	緒戦をお手合わせ願えませんかしら？	has:바랄 수 없습니까	fix	compose
+compose:potential-negation	これなら聞けるんじゃないかな？	이것이라면 들을 수 있지 않을까?	keep	compose
+compose:potential-negation	次は勝てるんじゃないかな？	다음은 이길 수 있지 않을까?	keep	compose
+compose:potential-negation	暫くは会ってない。そのうち会えるんじゃない？	has:만날 수 있지 않아?	keep	compose
+compose:potential-negation	小型化すればロボットのサーボなんかでも使えるんじゃないですか？	has:쓸 수 있지 않습니까?	keep	compose
+compose:potential-negation	お店、出せんじゃない？	has:낼 수 있지 않아?	keep	compose
+compose:potential-negation	だって信頼できんじゃん？	lacks:수 없	keep	compose
+compose:potential-negation	ミドリさんやべえよな伝説になれるんじゃね？	has:될 수 있지 않아?	keep	compose
+compose:potential-negation	しえんいる？	lacks:수 없	keep	compose

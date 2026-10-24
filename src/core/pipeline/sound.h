@@ -93,8 +93,8 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedAuxiliaries, RewriteRaLessKuru,
-// RewriteContractedNo,
+// RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
+// RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
@@ -189,6 +189,27 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
 // (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that
 // spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap);
+
+// The kana of a verb form said ん or っ in casual speech written back where a verb of the
+// dictionary has the form: the る of an ichidan verb, する or くる before the な of a prohibition
+// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability (想像できんな);
+// the られ of a potential, the ら of a godan verb in る or the れ ending an ichidan stem before
+// contraction.n-nai (信じらんない 信じられない, 分かんない 分からない, してくんない してくれない), with
+// contraction.n-nee written as ない (変わんねえ 変わらない); the negative ない after an ichidan or
+// potential stem before contraction.n-negative, not contraction.n-negative-not (負けんぞ 負けないぞ,
+// 許せんから 許せないから); and the る said っ before contraction.tsu-ru (やっから やるから). The stem
+// has kanji, or is one kana after a member of contraction.n-kana-stem-after or the す of する after
+// a noun; a stem of more kana is read only as a て form before らん (やってらんねえ). Not after a
+// dictionary form (書くんなら, the の), a godan negative stem (知らんな, already the negative), nor
+// in or at the end of a word of the dictionary (こんな, 天下).
+std::string RewriteContractedN(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The おる after a て form contracted with its て or で (聞いとる 聞いておる, 読んどった 読んでおった,
+// 苦労しとる 苦労しておる) written in full: a と or ど before a member of contraction.te-oru
+// where the text before it with て or で is the て form of a verb of the dictionary, する or 来る, the
+// stem has kanji and is no noun of the dictionary (天下), and no word of the dictionary spans the と
+// (見とれる).
+std::string RewriteContractedOru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The past and the て form of a godan verb in う said with う for っ (言うた 言った, 思うて 思って,
 // 問うて), when the dictionary has the kanji stem as such a verb and no word that spans the
