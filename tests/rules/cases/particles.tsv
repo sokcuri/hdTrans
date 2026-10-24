@@ -14,7 +14,7 @@ dict:jisjk:257877	本物なんだよ。	진짜야.	keep	local
 dict:jisjk:116866	秘密の作戦で敵を倒す。	비밀의 작전으로 적을 쓰러뜨린다.	fix	local
 dict:jisjk:116866	気合で勝つ。	기합으로 이긴다.	fix	local
 dict:jisjk:116866	決勝戦で勝った。	결승전에서 이겼다.	keep	local
-dict:jisjk:267575	先生に翻訳してもらう。	선생님에게 번역받는다.	fix	local
+dict:jisjk:267575	先生に翻訳してもらう。	선생님이 번역해 준다.	fix	local
 dict:jisjk:267575	韓国語に翻訳する。	한국어로 번역한다.	keep	local
 dict:jisjk:6168	僕だって！	나도!	fix	local
 dict:jisjk:6168	明日は雪だって。	내일은 눈이래.	keep	local

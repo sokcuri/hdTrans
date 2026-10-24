@@ -210,6 +210,10 @@ constexpr NamedFeature kFeatures[] = {
     {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
     // The verb was analysed as a causative.
     {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
+    // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
+    {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
+    // The verb was analysed as a causative-passive (待たされ, 読ませられ).
+    {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
     // token when the word before ends its token.
     {"touches-prev",
@@ -422,6 +426,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"copy-ending", CxVerb::CopyEnding},
         {"copy-word", CxVerb::CopyWord},
         {"set-sound", CxVerb::SetSound},
+        {"set-active", CxVerb::SetActive},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -460,7 +465,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             continue;
         }
         const char* bad = nullptr;
-        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound) {
+        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
+            a.verb == CxVerb::SetActive) {
             out.push_back(std::move(a));
             continue;
         }
@@ -930,6 +936,14 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         }
         case internal::CxVerb::SetVerb:
             it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            break;
+        case internal::CxVerb::SetActive:
+            // The verb is written in the active voice: its Korean without the passive.
+            if (it->DetailRecord() == 1) {
+                it->detail->record = 0;
+                if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
+                it->choice = source;
+            }
             break;
         case internal::CxVerb::SetSound: {
             if (std::string sound = text::FromKana(it->group->surface, text::Preset::Fan); !sound.empty()) {
