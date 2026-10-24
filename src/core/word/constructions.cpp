@@ -126,7 +126,7 @@ bool OnlyPauses(std::string_view s) {
 // Whether the speech goes on after the item, past pause marks and spaces, within its sentence
 // or past a ！ or ？ that ends it inside a quote the next sentence goes on: a word follows that
 // is not a closing bracket (……そうだ、ほら, 「……そうだ！　田中さん」; not ……そうだ。 間違いない,
-// 「……そうだ」 or an unclosed 「……そうだ at the end of the text).
+// ……そうだ！ 間違いない outside quotes, 「……そうだ」 or an unclosed 「……そうだ at the end of the text).
 bool SpeechGoesOn(Worker& w, const Item* it) {
     const std::string_view rest = From(it->text, it->start + it->length);
     if (!rest.empty() && !OnlyPauses(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
@@ -142,7 +142,9 @@ bool SpeechGoesOn(Worker& w, const Item* it) {
             continue;
         }
         const std::string_view raw = w.tokens.Raw(static_cast<std::size_t>(j));
-        if (!OnlyPauses(raw)) return MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+        if (!OnlyPauses(raw)) {
+            return (!exclaimed || w.QuoteDepth(j) > 0) && MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+        }
     }
     return false;
 }

@@ -65,7 +65,8 @@ rewrite:ruby-idiom-verb	遠くで{rb}声{/rb}{rt}こえ{/rt}がした	먼 곳에
 rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}がする	{rb}목소리{/rb}{rt}목소리{/rt}가 들린다	fix	rewrites
 rewrite:ruby-idiom-verb	どこからか母の{rb}声{/rb}{rt}こえ{/rt}がして	어디에선가 어머니의 {rb}목소리{/rb}{rt}목소리{/rt}가 들려	fix	rewrites
 rewrite:ruby-idiom-verb	{rb}味{/rb}{rt}あじ{/rt}がした。	{rb}맛{/rb}{rt}맛{/rt}이 났다.	fix	rewrites
-rewrite:ruby-idiom-verb	{rb}損{/rb}{rt}そん{/rt}をした	{rb}손해{/rb}{rt}손{/rt}를 보았다	fix	rewrites
+# 맞는 출력: {rb}손해{/rb}{rt}손해{/rt}를 보았다
+rewrite:ruby-idiom-verb	{rb}損{/rb}{rt}そん{/rt}をした	{rb}손해{/rb}{rt}손{/rt}를 보았다	current	rewrites
 # 맞는 출력: 문이 개폐되는 {rb}소리{/rb}{rt}소리{/rt}가 났다.
 rewrite:ruby-idiom-verb	ドアが開閉される{rb}音{/rb}{rt}おと{/rt}がした。	문이 개폐되는 {rb}소리{/rb}{rt}와{/rt}가 났다.	current	rewrites
 # 맞는 출력: 랜턴을 {rb}손{/rb}{rt}손{/rt}에 넣었다
