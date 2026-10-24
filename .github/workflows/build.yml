@@ -370,9 +370,9 @@ jobs:
           fi
           compilers() { readelf -p .comment "$1" 2> /dev/null | grep -F '[' | sed 's/^ *\[ *[0-9a-f]*\] *//' | sort -u; }
           build_base() {
-            local src="$RUNNER_TEMP/base-src" home
+            local src="$RUNNER_TEMP/base-src" home="$RUNNER_TEMP/base-home"
             git worktree add --detach "$src" "$BASE_SHA" > /dev/null || return 1
-            home=$(mktemp -d)
+            mkdir -p "$home"
             if ! (cd "$src" && cmake --preset linux -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
                   -DCMAKE_C_COMPILER_LAUNCHER=sccache &&
                   cmake --build --preset linux --parallel "$BUILD_JOBS" --target hdtrans_cli &&
