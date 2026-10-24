@@ -1,0 +1,139 @@
+# 규칙: LEX-3, LEX-27
+rule	input	expected	kind	layer
+dict:dialogue-senses:3	シロッコ、了解！	시로코, 알았어!	fix	local
+dict:dialogue-senses:3	山汐丸、了解。	야마시오마루, 알았어.	fix	local
+dict:dialogue-senses:3	長波了解！	has:알았어!	fix	local
+dict:dialogue-senses:3	りょ、了解、私もがんばります！	has:알았어, 저도	fix	local
+dict:dialogue-senses:3	時雨、了解。突撃開始。行くよ！	has:알았어. 돌격	fix	local
+dict:dialogue-senses:3	「了解。練習しとくね」	has:「알았어.	fix	local
+dict:dialogue-senses:3	≪了解、先に行くねー≫	has:알았어, 먼저	fix	local
+builtin:phrases	能代、了解いたしました。	has:알겠습니다	fix	builtin-phrase
+dict:dialogue-senses:3	了解を得る必要がある。	양해를 얻을 필요가 있다.	keep	local
+dict:dialogue-senses:3	第十九駆逐隊、了解しました。	제19구축대, 알겠습니다.	keep	local
+dict:dialogue-senses:3	はい、提督、了解です。	네, 제독, 알겠습니다.	keep	local
+dict:jisjk:364488	発射始め！	발사 시작!	fix	lookup
+dict:jisjk:364488	海防艦、演習始め！	해방함, 연습 시작!	fix	lookup
+dict:jisjk:364488	速吸航空隊、発艦始め！	has:발함 시작!	fix	lookup
+dict:jisjk:364488	それは、春の始めの出来事だった。	has:봄의 시작의	fix	lookup
+dict:dialogue-senses:14	行くよ！二航戦攻撃隊、発艦はじめ！	has:발함 시작!	fix	local
+dict:dialogue-senses:14	撃ち方ー……はじめ！	has:……시작!	fix	local
+dict:jisjk:364488	洗礼の儀式を始める！	세례의 의식을 시작한다!	keep	lookup
+dict:jisjk:364488	撃ち方始めっ！	사격 개시!	keep	lookup
+dict:dialogue-senses:14	はじめは怖かった	처음은 무서웠다	keep	local
+dict:dialogue-senses:14	はじめまして	처음 뵙겠습니다	keep	local
+dict:dialogue-senses:2	ほお…なんか提督も忙しそう……。	has:호오…	fix	local
+dict:dialogue-senses:2	ほお……ふん……なるほどな。	has:호오……	fix	local
+dict:dialogue-senses:2	ほお？ 意外と利口な奴だな	has:호오?	fix	local
+dict:dialogue-senses:2	え、ほお…ふむ…	has:호오…	fix	local
+dict:dialogue-senses:2	ほお擦りしているのだ。	has:뺨	keep	local
+dict:dialogue-senses:2	ほおを赤らめる	has:뺨을	keep	local
+dict:dialogue-senses:2	ほおが落ちる。	둘이 먹다가 하나 죽어도 모른다.	keep	local
+dict:jisjk:2673	あなたも色々大変そうね。	has:힘들 것 같네	fix	lookup
+dict:jisjk:2673	三日月大変そうだなぁ。	has:힘들 것 같구나	fix	lookup
+dict:jisjk:2673	秋刀魚漁は、今年は大変そうだ。	has:힘들 것 같다	fix	lookup
+dict:jisjk:2673	お父さん、大変そうだからそっとしてあげてね。	has:힘들 것 같으니까	fix	lookup
+dict:jisjk:2673	とても忙しくて、大変そうな気がする	has:힘들 것 같은	fix	lookup
+dict:jisjk:2673	大変だ！	힘들다!	keep	lookup
+dict:jisjk:342588	王子は、婚約者のクラリス様に言った。	has:클라리스님에게 말했다	fix	local
+dict:jisjk:342588	帝国の王妃様は、クラリス様に深く頭を下げた。	has:클라리스님에게	fix	local
+dict:jisjk:342588	まるでシンシア様に見せ付けるような	has:신시아님에게	fix	local
+dict:jisjk:342588	司令官様にご報告ですっ！	has:사령관님에게	fix	local
+dict:jisjk:342588	たびたびマリアローゼ様に苦言を呈されてもいる。	has:로제님에게	fix	local
+dict:jisjk:342433	提督様になられた	제독님이 되셨다	keep	local
+dict:jisjk:342588	準備ができたのならルア様に言うのだ。	has:루아님에게	keep	local
+dict:dialogue-senses:1	やめて！	그만해!	fix	local
+dict:dialogue-senses:1	……冷やかしはやめてくれ。	has:그만해 줘	fix	local
+dict:dialogue-senses:1	や、やめてよぉ！	has:그만해!	fix	local
+dict:dialogue-senses:1	も、もうやめてー！	has:그만해~!	fix	local
+dict:dialogue-senses:1	うぅ…翔太ちゃん、メールはやめてよ★	has:그만해★	fix	local
+dict:dialogue-senses:1	やめてよ、私はJ-class Javelinよ。	has:그만해, 나는	fix	local
+dict:dialogue-senses:1	ああもう、じいちゃんやめてくれよ恥ずかしい！	has:그만해 주	fix	local
+dict:dialogue-senses:1	「いいです、やめて下さい」	has:그만해 주세요	fix	local
+dict:dialogue-senses:1	「やめて、佳奈」	has:그만해, 카나	fix	local
+dict:dialogue-senses:1	けんかをやめて	싸움을 그만해	fix	local
+dict:dialogue-senses:1	提督、多摩をちゃん付けで呼ぶのはやめてほしいにゃ。	has:그만하기를	fix	local
+dict:dialogue-senses:1	と笑い飛ばそうとしたがやめておくことにした。	has:그만두기로	keep	local
+dict:dialogue-senses:1	出場するべきか……やめておくべきか……	has:그만두어야	keep	local
+dict:dialogue-senses:1	仕事をやめていた	일을 그만두고 있었다	keep	local
+dict:dialogue-senses:1	タバコをやめてよかった	has:그만두어서	keep	local
+dict:dialogue-senses:1	学校をやめて働く	has:그만두어 일한다	keep	local
+dict:dialogue-senses:1	やめてしまった	has:그만두어	keep	local
+dict:variant:tsuitekuru:3	こっちだ、付いて来て。	여기다, 따라 와.	fix	lookup
+dict:variant:tsuitekuru:3	貴様らは邪魔だ、付いて来るな。	has:따라 오지 마	fix	lookup
+dict:variant:tsuitekuru:3	みんな、付いて来て！	모두, 따라 와!	fix	lookup
+dict:variant:tsuitekuru:3	突撃します、付いてきてください。	has:따라 와 주세요	fix	lookup
+dict:variant:tsuitekuru:3	付いてこい！	따라 와라!	fix	lookup
+dict:variant:tsuitekuru:3	しっかり付いてくるっす。	has:따라 와요	fix	lookup
+dict:variant:tsuitekuru:3	Richelieuに付いてきなさい。	Richelieu를 따라 와.	fix	lookup
+dict:variant:tsuitekuru:3	ほな、黒潮に付いてきてぇ～。	has:구로시오를	keep	lookup
+dict:variant:tsuitekuru:3	微笑みながら近付いてくる彼女	has:가까워져 오는	keep	lookup
+dict:dialogue-senses:12	↑オイオイｗほんの少し上に382とミドリさんの書き込みがあるぞｗ	has:미도리 씨의 글이	fix	lookup
+dict:dialogue-senses:12	書き込みが途絶えて結構時間が経ってますが	has:글이 끊어져	fix	lookup
+dict:dialogue-senses:12	ミドリさんの書き込みから、丸2日以上経ってますが	has:미도리 씨의 글로부터	fix	lookup
+dict:dialogue-senses:12	展開予想などの書き込みは、	has:등의 글은	fix	lookup
+dict:jisjk:142896	ちょっと詳しく書き込むから待っててー	has:자세하게 적으니까	fix	lookup
+dict:jisjk:142896	電話番号を書き込め	전화번호를 적어라	fix	lookup
+dict:jisjk:142896	俺は目を閉じて、頭の中の工程表に最初の一行を書き込んだ。	has:일행을 적었다	fix	lookup
+dict:jisjk:142896	うん、また進展があったら書き込むよ	has:있으면 적어	fix	lookup
+dict:jisjk:167475	教科書に書き込みをした	교과서에 기입을 했다	keep	local
+dict:jisjk:167475	イキった書き込みしたヤツ	has:기입한	keep	local
+builtin:phrases	明けまして、おめでとうございます！	새해 복 많이 받으세요!	fix	builtin-phrase
+builtin:phrases	新年明けまして、おめでとうございます！	has:새해 복 많이 받으세요!	fix	builtin-phrase
+dict:jisjk:373482	明けましておめでとう、司令官。	새해 복 많이 받으세요, 사령관.	fix	lookup
+dict:jisjk:373482	新年明けましておめでとう！	has:새해 복 많이 받으세요!	fix	lookup
+dict:jisjk:342097	新年あけましておめでとうございます。	has:새해 복 많이	fix	lookup
+dict:jisjk:373482	提督、明けましておめでとうございます。	제독, 새해 복 많이 받으세요.	keep	lookup
+dict:jisjk:40671	お風呂は…好き。	목욕은…좋아해.	fix	lookup
+dict:jisjk:40671	ごめんなさい、長いお風呂かも。	has:긴 목욕	fix	lookup
+dict:jisjk:40671	あら、お風呂だったのね。	has:목욕이었구나	fix	lookup
+dict:jisjk:40671	ちょっとお風呂。	has:목욕.	fix	lookup
+dict:dialogue-senses:9	早波、少しお風呂入ってもいい？	has:목욕해도	fix	lookup
+dict:dialogue-senses:9	お風呂入るから…マジで覗かないでね！	has:목욕하니까	fix	lookup
+dict:dialogue-senses:9	あぁ、お風呂入りたい。……	has:목욕하고 싶다	fix	lookup
+dict:dialogue-senses:13	ちょっと、お風呂に行ってきます。	has:욕실에 다녀오겠습니다	keep	local
+dict:dialogue-senses:13	お風呂に浸かるよー。	has:욕실에	keep	local
+dict:jisjk:112357	お風呂場で	욕실에서	fix	lookup
+dict:jisjk:40671	お風呂に入る。	목욕을 한다.	keep	lookup
+dict:dialogue-senses:15	写真には人の像の上に赤丸がいくつか書き込まれていた。	has:기입되고 있었다	keep	lookup
+dict:dialogue-senses:13	やっぱりお風呂もなかったよ。	has:욕실도 없었어	keep	local
+dict:dialogue-senses:13	お風呂はあとで	has:목욕은	keep	local
+dict:dialogue-senses:8	提督、お疲れでありましょう？	lacks:수고했어	keep	local
+dict:dialogue-senses:16	お疲れが出て、寝てしまったので	has:피로가 와	keep	lookup
+dict:dialogue-senses:6	今日もお疲れ。	오늘도 수고했어.	fix	lookup
+dict:dialogue-senses:6	「ユメたちもお疲れ。どう？」	has:유메들도 수고했어.	fix	lookup
+dict:dialogue-senses:6	はいお疲れ～	has:수고했어~	fix	lookup
+dict:dialogue-senses:6	松もお疲れｗ	has:수고했어	fix	lookup
+dict:dialogue-senses:7	少しお疲れですか？	조금 피곤합니까?	fix	local
+dict:dialogue-senses:7	提督、お疲れでしょう？	has:피곤하겠	fix	local
+dict:dialogue-senses:7	提督、少しお疲れではないですか？	has:피곤하지 않습니까?	fix	local
+dict:dialogue-senses:7	お疲れじゃないですか？	has:피곤하잖아요?	fix	local
+dict:dialogue-senses:7	司令官、少しお疲れかも？	has:피곤할지도?	fix	local
+dict:dialogue-senses:10	少しお疲れのようです。	조금 피곤한 것 같습니다.	fix	lookup
+dict:dialogue-senses:11	榊さん、随分とお疲れみたいですね	has:피곤한 것 같네요	fix	lookup
+dict:dialogue-senses:8	お疲れがたまっていませんか？	has:피로가 쌓여	keep	local
+dict:dialogue-senses:8	昼間のお疲れが溜まって	has:피로가	keep	local
+dict:jisjk:349343	今日はお疲れ様。	오늘은 수고하셨습니다.	fix	lookup
+dict:jisjk:349345	深夜までお疲れ様です。	심야까지 수고하셨습니다.	fix	lookup
+dict:jisjk:349344	大変お疲れ様でした。	정말 수고하셨습니다.	fix	lookup
+dict:jisjk:364809	お疲れさま～！	수고하셨어요~!	keep	lookup
+dict:jisjk:196171	秋月、推参！	아키즈키, 등장!	fix	lookup
+dict:jisjk:196171	第七駆逐隊、推参。	제7구축대, 등장.	fix	lookup
+dict:jisjk:196171	秋月、推参します！	아키즈키, 등장합니다!	fix	lookup
+dict:jisjk:196171	雲龍型航空母艦、雲龍、推参しました。	has:등장했습니다	fix	lookup
+dict:jisjk:196171	推参です！	등장입니다!	fix	lookup
+dict:jisjk:196171	大和型二番艦、武蔵…推参する！	has:등장한다!	fix	lookup
+dict:dialogue-senses:4	説明して頂戴！	설명해 줘!	fix	lookup
+dict:dialogue-senses:4	起きて、起きて頂戴！	일어나, 일어나 줘!	fix	lookup
+dict:dialogue-senses:4	身支度はちゃんとさせて頂戴。	has:시켜 줘.	fix	lookup
+dict:dialogue-senses:5	日替わり定食を頂戴	일일 정식을 줘	fix	lookup
+dict:dialogue-senses:5	一番いい艦載機を頂戴よ。	has:함재기를 줘	fix	lookup
+dict:dialogue-senses:5	バレンタインのお返し頂戴♪	has:답례 줘♪	fix	lookup
+dict:jisjk:140186	有り難く頂戴します。	고맙게 받습니다.	keep	lookup
+dict:jisjk:140186	ありがたく頂戴いたします。	고맙게 받겠습니다.	keep	lookup
+dict:jisjk:140186	ありがたく頂戴するわね。	has:고맙게 받아	keep	lookup
+builtin:phrases	提督、午後も頑張ろ！	제독, 오후도 힘내자!	fix	builtin-phrase
+builtin:phrases	サラももっと頑張ろ！	has:좀 더 힘내자!	fix	builtin-phrase
+builtin:phrases	一緒に頑張ろ？	has:힘내자?	fix	builtin-phrase
+builtin:phrases	明日も頑張ろう。	내일도 노력하자.	keep	builtin-phrase
+builtin:phrases	頑張ろうね	lacks:힘내자	keep	builtin-phrase
+dict:jisjk:40671	「お風呂、電気付いてなかったよ」	「목욕, 전기 붙지 않았어」	current	lookup

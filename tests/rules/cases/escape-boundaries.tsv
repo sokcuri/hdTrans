@@ -13,7 +13,7 @@ segment:escape-gap	「えっ！？\n分かってるね」	「어!?\n알고 있�
 segment:escape-gap	「えっ！？\n行くじゃん」	「어!?\n가잖아」	fix	segment
 segment:escape-gap	「きゃー♪\n帰ろうぜ」	「꺄아♪\n돌아가자구」	fix	segment
 segment:escape-gap	「ちょ、ちょっと！\n帰ろうよ」	「자, 잠깐!\n돌아가자」	fix	segment
-segment:escape-gap	「な、何よ\nやめてね」	「뭐, 뭐야\n그만둬」	fix	segment
+segment:escape-gap	「な、何よ\nやめてね」	「뭐, 뭐야\n그만해」	fix	segment
 segment:escape-gap	「はぁ…\n行っちゃうね」	「하아…\n가버리네」	fix	segment
 segment:escape-gap	「はわわ\n忘れてたぞ」	「하와와\n잊고 있었어」	fix	segment
 segment:escape-gap	「ひゃっ！\n好きだじゃん」	lacks:\n을	fix	segment

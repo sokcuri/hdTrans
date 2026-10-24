@@ -105,13 +105,15 @@ enum class LoadErrorKind : uint8_t {
     Header,      // a "#!" first line that is not a header or a layer the file cannot have
     MissingRuleBodies,  // rows name local rules and no row carries a body (an older dictionary)
     NegationEnding,     // a line loaded whose 지 않 negation fits no class of its key (NegationEndingError)
+    VerbNoun,    // a line loaded whose noun target is a 하다 verb made a noun (VerbNounError)
 };
 
 // Whether an error of kind fails the load of its file; the other kinds list lines of a
 // load that takes place.
 constexpr bool FailsLoad(LoadErrorKind kind) {
     return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass &&
-           kind != LoadErrorKind::MissingRuleBodies && kind != LoadErrorKind::NegationEnding;
+           kind != LoadErrorKind::MissingRuleBodies && kind != LoadErrorKind::NegationEnding &&
+           kind != LoadErrorKind::VerbNoun;
 }
 
 struct LoadError {

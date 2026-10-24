@@ -161,4 +161,15 @@ std::string MarkerClassError(std::string_view target, PartCode part) {
            " stems, not the part code " + std::string(part.Text());
 }
 
+std::string VerbNounError(std::string_view key, std::string_view target, PartCode part, std::string_view sem) {
+    constexpr std::string_view kHagi = "하기";
+    if (part.Class() != WordClass::Noun || part.Sub() == '3' || sem.starts_with('Q') || !target.ends_with(kHagi) ||
+        target == kHagi ||
+        target.find(' ') != std::string_view::npos || key.ends_with("期")) {
+        return {};
+    }
+    return "the noun target " + Quoted(target) + " is a verb made a noun; write the noun " +
+           Quoted(target.substr(0, target.size() - kHagi.size()));
+}
+
 }  // namespace hdTrans::dict

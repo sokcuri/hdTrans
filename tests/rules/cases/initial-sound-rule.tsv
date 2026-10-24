@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:initial-sound	隆書は言った。	융서는 말했다.	fix	rewrites
-rewrite:initial-sound	練度を上げる。	연도를 올린다.	fix	rewrites
+rewrite:initial-sound	練剣を上げる。	연검을 올린다.	fix	rewrites
 rewrite:initial-sound	良書を読む。	양서를 읽는다.	keep	rewrites
 rewrite:initial-sound	興隆を極めた。	융성을 다했다.	keep	rewrites
 rewrite:initial-sound	二〇二六年の春。	2026년 봄.	keep	rewrites

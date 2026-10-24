@@ -234,6 +234,26 @@ HD_TEST(MarkerClassErrors) {
     for (const Case& c : cases) HD_CHECK_EQ(MarkerClassError(c.target, PartCode(c.part)), std::string(c.error));
 }
 
+HD_TEST(VerbNounErrors) {
+    struct Case {
+        std::string_view key, target, part, sem, error;
+    };
+    const Case cases[] = {
+        {"抜錨", "출항하기", "N110", "", "the noun target \"출항하기\" is a verb made a noun; write the noun \"출항\""},
+        {"不見識", "경솔하기", "I110", "", "the noun target \"경솔하기\" is a verb made a noun; write the noun \"경솔\""},
+        {"抜錨", "출항", "N110", "", ""},
+        {"職探し", "직장 구하기", "N110", "", ""},
+        {"夏期", "하기", "N110", "", ""},
+        {"氷河期", "빙하기", "N110", "", ""},
+        {"矢作", "야하기", "N130", "", ""},
+        {"中萩", "나카하기", "N110", "QCT", ""},
+        {"使用", "사용하기", "M439", "", ""},
+    };
+    for (const Case& c : cases) {
+        HD_CHECK_EQ(hdTrans::dict::VerbNounError(c.key, c.target, PartCode(c.part), c.sem), std::string(c.error));
+    }
+}
+
 HD_TEST(CodeTablePrefixTupleIdentity) {
     using namespace std::string_view_literals;
     struct Tuple {
