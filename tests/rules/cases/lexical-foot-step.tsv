@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:words-phrases:66	電車で足を踏まれた。	rule:dict:words-phrases:66=발	fix	local
+dict:words-phrases:66	千里に足を踏まれた。	has:발을 밟혔다	fix	local
+dict:words-phrases:66	足を踏んでしまった。	has:발을 밟아	fix	local
+dict:words-phrases:66	足が痛い。	다리가 아프다.	keep	local
+dict:words-phrases:66	足を引っ張るな。	!rule:dict:words-phrases:66	keep	local
+dict:words-phrases:66	うっかり彼の足を踏んでしまった。	has:발을 밟아	fix	local
+dict:words-phrases:66	足で踏みつけた。	has:발로	fix	local
+dict:words-phrases:66	足が速い。	has:발이 빠르다	keep	local

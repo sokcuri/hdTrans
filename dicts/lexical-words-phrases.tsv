@@ -66,3 +66,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 仕置き	벌	N110		Hd	GN				replace			words-phrases:63
 御構いなしに	상관없이	E311			GN							words-phrases:64
 夜毎に	밤마다	E311			GN							words-phrases:65
+足	발	N110	VBp		GN	7463	||1 &&2 P+1== "2**" S+2== "L踏"	조사를 사이에 두고 踏む가 뒤따르는 足는 밟는 데 쓰는 발이다.				words-phrases:66

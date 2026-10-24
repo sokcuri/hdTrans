@@ -1,0 +1,25 @@
+# 규칙: GRM-14
+rule	input	expected	kind	layer
+voice:doer-left-out	服を着られたら困る。	옷을 입으면 곤란하다.	fix	voice
+voice:doer-left-out	ずっと意識しないようにしていたのだが、胸を張られるとつらい。	has:가슴을 펴면 괴롭다	fix	voice
+voice:doer-left-out	「胸を張られても」	「가슴을 펴도」	fix	voice
+voice:doer-left-out	「白崎、そこまで気を遣われるとやりにくいぞ」	has:신경을 쓰면	fix	voice
+voice:doer-left-out	「……酒を注がれたら、まず一度は口をつけてから置く、か」	has:술을 따르면	fix	voice
+voice:doer-left-out	人間、本当に意表を突かれると動けなくなるらしい。	has:의표를 찌르면	fix	voice
+voice:doer-left-out	正体を知られても、一定期間が経てば忘れてもらえる。	has:정체를 알아도	fix	voice
+voice:doer-left-out	いくら借りを返してもらうとはいえ、こんな彼女の姿を見せられたら放ってはいられなくなる。	has:모습을 보이면	fix	voice
+voice:doer-left-out	「数字の羅列や心電図を見せられても、どうせ分からん」	has:심전도를 보여도	fix	voice
+voice:doer-left-out	胸を揉まれては、はだけ、それを玉藻が肩紐をかけなおす……の繰り返し。	lacks:가슴을 주물러서는	keep	voice
+voice:doer-left-out	あんなかっこいい姿を見せられたら、	has:모습을 보이면	fix	voice
+voice:doer-left-out	「彼女のこんな姿を見せられれば、気が動転するのも無理はありませんよ」	has:모습을 보이면	fix	voice
+voice:doer-left-out	芹沢さんの本気を見せられたら、自分に才能があるなんて思えない。	has:진심을 보이면	fix	voice
+voice:doer-left-out	見られたら困る。	보여지면 곤란하다.	keep	voice
+voice:doer-left-out	食べられたら困る。	먹히면 곤란하다.	keep	voice
+voice:doer-left-out	足を踏まれたら痛い。	has:발을 밟히면	keep	voice
+voice:doer-left-out	本音を言われると困る。	속마음을 들으면 곤란하다.	keep	voice
+voice:doer-left-out	不快ではあったが、嫌味を言われても仕方がない。	has:비꼬는 말을 들어도	keep	voice
+voice:doer-left-out	嬉野さんに俺たちが付き合っていることを知られたら、間違いなく佳奈は根ほり葉ほり聞かれるだろう。	lacks:것을 알면	keep	voice
+voice:doer-left-out	「私がこんな演劇を見せられたら、何だこれって言いますよ」	lacks:연극을 보이면	keep	voice
+voice:doer-left-out	「話によると、モデルはカメラを向けられると反射的にポーズを取るらしいぞ」	lacks:카메라를 향하면	keep	voice
+voice:doer-left-out	思わぬタイミングで話を振られたらしく、レナは赤面する。	lacks:말을 건 것	keep	voice
+voice:doer-left-out	この人にも、他の誰にだって、心の中を知られてはいけない。	lacks:마음속을 알아	keep	voice

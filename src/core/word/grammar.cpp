@@ -532,19 +532,6 @@ bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     return false;
 }
 
-void OwnPassives(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->detail->record != 1 || it->lexical || it->selected < 0) continue;
-        const std::string passive = KoreanPassiveLemma(output::Lemma(it->EntryText(it->selected), f.families));
-        if (passive.empty()) continue;
-        // A passive in 이다 is a plain verb, not the copula.
-        output::Conjugated c = output::Conjugating(passive, '&', passive.ends_with("이다") ? "규칙" : "", f.families);
-        if (!c.error.empty()) continue;
-        it->detail->record = 0;
-        it->lexical = true;
-        it->AssignEntrySurface(it->selected, c.target);
-    }
-}
 
 namespace {
 
@@ -917,6 +904,63 @@ bool AdverseCondition(const Item* it, std::string_view rest) {
     return n != nullptr && StartsWithMember(n->group->surface, dict::ClassMembers("stem.adverse-outcome"));
 }
 
+// Whether a noun of noun.suffered-act, or a noun that ends in こと (同じこと), stands right before
+// item it, or before a を right before it (どんなことされた, 何をされた).
+bool SufferedActBefore(const Item* it) {
+    const Item* p = it->prev;
+    if (p != nullptr && p->group->surface == "を") p = p->prev;
+    if (p == nullptr || p->detail->Yougo()) return false;
+    const std::string_view s = p->group->surface;
+    return dict::InClass("noun.suffered-act", s) || s.ends_with("こと");
+}
+
+// Whether the (ら)れ of verb item it, followed by rest, is a condition (ending.voice-condition but ては)
+// with an object of を before it in its clause or in the word (服を着られたら, 銃口を向けられても).
+bool ConditionWithObject(const Item* it, std::string_view rest) {
+    // たらしい is a guess, not a condition (話を振られたらしく), and ては also strings acts one after another
+    // (胸を揉まれては、はだけ).
+    return StartsWithMember(rest, dict::ClassMembers("ending.voice-condition")) && !rest.starts_with("たらし") &&
+           !rest.starts_with("ては") && (Has(it->group->surface, "を") || ActedObjectBefore(it));
+}
+
+// Whether a noun before a subject or topic particle (が, は, も), or a person or an animal before a
+// particle in に or before から, によって or により, stands before item it in its sentence: who the
+// passive is done to (私がこんな演劇を見せられたら, モデルはカメラを向けられると) or who may do it
+// (嬉野さんに俺たちが付き合っていることを知られたら, 誰にだって), though another clause stands between.
+bool PassiveRoleInSentence(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s.empty() || Has("。！？!?「」『』", s)) break;
+        const Entry* e = p->detail->Yougo() ? nullptr : p->group->At(std::max(p->selected, 0));
+        const Item* a = p->prev;
+        if (e == nullptr || e->cls != 'P' || a == nullptr || a->detail->Yougo()) continue;
+        if (s == "が" || s == "は" || s == "も") return true;
+        if ((s.starts_with(kAgentNi) || s == "から" || s.starts_with("によ")) && Person(a->Attr(std::max(a->selected, 0)))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Whether surface has a Korean passive lemma of its own in kPassiveLemmas (褒め 칭찬받다), not one in
+// 지다 that only puts 어지다 on a verb (見せ 보여지다).
+bool OwnPassiveLemma(std::string_view surface) {
+    for (const PassiveLemma& p : kPassiveLemmas) {
+        if (p.surface == surface) return !p.lemma.substr(0, p.lemma.find(':')).ends_with("지다");
+    }
+    return false;
+}
+
+// Whether every candidate of the dictionary word item it reads its passive with 어지다 or 되다 (知られ
+// 알려지다), no Korean passive word that takes an object.
+bool WordlessPassive(Flusher& f, const Item* it) {
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        const std::string lemma = ItemLemma(f, it, slot);
+        if (!lemma.ends_with("지다") && !lemma.ends_with("되다")) return false;
+    }
+    return !it->group->entries.empty();
+}
+
 // The voice that candidate slot of item it reads: the potential (볼 수 있다, gram Ke), the
 // respectful form in 시, or else none.
 Voice CandidateVoice(Flusher& f, const Item* it, int slot) {
@@ -1034,7 +1078,9 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
                         CompoundAction(surface) || Transitive(it) || ObjectBefore(it) || Has(surface, "を");
     if (agent != nullptr && object) return Voice::Passive;
     if (Respectful(f, it, form, stem, rest, passive, ichidan)) return Voice::Respectful;
-    if (form == VoiceForm::Godan) return Voice::Passive;
+    if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
+        return Voice::Passive;
+    }
     if (object && StartsWithMember(rest, dict::ClassMembers("ending.voice-desire"))) return Voice::Passive;
     if (AbilityScope(it, rest)) return Voice::Potential;
     // A trouble and a verb of feeling tell the passive from the potential, which only the られ of an
@@ -1043,6 +1089,138 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (ichidan && object && dict::InClass("verb.spontaneous", stem)) return Voice::Spontaneous;
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
     return Voice::None;
+}
+
+// The e-row kana that ends the potential of a godan verb and the conjugation kind (the last digit of
+// the part code) of that verb (撮れ 撮る 8, 書け 書く 1).
+constexpr std::string_view kPotentialKana[][2] = {
+    {"え", "0"}, {"け", "1?"}, {"げ", "2"}, {"せ", "3"}, {"て", "4"}, {"ね", "<"}, {"べ", "6"}, {"め", "5"}, {"れ", "8"},
+};
+
+// Whether item p, before a verb, names the place where it is done: ここで, そこで, どこで, or で, では
+// after a noun of a place (VPl).
+bool PlaceDe(const Item* p) {
+    const std::string_view s = p->group->surface;
+    if (s == "ここで" || s == "そこで" || s == "あそこで" || s == "どこで" || s == "ここでは" || s == "そこでは") return true;
+    const Item* a = p->prev;
+    return (s == "で" || s == "では") && a != nullptr && !a->detail->Yougo() && Has(a->Attr(std::max(a->selected, 0)), "VPl");
+}
+
+// Whether the clause before verb item it, followed by rest, asks for the potential of a godan verb
+// rather than the intransitive word of the same spelling (spec GRM-10): an object of を, a word of
+// word.ability-scope, or a place of で before a negative or a polite non-past (ここで写真は撮れません).
+bool PotentialClause(const Item* it, std::string_view rest) {
+    if (ObjectBefore(it) || AbilityScope(it, rest)) return true;
+    const bool form = rest.starts_with("な") || rest.starts_with("ず") || rest.starts_with("ぬ") || rest.starts_with("ませ") ||
+                      rest.starts_with("ます");
+    for (const Item* p = it->prev; form && p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (PlaceDe(p)) return true;
+    }
+    return false;
+}
+
+// A dictionary word that spells the potential of a godan verb (撮れ 撮る) and reads only the Korean
+// passive of that verb (찍히다 of 찍다) is read as that potential when its clause asks for one
+// (PotentialClause): the godan verb analysed at its place, as the analysis reads a godan potential
+// (ここで写真は撮れません 사진은 찍을 수 없습니다).
+void SpelledPotential(Flusher& f, Item* it) {
+    if (it->detail->record != 0 || it->detail->cls != kDetailVerb || it->Fixed() || it->group->entries.empty()) return;
+    const std::string_view surface = it->group->surface;
+    const text::Rune last = DecodeLastRune(surface);
+    if (surface.size() <= last.size || !text::IsKanji(text::DecodeRune(surface).cp)) return;
+    const std::string_view kana = surface.substr(surface.size() - last.size);
+    std::string_view kinds;
+    for (const auto& [k, kind] : kPotentialKana) {
+        if (kana == k) kinds = kind;
+    }
+    if (kinds.empty()) return;
+    const std::string_view base = f.w.arena.Keep(std::string(surface.substr(0, surface.size() - kana.size())));
+    const Lookup found = f.w.DoLookup(base, kModeGeneral);
+    std::vector<std::string> passives;
+    for (const Record* r = found.records; r != nullptr; r = r->child) {
+        if (r->source != base || At(r->partCode, 1) != '4' || !Has(kinds, std::string(1, At(r->partCode, 3)))) continue;
+        if (std::string p = KoreanPassiveLemma(output::Lemma(r->target, f.families)); !p.empty()) passives.push_back(std::move(p));
+    }
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        if (At(it->Code(slot), 2) != '7' || std::ranges::find(passives, ItemLemma(f, it, slot)) == passives.end()) return;
+    }
+    const std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
+    if (!PotentialClause(it, rest)) return;
+    Item* potential = f.w.InsertLateCandidate(it->text, it->start, it->tokenIndex, found.records);
+    if (potential == nullptr || potential->detail->record != 4 || potential->length != it->length ||
+        potential->group->surface != base) {
+        return;
+    }
+    it->group = potential->group;
+    it->detail = potential->detail;
+    it->detail->voice = Voice::Potential;
+}
+
+// Whether surface is a dictionary word in (ら)れ made from a godan verb (知られ 知る), whose (ら)れ
+// with an object is the passive; that of an ichidan verb (受け止められ) is as often the potential.
+bool GodanPassiveWord(Flusher& f, std::string_view surface) {
+    std::string_view base;
+    const std::vector<const Record*> verbs = BaseVerbRecords(f, surface, base);
+    return !verbs.empty() && At(DefaultRecord(verbs)->partCode, 3) != '7' && !PassiveBaseVerb(f, surface).empty();
+}
+
+// Whether the Korean that verb item it selected reads a passive that takes no object: 어지다 yet to be
+// written (record 1), a one-word lemma in 지다 or in a noun with 되다 (not the 게 되다 of a
+// causative-passive), or one of ko-verb.passive-subject.
+bool SubjectOnlyPassive(Flusher& f, const Item* it) {
+    const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+    // A Korean verb in 지다 takes no 어지다: it is written as it is, an active verb (데리고 사라지다).
+    if (it->detail->record == 1 && !it->lexical) return !lemma.ends_with("지다");
+    if (it->detail->record != 0) return false;
+    constexpr std::string_view kDoeda = "되다";
+    // A phrase takes its object with its first verb (데리고 사라지다).
+    if (Has(lemma, " ")) return false;
+    return lemma.ends_with("지다") ||
+           (lemma.ends_with(kDoeda) && lemma.size() > kDoeda.size() && lemma[lemma.size() - kDoeda.size() - 1] != ' ') ||
+           dict::InClass("ko-verb.passive-subject", lemma);
+}
+
+// The object of a passive whose Korean takes none is its subject (名前を呼ばれた 이름이 불렸다, 秘密を
+// 知られた 비밀이 알려졌다): the を before verb item it in its clause, with no pause, no other particle and
+// no verbal noun between, is (이)가, unless a subject が stands before it in the clause (彼が手紙を書かれた), which would
+// make two.
+// The passive is the reading the voice step decided, or a dictionary word in (ら)れ of a godan verb
+// that no signal decided (知られ 알려지다).
+void ObjectAsSubject(Flusher& f, Item* it) {
+    const bool passive = it->detail->voice == Voice::Passive || it->detail->voice == Voice::Spontaneous ||
+                         (it->detail->voice == Voice::None && GodanPassiveWord(f, it->group->surface));
+    // The (ら)れ of the auxiliary しまう (姿を隠してしまわれた) is respectful, and its object is the verb's.
+    const std::string_view surface = it->group->surface;
+    if (!passive || dict::InClass("verb.respectful", surface) || surface.ends_with("てしま") || surface.ends_with("でしま") ||
+        !SubjectOnlyPassive(f, it)) {
+        return;
+    }
+    // The られ of an ichidan verb with an object outside the past and the て form is as often the
+    // potential (これなら奴らをやっつけられる).
+    const std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
+    if (const char k = At(it->Code(it->selected), 2); (k == '7' || k == ';' || k == '=') && rest.starts_with(kRare)) {
+        const std::string_view form = From(rest, static_cast<long>(kRare.size()));
+        if (!form.starts_with("た") && !form.starts_with("て")) return;
+    }
+    for (Item* p = it->prev; p != nullptr; p = p->prev) {
+        if (p->AfterPause(false) && p->prev != nullptr && p->prev->group->surface == "を") return;
+        // A particle or a verbal noun between belongs to a word of its own (解消を前提に結ばれた,
+        // 一生を本に囲まれて, ビームを反射するために作られた).
+        if (const Entry* e = p->detail->Yougo() ? nullptr : p->group->At(std::max(p->selected, 0));
+            e != nullptr && ((e->cls == 'P' && p->group->surface != "を") || GrammarCode(e->gattr, "Hd"))) {
+            return;
+        }
+        if (p->group->surface == "を") {
+            for (const Item* q = p->prev; q != nullptr && !ClauseBreak(q); q = q->prev) {
+                if (q->group->surface == "が" && q->prev != nullptr && !q->prev->detail->Yougo()) return;
+            }
+            if (!p->Fixed() && p->selected >= 0 && p->EntryText(p->selected) == "(을)를") {
+                p->AssignEntrySurface(p->selected, "(이)가");
+            }
+            return;
+        }
+        if (ClauseBreak(p)) return;
+    }
 }
 
 }  // namespace
@@ -1054,7 +1232,10 @@ void DecideVoice(Flusher& f) {
         std::string_view stem, rest;
         bool ichidan = false;
         const VoiceForm form = VoiceFormOf(f, it, stem, rest, spelled, ichidan);
-        if (form == VoiceForm::None) continue;
+        if (form == VoiceForm::None) {
+            SpelledPotential(f, it);
+            continue;
+        }
         const bool passive = form == VoiceForm::Godan || (form == VoiceForm::Rare && PassiveReading(f.w, it, rest));
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
@@ -1063,12 +1244,21 @@ void DecideVoice(Flusher& f) {
         const bool passiveVoice = v == Voice::Passive || v == Voice::Spontaneous;
         // The candidates of a word no rule may change (a user's word) stay as they are.
         const bool own = it->Fixed();
+        // A passive in a condition with its object and no agent whose Korean has no passive word
+        // of its own (a dictionary word no signal decides reads the passive of its candidates) is
+        // left to the analysed passive, which condition-active writes in the active (服を着られたら
+        // 옷을 입으면, 正体を知られても 정체를 알아도).
+        const bool doerLeftOut = (passiveVoice || (form == VoiceForm::Lexical && v == Voice::None)) && !own &&
+                                 agent == nullptr && ConditionWithObject(it, rest) && !PassiveRoleInSentence(it);
+        it->detail->doerLeftOut = doerLeftOut;
         if (form == VoiceForm::Lexical) {
             // A word whose candidates all read the potential is read as the passive of the verb it is
             // made from when that verb takes an object (調べられた 조사되었다).
             if (!own && v != Voice::None && !KeepVoiceCandidates(f, it, v) && passiveVoice &&
                 BaseTakesObject(f, spelled) && ReadAsBaseVerb(f, it, spelled)) {
                 WriteLexicalPassive(f, it);
+            } else if (doerLeftOut && WordlessPassive(f, it)) {
+                ReadAsBaseVerb(f, it, spelled);
             }
         } else if (form == VoiceForm::Shorter) {
             if (!own && passiveVoice && ReadAsBaseVerb(f, it, spelled)) WriteLexicalPassive(f, it);
@@ -1082,7 +1272,10 @@ void DecideVoice(Flusher& f) {
             // A passive with a person before に and an object is that person's act (voice-agent,
             // GRM-2): no Korean passive word is written for it (弟にケーキを食べられた 남동생이
             // 케이크를 먹었다, not 먹혔다).
-            if (passiveVoice && !(agent != nullptr && ni && ActedObjectBefore(it))) WriteLexicalPassive(f, it);
+            if (passiveVoice && !(agent != nullptr && ni && ActedObjectBefore(it)) &&
+                !(doerLeftOut && !OwnPassiveLemma(it->group->surface) && !SayPassiveApplies(it))) {
+                WriteLexicalPassive(f, it);
+            }
         }
         // The agent of a passive after a person or an animal is 에게 (猫に引っかかれた 고양이에게).
         if (passiveVoice && agent != nullptr && ni && !agent->Fixed()) {
@@ -1092,6 +1285,28 @@ void DecideVoice(Flusher& f) {
             }
             if (!kept.empty()) agent->group->entries = std::move(kept);
         }
+    }
+}
+
+void OwnPassives(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->detail->record != 1 || it->lexical || it->selected < 0) continue;
+        const std::string passive = KoreanPassiveLemma(output::Lemma(it->EntryText(it->selected), f.families));
+        if (passive.empty()) {
+            // Without a Korean passive word Korean says such a passive in the active (服を着られたら
+            // 옷을 입으면), not with 어지다 and an object.
+            if (it->detail->doerLeftOut) it->detail->record = 0;
+            continue;
+        }
+        // A passive in 이다 is a plain verb, not the copula.
+        output::Conjugated c = output::Conjugating(passive, '&', passive.ends_with("이다") ? "규칙" : "", f.families);
+        if (!c.error.empty()) continue;
+        it->detail->record = 0;
+        it->lexical = true;
+        it->AssignEntrySurface(it->selected, c.target);
+    }
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (it->detail->Yougo() && it->selected >= 0) ObjectAsSubject(f, it);
     }
 }
 
