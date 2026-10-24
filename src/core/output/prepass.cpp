@@ -1087,8 +1087,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     using Result = std::pair<std::string, bool>;
     JoinBeforeDoe(t);
-    // An auxiliary of ko-aux.joined after the 아/어 form is written joined to it (먹어버렸다; LAY-11).
-    if (nextIndex == i + 1 && First(item.ending.text) == '6' && dict::InClass("ko-aux.joined", EntryText(items[nextIndex]))) {
+    // An auxiliary verb (gram Ds) read as a word of ko-aux.joined after the 아/어 form is
+    // written joined to it (食べてしまった 먹어버렸다); the main verb stays apart (拾って捨てた
+    // 주워 버렸다; LAY-11).
+    if (nextIndex == i + 1 && First(item.ending.text) == '6' && Contains(GAttr(items[nextIndex]), "Ds") &&
+        dict::InClass("ko-aux.joined", EntryText(items[nextIndex]))) {
         return Result(std::move(t), false);
     }
     // A comma keeps its space before a run of symbols as before a word (마인, ％＆＄＃).
