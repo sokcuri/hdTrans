@@ -438,6 +438,42 @@ bool JanKa(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The casual negative ねえ, ねー after a word that takes ない: after わけ or 訳 (わけがない), しか or たくも
+// (わけねーだろ, しかねーし, したくもねーわ), and after a noun in kanji or katakana before よ, だろ, じゃ, し, けど or ぞ,
+// which follow no particle ね (需要ねーよ, 関係ねーじゃん, 魚雷ねえけど; not 綺麗ねー。, 長波ねぇ！).
+bool NounNee(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    bool noun = false;
+    bool word = false;
+    for (const std::string_view w : {"わけ", "訳", "しか", "たくも"}) {
+        if (s.substr(p).starts_with(w)) {
+            p += w.size();
+            word = true;
+            break;
+        }
+    }
+    if (!word) {
+        if (Before(s, pos) != 0 && (IsKanjiClass(Before(s, pos)) || IsKatakanaRune(Before(s, pos)))) return false;
+        const auto nounRune = [](char32_t c) { return IsKanjiClass(c) || IsKatakanaRune(c); };
+        if (!Take(s, p, nounRune)) return false;
+        while (Take(s, p, nounRune)) {
+        }
+        noun = true;
+    }
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ね")) return false;
+    const size_t run = p;
+    while (p < s.size() && In(At(s, p).cp, U"ぇえー")) p += At(s, p).size;
+    if (p == run) return false;
+    if (noun) {
+        bool tail = false;
+        for (const std::string_view t : {"よ", "だろ", "じゃ", "し", "けど", "ぞ"}) tail = tail || s.substr(p).starts_with(t);
+        if (!tail) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 // ([ぁ-ゖ一-龥々])([おこごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
 // volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな, しちゃおっかな). Not
 // そっか: after kana (そっか, あそっか) it is そうか read as an answer, and after kanji the sound
@@ -821,6 +857,10 @@ std::string RewriteCasual(std::string_view in) {
             stem += "ら";
         }
         return Cat({stem, "ない", g.group[2]});
+    });
+    text = ReplaceAll(text, NounNee, [](const Match& m) {
+        const bool wake = m.group[1] == "わけ" || m.group[1] == "訳";  // わけがない, not 訳ない (easy)
+        return Cat({m.group[1], wake ? "がない" : "ない"});
     });
     text = ReplaceAll(text, Chimau, [](const Match& m) {
         const Match g = Rematch(m, Chimau);
