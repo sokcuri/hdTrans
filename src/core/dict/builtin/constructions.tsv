@@ -122,5 +122,5 @@ cx:ne-promise:40	SPC-5	&&6 F+0== "verb" F+0== "selected" Y+0== "0군" U+0== "R�
 //= baii-question	after ne-promise	The ばいい read 면 된다 asks before a question mark (면 돼?) and wonders after a question word at the end of a sentence (면 좋을까).
 cx:baii-question:10	SPC-6	&&3 I+0== "Rばいい" Y+0== "2면 된다" ||2 S+1== "？" S+1== "?"	set-ending "2면 돼"	どうすればいい？ 어떻게 하면 돼?
 cx:baii-question:20	SPC-6	&&4 I+0== "Rばいい" Y+0== "2면 된다" ||2 F+0== "last" F+1== "boundary" ||2 S+0== @question.wonder <0 S+0== @question.wonder F+0== "boundary"	set-ending "2면 좋을까"	どうすればいい 어떻게 하면 좋을까
-cx:baii-question:30	SPC-6	&&6 S+0== "い" D+0== "R$AF@" U+0== "~んだ" Y+0== "1다" Y-1== "R면" ||2 S+1== "？" S+1== "?"	set-ending "1지"	どうすればいいんだ？ 어떻게 하면 되지?
+cx:baii-question:30	SPC-6	&&6 S+0== "い" D+0== "R$AF@" U+0== "~んだ" Y+0== "1다" Y-1== "R면" ||2 S+1== "？" S+1== "?"	set-ending "6"	どうすればいいんだ？ 어떻게 하면 돼?
 cx:baii-question:40	SPC-6	&&7 S+0== "い" D+0== "R$AF@" U+0== "~んだ" Y+0== "1다" Y-1== "R면" ||3 F+0== "quote-end" F+0== "drawn" &&2 F+0== "utterance-end" !1 S+1== @mark.comma <0 S+0== @question.wonder F+0== "boundary"	set-ending "1지"	どう拾えばいいんだ。 어떻게 주우면 되지.

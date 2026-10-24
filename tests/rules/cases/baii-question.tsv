@@ -13,10 +13,10 @@ cx:baii-question:10	「こんなときは、どうすればいい？」	rule:cx:
 cx:baii-question:10	「誰に聞けばいい？」	rule:cx:baii-question:10=2면 돼	fix	rewrites
 cx:baii-question:10	「いつ行けばいい？」	rule:cx:baii-question:10=2면 돼	fix	rewrites
 cx:baii-question:20	何を残せばいい。	rule:cx:baii-question:20=2면 좋을까	fix	rewrites
-cx:baii-question:30	「どうすればいいんだ？」	rule:cx:baii-question:30=1지	fix	rewrites
-cx:baii-question:30	「どう使えばいいんだ？」	rule:cx:baii-question:30=1지	fix	rewrites
-cx:baii-question:30	「俺はどうすればいいんだ……？」	rule:cx:baii-question:30=1지	fix	rewrites
-cx:baii-question:30	「何をすればいいんだ？」	rule:cx:baii-question:30=1지	fix	rewrites
+cx:baii-question:30	「どうすればいいんだ？」	rule:cx:baii-question:30=6	fix	rewrites
+cx:baii-question:30	「どう使えばいいんだ？」	rule:cx:baii-question:30=6	fix	rewrites
+cx:baii-question:30	「俺はどうすればいいんだ……？」	rule:cx:baii-question:30=6	fix	rewrites
+cx:baii-question:30	「何をすればいいんだ？」	rule:cx:baii-question:30=6	fix	rewrites
 cx:baii-question:40	「どう拾えばいいんだ。」	rule:cx:baii-question:40=1지	fix	rewrites
 cx:baii-question:10	「どうすればいいですか？」	!rule:cx:baii-question:10	keep	rewrites
 cx:baii-question:20	「何を言えばいいかわからない」	!rule:cx:baii-question:20	keep	rewrites
