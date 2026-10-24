@@ -764,7 +764,8 @@ HD_TEST(pipeline_sound_extra_isolation) {
 }
 
 // An interjection before a pause or an ellipsis is read as a sound although an end row
-// has the same key; before other text the end row's key still rules it out.
+// has the same key, and so is a sound with no word before it that ends in its と or before
+// no kanji or katakana; after a word or before other text the end row's key still rules it out.
 HD_TEST(pipeline_sound_before_pause_over_end_row) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());
@@ -778,6 +779,9 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"ぽい…", "포이…"},
         {"ぽいぽい。", "포이포이。"},
         {"ぽい捨て", "ぽい捨て"},
+        {"敬礼！ぴょん！", "敬礼！뿅！"},
+        {"ぴょんと跳ねた", "폴짝 跳ねた"},
+        {"凄いぴょん！", "凄いぴょん！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
