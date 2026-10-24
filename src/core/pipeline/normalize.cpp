@@ -17,6 +17,7 @@
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
+#include "core/dict/classes.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -345,12 +346,26 @@ bool StartEe(std::string_view s, size_t pos, Match& m) {
 }
 
 // […‥―─—] え[ぇえー]* ([…‥]*[？?]): え after a pause inside an utterance that asks
-// (へ……え？, ……て、…え？) as group 1 and the question as group 2.
+// (へ……え？, ……て、…え？) as group 1 and the question as group 2; also え after a pause or
+// a comma right before a pause, the hesitation (あっ、え…違う 어…), with an empty group 2.
 bool PauseEe(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (!OneOf(s, p, U"…‥―─—")) return false;
+    const auto rune = [&] { return p < s.size() ? s.substr(p, At(s, p).size) : std::string_view(); };
+    bool comma = false;
+    if (!OneOf(s, p, U"…‥―─—")) {
+        if (!dict::InClass("mark.comma", rune())) return false;
+        p += At(s, p).size;
+        comma = true;
+    }
     const size_t at = p;
     if (!Lit(s, p, "え")) return false;
+    if (dict::InClass("mark.pause", rune())) {
+        m.group[1] = Span(s, pos, at);
+        m.group[2] = {};
+        m.end = p;
+        return true;
+    }
+    if (comma) return false;
     return Repeat(s, p, InSet(U"ぇえー"), 0, kUnbounded, [&](size_t t) {
         return Repeat(s, t, InSet(U"…‥"), 0, kUnbounded, [&](size_t u) {
             size_t v = u;

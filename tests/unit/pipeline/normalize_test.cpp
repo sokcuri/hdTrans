@@ -233,6 +233,12 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"あれ―は誰？"sv, "あれ―は誰？"sv},
         {"あれ……が欲しい"sv, "あれ……が欲しい"sv},
         {"え――はい"sv, "えっ――はい"sv},
+        // え after a comma or a pause right before a pause hesitates; before a question only
+        // after a pause.
+        {"あっ、え…違う"sv, "あっ、えっ…違う"sv},
+        {"……え……本当"sv, "……えっ……本当"sv},
+        {"そう、え？"sv, "そう、え？"sv},
+        {"考え…"sv, "考え…"sv},
     };
     Check(RewriteInterjections, cases);
 }

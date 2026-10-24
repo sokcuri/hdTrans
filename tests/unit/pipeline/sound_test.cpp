@@ -202,12 +202,29 @@ HD_TEST(pipeline_sound) {
         {"「わ、わ、私は……」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、私は……」"},
         // A syllable said twice is a stutter even where it alone is a word (さ、 well).
         {"「さ、さ、最低」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、最低」"},
-        {"「さ、最低」", "「자、最低」"},
+        {"「さ、一緒に」", "「자、一緒に」"},
         // A dash run separates; a small vowel stutters its plain vowel; before a dash a lone
         // vowel stands alone.
         {"「ぃ―――いやぁッ」", "「\xEE\x80\x80" "―――싫엇」"},
         {"「あ――本当に」", "「あ――本当に」"},
-        {"「う――痛い」", "「う――痛い」"},
+        {"「う――痛い」", "「으――痛い」"},
+        // A syllable that also stands alone stutters a word in kanji whose reading it starts,
+        // after any separator; a head of one kanji is that kanji before kana. と or で that
+        // opens a line is the conjunction. A lone lead of one kana stands before an ellipsis.
+        {"「ま、待って」", "「\xEE\x80\x80" "、待って」"},
+        {"「ま、待機中」", "「ま、待機中」"},
+        {"「ま、仕方ない」", "「ま、仕方ない」"},
+        {"「お……俺は」", "「\xEE\x80\x80" "……俺は」"},
+        {"「む、無理」", "「\xEE\x80\x80" "、無理」"},
+        {"「と、時計」", "「\xEE\x80\x80" "、時計」"},
+        {"と、時計を見た", "と、時計を見た"},
+        {"「さ……行こう」", "「자……行こう」"},
+        {"「う、多分」", "「으、多分」"},
+        {"「じゅ――う！」", "「じゅ――う！」"},
+        {"「む…、むっ」", "「む…、뭇」"},
+        {"「ちょ…直撃」", "「\xEE\x80\x80" "…直撃」"},
+        {"「ちょ、直撃」", "「잠깐、直撃」"},
+        {"「う…美味い」", "「\xEE\x80\x80" "…美味い」"},
         // Longer pieces that each begin the next: a kana mark for each kana of the piece and
         // a rest mark for each kana of the word it does not reach.
         {"「ご、ごめ、ごめんなさい」",
