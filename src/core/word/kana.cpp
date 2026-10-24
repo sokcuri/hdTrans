@@ -1,5 +1,6 @@
 #include "core/word/kana.h"
 
+#include <algorithm>
 #include <deque>
 #include <string>
 #include <vector>
@@ -120,11 +121,16 @@ struct Run {
         if (fault) return;
         for (long j = i < 0 ? 0 : i; j <= Size(); j++) {
             if (!Has(j, search)) continue;
-            scratch.assign(cells.begin(), cells.begin() + j);
+            scratch.clear();
             if (replacement == kEmptyCell) scratch.push_back(replacement);
             else AppendCells(scratch, replacement);
-            scratch.insert(scratch.end(), cells.begin() + j + static_cast<long>(CellCount(search)), cells.end());
-            cells.swap(scratch);
+            const auto at = cells.begin() + j;
+            const long count = static_cast<long>(CellCount(search));
+            if (static_cast<long>(scratch.size()) == count) {
+                std::copy(scratch.begin(), scratch.end(), at);
+            } else {
+                cells.insert(cells.erase(at, at + count), scratch.begin(), scratch.end());
+            }
             return;
         }
         fault = true;

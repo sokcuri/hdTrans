@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <ctime>
 #include <string>
 #include <string_view>
 
@@ -77,4 +79,28 @@ HD_TEST(kana_hiragana_cases) {
     HD_CHECK_EQ(TransliterateHiragana("１ａ"), std::string("1a"));
     HD_CHECK_EQ(TransliterateHiragana("ゔぁいおりん"), std::string("바이오린"));
     HD_CHECK_EQ(TransliterateHiragana("ゔゕゖ"), std::string("부카케"));
+}
+
+// The cells of a run are edited in place, so transliterating sixteen times the run takes about
+// sixteen times as long; copying the cells at every edit makes it over a hundred times.
+HD_TEST(kana_katakana_run_time_grows_with_its_length) {
+    auto fastest = [](int n, std::string& out) {
+        std::string in;
+        for (int i = 0; i < n; i++) in += "メー";
+        double best = 0;
+        for (int i = 0; i < 3; i++) {
+            const std::clock_t start = std::clock();
+            if (!TransliterateKatakana(in, out)) out = "fault";
+            const double seconds = static_cast<double>(std::clock() - start) / CLOCKS_PER_SEC;
+            best = i == 0 ? seconds : std::min(best, seconds);
+        }
+        return best;
+    };
+    std::string shortOut, longOut;
+    const double shortRun = fastest(1000, shortOut);
+    const double longRun = fastest(16000, longOut);
+    std::string expected;
+    for (int i = 0; i < 16000; i++) expected += "메이";
+    HD_CHECK_EQ(longOut, expected);
+    HD_CHECK(longRun < 40 * shortRun);
 }
