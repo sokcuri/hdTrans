@@ -5,8 +5,10 @@
 
 #include "core/dict/classes.h"
 #include "core/rules/match.h"
+#include "core/text/hangul.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/token.h"
 #include "core/word/conjugation.h"
 #include "core/word/item.h"
 #include "core/word/strings.h"
@@ -176,6 +178,18 @@ bool Item::InQuote() const {
     return QuoteDepthAfter(text.substr(0, std::min(text.size(), static_cast<std::size_t>(std::max(start, 0)))), depth) > 0;
 }
 
+bool Item::KoreanSpan() const {
+    if (w == nullptr || w->Span(tokenIndex) != tokenizer::kSpanWord) return false;
+    const std::string_view s = group->surface;
+    if (s.empty()) return false;
+    for (std::size_t k = 0; k < s.size();) {
+        const text::Rune r = text::DecodeRune(s.substr(k));
+        if (!text::Split(r.cp) && !text::IsSpace(r.cp)) return false;
+        k += r.size;
+    }
+    return true;
+}
+
 // Whether the word is a question word: alone, run on with a particle or kanji (何人, いつ以来), or
 // with other kana in a word that is no adverb, conjunction or adnominal (どうなる, どういう意味);
 // such a word only starts like one (なぜなら, 何しろ, 何より, どのみち, 何らかの).
@@ -303,6 +317,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Hz" && StartsSentence()) return true;
         // Qt: the word stands inside a quote (G!= "Qt" for narration).
         if (c == "Qt") return InQuote();
+        // Kh: a word span of Hangul (두근두근, 정말), see KoreanSpan.
+        if (c == "Kh") return KoreanSpan();
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;

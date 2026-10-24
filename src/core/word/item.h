@@ -215,6 +215,10 @@ public:
     bool StartsSentence() const;
     // Whether the word stands inside 「」 or 『』, a quote an earlier line left open included.
     bool InQuote() const;
+    // Whether the word is a word span of Hangul syllables and spaces only (rule code Kh): Korean
+    // the sound stage wrote or the input holds, whose part of speech is unknown; a span with a
+    // mask (자○) is a noun.
+    bool KoreanSpan() const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
     // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
     bool AfterQuestionWord() const;

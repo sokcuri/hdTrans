@@ -162808,7 +162808,7 @@ ttt	ttt	K110			GN				jisjk:201744
 垈	누타	N130	QCTVPl		GN				jisjk:318849		
 型	형태	N110	VPe		GN				jisjk:168530		
 型	형	N110		On	GN				jisjk:259593		
-型	형	N110		Z7	GN	3119	||1 ||4 S-1== "A" S-1== "B" S-1== "O" S-1== "AB"	型 앞말이 A·B·O·AB이면 혈액형의 형을 고른다. (미발동: rare-context)	jisjk:341667		
+型	형	N110		Z7Zs	GN	3119	||1 ||4 S-1== "A" S-1== "B" S-1== "O" S-1== "AB"	型 앞말이 A, B, O, AB이면 혈액형의 형을 고른다. (미발동: rare-context)	jisjk:341667		
 型ど	본&A8@	M448			GN				jisjk:143161		
 型どおりの	판에 박은 듯한	C0D1			GN				jisjk:4782		
 型に抜	틀로 찍어 &A6@	M431			GN				jisjk:95970		
@@ -297281,7 +297281,7 @@ ttt	ttt	K110			GN				jisjk:201744
 糺	규명&AV@	M443	ULw		GN				jisjk:139555		
 糺森	다다스노모리	N130	VPl		GN				jisjk:217603		
 糺町	타다스쵸	N130	QCTVPl		GN				jisjk:306688		
-系	계	Q110		Z7	GN				jisjk:266644		
+系	계	Q110		Z7Zs	GN				jisjk:266644		
 系	계열	Q110			GN	4695	||1 &&3 P-1== "13*" A-1== "QID" P+1== "2**"	앞에 회사 의미 코드의 고유명사가 있고 뒤에 조사가 오면 系를 계열로 고른다. (미발동: rare-context)	jisjk:371561		
 系列	계열	N110			GN				jisjk:15600		
 系列会社	계열회사	I110			GN				jisjk:108369		
@@ -354938,7 +354938,7 @@ ttt	ttt	K110			GN				jisjk:201744
 頬返し	취할 방법	N110			GN				jisjk:250796		
 頬骨	광대뼈	N110	VBp		GN				jisjk:154953		
 頭	머리	N110	XXXVBp		GN				jisjk:116095		
-頭	두	N110		Z7	GN				jisjk:116926		
+頭	두	N110			GN				jisjk:116926		
 頭	마리	N110		Ct	GN	1288	||1 &&2 P-1== "1**" G-1== "NdNj"	頭는 앞말이 숫자 문법 코드 Nd·Nj를 가진 명사이면 조수사 ‘마리’를 고른다.	jisjk:116927		
 頭	카시라	N130	QCT		GN				jisjk:259110		
 頭	두	N110		On	GN				jisjk:281909		
