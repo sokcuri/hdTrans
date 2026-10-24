@@ -3,6 +3,7 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
 //= adverb.habitual	Words of frequency or of the old days before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
@@ -97,6 +98,7 @@
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
+//= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
 //= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
@@ -219,6 +221,9 @@ adverb.habitual	ときどき
 adverb.habitual	何度も
 adverb.habitual	しばしば
 adverb.habitual	昔
+adverb.going-well	上手く
+adverb.going-well	旨く
+adverb.going-well	巧く
 
 adverb.observation	よく
 adverb.observation	いつも
@@ -2458,6 +2463,32 @@ noun.practice	鍛錬
 noun.practice	研鑽
 noun.practice	場数
 noun.practice	功績
+noun.receive-verbal	紹介
+noun.receive-verbal	支給
+noun.receive-verbal	指導
+noun.receive-verbal	治療
+noun.receive-verbal	診察
+noun.receive-verbal	許可
+noun.receive-verbal	推薦
+noun.receive-verbal	案内
+noun.receive-verbal	教育
+noun.receive-verbal	保護
+noun.receive-verbal	支援
+noun.receive-verbal	援助
+noun.receive-verbal	招待
+noun.receive-verbal	承認
+noun.receive-verbal	祝福
+noun.receive-verbal	歓迎
+noun.receive-verbal	応援
+noun.receive-verbal	検査
+noun.receive-verbal	手術
+noun.receive-verbal	相談
+noun.receive-verbal	指名
+noun.receive-verbal	表彰
+noun.receive-verbal	補償
+noun.receive-verbal	配達
+noun.receive-verbal	送金
+noun.receive-verbal	融資
 
 verb.naming	呼ぶ
 verb.naming	書く

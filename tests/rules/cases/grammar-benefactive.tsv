@@ -3,11 +3,11 @@ rule	input	expected	kind	layer
 cx:benefactive-agent:10	祖母に昔話をしてもらった。	할머니가 옛날이야기를 해 주었다.	fix	rewrites
 cx:benefactive-agent:10	母に料理をしてもらった。	어머니가 요리를 해 주었다.	fix	rewrites
 cx:benefactive-agent:10	姉に部屋の掃除をしてもらった。	언니가 방 청소를 해 주었다.	fix	rewrites
-cx:benefactive-agent:10	神主さんに紹介してもらったらしい。	제주 씨가 소개해 준 것 같다.	fix	rewrites
+cx:benefactive-agent:10	神主さんに紹介してもらったらしい。	제주 씨에게 소개받은 것 같다.	keep	rewrites
 cx:benefactive-agent:10	田中さんに解析してもらって解除、回収する。	타나카 씨가 해석해 주어 해제, 회수한다.	fix	rewrites
 cx:benefactive-agent:10	生徒に協力してもらったアンケートです	학생이 협력해 준 앙케이트입니다	fix	rewrites
 cx:benefactive-agent:10	姉に用意してもらった触媒を使って	언니가 준비해 준 촉매를 써	fix	rewrites
-cx:benefactive-agent:10	山本さんという人に武器を支給してもらって……？	야마모토 씨라는 사람이 무기를 지급해 주어……?	fix	rewrites
+cx:benefactive-agent:10	山本さんという人に武器を支給してもらって……？	야마모토 씨라는 사람에게 무기를 지급받아……?	keep	rewrites
 cx:benefactive-agent:10	医者に診察してもらった。	의사에게 진찰을 받았다.	keep	rewrites
 cx:benefactive-agent:10	看病してもらった。	간병받았다.	keep	rewrites
 cx:benefactive-agent:10	時々、英会話の指導をしてもらっていた。	가끔, 영어회화 지도를 받고 있었다.	keep	rewrites
@@ -45,3 +45,5 @@ cx:benefactive-agent:20	自分以外の誰かにしてもらうなんて、初�
 cx:benefactive-agent:30	早速だが、おまえの実力のほどを見極めさせてもらおう……。	rule:cx:benefactive-agent:30=&CJ@	fix	rewrites
 cx:benefactive-agent:30	では待たせてもらおうかしら	rule:cx:benefactive-agent:30=&CJ@	fix	rewrites
 cx:benefactive-agent:30	撮影したデータを消してもらおうか。	!rule:cx:benefactive-agent:30	keep	rewrites
+dict:benefactive:4	あちらにある棒につかまって、ぶらさがっていただきます。	!rule:dict:benefactive:4	keep	local
+dict:benefactive:4	貴方には、こちらで待っていただきます。	!rule:dict:benefactive:4	keep	local
