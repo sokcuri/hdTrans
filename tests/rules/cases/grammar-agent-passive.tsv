@@ -24,7 +24,7 @@ cx:voice-agent:10	犬に噛まれた。	개에게 물렸다.	keep	rewrites
 cx:voice-agent:10	先生に褒められた。	선생님에게 칭찬받았다.	keep	rewrites
 cx:voice-agent:10	陛下が彼に手紙を書かれた。	!rule:cx:voice-agent:10	keep	rewrites
 cx:voice-agent:20	俺が彼女に頭を撫でられた。	!rule:cx:voice-agent:20	keep	rewrites
-cx:voice-agent:20	彼女にこれを撫でられたくない。	!rule:cx:voice-agent:20	keep	rewrites
+cx:voice-agent:20	彼女に頭を撫でられたい。	!rule:cx:voice-agent:20	keep	rewrites
 cx:voice-agent:10	先生に名前を呼ばれた。	선생님에게 이름을 불렸다.	keep	rewrites
 cx:voice-agent:10	私は弟に手紙を破られた。	!rule:cx:voice-agent:10	keep	rewrites
 cx:voice-agent:10	私も弟に手紙を破られた。	!rule:cx:voice-agent:10	keep	rewrites
