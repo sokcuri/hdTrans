@@ -84,8 +84,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御喋り	수다	N110			GN							jisjk:165385
 御得	이득%D4@	G8U0			GN							jisjk:119541
 御得	이득	N110			GN							jisjk:341940
-おつかれ様	수고 하셨습니다	A9D0			GN							jisjk:349343
-御疲れ様	수고 하셨습니다	A9D0			GN							jisjk:349343
+おつかれ様	수고하셨습니다	A9D0			GN							jisjk:349343
+御疲れ様	수고하셨습니다	A9D0			GN							jisjk:349343
 御付き	수행원	I110	UAq		GN							jisjk:40587
 御付き	시중	I110	VHn		GN							jisjk:40588
 御父さん	아버지	K110	VQmUQfVHn		GN							jisjk:40589
@@ -20605,6 +20605,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ワタシタチ	우리	I120	VHn		GN						わたしたち	variant:watashitachi:2
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
 ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
+付いて	따라 &AH@	M41;			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:2
+付いて	따라 &AH@	M41=			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:3
 ヒゲ	수염	N110	VBp		GN							variant:katakana:1
 バッチリ	딱	E300			GN							variant:katakana:2
 ダチ	친구	N110	VHn		GN							variant:katakana:3
