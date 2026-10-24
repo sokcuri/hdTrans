@@ -26861,3 +26861,25 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 一人前の	1인분의	E0H0			GN	6925	||1 A+1== "VFd"	음식을 뜻하는 말 앞의 一人前の는 1인분의로 고른다.			いちにんまえの	w:27029
 精一杯の	혼신의	E0H0			GN						せいいっぱいの	w:27030
 頭がいっぱい	머릿속이 가득해	K110			GN						あたまがいっぱい	w:27031
+伊予国	이요국	N110	VPl		GN							w:27250
+備中国	빗추국	N110	VPl		GN							w:27251
+備前国	비젠국	N110	VPl		GN							w:27252
+備後国	빈고국	N110	VPl		GN							w:27253
+加賀国	가가국	N110	VPl		GN							w:27254
+因幡国	이나바국	N110	VPl		GN							w:27255
+大隅国	오스미국	N110	VPl		GN							w:27256
+尾張国	오와리국	N110	VPl		GN							w:27257
+常陸国	히타치국	N110	VPl		GN							w:27258
+日向国	휴가국	N110	VPl		GN							w:27259
+甲斐国	가이국	N110	VPl		GN							w:27260
+石見国	이와미국	N110	VPl		GN							w:27261
+肥前国	히젠국	N110	VPl		GN							w:27262
+肥後国	히고국	N110	VPl		GN							w:27263
+讃岐国	사누키국	N110	VPl		GN							w:27264
+豊前国	부젠국	N110	VPl		GN							w:27265
+豊後国	분고국	N110	VPl		GN							w:27266
+越中国	엣추국	N110	VPl		GN							w:27267
+越前国	에치젠국	N110	VPl		GN							w:27268
+越後国	에치고국	N110	VPl		GN							w:27269
+隠岐国	오키국	N110	VPl		GN							w:27270
+飛騨国	히다국	N110	VPl		GN							w:27271
