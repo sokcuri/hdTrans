@@ -509,6 +509,39 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
            dict::Written(r.cp) == text::DecodeRune(EntryText(b)).cp;
 }
 
+// Whether Korean t is a verb phrase made a noun, which stays apart from a する after it: two
+// words or more ending in 기 (대강 읽기, 함부로 버리기).
+bool VerbPhraseNoun(std::string_view t) { return t.find(' ') != std::string_view::npos && t.ends_with("기"); }
+
+// Whether the next item that writes something, written straight after item i, attaches to
+// the last syllable of i: a particle or the copula (not one written as a space), a word
+// written attached (Tu) that starts with a syllable (들, 에 대한), or the する of a noun the
+// dictionary writes with a space at its end. That space then goes (백년 해로를, 백년
+// 해로한다, 싶을 정도입니다, 우리에 대한); before a word it stays (백년 해로 생활).
+bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens, int i) {
+    int n = i + 1;
+    const int count = static_cast<int>(items.size());
+    while (n < count && EntryText(items[n]).empty() && (items[n].directIndex < 0 || items[n].ending.text.empty())) {
+        n++;
+    }
+    if (n >= count || TokenDistance(tokens, items[i].tokenIndex, items[n].tokenIndex) >= 2) return false;
+    const ResolvedItem& next = items[n];
+    const std::string_view text = EntryText(next);
+    if (text.empty() || text.front() == ' ') return false;
+    if (First(Code(next)) == '2' || (Contains(GAttr(next), "Tu") && text::Final(text::DecodeRune(text).cp) >= 0)) {
+        return true;
+    }
+    const std::string_view gloss = EntryText(items[i]);
+    const std::string_view word = gloss.substr(0, gloss.find_last_not_of(' ') + 1);
+    if (First(Code(items[i])) != '1' || word.size() == gloss.size() || First(Code(next)) != '4' ||
+        VerbPhraseNoun(word)) {
+        return false;
+    }
+    const auto starts = dict::ClassMembers("suru.verbal-noun-start");
+    return dict::InClass("suru.verbal-noun-whole", next.surface) ||
+           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+}
+
 // Whether item k follows item k - 1 with nothing between them: in the same token, or at the
 // start of the next one (a number token after a word).
 bool Follows(const std::vector<ResolvedItem>& items, int k) {
@@ -838,6 +871,10 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     std::string composed;
     if (record) composed = translated;
     auto [spaced, space] = Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
+    if (!space && AttachesAfter(items, tokens, i)) {
+        const size_t end = spaced.find_last_not_of(' ');
+        if (end != std::string::npos) spaced.erase(end + 1);
+    }
     if (record) inflected.push_back({i, std::move(composed), spaced, space});
     if (protectedToken) {
         spaced = tokenText;
@@ -1247,7 +1284,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                        std::none_of(body.begin(), body.end(), [](char32_t r) { return r == U'な' || r == U'の'; });
             };
             // Its Korean must not be a verb phrase made a noun (流し読み 대강 읽기, お留守番 집 지키기).
-            const bool koreanVerbalNoun = t.find(' ') == std::string::npos || !t.ends_with("기");
+            const bool koreanVerbalNoun = !VerbPhraseNoun(t);
             const bool verbalNoun = Contains(tags, "Hd") ||
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
                                     kanjiCompound(item.surface) ||
