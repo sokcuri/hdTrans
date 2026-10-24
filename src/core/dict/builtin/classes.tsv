@@ -16,6 +16,7 @@
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
+//= copula.kansai-negative	The dictionary words of the Kansai ちゃう that is じゃない after a noun (マザコンちゃうわ 마더 콤플렉스 아니거든); after a verb the same kana are the contracted てしまう (やっちゃうね), and constraint chau-after-verb drops the word there.
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
@@ -149,6 +150,8 @@
 //= ending.copies-bare	The bare endings of the last copy of an adjective or adjectival noun said again as a predicate (痛い痛い, 嫌だ嫌だ).
 //= ending.copies-plain	The Korean endings of that last copy that the copies may recast: the plain 1다 and the exclamative 6.
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
+//= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
+//= noun.coming-flow	Nouns of what keeps coming, whose 来ている comes on rather than has arrived (いい風きてる 좋은 바람 오고 있어, 波が来ている 파도가 오고 있다).
 //= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안돼 안됏).
 //= ko.joined-before-doe	Korean words written joined to a form of 되다 right after them (안 돼 안돼, 안 된다 안된다).
 //= ko-aux.joined	Korean auxiliary verbs, by their selected Korean, written joined to the 아/어 form before them when the Japanese entry is an auxiliary (gram Ds) (먹어 버렸다 먹어버렸다).
@@ -308,6 +311,7 @@
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
+//= verb.arrival-te	Stems of the verbs of moving to a place whose て form before 来る says the arrival, so that its ている is the state of having come (帰ってきている 돌아와 있다, 入ってきている 들어와 있다).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
@@ -783,6 +787,16 @@ counter.unit-abbrev	航戦
 counter.unit-abbrev	航空戦隊
 counter.unit-abbrev	戦隊
 counter.unit-abbrev	駆
+
+copula.kansai-negative	ちゃう
+copula.kansai-negative	ちゃうわ
+copula.kansai-negative	ちゃうねん
+copula.kansai-negative	ちゃうで
+copula.kansai-negative	ちゃうよ
+copula.kansai-negative	ちゃうか
+copula.kansai-negative	ちゃうやろ
+copula.kansai-negative	ちゃいます
+copula.kansai-negative	ちゃいますか
 
 ko-noun.cp-danghada	해고
 ko-noun.cp-danghada	퇴학
@@ -1673,6 +1687,7 @@ ko-adjective.stem-end	넓
 ko-adjective.stem-end	탐탁
 ko-adjective.stem-end	점잖
 ko-adjective.stem-end	고프
+ko-adjective.stem-end	뻔하
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -4763,6 +4778,26 @@ verb.result-state	引っ掛か
 verb.result-state	寄り掛か
 verb.result-state	もたれ掛か
 verb.result-state	老け
+verb.result-state	疲れ切
+verb.result-state	冷え切
+verb.result-state	弱り切
+verb.result-state	静まり返
+verb.result-state	青ざめ
+verb.result-state	蒼ざめ
+verb.result-state	むくれ
+verb.result-state	傷つ
+verb.result-state	吹っ切れ
+verb.result-state	帰って
+verb.result-state	戻って
+verb.result-state	入って
+
+verb.arrival-te	帰
+verb.arrival-te	戻
+verb.arrival-te	入
+verb.arrival-te	移
+verb.arrival-te	逃げ
+verb.arrival-te	引っ越
+verb.arrival-te	連れ
 
 verb.result-state-past	亡くな
 verb.result-state-past	生き残
@@ -5902,6 +5937,35 @@ noun.quote-request	提案
 noun.quote-request	主張
 noun.quote-request	説明
 noun.quote-request	報告
+
+noun.arrival-suru	転属
+noun.arrival-suru	転勤
+noun.arrival-suru	出張
+noun.arrival-suru	合流
+noun.arrival-suru	帰還
+noun.arrival-suru	帰国
+noun.arrival-suru	帰省
+noun.arrival-suru	移籍
+noun.arrival-suru	赴任
+noun.arrival-suru	着任
+noun.arrival-suru	入学
+noun.arrival-suru	入隊
+noun.arrival-suru	入社
+noun.arrival-suru	上京
+noun.arrival-suru	来日
+noun.arrival-suru	移住
+noun.arrival-suru	留学
+noun.arrival-suru	亡命
+noun.arrival-suru	避難
+
+noun.coming-flow	風
+noun.coming-flow	波
+noun.coming-flow	嵐
+noun.coming-flow	雨
+noun.coming-flow	雪
+noun.coming-flow	台風
+noun.coming-flow	津波
+noun.coming-flow	寒波
 
 ending.final-quote	か
 ending.final-quote	かな

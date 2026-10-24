@@ -168,6 +168,8 @@ bool HangulText(std::string_view s) {
 
 bool HonorificAt(std::string_view s, bool familiarOnly) {
     if (s.starts_with("くんだり")) return false;  // 千里くんだり: all the way to a place
+    // っちゃ is the contracted てしまう of a verb before it (ビビっちゃった), not the suffix っち.
+    if (s.starts_with("っちゃ") && !s.starts_with("っちゃん")) return false;
     const auto at = [&](std::string_view h) { return s.starts_with(h); };
     if (familiarOnly) return std::ranges::any_of(dict::ClassMembers("honorific.constraint-familiar"), at);
     return std::ranges::any_of(dict::ClassMembers("honorific.constraint"), at);

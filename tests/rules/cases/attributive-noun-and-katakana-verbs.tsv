@@ -1,0 +1,18 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+lookup:attributive-noun	でも、いい感じ、いい感じ。ね！	하지만, 좋은 느낌, 좋은 느낌. 저기!	fix	lookup
+lookup:attributive-noun	いい感じ、いい感じ。	좋은 느낌, 좋은 느낌.	fix	lookup
+lookup:attributive-noun	悪い感じ、しない。	나쁜 느낌, 하지 않는다.	fix	lookup
+lookup:attributive-noun	強い感じ、ある。	강한 느낌, 있다.	fix	lookup
+lookup:attributive-noun	いい感じ！	좋은 느낌!	keep	lookup
+lookup:attributive-noun	いい感じに仕上がった。	좋은 느낌으로 완성되었다.	keep	lookup
+lookup:attributive-noun	各人の前に長い列ができ、撮影の時間が続いた。	각자 앞에 긴 줄이 생겨 촬영의 시간이 계속되었다.	keep	lookup
+lookup:attributive-noun	猛獣が骨をかみ砕くような音をたて、呑み込んだ。	맹수가 뼈를 물어 부수는 것 같은 소리를 내 삼켰다.	keep	lookup
+lookup:attributive-noun	彼の優しい言葉に甘え、毎日入り浸るようになった。	그의 다정한 호의를 받아들여 매일 눌러앉게 되었다.	keep	lookup
+constraint:honorific-katakana	ビビっちまった。	위축되어버렸다.	fix	lookup
+constraint:honorific-katakana	ビビっちゃった。	위축되어버렸다.	fix	lookup
+sound:verb-stem-te	ビビってた。	has:위축되	fix	sound
+sound:verb-stem-te	ビビってる。	위축되고 있다.	fix	sound
+constraint:honorific-katakana	そうそうあれビビった	has:위축되었다	keep	lookup
+sound:verb-stem-te	ドキッてした。	철렁했다.	keep	sound
+sound:verb-stem-te	「なんでビビってんの？」	「왜 위축되고 있어?」	fix	sound

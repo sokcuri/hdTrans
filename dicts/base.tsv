@@ -3266,11 +3266,11 @@ ttt	ttt	K110			GN				jisjk:201744
 いためにも	1기 위해서(때문에)라도	T500			GN				jisjk:265810		
 いための	1기 위한	T500			GN				jisjk:355128		
 いたや町	이타야쵸	I130	QCTVPl		GN				jisjk:272675		
-いたようであ	있던 것 듯&AV@	M428			GN				jisjk:142154		
+いたようであ	있던 것 듯&AV@	M428		Da	GN				jisjk:142154		
 いたらしめ	이르게 &AV@	M447			GN				jisjk:143267		
 いたらぬ	미흡한	E0H0			GN				jisjk:149730		
 いたり	소치	N110			GN				jisjk:125601		
-いたり	6 있거나	S570			GN				jisjk:264549		
+いたり	1고 있거나	S570			GN				jisjk:264549		
 いたるところ	도처에	E311			GN				jisjk:53		
 いたるところ	도처	N110	VPl		GN				jisjk:125602		
 いたるところ	도처	N110	VPl		GN				jisjk:150505		
@@ -4083,8 +4083,8 @@ ttt	ttt	K110			GN				jisjk:201744
 いるす	없는 척	N110			GN				jisjk:126290		
 いるすをつか	집에 있으면서 없는 체&AV@	M420	SFl		GN				jisjk:141131		
 いるだけだったり	있을 따름이었거나	E300			GN				jisjk:149002		
-いるにすぎな	있는데 지나지 $D7@	H7N0			GN				jisjk:138851		
-いるように見え	있는 것처럼 보&AJ@	M427			GN				jisjk:144917		
+いるにすぎな	있는데 지나지 $D7@	H7N0		Da	GN				jisjk:138851		
+いるように見え	있는 것처럼 보&AJ@	M427		Da	GN				jisjk:144917		
 いれ	&H5@	M447			GN				jisjk:263883		
 いれあげ	돈을 처들&AJ@	M447	VMy		GN				jisjk:141134		
 いれあわせ	벌충&AV@	M447			GN				jisjk:141138		
@@ -31852,6 +31852,14 @@ ttt	ttt	K110			GN				jisjk:201744
 ちまよ	흥분하여 이성을 &HL@	M420	SFlVBp		GN				jisjk:141663		
 ちみちをあげ	함빡 빠&AK@	M427			GN				jisjk:141667		
 ちみつ	치밀%A1@	G8U0			GN				jisjk:140469		
+ちゃう	아니야	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:1		
+ちゃうわ	아니거든	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:2		
+ちゃうねん	아니야	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:3		
+ちゃうで	아니야	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:4		
+ちゃうよ	아니야	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:5		
+ちゃうやろ	아니잖아	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:6		
+ちゃいます	아닙니다	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:7		
+ちゃいますか	아닙니까	N110			GN			관서 말에서 명사 뒤의 ちゃう는 じゃない다(constraint chau-after-verb가 동사 뒤를 뺀다).	kansai-chau:8		
 ちゃうか	아니야	P200			GN				jisjk:349604		
 ちゃお	챠오	N110			GN				jisjk:344511		
 ちゃか	얼버무&AA@	M433	UTs		GN				jisjk:91055		
@@ -133885,6 +133893,7 @@ ttt	ttt	K110			GN				jisjk:201744
 冷え冷えと	쌀쌀하게	E300			GN				jisjk:369336		
 冷え冷えとしてい	쌀쌀&AV@	E4U7		Va	GN				jisjk:369337		
 冷え切	차가워&AL@	M418			GN				jisjk:92526		
+弱り切	완전히 약해&AL@	M418			GN				result-compound:1		
 冷え対策	냉각대책	I110			GN				jisjk:67647		
 冷え性	냉한체질	I110			GN				jisjk:67648		
 冷え症	냉증	N110	UTi		GN				jisjk:203501		
@@ -278202,8 +278211,8 @@ ttt	ttt	K110			GN				jisjk:201744
 疲れにく	피곤하지 $D7@	H7N0			GN				jisjk:137069		
 疲れやすくな	쉽게 지&AO@	M428	QHP		GN				jisjk:140427		
 疲れをと	피로를 &LF@	M448			GN				jisjk:140432		
-疲れ切	녹초가&C6@	M428			GN				jisjk:103833		
-疲れ切っ	녹초가&C6@	M428			GN				jisjk:103827		
+疲れ切	녹초가 &C6@	M428			GN				jisjk:103833		
+疲れ切っ	녹초가 &C6@	M428			GN				jisjk:103827		
 疲れ果て	완전히 지쳐버&AA@	M427	SFl		GN				jisjk:142211		
 疲れ気味	피곤한 것 %B3@	G8U0			GN				jisjk:140693		
 疲れ目	피곤한 눈	N110	VBp		GN				jisjk:243775		
@@ -331472,6 +331481,7 @@ ttt	ttt	K110			GN				jisjk:201744
 起	오코시	N130	QCTVPl		GN				jisjk:279771		
 起	떠&A5@	M414			GN				jisjk:341023		
 起き	일어&A5@	M417			GN				jisjk:92246		
+起き	&C2@	M417		Dx	GN	8302	||1 &&4 ||2 Y+0== "L1고 있" &&2 U+0== "て" S+1== "Lい" G+0!= "Qw" ||3 G+0== "Hz" &&8 S-1!= "が" S-1!= "は" S-1!= "も" S-1!= "Rに" S-1!= "Rで" S-1!= "何か" S-1!= "何も" S-1!= "早く" &&2 ||3 S-1== "が" S-1== "は" S-1== "も" A-2-= "VHn" ||2 G+0== "Ow" &&2 S+1!= "こと" S+1!= "Lいれ"	사람이 주어이거나 주어가 없는 起きている는 깨어 있는 상태다(まだ起きてる？ 아직 깨어 있어?). 일이 일어나는 뜻(何が起きてる)은 앞의 사물 주어로 가른다.	result-awake:1		
 起き	일어나기	N110	UMv		GN				jisjk:343418		
 起きあが	일어&A5@	M418			GN				jisjk:92247		
 起きさせていただ	일어&A5@	M421			GN				jisjk:262850		
