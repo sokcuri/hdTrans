@@ -11,7 +11,6 @@
 #include "core/output/korean.h"
 #include "core/output/particle.h"
 #include "core/output/inflect.h"
-#include "core/output/pieces.h"
 #include "core/rules/match.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
@@ -246,13 +245,12 @@ constexpr NamedFeature kFeatures[] = {
          }
          return false;
      }},
-    // A lengthening mark or a kana of mark.drawn follows the word (痺れるね～, 冷えるねー).
+    // A vowel kana of mark.drawn follows the word (燃えるねぇ, 言うねェ).
     {"drawn",
      [](Flusher&, const Item* it) {
          std::string_view rest = From(it->text, it->start + it->length);
          if (rest.empty()) rest = it->detail->nextText;
-         const text::Rune r = text::DecodeRune(rest);
-         return r.cp == output::kLengthenMark || r.cp == output::kDrawnMark || dict::InClass("mark.drawn", rest.substr(0, r.size));
+         return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
      }},
 };
 
