@@ -23,7 +23,7 @@ dict:w:28563	ええぃ、もういっちょ！	에잇, 한 번 더!	fix	defaults
 dict:w:28578	痛たた……。	아야야…….	fix	defaults
 dict:w:28576	あけおめことよろ！	새해 복 많이 받아 올해도 잘 부탁해!	fix	defaults
 dict:w:28520	目をしばたかせながら	눈을 깜빡이면서	fix	defaults
-dict:w:28521	乳幼児のころに身罷った	유아의 무렵에 세상을 떠났다	fix	defaults
+dict:w:28521	乳幼児のころに身罷った	영유아의 무렵에 세상을 떠났다	fix	defaults
 dict:w:28523	それを見て彼が訝しむ。	그것을 보고 그가 의아해한다.	fix	defaults
 dict:w:28524	下女たちはいぶかしみながら	하녀들은 의아해하면서	fix	defaults
 dict:w:28525	暗闇にマズルフラッシュが爆ぜる。	어둠에 총구 섬광이 터진다.	fix	defaults
@@ -51,7 +51,7 @@ lookup:missing-words	体をゆすって起こした	몸을 흔들어 일으켰�
 dict:w:28586	くやしいが先輩萌えは同意するわ	분하지만 선배 모에는 동의해	fix	lookup
 dict:w:28586	２次はもちろん激萌えだった	2차는 물론 격모에였다	fix	lookup
 dict:w:28589	東宮が身まかられたという話	동궁이 돌아가셨다고 하는 이야기	fix	defaults
-dict:w:28589	乳幼児のころに身まかられている	유아의 무렵에 돌아가셨다	fix	defaults
+dict:w:28589	乳幼児のころに身まかられている	영유아의 무렵에 돌아가셨다	fix	defaults
 dict:w:28591	『恋は人を愚かにすると言うけれど、とんだ道化っぷりね。	『사랑은 사람을 어리석게 한다고 하지만, 터무니 없는 광대 짓이네.	fix	defaults
 dict:w:28561	ほどの徹底っぷりだった。	정도의 철저함이었다.	fix	defaults
 dict:w:28564	少しして局員が戻ってきたので、ようやっと俺も尋問室から解放される。	조금 해 국원이 돌아왔으므로, 드디어 나도 심문실에서 해방된다.	fix	defaults

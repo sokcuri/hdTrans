@@ -29,12 +29,12 @@ lookup:contracted-iru	待ってろ。	기다려라.	keep	lookup
 lookup:contracted-iru	「ちゃんと寝ててね、マイン」	「제대로 자고 있어, 마인」	keep	lookup
 lookup:contracted-iru	思ってたよりは元気だったよ。	생각했던 것보다는 건강했어.	fix	lookup
 lookup:contracted-iru	「ふぇ？魔王ちゃん、デートを言ってたじゃんにゃ★」	「후에? 마왕, 데이트를 말했잖아냥★」	fix	lookup
-lookup:contracted-iru	翔太ちゃん「ガチ、放課後とか言ってたじゃんにゃ」	쇼타짱 「가치, 방과 후라든가 말했잖아냥」	fix	lookup
-lookup:contracted-iru	「ガチ！宿題とか言ってたじゃんぞ」	「가치! 숙제라든가 말했잖아」	fix	lookup
+lookup:contracted-iru	翔太ちゃん「ガチ、放課後とか言ってたじゃんにゃ」	쇼타짱 「진짜, 방과 후라든가 말했잖아냥」	fix	lookup
+lookup:contracted-iru	「ガチ！宿題とか言ってたじゃんぞ」	「진짜! 숙제라든가 말했잖아」	fix	lookup
 lookup:contracted-iru	（心の声）言ってたじゃんぞ	(마음의 소리) 말했잖아	fix	lookup
 lookup:contracted-iru	「べ、別にお兄ちゃん、魔法に忘れてたさ☆」	「벼, 별로 형, 마법에 잊고 있었어☆」	fix	lookup
 lookup:contracted-iru	「むーメイドくん、デートが忘れてたのだーー」	「-메이드 군, 데이트가 잊고 있었던 거다~」	fix	lookup
-lookup:contracted-iru	お姉ちゃんさん「推し！放課後って忘れてたのだ」	언니 씨 「추천해! 방과 후는 잊고 있었던 거다」	fix	lookup
+lookup:contracted-iru	お姉ちゃんさん「推し！放課後って忘れてたのだ」	언니 씨 「최애! 방과 후는 잊고 있었던 거다」	fix	lookup
 lookup:contracted-iru	ユウキ「マジで、宿題とか忘れてたのだ」	유우키 「진짜로, 숙제라든지 잊고 있었던 거다」	fix	lookup
 lookup:contracted-iru	あ！後ろから見てたの？スマホとかで遊んでたんじゃないからね。	아! 뒤에서 봤어? 스마트폰등으로 놀고 있었던 게 아니니까.	fix	lookup
 lookup:contracted-iru	「……なにか、俺たちに用があって、待ってたんじゃないのか？」	「……뭔가, 우리에게 용무가 있어, 기다리고 있었던 게 아닌 건가?」	fix	lookup
