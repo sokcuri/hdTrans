@@ -5,8 +5,23 @@
 
 ### Bug Fixes
 
-* **release:** keep meanings from flipping, decide (ら)れ once and read stretched spellings and laughter as words ([cc37a84](https://github.com/sokcuri/hdTrans/commit/cc37a84e86fcfefc7ffbd41e3f4b1451b39b1580))
+* follow-ups to the drops fixes (name suffixes, a repeated row, spec rows, CI drops budget) ([#108](https://github.com/sokcuri/hdTrans/issues/108)) ([ce59bef](https://github.com/sokcuri/hdTrans/commit/ce59bef980cbf00c2fb5f8be70efece2945454dd))
+* release review clean-ups for 0.5.2 ([#128](https://github.com/sokcuri/hdTrans/issues/128)) ([a6ed2d0](https://github.com/sokcuri/hdTrans/commit/a6ed2d02ef1f5f2daa194fde553163819f7fea19))
+* **build:** report dev for builds that are not on a release tag ([#111](https://github.com/sokcuri/hdTrans/issues/111)) ([96122d2](https://github.com/sokcuri/hdTrans/commit/96122d2f6a4dc16d9464dd8698096c8302d5872e))
+* **contracted:** read the dropped kana of いる, あげる and やる as the full form ([#117](https://github.com/sokcuri/hdTrans/issues/117)) ([d33a3b3](https://github.com/sokcuri/hdTrans/commit/d33a3b32493baa13530e9b2c250028d7cf046858))
+* **normalize:** read a run of っ inside a word as one っ ([#107](https://github.com/sokcuri/hdTrans/issues/107)) ([06e7162](https://github.com/sokcuri/hdTrans/commit/06e7162790fb8b3d5b5d4f3e8a19a252fcab10e3))
 * **release:** keep meanings from flipping, decide (ら)れ once and read stretched spellings and laughter as words ([#129](https://github.com/sokcuri/hdTrans/issues/129)) ([cc37a84](https://github.com/sokcuri/hdTrans/commit/cc37a84e86fcfefc7ffbd41e3f4b1451b39b1580))
+* **sound:** close every clipped copy of a repeated cry with ㅅ and read 痛っ as 아얏 ([#112](https://github.com/sokcuri/hdTrans/issues/112)) ([20e5c0a](https://github.com/sokcuri/hdTrans/commit/20e5c0af0f1cde62e9c3e946ab0c9a294140d618))
+* **sound:** decide laughing w from the source and join it to laughter words ([#110](https://github.com/sokcuri/hdTrans/issues/110)) ([34165f6](https://github.com/sokcuri/hdTrans/commit/34165f687b3f96359f1e3d357e639ffd7197b16f))
+* **sound:** read drawn ちゃーん, くーん and たーんと in sound words, verb forms and the adverb correctly ([#106](https://github.com/sokcuri/hdTrans/issues/106)) ([1cffeb5](https://github.com/sokcuri/hdTrans/commit/1cffeb5e03c77d78a817172f364aec457b236e14))
+* **translation:** add a critical meaning-flip suite and fix と思うな, 行ってきた and に before potentials ([#99](https://github.com/sokcuri/hdTrans/issues/99)) ([a223173](https://github.com/sokcuri/hdTrans/commit/a2231732cbde256ffa82734e049a172688430dce))
+* **translation:** conjugate obligations, read ちゃいそう, ますね promises, やばい and drawn honorifics by use ([#100](https://github.com/sokcuri/hdTrans/issues/100)) ([7f15b8e](https://github.com/sokcuri/hdTrans/commit/7f15b8e469fdde8ad636b8737ea3d2104aa3b2e8))
+* **translation:** decide the reading of (ら)れ once, before word choice ([#104](https://github.com/sokcuri/hdTrans/issues/104)) ([2757ed1](https://github.com/sokcuri/hdTrans/commit/2757ed12e1e6ddf72034576b30d10d1067874b42))
+* **translation:** keep ぴょんと after a particle a sound, and add no copula after a finished utterance ([#109](https://github.com/sokcuri/hdTrans/issues/109)) ([6ca11e7](https://github.com/sokcuri/hdTrans/commit/6ca11e7bf4aa8d25a8208047a251ab91bd902e9e))
+* **translation:** read drawn words and adnominal な before く words as the words (べーつに, ようなクサい相談) ([#113](https://github.com/sokcuri/hdTrans/issues/113)) ([b418fe9](https://github.com/sokcuri/hdTrans/commit/b418fe918542da8954fd9794fd5d076e499d87ef))
+* **translation:** read stutters before kanji words, でも after counts, katakana endings and name に by use ([#127](https://github.com/sokcuri/hdTrans/issues/127)) ([c65d5e8](https://github.com/sokcuri/hdTrans/commit/c65d5e8bddcb0f2fb40f416526265d308b068eb2))
+* **translation:** widen construction families to variant sentences: causative-passives, passives, giving verbs, habits, くせに and counterfactuals ([#105](https://github.com/sokcuri/hdTrans/issues/105)) ([fbfb77e](https://github.com/sokcuri/hdTrans/commit/fbfb77ef4602c940533d349691bed4d73d9b7b10))
+* **translation:** write passives, potentials and the で of vehicles in forms Korean takes ([#119](https://github.com/sokcuri/hdTrans/issues/119)) ([b371916](https://github.com/sokcuri/hdTrans/commit/b3719162f182237df567ebcd77fee4bdccc9b36f))
 
 ## [0.5.1](https://github.com/sokcuri/hdTrans/compare/v0.5.0...v0.5.1) (2026-10-24)
 
