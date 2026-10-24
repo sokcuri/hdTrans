@@ -1,0 +1,18 @@
+# 규칙: GRM-3
+rule	input	expected	kind	layer
+dict:kanji-morau:2	友達にノートを見せて貰った	친구가 노트를 보여 주었다	fix	local
+dict:kanji-morau:2	先生に教えて貰いました	선생님이 가르쳐 주었습니다	fix	local
+dict:kanji-morau:2	祖母に昔話をして貰った	할머니가 옛날이야기를 해 주었다	fix	local
+dict:kanji-morau:2	先生には教えて貰った	선생님은 가르쳐 주었다	fix	local
+dict:kanji-morau:2	二度ほど相談に乗って頂いたり、話を聞いて貰ったりしておりました	!rule:dict:kanji-morau:2	keep	local
+dict:kanji-morau:2	お情けで結婚して貰うなど	!rule:dict:kanji-morau:2	keep	local
+dict:kanji-morau:2	私が自由にさせて貰ってる契約だからね	!rule:dict:kanji-morau:2	keep	local
+dict:kanji-morau:2	この四人と戦って貰う。	!rule:dict:kanji-morau:2	keep	local
+dict:kanji-morau:1	皆さんに楽しんで貰おう	여러분에게 즐겨 달라고 하자	fix	local
+dict:kanji-morau:1	まず、名を名乗って貰おうか。	우선, 이름을 자칭해 달라고 할까.	fix	local
+dict:kanji-morau:1	いまここで返して貰おうか。	지금 여기서 돌려주어 달라고 할까.	fix	local
+dict:kanji-morau:1	本を貸して貰った	!rule:dict:kanji-morau:1	keep	local
+dict:kanji-morau:4	褒めて貰いたい	칭찬해 주었으면 한다	fix	local
+dict:kanji-morau:4	お金を貰いたい	!rule:dict:kanji-morau:4	keep	local
+dict:kanji-morau:2	同じくらいの家格のグループに入れて貰えて	!rule:dict:kanji-morau:2	keep	local
+dict:kanji-morau:2	お姉様はあまり公の場に出して貰えなかった。	!rule:dict:kanji-morau:2	keep	local

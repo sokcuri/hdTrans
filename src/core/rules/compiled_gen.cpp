@@ -1649,11 +1649,12 @@ bool RuleL177([[maybe_unused]] Item* p) {
 
 // local 178
 //     src[+1] == "な" and ko[+1] == "&C6@" and pos[+1] is 4**
-//     sem[-1] under VHn and pos[+1] is 4** and end.pos[+1] is 57* and (src[+2] == "もら" or src[+2] == "いただ") and ko[+2] == "&CJ@" and pos[+2] is 4**
+//     sem[-1] under VHn and pos[+1] is 4** and end.pos[+1] is 57* and (src[+2] == "もら" or src[+2] == "貰" or src[+2] == "いただ") and ko[+2] == "&CJ@" and pos[+2] is 4**
 //     pos[-1] is 7** and end.src[-1] == "い" and src[+1] == "決まってい" and pos[+1] is 4**
 bool RuleL178([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "な"sv) && DstEq(p, 1, "&C6@"sv) && PumsaEq(p, 1, "4**"sv)) ||
            (AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && GobiPumsaEq(p, 1, "57*"sv) && (SrcEq(p, 2, "もら"sv) ||
+           SrcEq(p, 2, "貰"sv) ||
            SrcEq(p, 2, "いただ"sv)) && DstEq(p, 2, "&CJ@"sv) && PumsaEq(p, 2, "4**"sv)) ||
            (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "い"sv) && SrcEq(p, 1, "決まってい"sv) && PumsaEq(p, 1, "4**"sv));
 }
@@ -4632,7 +4633,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL175, 0x319420ee6f69e1eeull},
     {RuleL176, 0x8c3607ffd2fa82bcull},
     {RuleL177, 0xec71ef877aa2fb26ull},
-    {RuleL178, 0x4015b102a3465bf7ull},
+    {RuleL178, 0x9ff88930f37d3664ull},
     {RuleL179, 0xe92575172a0a2872ull},
     {RuleL180, 0xcb14b6a9db55cd88ull},
     {RuleL181, 0x3a44e41643288c21ull},

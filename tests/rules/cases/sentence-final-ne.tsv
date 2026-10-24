@@ -229,7 +229,7 @@ cx:ne-polite:10	「ちょっと休みますね」	「조금 쉴게요」	fix	rew
 cx:ne-polite:10	「お茶、淹れますね」	「차, 끓일게요」	fix	rewrites
 cx:ne-polite:10	夕食の準備をしますね。	저녁식사 준비를 할게요.	fix	rewrites
 cx:ne-polite:10	提督、ちょっと席を外しますね。	제독, 조금 자리를 비울게요.	fix	rewrites
-cx:ne-polite:10	牛乳をお持ちしますね。	우유를 가져올게요.	fix	rewrites
+cx:ne-polite:10	牛乳をお持ちしますね。	우유를 가져다 드릴게요.	fix	rewrites
 cx:ne-polite:10	お部屋に戻りますね。	방으로 돌아갈게요.	fix	rewrites
 cx:ne-polite:10	お水、ここに置きますね。	물, 여기에 둘게요.	fix	rewrites
 cx:ne-polite:10	お弁当作りますね。	도시락 만들게요.	fix	rewrites

@@ -2575,6 +2575,26 @@ bool OldSpeech(std::string_view q) {
     return false;
 }
 
+// Whether the sentence before it names a doer other than the speaker, a kin term or a person noun
+// (noun.role or noun.other-giver, not pronoun.speaker) in が, は or も (彼が, 母は), or a habit
+// (adverb.habit: 毎日): its giving then tells what someone does, no promise. A time word or a name
+// before the particle does not (今日も, 長鯨が: a speaker often names herself).
+bool OtherGiver(const Item* it) {
+    for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (s == "。" || s == "！" || s == "？" || s == "!" || s == "?" || s == "「" || s == "『") break;
+        if (dict::InClass("adverb.habit", s)) return true;
+        if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr) {
+            const std::string_view doer = x->prev->group->surface;
+            if (!dict::InClass("pronoun.speaker", doer) &&
+                (dict::InClass("noun.role", doer) || dict::InClass("noun.other-giver", doer))) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 }  // namespace
 
 void OfferPromise(Flusher& f) {
@@ -2583,20 +2603,44 @@ void OfferPromise(Flusher& f) {
         const Entry* d = it->DirectEntry(it->DirectIndex());
         const std::string_view surface = it->group->surface;
         const bool humble = surface.ends_with("さしあげ") || surface.ends_with("差し上げ");
-        if (e == nullptr || d == nullptr || !(e->dst.ends_with("&CJ@") || (humble && e->dst.ends_with("드&AA@"))) ||
-            (!surface.ends_with("や") && !surface.ends_with("あげ") && !surface.ends_with("上げ"))) {
+        std::string_view after = From(it->text, it->start + it->length);
+        if (after.empty() && it->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(it->tokenIndex + 1).text;
+        // The sentence ends after the word. After あげる it may also end in an ellipsis or a clipping
+        // っ (見せてあげる……, 見せてあげるっ！), and so may やろう; a shouted やる there stays a
+        // declaration.
+        const bool gives = surface.ends_with("あげ") || surface.ends_with("上げ");
+        std::string_view rest = after;
+        for (int next = it->tokenIndex + 1; gives;) {
+            while (!rest.empty() && RuneIn(text::DecodeRune(rest).cp, "っッ♪")) rest.remove_prefix(text::DecodeRune(rest).size);
+            if (!rest.empty() || next >= f.w.TokenCount()) break;
+            rest = f.w.Tok(next++).text;
+        }
+        const bool ends = gives || it->DirectSurface() == "ろう"
+                              ? rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)…‥")
+                              : QuoteEnd(f.w, it);
+        const bool asks = after.starts_with("？") || after.starts_with("?") || rest.starts_with("？") || rest.starts_with("?");
+        // やる said with its や dropped after a て form before a soft particle (やったるわ, 殴ったるさ) puts
+        // 주다 into the ending: speech, so the speaker's promise.
+        const std::string_view own = it->DirectSurface();
+        if (d != nullptr && ends && !asks && own.size() == 3 && Has("わさよね", own) && it->detail != nullptr &&
+            it->detail->patternKind == 8 && it->detail->kind == 0 && std::string_view(d->dst).starts_with("6 ")) {
+            it->AssignDirectSlot(it->DirectIndex(), "6 줄게");
             continue;
         }
-        // The end of the quote, or for an offer of あげる a stop っ before its mark (見せてあげるっ！).
-        const bool offer = !humble && (surface.ends_with("あげ") || surface.ends_with("上げ"));
-        const Item* stop = it->After();
-        if (!QuoteEnd(f.w, it) && !(offer && stop != nullptr && stop->group->surface == "っ" && QuoteEnd(f.w, stop))) continue;
+        if (e == nullptr || d == nullptr || !(e->dst.ends_with("&CJ@") || (humble && e->dst.ends_with("드&AA@"))) ||
+            (!surface.ends_with("や") && !gives) || !ends) {
+            continue;
+        }
         const std::string_view ending = it->DirectSurface();
         // Only a present or volitional ending turns: not 教えてやったよ, 教えてさしあげられます.
         if (it->DetailRecord() != 0 || d->dst.empty() || !AnyOf("46017", d->dst[0])) continue;
-        std::string_view after = From(it->text, it->start + it->length);
-        if (after.empty() && it->tokenIndex + 1 < f.w.TokenCount()) after = f.w.Tok(it->tokenIndex + 1).text;
-        if (after.starts_with("？") || after.starts_with("?")) continue;
+        if (asks) continue;
+        // The volitional of やる after a て form (褒めてやろう) is the speaker's haughty grant: 주마,
+        // in narration as in speech.
+        if (surface.ends_with("や") && ending == "ろう") {
+            it->AssignDirectSlot(it->DirectIndex(), "1마");
+            continue;
+        }
         const bool polite = ending == "ます" || ending == "ますよ" || ending == "ますね" || ending == "ますわ" ||
                             (humble && ending == "ましょう");
         const bool plain = ending == "る" || ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" ||
@@ -2608,12 +2652,19 @@ void OfferPromise(Flusher& f) {
             !tail.starts_with("のじゃ")) {
             continue;
         }
-        // A final particle marks speech outside brackets too (a line of dialogue), and an exclamation
-        // after the offer of あげる (見せてあげる！; not 見せてやる！, a threat that stays 준다).
+        // A final particle marks speech outside brackets too (a line of dialogue), and so does an
+        // exclamation mark after the あげる of a て form with no other doer or habit before it
+        // (見せてあげる！; not 母が作ってあげる！ nor the shouted 見せてやる！).
+        // The て form may be the item before or the start of the item itself (してあげ).
+        const std::string_view lead = gives ? surface.substr(0, surface.size() - std::string_view("あげ").size()) : "";
+        const bool afterTe = lead.ends_with("て") || lead.ends_with("で") ||
+                             (it->prev != nullptr && it->prev->selected >= 0 &&
+                              (it->prev->DirectSurface().ends_with("て") || it->prev->DirectSurface().ends_with("で")));
         const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
                             ending == "ぞ" ||
-                            (offer && std::ranges::any_of(dict::ClassMembers("mark.spoken-exclamation"),
-                                                          [&](std::string_view m) { return after.starts_with(m); }));
+                            (gives && afterTe && !OtherGiver(it) &&
+                             std::ranges::any_of(dict::ClassMembers("mark.spoken-exclamation"),
+                                                 [&](std::string_view m) { return rest.starts_with(m); }));
         int open = 0, close = 0;
         if (!polite && !plain) continue;
         if (!QuoteAround(f.w, it->tokenIndex, open, close) && !spoken) continue;

@@ -10,7 +10,7 @@ constraint:cued-name	浦波「撃ち方、はーじめ！」	has:우라나미 �
 constraint:cued-name	朧: 七駆の行くところ、作戦成功間違いなし…たぶん！	has:오보로:	fix	lookup
 constraint:cued-name	如月、出撃します。	키사라기, 출격합니다.	fix	lookup
 constraint:cued-name	若葉、出撃する。	와카바, 출격한다.	fix	lookup
-constraint:cued-name	狭霧、参ります！	사기리, 갑니다!	fix	lookup
+constraint:cued-name	狭霧、参ります！	사기리, 가겠습니다!	fix	lookup
 constraint:cued-name	　聖女アヤメ。	 성녀 아야메.	fix	lookup
 constraint:cued-name	睦月です。はりきって、まいりましょー！	has:무츠키입니다.	fix	lookup
 constraint:cued-name	満潮よ。私、なんでこんな部隊に配属されたのかしら。	미치시오야. 나, 왜 이런 부대에 배속된 걸까.	fix	lookup
@@ -21,7 +21,7 @@ constraint:cued-name	お疲れ様です。給糧艦伊良湖です。	수고하�
 constraint:cued-name	水上機母艦、秋津洲よ！	수상기모함, 아키츠시마야!	fix	lookup
 constraint:cued-name	「おはよう、千里」	「좋은 아침, 치사토」	fix	lookup
 constraint:cued-name	扶桑型戦艦山城。出撃します！	후소급 전함 야마시로. 출격합니다!	fix	lookup
-constraint:cued-name	大井、出ます！みんな、遅れないで！	오오이, 나옵니다! 모두, 늦지 마!	fix	lookup
+constraint:cued-name	大井、出ます！みんな、遅れないで！	오오이, 나갑니다! 모두, 늦지 마!	fix	lookup
 constraint:cued-name	駆逐艦時雨、出撃。時雨が降ってきた。	구축함 시구레, 출격. 늦가을 비가 내리기 시작했다.	keep	lookup
 constraint:cued-name	時雨が降ってきた。	늦가을 비가 내리기 시작했다.	keep	lookup
 constraint:cued-name	雷が落ちた。	벼락이 떨어졌다.	keep	lookup
@@ -49,7 +49,7 @@ constraint:cued-name	抜錨！鳥海、出撃します！	has:초카이	keep	loo
 constraint:cued-name	「蛇ちゃんと蟹ちゃんをふたつずつですねー」	lacks:카니	keep	lookup
 constraint:cued-name	「アラタ、うちの隊員を救助してくれた事」	has:우리 대원	keep	lookup
 constraint:cued-name	「それもありますけど、漆葉さんの場合」	lacks:요우	keep	lookup
-constraint:cued-name	妙高、参ります。	묘오코, 갑니다.	keep	lookup
+constraint:cued-name	妙高、参ります。	묘오코, 가겠습니다.	keep	lookup
 constraint:chan-after-word	夕立ちゃん、遅いよ	has:유다치짱	fix	lookup
 constraint:chan-after-word	「鈴木さんといちゃいちゃしていた」	has:스즈키 씨와	keep	lookup
 constraint:cued-name	「宇宙、そこは最後のフロンティア」	has:「우주,	keep	lookup
