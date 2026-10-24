@@ -7,6 +7,7 @@
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
 
@@ -737,6 +738,121 @@ std::string_view ClippedWord(std::string_view run, std::string_view rest, const 
     return {};
 }
 
+// Whether the katakana run has the shape of a native adverb: two or more kana said twice
+// (ジワジワ, see Doubled), or four kana framed as
+// kana.mimetic-adverb-frame (シッカリ, ヒンヤリ).
+bool AdverbShape(std::u32string_view k) {
+    if (Doubled(k)) return true;
+    if (k.size() != 4) return false;
+    const std::u32string frame = {k[1], k[3]};
+    return dict::InClass("kana.mimetic-adverb-frame", ToHiragana(Utf8(frame)));
+}
+
+// Whether text starts with a conjugation of the verb kind.
+bool ConjugatesWith(int kind, std::string_view text) {
+    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+        const std::string_view conj = word::Conjugation(kind, branch);
+        if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && text.starts_with(conj)) return true;
+    }
+    return false;
+}
+
+// Whether the Korean of a dictionary row only spells the sound of its katakana key
+// (パラパラ 파라파라): such a row gives the run no meaning.
+bool SoundGloss(const dict::Candidate& c) {
+    std::string ko;
+    for (const char ch : c.target) {
+        if (ch != ' ') ko += ch;
+    }
+    for (const text::Preset p : {text::Preset::Fan, text::Preset::FanShort, text::Preset::Official}) {
+        if (text::FromKana(c.source, p) == ko) return true;
+    }
+    return false;
+}
+
+// The hiragana spelling of a katakana run that writes a native word for emphasis, or "":
+//   - a verb or i-adjective stem that the hiragana after the run conjugates (カブれない
+//     かぶれない, ナメられ なめられ, ビビッた びびった) or that runs on into the text after it
+//     (ブッ放す ぶっ放す, ベタぼれ べたぼれ), unless a particle, an honorific or a drawn
+//     honorific follows the run (サッちゃん, サラったら, アルくぅん) or the run is a person of the
+//     name layer before suru.verbal-noun-start (ナオして, ナオすごい);
+//   - an adverb of AdverbShape (シッカリと しっかりと, ヤッパリ やっぱり), a unit said twice only
+//     before と that does not quote it, a kanji or a hiragana word other than a particle or the
+//     copula (ソロソロ帰ろう; not マルマルです, メキメキという, ウソウソ！).
+// The run must be no katakana word: no key other than a name, a row that spells its sound
+// (パラパラ 파라파라) or a stem the text does not conjugate reads it, and no name of the document.
+std::string NativeSpelling(std::string_view word, bool tsu, std::string_view rest, const LineContext& ctx,
+                           const dict::Snapshot& snap) {
+    const std::u32string k = Runes(word);
+    if (k.size() < 2) return {};
+    if (ctx.named != nullptr && ctx.named->contains(std::string(word))) return {};
+    std::string_view tail = rest.substr(0, 15);
+    while (!tail.empty() && !ValidUtf8(tail)) tail.remove_suffix(1);
+    const std::string written = std::string(word) + std::string(tail);
+    for (const dict::Candidate& c : snap.GetWordInfo(written, dict::LookupMode::General, ctx.lookup).list) {
+        if (c.codes == nullptr || c.source.size() < word.size() || (c.user != nullptr && c.user->nameLayer) ||
+            c.codes->sem.HasPrefix("QPN")) {
+            continue;
+        }
+        if (c.source.size() > word.size()) return {};
+        const std::string_view part = c.codes->partText;
+        if (part.size() == 4 && (part[0] == 'M' || part[0] == 'H')) {
+            if (part[0] == 'H' || ConjugatesWith(part[3] - '0', rest)) return {};
+        } else if (!SoundGloss(c)) {
+            return {};
+        }
+    }
+    const std::string hira = ToHiragana(word);
+    const std::string spelled = hira + std::string(tail);
+    const std::u32string next = Runes(tail);
+    const auto drawn = [&](size_t n) { return n < next.size() && dict::InClass("kana.drawn-out", Utf8(next.substr(n, 1))); };
+    // A person's name before し, さ, す or せ stays the name: they start する or a word of their
+    // own (ナオして, ナオすごい), not the conjugation of a stem.
+    std::string_view suru;
+    bool nameThenSuru = PrefixIn(rest, dict::ClassMembers("suru.verbal-noun-start"), suru);
+    if (nameThenSuru) {
+        const std::vector<dict::Record> names = snap.NameRecords(word);
+        nameThenSuru = std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes != nullptr && r.codes->sem.HasPrefix("QPN"); });
+    }
+    // A particle, an honorific or a drawn honorific (くぅん) after the run.
+    bool nounFollows = drawn(1);
+    for (const std::string_view n : dict::ClassMembers("follower.kata-noun")) {
+        nounFollows = nounFollows || rest.starts_with(n);
+    }
+    for (const std::string_view n : dict::ClassMembers("honorific.name")) {
+        nounFollows = nounFollows || rest.starts_with(n);
+    }
+    bool quoted = false;
+    for (const std::string_view q : dict::ClassMembers("follower.quoting-to")) {
+        quoted = quoted || rest.starts_with(q);
+    }
+    const bool adverbial = !next.empty() && !quoted && !drawn(0) &&
+                           (IsKanjiRune(next[0]) || dict::InClass("follower.kata-adverb", Utf8(next.substr(0, 1))) ||
+                            (IsHiraganaRune(next[0]) && !nounFollows));
+    for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
+        if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QPN")) continue;
+        const std::string_view part = c.codes->partText;
+        if (part.size() != 4) continue;
+        const std::string_view after = std::string_view(spelled).substr(std::min(c.source.size(), spelled.size()));
+        const bool runsOn = c.source.size() > hira.size();
+        if (part[0] == 'M' && !nameThenSuru && (runsOn || (!next.empty() && IsHiraganaRune(next[0]) && !nounFollows))) {
+            // The stem covers the run, but for a closing ッ that starts the conjugation.
+            if (c.source.size() + (tsu ? 3 : 0) < hira.size()) continue;
+            // An ichidan stem that takes in okurigana after the run may stand bare (カブれない).
+            if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
+        } else if (part[0] == 'H' && part[1] == '7' && c.source.size() == hira.size() && !tsu && !nounFollows) {
+            for (const std::string_view e : dict::ClassMembers("follower.kata-adjective-stem")) {
+                if (after.starts_with(e)) return hira;
+            }
+        } else if ((part[0] == 'E' || part[0] == 'N') && part[1] == '3' && c.source.size() >= hira.size() &&
+                   AdverbShape(k) && !quoted && (!Doubled(k) || adverbial)) {
+            const std::string_view more = std::string_view(c.source).substr(hira.size());
+            if (more.empty() || dict::InClass("follower.kata-adverb", more)) return hira;
+        }
+    }
+    return {};
+}
+
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
 // around it.
 std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, const LineContext& ctx,
@@ -802,7 +918,18 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         for (const KataWord& x : kKataWords) {
             if (x.word == base && (!tsu || x.adjective)) kw = &x;
         }
-        if (kw == nullptr) continue;
+        // The run joins a name or the span before it.
+        const bool joined = prev == U'・' || prev == U'＝' || (start == 0 && spanBefore);
+        if (kw == nullptr) {
+            // After a digit the run counts something (1モグり), not a native word.
+            if (joined || text::IsDigit(prev)) continue;
+            if (const std::string native = NativeSpelling(word, tsu, rest, ctx, snap); !native.empty()) {
+                b.append(text.substr(at, start - at));
+                b += native;
+                at = i;
+            }
+            continue;
+        }
         std::string_view follower;
         bool ok;
         if (kw->adjective) {
@@ -816,7 +943,7 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             ok = PrefixIn(rest, dict::ClassMembers("follower.kata-pronoun"), follower);
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));
         }
-        if (!ok || prev == U'・' || prev == U'＝' || prev == U'の' || (start == 0 && spanBefore)) continue;
+        if (!ok || joined || prev == U'の') continue;
         if (HasUserSense(word, ctx, snap) || HasUserSense(base, ctx, snap)) continue;
         if (ctx.named != nullptr &&
             (ctx.named->find(std::string(word)) != ctx.named->end() || ctx.named->find(std::string(base)) != ctx.named->end())) {

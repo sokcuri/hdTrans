@@ -36,11 +36,14 @@
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
 //= follower.kata-adjective-final	The sentence-final particles after which a katakana spelling of an i-adjective reads as one (ウルサイぞ).
+//= follower.kata-adjective-stem	Endings after which the hiragana spelling of a katakana run that no katakana word reads is an i-adjective stem (クサい, オモシロかった).
+//= follower.kata-adverb	What a katakana adverb read in hiragana takes after it as part of its key (シッカリと, ロクに), and the particles and verb starts before which a katakana mimetic said twice reads as an adverb (ジワジワと, ドロドロに, イロイロやる).
 //= follower.kata-noun	What may follow a katakana noun: particles, the copula and honorifics (イカなんて, イカを).
 //= follower.kata-pronoun	The particles and predicates after which a katakana spelling of a pronoun or noun reads as the word (アレは, ソレだ); アレ before ？ is the interjection.
 //= follower.kata-verb	What else follows a katakana spelling of a verb (コロスんだ, コロスから).
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
+//= follower.quoting-to	The と that quotes the katakana run before it, which leaves the run a sound (メキメキという, ゴロゴロと言う).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
@@ -57,7 +60,9 @@
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
 //= honorific.prepass-spaced	Honorifics read 씨 or 군 that are written apart from the noun before them (田中さん 다나카 씨).
+//= kana.drawn-out	Small kana and marks that draw out the kana before them (マルマルぅ, くぅん, ちゃーん).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
+//= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
@@ -461,6 +466,17 @@ follower.kata-adjective-final	な
 follower.kata-adjective-final	ね
 follower.kata-adjective-final	わ
 
+follower.kata-adjective-stem	い
+follower.kata-adjective-stem	かっ
+follower.kata-adjective-stem	く
+follower.kata-adjective-stem	けれ
+follower.kata-adjective-stem	さ
+follower.kata-adjective-stem	すぎ
+
+follower.kata-adverb	と
+follower.kata-adverb	に
+follower.kata-adverb	や
+
 follower.kata-noun	は
 follower.kata-noun	が
 follower.kata-noun	を
@@ -481,6 +497,8 @@ follower.kata-noun	なら
 follower.kata-noun	なの
 follower.kata-noun	なんか
 follower.kata-noun	って
+follower.kata-noun	ったら
+follower.kata-noun	ってば
 follower.kata-noun	より
 follower.kata-noun	から
 follower.kata-noun	まで
@@ -537,6 +555,15 @@ follower.noun-not-stem	あり
 follower.noun-not-stem	ある
 follower.noun-not-stem	さ
 follower.noun-not-stem	よ
+
+follower.quoting-to	という
+follower.quoting-to	といっ
+follower.quoting-to	と言
+follower.quoting-to	と思
+follower.quoting-to	とか
+follower.quoting-to	とは
+follower.quoting-to	とも
+follower.quoting-to	との
 
 follower.stem	ない
 follower.stem	無い
@@ -711,6 +738,17 @@ honorific.prepass-spaced	くん
 honorific.prepass-spaced	君
 honorific.prepass-spaced	氏
 
+kana.drawn-out	ぁ
+kana.drawn-out	ぃ
+kana.drawn-out	ぅ
+kana.drawn-out	ぇ
+kana.drawn-out	ぉ
+kana.drawn-out	ゃ
+kana.drawn-out	ゅ
+kana.drawn-out	ょ
+kana.drawn-out	ー
+kana.drawn-out	～
+
 kana.kin-before-chan	にい
 kana.kin-before-chan	にー
 kana.kin-before-chan	ねえ
@@ -732,6 +770,9 @@ kana.kin-before-chan	じょう
 kana.kin-before-chan	あか
 kana.kin-before-chan	あん
 kana.kin-before-chan	いっ
+
+kana.mimetic-adverb-frame	っり
+kana.mimetic-adverb-frame	んり
 
 ko-adjective.stem-end	좋
 ko-adjective.stem-end	같
