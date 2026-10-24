@@ -31,3 +31,7 @@ cx:habitual-mono:14	これは昔、母が作ったものだ。	!rule:cx:habitual
 cx:habitual-mono:20	昔はよく遊んだものだね。	!rule:cx:habitual-mono:20	keep	rewrites
 cx:habitual-mono:14	時々喧嘩したものだ。	가끔 싸움하곤 했다.	fix	rewrites
 cx:habitual-mono:14	時々、喧嘩したものだ。	!rule:cx:habitual-mono:14	keep	rewrites
+cx:habitual-mono:14	この本は毎日読んだものだ。	!rule:cx:habitual-mono:14	keep	rewrites
+cx:habitual-mono:14	この服はいつも着たものだ。	!rule:cx:habitual-mono:14	keep	rewrites
+cx:habitual-mono:20	これは毎日使ったものです。	!rule:cx:habitual-mono:20	keep	rewrites
+cx:habitual-mono:14	彼は毎日走ったものだ。	그는 매일 달리곤 했다.	fix	rewrites
