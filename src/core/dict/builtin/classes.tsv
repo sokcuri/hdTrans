@@ -13,6 +13,7 @@
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
+//= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
@@ -268,6 +269,15 @@ copula.short-so	でもな
 copula.short-so	じゃ
 copula.short-so-final	だ
 copula.short-so-sentence	だった
+
+ending.taunt	よーだ
+ending.taunt	よーっだ
+ending.taunt	よーだっ
+ending.taunt	よーっだっ
+ending.taunt	もんねーだ
+ending.taunt	もんねーっだ
+ending.taunt	もんねーだっ
+ending.taunt	もんねーっだっ
 
 contraction.n-no	ん中
 contraction.n-no	んところ
