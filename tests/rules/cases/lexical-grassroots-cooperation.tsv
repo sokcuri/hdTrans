@@ -1,9 +1,9 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
-dict:jisjk:110853	草の根連携	무명대중 연계	fix	defaults
-dict:jisjk:110853	草の根連携を進める。	무명대중 연계를 진행시킨다.	fix	defaults
-dict:jisjk:110853	草の根連携が必要だ。	무명대중 연계가 필요하다.	fix	defaults
-dict:jisjk:110853	草の根連携の強化。	무명대중 연계의 강화.	fix	defaults
+dict:jisjk:110853	草の根連携	풀뿌리 연계	fix	defaults
+dict:jisjk:110853	草の根連携を進める。	풀뿌리 연계를 진행시킨다.	fix	defaults
+dict:jisjk:110853	草の根連携が必要だ。	풀뿌리 연계가 필요하다.	fix	defaults
+dict:jisjk:110853	草の根連携の強化。	풀뿌리 연계의 강화.	fix	defaults
 dict:jisjk:110853	連休	연휴	keep	defaults
 dict:jisjk:110853	連携	연계	keep	defaults
 dict:jisjk:110853	草の根運動	풀뿌리 운동	keep	defaults

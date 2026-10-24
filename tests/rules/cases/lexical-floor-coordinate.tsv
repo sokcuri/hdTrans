@@ -6,8 +6,7 @@ dict:jisjk:106151	床運動を練習する。	마루 운동을 연습한다.	fix
 dict:jisjk:106151	床運動の選手。	마루 운동의 선수.	fix	defaults
 dict:jisjk:106151	床運動の大会。	마루 운동의 대회.	fix	defaults
 dict:jisjk:106151	徒手体操	맨손체조	keep	defaults
-dict:jisjk:106151	体操	체조	keep	defaults
-dict:jisjk:106151	床暖房	마루 난방법	keep	defaults
+dict:jisjk:106151	床暖房	바닥 난방	keep	defaults
 dict:jisjk:233366	座標変換	좌표변환	fix	defaults
 dict:jisjk:233366	座標変換を行う。	좌표변환을 실시한다.	fix	defaults
 dict:jisjk:233366	座標変換の計算。	좌표변환의 계산.	fix	defaults

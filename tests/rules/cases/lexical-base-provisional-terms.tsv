@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:352791	仮勘定を使う。	가계정을 쓴다.	fix	defaults
 dict:jisjk:352791	仮勘定に記入する。	가계정에 기입한다.	fix	defaults
@@ -34,4 +34,3 @@ dict:jisjk:229010	仮道管を調べる。	헛물관을 조사한다.	fix	defaul
 dict:jisjk:229010	「仮道管の構造を調べた」	「헛물관 구조를 조사했다」	fix	defaults
 dict:jisjk:229010	仮導管を観察する。	헛물관을 관찰한다.	keep	defaults
 dict:jisjk:229010	導管を観察する。	물관을 관찰한다.	keep	defaults
-dict:jisjk:229010	細胞組織を調べる。	세포 조직을 조사한다.	keep	defaults

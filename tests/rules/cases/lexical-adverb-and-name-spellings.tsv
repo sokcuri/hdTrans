@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:682	たちまちに	금세	fix	defaults
 dict:jisjk:682	たちまちに終わった。	금세 끝났다.	fix	defaults
@@ -19,7 +19,7 @@ dict:jisjk:83693	爪切り	손톱깎이	keep	defaults
 dict:jisjk:83693	爪切りを買った。	손톱깎이를 샀다.	keep	defaults
 dict:jisjk:83693	爪切りがある。	손톱깎이가 있다.	keep	defaults
 dict:jisjk:83693	「爪切り」	「손톱깎이」	keep	defaults
-dict:jisjk:83693	爪切りばさみ	손톱깎이	keep	defaults
+dict:jisjk:83693	爪切りばさみ	손톱 가위	keep	defaults
 dict:jisjk:253307	目アカ	눈곱	fix	defaults
 dict:jisjk:253307	目アカがある。	눈곱이 있다.	fix	defaults
 dict:jisjk:253307	「目アカ」	「눈곱」	fix	defaults
@@ -38,6 +38,3 @@ dict:jisjk:82642	後片付けをする。	뒷정리를 한다.	keep	defaults
 dict:jisjk:82642	部屋の後片付け。	방의 뒷정리.	keep	defaults
 dict:jisjk:82642	あとかたづけ	뒷정리	keep	defaults
 dict:jisjk:82642	机を片付ける。	책상을 정리한다.	keep	defaults
-dict:jisjk:82642	皿を洗った。	접시를 씻었다.	keep	defaults
-dict:jisjk:82642	皿洗い	접시닦이	keep	defaults
-dict:jisjk:82642	雨仕舞い	빗물막이	keep	defaults

@@ -13485,7 +13485,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 憑代	신이 깃드는 물체	N110			GN							jisjk:255426
 憑り代	신이 깃드는 물체	N110			GN							jisjk:255426
 のど越し	목 넘김	N110		Hd	GN							jisjk:249035
-からくり人形	꼭두각시	I110			GN							jisjk:67568
+からくり人形	태엽 인형	I110			GN							jisjk:67568
 輪を掛け	한 술 더 &A8@	M447			GN							jisjk:117103
 バター臭	서양티가 $A2@	H7U0			GN							jisjk:5315
 飛降り自殺	투신 자살	N110		Hd	GN							jisjk:153766
@@ -20136,7 +20136,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ピーター・パン	피터팬	N110	QPN		GN							jisjk:54349
 ニナ・リッチ	니나리치	N110	VCp		GN							jisjk:131944
 ヴォルヴォ	볼보	N110	VTp		GN							jisjk:56745
-クー・クラックス・クラン	K.K.K.	N110	VBl		GN							jisjk:158942
+クー・クラックス・クラン	쿠 클럭스 클랜	N110	VBl		GN							jisjk:158942
 コカ・コーラ	코카콜라	N110	VFd		GN							jisjk:46968
 サンケイ・スポーツ	산케이 스포츠	N110			GN							jisjk:340538
 ベンハー	벤허	N110			GN							jisjk:134073

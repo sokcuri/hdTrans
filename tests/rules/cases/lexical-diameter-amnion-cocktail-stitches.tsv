@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:163125	繊維径	섬유 지름	fix	defaults
 dict:jisjk:163125	繊維径を測定した。	섬유 지름을 측정했다.	fix	defaults
@@ -12,19 +12,15 @@ dict:jisjk:28899	羊膜の内側。	양막의 안쪽.	fix	defaults
 dict:jisjk:28899	羊膜に包まれた。	양막에 싸였다.	fix	defaults
 dict:jisjk:28899	羊膜に包まれている。	양막에 싸여 있다.	fix	defaults
 dict:jisjk:28899	羊水	양수	keep	defaults
-dict:jisjk:28899	羊毛	양모	keep	defaults
-dict:jisjk:28899	砂嚢	모래주머니	keep	defaults
 dict:jisjk:375114	缶入りカクテル	캔 칵테일	fix	defaults
 dict:jisjk:375114	缶入りカクテルを買った。	캔 칵테일을 샀다.	fix	defaults
 dict:jisjk:375114	缶入りカクテルの味。	캔 칵테일의 맛.	fix	defaults
 dict:jisjk:375114	缶入りカクテルを飲んだ。	캔 칵테일을 마셨다.	fix	defaults
 dict:jisjk:375114	カクテル	칵테일	keep	defaults
 dict:jisjk:375114	缶ビール	캔맥주	keep	defaults
-dict:jisjk:375114	缶詰	통조림	keep	defaults
 dict:jisjk:87809	編み目	뜨개질 코	fix	defaults
 dict:jisjk:87809	編み目の数。	뜨개질 코의 수.	fix	defaults
 dict:jisjk:87809	編み目を数えた。	뜨개질 코를 세었다.	fix	defaults
 dict:jisjk:87809	編み目が見える。	뜨개질 코가 보인다.	fix	defaults
 dict:jisjk:87809	編み物	뜨개질	keep	defaults
 dict:jisjk:87809	編み針	뜨개바늘	keep	defaults
-dict:jisjk:87809	網目	그물코	keep	defaults

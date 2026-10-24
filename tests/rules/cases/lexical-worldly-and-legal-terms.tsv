@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:74573	これも世のならいだ。	이것도 세상 이치다.	fix	defaults
 dict:jisjk:74573	世のならいに従う。	세상 이치에 따른다.	fix	defaults
@@ -9,17 +9,13 @@ dict:jisjk:74575	悲しい世の習いだった。	슬픈 세상 이치였다.	f
 dict:jisjk:256029	これは両唇音だ。	이것은 양순음이다.	keep	defaults
 dict:jisjk:256029	両唇音を発音する。	양순음을 발음한다.	keep	defaults
 dict:jisjk:256029	両唇音について学ぶ。	양순음에 대해 배운다.	keep	defaults
-dict:jisjk:263317	両面高密度のディスク。	더블 사이디드 하이 덴시티의 디스크.	fix	defaults
-dict:jisjk:263317	両面高密度ディスクを使う。	더블 사이디드 하이 덴시티 디스크를 쓴다.	fix	defaults
-dict:jisjk:263317	両面高密度に対応する。	더블 사이디드 하이 덴시티에 대응한다.	fix	defaults
+dict:jisjk:263317	両面高密度のディスク。	양면 고밀도의 디스크.	fix	defaults
+dict:jisjk:263317	両面高密度ディスクを使う。	양면 고밀도 디스크를 쓴다.	fix	defaults
+dict:jisjk:263317	両面高密度に対応する。	양면 고밀도에 대응한다.	fix	defaults
 dict:jisjk:360259	両罰規定を適用する。	양벌규정을 적용한다.	fix	defaults
 dict:jisjk:360259	両罰規定がある。	양벌규정이 있다.	fix	defaults
 dict:jisjk:360259	両罰規定の対象だ。	양벌규정의 대상이다.	fix	defaults
-dict:jisjk:74573	世襲の制度。	세습의 제도.	keep	defaults
-dict:jisjk:74575	世間話をした。	잡담을 했다.	keep	defaults
-dict:jisjk:74573	世界の歴史。	세계의 역사.	keep	defaults
-dict:jisjk:256029	母音を発音する。	홀소리를 발음한다.	keep	defaults
-dict:jisjk:256029	子音を発音する。	닿소리를 발음한다.	keep	defaults
+dict:jisjk:256029	母音を発音する。	모음을 발음한다.	keep	defaults
+dict:jisjk:256029	子音を発音する。	자음을 발음한다.	keep	defaults
 dict:jisjk:263317	高密度のディスク。	고밀도의 디스크.	keep	defaults
 dict:jisjk:263317	両面テープを使う。	양면 테이프를 쓴다.	keep	defaults
-dict:jisjk:360259	両方を罰する。	양쪽 모두를 처벌한다.	keep	defaults

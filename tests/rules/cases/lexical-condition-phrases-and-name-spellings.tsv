@@ -1,116 +1,54 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
-dict:jisjk:90426	いい塩梅になった。	다행히 되었다.	keep	defaults
-dict:jisjk:90426	いい塩梅になる。	다행히 된다.	keep	defaults
-dict:jisjk:90426	いい塩梅になればいい。	다행히 되면 된다.	keep	defaults
-dict:jisjk:90426	いい塩梅になっている。	다행히 되어 있다.	keep	defaults
+dict:i:7148	いい塩梅になった。	알맞게 되었다.	keep	defaults
+dict:i:7148	いい塩梅になる。	알맞게 된다.	keep	defaults
+dict:i:7148	いい塩梅になればいい。	알맞게 되면 된다.	keep	defaults
+dict:i:7148	いい塩梅になっている。	알맞게 되어 있다.	keep	defaults
 dict:jisjk:373981	いずれにしろ	어쨌건 간에	keep	defaults
 dict:jisjk:373981	いずれにしろ。	어쨌건 간에.	keep	defaults
-dict:jisjk:373981	いずれにしろと書いた。	어쨌건 간에라고 썼다.	keep	defaults
-dict:jisjk:373981	いずれにしろがある。	어쨌건 간에가 있다.	keep	defaults
 dict:jisjk:193650	じぜんなべ	자선 냄비	fix	defaults
 dict:jisjk:193650	じぜんなべ。	자선 냄비.	fix	defaults
-dict:jisjk:193650	じぜんなべと書いた。	자선 냄비라고 썼다.	fix	defaults
-dict:jisjk:193650	じぜんなべがある。	자선 냄비가 있다.	fix	defaults
 dict:jisjk:55434	フレーバー	플레이버	keep	defaults
 dict:jisjk:55434	フレーバー。	플레이버.	keep	defaults
-dict:jisjk:55434	フレーバーと書いた。	플레이버라고 썼다.	keep	defaults
-dict:jisjk:55434	フレーバーがある。	플레이버가 있다.	keep	defaults
 dict:jisjk:109540	埼玉県経済農業協同組合連合	사이타마현 경제농업협동조합연합	fix	defaults
 dict:jisjk:109540	埼玉県経済農業協同組合連合。	사이타마현 경제농업협동조합연합.	fix	defaults
-dict:jisjk:109540	埼玉県経済農業協同組合連合と書いた。	사이타마현 경제농업협동조합연합이라고 썼다.	fix	defaults
-dict:jisjk:109540	埼玉県経済農業協同組合連合がある。	사이타마현 경제농업협동조합연합이 있다.	fix	defaults
 dict:jisjk:163668	水道水	수돗물	keep	defaults
 dict:jisjk:163668	水道水。	수돗물.	keep	defaults
-dict:jisjk:163668	水道水と書いた。	수돗물이라고 썼다.	keep	defaults
-dict:jisjk:163668	水道水がある。	수돗물이 있다.	keep	defaults
-dict:jisjk:245440	藤四郎	토우시로우	keep	fixed
-dict:jisjk:245440	藤四郎。	토우시로우.	keep	fixed
-dict:jisjk:245440	藤四郎と書いた。	토우시로우라고 썼다.	keep	fixed
-dict:jisjk:245440	藤四郎がある。	토우시로우가 있다.	keep	fixed
-dict:jisjk:14478	角刈	치켜 깎음	fix	defaults
-dict:jisjk:14478	角刈。	치켜 깎음.	fix	defaults
-dict:jisjk:14478	角刈と書いた。	치켜 깎음이라고 썼다.	fix	defaults
-dict:jisjk:14478	角刈がある。	치켜 깎음이 있다.	fix	defaults
+dict:jisjk:14478	角刈	스포츠머리	fix	defaults
+dict:jisjk:14478	角刈。	스포츠머리.	fix	defaults
 dict:jisjk:60335	角刈り	스포츠머리	keep	defaults
 dict:jisjk:60335	角刈り。	스포츠머리.	keep	defaults
-dict:jisjk:60335	角刈りと書いた。	스포츠머리라고 썼다.	keep	defaults
-dict:jisjk:60335	角刈りがある。	스포츠머리가 있다.	keep	defaults
 dict:jisjk:77795	野狐禅	풋내기 선	fix	defaults
 dict:jisjk:77795	野狐禅。	풋내기 선.	fix	defaults
-dict:jisjk:77795	野狐禅と書いた。	풋내기 선이라고 썼다.	fix	defaults
-dict:jisjk:77795	野狐禅がある。	풋내기 선이 있다.	fix	defaults
 dict:jisjk:79660	隠元豆	강낭콩	fix	defaults
 dict:jisjk:79660	隠元豆。	강낭콩.	fix	defaults
-dict:jisjk:79660	隠元豆と書いた。	강낭콩이라고 썼다.	fix	defaults
-dict:jisjk:79660	隠元豆がある。	강낭콩이 있다.	fix	defaults
 dict:jisjk:122414	食欲を催す。	식욕을 돋우어 준다.	fix	defaults
 dict:jisjk:122414	食欲を催した。	식욕을 돋우어 주었다.	fix	defaults
 dict:jisjk:122414	食欲を催している。	식욕을 돋우어 주고 있다.	fix	defaults
 dict:jisjk:122414	食欲を催す香り。	식욕을 돋우어 주는 향기.	fix	defaults
 dict:jisjk:180178	黄口	풋내기	fix	defaults
 dict:jisjk:180178	黄口。	풋내기.	fix	defaults
-dict:jisjk:180178	黄口と書いた。	풋내기라고 썼다.	fix	defaults
-dict:jisjk:180178	黄口がある。	풋내기가 있다.	fix	defaults
-dict:names.29100	アイス・ロード:リベンジ	아이스 로드:리벤지	keep	fixed
-dict:names.29100	アイス・ロード:リベンジ。	아이스 로드:리벤지.	keep	fixed
-dict:names.29100	アイス・ロード:リベンジと書いた。	아이스 로드:리벤지라고 썼다.	keep	fixed
-dict:names.29100	アイス・ロード:リベンジがある。	아이스 로드:리벤지가 있다.	keep	fixed
-dict:names.59533	イオク・クジャン	이오쿠 쿠잔	keep	fixed
-dict:names.59533	イオク・クジャン。	이오쿠 쿠잔.	keep	fixed
-dict:names.59533	イオク・クジャンと書いた。	이오쿠 쿠잔이라고 썼다.	keep	fixed
-dict:names.59533	イオク・クジャンがある。	이오쿠 쿠잔이 있다.	keep	fixed
-lookup:lexical-identifiers	いずれにせよ。	어쨌든.	keep	defaults
-lookup:lexical-identifiers	安上がりになった。	싸게 들게 되었다.	keep	defaults
-lookup:lexical-identifiers	根こそぎにする。	모조리로 한다.	keep	defaults
-lookup:lexical-identifiers	水道。	수도.	keep	defaults
-lookup:lexical-identifiers	水道の水。	수돗물.	keep	defaults
-lookup:lexical-identifiers	総利益。	총이익.	keep	defaults
-lookup:lexical-identifiers	聞く耳を持たない。	들을 귀를 가지지 않는다.	keep	defaults
-lookup:lexical-identifiers	聞いている。	듣고 있다.	keep	defaults
-lookup:lexical-identifiers	角。	각.	keep	defaults
-lookup:lexical-identifiers	髪を刈る。	머리카락을 벤다.	keep	defaults
-lookup:lexical-identifiers	大豆。	대두.	keep	defaults
-lookup:lexical-identifiers	食欲がある。	식욕이 있다.	keep	defaults
-lookup:lexical-identifiers	気分を高める。	기분을 높인다.	keep	defaults
-lookup:lexical-identifiers	フレーム。	프레임.	keep	defaults
-lookup:lexical-identifiers	あすのWA!	내일의 WA!	keep	defaults
-lookup:lexical-identifiers	PSYフレームギア・δ	PSY프레임기어·δ	keep	defaults
-lookup:lexical-identifiers	PSYフレームロード・Λ	PSY 프레임 로드·Λ	keep	defaults
-lookup:lexical-identifiers	牙狼<GARO>～闇を照らす者～	가로<GARO>~어둠을 비추는 사람~	keep	defaults
-lookup:lexical-identifiers	東武80000系	토부 80000계	keep	defaults
-lookup:lexical-identifiers	近鉄30000系電車	킨테츠 30000계 전철	keep	defaults
-lookup:lexical-identifiers	ギャプラン改	갸프랑 改	keep	defaults
-lookup:lexical-identifiers	イオク	이오크	keep	defaults
-lookup:lexical-identifiers	クジャン	쿠잔	keep	defaults
-lookup:lexical-identifiers	かくして!マキナさん!!	숨겨! 마키나 씨!!	keep	defaults
-lookup:lexical-identifiers	ばくおん!!	폭음!!	keep	defaults
-lookup:lexical-identifiers	神宮寺駅	진구지역	keep	defaults
-dict:names.262122	ニュース845沖縄を見た。	뉴스 845 오키나와를 보았다.	keep	defaults
-dict:names.262122	ニュース845福岡が始まった。	뉴스 845 후쿠오카가 시작되었다.	keep	defaults
+dict:names.59533	イオク・クジャン。	이오크 쿠잔.	keep	fixed
 dict:jisjk:51639	トッグル	토글	keep	defaults
 dict:jisjk:51639	トッグルを切り替えた。	토글을 바꾸었다.	keep	defaults
 dict:jisjk:51639	トッグルスイッチを押した。	토글 스위치를 눌렀다.	keep	defaults
 dict:jisjk:51639	トッグルの設定。	토글의 설정.	keep	defaults
 dict:jisjk:51639	トグル	토글	keep	defaults
 dict:jisjk:51639	トグルを切り替えた。	토글을 바꾸었다.	keep	defaults
-dict:jisjk:51639	スイッチを押した。	스위치를 눌렀다.	keep	defaults
 dict:jisjk:51639	トグルスイッチの設定。	토글스위치의 설정.	keep	defaults
 dict:jisjk:55434	フレイバー	플레이버	keep	defaults
 dict:jisjk:55434	フレイバーを選んだ。	플레이버를 선택했다.	keep	defaults
 dict:jisjk:55434	フレイバーが違う。	플레이버가 다르다.	keep	defaults
 dict:jisjk:55434	フレイバーの種類。	플레이버의 종류.	keep	defaults
 dict:jisjk:55434	フレーバーを選んだ。	플레이버를 선택했다.	keep	defaults
-dict:jisjk:55434	香りが違う。	향기가 다르다.	keep	defaults
-dict:jisjk:55434	バニラの香り。	바닐라의 향기.	keep	defaults
 dict:jisjk:110919	操人形	꼭두각시	fix	defaults
 dict:jisjk:110919	操人形を動かした。	꼭두각시를 움직였다.	fix	defaults
 dict:jisjk:110919	操人形が動く。	꼭두각시가 움직인다.	fix	defaults
 dict:jisjk:110919	操人形の糸。	꼭두각시의 실.	fix	defaults
-dict:jisjk:110919	からくり人形	꼭두각시	keep	defaults
-dict:jisjk:110919	からくり人形を動かした。	꼭두각시를 움직였다.	keep	defaults
-dict:jisjk:110919	機関人形の糸。	꼭두각시의 실.	keep	defaults
-dict:jisjk:110919	絡繰り人形が動く。	꼭두각시가 움직인다.	keep	defaults
+dict:jisjk:67568	からくり人形	태엽 인형	keep	defaults
+dict:jisjk:67568	からくり人形を動かした。	태엽 인형을 움직였다.	keep	defaults
+dict:jisjk:169587	機関人形の糸。	태엽 인형의 실.	keep	defaults
+dict:jisjk:67568	絡繰り人形が動く。	태엽 인형이 움직인다.	keep	defaults
 dict:jisjk:259924	アドレス・バス	어드레스 버스	keep	defaults
 dict:jisjk:259924	アドレス・バスを使う。	어드레스 버스를 쓴다.	keep	defaults
 dict:jisjk:259924	アドレス・バスの幅。	어드레스 버스의 폭.	keep	defaults
@@ -119,19 +57,3 @@ dict:jisjk:259924	データバス	데이터 버스	keep	defaults
 dict:jisjk:259924	データバスを使う。	데이터 버스를 쓴다.	keep	defaults
 dict:jisjk:259924	バスの幅。	버스의 폭.	keep	defaults
 dict:jisjk:259924	アドレスバスが必要だ。	어드레스 버스가 필요하다.	keep	defaults
-dict:names.122819	ギャビー・ギャビー	개비 개비	keep	defaults
-dict:names.122914	ギャラクトロンMK2	갤럭트론 MK2	keep	defaults
-dict:names.132401	クロクロークロウ	쿠로쿠로크로우	keep	defaults
-dict:names.138236	グレースケール	그레이 스케일	keep	defaults
-dict:names.203575	スーパーロボット大戦 ORIGINAL GENERATION	슈퍼로봇대전 ORIGINAL GENERATION	keep	defaults
-dict:names.259911	ニコニコ大百科	니코니코 대백과	keep	defaults
-dict:names.444316	五光	오광	keep	defaults
-dict:names.663491	短調	단조	keep	defaults
-dict:names.673894	空母棲姫	공모서희	keep	defaults
-dict:names.701634	薨去	훙거	keep	defaults
-dict:i:985	口笛を吹いた。	휘파람을 불었다.	keep	defaults
-dict:w:7577	ヒト属	사람속	keep	defaults
-dict:w:15406	尾灯	미등	keep	defaults
-dict:w:17979	月色	월색	keep	defaults
-dict:w:18816	氷晶	빙정	keep	defaults
-lookup:crisp-reading	さくさく	바삭바삭	keep	defaults

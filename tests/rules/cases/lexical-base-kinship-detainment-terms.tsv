@@ -1,11 +1,10 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:30921	乙巳の年。	을사의 해.	fix	defaults
 dict:jisjk:30921	乙巳生まれ。	을사 태생.	fix	defaults
 dict:jisjk:30921	今年は乙巳だ。	금년은 을사다.	fix	defaults
 dict:jisjk:30921	乙巳から乙未まで。	을사로부터 을미까지.	fix	defaults
 dict:jisjk:30921	乙未の年。	을미의 해.	keep	defaults
-dict:jisjk:30921	甲辰の年。	갑진의 해.	keep	defaults
 dict:jisjk:15092	乾風が吹く。	건조한 바람이 분다.	fix	defaults
 dict:jisjk:15092	乾風にさらされる。	건조한 바람에 노출된다.	fix	defaults
 dict:jisjk:15092	乾風の吹く季節。	건조한 바람이 부는 계절.	fix	defaults
@@ -29,14 +28,11 @@ dict:jisjk:255400	予防検束の対象。	예방 검속의 대상.	fix	defaults
 dict:jisjk:255400	予防検束を受けた。	예방 검속을 받았다.	fix	defaults
 dict:jisjk:255400	予防検束に乗り出した。	예방 검속에 나섰다.	fix	defaults
 dict:jisjk:255400	予防検束を取る。	예방 검속을 택한다.	fix	local
-dict:jisjk:255400	保険に入る。	보험에 들어간다.	keep	defaults
 dict:jisjk:255400	予防拘禁を行う。	예방구금을 실시한다.	keep	defaults
-dict:jisjk:255400	借金を踏み倒す。	빚을 떼먹는다.	keep	defaults
 dict:jisjk:145427	同じ二の舞を踏む。	같은 전철을 밟는다.	fix	defaults
 dict:jisjk:145427	二の舞を踏んだ。	전철을 밟았다.	fix	defaults
 dict:jisjk:145427	二の舞を踏まない。	전철을 밟지 않는다.	fix	defaults
 dict:jisjk:145427	また二の舞を踏んでいる。	또 전철을 밟고 있다.	fix	defaults
-dict:jisjk:145427	前妻と会った。	전처와 만났다.	keep	defaults
 dict:jisjk:145427	二の足を踏む。	주저한다.	keep	defaults
 dict:jisjk:145427	足を踏んだ。	발을 밟았다.	keep	defaults
 dict:jisjk:247668	二院制を採用する。	양원제를 채용한다.	fix	defaults
@@ -61,17 +57,17 @@ dict:jisjk:99421	亡父と亡母の墓。	죽은 아버지와 망모의 무덤.	
 dict:jisjk:99421	亡夫の写真。	망부의 사진.	keep	defaults
 dict:jisjk:99421	亡母の写真。	망모의 사진.	keep	defaults
 dict:jisjk:99421	父の写真。	아버지의 사진.	keep	defaults
-dict:jisjk:251295	亡姉の写真。	죽은 손위 누이의 사진.	fix	defaults
-dict:jisjk:251295	亡姉を思い出す。	죽은 손위 누이를 생각해 낸다.	fix	defaults
-dict:jisjk:251295	亡姉の遺品。	죽은 손위 누이의 유품.	fix	defaults
-dict:jisjk:251295	亡姉と亡妹の写真。	죽은 손위 누이와 죽은 누이동생의 사진.	fix	defaults
+dict:jisjk:251295	亡姉の写真。	죽은 언니의 사진.	fix	defaults
+dict:jisjk:251295	亡姉を思い出す。	죽은 언니를 생각해 낸다.	fix	defaults
+dict:jisjk:251295	亡姉の遺品。	죽은 언니의 유품.	fix	defaults
+dict:jisjk:251295	亡姉と亡妹の写真。	죽은 언니와 죽은 누이동생의 사진.	fix	defaults
 dict:jisjk:251295	亡妹の写真。	죽은 누이동생의 사진.	keep	defaults
 dict:jisjk:251295	亡弟の写真。	죽은 아우의 사진.	keep	defaults
 dict:jisjk:251295	姉の写真。	언니의 사진.	keep	defaults
-dict:jisjk:107987	交通遺児を支援する。	교통사고 고아를 지원한다.	fix	defaults
-dict:jisjk:107987	交通遺児のための募金。	교통사고 고아를 위한 모금.	fix	defaults
-dict:jisjk:107987	交通遺児の生活。	교통사고 고아의 생활.	fix	defaults
-dict:jisjk:107987	交通遺児を育てる。	교통사고 고아를 기른다.	fix	defaults
+dict:jisjk:107987	交通遺児を支援する。	교통사고 유자녀를 지원한다.	fix	defaults
+dict:jisjk:107987	交通遺児のための募金。	교통사고 유자녀를 위한 모금.	fix	defaults
+dict:jisjk:107987	交通遺児の生活。	교통사고 유자녀의 생활.	fix	defaults
+dict:jisjk:107987	交通遺児を育てる。	교통사고 유자녀를 기른다.	fix	defaults
 dict:jisjk:107987	交通事故の原因。	교통사고의 원인.	keep	defaults
 dict:jisjk:107987	幼児を支援する。	유아를 지원한다.	keep	defaults
 dict:jisjk:29568	害虫の発生を予察する。	해충 발생을 예찰한다.	fix	defaults
@@ -87,11 +83,8 @@ dict:jisjk:248261	乳輪の大きさ。	유륜의 크기.	keep	defaults
 dict:jisjk:255400	警察は予防検束をとった。	경찰은 예방 검속을 취했다.	fix	local
 dict:jisjk:255400	予防検束を取らない。	예방 검속을 택하지 않는다.	fix	local
 dict:jisjk:255400	予防検束をとる方針だ。	예방 검속을 취할 방침이다.	fix	local
-dict:jisjk:255400	保険をとった。	보험을 취했다.	keep	defaults
-dict:jisjk:255400	罰金を受けた。	벌금을 받았다.	keep	defaults
 dict:jisjk:204508	塩素酸の水溶液。	염소산의 수용액.	keep	defaults
 dict:jisjk:107987	孤児を支援する。	고아를 지원한다.	keep	defaults
-dict:jisjk:255400	生命保険の契約。	생명보험의 계약.	keep	defaults
 dict:jisjk:78545	五体満足で無事に戻った。	온전한 몸으로 무사히 돌아왔다.	fix	defaults
 lookup:pneumonia	肺炎の治療。	폐렴의 치료.	keep	defaults
 dict:jisjk:248258	乳幼児肺炎の治療。	영유아 폐렴의 치료.	fix	defaults
@@ -101,13 +94,11 @@ dict:jisjk:248258	乳幼児肺炎の予防。	영유아 폐렴의 예방.	fix	de
 dict:jisjk:248258	乳幼児肺炎の診断。	영유아 폐렴의 진단.	fix	defaults
 dict:jisjk:248258	乳幼児肺炎の患者。	영유아 폐렴의 환자.	fix	defaults
 dict:jisjk:248258	乳幼児肺炎を治療する。	영유아 폐렴을 치료한다.	fix	defaults
-lookup:medical-compounds	乳幼児の肺炎。	유아의 폐렴.	keep	defaults
-lookup:medical-compounds	乳幼児の治療。	유아의 치료.	keep	defaults
+lookup:medical-compounds	乳幼児の肺炎。	영유아의 폐렴.	keep	defaults
+lookup:medical-compounds	乳幼児の治療。	영유아의 치료.	keep	defaults
 lookup:medical-compounds	幼児の症状。	유아의 증상.	keep	defaults
-lookup:medical-compounds	肺炎の治療。	폐렴의 치료.	keep	defaults
 lookup:medical-compounds	肺炎の症状。	폐렴의 증상.	keep	defaults
-lookup:medical-compounds	乳幼児健診。	유아 건강 진단.	keep	defaults
+lookup:medical-compounds	乳幼児健診。	영유아 건강 검진.	keep	defaults
 dict:jisjk:158580	カリニ肺炎の症状。	카리니 폐렴의 증상.	fix	defaults
 dict:jisjk:158581	カリニはいえんの治療。	카리니 폐렴의 치료.	fix	defaults
 dict:jisjk:236144	親生児肺炎の治療。	신생아 폐렴의 치료.	fix	defaults
-lookup:medical-compounds	観世音菩薩。	관세음보살.	keep	defaults

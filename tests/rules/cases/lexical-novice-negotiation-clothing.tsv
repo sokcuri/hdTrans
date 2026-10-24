@@ -1,24 +1,19 @@
-# 규칙: LEX-3
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:194157	弱輩者	풋내기	fix	defaults
 dict:jisjk:194157	私は弱輩者だ。	나는 풋내기다.	fix	defaults
 dict:jisjk:194157	弱輩者の意見。	풋내기의 의견.	fix	defaults
 dict:jisjk:194157	弱輩者ですが。	풋내기입니다만.	fix	defaults
-dict:jisjk:194157	弱輩	젊은이	keep	defaults
-dict:jisjk:194157	初心者	초심자	keep	defaults
-dict:jisjk:194157	若者	젊은이	keep	defaults
+dict:jisjk:194157	弱輩	애송이	keep	defaults
 dict:jisjk:183168	強談判	강경한 담판	fix	defaults
 dict:jisjk:183168	強談判をする。	강경한 담판을 한다.	fix	defaults
 dict:jisjk:183168	強談判の結果。	강경한 담판의 결과.	fix	defaults
 dict:jisjk:183168	強談判に及ぶ。	강경한 담판에 이른다.	fix	defaults
 dict:jisjk:183168	強談	강경한 담판	keep	defaults
 dict:jisjk:183168	談判	담판	keep	defaults
-dict:jisjk:183168	単板	단판	keep	defaults
 dict:jisjk:352324	形態安定衣料	형태 안정 의류	fix	defaults
 dict:jisjk:352324	形態安定衣料を買う。	형태 안정 의류를 산다.	fix	defaults
 dict:jisjk:352324	形態安定衣料の価格。	형태 안정 의류의 가격.	fix	defaults
 dict:jisjk:352324	形態安定衣料を販売する。	형태 안정 의류를 판매한다.	fix	defaults
 dict:jisjk:352324	衣料	의류	keep	defaults
 dict:jisjk:352324	衣類	의류	keep	defaults
-dict:jisjk:352324	医療	의료	keep	defaults
-dict:jisjk:352324	形状記憶シャツ	형상 기억 셔츠	keep	defaults

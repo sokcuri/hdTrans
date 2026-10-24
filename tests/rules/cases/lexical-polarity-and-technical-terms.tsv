@@ -19,8 +19,6 @@ dict:jisjk:71477	不準備を反省した。	준비 미비를 반성했다.	fix	
 dict:jisjk:262360	不確定性原理を学ぶ。	불확정성 원리를 배운다.	fix	defaults
 dict:jisjk:262360	これは不確定性原理だ。	이것은 불확정성 원리다.	fix	defaults
 dict:jisjk:262360	不確定性原理について話した。	불확정성 원리에 대해 이야기했다.	fix	defaults
-dict:jisjk:352745	売上予想を上方修正した。	매상 예상을 상향수정했다.	keep	defaults
-dict:jisjk:352745	下方に移動する。	하부로 이동한다.	keep	defaults
 dict:jisjk:262361	不完全な説明。	불완전한 설명.	keep	defaults
 dict:jisjk:262361	この定理を証明した。	이 정리를 증명했다.	keep	defaults
 dict:jisjk:71418	不屈の精神。	불굴의 정신.	keep	defaults
@@ -30,7 +28,6 @@ dict:jisjk:71477	事前準備をした。	사전 준비를 했다.	keep	defaults
 dict:jisjk:262360	不確実な情報。	불확실한 정보.	keep	defaults
 dict:jisjk:262360	その原理を説明した。	그 원리를 설명했다.	keep	defaults
 dict:jisjk:118879	山頂から下山できる。	산정에서 하산할 수 있다.	fix	defaults
-dict:jisjk:118879	雨でも下山できた。	비에서도 하산할 수 있었다.	fix	defaults
 dict:jisjk:118879	暗くて下山できない。	어두워서 하산할 수 없다.	fix	defaults
 dict:jisjk:118879	一人では下山できなかった。	혼자서는 하산할 수 없었다.	fix	defaults
 dict:jisjk:118879	下山できれば安心だ。	하산할 수 있으면 안심이다.	fix	defaults

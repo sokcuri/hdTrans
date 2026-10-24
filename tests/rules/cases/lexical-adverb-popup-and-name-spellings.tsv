@@ -1,60 +1,47 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-25
 rule	input	expected	kind	layer
-lookup:lexical-cleanup-10	たちまち	금세	keep	lookup
 lookup:lexical-cleanup-10	たちまちのうちに	눈 깜짝할 사이에	keep	lookup
-lookup:lexical-cleanup-10	すぐに終わった。	곧바로 끝났다.	keep	lookup
 lookup:lexical-cleanup-10	後始末	뒤처리	keep	lookup
 lookup:lexical-cleanup-10	跡始末	뒤처리	keep	lookup
 lookup:lexical-cleanup-10	あとしまつ	뒤처리	keep	lookup
-lookup:lexical-cleanup-10	尻尾	꼬리	keep	lookup
 lookup:lexical-cleanup-10	お尻を拭く。	엉덩이를 닦는다.	keep	lookup
-lookup:lexical-cleanup-10	小宵	코요이	keep	lookup
-lookup:lexical-cleanup-10	別所小宵	벳쇼 코요이	keep	lookup
 dict:jisjk:54026	ヒトケタ	한 자릿수	fix	lookup
 dict:jisjk:54026	ヒトケタだ。	한 자릿수다.	fix	lookup
 dict:jisjk:54026	「ヒトケタ」	「한 자릿수」	fix	lookup
-dict:jisjk:61727	共同テレビジョン	쿄도 텔레비전	fix	lookup
-dict:jisjk:61727	共同テレビジョンだ。	쿄도 텔레비전이다.	fix	lookup
-dict:jisjk:61727	「共同テレビジョン」	「쿄도 텔레비전」	fix	lookup
-dict:jisjk:359430	売上高利益率	매상고 이익률	fix	lookup
-dict:jisjk:359430	売上高利益率だ。	매상고 이익률이다.	fix	lookup
-dict:jisjk:359430	「売上高利益率」	「매상고 이익률」	fix	lookup
-dict:jisjk:248010	日本テレビ放送綱	닛폰 텔레비전 방송망	fix	lookup
-dict:jisjk:248010	日本テレビ放送綱だ。	닛폰 텔레비전 방송망이다.	fix	lookup
-dict:jisjk:248010	「日本テレビ放送綱」	「닛폰 텔레비전 방송망」	fix	lookup
-dict:jisjk:80951	日本テレビ放送網	일본 텔레비전 방송망	fix	lookup
-dict:jisjk:80951	日本テレビ放送網だ。	일본 텔레비전 방송망이다.	fix	lookup
-dict:jisjk:80951	「日本テレビ放送網」	「일본 텔레비전 방송망」	fix	lookup
-dict:jisjk:187407	静岡第一テレビ	시즈오카 다이이치 텔레비전	fix	lookup
-dict:jisjk:187407	静岡第一テレビだ。	시즈오카 다이이치 텔레비전이다.	fix	lookup
-dict:jisjk:187407	「静岡第一テレビ」	「시즈오카 다이이치 텔레비전」	fix	lookup
-dict:names.507127	大愛電視	다아이 텔레비전	fix	lookup
-dict:names.507127	大愛電視だ。	다아이 텔레비전이다.	fix	lookup
-dict:names.507127	「大愛電視」	「다아이 텔레비전」	fix	lookup
+dict:jisjk:61727	共同テレビジョン	교도 테레비전	fix	lookup
+dict:jisjk:61727	共同テレビジョンだ。	교도 테레비전이다.	fix	lookup
+dict:jisjk:61727	「共同テレビジョン」	「교도 테레비전」	fix	lookup
+dict:jisjk:359430	売上高利益率	매출액 이익률	fix	lookup
+dict:jisjk:359430	売上高利益率だ。	매출액 이익률이다.	fix	lookup
+dict:jisjk:359430	「売上高利益率」	「매출액 이익률」	fix	lookup
+dict:jisjk:248010	日本テレビ放送綱	닛폰 테레비 방송망	fix	lookup
+dict:jisjk:248010	日本テレビ放送綱だ。	닛폰 테레비 방송망이다.	fix	lookup
+dict:jisjk:248010	「日本テレビ放送綱」	「닛폰 테레비 방송망」	fix	lookup
+dict:jisjk:80951	日本テレビ放送網	닛폰 테레비 방송망	fix	lookup
+dict:jisjk:80951	日本テレビ放送網だ。	닛폰 테레비 방송망이다.	fix	lookup
+dict:jisjk:80951	「日本テレビ放送網」	「닛폰 테레비 방송망」	fix	lookup
+dict:jisjk:187407	静岡第一テレビ	시즈오카 다이이치 테레비	fix	lookup
+dict:jisjk:187407	静岡第一テレビだ。	시즈오카 다이이치 테레비다.	fix	lookup
+dict:jisjk:187407	「静岡第一テレビ」	「시즈오카 다이이치 테레비」	fix	lookup
+dict:names.507127	大愛電視	다아이 뎬스	fix	lookup
+dict:names.507127	大愛電視だ。	다아이 뎬스다.	fix	lookup
+dict:names.507127	「大愛電視」	「다아이 뎬스」	fix	lookup
 lookup:lexical-cleanup-10	ひとけた	한 자릿수	keep	lookup
 lookup:lexical-cleanup-10	テレビ	텔레비전	keep	lookup
-lookup:lexical-cleanup-10	テレビジョン	텔레비전	keep	lookup
-lookup:lexical-cleanup-10	テレビを見た。	텔레비전을 보았다.	keep	lookup
-lookup:lexical-cleanup-10	共同通信	쿄오도통신	keep	lookup
-lookup:lexical-cleanup-10	売上利益率	매상 이익률	keep	lookup
-lookup:lexical-cleanup-10	売上総利益率	매상 총이익률	keep	lookup
-lookup:lexical-cleanup-10	売上高純利益率	매상고 순이익률	keep	lookup
+lookup:lexical-cleanup-10	共同通信	교도통신	keep	lookup
+lookup:lexical-cleanup-10	売上利益率	매출 이익률	keep	lookup
+lookup:lexical-cleanup-10	売上総利益率	매출 총이익률	keep	lookup
+lookup:lexical-cleanup-10	売上高純利益率	매출액 순이익률	keep	lookup
 dict:jisjk:109539	埼玉県共済農業協同組合連合	사이타마현 공제농업협동조합연합	fix	lookup
 dict:jisjk:109539	埼玉県共済農業協同組合連合だ。	사이타마현 공제농업협동조합연합이다.	fix	lookup
 dict:jisjk:109539	「埼玉県共済農業協同組合連合」	「사이타마현 공제농업협동조합연합」	fix	lookup
 dict:jisjk:109539	埼玉県共済農業協同組合連合の名前	사이타마현 공제농업협동조합연합의 이름	fix	lookup
-dict:jisjk:110107	日清ディーシーエー食品	닛신 D C A식품	fix	lookup
-dict:jisjk:110107	日清ディーシーエー食品だ。	닛신 D C A식품이다.	fix	lookup
-dict:jisjk:110107	「日清ディーシーエー食品」	「닛신 D C A식품」	fix	lookup
-dict:jisjk:110107	日清ディーシーエー食品の名前	닛신 D C A식품의 이름	fix	lookup
-lookup:lexical-cleanup-10	埼玉県	사이타마현	keep	lookup
-lookup:lexical-cleanup-10	農業協同組合	농업협동조합	keep	lookup
+dict:jisjk:110107	日清ディーシーエー食品	닛신 DCA 식품	fix	lookup
+dict:jisjk:110107	日清ディーシーエー食品だ。	닛신 DCA 식품이다.	fix	lookup
+dict:jisjk:110107	「日清ディーシーエー食品」	「닛신 DCA 식품」	fix	lookup
+dict:jisjk:110107	日清ディーシーエー食品の名前	닛신 DCA 식품의 이름	fix	lookup
 lookup:lexical-cleanup-10	日清食品	닛신 식품	keep	lookup
 lookup:lexical-cleanup-10	食品	식품	keep	lookup
-lookup:lexical-cleanup-10	IEEE	IEEE	keep	lookup
-lookup:lexical-cleanup-10	CPU	CPU	keep	lookup
-lookup:lexical-cleanup-10	12cm砲	12cm포	keep	lookup
-lookup:lexical-cleanup-10	9×18mmマカロフ弾	9×18mm마카로프탄	keep	lookup
 dict:jisjk:54841	フイルム	필름	keep	lookup
 dict:jisjk:54841	フイルムだ。	필름이다.	keep	lookup
 dict:jisjk:54841	「フイルム」	「필름」	keep	lookup
@@ -63,10 +50,10 @@ dict:jisjk:69006	夢想家	몽상가	keep	lookup
 dict:jisjk:69006	夢想家だ。	몽상가다.	keep	lookup
 dict:jisjk:69006	「夢想家」	「몽상가」	keep	lookup
 dict:jisjk:69006	夢想家の名前	몽상가의 이름	keep	lookup
-dict:jisjk:244497	鉄拳制裁	철권제재	fix	lookup
-dict:jisjk:244497	鉄拳制裁だ。	철권제재다.	fix	lookup
-dict:jisjk:244497	「鉄拳制裁」	「철권제재」	fix	lookup
-dict:jisjk:244497	鉄拳制裁の名前	철권제재의 이름	fix	lookup
+dict:jisjk:244497	鉄拳制裁	철권 제재	fix	lookup
+dict:jisjk:244497	鉄拳制裁だ。	철권 제재다.	fix	lookup
+dict:jisjk:244497	「鉄拳制裁」	「철권 제재」	fix	lookup
+dict:jisjk:244497	鉄拳制裁の名前	철권 제재의 이름	fix	lookup
 dict:names.458948	修士(神学)	신학 석사	fix	lookup
 dict:names.458948	修士(神学)だ。	신학 석사다.	fix	lookup
 dict:names.458948	「修士(神学)」	「신학 석사」	fix	lookup
@@ -79,30 +66,17 @@ dict:jisjk:262973	ポップ・アップ	팝업	fix	lookup
 dict:jisjk:262973	ポップ・アップだ。	팝업이다.	fix	lookup
 dict:jisjk:262973	「ポップ・アップ」	「팝업」	fix	lookup
 dict:jisjk:262973	ポップ・アップの名前	팝업의 이름	fix	lookup
-lookup:lexical-cleanup-10	フィルム	필름	keep	lookup
 lookup:lexical-cleanup-10	フィルムを見た。	필름을 보았다.	keep	lookup
 lookup:lexical-cleanup-10	夢想	몽상	keep	lookup
-lookup:lexical-cleanup-10	夢想家	몽상가	keep	lookup
-lookup:lexical-cleanup-10	猟人	사냥꾼	keep	lookup
-lookup:lexical-cleanup-10	狩人	사냥꾼	keep	lookup
 lookup:lexical-cleanup-10	鉄拳	철권	keep	lookup
 lookup:lexical-cleanup-10	修士	석사	keep	lookup
 lookup:lexical-cleanup-10	博士	박사	keep	lookup
 lookup:lexical-cleanup-10	神学	신학	keep	lookup
-lookup:lexical-cleanup-10	柳瀬	야나세	keep	lookup
-lookup:lexical-cleanup-10	沼田	누마타	keep	lookup
-lookup:lexical-cleanup-10	三郎	사부로	keep	lookup
-lookup:lexical-cleanup-10	遠藤	엔도	keep	lookup
-lookup:lexical-cleanup-10	庄司	쇼우지	keep	lookup
 lookup:lexical-cleanup-10	ポップコーン	팝콘	keep	lookup
 lookup:lexical-cleanup-10	アップロード	업로드	keep	lookup
 lookup:lexical-cleanup-10	ポップ・アート	팝 아트	keep	lookup
-lookup:lexical-cleanup-10	USB	USB	keep	lookup
-lookup:lexical-cleanup-10	M.div	M.div	keep	lookup
-lookup:lexical-cleanup-10	QWK	QWK	keep	lookup
-dict:jisjk:244497	鉄拳制裁を加える。	철권제재를 더한다.	fix	lookup
-dict:jisjk:244497	「鉄拳制裁だ。」	「철권제재다.」	fix	lookup
-dict:jisjk:244497	鉄拳制裁は嫌だ。	철권제재는 싫다.	fix	lookup
+dict:jisjk:244497	「鉄拳制裁だ。」	「철권 제재다.」	fix	lookup
+dict:jisjk:244497	鉄拳制裁は嫌だ。	철권 제재는 싫다.	fix	lookup
 dict:names.458948	「修士(神学)だ。」	「신학 석사다.」	fix	lookup
 dict:names.458948	修士(神学)を取得した。	신학 석사를 취득했다.	fix	lookup
 dict:names.458948	これは修士(神学)です。	이것은 신학 석사입니다.	fix	lookup

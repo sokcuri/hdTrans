@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:164543	荷おろし	짐 부리기	fix	defaults
 dict:jisjk:164543	荷おろしを始める。	짐 부리기를 시작한다.	fix	defaults
@@ -7,13 +7,10 @@ dict:jisjk:164543	船の荷おろし。	배의 짐 부리기.	fix	defaults
 dict:jisjk:164543	荷下ろし	짐 부리기	keep	defaults
 dict:jisjk:164543	荷積み	짐을 실음	keep	defaults
 dict:jisjk:164543	放出	방출	keep	defaults
-dict:jisjk:164543	荷物	짐	keep	defaults
 dict:jisjk:104504	荷電	하전	fix	defaults
-dict:jisjk:104504	荷電した粒子。	하전한 입자.	fix	defaults
 dict:jisjk:104504	荷電の状態。	하전 상태.	fix	defaults
 dict:jisjk:104504	荷電を測る。	하전을 측정한다.	fix	defaults
 dict:jisjk:104504	家電	가전	keep	defaults
-dict:jisjk:104504	家電製品	가전제품	keep	defaults
 dict:jisjk:104504	荷電粒子	하전 입자	keep	defaults
 dict:jisjk:104504	電荷	전하	keep	defaults
 dict:jisjk:168285	菓子パン	과자빵	fix	defaults
@@ -30,5 +27,3 @@ dict:jisjk:232096	菜豆の栽培。	강낭콩의 재배.	fix	defaults
 dict:jisjk:232096	菜豆を育てる。	강낭콩을 기른다.	fix	defaults
 dict:jisjk:232096	莢隠元	강낭콩	keep	defaults
 dict:jisjk:232096	莢豆	꼬투리콩	keep	defaults
-dict:jisjk:232096	大豆	대두	keep	defaults
-dict:jisjk:232096	小豆粥	팥죽	keep	defaults

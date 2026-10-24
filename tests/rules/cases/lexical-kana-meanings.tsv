@@ -1,10 +1,9 @@
-# 규칙: LEX-1, LEX-2
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:169575	からかぜが吹く。	건조한 바람이 분다.	fix	defaults
 dict:jisjk:169576	冬のからかぜ。	겨울의 건조한 바람.	fix	defaults
 dict:jisjk:169575	からかぜ。	건조한 바람.	fix	defaults
 dict:jisjk:169575	かわかぜが吹く。	강바람이 분다.	keep	defaults
-dict:jisjk:169576	海風が吹く。	갯바람이 분다.	keep	defaults
 dict:jisjk:169585	これはからくじだ。	이것은 꽝이다.	fix	defaults
 dict:jisjk:169585	からくじを引いた。	꽝을 뽑았다.	fix	defaults
 dict:jisjk:169585	からくじばかりだ。	꽝뿐이다.	fix	defaults
@@ -19,42 +18,32 @@ dict:jisjk:40770	からすみを食べる。	어란을 먹는다.	fix	defaults
 dict:jisjk:40770	からすみの味。	어란의 맛.	fix	defaults
 dict:jisjk:40770	からすみを買った。	어란을 샀다.	fix	defaults
 dict:jisjk:40770	からすが鳴く。	까마귀가 운다.	keep	defaults
-dict:jisjk:40770	魚を食べる。	생선을 먹는다.	keep	defaults
 dict:jisjk:169518	かもなんばんを食べる。	오리고기 국수를 먹는다.	fix	lookup
 dict:jisjk:169518	かもなんばんの味。	오리고기 국수의 맛.	fix	lookup
 dict:jisjk:169518	かもなんばんを注文した。	오리고기 국수를 주문했다.	fix	lookup
 dict:jisjk:169518	そばを食べる。	메밀국수를 먹는다.	keep	lookup
-dict:jisjk:169518	うどんを食べる。	우동을 먹는다.	keep	lookup
 dict:jisjk:169697	かりごやを建てた。	임시 오두막을 지었다.	fix	lookup
 dict:jisjk:169697	かりごやで休む。	임시 오두막에서 쉰다.	fix	lookup
 dict:jisjk:169697	かりごやの屋根。	임시 오두막의 지붕.	fix	lookup
 dict:jisjk:169697	小屋を建てた。	오두막을 지었다.	keep	lookup
-dict:jisjk:169697	家屋を建てた。	가옥을 지었다.	keep	lookup
 dict:jisjk:170455	かんじんもとを呼ぶ。	주최자를 부른다.	fix	lookup
 dict:jisjk:170455	かんじんもとに会った。	주최자를 만났다.	fix	lookup
 dict:jisjk:170455	かんじんもとの名前。	주최자의 이름.	fix	lookup
 dict:jisjk:170455	主催者を呼ぶ。	주최자를 부른다.	keep	lookup
-dict:jisjk:170455	酔っ払いを呼ぶ。	술주정꾼을 부른다.	keep	lookup
 dict:jisjk:170469	かんすうじで書く。	한자 숫자로 쓴다.	fix	lookup
 dict:jisjk:170469	かんすうじを読む。	한자 숫자를 읽는다.	fix	lookup
 dict:jisjk:170469	かんすうじの一覧。	한자 숫자의 일람.	fix	lookup
-dict:jisjk:170469	数字を読む。	숫자를 읽는다.	keep	lookup
-dict:jisjk:170469	漢字を読む。	한자를 읽는다.	keep	lookup
 dict:jisjk:170666	かんとうだいしんさいの記録。	관동대지진의 기록.	fix	lookup
 dict:jisjk:170666	かんとうだいしんさいを調べる。	관동대지진을 조사한다.	fix	lookup
 dict:jisjk:170666	かんとうだいしんさいの被害。	관동대지진의 피해.	fix	lookup
-dict:jisjk:170666	地震の被害。	지진의 피해.	keep	lookup
 dict:jisjk:170666	大地震の記録。	대지진의 기록.	keep	lookup
 dict:jisjk:171071	がいじしを読む。	외국어 신문을 읽는다.	fix	lookup
 dict:jisjk:171071	がいじしの記事。	외국어 신문의 기사.	fix	lookup
 dict:jisjk:171071	がいじしを買った。	외국어 신문을 샀다.	fix	lookup
-dict:jisjk:171071	新聞を読む。	신문을 읽는다.	keep	lookup
-dict:jisjk:171071	外国語の記事。	외국어의 기사.	keep	lookup
 dict:jisjk:171572	がんせきけんを調べる。	암석권을 조사한다.	fix	lookup
 dict:jisjk:171572	がんせきけんの厚さ。	암석권의 두께.	fix	lookup
 dict:jisjk:171572	がんせきけんの構造。	암석권의 구조.	fix	lookup
 dict:jisjk:171572	地殻の構造。	지각의 구조.	keep	lookup
-dict:jisjk:171572	地球の構造。	지구의 구조.	keep	lookup
 dict:jisjk:161036	がんの疑いがある。	암 의심이 있다.	fix	lookup
 dict:jisjk:161036	がんの疑いで検査する。	암 의심으로 검사한다.	fix	lookup
 dict:jisjk:161036	がんの疑い。	암 의심.	fix	lookup
@@ -64,23 +53,19 @@ dict:jisjk:171791	ききうでは左腕だ。	잘 쓰는 팔은 왼팔이다.	fi
 dict:jisjk:171791	彼のききうで。	그의 잘 쓰는 팔.	fix	lookup
 dict:jisjk:171791	ききうでを動かす。	잘 쓰는 팔을 움직인다.	fix	lookup
 dict:jisjk:171791	右腕を動かす。	오른팔을 움직인다.	keep	lookup
-dict:jisjk:171791	左腕を動かす。	왼팔을 움직인다.	keep	lookup
 dict:jisjk:172102	きしめんを食べる。	납작한 국수를 먹는다.	fix	lookup
 dict:jisjk:172102	きしめんの幅。	납작한 국수의 폭.	fix	lookup
 dict:jisjk:172102	きしめんを注文した。	납작한 국수를 주문했다.	fix	lookup
 dict:jisjk:172102	細い麺を食べる。	가는 면을 먹는다.	keep	lookup
-dict:jisjk:172102	うどんを注文した。	우동을 주문했다.	keep	lookup
 dict:jisjk:40821	きつつきが鳴く。	딱따구리가 운다.	fix	lookup
 dict:jisjk:40821	きつつきを見た。	딱따구리를 보았다.	fix	lookup
 dict:jisjk:40821	きつつきの巣。	딱따구리의 둥지.	fix	lookup
-dict:jisjk:40821	鳥が鳴く。	새가 운다.	keep	lookup
 dict:jisjk:40821	啄木鳥を見た。	딱따구리를 보았다.	keep	lookup
 dict:jisjk:172704	きびだんごを食べる。	기장 경단을 먹는다.	fix	lookup
 dict:jisjk:172704	きびだんごの味。	기장 경단의 맛.	fix	lookup
 dict:jisjk:265557	きび団子を買った。	기장 경단을 샀다.	fix	lookup
 dict:jisjk:265557	きび団子の材料。	기장 경단의 재료.	fix	lookup
 dict:jisjk:172704	だんごを食べる。	경단을 먹는다.	keep	lookup
-dict:jisjk:265557	餅を食べる。	떡을 먹는다.	keep	lookup
 dict:jisjk:99236	きめてがない。	결정적 수단이 없다.	fix	lookup
 dict:jisjk:99236	きめてを探す。	결정적 수단을 찾는다.	fix	lookup
 dict:jisjk:99236	これがきめてだ。	이것이 결정적 수단이다.	fix	lookup
@@ -89,7 +74,6 @@ dict:jisjk:99236	決めた。	결정했다.	keep	lookup
 dict:jisjk:174010	きょうわんを見た。	피오르를 보았다.	fix	lookup
 dict:jisjk:174010	きょうわんの地形。	피오르의 지형.	fix	lookup
 dict:jisjk:174010	きょうわんの入り口。	피오르의 입구.	fix	lookup
-dict:jisjk:174010	海岸の地形。	바닷가의 지형.	keep	lookup
 dict:jisjk:174010	入り江を見た。	후미를 보았다.	keep	lookup
 dict:jisjk:174044	きょくうの政党。	극우의 정당.	fix	lookup
 dict:jisjk:174044	きょくうの思想。	극우의 사상.	fix	lookup
@@ -99,34 +83,26 @@ dict:jisjk:174044	きょくさの思想。	극좌파의 사상.	keep	lookup
 dict:jisjk:174242	きょだくを得た。	승낙을 얻었다.	fix	lookup
 dict:jisjk:174242	きょだくが必要だ。	승낙이 필요하다.	fix	lookup
 dict:jisjk:174242	きょだくを求める。	승낙을 구한다.	fix	lookup
-dict:jisjk:174242	拒絶を伝える。	거절을 전한다.	keep	lookup
-dict:jisjk:174242	許可を得た。	허가를 얻었다.	keep	lookup
 dict:jisjk:172861	きゃくまちをする。	손님 대기를 한다.	fix	lookup
 dict:jisjk:172861	きゃくまちで疲れた。	손님 대기로 지쳤다.	fix	lookup
 dict:jisjk:172861	きゃくまち。	손님 대기.	fix	lookup
 dict:jisjk:172861	タクシー乗り場。	택시 승강장.	keep	lookup
-dict:jisjk:172861	タクシー乗り場で待つ。	택시 승강장에서 기다린다.	keep	lookup
 dict:jisjk:175151	ぎっしゃに乗る。	소달구지를 탄다.	fix	defaults
 dict:jisjk:175151	ぎっしゃを引く牛。	소달구지를 당기는 소.	fix	defaults
 dict:jisjk:175151	ぎっしゃで移動した。	소달구지로 이동했다.	fix	defaults
 dict:jisjk:175151	ぎっしゃの車輪。	소달구지의 바퀴.	fix	defaults
 dict:jisjk:175151	馬車に乗る。	마차를 탄다.	keep	defaults
-dict:jisjk:175151	牛が草を食べる。	소가 풀을 먹는다.	keep	defaults
 dict:jisjk:40892	くろうまに乗る。	검은 말을 탄다.	fix	defaults
 dict:jisjk:40892	くろうまが走る。	검은 말이 달린다.	fix	defaults
 dict:jisjk:40892	くろうまのたてがみ。	검은 말의 갈기.	fix	defaults
-dict:jisjk:40892	黒熊が眠る。	흑웅이 잔다.	keep	defaults
-dict:jisjk:40892	白馬に乗る。	백마를 탄다.	keep	defaults
 dict:jisjk:176723	くろづくりを食べる。	오징어 젓을 먹는다.	fix	defaults
 dict:jisjk:176723	くろづくりの味。	오징어 젓의 맛.	fix	defaults
 dict:jisjk:176723	くろづくりを買った。	오징어 젓을 샀다.	fix	defaults
 dict:jisjk:176723	塩辛を食べる。	젓갈을 먹는다.	keep	defaults
-dict:jisjk:176723	牛乳を飲む。	우유를 마신다.	keep	defaults
 dict:jisjk:176849	くんどうに会った。	초등학교 교사를 만났다.	fix	defaults
 dict:jisjk:176849	くんどうから聞いた。	초등학교 교사에게서 들었다.	fix	defaults
 dict:jisjk:176849	くんどうが教えた。	초등학교 교사가 가르쳤다.	fix	defaults
 dict:jisjk:176849	くんどうの名前。	초등학교 교사의 이름.	fix	defaults
-dict:jisjk:176849	小学校で教える。	초등학교에서 가르친다.	keep	defaults
 dict:jisjk:176849	教師に会った。	교사를 만났다.	keep	defaults
 dict:jisjk:176849	くんどうに手紙を送る。	초등학교 교사에게 편지를 보낸다.	fix	defaults
 dict:jisjk:176849	くんどうと話す。	초등학교 교사와 이야기한다.	fix	defaults
@@ -140,7 +116,6 @@ dict:jisjk:177149	けいあんを呼ぶ。	중매쟁이를 부른다.	fix	defaul
 dict:jisjk:177149	けいあんに頼む。	중매쟁이에게 부탁한다.	fix	defaults
 dict:jisjk:177149	けいあんの仕事。	중매쟁이의 일.	fix	defaults
 dict:jisjk:177149	仲人を呼ぶ。	중매인을 부른다.	keep	defaults
-dict:jisjk:177149	職人の仕事。	장인의 일.	keep	defaults
 dict:jisjk:177534	けいそうどを使う。	규조토를 쓴다.	fix	defaults
 dict:jisjk:177534	けいそうどの壁。	규조토의 벽.	fix	defaults
 dict:jisjk:177534	けいそうどを買った。	규조토를 샀다.	fix	defaults
@@ -153,12 +128,9 @@ dict:jisjk:111842	けし粒ほど小さい。	양귀비씨만큼 작다.	keep	de
 dict:jisjk:343018	けたを数える。	자릿수를 센다.	fix	defaults
 dict:jisjk:343018	けたが増える。	자릿수가 늘어난다.	fix	defaults
 dict:jisjk:343018	けたの数。	자릿수의 수.	fix	defaults
-dict:jisjk:343018	肩が痛い。	어깨가 아프다.	keep	defaults
 dict:jisjk:178093	けらつつきが鳴く。	딱따구리가 운다.	fix	defaults
 dict:jisjk:178093	けらつつきの羽。	딱따구리의 날개.	fix	defaults
 dict:jisjk:178093	けらつつきを見た。	딱따구리를 보았다.	fix	defaults
-dict:jisjk:178093	きつつきが鳴く。	딱따구리가 운다.	fix	defaults
-dict:jisjk:178093	雀が鳴く。	참새가 운다.	keep	defaults
 dict:jisjk:178143	けんおんする。	체온 측정한다.	fix	defaults
 dict:jisjk:178143	けんおんの時間。	체온 측정의 시간.	fix	defaults
 dict:jisjk:178143	朝のけんおん。	아침의 체온 측정.	fix	defaults
@@ -170,9 +142,6 @@ dict:jisjk:90743	椅子をけ倒して逃げた。	의자를 차서 넘어뜨려
 dict:jisjk:90743	椅子をけ倒さない。	의자를 차서 넘어뜨리지 않는다.	fix	defaults
 dict:jisjk:90743	椅子をけ倒せばいい。	의자를 차서 넘어뜨리면 된다.	fix	defaults
 dict:jisjk:90743	椅子を蹴倒した。	의자를 차서 넘어뜨렸다.	keep	defaults
-dict:jisjk:90743	ボールを蹴る。	공을 찬다.	keep	defaults
-dict:jisjk:111842	からしを使う。	겨자를 쓴다.	keep	defaults
-dict:jisjk:343018	数字を数える。	숫자를 센다.	keep	defaults
 dict:jisjk:178143	けんおんした。	체온 측정했다.	fix	defaults
 dict:jisjk:178143	けんおんして記録する。	체온 측정해 기록한다.	fix	defaults
 dict:jisjk:178143	けんおんしない。	체온 측정하지 않는다.	fix	defaults
@@ -181,10 +150,7 @@ dict:jisjk:180785	こうぞうか。	구조화.	fix	defaults
 dict:jisjk:180785	こうぞうかを進める。	구조화를 진행시킨다.	fix	defaults
 dict:jisjk:180785	文書のこうぞうか。	문서의 구조화.	fix	defaults
 dict:jisjk:180785	こうぞうかの方法。	구조화의 방법.	fix	defaults
-dict:jisjk:180785	構造を調べる。	구조를 조사한다.	keep	defaults
-dict:jisjk:180785	構造的な問題。	구조적인 문제.	keep	defaults
 dict:jisjk:181429	こうもりがさを開く。	우산을 연다.	fix	defaults
-dict:jisjk:181429	こうもりがさを閉じる。	우산을 닫는다.	fix	defaults
 dict:jisjk:181429	黒いこうもりがさ。	검은 우산.	fix	defaults
 dict:jisjk:181429	日傘を使う。	양산을 쓴다.	keep	defaults
 dict:jisjk:181429	雨傘を使う。	우산을 쓴다.	keep	defaults
@@ -199,29 +165,23 @@ dict:jisjk:119276	こくびをひねった。	고개를 갸우뚱했다.	fix	def
 dict:jisjk:119276	こくびをひねっている。	고개를 갸우뚱하고 있다.	fix	defaults
 dict:jisjk:119276	こくびをひねらない。	고개를 갸우뚱하지 않는다.	fix	defaults
 dict:jisjk:119276	首をひねる。	고개를 갸우뚱한다.	keep	defaults
-dict:jisjk:119276	首を回す。	목을 돌린다.	keep	defaults
 dict:jisjk:111702	こけら落とし。	개관 첫 공연.	fix	defaults
 dict:jisjk:111702	劇場のこけら落とし。	극장의 개관 첫 공연.	fix	defaults
 dict:jisjk:111702	こけら落としを行う。	개관 첫 공연을 실시한다.	fix	defaults
-dict:jisjk:111702	客観的な意見。	객관적인 의견.	keep	defaults
 dict:jisjk:182272	こしぬけだ。	겁쟁이다.	fix	defaults
 dict:jisjk:182272	彼はこしぬけだ。	그는 겁쟁이다.	fix	defaults
 dict:jisjk:182272	こしぬけと呼ばれた。	겁쟁이로 불렸다.	fix	defaults
 dict:jisjk:182272	腰抜けだ。	겁쟁이다.	keep	defaults
-dict:jisjk:182272	職人の仕事。	장인의 일.	keep	defaults
 dict:jisjk:182273	こしぬけ。	겁쟁이.	fix	defaults
 dict:jisjk:182273	このこしぬけ。	이 겁쟁이.	fix	defaults
 dict:jisjk:182273	こしぬけではない。	겁쟁이가 아니다.	fix	defaults
-dict:jisjk:182273	鍛冶屋の仕事。	대장간의 일.	keep	defaults
 dict:jisjk:180785	構造化。	구조화.	keep	defaults
 dict:jisjk:181429	こうもりがさを持っている。	우산을 가지고 있다.	fix	defaults
-dict:jisjk:111702	開館記念の公演。	개관 기념의 공연.	keep	defaults
-dict:jisjk:182273	勇敢な男だ。	용감한 남자다.	keep	defaults
 dict:jisjk:182272	こしぬけになりたくない。	겁쟁이가 되고 싶지 않다.	fix	defaults
 dict:jisjk:182273	こしぬけが逃げた。	겁쟁이가 도망쳤다.	fix	defaults
-dict:jisjk:120031	こってりとしたスープ。	걸쭉한 스프.	fix	defaults
-dict:jisjk:120031	こってりとしている。	걸쭉하다.	fix	defaults
-dict:jisjk:120031	こってりとした味。	걸쭉한 맛.	fix	defaults
+dict:jisjk:120031	こってりとしたスープ。	진한 스프.	fix	defaults
+dict:jisjk:120031	こってりとしている。	진하다.	fix	defaults
+dict:jisjk:120031	こってりとした味。	진한 맛.	fix	defaults
 dict:jisjk:362297	この度はありがとうございます。	이번에는 감사합니다.	fix	defaults
 dict:jisjk:362297	この度はお世話になりました。	이번에는 신세를 졌습니다.	fix	defaults
 dict:jisjk:362297	この度は私の番だ。	이번에는 내 차례다.	fix	defaults
@@ -233,7 +193,6 @@ dict:jisjk:40984	こぶまきを買う。	다시마말이를 산다.	fix	default
 dict:jisjk:40984	昆布巻きを食べる。	다시마말이를 먹는다.	keep	defaults
 dict:jisjk:183169	こわだんぱんをする。	강경한 담판을 한다.	fix	defaults
 dict:jisjk:183169	こわだんぱんの末。	강경한 담판의 끝.	fix	defaults
-dict:jisjk:183169	交渉する。	교섭한다.	keep	defaults
 dict:jisjk:183169	強硬な態度。	강경한 태도.	keep	defaults
 dict:jisjk:123120	説明をごらんのうえ、ご連絡ください。	설명을 보신 후에, 연락해 주십시오.	fix	defaults
 dict:jisjk:123120	内容をごらんのうえ、判断する。	내용을 보신 후에, 판단한다.	fix	defaults
@@ -249,13 +208,11 @@ dict:jisjk:262860	適切なご措置をもって。	적절한 조치를 취해.	
 dict:jisjk:262860	ご措置をもって。	조치를 취해.	fix	defaults
 dict:jisjk:262860	措置を取る。	조치를 취한다.	keep	defaults
 dict:jisjk:262860	処置を行う。	처치를 실시한다.	keep	defaults
-dict:jisjk:120031	こってりとした汁。	걸쭉한 국물.	fix	defaults
-dict:jisjk:120031	こってりとしています。	걸쭉합니다.	fix	defaults
+dict:jisjk:120031	こってりとした汁。	진한 국물.	fix	defaults
+dict:jisjk:120031	こってりとしています。	진합니다.	fix	defaults
 dict:jisjk:120031	さっぱりした味。	담백한 맛.	keep	defaults
-dict:jisjk:120031	薄いスープ。	싱거운 스프.	keep	defaults
 dict:jisjk:123120	見てから答えてください。	보고 나서 대답해 주세요.	keep	defaults
 dict:jisjk:106560	ご健康が心配です。	건강이 걱정입니다.	fix	defaults
-dict:jisjk:40984	昆布を使う。	다시마를 쓴다.	keep	defaults
 dict:jisjk:40984	鰊を食べる。	청어를 먹는다.	keep	defaults
 dict:jisjk:40984	こぶまき。	다시마말이.	fix	defaults
 dict:jisjk:183169	こわだんぱん。	강경한 담판.	fix	defaults
@@ -279,7 +236,6 @@ dict:jisjk:184877	さくぎょうから。	어제 새벽녘부터.	fix	defaults
 dict:jisjk:184877	さくぎょうに出発した。	어제 새벽녘에 출발했다.	fix	defaults
 dict:jisjk:184877	さくぎょうの空。	어제 새벽녘의 하늘.	fix	defaults
 dict:jisjk:184877	さくちょうの雨。	어제 아침의 비.	keep	defaults
-dict:jisjk:184877	今朝の空。	오늘 아침의 하늘.	keep	defaults
 dict:jisjk:356234	さし木で増やす。	꺾꽂이로 늘린다.	fix	defaults
 dict:jisjk:356234	さし木の方法。	꺾꽂이의 방법.	fix	defaults
 dict:jisjk:356234	さし木をする。	꺾꽂이를 한다.	fix	defaults
@@ -297,8 +253,6 @@ dict:jisjk:486	雨にしっぽり濡れる。	비에 촉촉이 젖는다.	fix	de
 dict:jisjk:486	しっぽりと濡れた髪。	촉촉이 젖은 머리카락.	fix	defaults
 dict:jisjk:486	しっぽり濡れた布。	촉촉이 젖은 천.	fix	defaults
 dict:jisjk:486	びっしょり濡れた服。	흠뻑 젖은 옷.	keep	defaults
-dict:jisjk:486	酒を飲む。	술을 마신다.	keep	defaults
-dict:jisjk:486	静かに話す。	조용하게 이야기한다.	keep	defaults
 dict:jisjk:189085	しゅうあけに会う。	주초에 만난다.	fix	defaults
 dict:jisjk:189085	しゅうあけの月曜日。	주초 월요일.	fix	defaults
 dict:jisjk:189085	しゅうあけまで待つ。	주초까지 기다린다.	fix	defaults
@@ -306,7 +260,6 @@ dict:jisjk:189085	しゅうあけから始まる。	주초부터 시작된다.	f
 dict:jisjk:189085	しゅうあけの会議。	주초의 회의.	fix	defaults
 dict:jisjk:189085	来週のしゅうあけ。	다음주 주초.	fix	defaults
 dict:jisjk:189085	週末に会う。	주말에 만난다.	keep	defaults
-dict:jisjk:189085	月末の会議。	월말의 회의.	keep	defaults
 dict:jisjk:486	雪にしっぽり濡れた服。	눈에 촉촉이 젖은 옷.	fix	defaults
 dict:jisjk:486	袖がしっぽり濡れた。	소매가 촉촉이 젖었다.	fix	defaults
 dict:jisjk:486	肩がしっぽり濡れた。	어깨가 촉촉이 젖었다.	fix	defaults
@@ -314,17 +267,14 @@ dict:jisjk:486	しっぽりと濡れた道。	촉촉이 젖은 길.	fix	defaults
 dict:jisjk:486	夜露にしっぽり濡れる。	밤이슬에 촉촉이 젖는다.	fix	defaults
 dict:jisjk:486	しっぽり濡れた靴。	촉촉이 젖은 구두.	fix	defaults
 dict:jisjk:486	雨に濡れた服。	비에 젖은 옷.	keep	defaults
-dict:jisjk:486	乾いた髪。	마른 머리카락.	keep	defaults
 dict:jisjk:189085	しゅうあけの予定。	주초의 예정.	fix	defaults
 dict:jisjk:189085	しゅうあけには帰る。	주초에는 돌아간다.	fix	defaults
 dict:jisjk:189085	しゅうあけに始まった。	주초에 시작했다.	fix	defaults
 dict:jisjk:189085	しゅうあけの朝。	주초 아침.	fix	defaults
 dict:jisjk:189085	週末の会議。	주말의 회의.	keep	defaults
-dict:jisjk:189085	年末に帰る。	연말에 돌아간다.	keep	defaults
-dict:jisjk:189085	来月の予定。	내달의 예정.	keep	defaults
 lookup:national-strength	こくりょくを高める。	국력을 높인다.	keep	defaults
 lookup:national-strength	こくりょくを強める。	국력을 강하게 한다.	keep	defaults
-sense:capacity-growth	のりをつける。	풀을 붙인다.	keep	senses
-sense:capacity-growth	のりをつけた。	풀을 붙였다.	keep	senses
-sense:capacity-growth	のりをつけている。	풀을 붙이고 있다.	keep	senses
-sense:capacity-growth	のりをつけない。	풀을 붙이지 않는다.	keep	senses
+dict:w:27283	のりをつける。	풀을 바른다.	fix	defaults
+dict:w:27283	のりをつけた。	풀을 발랐다.	fix	defaults
+dict:w:27283	のりをつけている。	풀을 바르고 있다.	fix	defaults
+dict:w:27283	のりをつけない。	풀을 바르지 않는다.	fix	defaults

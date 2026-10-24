@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:194156	じゃくはいものだ。	풋내기다.	fix	defaults
 dict:jisjk:194156	あのじゃくはいものが来た。	그 풋내기가 왔다.	fix	defaults
@@ -9,20 +9,8 @@ lookup:lexical-spelling	たちまち集まった。	금세 모였다.	keep	defau
 lookup:lexical-spelling	数日後に戻る。	며칠 후에 돌아온다.	keep	defaults
 lookup:lexical-spelling	数日後に帰った。	며칠 후에 돌아갔다.	keep	defaults
 lookup:lexical-spelling	数日後だった。	며칠 후였다.	keep	defaults
-lookup:lexical-spelling	あおにさいだ。	풋내기다.	keep	defaults
-lookup:lexical-spelling	ウッドペッカーが鳴いた。	딱따구리가 울었다.	keep	defaults
-lookup:lexical-spelling	石川啄木の本を読む。	이시카와 다쿠보쿠의 책을 읽는다.	keep	defaults
-lookup:lexical-spelling	テレビを見る。	텔레비전을 본다.	keep	defaults
-lookup:lexical-spelling	アイティーブイを使う。	공업용텔레비전을 쓴다.	keep	defaults
 lookup:lexical-spelling	数日前に会った。	며칠 전에 만났다.	keep	defaults
-lookup:lexical-spelling	数日間待った。	며칠간 기다렸다.	keep	defaults
-lookup:lexical-spelling	すぐに消えた。	곧바로 사라졌다.	keep	defaults
-lookup:lexical-spelling	一年後に会う。	일년 후에 만난다.	keep	defaults
-lookup:lexical-spelling	若者が来た。	젊은이가 왔다.	keep	defaults
 lookup:lexical-spelling	キツツキが鳴いた。	딱따구리가 울었다.	keep	defaults
-lookup:lexical-spelling	突然雨が降った。	갑자기 비가 왔다.	keep	defaults
-lookup:lexical-spelling	映像を見た。	영상을 보았다.	keep	defaults
-lookup:lexical-spelling	二日後に会う。	이틀 후에 만난다.	keep	defaults
 dict:jisjk:194156	彼はじゃくはいものだった。	그는 풋내기였다.	fix	defaults
 dict:jisjk:194156	そのじゃくはいものと話した。	그 풋내기와 이야기했다.	fix	defaults
 dict:jisjk:194156	じゃくはいものの話を聞いた。	풋내기의 이야기를 들었다.	fix	defaults

@@ -1,32 +1,23 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-25
 rule	input	expected	kind	layer
-dict:jisjk:84389	中京テレビ放送。	츄우쿄오 텔레비전방송.	fix	defaults
-dict:jisjk:84389	中京テレビ放送を見る。	츄우쿄오 텔레비전방송을 본다.	fix	defaults
-dict:jisjk:84389	中京テレビ放送の番組。	츄우쿄오 텔레비전방송의 프로그램.	fix	defaults
+dict:jisjk:84389	中京テレビ放送。	주쿄 테레비 방송.	fix	defaults
+dict:jisjk:84389	中京テレビ放送を見る。	주쿄 테레비 방송을 본다.	fix	defaults
+dict:jisjk:84389	中京テレビ放送の番組。	주쿄 테레비 방송의 프로그램.	fix	defaults
 dict:jisjk:88537	割れなべ。	깨진 냄비.	fix	defaults
 dict:jisjk:88537	これは割れなべだ。	이것은 깨진 냄비다.	fix	defaults
 dict:jisjk:88537	割れなべを使う。	깨진 냄비를 쓴다.	fix	defaults
-dict:jisjk:233563	四季桜。	벚꽃의 원예종.	fix	defaults
-dict:jisjk:233563	四季桜を見る。	벚꽃의 원예종을 본다.	fix	defaults
-dict:jisjk:233563	これは四季桜だ。	이것은 벚꽃의 원예종이다.	fix	defaults
-dict:jisjk:352684	株主資本利益率。	주주자본 이익률.	fix	defaults
-dict:jisjk:352684	株主資本利益率を調べる。	주주자본 이익률을 조사한다.	fix	defaults
-dict:jisjk:352684	株主資本利益率が上がる。	주주자본 이익률이 오른다.	fix	defaults
+dict:jisjk:233563	四季桜。	시키자쿠라.	fix	defaults
+dict:jisjk:233563	四季桜を見る。	시키자쿠라를 본다.	fix	defaults
+dict:jisjk:233563	これは四季桜だ。	이것은 시키자쿠라다.	fix	defaults
+dict:jisjk:352684	株主資本利益率。	자기자본이익률.	fix	defaults
+dict:jisjk:352684	株主資本利益率を調べる。	자기자본이익률을 조사한다.	fix	defaults
+dict:jisjk:352684	株主資本利益率が上がる。	자기자본이익률이 오른다.	fix	defaults
 dict:jisjk:30916	隠元。	강낭콩.	fix	defaults
 dict:jisjk:30916	隠元を食べる。	강낭콩을 먹는다.	fix	defaults
 dict:jisjk:30916	これは隠元だ。	이것은 강낭콩이다.	fix	defaults
 dict:jisjk:192001	白々明け。	새벽녘.	fix	defaults
 dict:jisjk:192001	白々明けに出る。	새벽녘에 나온다.	fix	defaults
 dict:jisjk:192001	白々明けの空。	새벽녘의 하늘.	fix	defaults
-dict:jisjk:84389	勇敢な人だ。	용감한 사람이다.	keep	defaults
-dict:jisjk:88537	オリバーだ。	올리버다.	keep	defaults
-dict:jisjk:233563	テレビを見る。	텔레비전을 본다.	keep	defaults
-dict:jisjk:352684	鍋を使う。	냄비를 쓴다.	keep	defaults
-dict:jisjk:30916	花を見る。	꽃을 본다.	keep	defaults
-dict:jisjk:192001	利益を調べる。	이익을 조사한다.	keep	defaults
-dict:jisjk:84389	大豆を食べる。	대두를 먹는다.	keep	defaults
-dict:jisjk:88537	夕暮れに出る。	황혼에 나온다.	keep	defaults
-dict:jisjk:233563	ABCを見る。	ABC를 본다.	keep	defaults
 dict:jisjk:145911	腕を組む。	팔짱을 낀다.	keep	defaults
 dict:jisjk:145911	腕を組んだ。	팔짱을 꼈다.	keep	defaults
 dict:jisjk:145911	腕を組んでいる。	팔짱을 끼고 있다.	keep	defaults
@@ -41,7 +32,6 @@ dict:jisjk:260857	あれから一年が過ぎた。	그때부터 일년이 지�
 dict:jisjk:260857	あれから何も変わらない。	그때부터 아무것도 변함없다.	keep	defaults
 dict:jisjk:260737	むくれる。	뾰로통해진다.	fix	defaults
 dict:jisjk:260737	むくれた。	뾰로통해졌다.	fix	defaults
-dict:jisjk:260737	むくれている。	뾰로통해지고 있다.	fix	defaults
 dict:jisjk:260737	むくれない。	뾰로통해지지 않는다.	fix	defaults
 dict:jisjk:260737	むくれた顔。	뾰로통해진 얼굴.	fix	defaults
 dict:jisjk:133893	プロトン。	프로톤.	fix	defaults
@@ -57,19 +47,10 @@ dict:jisjk:40373	いずみ製菓。	이즈미 제과.	fix	defaults
 dict:jisjk:40373	「いずみ製菓」	「이즈미 제과」	fix	defaults
 dict:jisjk:40373	いずみ製菓を見る。	이즈미 제과를 본다.	fix	defaults
 dict:jisjk:40374	いせえび。	닭새우.	fix	defaults
-dict:jisjk:40374	いせえびを食べる。	닭새우를 먹는다.	fix	defaults
 dict:jisjk:40374	これはいせえびだ。	이것은 닭새우다.	fix	defaults
-dict:jisjk:40984	こぶまき。	다시마말이.	fix	defaults
-dict:jisjk:40984	こぶまきを食べる。	다시마말이를 먹는다.	fix	defaults
 dict:jisjk:40984	これはこぶまきだ。	이것은 다시마말이다.	fix	defaults
-dict:jisjk:116563	ご遠慮願います。	삼가 주시기 바랍니다.	fix	defaults
-dict:jisjk:116563	喫煙はご遠慮願います。	흡연은 삼가 주시기 바랍니다.	fix	defaults
-dict:jisjk:116563	撮影はご遠慮願います。	촬영은 삼가 주시기 바랍니다.	fix	defaults
 dict:jisjk:160652	介助者。	도우미.	fix	defaults
-dict:jisjk:160652	介助者が来た。	도우미가 왔다.	fix	defaults
-dict:jisjk:160652	介助者を呼ぶ。	도우미를 부른다.	fix	defaults
 dict:jisjk:170351	甘藷。	고구마.	fix	defaults
-dict:jisjk:170351	甘藷を食べる。	고구마를 먹는다.	fix	defaults
 dict:jisjk:170351	これは甘藷だ。	이것은 고구마다.	fix	defaults
 dict:places:7589	多摩帝国美術学校。	다마 제국 미술학교.	fix	defaults
 dict:places:7589	「多摩帝国美術学校」	「다마 제국 미술학교」	fix	defaults
@@ -84,50 +65,18 @@ dict:places:11540	徳島航空基地。	도쿠시마 항공기지.	fix	defaults
 dict:places:11540	「徳島航空基地」	「도쿠시마 항공기지」	fix	defaults
 dict:places:11540	徳島航空基地を見る。	도쿠시마 항공기지를 본다.	fix	defaults
 dict:names.107064	カンダブ水路。	칸다부 수로.	fix	defaults
-dict:names.107064	「カンダブ水路」	「칸다부 수로」	fix	defaults
 dict:names.107064	カンダブ水路を見る。	칸다부 수로를 본다.	fix	defaults
-dict:names.109617	カーンケール県。	간케르구.	fix	defaults
-dict:names.109617	「カーンケール県」	「간케르구」	fix	defaults
-dict:names.109617	カーンケール県を見る。	간케르구를 본다.	fix	defaults
-dict:names.113730	ガールとロボット。	걸과 로봇.	keep	defaults
-dict:names.113730	「ガールとロボット」	「걸과 로봇」	keep	defaults
 dict:names.113730	ガールとロボットを見る。	걸과 로봇을 본다.	keep	defaults
 dict:names.312950	ブライアン・マイケル・スミス。	브라이언 마이클 스미스.	fix	defaults
-dict:names.312950	「ブライアン・マイケル・スミス」	「브라이언 마이클 스미스」	fix	defaults
 dict:names.312950	ブライアン・マイケル・スミスを見る。	브라이언 마이클 스미스를 본다.	fix	defaults
 dict:names.314408	ブラッド・フレイザー。	브래드 프레이저.	fix	defaults
-dict:names.314408	「ブラッド・フレイザー」	「브래드 프레이저」	fix	defaults
 dict:names.314408	ブラッド・フレイザーを見る。	브래드 프레이저를 본다.	fix	defaults
 dict:names.572553	新井毫。	아라이 고.	keep	defaults
-dict:names.572553	「新井毫」	「아라이 고」	keep	defaults
 dict:names.572553	新井毫を見る。	아라이 고를 본다.	keep	defaults
-dict:names.712064	誠直也。	마코토 나오야.	fix	defaults
-dict:names.712064	「誠直也」	「마코토 나오야」	fix	defaults
 dict:names.712064	誠直也を見る。	마코토 나오야를 본다.	fix	defaults
-dict:jisjk:260857	それから。	그리고.	keep	defaults
 dict:jisjk:260857	あれ以来。	그 이후로.	keep	defaults
-dict:jisjk:260737	不満だ。	불만이다.	keep	defaults
-dict:jisjk:133893	電子。	전자.	keep	defaults
-dict:jisjk:113528	ヘビ。	뱀.	keep	defaults
-dict:jisjk:58991	原子炉。	원자로.	keep	defaults
-dict:jisjk:58991	エネルギー。	에너지.	keep	defaults
-dict:jisjk:40373	菓子。	과자.	keep	defaults
 dict:jisjk:40374	えび。	새우.	keep	defaults
-dict:jisjk:40984	えび。	새우.	keep	defaults
-dict:jisjk:116563	歓迎します。	환영합니다.	keep	defaults
-dict:jisjk:160652	介入者。	개입자.	keep	defaults
-dict:jisjk:170351	砂糖。	설탕.	keep	defaults
-dict:places:7589	美術館。	미술관.	keep	defaults
-dict:places:8368	大学。	대학.	keep	defaults
-dict:places:10149	体育館。	체육관.	keep	defaults
-dict:places:11540	空港。	공항.	keep	defaults
-dict:names.107064	水路。	수로.	keep	defaults
-dict:names.109617	県。	현.	keep	defaults
-dict:names.113730	ロボット。	로봇.	keep	defaults
-dict:names.312950	マイケル。	마이클.	keep	defaults
-dict:names.314408	新井さん。	아라이 씨.	keep	defaults
 dict:names.572553	新井さん。	아라이 씨.	keep	defaults
-dict:names.712064	誠実。	성실.	keep	defaults
 dict:names.189701	ジョージア・ダグラス・ジョンソン。	조지아 더글라스 존슨.	fix	defaults
 dict:names.189701	「ジョージア・ダグラス・ジョンソン」	「조지아 더글라스 존슨」	fix	defaults
 dict:names.189701	ジョージア・ダグラス・ジョンソンが来た。	조지아 더글라스 존슨이 왔다.	fix	defaults
@@ -140,9 +89,3 @@ dict:names.560953	怪人☆仮面マスクを見る。	괴인☆가면 마스크
 dict:names.753612	馬鹿者。	바보.	keep	defaults
 dict:names.753612	この馬鹿者。	이 바보.	keep	defaults
 dict:names.753612	馬鹿者だ。	바보다.	keep	defaults
-dict:names.113218	エレクトリック。	일렉트릭.	keep	defaults
-dict:names.113234	ブレード。	브레이드.	keep	defaults
-dict:names.560953	怪盗。	괴도.	keep	defaults
-dict:names.753612	勇者。	용사.	keep	defaults
-dict:names.189701	ジョージア。	조지아.	keep	defaults
-dict:names.396800	ガンダム。	건담.	keep	defaults

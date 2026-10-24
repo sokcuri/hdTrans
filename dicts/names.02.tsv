@@ -69630,7 +69630,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 茨城弁	이바라키 사투리	N110			GN							names.695951
 茨城放送	이바라키 방송	N130	QCTVPl		GN							names.695952
 茨城新聞	이바라키 신문	N130	QWK		GN							names.695953
-茨城朝鮮初中高級学校	이바라기조선초중고급학교	N130	VGt		GN							names.695954
+茨城朝鮮初中高級学校	이바라키조선초중고급학교	N130	VGt		GN							names.695954
 茨城皇子	우마라키노미코	N130	QPNVHn	Wb	GN							names.695955
 茨城県第1区	이바라키현 제1구	N130	QCTVPl		GN							names.695956
 茨城県第2区	이바라키현 제2구	N130	QCTVPl		GN							names.695957
@@ -89213,8 +89213,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 賢澄	요시즈미	N130	QPNVHn	Wb	GN						よしずみ	names.715534
 賢狼	호로	N130	QPNVHn	Wb	GN							names.715535
 賢狼	히로	N130	QPNVHn	Wb	GN							names.715536
-賢狼ホロ	호로	N130	QPNVHn	Wb	GN							names.715537
-賢狼ホロ	호로	N130	QPNVHn	Wb	GN							names.715538
+賢狼ホロ	현랑 호로	N130	QPNVHn	Wb	GN							names.715537
+賢狼ホロ	현랑 호로	N130	QPNVHn	Wb	GN							names.715538
 賢王キングバーン	현왕 킹 번	N110			GN						けんおうきんぐばーん	names.715539
 賢王ポロン	현왕 포롱	N130	QPNVHn		GN							names.715540
 賢瑞官カルダーン	현서관 카르단	N130	QPNVHn		GN							names.715541
@@ -108405,7 +108405,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鉄拳タッグトーナメント2	철권 태그 토너먼트 2	N110			GN							names.734726
 鉄拳チンミ	쿵후보이 친미	N130	QWK		GN							names.734727
 鉄拳レボリューション	철권 레볼루션	N110			GN							names.734728
-鉄拳制裁	철권제재	N110			GN							names.734729
+鉄拳制裁	철권 제재	N110			GN							names.734729
 鉄拳戦士アイアン・キッド	아이언 키드	N130	QWK		GN							names.734730
 鉄拳王	철권왕	N110			GN						てっけんおう	names.734731
 鉄斎	뎃사이	N130	QPNVHn	Wb	GN							names.734732
@@ -121491,7 +121491,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 静岡県第8区	시즈오카현 제8구	N130	QCTVPl		GN							names.747812
 静岡県第9区	시즈오카현 제9구	N130	QCTVPl		GN							names.747813
 静岡県選挙区	시즈오카현 선거구	N130	QCTVPl		GN							names.747814
-静岡第一テレビ	시즈오카 제일 TV	N110			GN							names.747815
+静岡第一テレビ	시즈오카 다이이치 테레비	N110			GN							names.747815
 静岡鉄道	시즈오카 철도	N130	VGt		GN							names.747816
 静岡鉄道1000形	시즈오카 철도 1000형	N110			GN							names.747817
 静岡鉄道A3000形	시즈오카 철도 A3000형	N110			GN							names.747818
@@ -134589,7 +134589,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鯨岡兵輔	쿠지라오카 효스케	N130	QPNVHn		GN							names.760911
 鯨岡大吾郎	쿠지라오카 다이고로	N130	QPNVHn		GN						くじらおか だいごろう	names.760912
 鯨岡峻	구지라오카 다카시	N130	QPNVHn		GN							names.760913
-鯨木かさね	구지라기 카사네	N130	QPNVHn		GN						くじらきかさね	names.760914
+鯨木かさね	구지라키 카사네	N130	QPNVHn		GN						くじらきかさね	names.760914
 鯨木大介	쿠지라기 다이스케	N130	QPNVHn		GN						くじらぎ だいすけ	names.760915
 鯨歌	고래의 노래	N130	QWK		GN							names.760916
 鯨波兵庫	쿠지라나미 효고	N130	QPNVHn		GN						くじらなみ ひょうご	names.760917

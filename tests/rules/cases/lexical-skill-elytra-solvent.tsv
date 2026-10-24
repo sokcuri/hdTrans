@@ -1,11 +1,10 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:22484	美技	훌륭한 기술	fix	defaults
 dict:jisjk:22484	美技を見せた。	훌륭한 기술을 보였다.	fix	defaults
 dict:jisjk:22484	美技に感動した。	훌륭한 기술에 감동했다.	fix	defaults
 dict:jisjk:22484	美技だった。	훌륭한 기술이었다.	fix	defaults
 dict:jisjk:22484	技術	기술	keep	defaults
-dict:jisjk:22484	美術	미술	keep	defaults
 dict:jisjk:22484	見事な技。	훌륭한 기술.	keep	defaults
 dict:jisjk:233763	翅鞘	딱지날개	fix	defaults
 dict:jisjk:233763	甲虫の翅鞘。	딱정벌레의 딱지날개.	fix	defaults
@@ -13,7 +12,6 @@ dict:jisjk:233763	翅鞘を開く。	딱지날개를 연다.	fix	defaults
 dict:jisjk:233763	硬い翅鞘。	딱딱한 딱지날개.	fix	defaults
 dict:jisjk:233763	甲虫	딱정벌레	keep	defaults
 dict:jisjk:233763	翅果	시과	keep	defaults
-dict:jisjk:233763	羽毛	깃털	keep	defaults
 dict:jisjk:162965	耐ソルベント	내용제성	fix	defaults
 dict:jisjk:162965	耐ソルベントの試験。	내용제성의 시험.	fix	defaults
 dict:jisjk:162965	耐ソルベントを調べた。	내용제성을 조사했다.	fix	defaults

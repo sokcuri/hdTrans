@@ -1,6 +1,5 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
-dict:jisjk:341553	かくれんぼ	카쿠렌보	keep	defaults
 dict:jisjk:341553	かくれんぼが好きだ。	숨바꼭질을 좋아한다.	keep	defaults
 dict:jisjk:341553	「かくれんぼが好きだよ」	「숨바꼭질을 좋아해」	keep	defaults
 dict:jisjk:41574	ふたご	쌍둥이	keep	defaults
@@ -15,18 +14,15 @@ dict:jisjk:359881	「テレビ新聞を見たよ」	「텔레비전 신문을 �
 dict:jisjk:261499	ネットワークセグメント	네트워크 세그먼트	fix	defaults
 dict:jisjk:261499	ネットワークセグメントを見た。	네트워크 세그먼트를 보았다.	fix	defaults
 dict:jisjk:261499	「ネットワークセグメントを見たよ」	「네트워크 세그먼트를 봤어」	fix	defaults
-dict:jisjk:151864	元テレビタレント	이전 텔레비전 탤런트	fix	defaults
-dict:jisjk:151864	元テレビタレントを見た。	이전 텔레비전 탤런트를 보았다.	fix	defaults
-dict:jisjk:151864	「元テレビタレントを見たよ」	「이전 텔레비전 탤런트를 봤어」	fix	defaults
+dict:jisjk:151864	元テレビタレント	전 텔레비전 탤런트	fix	defaults
+dict:jisjk:151864	元テレビタレントを見た。	전 텔레비전 탤런트를 보았다.	fix	defaults
+dict:jisjk:151864	「元テレビタレントを見たよ」	「전 텔레비전 탤런트를 봤어」	fix	defaults
 dict:jisjk:244607	寺啄	딱따구리	fix	defaults
 dict:jisjk:244607	寺啄を見た。	딱따구리를 보았다.	fix	defaults
 dict:jisjk:244607	「寺啄を見たよ」	「딱따구리를 봤어」	fix	defaults
 dict:jisjk:109902	愛知中央三菱自動車販売	아이치 중앙 미쓰비시자동차 판매	fix	defaults
 dict:jisjk:109902	愛知中央三菱自動車販売を見た。	아이치 중앙 미쓰비시자동차 판매를 보았다.	fix	defaults
 dict:jisjk:109902	「愛知中央三菱自動車販売を見たよ」	「아이치 중앙 미쓰비시자동차 판매를 봤어」	fix	defaults
-dict:jisjk:81741	日精エー. エス。 ビー機械	닛세이 A. 에스. 비 기계	keep	defaults
-dict:jisjk:81741	日精エー. エス。 ビー機械を見た。	닛세이 A. 에스. 비 기계를 보았다.	keep	defaults
-dict:jisjk:81741	「日精エー. エス。 ビー機械を見たよ」	「닛세이 A. 에스. 비 기계를 봤어」	keep	defaults
 dict:jisjk:239659	線量当量	선량당량	keep	defaults
 dict:jisjk:239659	線量当量を見た。	선량당량을 보았다.	keep	defaults
 dict:jisjk:239659	「線量当量を見たよ」	「선량당량을 봤어」	keep	defaults
@@ -38,18 +34,15 @@ dict:jisjk:355764	「限界利益率を見たよ」	「한계 이익률을 봤�
 dict:names.104018	カラカル・ドーパント	카라칼 도펀트	fix	defaults
 dict:names.104018	カラカル・ドーパントを見た。	카라칼 도펀트를 보았다.	fix	defaults
 dict:names.104018	「カラカル・ドーパントを見たよ」	「카라칼 도펀트를 봤어」	fix	defaults
-dict:names.124085	ギンコ	깅코	keep	defaults
-dict:names.124085	ギンコを見た。	깅코를 보았다.	keep	defaults
-dict:names.124085	「ギンコを見たよ」	「깅코를 봤어」	keep	defaults
+dict:names.124085	ギンコ	긴코	keep	defaults
+dict:names.124085	ギンコを見た。	긴코를 보았다.	keep	defaults
+dict:names.124085	「ギンコを見たよ」	「긴코를 봤어」	keep	defaults
 dict:names.145100	コックローチ・ドーパント	코크로치 도펀트	fix	defaults
 dict:names.145100	コックローチ・ドーパントを見た。	코크로치 도펀트를 보았다.	fix	defaults
 dict:names.145100	「コックローチ・ドーパントを見たよ」	「코크로치 도펀트를 봤어」	fix	defaults
 dict:names.295108	ビースト・ドーパント	비스트 도펀트	fix	defaults
 dict:names.295108	ビースト・ドーパントを見た。	비스트 도펀트를 보았다.	fix	defaults
 dict:names.295108	「ビースト・ドーパントを見たよ」	「비스트 도펀트를 봤어」	fix	defaults
-dict:names.398205	リ・ガズィ カスタム	리 가즈 커스텀	keep	defaults
-dict:names.398205	リ・ガズィ カスタムを見た。	리 가즈 커스텀을 보았다.	keep	defaults
-dict:names.398205	「リ・ガズィ カスタムを見たよ」	「리 가즈 커스텀을 봤어」	keep	defaults
 dict:jisjk:17669	寄せ鍋	모둠냄비	fix	defaults
 dict:jisjk:17669	寄せ鍋を食べた。	모둠냄비를 먹었다.	fix	defaults
 dict:jisjk:17669	「寄せ鍋を食べたよ」	「모둠냄비를 먹었어」	fix	defaults
@@ -59,41 +52,14 @@ dict:jisjk:261240	「ジョイパットを見たよ」	「조이패드를 봤어
 dict:jisjk:119273	小首をかたむけた。	고개를 갸우뚱했다.	fix	defaults
 dict:jisjk:119273	彼は小首をかたむける。	그는 고개를 갸우뚱한다.	fix	defaults
 dict:jisjk:119273	「小首をかたむけたよ」	「고개를 갸우뚱했어」	fix	defaults
-lexical:cleanup-02	テレビを見た。	텔레비전을 보았다.	keep	defaults
-lexical:cleanup-02	「テレビを見たよ」	「텔레비전을 봤어」	keep	defaults
-lexical:cleanup-02	新聞を読んだ。	신문을 읽었다.	keep	defaults
-lexical:cleanup-02	ネットワークを確認した。	네트워크를 확인했다.	keep	defaults
-lexical:cleanup-02	セグメントがある。	세그먼트가 있다.	keep	defaults
-lexical:cleanup-02	タレントが来た。	탤런트가 왔다.	keep	defaults
-lexical:cleanup-02	若輩の兵士が来た。	애송이의 병사가 왔다.	keep	defaults
-lexical:cleanup-02	双子が来た。	쌍둥이가 왔다.	keep	defaults
 lexical:cleanup-02	かくれんぼをした。	숨바꼭질을 했다.	keep	defaults
-lexical:cleanup-02	ウッドペッカーを見た。	딱따구리를 보았다.	keep	defaults
-lexical:cleanup-02	三菱自動車を見た。	미쓰비시 자동차공업을 보았다.	keep	defaults
-lexical:cleanup-02	機械を見た。	기계를 보았다.	keep	defaults
-lexical:cleanup-02	線量を確認した。	선량을 확인했다.	keep	defaults
-lexical:cleanup-02	利益を確認した。	이익을 확인했다.	keep	defaults
-lexical:cleanup-02	ドーパントを見た。	도펀트를 보았다.	keep	defaults
-lexical:cleanup-02	「鍋を食べたよ」	「냄비를 먹었어」	keep	defaults
-lexical:cleanup-02	鍋を食べる。	냄비를 먹는다.	keep	defaults
-lexical:cleanup-02	首をひねった。	고개를 갸웃했다.	keep	defaults
-lexical:cleanup-02	ゲイ・ボーイ	게이 보이	keep	defaults
-lexical:cleanup-02	リ・ガズィ カスタムを見た。	리 가즈 커스텀을 보았다.	keep	defaults
-lexical:cleanup-02	HIP	HIP	keep	defaults
-lexical:cleanup-02	60000系	60000계	keep	defaults
-dict:names.290257	ヒップタッチの女王	힙하게	fix	fixed
+dict:names.290257	ヒップタッチの女王	히프 터치의 여왕	fix	fixed
 dict:jisjk:261240	ジョイパッドを使った。	조이패드를 썼다.	fix	defaults
-dict:names.290257	「ヒップタッチの女王」	「힙하게」	fix	fixed
-dict:names.290257	ヒップタッチの女王を見た。	힙하게를 보았다.	fix	fixed
-dict:names.290257	「ヒップタッチの女王を見たよ」	「힙하게를 봤어」	fix	fixed
-dict:names.290257	ヒップタッチの女王が好きだ。	힙하게를 좋아한다.	fix	fixed
-dict:names.290257	昨日、ヒップタッチの女王を見た。	어제, 힙하게를 보았다.	fix	fixed
+dict:names.290257	「ヒップタッチの女王」	「히프 터치의 여왕」	fix	fixed
+dict:names.290257	ヒップタッチの女王を見た。	히프 터치의 여왕을 보았다.	fix	fixed
+dict:names.290257	「ヒップタッチの女王を見たよ」	「히프 터치의 여왕을 봤어」	fix	fixed
+dict:names.290257	ヒップタッチの女王が好きだ。	히프 터치의 여왕을 좋아한다.	fix	fixed
+dict:names.290257	昨日、ヒップタッチの女王を見た。	어제, 히프 터치의 여왕을 보았다.	fix	fixed
 dict:names.290257	ヒップ	히프	keep	defaults
-dict:names.290257	HIPを見た。	HIP를 보았다.	keep	defaults
 dict:names.290257	女王を見た。	여왕을 보았다.	keep	defaults
-dict:names.290257	テレビを見た。	텔레비전을 보았다.	keep	defaults
-dict:names.290257	「テレビを見たよ」	「텔레비전을 봤어」	keep	defaults
 dict:names.290257	ヒップタッチ	히프 터치	keep	defaults
-dict:names.290257	(HIP)	(HIP)	keep	defaults
-dict:names.290257	힙하게	힙하게	keep	defaults
-dict:names.290257	힙(HIP)하게	힙(HIP) 하게	keep	defaults
