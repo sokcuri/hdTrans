@@ -1,0 +1,9 @@
+# 규칙: SPC-6
+rule	input	expected	kind	layer
+cx:baii-question:10	どうすればいい？	어떻게 하면 돼?	fix	rewrites
+cx:baii-question:10	じゃあ、ここですればいい？	그럼, 여기서 하면 돼?	fix	rewrites
+cx:baii-question:10	待てばいい。	!rule:cx:baii-question:10	keep	rewrites
+cx:baii-question:20	どうすればいい	어떻게 하면 좋을까	fix	rewrites
+cx:baii-question:20	「どこに行けばいい……」	「어디에 가면 좋을까……」	fix	rewrites
+cx:baii-question:20	これを使えばいい。	이것을 쓰면 된다.	keep	rewrites
+cx:baii-question:20	どうすればいいか分からない。	!rule:cx:baii-question:20	keep	rewrites
