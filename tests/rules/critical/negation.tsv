@@ -38,3 +38,10 @@ dict:gram:beki-rhetorical:7	そうすべきではないかと思う	has:해야 �
 dict:gram:beki-rhetorical:2	行くべきではないのか	has:가야 하지 않나	fix	local
 dict:gram:beki-rhetorical:7	すべきではない。	has:해서는 안된다	keep	local
 dict:gram:beki-rhetorical:8	行くべきではない	has:가서는 안된다	keep	local
+constraint:chau-after-verb	ま、マザコンちゃうわ！	has:아니	fix	lookup
+constraint:chau-after-verb	嘘ちゃうで。	has:아니	fix	lookup
+constraint:chau-after-verb	アホちゃう？	has:아니	fix	lookup
+constraint:chau-after-verb	やっちゃうね。	lacks:아니	keep	lookup
+constraint:chau-after-verb	夜更かしはお肌荒れちゃうね。	lacks:아니	keep	lookup
+constraint:chau-after-verb	食べ過ぎたらバルジっちゃうかな……	lacks:아니	keep	lookup
+constraint:chau-after-verb	いつでも、旗艦やっちゃいますよ、はいっ！	lacks:아닙	keep	lookup

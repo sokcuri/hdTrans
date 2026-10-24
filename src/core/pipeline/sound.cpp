@@ -460,6 +460,7 @@ private:
     size_t NextWord(size_t i) const;
     std::string IyaReading(size_t p, size_t end) const;
     bool Stopped(const SoundMatch& m) const;
+    bool VerbStemAt(size_t p, size_t n) const;
     bool MimeticAfterWord(const SoundMatch& m) const;
     bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
     bool StemAt(size_t p, size_t n) const;
@@ -1035,7 +1036,22 @@ std::string SoundText::IyaReading(size_t p, size_t end) const {
 bool SoundText::Stopped(const SoundMatch& m) const {
     if (f_[m.end - 1] != U'ッ' || m.end == f_.size()) return true;
     const char32_t r = f_[m.end];
+    // テ after the ッ of a verb's stem, with the いる or ます of its て form after it, is that
+    // verb (ビビってた, ビビってんの); a quoting or joining て stays after the sound (ブチってなった).
+    if (r == U'テ' && m.end + 1 < f_.size() && In(f_[m.end + 1], U"タルンイマ") && m.end - 1 > m.start &&
+        VerbStemAt(m.start, m.end - 1 - m.start)) {
+        return false;
+    }
     return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start];
+}
+
+// Whether the n characters at p are in the dictionary as the stem of a verb (ビビ of ビビる),
+// also when they are a name too.
+bool SoundText::VerbStemAt(size_t p, size_t n) const {
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup).list) {
+        if (text::RuneCount(c.source) == n && c.codes != nullptr && c.codes->part.Tag() == 'M') return true;
+    }
+    return false;
 }
 
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):

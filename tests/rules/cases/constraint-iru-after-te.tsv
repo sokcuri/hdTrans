@@ -12,7 +12,7 @@ constraint:iru-form-after-te	って続けてたら、無意識にその足をか
 constraint:iru-form-after-te	そしたらそのお礼が届いてたみたい	그랬더니 그 감사 인사가 닿고 있었던 것 같다	keep	lookup
 constraint:iru-form-after-te	そして、蒼真くんのお父さんとも、一緒に調べていたみたい。	그리고, 소마 군의 아버지와도, 함께 조사하고 있었던 것 같다.	keep	lookup
 constraint:iru-form-after-te	知ってます、クロード様は結婚相手に家柄の良さなど求めていらっしゃいません。	알고 있습니다, 클로드님은 결혼상대에 집안의 좋은 점 등 구하고 계시지 않습니다.	keep	lookup
-constraint:iru-form-after-te	3日くらい前にもうこっちの世界に戻って来てたってこと？	3일 정도 전에 이제 여기의 세계로 돌아오고 있었다는 것?	keep	lookup
+constraint:iru-form-after-te	3日くらい前にもうこっちの世界に戻って来てたってこと？	3일 정도 전에 이제 여기의 세계로 돌아와 있었다는 것?	keep	lookup
 constraint:iru-form-after-te	でも、一番大きいのは、作者が御園さんの歌をイメージしていたってことです	하지만, 제일 큰 것은, 작가가 미소노 씨의 노래를 이미지하고 있었다는 것입니다	keep	lookup
 constraint:iru-past-after-te	化け物が持っていたっていうあの鈴、なにか哀しい音色だった。	괴물이 가지고 있었다고 하는 그 방울, 뭔가 슬픈 음색이었다.	keep	local-ending
 constraint:iru-past-after-te	じゃあ、マキナはいつの間にか有名人になってたってこと？	그럼, 마키나는 어느새인가 유명인이 되어 있었다는 것?	keep	local-ending

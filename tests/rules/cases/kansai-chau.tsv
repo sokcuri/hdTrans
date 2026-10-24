@@ -1,0 +1,20 @@
+# 규칙: LEX-49
+rule	input	expected	kind	layer
+constraint:chau-after-verb	ま、マザコンちゃうわ！	마, 마더 콤플렉스 아니거든!	fix	lookup
+constraint:chau-after-verb	嘘ちゃうで。	거짓말 아니야.	fix	lookup
+constraint:chau-after-verb	アホちゃう？	바보 아니야?	fix	lookup
+constraint:chau-after-verb	そんなんちゃいます。	has:아닙니다	fix	lookup
+constraint:chau-after-verb	行くんちゃう？	has:아니야	fix	lookup
+constraint:chau-after-verb	やっちゃうね。	해 치우네.	keep	lookup
+constraint:chau-after-verb	旗艦やっちゃうね！	기함 해 치우네!	keep	lookup
+constraint:chau-after-verb	食べちゃう。	먹어버린다.	keep	lookup
+constraint:chau-after-verb	見ちゃうよ。	봐버릴 거야.	keep	lookup
+constraint:chau-after-verb	寝ちゃうわ。	자버려.	keep	lookup
+constraint:chau-after-verb	言っちゃうか？	말해버릴까?	keep	lookup
+constraint:chau-after-verb	来ちゃうで。	와버릴 거야.	keep	lookup
+constraint:chau-after-verb	バレちゃうよ。	들켜버릴 거야.	keep	lookup
+constraint:chau-after-verb	夜更かしはお肌荒れちゃうね。	lacks:아니	keep	lookup
+constraint:chau-after-verb	艦隊防空やっちゃうから！	함대 방공 해 치우니까!	keep	lookup
+constraint:chau-after-verb	食べ過ぎたらバルジっちゃうかな……	lacks:아니	keep	lookup
+constraint:chau-after-verb	いつでも、旗艦やっちゃいますよ、はいっ！	언제라도, 기함 해 치워요, 네!	keep	lookup
+constraint:chau-after-verb	三航戦旗艦瑞鳳、抜錨しちゃいます！	3항전 기함 즈이호우, 출항해버립니다!	keep	lookup

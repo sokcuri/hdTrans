@@ -1463,6 +1463,27 @@ bool AfterTeForm(const Item* v) {
            (p->DirectSurface().ends_with(kJaTe) || p->DirectSurface().ends_with(kJaDe));
 }
 
+// Whether the て form before the auxiliary 来る, item v, is a move that ends where the speaker
+// is (帰ってきている 돌아와 있다, 転属してきている 전속해 와 있다): a verb of verb.arrival-te or a
+// verbal noun of noun.arrival-suru with its する. An approach or a change (近づいてきている,
+// 寒くなってきている) is none.
+bool ArrivalBefore(const Item* v) {
+    const Item* p = v->prev;
+    if (p == nullptr || p->selected < 0) return false;
+    if (dict::InClass("verb.arrival-te", p->group->surface)) return true;
+    const Item* noun = p->prev;
+    return p->EntryText(p->selected) == "&AV@" && noun != nullptr && noun->tokenIndex == p->tokenIndex &&
+           dict::InClass("noun.arrival-suru", noun->group->surface);
+}
+
+// Whether a noun of noun.coming-flow is the subject of 来る, item v: right before it or before
+// its が, は or も.
+bool FlowBefore(const Item* v) {
+    const Item* p = v->prev;
+    if (p != nullptr && (p->group->surface == "が" || p->group->surface == "は" || p->group->surface == "も")) p = p->prev;
+    return p != nullptr && dict::InClass("noun.coming-flow", p->group->surface);
+}
+
 // The verb in its 連用形 (the bare stem or its one i-row kana) that an unlisted 込む, item n,
 // follows in the same token (詰め込む, 惚れ込んでいる); nullptr when n is no such 込む.
 Item* InwardVerb(Item* n) {
@@ -1519,6 +1540,19 @@ void ResultState(Flusher& f) {
             text::IsKanji(text::DecodeRune(stem).cp) && HonorificAspect(f, it)) {
             verb.remove_suffix(kRare.size());
         }
+        // 来る written in kana after a noun or a particle (手紙きてる 편지 와 있어); after a verb
+        // or a て form it is the auxiliary (練習してきている 연습해 오고 있다, 違ってきている).
+        if (verb == "き" && v->selected >= 0 && v->EntryText(v->selected) == "&AH@") {
+            const Item* p = v->prev;
+            const bool afterTe = p != nullptr && p->selected >= 0 &&
+                                 (p->group->surface.ends_with("て") ||
+                                  (p->group->surface.ends_with("で") && At(p->Code(p->selected), 0) != '2'));
+            if (ArrivalBefore(v) || (!afterTe && (p == nullptr || p->selected < 0 || At(p->Code(p->selected), 0) != '4'))) {
+                verb = "来";
+            }
+        }
+        // What keeps coming, as wind or waves, comes on (いい風きてる 좋은 바람 오고 있어).
+        if (verb == "来" && FlowBefore(v)) continue;
         const bool past = v->detail->record == 0 && !v->lexical && dict::InClass("verb.result-state-past", verb);
         const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass("verb.result-passive", stem)) ||
@@ -1526,8 +1560,9 @@ void ResultState(Flusher& f) {
                             !v->EntryText(v->selected).ends_with("&HN@"));
         if (!state) continue;
         // A verb that is also a て auxiliary (来る) is a change or approach after a て form
-        // (近づいて来られている 가까워져 오고 계신다), no state of its own.
-        if (dict::InClass("aux.te-start", verb) && AfterTeForm(v)) continue;
+        // (近づいて来られている 가까워져 오고 계신다), no state of its own, unless the move ends
+        // here (ArrivalBefore).
+        if (dict::InClass("aux.te-start", verb) && AfterTeForm(v) && !ArrivalBefore(v)) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         const std::string lemma = output::Lemma(e->dst, f.families);
@@ -1567,13 +1602,22 @@ constexpr std::string_view kSayEnds[] = {"言", "云"};
 
 enum class Aspect { None, State, Say };
 
-// Whether a verb's Korean ends in a marker family of an adjective (困って 곤란&Mf@): an adjective
-// takes neither 고 있다 nor 어 있다.
-bool AdjectiveTarget(std::string_view target) {
+// Whether a verb's Korean ends in a marker family of an adjective (困って 곤란&Mf@), or in a
+// family that verbs share with a stem that ends like an adjective of ko-adjective.stem-end
+// (腹が減って 배가 고&Aa@ 고프다, そうになって 뻔&AV@ 뻔하다): an adjective takes neither 고 있다
+// nor 어 있다.
+// verbFamily tells that the family is a verb's and the stem made it an adjective.
+bool AdjectiveTarget(std::string_view target, bool* verbFamily = nullptr) {
+    if (verbFamily != nullptr) *verbFamily = false;
     if (target.size() < 4 || !target.ends_with("@") || target[target.size() - 4] != '&') return false;
     const output::internal::KoreanFamily* family = output::internal::FindKoreanFamily(target.substr(target.size() - 4));
-    return family != nullptr && family->partOfSpeech == output::internal::KoreanPartOfSpeech::Adjective &&
-           family->inflectionClass != output::internal::InflectionClass::Copula;
+    if (family == nullptr || family->inflectionClass == output::internal::InflectionClass::Copula) return false;
+    if (family->partOfSpeech == output::internal::KoreanPartOfSpeech::Adjective) return true;
+    const std::string stem = std::string(target.substr(0, target.size() - 4)) + std::string(family->stem);
+    const bool adjective =
+        std::ranges::any_of(dict::ClassMembers("ko-adjective.stem-end"), [&](std::string_view e) { return stem.ends_with(e); });
+    if (verbFamily != nullptr) *verbFamily = adjective;
+    return adjective;
 }
 
 Aspect SimpleAspectOf(std::string_view stem, std::string_view target) {
@@ -1626,11 +1670,16 @@ void SimpleAspect(Flusher& f) {
         if (contracted) {
             const std::size_t cut = e->dst.starts_with(progressive) ? progressive.size() : resultative.size();
             std::string simple = ExistentialToVerb(f, std::string_view(e->dst).substr(cut));
+            bool verbFamily = false;
+            const bool adjective = AdjectiveTarget(it->EntryText(it->selected), &verbFamily);
             // The form 8 of an adjective is no past (곤란한): 있던 there is its past adnominal (곤란했던).
             if (const std::span<const std::string_view> past = dict::ClassMembers("ko.adjective-past-adnominal");
-                simple.starts_with("8") && !past.empty() && AdjectiveTarget(it->EntryText(it->selected))) {
+                simple.starts_with("8") && !past.empty() && adjective) {
                 simple = std::string(past.front()) + simple.substr(1);
             }
+            // A family of verbs read as an adjective takes the adjective forms 8 and 1 for the verb
+            // forms 0 and 4 (腹が減っておる 배가 고프다).
+            if (verbFamily && (simple.starts_with("0") || simple.starts_with("4"))) simple[0] = simple[0] == '0' ? '8' : '1';
             if (!simple.empty() && !KeepsProgressive(aspect, simple)) it->AssignDirectSlot(it->DirectIndex(), simple);
             continue;
         }
@@ -1644,8 +1693,18 @@ void SimpleAspect(Flusher& f) {
         if (d == nullptr || d->dst.empty() || KeepsProgressive(aspect, d->dst)) continue;
         // An adjective target has no verb form 0 or 4 (있는, 있다); the composer reads it with its
         // いる (苛々している 초조하다).
-        if (AdjectiveTarget(it->EntryText(it->selected)) && (d->dst[0] == '0' || d->dst[0] == '4')) continue;
-        it->AssignDirectSlot(it->DirectIndex(), d->dst);
+        bool verbFamily = false;
+        const bool adjective = AdjectiveTarget(it->EntryText(it->selected), &verbFamily);
+        std::string simple = d->dst;
+        // A family of verbs has the verb forms 0 and 4 (고프는, 고픈다); an adjective takes 8 and 1
+        // there (고픈, 고프다).
+        if (verbFamily && (simple[0] == '0' || simple[0] == '4')) simple[0] = simple[0] == '0' ? '8' : '1';
+        else if (adjective && (simple[0] == '0' || simple[0] == '4')) continue;
+        if (const std::span<const std::string_view> past = dict::ClassMembers("ko.adjective-past-adnominal");
+            d->dst[0] == '8' && !past.empty() && verbFamily) {
+            simple = std::string(past.front()) + simple.substr(1);
+        }
+        it->AssignDirectSlot(it->DirectIndex(), simple);
         n->AssignEntrySurface(n->selected, "");
         n->AssignDirectSlot(n->DirectIndex(), "");
     }

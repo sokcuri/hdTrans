@@ -1,0 +1,29 @@
+# 규칙: NUM-1
+rule	input	expected	kind	layer
+dict:ordinal-first:1	第一海上護衛隊、出撃します！	제1해상 호위대, 출격합니다!	fix	local
+dict:ordinal-first:1	第一戦隊、戦場へ向かう。	제1전대, 전장으로 향한다.	fix	local
+dict:ordinal-first:1	新編「第一戦隊」を編成せよ！	신편 「제1전대」를 편성하라!	fix	local
+dict:ordinal-first:1	第一潜水隊、演習？	제1잠수대, 연습?	fix	local
+dict:ordinal-first:1	第一機動部隊、出撃します！	제1기동부대, 출격합니다!	fix	local
+dict:ordinal-first:1	第一スロに「天山」を装備	제1스로에 「텐잔」을 장비	fix	local
+dict:ordinal-first:1	第一装備スロットに装備せよ。	제1장비 슬롯에 장비하라.	fix	local
+dict:ordinal-first:1	いよいよ第一競技の始まりだ。	드디어 제1경기의 시작이다.	fix	local
+dict:ordinal-first:1	――第一工程、着手。	――제1공정, 착수.	fix	local
+dict:ordinal-first:1	ゆっくりと第一関節まで沈めていく。	천천히 제1관절까지 가라앉혀 간다.	fix	local
+dict:ordinal-first:1	「第一志望は大学なんだ」	「제1지망은 대학이야」	fix	local
+dict:ordinal-first:1	「第一問。一番好きな作家は？」	「제1문. 제일 좋아하는 작가는?」	fix	local
+dict:ordinal-first:1	「会則第一条！！」	「회칙 제1조!!」	fix	local
+dict:ordinal-first:1	作戦準備(第一段階任務)	작전 준비(제1단계 임무)	fix	local
+dict:ordinal-first:2	第一、俺はこんなに巧くはないよ。	애초에, 나는 이렇게 능숙하지는 않아.	fix	local
+dict:ordinal-first:2	第一お前、俺より上級生だろ？！	애초에 너, 나보다 상급생이지?!	fix	local
+dict:ordinal-first:2	第一それ、賛辞じゃねえし！！！	애초에 그것, 찬사가 아니고!!!	fix	local
+dict:ordinal-first:2	もう……坊ちゃんでいいよ。第一そんな柄じゃねえし。	이제……도련님이면 돼. 애초에 그런 격이 아니고.	fix	local
+dict:ordinal-first:2	（……第一、俺みたいなガキを騙して何の意味があるんだ？）	(……애초에, 나 같은 녀석을 속여 무슨 의미가 있는 거야?)	fix	local
+dict:ordinal-first:1	第一、第二主砲！いい……撃て！	제1, 제2주포! 좋다……쏘아라!	fix	local
+dict:ordinal-first:1	第一人者だ。	제일인자다.	keep	defaults
+dict:ordinal-first:1	第一線で戦う	제일선에서 싸운다	keep	defaults
+dict:ordinal-first:1	第一印象は大事	첫인상은 중요	keep	defaults
+dict:ordinal-first:1	まず第一に、教えやすい。	가장 먼저, 가르치기 쉽다.	keep	defaults
+dict:ordinal-first:1	まず第一の要因は攻撃に頼りすぎてる事ね。	우선 제일의 요인은 공격에 너무 의지하고 있는 일이네.	keep	defaults
+dict:ordinal-first:1	第一王子が来た。	제1왕자가 왔다.	keep	defaults
+dict:ordinal-first:1	第一艦隊、出撃！	제1함대, 출격!	keep	defaults
