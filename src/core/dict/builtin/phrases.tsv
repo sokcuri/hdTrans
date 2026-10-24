@@ -6,7 +6,9 @@
 // An intj row with exclaim in the fourth column is an exclamation, no sound
 // before a question mark (よかった 다행이다, but よかった？ 좋았어?); with predicate also
 // none after a noun topic and a comma (あの頃は、よかった 좋았다). With final it is read
-// only where the utterance ends after it (また明日 내일 보자, not また明日来る).
+// only where the utterance ends after it, no comma or question mark (また明日 내일 보자, not
+// また明日来る). With polite=W the last word of the Korean is W where the quote speaks politely
+// or an honoured person is called right before it (先生、また明日 선생님, 내일 봬요).
 
 // Greetings and everyday set phrases.
 ただいま帰りました	다녀왔습니다	intj
@@ -502,20 +504,20 @@
 それじゃあね	그럼 안녕	intj
 
 // Leave-taking: また and the time of meeting again, with ね or な.
-また明日	내일 보자	intj	final
-また明日ね	내일 보자	intj
+また明日	내일 보자	intj	final polite=봬요
+また明日ね	내일 보자	intj	polite=봬요
 また明日な	내일 보자	intj
-またあした	내일 보자	intj	final
-またあしたね	내일 보자	intj
+またあした	내일 보자	intj	final polite=봬요
+またあしたね	내일 보자	intj	polite=봬요
 またあしたな	내일 보자	intj
-また後で	나중에 보자	intj	final
-また後でね	나중에 보자	intj
+また後で	나중에 보자	intj	final polite=봬요
+また後でね	나중에 보자	intj	polite=봬요
 また後でな	나중에 보자	intj
-またあとで	나중에 보자	intj	final
-またあとでね	나중에 보자	intj
+またあとで	나중에 보자	intj	final polite=봬요
+またあとでね	나중에 보자	intj	polite=봬요
 またあとでな	나중에 보자	intj
-また来週	다음 주에 보자	intj	final
-また来週ね	다음 주에 보자	intj
+また来週	다음 주에 보자	intj	final polite=봬요
+また来週ね	다음 주에 보자	intj	polite=봬요
 また来週な	다음 주에 보자	intj
 またな	또 보자	intj
 

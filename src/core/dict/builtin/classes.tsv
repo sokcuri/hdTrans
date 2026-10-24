@@ -41,6 +41,7 @@
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
+//= greeting.honorific-end	Greetings that end like an honoured person in 様 or さま and call no one (お疲れさま、また明日 수고했어, 내일 보자).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -119,6 +120,7 @@
 //= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
+//= speech.polite-lookalike	Words that hold a mark of speech.polite-grammar and are no polite speech (ますます).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
@@ -536,6 +538,18 @@ honorific.honoured-person	母上
 honorific.honoured-person	父上
 honorific.honoured-person	兄上
 honorific.honoured-person	姉上
+greeting.honorific-end	お疲れさま
+greeting.honorific-end	お疲れ様
+greeting.honorific-end	おつかれさま
+greeting.honorific-end	ご苦労さま
+greeting.honorific-end	ご苦労様
+greeting.honorific-end	ごくろうさま
+greeting.honorific-end	ご馳走さま
+greeting.honorific-end	ご馳走様
+greeting.honorific-end	ごちそうさま
+greeting.honorific-end	お互いさま
+greeting.honorific-end	お互い様
+greeting.honorific-end	お世話さま
 
 honorific.kana-name	さん
 honorific.kana-name	ちゃん
@@ -1946,6 +1960,7 @@ speech.polite-grammar	でしょうか
 speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
+speech.polite-lookalike	ますます
 spelling.variant	程=ほど
 spelling.variant	位=くらい
 spelling.variant	等=など

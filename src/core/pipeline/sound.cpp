@@ -97,6 +97,8 @@ constexpr std::u32string_view kConditionals[] = {U"ナルト", U"ナッタラ", 
 
 // The characters that may stand between いやぁ and the words that decide its reading.
 constexpr std::u32string_view kSoundSeparators = U"、，…‥・ 　";
+// The characters before a comma that PoliteAt reads for an honoured person called (陛下, お疲れさま).
+constexpr size_t kLongestCall = 8;
 
 template <size_t N>
 bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
@@ -366,6 +368,10 @@ private:
     bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
+    bool PoliteAt(size_t p) const;
+    // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
+    mutable size_t politeFrom_ = 1, politeTo_ = 0;
+    mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
     bool Scoff(size_t p, size_t end) const;
     std::u32string_view Clause(size_t i) const;
@@ -728,7 +734,43 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
         if (Scoff(p, end)) return "흥";
     }
     if (s.phrase && AskedAt(rs_, end)) return AskedPast(s.korean);
+    if (!s.polite.empty() && PoliteAt(p)) {
+        const size_t space = s.korean.rfind(' ');
+        return (space == std::string::npos ? std::string() : s.korean.substr(0, space + 1)) + s.polite;
+    }
     return s.korean;
+}
+
+// Whether the row at character p is said politely: its quote, or the line outside quotes, holds
+// a mark of speech.polite-grammar outside the words of speech.polite-lookalike (ありがとうございました。
+// では、また明日; not ますます), or an honoured person is called with a comma right before it
+// (先生、また来週; not the greeting お疲れさま of greeting.honorific-end). The quote is read once.
+bool SoundText::PoliteAt(size_t p) const {
+    constexpr std::u32string_view kQuoteEnds = U"「『」』\n";
+    if (p < politeFrom_ || p > politeTo_) {
+        size_t start = p, end = p;
+        while (start > 0 && !In(rs_[start - 1], kQuoteEnds)) start--;
+        while (end < rs_.size() && !In(rs_[end], kQuoteEnds)) end++;
+        std::string quote = EncodeText(std::u32string_view(rs_).substr(start, end - start));
+        for (const std::string_view w : dict::ClassMembers("speech.polite-lookalike")) {
+            for (size_t at = quote.find(w); at != std::string::npos; at = quote.find(w, at + w.size())) {
+                quote.replace(at, w.size(), w.size(), ' ');
+            }
+        }
+        politeFrom_ = start;
+        politeTo_ = end;
+        politeQuote_ = std::ranges::any_of(dict::ClassMembers("speech.polite-grammar"),
+                                           [&](std::string_view m) { return quote.find(m) != std::string::npos; });
+    }
+    if (politeQuote_) return true;
+    size_t q = p;
+    while (q > politeFrom_ && text::IsSpace(rs_[q - 1])) q--;
+    if (q == politeFrom_ || !dict::InClass("mark.comma", EncodeText(std::u32string_view(rs_).substr(q - 1, 1)))) return false;
+    const size_t from = std::max(politeFrom_, q - 1 > kLongestCall ? q - 1 - kLongestCall : 0);
+    const std::string called = EncodeText(std::u32string_view(rs_).substr(from, q - 1 - from));
+    const auto ends = [&](std::string_view m) { return called.ends_with(m); };
+    return std::ranges::any_of(dict::ClassMembers("honorific.honoured-person"), ends) &&
+           std::ranges::none_of(dict::ClassMembers("greeting.honorific-end"), ends);
 }
 
 // Whether the ただいま that ends at character end means "now": a kanji follows it

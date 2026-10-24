@@ -842,6 +842,10 @@ HD_TEST(pipeline_sound_final_phrase) {
         {"また明日、学校で", "また明日、学校で"},
         {"また明日？", "また明日？"},  // a question, not the farewell
         {"また明日 ?", "また明日 ?"},
+        // In polite speech, or after an honoured person called, the farewell is polite.
+        {"ありがとうございました。また明日", "ありがとうございました。내일 봬요"},
+        {"先生、また明日", "先生、내일 봬요"},
+        {"「行きます」また明日", "「行きます」내일 보자"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

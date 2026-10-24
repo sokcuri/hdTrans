@@ -169,6 +169,21 @@ phrase:leave-taking	「また来週？」	「또 다음주?」	keep	sound
 phrase:leave-taking	「また後で？」	「또 나중에?」	keep	sound
 phrase:leave-taking	「またあした？」	「또 내일?」	keep	sound
 phrase:leave-taking	「また明日。」	「내일 보자.」	fix	sound
+phrase:leave-taking	「ありがとうございました。では、また明日」	「감사합니다. 그럼, 내일 봬요」	fix	sound
+phrase:leave-taking	ありがとうございました。では、また明日	감사합니다. 그럼, 내일 봬요	fix	sound
+phrase:leave-taking	「先生、また来週」	「선생님, 다음 주에 봬요」	fix	sound
+phrase:leave-taking	「田中先生、また明日」	「타나카 선생님, 내일 봬요」	fix	sound
+phrase:leave-taking	「先生、また明日ね」	「선생님, 내일 봬요」	fix	sound
+phrase:leave-taking	「そうです。また明日」	「그렇습니다. 내일 봬요」	fix	sound
+phrase:leave-taking	「失礼します。また後で」	「실례합니다. 나중에 봬요」	fix	sound
+phrase:leave-taking	「では、また明日。失礼します」	「그럼, 내일 봬요. 실례합니다」	fix	sound
+phrase:leave-taking	「先生、また明日？」	「선생님, 또 내일?」	keep	sound
+phrase:leave-taking	「行きます」と言った。「また明日」	「갑니다」라고 말했다. 「내일 보자」	keep	sound
+phrase:leave-taking	「また明日な。ありがとうございます」	「내일 보자. 감사합니다」	keep	sound
+phrase:leave-taking	「なさい。また明日」	「해. 내일 보자」	keep	sound
+phrase:leave-taking	「ますます寒い。また明日」	「더욱 더 춥다. 내일 보자」	keep	sound
+phrase:leave-taking	「おつかれさま、また明日ね」	「수고했어, 내일 보자」	keep	sound
+phrase:leave-taking	「お疲れ様でした。また明日」	「수고하셨습니다. 내일 봬요」	fix	sound
 cx:ne-promise:17	「にいちゃん、やるね。」	rule:cx:ne-promise:17=1네	fix	rewrites
 cx:ne-promise:17	「よし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
 cx:ne-promise:40	「放課後とか頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites
