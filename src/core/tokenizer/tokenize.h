@@ -1,5 +1,6 @@
 #pragma once
 // Splitting a chunk of text into typed tokens.
+#include <functional>
 #include <span>
 #include <string_view>
 
@@ -15,7 +16,13 @@ namespace hdTrans::tokenizer {
 // more ― stay dashes after Japanese text instead of becoming ー (あんたが―― 네가――,
 // ロンド－( 론도－(, but シャ－カ－ン 샤칸), and a 」 that closes the line's utterance
 // is a token of its own.
-void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out);
+// With joins, a space or an ideographic space between two kanji stays a space token of its own,
+// so that the words
+// on its sides are read apart (光 影, 副総理 兼 外務大臣), unless joins says that a word of
+// the dictionary spans it (未 来, text spaced out character by character). joins gets the
+// Japanese text before the space and the text after it, the space left out.
+using SpaceJoins = std::function<bool(std::string_view before, std::string_view after)>;
+void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins = nullptr);
 
 // TokenizeSpans of input as one text piece, without dashes.
 void Tokenize(std::string_view input, Tokens& out);
