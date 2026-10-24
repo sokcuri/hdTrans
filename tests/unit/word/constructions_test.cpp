@@ -128,6 +128,65 @@ HD_TEST(constructions_parse_append_target) {
     HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[1].delta), 1);
 }
 
+HD_TEST(constructions_parse_prepend_and_verb_from) {
+    const std::vector<std::string_view> lines = {
+        "//~ tails\t있는=있으면서 버리는=버리면서\tdoc\n",
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\tF+0== \"causative-passive\"\tset-verb-from \"게 &C6@\" \"다\" prepend-target \"억지로 \"\t\n",
+        "cx:a:20\t\tS+0== \"くせに\"\tmap-ending-tail@-1 @tails\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.rows.size() == 2);
+    HD_REQUIRE(t.rows[0].actions.size() == 2);
+    HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::SetVerbFrom);
+    HD_CHECK_EQ(t.rows[0].actions[0].value, std::string("게 &C6@"));
+    HD_CHECK_EQ(t.rows[0].actions[0].with, std::string("다"));
+    HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::PrependTarget);
+    HD_CHECK_EQ(t.rows[0].actions[1].value, std::string("억지로 "));
+    HD_REQUIRE(t.rows[1].actions.size() == 1);
+    HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::MapEndingTail);
+    HD_CHECK_EQ(t.rows[1].actions[0].map, 0);
+    HD_CHECK_EQ(static_cast<int>(t.rows[1].actions[0].delta), -1);
+    const std::vector<std::string_view> bad = {
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\tF+0== \"causative-passive\"\tset-verb-from \"게 &C6@\"\t\n",
+    };
+    HD_CHECK(!internal::ParseConstructions(bad, kPasses).errors.empty());
+}
+
+HD_TEST(constructions_parse_named_conditions) {
+    const std::vector<std::string_view> lines = {
+        "//: particle\t||2 S+0== \"に\" S+0== \"へ\"\ta goal particle\n",
+        "//: goal-before\t&&2 :particle F-1== \"selected\"\tone after a word\n",
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\t&&2 :goal-before S+1== \":particle\"\tselect-lemma \"에\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.rows.size() == 1);
+    // The names expand in place: && of (&& of (|| of two atoms) and an atom) and an atom whose
+    // quoted value keeps its text.
+    const std::vector<internal::CxNode>& n = t.nodes;
+    const uint32_t root = t.rows[0].root;
+    HD_CHECK(n[root].kind == hdTrans::rules::BodyKind::And && n[root].count == 2);
+    HD_CHECK(n[root + 1].kind == hdTrans::rules::BodyKind::And && n[root + 1].count == 2);
+    HD_CHECK(n[root + 2].kind == hdTrans::rules::BodyKind::Or && n[root + 2].count == 2);
+    HD_REQUIRE(t.atoms.size() == 4);
+    HD_CHECK_EQ(t.atoms.back().value, std::string(":particle"));
+    const std::vector<std::string_view> bad = {
+        "//: two\tS+0== \"に\" S+0== \"へ\"\ttwo expressions\n",
+        "//: twice\tS+0== \"に\"\tdoc\n",
+        "//: twice\tS+0== \"へ\"\tdoc\n",
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\t:missing\tselect-lemma \"에\"\t\n",
+    };
+    const std::string errors = Errors(internal::ParseConstructions(bad, kPasses));
+    HD_CHECK(errors.find("1: condition: ") != std::string::npos);
+    HD_CHECK(errors.find("3: a second line for the condition twice") != std::string::npos);
+    HD_CHECK(errors.find("5: condition: no named condition :missing") != std::string::npos);
+}
+
 HD_TEST(constructions_surface_index) {
     const std::vector<std::string_view> lines = {
         "//= a\tafter First\tdoc\n",

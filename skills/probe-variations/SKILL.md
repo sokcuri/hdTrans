@@ -18,6 +18,10 @@ Keep both sets in `$HDTRANS_WORK/<branch>/` (not in the repository) as one line 
 - **near-misses.txt**: look-alikes that must not change.
   - The same surface in another sense, or a neighbouring construction.
   - Lines just outside the rule's condition (the other side of every test in it).
+- For a construction family, write its slot template in `tests/variants/` (docs/testing.md, 구문 변형):
+  `tools/variants.py CLI --base "$BASE/build/<preset>/hdtrans" "$BASE/dicts" --fails` fills the slots
+  with dictionary words of their class, checks the Korean shape and prints the pass rate per family.
+  Raise the family's minimum in its `family` line when a fix widens it.
 - Add real lines that contain the pattern:
   `tools/count-class.py '<regex>' --show 50` lists them from `$HDTRANS_CORPUS` and `$HDTRANS_REF_SAMPLE/ja.txt`.
 

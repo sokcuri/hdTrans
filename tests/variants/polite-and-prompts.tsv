@@ -1,0 +1,43 @@
+# Variants of polite questions, prompts, honorifics and words read by their neighbours (tools/variants.py).
+family	masuka-offer	SPC-10	90
+slot	A	list	上書き 保存 削除 セーブ ロード 終了 中断 再開 購入 送信
+slot	V	verb	帰る 行く 始める 休む 食べる 飲む 出発する 戻る
+slot	C	list	さて、 じゃあ、 そろそろ じゃ、
+case	{A}しますか？	[할]까요\?$	합니까
+case	{C}{V:masuka}	까요$	니까$
+case	データを{A}しますか？	까요\?$	합니까
+
+family	masuka-question	SPC-10	90
+slot	N	list	日本語 英語 テニス ピアノ 料理 ゴルフ
+slot	V	list	話します 弾きます しますか
+case	毎日{N}を勉強しますか？	니까\?$	까요
+case	あなたは{N}をしますか？	니까\?$	까요
+
+family	return-to	LEX-24	85
+slot	N	list	タイトル画面 メニュー 前の画面 ホーム 最初 元の場所 マップ 町 ステージ選択 ロビー
+case	{N}に戻ります。	(?:으로|로) 돌아갑니다\.$	에 돌아
+case	{N}に戻る	(?:으로|로) 돌아간다$	에 돌아
+
+family	honorific-doer	SPC-11	90
+slot	VN	list	利用 予約 購入 来店 希望 参加 応募 宿泊 搭乗 契約
+case	ご{VN}のお客様	하(?:시는|신) 손님$	의 손님
+case	ご{VN}の方はお申し出ください。	하(?:시는|신) 분은 	편은|의 분
+
+family	humble-promise	SPC-11	90
+slot	VN	list	説明 案内 準備 確認 連絡 紹介 用意 報告 発表 説明
+case	{VN}させていただきますね	할게요$	하네요|합니다
+case	ご{VN}させていただきますね。	할게요\.$	하네요|합니다
+
+family	container-full	NUM-9	90
+slot	N	list	箱 鞄 コップ 袋 バケツ 鍋 皿 カップ 引き出し 籠
+slot	V	verb	入れる 詰める 盛る 詰め込む
+case	{N}にいっぱい{V:ta}。	가득 	많이
+case	{N}に一杯{V:ta}。	가득 	많이 |한 잔
+
+family	latin-particle	LAY-7	90
+slot	C	list	Tom Ken Bob Jack Sam John Ben Dan Tim Jim Adam Nick
+slot	V	list	Mary Lucy Emma Anna Joe Amy Sara Mia Lily Leo Hugo Nora
+case	{C}が来た。	^{C}이 	{C}가
+case	{V}が来た。	^{V}가 	{V}이
+case	{C}と話した。	^{C}과 	{C}와
+case	{V}と話した。	^{V}와 	{V}과

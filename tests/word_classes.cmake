@@ -85,7 +85,10 @@ foreach(path IN LISTS sources)
     endforeach()
 endforeach()
 file(READ "${SOURCE}/src/core/dict/builtin/constructions.tsv" constructions)
-string(REGEX REPLACE "\n//[^\n]*" "" constructions "\n${constructions}")
+# Named conditions (//: NAME <TAB> CONDITION <TAB> doc) call sets in their condition; their doc and
+# other // lines are comments.
+string(REGEX REPLACE "\n(//: [^\t\n]*\t[^\t\n]*)\t[^\n]*" "\n\\1" constructions "\n${constructions}")
+string(REGEX REPLACE "\n//([^:\n][^\n]*)?" "" constructions "${constructions}")
 string(REGEX MATCHALL "@[LR]?[a-z][a-z0-9.-]*" calls "${constructions}")
 foreach(call IN LISTS calls)
     string(REGEX REPLACE "^@[LR]?" "" set "${call}")

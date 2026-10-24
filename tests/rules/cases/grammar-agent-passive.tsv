@@ -31,3 +31,19 @@ cx:voice-agent:10	私も弟に手紙を破られた。	!rule:cx:voice-agent:10	k
 cx:voice-agent:20	僕は彼女に頭を撫でられた。	!rule:cx:voice-agent:20	keep	rewrites
 rewrite:passive-reading	彼女にプレゼントをあげられた。	그녀에게 선물을 줄 수 있었다.	keep	rewrites
 rewrite:passive-reading	父に車を借りられた。	아버지에게 차를 빌릴 수 있었다.	keep	rewrites
+cx:voice-agent:25	母に日記を見られた。	어머니가 일기를 보았다.	fix	rewrites
+cx:voice-agent:25	父に傘を使われた。	아버지가 우산을 썼다.	fix	rewrites
+cx:voice-agent:25	弟に傘を使われてしまった。	남동생이 우산을 써버렸다.	fix	rewrites
+cx:voice-agent:25	後輩に名前を書かれた。	후배가 이름을 썼다.	fix	rewrites
+cx:voice-agent:25	富士山を見られた。	후지산을 볼 수 있었다.	keep	rewrites
+cx:voice-agent:25	母に見られた。	!rule:cx:voice-agent:25	keep	rewrites
+cx:voice-agent:25	先生に褒められた。	선생님에게 칭찬받았다.	keep	rewrites
+cx:voice-agent:25	友達に写真を撮られた。	친구에게 사진이 찍혔다.	keep	rewrites
+cx:voice-agent:10	父に傘を使われた。	rule:cx:voice-agent:10=(이)가	fix	rewrites
+cx:voice-agent:25	皆に顔を知られている。	모두에게 얼굴을 알려져 있다.	keep	rewrites
+cx:voice-agent:25	彼に答えを知られていた。	!rule:cx:voice-agent:25	keep	rewrites
+cx:voice-agent:10	みんなに顔を知られている有名人。	!rule:cx:voice-agent:10	keep	rewrites
+cx:voice-agent:20	弟にケーキを食べられた。	남동생이 케이크를 먹었다.	fix	rewrites
+cx:voice-agent:20	ケーキを弟に食べられた。	케이크를 남동생이 먹었다.	fix	rewrites
+cx:voice-agent:20	全滅するところを…駆逐艦達に助けられました。	!rule:cx:voice-agent:20	keep	rewrites
+cx:voice-agent:20	電車で足を踏まれた。	!rule:cx:voice-agent:20	keep	rewrites

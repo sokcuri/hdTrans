@@ -42,3 +42,10 @@ dict:jisjk:354152	私も三回も言った	rule:dict:jisjk:354152=(이)나	fix	l
 dict:jisjk:354152	だが、数年も経つ頃には	rule:dict:jisjk:354152=(이)나	fix	local
 cx:count-mo-condition:10	三杯もそばを食べた	!rule:cx:count-mo-condition:10	keep	rewrites
 cx:count-mo-condition:10	三回も言えば分かる	!rule:cx:count-mo-condition:10	keep	rewrites
+dict:jisjk:354152	五回も走った。	다섯 번이나 달렸다.	fix	local
+dict:jisjk:354152	四回も言った。	네 번이나 말했다.	fix	local
+dict:jisjk:354152	五日も待った。	닷새나 기다렸다.	fix	local
+dict:jisjk:354152	五回も走ったのに。	다섯 번이나 달렸는데.	fix	local
+dict:jisjk:354152	五回も言わなかった。	다섯 번도 말하지 않았다.	keep	local
+dict:jisjk:354152	残りの五回も走った。	나머지의 다섯 번도 달렸다.	keep	local
+dict:jisjk:354152	彼ら五人も来た。	그들 다섯 명도 왔다.	keep	local

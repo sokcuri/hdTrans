@@ -24,3 +24,17 @@ cx:honorific-doer:20	ご連絡の方、よろしくお願いいたします。	!
 cx:honorific-doer:20	ご検討の方をよろしくお願いします。	!rule:cx:honorific-doer:20	keep	rewrites
 cx:honorific-doer:20	ご返信の方お待ちしております。	!rule:cx:honorific-doer:20	keep	rewrites
 cx:honorific-doer:10	ご利用の方お待ちしております。	!rule:cx:honorific-doer:10	keep	rewrites
+cx:honorific-doer:25	ご来店の方はお申し出ください。	내점하신 분은 신청해 주세요.	fix	rewrites
+cx:honorific-doer:25	ご参加の方にお知らせします。	참가하신 분에게 알려 드리겠습니다.	fix	rewrites
+cx:honorific-doer:25	ご予約の方が優先です。	예약하신 분이 우선입니다.	fix	rewrites
+cx:honorific-doer:25	ご購入の方へ特典があります。	구입하신 분에게 특전이 있습니다.	fix	rewrites
+cx:honorific-doer:25	ご宿泊の方もご利用いただけます。	숙박하신 분도 이용하실 수 있습니다.	fix	rewrites
+cx:honorific-doer:25	ご契約の方は窓口へ。	계약하신 분은 창구에.	fix	rewrites
+cx:honorific-doer:20	ご契約のお客様	계약하신 손님	fix	rewrites
+cx:honorific-doer:25	予約の方はこちら。	!rule:cx:honorific-doer:25	keep	rewrites
+cx:honorific-doer:25	ご連絡の方からお願いします。	!rule:cx:honorific-doer:25	keep	rewrites
+cx:honorific-doer:25	私の方は大丈夫です。	제 쪽은 괜찮습니다.	keep	rewrites
+cx:honorific-doer:15	ご利用の方はこちらへ。	이용하시는 분은 이쪽으로.	fix	rewrites
+cx:honorific-doer:15	ご使用の方にお願いします。	사용하시는 분에게 부탁드립니다.	fix	rewrites
+cx:honorific-doer:15	利用の方は少ない。	!rule:cx:honorific-doer:15	keep	rewrites
+cx:honorific-doer:25	メニューのご注文の方は決まりましたか？	메뉴 주문은 정해졌습니까?	keep	rewrites

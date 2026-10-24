@@ -1,0 +1,23 @@
+# Variants of sentence-final ね, ばいい questions and ちゃった with a particle (tools/variants.py).
+family	ne-promise	SPC-5	90
+slot	V	verb	行く 帰る 寝る 食べる 電話する 連絡する 待つ 準備する 片付ける 掃除する 洗う 書く
+slot	T	list	先に 明日 後で すぐ 今から
+case	{T}{V}ね。	[ㄹ을갈게낼볼할]게\.$|[가-힣]게\.$	는군|네\.$
+case	じゃあ、{T}{V}ね。	게\.$	는군|네\.$
+
+family	ne-observation	SPC-5	90
+slot	N	list	電車 雨 バス 風 雪 花 船 時間
+slot	V	verb	来る 降る 止まる 吹く 咲く 動く 過ぎる 変わる
+case	{N}が{V}ね。	네\.$	게\.$|는군
+
+family	baii-question	SPC-6	90
+slot	V	verb	言う 書く 待つ 謝る 使う 選ぶ 帰る 伝える 探す
+slot	Q	list	どう 何て いつ どこで 何を
+case	{Q}{V:ba}いい？	면 돼\?$	된다\?
+case	{Q}{V:ba}いいんだ？	면 돼\?$	된다\?|된다는
+case	{Q}{V:ba}いいの？	면 (?:돼|되는데|되는 거야|되지)\?$	된다\?
+
+family	chatta-particle	SPC-7	90
+slot	V	verb	食べる 忘れる 寝る 言う 壊す 落とす 遅れる 負ける 飲む 使う
+case	{V:chatta}よ。	버렸어\.$	버렸다
+case	{V:chatta}ね。	버렸(?:네|구나)\.$	버렸다

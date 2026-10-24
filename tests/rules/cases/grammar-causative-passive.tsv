@@ -1,27 +1,88 @@
 # 규칙: GRM-1
 rule	input	expected	kind	layer
-cx:causer-ni:10	特に、鈴木って後輩にはいつも苦労させられて……	rule:cx:causer-ni:10= 때문에	fix	rewrites
-cx:causer-ni:10	確かに姉と妹は彼女たちに負傷させられたが、こちらも不注意があったからな	확실히 언니와 여동생은 그녀들 때문에 부상 당했지만, 이쪽도 부주의가 있었으니까	fix	rewrites
-cx:causer-ni:10	不機嫌そうな田中さんに思考を中断させられた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
-cx:causer-ni:10	母に野菜を食べさせられた。	어머니 때문에 야채를 먹었다.	fix	rewrites
-cx:causer-ni:10	母に薬を飲まされた。	어머니 때문에 약을 먹게 되었다.	fix	rewrites
-cx:causer-ni:10	母に本を読まされた。	어머니 때문에 책을 읽게 되었다.	fix	rewrites
-cx:causer-ni:10	兄に宿題をやらされた。	형 때문에 숙제를 하게 되었다.	fix	rewrites
-cx:causer-ni:10	先輩に酒を飲まされた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
-cx:causer-ni:10	彼に一時間も待たされた。	그 때문에 1시간이나 기다리게 되었다.	fix	rewrites
-cx:causer-ni:10	店長に配置換えさせられた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
-cx:causer-ni:10	先生に掃除をさせられた。	선생님에게 청소를 하도록 강요받았다.	keep	rewrites
+cx:causer-ni:10	母に野菜を食べさせられた。	어머니 때문에 억지로 야채를 먹었다.	fix	rewrites
+cx:causer-ni:10	母に薬を飲まされた。	어머니 때문에 억지로 약을 먹었다.	fix	rewrites
+cx:causer-ni:10	母に本を読まされた。	어머니 때문에 억지로 책을 읽었다.	fix	rewrites
+cx:causer-ni:10	兄に宿題をやらされた。	형 때문에 억지로 숙제를 했다.	fix	rewrites
+cx:causer-ni:10	先輩に酒を飲まされた。	rule:cx:causer-ni:10= 때문에 억지로	fix	rewrites
+cx:causer-ni:10	父に謝らされた。	아버지 때문에 억지로 사과했다.	fix	rewrites
+cx:causer-ni:10	父に勉強させられた。	아버지 때문에 억지로 공부했다.	fix	rewrites
+cx:causer-ni:10	彼女に重い荷物を持たされた。	그녀 때문에 억지로 무거운 짐을 들었다.	fix	rewrites
+cx:causer-ni:10	毎日部長に残業させられている。	매일 부장 때문에 억지로 잔업하고 있다.	fix	rewrites
+cx:causer-ni:10	兄に働かされた。	형 때문에 억지로 일했다.	fix	rewrites
+cx:causer-ni:10	先生にゴミを捨てさせられました。	선생님 때문에 억지로 쓰레기를 버렸습니다.	fix	rewrites
+cx:causer-ni:10	店長に配置換えさせられた。	rule:cx:causer-ni:10= 때문에 억지로	fix	rewrites
+cx:causer-ni:10	彼に一時間も待たされた。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	母に無理やり本を読まされた。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	彼に心配させられた。	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	どうすれば佐藤に一発食らわせられるか教えて！	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	ならよかった。ライブ前の妹に風邪なんかひかせられない	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	今後は田中くんを回復させられるくらいになるかもしれない	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	ホントに『なるほど』という気持ちにさせられるな……	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	この話がなくたって、どうせ合宿には参加させられてましたし	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	ですが、やはり今のままでは実戦投入はさせられません。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	先生に掃除をさせられた。	선생님에게 청소를 하도록 강요받았다.	keep	rewrites
 cx:causer-ni:10	こんな汚れ仕事、あの子にはやらせられないもの。	이런 더러운 일, 그 아이에게는 시킬 수 없는 것.	keep	rewrites
 cx:causer-ni:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
 cx:causer-ni:10	母が子供に野菜を食べさせた。	어머니가 아이에게 야채를 먹였다.	keep	rewrites
-cx:causer-ni:10	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:20	彼に一時間も待たされた。	그 때문에 1시간이나 기다리게 되었다.	fix	rewrites
+cx:causer-ni:20	彼に待たされたか？	그 때문에 기다리게 되었나?	fix	rewrites
+cx:causer-ni:20	特に、鈴木って後輩にはいつも苦労させられて……	특히, 스즈키는 후배 때문에 언제나 고생하게 되어……	fix	rewrites
+cx:causer-ni:20	母に無理やり本を読まされた。	rule:cx:causer-ni:20= 때문에	fix	rewrites
+cx:causer-ni:20	彼に心配させられた。	그 때문에 걱정하게 되었다.	fix	rewrites
+cx:causer-ni:20	彼に考えさせられた。	그 때문에 생각하게 되었다.	fix	rewrites
+cx:causer-ni:20	不機嫌そうな田中さんに思考を中断させられた。	rule:cx:causer-ni:20= 때문에	fix	rewrites
+cx:causer-ni:20	確かに姉と妹は彼女たちに負傷させられたが、こちらも不注意があったからな	확실히 언니와 여동생은 그녀들 때문에 부상당했지만, 이쪽도 부주의가 있었으니까	fix	rewrites
+cx:causer-ni:20	母に本を読まされた。	!rule:cx:causer-ni:20	keep	rewrites
+cx:causer-ni:20	先生に掃除をさせられた。	!rule:cx:causer-ni:20	keep	rewrites
+cx:causer-ni:20	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:20	keep	rewrites
+cx:causer-ni:20	どうすれば佐藤に一発食らわせられるか教えて！	!rule:cx:causer-ni:20	keep	rewrites
+cx:causer-ni:20	母が子供に野菜を食べさせた。	!rule:cx:causer-ni:20	keep	rewrites
+cx:forced-act:10	彼に待たされた。	그 때문에 기다리게 되었다.	keep	rewrites
+cx:forced-act:10	母に野菜を食べさせられたくない。	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:10	待たされる間が、とても長く感じた。	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:20	彼に心配させられた。	!rule:cx:forced-act:20	keep	rewrites
+cx:forced-act:20	ですが、やはり今のままでは実戦投入はさせられません。	!rule:cx:forced-act:20	keep	rewrites
+cx:forced-act:30	解雇させられた。	해고당했다.	fix	rewrites
+cx:forced-act:30	確かに姉と妹は彼女たちに負傷させられたが、	rule:cx:forced-act:30=당&AV@	fix	rewrites
+cx:forced-act:30	勉強させられた。	!rule:cx:forced-act:30	keep	rewrites
+cx:forced-act:30	彼に心配させられた。	!rule:cx:forced-act:30	keep	rewrites
+cx:forced-act:35	孤立させられた。	고립되었다.	fix	rewrites
+cx:forced-act:35	不機嫌そうな田中さんに思考を中断させられた。	기분이 안 좋을 것 같은 타나카 씨 때문에 사고를 중단하게 되었다.	keep	rewrites
+cx:forced-act:35	勉強させられた。	!rule:cx:forced-act:35	keep	rewrites
 rewrite:passive-reading	母に本を読ませられた。	어머니가 책을 읽게 했다.	current	rewrites
-cx:causer-ni:10	父に謝らされた。	아버지 때문에 사과하게 되었다.	fix	rewrites
-cx:causer-ni:10	彼に待たされたか？	그 때문에 기다리게 되었나?	fix	rewrites
-cx:causer-ni:10	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	rewrites
+cx:forced-act:10	以前、練習に付き合ったときは、佐藤が台詞を言うたびにドキリとさせられた。	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:10	ご婚約者であらせられる鈴木様	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:10	ご令嬢によっては背筋が凍る目に遭わされる可能性もある	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:10	母に本を読まされた。	어머니 때문에 억지로 책을 읽었다.	fix	rewrites
+cx:forced-act:10	彼女に重い荷物を持たされた。	그녀 때문에 억지로 무거운 짐을 들었다.	fix	rewrites
+cx:forced-act:10	父に謝らされた。	아버지 때문에 억지로 사과했다.	fix	rewrites
+cx:forced-act:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
+cx:forced-act:10	薬を飲まされた。	약을 먹게 되었다.	keep	rewrites
+cx:forced-act:10	重荷を背負わされたのだ。	무거운 짐을 짊어지게 되었다.	keep	rewrites
+cx:forced-act:20	父に勉強させられた。	아버지 때문에 억지로 공부했다.	fix	rewrites
+cx:forced-act:20	毎日部長に残業させられている。	매일 부장 때문에 억지로 잔업하고 있다.	fix	rewrites
+cx:forced-act:20	勉強させられた。	공부하게 되었다.	keep	rewrites
+cx:forced-act:20	叔父との別れを選択させられたのであるが。	숙부와의 이별을 선택하게 되었지만.	keep	rewrites
+cx:forced-act:20	無理やり競争させられる。	억지로 경쟁하게 된다.	keep	rewrites
+cx:forced-act:20	地下帝国に送られて、強制労働させられるんだろ？	지하제국에게 보내져, 강제 노동하게 되는 거지?	keep	rewrites
+cx:forced-act:40	本を読まされることになった。	책을 읽게 되었다.	fix	rewrites
+cx:forced-act:40	母に本を読まされることになった。	어머니 때문에 억지로 책을 읽게 되었다.	fix	rewrites
+cx:forced-act:40	母に本を読まされた。	!rule:cx:forced-act:40	keep	rewrites
+cx:forced-act:45	二日後には退院させられることになって	이틀 후에는 퇴원하게 되어	fix	rewrites
+cx:forced-act:45	退院させられた。	!rule:cx:forced-act:45	keep	rewrites
+cx:forced-act:32	病院食まで検査させられて運ばれる	병원식까지 검사받아 옮겨진다	fix	rewrites
+cx:forced-act:32	検査させられた。	검사받았다.	fix	rewrites
+cx:forced-act:32	勉強させられた。	!rule:cx:forced-act:32	keep	rewrites
+cx:causer-ni:10	母にドキリとさせられた。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	彼女にはハッとさせられた。	그녀 때문에 흠칫하게 되었다.	keep	rewrites
+cx:causer-ni:10	彼女にドキドキさせられた。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	無理やり母に本を読まされた。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:20	母にドキリとさせられた。	어머니 때문에 깜짝 놀랐다.	fix	rewrites
+cx:forced-act:10	強制的に母に本を読まされた。	강제적으로 어머니 때문에 책을 읽었다.	fix	rewrites
+cx:forced-act:10	母に無理やり本を読まされた。	rule:cx:forced-act:10=&HK@	fix	rewrites
+cx:forced-act:10	彼に一時間も待たされた。	!rule:cx:forced-act:10	keep	rewrites
+cx:forced-act:20	上司に無視させられた。	상사 때문에 억지로 무시했다.	fix	rewrites
+cx:forced-act:20	彼女にはハッとさせられた。	!rule:cx:forced-act:20	keep	rewrites
+cx:forced-act:30	上司に無視させられた。	!rule:cx:forced-act:30	keep	rewrites

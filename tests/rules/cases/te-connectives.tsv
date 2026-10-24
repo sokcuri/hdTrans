@@ -15,3 +15,10 @@ cx:see-and:10	私を見て！と叫んだ。	나를 봐!라고 외쳤다.	fix	re
 cx:see-and:10	これを見て、驚いた。	이것을 보고, 놀랐다.	keep	rewrites
 cx:see-and:10	「これを見て？」	「이걸 봐?」	fix	rewrites
 cx:see-and:10	「何を見て？」	「뭘 보고?」	keep	rewrites
+cx:te-request:30	貸してくれ。	빌려 줘.	fix	rewrites
+cx:te-request:30	「携帯、貸してくれ」	「휴대폰, 빌려 줘」	fix	rewrites
+cx:te-request:30	やってくれ!!	해 줘!!	fix	rewrites
+cx:te-request:30	ついてくれ。	뒤따라 줘.	fix	rewrites
+cx:te-request:30	貸してくれ……	빌려 줘……	fix	rewrites
+cx:te-request:30	貸してくれた。	!rule:cx:te-request:30	keep	rewrites
+cx:te-request:30	貸してくれる？	!rule:cx:te-request:30	keep	rewrites

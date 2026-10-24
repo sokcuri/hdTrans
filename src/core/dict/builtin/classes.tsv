@@ -2,6 +2,7 @@
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
+//= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
@@ -83,6 +84,7 @@
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
+//= ko-noun.cp-danghada	Korean nouns of what one undergoes whose causative-passive (させられる after the Japanese noun) is the noun with 당하다 (해고당하다, 퇴학당하다), not the act one is made to do.
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
@@ -132,6 +134,7 @@
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
+//= noun.cp-change	Verbal nouns of a change that befalls someone or something (中断, 孤立, 停止), whose causative-passive is that change done to one, 되다 (思考を中断させられた 사고가 중단되었다), not an act one is made to do.
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
@@ -153,7 +156,7 @@
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
 //= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
-//= noun.return-here	Ends of the nouns of here and of a ship's home port: 戻る to them, or in a sentence that names here after it, comes back, 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다, 車に戻ったんだ、ここも 차로 돌아왔어).
+//= noun.return-here	Ends of the nouns of here, of a ship's home port and of one's right mind (正気): 戻る to them, or in a sentence that names here after it, comes back, 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다, 正気に戻る 제정신으로 돌아오다, 車に戻ったんだ、ここも 차로 돌아왔어).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
@@ -218,8 +221,9 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
-//= verb.causative-passive	Dictionary verbs in される whose Korean is the causative-passive 게 되다 (待たされる 기다리게 되다); a person before に is who made it happen.
+//= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 食べさせられる 먹다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
+//= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
 //= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
@@ -277,6 +281,18 @@ adverb.degree-feeling	凄く
 adverb.degree-feeling	すっごく
 adverb.degree-feeling	めちゃくちゃ
 
+adverb.forcing	無理やり
+adverb.forcing	無理矢理
+adverb.forcing	むりやり
+adverb.forcing	強制的に
+adverb.forcing	強引に
+adverb.forcing	否応なく
+adverb.forcing	否応無く
+adverb.forcing	いやいや
+adverb.forcing	嫌々
+adverb.forcing	渋々
+adverb.forcing	しぶしぶ
+adverb.forcing	強制
 adverb.gradual	次第
 adverb.gradual	徐々
 adverb.gradual	どんどん
@@ -531,6 +547,125 @@ counter.added	泊
 counter.added	切れ
 counter.added	滴
 
+ko-noun.cp-danghada	해고
+ko-noun.cp-danghada	퇴학
+ko-noun.cp-danghada	퇴장
+ko-noun.cp-danghada	정학
+ko-noun.cp-danghada	파면
+ko-noun.cp-danghada	제명
+ko-noun.cp-danghada	의절
+ko-noun.cp-danghada	강등
+ko-noun.cp-danghada	부상
+ko-noun.cp-danghada	괴멸
+ko-noun.cp-danghada	파멸
+noun.cp-change	中断
+noun.cp-change	孤立
+noun.cp-change	停止
+noun.cp-change	回復
+noun.cp-change	消滅
+noun.cp-change	崩壊
+noun.cp-change	気絶
+noun.cp-change	失神
+noun.cp-change	成長
+noun.cp-change	変化
+noun.cp-change	混乱
+noun.cp-change	減少
+noun.cp-change	増加
+noun.cp-change	低下
+noun.cp-change	悪化
+noun.cp-change	転落
+noun.cp-change	墜落
+noun.cp-change	沈没
+noun.cp-change	爆発
+noun.cp-change	炎上
+noun.cp-change	覚醒
+noun.cp-change	進化
+noun.cp-change	退化
+noun.cp-change	凍結
+noun.cp-change	解散
+noun.cp-change	閉鎖
+noun.cp-change	中止
+noun.cp-change	延期
+noun.cp-change	移動
+noun.cp-change	転居
+noun.cp-change	変更
+noun.cp-change	配置換え
+noun.cp-change	異動
+noun.cp-change	左遷
+noun.cp-change	転属
+noun.cp-change	転勤
+verb.cp-experience	待つ
+verb.cp-experience	聞く
+verb.cp-experience	知る
+verb.cp-experience	気付く
+verb.cp-experience	気づく
+verb.cp-experience	考える
+verb.cp-experience	驚く
+verb.cp-experience	笑う
+verb.cp-experience	泣く
+verb.cp-experience	悩む
+verb.cp-experience	困る
+verb.cp-experience	呆れる
+verb.cp-experience	思い知る
+verb.cp-experience	感じる
+verb.cp-experience	思う
+verb.cp-experience	喜ぶ
+verb.cp-experience	怒る
+verb.cp-experience	悲しむ
+verb.cp-experience	苦しむ
+verb.cp-experience	焦る
+verb.cp-experience	慌てる
+verb.cp-experience	戸惑う
+verb.cp-experience	迷う
+verb.cp-experience	照れる
+verb.cp-experience	気付かされ
+verb.cp-experience	気づかされ
+verb.cp-experience	待たされ
+verb.cp-experience	知らされ
+verb.cp-experience	考えさせられ
+verb.cp-experience	聞かされ
+verb.cp-experience	心配
+verb.cp-experience	苦労
+verb.cp-experience	感心
+verb.cp-experience	納得
+verb.cp-experience	実感
+verb.cp-experience	痛感
+verb.cp-experience	困惑
+verb.cp-experience	感動
+verb.cp-experience	反省
+verb.cp-experience	後悔
+verb.cp-experience	意識
+verb.cp-experience	自覚
+verb.cp-experience	緊張
+verb.cp-experience	安心
+verb.cp-experience	失望
+verb.cp-experience	落胆
+verb.cp-experience	驚愕
+verb.cp-experience	動揺
+verb.cp-experience	興奮
+verb.cp-experience	幻滅
+verb.cp-experience	イライラ
+verb.cp-experience	ドキッと
+verb.cp-experience	ドキリと
+verb.cp-experience	どきりと
+verb.cp-experience	はっと
+verb.cp-experience	ハッと
+verb.cp-experience	遭う
+verb.cp-experience	遭わされ
+verb.cp-experience	ドキドキ
+verb.cp-experience	どきどき
+verb.cp-experience	どきっと
+verb.cp-experience	わくわく
+verb.cp-experience	ワクワク
+verb.cp-experience	ぞっと
+verb.cp-experience	ゾッと
+verb.cp-experience	ひやっと
+verb.cp-experience	ヒヤッと
+verb.cp-experience	びっくり
+verb.cp-experience	ほっと
+verb.cp-experience	ホッと
+verb.cp-experience	うんざり
+verb.cp-experience	がっかり
 word.give-request	ください
 word.give-request	下さい
 word.give-request	ちょうだい
@@ -1129,6 +1264,10 @@ ko-noun.passive-batda	신뢰
 ko-noun.passive-batda	주의
 ko-noun.passive-batda	충고
 ko-noun.passive-batda	재판
+ko-noun.passive-batda	검사
+ko-noun.passive-batda	진찰
+ko-noun.passive-batda	수술
+ko-noun.passive-batda	심사
 
 ko-noun.passive-danghada	무시
 ko-noun.passive-danghada	거절
@@ -1154,6 +1293,17 @@ ko-noun.passive-danghada	학대
 ko-noun.passive-danghada	구박
 ko-noun.passive-danghada	고문
 ko-noun.passive-danghada	희롱
+ko-noun.passive-danghada	해고
+ko-noun.passive-danghada	퇴학
+ko-noun.passive-danghada	퇴장
+ko-noun.passive-danghada	정학
+ko-noun.passive-danghada	파면
+ko-noun.passive-danghada	제명
+ko-noun.passive-danghada	의절
+ko-noun.passive-danghada	강등
+ko-noun.passive-danghada	부상
+ko-noun.passive-danghada	괴멸
+ko-noun.passive-danghada	파멸
 
 ko-noun.passive-eojida	말
 ko-noun.passive-eojida	의지
@@ -2911,6 +3061,8 @@ verb.causative-passive	行かされ
 verb.causative-passive	謝らされ
 verb.causative-passive	闘わされ
 verb.causative-passive	飲まされ
+verb.causative-passive	働かされ
+verb.causative-passive	食べさせられ
 verb.condition	疲れ
 verb.condition	つかれ
 verb.condition	困
@@ -3110,6 +3262,7 @@ noun.return-here	この場
 noun.return-here	母港
 noun.return-here	鎮守府
 noun.return-here	こちら
+noun.return-here	正気
 
 verb.naming	呼ぶ
 verb.naming	書く
