@@ -1,5 +1,63 @@
 # 규칙: MNG-3, GRM-8
 rule	input	expected	kind	layer
+cx:omou-na:10	お前ごときが私に勝てると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	貴様ごときが私に勝てると思うな！	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前が俺に勝てると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前らが生きて帰れると思うな！	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前なんかが勝てると思うな。	has:생각하지 마	fix	rewrites
+cx:omou-na:10	てめえらが逃げ切れると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	二度と会えると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	決して逃げ切れると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前ごときが勝てないと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	二度と会えないと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	いいと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	たぶん違うと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	それなら私はあの子だと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	友達に隠し事するのは誠実じゃないと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	そんなことはないと思うな！	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	まだ早いと思うなー	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	わたしもあの子ならできると思うなぁ	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が勝てるって思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前がいれば勝てると思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が来たら勝てると思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	あんたが来てくれたら喜ぶと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	決して諦めないから、勝てると思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	なんかが壊れると思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が勝てると思うなぁ	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前ごときが勝てると思うなー！	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前ごときが勝てぬと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が勝てませんと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が勝てると思うな？	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	お前が来ると思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	私に勝てないと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:10	決して許されると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	てめえが逃げられると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前が見逃してもらえると思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前ごときが勝つと思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:10	お前が勝つと思うな	lacks:생각하지 마	keep	rewrites
+cx:omou-na:20	お前ごときが勝てないとは思うな	lacks:생각하지 마	fix	rewrites
+cx:omou-na:20	二度と会えないとは思うな	lacks:생각하지 마	fix	rewrites
+cx:omou-na:20	スレは消したほうがいいのかなとは思うな	has:생각해	fix	rewrites
+cx:omou-na:20	人知を超えたものを畏れ敬うって気持ちが大切なんだと思うな。	has:생각해	fix	rewrites
+cx:omou-na:20	あいつのはいい追い込み方だったと思うな	has:생각해	fix	rewrites
+cx:omou-na:20	君なら言えてたと思うな	has:생각해	fix	rewrites
+cx:omou-na:20	あたいは、そう思うな。	has:그렇게 생각해	fix	rewrites
+cx:omou-na:20	私の知ってる鹿は、あんな角はしていなかったと思うなー。	has:생각해	fix	rewrites
+cx:omou-na:20	いい作戦だったと思うな。	has:생각해	fix	rewrites
+cx:omou-na:20	ただで済むと思うなよ	has:생각하지 마	keep	rewrites
+cx:omou-na:20	この程度でハンデになると思うなよ！！	has:생각하지 마	keep	rewrites
+cx:omou-na:20	これで終わったと思うなよ！	has:생각하지 마	keep	rewrites
+cx:omou-na:20	だから自分を特別だと思うなって。	has:생각하지 말라고	keep	rewrites
+cx:omou-na:20	悪く思うなよ	has:생각하지 마	keep	rewrites
+cx:omou-na:20	そう思うなよ	has:생각하지 마	keep	rewrites
+cx:omou-na:20	思うな！	has:생각하지 마	keep	rewrites
+cx:omou-na:20	二度と会えるとは思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:20	お前ごときが勝てるとは思うな	has:생각하지 마	fix	rewrites
+cx:omou-na:20	お前が勝てるとは思うな	has:생각하지 마	fix	rewrites
+normalize:exclamation-na	お前ごときが私に勝てると思うな	has:생각하지 마	fix	normalize
+normalize:exclamation-na	そろそろ日が暮れるな。	has:지는구나	keep	normalize
+normalize:exclamation-na	よく食べるな、お前	lacks:지 마	keep	normalize
+normalize:exclamation-na	お前が言うな！	lacks:말하는구나	keep	normalize
 dict:jisjk:344556	行くな	has:가지 마	keep	local-ending
 dict:jisjk:344556	言うな	has:말하지 마	keep	local-ending
 dict:jisjk:344556	忘れるな	has:잊지 마	keep	local-ending

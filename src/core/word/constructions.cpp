@@ -351,6 +351,15 @@ constexpr NamedFeature kFeatures[] = {
          }
          return false;
      }},
+    // A mark of mark.lengthening, or the lengthen or drawn mark that stands for one, is right after the
+    // word (思うなぁ, 思うなー).
+    {"lengthened",
+     [](Flusher&, const Item* it) {
+         const std::string_view rest = TextAfter(it);
+         const text::Rune r = text::DecodeRune(rest);
+         return r.cp == output::kLengthenMark || r.cp == output::kDrawnMark ||
+                dict::InClass("mark.lengthening", rest.substr(0, r.size));
+     }},
     // A vowel kana of mark.drawn follows the word (燃えるねぇ, 言うねェ).
     {"drawn",
      [](Flusher&, const Item* it) {
