@@ -135,3 +135,21 @@
 사례: `tests/rules/cases/sound-n-hum.tsv`(ん 소리), `tests/rules/cases/sound-u-cries.tsv`(う 소리),
 `tests/rules/cases/sound-closed-u.tsv`(っ로 끝나는 う), `tests/rules/cases/sound-hya-cries.tsv`(ひゃ),
 `tests/rules/cases/normalize-voiced-mark.tsv`(탁점)
+
+## SND-5 웃음 표기는 ㅋ로 옮긴다
+
+한국어 뒤나 줄 첫머리에서 웃음을 나타내는 w, ｗ의 연속은 글자 수만큼 `ㅋ`으로 옮긴다. 문장을 닫는 草(〜で草, 〜の草, 홀로
+선 草)도 웃음이라 `ㅋㅋ`다. 라틴 글자, 숫자, 주소 기호에 붙은 w(www.example.com), 조사 앞이나 조사와 한자, 가타카나 사이에서 낱말로 쓴 글자
+하나(変数wの値, のwキー)와 명사 뒤의 草(庭の草)는 그대로 둔다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| マジかｗｗｗ | 진짜야ㅋㅋㅋ | 고침 |
+| それはないわｗ | 그것은 없어 ㅋ | 고침 |
+| ブラックで草 | 블랙으로 ㅋㅋ | 고침 |
+| 「草…」 | 「ㅋㅋ…」 | 고침 |
+| www.example.com | www.example.com | 유지 |
+| 変数wの値 | 변수 w의 값 | 유지 |
+| 庭の草。 | 뜰의 풀. | 유지 |
+
+사례: `tests/rules/cases/sound-laughter.tsv`
