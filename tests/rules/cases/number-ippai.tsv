@@ -49,3 +49,30 @@ sense:いっぱい	コップにいっぱい注ぐ。	컵에 가득 따른다.	fi
 sense:いっぱい	お砂糖、いっぱい入れていい？	설탕, 많이 넣어도 좋아?	keep	local
 sense:一杯	コーヒーを一杯注ぐ。	커피를 한 잔 따른다.	keep	senses
 sense:いっぱい	経験もいっぱい積んだ。	경험도 많이 쌓았다.	keep	senses
+sense:いっぱい	演習もたくさんやったし、経験もいっぱい積んだし。	연습도 많이 했고, 경험도 많이 쌓았고.	fix	senses
+dict:w:27004	そう、足にいっぱい付いたんですよ！	그래, 다리에 많이 붙은 거예요!	fix	local
+dict:w:27004	明かりをいっぱいつけて、北方の海域に出ていく。	rule:dict:w:27004=많이	fix	local
+dict:w:27004	いっぱい握っておいたから。	rule:dict:w:27004=많이	fix	local
+sense:いっぱい	艦載機いっぱい積めていいなー。	함재기 가득 탑재할 수 있어도 좋네~.	keep	senses
+dict:w:27004	おにぎりいっぱい作りますね。	주먹밥 많이 만드네요.	fix	local
+dict:w:27004	料理いっぱい作るかも。	요리 많이 만들지도.	fix	local
+dict:w:27004	お祝いで健康ケーキ、いっぱい作りますね！	축하로 건강 케이크, 많이 만드네요!	fix	local
+dict:w:27004	豆をいっぱいお持ちしました。	콩을 많이 가져왔습니다.	fix	local
+dict:w:27004	お水いっぱい飲んだら、醒めました…。	물 많이 마셨더니, 깨었습니다….	fix	local
+dict:w:27004	……いっぱい出たね	……많이 나왔네	fix	local
+dict:w:27004	やることいっぱいあって大変！	rule:dict:w:27004=많이	fix	local
+dict:jisjk:373504	ゴロゴロ……お腹がいっぱいさ	데굴데굴……배가 불러	fix	local-ending
+dict:number-ippai	チュッ……頭がいっぱいぞ	쪽……머릿속이 가득해	keep	defaults
+dict:number-ippai	ピンポーン……頭がいっぱいぜ	딩동……머릿속이 가득해	keep	defaults
+# 맞는 출력: 배가 부르면…졸려 버렸어
+dict:number-ippai	お腹いっぱいになったら…眠くなっちゃった	배부르게 되면…졸려져 버렸다	current	defaults
+# 맞는 출력: 쏴아쏴아……머릿속이 가득하네
+dict:number-ippai	ザーザー……頭がいっぱいな	쏴아쏴아……머릿속이 가득한	current	defaults
+# 맞는 출력: 싱글벙글……머릿속이 가득한 거야
+dict:number-ippai	ニコニコ……頭がいっぱいの	싱글벙글……머릿속이 가득해의	current	defaults
+# 맞는 출력: 싱글벙글……머릿속이 가득해
+dict:number-ippai	ニコニコ……頭がいっぱいわよ	싱글벙글……머릿속이 가득해야	current	defaults
+# 맞는 출력: 딩동……머릿속이 가득한 거야
+dict:number-ippai	ピンポーン……頭がいっぱいのよ	딩동……머릿속이 가득해의 것	current	defaults
+# 맞는 출력: 조용함, 그것이 제일이다.
+dict:jisjk:267449	静かさ、それが一番だ。	조용해, 그것이 제일이다.	current	local-ending
