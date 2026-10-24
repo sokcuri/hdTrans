@@ -1,0 +1,14 @@
+#! layer=base
+# 용언 뒤 くせに, くせして: 그러면서도 어긋나는 일을 탓하는 -면서
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+くせに	2면서	S500			GN				kuseni:1		
+くせして	2면서	S500			GN				kuseni:2		
+くせに	5으면서	S560			GN				kuseni:3		
+くせして	5으면서	S560			GN				kuseni:4		
+いくせして	2면서	T500			GN				kuseni:5		
+かったくせに	5으면서	T500			GN				kuseni:6		
+かったくせして	5으면서	T500			GN				kuseni:7		
+くせして	주제에	E301			GN				kuseni:8		
+クセして	주제에	E301			GN				kuseni:9		
+癖して	주제에	E301			GN				kuseni:10		
+そのくせ	그러면서도	E311			GN				kuseni:11		

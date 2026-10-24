@@ -3,6 +3,8 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
+//= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
@@ -24,8 +26,10 @@
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
-//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
+//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
+//= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
+//= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
@@ -57,6 +61,7 @@
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
+//= ko-sound.laugh	Korean laughs the sound stage writes (아하하, 후후), after which おかしい is funny, not strange (あはは、おかしい 아하하, 웃겨).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
@@ -86,11 +91,14 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
-//= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내, 出羽国人 데와 고쿠진); 国中, 国府, 国主 keep the name with its 国.
+//= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
+//= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
+//= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
+//= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
 //= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
@@ -128,6 +136,7 @@
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
 //= spelling.variant-kept	Contexts in which a variant of spelling.variant is another word and stays: 位 of rank after の or before が, を (神の位, 位が下げられる), 等 read ら after a pronoun (それ等, あいつ等), the verb 為す or 為る (何を為そう), and 程 after the adnominal な, which the kana rows read as an attached 만큼 (同数な程).
 //= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
+//= stem.contracted-shimau	The contractions of て or で with しまう before its own endings (食べちゃうよ, 飲んじゃうよ, 行っちまうよ, 死んじまうよ).
 //= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
@@ -142,9 +151,11 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.causative-passive	Dictionary verbs in される whose Korean is the causative-passive 게 되다 (待たされる 기다리게 되다); a person before に is who made it happen.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
-//= verb.filling	Verbs of filling, loading and holding, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱい溜めて); written as words of a senses.tsv trigger.
+//= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
+//= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -169,7 +180,9 @@
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
+//= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
+//= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -194,6 +207,21 @@ adverb.gradual	益々
 adverb.gradual	日に日に
 adverb.gradual	少しずつ
 adverb.gradual	みるみる
+adverb.habitual	いつも
+adverb.habitual	毎日
+adverb.habitual	毎晩
+adverb.habitual	毎朝
+adverb.habitual	毎年
+adverb.habitual	しょっちゅう
+adverb.habitual	度々
+adverb.habitual	たびたび
+adverb.habitual	時々
+adverb.habitual	ときどき
+adverb.habitual	何度も
+adverb.habitual	しばしば
+adverb.going-well	上手く
+adverb.going-well	旨く
+adverb.going-well	巧く
 
 adverb.observation	よく
 adverb.observation	いつも
@@ -349,6 +377,7 @@ ending.rare-passive	てい
 ending.rare-passive	てる
 ending.rare-passive	てお
 ending.rare-passive	てた
+ending.rare-passive	ちゃ
 
 ending.rare-potential	な
 ending.rare-potential	ず
@@ -360,6 +389,18 @@ ending.rare-potential	れば
 ending.rare-potential	よう
 ending.rare-potential	たら
 ending.rare-potential	たり
+
+ending.taunt	よーだ
+ending.taunt	よーっだ
+ending.taunt	よーだっ
+ending.taunt	よーっだっ
+ending.taunt	もんねーだ
+ending.taunt	もんねーっだ
+ending.taunt	もんねーだっ
+ending.taunt	もんねーっだっ
+
+ending.taunt-not-after	の
+ending.taunt-not-after	な
 
 follower.contracted-iru	の
 follower.contracted-iru	だ
@@ -743,6 +784,58 @@ ko-noun.passive-eojida	말
 ko-noun.passive-eojida	의지
 ko-noun.passive-eojida	생각
 ko-noun.passive-eojida	일
+ko-sound.laugh	후후
+ko-sound.laugh	후훗
+ko-sound.laugh	후후후
+ko-sound.laugh	훗
+ko-sound.laugh	훗훗훗
+ko-sound.laugh	우후
+ko-sound.laugh	우후후
+ko-sound.laugh	우훗
+ko-sound.laugh	우후훗
+ko-sound.laugh	무후후
+ko-sound.laugh	에헤
+ko-sound.laugh	에헤헤
+ko-sound.laugh	에헷
+ko-sound.laugh	에헤헷
+ko-sound.laugh	헤헤
+ko-sound.laugh	헤헷
+ko-sound.laugh	헤헤헤
+ko-sound.laugh	데헤
+ko-sound.laugh	데헷
+ko-sound.laugh	데헤헤
+ko-sound.laugh	아하
+ko-sound.laugh	아핫
+ko-sound.laugh	아하하
+ko-sound.laugh	아하핫
+ko-sound.laugh	아하하하
+ko-sound.laugh	하하
+ko-sound.laugh	하핫
+ko-sound.laugh	하하하
+ko-sound.laugh	와하하
+ko-sound.laugh	와하하하
+ko-sound.laugh	푸핫
+ko-sound.laugh	푸하하
+ko-sound.laugh	풉
+ko-sound.laugh	푸풋
+ko-sound.laugh	크크
+ko-sound.laugh	크큭
+ko-sound.laugh	크크크
+ko-sound.laugh	큭큭큭
+ko-sound.laugh	큭
+ko-sound.laugh	킥킥
+ko-sound.laugh	히히
+ko-sound.laugh	히히히
+ko-sound.laugh	히힛
+ko-sound.laugh	니히
+ko-sound.laugh	니히히
+ko-sound.laugh	니힛
+ko-sound.laugh	니시시
+ko-sound.laugh	호호호
+ko-sound.laugh	오호호
+ko-sound.laugh	오호호호
+ko-sound.laugh	우하하
+ko-sound.laugh	우하하하
 
 ko-verb.casual-state	된다
 ko-verb.casual-state	모른다
@@ -1253,7 +1346,10 @@ noun.realm-compound	国境
 noun.realm-compound	国内
 noun.realm-compound	国外
 noun.realm-compound	国民
-noun.realm-compound	国人
+
+noun.realm-province-compound	国人
+
+noun.realm-country	日本
 
 noun.realm-name	日本
 noun.realm-name	山城
@@ -2040,6 +2136,11 @@ stem.compound-particle	伴
 stem.compound-particle	とも
 stem.compound-particle	応じ
 
+stem.contracted-shimau	ちゃ
+stem.contracted-shimau	じゃ
+stem.contracted-shimau	ちま
+stem.contracted-shimau	じま
+
 stem.request	くださ
 stem.request	下さ
 stem.request	いらっしゃ
@@ -2220,6 +2321,19 @@ verb.casual-state	疑
 verb.casual-state	流行
 verb.casual-state	はや
 verb.casual-state	似合
+verb.causative-passive	気づかされ
+verb.causative-passive	あやまらされ
+verb.causative-passive	受けもたされ
+verb.causative-passive	向かいあわされ
+verb.causative-passive	向かい合わされ
+verb.causative-passive	待たされ
+verb.causative-passive	払わされ
+verb.causative-passive	書かされ
+verb.causative-passive	立たされ
+verb.causative-passive	行かされ
+verb.causative-passive	謝らされ
+verb.causative-passive	闘わされ
+verb.causative-passive	飲まされ
 
 verb.entrust	頼む
 verb.entrust	たのむ
@@ -2316,6 +2430,25 @@ verb.filling	満たす
 verb.filling	浮かべる
 verb.filling	頬張る
 verb.filling	抱える
+verb.filling	つめる
+verb.filling	つめこむ
+verb.filling	詰まる
+verb.filling	ためる
+verb.filling	溜まる
+verb.filling	みたす
+verb.filling	満ちる
+verb.filling	みちる
+verb.filling	そそぐ
+verb.filling	うかべる
+verb.filling	ほおばる
+verb.filling	かかえる
+verb.filling	盛る
+verb.filling	涙をためる
+verb.filling	涙を溜める
+verb.filling	涙を浮かべる
+verb.filling	涙をうかべる
+verb.putting-in	入れる
+verb.putting-in	いれる
 noun.practice	経験
 noun.practice	経験値
 noun.practice	実績
@@ -2328,6 +2461,32 @@ noun.practice	鍛錬
 noun.practice	研鑽
 noun.practice	場数
 noun.practice	功績
+noun.receive-verbal	紹介
+noun.receive-verbal	支給
+noun.receive-verbal	指導
+noun.receive-verbal	治療
+noun.receive-verbal	診察
+noun.receive-verbal	許可
+noun.receive-verbal	推薦
+noun.receive-verbal	案内
+noun.receive-verbal	教育
+noun.receive-verbal	保護
+noun.receive-verbal	支援
+noun.receive-verbal	援助
+noun.receive-verbal	招待
+noun.receive-verbal	承認
+noun.receive-verbal	祝福
+noun.receive-verbal	歓迎
+noun.receive-verbal	応援
+noun.receive-verbal	検査
+noun.receive-verbal	手術
+noun.receive-verbal	相談
+noun.receive-verbal	指名
+noun.receive-verbal	表彰
+noun.receive-verbal	補償
+noun.receive-verbal	配達
+noun.receive-verbal	送金
+noun.receive-verbal	融資
 
 verb.naming	呼ぶ
 verb.naming	書く
@@ -2852,12 +3011,30 @@ word.kara-source-keep	解放
 word.kara-source-keep	避
 word.kara-source-keep	離
 word.kara-source-keep	身を
+word.kuseni	くせに
+word.kuseni	クセに
+word.kuseni	くせして
+word.kuseni	クセして
+word.kuseni	癖して
 
 word.meet-partner	と
 word.meet-partner	ここ
 word.meet-partner	そこ
 word.meet-partner	あそこ
 word.meet-partner	どこ
+word.near-miss	危うく
+word.near-miss	あやうく
+word.near-miss	危く
+word.near-miss	もう少しで
+word.near-miss	もうちょっとで
+word.near-miss	もうちょいで
+word.near-miss	あと少しで
+word.near-miss	間違えば
+word.near-miss	間違えれば
+word.near-miss	下手をすれば
+word.near-miss	下手すれば
+word.near-miss	下手したら
+word.near-miss	危なかった
 
 word.partner-to	一緒
 word.partner-to	いっしょ

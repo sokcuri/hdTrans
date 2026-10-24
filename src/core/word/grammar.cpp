@@ -572,6 +572,9 @@ constexpr Suppletive kSuppletive[] = {
     {"있다", "계시다", OwnProgressive::None},       {"죽다", "돌아가시다", OwnProgressive::None},
 };
 
+// The honorific 시 with the dictionary ending, which ends every honorific lemma (쓰시다).
+constexpr std::string_view kHonorificDa = "시다";
+
 // The honorific target of the conjugating verb target text (쓰&AF@ 쓰시다); "" when it has none.
 std::string HonorificTarget(Flusher& f, std::string_view text) {
     if (text.size() < 4 || text.back() != '@' || text[text.size() - 4] != '&') return {};
@@ -586,7 +589,7 @@ std::string HonorificTarget(Flusher& f, std::string_view text) {
     if (lemma.empty()) {
         const std::string_view stem = LookupSource(std::string(text.substr(text.size() - 4)) + "A", f.families);
         if (stem.empty()) return {};
-        lemma = std::string(head) + std::string(stem) + "시다";
+        lemma = std::string(head) + std::string(stem) + std::string(kHonorificDa);
     }
     output::Conjugated c = output::Conjugating(lemma, '&', "", f.families);
     return c.error.empty() ? std::move(c.target) : std::string();
@@ -629,13 +632,12 @@ std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitiv
 
 // The plain verb of the honorific verb target text (읽으&AE@ 읽다, 입원하&AE@ 입원하다) as a
 // conjugating target: the verb of the passive stem surface when the dictionary has one (作られ
-// 만들다), else the verb whose honorific is text (its stem without the 으 before 시, or the
-// stem itself), or the honorific itself as kSuppletive says (드시고 계신다); "" for an honorific
-// suffix alone, 계시다 and 돌아가시다.
+// 만들다), else the verb whose honorific is text (its stem without the syllable before 시, the
+// 으 that HonorificTarget puts after a final consonant, or the stem itself), or the honorific
+// itself as kSuppletive says (드시고 계신다); "" for an honorific suffix alone, 계시다 and 돌아가시다.
 std::string PlainOfHonorific(Flusher& f, std::string_view surface, std::string_view text) {
     const std::string lemma = output::Lemma(text, f.families);
-    constexpr std::string_view kSi = "시다";
-    if (!lemma.ends_with(kSi) || lemma.size() == kSi.size()) return {};
+    if (!lemma.ends_with(kHonorificDa) || lemma.size() == kHonorificDa.size()) return {};
     for (const Suppletive& own : kSuppletive) {
         if (!lemma.ends_with(own.honorific)) continue;
         if (own.progressive == OwnProgressive::None) return {};
@@ -644,9 +646,9 @@ std::string PlainOfHonorific(Flusher& f, std::string_view surface, std::string_v
     bool transitive = false;
     std::string plain;
     if (!BaseVerbTarget(f, surface, transitive, plain).empty() && !plain.empty()) return plain;
-    const std::string_view head = std::string_view(lemma).substr(0, lemma.size() - kSi.size());
-    constexpr std::string_view kEu = "으";
-    for (const std::string_view stem : {head.ends_with(kEu) ? head.substr(0, head.size() - kEu.size()) : head, head}) {
+    const std::string_view head = std::string_view(lemma).substr(0, lemma.size() - kHonorificDa.size());
+    for (const std::string_view stem : {head.substr(0, head.size() - DecodeLastRune(head).size), head}) {
+        if (stem.empty()) continue;
         output::Conjugated c = output::Conjugating(std::string(stem) + std::string(kKoDa), '&', "", f.families);
         if (!c.error.empty()) continue;
         if (output::Lemma(HonorificTarget(f, c.target), f.families) == lemma) return std::move(c.target);

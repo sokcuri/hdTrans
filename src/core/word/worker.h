@@ -128,7 +128,8 @@ private:
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
-    // (noun.realm-compound) gives it its 国 (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the reading of
+    // (noun.realm-compound, and noun.realm-province-compound after a province) gives it its 国 (美濃国境
+    // 美濃 + 国境, 日本国内 日本 + 国内, 出羽国人 出羽 + 国人): the reading of
     // the name that the name with 国 starts with moves to the front, when no longer word starts
     // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
     Record* NounBeforeCompound(Record* records, std::string_view text);

@@ -327,7 +327,10 @@ char LatinWordClass(std::string_view letters) {
     switch (last) {
         case 'm': case 'n': return 'c';  // 룸, 톰, 레인, bomb 밤, sign 사인
         case 'l': return 'l';            // 폴, 툴, 쿨
-        case 'g': return at(1) == 'n' ? 'c' : 'v';  // 킹; 도그
+        case 'g':
+            // ng is 킹; bag and big keep the spellings 백 and 빅 (핸드백), other g take 으 (도그, 태그).
+            if (at(1) == 'n') return 'c';
+            return w.ends_with("bag") || w == "big" ? 'c' : 'v';
         case 'e':
             // e sounds after a vowel and in a word of two letters (트리, 블루, 미); otherwise
             // it is silent and the consonant before it decides: 게임, 라인, 애플, 실루엣, but

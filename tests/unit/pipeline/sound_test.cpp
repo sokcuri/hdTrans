@@ -78,6 +78,8 @@ HD_TEST(pipeline_lengthen) {
         {"으음", "t", "으음~"}, {"으음", "~t", "으으~음"},
         // 'd' lets the last syllable of a word carry the lengthening.
         {"안 돼", "vvvd", "안 돼애애애"}, {"가 버려", "vv!d", "가 버려어엇"}, {"안 돼", "vvv", "안 돼~"},
+        // 'u': a ッ that closes a drawn う writes 읏, other closing 우 stay (わおっ 와웃).
+        {"하우", "!u", "하읏"}, {"하우", "v!u", "하우읏"}, {"와우", "!", "와웃"}, {"우우", "rr!u", "우우우읏"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::Lengthen(c.korean, c.units), std::string(c.want));
 }
@@ -304,8 +306,8 @@ HD_TEST(pipeline_sound) {
         {"「カハッ！」", "「カハッ！」"},
         // A lone ん or small vowel between punctuation is a voice of its own.
         {"「あっ、ん、くぁっ」", "「앗、응、크앗」"},
-        {"……ぅ……", "……우……"},
-        {"あっ、く、うぅ", "앗、크、우우"},
+        {"……ぅ……", "……으……"},
+        {"あっ、く、うぅ", "앗、크、으으"},
         {"な ん", "な ん"},
         {"君ん家", "君ん家"},
         {"「おい、誰か！！」", "「어이、誰か！！」"},
@@ -361,6 +363,11 @@ HD_TEST(pipeline_sound) {
         // A sound after a hiragana word: a mimetic in と or doubled, not grammar going on.
         {"ただぼーっと道", "ただ멍하니 道"},
         {"わからなくたって", "わからなくたって"},
+        // A particle after the reading of brace ruby goes with its base (声がして); a sound after
+        // it, or a doubled sound that starts with it, stays one.
+        {"{rb}声{/rb}{rt}こえ{/rt}がして", "{rb}声{/rb}{rt}こえ{/rt}がして"},
+        {"{rb}彼{/rb}{rt}かれ{/rt}はドキドキ", "{rb}彼{/rb}{rt}かれ{/rt}は두근두근"},
+        {"{rb}彼{/rb}{rt}かれ{/rt}がしがしと", "{rb}彼{/rb}{rt}かれ{/rt}벅벅"},
         // Invalid UTF-8 bytes stay in place.
         {"の\xff<b>", "の\xff<b>"},
         {"\xffドキドキ\xe3", "\xff두근두근\xe3"},

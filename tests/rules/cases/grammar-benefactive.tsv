@@ -1,0 +1,51 @@
+# 규칙: GRM-3
+rule	input	expected	kind	layer
+cx:benefactive-agent:10	祖母に昔話をしてもらった。	할머니가 옛날이야기를 해 주었다.	fix	rewrites
+cx:benefactive-agent:10	母に料理をしてもらった。	어머니가 요리를 해 주었다.	fix	rewrites
+cx:benefactive-agent:10	姉に部屋の掃除をしてもらった。	언니가 방 청소를 해 주었다.	fix	rewrites
+cx:benefactive-agent:10	神主さんに紹介してもらったらしい。	제주 씨에게 소개받은 것 같다.	keep	rewrites
+cx:benefactive-agent:10	田中さんに解析してもらって解除、回収する。	타나카 씨가 해석해 주어 해제, 회수한다.	fix	rewrites
+cx:benefactive-agent:10	生徒に協力してもらったアンケートです	학생이 협력해 준 앙케이트입니다	fix	rewrites
+cx:benefactive-agent:10	姉に用意してもらった触媒を使って	언니가 준비해 준 촉매를 써	fix	rewrites
+cx:benefactive-agent:10	山本さんという人に武器を支給してもらって……？	야마모토 씨라는 사람에게 무기를 지급받아……?	keep	rewrites
+cx:benefactive-agent:10	医者に診察してもらった。	의사에게 진찰을 받았다.	keep	rewrites
+cx:benefactive-agent:10	看病してもらった。	간병받았다.	keep	rewrites
+cx:benefactive-agent:10	時々、英会話の指導をしてもらっていた。	가끔, 영어회화 지도를 받고 있었다.	keep	rewrites
+cx:benefactive-agent:10	尻ぬぐいをしてもらって恩義を感じている部下もいる	뒷처리를 받아 은의를 느끼고 있는 부하도 있다	keep	rewrites
+cx:benefactive-agent:20	先輩に優しくしてもらったから	선배가 다정하게 해 주었으니까	fix	rewrites
+cx:benefactive-agent:20	入院してるときから優しくしてもらってて	입원하고 있을 때부터 다정하게 해 주고 있어	fix	rewrites
+cx:benefactive-agent:20	室内を覗くことは出来るようにしてもらった。	실내를 들여다 볼 수 있도록 해 주었다.	fix	rewrites
+cx:benefactive-agent:20	そこまでしてもらわなくても	거기까지 해 주지 않아도	fix	rewrites
+cx:benefactive-agent:20	治療を十分にしてもらった。	치료를 충분히 받았다.	keep	rewrites
+cx:benefactive-agent:20	実の息子のようによくしてもらいました。	친아들처럼 잘 대접받았습니다.	keep	rewrites
+cx:benefactive-provider:10	先生に説明していただいた。	선생님이 설명해 주셨다.	fix	rewrites
+cx:benefactive-provider:10	田中さんにお力添えして頂いた方	타나카 씨가 도움해 주신 편	fix	rewrites
+cx:benefactive-provider:10	王宮で働く方々に相談をさせていただいた。	왕궁에서 일하는 분들에게 상담을 했다.	keep	rewrites
+dict:benefactive:4	先生に本を読んでいただいた。	선생님이 책을 읽어 주셨다.	fix	local
+dict:benefactive:4	聞いていただき、ありがとうございます！	들어 주셔서, 감사합니다!	fix	local
+dict:benefactive:4	わざわざ、このような所まで足を運んでいただき申し訳ありません。	일부러, 이러한 곳까지 발길을 옮겨 주셔서 죄송합니다.	fix	local
+dict:benefactive:4	貴社に訪問させていただきます。	귀사에 방문하겠습니다.	keep	local
+dict:benefactive:3	ハンカチを拾って頂きありがとうございました。	손수건을 주워 주셔서 감사합니다.	fix	local
+dict:benefactive:3	お心を砕いて頂いた事	마음을 부수어 주신 일	fix	local
+dict:benefactive:3	イニシアティブを取らせて頂きます。	이니셔티브를 받게 해 받습니다.	keep	local
+dict:benefactive:7	是非とも教えて頂きたいです	부디 가르쳐 주셨으면 합니다	fix	local
+dict:morae-request:1	撮影したデータを消してもらおうか。	촬영한 데이터를 지워 달라고 할까.	fix	local
+dict:morae-request:1	契約を履行してもらおうかな	계약을 이행해 달라고 할까	fix	local
+dict:morae-request:1	直ったら、なにか吹いてもらおうと思ってたのに……	회복되면, 뭔가 불어 달라고 하려고 했었는데……	fix	local
+dict:morae-request:1	それじゃあ吐いてもらいましょうか	그럼 토해 달라고 할까요	fix	local
+dict:morae-request:1	作ってもらえ。	만들어 달라고 해라.	keep	local
+dict:morae-request:1	データを消してもらった。	데이터를 지워 주었다.	keep	local
+dict:benefactive:9	勝ったら、何をしてもらおう？	이기면, 무엇을 해 달라고 하자?	fix	local
+dict:benefactive:9	契約を履行してもらおうかな	계약을 이행해 달라고 할까	fix	local
+dict:benefactive:9	先生に説明してもらった。	!rule:dict:benefactive:9	keep	local
+cx:benefactive-provider:30	姉貴に一緒に作ってもらおうか？	누님에게 함께 만들어 달라고 할까?	fix	rewrites
+cx:benefactive-provider:30	皆さんに楽しんでもらおう。	여러분에게 즐겨 달라고 하자.	fix	rewrites
+cx:benefactive-provider:30	先生に本を読んでもらった。	!rule:cx:benefactive-provider:30	keep	rewrites
+cx:benefactive-agent:20	自分以外の誰かにしてもらうなんて、初めての経験だから	!rule:cx:benefactive-agent:20	keep	rewrites
+cx:benefactive-agent:30	早速だが、おまえの実力のほどを見極めさせてもらおう……。	rule:cx:benefactive-agent:30=&CJ@	fix	rewrites
+cx:benefactive-agent:30	では待たせてもらおうかしら	rule:cx:benefactive-agent:30=&CJ@	fix	rewrites
+cx:benefactive-agent:30	撮影したデータを消してもらおうか。	!rule:cx:benefactive-agent:30	keep	rewrites
+dict:benefactive:4	あちらにある棒につかまって、ぶらさがっていただきます。	!rule:dict:benefactive:4	keep	local
+dict:benefactive:4	貴方には、こちらで待っていただきます。	!rule:dict:benefactive:4	keep	local
+cx:benefactive-agent:10	私が母に料理をしてもらった。	!rule:cx:benefactive-agent:10	keep	rewrites
+cx:benefactive-agent:10	私は祖母に昔話をしてもらった。	!rule:cx:benefactive-agent:10	keep	rewrites

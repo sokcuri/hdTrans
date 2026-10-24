@@ -80499,9 +80499,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユフィ	유피	N110			GN						ゆふぃ	names.378254
 ユフィ&ソフィ	유피&소피	N130	QPNVHn	Wb	GN						ゆふぃ&そふぃ	names.378255
 ユフィア	유피아	N130	QPNVHn	Wb	GN						ゆふぃあ	names.378256
-ユフィリア・フェズ・パレッティア	유피리아 페즈 팔레티아	N130	QPNVHn		GN						ゆふぃりあ・ふぇず・ぱれってぃあ	names.378257
-ユフィリア・フェズ・パレッティア	유필리아 마젠타	N130	QPNVHn		GN							names.378258
-ユフィリア・マゼンタ	유피리아 마젠타	N130	QPNVHn		GN						ゆふぃりあ・まぜんた	names.378259
+ユフィリア	유필리아	N130	QPNVHn		GN						ゆふぃりあ	names.767332
+ユフィリア・フェズ・パレッティア	유필리아 페즈 팔레티아	N130	QPNVHn		GN						ゆふぃりあ・ふぇず・ぱれってぃあ	names.378257
 ユフィリア・マゼンタ	유필리아 마젠타	N130	QPNVHn		GN						ユフィリア・マゼンタ	names.378260
 ユフィ・キサラギ	유피 키사라기	N130	QPNVHn		GN						ゆふぃ・きさらぎ	names.378261
 ユフィーナ=マーロン	유피나 마론	N130	QPNVHn		GN						ゆふぃーな・まーろん	names.378262

@@ -222,6 +222,17 @@ if(NOT EMSCRIPTEN)
         endforeach()
         set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
+        # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
+        # (where python3 is found, as for the tools.* tests).
+        if(HDTRANS_PYTHON)
+            add_test(NAME rules.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-soft"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-strict" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops"
+                --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")
+            set_tests_properties(rules.drops PROPERTIES TIMEOUT 300)
+            add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
+        endif()
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/e2e.sh" $<TARGET_FILE:hdtrans_cli>

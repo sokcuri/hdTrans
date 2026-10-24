@@ -4,6 +4,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -135,16 +136,17 @@ public:
 
     // A dictionary key of two or more characters, or with a kanji, that ends at
     // character at of rs and starts at or after from, and no key of the sound lexicon
-    // that does (どしゃ). An ending of the contracted しまう (うよ of 食べちゃうよ) ends a word
-    // only after the ゃ or ま of its contraction (not 歌うよ).
+    // that does (どしゃ). An ending that starts with the dictionary ending of しまう (うよ of
+    // 食べちゃうよ) ends a word only after a contraction of stem.contracted-shimau (not 歌うよ).
     bool WordEnds(std::u32string_view rs, size_t from, size_t at) const {
+        const std::string_view shimauEnd = word::Conjugation(word::kKindWa, 0);
         bool word = false;
         for (size_t j = from; j < at; j++) {
             if (LexiconKey(ToKatakana(rs.substr(j, at - j)), ctx_.extraBuiltin)) return false;
             if (at - j < 2 && !IsKanjiRune(rs[j])) continue;
             const std::string tags = Tags(rs.substr(j, at - j));
-            const bool contracted = tags.find_first_not_of('S') == std::string::npos && rs[j] == U'う';
-            word = word || (!tags.empty() && (!contracted || (j > 0 && In(rs[j - 1], U"ゃま"))));
+            const bool contracted = tags.find_first_not_of('S') == std::string::npos && EncodeText(rs.substr(j, 1)) == shimauEnd;
+            word = word || (!tags.empty() && (!contracted || (j >= 2 && dict::InClass("stem.contracted-shimau", EncodeText(rs.substr(j - 2, 2))))));
         }
         return word;
     }
@@ -610,6 +612,24 @@ bool ShoutEnd(std::u32string_view rs, size_t i) {
     return i >= rs.size() || IsPause(rs[i]);
 }
 
+// The length of the tail of a sulky tag of ending.taunt (よーだ, もんねーっだ) whose drawn mark
+// starts at i and ends at end, after a word and before a pause or the end; 0 when there is none.
+// After a kana of ending.taunt-not-after the tag is ようだ spelled long (夢のよーだ).
+size_t TauntTail(std::u32string_view rs, size_t i, size_t end) {
+    for (const std::string_view member : dict::ClassMembers("ending.taunt")) {
+        const std::u32string t = DecodeText(member);
+        const size_t d = static_cast<size_t>(std::find_if(t.begin(), t.end(), IsDash) - t.begin());
+        if (d == 0 || d >= t.size() || i < d + 1) continue;
+        const std::u32string_view head = std::u32string_view(t).substr(0, d), tail = std::u32string_view(t).substr(d + 1);
+        if (rs.substr(i - d, d) != head || !IsWordRune(rs[i - d - 1]) || rs.substr(end, tail.size()) != tail ||
+            dict::InClass("ending.taunt-not-after", EncodeText(rs.substr(i - d - 1, 1)))) {
+            continue;
+        }
+        if (end + tail.size() >= rs.size() || IsPause(rs[end + tail.size()])) return tail.size();
+    }
+    return 0;
+}
+
 // The ーs and ぇs of the e row, at least one ー, of rs[i:end] (てぇー, せー).
 bool LongE(std::u32string_view rs, size_t i, size_t end) {
     bool dash = false;
@@ -890,6 +910,12 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             // A shout's っ after the run, before a pause, ends the phrase: for the ～ below when
             // the run has a ー and dictionary keys read the text up to the mark (だめーっ; not the
             // cry ぎやぁーっ), and for a drawl of three or more vowel kana (たすけてぇぇぇっ).
+            // A sulky tag after a drawn sentence particle is tone, not a copula: its tail is dropped
+            // and the particle drawn out (分かりましたよーだ 알았어요~).
+            if (const size_t taunt = std::any_of(rs.begin() + i, rs.begin() + end, IsDash) ? TauntTail(rs, i, end) : 0; taunt > 0) {
+                rs = Spliced(rs, end, std::u32string(), end + taunt);
+                changed = true;
+            }
             const bool tsuEnd = end < rs.size() && rs[end] == U'っ' && ShoutEnd(rs, end);
             const bool dashed = std::any_of(rs.begin() + i, rs.begin() + end, [](char32_t c) { return c == U'ー'; });
             const bool shoutTsu = tsuEnd && dashed && e.ReadsTo(rs, i);

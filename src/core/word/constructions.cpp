@@ -1,6 +1,7 @@
 #include "core/word/constructions.h"
 
 #include <algorithm>
+#include <span>
 #include <string>
 #include <unordered_map>
 
@@ -103,6 +104,51 @@ bool Exclaimed(Flusher& f, const Item* it) {
     return false;
 }
 
+// The size of the mark of marks that starts s, 0 for none.
+std::size_t MarkAt(std::string_view s, std::span<const std::string_view> marks) {
+    for (const std::string_view m : marks) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
+// Whether s holds only marks of a pause and spaces.
+bool OnlyPauses(std::string_view s) {
+    while (!s.empty()) {
+        std::size_t n = MarkAt(s, dict::ClassMembers("mark.pause"));
+        if (n == 0 && text::IsSpace(text::DecodeRune(s).cp)) n = text::DecodeRune(s).size;
+        if (n == 0) return false;
+        s.remove_prefix(n);
+    }
+    return true;
+}
+
+// Whether the speech goes on after the item, past pause marks and spaces, within its sentence
+// or past a ！ or ？ that ends it inside a quote the next sentence goes on: a word follows that
+// is not a closing bracket (……そうだ、ほら, 「……そうだ！　田中さん」; not ……そうだ。 間違いない,
+// ……そうだ！ 間違いない outside quotes, 「……そうだ」 or an unclosed 「……そうだ at the end of the text).
+bool SpeechGoesOn(Worker& w, const Item* it) {
+    const std::string_view rest = From(it->text, it->start + it->length);
+    if (!rest.empty() && !OnlyPauses(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
+    bool exclaimed = false;
+    for (int j = it->tokenIndex + 1; j < w.TokenCount(); j++) {
+        const int type = w.Tok(j).type;
+        if (type == tokenizer::kTypeEnd) return exclaimed && w.QuoteDepth(j) > 0;
+        if (type == tokenizer::kTypeNewline) return false;
+        if (type == tokenizer::kTypeSentenceEnd || type == tokenizer::kTypeAsciiPunct) {
+            const std::string_view mark = w.tokens.Canonical(static_cast<std::size_t>(j));
+            if (!mark.starts_with("!") && !mark.starts_with("?")) return false;
+            exclaimed = true;
+            continue;
+        }
+        const std::string_view raw = w.tokens.Raw(static_cast<std::size_t>(j));
+        if (!OnlyPauses(raw)) {
+            return (!exclaimed || w.QuoteDepth(j) > 0) && MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+        }
+    }
+    return false;
+}
+
 bool Narrated(Flusher& f, const Item* it) {
     if (it->InQuote()) return false;
     const Item* tail = it;
@@ -164,6 +210,10 @@ constexpr NamedFeature kFeatures[] = {
     {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
     // The verb was analysed as a causative.
     {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
+    // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
+    {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
+    // The verb was analysed as a causative-passive (待たされ, 読ませられ).
+    {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
     // token when the word before ends its token.
     {"touches-prev",
@@ -200,6 +250,8 @@ constexpr NamedFeature kFeatures[] = {
     // a dash or a small つ.
     {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
+    // More words follow on the line past the end of the sentence (SpeechGoesOn).
+    {"speech-goes-on", [](Flusher& f, const Item* it) { return SpeechGoesOn(f.w, it); }},
     // The item ends its sentence: the end of the utterance, or ！？!? after it (SentenceEnd).
     {"sentence-end", [](Flusher& f, const Item* it) { return SentenceEnd(f.w, it); }},
     // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
@@ -374,6 +426,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"copy-ending", CxVerb::CopyEnding},
         {"copy-word", CxVerb::CopyWord},
         {"set-sound", CxVerb::SetSound},
+        {"set-active", CxVerb::SetActive},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -412,7 +465,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             continue;
         }
         const char* bad = nullptr;
-        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound) {
+        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
+            a.verb == CxVerb::SetActive) {
             out.push_back(std::move(a));
             continue;
         }
@@ -882,6 +936,14 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         }
         case internal::CxVerb::SetVerb:
             it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            break;
+        case internal::CxVerb::SetActive:
+            // The verb is written in the active voice: its Korean without the passive.
+            if (it->DetailRecord() == 1) {
+                it->detail->record = 0;
+                if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
+                it->choice = source;
+            }
             break;
         case internal::CxVerb::SetSound: {
             if (std::string sound = text::FromKana(it->group->surface, text::Preset::Fan); !sound.empty()) {

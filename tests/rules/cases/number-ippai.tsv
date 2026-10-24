@@ -85,3 +85,17 @@ dict:jisjk:373504	いやー、簡単さーこんなの…。	이야, 간단해-�
 dict:jisjk:373504	優秀さ、美しさ。	우수함, 아름다움.	fix	ending-defaults
 dict:jisjk:373504	優秀さ、高さ、全てを持っている。	우수함, 높이, 모든 것을 가지고 있다.	fix	ending-defaults
 dict:jisjk:373504	大丈夫さ、静かだ。	괜찮아, 조용하다.	keep	local-ending
+cx:container-full:10	箱にいっぱい入れた。	상자에 가득 넣었다.	fix	rewrites
+cx:container-full:10	ポケットに一杯入れた。	rule:cx:container-full:10=가득	fix	rewrites
+cx:container-full:10	頭にいっぱい入れた。	머리에 가득 넣었다.	fix	rewrites
+cx:container-full:10	お砂糖、いっぱい入れていい？	!rule:cx:container-full:10	keep	rewrites
+cx:container-full:10	アーティチョークいっぱい入れてさ！	!rule:cx:container-full:10	keep	rewrites
+cx:container-full:10	水をいっぱい入れた。	물을 많이 넣었다.	keep	rewrites
+sense:いっぱい	カバンにいっぱいつめた。	가방에 가득 채웠다.	fix	senses
+sense:いっぱい	希望がいっぱい詰まっているのです！	희망이 가득 차 있습니다!	fix	senses
+sense:いっぱい	女の子の携帯には秘密がいっぱい詰まってるんですよ	여자아이의 휴대폰에는 비밀이 가득 차 있는 거예요	fix	senses
+sense:いっぱい	目にいっぱい涙をためた。	눈에 가득 눈물을 고였다.	fix	senses
+sense:いっぱい	目にいっぱい涙を浮かべた。	눈에 가득 눈물을 머금었다.	fix	senses
+sense:いっぱい	皿にいっぱい盛った。	접시에 가득 담았다.	fix	senses
+sense:一杯	仕事の後の一杯はたまんないわー	일 뒤의 한 잔은 견딜 수 없어~	keep	senses
+cx:container-full:10	彼にいっぱい入れた。	!rule:cx:container-full:10	keep	rewrites

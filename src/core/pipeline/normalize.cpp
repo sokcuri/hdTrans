@@ -438,6 +438,9 @@ size_t TimeEnd(std::string_view text, const Match& m) {
     return (c >= U'ァ' && c <= U'ヶ') || (c >= U'一' && c <= U'鿿') ? 0 : p;
 }
 
+// The kana that a voiced mark cannot voice: vowels, ん, っ, ー and small kana.
+constexpr std::u32string_view kUnvoicedKana = U"あいうえおぁぃぅぇぉゃゅょゎんっアイウエオァィゥェォャュョヮヵヶンッー～";
+
 }  // namespace
 
 std::string NormalizeForms(std::string_view text) {
@@ -481,6 +484,29 @@ std::string NormalizeForms(std::string_view text) {
             if (const text::Rune vs = At(text, i); vs.cp == 0xFE0E || vs.cp == 0xFE0F) i += vs.size;  // ‼︎
         } else {
             c = MapForm(c);
+        }
+        // A voiced mark on a kana that has no voiced form strains the voice of a cry (あ゛っ, ん゛,
+        // ウ゛ー); the kana is read without it. Katakana ウ with the mark before a small vowel or
+        // another katakana letter spells ヴ (ウ゛ァイオリン), and hiragana う before a small vowel
+        // keeps the mark (う゛ぁ).
+        if (In(c, kUnvoicedKana)) {
+            size_t j = i;
+            while (j < text.size() && In(At(text, j).cp, U"゛゙ﾞ")) j += At(text, j).size;
+            // A run of ウ゛ reads by what follows the whole run (ウ゛ウ゛ッ ウウッ).
+            size_t k = j;
+            while (c == U'ウ' && k < text.size() && At(text, k).cp == U'ウ') {
+                size_t m = k + At(text, k).size;
+                if (m >= text.size() || !In(At(text, m).cp, U"゛゙ﾞ")) break;
+                while (m < text.size() && In(At(text, m).cp, U"゛゙ﾞ")) m += At(text, m).size;
+                k = m;
+            }
+            const char32_t next = k < text.size() ? At(text, k).cp : 0;
+            if (j > i && c == U'ウ' && IsKatakanaRune(next) && !In(next, U"ーッゥンウ")) {
+                c = U'ヴ';
+                i = j;
+            } else if (j > i && !(c == U'う' && In(next, U"ぁぃぇぉ"))) {
+                i = j;
+            }
         }
         text::AppendRune(out, c);
     }

@@ -7,6 +7,7 @@ namespace hdTrans::word {
 
 constexpr int kConjugationKinds = 14;     // rows: the kind digit of a verb's part code
 constexpr int kConjugationBranches = 18;  // columns: the conjugation branch
+constexpr int kKindWa = 0;                // わ-row godan verbs (しまう, and its ちゃう, ちまう)
 constexpr int kKindIku = '?' - '0';       // 行く-type verbs
 constexpr int kPrefixForms = 200;
 constexpr int kPrefixGates = 34;

@@ -213,7 +213,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
 // (하아 하앗); other words take one ~ instead (정말 정말~), unless 'd' (an interjection drawn
 // out by three or more vowel kana) makes the last syllable carry it (안 돼 + vvvd 안 돼애애애).
-// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end.
+// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end. 'u' (the ッ
+// closes a drawn う) writes a final 웃 as 읏 (하우 + ! 하읏).
 std::string Lengthen(std::string_view korean, std::string_view units);
 
 // A row of the sound lexicon; key in katakana.
