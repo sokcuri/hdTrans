@@ -55,6 +55,8 @@ cx:hodo-degree:30		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-de
 cx:question-copula:10		&&5 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、" L-1== "무엇"	set-target@-1 "뭐" set-target "냐"	何だ、少尉 뭐냐, 소위
 cx:question-copula:20		&&5 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、" F-1== "final-consonant"	set-target "이냐"	「どれだ」 「어떤 것이냐」
 cx:question-copula:30		&&4 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、"	set-target "냐"	誰だ！ 누구냐!
+//= second-self	after Select	A first-person pronoun spelled in katakana, with a first-person pronoun in another spelling in the same sentence, is a second self and keeps its sound (ワタシと私 와타시와 나); a pronoun right after an ellipsis restarts the words before it (ワタシが…私が 내가…내가).
+cx:second-self:10	LEX-5	&&5 S+0== @pronoun.first-person F+0== "katakana" F+0== "selected" F+0!= "after-restart" ||2 <30 &&3 S+0== @pronoun.first-person F+0!= "katakana" F+0!= "after-restart" ||7 S+0== "00。！？!?「」『』" I+0== "~」" I+0== "~』" I+0== "~「" I+0== "~。" I+0== "~！" I+0== "~？" >30 &&3 S+0== @pronoun.first-person F+0!= "katakana" F+0!= "after-restart" ||7 S+0== "00。！？!?「」『』" I+0== "~」" I+0== "~』" I+0== "~「" I+0== "~。" I+0== "~！" I+0== "~？"	set-sound	ワタシと私が 와타시와 내가
 //= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
 cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다
 //= kara-source	after return-to	The から read (으)로부터 is 부터 after a time or a number, and 에서 after a place or scene.

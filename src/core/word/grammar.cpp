@@ -420,14 +420,41 @@ bool NumberSurface(std::string_view s) {
     return true;
 }
 
-bool OpensLine(const Worker& w, const Item* it) {
+std::string_view TextBefore(const Worker& w, const Item* it, int& token) {
     std::string_view before = it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
-    for (int t = it->tokenIndex;;) {
+    for (token = it->tokenIndex;;) {
         before = TrimSpace(before);
-        if (!before.empty()) return RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
-        if (--t < 0) return true;
-        before = w.Tok(t).text;
+        if (!before.empty() || token == 0) return before;
+        before = w.Tok(--token).text;
     }
+}
+
+bool OpensLine(const Worker& w, const Item* it) {
+    int token = 0;
+    const std::string_view before = TextBefore(w, it, token);
+    return before.empty() || RuneIn(DecodeLastRune(before).cp, "。．.！？!?");
+}
+
+bool AfterRestart(const Worker& w, const Item* it) {
+    int token = 0;
+    std::string_view before = TextBefore(w, it, token);
+    bool mark = false;
+    for (bool cut = true; cut;) {
+        cut = false;
+        for (const std::string_view m : dict::ClassMembers("mark.restart")) {
+            if (before.ends_with(m)) {
+                before.remove_suffix(m.size());
+                mark = cut = true;
+                break;
+            }
+        }
+    }
+    if (!mark) return false;
+    if (!TrimSpace(before).empty()) return true;
+    while (token > 0) {
+        if (!TrimSpace(w.Tok(--token).text).empty()) return true;
+    }
+    return false;
 }
 
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
