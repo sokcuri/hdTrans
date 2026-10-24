@@ -1993,16 +1993,16 @@ bool RuleL209([[maybe_unused]] Item* p) {
 }
 
 // local 210
-//     (src[-1] == "証拠" or src[-1] == "一度")
+//     src[-1] == "証拠"
 //     (sem[-1] has QLG or sem[-1] has UQf)
 //     src[+1] == "何でも"
 //     (src[-2] == "どんな" or src[-2] == "たとえ")
 //     src[+1] ends "た" and pos[+1] is 7**
 //     src[-1] == "問題" and src[-2] == "何か"
 //     pos[-1] is 1** and pos[-2] is 7**|8** and src[-3] == "たとえ"
+//     (gram[-1] has Nq and sem[-1] lacks VPl and (gram[-1] has Ct or gram[-1] lacks Nj|Nd) or gram[-1] has Ct and sem[-1] lacks VPl and gram[-2] has Nq)
 bool RuleL210([[maybe_unused]] Item* p) {
-    return (SrcEq(p, -1, "証拠"sv) ||
-           SrcEq(p, -1, "一度"sv)) ||
+    return SrcEq(p, -1, "証拠"sv) ||
            (AttrEq(p, -1, "QLG"sv) ||
            AttrEq(p, -1, "UQf"sv)) ||
            SrcEq(p, 1, "何でも"sv) ||
@@ -2010,7 +2010,10 @@ bool RuleL210([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "たとえ"sv)) ||
            (SrcEq(p, 1, "Rた"sv) && PumsaEq(p, 1, "7**"sv)) ||
            (SrcEq(p, -1, "問題"sv) && SrcEq(p, -2, "何か"sv)) ||
-           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "7**8**"sv) && SrcEq(p, -3, "たとえ"sv));
+           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "7**8**"sv) && SrcEq(p, -3, "たとえ"sv)) ||
+           ((GramEq(p, -1, "Nq"sv) && AttrNe(p, -1, "VPl"sv) && (GramEq(p, -1, "Ct"sv) ||
+           GramNe(p, -1, "NjNd"sv))) ||
+           (GramEq(p, -1, "Ct"sv) && AttrNe(p, -1, "VPl"sv) && GramEq(p, -2, "Nq"sv)));
 }
 
 // local 211
@@ -4661,7 +4664,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL207, 0x183bc699d822bb26ull},
     {RuleL208, 0x0b1fa83be200dcccull},
     {RuleL209, 0x4aa763daeab76a88ull},
-    {RuleL210, 0x6640fde621d3a542ull},
+    {RuleL210, 0x865722d329f1ec97ull},
     {RuleL211, 0x1833fc6c1f2aaf04ull},
     {RuleL212, 0x70d80a842cc00bacull},
     {RuleL213, 0xc6591e5bccd20c62ull},
