@@ -26,7 +26,7 @@ struct CompositionCase {
     const char* expected;
 };
 
-void CheckComposition(const CompositionCase& c, bool literal = false) {
+void CheckComposition(const CompositionCase& c, bool literal = false, bool cleanup = false) {
     std::vector<TokenText> tokens = {
         {tokenizer::kTypeJapanese, 0, "", ""},
         {tokenizer::kTypeSentenceEnd, 0, ".", ""},
@@ -60,6 +60,7 @@ void CheckComposition(const CompositionCase& c, bool literal = false) {
     Settings settings;
     settings.text = true;
     settings.literal = literal;
+    settings.cleanup = cleanup;
     Pieces result;
     composer.Compose(items, tokens, 0, 1, {}, settings, families, result);
     HD_CHECK_EQ(String(result), c.expected);
@@ -338,6 +339,25 @@ HD_TEST(compose_verbal_noun_passive) {
         {{{"色々", "110", "", "여러 가지"}, {"し", "427", "", "&AV@", "5다"}}, {1, 2}, "여러 가지 했다."},
     };
     for (const auto& c : cases) CheckComposition(c);
+}
+
+// A gloss that ends in a space joins what attaches to its last syllable, and keeps the
+// space before a word.
+HD_TEST(compose_gloss_space_before_attached_word) {
+    const CompositionCase cases[] = {
+        {{{"家計消費支出", "110", "", "가계 소비 지출 "}, {"が", "211", "", "(이)가"},
+          {"増えた", "427", "", "늘어&A5@", "5다"}},
+         {2, 3}, "가계 소비 지출이 늘어났다."},
+        {{{"あいおい", "110", "Hd", "백년 해로 "}, {"を", "211", "", "(을)를"}}, {2}, "백년 해로를."},
+        {{{"あいおい", "110", "Hd", "백년 해로 "}, {"です", "200", "", "입니다"}}, {2}, "백년 해로입니다."},
+        {{{"何名様", "110", "", "몇 분 "}, {"たち", "110", "Tu", "들"}}, {1, 2}, "몇 분들."},
+        {{{"あいおい", "110", "Hd", "백년 해로 "}, {"する", "427", "", "&AV@", "5다"}}, {1, 2}, "백년 해로했다."},
+        {{{"あいおい", "110", "Hd", "백년 해로 "}, {"生活", "110", "", "생활"}}, {1, 2}, "백년 해로 생활."},
+        {{{"あいおい", "110", "Hd", "백년 해로 "}, {"の", "230", "", ""}, {"夫婦", "110", "", "부부"}},
+         {2, 3}, "백년 해로 부부."},
+        {{{"結婚", "110", "", "결혼"}, {"は", "200", "", " "}, {"夫婦", "110", "", "부부"}}, {2, 3}, "결혼 부부."},
+    };
+    for (const auto& c : cases) CheckComposition(c, false, true);
 }
 
 // An ellipsis or a mark of tone closes the word before it: the space the word was written
