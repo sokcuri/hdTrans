@@ -39044,11 +39044,11 @@ ttt	ttt	K110			GN				jisjk:201744
 ぱっぱと	척척	E311			GN				jisjk:1085		
 ぱぱ	아빠	N110	VHn		GN				jisjk:342356		
 ぱらつ	뿌&AA@	M411			GN				jisjk:91354		
-ぱらぱら	훨훨	E311			GN				jisjk:1086		
+ぱらぱら	훌훌	E311			GN				jisjk:1086		
 ぱらぱら	호도독호도독	E301			GN				jisjk:117476		
 ぱらぱら	훌훌	E301			GN				jisjk:117477		
-ぱらぱらと	훨훨	E300			GN				jisjk:1087		
-ぱらぱらと	후두둑	E300			GN	3200	||1 S-2== "雨"	ぱらぱらと의 두 단어 앞에 雨가 있으면 후두둑을 고른다. (미발동: rare-word)	jisjk:342105		
+ぱらぱらと	훌훌	E300			GN				jisjk:1087		
+ぱらぱらと	후두둑	E300			GN	3200	||2 S-2== "雨" S+1== "L降"	ぱらぱらと의 두 단어 앞에 雨가 있거나 뒤에 降로 시작하는 말이 오면 후두둑을 고른다.	jisjk:342105		
 ぱらりと	팔랑	E311			GN				jisjk:1088		
 ぱりっと	짝	E311			GN				jisjk:1089		
 ぱりぱり	파삭파삭	E301		Hw	GN				jisjk:1090		
@@ -65694,7 +65694,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スリー・ディー	3D	N110			IT				jisjk:260147		
 スルガカード	스루가 카드	N130	QIDVGt		GN				jisjk:49415		
 スルガ銀行	스루가 은행	N130	QIDVGt		GN				jisjk:49416		
-スルスルと	찰랑찰랑	K110			GN				jisjk:266025		
+スルスルと	스르르	E311			GN				jisjk:266025		
 スルタン	설탄	N110	VHn		GN				jisjk:130189		
 スルニチェク	슬니첵	N130	QPN		GN				jisjk:372100		
 スルファミン	설파제	N110	QHPQHP		GN				jisjk:130190		
