@@ -6,7 +6,7 @@ cx:yori:10	提督が鎮守府に着任しました。これより艦隊の指揮
 cx:yori:10	これより、出撃致します！	has:지금부터	fix	rewrites
 cx:yori:10	「……子爵領は、これより王領になります。」	has:지금부터 왕령이	fix	rewrites
 cx:yori:10	これより語られるのは、ある王国に生まれたお姫様のお話。	has:지금부터 말해지는	fix	rewrites
-cx:yori:10	本艦、M.T.はこれより抜錨する。行くぞ！	has:지금부터 출항하기한다	fix	rewrites
+cx:yori:10	本艦、M.T.はこれより抜錨する。行くぞ！	has:지금부터 출항한다	fix	rewrites
 cx:yori:10	≪確認しました。これより渡辺さん、筒美さんと共に向かいます≫	has:지금부터 와타나베	fix	rewrites
 cx:yori:10	これより強い敵はいない。	has:이것보다	keep	rewrites
 cx:yori:10	これより前に進む。	has:이것보다	keep	rewrites

@@ -17,7 +17,7 @@ dict:jisjk:341410	演習でもする？	has:연습이라도	keep	local
 dict:jisjk:4346	海でも綺麗だ。	has:바다에서도	keep	local
 dict:jisjk:353546	そのうちでも一番だ。	머지않아에서도 제일이다.	keep	local
 cx:even-before-passive:20	家でも買うか。	has:집이라도 살까	fix	rewrites
-cx:even-before-passive:20	お風呂でもどう？	has:욕실이라도 어때	fix	rewrites
+cx:even-before-passive:20	お風呂でもどう？	has:목욕이라도 어때	fix	rewrites
 cx:even-before-passive:20	家でも食べられる。	has:집에서도	keep	rewrites
 cx:even-before-passive:20	学校でも勉強する。	has:학교에서도	keep	rewrites
 cx:even-before-passive:30	王立学園の創立記念パーティーは、王都でも指折りの華やかな催しである。	has:왕도에서도	fix	rewrites
