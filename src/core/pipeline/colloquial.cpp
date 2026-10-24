@@ -1,7 +1,9 @@
 #include <algorithm>
 #include <initializer_list>
+#include <iterator>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "core/dict/classes.h"
@@ -868,6 +870,17 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // The sound spans of the line, read once and moved along with each rewrite after them.
+    std::vector<std::pair<size_t, size_t>> spans;
+    bool spansRead = false;
+    const auto rewrite = [&](std::u32string next, size_t oldEnd) {
+        const size_t grown = next.size(), was = rs.size();
+        for (auto& sp : spans) {
+            if (sp.first >= oldEnd) sp = {sp.first + grown - was, sp.second + grown - was};
+        }
+        rs = std::move(next);
+        changed = true;
+    };
     for (const std::string_view member : dict::ClassMembers("honorific.drawn-out")) {
         const std::u32string h = DecodeText(member);
         if (h.size() < 2) continue;
@@ -885,8 +898,14 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             if (end == i + stem.size() || end >= rs.size() || rs[end] != h.back()) continue;
             // The end of a sound that the sound stage reads from before it, no honorific or ちゃんと
             // (がちゃーん, ぽちゃーんと, どくーんと; not ケンくぅん or こどもがちゃーんと).
-            const auto spans = SoundSpans(EncodeText(rs), ctx, snap);
-            if (std::any_of(spans.begin(), spans.end(), [&](const auto& sp) { return sp.first < i && sp.second > end; })) continue;
+            if (!spansRead) {
+                spans = SoundSpans(EncodeText(rs), ctx, snap);
+                spansRead = true;
+            }
+            if (const auto sp = std::upper_bound(spans.begin(), spans.end(), std::pair<size_t, size_t>(i, 0));
+                sp != spans.begin() && std::prev(sp)->first < i && std::prev(sp)->second > end) {
+                continue;
+            }
             size_t last = end + 1;
             while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
             // After a greeting or an interjection that starts a word, a familiar tag: the phrase with
@@ -902,8 +921,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                     phrase = phrase || e.Tags(p).find('A') != std::string::npos;
                 }
                 if (phrase) {
-                    rs = Spliced(rs, i, std::u32string(1, kLengthenMark), last);
-                    changed = true;
+                    rewrite(Spliced(rs, i, std::u32string(1, kLengthenMark), last), last);
                     continue;
                 }
             }
@@ -968,8 +986,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                 plain.insert(static_cast<size_t>(mark), marks);
                 i = mark + marks.size() - 1;
             }
-            rs = std::move(plain);
-            changed = true;
+            rewrite(std::move(plain), last);
             if (word > h.size()) i = mark;
         }
     }
