@@ -9,12 +9,15 @@
 
 namespace hdTrans::pipeline {
 
+// Whether a dictionary word holds the run line[at, end) (じっっくり), so that it stays as written.
+using WordHoldsRun = bool (*)(const void* context, std::string_view line, size_t at, size_t end);
+
 // The dictionary lookups of CollapseTsuRuns, each optional: holds says whether a dictionary
-// word holds the run line[at, end) (じっっくり), so that it stays as written; start gives the
+// word holds the run line[at, end), so that it stays as written; start gives the
 // start of the word that holds the っ at line[at] of the collapsed line, before which the stress
 // mark goes, or npos.
 struct RunLookup {
-    bool (*holds)(const void* context, std::string_view line, size_t at, size_t end) = nullptr;
+    WordHoldsRun holds = nullptr;
     size_t (*start)(const void* context, std::string_view line, size_t at) = nullptr;
     const void* context = nullptr;
 };
