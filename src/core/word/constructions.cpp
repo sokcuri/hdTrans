@@ -11,6 +11,7 @@
 #include "core/output/korean.h"
 #include "core/output/particle.h"
 #include "core/rules/match.h"
+#include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/classify.h"
 #include "core/tokenizer/token.h"
@@ -133,6 +134,7 @@ constexpr NamedFeature kFeatures[] = {
          return !lemma.empty() && it->next != nullptr && ItemLemma(f, it->next, it->next->selected).starts_with(lemma + " ");
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
+    {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
@@ -338,6 +340,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"set-verb", CxVerb::SetVerb},
         {"copy-ending", CxVerb::CopyEnding},
         {"copy-word", CxVerb::CopyWord},
+        {"set-sound", CxVerb::SetSound},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -376,7 +379,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             continue;
         }
         const char* bad = nullptr;
-        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord) {
+        if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound) {
             out.push_back(std::move(a));
             continue;
         }
@@ -846,6 +849,12 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         case internal::CxVerb::SetVerb:
             it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
             break;
+        case internal::CxVerb::SetSound: {
+            if (std::string sound = text::FromKana(it->group->surface, text::Preset::Fan); !sound.empty()) {
+                it->AssignEntrySurface(it->selected, sound, source);
+            }
+            break;
+        }
     }
 }
 

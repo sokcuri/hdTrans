@@ -98,6 +98,21 @@ HD_TEST(constructions_parse_select_and_tail) {
     HD_CHECK_EQ(t.rows[1].actions[0].with, std::string(" 것이"));
 }
 
+HD_TEST(constructions_parse_set_sound) {
+    const std::vector<std::string_view> lines = {
+        "//= a\tafter First\tdoc\n",
+        "cx:a:10\t\tF+0== \"katakana\"\tset-sound select-lemma@+1 \"(와)과\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.rows.size() == 1);
+    HD_REQUIRE(t.rows[0].actions.size() == 2);
+    HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::SetSound);
+    HD_CHECK(t.rows[0].actions[0].value.empty());
+    HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::SelectLemma);
+    HD_CHECK_EQ(static_cast<int>(t.rows[0].actions[1].delta), 1);
+}
+
 HD_TEST(constructions_surface_index) {
     const std::vector<std::string_view> lines = {
         "//= a\tafter First\tdoc\n",
