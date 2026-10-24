@@ -1,0 +1,28 @@
+# 규칙: GRM-4
+rule	input	expected	kind	layer
+cx:habitual-mono:10	子供の頃、祖母によく昔話をしてもらったものだ。	어릴 적, 할머니가 자주 옛날이야기를 해 주곤 했다.	fix	rewrites
+cx:habitual-mono:10	あの奥で、よく一緒に遊んでいたものだ。	그 안쪽에서, 자주 함께 놀고 있곤 했다.	fix	rewrites
+cx:habitual-mono:10	両家の親はよく、そんな話を了承したものだな。	양가의 부모는 잘, 그런 이야기를 승낙한 것이네.	keep	rewrites
+cx:habitual-mono:10	よく昔の学生は、こんなものを着ていたものだ	잘 옛 학생은, 이런 것을 입고 있던 것이다	keep	rewrites
+cx:habitual-mono:10	読書の秋とはよく言ったものだ。	독서의 가을이라고는 잘 말한 것이다.	keep	rewrites
+cx:habitual-mono:10	よく刺さらなかったものだ。	잘 박히지 않았던 것이다.	keep	rewrites
+cx:habitual-mono:14	昔はよく泣いたものだ。	옛날은 자주 울곤 했다.	fix	rewrites
+cx:habitual-mono:14	子供の頃はいつも夜更かししたものだ。	어릴 적은 언제나 밤샘하곤 했다.	fix	rewrites
+cx:habitual-mono:14	何度も経験してわかったことだ。	몇 번이나 경험하고 안 것이다.	keep	rewrites
+cx:habitual-mono:14	クライアントと何度も会議を重ねて決めたものだ。	클라이언트와 몇 번이나 회의를 거듭해 결정한 것이다.	keep	rewrites
+cx:habitual-mono:14	この前デートした時に撮ったものだ。	일전에 데이트했을 때 찍은 것이다.	keep	rewrites
+cx:habitual-mono:16	学生時代は毎晩飲み歩いたものだった。	학생시절은 매일 밤 마시며 돌아 다니곤 했었다.	fix	rewrites
+cx:habitual-mono:16	昔は部室に帰ったものだと思っていた。	옛날은 동아리방에 돌아간 것이라고 생각했다.	keep	rewrites
+cx:habitual-mono:20	昔は、つんけんしていたものだが。	옛날은, 뾰루퉁 하고 있곤 했지만.	fix	rewrites
+cx:habitual-mono:20	「昔はよく一緒に遊んだものです」	「옛날은 자주 함께 놀곤 했습니다」	fix	rewrites
+cx:habitual-mono:20	人のそういう所に注目して稼いでいたものですが……	사람의 그런 곳에 주목해 벌고 있던 것입니다만……	keep	rewrites
+cx:habitual-mono:20	昔は慌てて出て行ったものだから靴を忘れた。	옛날은 황급히 나간 것이니까 구두를 잊었다.	keep	rewrites
+cx:habitual-mono:24	昔はよく遊んだもんだ。	옛날은 자주 놀곤 했다.	fix	rewrites
+cx:habitual-mono:24	しょっちゅう喧嘩したもんだ。	언제나 싸움하곤 했다.	fix	rewrites
+cx:habitual-mono:24	困ったもんだ。	곤란한 것이다.	keep	rewrites
+cx:habitual-mono:26	昔はよく遊んだもんだった。	옛날은 자주 놀곤 했었다.	fix	rewrites
+cx:habitual-mono:26	昔はよく遊んだもんだったと思う。	옛날은 잘 논 것이었다고 생각한다.	keep	rewrites
+cx:habitual-mono:30	昔はよく遊んだもんです。	옛날은 자주 놀곤 했습니다.	fix	rewrites
+cx:habitual-mono:30	昔はよく遊んだもんだよ。	옛날은 자주 놀곤 했어.	fix	rewrites
+cx:habitual-mono:30	時々来たもんだから、慣れている。	가끔 온 것이니까, 익숙해져 있다.	keep	rewrites
+cx:habitual-mono:10	「よく昔の学生は、こんなものを着ていたものだ」	「잘 옛 학생은, 이런 걸 입고 있던 것이다」	keep	rewrites

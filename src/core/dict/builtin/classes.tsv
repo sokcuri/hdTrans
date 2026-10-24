@@ -3,6 +3,7 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.habitual	Words of frequency or of the old days before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
@@ -205,6 +206,19 @@ adverb.gradual	益々
 adverb.gradual	日に日に
 adverb.gradual	少しずつ
 adverb.gradual	みるみる
+adverb.habitual	いつも
+adverb.habitual	毎日
+adverb.habitual	毎晩
+adverb.habitual	毎朝
+adverb.habitual	毎年
+adverb.habitual	しょっちゅう
+adverb.habitual	度々
+adverb.habitual	たびたび
+adverb.habitual	時々
+adverb.habitual	ときどき
+adverb.habitual	何度も
+adverb.habitual	しばしば
+adverb.habitual	昔
 
 adverb.observation	よく
 adverb.observation	いつも
