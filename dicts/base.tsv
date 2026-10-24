@@ -120557,7 +120557,7 @@ ttt	ttt	K110			GN				jisjk:201744
 伊良原	이라바라	N130	QCTVPl		GN				jisjk:274027		
 伊良林	이라바야시	N130	QCTVPl		GN				jisjk:274026		
 伊良波	이라하	N130	QCTVPl		GN				jisjk:274024		
-伊良湖	이라고	I110	QCT		GN				jisjk:79960		
+伊良湖	이라코	I110	QCT		GN				jisjk:79960		
 伊良皆	이라미나	N130	QCTVPl		GN				jisjk:274029		
 伊良部	이라부	N130	QCT		GN				jisjk:79959		
 伊良部	이라부	N130	QPN	Wa	GN				jisjk:362185		
@@ -213651,7 +213651,6 @@ ttt	ttt	K110			GN				jisjk:201744
 抓	&F3@	M445	VBp		GN				jisjk:143624		
 抓	꼬&Hb@	M448			GN				jisjk:202133		
 投	던&AL@	M43:			GN				jisjk:95696		
-投	던&AL@	M449			GN				jisjk:144978		
 投げ	던&AL@	M437			GN				jisjk:95697		
 投げ	던지기	N110			GN				jisjk:363302		
 投げ	매각	N110			BZ				jisjk:363303		-1
@@ -289975,7 +289974,7 @@ ttt	ttt	K110			GN				jisjk:201744
 秋津島	아키쓰시마	N110	VPl		GN				jisjk:124075		
 秋津川	아키즈가와	N130	QCTVPl		GN				jisjk:269305		
 秋津新町	아키츠심마치	I130	QCTVPl		GN				jisjk:269299		
-秋津洲	다키츠시마	N130	QPN	Wa	GN				jisjk:345089		
+秋津洲	아키츠시마	N130	QPN	Wa	GN				jisjk:345089		
 秋津町	아키츠쵸	N130	QCTVPl		GN				jisjk:269300		
 秋津町	아키츠마치	N130	QCTVPl		GN				jisjk:269302		
 秋津町	아키즈쵸	N130	QCTVPl		GN				jisjk:269307		

@@ -1,7 +1,7 @@
 # 규칙: LAY-8
 rule	input	expected	kind	layer
 sound:stretched-copula	ふぅ、お豆輸送中でーす！	후우, 콩수송 중입니다~!	fix	sound
-sound:stretched-copula	艦隊帰投でーす。	함대귀투입니다~.	fix	sound
+sound:stretched-copula	艦隊帰投でーす。	함대 귀환입니다~.	fix	sound
 sound:stretched-copula	お手紙でーす。	편지입니다~.	fix	sound
 sound:stretched-copula	7時でーす！	7시입니다~!	fix	sound
 sound:stretched-copula	正解でーす♪	정답입니다~♪	fix	sound
