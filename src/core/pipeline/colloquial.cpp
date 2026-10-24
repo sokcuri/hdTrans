@@ -52,9 +52,6 @@ int HiraganaVowel(char32_t r) {
 constexpr std::u32string_view kConjKana = U"かきくけこがぎぐげごさしすせそたちつてとなにぬねのばびぶべぼまみむめもらりるれろわいうえおっん";
 
 // The small and plain vowel kana by vowel row.
-// The conjugation row of しまう (わ-row godan), which its contractions ちゃう and ちまう keep.
-constexpr int kShimauKind = 0;
-
 constexpr char32_t kEmphasisVowels[5][2] = {{U'ぁ', U'あ'}, {U'ぃ', U'い'}, {U'ぅ', U'う'}, {U'ぇ', U'え'}, {U'ぉ', U'お'}};
 
 // The longest dictionary keys rewriteEmphasis looks for, in characters.
@@ -142,7 +139,7 @@ public:
     // that does (どしゃ). An ending that starts with the dictionary ending of しまう (うよ of
     // 食べちゃうよ) ends a word only after a contraction of stem.contracted-shimau (not 歌うよ).
     bool WordEnds(std::u32string_view rs, size_t from, size_t at) const {
-        const std::string_view shimauEnd = word::Conjugation(kShimauKind, 0);
+        const std::string_view shimauEnd = word::Conjugation(word::kKindWa, 0);
         bool word = false;
         for (size_t j = from; j < at; j++) {
             if (LexiconKey(ToKatakana(rs.substr(j, at - j)), ctx_.extraBuiltin)) return false;
