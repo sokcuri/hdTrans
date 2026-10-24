@@ -13,6 +13,7 @@ Exit: 0 downloaded into DIR, 1 no build found, 2 invalid arguments.
 """
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -35,22 +36,32 @@ class GitHub:
         self.repo = repo
 
     def api(self, path):
+        """The parsed answer, or None when the call failed."""
         status, out = gh("api", f"repos/{self.repo}/{path}")
-        return json.loads(out) if status == 0 and out.strip() else {}
+        try:
+            return json.loads(out) if status == 0 else None
+        except ValueError:
+            return None
 
     def push_runs(self, commit):
-        """[(run id, completed)] of the Build push runs of commit."""
+        """[(run id, completed)] of the Build push runs of commit; None when unknown."""
         runs = self.api(f"actions/workflows/{WORKFLOW}/runs?head_sha={commit}&event=push&per_page=20")
-        return [(r["id"], r.get("status") == "completed") for r in runs.get("workflow_runs", [])]
+        return None if runs is None else [(r["id"], r.get("status") == "completed")
+                                          for r in runs.get("workflow_runs", [])]
 
     def tested_runs(self, tree):
-        found = self.api(f"actions/artifacts?name=tested-tree-{tree}&per_page=20")
+        found = self.api(f"actions/artifacts?name=tested-tree-{tree}&per_page=20") or {}
         return [a["workflow_run"]["id"] for a in found.get("artifacts", [])
                 if not a.get("expired") and a.get("workflow_run", {}).get("id")]
 
     def has_build(self, run):
-        found = self.api(f"actions/runs/{run}/artifacts?name={ARTIFACT}")
+        found = self.api(f"actions/runs/{run}/artifacts?name={ARTIFACT}") or {}
         return any(not a.get("expired") for a in found.get("artifacts", []))
+
+    def linux_done(self, run):
+        """Whether the linux job of run finished; it uploads the build only when its tests pass."""
+        found = self.api(f"actions/runs/{run}/jobs?per_page=100") or {}
+        return any(j.get("name") == "linux" and j.get("status") == "completed" for j in found.get("jobs", []))
 
     def download(self, run, directory):
         status, _ = gh("run", "download", str(run), "-R", self.repo, "-n", ARTIFACT, "-D", str(directory))
@@ -65,30 +76,33 @@ def tree_of(commit):
 def fetch(hub, commit, tree, directory, wait, clock=time.monotonic, pause=time.sleep):
     """The run whose build was downloaded into directory, or None."""
     deadline = clock() + wait
-    tried = set()
+    failed = set()
     while True:
         pushes = hub.push_runs(commit)
-        candidates = [run for run, _ in pushes] + (hub.tested_runs(tree) if tree else [])
+        candidates = [run for run, _ in pushes or []] + (hub.tested_runs(tree) if tree else [])
         for run in candidates:
-            if run in tried or not hub.has_build(run):
+            if run in failed or not hub.has_build(run):
                 continue
-            tried.add(run)
-            for name in FILES:
-                (Path(directory) / name).unlink(missing_ok=True)
-            if hub.download(run, directory) and all((Path(directory) / name).is_file() for name in FILES):
-                (Path(directory) / "hdtrans").chmod(0o755)
-                return run
-        running = [run for run, done in pushes if not done]
-        if not running or clock() + POLL > deadline:
+            for _ in range(2):
+                # gh run download does not overwrite files.
+                shutil.rmtree(directory, ignore_errors=True)
+                Path(directory).mkdir(parents=True)
+                if hub.download(run, directory) and all((Path(directory) / name).is_file() for name in FILES):
+                    (Path(directory) / "hdtrans").chmod(0o755)
+                    return run
+            failed.add(run)
+        waiting = pushes is None or any(not done and run not in failed and
+                                        not (hub.linux_done(run) and not hub.has_build(run)) for run, done in pushes)
+        if not waiting or clock() + POLL > deadline:
             return None
-        print(f"perf-base: waiting for the linux build of run {running[0]}", flush=True)
+        print("perf-base: waiting for the linux build of a push run in progress", flush=True)
         pause(POLL)
 
 
 def self_test():
     class Fake:
         def __init__(self):
-            self.pushes, self.tested, self.builds, self.downloads = [], [], set(), []
+            self.pushes, self.tested, self.builds, self.downloads, self.finished = [], [], set(), [], set()
 
         def push_runs(self, commit):
             return self.pushes
@@ -98,6 +112,9 @@ def self_test():
 
         def has_build(self, run):
             return run in self.builds
+
+        def linux_done(self, run):
+            return run in self.finished
 
         def download(self, run, directory):
             self.downloads.append(run)
@@ -139,6 +156,24 @@ def self_test():
             hub.has_build = lambda run: False
             assert fetch(hub, "c", "t", tmp, 100, clock, lambda s: now.__setitem__(0, now[0] + s)) is None
             assert now[0] <= 100
+            # A linux job that finished without a build ends the wait.
+            hub, now[0] = Fake(), 0.0
+            hub.pushes, hub.finished = [(3, False)], {3}
+            assert fetch(hub, "c", "t", tmp, 600, clock, lambda s: now.__setitem__(0, now[0] + s)) is None
+            assert now[0] == 0
+            # Unknown runs (a failed call) keep the wait going.
+            hub, now[0] = Fake(), 0.0
+            hub.push_runs = lambda commit: None
+            assert fetch(hub, "c", "t", tmp, 100, clock, lambda s: now.__setitem__(0, now[0] + s)) is None
+            assert now[0] > 0
+            # A download that failed is tried once more; old files do not block it.
+            hub = Fake()
+            hub.pushes, hub.builds = [(1, True)], {1}
+            (Path(tmp) / "stale").write_text("x")
+            flaky = iter([False, True])
+            real = hub.download
+            hub.download = lambda run, d: next(flaky) and real(run, d)
+            assert fetch(hub, "c", "t", tmp, 600, clock, lambda s: None) == 1
     finally:
         sys.stdout.close()
         sys.stdout = stdout

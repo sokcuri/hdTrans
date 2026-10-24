@@ -372,12 +372,15 @@ jobs:
           build_base() {
             local src="$RUNNER_TEMP/base-src" home
             git worktree add --detach "$src" "$BASE_SHA" > /dev/null || return 1
-            (cd "$src" && cmake --preset linux -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
-              -DCMAKE_C_COMPILER_LAUNCHER=sccache > /dev/null &&
-              cmake --build --preset linux --parallel "$BUILD_JOBS" --target hdtrans_cli > /dev/null) || return 1
             home=$(mktemp -d)
-            HOME="$home" HDTRANS_CACHE_DIR=off "$src/build/linux/hdtrans" --dicts "$src/dicts" \
-              --compile-snapshot "$src/build/linux/dicts.hdsnap" > /dev/null || return 1
+            if ! (cd "$src" && cmake --preset linux -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
+                  -DCMAKE_C_COMPILER_LAUNCHER=sccache &&
+                  cmake --build --preset linux --parallel "$BUILD_JOBS" --target hdtrans_cli &&
+                  HOME="$home" HDTRANS_CACHE_DIR=off build/linux/hdtrans --dicts "$PWD/dicts" \
+                    --compile-snapshot "$PWD/build/linux/dicts.hdsnap") > "$RUNNER_TEMP/base-build.log" 2>&1; then
+              tail -n 40 "$RUNNER_TEMP/base-build.log"
+              return 1
+            fi
             rm -rf "$home"
             base="$src/build/linux"
           }
@@ -393,7 +396,7 @@ jobs:
             fi
             if [[ -z "$base" ]]; then
               echo "perf-base: building $BASE_SHA here"
-              build_base || { base=; warn "The base commit $BASE_SHA could not be built; the counts were only reported."; }
+              build_base || { base=; echo "perf-base: the base commit $BASE_SHA could not be built"; }
             fi
             if [[ -n "$base" ]]; then args+=(--against "$base/hdtrans" "$base/dicts.hdsnap"); fi
           fi

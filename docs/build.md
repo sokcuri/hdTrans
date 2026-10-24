@@ -208,8 +208,9 @@ cmake --build --preset wasm --parallel
 - 느려지는 것이 맞는 변경이면 PR의 커밋 하나에 트레일러로 이유를 적습니다. squash 병합의 본문에도 그
   트레일러를 남깁니다.
 - `tools/perf-budget.tsv`는 입력 커밋과 릴리스 때의 수를 적는 기록이고, 커밋하지 않아도 PR은 실패하지 않습니다.
-  릴리스할 때나 러너의 도구 체인이 바뀌었을 때 최신 `develop` push의 `perf-budget` 아티팩트(또는 작업 요약의
-  측정표)를 옮겨 커밋합니다. `--update CLI DICTS`는 같은 도구 체인에서 잰 수를 직접 씁니다.
+  릴리스할 때나 러너의 도구 체인이 바뀌었을 때 최신의 성공한 `develop` push Build에서 `perf-budget` 아티팩트를
+  내려받아(`gh run download <run> -n perf-budget -D <폴더>`) develop으로 가는 PR로 커밋합니다. `--update CLI DICTS`는
+  같은 도구 체인에서 잰 수를 직접 씁니다.
 - 실패나 경고를 다시 보려면 `linux` 작업만 다시 실행합니다. 같은 빌드의 수는 다시 재도 같습니다.
 
 ## 퍼징
