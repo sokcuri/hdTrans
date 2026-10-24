@@ -83,7 +83,8 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
-//= noun.realm-end	The last kanji of a country or province name (日本国, 美濃国) that a noun after the name starting with that kanji takes over (美濃国境 미노 국경, 日本国内 일본 국내).
+//= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내, 出羽国人 데와 고쿠진); 国中, 国府, 国主 keep the name with its 国.
+//= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
@@ -1226,7 +1227,81 @@ noun.quoted	言葉
 noun.quoted	のは
 noun.quoted	のが
 
-noun.realm-end	国
+noun.realm-compound	国境
+noun.realm-compound	国内
+noun.realm-compound	国外
+noun.realm-compound	国民
+noun.realm-compound	国人
+
+noun.realm-name	日本
+noun.realm-name	山城
+noun.realm-name	大和
+noun.realm-name	河内
+noun.realm-name	和泉
+noun.realm-name	摂津
+noun.realm-name	伊賀
+noun.realm-name	伊勢
+noun.realm-name	志摩
+noun.realm-name	尾張
+noun.realm-name	三河
+noun.realm-name	遠江
+noun.realm-name	駿河
+noun.realm-name	伊豆
+noun.realm-name	甲斐
+noun.realm-name	相模
+noun.realm-name	武蔵
+noun.realm-name	安房
+noun.realm-name	上総
+noun.realm-name	下総
+noun.realm-name	常陸
+noun.realm-name	近江
+noun.realm-name	美濃
+noun.realm-name	飛騨
+noun.realm-name	信濃
+noun.realm-name	上野
+noun.realm-name	下野
+noun.realm-name	陸奥
+noun.realm-name	出羽
+noun.realm-name	若狭
+noun.realm-name	越前
+noun.realm-name	加賀
+noun.realm-name	能登
+noun.realm-name	越中
+noun.realm-name	越後
+noun.realm-name	佐渡
+noun.realm-name	丹波
+noun.realm-name	丹後
+noun.realm-name	但馬
+noun.realm-name	因幡
+noun.realm-name	伯耆
+noun.realm-name	出雲
+noun.realm-name	石見
+noun.realm-name	隠岐
+noun.realm-name	播磨
+noun.realm-name	美作
+noun.realm-name	備前
+noun.realm-name	備中
+noun.realm-name	備後
+noun.realm-name	安芸
+noun.realm-name	周防
+noun.realm-name	長門
+noun.realm-name	紀伊
+noun.realm-name	淡路
+noun.realm-name	阿波
+noun.realm-name	讃岐
+noun.realm-name	伊予
+noun.realm-name	土佐
+noun.realm-name	筑前
+noun.realm-name	筑後
+noun.realm-name	豊前
+noun.realm-name	豊後
+noun.realm-name	肥前
+noun.realm-name	肥後
+noun.realm-name	日向
+noun.realm-name	大隅
+noun.realm-name	薩摩
+noun.realm-name	壱岐
+noun.realm-name	対馬
 
 noun.result-sareru	舗装
 noun.result-sareru	設置

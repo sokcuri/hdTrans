@@ -14,21 +14,6 @@ G30	マリア様が来た。	마리아님이 왔다.	keep	global-stem
 G30	バルト海の船。	발트해의 배.	keep	global-stem
 G30	テラス席に座る	테라스석에 앉는다	keep	global-stem
 G30	グルグル型のお香を焚きましょう。	빙글빙글 형의 향을 핍시다.	keep	global-stem
-lookup:province	越前国旗頭	에치젠국 우두머리	fix	lookup
-lookup:province	尾張国の旗頭	오와리국의 우두머리	fix	lookup
-lookup:province	国旗を掲げる。	국기를 게양한다.	keep	lookup
-lookup:province	筆頭家老	필두 가로	keep	lookup
-lookup:province	越中国境	엣추 국경	fix	lookup
-lookup:province	美濃国境	미노 국경	fix	lookup
-lookup:province	越後国内	에치고 국내	fix	lookup
-lookup:province	日本国内でも	일본 국내에서도	fix	lookup
-lookup:province	上総国内	가즈사 국내	fix	lookup
-lookup:province	中国国内	중국 국내	keep	lookup
-lookup:province	日本国民に必要量の	일본 국민에게 필요량의	keep	lookup
-lookup:province	王国中から	왕국 중에서	keep	lookup
-lookup:province	外国産の品	외국산의 물건	keep	lookup
-lookup:province	建国後	건국 후	keep	lookup
-lookup:province	紀伊国屋は	키노쿠니야는	keep	lookup
 G30	「ぐあっ……頭が痛い。」	「크앗……머리가 아프다.」	fix	global-stem
 G30	ぷにぷに……頭が痛いにゃ	말랑말랑……머리가 아프다냥	fix	global-stem
 G30	ガシャーン……頭が鳴った	와장창……머리가 울렸다	fix	global-stem

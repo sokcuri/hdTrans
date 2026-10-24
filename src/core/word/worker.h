@@ -127,10 +127,10 @@ private:
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
-    // Text path: a country or province of two or more kanji and 国 (noun.realm-end) before a noun
-    // in 国 gives its 国 to that noun (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the records of the
-    // name without 国 move to the front when 国 and the kanji after the name make a noun and no
-    // longer word starts after the name (越前国旗頭 stays 越前国 + 旗頭).
+    // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
+    // (noun.realm-compound) gives it its 国 (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the reading of
+    // the name that the name with 国 starts with moves to the front, when no longer word starts
+    // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
     Record* NounBeforeCompound(Record* records, std::string_view text);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);

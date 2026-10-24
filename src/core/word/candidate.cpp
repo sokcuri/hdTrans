@@ -1185,23 +1185,28 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     }
     if (word.empty()) return records;
     const text::Rune last = DecodeLastRune(word);
-    if (text::RuneCount(word) < 3 || !dict::InClass("noun.realm-end", word.substr(word.size() - last.size))) return records;
-    const std::string_view shorter = word.substr(0, word.size() - last.size);
+    const std::string_view name = word.substr(0, word.size() - last.size);
     const std::string_view after = text.substr(word.size());
-    if (!text::IsKanji(text::DecodeRune(after).cp)) return records;
-    bool found = false;
-    for (const Record* r = first; r != nullptr && !found; r = r->child) found = r->source == shorter && At(r->partCode, 1) == '1';
-    if (!found) return records;
+    const std::string_view compound = text.substr(name.size(), last.size + text::DecodeRune(after).size);
+    if (!dict::InClass("noun.realm-name", name) || !dict::InClass("noun.realm-compound", compound)) return records;
     for (const Record* r = DoLookup(after, kModeGeneral).records; r != nullptr; r = r->child) {
         if (after.starts_with(r->source) && text::RuneCount(r->source) > 1) return records;
     }
-    const std::string_view rest = text.substr(shorter.size());
-    const std::string_view compound = rest.substr(0, last.size + text::DecodeRune(after).size);
-    bool noun = false;
-    for (const Record* r = DoLookup(rest, kModeGeneral).records; r != nullptr && !noun; r = r->child) {
-        noun = r->source == compound && At(r->partCode, 1) == '1';
+    // The compound as a common noun (国境 국경), not a name (国中 쿠니나카).
+    bool common = false;
+    for (const Record* r = DoLookup(compound, kModeGeneral).records; r != nullptr && !common; r = r->child) {
+        common = r->source == compound && At(r->partCode, 1) == '1' && At(r->partCode, 2) == '1';
     }
-    if (!noun) return records;
+    if (!common) return records;
+    // The reading of the name that the name with 国 starts with (越中 엣추 of 越中国 엣추국), not
+    // another word written the same (甲斐 보람).
+    const auto realm = [&](const Record* n) {
+        if (n->source != name || At(n->partCode, 1) != '1' || n->target.empty()) return false;
+        for (const Record* r = first; r != nullptr; r = r->child) {
+            if (r->source == word && std::string_view(r->target).starts_with(n->target)) return true;
+        }
+        return false;
+    };
     Record* front = nullptr;
     Record* back = nullptr;
     Record** frontTail = &front;
@@ -1209,7 +1214,7 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     for (Record* r = first; r != nullptr;) {
         Record* next = r->child;
         r->child = nullptr;
-        if (r->source == shorter && At(r->partCode, 1) == '1') {
+        if (realm(r)) {
             *frontTail = r;
             frontTail = &r->child;
         } else {
@@ -1217,6 +1222,11 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
             backTail = &r->child;
         }
         r = next;
+    }
+    if (front == nullptr) {
+        if (owned == nullptr) return back;
+        owned->child = back;
+        return records;
     }
     *frontTail = back;
     if (owned == nullptr) return front;
