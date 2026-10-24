@@ -28,7 +28,91 @@ bool StandsAsWord(std::string_view line, size_t pos, std::string_view variant, s
     return internal::IsHiraganaRune(prev) || (KanjiOrKatakana(prev) && dict::InClass("spelling.variant-after-word", variant));
 }
 
+// Whether r writes a word: a kana, a kanji, another letter or a digit.
+bool WordRune(char32_t r) { return text::IsLetter(r) || text::IsDigit(r); }
+
+// The distance from a katakana letter to its hiragana.
+constexpr char32_t kKatakanaShift = 0x60;
+
+// Whether r is a katakana letter (ァ..ヶ), not the long mark.
+bool KatakanaLetter(char32_t r) { return internal::IsKatakanaRune(r) && internal::IsHiraganaRune(r - kKatakanaShift); }
+
 }  // namespace
+
+std::string RespellKatakanaEndings(std::string_view line) {
+    // The katakana run that starts at line[pos] and its letters without the long marks.
+    auto runAt = [&](size_t pos, std::string& core) {
+        size_t end = pos;
+        while (end < line.size()) {
+            const text::Rune k = text::DecodeRune(line.substr(end));
+            if (!internal::IsKatakanaRune(k.cp)) break;
+            if (KatakanaLetter(k.cp)) core.append(line.substr(end, k.size));
+            end += k.size;
+        }
+        return end;
+    };
+    auto ending = [&](std::string_view core, size_t pos) {
+        const char32_t prev = internal::LastRune(line.substr(0, pos)).cp;
+        if (dict::InClass("spelling.katakana-copula", core)) {
+            const std::string_view before = line.substr(0, pos);
+            const std::span<const std::string_view> kept = dict::ClassMembers("spelling.katakana-copula-kept-after");
+            const std::span<const std::string_view> afterKanji = dict::ClassMembers("spelling.katakana-copula-kept-after-kanji");
+            return std::none_of(kept.begin(), kept.end(), [&](std::string_view k) { return before.ends_with(k); }) &&
+                   std::none_of(afterKanji.begin(), afterKanji.end(), [&](std::string_view k) {
+                       return before.ends_with(k) && text::IsKanji(internal::LastRune(before.substr(0, before.size() - k.size())).cp);
+                   });
+        }
+        return dict::InClass("spelling.katakana-ending", core) ||
+               (internal::IsHiraganaRune(prev) && dict::InClass("spelling.katakana-ending-after-kana", core)) ||
+               ((internal::IsHiraganaRune(prev) || text::IsKanji(prev)) && dict::InClass("spelling.katakana-particle", core));
+    };
+    // A line without hiragana that writes other okurigana or particles in katakana after a
+    // kanji (解析シマス。原因ハ) is left whole to the reading of katakana speech.
+    if (internal::RunOf(line, [](char32_t c) { return !internal::IsHiraganaRune(c); }) == line.size()) {
+        char32_t before = 0;
+        for (size_t pos = 0; pos < line.size();) {
+            const text::Rune r = text::DecodeRune(line.substr(pos));
+            if (KatakanaLetter(r.cp) && text::IsKanji(before)) {
+                std::string core;
+                const size_t end = runAt(pos, core);
+                if (!ending(core, pos)) return std::string(line);
+                before = internal::LastRune(line.substr(0, end)).cp;
+                pos = end;
+                continue;
+            }
+            before = r.cp;
+            pos += r.size;
+        }
+    }
+    std::string out;
+    size_t copied = 0, pos = 0;
+    char32_t prev = 0;
+    while (pos < line.size()) {
+        const text::Rune r = text::DecodeRune(line.substr(pos));
+        if (!KatakanaLetter(r.cp) || internal::IsKatakanaRune(prev) || !WordRune(prev)) {
+            prev = r.cp;
+            pos += r.size;
+            continue;
+        }
+        std::string core;
+        const size_t end = runAt(pos, core);
+        const bool closed = end == line.size() || !WordRune(text::DecodeRune(line.substr(end)).cp);
+        if (closed && ending(core, pos)) {
+            out.append(line.substr(copied, pos - copied));
+            for (size_t k = pos; k < end;) {
+                const text::Rune c = text::DecodeRune(line.substr(k));
+                text::AppendRune(out, KatakanaLetter(c.cp) ? c.cp - kKatakanaShift : c.cp);
+                k += c.size;
+            }
+            copied = end;
+        }
+        prev = internal::LastRune(line.substr(0, end)).cp;
+        pos = end;
+    }
+    if (copied == 0) return std::string(line);
+    out.append(line.substr(copied));
+    return out;
+}
 
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context) {
     std::string out;

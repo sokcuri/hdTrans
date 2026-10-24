@@ -215,6 +215,12 @@
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-lookalike	Words that hold a mark of speech.polite-grammar and are no polite speech (ますます).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= spelling.katakana-copula	The copula です written in katakana, alone or with a final particle, respelled like spelling.katakana-ending (私デース 私でーす, 秋刀魚デスネー).
+//= spelling.katakana-copula-kept-after	Ends of a predicate (a past in た or だ after the kana that a verb conjugates with, a progressive in てる or でる) after which spelling.katakana-copula stays in katakana: the verb and です do not make a sentence (言ったデース, 何してるデース; not あなたデス, まだデス).
+//= spelling.katakana-copula-kept-after-kanji	Ends of spelling.katakana-copula-kept-after that also count right after a kanji, the stem of a verb (来たデース, 見たデース).
+//= spelling.katakana-ending	Polite endings of する written in katakana right after a word, before a pause or the end (受信シマシタ), respelled in hiragana with their ー kept (でーす) before lookup.
+//= spelling.katakana-ending-after-kana	Endings of spelling.katakana-ending that are respelled only after hiragana, the stem of a verb (行きマース; not 一マス).
+//= spelling.katakana-particle	Final particles written in katakana, respelled like spelling.katakana-ending but only after hiragana or kanji (楽しいネー, 天気ネ; not Decemberネー).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
@@ -2934,6 +2940,45 @@ speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
 speech.polite-lookalike	ますます
+spelling.katakana-copula	デス
+spelling.katakana-copula	デスネ
+spelling.katakana-copula	デスカ
+spelling.katakana-copula	デスヨ
+spelling.katakana-copula	デシタ
+spelling.katakana-copula-kept-after	った
+spelling.katakana-copula-kept-after	んだ
+spelling.katakana-copula-kept-after	いた
+spelling.katakana-copula-kept-after	した
+spelling.katakana-copula-kept-after	きた
+spelling.katakana-copula-kept-after	ぎた
+spelling.katakana-copula-kept-after	ちた
+spelling.katakana-copula-kept-after	にた
+spelling.katakana-copula-kept-after	びた
+spelling.katakana-copula-kept-after	みた
+spelling.katakana-copula-kept-after	りた
+spelling.katakana-copula-kept-after	じた
+spelling.katakana-copula-kept-after	えた
+spelling.katakana-copula-kept-after	けた
+spelling.katakana-copula-kept-after	げた
+spelling.katakana-copula-kept-after	せた
+spelling.katakana-copula-kept-after	てた
+spelling.katakana-copula-kept-after	ねた
+spelling.katakana-copula-kept-after	べた
+spelling.katakana-copula-kept-after	めた
+spelling.katakana-copula-kept-after	れた
+spelling.katakana-copula-kept-after	てる
+spelling.katakana-copula-kept-after	でる
+spelling.katakana-copula-kept-after-kanji	た
+spelling.katakana-ending	シマス
+spelling.katakana-ending	シマシタ
+spelling.katakana-ending-after-kana	マス
+spelling.katakana-ending-after-kana	マスネ
+spelling.katakana-ending-after-kana	マスカ
+spelling.katakana-ending-after-kana	マスヨ
+spelling.katakana-ending-after-kana	マシタ
+spelling.katakana-particle	ネ
+spelling.katakana-particle	カ
+spelling.katakana-particle	ヨ
 spelling.variant	程=ほど
 spelling.variant	位=くらい
 spelling.variant	等=など
