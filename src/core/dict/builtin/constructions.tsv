@@ -14,8 +14,13 @@ cx:benefactive-provider:20		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게는"
 //= go-not-say	after ChooseInitialConjunctions	The い of いう read 말하다 after に, へ, まで or から is 가다 (行く), unless a person or a noun of manner (noun.manner-ni) stands before the particle.
 cx:go-not-say:10		&&7 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni C+0== "가다"	select-lemma "가다"	学校までいった 학교까지 갔다
 cx:go-not-say:20		&&6 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni	set-verb "가다"	the word has no candidate 가다
-//= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
+//= adjective-neighbours	after HanBeforeNa	After an adjective in い read in 4, a だろ read 이겠 is 겠 on the adjective (없겠지), and after the く of an adjective read as a noun with 이다 (a copula family, 큰일$AH@) the な of なる is 되다 (큰일이 되다).
+cx:adjective-neighbours:10		&&7 F+0== "selected" F+1== "selected" P+0== "7" U+0== "い" Y+0== "4" S+1== "だろ" D+1== "L이겠"	set-ending "1" replace-head@+1 "이겠" "겠"	需要ないだろ 수요 없겠지
+cx:adjective-neighbours:20		&&8 F+0== "selected" F+1== "selected" ||2 P+0== "7" P+0== "8" U+0== "く" Y+0== "6" S+1== "な" P+1== "4" F+0== "copula-target"	select-lemma@+1 "되다"	まずくなる 큰일이 되다
+//= adjectival-ni	after adjective-neighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
+//= geot-before-mitai	after adjectival-ni	An ending in 던 before a みたい read as an adjective (%) takes the noun 것: 来てたみたい 오고 있었던 것 같다.
+cx:geot-before-mitai:10		&&4 D+0== "L%" F+0== "mitai-like" ||2 P-1== "4" P-1== "7" Y-1== "R던"	replace-ending-tail@-1 "던" "던 것"	来てたみたいだ 오고 있었던 것 같다
 //= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
 cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
 cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다

@@ -35,8 +35,6 @@ constexpr Pass kTextPasses[] = {
     {"DegreeAfterNumber", DegreeAfterNumber},
     {"ChooseInitialConjunctions", ChooseInitialConjunctions},
     {"HanBeforeNa", HanBeforeNa},
-    {"AdjectiveNeighbours", AdjectiveNeighbours},
-    {"GeotBeforeMitai", GeotBeforeMitai},
     {"PositiveIke", PositiveIke},
     {"NegativeCopula", NegativeCopula},
     {"VerseTe", VerseTe},

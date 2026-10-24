@@ -143,10 +143,6 @@ void VerbNegative(Flusher& f);
 void TeSequence(Flusher& f);
 bool UtteranceEnd(const Worker& w, const Item* it);
 
-// Text-path adjectival neighbours (neighbours.cpp).
-void AdjectiveNeighbours(Flusher& f);
-void GeotBeforeMitai(Flusher& f);
-
 // Whether the item's surface is one of set.
 template <std::size_t N>
 bool IsOneOf(const Item* it, const std::string_view (&set)[N]) {
