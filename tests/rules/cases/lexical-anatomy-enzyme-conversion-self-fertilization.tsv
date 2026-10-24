@@ -16,7 +16,7 @@ dict:jisjk:242338	脱水素反応	탈수소반응	keep	defaults
 dict:jisjk:257547	腱鞘	건초	fix	defaults
 dict:jisjk:257547	腱鞘を調べる。	건초를 조사한다.	fix	defaults
 dict:jisjk:257547	腱鞘の構造。	건초의 구조.	fix	defaults
-dict:jisjk:257547	腱	건	keep	defaults
+dict:jisjk:257547	腱	힘줄	keep	defaults
 dict:jisjk:257546	腱鞘炎	건초염	fix	defaults
 dict:jisjk:257546	腱鞘炎を治療する。	건초염을 치료한다.	fix	defaults
 dict:jisjk:257546	腱鞘炎の症状。	건초염의 증상.	fix	defaults

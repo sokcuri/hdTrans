@@ -14,7 +14,7 @@ sense:capacity-growth	力をつけてきた。	힘을 길러 왔다.	fix	senses
 sense:capacity-growth	アタシも力を付けた。	나도 힘을 길렀다.	fix	senses
 sense:capacity-growth	力をつけつつある。	힘을 기르고 있다.	fix	senses
 sense:capacity-growth	戦闘力をつける。	전투력을 기른다.	fix	senses
-sense:capacity-growth	魔力をつけた。	마력을 길렀다.	fix	senses
+sense:capacity-growth	剣に魔力をつけた。	검에 마력을 붙였다.	keep	senses
 sense:capacity-growth	免疫力をつける。	면역력을 기른다.	fix	senses
 sense:capacity-growth	経済力をつけた。	경제력을 길렀다.	fix	senses
 sense:capacity-growth	語学力をつける。	어학 실력을 기른다.	fix	senses

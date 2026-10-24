@@ -1,6 +1,6 @@
 # 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
-dict:names.114038	「キエン・グエン「色分けされた手術」」	「키엔 구엔: 색이 보이는 수술」	fix	fixed
+dict:names.114038	「キエン・グエン「色分けされた手術」」	「끼엔 응우옌: 색이 보이는 수술」	fix	fixed
 dict:jisjk:42339	アクセサリ。	액세서리.	fix	defaults
 dict:jisjk:42339	アクセサリを買った。	액세서리를 샀다.	fix	defaults
 dict:jisjk:42339	新しいアクセサリ。	새로운 액세서리.	fix	defaults

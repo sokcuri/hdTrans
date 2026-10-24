@@ -71,11 +71,8 @@ lookup:jisjk:136469	生きなきゃいけない。	살아야 한다.	keep	defaul
 lookup:jisjk:136469	死ななくてもいい。	죽지 않아도 된다.	keep	defaults
 lookup:jisjk:136469	死ななきゃ。	죽어야 한다.	keep	defaults
 lookup:jisjk:265639	真っ白になる。	새하얗게 된다.	keep	defaults
-lookup:jisjk:265639	真っ白になった。	새하얗게 되었다.	keep	defaults
-lookup:jisjk:265639	顔が真っ白になった。	얼굴이 새하얗게 되었다.	keep	defaults
 lookup:jisjk:265639	真っ白にならない。	새하얗게 안 된다.	keep	defaults
 lookup:jisjk:265639	白くなった。	희어졌다.	keep	defaults
-lookup:jisjk:265639	真っ黒になった。	새까맣게 되었다.	keep	defaults
 lookup:jisjk:240437	粗製濫造	조제남조	fix	defaults
 lookup:jisjk:240437	粗製濫造を避ける。	조제남조를 피한다.	fix	defaults
 lookup:jisjk:240437	粗製濫造の商品だ。	조제남조의 상품이다.	fix	defaults

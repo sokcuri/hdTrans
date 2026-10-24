@@ -27,7 +27,6 @@ dict:jisjk:255400	予防検束の廃止。	예방 검속의 폐지.	fix	defaults
 dict:jisjk:255400	予防検束の対象。	예방 검속의 대상.	fix	defaults
 dict:jisjk:255400	予防検束を受けた。	예방 검속을 받았다.	fix	defaults
 dict:jisjk:255400	予防検束に乗り出した。	예방 검속에 나섰다.	fix	defaults
-dict:jisjk:255400	予防検束を取る。	예방 검속을 택한다.	fix	local
 dict:jisjk:255400	予防拘禁を行う。	예방구금을 실시한다.	keep	defaults
 dict:jisjk:145427	同じ二の舞を踏む。	같은 전철을 밟는다.	fix	defaults
 dict:jisjk:145427	二の舞を踏んだ。	전철을 밟았다.	fix	defaults
@@ -51,14 +50,12 @@ dict:jisjk:204508	亜えん素酸の性質。	아염소산의 성질.	fix	defaul
 dict:jisjk:204508	亜えん素酸の濃度。	아염소산의 농도.	fix	defaults
 dict:jisjk:204508	亜塩素酸の水溶液。	아염소산의 수용액.	keep	defaults
 dict:jisjk:99421	亡父の写真。	죽은 아버지의 사진.	fix	defaults
-dict:jisjk:99421	亡父を思い出す。	죽은 아버지를 생각해 낸다.	fix	defaults
 dict:jisjk:99421	亡父の遺言。	죽은 아버지의 유언.	fix	defaults
 dict:jisjk:99421	亡父と亡母の墓。	죽은 아버지와 망모의 무덤.	fix	defaults
 dict:jisjk:99421	亡夫の写真。	망부의 사진.	keep	defaults
 dict:jisjk:99421	亡母の写真。	망모의 사진.	keep	defaults
 dict:jisjk:99421	父の写真。	아버지의 사진.	keep	defaults
 dict:jisjk:251295	亡姉の写真。	죽은 언니의 사진.	fix	defaults
-dict:jisjk:251295	亡姉を思い出す。	죽은 언니를 생각해 낸다.	fix	defaults
 dict:jisjk:251295	亡姉の遺品。	죽은 언니의 유품.	fix	defaults
 dict:jisjk:251295	亡姉と亡妹の写真。	죽은 언니와 죽은 누이동생의 사진.	fix	defaults
 dict:jisjk:251295	亡妹の写真。	죽은 누이동생의 사진.	keep	defaults

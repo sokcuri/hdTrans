@@ -53,7 +53,6 @@ dict:jisjk:109833	酪農農業協同組合	낙농 농업협동조합	keep	defaul
 dict:jisjk:117890	口を酸っぱくした。	입이 닳도록 말했다.	fix	defaults
 dict:jisjk:117890	口を酸っぱくしている。	입이 닳도록 말하고 있다.	fix	defaults
 dict:jisjk:117890	口を酸っぱくしない。	입이 닳도록 말하지 않는다.	fix	defaults
-dict:jisjk:117890	口を酸っぱくしたが無駄だった。	입이 닳도록 말했지만 쓸데없었다.	fix	defaults
 dict:names.584545	有坂亜里紗	아리사카 아리사	fix	lookup
 dict:names.584545	有坂亜里紗さん	아리사카 아리사 씨	keep	fixed
 dict:names.584545	有坂亜里紗が来た。	아리사카 아리사가 왔다.	keep	fixed

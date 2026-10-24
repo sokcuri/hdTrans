@@ -138100,7 +138100,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中井雅之	나카이 마사유키	N130	QPNVHn		GN							names.435856
 中井麗一	나카이 레이이치	N130	QPNVHn		GN						なかいれいいち	names.435857
 中亥歳男	나카 이사오	N130	QPNVHn		GN							names.435858
-中京テレビ	주쿄 TV 방송	N110			GN							names.435859
+中京テレビ	주쿄 테레비	N110			GN							names.435859
 中京テレビ放送	주쿄 테레비 방송	N130	VGt		GN							names.435860
 中京圏	주쿄권	N130	QCTVPl		GN							names.435861
 中京大学	주쿄 대학	N130	VGt		GN							names.435862
@@ -277834,7 +277834,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本テレビ日曜10時30分枠連続ドラマ	닛폰 TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
 日本テレビ火曜8時枠時代劇	닛폰 TV 화요일 8시 시대극	N130	QWK		GN							names.575592
 日本テレビ盃	니혼테레비배	N110			GN						にほんてれびはい	names.575593
-日本テレビ系列	닛폰 TV 계열	N130	VGt		GN							names.575594
+日本テレビ系列	닛폰 테레비 계열	N130	VGt		GN							names.575594
 日本テレビ系土曜深夜ドラマ	일본 TV 토요 심야 드라마	N130	QWK		GN							names.575595
 日本テレビ金曜8時連続ドラマ	니혼 TV 금요일 8시 연속 드라마	N130	QWK		GN							names.575596
 日本デザイナー学院	일본 디자이너 학원	N130	VGt		GN							names.575597

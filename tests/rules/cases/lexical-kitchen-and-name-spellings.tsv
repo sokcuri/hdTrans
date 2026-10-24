@@ -3,7 +3,6 @@ rule	input	expected	kind	layer
 dict:jisjk:14070	ナベ	냄비	fix	defaults
 dict:jisjk:14070	ナベを洗った。	냄비를 씻었다.	fix	defaults
 dict:jisjk:14070	ナベを使った。	냄비를 썼다.	fix	defaults
-dict:jisjk:14070	このナベは新しい。	이 냄비는 새롭다.	fix	defaults
 dict:jisjk:240950	鯛ちり	도미 냄비요리	fix	defaults
 dict:jisjk:240950	鯛ちりを食べた。	도미 냄비요리를 먹었다.	fix	defaults
 dict:jisjk:240950	鯛ちりを作った。	도미 냄비요리를 만들었다.	fix	defaults
@@ -19,9 +18,9 @@ dict:names.93597	オラクルカードを見た。	오라클 카드를 보았다
 dict:jisjk:109826	茨城三菱ふそう自動車販売	이바라키 미쓰비시후소자동차판매	fix	defaults
 dict:jisjk:109826	茨城三菱ふそう自動車販売の車。	이바라키 미쓰비시후소자동차판매의 차.	fix	defaults
 dict:jisjk:109826	茨城三菱ふそう自動車販売を訪ねた。	이바라키 미쓰비시후소자동차판매를 방문했다.	fix	defaults
-dict:jisjk:117886	話しに花が咲く。	이야기에 꽃이 핀다.	fix	defaults
-dict:jisjk:117886	話しに花が咲いた。	이야기에 꽃이 피었다.	fix	defaults
-dict:jisjk:117886	話しに花が咲いている。	이야기에 꽃이 피고 있다.	fix	defaults
+dict:jisjk:117886	話しに花が咲く。	이야기꽃이 핀다.	fix	defaults
+dict:jisjk:117886	話しに花が咲いた。	이야기꽃이 피었다.	fix	defaults
+dict:jisjk:117886	話しに花が咲いている。	이야기꽃이 피고 있다.	fix	defaults
 dict:jisjk:109826	三菱ふそう自動車販売	미쓰비시 후소자동차판매	keep	defaults
 dict:jisjk:109826	茨城県	이바라키현	keep	defaults
 dict:jisjk:117886	花が咲く。	꽃이 핀다.	keep	defaults

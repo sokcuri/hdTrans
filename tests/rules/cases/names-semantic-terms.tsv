@@ -1,4 +1,3 @@
-# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:presidential-office	大統領職	대통령직	fix	lookup
 names:presidential-office	「大統領職」	「대통령직」	fix	lookup
