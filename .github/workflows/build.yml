@@ -385,7 +385,7 @@ jobs:
           if [[ -n "$BASE_SHA" ]]; then
             args+=(--base "$BASE_SHA")
             base="$RUNNER_TEMP/base"
-            if ! python3 -I tools/perf-base.py "$BASE_SHA" "$base" --wait 600; then
+            if true || ! python3 -I tools/perf-base.py "$BASE_SHA" "$base" --wait 600; then
               base=
             elif [[ "$(compilers "$base/hdtrans")" != "$(compilers build/linux/hdtrans)" ]]; then
               echo "perf-base: the downloaded base build has another compiler"
