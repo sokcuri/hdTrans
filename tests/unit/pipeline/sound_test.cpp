@@ -1115,8 +1115,8 @@ HD_TEST(pipeline_contracted_no) {
 
 // A ん or っ said for a kana of a verb form takes it back: る before the な of a prohibition, ら, れ
 // or られ before ない (and ねえ, written ない), the negative ない after an ichidan or potential stem
-// before ぞ, から or か, る before から; not after a verb of ability, a godan negative stem or a
-// dictionary form, in a word, nor after a lone kana elsewhere or kana alone.
+// before ぞ, から or か, る before から, the れ of しれない after かも; not after a verb of ability, a
+// godan negative stem or a dictionary form, in a word, nor after a lone kana elsewhere or kana alone.
 HD_TEST(pipeline_contracted_n) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tgram\tid\n"
@@ -1146,6 +1146,8 @@ HD_TEST(pipeline_contracted_n) {
         {"帰んねえ", "帰らない"},
         {"信じらんない", "信じられない"},
         {"してくんない", "してくれない"},
+        {"かもしんない", "かもしれない"},  // after かも the し of しれない, not 知らない
+        {"かもしんねえ", "かもしれない"},
         {"負けんぞ", "負けないぞ"},
         {"許せんから", "許せないから"},
         {"負けん。", "負けん。"},  // the word stage reads the negative ん before a mark

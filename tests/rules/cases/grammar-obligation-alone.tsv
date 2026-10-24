@@ -1,0 +1,46 @@
+# 규칙: GRM-12
+rule	input	expected	kind	layer
+cx:fused-obligation:5	早いにゃあ…もう師走にゃしぃ…。ユイちゃんと一緒に、大掃除しなきゃ。	빠르다냥…이제 12월이다냥…. 유이짱과 함께, 대청소해야 한다.	fix	rewrites
+cx:fused-obligation:5	やられちゃった…？修理しなくちゃ。	당해버렸다…? 수리해야 한다.	fix	rewrites
+cx:fused-obligation:5	もう年末…年越しの準備をしなくちゃ。ハナ、手伝って。	has:준비를 해야 한다	fix	rewrites
+cx:fused-obligation:5	はぁ……提督の机も綺麗にしなきゃ。	하아……제독의 책상도 깨끗이 해야 한다.	fix	rewrites
+cx:fused-obligation:5	大掃除！ お部屋の整理もしなくちゃ！	대청소! 방 정리도 해야 한다!	fix	rewrites
+cx:fused-obligation:5	やだ、お洋服が……んもう、クリーニングしなきゃ……覚えてなさいよっ！	싫어, 옷이……이제, 클리닝해야 한다……기억해!	fix	rewrites
+cx:fused-obligation:5	敵艦を捕捉しなくては…。	적함을 포착해야 한다….	fix	rewrites
+cx:fused-obligation:5	「帰って試験勉強をしなくてはならないんだ」	「돌아가 시험 공부를 해야 한다」	fix	rewrites
+cx:fused-obligation:5	足止めしなくてはならない。	저지해야 한다.	fix	rewrites
+cx:fused-obligation:5	「では、俺はそこで何かしなければいけないのですか？」	「그럼, 나는 거기서 뭔가 해야 합니까?」	fix	rewrites
+cx:fused-obligation:10	ミキさんとお揃いの水着、買わなくちゃ。	미키 씨와 세트의 수영복, 사야 한다.	fix	rewrites
+cx:fused-obligation:20	「強くならなきゃいけなかったんだから」	「강하게 돼야 했으니까」	fix	rewrites
+cx:obligation-alone:20	そう。それよりお礼を言わなくちゃね。	그래. 그것보다 감사 인사를 해야지.	fix	rewrites
+cx:obligation-alone:20	まずは基本操作を覚えなきゃね。	우선은 기본 조작을 기억해야지.	fix	rewrites
+cx:obligation-alone:20	『教会』本部から、メカニックを呼んでこなきゃな。	『교회』본부에서, 메카닉을 불러 와야지.	fix	rewrites
+cx:obligation-alone:20	「そういえば、歓迎会をしなきゃね」	「그러고 보니, 환영회를 해야지」	fix	rewrites
+cx:obligation-alone:30	助けなきゃ、と思った。	도와야 한다고 생각했다.	fix	rewrites
+cx:obligation-alone:30	答えなければ、と思っていたはずだった。	대답해야 한다고 생각했을 것이었다.	fix	rewrites
+cx:obligation-alone:40	ユイと大掃除しなきゃと思った。	유이와 대청소해야 한다고 생각했다.	fix	rewrites
+cx:obligation-alone:50	「皆さんの期待に応えなきゃって気持ちの方が強くて」	「여러분이 기대에 부응해야 한다는 기분이 강해서」	fix	rewrites
+cx:obligation-alone:60	早く行かなきゃって思った。	빨리 가야 한다고 생각했다.	fix	rewrites
+cx:obligation-alone:10	　抵抗しなくちゃいけないんだ。	 저항해야 한다.	fix	rewrites
+dict:jisjk:344317	「行かなくちゃいけない」	「가야 한다」	fix	local-ending
+dict:jisjk:344317	帰らなくちゃ……また怒られる……	돌아가야 한다……또 혼난다……	fix	local-ending
+cx:obligation-alone:70	格納庫も大掃除しなきゃ…って、コラ！	격납고도 대청소해야 한다…라니, 코라!	fix	rewrites
+cx:obligation-alone:70	行かなきゃ損だ	!rule:cx:obligation-alone:70	keep	rewrites
+cx:obligation-alone:70	行かなきゃ、間に合わない	!rule:cx:obligation-alone:70	keep	rewrites
+cx:fused-obligation:5	そうでなきゃ、この先私が生きていけない。	!rule:cx:fused-obligation:5	keep	rewrites
+cx:obligation-alone:20	やばい、送らなきゃよかったかも……。	!rule:cx:obligation-alone:20	keep	rewrites
+cx:fused-obligation:5	「あ、ケンがいることを知ってなきゃ、そんな風に言えるはずがない」	!rule:cx:fused-obligation:5	keep	rewrites
+cx:obligation-alone:70	「泣き言言ってんじゃネェ！　ここで身体張らなきゃ、いつ張るってんだ！」	!rule:cx:obligation-alone:70	keep	rewrites
+cx:obligation-alone:40	勉強しなきゃと思った。	!rule:cx:obligation-alone:40	keep	builtin-pattern
+cx:obligation-alone:10	あんなこと、しなきゃよかった。	!rule:cx:obligation-alone:10	keep	rewrites
+cx:obligation-alone:30	行かなきゃ、間に合わない	!rule:cx:obligation-alone:30	keep	rewrites
+cx:obligation-alone:50	早く行かなきゃって思った。	!rule:cx:obligation-alone:50	keep	rewrites
+cx:obligation-alone:60	「皆さんの期待に応えなきゃって気持ちの方が強くて」	!rule:cx:obligation-alone:60	keep	rewrites
+cx:fused-obligation:10	今買わなきゃ損だ	!rule:cx:fused-obligation:10	keep	rewrites
+cx:fused-obligation:20	強くならなきゃ、意味がない	!rule:cx:fused-obligation:20	keep	rewrites
+cx:fused-obligation:5	「ダメじゃないフリーか確認しなきゃ！」	「안되지 않는 프리나 확인해야 한다!」	fix	rewrites
+cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなければ……。	슬슬 목욕하고 잘 준비를 해야 한다…….	fix	rewrites
+cx:fused-obligation:5	後で姉にもお礼をしなくちゃ。	나중에 언니에게도 감사 인사를 해야 한다.	fix	rewrites
+cx:obligation-alone:10	むしろ、そうしなきゃいけなかったような……	오히려, 그렇게 해야 했던 것 같은……	fix	rewrites
+cx:obligation-alone:70	でも、言わなきゃ……言わなきゃいけない。	하지만, 말해야 한다……말해야 한다.	fix	rewrites
+dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨 곳에 가야 한다!!	fix	local-ending
