@@ -739,3 +739,64 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
     assert.equal(warned, status !== 0 && blocking !== 'true');
   });
 }
+
+const perfStep = build.slice(build.indexOf('      - name: Performance budget\n'),
+  build.indexOf('\n      - name:', build.indexOf('      - name: Performance budget\n') + 1));
+
+test('the performance budget measures pull requests only and never fails the job', () => {
+  assert.match(perfStep, /\n        if: matrix\.preset == 'linux' && github\.event_name == 'pull_request'\n/);
+  assert.match(perfStep, /\n        continue-on-error: true\n/);
+  assert.doesNotMatch(build, /Perf-Budget|perf-budget\.tsv|name: perf-budget\n/);
+  assert.equal(existsSync(join(root, 'tools/perf-budget.tsv')), false);
+});
+
+for (const [status, output, warning] of [
+  [0, 'row\tthis build\tbase build\tchange\nload\t100\t100\t+0.00%', null],
+  [0, 'load\t103\t100\t+3.00%\nover: load: 103 instructions, +3.00% against the base build (100)',
+    'More than 1% over the base build: load: 103 instructions, +3.00% against the base build (100)'],
+  [0, 'perf-budget: no base: the base build could not be measured (crashed)\nload\t100', 'No base build was measured'],
+  [2, 'perf-budget: not measured: valgrind is not installed', 'The counts could not be measured (exit 2)'],
+]) {
+  test(`the performance budget step reports and exits 0: ${status}, ${warning ?? 'no warning'}`, t => {
+    const dir = mkdtempSync(join(tmpdir(), 'hdtrans-ci-perf-'));
+    t.after(() => rmSync(dir, { recursive: true, force: true }));
+    mkdirSync(join(dir, 'tools'));
+    mkdirSync(join(dir, 'bin'));
+    writeFileSync(join(dir, 'bin/git'), '#!/bin/sh\n[ "$*" = "rev-parse --verify -q HEAD^1" ] && echo abc123\n', { mode: 0o700 });
+    writeFileSync(join(dir, 'bin/valgrind'), '#!/bin/sh\n', { mode: 0o700 });
+    writeFileSync(join(dir, 'bin/readelf'), "#!/bin/sh\necho '  [     0]  GCC: 1'\n", { mode: 0o700 });
+    writeFileSync(join(dir, 'tools/perf-base.py'), `import os, sys
+assert sys.argv[1] == "abc123"
+os.makedirs(sys.argv[2])
+`);
+    writeFileSync(join(dir, 'tools/perf-budget.py'), `import os, sys
+base = os.environ["RUNNER_TEMP"] + "/base"
+assert sys.argv[1:] == ["--report", "build/linux/hdtrans", "build/linux/dicts.hdsnap", "--base", "abc123",
+                        "--against", base + "/hdtrans", base + "/dicts.hdsnap"], sys.argv
+print(os.environ["FIXTURE_OUTPUT"])
+sys.exit(int(os.environ["FIXTURE_STATUS"]))
+`);
+    const script = perfStep.match(/        run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '');
+    const summary = join(dir, 'summary');
+    const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', script], {
+      cwd: dir,
+      env: {
+        ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: summary,
+        FIXTURE_STATUS: String(status), FIXTURE_OUTPUT: output,
+      },
+      encoding: 'utf8',
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status, 0, result.stderr);
+    const report = readFileSync(summary, 'utf8');
+    assert.ok(report.startsWith('### Performance budget\n```text\n' + output + '\n```\n'), report);
+    const warnings = result.stdout.split('\n').filter(line => line.startsWith('::warning title=Performance budget::'));
+    if (warning === null) {
+      assert.deepEqual(warnings, []);
+    } else {
+      assert.equal(warnings.length, 1, result.stdout);
+      assert.ok(warnings[0].includes(warning), warnings[0]);
+      assert.ok(report.includes(warning), report);
+    }
+  });
+}
