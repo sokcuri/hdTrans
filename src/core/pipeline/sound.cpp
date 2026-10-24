@@ -47,10 +47,10 @@ int VowelOf(char32_t r) {
 }
 
 // Whether r lengthens a syllable ending in the stem character last: ー, ～, the small
-// or plain kana of its vowel, or ン after ン.
+// or plain kana of its vowel, or ン or ゥ after ン (んんぅ).
 bool Lengthens(char32_t r, char32_t last) {
     if (r == U'ー' || r == U'～') return true;
-    if (last == U'ン') return r == U'ン';
+    if (last == U'ン') return r == U'ン' || r == U'ゥ';
     const int v = VowelOf(last);
     return v >= 0 && (r == kSmallVowels[v] || r == kPlainVowels[v]);
 }
@@ -74,6 +74,23 @@ constexpr int kMaxLengthening = 16;
 
 char32_t Syllable(int initial, int vowel, int final) {
     return static_cast<char32_t>(0xAC00 + (initial * 21 + vowel) * 28 + final);
+}
+
+constexpr int kInitialNone = 11;  // ㅇ
+constexpr int kVowelA = 0;        // ㅏ
+constexpr int kVowelU = 13;       // ㅜ
+constexpr int kVowelEu = 18;      // ㅡ
+
+// Whether r is a syllable without an initial consonant whose vowel is vowel.
+bool BareVowel(char32_t r, int vowel) {
+    const auto s = text::Split(r);
+    return s && s->initial == kInitialNone && s->vowel == vowel;
+}
+
+// 우 (with any final) as the weak vowel 으 that a cry of う is written with, also where っ closes it
+// (はうっ 하읏, not 하웃); other characters unchanged.
+char32_t WeakU(char32_t r) {
+    return BareVowel(r, kVowelU) ? text::Join(kInitialNone, kVowelEu, text::Final(r)) : r;
 }
 
 // The vowel that lengthens a vowel (ㅑ ㅏ, ㅘ ㅏ, ㅟ ㅣ).
@@ -223,6 +240,14 @@ bool OneSyllableRepeated(std::string_view s) {
     return true;
 }
 
+// The syllables of a sound: those of its Korean, but one for a key of one kana and a small ャ, ュ or
+// ョ, however many its Korean has (ひゃ 히야).
+size_t Syllables(const SoundMatch& m) {
+    const std::u32string_view k = m.key;
+    if (k.size() >= 2 && k.size() <= 3 && In(k[1], U"ャュョ") && (k.size() == 2 || k[2] == U'ッ')) return 1;
+    return text::RuneCount(m.korean);
+}
+
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) {
         return false;
@@ -232,8 +257,7 @@ bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.end == b.start && a.key == b.key && a.key.size() >= 2 && a.korean == b.korean && OneSyllableRepeated(a.korean)) {
         return false;
     }
-    return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&
-           (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
+    return Syllables(a) > 1 && Syllables(b) > 1 && (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
 }
 
 bool IsAsciiLetter(char c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
@@ -635,6 +659,15 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
             if (s.open && !PauseAt(end)) {
                 if (IsHiraganaRune(rs_[end])) korean += ',';
                 spaceAfter = !In(rs_[end], U"…‥―─—");
+            }
+            // A small ぅ that opens a cry before 아 is the weak vowel 으 (ぅあ 으아; not ぅお 우오,
+            // ぅぇ 우에 or ぅわぁ 우와아).
+            if (f_[p] == U'ゥ') {
+                std::u32string ko = DecodeText(korean);
+                if (ko.size() > 1 && BareVowel(ko[1], kVowelA) && BareVowel(ko[0], kVowelU)) {
+                    ko[0] = WeakU(ko[0]);
+                    korean = EncodeText(ko);
+                }
             }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2])};
@@ -1393,13 +1426,18 @@ size_t SoundText::Cry(size_t p, std::string& korean) const {
         std::u32string kana(1, r);
         if (k + 1 < e && In(f[k + 1], U"ャュョ")) kana += f[++k];
         if (const char32_t plain = PlainVowel(r); plain != 0) kana = plain;
-        const std::u32string syllable = DecodeText(text::FromKana(EncodeText(kana), text::Preset::Fan));
+        std::u32string syllable = DecodeText(text::FromKana(EncodeText(kana), text::Preset::Fan));
+        // A cry of the one vowel う is the weak vowel 으 (ううう 으으으).
+        if (syllables == 1 && syllable.size() == 1 && BareVowel(syllable[0], kVowelU)) syllable[0] = WeakU(syllable[0]);
         if (syllable.size() != 1 || syllable[0] < 0xAC00 || syllable[0] > 0xD7A3) return 0;
         ko += syllable;
         vowel = static_cast<int>(syllable[0] - 0xAC00) % 588 / 28;
         last = kana.size() == 1 ? kana[0] : kana[1];
     }
-    if (e < closing && (ko.back() - 0xAC00) % 28 == 0) ko.back() += 19;  // ㅅ
+    if (e < closing && (ko.back() - 0xAC00) % 28 == 0) {
+        ko.back() += static_cast<char32_t>(text::kFinalSiot);
+        if (In(f[e - 1], U"ウゥ")) ko.back() = WeakU(ko.back());  // a drawn う closed by っ: はうっ 하읏
+    }
     korean = EncodeText(ko);
     return end;
 }
@@ -1424,7 +1462,7 @@ size_t SoundText::LoneCatch(size_t p) const {
 std::string_view SoundText::LoneVoice(size_t p) const {
     const std::u32string_view rs = rs_;
     constexpr std::u32string_view kVoices = U"ンァィゥェォくぐやはひふつ";
-    constexpr std::string_view kKorean[] = {"응", "아", "이", "우", "에", "오", "크", "그", "야", "하", "히", "후", "읏"};
+    constexpr std::string_view kKorean[] = {"응", "아", "이", "으", "에", "오", "크", "그", "야", "하", "히", "후", "읏"};
     size_t v = kVoices.find(f_[p]);
     if (v == std::u32string_view::npos) v = kVoices.find(rs[p]);  // hiragana only
     if (v == std::u32string_view::npos) return {};
@@ -1748,8 +1786,9 @@ std::u32string_view RepeatedUnit(const SoundRow& row) {
         const std::u32string_view unit = key.substr(key.size() - n);
         if (key.substr(key.size() - 2 * n, n) != unit) continue;
         size_t syllables = 0;
-        for (const char32_t r : unit) {
-            if (r == U'ッ') continue;
+        for (size_t k = 0; k < unit.size(); k++) {
+            const char32_t r = unit[k];
+            if (r == U'ッ' || (k > 0 && In(r, U"ャュョ"))) continue;  // ヒャ is one syllable
             if (In(r, U"ンーァィゥェォャュョ") || PlainVowel(r) != 0) return {};
             syllables++;
         }
@@ -1777,7 +1816,9 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     const std::u32string_view unit = RepeatedUnit(row);
     std::u32string_view stem = row.key;
     char32_t tail = 0;
-    if (const size_t n = row.key.size(); n >= 2 && (row.key[n - 1] == U'ン' || row.key[n - 1] == U'ッ')) {
+    // A final ン after another ン is part of the stem, which more ン lengthen (んん, んんん).
+    if (const size_t n = row.key.size();
+        n >= 2 && ((row.key[n - 1] == U'ン' && row.key[n - 2] != U'ン') || row.key[n - 1] == U'ッ')) {
         stem = stem.substr(0, n - 1);
         tail = row.key[n - 1];
     }
@@ -1826,7 +1867,9 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     size_t i = q;
     if (tail == 0) i += Repeats(unit, f, i, units);
     for (; i < f.size() && Lengthens(f[i], last); i++) {
-        if (f[i] != U'～') {
+        if (tail == 0 && stem.ends_with(U"ンン") && isMark(f[i])) {
+            tilde = true;  // a hum drawn out with ー or ～ ends in ~ (んんー 으응~)
+        } else if (f[i] != U'～') {
             units += 'v';
         } else if (units.empty() || units.back() != '~') {
             units += '~';
@@ -1846,6 +1889,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     while (j < f.size() && f[j] == U'ッ') j++;
     if (j > i && (j == f.size() || !IsKana(f[j]) || In(f[j], U"トテ～ー") || (row.intj && !row.phrase))) {
         units += '!';
+        if (In(f[i - 1], U"ウゥ")) units += 'u';  // the っ closes a drawn う: 읏 (はうっ 하읏)
         for (i = j; i < f.size() && In(f[i], U"～ー"); i++) {
         }
     }
@@ -1878,7 +1922,8 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
         rs.append(n, rs.back());
         std::string rest(units.substr(n));
         if (std::erase(rest, '!') > 0 && rs.back() >= 0xAC00 && rs.back() <= 0xD7A3 && (rs.back() - 0xAC00) % 28 == 0) {
-            rs.back() += static_cast<char32_t>(19);  // ㅅ
+            rs.back() += static_cast<char32_t>(text::kFinalSiot);
+            if (rest.find('u') != std::string::npos) rs.back() = WeakU(rs.back());
         }
         return Lengthen(EncodeText(rs), rest);
     }
@@ -1893,6 +1938,7 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
     }
     rs.back() = Syllable(initial, vowel, 0);
     int added = 0;
+    bool closed = false;  // っ added the ㅅ
     for (const char u : units) {
         if (u == 'v' && added < kMaxLengthening) {
             rs.push_back(Syllable(11, kLongVowel[vowel], 0));
@@ -1900,7 +1946,8 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
         } else if (u == '~') {
             rs.push_back(U'~');
         } else if (u == '!' && final == 0) {
-            final = 19;  // ㅅ
+            final = text::kFinalSiot;
+            closed = true;
         }
     }
     if (final != 0) {
@@ -1910,6 +1957,7 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
             rs.back() += static_cast<char32_t>(final);
         }
     }
+    if (closed && units.find('u') != std::string_view::npos) rs.back() = WeakU(rs.back());  // はうっ 하읏, not 하웃
     return EncodeText(rs);
 }
 
