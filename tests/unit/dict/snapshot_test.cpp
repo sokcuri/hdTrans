@@ -609,11 +609,11 @@ HD_TEST(SnapshotCompiledPlainDictionaries) {
     HD_CHECK_EQ(EntriesOf(s.Plain(), 1), "猫 고양이 N110 @1.0");
     HD_CHECK_EQ(s.Plain().Entries().size(), size_t{696});
     HD_CHECK(s.Plain().Entries()[0].end);
-    // The text path adds the kana spellings, the phrases but the 343 interjections in
+    // The text path adds the kana spellings, the phrases but the 354 interjections in
     // kana, and the patterns.
     HD_CHECK_EQ(EntriesOf(s.TextPlain(), -2), "あい 사랑 N110 @3.0");
-    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2634});
-    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2638});
+    HD_CHECK_EQ(CountFile(s.TextPlain(), -1), size_t{2637});
+    HD_CHECK_EQ(s.TextPlain().Entries().size(), size_t{2641});
     HD_CHECK(s.Senses().contains("腕"));
     const auto better = s.Senses().find("マシ");
     HD_REQUIRE(better != s.Senses().end());

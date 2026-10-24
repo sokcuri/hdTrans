@@ -1,0 +1,14 @@
+# 규칙: LEX-49
+rule	input	expected	kind	layer
+dict:nantoka-iu:1	「なんとか言えよ！！」	「뭐라고 말해!!」	fix	local
+dict:nantoka-iu:1	「おいコラっ！　なんとか言えやっ！」	「야 이놈아! 어떻게든 말할 수 있고야!」	fix	local
+dict:nantoka-iu:1	「なんとか言ったらどうなんだ！」	「뭐라고 말하면 어때!」	fix	local
+dict:nantoka-iu:1	この世界だって、魔力とかなんとか言ってるけど、人間の体の構造は変わらないはずだ。	이 세계도, 마력이라든지 뭐라고 말하고 있지만, 인간 몸 구조는 변함없을 것이다.	fix	local
+dict:nantoka-iu:1	「なんとか言いくるめられた……危なかったぁ……」	!rule:dict:nantoka-iu:1	keep	local
+dict:nantoka-iu:1	なんとかいける。	!rule:dict:nantoka-iu:1	keep	local
+dict:nantoka-iu:1	なんとかする。	!rule:dict:nantoka-iu:1	keep	local
+dict:nantoka-iu:2	「いや、待て……白崎、何とか言ってくれ」	「아니, 기다려……시라사키, 뭐라고 말해 줘」	fix	local
+dict:nantoka-iu:2	「きー、桜庭さん、何とか言ってやって下さいよっ」	「오고―, 사쿠라바 씨, 어떻게든 말해 주세요」	fix	local
+dict:nantoka-iu:2	両親は、私には相応しくないとか何とか言っていたけれど。	부모님은, 나에게는 걸맞지 않다든가 뭐라고 말했지만.	fix	local
+dict:nantoka-iu:2	言葉が理解できてくると、何とか喋ろうとまだ回らない口でもごもごと何かを話しだした。	!rule:dict:nantoka-iu:2	keep	local
+dict:nantoka-iu:2	よし。左肩は痛むけど、何とか動かせる。	!rule:dict:nantoka-iu:2	keep	local
