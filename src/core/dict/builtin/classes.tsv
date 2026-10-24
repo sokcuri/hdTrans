@@ -58,6 +58,7 @@
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
+//= ko-sound.laugh	Korean laughs the sound stage writes (아하하, 후후), after which おかしい is funny, not strange (あはは、おかしい 아하하, 웃겨).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
@@ -753,6 +754,58 @@ ko-noun.passive-eojida	말
 ko-noun.passive-eojida	의지
 ko-noun.passive-eojida	생각
 ko-noun.passive-eojida	일
+ko-sound.laugh	후후
+ko-sound.laugh	후훗
+ko-sound.laugh	후후후
+ko-sound.laugh	훗
+ko-sound.laugh	훗훗훗
+ko-sound.laugh	우후
+ko-sound.laugh	우후후
+ko-sound.laugh	우훗
+ko-sound.laugh	우후훗
+ko-sound.laugh	무후후
+ko-sound.laugh	에헤
+ko-sound.laugh	에헤헤
+ko-sound.laugh	에헷
+ko-sound.laugh	에헤헷
+ko-sound.laugh	헤헤
+ko-sound.laugh	헤헷
+ko-sound.laugh	헤헤헤
+ko-sound.laugh	데헤
+ko-sound.laugh	데헷
+ko-sound.laugh	데헤헤
+ko-sound.laugh	아하
+ko-sound.laugh	아핫
+ko-sound.laugh	아하하
+ko-sound.laugh	아하핫
+ko-sound.laugh	아하하하
+ko-sound.laugh	하하
+ko-sound.laugh	하핫
+ko-sound.laugh	하하하
+ko-sound.laugh	와하하
+ko-sound.laugh	와하하하
+ko-sound.laugh	푸핫
+ko-sound.laugh	푸하하
+ko-sound.laugh	풉
+ko-sound.laugh	푸풋
+ko-sound.laugh	크크
+ko-sound.laugh	크큭
+ko-sound.laugh	크크크
+ko-sound.laugh	큭큭큭
+ko-sound.laugh	큭
+ko-sound.laugh	킥킥
+ko-sound.laugh	히히
+ko-sound.laugh	히히히
+ko-sound.laugh	히힛
+ko-sound.laugh	니히
+ko-sound.laugh	니히히
+ko-sound.laugh	니힛
+ko-sound.laugh	니시시
+ko-sound.laugh	호호호
+ko-sound.laugh	오호호
+ko-sound.laugh	오호호호
+ko-sound.laugh	우하하
+ko-sound.laugh	우하하하
 
 ko-verb.casual-state	된다
 ko-verb.casual-state	모른다
