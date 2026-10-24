@@ -384,9 +384,9 @@ HD_TEST(compose_emit_closing_symbols) {
     }
 }
 
-// An opening bracket of the bracket tokens other than 〔 (【 〈 《 ［) stands apart from a word or
-// a comma before it, as a word does; 〔, ＜ and [, and an opening bracket after punctuation or
-// another bracket, stay attached.
+// An opening bracket token other than 〔 (【 〈 《 ［ ‘ ｛) stands apart from a word, a word span or
+// a comma before it, as a word does; 〔, ＜ and [, and an opening bracket after punctuation, an
+// escape, a tag or another bracket, stay attached.
 HD_TEST(compose_emit_opening_bracket_apart) {
     struct Case {
         std::vector<TokenText> tokens;
@@ -410,12 +410,27 @@ HD_TEST(compose_emit_opening_bracket_apart) {
         {{{tokenizer::kTypeBracket, 0, "【", ""}, {tokenizer::kTypeJapanese, 0, "감정", ""}, {tokenizer::kTypeBracket, 0, "】", ""},
           {tokenizer::kTypeBracket, 0, "【", ""}},
          "【감정】【"},
+        {{{tokenizer::kTypeJapanese, 0, "그의", ""}, {tokenizer::kTypeBracket, 0, "‘", ""}}, "그의 ‘"},
+        {{{tokenizer::kTypeJapanese, 0, "그는", ""}, {tokenizer::kTypeBracket, 0, "｛", ""}}, "그는 ｛"},
+        {{{tokenizer::kTypeProtected, 1, "wiki", "wiki"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "wiki 【"},
+        {{{tokenizer::kTypeProtected, 1, "섹\uE001", "섹\uE001"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "섹\uE001 【"},
+        {{{tokenizer::kTypeMarkup, 3, "</b>", "</b>"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "</b>【"},
+        {{{tokenizer::kTypeJapanese, 0, "왔다.", ""}, {tokenizer::kTypeAsciiSymbol, 0, "\\n", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "왔다.\\n【"},
+        {{{tokenizer::kTypeJapanese, 0, "이름은", ""}, {tokenizer::kTypeAsciiSymbol, 0, "%s", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "이름은%s【"},
+        {{{tokenizer::kTypeJapanese, 0, "그는", ""}, {tokenizer::kTypeNewline, 0, "\n", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "그는\n【"},
+        {{{tokenizer::kTypeBracket, 0, "【", ""}}, "【"},
     };
-    Settings settings;
-    for (const Case& c : cases) {
-        Pieces out;
-        EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
-        HD_CHECK_EQ(String(out), c.expected);
+    for (const bool cleanup : {false, true}) {
+        Settings settings;
+        settings.cleanup = cleanup;
+        for (const Case& c : cases) {
+            Pieces out;
+            EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+            HD_CHECK_EQ(String(out), c.expected);
+        }
     }
 }
 
@@ -431,7 +446,7 @@ HD_TEST(compose_comma_before_symbol_run) {
         {"……", tokenizer::kTypeSymbol, "마인, ……."},
         {"❩", tokenizer::kTypeSymbol, "마인,❩."},
         {"”", tokenizer::kTypeSymbol, "마인,”."},
-        {"「", tokenizer::kTypeBracket, "마인, 「."},
+        {"【", tokenizer::kTypeBracket, "마인, 【."},
         {"％＆＄＃", tokenizer::kTypeSymbol, "마인,％＆＄＃.", false},
     };
     for (const Case& c : cases) {

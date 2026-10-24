@@ -1405,15 +1405,18 @@ bool SpacedAfterSyllable(const Pieces& out) {
            text::Final(DecodeLastRune(TextBefore(t.substr(0, end + 1)), end + 1).cp) >= 0;
 }
 
-// Whether out ends in a word or a comma: a syllable, a Latin letter or digit, the particle
-// mark of a word span, or ",".
+// Whether out ends in a word or a comma: a syllable, a run of Latin letters and digits that
+// does not follow \ or % (an escape such as \n or %s), the particle mark of a word span, or ",".
 bool EndsInWord(const Pieces& out) {
     if (out.empty() || (out.back().span != SpanText && out.back().span != SpanWord)) return false;
     const std::string_view t = out.back().text;
     if (t.empty()) return false;
     const char32_t r = DecodeLastRune(TextBefore(t), t.size()).cp;
-    return text::Final(r) >= 0 || (r >= U'0' && r <= U'9') || (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z') ||
-           r == U',' || r == kVowelMark || r == kConsonantMark || r == kRieulMark;
+    if (text::Final(r) >= 0 || r == U',' || r == kVowelMark || r == kConsonantMark || r == kRieulMark) return true;
+    size_t k = t.size();
+    const auto latin = [](char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); };
+    while (k > 0 && latin(t[k - 1])) k--;
+    return k < t.size() && (k == 0 || (t[k - 1] != '\\' && t[k - 1] != '%'));
 }
 
 }  // namespace
