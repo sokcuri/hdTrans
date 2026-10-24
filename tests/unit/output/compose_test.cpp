@@ -383,3 +383,47 @@ HD_TEST(compose_emit_closing_symbols) {
         HD_CHECK_EQ(String(out), c.expected);
     }
 }
+
+HD_TEST(compose_comma_before_symbol_run) {
+    struct Case {
+        const char* symbols;
+        int type;
+        const char* expected;
+        bool text = true;
+    };
+    const Case cases[] = {
+        {"％＆＄＃", tokenizer::kTypeSymbol, "마인, ％＆＄＃."},
+        {"……", tokenizer::kTypeSymbol, "마인, ……."},
+        {"❩", tokenizer::kTypeSymbol, "마인,❩."},
+        {"”", tokenizer::kTypeSymbol, "마인,”."},
+        {"「", tokenizer::kTypeBracket, "마인,「."},
+        {"％＆＄＃", tokenizer::kTypeSymbol, "마인,％＆＄＃.", false},
+    };
+    for (const Case& c : cases) {
+        std::vector<TokenText> tokens = {
+            {tokenizer::kTypeJapanese, 0, "マイン、", ""},
+            {c.type, 0, c.symbols, ""},
+            {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+            {tokenizer::kTypeTruncated, 0, "", ""},
+        };
+        std::vector<ResolvedItem> items(2);
+        items[0].surface = "マイン";
+        items[0].entry = items[0].first = {"130", "", "마인"};
+        items[1].surface = "、";
+        items[1].offset = 9;
+        items[1].entry = items[1].first = {"600", "", ","};
+        for (ResolvedItem& item : items) {
+            item.length = static_cast<int>(item.surface.size());
+            item.selected = 0;
+        }
+        Nodes nodes;
+        BuildItems(items, tokens, nodes);
+        Composer composer;
+        Families families;
+        Settings settings;
+        settings.text = c.text;
+        Pieces result;
+        composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
+        HD_CHECK_EQ(String(result), c.expected);
+    }
+}

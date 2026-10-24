@@ -147,6 +147,7 @@ private:
         }
         out_.tokens.push_back(t);
         bufStart_ = out_.text.size();
+        maskAt_ = kNoMask;
     }
 
     void Start(int type) {
@@ -191,6 +192,7 @@ private:
     }
 
     void Ascii() {
+        maskAt_ = kNoMask;
         const int type = AsciiType();
         const char32_t c = s_[p_];
         if (type == cur_) {
@@ -272,7 +274,7 @@ private:
 
     // The type of the non-ASCII character at p; halfWidth reports a half-width
     // katakana or punctuation character. May rewrite the character.
-    int WideType(bool& halfWidth) {
+    int WideType(bool& halfWidth, bool& mask) {
         halfWidth = false;
         const size_t n = s_.size();
         const char32_t c = s_[p_];
@@ -299,8 +301,12 @@ private:
                 s_[p_] = U'、';
                 return kTypeJapanese;
             case U'、': case U'（': case U'）': case U'「': case U'」': case U'『': case U'』':
-            case U'＝': case U'“': case U'”': case U'～': case U'○': case U'＊':
+            case U'＝': case U'“': case U'”': case U'～':
                 return kTypeJapanese;
+            case U'○': case U'＊':
+                // A mask character after a symbol goes on with the run of symbols (＠＊＋).
+                mask = true;
+                return cur_ == kTypeSymbol && BufSize() > 0 ? kTypeSymbol : kTypeJapanese;
             case U'。': case U'．': case U'？': case U'！':
                 return kTypeSentenceEnd;
             case U'＜': case U'＞': case U'‘': case U'’': case U'〔': case U'〕': case U'［': case U'］':
@@ -350,9 +356,13 @@ private:
             p_++;
             return;
         }
-        bool halfWidth = false;
-        const int type = WideType(halfWidth);
+        bool halfWidth = false, mask = false;
+        const int type = WideType(halfWidth, mask);
         const char32_t c = s_[p_];
+        // Mask characters that end Japanese text before a symbol start the run of symbols
+        // (「＊＠＋ 「 ＊＠＋).
+        if (type == kTypeSymbol && cur_ == kTypeJapanese && maskAt_ != kNoMask) StartRunAtMasks();
+        const size_t addedAt = out_.text.size();
         const bool letterOrDigit = type == kTypeNumber || type == kTypeAlpha;
         if (type == cur_) {
             if (letterOrDigit) {
@@ -361,9 +371,13 @@ private:
                 Add(WidenHalfWidth(c));
             } else {
                 // 。 starts a new token, and so does ！ or ？ after a lengthening ～ (行くよ～！！),
-                // which then reads like a sentence end anywhere else.
+                // which then reads like a sentence end anywhere else. A sign with a form of its
+                // own (FirstForm) after a number is a token of its own, the unit of the number,
+                // not the start of a run of other symbols (３４％…… 34%……, but ３４％％％).
                 const bool afterLength = (c == U'！' || c == U'？') && p_ > 0 && s_[p_ - 1] == U'～';
-                if ((c == U'。' || afterLength) && BufSize() > 0) Emit(cur_);
+                const bool afterUnit = cur_ == kTypeSymbol && p_ > 1 && IsDigitRune(s_[p_ - 2]) &&
+                                       FirstForm(s_[p_ - 1]) && c != s_[p_ - 1];
+                if ((c == U'。' || afterLength || afterUnit) && BufSize() > 0) Emit(cur_);
                 Add(c);
             }
         } else if ((cur_ == kTypeNumber && type == kTypeAlpha) || (cur_ == kTypeAlpha && type == kTypeNumber)) {
@@ -399,8 +413,28 @@ private:
                 Add(c);
             }
         }
+        if (!mask || cur_ != kTypeJapanese || out_.text.size() == addedAt) {
+            maskAt_ = kNoMask;
+        } else if (maskAt_ == kNoMask) {
+            maskAt_ = addedAt - bufStart_;
+            maskSource_ = out_.offsets[p_];
+        }
         prev_ = Class(c);
         p_++;
+    }
+
+    // Moves the mask characters at the end of the Japanese token being built into a new
+    // token of symbols.
+    void StartRunAtMasks() {
+        const std::string masks = out_.text.substr(bufStart_ + maskAt_);
+        out_.text.resize(bufStart_ + maskAt_);
+        if (BufSize() > 0) {
+            srcEnd_ = maskSource_;
+            Emit(cur_);
+        }
+        Start(kTypeSymbol);
+        out_.text.append(masks);
+        srcBegin_ = maskSource_;
     }
 
     Tokens& out_;
@@ -416,6 +450,11 @@ private:
     bool inTag_ = false;   // after '<' + letter, '!' or '/', until '>'
     bool inCS_ = false;    // after "&#CS" starts, until its 'S'
     int prev_ = 0;         // Class of the previous character (0 after ASCII)
+    // Where the mask characters (○ ＊) that end the Japanese token being built start in its
+    // text, and in the input; kNoMask when it does not end in one.
+    static constexpr size_t kNoMask = static_cast<size_t>(-1);
+    size_t maskAt_ = kNoMask;
+    uint32_t maskSource_ = 0;
 };
 
 void Reset(Tokens& out) {
@@ -615,21 +654,6 @@ void Prepare(Tokens& tokens) {
     Preparer(tokens).Run();
 }
 
-void AppendCanonicalText(std::string& out, std::string_view s) {
-    const size_t start = out.size();
-    const text::Rune first = text::DecodeRune(s);
-    if (const auto form = FirstForm(first.cp)) {
-        out.append(*form);
-    } else {
-        for (size_t i = 0; i < s.size();) {
-            const text::Rune r = text::DecodeRune(s.substr(i));
-            AppendCanonical(out, r.cp);
-            i += r.size;
-        }
-    }
-    while (out.size() > start && out.back() == ' ') out.pop_back();
-}
-
 namespace {
 
 // The ASCII marks of an exclamation or question mark, "" for other characters.
@@ -645,6 +669,32 @@ std::string_view MarkForm(char32_t c) {
 }
 
 }  // namespace
+
+void AppendCanonicalText(std::string& out, std::string_view s) {
+    const size_t start = out.size();
+    const text::Rune first = text::DecodeRune(s);
+    const auto form = FirstForm(first.cp);
+    if (form && (first.size == s.size() || !MarkForm(first.cp).empty())) {
+        out.append(*form);
+    } else {
+        const bool run = first.size < s.size();
+        size_t i = 0;
+        if (form) {
+            out.append(s.substr(0, first.size));
+            i = first.size;
+        }
+        for (; i < s.size();) {
+            const text::Rune r = text::DecodeRune(s.substr(i));
+            if (run && !text::IsKanji(r.cp) && CanonicalForm(r.cp) == "□") {
+                text::AppendRune(out, r.cp);
+            } else {
+                AppendCanonical(out, r.cp);
+            }
+            i += r.size;
+        }
+    }
+    while (out.size() > start && out.back() == ' ') out.pop_back();
+}
 
 std::string MarkRun(std::string_view s) {
     std::string out;
