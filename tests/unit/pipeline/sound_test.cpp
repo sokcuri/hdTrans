@@ -1063,7 +1063,8 @@ HD_TEST(pipeline_onbin_u) {
 
 // An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
 // a longer word it starts takes the mark after that word, also with no word before it. A verb
-// stem and its continuative kana before it are no name (かみつき).
+// stem and its continuative kana before it are no name (かみつき). The end of a sound word that
+// starts before it is no honorific (がちゃーん, ぽちゃーんと, どくーんと).
 HD_TEST(pipeline_drawn_honorifics) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -1082,7 +1083,11 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"アルくぅん！", "アルくん\uE00A！"},
         {"みどりさああんん！", "みどりさん\uE00A\uE00A！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
-        {"がちゃ～んと", "がちゃんと\uE00A"},
+        {"私がちゃーんと", "私がちゃんと\uE00A"},
+        {"がちゃ～んと", "がちゃ～んと"},
+        {"皿ががちゃーんと", "皿ががちゃーんと"},
+        {"石がぽちゃーんと", "石がぽちゃーんと"},
+        {"心臓がどくーんと", "心臓がどくーんと"},
         {"…くぅん", "…くぅん"},
         {"そうちゃうん？", "そうちゃうん？"},
         {"うくぅんんっ！", "うくぅんんっ！"},
