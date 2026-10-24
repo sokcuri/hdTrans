@@ -63,7 +63,7 @@
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
 //= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
-//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons (先生たん, 小林っち; not たまごっち, 顔合わせたんだ).
+//= honorific.after-person	Familiar name suffixes of the dictionary that are words only after a name or a noun of persons (先生たん, 小林っち; not たまごっち, 顔合わせたんだ, 母たんこぶ).
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
@@ -101,8 +101,8 @@
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
 //= ko.benefactive-head	The Korean of the あげる after a て form whose あ is dropped (作ったげる 만들어 줄게), ending in the marker family that the ending after it conjugates.
-//= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버렸던 거야), ending in the marker family that the ending after it conjugates.
-//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped (見てた 보고 있었다), ending in the marker family that the ending after it conjugates.
+//= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자버린 거야), ending in the marker family that the ending after it conjugates.
+//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped (見てたんですね 보고 있었군요), ending in the marker family that the ending after it conjugates.
 //= ko.progressive-honorific-head	The same for いらっしゃる (見てらっしゃる 보고 계시다).
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.laughter	Latin letters a run of which laughs after Korean in the output (없어ｗｗ 없어ㅋㅋ).
@@ -256,7 +256,7 @@
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
-//= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 방법도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
+//= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).

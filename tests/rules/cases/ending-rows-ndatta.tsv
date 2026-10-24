@@ -1,4 +1,4 @@
-# 규칙: LEX-35
+# 규칙: GRM-11
 rule	input	expected	kind	layer
 lookup:ending-rows-conj	（あ、俺の車、インド人に貸してやったんだった……）	(아, 내 차, 인도인에 빌려 주었다……)	fix	lookup
 lookup:ending-rows-conj	そういえば戦国時代は諱を言っちゃいけないんだったー！	그러고 보니 전국시대는 휘를 말하면 안되었다~!	fix	lookup

@@ -307,7 +307,7 @@ jobs:
           path: testdata
       - name: Skip unavailable expected data
         if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY != 'true'
-        run: echo "::notice::HDTRANS_TESTDATA_KEY is not available; the expected-data comparison is skipped."
+        run: echo "::notice::HDTRANS_TESTDATA_KEY is not available; the expected-data comparison and the drops budget are skipped."
       - name: Compare with the expected outputs
         if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY == 'true'
         run: |
@@ -323,6 +323,18 @@ jobs:
             1) echo 'Translations changed; accept them in the test data once this is on main.' >> "$GITHUB_STEP_SUMMARY" ;;
           esac
           [ "$status" -le 1 ]
+      # The test-data documents drop text in as many inputs as their row of tools/drops-budget.tsv says
+      # (docs/testing.md, drops.py). ctest sets.drops skips above, before the data is checked out; the
+      # web examples are not in the test data, so the documents are the only set here.
+      - name: Drops budget of the test data
+        if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY == 'true'
+        timeout-minutes: 15
+        run: |
+          home="$(mktemp -d "$RUNNER_TEMP/hdtrans-drops-home.XXXXXX")"
+          trap 'rm -rf "$home"' EXIT
+          unset HDTRANS_CORPUS HDTRANS_REF_SAMPLE HDTRANS_EXAMPLES
+          HOME="$home" HDTRANS_TESTDATA="$GITHUB_WORKSPACE/testdata" \
+            python3 -I tools/drops.py build/linux/hdtrans "$GITHUB_WORKSPACE/dicts" --sets --budget tools/drops-budget.tsv
       # Instruction counts of fixed inputs under valgrind (tools/perf-budget.py, docs/build.md "CI"). On a
       # pull request the base commit's linux build is measured in the same run: downloaded
       # (tools/perf-base.py, waiting for a develop build in progress) or else built here. The counts go
