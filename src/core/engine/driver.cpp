@@ -500,6 +500,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (!options.reference) {
         normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
         normalized = pipeline::RespellKatakanaEndings(normalized);
+        normalized = pipeline::RespellKanjiCries(normalized);
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);

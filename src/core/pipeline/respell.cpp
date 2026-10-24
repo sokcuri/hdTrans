@@ -114,6 +114,53 @@ std::string RespellKatakanaEndings(std::string_view line) {
     return out;
 }
 
+std::string RespellKanjiCries(std::string_view line) {
+    std::string out;
+    size_t copied = 0, pos = 0;
+    char32_t prev = 0;
+    const std::span<const std::string_view> pairs = dict::ClassMembers("spelling.cry-kanji");
+    auto drawn = [&](size_t at) {
+        const text::Rune r = text::DecodeRune(line.substr(at));
+        const std::string_view c = line.substr(at, r.size);
+        return r.size > 0 && (dict::InClass("kana.drawn-out", c) || dict::InClass("mark.clip", c));
+    };
+    while (pos < line.size()) {
+        const text::Rune r = text::DecodeRune(line.substr(pos));
+        size_t taken = 0;
+        for (const std::string_view pair : WordRune(prev) ? std::span<const std::string_view>() : pairs) {
+            const size_t eq = pair.find('=');
+            const std::string_view kanji = pair.substr(0, eq), kana = pair.substr(eq + 1);
+            if (!line.substr(pos).starts_with(kanji)) continue;
+            size_t end = pos + kanji.size();
+            int run = 0;
+            bool clipped = false;
+            while (end < line.size() && drawn(end)) {
+                const size_t n = text::DecodeRune(line.substr(end)).size;
+                clipped = clipped || dict::InClass("mark.clip", line.substr(end, n));
+                end += n;
+                run++;
+            }
+            const std::string_view after = line.substr(end, text::DecodeRune(line.substr(end)).size);
+            if (run == 0 || (!after.empty() && WordRune(text::DecodeRune(after).cp))) continue;
+            // One drawn kana before a pause other than an exclamation or a comma reads as the
+            // interjection いやぁ (이야), which the kanji is not.
+            if (run == 1 && !clipped && !dict::InClass("mark.exclaim", after) && !dict::InClass("mark.comma", after)) {
+                continue;
+            }
+            out.append(line.substr(copied, pos - copied));
+            out.append(kana);
+            taken = kanji.size();
+            copied = pos + taken;
+            break;
+        }
+        prev = r.cp;
+        pos += taken > 0 ? taken : r.size;
+    }
+    if (copied == 0) return std::string(line);
+    out.append(line.substr(copied));
+    return out;
+}
+
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context) {
     std::string out;
     size_t copied = 0, pos = 0;

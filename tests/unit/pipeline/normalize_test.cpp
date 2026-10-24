@@ -551,6 +551,19 @@ HD_TEST(pipeline_respell_katakana_endings) {
     for (const Case& c : cases) HD_CHECK_EQ(RespellKatakanaEndings(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_respell_kanji_cries) {
+    const Case cases[] = {
+        {"「嫌ぁぁぁ」"sv, "「いやぁぁぁ」"sv},
+        {"嫌っ！"sv, "いやっ！"sv},
+        {"「嫌ぁ！」"sv, "「いやぁ！」"sv},
+        {"「嫌ぁ……」"sv, "「嫌ぁ……」"sv},
+        {"すごく嫌ー"sv, "すごく嫌ー"sv},
+        {"嫌っている"sv, "嫌っている"sv},
+        {"嫌！"sv, "嫌！"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellKanjiCries(c.in), std::string(c.want));
+}
+
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},

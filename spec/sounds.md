@@ -13,6 +13,8 @@
 소리로 읽는 글자 뒤의 ー나 ～도, 빼고 읽으면 사전 낱말이 ー 뒤로 두 글자 이상 이어지고 소리(뒤의 と 포함)보다, ー 바로 뒤에서
 시작하는 낱말보다 짧지 않게 가면 그 낱말을 늘여 쓴 것이므로 낱말로 읽는다(べーつに 딱히, ほーんと 정말, ざーんねん 유감).
 ー 뒤 한 글자에서 끝나는 낱말(へーそうなんだ의 へそ, さぁて의 さて)이나 소리가 그만큼 가는 것(どーんと, えーっと)은 소리다.
+말머리에서 작은 모음, ー, っ로 늘여 외친 嫌는 외침 いや와 같이 옮긴다(嫌ぁぁぁ 싫어어어, 嫌っ！ 싫어!). 늘인 모음 하나
+뒤에 느낌표나 쉼표가 없으면 외침이 아니고(嫌ぁ……), 말 가운데의 嫌(すごく嫌ー, 嫌っている)는 낱말로 둔다.
 
 현재: 따름. 다만 감탄사로 읽는 소리 뒤의 という(へっという顔)와 하고를 붙여 읽는 소리 뒤의 という(ザーッという雨 쏴아하고
 말하는 비)는 아직 하는으로 옮기지 않고, 형용사 어간으로 읽는 소리는 동사처럼 활용하며(ぼーっという音 멍하는 소리,
@@ -31,6 +33,8 @@
 | 「さ、さ、最低」 | 「최, 최, 최저」 | 고침 |
 | 彼女はもぞもぞとお尻を動かした。 | 그녀는 꼼지락꼼지락 엉덩이를 움직였다. | 고침 |
 | すごおおおい！ | 대단해~! | 고침 |
+| 「嫌ぁぁぁ」 | 「싫어어어」 | 고침 |
+| 嫌なものは嫌っ！ | 싫은 것은 싫다! | 유지 |
 | カタカタという音 | 달각달각하는 소리 | 고침 |
 | ドンという音 | 쾅 하는 소리 | 고침 |
 | ドンというか | 쾅이라고 할까 | 고침 |
@@ -48,7 +52,7 @@
 사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-stutter-kanji.tsv`(한자 낱말 앞의 말더듬),
 `tests/rules/cases/sound-adverbial-to.tsv`(말더듬과 と), `tests/rules/cases/sound-drawn-cries.tsv`(소리의 길이),
 `tests/rules/cases/sound-drawl-shout.tsv`(외침의 ッ), `tests/rules/cases/sound-vowel-run.tsv`(낱말 안에서 늘인 모음),
-`tests/rules/cases/sound-quoting-to-iu.tsv`(소리 뒤의 という), `tests/rules/cases/sound-drawn-word.tsv`(늘여 쓴 낱말)
+`tests/rules/cases/sound-quoting-to-iu.tsv`(소리 뒤의 という), `tests/rules/cases/sound-drawn-word.tsv`(늘여 쓴 낱말), `tests/rules/cases/sound-kanji-cry.tsv`(한자로 쓴 외침)
 
 ## SND-2 되풀이한 말은 사본마다 같은 말로 옮긴다
 

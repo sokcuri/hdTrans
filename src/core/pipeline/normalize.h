@@ -63,6 +63,13 @@ std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const
 // spelling.katakana-particle only after hiragana or kanji (not Decemberネー).
 std::string RespellKatakanaEndings(std::string_view line);
 
+// line with each kanji of classes.tsv spelling.cry-kanji (KANJI=KANA) written in its kana where it
+// starts an utterance, after anything but a letter or digit, and a run of kana.drawn-out or
+// mark.clip follows it before anything but a letter or digit (嫌ぁぁぁ いやぁぁぁ, 嫌っ！ いやっ！;
+// not 嫌っている, すごく嫌ー); a run of one drawn kana only before mark.exclaim or mark.comma
+// (嫌ぁ！, not 嫌ぁ……).
+std::string RespellKanjiCries(std::string_view line);
+
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
