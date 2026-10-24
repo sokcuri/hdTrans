@@ -80,6 +80,7 @@
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
+//= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
@@ -136,6 +137,7 @@
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (出るね, 始まるね, 思い出すね, 照れるね).
+//= verb.filling	Verbs of filling, loading and holding, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱい溜めて); written as words of a senses.tsv trigger.
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -2204,6 +2206,29 @@ verb.means-de	膨らま
 verb.means-de	膨らませ
 verb.means-de	終わ
 verb.means-de	終え
+verb.filling	積む
+verb.filling	積み込む
+verb.filling	詰める
+verb.filling	詰め込む
+verb.filling	溜める
+verb.filling	貯める
+verb.filling	注ぐ
+verb.filling	満たす
+verb.filling	浮かべる
+verb.filling	頬張る
+verb.filling	抱える
+noun.practice	経験
+noun.practice	経験値
+noun.practice	実績
+noun.practice	実戦
+noun.practice	練習
+noun.practice	訓練
+noun.practice	修行
+noun.practice	修練
+noun.practice	鍛錬
+noun.practice	研鑽
+noun.practice	場数
+noun.practice	功績
 
 verb.naming	呼ぶ
 verb.naming	書く

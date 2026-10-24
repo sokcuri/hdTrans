@@ -43,3 +43,9 @@ dict:jisjk:373504	容姿と優秀さで有名だ。	용모와 우수함으로 �
 dict:jisjk:373504	今の長波にぴったりさ、いくぜ！	지금의 장파에 딱 맞아, 간다!	fix	local-ending
 dict:jisjk:267449	彼女は優秀さ、美しさ、全てを持っている。	그녀는 우수함, 아름다움, 모든 것을 가지고 있다.	fix	local-ending
 dict:jisjk:267449	彼の優秀さ、誠実さ、勤勉さ。	그의 우수함, 성실함, 근면함.	fix	local-ending
+sense:いっぱい	目に涙をいっぱい浮かべた。	눈에 눈물을 가득 띄웠다.	fix	senses
+sense:いっぱい	箱にいっぱい詰めた。	상자에 가득 채웠다.	fix	senses
+sense:いっぱい	コップにいっぱい注ぐ。	컵에 가득 따른다.	fix	senses
+sense:いっぱい	お砂糖、いっぱい入れていい？	설탕, 많이 넣어도 좋아?	keep	local
+sense:一杯	コーヒーを一杯注ぐ。	커피를 한 잔 따른다.	keep	senses
+sense:いっぱい	経験もいっぱい積んだ。	경험도 많이 쌓았다.	keep	senses

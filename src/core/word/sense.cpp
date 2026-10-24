@@ -4,6 +4,7 @@
 #include <string>
 #include <string_view>
 
+#include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
 #include "core/text/utf8.h"
 #include "core/word/flush.h"
@@ -71,6 +72,17 @@ bool HasTag(const Item* it, std::string_view tag) {
 }
 
 bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
+    // class:SET matches a member of a word class of classes.tsv, written as a word trigger.
+    if (trigger.starts_with("class:")) {
+        const std::string_view name = trigger.substr(std::string_view("class:").size());
+        const dict::internal::WordClass* c =
+            dict::internal::FindClass(dict::internal::BuiltinClasses(), name, dict::internal::ClassHash(name));
+        if (c == nullptr) return false;
+        for (const std::string_view member : c->members) {
+            if (IsWord(x, member)) return true;
+        }
+        return false;
+    }
     if (!trigger.starts_with("sem:") && !trigger.starts_with("gram:")) return IsWord(x, trigger);
     const std::size_t at = trigger.find('@');
     if (!HasTag(x, trigger.substr(0, at))) return false;
