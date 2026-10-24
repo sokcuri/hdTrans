@@ -1,0 +1,49 @@
+# 규칙: LEX-41
+rule	input	expected	kind	layer
+dict:jisjk:4344	「お世辞でも嬉しいよ……」	has:「빈말이라도 기뻐	fix	defaults
+dict:jisjk:4344	さて、ナナイさんに電話してアポでも取っておくか。	has:약속이라도 취해	fix	defaults
+dict:jisjk:4344	「そこで本でも読んでてください」	has:책이라도 읽고	fix	defaults
+dict:jisjk:4344	まさか幻でも見てたのか？	has:환상이라도 보고	fix	defaults
+dict:jisjk:4344	「今度、物語でも書いてみれば？」	has:이야기라도 써	fix	defaults
+dict:jisjk:4344	……不知火に落ち度でも？	has:잘못이라도	fix	defaults
+dict:jisjk:4344	お腹でも空いた？仕方ない、何か作ってあげようか。	has:배라도 비었어	fix	defaults
+dict:jisjk:4344	ストロープワッフルでも食べる？	has:스트로프왓훌이라도 먹어	fix	defaults
+dict:jisjk:4344	提督、20時よ。ローズヒップティーでも一緒にいかが？	has:티라도 함께	fix	defaults
+dict:jisjk:4344	どんな困難な状況でも、屋代、頑張り抜きます。	has:상황이라도	fix	defaults
+dict:jisjk:4344	まぁ、水弾二発でも、使い方次第か。	has:발이라도	fix	defaults
+dict:jisjk:341410	演習でもそうだった。	has:연습에서도	fix	local
+dict:jisjk:341410	授業でもエースだ。	has:수업에서도	fix	local
+dict:jisjk:341410	演習でもする？	has:연습이라도	keep	local
+dict:jisjk:4346	海でも綺麗だ。	has:바다에서도	keep	local
+dict:jisjk:353546	そのうちでも一番だ。	머지않아에서도 제일이다.	keep	local
+cx:even-before-passive:20	家でも買うか。	has:집이라도 살까	fix	rewrites
+cx:even-before-passive:20	お風呂でもどう？	has:욕실이라도 어때	fix	rewrites
+cx:even-before-passive:20	家でも食べられる。	has:집에서도	keep	rewrites
+cx:even-before-passive:20	学校でも勉強する。	has:학교에서도	keep	rewrites
+cx:even-before-passive:30	王立学園の創立記念パーティーは、王都でも指折りの華やかな催しである。	has:왕도에서도	fix	rewrites
+cx:even-before-passive:30	婚約破棄って、現実でも起きるような事なの？	has:현실에서도	fix	rewrites
+cx:even-before-passive:30	アッツ沖やキスカ作戦でも働きました。	has:작전에서도	fix	rewrites
+cx:even-before-passive:30	（ああそうか。この街でもそれを知ってるのは数人だけ……。	has:거리에서도	fix	rewrites
+cx:even-before-passive:30	セリカやフランの前でも、普通に振る舞ってみるといい。	has:앞에서도	fix	rewrites
+cx:even-before-passive:30	温泉地でも錆（さ）びないように木製だった。	has:온천지에서도	fix	rewrites
+cx:even-before-passive:30	「フム……今度、ウチでも試してみようか」	has:우리에서도	fix	rewrites
+cx:even-before-passive:30	ここでもいい？	lacks:여기라도	keep	rewrites
+cx:even-before-passive:30	「忙しいなら出前でもいいんじゃない？」	has:배달이라도	keep	rewrites
+cx:even-before-passive:30	「……たとえ、ここが君の夢でも、三途の川でも……」	lacks:꿈에서도	keep	rewrites
+cx:even-before-passive:30	どんな世界でも、私は戦う。	lacks:세계에서도	keep	rewrites
+cx:even-before-passive:30	転生でも夢でもいいけど、	has:꿈이라도	keep	rewrites
+cx:even-before-passive:35	真珠湾、そして痛恨のミッドウェーでも、艦隊の眼として縦横無尽の活躍なのじゃ。	has:미드웨이에서도	fix	rewrites
+cx:even-before-passive:35	ヤバいねあいつら！ Kula GulfでもKolombangaraでも、あいつらは	has:Gulf에서도	fix	rewrites
+cx:even-before-passive:35	流星でも烈風でも問題ありません。	lacks:에서도	keep	rewrites
+cx:even-before-passive:35	食べる方でも、獲る方でも	lacks:에서도	keep	rewrites
+cx:even-before-passive:40	魔法の絨毯のあとフランス海軍でも活躍したんだぜ！	has:해군에서도	fix	rewrites
+cx:even-before-passive:40	ＳＯＲＤでも指折りのエース２人は、瞬く間に敵の数を減らしていった。	has:SORD에서도	fix	rewrites
+cx:even-before-passive:40	あっちでも頑張りました！	has:저쪽에서도	fix	rewrites
+cx:even-before-passive:40	提督でも頑張る。	lacks:에서도	keep	rewrites
+cx:even-before-passive:40	この時間でも頑張っていますね。	lacks:에서도	keep	rewrites
+cx:even-before-passive:40	どんな苦境でも戦えます！	lacks:에서도	keep	rewrites
+cx:even-before-passive:50	「ん……でも……」	has:하지만	fix	rewrites
+cx:even-before-passive:50	やだな……でも……。	has:하지만	fix	rewrites
+cx:even-before-passive:50	「いや、そうだけど……でも……」	has:하지만	fix	rewrites
+cx:even-before-passive:50	ちょっとでも休んで。	lacks:하지만	keep	rewrites
+cx:even-before-passive:50	お茶でも飲みますか。	lacks:하지만	keep	rewrites

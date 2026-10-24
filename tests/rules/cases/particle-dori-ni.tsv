@@ -1,0 +1,13 @@
+# 규칙: LEX-45
+rule	input	expected	kind	layer
+cx:ni-after-adverb:40	私の思い通りに動いた。	has:뜻대로 움직였다	fix	rewrites
+cx:ni-after-adverb:40	あなたならきっとわたくしの想像通りに動いてくれると思うわ	has:상상대로 움직여	fix	rewrites
+cx:ni-after-adverb:40	方法を伝えていくから、手順通りに片付けなさい、と。	has:순서대로 정리해	fix	rewrites
+cx:ni-after-adverb:40	過去数年分のバックナンバーが順番通りに重ねられている。	has:차례대로 거듭되어	fix	rewrites
+cx:ni-after-adverb:40	ほぼ予定どおりに出来たと言っていいだろう。	has:예정대로 할	fix	rewrites
+cx:ni-after-adverb:40	でもマンガの筋書き通りに悪役キャラになるのは全力で回避したい。	has:줄거리대로 악역	fix	rewrites
+cx:ni-after-adverb:40	若、あまり気負わずにいつも通りにやりましょう。	has:평소처럼 합시다	fix	rewrites
+cx:ni-after-adverb:40	ディアレットお嬢様のおっしゃる通りになさって下さいませ。	has:대로 하셔	fix	rewrites
+cx:ni-after-adverb:40	大きな通りに出た。	has:대로에	keep	rewrites
+cx:ni-after-adverb:40	通りに出てすぐのところに、お店があった。	lacks:대로 나오	keep	rewrites
+cx:ni-after-adverb:40	思い通りにならない	has:뜻대로가	keep	rewrites

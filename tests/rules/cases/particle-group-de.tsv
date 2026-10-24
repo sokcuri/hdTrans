@@ -1,0 +1,14 @@
+# 규칙: LEX-44
+rule	input	expected	kind	layer
+cx:de-scene:40	重巡戦隊でいきましょう！	has:전대로 갑시다	fix	rewrites
+cx:de-scene:40	第２艦隊で空母機動部隊を編成せよ！	has:제2함대로 항공	fix	rewrites
+cx:de-scene:40	編成した「第八駆逐隊」を含む艦隊で出撃し、オリョール海の敵を撃滅せよ！	has:함대로 출격해	fix	rewrites
+cx:de-scene:40	「第六駆逐隊」を含む艦隊で鎮守府正面へ展開、対潜哨戒を実施せよ！	has:함대로 진수부	fix	rewrites
+cx:de-scene:40	航空戦艦2隻を基幹とする艦隊で、西方海域カスガダマ島の敵勢力を撃破せよ！	has:함대로	fix	rewrites
+cx:de-scene:40	同艦隊で、本日中に演習で4回勝利せよ！	has:동함대로	fix	rewrites
+cx:de-scene:40	練度の高い艦隊で観艦式本番を実施する。	has:함대로 관함식	fix	rewrites
+cx:de-scene:40	航空戦艦2隻と航空巡洋艦2隻を基幹とする艦隊でカレー洋の制海権を握れ！	has:함대로 카레양의	fix	rewrites
+cx:de-scene:40	艦隊で一番強い。	has:함대에서	keep	rewrites
+cx:de-scene:40	艦隊で人気だ。	has:함대에서	keep	rewrites
+cx:de-scene:40	マ～ルヒ～トマルマル！ 艦隊ではこんな感じですよね！	has:함대에서는	keep	rewrites
+cx:de-scene:40	で、私はね、TaffyIIIって任務部隊で、護衛空母を守ってたの。	lacks:부대로	keep	rewrites

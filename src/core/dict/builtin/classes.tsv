@@ -151,6 +151,7 @@
 //= mark.voice-end	Marks that end the sentence a (ら)れ verb asks in (何を読まれているんですか？).
 //= mark.voice-question	Ends of a question after a (ら)れ verb, the last kana of its sentence or the mark after it (確認されますか, 読まれているんですか？).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
+//= noun.arena	Ends of the nouns of a realm, a setting, a group or an event in which something holds or is done: でも after one is 에서도, in it too (王都でも指折り 왕도에서도 손꼽히는, 作戦でも働いた 작전에서도 일했다), not before する, a verb of verb.example-object, どう or a word of permission.
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
@@ -178,6 +179,9 @@
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
 //= noun.return-here	Ends of the nouns of here, of a ship's home port and of one's right mind (正気): 戻る to them, or in a sentence that names here after it, comes back, 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다, 正気に戻る 제정신으로 돌아오다, 車に戻ったんだ、ここも 차로 돌아왔어).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
+//= noun.unit	Ends of the nouns of a fleet, a unit or a team that acts as one: で after one before a verb of verb.unit-operation is the group that does it, (으)로 (艦隊で出撃する 함대로 출격한다), not the scope (艦隊で一番 함대에서 제일).
+//= noun.goto-unit	Ends of the words of a span or a unit before which ごと shares out, 마다 (数時間ごと 몇 시간마다, 三ページごと), not 째.
+//= noun.matter-goto	Ends of the nouns before which ごと is 事, a matter (お願いごと, 面倒ごと, 争いごと), not the whole of a thing taken with it, 째.
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
 //= noun.scene-means	Nouns of noun.scene that also name a thing one uses: before a verb of verb.means-de their で is the means (夢で取り繕う 꿈으로 꾸미다, 夢で終わる 꿈으로 끝나다).
@@ -262,6 +266,7 @@
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
 //= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
+//= verb.example-object	Verbs of seeing, buying, eating, drinking, making and reading, whose object a noun in でも offers as an example: (이)라도, not the place 에서도 (家でも買うか 집이라도 살까, 本でも読め 책이라도 읽어).
 //= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
 //= word.liking	Starts of words of liking and delight that make a やばい right before or after them praise, 대박 (かわいすぎてやばい, やばい、可愛い).
@@ -295,10 +300,14 @@
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
+//= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
 //= word.ability-scope	Words that make the (ら)れ of their clause the potential: anyone, any time or anywhere, or by oneself (誰でも着られる, 自分で決められる).
 //= word.iru-form	Words of the dictionary that a form of いる or いらっしゃる starts (いろ 色, いよう 異様, いたって 至って, いたみ 痛み, いらっしゃい 어서 오세요): right after a て form the text is that いる or いらっしゃる (待っていろよ, 何していようかな, 悔しがっていたみたい, 洗っていらっしゃい).
+//= word.arena-predicate	Words of standing out or doing one's part (活躍, 頑張る, 有名, 最強): a でも right before one after a noun that is no person is 에서도, where it holds (フランス海軍でも活躍した 프랑스 해군에서도 활약했다).
+//= word.demo-concessive	Words that open a concession before the noun in でも, which then stays (이)라도 even in a setting (どんな苦境でも 어떤 곤경이라도, どんな世界でも).
+//= word.demo-permission	Starts of the words of permission and of being all right, before which a でも is (이)라도 even after a noun of noun.arena (ここでもいい 여기라도 좋아).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
@@ -314,6 +323,10 @@
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
+//= word.toha-define	Starts of the words right after a とは that ask or tell what or who it names, so it defines, (이)란, even after a person (先生とは誰ですか, メイドとは一体何).
+//= word.toha-partner	Starts of the words of difference, comparison and relationship that take what とは names as their partner, (와)과는 (それとは違う 그것과는 다르다, 答えとは裏腹に, あいつとは仲がいい); without one later in its clause とは defines, (이)란.
+//= word.yori-compare	Words after これより that make it a comparison, not the start of an action now (これより前, これより先, これよりまし).
+//= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
 
 adverb.degree-feeling	本当に
@@ -1882,6 +1895,71 @@ noun.attribute	態度
 noun.attribute	機嫌
 noun.attribute	具合
 noun.attribute	調子
+noun.arena	街
+noun.arena	表
+noun.arena	外
+noun.arena	地
+noun.arena	町
+noun.arena	村
+noun.arena	都
+noun.arena	国
+noun.arena	世界
+noun.arena	現実
+noun.arena	社会
+noun.arena	業界
+noun.arena	社交界
+noun.arena	戦場
+noun.arena	現場
+noun.arena	海軍
+noun.arena	陸軍
+noun.arena	軍
+noun.arena	部隊
+noun.arena	艦隊
+noun.arena	作戦
+noun.arena	海戦
+noun.arena	夜戦
+noun.arena	戦い
+noun.arena	戦闘
+noun.arena	決戦
+noun.arena	任務
+noun.arena	護衛
+noun.arena	演習
+noun.arena	訓練
+noun.arena	試合
+noun.arena	試験
+noun.arena	考査
+noun.arena	授業
+noun.arena	大会
+noun.arena	会議
+noun.arena	漫画
+noun.arena	作品
+noun.arena	小説
+noun.arena	ルート
+noun.arena	エンド
+noun.arena	意味
+noun.arena	今世
+noun.arena	前世
+noun.arena	来世
+noun.arena	アニメ
+noun.arena	中
+noun.arena	内
+noun.arena	ここ
+noun.arena	そこ
+noun.arena	あそこ
+noun.arena	こっち
+noun.arena	そっち
+noun.arena	あっち
+noun.arena	領
+noun.arena	土壌
+noun.arena	環境
+noun.arena	メーカー
+noun.arena	夢
+noun.arena	うち
+noun.arena	ウチ
+noun.arena	場面
+noun.arena	シーン
+noun.arena	話
+noun.arena	遠目
 
 noun.bound-pause	こと
 noun.bound-pause	事
@@ -2505,6 +2583,68 @@ noun.scene	世界
 noun.scene	夢
 noun.scene	環境
 noun.scene	空間
+noun.matter-goto	願い
+noun.matter-goto	面倒
+noun.matter-goto	厄介
+noun.matter-goto	揉め
+noun.matter-goto	争い
+noun.matter-goto	隠し
+noun.matter-goto	頼み
+noun.matter-goto	悩み
+noun.matter-goto	心配
+noun.matter-goto	困り
+noun.matter-goto	考え
+noun.matter-goto	習い
+noun.matter-goto	決まり
+noun.matter-goto	祝い
+noun.matter-goto	内緒
+noun.matter-goto	秘密
+noun.matter-goto	賭け
+noun.matter-goto	色
+noun.matter-goto	絵空
+noun.matter-goto	他人
+noun.matter-goto	人
+noun.matter-goto	綺麗
+noun.matter-goto	約束
+noun.matter-goto	もめ
+noun.matter-goto	かくし
+noun.matter-goto	たのみ
+noun.matter-goto	ねがい
+noun.goto-unit	時間
+noun.goto-unit	分
+noun.goto-unit	秒
+noun.goto-unit	日間
+noun.goto-unit	週間
+noun.goto-unit	年間
+noun.goto-unit	月間
+noun.goto-unit	ヶ月
+noun.goto-unit	か月
+noun.goto-unit	カ月
+noun.goto-unit	回
+noun.goto-unit	度
+noun.goto-unit	件
+noun.goto-unit	枚
+noun.goto-unit	個
+noun.goto-unit	ページ
+noun.goto-unit	章
+noun.goto-unit	行
+noun.goto-unit	段
+noun.goto-unit	歳
+noun.goto-unit	学年
+noun.goto-unit	クラス
+noun.goto-unit	種類
+noun.goto-unit	部門
+noun.goto-unit	地域
+noun.goto-unit	国
+noun.goto-unit	チーム
+noun.goto-unit	グループ
+noun.unit	艦隊
+noun.unit	隊
+noun.unit	チーム
+noun.unit	パーティー
+noun.unit	パーティ
+noun.unit	船団
+noun.unit	編成
 
 noun.scene-means	夢
 
@@ -3765,6 +3905,21 @@ verb.entrust	まかせる
 verb.entrust	任す
 verb.entrust	託す
 verb.entrust	委ねる
+verb.example-object	見る
+verb.example-object	買う
+verb.example-object	読む
+verb.example-object	食べる
+verb.example-object	食う
+verb.example-object	飲む
+verb.example-object	作る
+verb.example-object	淹れる
+verb.example-object	眺める
+verb.example-object	撮る
+verb.example-object	歌う
+verb.example-object	探す
+verb.example-object	借りる
+verb.example-object	頼む
+verb.example-object	聞く
 verb.extent	離れる
 verb.extent	はなれる
 verb.extent	下がる
@@ -4444,6 +4599,44 @@ verb.writing	描
 verb.writing	記
 verb.writing	記し
 verb.writing	しるし
+verb.unit-operation	出撃
+verb.unit-operation	出る
+verb.unit-operation	出発
+verb.unit-operation	抜錨
+verb.unit-operation	突撃
+verb.unit-operation	突入
+verb.unit-operation	突っ込
+verb.unit-operation	進撃
+verb.unit-operation	侵攻
+verb.unit-operation	展開
+verb.unit-operation	攻略
+verb.unit-operation	攻撃
+verb.unit-operation	撃滅
+verb.unit-operation	撃破
+verb.unit-operation	殲滅
+verb.unit-operation	掃討
+verb.unit-operation	捕捉
+verb.unit-operation	哨戒
+verb.unit-operation	護衛
+verb.unit-operation	援護
+verb.unit-operation	輸送
+verb.unit-operation	遠征
+verb.unit-operation	救出
+verb.unit-operation	実施
+verb.unit-operation	挑
+verb.unit-operation	向か
+verb.unit-operation	行
+verb.unit-operation	いき
+verb.unit-operation	いく
+verb.unit-operation	いこ
+verb.unit-operation	戦
+verb.unit-operation	叩
+verb.unit-operation	迎え撃
+verb.unit-operation	勝利
+verb.unit-operation	達成
+verb.unit-operation	編成
+verb.unit-operation	制
+verb.unit-operation	握
 
 word.ability-scope	誰でも
 word.ability-scope	誰にでも
@@ -4459,6 +4652,44 @@ word.ability-scope	一人で
 word.ability-scope	ひとりで
 word.ability-scope	独りで
 word.ability-scope	自力で
+word.arena-predicate	活躍
+word.arena-predicate	大活躍
+word.arena-predicate	奮戦
+word.arena-predicate	健闘
+word.arena-predicate	頑張る
+word.arena-predicate	働く
+word.arena-predicate	戦う
+word.arena-predicate	有名
+word.arena-predicate	人気
+word.arena-predicate	最強
+word.arena-predicate	指折り
+word.arena-predicate	屈指
+word.arena-predicate	評判
+word.arena-predicate	話題
+word.arena-predicate	配信
+word.arena-predicate	公開
+word.arena-predicate	掲載
+word.arena-predicate	放送
+word.arena-predicate	発売
+word.arena-predicate	販売
+word.arena-predicate	連載
+word.arena-predicate	確認
+word.demo-permission	いい
+word.demo-permission	よい
+word.demo-permission	良い
+word.demo-permission	良か
+word.demo-permission	よか
+word.demo-permission	構わ
+word.demo-permission	大丈夫
+word.demo-permission	平気
+word.demo-concessive	どんな
+word.demo-concessive	どの
+word.demo-concessive	いかなる
+word.demo-concessive	たとえ
+word.demo-concessive	例え
+word.demo-concessive	どれだけ
+word.demo-concessive	どれほど
+word.demo-concessive	いくら
 
 word.iru-form	いろ
 word.iru-form	いよう
@@ -4702,6 +4933,142 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+word.yori-compare	方
+word.yori-compare	ほう
+word.yori-compare	まし
+word.yori-compare	マシ
+word.yori-compare	もっと
+word.yori-compare	ずっと
+word.yori-compare	前
+word.yori-compare	先
+word.yori-compare	後
+word.yori-compare	上
+word.yori-compare	下
+word.yori-compare	以上
+word.yori-compare	以下
+word.yori-compare	多
+word.yori-compare	少な
+word.yori-compare	勝
+word.yori-compare	優れ
+word.yori-compare	劣
+word.yori-compare	上回
+word.yori-compare	下回
+word.yori-degree	ずっと
+word.yori-degree	もっと
+word.yori-degree	遥かに
+word.yori-degree	はるかに
+word.yori-degree	一層
+word.yori-degree	少し
+word.yori-degree	やや
+word.yori-degree	幾分
+word.yori-degree	よほど
+word.yori-degree	断然
+word.toha-partner	違
+word.toha-partner	ちが
+word.toha-partner	異な
+word.toha-partner	別に
+word.toha-partner	別世界
+word.toha-partner	別人
+word.toha-partner	別物
+word.toha-partner	別れ
+word.toha-partner	お別れ
+word.toha-partner	比
+word.toha-partner	逆
+word.toha-partner	裏腹
+word.toha-partner	大違い
+word.toha-partner	雲泥
+word.toha-partner	正反対
+word.toha-partner	対照
+word.toha-partner	差
+word.toha-partner	無縁
+word.toha-partner	無関係
+word.toha-partner	関係
+word.toha-partner	縁
+word.toha-partner	仲
+word.toha-partner	面識
+word.toha-partner	腹違い
+word.toha-partner	似
+word.toha-partner	そっくり
+word.toha-partner	付き合
+word.toha-partner	知り合
+word.toha-partner	因縁
+word.toha-partner	段違い
+word.toha-partner	桁違い
+word.toha-partner	対極
+word.toha-partner	盟友
+word.toha-partner	親友
+word.toha-partner	友人
+word.toha-partner	友達
+word.toha-partner	お友達
+word.toha-partner	仲間
+word.toha-partner	幼馴染
+word.toha-partner	顔見知り
+word.toha-partner	戦友
+word.toha-partner	兄弟
+word.toha-partner	姉妹
+word.toha-partner	同期
+word.toha-partner	かけ離れ
+word.toha-partner	一線
+word.toha-partner	はぐれ
+word.toha-partner	一変
+word.toha-partner	噛み合
+word.toha-partner	訳が違
+word.toha-partner	わけが違
+word.toha-partner	わけがちが
+word.toha-partner	一味違
+word.toha-partner	上手く
+word.toha-partner	うまく
+word.toha-partner	一戦
+word.toha-partner	交え
+word.toha-partner	おさらば
+word.toha-partner	オサラバ
+word.toha-partner	さらば
+word.toha-partner	馬が
+word.toha-partner	お会い
+word.toha-partner	出来が
+word.toha-partner	色々あ
+word.toha-partner	いろいろあ
+word.toha-partner	遠ざか
+word.toha-partner	つなが
+word.toha-partner	繋が
+word.toha-partner	初対面
+word.toha-partner	接点
+word.toha-partner	連絡
+word.toha-partner	どうな
+word.toha-partner	どうなっ
+word.toha-partner	どこまで
+word.toha-partner	何でもな
+word.toha-partner	なんでもな
+word.toha-partner	対称
+word.toha-partner	左右対称
+word.toha-partner	親し
+word.toha-partner	仲良
+word.toha-partner	仲が
+word.toha-partner	関わ
+word.toha-partner	どうか
+word.toha-partner	いか
+word.toha-partner	いき
+word.toha-partner	話が別
+word.toha-partner	当たらず
+word.toha-define	何
+word.toha-define	なに
+word.toha-define	なん
+word.toha-define	どんな
+word.toha-define	どういう
+word.toha-define	どのような
+word.toha-define	どの
+word.toha-define	一体
+word.toha-define	いったい
+word.toha-define	如何
+word.toha-define	いかなる
+word.toha-define	なんぞ
+word.toha-define	どなた
+word.toha-define	誰
+word.toha-define	だれ
+word.toha-define	つまり
+word.toha-define	すなわち
+word.toha-define	即ち
+word.toha-define	要するに
 sound.quoting	という
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
