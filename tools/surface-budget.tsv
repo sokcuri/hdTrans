@@ -66,7 +66,7 @@ src/core/word/conjugation.cpp	3	0	0	0	0	0	0	0	0
 src/core/word/connective.cpp	28	9	4	1	3	0	0	0	31
 src/core/word/constraints.cpp	136	16	23	6	120	5	0	0	69
 src/core/word/document_senses.cpp	0	18	0	2	18	1	2	0	1
-src/core/word/grammar.cpp	341	329	44	12	253	18	10	33	390
+src/core/word/grammar.cpp	340	320	44	12	253	18	10	24	381
 src/core/word/item.cpp	0	0	6	0	0	6	0	1	13
 src/core/word/kana.cpp	21	5	0	0	0	20	1	0	51
 src/core/word/kana.h	0	0	0	0	0	3	0	0	1
@@ -75,7 +75,7 @@ src/core/word/misread.cpp	3	0	1	0	0	19	4	0	10
 src/core/word/passes.cpp	0	0	0	0	0	0	0	19	18
 src/core/word/selectors.cpp	0	0	0	0	0	0	0	6	3
 src/core/word/sense.cpp	20	7	19	3	24	3	2	8	27
-src/core/word/strings.h	121	15	7	1	3	0	0	0	0
+src/core/word/strings.h	118	12	7	1	3	0	0	0	0
 src/core/word/terminal.cpp	3	0	3	1	3	0	0	7	9
 src/core/word/terminal.h	12	3	13	2	24	0	0	0	0
 src/core/word/util.cpp	3	0	0	0	0	14	4	0	13

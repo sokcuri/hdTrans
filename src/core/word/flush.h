@@ -44,11 +44,10 @@ void ApplyNegatives(Flusher& f);
 
 // Helpers of the text-path passes. TakeTarget (sense.cpp) selects the candidate of class
 // with target, or writes target over the selected one. SelectLemma (grammar.cpp) selects
-// the first entry whose dictionary form is lemma (or starts with prefix) and reports
-// whether there was one. Thing and Person classify dictionary attributes.
+// the first entry whose dictionary form is lemma and reports whether there was one. Thing
+// and Person classify dictionary attributes.
 void TakeTarget(Item* it, char cls, std::string_view target, Selection source = {Provenance::Rewrite});
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma);
-bool SelectLemmaPrefix(Flusher& f, Item* it, std::string_view prefix);
 bool Thing(std::string_view attr);
 // The dictionary form of entry slot of it (an empty string for no entry).
 std::string ItemLemma(Flusher& f, const Item* it, int slot);
@@ -81,8 +80,6 @@ void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.
 void OwnPassives(Flusher& f);
-void PositiveIke(Flusher& f);
-void NegativeCopula(Flusher& f);
 // A singular personal pronoun before the plural suffix たち, 達, ら or ども reads as its
 // plural and the suffix as nothing: 나 우리, 저 저희, 너 너희 (ボクたち 나들 → 우리).
 void PluralPronoun(Flusher& f);

@@ -60,10 +60,11 @@ HD_TEST(constructions_parse_maps) {
         "//= a\tafter First\tdoc\n",
         "cx:a:10\t\t&&4 C+0== \"가다\" G+0== \"HdCt\" O+1== \"R는\" F-1== \"person\"\tmap-lemma@-1 @subject set-verb \"가다\"\t\n",
         "cx:a:20\t\tO+0== @Rnoun.event\tmap-target @subject\t\n",
+        "cx:a:30\t\tF+0== \"selected\"\tselect-map@-1 @subject\t\n",
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
     HD_CHECK_EQ(Errors(t), std::string());
-    HD_REQUIRE(t.maps.size() == 1 && t.rows.size() == 2);
+    HD_REQUIRE(t.maps.size() == 1 && t.rows.size() == 3);
     HD_CHECK_EQ(t.maps[0].name, std::string("subject"));
     HD_CHECK(t.maps[0].pairs == (std::vector<std::pair<std::string, std::string>>{{"나", "내"}, {"저", "제"}}));
     HD_REQUIRE(t.rows[0].actions.size() == 2);
@@ -72,6 +73,7 @@ HD_TEST(constructions_parse_maps) {
     HD_CHECK(t.rows[0].actions[1].verb == internal::CxVerb::SetVerb);
     HD_CHECK_EQ(t.rows[0].actions[1].value, std::string("가다"));
     HD_CHECK(t.rows[1].actions[0].verb == internal::CxVerb::MapTarget);
+    HD_CHECK(t.rows[2].actions[0].verb == internal::CxVerb::SelectMap && t.rows[2].actions[0].map == 0);
 }
 
 HD_TEST(constructions_parse_select_and_tail) {

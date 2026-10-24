@@ -16,6 +16,7 @@
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
+//= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
@@ -297,6 +298,12 @@ ending.conjunctive	から
 ending.conjunctive	ので
 ending.conjunctive	のに
 ending.conjunctive	ながら
+ending.negative-start	な
+ending.negative-start	ね
+ending.negative-start	ませ
+ending.negative-start	ず
+ending.negative-start	ぬ
+ending.negative-start	ん
 
 ending.rare-passive	てい
 ending.rare-passive	てる

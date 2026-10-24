@@ -21,10 +21,14 @@ cx:adjective-neighbours:20		&&8 F+0== "selected" F+1== "selected" ||2 P+0== "7" 
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
 //= geot-before-mitai	after adjectival-ni	An ending in 던 before a みたい read as an adjective (%) takes the noun 것: 来てたみたい 오고 있었던 것 같다.
 cx:geot-before-mitai:10		&&4 D+0== "L%" F+0== "mitai-like" ||2 P-1== "4" P-1== "7" Y-1== "R던"	replace-ending-tail@-1 "던" "던 것"	来てたみたいだ 오고 있었던 것 같다
-//= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
+//= positive-ike	after geot-before-mitai	The いけ read 안 되다 is 갈 수 있다 (いける, いけそう), unless a negative follows it: an ending, or the next word after no ending, that starts with one of ending.negative-start (いけない, いけません).
+cx:positive-ike:10		&&4 S+0== "いけ" D+0== "L안" !1 U+0== @Lending.negative-start ||2 U+0!= "" !1 S+1== @Lending.negative-start	select-target "L갈 수"	まだいける 아직 갈 수 있다
+//= copula-de-aru	after positive-ike	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
 cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
 cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다
-//= subject-before-ga	after NegativeCopula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
+//= negative-copula	after copula-de-aru	The ではな read (은)는 아니다 after a noun is (이)가 아니다, and a pronoun before it takes the candidate of its subject form (내가 아니다), unless a contrast goes on after it (大した傷ではないが) or the noun reads as an adverb in 히.
+cx:negative-copula:10		&&8 S+0== "ではな" F-1!= "conjugating" K-1== "N" L-1!= "R히" L-1!= "," F+0!= "contrast" L+0== "L(은)는 아니" C+0== "L(이)가 아니"	select-lemma "L(이)가 아니" select-map@-1 @subject-pronoun	言葉ではない 말이 아니다, 俺ではない 내가 아니다
+//= subject-before-ga	after negative-copula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
 cx:subject-before-ga:10		&&4 S+0== "が" F-1== "selected" L+0== "(을)를" F-1!= "conjugating"	map-target@-1 @plain-pronoun	私が好き 나를 좋아해
 cx:subject-before-ga:20		&&3 D+0== "L(이)가 " F-1== "selected" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺じゃない 내가 아니다
 cx:subject-before-ga:30		&&5 S+0== "の" F-1== "selected" L+0== "(이)가" F+1== "conjugating" S+1== "~を"	select-lemma "의"	

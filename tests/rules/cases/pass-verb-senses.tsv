@@ -1,11 +1,11 @@
 rule	input	expected	kind	layer
-rewrite:positive-ike	まだまだいける	아직도 갈 수 있다	fix	rewrites
-rewrite:positive-ike	いつでもいけますよ	언제라도 갈 수 있어요	fix	rewrites
-rewrite:positive-ike	これならいけそうです！	이것이라면 갈 수 있을 것 같습니다!	fix	rewrites
-rewrite:positive-ike	いけるかも…	갈 수 있을지도…	fix	rewrites
-rewrite:positive-ike	ここで遊んではいけない。	여기서 놀아선 안 된다.	keep	rewrites
-rewrite:positive-ike	いけません。	안 됩니다.	keep	rewrites
-rewrite:positive-ike	行かなければいけない。	가야 한다.	keep	rewrites
+cx:positive-ike:10	まだまだいける	아직도 갈 수 있다	fix	rewrites
+cx:positive-ike:10	いつでもいけますよ	언제라도 갈 수 있어요	fix	rewrites
+cx:positive-ike:10	これならいけそうです！	이것이라면 갈 수 있을 것 같습니다!	fix	rewrites
+cx:positive-ike:10	いけるかも…	갈 수 있을지도…	fix	rewrites
+cx:positive-ike:10	ここで遊んではいけない。	여기서 놀아선 안 된다.	keep	rewrites
+cx:positive-ike:10	いけません。	안 됩니다.	keep	rewrites
+cx:positive-ike:10	行かなければいけない。	가야 한다.	keep	rewrites
 cx:go-not-say:10	どこまでいったんですか？	어디까지 갔습니까?	fix	rewrites
 cx:go-not-say:10	学校までいった。	학교까지 갔다.	fix	rewrites
 cx:go-not-say:10	後頭部からいったしな	후두부에서 갔고	fix	rewrites

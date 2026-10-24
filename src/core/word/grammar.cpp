@@ -360,14 +360,6 @@ void WriteLexicalPassive(Flusher& f, Item* it) {
     for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, lexical);
 }
 
-// The subject form of 나, 저 and 너 (before 가), or "" for other lemmas.
-std::string_view SubjectPronoun(std::string_view lemma) {
-    if (lemma == "나") return "내";
-    if (lemma == "저") return "제";
-    if (lemma == "너") return "네";
-    return {};
-}
-
 // Whether the text after ではな is a contrast that goes on (大した傷ではないが), which keeps the
 // topic particle.
 bool Contrast(std::string_view rest) {
@@ -379,15 +371,6 @@ bool Contrast(std::string_view rest) {
         for (const std::string_view p : dict::ClassMembers("particle.contrast")) {
             if (after.starts_with(p)) return true;
         }
-    }
-    return false;
-}
-
-// Whether text starts like a negative ending: な, ね (ねえ), ませ, ず, ぬ, ん.
-bool NegativeStart(std::string_view text) {
-    constexpr std::string_view kStarts[] = {kJaNa, kJaNe, kJaMase, kJaZu, kJaNu, kJaN};
-    for (const std::string_view p : kStarts) {
-        if (text.starts_with(p)) return true;
     }
     return false;
 }
@@ -453,17 +436,6 @@ bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {
         if (output::Lemma(it->EntryText(slot), f.families) == lemma) {
-            it->SelectCandidate(slot, {Provenance::Rewrite});
-            return true;
-        }
-    }
-    return false;
-}
-
-bool SelectLemmaPrefix(Flusher& f, Item* it, std::string_view prefix) {
-    const int count = static_cast<int>(it->group->entries.size());
-    for (int slot = 0; slot < count; slot++) {
-        if (output::Lemma(it->EntryText(slot), f.families).starts_with(prefix)) {
             it->SelectCandidate(slot, {Provenance::Rewrite});
             return true;
         }
@@ -724,42 +696,6 @@ void RespectfulPassive(Flusher& f) {
         // The state of the passive (gram Dx, 書かれている 쓰여 있다) is no state of the active.
         if (Entry* e = it->group->At(it->selected); e != nullptr) DropGrammarCode(e->gattr, "Dx");
         it->AssignEntrySurface(it->selected, HonorificProgressive(f, it) ? plain : target);
-    }
-}
-
-void PositiveIke(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (it->group->surface != kJaIke || !it->EntryText(it->selected).starts_with(kKoAn)) continue;
-        const std::string_view direct = it->DirectSurface();
-        if (NegativeStart(direct) || (direct.empty() && it->next != nullptr && NegativeStart(it->next->group->surface))) {
-            continue;
-        }
-        const int count = static_cast<int>(it->group->entries.size());
-        for (int slot = 0; slot < count; slot++) {
-            if (it->EntryText(slot).starts_with(kKoGalSu)) {
-                it->SelectCandidate(slot, {Provenance::Rewrite});
-                break;
-            }
-        }
-    }
-}
-
-void NegativeCopula(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        Item* p = it->prev;
-        if (p == nullptr) continue;
-        const Entry* pe = p->group->At(p->selected);
-        if (p->detail->cls != kDetailInfo || pe == nullptr || pe->cls != 'N') continue;
-        const std::string plemma = output::Lemma(p->EntryText(p->selected), f.families);
-        if (plemma.ends_with("히") || TrimSpace(plemma) == ",") continue;
-        if (it->group->surface != "ではな" || Contrast(From(it->text, it->start + static_cast<long>(it->group->surface.size())))) {
-            continue;
-        }
-        if (!output::Lemma(it->EntryText(it->selected), f.families).starts_with("(은)는 아니") ||
-            !SelectLemmaPrefix(f, it, "(이)가 아니")) {
-            continue;
-        }
-        if (const std::string_view subject = SubjectPronoun(plemma); !subject.empty()) SelectLemma(f, p, subject);
     }
 }
 

@@ -219,6 +219,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
+        {"select-map", CxVerb::SelectMap},
         {"set-verb", CxVerb::SetVerb},
     };
     rules::Tokens tokens(text);
@@ -243,7 +244,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail("unknown action");
             break;
         }
-        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget) {
+        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -650,6 +651,21 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
                     it->AssignEntrySurface(it->selected, to, source);
                     break;
                 }
+            }
+            break;
+        }
+        case internal::CxVerb::SelectMap: {
+            const std::string key = ItemLemma(f, it, it->selected);
+            for (const auto& [from, to] : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (from != key) continue;
+                const int count = static_cast<int>(it->group->entries.size());
+                for (int slot = 0; slot < count; slot++) {
+                    if (ItemLemma(f, it, slot) == to) {
+                        it->SelectCandidate(slot, source);
+                        break;
+                    }
+                }
+                break;
             }
             break;
         }
