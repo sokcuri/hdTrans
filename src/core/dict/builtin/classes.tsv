@@ -357,6 +357,7 @@
 //= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
 //= word.soreni-follow	Starts of the words after which それに is the thing taken up, 거기에, not the conjunction 게다가 (それによって, それに伴って, それに比例して).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
+//= word.survival	Words of life, wounds, illness, escape and rescue before which 助かる in the same sentence is surviving, 살아나다 (命が助かった 목숨을 건졌다, 患者は助からない), not help or relief.
 
 adverb.degree-feeling	本当に
 adverb.degree-feeling	ほんとに
@@ -5470,6 +5471,45 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+word.survival	命
+word.survival	いのち
+word.survival	生命
+word.survival	傷
+word.survival	怪我
+word.survival	けが
+word.survival	ケガ
+word.survival	重傷
+word.survival	致命傷
+word.survival	患者
+word.survival	病
+word.survival	病気
+word.survival	病人
+word.survival	手術
+word.survival	治療
+word.survival	医者
+word.survival	死
+word.survival	死ぬ
+word.survival	溺れ
+word.survival	全滅
+word.survival	生存
+word.survival	遭難
+word.survival	救助
+word.survival	救出
+word.survival	毒
+word.survival	出血
+word.survival	輸血
+word.survival	殺す
+word.survival	逃げる
+word.survival	這い上がる
+word.survival	隠れる
+word.survival	避難
+word.survival	脱出
+word.survival	刺され
+word.survival	撃たれ
+word.survival	刺す
+word.survival	撃つ
+word.survival	生き残る
+word.survival	生き延びる
 word.soreni-follow	対
 word.soreni-follow	関
 word.soreni-follow	よっ
