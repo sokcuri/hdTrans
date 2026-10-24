@@ -534,10 +534,8 @@ bool RuleL67([[maybe_unused]] Item* p) {
 
 // local 68
 //     end.src == "に" and pos[-1] is 1** and end.ko := "1이"
-//     pos[-1] is 1**
 bool RuleL68([[maybe_unused]] Item* p) {
-    return (GobiSrcEq(p, 0, "に"sv) && PumsaEq(p, -1, "1**"sv) && GobiDstSet(p, 0, "1이"sv)) ||
-           PumsaEq(p, -1, "1**"sv);
+    return (GobiSrcEq(p, 0, "に"sv) && PumsaEq(p, -1, "1**"sv) && GobiDstSet(p, 0, "1이"sv));
 }
 
 // local 69
@@ -1106,16 +1104,16 @@ bool RuleL125([[maybe_unused]] Item* p) {
 // local 126
 //     pos[-1] is 4**|7**|8**
 //     src[-1] == "できるように" and pos[-1] is 1**
-//     (sem[+1] has UTs or sem[+1] has USe or sem[+1] has UTh)
+//     sem[-1] lacks VHn and (sem[+1] has UTs or sem[+1] has USe or sem[+1] has UTh)
 //     src[+1] == "こと" and (src[+2] starts "です" or src[+2] == "でしたが")
 //     src[-1] == "、" and pos[-2] is 4**|7**|8**
 //     pos[-1] is 1** and sem[-1] has UMe and src[+1] == "こと" and src[+2] == "から"
 bool RuleL126([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "4**7**8**"sv) ||
            (SrcEq(p, -1, "できるように"sv) && PumsaEq(p, -1, "1**"sv)) ||
-           (AttrEq(p, 1, "UTs"sv) ||
+           (AttrNe(p, -1, "VHn"sv) && (AttrEq(p, 1, "UTs"sv) ||
            AttrEq(p, 1, "USe"sv) ||
-           AttrEq(p, 1, "UTh"sv)) ||
+           AttrEq(p, 1, "UTh"sv))) ||
            (SrcEq(p, 1, "こと"sv) && (SrcEq(p, 2, "Lです"sv) ||
            SrcEq(p, 2, "でしたが"sv))) ||
            (SrcEq(p, -1, "、"sv) && PumsaEq(p, -2, "4**7**8**"sv)) ||
@@ -2504,10 +2502,8 @@ bool RuleL266([[maybe_unused]] Item* p) {
 
 // local 267
 //     pos[-1] is 2** and sem[-2] has VPt|VFd
-//     sem[-3] under VFd
 bool RuleL267([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VPtVFd"sv)) ||
-           AttrMinusEq(p, -3, "VFd"sv);
+    return (PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VPtVFd"sv));
 }
 
 // local 268
@@ -2749,10 +2745,8 @@ bool RuleL297([[maybe_unused]] Item* p) {
 
 // local 298
 //     pos[-1] is 1** and sem[-1] under VHn and pos[+1] is 4** and sem[+1] has UTs
-//     pos[+1] is 7**|8**
 bool RuleL298([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UTs"sv)) ||
-           PumsaEq(p, 1, "7**8**"sv);
+    return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UTs"sv));
 }
 
 // local 299
@@ -4506,7 +4500,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL65, 0x7a8608ebe74be393ull},
     {RuleL66, 0x6fbe657463f4cafcull},
     {RuleL67, 0x22f8ca20895b391dull},
-    {RuleL68, 0xef82ebb6707bde90ull},
+    {RuleL68, 0xfae94020dffc795cull},
     {RuleL69, 0x2f066365431199e0ull},
     {RuleL70, 0x959781bbf950809cull},
     {RuleL71, 0x921504b148faf3e8ull},
@@ -4564,7 +4558,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL123, 0x99e20f43a4f65766ull},
     {RuleL124, 0xbb1e107e37f49179ull},
     {RuleL125, 0x8235363acd731940ull},
-    {RuleL126, 0x470def2162c6893dull},
+    {RuleL126, 0xe17ff12cc8ddc874ull},
     {RuleL127, 0x43dbd03df3b8e3cbull},
     {RuleL128, 0xe073a2c392a97b83ull},
     {RuleL129, 0x33fc731cc8c927adull},
@@ -4705,7 +4699,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL264, 0x53bf954223712ce8ull},
     {RuleL265, 0x1c842c4e602d92c6ull},
     {RuleL266, 0xa891d454df7ed39eull},
-    {RuleL267, 0xcc5a01ebd286a44dull},
+    {RuleL267, 0x3b667792b6ba1b87ull},
     {RuleL268, 0xb86131a1e95df235ull},
     {RuleL269, 0x5a9d2c6301b3344bull},
     {RuleL270, 0xcec846a9eb803db8ull},
@@ -4736,7 +4730,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL295, 0x486c352d7016a6b0ull},
     {RuleL296, 0x32247b3073b6942full},
     {RuleL297, 0xbaec7ae0d6126ed9ull},
-    {RuleL298, 0x3ca4b88394a7f11cull},
+    {RuleL298, 0x1bb47bbac93a48ecull},
     {RuleL299, 0xfd3b38a005cbf43cull},
     {RuleL300, 0x3d9fac7abdf1f608ull},
     {RuleL301, 0x45558a319bc9e9f9ull},

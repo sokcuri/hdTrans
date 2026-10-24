@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:jisjk:4032	友人との雑談。	!rule:dict:jisjk:4032	fix	local
+dict:jisjk:4032	会長との約束を果たした。	회장과의 약속을 완수했다.	fix	local
+dict:jisjk:4032	『撤退』との命令が下った。	rule:dict:jisjk:4032=(이)라는	keep	local
+dict:jisjk:4032	『改善を』との指示があった。	rule:dict:jisjk:4032=(이)라는	keep	local
+dict:jisjk:115361	あとは上が判断する。	!rule:dict:jisjk:115361	fix	local
+dict:jisjk:115361	あと5分だ。	rule:dict:jisjk:115361=앞으로	keep	local
+dict:jisjk:6285	犬などの小さい動物。	!rule:dict:jisjk:6285	fix	local
+dict:jisjk:6285	彼などの話す言葉。	rule:dict:jisjk:6285=등이	keep	local
+dict:jisjk:265737	なしにすることはできない。	!rule:dict:jisjk:265737	fix	local
+dict:jisjk:265737	勉強のできない人だ。	rule:dict:jisjk:265737=할 수 $FA@	keep	local
+dict:jisjk:5727	水を刺し辛かった。	!rule:dict:jisjk:5727	fix	local
+dict:jisjk:5727	このカレーは辛い。	이 카레는 맵다.	keep	defaults
+dict:jisjk:2278	団体さんみたいだな。	!rule:dict:jisjk:2278	fix	local
+dict:jisjk:2278	猫みたいに眠る。	rule:dict:jisjk:2278=%B3@	keep	local
