@@ -803,7 +803,11 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
         }
         case CxField::Gram: {
             const std::string_view codes = it->GAttr(it->selected);
-            for (std::size_t off = 0; off < a.value.size() && !v; off += 2) v = Has(codes, std::string_view(a.value).substr(off, 2));
+            for (std::size_t off = 0; off < a.value.size() && !v; off += 2) {
+                const std::string_view code = std::string_view(a.value).substr(off, 2);
+                // Qw: a question word is the word or comes before it in its sentence, as in rules.
+                v = code == "Qw" ? it->AfterQuestionWord() : Has(codes, code);
+            }
             break;
         }
         case CxField::FirstWord: {

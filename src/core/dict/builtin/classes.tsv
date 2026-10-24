@@ -27,6 +27,7 @@
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= counter.added	Counters of things and actions that もう before a number adds one or more of (もう一匹 한 마리 더, もう１錠 1정 더); no counter of a time, an age, a floor or an order, after which もう is the time reached (もう三年 벌써 3년).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
+//= ending.final-quote	Ends of a predicate that close what was said or thought, after which a separate と quotes it (熱いんじゃないかなぁと想像して, 何があったんだと心配そうに, 見たいんだと): sentence particles, the explanatory んだ, たい, the past and a reason or condition said as a wish (から, ば); not だろう or ます, whose と is also a concession or a condition (だろうとなんだろうと, いただけますと).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
@@ -76,6 +77,7 @@
 //= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
+//= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
@@ -112,6 +114,7 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
+//= noun.quote-request	Verbal nouns of asking, wishing, answering and ordering whose する takes what is asked or wished with って (静かにってお願いした 조용히라고 부탁했다, 場所って希望した 장소라고 희망했다).
 //= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
 //= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
@@ -200,6 +203,7 @@
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
+//= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
@@ -214,7 +218,7 @@
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
-//= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
+//= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
@@ -2278,6 +2282,7 @@ question.wonder-not	どうにか
 question.wonder-not	どうやら
 question.wonder-not	どうでも
 question.wonder-not	どうにも
+question.wonder-not	どうしようも
 question.wonder-not	どれも
 question.wonder-not	どれか
 question.wonder-not	どの道
@@ -3252,6 +3257,9 @@ verb.state-teiru	見え
 verb.state-teiru	聞こえ
 verb.state-teiru	想
 
+verb.teach	教える
+verb.teach	おしえる
+
 verb.thinking-start	思
 verb.thinking-start	おもっ
 verb.thinking-start	おもう
@@ -3439,12 +3447,22 @@ word.partner-to	共に
 word.partner-to	ともに
 word.partner-to	同じ
 word.partner-to	おなじ
-word.partner-to	違
-word.partner-to	ちが
+word.partner-to	違う
+word.partner-to	違っ
+word.partner-to	違い
+word.partner-to	違わ
+word.partner-to	ちがう
+word.partner-to	ちがっ
+word.partner-to	ちがい
+word.partner-to	ちがわ
 word.partner-to	比べ
 word.partner-to	くらべ
 word.partner-to	異な
 word.partner-to	似
+word.partner-to	同時
+word.partner-to	どうじ
+word.partner-to	同様
+word.partner-to	等し
 word.recall-interjection	あ
 word.recall-interjection	あっ
 word.recall-interjection	あー
@@ -3580,3 +3598,65 @@ word.offer-cue	みんなで
 word.offer-cue	皆で
 word.offer-cue	いったん
 word.offer-cue	一旦
+
+noun.quote-request	希望
+noun.quote-request	要望
+noun.quote-request	要求
+noun.quote-request	お願い
+noun.quote-request	依頼
+noun.quote-request	返事
+noun.quote-request	返答
+noun.quote-request	注文
+noun.quote-request	命令
+noun.quote-request	指示
+noun.quote-request	お礼
+noun.quote-request	連絡
+noun.quote-request	合図
+noun.quote-request	宣言
+noun.quote-request	約束
+noun.quote-request	提案
+noun.quote-request	主張
+noun.quote-request	説明
+noun.quote-request	報告
+
+ending.final-quote	か
+ending.final-quote	かな
+ending.final-quote	かなぁ
+ending.final-quote	かなあ
+ending.final-quote	かしら
+ending.final-quote	な
+ending.final-quote	なぁ
+ending.final-quote	なあ
+ending.final-quote	ね
+ending.final-quote	ねぇ
+ending.final-quote	よ
+ending.final-quote	よね
+ending.final-quote	わ
+ending.final-quote	わね
+ending.final-quote	ぞ
+ending.final-quote	ぜ
+ending.final-quote	んだ
+ending.final-quote	のだ
+ending.final-quote	んです
+ending.final-quote	のです
+ending.final-quote	たい
+ending.final-quote	た
+ending.final-quote	から
+ending.final-quote	ば
+
+ko.utterance-end	다
+ko.utterance-end	요
+ko.utterance-end	라
+ko.utterance-end	마
+ko.utterance-end	야
+ko.utterance-end	아
+ko.utterance-end	어
+ko.utterance-end	워
+ko.utterance-end	해
+ko.utterance-end	까
+ko.utterance-end	네
+ko.utterance-end	지
+ko.utterance-end	군
+ko.utterance-end	자
+ko.utterance-end	줘
+ko.utterance-end	래
