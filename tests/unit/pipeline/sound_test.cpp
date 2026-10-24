@@ -219,6 +219,9 @@ HD_TEST(pipeline_sound) {
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        // A drawn よ after a て form at the start of the text: no character before the て.
+        {"てよー", "てよ～"},
+        {"でよーーー。聞いてるの？", "でよ～。聞いてるの？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
