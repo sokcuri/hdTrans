@@ -97417,7 +97417,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三函ノ湯	사바코노유	N130	VPl		GN				jisjk:215513		
 三函ノ湯	사바코노유	N130	VPl		GN				jisjk:215514		
 三刀屋町	미토야쵸	I130	QCTVPl		GN				jisjk:331181		
-三分	3 분	N110		NJNdCt	GN				jisjk:344434		
+三分	3분	N110		NJNdCt	GN				jisjk:344434		
 三分	미분	N130	QCTVPL		GN				jisjk:344436		
 三分一	삼부이치	N130	QCTVPl		GN				jisjk:296823		
 三分市	삼부이치	N130	QCTVPl		GN				jisjk:296824		
@@ -114867,9 +114867,7 @@ ttt	ttt	K110			GN				jisjk:201744
 二階建	이층 건물	I110	VPl		GN				jisjk:79779		
 二階建て	이층건물	I110			GN				jisjk:79780		
 二階町	니카이마치	N130	QCTVPl		GN				jisjk:316021		
-二面	이면	N110			GN				jisjk:31130		
-二面	후타오모테	N130	QCTVPl		GN				jisjk:326535		
-二面性	이면성	I110			GN				jisjk:79812		
+二面性	양면성	I110			GN				jisjk:79812		
 二項係数	이항 계수	N110			GN				jisjk:247757		
 二項分布	이항 분포	N110			GN				jisjk:247760		
 二項定理	이항정리	I110			GN				jisjk:79871		
@@ -130013,7 +130011,6 @@ ttt	ttt	K110			GN				jisjk:201744
 八剣山	핫켄잔	I110	VPl		GN				jisjk:87636		
 八剱町	하치켄쵸	N130	QCTVPl		GN				jisjk:320454		
 八剱町	야츠루기쵸	N130	QCTVPl		GN				jisjk:335768		
-八割	하치와리	N130	QCTVPl		GN				jisjk:320546		
 八勝通	핫쇼토리	N130	QCTVPl		GN				jisjk:320571		
 八区	8구	N130	QCTVPl		GN				jisjk:268631		
 八十一郎	야소이치로우	N130	QPN	Wb	GN				jisjk:356376		
@@ -143566,7 +143563,6 @@ ttt	ttt	K110			GN				jisjk:201744
 十六羅漢	십육 나한	N110	VHnUCl		GN				jisjk:194609		
 十六進数	십육진수	I110		Ct	GN				jisjk:77128		
 十六銀行	쥬로쿠 은행	I130	QIDVGt		GN				jisjk:77112		
-十六面	쥬우로쿠센	N130	QCTVPl		GN				jisjk:302485		
 十兵衛	주베에	N130	VHn		GN				jisjk:216460		
 十兵衛	쥬우베	N130	QCTVPl		GN				jisjk:302462		
 十円玉	십엔동전	I110	VMo		GN				jisjk:77124		
@@ -353601,7 +353597,7 @@ ttt	ttt	K110			GN				jisjk:201744
 非電解質	비전해질	I110			GN				jisjk:71616		
 非飽和時	비포화시	N110	UMe		GN				jisjk:162574		
 靡	나부&A4@	M411			GN				jisjk:92924		
-面	면	N110	VBpVPl		GN				jisjk:166014		
+面	면	N110	VBpVPl	Ct	GN				jisjk:166014		
 面	얼굴	N110	VBp		GN				jisjk:166015		
 面	면	N110		On	GN				jisjk:259562		
 面々	면면	N110	VHn		GN				jisjk:155630		

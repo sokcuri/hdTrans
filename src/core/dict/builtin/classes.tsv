@@ -34,6 +34,7 @@
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
+//= follower.count	What follows a count of things to say how they are shared or measured: ずつ, 分 and the times sign (二面ずつ 두 면씩, 四面分 네 면분, 四面×四面 네 면×네 면).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
 //= follower.kata-adjective-final	The sentence-final particles after which a katakana spelling of an i-adjective reads as one (ウルサイぞ).
 //= follower.kata-adjective-stem	Endings after which the hiragana spelling of a katakana run that no katakana word reads is an i-adjective stem (クサい, オモシロかった).
@@ -47,6 +48,8 @@
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
 //= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
+//= fraction.numerator-lead	First characters of the number after the 分の of a fraction (十分の一 10분의 1, 三分の二, 何分の一).
+//= fraction.of	What follows the denominator of a fraction written with a kanji number (十分の一 10분의 1).
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
@@ -69,6 +72,7 @@
 //= ko-noun.passive-eojida	Korean nouns of 하다 whose passive keeps 어지다 (말하다 말해지다, 의지하다).
 //= ko-sound.laugh	Korean laughs the sound stage writes (아하하, 후후), after which おかしい is funny, not strange (あはは、おかしい 아하하, 웃겨).
 //= ko-verb.casual-state	Ends of Korean present verbs that state, not plan, and so are written plainly in 해체 (모른다 몰라, 생각한다 생각해, 마음에 든다 마음에 들어).
+//= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
@@ -583,6 +587,40 @@ follower.te-imperative	ませ
 follower.te-imperative	まし
 follower.te-imperative	ず
 
+fraction.numerator-lead	一
+fraction.numerator-lead	二
+fraction.numerator-lead	三
+fraction.numerator-lead	四
+fraction.numerator-lead	五
+fraction.numerator-lead	六
+fraction.numerator-lead	七
+fraction.numerator-lead	八
+fraction.numerator-lead	九
+fraction.numerator-lead	十
+fraction.numerator-lead	百
+fraction.numerator-lead	千
+fraction.numerator-lead	何
+fraction.numerator-lead	数
+fraction.numerator-lead	幾
+fraction.numerator-lead	〇
+fraction.numerator-lead	０
+fraction.numerator-lead	１
+fraction.numerator-lead	２
+fraction.numerator-lead	３
+fraction.numerator-lead	４
+fraction.numerator-lead	５
+fraction.numerator-lead	６
+fraction.numerator-lead	７
+fraction.numerator-lead	８
+fraction.numerator-lead	９
+fraction.of	分の
+follower.count	ずつ
+follower.count	づつ
+follower.count	分
+follower.count	×
+follower.count	✕
+mark.times	×
+mark.times	✕
 follower.verbal-noun	し
 follower.verbal-noun	す
 follower.verbal-noun	さ
