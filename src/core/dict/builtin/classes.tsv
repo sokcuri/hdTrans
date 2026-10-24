@@ -101,6 +101,7 @@
 //= mark.times	Times signs: a count after one counts too (四面×四面 네 면×네 면).
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
+//= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
@@ -1542,6 +1543,17 @@ ko-verb.holding	눕다
 ko-verb.holding	서다
 ko-verb.holding	앞두다
 
+ko-verb.passive-subject	불리다
+ko-verb.passive-subject	끊기다
+ko-verb.passive-subject	놓이다
+ko-verb.passive-subject	쌓이다
+ko-verb.passive-subject	섞이다
+ko-verb.passive-subject	팔리다
+ko-verb.passive-subject	흔들리다
+ko-verb.passive-subject	덮이다
+ko-verb.passive-subject	둘러싸이다
+ko-verb.passive-subject	에워싸이다
+ko-verb.passive-subject	꺾이다
 ko-verb.sequence	먹다
 ko-verb.sequence	마시다
 ko-verb.sequence	읽다

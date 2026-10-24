@@ -95,6 +95,9 @@ struct Detail {
     int kind = -1;
     int record = 0;  // verb: 1 passive, 2 causative, 4 potential, 5 causative-passive
     Voice voice = Voice::None;
+    // A passive in a condition with its object and no agent (服を着られたら): OwnPassives writes it in
+    // the active when no Korean passive word reads it.
+    bool doerLeftOut = false;
     int punct = 0;   // punctuation class after the ending
     Group* group = nullptr;
     std::vector<uint8_t> classes;  // punctuation class per direct entry
