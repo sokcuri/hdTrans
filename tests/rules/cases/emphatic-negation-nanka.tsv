@@ -24,6 +24,7 @@ dict:gram:ku-nanka-nai:4	眠くなんかありません！	졸리지도 않습�
 dict:gram:ku-nanka-nai:7	眠くなんてありませんでした	졸리지도 않았습니다	fix	ending-defaults
 dict:gram:ku-nanka-nai:8	眠くもありませんでした	졸리지도 않았습니다	fix	ending-defaults
 dict:jisjk:258784	嬉しくはない	기쁘지는 않다	keep	local-ending
-dict:gram:ku-nanka-nai:1	嬉しくもない	기쁜 것도 아니다	keep	ending-defaults
 dict:gram:ku-nanka-nai:2	こんなに嬉しくなんて	이렇게 기쁘다니	keep	local-ending
 dict:gram:ku-nanka-nai:2	中央の方々が動くなんてありえないわ	중앙의 분들이 움직이다니 있을 수 없어	keep	local-ending
+dict:gram:ku-nanka-nai:10	強くなど言わない	강하게는 말하지 않는다	fix	ending-defaults
+dict:gram:ku-nanka-nai:11	冷たくなどありません	차갑지도 않습니다	fix	ending-defaults
