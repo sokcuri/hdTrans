@@ -327,6 +327,7 @@
 //= word.toha-partner	Starts of the words of difference, comparison and relationship that take what とは names as their partner, (와)과는 (それとは違う 그것과는 다르다, 答えとは裏腹に, あいつとは仲がいい); without one later in its clause とは defines, (이)란.
 //= word.yori-compare	Words after これより that make it a comparison, not the start of an action now (これより前, これより先, これよりまし).
 //= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
+//= word.soreni-follow	Starts of the words after which それに is the thing taken up, 거기에, not the conjunction 게다가 (それによって, それに伴って, それに比例して).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
 
 adverb.degree-feeling	本当に
@@ -4933,6 +4934,24 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+word.soreni-follow	対
+word.soreni-follow	関
+word.soreni-follow	よっ
+word.soreni-follow	より
+word.soreni-follow	よる
+word.soreni-follow	伴
+word.soreni-follow	準
+word.soreni-follow	比例
+word.soreni-follow	応
+word.soreni-follow	加え
+word.soreni-follow	混
+word.soreni-follow	合わせ
+word.soreni-follow	従
+word.soreni-follow	向け
+word.soreni-follow	基づ
+word.soreni-follow	気付
+word.soreni-follow	気づ
+word.soreni-follow	気が
 word.yori-compare	方
 word.yori-compare	ほう
 word.yori-compare	まし
