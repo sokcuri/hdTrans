@@ -1125,6 +1125,23 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
     if (!isLast) {
+        // A pronoun written in kanji or two kana or more forms no compound with a noun next
+        // to it (誰か僕を 누군가 나를, そもそも俺は 원래 나는), but takes a suffix or a word of one
+        // syllable (僕ら 우리, 自分と 자신과, 私流 나류).
+        const auto pronoun = [](const ResolvedItem& w) {
+            return Code(w).starts_with("12") && (text::RuneCount(w.surface) >= 2 || IsKanji(FirstRune(w.surface)));
+        };
+        // A pronoun the token ends with before Latin, digits or a symbol is part of a name
+        // written on (カフェ俺@cafe 카페나).
+        const bool namedOn = next.tokenIndex + 1 < static_cast<int>(tokens.size()) &&
+                             (nextIndex + 1 >= count || items[nextIndex + 1].tokenIndex != next.tokenIndex) &&
+                             (tokens[next.tokenIndex + 1].type == tokenizer::kTypeAlpha ||
+                              tokens[next.tokenIndex + 1].type == tokenizer::kTypeNumber ||
+                              tokens[next.tokenIndex + 1].type == tokenizer::kTypeAsciiSymbol);
+        if (kind == '1' && nextKind == '1' && !Contains(nextTags, "Z7") && !Contains(tags, "Z6") &&
+            ((pronoun(item) && WidthOf(nextEntry) > 2) || (pronoun(next) && !namedOn))) {
+            return Result(std::move(t), true);
+        }
         if (kind != '1' || WidthOf(t) != 2) return Result(std::move(t), false);
         if (nextKind != '1' || WidthOf(nextEntry) <= 2) return Result(std::move(t), false);
         const bool space = Contains(tags, "Z7") || !Contains(tags, "Z6");
