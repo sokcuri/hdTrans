@@ -1,0 +1,36 @@
+# Variants of repeated words, counts and ちょっと before requests (tools/variants.py).
+family	repeat-request	SND-2	90
+slot	V	verb	待つ 見る 入る 来る 聞く 食べる 座る 急ぐ 走る 逃げる 帰る 止まる
+case	{V:te}{V:te}！	^(\S+) \1!$
+case	「{V:te}{V:te}」	^「(\S+) \1」$
+case	{V:te}、{V:te}！	^(\S+), \1!$
+
+family	repeat-te-sequence	SND-2	90
+slot	V	verb	歩く 走る 泣く 笑う 考える 探す 待つ 働く 泳ぐ 書く
+slot	N	list	町 家 駅 学校 海
+case	{V:te}{V:te}、{N}に着いた。	^\S+고 또 \S+, 	\S+고 \S+고
+case	{V:te}{V:te}、やっと終わった。	^\S+고 또 \S+,
+
+family	repeat-predicate	SND-2	90
+slot	X	list	いやだ 嫌だ だめだ 無理だ 好きだ 怖い 痛い 寒い 眠い 嬉しい
+case	{X}{X}	^(.+) \1$|^\S+다 \S+$
+case	{X}{X}！	^(.+) \1!$
+
+family	chotto-request	LEX-20	90
+slot	V	verb	見る 待つ 貸す 来る 聞く 手伝う 止まる 座る 押す 持つ 開ける 教える
+case	ちょっと{V:te}。	^잠깐
+case	ちょっと{V:te}くれ。	^잠깐
+case	ちょっと{V:te}ください。	^잠깐
+case	ちょっと{V:te}よ！	^잠깐
+
+family	count-mo	LEX-11	90
+slot	C	list	三回 二度 四人 五時間 十冊 三日 五回 何度 三杯 二時間 百回 六人
+slot	V	verb	言う 読む 待つ 飲む 食べる 来る 書く 聞く 走る 泣く
+case	{C}も{V:ta}。	(?:이나|나) \S+다\.$	도
+case	{C}も{V:ta}のに。	(?:이나|나) \S+는데\.$	도
+
+family	more-count	LEX-28	90
+slot	C	list	一つ 一杯 一回 一度 一枚 一人 二つ 一本 一個 一日
+slot	V	verb	食べる 飲む 言う 待つ 書く 作る 買う 来る 読む
+case	もう{C}{V}。	\S+ 더 \S+다\.$	또 |이제 |벌써
+case	もう{C}{V:masu}。	\S+ 더 \S+니다\.$	또 |이제 |벌써

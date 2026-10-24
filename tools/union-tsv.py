@@ -39,7 +39,13 @@ def identity(header, cols, classes=False):
     if classes:
         return ("class", cols[0], cols[1] if len(cols) > 1 else "")
     if header and header[0] == "rule":
-        kind = cols[2].split("=", 1)[0] if len(cols) > 2 and cols[2].startswith(("rule:", "!rule:")) else "full"
+        expected = cols[2] if len(cols) > 2 else ""
+        if expected.startswith(("rule:", "!rule:")):
+            kind = expected.split("=", 1)[0]
+        elif expected.startswith(("has:", "lacks:")):
+            kind = expected  # each has: or lacks: row asserts its own words
+        else:
+            kind = "full"
         return ("case", *cols[:2], kind)
     if header and "id" in header:
         i = header.index("id")
@@ -108,7 +114,7 @@ def check_table(path, lines, report):
             i = header.index("id")
             if i < len(cols) and cols[i]:
                 ids[cols[i]].add(line)
-        if header and header[0] == "rule" and len(cols) >= 3 and not cols[2].startswith(("rule:", "!rule:")):
+        if header and header[0] == "rule" and len(cols) >= 3 and not cols[2].startswith(("rule:", "!rule:", "has:", "lacks:")):
             prev = full.setdefault((cols[0], cols[1]), cols[2])
             if prev != cols[2]:
                 report(f"CASE {path}: {cols[0]} {cols[1]} expects both {prev} and {cols[2]}")
@@ -198,8 +204,12 @@ def self_test():
     assert [f.split()[0] for f in found] == ["MARKER", "DUPROW", "DUPID", "DUPID"], found
     found = []
     check_table("tests/rules/t.tsv", ["rule\tinput\texpected\tkind\tlayer", "L1\t猫\t고양이\tfix\tlocal",
-                                      "L1\t猫\trule:L1=고양이\tfix\tlocal", "L1\t猫\t괭이\tkeep\tlocal"], found.append)
+                                      "L1\t猫\trule:L1=고양이\tfix\tlocal", "L1\t猫\t괭이\tkeep\tlocal",
+                                      "L2\t犬\thas:개\tfix\tlocal", "L2\t犬\tlacks:고양이\tfix\tlocal"], found.append)
     assert len(found) == 1 and found[0].startswith("CASE"), found
+    held = ("rule\tinput\texpected\tkind\tlayer\n<<<<<<< HEAD\nL2\t犬\thas:개\tfix\tlocal\n=======\n"
+            "L2\t犬\tlacks:고양이\tfix\tlocal\n>>>>>>> pick\n")
+    assert union(held)[1] == [], union(held)
     with tempfile.TemporaryDirectory() as d:
         p = Path(d) / "t.tsv"
         p.write_text(clash, encoding="utf-8")

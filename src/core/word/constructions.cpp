@@ -39,15 +39,52 @@ bool CopyPause(const Item* it) {
     return !text.empty();
 }
 
+// Whether the word is only the clipping っ or ッ of mark.clip (だめ|っ|だめっ).
+bool ClipWord(const Item* it) {
+    const std::string_view text = Slice(it->text, it->start, it->length);
+    for (std::string_view t = text; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (!dict::InClass("mark.clip", t.substr(0, r.size))) return false;
+        t.remove_prefix(r.size);
+    }
+    return !text.empty();
+}
+
+// Whether text holds a long mark of mark.long-vowel after its first character (すごーい).
+bool LongMarked(std::string_view text) {
+    for (std::string_view t = text.substr(text::DecodeRune(text).size); !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        const std::string_view c = t.substr(0, std::max<std::size_t>(r.size, 1));
+        if (dict::InClass("mark.long-vowel", c)) return true;
+        t.remove_prefix(c.size());
+    }
+    return false;
+}
+
+// text without the long marks of mark.long-vowel after its first character (すごーい すごい).
+std::string Unlengthened(std::string_view text) {
+    std::string out;
+    for (std::string_view t = text; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        const std::string_view c = t.substr(0, std::max<std::size_t>(r.size, 1));
+        if (out.empty() || !dict::InClass("mark.long-vowel", c)) out.append(c);
+        t.remove_prefix(c.size());
+    }
+    return out;
+}
+
 // The word before it that it repeats: the same text with the same ending, of two
-// characters or more, in the same token with nothing or a CopyPause word between (いや|いや,
-// 待って、待って).
+// characters or more, in the same token with nothing, a CopyPause word, or the ClipWord of
+// the copy before it and maybe a CopyPause word after that between (いや|いや, 待って、待って,
+// だめっ、だめっ); a copy drawn out with long marks of mark.long-vowel is the same (すごい|すごーい).
 const Item* CopyBefore(const Item* it) {
     const Item* p = it->prev;
     if (p != nullptr && p->tokenIndex == it->tokenIndex && CopyPause(p)) p = p->prev;
+    if (p != nullptr && p->tokenIndex == it->tokenIndex && ClipWord(p)) p = p->prev;
     if (p == nullptr || p->tokenIndex != it->tokenIndex) return nullptr;
-    const std::string_view text = Slice(it->text, it->start, it->length);
-    if (text::RuneCount(text) < 2 || Slice(p->text, p->start, p->length) != text) return nullptr;
+    const std::string_view text = Slice(it->text, it->start, it->length), before = Slice(p->text, p->start, p->length);
+    if (text::RuneCount(text) < 2) return nullptr;
+    if (before != text && (!(LongMarked(text) || LongMarked(before)) || Unlengthened(before) != Unlengthened(text))) return nullptr;
     return p;
 }
 
@@ -56,6 +93,7 @@ const Item* CopyBefore(const Item* it) {
 // The word after it that repeats it.
 const Item* CopyAfter(const Item* it) {
     const Item* n = it->next;
+    if (n != nullptr && n->tokenIndex == it->tokenIndex && ClipWord(n)) n = n->next;
     if (n != nullptr && n->tokenIndex == it->tokenIndex && CopyPause(n)) n = n->next;
     return n != nullptr && CopyBefore(n) != nullptr ? n : nullptr;
 }
@@ -69,10 +107,11 @@ const Item* LastCopy(const Item* it) {
     return last;
 }
 
-// Whether the copy after it follows it with no pause between (いやだいやだ, not 好き、好き).
+// Whether the copy after it follows it with no pause between, or only its clipping っ
+// (いやだいやだ, だめっだめっ, not 好き、好き).
 bool CopiedStraight(const Item* it) {
     const Item* n = CopyAfter(it);
-    return n != nullptr && it->next == n;
+    return n != nullptr && (it->next == n || (ClipWord(it->next) && it->next->next == n));
 }
 
 // Whether the copies of its run are the last predicate of their sentence: no word after the
@@ -112,13 +151,23 @@ bool PredicateCopies(const Item* it) {
     const Item* last = LastCopy(it);
     const int from = last->DirectIndex();
     if (from < 0) return false;
-    return dict::InClass("ending.copies-bare", last->DirectSurface()) && dict::InClass("ending.copies-plain", last->DirectText(from));
+    // A drawn-out ending is the bare one (すごーい).
+    const std::string_view ending = last->DirectSurface();
+    const bool drawn = !ending.empty() && dict::InClass("kana.drawn-out", ending.substr(0, text::DecodeRune(ending).size));
+    const std::string_view plain = drawn ? ending.substr(text::DecodeRune(ending).size) : ending;
+    return dict::InClass("ending.copies-bare", plain) && dict::InClass("ending.copies-plain", last->DirectText(from));
 }
 
 // The text right after the word: the rest of its token, or the text after the token.
 std::string_view TextAfter(const Item* it) {
     const std::string_view rest = From(it->text, it->start + it->length);
     return rest.empty() ? it->detail->nextText : rest;
+}
+
+// Whether a clipping っ or ッ of mark.clip follows the word right after it (痛いっ).
+bool Clipped(const Item* it) {
+    const std::string_view rest = TextAfter(it);
+    return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
 }
 
 // Whether its run of copies is a cry whatever the words: three copies or more, or a mark of
@@ -244,12 +293,17 @@ constexpr NamedFeature kFeatures[] = {
     // (PredicateCopies); the run is a cry (CriedCopies).
     {"predicate-copies", [](Flusher&, const Item* it) { return PredicateCopies(it); }},
     {"cried-copies", [](Flusher&, const Item* it) { return CriedCopies(it); }},
-    // A clipping っ or ッ (mark.clip) follows the word right after it (痛いっ).
-    {"clipped",
+    // The ending of the word starts with a mark of kana.drawn-out (すご|ーい).
+    {"drawn-ending",
      [](Flusher&, const Item* it) {
-         const std::string_view rest = TextAfter(it);
-         return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
+         const int at = it->DirectIndex();
+         const std::string_view ending = at >= 0 ? it->DirectSurface() : std::string_view();
+         return !ending.empty() && dict::InClass("kana.drawn-out", ending.substr(0, text::DecodeRune(ending).size));
      }},
+    // A clipping っ or ッ (mark.clip) follows the word right after it (痛いっ).
+    {"clipped", [](Flusher&, const Item* it) { return Clipped(it); }},
+    // The last copy of its run is Clipped (だめっ、だめっ; not ないっ、ない、ない).
+    {"copies-clipped", [](Flusher&, const Item* it) { return Clipped(LastCopy(it)); }},
     // The sentence of the word ends in ! or ? (an utterance, not a narrated sentence).
     {"exclaimed", [](Flusher& f, const Item* it) { return Exclaimed(f, it); }},
     // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis
@@ -259,12 +313,31 @@ constexpr NamedFeature kFeatures[] = {
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
     {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
+    // The surface has a kanji and the name layer has it as a person's name (美咲, read as a town in
+    // the base dictionary).
+    {"person-name",
+     [](Flusher& f, const Item* it) {
+         const std::string_view s = it->group->surface;
+         bool kanji = false;
+         for (std::string_view t = s; !t.empty() && !kanji;) {
+             const text::Rune r = text::DecodeRune(t);
+             kanji = text::IsKanji(r.cp);
+             t.remove_prefix(std::max<std::size_t>(r.size, 1));
+         }
+         if (!kanji) return false;
+         const std::vector<dict::Record> names = f.w.snapshot.NameRecords(s);
+         return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
+     }},
     // The verb was analysed as a causative.
     {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
     {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
+    // A dictionary word that is the passive of a dictionary verb (書かれ, 使われ, 見られ; PassiveBaseVerb).
+    {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
     {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
+    // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
+    {"respectful", [](Flusher&, const Item* it) { return it->detail->Yougo() && it->detail->voice == Voice::Respectful; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
     // token when the word before ends its token.
     {"touches-prev",
@@ -350,6 +423,15 @@ constexpr NamedFeature kFeatures[] = {
              if (stem.ends_with(end)) return true;
          }
          return false;
+     }},
+    // A mark of mark.lengthening, or the lengthen or drawn mark that stands for one, is right after the
+    // word (思うなぁ, 思うなー).
+    {"lengthened",
+     [](Flusher&, const Item* it) {
+         const std::string_view rest = TextAfter(it);
+         const text::Rune r = text::DecodeRune(rest);
+         return r.cp == output::kLengthenMark || r.cp == output::kDrawnMark ||
+                dict::InClass("mark.lengthening", rest.substr(0, r.size));
      }},
     // A vowel kana of mark.drawn follows the word (燃えるねぇ, 言うねェ).
     {"drawn",
@@ -495,18 +577,23 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"take-target", CxVerb::TakeTarget},
         {"set-target", CxVerb::SetTarget},
         {"append-target", CxVerb::AppendTarget},
+        {"prepend-target", CxVerb::PrependTarget},
         {"set-ending", CxVerb::SetEnding},
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
+        {"map-ending-tail", CxVerb::MapEndingTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
         {"set-verb", CxVerb::SetVerb},
+        {"set-verb-from", CxVerb::SetVerbFrom},
         {"copy-ending", CxVerb::CopyEnding},
         {"copy-word", CxVerb::CopyWord},
         {"set-sound", CxVerb::SetSound},
         {"set-active", CxVerb::SetActive},
         {"clip-ending", CxVerb::ClipEnding},
+        {"set-base-verb", CxVerb::SetBaseVerb},
+        {"draw-ending", CxVerb::DrawEnding},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -530,7 +617,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail("unknown action");
             break;
         }
-        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap) {
+        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap ||
+            a.verb == CxVerb::MapEndingTail) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -546,7 +634,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         }
         const char* bad = nullptr;
         if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
-            a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding) {
+            a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding ||
+            a.verb == CxVerb::SetBaseVerb || a.verb == CxVerb::DrawEnding) {
             out.push_back(std::move(a));
             continue;
         }
@@ -554,7 +643,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
         }
-        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail) &&
+        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail || a.verb == CxVerb::SetVerbFrom) &&
             (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
             tokens.Fail(bad != nullptr ? bad : "a replace action takes the old and the new text");
             break;
@@ -633,10 +722,41 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
 
 }  // namespace
 
+namespace {
+
+// A condition with each token :NAME replaced by the condition named so (a //: line above it).
+bool ExpandNamed(std::string_view text, const std::vector<std::pair<std::string, std::string>>& named, std::string& out,
+                 std::string& error) {
+    out.clear();
+    rules::Tokens tokens(text);
+    for (std::string_view token; !tokens.AtEnd();) {
+        if (!tokens.Next(token)) {
+            error = tokens.error != nullptr ? tokens.error : "bad token";
+            return false;
+        }
+        if (!out.empty()) out += ' ';
+        if (!token.starts_with(':')) {
+            out += token;
+            continue;
+        }
+        const auto it = std::ranges::find(named, token.substr(1), &std::pair<std::string, std::string>::first);
+        if (it == named.end()) {
+            error = "no named condition " + std::string(token);
+            return false;
+        }
+        out += it->second;
+    }
+    return true;
+}
+
+}  // namespace
+
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes) {
     ConstructionTable t;
     std::unordered_map<std::string_view, std::size_t> families;
     std::vector<std::string> ids;
+    std::vector<std::pair<std::string, std::string>> named;  // //: NAME <TAB> CONDITION, expanded
+    std::string expanded, expandError;
     const auto fail = [&](int line, std::string message) { t.errors.push_back({line, std::move(message)}); };
     int number = 0;
     for (const std::string_view raw : lines) {
@@ -681,6 +801,33 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
             continue;
         }
+        if (line.starts_with("//:")) {
+            std::string_view head = line.substr(3);
+            while (head.starts_with(' ')) head.remove_prefix(1);
+            const std::vector<std::string_view> f = SplitTabs(head);
+            if (f.size() != 3 || !FamilyName(f[0]) || f[1].empty() || f[2].empty()) {
+                fail(number, "a named condition is //: NAME <TAB> CONDITION <TAB> what it is for");
+                continue;
+            }
+            if (std::ranges::find(named, f[0], &std::pair<std::string, std::string>::first) != named.end()) {
+                fail(number, "a second line for the condition " + std::string(f[0]));
+                continue;
+            }
+            if (!ExpandNamed(f[1], named, expanded, expandError)) {
+                fail(number, "condition: " + expandError);
+                continue;
+            }
+            // The body is one expression, so that it counts as one operand where it is named.
+            ConstructionTable scratch;
+            CxSink sink(scratch);
+            rules::Tokens tokens(expanded);
+            if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
+                fail(number, std::string("condition: ") + (tokens.error != nullptr ? tokens.error : "more than one expression"));
+                continue;
+            }
+            named.emplace_back(f[0], expanded);
+            continue;
+        }
         if (line.starts_with("//")) continue;
         const std::vector<std::string_view> f = SplitTabs(line);
         if (f.size() != 5 || f[2].empty() || f[3].empty()) {
@@ -704,8 +851,12 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, "a second row " + std::string(id));
             continue;
         }
+        if (!ExpandNamed(f[2], named, expanded, expandError)) {
+            fail(number, "condition: " + expandError);
+            continue;
+        }
         CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, number};
-        rules::Tokens tokens(f[2]);
+        rules::Tokens tokens(expanded);
         CxSink sink(t);
         if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
             fail(number, std::string("condition: ") + (tokens.error != nullptr ? tokens.error : "trailing tokens"));
@@ -981,17 +1132,23 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             it->appended += a.value;
             it->choice = source;
             break;
+        case internal::CxVerb::PrependTarget:
+            it->AssignEntrySurface(it->selected, a.value + std::string(it->EntryText(it->selected)), source);
+            break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
-        case internal::CxVerb::ClipEnding: {
-            // The mark after the ending, or after the word that has none; the restore stage writes it
-            // as ㅅ closing the last syllable (아팟, 안됏).
+        case internal::CxVerb::ClipEnding:
+        case internal::CxVerb::DrawEnding: {
+            // The mark after the ending, or after the word that has none; the restore stage writes the
+            // clip as ㅅ closing the last syllable (아팟, 안됏) and the lengthening as ~ at the end of
+            // the phrase (대단해~).
+            const char32_t mark = a.verb == internal::CxVerb::ClipEnding ? output::kClipMark : output::kLengthenMark;
             if (const int at = it->DirectIndex(); at >= 0) {
                 std::string ending(it->DirectText(at));
-                text::AppendRune(ending, output::kClipMark);
+                text::AppendRune(ending, mark);
                 it->AssignDirectSlot(at, ending, source);
             } else if (it->selected >= 0) {
                 std::string word(it->EntryText(it->selected));
-                text::AppendRune(word, output::kClipMark);
+                text::AppendRune(word, mark);
                 it->AssignEntrySurface(it->selected, word, source);
             }
             break;
@@ -1008,6 +1165,20 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const Entry* e = it->DirectEntry(it->DirectIndex());
             if (e != nullptr && e->dst.ends_with(a.value)) {
                 it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - a.value.size()) + a.with, source);
+            }
+            break;
+        }
+        case internal::CxVerb::MapEndingTail: {
+            // The longest tail of the map that the ending's Korean ends in is replaced by its pair.
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e == nullptr) break;
+            const std::pair<std::string, std::string>* best = nullptr;
+            for (const auto& pair : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (e->dst.ends_with(pair.first) && (best == nullptr || pair.first.size() > best->first.size())) best = &pair;
+            }
+            if (best != nullptr) {
+                it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - best->first.size()) + best->second,
+                                     source);
             }
             break;
         }
@@ -1041,12 +1212,29 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         case internal::CxVerb::SetVerb:
             it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
             break;
+        case internal::CxVerb::SetVerbFrom: {
+            // A translation that ends in the old tail is the verb whose dictionary form is its head
+            // and the new tail (기다리게 &C6@ with "게 &C6@" "다" is 기다리다).
+            const std::string_view target = it->EntryText(it->selected);
+            if (target.size() > a.value.size() && target.ends_with(a.value)) {
+                const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
+                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, '&', "", f.families).target, source);
+            }
+            break;
+        }
         case internal::CxVerb::SetActive:
-            // The verb is written in the active voice: its Korean without the passive.
-            if (it->DetailRecord() == 1) {
+            // The verb is written in the active voice: its Korean without the passive or the
+            // causative-passive (읽혀지다, 읽게 되다 → 읽다).
+            if (it->DetailRecord() == 1 || it->DetailRecord() == 5) {
                 it->detail->record = 0;
                 if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
                 it->choice = source;
+            }
+            break;
+        case internal::CxVerb::SetBaseVerb:
+            // A dictionary word read as the passive of a verb is written as that verb (PassiveBaseVerb).
+            if (std::string verb = PassiveBaseVerb(f, it->group->surface); !verb.empty()) {
+                it->AssignEntrySurface(it->selected, verb, source);
             }
             break;
         case internal::CxVerb::SetSound: {

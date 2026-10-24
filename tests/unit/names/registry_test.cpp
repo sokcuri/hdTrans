@@ -88,7 +88,12 @@ const dict::Snapshot* Dictionary() {
          "星\t별\tN110\t\t\tGN\t81\n"
          "星\t호시\tN130\tQPN\tWa\tGN\t82\n"
          "犬\t개\tN110\t\t\tGN\t83\n"
-         "ベルクロア\t벨크로아\tN130\tQPN\t\tGN\t88\n"},
+         "ベルクロア\t벨크로아\tN130\tQPN\t\tGN\t88\n"
+         "ユフィリカ\t유필리카\tN130\tQPN\t\tGN\t92\n"
+         "ベルンハルト\t베른할트\tN130\tQPN\t\tGN\t93\n"
+         "シャルロッテ\t샬롯테\tN130\tQPN\t\tGN\t94\n"
+         "ミリアム\t밀리암\tN130\tQPN\t\tGN\t95\n"
+         "アレクシス\t알렉시스\tN130\tQPN\t\tGN\t96\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -506,6 +511,30 @@ HD_TEST(names_katakana_full_names) {
     HD_CHECK_EQ(m.Render("ユフィリア"), std::string("유피리아"));
     m.SetName("ユフィリア", "유필리아");
     HD_CHECK_EQ(m.Render("ユフィリア・マゼンタ"), std::string("유필리아 마젠타"));
+}
+
+// A katakana name before an honorific that starts a longer name of the document reads as the
+// leading syllables of that name's reading that spell it, without a final it lacks; with no
+// longer name it reads as itself.
+HD_TEST(names_prefix_of_learned_name) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    struct Case {
+        std::string full, kr, nick, want;
+    };
+    const Case cases[] = {
+        {"ユフィリカ", "유필리카", "ユフィ", "유피"}, {"レオンハルト", "레온하르트", "レオ", "레오"},
+        {"ベルンハルト", "베른할트", "ベル", "베르"}, {"アルガルド", "아르가르드", "アル", "아르"},
+        {"シャルロッテ", "샬롯테", "シャル", "샬"}, {"レオンハルト", "레온하르트", "レオン", "레온"},
+        {"ミリアム", "밀리암", "ミリ", "밀리"}, {"アレクシス", "알렉시스", "アレク", "알렉"},
+    };
+    for (const Case& c : cases) {
+        names::Registry r = Scan(snap, c.full + "様は剣を抜いた。\n" + c.full + "様は笑った。\n" + c.nick + "くん、おはよう。");
+        HD_CHECK_EQ(r.Render(c.full), c.kr);
+        HD_CHECK_EQ(r.Render(c.nick), c.want);
+    }
+    names::Registry alone = Scan(snap, Repeat("レオくん、おはよう。", 2));
+    HD_CHECK_EQ(alone.Render("レオ"), std::string("레오"));
 }
 
 // The parts of a chain name read as the words of its name-layer person reading, in the

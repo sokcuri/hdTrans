@@ -11,6 +11,7 @@
 #include "core/dict/classes.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/constraint_rules.h"
 #include "core/word/worker.h"
@@ -72,12 +73,28 @@ constexpr ConstraintRule kRules[] = {
      "동사 た·だ·る 바로 뒤의 ん은 감탄사 응이 아님 (終わったん？ 끝난 응? → 끝난?)", "응"},
     {"ita-after-te", ConstraintWord::Source, "いた", ConstraintContext::AfterTeNotAdjective, ConstraintReject::Word,
      "て·で 바로 뒤의 いた는 형용사 어미가 붙지 않으면 痛い·傷む가 아니라 いる의 과거 (捨てられていたんです 버려져 손상되어 → 버려져 있었습니다)", {}},
+    {"iru-form-after-te", ConstraintWord::IruForm, "", ConstraintContext::AfterTe, ConstraintReject::Word,
+     "て, で 바로 뒤에서 いる의 활용형과 같은 글자로 시작하는 낱말은 그 낱말이 아니라 いる의 활용 (固まっていろよ 굳어져 색이야 → 굳어져 있어라, 何していようかな 뭐해 이상한가 → 뭐하고 있을까)", {}},
+    {"iru-past-after-te", ConstraintWord::Source, "い", ConstraintContext::AfterTeBeforeTa, ConstraintReject::NonVerbs,
+     "て, で 바로 뒤에서 た가 이어지는 い는 いい의 어간이 아니라 いる (待っていたって 기다려도 좋아도 → 기다리고 있어도)", {}},
+    {"hashi-before-te", ConstraintWord::Source, "はし", ConstraintContext::AfterWordBeforeTe, ConstraintReject::Word,
+     "앞에 말이 있고 て가 바로 이어지는 はし는 箸나 橋가 아니라 は와 する의 て형 (感じはしていた 느낌 젓가락이라고 있었다 → 느낌은 하고 있었다)", {}},
+    {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
+     "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
+    {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
+     "らっしゃ 앞에서 でい로 끝나는 말도 같다 (読んでいらっしゃる)", {}},
+    {"tanto-after-tsu", ConstraintWord::Source, "たんと", ConstraintContext::AfterSmallTsu, ConstraintReject::Word,
+     "っ 바로 뒤의 たんと는 부사 듬뿍이 아니라 과거 た + んと (行ったんと違う 간 듬뿍 다르다)", {}},
     {"kotoshi-suru", ConstraintWord::Source, "ことし", ConstraintContext::BeforeSuruForm, ConstraintReject::Word,
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
      "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
-    {"itadake-dake", ConstraintWord::Source, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
-     "だ, で, じゃ, に, の, か 앞의 いただけ는 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다)", {}},
+    {"itadake-dake", ConstraintWord::EndsInSource, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
+     "だ, で, じゃ, に, の, か 앞에서 いただけ로 끝나는 말은 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다, 油断していただけだから 방심해 주실 수 있고니까 → 방심하고 있었을 뿐이니까)", {}},
+    {"itadaku-ke-after-te", ConstraintWord::Source, "いただ", ConstraintContext::AfterTeBeforeDake, ConstraintReject::Word,
+     "て, で 바로 뒤에서 けだ, け〜처럼 だけ로 읽히는 け 앞의 いただ는 いただく의 명령이 아니라 いた + だけ (フリしていただけ〜 척해 주셔라 → 척하고 있었을 뿐)", {}},
+    {"teitadaku-ke", ConstraintWord::EndsInSource, "ていただ", ConstraintContext::BeforeDake, ConstraintReject::Word,
+     "그런 け 앞에서 ていただ로 끝나는 말도 같다 (していただけ。 해 주셔라 → 하고 있었을 뿐)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
     {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
@@ -193,6 +210,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return AllOfClass(source, kClassKanji) && NameClassOf(before) != kClassKanji && FindHonorificPrefix(before) == -1;
     case ConstraintWord::Source:
         return source == rule.source;
+    case ConstraintWord::EndsInSource:
+        return source.ends_with(rule.source);
     case ConstraintWord::EndsInDe:
         return text::RuneCount(source) >= 2 && source.ends_with("で");
     case ConstraintWord::OStem: {
@@ -202,6 +221,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
     }
     case ConstraintWord::EndsInKu:
         return text::RuneCount(source) >= 2 && source.ends_with("く");
+    case ConstraintWord::IruForm:
+        return dict::InClass("word.iru-form", source);
     }
     return false;
 }
@@ -230,6 +251,12 @@ bool EndsInQuantity(std::string_view s) {
 
 bool StartsWithAny(std::string_view s, std::span<const std::string_view> list) {
     return std::any_of(list.begin(), list.end(), [s](std::string_view p) { return s.starts_with(p); });
+}
+
+// Whether s is what may follow the だけ of いただけ: a member of copula.after-dake, or no letter
+// (いただけだ, いただけなんです, いただけ〜).
+bool DakeEnds(std::string_view s) {
+    return s.empty() || !text::IsLetter(text::DecodeRune(s).cp) || StartsWithAny(s, dict::ClassMembers("copula.after-dake"));
 }
 
 // Whether the context of rule holds for the word source of the candidates list: after is
@@ -268,10 +295,23 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なる") && !after.starts_with("なるべく") && !after.starts_with("なるほど");
     case ConstraintContext::BeforeAgaru:
         return after.starts_with("上が");
+    case ConstraintContext::AfterTeBeforeTa:
+        return (preceding.ends_with("て") || preceding.ends_with("で")) && after.starts_with("た");
+    case ConstraintContext::AfterTeBeforeDake:
+        return (preceding.ends_with("て") || preceding.ends_with("で")) && after.starts_with("け") &&
+               DakeEnds(after.substr(std::string_view("け").size()));
+    case ConstraintContext::BeforeDake:
+        return after.starts_with("け") && DakeEnds(after.substr(std::string_view("け").size()));
+    case ConstraintContext::AfterWordBeforeTe:
+        // The word before may be Korean already and spaced off (ソワソワ written 안절부절 by the sound stage).
+        return after.starts_with("て") &&
+               (NameClassOf(adjacent) != kClassOther || HangulText(adjacent) || adjacent == " ");
+    case ConstraintContext::BeforeRassharu:
+        return after.starts_with("らっしゃ");
     case ConstraintContext::BeforeNasai:
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
-        return StartsWithAny(after, dict::ClassMembers("copula.after-dake"));
+        return DakeEnds(after);
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
     case ConstraintContext::AfterPredicate:
@@ -279,9 +319,13 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                            [&](std::string_view e) { return lead.ends_with(e); });
     case ConstraintContext::NotAfterQuantity:
         return !EndsInQuantity(lead);
+    case ConstraintContext::AfterSmallTsu:
+        return preceding.ends_with("っ") || preceding.ends_with("ッ");
     case ConstraintContext::AfterTeNotAdjective:
         return (preceding.ends_with("て") || preceding.ends_with("で")) &&
                !StartsWithAny(after, dict::ClassMembers("follower.ita"));
+    case ConstraintContext::AfterTe:
+        return preceding.ends_with("て") || preceding.ends_with("で");
     case ConstraintContext::NotBeforeNoun: {
         const int next = NameClassOf(FirstChar(after));
         return next != kClassKanji && next != kClassKatakana;
@@ -547,6 +591,14 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 if (std::all_of(same.begin(), same.end(), verb)) break;
                 for (std::size_t k = 0; k < list.size(); k++) {
                     if (list[k].codes != nullptr && verb(k) && source.starts_with(list[k].source)) rejected.push_back(k);
+                }
+                break;
+            }
+            case ConstraintReject::NonVerbs: {
+                auto verb = [&](std::size_t k) { return list[k].codes->part.Tag() == 'M'; };
+                if (std::none_of(same.begin(), same.end(), verb)) break;
+                for (const std::size_t k : same) {
+                    if (!verb(k)) rejected.push_back(k);
                 }
                 break;
             }

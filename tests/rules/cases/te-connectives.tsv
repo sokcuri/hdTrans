@@ -15,3 +15,23 @@ cx:see-and:10	私を見て！と叫んだ。	나를 봐!라고 외쳤다.	fix	re
 cx:see-and:10	これを見て、驚いた。	이것을 보고, 놀랐다.	keep	rewrites
 cx:see-and:10	「これを見て？」	「이걸 봐?」	fix	rewrites
 cx:see-and:10	「何を見て？」	「뭘 보고?」	keep	rewrites
+cx:te-request:30	貸してくれ。	빌려 줘.	fix	rewrites
+cx:te-request:30	「携帯、貸してくれ」	「휴대폰, 빌려 줘」	fix	rewrites
+cx:te-request:30	やってくれ!!	해 줘!!	fix	rewrites
+cx:te-request:30	ついてくれ。	뒤따라 줘.	fix	rewrites
+cx:te-request:30	貸してくれ……	빌려 줘……	fix	rewrites
+cx:te-request:30	貸してくれた。	!rule:cx:te-request:30	keep	rewrites
+cx:te-request:30	貸してくれる？	!rule:cx:te-request:30	keep	rewrites
+cx:te-request:15	中に、出して	안에, 내 줘	fix	rewrites
+cx:te-request:15	「中に出して」	「안에 내 줘」	fix	rewrites
+cx:te-request:15	「外に出して」	「밖에 내 줘」	fix	rewrites
+cx:te-request:15	「ここから出して！」	「여기에서 내 줘!」	fix	rewrites
+cx:te-request:15	「早く出して」	「빨리 내 줘」	fix	rewrites
+cx:te-request:15	「手を出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「取り出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「入れて」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「待って」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「出して、それから」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「出して？」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「心配ないから、元気出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	良太が車出して、5人で出かけた	!rule:cx:te-request:15	keep	rewrites

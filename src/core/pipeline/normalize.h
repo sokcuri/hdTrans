@@ -9,9 +9,14 @@
 
 namespace hdTrans::pipeline {
 
+// Whether a dictionary word holds the run line[at, end) (じっっくり), so that it stays as written.
+using WordHoldsRun = bool (*)(const void* context, std::string_view line, size_t at, size_t end);
+
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
 // in normalize.cpp. A line that is written whole from the line table is not passed here.
-std::string Normalize(std::string_view line, const LineContext& ctx);
+// holds, when given, keeps the runs of CollapseTsuRuns that a dictionary word holds.
+std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds = nullptr,
+                      const void* context = nullptr);
 
 // How the dictionary reads a ruby base with the kana after it.
 struct BaseReading {
@@ -50,6 +55,21 @@ using WordKeepsVariant = bool (*)(const void* context, std::string_view line, si
 // keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
 
+// line with each ending of classes.tsv spelling.katakana-ending written in katakana right after a
+// hiragana, kanji, Latin letter or digit and before anything but a kana, kanji, letter or digit
+// written in hiragana, its ー kept (私デース 私でーす, 楽しいネー 楽しいねー, 受信シマシタ 受信しました);
+// spelling.katakana-copula as well, except after spelling.katakana-copula-kept-after or a kanji and
+// spelling.katakana-copula-kept-after-kanji (言ったデース, 来たデース stay; あなたデス does not), spelling.katakana-ending-after-kana only after hiragana (行きマース 行きまーす, not 一マス) and
+// spelling.katakana-particle only after hiragana or kanji (not Decemberネー).
+std::string RespellKatakanaEndings(std::string_view line);
+
+// line with each kanji of classes.tsv spelling.cry-kanji (KANJI=KANA) written in its kana where it
+// starts an utterance, after anything but a letter or digit, and a run of kana.drawn-out or
+// mark.clip follows it before anything but a letter or digit (嫌ぁぁぁ いやぁぁぁ, 嫌っ！ いやっ！;
+// not 嫌っている, すごく嫌ー); a run of one drawn kana only before mark.exclaim or mark.comma
+// (嫌ぁ！, not 嫌ぁ……).
+std::string RespellKanjiCries(std::string_view line);
+
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
@@ -60,6 +80,11 @@ namespace internal {
 // ‼ ⁉ ⁈ as two marks (！！ ！？ ？！) without a variation selector after them; U+0000..U+0003 as
 // spaces. Invalid UTF-8 bytes are kept.
 std::string NormalizeForms(std::string_view text);
+
+// A run of two or more っ or ッ after a letter and before a letter other than a small kana, ー
+// or ～ as its first character (褒められちゃっっっった 褒められちゃった, とっっても とっても),
+// unless holds says a dictionary word holds the run. A run that ends a word (あっっ！) stays.
+std::string CollapseTsuRuns(std::string_view text, WordHoldsRun holds = nullptr, const void* context = nullptr);
 
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.
 std::string JoinNasai(std::string_view text);

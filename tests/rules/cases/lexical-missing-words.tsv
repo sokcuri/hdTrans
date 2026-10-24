@@ -1,7 +1,7 @@
 # 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:w:28515	そうだとしたらあたしが萌えるよね	그렇다고 하면 내가 설레지	fix	defaults
-dict:w:28515	先輩に萌えればいいのか、	선배에게 설레면 좋은 건지,	fix	defaults
+dict:w:28515	先輩に萌えればいいのか、	선배에게 설레면 되는 건지,	fix	defaults
 dict:w:28515	何それ庇って怪我とかわたしも萌えます	그게 뭐야 감싸 상처라든지 저도 설렙니다	fix	defaults
 dict:w:28584	若葉が萌える季節になった	새잎이 싹트는 계절이 되었다	fix	local
 dict:w:28586	先輩萌えに完全同意	선배 모에에 완전 동의	fix	defaults
@@ -18,7 +18,7 @@ dict:w:28553	うっそまじ？神様が憑いてるん？	거짓말 진심? 신
 dict:w:28540	あいつ……どこに隱れたんだろう。	저 녀석……어디에 숨었을까.	fix	defaults
 dict:w:28517	砕いたパンの粉をまぶして油で揚げた料理。	부순 빵의 가루를 묻혀 기름에 튀긴 요리.	fix	defaults
 dict:w:28552	こんな荒々しい口調のおにゃのこがいたら	이런 대강 강요하고 어조의 여자애가 있으면	fix	defaults
-dict:w:28562	「さて、いっちょやるか」	「자, 한번 할까」	fix	defaults
+dict:w:28308	「さて、いっちょやるか」	「자, 한번 할까」	fix	defaults
 dict:w:28563	ええぃ、もういっちょ！	에잇, 한 번 더!	fix	defaults
 dict:w:28578	痛たた……。	아야야…….	fix	defaults
 dict:w:28576	あけおめことよろ！	새해 복 많이 받아 올해도 잘 부탁해!	fix	defaults
@@ -56,7 +56,7 @@ dict:w:28591	『恋は人を愚かにすると言うけれど、とんだ道化�
 dict:w:28561	ほどの徹底っぷりだった。	정도의 철저함이었다.	fix	defaults
 dict:w:28564	少しして局員が戻ってきたので、ようやっと俺も尋問室から解放される。	조금 해 국원이 돌아왔으므로, 드디어 나도 심문실에서 해방된다.	fix	defaults
 dict:w:28597	草が萌え鳥が鳴く春からは	풀이 싹트고 새가 우는 봄부터는	fix	local
-dict:w:28515	姐さんに萌えればいいのか	누님에 설레면 좋은 건가	fix	defaults
+dict:w:28515	姐さんに萌えればいいのか	누님에 설레면 되는 건가	fix	defaults
 dict:w:28594	382『うるせえぶっ×してやる!!』	382 『시끄러워 확×해 줄게!!』	fix	defaults
 dict:w:28594	うるせえぶっ殺すぞ	시끄러워 확 죽이겠어	fix	defaults
 lookup:missing-words	うるせえ！	시끄러!	keep	sound

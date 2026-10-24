@@ -739,3 +739,120 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
     assert.equal(warned, status !== 0 && blocking !== 'true');
   });
 }
+
+const perfStep = build.slice(build.indexOf('      - name: Performance budget\n'),
+  build.indexOf('\n      - name:', build.indexOf('      - name: Performance budget\n') + 1));
+
+test('the performance budget measures pull requests only and never fails the job', () => {
+  assert.match(perfStep, /\n        if: matrix\.preset == 'linux' && github\.event_name == 'pull_request'\n/);
+  assert.match(perfStep, /\n        continue-on-error: true\n/);
+  assert.doesNotMatch(build, /Perf-Budget|perf-budget\.tsv|name: perf-budget\n/);
+  assert.equal(existsSync(join(root, 'tools/perf-budget.tsv')), false);
+});
+
+for (const [status, output, warning] of [
+  [0, 'row\tthis build\tbase build\tchange\nload\t100\t100\t+0.00%', null],
+  [0, 'load\t103\t100\t+3.00%\nover: load: 103 instructions, +3.00% against the base build (100)',
+    'More than 1% over the base build: load: 103 instructions, +3.00% against the base build (100)'],
+  [0, 'perf-budget: no base: the base build could not be measured (crashed)\nload\t100', 'No base build was measured'],
+  [2, 'perf-budget: not measured: valgrind is not installed', 'The counts could not be measured (exit 2)'],
+]) {
+  test(`the performance budget step reports and exits 0: ${status}, ${warning ?? 'no warning'}`, t => {
+    const dir = mkdtempSync(join(tmpdir(), 'hdtrans-ci-perf-'));
+    t.after(() => rmSync(dir, { recursive: true, force: true }));
+    mkdirSync(join(dir, 'tools'));
+    mkdirSync(join(dir, 'bin'));
+    writeFileSync(join(dir, 'bin/git'), '#!/bin/sh\n[ "$*" = "rev-parse --verify -q HEAD^1" ] && echo abc123\n', { mode: 0o700 });
+    writeFileSync(join(dir, 'bin/valgrind'), '#!/bin/sh\n', { mode: 0o700 });
+    writeFileSync(join(dir, 'bin/readelf'), "#!/bin/sh\necho '  [     0]  GCC: 1'\n", { mode: 0o700 });
+    writeFileSync(join(dir, 'tools/perf-base.py'), `import os, sys
+assert sys.argv[1] == "abc123"
+os.makedirs(sys.argv[2])
+`);
+    writeFileSync(join(dir, 'tools/perf-budget.py'), `import os, sys
+base = os.environ["RUNNER_TEMP"] + "/base"
+assert sys.argv[1:] == ["--report", "build/linux/hdtrans", "build/linux/dicts.hdsnap", "--base", "abc123",
+                        "--against", base + "/hdtrans", base + "/dicts.hdsnap"], sys.argv
+print(os.environ["FIXTURE_OUTPUT"])
+sys.exit(int(os.environ["FIXTURE_STATUS"]))
+`);
+    const script = perfStep.match(/        run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '');
+    const summary = join(dir, 'summary');
+    const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', script], {
+      cwd: dir,
+      env: {
+        ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: summary,
+        FIXTURE_STATUS: String(status), FIXTURE_OUTPUT: output,
+      },
+      encoding: 'utf8',
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status, 0, result.stderr);
+    const report = readFileSync(summary, 'utf8');
+    assert.ok(report.startsWith('### Performance budget\n```text\n' + output + '\n```\n'), report);
+    const warnings = result.stdout.split('\n').filter(line => line.startsWith('::warning title=Performance budget::'));
+    if (warning === null) {
+      assert.deepEqual(warnings, []);
+    } else {
+      assert.equal(warnings.length, 1, result.stdout);
+      assert.ok(warnings[0].includes(warning), warnings[0]);
+      assert.ok(report.includes(warning), report);
+    }
+  });
+}
+
+const ciOkJob = build.slice(build.indexOf('\n  ci-ok:\n'));
+// Jobs of Build that test nothing: the tested-tree record and the packaging of pushes.
+const notTestJobs = ['tested', 'release'];
+
+test('ci-ok needs every job of Build that tests code', () => {
+  const jobs = [...build.slice(build.indexOf('\njobs:\n')).matchAll(/^  ([\w-]+):$/gm)].map(match => match[1]);
+  assert.ok(jobs.includes('build') && jobs.includes('ci-ok'));
+  for (const job of notTestJobs) assert.ok(jobs.includes(job), job);
+  const needs = ciOkJob.match(/^    needs: \[(.*)\]$/m)[1].split(', ');
+  assert.deepEqual([...needs].sort(), jobs.filter(job => job !== 'ci-ok' && !notTestJobs.includes(job)).sort());
+  assert.match(ciOkJob, /^    name: ci-ok$/m);
+  assert.match(ciOkJob, /^    runs-on: ubuntu-latest$/m);
+  assert.match(ciOkJob, /^    timeout-minutes: 5$/m);
+  assert.match(ciOkJob, /^    permissions: \{\}$/m);
+  assert.doesNotMatch(ciOkJob, /continue-on-error|secrets\./);
+});
+
+test('only Build and the PR title check run on pull requests', () => {
+  const dir = join(root, '.github/workflows');
+  const onPullRequests = readdirSync(dir).filter(name => {
+    const workflow = readFileSync(join(dir, name), 'utf8');
+    return /^  pull_request(_target)?:/m.test(workflow.slice(workflow.indexOf('\non:\n'), workflow.indexOf('\njobs:\n')));
+  });
+  assert.deepEqual(onPullRequests.sort(), ['build.yml', 'pr-title.yml']);
+});
+
+test('ci-ok runs on every pull request and push, even after failures and cancellations', () => {
+  const runs = new Function('github', 'always', `return (${ciOkJob.match(/^    if: \$\{\{ (.*) \}\}$/m)[1]});`);
+  assert.match(ciOkJob.match(/^    if: (.*)$/m)[1], /^\$\{\{ always\(\) && /);
+  for (const event_name of ['pull_request', 'push']) assert.equal(runs({ event_name }, () => true), true, event_name);
+  for (const event_name of ['workflow_dispatch', 'workflow_call']) assert.equal(runs({ event_name }, () => true), false, event_name);
+});
+
+const passed = { gate: 'success', 'release-tools': 'success', build: 'success', sanitize: 'success', fuzz: 'success' };
+for (const [results, ok] of [
+  [passed, true],
+  [{ ...passed, 'release-tools': 'skipped', build: 'skipped', sanitize: 'skipped', fuzz: 'skipped' }, true],
+  [{ ...passed, build: 'failure' }, false],
+  [{ ...passed, fuzz: 'cancelled' }, false],
+  [{ ...passed, sanitize: 'skipped', 'release-tools': 'failure' }, false],
+  [{ ...passed, gate: 'failure' }, false],
+  [{ ...passed, gate: 'cancelled' }, false],
+  [{ gate: 'skipped', 'release-tools': 'skipped', build: 'skipped', sanitize: 'skipped', fuzz: 'skipped' }, false],
+]) {
+  test(`ci-ok ${ok ? 'passes' : 'fails'}: ${JSON.stringify(results)}`, () => {
+    const needs = Object.fromEntries(Object.entries(results).map(([job, result]) => [job, { result, outputs: {} }]));
+    const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', stepScript(ciOkJob, 'Check the needed jobs')], {
+      env: { ...process.env, NEEDS: JSON.stringify(needs, null, 2) },
+      encoding: 'utf8',
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status === 0, ok, result.stdout + result.stderr);
+    for (const [job, value] of Object.entries(results)) assert.match(result.stdout, new RegExp(`^${job}: ${value}$`, 'm'));
+  });
+}

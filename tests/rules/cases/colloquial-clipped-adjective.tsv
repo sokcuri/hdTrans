@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
 sound:clipped-adjective	「キャリア浅っ」	「캐리어 얕다」	fix	sound
-sound:clipped-adjective	嫌っ、そんな目で見ないで下さい！	싫다, 그런 눈으로 보지 말아 주세요!	fix	sound
+sound:clipped-adjective	嫌っ、そんな目で見ないで下さい！	싫어, 그런 눈으로 보지 말아 주세요!	fix	sound
 sound:clipped-adjective	「蒼っ！」	「창!」	keep	sound

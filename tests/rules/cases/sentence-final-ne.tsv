@@ -174,6 +174,8 @@ phrase:leave-taking	ありがとうございました。では、また明日	�
 phrase:leave-taking	「先生、また来週」	「선생님, 다음 주에 봬요」	fix	sound
 phrase:leave-taking	「田中先生、また明日」	「타나카 선생님, 내일 봬요」	fix	sound
 phrase:leave-taking	「先生、また明日ね」	「선생님, 내일 봬요」	fix	sound
+phrase:leave-taking	「部長、また明日」	「부장, 내일 봬요」	fix	sound
+phrase:leave-taking	「社長、また来週」	「사장, 다음 주에 봬요」	fix	sound
 phrase:leave-taking	「そうです。また明日」	「그렇습니다. 내일 봬요」	fix	sound
 phrase:leave-taking	「失礼します。また後で」	「실례합니다. 나중에 봬요」	fix	sound
 phrase:leave-taking	「では、また明日。失礼します」	「그럼, 내일 봬요. 실례합니다」	fix	sound
@@ -219,3 +221,60 @@ cx:ne-promise:40	「お茶を出すね」	「차를 낼게」	fix	rewrites
 cx:ne-promise:40	「明日、手紙を出すね」	「내일, 편지를 보낼게」	fix	rewrites
 cx:ne-promise:40	「宿題を出すね」	「숙제를 낼게」	fix	rewrites
 cx:ne-promise:20	「思い出すね」	rule:cx:ne-promise:20=1네	keep	rewrites
+cx:ne-polite:10	「先に行きますね」	「먼저 갈게요」	fix	rewrites
+cx:ne-polite:10	「すぐ戻りますね」	「바로 돌아올게요」	fix	rewrites
+cx:ne-polite:10	「私が作りますね」	「제가 만들게요」	fix	rewrites
+cx:ne-polite:10	「頑張りますね！」	「노력할게요!」	fix	rewrites
+cx:ne-polite:10	「ちょっと休みますね」	「조금 쉴게요」	fix	rewrites
+cx:ne-polite:10	「お茶、淹れますね」	「차, 끓일게요」	fix	rewrites
+cx:ne-polite:10	夕食の準備をしますね。	저녁식사 준비를 할게요.	fix	rewrites
+cx:ne-polite:10	提督、ちょっと席を外しますね。	제독, 조금 자리를 비울게요.	fix	rewrites
+cx:ne-polite:10	牛乳をお持ちしますね。	우유를 가져올게요.	fix	rewrites
+cx:ne-polite:10	お部屋に戻りますね。	방으로 돌아갈게요.	fix	rewrites
+cx:ne-polite:10	お水、ここに置きますね。	물, 여기에 둘게요.	fix	rewrites
+cx:ne-polite:10	お弁当作りますね。	도시락 만들게요.	fix	rewrites
+cx:ne-polite:10	後で連絡しますね	나중에 연락할게요	fix	rewrites
+cx:ne-polite:10	「先に行きますね？」	!rule:cx:ne-polite:10	keep	rewrites
+cx:ne-polite:10	「先輩が来ますね」	!rule:cx:ne-polite:10	keep	rewrites
+cx:ne-polite:10	「待っていますね」	!rule:cx:ne-polite:10	keep	rewrites
+cx:ne-polite:20	「雨が降りますね」	「비가 오네요」	fix	rewrites
+cx:ne-polite:20	「よく似合いますね」	「잘 어울리네요」	fix	rewrites
+cx:ne-polite:20	ほとんど夜が明けますね。	거의 날이 새네요.	fix	rewrites
+cx:ne-polite:20	心が落ち着きますね。	마음이 진정되네요.	fix	rewrites
+cx:ne-polite:20	「本当によく食べますね」	「정말 잘 먹네요」	fix	rewrites
+cx:ne-polite:20	「先に行きますね」	!rule:cx:ne-polite:20	keep	rewrites
+cx:ne-polite:20	「大変ですね」	!rule:cx:ne-polite:20	keep	rewrites
+cx:ne-polite:20	「先に行きますね、それから」	!rule:cx:ne-polite:20	keep	rewrites
+cx:ne-polite:20	秋は、落ち着きますね。	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	ほっとしますね。	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	「ありがたいことに、そう言われますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	「無茶苦茶言いますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「まぁ、田中さん。お野菜もしっかり食べますね」	「뭐, 타나카 씨. 야채도 확실히 먹네요」	fix	rewrites
+cx:ne-promise:22	「佐藤さん、今日はたくさん食べますね」	「사토 씨, 오늘은 많이 먹네요」	fix	rewrites
+cx:ne-promise:20	提督、日が、落ちますね。夜…か…	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	「こうも外すと自信を失いますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	「きゅ、急に切り替えますね……」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	この時間は、町も静まり変えてきますね。	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	美味しいです。沁みますね。	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:20	夕日はどこで見ても、心を、奪われますね。	석양은 어디서 봐도, 마음을, 빼앗기네요.	fix	rewrites
+cx:ne-promise:20	やはり朝の定食はこの店に限りますね！	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	もうすぐ皆さん起きてきますね。	이제 곧 여러분 일어나네요.	fix	rewrites
+cx:ne-promise:20	「面と向かって言われるとやっぱり凹みますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「お茶を見てきますね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	提督、ちょっと席を外しますね。	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	楽屋で食べるね！	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	あたしは良太と後始末があるから落ちるね	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	あたし、少しやせるように頑張るね！	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	少しお昼寝するね……。	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「お兄ちゃん食べるね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「先輩行くね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「先生行きますね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「先生に怒られますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「また叱られますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「お腹が空いてきますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「料理が冷めてきますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「たくさん飲みますね」	!rule:cx:ne-polite:10	fix	rewrites
+cx:ne-promise:22	「私も食べますね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「お弁当、ここで食べますね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「明日はめちゃくちゃ頑張るね」	!rule:cx:ne-promise:22	keep	rewrites
+cx:ne-promise:22	「急に出かけるね」	!rule:cx:ne-promise:22	keep	rewrites

@@ -48,7 +48,11 @@ const dict::LoadResult& SoundDictionary() {
         "ついに\t마침내\tE300\t30\n"
         "ただ\t다만\tE300\t31\n"
         "歌\t노래하\tM100\t32\n"
-        "うよ\t6 버릴 거야\tS5A0\t33\n",
+        "うよ\t6 버릴 거야\tS5A0\t33\n"
+        "べつに\t딱히\tE300\t34\n"
+        "ざんねん\t유감\tN110\t35\n"
+        "へそ\t배꼽\tN110\t36\n"
+        "そう\t그렇게\tE300\t37\n",
     }});
     return result;
 }
@@ -155,11 +159,22 @@ HD_TEST(pipeline_sound) {
         {"司書が本を運ぶ", "司書が本を運ぶ"},
         {"ししょかん", "ししょかん"},
         {"ああああん", "아아아앙"},
+        // A sound gives a ー up to a word that reads the kana without it and goes on two
+        // kana past it (べーつに べつに, ざーんねん ざんねん); not to one that ends one kana
+        // past it before a word of its own (へーそうなんだ).
+        {"べーつに", "べつに"},
+        {"ざーんねん", "ざんねん"},
+        {"へーそうなんだ", "へーそうなんだ"},
         // A cry that ends drawing out its vowel runs on into the next cry; words stay apart.
         {"ひぃやあっ！", "히이야앗！"},
         {"ふぁーふぁー", "후아아후아아"},
         {"やだやだ", "싫어 싫어"},
         {"やだやだっ", "싫어 싫엇"},  // the clipped last copy of a cry closes with ㅅ
+        {"やだっやだっ", "싫엇 싫엇"},  // so does every clipped copy
+        {"やだっ、やだっ！", "싫엇、싫엇！"},  // also across a comma
+        {"いやっ、やだっ", "싫어、싫어"},  // two cries, no copies
+        {"やだっ", "싫어"},  // said once
+        {"やだっ、やだ", "싫어、싫어"},  // the last copy is not clipped
         // Of two keys as long, the one whose Korean draws the vowel out (ひぎぃ, not ひぎっ).
         {"ひぎぃぃぃっ！", "히기이이익！"},
         {"ひぎっ！", "히긱！"},
@@ -187,12 +202,29 @@ HD_TEST(pipeline_sound) {
         {"「わ、わ、私は……」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、私は……」"},
         // A syllable said twice is a stutter even where it alone is a word (さ、 well).
         {"「さ、さ、最低」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、最低」"},
-        {"「さ、最低」", "「자、最低」"},
+        {"「さ、一緒に」", "「자、一緒に」"},
         // A dash run separates; a small vowel stutters its plain vowel; before a dash a lone
         // vowel stands alone.
         {"「ぃ―――いやぁッ」", "「\xEE\x80\x80" "―――싫엇」"},
         {"「あ――本当に」", "「あ――本当に」"},
-        {"「う――痛い」", "「う――痛い」"},
+        {"「う――痛い」", "「으――痛い」"},
+        // A syllable that also stands alone stutters a word in kanji whose reading it starts,
+        // after any separator; a head of one kanji is that kanji before kana. と or で that
+        // opens a line is the conjunction. A lone lead of one kana stands before an ellipsis.
+        {"「ま、待って」", "「\xEE\x80\x80" "、待って」"},
+        {"「ま、待機中」", "「ま、待機中」"},
+        {"「ま、仕方ない」", "「ま、仕方ない」"},
+        {"「お……俺は」", "「\xEE\x80\x80" "……俺は」"},
+        {"「む、無理」", "「\xEE\x80\x80" "、無理」"},
+        {"「と、時計」", "「\xEE\x80\x80" "、時計」"},
+        {"と、時計を見た", "と、時計を見た"},
+        {"「さ……行こう」", "「자……行こう」"},
+        {"「う、多分」", "「으、多分」"},
+        {"「じゅ――う！」", "「じゅ――う！」"},
+        {"「む…、むっ」", "「む…、뭇」"},
+        {"「ちょ…直撃」", "「\xEE\x80\x80" "…直撃」"},
+        {"「ちょ、直撃」", "「잠깐、直撃」"},
+        {"「う…美味い」", "「\xEE\x80\x80" "…美味い」"},
         // Longer pieces that each begin the next: a kana mark for each kana of the piece and
         // a rest mark for each kana of the word it does not reach.
         {"「ご、ごめ、ごめんなさい」",
@@ -244,6 +276,9 @@ HD_TEST(pipeline_sound) {
         {"よー！", "よー！"},
         {"もっと早く", "もっと早く"},
         {"鍵が……おーいだれか", "鍵が……おーいだれか"},
+        // A sound that holds the mark gives it up to a longer word read without it.
+        {"べーつに", "べつに"},
+        {"へーそうなんだ", "へーそうなんだ"},
         {"うーちゃん！", "うーちゃん！"},
         {"休もうっと。", "休もうっと。"},
         {"うるせぇな", "うるさいな"},
@@ -767,7 +802,8 @@ HD_TEST(pipeline_sound_extra_isolation) {
 
 // An interjection before a pause or an ellipsis is read as a sound although an end row
 // has the same key, and so is a sound with no word before it that ends in its と or before
-// no kanji or katakana; after a word or before other text the end row's key still rules it out.
+// no kanji or katakana, a sound after a lone particle, and one that kana go on after; after a
+// word and before the end or a kanji the end row's key still rules it out.
 // An end row's key that kana go on from is no word there, so a sound may start inside it.
 HD_TEST(pipeline_sound_before_pause_over_end_row) {
     const auto& loaded = SoundDictionary();
@@ -787,6 +823,12 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"凄いぴょん！", "凄いぴょん！"},
         {"学校でちらっと見た", "学校で힐끗 見た"},
         {"ありがとぴょん！", "고마워뿅！"},
+        {"猫がぴょんと跳ねた", "猫が폴짝 跳ねた"},
+        {"彼はぴょんと跳ねた", "彼は폴짝 跳ねた"},
+        {"猫ぴょんと跳ねた", "猫폴짝 跳ねた"},
+        {"猫がぴょん！", "猫が뿅！"},
+        {"読んでぴょん！", "読んで뿅！"},
+        {"報告ぴょん！", "報告ぴょん！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
@@ -913,6 +955,59 @@ HD_TEST(pipeline_contracted_iku) {
     }
 }
 
+// The kana an auxiliary after a て form drops come back: the い of いる and いらっしゃる, the あ of
+// あげる and the や of やる after a て form said た; not after a verb stem that ends in て (捨てた), before
+// a word after the て form (負けてたまるか), inside a longer word (来たる, 秘めたる力) nor where an
+// ending row of the て form spells the contraction (見てた。).
+HD_TEST(pipeline_contracted_auxiliaries) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "見\t&AY@\tM437\t1\n"
+                                     "捨て\t버리&AA@\tM437\t2\n"
+                                     "待\t기다리&AA@\tM424\t3\n"
+                                     "読\t읽&AA@\tM425\t4\n"
+                                     "作\t만들&AA@\tM428\t5\n"
+                                     "や\t하&AA@\tM438\t6\n"
+                                     "来\t오&AA@\tM43=\t7\n"
+                                     "来たる\t오는\tN110\t8\n"
+                                     "寝\t자&AA@\tM437\t9\n"
+                                     "歩いて\t걸어 &AH@\tM41;\t10\n"
+                                     "歩\t걷&AA@\tM421\t11\n"
+                                     "た\t5다\tS570\t12\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"見てたところ", "見ていたところ"},
+        {"見てた。", "見てた。"},            // an ending row of the て form spells it
+        {"待ってるんだ", "待っているんだ"},
+        {"待ってられない", "待っていられない"},
+        {"読んでらっしゃるのに", "読んでいらっしゃるのに"},
+        {"読んでらっしゃる。", "読んでらっしゃる。"},  // a pattern row spells it where the sentence ends
+        {"見てろよ", "見ていろよ"},
+        {"してたところ", "していたところ"},
+        {"寝ちゃってた", "寝ちゃっていた"},
+        {"歩いてたところ", "歩いていたところ"},  // 歩いて of 歩いてくる conjugates no た
+        {"作ったげるから", "作ってあげるから"},
+        {"読んだげよう", "読んであげよう"},
+        {"作ったげる", "作ったげる"},        // an end row of the past spells it
+        {"やったるぜ！", "やってやるぜ！"},
+        {"やったる！", "やってやる！"},
+        {"やったります", "やってやります"},
+        {"捨てた", "捨てた"},                // the past of 捨てる
+        {"捨てて", "捨てて"},
+        {"待ってたまるか", "待ってたまるか"},  // contraction.te-iru-not
+        {"来たる", "来たる"},                // a word of the dictionary
+        {"作ったるは", "作ったるは"},        // the attributive before a particle
+        {"見たげな", "見たげな"},            // the げ of a look
+        {"見て", "見て"},
+        {"\xcd見てたところ", "\xcd見ていたところ"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(internal::RewriteContractedAuxiliaries(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    }
+}
+
 // The potential of くる without its ら after the て form of a verb of the dictionary takes its ら
 // back; これ is the pronoun before なら and まで, and after no て form.
 HD_TEST(pipeline_ra_less_kuru) {
@@ -984,8 +1079,12 @@ HD_TEST(pipeline_onbin_u) {
 }
 
 // An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
-// a longer word it starts takes the mark after that word, also with no word before it. A verb
-// stem and its continuative kana before it are no name (かみつき).
+// a longer word it starts takes the mark after its shortest key (ちゃんと, not ちゃんと出), also
+// with no word before it. A verb stem and its continuative kana before it are no name
+// (かみつき), nor is a verb form (お待たせ); a word with the honorific is (みなさん). The end of a
+// sound that the sound stage reads from before it is no honorific (がちゃーん, ぽちゃーんと,
+// どくーんと; not こども + がちゃーんと). After a greeting or an interjection the drawn ちゃん is a
+// familiar tag that leaves the lengthening (おはようちゃーん).
 HD_TEST(pipeline_drawn_honorifics) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -993,28 +1092,48 @@ HD_TEST(pipeline_drawn_honorifics) {
                                      "ちゃう\t아니\tM100\t2\n"
                                      "かみつ\t물\tM100\t3\n"
                                      "みつき\t미츠키\tN130\t4\n"
-                                     "みどり\t미도리\tN130\t5\n"}});
+                                     "みどり\t미도리\tN130\t5\n"
+                                     "ちゃんと出\t잘 나\tC427\t6\n"
+                                     "お待たせ\t기다리게\tM429\t7\n"
+                                     "みな\t간주\tM443\t8\n"
+                                     "みなさん\t여러분\tI120\t9\n"
+                                     "こども\t어린이\tN110\t10\n"
+                                     "おはよう\t좋은 아침\tA9H1\t11\n"}});
     HD_REQUIRE(loaded.errors.empty());
     HD_REQUIRE(loaded.snapshot != nullptr);
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
-        {"圭ちゃ～ん！", "圭ちゃん\uE00A\uE00B！"},
+        {"圭ちゃ～ん！", "圭ちゃん\uE00A！"},
         {"田中さぁあぁあん…", "田中さん\uE00B\uE00B\uE00B\uE00B…"},
-        {"アルくぅん！", "アルくん\uE00B！"},
-        {"みどりさああんん！", "みどりさん\uE00B\uE00B！"},
+        {"アルくぅん！", "アルくん\uE00A！"},
+        {"みどりさああんん！", "みどりさん\uE00A\uE00A！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
-        {"がちゃ～んと", "がちゃんと\uE00A"},
+        {"私がちゃーんと", "私がちゃんと\uE00A"},
+        {"ちゃ～んと出撃", "ちゃんと\uE00A出撃"},
+        {"お待たせちゃーん", "お待たせ\uE00A"},
+        {"おはようちゃーん", "おはよう\uE00A"},
+        {"こどもがちゃーんと", "こどもがちゃんと\uE00A"},
+        {"みなさーん", "みなさん\uE00A"},
+        {"がちゃ～んと", "がちゃ～んと"},
+        {"皿ががちゃーんと", "皿ががちゃーんと"},
+        {"石がぽちゃーんと", "石がぽちゃーんと"},
+        {"心臓がどくーんと", "心臓がどくーんと"},
         {"…くぅん", "…くぅん"},
         {"そうちゃうん？", "そうちゃうん？"},
         {"うくぅんんっ！", "うくぅんんっ！"},
         {"びちゃーん！", "びちゃーん！"},
         {"田中さん", "田中さん"},
         {"かみつきさあん", "かみつきさあん"},
-        {"みどりさああん", "みどりさん\uE00B\uE00B"},
-        // Drawn out by vowel kana or by two or more ー, a drawn mark for each.
-        {"圭ちゃーん！", "圭ちゃん\uE00A\uE00B！"},
-        {"あおくーーーん", "あおくん\uE00B\uE00B\uE00B"},
+        {"みどりさああん", "みどりさん\uE00A\uE00A"},
+        // One lengthening for one stretch mark, two for two or three, a drawn mark for each of four or more;
+        // さま drawn after itself too.
+        {"圭ちゃーん！", "圭ちゃん\uE00A！"},
+        {"あおくーーーん", "あおくん\uE00A\uE00A"},
+        {"あおくーーーーん", "あおくん\uE00B\uE00B\uE00B\uE00B"},
+        {"姫さまぁ！", "姫さま\uE00A！"},
+        {"お嬢様ーっ！", "お嬢様\uE00A！"},
+        {"さまざま", "さまざま"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

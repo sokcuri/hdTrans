@@ -5,7 +5,7 @@ normalize:katakana-wake	言いワケはしたくない。	변명은 하고 싶�
 normalize:katakana-wake	ホンソメワケベラがいる。	청줄청소놀래기가 있다.	keep	normalize
 pattern:書くわけがないじゃないか	食べられないわけがないじゃないか。	먹을 수 없을 리가 없잖아.	fix	builtin-pattern
 pattern:静かなわけがない	簡単なわけがない。	간단할 리가 없다.	fix	builtin-pattern
-pattern:書くわけはなかったが	答えるわけはなかったが、黙っていた。	대답할 리는 없었지만, 입다물고 있었다.	fix	builtin-pattern
+pattern:書くわけはなかったが	答えるわけはなかったが、黙っていた。	대답할 리는 없었지만, 입을 다물고 있었다.	fix	builtin-pattern
 pattern:学生なはず	本当なはずだ。	사실일 것이다.	fix	builtin-pattern
 pattern:学生なわけがない	見かけ通りなわけがない。	외관대로일 리가 없다.	fix	builtin-pattern
 dict:segmentation-b	そんなわけがない。	그럴 리가 없다.	fix	lookup

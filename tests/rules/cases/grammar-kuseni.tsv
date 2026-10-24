@@ -6,12 +6,12 @@ lookup:kuseni	裏切ったくせに。拒絶したくせに。	배반했으면�
 lookup:kuseni	何も知らないくせに！	아무것도 모르면서!	fix	ending-defaults
 lookup:kuseni	いつもは研究室に引きこもっているくせして	언제나 연구실에 틀어박혀 있으면서	fix	ending-defaults
 lookup:kuseni	弱いくせに威張るな。	약하면서 잘난체 하지 마.	fix	ending-defaults
-cx:kuseni-clause:10	いっつもお腹空かせてるくせに、ご飯の時間になると居なくなるよね。	rule:cx:kuseni-clause:10=1고 있으면서	fix	rewrites
-cx:kuseni-clause:10	知ってるくせして黙ってた。	알고 있으면서 입을 다물었다.	fix	rewrites
-cx:kuseni-clause:15	無様に負けてたくせに。	보기 흉하게 지고 있었으면서.	fix	rewrites
-cx:kuseni-clause:15	知ってた癖に何も言わない。	알고 있었으면서 아무것도 말하지 않는다.	fix	rewrites
-cx:kuseni-clause:20	これあげると、よだれを垂らして喜んじゃう癖に	rule:cx:kuseni-clause:20=6버리면서	fix	rewrites
-cx:kuseni-clause:45	これあげると、よだれを垂らして喜んじゃう癖に	rule:cx:kuseni-clause:45=	fix	rewrites
+cx:kuseni-clause:42	いっつもお腹空かせてるくせに、ご飯の時間になると居なくなるよね。	rule:cx:kuseni-clause:42=1고 있으면서	fix	rewrites
+cx:kuseni-clause:42	知ってるくせして黙ってた。	알고 있으면서 입을 다물었다.	fix	rewrites
+cx:kuseni-clause:42	無様に負けてたくせに。	보기 흉하게 지고 있었으면서.	fix	rewrites
+cx:kuseni-clause:42	知ってた癖に何も言わない。	알고 있었으면서 아무것도 말하지 않는다.	fix	rewrites
+cx:kuseni-clause:42	これあげると、よだれを垂らして喜んじゃう癖に	rule:cx:kuseni-clause:42=6버리면서	fix	rewrites
+cx:kuseni-connective:20	これあげると、よだれを垂らして喜んじゃう癖に	rule:cx:kuseni-connective:20=	fix	rewrites
 cx:kuseni-clause:30	笑う癖に何も言わない。	웃으면서 아무것도 말하지 않는다.	fix	rewrites
 cx:kuseni-clause:40	言ったクセに。	말했으면서.	fix	rewrites
 cx:kuseni-clause:50	私も、ボッチのくせに実は責任感が強い	rule:cx:kuseni-clause:50= 	fix	rewrites
@@ -24,12 +24,20 @@ cx:kuseni-clause:50	俺の深層心理なくせに使えないなぁ……	!rule
 cx:kuseni-clause:60	最初は変な味だと思っていたが、むしろ癖になりつつあった。	!rule:cx:kuseni-clause:60	keep	defaults
 cx:kuseni-clause:60	自分でさせないと癖になりますよ	스스로 시키지 않으면 버릇이 돼요	keep	defaults
 cx:kuseni-clause:60	悪い癖に気づいた。	나쁜 버릇을 눈치챘다.	keep	defaults
-cx:kuseni-clause:45	同じ個所を負傷すると癖になる。	같은 부분을 부상하면 버릇이 된다.	keep	defaults
-cx:kuseni-clause:10	爪を噛む癖がある。	손톱을 물어뜯는 버릇이 있다.	keep	defaults
+cx:kuseni-connective:20	同じ個所を負傷すると癖になる。	같은 부분을 부상하면 버릇이 된다.	keep	defaults
+cx:kuseni-clause:42	爪を噛む癖がある。	손톱을 물어뜯는 버릇이 있다.	keep	defaults
 cx:kuseni-clause:40	俺と話をしたいと言ったくせに、千里は口を開かない。	!rule:cx:kuseni-clause:40	keep	ending-defaults
-cx:kuseni-clause:10	知っているくせに教えてくれない。	!rule:cx:kuseni-clause:10	keep	ending-defaults
-cx:kuseni-clause:15	裏切ったくせに。拒絶したくせに。	!rule:cx:kuseni-clause:15	keep	ending-defaults
-cx:kuseni-clause:20	何も知らないくせに！	!rule:cx:kuseni-clause:20	keep	ending-defaults
+cx:kuseni-clause:42	知っているくせに教えてくれない。	!rule:cx:kuseni-clause:42	keep	ending-defaults
+cx:kuseni-clause:42	裏切ったくせに。拒絶したくせに。	!rule:cx:kuseni-clause:42	keep	ending-defaults
+cx:kuseni-clause:42	何も知らないくせに！	!rule:cx:kuseni-clause:42	keep	ending-defaults
 cx:kuseni-clause:30	爪を噛む癖がある。	손톱을 물어뜯는 버릇이 있다.	keep	defaults
 lookup:kuseni	そのくせ、何も言わない。	그러면서도, 아무것도 말하지 않는다.	fix	defaults
 cx:kuseni-clause:60	その癖は俺の中に息づいている。	!rule:cx:kuseni-clause:60	keep	defaults
+cx:kuseni-clause:42	食べちゃったくせに！	먹어버렸으면서!	fix	rewrites
+cx:kuseni-clause:42	忘れちゃうくせに！	잊어버리면서!	fix	rewrites
+cx:kuseni-clause:42	見ちゃったくせに、知らないふりをした。	rule:cx:kuseni-clause:42=6버렸으면서	fix	rewrites
+cx:kuseni-clause:42	子供のくせに生意気だ。	!rule:cx:kuseni-clause:42	keep	rewrites
+cx:kuseni-connective:10	食べちゃったくせに！	rule:cx:kuseni-connective:10=	fix	rewrites
+cx:kuseni-connective:10	知ってるくせに教えてくれない。	알고 있으면서 가르쳐 주지 않는다.	fix	rewrites
+cx:kuseni-connective:10	子供のくせに生意気だ。	!rule:cx:kuseni-connective:10	keep	rewrites
+cx:kuseni-connective:10	爪を噛む癖がある。	손톱을 물어뜯는 버릇이 있다.	keep	rewrites

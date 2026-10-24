@@ -38,3 +38,5 @@ cx:chotto-request:10	ちょっと驚いて。	!rule:cx:chotto-request:10	keep	re
 dict:w:26722	ちょっといる？	!rule:dict:w:26722	keep	local
 dict:w:26722	「ちょっといいかしら？」	rule:dict:w:26722=잠깐	fix	local
 cx:chotto-request:10	「ちょっと慣れて」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	ちょっと貸してくれ。	잠깐 빌려 줘.	fix	rewrites
+cx:chotto-request:10	ちょっと貸してくれた。	!rule:cx:chotto-request:10	keep	rewrites

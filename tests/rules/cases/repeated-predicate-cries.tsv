@@ -30,22 +30,22 @@ cx:copies:36	「痛かった痛かった」	「아팠다 아팠다」	keep	rewri
 cx:copies:36	「やばいやばい……」	!rule:cx:copies:36	keep	rewrites
 cx:copies:36	痛い。	아프다.	keep	rewrites
 cx:copies:36	「痛い」	「아프다」	keep	rewrites
-cx:copies:32	「危ない危ないっ！！」	「위험해 위험햇!!」	fix	rewrites
-cx:copies:32	近い近いっ！	가까워 가까웟!	fix	rewrites
-cx:copies:32	「痛い痛いっ」	「아파 아팟」	fix	rewrites
-cx:copies:32	「熱い熱いっ！」	「뜨거워 뜨거웟!」	fix	rewrites
-cx:copies:32	こわいこわいっ	무서워 무서웟	fix	rewrites
-cx:copies:32	「いやだいやだっ」	「싫어 싫엇」	fix	rewrites
-cx:copies:32	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
-cx:copies:32	だめだだめだっ	안돼 안됏	fix	rewrites
-cx:copies:32	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
-cx:copies:32	「痛いっ！」	「아프다!」	keep	rewrites
-cx:copies:32	痛い痛い	!rule:cx:copies:32	keep	rewrites
-cx:copies:33	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
-cx:copies:33	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites
-cx:copies:33	「だめ、だめっ、これ」	「안돼, 안됏, 이거」	fix	rewrites
-cx:copies:33	「だめっ」	「안돼」	keep	rewrites
-cx:copies:33	だめだめ	!rule:cx:copies:33	keep	rewrites
+cx:clipped-copies:10	「危ない危ないっ！！」	「위험해 위험햇!!」	fix	rewrites
+cx:clipped-copies:10	近い近いっ！	가까워 가까웟!	fix	rewrites
+cx:clipped-copies:10	「痛い痛いっ」	「아파 아팟」	fix	rewrites
+cx:clipped-copies:10	「熱い熱いっ！」	「뜨거워 뜨거웟!」	fix	rewrites
+cx:clipped-copies:10	こわいこわいっ	무서워 무서웟	fix	rewrites
+cx:clipped-copies:10	「いやだいやだっ」	「싫어 싫엇」	fix	rewrites
+cx:clipped-copies:10	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
+cx:clipped-copies:10	だめだだめだっ	안돼 안됏	fix	rewrites
+cx:clipped-copies:10	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
+cx:clipped-copies:10	「痛いっ！」	「아프다!」	keep	rewrites
+cx:clipped-copies:10	痛い痛い	!rule:cx:clipped-copies:10	keep	rewrites
+cx:clipped-copies:20	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
+cx:clipped-copies:20	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites
+cx:clipped-copies:20	「だめ、だめっ、これ」	「안돼, 안됏, 이거」	fix	rewrites
+cx:clipped-copies:20	「だめっ」	「안돼」	keep	rewrites
+cx:clipped-copies:20	だめだめ	!rule:cx:clipped-copies:20	keep	rewrites
 compose:joined-before-doe	だめだめ	안돼 안돼	fix	compose
 compose:joined-before-doe	「だめだめだめ！」	「안돼 안돼 안돼!」	fix	compose
 compose:joined-before-doe	「だめだめそんな、それは悪いよ……！」	「안돼 안돼 그런, 그건 나빠……!」	fix	compose
@@ -105,3 +105,14 @@ sound:drawn-clip	待ってぇぇ	기다려	keep	sound
 sound:drawn-clip	待って待ってぇ	기다려 기다려	keep	sound
 sound:drawn-clip	すごおおおい	대단해~	keep	sound
 dict:w:27518	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	「뭐 일단 응모해 둘까」라고, 밑져야 본전으로 예약해 보았다.	fix	lookup
+cx:copies:31	すごいすごーい	대단해 대단해~	fix	rewrites
+cx:copies:31	すごいすごーい！	대단해 대단해~!	fix	rewrites
+cx:copies:31	「すごいすごーい！」	「대단해 대단해~!」	fix	rewrites
+cx:copies:31	ずるいずるーい	치사해 치사해~	fix	rewrites
+cx:copies:31	はやいはやーい	빨라 빨라~	fix	rewrites
+cx:copies:31	すごいすごーい、ほんとに	대단해 대단해~, 정말	fix	rewrites
+cx:clipped-copies:10	すごいすごーいっ！	대단해 대단햇!	fix	rewrites
+cx:copies:31	すごいすごい	!rule:cx:copies:31	keep	rewrites
+cx:copies:31	いたいいたーい	아파 아파~	keep	rewrites
+cx:copies:31	すごーい！	대단해!	keep	rewrites
+cx:copies:31	「長い長ーい夜」	「긴 긴 밤」	keep	rewrites

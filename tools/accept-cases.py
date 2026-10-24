@@ -7,7 +7,7 @@
 
 Reads the failure report of tools/rule-cases.sh (`rule: input`, `  expected X`, `  actual   Y`)
 and, in each FILE, replaces X by Y in the rows with that rule, input and expected value. Only
-rows whose expected value is a whole translation change; `rule:` and `!rule:` rows assert what a
+rows whose expected value is a whole translation change; `rule:`, `!rule:`, `has:` and `lacks:` rows assert what a
 rule chooses and are fixed by hand. Rows of any kind are rewritten, so run it only on rows whose
 new output was judged better.
 Prints the number of rows changed per file.
@@ -25,7 +25,7 @@ def accept(report, text):
     lines, n = text.split("\n"), 0
     for k, line in enumerate(lines):
         cols = line.split("\t")
-        if line.startswith("#") or len(cols) < 3 or cols[2].startswith(("rule:", "!rule:")):
+        if line.startswith("#") or len(cols) < 3 or cols[2].startswith(("rule:", "!rule:", "has:", "lacks:")):
             continue
         new = fixes.get((cols[0], cols[1], cols[2]))
         if new is not None:

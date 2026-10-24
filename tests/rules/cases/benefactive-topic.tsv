@@ -1,0 +1,23 @@
+# 규칙: GRM-3
+rule	input	expected	kind	layer
+cx:benefactive-topic:10	私が友達にノートを見せてもらった	나는 친구가 노트를 보여 주었다	fix	rewrites
+cx:benefactive-topic:10	「私が先輩に教えてもらったんです」	「저는 선배가 가르쳐 줬습니다」	fix	rewrites
+cx:benefactive-topic:10	私が彼に送ってもらった。	나는 그가 보내 주었다.	fix	rewrites
+cx:benefactive-topic:10	あなたが先生に説明していただいた	당신은 선생님이 설명해 주셨다	fix	rewrites
+cx:benefactive-topic:10	僕が姉に髪を切ってもらいました。	저는 언니가 머리를 잘라 주었습니다.	fix	rewrites
+cx:benefactive-topic:10	私が先生に褒めていただきました	저는 선생님이 칭찬해 주셨습니다	fix	rewrites
+cx:benefactive-topic:10	私が友達に見せてもらった。それから帰った。	나는 친구가 보여 주었다. 그리고 돌아갔다.	fix	rewrites
+cx:benefactive-topic:10	私が君に気持ちよくなってもらうつもりだったの	나는 네가 기분 좋아져 줄 생각이었던 것	fix	rewrites
+cx:benefactive-topic:10	私が作ったケーキを友達に食べてもらった	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私が学校の先生に教えてもらって作った拙いシュシュ	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私が母に作ってもらったお弁当を食べた	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私が友達に見せてもらったのは本だ	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私が友達に会った	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	僕が先生に本を貸してもらった。	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私は友達にノートを見せてもらった	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	あの日、私が医師に娘を診てもらうようにいったときで	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	誰が先生に教えてもらったの？	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	誰が君に教えてもらったの？	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	何が彼に見せてもらったの？	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	どっちが先生に教えてもらったの？	!rule:cx:benefactive-topic:10	keep	rewrites
+cx:benefactive-topic:10	私だけが先生に褒めてもらった	!rule:cx:benefactive-topic:10	keep	rewrites

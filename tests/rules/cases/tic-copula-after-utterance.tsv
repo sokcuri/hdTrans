@@ -1,0 +1,30 @@
+# 규칙: LEX-31
+rule	input	expected	kind	layer
+cx:copula-after-utterance:10	ごちそうさまでち！	잘 먹었어요!	fix	rewrites
+cx:copula-after-utterance:10	わーお！ ごちそうさまでち！	와우! 잘 먹었어요!	fix	rewrites
+cx:copula-after-utterance:10	司令、お返しありがとっす。	사령, 답례 고마워요.	fix	rewrites
+cx:copula-after-utterance:10	ありがとでち！	고마워요!	fix	rewrites
+cx:copula-after-utterance:10	おめでとうでち！	축하해요!	fix	rewrites
+cx:copula-after-utterance:10	北上様、ありがとーでしたー！	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:10	お弁当に手伝ってでち〜	has:도와요	fix	rewrites
+cx:copula-after-utterance:10	今日は休みでち。	오늘은 휴일이에요.	keep	rewrites
+cx:copula-after-utterance:10	朝でち！	아침이에요!	keep	rewrites
+cx:copula-after-utterance:10	ちょっと自慢っす。	조금 자랑이에요.	keep	rewrites
+cx:copula-after-utterance:10	連絡です。	연락입니다.	keep	rewrites
+cx:copula-after-utterance:10	雨が多い季節でち。	비가 많은 계절이에요.	keep	rewrites
+cx:copula-after-utterance:10	大丈夫でち。	괜찮아요.	keep	rewrites
+cx:copula-after-utterance:20	……ふんふん、なるほどでちー！	……흥흥, 그렇군요~!	fix	rewrites
+cx:copula-after-utterance:20	そっかです。	그렇군요.	fix	rewrites
+cx:copula-after-utterance:20	そっか！	그렇구나!	keep	rewrites
+cx:copula-after-utterance:20	なるほど。	그렇구나.	keep	rewrites
+cx:copula-after-utterance:30	おやすみでち。	잘자요.	fix	rewrites
+cx:copula-after-utterance:30	すみませんでち！	죄송합니다!	fix	rewrites
+cx:copula-after-utterance:30	おはようございますでち！	안녕하세요!	fix	rewrites
+cx:copula-after-utterance:30	すみません。	죄송합니다.	keep	rewrites
+cx:copula-after-utterance:30	おやすみ。	잘 자.	keep	rewrites
+cx:copula-after-utterance:10	司令官、お手紙ですよ！	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:10	お手紙でーす。	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:10	この先は立入禁止です。	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:10	インターネットサービスについてです。	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:10	総員、起しでございます。	!rule:cx:copula-after-utterance:10	keep	rewrites
+cx:copula-after-utterance:30	輸送作戦はお任せください……です。	!rule:cx:copula-after-utterance:30	keep	rewrites

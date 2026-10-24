@@ -9,7 +9,7 @@ CLI is an experiment build (CMake -DHDTRANS_PASS_EXPERIMENTS=ON, docs/testing.md
 build/<preset>-passexp/hdtrans with HDTRANS_PRESET as in the other tools). DICTS defaults to dicts/.
 The passes are the names in src/core/word/flush.cpp and the row ids (cx:FAMILY:PRIO) of
 src/core/dict/builtin/constructions.tsv; PASS... limits the run to some of them. Each is left out
-with HDTRANS_PASS_SKIP while tests/rules/cases/, tests/rules/speech-soft/ (--speech soft),
+with HDTRANS_PASS_SKIP while tests/rules/critical/, tests/rules/cases/, tests/rules/speech-soft/ (--speech soft),
 tests/rules/speech-strict/ (--speech strict) and examples/ run, JOBS at a time (default: the number
 of CPUs), each with a fresh HOME, a time limit of SECONDS (default 900) and one dictionary cache that
 a run without a left-out pass fills first.
@@ -33,6 +33,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SUITES = [
+    ("critical", ["tests/rules/critical", "--no-current"]),
     ("themes", ["tests/rules/cases"]),
     ("soft", ["tests/rules/speech-soft", "--", "--speech", "soft"]),
     ("strict", ["tests/rules/speech-strict", "--", "--speech", "strict"]),

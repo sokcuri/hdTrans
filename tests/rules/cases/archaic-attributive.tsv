@@ -26,7 +26,7 @@ cx:archaic-shi:10	はっきり言って、晒し者だ。	!rule:cx:archaic-shi:1
 cx:archaic-shi:10	俺たちみたいなはみ出し者	!rule:cx:archaic-shi:10	keep	rewrites
 cx:archaic-shi:10	選ばれた者	!rule:cx:archaic-shi:10	keep	rewrites
 dict:names.529078	封印されし者よ。	봉인된 자야.	fix	lookup
-pattern:学生ごとき	「お前ごときが私に選ばれたことを感謝すべき立場なのだぞ！」	「너 따위가 나로 선택된 걸 감사해야 할 입장인 것이다!」	fix	lookup
+pattern:学生ごとき	「お前ごときが私に選ばれたことを感謝すべき立場なのだぞ！」	「너 따위가 나에게 선택된 걸 감사해야 할 입장인 것이다!」	fix	lookup
 pattern:学生ごとき	伯爵令息ごときに、侮られる訳にはいかないのだ	백작 영식 따위에, 경시될 수는 없는 것이다	fix	lookup
 pattern:学生ごとき	駆逐艦ごとき、我の主砲で…。	구축함 따위, 나의 주포로….	fix	lookup
 pattern:学生ごとき	人間ごときに負けるものか。	인간 따위에 질까 보냐.	fix	lookup

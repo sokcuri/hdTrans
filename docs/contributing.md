@@ -4,6 +4,8 @@
 
 - 작업 브랜치는 `develop`에서 만들고, PR도 `develop`으로 보냅니다.
 - 일반 PR은 **Squash and merge**로 합칩니다. PR 제목이 최종 커밋 제목이 됩니다.
+- PR은 auto-merge로 합칩니다. 필수 검사는 Build의 `ci-ok`와 PR 제목 검사(`title`)이고, 둘이 통과하면 병합됩니다.
+  브랜치를 `develop` 최신으로 맞출 필요는 없습니다. 병합된 트리는 `develop` push의 Build가 다시 테스트합니다.
 - 정식 릴리스에 넣을 변경은 `develop` → `main` PR로 모읍니다. 이 PR은 **Create a merge commit**으로 합쳐 개별 변경의 제목을 보존합니다.
 
 오역 수정과 검증 방법은 [fixing-translations.md](fixing-translations.md)에 있습니다.

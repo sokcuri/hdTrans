@@ -21,11 +21,12 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 
 | Tool | Does |
 |---|---|
-| `tools/gate.sh [NAME]` | Build and ctest (without `testdata`) with dicts/ and a fresh HOME; the case and example tests must pass; prints `GATE OK` |
+| `tools/gate.sh [NAME]` | Build and ctest (without `testdata`) with dicts/ and a fresh HOME; the critical, case and example tests must pass; prints `GATE OK` |
 | `tools/measure.sh [-c CLI] [-d DICTS] [-b BASE] NAME` | Translate the private sets (lines, sample, test-data documents, web examples) at once, write the changed lines as judge pairs, print the sample chrF |
 | `tools/audit.py draw RUN OUT \| rate LINES GRADES` | A fixed seeded sample of current outputs for grading, and its error rate per set (docs/testing.md) |
 | `tools/chrf.py REF A [B]` | Corpus chrF, and changed, better and worse line counts between two outputs |
 | `tools/count-class.py REGEX [FILE...]` | Lines and distinct keys that share a failure shape |
+| `tools/variants.py CLI [--base CLI DICTS] [--fails]` | Variant sentences of each construction family from slot templates (`tests/variants/`), pass rate per family |
 | `tools/verdicts.py PAIRS FIRST [SECOND]` | Judgment counts and the lines two judges both call worse |
 | `tools/blind.py make \| disagree \| final` | Blind judge input (X/Y per line, private key), the lines two judges answer differently, and the verdicts mapped back |
 | `tools/new-pairs.py OUT NEW [OLD...]` | Judge pairs not judged before with the same before and after (rebased PRs, cycle checks) |
@@ -40,9 +41,9 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 | `tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]` | Leaves out each sentence pass in an experiment build and lists the passes no rule case or example catches (docs/testing.md) |
 | `tools/with-timeout.sh SECONDS CMD...` | Time limit with `timeout`, `gtimeout` or a perl alarm |
 
-ctest runs the `--self-test` of each Python tool (except `shadow.py`), `tests/pick.sh` and
-`tests/measure.sh`. The
-shell tools use the Ninja build folder `build/<preset>`.
+ctest runs the `--self-test` of each Python tool in the table except `shadow.py` and
+`surface-budget.py`, `tests/pick.sh` and `tests/measure.sh`. The shell tools use the Ninja build
+folder `build/<preset>`.
 
 ## Environment
 

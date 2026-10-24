@@ -13,10 +13,12 @@ enum class ConstraintWord : uint8_t {
     Hiragana,  // a hiragana run of two or more characters outside a kana or kanji word
     Kanji,     // a kanji word not after another kanji or the prefixes お and ご
     Source,    // the word whose source is the rule's source
+    EndsInSource,  // a word whose source ends in the rule's source (していただけ, いただけ)
     EndsInDe,  // a word of two or more characters whose source ends in で (歳で, 途中で)
     OStem,     // お and a verb stem ending in hiragana, three characters or more (お待ち, おやめ),
                // not the greetings お帰り and お休み
     EndsInKu,  // a word of two or more characters whose source ends in く (したく, きたく)
+    IruForm,   // a word of word.iru-form: spelled like a form of いる and more (いろ 色, いよう 異様)
 };
 
 // What must be next to the word.
@@ -42,6 +44,9 @@ enum class ConstraintContext : uint8_t {
                         // continuative right after the word, and no kanji or katakana word right before
                         // it (余り好き, 余り伸びない; not 余りの, 余りに, 余り、, 余り過ぎる, 余ります, 在庫余り)
     AfterTeNotAdjective, // right after て or で, and no い, か, く, け, し or だ after the word (見ていたんだ)
+    AfterTe,            // right after て or で (待っていろ, 黙っていたんだ)
+    AfterTeBeforeTa,    // the same with た after the word (待っていたって)
+    AfterSmallTsu,      // right after っ or ッ (行ったんと: the た of a past form)
     Detached,           // nothing, a space or punctuation right before the word (名前: め)
     BeforeSuruForm,     // a form of する goes on from the word's last し (ことしないで, ことしてる)
     OpeningKotode,      // only spaces, opening brackets or an ellipsis before the word in its line, うことで、
@@ -53,7 +58,13 @@ enum class ConstraintContext : uint8_t {
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)
     BeforeNasai,        // なさい or なさいませ follows (お待ちなさい)
-    BeforeCopula,       // だ, で, じゃ, に, の or か follows, which no verb stem takes (いただけだ)
+    AfterWordBeforeTe,  // a word right before and て after (感じはしていた; not はしで食べる)
+    BeforeRassharu,     // らっしゃ follows (座っていらっしゃる: the い starts いらっしゃる)
+    BeforeCopula,       // だ, で, じゃ, に, の, か or なん follows, or no letter, which no verb stem
+                        // takes (いただけだ, いただけなんです, いただけ〜)
+    AfterTeBeforeDake,  // right after て or で, with け after the word and then what BeforeCopula
+                        // takes (いただ of いただけ〜)
+    BeforeDake,         // the same without the て or で (していただ of していただけ。)
 };
 
 // The senses a rule rejects.
@@ -70,6 +81,8 @@ enum class ConstraintReject : uint8_t {
     NonNameBesidePlace,
     // The pronoun senses (N12x), when another sense remains.
     Pronoun,
+    // The senses that are no verb (M), when a verb sense of the word remains.
+    NonVerbs,
     // The senses that do not quote (whose Korean has no 라고, 다고, 라는 or 다는), when
     // one quotes.
     NonQuote,
@@ -91,7 +104,7 @@ enum class ConstraintReject : uint8_t {
 struct ConstraintRule {
     std::string_view id;
     ConstraintWord word;
-    std::string_view source;  // ConstraintWord::Source only
+    std::string_view source;  // ConstraintWord::Source and EndsInSource only
     ConstraintContext context;
     ConstraintReject reject;
     std::string_view note;    // the rule in Korean

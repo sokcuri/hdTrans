@@ -1,0 +1,31 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:drawn-in-word	「べーつに。ただ、土曜日は楽しかったかなーと思っただけ」	has:「딱히.	fix	sound
+sound:drawn-in-word	「いや、べーつにー」	「아니, 딱히~」	fix	sound
+sound:drawn-in-word	「べーつにー」	「딱히~」	fix	sound
+sound:drawn-in-word	べーつに	딱히	fix	sound
+sound:drawn-in-word	「ひーみつ♪」	「비밀♪」	fix	sound
+sound:drawn-in-word	ほーんと……見つけたら	정말……찾아내면	fix	sound
+sound:drawn-in-word	ほーんとに？	정말?	fix	sound
+sound:drawn-in-word	ほーんとだよ	정말이야	fix	sound
+sound:drawn-in-word	ざーんねん	유감	fix	sound
+sound:drawn-in-word	「ざーんねん、外れ」	has:유감	fix	sound
+sound:drawn-in-word	べ～つに	딱히	keep	sound
+sound:drawn-in-word	そーいう事	그런 일	keep	sound
+sound:drawn-in-word	まーた来た	또 왔다	keep	sound
+sound:drawn-in-word	「へーそうなんだ」	「에-그렇구나」	keep	sound
+sound:drawn-in-word	どーんとお願いします！	콰앙 부탁드립니다!	keep	sound
+sound:drawn-in-word	えーっと、対空戦ですか？	으음, 대공전입니까?	keep	sound
+sound:drawn-in-word	撃つよ、ほーら！	has:자아	keep	sound
+sound:drawn-in-word	「ほーら、私に甘えるんだ」	「자아, 나에게 응석부리는 거야」	keep	sound
+sound:drawn-in-word	この場でぎゅーっと抱きしめたくなる	has:꼬오옥	keep	sound
+sound:drawn-in-word	「べーっだ。ほんと可愛くないんだから」	「메롱. 정말 귀엽지 않으니까」	keep	sound
+sound:drawn-in-word	あっかんべー	메롱	keep	sound
+sound:drawn-in-word	うーん、どうしよう	으음, 어떻게 하지	keep	sound
+sound:drawn-in-word	おーい、待って	어이, 기다려	keep	sound
+sound:drawn-in-word	さぁて、行くか	자, 갈까	keep	sound
+sound:drawn-in-word	まぁいいや	뭐 좋아	keep	sound
+sound:drawn-in-word	へーきへーき	괜찮아 괜찮아	keep	sound
+sound:drawn-in-word	まぁでも個人の念力で	lacks:까지도	keep	sound
+sound:drawn-in-word	司令官、もっともーっとがんばりますね！	has:좀더 좀더	fix	sound
+sound:drawn-in-word	「ざーんねん、違いまーす！」	has:유감	fix	sound

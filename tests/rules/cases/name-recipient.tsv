@@ -1,0 +1,22 @@
+# 규칙: GRM-16
+rule	input	expected	kind	layer
+cx:name-recipient:10	美咲に渡した	미사키에게 건네주었다	fix	rewrites
+cx:name-recipient:10	美咲にあげる	rule:cx:name-recipient:10=에게	fix	rewrites
+cx:name-recipient:10	美咲に言った	미사키에게 말했다	fix	rewrites
+cx:name-recipient:10	美咲に話した	미사키에게 이야기했다	fix	rewrites
+cx:name-recipient:10	美咲に頼んだ	미사키에게 부탁했다	fix	rewrites
+cx:name-recipient:10	健太にあげる	켄타에게 준다	fix	rewrites
+cx:name-recipient:10	美咲に手紙を見せた	미사키에게 편지를 보였다	fix	rewrites
+cx:name-recipient:10	七海に教えた	rule:cx:name-recipient:10=에게	fix	rewrites
+cx:name-recipient:10	美浜に預けた	미하마에게 맡겼다	fix	rewrites
+cx:name-recipient:10	美浜に任せておけ	미하마에게 맡겨 두어라	fix	rewrites
+cx:name-recipient:10	健太に謝るために	켄타에게 사과하기 위해	fix	rewrites
+cx:name-recipient:10	美咲にあげるのは	rule:cx:name-recipient:10=에게	fix	rewrites
+cx:name-recipient:10	美咲に会った	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	美咲に行った	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	パリに送った	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	ロンドンに言った	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	美咲に住んでいる	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	美咲には言った	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	京都に聞いた	!rule:cx:name-recipient:10	keep	rewrites
+cx:name-recipient:10	大阪に頼んだ	!rule:cx:name-recipient:10	keep	rewrites

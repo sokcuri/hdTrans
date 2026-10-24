@@ -1,4 +1,5 @@
 #! layer=words
-# 수동형 알아차림 동사의 부정 희망형
+# 수동형 동사의 낱말: 알아차림 동사의 부정 희망형, 잠을 깨우는 起こされ
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気づかれたくな	들키고 싶지 $D7@	H7U0			GN							passive:1
+起こされ	&C2@	M427			GN	7462	||1 &&2 S-1== "に" D-1= "에"	사람이 아닌 말 뒤 に 바로 뒤의 起こされ는 그것에 잠이 깬 일이므로 깨다로 고르고 に를 에로 바꾼다.				passive:2

@@ -1,4 +1,4 @@
-# 규칙: LEX-35
+# 규칙: GRM-11
 rule	input	expected	kind	layer
 dict:drops-conj:11	人が散ったところを見計らい、白崎に	사람이 진 곳을 가늠해, 시라사키에	fix	ending-defaults
 dict:drops-conj:11	抗議しようとしたところを、唇でふさがれた	항의하려고 한 곳을, 입술로 채워졌다	fix	ending-defaults

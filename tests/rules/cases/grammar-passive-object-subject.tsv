@@ -1,0 +1,35 @@
+# 규칙: GRM-14
+rule	input	expected	kind	layer
+voice:object-subject	名前を呼ばれた気がした。	이름이 불린 것 같았다.	fix	voice
+voice:object-subject	名前を呼ばれた結衣は、びくりと肩を震わせた。	has:이름이 불린 유이는	fix	voice
+voice:object-subject	少女のようにどう見ても目下のものに、実名を呼ばれる事は大変許しがたい行為である。	has:실명이 불리는	fix	voice
+voice:object-subject	先生に名前を呼ばれた。	선생님에게 이름이 불렸다.	fix	voice
+voice:object-subject	ヒエラルキーは一瞬にして最下層に落ちて、ホーケーという仇名を付けられてからかわれた。	has:별명이 붙여지고	fix	voice
+voice:object-subject	一度大怪我をし、痩身処置を施された。	has:감량 처치가 실시되었다	fix	voice
+voice:object-subject	これ以上ぐずぐずしていたら、本当に新たな条件を付け加えられてしまう。	has:조건이 덧붙여져	fix	voice
+voice:object-subject	広場は集合住宅のような高い建物に四方を囲まれていて、	has:사방이 둘러싸여	fix	voice
+voice:object-subject	要約すればこんなことを書かれていた。	has:이런 일이 쓰여져	fix	voice
+voice:object-subject	今回なんか4人も命を救われてるんだぜ？	has:목숨이 구해지고	fix	voice
+voice:object-subject	繋がりを断たれるともう捜しようがねーんだ	has:연결이 끊기면	fix	voice
+voice:object-subject	それは望みを絶たれた悲しさの裏返しでもあった。	has:소망이 끊긴	fix	voice
+voice:object-subject	突然、よく知った声に視界を遮られた！	has:시야가 가로막아졌다	fix	voice
+voice:object-subject	コゼットの居室は中庭に面した陽当たりの良い部屋を割り当てられており、	has:방이 할당되고	fix	voice
+voice:object-subject	頭からレモネードを浴びせられていた。	has:레모네이드가 퍼부어지고	fix	voice
+voice:object-subject	まず正しい姿勢を徹底的に叩き込まれた。	has:자세가 철저하게 주입되었다	fix	voice
+voice:object-subject	親子ほどに年の離れた娘に、自分の好みや願望を見透かされていたことにも驚いた	has:소망이 간파되고	fix	voice
+voice:object-subject	「付き合ってることを知られるの、恥ずかしいんじゃなかったのかよ」	has:사귀는 일이 알려지는	fix	voice
+voice:object-subject	千里に足を踏まれた。	has:발을 밟혔다	keep	voice
+voice:object-subject	瞬間、胸ぐらを掴まれた。	has:멱살을 잡혔다	keep	voice
+voice:object-subject	スプーンを奪われてしまった。	has:스푼을 빼앗겨	keep	voice
+voice:object-subject	急に腕を引かれ、バランスを崩す。	has:팔을 끌려	keep	voice
+voice:object-subject	私は弟に手紙を破られた。	나는 남동생에게 편지를 찢겼다.	keep	voice
+voice:object-subject	この婚約ははじめから、数年で解消されることを前提に結ばれたものである。	lacks:것이 전제로	keep	voice
+voice:object-subject	一生を本に囲まれて生きていきたい。	has:일생을 책에	keep	voice
+voice:object-subject	あの鏡はビームを反射するために作られたと考えるべきでしょう。	has:빔을 반사하기	keep	voice
+voice:object-subject	≪彼女を連れ去られてしまっては、何百万の命が失われる≫	has:그녀를 데리고	keep	voice
+voice:object-subject	彼が手紙を書かれた。	lacks:편지가	keep	voice
+voice:object-subject	OK! いいね!これなら奴らをやっつけられる！	lacks:놈들이	keep	voice
+voice:object-subject	「私も同感〜！ 校長先生の頭を撫でられるのは梨花ちゃんだけだし。」	lacks:머리가	keep	voice
+voice:object-subject	「ちゃんと、貴方を受け止められたわ……」	lacks:당신이	keep	voice
+voice:object-subject	「……どのことをおっしゃられているのか」	lacks:어느 게	keep	voice
+voice:object-subject	ある時を境にふっつりと姿を隱してしまわれたのだが、	lacks:모습이	keep	voice

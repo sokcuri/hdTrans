@@ -50,10 +50,12 @@
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
 //     entry at least as long as the sound's key (without a final と), win; the ending
-//     of an end row does not win over an intj row before a pause or an ellipsis, nor over
+//     of an end row wins only after no lone particle and where no kana that are no
+//     lengthening go on after it (うさぎがぴょんと 폴짝, 読んでぴょん 뿅, 猫ぴょんと 폴짝;
+//     報告ぴょん 보고다뿅), not over an intj row before a pause or an ellipsis, nor over
 //     a sound with no word right before it that ends in its と or comes before no kanji or
-//     katakana (敬礼！ぴょん！ 뿅), and it is no word where kana that are no lengthening or a
-//     kanji go on after it (関連でちょこっと: で + ちょこっと).
+//     katakana (敬礼！ぴょん！ 뿅), and it is no word where it may not end the sentence
+//     (関連でちょこっと: で + ちょこっと).
 //
 // A katakana word that starts an utterance or follows 、 or an ellipsis, before ！と or
 // ！っと, that an ono row reads alone or with ッ is that sound even where a dictionary word
@@ -91,7 +93,8 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedNo,
+// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedAuxiliaries, RewriteRaLessKuru,
+// RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
@@ -125,6 +128,9 @@ std::string WriteMasked(std::string_view text, const LineContext& ctx, const dic
 // nor letters.
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The spans [from, to) in characters of text that WriteSounds reads as keys of the sound lexicon.
+std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The cries of text that the lexicon lacks written in Korean as heard: a run of kana
 // that starts with hiragana (katakana speech and names are left to later stages) where an
 // utterance starts or after a comma, an ellipsis, a dash or a mark of tone (not after a
@@ -152,6 +158,20 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 // before contraction.te-iku-not (待ってったら).
 // The て form is a verb of the dictionary that ends in its て or で.
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The kana that casual speech drops of an auxiliary after a て form written back, so that the form
+// reads as said in full: the い of いる and いらっしゃる before contraction.te-iru (見てたところ
+// 見ていたところ, 待ってられない 待っていられない), also after the て form of ちゃう (寝ちゃってた
+// 寝ちゃっていた); the あ of あげる before contraction.ta-ageru and the や of やる before
+// contraction.ta-yaru, or contraction.ta-yaru-final before no letter, where the て before them is said
+// た or だ (作ったげるから 作ってあげるから, やったるわ やってやるわ; not 秘めたる力). The て form is a verb
+// of the dictionary, or する or くる, that ends in て or で. Not written back: before a word of the
+// dictionary that reaches two or more characters past the contracted form (負けてたまるか,
+// 割ってちゃわん), after a verb stem that ends there (捨てた, 育てる), inside
+// a word of the dictionary (来たる, いってらっしゃい), where an ending row of the dictionary spells the
+// contraction (見てるの, 見てた。, 作ったげる。; for the past た of いる any row longer than it, which the
+// word stage reads on the past of いる: 見てたぞ) and before contraction.te-iru-past.
+std::string RewriteContractedAuxiliaries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The potential of the くる after a て form said without its ら (帰ってこれた 帰ってこられた, 逃げてこれる)
 // written in full: before the forms of contraction.ra-less-kuru when the dictionary has the verb

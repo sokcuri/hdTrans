@@ -1,0 +1,86 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+sound:contracted-auxiliaries	ウズウズしてたとこさ！	근질근질하고 있던 참이야!	fix	sound
+sound:contracted-auxiliaries	飯を作ってたとこなんだ。	밥을 만들고 있던 참이야.	fix	sound
+sound:contracted-auxiliaries	そこからお前が住んでたところを割り出して、後はまあ……地道な聞き込みだな	거기에서 네가 살고 있던 곳을 산출해, 나머지는 뭐……충실한 탐문이네	keep	sound
+sound:contracted-auxiliaries	ただ幸せだなって思ってたところです	다만 행복하다라고 생각했습니다	keep	sound
+sound:contracted-auxiliaries	予定してたところを全部回ったと思った瞬間、全身がずっしりと重くなった。	예정하고 있던 곳을 전부 돌았다고 생각한 순간, 전신이 묵직 무거워졌다.	keep	sound
+sound:contracted-auxiliaries	いいよ、やったげよか？	좋아, 해 줄까?	fix	sound
+sound:contracted-auxiliaries	遅れたら、後で笑ったげるわ！	늦으면, 나중에 웃어 줄게!	fix	sound
+sound:contracted-auxiliaries	原稿書きながら付き合ったげるぅ～	has:어울려	fix	sound
+sound:contracted-auxiliaries	行ったげるよ。	가 줄게.	fix	sound
+sound:contracted-auxiliaries	だったら、あたしがまとめて買ったげるわ	그렇다면, 내가 모아서 사 줄게	fix	sound
+sound:contracted-auxiliaries	ジャ…ジャア……わたし、やったげる！	그…그럼……나, 해 줄게!	keep	sound
+sound:contracted-auxiliaries	私がやったげる！	내가 해 줄게!	keep	sound
+sound:contracted-auxiliaries	対艦、対潜、対空、お料理だって、やったげる！	대함, 대잠, 대공, 요리도, 해 줄게!	keep	sound
+sound:contracted-auxiliaries	オッケー、取ったげる。	has:줄게	keep	sound
+sound:contracted-auxiliaries	私とったげる。	나 잡아 줄게.	keep	sound
+sound:contracted-auxiliaries	いっちょやったりますよ！	한번 해 줘요!	current	sound
+sound:contracted-auxiliaries	ああ、やったるさ。	아, 해 줄게.	fix	sound
+sound:contracted-auxiliaries	あたいが、やったるわ！	내가, 해 줄게!	fix	sound
+sound:contracted-auxiliaries	やったるぜ！	해 준다!	keep	sound
+sound:contracted-auxiliaries	やったるで。	해 줄 거야.	keep	sound
+sound:contracted-auxiliaries	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	keep	sound
+sound:contracted-auxiliaries	んっ、敵艦隊発見したぜ、やったるぜぇ、合戦準備！	읏, 적함대 발견했다구, 해 준다, 전투 준비!	keep	sound
+sound:contracted-auxiliaries	さあ、やったるぜー！	자, 해 준다~!	keep	sound
+sound:contracted-auxiliaries	そんなの……見てられないもん……	그런 것……보고 있을 수 없는 걸……	fix	sound
+sound:contracted-auxiliaries	テレビのニュースによくお顔出てらっしゃるだろうよ……ニュースぐらい見ろよ……って見てるのか	텔레비전의 뉴스에 잘 얼굴 나와 계실 것이다……뉴스 정도 봐라……는 보고 있는 거야	fix	sound
+sound:contracted-auxiliaries	あの頃はみんなが聞きたがってさあ、オイラ、のんびり遊んでられなかったよ。	그 무렵은 모두가 듣고 싶어해 자, 나, 한가로이 놀고 있을 수 없었어.	fix	sound
+sound:contracted-auxiliaries	青葉、じっとしてられないな。	has:가만히	fix	sound
+sound:contracted-auxiliaries	付き合ってられませんわ	사귀고 있을 수 없어요	fix	sound
+sound:contracted-auxiliaries	咬みつきさん色白なまめかしい御手をしてらっしゃるようなので…	물어씨흰 피부 요염한 손을 하고 계시는 것 같아서…	fix	sound
+sound:contracted-auxiliaries	うーん……１時間も待ってられないし……ん、仕方がない	으음……1시간이나 기다리고 있을 수 없고……응, 어쩔 수 없다	fix	sound
+sound:contracted-auxiliaries	そこまで思ったら、もうジッとしてられなかった。	거기까지 생각했더니, 벌써 가만히 하고 있을 수 없었다.	fix	sound
+sound:contracted-auxiliaries	でないとやってられない。	그렇지 않으면 할 수 없다.	fix	sound
+sound:contracted-auxiliaries	まあ、あるいはそうでも思わないとやってられなかったのかもしれないが。	뭐, 혹은 그래도 생각하지 않으면 할 수 없었던 걸지도 모르겠지만.	fix	sound
+sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없다!	fix	sound
+sound:contracted-auxiliaries	そんなこと言ってられないよ。	그런 말 하고 있을 수 없어.	fix	sound
+sound:contracted-auxiliaries	飲まないとやってられないぃ！	마시지 않으면 할 수 없다!	fix	sound
+sound:contracted-auxiliaries	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	keep	sound
+sound:contracted-auxiliaries	みんな、ついてらっしゃい！	모두, 따라와!	keep	sound
+sound:contracted-auxiliaries	難しい顔をしてらっしゃる	심각한 표정을 하고 계신다	keep	sound
+sound:contracted-auxiliaries	壊れちまってるんだよ。	망가져 버렸어.	fix	sound
+sound:contracted-auxiliaries	一人は泣いちゃってるんでしょ？	한 사람은 울어 버린 거지?	fix	sound
+sound:contracted-auxiliaries	んっ……こんなに、エッチな格好で、下も沢山濡らしちゃってるのに	읏……이렇게, 야한 모습으로, 아래도 많이 적셔 버렸는데	fix	sound
+sound:contracted-auxiliaries	そういえば、気付いたらサッちゃんが掃除を済ませちゃってるなぁ……	그러고 보니, 정신을 차려 보니 삿짱이 청소를 끝마쳤군……	fix	sound
+sound:contracted-auxiliaries	ゾワゾワしちゃってる……	오싹오싹해버렸다……	keep	sound
+sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸다……	keep	sound
+sound:contracted-auxiliaries	…あ、本当に寝ちゃってる。	…아, 정말 자버렸다.	keep	sound
+sound:contracted-auxiliaries	……オージマに、持ってて、もらいたいの……	……오지마에, 가지고 있어, 받고 싶은 거야……	keep	sound
+sound:contracted-auxiliaries	……言ってて、恥ずかしくなってきた……	……말해, 부끄러워졌다……	keep	sound
+sound:contracted-auxiliaries	……負けた理由を理解してれば次からはどう戦えばいいのかわかってるはずよ、がんばってね！	……진 이유를 이해하고 있으면 다음부터는 어떻게 싸우면 되는 건지 알고 있을 것, 힘내!	keep	sound
+sound:contracted-auxiliaries	慌てて、みいちゃんたちも俺たちの元に駆けつけた。	당황해, 미이짱들도 우리의 바탕으로 달려왔다.	keep	sound
+sound:contracted-auxiliaries	ちゃんと勝てれば、レナにだっておいしいチャンスなのに！	제대로 이길 수 있으면, 레나에게라도 맛있는 찬스인데!	keep	sound
+sound:contracted-auxiliaries	見てて～	보고 있어~	keep	sound
+sound:contracted-auxiliaries	住んでたところ	has:살고 있던	fix	sound
+sound:contracted-auxiliaries	見てたところ	보고 있던 참	fix	sound
+sound:contracted-auxiliaries	読んだげるね	읽어 줄게	fix	sound
+sound:contracted-auxiliaries	見せたげて	보여 줘	fix	sound
+sound:contracted-auxiliaries	やめたげて	그만두어 줘	fix	sound
+sound:contracted-auxiliaries	寝ちゃってた	자 버렸다	keep	sound
+sound:contracted-auxiliaries	見てた。	보았다.	keep	sound
+sound:contracted-auxiliaries	捨てた	버렸다	keep	sound
+sound:contracted-auxiliaries	育てる	기른다	keep	sound
+sound:contracted-auxiliaries	来たる	오는	keep	sound
+sound:contracted-auxiliaries	秘めたる力	은밀한인 힘	keep	sound
+sound:contracted-auxiliaries	取り出したるは	꺼낸 것은	keep	sound
+sound:contracted-auxiliaries	負けてたまるか	질 수는 없다	keep	sound
+sound:contracted-auxiliaries	寝ちゃってたまらない	자서 견딜 수 없다	keep	sound
+sound:contracted-auxiliaries	言いたげな顔	말하고 싶은 듯한 얼굴	keep	sound
+sound:contracted-auxiliaries	いってらっしゃい	잘 다녀와	keep	sound
+sound:contracted-auxiliaries	ふんふん、いってらっしゃーい。	흥흥, 잘 다녀와.	keep	sound
+sound:contracted-auxiliaries	いつまでたっても	아무리 시간이 흘러도	keep	sound
+lookup:past-before-ge	弱者はただしいたげられるだけ	약자는 다만 시달릴 뿐	keep	lookup
+sound:contracted-auxiliaries	丁度クリーニングに出そうと思ってたところだから	꼭 클리닝에 맡기려고 한 참이니까	fix	sound
+sound:contracted-auxiliaries	手を当ててたいへんだ	손을 대어 힘들다	keep	sound
+sound:contracted-auxiliaries	言ってたいしたことない	말해 대단한 것도 아니다	keep	sound
+sound:contracted-auxiliaries	割ってちゃわんを	나누어 공기 그릇을	keep	sound
+sound:contracted-auxiliaries	見てちゃんと	봐 제대로	keep	sound
+sound:contracted-auxiliaries	見てようやく	봐 드디어	keep	sound
+sound:contracted-auxiliaries	神聖かまってちゃん	신성한가 기다려	keep	sound
+sound:contracted-auxiliaries	先生、ケーキは忘れてたですわ	선생님, 케이크는 잊고 있었던이에요	current	sound
+sound:contracted-auxiliaries	待ってたあああ！！	기다리고 있었던 아 아!!	current	sound
+dict:s:9453	かまってちゃんが来た	관심병 환자가 왔다	fix	defaults
+dict:s:9453	かまってちゃんなの？	관심병 환자야?	fix	defaults
+dict:s:9453	かまってちゃんかよ	관심병 환자인가	fix	defaults
+dict:s:9453	かまってちゃんだね	관심병 환자구나	fix	defaults

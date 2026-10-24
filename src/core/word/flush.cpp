@@ -71,7 +71,7 @@ constexpr auto kTextPassNames = [] {
 
 // The passes Flush runs outside kTextPasses.
 constexpr std::string_view kOuterPasses[] = {
-    "DrainNmTail",    "ReinsertPhrases",    "PassiveRecords", "CleanupSelectors", "CleanupClass3", "ApplyNegatives",
+    "DrainNmTail",    "ReinsertPhrases",    "DecideVoice",    "CleanupSelectors", "CleanupClass3", "ApplyNegatives",
     "PreferTerminal", "ExclaimedAdjective", "VerbNegative",   "FilterMisreads",   "FilterCg"};
 
 std::string_view Trim(std::string_view s) {
@@ -178,7 +178,7 @@ std::span<const std::string_view> TextPassNames() { return kTextPassNames; }
 void Flush(Flusher& f) {
     Run(f, {"DrainNmTail", DrainNmTail});
     Run(f, {"ReinsertPhrases", ReinsertPhrases});
-    if (f.w.settings.text) Run(f, {"PassiveRecords", PassiveRecords});
+    if (f.w.settings.text) Run(f, {"DecideVoice", DecideVoice});
     Run(f, {"CleanupSelectors", CleanupSelectors});
     Run(f, {"CleanupClass3", CleanupClass3});
     Run(f, {"ApplyNegatives", ApplyNegatives});

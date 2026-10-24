@@ -506,6 +506,7 @@ std::string WriteLengthening(std::string_view s) {
     // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
     static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
     std::u32string out;
+    int lengthenings = 0;  // the lengthenings right before r
     for (const char32_t r : rs) {
         if (const auto last = out.size() >= 2 && out.back() == U'~' ? text::Split(out[out.size() - 2]) : std::nullopt;
             r == kDrawnMark && last) {
@@ -526,7 +527,10 @@ std::string WriteLengthening(std::string_view s) {
             out.push_back(r);
         } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
             out.push_back(U'~');
+        } else if (lengthenings == 1) {
+            out.push_back(U'~');  // two lengthenings in a row (くぅぅん 군~~)
         }
+        lengthenings = r == kLengthenMark ? lengthenings + 1 : 0;
     }
     return Utf8(out);
 }
@@ -619,24 +623,105 @@ struct LaughRun {
     std::size_t start, end;
 };
 
-// The runs of mark.laughter letters in rs that no Latin letter, digit or one of . / @ _ : touches.
+// The maximal runs of letters of laughs in rs.
 std::vector<LaughRun> LaughRuns(const std::vector<RuneAt>& rs, std::u32string_view laughs) {
-    auto touches = [](char32_t r) {
-        return ((text::IsLetter(r) || text::IsDigit(r)) && !internal::IsJapaneseRune(r) && !IsSyllable(r)) ||
-               Contains(U"./@_:", r);
-    };
     std::vector<LaughRun> runs;
     for (std::size_t i = 0; i < rs.size();) {
-        if (!Contains(laughs, rs[i].cp) || (i > 0 && touches(rs[i - 1].cp))) {
+        if (!Contains(laughs, rs[i].cp)) {
             i++;
             continue;
         }
         std::size_t end = i;
         while (end < rs.size() && Contains(laughs, rs[end].cp)) end++;
-        if (end == rs.size() || !touches(rs[end].cp)) runs.push_back({i, end});
+        runs.push_back({i, end});
         i = end;
     }
     return runs;
+}
+
+// Fullwidth forms (Ａ ｗ ０).
+bool Wide(char32_t r) { return r >= 0xFF01 && r <= 0xFF5E; }
+
+// A letter or digit of a Latin, Greek or Cyrillic word, of either width.
+bool LatinRune(char32_t r) { return (r < 0x2000 || Wide(r)) && (text::IsLetter(r) || text::IsDigit(r)); }
+
+// The marks of addresses, handles and code that join a letter next to them into one token.
+constexpr std::u32string_view kAddressMarks = U"/@_:=#&／＠＿＃";
+
+// What a run of laughing letters writes.
+enum class Laugh : std::uint8_t { None, Run, Bracketed };
+
+// What each run of src writes, read from the typed text around it.
+std::vector<Laugh> TypedLaughs(const std::vector<RuneAt>& src, const std::vector<LaughRun>& runs) {
+    const auto size = static_cast<std::ptrdiff_t>(src.size());
+    auto at = [&](std::ptrdiff_t i) -> char32_t { return i < 0 || i >= size ? 0 : src[static_cast<std::size_t>(i)].cp; };
+    auto space = [](char32_t r) { return r == U' ' || r == U'　'; };
+    auto dot = [](char32_t r) { return r == U'.' || r == U'．'; };
+    auto particle = [](char32_t r) {
+        std::string one;
+        text::AppendRune(one, r);
+        return dict::InClass("particle.after-letter", one);
+    };
+    // Whether the rune at i, on the side step of a run of width wide, joins the run into a word
+    // or an address: a Latin letter or digit of the same width, a mark of kAddressMarks, or dots
+    // with such a letter beyond them (www.example.com, No...way).
+    auto touches = [&](std::ptrdiff_t i, std::ptrdiff_t step, bool wide) {
+        const char32_t r = at(i);
+        if (LatinRune(r)) return Wide(r) == wide;
+        if (dot(r)) {
+            while (dot(at(i))) i += step;
+            return LatinRune(at(i));
+        }
+        return Contains(kAddressMarks, r);
+    };
+    std::vector<Laugh> laughs;
+    for (const LaughRun& run : runs) {
+        const auto s = static_cast<std::ptrdiff_t>(run.start);
+        const auto e = static_cast<std::ptrdiff_t>(run.end);
+        const char32_t p = at(s - 1);
+        const char32_t n = at(e);
+        std::ptrdiff_t q = s - 1;
+        while (q >= 0 && space(at(q))) q--;
+        const bool opens = q < 0;
+        const bool single = e - s == 1;
+        auto noun = [](char32_t r) { return internal::IsKanjiRune(r) || internal::IsKatakanaRune(r); };
+        Laugh laugh = Laugh::Run;
+        if (touches(s - 1, -1, Wide(at(s))) || touches(e, 1, Wide(at(s))) || (q < s - 1 && LatinRune(at(q)))) {
+            laugh = Laugh::None;
+        } else if ((p == U'(' || p == U'（') && (n == U')' || n == U'）')) {
+            std::ptrdiff_t b = s - 2;
+            while (b >= 0 && space(at(b))) b--;
+            const char32_t a = at(e + 1);
+            const bool closes = a == 0 || space(a) ||
+                                !(internal::IsJapaneseRune(a) || LatinRune(a) || IsSyllable(a) || Contains(U"、，,", a));
+            laugh = !LatinRune(at(b)) && closes ? Laugh::Bracketed : Laugh::None;
+        } else if ((opens && (internal::IsHiraganaRune(n) || (single && noun(n)))) || (particle(p) && particle(n)) ||
+                   (single && (p == 0 || space(p) || noun(p) || particle(p)) && (particle(n) || (particle(p) && noun(n))))) {
+            laugh = Laugh::None;
+        }
+        laughs.push_back(laugh);
+    }
+    return laughs;
+}
+
+// What each run of rs writes, read from the output alone: a run that no Latin letter, digit or
+// address mark touches laughs after a Hangul syllable, the Korean laughter or a mark of before,
+// past spaces, or at the start of the line unless a Hangul syllable follows it (w를 입력).
+std::vector<Laugh> OutputLaughs(const std::vector<RuneAt>& rs, const std::vector<LaughRun>& runs,
+                                std::u32string_view before, char32_t korean) {
+    auto touches = [](char32_t r) { return LatinRune(r) || r == U'.' || Contains(kAddressMarks, r); };
+    std::vector<Laugh> laughs;
+    for (const LaughRun& run : runs) {
+        std::size_t prev = run.start;
+        while (prev > 0 && rs[prev - 1].cp == U' ') prev--;
+        const bool opens = prev == 0;
+        const char32_t p = opens ? 0 : rs[prev - 1].cp;
+        const char32_t n = run.end < rs.size() ? rs[run.end].cp : 0;
+        const bool touched = (run.start > 0 && touches(rs[run.start - 1].cp)) || touches(n);
+        const bool after = opens || IsSyllable(p) || p == korean || Contains(before, p);
+        laughs.push_back(!touched && after && !(opens && IsSyllable(n)) ? Laugh::Run : Laugh::None);
+    }
+    return laughs;
 }
 
 }  // namespace
@@ -650,44 +735,73 @@ std::string WriteLaughter(std::string_view line, std::string_view source) {
     for (const std::string_view m : dict::ClassMembers("mark.before-laughter")) before += text::DecodeRune(m).cp;
     const std::string_view korean = dict::ClassMembers("ko.laughter").front();
     const char32_t koreanRune = text::DecodeRune(korean).cp;
-    auto particle = [](char32_t r) {
-        std::string one;
-        text::AppendRune(one, r);
-        return dict::InClass("particle.after-letter", one);
-    };
-    // Whether the source run is a letter used as a word: one letter after a kanji, katakana, the
-    // start or a particle, before a particle (変数wの値), or after a particle before kanji or
-    // katakana (のwキー).
-    const std::vector<RuneAt> src = RunesAt(source);
-    std::vector<bool> words;
-    for (const LaughRun& run : LaughRuns(src, laughs)) {
-        const char32_t p = run.start == 0 ? 0 : src[run.start - 1].cp;
-        const char32_t n = run.end == src.size() ? 0 : src[run.end].cp;
-        const bool after = p == 0 || p == U' ' || internal::IsKanjiRune(p) || internal::IsKatakanaRune(p) || particle(p);
-        words.push_back(run.end - run.start == 1 && after &&
-                        (particle(n) || (particle(p) && (internal::IsKanjiRune(n) || internal::IsKatakanaRune(n)))));
-    }
+    const std::string bracketed = "(" + std::string(dict::ClassMembers("ko.bracketed-laughter").front()) + ")";
     const std::vector<RuneAt> rs = RunesAt(line);
     const std::vector<LaughRun> runs = LaughRuns(rs, laughs);
-    const bool aligned = runs.size() == words.size();
-    std::string out;
-    std::size_t copied = 0;  // bytes of line written to out
-    for (std::size_t k = 0; k < runs.size(); k++) {
-        const LaughRun& run = runs[k];
-        std::size_t prev = run.start;
-        while (prev > 0 && rs[prev - 1].cp == U' ') prev--;
-        const bool opens = prev == 0;
-        const char32_t p = opens ? 0 : rs[prev - 1].cp;
-        const char32_t n = run.end < rs.size() ? rs[run.end].cp : 0;
-        const bool after = opens || IsSyllable(p) || p == koreanRune || Contains(before, p);
-        const bool word = (aligned && words[k]) || (opens && IsSyllable(n));
-        if (!after || word) continue;
-        out.append(line, copied, rs[run.start].at - copied);
-        for (std::size_t i = run.start; i < run.end; i++) out += korean;
-        copied = run.end < rs.size() ? rs[run.end].at : line.size();
+    const std::vector<RuneAt> src = RunesAt(source);
+    const std::vector<LaughRun> typed = LaughRuns(src, laughs);
+    bool aligned = runs.size() == typed.size();
+    for (std::size_t k = 0; aligned && k < runs.size(); k++)
+        aligned = runs[k].end - runs[k].start == typed[k].end - typed[k].start;
+    std::vector<Laugh> kinds = aligned ? TypedLaughs(src, typed) : OutputLaughs(rs, runs, before, koreanRune);
+    // A run that the translation put against a Latin letter its typed run does not touch stays
+    // (くぁwせdrftgy 크아wdrftgy).
+    auto letter = [](const std::vector<RuneAt>& v, std::size_t i, bool left) {
+        if (left && i == 0) return false;
+        const std::size_t at = left ? i - 1 : i;
+        return at < v.size() && LatinRune(v[at].cp) && !text::IsDigit(v[at].cp);
+    };
+    for (std::size_t k = 0; aligned && k < runs.size(); k++) {
+        if ((letter(rs, runs[k].start, true) && !letter(src, typed[k].start, true)) ||
+            (letter(rs, runs[k].end, false) && !letter(src, typed[k].end, false)))
+            kinds[k] = Laugh::None;
     }
-    if (copied == 0) return std::string(line);
-    out.append(line, copied, std::string_view::npos);
+    auto byteAt = [&](std::size_t i) { return i < rs.size() ? rs[i].at : line.size(); };
+    std::string out;
+    std::size_t copied = 0;  // runes of line written to out
+    bool changed = false;
+    for (std::size_t k = 0; k < runs.size(); k++) {
+        if (kinds[k] == Laugh::None) continue;
+        std::size_t start = runs[k].start;
+        std::size_t end = runs[k].end;
+        if (kinds[k] == Laugh::Bracketed && start > 0 && end < rs.size() && rs[start - 1].cp == U'(' &&
+            rs[end].cp == U')') {
+            out.append(line, byteAt(copied), byteAt(start - 1) - byteAt(copied));
+            out += bracketed;
+            copied = end + 1;
+            changed = true;
+            continue;
+        }
+        std::size_t count = end - start;
+        // Right after a word written as Korean laughter, past spaces, the run joins it (草ｗ ㅋㅋ ㅋ).
+        std::size_t laughEnd = start;
+        while (laughEnd > copied && rs[laughEnd - 1].cp == U' ') laughEnd--;
+        std::size_t laughStart = laughEnd;
+        while (laughStart > copied && rs[laughStart - 1].cp == koreanRune) laughStart--;
+        if (laughStart < laughEnd) {
+            count = std::max(count, laughEnd - laughStart);
+            start = laughStart;
+        }
+        if (aligned) {
+            const LaughRun& t = typed[k];
+            // Bracketed laughter right after the run joins it (ｗｗ（笑） ㅋㅋ).
+            if (t.end < src.size() && (src[t.end].cp == U'(' || src[t.end].cp == U'（')) {
+                std::size_t j = end;
+                while (j < rs.size() && rs[j].cp == U' ') j++;
+                if (line.substr(byteAt(j)).starts_with(bracketed)) {
+                    const std::size_t stop = byteAt(j) + bracketed.size();
+                    while (j < rs.size() && rs[j].at < stop) j++;
+                    end = j;
+                }
+            }
+        }
+        out.append(line, byteAt(copied), byteAt(start) - byteAt(copied));
+        for (std::size_t n = 0; n < count; n++) out += korean;
+        copied = end;
+        changed = true;
+    }
+    if (!changed) return std::string(line);
+    out.append(line, byteAt(copied), std::string_view::npos);
     return out;
 }
 

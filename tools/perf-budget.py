@@ -1,35 +1,32 @@
 #!/usr/bin/env python3
-"""Counts the instructions the CLI runs for fixed inputs under valgrind and compares them with a build
-of the base commit measured in the same run, and reports them against tools/perf-budget.tsv.
+"""Counts the instructions the CLI runs for fixed inputs under valgrind and reports them next to a
+build of the base commit measured in the same run. It only reports: a rise never fails a run.
 
-  tools/perf-budget.py --check CLI DICTS [--against CLI DICTS] [--base REF] [--out FILE]
-  tools/perf-budget.py --update CLI DICTS [--base REF]   write the counts into the table
-  tools/perf-budget.py --measure CLI DICTS               print the counts
+  tools/perf-budget.py --report CLI DICTS [--against CLI DICTS] [--base REF]
+  tools/perf-budget.py --measure CLI DICTS [--base REF]   print the counts
   tools/perf-budget.py --self-test
 
 DICTS is what --dicts takes (the CI passes the compiled snapshot of each build). The inputs are read
-from the commit on the `inputs` line of the table, a develop commit, so that later edits of those
-files do not move the counts:
+from the commit REF, the base commit (default: the merge base with develop), so that both builds
+translate the same text:
   each      the inputs of the rule cases (tests/rules/cases, tests/rules/speech-strict), --each
   document  the examples (examples/*.ja.txt without their first line) as one document
 Every run loads the dictionaries; `load` is a run on empty input, and the other rows count the
 instructions above it. The lines of each run in EACH_PARTS parts, and all runs of both builds run at
 once; valgrind's counts do not depend on that. The CLI runs with an empty settings file, HOME in a
 fresh folder and the dictionary cache off. The dictionaries of each build are part of what is counted.
-Counts depend on the compiler, the C library, the processor architecture and valgrind: the toolchain.
---check compares with the --against build (the base commit) when both have the same toolchain; a
-count more than TOLERANCE above it fails, unless a commit of REF..HEAD (--base) carries a
-`Perf-Budget: <reason>` trailer. Without such a base build, or when it cannot be measured, the counts
-are compared with the table and only reported: the table is a record of earlier counts and never
-fails a run. A count more than TOLERANCE below is reported. --out writes the measured counts as a
-table. --update writes them into the table (REF defaults to the merge base with develop, which is
-also the `inputs` of a new table).
-Exit: 0 within the base build or only reported, 1 over the base build without a trailer, 2 invalid
-arguments or a measurement that failed (valgrind missing, a run that failed or took longer than
-RUN_TIMEOUT, or an error of this script).
+Counts depend on the compiler, the C library, the processor architecture and valgrind, so the two
+builds are measured on one machine with one toolchain.
+--report prints the counts of this build and of the --against build with the change of each row; a
+row more than TOLERANCE above the --against build gets a line starting `over:`, one more than
+TOLERANCE below a line starting `under:`. When the --against build cannot be measured, this build is
+reported alone after a line starting `perf-budget: no base`.
+Exit: 0 measured and reported, 2 invalid arguments or a measurement of this build that failed
+(valgrind missing, a run that failed or took longer than RUN_TIMEOUT, or an error of this script).
 """
+import contextlib
+import io
 import os
-import platform
 import re
 import shutil
 import subprocess
@@ -40,9 +37,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TABLE = "tools/perf-budget.tsv"
 TOLERANCE = 0.01
-TRAILER = re.compile(r"^Perf-Budget:[ \t]*\S", re.M)
 ROWS = ["load", "each", "document"]
 EACH_PARTS = 2
 EACH_DIRS = ["tests/rules/cases", "tests/rules/speech-strict"]
@@ -60,35 +55,6 @@ def git(root, *args, check=True):
     if check and r.returncode:
         raise MeasureError(f"git {' '.join(args)}: {r.stderr.strip()}")
     return r
-
-
-def empty_table():
-    return {"inputs": "", "toolchain": "", "rows": {}}
-
-
-def read_table(text):
-    """{"inputs": commit, "toolchain": text, "rows": {name: count}}"""
-    table = empty_table()
-    header = False
-    for line in text.split("\n"):
-        if not line or line.startswith("#"):
-            continue
-        cells = line.split("\t")
-        if cells[0] in ("inputs", "toolchain") and len(cells) == 2:
-            table[cells[0]] = cells[1]
-        elif cells == ["row", "instructions"]:
-            header = True
-        elif header and len(cells) == 2:
-            table["rows"][cells[0]] = int(cells[1])
-    return table
-
-
-def write_table(table):
-    out = ["# Instruction counts of tools/perf-budget.py: the inputs at the commit `inputs`, measured with",
-           "# `toolchain`; each/document count above load.",
-           f"inputs\t{table['inputs']}", f"toolchain\t{table['toolchain']}", "row\tinstructions"]
-    out += [f"{name}\t{table['rows'][name]}" for name in ROWS if name in table["rows"]]
-    return "\n".join(out) + "\n"
 
 
 def file_at(root, commit, path):
@@ -151,36 +117,6 @@ def valgrind_count(cmd, env):
     return int(m.group(1).replace(",", ""))
 
 
-def run_text(*cmd):
-    try:
-        return subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
-    except OSError:
-        return ""
-
-
-def toolchain(cli):
-    """The compiler that built CLI (its .comment section, else the CMake cache next to it), the C
-    library, the processor architecture and the valgrind version."""
-    parts = []
-    comment = run_text("readelf", "-p", ".comment", str(cli)) if shutil.which("readelf") else ""
-    compilers = sorted({m.strip() for m in re.findall(r"^\s*\[\s*\w+\]\s+(.+)$", comment, re.M)})
-    if compilers:
-        parts.append("; ".join(compilers))
-    else:
-        cache = Path(cli).resolve().parent / "CMakeCache.txt"
-        m = re.search(r"^CMAKE_CXX_COMPILER:\w+=(.+)$", cache.read_text(encoding="utf-8", errors="replace"),
-                      re.M) if cache.exists() else None
-        if m and shutil.which(m.group(1)):
-            parts.append(run_text(m.group(1), "--version").split("\n")[0].strip())
-    libc = os.confstr("CS_GNU_LIBC_VERSION") if "CS_GNU_LIBC_VERSION" in os.confstr_names else ""
-    if libc:
-        parts.append(libc)
-    parts.append(platform.machine())
-    if shutil.which("valgrind"):
-        parts.append(run_text("valgrind", "--version").strip())
-    return ", ".join(p for p in parts if p)
-
-
 def measure_builds(root, builds, commit, count=valgrind_count):
     """{build: {row: instructions}} for builds {build: (cli, dicts)}, each row above load."""
     rows = runs(inputs(root, commit))
@@ -228,20 +164,15 @@ def measure(root, cli, dicts, commit, count=valgrind_count):
 
 
 def compare(measured, baseline):
-    """(over, under): (row, count, baseline) beyond the tolerance either way; a row without a
-    baseline is over."""
+    """(over, under): (row, count, baseline) beyond the tolerance either way."""
     over, under = [], []
     for name in ROWS:
-        n, b = measured[name], baseline.get(name)
-        if b is None or n > b * (1 + TOLERANCE):
+        n, b = measured[name], baseline[name]
+        if n > b * (1 + TOLERANCE):
             over.append((name, n, b))
         elif n < b * (1 - TOLERANCE):
             under.append((name, n, b))
     return over, under
-
-
-def has_trailer(root, base):
-    return bool(TRAILER.search(git(root, "log", "--format=%B", f"{base}..HEAD").stdout))
 
 
 def default_base(root):
@@ -255,78 +186,44 @@ def default_base(root):
 
 
 def percent(n, b):
-    return f"{(n - b) / b * 100:+.2f}%" if b else "new"
+    return f"{(n - b) / b * 100:+.2f}%"
 
 
-def check(root, cli, dicts, base, out=None, against=None, count=valgrind_count, tc=toolchain):
-    path = Path(root) / TABLE
-    table = read_table(path.read_text(encoding="utf-8")) if path.exists() else empty_table()
-    if not table["inputs"]:
-        raise MeasureError(f"{TABLE}: no inputs commit")
+def report(root, cli, dicts, base, against=None, count=valgrind_count):
+    """Prints the counts of this build and of the against build; returns 0, as a rise is only reported."""
     builds = {"head": (cli, dicts)}
     if against:
         builds["base"] = against
-    measured, errors = measure_builds(root, builds, table["inputs"], count)
+    measured, errors = measure_builds(root, builds, base, count)
     if "head" in errors:
         raise errors["head"]
+    head = measured["head"]
     if "base" in errors:
-        print(f"perf-budget: the base build could not be measured ({errors['base']}); reported only")
-        against = None
-    head, mine = measured["head"], tc(cli)
-    if out:
-        Path(out).write_text(write_table({"inputs": table["inputs"], "toolchain": mine, "rows": head}),
-                             encoding="utf-8")
-    if against and tc(against[0]) == mine:
-        reference, name, gating = measured["base"], "the base build", True
-    else:
-        if against:
-            print(f"perf-budget: the base build has another toolchain ({tc(against[0])}); reported only")
-        elif "base" not in errors:
-            print("perf-budget: no base build; reported only")
-        reference, name, gating = table["rows"], TABLE, False
-        if table["toolchain"] != mine:
-            print(f"perf-budget: measured with {mine}, {TABLE} with {table['toolchain'] or 'nothing'}")
-    print("row\tthis build\t" + ("base build\t" if "base" in measured else "") + f"{TABLE}\tchange")
+        print(f"perf-budget: no base: the base build could not be measured ({errors['base']})")
+    elif not against:
+        print("perf-budget: no base build to compare with")
+    reference = measured.get("base")
+    print("row\tthis build" + ("\tbase build\tchange" if reference else ""))
     for row in ROWS:
-        cells = [row, str(head[row])]
-        if "base" in measured:
-            cells.append(str(measured["base"][row]))
-        cells += [str(table["rows"].get(row, "-")), percent(head[row], reference.get(row))]
-        print("\t".join(cells))
-    status = 0
-    over, under = compare(head, reference)
-    trailer = gating and bool(base) and has_trailer(root, base)
-    for row, n, b in over:
-        verdict = "with a Perf-Budget trailer" if trailer else "over the budget" if gating else "reported only"
-        print(f"{row}: {n} instructions, {percent(n, b)} against {name} ({b}); {verdict}")
-        if gating and not trailer:
-            status = 1
-    for row, n, b in under:
-        print(f"{row}: {n} instructions, {percent(n, b)} against {name} ({b})")
-    print("perf-budget: " + ("over" if status else "ok"))
-    return status
-
-
-def update(root, cli, dicts, base, count=valgrind_count, tc=toolchain):
-    path = Path(root) / TABLE
-    table = read_table(path.read_text(encoding="utf-8")) if path.exists() else empty_table()
-    commit = table["inputs"] or base or default_base(root)
-    new = {"inputs": commit, "toolchain": tc(cli), "rows": measure(root, cli, dicts, commit, count)}
-    path.write_text(write_table(new), encoding="utf-8")
-    print(f"perf-budget: wrote {TABLE}")
+        print("\t".join([row, str(head[row])] + ([str(reference[row]), percent(head[row], reference[row])]
+                                                 if reference else [])))
+    if reference:
+        over, under = compare(head, reference)
+        for row, n, b in over:
+            print(f"over: {row}: {n} instructions, {percent(n, b)} against the base build ({b})")
+        for row, n, b in under:
+            print(f"under: {row}: {n} instructions, {percent(n, b)} against the base build ({b})")
     return 0
 
 
 def self_test():
     assert IREFS.search("==12== Cachegrind, a high-precision tracing profiler\n==12== I   refs:      1,234,567\n")
-    t = {"inputs": "abc", "toolchain": "cc 1, valgrind-3", "rows": {"load": 100, "each": 2000, "document": 300}}
-    assert read_table(write_table(t)) == t
-    assert compare({"load": 100, "each": 2021, "document": 296}, t["rows"]) == ([("each", 2021, 2000)],
-                                                                                [("document", 296, 300)])
-    assert compare({"load": 101, "each": 2020, "document": 297}, t["rows"]) == ([], [])
+    rows = {"load": 100, "each": 2000, "document": 300}
+    assert compare({"load": 100, "each": 2021, "document": 296}, rows) == ([("each", 2021, 2000)],
+                                                                          [("document", 296, 300)])
+    assert compare({"load": 101, "each": 2020, "document": 297}, rows) == ([], [])
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
-        (root / "tools").mkdir()
         (root / "examples").mkdir()
         (root / "tests" / "rules" / "cases").mkdir(parents=True)
         (root / "examples" / "a.ja.txt").write_text("# case\nあ\n\nい\n", encoding="utf-8")
@@ -339,7 +236,6 @@ def self_test():
                            check=True, capture_output=True)
 
         cost = {"head": 1000, "base": 1000}
-        chains = {"head": "cc 1", "base": "cc 1"}
         broken = set()
 
         def fake(cmd, env):
@@ -349,17 +245,12 @@ def self_test():
             text = Path(cmd[cmd.index("--in") + 1]).read_text(encoding="utf-8")
             return cost[cmd[0]] + len(text.encode("utf-8")) * (3 if "--each" in cmd else 1)
 
-        def fake_tc(cli):
-            return chains[str(cli)]
+        def rep(against=True):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                status = report(root, "head", "dicts", base, ("base", "dicts") if against else None, fake)
+            return status, buf.getvalue()
 
-        def fail(cmd, env):
-            raise MeasureError("valgrind: not found")
-
-        def chk(base, against=None, out=None):
-            return check(root, "head", "dicts", base, out, ("base", "dicts") if against else None, fake, fake_tc)
-
-        quiet = open(os.devnull, "w")
-        stdout, sys.stdout = sys.stdout, quiet
         saved = {k: os.environ.get(k) for k in ("GIT_CONFIG_GLOBAL", "GIT_CONFIG_NOSYSTEM")}
         os.environ.update(GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_NOSYSTEM="1")
         try:
@@ -370,50 +261,32 @@ def self_test():
             got = inputs(root, base)
             assert got["each"] == ("う\nえお\n", ["--each"]) and got["document"] == ("あ\nい\n", []), got
             assert measure(root, "head", "dicts", base, fake) == {"load": 1000, "each": 33, "document": 8}
-            assert update(root, "head", "dicts", base, fake, fake_tc) == 0
-            assert read_table((root / TABLE).read_text(encoding="utf-8"))["inputs"] == base
-            run("add", "-A")
-            run("commit", "-q", "-m", "table")
-            base = git(root, "rev-parse", "HEAD").stdout.strip()
-            # Later edits of the inputs do not move the counts.
+            # Later edits of the inputs do not move the counts: both builds read the base commit.
             (root / "examples" / "a.ja.txt").write_text("# case\nあああ\n", encoding="utf-8")
             run("commit", "-q", "-am", "edit an example")
-            assert chk(base) == 0 and chk(base, True) == 0
-            out = root / "measured.tsv"
+            status, out = rep()
+            assert status == 0 and "over:" not in out and "document\t8\t8\t+0.00%" in out, out
+            # A rise is reported, never failed.
             cost["head"] = 1030
-            # The table only reports; the base build decides.
-            assert chk(base, False, out) == 0 and chk(base, True) == 1
-            assert read_table(out.read_text(encoding="utf-8"))["rows"]["load"] == 1030
-            # The base build moved as much: the change is not this branch's.
-            cost["base"] = 1030
-            assert chk(base, True) == 0
-            cost["base"] = 1000
-            # A base build of another toolchain, or one that cannot run, only reports.
-            chains["base"] = "cc 2"
-            assert chk(base, True) == 0
-            chains["base"] = "cc 1"
+            status, out = rep()
+            assert status == 0 and "over: load: 1030 instructions, +3.00%" in out, out
+            cost["head"], cost["base"] = 1000, 1030
+            status, out = rep()
+            assert status == 0 and "under: load:" in out and "over:" not in out, out
+            # A base build that cannot run, or none, leaves this build reported alone.
             broken.add("base")
-            assert chk(base, True) == 0
+            status, out = rep()
+            assert status == 0 and "perf-budget: no base:" in out and "load\t1000\n" in out, out
             broken.clear()
+            status, out = rep(False)
+            assert status == 0 and "no base build" in out and "change" not in out, out
             broken.add("head")
             try:
-                chk(base, True)
-                raise AssertionError("no error")
-            except MeasureError:
-                pass
-            broken.clear()
-            run("commit", "-q", "--allow-empty", "-m", "slower\n\nPerf-Budget: a test reason")
-            assert chk(base, True) == 0
-            assert update(root, "head", "dicts", base, fake, fake_tc) == 0
-            assert read_table((root / TABLE).read_text(encoding="utf-8"))["rows"]["load"] == 1030
-            try:
-                check(root, "head", "dicts", None, None, None, fail, fake_tc)
+                rep()
                 raise AssertionError("no error")
             except MeasureError:
                 pass
         finally:
-            sys.stdout = stdout
-            quiet.close()
             for k, v in saved.items():
                 if v is None:
                     os.environ.pop(k, None)
@@ -424,13 +297,13 @@ def self_test():
 
 
 def main(argv):
-    values = {"--base": None, "--out": None}
+    base = None
     against = None
     rest = []
     i = 0
     while i < len(argv):
-        if argv[i] in values and i + 1 < len(argv):
-            values[argv[i]] = argv[i + 1]
+        if argv[i] == "--base" and i + 1 < len(argv):
+            base = argv[i + 1]
             i += 2
         elif argv[i] == "--against" and i + 2 < len(argv):
             against = (Path(argv[i + 1]).resolve(), Path(argv[i + 2]).resolve())
@@ -440,7 +313,7 @@ def main(argv):
             i += 1
     if rest == ["--self-test"]:
         return self_test()
-    if len(rest) != 3 or rest[0] not in ("--check", "--update", "--measure"):
+    if len(rest) != 3 or rest[0] not in ("--report", "--measure") or (against and rest[0] != "--report"):
         print(__doc__.strip(), file=sys.stderr)
         return 2
     cli, dicts = Path(rest[1]).resolve(), Path(rest[2]).resolve()
@@ -450,12 +323,10 @@ def main(argv):
                 raise MeasureError(f"{p} does not exist")
         if not shutil.which("valgrind"):
             raise MeasureError("valgrind is not installed")
-        if rest[0] == "--check":
-            return check(ROOT, cli, dicts, values["--base"], values["--out"], against)
-        if rest[0] == "--update":
-            return update(ROOT, cli, dicts, values["--base"])
-        table = read_table((ROOT / TABLE).read_text(encoding="utf-8")) if (ROOT / TABLE).exists() else empty_table()
-        for name, n in measure(ROOT, cli, dicts, table["inputs"] or default_base(ROOT)).items():
+        commit = base or default_base(ROOT)
+        if rest[0] == "--report":
+            return report(ROOT, cli, dicts, commit, against)
+        for name, n in measure(ROOT, cli, dicts, commit).items():
             print(f"{name}\t{n}")
         return 0
     except MeasureError as e:
