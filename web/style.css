@@ -10,6 +10,7 @@ progress { flex: 1; max-width: 20rem; }
 fieldset { border: 1px solid var(--line); border-radius: 6px; padding: .2rem .7rem; margin: 0; }
 legend { font-size: .8rem; opacity: .7; }
 select { font: inherit; }
+#example { width: 16rem; max-width: 100%; text-overflow: ellipsis; }
 .panes { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
 @media (max-width: 48rem) { .panes { grid-template-columns: 1fr; } }
 .pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; }
