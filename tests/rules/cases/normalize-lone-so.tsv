@@ -1,0 +1,16 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:lone-so	「そ、あたしのことよ」	has:「그래,	fix	normalize
+normalize:lone-so	「そ、アプリオのコックさんに教えてもらったの」	「그래, 아프리오의 요리사가 가르쳐 줬어」	fix	normalize
+normalize:lone-so	提督、ガムいる？ そ？	제독, 껌 있어? 그래?	fix	normalize
+normalize:lone-so	基本だよ。そ。卵は2つね。	has:기본이야. 그래.	fix	normalize
+normalize:lone-so	「そ……」	「그래……」	fix	normalize
+normalize:lone-so	「そ！ 圭ちゃんにカタログを持ってきてもらいたかったんだけどねぇ。」	has:「그래!	fix	normalize
+normalize:lone-so	元気？ そ、ならよかった！	건강? 그래, 그럼 다행이네!	fix	normalize
+normalize:lone-so	Enough? そ。	Enough? 그래.	fix	normalize
+normalize:lone-so	……あっ、そ。んじゃ初詣行こう？	lacks:소	fix	normalize
+normalize:lone-so	「そ、それは」	「그, 그건」	keep	normalize
+normalize:lone-so	「そ、そうね」	「그, 그래」	keep	normalize
+normalize:lone-so	そ、れ、よ、り、も！	has:소, 레	keep	normalize
+normalize:lone-so	「そ、空が」	「하, 하늘이」	keep	normalize
+normalize:lone-so	「そっか」	「그렇구나」	keep	normalize

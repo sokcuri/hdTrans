@@ -577,28 +577,16 @@ bool SoundText::LongerWordAt(size_t p, size_t n) const {
 }
 
 // Whether the sound at [p, end), in hiragana, draws out a kana of a word with its first run
-// of ー or ～: a dictionary word reads the text from p without the run, goes two or more
-// characters past it, further than the sound with its adverbial と and at least as far as
-// the word right after the run (べーつに べつに, ざーんねん ざんねん; not へーそうなんだ,
-// えーっと or どーんと).
+// of ー or ～ (internal::DrawnInWord, with the sound and its adverbial と holding the run: べーつに
+// べつに, ざーんねん ざんねん; not へーそうなんだ, えーっと or どーんと).
 bool SoundText::DrawnInWord(size_t p, size_t end) const {
     if (!IsHiraganaRune(rs_[p])) return false;
     size_t i = p + 1;
     while (i < end && !In(rs_[i], U"ー～")) i++;
     size_t j = i;
     while (j < rs_.size() && In(rs_[j], U"ー～")) j++;
-    if (i >= end || j == i || j >= rs_.size() || !IsHiraganaRune(rs_[j]) || In(rs_[j], U"ぁぃぅぇぉっ")) return false;
-    const std::string plain = std::string(Bytes(p, i)) + std::string(Bytes(j, std::min(rs_.size(), j + 24)));
-    size_t n = 0;
-    for (const dict::Candidate& c : snap_.GetWordInfo(plain, dict::LookupMode::General, ctx_.lookup).list) {
-        if (c.user != nullptr && (c.user->kana || c.user->nameLayer)) continue;
-        n = std::max(n, text::RuneCount(c.source));
-    }
-    size_t base = 0, user = 0, name = 0;
-    LongestKeys(j, base, user, name);
-    const size_t before = i - p;
-    const size_t to = end + Adverbial(end);  // どーんと: the sound with its と reads as far as どんと
-    return n >= before + 2 && n > to - p - (j - i) && n >= before + std::max(base, user);
+    if (i >= end || j == i) return false;
+    return internal::DrawnInWord(rs_, i, j, end + Adverbial(end), ctx_, snap_);  // どーんと: as far as どんと
 }
 
 // The sound at character p: the longest key, then the longest match. A dictionary word
