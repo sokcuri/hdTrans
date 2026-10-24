@@ -412,7 +412,7 @@ private:
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
-    bool MatchAt(size_t p, SoundMatch& best, bool inChain = false) const;
+    bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PoliteAt(size_t p) const;
     // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
@@ -441,6 +441,7 @@ private:
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
     size_t RunningWordLen(size_t p) const;
+    bool GoesOnAt(size_t e) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
@@ -543,7 +544,7 @@ bool SoundText::LongerWordAt(size_t p, size_t n) const {
 // The sound at character p: the longest key, then the longest match. A dictionary word
 // that is longer, or a plain-dictionary entry that is at least as long as the key,
 // rules it out; a name-layer sense does not (ドーン, ガチャ).
-bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
+bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterParticle) const {
     const SoundRow* chosen = nullptr;
     std::string units;
     const std::u32string_view f = f_;
@@ -723,8 +724,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     const bool alone = (inChain || UtteranceStart(p) || pauseAt(p - 1)) &&
                        (keyLen < chosen->key.size() || best.end >= rs_.size() ||
                         (!IsKanjiRune(rs_[best.end]) && !IsKatakanaRune(rs_[best.end])));
-    size_t base = 0, user = 0, name = 0;
-    LongestKeys(p, base, user, name, (best.intj && beforePause) || alone);
+    // The ending of an end row ends a predicate: it does not win after a lone particle, where no
+    // predicate stands for it to end, nor where kana go on after it (うさぎがぴょんと 폴짝,
+    // 読んでぴょん 읽어 뿅, 猫ぴょんと跳ねた; but 報告ぴょん 보고다뿅, でたっぴょん 나왔다뿅).
+    size_t base = 0, user = 0, name = 0, ending = 0;
+    LongestKeys(p, base, user, name, false, &ending);
+    const bool kanaGoOn = GoesOnAt(p + ending) && !IsKanjiRune(rs_[p + ending]);
+    if (!(best.intj && beforePause) && !alone && !afterParticle && !kanaGoOn) user = std::max(user, ending);
     const size_t surface = best.end - p;
     // A name-layer key that runs on from the sound into kanji and ends with the kanji word
     // names a thing (ニコニコ動画 니코니코 동화, ニコニコ大百科).
@@ -970,7 +976,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     bool loose = false;  // the first sound took a ッ that the next sound starts from
     for (size_t i = p; i < rs.size();) {
         SoundMatch m;
-        if (!MatchAt(i, m, i > p)) break;
+        if (!MatchAt(i, m, i > p, afterParticle && i == p)) break;
         // ねぇ and なぁ right after another sound are its closing particle, not a call (やだねぇ
         // 싫어, not 싫어 저기); they call only where an utterance starts, after a pause or
         // after another call (ねぇねぇねぇ).
@@ -1133,12 +1139,14 @@ size_t SoundText::RunningWordLen(size_t p) const {
     LongestKeys(p, base, user, name, false, &ending);
     const size_t words = std::max({base, user, name, size_t{1}});
     const size_t all = std::max(words, ending);
-    const size_t e = p + all;
-    if (words < all && e < rs_.size() &&
-        (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])))) {
-        return words;
-    }
-    return all;
+    return words < all && GoesOnAt(p + all) ? words : all;
+}
+
+// Whether the sentence goes on at character e: a kanji, or a kana that does not draw out the
+// one before it, follows.
+bool SoundText::GoesOnAt(size_t e) const {
+    return e > 0 && e < rs_.size() &&
+           (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])));
 }
 
 // The length of the と, or the て of って, that makes an ono row ending at character i

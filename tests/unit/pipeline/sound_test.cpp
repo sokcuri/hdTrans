@@ -772,7 +772,8 @@ HD_TEST(pipeline_sound_extra_isolation) {
 
 // An interjection before a pause or an ellipsis is read as a sound although an end row
 // has the same key, and so is a sound with no word before it that ends in its と or before
-// no kanji or katakana; after a word or before other text the end row's key still rules it out.
+// no kanji or katakana, a sound after a lone particle, and one that kana go on after; after a
+// word and before the end or a kanji the end row's key still rules it out.
 // An end row's key that kana go on from is no word there, so a sound may start inside it.
 HD_TEST(pipeline_sound_before_pause_over_end_row) {
     const auto& loaded = SoundDictionary();
@@ -792,6 +793,12 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
         {"凄いぴょん！", "凄いぴょん！"},
         {"学校でちらっと見た", "学校で힐끗 見た"},
         {"ありがとぴょん！", "고마워뿅！"},
+        {"猫がぴょんと跳ねた", "猫が폴짝 跳ねた"},
+        {"彼はぴょんと跳ねた", "彼は폴짝 跳ねた"},
+        {"猫ぴょんと跳ねた", "猫폴짝 跳ねた"},
+        {"猫がぴょん！", "猫が뿅！"},
+        {"読んでぴょん！", "読んで뿅！"},
+        {"報告ぴょん！", "報告ぴょん！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }

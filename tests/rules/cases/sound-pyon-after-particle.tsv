@@ -1,0 +1,34 @@
+# 규칙: LEX-31
+rule	input	expected	kind	layer
+sound:end-row-after-particle	ラピスがぴょんぴょんと反復横跳びのような仕草をする。	has:폴짝폴짝	keep	sound
+sound:end-row-after-particle	またキツネ耳がぴょこぴょこする。	또 여우 귀가 깡충깡충한다.	keep	sound
+sound:end-row-after-particle	うさぎがぴょんと跳ねた。	토끼가 폴짝 뛰었다.	fix	sound
+sound:end-row-after-particle	彼はぴょんと飛んだ。	그는 폴짝 날았다.	fix	sound
+sound:end-row-after-particle	カエルがぴょんと跳んだ。	개구리가 폴짝 뛰었다.	fix	sound
+sound:end-row-after-particle	子ウサギもぴょんと跳ねた。	has:폴짝 뛰었다	fix	sound
+sound:end-row-after-particle	彼にぴょんと飛びついた。	그에게 폴짝 달려들었다.	fix	sound
+sound:end-row-after-particle	猫ぴょんと跳ねた。	고양이 폴짝 뛰었다.	fix	sound
+sound:end-row-after-particle	カエルがぴょーんと跳ねた。	개구리가 뿅~ 뛰었다.	keep	sound
+sound:end-row-after-particle	うさぎもぴょーんと跳んだ。	토끼도 뿅~ 뛰었다.	keep	sound
+sound:end-row-after-particle	うさぎがぴょんぴょんと跳ねていく。	토끼가 폴짝폴짝 뛰어 간다.	keep	sound
+sound:end-row-after-particle	うさぎがぴょん！	토끼가 뿅!	fix	sound
+sound:end-row-after-particle	カエルがぴょん。	개구리가 뿅.	fix	sound
+sound:end-row-after-particle	読んでぴょん！	읽어 뿅!	fix	sound
+sound:end-row-after-particle	書いてぴょん！	써 뿅!	fix	sound
+sound:end-row-after-particle	食べてぴょん！	먹어 뿅!	fix	sound
+ending:pyon	やったぁ！ でたっぴょん！	해냈다! 나왔다뿅!	keep	builtin-ending
+ending:pyon	嬉しいぴょん！	기쁘다뿅!	keep	builtin-ending
+ending:pyon	司令官に報告ぴょん！	사령관에 보고다뿅!	keep	builtin-ending
+ending:pyon	攻撃、開始するぴょん！	공격, 개시한다뿅!	keep	builtin-ending
+ending:pyon	うーちゃんの番ぴょん！	우짱의 차례다뿅!	keep	builtin-ending
+sound:end-row-after-particle	疲れたら一緒にお休みするぴょん♪ ぴょん！	지치면 함께 쉰다뿅♪ 뿅!	keep	sound
+ending:pyon	楽しいっぴょん♪	즐겁다뿅♪	keep	builtin-ending
+sound:end-row-after-particle	ぴょんと跳ねた。	폴짝 뛰었다.	keep	sound
+sound:end-row-after-particle	ありがとぴょん！	고마워뿅!	keep	sound
+sound:end-row-after-particle	猫がにゃーにゃーと鳴く。	고양이가 냐옹냐옹 운다.	keep	sound
+sound:end-row-after-particle	猫がにゃんにゃんと鳴いた。	고양이가 냥냥 울었다.	keep	sound
+sound:end-row-after-particle	家をでちゃった。	집을 나와버렸다.	keep	lookup
+sound:end-row-after-particle	外にでちゃう。	밖에 나와버린다.	keep	lookup
+ending:dechi	もう行くでち。	이제 가요.	keep	builtin-ending
+ending:sshu	がんばるっしゅ！	열심히 해요!	keep	builtin-ending
+ending:ssho	それでいいっしょ。	그것으로 좋지.	keep	builtin-ending
