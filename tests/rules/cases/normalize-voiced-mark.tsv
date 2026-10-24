@@ -27,5 +27,5 @@ normalize:voiced-mark	「ウ゛ーッ！」	「으읏!」	fix	normalize
 normalize:voiced-mark	「ウ゛ゥ……」	「으으……」	fix	normalize
 normalize:voiced-mark	「ウ゛ァンパイア」	「뱀파이어」	fix	normalize
 normalize:voiced-mark	「ウ゛ウ゛ー」	「으으으」	fix	normalize
-normalize:voiced-mark	「ウ゛ウ゛ッ」	「으으」	fix	normalize
-normalize:voiced-mark	……ウ゛ウ゛ウ゛ッ	……으으으	fix	normalize
+normalize:voiced-mark	「ウ゛ウ゛ッ」	「으읏」	fix	normalize
+normalize:voiced-mark	……ウ゛ウ゛ウ゛ッ	……으으읏	fix	normalize
