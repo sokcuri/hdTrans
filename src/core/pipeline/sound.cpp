@@ -1895,16 +1895,6 @@ std::string Completion(std::u32string_view frag, size_t kanjiEnd, const LineCont
 // The longest stem, noun or て form that the contractions look back over, in characters.
 constexpr size_t kLongestStem = 8;
 
-// The byte offset of each character of rs in its UTF-8 text, and the text's size last.
-std::vector<size_t> RuneOffsets(std::u32string_view rs) {
-    std::vector<size_t> at(rs.size() + 1, 0);
-    for (size_t k = 0; k < rs.size(); k++) {
-        const char32_t c = rs[k];
-        at[k + 1] = at[k] + (c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : 4);
-    }
-    return at;
-}
-
 // Where needle first occurs in text from from on, npos for none. Japanese characters share their
 // first byte, so the search goes by the last byte of needle.
 size_t FindFrom(std::string_view text, std::string_view needle, size_t from) {
@@ -2001,7 +1991,7 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     }
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
-    const std::vector<size_t> byte = RuneOffsets(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
     std::string out;
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {
@@ -2056,7 +2046,7 @@ std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& sna
     if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
-    const std::vector<size_t> byte = RuneOffsets(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
     std::string out;
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {
@@ -2097,7 +2087,7 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
     if (!HoldsMember(text, {dict::ClassMembers("contraction.u-onbin")})) return std::string(text);
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
-    const std::vector<size_t> byte = RuneOffsets(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
     std::string out;
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {

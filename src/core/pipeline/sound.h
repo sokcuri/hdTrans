@@ -78,6 +78,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/dict/snapshot.h"
 #include "core/pipeline/line_context.h"
@@ -249,6 +250,9 @@ constexpr char32_t kInvalidByte = 0x110000;
 std::u32string DecodeText(std::string_view s);
 // The inverse of DecodeText.
 std::string EncodeText(std::u32string_view rs);
+// The byte offset of each character of rs in EncodeText(rs), and its size last: an invalid byte
+// takes one byte.
+std::vector<size_t> EncodedOffsets(std::u32string_view rs);
 // rs with the hiragana ぁ..ゖ in katakana.
 std::u32string ToKatakana(std::u32string_view rs);
 
