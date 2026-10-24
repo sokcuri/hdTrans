@@ -1,0 +1,15 @@
+# 규칙: SPC-13
+rule	input	expected	kind	layer
+cx:te-na-stay:10	情報だな、待ってな。	정보다, 기다리고 있어.	fix	rewrites
+cx:te-na-stay:10	ちょっと待ってな、コーヒー付きでね。	잠깐 기다리고 있어, 커피 첨부로.	fix	rewrites
+cx:te-na-stay:10	みんな、よーく見張ってな！	모두, 잘 감시하고 있어!	fix	rewrites
+cx:te-na-stay:10	あんたは休んでな。	너는 쉬고 있어.	fix	rewrites
+cx:te-na-stay:10	やってやんぜー、見てな！	해―, 보고 있어!	fix	rewrites
+cx:te-na-stay:10	足手まといだ。そこで見物でもしてな。	방해가 되다. 거기서 볼만해도 하고 있어.	fix	rewrites
+cx:te-na-stay:10	死んじまってな。	!rule:cx:te-na-stay:10	keep	rewrites
+cx:te-na-stay:10	待たせてな。	!rule:cx:te-na-stay:10	keep	rewrites
+cx:te-na-stay:10	そう思ってな…	!rule:cx:te-na-stay:10	keep	rewrites
+cx:te-na-stay:10	目が覚めてな。	!rule:cx:te-na-stay:10	keep	rewrites
+cx:te-na-stay:5	あたしの後ろに隠れてな!	내 뒤로 숨어 있어!	fix	rewrites
+cx:te-na-stay:5	「だから、オレの後ろに隠れてな」	「그러니까, 내 뒤로 숨어 있어」	fix	rewrites
+cx:te-na-stay:5	よっしゃ、下がってな。	!rule:cx:te-na-stay:5	keep	rewrites

@@ -287,6 +287,8 @@
 //= verb.passive-end	Ends of passive stems (言われ, 書かれ, 愛され, 頼まれ, 打たれ, 呼ばれ, 塞がれ, 叱られ), whose ね is what happens to someone, not a promise (また叱られますね 또 꾸중듣네요).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
+//= verb.stay	Stems of the verbs of staying, waiting and watching, whose て form with a final な tells the listener to keep doing it, ていな (待ってな 기다리고 있어, 見てな 보고 있어), not a reason (思ってな).
+//= verb.errand	Stems of the verbs of an errand one goes to do and comes back from, and the verbal nouns of upkeep before する, whose てまいる is going to do it and coming back (お茶を淹れてまいります 차를 끓여 오겠습니다, 整備してまいります 정비해 오겠습니다); other てまいる go on doing it.
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -327,6 +329,7 @@
 //= word.give-request	Words that ask to be given what is named before them (もう一枚ください 한 장 더 주세요).
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
+//= word.humble-own	Ends of the words of the humble お〜する and ご〜する that do no favour to another: one rests, waits, accepts, refuses, entrusts, asks, meets or comes along (お休みします 쉴게요, お任せします 맡깁니다), so they take no 드리다.
 //= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
@@ -4219,6 +4222,70 @@ verb.happening	凹
 verb.happening	沁み
 verb.happening	失
 
+verb.stay	待
+verb.stay	見
+verb.stay	下が
+verb.stay	さが
+verb.stay	隠れ
+verb.stay	かくれ
+verb.stay	休
+verb.stay	やす
+verb.stay	見張
+verb.stay	黙
+verb.stay	だま
+verb.stay	寝
+verb.stay	座
+verb.stay	すわ
+verb.stay	引っ込
+verb.stay	ひっこ
+verb.stay	控え
+verb.stay	じっと
+verb.errand	淹れ
+verb.errand	いれ
+verb.errand	煎れ
+verb.errand	入れ
+verb.errand	直
+verb.errand	なお
+verb.errand	治
+verb.errand	取
+verb.errand	持
+verb.errand	呼
+verb.errand	見
+verb.errand	行
+verb.errand	買
+verb.errand	調べ
+verb.errand	確かめ
+verb.errand	洗
+verb.errand	あら
+verb.errand	片付け
+verb.errand	片づけ
+verb.errand	かたづけ
+verb.errand	着替え
+verb.errand	話し合
+verb.errand	聞
+verb.errand	探
+verb.errand	さが
+verb.errand	届け
+verb.errand	とどけ
+verb.errand	渡
+verb.errand	伝え
+verb.errand	置
+verb.errand	済ませ
+verb.errand	休
+verb.errand	やす
+verb.errand	入渠
+verb.errand	整備
+verb.errand	修理
+verb.errand	補給
+verb.errand	準備
+verb.errand	用意
+verb.errand	確認
+verb.errand	報告
+verb.errand	掃除
+verb.errand	洗濯
+verb.errand	偵察
+verb.errand	点検
+verb.errand	着替
 verb.means	使
 verb.means	用い
 verb.means	利用し
@@ -5075,6 +5142,43 @@ word.kara-source-keep	解放
 word.kara-source-keep	避
 word.kara-source-keep	離
 word.kara-source-keep	身を
+word.humble-own	到着
+word.humble-own	出発
+word.humble-own	来場
+word.humble-own	帰還
+word.humble-own	借
+word.humble-own	借り
+word.humble-own	話
+word.humble-own	呼
+word.humble-own	戻
+word.humble-own	かけ
+word.humble-own	掛け
+word.humble-own	休み
+word.humble-own	やすみ
+word.humble-own	任せ
+word.humble-own	まかせ
+word.humble-own	受け
+word.humble-own	断り
+word.humble-own	ことわり
+word.humble-own	待ち
+word.humble-own	まち
+word.humble-own	邪魔
+word.humble-own	じゃま
+word.humble-own	願い
+word.humble-own	ねがい
+word.humble-own	一緒
+word.humble-own	散歩
+word.humble-own	先に
+word.humble-own	聞き
+word.humble-own	伺い
+word.humble-own	うかがい
+word.humble-own	会い
+word.humble-own	目にかか
+word.humble-own	供
+word.humble-own	察
+word.humble-own	詫び
+word.humble-own	暇
+word.humble-own	いとま
 word.kuseni	くせに
 word.kuseni	クセに
 word.kuseni	くせして

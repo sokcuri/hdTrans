@@ -1,0 +1,16 @@
+# 규칙: SPC-13
+rule	input	expected	kind	layer
+cx:prohibit-na:10	うわァッ！なめるなァ！	우와앗! 얕보지 마!	fix	rewrites
+cx:prohibit-na:10	「逃げるな田中！！」	「도망치지 마 타나카!!」	fix	rewrites
+cx:prohibit-na:10	「来るなマイク！」	「오지 마 마이크!」	fix	rewrites
+cx:prohibit-na:10	≪追うなケンタ！≫	≪쫓지 마 켄타! ≫	fix	rewrites
+cx:prohibit-na:10	手を突っ込むなバカァ！	손을 집어넣지 마 바카!	fix	rewrites
+cx:prohibit-na:10	わざわざ踊るな佐藤！！	일부러 춤추지 마 사토!!	fix	rewrites
+cx:prohibit-na:10	食べるな田中が	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	うん、結構いけるなこれ。	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	「いいか。わかるな？」	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	火は入っているな？	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	聞こえんなぁ～？	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	お弁当を教えてあげるなorz	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	よく食べたなァ！	!rule:cx:prohibit-na:10	keep	rewrites
+cx:prohibit-na:10	やるな相棒！	!rule:cx:prohibit-na:10	keep	rewrites

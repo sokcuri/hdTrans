@@ -10,3 +10,35 @@ rewrite:offer-promise	毎晩、弟に本を読んでやる。	매일 밤, 남동
 rewrite:offer-promise	宿題なら教えてやるよ。	숙제라면 가르쳐 줄게.	fix	rewrites
 rewrite:offer-promise	仕方ない、手伝ってやるわ。	어쩔 수 없다, 도와 줄게.	fix	rewrites
 rewrite:offer-promise	妹にも分けてあげてね。	여동생에게도 나누어 줘.	keep	rewrites
+rewrite:offer-promise	ああ、えらいぞ！ この俺が褒めてやろう。	아, 대단해! 이 내가 칭찬해 주마.	fix	rewrites
+rewrite:offer-promise	よし、鬼役をやってやろう！	좋아, 오니역을 하고 주마!	fix	rewrites
+rewrite:offer-promise	一ついいことを教えてやろう。	하나 좋은 일을 가르쳐 주마.	fix	rewrites
+rewrite:offer-promise	今回だけは許してやろう。	이번만은 용서해 주마.	fix	rewrites
+rewrite:offer-promise	まずは元の世界に戻してやろう！	우선은 원래의 세계에 되돌려 주마!	fix	rewrites
+rewrite:offer-promise	「わかったわかった。今後はオレンジを直接口に絞ってやろう」	「알았어 알았어. 향후는 오렌지를 직접구에 좁혀 주마」	fix	rewrites
+rewrite:offer-promise	「いいだろう、教えてやろう……」	「좋다, 가르쳐 주마……」	fix	rewrites
+rewrite:offer-promise	遊んでやろうか？	놀아 줄까?	keep	rewrites
+rewrite:offer-promise	殺してやろうと思った。	죽여주려고 했다.	keep	rewrites
+rewrite:offer-promise	話の続きはそこでやろう。	이야기의 다음은 거기서 하자.	keep	rewrites
+rewrite:offer-promise	見せてあげる！	보여 줄게!	fix	rewrites
+rewrite:offer-promise	正規空母の力、存分に見せてあげる！	정규 항공모함의 힘, 마음껏 보여 줄게!	fix	rewrites
+rewrite:offer-promise	あたしが、いれてあげる！Just a moment!	내가, 넣어 줄게! Just a moment!	fix	rewrites
+rewrite:offer-promise	「一気に勝負をつけてあげるっ！」	「단번에 승부를 붙여 줄게!」	fix	rewrites
+rewrite:offer-promise	仕方ない。私、付いてってあげる！	어쩔 수 없다. 나, 붙어 가 줄게!	fix	rewrites
+rewrite:offer-promise	見せてやる！	보여 준다!	keep	rewrites
+rewrite:offer-promise	今ここでケリ付けてやる！	지금 여기서 끝장 내 준다!	keep	rewrites
+rewrite:offer-promise	母が作ってあげる！	어머니가 만들어 준다!	keep	rewrites
+rewrite:offer-promise	毎日猫にご飯をあげる！	매일고양이에 밥을 준다!	keep	rewrites
+rewrite:offer-promise	彼が花をあげます！	그가 꽃을 줍니다!	keep	rewrites
+rewrite:offer-promise	田中くんの秘密を作ってあげるさーー	타나카 군의 비밀을 만들어 주고 말이야--	keep	rewrites
+rewrite:offer-promise	いつでも俺が受けてやる……	언제라도 내가 받아 준다……	keep	rewrites
+rewrite:offer-promise	あたいが、やったるわ！	내가, 해 줄게!	fix	rewrites
+rewrite:offer-promise	全艦戦闘用意！ ああ、やったるさ。	전함전투 준비! 아, 해 줄게.	fix	rewrites
+rewrite:offer-promise	うっし、いける。やったるぜ！	좋았어, 갈 수 있다. 해 준다!	keep	rewrites
+rewrite:offer-promise	調整したるから	조정해 주니까	keep	rewrites
+rewrite:offer-promise	今度こそやつの息の根を止めてやる！	이번이야말로 녀석의 숨통을 끊어 준다!	keep	rewrites
+rewrite:offer-promise	…小細工ごと、ぶっ潰してやるぜッ！！	…세공마다, 확 부수어 준다!!	keep	rewrites
+rewrite:offer-promise	「見てろ。見せてやるぜッ！！！」	「봐라. 보여 준다!!!」	keep	rewrites
+rewrite:offer-promise	やったるぜーぇ！	해 준다!	keep	rewrites
+rewrite:offer-promise	なあ、そこのあんた、ちょっとこっち来てくれよう。	저기, 거기의 너, 조금 여기 와 주자.	keep	rewrites
+rewrite:offer-promise	フタタビ…アノアクムヲ…ミセテヤロウ…イマ…ココデッ！	다시…그 악몽을…보여 주마…지금…여기서!	fix	rewrites

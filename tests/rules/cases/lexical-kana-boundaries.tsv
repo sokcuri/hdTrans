@@ -10,7 +10,7 @@ dict:kami-osage	髪をおさげにする。	머리를 땋아 늘어뜨린다.	fi
 dict:kami-osage	朝、髪をおさげにした。	아침, 머리를 땋아 늘어뜨렸다.	fix	lookup
 dict:kami-osage	髪をおさげにして出かけた。	머리를 땋아 늘어뜨려 나갔다.	fix	lookup
 dict:kami-osage	荷物をおさげください。	짐을 낮추어 주세요.	keep	lookup
-dict:kami-osage	皿をおさげします。	접시를 낮추겠습니다.	keep	lookup
+dict:kami-osage	皿をおさげします。	접시를 낮추어 드리겠습니다.	keep	lookup
 dict:kami-osage	その箱をおさげになる。	그 상자를 낮추신다.	keep	lookup
 dict:kami-osage	お下げの人が来た。	땋은 머리의 사람이 왔다.	keep	lookup
 dict:yosoru	ご飯をよそる。	밥을 담아낸다.	fix	lookup
