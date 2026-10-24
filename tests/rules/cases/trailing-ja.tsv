@@ -1,0 +1,19 @@
+# 규칙: GRM-25
+rule	input	expected	kind	layer
+cx:trailing-ja:10	「べ、別にそんなたいした理由じゃ……」	「벼, 별로 그런 굉장한 이유는……」	fix	rewrites
+cx:trailing-ja:10	「あ、まさか、あの人からの電話じゃ……」	「아, 설마, 그 사람으로부터의 전화는……」	fix	rewrites
+cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니다! 별로 그런 작정은……」	fix	rewrites
+cx:trailing-ja:10	かみつき、それ虐待じゃ…	물어, 그것 학대는…	fix	rewrites
+cx:trailing-ja:10	「こんなレベルじゃ…。」	「이런 레벨은….」	fix	rewrites
+cx:trailing-ja:10	ええ？そんな…アイドルは沈まない設定じゃ…	어? 그런…아이돌은 가라앉지 않는 설정은…	fix	rewrites
+cx:trailing-ja:10	「あ、……お、俺のは大した答えじゃ……。」	「아, ……나, 나의 건 대단한 대답은…….」	fix	rewrites
+cx:trailing-ja:10	え、呪いの人形じゃ…。あぁそうなんですね	어, 저주 인형은…. 아그렇네요	fix	rewrites
+cx:trailing-ja:10	もう分かったよ。飲みすぎじゃ…。	벌써 알았어. 과음은….	fix	rewrites
+cx:trailing-ja:10	本当にスパイじゃ……	정말 스파이는……	fix	rewrites
+cx:trailing-ja:10	わしじゃ……	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	雨じゃ。	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	タタカイ……トカ……。スキ…ジャ……。	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	「……それで、アルファさんは、幽霊じゃ……ないんだよな？」	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	やばい、このままじゃ……！！	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	「それじゃ……いくわよ！」	!rule:cx:trailing-ja:10	keep	rewrites
+cx:trailing-ja:10	「そこは頭を撫でるシチュエーションじゃ……」	「거기는 머리를 쓰다듬는 시추에이션은……」	fix	rewrites
