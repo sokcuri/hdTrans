@@ -41,7 +41,7 @@ dict:jisjk:373504	その大切さを知った。	그 중요함을 알았다.	kee
 dict:jisjk:373504	頭がいっぱいだよ	머릿속이 가득해	keep	defaults
 dict:jisjk:373504	容姿と優秀さで有名だ。	용모와 우수함으로 유명하다.	keep	ending-defaults
 dict:jisjk:373504	今の長波にぴったりさ、いくぜ！	지금의 장파에 딱 맞아, 간다!	fix	local-ending
-dict:jisjk:267449	彼女は優秀さ、美しさ、全てを持っている。	그녀는 우수함, 아름다움, 모든 것을 가지고 있다.	fix	local-ending
+dict:jisjk:373504	彼女は優秀さ、美しさ、全てを持っている。	그녀는 우수함, 아름다움, 모든 것을 가지고 있다.	fix	local-ending
 dict:jisjk:267449	彼の優秀さ、誠実さ、勤勉さ。	그의 우수함, 성실함, 근면함.	fix	local-ending
 sense:いっぱい	目に涙をいっぱい浮かべた。	눈에 눈물을 가득 띄웠다.	fix	senses
 sense:いっぱい	箱にいっぱい詰めた。	상자에 가득 채웠다.	fix	senses
@@ -75,4 +75,10 @@ dict:number-ippai	ニコニコ……頭がいっぱいわよ	싱글벙글……�
 # 맞는 출력: 딩동……머릿속이 가득한 거야
 dict:number-ippai	ピンポーン……頭がいっぱいのよ	딩동……머릿속이 가득해의 것	current	defaults
 # 맞는 출력: 조용함, 그것이 제일이다.
-dict:jisjk:267449	静かさ、それが一番だ。	조용해, 그것이 제일이다.	current	local-ending
+dict:jisjk:373504	静かさ、それが一番だ。	조용해, 그것이 제일이다.	current	local-ending
+dict:jisjk:373504	大丈夫さ、大丈夫さ。	괜찮아, 괜찮아.	keep	local-ending
+dict:jisjk:373504	「大丈夫さ、平気さ」	「괜찮아, 괜찮아」	keep	local-ending
+dict:jisjk:373504	簡単さ、楽勝さ！	간단해, 간단히 이겨!	keep	local-ending
+dict:jisjk:373504	平気さ、平気さ。	괜찮아, 괜찮아.	keep	local-ending
+dict:jisjk:373504	うん、大丈夫だ、平気さ。	응, 괜찮다, 괜찮아.	keep	local-ending
+dict:jisjk:373504	料理得意なの？っていやー、簡単さーこんなの…。	요리 자신있어? 라는 아니~, 간단해-이런 건….	keep	local-ending
