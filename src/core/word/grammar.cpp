@@ -787,7 +787,7 @@ void RespectfulPassive(Flusher& f) {
             // (gram Hi): 陛下が幽閉された is the passive, 国王様が崩御された the respectful form.
             if (!RespectfulReading(it, surface == "され" && SinoNounTakesObject(it->prev))) continue;
             it->SelectCandidate(honorific, {Provenance::Rewrite});
-            // Before いる it is the plain verb with 고 and 계시다 (来られてる 오고 계신다).
+            // Before いる it is the plain verb with 고 and 계시다 (読まれてる 읽고 계신다).
             if (const std::string plain = PlainOfHonorific(f, surface, it->EntryText(honorific));
                 !plain.empty() && HonorificProgressive(f, it)) {
                 it->AssignEntrySurface(honorific, plain);
@@ -865,6 +865,13 @@ bool GradualBefore(const Item* it) {
     return false;
 }
 
+// Whether verb item v is an auxiliary after the て form of the verb before it (近づいて来る).
+bool AfterTeForm(const Item* v) {
+    const Item* p = v->prev;
+    return p != nullptr && p->tokenIndex == v->tokenIndex && p->detail->Yougo() &&
+           (p->DirectSurface().ends_with(kJaTe) || p->DirectSurface().ends_with(kJaDe));
+}
+
 // The verb in its 連用形 (the bare stem or its one i-row kana) that an unlisted 込む, item n,
 // follows in the same token (詰め込む, 惚れ込んでいる); nullptr when n is no such 込む.
 Item* InwardVerb(Item* n) {
@@ -891,8 +898,9 @@ bool HonorificAspect(Flusher& f, const Item* it) {
     if (const Item* n = it->After(); n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == honorific) {
         return true;
     }
+    if (honorific.size() <= kHonorificMarker.size() || it->DirectIndex() < 0) return false;
     const std::string ending = std::string(kProgressiveHead) + honorific.substr(0, honorific.size() - kHonorificMarker.size());
-    return honorific.size() > kHonorificMarker.size() && it->DirectIndex() >= 0 && it->DirectText(it->DirectIndex()).starts_with(ending);
+    return it->DirectText(it->DirectIndex()).starts_with(ending);
 }
 
 }  // namespace
@@ -927,6 +935,9 @@ void ResultState(Flusher& f) {
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
                             !v->EntryText(v->selected).ends_with("&HN@"));
         if (!state) continue;
+        // A verb that is also a て auxiliary (来る) is a change or approach after a て form
+        // (近づいて来られている 가까워져 오고 계신다), no state of its own.
+        if (dict::InClass("aux.te-start", verb) && AfterTeForm(v)) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
         const std::string lemma = output::Lemma(e->dst, f.families);
@@ -1299,8 +1310,7 @@ void PastSequence(Flusher& f) {
         // 出会ったのは 나가 보니 만난 것은).
         const std::string_view stem = it->group->surface;
         const bool tried = seeing && (stem.ends_with("てみ") || stem.ends_with("でみ") ||
-                                      (stem == "み" && it->prev != nullptr && it->prev->detail->Yougo() &&
-                                       (it->prev->DirectSurface().ends_with(kJaTe) || it->prev->DirectSurface().ends_with(kJaDe))));
+                                      (stem == "み" && AfterTeForm(it)));
         // A point of view (長期的に見れば, 目で見れば, 外から見れば) is no step of the story.
         const bool viewpoint = it->prev != nullptr && (it->prev->group->surface.ends_with("的に") ||
                                                       it->prev->group->surface.ends_with("目で") ||

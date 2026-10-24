@@ -23,6 +23,11 @@ rewrite:respectful-passive	先生は来られてる。	선생님은 와 계신�
 rewrite:respectful-passive	先生は来られている。	선생님은 와 계신다.	fix	rewrites
 rewrite:respectful-passive	先生は来られていた。	선생님은 와 계셨다.	fix	rewrites
 rewrite:respectful-passive	先生は部屋に入られてる	선생님은 방에 들어가 계신다	fix	rewrites
-rewrite:respectful-passive	先生は東京に行かれている	선생님은 도쿄에 가고 계신다	fix	lookup
+rewrite:respectful-passive	先生は東京に行かれている	선생님은 도쿄에 가 계신다	fix	lookup
 rewrite:respectful-passive	先生が来られた。	선생님이 오셨다.	keep	rewrites
 rewrite:respectful-passive	電話が来ている	전화가 와 있다	keep	lookup
+rewrite:respectful-passive	先生が近づいて来られている	선생님이 가까워져 오고 계신다	fix	rewrites
+rewrite:respectful-passive	先生は毎日ここに来られている	선생님은 매일 여기에 와 계신다	keep	rewrites
+rewrite:respectful-passive	先生は東京に行かれていた	선생님은 도쿄에 가 계셨다	fix	lookup
+rewrite:respectful-passive	先生はどこに行かれているんですか？	선생님은 어디에 가 계십니까?	fix	lookup
+rewrite:respectful-passive	毎日座っている	매일 앉아 있다	keep	rewrites
