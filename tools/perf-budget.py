@@ -439,6 +439,13 @@ def self_test():
             broken.add("base")
             assert chk(base, True) == 0
             broken.clear()
+            broken.add("head")
+            try:
+                chk(base, True)
+                raise AssertionError("no error")
+            except MeasureError:
+                pass
+            broken.clear()
             assert update(root, "head", "dicts", base, fake, fake_tc) == 0 and chk(base) == 0
             head = git(root, "rev-parse", "HEAD").stdout.strip()
             run("commit", "-q", "-am", "raise")

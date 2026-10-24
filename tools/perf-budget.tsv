@@ -3,6 +3,6 @@
 inputs	5f0195b91674a894d40fa6a36077dd40e22fa21b
 toolchain	GCC: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, glibc 2.39, x86_64, valgrind-3.22.0
 row	instructions
-load	2931303185
-each	19947276325
-document	1505298965
+load	2931259351
+each	19963575035
+document	1509708593
