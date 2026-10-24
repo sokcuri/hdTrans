@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 cx:humble-give:10	わたくしがお持ちしますね	제가 가져다 드릴게요	fix	rewrites
 cx:humble-give:10	甘いものをお持ちしますね。	단 것을 가져다 드릴게요.	fix	rewrites

@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 cx:humble-go:10	お茶を淹れてまいります。	차를 끓여 오겠습니다.	fix	rewrites
 cx:humble-go:10	「はいっ、それでは、直してまいりますっ」	「네, 그러면, 고쳐 오겠습니다」	fix	rewrites

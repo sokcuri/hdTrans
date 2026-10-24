@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 cx:te-na-stay:10	情報だな、待ってな。	정보다, 기다리고 있어.	fix	rewrites
 cx:te-na-stay:10	ちょっと待ってな、コーヒー付きでね。	잠깐 기다리고 있어, 커피 첨부로.	fix	rewrites

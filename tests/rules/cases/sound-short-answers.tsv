@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 sound:short-answer	第二水雷戦隊、戦場海域に到達。これより突入する。かかれっ！	제2수뢰전대, 전장 해역에 도달. 지금부터 돌입한다. 덤벼라!	fix	fixed
 sound:short-answer	これより、友軍の作戦を支援する。かかれっ！	지금부터, 우군의 작전을 지원한다. 덤벼라!	fix	fixed

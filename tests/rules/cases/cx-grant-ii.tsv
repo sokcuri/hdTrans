@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 cx:grant-ii:10	なるほど……よし、いいだろう。	그렇구나……좋아, 좋다.	fix	rewrites
 cx:grant-ii:10	いいだろう。	좋다.	fix	rewrites

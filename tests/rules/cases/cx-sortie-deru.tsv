@@ -1,4 +1,4 @@
-# 규칙: SPC-13
+# 규칙: SPC-15
 rule	input	expected	kind	layer
 cx:promise-go-out:30	支援任務、了解。田中、出る。	지원 임무, 알았어. 타나카, 나간다.	fix	rewrites
 cx:promise-go-out:30	一番艦、出る！	1번함, 나간다!	fix	rewrites
