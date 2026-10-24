@@ -294,7 +294,7 @@ bool SuffixHost(const Item* before) {
         if (person(e->code, e->attr, e->gattr)) return true;
     }
     for (const Record* r = before->group->records; r != nullptr; r = r->child) {
-        if (r->source == before->group->surface && person(std::string_view(r->partCode).substr(1), r->semantic, r->attr)) {
+        if (r->source == before->group->surface && person(From(r->partCode, 1), r->semantic, r->attr)) {
             return true;
         }
     }
