@@ -128,7 +128,8 @@ std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool 
 std::string RewriteInterjections(std::string_view text);
 
 // Words said with an emphatic っ or ん inside written plain (さっすが さすが, しっかたない
-// しかたない, すんごい すごい).
+// しかたない, すんごい すごい, あったりまえ あたりまえ, くっさい くさい, バッカ バカ, ばっかじゃ
+// バカじゃ where a clause starts).
 std::string RewriteEmphaticSpellings(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,

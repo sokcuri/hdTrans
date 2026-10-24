@@ -291,11 +291,6 @@ constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
 constexpr char kSoyuKoto[] = "そゆこと";
-// Words said with an emphatic っ or ん inside: さっすが さすが, しっかた しかた (しっかたないなぁ),
-// すんご すご (すんごい, すんごく).
-constexpr char kSassuga[] = "さっすが";
-constexpr char kShikkata[] = "しっかた";
-constexpr char kSungo[] = "すんご";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -690,12 +685,49 @@ bool EndsWithStemKanji(std::string_view s) {
     return last.size == 3 && IsKanji(last.cp) && !In(last.cp, U"見来寝着出居");
 }
 
+bool AdjectiveEnd(char32_t c) { return In(c, U"いくかけそ"); }
+bool NoKana(char32_t c) { return !IsHiraganaRune(c) && !IsKatakanaRune(c); }
+bool NoKatakana(char32_t c) { return !IsKatakanaRune(c); }
+
+// A word said with an emphatic っ or ん inside and its plain spelling, where next holds for
+// the rune after it (0 at the end) and, with clause, where a clause starts before it.
+struct EmphaticSpelling {
+    std::string_view written, plain;
+    bool (*next)(char32_t) = nullptr;
+    bool clause = false;
+};
+constexpr EmphaticSpelling kEmphaticSpellings[] = {
+    {"さっすが", "さすが"},
+    {"しっかた", "しかた"},  // しっかたないなぁ
+    {"すんご", "すご"},      // すんごい, すんごく
+    {"あったりまえ", "あたりまえ"},
+    {"あったり前", "あたり前"},
+    {"くっさ", "くさ", AdjectiveEnd},  // くっさい
+    {"くっさ", "臭っ", NoKana},        // うわ、くっさ。
+    {"あっつ", "暑", AdjectiveEnd},  // あっついねー
+    {"きっつ", "きつ", AdjectiveEnd},
+    {"うっせ", "うるせえ", NoKana},
+    {"バッカ", "バカ", NoKatakana},          // not バッカス
+    {"ばっかじゃ", "バカじゃ", nullptr, true},  // not the ばかり of 学食ばっかじゃ
+    {"ばっかみたい", "バカみたい", nullptr, true},
+};
+
+bool EmphaticAt(std::string_view s, size_t pos, Match& m) {
+    for (const EmphaticSpelling& e : kEmphaticSpellings) {
+        size_t p = pos;
+        if (!Lit(s, p, e.written) || (e.clause && !ClauseStart(s, pos))) continue;
+        if (e.next != nullptr && !e.next(p < s.size() ? At(s, p).cp : 0)) continue;
+        m.group[1] = e.plain;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string RewriteEmphaticSpellings(std::string_view in) {
-    std::string text = ReplaceAll(in, Literal<kSassuga>, [](const Match&) { return std::string("さすが"); });
-    text = ReplaceAll(text, Literal<kShikkata>, [](const Match&) { return std::string("しかた"); });
-    return ReplaceAll(text, Literal<kSungo>, [](const Match&) { return std::string("すご"); });
+    return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
 std::string RewriteCasual(std::string_view in) {
