@@ -61,6 +61,7 @@
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
+//= mark.drawn	Kana that draw out the word before them (燃えるねぇ, 言うねェ, ねー, ね～).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
@@ -623,6 +624,7 @@ ko-adjective.stem-end	밉
 ko-adjective.stem-end	넓
 ko-adjective.stem-end	탐탁
 ko-adjective.stem-end	점잖
+ko-adjective.stem-end	고프
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -818,6 +820,12 @@ mark.restart	―
 mark.restart	—
 mark.restart	・・
 mark.restart	··
+mark.drawn	ぇ
+mark.drawn	ェ
+mark.drawn	え
+mark.drawn	ー
+mark.drawn	～
+mark.drawn	〜
 
 mark.sentence-end	。
 mark.sentence-end	！
