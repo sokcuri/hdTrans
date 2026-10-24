@@ -59,3 +59,7 @@ compose:native-count	3.5キロ歩いた。	3.5킬로 걸었다.	keep	compose
 compose:native-count	2回目の挑戦	2번째의 도전	keep	compose
 compose:native-count	第3王子が来た。	제3왕자가 왔다.	keep	compose
 compose:native-count	二つください。	두 개 주세요.	keep	compose
+compose:native-count	2回やった。	2회 했다.	fix	compose
+compose:native-count	7枚の紙。	7장의 종이.	fix	compose
+compose:native-count	1個だけ。	1개만.	fix	compose
+compose:native-count	一人で行く。	혼자서 간다.	keep	lookup
