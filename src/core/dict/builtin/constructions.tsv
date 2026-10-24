@@ -14,22 +14,49 @@ cx:benefactive-provider:20		&&4 ||2 S+0== "に" S+0== "には" D+0== "에게는"
 //= go-not-say	after ChooseInitialConjunctions	The い of いう read 말하다 after に, へ, まで or から is 가다 (行く), unless a person or a noun of manner (noun.manner-ni) stands before the particle.
 cx:go-not-say:10		&&7 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni C+0== "가다"	select-lemma "가다"	学校までいった 학교까지 갔다
 cx:go-not-say:20		&&6 S+0== "い" F+0== "conjugating" L+0== "L말하" ||4 S-1== "に" S-1== "へ" S-1== "まで" S-1== "から" F-2!= "person" S-2!= @noun.manner-ni	set-verb "가다"	the word has no candidate 가다
-//= adjectival-ni	after AdjectiveNeighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
+//= adjective-neighbours	after HanBeforeNa	After an adjective in い read in 4, a だろ read 이겠 is 겠 on the adjective (없겠지), and after the く of an adjective read as a noun with 이다 (a copula family, 큰일$AH@) the な of なる is 되다 (큰일이 되다).
+cx:adjective-neighbours:10		&&7 F+0== "selected" F+1== "selected" P+0== "7" U+0== "い" Y+0== "4" S+1== "だろ" D+1== "L이겠"	set-ending "1" replace-head@+1 "이겠" "겠"	需要ないだろ 수요 없겠지
+cx:adjective-neighbours:20		&&8 F+0== "selected" F+1== "selected" ||2 P+0== "7" P+0== "8" U+0== "く" Y+0== "6" S+1== "な" P+1== "4" F+0== "copula-target"	select-lemma@+1 "되다"	まずくなる 큰일이 되다
+//= adjectival-ni	after adjective-neighbours	The に read 에 after a noun the sense table reads as an adjectival noun is its adverb ending 하게.
 cx:adjectival-ni:10		&&7 F+0== "selected" F+1== "selected" P+0== "1" F+0== "adjectival" S+1== "に" D+1== "에" F+1!= "fixed"	take-target@+1 "하게"	
-//= copula-de-aru	after PositiveIke	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
+//= geot-before-mitai	after adjectival-ni	An ending in 던 before a みたい read as an adjective (%) takes the noun 것: 来てたみたい 오고 있었던 것 같다.
+cx:geot-before-mitai:10		&&4 D+0== "L%" F+0== "mitai-like" ||2 P-1== "4" P-1== "7" Y-1== "R던"	replace-ending-tail@-1 "던" "던 것"	来てたみたいだ 오고 있었던 것 같다
+//= positive-ike	after geot-before-mitai	The いけ read 안 되다 is 갈 수 있다 (いける, いけそう), unless a negative follows it: an ending, or the next word after no ending, that starts with one of ending.negative-start (いけない, いけません).
+cx:positive-ike:10		&&4 S+0== "いけ" D+0== "L안" !1 U+0== @Lending.negative-start ||2 U+0!= "" !1 S+1== @Lending.negative-start	select-target "L갈 수"	まだいける 아직 갈 수 있다
+//= copula-de-aru	after positive-ike	The であ that a place before it read 에서 만나다 is 에서 있다, what happened there, when its attributive modifies a noun of an event (a verbal noun or one of noun.event), and the copula 이다 after a word that is no partner of meeting (word.meet-partner).
 cx:copula-de-aru:10		&&5 S+0== "であ" F-1== "exists" L+0== "L에서 만나" Y+0== "8" >0 &&4 F+0!= "conjugating" F+0== "selected" P+0== "1" ||2 G+0== "Hd" S+0== @Rnoun.event F+0!= "conjugating"	select-lemma "에서 있다"	海外であった事件 해외에서 있던 사건
 cx:copula-de-aru:20		&&4 S+0== "であ" F-1== "exists" L+0== "L에서 만나" S-1!= @word.meet-partner	select-lemma "이다"	その子であった 그 아이였다
-//= subject-before-ga	after NegativeCopula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
+//= negative-copula	after copula-de-aru	The ではな read (은)는 아니다 after a noun is (이)가 아니다, and a pronoun before it takes the candidate of its subject form (내가 아니다), unless a contrast goes on after it (大した傷ではないが) or the noun reads as an adverb in 히.
+cx:negative-copula:10		&&8 S+0== "ではな" F-1!= "conjugating" K-1== "N" L-1!= "R히" L-1!= "," F+0!= "contrast" L+0== "L(은)는 아니" C+0== "L(이)가 아니"	select-lemma "L(이)가 아니" select-map@-1 @subject-pronoun	言葉ではない 말이 아니다, 俺ではない 내가 아니다
+//= subject-before-ga	after negative-copula	A pronoun before the subject (이)가 of が or の, or before a negative copula (이)가 아니다, takes its subject form (내가, 내가 아니다), and the subject form goes back to the plain pronoun before a が read as the object (나를). The の before a verb with を is 의.
 cx:subject-before-ga:10		&&4 S+0== "が" F-1== "selected" L+0== "(을)를" F-1!= "conjugating"	map-target@-1 @plain-pronoun	私が好き 나를 좋아해
 cx:subject-before-ga:20		&&3 D+0== "L(이)가 " F-1== "selected" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺じゃない 내가 아니다
 cx:subject-before-ga:30		&&5 S+0== "の" F-1== "selected" L+0== "(이)가" F+1== "conjugating" S+1== "~を"	select-lemma "의"	
 cx:subject-before-ga:40		&&4 ||2 S+0== "が" S+0== "の" F-1== "selected" L+0== "(이)가" F-1!= "conjugating"	map-lemma@-1 @subject-pronoun	俺が 내가
 //= subject-no	after subject-before-ga	The の read 의 after a noun and before a predicate of existence, quantity or knowing (stem.subject-predicate), or before an adjective after a noun of a quality (noun.attribute), with a noun after the predicate, is the subject (이)가.
 cx:subject-no:10		&&7 S+0== "の" L+0== "의" P-1== "1" F+1== "selected" P+2== "1" ||2 S+1== @stem.subject-predicate &&2 S-1== @noun.attribute P+1== "7" C+0== "(이)가"	select-lemma "(이)가" map-lemma@-1 @subject-pronoun	人の少ない町 사람이 적은 마을
+//= te-request	after VerseTe	A て form read 며 that ends the utterance is a request: 어 (待って 기다려), and 어서 after しまう or ちゃう (忘れてしまって 잊어 버려서). Not a て of 있다.
+cx:te-request:10		&&6 F+0== "conjugating" Y+0== "2며" ||2 I+0== "Rて" I+0== "Rで" D+0!= "L있" F+0== "utterance-end" ||2 S+0== "Rしま" S+0== "Rちゃ"	set-ending "6서"	忘れてしまって 잊어 버려서
+cx:te-request:20		&&5 F+0== "conjugating" Y+0== "2며" ||2 I+0== "Rて" I+0== "Rで" D+0!= "L있" F+0== "utterance-end"	set-ending "6"	待って 기다려
+//= past-progressive-adnominal	after SimpleAspect	The progressive ていた of a verb with no passive, potential or causative, before a noun it describes, is 던 (読んでいた本 읽던 책); not a verb of holding (ko-verb.holding: 握っていた手 잡고 있던 손).
+cx:past-progressive-adnominal:10		&&6 F+0== "conjugating" F+0== "verb" F+0== "plain-voice" ||2 Y+0== "1고 있었던" Y+0== "1고 있던" F+0!= "holding-verb" F+0== "described-noun"	set-ending "1던"	one ending 고 있던
+cx:past-progressive-adnominal:20		&&12 F+0== "conjugating" F+0== "verb" F+0== "plain-voice" Y+0== "1고" ||2 U+0== "Rて" U+0== "Rで" S+1== "い" F+1== "selected" U+1== "た" Y+1== "8" L+1== "L있" F+0!= "holding-verb" F+1== "described-noun"	set-ending "1던" set-target@+1 "" set-ending@+1 ""	読んでいた本 읽던 책
+//= see-and	after NotYet	The て of 見る read 보다 after を is 고, an action done before the next one (私を見て言う 나를 보고 말한다), unless the utterance ends after it with no comma, or a closing quote, an auxiliary of the て form or one of particle.see-te-keep follows it.
+cx:see-and:10		&&8 S+0== "R見" U+0== "て" Y+0== "6" S-1== "を" F+0== "conjugating" L+0== "보다" ||2 F+0!= "utterance-end" T+0== "L、" ||2 !1 F+1== "exists" &&4 S+1!= "L」" S+1!= "L』" S+1!= @Laux.te-start S+1!= @particle.see-te-keep	set-ending "1고"	私を見て言う 나를 보고 말한다
+//= te-sequence	after see-and	The て form read 어 of a verb whose Korean is an action of ko-verb.sequence is 고 when a verb follows in the sentence (手を洗って寝る 손을 씻고 잔다); not ないで.
+cx:te-sequence:10		&&7 F+0== "conjugating" F+0== "verb" Y+0== "6" ||2 I+0== "Rて" I+0== "Rで" I+0!= "Rないで" L+0== @ko-verb.sequence F+0== "predicate-follows"	set-ending "1고"	手を洗って寝る 손을 씻고 잔다
+//= te-object-comma	after TeThanks	The て or 連用 form read 어 of a verb with an object before a comma is 고 (本を開いて、 책을 펴고,), unless the verb gives a means (verb.means: 道具を使って、 도구를 써,).
+cx:te-object-comma:10		&&6 S-1== "を" S+1== "、" F+0== "conjugating" F+0== "verb" Y+0== "6" S+0!= @Rverb.means	set-ending "1고"	本を開いて、 책을 펴고,
+//= noda-to	after QuoteTo	An ending in 것이다 before a quoting と read (이)라고 drops its 다: そうだろうと思った 그럴 것이라고 생각했다.
+cx:noda-to:10		&&4 Y+0== "R 것이다" S+1== "Lと" F+1== "selected" ||2 L+1== "L(이)라고" L+1== "L라고"	replace-ending-tail " 것이다" " 것이"	そうだろうと思った 그럴 것이라고 생각했다
 //= hodo-degree	after TerminalBeforeQuote	The ほど or 程 of degree read in 수록 or 만큼 is 정도, and the に after it (으)로, unless a ば condition stands before it.
 cx:hodo-degree:10		&&3 ||2 U+0== "R程に" U+0== "Rほどに" ||2 Y+0== "~수록" &&2 Y+0== "~만큼" S+1== "に" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도로"	痛ましい程に 참혹할 정도로
 cx:hodo-degree:20		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1== "に" ||2 Y+0== "~수록" Y+0== "~만큼" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도" select-lemma@+1 "(으)로"	ほどに with に its own word
 cx:hodo-degree:30		&&5 ||2 U+0== "R程" U+0== "Rほど" S+1== @Lparticle.hodo-degree S+1!= "に" Y+0== "~수록" !1 ||2 U+0== "Rば" <0 U+0== "Rば" ||0	set-ending "3 정도"	痛い程の 따가울 정도의
+//= question-copula	after hodo-degree	The copula だ read (이)다 after a question word of question.copula that ends a quote or stands before 、 asks: 냐, 이냐 after a final consonant, and 무엇 before it is 뭐 (何だ 뭐냐, 誰だ 누구냐).
+cx:question-copula:10		&&5 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、" L-1== "무엇"	set-target@-1 "뭐" set-target "냐"	何だ、少尉 뭐냐, 소위
+cx:question-copula:20		&&5 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、" F-1== "final-consonant"	set-target "이냐"	「どれだ」 「어떤 것이냐」
+cx:question-copula:30		&&4 S+0== "だ" L+0== "(이)다" S-1== @question.copula ||2 F+0== "quote-end" T+0== "L、"	set-target "냐"	誰だ！ 누구냐!
 //= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
 cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다
 //= kara-source	after return-to	The から read (으)로부터 is 부터 after a time or a number, and 에서 after a place or scene.
@@ -72,3 +99,5 @@ cx:naka-sok:20		&&3 S+0== "の中で" F+0== "selected" S-1== @noun.inside-medium
 cx:naka-sok:30		&&3 S+0== "の中から" F+0== "selected" S-1== @noun.inside-medium	take-target " 속에서"	炎の中から 불길 속에서
 //= koto-nante	after naka-sok	The なんて or なんか after a のこと that follows a noun belittles the noun: 같은 건 after the noun, or after 의 일 where the rules read のこと so (昨日のこと 어제의 일).
 cx:koto-nante:10		&&6 ||2 S+0== "なんて" S+0== "なんか" F+0== "selected" F+0!= "fixed" S-1== "のこと" F-1== "selected" F-2== "selected"	set-target " 같은 건"	あたしのことなんて 나 같은 건
+//= chan-after-katakana	after HumbleFirstPerson	A ちゃん left empty right after a katakana noun in the same token is 짱 (ナッちゃん 낫짱); the empty ちゃん of a kin word (お姉ちゃん 누나) stays.
+cx:chan-after-katakana:10		&&8 S+0== "ちゃん" F+0== "selected" F+0== "blank" F+0== "touches-prev" H+0!= "" F-1== "selected" P-1== "1" F-1== "katakana"	select-lemma "짱"	アリスちゃん 앨리스짱
