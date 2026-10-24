@@ -304,7 +304,7 @@ bool SuffixHost(const Item* before) {
 }  // namespace
 
 // Text path: a suffix of honorific.after-person (たん, っち) at full[cursor:] is a word only
-// after a name or a noun of persons (先生たん, 大井っち) and when no longer dictionary word
+// after a name or a noun of persons (先生たん, 小林っち) and when no longer dictionary word
 // starts at that noun and goes past it (たまご + っち of たまごっち); elsewhere its records
 // leave the candidates, so that the longer word or the kana around it are read instead.
 Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
