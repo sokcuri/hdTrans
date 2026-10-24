@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+dict:jisjk:30684	有明の手	아리아케의 손	fix	lookup
+dict:jisjk:30684	有明んところ	아리아케의 곳	fix	lookup
+dict:jisjk:30684	有明の海	아리아케의 바다	keep	lookup
