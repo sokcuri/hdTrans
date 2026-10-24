@@ -19,8 +19,10 @@ namespace hdTrans::tokenizer {
 // With joins, a space or an ideographic space between two kanji stays a space token of its own,
 // so that the words
 // on its sides are read apart (光 影, 副総理 兼 外務大臣), unless joins says that a word of
-// the dictionary spans it (未 来, text spaced out character by character). joins gets the
-// Japanese text before the space and the text after it, the space left out.
+// the dictionary spans it (未 来, text spaced out character by character), and a letter after
+// kana goes on with the Japanese text when a word spans both (うｐ, おｋ). joins gets the
+// Japanese text before the space or letter and the text after it, the space left out and the
+// letters folded to ASCII.
 using SpaceJoins = std::function<bool(std::string_view before, std::string_view after)>;
 void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins = nullptr);
 
