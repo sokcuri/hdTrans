@@ -163,11 +163,11 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{35});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{42});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
-        HD_CHECK((r.word == word::ConstraintWord::Source) == !r.source.empty());
+        HD_CHECK((r.word == word::ConstraintWord::Source || r.word == word::ConstraintWord::EndsInSource) == !r.source.empty());
         HD_CHECK((r.reject == word::ConstraintReject::OtherTargets || r.reject == word::ConstraintReject::Target) ==
                  !r.target.empty());
     }

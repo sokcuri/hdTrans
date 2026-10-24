@@ -1,17 +1,17 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-lookup:contracted-ageru	いいよ、私作ったげるから。	좋아, 나 만들어 주니까.	fix	lookup
-lookup:contracted-ageru	さぁて、みんないい？改装陽炎型の威力、見せたげるから！	자, 모두 좋아? 개장 아지랑이형의 위력, 보여 주니까!	fix	lookup
-lookup:contracted-ageru	そっかぁ。情報だね。持ってきたげるよ！	그렇구나~. 정보구나. 가져와 주어!	fix	lookup
-lookup:contracted-ageru	提督の絵、描いたげようか～？	제독의 그림, 그려 줄까~?	fix	lookup
-lookup:contracted-ageru	提督、お茶飲む？ 淹れたげよっか？	제독, 차 마셔? 끓여 줄까?	fix	lookup
-lookup:contracted-ageru	んじゃ、あたしがちょっと珍しい料理、作ったげましょ！	그럼, 제가 조금 드문 요리, 만들어 줍시다!	fix	lookup
-lookup:contracted-ageru	…はぁ、仕方ない。行ったげるよ。	…하아, 어쩔 수 없다. 가 주어.	fix	lookup
-lookup:contracted-ageru	遅れたら、後で笑ったげるわ！	늦으면, 나중에 웃어 주어!	fix	lookup
-lookup:contracted-ageru	「だったら、あたしがまとめて買ったげるわ」	「그렇다면, 내가 모아서 사 줘」	fix	lookup
-lookup:contracted-ageru	本を読んだげる。	책을 읽어 줄게.	keep	lookup
-lookup:contracted-ageru	私が作ってあげるから	내가 만들어 주니까	keep	lookup
-lookup:contracted-ageru	見せてあげる	보여 준다	keep	lookup
-lookup:contracted-ageru	言いたげな顔をしている。	말하고 싶은 듯한 얼굴을 하고 있다.	keep	lookup
-lookup:contracted-ageru	頭をもたげる。	두각을 나타낸다.	keep	lookup
-lookup:contracted-ageru	彼は満足げに笑った。	그는 만족스럽게 웃었다.	keep	lookup
+sound:contracted-auxiliaries	いいよ、私作ったげるから。	좋아, 나 만들어 주니까.	fix	sound
+sound:contracted-auxiliaries	さぁて、みんないい？改装陽炎型の威力、見せたげるから！	자, 모두 좋아? 개장 아지랑이형의 위력, 보여 주니까!	fix	sound
+sound:contracted-auxiliaries	そっかぁ。情報だね。持ってきたげるよ！	그렇구나~. 정보구나. 가져와 줄게!	fix	sound
+sound:contracted-auxiliaries	提督の絵、描いたげようか～？	제독의 그림, 그려 줄까~?	fix	sound
+sound:contracted-auxiliaries	提督、お茶飲む？ 淹れたげよっか？	제독, 차 마셔? 끓여 줄까?	fix	sound
+sound:contracted-auxiliaries	んじゃ、あたしがちょっと珍しい料理、作ったげましょ！	그럼, 제가 조금 드문 요리, 만들어 줍시다!	fix	sound
+sound:contracted-auxiliaries	…はぁ、仕方ない。行ったげるよ。	…하아, 어쩔 수 없다. 가 줄게.	fix	sound
+sound:contracted-auxiliaries	遅れたら、後で笑ったげるわ！	늦으면, 나중에 웃어 줄게!	fix	sound
+sound:contracted-auxiliaries	「だったら、あたしがまとめて買ったげるわ」	「그렇다면, 내가 모아서 사 줄게」	fix	sound
+sound:contracted-auxiliaries	本を読んだげる。	책을 읽어 줄게.	keep	sound
+sound:contracted-auxiliaries	私が作ってあげるから	내가 만들어 주니까	keep	sound
+sound:contracted-auxiliaries	見せてあげる	보여 준다	keep	sound
+sound:contracted-auxiliaries	言いたげな顔をしている。	말하고 싶은 듯한 얼굴을 하고 있다.	keep	sound
+sound:contracted-auxiliaries	頭をもたげる。	두각을 나타낸다.	keep	sound
+sound:contracted-auxiliaries	彼は満足げに笑った。	그는 만족스럽게 웃었다.	keep	sound

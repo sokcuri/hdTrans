@@ -1,0 +1,19 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+constraint:hashi-before-te	確かにソワソワはしているが、父が無言の圧力になっているのか大人しく食べている。	확실히 안절부절은 하고 있지만, 아버지가 무언의 압력이 되어 있는지 얌전히 먹고 있다.	fix	lookup
+constraint:hashi-before-te	よもや、手荒な真似はしていないだろうな？	설마, 난폭한 흉내는 하고 있지 않겠지?	fix	lookup
+constraint:hashi-before-te	将棋は好きだけど、わざわざ道具を持ってきたりはしていないわ	쇼기는 좋아하지만, 일부러 도구를 가져오거나는 하고 있지 않아	fix	lookup
+constraint:hashi-before-te	いつかは、私も沈むと…覚悟はしてたけど……提督や、みんなと会えてからで…よかった…	언젠가는, 나도 가라앉으면…각오는 했지만……제독이나, 모두와 만날 수 있고 나서로…다행이다…	keep	lookup
+constraint:hashi-before-te	……ですが、脱税はしていません。	……그렇지만, 탈세는 하고 있지 않습니다.	keep	lookup
+constraint:hashi-before-te	しかし、何らかの理由を見つけてここへ攻め込んでくる用意はしているのではないかと……。	하지만, 어떠한 이유를 찾아내 여기에 쳐들어가 올 준비는 하고 있을 것 같습니다…….	keep	lookup
+constraint:hashi-before-te	それなりに期待はしているわ。	그 나름대로 기대는 하고 있어.	keep	lookup
+constraint:hashi-before-te	毎日大事に整備はしてる。	매일 소중하게 정비는 하고 있다.	keep	lookup
+constraint:hashi-before-te	提督、今日もそれなりに期待はしているわ。	제독, 오늘도 그 나름대로 기대는 하고 있어.	keep	lookup
+constraint:hashi-before-te	あぁ、もちろん行ったよ……まぁ想像はしてたが、すごい現場だったな	아아, 물론 갔어……뭐 상상은 하고 있었지만, 대단한 현장이었네	keep	lookup
+constraint:hashi-before-te	うーん、ふわふわはしてたかも……	으음, 푹신푹신은 하고 있었는지도……	keep	lookup
+constraint:hashi-before-te	箸で食べた	젓가락으로 먹었다	keep	lookup
+constraint:hashi-before-te	感じはしていたんですけど	느낌은 하고 있었는데요	fix	lookup
+constraint:hashi-before-te	覚悟はしてたが罪悪感で	각오는 하고 있었지만 죄책감으로	keep	lookup
+constraint:hashi-before-te	橋を渡った	다리를 건넜다	keep	lookup
+constraint:hashi-before-te	はしで食べる	젓가락으로 먹는다	keep	lookup
+constraint:hashi-before-te	はしで食べた。	젓가락으로 먹었다.	keep	lookup

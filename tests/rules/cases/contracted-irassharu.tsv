@@ -1,24 +1,24 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-lookup:contracted-irassharu	霞よ。ガンガン行くわよ。ついてらっしゃい。	안개야. 마구 갈 거야. 따라와.	fix	lookup
-lookup:contracted-irassharu	二水戦所属は伊達じゃないわ。雪風、ついてらっしゃいな！	이수변전 소속은 다테가 아니야. 유키카제, 따라와!	fix	lookup
-lookup:contracted-irassharu	第五駆逐隊、抜錨！いい？みんな、ついてらっしゃい！	제5구축대, 출항하기! 좋아? 모두, 따라와!	fix	lookup
-lookup:contracted-irassharu	あなたも、付いてらっしゃい。	당신도, 따라와.	fix	lookup
-lookup:contracted-irassharu	お気に入りの制服が台無しよ。覚えてらっしゃい。	마음에 드는 제복이 엉망이야. 두고 봐.	fix	lookup
-lookup:contracted-irassharu	「さあさ、まずは手を洗ってらっしゃい」	「자, 우선은 손을 씻고 와」	fix	lookup
-lookup:contracted-irassharu	「圭一、お夕飯までまだ時間があるから。表でも散歩してらっしゃい。」	「케이이치, 저녁까지 아직 시간이 있으니까. 밖에서도 산책하고 와.」	fix	lookup
-lookup:contracted-irassharu	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	fix	lookup
-lookup:contracted-irassharu	「そーね、問題ないわ。こっちは大丈夫だから、３人でいってらっしゃい」	「네, 문제없어. 여기는 괜찮으니까, 3명이 잘 다녀와」	fix	lookup
-lookup:contracted-irassharu	今は第四水雷戦隊の旗艦を務めてらっしゃるのですね。	지금은 제4수뢰전대의 기함을 맡고 계시는군요.	fix	lookup
-lookup:contracted-irassharu	昼間のお疲れが溜まってらっしゃったのですね。	낮의 피로가 쌓여 계셨군요.	fix	lookup
-lookup:contracted-irassharu	提督、16時ですわ。熱心に何を見てらっしゃいますの？	제독, 16시예요. 열심히 무엇을 보고 계셔요?	fix	lookup
-lookup:contracted-irassharu	テレビのニュースによくお顔出てらっしゃるだろうよ	텔레비전의 뉴스에 잘 얼굴 나오고 계실 것이다	fix	lookup
-lookup:contracted-irassharu	「……もう。私よりこちらの生活を気に入ってらっしゃるんだもの」	「……이제. 나보다 이쪽의 생활을 마음에 들어 계시는걸」	fix	lookup
-lookup:contracted-irassharu	先生は今、本を読んでらっしゃる。	선생님은 지금, 책을 읽고 계신다.	keep	lookup
-lookup:contracted-irassharu	社長はまだ待ってらっしゃいます。	사장은 아직 기다리고 계십니다.	fix	lookup
-lookup:contracted-irassharu	「はい……いってらっしゃい」	「네……잘 다녀와」	keep	lookup
+sound:contracted-auxiliaries	霞よ。ガンガン行くわよ。ついてらっしゃい。	안개야. 마구 갈 거야. 따라와.	fix	sound
+sound:contracted-auxiliaries	二水戦所属は伊達じゃないわ。雪風、ついてらっしゃいな！	이수변전 소속은 다테가 아니야. 유키카제, 따라와!	fix	sound
+sound:contracted-auxiliaries	第五駆逐隊、抜錨！いい？みんな、ついてらっしゃい！	제5구축대, 출항하기! 좋아? 모두, 따라와!	fix	sound
+sound:contracted-auxiliaries	あなたも、付いてらっしゃい。	당신도, 따라와.	fix	sound
+sound:contracted-auxiliaries	お気に入りの制服が台無しよ。覚えてらっしゃい。	마음에 드는 제복이 엉망이야. 두고 봐.	fix	sound
+sound:contracted-auxiliaries	「さあさ、まずは手を洗ってらっしゃい」	「자, 우선은 손을 씻고 와」	fix	sound
+sound:contracted-auxiliaries	「圭一、お夕飯までまだ時間があるから。表でも散歩してらっしゃい。」	「케이이치, 저녁까지 아직 시간이 있으니까. 밖에서도 산책하고 와.」	fix	sound
+sound:contracted-auxiliaries	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	fix	sound
+sound:contracted-auxiliaries	「そーね、問題ないわ。こっちは大丈夫だから、３人でいってらっしゃい」	「네, 문제없어. 여기는 괜찮으니까, 3명이 잘 다녀와」	fix	sound
+sound:contracted-auxiliaries	今は第四水雷戦隊の旗艦を務めてらっしゃるのですね。	지금은 제4수뢰전대의 기함을 맡고 계시는군요.	fix	sound
+sound:contracted-auxiliaries	昼間のお疲れが溜まってらっしゃったのですね。	낮의 피로가 쌓여 계셨군요.	fix	sound
+sound:contracted-auxiliaries	提督、16時ですわ。熱心に何を見てらっしゃいますの？	제독, 16시예요. 열심히 무엇을 보고 계셔요?	fix	sound
+sound:contracted-auxiliaries	テレビのニュースによくお顔出てらっしゃるだろうよ	텔레비전의 뉴스에 잘 얼굴 나와 계실 것이다	fix	sound
+sound:contracted-auxiliaries	「……もう。私よりこちらの生活を気に入ってらっしゃるんだもの」	「……이제. 나보다 이쪽의 생활을 마음에 들어 계시는걸」	fix	sound
+sound:contracted-auxiliaries	先生は今、本を読んでらっしゃる。	선생님은 지금, 책을 읽고 계신다.	keep	sound
+sound:contracted-auxiliaries	社長はまだ待ってらっしゃいます。	사장은 아직 기다리고 계십니다.	fix	sound
+sound:contracted-auxiliaries	「はい……いってらっしゃい」	「네……잘 다녀와」	keep	sound
 sound:phrases	行ってらっしゃいませ	다녀오세요	fix	sound
-lookup:contracted-irassharu	さあ、かかってらっしゃい！	자, 덤벼 보시지!	keep	lookup
-lookup:contracted-irassharu	いらっしゃい！	어서 오세요!	keep	lookup
-lookup:contracted-irassharu	先生は今、本を読んでいらっしゃる。	선생님은 지금, 책을 읽고 계신다.	keep	lookup
-lookup:contracted-irassharu	お客様がいらっしゃいました。	손님이 계셨습니다.	keep	lookup
+sound:contracted-auxiliaries	さあ、かかってらっしゃい！	자, 덤벼 보시지!	keep	sound
+sound:contracted-auxiliaries	いらっしゃい！	어서 오세요!	keep	sound
+sound:contracted-auxiliaries	先生は今、本を読んでいらっしゃる。	선생님은 지금, 책을 읽고 계신다.	keep	sound
+sound:contracted-auxiliaries	お客様がいらっしゃいました。	손님이 계셨습니다.	keep	sound

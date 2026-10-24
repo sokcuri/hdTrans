@@ -14,16 +14,22 @@
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
-//= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
+//= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
-//= contraction.te-irassharu	Starts of the text after a て form that are the いらっしゃる after it contracted (ついてらっしゃい, 気に入ってらっしゃる).
 //= contraction.ra-less-kuru	The forms of the potential of くる without its ら that follow a て form (帰ってこれた, ついてこれる, 戻ってこれました); not これなら or これまで, where これ is the pronoun.
-//= contraction.te-ageru	The start of the あげる after a て form said with its あ dropped, its て then said た (作ったげる, 見せたげよう, 読んだげる).
-//= contraction.te-yaru-after	What follows the る of the やる after a て form said with its や dropped (やったるぜ, やったるわ, 調整したるから); not は, が, の or a noun, where たる is the attributive (取り出したるは).
+//= contraction.te-iru	Starts of the text after a て form that are the いる or いらっしゃる after it with its い dropped (見てる, 見てた, 見てて, 見てれば, 見てよう, 見てろ, 見てちゃ, 待ってられない, ついてらっしゃい).
+//= contraction.te-iru-greeting	The greeting said with the い of いらっしゃい dropped, which stays as said, drawn out too (いってらっしゃーい 잘 다녀와).
+//= contraction.sentence-end	Marks after a predicate that end its sentence, where an end or pattern row of a contraction applies (見てたぜ！); not a comma or an emoticon (忘れてたぜ(^_^)).
+//= contraction.te-iru-past	Starts of the text after a て form whose past た of a contracted いる stays as said and is read by the word stage on the past of いる (見てたか 보고 있었는지, 見てたやつ 보던 녀석, 考えてたん・・・ 생각하고 있었던), where the full form does not yet read as well. Not after ちゃう.
+//= contraction.past-end	Kana after the past た of a contracted いる with which its predicate ends: a copula said after it or its vowel drawn out (忘れてたですわ, 待ってたああ), not a word it describes (見てたところ).
+//= contraction.chau-te	The て forms of ちゃう and ちまう after the stem of a て form (寝ちゃって, 読んじゃって, 寝ちまって), a て form before the いる of contraction.te-iru (寝ちゃってた).
+//= contraction.ta-ageru	Starts of the text after a て form said た or だ that are the あげる after it with its あ dropped (作ったげる, 見せたげよう, 読んだげます).
+//= contraction.ta-yaru	Starts of the text after a て form said た or だ that are the やる after it with its や dropped (やったるぜ, 調整したるから, やったります).
+//= contraction.ta-yaru-final	The same before no kana, kanji or letter (やったる！); not before a particle or a noun, where たる is the attributive (取り出したるは, 秘めたる力).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
@@ -100,11 +106,10 @@
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
-//= ko.benefactive-head	The Korean of the あげる after a て form whose あ is dropped (作ったげる 만들어 줄게), ending in the marker family that the ending after it conjugates.
-//= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자버린 거야), ending in the marker family that the ending after it conjugates.
-//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped (見てたんですね 보고 있었군요), ending in the marker family that the ending after it conjugates.
-//= ko.progressive-honorific-head	The same for いらっしゃる (見てらっしゃる 보고 계시다).
+//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), ending in the marker family that the ending after it conjugates.
+//= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버린 거야), ending in the marker family that the ending after it conjugates.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
+//= mark.spoken-exclamation	Marks right after an offer of あげる outside brackets that make it a line of dialogue, as a final particle does (見せてあげる！ 보여 줄게!, 見せてあげるっ！).
 //= mark.laughter	Latin letters a run of which laughs after Korean in the output (없어ｗｗ 없어ㅋㅋ).
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
 //= ko.bracketed-laughter	The Korean written in the brackets of a bracketed run of mark.laughter ((w) (웃음)), as for (笑).
@@ -261,6 +266,7 @@
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
 //= word.ability-scope	Words that make the (ら)れ of their clause the potential: anyone, any time or anywhere, or by oneself (誰でも着られる, 自分で決められる).
+//= word.iru-form	Words of the dictionary that a form of いる or いらっしゃる starts (いろ 色, いよう 異様, いたって 至って, いたみ 痛み, いらっしゃい 어서 오세요): right after a て form the text is that いる or いらっしゃる (待っていろよ, 何していようかな, 悔しがっていたみたい, 洗っていらっしゃい).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
@@ -428,7 +434,6 @@ aux.te-start	差し
 aux.te-start	行
 aux.te-start	ちょうだい
 
-
 casual.nna-word	ごめんな
 
 copula.after-dake	だ
@@ -437,6 +442,7 @@ copula.after-dake	じゃ
 copula.after-dake	に
 copula.after-dake	の
 copula.after-dake	か
+copula.after-dake	なん
 copula.short-so	だね
 copula.short-so	だよ
 copula.short-so	だな
@@ -489,7 +495,88 @@ contraction.te-iku	ってる
 contraction.te-iku	けよ
 contraction.te-iku	けば
 
-contraction.te-irassharu	らっしゃ
+contraction.te-iru	る
+contraction.te-iru	た
+contraction.te-iru	て
+contraction.te-iru	れば
+contraction.te-iru	よう
+contraction.te-iru	ろ
+contraction.te-iru	ちゃ
+contraction.te-iru	られ
+contraction.te-iru	らっしゃ
+
+contraction.te-iru-greeting	いってらっしゃ
+contraction.te-iru-greeting	行ってらっしゃ
+
+contraction.sentence-end	。
+contraction.sentence-end	．
+contraction.sentence-end	！
+contraction.sentence-end	？
+contraction.sentence-end	!
+contraction.sentence-end	?
+contraction.sentence-end	…
+contraction.sentence-end	‥
+contraction.sentence-end	」
+contraction.sentence-end	』
+contraction.sentence-end	～
+contraction.sentence-end	〜
+contraction.sentence-end	ー
+contraction.sentence-end	♪
+contraction.sentence-end	☆
+contraction.sentence-end	★
+
+contraction.te-iru-past	たか
+contraction.te-iru-past	たとし
+contraction.te-iru-past	たやつ
+contraction.te-iru-past	たぐら
+contraction.te-iru-past	たくら
+contraction.te-iru-past	たん・
+contraction.te-iru-past	たん…
+
+contraction.past-end	です
+contraction.past-end	でし
+contraction.past-end	あ
+contraction.past-end	ぁ
+contraction.past-end	ー
+contraction.past-end	～
+contraction.past-end	〜
+
+contraction.chau-te	ちゃって
+contraction.chau-te	じゃって
+contraction.chau-te	ちまって
+contraction.chau-te	じまって
+
+contraction.ta-ageru	げる
+contraction.ta-ageru	げよ
+contraction.ta-ageru	げて
+contraction.ta-ageru	げた
+contraction.ta-ageru	げま
+contraction.ta-ageru	げない
+contraction.ta-ageru	げなかっ
+contraction.ta-ageru	げなく
+contraction.ta-ageru	げれ
+contraction.ta-ageru	げろ
+contraction.ta-ageru	げちゃ
+
+contraction.ta-yaru	るぜ
+contraction.ta-yaru	るで
+contraction.ta-yaru	るわ
+contraction.ta-yaru	るよ
+contraction.ta-yaru	るぞ
+contraction.ta-yaru	るさ
+contraction.ta-yaru	るね
+contraction.ta-yaru	るから
+contraction.ta-yaru	るけど
+contraction.ta-yaru	るって
+contraction.ta-yaru	るっ
+contraction.ta-yaru	るかい
+contraction.ta-yaru	るかな
+contraction.ta-yaru	るか
+contraction.ta-yaru	ります
+contraction.ta-yaru	りまし
+contraction.ta-yaru	りませ
+
+contraction.ta-yaru-final	る
 
 contraction.ra-less-kuru	これる
 contraction.ra-less-kuru	これた
@@ -505,23 +592,6 @@ contraction.ra-less-kuru	これまし
 contraction.ra-less-kuru	これれば
 contraction.ra-less-kuru	これず
 contraction.ra-less-kuru	これそう
-
-contraction.te-ageru	げ
-
-contraction.te-yaru-after	ぜ
-contraction.te-yaru-after	で
-contraction.te-yaru-after	わ
-contraction.te-yaru-after	よ
-contraction.te-yaru-after	ぞ
-contraction.te-yaru-after	さ
-contraction.te-yaru-after	ね
-contraction.te-yaru-after	から
-contraction.te-yaru-after	けど
-contraction.te-yaru-after	って
-contraction.te-yaru-after	っ
-contraction.te-yaru-after	かい
-contraction.te-yaru-after	かな
-contraction.te-yaru-after	か
 
 contraction.te-iku-final	って
 contraction.te-iku-final	け
@@ -1524,13 +1594,9 @@ ko.doing	돼
 
 ko.adjective-past-adnominal	5던
 
-ko.benefactive-head	6 &CJ@
-
-ko.completive-head	6 버&AA@
-
 ko.progressive-head	1고 &HN@
 
-ko.progressive-honorific-head	1고 계&AE@
+ko.completive-head	6 버&AA@
 
 ko.title-end	님
 ko.title-end	씨
@@ -1543,6 +1609,10 @@ mark.close-after-space	」
 mark.close-after-space	』
 mark.close-after-space	）
 mark.close-after-space	)
+mark.spoken-exclamation	！
+mark.spoken-exclamation	!
+mark.spoken-exclamation	っ
+
 mark.laughter	w
 mark.laughter	ｗ
 ko.laughter	ㅋ
@@ -3754,6 +3824,17 @@ word.ability-scope	一人で
 word.ability-scope	ひとりで
 word.ability-scope	独りで
 word.ability-scope	自力で
+
+word.iru-form	いろ
+word.iru-form	いよう
+word.iru-form	いたって
+word.iru-form	いたみ
+word.iru-form	いらっしゃい
+word.iru-form	いらっしゃいます
+word.iru-form	いらっしゃいますか
+word.iru-form	いらっしゃいますでしょうか
+word.iru-form	いらっしゃいません
+word.iru-form	いらっしゃいませ
 
 word.closing-utterance	ゴメンな
 word.closing-utterance	ゴメンね

@@ -24,6 +24,7 @@ inline constexpr std::string_view kJaHa = "は";
 inline constexpr std::string_view kJaHaji = "はじ";
 inline constexpr std::string_view kJaHajiKanji = "始";
 inline constexpr std::string_view kJaHe = "へ";
+inline constexpr std::string_view kJaGe = "げ";
 inline constexpr std::string_view kJaI = "い";
 inline constexpr std::string_view kJaSuru = "する";
 inline constexpr std::string_view kJaComma = "、";

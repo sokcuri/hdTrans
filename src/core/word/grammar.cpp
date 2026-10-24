@@ -2369,9 +2369,13 @@ void OfferPromise(Flusher& f) {
         const std::string_view surface = it->group->surface;
         const bool humble = surface.ends_with("さしあげ") || surface.ends_with("差し上げ");
         if (e == nullptr || d == nullptr || !(e->dst.ends_with("&CJ@") || (humble && e->dst.ends_with("드&AA@"))) ||
-            (!surface.ends_with("や") && !surface.ends_with("あげ") && !surface.ends_with("上げ")) || !QuoteEnd(f.w, it)) {
+            (!surface.ends_with("や") && !surface.ends_with("あげ") && !surface.ends_with("上げ"))) {
             continue;
         }
+        // The end of the quote, or for an offer of あげる a stop っ before its mark (見せてあげるっ！).
+        const bool offer = !humble && (surface.ends_with("あげ") || surface.ends_with("上げ"));
+        const Item* stop = it->After();
+        if (!QuoteEnd(f.w, it) && !(offer && stop != nullptr && stop->group->surface == "っ" && QuoteEnd(f.w, stop))) continue;
         const std::string_view ending = it->DirectSurface();
         // Only a present or volitional ending turns: not 教えてやったよ, 教えてさしあげられます.
         if (it->DetailRecord() != 0 || d->dst.empty() || !AnyOf("46017", d->dst[0])) continue;
@@ -2389,9 +2393,12 @@ void OfferPromise(Flusher& f) {
             !tail.starts_with("のじゃ")) {
             continue;
         }
-        // A final particle marks speech outside brackets too (a line of dialogue).
+        // A final particle marks speech outside brackets too (a line of dialogue), and an exclamation
+        // after the offer of あげる (見せてあげる！; not 見せてやる！, a threat that stays 준다).
         const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
-                            ending == "ぞ";
+                            ending == "ぞ" ||
+                            (offer && std::ranges::any_of(dict::ClassMembers("mark.spoken-exclamation"),
+                                                          [&](std::string_view m) { return after.starts_with(m); }));
         int open = 0, close = 0;
         if (!polite && !plain) continue;
         if (!QuoteAround(f.w, it->tokenIndex, open, close) && !spoken) continue;
