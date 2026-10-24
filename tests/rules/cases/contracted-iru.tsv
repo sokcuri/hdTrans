@@ -41,3 +41,7 @@ lookup:contracted-iru	「……なにか、俺たちに用があって、待っ�
 lookup:contracted-iru	遊んだんじゃないからね。	논 게 아니니까.	fix	lookup
 lookup:contracted-iru	言ったじゃんぞ	말했잖아	fix	lookup
 lookup:contracted-iru	言ってたじゃん	말했잖아	keep	lookup
+lookup:contracted-iru	大学に買い食いしながら通ったりしてたんだよねｗ	대학에 군것질하면서 다니거나 하고 있었지 ㅋ	fix	lookup
+lookup:contracted-iru	ずっと見てたんだよな	계속 보고 있었지	fix	lookup
+lookup:contracted-iru	毎日練習してたんだよね。	매일 연습하고 있었지.	fix	lookup
+lookup:contracted-iru	捨てたんだよね	버렸어	keep	lookup

@@ -14,3 +14,5 @@ dict:drops-conj:14	そんなことしたって意味がない	!rule:dict:drops-c
 dict:drops-conj:14	それに毛並みも野性味が溢れてるし、どう見たって日本の犬じゃない。	!rule:dict:drops-conj:14	keep	local-ending
 dict:drops-conj:14	今俺がここで自己紹介したって明日もその通りの生き方をしてるとは限らねえ。	!rule:dict:drops-conj:14	keep	local-ending
 dict:drops-conj:14	「でも、どっちにしたってパンケーキは絶対食べたいっ」	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:30	単純にもう１本の道を見つけてたってだけだけど。	단순에 또 1개의 길을 찾아내고 있었다는 것만이지만.	fix	local-ending
+dict:drops-conj:30	待ってたって仕方がない	기다리고 있어도 어쩔 수 없다	keep	local-ending
