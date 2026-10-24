@@ -1156,6 +1156,8 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             // the lengthening (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
             if (dict::InClass("honorific.phrase-tag", EncodeText(h))) {
                 bool phrase = false;
+                size_t start = i;
+                std::u32string casual;  // the spelling of honorific.phrase-tag-word the tag gives the phrase
                 for (size_t j = i; j > 0 && i - j < kMaxKeyRunes && !phrase && (IsHiraganaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1]));) {
                     j--;
                     if (j > 0 && (IsHiraganaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1]) || IsKatakanaRune(rs[j - 1]))) continue;
@@ -1163,9 +1165,19 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                     const std::u32string key = ToKatakana(p);
                     for (const SoundRow& s : SoundRows(key[0], ctx.extraBuiltin)) phrase = phrase || (s.phrase && s.intj && s.key == key);
                     phrase = phrase || e.Tags(p).find('A') != std::string::npos;
+                    for (const std::string_view member : dict::ClassMembers("honorific.phrase-tag-word")) {
+                        const std::u32string m = DecodeText(member);
+                        const size_t eq = m.find(U'=');
+                        if (std::u32string_view(m).substr(0, eq) != p) continue;
+                        phrase = true;
+                        if (eq != std::u32string::npos) casual = m.substr(eq + 1);
+                    }
+                    start = j;
                 }
                 if (phrase) {
-                    rewrite(Spliced(rs, i, std::u32string(1, kLengthenMark), last), last);
+                    std::u32string next = Spliced(rs, i, std::u32string(1, kLengthenMark), last);
+                    if (!casual.empty()) next = Spliced(next, start, casual, i);
+                    rewrite(std::move(next), last);
                     continue;
                 }
             }
