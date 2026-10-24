@@ -232,6 +232,9 @@ struct SoundRow {
     // An exclaim row that is no sound after a noun topic and a comma either, where it is the
     // predicate (fourth column predicate: あの頃は、よかった 좋았다).
     bool predicate = false;
+    // An intj row read only where the utterance ends after it (fourth column final: また明日
+    // 내일 보자, not また明日来る).
+    bool final = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

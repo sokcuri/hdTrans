@@ -595,6 +595,15 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 ok = false;
             }
         }
+        // A final row needs the end of the utterance after it and any spaces: no letter, digit or comma.
+        if (ok && s.final) {
+            size_t q = end;
+            while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
+            if (q < rs_.size() &&
+                (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass("mark.comma", EncodeText(f.substr(q, 1))))) {
+                ok = false;
+            }
+        }
         // Of two keys as long that reach as far, one whose Korean draws the vowel out wins
         // over one that can only add ~ (ひぎぃぃぃっ: ひぎぃ 히기이이익, not ひぎっ 히긱~).
         const bool redrawn = ok && chosen != nullptr && end == best.end && s.key.size() == chosen->key.size() &&

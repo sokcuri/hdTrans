@@ -14,9 +14,9 @@
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
-//= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 遊んでってよ, 持ってけよ).
+//= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
-//= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ, 持ってってね); otherwise the quoting って (やめてってよ).
+//= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-not	Starts of the text after a て form that are no contracted いく: the quoting ったら (待ってったら).
 //= contraction.u-onbin	Starts of the text after the kanji stem of a godan verb in う that say its past or て form with う for っ (言うた, 思うて).
 //= contraction.u-onbin-not	Starts of the text of contraction.u-onbin that go on as another word (救うため, 戦うたび, 歌うたい).
@@ -62,6 +62,7 @@
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
+//= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
 //= mark.drawn	Kana that draw out the word before them (燃えるねぇ, 言うねェ, ねー, ね～).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
@@ -281,6 +282,8 @@ contraction.te-iku	ってやっ
 contraction.te-iku	ってやろ
 contraction.te-iku	ってほし
 contraction.te-iku	ってちょうだい
+contraction.te-iku	ってね
+contraction.te-iku	ってる
 contraction.te-iku	けよ
 contraction.te-iku	けば
 
@@ -288,8 +291,6 @@ contraction.te-iku-final	って
 contraction.te-iku-final	け
 
 contraction.te-iku-listed	ってよ
-contraction.te-iku-listed	ってね
-contraction.te-iku-listed	ってる
 
 contraction.te-iku-not	ったら
 
@@ -832,6 +833,10 @@ mark.restart	―
 mark.restart	—
 mark.restart	・・
 mark.restart	··
+mark.comma	、
+mark.comma	，
+mark.comma	,
+
 mark.drawn	ぇ
 mark.drawn	ェ
 mark.drawn	え

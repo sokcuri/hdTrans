@@ -787,6 +787,27 @@ HD_TEST(pipeline_sound_exclaim_before_question) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
 
+// A final phrase row (また明日 내일 보자) is read only where the utterance ends after it.
+HD_TEST(pipeline_sound_final_phrase) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'マ')) flagged = flagged || (r.key == U"マタ明日" && r.final);
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"また明日。", "내일 보자。"},
+        {"また明日……", "내일 보자……"},
+        {"また明日来る", "また明日来る"},
+        {"また明日 来る", "また明日 来る"},
+        {"また明日、学校で", "また明日、学校で"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
 // The いく after a て form contracted is written in full before its forms; before a mark only
 // when the dictionary holds the verb with ていく, else the quoting って stays.
 HD_TEST(pipeline_contracted_iku) {

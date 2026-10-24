@@ -96,6 +96,14 @@ bool UtteranceBoundary(std::string_view c) {
     return c.empty() || (NameClassOf(c) == kClassOther && !(c.size() == 1 && (IsAlpha(c[0]) || IsDigit(c[0]))));
 }
 
+// Whether the utterance ends where rest starts, after any spaces: nothing, or punctuation, a
+// bracket or a mark that is no comma.
+bool UtteranceEnds(std::string_view rest) {
+    while (!rest.empty() && text::IsSpace(text::DecodeRune(rest).cp)) rest.remove_prefix(text::DecodeRune(rest).size);
+    const std::string_view c = FirstChar(rest);
+    return UtteranceBoundary(c) && !dict::InClass("mark.comma", c);
+}
+
 // The first Hangul syllable of s, "" when it has none.
 std::string_view FirstHangul(std::string_view s) {
     for (std::size_t i = 0; i < s.size();) {
@@ -245,7 +253,8 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
 bool Worker::Skip(const dict::UserEntry& u, std::string_view query) const {
     return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) ||
            (u.nameLayer && PhraseTitle(u) && !StandsApart(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
-           (settings.text && BoundImperative(u, query));
+           (settings.text && BoundImperative(u, query)) ||
+           (u.utteranceEnd && query.starts_with(u.key) && !UtteranceEnds(query.substr(u.key.size())));
 }
 
 // Notes in parentheses are dropped from the Korean of base nouns (아바타(Avatar) 아바타, 틈(간격)

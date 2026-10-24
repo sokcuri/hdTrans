@@ -42,6 +42,9 @@
 //                   a sound before a question mark (よかった 다행이다, よかった？ 좋았어?)
 //   predicate       exclaim rows: nor after a noun topic and a comma, where it is the
 //                   predicate (あの頃は、よかった 좋았다)
+//   final           intj rows: only where the utterance ends after the key: the end, a
+//                   sentence mark, a closing bracket, an ellipsis or a drawn vowel, not a
+//                   comma or a word (また明日 내일 보자, not また明日来る)
 #include <cstdint>
 #include <string>
 #include <string_view>

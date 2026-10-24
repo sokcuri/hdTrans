@@ -25,3 +25,13 @@ cx:ne-promise:40	「食べたね」	「먹었네」	keep	rewrites
 cx:ne-promise:40	「行かないね」	!rule:cx:ne-promise:40	keep	rewrites
 cx:ne-promise:40	「行きますね」	!rule:cx:ne-promise:40	keep	rewrites
 cx:ne-promise:40	「本当に行くね？」	!rule:cx:ne-promise:40	keep	rewrites
+phrase:leave-taking	「じゃあ、また明日ね」	「그럼, 내일 보자」	fix	sound
+phrase:leave-taking	「うん……また明日」	「응……내일 보자」	fix	sound
+phrase:leave-taking	「また来週ね」	「다음 주에 보자」	fix	sound
+phrase:leave-taking	「では、また後で」	「그럼, 나중에 보자」	fix	sound
+phrase:leave-taking	「また明日来る」	「또 내일 온다」	keep	sound
+phrase:leave-taking	「また明日 来る」	「또 내일 온다」	keep	sound
+phrase:leave-taking	「また今度、買いに来るね」	「다음에 또, 사러 올게」	keep	sound
+phrase:yaru-ne	ぐあぁ！やるね！	크아아! 제법이네!	fix	sound
+phrase:yaru-ne	「私がやるね」	「내가 할게」	keep	sound
+phrase:yaru-ne	「よし、やるね」	「좋아, 할게」	keep	sound
