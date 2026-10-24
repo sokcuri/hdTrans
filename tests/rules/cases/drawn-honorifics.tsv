@@ -86,3 +86,31 @@ phrases:greeting	作戦完了だよ！おつかれ！	작전 완료야! 수고�
 phrases:greeting	おつかれぴょん！	수고했어뿅!	fix	phrases
 phrases:greeting	提督、おつかれ。明日もよろしくな！	has:수고했어	fix	phrases
 phrases:greeting	おつかれさま	수고했어	keep	phrases
+sound:drawn-honorific	「姫さまあああ！」	「공주님~~!」	fix	sound
+sound:drawn-honorific	「お嬢様ぁ！」	「아가씨~!」	fix	sound
+sound:drawn-honorific	「太郎くぅぅん～」	「타로 군~~」	fix	sound
+sound:drawn-honorific	「貴様ぁ！」	「네놈!」	keep	sound
+sound:drawn-honorific	「俺様ぁ」	「이 몸」	keep	sound
+sound:drawn-honorific	「姫様ぁ」	「공주님~」	fix	sound
+sound:drawn-honorific	「田中様ぁぁぁ」	「타나카님~~」	fix	sound
+sound:drawn-honorific	「お疲れさまぁ！」	「수고하셨어요~!」	keep	sound
+sound:drawn-honorific	おつかれさまー。	수고했어~.	keep	sound
+sound:drawn-honorific	「お疲れさまーぁ！」	「수고하셨어요~!」	keep	sound
+sound:drawn-honorific	「姉ぇさまぁ、心配しないで」	「언니님~, 걱정하지 말아줘」	keep	sound
+sound:drawn-honorific	「は、はい…ご主人様ぁ……。」	「네, 네…주인님~…….」	fix	sound
+sound:drawn-honorific	「お待ちください、姫様ぁ！」	「기다려 주세요, 공주님~!」	fix	sound
+sound:drawn-honorific	「貴様ぁーーーーっ！」	「네놈~!」	keep	sound
+sound:drawn-honorific	ぐっ……、貴様ぁ……。	윽……, 네놈…….	keep	sound
+sound:drawn-honorific	「おい貴様ぁぁ！」	「어이 네놈!」	keep	sound
+sound:drawn-honorific	「くぅぅ……貴様ぁ」	「크으으……네놈」	keep	sound
+sound:drawn-honorific	「俺様ぁ！」	「이 몸!」	keep	sound
+sound:drawn-honorific	「様ぁ」	「모양」	keep	sound
+sound:drawn-honorific	「有様ぁ」	「모양」	keep	sound
+sound:drawn-honorific	「同様あ」	lacks:~	keep	sound
+sound:drawn-honorific	「様様ぁ」	lacks:~	keep	sound
+sound:drawn-honorific	「きさまぁ！」	「너!」	fix	sound
+sound:drawn-honorific	「おれさまぁ！」	lacks:님~	fix	sound
+sound:drawn-honorific	「オレ様ぁ」	「이 몸」	keep	sound
+sound:drawn-honorific	「お許し下さいご主人様ぁ〜…！」	「용서해 주세요 주인님~…!」	fix	sound
+sound:drawn-honorific	司令官様ぁ～、メリークリスマス	사령관님~, 메리 크리스마스	fix	sound
+sound:drawn-honorific	「太郎くぅぅん～～！」	「타로 군~~!」	fix	sound

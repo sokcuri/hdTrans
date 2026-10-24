@@ -91,7 +91,8 @@ std::string WriteEmphasis(std::string_view s);
 // mark is dropped.
 std::string WriteStress(std::string_view s);
 
-// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!); each
+// Each kLengthenMark written as ~, or dropped after a ~ (선배~\uE00A! 선배~!) unless it is the second of
+// two in a row (군\uE00A\uE00A 군~~); each
 // kDrawnMark after a Hangul syllable written as a syllable of its vowel, the final
 // consonant moved to the last one (그만둬\uE00B\uE00B 그만둬어어, 님\uE00B 니임), or after the ~ that
 // follows such a syllable, kept between the two when it has a final consonant (짱\uE00A\uE00B 짜~앙,

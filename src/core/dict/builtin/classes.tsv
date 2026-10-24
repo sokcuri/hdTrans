@@ -88,8 +88,9 @@
 //= greeting.honorific-end	Greetings that end like an honoured person in 様 or さま and call no one (お疲れさま、また明日 수고했어, 내일 보자).
 //= honorific.drawn-out	Honorifics that a name may draw out before their final ん, with ー, ～ or the vowel of the kana before it (圭ちゃ～ん, 田中さぁあん, アルくぅん).
 //= honorific.drawn-after	Honorifics without a final ん that a speaker draws out after themselves before a pause (姫さまぁ 공주님~, 様ーっ), marked as the drawn honorifics are.
-//= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~).
+//= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~), pronouns that end in 様 or さま (貴様ぁ, 俺様ぁ, きさまぁ), and words that end in 様 and name no one (有様ぁ, 同様あ).
 //= honorific.phrase-tag	Drawn-out honorifics that a greeting or an interjection takes as a familiar tag: the phrase keeps its reading and the drawl (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
+//= honorific.kanji-reading	Kanji honorifics of honorific.drawn-after with their kana reading, KANJI=KANA, whose last vowel the speaker draws them out with (様=さま: 姫様ぁ 공주님~).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -1361,6 +1362,15 @@ honorific.drawn-after	さま
 honorific.drawn-after	様
 honorific.drawn-out-word	かいさん
 honorific.phrase-tag	ちゃん
+honorific.drawn-out-word	貴様
+honorific.drawn-out-word	俺様
+honorific.drawn-out-word	オレ様
+honorific.drawn-out-word	おれさま
+honorific.drawn-out-word	きさま
+honorific.drawn-out-word	有様
+honorific.drawn-out-word	同様
+honorific.drawn-out-word	様様
+honorific.kanji-reading	様=さま
 
 honorific.after-person	たん
 honorific.after-person	っち

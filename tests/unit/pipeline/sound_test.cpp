@@ -1270,6 +1270,17 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"姫さまぁ！", "姫さま\uE00A！"},
         {"お嬢様ーっ！", "お嬢様\uE00A！"},
         {"さまざま", "さまざま"},
+        {"姫さまあああ！", "姫さま\uE00A\uE00A！"},
+        {"お嬢様ぁ！", "お嬢様\uE00A！"},
+        {"太郎くぅぅん～", "太郎くん\uE00A\uE00A"},
+        // さま after a name drawn out with small vowels, or ending a greeting; not after no name or in a
+        // word that holds none.
+        {"姉ぇさまぁ、", "姉ぇさま\uE00A、"},
+        {"お疲れさまぁ！", "お疲れさま\uE00A！"},
+        {"おつかれさまー。", "おつかれさま\uE00A。"},
+        {"貴様ぁ！", "貴様ぁ！"},
+        {"俺様ぁ", "俺様ぁ"},
+        {"「様ぁ」", "「様ぁ」"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
