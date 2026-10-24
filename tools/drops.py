@@ -8,8 +8,9 @@ word stage read one at a time and gave no Korean, so that their text vanishes fr
 
 Each FILE is a text file with one input per line, a rule case table (.tsv, its input column) or a
 folder, which stands for its .txt and .tsv files other than the --known file.
-Every input is translated as its own line (-each) with -why. Prints each input that drops text with
-the dropped characters. With --known, the inputs listed there (one per line, `#` comments) are known
+Every input is translated as its own line (-each) with -why. A run the word stage left empty that a
+later stage still wrote (るんるん 룬룬: the run translated alone is in the line's translation) is no
+drop. Prints each input that drops text with the dropped characters. With --known, the inputs listed there (one per line, `#` comments) are known
 gaps: they are not reported, but a listed input that no longer drops is, so the list only shrinks.
 Exit: 0 nothing new, 1 an input drops text or a known gap is fixed, 2 invalid arguments or a failed CLI.
 """
@@ -77,6 +78,17 @@ def drops(why_text):
     return found
 
 
+def lost(found, outputs, alone):
+    """The runs of found whose own translation (alone) is not in the translation of their line."""
+    out = {}
+    for number, runs in found.items():
+        line = outputs[number - 1].replace(" ", "") if 0 < number <= len(outputs) else ""
+        gone = [r for r in runs if not alone.get(r, "").strip() or alone[r].replace(" ", "") not in line]
+        if gone:
+            out[number] = gone
+    return out
+
+
 def known_of(path):
     if path is None:
         return set()
@@ -107,16 +119,27 @@ def main(argv):
             texts.extend(inputs_of(name))
     known = known_of(known_path)
     with tempfile.TemporaryDirectory() as tmp:
-        source = os.path.join(tmp, "in.txt")
-        with open(source, "w", encoding="utf-8") as f:
-            f.write("\n".join(texts) + "\n")
         env = dict(os.environ, HOME=tmp, HDTRANS_CACHE_DIR="off")
-        done = subprocess.run([cli, "-dicts", dicts, "-each", "-why", "-in", source, "-out", os.devnull] + options,
-                              stderr=subprocess.PIPE, env=env)
-    if done.returncode != 0:
+
+        def translate(lines, why):
+            source, target = os.path.join(tmp, "in.txt"), os.path.join(tmp, "out.txt")
+            with open(source, "w", encoding="utf-8") as f:
+                f.write("\n".join(lines) + "\n")
+            done = subprocess.run([cli, "-dicts", dicts, "-each", "-in", source, "-out", target] + (["-why"] if why else []) +
+                                  options, stderr=subprocess.PIPE, env=env)
+            if done.returncode != 0:
+                return None, None
+            with open(target, encoding="utf-8") as f:
+                return f.read().split("\n"), done.stderr.decode("utf-8", "replace")
+
+        outputs, log = translate(texts, True)
+        found = drops(log) if log is not None else None
+        runs = sorted({r for rs in (found or {}).values() for r in rs})
+        alone, _ = translate(runs, False) if runs else ([], "")
+    if found is None or alone is None:
         print(f"drops: {cli} failed", file=sys.stderr)
         return 2
-    found = drops(done.stderr.decode("utf-8", "replace"))
+    found = lost(found, outputs, dict(zip(runs, alone)))
     bad = 0
     dropping = set()
     for number, runs in sorted(found.items()):
@@ -153,6 +176,8 @@ def self_test():
     ])
     got = drops(log)
     assert got == {1: ["めら"]}, got
+    assert lost({1: ["めら"], 2: ["るんるん"]}, ["포", "룬룬♪"], {"めら": "메라", "るんるん": "룬 룬"}) == {1: ["めら"]}
+    assert lost({1: ["ぶっ"]}, ["날다"], {"ぶっ": ""}) == {1: ["ぶっ"]}
     with tempfile.TemporaryDirectory() as tmp:
         table = os.path.join(tmp, "q.tsv")
         with open(table, "w", encoding="utf-8") as f:
