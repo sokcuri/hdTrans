@@ -191,6 +191,7 @@
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
+//= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
@@ -198,6 +199,7 @@
 //= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
+//= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener: 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -3269,3 +3271,82 @@ word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
 sound.quoting	という
+word.confirm-action	上書き
+word.confirm-action	保存
+word.confirm-action	セーブ
+word.confirm-action	ロード
+word.confirm-action	終了
+word.confirm-action	削除
+word.confirm-action	購入
+word.confirm-action	使用
+word.confirm-action	決定
+word.confirm-action	中断
+word.confirm-action	再開
+word.confirm-action	開始
+word.confirm-action	送信
+word.confirm-action	実行
+word.confirm-action	変更
+word.confirm-action	初期化
+word.confirm-action	リセット
+word.confirm-action	ダウンロード
+word.confirm-action	インストール
+word.confirm-action	アップデート
+word.confirm-action	ログイン
+word.confirm-action	ログアウト
+word.confirm-action	エントリー
+word.confirm-action	スキップ
+word.confirm-action	取得
+word.confirm-action	装備
+word.confirm-action	売却
+word.confirm-action	破棄
+word.confirm-action	確定
+word.confirm-action	登録
+word.confirm-action	解除
+word.confirm-action	適用
+word.confirm-action	選択
+word.confirm-action	キャンセル
+word.confirm-action	退出
+word.confirm-action	交換
+word.confirm-action	強化
+word.confirm-action	移動
+word.confirm-action	参加
+word.confirm-action	出撃
+word.confirm-action	乗艦
+word.confirm-action	使
+word.confirm-action	始め
+word.confirm-action	捨て
+word.confirm-action	売
+word.confirm-action	買
+word.confirm-action	止め
+word.confirm-action	やめ
+word.confirm-action	続け
+word.confirm-action	み
+word.offer-cue	さて
+word.offer-cue	じゃあ
+word.offer-cue	じゃ
+word.offer-cue	んじゃ
+word.offer-cue	んじゃあ
+word.offer-cue	んじゃま
+word.offer-cue	それじゃ
+word.offer-cue	それじゃあ
+word.offer-cue	それでは
+word.offer-cue	では
+word.offer-cue	さあ
+word.offer-cue	さぁ
+word.offer-cue	さ
+word.offer-cue	よし
+word.offer-cue	仕方ない
+word.offer-cue	しゃあない
+word.offer-cue	まずは
+word.offer-cue	もう一度
+word.offer-cue	一緒に
+word.offer-cue	よかったら
+word.offer-cue	良かったら
+word.offer-cue	ちょっと
+word.offer-cue	少し
+word.offer-cue	少しだけ
+word.offer-cue	でも
+word.offer-cue	そろそろ
+word.offer-cue	자
+word.offer-cue	그럼
+word.offer-cue	좋아

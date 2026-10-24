@@ -14,7 +14,7 @@ compose:question-plain	「行くか？」	「갈까?」	keep	compose
 compose:question-plain	「明日は晴れるかな？」	「내일은 갤까?」	keep	compose
 compose:question-plain	「授業が終わったら部屋に来ないか？」	「수업이 끝나면 방에 오지 않을까?」	keep	compose
 compose:question-plain	「だって、俺はお前と結婚するつもりなんだぞ？」	「왜냐하면, 나는 너와 결혼할 생각이다?」	keep	compose
-compose:question-plain	「行きますか？」	「갈까요?」	keep	compose
+compose:question-plain	「行きますか？」	「갑니까?」	keep	compose
 compose:question-plain	「大丈夫でしょうか？」	「괜찮을까요?」	keep	compose
 compose:question-plain	「お主、まだ戦えるか？」	「그대, 아직 싸울 수 있을까?」	keep	compose
 compose:question-conjecture	「何か言いたいことがあったんだろう？」	「뭔가 말하고 싶은 게 있었지?」	fix	compose

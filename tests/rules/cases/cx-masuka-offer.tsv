@@ -7,12 +7,12 @@ cx:masuka-offer:10	アップデートがあります。ダウンロードしま�
 cx:masuka-offer:10	プロローグをスキップしますか？	프롤로그를 스킵할까요?	fix	rewrites
 cx:masuka-offer:10	競技2日目、エントリーしますか？	경기 2일째, 엔트리할까요?	fix	rewrites
 cx:masuka-offer:10	「さて、帰りますか」	「자, 돌아갈까요」	fix	rewrites
-cx:masuka-offer:10	「食べますか」	「먹을까요」	fix	rewrites
+cx:masuka-offer:10	「食べますか」	「먹습니까」	keep	rewrites
 cx:masuka-offer:10	「じゃあ、そろそろ行きますか」	「그럼, 슬슬 갈까요」	fix	rewrites
 cx:masuka-offer:10	「んじゃ、また９月ってことで解散しますか」	「그럼, 또 9월이라는 걸로 해산할까요」	fix	rewrites
 cx:masuka-offer:10	「……目は覚ましませんね。もう一度試しますか？」	「……눈은 깨지 않아요. 한번 더 시험할까요?」	fix	rewrites
 cx:masuka-offer:10	そろそろお仕事しますか。	슬슬 일할까요.	fix	rewrites
-cx:masuka-offer:10	「どうしますか？」	「어떻게 할까요?」	fix	rewrites
+cx:masuka-offer:10	「どうしますか？」	「어떻게 합니까?」	keep	rewrites
 cx:masuka-offer:5	「少しお休みになりますか？」	「조금 쉬시겠습니까?」	fix	rewrites
 cx:masuka-offer:5	「お茶を召し上がりますか？」	「차를 드시겠습니까?」	fix	rewrites
 cx:masuka-offer:5	いかがあそばしますか。	어떻게 하시겠습니까.	fix	rewrites
@@ -48,3 +48,12 @@ cx:masuka-offer:7	『あなたは毎朝走りますか？』	『당신은 매일
 cx:masuka-offer:7	セーブしますか？（はい／いいえ）	세이브하시겠습니까? (네/아니요)	fix	rewrites
 cx:masuka-offer:10	待ち伏せますか？！	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	「一生懸命働いた人たちは、それで満足しますか？　納得してくれますか？」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	日本語を話しますか？	일본어를 합니까?	keep	rewrites
+cx:masuka-offer:10	タバコを吸いますか？	담배를 피웁니까?	keep	rewrites
+cx:masuka-offer:10	「本当に死にますか？」	「정말 죽습니까?」	keep	rewrites
+cx:masuka-offer:10	「我々も行きますか？」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	よし、行きますか	좋아, 갈까요	fix	rewrites
+cx:masuka-offer:10	お風呂にしますか	rule:cx:masuka-offer:10=3까요	fix	rewrites
+cx:masuka-offer:10	触ってみますか	만져 볼까요	fix	rewrites
+cx:masuka-offer:10	子守唄でも歌いますか	rule:cx:masuka-offer:10=3까요	fix	rewrites
+cx:masuka-offer:10	エリクサーを使いますか？	엘릭서를 쓸까요?	fix	rewrites

@@ -26,11 +26,13 @@ std::string Translate(std::string_view text) {
 }  // namespace
 
 HD_TEST(word_masuka_offer_marks_after_the_question) {
-    // A question that ends the sentence offers the act.
-    HD_CHECK_EQ(Translate("帰りますか？"), std::string("돌아갈까요?"));
-    // An exclamation mark after it makes a surprised remark (exclaim-after).
-    HD_CHECK_EQ(Translate("帰りますか！"), std::string("돌아갑니까!"));
-    HD_CHECK_EQ(Translate("帰りますか？！"), std::string("돌아갑니까?!"));
+    // A plain question with no sign of an offer keeps 니까.
+    HD_CHECK_EQ(Translate("帰りますか？"), std::string("돌아갑니까?"));
+    // A system message in 『』 asks the reader's will, unless an exclamation mark follows the
+    // question (exclaim-after).
+    HD_CHECK_EQ(Translate("『帰りますか？』"), std::string("『돌아가시겠습니까?』"));
+    HD_CHECK_EQ(Translate("『帰りますか！』"), std::string("『돌아갑니까!』"));
+    HD_CHECK_EQ(Translate("『帰りますか？！』"), std::string("『돌아갑니까?!』"));
     // A prompt on a screen asks the reader's will (prompt-after).
     HD_CHECK(Translate("帰りますか？はい／いいえ").starts_with("돌아가시겠습니까?"));
     HD_CHECK(Translate("帰りますか？（はい／いいえ）").starts_with("돌아가시겠습니까?"));
