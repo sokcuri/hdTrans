@@ -1861,11 +1861,44 @@ std::vector<size_t> RuneOffsets(std::u32string_view rs) {
     return at;
 }
 
-// Whether text holds a member of one of sets anywhere: the contractions look closer only then.
-bool HoldsMember(std::string_view text, std::initializer_list<std::span<const std::string_view>> sets) {
+// Where needle first occurs in text from from on, npos for none. Japanese characters share their
+// first byte, so the search goes by the last byte of needle.
+size_t FindFrom(std::string_view text, std::string_view needle, size_t from) {
+    if (needle.empty()) return from <= text.size() ? from : std::string_view::npos;
+    for (size_t at = from + needle.size() - 1; (at = text.find(needle.back(), at)) != std::string_view::npos; at++) {
+        if (text.substr(at + 1 - needle.size(), needle.size()) == needle) return at + 1 - needle.size();
+    }
+    return std::string_view::npos;
+}
+
+// Whether text holds a member of one of sets, right after one of the strings of before when that is
+// not empty: the contractions look closer only then. The members are compared only where one of
+// before, or else their first character, occurs.
+bool HoldsMember(std::string_view text, std::initializer_list<std::span<const std::string_view>> sets,
+                 std::initializer_list<std::string_view> before = {}) {
+    const auto startsMember = [&](size_t at) {
+        for (const std::span<const std::string_view> set : sets) {
+            for (const std::string_view m : set) {
+                if (text.substr(at).starts_with(m)) return true;
+            }
+        }
+        return false;
+    };
+    for (const std::string_view b : before) {
+        for (size_t at = FindFrom(text, b, 0); at != std::string_view::npos; at = FindFrom(text, b, at + 1)) {
+            if (startsMember(at + b.size())) return true;
+        }
+    }
+    if (before.size() > 0) return false;
+    std::string_view previous;  // the first character of the members before, searched already
     for (const std::span<const std::string_view> set : sets) {
         for (const std::string_view m : set) {
-            if (text.find(m) != std::string_view::npos) return true;
+            const std::string_view lead = m.substr(0, text::DecodeRune(m).size);
+            if (lead == previous) continue;
+            previous = lead;
+            for (size_t at = FindFrom(text, lead, 0); at != std::string_view::npos; at = FindFrom(text, lead, at + 1)) {
+                if (startsMember(at)) return true;
+            }
         }
     }
     return false;
@@ -1915,8 +1948,11 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kI = "い";
-    if (!HoldsMember(text, {dict::ClassMembers("contraction.te-iku"), dict::ClassMembers("contraction.te-iku-listed"),
-                            dict::ClassMembers("contraction.te-iku-final")})) {
+    constexpr std::string_view kTe = "て", kDe = "で";  // the end of a て form
+    if (!HoldsMember(text,
+                     {dict::ClassMembers("contraction.te-iku"), dict::ClassMembers("contraction.te-iku-listed"),
+                      dict::ClassMembers("contraction.te-iku-final")},
+                     {kTe, kDe})) {
         return std::string(text);
     }
     const std::u32string rs = DecodeText(text);
@@ -1925,7 +1961,6 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     std::string out;
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {
-        if (!IsHiraganaRune(rs[i - 1])) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i]);
         if (StartLength(rest, dict::ClassMembers("contraction.te-iku-not")) > 0) continue;
         bool compound = false;  // only when the dictionary holds the verb with ていく

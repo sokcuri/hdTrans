@@ -56,7 +56,8 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
     // godan record (笑え, 言え) is no ichidan stem before the よ of an imperative: a potential
     // has none.
     bool potential = false, imperative = false;
-    for (const Record* r = records; r != nullptr; r = r->child) {
+    const bool imperativeYo = Starts(tail, Conjugation(7, 12)) && !Starts(tail, Conjugation(7, 5));
+    for (const Record* r = imperativeYo ? records : nullptr; r != nullptr; r = r->child) {
         if (r->source.size() == recordText.size()) potential = potential || Has(r->attr, "Ke");
         if (r->source.size() < recordText.size() && At(r->partCode, 1) == '4' && recordText.starts_with(r->source)) {
             const int k = Byte(At(r->partCode, 3)) - '0';
@@ -78,7 +79,7 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
 
 bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record, bool potential) {
     const int kind = d.patternKind;
-    if (potential && kind == 7 && Starts(tail, Conjugation(kind, 12)) && !Starts(tail, Conjugation(kind, 5))) return false;
+    if (potential && kind == 7) return false;
     if (kind == kKindDirect) {
         d.patternMatched = 1;
         d.patternLength = static_cast<int>(recordText.size());
