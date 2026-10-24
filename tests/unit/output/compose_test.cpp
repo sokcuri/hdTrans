@@ -389,12 +389,15 @@ HD_TEST(compose_comma_before_symbol_run) {
         const char* symbols;
         int type;
         const char* expected;
+        bool text = true;
     };
     const Case cases[] = {
         {"％＆＄＃", tokenizer::kTypeSymbol, "마인, ％＆＄＃."},
         {"……", tokenizer::kTypeSymbol, "마인, ……."},
-        {"〕", tokenizer::kTypeSymbol, "마인,〕."},
+        {"❩", tokenizer::kTypeSymbol, "마인,❩."},
+        {"”", tokenizer::kTypeSymbol, "마인,”."},
         {"「", tokenizer::kTypeBracket, "마인,「."},
+        {"％＆＄＃", tokenizer::kTypeSymbol, "마인,％＆＄＃.", false},
     };
     for (const Case& c : cases) {
         std::vector<TokenText> tokens = {
@@ -418,7 +421,7 @@ HD_TEST(compose_comma_before_symbol_run) {
         Composer composer;
         Families families;
         Settings settings;
-        settings.text = true;
+        settings.text = c.text;
         Pieces result;
         composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
         HD_CHECK_EQ(String(result), c.expected);

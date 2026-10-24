@@ -373,9 +373,10 @@ private:
                 // 。 starts a new token, and so does ！ or ？ after a lengthening ～ (行くよ～！！),
                 // which then reads like a sentence end anywhere else. A sign with a form of its
                 // own (FirstForm) after a number is a token of its own, the unit of the number,
-                // not the start of a run of symbols (３４％…… 34%……).
+                // not the start of a run of other symbols (３４％…… 34%……, but ３４％％％).
                 const bool afterLength = (c == U'！' || c == U'？') && p_ > 0 && s_[p_ - 1] == U'～';
-                const bool afterUnit = p_ > 1 && IsDigitRune(s_[p_ - 2]) && FirstForm(s_[p_ - 1]);
+                const bool afterUnit = cur_ == kTypeSymbol && p_ > 1 && IsDigitRune(s_[p_ - 2]) &&
+                                       FirstForm(s_[p_ - 1]) && c != s_[p_ - 1];
                 if ((c == U'。' || afterLength || afterUnit) && BufSize() > 0) Emit(cur_);
                 Add(c);
             }
@@ -684,7 +685,7 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
         }
         for (; i < s.size();) {
             const text::Rune r = text::DecodeRune(s.substr(i));
-            if (run && CanonicalForm(r.cp) == "□") {
+            if (run && !text::IsKanji(r.cp) && CanonicalForm(r.cp) == "□") {
                 text::AppendRune(out, r.cp);
             } else {
                 AppendCanonical(out, r.cp);

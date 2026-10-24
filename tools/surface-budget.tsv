@@ -25,7 +25,7 @@ src/core/output/josa.cpp	0	0	2	0	0	6	0	0	8
 src/core/output/korean.cpp	0	119	0	3	28	0	4	3	48
 src/core/output/marker.cpp	47	90	5	5	47	8	0	55	85
 src/core/output/particle.cpp	0	87	0	1	87	29	6	0	14
-src/core/output/prepass.cpp	135	165	22	14	219	25	8	4	120
+src/core/output/prepass.cpp	135	165	22	14	219	25	9	4	120
 src/core/output/text.cpp	0	0	0	0	0	0	2	0	0
 src/core/pipeline/casual.cpp	287	0	11	13	75	6	4	0	102
 src/core/pipeline/colloquial.cpp	120	0	7	7	53	129	0	0	181

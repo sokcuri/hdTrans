@@ -211,8 +211,11 @@ bool SymbolsFollow(const std::vector<TokenText>& tokens, const std::vector<Resol
     if (i + 1 < static_cast<int>(items.size()) && items[i + 1].tokenIndex == t) return false;
     if (t + 1 >= static_cast<int>(tokens.size())) return false;
     const TokenText& next = tokens[t + 1];
-    return next.type == tokenizer::kTypeSymbol && next.span == 0 && !next.text.empty() &&
-           !text::IsClosePunctuation(text::DecodeRune(next.text).cp);
+    if (next.type != tokenizer::kTypeSymbol || next.span != 0 || next.text.empty()) return false;
+    // Closing brackets and quotes (】 ” ’ » and 〃 written for 〟) stay attached.
+    const char32_t first = text::DecodeRune(next.text).cp;
+    return !text::IsClosePunctuation(first) && first != 0xBB && first != 0x2019 && first != 0x201D &&
+           first != 0x203A && first != 0x3003;
 }
 
 // The token types that are written without a space next to a word span when the input
@@ -1071,7 +1074,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     using Result = std::pair<std::string, bool>;
     // A comma keeps its space before a run of symbols as before a word (마인, ％＆＄＃).
-    if (kind == '6' && t == "," && SymbolsFollow(tokens, items, i)) {
+    if (settings_.text && kind == '6' && t == "," && SymbolsFollow(tokens, items, i)) {
         return Result(std::move(t), true);
     }
     if (nextIndex < 0 || t.empty() || item.selectionFlag == 1 ||

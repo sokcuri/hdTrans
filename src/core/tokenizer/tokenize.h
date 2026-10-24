@@ -39,9 +39,9 @@ bool CanonicalType(int type);
 // The canonical form of a non-empty token text: the FirstForm of its character when it is
 // one character or starts with an exclamation or question mark (？！ ?), otherwise the
 // concatenated canonical forms of its characters. In a run of two or more characters, a first
-// character with a FirstForm and a character whose canonical form is only □ stay as typed, so
-// that a run of symbols keeps every character (％＆＄ ％＆＄, 〒♪ 〒♪, ／ヽ ／ヽ); trailing
-// spaces dropped.
+// character with a FirstForm and a character other than a kanji whose canonical form is only □
+// stay as typed, so that a run of symbols keeps every character (％＆＄ ％＆＄, 〒♪ 〒♪, ／ヽ
+// ／ヽ); trailing spaces dropped.
 void AppendCanonicalText(std::string& out, std::string_view s);
 
 // The leading run of exclamation and question marks of s in ASCII, one for one (！！ !!,
