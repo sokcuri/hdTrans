@@ -1,21 +1,24 @@
 # 규칙: LEX-30
 rule	input	expected	kind	layer
-sound:drawn-honorific	あばよ、ケンくぅん！」	잘 있어라, 켄 군~!」	fix	sound
-sound:drawn-honorific	「佐藤さああああああああん！！」	「사토 씨~!!」	fix	sound
-sound:drawn-honorific	「田中さぁあぁあん…！」	「타나카 씨~…!」	fix	sound
-sound:drawn-honorific	「前田さぁああん！！！」	「마에다 씨~!!!」	fix	sound
-sound:drawn-honorific	「ケイちゃ〜ん！」	「케이짱~!」	fix	sound
-sound:drawn-honorific	「美咲ちゃぁん！」	「미사키짱~!」	fix	sound
-sound:drawn-honorific	佐藤さぁん、こんにちは	사토 씨~, 안녕하세요	fix	sound
-sound:drawn-honorific	先生さぁーん、今日も	선생님~, 오늘도	fix	sound
+sound:drawn-honorific	あばよ、ケンくぅん！」	잘 있어라, 켄 구운!」	fix	sound
+sound:drawn-honorific	「佐藤さああああああああん！！」	「사토 씨이이이이이이이이!!」	fix	sound
+sound:drawn-honorific	「田中さぁあぁあん…！」	「타나카 씨이이이이…!」	fix	sound
+sound:drawn-honorific	「前田さぁああん！！！」	「마에다 씨이이이!!!」	fix	sound
+sound:drawn-honorific	「ケイちゃ〜ん！」	「케이짜~앙!」	fix	sound
+sound:drawn-honorific	「美咲ちゃぁん！」	「미사키짜앙!」	fix	sound
+sound:drawn-honorific	佐藤さぁん、こんにちは	사토 씨이, 안녕하세요	fix	sound
+sound:drawn-honorific	先生さぁーん、今日も	선생니-임, 오늘도	fix	sound
 sound:drawn-honorific	ちゃーんと戦いなさい	제대로~ 싸워	fix	sound
 sound:drawn-honorific	朝はちゃーんと食べる	아침은 제대로~ 먹는다	fix	sound
 sound:drawn-honorific	「田中さん」	「타나카 씨」	keep	sound
-sound:drawn-honorific	「田中さーん」	「타나카 씨~」	keep	sound
+sound:drawn-honorific	「田中さーん」	「타나카 씨-이」	keep	sound
 sound:drawn-honorific	「つぐみちゃん、来て」	「츠구미짱, 와」	keep	sound
 sound:drawn-honorific	ふっ、ん……くぅんっ……	훗, 응……끄응……	keep	sound
 sound:drawn-honorific	「ちゃんと見て」	「제대로 봐」	keep	sound
-sound:drawn-honorific	「ゆかちゃーん、田中が好きだってさ」	「유카짱~, 타나카를 좋아한다고」	keep	sound
-sound:drawn-honorific	！！おとうちゃ～ん！！	!! 아버지~!!	keep	sound
-sound:drawn-honorific	「みなさーんっ、お茶がはいりましたー！」	「여러분~, 차가 들어갔습니다~!」	keep	sound
-sound:drawn-honorific	「おーい田中くーん」	「어이 타나카 군~」	fix	sound
+sound:drawn-honorific	「ゆかちゃーん、田中が好きだってさ」	「유카짜-앙, 타나카를 좋아한다고」	keep	sound
+sound:drawn-honorific	！！おとうちゃ～ん！！	!! 아버지~이!!	keep	sound
+sound:drawn-honorific	「みなさーんっ、お茶がはいりましたー！」	「여러부-운, 차가 들어갔습니다~!」	keep	sound
+sound:drawn-honorific	「おーい田中くーん」	「어이 타나카 구-운」	fix	sound
+sound:drawn-honorific	みつきちゃあああああん！	미츠키짜아아아아앙!	fix	sound
+sound:drawn-honorific	「みなさーん」	「여러부-운」	fix	sound
+sound:drawn-honorific	ちゃーんと見て	제대로~ 봐	keep	sound

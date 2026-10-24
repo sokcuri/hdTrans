@@ -999,10 +999,10 @@ HD_TEST(pipeline_drawn_honorifics) {
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
-        {"圭ちゃ～ん！", "圭ちゃん\uE00A！"},
-        {"田中さぁあぁあん…", "田中さん\uE00A…"},
-        {"アルくぅん！", "アルくん\uE00A！"},
-        {"みどりさああんん！", "みどりさん\uE00A！"},
+        {"圭ちゃ～ん！", "圭ちゃん\uE00A\uE00B！"},
+        {"田中さぁあぁあん…", "田中さん\uE00B\uE00B\uE00B\uE00B…"},
+        {"アルくぅん！", "アルくん\uE00B！"},
+        {"みどりさああんん！", "みどりさん\uE00B\uE00B！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
         {"がちゃ～んと", "がちゃんと\uE00A"},
         {"…くぅん", "…くぅん"},
@@ -1011,7 +1011,9 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"びちゃーん！", "びちゃーん！"},
         {"田中さん", "田中さん"},
         {"かみつきさあん", "かみつきさあん"},
-        {"みどりさああん", "みどりさん\uE00A"},
+        {"みどりさああん", "みどりさん\uE00B\uE00B"},
+        // Drawn out by vowel kana, a drawn mark for each; spelled with ー the lengthening is written -.
+        {"圭ちゃーん！", "圭ちゃん\uE00D\uE00B！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

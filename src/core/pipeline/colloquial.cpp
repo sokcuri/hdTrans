@@ -613,7 +613,7 @@ bool GoodAfterWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
 // A character that ends a spoken phrase: punctuation, a closing bracket, a space, a mark
 // of tone, or a line break.
 bool IsPause(char32_t r) {
-    return In(r, U"、。，．,.！？!?…‥」』）)］】♪☆★♥♡❤～~ 　\n") || r == kLengthenMark || r == kDrawnMark ||
+    return In(r, U"、。，．,.！？!?…‥」』）)］】♪☆★♥♡❤～~ 　\n") || r == kLengthenMark || r == output::kDashMark || r == kDrawnMark ||
            r == output::kClipMark || r == kEmphasisClose;
 }
 
@@ -881,10 +881,30 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             }
             if (word <= h.size() && !afterWord) continue;
             const size_t mark = i + std::max(word, h.size());
-            plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);
+            // The honorific, alone or ending a word, takes the lengthening (- when it was spelled with ー)
+            // and a drawn mark: the restore stage writes its last syllable drawn out across the mark
+            // (ちゃ～ん 짜~앙, みなさーん 여러부-운). A word that goes on past it takes the lengthening.
+            // ー is the dash that is katakana (～ is not).
+            const bool dashed = std::any_of(rs.begin() + i + stem.size(), rs.begin() + end,
+                                            [](char32_t c) { return IsDash(c) && IsKatakanaRune(c); });
+            if (word > h.size()) {
+                plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);  // ちゃーんと 제대로~
+            } else {
+                // Drawn out by vowel kana alone, a drawn mark for each (ちゃあああん 짜아아앙).
+                const size_t vowels = static_cast<size_t>(std::count_if(rs.begin() + i + stem.size(), rs.begin() + end,
+                                                                        [](char32_t c) { return !IsDash(c); }));
+                std::u32string marks;
+                if (vowels == end - i - stem.size()) {
+                    marks.assign(std::min<size_t>(vowels, 16), kDrawnMark);
+                } else {
+                    marks = {dashed ? output::kDashMark : kLengthenMark, kDrawnMark};
+                }
+                plain.insert(static_cast<size_t>(mark), marks);
+                i = mark + marks.size() - 1;
+            }
             rs = std::move(plain);
             changed = true;
-            i = mark;
+            if (word > h.size()) i = mark;
         }
     }
     return changed ? EncodeText(rs) : std::string(text);

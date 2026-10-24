@@ -459,7 +459,7 @@ bool SoundText::UtteranceStart(size_t p) const {
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
 // closing bracket or lengthening mark (not an ellipsis: ちょっと…痛い).
 bool SoundText::PauseAt(size_t p) const {
-    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark || rs_[p] == output::kDrawnMark;
+    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark || rs_[p] == output::kDashMark || rs_[p] == output::kDrawnMark;
 }
 
 // The length in characters of the longest base key, plain-dictionary key and name-layer
