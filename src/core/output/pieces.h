@@ -47,6 +47,14 @@ constexpr char32_t kDrawnMark = 0xE00B;
 // (아파아팟).
 constexpr char32_t kClipMark = 0xE00C;
 
+// Whether c is a mark the sound stage writes at the drawn-out end of a word (kLengthenMark,
+// kDrawnMark, kClipMark).
+constexpr bool IsDrawnEndMark(char32_t c) { return c == kLengthenMark || c == kDrawnMark || c == kClipMark; }
+
+// Whether c is a closing mark of the sound stage: kEmphasisClose or a drawn end mark. A
+// sentence end after the marks is still the end of the word's sentence.
+constexpr bool IsClosingMark(char32_t c) { return c == kEmphasisClose || IsDrawnEndMark(c); }
+
 struct Piece {
     std::string text;
     SpanKind span = SpanText;

@@ -71,3 +71,13 @@ HD_TEST(output_spoken_words) {
     HD_CHECK_EQ(SpokenWords("「그것은」", 0, {0, 4}), std::string("「그것은」"));
     HD_CHECK_EQ(SpokenWords("그것은 몰라」", 1, casual), std::string("그건 몰라」"));
 }
+
+HD_TEST(output_closing_marks) {
+    for (const char32_t c : {kLengthenMark, kDrawnMark, kClipMark}) {
+        HD_CHECK(IsDrawnEndMark(c));
+        HD_CHECK(IsClosingMark(c));
+    }
+    HD_CHECK(!IsDrawnEndMark(kEmphasisClose));
+    HD_CHECK(IsClosingMark(kEmphasisClose));
+    for (const char32_t c : {kEmphasisOpen, U'っ', U'ー', U'！'}) HD_CHECK(!IsClosingMark(c));
+}
