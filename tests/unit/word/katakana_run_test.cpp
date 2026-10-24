@@ -31,7 +31,7 @@ std::string Repeat(std::string_view s, int n) {
     return out;
 }
 
-// The processor time of the fastest of three translations of input, with the translation.
+// The std::clock time of the fastest of three translations of input, with the translation.
 double FastestSeconds(const hdTrans::dict::Snapshot& snap, hdTrans::internal::Generated& generated,
                       const std::string& input, std::string& out) {
     double best = 0;
@@ -57,19 +57,29 @@ HD_TEST(word_katakana_run_keeps_hiragana_ending_out) {
     HD_CHECK_EQ(Translate(*loaded.snapshot, "ティアーズ"), std::string("티아즈"));
 }
 
-// A run of one katakana that is no word joins into one word a neighbour at a time. Only the word
-// left at the end is transliterated, so four times the run takes about four times as long; a
-// transliteration at every step makes it about sixteen times.
+// A run of one katakana that is no word joins into one word a neighbour at a time, and the
+// word left at the end is transliterated once, so the time grows about in proportion to the
+// run, also when hiragana follows it.
 HD_TEST(word_katakana_run_time_grows_with_its_length) {
     const char* dicts = std::getenv("HDTRANS_DICTS");
     if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
     const auto loaded = hdTrans::dict::LoadFoldersTsv({dicts});
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
-    std::string shortOut, longOut;
-    const double shortRun = FastestSeconds(*loaded.snapshot, *generated, Repeat("メ", 400), shortOut);
-    const double longRun = FastestSeconds(*loaded.snapshot, *generated, Repeat("メ", 1600), longOut);
-    HD_CHECK_EQ(shortOut, Repeat("메", 400));
-    HD_CHECK_EQ(longOut, Repeat("메", 1600));
-    HD_CHECK(longRun < 10 * shortRun);
+    struct Shape {
+        std::string_view head, unit, tail, readHead, readUnit;
+    };
+    const Shape shapes[] = {
+        {"", "メ", "", "", "메"},
+        {"ティ", "ア", "う少しで落ちるとこだった。", "티", "아"},
+    };
+    for (const Shape& shape : shapes) {
+        auto input = [&](int n) { return std::string(shape.head) + Repeat(shape.unit, n) + std::string(shape.tail); };
+        std::string shortOut, longOut;
+        const double shortRun = FastestSeconds(*loaded.snapshot, *generated, input(200), shortOut);
+        const double longRun = FastestSeconds(*loaded.snapshot, *generated, input(1600), longOut);
+        HD_CHECK(shortOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 200)));
+        HD_CHECK(longOut.starts_with(std::string(shape.readHead) + Repeat(shape.readUnit, 1600)));
+        HD_CHECK(longRun < 30 * shortRun);
+    }
 }

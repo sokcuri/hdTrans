@@ -81,12 +81,13 @@ HD_TEST(kana_hiragana_cases) {
     HD_CHECK_EQ(TransliterateHiragana("ゔゕゖ"), std::string("부카케"));
 }
 
-// The cells of a run are edited in place, so transliterating sixteen times the run takes about
-// sixteen times as long; copying the cells at every edit makes it over a hundred times.
+// An edit moves only the cells between it and the one before it, so a run sixteen times as long
+// takes about sixteen times as long to transliterate, whether edits keep the number of cells (メー)
+// or drop marks (ラーメン, ビッグ), and many short runs do too.
 HD_TEST(kana_katakana_run_time_grows_with_its_length) {
-    auto fastest = [](int n, std::string& out) {
+    auto fastest = [](std::string_view unit, int n, std::string& out) {
         std::string in;
-        for (int i = 0; i < n; i++) in += "メー";
+        for (int i = 0; i < n; i++) in += unit;
         double best = 0;
         for (int i = 0; i < 3; i++) {
             const std::clock_t start = std::clock();
@@ -96,11 +97,16 @@ HD_TEST(kana_katakana_run_time_grows_with_its_length) {
         }
         return best;
     };
-    std::string shortOut, longOut;
-    const double shortRun = fastest(1000, shortOut);
-    const double longRun = fastest(16000, longOut);
-    std::string expected;
-    for (int i = 0; i < 16000; i++) expected += "메이";
-    HD_CHECK_EQ(longOut, expected);
-    HD_CHECK(longRun < 40 * shortRun);
+    struct Shape {
+        std::string_view unit, read;
+    };
+    for (const Shape& shape : {Shape{"メー", "메이"}, Shape{"ラーメン", "라멘"}, Shape{"ビッグ", "빅"}, Shape{"aア", "a아"}}) {
+        std::string shortOut, longOut;
+        const double shortRun = fastest(shape.unit, 1000, shortOut);
+        const double longRun = fastest(shape.unit, 16000, longOut);
+        std::string expected;
+        for (int i = 0; i < 16000; i++) expected += shape.read;
+        HD_CHECK_EQ(longOut, expected);
+        HD_CHECK(longRun < 40 * shortRun);
+    }
 }
