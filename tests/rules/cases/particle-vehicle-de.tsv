@@ -20,7 +20,7 @@ cx:de-scene:30	車で近づくと彼は手を振って止まれの合図を出�
 cx:de-scene:30	「皇太子は、ここに車でいらっしゃる予定よ」	has:차로	keep	rewrites
 cx:de-scene:30	ここから高藤学園は、地下鉄でひと駅しか離れてないので、	has:지하철로	keep	rewrites
 cx:de-scene:30	怪我人を優先しつつ、数回にわけてレイチェルのヘリで救助をしてもらった。	has:헬리콥터로 구조	keep	rewrites
-cx:de-scene:30	「えーと、自転車でいいよね？」	has:자전거로 좋지	keep	rewrites
+cx:de-scene:30	「えーと、自転車でいいよね？」	has:자전거면 되지	keep	rewrites
 cx:de-scene:30	「あの車は車で高いだろ……」	lacks:차에서	keep	rewrites
 cx:de-scene:30	「迂回しながら島の北側へ向かう。合流予定時間の３０分前にヘリで出るぞ」	has:헬리콥터로 나오	keep	rewrites
 cx:de-scene:30	車で帰宅する者の中には、とんでもない車でやってきた連中もいた。	lacks:차에서	keep	rewrites

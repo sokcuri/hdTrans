@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 ending:rhetorical-ja-nai	可愛いじゃないの	귀엽잖아	fix	builtin-ending
 ending:rhetorical-ja-nai	や、やるじゃないの…！	하, 하잖아…!	fix	builtin-ending
 ending:rhetorical-ja-nai	痛いじゃないの！	아프잖아!	fix	builtin-ending
-ending:rhetorical-ja-nai	ちっ…痛いじゃない！やめてよね！	쳇…아프잖아! 그만둬!	keep	builtin-ending
+ending:rhetorical-ja-nai	ちっ…痛いじゃない！やめてよね！	쳇…아프잖아! 그만해!	keep	builtin-ending
 ending:rhetorical-ja-nai	し、仕方ないではないか！	어, 어쩔 수 없잖아!	fix	builtin-ending
 ending:rhetorical-ja-nai	「庭？　何も無いではないか！」	「뜰? 아무것도 없잖아!」	fix	builtin-ending
 ending:rhetorical-ja-nai	遅いではないか！	늦잖아!	fix	builtin-ending
