@@ -80,7 +80,7 @@ std::string ExecutableDir() {
 }
 
 void Usage(std::FILE* file) {
-    std::fprintf(file, "hdTrans v%s\n", HDTRANS_VERSION);
+    std::fprintf(file, "hdTrans v%s\n", HDTRANS_VERSION_TEXT);
     std::fputs("Author: Sokcuri (https://sokcuri.neko.kr/)\n\n"
                "usage: hdtrans [options] [text]\n"
                "  --in FILE, --file FILE  read UTF-8 input (default: stdin)\n"
@@ -502,7 +502,7 @@ int RunMain(int argc, char** argv) {
 
     if (version) {
         const std::string dictionaryVersion = hdTrans::frontend::DictionaryVersion(folders);
-        std::printf("hdTrans v%s (native) / dict %s\n", HDTRANS_VERSION, dictionaryVersion.c_str());
+        std::printf("hdTrans v%s (native) / dict %s\n", HDTRANS_VERSION_TEXT, dictionaryVersion.c_str());
         return 0;
     }
 

@@ -103,7 +103,9 @@ add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
-set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIES
+set_source_files_properties(src/cli/main.cpp PROPERTIES
+    COMPILE_DEFINITIONS HDTRANS_VERSION_TEXT="${HDTRANS_VERSION_TEXT}")
+set_source_files_properties(src/cshared/hdtrans_c.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
 if(HDTRANS_INTERPRET_RULES)
     target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
@@ -171,8 +173,12 @@ if(NOT EMSCRIPTEN)
     add_test(NAME cli.options COMMAND "${CMAKE_COMMAND}" -DCLI=$<TARGET_FILE:hdtrans_cli>
         -DFIXTURE=${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder
         -DWORK=${CMAKE_CURRENT_BINARY_DIR}/cli-options -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_options.cmake")
-    set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
+    string(REGEX REPLACE "([][+.*()^$?|\\])" "\\\\\\1" versionPattern "${HDTRANS_VERSION_TEXT}")
+    set_tests_properties(cli.version PROPERTIES
+        PASS_REGULAR_EXPRESSION "^hdTrans v${versionPattern} \\(native\\) / dict "
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
+    add_test(NAME version COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
+        -DWORK=${CMAKE_CURRENT_BINARY_DIR}/version-test -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/version.cmake")
     add_test(NAME unit COMMAND hdtrans_tests)
     add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")

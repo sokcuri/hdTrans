@@ -253,9 +253,11 @@ Actions의 **Build → Run workflow**에서 `dry_run=true`로 실행하면 패�
 공개 배포는 `main`에 포함된 `vX.Y.Z` 태그에서만 허용하며, 브랜치에서 수동 실행하면 공개하지 않습니다.
 사용자 파일 견본의 스테이징 목록은 `build.yml`의 `HDTRANS_USER_FILES`에서 관리합니다.
 
-버전은 `git describe --tags`로 찾은 가장 가까운 `v` 태그에서 앞의 `v`를 뗀 값입니다.
-태그가 없으면 `0.0.0-<짧은 SHA>`입니다. Git 정보가 없는 소스 압축본은 릴리스 봇이 관리하는
-`release-version.txt`를 쓰며, 그 파일도 없으면 `0.0.0-unknown`입니다.
-C API의 `hdTrans_Version`, TypeScript의 `version`, Windows EXE와 DLL의 버전 정보에 같은 엔진 버전 문자열을 씁니다.
+버전은 빌드한 커밋에 붙은 `v` 태그에서 앞의 `v`를 뗀 값입니다(`cmake/detect_version.cmake`).
+릴리스 태그가 붙지 않은 커밋은 `dev`이고, 짧은 커밋 해시를 따로 둡니다.
+Git 정보가 없는 소스 압축본은 릴리스 봇이 관리하는 `release-version.txt`를 쓰며, 그 파일도 없으면 `dev`입니다.
+C API의 `hdTrans_Version`, TypeScript의 `version`에는 엔진 버전만 쓰고, Windows EXE와 DLL의 버전 문자열과
+CLI에는 해시를 붙여 `dev (2757ed12)`처럼 씁니다. Windows의 숫자 버전은 `dev`일 때 `0.0.0.0`입니다.
+패키지 이름에 쓰는 `hdtrans-version.txt`는 `0.5.1` 또는 `dev-2757ed12`입니다.
 CLI의 `--version`은 선택한 사전도 로드해서 `hdTrans v<엔진> (native 또는 wasm) / dict <사전>`을 한 줄로 출력합니다.
 `J2KEngine.config.yaml`은 아직 읽지 않으므로 배포하지 않습니다. 설정은 `user/hdtrans.config.yaml`을 씁니다.
