@@ -29,7 +29,10 @@ const dict::Snapshot* Dictionary() {
          "高峰\t고봉\tN110\t\t\tGN\t22\n"
          "潮\t조수\tN110\t\t\tGN\t26\n"
          "風\t바람\tN110\tVFr\t\tGN\t27\n"
-         "元気\t건강%A1@\tG8L0\t\t\tGN\t23\n"},
+         "元気\t건강%A1@\tG8L0\t\t\tGN\t23\n"
+         "つむ\t뽑&AW@\tM425\t\t\tGN\t30\n"
+         "ここ\t여기\tN120\t\t\tGN\t31\n"
+         "いつか\t언젠가\tE300\t\t\tGN\t32\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -47,7 +50,11 @@ const dict::Snapshot* Dictionary() {
          "高峰\t타카미네\tN130\tQPNVHn\tWa\tGN\t24\n"
          "潮\t우시오\tN130\tQPNVHn\tWb\tGN\t28\n"
          "風\t펑\tN130\tQPNVHn\tWb\tGN\t29\n"
-         "元気\t겐키\tN130\tQPNVHn\tWb\tGN\t25\n"},
+         "元気\t겐키\tN130\tQPNVHn\tWb\tGN\t25\n"
+         "つむぎ\t츠무기\tN130\tQPNVHn\tWb\tGN\t33\n"
+         "ここね\t코코네\tN130\tQPNVHn\tWb\tGN\t34\n"
+         "いつか\t이츠카\tN130\tQPNVHn\tWb\tGN\t35\n"
+         "いくよ\t이쿠요\tN130\tQPNVHn\tWb\tGN\t36\n"},
     });
     return loaded.snapshot.get();
 }
@@ -98,6 +105,15 @@ HD_TEST(names_name_cues) {
         {"げ、アヤメ！？", {}},
         {"海防艦計3隻", {}},
         {"32村雨改二", {}},
+        // A hiragana name that starts a verb is cued only by a call at the start of an utterance
+        // or a self-introduction, also after a comma; not a word of the dictionary or a word or
+        // predicate closed by a final particle.
+        {"つむぎ、来て", {{"つむぎ", false}}},
+        {"「わたし、つむぎです」", {{"つむぎ", false}}},
+        {"糸をつむぎ、織る", {}},
+        {"「ここね、待って」", {}},
+        {"「いくよ、待って」", {}},
+        {"いつか、行こう", {}},
         // A person sense that is no Japanese reading cues nothing.
         {"駆逐艦風", {}},
     };
