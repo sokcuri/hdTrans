@@ -2,7 +2,7 @@
 # sets.drops). A change that makes fewer inputs drop text lowers its row (--update); one that makes more
 # fixes them instead. A row is checked only against a set with the same number of inputs.
 set	inputs	drops
-corpus	64615	1094
+corpus	64615	1091
 sample	39999	308
 docs	18517	182
 examples	3635	16

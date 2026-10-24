@@ -61,8 +61,8 @@ HD_TEST(word_copies_read_one_by_one) {
     HD_CHECK(out[0].find("か") == std::string::npos && out[0].find("お") == std::string::npos);
 }
 
-// An adjective said again as the last predicate is a cry in 6 on every copy, its last copy
-// closed with ㅅ before a clipping っ; an adjective of adjective.grumble said twice with nothing
+// An adjective said again as the last predicate is a cry in 6 on every copy, each copy closed
+// with ㅅ before its clipping っ; an adjective of adjective.grumble said twice with nothing
 // after is a grumble in 1다 and 6. The analysis takes the dictionary's adjective stems and
 // endings, so the test needs HDTRANS_DICTS.
 HD_TEST(word_copies_adjective_cries) {
@@ -90,4 +90,10 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("だめだだめだ！"), "안돼 안돼!");  // the copy before another is contracted too
     HD_CHECK_EQ(translate("やだやだやだっ"), "싫어 싫어 싫엇");  // a sound of the lexicon
     HD_CHECK_EQ(translate("長い長い夜だった。"), "긴 긴 밤이었다.");  // copies before a noun
+    // Each copy clipped with its own っ is still a copy and closes with ㅅ.
+    HD_CHECK_EQ(translate("だめっだめっ"), "안됏 안됏");
+    HD_CHECK_EQ(translate("痛いっ、痛いっ……"), "아팟, 아팟……");
+    HD_CHECK_EQ(translate("待って待ってっ"), "기다려 기다렷");
+    HD_CHECK_EQ(translate("先輩っ先輩っ"), "선배 선배");  // a noun keeps its Korean
+    HD_CHECK_EQ(translate("痛いっ！"), "아프다!");  // said once
 }

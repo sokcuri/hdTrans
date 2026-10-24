@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <span>
 
 #include "core/dict/classes.h"
@@ -140,11 +141,14 @@ bool NotAppeal(std::string_view stem) {
     return false;
 }
 
-// (怖|寒|…|こわ)っ+([！!？?。、…‥」』]|$)
+// (怖|寒|…|こわ)っ+([！!？?。、…‥」』]|$); a stem of kClippedCries only after a particle
+// (足が痛っ), the cry of the dictionary elsewhere (痛っ！ 아얏).
 bool ClippedAdjective(std::string_view s, size_t pos, Match& m) {
+    const bool afterParticle = pos > 0 && In(LastRune(s.substr(0, pos)).cp, U"がはもにをでとへの");
     for (std::string_view w : kClippedAdjectives) {
         size_t p = pos;
         if (!Lit(s, p, w)) continue;
+        if (!afterParticle && std::ranges::find(kClippedCries, w) != std::end(kClippedCries)) continue;
         m.group[1] = Span(s, pos, p);
         const bool ok = Repeat(s, p, InSet(U"っ"), 1, kUnbounded,
                                [&](size_t q) { return EndGroup(s, q, U"！!？?。、…‥」』", m); });

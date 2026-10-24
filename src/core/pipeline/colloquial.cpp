@@ -642,6 +642,23 @@ bool CopiedBefore(std::u32string_view rs, size_t at) {
     return false;
 }
 
+// Whether the word of two kana or more that ends at rs[at] is said again right after the っ
+// run rs[at:end] and that copy ends at a っ, punctuation or the end: the っ then clips the word
+// and is no emphasis inside a longer one (だめっだめっ, だめっだめ！; not きんっきんに きんきん or
+// じゃっじゃーん).
+bool CopiedAfter(std::u32string_view rs, size_t at, size_t end) {
+    for (size_t n = 2; n <= 8 && n <= at && end + n <= rs.size(); n++) {
+        const size_t after = end + n;
+        const std::u32string_view word = rs.substr(at - n, n);
+        if (word.find_first_of(U"っッ") != std::u32string_view::npos) break;
+        if (word == rs.substr(end, n) &&
+            (after == rs.size() || In(rs[after], U"っッ、。，,！？!?…‥」』）) 　\n"))) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Whether rs[i:] ends a phrase: the end, a pause, or a shout's っ before one (だめーーっ！).
 bool ShoutEnd(std::u32string_view rs, size_t i) {
     while (i < rs.size() && (rs[i] == U'っ' || rs[i] == U'ッ')) i++;
@@ -1217,6 +1234,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             }
             if (!longer) continue;
         }
+        if (r == U'っ' && CopiedAfter(rs, i, end)) continue;
         const size_t before = e.Reach(rs, from, i);
         // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
         // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,

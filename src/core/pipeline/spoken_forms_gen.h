@@ -203,6 +203,12 @@ inline constexpr std::string_view kNegativeNeeStems[] = {
     "聞こえ",
 };
 
+// The stems of kClippedAdjectives whose clipped form standing alone is a cry of the dictionary
+// (痛っ 아얏).
+inline constexpr std::string_view kClippedCries[] = {
+    "痛",
+};
+
 inline constexpr std::string_view kNegativeNeeKu[] = {
     "面白",
     "悪",
