@@ -430,6 +430,54 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
     return records;
 }
 
+// Text path: the verb records of records move ahead of a longer record that is no verb but
+// spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
+// 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
+// Plain-dictionary records stay in front.
+Record* VerbBeforePolite(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 1) == '4' || !text.starts_with(first->source)) return records;
+    bool polite = false;
+    for (const std::string_view m : dict::ClassMembers("follower.polite-masu")) {
+        polite = polite || text.substr(first->source.size()).starts_with(m);
+    }
+    if (!polite) return records;
+    bool spelled = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > first->source.size()) return records;
+        if (At(r->partCode, 1) != '4' || r->partCode.size() != 4 || !first->source.starts_with(r->source)) continue;
+        const std::string_view form = first->source.substr(r->source.size());
+        const int kind = r->partCode[3] - '0';
+        spelled = spelled || (!form.empty() && (form == Conjugation(kind, 10) || form == Conjugation(kind, 4)));
+    }
+    if (!spelled) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '4') {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
+    return records;
+}
+
 // Rejects some kind-1 records next to level-2 kanji and the characters after them in
 // the code order (Shift-JIS lead byte 0xE0 or above); kinds 0, 1, 2, 3 and 9 are
 // otherwise valid, others never.
@@ -1317,6 +1365,7 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
+    if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
