@@ -516,14 +516,17 @@ bool SpelledTail(std::u32string_view text) {
     return false;
 }
 
-// Whether the run of single kana pieces at rs[i:end] (・ between them) follows the order of
+// The marks between the pieces of a word spelled out (・) or spaced out character by character.
+constexpr std::u32string_view kPieceMarks = U"・ 　";
+
+// Whether the run of single kana pieces at rs[i:end] (・ or a space between them) follows the order of
 // the kana table or of the iroha, three pieces or more: a list (あ・い・う, は・ひ・ふ・へ・ほ,
 // い・ろ・は).
 bool KanaOrder(std::u32string_view rs, size_t i, size_t end) {
     std::u32string kana;
     for (size_t k = i; k < end; k++) {
-        if (rs[k] == U'・') continue;
-        if (k + 1 < end && rs[k + 1] != U'・') return false;  // a piece of more than one character
+        if (In(rs[k], kPieceMarks)) continue;
+        if (k + 1 < end && !In(rs[k + 1], kPieceMarks)) return false;  // a piece of more than one character
         kana.push_back(rs[k] >= U'ァ' && rs[k] <= U'ヶ' ? rs[k] - 0x60 : rs[k]);  // あ・イ・う
     }
     if (kana.size() < 3) return false;
@@ -1548,6 +1551,62 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
         changed = true;
     }
     if (!changed) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
+}
+
+// Whether w is one word of the dictionary: a key, kana spellings included, alone or before a
+// copula or particle (おとな+の, マジ+かよ), or a verb or adjective stem before kana of its
+// ending only (し+てました); not keys one after the other (しら+さき).
+bool SpacedWord(const Emphasis& e, std::u32string_view w) {
+    bool stem = false;
+    const size_t n = e.WordAt(w, 0, stem);
+    if (n == 0) return false;
+    if (n == w.size() || (n >= 2 && SpelledTail(w.substr(n)) && w.size() - n <= 3)) return true;
+    return stem && std::all_of(w.begin() + n, w.end(), [](char32_t c) { return In(c, U"てでたっまします んだいうかよねなのわぞさければ"); });
+}
+
+std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find(' ') == std::string_view::npos && text.find("　") == std::string_view::npos) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    std::u32string out;
+    size_t at = 0;
+    const auto space = [](char32_t r) { return r == U' ' || r == U'　'; };
+    for (size_t i = 0; i < rs.size(); i++) {
+        // A run starts after other than a word or a word and a space (not inside a spaced line).
+        if (i > 0 && (IsWordRune(rs[i - 1]) || (i > 1 && space(rs[i - 1]) && IsWordRune(rs[i - 2])))) continue;
+        std::vector<size_t> ends;
+        for (size_t p = i;;) {
+            const size_t q = SpelledPiece(rs, p, ends.empty());
+            if (q == p) break;
+            ends.push_back(q);
+            if (q + 1 >= rs.size() || !space(rs[q])) break;
+            p = q + 1;
+        }
+        if (ends.size() < 3) continue;
+        const size_t end = ends.back();
+        if (end < rs.size() && IsWordRune(rs[end]) && !SpelledTail(std::u32string_view(rs).substr(end))) continue;
+        std::u32string joined;
+        for (size_t k = i; k < end; k++) {
+            if (!space(rs[k])) joined.push_back(rs[k]);
+        }
+        if (std::all_of(joined.begin(), joined.end(), [](char32_t c) { return IsKanjiRune(c); })) continue;
+        // Katakana that starts the run is a key of the dictionary; the rest reads as words in
+        // hiragana, and is no list, label's choices or name only.
+        size_t kata = 0;
+        while (kata < joined.size() && IsKatakanaRune(joined[kata])) kata++;
+        const std::u32string core = ToHiragana(joined);
+        const bool word = (kata == 0 || !e.Tags(joined.substr(0, kata)).empty() || !e.Tags(core.substr(0, kata)).empty()) &&
+                          !AfterLabel(rs, i) && !KanaOrder(rs, i, end) && !(e.NameKey(core, true) && !e.WordKey(core)) &&
+                          (SpacedWord(e, joined) || SpacedWord(e, core) || Emphasis::LexiconKey(ToKatakana(core), ctx.extraBuiltin));
+        if (!word) continue;
+        out.append(rs, at, i - at);
+        out += joined;
+        at = end;
+        i = end - 1;
+    }
+    if (at == 0) return std::string(text);
     out.append(rs, at, std::u32string::npos);
     return EncodeText(out);
 }

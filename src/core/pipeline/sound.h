@@ -91,7 +91,7 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// The normalized line after the sound stage: JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedIku, RewriteContractedAuxiliaries, RewriteRaLessKuru,
 // RewriteContractedNo,
@@ -119,6 +119,13 @@ namespace internal {
 // kana piece is written piece by piece as heard, ・ between the pieces and a lone ー kept
 // (아・이・우, あ・ー 아・ー).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Each word spaced out character by character (お　と　な　の, こ ろ し て や る) joined: three or
+// more pieces of JoinSpelledOut with one space or ideographic space between them, not next to
+// other kana or kanji but for a copula or particle after it, when the dictionary or the sound
+// lexicon reads them as words as JoinSpelledOut does. A run of kanji only stays for the
+// tokenizer (通 知 表), and a run that is no word stays as written (し　ら　さ　き, あ い う).
+std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);

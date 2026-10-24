@@ -1,0 +1,17 @@
+# 규칙: LAY-2
+rule	input	expected	kind	layer
+sound:spaced-word	「大人の挨拶だよ、お　と　な　の」	「어른의 인사야, 어른의」	fix	sound
+sound:spaced-word	「お　と　な　の」	「어른의」	fix	sound
+sound:spaced-word	白崎が、口の動きだけで『ト　イ　レ』と告げた。	has:『화장실』	fix	sound
+sound:spaced-word	「ご飯にしますか？　お風呂にしますか？　そ　れ　と　も」	has:그렇지 않으면」	fix	sound
+sound:spaced-word	「し　て　ま　し　た」	「하고 있었습니다」	fix	sound
+sound:spaced-word	「マ　ジ　か　よ！　アンタの噂は聞いてるぜ！」	「진짜냐! 너의 소문은 듣고 있어!」	fix	sound
+sound:spaced-word	タマも銃も全部自前品です。あ く ま で、プライベート参加です。	has:어디까지나, 프라이빗	fix	sound
+sound:spaced-word	お　と　な　の	어른의	keep	sound
+sound:spaced-word	こ　ん　に　ち　は	안녕하세요	keep	sound
+sound:spaced-word	こ の 展 開 は 新 し い	이 전개는 새롭다	keep	sound
+sound:spaced-word	「 私 が 悪 い こ と に し た ？ 」	「내가 나쁘기로 했어 ?」	keep	sound
+sound:spaced-word	「あなたのためにこんなに頑張ってきたのに、私 が 何 を し た っ て 言 う の よ ！！」	has:내가 뭘 했다고 해	keep	sound
+sound:spaced-word	「そ れ じ ゃ あ ど う や っ て 生 き て い く っ て 言 う の ？」	has:살아간다고 하는	keep	sound
+sound:spaced-word	「 ま さ か 、 通 知 表 の こ と じ ゃ な い わ よ ね ？ 」	「설마, 성적표가 아니야 ?」	keep	sound
+sound:spaced-word	↑そ れ だ！	↑그것이다!	keep	sound
