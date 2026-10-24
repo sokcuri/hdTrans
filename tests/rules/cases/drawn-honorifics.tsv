@@ -33,7 +33,7 @@ sound:drawn-honorific	太郎くぅぅぅん！	타로 군~~!	fix	sound
 sound:drawn-honorific	太郎くぅぅぅぅん！	타로 구우우우운!	fix	sound
 sound:drawn-honorific	太郎くぅぅぅぅぅん！	타로 구우우우우운!	fix	sound
 sound:drawn-honorific	石がぽちゃーんと落ちた	돌이 퐁당~ 떨어졌다	fix	sound
-sound:drawn-honorific	水がばちゃーんと跳ねた	물이 첨벙~ 뛰었다	fix	sound
+sound:drawn-honorific	水がばちゃーんと跳ねた	has:첨벙~	fix	sound
 sound:drawn-honorific	皿ががちゃーんと割れた	접시가 와장창 깨졌다	fix	sound
 sound:drawn-honorific	ドアをがちゃーんと閉めた	문을 와장창 닫았다	fix	sound
 sound:drawn-honorific	ぴちゃーんと水が落ちた	퐁당~ 물이 떨어졌다	fix	sound
@@ -69,3 +69,8 @@ sound:drawn-honorific	おまたせちゃ～ん♪	기다렸지~♪	fix	sound
 sound:drawn-honorific	お待たせちゃん！	기다렸지!	fix	sound
 sound:drawn-honorific	お待たせー	기다렸지~	keep	sound
 sound:drawn-honorific	「ゆるさーーーん！」	「용서하지 않아~!」	keep	sound
+sound:drawn-honorific	こどもがちゃーんと見てる	has:제대로~	keep	sound
+sound:drawn-honorific	いもうとがちゃーんと起きた	has:제대로~	keep	sound
+sound:drawn-honorific	おとうとがちゃーんとやった	has:제대로~	keep	sound
+sound:drawn-honorific	あにがちゃーんと言った	has:제대로~	keep	sound
+sound:drawn-honorific	ともがちゃーんと来た	has:제대로~	keep	sound

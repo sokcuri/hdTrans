@@ -1062,11 +1062,11 @@ HD_TEST(pipeline_onbin_u) {
 }
 
 // An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
-// a longer word it starts takes the mark after that word, also with no word before it. A verb
-// stem and its continuative kana before it are no name (かみつき). The end of a sound word that
-// starts before it is no honorific (がちゃーん, ぽちゃーんと, どくーんと), nor one after a verb form
-// (お待たせ); a word with the honorific is (みなさん). A longer word takes the lengthening after
-// its shortest key (ちゃんと, not ちゃんと出).
+// a longer word it starts takes the mark after its shortest key (ちゃんと, not ちゃんと出), also
+// with no word before it. A verb stem and its continuative kana before it are no name
+// (かみつき), nor is a verb form (お待たせ); a word with the honorific is (みなさん). The end of a
+// sound that the sound stage reads from before it is no honorific (がちゃーん, ぽちゃーんと,
+// どくーんと; not こども + がちゃーんと).
 HD_TEST(pipeline_drawn_honorifics) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -1078,7 +1078,8 @@ HD_TEST(pipeline_drawn_honorifics) {
                                      "ちゃんと出\t잘 나\tC427\t6\n"
                                      "お待たせ\t기다리게\tM429\t7\n"
                                      "みな\t간주\tM443\t8\n"
-                                     "みなさん\t여러분\tI120\t9\n"}});
+                                     "みなさん\t여러분\tI120\t9\n"
+                                     "こども\t어린이\tN110\t10\n"}});
     HD_REQUIRE(loaded.errors.empty());
     HD_REQUIRE(loaded.snapshot != nullptr);
     LineContext ctx;
@@ -1092,6 +1093,7 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"私がちゃーんと", "私がちゃんと\uE00A"},
         {"ちゃ～んと出撃", "ちゃんと\uE00A出撃"},
         {"お待たせちゃーん", "お待たせちゃーん"},
+        {"こどもがちゃーんと", "こどもがちゃんと\uE00A"},
         {"みなさーん", "みなさん\uE00A\uE00B"},
         {"がちゃ～んと", "がちゃ～んと"},
         {"皿ががちゃーんと", "皿ががちゃーんと"},

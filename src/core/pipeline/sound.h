@@ -128,6 +128,9 @@ std::string WriteMasked(std::string_view text, const LineContext& ctx, const dic
 // nor letters.
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The spans [from, to) in characters of text that WriteSounds reads as keys of the sound lexicon.
+std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The cries of text that the lexicon lacks written in Korean as heard: a run of kana
 // that starts with hiragana (katakana speech and names are left to later stages) where an
 // utterance starts or after a comma, an ellipsis, a dash or a mark of tone (not after a

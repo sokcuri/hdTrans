@@ -861,23 +861,6 @@ bool HasDrawnAfter(std::string_view text) {
     return false;
 }
 
-// Whether a key of the sound lexicon starts in the run of hiragana that ends at character i of
-// rs, after a non-letter, the line start or a particle, and reaches character end
-// (がちゃーん, ぽちゃーんと, どくーんと around a drawn ちゃん or くん; not 私がちゃーんと).
-bool SoundHolds(std::u32string_view rs, size_t i, size_t end, bool extra) {
-    const std::u32string f = ToKatakana(rs);
-    std::string units;
-    for (size_t j = i; j > 0 && i - j < kMaxKeyRunes && IsHiraganaRune(rs[j - 1]);) {
-        j--;
-        if (j > 0 && (IsHiraganaRune(rs[j - 1]) || IsKanjiRune(rs[j - 1])) && !In(rs[j - 1], U"がをにはもでとへや")) continue;
-        for (const SoundRow& s : SoundRows(f[j], extra)) {
-            size_t to = 0;
-            if (MatchSound(s, f, j, to, units) && to > end) return true;
-        }
-    }
-    return false;
-}
-
 }  // namespace
 
 std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -900,7 +883,10 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                 end++;
             }
             if (end == i + stem.size() || end >= rs.size() || rs[end] != h.back()) continue;
-            if (SoundHolds(rs, i, end, ctx.extraBuiltin)) continue;  // the end of a sound, no honorific or ちゃんと
+            // The end of a sound that the sound stage reads from before it, no honorific or ちゃんと
+            // (がちゃーん, ぽちゃーんと, どくーんと; not ケンくぅん or こどもがちゃーんと).
+            const auto spans = SoundSpans(EncodeText(rs), ctx, snap);
+            if (std::any_of(spans.begin(), spans.end(), [&](const auto& sp) { return sp.first < i && sp.second > end; })) continue;
             size_t last = end + 1;
             while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
             // The honorific spelled plainly, and the longest dictionary word it starts there.
