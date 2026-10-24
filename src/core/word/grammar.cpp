@@ -155,8 +155,9 @@ bool ObjectWithoutRecipient(const Item* it) {
 //   - a verb that takes no object is potential, unless it is listed or a compound action;
 //   - ている, ていた, てる, ており are passive;
 //   - going back through the clause, the nearest を (potential unless listed, or a narrative
-//     form of a verb of verb.passive-after-object, after the body or before a noun it describes)
-//     or an agent
+//     form of a verb of verb.passive-after-object, after the body or before a noun it describes,
+//     or a person before に, から, によって, により further back is its agent and the verb is
+//     none of verb.recipient-ni) or an agent
 //     に, から, によって, により after a thing-free word decides;
 //   - listed verbs and narrative forms are passive;
 //   - a subject は or が that is a thing makes the reading passive, unless the verb is the
@@ -177,22 +178,29 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
         if (rest.starts_with(p)) return true;
     }
     const Item* subject = nullptr;
+    bool potentialObject = false;  // a を that reads the potential unless a person agent comes before it
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
         if (s == "を" && !listed &&
             (!NarrativePassive(it, rest) ||
              !(dict::InClass("verb.passive-after-object", it->group->surface) || BodyObject(p->prev) ||
                DescribedNoun(w, it)))) {
-            return false;
+            if (dict::InClass("verb.recipient-ni", it->group->surface)) return false;
+            potentialObject = true;
         } else if (s == "に" || s == "から" || s == "によって" || s == "により") {
             const Item* a = p->prev;
-            if (a != nullptr && !Thing(a->Attr(std::max(a->selected, 0)))) return true;
-        } else if ((s == "は" || s == "が") && p->prev != nullptr && subject == nullptr) {
+            if (a != nullptr && (potentialObject ? Person(a->Attr(std::max(a->selected, 0)))
+                                                 : !Thing(a->Attr(std::max(a->selected, 0))))) {
+                return true;
+            }
+            if (potentialObject) return false;
+        } else if (!potentialObject && (s == "は" || s == "が") && p->prev != nullptr && subject == nullptr) {
             subject = p->prev;
         } else if (p->detail->Yougo() || s.empty() || Has("、。,「」『』！？", s)) {
             break;
         }
     }
+    if (potentialObject) return false;
     if (listed || NarrativePassive(it, rest)) return true;
     return subject != nullptr && Thing(subject->Attr(std::max(subject->selected, 0))) && !rest.starts_with("る");
 }

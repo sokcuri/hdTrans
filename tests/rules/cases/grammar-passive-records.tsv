@@ -6,7 +6,7 @@ rewrite:passive-records	司令官、今年も一緒に新年を迎えられた�
 rewrite:passive-records	「私にあおくんを任せられたから、出たい時間に出られたんじゃないかな」	「나에게 아오 군을 맡길 수 있었으니까, 나가고 싶은 시간에 나올 수 있던 거 아닐까」	keep	rewrites
 dict:passive-feeling:1	呆れられた。	한심하게 여겨졌다.	fix	local
 rewrite:passive-records	ついにこの本を書き上げられた。	마침내 이 책을 다 쓸 수 있었다.	fix	rewrites
-rewrite:passive-records	俺は架子に腕を絡められたまま、この道を歩く。	나는 가자에게 팔을 걸어진 채로, 이 길을 걷는다.	keep	rewrites
+rewrite:passive-records	俺は架子に腕を絡められたまま、この道を歩く。	나는 가자가 팔을 건 채로, 이 길을 걷는다.	keep	rewrites
 rewrite:passive-records	「というか、なんでまた朝早く集合をかけられたんだ？」	「이라고 할까, 왜 또 아침 일찍 집합을 걸쳐진 거야?」	keep	rewrites
 rewrite:passive-records	固くて高品質な板を敷き詰められた床は	단단해서 고품질인 판을 전면에 깔아진 바닥은	keep	rewrites
 rewrite:passive-records	それでも、一度でも夜伽を命じられれば部屋の移動ができ、二度目の御手付きは出世を意味している。	그래도, 한 번이라도 밤시중을 명령받으면 방 이동을 할 수 있어 두 번째의 승은은 출세를 의미하고 있다.	fix	rewrites

@@ -148,6 +148,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.causative-passive	Dictionary verbs in される whose Korean is the causative-passive 게 되다 (待たされる 기다리게 되다); a person before に is who made it happen.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
@@ -161,6 +162,7 @@
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+//= verb.recipient-ni	Ichidan stems that take whoever receives in に (任せる, 見せる): a person before に and an object of を leave their られ the potential.
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
@@ -2300,6 +2302,19 @@ verb.casual-state	疑
 verb.casual-state	流行
 verb.casual-state	はや
 verb.casual-state	似合
+verb.causative-passive	気づかされ
+verb.causative-passive	あやまらされ
+verb.causative-passive	受けもたされ
+verb.causative-passive	向かいあわされ
+verb.causative-passive	向かい合わされ
+verb.causative-passive	待たされ
+verb.causative-passive	払わされ
+verb.causative-passive	書かされ
+verb.causative-passive	立たされ
+verb.causative-passive	行かされ
+verb.causative-passive	謝らされ
+verb.causative-passive	闘わされ
+verb.causative-passive	飲まされ
 
 verb.entrust	頼む
 verb.entrust	たのむ
@@ -2569,6 +2584,18 @@ verb.receiver-passive	託
 verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
+verb.recipient-ni	任せ
+verb.recipient-ni	与え
+verb.recipient-ni	見せ
+verb.recipient-ni	教え
+verb.recipient-ni	伝え
+verb.recipient-ni	預け
+verb.recipient-ni	届け
+verb.recipient-ni	授け
+verb.recipient-ni	向け
+verb.recipient-ni	打ち明け
+verb.recipient-ni	押し付け
+verb.recipient-ni	告げ
 
 verb.respectful	仰
 verb.respectful	おっしゃ

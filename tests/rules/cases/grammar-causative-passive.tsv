@@ -1,0 +1,27 @@
+# 규칙: GRM-1
+rule	input	expected	kind	layer
+cx:causer-ni:10	特に、鈴木って後輩にはいつも苦労させられて……	rule:cx:causer-ni:10= 때문에	fix	rewrites
+cx:causer-ni:10	確かに姉と妹は彼女たちに負傷させられたが、こちらも不注意があったからな	확실히 언니와 여동생은 그녀들 때문에 부상 당했지만, 이쪽도 부주의가 있었으니까	fix	rewrites
+cx:causer-ni:10	不機嫌そうな田中さんに思考を中断させられた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
+cx:causer-ni:10	母に野菜を食べさせられた。	어머니 때문에 야채를 먹었다.	fix	rewrites
+cx:causer-ni:10	母に薬を飲まされた。	어머니 때문에 약을 먹게 되었다.	fix	rewrites
+cx:causer-ni:10	母に本を読まされた。	어머니 때문에 책을 읽게 되었다.	fix	rewrites
+cx:causer-ni:10	兄に宿題をやらされた。	형 때문에 숙제를 하게 되었다.	fix	rewrites
+cx:causer-ni:10	先輩に酒を飲まされた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
+cx:causer-ni:10	彼に一時間も待たされた。	그 때문에 1시간이나 기다리게 되었다.	fix	rewrites
+cx:causer-ni:10	店長に配置換えさせられた。	rule:cx:causer-ni:10= 때문에	fix	rewrites
+cx:causer-ni:10	先生に掃除をさせられた。	선생님에게 청소를 하도록 강요받았다.	keep	rewrites
+cx:causer-ni:10	どうすれば佐藤に一発食らわせられるか教えて！	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	ならよかった。ライブ前の妹に風邪なんかひかせられない	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	今後は田中くんを回復させられるくらいになるかもしれない	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	ホントに『なるほど』という気持ちにさせられるな……	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	この話がなくたって、どうせ合宿には参加させられてましたし	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	ですが、やはり今のままでは実戦投入はさせられません。	!rule:cx:causer-ni:10	keep	rewrites
+cx:causer-ni:10	こんな汚れ仕事、あの子にはやらせられないもの。	이런 더러운 일, 그 아이에게는 시킬 수 없는 것.	keep	rewrites
+cx:causer-ni:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
+cx:causer-ni:10	母が子供に野菜を食べさせた。	어머니가 아이에게 야채를 먹였다.	keep	rewrites
+cx:causer-ni:10	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:10	keep	rewrites
+rewrite:passive-reading	母に本を読ませられた。	어머니가 책을 읽게 했다.	fix	rewrites
+cx:causer-ni:10	父に謝らされた。	아버지 때문에 사과하게 되었다.	fix	rewrites
+cx:causer-ni:10	彼に待たされたか？	그 때문에 기다리게 되었나?	fix	rewrites
+cx:causer-ni:10	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	rewrites
