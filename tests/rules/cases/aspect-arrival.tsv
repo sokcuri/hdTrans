@@ -1,0 +1,22 @@
+# 규칙: GRM-21
+rule	input	expected	kind	layer
+rewrite:result-state	その前線艦隊についての追加情報として、旧司令官が転属してきているとのことです。	그 전선 함대에 대한 추가 정보로서 구사령관이 전속해 와 있다고 합니다.	fix	rewrites
+rewrite:result-state	……他の家じゃ息子さんたちが帰ってきてるんですよね。	……다른 집은 아들들이 돌아와 있는 거예요.	fix	rewrites
+rewrite:result-state	「……ん？　あぁ、周防さん、戻ってきてたのね」	「……응? 아아, 스오우 씨, 돌아와 있었구나」	fix	rewrites
+rewrite:result-state	放課後の演説を終えて、俺たちは部室に戻ってきていた。	방과 후 연설을 끝내고, 우리는 동아리방으로 돌아와 있었다.	fix	rewrites
+rewrite:result-state	3日くらい前にもうこっちの世界に戻って来てたってこと？！	3일 정도 전에 이제 여기의 세계로 돌아와 있었다는 것?!	fix	rewrites
+rewrite:result-state	特に被害があったという報告は入ってきていません。	특히 피해가 있었다고 하는 보고는 들어 와 있지 않습니다.	fix	rewrites
+rewrite:result-state	新しい目撃情報が入ってきているのだ。	새로운 목격 정보가 들어 와 있다.	fix	rewrites
+rewrite:result-state	手紙…きてるよ？	편지…와 있어?	fix	rewrites
+rewrite:result-state	ああああニュースきてる!!	아아아아 뉴스 와 있다!!	fix	rewrites
+rewrite:result-state	なんか電文みたいのがきてるっぽい？	뭔가 전문 보고 싶은 것이 와 있는 것 같아?	fix	rewrites
+rewrite:result-state	「応援要請がきている」	「응원 요청이 와 있다」	fix	rewrites
+rewrite:result-state	集合時間より３時間も早く部室にきてるヤツがいたら驚くわ	집합 시간부터 3시간도 빨리 동아리방에 와 있는 녀석이 있으면 놀라	fix	rewrites
+rewrite:result-state	食事を終えて、俺は橋の袂まできていた。	식사를 끝내고, 나는 다리의 소매까지 와 있었다.	fix	rewrites
+rewrite:result-state	その雰囲気は、最初の頃と違ってきている。	lacks:와 있	keep	rewrites
+rewrite:result-state	敵が近づいてきている。	적이 다가오고 있다.	keep	rewrites
+rewrite:result-state	寒くなってきている。	추워지고 있다.	keep	rewrites
+rewrite:result-state	これでも何年か魔法を練習してきていますので	has:연습해 오고 있	keep	rewrites
+rewrite:result-state	私たちの対潜装備も充実してきていますけれど	has:충실해 오고 있	keep	rewrites
+rewrite:result-state	離婚届まで渡してきてる始末だ。	lacks:와 있	keep	rewrites
+rewrite:result-state	いい風きてる？十六駆、演習開始！	좋은 바람 오고 있어? 16구, 연습 개시!	keep	rewrites
