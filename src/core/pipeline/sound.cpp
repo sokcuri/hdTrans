@@ -666,6 +666,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             }
         }
         if (skipped && runKorean.empty()) continue;
+        bool open = s.open;
         if (ok && s.lead) {
             size_t from = p;
             if (s.open) {
@@ -674,7 +675,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             // No word starts with っ, so a key in っ (ったく, ってか) also starts a clause after a
             // comma (なんだよ、ったく…).
             bool start = UtteranceStart(from) || (s.key.front() == U'ッ' && from > 0 && In(rs_[from - 1], U"、，,")),
-                 pause = PauseAt(end);
+                 pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
             // う……多分, ちょ……待って).
@@ -685,6 +686,15 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
                 pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
             }
+            // A lead asked on its own after an ellipsis that opens an utterance is one too
+            // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
+            size_t asked = end, opened = from;
+            while (asked < rs_.size() && In(rs_[asked], U"ッっー～")) asked++;
+            while (opened > 0 && In(rs_[opened - 1], U"…‥")) opened--;
+            if (!start && opened < from && UtteranceStart(opened) &&
+                (In(rs_[end - 1], U"？?") || (asked < rs_.size() && In(rs_[asked], U"？?")))) {
+                start = true;
+            }
             // A kana in brackets right after a kanji is its reading (々(う)), and one after a dash
             // after kana draws out that word (じゅ――う), not an utterance.
             if (from > 1 && In(rs_[from - 1], U"（(") && IsKanjiRune(rs_[from - 2])) start = false;
@@ -692,6 +702,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 size_t d = from;
                 while (d > 0 && In(rs_[d - 1], U"―─—")) d--;
                 if (d > 0 && IsKana(rs_[d - 1])) start = false;
+            }
+            // いえ that opens an utterance right before a word of three or more characters is the
+            // answer 아뇨, read like an open row (いえなんでも 아뇨, 아무것도); 言え would take an
+            // ending there (いえば, いえない).
+            if (s.key == U"イエ" && start && !pause) {
+                size_t base = 0, user = 0, name = 0;
+                LongestKeys(end, base, user, name, true);
+                open = std::max(base, user) >= 3;
             }
             if (s.key == U"ハ" || s.key == U"ヘ") {
                 // A bare は or へ is the particle after a word, a dash or a space ((人形) は、,
@@ -711,10 +729,10 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 rs_[end] != U'茂') {
                 pause = true;
             }
-            if (!start || (!pause && !s.open) || IsKatakanaRune(rs_[p])) continue;
+            if (!start || (!pause && !open) || IsKatakanaRune(rs_[p])) continue;
             // Nor where it ends inside a word in katakana (、ってカンジ: the quoting って).
             if (end < rs_.size() && IsKatakanaRune(rs_[end - 1]) && IsKatakanaRune(rs_[end]) && rs_[end] != U'ー') continue;
-            if (s.open && end < rs_.size() && In(rs_[end], U"？?")) continue;  // 見ゆ！ってか？ quotes
+            if (open && end < rs_.size() && In(rs_[end], U"？?")) continue;  // 見ゆ！ってか？ quotes
             std::erase(units, '!');  // よしっ 좋아, not 좋앗
         }
         if (ok && runKorean.empty() && s.key.back() == U'ト' && !EndsInTo(std::u32string_view(rs_).substr(p, end - p))) {
@@ -766,7 +784,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                                            : Lengthen(Reading(s, p, end), units);
             // An open row before no pause is followed by a comma, so the words after it
             // read as the start of a clause (ってかなんで 그보다, 왜).
-            if (s.open && !PauseAt(end)) {
+            if (open && !PauseAt(end)) {
                 if (IsHiraganaRune(rs_[end])) korean += ',';
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
@@ -779,7 +797,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                     korean = EncodeText(ko);
                 }
             }
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase,
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry};
             chosen = &s;
         }
@@ -1099,7 +1117,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         SoundMatch& last = chain.back();
         size_t end = last.end;
         if (!last.intj) end += Adverbial(end);
-        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) ||
+        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") ||
             (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end]))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
             last.end = end;

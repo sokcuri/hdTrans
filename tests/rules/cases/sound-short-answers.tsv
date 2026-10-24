@@ -1,0 +1,26 @@
+# 규칙: SPC-13
+rule	input	expected	kind	layer
+sound:short-answer	第二水雷戦隊、戦場海域に到達。これより突入する。かかれっ！	제2수뢰전대, 전장 해역에 도달. 이것보다 돌입한다. 덤벼라!	fix	fixed
+sound:short-answer	これより、友軍の作戦を支援する。かかれっ！	이것보다, 우군의 작전을 지원한다. 덤벼라!	fix	fixed
+sound:short-answer	ひゃっはー！ かかれー！	히햐하! 덤벼라~!	fix	fixed
+sound:short-answer	「今、エンジンかけてる……くそっ、かかれ！」	「지금, 엔진 걸고 있는……젠장, 걸려라!」	keep	fixed
+sound:short-answer	それでは作業、かかれっ	그러면 작업, 쓰여되고	keep	fixed
+sound:short-answer	「ね？」	「그렇지?」	fix	fixed
+sound:short-answer	このお料理、おいしいわ。貴方も食べてみて。ね？	이 요리, 맛있어. 당신도 먹어 봐. 그렇지?	fix	fixed
+sound:short-answer	季節は…秋、ですね。ね？ 今年は一緒に行きませんか？	계절은…가을, 이군요. 그렇지? 금년은 함께 가지 않겠습니까?	fix	fixed
+sound:short-answer	ね？はい、どうぞ。	그렇지? 네, 그러세요.	fix	fixed
+sound:short-answer	お祝いしたい…ね？	축하하고 싶다…?	keep	fixed
+sound:short-answer	ねっ、ねっ？そう思う	저, 저기? 그렇게 생각한다	keep	fixed
+sound:short-answer	お待たせ！…そう？ごめんなさい！	기다렸지! …그래? 미안해요!	fix	fixed
+sound:short-answer	やだ！だ、大丈夫？……そう？	싫어! 괘, 괜찮아? ……그래?	fix	fixed
+sound:short-answer	「そう？」	「그래?」	keep	fixed
+sound:short-answer	これは…そう、あれだ	이것은…그렇게, 저것이다	keep	fixed
+sound:short-answer	いえなんでも…ありません……	아뇨, 아무것도…아닙니다……	fix	fixed
+sound:short-answer	「いえそうじゃなくて……あの」	「아뇨, 그렇지 않아……저기」	fix	fixed
+sound:short-answer	許可？ いえそんなもの必要ありませんよ。	허가? 아뇨, 그런 것 필요 없어요.	fix	fixed
+sound:short-answer	「いえいえ、大切なのは愛ですよ」	「아니오, 중요한 건 사랑이에요」	keep	fixed
+sound:short-answer	いえない	말할 수 없다	keep	fixed
+sound:short-answer	そういえば	그러고 보니	keep	fixed
+sound:short-answer	私もお祝い! いぇい！！	나도 축하! 예이!!	fix	fixed
+sound:short-answer	さ、午後も頑張ろ！いぇい！	자, 오후도 완장! 예이!	fix	fixed
+sound:short-answer	いぇーい！	예이!	keep	fixed

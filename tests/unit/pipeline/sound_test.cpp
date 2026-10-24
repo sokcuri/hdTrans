@@ -52,7 +52,8 @@ const dict::LoadResult& SoundDictionary() {
         "べつに\t딱히\tE300\t34\n"
         "ざんねん\t유감\tN110\t35\n"
         "へそ\t배꼽\tN110\t36\n"
-        "そう\t그렇게\tE300\t37\n",
+        "そう\t그렇게\tE300\t37\n"
+        "なんでも\t뭐든\tE300\t38\n",
     }});
     return result;
 }
@@ -353,6 +354,18 @@ HD_TEST(pipeline_sound) {
         {"「おいこら！」", "「야 이놈아！」"},
         {"ここにおいて", "ここにおいて"},
         {"ほら、見て！", "자、見て！"},
+        // A lead that asks ends in its own pause, also before kana (ね？はい), and after an
+        // ellipsis that opens the utterance; after words the ellipsis only pauses them.
+        {"ね？はい", "그렇지?はい"},
+        {"待って！…そう？", "待って！…그래？"},
+        {"したい…ね？", "したい…ね？"},
+        // いえ that opens an utterance before a word is the answer; 言え takes an ending.
+        {"いえなんでも", "아뇨, なんでも"},
+        {"いえない", "いえない"},
+        // かかれ that opens an utterance is the order to attack.
+        {"これより突入。かかれっ！", "これより突入。덤벼라！"},
+        {"準備、かかれ", "準備、かかれ"},
+        {"いぇい！", "예이！"},
         {"ちょっと高い", "ちょっと高い"},
         {"これでよし。", "これでよし。"},
         {"<b>きゃあ</b>ぎゅっと", "<b>꺄아</b>꽉"},
