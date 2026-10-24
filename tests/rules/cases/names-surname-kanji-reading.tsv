@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:surname-spelling	潮崎なの	시오자키 나노	fix	lookup
 names:surname-spelling	潮崎なの氏が来た。	시오자키 나노 씨가 왔다.	fix	lookup

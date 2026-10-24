@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.41172	アメリカ地中海	아메리카 지중해	fix	lookup
 dict:names.41172	「アメリカ地中海」	「아메리카 지중해」	fix	lookup

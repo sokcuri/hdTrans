@@ -1,4 +1,4 @@
-# 규칙: LEX-3
+# 규칙: LEX-3, LEX-29
 rule	input	expected	kind	layer
 names:target-text	清水聖義	시미즈 마사요시	keep	lookup
 names:target-text	清水聖義さん	시미즈 마사요시 씨	keep	lookup

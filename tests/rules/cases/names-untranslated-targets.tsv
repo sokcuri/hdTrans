@@ -1,4 +1,4 @@
-# 규칙: LEX-3
+# 규칙: LEX-3, LEX-29
 rule	input	expected	kind	layer
 dict:names.604067	柳生比呂士さん	야규 히로시 씨	fix	fixed
 dict:names.604067	「柳生比呂士」	「야규 히로시」	fix	fixed

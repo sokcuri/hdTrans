@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:surname-target	渡邉理佐	와타나베 리사	fix	lookup
 names:surname-target	渡邉理佐氏が来た。	와타나베 리사 씨가 왔다.	fix	lookup

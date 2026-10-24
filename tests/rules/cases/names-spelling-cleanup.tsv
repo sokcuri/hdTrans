@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 names:gloss	フォルカー・ヴィッシング	폴커 비싱	fix	lookup
 names:gloss	「フォルカー・ヴィッシング」	「폴커 비싱」	fix	lookup

@@ -1,4 +1,4 @@
-# 규칙: LEX-3
+# 규칙: LEX-3, LEX-29
 rule	input	expected	kind	layer
 dict:places:7347	埼玉高速鉄道線	사이타마 고속 철도선	fix	fixed
 dict:places:7347	埼玉高速鉄道線に乗った。	사이타마 고속 철도선을 탔다.	fix	fixed

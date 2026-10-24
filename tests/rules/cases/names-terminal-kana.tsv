@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 names:terminal-kana	奇械人オオカミン	기계인 오오카민	fix	lookup
 names:terminal-kana	「奇械人オオカミン」	「기계인 오오카민」	fix	lookup

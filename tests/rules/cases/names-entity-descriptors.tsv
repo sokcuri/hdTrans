@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:places:4441	八王子城合戦	하치오지성 전투	fix	fixed
 dict:places:4441	八王子城合戦の記録	하치오지성 전투의 기록	fix	fixed

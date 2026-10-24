@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 names:gloss	フラビオ・カッタネーオ	플라비오 카타네오	fix	lookup
 names:gloss	「フラビオ・カッタネーオ」	「플라비오 카타네오」	fix	lookup

@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2
+# 규칙: LEX-1, LEX-2, LEX-29
 rule	input	expected	kind	layer
 dict:names.242735	データカードダスプリキュアオールスターズ	데이터카드더스 프리큐어 올스타즈	fix	lookup
 dict:names.242735	データカードダスプリキュアオールスターズを見た。	데이터카드더스 프리큐어 올스타즈를 보았다.	fix	lookup

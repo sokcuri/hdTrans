@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 dict:names.172815	シンティア・ディッカー	신티아 디커	fix	fixed
 dict:names.172815	シンティア・ディッカーが来た。	신티아 디커가 왔다.	fix	fixed

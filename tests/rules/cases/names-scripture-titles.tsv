@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.571049	文殊師利仏土厳浄経	문수사리불토엄정경	fix	fixed
 dict:names.571049	「文殊師利仏土厳浄経」	「문수사리불토엄정경」	fix	fixed

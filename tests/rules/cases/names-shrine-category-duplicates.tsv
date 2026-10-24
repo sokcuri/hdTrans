@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:places:2826	二子神社	후타코 신사	fix	fixed
 dict:places:2826	二子神社に行った。	후타코 신사에 갔다.	fix	fixed

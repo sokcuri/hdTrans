@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:phonetic-target	猫背椿	네코제 츠바키	fix	lookup
 names:phonetic-target	猫背椿。	네코제 츠바키.	fix	lookup

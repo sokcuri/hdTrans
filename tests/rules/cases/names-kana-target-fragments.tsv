@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2
+# 규칙: LEX-1, LEX-2, LEX-29
 rule	input	expected	kind	layer
 dict:names.174153	シールドレッシャー	실드 렛샤	fix	fixed
 dict:names.174153	シールドレッシャーを見た。	실드 렛샤를 보았다.	fix	fixed

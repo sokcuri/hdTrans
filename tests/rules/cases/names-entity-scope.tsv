@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 dict:names.46428	アルフレッド・パッカー事件	앨프리드 패커 사건	fix	lookup
 dict:names.46428	「アルフレッド・パッカー事件」	「앨프리드 패커 사건」	fix	lookup

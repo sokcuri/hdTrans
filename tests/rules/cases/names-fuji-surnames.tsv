@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:fuji-surnames	藤あかね	후지 아카네	fix	lookup
 names:fuji-surnames	藤あかねと会った。	후지 아카네와 만났다.	fix	lookup

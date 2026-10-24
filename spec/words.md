@@ -453,3 +453,29 @@
 
 사례: `tests/rules/cases/sense-domain-terms.tsv`, `tests/rules/cases/cx-market-rebound.tsv`, `tests/rules/cases/cx-value-after-loanword.tsv`,
 `tests/rules/cases/lexical-domain-terms.tsv`, `tests/rules/cases/lexical-news-terms.tsv`
+
+## LEX-29 고유 명사는 발음을 살린다
+
+인명, 지명, 회사와 방송국 이름, 상표, 작품 제목은 일본어 발음대로 옮기고, 한국에서 부르는 다른 이름이나 뜻으로 바꾸지
+않는다(フジテレビ는 `후지테레비`, アメリカ合衆国은 `아메리카 합중국`). 한국에서 쓰는 공식 이름이 그 발음을 옮긴 것이면
+그 이름을 쓴다(デジモン `디지몬`). 일본 인명에서 장음을 모음 두 개로 적는 おお는 줄이지 않는다(大石 `오오이시`,
+大川 `오오카와`). 굳어진 지명은 늘 쓰는 꼴을 쓴다(東京 `도쿄`, 大阪 `오사카`).
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| フジテレビを見た。 | 후지테레비를 보았다. | 고침 |
+| 中京テレビ放送 | 주쿄 테레비 방송 | 고침 |
+| キッコーマンの醤油 | 깃코만의 간장 | 고침 |
+| デジモンが好きだ。 | 디지몬을 좋아한다. | 고침 |
+| 大井さんが来た。 | 오오이 씨가 왔다. | 고침 |
+| アメリカ合衆国の大統領が来た。 | 아메리카 합중국의 대통령이 왔다. | 유지 |
+| 大石さんが来た。 | 오오이시 씨가 왔다. | 유지 |
+| 東京に行く。 | 도쿄에 간다. | 유지 |
+
+현재: おう, えい 꼴의 장음(佐藤, 優一)은 정하지 않았다. 사전 행은 대부분 줄여 적고(佐藤 `사토`, 優一 `유이치`),
+가타카나로 쓴 이름은 엔진이 장음을 살려 적는다(サトウさん `사토우 씨`).
+
+사례: `tests/rules/cases/names-pronounced-form.tsv`, `tests/rules/cases/names-surname-prefix.tsv`,
+`tests/rules/cases/names-kana-targets.tsv`,
+`tests/rules/cases/names-katakana-word-and-title.tsv`, `tests/rules/cases/names-geographical-scope.tsv`,
+`tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`

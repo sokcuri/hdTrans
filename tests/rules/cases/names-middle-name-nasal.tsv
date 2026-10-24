@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 names:gloss	ブライアン・マイケル・スミス	브라이언 마이클 스미스	fix	lookup
 names:gloss	「ブライアン・マイケル・スミス」	「브라이언 마이클 스미스」	fix	lookup

@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.576765	旧広州白雲国際空港	구 광저우 바이윈 국제공항	fix	fixed
 dict:names.576765	「旧広州白雲国際空港」	「구 광저우 바이윈 국제공항」	fix	fixed

@@ -1,4 +1,4 @@
-# 규칙: LEX-3
+# 규칙: LEX-3, LEX-29
 rule	input	expected	kind	layer
 names:target-corruption	赤月焔	아카츠키 호무라	fix	lookup
 names:target-corruption	赤月焔さんが来た。	아카츠키 호무라 씨가 왔다.	fix	lookup

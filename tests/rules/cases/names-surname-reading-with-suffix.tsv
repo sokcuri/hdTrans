@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:missing-surname-syllable	満潮改二	미치시오 개2	fix	lookup
 names:missing-surname-syllable	満潮改二。	미치시오 개2.	fix	lookup

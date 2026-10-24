@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:place-entity-type	カンダブ水路	칸다부 수로	fix	fixed
 names:place-entity-type	カンダブ水路だ。	칸다부 수로다.	fix	fixed
@@ -12,12 +13,12 @@ names:place-entity-type	カンザス・シティ都市圏を調べた。	캔자�
 names:place-entity-type	カンダブ島	칸다부섬	keep	fixed
 names:place-entity-type	カンザスシティ	캔자스시티	keep	fixed
 names:place-entity-type	カンザス・シティ	캔자스시티	keep	fixed
-names:place-entity-type	カーンケール県	간케르구	fix	fixed
-names:place-entity-type	カーンケール県だ。	간케르구다.	fix	fixed
-names:place-entity-type	「カーンケール県」	「간케르구」	fix	fixed
-names:place-entity-type	カーンケール県に行く。	간케르구에 간다.	fix	fixed
-names:place-entity-type	カーンケール県の人口	간케르구의 인구	fix	fixed
-names:place-entity-type	カーンケール県を調べた。	간케르구를 조사했다.	fix	fixed
-names:place-entity-type	カーンケール県の地図	간케르구의 지도	fix	fixed
+names:place-entity-type	カーンケール県	칸케르현	fix	fixed
+names:place-entity-type	カーンケール県だ。	칸케르현이다.	fix	fixed
+names:place-entity-type	「カーンケール県」	「칸케르현」	fix	fixed
+names:place-entity-type	カーンケール県に行く。	칸케르현에 간다.	fix	fixed
+names:place-entity-type	カーンケール県の人口	칸케르현의 인구	fix	fixed
+names:place-entity-type	カーンケール県を調べた。	칸케르현을 조사했다.	fix	fixed
+names:place-entity-type	カーンケール県の地図	칸케르현의 지도	fix	fixed
 names:place-entity-type	ガイバンダ県	가이반다구	keep	fixed
 names:place-entity-type	ガジプル県	가지푸르구	keep	fixed

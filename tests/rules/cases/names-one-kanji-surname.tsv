@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:proper-surname-target	潮健児	우시오 켄지	fix	lookup
 names:proper-surname-target	潮健児氏が来た。	우시오 켄지 씨가 왔다.	fix	lookup

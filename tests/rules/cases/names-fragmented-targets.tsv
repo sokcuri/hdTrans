@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-3
+# 규칙: LEX-1, LEX-3, LEX-29
 rule	input	expected	kind	layer
 names:target-corruption	ガンダムキュリオス	건담 큐리오스	fix	fixed
 names:target-corruption	ガンダムキュリオスだ。	건담 큐리오스다.	fix	fixed

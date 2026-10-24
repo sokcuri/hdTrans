@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 dict:names.44380	アルケーガンダムドライ	아르케 건담 드라이	fix	lookup
 dict:names.44380	「アルケーガンダムドライ」	「아르케 건담 드라이」	fix	lookup

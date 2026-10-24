@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.41957	アラバト砂州	아라바트 사주	fix	lookup
 dict:names.41957	「アラバト砂州」	「아라바트 사주」	fix	lookup

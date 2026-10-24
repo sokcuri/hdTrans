@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-3
+# 규칙: LEX-1, LEX-3, LEX-29
 rule	input	expected	kind	layer
 dict:names.174644	ジェイソン・グッドウィン	제이슨 굿윈	fix	fixed
 dict:names.174644	ジェイソン・グッドウィンが来た。	제이슨 굿윈이 왔다.	fix	fixed

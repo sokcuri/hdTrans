@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:reading-corruption	瀬尾光世	세오 미츠요	fix	lookup
 names:reading-corruption	瀬田奏恵	세타 카나에	fix	lookup

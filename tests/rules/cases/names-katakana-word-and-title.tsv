@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-4
+# 규칙: LEX-1, LEX-4, LEX-29
 rule	input	expected	kind	layer
 names:gloss	フォント	폰트	keep	lookup
 names:gloss	フォントを選ぶ。	폰트를 선택한다.	keep	lookup

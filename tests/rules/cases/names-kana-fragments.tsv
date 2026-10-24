@@ -1,4 +1,4 @@
-# 규칙: LEX-1
+# 규칙: LEX-1, LEX-29
 rule	input	expected	kind	layer
 dict:names	イオク・クジャン	이오크 쿠잔	keep	lookup
 dict:names	イオク・クジャンが来た。	이오크 쿠잔이 왔다.	keep	lookup

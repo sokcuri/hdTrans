@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-3
+# 규칙: LEX-1, LEX-3, LEX-29
 rule	input	expected	kind	layer
 dict:names.409976	ロイド・ベラドンナ	로이드 벨라돈나	fix	fixed
 dict:names.409976	ロイド・ベラドンナ。	로이드 벨라돈나.	fix	fixed

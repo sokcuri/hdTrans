@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.572553	新井毫	아라이 고	fix	fixed
 dict:names.572553	 新井毫	 아라이 고	fix	fixed

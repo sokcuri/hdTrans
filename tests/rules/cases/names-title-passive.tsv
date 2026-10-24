@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.578102	明智光秀～神に愛されなかった男～	아케치 미쓰히데 ~ 신에게 사랑받지 못한 남자 ~	fix	fixed
 dict:names.578102	「明智光秀～神に愛されなかった男～」	「아케치 미쓰히데 ~ 신에게 사랑받지 못한 남자 ~」	fix	fixed

@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:facility-type	熊本マスジド	구마모토 모스크	fix	lookup
 names:facility-type	熊本マスジドの名前	구마모토 모스크의 이름	fix	lookup

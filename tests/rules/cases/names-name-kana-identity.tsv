@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.578816	星奈あい	호시나 아이	fix	fixed
 dict:names.578816	「星奈あい」	「호시나 아이」	fix	fixed

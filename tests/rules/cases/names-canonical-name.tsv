@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 names:canonical-name	片桐順一郎	카타기리 쥰이치로	fix	lookup
 names:canonical-name	片桐順一郎氏	카타기리 쥰이치로 씨	fix	lookup

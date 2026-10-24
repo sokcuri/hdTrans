@@ -1,3 +1,4 @@
+# 규칙: LEX-29
 rule	input	expected	kind	layer
 dict:names.574495	方文琳	팡원린	fix	fixed
 dict:names.574495	方文琳さん	팡원린 씨	fix	fixed
