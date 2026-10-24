@@ -106,7 +106,7 @@ cx:ne-promise:40	「頑張っているようね」	!rule:cx:ne-promise:40	keep	r
 cx:ne-promise:40	「花子ちゃん、頑張ってるね」	!rule:cx:ne-promise:40	keep	rewrites
 cx:ne-promise:40	「でも、鈴木さん、よく知ってるね」	!rule:cx:ne-promise:40	keep	rewrites
 cx:ne-promise:40	「さすがに佐藤さんはしっかりしてるね」	!rule:cx:ne-promise:40	keep	rewrites
-cx:ne-promise:20	潜水艦、出るね。	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:promise-go-out:10	潜水艦、出るね。	잠수함, 나갈게.	fix	rewrites
 cx:ne-promise:20	「新しい一日がはじまるね」	rule:cx:ne-promise:20=1네	fix	rewrites
 cx:ne-promise:20	「騒がしくなるね」	rule:cx:ne-promise:20=1네	fix	rewrites
 cx:ne-promise:20	「明日、晴れるね」	rule:cx:ne-promise:20=1네	fix	rewrites
@@ -187,3 +187,20 @@ phrase:leave-taking	「お疲れ様でした。また明日」	「수고하셨�
 cx:ne-promise:17	「にいちゃん、やるね。」	rule:cx:ne-promise:17=1네	fix	rewrites
 cx:ne-promise:17	「よし、やるね」	!rule:cx:ne-promise:17	keep	rewrites
 cx:ne-promise:40	「放課後とか頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:promise-go-out:10	「先に出るね」	「먼저 나갈게」	fix	rewrites
+cx:promise-go-out:10	「私が出るね」	「내가 나갈게」	fix	rewrites
+cx:promise-go-out:10	「また哨戒に出るね。」	「또 초계에 나갈게.」	fix	rewrites
+cx:promise-go-out:10	「じゃあ、先に出るね」	「그럼, 먼저 나갈게」	fix	rewrites
+cx:promise-go-out:10	「月が出るね」	「달이 나오네」	keep	rewrites
+cx:promise-go-out:10	「結果が出るね」	「결과가 나오네」	keep	rewrites
+cx:promise-go-out:10	「電話に出るね」	「전화를 받을게」	keep	rewrites
+cx:ne-promise:20	「涙出るね」	「눈물 나오네」	keep	rewrites
+cx:ne-promise:20	「結果出るね」	「결과 나오네」	keep	rewrites
+cx:ne-promise:20	「お化け出るね」	「도깨비 나오네」	keep	rewrites
+cx:promise-go-out:10	「今日出るね」	「오늘 나갈게」	fix	rewrites
+cx:promise-go-out:10	「俺出るね」	「나 나갈게」	fix	rewrites
+cx:ne-promise:40	「手紙を出すね」	「편지를 보낼게」	fix	rewrites
+cx:ne-promise:40	「お茶を出すね」	「차를 낼게」	fix	rewrites
+cx:ne-promise:40	「明日、手紙を出すね」	「내일, 편지를 보낼게」	fix	rewrites
+cx:ne-promise:40	「宿題を出すね」	「숙제를 낼게」	fix	rewrites
+cx:ne-promise:20	「思い出すね」	rule:cx:ne-promise:20=1네	keep	rewrites
