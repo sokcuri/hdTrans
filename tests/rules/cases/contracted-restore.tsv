@@ -78,7 +78,7 @@ sound:contracted-auxiliaries	割ってちゃわんを	나누어 공기 그릇을
 sound:contracted-auxiliaries	見てちゃんと	봐 제대로	keep	sound
 sound:contracted-auxiliaries	見てようやく	봐 드디어	keep	sound
 sound:contracted-auxiliaries	神聖かまってちゃん	신성한가 기다려	keep	sound
-sound:contracted-auxiliaries	先生、ケーキは忘れてたですわ	선생님, 케이크는 잊고 있었던이에요	current	sound
+sound:contracted-auxiliaries	先生、ケーキは忘れてたですわ	선생님, 케이크는 잊고 있었어요	current	sound
 sound:contracted-auxiliaries	待ってたあああ！！	기다리고 있었던 아 아!!	current	sound
 dict:s:9453	かまってちゃんが来た	관심병 환자가 왔다	fix	defaults
 dict:s:9453	かまってちゃんなの？	관심병 환자야?	fix	defaults

@@ -370,6 +370,18 @@ HD_TEST(compose_hada_noun_before_suru) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// 아니다 takes 라 before the quoting endings (아니라고, 아니라는, 아니라면); other adjectives keep 다.
+HD_TEST(compose_ani_quoting_form) {
+    const CompositionCase cases[] = {
+        {{{"違", "700", "", "아$A3@", "1다고"}}, {1}, "아니라고."},
+        {{{"違", "700", "", "아$A3@", "1다는"}}, {1}, "아니라는."},
+        {{{"違", "700", "", "아$A3@", "1다면"}}, {1}, "아니라면."},
+        {{{"違", "700", "", "아$A3@", "1다"}}, {1}, "아니다."},
+        {{{"違", "700", "", "기$A3@", "1다고"}}, {1}, "기니다고."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // The auxiliary 버리다 (gram Ds) joins the 아/어 form before it; the main verb stays apart.
 HD_TEST(compose_auxiliary_beorida_join) {
     const CompositionCase cases[] = {

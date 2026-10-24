@@ -1,0 +1,81 @@
+# 규칙: SPC-6
+rule	input	expected	kind	layer
+dict:gram:de-ii:1	……これでいい？	……이것으로 좋아?	keep	local
+dict:gram:de-ii:1	dogでいい？	dog면 돼?	fix	local
+dict:gram:de-ii:1	普通でいいですか？	보통이면 됩니까?	fix	local
+dict:gram:de-ii:1	私のことはアルファでいいわよ。	나는 알파면 돼.	fix	local
+dict:gram:de-ii:1	俺は……タコライスでいいかな」	나는……타코라이스면 될까」	fix	local
+dict:gram:de-ii:1	朝ごはん…パンでいいわよね？	has:빵이면 돼?	fix	local
+dict:gram:de-ii:1	第三艦隊でいい？	제3함대면 돼?	fix	local
+dict:gram:de-ii:1	Garibaldiでいいよ。	Garibaldi면 돼.	fix	local
+dict:gram:de-ii:1	外でいいんですか？	밖이면 됩니까?	fix	local
+dict:gram:de-ii:1	ダージリンでいいか？	다질링이면 되나?	fix	local
+dict:gram:de-ii:1	今日は、kaltes Essenで良いですか？	오늘은, kaltes Essen이면 됩니까?	fix	local
+dict:gram:de-ii:1	じゃあ、いつものエマ様の悪口でいいですから	그럼, 평소의 에마님의 욕이면 되니까요	fix	local
+dict:gram:de-ii:1	そんなんでいいの？	그런 것으로 좋은 거야?	keep	local
+dict:gram:de-ii:1	逃げればいいのか」	도망치면 되는 건가」	fix	local
+dict:gram:de-ii:1	じゃあほっとけばいいんじゃない？	그럼, 가만히 두면 되지 않아?	fix	local
+dict:gram:de-ii:1	豆投げればいいのよね？	콩 던지면 돼?	fix	local
+dict:gram:de-ii:1	計画を押し進めればよい。	계획을 추진하면 좋다.	keep	local
+dict:gram:de-ii:1	楽しくやれればいいじゃないか…！	즐겁게 할 수 있으면 되잖아…!	fix	local
+dict:gram:de-ii:1	ＣＩＲＳの部隊を使えばいいだろう」	CIRS의 부대를 쓰면 될 것이다」	fix	local
+dict:gram:de-ii:1	メールで済ませば良いではないか	메일로 끝내면 되잖아	fix	local
+dict:gram:de-ii:1	行ったらいいよ	가면 돼	fix	local
+dict:gram:de-ii:1	このまま何事もなければいいけれど」	이대로 아무 일도 없으면 좋지만」	keep	local
+dict:gram:de-ii:1	そんな人がいればいいんですけど」	그런 사람이 있으면 좋은데요」	keep	local
+dict:gram:de-ii:1	何をすればいい？	무엇을 하면 돼?	keep	local
+dict:gram:de-ii:1	どうすればいいのかしら」	!rule:dict:gram:de-ii:1	keep	local
+dict:gram:de-ii:1	行けばいいのに	가면 좋을 텐데	keep	local
+dict:gram:de-ii:1	晴れればいいな	has:좋겠다	keep	local
+dict:gram:de-ii:1	これはこれでいいですね	이것은 이것대로 좋네요	keep	local
+dict:gram:de-ii:1	菊月でいいなら、共に祝ってもいいが…。	lacks:면 되면	keep	local
+dict:gram:de-ii:1	スシ、好評でよかったです。	스시, 호평이라서 다행입니다.	keep	local
+dict:gram:de-ii:1	はじめから断っていればよかったのに。	has:좋았을	keep	local
+dict:gram:de-ii:1	だとしたらいい勘してるよ	has:좋은 감	keep	local
+dict:gram:de-ii:1	これでいい人	이것으로 좋은 사람	keep	local
+dict:gram:de-ii:1	それでいい。	그것으로 좋다.	keep	local
+dict:gram:de-ii:1	それでいいんです。	그것으로 좋습니다.	keep	local
+dict:gram:de-ii:1	本当にそれでいいのか？	정말 그것으로 좋은 건가?	keep	local
+dict:gram:de-ii:1	それでいいなら	그것으로 좋으면	keep	local
+dict:gram:ii-done:1	まあ、いいか。	뭐, 됐나.	fix	local
+dict:gram:ii-done:1	まあいっか！	뭐 됐나!	fix	local
+dict:gram:ii-done:1	ま、いっか。	뭐, 됐나.	fix	local
+dict:gram:ii-done:1	ならいいか。	그렇다면 좋은가.	keep	local
+dict:gram:ii-done:1	まぁいいや。	뭐 됐어.	fix	local
+dict:gram:ii-done:1	まあいい。	뭐 됐다.	fix	local
+dict:gram:ii-done:1	準備はいい？	준비는 됐어?	fix	local
+dict:gram:ii-done:1	準備はいいか？	준비는 됐나?	fix	local
+dict:gram:ii-done:1	用意はいい？	준비는 됐어?	fix	local
+dict:gram:ii-done:1	覚悟はいい？	각오는 됐어?	fix	local
+dict:gram:ii-done:1	天気はいいか？	날씨는 좋은가?	keep	local
+dict:gram:ii-done:1	まあいい人だ	뭐 좋은 사람이다	keep	local
+dict:gram:iika-listen:1	いいか？暁の水平線に勝利を刻むんだ！	알겠어? 새벽의 수평선에 승리를 새기는 거야!	fix	local
+dict:gram:iika-listen:1	いいか、お前たち4人は何があっても絶対にはぐれるなよ	has:알겠어,	fix	local
+dict:gram:iika-listen:1	そんじゃ、行くぞ。いいか？	has:알겠어?	fix	local
+dict:gram:iika-listen:1	佐藤、いいか？遅れるなよー！	사토, 좋은가? 늦지 마~!	keep	local
+dict:gram:iika-listen:1	いいか悪いかは別だ	has:좋은가 나쁜가	keep	local
+phrase:resigned-iiya	まあ、いいや。	뭐, 됐어.	fix	builtin-phrase
+phrase:resigned-iiya	ま、いいや。その	뭐, 됐어. 그	fix	builtin-phrase
+phrase:resigned-iiya	いいや、何度でも	아니, 몇 번이라도	keep	builtin-phrase
+dict:gram:de-ii:1	「甘いものは、頭を使ったあとに食べるといいんだぞ」	has:먹으면 좋은 거야	keep	local
+dict:gram:de-ii:1	……どうですか？ お口に合えばいいのですが。	has:맞으면 좋	keep	local
+dict:gram:de-ii:1	……なれたらいいよね。	has:좋지	keep	local
+dict:gram:de-ii:1	少しでも家計の足しになればいいのよ。	has:되면 돼	fix	local
+dict:gram:de-ii:1	この豆を先生に投げればいいのか？	has:던지면 되는 건가?	fix	local
+dict:gram:ii-done:1	「じゃあ、いいか？　花子」	lacks:됐나	keep	local
+dict:gram:ii-done:1	まあ、合法ならいいか。	lacks:됐나	keep	local
+dict:gram:ii-done:1	もう、なんと言っていいか、わからなくなった。	lacks:됐나	keep	local
+dict:gram:iika-listen:1	うん…いいか、もう一杯戴く。	lacks:알겠어	keep	local
+dict:gram:de-ii:1	「あぁら田中くん、両手に花でいいわねぇ！」	has:여자로 좋네	keep	local
+dict:gram:de-ii:1	なんか、楽しそうな家でいいなぁ。	lacks:되겠다	keep	local
+dict:gram:de-ii:1	アタシも酒保でいいもん銀蝿してきた	lacks:되는	keep	local
+dict:gram:de-ii:1	……こんなもんでいいかな	lacks:이면	keep	local
+dict:gram:de-ii:1	ＯＫ〜。親は部長である私でいいよね。	lacks:나면	keep	local
+dict:gram:de-ii:1	それがいつか恋に、愛に変われば良い。	has:바뀌면 좋다	keep	local
+dict:gram:de-ii:1	決定でいいですか？	결정이면 됩니까?	current	local
+dict:gram:de-ii:1	その通信方法はどうなんでしょう。平文で良いかと思います。	그 통신 방법은 어떨까요. 평문이면 될 것 같습니다.	current	local
+dict:gram:de-ii:1	OK、少し寝たらいいんじゃない？ いいわよ、別に。	OK, 조금 자면 되지 않아? 좋아, 별로.	current	local
+dict:gram:de-ii:1	「私なんかがリーダーでいいのか不安になったとき……」	「나등이 리더면 되는 건지 불안하게 됐을 때……」	current	local
+dict:gram:de-ii:1	「私も佐藤の作戦でいいと思う。」	「나도 사토의 작전이면 된다고 생각한다.」	current	local
+dict:gram:de-ii:1	「隊員は、３人と、私でいいのかな？」	「대원은, 3명으로 나면 되는 건지?」	current	local
+dict:gram:de-ii:1	「じゃあ……真正面から振る展開でいいの？」	「그럼……바로 정면에서 흔드는 전개면 되는 거야?」	current	local

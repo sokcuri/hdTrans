@@ -1,0 +1,32 @@
+# 규칙: GRM-18
+rule	input	expected	kind	layer
+cx:adnominal-clause:10	帰っちゃったみたいだなぁ……	돌아가버린 것 같구나……	fix	rewrites
+cx:adnominal-clause:10	させちゃったみたいで……	시켜버린 것 같아……	fix	rewrites
+cx:adnominal-clause:10	家に置いてきちゃったみたいでさ	집에 두고 와버린 것 같아	fix	rewrites
+cx:adnominal-clause:10	逆に霊感があったりすると、次元を越えちゃうみたいだけどね	has:넘어버리는 것 같지만	fix	rewrites
+cx:adnominal-clause:10	ガスが薄まっちゃったみたい！	가스가 엷어져버린 것 같다!	fix	rewrites
+cx:adnominal-clause:10	告白は死んじゃうっぽい	!rule:cx:adnominal-clause:10	keep	rewrites
+cx:adnominal-clause:10	お金がないみたい	!rule:cx:adnominal-clause:10	keep	rewrites
+cx:adnominal-clause:20	もう遅かったみたいね	이미 늦었던 것 같네	fix	rewrites
+cx:adnominal-clause:20	書き込みは厳しかったみたいです	글은 어려웠던 것 같습니다	fix	rewrites
+cx:adnominal-clause:20	ちょっと生まれるのが遅かったみたい	조금 태어나는 것이 늦었던 것 같다	fix	rewrites
+cx:adnominal-clause:20	力出せないみたいだね	!rule:cx:adnominal-clause:20	keep	rewrites
+cx:adnominal-clause:20	お金がないみたい	돈이 없는 것 같다	keep	rewrites
+cx:adnominal-clause:30	宿題を死んじゃうのだ	숙제를 죽어버리는 것이다	fix	rewrites
+cx:adnominal-clause:30	交換しちゃったものを今更消せ	교환해버린 것을 이제 와서 지워라	fix	rewrites
+cx:adnominal-clause:30	佐藤くんを横取りしちゃったこと	has:횡령해버린 일	fix	rewrites
+cx:adnominal-clause:30	我慢しなきゃいけないこともある	참아야 하는 것도 있다	fix	rewrites
+cx:adnominal-clause:30	殺されちゃうんじゃない？	살해당해버리는 것이 아니야?	fix	rewrites
+cx:adnominal-clause:30	安心してると、こうなっちゃうのよね。	안심하고 있으면, 이렇게 되어버리는 것이지.	fix	rewrites
+cx:adnominal-clause:30	見ちゃうのよね	봐버리는 것이지	fix	rewrites
+cx:adnominal-clause:30	これに優勝したら権利が得られるんだもの、	이것에 우승하면 권리를 얻을 수 있는 것,	fix	rewrites
+cx:adnominal-clause:30	人目を気にしないでしちゃうのに	!rule:cx:adnominal-clause:30	keep	rewrites
+cx:adnominal-clause:30	知ってるもん	!rule:cx:adnominal-clause:30	keep	rewrites
+cx:adnominal-clause:40	屋上に嫌いなのでしょ☆	옥상에 싫은 것이지☆	fix	rewrites
+cx:adnominal-clause:40	本に囲まれているだけで、幸せだもの。	책에 둘러싸여 있는 것만으로, 행복한 것.	fix	rewrites
+cx:adnominal-clause:40	灯りが必要だものね	등불이 필요한 것이네	fix	rewrites
+cx:adnominal-clause:40	幸せだね	!rule:cx:adnominal-clause:40	keep	rewrites
+cx:adnominal-clause:40	静かなのよ	!rule:cx:adnominal-clause:40	keep	rewrites
+cx:adnominal-clause:50	相手はニンジャだったみたいだが	상대는 닌자였던 것 같지만	fix	rewrites
+cx:adnominal-clause:50	思っていたより難問だったみたいね	생각했던 것보다 난문이었던 것 같네	fix	rewrites
+cx:adnominal-clause:50	彼はニンジャだった	!rule:cx:adnominal-clause:50	keep	rewrites
