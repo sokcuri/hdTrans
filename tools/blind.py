@@ -56,15 +56,20 @@ def make(pairs, key_path, blind_path):
         fail(f"{pairs}: rows need four columns: key, ja, before, after")
     if len({r[0] for r in rows}) != len(rows):
         fail(f"{pairs}: a key appears twice")
-    if Path(key_path).exists():
-        fail(f"{key_path} exists; answers belong to the key they were made with")
     blind, key = [], []
     for i, (k, ja, before, after) in enumerate(rows, 1):
         flip = secrets.randbelow(2)
         blind.append((i, ja, *((after, before) if flip else (before, after))))
         key.append((i, k, flip))
-    write(key_path, key)
     write(blind_path, blind)
+    try:
+        with open(key_path, "x", encoding="utf-8", newline="") as f:
+            csv.writer(f, delimiter="\t", lineterminator="\n").writerows(key)
+    except FileExistsError:
+        Path(blind_path).unlink()
+        fail(f"{key_path} exists; answers belong to the key they were made with")
+    except OSError as error:
+        fail(str(error))
     print(f"{len(rows)} lines in {blind_path}", file=sys.stderr)
 
 

@@ -302,7 +302,8 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
    cp "$J1/blind.tsv" "$J2/"
    # 판정자 1은 $J1/blind.tsv를 읽고 $J1/answers.tsv에, 판정자 2는 $J2에서 같은 일을 함
    python3 tools/blind.py disagree "$J1/blind.tsv" "$J1/answers.tsv" "$J2/answers.tsv" "$J3/blind.tsv"
-   # 판정자 3은 $J3/blind.tsv를 읽고 $J3/answers.tsv를 씀
+   # $J3/blind.tsv가 비어 있지 않으면 판정자 3이 읽고 $J3/answers.tsv를 씀
+   [ -s "$J3/blind.tsv" ] || : > "$J3/answers.tsv"
    cp "$J1/answers.tsv" "$RUN/dev.answers-1.tsv"; cp "$J2/answers.tsv" "$RUN/dev.answers-2.tsv"
    cp "$J3/answers.tsv" "$RUN/dev.answers-3.tsv"
    python3 tools/blind.py final "$RUN/dev.key.tsv" "$RUN"/dev.answers-[123].tsv > "$RUN/dev.final.tsv"
@@ -409,13 +410,14 @@ echo "$H" >> "$C/checks.txt"
   씁니다. 판정한 뒤 이전이나 이후가 바뀐 줄은 다시 새 줄이 됩니다.
 - `$DEV`는 그 커밋을 고정한 worktree이고 `$TAG`는 태그의 worktree입니다. `$C/$H/new.tsv`를 위의 변경 판정 3~5로
   판정해 최종 판정을 `$C/$H/final.tsv`에 둡니다.
-- 마지막 릴리스 뒤 누적 개수는 확인한 순서대로 이어 붙인 판정을 마지막 확인의 쌍에 맞춰 셉니다(한 키는 나중 판정이 씀):
+- 마지막 릴리스 뒤 누적 개수는 마지막 확인의 쌍마다, 키, 이전, 이후 출력이 같은 줄을 판정한 마지막 확인의 판정으로
+  셉니다. 한 주기 안에서 바뀌었다가 되돌아간 줄도 지금 출력에 맞는 판정을 씁니다:
 
   ```sh
   L=$(tail -n 1 "$C/checks.txt")
-  for H in $(cat "$C/checks.txt"); do cat "$C/$H/final.tsv"; done > "$C/total.tsv"
-  cat "$C/$L"/corpus.pairs.tsv "$C/$L"/sample.pairs.tsv "$C/$L"/docs.pairs.tsv "$C/$L"/examples.pairs.tsv \
-    > "$C/total.pairs.tsv" 2> /dev/null
+  cat "$C/$L"/*.pairs.tsv > "$C/total.pairs.tsv"
+  python3 tools/new-pairs.py --verdicts "$C/total.tsv" "$C/total.pairs.tsv" \
+    $(for H in $(cat "$C/checks.txt"); do echo "$C/$H/new.tsv" "$C/$H/final.tsv"; done)
   python3 tools/verdicts.py "$C/total.pairs.tsv" "$C/total.tsv"
   ```
 

@@ -66,15 +66,16 @@ gh pr checks N --watch --fail-fast && gh pr checks N
 gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain summary>'
 ```
 
+- The body states what changed, the cause classes, the tests and the judgment numbers (changed,
+  improved, same, worse). Name no data sets or sources.
+- Use `Fixes #N` for the issues the PR resolves.
+- The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
+
 After merging a PR that changes translations, run the cycle check: measure the merge commit of
 develop against the run of the last release tag on all four sets, with the runs in
 `$HDTRANS_WORK/cycle/<next version>/`, keep only the lines no earlier check of the cycle judged
 (`tools/new-pairs.py`), and judge them blind into that check's `final.tsv`. The release review
 then judges only what changed since the last check.
-- The body states what changed, the cause classes, the tests and the judgment numbers (changed,
-  improved, same, worse). Name no data sets or sources.
-- Use `Fixes #N` for the issues the PR resolves.
-- The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
 
 ## 3. develop → main
 

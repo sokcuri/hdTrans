@@ -144,7 +144,8 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
          transliterations are fine). Tell them not to read the key, the pairs, the run folder, the
          repository or the other judge's folder, and not to run the engine.
       3. `tools/blind.py disagree J1/blind.tsv J1/answers.tsv J2/answers.tsv J3/blind.tsv`, then a
-         third such sub-agent reads only `J3/blind.tsv` and writes `J3/answers.tsv`.
+         third such sub-agent reads only `J3/blind.tsv` and writes `J3/answers.tsv`. When that file
+         is empty, the two agreed everywhere; leave the third answers empty.
       4. `tools/blind.py final KEY.tsv J1/answers.tsv J2/answers.tsv J3/answers.tsv > FINAL.tsv`;
          a `worse` there is a line two judges called worse. Keep the answers with the run.
     - For large sets, split the pairs (`split -l 500 PAIRS.tsv part.`) across parallel judges and

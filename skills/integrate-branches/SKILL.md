@@ -70,8 +70,9 @@ Conflict policy:
    - Judge, blind, every line that no single branch changed, which means only the combination
      produced it, and every line where two branches disagree (fix-translation step 12).
      `tools/new-pairs.py OUT.tsv INTEGRATION.pairs.tsv <branch pairs>...` keeps the first kind: it
-     drops a line a branch already judged with the same before and after. Add the second kind, keys
-     that two branch pair files hold with different after, even when the integration matches one.
+     drops a line a branch already judged with the same before and after. Add the second kind with
+     `tools/new-pairs.py --differ OUT.tsv INTEGRATION.pairs.tsv <branch pairs>...`: keys that two
+     branch pair files hold with different after, even when the integration matches one.
    - The same thresholds apply: improved:worse at least 2:1, and chrF not lower than the base.
 5. `tools/hygiene.py <base>` covers markers, stray paths, absolute paths and instruction wording
    over the whole diff and its messages.

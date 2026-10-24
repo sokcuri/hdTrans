@@ -44,24 +44,51 @@ HDTRANS_TESTDATA=$tmp/sample "$here/tools/measure.sh" -c "$cli" -d "$dicts" thir
 [ "$status" -eq 2 ]
 grep -F 'corpus: 2 lines' "$tmp/third.log" > /dev/null
 # A TERM to the whole process group stops every set and leaves no translation running.
-printf '#!/bin/sh\nexec sleep 30\n' > "$tmp/slow"
+printf '#!/bin/sh\necho $$ >> "%s/pids"\nexec sleep 30\n' "$tmp" > "$tmp/slow"
 chmod +x "$tmp/slow"
-python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" <<'PY'
+python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" "$tmp/pids" <<'PY'
 import os, signal, subprocess, sys, time
-measure, slow, dicts = sys.argv[1:]
+measure, slow, dicts, pids = sys.argv[1:]
 p = subprocess.Popen(["sh", measure, "-c", slow, "-d", dicts, "slow"], start_new_session=True,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-time.sleep(2)
+
+
+def started():
+    try:
+        return [int(x) for x in open(pids).read().split()]
+    except FileNotFoundError:
+        return []
+
+
+def alive(pid):
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+
+
+# corpus, sample, two documents and at least one example
+deadline = time.time() + 30
+while len(started()) < 5 and time.time() < deadline:
+    time.sleep(0.1)
 os.killpg(p.pid, signal.SIGTERM)
 try:
     status = p.wait(timeout=20)
 except subprocess.TimeoutExpired:
+    status = None
+deadline = time.time() + 5
+while any(alive(x) for x in started()) and time.time() < deadline:
+    time.sleep(0.1)
+left = [x for x in started() if alive(x)]
+for x in left:
+    os.kill(x, signal.SIGKILL)
+if status is None:
     os.killpg(p.pid, signal.SIGKILL)
     sys.exit("measure.sh did not stop")
-time.sleep(1)
-left = subprocess.run(["pgrep", "-g", str(p.pid)], capture_output=True, text=True).stdout.split()
+if len(started()) < 5:
+    sys.exit(f"only {len(started())} translations started")
 if left:
-    os.killpg(p.pid, signal.SIGKILL)
     sys.exit(f"left running: {left}")
 assert status != 0, status
 PY
