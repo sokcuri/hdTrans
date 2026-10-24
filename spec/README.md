@@ -14,3 +14,4 @@
 | [speech.md](speech.md) | 말투 (`SPC`) |
 | [sounds.md](sounds.md) | 소리 (`SND`) |
 | [grammar.md](grammar.md) | 문법 (`GRM`) |
+| [meaning.md](meaning.md) | 뜻 (`MNG`): 뜻이 뒤집히는 오역, 실패가 없어야 하는 사례 |

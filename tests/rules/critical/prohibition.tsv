@@ -1,0 +1,22 @@
+# 규칙: MNG-3, GRM-8
+rule	input	expected	kind	layer
+dict:jisjk:344556	行くな	has:가지 마	keep	local-ending
+dict:jisjk:344556	言うな	has:말하지 마	keep	local-ending
+dict:jisjk:344556	忘れるな	has:잊지 마	keep	local-ending
+dict:jisjk:344556	泣くな！	has:울지 마	keep	local-ending
+dict:jisjk:344556	来るな！	has:오지 마	keep	local-ending
+dict:jisjk:344556	動くな！	has:움직이지 마	keep	local-ending
+dict:jisjk:344556	「あまり見るな、恥ずかしい」	has:보지 마	keep	local-ending
+dict:jisjk:344556	そんなこと言うな！	has:하지 마	keep	local-ending
+dict:jisjk:344556	いいな	lacks:지 마	keep	local-ending
+dict:jisjk:344556	行くかな	lacks:지 마	keep	local-ending
+dict:jisjk:344556	そうだな	lacks:지 마	keep	local-ending
+dict:jisjk:344556	いいなあ	lacks:지 마	keep	local-ending
+dict:jisjk:344556	嬉しいな	lacks:지 마	keep	local-ending
+dict:jisjk:344556	雨が降るかな	lacks:지 마	keep	local-ending
+ending:te-mo-ii	行かなくてもいい	has:않아도 된다	keep	fixed
+ending:te-mo-ii	泣いてもいいんだよ	has:울어도	keep	ending-defaults
+ending:te-wa-ikenai	見てはいけない	has:봐선 안	keep	local-ending
+ending:te-wa-ikenai	入ってはだめだ	has:들어가서는 안	keep	local-ending
+ending:naide	行かないで	has:가지 마	keep	local-ending
+ending:naide	触らないでください	has:만지지 말아	keep	local-ending

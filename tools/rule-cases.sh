@@ -10,7 +10,8 @@
 #   rule:L<n>=<target>           the same with the local rule number;
 #   rule:cx:<family>:<prio>=<target>  some word or ending of the line takes that target from the
 #                                construction row (src/core/dict/builtin/constructions.tsv);
-#   !rule:dict:<row id>, !rule:cx:<family>:<prio>  that rule or row chooses nothing in the line.
+#   !rule:dict:<row id>, !rule:cx:<family>:<prio>  that rule or row chooses nothing in the line;
+#   has:<text>, lacks:<text>     the whole output holds <text>, or does not.
 # `rule` names what the row tests: dict:<row id> or L<n> for a local rule, G<prio> for a global
 # rule, cx:<family>:<prio> for a construction row, else <stage>:<name> (sound:, constraint:,
 # rewrite:, compose:, normalize:, sense:, ...).
@@ -19,18 +20,20 @@
 # defaults, senses, rewrites, compose, normalize, sound, restore, ...); failures are grouped by it.
 # Failing rows are reported grouped by layer, each with its rule, input, expected and actual
 # value, so that a change in one layer that breaks another layer's rows shows as such.
-# --accept rewrites the expected value of every full-output row whose kind is current. The words
+# --accept rewrites the expected value of every full-output row whose kind is current. --no-current
+# fails every row whose kind is current (tests/rules/critical/ takes fix and keep only). The words
 # after -- are passed to the CLI (--speech strict).
 # Exit: 0 all rows pass, 1 a row fails, 2 invalid arguments or failed CLI.
 set -eu
 LC_ALL=C; export LC_ALL
-[ $# -ge 2 ] || { echo "usage: tools/rule-cases.sh CLI DICTS [CASES] [--accept]" >&2; exit 2; }
+[ $# -ge 2 ] || { echo "usage: tools/rule-cases.sh CLI DICTS [CASES] [--accept] [--no-current]" >&2; exit 2; }
 cli=$1 dicts=$2; shift 2
 here=$(cd "$(dirname "$0")/.." && pwd)
-cases=$here/tests/rules/cases accept=
+cases=$here/tests/rules/cases accept= nocurrent=
 while [ $# -gt 0 ]; do
     case $1 in
         --accept) accept=1 ;;
+        --no-current) nocurrent=1 ;;
         --) shift; break ;;
         *) cases=$1 ;;
     esac
@@ -64,7 +67,7 @@ tail -n +2 "$cases" | cut -f 2 > "$tmp/in.txt"
     { echo "CLI failed" >&2; exit 2; }
 # The dictionary row id names the rule a row carries; a case may use either.
 awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"
-awk -F '\t' -v OFS='\t' -v accept="$accept" -v fixed="$tmp/fixed.tsv" \
+awk -F '\t' -v OFS='\t' -v accept="$accept" -v nocurrent="$nocurrent" -v fixed="$tmp/fixed.tsv" \
     -f "$here/tools/rule-cases.awk" \
  "$tmp/why.txt" "$tmp/out.txt" "$tmp/rule-by-id.tsv" "$cases" || status=$?
 [ -z "$accept" ] || cat "$tmp/notes.tsv" "$tmp/fixed.tsv" > "$src"

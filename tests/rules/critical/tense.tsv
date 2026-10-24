@@ -1,0 +1,7 @@
+# 규칙: MNG-2
+rule	input	expected	kind	layer
+aspect:te-kuru	母が帰ってきた	has:돌아왔다	keep	ending-defaults
+aspect:te-kuru	弁当を買ってきた	has:사 왔다	keep	ending-defaults
+aspect:te-kuru	雨が降ってきた	has:왔다	keep	ending-defaults
+aspect:te-kuru	ずっと頑張ってきた	has:노력해 왔다	keep	ending-defaults
+ending:past	もう行った	has:갔다	keep	ending-defaults

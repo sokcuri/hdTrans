@@ -578,7 +578,7 @@ jobs:
         run: |
           unset HDTRANS_REQUIRE_ALL HDTRANS_GOLDEN HDTRANS_TEST_EXCLUDE
           export HDTRANS_DICTS="$RUNNER_TEMP/dicts.hdsnap"
-          ctest --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)" -R '^(unit|rules\.cases.*|examples)$' \
+          ctest --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)" -R '^(unit|rules\.critical|rules\.cases.*|examples)$' \
             2>&1 | tee build/linux-asan/ctest.log
       - name: Report sanitizer compiler cache
         if: always()

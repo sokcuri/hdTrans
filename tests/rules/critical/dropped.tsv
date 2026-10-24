@@ -1,0 +1,5 @@
+# 규칙: MNG-5
+rule	input	expected	kind	layer
+conjugation:voice-later-form	褒められちゃった♪	has:칭찬받아	keep	conjugation
+conjugation:voice-later-form	「気を遣わせちゃってごめんね」	has:신경을 쓰게 해서	keep	conjugation
+conjugation:voice-later-form	たった一言で黙らせちゃった	has:입을 다물게 해	keep	conjugation

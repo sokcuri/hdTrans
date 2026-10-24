@@ -33,7 +33,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SEED_STEP = 25
-CASE_DIRS = ["tests/rules/cases", "tests/rules/speech-soft", "tests/rules/speech-strict"]
+CASE_DIRS = ["tests/rules/critical", "tests/rules/cases", "tests/rules/speech-soft", "tests/rules/speech-strict"]
 MAX_LEN = 4096
 FAILURES = ("crash", "timeout", "oom", "leak")  # libFuzzer artifact prefixes
 REPLAY_TIMEOUT = 60

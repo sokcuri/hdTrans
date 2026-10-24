@@ -7,7 +7,7 @@ never fire on a corpus.
   tools/construction-cases.py --self-test
 
 The rows are the ids (cx:FAMILY:PRIO) of src/core/dict/builtin/constructions.tsv. A case names its
-row in the `rule` column of tests/rules/cases/, tests/rules/speech-soft/ or
+row in the `rule` column of tests/rules/critical/, tests/rules/cases/, tests/rules/speech-soft/ or
 tests/rules/speech-strict/; --check fails for a row without a `fix` and a `keep` case and for a case
 that names a row the table lacks (in `rule` or in a rule:cx: or !rule:cx: expectation).
 --fires translates each INPUT (default $HDTRANS_CORPUS and $HDTRANS_REF_SAMPLE/ja.txt) one line at a
@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TABLE = "src/core/dict/builtin/constructions.tsv"
-CASES = ["tests/rules/cases", "tests/rules/speech-soft", "tests/rules/speech-strict"]
+CASES = ["tests/rules/critical", "tests/rules/cases", "tests/rules/speech-soft", "tests/rules/speech-strict"]
 EXPECTED = re.compile(r"^!?rule:(cx:[a-z0-9-]+:[0-9]+)(=|$)")
 
 

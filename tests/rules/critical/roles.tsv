@@ -1,0 +1,7 @@
+# 규칙: MNG-4, GRM-9
+rule	input	expected	kind	layer
+voice:passive-agent	母に叱られた。	has:어머니에게 야단맞았다	keep	rewrites
+voice:passive-agent	犬に噛まれた。	has:개에게 물렸다	keep	rewrites
+cx:voice-agent:10	それを姉に見透かされた。	has:언니가 간파했다	keep	rewrites
+cx:benefactive-provider:10	先生に説明していただいた。	has:선생님이 설명해 주셨다	keep	rewrites
+voice:causative	母が子供に野菜を食べさせた。	has:아이에게 야채를 먹였다	keep	rewrites

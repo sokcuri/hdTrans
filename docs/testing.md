@@ -12,6 +12,7 @@
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
+| `rules.critical` | 뜻이 뒤집히는 오역의 사례 `tests/rules/critical/<갈래>.tsv`. 한 행도 실패하지 않아야 하고 `current` 행을 받지 않음 ([번역 규칙 MNG](../spec/meaning.md)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
@@ -54,7 +55,7 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
   그 밖의 단계는 `<단계>:<이름>`(`sense:お盆`, `cx:noun-to:10`)
 - `input`: 직접 쓴 짧은 일본어 문장
 - `expected`: 번역 전체, 또는 `rule:dict:<id>=<번역>`(그 줄의 어떤 단어를 그 행의 지역 규칙이 그 번역으로 골랐음, `-why` 기준),
-  `!rule:dict:<id>`(그 규칙이 아무것도 고르지 않음)
+  `!rule:dict:<id>`(그 규칙이 아무것도 고르지 않음), `has:<말>`, `lacks:<말>`(출력에 그 말이 있음, 없음)
 - `kind`: `fix`(고친 규칙이 이제 맞게 고르는 문장), `keep`(고치기 전 선택이 맞아서 그대로 남아야 하는 문장),
   `current`(지금 동작을 그대로 적어 둔 문장)
 - `layer`: 그 규칙이 도는 실행 층([pipeline-layers.md](pipeline-layers.md)의 `local`, `local-ending`, `global-stem`,
