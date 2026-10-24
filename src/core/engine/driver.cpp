@@ -56,6 +56,36 @@ const word::Item* InflectedBase(const word::Analysis& analysis, std::size_t base
     return static_cast<std::size_t>(first->length) > base ? first : nullptr;
 }
 
+// Whether a candidate of the verb stem group conjugates as する, ずる, くる or 来る (kind 9,
+// 10, 11 or 13 of its part code "429") with a Korean of two words or more and no local rule: a
+// noun and its particle before a light verb, which the word stage reads around the ruby tags
+// (word::RubyIdiomVerb: 声が 목소리가 들&AA@). A stem whose Korean rules choose by context
+// (気が) stays whole.
+bool SplitIdiomStem(const word::Group& group) {
+    return std::any_of(group.entries.begin(), group.entries.end(), [](const word::Entry* e) {
+        if (e == nullptr || e->code.size() < 3 || e->dst.find(' ') == std::string::npos || e->ruleId > 0) return false;
+        const char kind = e->code[2];
+        return kind == '9' || kind == ':' || kind == ';' || kind == '=';
+    });
+}
+
+// Whether the word analysis of kana alone starts with a verb, or with a particle and a verb: the
+// light verb that word::RubyIdiomVerb reads after a ruby base (がした, にした; not がしない,
+// whose しな is no verb there).
+bool StartsLightVerb(const dict::Snapshot& snap, std::string_view kana) {
+    tokenizer::Tokens tokens;
+    tokenizer::Tokenize(kana, tokens);
+    word::Settings settings;
+    settings.text = true;
+    word::Arena arena;
+    word::Analysis analysis;
+    word::Analyze(tokens, snap, dict::LookupContext{}, settings, arena, analysis);
+    if (analysis.sentences.empty()) return false;
+    const word::Item* it = analysis.sentences.front().chain.head;
+    if (it != nullptr && it->Code(0).starts_with("2")) it = it->next;
+    return it != nullptr && it->detail->cls == word::kDetailVerb;
+}
+
 // The bytes of base + kana that the inflected base word takes when the next word inside the
 // kana is a dictionary noun that is not also an ending (掬った|まぐろ, not 躓いてるって|こと)
 // or an auxiliary verb (Ds, Du, Da: 庇って|くれた, 囚われて|いる); 0 otherwise. Endings read
@@ -98,8 +128,10 @@ pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::
     word::Analyze(tokens, snap, dict::LookupContext{}, settings, arena, analysis);
     if (const word::Item* first = InflectedBase(analysis, base.size())) {
         // A stem key that goes on into the kana past their first character is an idiom
-        // (人気があ), not the base's inflection.
-        r.inflected = static_cast<std::size_t>(first->group->length) <= okurigana;
+        // (人気があ), not the base's inflection, and so is a key that takes the first kana
+        // as the particle of a noun before する or 来る (声がした, 手にした).
+        const std::size_t key = static_cast<std::size_t>(first->group->length);
+        r.inflected = key <= okurigana && !(key > base.size() && SplitIdiomStem(*first->group) && StartsLightVerb(snap, kana));
         // The end cuts the kana, so it must fall inside them on a character boundary.
         const std::size_t end = BaseWordEnd(snap, text, *first);
         if (end > base.size() && end < text.size() && (static_cast<unsigned char>(text[end]) & 0xC0) != 0x80) {

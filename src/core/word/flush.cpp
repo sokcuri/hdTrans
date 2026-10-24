@@ -30,6 +30,7 @@ struct Pass {
 // The text-path passes between the negatives and the terminal forms, in order.
 constexpr Pass kTextPasses[] = {
     {"Select", Select},
+    {"RubyIdiomVerb", RubyIdiomVerb},
     {"RespectfulPassive", RespectfulPassive},
     {"OwnPassives", OwnPassives},
     {"DegreeAfterNumber", DegreeAfterNumber},

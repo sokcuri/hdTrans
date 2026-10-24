@@ -164,5 +164,6 @@ bool IsAny(const Item* it, const Words& words) {
 void ChooseSenses(Flusher& f);
 void ChooseInitialConjunctions(Flusher& f);
 void HanBeforeNa(Flusher& f);
+void RubyIdiomVerb(Flusher& f);
 
 }  // namespace hdTrans::word

@@ -1580,6 +1580,15 @@ std::string SoundText::Write() {
             while (i < rs.size() && offsets_[i] < end) i++;
             continue;
         }
+        // A particle right after the reading of brace ruby goes with its base (声がした, not the
+        // sound がし), so it starts no sound.
+        if (In(rs[i], kParticles) && text_.substr(0, offsets_[i]).ends_with("{/rt}")) {
+            afterParticle = true;
+            afterWord = false;
+            b += Bytes(i, i + 1);
+            i++;
+            continue;
+        }
         size_t next = i + 1;
         bool particle = false;
         bool word = false;

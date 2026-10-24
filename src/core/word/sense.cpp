@@ -6,6 +6,7 @@
 
 #include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
+#include "core/output/particle.h"
 #include "core/text/utf8.h"
 #include "core/word/flush.h"
 #include "core/word/kana.h"
@@ -306,6 +307,86 @@ void HanBeforeNa(Flusher& f) {
         const std::string_view entry = n->EntryText(n->selected);
         const std::string target = std::string(kKoHan) + std::string(entry.substr(kKoIn.size()));
         TakeTarget(n, At(n->Code(n->selected), 0), target);
+    }
+}
+
+namespace {
+
+// The candidate of the noun item whose Korean starts head and is shorter, the selected one first;
+// -1 for none.
+int NounStarting(const Item* it, std::string_view head) {
+    const auto starts = [&](int slot) {
+        const Entry* e = it->group->At(slot);
+        return e != nullptr && At(e->code, 0) == '1' && !e->dst.empty() && head.size() > e->dst.size() &&
+               head.starts_with(e->dst);
+    };
+    if (starts(it->selected)) return it->selected;
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        if (starts(slot)) return slot;
+    }
+    return -1;
+}
+
+// The alternating pattern of a particle form ((이)가 of 이 and 가); other text as it is.
+std::string_view JosaPattern(std::string_view form) {
+    for (const output::JosaForms& row : output::JosaTable()) {
+        if (form == row.consonant || form == row.vowel) return row.pattern;
+    }
+    return form;
+}
+
+}  // namespace
+
+// A one-character ruby base noun and the light verb after its reading read the idiom that the
+// base and the particle start, since the ruby tags keep the idiom from being looked up whole: a
+// verb stem of the base and the particle (声が, 手に) that conjugates in the row of the verb after
+// them (する, 来る), with the Korean of the base, its particle, a space and the verb and no local rule (声が 목소리가
+// 들&AA@: {rb}声{/rb}{rt}こえ{/rt}がした 목소리, 가, 들렸다). The particle is its own word before
+// the verb (が した) or the start of a verb stem (にする of 手にした).
+void RubyIdiomVerb(Flusher& f) {
+    Worker& w = f.w;
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        if (w.RubyPart(it->tokenIndex) != 1 || it->selected < 0 || At(it->Code(it->selected), 0) != '1' ||
+            text::RuneCount(it->group->surface) != 1) {
+            continue;
+        }
+        if ((it->prev != nullptr && w.RubyPart(it->prev->tokenIndex) == 1) ||
+            (it->next != nullptr && w.RubyPart(it->next->tokenIndex) == 1)) {
+            continue;
+        }
+        Item* particle = it->After();
+        if (particle == nullptr || particle->selected < 0 || particle->Fixed() || w.RubyPart(particle->tokenIndex) != 0) continue;
+        Item* verb = particle;
+        if (At(particle->Code(particle->selected), 0) == '2') {
+            verb = particle->next;
+        } else {
+            particle = nullptr;
+        }
+        if (verb == nullptr || verb->selected < 0 || verb->Fixed() || verb->detail->cls != kDetailVerb ||
+            (particle != nullptr && verb->tokenIndex != particle->tokenIndex)) {
+            continue;
+        }
+        const std::string key = std::string(it->group->surface) + (particle != nullptr ? particle : verb)->group->surface;
+        for (const Record* r = w.DoLookup(key, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (r->source != key || r->ruleNo > 0 || At(r->partCode, 1) != '4' ||
+                At(r->partCode, 3) - '0' != verb->detail->patternKind) {
+                continue;
+            }
+            const std::size_t space = r->target.find(' ');
+            if (space == std::string::npos || !r->target.ends_with("@")) continue;
+            const std::string_view target = r->target;
+            const int noun = NounStarting(it, target.substr(0, space));
+            if (noun < 0) continue;
+            if (noun != it->selected) it->SelectCandidate(noun, {Provenance::Rewrite});
+            const std::size_t nounSize = it->group->At(noun)->dst.size();
+            if (particle != nullptr) {
+                TakeTarget(particle, '2', JosaPattern(target.substr(nounSize, space - nounSize)));
+                TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(space + 1));
+            } else {
+                TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(nounSize));
+            }
+            break;
+        }
     }
 }
 

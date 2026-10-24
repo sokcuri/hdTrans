@@ -61,3 +61,23 @@ G100	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
 G100	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
 G100	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
 G100	夢	몽	keep	global-stem
+rewrite:ruby-idiom-verb	遠くで{rb}声{/rb}{rt}こえ{/rt}がした	먼 곳에서 {rb}목소리{/rb}{rt}목소리{/rt}가 들렸다	fix	rewrites
+rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}がする	{rb}목소리{/rb}{rt}목소리{/rt}가 들린다	fix	rewrites
+rewrite:ruby-idiom-verb	どこからか母の{rb}声{/rb}{rt}こえ{/rt}がして	어디에선가 어머니의 {rb}목소리{/rb}{rt}목소리{/rt}가 들려	fix	rewrites
+rewrite:ruby-idiom-verb	ドアが開閉される{rb}音{/rb}{rt}おと{/rt}がした。	문이 개폐되는 {rb}소리{/rb}{rt}와{/rt}가 났다.	fix	rewrites
+rewrite:ruby-idiom-verb	{rb}味{/rb}{rt}あじ{/rt}がした。	{rb}맛{/rb}{rt}맛{/rt}이 났다.	fix	rewrites
+rewrite:ruby-idiom-verb	ランタンを{rb}手{/rb}{rt}て{/rt}にした	랜턴을 {rb}손{/rb}{rt}이라고{/rt}에 넣었다	fix	rewrites
+# 맞는 출력: 뒤에서 빛난 {rb}느낌{/rb}{rt}느낌{/rt}이 들었다
+normalize:ruby	後ろで光った{rb}気{/rb}{rt}き{/rt}がした	뒤에서 빛난 {rb}것 같았다{/rb}{rt}생각이 들었다{/rt}	current	normalize
+# 맞는 출력: 믿을 수 없는 것을 {rb}말했다{/rb}{rt}말했다{/rt}
+normalize:ruby	信じられない事を{rb}口{/rb}{rt}くち{/rt}にした	믿을 수 없는 것을 {rb}말했다{/rb}{rt}썩어로 했다{/rt}	current	rewrites
+# 맞는 출력: {rb}목소리{/rb}{rt}목소리{/rt}가 들리지 않는다
+normalize:ruby	{rb}声{/rb}{rt}こえ{/rt}がしない	{rb}목소리가 들리지 않는다{/rb}{rt}목소리가 하지 않는다{/rt}	current	normalize
+rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}が聞こえた	{rb}목소리{/rb}{rt}목소리{/rt}가 들렸다	keep	rewrites
+rewrite:ruby-idiom-verb	{rb}手{/rb}{rt}て{/rt}に取った	{rb}손{/rb}{rt}이라고{/rt}에 취했다	keep	rewrites
+rewrite:ruby-idiom-verb	{rb}犬{/rb}{rt}いぬ{/rt}がワンワンと吠えた	{rb}개{/rb}{rt}개{/rt}가 멍멍 짖었다	keep	rewrites
+rewrite:ruby-idiom-verb	{rb}心{/rb}{rt}こころ{/rt}がどきどきした	{rb}마음{/rb}{rt}마음{/rt}이 두근두근했다	keep	rewrites
+normalize:ruby	{rb}上{/rb}{rt}あ{/rt}がった	{rb}올랐다{/rb}{rt}올랐다{/rt}	keep	normalize
+normalize:ruby	頭を{rb}撫{/rb}{rt}な{/rt}でた	머리를 {rb}쓰다듬었다{/rb}{rt}쓰다듬었다{/rt}	keep	normalize
+normalize:ruby	{rb}読{/rb}{rt}よ{/rt}もう	{rb}읽자{/rb}{rt}읽자{/rt}	keep	normalize
+normalize:ruby	{rb}死{/rb}{rt}し{/rt}ね	{rb}죽어라{/rb}{rt}죽어라{/rt}	keep	normalize
