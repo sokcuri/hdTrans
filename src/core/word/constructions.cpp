@@ -310,6 +310,22 @@ constexpr NamedFeature kFeatures[] = {
          if (rest.empty()) rest = it->detail->nextText;
          return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
      }},
+    // An exclamation mark of mark.exclaim follows the word (待ち伏せますか！).
+    {"exclaim-after",
+     [](Flusher&, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         if (rest.empty()) rest = it->detail->nextText;
+         return dict::InClass("mark.exclaim", rest.substr(0, text::DecodeRune(rest).size));
+     }},
+    // The text after the word starts with one of mark.prompt-follow, which shows a question as a
+    // prompt on screen: a quoting と, a closing 》 or the answers (開始しますか？という, はい／いいえ).
+    {"prompt-after",
+     [](Flusher&, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         if (rest.empty()) rest = it->detail->nextText;
+         return std::ranges::any_of(dict::ClassMembers("mark.prompt-follow"),
+                                    [&](std::string_view m) { return rest.starts_with(m); });
+     }},
 };
 
 struct FieldSpelling {

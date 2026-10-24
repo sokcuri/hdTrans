@@ -72,6 +72,8 @@
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
 //= mark.before-laughter	Marks after which a run of mark.laughter still laughs (진짜야!ｗ).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
+//= mark.exclaim	Exclamation marks: a question with one after it is a surprised remark, not an offer (待ち伏せますか！).
+//= mark.prompt-follow	What follows the question mark of a prompt shown on a screen: a quoting と, a closing 》 and the answers (開始しますか？という, 取得しますか？》, はい／いいえ).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
 //= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
 //= mark.question	Question marks, after which a row read only where the utterance ends asks instead (また明日？ 또 내일?).
@@ -990,12 +992,18 @@ mark.question	?
 mark.drawn	ぇ
 mark.drawn	ェ
 mark.drawn	え
+mark.exclaim	！
+mark.exclaim	!
 
 mark.pause	…
 mark.pause	‥
 mark.pause	―
 mark.pause	─
 mark.pause	—
+mark.prompt-follow	と
+mark.prompt-follow	》
+mark.prompt-follow	はい
+mark.prompt-follow	いいえ
 mark.sentence-end	。
 mark.sentence-end	！
 mark.sentence-end	？

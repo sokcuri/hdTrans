@@ -1,0 +1,41 @@
+# 규칙: SPC-9
+rule	input	expected	kind	layer
+cx:masuka-offer:10	上書きしますか？	덮어쓰기할까요?	fix	rewrites
+cx:masuka-offer:10	ゲームを終了しますか？	게임을 종료할까요?	fix	rewrites
+cx:masuka-offer:10	ロードしますか？	로드할까요?	fix	rewrites
+cx:masuka-offer:10	アップデートがあります。ダウンロードしますか？	업데이트가 있습니다. 다운로드할까요?	fix	rewrites
+cx:masuka-offer:10	プロローグをスキップしますか？	프롤로그를 스킵할까요?	fix	rewrites
+cx:masuka-offer:10	競技2日目、エントリーしますか？	경기 2일째, 엔트리할까요?	fix	rewrites
+cx:masuka-offer:10	「さて、帰りますか」	「자, 돌아갈까요」	fix	rewrites
+cx:masuka-offer:10	「食べますか」	「먹을까요」	fix	rewrites
+cx:masuka-offer:10	「じゃあ、そろそろ行きますか」	「그럼, 슬슬 갈까요」	fix	rewrites
+cx:masuka-offer:10	「んじゃ、また９月ってことで解散しますか」	「그럼, 또 9월이라는 걸로 해산할까요」	fix	rewrites
+cx:masuka-offer:10	「……目は覚ましませんね。もう一度試しますか？」	「……눈은 깨지 않아요. 한번 더 시험할까요?」	fix	rewrites
+cx:masuka-offer:10	そろそろお仕事しますか。	슬슬 일할까요.	fix	rewrites
+cx:masuka-offer:10	「どうしますか？」	「어떻게 할까요?」	fix	rewrites
+cx:masuka-offer:5	「少しお休みになりますか？」	「조금 쉬시겠습니까?」	fix	rewrites
+cx:masuka-offer:5	「お茶を召し上がりますか？」	「차를 드시겠습니까?」	fix	rewrites
+cx:masuka-offer:5	いかがあそばしますか。	어떻게 하시겠습니까.	fix	rewrites
+cx:masuka-offer:10	「どこに行きますか？」	「어디에 갑니까?」	keep	rewrites
+cx:masuka-offer:10	「何を食べますか？」	「뭘 먹습니까?」	keep	rewrites
+cx:masuka-offer:10	「今の話、筧君はどう思いますか？」	「지금의 이야기, 카케이 군은 어떻게 생각합니까?」	keep	rewrites
+cx:masuka-offer:10	「マスター、指示はありますか？」	「마스터, 지시는 있습니까?」	keep	rewrites
+cx:masuka-offer:10	「このメモの暗号、解読できますか？」	「이 메모의 암호, 해독할 수 있습니까?」	keep	rewrites
+cx:masuka-offer:10	「その大仕事の内容、教えてもらえますか？」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「明日の予定は決めてますか？」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「時間ありますか？」	「시간 있습니까?」	keep	rewrites
+cx:masuka-offer:5	「お持ちでいらっしゃいますか？」	!rule:cx:masuka-offer:5	keep	rewrites
+cx:masuka-offer:10	「私の胸の鼓動、感じますか」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「一緒に行きませんか？」	「함께 가지 않겠습니까?」	keep	rewrites
+cx:masuka-offer:7	セーブしますか？はい／いいえ	세이브하시겠습니까? 네/아니요	fix	rewrites
+cx:masuka-offer:10	艦首扉が気になりますか？	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:7	『課金を行いますか？』	『과금을 실시하시겠습니까?』	fix	rewrites
+cx:masuka-offer:7	『チュートリアルを行いますか？』	『튜토리얼을 실시하시겠습니까?』	fix	rewrites
+cx:masuka-offer:7	『召喚士はまだ、試験運用が終わっておらず、ユーザーがいません。それでも開始しますか？はい／いいえ』	rule:cx:masuka-offer:7=2시겠습니까	fix	rewrites
+cx:masuka-offer:7	開始しますか？という大きなクリックボタンだけが画面に表示されている。	rule:cx:masuka-offer:7=2시겠습니까	fix	rewrites
+cx:masuka-offer:7	取得しますか？》	취득하시겠습니까? 》	fix	rewrites
+cx:masuka-offer:7	「さて、帰りますか」	!rule:cx:masuka-offer:7	keep	rewrites
+cx:masuka-offer:7	『自動サポートをご利用されますか？』	!rule:cx:masuka-offer:7	keep	rewrites
+cx:masuka-offer:10	「うわ！ そこで待ち伏せますか！」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「あ、そう来ますか」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「ヨウタサン。コノ、カンジ、ナント、ヨミマスカ？」	!rule:cx:masuka-offer:10	keep	rewrites
