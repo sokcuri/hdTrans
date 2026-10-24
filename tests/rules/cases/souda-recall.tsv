@@ -1,0 +1,12 @@
+# 규칙: LEX-17
+rule	input	expected	kind	layer
+cx:souda-recall:10	「あ、そうだ」	rule:cx:souda-recall:10=%Dn@	fix	rewrites
+cx:souda-recall:10	「あっ、そうだ！」	「앗, 맞다!」	fix	rewrites
+cx:souda-recall:10	「えっと、そうだ！」	「음, 맞다!」	fix	rewrites
+cx:souda-recall:10	「ああ、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
+cx:souda-recall:10	「うん、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
+cx:souda-recall:10	「あぁ、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
+cx:souda-recall:20	「と、そうだ」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
+cx:souda-recall:20	「っと、そうだ……今、何時ですか？」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
+cx:souda-recall:20	「と、その前に」	!rule:cx:souda-recall:20	keep	rewrites
+cx:souda-recall:20	「是非……と、そうだと言いたい」	!rule:cx:souda-recall:20	keep	rewrites
