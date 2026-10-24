@@ -69,6 +69,7 @@
 //= honorific.constraint-familiar	The familiar honorifics of honorific.constraint (くん, ちゃん), a subset of it, which the rules about familiar address look for alone.
 //= greeting.honorific-end	Greetings that end like an honoured person in 様 or さま and call no one (お疲れさま、また明日 수고했어, 내일 보자).
 //= honorific.drawn-out	Honorifics that a name may draw out before their final ん, with ー, ～ or the vowel of the kana before it (圭ちゃ～ん, 田中さぁあん, アルくぅん).
+//= honorific.drawn-after	Honorifics without a final ん that a speaker draws out after themselves before a pause (姫さまぁ 공주님~, 様ーっ), marked as the drawn honorifics are.
 //= honorific.drawn-out-word	Words that end in the kana of a drawn-out honorific but hold none (かいさん 해산), whose drawl stays a lengthening (かいさーん 해산~).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
@@ -1150,6 +1151,8 @@ honorific.katakana-name	ドノ
 honorific.drawn-out	さん
 honorific.drawn-out	ちゃん
 honorific.drawn-out	くん
+honorific.drawn-after	さま
+honorific.drawn-after	様
 honorific.drawn-out-word	かいさん
 
 honorific.after-person	たん

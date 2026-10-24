@@ -34,6 +34,6 @@ lookup:suffix-after-person	警察署で会ったんだけど	경찰서에서 만
 lookup:suffix-after-person	「こっちだよ」	「여기야」	keep	lookup
 dict:w:28600	田中ちゃん！	타나카짱!	fix	local
 dict:w:28600	美雪ちゃん	미유키짱	fix	local
-dict:w:28600	美雪ちゃ～ん、食べて直ぐ寝ると	미유키짜~앙, 먹고 곧 잔다고	fix	local
+dict:w:28600	美雪ちゃ～ん、食べて直ぐ寝ると	미유키짱~, 먹고 곧 잔다고	fix	local
 dict:w:28600	姉ちゃん、待って。	누나, 기다려.	keep	local
 dict:w:28600	魔王ちゃんの本だ。	마왕의 책이다.	keep	local

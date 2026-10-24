@@ -1017,10 +1017,10 @@ HD_TEST(pipeline_drawn_honorifics) {
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
-        {"圭ちゃ～ん！", "圭ちゃん\uE00A\uE00B！"},
+        {"圭ちゃ～ん！", "圭ちゃん\uE00A！"},
         {"田中さぁあぁあん…", "田中さん\uE00B\uE00B\uE00B\uE00B…"},
-        {"アルくぅん！", "アルくん\uE00B！"},
-        {"みどりさああんん！", "みどりさん\uE00B\uE00B！"},
+        {"アルくぅん！", "アルくん\uE00A！"},
+        {"みどりさああんん！", "みどりさん\uE00A\uE00A！"},
         {"ちゃーんと見て", "ちゃんと\uE00A見て"},
         {"がちゃ～んと", "がちゃんと\uE00A"},
         {"…くぅん", "…くぅん"},
@@ -1029,10 +1029,15 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"びちゃーん！", "びちゃーん！"},
         {"田中さん", "田中さん"},
         {"かみつきさあん", "かみつきさあん"},
-        {"みどりさああん", "みどりさん\uE00B\uE00B"},
-        // Drawn out by vowel kana or by two or more ー, a drawn mark for each.
-        {"圭ちゃーん！", "圭ちゃん\uE00A\uE00B！"},
-        {"あおくーーーん", "あおくん\uE00B\uE00B\uE00B"},
+        {"みどりさああん", "みどりさん\uE00A\uE00A"},
+        // One lengthening for one stretch mark, two for two or three, a drawn mark for each of four or more;
+        // さま drawn after itself too.
+        {"圭ちゃーん！", "圭ちゃん\uE00A！"},
+        {"あおくーーーん", "あおくん\uE00A\uE00A"},
+        {"あおくーーーーん", "あおくん\uE00B\uE00B\uE00B\uE00B"},
+        {"姫さまぁ！", "姫さま\uE00A！"},
+        {"お嬢様ーっ！", "お嬢様\uE00A！"},
+        {"さまざま", "さまざま"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
