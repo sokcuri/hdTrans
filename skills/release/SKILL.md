@@ -74,7 +74,7 @@ gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain s
   improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
 - The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
-- Keep the branch's `Surface-Budget:` and `Perf-Budget:` trailers as trailers of the squash body.
+- Keep the branch's `Perf-Budget:` trailers as trailers of the squash body.
 
 After merging a PR that changes translations, run the cycle check: measure the merge commit of
 develop against the run of the last release tag on all four sets, with the runs in

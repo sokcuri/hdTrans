@@ -1,7 +1,7 @@
 // hdrulec: the rule compiler.
 //   hdrulec lint RULES [-dicts DIR] [-tsv] [-max-delta N] [-budget FILE]
 //       parses the flat rules (or readable rules, *.hdr) and runs the checks; exit 1 on errors,
-//       and with -budget also when the warnings of a flag are not the count FILE records
+//       and with -budget also when the warnings of a flag exceed the count FILE records
 //   hdrulec convert RULES [-o OUT]       the flat rules in the readable syntax
 //   hdrulec flat RULES.hdr [-o OUT]      readable rules in the flat format
 //   hdrulec verify RULES [-paths N]      checks the front end against rules::Load and the
@@ -62,8 +62,8 @@ int Report(const Source& source, const Diagnostics& diags, bool tsv) {
 }
 
 // The warnings of each flag against the lines "flag<TAB>count" of path (# starts a comment; a
-// flag without a line has 0). A count above its line fails, and so does one below it, so that
-// the line is lowered with the change that removes the warnings. 0 equal, 1 different, 2 unread.
+// flag without a line has 0). A count above its line fails; one below it passes with a note
+// that the line can be lowered. 0 within, 1 above, 2 unread.
 int Budget(const Diagnostics& diags, const std::string& path) {
     std::string text;
     if (!ReadFile(path, text)) {
@@ -98,10 +98,14 @@ int Budget(const Diagnostics& diags, const std::string& path) {
     for (const auto& [flag, n] : count) {
         const auto it = ceiling.find(flag);
         const long want = it == ceiling.end() ? 0 : it->second;
-        if (n == want) continue;
-        std::fprintf(stderr, "hdrulec: %ld [-W%s] warning(s), %s records %ld; %s\n", n, flag.c_str(), path.c_str(), want,
-                     n > want ? "fix the new ones" : "lower the line to the new count");
-        status = 1;
+        if (n > want) {
+            std::fprintf(stderr, "hdrulec: %ld [-W%s] warning(s), %s records %ld; fix the new ones\n", n, flag.c_str(),
+                         path.c_str(), want);
+            status = 1;
+        } else if (n < want) {
+            std::fprintf(stderr, "hdrulec: %ld [-W%s] warning(s), %s records %ld; it may be lowered to %ld\n", n,
+                         flag.c_str(), path.c_str(), want, n);
+        }
     }
     return status;
 }

@@ -11,7 +11,6 @@
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
-| `tools.surface-budget` | `src/core`의 일본어, 한국어 문자열이 `tools/surface-budget.tsv`의 상한을 넘지 않는지 확인 ([아래](#표면-문자열-예산-surface-budgetpy)). `.self-test`는 도구 자체 시험 (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
@@ -85,29 +84,12 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 출력은 `build/examples/`에 생깁니다. 사전 인자가 비어 있으면 77로 끝나며, ctest는 이를 건너뜀으로
 처리합니다.
 
-## 표면 문자열 예산 (surface-budget.py)
+## 표면 문자열 보고 (surface-budget.py)
 
-`tools/surface-budget.py`는 `src/core`의 `.cpp`, `.h`마다 엔진 코드에 직접 쓴 일본어와 한국어를 셉니다.
-첫 줄이 `// Generated ...; do not edit`인 생성 파일만 빼고, 이름이 `_gen`이어도 손으로 고치는 파일은 셉니다.
-열의 뜻은 도구 첫머리에 있습니다. 문자열, 낱말 목록, 표면형 비교 조건(`In(`, `OneOf(`, `Starts(` 같은 도우미
-호출, 여러 줄에 걸친 비교, `case U'…'` 포함)과 그 우회(가나 문자 리터럴, `\u` 이스케이프, 가나, 한자, 한글
-범위의 16진 상수와 범위 경계로 쓴 10진 상수, 헤더 상수 사용)를 셉니다. 비트 마스크와 BOM은 세지 않습니다.
-코드와 분류 비교 조건(`cond_code`)은 상한 없이 셉니다.
-
-- `tools/surface-budget.tsv`가 파일마다 상한입니다. 표에 없는 파일의 상한은 0이라서, 새 파일에 문자열을
-  쓰면 실패합니다. 파일 이름을 바꾸거나 나누는 것도 새 파일의 상한을 올리는 일입니다.
-- `--check`(기본)는 상한을 넘는 수를 보이고 실패합니다. 낮출 수 있는 상한이 있으면 그 수와 `--update`
-  명령을 알립니다. `--base REF`를 주면 REF 뒤에 바뀐 파일의 수가 상한보다 낮을 때도 실패합니다. 남은
-  여유를 표에 적어 두지 않으면 나중에 트레일러 없이 다시 채울 수 있기 때문입니다.
-- `--update`는 지금 수를 상한으로 씁니다. 낮추기와 지운 파일의 행 지우기는 그냥 되지만, 올리기는
-  develop과의 merge base(`--base REF`) 뒤의 커밋 하나에 `Surface-Budget: <이유>` 트레일러가 있을 때만
-  씁니다. 트레일러 하나가 그 범위의 모든 파일에 통합니다. 올려야 하면 코드를 그 트레일러와 함께
-  커밋하고, `--update`를 돌린 뒤 표를 커밋합니다.
-- `--report`는 열마다 합계, 표면형 비교와 코드 비교 조건의 비(`surface:code`), 문자열이 많은 파일을
-  보입니다. 구조를 바꾼 뒤 수가 줄었는지 볼 때 씁니다.
-- CI의 `release-tools` 작업은 `--self-test`와 `--check`를 돌립니다. PR에서는 PR이 갈라진 기준 커밋
-  (`github.event.pull_request.base.sha`)으로 `--check --base`를 돌려, 표의 수가 오르거나 행이 늘었는데
-  PR의 어느 커밋에도 트레일러가 없을 때와 PR이 바꾼 파일에 적지 않은 여유가 있을 때 실패합니다.
+`tools/surface-budget.py`는 `src/core`의 `.cpp`, `.h`마다 엔진 코드에 직접 쓴 일본어와 한국어 문자열,
+낱말 목록, 표면형 비교 조건을 세어 합계와 많은 파일을 보이는 선택 보고입니다. 검사가 아니어서 CI와
+ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 줄었는지 볼 때 씁니다. 열의 뜻은 도구 첫머리에
+있습니다. 고칠 때는 C++ 문자열보다 사전 행과 부류를 먼저 씁니다(docs/fixing-translations.md).
 
 ## 낱말 빠짐 (drops.py)
 

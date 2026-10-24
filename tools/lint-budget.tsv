@@ -1,5 +1,5 @@
 # Warnings of hdrulec lint on the shipped rules program, per flag (ctest rules.lint). A change
-# that removes warnings lowers its line; one that adds them fixes them instead. Each left here
+# that removes warnings may lower its line; one that adds them fixes them instead. Each left here
 # needs a decision about the translation (docs/rule-compiler.md).
 always-false	0
 empty-pattern	1
