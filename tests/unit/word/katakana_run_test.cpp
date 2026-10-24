@@ -1,7 +1,7 @@
 // A word with a hiragana ending stays out of the transliterated katakana run next to it, and a
 // long run costs time in proportion to its length.
 #include <algorithm>
-#include <ctime>
+#include <chrono>
 #include <cstdlib>
 #include <string>
 #include <string_view>
@@ -31,14 +31,14 @@ std::string Repeat(std::string_view s, int n) {
     return out;
 }
 
-// The std::clock time of the fastest of three translations of input, with the translation.
+// The time of the fastest of three translations of input, with the translation.
 double FastestSeconds(const hdTrans::dict::Snapshot& snap, hdTrans::internal::Generated& generated,
                       const std::string& input, std::string& out) {
     double best = 0;
     for (int i = 0; i < 3; i++) {
-        const std::clock_t start = std::clock();
+        const auto start = std::chrono::steady_clock::now();
         out = Translate(snap, generated, input);
-        const double seconds = static_cast<double>(std::clock() - start) / CLOCKS_PER_SEC;
+        const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count();
         best = i == 0 ? seconds : std::min(best, seconds);
     }
     return best;

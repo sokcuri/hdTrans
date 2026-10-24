@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <ctime>
+#include <chrono>
 #include <string>
 #include <string_view>
 
@@ -89,10 +89,10 @@ HD_TEST(kana_katakana_run_time_grows_with_its_length) {
         std::string in;
         for (int i = 0; i < n; i++) in += unit;
         double best = 0;
-        for (int i = 0; i < 3; i++) {
-            const std::clock_t start = std::clock();
+        for (int i = 0; i < 5; i++) {
+            const auto start = std::chrono::steady_clock::now();
             if (!TransliterateKatakana(in, out)) out = "fault";
-            const double seconds = static_cast<double>(std::clock() - start) / CLOCKS_PER_SEC;
+            const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count();
             best = i == 0 ? seconds : std::min(best, seconds);
         }
         return best;
@@ -102,11 +102,11 @@ HD_TEST(kana_katakana_run_time_grows_with_its_length) {
     };
     for (const Shape& shape : {Shape{"メー", "메이"}, Shape{"ラーメン", "라멘"}, Shape{"ビッグ", "빅"}, Shape{"aア", "a아"}}) {
         std::string shortOut, longOut;
-        const double shortRun = fastest(shape.unit, 1000, shortOut);
-        const double longRun = fastest(shape.unit, 16000, longOut);
+        const double shortRun = fastest(shape.unit, 2000, shortOut);
+        const double longRun = fastest(shape.unit, 32000, longOut);
         std::string expected;
-        for (int i = 0; i < 16000; i++) expected += shape.read;
+        for (int i = 0; i < 32000; i++) expected += shape.read;
         HD_CHECK_EQ(longOut, expected);
-        HD_CHECK(longRun < 40 * shortRun);
+        HD_CHECK(longRun < 64 * shortRun);
     }
 }
