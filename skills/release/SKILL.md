@@ -16,10 +16,11 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
 - `tools/gate.sh` prints `GATE OK`.
 - `tools/shadow.py` reports no new warning.
 - If the tree has `mac-asan` or `linux-asan` presets, the sanitizer ctest passes too.
-- The CI `Performance budget` step (linux) and the `linux-fuzz` job pass, and their warnings are read
-  (docs/build.md "CI", "성능 예산", "퍼징"). A slowdown that is intended has a `Perf-Budget: <reason>`
-  trailer. An input the fuzzer printed is fixed, kept in `tests/fuzz/regressions/` and covered by a
-  rule case, or filed as an issue when it is an older bug.
+- The `linux-fuzz` job passes and the warnings of it and of the CI `Performance budget` step (linux)
+  are read (docs/build.md "CI", "성능 예산", "퍼징"). The performance budget only reports: CI writes
+  the change of each count against the base build to the job summary and never fails on it, so do
+  not measure it locally. An input the fuzzer printed is fixed, kept in `tests/fuzz/regressions/`
+  and covered by a rule case, or filed as an issue when it is an older bug.
 - Translation changes were measured and every changed line was judged blind by judges that did not
   write the change (fix-translation steps 11–12). Keep the numbers for the PR body.
 - For a develop → main promotion, run the cycle check (section 2) on the develop head and judge
@@ -74,7 +75,6 @@ gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain s
   improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
 - The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
-- Keep the branch's `Perf-Budget:` trailers as trailers of the squash body.
 
 After merging a PR that changes translations, run the cycle check: measure the merge commit of
 develop against the run of the last release tag on all four sets, with the runs in
@@ -93,10 +93,8 @@ then judges only what changed since the last check.
   Use `fix:` unless a feature release is intended.
 - Write a new title and body as a release summary, grouped by area (words, speech, numbers, layout,
   sounds, tools). Do not copy the develop PR.
-- State how the counts of the `perf-budget` artifact of the latest successful develop push Build
-  (`gh run download <run> -n perf-budget -D <dir>`) moved from `git show vX.Y.Z:tools/perf-budget.tsv`
-  of the last release, with the `Perf-Budget:` reasons of `git log vX.Y.Z..develop`. Before the
-  promotion, commit that artifact as `tools/perf-budget.tsv` through a PR into develop.
+- The `Performance budget` summary of this PR's linux job compares develop with main, the change of
+  the whole cycle; a large rise is looked at in the release review.
 - Open it with `gh pr create --base main --head develop --milestone X.Y.Z`.
 - Wait for its checks (see "Merging any PR"), then merge with a merge commit, not a squash:
   `gh pr merge N --merge`.
