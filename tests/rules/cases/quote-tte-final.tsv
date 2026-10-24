@@ -1,0 +1,62 @@
+# 규칙: SPC-12
+rule	input	expected	kind	layer
+cx:tte-final:10	そんなところには行きませんって！	has:않는다고요	fix	rewrites
+cx:tte-final:10	いまさらそんなことできませんって	lacks:않는다	keep	rewrites
+cx:tte-final:30	ちゃんと見てませんって！	has:않았다고요	fix	rewrites
+cx:tte-final:30	だから、怒ってないんですって…	has:않다고요	fix	rewrites
+cx:tte-final:14	そんな、普通の人には無理ですって	has:무리라고요	fix	rewrites
+cx:tte-final:15	危ないですって！	has:위험하다고요	fix	rewrites
+cx:tte-final:15	カレーの具がないですって？	has:없다고요	fix	rewrites
+cx:tte-final:15	大和にも負けないですって？	has:않는다고요	fix	rewrites
+cx:tte-final:16	っ髪型の話じゃありませんって！	has:아니라고요	fix	rewrites
+cx:tte-final:17	いまさらそんなことできませんって	has:없다고요	fix	rewrites
+cx:tte-final:20	秋雲よりはちゃんとやりますって！	has:한다고요	fix	rewrites
+cx:tte-final:20	新しい艦娘、来ますって。	has:온다고요	fix	rewrites
+cx:tte-final:20	少し休みますって。	has:쉰다고요	fix	rewrites
+cx:tte-final:30	お、起きてますって。	has:있다고요	fix	rewrites
+cx:tte-final:40	また、明日も頑張りましょーって。	has:노력하자고요	fix	rewrites
+cx:tte-final:50	伊号のみんなとの潜水、楽しかったって。	has:즐거웠다고	fix	rewrites
+cx:tte-final:50	え、朝食足りなかったって？	has:부족했다고	fix	rewrites
+cx:tte-final:50	誰もいなかったって	has:없었다고	fix	rewrites
+cx:tte-final:50	大きくなりたいなって	has:싶다고	fix	rewrites
+cx:tte-final:50	結構楽しい…って…神通さん？	lacks:즐겁다…고	keep	rewrites
+cx:tte-final:60	眠いかって？	has:졸리냐고	fix	rewrites
+cx:tte-final:60	砲塔が重いかって？	has:무겁냐고	fix	rewrites
+cx:tte-final:60	蒼龍型改じゃないかって？	has:아니냐고	fix	rewrites
+cx:tte-final:60	どう特別なのかって？	lacks:냐고	keep	rewrites
+cx:tte-final:60	何の話かって？	lacks:냐고	keep	rewrites
+cx:tte-final:70	夕日って、なんで悲しく見えるんだろうって。	has:보일까 하고	fix	rewrites
+cx:tte-final:70	まだ、ふたりを繋ぎ止められるかなって……	has:있을까 하고	fix	rewrites
+cx:tte-final:70	今度は沈むかって！	lacks:하고	keep	rewrites
+cx:tte-final:80	ちょっと、ちょっと。待ちなさいって！？	has:기다리라고	fix	rewrites
+cx:tte-final:80	よその人は多いから気をつけなさいって。	has:조심하라고	fix	rewrites
+cx:tte-final:110	行きませんってば！	has:않는다니까요	fix	rewrites
+cx:tte-final:130	だからそんなもの見てませんってば！	has:않았다니까요	fix	rewrites
+cx:tte-final:114	それは無理ですってば！	has:무리라니까요	fix	rewrites
+cx:tte-final:115	いや、危ないですってば！	has:위험하다니까요	fix	rewrites
+cx:tte-final:116	そういう話じゃありませんってば！	has:아니라니까요	fix	rewrites
+cx:tte-final:117	提督、さすがにお風呂は…ご一緒できませんってばっ！	has:없다니까요	fix	rewrites
+cx:tte-final:120	私がしてあげるんですってば……	has:준다니까요	fix	rewrites
+cx:tte-final:130	筧さんの方がエッチな顔してますってば	has:있다니까요	fix	rewrites
+cx:tte-final:140	知らなかったってば。	has:몰랐다니까	fix	rewrites
+cx:tte-final:140	提督ってば！聞いてる？	has:제독은 정말	keep	rewrites
+cx:tte-final:150	もう、やめなさいってば！	has:그만두라니까	fix	rewrites
+cx:tte-final:160	ハイハイ、わかってるわよ！ただの冗談だってば……。	has:농담이라니까	fix	rewrites
+cx:tte-final:160	そういうとこが嫌なんだってば。	lacks:이라니까	keep	rewrites
+cx:tte-final:160	提督ってば！聞いてる？	has:제독은 정말	keep	rewrites
+cx:tte-final:20	猫って可愛い。	고양이는 귀엽다.	keep	rewrites
+cx:tte-final:14	無理ですって言われた。	has:라고 말	keep	rewrites
+cx:tte-final:15	危ないですって言った。	has:라고 말	keep	rewrites
+cx:tte-final:16	話じゃありませんって言った。	has:라고 말	keep	rewrites
+cx:tte-final:17	できませんって言った。	has:라고 말	keep	rewrites
+cx:tte-final:30	起きてますって言った。	has:라고 말	keep	rewrites
+cx:tte-final:40	頑張りましょうって言った。	has:라고 말	keep	rewrites
+cx:tte-final:80	気をつけなさいって言われた。	has:라고 말	keep	rewrites
+cx:tte-final:110	もう、司令官ってば。	has:정말	keep	rewrites
+cx:tte-final:114	ねえ、提督ってば！	has:정말	keep	rewrites
+cx:tte-final:115	あたしってば強くなりすぎぃ。	has:정말	keep	rewrites
+cx:tte-final:116	ねえってばー！	lacks:니까요	keep	rewrites
+cx:tte-final:117	提督ってばぁ……。	has:정말	keep	rewrites
+cx:tte-final:120	それってば……。	has:정말	keep	rewrites
+cx:tte-final:130	コレってば！	has:정말	keep	rewrites
+cx:tte-final:150	あの子ってば	has:정말	keep	rewrites

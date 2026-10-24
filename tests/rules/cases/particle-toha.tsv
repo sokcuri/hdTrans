@@ -1,0 +1,39 @@
+# 규칙: LEX-42
+rule	input	expected	kind	layer
+dict:jisjk:262240	とかく人間の集団心理とは恐ろしいものである。	has:집단심리란 무서운	fix	defaults
+dict:jisjk:262240	高等部とは地球で言うところの大学に相当する。	has:고등부란 지구에서	fix	defaults
+dict:jisjk:262240	クソゲーとはなんぞや。	has:게임이란 따위야	fix	defaults
+dict:jisjk:262240	そもそも約束とは守る為にあるので…	has:약속이란 지키기	fix	defaults
+dict:jisjk:262240	必然とはそういうものだ。	has:필연이란 그런	fix	defaults
+cx:toha:5	これで…欠陥戦艦とは言わせないし…	has:전함이라고는 말하게	fix	rewrites
+cx:toha:5	万全の補給と訓練があれば、七面鳥などとは言わせないわ！	has:등이라고는 말하게	fix	rewrites
+cx:toha:5	あいつとは話したくない。	lacks:이란	keep	rewrites
+cx:toha:10	五周年とはね。	has:5주년이라니	fix	rewrites
+cx:toha:10	貴様が護衛小隊の指揮官とはな……。	has:지휘관이라니	fix	rewrites
+cx:toha:10	しかし、これほどとはな……	has:정도라니	fix	rewrites
+cx:toha:10	それで勝てたつもりとはね。	has:생각이라니	fix	rewrites
+cx:toha:10	入場券とは	has:입장권이란	keep	rewrites
+cx:toha:10	愛とは何か。	has:사랑이란	keep	rewrites
+cx:toha:15	こんなにうまく行くとはね。	has:된다니	fix	rewrites
+cx:toha:15	シグにあんな過去があったとはな。	has:있었다니	fix	rewrites
+cx:toha:15	この僕を、ここまで追い詰めるとはね。	has:몰아넣는다니	fix	rewrites
+cx:toha:15	まさか負けるとは思わなかった。	lacks:지다니	keep	rewrites
+cx:toha:20	それとは違う。	has:그것과는	fix	rewrites
+cx:toha:20	まぁ司令官とは長い仲だし？	has:사령관과는 긴	fix	rewrites
+cx:toha:20	「別に御園とはなんでもない」	has:미소노와는	fix	rewrites
+cx:toha:20	「それとこれとは話が別だなぁ」	has:이것과는	fix	rewrites
+cx:toha:20	小太刀の家とは左右対称の造りになっているはずだ。	has:집과는	fix	rewrites
+cx:toha:20	兄貴は他の囚人とはなんか雰囲気が違うんすよね。	has:죄수와는	fix	rewrites
+cx:toha:20	これは危機管理組織とはまた別のものなのでしょうか？	has:조직과는	fix	rewrites
+cx:toha:20	部活メンバーには一般参加者とは別に罰ゲームが付くからね。	has:참가자와는	fix	rewrites
+cx:toha:20	レナの律儀さとは逆にマイペースなヤツ。	has:성실함과는	fix	rewrites
+cx:toha:20	大森社長とは彼の別の姿であり、	has:사장이란	keep	rewrites
+cx:toha:20	提督とは、艦隊を指揮する人だ。	lacks:제독이라니	keep	rewrites
+cx:toha:25	「で、その子とはどこまでいったんですか？」	has:아이와는	fix	rewrites
+cx:toha:25	その後七瀬未来とはどうなりました？	has:미래와는	fix	rewrites
+cx:toha:25	通信妨害が続いていて、アラタとは連絡が取れないでいる。	has:아라타와는	fix	rewrites
+cx:toha:25	合宿の間、ふたりとはいろいろありすぎた。	has:사람과는	fix	rewrites
+cx:toha:25	相方とはどなたですか!?	has:파트너란	keep	rewrites
+cx:toha:25	サメ好きのメイドとは一体何なのか	has:메이드란	keep	rewrites
+cx:toha:25	人間とは恐ろしいもの。	has:인간이란	keep	rewrites
+cx:toha:25	ヒラ外務省役人とは仮の姿、国際情報官であり、白木にとって体得済である。	has:공무원이란	keep	rewrites
