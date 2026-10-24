@@ -28,7 +28,7 @@ src/core/output/particle.cpp	0	87	0	1	87	29	6	0	14
 src/core/output/prepass.cpp	135	165	22	14	219	25	8	4	120
 src/core/output/text.cpp	0	0	0	0	0	0	2	0	0
 src/core/pipeline/casual.cpp	287	0	11	13	75	6	4	0	102
-src/core/pipeline/colloquial.cpp	118	0	7	7	53	128	0	0	178
+src/core/pipeline/colloquial.cpp	119	0	7	7	53	128	0	0	179
 src/core/pipeline/katakana.cpp	257	0	4	6	223	26	0	2	62
 src/core/pipeline/kin_terms.cpp	10	10	4	2	24	0	0	0	0
 src/core/pipeline/masked.cpp	2	0	0	0	0	0	0	0	2
@@ -40,7 +40,7 @@ src/core/pipeline/restore.h	0	0	0	0	0	0	1	0	0
 src/core/pipeline/ruby.cpp	15	0	5	2	13	4	0	0	10
 src/core/pipeline/runes.h	0	0	1	0	0	0	18	0	2
 src/core/pipeline/segment.cpp	8	0	3	1	6	3	0	0	6
-src/core/pipeline/sound.cpp	196	32	44	12	132	101	18	0	227
+src/core/pipeline/sound.cpp	201	32	44	12	132	101	18	0	227
 src/core/pipeline/sound_lexicon.cpp	0	2	0	0	0	1	0	0	2
 src/core/pipeline/spans.cpp	5	0	0	0	0	15	10	2	14
 src/core/pipeline/speech.cpp	116	0	21	11	103	22	0	0	51
@@ -70,7 +70,7 @@ src/core/word/grammar.cpp	329	301	42	12	253	18	10	22	353
 src/core/word/item.cpp	0	0	6	0	0	6	0	1	13
 src/core/word/kana.cpp	21	5	0	0	0	20	1	0	51
 src/core/word/kana.h	0	0	0	0	0	3	0	0	1
-src/core/word/lookup.cpp	128	12	18	10	87	29	5	11	82
+src/core/word/lookup.cpp	126	12	18	10	87	29	5	11	80
 src/core/word/misread.cpp	3	0	1	0	0	19	4	0	10
 src/core/word/passes.cpp	0	0	0	0	0	0	0	19	18
 src/core/word/selectors.cpp	0	0	0	0	0	0	0	6	3

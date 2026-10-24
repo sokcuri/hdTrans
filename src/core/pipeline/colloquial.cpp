@@ -315,7 +315,12 @@ bool Volitional(std::u32string_view rs, size_t i) {
         const int v = HiraganaVowel(rs[i - 2]);
         return v != 1 && v != 3;  // やろー, 帰ろー; not the imperative やめろー, 見ろー
     }
-    if (prev == U'よ') return rs[i - 2] == U'し' || HiraganaVowel(rs[i - 2]) == 3;
+    if (prev == U'よ') {
+        // て or で ends an ichidan stem only after its kanji (捨てよー); after kana it is a て form
+        // and よ the particle (連れていってよー, 見ててよー, 遊んでよー).
+        if (In(rs[i - 2], U"てで") && !IsKanjiRune(rs[i - 3])) return false;
+        return rs[i - 2] == U'し' || HiraganaVowel(rs[i - 2]) == 3;
+    }
     return false;
 }
 

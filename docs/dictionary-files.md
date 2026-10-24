@@ -240,6 +240,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 | `neg=LEMMA` | `v`, `adj` 줄: 이 단어를 부정하는 한국어 동사 |
 | `exclaim` | 내장 `phrases.tsv`의 `intj` 줄: 감탄. 물음표 앞에서는 소리로 읽지 않고 단어로 읽음 (よかった 다행이다, よかった？ 좋았어?) |
 | `predicate` | `exclaim` 줄: 한자나 가타카나 명사＋は, が와 쉼표 뒤에서도 단어로 읽음 (あの頃は、よかった 좋았다) |
+| `final` | `intj` 줄: 바로 뒤에서 발화가 끝날 때만(끝, 문장 부호, 닫는 괄호, 말줄임표, 늘임표) 읽음. 쉼표나 낱말 앞에서는 읽지 않음 (また明日 내일 보자, また明日来る는 그대로) |
 
 정의: `src/core/userdict/userdict.h`.
 

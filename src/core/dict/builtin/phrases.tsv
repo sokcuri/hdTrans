@@ -5,7 +5,8 @@
 // entries. A phrase that ends in a particle keeps it (こんなのが 이런 게).
 // An intj row with exclaim in the fourth column is an exclamation, no sound
 // before a question mark (よかった 다행이다, but よかった？ 좋았어?); with predicate also
-// none after a noun topic and a comma (あの頃は、よかった 좋았다).
+// none after a noun topic and a comma (あの頃は、よかった 좋았다). With final it is read
+// only where the utterance ends after it (また明日 내일 보자, not また明日来る).
 
 // Greetings and everyday set phrases.
 ただいま帰りました	다녀왔습니다	intj
@@ -145,6 +146,7 @@
 それはそれは	그거 참	intj
 めでたしめでたし	잘됐다 잘됐어	intj
 いたいのいたいのとんでけ	아픈 거 아픈 거 날아가라	intj
+いたいのいたいのとんでいけ	아픈 거 아픈 거 날아가라	intj
 いたいのいたいのとんでゆけ	아픈 거 아픈 거 날아가라	intj
 あんたがたどこさ	너희들 어디서 왔니	intj
 ねこふんじゃった	고양이를 밟아 버렸다	intj
@@ -494,9 +496,28 @@
 
 // Utterance starts.
 じゃあ	그럼	intj
+ほな	그럼	intj
 
 じゃあね	그럼 안녕	intj
 それじゃあね	그럼 안녕	intj
+
+// Leave-taking: また and the time of meeting again, with ね or な.
+また明日	내일 보자	intj	final
+また明日ね	내일 보자	intj
+また明日な	내일 보자	intj
+またあした	내일 보자	intj	final
+またあしたね	내일 보자	intj
+またあしたな	내일 보자	intj
+また後で	나중에 보자	intj	final
+また後でね	나중에 보자	intj
+また後でな	나중에 보자	intj
+またあとで	나중에 보자	intj	final
+またあとでね	나중에 보자	intj
+またあとでな	나중에 보자	intj
+また来週	다음 주에 보자	intj	final
+また来週ね	다음 주에 보자	intj
+また来週な	다음 주에 보자	intj
+またな	또 보자	intj
 
 と言われても	라고 해도	phrase
 にも関わらず	에도 불구하고	phrase	gattr=Tu

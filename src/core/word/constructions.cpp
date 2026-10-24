@@ -10,6 +10,7 @@
 #include "core/output/compose.h"
 #include "core/output/korean.h"
 #include "core/output/particle.h"
+#include "core/output/inflect.h"
 #include "core/rules/match.h"
 #include "core/text/kana.h"
 #include "core/text/unicode.h"
@@ -221,6 +222,35 @@ constexpr NamedFeature kFeatures[] = {
              t.remove_prefix(r.size);
          }
          return false;
+     }},
+    // The conjugation of a verb in the potential (潜れる, 使える).
+    {"potential", [](Flusher&, const Item* it) { return it->DetailRecord() == 4; }},
+    // The Korean of the chosen candidate is an adjective or 있다, 없다 (배고프다, 효과가 있다): a
+    // marker of an adjective family, of a family whose declarative is bare, or a stem that ends like
+    // an adjective of ko-adjective.stem-end.
+    {"ko-state",
+     [](Flusher&, const Item* it) {
+         namespace oi = output::internal;
+         const std::string_view t = it->EntryText(it->selected);
+         if (t.size() < 4 || t.back() != '@') return false;
+         const oi::KoreanFamily* k = oi::FindKoreanFamily(t.substr(t.size() - 4));
+         if (k == nullptr) return false;
+         if (k->partOfSpeech == oi::KoreanPartOfSpeech::Adjective || k->inflectionClass == oi::InflectionClass::Existential ||
+             (k->flags & oi::kBareDeclarative) != 0) {
+             return true;
+         }
+         const std::string stem = std::string(t.substr(0, t.size() - 4)) + std::string(k->stem);
+         for (const std::string_view end : dict::ClassMembers("ko-adjective.stem-end")) {
+             if (stem.ends_with(end)) return true;
+         }
+         return false;
+     }},
+    // A vowel kana of mark.drawn follows the word (燃えるねぇ, 言うねェ).
+    {"drawn",
+     [](Flusher&, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         if (rest.empty()) rest = it->detail->nextText;
+         return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
      }},
 };
 

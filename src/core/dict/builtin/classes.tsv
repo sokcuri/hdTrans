@@ -3,6 +3,7 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
+//= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
@@ -12,6 +13,13 @@
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
+//= contraction.n-no	What follows the ん that a noun before it says for の (頭ん中 頭の中, 先生んとこ 先生のとこ).
+//= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
+//= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
+//= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
+//= contraction.te-iku-not	Starts of the text after a て form that are no contracted いく: the quoting ったら (待ってったら).
+//= contraction.u-onbin	Starts of the text after the kanji stem of a godan verb in う that say its past or て form with う for っ (言うた, 思うて).
+//= contraction.u-onbin-not	Starts of the text of contraction.u-onbin that go on as another word (救うため, 戦うたび, 歌うたい).
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
@@ -28,6 +36,7 @@
 //= follower.not-predicate-start	Starts of an item that is not a verb or adjective on its own: a copula or particle at its start (で, じゃ, っ).
 //= follower.noun-not-stem	What follows a noun and never a verb stem: copulas, particles, ある (わけだ, わけが, わけあって), and what also follows the stem of a verb in its own use (わけ、, わけない 分けない, わけは).
 //= follower.stem	What follows a kana verb stem in its own use as well as a noun: the negative, は, も and に (わけない 分けない, わけは).
+//= follower.te-imperative	The starts of the verb forms after the て of a t-row godan imperative that a phrase row holds (待てない, 待てって, 待てば, 待てる, 待てた), after which the row gives way to the verb.
 //= follower.verbal-noun	What may follow a verbal noun that goes on past a counter, so that the number counts its action (1回復した, 1回復を): the forms of する and できる and particles.
 //= honorific.candidate	Honorifics after which a name spelled like a number is the name, not the number (九十九さん).
 //= honorific.constraint	Honorifics after a name that the constraint rules find at the start of the text after it (さん, 先生, ちゃん).
@@ -53,6 +62,8 @@
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
+//= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
+//= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
@@ -91,6 +102,7 @@
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
 //= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
+//= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
@@ -117,6 +129,7 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
+//= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (出るね, 始まるね, 思い出すね, 照れるね).
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -164,6 +177,17 @@ adverb.gradual	益々
 adverb.gradual	日に日に
 adverb.gradual	少しずつ
 adverb.gradual	みるみる
+
+adverb.observation	よく
+adverb.observation	いつも
+adverb.observation	随分
+adverb.observation	ずいぶん
+adverb.observation	なかなか
+adverb.observation	結構
+adverb.observation	けっこう
+adverb.observation	さすが
+adverb.observation	流石
+adverb.observation	意外と
 
 aru.after-de	ある
 aru.after-de	あり
@@ -227,6 +251,58 @@ copula.short-so	でもな
 copula.short-so	じゃ
 copula.short-so-final	だ
 copula.short-so-sentence	だった
+
+contraction.n-no	ん中
+contraction.n-no	んところ
+contraction.n-no	んとこ
+
+contraction.te-iku	った
+contraction.te-iku	っちゃ
+contraction.te-iku	っちま
+contraction.te-iku	かない
+contraction.te-iku	かなかっ
+contraction.te-iku	かなきゃ
+contraction.te-iku	かなく
+contraction.te-iku	かなけ
+contraction.te-iku	かねー
+contraction.te-iku	かねぇ
+contraction.te-iku	かねえ
+contraction.te-iku	かれる
+contraction.te-iku	かれた
+contraction.te-iku	かれて
+contraction.te-iku	かれちゃ
+contraction.te-iku	かれな
+contraction.te-iku	かれま
+contraction.te-iku	かれそ
+contraction.te-iku	ってくれ
+contraction.te-iku	ってくだ
+contraction.te-iku	ってあげ
+contraction.te-iku	ってもら
+contraction.te-iku	ってやる
+contraction.te-iku	ってやれ
+contraction.te-iku	ってやっ
+contraction.te-iku	ってやろ
+contraction.te-iku	ってほし
+contraction.te-iku	ってちょうだい
+contraction.te-iku	ってね
+contraction.te-iku	ってる
+contraction.te-iku	けよ
+contraction.te-iku	けば
+
+contraction.te-iku-final	って
+contraction.te-iku-final	け
+
+contraction.te-iku-listed	ってよ
+
+contraction.te-iku-not	ったら
+
+contraction.u-onbin	うた
+contraction.u-onbin	うて
+
+contraction.u-onbin-not	うため
+contraction.u-onbin-not	うたび
+contraction.u-onbin-not	うたい
+contraction.u-onbin-not	うたう
 
 counter.bare-native-one	つ
 ending.conjunctive	て
@@ -374,6 +450,16 @@ follower.stem	なかっ
 follower.stem	は
 follower.stem	も
 follower.stem	に
+
+follower.te-imperative	な
+follower.te-imperative	って
+follower.te-imperative	ば
+follower.te-imperative	る
+follower.te-imperative	た
+follower.te-imperative	ます
+follower.te-imperative	ませ
+follower.te-imperative	まし
+follower.te-imperative	ず
 
 follower.verbal-noun	し
 follower.verbal-noun	す
@@ -553,6 +639,7 @@ ko-adjective.stem-end	밉
 ko-adjective.stem-end	넓
 ko-adjective.stem-end	탐탁
 ko-adjective.stem-end	점잖
+ko-adjective.stem-end	고프
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -748,6 +835,13 @@ mark.restart	―
 mark.restart	—
 mark.restart	・・
 mark.restart	··
+mark.comma	、
+mark.comma	，
+mark.comma	,
+
+mark.drawn	ぇ
+mark.drawn	ェ
+mark.drawn	え
 
 mark.sentence-end	。
 mark.sentence-end	！
@@ -1472,6 +1566,34 @@ pronoun.second-person-genitive	お前
 pronoun.second-person-genitive	おまえ
 pronoun.second-person-genitive	きみ
 
+pronoun.speaker	私
+pronoun.speaker	僕
+pronoun.speaker	俺
+pronoun.speaker	わたし
+pronoun.speaker	あたし
+pronoun.speaker	アタシ
+pronoun.speaker	ぼく
+pronoun.speaker	おれ
+pronoun.speaker	ボク
+pronoun.speaker	オレ
+pronoun.speaker	わたくし
+pronoun.speaker	うち
+pronoun.speaker	ウチ
+pronoun.speaker	自分
+pronoun.speaker	私たち
+pronoun.speaker	私達
+pronoun.speaker	わたしたち
+pronoun.speaker	あたしたち
+pronoun.speaker	僕たち
+pronoun.speaker	僕達
+pronoun.speaker	僕ら
+pronoun.speaker	俺たち
+pronoun.speaker	俺達
+pronoun.speaker	俺ら
+pronoun.speaker	我々
+pronoun.speaker	うちら
+pronoun.speaker	ウチら
+
 pronoun.topic-wa	こっち
 pronoun.topic-wa	そっち
 pronoun.topic-wa	あっち
@@ -1914,6 +2036,22 @@ verb.casual-state	すぎ
 verb.casual-state	過ぎ
 verb.casual-state	見え
 verb.casual-state	聞こえ
+verb.casual-state	感じ
+verb.casual-state	思
+verb.casual-state	かか
+verb.casual-state	掛か
+verb.casual-state	叶
+verb.casual-state	疲れ
+verb.casual-state	助か
+verb.casual-state	目立
+verb.casual-state	分か
+verb.casual-state	わか
+verb.casual-state	解か
+verb.casual-state	知
+verb.casual-state	疑
+verb.casual-state	流行
+verb.casual-state	はや
+verb.casual-state	似合
 
 verb.entrust	頼む
 verb.entrust	たのむ
@@ -1922,6 +2060,50 @@ verb.entrust	まかせる
 verb.entrust	任す
 verb.entrust	託す
 verb.entrust	委ねる
+verb.happening	出
+verb.happening	始ま
+verb.happening	はじま
+verb.happening	起き
+verb.happening	起こ
+verb.happening	降
+verb.happening	晴れ
+verb.happening	曇
+verb.happening	増え
+verb.happening	減
+verb.happening	冷え
+verb.happening	燃え
+verb.happening	痺れ
+verb.happening	しびれ
+verb.happening	染み
+verb.happening	しみ
+verb.happening	照れ
+verb.happening	テレ
+verb.happening	惚れ
+verb.happening	憧れ
+verb.happening	済
+verb.happening	思い出
+verb.happening	光
+verb.happening	揺
+verb.happening	震え
+verb.happening	生まれ
+verb.happening	消え
+verb.happening	見つか
+verb.happening	溢れ
+verb.happening	響
+verb.happening	鳴
+verb.happening	輝
+verb.happening	決ま
+verb.happening	慣れ
+verb.happening	飽き
+verb.happening	イケ
+verb.happening	いけ
+verb.happening	沈
+verb.happening	浮か
+verb.happening	暮れ
+verb.happening	明け
+verb.happening	咲
+verb.happening	散
+verb.happening	吹
 
 verb.means	使
 verb.means	用い

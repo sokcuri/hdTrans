@@ -180,6 +180,39 @@ HD_TEST(verb_match_conjugation) {
     }
 }
 
+// A stem one of whose records is a potential (gram Ke) and that is the imperative of a shorter
+// godan record is no ichidan stem before the imperative よ: 笑えよ is 笑え and よ, not the
+// imperative of 笑える; without the shorter record or before ない it stays.
+HD_TEST(verb_potential_no_imperative) {
+    struct Case {
+        std::string_view text;
+        bool shorter;
+        bool ok;
+    };
+    const Case cases[] = {
+        {"笑えよ", true, false},
+        {"笑えよ", false, true},
+        {"笑えない", true, true},
+        {"笑えよう", true, true},
+    };
+    for (const Case& c : cases) {
+        std::deque<word::Record> pool;
+        word::Record& potential = pool.emplace_back();
+        potential.source = "笑え";
+        potential.partCode = "M427";
+        potential.attr = "MaKe";
+        if (c.shorter) {
+            word::Record& godan = pool.emplace_back();
+            godan.source = "笑";
+            godan.partCode = "M430";
+            potential.child = &godan;
+        }
+        word::Detail d;
+        word::Record* stop = nullptr;
+        HD_CHECK_EQ(word::MatchConjugation(d, c.text, 0, &potential, stop), c.ok);
+    }
+}
+
 // Part code byte 3 '>' is pattern kind 14 (no ending): it matches with the length of the
 // record's source and leaves the branch unset.
 HD_TEST(verb_match_direct_kind) {
