@@ -1,0 +1,28 @@
+# 규칙: LEX-6
+rule	input	expected	kind	layer
+analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	has:하는 것 같은	fix	analysis
+analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	lacks:없고	fix	analysis
+analysis:adnominal-na-word	みたいなクサい台詞	has:같은	fix	analysis
+analysis:adnominal-na-word	ようなクドい話	같은 장황한 이야기	fix	analysis
+analysis:adnominal-na-word	変なクサい台詞	has:이상한	fix	analysis
+analysis:adnominal-na-word	くすぐったいようなくすぐったくないような	낯간지러운 것 같은 낯간지럽지 않은 것 같은	fix	analysis
+analysis:adnominal-na-word	みたいなくせに	같은 주제에	fix	analysis
+analysis:adnominal-na-word	変なくせがある	이상한 버릇이 있다	fix	analysis
+analysis:adnominal-na-word	きれいなくつ	예쁜 구두	fix	analysis
+analysis:adnominal-na-word	静かなくらしがしたい	has:조용한	fix	analysis
+analysis:adnominal-na-word	夢のようなくだらない話	꿈 같은 시시한 이야기	keep	analysis
+analysis:adnominal-na-word	遠慮なく食べて	거리낌 없이 먹어	keep	analysis
+analysis:adnominal-na-word	容赦なく斬った	가차 없이 베었다	keep	analysis
+analysis:adnominal-na-word	仕方なく座った	어쩔 수 없이 앉았다	keep	analysis
+analysis:adnominal-na-word	問題なくて安心した	문제없어서 안심했다	keep	analysis
+analysis:adnominal-na-word	間違いなく本物だ	틀림없이 진짜다	keep	analysis
+analysis:adnominal-na-word	元気なくて	기운이 없어서	keep	analysis
+analysis:adnominal-na-word	元気なく笑った	has:없게	keep	analysis
+analysis:adnominal-na-word	ような臭い台詞	같은 구린 대사	keep	analysis
+analysis:adnominal-na-word	そんなクサい台詞	has:냄새가	keep	analysis
+analysis:adnominal-na-word	普段は従順なくせに	평소는 온순한 주제에	fix	analysis
+analysis:adnominal-na-word	お菓子が大好きなくせに	has:아주 좋아하는 주제에	fix	analysis
+analysis:adnominal-na-word	駄目なくせに、練習もできないなんて	has:주제에	fix	analysis
+analysis:adnominal-na-word	よし、異常なしだ。	has:없음	keep	analysis
+analysis:adnominal-na-word	力を入れすぎないように注意しながら	has:않도록	keep	analysis
+analysis:adnominal-na-word	頑張り過ぎないように気をつけろよ	너무 노력하지 않도록 조심해라	keep	analysis

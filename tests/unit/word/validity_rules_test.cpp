@@ -67,3 +67,30 @@ HD_TEST(validity_match_dictionary) {
         HD_CHECK_EQ(worker.MatchDictionary(c.following, c.source, c.first, c.second), c.ok);
     }
 }
+
+// The adnominal な stays before a word in く of two kana or more reaching further than any key
+// that starts at the な (ような + くさい, not なく + さい); not before a lone く, a word that a key
+// from the な covers (遠慮 + なくして) or other kana (異常 + なし).
+HD_TEST(word_after_adnominal) {
+    dict::File base;
+    base.name = "base.tsv";
+    base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n"
+                "くさ\t냄새가 나\tH7N0\t\t\t\t1\n"
+                "なく\t없\tH443\t\t\t\t2\n"
+                "くし\t빗\tN110\t\t\t\t3\n"
+                "なくし\t잃\tM431\t\t\t\t4\n"
+                "しあわせ\t행복\tN110\t\t\t\t5\n"
+                "なし\t없음\tN110\t\t\t\t6\n";
+    const auto snapshot = dict::Load({base}).snapshot;
+    HD_REQUIRE(snapshot != nullptr);
+    tokenizer::Tokens tokens;
+    word::Arena arena;
+    word::Settings settings = word::Settings::Reference();
+    settings.text = true;
+    word::Worker worker(tokens, *snapshot, dict::LookupContext{}, settings, arena, word::LookupObserver{});
+    HD_CHECK(worker.WordAfterAdnominal("くさい相談"));
+    HD_CHECK(!worker.WordAfterAdnominal("しあわせ"));
+    HD_CHECK(!worker.WordAfterAdnominal("くして"));
+    HD_CHECK(!worker.WordAfterAdnominal("く食べて"));
+    HD_CHECK(!worker.WordAfterAdnominal("話"));
+}
