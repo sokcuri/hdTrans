@@ -129,15 +129,29 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
     - The folder in a `docs:<folder>/<name>:<line>` key tells the chapters you looked at while fixing
       (dev set) from the ones you did not (held-out set); report them separately. Other chapter
       folders go through `tools/e2e-pairs.py` (docs/testing.md).
-12. **Judge every changed line.** Do not sample.
-    - The first judge reads every pair; the second re-reads the lines the first called worse or same.
-      With API access, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS] [--effort high]` does
-      this (docs/testing.md "변경 판정").
+12. **Judge every changed line.** Do not sample. You wrote the fix, so you do not judge it, and
+    no judge learns which side is new (docs/testing.md "변경 판정").
+    - With API access to both models, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS]
+      [--effort high]` asks blind (X/Y shuffled per line): the first model reads every pair, the
+      second re-reads the lines the first called worse or same.
+    - Otherwise judge blind with sub-agents. The second API model is often not reachable, so this
+      is the usual path:
+      1. `tools/blind.py make PAIRS.tsv DIR` writes `DIR/blind.tsv` (`id ja X Y`) and `DIR/key.tsv`.
+      2. Two sub-agents that did not take part in the fix each read only `DIR/blind.tsv` and write
+         `DIR/answers-1.tsv` and `DIR/answers-2.tsv` (`id X|Y|same [note]`). Give them the path
+         and the criteria of `tools/judge.py` (faithful, natural Korean; judge only the differing
+         parts; loanword transliterations are fine). Never give them the key, the pairs, the run
+         folder or the fix.
+      3. `tools/blind.py disagree DIR DIR/answers-1.tsv DIR/answers-2.tsv DIR/third.tsv`, then a
+         third such sub-agent reads only `DIR/third.tsv` and writes `DIR/answers-3.tsv`.
+      4. `tools/blind.py final DIR DIR/answers-1.tsv DIR/answers-2.tsv DIR/answers-3.tsv > FINAL.tsv`;
+         a `worse` there is a line two judges called worse.
     - For large sets, split the pairs (`split -l 500 PAIRS.tsv part.`) across parallel judges and
       concatenate their outputs.
     - Verdict files have the columns `key verdict judge [note]`, with verdict `improved`, `same` or `worse`.
     - `tools/verdicts.py PAIRS FIRST [SECOND]` prints changed, improved, same, worse and every key
-      both judges call worse.
+      both judges call worse; for blind judging it is `tools/verdicts.py PAIRS FINAL.tsv`, and every
+      `worse` counts as both judges.
     - A line both judges call worse means reverting or narrowing the change.
     - Keep the change only if improved:worse is at least 2:1, no class of lines gets worse as a
       group, and the sample chrF is not lower than the baseline.

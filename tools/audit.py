@@ -28,7 +28,7 @@ import tempfile
 
 SETS = ("corpus", "sample", "docs", "examples")
 GRADES = ("correct", "minor", "wrong")
-JAPANESE = re.compile("[ぁ-ヿ㐀-鿿]")
+JAPANESE = re.compile("[ぁ-ゖァ-ヺ㐀-鿿]")
 
 
 def fail(message):
@@ -36,18 +36,18 @@ def fail(message):
     sys.exit(2)
 
 
-def lines(path):
-    data = Path(path).read_bytes().decode("utf-8")
+def lines(data):
     return (data[:-1] if data.endswith("\n") else data).split("\n")
 
 
 def aligned(name, ja, ko):
     """Yields (line number, ja, ko) of one input file and its translation."""
-    source = lines(ja)
+    source = Path(ja).read_bytes().decode("utf-8")
     offset = 0
     if name == "docs":
-        source, offset = source[1:], 1
-    target = lines(ko)
+        source, offset = source.partition("\n")[2], 1
+    source = lines(source)
+    target = lines(Path(ko).read_bytes().decode("utf-8"))
     if len(source) != len(target):
         fail(f"line counts differ: {ja} {len(source)}, {ko} {len(target)}")
     for i, (x, y) in enumerate(zip(source, target), 1 + offset):
@@ -147,7 +147,7 @@ def rate(sample, grades):
 
 def self_test():
     rows = [(f"corpus:{i}", f"猫{i}", "x") for i in range(1, 51)]
-    rows += [("corpus:51", "abc", "abc"), ("corpus:52", "猫1", "y")]
+    rows += [("corpus:51", "abc", "abc"), ("corpus:52", "猫1", "y"), ("corpus:53", "・ー", "")]
     chosen, pool = pick(rows, "corpus", 1, 5)
     assert pool == 50 and len(chosen) == 5
     assert [r[0] for r in chosen] == sorted((r[0] for r in chosen), key=lambda k: int(k[7:]))
@@ -155,6 +155,10 @@ def self_test():
     assert len(set(chosen) & set(more)) >= 2
     assert pick(rows, "corpus", 2, 5)[0] != chosen
     with tempfile.TemporaryDirectory() as d:
+        ja, ko = Path(d) / "a.ja.txt", Path(d) / "a.ko.txt"
+        ja.write_text("# only", encoding="utf-8")
+        ko.write_text("", encoding="utf-8")
+        assert list(aligned("docs", ja, ko)) == [(2, "", "")]
         sample, grades = Path(d) / "s.tsv", Path(d) / "g.tsv"
         sample.write_text("corpus:1\ta\tb\t\ndocs:x/y:2\ta\tb\t\n", encoding="utf-8")
         grades.write_text("corpus:1\twrong\tj\ndocs:x/y:2\tminor\tj\tnote\n", encoding="utf-8")

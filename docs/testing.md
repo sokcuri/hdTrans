@@ -266,7 +266,8 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
      줄 번호는 `#` 머리줄도 포함한 1부터 셉니다. 겹치지 않는 폴더 이름을 씁니다. 바뀐 줄만 기록합니다.
    - 모든 도구의 TSV는 탭, 따옴표가 든 필드를 CSV 방식으로 인용합니다. 직접 파싱할 때도 TSV용 CSV 리더를 씁니다.
 
-3. Sonnet(`claude-sonnet-5-5`)으로 **모든 변경 줄**을 판정합니다.
+3. 판정은 바뀐 줄을 만든 쪽이 아닌 판정자가, 어느 쪽이 새 출력인지 모르고 합니다. `judge.py`는 줄마다 X/Y 순서를
+   섞어 묻습니다. Sonnet(`claude-sonnet-5-5`)으로 **모든 변경 줄**을 판정합니다.
 4. Sonnet이 `worse` 또는 `same`으로 본 줄만 `gpt-6.1-sol`의 **high effort**로 다시 판정합니다.
 
    ```sh
@@ -285,13 +286,32 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
      effort는 `--effort` → `JUDGE_EFFORT` → `low` 순입니다.
    - `ANTHROPIC_BASE_URL`(기본 `https://api.anthropic.com`)과 `ANTHROPIC_AUTH_TOKEN`(Bearer) 또는
      `ANTHROPIC_API_KEY`(`x-api-key`)를 환경에서 읽습니다. 둘 다 있으면 Bearer를 씁니다. 키, 토큰을 파일에 넣지 않습니다.
-     GPT 모델은 해당 모델을 제공하는 Anthropic Messages 호환 게이트웨이가 필요합니다.
+     GPT 모델은 해당 모델을 제공하는 Anthropic Messages 호환 게이트웨이가 필요합니다. 그런 게이트웨이나 API 키가
+     없으면 아래 블라인드 판정으로 합니다.
 
    - 줄이 많으면 표본을 뽑지 않고 판정 입력을 나눠(`split -l 500 PAIRS.tsv part.`) 조각마다 판정을 동시에 돌리고
-     출력을 이어 붙입니다. 모델 대신 사람이나 에이전트가 판정한 결과도 같은 열(`key verdict judge`, 넷째 열에 메모)로 씁니다.
+     출력을 이어 붙입니다. 직접 판정한 결과도 같은 열(`key verdict judge`, 넷째 열에 메모)로 씁니다.
+
+   **블라인드 판정 (blind.py).** API 없이 판정할 때 씁니다. 바뀐 줄을 만들지 않은 판정자 둘이 따로 `blind.tsv`만 보고
+   답하고, 답이 갈린 줄은 셋째 판정자가 봅니다. 판정자에게는 `key.tsv`, 판정 입력, run 폴더를 주지 않습니다.
+
+   ```sh
+   B=$RUN/dev.blind
+   python3 tools/blind.py make "$RUN/dev.pairs.tsv" "$B"   # $B/blind.tsv와 $B/key.tsv
+   # 판정자 1, 2가 각자 $B/blind.tsv를 읽고 $B/answers-1.tsv, $B/answers-2.tsv에 `id 답 [메모]`를 씀
+   python3 tools/blind.py disagree "$B" "$B/answers-1.tsv" "$B/answers-2.tsv" "$B/third.tsv"
+   # 판정자 3이 $B/third.tsv만 읽고 $B/answers-3.tsv를 씀
+   python3 tools/blind.py final "$B" "$B/answers-1.tsv" "$B/answers-2.tsv" "$B/answers-3.tsv" > "$RUN/dev.final.tsv"
+   ```
+
+   - `blind.tsv`는 `id ja X Y`입니다. `id`는 줄 번호일 뿐이고 X, Y는 줄마다 무작위로 바꾼 이전, 이후 출력입니다.
+     답은 더 나은 쪽 `X`, `Y`, 또는 `same`입니다.
+   - `final`은 두 답이 같으면 그 답, 다르면 셋째가 고른 쪽, 셋 다 다르면 `same`을 `key verdict judges [메모]`로
+     씁니다. 그래서 `worse`는 두 판정자가 나빠졌다고 본 줄입니다. 답이 모자란 줄은 빠지고 5에서 판정 안 됨으로 셉니다.
 
 5. 개수를 셉니다: `python3 tools/verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.sonnet.tsv" "$RUN/dev.gpt.tsv"`는 바뀐 줄,
-   나아짐, 같음, 나빠짐과 두 모델이 모두 `worse`로 판정한 키를 출력합니다. 그런 줄이 있으면 원인 변경을 되돌리거나 조건을
+   나아짐, 같음, 나빠짐과 두 모델이 모두 `worse`로 판정한 키를 출력합니다. 블라인드 판정은
+   `verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.final.tsv"`이고, 그 `worse`가 두 판정자 모두 나빠졌다고 본 줄입니다. 그런 줄이 있으면 원인 변경을 되돌리거나 조건을
    좁힙니다. 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다. 나아짐:나빠짐이 2:1 이상이고 한 부류의 줄이 몰려
    나빠지지 않을 때 남깁니다.
 6. held-out에도 3~5를 별도로 실행하고, 개발 세트와 held-out의 변경 줄, 개선, 동률, 악화 및 쌍방 악화 수를 **분리 보고**합니다.
@@ -303,37 +323,11 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
    |---|---|---|---|
    | 줄 단위 회귀 문장 | `HDTRANS_CORPUS` | 줄마다 따로(`--each`) | `corpus.pairs.tsv`, `corpus:줄` |
    | 참조 샘플 | `HDTRANS_REF_SAMPLE` | 줄마다 따로 | `sample.pairs.tsv`, `sample:줄` |
-   | 테스트 데이터 문서 | `HDTRANS_TESTDATA` | `e2e.sh`처럼 `#` 머리줄을 빼고 한 문서로 | `docs.pairs.tsv`, `docs:폴더/이름:줄` |
-   | 웹 예제 | `HDTRANS_EXAMPLES` | `web/examples.tsv`의 파일을 `web/examples/`나 이 폴더에서 찾아 한 문서로 | `examples.pairs.tsv`, `examples:파일:줄` |
+   | 테스트 데이터 문서 | `HDTRANS_TESTDATA` | `e2e.sh`처럼 `#` 머리줄을 빼고 한 문서로, 출력에도 머리줄이 없음 | `docs.pairs.tsv`, `docs:폴더/이름:줄` |
+   | 웹 예제 | `HDTRANS_EXAMPLES` | `web/examples.tsv`에 이름과 함께 적힌 파일을 `web/examples/`나 이 폴더에서 찾아 한 문서로 | `examples.pairs.tsv`, `examples:파일:줄` |
 
    줄 번호는 입력 파일에서 셉니다. 네 세트는 동시에 돌고, 문서는 `HDTRANS_JOBS`(기본 CPU 수)개씩 번역합니다.
    `docs:` 키의 폴더로 개발 세트와 held-out을 나눠 셉니다.
-
-## 오류율 감사 (audit.py)
-
-변경 판정은 바뀐 줄만 봅니다. 감사는 릴리스마다 같은 줄을 뽑아 현재 출력에 등급을 매겨, 릴리스끼리 비교할 수 있는
-오류율을 냅니다. 결과는 `$HDTRANS_WORK/audit/<버전>/`에 두고 커밋하지 않습니다.
-
-```sh
-V=0.4.8                                    # 릴리스 버전, develop이면 develop-<짧은 해시>
-tools/measure.sh "audit-$V"                # 네 세트의 현재 출력
-A=$HDTRANS_WORK/audit/$V; mkdir -p "$A"
-python3 tools/audit.py draw "$HDTRANS_WORK/audit-$V" "$A/lines.tsv"
-python3 tools/judge.py claude-sonnet-5-5 "$A/grades.tsv" "$A/lines.tsv" --grade
-python3 tools/audit.py rate "$A/lines.tsv" "$A/grades.tsv" > "$A/rate.tsv"
-```
-
-- `draw RUN OUT.tsv [--seed S] [--per-set N]`: measure.sh run에서 변수가 있는 세트마다 N줄(기본 75, 네 세트면
-  300줄)을 뽑습니다. 가나나 한자가 있는 줄만, 같은 일본어는 세트에 한 번만 셉니다. 씨앗(기본 1), 세트, 일본어의 해시로
-  고르므로 같은 씨앗은 어느 run에서나 같은 줄을 뽑고, 세트에 줄이 늘어도 뽑힌 줄은 거의 그대로입니다. 출력은
-  `judge.py` 입력 형식(`key ja 출력`, 넷째 열은 비움)이고 키는 measure.sh와 같습니다.
-- 등급은 `correct`(그대로 받아들일 번역), `minor`(뜻은 맞지만 조사, 어미, 띄어쓰기, 낱말, 말투가 눈에 띄게 어긋남),
-  `wrong`(뜻이 빠지거나 바뀌거나 더해짐, 일본어가 남음, 깨진 한국어)입니다. 줄은 문맥 없이 보며, 어떤 문맥에서 맞을 수
-  있는 읽기는 오류로 치지 않습니다. `judge.py --grade`는 둘째 열과 셋째 열만 보고 `key 등급 model`을 씁니다. 사람이나
-  에이전트의 등급도 같은 열(`key grade judge`, 넷째 열에 메모)로 씁니다.
-- `rate LINES.tsv GRADES.tsv`: 세트마다 줄 수, 등급별 개수, `wrong %`, `correct`가 아닌 비율을 냅니다. 한 키의 마지막
-  행이 쓰이고, 등급이 없는 줄이 있으면 1로 끝납니다.
-- 씨앗, 세트 크기, 등급을 매긴 판정이 같은 감사끼리만 비교합니다.
 
 ### 나쁜 구간을 고른 층 찾기 (attribute.py)
 
@@ -353,6 +347,60 @@ python3 tools/attribute.py --verdicts "$RUN/spans/sample.verdicts.tsv" \
 어미 출처가 있으면 `+end=층:규칙`을 덧붙입니다. 같은 구간이 반복되면 모두 찾습니다. 표면형을 원문에서 순서대로
 맞추므로 정규화, 합성된 단어는 빠질 수 있고, `-why`가 기록하지 않는 층은 [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)와
 단계 기록으로 확인합니다. 표준 오류에는 분석, 출력 변화, 구간 누락 개수가 나옵니다.
+
+## 오류율 감사 (audit.py)
+
+변경 판정은 바뀐 줄만 봅니다. 감사는 릴리스마다 같은 줄을 뽑아 현재 출력에 등급을 매겨, 릴리스끼리 비교할 수 있는
+오류율을 냅니다. 결과는 `$HDTRANS_WORK/audit/<버전>/`에 두고 커밋하지 않습니다.
+
+```sh
+V=0.4.8                                    # 릴리스 버전, develop이면 develop-<짧은 해시>
+W=${HDTRANS_WORK:-build/work}
+tools/measure.sh "audit-$V"                # 네 세트의 현재 출력
+A=$W/audit/$V; mkdir -p "$A"
+python3 tools/audit.py draw "$W/audit-$V" "$A/lines.tsv"
+python3 tools/judge.py claude-sonnet-5-5 "$A/grades.tsv" "$A/lines.tsv" --grade
+python3 tools/audit.py rate "$A/lines.tsv" "$A/grades.tsv" > "$A/rate.tsv"
+```
+
+- `draw RUN OUT.tsv [--seed S] [--per-set N]`: measure.sh run에서 변수가 있는 세트마다 N줄(기본 75, 네 세트면
+  300줄)을 뽑습니다. 가나나 한자가 있는 줄만, 같은 일본어는 세트에 한 번만 셉니다. 씨앗(기본 1), 세트, 일본어의 해시로
+  고르므로 같은 씨앗은 어느 run에서나 같은 줄을 뽑고, 세트에 줄이 늘어도 뽑힌 줄은 거의 그대로입니다. 출력은
+  `judge.py` 입력 형식(`key ja 출력`, 넷째 열은 비움)이고 키는 measure.sh와 같습니다.
+- 등급은 `correct`(그대로 받아들일 번역), `minor`(뜻은 맞지만 조사, 어미, 띄어쓰기, 낱말, 말투가 눈에 띄게 어긋남),
+  `wrong`(뜻이 빠지거나 바뀌거나 더해짐, 일본어가 남음, 깨진 한국어)입니다. 줄은 문맥 없이 보며, 어떤 문맥에서 맞을 수
+  있는 읽기는 오류로 치지 않습니다. `judge.py --grade`는 둘째 열과 셋째 열만 보고 `key 등급 model`을 씁니다. 직접 매긴
+  등급도 같은 열(`key grade judge`, 넷째 열에 메모)로 씁니다.
+- `rate LINES.tsv GRADES.tsv`: 세트마다 줄 수, 등급별 개수, `wrong %`, `correct`가 아닌 비율을 냅니다. 한 키의 마지막
+  행이 쓰이고, 등급이 없는 줄이 있으면 1로 끝납니다.
+- 씨앗, 세트 크기, 등급을 매긴 판정이 같은 감사끼리만 비교합니다.
+
+## 주기 누적 확인 (cycle)
+
+PR마다의 판정은 그 PR이 갈라져 나온 `develop`과 비교하므로, 같은 주기에 합친 PR끼리의 상호작용은 따로 봐야 합니다.
+
+- **합치기 전.** 번역이 바뀌는 PR은 지금의 `develop`에 rebase하고, 지금의 `develop` 머리 빌드의 run을 기준으로
+  다시 잽니다. 처음 판정한 쌍에 없는 줄만 판정합니다.
+- **합친 뒤.** `develop`에 합칠 때마다 그 커밋을 마지막 릴리스 태그의 run과 네 세트 모두에서 비교하고, run을
+  `$HDTRANS_WORK/cycle/<다음 버전>/`에 쌓습니다. 앞선 확인에서 판정한 쌍에 없는 줄만 판정합니다. 릴리스 리뷰는 마지막
+  확인 뒤에 새로 생긴 줄만 판정하면 됩니다.
+
+```sh
+W=${HDTRANS_WORK:-build/work}; C=$W/cycle/0.4.9     # 다음 버전
+tools/measure.sh -c "$TAG/build/mac/hdtrans" -d "$TAG/dicts" release-v0.4.8   # 태그마다 한 번
+H=$(git -C "$DEV" rev-parse --short HEAD)
+HDTRANS_WORK=$C tools/measure.sh -c "$DEV/build/mac/hdtrans" -d "$DEV/dicts" -b "$W/release-v0.4.8" "$H"
+for s in corpus sample docs examples; do
+  [ -f "$C/$H/$s.pairs.tsv" ] || continue
+  python3 tools/new-pairs.py "$C/$H/$s.new.tsv" "$C/$H/$s.pairs.tsv" \
+    $(find "$C" -name "$s.pairs.tsv" ! -path "$C/$H/*")
+done
+```
+
+- `new-pairs.py OUT.tsv NEW.tsv [OLD.tsv...]`는 NEW의 행 가운데 키, 이전, 이후 출력이 모두 같은 행이 OLD에 없는 것만
+  씁니다. 판정한 뒤 이전이나 이후가 바뀐 줄은 다시 새 줄이 됩니다.
+- `$DEV`는 그 커밋을 고정한 worktree이고 `$TAG`는 태그의 worktree입니다. 새 줄은 위의 변경 판정 3~5로 판정하고
+  판정 결과도 그 run 폴더에 둡니다.
 
 ## 잘못된 출력 찾기 (detect-bad.sh)
 

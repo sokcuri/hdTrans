@@ -28,6 +28,15 @@ grep -F 'docs: 1 changed lines in 1 of 2 documents' "$tmp/second.log" > /dev/nul
 grep -F 'examples: 0 changed lines' "$tmp/second.log" > /dev/null
 grep -F 'corpus: 0 changed lines' "$tmp/second.log" > /dev/null
 [ "$(cut -f 1,2 "$tmp/work/second/docs.pairs.tsv")" = "$(printf 'docs:a/two:2\t猫')" ]
+# A base without the sets is reported as such, and a run cannot be its own base.
+mkdir "$tmp/empty"
+"$here/tools/measure.sh" -c "$cli" -d "$dicts" -b "$tmp/empty" fourth > "$tmp/fourth.log" 2>&1
+grep '^docs: 2 documents in .*/fourth/docs; not in .*/empty$' "$tmp/fourth.log" > /dev/null
+grep '^corpus: 2 lines in .*/fourth/corpus.txt; not in .*/empty$' "$tmp/fourth.log" > /dev/null
+[ ! -e "$tmp/work/fourth/docs.pairs.tsv" ]
+status=0
+"$here/tools/measure.sh" -c "$cli" -d "$dicts" -b fourth fourth > /dev/null 2>&1 || status=$?
+[ "$status" -eq 2 ]
 # A failing set fails the run after the others have reported.
 status=0
 HDTRANS_TESTDATA=$tmp/sample "$here/tools/measure.sh" -c "$cli" -d "$dicts" third > "$tmp/third.log" 2>&1 ||
