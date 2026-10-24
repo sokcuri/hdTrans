@@ -67,3 +67,10 @@ compose:latin-particle-form	Christmasが来る。	Christmas가 온다.	keep	comp
 compose:latin-particle-form	Drumだよ。	Drum이야.	keep	compose
 compose:latin-particle-form	Houstonが来た。	Houston이 왔다.	keep	compose
 compose:latin-particle-form	Meは腹減った！	Me는 배고파!	keep	compose
+compose:latin-particle-form	bagを買った。	bag을 샀다.	fix	compose
+compose:latin-particle-form	Bagは重い。	Bag은 무겁다.	fix	compose
+compose:latin-particle-form	このhandbagが欲しい。	이 handbag을 갖고 싶다.	fix	compose
+compose:latin-particle-form	tagをつけた。	tag를 붙였다.	keep	compose
+compose:latin-particle-form	dogと遊ぶ。	dog와 논다.	keep	compose
+compose:latin-particle-form	bugを直した。	bug를 고쳤다.	keep	compose
+compose:latin-particle-form	flagが立った。	flag가 섰다.	keep	compose
