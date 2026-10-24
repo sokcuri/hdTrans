@@ -1,7 +1,34 @@
+# 규칙: SND-6
 rule	input	expected	kind	layer
 normalize:emphatic-spelling	「さっすが、話がわかるぜ親友！」	「역시, 이해한다 친구!」	fix	normalize
 normalize:emphatic-spelling	さっすがですねぇ！	역시 대단하네요!	fix	normalize
 normalize:emphatic-spelling	しっかたないなぁ…。	어쩔 수 없다….	fix	normalize
 normalize:emphatic-spelling	もうすんごい泣くんだ。	이제 대단히 우는 거야.	fix	normalize
 normalize:emphatic-spelling	すんごく……痛い！	정말……아프다!	fix	normalize
+normalize:emphatic-spelling	「あったりまえでしょ」	「당연하지」	fix	normalize
+normalize:emphatic-spelling	「あったりまえでしょう？」	「당연하겠죠?」	fix	normalize
+normalize:emphatic-spelling	「あ……あったり前よ、あたしが作ったクッキー」	has:당연해	fix	normalize
+normalize:emphatic-spelling	「あ……うん。あったり前じゃない！」	has:당연	fix	normalize
+normalize:emphatic-spelling	「うわ、くっさ。なんだこの部屋……」	「우와, 구리다. 뭐야 이 방……」	fix	normalize
+normalize:emphatic-spelling	「くっさ！？　この匂い」	「구려!? 이 냄새」	fix	normalize
+normalize:emphatic-spelling	アンタどんだけくっさいのよ！	너 얼마나 냄새가 나!	fix	normalize
+normalize:emphatic-spelling	「彼女いるのに何やってんのよ。バッカじゃないの？」	has:바보가 아닌 거야?	fix	normalize
+normalize:emphatic-spelling	「ば、バッカ、これはわざとつけてたの！」	「바, 바보, 이건 일부러 붙였어!」	fix	normalize
+normalize:emphatic-spelling	「はあ！？　バッカじゃないの！？」	「하아!? 바보가 아닌 거야!?」	fix	normalize
+normalize:emphatic-spelling	「冗談に決まってるでしょ、ばっかじゃないの」	「농담일 게 뻔하잖아, 바보가 아닌 거야」	fix	normalize
+normalize:emphatic-spelling	「ばっかじゃないの！　ばっかじゃないの！」	「바보가 아닌 거야! 바보가 아닌 거야!」	fix	normalize
+normalize:emphatic-spelling	「みんなでとか……ばっかみたい」	has:바보같다	fix	normalize
+normalize:emphatic-spelling	「うわ……今日もあっついねー」	「우와……오늘도 덥네~」	fix	normalize
+normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 덥다……」	fix	normalize
+normalize:emphatic-spelling	「ちぇっ……きっついなぁ。優しくしてよね」	「쳇……힘들어. 다정하게 해」	fix	normalize
+normalize:emphatic-spelling	「うっせ」	「시끄러」	fix	normalize
 normalize:emphatic-spelling	さすがですね。	역시 대단하네요.	keep	normalize
+normalize:emphatic-spelling	「どこかに監視カメラとかあったりして」	「어디엔가 감시 카메라라든지 있기도 하며」	keep	normalize
+normalize:emphatic-spelling	「うっせーぞ、黙ってろ」	「시끄러워, 입을 다물어라」	keep	normalize
+normalize:emphatic-spelling	「うっせえよ、フランもだろ」	「시끄러워, 프랑도지」	keep	normalize
+normalize:emphatic-spelling	バッカスの神殿	바커스의 신전	keep	normalize
+normalize:emphatic-spelling	「……いつにも増して、ひっどい成績やなぁ」	has:심한 성적	keep	normalize
+normalize:emphatic-spelling	「学食ばっかじゃ飽きる」	「학생식당뿐은 질린다」	keep	normalize
+normalize:emphatic-spelling	夏本番だー！ くぅ～、あっついねー！！	has:덥네~!!	fix	normalize
+normalize:emphatic-spelling	あっついなぁぁぁ……もー夏かぁ	has:덥다	fix	normalize
+normalize:emphatic-spelling	アホくっさ…クソして寝るわ	has:바보스럽다…	fix	normalize

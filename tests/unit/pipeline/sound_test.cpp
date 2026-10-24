@@ -751,6 +751,38 @@ HD_TEST(pipeline_join_spelled_out) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpelledOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+HD_TEST(pipeline_join_spaced_out) {
+    const auto loaded = dict::Load({{
+        0, "base.tsv",
+        "key\tko\tpos\tid\n"
+        "おとな\t어른\tN110\t1\n"
+        "トイレ\t화장실\tN110\t2\n"
+        "それとも\t아니면\tE300\t3\n"
+        "し\t하\tM100\t4\n"
+        "しら\t모르\tM100\t5\n"
+        "さき\t앞\tN110\t6\n"
+        "あい\t사랑\tN110\t7\n"
+        "通知表\t성적표\tN110\t8\n",
+    }});
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"だよ、お　と　な　の", "だよ、おとなの"},
+        {"『ト　イ　レ』と", "『トイレ』と"},
+        {"「そ れ と も」", "「それとも」"},
+        {"し　て　ま　し　た", "してました"},
+        // Keys one after the other, a list in the order of the kana table, two pieces, a run of
+        // kanji and pieces next to other kana stay.
+        {"「し　ら　さ　き」", "「し　ら　さ　き」"},
+        {"あ　い　う", "あ　い　う"},
+        {"お　と", "お　と"},
+        {"通 知 表", "通 知 表"},
+        {"おと な の", "おと な の"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpacedOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 HD_TEST(pipeline_rewrite_casual_adjectives) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());

@@ -48,7 +48,7 @@ namespace internal {
 //   - the host markers, the longest that matches (SpanOpen);
 //   - the stutter marks U+E000 with their separators (SpanOpen);
 //   - the drawl spans U+E005, U+E006 or U+E007 to the same mark (SpanOpen);
-//   - the emphasis marks U+E008 (SpanOpen) and U+E009 (SpanClose), the lengthening
+//   - the emphasis marks U+E008 and U+E00D (SpanOpen) and U+E009 (SpanClose), the lengthening
 //     mark U+E00A and a run of the drawn mark U+E00B (SpanClose);
 //   - Hangul runs with the masks in or after them (자○), joined by ASCII or full-width
 //     spaces (SpanWord);

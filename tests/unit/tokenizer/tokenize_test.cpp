@@ -511,3 +511,27 @@ HD_TEST(tokenize_kept_kanji_space) {
     // Without joins every such space is dropped.
     HD_CHECK_EQ(ScanText("光 影", true), std::string("24/0:光影 9/0:"));
 }
+
+// With SpaceJoins, a letter after kana goes on with the Japanese token when a word spans both.
+HD_TEST(tokenize_kept_letter_after_kana) {
+    const SpaceJoins joins = [](std::string_view before, std::string_view after) {
+        for (const std::string_view word : {"うp"sv, "おk"sv}) {
+            for (std::size_t start = 0; start < before.size(); start++) {
+                const std::string text = std::string(before.substr(start)) + std::string(after);
+                if (text.starts_with(word) && word.size() > before.size() - start) return true;
+            }
+        }
+        return false;
+    };
+    const auto scan = [&](std::string_view input) {
+        const std::vector<Piece> pieces = {{std::string(input), 0}};
+        Tokens t;
+        TokenizeSpans(pieces, true, t, &joins);
+        return Scanned(t);
+    };
+    HD_CHECK_EQ(scan("写真うｐ"), std::string("24/0:写真うp 9/0:"));
+    HD_CHECK_EQ(scan("おｋおｋ"), std::string("24/0:おkおk 9/0:"));
+    HD_CHECK_EQ(scan("うpした"), std::string("24/0:うpした 9/0:"));
+    HD_CHECK_EQ(scan("これはOKです"), ScanText("これはOKです", true));
+    HD_CHECK_EQ(ScanText("写真うｐ", true), std::string("24/0:写真う 2/0:p 9/0:"));
+}

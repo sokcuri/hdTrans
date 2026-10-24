@@ -558,11 +558,43 @@ std::string WriteEmphasis(std::string_view s) {
     return Utf8(out);
 }
 
+namespace {
+
+// The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
+constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+
+// Whether a syllable with the final f is drawn out by WriteStress: none or one that can be held
+// (ㄴ ㄹ ㅁ ㅇ).
+bool StressFinal(int f) { return f == 0 || f == 4 || f == 8 || f == 16 || f == 21; }
+
+}  // namespace
+
+std::string WriteStress(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kStressMark)) return std::string(s);
+    std::u32string out;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != kStressMark) {
+            out.push_back(rs[i]);
+            continue;
+        }
+        const auto first = i + 1 < rs.size() ? text::Split(rs[i + 1]) : std::nullopt;
+        // The drawn syllables are vowels; without a final, a syllable that starts with ㅇ after them
+        // would run into them (매우).
+        const auto second = i + 2 < rs.size() ? text::Split(rs[i + 2]) : std::nullopt;
+        if (!first || !StressFinal(first->final) || (first->final == 0 && second && second->initial == 11)) continue;
+        const int vowel = kLongVowel[first->vowel];
+        out.push_back(text::Join(first->initial, first->vowel, 0));
+        out.push_back(text::Join(11, vowel, 0));
+        out.push_back(text::Join(11, vowel, first->final));
+        i++;
+    }
+    return Utf8(out);
+}
+
 std::string WriteLengthening(std::string_view s) {
     const std::u32string rs = Runes(s);
     if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark) && !Contains(rs, output::kClipMark)) return std::string(s);
-    // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
-    static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
     std::u32string out;
     int lengthenings = 0;  // the lengthenings right before r
     for (const char32_t r : rs) {
@@ -873,7 +905,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
     });
     st.line = UnescapePrivateUse(WriteLaughter(
         DropEchoedGlosses(DropParticleMarks(
-            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))),
+            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(WriteStress(output::String(st.korean))))))))),
         output::String(typed)));
     if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;

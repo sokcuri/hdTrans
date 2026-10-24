@@ -17,6 +17,9 @@
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
+#include <algorithm>
+#include <vector>
+
 #include "core/dict/classes.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
@@ -27,10 +30,10 @@ namespace hdTrans::pipeline {
 
 using namespace internal;
 
-std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds, const void* context) {
+std::string Normalize(std::string_view line, const LineContext& ctx, const RunLookup& runs) {
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
-    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), holds, context)));
+    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
@@ -282,12 +285,15 @@ std::string DrawlSpan(std::string_view marks, char32_t mark) {
     return out;
 }
 
-// The character before pos, U+0000 at the start of s.
+// The character before pos, past a stress mark (CollapseTsuRuns), U+0000 at the start of s.
 char32_t Before(std::string_view s, size_t pos) {
-    if (pos == 0) return 0;
-    size_t q = pos - 1;
-    while (q > 0 && (static_cast<unsigned char>(s[q]) & 0xC0) == 0x80) q--;
-    return At(s, q).cp;
+    while (pos > 0) {
+        size_t q = pos - 1;
+        while (q > 0 && (static_cast<unsigned char>(s[q]) & 0xC0) == 0x80) q--;
+        if (At(s, q).cp != output::kStressMark) return At(s, q).cp;
+        pos = q;
+    }
+    return 0;
 }
 
 // (?<=^|[\n「『（。！？!?])([ 　―…‥]*) as group 2 (group 1 empty), then rest(end of group 2).
@@ -391,8 +397,8 @@ bool StartJaa(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン", "ゴー",
-                                               "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ"};
+constexpr std::string_view kMilitaryWords[] = {"マル", "ヒト", "フタ", "ニー", "サン", "ヨン",   "ゴー",
+                                               "ゴ",   "ロク", "ナナ", "ハチ", "キュー", "キュウ", "キュ"};
 constexpr std::string_view kMilitaryKana[] = {"まる", "ひと", "ふた", "さん", "よん",
                                               "ごー", "ろく", "なな", "はち", "きゅう"};
 
@@ -414,16 +420,21 @@ bool AnyWord(std::string_view s, size_t& pos, const std::string_view (&words)[N]
     return false;
 }
 
-// W([、・ ー]?W){3} with W a katakana digit word, or four hiragana digit words. A word
-// never begins with a separator or ー, so the first word that fits is the only one
-// that lets the rest match.
+// The separators a katakana military time may have between its words: ヒトマルーマルマル and
+// ヒトハチ～マルマル draw a word out, マルサン…マルマル and マルサン・・マルマル pause.
+constexpr std::u32string_view kMilitarySeparators = U"、・ ー～…‥";
+
+// W(S?P*W){3} with W a katakana digit word, S one of kMilitarySeparators and P one of …‥・, or
+// four hiragana digit words. A word never begins with a separator or ー, so the first word that
+// fits is the only one that lets the rest match.
 bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (AnyWord(s, p, kMilitaryWords)) {
         int n = 1;
         for (; n < 4; n++) {
             size_t q = p;
-            OneOf(s, q, U"、・ ー");  // ヒトマルーマルマル draws a word out
+            OneOf(s, q, kMilitarySeparators);
+            while (OneOf(s, q, U"…‥・")) {}  // マルサン……マルマル
             if (!AnyWord(s, q, kMilitaryWords)) break;
             p = q;
         }
@@ -446,7 +457,8 @@ bool IsKanaOrMark(char32_t c) {
 
 // The end of a katakana time of day (hour 00 to 29 read as マル, ヒト or フタ first, not
 // マルマルマルマル) before hiragana, or after a run of ー～ and small ゥッ that the time takes
-// in, before anything but katakana: ヒトサンマルマルです, フタサンマルマルー！. 0 otherwise.
+// in, before anything but katakana: ヒトサンマルマルです, フタサンマルマルー！; before a ～ and
+// another time, before the ～. 0 otherwise.
 size_t TimeEnd(std::string_view text, const Match& m) {
     const std::string_view w = m.group[0];
     if (!w.starts_with("マル") && !w.starts_with("ヒト") && !w.starts_with("フタ")) return 0;
@@ -455,6 +467,8 @@ size_t TimeEnd(std::string_view text, const Match& m) {
     while (p < text.size() && In(At(text, p).cp, U"ー～ゥッ")) p += At(text, p).size;
     const char32_t c = p < text.size() ? At(text, p).cp : 0;
     if (p == m.end) return c >= U'ぁ' && c <= U'ゖ' ? p : 0;
+    // A ～ before another time is a range (ヒトサンマルマル～フタマルマルマル 1300～2000).
+    if (Match next; At(text, m.end).cp == U'～' && MilitaryTime(text, p, next)) return m.end;
     return (c >= U'ァ' && c <= U'ヶ') || (c >= U'一' && c <= U'鿿') ? 0 : p;
 }
 
@@ -533,8 +547,9 @@ std::string NormalizeForms(std::string_view text) {
     return out;
 }
 
-std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void* context) {
+std::string CollapseTsuRuns(std::string_view in, const RunLookup& runs) {
     std::string out;
+    std::vector<size_t> kept;  // where the っ kept of each run is in out
     size_t copied = 0;
     char32_t prev = 0;
     for (size_t pos = 0; pos < in.size();) {
@@ -547,8 +562,11 @@ std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void*
         const size_t end = pos + RunOf(in.substr(pos), TsuRune);
         const char32_t next = end < in.size() ? text::DecodeRune(in.substr(end)).cp : 0;
         const bool small = RuneIn(next, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮヵヶー");
-        if (end - pos > r.size && LetterRune(prev) && LetterRune(next) && !small && !(holds && holds(context, in, pos, end))) {
-            out.append(in.substr(copied, pos + r.size - copied));
+        if (end - pos > r.size && LetterRune(prev) && LetterRune(next) && !small &&
+            !(runs.holds && runs.holds(runs.context, in, pos, end))) {
+            out.append(in.substr(copied, pos - copied));
+            kept.push_back(out.size());
+            out.append(in.substr(pos, r.size));
             copied = end;
         }
         prev = r.cp;
@@ -556,6 +574,18 @@ std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void*
     }
     if (copied == 0) return std::string(in);
     out.append(in.substr(copied));
+    if (runs.start == nullptr) return out;
+    std::vector<size_t> starts;
+    for (const size_t at : kept) {
+        if (const size_t start = runs.start(runs.context, out, at); start != std::string::npos) starts.push_back(start);
+    }
+    std::sort(starts.begin(), starts.end());
+    starts.erase(std::unique(starts.begin(), starts.end()), starts.end());
+    for (size_t k = starts.size(); k-- > 0;) {
+        std::string mark;
+        text::AppendRune(mark, output::kStressMark);
+        out.insert(starts[k], mark);
+    }
     return out;
 }
 
@@ -605,7 +635,7 @@ std::string RewriteMilitaryTime(std::string_view text) {
         for (size_t i = 0; i < m.group[0].size();) {
             const text::Rune r = At(m.group[0], i);
             i += r.size;
-            if (r.cp == U'、' || r.cp == U'・' || r.cp == U' ' || r.cp == U'ー') continue;
+            if (In(r.cp, kMilitarySeparators)) continue;
             text::AppendRune(words, r.cp >= U'ぁ' && r.cp <= U'ゖ' ? r.cp + 0x60 : r.cp);
         }
         out.append(text.substr(at, m.begin - at));

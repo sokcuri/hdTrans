@@ -76,3 +76,16 @@ dict:i:7788	恐るべき力	무서운 힘	keep	lookup
 dict:s:1500	ググる	구글링	keep	lookup
 dict:s:9451	「ワンチャンスだと？ ルールを説明しろ。」	「원 찬스라고? 룰을 설명해라.」	keep	lookup
 dict:variant:kana:oshihaka	気持ちを推しはかる	기분을 헤아린다	keep	lookup
+dict:s:9453	写真うｐ！	사진 업!	fix	lookup
+dict:s:9453	これは是非とも写真うｐ	이것은 부디 사진 업	fix	lookup
+dict:s:9453	写真うｐはうやむやになっちゃったけどｗ	사진 업은 애매하게 되어버렸지만 ㅋ	fix	lookup
+dict:s:9453	おいらは咬みつきが写真うｐしてくれたら信じる！	has:사진 업해 주면	fix	lookup
+dict:s:9453	だからうｐ！顔写真うｐ！	그러니까 업! 얼굴 사진 업!	fix	lookup
+dict:s:9453	＞写真うｐ	>사진 업	fix	lookup
+dict:s:9454	ここ実話オンリーの怖い話掲示板だけどおｋ？	has:게시판이지만 오케이?	fix	lookup
+dict:s:9454	おｋおｋ	오케이 오케이	fix	lookup
+dict:s:9454	【雑談おｋ】	【잡담 오케이】	fix	lookup
+dict:s:9454	おｋ。すぐ確認の電話	오케이. 바로 확인의 전화	fix	lookup
+dict:s:9454	これはOKです	이것은 OK입니다	keep	lookup
+dict:s:9453	あれをupした	저것을 up 했다	keep	lookup
+dict:s:9453	そうかなｗ	그럴까 ㅋ	keep	lookup

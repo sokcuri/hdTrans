@@ -2,6 +2,7 @@
 #include <span>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -25,8 +26,15 @@ bool CharOrEnd(std::string_view s, size_t p, std::u32string_view set, Match& m, 
     return false;
 }
 
-// The character before byte pos of s; 0 at the start.
-char32_t Before(std::string_view s, size_t pos) { return pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp; }
+// The character before byte pos of s, past a stress mark (CollapseTsuRuns); 0 at the start.
+char32_t Before(std::string_view s, size_t pos) {
+    while (pos > 0) {
+        const text::Rune r = LastRune(s.substr(0, pos));
+        if (r.cp != output::kStressMark) return r.cp;
+        pos -= r.size;
+    }
+    return 0;
+}
 
 // かも(しれ|知れ)(?:ん|ね[ぇえー]+)
 bool Shiren(std::string_view s, size_t pos, Match& m) {
@@ -291,11 +299,6 @@ constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
 constexpr char kSoyuKoto[] = "そゆこと";
-// Words said with an emphatic っ or ん inside: さっすが さすが, しっかた しかた (しっかたないなぁ),
-// すんご すご (すんごい, すんごく).
-constexpr char kSassuga[] = "さっすが";
-constexpr char kShikkata[] = "しっかた";
-constexpr char kSungo[] = "すんご";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -409,10 +412,8 @@ bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
 // Whether pos starts a sentence or a clause: the start of s, or after 「『（。！？!?…‥、
 // or a space.
 bool ClauseStart(std::string_view s, size_t pos) {
-    if (pos == 0) return true;
-    size_t p = pos - 1;
-    while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) p--;
-    return In(At(s, p).cp, U"「『（。！？!?…‥、 　");
+    const char32_t c = Before(s, pos);
+    return c == 0 || In(c, U"「『（。！？!?…‥、 　");
 }
 
 // んで at the start of a clause before 、，？?！!…‥」: それで (んで、どうする).
@@ -690,12 +691,49 @@ bool EndsWithStemKanji(std::string_view s) {
     return last.size == 3 && IsKanji(last.cp) && !In(last.cp, U"見来寝着出居");
 }
 
+bool AdjectiveEnd(char32_t c) { return In(c, U"いくかけそ"); }
+bool NoKana(char32_t c) { return !IsHiraganaRune(c) && !IsKatakanaRune(c); }
+bool NoKatakana(char32_t c) { return !IsKatakanaRune(c); }
+
+// A word said with an emphatic っ or ん inside and its plain spelling, where next holds for
+// the rune after it (0 at the end) and, with clause, where a clause starts before it.
+struct EmphaticSpelling {
+    std::string_view written, plain;
+    bool (*next)(char32_t) = nullptr;
+    bool clause = false;
+};
+constexpr EmphaticSpelling kEmphaticSpellings[] = {
+    {"さっすが", "さすが"},
+    {"しっかた", "しかた"},  // しっかたないなぁ
+    {"すんご", "すご"},      // すんごい, すんごく
+    {"あったりまえ", "あたりまえ"},
+    {"あったり前", "あたり前"},
+    {"くっさ", "くさ", AdjectiveEnd},  // くっさい
+    {"くっさ", "臭っ", NoKana},        // うわ、くっさ。
+    {"あっつ", "暑", AdjectiveEnd},  // あっついねー
+    {"きっつ", "きつ", AdjectiveEnd},
+    {"うっせ", "うるせえ", NoKana},
+    {"バッカ", "バカ", NoKatakana},          // not バッカス
+    {"ばっかじゃ", "バカじゃ", nullptr, true},  // not the ばかり of 学食ばっかじゃ
+    {"ばっかみたい", "バカみたい", nullptr, true},
+};
+
+bool EmphaticAt(std::string_view s, size_t pos, Match& m) {
+    for (const EmphaticSpelling& e : kEmphaticSpellings) {
+        size_t p = pos;
+        if (!Lit(s, p, e.written) || (e.clause && !ClauseStart(s, pos))) continue;
+        if (e.next != nullptr && !e.next(p < s.size() ? At(s, p).cp : 0)) continue;
+        m.group[1] = e.plain;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string RewriteEmphaticSpellings(std::string_view in) {
-    std::string text = ReplaceAll(in, Literal<kSassuga>, [](const Match&) { return std::string("さすが"); });
-    text = ReplaceAll(text, Literal<kShikkata>, [](const Match&) { return std::string("しかた"); });
-    return ReplaceAll(text, Literal<kSungo>, [](const Match&) { return std::string("すご"); });
+    return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
 std::string RewriteCasual(std::string_view in) {

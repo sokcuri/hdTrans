@@ -84,6 +84,13 @@ std::string UnescapePrivateUse(std::string_view s);
 // syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
 std::string WriteEmphasis(std::string_view s);
 
+// Each kStressMark before a Hangul syllable written as that syllable drawn out by two syllables
+// of its vowel, the final consonant moved to the last one (대단해 대애애단해, 정말로 저어엉말로); a
+// syllable that ends in a consonant other than ㄴ ㄹ ㅁ ㅇ stays (확실히, 많이), so does one without a
+// final before a syllable that starts with ㅇ (매우), and so do the kana the composer shifted for WriteDropped; the
+// mark is dropped.
+std::string WriteStress(std::string_view s);
+
 // Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!); each
 // kDrawnMark after a Hangul syllable written as a syllable of its vowel, the final
 // consonant moved to the last one (그만둬\uE00B\uE00B 그만둬어어, 님\uE00B 니임), or after the ~ that
@@ -133,6 +140,8 @@ using output::kEmphasisOpen;
 // The lengthening mark of the sound stage (WriteLengthening).
 using output::kDrawnMark;
 using output::kLengthenMark;
+// The mark before a word said with a run of っ inside (WriteStress).
+using output::kStressMark;
 
 namespace internal {
 

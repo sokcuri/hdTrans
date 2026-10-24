@@ -12,11 +12,20 @@ namespace hdTrans::pipeline {
 // Whether a dictionary word holds the run line[at, end) (じっっくり), so that it stays as written.
 using WordHoldsRun = bool (*)(const void* context, std::string_view line, size_t at, size_t end);
 
+// The dictionary lookups of CollapseTsuRuns, each optional: holds says whether a dictionary
+// word holds the run line[at, end), so that it stays as written; start gives the
+// start of the word that holds the っ at line[at] of the collapsed line, before which the stress
+// mark goes, or npos.
+struct RunLookup {
+    WordHoldsRun holds = nullptr;
+    size_t (*start)(const void* context, std::string_view line, size_t at) = nullptr;
+    const void* context = nullptr;
+};
+
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
 // in normalize.cpp. A line that is written whole from the line table is not passed here.
-// holds, when given, keeps the runs of CollapseTsuRuns that a dictionary word holds.
-std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds = nullptr,
-                      const void* context = nullptr);
+// runs gives the lookups of CollapseTsuRuns.
+std::string Normalize(std::string_view line, const LineContext& ctx, const RunLookup& runs = {});
 
 // How the dictionary reads a ruby base with the kana after it.
 struct BaseReading {
@@ -88,8 +97,9 @@ std::string NormalizeForms(std::string_view text);
 
 // A run of two or more っ or ッ after a letter and before a letter other than a small kana, ー
 // or ～ as its first character (褒められちゃっっっった 褒められちゃった, とっっても とっても),
-// unless holds says a dictionary word holds the run. A run that ends a word (あっっ！) stays.
-std::string CollapseTsuRuns(std::string_view text, WordHoldsRun holds = nullptr, const void* context = nullptr);
+// unless runs.holds says a dictionary word holds the run, and output::kStressMark before the
+// word runs.start finds for it (すっっっごい \uE00Dすっごい). A run that ends a word (あっっ！) stays.
+std::string CollapseTsuRuns(std::string_view text, const RunLookup& runs = {});
 
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.
 std::string JoinNasai(std::string_view text);
@@ -128,7 +138,8 @@ std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool 
 std::string RewriteInterjections(std::string_view text);
 
 // Words said with an emphatic っ or ん inside written plain (さっすが さすが, しっかたない
-// しかたない, すんごい すごい).
+// しかたない, すんごい すごい, あったりまえ あたりまえ, くっさい くさい, バッカ バカ, ばっかじゃ
+// バカじゃ where a clause starts).
 std::string RewriteEmphaticSpellings(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
@@ -137,7 +148,8 @@ std::string RewriteEmphaticSpellings(std::string_view text);
 std::string RewriteCasual(std::string_view text);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル
-// 1400) when no kana follows, or when hiragana follows a time of day (マルロクマルマルです).
+// 1400, ヒトハチ～マルマル 1800, マルサン…マルマル 0300) when no kana follows, or when
+// hiragana follows a time of day (マルロクマルマルです).
 std::string RewriteMilitaryTime(std::string_view text);
 
 // The elder-sibling words of line in a woman's Korean (お兄様 오빠, お姉ちゃん 언니) when

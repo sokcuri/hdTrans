@@ -1,0 +1,21 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:stretched-word	「うは～っ、か～わ～い～い～」	「는~, 귀엽다~」	fix	sound
+sound:stretched-word	か～わ～い～い～！	귀엽다~!	fix	sound
+sound:stretched-word	す～ご～い～！	대단해~!	fix	sound
+sound:stretched-word	「つーかーれーたー」	「지쳤다~」	fix	sound
+sound:stretched-word	ご～ぜ～ん～ 3時でーす(小声)	오전~ 3시입니다(작은 소리)	fix	sound
+sound:stretched-word	「…お〜り〜て〜こ〜い〜…」	「…내리고 와~…」	fix	sound
+sound:stretched-word	やーめーてーよー！	그만둬~!	fix	sound
+sound:stretched-word	か～な～りの優秀艦じゃね。	has:상당한	fix	sound
+sound:stretched-word	「ぎゃあああ！　おーかーさーれーるー！」	「갸아아아! 범해진다~!」	fix	sound
+sound:stretched-word	「ぎょわあッ、や～～ら～～れ～～た～～…………ガクッ」	「교와아, 당했다~…………털썩」	fix	sound
+sound:stretched-word	「とーにーかーく！　避けるの禁止！」	「어쨌든! 피하는 거 금지!」	keep	sound
+sound:stretched-word	「だーかーらー！　夜の生活の話！」	「그러니까~! 밤의 생활의 이야기!」	keep	sound
+sound:stretched-word	「あーそーだー」	「아-그래―」	keep	sound
+sound:stretched-word	「あーそーなの？」	「아-그래?」	keep	sound
+sound:stretched-word	（あ～あ～、ニマニマしちゃってぇ……おっと）	(아~아~, 히죽히죽해서……어이쿠)	keep	sound
+sound:stretched-word	な～に～？痛いじゃない。	뭐~? 아프잖아.	keep	sound
+sound:stretched-word	「そーそー。ひよこ豆を毎日」	「맞아 맞아. 병아리콩을 매일」	keep	sound
+sound:stretched-word	「ねーねー、この話知ってる？」	「있잖아, 이 이야기 알고 있어?」	keep	sound
+sound:stretched-word	「まーねー。はっはっは」	「뭐 그렇지~. 하하하」	keep	sound

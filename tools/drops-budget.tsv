@@ -3,7 +3,7 @@
 # fixes them instead. A set whose number of inputs differs from its row is not compared and gets a
 # warning: the data changed, and --update with that data writes its row again.
 set	inputs	drops
-corpus	64615	1084
+corpus	64615	1082
 sample	39999	303
-docs	18517	181
+docs	18517	180
 examples	3635	16
