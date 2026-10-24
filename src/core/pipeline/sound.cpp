@@ -2165,6 +2165,31 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     return out;
 }
 
+std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.ra-less-kuru")})) return std::string(text);
+    // The ら that the potential られ of an ichidan verb starts with.
+    const std::string_view potential = word::Conjugation(7, 4);
+    const std::string_view ra = potential.substr(0, text::DecodeRune(potential).size);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (StartLength(std::string_view(s).substr(byte[i]), dict::ClassMembers("contraction.ra-less-kuru")) == 0) continue;
+        size_t from = i;
+        while (from > 0 && i - from < kLongestStem && (IsKanjiRune(rs[from - 1]) || IsHiraganaRune(rs[from - 1]))) from--;
+        while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
+        if (from + 1 >= i) continue;
+        out.append(s, byte[done], byte[i + 1] - byte[done]);
+        out += ra;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
     constexpr std::string_view kNo = "の";
     if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
@@ -2258,7 +2283,7 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
         internal::RewriteCasualAdjectives(internal::WriteSounds(
                                               internal::RewriteOnbinU(
                                               internal::RewriteContractedNo(
-                                                  internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), snap),
+                                                  internal::RewriteRaLessKuru(internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), snap),
                                               ctx, snap), ctx, snap),
                                           ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {

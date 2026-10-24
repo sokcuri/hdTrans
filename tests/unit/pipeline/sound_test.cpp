@@ -904,6 +904,32 @@ HD_TEST(pipeline_contracted_iku) {
     }
 }
 
+// The potential of くる without its ら after the て form of a verb of the dictionary takes its ら
+// back; これ is the pronoun before なら and まで, and after no て form.
+HD_TEST(pipeline_ra_less_kuru) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "帰\t돌아&A1@\tM428\t1\n"
+                                     "見\t&AY@\tM437\t2\n"
+                                     "これ\t이것\tN110\t3\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"帰ってこれた", "帰ってこられた"},
+        {"帰ってこれました。", "帰ってこられました。"},
+        {"見てこれない", "見てこられない"},
+        {"帰ってこれる？", "帰ってこられる？"},
+        {"見てこれなら", "見てこれなら"},
+        {"見てこれまで", "見てこれまで"},
+        {"これた", "これた"},
+        {"ここにこれた", "ここにこれた"},
+        {"帰ってこれ", "帰ってこれ"},
+        {"\xcd帰ってこれた", "\xcd帰ってこられた"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteRaLessKuru(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
 HD_TEST(pipeline_contracted_no) {
     const auto loaded = dict::Load({{0, "base.tsv",

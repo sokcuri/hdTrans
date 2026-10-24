@@ -149,6 +149,11 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 // The て form is a verb of the dictionary that ends in its て or で.
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The potential of the くる after a て form said without its ら (帰ってこれた 帰ってこられた, 逃げてこれる)
+// written in full: before the forms of contraction.ra-less-kuru when the dictionary has the verb
+// of the て form before them.
+std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The の after a noun in kanji or katakana said ん before a member of contraction.n-no
 // (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that
 // spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
