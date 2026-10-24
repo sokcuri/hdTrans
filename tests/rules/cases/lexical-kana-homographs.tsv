@@ -1,0 +1,80 @@
+# 규칙: LEX-52, SPC-13
+rule	input	expected	kind	layer
+lookup:kana-homograph	マルハチマルマル。暇つぶしになんかないの？ あるでしょ？	0800. 시간때우기에 왠지 없는 거야? 있겠지?	keep	lookup
+lookup:kana-homograph	そんなことって、あるかな～？	그런 일은, 있을까~?	fix	lookup
+lookup:kana-homograph	「お母さん、家に軍手はあるかな。それとタオル。」	「엄마, 집에 목장갑은 있을까. 그것과 수건.」	fix	lookup
+lookup:kana-homograph	本格ピザ？うーん、材料あるかな？はい、ほいほい…あるね。	has:재료 있을까?	fix	lookup
+lookup:kana-homograph	まだあるくんだ。	아직 걷는 거야.	keep	lookup
+lookup:kana-homograph	一緒にあるこう。	함께 걷자.	keep	lookup
+lookup:kana-homograph	あるいは、内部を確認したかもしれない。	혹은, 내부를 확인했을지도 모른다.	keep	lookup
+lookup:kana-homograph	「三角テントだったら２人じゃきつかったかもしれない」	「삼각 텐트라면 2명은 힘들었던 걸지도 모른다」	fix	lookup
+lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이다!	fix	lookup
+lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
+lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup
+lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨, 그렇지 않아……저, 마신 라페르이죠?」	keep	lookup
+validity:genki-nai	「……元気ない？」	「……기운이 없어?」	fix	analysis
+validity:genki-nai	司令官、元気ないね。	사령관, 기운이 없네.	fix	analysis
+validity:genki-nai	提督、あなたも元気ないわね！	제독, 당신도 기운이 없네!	fix	analysis
+validity:genki-nai	元気なかった。	기운이 없었다.	keep	analysis
+validity:genki-nai	元気な子供。	건강한 아이.	keep	analysis
+validity:genki-nai	もう大事ないのか。	이제 괜찮은 건가.	fix	analysis
+validity:genki-nai	危なげない勝利。	무난한 승리.	fix	analysis
+validity:aru-kana	オイルの在庫はどれくらいあるかな？	오일 재고는 어느 정도 있을까?	fix	analysis
+dict:jisjk:266093	異常なし、です！	이상 없음, 입니다!	fix	local
+dict:jisjk:266093	提督、鎮守府内は異常なし、です！	제독, 진수부내는 이상 없음, 입니다!	fix	local
+dict:jisjk:266093	爆雷も問題なし、魚雷もOK、と。	폭뢰도 문제 없음, 어뢰도 OK, 라고.	fix	local
+dict:jisjk:266093	問題なし。	문제 없음.	keep	local
+sound:teka-open	てかおかしい	그보다, 이상하다	fix	sound
+sound:teka-open	てかイケメン納得だわ	그보다 미남 납득이야	fix	sound
+sound:teka-open	マルサン、マルマル。てかさ、うちらもカタパルト欲しくない？	0300. 그보다, 중 등도 캐터펄트 갖고 싶지 않아?	fix	sound
+sound:teka-open	説教を食らわしてから一週間が経った	lacks:그보다	keep	sound
+sound:teka-open	ここで食べてかない？	여기서 먹어 가지 않아?	keep	sound
+phrase:ならいい	……そう、ならいいけど。	……그래, 그럼 됐지만.	fix	builtin-phrase
+phrase:ならいい	あら、そう？ならいいけど……提督？	어머, 그렇게? 그럼 됐지만……제독?	fix	builtin-phrase
+phrase:ならいい	何か命令が？そう？ならいいの。	뭔가 명령이? 그래? 그럼 됐어.	fix	builtin-phrase
+phrase:ならいい	それならいいけど。	그렇다면 좋은데.	keep	builtin-phrase
+phrase:ならいい	ピアノをならった。	피아노를 배웠다.	keep	builtin-phrase
+dict:w:28630	ほんじゃあ、遠慮なくっ！	그럼, 거리낌 없이!	fix	lookup
+dict:w:28629	ほんじゃ、行くか。	그럼, 갈까.	fix	lookup
+dict:w:28629	本じゃない。	책이 아니다.	keep	lookup
+dict:w:28628	はわわ～。これはええ感じやね～。	has:좋은 느낌	fix	lookup
+cx:go-not-say:15	いってみよう！	가 보자!	fix	rewrites
+cx:go-not-say:15	いってみましょう。	가 봅시다.	fix	rewrites
+cx:go-not-say:15	さあ、いってみよう！綾波型駆逐艦	has:가 보자	fix	rewrites
+cx:go-not-say:15	いってみて。	!rule:cx:go-not-say:15	keep	rewrites
+cx:go-not-say:15	何かいってみよう。	!rule:cx:go-not-say:15	keep	rewrites
+cx:mae-he:10	艦隊、前へ！	함대, 앞으로!	fix	rewrites
+cx:mae-he:10	一歩前へ。	한 걸음 앞으로.	fix	rewrites
+cx:mae-he:10	第一駆逐隊、出撃です！艦隊、前へ！	has:함대, 앞으로!	fix	rewrites
+cx:mae-he:10	前へ出ろ。	앞으로 나와라.	fix	rewrites
+cx:mae-he:10	まだ進むだけ。皆さん……前へ。参りましょう！	has:앞으로.	fix	rewrites
+cx:mae-he:10	滑るように前へ飛び	!rule:cx:mae-he:10	keep	rewrites
+cx:mae-he:10	前に出ろ。	!rule:cx:mae-he:10	keep	rewrites
+cx:nanja-final:10	大武会を見るのはこれが初めてなんじゃ。	오오타케회를 보는 것은 이것이 처음이지.	fix	rewrites
+cx:nanja-final:10	新しいやり方の新興宗教なんじゃ…	새로운 방식의 신흥 종교지…	fix	rewrites
+cx:nanja-final:10	本当なんじゃないか。	!rule:cx:nanja-final:10	keep	rewrites
+cx:nanja-final:10	何なんじゃ、お前は。	!rule:cx:nanja-final:10	keep	rewrites
+dict:w:28618	まるで心臓を握られたように、頭がズキズキと痛みだした。	has:아프기 시작했다	fix	lookup
+dict:w:28619	ペニスの根元から甘い疼きが湧きだしてきた。	has:솟아나기 시작해	fix	lookup
+dict:w:28620	それを合図に立っていた生徒たちも席に座りだす。	그것을 신호에 서 있던 학생들도 자리에 앉기 시작한다.	fix	lookup
+dict:w:28621	トテトテ先に走りだす。	has:달리기 시작한다	fix	lookup
+dict:w:28626	音楽にあわせて踊りだした。	has:춤추기 시작했다	fix	lookup
+dict:w:28623	誰も彼もが何かを話しだした。	has:이야기하기 시작했다	fix	lookup
+dict:w:28622	それは怒りだ。	그것은 분노다.	keep	lookup
+dict:w:28621	走りだけは得意だ。	달리기만은 자신있다.	keep	lookup
+dict:jisjk:4904	「うまかった。」	「맛있었다.」	fix	local
+dict:jisjk:4904	うまかった！	맛있었다!	fix	local
+dict:jisjk:4904	彼は歌がうまかった。	그는 노래가 능숙했다.	keep	local
+dict:jisjk:342448	じゃあなんで地中に……	has:왜 지중에	fix	local
+dict:jisjk:342448	「え！じゃあなんでこの大会に出ろなんて言ったの」	has:왜 이 대회에	fix	local
+dict:jisjk:342448	訳なんで、	것이니까,	keep	local
+dict:jisjk:259274	内容は百人一首の現代語訳と解釈だ。	has:현대어역	fix	local
+dict:jisjk:259274	そういう訳だ。	그런 것이다.	keep	local
+dict:jisjk:104796	「脚立が倒れそうですっ」	「접사다리가 쓰러질 것 같습니다」	fix	lookup
+dict:jisjk:82576	ついに俺たちは幼馴染から赤の他人になった。	마침내 우리는 소꿉친구에게서 생판 남이 되었다.	fix	lookup
+dict:w:28632	「脱がしていい？」	「벗겨도 좋아?」	fix	lookup
+dict:w:28632	その悪戯した人形を脱がしてやる！	has:벗겨 준	fix	lookup
+dict:w:28635	「脱がせるからな」	「벗기니까」	fix	lookup
+dict:w:28635	するっと下着を脱がせて、	has:벗기고	fix	lookup
+dict:w:28633	魅音とレナは顔を見合わせクスリと笑い合った。	미온과 레나는 얼굴을 마주 보고 피식 함께 웃었다.	fix	lookup
+dict:w:28634	それが、保健室に担ぎ込まれた直後の体温だった。	그것이, 양호실에 실려 간 직후의 체온이었다.	fix	lookup

@@ -4352,6 +4352,7 @@ verb.errand	洗濯
 verb.errand	偵察
 verb.errand	点検
 verb.errand	着替
+
 verb.kakeru-directed	話し
 verb.kakeru-directed	問い
 verb.kakeru-directed	呼び
@@ -4394,6 +4395,7 @@ verb.kakeru-directed	ほほえみ
 verb.kakeru-directed	わらい
 verb.kakeru-directed	とい
 verb.kakeru-directed	おい
+
 verb.kakeru-unwilled	なり
 verb.kakeru-unwilled	あり
 verb.kakeru-unwilled	忘れ
@@ -4469,6 +4471,8 @@ verb.kakeru-unwilled	こわれ
 verb.kakeru-unwilled	くずれ
 verb.kakeru-unwilled	たおれ
 verb.kakeru-unwilled	ころび
+
+
 verb.means	使
 verb.means	用い
 verb.means	利用し
@@ -5448,6 +5452,7 @@ word.denial-lead	あ
 word.denial-lead	あっ
 word.denial-lead	あの
 word.denial-lead	いやいや
+
 word.supposing	仮定
 word.supposing	表現
 word.supposing	判断
@@ -5485,6 +5490,7 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+
 word.survival	命
 word.survival	いのち
 word.survival	生命
