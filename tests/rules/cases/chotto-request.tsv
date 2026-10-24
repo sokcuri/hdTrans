@@ -1,0 +1,40 @@
+# 규칙: LEX-20
+rule	input	expected	kind	layer
+cx:chotto-request:10	ちょっと見て	잠깐 봐	fix	rewrites
+cx:chotto-request:10	「ちょっと見てよ」	「잠깐 봐」	fix	rewrites
+cx:chotto-request:10	ちょっと見せて	잠깐 보여 줘	fix	rewrites
+cx:chotto-request:10	「あせもじゃないか？　ちょっと見せて」	rule:cx:chotto-request:10=잠깐	fix	rewrites
+cx:chotto-request:10	「あー、そうそう、ちょっと聞いてよ」	rule:cx:chotto-request:10=잠깐	fix	rewrites
+cx:chotto-request:10	「白崎、ちょっと耳を貸してくれ」	「시라사키, 잠깐 귀를 기울여 줘」	fix	rewrites
+cx:chotto-request:10	「ちょっときてくれ」	「잠깐 와 줘」	fix	rewrites
+cx:chotto-request:10	「あ、ちょっと動かないで下さいね」	rule:cx:chotto-request:10=잠깐	fix	rewrites
+cx:chotto-request:10	「ちょっと聞いてもらえるかな」	「잠깐 들어 줄 수 있을까」	fix	rewrites
+cx:chotto-request:10	……ちょっと見せてくれませんか。	……잠깐 보여 주지 않겠습니까.	fix	rewrites
+cx:chotto-request:10	「ちょっと落ち着いて」	「잠깐 침착해」	fix	rewrites
+cx:chotto-request:10	ちょっと貸して！	잠깐 빌려 줘!	fix	rewrites
+cx:chotto-request:10	ちょっと高い	조금 높다	keep	rewrites
+cx:chotto-request:10	ちょっと疲れた	조금 지쳤다	keep	rewrites
+cx:chotto-request:10	ちょっと疲れてね	조금 지쳐	keep	rewrites
+cx:chotto-request:10	「あはは、ちょっとびっくりしちゃって」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	「ただ、ちょっと気になったので」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	ちょっと困ってて	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	ちょっと疲れて、寝た。	조금 지쳐, 잤다.	keep	rewrites
+cx:chotto-request:10	ちょっと見てくる	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	もうちょっと考えて下さい	좀 더 생각해 주세요	keep	rewrites
+dict:w:26722	「すまないが、ちょっといいか？」	「미안하지만, 잠깐 괜찮아?」	fix	local
+dict:w:26722	「あの、ちょっといいですか？」	「저, 잠깐 괜찮습니까?」	fix	local
+dict:w:26722	「あの、ちょっとよろしいですか？」	rule:dict:w:26722=잠깐	fix	local
+dict:w:26722	「ねえ……ちょっといいかな」	rule:dict:w:26722=잠깐	fix	local
+dict:w:26722	ちょっと待ってて	rule:dict:w:26722=잠깐	keep	local
+dict:w:26722	ちょっといい感じ	조금 괜찮은 느낌	keep	local
+cx:chotto-request:10	「ゴメン、ちょっと離れてくれる？」	「미안해, 조금 떨어져 줄래?」	keep	rewrites
+cx:chotto-request:10	「目をつぶってちょっと屈んで下さい」	!rule:cx:chotto-request:10	keep	rewrites
+dict:w:26722	夜戦とかはちょっといいかな。	!rule:dict:w:26722	keep	local
+cx:chotto-request:10	「ちょっと疲れて」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	「最近ちょっと太って」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	「ちょっと困って」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	「ちょっと頼まれて」	!rule:cx:chotto-request:10	keep	rewrites
+cx:chotto-request:10	ちょっと驚いて。	!rule:cx:chotto-request:10	keep	rewrites
+dict:w:26722	ちょっといる？	!rule:dict:w:26722	keep	local
+dict:w:26722	「ちょっといいかしら？」	rule:dict:w:26722=잠깐	fix	local
+cx:chotto-request:10	「ちょっと慣れて」	!rule:cx:chotto-request:10	keep	rewrites

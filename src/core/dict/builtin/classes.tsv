@@ -152,7 +152,10 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.causative-passive	Dictionary verbs in される whose Korean is the causative-passive 게 되다 (待たされる 기다리게 되다); a person before に is who made it happen.
+//= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
+//= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
+//= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
@@ -2334,6 +2337,28 @@ verb.causative-passive	行かされ
 verb.causative-passive	謝らされ
 verb.causative-passive	闘わされ
 verb.causative-passive	飲まされ
+verb.condition	疲れ
+verb.condition	つかれ
+verb.condition	困
+verb.condition	こま
+verb.condition	太
+verb.condition	ふと
+verb.condition	痩せ
+verb.condition	やせ
+verb.condition	驚
+verb.condition	おどろ
+verb.condition	悩
+verb.condition	なや
+verb.condition	酔
+verb.condition	慣れ
+verb.condition	なれ
+verb.condition	飽き
+verb.condition	あき
+verb.elapse	経つ
+verb.elapse	たつ
+verb.elapse	過ぎる
+verb.elapse	すぎる
+verb.elapse	する
 
 verb.entrust	頼む
 verb.entrust	たのむ
@@ -2342,6 +2367,23 @@ verb.entrust	まかせる
 verb.entrust	任す
 verb.entrust	託す
 verb.entrust	委ねる
+verb.extent	離れる
+verb.extent	はなれる
+verb.extent	下がる
+verb.extent	さがる
+verb.extent	屈む
+verb.extent	かがむ
+verb.extent	詰める
+verb.extent	つめる
+verb.extent	上げる
+verb.extent	下げる
+verb.extent	ずれる
+verb.extent	ずらす
+verb.extent	近づく
+verb.extent	近寄る
+verb.extent	さげる
+verb.extent	ちかづく
+verb.extent	ちかよる
 verb.happening	始ま
 verb.happening	はじま
 verb.happening	起き

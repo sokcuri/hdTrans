@@ -6,6 +6,7 @@
 
 #include "core/dict/classes.h"
 #include "core/word/conjugation.h"
+#include "core/word/constructions.h"
 #include "core/word/flush.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
@@ -190,7 +191,13 @@ Phrase FindPhrase(Flusher& f) {
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
                     if (combined != record->source || At(record->partCode, 0) != 'N') continue;
+                    // Copies said straight after it are passed over: the word reads like the last
+                    // copy of the run (好き好き好き, 迷い迷い、).
                     Item* next = it->After();
+                    for (const Item* copy = it; next != nullptr && internal::CopyAfter(copy) == next;) {
+                        copy = next;
+                        next = next->After();
+                    }
                     if (next != nullptr) {
                         const char k = At(next->Code(0), 0);
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {

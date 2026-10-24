@@ -1,0 +1,44 @@
+# 규칙: LEX-11, NUM-7
+rule	input	expected	kind	layer
+dict:jisjk:354152	三回も言った。	세 번이나 말했다.	fix	local
+dict:jisjk:354152	二度も言った。	두 번이나 말했다.	fix	local
+dict:jisjk:354152	数時間も話した。	몇 시간이나 이야기했다.	fix	local
+dict:jisjk:354152	「馬鹿なことを二度も言うな！」	rule:dict:jisjk:354152=(이)나	fix	local
+dict:jisjk:354152	帝の子を四人も失わせてしまった。	황제의 아이를 네 명이나 잃게 해 버렸다.	fix	local
+dict:jisjk:354152	その体で三人も倒したそうじゃない。	rule:dict:jisjk:354152=(이)나	fix	local
+dict:jisjk:354152	侵入を二度も許したのは	rule:dict:jisjk:354152=(이)나	fix	local
+dict:jisjk:354152	魔法使いが幾人もおられるとか。	마법사가 몇 사람이나 계신다든가.	fix	local
+dict:jisjk:354152	妓女を幾人も見てきた。	기생을 몇 사람이나 봐 왔다.	fix	local
+dict:jisjk:354152	もう何十年も使われていないという話だった。	rule:dict:jisjk:354152=(이)나	fix	local
+dict:jisjk:354152	数年も経つ頃には	수년이나 지나는 무렵에는	fix	local
+dict:jisjk:354152	何年も見てなかったな	몇 년이나 보지 않았네	keep	local
+dict:jisjk:354152	二度も三度も言った。	두 번도 세 번도 말했다.	keep	local
+dict:jisjk:354152	２回も３回も言った。	2번도 3번도 말했다.	keep	local
+dict:jisjk:354152	二人も来た。	두 사람도 왔다.	keep	local
+dict:jisjk:354152	この二人も相変わらず仲がいいな。	이 두 사람도 변함없이 사이가 좋네.	keep	local
+dict:jisjk:354152	残りの三発もやってくれ	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	文句の一つも言ってやろう	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	茶の一杯も出さなきゃならなかった	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	一人も死なせるわけにはいかない	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	一発も撃たせるなってオーダーなの	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	次の一年も頼むぞ。	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	さすがの千里も疲れた。	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	516も言ってる	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:4079	一回も言わなかった。	한 번도 말하지 않았다.	keep	local
+dict:jisjk:4079	三回も言わなかった。	rule:dict:jisjk:4079=도	fix	local
+dict:jisjk:4079	三人も来なかった。	rule:dict:jisjk:4079=도	fix	local
+dict:jisjk:354152	一年も経ってないんですよ。	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:4078	二度も三度も言った。	rule:dict:jisjk:4078=도	fix	local
+cx:count-mo-condition:10	怪談話は半年もすれば落ち着いた	rule:cx:count-mo-condition:10=도	fix	rewrites
+cx:count-mo-condition:10	「考えてみりゃもう１０月だ。半年も経てばみんな変わるよなぁ」	rule:cx:count-mo-condition:10=도	fix	rewrites
+cx:count-mo-condition:10	お付き合いして三か月も経てば	교제해 3개월도 지나면	fix	rewrites
+cx:count-mo-condition:10	半年も続けた	!rule:cx:count-mo-condition:10	keep	rewrites
+cx:count-mo-condition:10	三回も言った。	!rule:cx:count-mo-condition:10	keep	rewrites
+dict:jisjk:354152	あの三人も知っている	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	その三人も来た	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	彼ら三人も来た	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	千里も疲れた。	!rule:dict:jisjk:354152	keep	local
+dict:jisjk:354152	私も三回も言った	rule:dict:jisjk:354152=(이)나	fix	local
+dict:jisjk:354152	だが、数年も経つ頃には	rule:dict:jisjk:354152=(이)나	fix	local
+cx:count-mo-condition:10	三杯もそばを食べた	!rule:cx:count-mo-condition:10	keep	rewrites
+cx:count-mo-condition:10	三回も言えば分かる	!rule:cx:count-mo-condition:10	keep	rewrites

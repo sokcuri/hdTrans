@@ -126,6 +126,9 @@ struct ConstructionTable {
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes);
 // The parsed builtin constructions.tsv.
 const ConstructionTable& BuiltinConstructions();
+// The word after it that repeats it: the same text in the same token, with nothing or a
+// pause.copy mark between (いや|いや, 待って、待って); null for none.
+const Item* CopyAfter(const Item* it);
 
 }  // namespace internal
 
