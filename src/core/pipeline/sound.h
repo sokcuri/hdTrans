@@ -90,6 +90,7 @@
 namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedIku, RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
@@ -181,6 +182,13 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
 // (届いてぇ; 冷てぇ and いてぇ are adjectives). A kanji that starts a word clipped with っ
 // before a mark is the adjective of that kanji with い (浅っ 浅い).
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
+// katakana or two or more hiragana (圭ちゃ～ん, 田中さぁあん, アルくぅん) is the honorific with
+// the lengthening mark after it; a longer dictionary word that the honorific starts takes the
+// mark after that word, also with no word before it (ちゃ～んと ちゃんと). A ん said again is
+// dropped (さああんん); ちゃうん, whose う is no vowel of ちゃ, stays.
+std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The emphasis that spoken text writes inside a word dropped when the dictionary then
 // reads the word: a っ before a kana that does not start a て or た form (まっかせて,

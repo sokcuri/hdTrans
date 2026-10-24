@@ -979,3 +979,30 @@ HD_TEST(pipeline_onbin_u) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteOnbinU(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
+
+// An honorific drawn out before its ん after a word is the honorific with the lengthening mark;
+// a longer word it starts takes the mark after that word, also with no word before it.
+HD_TEST(pipeline_drawn_honorifics) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "ちゃんと\t제대로\tE300\t1\n"
+                                     "ちゃう\t아니\tM100\t2\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"圭ちゃ～ん！", "圭ちゃん\uE00A！"},
+        {"田中さぁあぁあん…", "田中さん\uE00A…"},
+        {"アルくぅん！", "アルくん\uE00A！"},
+        {"みどりさああんん！", "みどりさん\uE00A！"},
+        {"ちゃーんと見て", "ちゃんと\uE00A見て"},
+        {"がちゃ～んと", "がちゃんと\uE00A"},
+        {"…くぅん", "…くぅん"},
+        {"そうちゃうん？", "そうちゃうん？"},
+        {"うくぅんんっ！", "うくぅんんっ！"},
+        {"びちゃーん！", "びちゃーん！"},
+        {"田中さん", "田中さん"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}

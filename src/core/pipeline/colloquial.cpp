@@ -797,6 +797,45 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
     return EncodeText(out);
 }
 
+std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    const Emphasis e(ctx, snap);
+    bool changed = false;
+    for (const std::string_view member : dict::ClassMembers("honorific.drawn-out")) {
+        const std::u32string h = DecodeText(member);
+        if (h.size() < 2) continue;
+        const std::u32string_view stem = std::u32string_view(h).substr(0, h.size() - 1);
+        const int v = HiraganaVowel(stem.back());
+        if (v < 0) continue;
+        for (size_t i = 0; i + stem.size() + 1 < rs.size(); i++) {
+            if (std::u32string_view(rs).substr(i, stem.size()) != stem) continue;
+            size_t end = i + stem.size();
+            // ー, ～ or the small or plain kana of the vowel (each plain vowel follows its small one).
+            while (end < rs.size() &&
+                   (IsDash(rs[end]) || (HiraganaVowel(rs[end]) == v && (IsSmallVowel(rs[end]) || IsSmallVowel(rs[end] - 1))))) {
+                end++;
+            }
+            if (end == i + stem.size() || end >= rs.size() || rs[end] != h.back()) continue;
+            size_t last = end + 1;
+            while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
+            // The honorific spelled plainly, and the longest dictionary word it starts there.
+            std::u32string plain = Spliced(rs, i, h, last);
+            const size_t word = e.LongestKey(std::u32string_view(plain).substr(i));
+            // A name before it: kanji or katakana, or two or more hiragana (みどりさああん; not the
+            // cry うくぅんん or the sound びちゃーん).
+            const bool afterWord = i > 0 && (IsKatakanaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1]) ||
+                                             (i > 1 && IsHiraganaRune(rs[i - 1]) && IsHiraganaRune(rs[i - 2])));
+            if (word <= h.size() && !afterWord) continue;
+            const size_t mark = i + std::max(word, h.size());
+            plain.insert(plain.begin() + static_cast<std::ptrdiff_t>(mark), kLengthenMark);
+            rs = std::move(plain);
+            changed = true;
+            i = mark;
+        }
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
