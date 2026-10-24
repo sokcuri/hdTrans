@@ -1,0 +1,8 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+dict:drops-conj:12	「誰が泣いてたって？　適当言うんじゃないよ」	「누가 울고 있었다고? 적당 말하지 않아」	fix	local-ending
+dict:drops-conj:12	提督が言ってたって？ ほんと？	제독이 말했다고? 정말?	fix	local-ending
+dict:drops-conj:12	朧が頑張ったって？	농이 노력했다고?	fix	local-ending
+dict:drops-conj:12	いくら言ったって無駄だ。	!rule:dict:drops-conj:12	keep	local-ending
+dict:drops-conj:12	しおいが言ってたって！	!rule:dict:drops-conj:12	keep	local-ending
+dict:drops-conj:12	他の子がどうしたって？	다른 아이가 어떻게 하든?	keep	local-ending
