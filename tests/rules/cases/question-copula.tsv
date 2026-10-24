@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+rewrite:question-copula	誰だ！	누구냐!	fix	rewrites
+rewrite:question-copula	何だ、少尉。	뭐냐, 소위.	fix	rewrites
+rewrite:question-copula	「どれだ」	「어떤 것이냐」	fix	rewrites
+rewrite:question-copula	何だか変だ。	왠지 이상하다.	keep	rewrites
+rewrite:question-copula	「いつだ？」	「언제야?」	keep	rewrites

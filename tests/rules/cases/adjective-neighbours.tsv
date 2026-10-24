@@ -1,0 +1,5 @@
+rule	input	expected	kind	layer
+rewrite:adjective-neighbours	需要ないだろ、それ	수요 없겠지, 그것	fix	rewrites
+rewrite:adjective-neighbours	高いだろう	비쌀 것이다	keep	rewrites
+rewrite:adjective-neighbours	関係がまずくなる。	관계가 큰일이 된다.	fix	rewrites
+rewrite:adjective-neighbours	赤くなる。	붉어진다.	keep	rewrites

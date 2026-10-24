@@ -1,0 +1,7 @@
+rule	input	expected	kind	layer
+rewrite:negative-copula	意味のある言葉ではない。	의미가 있는 말이 아니다.	fix	rewrites
+rewrite:negative-copula	俺ではない。	내가 아니다.	fix	rewrites
+rewrite:negative-copula	私ではないです。	제가 아닙니다.	fix	rewrites
+rewrite:negative-copula	お前ではない。	네가 아니다.	fix	rewrites
+rewrite:negative-copula	大した傷ではないが、痛い。	대단한 상처는 아니지만, 아프다.	keep	rewrites
+rewrite:negative-copula	静かではない。	조용하지 않다.	keep	rewrites
