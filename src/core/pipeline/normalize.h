@@ -53,11 +53,12 @@ std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
-// or semi-voiced mark composed (ｶﾞ ガ, ﾊﾟ パ, ｳﾞ ヴ; a mark that does not compose becomes
-// ゛ or ゜); the CP932 mapping differences (〜 ～, − －, ‖ ∥, ¢ £ ¬ in full width) and
-// kanji forms outside JIS X 0208 (頰 頬, 𠮟 叱) mapped; ‼ ⁉ ⁈ as two marks (！！ ！？ ？！)
-// without a variation selector after them; U+0000..U+0003 as spaces. Invalid UTF-8 bytes
-// are kept.
+// or semi-voiced mark composed (ｶﾞ ガ, ﾊﾟ パ, ｳﾞ ヴ; another mark becomes ゛ or ゜); a voiced
+// mark after a vowel, ん, っ, ー or a small kana dropped (あ゛っ あっ, ｱﾞ ア), on ウ before a
+// small vowel or a katakana letter composed (ウ゛ァ ヴァ); the CP932 mapping differences (〜 ～,
+// − －, ‖ ∥, ¢ £ ¬ in full width) and kanji forms outside JIS X 0208 (頰 頬, 𠮟 叱) mapped;
+// ‼ ⁉ ⁈ as two marks (！！ ！？ ？！) without a variation selector after them; U+0000..U+0003 as
+// spaces. Invalid UTF-8 bytes are kept.
 std::string NormalizeForms(std::string_view text);
 
 // ごめん, ゴメン, おやすみ, おかえり, お帰り joined to a なさい cut off by 、，…‥・.

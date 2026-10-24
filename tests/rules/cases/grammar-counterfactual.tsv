@@ -1,0 +1,34 @@
+# 규칙: GRM-7
+rule	input	expected	kind	layer
+cx:counterfactual-past:10	雨が降っていなければ、試合は中止にならなかった。	비가 오지 않았더라면, 시합은 중지가 되지 않았다.	fix	rewrites
+cx:counterfactual-past:10	もっと正確に計算出来てれば、また別のことも考えられたのに……	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	たしかに、あそこでみんながバラバラになってなければ、もっと有利な展開だったかもしれない。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	もし貫通力の高い弾丸を使っていれば命はなかった。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	ヘイディオの犯行声明がなければ、世界大戦が起こっていても不思議ではなかった	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	君がいなければ、僕は死んでいた。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	もっと早く来ていれば間に合ったのに。	좀 더 빨리 와 있었더라면 늦지 않았는데.	fix	rewrites
+cx:counterfactual-past:10	あの時勉強していれば、合格できただろう。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:20	あと１０センチちがっていたら、僕に刺さっていたかもしれない。	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
+cx:counterfactual-past:20	もし、誰かとぶつかる可能性があるという考えを持っていれば、キミとの激突は避けられたかもしれない	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
+cx:counterfactual-past:20	お金があれば買えたのに。	돈이 있었더라면 살 수 있었는데.	fix	rewrites
+cx:counterfactual-past:20	本気を出せば、プロにはなれたかもしれない。	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
+cx:counterfactual-past:20	それなら断ればよかったのに。	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
+cx:counterfactual-past:30	うあー、勢いであんなこと言わなければ良かった	rule:cx:counterfactual-past:30=1지 않았더라면	fix	rewrites
+cx:counterfactual-past:30	奴等が村に来なければ、戦闘を始めなければ、俺はギアに乗ることもなかった。	rule:cx:counterfactual-past:30=1지 않았더라면	fix	rewrites
+cx:counterfactual-past:20	外に出て、がむしゃらに走っていたら頭が冷えた。	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:20	調べ物をしていたら、思わず占いにはまってしまった	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:20	気がつけば、引き返せない一線を越えていた。	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:20	窓を開ければ海が見えた。	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:20	直ったら、未散になにか吹いてもらおうと思ってたのに……	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:10	雨が降っていなければ、試合は中止になる。	!rule:cx:counterfactual-past:10	keep	rewrites
+cx:counterfactual-past:30	行かなければならなかった。	!rule:cx:counterfactual-past:30	keep	rewrites
+cx:counterfactual-past:10	夢でなければ、未来は俺の机の前に座っていた。	!rule:cx:counterfactual-past:10	keep	rewrites
+cx:counterfactual-past:10	どうにかしてそれを黙らせなければならなかった。	!rule:cx:counterfactual-past:10	keep	rewrites
+cx:counterfactual-past:10	その領地は、栄えてもいなければ、領民が圧政で苦しんでもいない。	!rule:cx:counterfactual-past:10	keep	rewrites
+cx:counterfactual-past:20	オスロの思想が遺伝しているとしたら、肉親の処分にも躊躇わなかったはず	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:30	今のうちに死んでおかなければ、苦痛が襲ってくるのは明白だったから、死ななければならなかった。	!rule:cx:counterfactual-past:30	keep	rewrites
+cx:counterfactual-past:20	傍から見れば、ただ遊んでいるだけに見えただろう。	!rule:cx:counterfactual-past:20	keep	rewrites
+cx:counterfactual-past:10	パンがなければ、肉を食べればいいと笑った。	!rule:cx:counterfactual-past:10	keep	rewrites
+cx:counterfactual-past:30	もし助けなければ、きっと後悔するんだろうと直感した。	!rule:cx:counterfactual-past:30	keep	rewrites
+cx:counterfactual-past:30	開けなければ、今度は窓の外にレンズが並んだ。	!rule:cx:counterfactual-past:30	keep	rewrites
+cx:counterfactual-past:30	私が変調を来さなければ、あなたは怪我をしなかったでしょう……？	rule:cx:counterfactual-past:30=1지 않았더라면	fix	rewrites

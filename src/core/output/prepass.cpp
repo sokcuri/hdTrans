@@ -1222,6 +1222,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
+    // A noun that starts with a kanji and is said again right after itself is a word of its own
+    // (終わり終わり 끝 끝).
+    if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && next.surface == item.surface &&
+        nextEntry == t && text::RuneCount(item.surface) >= 2 && IsKanji(FirstRune(item.surface))) {
+        return Result(std::move(t), true);
+    }
     if (!isLast) {
         // A pronoun written in kanji or two kana or more forms no compound with a noun next
         // to it (誰か僕を 누군가 나를, そもそも俺は 원래 나는), but takes a suffix or a word of one

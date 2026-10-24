@@ -608,8 +608,10 @@ void Composer::WriteCasual(int first, int last) {
         const bool exclaimed = close == U'！' || close == U'!';
         if (it.directIndex < 0) {
             // A copula alone in its clause (「だな」, しかし、だ), after a stutter (だだだ) or
-            // after a particle (ユフィリアもだ) is no predicate of a sentence.
-            const std::string_view to = Find(kCopulas, Selected(it).text);
+            // after a particle (ユフィリアもだ) is no predicate of a sentence. A copula that a
+            // construction wrote as a past verb (놀곤 했다) takes the 해체 of the past.
+            std::string to(Find(kCopulas, Selected(it).text));
+            if (to.empty()) to = PastWord(Selected(it).text);
             if (to.empty() || it.selected < 0 || alone || open == U'、' || open == U'だ' ||
                 (i > 0 && First(Selected(items[i - 1]).code) == '2')) {
                 continue;

@@ -1,0 +1,39 @@
+# 규칙: SND-4
+rule	input	expected	kind	layer
+sound:u-cry	「うう、すみません」	「으으, 죄송합니다」	fix	sound
+sound:u-cry	「うう……恥ずかしいです……」	「으으……부끄럽습니다……」	fix	sound
+sound:u-cry	「ううぅ……そんな……」	「으으으……그런……」	fix	sound
+sound:u-cry	「うぅ……でもぉ」	「으으……하지만」	fix	sound
+sound:u-cry	「わたしぃ……うっ……ううっ……」	「나……윽……으으……」	fix	sound
+sound:u-cry	「うううっ……」	「으으으……」	fix	sound
+sound:u-cry	「うううう……」	「으으으으……」	fix	sound
+sound:u-cry	「うーー！」	「으으으!」	fix	sound
+sound:u-cry	「うー………………ここで」	「으으………………여기서」	fix	sound
+sound:u-cry	「……ぅ……ぅぅ……」	「……으……으으……」	fix	sound
+sound:u-cry	「ずるいよ……うっ……ぅ……ぅ……」	「치사해……윽……으……으……」	fix	sound
+sound:u-cry	「ぅ……ん……」	「으……응……」	fix	sound
+sound:u-cry	「ぅあ……はぁ……あぁ……」	「으아……하아……아아……」	fix	sound
+sound:u-cry	「そ、そこは、ぅあ、あああっ……！」	「거, 거기는, 으아, 아아앗……!」	fix	sound
+sound:u-cry	「ん……ふ……んっ……ぅふ……」	「응……후……읏……우후……」	keep	sound
+sound:u-cry	「ん……っ、ぅあっ」	「응……, 으앗」	fix	sound
+sound:u-cry	「あっ……うう」	「앗……으으」	fix	sound
+sound:u-cry	「うぅ……ぅ……ぅ……ぅぅ……」	「으으……으……으……으으……」	fix	sound
+sound:u-cry	「ぅおっ！？」	「우옷!?」	keep	sound
+sound:u-cry	「うっ、痛い……」	「윽, 아프다……」	keep	sound
+sound:u-cry	「うわぁ、すごい！」	「우와아, 대단해!」	keep	sound
+sound:u-cry	「ぅわぁ～、すごい」	「우와아~, 대단해」	keep	sound
+sound:u-cry	「うあっ、ああっ」	「우앗, 아앗」	keep	sound
+sound:u-cry	「うふふ、内緒」	「우후후, 비밀」	keep	sound
+sound:u-cry	「うん、わかった」	「응, 알았다」	keep	sound
+sound:u-cry	「うーん……」	「으음……」	keep	sound
+sound:u-cry	「うぇっ」	「우엑」	keep	sound
+sound:u-cry	「うぐっ……」	「윽……」	keep	sound
+sound:u-cry	「うそっ！？」	「거짓말!?」	keep	sound
+sound:u-cry	ぅおおぉ！	우오오오!	keep	sound
+sound:u-cry	ぅひゃぁ！	우햐아!	keep	sound
+sound:u-cry	「うぐぐぅ……は、はい」	「우그그으……네, 네」	fix	sound
+sound:u-cry	「うぐぐ……」	「우그그……」	fix	sound
+sound:u-cry	「うぐぐぐっ」	「우그그끄읏」	fix	sound
+sound:u-cry	「うぐっ」	「윽」	keep	sound
+sound:u-cry	「うぐぅ」	「우그으」	keep	sound
+sound:u-cry	「うぐぐっ」	「우그끄읏」	fix	sound

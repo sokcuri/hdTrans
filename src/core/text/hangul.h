@@ -14,6 +14,7 @@ constexpr int kFinalNone = 0;
 constexpr int kFinalNieun = 4;
 constexpr int kFinalRieul = 8;
 constexpr int kFinalMieum = 16;
+constexpr int kFinalSiot = 19;
 constexpr int kFinalSsangSiot = 20;
 constexpr int kFinalIeung = 21;
 constexpr int kFinalsCount = 28;

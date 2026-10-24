@@ -24,7 +24,7 @@ dict:jisjk:340827	話しをしないでください。	이야기를 하지 말�
 dict:jisjk:375160	無理だとは思わない。	무리라고는 생각하지 않는다.	keep	local
 dict:jisjk:268040	お詫びの申し上げもございませんが、失礼します。	뭐라 사과의 말씀을 드려야 할지 모르겠습니다만, 실례합니다.	fix	local
 dict:jisjk:268040	お詫びの申し上げもございませんでした。	!rule:dict:jisjk:268040	keep	local
-dict:jisjk:266529	先生に本を読んでいただいた。	선생님이 책을 읽어 주었다.	fix	local
+dict:jisjk:266529	先生に本を読んでいただいた。	선생님이 책을 읽어 주셨다.	fix	local
 dict:jisjk:362273	いただきます、明日返します。	받습니다, 내일 돌려줍니다.	fix	local
 dict:jisjk:362273	いただきます。	잘 먹겠습니다.	fix	local
 dict:jisjk:362273	「いただきます」と言った。	「잘 먹겠습니다」라고 말했다.	fix	local

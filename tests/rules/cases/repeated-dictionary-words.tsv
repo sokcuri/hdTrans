@@ -1,0 +1,37 @@
+# 규칙: SND-2
+rule	input	expected	kind	layer
+lookup:copies-dictionary-word	好き好き好き	좋아 좋아 좋아	fix	lookup
+lookup:copies-dictionary-word	「好き好き好き！」	「좋아 좋아 좋아!」	fix	lookup
+lookup:copies-dictionary-word	好き好き好き好き	좋아 좋아 좋아 좋아	fix	lookup
+lookup:copies-dictionary-word	まだまだまだ	아직 아직 아직	fix	lookup
+lookup:copies-dictionary-word	「まだまだまだ！」	「아직 아직 아직!」	fix	lookup
+lookup:copies-dictionary-word	「待て待て待て待て」	「기다려 기다려 기다려 기다려」	fix	lookup
+lookup:copies-dictionary-word	ハイハイ釣り釣り	네네 낚시 낚시	fix	lookup
+lookup:copies-dictionary-word	「無理無理無理っ！？」	「무리 무리 무리!?」	keep	lookup
+lookup:copies-dictionary-word	「だめだめだめ」	「안 돼 안 돼 안 돼」	keep	lookup
+lookup:copies-dictionary-word	はいはいはい！	네네네!	keep	lookup
+lookup:copies-dictionary-word	イヨはまだ、まだまだ平気！	이요는 아직, 아직도 괜찮아!	keep	lookup
+lookup:copies-dictionary-word	その光景が、繰り返し繰り返し、	그 광경이, 반복해 반복해,	keep	lookup
+lookup:copies-dictionary-word	まだまだ	아직도	keep	lookup
+lookup:copies-dictionary-word	「好き、好き」	「좋아해, 좋아」	keep	lookup
+dict:jisjk:196572	好き好き	rule:dict:jisjk:196572=좋아 좋아	fix	local
+dict:jisjk:196572	好き好き！	좋아 좋아!	fix	local
+dict:jisjk:196572	「好き好き！」	「좋아 좋아!」	fix	local
+dict:jisjk:196572	好き好き……	좋아 좋아……	fix	local
+dict:jisjk:196572	好き好き大好き	좋아 좋아 너무 좋아	fix	local
+dict:jisjk:196572	チョコのお返しくれんのか？ 好き好き！ そういうのいいね！	rule:dict:jisjk:196572=좋아 좋아	fix	local
+dict:jisjk:196572	「好きです、好き好き……」	rule:dict:jisjk:196572=좋아 좋아	fix	local
+dict:jisjk:196572	好き好きって言って	좋아 좋아라고 말해	fix	local
+dict:jisjk:196572	好き好きだ	각자 기호다	keep	local
+dict:jisjk:196572	人の好き好きだ	사람의 각자 기호다	keep	local
+dict:jisjk:196572	人の好き好き	!rule:dict:jisjk:196572	keep	local
+dict:jisjk:196572	蓼食う虫も好き好き	!rule:dict:jisjk:196572	keep	local
+dict:jisjk:196572	味の好みは好き好きだから。	맛의 취향은 각자 기호니까.	keep	local
+dict:jisjk:196572	好みは人それぞれ、好き好きです。	!rule:dict:jisjk:196572	keep	local
+dict:jisjk:196572	好き好きでしょう	!rule:dict:jisjk:196572	keep	local
+dict:w:14800	好き好き好き	!rule:dict:w:14800	fix	local
+dict:w:14800	あなた好き	rule:dict:w:14800=좋아해	keep	local
+compose:noun-copies	終わり終わり！	끝 끝!	fix	compose
+compose:noun-copies	「終わり終わり！ なっ！」	「끝 끝! 그치!」	fix	compose
+compose:noun-copies	はいはいはい	네네네	keep	compose
+compose:noun-copies	うんうん	응응	keep	compose

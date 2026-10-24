@@ -1,9 +1,9 @@
 rule	input	expected	kind	layer
 sound:moan-fragments	「あう」	「아우」	fix	sound
-sound:moan-fragments	「ああっ、んく！　あう、あふっ、あううっ～！」	「아앗, 응쿠! 아우, 아훗, 아우웃!」	fix	sound
+sound:moan-fragments	「ああっ、んく！　あう、あふっ、あううっ～！」	「아앗, 으쿠! 아우, 아훗, 아우읏!」	fix	sound
 sound:moan-fragments	「ひく、うく……っ、うあ、あ、あっ！　あ、やんっ！」	「히윽, 으윽……, 우아, 아, 앗! 아, 앙!」	fix	sound
 sound:moan-fragments	「やんっ……ああ……」	「앙……아……」	fix	sound
-sound:moan-fragments	「んううっ、あっ……んくっ」	「응우웃, 앗……응큿」	fix	sound
+sound:moan-fragments	「んううっ、あっ……んくっ」	「으으읏, 앗……으큿」	fix	sound
 sound:moan-fragments	「ん……ぁんっ……ふくっ……あう、はぁう……」	「응……앙……후윽……아우, 하아우……」	fix	sound
 sound:moan-fragments	「ふぁい……」	「네에……」	fix	sound
 sound:moan-fragments	「くちんっ！」	「에취!」	fix	sound

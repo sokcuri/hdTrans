@@ -1,0 +1,27 @@
+# 규칙: SND-4
+rule	input	expected	kind	layer
+sound:closed-u	「はうっ！？」	「하읏!?」	fix	sound
+sound:closed-u	「はううっ……」	「하우읏……」	fix	sound
+sound:closed-u	「あんんっ、ふっ……あぅっ」	「앙, 훗……아읏」	fix	sound
+sound:closed-u	「ああっ、あう、あふっ、あううっ～！」	「아앗, 아우, 아훗, 아우읏!」	fix	sound
+sound:closed-u	「はぁ……はぁ、あぅっ……！」	「하아……하아, 아읏……!」	fix	sound
+sound:closed-u	「ひううっ、んうっ、ふあぁっ」	「히우읏, 으읏, 후아앗」	fix	sound
+sound:closed-u	「……ひゃうっ……」	「……히야읏……」	fix	sound
+sound:closed-u	「ひっ……やあっ……きゃうっ」	「힉……야앗……꺄읏」	fix	sound
+sound:closed-u	「あうっ、んっ……ふうぅっ」	「아읏, 읏……후우우」	fix	sound
+sound:closed-u	「あうっ…………ごめんなさい」	「아읏…………미안해요」	fix	sound
+sound:closed-u	「はうっ……んんっ」	「하읏……으읏」	fix	sound
+sound:closed-u	「ああっ、んっ、あっ、はぅっ、あんっ！」	「아앗, 읏, 앗, 하읏, 앙!」	fix	sound
+sound:closed-u	「あくっ……うううっ、あうぅっ！」	「아윽……으으으, 아우읏!」	fix	sound
+sound:closed-u	「ひうっ！？」	「히읏!?」	fix	sound
+sound:closed-u	「ふうっ……」	「후우……」	fix	sound
+sound:closed-u	「あう、そんな……」	「아우, 그런……」	keep	sound
+sound:closed-u	「はう……」	「하우……」	keep	sound
+sound:closed-u	「うっ……」	「윽……」	keep	sound
+sound:closed-u	「くうっ……」	「크읏……」	keep	sound
+sound:closed-u	「ちゅうっ」	「쪼옥」	keep	sound
+sound:closed-u	「ぐうっ……」	「크읏……」	fix	sound
+sound:closed-u	「あっ、ああっ」	「앗, 아앗」	keep	sound
+sound:closed-u	「はあっ、はあっ」	「하앗, 하앗」	keep	sound
+sound:closed-u	「びゅっ」	「뷰웃」	keep	sound
+sound:closed-u	「わーおっ！」	「와웃!」	keep	sound
