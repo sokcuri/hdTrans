@@ -365,7 +365,28 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
         if (branch == kConjugationBranches) return false;
-        if (branch == 8 && (two == kJaComma || two.StartsWith(","))) base.kind = 7;
+        // The empty stem form gives way to the first later form that begins the tail, as after
+        // an ichidan stem (褒められちゃった, 褒められず); not to an imperative (11, 12), which a
+        // passive, potential or causative form does not take before よ (言えよ is 言え and よ), nor
+        // to the start of a longer adverb (見透かされずいぶん is ずいぶん).
+        auto startsAdverb = [&](std::size_t n) {
+            for (const Record* r = w->DoLookup(tail, kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source.size() > n && At(r->partCode, 0) == 'E' && At(r->partCode, 1) == '3') return true;
+            }
+            return false;
+        };
+        if (branch == 8) {
+            for (int later = 9; later < kConjugationBranches; later++) {
+                const std::string_view e = Conjugation(7, later);
+                if (later != 11 && later != 12 && later != 13 && !e.empty() && tail.starts_with(e) && !startsAdverb(e.size())) {
+                    base.kind = later;
+                    break;
+                }
+            }
+        }
+        if (base.kind == 8 && (two == kJaComma || two.StartsWith(","))) base.kind = 7;
+        // ちゃう happens to one: an ichidan られ before it is the passive (見られちゃう, 忘れられちゃった).
+        if (oldKind == 7 && oldState == 4 && base.kind == 17) base.record = 1;
         patternWidth = WidthOf(Conjugation(7, base.kind));
         two = Left(after(), 2);
         four = Left(after(), 4);
