@@ -1,0 +1,29 @@
+# 규칙: LEX-18
+rule	input	expected	kind	layer
+dict:gram:ku-nanka-nai:1	悔しくなんかないもん！！	분하지도 않은 걸!!	fix	local-ending
+dict:gram:ku-nanka-nai:1	嬉しくなんかないし	기쁘지도 않고	fix	local-ending
+dict:gram:ku-nanka-nai:1	「嬉しくなんかないんだからね」	「기쁘지도 않으니까」	fix	local-ending
+dict:gram:ku-nanka-nai:1	眠くなんかないです！	졸리지도 않습니다!	fix	local-ending
+dict:gram:ku-nanka-nai:1	今は別に寂しくなんかない。	지금은 별로 외롭지도 않다.	fix	local-ending
+dict:gram:ku-nanka-nai:1	苦くなんかないよぉ！	씁쓸하지도 않아!	fix	local-ending
+dict:gram:ku-nanka-nai:1	「あの傷、醜くなんかなかったよ……」	「그 상처, 추악하지도 않았어……」	fix	local-ending
+dict:gram:ku-nanka-nai:1	「あ、うん、全然臭くなんかないよ」	「아, 응, 전혀 구리지도 않아」	fix	local-ending
+dict:gram:ku-nanka-nai:1	「優しくなんかないよ……」	「다정하지도 않아……」	fix	local-ending
+dict:gram:ku-nanka-nai:1	痛くなんかないけどね	아프지도 않지만	fix	local-ending
+dict:gram:ku-nanka-nai:1	少し…いえ！怖くなんかないです	조금…아뇨! 무섭지도 않습니다	fix	local-ending
+dict:gram:ku-nanka-nai:1	別に嬉しくなんか！	별로 기쁘지도!	fix	local-ending
+dict:gram:ku-nanka-nai:1	別に、こわくなんか......でも、あたたかい。	별로, 무섭지도......하지만, 따뜻하다.	fix	local-ending
+dict:gram:ku-nanka-nai:9	「別に仲良くなんかなってないぞ」	「별로 사이 좋게는 돼 있지 않아」	fix	ending-defaults
+dict:gram:ku-nanka-nai:9	あたい、別に優しくなんかしないぜ？	나, 별로 다정하게는 하지 않지?	fix	ending-defaults
+dict:gram:ku-nanka-nai:2	「ははは、怖くなんてないさ」	「하하하, 무섭지도 않아」	fix	local-ending
+dict:gram:ku-nanka-nai:2	「大丈夫、怖くなんてないよ」	「괜찮아, 무섭지도 않아」	fix	local-ending
+dict:gram:ku-nanka-nai:2	馬鹿らしくなんてない	바보 같지도 않다	fix	local-ending
+dict:gram:ku-nanka-nai:2	「う、うらやましくなんてないもん」	「부, 부럽지도 않은 걸」	fix	local-ending
+dict:gram:ku-nanka-nai:3	悲しくなどない	슬프지도 않다	fix	local-ending
+dict:gram:ku-nanka-nai:4	眠くなんかありません！	졸리지도 않습니다!	fix	ending-defaults
+dict:gram:ku-nanka-nai:7	眠くなんてありませんでした	졸리지도 않았습니다	fix	ending-defaults
+dict:gram:ku-nanka-nai:8	眠くもありませんでした	졸리지도 않았습니다	fix	ending-defaults
+dict:jisjk:258784	嬉しくはない	기쁘지는 않다	keep	local-ending
+dict:gram:ku-nanka-nai:1	嬉しくもない	기쁜 것도 아니다	keep	ending-defaults
+dict:gram:ku-nanka-nai:2	こんなに嬉しくなんて	이렇게 기쁘다니	keep	local-ending
+dict:gram:ku-nanka-nai:2	中央の方々が動くなんてありえないわ	중앙의 분들이 움직이다니 있을 수 없어	keep	local-ending
