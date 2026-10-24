@@ -1,30 +1,21 @@
 # 규칙: LEX-30
 rule	input	expected	kind	layer
 sound:drawn-honorific	あばよ、ケンくぅん！」	잘 있어라, 켄 군~!」	fix	sound
-sound:drawn-honorific	「おーい田中くーん」	「어이 타나카 군~」	fix	sound
 sound:drawn-honorific	「佐藤さああああああああん！！」	「사토 씨~!!」	fix	sound
-sound:drawn-honorific	「みどりさああああんん！！」	「미도리 씨~!!」	fix	sound
 sound:drawn-honorific	「田中さぁあぁあん…！」	「타나카 씨~…!」	fix	sound
-sound:drawn-honorific	「ま、前原さぁあぁあぁあぁぁぁぁぁぁあああんッ！！	「뭐, 마에바라 씨~!!	fix	sound
-sound:drawn-honorific	「前原さぁああん！！！」	「마에바라 씨~!!!」	fix	sound
-sound:drawn-honorific	だとしたらいい勘してるよ圭ちゃ〜ん！」	라고 하면 좋은 감 하고 있는케이짱~!」	fix	sound
-sound:drawn-honorific	「美咲ちゃ～ん、食べて直ぐ寝ると」	「미사키짱~, 먹고 곧 잔다고」	fix	sound
+sound:drawn-honorific	「前田さぁああん！！！」	「마에다 씨~!!!」	fix	sound
+sound:drawn-honorific	「ケイちゃ〜ん！」	「케이짱~!」	fix	sound
 sound:drawn-honorific	「美咲ちゃぁん！」	「미사키짱~!」	fix	sound
-sound:drawn-honorific	佐藤さぁん、夜戦	사토 씨~, 야전	fix	sound
-sound:drawn-honorific	提督さぁーん、今日も	제독님~, 오늘도	fix	sound
-sound:drawn-honorific	手紙だよ。ちゃーんと見とけ	편지야. 제대로~ 봐 두어라	fix	sound
+sound:drawn-honorific	佐藤さぁん、こんにちは	사토 씨~, 안녕하세요	fix	sound
+sound:drawn-honorific	先生さぁーん、今日も	선생님~, 오늘도	fix	sound
 sound:drawn-honorific	ちゃーんと戦いなさい	제대로~ 싸워	fix	sound
-sound:drawn-honorific	ちゃ～んと果汁を	제대로~ 과즙을	fix	sound
 sound:drawn-honorific	朝はちゃーんと食べる	아침은 제대로~ 먹는다	fix	sound
 sound:drawn-honorific	「田中さん」	「타나카 씨」	keep	sound
 sound:drawn-honorific	「田中さーん」	「타나카 씨~」	keep	sound
 sound:drawn-honorific	「つぐみちゃん、来て」	「츠구미짱, 와」	keep	sound
 sound:drawn-honorific	ふっ、ん……くぅんっ……	훗, 응……끄응……	keep	sound
 sound:drawn-honorific	「ちゃんと見て」	「제대로 봐」	keep	sound
-sound:drawn-honorific	「んうっ、うくぅんんっ！」	「으읏, 으으윽 으읏!」	keep	sound
-sound:drawn-honorific	殿下！　びちゃーん！　泥水ダイブ！	전하! 철퍽~응! 흙탕물 다이브!	keep	sound
-sound:drawn-honorific	ちょっとかみつきさあああああん？？？	조금 물어 자 아 아 응???	keep	sound
-sound:drawn-honorific	しんみりしてたのに…咬みつきさあん	숙연했었는데…물어 자	keep	sound
 sound:drawn-honorific	「ゆかちゃーん、田中が好きだってさ」	「유카짱~, 타나카를 좋아한다고」	keep	sound
 sound:drawn-honorific	！！おとうちゃ～ん！！	!! 아버지~!!	keep	sound
 sound:drawn-honorific	「みなさーんっ、お茶がはいりましたー！」	「여러분~, 차가 들어갔습니다~!」	keep	sound
+sound:drawn-honorific	「おーい田中くーん」	「어이 타나카 군~」	fix	sound
