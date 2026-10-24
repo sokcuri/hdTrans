@@ -394,3 +394,21 @@ cx:question-tte:20		&&5 S+0== "って" F+0== "selected" L+0== "(은)는" K-1== "
 //= pause-start	after question-tte	A word that starts an utterance right after an ellipsis or a dash takes it up again (spec GRM-22). The って read (은)는 there before a comma, ！ or ？ is a retort on what was just said: (이)라니 (そうか……って、ごまかされないぞ 그런가……라니, 안 속아). The じゃ read (은)는 there before a comma is the conjunction 그러면 (そっか……じゃ、今から行くね 그렇구나……그러면, 지금 갈게), unless ない or ありません follows the comma (キライ…じゃ、ないです).
 cx:pause-start:10	GRM-22	&&5 S+0== "って" F+0== "selected" F+0== "after-pause" L+0== "(은)는" ||2 S+1== "00、，,！？!?" &&2 F+0== "sentence-end" !1 F+0== "utterance-end"	take-target "(이)라니"	そうか……って、ごまかされないぞ 그런가……라니, 안 속아
 cx:pause-start:20	GRM-22	&&7 S+0== "じゃ" F+0== "selected" F+0== "after-pause" L+0== "(은)는" S+1== "00、，," !1 S+2== "Lな" !1 S+2== "Lあり"	select-lemma "그러면"	そっか……じゃ、今から行くね 그렇구나……그러면, 지금 갈게
+//: obligation-ending	||5 I+0== "Rなきゃ" I+0== "Rなくちゃ" I+0== "Rなくては" I+0== "Rなけりゃ" I+0== "Rなければ"	A verb negated in a condition that can say what one must do (なきゃ, なくちゃ, なくては, なけりゃ, なければ), with its ending or in a negative stem read in one word with it (しな|きゃ).
+//: obligation-must	||2 S+1== "Lならな" S+1== "Lいけな"	ならない or いけない follows the condition.
+//: obligation-tag	&&2 ||6 I+1== "99ね" I+1== "99な" I+1== "99ねー" I+1== "99なー" I+1== "99ねえ" I+1== "99なあ" ||2 F+1== "quote-end" F+1== "utterance-end"	A closing ね or な ends the sentence after the condition (しなきゃね, 呼ばなきゃな).
+//: obligation-quote	||3 S+1== "と" &&2 S+1== "って" F+1!= "after-pause" &&2 S+1== "00、，," S+2== "と"	A quote (と, 、と, って) takes the condition.
+//: obligation-alone	||2 F+0== "quote-end" &&2 F+0== "utterance-end" !1 S+1== "00、，,"	The sentence or the line ends after the condition, or a pause ends the utterance.
+//: obligation-said	||4 :obligation-must :obligation-tag :obligation-quote :obligation-alone	Nothing that the condition could lead to follows it.
+//= fused-obligation	after pause-start	A negative stem read in one word with its verb (しな 하지 않다, 買わな 사지 않다, ならな 안 되다) before a condition ending (きゃ, くちゃ, くては, けりゃ, ければ) that says what one must do (obligation-said, spec GRM-12) is the verb in the condition 1지 않으면, which obligation-alone then reads: 하다, 사다, 되다.
+cx:fused-obligation:5	GRM-12	&&4 F+0== "selected" D+0== "하지 $DH@" :obligation-ending :obligation-said	set-target "$Kz@" set-ending "1지 않으면"	大掃除しなきゃ 대청소해야 한다
+cx:fused-obligation:10	GRM-12	&&4 F+0== "selected" D+0== "R지 $DH@" :obligation-ending :obligation-said	set-verb-from "지 $DH@" "다" set-ending "1지 않으면"	買わなくちゃ 사야 한다
+cx:fused-obligation:20	GRM-12	&&4 F+0== "selected" D+0== "안 $AF@" :obligation-ending :obligation-said	set-verb "되다" set-ending "1지 않으면"	強くならなきゃいけなかった 강하게 돼야 했다
+//= obligation-alone	after fused-obligation	A verb in the condition 1지 않으면 of なきゃ, なくちゃ, なくては (spec GRM-12) says what one must do when nothing that it could be the condition of follows it (obligation-said). Before ならない or いけない it takes -아야 and they read 하다 (しなくてはならない 해야 한다); before a closing ね or な it is -아야지 (お礼をしなくちゃね 감사 인사를 해야지); a quote takes -아야 한다고 with と and って, or -아야 한다는 before a noun (応えなきゃって気持ち 부응해야 한다는 기분); alone it is -아야 한다. Another predicate after it keeps the condition (行かなきゃ損だ, 行かなきゃ、間に合わない).
+cx:obligation-alone:10	GRM-12	&&4 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" :obligation-must	set-ending "6야" take-target@+1 "$Kz@"	しなくてはならない 해야 한다
+cx:obligation-alone:20	GRM-12	&&4 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" :obligation-tag	set-ending "6야지"	寝なきゃね 자야지
+cx:obligation-alone:30	GRM-12	&&5 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" S+1== "00、，," S+2== "と"	set-ending "6야 한다고" set-target@+1 "" set-target@+2 " "	助けなきゃ、と思った 도와야 한다고 생각했다
+cx:obligation-alone:40	GRM-12	&&4 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" S+1== "と"	set-ending "6야 한다고" set-target@+1 " "	準備しなきゃと思った 준비해야 한다고 생각했다
+cx:obligation-alone:50	GRM-12	&&6 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" S+1== "って" F+1!= "after-pause" P+2== "1"	set-ending "6야 한다는" set-target@+1 " "	応えなきゃって気持ち 부응해야 한다는 기분
+cx:obligation-alone:60	GRM-12	&&5 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" S+1== "って" F+1!= "after-pause"	set-ending "6야 한다고" set-target@+1 " "	行かなきゃって思った 가야 한다고 생각했다
+cx:obligation-alone:70	GRM-12	&&4 F+0== "conjugating" :obligation-ending Y+0== "1지 않으면" :obligation-alone	set-ending "6야 한다"	助けなきゃ。 도와야 한다.
