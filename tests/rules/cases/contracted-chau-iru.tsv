@@ -1,0 +1,11 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+lookup:contracted-chau-iru	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸다……	fix	lookup
+lookup:contracted-chau-iru	「寝ちゃってた……」	「자 버렸어……」	fix	lookup
+lookup:contracted-chau-iru	……ああごめん、少し見惚れちゃってた。戻りましょう。	……아 미안, 조금 넋을 잃고 봐 버렸다. 돌아옵시다.	fix	lookup
+lookup:contracted-chau-iru	寝ちまってたか。	자 버렸나.	fix	lookup
+lookup:contracted-chau-iru	「あの………ごめんなさい。言いそびれちゃってたんですけど……」	「그………미안해요. 말할 기회를 놓쳐 버렸는데요……」	fix	lookup
+lookup:contracted-chau-iru	寝ちゃってたけど	자 버렸지만	fix	lookup
+lookup:contracted-chau-iru	寝ちゃってたんだ	자 버린 거야	fix	lookup
+lookup:contracted-chau-iru	寝ちゃった	자 버렸다	keep	lookup
+lookup:contracted-chau-iru	寝ちゃってる	자 버렸다	keep	lookup

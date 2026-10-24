@@ -654,6 +654,27 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
+    // The ちゃ form whose ちゃう is in its て form before いる with its い dropped (寝ちゃってた,
+    // 言いそびれちゃってたんですけど): done and past, as ちゃった; the ending after the た is read on
+    // the past and written for 버리 after the verb (5지만 → 6 버렸지만).
+    if (base.kind == 17 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(0, 7)) &&
+        rest.substr(Conjugation(0, 7).size()).starts_with(Conjugation(7, 6)) &&
+        (ending == nullptr || ending->length < static_cast<int>(rest.size()))) {
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.completive-head");
+        const int chaWidth = patternWidth;
+        patternWidth += WidthOf(Conjugation(0, 7)) + WidthOf(Conjugation(7, 6));
+        base.kind = 6;
+        Group* g = endingGroup(after());
+        if (g != nullptr && !head.empty() && ProgressiveEndings(*g, base, head.front())) {
+            ending = g;
+            length = sourceLength + pattern();
+        } else {
+            patternWidth = chaWidth;
+            base.kind = 17;
+            if (ending != nullptr) ending = endingGroup(rest);
+        }
+    }
+
     // A past form whose た is the て before あげる with its あ dropped (作ったげる, 見せたげよう): the
     // kana after the た are the ichidan forms of あげる without it, written for 주 after the て
     // form (6 줄게). Without an ending of its own the form takes the empty ending below.

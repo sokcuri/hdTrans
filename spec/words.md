@@ -623,9 +623,10 @@
 て로 끝나는 동사(捨てた, 育てた)의 た는 과거다. 그 いる의 가능형(待ってられない, 寝てられない)은 앞 동사의 가능형으로
 옮긴다(기다릴 수 없다). い가 빠진 いらっしゃる(務めてらっしゃる, 待ってらっしゃいます)는 `-고 계시다`로, 홀로 끝나는 명령
 らっしゃい(手を洗ってらっしゃい)는 `-고 와`로 옮긴다. あ가 빠지고 て가 た로 바뀐 あげる(作ったげる, 淹れたげよっか)는
-てあげる와 같이 `-아/어 주다`로 옮긴다.
+てあげる와 같이 `-아/어 주다`로 옮긴다. ちゃう의 て형 뒤에서 い가 빠진 いる(寝ちゃってた)는 ちゃった와 같이 `-아/어 버렸다`로
+옮긴다.
 
-현재: 따름. ちゃう의 て형 뒤에서 줄인 꼴(寝ちゃってた)은 아직 따르지 않는다.
+현재: 따름. ちゃっていた처럼 줄이지 않은 꼴은 아직 따르지 않는다.
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -643,11 +644,13 @@
 | いいよ、私作ったげるから。 | 좋아, 나 만들어 주니까. | 고침 |
 | 提督、お茶飲む？ 淹れたげよっか？ | 제독, 차 마셔? 끓여 줄까? | 고침 |
 | 言いたげな顔をしている。 | 말하고 싶은 듯한 얼굴을 하고 있다. | 유지 |
+| 「寝ちゃってた……」 | 「자 버렸어……」 | 고침 |
+| 寝ちゃった | 자 버렸다 | 유지 |
 | 見てた。 | 보았다. | 유지 |
 | 見てるだけだ。 | 보고 있을 뿐이다. | 유지 |
 | ゴミを捨てたが、まだ臭う。 | 쓰레기를 버렸지만, 아직 냄새난다. | 유지 |
 
-사례: `tests/rules/cases/contracted-iru.tsv`, `tests/rules/cases/contracted-iru-potential.tsv`, `tests/rules/cases/contracted-irassharu.tsv`, `tests/rules/cases/contracted-ageru.tsv`
+사례: `tests/rules/cases/contracted-iru.tsv`, `tests/rules/cases/contracted-iru-potential.tsv`, `tests/rules/cases/contracted-irassharu.tsv`, `tests/rules/cases/contracted-ageru.tsv`, `tests/rules/cases/contracted-chau-iru.tsv`
 
 ## LEX-35 사전에 있는 동사의 활용형은 그 동사로 읽는다
 
