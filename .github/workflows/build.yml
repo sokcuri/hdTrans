@@ -621,8 +621,8 @@ jobs:
 
   # libFuzzer on mutated text made from the repository's inputs (tools/fuzz.py, docs/build.md "CI").
   # Replaying the seeds and the kept regression inputs fails the job; what the random run finds fails
-  # it on branch pushes and is reported on pull requests and tags. A fuzzer that does not build is
-  # reported: the other jobs compile the same sources.
+  # it on develop pushes and is reported on pull requests, main pushes and tags. A fuzzer that does
+  # not build is reported: the other jobs compile the same sources.
   fuzz:
     name: linux-fuzz
     needs: gate
@@ -638,7 +638,7 @@ jobs:
       HDTRANS_CACHE_DIR: 'off'
       ASAN_OPTIONS: detect_stack_use_after_return=1
       UBSAN_OPTIONS: print_stacktrace=1
-      FUZZ_BLOCKING: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/heads/') }}
+      FUZZ_BLOCKING: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
     steps:
       - uses: actions/checkout@v7
       - name: Set up sccache

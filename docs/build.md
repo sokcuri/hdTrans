@@ -144,7 +144,7 @@ cmake --build --preset wasm --parallel
   |---|---|---|
   | `linux`의 Performance budget | PR에서 어느 행이 같은 러너에서 잰 기준 커밋의 빌드보다 1% 넘게 많고 PR의 커밋에 `Perf-Budget:` 트레일러가 없을 때 | valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때(exit 2), 기준 빌드를 찾지도 빌드하지도 못했을 때, 표와의 비교 전부, push의 모든 결과 |
   | `linux-fuzz`의 Replay | 시드나 `tests/fuzz/regressions/`의 입력 하나가 멈추거나 sanitizer 보고, 메모리 초과를 낼 때 | - |
-  | `linux-fuzz`의 Fuzz | `main`, `develop` push에서 무작위 퍼징이 찾은 입력이 있을 때 | PR과 태그 빌드(**Publish npm**)에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
+  | `linux-fuzz`의 Fuzz | `develop` push에서 무작위 퍼징이 찾은 입력이 있을 때 | PR, `main` push, 태그 빌드(**Publish npm**)에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
 
   경고는 작업 요약과 주석(annotation)에 남습니다. 인프라 문제로 보이면 그 작업만 다시 실행합니다(**Re-run
   failed jobs** 또는 `gh run rerun <run> --failed`).

@@ -692,12 +692,12 @@ function fuzzStep(name) {
 const fuzzBlocking = new Function('github', 'startsWith',
   `return (${fuzzJob.match(/^      FUZZ_BLOCKING: \$\{\{ (.*) \}\}$/m)[1]});`);
 
-test('the random fuzz run fails branch pushes and only warns on pull requests and tags', () => {
+test('the random fuzz run fails develop pushes and only warns on pull requests, main pushes and tags', () => {
   const startsWith = (s, prefix) => s.startsWith(prefix);
   // Publish npm calls Build on the tag push, so a tag build has the push event and the tag ref.
   for (const [event_name, ref, blocking] of [
     ['push', 'refs/heads/develop', true],
-    ['push', 'refs/heads/main', true],
+    ['push', 'refs/heads/main', false],
     ['pull_request', 'refs/pull/7/merge', false],
     ['push', 'refs/tags/v1.2.3', false],
   ]) {
