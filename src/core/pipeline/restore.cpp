@@ -84,6 +84,61 @@ std::string DropOpeningSpaces(std::string_view text) {
     return out;
 }
 
+// The closing brackets, as typed and in the forms the engine writes for them. A ” or ’ closes
+// only a quote opened before it (“ or ” before ”, ‘ or ’ before ’), a > or ＞ only after a < or ＜.
+constexpr std::u32string_view kClosings = U"」』）)】〕］]〉》｝}”’>＞";
+
+// The closing brackets of text (kClosings), each as the index of its rune in Runes(text).
+std::vector<size_t> Closings(const std::u32string& rs) {
+    std::vector<size_t> out;
+    bool quoted = false, singleQuoted = false;
+    int angle = 0;
+    for (size_t i = 0; i < rs.size(); i++) {
+        const char32_t r = rs[i];
+        if (r == U'“') quoted = true;
+        if (r == U'‘') singleQuoted = true;
+        if (r == U'<' || r == U'＜') angle++;
+        if (!Contains(kClosings, r)) continue;
+        if (r == U'”' || r == U'’') {
+            bool& open = r == U'”' ? quoted : singleQuoted;
+            open = !open;
+            if (open) continue;
+        }
+        if (r == U'>' || r == U'＞') {
+            if (angle == 0) continue;
+            angle--;
+        }
+        out.push_back(i);
+    }
+    return out;
+}
+
+// Whether text holds white space before a closing bracket.
+bool HasClosingSpace(std::string_view text) {
+    const std::u32string rs = Runes(text);
+    for (const size_t i : Closings(rs)) {
+        if (i > 0 && (rs[i - 1] == U' ' || rs[i - 1] == U'　' || rs[i - 1] == U'\t')) return true;
+    }
+    return false;
+}
+
+// text without the ASCII spaces before its closing brackets.
+std::string DropClosingSpaces(std::string_view text) {
+    const std::u32string rs = Runes(text);
+    const std::vector<size_t> closings = Closings(rs);
+    if (closings.empty()) return std::string(text);
+    std::u32string out;
+    size_t from = 0;
+    for (const size_t i : closings) {
+        size_t start = i;
+        while (start > from && rs[start - 1] == U' ') start--;
+        out.append(rs, from, start - from);
+        from = i;
+    }
+    out.append(rs, from);
+    return Utf8(out);
+}
+
 // The forms the engine writes for the brackets it does not write as typed.
 char32_t BracketForm(char32_t r) {
     switch (r) {
@@ -261,6 +316,9 @@ Pieces DropAddedSpaces(const Pieces& typed, const Pieces& out) {
         bool opening = false;
         for (const auto& p : inLines[i]) opening = opening || HasOpeningSpace(TextOf(p));
         if (!opening) line = MapText(line, DropOpeningSpaces);
+        bool closing = false;
+        for (const auto& p : inLines[i]) closing = closing || HasClosingSpace(TextOf(p));
+        if (!closing) line = MapText(line, DropClosingSpaces);
     }
     return output::JoinLines(outLines);
 }

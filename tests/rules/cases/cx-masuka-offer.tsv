@@ -32,7 +32,7 @@ cx:masuka-offer:7	『課金を行いますか？』	『과금을 실시하시겠
 cx:masuka-offer:7	『チュートリアルを行いますか？』	『튜토리얼을 실시하시겠습니까?』	fix	rewrites
 cx:masuka-offer:7	『召喚士はまだ、試験運用が終わっておらず、ユーザーがいません。それでも開始しますか？はい／いいえ』	rule:cx:masuka-offer:7=2시겠습니까	fix	rewrites
 cx:masuka-offer:7	開始しますか？という大きなクリックボタンだけが画面に表示されている。	rule:cx:masuka-offer:7=2시겠습니까	fix	rewrites
-cx:masuka-offer:7	取得しますか？》	취득하시겠습니까? 》	fix	rewrites
+cx:masuka-offer:7	取得しますか？》	취득하시겠습니까?》	fix	rewrites
 cx:masuka-offer:7	「さて、帰りますか」	!rule:cx:masuka-offer:7	keep	rewrites
 cx:masuka-offer:7	『自動サポートをご利用されますか？』	!rule:cx:masuka-offer:7	keep	rewrites
 cx:masuka-offer:10	「うわ！ そこで待ち伏せますか！」	!rule:cx:masuka-offer:10	keep	rewrites

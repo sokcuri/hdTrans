@@ -207,7 +207,7 @@ void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector
 
 // Appends a space after a sentence ending in ".", "!" or "?" (token types other than
 // 26 and 78) when the next token is not a sentence end itself and does not start with
-// 」.
+// a closing bracket of classes.tsv mark.close-after-space.
 void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pieces& out);
 
 // The source text left over around a translated item: kanji as their Hangul reading

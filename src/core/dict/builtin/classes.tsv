@@ -116,7 +116,7 @@
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
 //= ko.bracketed-laughter	The Korean written in the brackets of a bracketed run of mark.laughter ((w) (웃음)), as for (笑).
 //= mark.before-laughter	Marks after which a run of mark.laughter still laughs (진짜야!ｗ).
-//= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
+//= mark.close-after-space	Closing brackets, before which no space follows a sentence end (정말? 」 정말?」, 없습니다. 』 없습니다.』) and after which the speech of a quote does not go on.
 //= mark.exclaim	Exclamation marks: a question with one after it is a surprised remark, not an offer (待ち伏せますか！).
 //= mark.prompt-answer	Answers a prompt on a screen lists after its question, anywhere in the text that follows it (乗りますか？乗るやめる, やりますか？やるやらない).
 //= mark.prompt-follow	What follows the question mark of a prompt shown on a screen: a quoting と, a closing 》 and the answers (開始しますか？という, 取得しますか？》, はい／いいえ, （はい／いいえ）).
@@ -1641,6 +1641,14 @@ mark.close-after-space	」
 mark.close-after-space	』
 mark.close-after-space	）
 mark.close-after-space	)
+mark.close-after-space	】
+mark.close-after-space	〕
+mark.close-after-space	］
+mark.close-after-space	]
+mark.close-after-space	〉
+mark.close-after-space	》
+mark.close-after-space	｝
+mark.close-after-space	}
 mark.spoken-exclamation	！
 mark.spoken-exclamation	!
 mark.spoken-exclamation	っ
