@@ -26825,3 +26825,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 とであ	(와)과 만&A5@	M420		TuPj	GN							w:26812
 であ	만&A5@	M420		Pj	GN	6912	||1 &&2 S-1== "Rと" ||2 D-1== "R와" D-1== "R과"	와, 과로 끝나는 말 뒤의 であ는 出会う로 만나다를 고른다.				w:26813
 であ	에서 &HN@	M420		TuPj	GN			장소 뒤에서 명사를 꾸미는 であった는 그곳에서 있었던 일이다.				w:26814
+ロンリー	론리	N110		Dd	GN						ろんりー	w:26815

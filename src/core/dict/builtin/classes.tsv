@@ -9,6 +9,7 @@
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
 //= bound.column-start	Words that follow another word inside one clause and so never start a column: a copula, an auxiliary or a particle at the start of the hiragana run that begins a column.
 //= bound.column-whole	Particles, copulas and the like that never start a column when they are its whole hiragana run.
+//= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに).
 //= copula.short-so	The copula forms after which そ starting a clause is そう said short (そだね, そであった, そでもない, そじゃない).
 //= copula.short-so-final	The copula forms after a clause-initial そ that make it そう only where the sentence ends after them (あ、そだ。).
@@ -61,6 +62,7 @@
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
+//= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
@@ -74,11 +76,13 @@
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
+//= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
 //= particle.phrase	Particles that, after the first character of an item, make a phrase that starts with a noun.
+//= particle.title-phrase	Case particles that, between two kanji or katakana of a name-layer key, make the key a phrase that reads as a title only standing apart (星に願いを, 世界を救う).
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
@@ -126,6 +130,7 @@
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
+//= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
@@ -254,6 +259,8 @@ bound.column-whole	ぞ
 bound.column-whole	さ
 bound.column-whole	な
 bound.column-whole	たい
+
+casual.nna-word	ごめんな
 
 copula.after-dake	だ
 copula.after-dake	で
@@ -971,6 +978,50 @@ noun.do-angle	華氏
 noun.do-angle	零下
 noun.do-angle	氷点下
 
+noun.inside-medium	水
+noun.inside-medium	口
+noun.inside-medium	森
+noun.inside-medium	林
+noun.inside-medium	山
+noun.inside-medium	土
+noun.inside-medium	闇
+noun.inside-medium	暗闇
+noun.inside-medium	夢
+noun.inside-medium	海
+noun.inside-medium	頭
+noun.inside-medium	胸
+noun.inside-medium	腹
+noun.inside-medium	森林
+noun.inside-medium	茂み
+noun.inside-medium	草むら
+noun.inside-medium	藪
+noun.inside-medium	日差し
+noun.inside-medium	記憶
+noun.inside-medium	思い出
+noun.inside-medium	想い出
+noun.inside-medium	夜
+noun.inside-medium	夜空
+noun.inside-medium	闇夜
+noun.inside-medium	暗がり
+noun.inside-medium	光
+noun.inside-medium	静寂
+noun.inside-medium	沈黙
+noun.inside-medium	炎
+noun.inside-medium	煙
+noun.inside-medium	空気
+noun.inside-medium	雪
+noun.inside-medium	嵐
+noun.inside-medium	波
+noun.inside-medium	人混み
+noun.inside-medium	人ごみ
+noun.inside-medium	雑踏
+noun.inside-medium	喧騒
+noun.inside-medium	日常
+noun.inside-medium	季節
+noun.inside-medium	時代
+noun.inside-medium	歴史
+noun.inside-medium	物語
+
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同
@@ -1314,6 +1365,11 @@ particle.after-name	よ
 particle.after-name	ね
 particle.after-name	さ
 
+particle.before-predicate	の
+particle.before-predicate	は
+particle.before-predicate	が
+particle.before-predicate	も
+
 particle.case-before-stem	を
 particle.case-before-stem	に
 particle.case-before-stem	へ
@@ -1354,6 +1410,11 @@ particle.phrase	も
 particle.phrase	へ
 particle.phrase	の
 
+particle.title-phrase	を
+particle.title-phrase	に
+particle.title-phrase	へ
+particle.title-phrase	は
+
 particle.wonder	を
 particle.wonder	が
 particle.wonder	に
@@ -1374,6 +1435,7 @@ pronoun.first-person-genitive	わたし
 pronoun.first-person-genitive	わたくし
 pronoun.first-person-genitive	あたし
 pronoun.first-person-genitive	アタシ
+pronoun.first-person-genitive	ワタシ
 pronoun.first-person-genitive	ぼく
 pronoun.first-person-genitive	おれ
 pronoun.first-person-genitive	ボク
@@ -1407,6 +1469,7 @@ pronoun.humble-first-person	私
 pronoun.humble-first-person	わたし
 pronoun.humble-first-person	わたくし
 pronoun.humble-first-person	あたし
+pronoun.humble-first-person	ワタシ
 pronoun.humble-first-person	僕
 pronoun.humble-first-person	ぼく
 pronoun.humble-first-person	私たち
@@ -1443,6 +1506,7 @@ pronoun.topic-wa	私
 pronoun.topic-wa	わたし
 pronoun.topic-wa	あたし
 pronoun.topic-wa	アタシ
+pronoun.topic-wa	ワタシ
 pronoun.topic-wa	俺
 pronoun.topic-wa	おれ
 pronoun.topic-wa	オレ
@@ -2257,6 +2321,10 @@ verb.writing	描
 verb.writing	記
 verb.writing	記し
 verb.writing	しるし
+
+word.closing-utterance	ゴメンな
+word.closing-utterance	ゴメンね
+word.closing-utterance	ゴメンよ
 
 word.comitative	合う
 word.comitative	戦う

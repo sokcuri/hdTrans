@@ -180,12 +180,14 @@ bool SentenceInitial(Flusher& f, const Item* it) {
     return s == "「" || s == "『" || s == "（" || s == "(" || s == "【" || s == "〈" || s == "《";
 }
 
-// A katakana loanword that reads as a 하다 adjective: one that ends like an English adjective.
+// A katakana loanword that reads as a 하다 adjective: its row takes な (Dd), or it ends like
+// an English adjective.
 bool NaRoot(const Item* it) {
     const std::string_view surface = it->group->surface;
     for (std::string_view rest = surface; !rest.empty(); rest.remove_prefix(text::DecodeRune(rest).size)) {
         if (!IsKatakana(text::DecodeRune(rest).cp)) return false;
     }
+    if (Has(it->GAttr(it->selected), "Dd")) return true;
     constexpr std::string_view kSuffixes[] = {"フル", "カル", "ブル", "プル", "アル", "ティブ", "ィブ", "イジー",
                                               "ーシー", "レス", "ッシュ", "ート"};
     for (const std::string_view suffix : kSuffixes) {

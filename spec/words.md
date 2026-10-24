@@ -45,7 +45,7 @@
 | 黒枠の眼鏡をかけた男。 | 검은 테두리의 안경을 쓴 남자. | 고침 |
 
 사례: `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`,
-`tests/rules/cases/lexical-gloss-cleanup.tsv`
+`tests/rules/cases/lexical-gloss-cleanup.tsv`, `tests/rules/cases/lexical-idiom-glosses.tsv`
 
 ## LEX-4 이름 읽기는 명사로 읽히는 낱말을 덮지 않는다
 
@@ -58,6 +58,65 @@
 | 高原さんが来た。 | 타카하라 씨가 왔다. | 유지 |
 | ジョン・スミスが来た。 | 존 스미스가 왔다. | 유지 |
 | 「さすが、お姫様を守るナイトだね」 | 「역시, 공주님을 지키는 나이트구나」 | 유지 |
+| 星に願いを込めた。 | 별에 소원을 담았다. | 고침 |
+| ポケットの中に入っている。 | 주머니 속에 들어가 있다. | 유지 |
+
+조사(を, に, へ, は)로 이은 구 모양의 이름(작품 이름)은 앞뒤가 문장과 떨어져 있을 때만 이름으로 읽는다.
 
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
-`tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`
+`tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
+`tests/rules/cases/names-phrase-titles.tsv`
+
+## LEX-5 가타카나로 쓴 일반 낱말은 그 낱말로 읽는다
+
+대명사, 감탄사처럼 히라가나나 한자로 쓰는 낱말을 가타카나로 쓴 것은 그 낱말과 같게 읽는다. 소리대로 적지 않는다.
+낱말의 히라가나 어미는 소리대로 적는 가타카나 구간에 넣지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| ワタシはここにいるよ | 나는 여기에 있어 | 고침 |
+| ゴメンな。 | 미안해. | 고침 |
+| リアルなティアーズ | 리얼한 티아즈 | 고침 |
+| そんなのはゴメンだ。 | 그런 것은 싫다. | 유지 |
+| そんなのゴメンよ。 | 그런 것 싫어. | 유지 |
+
+사례: `tests/rules/cases/lexical-katakana-spellings.tsv`
+
+## LEX-6 な로 꾸미는 외래 형용사는 하다 형용사로 옮긴다
+
+영어 형용사에서 온 가타카나 외래어 뒤의 な는 `-한`으로 옮긴다(리얼한, 핫한). 명사에서 온 외래어 뒤의 な는 `-인`이다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| ホットなニュース | 핫한 뉴스 | 고침 |
+| ディープな話 | 딥한 이야기 | 고침 |
+| ファンタジーな時点で | 판타지인 시점에서 | 유지 |
+
+사례: `tests/rules/cases/lexical-katakana-spellings.tsv`
+
+## LEX-7 の中는 담는 것이면 안, 그 속에 있는 것이면 속이다
+
+상자, 방처럼 담는 것 뒤의 中은 `안`, 기억, 밤, 정적처럼 그 속에 있는 매질, 때, 상태 뒤의 中은 `속`이다. 무리 가운데
+고르는 中은 `중`이다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 記憶の中に残る。 | 기억 속에 남는다. | 고침 |
+| 静寂の中で感じた。 | 정적 속에서 느꼈다. | 고침 |
+| 箱の中に入れる。 | 상자 안에 넣는다. | 유지 |
+| 人の中で一番強い。 | 사람 중에서 제일 강하다. | 유지 |
+
+사례: `tests/rules/cases/pass-naka-sok.tsv`, `tests/rules/cases/naka-inside-mass.tsv`
+
+## LEX-8 명사 뒤의 なんて, なんか는 `같은 건`이다
+
+명사나 `명사のこと` 뒤에서 낮추어 말하는 なんて, なんか는 `같은 건`으로 옮긴다. のこと는 따로 옮기지 않고, 때를 나타내는
+명사 뒤에서만 `의 일`로 옮긴다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| あたしのことなんて | 나 같은 건 | 고침 |
+| 昨日のことなんて覚えてない | 어제의 일 같은 건 기억하지 못한다 | 고침 |
+| 夢なんて忘れて。 | 꿈 같은 건 잊어. | 유지 |
+
+사례: `tests/rules/cases/pass-koto-nante.tsv`

@@ -9716,8 +9716,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カラ元気	허세	I110			GN							jisjk:61950
 空出張	가공 출장	N110			GN							jisjk:158566
 そら目	착시	N110			GN							jisjk:16185
-カラ回り	표류	I110		Hd	GN							jisjk:61975
-空まわり	표류	I110		Hd	GN							jisjk:61975
+カラ回り	공회전	I110		Hd	GN							jisjk:61975
+空まわり	공회전	I110		Hd	GN							jisjk:61975
 そら耳	환청	N110	UTi		GN							jisjk:16210
 空ぶかし	무부하회전	N110	VPe		GN							jisjk:229505
 空ふかし	무부하회전	N110	VPe		GN							jisjk:229505
@@ -20596,9 +20596,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 黄色狒々	노랑개코원숭이	N110			GN							w:26230
 アタシ	나	I120	XXXVQwVHn		GN	511	||2 &&4 S+1== "の" D+1== "의" P+1== "2**" ||2 P+2== "1**" P+2== "7**" &&2 ||2 S+1== "に" S+1== "を" P+1== "2**"	지시어, 의문사, 대명사: こ, そ, あ, ど 계열(これ, その, そんな, どんなに, このまま…), 의문사(何, なん, 誰, いつ, いくつ, いくら, いかが), 인칭대명사(私, 僕, 俺, 君, 自分…). 형식: docs/rule-language.md, 실행 순서: docs/pipeline-layers.md. 규칙은 그 번호를 가리키는 사전 단어(머리 단어)의 갈래로 파일을 정한다(docs/rule-language.md#주제-파일). 파일 안에서는 머리 단어별로 모아 두었다. 다른 파일: それから, それで 같은 접속사와 そうか, どうぞ, どうも 같은 응답, 인사는 discourse.txt, そう(것 같다)는 sense-*.txt. あたし를 소유격 の와 명사, 형용사가 이어지는 문맥에서 '나'로 선택한다. 조사 に·を 앞에서도 나를 고른다.			あたし	variant:atashi:1
 アタシ	내	I120	VQwVHn		GN	512	||4 &&3 D+1== "(이)가" P+1== "2**" P+2== "4**" S+1== "が好き" &&2 S+1== "の好き" P+1== "8**" &&2 S+1== "が" P+1== "2**"	あたし는 주격 조사 が나 が好き・の好き 등의 앞에서 '내'를 골라 '내가' 같은 표현을 만든다.			あたし	variant:atashi:2
+ワタシ	나	I120	XXXVHn		GN	511	||2 &&4 S+1== "の" D+1== "의" P+1== "2**" ||2 P+2== "1**" P+2== "7**" &&2 ||2 S+1== "に" S+1== "を" P+1== "2**"	ワタシ를 소유격 の와 명사, 형용사 앞이나 に, を 앞에서 나로 고른다.			わたし	variant:watashi:1
+ワタシ	내	I120	VHn		GN	512	||4 &&3 D+1== "(이)가" P+1== "2**" P+2== "4**" S+1== "が好き" &&2 S+1== "の好き" P+1== "8**" &&2 S+1== "が" P+1== "2**"	ワタシ를 주격 が나 が好き, の好き 앞에서 내로 골라 내가 같은 표현을 만든다.			わたし	variant:watashi:2
 あたしたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:1
 あたし達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:2
 アタシたち	우리	I120	VHn		GN						あたしたち	variant:atashitachi:3
+ワタシたち	우리	I120	VHn		GN						わたしたち	variant:watashitachi:1
+ワタシタチ	우리	I120	VHn		GN						わたしたち	variant:watashitachi:2
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
 ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
 ヒゲ	수염	N110	VBp		GN							variant:katakana:1
@@ -20621,3 +20625,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オトモダチ	친구	N110	VHn		GN							variant:katakana:20
 ヒルメシ	점심	N110	VFd		GN							variant:katakana:21
 トモダチ	친구	N110	VHn		GN							variant:katakana:22
+ゴメンな	미안해	A9H0			GN						ごめんな	variant:katakana:23
+ゴメンよ	미안해	A9H0			GN						ごめんよ	variant:katakana:24

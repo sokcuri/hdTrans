@@ -1,0 +1,8 @@
+# 규칙: LEX-7
+rule	input	expected	kind	layer
+cx:naka-sok:10	記憶の中に残る。	기억 속에 남는다.	fix	rewrites
+cx:naka-sok:10	箱の中に入れる。	!rule:cx:naka-sok:10	keep	rewrites
+cx:naka-sok:20	静寂の中で感じた。	정적 속에서 느꼈다.	fix	rewrites
+cx:naka-sok:20	人の中で一番強い。	!rule:cx:naka-sok:20	keep	rewrites
+cx:naka-sok:30	炎の中から現れた。	불길 속에서 나타났다.	fix	rewrites
+cx:naka-sok:30	箱の中から出す。	!rule:cx:naka-sok:30	keep	rewrites
