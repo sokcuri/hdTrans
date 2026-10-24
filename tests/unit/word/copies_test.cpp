@@ -90,6 +90,13 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("だめだだめだ！"), "안돼 안돼!");  // the copy before another is contracted too
     HD_CHECK_EQ(translate("やだやだやだっ"), "싫어 싫어 싫엇");  // a sound of the lexicon
     HD_CHECK_EQ(translate("長い長い夜だった。"), "긴 긴 밤이었다.");  // copies before a noun
+    // Copies drawn out by one or two vowel kana are copies across their cry marks.
+    HD_CHECK_EQ(translate("痛いぃ、痛いぃ"), "아파, 아파");
+    HD_CHECK_EQ(translate("怖いいいっ、怖いいいっ！"), "무서웟, 무서웟!");
+    HD_CHECK_EQ(translate("痛いぃ……でも我慢する"), "아파……하지만 참는다");  // not the attributive
+    HD_CHECK_EQ(translate("痛いぃ……いや"), "아파……아니");  // nor before a noun
+    HD_CHECK_EQ(translate("痛いー、痛いー"), "아파~, 아파~");  // copies across their lengthening
+    HD_CHECK_EQ(translate("（痛いー）"), "(아프다~)");  // a thought is no cry
     // Each copy clipped with its own っ is still a copy and closes with ㅅ.
     HD_CHECK_EQ(translate("だめっだめっ"), "안됏 안됏");
     HD_CHECK_EQ(translate("痛いっ、痛いっ……"), "아팟, 아팟……");

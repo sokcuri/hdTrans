@@ -97,7 +97,7 @@ std::string WriteStress(std::string_view s);
 // follows such a syllable, kept between the two when it has a final consonant (짱\uE00A\uE00B 짜~앙,
 // 씨\uE00A\uE00B 씨이), and
 // dropped elsewhere; each output::kClipMark dropped, closing an open Hangul syllable before it
-// with ㅅ (아파\uE00C 아팟, 돼\uE00B\uE00B\uE00C 돼에엣).
+// with ㅅ (아파\uE00C 아팟, 돼\uE00B\uE00B\uE00C 돼에엣); each cry mark (output::IsCryMark) dropped.
 std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).

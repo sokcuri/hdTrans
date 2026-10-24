@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/rules/match.h"
 #include "core/text/hangul.h"
 #include "core/text/unicode.h"
@@ -363,6 +364,21 @@ bool Item::CheckGAttr(std::string_view s, int di) {
     return false;
 }
 
+namespace {
+
+// Whether t is a run of the closing marks of the sound stage (output::IsClosingMark).
+bool ClosingMarks(std::string_view t) {
+    if (t.empty()) return false;
+    for (std::string_view r = t; !r.empty();) {
+        const text::Rune c = text::DecodeRune(r);
+        if (!output::IsClosingMark(c.cp)) return false;
+        r.remove_prefix(c.size);
+    }
+    return true;
+}
+
+}  // namespace
+
 // Whether the next item (after a parenthesised group) is missing or its first target
 // starts with ) 」 ! ” = or -.
 bool Item::IsRuleRightBoundary() const {
@@ -421,14 +437,21 @@ bool Item::IsRuleRightBoundary() const {
     }
     const char32_t punct = text::DecodeRune(n->group->surface).cp;
     const bool mark = std::u32string_view(U"?？!！。、」』").find(punct) != std::u32string_view::npos;
-    const Item* closed = tsu != nullptr ? tsu : (terminal && !bound && !mark ? this : nullptr);
+    // A predicate drawn out at its end, with the closing marks of the sound stage right after
+    // it, has ended its phrase: no noun after the pause takes it as a modifier (痛いぃ……いや).
+    const bool drawn = w != nullptr && From(text, start + length).empty() &&
+                       ClosingMarks(w->tokens.Raw(static_cast<std::size_t>(tokenIndex + 1)));
+    const Item* closed = tsu != nullptr ? tsu : (terminal && (!bound || drawn) && !mark ? this : nullptr);
+    // The closing marks of the sound stage after a drawn word (痛いぃ……) stand between too.
     if (closed != nullptr && w != nullptr && n->tokenIndex > closed->tokenIndex + 1) {
-        bool ellipsis = true;
+        bool ellipsis = true, dots = false;
         for (int k = closed->tokenIndex + 1; k < n->tokenIndex && ellipsis; k++) {
             const std::string_view t = w->tokens.Raw(static_cast<std::size_t>(k));
-            ellipsis = !t.empty() && TrimRunes(t, "…‥・.").empty();
+            const bool run = !t.empty() && TrimRunes(t, "…‥・.").empty();
+            dots = dots || run;
+            ellipsis = run || ClosingMarks(t);
         }
-        if (ellipsis) return true;
+        if (ellipsis && dots) return true;
     }
     const std::string_view dst = n->EntryText(0);
     for (const std::string_view p : {std::string_view(")"), kKoCloseQuote, std::string_view("!"), std::string_view("”"),

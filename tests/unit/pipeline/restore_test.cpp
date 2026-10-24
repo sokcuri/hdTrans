@@ -300,6 +300,8 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼에"));
     HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00B\uE00B\uE00C!"), std::string("안돼에엣!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("뜨거워\uE00E!"), std::string("뜨거워!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("뜨거워\uE00F!"), std::string("뜨거워!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배님\uE00B\uE00B"), std::string("선배니이임"));
     HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00B선배"), std::string("!선배"));
     // A clip mark closes the open syllable before it with ㅅ and is dropped elsewhere.

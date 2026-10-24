@@ -153,6 +153,9 @@
 //= mark.cry	Marks right after the last copy of an adjective of adjective.grumble said twice that make the copies a cry (寒い寒いっ, 寒い寒い！, 寒い寒いー, 寒い寒い……, 寒い寒い♪).
 //= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
+//= mark.thought-open	Marks that open a thought, which an adjective drawn out in it does not make a cry (（む、難しい〜〜） 어렵다~~).
+//= mark.thought-close	Marks that close what mark.thought-open opens.
+//= mark.stretch	Marks that stretch an い-adjective at the end of its phrase into a cry (暑いー！ 더워~!, 痛い～ 아파~).
 //= mark.lengthening	Marks that draw out the word before them: after a final な of 思う they make it the speaker's opinion (思うなぁ, 思うなー).
 //= mark.long-vowel	Long marks that draw out a kana inside a word: a copy of a word drawn out with them is the same word (すごい|すごーい).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
@@ -6026,6 +6029,14 @@ ko-verb.person-object	따라잡다
 ko-verb.person-object	앞지르다
 ko-verb.person-object	닮다
 ko-verb.person-object	섬기다
+mark.thought-open	（
+mark.thought-open	(
+mark.thought-close	）
+mark.thought-close	)
+mark.stretch	ー
+mark.stretch	～
+mark.stretch	〜
+mark.stretch	~
 mark.lengthening	ぁ
 mark.lengthening	あ
 mark.lengthening	ー

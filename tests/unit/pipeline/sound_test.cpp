@@ -271,7 +271,7 @@ HD_TEST(pipeline_sound) {
         {"うるさああい！", "うるさい\uE00A！"},
         {"すごおい！", "すごおい！"},
         // A ー after the い that ends an adjective before a pause is written ～.
-        {"すごいー！", "すごい～！"},
+        {"すごいー！", "すごい\uE00A！"},
         // Unchanged: the casual negative ね, a lone kana, a sound.
         {"知らねー", "知らねー"},
         {"よー！", "よー！"},
@@ -623,6 +623,14 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
         {"うるさ～い！", "うるさい\uE00A！"},
+        // An adjective lengthened before its い takes a shout's っ into the lengthening, not before a comma.
+        {"うるさ～いっ！", "うるさい\uE00A！"},
+        {"うるさ～い、それ", "うるさい、それ"},
+        // An adjective drawn out after its い with ー or ～ before a pause takes one lengthening mark,
+        // with a shout's っ; two or more ～ stay written before it.
+        {"うるさいー！", "うるさい\uE00A！"},
+        {"うるさい～っ！", "うるさい\uE00A！"},
+        {"うるさい～～～！", "うるさい～～～\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
@@ -665,10 +673,14 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // A sound key that starts inside the stem before the mark does not hold it (ゴォ of
         // すご), one that starts a word does (おーい).
         {"すごぉぉい！", "すごい！"},
-        // The い and ぃ that draw out an adjective at the end of a phrase go; い alone stays.
-        {"うるさいぃ！", "うるさい！"},
-        {"すごいいいっ！", "すごいっ！"},
-        {"冷たいぃぃ", "冷たい"},
+        // The い and ぃ that draw out an adjective at the end of a phrase go, one or two of them
+        // with a shout's っ after them leaving the cry mark, three or more drawn marks; い alone
+        // stays. A ー or ～ after them lengthens the adjective instead.
+        {"うるさいぃ！", "うるさい\uE00E！"},
+        {"すごいいいっ！", "すごい\uE00F！"},  // the clipped cry mark
+        {"冷たいぃぃ", "冷たい\uE00E"},
+        {"すごいいいいっ！", "すごい\uE00B\uE00B\uE00B\uE00C！"},
+        {"冷たいぃ～", "冷たい\uE00A"},
         {"いいいい！", "いいいい！"},
         {"うるさいいね", "うるさいいね"},
         // Before a sentence particle and a pause the mark of an adjective's い goes after the
