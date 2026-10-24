@@ -577,6 +577,47 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
+    // The potential of that いる (待ってられない, やってられません) is the potential of the verb, as
+    // a potential form reads (기다릴 수 없다): the ending after the ichidan form of られ.
+    bool potentialStem = false;
+    if (ending == nullptr && base.kind == 7 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(7, 4))) {
+        const int teWidth = patternWidth;
+        patternWidth += WidthOf(Conjugation(7, 4));
+        const int potentialWidth = patternWidth;
+        const std::string_view potential = after();
+        int branch = 0;
+        while (branch < kConjugationBranches && !potential.starts_with(Conjugation(7, branch))) branch++;
+        for (int later = 9; branch == 8 && later < kConjugationBranches; later++) {
+            const std::string_view e = Conjugation(7, later);
+            if (later != 11 && later != 12 && later != 13 && !e.empty() && potential.starts_with(e)) branch = later;
+        }
+        if (branch < kConjugationBranches) {
+            patternWidth += WidthOf(Conjugation(7, branch));
+            base.patternKind = 7;
+            base.kind = branch;
+            base.record = 4;
+            ending = endingGroup(after());
+            if (ending == nullptr) base.patternKind = oldKind;
+        }
+        if (ending == nullptr && branch < kConjugationBranches && Conjugation(7, branch).empty()) {
+            // Where that form is a bare stem without an ending of its own, the potential takes the
+            // empty ending, the ない after it being a word.
+            patternWidth = potentialWidth;
+            base.kind = 4;
+            base.record = 0;
+            ending = endingGroup(after());
+            potentialStem = ending == nullptr;
+        }
+        if (ending != nullptr || potentialStem) {
+            length = sourceLength + pattern();
+        } else {
+            patternWidth = teWidth;
+            base.patternKind = oldKind;
+            base.kind = 7;
+            base.record = 0;
+        }
+    }
+
     if (ending == nullptr) {
         if (following != nullptr && base.patternKind == 7 && base.kind == 8) {
             if (Has(GAttr(0), "Ke") && !(!two.Empty() && Classify(two) != 0)) return false;
