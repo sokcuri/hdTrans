@@ -1,0 +1,40 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:6485	そうね。この際、徹底的に撃滅しましょう！	그래. 이참에, 철저하게 격멸합시다!	fix	defaults
+dict:jisjk:6485	この際きちんと直しておくことも大切ね。	이참에 제대로 고쳐 두는 일도 중요하네.	fix	defaults
+dict:jisjk:253615	猛吹雪でビックリした。	맹렬한 눈보라로 깜짝 놀랐다.	fix	defaults
+dict:w:24760	野ざらしよりはマシだろう。	노천보다는 나을 것이다.	fix	defaults
+dict:jisjk:79692	倉の中のバケツに飲み水を補充する。	창고안의 양동이에 식수를 보충한다.	fix	defaults
+dict:w:27500	親犬たちは勝手に動き回る。	어미 개들은 마음대로 돌아다닌다.	fix	defaults
+dict:w:27501	子クモたちはジャガイモを食べていた。	새끼 거미들은 감자를 먹고 있었다.	fix	defaults
+dict:jisjk:106110	もっと積もったら雪掻きをしないといけない。	좀 더 쌓이면 눈 치우기를 하지 않으면 안 된다.	fix	defaults
+dict:w:27503	襖を少し高くしたぐらいの大きさだ。	장지문을 조금 높게 한 정도의 크기다.	fix	defaults
+dict:w:27504	まさに一択だった。	그야말로 외길이었다.	fix	defaults
+dict:w:27505	拳大の穴を真っ直ぐに掘る。	주먹 크기의 구멍을 곧게 판다.	fix	defaults
+dict:w:27507	一口大	한입 크기	fix	defaults
+dict:jisjk:86356	電動草刈機なども駄目だった。	전동 예초기 등도 안 되었다.	fix	defaults
+dict:jisjk:79395	簡易な囲炉裏のような形を作る。	간단하고 쉬운 화로와 같은 형태를 만든다.	fix	defaults
+lookup:首部	合掌して首部分も肥料にしておいた。	합장해 목부분도 비료로 해 두었다.	fix	lookup
+dict:jisjk:19018	大任を果たしたと少し満足そうだ。	대임을 완수했다고 조금 만족한 것 같다.	fix	defaults
+dict:w:27508	しかし、素人に高床は厳しかった。	하지만, 아마추어에게 고상식은 어려웠다.	fix	defaults
+dict:w:27509	身重の女が居るのだ。	임신한 여자가 있다.	fix	defaults
+dict:jisjk:61862	工務店で売ってる物との差は感じない。	건축 업체에서 팔고 있는 것과의 차이는 느끼지 않는다.	fix	defaults
+dict:jisjk:106008	前屈みだった兎の首の部分	앞으로 숙인 자세였던 토끼의 목의 부분	fix	defaults
+dict:w:27511	主な利用方法は、トイレのお尻拭き。	주된 이용 방법은, 화장실의 밑씻개.	fix	defaults
+dict:w:27510	尻拭き用は、置いているだけだった。	밑씻개용은, 두고 있을 뿐이었다.	fix	defaults
+lookup:困った事	困った事態に直面した。	곤란한 사태에 직면했다.	fix	lookup
+lookup:困った事	困った事があったら言ってね。	곤란한 일이 있으면 말해.	keep	lookup
+L6970	【万能農具】様様だ。	【만능 농기구】덕분이다.	fix	local
+L6970	様様な人がいる。	여러 가지 사람이 있다.	keep	local
+L6971	十年近くの入院生活	10년 가까운 입원 생활	fix	local
+L6971	駅の近くの店	역 근처 가게	keep	local
+L6972	日暮れ近くまで森を耕した。	저녁때 가까이까지 숲을 경작했다.	fix	local
+L6972	家の近くまで来た。	집의 근처까지 왔다.	keep	local
+dict:w:27513	二十分近くの距離	rule:dict:w:27513=가까운	fix	local
+dict:w:27513	数年近くの月日	rule:dict:w:27513=가까운	fix	local
+dict:w:27513	自分近くの席	!rule:dict:w:27513	keep	local
+dict:w:27513	部分近くの	!rule:dict:w:27513	keep	local
+dict:w:27513	気分近くの	!rule:dict:w:27513	keep	local
+dict:w:27514	自分近くまで	!rule:dict:w:27514	keep	local
+sense:膨れる	とりあえず、腹は膨れた。	우선, 배는 불렀다.	fix	senses
+sense:膨れる	頬が膨れた。	뺨이 부풀었다.	keep	senses

@@ -17896,7 +17896,7 @@ ttt	ttt	K110			GN				jisjk:201744
 この間隔	이 간격	N110	VPl		GN				jisjk:164518		
 この間隔	이 간격	N110	VPl		GN				jisjk:164519		
 この限りではな	예외로 $AB@	E7U0		Av	GN				jisjk:362318		
-この際	이 때	E300	UMe		GN				jisjk:6485		
+この際	이참에	E300	UMe		GN				jisjk:6485		
 この頃	요즘	C0H0	UMe		GN				jisjk:182775		
 こはずかし	열$FA@	H7U0			GN				jisjk:5067		
 こはぜ	메뚜기	I110	VHn		GN				jisjk:40982		
@@ -137148,7 +137148,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前々回	전전회	N110	UMe		GN				jisjk:199741		
 前々日	전전날	N110	UMe		GN				jisjk:199743		
 前えもって	미리	E311			GN				jisjk:1923		
-前かがみ	앞으로 구부림	I110			GN				jisjk:110786		
+前かがみ	앞으로 숙인 자세	I110			GN				jisjk:110786		
 前かがみにな	몸을 앞으로 구부&AA@	M428			GN				jisjk:148331		
 前かけ	앞치마	I110			GN				jisjk:106007		
 前かご	앞 바구니	N110			GN				jisjk:151793		
@@ -137312,7 +137312,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前尾	마에오	N130			GN				jisjk:104941		
 前屈	전굴	N110			GN				jisjk:239772		
 前屈にな	몸을 앞으로 구부&AA@	M428			GN				jisjk:148330		
-前屈み	앞으로 구부림	I110			GN				jisjk:106008		
+前屈み	앞으로 숙인 자세	I110			GN				jisjk:106008		
 前山	마에야마	N130	QCTVPl		GN				jisjk:328895		
 前山代	마에야마시로	I110	QCT		GN				jisjk:82742		
 前山区	마에야마구	N130	QCTVPl		GN				jisjk:328896		
@@ -159575,7 +159575,7 @@ ttt	ttt	K110			GN				jisjk:201744
 囲み	포위	N110			GN				jisjk:104407		
 囲名	카코이묘	N130	QCTVPl		GN				jisjk:281666		
 囲山	카코이야마	N130	QCTVPl		GN				jisjk:281667		
-囲炉裏	난로	I110			GN				jisjk:79395		
+囲炉裏	화로	I110			GN				jisjk:79395		
 囲碁	바둑	N110	VRw		GN				jisjk:30562		
 囲繞	위요	N110		Hd	GN				jisjk:125484		
 囲繞	빙 두름	N110		Hd	GN				jisjk:126070		
@@ -168231,8 +168231,8 @@ ttt	ttt	K110			GN				jisjk:201744
 大仰	호들갑%A2@	G8U0			GN				jisjk:2679		
 大仰	오노키	N130	QCTVPl		GN				jisjk:278460		
 大仲新田	오나카신덴	I130	QCTVPl		GN				jisjk:278394		
+大任	대임	N110			GN				jisjk:19018		
 大任	오오토	N130	QCT		GN				jisjk:19017		
-大任	중임	N110			GN				jisjk:19018		
 大任町	오토우마치	N130	QCTVPl		GN				jisjk:278308		
 大企業	대기업	I110	VGt		GN				jisjk:64980		
 大企業病	대기업병	I110			BZ				jisjk:357646		
@@ -195092,8 +195092,8 @@ ttt	ttt	K110			GN				jisjk:201744
 工具旋盤	공구선반	N110	VPe		GN				jisjk:206668		
 工具鋼	공구강	N110	VSn		GN				jisjk:206669		
 工務	공무	N110			GN				jisjk:16121		
-工務店	공무점	I110	UAqVPl		GN				jisjk:61862		
-工務店	공무점	I110			GN				jisjk:61863		
+工務店	건축 업체	I110	UAqVPl		GN				jisjk:61862		
+工務店	건축 업체	I110			GN				jisjk:61863		
 工務課	공무과	N110	VBl		GN				jisjk:181400		
 工務課長	공무 과장	N110	VHn		GN				jisjk:181402		
 工匠	공장	N110	UAq		GN				jisjk:16138		
@@ -272046,7 +272046,7 @@ ttt	ttt	K110			GN				jisjk:201744
 猛	맹	N110	XXX	Z6On	GN				jisjk:339769		
 猛勇	용맹	N110		Dd	GN				jisjk:253621		
 猛反発	맹반발	N110			GN				jisjk:265082		
-猛吹雪	비바람	N110	VSs		GN				jisjk:253615		
+猛吹雪	맹렬한 눈보라	N110	VSs		GN				jisjk:253615		
 猛威	맹위	N110			GN				jisjk:21549		
 猛安謨克制	맹안모극제	N130	UMn		GN				jisjk:205481		
 猛射	맹사	N110	VTw	Hd	GN				jisjk:155646		
@@ -311584,7 +311584,7 @@ ttt	ttt	K110			GN				jisjk:201744
 草刈	쿠사카리	N130	QCTVPl		GN				jisjk:290315		
 草刈り	풀베기	N110		Hd	GN				jisjk:86355		
 草刈り場	벌초장	K110			GN				jisjk:353421		
-草刈り機	벌초기계	I110	VPe		GN				jisjk:86356		
+草刈り機	예초기	I110	VPe		GN				jisjk:86356		
 草刈り鎌	낫	N110	VPe		GN				jisjk:175835		
 草刈谷地	쿠사카리야치	I130	QCTVPl		GN				jisjk:290316		
 草創	초창	N110			GN				jisjk:35951		
@@ -351332,7 +351332,7 @@ ttt	ttt	K110			GN				jisjk:201744
 雪	눈	N110	VFr		GN				jisjk:115949		
 雪	&HG@	M442	VFdVAcVCp		GN				jisjk:138703		
 雪	설	N110		On	GN				jisjk:258986		
-雪かき	눈치우기	I110			GN				jisjk:74399		
+雪かき	눈 치우기	I110			GN				jisjk:74399		
 雪がちらちら	눈이 흩날&AA@	M429		Pn	GN				jisjk:344078		
 雪がふ	눈이 내&AA@	M428			GN				jisjk:263533		
 雪ぐつ	눈신	I110	VAc		GN				jisjk:74400		
@@ -351418,7 +351418,7 @@ ttt	ttt	K110			GN				jisjk:201744
 雪投げ	눈싸움	I110			GN				jisjk:106111		
 雪折れ	눈에 꺾임	N110			GN				jisjk:254771	000000000000000000000000000000000000000000000000000000000000000042283f314b543f38df46544f2b4831df4c55464a4f5e3e094c55df3e264e004e3131300000537300426c00436c00466400436c000000000000006400710071006800000000000000000000000000474e000000000000000000000000fb2c0c3c	
 雪持ち	소복이 쌓인 눈	I110			GN				jisjk:74429		
-雪掻き	눈가레	I110		Hd	GN				jisjk:106110		
+雪掻き	눈 치우기	I110		Hd	GN				jisjk:106110		
 雪掻車	설소차	I110			GN				jisjk:74416		
 雪明かり	눈색깔	I110	UCl		GN				jisjk:74413		
 雪時雨	진눈깨비	I110			GN				jisjk:74418		
@@ -356768,7 +356768,7 @@ ttt	ttt	K110			GN				jisjk:201744
 飲み易さ	부드러움	H110			GN				jisjk:365461		
 飲み止し	마시다 남긴 것	N110		Hd	GN				jisjk:249086		
 飲み歩	마시며 돌아 다&A7@	M441			GN				jisjk:360139		
-飲み水	음료수	I110	VFd		GN				jisjk:79692		
+飲み水	식수	I110	VFd		GN				jisjk:79692		
 飲み物	음료	I110	VFd		GN				jisjk:79690		
 飲み薬	내복약	I110	VFdVMd		GN				jisjk:79693		
 飲み足りな	마시는 것이 부족$AB@	H7U0			GN				jisjk:368847		
@@ -357312,7 +357312,6 @@ ttt	ttt	K110			GN				jisjk:201744
 首足	수족	N110	VBp		GN				jisjk:189989		
 首輪	목걸이	N110	VAcVJwVCp		GN				jisjk:27485		
 首途	출발	N110		Hd	GN				jisjk:190209		
-首部	코우베	N130	QCTVPl		GN				jisjk:292690		
 首都	수도	N110	VPl		GN				jisjk:27483		
 首都圏	수도권	I110	VPl		GN				jisjk:76089		
 首都圏モーゲージ	수도권 몰트게이지	I130	QIDVGt		GN				jisjk:76090		
