@@ -104,3 +104,27 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("先輩っ先輩っ"), "선배 선배");  // a noun keeps its Korean
     HD_CHECK_EQ(translate("痛いっ！"), "아프다!");  // said once
 }
+
+// Three or more copies of a verb stem and ending that also spell a noun are a cry, each copy read
+// as the noun said alone, whatever stands before or after the run (SND-2); the dictionary word
+// 好き好き keeps its own reading. Needs HDTRANS_DICTS for the stems and endings.
+HD_TEST(word_copies_cried_nouns) {
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    const auto loaded = hdTrans::dict::LoadFoldersTsv({dicts});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    auto translate = [&](std::string_view text) {
+        hdTrans::internal::Memory memory;
+        const std::string line(text);
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        return out.empty() ? std::string() : out[0];
+    };
+    HD_CHECK_EQ(translate("好き好き好き、大好き"), "좋아 좋아 좋아, 너무 좋아");  // before a comma
+    HD_CHECK_EQ(translate("好き、好き、好き"), "좋아, 좋아, 좋아");
+    HD_CHECK_EQ(translate("ずっと好き好き好き"), "계속 좋아 좋아 좋아");  // after a word
+    HD_CHECK_EQ(translate("好き、好き、好き、大好き"), "좋아, 좋아, 좋아, 너무 좋아");  // the last copy too
+    HD_CHECK_EQ(translate("好き、大好き"), "좋아해, 너무 좋아");  // said once
+    HD_CHECK_EQ(translate("好き好きだ"), "각자 기호다");  // the dictionary word
+    HD_CHECK_EQ(translate("迷い迷い迷い、歩いた"), "헤매어 헤매어 헤매어, 걸었다");  // a verb stem stays the verb
+}
