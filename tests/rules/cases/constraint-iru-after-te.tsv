@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 constraint:iru-form-after-te	うふふっ♪ 司令の寝顔、可愛い♪ ずっと見ていようかな…あ、そうだ。	우후훗♪ 사령의 잠자는 얼굴, 귀여운♪ 계속 보고 있을까…아, 맞다.	fix	lookup
 constraint:iru-form-after-te	貴様は黙っていろ	네놈은 입을 다물고 있어라	fix	lookup
 constraint:iru-form-after-te	聞いていらっしゃいます？	듣고 계십니까?	fix	lookup
-constraint:iru-form-after-te	ミドリさんの服装や見た目を書き込むんだと思われていたみたいです	미도리 씨의 복장이나 외형을 기입한다고 생각되고 있던 것 같습니다	fix	lookup
+constraint:iru-form-after-te	ミドリさんの服装や見た目を書き込むんだと思われていたみたいです	미도리 씨의 복장이나 외형을 적는다고 생각되고 있던 것 같습니다	fix	lookup
 constraint:iru-form-after-te	……黙っていろ。	……입을 다물고 있어라.	fix	lookup
 constraint:iru-form-after-te	ということは、もともと修正液で直されていたってことにすれば……	그 말은, 원래 수정액으로 고쳐지고 있었다는 것으로 하면……	fix	lookup
 constraint:iru-form-after-te	どれだけ不実な行いをしてようが瑕疵があろうが、一切の責任を負わずに解消を認められるのだ。	얼마나 부실한 행동을 하고 있든 하자가 있든지, 일절의 책임지지 않고 해소를 인정받는다.	keep	lookup
