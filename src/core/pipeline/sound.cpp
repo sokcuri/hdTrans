@@ -2664,7 +2664,7 @@ bool AbilityVerb(int, const dict::Codes* c) { return c != nullptr && c->gram.Has
 // stem and that form spell it whole. する, くる and 来る count by their forms.
 bool VerbFormIs(std::string_view form, int branch, bool (*keep)(int, const dict::Codes*), const LineContext& ctx,
                 const dict::Snapshot& snap) {
-    for (const auto [group, kind] : {std::pair{kPrefixSuru, kSuru}, {kPrefixKuru, kKuru}, {kPrefixKuruKanji, kKuruKanji}}) {
+    for (const auto& [group, kind] : {std::pair{kPrefixSuru, kSuru}, {kPrefixKuru, kKuru}, {kPrefixKuruKanji, kKuruKanji}}) {
         if (const std::string_view f = word::PrefixForm(group + branch); !f.empty() && form == f && keep(kind, nullptr)) return true;
     }
     const dict::Candidates rd = snap.GetWordInfo(form, dict::LookupMode::General, ctx.lookup);
