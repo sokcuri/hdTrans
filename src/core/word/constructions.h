@@ -61,15 +61,15 @@ struct CxNode {
 };
 
 enum class CxVerb : uint8_t {
-    SelectLemma, SelectTarget, TakeTarget, SetTarget, AppendTarget, SetEnding, ReplaceHead, ReplaceEndingTail, MapLemma, MapTarget, SelectMap,
-    SetVerb, CopyEnding, CopyWord, SetSound, SetActive, ClipEnding,
+    SelectLemma, SelectTarget, TakeTarget, SetTarget, AppendTarget, PrependTarget, SetEnding, ReplaceHead, ReplaceEndingTail,
+    MapEndingTail, MapLemma, MapTarget, SelectMap, SetVerb, SetVerbFrom, CopyEnding, CopyWord, SetSound, SetActive, ClipEnding, SetBaseVerb, DrawEnding,
 };
 
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
-    std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail
-    int map = -1;             // map-lemma, map-target, select-map: into maps
+    std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail and set-verb-from
+    int map = -1;             // map-lemma, map-target, select-map, map-ending-tail: into maps
 };
 
 // A word map declared by "//~ NAME <TAB> FROM=TO ... <TAB> what it is for".

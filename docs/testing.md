@@ -12,10 +12,12 @@
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
+| `rules.critical` | 뜻이 뒤집히는 오역의 사례 `tests/rules/critical/<갈래>.tsv`. 한 행도 실패하지 않아야 하고 `current` 행을 받지 않음 ([번역 규칙 MNG](../spec/meaning.md)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
 | `sets.drops` | 측정 세트에서 글이 빠지는 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
+| `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
@@ -54,7 +56,7 @@ build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트�
   그 밖의 단계는 `<단계>:<이름>`(`sense:お盆`, `cx:noun-to:10`)
 - `input`: 직접 쓴 짧은 일본어 문장
 - `expected`: 번역 전체, 또는 `rule:dict:<id>=<번역>`(그 줄의 어떤 단어를 그 행의 지역 규칙이 그 번역으로 골랐음, `-why` 기준),
-  `!rule:dict:<id>`(그 규칙이 아무것도 고르지 않음)
+  `!rule:dict:<id>`(그 규칙이 아무것도 고르지 않음), `has:<말>`, `lacks:<말>`(출력에 그 말이 있음, 없음)
 - `kind`: `fix`(고친 규칙이 이제 맞게 고르는 문장), `keep`(고치기 전 선택이 맞아서 그대로 남아야 하는 문장),
   `current`(지금 동작을 그대로 적어 둔 문장)
 - `layer`: 그 규칙이 도는 실행 층([pipeline-layers.md](pipeline-layers.md)의 `local`, `local-ending`, `global-stem`,
@@ -68,6 +70,31 @@ tools/rule-cases.sh build/mac/hdtrans dicts tests/rules/cases/<주제>.tsv --acc
 ```
 
 규칙을 고칠 때는 `fix` 행과 `keep` 행을 하나 이상씩 더하고, 커밋 전에 표 전체와 `examples/`를 돌립니다.
+
+## 구문 변형 (tests/variants/)
+
+규칙 사례가 고친 문장 하나를 보는 것과 달리, 변형 표는 같은 구문에 다른 낱말을 넣은 문장들로 구문 가족이 얼마나 넓게 맞는지
+봅니다. `tools/variants.py`가 표의 틀에 사전의 낱말(사람 명사, 동사, 형용사)을 넣어 가족마다 문장을 만들고(기본 20개, 씨앗이
+정해져 있어 늘 같음), 번역해서 출력이 그 구문의 한국어 모양(정규식)에 맞는지 셉니다.
+
+```
+family	causer-ni	GRM-1	90
+slot	P	person	母 父 先生
+slot	VP	vp	本を+読む 荷物を+持つ
+case	{P}に{VP:cp-ta}。	^{P.ko} 때문에 억지로 	당했|되었
+```
+
+- `slot 이름 종류 낱말…`: 종류는 `person`, `noun`, `verb`, `vp`(목적어+동사), `adj`, `list`. 사전에서 그 종류가 아닌 낱말은
+  경고하고 뺍니다.
+- `case 틀 기대 [거부]`: `{이름:형}`은 동사, 형용사의 활용형(`te`, `ta`, `cp-ta`, `teireba`, `chatta` …), 기대와 거부의
+  `{이름.ko}`는 그 명사의 사전 번역 중 하나입니다.
+- `family`의 넷째 칸은 그 가족의 통과율 하한(%)이고, ctest `rules.variants`가 `--check`로 확인합니다. 하한은 잰 통과율보다
+  한두 문장 낮게 둡니다(90%를 넘으면 90, 90%이면 85).
+
+```sh
+tools/variants.py build/mac/hdtrans --fails                                   # 가족별 통과율과 틀린 줄
+tools/variants.py build/mac/hdtrans --base "$BASE/build/mac/hdtrans" "$BASE/dicts"   # 기준 → 지금
+```
 
 ## 예제 문서 (examples/)
 
@@ -101,7 +128,9 @@ ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 �
 - `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 줄 수와 글이 빠지는 서로 다른 입력 수를 씁니다.
   문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
   ctest `sets.drops`는 그 수가 `tools/drops-budget.tsv`의 행과 같아야 통과합니다. 빠지는 입력을 줄인 변경은
-  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다른 세트는 다른 데이터라서 보지 않습니다.
+  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
+  경고만 남깁니다(GitHub Actions에서는 주석). 데이터가 바뀐 것이므로 그 데이터로 `--update`해 행을 다시 씁니다. CI의 `linux` 작업은 테스트 데이터를 받은 뒤 문서 세트만
+  이 검사로 봅니다(웹 예제는 테스트 데이터에 없습니다).
 
 ```sh
 tools/drops.py build/mac/hdtrans dicts --sets --budget tools/drops-budget.tsv [--update]
@@ -226,7 +255,10 @@ tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept
 Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `--expected` 비교를 합니다. gate가
 matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
-로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다.
+로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다. 이어서 같은 데이터의
+문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 빠지는 입력 수가 예산과 다르면 실패합니다. 문서가 늘거나 줄어 입력 수가
+행과 다르면 경고만 남깁니다. ctest
+`sets.drops`는 테스트 데이터를 받기 전에 돌아 CI에서는 건너뜁니다.
 
 ## 변경 판정 (e2e + 모델 판정)
 

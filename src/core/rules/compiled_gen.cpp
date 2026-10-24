@@ -1354,6 +1354,7 @@ bool RuleL148([[maybe_unused]] Item* p) {
 //     (gram[-1] has Ct and gram[-2] has Nj|Nd or gram[-1] has Nq and src[-1] not starts "何" and src[-1] not starts "数" and src[-1] not starts "幾") and pos[+1] is 4** and (src[+2] == "な" or src[+2] == "いな") and pos[+2] is 7**
 //     (gram[-1] has Ct and gram[-2] has Nj|Nd or gram[-1] has Nq and src[-1] not starts "何" and src[-1] not starts "数" and src[-1] not starts "幾") and src[+1] == "な" and pos[+1] is 7**
 //     pos[-1] is 1** and pos[+1] is 3**
+//     (src[-1] ends "歳" or src[-1] ends "才") and pos[+1] is 4** and (end.src[+1] ends "なければ" or end.src[+1] ends "なきゃ" or end.src[+1] ends "なくちゃ" or end.src[+1] ends "なくては")
 bool RuleL149([[maybe_unused]] Item* p) {
     return (((GramEq(p, -1, "Ct"sv) && GramEq(p, -2, "NjNd"sv)) ||
            (GramEq(p, -1, "Nq"sv) && SrcNe(p, -1, "L何"sv) && SrcNe(p, -1, "L数"sv) && SrcNe(p, -1, "L幾"sv))) && GramEq(p, 1, "Xn"sv)) ||
@@ -1364,7 +1365,12 @@ bool RuleL149([[maybe_unused]] Item* p) {
            SrcEq(p, 2, "いな"sv)) && PumsaEq(p, 2, "7**"sv)) ||
            (((GramEq(p, -1, "Ct"sv) && GramEq(p, -2, "NjNd"sv)) ||
            (GramEq(p, -1, "Nq"sv) && SrcNe(p, -1, "L何"sv) && SrcNe(p, -1, "L数"sv) && SrcNe(p, -1, "L幾"sv))) && SrcEq(p, 1, "な"sv) && PumsaEq(p, 1, "7**"sv)) ||
-           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "3**"sv));
+           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, 1, "3**"sv)) ||
+           ((SrcEq(p, -1, "R歳"sv) ||
+           SrcEq(p, -1, "R才"sv)) && PumsaEq(p, 1, "4**"sv) && (GobiSrcEq(p, 1, "Rなければ"sv) ||
+           GobiSrcEq(p, 1, "Rなきゃ"sv) ||
+           GobiSrcEq(p, 1, "Rなくちゃ"sv) ||
+           GobiSrcEq(p, 1, "Rなくては"sv)));
 }
 
 // local 150
@@ -1645,13 +1651,11 @@ bool RuleL177([[maybe_unused]] Item* p) {
 //     src[+1] == "な" and ko[+1] == "&C6@" and pos[+1] is 4**
 //     sem[-1] under VHn and pos[+1] is 4** and end.pos[+1] is 57* and (src[+2] == "もら" or src[+2] == "いただ") and ko[+2] == "&CJ@" and pos[+2] is 4**
 //     pos[-1] is 7** and end.src[-1] == "い" and src[+1] == "決まってい" and pos[+1] is 4**
-//     pos[-1] is 1** and sem[-1] under VHn and pos[+1] is 4** and gram[+1] has Ka
 bool RuleL178([[maybe_unused]] Item* p) {
     return (SrcEq(p, 1, "な"sv) && DstEq(p, 1, "&C6@"sv) && PumsaEq(p, 1, "4**"sv)) ||
            (AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && GobiPumsaEq(p, 1, "57*"sv) && (SrcEq(p, 2, "もら"sv) ||
            SrcEq(p, 2, "いただ"sv)) && DstEq(p, 2, "&CJ@"sv) && PumsaEq(p, 2, "4**"sv)) ||
-           (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "い"sv) && SrcEq(p, 1, "決まってい"sv) && PumsaEq(p, 1, "4**"sv)) ||
-           (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && GramEq(p, 1, "Ka"sv));
+           (PumsaEq(p, -1, "7**"sv) && GobiSrcEq(p, -1, "い"sv) && SrcEq(p, 1, "決まってい"sv) && PumsaEq(p, 1, "4**"sv));
 }
 
 // local 179
@@ -1798,7 +1802,7 @@ bool RuleL190([[maybe_unused]] Item* p) {
 //     pos[+1] is 7** and end.src[+1] == "くて" and end.ko[+1] == "6서"
 //     (src[+1] == "楽し" or src[+1] == "ばかりい") and pos[+1] is 4**
 //     (src == "めぐ" or src == "も")
-//     src == src[+1]
+//     src == src[+1] and ko[+1] != "&CJ@"
 bool RuleL191([[maybe_unused]] Item* p) {
     return (SrcEq(p, 0, "忘れ"sv) && SrcEq(p, 1, "くる"sv) && PumsaEq(p, 1, "4**"sv)) ||
            ((SrcEq(p, 0, "住"sv) ||
@@ -1809,7 +1813,7 @@ bool RuleL191([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "ばかりい"sv)) && PumsaEq(p, 1, "4**"sv)) ||
            (SrcEq(p, 0, "めぐ"sv) ||
            SrcEq(p, 0, "も"sv)) ||
-           SrcEqW(p, 0, 1);
+           (SrcEqW(p, 0, 1) && DstNe(p, 1, "&CJ@"sv));
 }
 
 // local 192
@@ -1989,16 +1993,16 @@ bool RuleL209([[maybe_unused]] Item* p) {
 }
 
 // local 210
-//     (src[-1] == "証拠" or src[-1] == "一度")
+//     src[-1] == "証拠"
 //     (sem[-1] has QLG or sem[-1] has UQf)
 //     src[+1] == "何でも"
 //     (src[-2] == "どんな" or src[-2] == "たとえ")
 //     src[+1] ends "た" and pos[+1] is 7**
 //     src[-1] == "問題" and src[-2] == "何か"
 //     pos[-1] is 1** and pos[-2] is 7**|8** and src[-3] == "たとえ"
+//     (gram[-1] has Nq and sem[-1] lacks VPl and (gram[-1] has Ct or gram[-1] lacks Nj|Nd) or gram[-1] has Ct and sem[-1] lacks VPl and gram[-2] has Nq)
 bool RuleL210([[maybe_unused]] Item* p) {
-    return (SrcEq(p, -1, "証拠"sv) ||
-           SrcEq(p, -1, "一度"sv)) ||
+    return SrcEq(p, -1, "証拠"sv) ||
            (AttrEq(p, -1, "QLG"sv) ||
            AttrEq(p, -1, "UQf"sv)) ||
            SrcEq(p, 1, "何でも"sv) ||
@@ -2006,7 +2010,10 @@ bool RuleL210([[maybe_unused]] Item* p) {
            SrcEq(p, -2, "たとえ"sv)) ||
            (SrcEq(p, 1, "Rた"sv) && PumsaEq(p, 1, "7**"sv)) ||
            (SrcEq(p, -1, "問題"sv) && SrcEq(p, -2, "何か"sv)) ||
-           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "7**8**"sv) && SrcEq(p, -3, "たとえ"sv));
+           (PumsaEq(p, -1, "1**"sv) && PumsaEq(p, -2, "7**8**"sv) && SrcEq(p, -3, "たとえ"sv)) ||
+           ((GramEq(p, -1, "Nq"sv) && AttrNe(p, -1, "VPl"sv) && (GramEq(p, -1, "Ct"sv) ||
+           GramNe(p, -1, "NjNd"sv))) ||
+           (GramEq(p, -1, "Ct"sv) && AttrNe(p, -1, "VPl"sv) && GramEq(p, -2, "Nq"sv)));
 }
 
 // local 211
@@ -4596,7 +4603,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL146, 0xdc913148b3ee2169ull},
     {RuleL147, 0x250613dfe0dd370dull},
     {RuleL148, 0xd8392698fda548b2ull},
-    {RuleL149, 0x8a87243f9fa0a383ull},
+    {RuleL149, 0xd32f716a25279140ull},
     {RuleL150, 0xa92fff2098338ff5ull},
     {RuleL151, 0x8d24d5e482ce8d81ull},
     {RuleL152, 0xf9c516d2cc396514ull},
@@ -4625,7 +4632,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL175, 0x319420ee6f69e1eeull},
     {RuleL176, 0x8c3607ffd2fa82bcull},
     {RuleL177, 0xec71ef877aa2fb26ull},
-    {RuleL178, 0xd3a2d9a092d309b9ull},
+    {RuleL178, 0x4015b102a3465bf7ull},
     {RuleL179, 0xe92575172a0a2872ull},
     {RuleL180, 0xcb14b6a9db55cd88ull},
     {RuleL181, 0x3a44e41643288c21ull},
@@ -4638,7 +4645,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL188, 0xbb6faa8b3061dbbeull},
     {RuleL189, 0x0d5204dcb3322d1full},
     {RuleL190, 0x5220ce1b72a4b4d1ull},
-    {RuleL191, 0x4ac0f3ed4e6043e4ull},
+    {RuleL191, 0x3d166da12191cddfull},
     {RuleL192, 0xe94592d2a75aaa92ull},
     {RuleL193, 0xae55e76227f71160ull},
     {RuleL194, 0xbfcbe8239bbdce43ull},
@@ -4657,7 +4664,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL207, 0x183bc699d822bb26ull},
     {RuleL208, 0x0b1fa83be200dcccull},
     {RuleL209, 0x4aa763daeab76a88ull},
-    {RuleL210, 0x6640fde621d3a542ull},
+    {RuleL210, 0x865722d329f1ec97ull},
     {RuleL211, 0x1833fc6c1f2aaf04ull},
     {RuleL212, 0x70d80a842cc00bacull},
     {RuleL213, 0xc6591e5bccd20c62ull},

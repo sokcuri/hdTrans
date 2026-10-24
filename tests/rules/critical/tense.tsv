@@ -1,0 +1,34 @@
+# 규칙: MNG-2
+rule	input	expected	kind	layer
+lookup:itte-ki	ライブに行ってきた	has:왔다	fix	lookup
+lookup:itte-ki	ライブに行ってきた	lacks:다녀올게	fix	lookup
+lookup:itte-ki	さっき、買い物行ってきたの	has:왔어	fix	lookup
+lookup:itte-ki	私いま、図書部に行ってきたんです。	has:왔습니다	fix	lookup
+lookup:itte-ki	俺は来客を迎える前にスーパーへ買い出しに行ってきた。	has:왔다	fix	lookup
+lookup:itte-ki	今日は文化祭のミーティングを行ってきた	has:실시해 왔다	fix	lookup
+lookup:itte-ki	コンビニに行ってきました	has:왔습니다	fix	lookup
+lookup:itte-ki	「行ってきたよ！」	has:왔어	fix	lookup
+lookup:itte-ki	昨日、海に行ってきた。	has:왔다	fix	lookup
+lookup:itte-ki	友達と映画に行ってきたんだ	has:갔다온	fix	lookup
+lookup:itte-ki	行ってきたばかりだ	has:얼마 안	fix	lookup
+lookup:itte-ki	行ってきちゃった	has:갔다와	fix	lookup
+lookup:itte-ki	あっち行ってきたら？	has:갔다오면	fix	lookup
+lookup:itte-ki	手早くコンビニに行ってきて、早く戻ろう。	has:갔다와	fix	lookup
+lookup:itte-ki	先生、シャワー行ってきていいですか？	has:갔다와도	fix	lookup
+lookup:itte-ki	先生、気を付けて行ってきてくださいね	has:갔다와 주세요	fix	lookup
+lookup:itte-ki	悪いけど、一緒に行ってきてくれる？	has:갔다와 줄래	fix	lookup
+lookup:itte-ki	なんだ、そんなことなら俺が行ってきてやるよ。	has:갔다와 줄게	fix	lookup
+lookup:itte-ki	あなたも行ってきなさいよ	has:갔다와	fix	lookup
+lookup:itte-ki	では、ちょっと行ってきます	has:다녀오겠습니다	keep	lookup
+lookup:itte-ki	ういす、行ってきます！	has:다녀오겠습니다	keep	lookup
+lookup:itte-ki	行ってきます。	has:다녀오겠습니다	keep	lookup
+lookup:itte-ki	行ってきまーす	has:다녀오겠습니다	keep	lookup
+lookup:itte-ki	行ってきますね。	has:다녀올게요	keep	lookup
+lookup:itte-ki	ちょっと行ってくる	has:다녀올게	keep	lookup
+lookup:itte-ki	明日、病院に行ってくる。	has:다녀올게	keep	lookup
+lookup:itte-ki	行ってこい	has:와라	keep	lookup
+aspect:te-kuru	母が帰ってきた	has:돌아왔다	keep	ending-defaults
+aspect:te-kuru	弁当を買ってきた	has:사 왔다	keep	ending-defaults
+aspect:te-kuru	雨が降ってきた	has:왔다	keep	ending-defaults
+aspect:te-kuru	ずっと頑張ってきた	has:노력해 왔다	keep	ending-defaults
+ending:past	もう行った	has:갔다	keep	ending-defaults

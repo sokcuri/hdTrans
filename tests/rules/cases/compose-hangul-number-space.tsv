@@ -1,0 +1,25 @@
+# 규칙: NUM-1
+rule	input	expected	kind	layer
+compose:hangul-number-space	荒れるより千倍マシだわ	거칠어지는 것보다 천 배 낫구나	fix	compose
+compose:hangul-number-space	道中で百回	도중에서 백 회	fix	compose
+compose:hangul-number-space	千本同時は無理	천 개 동시는 무리	fix	compose
+compose:hangul-number-space	千人規模のイベント	천 명 규모의 이벤트	fix	compose
+compose:hangul-number-space	王国で百人もいない魔法使い	왕국에서 백 명도 없는 마법사	fix	compose
+compose:hangul-number-space	百枚以上のカツは迫力あるわね	백 장 이상의 커틀릿은 박력 있어	fix	compose
+compose:hangul-number-space	百回でも千回でも	백 번이라도 천 번이라도	fix	compose
+compose:hangul-number-space	およそ百人	대략 백 명	fix	compose
+compose:hangul-number-space	千ウォン札を財布に入れた。	천 원 지폐를 지갑에 넣었다.	fix	compose
+compose:hangul-number-space	百万人の観客	백만 명의 관객	fix	compose
+compose:hangul-number-space	万回でも言う	만 번이라도 말한다	fix	compose
+compose:hangul-number-space	百メートル	백 미터	fix	compose
+compose:hangul-number-space	値段は三万円だ。	가격은 3만엔이다.	keep	compose
+compose:hangul-number-space	五千万円	5000만엔	keep	compose
+compose:hangul-number-space	一億円	1억엔	keep	compose
+compose:hangul-number-space	数百回も言った。	수백 번이나 말했다.	keep	compose
+compose:hangul-number-space	何百年も	몇백 년이나	keep	compose
+compose:hangul-number-space	十回も言った。	열 번이나 말했다.	keep	compose
+compose:hangul-number-space	百匹の羊	백 마리의 양	keep	compose
+compose:hangul-number-space	百発百中ガールだよ	백발 백중 걸이야	keep	compose
+compose:hangul-number-space	千年前の色恋小説	천년 전의 연애 소설	keep	compose
+compose:hangul-number-space	百歩譲って	백보 양보해	keep	compose
+compose:hangul-number-space	千円札になる。	천 엔권이 된다.	keep	compose

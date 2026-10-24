@@ -1,4 +1,4 @@
-# 규칙: LEX-35
+# 규칙: GRM-11
 rule	input	expected	kind	layer
 dict:drops-conj:10	「はぁ…\n帰ろうぞ」	「하아…\n 돌아가자」	fix	ending-defaults
 dict:drops-conj:10	「やったー！\n遊ぼうぞ」	「해냈다! \n 놀자」	fix	ending-defaults

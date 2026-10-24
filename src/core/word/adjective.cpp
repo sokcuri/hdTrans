@@ -281,8 +281,12 @@ bool Item::RunDakeiyoCase8Query() {
                 base.enabled[entry] = false;
                 continue;
             }
-            if (g->length <= 0 || w->MatchDictionary(after, g->surface, '5', '8')) matched = true;
-            else break;
+            if (g->length <= 0 || w->MatchDictionary(after, g->surface, '5', '8') ||
+                (g->surface == kJaNa && w->WordAfterAdnominal(after))) {
+                matched = true;
+            } else {
+                break;
+            }
         }
         if (matched) {
             base.group = g;

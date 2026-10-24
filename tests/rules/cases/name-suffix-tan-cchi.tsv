@@ -16,6 +16,13 @@ lookup:suffix-after-person	「メイドたん、デートに行こう」	「메�
 lookup:suffix-after-person	お兄ちゃんたん、魔法って好きなの？	형짱, 마법은 좋아해?	fix	lookup
 lookup:suffix-after-person	アリスたんはケーキが欲しい。	앨리스짱은 케이크를 갖고 싶다.	fix	lookup
 lookup:suffix-after-person	魔王たんの夢	마왕짱의 꿈	fix	lookup
+lookup:suffix-after-person	母たんこぶができた	어머니 혹이 생겼다	fix	lookup
+lookup:suffix-after-person	姫たんこぶ痛い	공주 혹 아프다	fix	lookup
+lookup:suffix-after-person	お母さんたんこぶ	엄마 혹	fix	lookup
+lookup:suffix-after-person	お姉ちゃんたんこぶ	언니 혹	fix	lookup
+lookup:suffix-after-person	先生たんこぶ作ってる	선생님 혹 만들고 있다	fix	lookup
+lookup:suffix-after-person	子供たちたんこぶ	아이들 혹	fix	lookup
+lookup:suffix-after-person	僕らたんこぶ	우리 혹	fix	lookup
 dict:w:28404	俺っちは獣人っすよ、兄貴！	나는 수인입니다, 형!	fix	defaults
 dict:w:28404	俺っちに任せてください。	나에게 맡겨 주세요.	fix	defaults
 dict:w:28404	俺っち達は無罪だ！	우리는 무죄다!	fix	defaults
@@ -28,12 +35,31 @@ lookup:suffix-after-person	こっちは任せて。	여기는 맡겨.	keep	looku
 lookup:suffix-after-person	「どっちがいい？」	「어느 쪽이 좋아?」	keep	lookup
 lookup:suffix-after-person	一人ぼっちだ。	외톨이다.	keep	lookup
 lookup:suffix-after-person	田中さん、部隊は	타나카 씨, 부대는	keep	lookup
+lookup:suffix-after-person	先生たんすごい	선생님짱 대단해	keep	lookup
+lookup:suffix-after-person	アリスたんすごい！	앨리스짱 대단해!	keep	lookup
+lookup:suffix-after-person	姫たんと遊ぶ	공주짱과 논다	keep	lookup
+lookup:suffix-after-person	父たんすを開けた	아버지 장롱을 열었다	keep	lookup
+lookup:suffix-after-person	母たんすの中	어머니 장롱 안	keep	lookup
+lookup:suffix-after-person	姉たんぽぽが咲いた	has:언니	keep	lookup
+lookup:suffix-after-person	姉たんぽぽが咲いた	lacks:짱	keep	lookup
+lookup:suffix-after-person	クララたん、おはよ	클라라짱, 안녕	keep	lookup
+lookup:suffix-after-person	ミラっち、元気？	미라치, 건강?	keep	lookup
+lookup:suffix-after-person	子供たん	아이짱	keep	lookup
+lookup:suffix-after-person	子供っち	아이치	keep	lookup
+lookup:suffix-after-person	友達たん	has:친구짱	keep	lookup
+lookup:suffix-after-person	友達たんと遊ぶ	has:친구짱	keep	lookup
+lookup:suffix-after-person	友達っちに会った	has:친구치	keep	lookup
+lookup:suffix-after-person	人達たん	has:사람들짱	keep	lookup
+lookup:suffix-after-person	彼らたん、待って	has:그들짱	keep	lookup
+lookup:suffix-after-person	彼女らたん	has:그녀들짱	keep	lookup
+lookup:suffix-after-person	君たちっちは元気？	has:들치	keep	lookup
+lookup:suffix-after-person	子供たちたん	has:아이들짱	keep	lookup
 dict:w:28404	俺は獣人だ。	나는 수인이다.	keep	local
 dict:w:28405	俺が行く。	내가 간다.	keep	local
 lookup:suffix-after-person	警察署で会ったんだけど	경찰서에서 만났는데	keep	lookup
 lookup:suffix-after-person	「こっちだよ」	「여기야」	keep	lookup
 dict:w:28600	田中ちゃん！	타나카짱!	fix	local
 dict:w:28600	美雪ちゃん	미유키짱	fix	local
-dict:w:28600	美雪ちゃ～ん、食べて直ぐ寝ると	미유키짜~앙, 먹고 곧 잔다고	fix	local
+dict:w:28600	美雪ちゃ～ん、食べて直ぐ寝ると	미유키짱~, 먹고 곧 잔다고	fix	local
 dict:w:28600	姉ちゃん、待って。	누나, 기다려.	keep	local
 dict:w:28600	魔王ちゃんの本だ。	마왕의 책이다.	keep	local

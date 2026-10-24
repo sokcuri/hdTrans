@@ -8005,6 +8005,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マイルド・ヤンキー	마일드 양키	N110			GN				llm			s:8002
 老働	노후 노동	N110			GN				llm			s:8003
 構ってちゃん	관심병 환자	N110			GN				llm			s:8004
+かまってちゃん	관심병 환자	N110			GN				llm			s:9453
 構って君	관심병 환자	N110			GN				llm			s:8005
 かまって君	관심병 환자	N110			GN				llm			s:8006
 行列店	줄 서는 가게	N110			GN				llm			s:8007
@@ -8384,7 +8385,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 最の高	최고	N110			GN				llm			s:8381
 自分語り	자기 이야기	N110			GN				llm			s:8382
 クールぶ	쿨한 척&AV@	M428			GN				llm			s:8383
-行ってき	다녀올게	E320			GN				llm			s:8384
 ナルト走り	나루토 달리기	N110			GN				llm			s:8385
 ファンサ	팬서비스	N110			GN				llm			s:8386
 ベタ踏み	풀악셀	N110			GN				llm			s:8387

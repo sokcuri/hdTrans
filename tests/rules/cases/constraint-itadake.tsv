@@ -1,0 +1,18 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+constraint:itadake-dake	きさまは沙漠をウロウロしていただけじゃないか！	너는 사막을 어슬렁어슬렁하고 있었을 뿐이잖아!	fix	lookup
+constraint:itadake-dake	旅の想い出を形にしていただける清流線グッズや地元の名産品を取りそろえてお待ちしております。	여행의 추억을 형태로 해 주시는 청류선굿즈나 동네의 명산품을 두루 갖추어 기다리고 있습니다.	keep	lookup
+constraint:itadake-dake	……きちんと、１から１０まで、聞かせていただけるかしら？	……제대로, 1에서 10까지, 들려주어 주실 수 있을까?	keep	lookup
+constraint:itadake-dake	もう少し声を出していただけるとありがたいのですが	좀 더 소리를 내주면 고맙습니다만	keep	lookup
+constraint:itadake-dake	我々治安部に、あなた方の選挙を、手伝わせていただけませんか？	우리 치안부에, 여러분의 선거를, 돕게 해 주실 수 없습니까?	keep	lookup
+constraint:itadake-dake	これがダメなら、すっぱり諦めます……ですから、一度、目を通していただけませんか？	이것이 안되면, 깨끗이 포기합니다……니까, 한 번, 훑어봐 주실 수 없습니까?	keep	lookup
+constraint:itadake-dake	提督…もし良かったら、この榛名のチョコレート…もらっていただけますか？	제독…만약 괜찮다면, 이 하루나의 초콜릿…받아 주시겠습니까?	keep	lookup
+constraint:itadake-dake	……いえ、私が勝手に待っていただけですから	……아니요 제가 마음대로 기다리고 있었을 뿐이므로	keep	lookup
+constraint:itadake-dake	「フリしてただけ〜。	「척하고 있었을 뿐~.	fix	lookup
+constraint:itadake-dake	それ買ってただけなんす	그것 사고 있었을 뿐입니다	fix	lookup
+constraint:itadake-dake	待っていただけなんです	기다리고 있었을 뿐입니다	fix	lookup
+constraint:teitadaku-ke	説明していただけ。	설명하고 있었을 뿐.	fix	lookup
+constraint:itadake-dake	「あ、い、いや……油断してただけだから……」	「아, 아, 아니……방심하고 있었을 뿐이니까……」	fix	lookup
+constraint:itadake-dake	教えていただけますか	가르쳐 주시겠습니까	keep	lookup
+constraint:itadake-dake	教えていただけない	가르쳐 주실 수 없다	keep	lookup
+constraint:itadake-dake	説明していただけませんか	설명해 주실 수 없습니까	keep	lookup

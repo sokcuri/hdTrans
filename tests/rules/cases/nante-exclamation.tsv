@@ -6,3 +6,13 @@ dict:nante-what:1	くそっ、なんて速さだ！	젠장, 이 무슨 속도다
 dict:jisjk:264445	なんて言ったの？	뭐라고 말했어?	keep	local
 dict:jisjk:266724	なんて恐ろしい嵐だ。	정말 무서운 폭풍우다.	keep	local
 dict:nante-what:1	そんなことを言う、なんてことはない。	!rule:dict:nante-what:1	keep	local
+dict:jisjk:342679	何て書けばいいの？	뭐라고 쓰면 되는 거야?	fix	defaults
+dict:jisjk:342679	何て呼べばいい？	뭐라고 부르면 돼?	fix	defaults
+dict:jisjk:342679	今何て？	지금 뭐라고?	fix	defaults
+dict:jisjk:342679	あ、いえ、何ていうか	아, 아니요 뭐라고 말할까	fix	defaults
+dict:nante-kanji:1	何て綺麗なんだ	정말 예쁘다	fix	local
+dict:nante-kanji:1	何て静かな夜だ。	정말 조용한 밤이다.	fix	local
+dict:nante-kanji:1	何て言った？	!rule:dict:nante-kanji:1	keep	local
+dict:nante-kanji:2	これ何て料理？	이것 무슨 요리?	fix	local
+dict:nante-kanji:2	何て日だ	무슨 날이다	fix	local
+dict:nante-kanji:2	何て？	뭐라고?	keep	local

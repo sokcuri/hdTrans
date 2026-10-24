@@ -103,7 +103,9 @@ add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
-set_source_files_properties(src/cli/main.cpp src/cshared/hdtrans_c.cpp PROPERTIES
+set_source_files_properties(src/cli/main.cpp PROPERTIES
+    COMPILE_DEFINITIONS HDTRANS_VERSION_TEXT="${HDTRANS_VERSION_TEXT}")
+set_source_files_properties(src/cshared/hdtrans_c.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
 if(HDTRANS_INTERPRET_RULES)
     target_compile_definitions(hdtrans PRIVATE HDTRANS_INTERPRET_RULES)
@@ -171,8 +173,12 @@ if(NOT EMSCRIPTEN)
     add_test(NAME cli.options COMMAND "${CMAKE_COMMAND}" -DCLI=$<TARGET_FILE:hdtrans_cli>
         -DFIXTURE=${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder
         -DWORK=${CMAKE_CURRENT_BINARY_DIR}/cli-options -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_options.cmake")
-    set_tests_properties(cli.version PROPERTIES PASS_REGULAR_EXPRESSION "${HDTRANS_VERSION}"
+    string(REGEX REPLACE "([][+.*()^$?|\\])" "\\\\\\1" versionPattern "${HDTRANS_VERSION_TEXT}")
+    set_tests_properties(cli.version PROPERTIES
+        PASS_REGULAR_EXPRESSION "^hdTrans v${versionPattern} \\(native\\) / dict "
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
+    add_test(NAME version COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
+        -DWORK=${CMAKE_CURRENT_BINARY_DIR}/version-test -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/version.cmake")
     add_test(NAME unit COMMAND hdtrans_tests)
     add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
@@ -181,12 +187,15 @@ if(NOT EMSCRIPTEN)
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
+        add_test(NAME sound.long-line COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/long_line.sh" "$<TARGET_FILE:hdtrans_cli>"
+            "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+        set_tests_properties(sound.long-line PROPERTIES TIMEOUT 60)
         add_test(NAME tools.selfbase COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/selfbase.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME dicts.ids COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/dict_ids.sh" "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases audit blind new-pairs perf-budget perf-base fuzz)
+                    construction-cases audit blind new-pairs perf-budget perf-base fuzz variants)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
@@ -209,23 +218,31 @@ if(NOT EMSCRIPTEN)
         # One table per theme, tests/rules/cases/<theme>.tsv.
         add_test(NAME rules.cases.themes COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases")
+        # Meaning flips, tests/rules/critical/<kind>.tsv: every row passes, none is current.
+        add_test(NAME rules.critical COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/critical"
+            --no-current)
         # Each speech level: tests/rules/speech-<level>/<theme>.tsv (strict is the default).
         foreach(level soft strict)
             add_test(NAME rules.cases.speech-${level} COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-${level}" -- --speech ${level})
         endforeach()
-        set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
+        set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
         if(HDTRANS_PYTHON)
             add_test(NAME rules.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
-                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/critical"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-soft"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-strict" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops"
                 --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")
             set_tests_properties(rules.drops PROPERTIES TIMEOUT 300)
+            # Each family of tests/variants/ passes at least its minimum rate.
+            add_test(NAME rules.variants COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/variants.py"
+                $<TARGET_FILE:hdtrans_cli> -d "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --check)
+            set_tests_properties(rules.variants PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
             # The inputs of the measured sets that drop text stay at tools/drops-budget.tsv; skipped
             # when no set variable is set.

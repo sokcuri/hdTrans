@@ -181,6 +181,8 @@ HD_TEST(pipeline_spoken_forms) {
         {"いいじゃない？"sv, "いいじゃない？"sv},
         {"何それ怖っ！"sv, "何それ怖い！"sv},
         {"寒っ"sv, "寒い"sv},
+        {"足が痛っ"sv, "足が痛い"sv},
+        {"痛っ！"sv, "痛っ！"sv},  // the cry, a word of the dictionary
         {"ずるっ"sv, "ずるっ"sv},
         {"感心できんぞ！"sv, "感心できないぞ！"sv},
         {"あり得ん！"sv, "あり得ない！"sv},
@@ -231,6 +233,12 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"あれ―は誰？"sv, "あれ―は誰？"sv},
         {"あれ……が欲しい"sv, "あれ……が欲しい"sv},
         {"え――はい"sv, "えっ――はい"sv},
+        // え after a comma or a pause right before a pause hesitates; before a question only
+        // after a pause.
+        {"あっ、え…違う"sv, "あっ、えっ…違う"sv},
+        {"……え……本当"sv, "……えっ……本当"sv},
+        {"そう、え？"sv, "そう、え？"sv},
+        {"考え…"sv, "考え…"sv},
     };
     Check(RewriteInterjections, cases);
 }
@@ -519,6 +527,43 @@ HD_TEST(pipeline_respell_variants) {
     }
 }
 
+HD_TEST(pipeline_respell_katakana_endings) {
+    const Case cases[] = {
+        {"私デース！"sv, "私でーす！"sv},
+        {"楽しいネー"sv, "楽しいねー"sv},
+        {"受信シマシタ…"sv, "受信しました…"sv},
+        {"行きマース！"sv, "行きまーす！"sv},
+        {"justデース"sv, "justでーす"sv},
+        {"一マス進む"sv, "一マス進む"sv},
+        {"あと一マス。"sv, "あと一マス。"sv},
+        {"Decemberネー！"sv, "Decemberネー！"sv},
+        {"言ったデース！"sv, "言ったデース！"sv},
+        {"何してるデース！"sv, "何してるデース！"sv},
+        {"来たデース！"sv, "来たデース！"sv},
+        {"あなたデス！"sv, "あなたです！"sv},
+        {"まだデース！"sv, "まだでーす！"sv},
+        {"行くデース！"sv, "行くでーす！"sv},
+        {"デスゲーム"sv, "デスゲーム"sv},
+        {"サドンデス！"sv, "サドンデス！"sv},
+        {"……デース"sv, "……デース"sv},
+        {"音声ヲ、解析シマス。"sv, "音声ヲ、解析シマス。"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellKatakanaEndings(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_respell_kanji_cries) {
+    const Case cases[] = {
+        {"「嫌ぁぁぁ」"sv, "「いやぁぁぁ」"sv},
+        {"嫌っ！"sv, "いやっ！"sv},
+        {"「嫌ぁ！」"sv, "「いやぁ！」"sv},
+        {"「嫌ぁ……」"sv, "「嫌ぁ……」"sv},
+        {"すごく嫌ー"sv, "すごく嫌ー"sv},
+        {"嫌っている"sv, "嫌っている"sv},
+        {"嫌！"sv, "嫌！"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellKanjiCries(c.in), std::string(c.want));
+}
+
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},
@@ -595,6 +640,9 @@ HD_TEST(pipeline_exclamation_na) {
         {"最近よく降るな、これは"sv, "最近よく降るなあ、これは"sv},
         {"逃がすな、追え！"sv, "逃がすな、追え！"sv},
         {"お前が言うな！"sv, "お前が言うな！"sv},
+        {"お前ごときが私に勝てると思うな"sv, "お前ごときが私に勝てると思うな"sv},
+        {"みんなが来ると思うな。"sv, "みんなが来ると思うな。"sv},
+        {"お前が勝てると思うなぁ"sv, "お前が勝てると思うなぁ"sv},
         {"誰も動くな！"sv, "誰も動くな！"sv},
         {"さすが先生ですな。"sv, "さすが先生ですな。"sv},
         {"面倒なことになるなら"sv, "面倒なことになるなら"sv},
@@ -685,6 +733,24 @@ HD_TEST(pipeline_normalize_doubled_wo) {
         {"本を読む"sv, "本を読む"sv},
     };
     Check(CollapseDoubledWo, cases);
+}
+
+HD_TEST(pipeline_normalize_tsu_runs) {
+    const Case cases[] = {
+        {"褒められちゃっっっった♪"sv, "褒められちゃった♪"sv},
+        {"とっってもいい"sv, "とってもいい"sv},
+        {"バッッカじゃないの"sv, "バッカじゃないの"sv},
+        {"行っっッくぞ"sv, "行っくぞ"sv},
+        {"あっっ！"sv, "あっっ！"sv},
+        {"ああッッッ！！"sv, "ああッッッ！！"sv},
+        {"「っっ……」"sv, "「っっ……」"sv},
+        {"あっっぁ"sv, "あっっぁ"sv},
+        {"ウオッッッー"sv, "ウオッッッー"sv},
+        {"行った"sv, "行った"sv},
+    };
+    Check([](std::string_view text) { return CollapseTsuRuns(text); }, cases);
+    const auto holdsAll = [](const void*, std::string_view, size_t, size_t) { return true; };
+    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", holdsAll, nullptr), "じっっくり");
 }
 
 // Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a

@@ -4,8 +4,8 @@ sound:u-cry	「うう、すみません」	「으으, 죄송합니다」	fix	sou
 sound:u-cry	「うう……恥ずかしいです……」	「으으……부끄럽습니다……」	fix	sound
 sound:u-cry	「ううぅ……そんな……」	「으으으……그런……」	fix	sound
 sound:u-cry	「うぅ……でもぉ」	「으으……하지만」	fix	sound
-sound:u-cry	「わたしぃ……うっ……ううっ……」	「나……윽……으으……」	fix	sound
-sound:u-cry	「うううっ……」	「으으으……」	fix	sound
+sound:u-cry	「わたしぃ……うっ……ううっ……」	「나……윽……으읏……」	fix	sound
+sound:u-cry	「うううっ……」	「으으읏……」	fix	sound
 sound:u-cry	「うううう……」	「으으으으……」	fix	sound
 sound:u-cry	「うーー！」	「으으으!」	fix	sound
 sound:u-cry	「うー………………ここで」	「으으………………여기서」	fix	sound
@@ -37,3 +37,19 @@ sound:u-cry	「うぐぐぐっ」	「우그그끄읏」	fix	sound
 sound:u-cry	「うぐっ」	「윽」	keep	sound
 sound:u-cry	「うぐぅ」	「우그으」	keep	sound
 sound:u-cry	「うぐぐっ」	「우그끄읏」	fix	sound
+sound:u-cry	「う……」	「으……」	fix	sound
+sound:u-cry	ううっ…まだ、いけるわよね！？	으읏…아직, 갈 수 있지!?	fix	sound
+sound:u-cry	うぅっ、やられた…	으읏, 당했다…	fix	sound
+sound:u-cry	ふああ…ううっ、ごめんなさい。	후아아…으읏, 미안해요.	fix	sound
+sound:u-cry	熱っ！ううっ、すみません……	뜨겁다! 으읏, 죄송합니다……	fix	sound
+sound:u-cry	ううっ、オレのサイフ……。	으읏, 내 지갑…….	fix	sound
+sound:u-cry	くっ、ううっ……！？	큭, 으읏……!?	fix	sound
+sound:u-cry	「ううっ……は、恥ずかしいです……」	「으읏……부, 부끄럽습니다……」	fix	sound
+sound:u-cry	「いやあっ、うううっ……と、止まらないっ……」	「싫엇, 으으읏……머, 멈추지 않는다……」	fix	sound
+sound:u-cry	「くっ……う、ううっ……！」	「큭……으, 으읏……!」	fix	sound
+sound:u-cry	「……うぅっ……それは言っちゃダメ……」	「……으읏……그건 말하면 안돼……」	fix	sound
+sound:u-cry	「うっ……うっ……ううっ……	「윽……윽……으읏……	fix	sound
+sound:u-cry	なんて……うっ、ううっ、ううううっ……」	정말……윽, 으읏, 으으으읏……」	fix	sound
+sound:u-cry	「声など……あぅ……ううっ」	「목소리 등……아우……으읏」	fix	sound
+sound:u-cry	ウウッ……	으읏……	fix	sound
+sound:u-cry	うううぅっ、騙されるところだった～っ	으으으읏, 속을 뻔했다~	fix	sound

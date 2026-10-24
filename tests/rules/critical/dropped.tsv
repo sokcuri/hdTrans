@@ -1,0 +1,17 @@
+# 규칙: MNG-5
+rule	input	expected	kind	layer
+conjugation:voice-later-form	褒められちゃった♪	has:칭찬받아	keep	conjugation
+conjugation:voice-later-form	「気を遣わせちゃってごめんね」	has:신경을 쓰게 해서	keep	conjugation
+conjugation:voice-later-form	たった一言で黙らせちゃった	has:입을 다물게 해	keep	conjugation
+lookup:itte-ki	病院に行ってきて、疲れた	has:병원에	fix	lookup
+lookup:itte-ki	病院に行ってきて、疲れた	has:지쳤다	fix	lookup
+lookup:itte-ki	行ってきたばかりだ	has:얼마 안	fix	lookup
+analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	has:하는 것 같은	fix	analysis
+analysis:adnominal-na-word	変なくせがある	has:이상한 버릇	fix	analysis
+lookup:suffix-after-person	友達たんと遊ぶ	has:친구짱	keep	lookup
+lookup:suffix-after-person	友達っちに会った	has:친구치	keep	lookup
+lookup:suffix-after-person	彼らたん、待って	has:그들짱	keep	lookup
+lookup:suffix-after-person	子供たちたん	has:아이들짱	keep	lookup
+dict:w:28610	麦飯たーんと炊いておいたわ。	has:듬뿍	fix	defaults
+dict:w:28610	どうぞ、たんと召し上がって。	has:듬뿍	fix	defaults
+constraint:tanto-after-tsu	行ったんと違う	lacks:듬뿍	keep	lookup

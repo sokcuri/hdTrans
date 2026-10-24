@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:own-passive	犬が食われた。	개가 먹혔다.	fix	rewrites
-rewrite:own-passive	狼に取り囲まれている。	이리에 둘러싸여 있다.	fix	rewrites
+rewrite:own-passive	狼に取り囲まれている。	이리에게 둘러싸여 있다.	fix	rewrites
 rewrite:own-passive	学園の生徒に雇われた冒険者。	학원의 학생으로 고용된 모험가.	fix	rewrites
 rewrite:own-passive	簡単に地面が耕されていく。	간단하게 땅이 경작되어 간다.	fix	rewrites
 rewrite:own-passive	涙目で謝られた。	눈물 어린 눈으로 사과받았다.	fix	rewrites

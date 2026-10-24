@@ -138,11 +138,14 @@ cmake --build --preset wasm --parallel
   아티팩트로 올라갑니다.
 - Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
   [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트와 push에서 matrix와 함께 돕니다.
+- Build의 `ci-ok` 작업은 풀 리퀘스트와 push에서 항상 돌고, `gate`가 성공하지 않았거나 테스트 작업 하나가
+  실패, 취소되면 실패합니다. 건너뛴 작업은 통과로 칩니다. 테스트 작업을 새로 만들면 `ci-ok`의 `needs`에 넣습니다
+  (`tools/release/ci-workflow.test.mjs`가 검사합니다).
 - 성능 예산과 퍼징이 실패로 치는 것과 알리기만 하는 것:
 
   | 단계 | 실패 | 경고만(작업은 통과) |
   |---|---|---|
-  | `linux`의 Performance budget | PR에서 어느 행이 같은 러너에서 잰 기준 커밋의 빌드보다 1% 넘게 많고 PR의 커밋에 `Perf-Budget:` 트레일러가 없을 때 | valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때(exit 2), 기준 빌드를 찾지도 빌드하지도 못했을 때, 표와의 비교 전부, push의 모든 결과 |
+  | `linux`의 Performance budget | - | 기준 커밋의 빌드보다 1% 넘게 많은 행, valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때, 기준 빌드를 찾지도 빌드하지도 못했을 때 |
   | `linux-fuzz`의 Replay | 시드나 `tests/fuzz/regressions/`의 입력 하나가 멈추거나 sanitizer 보고, 메모리 초과를 낼 때 | - |
   | `linux-fuzz`의 Fuzz | `develop` push에서 무작위 퍼징이 찾은 입력이 있을 때 | PR, `main` push, 태그 빌드(**Publish npm**)에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
 
@@ -187,31 +190,25 @@ cmake --build --preset wasm --parallel
 | `each` | 규칙 사례(`tests/rules/cases`, `tests/rules/speech-strict`)의 입력을 `--each`로 |
 | `document` | `examples/*.ja.txt`(첫 줄 제외)를 한 문서로 |
 
-- 입력은 `tools/perf-budget.tsv`의 `inputs` 커밋(develop의 커밋)에서 읽으므로 사례와 예문이 늘어도 수가
-  움직이지 않습니다. 사전은 각 빌드의 것을 쓰므로 사전을 바꾸면 세 행이 모두 움직일 수 있습니다. `each`와 `document`는
-  `load`를 뺀 수입니다.
-- 수는 컴파일러, C 라이브러리, 아키텍처, valgrind(도구 체인)에 따라 다릅니다. 표의 `toolchain` 줄이 표의 수를
-  잰 도구 체인입니다.
-- `--check CLI DICTS --against CLI DICTS`는 두 빌드를 함께 재고, 도구 체인이 같으면 둘째 빌드(기준 커밋)와
-  비교합니다. 어느 행이든 1% 넘게 많으면 실패하고, 1% 넘게 적으면 알립니다. `--base REF`를 주면 REF..HEAD의
-  커밋에 `Perf-Budget: <이유>` 트레일러가 있을 때 많아도 통과합니다. 기준 빌드가 없거나, 도구 체인이 다르거나,
-  재지 못하면 표와 비교해 알리기만 합니다. 표는 실패를 내지 않습니다. 이 빌드를 재지 못하면(멈춤 포함) 비교하지
-  않고 경고합니다(종료 코드 2).
-- CI의 `linux` 작업은 PR에서 기준 커밋(PR 빌드가 병합한 develop 커밋, 곧 병합 커밋의 첫 부모)의 linux 빌드를
-  같은 러너에서 함께 잽니다. `tools/perf-base.py`가 그 빌드를 찾습니다.
+- 입력은 기준 커밋에서 읽으므로 두 빌드가 같은 글을 번역합니다. 사전은 각 빌드의 것을 쓰므로 사전을 바꾸면 세 행이
+  모두 움직일 수 있습니다. `each`와 `document`는 `load`를 뺀 수입니다.
+- 수는 컴파일러, C 라이브러리, 아키텍처, valgrind(도구 체인)에 따라 다르므로 두 빌드를 한 러너에서 함께 잽니다.
+- `--report CLI DICTS --against CLI DICTS --base REF`는 두 빌드를 함께 재고 행마다 바뀐 비율을 적습니다. 1% 넘게
+  많은 행은 `over:`, 1% 넘게 적은 행은 `under:`로 시작하는 줄을 더합니다. 기준 빌드를 재지 못하면 이 빌드의 수만
+  적습니다. 종료 코드는 잰 경우 늘 0이고, 이 빌드를 재지 못하면(멈춤 포함) 2입니다. `--measure CLI DICTS`는 한
+  빌드의 수만 출력합니다. `--base`를 주지 않으면 develop과의 병합 기준 커밋을 씁니다.
+- 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux` 작업은 PR에서 기준 커밋(PR 빌드가
+  병합한 기준 브랜치의 커밋, 곧 병합 커밋의 첫 부모)의 linux 빌드를 같은 러너에서 함께 재고, 표를 작업 요약에
+  적습니다. 1% 넘게 많은 행과 인프라 문제는 경고가 됩니다. 단계가 시간을 넘겨도 작업은 통과합니다.
+  `tools/perf-base.py`가 기준 빌드를 찾습니다.
   - 그 커밋의 push Build가 올린 `hdtrans-linux` 아티팩트(`linux` 작업의 테스트가 통과하면 run이 끝나기 전에도
     올라갑니다), 없으면 같은 트리를 기록한 `tested-tree-<트리>` run의 아티팩트를 씁니다.
   - push Build가 아직 돌고 있으면 30초마다 다시 보며 10분까지 기다립니다.
-  - 그래도 없거나 컴파일러가 다르면 그 커밋을 작업 안에서 빌드합니다. 빌드도 실패하면 경고하고 알리기만 합니다.
-- push에서는 표와 비교해 알리기만 하고, `develop` push는 잰 수를 표 형식 그대로 `perf-budget` 아티팩트(90일)로
-  올립니다. 이것이 develop의 수의 기록입니다.
-- 느려지는 것이 맞는 변경이면 PR의 커밋 하나에 트레일러로 이유를 적습니다. squash 병합의 본문에도 그
-  트레일러를 남깁니다.
-- `tools/perf-budget.tsv`는 입력 커밋과 릴리스 때의 수를 적는 기록이고, 커밋하지 않아도 PR은 실패하지 않습니다.
-  릴리스할 때나 러너의 도구 체인이 바뀌었을 때 최신의 성공한 `develop` push Build에서 `perf-budget` 아티팩트를
-  내려받아(`gh run download <run> -n perf-budget -D <폴더>`) develop으로 가는 PR로 커밋합니다. `--update CLI DICTS`는
-  같은 도구 체인에서 잰 수를 직접 씁니다.
-- 실패나 경고를 다시 보려면 `linux` 작업만 다시 실행합니다. 같은 빌드의 수는 다시 재도 같습니다.
+  - 그래도 없거나 컴파일러가 다르면 그 커밋을 작업 안에서 빌드합니다. 빌드도 실패하면 이 빌드의 수만 적고 경고합니다.
+- push에서는 재지 않습니다. develop → main 승격 PR의 표가 릴리스 주기 전체의 변화이고, 크게 늘었으면 릴리스
+  리뷰에서 살펴봅니다.
+- 로컬에서 따로 잴 필요는 없습니다. 경고를 다시 보려면 `linux` 작업만 다시 실행합니다. 같은 빌드의 수는 다시
+  재도 같습니다.
 
 ## 퍼징
 
@@ -259,9 +256,11 @@ Actions의 **Build → Run workflow**에서 `dry_run=true`로 실행하면 패�
 공개 배포는 `main`에 포함된 `vX.Y.Z` 태그에서만 허용하며, 브랜치에서 수동 실행하면 공개하지 않습니다.
 사용자 파일 견본의 스테이징 목록은 `build.yml`의 `HDTRANS_USER_FILES`에서 관리합니다.
 
-버전은 `git describe --tags`로 찾은 가장 가까운 `v` 태그에서 앞의 `v`를 뗀 값입니다.
-태그가 없으면 `0.0.0-<짧은 SHA>`입니다. Git 정보가 없는 소스 압축본은 릴리스 봇이 관리하는
-`release-version.txt`를 쓰며, 그 파일도 없으면 `0.0.0-unknown`입니다.
-C API의 `hdTrans_Version`, TypeScript의 `version`, Windows EXE와 DLL의 버전 정보에 같은 엔진 버전 문자열을 씁니다.
+버전은 빌드한 커밋에 붙은 `v` 태그에서 앞의 `v`를 뗀 값입니다(`cmake/detect_version.cmake`).
+릴리스 태그가 붙지 않은 커밋은 `dev`이고, 짧은 커밋 해시를 따로 둡니다.
+Git 정보가 없는 소스 압축본은 릴리스 봇이 관리하는 `release-version.txt`를 쓰며, 그 파일도 없으면 `dev`입니다.
+C API의 `hdTrans_Version`, TypeScript의 `version`에는 엔진 버전만 쓰고, Windows EXE와 DLL의 버전 문자열과
+CLI에는 해시를 붙여 `dev (2757ed12)`처럼 씁니다. Windows의 숫자 버전은 `dev`일 때 `0.0.0.0`입니다.
+패키지 이름에 쓰는 `hdtrans-version.txt`는 `0.5.1` 또는 `dev-2757ed12`입니다.
 CLI의 `--version`은 선택한 사전도 로드해서 `hdTrans v<엔진> (native 또는 wasm) / dict <사전>`을 한 줄로 출력합니다.
 `J2KEngine.config.yaml`은 아직 읽지 않으므로 배포하지 않습니다. 설정은 `user/hdtrans.config.yaml`을 씁니다.

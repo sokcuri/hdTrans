@@ -14,6 +14,9 @@ FILENAME == ARGV[1] {
         if (NF != 5 || $1 == "" || $2 == "" || $3 == "" || $4 !~ /^(fix|keep|current)$/ || $5 == "") {
             printf "line %d: malformed row\n", FNR; bad++; print > fixed; next
         }
+        if (nocurrent != "" && $4 == "current") {
+            printf "line %d: a current row in a table that takes only fix and keep\n", FNR; bad++; print > fixed; next
+        }
         if (!($5 in failed)) { failed[$5] = 0; order[++layers] = $5 }
         negate = 0
         if ($3 ~ /^!rule:(dict|cx):/) { negate = 1; $3 = substr($3, 2) }
@@ -39,6 +42,13 @@ FILENAME == ARGV[1] {
             if (index(why[n] "\n", "\n" want "\n") == 0) {
                 got = substr(why[n], 2); gsub(/\n/, "; ", got)
                 report[$5] = report[$5] sprintf("%s: %s\n  expected %s\n  actual   rule:%s\n", $1, $2, $3, got)
+                failed[$5]++; bad++
+            }
+        } else if ($3 ~ /^(has|lacks):./) {
+            # has:TEXT, lacks:TEXT: the output holds TEXT, or does not.
+            want = substr($3, index($3, ":") + 1)
+            if ((index(out[n], want) != 0) != ($3 ~ /^has:/)) {
+                report[$5] = report[$5] sprintf("%s: %s\n  expected %s\n  actual   %s\n", $1, $2, $3, out[n])
                 failed[$5]++; bad++
             }
         } else if (out[n] != $3) {

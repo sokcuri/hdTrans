@@ -95,13 +95,20 @@ std::string WriteLengthening(std::string_view s);
 std::string DropParticleMarks(std::string_view s);
 
 // line with each run of a letter of mark.laughter that laughs written as one ko.laughter per letter
-// (없어ｗｗ 없어ㅋㅋ): the run follows a Hangul syllable, ko.laughter or a mark of
-// mark.before-laughter, past spaces, or opens the line, and no Latin letter, digit or one of
-// . / @ _ : touches it (www.example.com). source is the typed text of the line; when it has as many
-// such runs, a run that is one letter used as a word there stays: after a kanji, katakana, the
-// start or a particle of particle.after-letter, before such a particle (変数wの値 변수 w의 값), or
-// after such a particle before kanji or katakana (のwキー); a run opening the line before a Hangul
-// syllable stays as well (w를 입력). The other bytes of line are copied as they are.
+// (없어ｗｗ 없어ㅋㅋ). source is the typed text of the line; when it has the same runs as line, each
+// run is read there. There a run laughs unless a Latin letter or digit of its own width, a mark of
+// an address, or dots before such a letter touch it (www.example.com), a Latin word stands before
+// it past spaces (OK www), or it is a letter used as a word: at the start of the line before
+// hiragana (wwwの意味, wwwって) or as one letter before a kanji or katakana (w数), between two
+// particles of particle.after-letter, or as one letter after a kanji, katakana, the start or such a
+// particle before such a particle (変数wの値) or after such a particle before kanji or katakana
+// (のwキー). A run alone in brackets, after no Latin letter and before the end, a space or
+// punctuation other than a comma, is laughter written as ko.bracketed-laughter in the brackets
+// ((w) (웃음)); bracketed laughter typed right after a laughing run joins it (ｗｗ（笑） ㅋㅋ).
+// Without such a source, a run that no Latin letter, digit or address mark touches laughs after a
+// Hangul syllable, ko.laughter or a mark of mark.before-laughter, past spaces, or at the start of
+// the line unless a Hangul syllable follows it (w를 입력). A laughing run right after ko.laughter,
+// past spaces, joins it as the longer of the two (草ｗ ㅋㅋ). The other bytes of line are copied.
 std::string WriteLaughter(std::string_view line, std::string_view source);
 
 // The offset of the kana the composer writes for kana it drops.

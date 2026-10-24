@@ -1,0 +1,82 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+dict:jisjk:4231	で、オフ会のみなさんが、テロリスト役やってやるから、好きに揉んでやれと。	그래서, 오프라인 파티의 여러분이, 테러리스트역 해 주니까, 좋아하게 주물러 주라고.	fix	local-ending
+dict:jisjk:4231	さあ、やってやるわよ。	자, 해 줄 거야.	fix	local-ending
+dict:jisjk:4231	よし、俺も……本気でやってやるぜーー！	좋아, 나도……진심으로 해 준다~!	fix	local-ending
+dict:jisjk:4231	やってやる！	해 준다!	fix	local-ending
+dict:jisjk:4231	いっちょやったりますよ！	한번 해 줘요!	current	local-ending
+dict:jisjk:4231	やってやります！	해 줍니다!	fix	local-ending
+dict:jisjk:4231	やってやる。	해 준다.	fix	local-ending
+dict:jisjk:4231	やってやるさ！	해 줄게!	fix	local-ending
+dict:jisjk:4231	さぁやってやるぜ！	자해 주마!	keep	local-ending
+dict:jisjk:4231	…上等よ、やってやるわ。	…훌륭해, 해 줄게.	keep	local-ending
+dict:jisjk:4231	ううん、やってやるわ！	아니, 해 줄게!	keep	local-ending
+dict:jisjk:4231	明日も、やってやるぜ。	내일도, 해 주마.	keep	local-ending
+dict:jisjk:4231	やってやるぜクマ！	해 주마 곰!	keep	local-ending
+dict:jisjk:4231	やってやるぜぇ！	해 주마~!	keep	local-ending
+dict:jisjk:4231	やってやるぜ！	해 주마!	keep	local-ending
+dict:jisjk:116558	調子に乗るなって、千代田に怒られちゃうから、黙っていてくださいね。	우쭐대지 말라고, 치요다에게 혼나버리니까, 입을 다물고 있어 주세요.	fix	local
+dict:jisjk:116558	……黙っていろ。	……입을 다물고 있어라.	fix	local
+dict:jisjk:116558	先日見たアニスフィアの面影を残しながら、黙っていれば見目麗しい姫としか思えない姿。	요전날 본 아니스피아의 모습을 남기면서, 입을 다물고 있으면 용모 아름다운 공주로밖에 생각되지 않는 모습.	fix	local
+dict:jisjk:116558	つまり守秘義務の方は黙っていても問題ない信頼の置ける友人同士のため、話してしまったのである	즉 비밀 유지 의무는 입을 다물고 있어도 문제없는 신뢰를 둘 수 있는 친구끼리를 위해, 이야기해버렸다	fix	local
+dict:jisjk:116558	黙っていれば可愛いのにね…。	입을 다물고 있으면 귀여운데….	fix	local
+dict:jisjk:116558	それまで黙っていたブリジッド様が、手を上げて発言する。	그때까지 입을 다물던 브리짓드님이, 손을 들어 발언한다.	fix	local
+dict:jisjk:116558	しかし、シグルド殿に打ち明けられたときには、私も黙っているべきだと思ったのです。	하지만, 시굴드전에 털어 놓였을 때는, 저도 입을 다물고 있어야 한다고 생각했습니다.	fix	local
+dict:jisjk:116558	貴様は黙っていろ	네놈은 입을 다물고 있어라	fix	local
+dict:jisjk:116558	しばらく黙っていたかと思うと、エナは唐突に呟く。	한동안 입을 다물고 있었는지라고 생각하면, 태는 갑자기 중얼거린다.	fix	local
+dict:jisjk:116558	考え事しているんだから黙っていてくれないか。	생각 하고 있으니까 입을 다물고 있어 주지 않겠는가.	fix	local
+dict:jisjk:116558	千歳お姉には黙ってて！	치토세언니에게는 입을 다물고 있어!	keep	local
+dict:jisjk:116558	それに今こうして我々の前に彼等が姿を現した以上、黙って見過ごすわけにはいかない。	게다가 지금 이렇게 해 우리 앞에 그들이 모습을 드러낸 이상, 입다물고 간과할 수는 없다.	keep	local
+dict:jisjk:116558	黙ってりゃ演劇のお稽古くらいで誤魔化せるんだから〜。	입을 다물면 연극의 연습 정도로 속일 수 있으니까~.	keep	local
+dict:jisjk:116558	反対のことをすれば長兄側が黙っていないだろう。	반대를 하면 맏형측이 입을 다물지 않을 것이다.	keep	local
+dict:jisjk:116558	俺は黙って電話を切った。	나는 입다물고 전화를 끊었다.	keep	local
+dict:jisjk:116558	黙って行っちまったのにか？	입다물고 가버렸는데인가?	keep	local
+dict:jisjk:116558	黙って！	입을 다물어!	keep	local
+dict:jisjk:116558	黙ってろ	입을 다물어라	keep	local
+dict:w:28605	でないとやってられない。	그렇지 않으면 할 수 없다.	fix	local
+dict:w:28605	まあ、あるいはそうでも思わないとやってられなかったのかもしれないが。	뭐, 혹은 그래도 생각하지 않으면 할 수 없었던 걸지도 모르겠지만.	fix	local
+dict:w:28605	……そう思わなければやっていられない。	……그렇게 생각하지 않으면 할 수 없다.	fix	local
+dict:w:28605	飲まないとやってられないぃ！	마시지 않으면 할 수 없다!	fix	local
+dict:w:28605	酔わないと、やっていられないのかもしれない。	취하지 않으면 할 수 없는 건지도 모른다.	fix	local
+dict:w:28605	じゃなきゃ、本職やってられませんって	가 아니면, 본직 할 수 없습니다는	keep	local
+dict:w:28605	さっきまで、図書部の空気になじめない、やってられないって揉めてたんですが	조금 전까지, 도서부의 공기에 친숙해질 수 없다, 할 수 없다고 다투었습니다만	keep	local
+dict:w:28605	大規模テロのあとにアレは、強い酒でも飲まなきゃやってられんよ	대규모 테러의 후에 그것은, 독한 술이라도 마시지 않으면 할 수 없어	keep	local
+dict:volitional-yoka:1	いいよ、やったげよか？	좋아, 해 줄까?	fix	ending-defaults
+dict:volitional-yoka:1	ふくよかな体格でおっとりと優しそうな容貌をなさっている。	포근한 체격으로 차분히 상냥해 보인 용모를 하고 계신다.	keep	ending-defaults
+dict:volitional-yoka:1	いよいよか、頑張る！	드디어인가, 노력한다!	keep	ending-defaults
+dict:iru-toko:1	ウズウズしてたとこさ！	근질근질하고 있던 참이야!	fix	local-ending
+dict:iru-toko:1	飯を作ってたとこなんだ。	밥을 만들고 있던 참이야.	fix	local-ending
+dict:jisjk:1449	テレビのニュースによくお顔出てらっしゃるだろうよ……ニュースぐらい見ろよ……って見てるのか	텔레비전의 뉴스에 잘 얼굴 나와 계실 것이다……뉴스 정도 봐라……는 보고 있는 거야	fix	local
+dict:volitional-yoka:1	見よか	볼까	fix	ending-defaults
+dict:volitional-yoka:1	食べよかな	먹을까	fix	ending-defaults
+dict:volitional-yoka:1	起きよか	일어날까	fix	ending-defaults
+dict:volitional-yoka:1	やってあげよか	해 줄까	fix	ending-defaults
+dict:volitional-yoka:1	見よ！	봐라!	keep	ending-defaults
+dict:volitional-yoka:1	よかった	다행이다	keep	ending-defaults
+dict:volitional-yoka:1	食べようか	먹을까	keep	ending-defaults
+dict:volitional-yoka:1	見よっか	볼까	keep	ending-defaults
+dict:iru-toko:1	待ってたとこだよ	기다리고 있던 참이야	fix	local-ending
+dict:iru-toko:1	今行くとこ	지금 가는 곳	keep	local-ending
+dict:iru-toko:1	見ていたところだ	보고 있던 참이다	keep	local-ending
+dict:iru-toko:1	見たとこ	보아하니	keep	local-ending
+dict:iru-monne:1	待っているもんね	기다리고 있는 것이네	fix	ending-defaults
+dict:iru-monne:1	知ってるもんね	알고 있는 것이네	keep	ending-defaults
+dict:iru-monne:1	食べるもんね	먹는 것	keep	ending-defaults
+dict:jisjk:267083	来ていらっしゃる	오신다	keep	local
+dict:jisjk:267083	行っていらっしゃい	잘 다녀오세요	keep	local
+dict:jisjk:267083	手を洗ってらっしゃい	손을 씻고 와	keep	local
+dict:jisjk:267083	待っていらっしゃる	기다리고 계신다	keep	local
+dict:jisjk:267083	先生は今、本を読んでらっしゃる。	선생님은 지금, 책을 읽고 계신다.	keep	local
+dict:jisjk:267083	社長はまだ待ってらっしゃいます。	사장은 아직 기다리고 계십니다.	fix	local
+dict:jisjk:340790	もう待ってられません。	이제 기다리고 있을 수 없습니다.	fix	local
+dict:jisjk:340790	もう待っていられません。	이제 기다리고 있을 수 없습니다.	fix	local
+dict:w:28605	本職やってられませんって	본직 할 수 없습니다는	fix	local
+dict:w:28604	やってられない	할 수 없다	fix	defaults
+dict:w:28604	待っていられない	기다리고 있을 수 없다	keep	defaults
+dict:w:28606	やったるぜー！	해 준다~!	keep	defaults
+dict:jisjk:265746	表でも散歩してらっしゃい。	밖에서도 산책하고 와.	fix	defaults
+dict:jisjk:265746	散歩していらっしゃい	산책하고 와	fix	defaults
+dict:w:28300	ついていらっしゃい	따라와	fix	defaults
+dict:w:28300	霞よ。ガンガン行くわよ。ついてらっしゃい。	안개야. 마구 갈 거야. 따라와.	keep	defaults
+dict:w:28302	覚えてらっしゃい。	두고 봐.	keep	defaults
+dict:jisjk:340790	待っていられませんか	기다리고 있을 수 없습니까	keep	local

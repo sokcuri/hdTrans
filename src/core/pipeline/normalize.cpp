@@ -4,18 +4,20 @@
 //      ruby markup removed (StripRuby);
 //   2. character forms: half-width katakana, CP932 mapping differences, kanji forms
 //      (NormalizeForms);
-//   3. an apology or greeting cut before なさい joined (JoinNasai);
-//   4. words said with an emphatic っ or ん written plain (RewriteEmphaticSpellings);
-//   5. a polite ending cut off or inside joined (JoinMasu);
-//   6. spoken and old-fashioned spellings (SpokenForms);
-//   7. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
-//   8. casual contractions (RewriteCasual);
-//   9. the military time in digits (RewriteMilitaryTime);
-//  10. a word cut from the copula by a pause joined (JoinPausedCopula);
-//  11. a doubled を after a word written once (CollapseDoubledWo).
+//   3. runs of っ inside a word as one (CollapseTsuRuns);
+//   4. an apology or greeting cut before なさい joined (JoinNasai);
+//   5. words said with an emphatic っ or ん written plain (RewriteEmphaticSpellings);
+//   6. a polite ending cut off or inside joined (JoinMasu);
+//   7. spoken and old-fashioned spellings (SpokenForms);
+//   8. あれ, え and じゃあ at the start of a sentence (RewriteInterjections);
+//   9. casual contractions (RewriteCasual);
+//  10. the military time in digits (RewriteMilitaryTime);
+//  11. a word cut from the copula by a pause joined (JoinPausedCopula);
+//  12. a doubled を after a word written once (CollapseDoubledWo).
 // Each step reads the output of the step before.
 #include "core/pipeline/normalize.h"
 
+#include "core/dict/classes.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -25,10 +27,10 @@ namespace hdTrans::pipeline {
 
 using namespace internal;
 
-std::string Normalize(std::string_view line, const LineContext& ctx) {
+std::string Normalize(std::string_view line, const LineContext& ctx, WordHoldsRun holds, const void* context) {
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
-    text = RewriteEmphaticSpellings(JoinNasai(NormalizeForms(text)));
+    text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), holds, context)));
     text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)));
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
@@ -66,6 +68,10 @@ char32_t MapForm(char32_t c) {
     }
     return c;
 }
+
+bool TsuRune(char32_t c) { return c == U'っ' || c == U'ッ'; }
+
+bool LetterRune(char32_t c) { return IsHiraganaRune(c) || IsKatakanaRune(c) || IsKanjiRune(c); }
 
 // (ごめん|ゴメン|おやすみ|おかえり|お帰り)[、，…‥・]+(なさい)
 bool SplitNasai(std::string_view s, size_t pos, Match& m) {
@@ -340,12 +346,26 @@ bool StartEe(std::string_view s, size_t pos, Match& m) {
 }
 
 // […‥―─—] え[ぇえー]* ([…‥]*[？?]): え after a pause inside an utterance that asks
-// (へ……え？, ……て、…え？) as group 1 and the question as group 2.
+// (へ……え？, ……て、…え？) as group 1 and the question as group 2; also え after a pause or
+// a comma right before a pause, the hesitation (あっ、え…違う 어…), with an empty group 2.
 bool PauseEe(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (!OneOf(s, p, U"…‥―─—")) return false;
+    const auto rune = [&] { return p < s.size() ? s.substr(p, At(s, p).size) : std::string_view(); };
+    bool comma = false;
+    if (!OneOf(s, p, U"…‥―─—")) {
+        if (!dict::InClass("mark.comma", rune())) return false;
+        p += At(s, p).size;
+        comma = true;
+    }
     const size_t at = p;
     if (!Lit(s, p, "え")) return false;
+    if (dict::InClass("mark.pause", rune())) {
+        m.group[1] = Span(s, pos, at);
+        m.group[2] = {};
+        m.end = p;
+        return true;
+    }
+    if (comma) return false;
     return Repeat(s, p, InSet(U"ぇえー"), 0, kUnbounded, [&](size_t t) {
         return Repeat(s, t, InSet(U"…‥"), 0, kUnbounded, [&](size_t u) {
             size_t v = u;
@@ -510,6 +530,32 @@ std::string NormalizeForms(std::string_view text) {
         }
         text::AppendRune(out, c);
     }
+    return out;
+}
+
+std::string CollapseTsuRuns(std::string_view in, WordHoldsRun holds, const void* context) {
+    std::string out;
+    size_t copied = 0;
+    char32_t prev = 0;
+    for (size_t pos = 0; pos < in.size();) {
+        const text::Rune r = text::DecodeRune(in.substr(pos));
+        if (!TsuRune(r.cp)) {
+            prev = r.cp;
+            pos += r.size;
+            continue;
+        }
+        const size_t end = pos + RunOf(in.substr(pos), TsuRune);
+        const char32_t next = end < in.size() ? text::DecodeRune(in.substr(end)).cp : 0;
+        const bool small = RuneIn(next, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮヵヶー");
+        if (end - pos > r.size && LetterRune(prev) && LetterRune(next) && !small && !(holds && holds(context, in, pos, end))) {
+            out.append(in.substr(copied, pos + r.size - copied));
+            copied = end;
+        }
+        prev = r.cp;
+        pos = end;
+    }
+    if (copied == 0) return std::string(in);
+    out.append(in.substr(copied));
     return out;
 }
 

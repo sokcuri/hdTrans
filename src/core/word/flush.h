@@ -65,6 +65,10 @@ bool OpensLine(const Worker& w, const Item* it);
 bool AfterRestart(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
+// The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its
+// default record first; "" when there is none or the verb is one whose passive stays passive with an
+// object (verb.passive-any-object, verb.passive-after-object, verb.receiver-passive) (grammar.cpp).
+std::string PassiveBaseVerb(Flusher& f, std::string_view surface);
 // Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
 bool QuoteVerbFollows(const Item* it);
 // Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a
@@ -87,9 +91,12 @@ bool DescribedNoun(const Worker& w, const Item* it);
 bool PredicateFollows(const Item* it);
 
 // Text-path grammar (grammar.cpp).
-void PassiveRecords(Flusher& f);
-// The passive or potential (ら)れ of a verb whose subject names someone the speaker honours is
-// the respectful form: 書かれた 쓰셨다, 来られた 오셨다.
+// Decides once, before selection, how each verb's (ら)れ reads (Detail::voice, spec GRM-10): the
+// passive, the potential, the respectful form or a feeling that comes by itself, and writes the
+// passive and potential into the record, the dictionary candidates and the agent's に.
+void DecideVoice(Flusher& f);
+// The (ら)れ that DecideVoice reads as respectful is written as the honorific: 書かれた 쓰셨다,
+// 来られた 오셨다.
 void RespectfulPassive(Flusher& f);
 // A selected passive verb whose Korean has a passive of its own (먹히다, 고용되다) is written
 // with it instead of 어지다.

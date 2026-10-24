@@ -39,7 +39,7 @@ dict:word-senses	ただただ驚いた。	그저 놀랐다.	fix	lookup
 dict:word-senses	東のはずれにある建物を見る。	동쪽의 변두리에 있는 건물을 본다.	fix	lookup
 dict:word-senses	くじははずれだ。	복권은 꽝이다.	keep	lookup
 dict:word-senses	札を掛けた。	패를 걸었다.	fix	lookup
-dict:word-senses	千ウォン札を財布に入れた。	천원 지폐를 지갑에 넣었다.	keep	lookup
+dict:word-senses	千ウォン札を財布に入れた。	천 원 지폐를 지갑에 넣었다.	keep	lookup
 dict:word-senses	考える時には甘い物がいい。	생각할 때는 단 것이 좋다.	fix	lookup
 dict:word-senses	考えが甘い。	생각이 안이하다.	keep	lookup
 dict:word-senses	暗い茶の髪をまとめた。	어두운 갈색의 머리카락을 정리했다.	fix	lookup

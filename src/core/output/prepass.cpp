@@ -738,6 +738,43 @@ bool WritesNativeCount(const std::vector<ResolvedItem>& items, const std::vector
     });
 }
 
+// Whether item k is past the items or starts with a mark that may end a word said again: a
+// clipping っ, a mark of mark.cry or pause.copy, or a closing bracket.
+bool EndsCopy(const std::vector<ResolvedItem>& items, int k) {
+    if (k >= static_cast<int>(items.size())) return true;
+    const std::string_view s = items[k].surface;
+    const std::string_view mark = s.substr(0, text::DecodeRune(s).size);
+    return dict::InClass("mark.clip", mark) || dict::InClass("mark.cry", mark) || dict::InClass("pause.copy", mark) ||
+           Closes(FirstRune(s));
+}
+
+// Whether item i is a copy of a word of two characters or more with its ending said again, with
+// its clipping っ, writing nothing, right after it (だめ|っ|だめ, 痛い|っ|、|痛い|っ|……; not
+// ぜん|っ|ぜん仕事).
+bool ClippedCopy(const std::vector<ResolvedItem>& items, int i) {
+    const int count = static_cast<int>(items.size()), next = i + 1;
+    if (next >= count || !EntryText(items[next]).empty() || !dict::InClass("mark.clip", items[next].surface) ||
+        text::RuneCount(items[i].surface) + text::RuneCount(items[i].endingSurface) < 2) {
+        return false;
+    }
+    const auto same = [&](int k) {
+        return items[k].surface == items[i].surface && items[k].endingSurface == items[i].endingSurface;
+    };
+    if (next + 1 < count && same(next + 1) && EndsCopy(items, next + 2)) return true;
+    int before = i - 1;
+    while (before >= 0 &&
+           (dict::InClass("mark.clip", items[before].surface) || dict::InClass("pause.copy", items[before].surface))) {
+        before--;
+    }
+    return before >= 0 && same(before);
+}
+
+// Whether item i ends a node of items before end: it is the last, or a ClippedCopy whose っ ends
+// the node (だめ|っ 안돼 안돼).
+bool ClipsEnd(const std::vector<ResolvedItem>& items, int i, int end) {
+    return i + 1 == end || (i + 2 == end && ClippedCopy(items, i));
+}
+
 }  // namespace
 
 bool IsOutputBuilderBlockedText(std::string_view text) {
@@ -847,7 +884,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
     }
     for (int n = static_cast<int>(nodes.size()) - 1; n >= 0; n--) {
         const int begin = n > 0 ? nodes[n - 1] : 0;
-        for (int index = nodes[n] - 1; index >= begin; index--) WriteItem(index, index == nodes[n] - 1, markers);
+        for (int index = nodes[n] - 1; index >= begin; index--) WriteItem(index, ClipsEnd(items, index, nodes[n]), markers);
     }
     JoinParticlesAfterSpace(items, tokens, first, last);
 }
@@ -1057,9 +1094,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (nextIndex == i + 1) {
         // An honorific the rules left untranslated (魔王ちゃんの 마왕의) leaves the spacing to
         // the word after it.
-        // So does a verb whose stem and ending the rules emptied (行こうと思って 가려고).
+        // So does a verb whose stem and ending the rules emptied (行こうと思って 가려고), and the
+        // clipping っ of a copy (ClippedCopy: 痛い|っ|…… 아팟……).
         while (nextIndex < count && EntryText(items[nextIndex]).empty() &&
                (dict::InClass("honorific.prepass", items[nextIndex].surface) ||
+                (nextIndex == i + 1 && ClippedCopy(items, i)) ||
                 (items[nextIndex].detailClass == DetailClass::Yougo && items[nextIndex].directIndex >= 0 &&
                  items[nextIndex].ending.text.empty()))) {
             nextIndex++;
@@ -1132,14 +1171,29 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // 몇 and 여러 stand apart from any counter (몇 체, 몇 층).
     if (settings_.literal && (t == "몇" || t == "여러") && Contains(nextTags, "Ct")) return Result(std::move(t), true);
     // A number word in Hangul, also one that goes on with 만 or 억 (몇십만, 수백억), stands
-    // apart from the counter after it (수십 명, 몇백 년, 몇십만 명) and joins 万 or 億.
+    // apart from the counter after it (수십 명, 몇백 년, 백 번, 천 명) and joins 万 or 億.
     if (settings_.literal && Contains(nextTags, "Ct")) {
         constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
         auto numberWord = [&](std::string_view w) {
             return std::find(std::begin(kNumberWords), std::end(kNumberWords), w) != std::end(kNumberWords);
         };
+        // A number word the dictionary reads from a kanji numeral in Hangul (百 백, 千 천), unless
+        // it goes on from digits (2000만엔, NUM-1).
+        auto hangulNumber = [&](std::string_view w) {
+            if (w.empty() || !(Contains(tags, "Nj") || Contains(tags, "Nd"))) return false;
+            if (previous >= 0) {
+                const std::string_view before = EntryText(items[previous]);
+                if (!before.empty() && IsDigit(before.back())) return false;
+            }
+            for (std::size_t k = 0; k < w.size();) {
+                const text::Rune r = text::DecodeRune(w.substr(k));
+                if (!text::Split(r.cp)) return false;
+                k += r.size;
+            }
+            return true;
+        };
         const bool myriad = next.surface == "万" || next.surface == "億";
-        if (numberWord(t)) return Result(std::move(t), !myriad);
+        if (numberWord(t) || hangulNumber(t)) return Result(std::move(t), !myriad);
         if ((item.surface == "万" || item.surface == "億") && previous >= 0 && numberWord(EntryText(items[previous])) &&
             !myriad) {
             return Result(std::move(t), true);
