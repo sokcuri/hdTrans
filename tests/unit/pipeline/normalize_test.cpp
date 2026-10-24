@@ -690,6 +690,24 @@ HD_TEST(pipeline_normalize_doubled_wo) {
     Check(CollapseDoubledWo, cases);
 }
 
+HD_TEST(pipeline_normalize_tsu_runs) {
+    const Case cases[] = {
+        {"褒められちゃっっっった♪"sv, "褒められちゃった♪"sv},
+        {"とっってもいい"sv, "とってもいい"sv},
+        {"バッッカじゃないの"sv, "バッカじゃないの"sv},
+        {"行っっッくぞ"sv, "行っくぞ"sv},
+        {"あっっ！"sv, "あっっ！"sv},
+        {"ああッッッ！！"sv, "ああッッッ！！"sv},
+        {"「っっ……」"sv, "「っっ……」"sv},
+        {"あっっぁ"sv, "あっっぁ"sv},
+        {"ウオッッッー"sv, "ウオッッッー"sv},
+        {"行った"sv, "行った"sv},
+    };
+    Check([](std::string_view text) { return CollapseTsuRuns(text); }, cases);
+    const auto holdsAll = [](const void*, std::string_view, size_t, size_t) { return true; };
+    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", holdsAll, nullptr), "じっっくり");
+}
+
 // Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a
 // verb of the shipped dictionaries, so the rewrite never makes a word they lack (ムズイ
 // むずい). The dictionaries are needed, so the test skips without HDTRANS_DICTS.
