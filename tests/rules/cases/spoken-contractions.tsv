@@ -62,3 +62,9 @@ sound:onbin-u	「ダイコン買うてくれ」	「무 사 줘」	fix	sound
 sound:onbin-u	「さようなら、と言うておった」	「안녕히 가세요, 라고 말했다」	fix	sound
 sound:onbin-u	「戦うたびに強くなる」	「싸울 때마다 강해진다」	keep	sound
 sound:onbin-u	「元は名うての戦闘員だ」	「원래는 이름난 전투원이다」	keep	sound
+sound:contracted-iku	「やめてってね」	「그만두라고」	fix	sound
+sound:contracted-iku	「待ってってね」	「기다리라고」	fix	sound
+sound:contracted-iku	「もう、やめてってね！」	「이제, 그만두라고!」	fix	sound
+sound:contracted-iku	「ゆっくりしてってね」	「쉬어 가」	keep	sound
+sound:contracted-iku	「食べてってね」	「먹어 가」	keep	sound
+sound:contracted-iku	「やめてった」	「그만둬 갔다」	keep	sound

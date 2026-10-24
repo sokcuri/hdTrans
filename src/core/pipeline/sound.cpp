@@ -2061,6 +2061,12 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         size_t from = start;
         while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
         if (from + 1 >= i) continue;
+        // The ってね after a request to stop or wait quotes it (やめてってね 그만두라고).
+        bool quoted = false;
+        for (size_t w = from; w < i && !quoted; w++) {
+            quoted = StartLength(std::string_view(s).substr(byte[w]), dict::ClassMembers("contraction.te-iku-quoted")) > 0;
+        }
+        if (quoted) continue;
         bool inWord = false;
         for (size_t w = start; w < from && !inWord; w++) {
             const std::string key = s.substr(byte[w], byte[i] - byte[w]);

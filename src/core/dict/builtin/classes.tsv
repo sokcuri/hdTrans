@@ -17,6 +17,7 @@
 //= contraction.te-iku	Starts of the text after a て form that are the いく after it contracted, in a form (連れてった, 置いてかないで, 持ってかれた, 持ってってくれ, 食べてってね, 持ってけよ).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
+//= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
 //= contraction.te-iku-not	Starts of the text after a て form that are no contracted いく: the quoting ったら (待ってったら).
 //= contraction.u-onbin	Starts of the text after the kanji stem of a godan verb in う that say its past or て form with う for っ (言うた, 思うて).
 //= contraction.u-onbin-not	Starts of the text of contraction.u-onbin that go on as another word (救うため, 戦うたび, 歌うたい).
@@ -311,6 +312,9 @@ contraction.te-iku-final	け
 contraction.te-iku-listed	ってよ
 
 contraction.te-iku-not	ったら
+contraction.te-iku-quoted	やめてってね
+contraction.te-iku-quoted	止めてってね
+contraction.te-iku-quoted	待ってってね
 
 contraction.u-onbin	うた
 contraction.u-onbin	うて

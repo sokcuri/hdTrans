@@ -875,6 +875,8 @@ HD_TEST(pipeline_contracted_iku) {
         {"連れてってば", "連れてってば"},      // not before a mark
         {"置いてったら", "置いてったら"},      // the quoting ったら
         {"どうやってって", "どうやってって"},  // the end of どうやって
+        {"連れてってね", "連れていってね"},
+        {"やめてってね", "やめてってね"},  // the quoted request (contraction.te-iku-quoted)
         // The text ends right after the contraction; an invalid byte before it takes one byte.
         {"連れてって", "連れていって"},
         {"連れて", "連れて"},
