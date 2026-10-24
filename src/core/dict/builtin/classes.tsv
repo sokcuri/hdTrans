@@ -21,6 +21,7 @@
 //= contraction.te-irassharu	Starts of the text after a て form that are the いらっしゃる after it contracted (ついてらっしゃい, 気に入ってらっしゃる).
 //= contraction.ra-less-kuru	The forms of the potential of くる without its ら that follow a て form (帰ってこれた, ついてこれる, 戻ってこれました); not これなら or これまで, where これ is the pronoun.
 //= contraction.te-ageru	The start of the あげる after a て form said with its あ dropped, its て then said た (作ったげる, 見せたげよう, 読んだげる).
+//= contraction.te-yaru-after	What follows the る of the やる after a て form said with its や dropped (やったるぜ, やったるわ, 調整したるから); not は, が, の or a noun, where たる is the attributive (取り出したるは).
 //= contraction.te-iku-final	Starts of the text after a て form that are the contracted いく before a mark or the end when the dictionary holds the verb with ていく (連れてって, 持ってけ); otherwise the quoting って (やめてって).
 //= contraction.te-iku-listed	Starts of the text after a て form that are the contracted いく when the dictionary holds the verb with ていく (連れてってよ); otherwise the quoting って (やめてってよ).
 //= contraction.te-iku-quoted	The ってね after the て forms that ask someone to stop or wait, which no one does on the way: it quotes the request, never a contracted いく (やめてってね 그만두라고, 待ってってね 기다리라고).
@@ -423,6 +424,21 @@ contraction.ra-less-kuru	これず
 contraction.ra-less-kuru	これそう
 
 contraction.te-ageru	げ
+
+contraction.te-yaru-after	ぜ
+contraction.te-yaru-after	で
+contraction.te-yaru-after	わ
+contraction.te-yaru-after	よ
+contraction.te-yaru-after	ぞ
+contraction.te-yaru-after	さ
+contraction.te-yaru-after	ね
+contraction.te-yaru-after	から
+contraction.te-yaru-after	けど
+contraction.te-yaru-after	って
+contraction.te-yaru-after	っ
+contraction.te-yaru-after	かい
+contraction.te-yaru-after	かな
+contraction.te-yaru-after	か
 
 contraction.te-iku-final	って
 contraction.te-iku-final	け

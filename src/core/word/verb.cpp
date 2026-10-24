@@ -739,6 +739,46 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
+    // The same for やる with its や dropped (やったるぜ, 調整したるから, やったりますよ): る before the
+    // end, a mark (no letter: not the attributive 秘めたる力) or a particle of
+    // contraction.te-yaru-after, or り before the polite ます, where
+    // the り of the たり form would leave ます unread. Not the attributive たる (取り出したるは), たり
+    // before anything else, or たら.
+    if (auxHead.empty() && base.kind == 6 && w->settings.text && queryAllowed &&
+        Conjugation(base.patternKind, 7).size() == Conjugation(base.patternKind, 6).size()) {
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.benefactive-head");
+        int branch = -1;
+        if (const std::string_view r = Conjugation(8, 0); rest.starts_with(r)) {
+            const std::string_view afterRu = rest.substr(r.size());
+            if (afterRu.empty() || !text::IsLetter(text::DecodeRune(afterRu).cp) ||
+                StartLength(afterRu, dict::ClassMembers("contraction.te-yaru-after")) > 0) {
+                branch = 0;
+            }
+        } else if (const std::string_view ri = Conjugation(8, 10);
+                   rest.starts_with(ri) && StartLength(rest.substr(ri.size()), dict::ClassMembers("follower.polite-masu")) > 0) {
+            branch = 10;
+        }
+        const bool shorter = ending != nullptr && branch == 10 && ending->length == static_cast<int>(Conjugation(8, 10).size());
+        if (branch >= 0 && !head.empty() && (ending == nullptr || shorter)) {
+            const int pastWidth = patternWidth;
+            patternWidth += WidthOf(Conjugation(8, branch));
+            base.patternKind = 8;
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else if (ending == nullptr && (after().empty() || Classify(after()) != 0)) {
+                auxHead = head.front();
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = pastWidth;
+                base.patternKind = oldKind;
+                base.kind = 6;
+                if (ending != nullptr) ending = endingGroup(rest);
+            }
+        }
+    }
+
     if (ending == nullptr) {
         if (following != nullptr && base.patternKind == 7 && base.kind == 8) {
             if (Has(GAttr(0), "Ke") && !(!two.Empty() && Classify(two) != 0)) return false;

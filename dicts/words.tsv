@@ -27062,3 +27062,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 うるせー	시끄러워	A9D0			GN							w:28595
 コッソリ	몰래	E300			GN							w:28596
 萌え	싹트고 	N110			GN	6993	||1 &&2 S-1== "が" ||4 S-2== "R草" S-2== "R芽" S-2== "R木" S-2== "R葉"	풀, 싹, 나무, 잎이 주어인 萌える는 ‘싹트다’를 고른다(草が萌え).				w:28597
+いっちょ	한번	E300			GN							w:28308
