@@ -423,6 +423,7 @@ private:
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
+    size_t RunningWordLen(size_t p) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
@@ -1099,6 +1100,22 @@ size_t SoundText::WordLen(size_t p) const {
     return std::max({base, user, name, size_t{1}});
 }
 
+// WordLen of the word the text goes on with at character p, where the ending of an end row
+// counts only where the sentence may end after it, not before kana or a kanji that go on
+// (関連でちょこっと: で, not the でち of 朝でち).
+size_t SoundText::RunningWordLen(size_t p) const {
+    const size_t all = WordLen(p);
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(p, base, user, name, true);
+    const size_t words = std::max({base, user, name, size_t{1}});
+    const size_t e = p + all;
+    if (words < all && e < rs_.size() &&
+        (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])))) {
+        return words;
+    }
+    return all;
+}
+
 // The length of the と, or the て of って, that makes an ono row ending at character i
 // an adverb, or 0: the particle must not start a longer word (とても) that reaches at
 // least as far as the word after it (とお of とお尻 does not), nor join two sounds
@@ -1740,7 +1757,7 @@ std::string SoundText::Write() {
                     continue;
                 }
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
-                next = std::min(rs.size(), i + WordLen(i));
+                next = std::min(rs.size(), i + RunningWordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
                 word = next > i + 1 && IsHiraganaRune(rs[i]) && IsHiraganaRune(rs[next - 1]) && !StemAt(i, next - i);
                 if (next > i + 1) wordEnd = next;

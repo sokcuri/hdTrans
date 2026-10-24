@@ -1,0 +1,34 @@
+# 규칙: LEX-31, SPC-1
+rule	input	expected	kind	layer
+ending:dechi	節分でち！	절분이에여!	fix	builtin-ending
+ending:dechi	雨が多い季節でち。	비가 많은 계절이에여.	fix	builtin-ending
+ending:dechi	朝でち！	아침이에여!	fix	builtin-ending
+ending:dechi	遅めの晩ご飯でちか？	늦은 저녁밥인가여?	fix	builtin-ending
+ending:dechi	魚雷は、よく整備されてるでち。	어뢰는, 잘 정비되어 있어여.	fix	builtin-ending
+ending:dechi	潜水艦さん達、今日もいい子でちね～。	잠수함 씨들, 오늘도 좋은 아이네여~.	fix	builtin-ending
+ending:dechi	モンスターの赤ちゃんでちゅよー。	몬스터의 아기예여~.	fix	builtin-ending
+ending:dechi	「はいはい、大人はえらいでちゅねーっ！」	「네네, 어른은 대단하네여-!」	fix	builtin-ending
+ending:sshu	艦隊、出撃っしゅ！	함대, 출격이에여!	fix	builtin-ending
+ending:sshu	一馬身リードっしゅ！	1마신 리드예여!	fix	builtin-ending
+ending:sshu	なんかいたっす？ 気の所為っしゅ？	뭔가 있었어요? 기분의 탓이에여?	fix	builtin-ending
+ending:sshu	しれぇ贅沢っしゅね～。	사령관님 사치네여~.	fix	builtin-ending
+ending:ssho	最高っしょ！？	최고지!?	fix	builtin-ending
+ending:ssho	サーロインステーキ、最高っしょ？	설로인 스테이크, 최고지?	fix	builtin-ending
+ending:ssho	自分がへましたらダメっしょ。	자신이 거치면 안 되지.	fix	builtin-ending
+ending:ssho	「凪ちゃんモテるっしょ？」	「나기짱 인기를 끌겠지?」	fix	builtin-ending
+ending:ssho	「今時メンコはないっしょ。」	「요즈음 멘코는 없지.」	fix	builtin-ending
+ending:ssho	「何個か教えたのあるっしょ」	「몇 개인가 가르친 거 있겠지」	fix	builtin-ending
+ending:kee	ええ装備じゃねぇ、皆も喜ぶけぇ。	네장비가 아닌, 모두도 기뻐할 테니까.	fix	builtin-ending
+ending:kee	差し入れの握り飯けぇ？	간식의 주먹밥이야?	fix	builtin-ending
+ending:kee	お？時間けぇ？	오? 시간이야?	fix	builtin-ending
+ending:nsu	兄貴、この俺っちを信用してないんすか？	형, 이 나를 신용하고 있지 않나요?	fix	builtin-ending
+ending:nsu	「今日は一緒じゃないんスか？」	「오늘은 함께가 아닌가요?」	fix	builtin-ending
+ending:ssho	「忘れるわけないっしょ」	「잊을 리가 없잖아」	keep	builtin-ending
+ending:ssho	「いっしょに帰ろう」	「함께 돌아가자」	keep	builtin-ending
+ending:dechi	でも、ちょっと待って	하지만, 잠깐 기다려	keep	builtin-ending
+ending:dechi	大きな声で泣いた。	큰 목소리로 울었다.	keep	builtin-ending
+ending:kee	今日は出かけないっす。	오늘은 나가지 않아요.	keep	builtin-ending
+ending:kee	学生じゃけえ	학생이니까	keep	builtin-ending
+ending:dechi	これは本当です。	이것은 사실입니다.	keep	builtin-ending
+sound:end-row-key-goes-on	婚約関連でちょこっと両親が登場した。	약혼 관련으로 살짝 부모님이 등장했다.	keep	sound
+sound:end-row-key-goes-on	学校でちらっと見た	학교에서 힐끗 보았다	keep	sound
