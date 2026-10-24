@@ -1,4 +1,4 @@
-# 규칙: SPC-7, NUM-9
+# 규칙: SPC-8, NUM-9
 rule	input	expected	kind	layer
 ending:静かでござる	シーン………頭がいっぱいでござる	장면………머릿속이 가득하오	fix	builtin-ending
 ending:静かでござる	お腹いっぱいでござる	배부르오	fix	builtin-ending

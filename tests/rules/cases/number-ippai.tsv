@@ -1,4 +1,4 @@
-# 규칙: NUM-9
+# 규칙: NUM-9, SPC-7
 rule	input	expected	kind	layer
 dict:w:27004	いっぱい食べてね！	많이 먹어!	fix	local
 dict:w:27004	写真をいっぱい撮った。	사진을 많이 찍었다.	fix	local
@@ -23,7 +23,7 @@ sense:いっぱい	胸がいっぱいです。	가슴이 벅찹니다.	fix	sense
 dict:number-ippai	胸が一杯の思い。	가슴이 벅찬 생각.	fix	defaults
 dict:number-ippai	頭がいっぱいだったの。	머릿속이 가득했어.	fix	defaults
 dict:w:27000	締め切りは水曜一杯。	마감은 수요일까지.	fix	local
-dict:w:27001	相談は五月一杯で止める。	rule:dict:w:27001=까지로    	fix	local
+dict:w:27001	相談は五月一杯で止める。	상담은 5월까지로 멈춘다.	fix	local
 dict:w:27002	届け出は明日いっぱいよ。	신고는 내일까지야.	fix	local
 dict:w:27002	今週いっぱい休む。	금주 내내 쉰다.	keep	defaults
 dict:number-ippai	彼女の精一杯の描写。	그녀의 혼신의 묘사.	fix	defaults
