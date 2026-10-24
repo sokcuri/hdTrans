@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+dict:jisjk:4217	遊ぶ時間が欲しい。	rule:dict:jisjk:4217=시간	keep	local
+dict:jisjk:265477	売りを誘う。	rule:dict:jisjk:265477=유도&AV@	keep	local

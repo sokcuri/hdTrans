@@ -1760,14 +1760,13 @@ bool RuleL188([[maybe_unused]] Item* p) {
 
 // local 189
 //     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "があ" and pos[+1] is 4** and end.ko[-1] := "3"
-//     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "が" and (src[+2] ends "な" or src[+2] == "無" or src[+2] == "") and end.ko[-1] := "3"
+//     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "が" and (src[+2] ends "な" or src[+2] == "無") and end.ko[-1] := "3"
 //     pos[-1] is 4** and end.pos[-1] is 500 and (src[+1] == "が欲し" or src[+1] == "がほし") and pos[+1] is 7** and end.ko[-1] := "3"
 //     pos[-1] is 4** and sem[-1] has UMv and end.pos[-1] is 50* and end.ko[-1] := "3"
 bool RuleL189([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && SrcEq(p, 1, "があ"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && SrcEq(p, 1, "が"sv) && (SrcEq(p, 2, "Rな"sv) ||
-           SrcEq(p, 2, "無"sv) ||
-           SrcEq(p, 2, ""sv)) && GobiDstSet(p, -1, "3"sv)) ||
+           SrcEq(p, 2, "無"sv)) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && (SrcEq(p, 1, "が欲し"sv) ||
            SrcEq(p, 1, "がほし"sv)) && PumsaEq(p, 1, "7**"sv) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && AttrEq(p, -1, "UMv"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "3"sv));
@@ -4630,7 +4629,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL186, 0x6335413206fbdcf8ull},
     {RuleL187, 0x29675fe7eade3335ull},
     {RuleL188, 0xbb6faa8b3061dbbeull},
-    {RuleL189, 0x5db47ae41bcd8b28ull},
+    {RuleL189, 0x0d5204dcb3322d1full},
     {RuleL190, 0x5220ce1b72a4b4d1ull},
     {RuleL191, 0x4ac0f3ed4e6043e4ull},
     {RuleL192, 0xe94592d2a75aaa92ull},
