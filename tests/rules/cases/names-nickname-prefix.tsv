@@ -1,0 +1,31 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:nickname-prefix	エミリア様とエミリア様。「あれ、エミちゃん！　お邪魔しちゃった？」	에밀리아님과 에밀리아님. 「어라, 에미짱! 실례해버렸어?」	fix	lookup
+names:nickname-prefix	エミリア様とエミリア様。改めて会場を見てみると、妹のエミちゃんがいた。	에밀리아님과 에밀리아님. 다시 회장을 보니, 여동생 에미짱이 있었다.	fix	lookup
+names:nickname-prefix	エミリア様とエミリア様。結局エミちゃんが暴走したせいで計画が頓挫しかけてる。	에밀리아님과 에밀리아님. 결국 에미짱이 폭주한 탓으로 계획이 좌절하기 시작하고 있다.	fix	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。「私もレオ君って呼んでも良い？」	레온하르트님과 레온하르트님. 「나도 레오 군이라고 불러도 좋아?」	fix	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。私はレオくんに疎まれてますから。	레온하르트님과 레온하르트님. 저는 레오 군에게 소외당하고 있으니까요.	fix	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。「どうしよう、レオくん。このままじゃ俺達」	레온하르트님과 레온하르트님. 「어떻게 하지, 레오 군. 이대로는 우리」	fix	lookup
+names:nickname-prefix	ベルンハルト様とベルンハルト様。「ちょっとベルくん、他の女性を侍らせてるの？」	베른할트님과 베른할트님. 「조금 베르 군, 다른 여성을 곁에 둬?」	fix	lookup
+names:nickname-prefix	ベルンハルト様とベルンハルト様。ベル様は何だか不満げな表情のままだ。	베른할트님과 베른할트님. 베르님은 왠지 불만인 표정인 채다.	fix	lookup
+names:nickname-prefix	エルンスト様とエルンスト様。「エルくん、おはよう」	에른스트님과 에른스트님. 「에르 군, 좋은 아침」	fix	lookup
+names:nickname-prefix	エルンスト様とエルンスト様。エル君が手を振った。	에른스트님과 에른스트님. 에르 군이 손을 흔들었다.	fix	lookup
+names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん、またね」	아렉산들님과 아렉산들님. 「아렉 군, 다시 또 보자」	fix	lookup
+names:nickname-prefix	アレクサンドル様とアレクサンドル様。アレク様はうなずいた。	아렉산들님과 아렉산들님. 아렉님은 끄덕였다.	fix	lookup
+names:nickname-prefix	アルフォンス様とアルフォンス様。そうなんだよねぇ、結局アルくんが暴走したせいだ。	아르폰스님과 아르폰스님. 그래요, 결국 아르 군이 폭주한 탓이다.	keep	lookup
+names:nickname-prefix	アンネローゼ様とアンネローゼ様。「アンネちゃん、遅いよ」	안네로제님과 안네로제님. 「안네짱, 늦어」	keep	lookup
+names:nickname-prefix	エリザベス様とエリザベス様。「エリちゃん、おいで」	엘리자베스님과 엘리자베스님. 「엘리짱, 와」	keep	lookup
+names:nickname-prefix	ベルンハルト様とベルンハルト様。「ベルンくん、おいで」	베른할트님과 베른할트님. 「베른 군, 와」	keep	lookup
+names:nickname-prefix	クリスティーナ様とクリスティーナ様。「クリスちゃん、おいで」	크리스티나님과 크리스티나님. 「크리스짱, 와」	keep	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。「レオンくん、おいで」	레온하르트님과 레온하르트님. 「레온 군, 와」	keep	lookup
+names:nickname-prefix	「あれ、アルくん！　お邪魔しちゃった？」	「어라, 알 군! 실례해버렸어?」	keep	lookup
+names:nickname-prefix	「ちょっとベルくん、遅いよ」	「조금 벨 군, 늦어」	keep	lookup
+names:nickname-prefix	「エルくん、おはよう」	「엘 군, 좋은 아침」	keep	lookup
+names:nickname-prefix	パンドラ様とパンドラ様。パンを食べた。	판도라님과 판도라님. 빵을 먹었다.	keep	lookup
+names:nickname-prefix	スキルヴィア様とスキルヴィア様。スキルを覚えた。	스키르비아님과 스키르비아님. 스킬을 배웠다.	keep	lookup
+names:nickname-prefix	エミリア様とエミリア様。エミリア様が笑った。	에밀리아님과 에밀리아님. 에밀리아님이 웃었다.	keep	lookup
+names:nickname-prefix	エミリア様とエミリア様。「エミちゃん、こっち！」	에밀리아님과 에밀리아님. 「에미짱, 여기!」	fix	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。レオくん、おいで。	레온하르트님과 레온하르트님. 레오 군, 와.	fix	lookup
+names:nickname-prefix	アレクサンドル様とアレクサンドル様。「アレクくん」	아렉산들님과 아렉산들님. 「아렉 군」	fix	lookup
+names:nickname-prefix	「あれ、アルくん！」	「어라, 알 군!」	keep	lookup
+names:nickname-prefix	レオンハルト様とレオンハルト様。「レオンくん」	레온하르트님과 레온하르트님. 「레온 군」	keep	lookup

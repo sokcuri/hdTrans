@@ -597,6 +597,10 @@
   보통 명사 テレビ는 LEX-1대로 `텔레비전`으로 적는다. 외국 방송국은 그 나라에서 쓰는 이름을 쓴다.
 - 한국어판 공식 이름이 있는 작품 속 생물과 인물은 같은 작품의 다른 이름과 맞춰 그 이름을 쓴다(ダルマッカ `달막화`,
   ガラルダルマッカ `가라르 달막화`).
+- 문서에서 이름으로 익힌 가타카나 이름의 앞부분을 경칭 앞에 쓴 애칭은 그 이름의 한국어 읽기에서 애칭의 가나를 적은
+  앞부분으로 옮긴다(レオンハルト가 있는 문서의 レオくん `레오 군`). 이름 읽기가 애칭 끝 음절에 붙인 받침은 떼고(エミリア
+  `에밀리아`의 エミ `에미`), 받침 ㄱ, ㄹ, ㅂ과 그 소리를 따로 적은 크, 르, 프는 같은 소리로 본다(アレクサンドル `아렉산들`의
+  アレク `아렉`). 문서에 그 이름이 없으면 애칭은 사전 읽기를 쓴다(アルくん `알 군`).
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -605,10 +609,15 @@
 | キッコーマンの醤油 | 깃코만의 간장 | 고침 |
 | デジモンが好きだ。 | 디지몬을 좋아한다. | 고침 |
 | 大井さんが来た。 | 오오이 씨가 왔다. | 고침 |
+| エミリア様とエミリア様。「エミちゃん、こっち！」 | 에밀리아님과 에밀리아님. 「에미짱, 여기!」 | 고침 |
+| レオンハルト様とレオンハルト様。レオくん、おいで。 | 레온하르트님과 레온하르트님. 레오 군, 와. | 고침 |
+| アレクサンドル様とアレクサンドル様。「アレクくん」 | 아렉산들님과 아렉산들님. 「아렉 군」 | 고침 |
 | カーンケール県に行く。 | 칸케르현에 간다. | 고침 |
 | アメリカ合衆国の大統領が来た。 | 아메리카 합중국의 대통령이 왔다. | 유지 |
 | 大石さんが来た。 | 오오이시 씨가 왔다. | 유지 |
 | 東京に行く。 | 도쿄에 간다. | 유지 |
+| レオンハルト様とレオンハルト様。「レオンくん」 | 레온하르트님과 레온하르트님. 「레온 군」 | 유지 |
+| 「あれ、アルくん！」 | 「어라, 알 군!」 | 유지 |
 
 현재: おお를 줄여 적은 사전 행(大野 `오노`, 大須賀 `오스가`)이 아직 많다. おう, えい 꼴의 장음(佐藤, 優一)은
 정하지 않았다. 사전 행은 대부분 줄여 적고(佐藤 `사토`, 優一 `유이치`),
@@ -619,7 +628,8 @@
 `tests/rules/cases/names-geographical-scope.tsv`, `tests/rules/cases/names-place-entity-types.tsv`,
 `tests/rules/cases/names-title-passive.tsv`, `tests/rules/cases/names-fragmented-targets.tsv`,
 `tests/rules/cases/names-place-facility-type.tsv`, `tests/rules/cases/names-title-separators.tsv`,
-`tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`, `tests/rules/cases/names-broadcaster-tv.tsv`
+`tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`, `tests/rules/cases/names-broadcaster-tv.tsv`,
+`tests/rules/cases/names-nickname-prefix.tsv`
 
 
 ## LEX-30 이름 뒤의 애칭 たん, っち는 붙여 쓴 짱, 치다

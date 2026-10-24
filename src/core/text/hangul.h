@@ -11,9 +11,11 @@ constexpr char32_t kLast = 0xD7A3;  // 힣
 
 // Final consonant indices (T).
 constexpr int kFinalNone = 0;
+constexpr int kFinalGiyeok = 1;
 constexpr int kFinalNieun = 4;
 constexpr int kFinalRieul = 8;
 constexpr int kFinalMieum = 16;
+constexpr int kFinalBieup = 17;
 constexpr int kFinalSiot = 19;
 constexpr int kFinalSsangSiot = 20;
 constexpr int kFinalIeung = 21;
@@ -21,10 +23,15 @@ constexpr int kFinalsCount = 28;
 
 // Initial consonant indices (L).
 constexpr int kInitialGiyeok = 0;
+constexpr int kInitialRieul = 5;
 constexpr int kInitialMieum = 6;
 constexpr int kInitialBieup = 7;
 constexpr int kInitialKieuk = 15;
+constexpr int kInitialPieup = 17;
 constexpr int kInitialHieuh = 18;
+
+// Vowel indices (V).
+constexpr int kVowelEu = 18;  // ㅡ
 
 struct Syllable {
     int initial;

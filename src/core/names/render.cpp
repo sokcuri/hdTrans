@@ -3,6 +3,7 @@
 // the head of a longer katakana name, the name layer's person rendering, and the katakana
 // transliteration.
 #include <algorithm>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -10,6 +11,7 @@
 #include "core/names/chars.h"
 #include "core/names/readings.h"
 #include "core/names/registry.h"
+#include "core/text/hangul.h"
 #include "core/word/kana.h"
 
 namespace hdTrans::names {
@@ -18,9 +20,68 @@ using namespace internal;
 
 namespace {
 
-// The syllables of kr, the rendering of the katakana word x+y, that render x: kr less the
-// transliteration of y when kr ends with it, else as many syllables as x has morae.
+// s with each final ㄱ, ㄹ and ㅂ written as a syllable 크, 르 and 프 after its syllable (알 아르,
+// 샬 샤르), the two spellings of a katakana ク, ル and プ after a vowel, but a final ㄹ before
+// an initial ㄹ dropped (알렉 아렉, 필리 피리), the Korean spelling of a single ラ-row kana.
+std::string OpenFinals(std::string_view s) {
+    std::string out;
+    for (std::size_t i = 0; i < s.size();) {
+        const text::Rune r = RuneAt(s, i);
+        i += r.size;
+        int open = -1;  // the initial of the syllable of the final
+        switch (text::Final(r.cp)) {
+            case text::kFinalGiyeok: open = text::kInitialKieuk; break;
+            case text::kFinalRieul: open = text::kInitialRieul; break;
+            case text::kFinalBieup: open = text::kInitialPieup; break;
+        }
+        if (open < 0) {
+            text::AppendRune(out, r.cp);
+            continue;
+        }
+        text::AppendRune(out, text::SetFinal(r.cp, text::kFinalNone));
+        const auto next = i < s.size() ? text::Split(RuneAt(s, i).cp) : std::nullopt;
+        if (open != text::kInitialRieul || !next || next->initial != text::kInitialRieul) {
+            text::AppendRune(out, text::Join(open, text::kVowelEu, text::kFinalNone));
+        }
+    }
+    return out;
+}
+
+// The leading syllables of kr, short of all of kr, that read x: they spell its
+// transliteration, the last maybe without a final x lacks (유필리아 유피, 레온하르트 레오),
+// with finals taken as OpenFinals writes them (아르가르드 아르, 알렉산드르 알렉); else they sound
+// as it (text::SameSound), as many syllables before fewer or more. "" when none do.
+std::string AlignedHead(const std::string& kr, std::string_view x) {
+    std::string tr;
+    if (!word::TransliterateName(x, tr) || !IsHangulText(tr)) return "";
+    tr = OpenFinals(tr);
+    const std::size_t n = RuneCount(tr);
+    std::string head, best;
+    int rank = 3;
+    for (std::size_t i = 0; i < kr.size();) {
+        const text::Rune r = RuneAt(kr, i);
+        i += r.size;
+        if (i >= kr.size() || !text::Split(r.cp)) break;
+        std::string open = head;
+        head += kr.substr(i - r.size, r.size);
+        text::AppendRune(open, text::SetFinal(r.cp, text::kFinalNone));
+        for (const std::string* h : {&head, &open}) {
+            const std::string key = OpenFinals(*h);
+            const int ra = key == tr ? 0 : !text::SameSound(key, tr) ? 3 : RuneCount(key) == n ? 1 : 2;
+            if (ra < rank) {
+                rank = ra;
+                best = *h;
+            }
+        }
+    }
+    return best;
+}
+
+// The syllables of kr, the rendering of the katakana word x+y, that render x: the leading
+// syllables that sound as x (AlignedHead), else kr less the transliteration of y when kr
+// ends with it, else as many syllables as x has morae.
 std::string SyllableHead(const std::string& kr, std::string_view x, std::string_view y) {
+    if (std::string h = AlignedHead(kr, x); !h.empty()) return h;
     std::string tail;
     if (word::TransliterateName(y, tail) && !tail.empty() && kr.size() > tail.size() && kr.ends_with(tail)) {
         return kr.substr(0, kr.size() - tail.size());
