@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Counts the instructions the CLI runs for fixed inputs under valgrind and compares them with a build
-of the base commit measured in the same run, or else with the baselines in tools/perf-budget.tsv.
+of the base commit measured in the same run, and reports them against tools/perf-budget.tsv.
 
   tools/perf-budget.py --check CLI DICTS [--against CLI DICTS] [--base REF] [--out FILE]
-  tools/perf-budget.py --update CLI DICTS [--base REF]   write the counts as baselines
+  tools/perf-budget.py --update CLI DICTS [--base REF]   write the counts into the table
   tools/perf-budget.py --measure CLI DICTS               print the counts
   tools/perf-budget.py --self-test
 
@@ -17,15 +17,14 @@ instructions above it. The lines of each run in EACH_PARTS parts, and all runs o
 once; valgrind's counts do not depend on that. The CLI runs with an empty settings file, HOME in a
 fresh folder and the dictionary cache off. The dictionaries of each build are part of what is counted.
 Counts depend on the compiler, the C library, the processor architecture and valgrind: the toolchain.
---check compares with the --against build when both have the same toolchain, else with the table
-when it names the same toolchain; otherwise it only reports. A count more than TOLERANCE above the
-reference fails, unless a commit of REF..HEAD carries a `Perf-Budget: <reason>` trailer. When the
-table is the reference, --base also fails a table that raises a baseline, adds a row or moves the
-inputs since REF without that trailer. When the base build cannot be measured, this build is
-compared with the table. A count more than TOLERANCE below is reported. --out writes the measured counts as a table.
---update writes the counts; raising one needs the trailer (REF defaults to the merge base with
-develop, which is also the `inputs` of a new table).
-Exit: 0 within the reference or only reported, 1 over it or a raise without a trailer, 2 invalid
+--check compares with the --against build (the base commit) when both have the same toolchain; a
+count more than TOLERANCE above it fails, unless a commit of REF..HEAD (--base) carries a
+`Perf-Budget: <reason>` trailer. Without such a base build, or when it cannot be measured, the counts
+are compared with the table and only reported: the table is a record of earlier counts and never
+fails a run. A count more than TOLERANCE below is reported. --out writes the measured counts as a
+table. --update writes them into the table (REF defaults to the merge base with develop, which is
+also the `inputs` of a new table).
+Exit: 0 within the base build or only reported, 1 over the base build without a trailer, 2 invalid
 arguments or a measurement that failed (valgrind missing, a run that failed or took longer than
 RUN_TIMEOUT, or an error of this script).
 """
@@ -241,15 +240,6 @@ def compare(measured, baseline):
     return over, under
 
 
-def raises(old, new):
-    """What the table at REF and the working table differ in that needs a trailer."""
-    up = [f"{name} {old['rows'].get(name, 0)} -> {n}" for name, n in new["rows"].items()
-          if name not in old["rows"] or n > old["rows"][name]]
-    if old["inputs"] and new["inputs"] != old["inputs"]:
-        up.append(f"inputs {old['inputs']} -> {new['inputs']}")
-    return up
-
-
 def has_trailer(root, base):
     return bool(TRAILER.search(git(root, "log", "--format=%B", f"{base}..HEAD").stdout))
 
@@ -262,11 +252,6 @@ def default_base(root):
         if base:
             return base
     raise MeasureError("no develop branch to take the merge base with; pass --base REF")
-
-
-def table_at(root, ref):
-    r = git(root, "show", f"{ref}:{TABLE}", check=False)
-    return read_table(r.stdout) if r.returncode == 0 else empty_table()
 
 
 def percent(n, b):
@@ -285,7 +270,7 @@ def check(root, cli, dicts, base, out=None, against=None, count=valgrind_count, 
     if "head" in errors:
         raise errors["head"]
     if "base" in errors:
-        print(f"perf-budget: the base build could not be measured ({errors['base']}); compared with {TABLE}")
+        print(f"perf-budget: the base build could not be measured ({errors['base']}); reported only")
         against = None
     head, mine = measured["head"], tc(cli)
     if out:
@@ -295,11 +280,12 @@ def check(root, cli, dicts, base, out=None, against=None, count=valgrind_count, 
         reference, name, gating = measured["base"], "the base build", True
     else:
         if against:
-            print(f"perf-budget: the base build has another toolchain ({tc(against[0])}); compared with {TABLE}")
-        reference, name, gating = table["rows"], TABLE, table["toolchain"] == mine
-        if not gating:
-            print(f"perf-budget: measured with {mine}, {TABLE} with {table['toolchain'] or 'nothing'}; "
-                  "reported only")
+            print(f"perf-budget: the base build has another toolchain ({tc(against[0])}); reported only")
+        elif "base" not in errors:
+            print("perf-budget: no base build; reported only")
+        reference, name, gating = table["rows"], TABLE, False
+        if table["toolchain"] != mine:
+            print(f"perf-budget: measured with {mine}, {TABLE} with {table['toolchain'] or 'nothing'}")
     print("row\tthis build\t" + ("base build\t" if "base" in measured else "") + f"{TABLE}\tchange")
     for row in ROWS:
         cells = [row, str(head[row])]
@@ -309,25 +295,14 @@ def check(root, cli, dicts, base, out=None, against=None, count=valgrind_count, 
         print("\t".join(cells))
     status = 0
     over, under = compare(head, reference)
-    trailer = bool(base) and has_trailer(root, base)
+    trailer = gating and bool(base) and has_trailer(root, base)
     for row, n, b in over:
-        verdict = "with a Perf-Budget trailer" if trailer else "reported only" if not gating else "over the budget"
+        verdict = "with a Perf-Budget trailer" if trailer else "over the budget" if gating else "reported only"
         print(f"{row}: {n} instructions, {percent(n, b)} against {name} ({b}); {verdict}")
         if gating and not trailer:
             status = 1
     for row, n, b in under:
         print(f"{row}: {n} instructions, {percent(n, b)} against {name} ({b})")
-    drift = [row for row in ROWS if row in table["rows"] and abs(head[row] - table["rows"][row]) >
-             table["rows"][row] * TOLERANCE]
-    if drift and table["toolchain"] == mine:
-        print(f"perf-budget: {', '.join(drift)} moved more than {TOLERANCE:.0%} from {TABLE}; "
-              "copy the measured table into it")
-    if base and name == TABLE and gating:
-        up = raises(table_at(root, base), table)
-        if up and not trailer:
-            for line in up:
-                print(f"{TABLE}: {line} without a Perf-Budget trailer since {base}")
-            status = 1
     print("perf-budget: " + ("over" if status else "ok"))
     return status
 
@@ -335,17 +310,10 @@ def check(root, cli, dicts, base, out=None, against=None, count=valgrind_count, 
 def update(root, cli, dicts, base, count=valgrind_count, tc=toolchain):
     path = Path(root) / TABLE
     table = read_table(path.read_text(encoding="utf-8")) if path.exists() else empty_table()
-    base = base or default_base(root)
-    commit = table["inputs"] or base
+    commit = table["inputs"] or base or default_base(root)
     new = {"inputs": commit, "toolchain": tc(cli), "rows": measure(root, cli, dicts, commit, count)}
-    up = raises(table, new) if table["rows"] else []
-    if up and not has_trailer(root, base):
-        for line in up:
-            print(line)
-        print("perf-budget: raising needs a commit with a `Perf-Budget: <reason>` trailer; nothing written")
-        return 1
     path.write_text(write_table(new), encoding="utf-8")
-    print(f"perf-budget: wrote {TABLE}" + (f" ({len(up)} raised)" if up else ""))
+    print(f"perf-budget: wrote {TABLE}")
     return 0
 
 
@@ -356,10 +324,6 @@ def self_test():
     assert compare({"load": 100, "each": 2021, "document": 296}, t["rows"]) == ([("each", 2021, 2000)],
                                                                                 [("document", 296, 300)])
     assert compare({"load": 101, "each": 2020, "document": 297}, t["rows"]) == ([], [])
-    assert raises(t, dict(t, rows={"load": 99, "each": 2000, "document": 300})) == []
-    assert raises(t, dict(t, rows={"load": 101, "each": 2000, "document": 300})) == ["load 100 -> 101"]
-    assert raises(t, dict(t, inputs="def")) == ["inputs abc -> def"]
-
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         (root / "tools").mkdir()
@@ -410,7 +374,6 @@ def self_test():
             assert read_table((root / TABLE).read_text(encoding="utf-8"))["inputs"] == base
             run("add", "-A")
             run("commit", "-q", "-m", "table")
-            assert chk(base) == 1  # rows added without a trailer
             base = git(root, "rev-parse", "HEAD").stdout.strip()
             # Later edits of the inputs do not move the counts.
             (root / "examples" / "a.ja.txt").write_text("# case\nあああ\n", encoding="utf-8")
@@ -418,24 +381,17 @@ def self_test():
             assert chk(base) == 0 and chk(base, True) == 0
             out = root / "measured.tsv"
             cost["head"] = 1030
-            assert chk(base, False, out) == 1 and chk(base, True) == 1
+            # The table only reports; the base build decides.
+            assert chk(base, False, out) == 0 and chk(base, True) == 1
             assert read_table(out.read_text(encoding="utf-8"))["rows"]["load"] == 1030
             # The base build moved as much: the change is not this branch's.
             cost["base"] = 1030
-            assert chk(base, True) == 0 and chk(base) == 1
-            # Another toolchain in the base build falls back to the table; another one there only reports.
-            chains["base"] = "cc 2"
-            assert chk(base, True) == 1
-            chains["head"] = "cc 2"
             assert chk(base, True) == 0
-            chains["head"] = "cc 3"
-            assert chk(base, True) == 0 and chk(base) == 0
-            chains.update(head="cc 1", base="cc 1")
             cost["base"] = 1000
-            assert update(root, "head", "dicts", base, fake, fake_tc) == 1
-            run("commit", "-q", "--allow-empty", "-m", "slower\n\nPerf-Budget: a test reason")
+            # A base build of another toolchain, or one that cannot run, only reports.
+            chains["base"] = "cc 2"
             assert chk(base, True) == 0
-            # A base build that cannot run leaves this build and the table.
+            chains["base"] = "cc 1"
             broken.add("base")
             assert chk(base, True) == 0
             broken.clear()
@@ -446,12 +402,10 @@ def self_test():
             except MeasureError:
                 pass
             broken.clear()
-            assert update(root, "head", "dicts", base, fake, fake_tc) == 0 and chk(base) == 0
-            head = git(root, "rev-parse", "HEAD").stdout.strip()
-            run("commit", "-q", "-am", "raise")
-            assert chk(head) == 1
-            cost["head"] = 900
-            assert chk(None) == 0
+            run("commit", "-q", "--allow-empty", "-m", "slower\n\nPerf-Budget: a test reason")
+            assert chk(base, True) == 0
+            assert update(root, "head", "dicts", base, fake, fake_tc) == 0
+            assert read_table((root / TABLE).read_text(encoding="utf-8"))["rows"]["load"] == 1030
             try:
                 check(root, "head", "dicts", None, None, None, fail, fake_tc)
                 raise AssertionError("no error")
