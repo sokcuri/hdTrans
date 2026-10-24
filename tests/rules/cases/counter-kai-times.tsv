@@ -45,3 +45,5 @@ dict:jisjk:115519	「3回攻撃する」	「3회 공격한다」	keep	global-ste
 dict:jisjk:115519	2回まで使用可能。	2회까지 사용 가능.	keep	global-stem
 dict:jisjk:115519	1日3回まで挑戦できる。	1일 3회까지 도전할 수 있다.	keep	global-stem
 dict:jisjk:115519	3回言った。	3회 말했다.	keep	global-stem
+dict:jisjk:115519	「大会で3回勝った」	「대회에서 3번 이겼다」	fix	local
+dict:jisjk:115519	「再会して2回も泣いた」	rule:dict:jisjk:115519=번	fix	local
