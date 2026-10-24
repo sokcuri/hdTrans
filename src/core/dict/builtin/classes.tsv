@@ -144,7 +144,8 @@
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
-//= verb.filling	Verbs of filling, loading and holding, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱい溜めて); written as words of a senses.tsv trigger.
+//= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
+//= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
@@ -2316,6 +2317,25 @@ verb.filling	満たす
 verb.filling	浮かべる
 verb.filling	頬張る
 verb.filling	抱える
+verb.filling	つめる
+verb.filling	つめこむ
+verb.filling	詰まる
+verb.filling	ためる
+verb.filling	溜まる
+verb.filling	みたす
+verb.filling	満ちる
+verb.filling	みちる
+verb.filling	そそぐ
+verb.filling	うかべる
+verb.filling	ほおばる
+verb.filling	かかえる
+verb.filling	盛る
+verb.filling	涙をためる
+verb.filling	涙を溜める
+verb.filling	涙を浮かべる
+verb.filling	涙をうかべる
+verb.putting-in	入れる
+verb.putting-in	いれる
 noun.practice	経験
 noun.practice	経験値
 noun.practice	実績
