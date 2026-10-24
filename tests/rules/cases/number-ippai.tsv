@@ -81,4 +81,7 @@ dict:jisjk:373504	「大丈夫さ、平気さ」	「괜찮아, 괜찮아」	keep
 dict:jisjk:373504	簡単さ、楽勝さ！	간단해, 간단히 이겨!	keep	local-ending
 dict:jisjk:373504	平気さ、平気さ。	괜찮아, 괜찮아.	keep	local-ending
 dict:jisjk:373504	うん、大丈夫だ、平気さ。	응, 괜찮다, 괜찮아.	keep	local-ending
-dict:jisjk:373504	料理得意なの？っていやー、簡単さーこんなの…。	요리 자신있어? 라는 아니~, 간단해-이런 건….	keep	local-ending
+dict:jisjk:373504	いやー、簡単さーこんなの…。	이야, 간단해-이런 건….	keep	local-ending
+dict:jisjk:373504	優秀さ、美しさ。	우수함, 아름다움.	fix	ending-defaults
+dict:jisjk:373504	優秀さ、高さ、全てを持っている。	우수함, 높이, 모든 것을 가지고 있다.	fix	ending-defaults
+dict:jisjk:373504	大丈夫さ、静かだ。	괜찮아, 조용하다.	keep	local-ending
