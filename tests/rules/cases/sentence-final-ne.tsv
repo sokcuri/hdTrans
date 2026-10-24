@@ -7,7 +7,7 @@ cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites
 cx:ne-promise:20	「頼りになるね」	「의지가 되네」	fix	rewrites
 cx:ne-promise:20	「ここにあるね」	「여기에 있네」	fix	rewrites
 cx:ne-promise:20	「潜れるね！」	「잠수할 수 있네!」	fix	rewrites
-cx:ne-promise:20	「冷えるねー」	「차가워지네~」	fix	rewrites
+cx:ne-promise:20	「冷えるねぇ」	「차가워지네」	fix	rewrites
 cx:ne-promise:20	「よく食べるね」	「잘 먹네」	fix	rewrites
 cx:ne-promise:20	「お茶淹れるね」	!rule:cx:ne-promise:20	keep	rewrites
 cx:ne-promise:30	「電車が来るね」	「전철이 오네」	fix	rewrites
@@ -35,3 +35,121 @@ phrase:leave-taking	「また今度、買いに来るね」	「다음에 또, �
 phrase:yaru-ne	ぐあぁ！やるね！	크아아! 제법이네!	fix	sound
 phrase:yaru-ne	「私がやるね」	「내가 할게」	keep	sound
 phrase:yaru-ne	「よし、やるね」	「좋아, 할게」	keep	sound
+cx:ne-promise:40	「伝えておくね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「また、漫画読み終わったら言うね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「お茶淹れるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「でも、これだけは約束するね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「私も……協力するね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「ありがとう、頑張るね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「メインは花子ちゃんにお願いするね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「山田さん、今からお茶淹れるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「今度聞いてみるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「これはまた後で言うね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「じゃあ……続けるね……」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「私も協力するね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「これからは田中くんの分もお弁当作ってあげるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「ゴミ袋、取ってくるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「……こっちも、してあげるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「じゃ、缶詰あけるね！」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「ごめん、電気つけるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「わたしも頑張ってくるね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「じゃあ、お仕置きしたあとで話を聞くね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「合い鍵ができ次第、みんなに渡すね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「じゃあ、写真を撮って送るね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「その間にご飯の準備しとくね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「答え行くね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「もらうね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「腕の長さ測るね」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:20	これで元の生活に戻れるね。	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「本当に助かるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「人差し指を宇宙人とくっつける映画を思い出すね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「やっぱり、太郎くんは頼りになるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「太郎くんはいつも助けてくれるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「ずっと、一緒にいられるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「なら、むしろ応援したくなるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「今日の子達みたいな付き合い方も憧れるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「ずいぶんあっさり答えてくれるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「いいことをした気がするね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「よくこの状態で食欲を感じるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「そっか、それじゃ今のも絶対叶うね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「時間もかかるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「さすが花子、いいこと言うね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「何だか、あの時を思い出すね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:10	「さすが、学年トップは余裕があるね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「ずいぶん声が違うね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「でも美味しそうなものがいっぱいあるね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「全然違うね……」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「ほー、彼女持ちは言うことが違うね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「うわー、色々あるね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:10	「やはり若い子が増えると活気が違うね」	rule:cx:ne-promise:10=1네	fix	rewrites
+cx:ne-promise:15	「じゃあ、私は戻るね」	rule:cx:ne-promise:15=3게	fix	rewrites
+cx:ne-promise:15	「あたしたちは行くね」	rule:cx:ne-promise:15=3게	fix	rewrites
+cx:ne-promise:40	「（田中さん、骨抜きにされてるね）」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「花子ちゃん、頑張ってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「市街地から離れてるからだろうね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「みんな……見てるね……」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「本当にリラックスしてるね……」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「やあ、頑張ってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「主様がいるところっすね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「何か……すごいことに……なってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「わぁ、すごく見やすくなってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「花子、すごい感じてるね……」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「会いたかったりして震えてるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「私の置き土産は正しく動作しているようね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「なんか、もめてるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「おお、いいバイク乗ってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「あー、よく憶えてるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「影でコソコソと何やってるんだろうね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「戦闘訓練も積んでいるようね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「正体はわからないところも似てるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「頑張っているようね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「花子ちゃん、頑張ってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「でも、鈴木さん、よく知ってるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「さすがに佐藤さんはしっかりしてるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:20	潜水艦、出るね。	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「新しい一日がはじまるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「騒がしくなるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「明日、晴れるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「２５票くらい集めてくればイケるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「それは気になるね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「傷に染みるねぇ」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「いいねぇ、思い出すねぇ！」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「見る目あるねぇ！」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「アイコンタクトとか見せつけるねぇ！」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「また、会えるね……」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「良さそう？　使えるね！」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「若い人の間で流行るね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「休むのはしょうがない気もするね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「それは仕方ないと疑うね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:20	「その時そう思ってしまうね」	rule:cx:ne-promise:20=1네	fix	rewrites
+cx:ne-promise:12	「お前、やるね」	rule:cx:ne-promise:12=1네	fix	rewrites
+cx:ne-promise:12	「先輩、やるね！」	rule:cx:ne-promise:12=1네	fix	rewrites
+cx:ne-promise:12	「じゃあ、やるね」	!rule:cx:ne-promise:12	keep	rewrites
+cx:ne-promise:15	「私が出るね」	rule:cx:ne-promise:15=3게	fix	rewrites
+cx:ne-promise:15	「私は先に帰るね」	rule:cx:ne-promise:15=3게	fix	rewrites
+cx:ne-promise:15	「僕は分かるね」	!rule:cx:ne-promise:15	keep	rewrites
+cx:ne-promise:30	「先輩が来るね」	rule:cx:ne-promise:30=1네	fix	rewrites
+cx:ne-promise:30	「あの人が言うね」	rule:cx:ne-promise:30=1네	fix	rewrites
+cx:ne-promise:40	「また哨戒に出るね。」	rule:cx:ne-promise:40=3게	fix	rewrites
+cx:ne-promise:40	「あらそうね、そうだったわね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「え、昨日、そう呼ぶねって……」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「アニメは行くね(笑)」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「行くね、先輩」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「ダメだなー不貞腐れてるね」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:40	「本当に行くね？」	!rule:cx:ne-promise:40	keep	rewrites
+cx:ne-promise:15	「本当に行くね？」	!rule:cx:ne-promise:15	keep	rewrites
+phrase:leave-taking	「おう、また明日」	「어, 내일 보자」	fix	sound
+phrase:leave-taking	「うん……また明日」	「응……내일 보자」	fix	sound
+phrase:leave-taking	「じゃ、じゃあ、また明日ね」	「그, 그럼, 내일 보자」	fix	sound
+phrase:leave-taking	「また明日なー！」	「내일 보자~!」	fix	sound
+phrase:leave-taking	「はい、では、また後で」	「네, 그럼, 나중에 보자」	fix	sound
+phrase:leave-taking	「それじゃ、また明日ね」	「그럼, 내일 보자」	fix	sound
+phrase:leave-taking	「またあとでね」	「나중에 보자」	fix	sound
+phrase:leave-taking	「それじゃ、また後でな。」	「그럼, 나중에 보자.」	fix	sound
+phrase:leave-taking	またあした	내일 보자	fix	sound
+phrase:leave-taking	「じゃーねー、また明日ー」	「그럼―, 내일 보자~」	fix	sound
+phrase:leave-taking	「また後でな」	「나중에 보자」	fix	sound
+phrase:leave-taking	「じゃあ、また来週ね」	「그럼, 다음 주에 보자」	fix	sound
+phrase:leave-taking	「うん、またな」	「응, 또 보자」	fix	sound
+phrase:leave-taking	「危ないからまた後で」	「위험하니까 또 나중에」	keep	sound
+phrase:leave-taking	「明日また来る」	「내일 또 온다」	keep	sound
