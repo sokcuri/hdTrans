@@ -728,6 +728,30 @@ bool Worker::GodanImperative(std::string_view form) const {
     return false;
 }
 
+// Whether stem is a す-verb stem all of whose Korean is a causative in 게 (引か 끌게 하다; not 動か
+// 움직이다, whose せ is the potential 動かせる) and that ends in the negative stem of a godan verb
+// (引く): its せ is that verb's causative (引かせる), not the potential of the す-verb.
+bool Worker::GodanCausative(std::string_view stem) const {
+    const std::string_view last = LastChar(stem);
+    const std::string_view godan = stem.substr(0, stem.size() - last.size());
+    if (godan.empty()) return false;
+    bool causative = false;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source != stem || pc.size() != 4 || !pc.starts_with("M4") || pc[3] != '3') continue;
+        if (rec.target.find("게 ") == std::string_view::npos) return false;
+        causative = true;
+    }
+    if (!causative) return false;
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(godan, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source != godan || pc.size() != 4 || !pc.starts_with("M4")) continue;
+        const int kind = pc[3] - '0';
+        if (kind != 3 && kind != 7 && kind >= 0 && kind <= 8 && Conjugation(kind, 8) == last) return true;
+    }
+    return false;
+}
+
 // An interjection (E32) or set phrase (A9) whose key ends in て or ます and is a form
 // of a verb of the base dictionary: the key without its last one to three characters,
 // all hiragana, is a verb stem none of whose Korean starts like r's.

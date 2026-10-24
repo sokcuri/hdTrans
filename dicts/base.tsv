@@ -201723,6 +201723,7 @@ ttt	ttt	K110			GN				jisjk:201744
 引	당&A2@	M441	VFnXXX		GN	3427	||1 &&3 P-1== "2**" ||3 S-2== "ドア" S-2== "門" S-2== "引き金" P-2== "1**"	引 앞의 조사 너머 명사가 ドア·門·引き金이면 당기다를 고른다. (미발동: rare-context)	jisjk:343262		
 引	&J3@	M441			GN	3791	||1 ||2 S-2== "R線" S-2== "Rライン"	引는 두 단어 앞 표기가 線·ライン으로 끝나면 긋다로 고른다. (미발동: rare-context)	jisjk:346624		
 引	&AC@	M441	VMo		BZ				jisjk:363579		
+引	&L2@	M441			GN	8204	||1 G+0== "Sa"	사역형 引かせる는 다른 규칙이 고르지 않으면 끌게 하다로 고른다(馬車を引かせる 마차를 끌게 하다).	causative:hikaseru		
 引あげ	인상	I110		Hd	GN				jisjk:105737		
 引か	끌게 &AV@	M433			GN				jisjk:94422		
 引かされ	끌&AA@	M417			GN				jisjk:94423		
@@ -299757,6 +299758,7 @@ ttt	ttt	K110			GN				jisjk:201744
 絞首	교수	N110		Hd	GN				jisjk:16668		
 絞首刑	교수형	I110	HGu		GN				jisjk:62606		
 絞首台	교수대	N110	VBl		GN				jisjk:180386		
+絡	얽&AW@	M425			GN	8203	||1 G+0== "Sa"	사역형 絡ませる는 얽히게 하다(얽다)로 고른다(指を絡ませる 손가락을 얽히게 하다).	causative:karamaseru		
 絡	관련&C6@	M425	XXX	Dx	GN	670	||3 &&2 P-1== "2**" A-2== "VHnVMo" &&2 M+0== "56*" S+1== "事件" S-2== "事件"	絡를 사람·물건 의미의 조사구 뒤나 事件 관련 문맥에서 관련되다로 고른다. (미발동: rare-context)	jisjk:92490		
 絡	휘감&A2@	M415			GN	2354	||1 &&3 P-1== "2**" S-2== "一面" P-2== "1**"	一面과 조사 뒤의 絡을 '휘감기다'로 고른다. (미발동: rare-context)	jisjk:265563		
 絡	연결&C6@	M425			GN	4659	||1 &&2 S-1== "に" S-2== "Rゴール"	絡를 ゴール로 끝나는 말과 に 뒤에서 연결되다로 고른다. (미발동: rare-context)	jisjk:369477		
@@ -334878,7 +334880,7 @@ ttt	ttt	K110			GN				jisjk:201744
 迷い犬	길잃은 개	N110			GN				jisjk:375149		
 迷い箸	이것저것 건드리는 젓가락질	N110		Hd	GN				jisjk:251990		
 迷い込	헤&CC@	M425			GN				jisjk:142438		
-迷わ	현혹시&AQ@	M433			GN				jisjk:92923		
+迷わ	헤매게 &AV@	M433			GN				jisjk:92923		
 迷信	미신	N110		Hd	GN				jisjk:22543		
 迷信家	미신가	N110	VHn		GN				jisjk:253340		
 迷児	미아	N110	VHn		GN				jisjk:22544		

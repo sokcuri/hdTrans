@@ -1,0 +1,30 @@
+# 규칙: LEX-35, MNG-4
+rule	input	expected	kind	layer
+conjugation:godan-causative	真帆を迷わせているのは、俺だ。	마호를 헤매게 하고 있는 것은, 나다.	fix	lookup
+conjugation:godan-causative	往く先を迷わせる、霧のような雨。	가는 앞을 헤매게 하는, 안개와 같은 비.	fix	lookup
+conjugation:godan-causative	多岐川さんが焦った様子で、モニターの上で手を迷わせる。	타키가와 씨가 초조해한 모습으로, 모니터 위에서 손을 헤매게 한다.	fix	lookup
+conjugation:godan-causative	『元気か？』という味も素っ気もないタイトルが、指先を迷わせた。	『건강한가?』라는 무미 건조한 타이틀이, 손가락끝을 헤매게 했다.	fix	lookup
+conjugation:godan-causative	舌を絡ませて、互いの唾液を混ぜ合わせる。	혀를 얽히게 하고, 서로의 타액을 혼합한다.	fix	lookup
+conjugation:godan-causative	お互いの体温を確かめるように、指を絡ませる。	서로의 체온을 확인하듯이, 손가락을 얽히게 한다.	fix	lookup
+conjugation:godan-causative	俺もそれに応え、舌を絡ませていく。	나도 거기에 응해 혀를 얽히게 해 간다.	fix	lookup
+conjugation:godan-causative	「……なんで髪まで絡ませているんだ？」	「……왜 머리카락까지 얽히게 하고 있는 거야?」	fix	lookup
+conjugation:godan-causative	その瞬間を逃さずに、舌を滑り込ませる。	그 순간을 놓치지 않고, 혀를 미끄러져 들어가게 한다.	fix	lookup
+conjugation:godan-causative	小太刀と入れ替わるように、ドアの内側に体を滑り込ませる。	작은 칼과 바뀌듯이, 문의 안쪽에 몸을 미끄러져 들어가게 한다.	fix	lookup
+conjugation:godan-causative	「あと何日か通わせてもらえると嬉しい」	「앞으로 며칠인가 다니게 해 줄 수 있으면 기쁘다」	fix	lookup
+conjugation:godan-causative	テーブルの端に、先端を尖らせた木の棒が見えている。	테이블의 구석에, 끝을 뾰족해지게 한 나무의 봉이 보인다.	fix	lookup
+conjugation:godan-causative	それらがアキラの指を鈍らせていた。	그것들이 아키라의 손가락을 무디어지게 하고 있었다.	fix	lookup
+conjugation:godan-causative	よし。左肩は痛むけど、何とか動かせる。	좋아. 왼쪽 어깨는 아프지만, 어떻게든 움직일 수 있다.	keep	lookup
+conjugation:godan-causative	あんな怪物みたいなもの、どうして動かせるの……？	저런 괴물 같은 것, 왜 움직일 수 있는 거야……?	keep	lookup
+conjugation:godan-causative	≪いいから、飛ばせるだけ飛ばして≫	≪됐으니까, 날릴 수 있을 만큼 날려≫	keep	lookup
+conjugation:godan-causative	食事程度ならば幾らでも贅を凝らせるだけの金もあったはずだ。	식사 정도라면 얼마든지 사치를 집중시킬 수 있을 만한 돈도 있었을 것이다.	keep	lookup
+conjugation:godan-causative	子供を笑わせた。	아이를 웃겼다.	keep	lookup
+dict:causative:karamaseru	佳奈すけが、フォークにナポリタンを絡ませる。	카나스케가, 포크에 나폴리탄을 얽히게 한다.	fix	local
+dict:causative:karamaseru	千里は、濡れた舌をペニスに絡ませた。	천리는, 젖은 혀를 페니스에 얽히게 했다.	fix	local
+dict:causative:karamaseru	葵が反対側の腕に両手を絡ませてくる。	아오이가 반대쪽의 팔에 양손을 얽히게 해 온다.	fix	local
+dict:causative:karamaseru	彼は事件に絡んでいる。	!rule:dict:causative:karamaseru	keep	local
+dict:causative:karamaseru	しつこく絡んでくる。	!rule:dict:causative:karamaseru	keep	local
+dict:causative:hikaseru	『馬車？』を引かせていた巨大なトカゲは、馬より一回りは大きかっただろうか。	『마차?』를 끌게 하고 있던 거대한 도마뱀은, 말보다 한 치수는 컸던 걸까.	fix	local
+dict:causative:hikaseru	みんなで何枚かメモに書いて敗者に引かせるってのはどうかな。	모두 몇 장이나 메모에 써 패자에게 끌게 한다고 것은 어떨까.	fix	local
+dict:causative:hikaseru	ではどぎつ〜いのを書いて圭一さんに引かせてやりますわぁ！	그럼 강렬한 것을 써 케이이치 씨에게 끌게 해 줘요!	fix	local
+dict:causative:hikaseru	ロープを引く。	!rule:dict:causative:hikaseru	keep	local
+dict:causative:hikaseru	風邪を引かせる。	!rule:dict:causative:hikaseru	keep	local
