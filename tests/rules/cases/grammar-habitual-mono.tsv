@@ -35,3 +35,11 @@ cx:habitual-mono:14	この本は毎日読んだものだ。	!rule:cx:habitual-mo
 cx:habitual-mono:14	この服はいつも着たものだ。	!rule:cx:habitual-mono:14	keep	rewrites
 cx:habitual-mono:20	これは毎日使ったものです。	!rule:cx:habitual-mono:20	keep	rewrites
 cx:habitual-mono:14	彼は毎日走ったものだ。	그는 매일 달리곤 했다.	fix	rewrites
+cx:habitual-mono:14	母によく本を読んでもらったものだ。	어머니가 자주 책을 읽어 주곤 했다.	fix	rewrites
+cx:habitual-mono:14	友達にいつも写真を撮ってもらったものだ。	친구가 언제나 사진을 찍어 주곤 했다.	fix	rewrites
+cx:habitual-mono:14	昔はよく泣いてしまったものだ。	옛날은 자주 울어버리곤 했다.	fix	rewrites
+cx:habitual-mono:14	昔はよく遊んでくれたものだ。	옛날은 자주 놀아 주곤 했다.	fix	rewrites
+cx:habitual-mono:10	母によく本を読んでもらったものだ。	rule:cx:habitual-mono:10=자주	fix	rewrites
+cx:habitual-mono:14	母に本を読んでもらったものだ。	어머니가 책을 읽어 준 것이다.	keep	rewrites
+cx:habitual-mono:14	この本は毎日読んでもらったものだ。	이 책은 매일 읽어 준 것이다.	keep	rewrites
+cx:habitual-mono:10	よく考えてみたものだ。	!rule:cx:habitual-mono:10	keep	rewrites

@@ -263,6 +263,8 @@ constexpr NamedFeature kFeatures[] = {
     {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
     {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
+    // A dictionary word that is the passive of a dictionary verb (書かれ, 使われ, 見られ; PassiveBaseVerb).
+    {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
     {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
     // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
@@ -506,18 +508,22 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"take-target", CxVerb::TakeTarget},
         {"set-target", CxVerb::SetTarget},
         {"append-target", CxVerb::AppendTarget},
+        {"prepend-target", CxVerb::PrependTarget},
         {"set-ending", CxVerb::SetEnding},
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
+        {"map-ending-tail", CxVerb::MapEndingTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
         {"set-verb", CxVerb::SetVerb},
+        {"set-verb-from", CxVerb::SetVerbFrom},
         {"copy-ending", CxVerb::CopyEnding},
         {"copy-word", CxVerb::CopyWord},
         {"set-sound", CxVerb::SetSound},
         {"set-active", CxVerb::SetActive},
         {"clip-ending", CxVerb::ClipEnding},
+        {"set-base-verb", CxVerb::SetBaseVerb},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -541,7 +547,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail("unknown action");
             break;
         }
-        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap) {
+        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap ||
+            a.verb == CxVerb::MapEndingTail) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -557,7 +564,8 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         }
         const char* bad = nullptr;
         if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
-            a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding) {
+            a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding ||
+            a.verb == CxVerb::SetBaseVerb) {
             out.push_back(std::move(a));
             continue;
         }
@@ -565,7 +573,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
         }
-        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail) &&
+        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail || a.verb == CxVerb::SetVerbFrom) &&
             (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
             tokens.Fail(bad != nullptr ? bad : "a replace action takes the old and the new text");
             break;
@@ -644,10 +652,41 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
 
 }  // namespace
 
+namespace {
+
+// A condition with each token :NAME replaced by the condition named so (a //: line above it).
+bool ExpandNamed(std::string_view text, const std::vector<std::pair<std::string, std::string>>& named, std::string& out,
+                 std::string& error) {
+    out.clear();
+    rules::Tokens tokens(text);
+    for (std::string_view token; !tokens.AtEnd();) {
+        if (!tokens.Next(token)) {
+            error = tokens.error != nullptr ? tokens.error : "bad token";
+            return false;
+        }
+        if (!out.empty()) out += ' ';
+        if (!token.starts_with(':')) {
+            out += token;
+            continue;
+        }
+        const auto it = std::ranges::find(named, token.substr(1), &std::pair<std::string, std::string>::first);
+        if (it == named.end()) {
+            error = "no named condition " + std::string(token);
+            return false;
+        }
+        out += it->second;
+    }
+    return true;
+}
+
+}  // namespace
+
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes) {
     ConstructionTable t;
     std::unordered_map<std::string_view, std::size_t> families;
     std::vector<std::string> ids;
+    std::vector<std::pair<std::string, std::string>> named;  // //: NAME <TAB> CONDITION, expanded
+    std::string expanded, expandError;
     const auto fail = [&](int line, std::string message) { t.errors.push_back({line, std::move(message)}); };
     int number = 0;
     for (const std::string_view raw : lines) {
@@ -692,6 +731,33 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
             continue;
         }
+        if (line.starts_with("//:")) {
+            std::string_view head = line.substr(3);
+            while (head.starts_with(' ')) head.remove_prefix(1);
+            const std::vector<std::string_view> f = SplitTabs(head);
+            if (f.size() != 3 || !FamilyName(f[0]) || f[1].empty() || f[2].empty()) {
+                fail(number, "a named condition is //: NAME <TAB> CONDITION <TAB> what it is for");
+                continue;
+            }
+            if (std::ranges::find(named, f[0], &std::pair<std::string, std::string>::first) != named.end()) {
+                fail(number, "a second line for the condition " + std::string(f[0]));
+                continue;
+            }
+            if (!ExpandNamed(f[1], named, expanded, expandError)) {
+                fail(number, "condition: " + expandError);
+                continue;
+            }
+            // The body is one expression, so that it counts as one operand where it is named.
+            ConstructionTable scratch;
+            CxSink sink(scratch);
+            rules::Tokens tokens(expanded);
+            if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
+                fail(number, std::string("condition: ") + (tokens.error != nullptr ? tokens.error : "more than one expression"));
+                continue;
+            }
+            named.emplace_back(f[0], expanded);
+            continue;
+        }
         if (line.starts_with("//")) continue;
         const std::vector<std::string_view> f = SplitTabs(line);
         if (f.size() != 5 || f[2].empty() || f[3].empty()) {
@@ -715,8 +781,12 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, "a second row " + std::string(id));
             continue;
         }
+        if (!ExpandNamed(f[2], named, expanded, expandError)) {
+            fail(number, "condition: " + expandError);
+            continue;
+        }
         CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, number};
-        rules::Tokens tokens(f[2]);
+        rules::Tokens tokens(expanded);
         CxSink sink(t);
         if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
             fail(number, std::string("condition: ") + (tokens.error != nullptr ? tokens.error : "trailing tokens"));
@@ -992,6 +1062,9 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             it->appended += a.value;
             it->choice = source;
             break;
+        case internal::CxVerb::PrependTarget:
+            it->AssignEntrySurface(it->selected, a.value + std::string(it->EntryText(it->selected)), source);
+            break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
         case internal::CxVerb::ClipEnding: {
             // The mark after the ending, or after the word that has none; the restore stage writes it
@@ -1019,6 +1092,20 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const Entry* e = it->DirectEntry(it->DirectIndex());
             if (e != nullptr && e->dst.ends_with(a.value)) {
                 it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - a.value.size()) + a.with, source);
+            }
+            break;
+        }
+        case internal::CxVerb::MapEndingTail: {
+            // The longest tail of the map that the ending's Korean ends in is replaced by its pair.
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e == nullptr) break;
+            const std::pair<std::string, std::string>* best = nullptr;
+            for (const auto& pair : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (e->dst.ends_with(pair.first) && (best == nullptr || pair.first.size() > best->first.size())) best = &pair;
+            }
+            if (best != nullptr) {
+                it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - best->first.size()) + best->second,
+                                     source);
             }
             break;
         }
@@ -1052,12 +1139,29 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         case internal::CxVerb::SetVerb:
             it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
             break;
+        case internal::CxVerb::SetVerbFrom: {
+            // A translation that ends in the old tail is the verb whose dictionary form is its head
+            // and the new tail (기다리게 &C6@ with "게 &C6@" "다" is 기다리다).
+            const std::string_view target = it->EntryText(it->selected);
+            if (target.size() > a.value.size() && target.ends_with(a.value)) {
+                const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
+                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, '&', "", f.families).target, source);
+            }
+            break;
+        }
         case internal::CxVerb::SetActive:
-            // The verb is written in the active voice: its Korean without the passive.
-            if (it->DetailRecord() == 1) {
+            // The verb is written in the active voice: its Korean without the passive or the
+            // causative-passive (읽혀지다, 읽게 되다 → 읽다).
+            if (it->DetailRecord() == 1 || it->DetailRecord() == 5) {
                 it->detail->record = 0;
                 if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
                 it->choice = source;
+            }
+            break;
+        case internal::CxVerb::SetBaseVerb:
+            // A dictionary word read as the passive of a verb is written as that verb (PassiveBaseVerb).
+            if (std::string verb = PassiveBaseVerb(f, it->group->surface); !verb.empty()) {
+                it->AssignEntrySurface(it->selected, verb, source);
             }
             break;
         case internal::CxVerb::SetSound: {

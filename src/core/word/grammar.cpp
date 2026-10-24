@@ -1081,6 +1081,13 @@ void DecideVoice(Flusher& f) {
     }
 }
 
+std::string PassiveBaseVerb(Flusher& f, std::string_view surface) {
+    bool transitive = false;
+    std::string plain;
+    BaseVerbTarget(f, surface, transitive, plain);
+    return plain;
+}
+
 void RespectfulPassive(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->group->entries.empty() || it->selected < 0 || it->lexical) continue;

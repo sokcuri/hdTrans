@@ -25,7 +25,7 @@ cx:return-to:20	それ以外に戻る理由ないっすよ？	!rule:cx:return-to
 cx:return-to:20	すぐに戻ります。	곧바로 돌아옵니다.	keep	rewrites
 cx:return-to:20	無事に戻った。	무사히 돌아왔다.	keep	rewrites
 cx:return-to:20	部屋に戻ってきた。	방으로 돌아왔다.	keep	rewrites
-cx:return-to:10	仕事に戻れ。	일로 돌아와라.	keep	rewrites
+cx:return-to:20	仕事に戻れ。	일로 돌아가라.	fix	rewrites
 cx:return-to:15	こっちに戻ってるって	여기로 돌아와 있다고	fix	rewrites
 cx:return-to:15	ちょっと前にもうこっちの世界に戻って来てた	조금 전에 이제 여기의 세계로 돌아왔다	fix	rewrites
 cx:return-to:15	我が精鋭艦隊が母港に戻りました	우리 정예 함대가 모항으로 돌아왔습니다	fix	rewrites
@@ -38,3 +38,10 @@ cx:return-to:20	城に戻ってこの手紙を渡せ。	성으로 돌아가 이 
 cx:return-to:20	城に戻るこの道は長い。	성으로 돌아가는 이 길은 길다.	keep	rewrites
 cx:return-to:15	すぐに美浜に戻って来れた。	rule:cx:return-to:15=(으)로	fix	rewrites
 cx:return-to:15	車に戻ったんだよここも誰もいねーけど	rule:cx:return-to:15=(으)로	fix	rewrites
+cx:return-to:20	ステージ選択に戻ります。	스테이지 선택으로 돌아갑니다.	fix	rewrites
+cx:return-to:20	作業に戻ろう。	작업으로 돌아가자.	fix	rewrites
+cx:return-to:20	後ろに戻る。	뒤로 돌아간다.	fix	rewrites
+cx:return-to:20	練習に戻った。	연습으로 돌아갔다.	fix	rewrites
+cx:return-to:15	作業に戻ってきた。	작업으로 돌아왔다.	keep	rewrites
+cx:return-to:20	昼に戻ります。	!rule:cx:return-to:20	keep	rewrites
+cx:return-to:20	どうにか正気に戻った私は	어떻게든 제정신으로 돌아온 나는	keep	rewrites

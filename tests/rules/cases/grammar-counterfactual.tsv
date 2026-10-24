@@ -3,11 +3,11 @@ rule	input	expected	kind	layer
 cx:counterfactual-past:10	雨が降っていなければ、試合は中止にならなかった。	비가 오지 않았더라면, 시합은 중지가 되지 않았다.	fix	rewrites
 cx:counterfactual-past:10	もっと正確に計算出来てれば、また別のことも考えられたのに……	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
 cx:counterfactual-past:10	たしかに、あそこでみんながバラバラになってなければ、もっと有利な展開だったかもしれない。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
-cx:counterfactual-past:10	もし貫通力の高い弾丸を使っていれば命はなかった。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	もし貫通力の高い弾丸を使っていれば命はなかった。	만약 관통력의 높은 탄환을 썼더라면 생명은 없었다.	fix	rewrites
 cx:counterfactual-past:10	ヘイディオの犯行声明がなければ、世界大戦が起こっていても不思議ではなかった	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
 cx:counterfactual-past:10	君がいなければ、僕は死んでいた。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
 cx:counterfactual-past:10	もっと早く来ていれば間に合ったのに。	좀 더 빨리 와 있었더라면 늦지 않았는데.	fix	rewrites
-cx:counterfactual-past:10	あの時勉強していれば、合格できただろう。	rule:cx:counterfactual-past:10=5더라면	fix	rewrites
+cx:counterfactual-past:10	あの時勉強していれば、合格できただろう。	그 때 공부했더라면, 합격할 수 있었을 것이다.	fix	rewrites
 cx:counterfactual-past:20	あと１０センチちがっていたら、僕に刺さっていたかもしれない。	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
 cx:counterfactual-past:20	もし、誰かとぶつかる可能性があるという考えを持っていれば、キミとの激突は避けられたかもしれない	rule:cx:counterfactual-past:20=5더라면	fix	rewrites
 cx:counterfactual-past:20	お金があれば買えたのに。	돈이 있었더라면 살 수 있었는데.	fix	rewrites
@@ -32,3 +32,15 @@ cx:counterfactual-past:10	パンがなければ、肉を食べればいいと笑
 cx:counterfactual-past:30	もし助けなければ、きっと後悔するんだろうと直感した。	!rule:cx:counterfactual-past:30	keep	rewrites
 cx:counterfactual-past:30	開けなければ、今度は窓の外にレンズが並んだ。	!rule:cx:counterfactual-past:30	keep	rewrites
 cx:counterfactual-past:30	私が変調を来さなければ、あなたは怪我をしなかったでしょう……？	rule:cx:counterfactual-past:30=1지 않았더라면	fix	rewrites
+cx:counterfactual-past:30	あの時急がなければ、こうはならなかった。	rule:cx:counterfactual-past:30=1지 않았더라면	fix	rewrites
+cx:counterfactual-progressive:10	もっと早く走っていれば、間に合ったのに。	좀 더 빨리 달렸더라면, 늦지 않았는데.	fix	rewrites
+cx:counterfactual-progressive:10	もっと早く起きていれば、間に合ったのに。	좀 더 일찍 일어났더라면, 늦지 않았는데.	fix	rewrites
+cx:counterfactual-progressive:10	あの時勉強していれば、合格できただろう。	그 때 공부했더라면, 합격할 수 있었을 것이다.	fix	rewrites
+cx:counterfactual-progressive:10	知っていれば、止めたのに。	!rule:cx:counterfactual-progressive:10	keep	rewrites
+cx:counterfactual-progressive:10	生きていれば、会えたのに。	살아 있었더라면, 만날 수 있었는데.	keep	rewrites
+cx:counterfactual-progressive:10	勉強していれば、合格できる。	공부하고 있으면, 합격할 수 있다.	keep	rewrites
+cx:counterfactual-progressive:20	もっと早く出発していれば、間に合ったのに。	좀 더 빨리 출발했더라면, 늦지 않았는데.	fix	rewrites
+cx:counterfactual-progressive:20	準備していれば、間に合ったのに。	준비했더라면, 늦지 않았는데.	fix	rewrites
+cx:counterfactual-progressive:20	もし傘を持っていれば、濡れなかった。	만약 우산을 가지고 있었더라면, 젖지 않았다.	keep	rewrites
+cx:counterfactual-progressive:20	毎日練習していれば、上手になる。	!rule:cx:counterfactual-progressive:20	keep	rewrites
+cx:counterfactual-progressive:20	もっと早く来ていれば間に合ったのに。	좀 더 빨리 와 있었더라면 늦지 않았는데.	keep	rewrites

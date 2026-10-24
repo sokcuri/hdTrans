@@ -65,6 +65,10 @@ bool OpensLine(const Worker& w, const Item* it);
 bool AfterRestart(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
+// The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its
+// default record first; "" when there is none or the verb is one whose passive stays passive with an
+// object (verb.passive-any-object, verb.passive-after-object, verb.receiver-passive) (grammar.cpp).
+std::string PassiveBaseVerb(Flusher& f, std::string_view surface);
 // Whether the item starts with a verb of saying or thinking, or is 聞く (grammar.cpp).
 bool QuoteVerbFollows(const Item* it);
 // Whether the item is followed by the end of the text, by closing punctuation (！？。」』）) or by a

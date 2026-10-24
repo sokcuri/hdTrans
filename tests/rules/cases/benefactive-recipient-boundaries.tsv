@@ -32,7 +32,7 @@ dict:plain-wakeru	パンを分ける。	빵을 나눈다.	keep	lookup
 dict:plain-wakeru	二つに分ける。	두 개로 나눈다.	keep	lookup
 dict:plain-oshieru	料理を教える。	요리를 가르친다.	keep	lookup
 dict:plain-oshieru	先生の教えを守る。	선생님의 가르침을 지킨다.	keep	lookup
-dict:competing-benefactive	友人に手伝ってもらった。	친구에게 도움을 받았다.	keep	lookup
+dict:competing-benefactive	友人に手伝ってもらった。	친구가 도와 주었다.	keep	lookup
 dict:competing-desire	自分で料理を教えたい。	스스로 요리를 가르치고 싶다.	keep	lookup
 dict:standalone-negative	友人から本をもらわなかった。	친구에게서 책을 받지 않았다.	keep	lookup
 dict:standalone-negative	友人から本をもらえません。	친구에게서 책을 받을 수 없습니다.	keep	lookup
