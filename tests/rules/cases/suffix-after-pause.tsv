@@ -1,6 +1,6 @@
 # 규칙: LEX-16
 rule	input	expected	kind	layer
-G30	転移先……人の少ない場所って希望したけど	전이처……사람이 적은 장소는 희망했지만	fix	defaults
+G30	転移先……人の少ない場所	전이할 곳……사람이 적은 장소	fix	defaults
 G30	艦隊…戦、か…行きます！	함대…전, 가…갑니다!	keep	defaults
 G30	海、港、街…力が尽きるまでお守りします。	해, 항구, 거리…힘이 다할 때까지 수호합니다.	fix	defaults
 G30	ん…海はやっぱりいいな。	응…바다는 역시 좋네.	keep	defaults

@@ -100055,7 +100055,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上井草	카미구사	N130	QCTVPl		GN				jisjk:283511		
 上井覚兼	우와이 가쿠켄	N110	VHn		GN				jisjk:211863		
 上井足	카미다니	N130	QCTVPl		GN				jisjk:283572		
-上京	상경	N110		HdHi	GN				jisjk:25673		
+上京	상경	N110	UMv	HdHi	GN				jisjk:25673		
 上京区	카미교구	I130	QCTVPl	Qq	GN				jisjk:73348		
 上京塚町	카미쿄즈카마치	I130	QCTVPl		GN				jisjk:284157		
 上京町	카미쿄마치	N130	QCTVPl		GN				jisjk:284159		
@@ -116182,7 +116182,7 @@ ttt	ttt	K110			GN				jisjk:201744
 亡八	유곽	N110	VBl		GN				jisjk:251348		
 亡友	죽은 친구	N110			GN				jisjk:99430		
 亡君	망군	N110	VHn		GN				jisjk:251271		
-亡命	망명	N110		Hd	GN				jisjk:21406		
+亡命	망명	N110	UMv	Hd	GN				jisjk:21406		
 亡命政権	망명 정권	N110	VPl		GN				jisjk:251362		
 亡命文学	망명문학	N110			GN				jisjk:251363		
 亡命者	망명자	N110	VHn		GN				jisjk:155083		
@@ -134659,7 +134659,7 @@ ttt	ttt	K110			GN				jisjk:201744
 出張ギャグマン	출장 개그맨	N110	UAq		GN				jisjk:202911		
 出張中	출장중	N110	UMe		GN				jisjk:190128		
 出張代	출장비	N110			GN				jisjk:190126		
-出張先	출장처	I110	VPl		GN				jisjk:86725		
+出張先	출장지	I110	VPl		GN				jisjk:86725		
 出張所	출장소	N110	VMoVBl		GN				jisjk:190124		
 出征	출정	N110		Hd	GN				jisjk:36353		
 出後	이즈고	N130	QCTVPl		GN				jisjk:272333		
@@ -201975,7 +201975,7 @@ ttt	ttt	K110			GN				jisjk:201744
 引っ繰り返	뒤집&AW@	M418			GN				jisjk:94513		
 引っ被	뒤집어 &AF@	M438	VAc		GN				jisjk:94516		
 引っ越	이사&AV@	M413			GN	779	||2 &&3 S-1== "に" ||2 S-2== "R間" S-2== "R時" D-1= "에" &&4 S-1== "に" P-2== "1**" A-2== "VPl" D-1= "(으)로"	引っ越 앞의 に가 間·時로 끝나는 말에 붙으면 에로 바꾸고 장소 명사에 붙으면 으로로 바꾸어 이사하다를 고른다. (미발동: rare-context)	jisjk:94511		
-引っ越し	이사	N110			GN				jisjk:80209		
+引っ越し	이사	N110	UMv		GN				jisjk:80209		
 引っ越しの日	이삿날	N110	UMe		GN				jisjk:203710		
 引っ越し会社	이삿짐 센터	N110	VBl		GN				jisjk:154346		
 引っ越し屋	이삿짐 센터	N110			GN				jisjk:265288		
@@ -202130,10 +202130,10 @@ ttt	ttt	K110			GN				jisjk:201744
 引谷	히쿠타니	N130	QCTVPl		GN				jisjk:324063		
 引責	인책	N110		Hd	GN				jisjk:126466		
 引起され	일으켜&AL@	M427			GN				jisjk:142816		
-引越	이사	N110	XXX		GN				jisjk:264607		
+引越	이사	N110	XXXUMv		GN				jisjk:264607		
 引越	이사 &A1@	M429			GN				jisjk:267814		
 引越	힛코시	N130	QCTVPl		GN				jisjk:324347		
-引越し	이사	N110		Hd	GN				jisjk:114611		
+引越し	이사	N110	UMv	Hd	GN				jisjk:114611		
 引越し	이사&AV@	M429			GN				jisjk:344236		
 引越専門協同組合	이사전문협동조합	I110			GN				jisjk:110241		
 引込み作業	인입작업	N110			GN				jisjk:162261		
@@ -263890,7 +263890,7 @@ ttt	ttt	K110			GN				jisjk:201744
 渡米	도미	N110		Hd	GN				jisjk:19335		
 渡線橋	육교	N110			GN				jisjk:245941		
 渡美	도미	N110	QNN		GN				jisjk:19336		
-渡航	도항	N110		HdHi	GN				jisjk:19343		
+渡航	도항	N110	UMv	HdHi	GN				jisjk:19343		
 渡航者	도항자	N110	VHn		GN				jisjk:354279		
 渡船	나룻배	N110			GN				jisjk:19339		
 渡船場	나루터	N110	VPl		GN				jisjk:153755		
@@ -277846,7 +277846,7 @@ ttt	ttt	K110			GN				jisjk:201744
 異俗	색다른 풍속	N110			GN				jisjk:125538		
 異分子	이단자	I110			GN				jisjk:80014		
 異分野	타분야	N110	VPl		GN				jisjk:160504		
-異動	이동	N110		Hd	GN				jisjk:31186		
+異動	이동	N110	UMv	Hd	GN				jisjk:31186		
 異化	이화	N110			GN				jisjk:31221		
 異化作用	이화 작용	N110			GN				jisjk:125189		
 異化効果	이화 효과	N110	UAr		GN				jisjk:227955		
@@ -278079,7 +278079,7 @@ ttt	ttt	K110			GN				jisjk:201744
 疎遠	소원%A1@	G8L0			GN				jisjk:3227		
 疎遠	소원	N110	UFl		GN				jisjk:3228		
 疎遠と	소원하게	E300			GN				jisjk:358363		
-疎開	피난	N110		Hd	GN				jisjk:101029		
+疎開	피난	N110	UMv	Hd	GN				jisjk:101029		
 疎開船	피난선	I110			GN				jisjk:101030		
 疎隔	소원	N110		Hd	GN				jisjk:200576		
 疎音	격조	N110			GN				jisjk:239913		
@@ -290407,12 +290407,12 @@ ttt	ttt	K110			GN				jisjk:201744
 移ろい	변화	N110	UMe	Hd	GN				jisjk:126959		
 移乗	이승	N110	VTp	Hd	GN				jisjk:125483		
 移付	이관	N110	ULw	Hd	GN				jisjk:126144		
-移住	이주	N110		Hd	GN				jisjk:31234		
+移住	이주	N110	UMv	Hd	GN				jisjk:31234		
 移住民	이주민	I110	VHn		GN				jisjk:80023		
 移入	이입	N110		Hd	GN				jisjk:31231		
 移出	이출	N110			GN				jisjk:31235		
 移出課税	이출과세	N110			BZ				jisjk:361853		
-移動	이동	N110		HdHi	GN				jisjk:31223		
+移動	이동	N110	UMv	HdHi	GN				jisjk:31223		
 移動しようと	이동하려고 &AV@	M429			GN				jisjk:144739		
 移動わく	이동범위	N110	VPl		GN				jisjk:164136		
 移動体	이동체	N110			BZ				jisjk:348931		
@@ -290452,7 +290452,7 @@ ttt	ttt	K110			GN				jisjk:201744
 移植ごて	꽃삽	N110	VPe		GN				jisjk:204472		
 移植免疫	이식 면역	N110	QHP		GN				jisjk:228174		
 移殖	이식	N110		Hd	GN				jisjk:351210		
-移民	이민	N110		Hd	BZ				jisjk:31224		
+移民	이민	N110	UMv	Hd	BZ				jisjk:31224		
 移民制限政策	이민 제한 정책	N110			BZ				jisjk:347955		
 移民周旋人	이민 중개인	N110			BZ				jisjk:348873		
 移民流入規制	이민유입규제	N110			GN				jisjk:362359		
@@ -290462,7 +290462,7 @@ ttt	ttt	K110			GN				jisjk:201744
 移管	이관	N110		Hd	GN				jisjk:31222		
 移管債権	이관채권	N110	VMo		BZ				jisjk:361829		
 移築	이축	N110	VBl	Hd	GN				jisjk:125627		
-移籍	이적	N110		Hd	GN				jisjk:31232		
+移籍	이적	N110	UMv	Hd	GN				jisjk:31232		
 移籍金	이적금	N110			GN				jisjk:125511		
 移行	이행	N110		Hd	GN				jisjk:31236		
 移行しえ	이행할 수 &HN@	M447			GN				jisjk:143433		
@@ -290474,12 +290474,12 @@ ttt	ttt	K110			GN				jisjk:201744
 移調	조옮김	N110	USoQMU	Hd	GN				jisjk:125768		
 移調楽器	이조 악기	N110	VPeUSoQMU		GN				jisjk:228443		
 移譲	이양	N110		Hd	GN				jisjk:125485		
-移転	이전	N110		Hd	GN				jisjk:31233		
+移転	이전	N110	UMv	Hd	GN				jisjk:31233		
 移転価格	이전 가격	N110	VMo		BZ				jisjk:228582		
 移転価格操作	이전가격 조작	N110			BZ				jisjk:348895		
 移転価格税制	이전가격 세제	N110			BZ				jisjk:348192		
 移転促進地域	이전촉진지역	N110	VPl		BZ				jisjk:360596		
-移転先	이전처	I110	VPl		GN				jisjk:80022		
+移転先	이전할 곳	I110	VPl		GN				jisjk:80022		
 移転加重平均	이전 가중평균	N110			BZ				jisjk:348890		
 移転収支	이전 수지	N110	VMo		BZ				jisjk:228583		
 移転平均	이전 평균	N110			BZ				jisjk:348887		
@@ -333167,7 +333167,7 @@ ttt	ttt	K110			GN				jisjk:201744
 転動	전동	N110		Hd	GN				jisjk:162842		
 転動しえ	전동할 수 &HN@	M447			GN				jisjk:142962		
 転動し得	전동할 수 &HN@	M447			GN				jisjk:142959		
-転勤	전근	N110		Hd	GN				jisjk:32874		
+転勤	전근	N110	UMv	Hd	GN				jisjk:32874		
 転勤さん	전근한 사람	K110	VHn		GN				jisjk:345358		
 転勤先	전근지	N110	VPl		GN				jisjk:160237		
 転勤者	전근자	N110	VMoVHn		GN				jisjk:151454		
@@ -333198,8 +333198,8 @@ ttt	ttt	K110			GN				jisjk:201744
 転寝	등걸잠	N110			GN				jisjk:184101		
 転寝を	등걸잠을 &AK@	M429			GN				jisjk:120098		
 転封	다이묘의 소령	N110			GN				jisjk:244882		
-転居	이사	N110		Hd	GN				jisjk:153620		
-転居先	이사처	N110	VPl		GN				jisjk:160991		
+転居	이사	N110	UMv	Hd	GN				jisjk:153620		
+転居先	이사할 곳	N110	VPl		GN				jisjk:160991		
 転居届	이전신고	N110			GN				jisjk:366414		
 転属	전속	N110		Hd	GN				jisjk:32883		
 転帰	전귀	N110			GN				jisjk:244651		
@@ -333220,7 +333220,7 @@ ttt	ttt	K110			GN				jisjk:201744
 転換社債ファンド	전환 사채 펀드	N110			BZ				jisjk:354086		
 転換組	전환 그룹	N110			GN				jisjk:153616		
 転換線	전환선	N110			BZ				jisjk:357063		
-転校	전학	N110		Hd	GN				jisjk:153622		
+転校	전학	N110	UMv	Hd	GN				jisjk:153622		
 転校	전학&A1@	M419			GN				jisjk:262367		
 転業	전업	N110		Hd	GN				jisjk:32886		
 転機	전환기	N110	UMe		GN				jisjk:32875		
@@ -333228,7 +333228,7 @@ ttt	ttt	K110			GN				jisjk:201744
 転流	전류	N110	VEl		GN				jisjk:244919		
 転炉	전로	N110	VPe		GN				jisjk:244930		
 転炉スラグ	전로 슬러그	N110			BZ				jisjk:361604		
-転生	전생	N110		Hd	GN				jisjk:32882		
+転生	전생	N110	UMv	Hd	GN				jisjk:32882		
 転生霊童	전생영동	N110	UCl		BZ				jisjk:359928		
 転用	전용	N110		Hd	GN				jisjk:32887		
 転用大衆薬	전용 대중약	N110	VMd		BZ				jisjk:359596		
@@ -333236,7 +333236,7 @@ ttt	ttt	K110			GN				jisjk:201744
 転石	전석	N110	VSn		GN				jisjk:244751		
 転禍為福	전화위복	I110			GN				jisjk:82926		
 転科	전과	N110		Hd	GN				jisjk:32873		
-転移	전이	N110		Hd	GN				jisjk:32889		
+転移	전이	N110	UMv	Hd	GN				jisjk:32889		
 転移 RNA	전이 RNA	N110			GN				jisjk:244628		
 転移点	전이점	N110			GN				jisjk:244627		
 転結	전결	N110			GN				jisjk:244674		
