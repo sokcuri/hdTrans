@@ -16,6 +16,7 @@
 //= copula.short-so-sentence	The copula forms of copula.short-so-final that also need the start of a sentence, not a comma, before そ (そだった。; not 大きく、そだった, 育った).
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
+//= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
@@ -82,6 +83,7 @@
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
 //= particle.phrase	Particles that, after the first character of an item, make a phrase that starts with a noun.
+//= particle.see-te-keep	Particles and final particles after the て of 見る before which it stays the 어 of a て form, not the 고 of an action done first (見てはいけない, 見てよ).
 //= particle.title-phrase	Case particles that, between two kanji or katakana of a name-layer key, make the key a phrase that reads as a title only standing apart (星に願いを, 世界を救う).
 //= particle.wonder	The particles a question word may run on with in one word (何を, 誰の, どこへ, いつから).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
@@ -297,6 +299,12 @@ ending.conjunctive	から
 ending.conjunctive	ので
 ending.conjunctive	のに
 ending.conjunctive	ながら
+ending.negative-start	な
+ending.negative-start	ね
+ending.negative-start	ませ
+ending.negative-start	ず
+ending.negative-start	ぬ
+ending.negative-start	ん
 
 ending.rare-passive	てい
 ending.rare-passive	てる
@@ -1409,6 +1417,19 @@ particle.phrase	と
 particle.phrase	も
 particle.phrase	へ
 particle.phrase	の
+particle.see-te-keep	は
+particle.see-te-keep	も
+particle.see-te-keep	を
+particle.see-te-keep	が
+particle.see-te-keep	の
+particle.see-te-keep	に
+particle.see-te-keep	と
+particle.see-te-keep	で
+particle.see-te-keep	や
+particle.see-te-keep	か
+particle.see-te-keep	よ
+particle.see-te-keep	ね
+particle.see-te-keep	な
 
 particle.title-phrase	を
 particle.title-phrase	に

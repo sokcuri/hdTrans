@@ -7,7 +7,9 @@
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/codes.h"
+#include "core/output/compose.h"
 #include "core/output/korean.h"
+#include "core/output/particle.h"
 #include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/tokenizer/classify.h"
@@ -71,6 +73,40 @@ constexpr NamedFeature kFeatures[] = {
          const char32_t r = text::DecodeRune(it->group->surface).cp;
          return text::IsLetter(r) || text::IsDigit(r);
      }},
+    // The surface is katakana only, with ー (KatakanaSurface).
+    {"katakana", [](Flusher&, const Item* it) { return KatakanaSurface(it->group->surface); }},
+    // The Korean of the selected candidate is empty or spaces.
+    {"blank", [](Flusher&, const Item* it) { return TrimSpace(it->EntryText(it->selected)).empty(); }},
+    // The Korean lemma of the selected candidate ends in a final consonant (어떤 것, 책).
+    {"final-consonant",
+     [](Flusher& f, const Item* it) {
+         const char c = output::ParticleClass(ItemLemma(f, it, it->selected));
+         return c == 'c' || c == 'l';
+     }},
+    // The Korean of the selected candidate is in a copula family (큰일$AH@, output::CopulaTarget).
+    {"copula-target", [](Flusher& f, const Item* it) { return output::CopulaTarget(it->EntryText(it->selected), f.families); }},
+    // The word is a みたい that can follow a clause (Item::MitaiLike).
+    {"mitai-like", [](Flusher&, const Item* it) { return it->MitaiLike(); }},
+    // A contrast goes on after the stem: ではないが (ContrastFollows).
+    {"contrast", [](Flusher&, const Item* it) { return ContrastFollows(it); }},
+    // The item ends the utterance or the quote (QuoteEnd); UtteranceEnd also passes over a comma,
+    // a dash or a small つ.
+    {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
+    {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
+    // A verb follows in the sentence, not an auxiliary of the て form (PredicateFollows).
+    {"predicate-follows", [](Flusher&, const Item* it) { return PredicateFollows(it); }},
+    // The verb was analysed with no passive, potential or causative.
+    {"plain-voice", [](Flusher&, const Item* it) { return it->detail->record == 0; }},
+    // A noun that the word describes follows it in its token (DescribedNoun).
+    {"described-noun", [](Flusher& f, const Item* it) { return DescribedNoun(f.w, it); }},
+    // The Korean lemma is one of ko-verb.holding or a phrase that ends in one (이를 악물다).
+    {"holding-verb",
+     [](Flusher& f, const Item* it) {
+         const std::string lemma = ItemLemma(f, it, it->selected);
+         return std::ranges::any_of(dict::ClassMembers("ko-verb.holding"), [&](std::string_view v) {
+             return lemma == v || (lemma.ends_with(v) && std::string_view(lemma).substr(0, lemma.size() - v.size()).ends_with(" "));
+         });
+     }},
     // The surface holds a hiragana.
     {"hiragana",
      [](Flusher&, const Item* it) {
@@ -94,12 +130,14 @@ constexpr FieldSpelling kFields[] = {
     {'U', CxField::EndingSurface}, {'Y', CxField::EndingTarget}, {'B', CxField::Word},
     {'I', CxField::Text},    {'H', CxField::Head},          {'F', CxField::Feature},
     {'C', CxField::Candidate}, {'G', CxField::Gram},        {'O', CxField::FirstWord},
+    {'T', CxField::Tail},
 };
 
 bool SetField(CxField field) {
     return field == CxField::Surface || field == CxField::Lemma || field == CxField::Target ||
            field == CxField::EndingSurface || field == CxField::EndingTarget || field == CxField::Text ||
-           field == CxField::Head || field == CxField::Word || field == CxField::Candidate || field == CxField::FirstWord;
+           field == CxField::Head || field == CxField::Word || field == CxField::Candidate || field == CxField::FirstWord ||
+           field == CxField::Tail;
 }
 
 // The nodes and atoms of one condition appended to a table.
@@ -184,9 +222,17 @@ bool FamilyName(std::string_view s) {
 
 bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::vector<CxAction>& out, const char*& error) {
     constexpr std::pair<std::string_view, CxVerb> kVerbs[] = {
-        {"select-lemma", CxVerb::SelectLemma}, {"take-target", CxVerb::TakeTarget}, {"set-target", CxVerb::SetTarget},
-        {"set-ending", CxVerb::SetEnding},     {"replace-head", CxVerb::ReplaceHead}, {"map-lemma", CxVerb::MapLemma},
-        {"map-target", CxVerb::MapTarget},     {"set-verb", CxVerb::SetVerb},
+        {"select-lemma", CxVerb::SelectLemma},
+        {"select-target", CxVerb::SelectTarget},
+        {"take-target", CxVerb::TakeTarget},
+        {"set-target", CxVerb::SetTarget},
+        {"set-ending", CxVerb::SetEnding},
+        {"replace-head", CxVerb::ReplaceHead},
+        {"replace-ending-tail", CxVerb::ReplaceEndingTail},
+        {"map-lemma", CxVerb::MapLemma},
+        {"map-target", CxVerb::MapTarget},
+        {"select-map", CxVerb::SelectMap},
+        {"set-verb", CxVerb::SetVerb},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -210,7 +256,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail("unknown action");
             break;
         }
-        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget) {
+        if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -229,8 +275,9 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             tokens.Fail(bad != nullptr ? bad : "an action takes a string literal");
             break;
         }
-        if (a.verb == CxVerb::ReplaceHead && (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
-            tokens.Fail(bad != nullptr ? bad : "replace-head takes the old and the new head");
+        if ((a.verb == CxVerb::ReplaceHead || a.verb == CxVerb::ReplaceEndingTail) &&
+            (!tokens.Next(literal) || !rules::AppendLiteral(literal, a.with, bad))) {
+            tokens.Fail(bad != nullptr ? bad : "a replace action takes the old and the new text");
             break;
         }
         out.push_back(std::move(a));
@@ -238,6 +285,71 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
     error = tokens.error;
     if (error == nullptr && out.empty()) error = "no action";
     return error == nullptr;
+}
+
+// Adds to keys the surfaces one of which the word must have for the condition at node i to hold;
+// false when it needs none: an atom S+0== with an exact surface or a class, a list && or & with
+// such an operand (the one with the fewest), or a list || of such operands only.
+bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string_view>& keys) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) {
+        const CxAtom& a = t.atoms[n.count];
+        if (a.field != CxField::Surface || a.delta != 0 || a.negated) return false;
+        if (a.match == CxMatch::Member) {
+            keys.insert(keys.end(), a.set->members.begin(), a.set->members.end());
+            return true;
+        }
+        if (a.match != CxMatch::Literal) return false;
+        const std::string_view v = a.value;
+        if (v.starts_with("99")) {
+            keys.push_back(v.substr(2));
+            return true;
+        }
+        for (const std::string_view marker : {"L", "R", "11", "22", "00"}) {
+            if (v.starts_with(marker)) return false;
+        }
+        if (v.size() > 1 && v[0] == '~') return false;
+        keys.push_back(v);
+        return true;
+    }
+    if (n.kind != rules::BodyKind::Or && n.kind != rules::BodyKind::And && n.kind != rules::BodyKind::AndAll) return false;
+    bool found = false;
+    std::vector<std::string_view> best, own;
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) {
+        own.clear();
+        const bool has = SurfaceKeys(t, child, own);
+        if (n.kind == rules::BodyKind::Or) {
+            if (!has) return false;
+            best.insert(best.end(), own.begin(), own.end());
+            found = true;
+        } else if (has && (!found || own.size() < best.size())) {
+            best = own;
+            found = true;
+        }
+    }
+    if (found) keys.insert(keys.end(), best.begin(), best.end());
+    return found;
+}
+
+// Fills the surface index of family c.
+void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+    std::vector<std::vector<std::string_view>> keys(c.rows.size());
+    std::vector<bool> keyed(c.rows.size());
+    for (std::size_t k = 0; k < c.rows.size(); k++) {
+        keyed[k] = SurfaceKeys(t, t.rows[static_cast<std::size_t>(c.rows[k])].root, keys[k]);
+        if (!keyed[k]) c.open.push_back(c.rows[k]);
+        c.indexed = c.indexed || keyed[k];
+    }
+    for (std::size_t k = 0; k < c.rows.size(); k++) {
+        for (const std::string_view key : keys[k]) {
+            if (c.bySurface.contains(key)) continue;
+            std::vector<int>& rows = c.bySurface[std::string(key)];
+            for (std::size_t j = 0; j < c.rows.size(); j++) {
+                if (!keyed[j] || std::ranges::find(keys[j], key) != keys[j].end()) rows.push_back(c.rows[j]);
+            }
+        }
+    }
 }
 
 }  // namespace
@@ -261,7 +373,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             } else if (!families.emplace(f[0], t.families.size()).second) {
                 fail(number, "a second line for the family " + std::string(f[0]));
             } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number});
+                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number, {}, {}, false});
             }
             continue;
         }
@@ -341,6 +453,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
                 fail(r.line, "two rows of " + c.name + " share a PRIO");
             }
         }
+        IndexFamily(t, c);
         int* slot = nullptr;
         if (const auto pass = std::ranges::find(passes, c.after); pass != passes.end()) {
             slot = &t.afterPass[static_cast<std::size_t>(pass - passes.begin())];
@@ -396,12 +509,16 @@ const Item* Neighbour(const Item* it, int delta) {
     return it;
 }
 
+// Whether v matches the literal of a condition: "~…" holds the value somewhere; the rest are the
+// surface markers of the rules.
+bool MatchesLiteral(std::string_view v, std::string_view literal) {
+    if (literal.size() > 1 && literal[0] == '~') return Has(v, literal.substr(1));
+    return rules::MatchRuleSurface(v, literal);
+}
+
 bool MatchesValue(const CxAtom& a, std::string_view v) {
     switch (a.match) {
-        case CxMatch::Literal:
-            // "~…" holds the value somewhere; the rest are the markers of the rules.
-            if (a.value.size() > 1 && a.value[0] == '~') return Has(v, std::string_view(a.value).substr(1));
-            return rules::MatchRuleSurface(v, a.value);
+        case CxMatch::Literal: return MatchesLiteral(v, a.value);
         case CxMatch::Member: return a.set->index.contains(v);
         case CxMatch::MemberStart:
             return std::ranges::any_of(a.set->members, [&](std::string_view m) { return v.starts_with(m); });
@@ -444,6 +561,7 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
             break;
         case CxField::Text: v = MatchesValue(a, Slice(it->text, it->start, it->length)); break;
         case CxField::Head: v = MatchesValue(a, Slice(it->text, 0, it->start)); break;
+        case CxField::Tail: v = MatchesValue(a, From(it->text, it->start + it->length)); break;
         case CxField::Feature: v = a.feature(f, it); break;
         case CxField::Candidate: {
             const int count = static_cast<int>(it->group->entries.size());
@@ -506,10 +624,13 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
     for (int d = a.delta; it != nullptr && d < 0; d++) it = it->prev;
     if (it == nullptr) return;
     switch (a.verb) {
-        case internal::CxVerb::SelectLemma: {
+        case internal::CxVerb::SelectLemma:
+        case internal::CxVerb::SelectTarget: {
             const int count = static_cast<int>(it->group->entries.size());
             for (int slot = 0; slot < count; slot++) {
-                if (ItemLemma(f, it, slot) == a.value) {
+                const bool match = a.verb == internal::CxVerb::SelectLemma ? MatchesLiteral(ItemLemma(f, it, slot), a.value)
+                                                                           : MatchesLiteral(it->EntryText(slot), a.value);
+                if (match) {
                     it->SelectCandidate(slot, source);
                     break;
                 }
@@ -526,6 +647,13 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             }
             break;
         }
+        case internal::CxVerb::ReplaceEndingTail: {
+            const Entry* e = it->DirectEntry(it->DirectIndex());
+            if (e != nullptr && e->dst.ends_with(a.value)) {
+                it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - a.value.size()) + a.with, source);
+            }
+            break;
+        }
         case internal::CxVerb::MapLemma:
         case internal::CxVerb::MapTarget: {
             const std::string key =
@@ -535,6 +663,21 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
                     it->AssignEntrySurface(it->selected, to, source);
                     break;
                 }
+            }
+            break;
+        }
+        case internal::CxVerb::SelectMap: {
+            const std::string key = ItemLemma(f, it, it->selected);
+            for (const auto& [from, to] : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (from != key) continue;
+                const int count = static_cast<int>(it->group->entries.size());
+                for (int slot = 0; slot < count; slot++) {
+                    if (ItemLemma(f, it, slot) == to) {
+                        it->SelectCandidate(slot, source);
+                        break;
+                    }
+                }
+                break;
             }
             break;
         }
@@ -558,7 +701,13 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
         for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-            for (const int r : family.rows) {
+            // Rule counts try every row.
+            const std::vector<int>* rows = &family.rows;
+            if (family.indexed && tally == nullptr) {
+                const auto found = family.bySurface.find(std::string_view(it->group->surface));
+                rows = found != family.bySurface.end() ? &found->second : &family.open;
+            }
+            for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
                 if (skip != nullptr && skip(row.id)) continue;
                 const bool fired = Eval(f, t, row.root, it);

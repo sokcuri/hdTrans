@@ -219,6 +219,12 @@ if(NOT EMSCRIPTEN)
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/e2e.sh" $<TARGET_FILE:hdtrans_cli>
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(testdata PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 600)
+        # Checks the unit test runner itself; it compiles a probe with the C++ compiler.
+        if(NOT WIN32)
+            add_test(NAME tests.runner COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/runner.sh")
+            set_tests_properties(tests.runner PROPERTIES TIMEOUT 300
+                ENVIRONMENT "CXX=${CMAKE_CXX_COMPILER}")
+        endif()
     endif()
 
     add_executable(config_host tests/host/config.cpp src/cshared/hdtrans_c.cpp src/frontend/module_dir.cpp)

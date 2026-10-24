@@ -15,8 +15,8 @@ namespace {
 // The item's text as typed, from its start over its length.
 std::string_view ItemText(const Item* it) { return Slice(it->text, it->start, it->length); }
 
-// Whether a verb follows it in its sentence (not an auxiliary of its て form), with only words
-// and particles between.
+}  // namespace
+
 bool PredicateFollows(const Item* it) {
     const Item* n = it->next;
     if (n == nullptr) return false;
@@ -36,8 +36,6 @@ bool PredicateFollows(const Item* it) {
     return false;
 }
 
-}  // namespace
-
 bool UtteranceEnd(const Worker& w, const Item* it) {
     std::string_view rest = From(it->text, it->start + it->length);
     if (rest.empty() && it->tokenIndex + 1 < w.TokenCount()) {
@@ -45,21 +43,6 @@ bool UtteranceEnd(const Worker& w, const Item* it) {
         rest = w.Tok(it->tokenIndex + 1).text;
     }
     return TrimRunes(rest, "…‥」』）)。．、ーっッ～").empty();
-}
-
-void TeSequence(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr) continue;
-        const std::string_view d = ItemText(it);
-        if (e->dst != "6" || (!d.ends_with("て") && !d.ends_with("で")) || d.ends_with("ないで") ||
-            !dict::InClass("ko-verb.sequence", output::Lemma(it->EntryText(it->selected), f.families)) ||
-            !PredicateFollows(it)) {
-            continue;
-        }
-        it->AssignDirectSlot(it->DirectIndex(), "1고");
-    }
 }
 
 // Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:
@@ -90,23 +73,6 @@ void TeThanks(Flusher& f) {
                                 [&](std::string_view t) { return next.starts_with(t); })) {
             it->AssignDirectSlot(it->DirectIndex(), "6서");
         }
-    }
-}
-
-void TeObjectComma(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->detail->cls != kDetailVerb) continue;
-        const std::string_view stem = it->group->surface;
-        if (std::ranges::any_of(dict::ClassMembers("verb.means"),
-                                [&](std::string_view v) { return stem.ends_with(v); })) {
-            continue;
-        }
-        const Item* p = it->prev;
-        const Item* n = it->next;
-        if (p == nullptr || n == nullptr || p->group->surface != "を" || n->group->surface != "、") continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr || e->dst != "6") continue;
-        it->AssignDirectSlot(it->DirectIndex(), "1고");
     }
 }
 
@@ -141,21 +107,6 @@ void VerseTe(Flusher& f) {
         return;
     }
     it->AssignDirectSlot(it->DirectIndex(), "1고");
-}
-
-void TeRequest(Flusher& f) {
-    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
-        Entry* e = it->DirectEntry(it->DirectIndex());
-        if (e == nullptr) continue;
-        const std::string_view surface = ItemText(it);
-        if (output::Lemma(e->dst, f.families) != "2며" || (!surface.ends_with("て") && !surface.ends_with("で")) ||
-            it->EntryText(it->selected).starts_with("있") || !UtteranceEnd(f.w, it)) {
-            continue;
-        }
-        const std::string_view s = it->group->surface;
-        it->AssignDirectSlot(it->DirectIndex(), s.ends_with("しま") || s.ends_with("ちゃ") ? "6서" : "6");
-    }
 }
 
 }  // namespace hdTrans::word
