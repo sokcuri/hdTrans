@@ -19,3 +19,11 @@ analysis:adnominal-na-word	女子学生がトイレでするようなクサい�
 analysis:adnominal-na-word	ようなクドい話	lacks:없고	fix	analysis
 analysis:adnominal-na-word	遠慮なく食べて	has:없이	keep	analysis
 analysis:adnominal-na-word	元気なく笑った	has:없게	keep	analysis
+compose:potential-negation	おや？寝付けませんか？	has:잠들 수 없습니까	fix	compose
+compose:potential-negation	「まいどあり…それとお嬢さん、これを頼めませんかね？」	has:부탁할 수 없습니까	fix	compose
+compose:potential-negation	我々はこの間の祭りには帰ってこれませんでしたからね。	has:돌아올 수 없었으니까	fix	compose
+compose:potential-negation	深夜三時ですって！？ ありえませんわ	has:있을 수 없어요	fix	compose
+compose:potential-negation	本来有り得ぬ天文学的確率で	has:있을 수 없는	fix	compose
+compose:potential-negation	うっっくぅ～、なんもいえねぇ～…	has:말할 수 없다	fix	compose
+compose:potential-negation	これなら聞けるんじゃないかな？	has:들을 수 있지 않을까	keep	compose
+compose:potential-negation	だって信頼できんじゃん？	lacks:수 없	keep	compose

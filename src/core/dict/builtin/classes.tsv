@@ -41,6 +41,8 @@
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.final-quote	Ends of a predicate that close what was said or thought, after which a separate と quotes it (熱いんじゃないかなぁと想像して, 何があったんだと心配そうに, 見たいんだと): sentence particles, the explanatory んだ, たい, the past and a reason or condition said as a wish (から, ば); not だろう or ます, whose と is also a concession or a condition (だろうとなんだろうと, いただけますと).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
+//= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
+//= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
@@ -902,6 +904,27 @@ ending.negative-start	ませ
 ending.negative-start	ず
 ending.negative-start	ぬ
 ending.negative-start	ん
+ending.negative-start	へん
+ending.negative-start	まい
+
+ending.negative-start-not	んじゃ
+
+ending.other-negation	いじゃ
+ending.other-negation	いただ
+ending.other-negation	いない
+ending.other-negation	おらず
+ending.other-negation	かと
+ending.other-negation	から
+ending.other-negation	きれず
+ending.other-negation	く
+ending.other-negation	しまいかと
+ending.other-negation	じゃ
+ending.other-negation	ていただく
+ending.other-negation	で
+ending.other-negation	と
+ending.other-negation	にならず
+ending.other-negation	はしまいかと
+ending.other-negation	んじゃ
 
 ending.rare-passive	てい
 ending.rare-passive	てる
