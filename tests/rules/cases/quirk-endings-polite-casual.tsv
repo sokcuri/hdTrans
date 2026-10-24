@@ -1,17 +1,17 @@
 # 규칙: LEX-31, SPC-1
 rule	input	expected	kind	layer
-ending:dechi	節分でち！	절분이에여!	fix	builtin-ending
-ending:dechi	雨が多い季節でち。	비가 많은 계절이에여.	fix	builtin-ending
-ending:dechi	朝でち！	아침이에여!	fix	builtin-ending
-ending:dechi	遅めの晩ご飯でちか？	늦은 저녁밥인가여?	fix	builtin-ending
-ending:dechi	魚雷は、よく整備されてるでち。	어뢰는, 잘 정비되어 있어여.	fix	builtin-ending
-ending:dechi	潜水艦さん達、今日もいい子でちね～。	잠수함 씨들, 오늘도 좋은 아이네여~.	fix	builtin-ending
-ending:dechi	モンスターの赤ちゃんでちゅよー。	몬스터의 아기예여~.	fix	builtin-ending
-ending:dechi	「はいはい、大人はえらいでちゅねーっ！」	「네네, 어른은 대단하네여-!」	fix	builtin-ending
-ending:sshu	艦隊、出撃っしゅ！	함대, 출격이에여!	fix	builtin-ending
-ending:sshu	一馬身リードっしゅ！	1마신 리드예여!	fix	builtin-ending
-ending:sshu	なんかいたっす？ 気の所為っしゅ？	뭔가 있었어요? 기분의 탓이에여?	fix	builtin-ending
-ending:sshu	しれぇ贅沢っしゅね～。	사령관님 사치네여~.	fix	builtin-ending
+ending:dechi	節分でち！	절분이에요!	fix	builtin-ending
+ending:dechi	雨が多い季節でち。	비가 많은 계절이에요.	fix	builtin-ending
+ending:dechi	朝でち！	아침이에요!	fix	builtin-ending
+ending:dechi	遅めの晩ご飯でちか？	늦은 저녁밥인가요?	fix	builtin-ending
+ending:dechi	魚雷は、よく整備されてるでち。	어뢰는, 잘 정비되어 있어요.	fix	builtin-ending
+ending:dechi	潜水艦さん達、今日もいい子でちね～。	잠수함 씨들, 오늘도 좋은 아이네요~.	fix	builtin-ending
+ending:dechi	モンスターの赤ちゃんでちゅよー。	몬스터의 아기예요~.	fix	builtin-ending
+ending:dechi	「はいはい、大人はえらいでちゅねーっ！」	「네네, 어른은 대단하네요-!」	fix	builtin-ending
+ending:sshu	艦隊、出撃っしゅ！	함대, 출격이에요!	fix	builtin-ending
+ending:sshu	一馬身リードっしゅ！	1마신 리드예요!	fix	builtin-ending
+ending:sshu	なんかいたっす？ 気の所為っしゅ？	뭔가 있었어요? 기분의 탓이에요?	fix	builtin-ending
+ending:sshu	しれぇ贅沢っしゅね～。	사령관님 사치네요~.	fix	builtin-ending
 ending:ssho	最高っしょ！？	최고지!?	fix	builtin-ending
 ending:ssho	サーロインステーキ、最高っしょ？	설로인 스테이크, 최고지?	fix	builtin-ending
 ending:ssho	自分がへましたらダメっしょ。	자신이 거치면 안 되지.	fix	builtin-ending
@@ -32,4 +32,5 @@ ending:kee	学生じゃけえ	학생이니까	keep	builtin-ending
 ending:dechi	これは本当です。	이것은 사실입니다.	keep	builtin-ending
 sound:end-row-key-goes-on	婚約関連でちょこっと両親が登場した。	약혼 관련으로 살짝 부모님이 등장했다.	keep	sound
 sound:end-row-key-goes-on	学校でちらっと見た	학교에서 힐끗 보았다	keep	sound
+ending:dechi	みんなも全力でお祝いでち！	모두도 전력으로 축하예요!	fix	builtin-ending
 normalize:drawl-not-ending	「えぇえぇッ？！ 逆転負けぇえぇッ？！？！」	「에에에엣?! 역전패애애애?!?!」	keep	normalize
