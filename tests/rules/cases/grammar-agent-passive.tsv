@@ -9,10 +9,10 @@ cx:voice-agent:10	それを姉に見透かされた。	그것을 언니가 간�
 cx:voice-agent:10	なんだか、自分の浅ましさをユイちゃんに見透かされたみたいで、ものすごく恥ずかしくなった。	왠지, 자신의 야비함을 유이짱이 간파한 것 같아, 대단히 부끄러워졌다.	fix	rewrites
 cx:voice-agent:20	ユイちゃんに頬を撫でられて、ビクンと身体がはずんだ。	rule:cx:voice-agent:20=쓰다&H7@	fix	rewrites
 cx:voice-agent:10	もしかして、疑う心を姉に覗かれてしまったのか？	혹시, 의심하는 마음을 언니가 들여다 봐 버린 건가?	fix	rewrites
-cx:voice-agent:10	彼女に命を救われたあの男は、彼女の決意を尊重すると伝えてきた。	그녀에게 목숨을 구해진 그 남자는, 그녀의 결의를 존중한다고 전해 왔다.	keep	rewrites
+cx:voice-agent:10	彼女に命を救われたあの男は、彼女の決意を尊重すると伝えてきた。	!rule:cx:voice-agent:10	keep	rewrites
 cx:voice-agent:10	姉に携帯を奪い取られる。	언니가 휴대폰을 강탈한다.	fix	rewrites
-cx:voice-agent:10	今度は吸血鬼に血を吸われ、自らも吸血鬼化した犠牲者の気分だな。	이번에는 흡혈귀에게 피를 빨아져 스스로도 흡혈귀화한 희생자의 기분이네.	keep	rewrites
-cx:voice-agent:10	傍から見ると、彼女に別れ話を切り出された情けないヤツみたいねー	옆에서 보면, 그녀에게 이별 이야기를 꺼내진 한심한 녀석 같네~	keep	rewrites
+cx:voice-agent:10	今度は吸血鬼に血を吸われ、自らも吸血鬼化した犠牲者の気分だな。	!rule:cx:voice-agent:10	keep	rewrites
+cx:voice-agent:10	傍から見ると、彼女に別れ話を切り出された情けないヤツみたいねー	!rule:cx:voice-agent:10	keep	rewrites
 cx:voice-agent:10	大事な手紙を弟に破られてしまった。	rule:cx:voice-agent:10=(이)가	fix	rewrites
 cx:voice-agent:10	友達に秘密をばらされた。	rule:cx:voice-agent:10=(이)가	fix	rewrites
 cx:voice-agent:10	私に弟を任せられたから、出たい時間に出られたんじゃないかな	!rule:cx:voice-agent:10	keep	rewrites
@@ -26,3 +26,8 @@ cx:voice-agent:10	陛下が彼に手紙を書かれた。	!rule:cx:voice-agent:1
 cx:voice-agent:20	俺が彼女に頭を撫でられた。	!rule:cx:voice-agent:20	keep	rewrites
 cx:voice-agent:20	彼女にこれを撫でられたくない。	!rule:cx:voice-agent:20	keep	rewrites
 cx:voice-agent:10	先生に名前を呼ばれた。	선생님에게 이름을 불렸다.	keep	rewrites
+cx:voice-agent:10	私は弟に手紙を破られた。	!rule:cx:voice-agent:10	keep	rewrites
+cx:voice-agent:10	私も弟に手紙を破られた。	!rule:cx:voice-agent:10	keep	rewrites
+cx:voice-agent:20	僕は彼女に頭を撫でられた。	!rule:cx:voice-agent:20	keep	rewrites
+rewrite:passive-reading	彼女にプレゼントをあげられた。	그녀에게 선물을 줄 수 있었다.	keep	rewrites
+rewrite:passive-reading	父に車を借りられた。	아버지에게 차를 빌릴 수 있었다.	keep	rewrites

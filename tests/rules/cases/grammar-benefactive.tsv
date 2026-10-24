@@ -47,3 +47,5 @@ cx:benefactive-agent:30	では待たせてもらおうかしら	rule:cx:benefact
 cx:benefactive-agent:30	撮影したデータを消してもらおうか。	!rule:cx:benefactive-agent:30	keep	rewrites
 dict:benefactive:4	あちらにある棒につかまって、ぶらさがっていただきます。	!rule:dict:benefactive:4	keep	local
 dict:benefactive:4	貴方には、こちらで待っていただきます。	!rule:dict:benefactive:4	keep	local
+cx:benefactive-agent:10	私が母に料理をしてもらった。	!rule:cx:benefactive-agent:10	keep	rewrites
+cx:benefactive-agent:10	私は祖母に昔話をしてもらった。	!rule:cx:benefactive-agent:10	keep	rewrites

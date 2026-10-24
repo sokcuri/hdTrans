@@ -21,7 +21,7 @@ cx:causer-ni:10	こんな汚れ仕事、あの子にはやらせられないも�
 cx:causer-ni:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
 cx:causer-ni:10	母が子供に野菜を食べさせた。	어머니가 아이에게 야채를 먹였다.	keep	rewrites
 cx:causer-ni:10	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:10	keep	rewrites
-rewrite:passive-reading	母に本を読ませられた。	어머니가 책을 읽게 했다.	fix	rewrites
+rewrite:passive-reading	母に本を読ませられた。	어머니에게 책을 읽게 할 수 있었다.	current	rewrites
 cx:causer-ni:10	父に謝らされた。	아버지 때문에 사과하게 되었다.	fix	rewrites
 cx:causer-ni:10	彼に待たされたか？	그 때문에 기다리게 되었나?	fix	rewrites
 cx:causer-ni:10	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	rewrites

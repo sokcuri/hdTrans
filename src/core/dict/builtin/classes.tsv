@@ -4,7 +4,7 @@
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
-//= adverb.habitual	Words of frequency or of the old days before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
+//= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
@@ -165,7 +165,6 @@
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
-//= verb.recipient-ni	Ichidan stems that take whoever receives in に (任せる, 見せる): a person before に and an object of を leave their られ the potential.
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
@@ -220,7 +219,6 @@ adverb.habitual	時々
 adverb.habitual	ときどき
 adverb.habitual	何度も
 adverb.habitual	しばしば
-adverb.habitual	昔
 adverb.going-well	上手く
 adverb.going-well	旨く
 adverb.going-well	巧く
@@ -2631,18 +2629,6 @@ verb.receiver-passive	託
 verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
-verb.recipient-ni	任せ
-verb.recipient-ni	与え
-verb.recipient-ni	見せ
-verb.recipient-ni	教え
-verb.recipient-ni	伝え
-verb.recipient-ni	預け
-verb.recipient-ni	届け
-verb.recipient-ni	授け
-verb.recipient-ni	向け
-verb.recipient-ni	打ち明け
-verb.recipient-ni	押し付け
-verb.recipient-ni	告げ
 
 verb.respectful	仰
 verb.respectful	おっしゃ
