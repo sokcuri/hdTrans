@@ -23,7 +23,9 @@ sound:onbin-u	救うために戦う。	구하기 위해 싸운다.	keep	sound
 sound:onbin-u	「言うて、それは違う」	「그렇긴 해도, 그건 다르다」	keep	sound
 dict:colloq:yacchau-past	やっちゃった。	저질렀다.	fix	local
 dict:colloq:yacchau-past	「またやっちゃったー！」	「또 저질렀어~!」	fix	local
-dict:colloq:yacchau-past	「何かやっちゃったんですか？」	rule:dict:colloq:yacchau-past=저&E7@	fix	local
+dict:colloq:yacchau-past	「あー、やっちゃった。ごめん」	rule:dict:colloq:yacchau-past=저&E7@	fix	local
+dict:jisjk:364791	「あら、やっちゃった？」	rule:dict:jisjk:364791=해 치&AI@	keep	local
+dict:jisjk:364791	「またやっちゃった？」	!rule:dict:colloq:yacchau-past	keep	local
 dict:colloq:yacchau-past	「宿題をやっちゃった」	!rule:dict:colloq:yacchau-past	keep	local
 dict:colloq:yacchau-past	「やっちゃったね」	「저질렀네」	fix	local
 dict:colloq:yacchau-past	「やっちゃって！」	!rule:dict:colloq:yacchau-past	keep	local
