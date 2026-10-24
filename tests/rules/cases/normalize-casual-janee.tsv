@@ -1,0 +1,17 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:casual-janee	「私はそんな目で見てるけど」じゃねーわ！！	has:아니야!!	fix	normalize
+normalize:casual-janee	ハゲじゃねーし！	대머리가 아니고!	fix	normalize
+normalize:casual-janee	オレじゃねーんだよ	내가 아니야	fix	normalize
+normalize:casual-janee	ストーカーじゃねえ	스토커가 아니다	fix	normalize
+normalize:casual-janee	ストーカーじゃねーんだよ	스토커가 아니야	fix	normalize
+normalize:casual-janee	ただのオカスレじゃねーもんな	has:가 아니잖아	fix	normalize
+normalize:casual-janee	「えへへ、じゃねえよ！」	has:아니야!	fix	normalize
+normalize:casual-janee	遊んでるバヤイじゃねぇ！	놀고 있는 경우가 아니다!	fix	normalize
+normalize:casual-janee	マルフタマルマルじゃねぇ。	0200이 아니다.	fix	normalize
+normalize:casual-janee	とても俺なんかが理解できるシロモノじゃねぇみてぇだ。	has:물건이 아닌	fix	normalize
+normalize:casual-janee	冗談じゃねーよ	농담하지 마	keep	normalize
+normalize:casual-janee	「じゃねー！」	has:그럼	keep	normalize
+normalize:casual-janee	バカじゃねーのｗ	has:바보가 아닌	keep	normalize
+normalize:casual-janee	時刻はぁ、マルヒトマルマルじゃねぇ。ふふ～ん、どうじゃ？	has:0100이구나	fix	normalize
+normalize:casual-janee	ええっと、マルヨンマルマルじゃ！もうすぐ朝じゃねぇ。	has:아침이구나	fix	normalize

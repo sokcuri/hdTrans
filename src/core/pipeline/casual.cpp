@@ -383,13 +383,34 @@ bool Teku(std::string_view s, size_t pos, Match& m) {
     return CharOrEnd(s, p, U"。！？…‥、!?よねぞわかの」", m, 2);
 }
 
-// ([ん一-龥々])じゃね[ぇえー]+
+// Whether s ends a sentence with the copula じゃ (どうじゃ？, 退屈じゃのぅ): the speaker's じゃねえ is
+// then the copula with ね, written だね.
+bool CopulaJa(std::string_view s) {
+    for (size_t at = s.find("じゃ"); at != std::string_view::npos; at = s.find("じゃ", at + 1)) {
+        const std::string_view rest = s.substr(at + std::string_view("じゃ").size());
+        if (rest.empty() || In(At(rest, 0).cp, U"！？!?。…‥」") || rest.starts_with("のう") || rest.starts_with("のぅ") ||
+            rest.starts_with("わい")) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// ([ん一-龥々ァ-ヶー])じゃね[ぇえー]+, or じゃね[ぇえー]+ before わ, よ, し, ぞ, ぜ or か where a
+// clause starts (じゃねーわ！, 」じゃねえよ; not the parting じゃねー！): じゃない, or だね where the line
+// ends a sentence with the copula じゃ (CopulaJa).
 bool Janee(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (!Take(s, p, [](char32_t c) { return c == U'ん' || IsKanjiClass(c); })) return false;
+    const char32_t before = Before(s, pos);
+    const bool start = before == 0 || In(before, U"「『（(」』）)、。，！？!?…‥　 \n");
+    if (!start || IsKanjiClass(At(s, p).cp) || IsKatakanaRune(At(s, p).cp) || At(s, p).cp == U'ん') {
+        if (!Take(s, p, [](char32_t c) { return c == U'ん' || IsKanjiClass(c) || IsKatakanaRune(c); })) return false;
+    }
     m.group[1] = Span(s, pos, p);
+    const bool bare = p == pos;
     if (!Lit(s, p, "じゃね")) return false;
     return Repeat(s, p, InSet(U"ぇえー"), 1, kUnbounded, [&](size_t q) {
+        if (bare && !(q < s.size() && In(At(s, q).cp, U"わよしぞぜか"))) return false;
         m.end = q;
         return true;
     });
@@ -486,6 +507,25 @@ bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
     }
     m.end = p;
     return true;
+}
+
+// そ alone where a clause starts, before 、。！？!?…‥」』） or the end: そう said short as an answer
+// (そ、あたしのことよ, そ。). Not a stutter before a word that starts with そ or ソ, or before a kanji,
+// which the sound stage reads (そ、それは, そ、空), nor a word spelled out kana by kana (そ、れ、よ、り).
+bool LoneSo(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "そ")) return false;
+    m.end = p;
+    if (p == s.size()) return true;
+    if (!In(At(s, p).cp, U"、。！？!?…‥」』）")) return false;
+    size_t q = p;
+    while (q < s.size() && In(At(s, q).cp, U"、…‥ 　")) q += At(s, q).size;
+    if (q == s.size()) return true;
+    const char32_t next = At(s, q).cp;
+    if (next == U'そ' || next == U'ソ' || IsKanjiClass(next)) return false;
+    // A word spelled out kana by kana (そ、れ、よ、り).
+    const size_t after = q + At(s, q).size;
+    return !(after < s.size() && At(s, after).cp == U'、');
 }
 
 // でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
@@ -813,12 +853,14 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Mashou, [](const Match& m) { return Cat({m.group[1], "しょう"}); });
     text = ReplaceAll(text, UtoShite, [](const Match& m) { return Cat({"うとしてい", m.group[1]}); });
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
-    text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
+    const bool copulaJa = CopulaJa(text);
+    text = ReplaceAll(text, Janee, [&](const Match& m) { return Cat({m.group[1], copulaJa ? "だね" : "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
     text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
     text = ReplaceAll(text, SoCopulaStart, [](const Match&) { return std::string("そう"); });
+    text = ReplaceAll(text, LoneSo, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });
