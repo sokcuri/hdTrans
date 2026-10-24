@@ -153,6 +153,7 @@
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.causative-passive	Dictionary verbs in される whose Korean is the causative-passive 게 되다 (待たされる 기다리게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
+//= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
 //= verb.entrust	Verbs of leaving a task to someone (頼む, 任せる), before which 後は is what is left to do.
 //= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
@@ -2353,6 +2354,11 @@ verb.condition	慣れ
 verb.condition	なれ
 verb.condition	飽き
 verb.condition	あき
+verb.elapse	経つ
+verb.elapse	たつ
+verb.elapse	過ぎる
+verb.elapse	すぎる
+verb.elapse	する
 
 verb.entrust	頼む
 verb.entrust	たのむ
