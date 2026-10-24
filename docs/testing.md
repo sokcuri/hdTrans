@@ -15,6 +15,8 @@
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
+| `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
+| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
@@ -106,6 +108,21 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 - CI의 `release-tools` 작업은 `--self-test`와 `--check`를 돌립니다. PR에서는 PR이 갈라진 기준 커밋
   (`github.event.pull_request.base.sha`)으로 `--check --base`를 돌려, 표의 수가 오르거나 행이 늘었는데
   PR의 어느 커밋에도 트레일러가 없을 때와 PR이 바꾼 파일에 적지 않은 여유가 있을 때 실패합니다.
+
+## 낱말 빠짐 (drops.py)
+
+`tools/drops.py`는 단어 단계가 한 글자씩 읽고 번역을 비운 글자(가나, 한자)가 둘 이상 이어져 번역에서 사라진
+입력을 찾습니다. 그 글자를 홀로 번역한 것이 줄의 번역에 있으면 뒤 단계가 쓴 것이라 빠짐으로 치지 않습니다.
+
+- ctest `rules.drops`는 규칙 사례와 `tests/rules/drops/`의 입력을 보고, `known-gaps.txt`의 입력만 봐줍니다.
+  고친 입력은 그 목록에서 지웁니다.
+- `--sets`는 `measure.sh`의 네 세트(변수가 있는 것만)를 보고 세트마다 입력 수와 글이 빠지는 입력 수를 씁니다.
+  ctest `sets.drops`는 그 수가 `tools/drops-budget.tsv`의 행과 같아야 통과합니다. 빠지는 입력을 줄인 변경은
+  `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다른 세트는 다른 데이터라서 보지 않습니다.
+
+```sh
+tools/drops.py build/mac/hdtrans dicts --sets --budget tools/drops-budget.tsv [--update]
+```
 
 ## 패스 실험 빌드
 
@@ -467,14 +484,14 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_REQUIRE_ALL` | 단위 테스트 | `1`이면 건너뛴 테스트를 실패로 |
 | `HDTRANS_TEST_EXCLUDE` | 단위 테스트 | 건너뛸 테스트 이름 (쉼표 구분) |
 | `HDTRANS_DATA`, `HDTRANS_INPUTS`, `HDTRANS_RUNS`, `HDTRANS_BIN` | `snapshot.sh`, `compare.sh` | 입력, 기록 위치와 CLI |
-| `HDTRANS_TESTDATA` | `e2e.sh`, `fetch-syosetu.sh`, `measure.sh`, `audit.py`, ctest `testdata` | 테스트 데이터 폴더 |
-| `HDTRANS_EXAMPLES` | `measure.sh`, `audit.py` | `web/examples/`에 없는 웹 예제 텍스트 폴더 (웹 빌드의 `HDTRANS_WEB_EXAMPLES`와 같은 폴더, 비공개) |
+| `HDTRANS_TESTDATA` | `e2e.sh`, `fetch-syosetu.sh`, `measure.sh`, `audit.py`, `drops.py`, ctest `testdata`, `sets.drops` | 테스트 데이터 폴더 |
+| `HDTRANS_EXAMPLES` | `measure.sh`, `audit.py`, `drops.py` | `web/examples/`에 없는 웹 예제 텍스트 폴더 (웹 빌드의 `HDTRANS_WEB_EXAMPLES`와 같은 폴더, 비공개) |
 | `HDTRANS_JOBS` | `measure.sh` | 한꺼번에 번역할 문서 수 (기본 CPU 수) |
 | `HDTRANS_DICTS_A` | `e2e.sh` | A 쪽 사전 |
 | `HDTRANS_DRIVER_DUMP` | CLI | `-stages`와 같음 |
 | `HDTRANS_CACHE_DIR`, `HDTRANS_SNAPSHOT`, `HDTRANS_VERIFY_DICTS` | 엔진 | 사전 캐시 ([dictionary-files.md](dictionary-files.md#캐시)) |
 | `HDTRANS_WORK` | `gate.sh`, `measure.sh` | 작업 출력 폴더 (기본 `build/work`) |
-| `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `audit.py`, `count-class.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
+| `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `audit.py`, `count-class.py`, `drops.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |
 | `HDTRANS_PASS_SKIP`, `HDTRANS_PASS_SHUFFLE` | `HDTRANS_PASS_EXPERIMENTS` 빌드의 엔진 | 뺄 문장 패스, 패스 순서를 섞는 씨앗 ([패스 실험 빌드](#패스-실험-빌드)) |

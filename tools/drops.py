@@ -4,6 +4,7 @@ word stage read one at a time and gave no Korean, so that their text vanishes fr
 (褒められちゃった 포).
 
   tools/drops.py CLI DICTS FILE... [--known FILE] [-- CLI-OPTIONS...]
+  tools/drops.py CLI DICTS --sets [--budget FILE [--update]] [-- CLI-OPTIONS...]
   tools/drops.py --self-test
 
 Each FILE is a text file with one input per line, a rule case table (.tsv, its input column) or a
@@ -12,11 +13,19 @@ Every input is translated as its own line (-each) with -why. A run the word stag
 later stage still wrote (るんるん 룬룬: the run translated alone is in the line's translation) is no
 drop. Prints each input that drops text with the dropped characters. With --known, the inputs listed there (one per line, `#` comments) are known
 gaps: they are not reported, but a listed input that no longer drops is, so the list only shrinks.
-Exit: 0 nothing new, 1 an input drops text or a known gap is fixed, 2 invalid arguments or a failed CLI.
+With --sets the inputs are the measured sets of tools/measure.sh whose variables are set: the lines of
+HDTRANS_CORPUS, of HDTRANS_REF_SAMPLE/ja.txt, of the documents HDTRANS_TESTDATA/*/*.ja.txt after their
+first line and of the web examples web/examples.tsv lists (from web/examples/ or HDTRANS_EXAMPLES). It
+prints the inputs and the inputs that drop text of each set. With --budget (rows `set inputs drops`) a
+set whose input count matches its row fails when its count of dropping inputs differs from the row:
+more is a regression, fewer is a fix that lowers the row. --update writes the counts into the file.
+Exit: 0 nothing new, 1 an input drops text, a known gap is fixed or a set is off its budget, 2 invalid
+arguments, no set or a failed CLI; with --sets and no set variable, 77.
 """
 import os
 import re
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 import sys
 import tempfile
 
@@ -89,6 +98,51 @@ def lost(found, outputs, alone):
     return out
 
 
+def measured_sets(here):
+    """[(name, inputs)] of the sets whose variables are set, in the order of tools/measure.sh."""
+    def lines(path):
+        with open(path, encoding="utf-8") as f:
+            return [l for l in f.read().split("\n") if l.strip()]
+    sets = []
+    if os.environ.get("HDTRANS_CORPUS"):
+        sets.append(("corpus", lines(os.environ["HDTRANS_CORPUS"])))
+    if os.environ.get("HDTRANS_REF_SAMPLE"):
+        sets.append(("sample", lines(os.path.join(os.environ["HDTRANS_REF_SAMPLE"], "ja.txt"))))
+    if os.environ.get("HDTRANS_TESTDATA"):
+        root, docs = os.environ["HDTRANS_TESTDATA"], []
+        for folder in sorted(os.listdir(root)):
+            path = os.path.join(root, folder)
+            if os.path.isdir(path):
+                for name in sorted(os.listdir(path)):
+                    if name.endswith(".ja.txt") and os.path.isfile(os.path.join(path, name)):
+                        docs.extend(lines(os.path.join(path, name))[1:])
+        sets.append(("docs", docs))
+    if os.environ.get("HDTRANS_EXAMPLES"):
+        examples = []
+        with open(os.path.join(here, "web", "examples.tsv"), encoding="utf-8") as f:
+            for row in f.read().split("\n"):
+                name, _, label = row.partition("\t")
+                if not name or not label:
+                    continue
+                for path in (os.path.join(here, "web", "examples", name), os.path.join(os.environ["HDTRANS_EXAMPLES"], name)):
+                    if os.path.isfile(path):
+                        examples.extend(lines(path))
+                        break
+        sets.append(("examples", examples))
+    return sets
+
+
+def budget_of(path):
+    """{set: (inputs, drops)} of a budget file."""
+    rows = {}
+    with open(path, encoding="utf-8") as f:
+        for line in f.read().split("\n"):
+            cells = line.split("\t")
+            if len(cells) == 3 and not line.startswith("#") and cells[0] != "set":
+                rows[cells[0]] = (int(cells[1]), int(cells[2]))
+    return rows
+
+
 def known_of(path):
     if path is None:
         return set()
@@ -112,12 +166,83 @@ def main(argv):
         argv = argv[:k] + argv[k + 2:]
     if len(argv) < 3:
         return usage()
+    if "--sets" in argv:
+        return check_sets(argv, options)
     cli, dicts, files = argv[0], argv[1], argv[2:]
     texts = []
     for path in files:
         for name in files_of(path, known_path):
             texts.extend(inputs_of(name))
     known = known_of(known_path)
+    found = dropping(cli, dicts, texts, options)
+    if found is None:
+        print(f"drops: {cli} failed", file=sys.stderr)
+        return 2
+    bad = 0
+    dropping_texts = set()
+    for number, runs in sorted(found.items()):
+        text = texts[number - 1] if 0 < number <= len(texts) else "?"
+        dropping_texts.add(text)
+        if text in known:
+            continue
+        print(f"DROP\t{'|'.join(runs)}\t{text}")
+        bad += 1
+    for text in sorted(known & set(texts) - dropping_texts):
+        print(f"FIXED\t{text}\t(remove it from {known_path})")
+        bad += 1
+    print(f"drops: {len(texts)} inputs, {len(dropping_texts)} drop text, {bad} to act on")
+    return 1 if bad else 0
+
+
+def check_sets(argv, options):
+    argv = list(argv)
+    update = "--update" in argv
+    budget_path = None
+    if "--budget" in argv:
+        k = argv.index("--budget")
+        if k + 1 >= len(argv):
+            return usage()
+        budget_path = argv[k + 1]
+        del argv[k:k + 2]
+    argv = [a for a in argv if a not in ("--sets", "--update")]
+    if len(argv) != 2 or (update and budget_path is None):
+        return usage()
+    cli, dicts = argv
+    sets = measured_sets(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    if not sets:
+        print("drops: no set variable (HDTRANS_CORPUS, HDTRANS_REF_SAMPLE, HDTRANS_TESTDATA, HDTRANS_EXAMPLES)")
+        return 77
+    with ThreadPoolExecutor(len(sets)) as pool:
+        results = list(pool.map(lambda s: dropping(cli, dicts, s[1], options), sets))
+    if any(r is None for r in results):
+        print(f"drops: {cli} failed", file=sys.stderr)
+        return 2
+    counts = {name: (len(texts), len({texts[n - 1] for n in found})) for (name, texts), found in zip(sets, results)}
+    budget = budget_of(budget_path) if budget_path and os.path.exists(budget_path) else {}
+    bad = 0
+    for name, (inputs, count) in counts.items():
+        line = f"drops: {name} {inputs} inputs, {count} drop text"
+        if budget_path and not update:
+            row = budget.get(name)
+            if row is None or row[0] != inputs:
+                line += ", not in the budget" if row is None else f", not checked (the budget is for {row[0]} inputs)"
+            elif count != row[1]:
+                line += f", budget {row[1]}: " + ("more than the budget" if count > row[1] else "lower the budget")
+                bad += 1
+        print(line)
+    if update:
+        budget.update(counts)
+        head = []
+        if os.path.exists(budget_path):
+            with open(budget_path, encoding="utf-8") as f:
+                head = [l for l in f.read().split("\n") if l.startswith("#")]
+        with open(budget_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(head + ["set\tinputs\tdrops"] + [f"{n}\t{i}\t{d}" for n, (i, d) in budget.items()]) + "\n")
+    return 1 if bad else 0
+
+
+def dropping(cli, dicts, texts, options):
+    """{input number: [runs it drops]} of texts, or None when the CLI fails."""
     with tempfile.TemporaryDirectory() as tmp:
         env = dict(os.environ, HOME=tmp, HDTRANS_CACHE_DIR="off")
 
@@ -137,27 +262,13 @@ def main(argv):
         runs = sorted({r for rs in (found or {}).values() for r in rs})
         alone, _ = translate(runs, False) if runs else ([], "")
     if found is None or alone is None:
-        print(f"drops: {cli} failed", file=sys.stderr)
-        return 2
-    found = lost(found, outputs, dict(zip(runs, alone)))
-    bad = 0
-    dropping = set()
-    for number, runs in sorted(found.items()):
-        text = texts[number - 1] if 0 < number <= len(texts) else "?"
-        dropping.add(text)
-        if text in known:
-            continue
-        print(f"DROP\t{'|'.join(runs)}\t{text}")
-        bad += 1
-    for text in sorted(known & set(texts) - dropping):
-        print(f"FIXED\t{text}\t(remove it from {known_path})")
-        bad += 1
-    print(f"drops: {len(texts)} inputs, {len(dropping)} drop text, {bad} to act on")
-    return 1 if bad else 0
+        return None
+    return lost(found, outputs, dict(zip(runs, alone)))
 
 
 def usage():
-    print("usage: tools/drops.py CLI DICTS FILE... [--known FILE] [-- CLI-OPTIONS...]", file=sys.stderr)
+    print("usage: tools/drops.py CLI DICTS FILE... [--known FILE] [-- CLI-OPTIONS...]\n"
+          "       tools/drops.py CLI DICTS --sets [--budget FILE [--update]] [-- CLI-OPTIONS...]", file=sys.stderr)
     return 2
 
 
@@ -192,6 +303,22 @@ def self_test():
             f.write("# gaps\nx\n\n")
         assert known_of(known) == {"x"}
         assert files_of(tmp, known) == [plain, table], files_of(tmp, known)
+        budget = os.path.join(tmp, "b.tsv")
+        with open(budget, "w", encoding="utf-8") as f:
+            f.write("# c\nset\tinputs\tdrops\ncorpus\t3\t1\n")
+        assert budget_of(budget) == {"corpus": (3, 1)}, budget_of(budget)
+        os.makedirs(os.path.join(tmp, "data", "a"))
+        with open(os.path.join(tmp, "data", "a", "x.ja.txt"), "w", encoding="utf-8") as f:
+            f.write("# header\n行く\n\n来る\n")
+        saved = {k: os.environ.pop(k, None) for k in ("HDTRANS_CORPUS", "HDTRANS_REF_SAMPLE", "HDTRANS_TESTDATA", "HDTRANS_EXAMPLES")}
+        try:
+            os.environ["HDTRANS_CORPUS"], os.environ["HDTRANS_TESTDATA"] = plain, os.path.join(tmp, "data")
+            assert measured_sets(tmp) == [("corpus", ["a", "b"]), ("docs", ["行く", "来る"])], measured_sets(tmp)
+        finally:
+            for k, v in saved.items():
+                os.environ.pop(k, None)
+                if v is not None:
+                    os.environ[k] = v
     print("PASS drops self-test")
     return 0
 
