@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3, SPC-1
 rule	input	expected	kind	layer
 dict:jisjk:237572	「人工放射性元素を調べた」	「인공 방사성 원소를 조사했어」	fix	defaults
 dict:jisjk:160652	「介助者を呼んだ」	「도우미를 불렀어」	fix	defaults
