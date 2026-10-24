@@ -1057,6 +1057,71 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     return Voice::None;
 }
 
+// The e-row kana that ends the potential of a godan verb and the conjugation kind (the last digit of
+// the part code) of that verb (撮れ 撮る 8, 書け 書く 1).
+constexpr std::string_view kPotentialKana[][2] = {
+    {"え", "0"}, {"け", "1?"}, {"げ", "2"}, {"せ", "3"}, {"て", "4"}, {"ね", "<"}, {"べ", "6"}, {"め", "5"}, {"れ", "8"},
+};
+
+// Whether item p, before a verb, names the place where it is done: ここで, そこで, どこで, or で, では
+// after a noun of a place (VPl).
+bool PlaceDe(const Item* p) {
+    const std::string_view s = p->group->surface;
+    if (s == "ここで" || s == "そこで" || s == "あそこで" || s == "どこで" || s == "ここでは" || s == "そこでは") return true;
+    const Item* a = p->prev;
+    return (s == "で" || s == "では") && a != nullptr && !a->detail->Yougo() && Has(a->Attr(std::max(a->selected, 0)), "VPl");
+}
+
+// Whether the clause before verb item it, followed by rest, asks for the potential of a godan verb
+// rather than the intransitive word of the same spelling (spec GRM-10): an object of を, a word of
+// word.ability-scope, or a place of で before a negative or a polite non-past (ここで写真は撮れません).
+bool PotentialClause(const Item* it, std::string_view rest) {
+    if (ObjectBefore(it) || AbilityScope(it, rest)) return true;
+    const bool form = rest.starts_with("な") || rest.starts_with("ず") || rest.starts_with("ぬ") || rest.starts_with("ませ") ||
+                      rest.starts_with("ます");
+    for (const Item* p = it->prev; form && p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (PlaceDe(p)) return true;
+    }
+    return false;
+}
+
+// A dictionary word that spells the potential of a godan verb (撮れ 撮る) and reads only the Korean
+// passive of that verb (찍히다 of 찍다) is read as that potential when its clause asks for one
+// (PotentialClause): the godan verb analysed at its place, as the analysis reads a godan potential
+// (ここで写真は撮れません 사진은 찍을 수 없습니다).
+void SpelledPotential(Flusher& f, Item* it) {
+    if (it->detail->record != 0 || it->detail->cls != kDetailVerb || it->Fixed() || it->group->entries.empty()) return;
+    const std::string_view surface = it->group->surface;
+    const text::Rune last = DecodeLastRune(surface);
+    if (surface.size() <= last.size || !text::IsKanji(text::DecodeRune(surface).cp)) return;
+    const std::string_view kana = surface.substr(surface.size() - last.size);
+    std::string_view kinds;
+    for (const auto& [k, kind] : kPotentialKana) {
+        if (kana == k) kinds = kind;
+    }
+    if (kinds.empty()) return;
+    const std::string_view base = f.w.arena.Keep(std::string(surface.substr(0, surface.size() - kana.size())));
+    const Lookup found = f.w.DoLookup(base, kModeGeneral);
+    std::vector<std::string> passives;
+    for (const Record* r = found.records; r != nullptr; r = r->child) {
+        if (r->source != base || At(r->partCode, 1) != '4' || !Has(kinds, std::string(1, At(r->partCode, 3)))) continue;
+        if (std::string p = KoreanPassiveLemma(output::Lemma(r->target, f.families)); !p.empty()) passives.push_back(std::move(p));
+    }
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        if (At(it->Code(slot), 2) != '7' || std::ranges::find(passives, ItemLemma(f, it, slot)) == passives.end()) return;
+    }
+    const std::string_view rest = From(it->text, it->start + static_cast<long>(surface.size()));
+    if (!PotentialClause(it, rest)) return;
+    Item* potential = f.w.InsertLateCandidate(it->text, it->start, it->tokenIndex, found.records);
+    if (potential == nullptr || potential->detail->record != 4 || potential->length != it->length ||
+        potential->group->surface != base) {
+        return;
+    }
+    it->group = potential->group;
+    it->detail = potential->detail;
+    it->detail->voice = Voice::Potential;
+}
+
 }  // namespace
 
 void DecideVoice(Flusher& f) {
@@ -1066,7 +1131,10 @@ void DecideVoice(Flusher& f) {
         std::string_view stem, rest;
         bool ichidan = false;
         const VoiceForm form = VoiceFormOf(f, it, stem, rest, spelled, ichidan);
-        if (form == VoiceForm::None) continue;
+        if (form == VoiceForm::None) {
+            SpelledPotential(f, it);
+            continue;
+        }
         const bool passive = form == VoiceForm::Godan || (form == VoiceForm::Rare && PassiveReading(f.w, it, rest));
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
