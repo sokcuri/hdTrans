@@ -25,6 +25,7 @@
 //= contraction.u-onbin	Starts of the text after the kanji stem of a godan verb in う that say its past or て form with う for っ (言うた, 思うて).
 //= contraction.u-onbin-not	Starts of the text of contraction.u-onbin that go on as another word (救うため, 戦うたび, 歌うたい).
 //= counter.bare-native-one	Counters after which an Arabic 1 in an idiom of counting is the bare native 하나, as the kanji one reads (1つ残らず 하나 남김없이).
+//= counter.added	Counters of things and actions that もう before a number adds one or more of (もう一匹 한 마리 더, もう１錠 1정 더); no counter of a time, an age, a floor or an order, after which もう is the time reached (もう三年 벌써 3년).
 //= ending.conjunctive	Ends of a word that join its clause to the next one (行って, 行けば, 行くけど, 行くので).
 //= ending.negative-start	Starts of an ending or of the next word that make a verb before them negative (いけない, いけません, いけず).
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
@@ -124,6 +125,8 @@
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
 //= particle.after-letter	Particles after which, or before which after a kanji or katakana, a single Latin letter of mark.laughter is a word, not laughter (変数wの値, のwキー).
+//= numeral.lead	Numerals that start a number with its counter in one word (一匹, 二人, 数本, 1回).
+//= numeral.many	Numerals of numeral.lead that start a count of more than one (10 to 19 start the numbers of two or more digits that begin with 1), after which もう before a past verb is the count reached (もう二人来た 벌써 두 사람 왔다).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
@@ -204,6 +207,7 @@
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
 //= word.do-angle	Starts of the words after 度 that make it an angle or a temperature: a change of direction, a bend, a turn, a tilt, or a range or step of the value (百八十度変わった, 九十度に曲げる, 三百六十度見渡す, 九十度近く).
 //= word.do-times	What follows 度 when it counts times: 目 (度目 번째), も and ほど (十度も 열 번이나, 五度ほど 다섯 번 정도).
+//= word.give-request	Words that ask to be given what is named before them (もう一枚ください 한 장 더 주세요).
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
 //= word.kuseni	The spellings of くせに and くせして that blame what goes against the clause or noun before them (知ってるくせに 알면서, 子供のくせに 아이 주제에).
@@ -396,6 +400,137 @@ contraction.u-onbin-not	うたい
 contraction.u-onbin-not	うたう
 
 counter.bare-native-one	つ
+
+counter.added	匹
+counter.added	頭
+counter.added	羽
+counter.added	人
+counter.added	名
+counter.added	本
+counter.added	枚
+counter.added	個
+counter.added	つ
+counter.added	発
+counter.added	杯
+counter.added	錠
+counter.added	粒
+counter.added	口
+counter.added	皿
+counter.added	品
+counter.added	隻
+counter.added	機
+counter.added	台
+counter.added	両
+counter.added	基
+counter.added	撃
+counter.added	戦
+counter.added	局
+counter.added	試合
+counter.added	回
+counter.added	周
+counter.added	歩
+counter.added	冊
+counter.added	曲
+counter.added	軒
+counter.added	着
+counter.added	足
+counter.added	箱
+counter.added	袋
+counter.added	缶
+counter.added	瓶
+counter.added	束
+counter.added	票
+counter.added	問
+counter.added	通
+counter.added	件
+counter.added	駅
+counter.added	泊
+counter.added	切れ
+counter.added	滴
+
+word.give-request	ください
+word.give-request	下さい
+word.give-request	ちょうだい
+word.give-request	頂戴
+
+numeral.lead	一
+numeral.lead	二
+numeral.lead	三
+numeral.lead	四
+numeral.lead	五
+numeral.lead	六
+numeral.lead	七
+numeral.lead	八
+numeral.lead	九
+numeral.lead	十
+numeral.lead	百
+numeral.lead	数
+numeral.lead	1
+numeral.lead	2
+numeral.lead	3
+numeral.lead	4
+numeral.lead	5
+numeral.lead	6
+numeral.lead	7
+numeral.lead	8
+numeral.lead	9
+numeral.lead	１
+numeral.lead	２
+numeral.lead	３
+numeral.lead	４
+numeral.lead	５
+numeral.lead	６
+numeral.lead	７
+numeral.lead	８
+numeral.lead	９
+
+numeral.many	二
+numeral.many	三
+numeral.many	四
+numeral.many	五
+numeral.many	六
+numeral.many	七
+numeral.many	八
+numeral.many	九
+numeral.many	十
+numeral.many	百
+numeral.many	数
+numeral.many	2
+numeral.many	3
+numeral.many	4
+numeral.many	5
+numeral.many	6
+numeral.many	7
+numeral.many	8
+numeral.many	9
+numeral.many	２
+numeral.many	３
+numeral.many	４
+numeral.many	５
+numeral.many	６
+numeral.many	７
+numeral.many	８
+numeral.many	９
+numeral.many	10
+numeral.many	11
+numeral.many	12
+numeral.many	13
+numeral.many	14
+numeral.many	15
+numeral.many	16
+numeral.many	17
+numeral.many	18
+numeral.many	19
+numeral.many	１０
+numeral.many	１１
+numeral.many	１２
+numeral.many	１３
+numeral.many	１４
+numeral.many	１５
+numeral.many	１６
+numeral.many	１７
+numeral.many	１８
+numeral.many	１９
 ending.conjunctive	て
 ending.conjunctive	ば
 ending.conjunctive	たら

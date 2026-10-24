@@ -47,6 +47,7 @@ struct ResolvedItem {
     // Some entry other than entry 0 and the selected one holds a Hangul syllable (the
     // entries up to the first one without code and text).
     bool otherHangul = false;
+    std::string appended;  // Korean written right after the item, outside its count and conjugation
 };
 
 }  // namespace hdTrans::output

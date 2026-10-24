@@ -446,6 +446,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"select-target", CxVerb::SelectTarget},
         {"take-target", CxVerb::TakeTarget},
         {"set-target", CxVerb::SetTarget},
+        {"append-target", CxVerb::AppendTarget},
         {"set-ending", CxVerb::SetEnding},
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
@@ -922,6 +923,11 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
         }
         case internal::CxVerb::TakeTarget: TakeTarget(it, At(it->Code(it->selected), 0), a.value, source); break;
         case internal::CxVerb::SetTarget: it->AssignEntrySurface(it->selected, a.value, source); break;
+        case internal::CxVerb::AppendTarget:
+            // The word keeps its candidate; -why names the row that wrote after it.
+            it->appended += a.value;
+            it->choice = source;
+            break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
         case internal::CxVerb::ReplaceHead: {
             const std::string_view target = it->EntryText(it->selected);

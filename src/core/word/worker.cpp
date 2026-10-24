@@ -194,6 +194,7 @@ Item* Worker::NewItem(Detail* d, Group* g, std::string_view text, int start, int
     it->selectionFlag = 0;
     it->adjectival = false;
     it->lexical = false;
+    it->appended.clear();
     return it;
 }
 

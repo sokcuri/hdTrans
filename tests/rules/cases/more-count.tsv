@@ -1,0 +1,55 @@
+# 규칙: LEX-28
+rule	input	expected	kind	layer
+cx:more-count:10	「もう一枚、焼いてこようか？」	「한 장 더, 구워 올까?」	fix	rewrites
+cx:more-count:10	ならもう一本要るか。	라면 한 개 더 필요할까.	fix	rewrites
+cx:more-count:10	念のためもう一発出してみたら、気絶してしまった。	만약을 위해 한 방 더 내 보았더니, 기절해 버렸다.	fix	rewrites
+cx:more-count:10	もう一本、どうぞ。	한 개 더, 어서.	fix	rewrites
+cx:more-count:10	ワイン、もう一本開けようか？	와인, 한 병 더 열까?	fix	rewrites
+cx:more-count:10	あ、ワインもう一本頼みますねぇ。	아, 와인 한 병 더 부탁하네요.	fix	rewrites
+cx:more-count:10	肉、もう一枚焼く？	고기, 한 장 더 구워?	fix	rewrites
+cx:more-count:10	もう一枚ちょうだい！	한 장 더 줘!	fix	rewrites
+cx:more-count:10	真っ黒な犬の後ろにさらにもう一匹、同じようなサイズの真っ黒な犬がいた。	새까만 개 뒤로 더욱 한 마리 더, 같은 사이즈의 새까만 개가 있었다.	fix	rewrites
+cx:more-count:10	「それじゃあもう一発」	「그럼 한 방 더」	fix	rewrites
+cx:more-count:10	だが、そこで彼女は尚ももう一歩踏み出した。	하지만, 거기서 그녀는 더욱 한 걸음 더 내디뎠다.	fix	rewrites
+cx:more-count:10	もう一匹いた。	한 마리 더 있었다.	fix	rewrites
+cx:more-count:10	もう二本ある。	두 개 더 있다.	fix	rewrites
+cx:more-count:10	もう三年経った。	벌써 3년 지났다.	keep	rewrites
+cx:more-count:10	もう二人来た。	벌써 두 사람 왔다.	keep	rewrites
+cx:more-count:10	もう一泊する。	!rule:cx:more-count:10	keep	rewrites
+cx:more-count:10	「もう一歩ってとこですかね」	!rule:cx:more-count:10	keep	rewrites
+cx:more-count:10	もう一撃だ！	!rule:cx:more-count:10	keep	rewrites
+cx:more-count:10	もう三回目だ。	이제 세 번째다.	keep	rewrites
+cx:more-count:10	もう十歳だ。	!rule:cx:more-count:10	keep	rewrites
+cx:more-count:10	もう五時だ。	이제 5시다.	keep	rewrites
+cx:more-count:10	もう二度と来ない。	이제 두 번 다시 오지 않는다.	keep	rewrites
+cx:more-count:10	もう二枚ください	두 장 더 주세요	fix	rewrites
+cx:more-count:10	もう二個食べた	이제 두 개 먹었다	keep	rewrites
+dict:jisjk:374780	もう二個食べた	!rule:dict:jisjk:374780	fix	local
+dict:jisjk:374780	もう1本で終わりだ	!rule:dict:jisjk:374780	fix	local
+dict:jisjk:374780	もう１本、もう１本と飲んだ	!rule:dict:jisjk:374780	fix	local
+cx:more-count:20	「もう１皿頼む！」	「1접시 더 부탁한다!」	fix	rewrites
+cx:more-count:20	もう２個ください。	2개 더 주세요.	fix	rewrites
+cx:more-count:20	もう１錠飲む……	1정 더 마신다……	fix	rewrites
+cx:more-count:20	スナイパーがもう１人いて、	스나이퍼가 1명 더 있어,	fix	rewrites
+cx:more-count:20	その時、もう１発、ライフルの射撃音が響いた。	그 때, 1발 더, 라이플 사격소리가 울렸다.	fix	rewrites
+cx:more-count:20	「もう１票！」	「1표 더!」	fix	rewrites
+cx:more-count:20	白ワイン、もう1本開けちゃうか？	화이트 와인, 1개 더 열어버릴까?	fix	rewrites
+cx:more-count:20	もう１本ある。	1개 더 있다.	fix	rewrites
+cx:more-count:20	もう2回やった。	!rule:cx:more-count:20	keep	rewrites
+cx:more-count:20	旗艦と他にもう2隻以上を含む第一艦隊	기함과 그 밖에도 2척 이상을 포함한 제1함대	keep	rewrites
+cx:more-count:20	「さらにもう１日前じゃなかったかな？」	!rule:cx:more-count:20	keep	rewrites
+cx:more-count:35	そしてもう一つの要素がサブ職業。	그리고 또 하나의 요소가 서브 직업.	fix	rewrites
+cx:more-count:35	もう一つがどこにあるのかがわからない。	또 하나가 어디에 있는지를 모른다.	fix	rewrites
+cx:more-count:35	もう一つある。	!rule:cx:more-count:35	keep	rewrites
+cx:more-count:35	もう一つは南だ。	!rule:cx:more-count:35	keep	rewrites
+cx:more-count:40	もう一枚は捨てた。	또 한 장은 버렸다.	fix	rewrites
+cx:more-count:40	もう一方は反射されたビームが命中する	!rule:cx:more-count:40	keep	rewrites
+cx:more-count:40	もう10本は残っている。	!rule:cx:more-count:40	keep	rewrites
+cx:more-count:40	もう12枚は捨てた。	!rule:cx:more-count:40	keep	rewrites
+cx:more-count:40	もう1回戦やろう	또 1회전 하자	fix	rewrites
+cx:more-count:40	もう一匹猫がいた	rule:cx:more-count:40=또	fix	rewrites
+cx:more-count:40	もう二本剣を抜いた	!rule:cx:more-count:40	keep	rewrites
+cx:more-count:50	単純にもう１本の道を見つけてた	rule:cx:more-count:50=또	fix	rewrites
+cx:more-count:50	もう１本ある。	!rule:cx:more-count:50	keep	rewrites
+cx:more-count:50	そこを中心にもう1本ラリエットを流す	rule:cx:more-count:50=또	fix	rewrites
+cx:more-count:50	もう１本剣を抜いた	!rule:cx:more-count:50	keep	rewrites
