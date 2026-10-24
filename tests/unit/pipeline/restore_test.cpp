@@ -349,7 +349,9 @@ HD_TEST(pipeline_laughter_letters) {
         {"그것은 없어 w", "그것은 없어 ㅋ"},
         {"진짜야www", "진짜야ㅋㅋㅋ"},
         {"진짜야! ww", "진짜야! ㅋㅋ"},
-        {"ㅋㅋ wwww", "ㅋㅋ ㅋㅋㅋㅋ"},
+        {"ㅋㅋ wwww", "ㅋㅋㅋㅋ"},
+        {"ㅋㅋㅋw", "ㅋㅋㅋ"},
+        {"좋아. www", "좋아. www"},
         {"www", "ㅋㅋㅋ"},
         {"송wwww 그런가", "송ㅋㅋㅋㅋ 그런가"},
         {"www.example.com", "www.example.com"},
@@ -367,4 +369,27 @@ HD_TEST(pipeline_laughter_letters) {
     HD_CHECK_EQ(pipeline::WriteLaughter("키보드의 w키", "キーボードのwキー"), std::string("키보드의 w키"));
     HD_CHECK_EQ(pipeline::WriteLaughter("있어w미도리 씨w", "あるよなｗミドリさんｗ"), std::string("있어ㅋ미도리 씨ㅋ"));
     HD_CHECK_EQ(pipeline::WriteLaughter("웃은 wwww미안해", "笑ったｗｗｗｗゴメン"), std::string("웃은 ㅋㅋㅋㅋ미안해"));
+    // Each run is read in the typed text when both have the same runs.
+    const struct { const char* in; const char* typed; const char* want; } typed[] = {
+        {"좋아. www", "大好き。ｗｗｗ", "좋아. ㅋㅋㅋ"},
+        {"좋아―ww", "ホントだねーｗｗ", "좋아―ㅋㅋ"},
+        {"≫454www≫456", "≫454ｗｗｗ≫456", "≫454ㅋㅋㅋ≫456"},
+        {"맛있지 wwby", "おいしいよねｗｗby", "맛있지 ㅋㅋby"},
+        {"wwwwww일을", "ｗｗｗｗｗｗ一乙", "ㅋㅋㅋㅋㅋㅋ일을"},
+        {"그것은 ㅋㅋ w", "それは草ｗ", "그것은 ㅋㅋ"},
+        {"ㅋㅋㅋwwwww", "ワロタwwwww", "ㅋㅋㅋㅋㅋ"},
+        {"진짜냐(w)", "マジかよ（ｗ）", "진짜냐(웃음)"},
+        {"ww (웃음)", "ｗｗ（笑）", "ㅋㅋ"},
+        {"f(w)를 구한다", "f(w)を求める", "f(w)를 구한다"},
+        {"폭(w), 높이(h)", "幅(w)、高さ(h)", "폭(w), 높이(h)"},
+        {"w배에 나온다", "ｗ杯に出る", "w배에 나온다"},
+        {"www.example.com", "ｗｗｗ.example.com", "www.example.com"},
+        {"No...way", "No...way", "No...way"},
+        {"야...w", "よ...w", "야...ㅋ"},
+        {"OK www", "OK www", "OK www"},
+        {"w=3으로 한다", "w=3とする", "w=3으로 한다"},
+        {"@wwwboy 씨", "@wwwboyさん", "@wwwboy 씨"},
+        {"ID:abcwww+", "ID:abcwww+", "ID:abcwww+"},
+    };
+    for (const auto& c : typed) HD_CHECK_EQ(pipeline::WriteLaughter(c.in, c.typed), std::string(c.want));
 }

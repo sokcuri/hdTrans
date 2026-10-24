@@ -104,6 +104,7 @@
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.laughter	Latin letters a run of which laughs after Korean in the output (없어ｗｗ 없어ㅋㅋ).
 //= ko.laughter	The Korean written for each laughing letter of mark.laughter.
+//= ko.bracketed-laughter	The Korean written in the brackets of a bracketed run of mark.laughter ((w) (웃음)), as for (笑).
 //= mark.before-laughter	Marks after which a run of mark.laughter still laughs (진짜야!ｗ).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.exclaim	Exclamation marks: a question with one after it is a surprised remark, not an offer (待ち伏せますか！).
@@ -1350,6 +1351,7 @@ mark.close-after-space	)
 mark.laughter	w
 mark.laughter	ｗ
 ko.laughter	ㅋ
+ko.bracketed-laughter	웃음
 mark.before-laughter	!
 mark.before-laughter	?
 mark.before-laughter	~
