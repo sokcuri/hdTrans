@@ -227,7 +227,10 @@ def translate(number, doc, path, header):
 
 pool = ThreadPoolExecutor(int(jobs) or os.cpu_count())
 futures = [pool.submit(translate, i, *doc) for i, doc in enumerate(docs)]
-wait(futures, return_when=FIRST_EXCEPTION)
+# Timed waits, so that the TERM handler runs while the translations are still going.
+while wait(futures, timeout=0.5, return_when=FIRST_EXCEPTION).not_done and \
+        not any(f.done() and f.exception() for f in futures):
+    pass
 for future in futures:
     if future.done() and future.exception():
         pool.shutdown(wait=False, cancel_futures=True)

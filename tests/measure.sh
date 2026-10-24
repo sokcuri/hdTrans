@@ -43,13 +43,15 @@ HDTRANS_TESTDATA=$tmp/sample "$here/tools/measure.sh" -c "$cli" -d "$dicts" thir
     status=$?
 [ "$status" -eq 2 ]
 grep -F 'corpus: 2 lines' "$tmp/third.log" > /dev/null
-# A TERM to the whole process group stops every set and leaves no translation running. Only where
-# GNU timeout moves the CLI into its own group does this show that measure.sh stops it itself.
-printf '#!/bin/sh\necho $$ >> "%s/pids"\nexec sleep 30\n' "$tmp" > "$tmp/slow"
+# A TERM to the whole process group stops every set and leaves no translation running. The fake
+# CLI records its pid and blocks until killed; TERM goes out once all six translations (corpus,
+# sample, two documents, two examples at HDTRANS_JOBS=2) have started. Only where GNU timeout
+# moves the CLI into its own group does this show that measure.sh stops it itself.
+printf '#!/bin/sh\necho $$ >> "%s/pids"\nexec tail -f /dev/null\n' "$tmp" > "$tmp/slow"
 chmod +x "$tmp/slow"
-python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" "$tmp/pids" <<'PY'
+python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" "$tmp/pids" "$tmp" <<'PY'
 import os, signal, subprocess, sys, time
-measure, slow, dicts, pids = sys.argv[1:]
+measure, slow, dicts, pids, tmp = sys.argv[1:]
 p = subprocess.Popen(["sh", measure, "-c", slow, "-d", dicts, "slow"], start_new_session=True,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -69,29 +71,35 @@ def alive(pid):
         return False
 
 
-# corpus, sample, two documents and at least one example
-deadline = time.time() + 30
-while len(started()) < 5 and time.time() < deadline:
-    time.sleep(0.1)
+def give_up(message):
+    listing = subprocess.run(["ps", "-ax", "-o", "pid,ppid,pgid,stat,command"],
+                             capture_output=True, text=True).stdout.splitlines()
+    print("\n".join(l for l in listing if tmp in l or "documents.py" in l), file=sys.stderr)
+    for x in started():
+        if alive(x):
+            os.kill(x, signal.SIGKILL)
+    try:
+        os.killpg(p.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    sys.exit(message)
+
+
+def until(test, seconds):
+    deadline = time.monotonic() + seconds
+    while not test() and time.monotonic() < deadline:
+        time.sleep(0.1)
+    return test()
+
+
+if not until(lambda: len(started()) >= 6 or p.poll() is not None, 60) or p.poll() is not None:
+    give_up(f"{len(started())} translations started, measure.sh status {p.poll()}")
 os.killpg(p.pid, signal.SIGTERM)
-try:
-    status = p.wait(timeout=20)
-except subprocess.TimeoutExpired:
-    status = None
-deadline = time.time() + 5
-while any(alive(x) for x in started()) and time.time() < deadline:
-    time.sleep(0.1)
-left = [x for x in started() if alive(x)]
-for x in left:
-    os.kill(x, signal.SIGKILL)
-if status is None:
-    os.killpg(p.pid, signal.SIGKILL)
-    sys.exit("measure.sh did not stop")
-if len(started()) < 5:
-    sys.exit(f"only {len(started())} translations started")
-if left:
-    sys.exit(f"left running: {left}")
-assert status != 0, status
+if not until(lambda: p.poll() is not None, 60):
+    give_up("measure.sh did not stop")
+if not until(lambda: not any(alive(x) for x in started()), 10):
+    give_up(f"left running: {[x for x in started() if alive(x)]}")
+assert p.returncode != 0, p.returncode
 PY
 # The audit draws the same lines again and rates a grade file.
 python3 -I "$here/tools/audit.py" draw "$tmp/work/second" "$tmp/audit.tsv" --per-set 1
