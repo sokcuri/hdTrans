@@ -1455,6 +1455,6 @@
 いっぱい	가득	class:verb.filling	after	adv
 おかしい	이상하다	が,は	before	adj
 おかしい	웃기다	class:ko-sound.laugh	sentence	adj
-// 解放 of memory, a resource or a lock is 해제; 反発 of a price or a market index is 반등.
+// 解放 of memory, a resource or a lock is 해제; 反発 in a sentence about a share price, an index or a rate is 반등.
 解放	해제	メモリ,メモリー,リソース,ロック,ハンドル,バッファ,バッファー,オブジェクト,インスタンス,領域,キャッシュ,ポインタ,ポインター,セマフォ,ミューテックス,ファイルハンドル,コネクション,ソケット	before	n
-反発	반등	株価,平均株価,日経平均,日経平均株価,株,株式,株式市場,相場,円相場,為替,終値,指数,株価指数,先物,原油,原油価格,金利,長期金利,債券,ダウ,東証,ドル,ユーロ,円	sentence	n
+反発	반등	株価,平均株価,日経平均,日経平均株価,株式,株式市場,相場,円相場,為替,終値,指数,株価指数,先物,原油価格,長期金利,債券,ダウ,東証	sentence	n

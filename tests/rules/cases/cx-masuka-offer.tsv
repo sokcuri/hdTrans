@@ -39,3 +39,12 @@ cx:masuka-offer:7	『自動サポートをご利用されますか？』	!rule:c
 cx:masuka-offer:10	「うわ！ そこで待ち伏せますか！」	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	「あ、そう来ますか」	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:10	「ヨウタサン。コノ、カンジ、ナント、ヨミマスカ？」	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	毎日勉強しますか？	매일 공부합니까?	keep	rewrites
+cx:masuka-offer:10	「あなたは神を信じますか？」	「당신은 신을 믿습니까?」	keep	rewrites
+cx:masuka-offer:10	このバスは駅に行きますか？	이 버스는 역에 갑니까?	keep	rewrites
+cx:masuka-offer:10	彼は明日帰りますか？	그는 내일 돌아갑니까?	keep	rewrites
+cx:masuka-offer:10	犬は吠えますか？	개는 짖습니까?	keep	rewrites
+cx:masuka-offer:7	『あなたは毎朝走りますか？』	『당신은 매일 아침 달립니까?』	keep	rewrites
+cx:masuka-offer:7	セーブしますか？（はい／いいえ）	세이브하시겠습니까? (네/아니요)	fix	rewrites
+cx:masuka-offer:10	待ち伏せますか？！	!rule:cx:masuka-offer:10	keep	rewrites
+cx:masuka-offer:10	「一生懸命働いた人たちは、それで満足しますか？　納得してくれますか？」	!rule:cx:masuka-offer:10	keep	rewrites

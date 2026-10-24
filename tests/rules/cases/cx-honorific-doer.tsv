@@ -1,14 +1,14 @@
 # 규칙: SPC-10
 rule	input	expected	kind	layer
 cx:honorific-doer:20	ご予約のお客様でいらっしゃいますか	예약하신 손님이십니까	fix	rewrites
-cx:honorific-doer:20	ご来店のお客様に粗品を差し上げます。	내점하신 손님에게 조품을 드립니다.	fix	rewrites
+cx:honorific-doer:20	ご来店のお客様に粗品を差し上げます。	rule:cx:honorific-doer:20=하신	fix	rewrites
 cx:honorific-doer:20	ご参加の皆様、ありがとうございます。	참가하신 여러분, 감사합니다.	fix	rewrites
 cx:honorific-doer:20	ご購入のお客様は、こちらへどうぞ。	구입하신 손님은, 이쪽으로 오세요.	fix	rewrites
 cx:honorific-doer:20	ご乗車のお客様にお知らせします。	승차하신 손님에게 알려 드리겠습니다.	fix	rewrites
 cx:honorific-doer:20	ご来場の皆様にお願い申し上げます。	입장하신 여러분에게 부탁드립니다.	fix	rewrites
 cx:honorific-doer:20	ご注文のお客様、お待たせいたしました。	주문하신 손님, 기다리게 해서 죄송합니다.	fix	rewrites
 cx:honorific-doer:20	ご宿泊のお客様へ	숙박하신 손님에게	fix	rewrites
-cx:honorific-doer:10	ご利用のお客様へのお知らせです。	이용하시는 손님에게로의 알림입니다.	fix	rewrites
+cx:honorific-doer:10	ご利用のお客様へのお知らせです。	rule:cx:honorific-doer:10=하시는	fix	rewrites
 cx:honorific-doer:30	ご使用の方は、受付にお申し出ください。	사용하시는 분은, 접수에 신청해 주세요.	fix	rewrites
 cx:honorific-doer:30	ご希望の方はお申し出ください。	희망하시는 분은 신청해 주세요.	fix	rewrites
 cx:honorific-doer:30	お持ちの方	가지고 계신 분	keep	local
@@ -19,3 +19,8 @@ cx:honorific-doer:20	予約のお客様	!rule:cx:honorific-doer:20	keep	rewrites
 cx:honorific-doer:30	こちらの方が早い。	이쪽이 빠르다.	keep	rewrites
 cx:honorific-doer:10	利用のお客様	!rule:cx:honorific-doer:10	keep	rewrites
 cx:honorific-doer:10	ご利用の前にお読みください。	!rule:cx:honorific-doer:10	keep	rewrites
+cx:honorific-doer:20	ご確認の方をお願いします。	!rule:cx:honorific-doer:20	keep	rewrites
+cx:honorific-doer:20	ご連絡の方、よろしくお願いいたします。	!rule:cx:honorific-doer:20	keep	rewrites
+cx:honorific-doer:20	ご検討の方をよろしくお願いします。	!rule:cx:honorific-doer:20	keep	rewrites
+cx:honorific-doer:20	ご返信の方お待ちしております。	!rule:cx:honorific-doer:20	keep	rewrites
+cx:honorific-doer:10	ご利用の方お待ちしております。	!rule:cx:honorific-doer:10	keep	rewrites

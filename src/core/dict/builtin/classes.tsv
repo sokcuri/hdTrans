@@ -5,6 +5,7 @@
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
+//= adverb.habit	Adverbs of habit and frequency: a ますか question with one of them asks what someone usually does, not an offer (毎日勉強しますか 매일 공부합니까).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
@@ -73,7 +74,7 @@
 //= mark.before-laughter	Marks after which a run of mark.laughter still laughs (진짜야!ｗ).
 //= mark.close-after-space	Closing brackets before which the space after ? or ! is dropped (정말? 」 정말?」).
 //= mark.exclaim	Exclamation marks: a question with one after it is a surprised remark, not an offer (待ち伏せますか！).
-//= mark.prompt-follow	What follows the question mark of a prompt shown on a screen: a quoting と, a closing 》 and the answers (開始しますか？という, 取得しますか？》, はい／いいえ).
+//= mark.prompt-follow	What follows the question mark of a prompt shown on a screen: a quoting と, a closing 》 and the answers (開始しますか？という, 取得しますか？》, はい／いいえ, （はい／いいえ）).
 //= mark.restart	Ellipses and dashes (also two katakana or Latin middle dots) after which a word restarts what was being said (私が…私が).
 //= mark.comma	Commas, before which an utterance goes on (また明日、学校で).
 //= mark.question	Question marks, after which a row read only where the utterance ends asks instead (また明日？ 또 내일?).
@@ -104,7 +105,7 @@
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
 //= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
-//= noun.return-here	Ends of the nouns of here and of one's home base, to which 戻る comes back: 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다).
+//= noun.return-here	Ends of the nouns of here and of a ship's home port: 戻る to them, or in a sentence that names here after it, comes back, 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다, 車に戻ったんだ、ここも 차로 돌아왔어).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
@@ -235,6 +236,22 @@ adverb.habitual	しばしば
 adverb.going-well	上手く
 adverb.going-well	旨く
 adverb.going-well	巧く
+adverb.habit	毎日
+adverb.habit	毎朝
+adverb.habit	毎晩
+adverb.habit	毎週
+adverb.habit	毎月
+adverb.habit	毎年
+adverb.habit	毎回
+adverb.habit	いつも
+adverb.habit	普段
+adverb.habit	ふだん
+adverb.habit	普通
+adverb.habit	よく
+adverb.habit	時々
+adverb.habit	ときどき
+adverb.habit	たまに
+adverb.habit	常に
 
 adverb.observation	よく
 adverb.observation	いつも
@@ -1006,6 +1023,8 @@ mark.prompt-follow	と
 mark.prompt-follow	》
 mark.prompt-follow	はい
 mark.prompt-follow	いいえ
+mark.prompt-follow	（はい
+mark.prompt-follow	(はい
 mark.sentence-end	。
 mark.sentence-end	！
 mark.sentence-end	？
@@ -2623,19 +2642,12 @@ noun.receive-verbal	送金
 noun.receive-verbal	融資
 noun.return-here	ここ
 noun.return-here	こっち
-noun.return-here	こちら
 noun.return-here	ここら
 noun.return-here	この場
-noun.return-here	此処
-noun.return-here	此方
-noun.return-here	手元
-noun.return-here	手もと
 noun.return-here	母港
 noun.return-here	鎮守府
-noun.return-here	自宅
-noun.return-here	実家
-noun.return-here	故郷
-noun.return-here	地元
+noun.return-here	ここ
+noun.return-here	こちら
 
 verb.naming	呼ぶ
 verb.naming	書く

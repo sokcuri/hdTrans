@@ -26,4 +26,4 @@ lookup:前の画面	前の画面に戻る	이전 화면으로 돌아간다	fix	l
 lookup:査収	資料を添付いたしましたので、ご査収ください。	자료를 첨부했으므로, 확인해 주십시오.	fix	lookup
 lookup:返信	ご返信お待ちしております。	답장 기다리고 있습니다.	fix	lookup
 lookup:何卒	何卒、ご容赦ください。	부디, 용서해 주십시오.	fix	lookup
-lookup:取り急ぎ	取り急ぎご報告いたします。	우선 보고하겠습니다.	fix	lookup
+lookup:取り急ぎ	取り急ぎ出発した。	서둘러 출발했다.	keep	lookup

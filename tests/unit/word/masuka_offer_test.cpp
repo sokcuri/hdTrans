@@ -30,6 +30,8 @@ HD_TEST(word_masuka_offer_marks_after_the_question) {
     HD_CHECK_EQ(Translate("帰りますか？"), std::string("돌아갈까요?"));
     // An exclamation mark after it makes a surprised remark (exclaim-after).
     HD_CHECK_EQ(Translate("帰りますか！"), std::string("돌아갑니까!"));
+    HD_CHECK_EQ(Translate("帰りますか？！"), std::string("돌아갑니까?!"));
     // A prompt on a screen asks the reader's will (prompt-after).
     HD_CHECK(Translate("帰りますか？はい／いいえ").starts_with("돌아가시겠습니까?"));
+    HD_CHECK(Translate("帰りますか？（はい／いいえ）").starts_with("돌아가시겠습니까?"));
 }

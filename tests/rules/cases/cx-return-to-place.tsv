@@ -5,7 +5,7 @@ cx:return-to:20	メニューに戻ります。	메뉴로 돌아갑니다.	fix	re
 cx:return-to:20	前の画面に戻る	이전 화면으로 돌아간다	fix	rewrites
 cx:return-to:20	席へ戻る。	자리로 돌아간다.	fix	rewrites
 cx:return-to:20	さっさと通常モードに戻らないと。	빨리 통상 모드로 돌아가지 않으면.	fix	rewrites
-cx:return-to:20	まるで、子供の頃に戻ったみたいで	마치, 어릴 적으로 돌아간 것 같아	fix	rewrites
+cx:return-to:20	まるで、子供の頃に戻ったみたいで	rule:cx:return-to:20=(으)로	fix	rewrites
 cx:return-to:20	舌だけが絡み合う状態に戻る。	혀만이 얽히는 상태로 돌아간다.	fix	rewrites
 cx:return-to:20	だが、すぐに真顔に戻る。	하지만, 곧바로 진지한 얼굴로 돌아간다.	fix	rewrites
 cx:return-to:20	少し安心して平常心に戻る。	조금 안심해 평상심으로 돌아간다.	fix	rewrites
@@ -34,3 +34,7 @@ cx:return-to:15	タイトル画面に戻ります	!rule:cx:return-to:15	keep	rew
 cx:return-to:15	4時頃に戻る予定です。	4시경에 돌아올 예정입니다.	keep	rewrites
 cx:return-to:15	巡り巡って自分の手元に戻って来た	!rule:cx:return-to:15	keep	rewrites
 cx:return-to:20	気づくと、中央分離帯から今きた横断歩道へ戻っていた。	!rule:cx:return-to:20	keep	rewrites
+cx:return-to:20	城に戻ってこの手紙を渡せ。	성으로 돌아가 이 편지를 건네주어라.	keep	rewrites
+cx:return-to:20	城に戻るこの道は長い。	성으로 돌아가는 이 길은 길다.	keep	rewrites
+cx:return-to:15	すぐに美浜に戻って来れた。	rule:cx:return-to:15=(으)로	fix	rewrites
+cx:return-to:15	車に戻ったんだよここも誰もいねーけど	rule:cx:return-to:15=(으)로	fix	rewrites
