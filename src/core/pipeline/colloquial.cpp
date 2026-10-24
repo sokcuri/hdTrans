@@ -936,7 +936,16 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                 }
             }
             if (word <= h.size() && !afterWord) continue;
-            const size_t mark = i + std::max(word, h.size());
+            // A longer word takes the lengthening after the shortest key that goes on past the
+            // honorific (ちゃんと in ちゃ～んと出撃, not the key ちゃんと出).
+            size_t shortest = word;
+            for (size_t n = h.size() + 1; n < word; n++) {
+                if (!e.Tags(std::u32string_view(plain).substr(i, n)).empty()) {
+                    shortest = n;
+                    break;
+                }
+            }
+            const size_t mark = i + std::max(shortest, h.size());
             // The honorific, alone or ending a word, takes drawn marks: the restore stage writes its last
             // syllable drawn out. A word that goes on past it takes the lengthening.
             if (word > h.size()) {
