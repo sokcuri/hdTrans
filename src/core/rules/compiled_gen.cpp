@@ -3928,10 +3928,8 @@ bool RuleL463([[maybe_unused]] Item* p) {
 }
 
 // local 464
-//     src == "に" and pos is 2** and pos[-1] is 1** and (sem[-1] has UAq or sem[-1] has UQf) and ko := "(으)로"
 bool RuleL464([[maybe_unused]] Item* p) {
-    return (SrcEq(p, 0, "に"sv) && PumsaEq(p, 0, "2**"sv) && PumsaEq(p, -1, "1**"sv) && (AttrEq(p, -1, "UAq"sv) ||
-           AttrEq(p, -1, "UQf"sv)) && DstSet(p, 0, "(으)로"sv));
+    return false;
 }
 
 // local 465
@@ -4904,7 +4902,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL461, 0xe3c93a97d654f9adull},
     {RuleL462, 0x9a5c3caca856c22cull},
     {RuleL463, 0xce506be8b0e6051full},
-    {RuleL464, 0xfa41b3f700de2b64ull},
+    {RuleL464, 0xfbc9691c9a40a7c5ull},
     {RuleL465, 0x4e2019ca1058e999ull},
     {RuleL466, 0x38dfc8adfdbc231cull},
     {RuleL467, 0xba86e2df47057baeull},

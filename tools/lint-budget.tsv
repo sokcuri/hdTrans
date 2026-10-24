@@ -3,9 +3,9 @@
 # needs a decision about the translation (docs/rule-compiler.md).
 always-false	1
 empty-pattern	1
-key-mismatch	9
+key-mismatch	0
 literal-space	0
 lone-test	201
-never-fires	2
+never-fires	0
 self-compare	3
 unknown-code	5

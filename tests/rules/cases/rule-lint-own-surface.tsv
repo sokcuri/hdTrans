@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:jisjk:202240	シュートを打つ。	슛을 날린다.	fix	local
+dict:jisjk:202240	ホームランを打った。	rule:dict:jisjk:202240=날&AA@	fix	local
+dict:jisjk:202240	ボールを打つ。	!rule:dict:jisjk:202240	keep	local
+dict:jisjk:265273	三年振りに会った。	rule:dict:jisjk:265273=만	keep	local
+dict:jisjk:340311	田中らが来た。	rule:dict:jisjk:340311=등	keep	local
+dict:jisjk:370945	神社縁起。	rule:dict:jisjk:370945=기원	keep	local
+dict:jisjk:114652	期限とする。	기한으로 한다.	keep	local
+dict:jisjk:114704	撃て。	쏘아라.	keep	local-ending
