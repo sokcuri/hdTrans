@@ -1610,7 +1610,7 @@ bool RuleL176([[maybe_unused]] Item* p) {
 
 // local 177
 //     pos[-1] is 1** and sem[-1] has VHn|VAm and (src[+1] == "似てい" or src[+1] == "似" or src[+1] == "追いつ" or src[+1] == "会" or src[+1] == "待たされ") and pos[+1] is 4**
-//     pos[-1] is 1** and (src[+1] == "代わ" or src[+1] == "踏み切" or src[+1] == "遭う" or src[+1] == "会" or src[+1] == "憧れ") and pos[+1] is 4**
+//     pos[-1] is 1** and (src[+1] == "代わ" or src[+1] == "踏み切" or src[+1] == "遭う" or src[+1] == "会" or src[+1] == "憧れ" or src[+1] == "乗り遅れ") and pos[+1] is 4**
 //     pos[-1] is 1** and sem[-1] under VHn and pos[+1] is 3** and (src[+2] == "遭" or src[+2] == "会" or src[+2] == "憧れ") and pos[+2] is 4**
 //     src[+1] == "固執"
 bool RuleL177([[maybe_unused]] Item* p) {
@@ -1623,7 +1623,8 @@ bool RuleL177([[maybe_unused]] Item* p) {
            SrcEq(p, 1, "踏み切"sv) ||
            SrcEq(p, 1, "遭う"sv) ||
            SrcEq(p, 1, "会"sv) ||
-           SrcEq(p, 1, "憧れ"sv)) && PumsaEq(p, 1, "4**"sv)) ||
+           SrcEq(p, 1, "憧れ"sv) ||
+           SrcEq(p, 1, "乗り遅れ"sv)) && PumsaEq(p, 1, "4**"sv)) ||
            (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "3**"sv) && (SrcEq(p, 2, "遭"sv) ||
            SrcEq(p, 2, "会"sv) ||
            SrcEq(p, 2, "憧れ"sv)) && PumsaEq(p, 2, "4**"sv)) ||
@@ -4611,7 +4612,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL174, 0x354d73e401bfab74ull},
     {RuleL175, 0x319420ee6f69e1eeull},
     {RuleL176, 0x8c3607ffd2fa82bcull},
-    {RuleL177, 0x83662d50f72c48ddull},
+    {RuleL177, 0xec71ef877aa2fb26ull},
     {RuleL178, 0xd3a2d9a092d309b9ull},
     {RuleL179, 0xe92575172a0a2872ull},
     {RuleL180, 0xcb14b6a9db55cd88ull},

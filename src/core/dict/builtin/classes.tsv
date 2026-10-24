@@ -179,6 +179,7 @@
 //= word.greeting-o	The greetings お帰りなさい and お休みなさい, which are no orders.
 //= word.kara-source-keep	Starts of the words after から that keep (으)로부터 (から守る, から逃げる, から身を).
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
+//= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
 //= word.partner-to	Starts of the words of company, sameness or difference before which a と going on from the line before is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -2984,6 +2985,19 @@ word.meet-partner	ここ
 word.meet-partner	そこ
 word.meet-partner	あそこ
 word.meet-partner	どこ
+word.near-miss	危うく
+word.near-miss	あやうく
+word.near-miss	危く
+word.near-miss	もう少しで
+word.near-miss	もうちょっとで
+word.near-miss	もうちょいで
+word.near-miss	あと少しで
+word.near-miss	間違えば
+word.near-miss	間違えれば
+word.near-miss	下手をすれば
+word.near-miss	下手すれば
+word.near-miss	下手したら
+word.near-miss	危なかった
 
 word.partner-to	一緒
 word.partner-to	いっしょ
