@@ -270,6 +270,23 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
 // after る or て. Returns text itself when nothing changes.
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// Whether the run of ー, ～ or small vowels at [i, j) of rs draws out a kana of a word (SND-1), the
+// one decision of the sound stage and RewriteEmphasis. The run follows a hiragana other than っ, a
+// small vowel or ね (the casual negative and the particle keep their mark: 知らねー, だよねー) and
+// comes before a hiragana other than a small kana. A word starts in the run of kana and kanji
+// before the mark: at its start, after a kanji, or after keys of two or more characters or with a
+// kanji and the kana of particles. With the run dropped, a key other than a name, kana spellings
+// included, reads from there two or more characters past the mark (three after a small vowel) and
+// as far as the key right after it (かーしこまりました, べーつに; not へーそうなんだ); or, where no
+// sound holds the run and its last syllable い, う or ん ends the phrase, a key or a verb or
+// adjective stem with its ending rows reads up to that syllable (寒くなーい？, せんぱーい！). It
+// reads further than any key, also in katakana, or sound (soundEnd, 0 for none) that holds the run
+// as written (すごーく, つーか). Not a run after vowel kana alone, an interjection
+// (あーそう, えーまさか, おお～), nor a drawn honorific (くーん, ちゃーん) or a nickname before one
+// (うーちゃん).
+bool DrawnInWord(std::u32string_view rs, size_t i, size_t j, size_t soundEnd, const LineContext& ctx,
+                 const dict::Snapshot& snap);
+
 // korean with the elongation units of a sound match: 'r' for each repeat of the
 // syllable the key ends with, which writes the last syllable again (아하하 아하하하) and
 // lets '!' give the last syllable the final ㅅ (아하하 + rr! 아하하하핫), then 'v' for each
