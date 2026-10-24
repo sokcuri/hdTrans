@@ -143,6 +143,7 @@
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
+//= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
 //= verb.result-passive	Stems of the passive verbs whose ている is a state (並べられている, 囲まれている).
 //= verb.result-state	Stems of the verbs whose ている is the state their action left, read without an object (濡れている, 座っている); a compound or phrase that ends in one counts too.
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
@@ -2335,6 +2336,26 @@ verb.receiver-passive	託
 verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
+
+verb.respectful	仰
+verb.respectful	おっしゃ
+verb.respectful	召し上が
+verb.respectful	召しあが
+verb.respectful	なさ
+verb.respectful	下さ
+verb.respectful	くださ
+verb.respectful	お休みにな
+verb.respectful	お呼びにな
+verb.respectful	お待ちにな
+verb.respectful	お持ちにな
+verb.respectful	お話しにな
+verb.respectful	お読みにな
+verb.respectful	お飲みにな
+verb.respectful	ごらんにな
+verb.respectful	ご覧にな
+verb.respectful	御覧にな
+verb.respectful	ご使用にな
+verb.respectful	ご利用にな
 
 verb.result-passive	並べ
 verb.result-passive	置

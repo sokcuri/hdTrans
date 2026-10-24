@@ -61,6 +61,13 @@ constexpr KoreanPassive kKoreanPassives[] = {
     {"핥다", "핥이다"},
 };
 
+// The heads of a て ending that holds the existential 있 (1고 있다, 6 있다), the family of 있다 and
+// the family of the honorifics in 시.
+constexpr std::string_view kProgressiveHead = "1고 ";
+constexpr std::string_view kResultativeHead = "6 ";
+constexpr std::string_view kExistenceMarker = "&HN@";
+constexpr std::string_view kHonorificMarker = "&AE@";
+
 // Whether the 2-byte grammar codes gattr hold code.
 bool GrammarCode(std::string_view gattr, std::string_view code) {
     for (std::size_t i = 0; i + 2 <= gattr.size(); i += 2) {
@@ -549,18 +556,29 @@ bool SinoNounTakesObject(const Item* n) {
 // Whether a verb part code takes an object (class 3 to 6, M431 書く; not M418 帰る).
 bool TransitiveCode(std::string_view code) { return At(code, 1) >= '3' && At(code, 1) <= '6'; }
 
+// How an honorific word of its own takes the いる of its て form: as the plain verb of its stem
+// (말씀하고 계신다), as itself (드시고 계신다), or not at all (계시다 is the いる; 돌아가셨다 the state).
+enum class OwnProgressive { Stem, Itself, None };
+
+struct Suppletive {
+    std::string_view plain, honorific;
+    OwnProgressive progressive;
+};
+
+// Verbs with their own honorific word.
+constexpr Suppletive kSuppletive[] = {
+    {"말하다", "말씀하시다", OwnProgressive::Stem}, {"먹다", "드시다", OwnProgressive::Itself},
+    {"마시다", "드시다", OwnProgressive::Itself},   {"자다", "주무시다", OwnProgressive::Itself},
+    {"있다", "계시다", OwnProgressive::None},       {"죽다", "돌아가시다", OwnProgressive::None},
+};
+
 // The honorific target of the conjugating verb target text (쓰&AF@ 쓰시다); "" when it has none.
 std::string HonorificTarget(Flusher& f, std::string_view text) {
-    // Verbs with their own honorific word.
-    constexpr std::string_view kSuppletive[][2] = {
-        {"말하다", "말씀하시다"}, {"먹다", "드시다"}, {"마시다", "드시다"}, {"자다", "주무시다"}, {"있다", "계시다"},
-        {"죽다", "돌아가시다"},
-    };
     if (text.size() < 4 || text.back() != '@' || text[text.size() - 4] != '&') return {};
     const std::string_view head = text.substr(0, text.size() - 4);
     std::string lemma;
     const std::string plain = output::Lemma(text, f.families);
-    for (const auto& [verb, honorific] : kSuppletive) {
+    for (const auto& [verb, honorific, progressive] : kSuppletive) {
         if (plain == verb || plain.ends_with(" " + std::string(verb))) {
             lemma = plain.substr(0, plain.size() - verb.size()) + std::string(honorific);
         }
@@ -609,16 +627,69 @@ std::string BaseVerbTarget(Flusher& f, std::string_view surface, bool& transitiv
     return {};
 }
 
+// The plain verb of the honorific verb target text (읽으&AE@ 읽다, 입원하&AE@ 입원하다) as a
+// conjugating target: the verb of the passive stem surface when the dictionary has one (作られ
+// 만들다), else the verb whose honorific is text (its stem without the 으 before 시, or the
+// stem itself), or the honorific itself as kSuppletive says (드시고 계신다); "" for an honorific
+// suffix alone, 계시다 and 돌아가시다.
+std::string PlainOfHonorific(Flusher& f, std::string_view surface, std::string_view text) {
+    const std::string lemma = output::Lemma(text, f.families);
+    constexpr std::string_view kSi = "시다";
+    if (!lemma.ends_with(kSi) || lemma.size() == kSi.size()) return {};
+    for (const Suppletive& own : kSuppletive) {
+        if (!lemma.ends_with(own.honorific)) continue;
+        if (own.progressive == OwnProgressive::None) return {};
+        if (own.progressive == OwnProgressive::Itself) return std::string(text);
+    }
+    bool transitive = false;
+    std::string plain;
+    if (!BaseVerbTarget(f, surface, transitive, plain).empty() && !plain.empty()) return plain;
+    const std::string_view head = std::string_view(lemma).substr(0, lemma.size() - kSi.size());
+    constexpr std::string_view kEu = "으";
+    for (const std::string_view stem : {head.ends_with(kEu) ? head.substr(0, head.size() - kEu.size()) : head, head}) {
+        output::Conjugated c = output::Conjugating(std::string(stem) + std::string(kKoDa), '&', "", f.families);
+        if (!c.error.empty()) continue;
+        if (output::Lemma(HonorificTarget(f, c.target), f.families) == lemma) return std::move(c.target);
+    }
+    return {};
+}
+
+std::string ExistentialToVerb(Flusher& f, std::string_view rest);
+
+// The honorific of the existential 있다 (계&AE@ 계시다).
+std::string HonorificExistence(Flusher& f) { return HonorificTarget(f, kExistenceMarker); }
+
+// The ending written for the existential 있 in rest (있다, 있으니까, 있었다) for its honorific
+// 계시다 (계신다, 계시니까, 계셨다); "" for an ending ExistentialToVerb does not cover.
+std::string HonorificExistential(Flusher& f, std::string_view rest) {
+    const std::string verb = ExistentialToVerb(f, rest);
+    const std::string honorific = HonorificExistence(f);
+    if (verb.empty() || honorific.size() < 4) return {};
+    const std::string_view family = std::string_view(honorific).substr(honorific.size() - 4);
+    const std::string_view row = LookupSource(std::string(family) + verb[0], f.families);
+    if (row.empty()) return {};
+    return honorific.substr(0, honorific.size() - 4) + std::string(row) + verb.substr(1);
+}
+
 // The respectful verb item it before the auxiliary いる of its て form in its token is the plain
 // verb with 고 and the honorific of いる (書かれている 쓰고 계신다, 置かれていた 두고 계셨다): the
-// auxiliary takes the honorific; false, with nothing changed, when no such auxiliary follows.
+// auxiliary takes the honorific. A verb whose ending holds the いる (書かれてる 1고 있다) takes
+// 고 and 계시다 in its ending. False, with nothing changed, when no such auxiliary follows.
 bool HonorificProgressive(Flusher& f, Item* it) {
+    if (it->DirectIndex() < 0) return false;
+    const std::string_view ending = it->DirectText(it->DirectIndex());
     Item* aux = it->next;
     if (aux == nullptr || aux->tokenIndex != it->tokenIndex || !aux->detail->Yougo() || aux->group->surface != "い" ||
-        aux->selected < 0 || it->DirectIndex() < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
+        aux->selected < 0 || ItemLemma(f, aux, aux->selected) != "있다") {
+        for (const std::string_view head : {kProgressiveHead, kResultativeHead}) {
+            if (!ending.starts_with(head)) continue;
+            const std::string honorific = HonorificExistential(f, ending.substr(head.size()));
+            if (honorific.empty()) return false;
+            it->AssignDirectSlot(it->DirectIndex(), std::string(kProgressiveHead) + honorific);
+            return true;
+        }
         return false;
     }
-    const std::string_view ending = it->DirectText(it->DirectIndex());
     if (ending != "6" && ending != "1고") return false;
     const std::string honorific = HonorificTarget(f, aux->EntryText(aux->selected));
     if (honorific.empty()) return false;
@@ -678,9 +749,19 @@ void RespectfulPassive(Flusher& f) {
             for (int slot = 0; slot < count; slot++) it->AssignEntrySurface(slot, targets[static_cast<std::size_t>(slot)]);
             continue;
         }
+        // A (ら)れ word or a respectful verb (verb.respectful) read as an honorific already (読まれ
+        // 읽으시다, 入院され 입원하시다, 仰 말씀하시다) before the auxiliary いる is the plain verb with
+        // 고 and the honorific of いる.
+        const bool stemRe = surface.ends_with("れ");
+        if (record == 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) {
+            if (!stemRe && !dict::InClass("verb.respectful", surface)) continue;
+            const std::string plain = PlainOfHonorific(f, surface, it->EntryText(it->selected));
+            if (!plain.empty() && HonorificProgressive(f, it)) it->AssignEntrySurface(it->selected, plain);
+            continue;
+        }
         // A word written as a passive or potential stem (され, 来られ, 書かれ): its honorific
         // candidate, or the honorific of the verb it is made from.
-        if (record != 0 || !surface.ends_with("れ") || it->EntryText(it->selected).ends_with("&AE@")) continue;
+        if (record != 0 || !stemRe) continue;
         // 言われ read as 듣다 (言われた通り 들은 대로) after an honoured subject is the respectful
         // 言う, 말씀하시다 (陛下が言われたこと 말씀하신 것); what is said is often left out, so it
         // needs no object.
@@ -796,6 +877,14 @@ Item* InwardVerb(Item* n) {
     return it;
 }
 
+// Whether verb item it is an honorific before the いる of its て form: its Korean is an honorific
+// (돌아가&AE@), or the auxiliary after it is 계시다.
+bool HonorificAspect(Flusher& f, const Item* it) {
+    if (it->selected >= 0 && it->EntryText(it->selected).ends_with(kHonorificMarker)) return true;
+    const Item* n = it->next;
+    return n != nullptr && n->selected >= 0 && n->detail->Yougo() && n->EntryText(n->selected) == HonorificExistence(f);
+}
+
 }  // namespace
 
 void ResultState(Flusher& f) {
@@ -814,8 +903,16 @@ void ResultState(Flusher& f) {
         }
         const bool nounPassive =
             stem == "され" && v->prev != nullptr && dict::InClass("noun.result-sareru", v->prev->group->surface);
-        const bool past = v->detail->record == 0 && !v->lexical && dict::InClass("verb.result-state-past", stem);
-        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(stem) || nounPassive) && !object) ||
+        // A られ word of a kanji verb read as an honorific (亡くなられている, 倒れられている) has the
+        // aspect of its verb; the なる of お慕いになられる is the respectful form.
+        std::string_view verb = stem;
+        if (constexpr std::string_view kRare = "られ"; v->detail->record == 0 && stem.size() > kRare.size() &&
+                                                     stem.ends_with(kRare) && text::IsKanji(text::DecodeRune(stem).cp) &&
+                                                     HonorificAspect(f, it)) {
+            verb.remove_suffix(kRare.size());
+        }
+        const bool past = v->detail->record == 0 && !v->lexical && dict::InClass("verb.result-state-past", verb);
+        const bool state = past || (v->detail->record == 0 && !v->lexical && (ResultVerbStem(verb) || nounPassive) && !object) ||
                            ((v->detail->record == 1 || v->lexical) && dict::InClass("verb.result-passive", stem)) ||
                            (v->detail->record <= 1 && GrammarCode(v->GAttr(v->selected), "Dx") &&
                             !v->EntryText(v->selected).ends_with("&HN@"));
@@ -843,7 +940,9 @@ void ResultState(Flusher& f) {
         }
         // The honorific 계시다 of the auxiliary is its 있다 (座られている 앉아 계신다).
         const std::string auxiliary = rest.empty() && it->next != nullptr ? ItemLemma(f, it->next, it->next->selected) : "";
-        if (rest.starts_with(" 있") || auxiliary.starts_with("있") || auxiliary == "계시다") {
+        const std::string honorific = HonorificExistence(f);
+        const bool honorificRest = honorific.size() > 4 && rest.starts_with(" " + honorific.substr(0, honorific.size() - 4));
+        if (rest.starts_with(" 있") || honorificRest || auxiliary.starts_with("있") || auxiliary == "계시다") {
             it->AssignDirectSlot(it->DirectIndex(), "6" + std::string(rest));
         }
     }
@@ -909,8 +1008,8 @@ void SimpleAspect(Flusher& f) {
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (aspect == Aspect::None || e == nullptr) continue;
         const std::string_view te = it->DirectSurface();
-        const std::string progressive = "1고 ";
-        const std::string resultative = "6 ";
+        const std::string progressive(kProgressiveHead);
+        const std::string resultative(kResultativeHead);
         const bool contracted = std::string_view(e->dst).starts_with(progressive) ||
                                 (std::string_view(e->dst).starts_with(resultative) && AdjectiveTarget(it->EntryText(it->selected)));
         if (contracted) {

@@ -1,0 +1,21 @@
+# 규칙: SPC-2
+rule	input	expected	kind	layer
+rewrite:respectful-passive	先生が本を読まれている。	선생님이 책을 읽고 계신다.	fix	rewrites
+rewrite:respectful-passive	先生が本を読まれていた。	선생님이 책을 읽고 계셨다.	fix	rewrites
+rewrite:respectful-passive	先生は何を読まれているんですか？	선생님은 무엇을 읽고 계십니까?	fix	rewrites
+rewrite:respectful-passive	陛下は手紙を書かれてる。	폐하는 편지를 쓰고 계신다.	fix	rewrites
+rewrite:respectful-passive	陛下は座られてる。	폐하는 앉아 계신다.	fix	rewrites
+rewrite:respectful-passive	先生は入院されている	선생님은 입원하고 계신다	fix	rewrites
+rewrite:respectful-passive	先生は亡くなられている。	선생님은 돌아가셨다.	fix	rewrites
+rewrite:respectful-passive	先生は亡くなられてるので	선생님은 돌아가셨기 때문에	fix	rewrites
+rewrite:respectful-passive	陛下は倒れられている	폐하는 쓰러져 계신다	fix	rewrites
+rewrite:respectful-passive	先生がおっしゃってます。	선생님이 말씀하고 계십니다.	fix	rewrites
+rewrite:respectful-passive	陛下がお休みになっている。	폐하가 쉬고 계신다.	fix	rewrites
+rewrite:respectful-passive	陛下がお酒を召し上がっている	폐하가 술을 드시고 계신다	fix	rewrites
+rewrite:respectful-passive	皆さん準備をなさっている	여러분 준비를 하고 계신다	keep	rewrites
+rewrite:respectful-passive	この本は世界中で読まれている。	이 책은 전세계에서 읽히고 있다.	keep	rewrites
+rewrite:respectful-passive	手紙が書かれている。	편지가 쓰여져 있다.	keep	rewrites
+rewrite:respectful-passive	彼は昼から酒を飲んでいる。	그는 낮부터 술을 마시고 있다.	keep	rewrites
+rewrite:respectful-passive	彼は神を祀っていた	그는 신을 모시고 있었다	keep	rewrites
+rewrite:respectful-passive	先生は本を読んでおられる	선생님은 책을 읽고 계신다	keep	rewrites
+rewrite:respectful-passive	父は亡くなっている	아버지는 돌아가셨다	keep	rewrites
