@@ -1,0 +1,12 @@
+# 규칙: LEX-25
+rule	input	expected	kind	layer
+sense:解放	リソースを解放する。	리소스를 해제한다.	fix	senses
+sense:解放	メモリを解放する必要がある。	메모리를 해제할 필요가 있다.	fix	senses
+sense:解放	使い終わったらロックを解放する。	다 썼으면 락을 해제한다.	fix	senses
+sense:解放	確保したメモリを解放し忘れた。	확보한 메모리를 해제하는 것을 잊었다.	fix	senses
+sense:解放	メモリの解放	메모리의 해제	fix	senses
+sense:解放	バッファを解放した。	버퍼를 해제했다.	fix	senses
+sense:解放	人質を解放した。	인질을 해방했다.	keep	senses
+sense:解放	奴隷を解放する。	노예를 해방한다.	keep	senses
+sense:解放	力を解放する。	힘을 해방한다.	keep	senses
+sense:解放	彼らを牢から解放した。	그들을 감옥으로부터 해방했다.	keep	senses

@@ -5875,7 +5875,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おかかえ	개인 고용	N110			GN				jisjk:164947		-1
 おかき	센베과자	K110	VFd		GN				jisjk:116913		
 おかけしな	끼치지 $DH@	H7U0			GN				jisjk:267721		
-おかけにな	&FI@	M428			GN				jisjk:264021		
+おかけにな	앉으&AE@	M428			GN				jisjk:264021		
 おかけにな	&L1@	M428			GN				jisjk:341124		
 おかけにな	&L1@	M428			GN	3019	||3 S-3== "電話" S-2== "電話" S-1== "電話"	앞 세 단어 안에 電話가 있으면 おかけにな를 거시다로 고른다. (미발동: rare-word)	jisjk:341125		
 おかげ	덕분	N110			GN	514	||1 &&3 S+1== "と" D+1== "(이)라고" S+2== "感謝"	뒤에 이라고로 번역되는 と와 感謝가 이어지면 おかげ를 덕분으로 고른다. (미발동: rare-context)	jisjk:40462		
@@ -7934,7 +7934,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お行きにな	가&AE@	M428	UMv		GN				jisjk:343793		
 お袋	어머니	N110	VHn		GN				jisjk:13849		
 お褒め	칭찬	I110			GN				jisjk:106870		
-お見えにな	&AH@	M428			GN				jisjk:263730		
+お見えにな	오&AE@	M428			GN				jisjk:263730		
 お見せ	보여드&AA@	M449			GN				jisjk:263627		
 お見せいた	보여 드&AA@	M443			GN				jisjk:266158		
 お見それ	알아보지 못&AV@	M439			GN				jisjk:90531		
@@ -7989,7 +7989,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お話	이야기 &AV@	M439		Pn	GN				jisjk:344336		
 お話し	이야기	N110		Hd	GN				jisjk:340803		
 お話しした	이야기 하고 $F9@	H7U0			GN				jisjk:374831		
-お話しにな	이야기 하&AE@	M428			GN				jisjk:267165		
+お話しにな	이야기하&AE@	M428			GN				jisjk:267165		
 お話なさ	말씀하&AE@	M428			GN				jisjk:262664		
 お話中	말씀 도중	N110			GN				jisjk:165859		
 お誂え向き	안성맞춤	I110			GN				jisjk:112471		
@@ -8023,7 +8023,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お越しいただ	찾아 오&AE@	M421			GN				jisjk:263129		
 お越しいただき	찾아와 주셔서	A9D0			GN				jisjk:263131		
 お越しくださ	발걸음해 주&AE@	M428			GN				jisjk:370905		
-お越しにな	&AH@	M428			GN				jisjk:262895		
+お越しにな	오&AE@	M428			GN				jisjk:262895		
 お越しの節	오실 때	K110	UMe		GN				jisjk:344488		
 お越し下さい	와 주세요	A9D0			GN				jisjk:268081		
 お越し場合	오실 경우	N110	UMe		GN				jisjk:150677		
@@ -123308,7 +123308,7 @@ ttt	ttt	K110			GN				jisjk:201744
 何十回も	몇 십회나	E311			GN				jisjk:2060		
 何十年	몇 십년	I110	UMe	Ct	GN				jisjk:88365		
 何千	몇천	N110		NjNd	GN				jisjk:38286		
-何卒	제발	E311			GN				jisjk:2064		
+何卒	부디	E311			GN				jisjk:2064		
 何原則	육하원칙	N110	UMn		GN				jisjk:204357		
 何名	몇명	N110	VHn		GN				jisjk:38273		
 何名かの方	몇 명의 분	N110	VHn		GN				jisjk:151578		
@@ -133218,7 +133218,7 @@ ttt	ttt	K110			GN				jisjk:201744
 円天井	둥근 천정	I110			GN				jisjk:78158		
 円子	마루코	N130	QCTVPl		GN				jisjk:329988		
 円孔部	원형구멍부	I110			GN				jisjk:78148		
-円安	엔하락	N110		Ct	GN				jisjk:355835		
+円安	엔저	N110		Ct	GN				jisjk:355835		
 円安インプレ	엔화 약세 인플레이션	N110			BZ				jisjk:349696		
 円安ドル高	엔하락 달러상승	N110		Ct	GN				jisjk:357562		
 円安・ドル高	엔 하락, 달러 상승	N110			GN				jisjk:362181		
@@ -137170,7 +137170,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前の席	앞 자리	N110	VPl		GN				jisjk:359255		
 前の方	앞쪽	K110	VPl		GN				jisjk:265912		
 前の日	전날	N110	UMe		GN				jisjk:264120		
-前の画面	앞에 화면	I110			GN				jisjk:110787		
+前の画面	이전 화면	I110			GN				jisjk:110787		
 前もって	미리	E311			GN				jisjk:1924		
 前より	전보다	E300			GN				jisjk:149516		
 前ケ崎	마에가사키	N130	QCTVPl		GN				jisjk:328752		
@@ -173186,7 +173186,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大難	대난	N110			GN				jisjk:18888		
 大雨	큰 비	N110	VFr		GN				jisjk:19001		
 大雨注意報	호우 주의보	I110	UTsUHr		GN				jisjk:65415		
-大雨警報	대우 경보	I110			GN				jisjk:111069		
+大雨警報	호우 경보	I110			GN				jisjk:111069		
 大雪	폭설	N110	VFr		GN				jisjk:18958		
 大雪山	다이세츠산	I110	QCT		GN				jisjk:65247		
 大雪山国立公園	다이세츠산 국립공원	N110	VPl		GN				jisjk:239682		
@@ -182400,7 +182400,7 @@ ttt	ttt	K110			GN				jisjk:201744
 容易にはおさま	용이하게는 가라&FI@	M428			GN				jisjk:148433		
 容易性	용이성	I110			GN				jisjk:78824		
 容止	기거 동작	N110			GN				jisjk:255020		
-容疑	용의	N110			GN	476	||1 &&3 P-1== "4**" M-1== "500" Y-1= "8"	기본형 동사 뒤에서 「容疑」를 고르고 앞 동사의 어미 번역을 활용형 8로 바꾼다. (미발동: rare-word)	jisjk:30042		
+容疑	혐의	N110			GN	476	||1 &&3 P-1== "4**" M-1== "500" Y-1= "8"	기본형 동사 뒤에서 「容疑」를 고르고 앞 동사의 어미 번역을 활용형 8로 바꾼다. (미발동: rare-word)	jisjk:30042		
 容疑者	용의자	I110	VHnUQf		GN				jisjk:78823		
 容積	용적	N110			GN				jisjk:30045		
 容積トン	용적톤	N110			GN				jisjk:255071		
@@ -229843,7 +229843,7 @@ ttt	ttt	K110			GN				jisjk:201744
 書類の山	서류 뭉치	N110			GN				jisjk:191929		
 書類入れ	서류넣은 것	I110			GN				jisjk:73833		
 書類箱	가라치	N110	VSt		GN				jisjk:203362		
-書類送検	서류 송검	N110	ULw	Hd	GN				jisjk:191927		
+書類送検	서류 송치	N110	ULw	Hd	GN				jisjk:191927		
 書風	서풍	N110			GN				jisjk:26065		
 曹こん	소콘	N110	VHn		GN				jisjk:240014		
 曹フンヒョン	조훈현	N130	QPN		GN				jisjk:209706		
@@ -230261,7 +230261,7 @@ ttt	ttt	K110			GN				jisjk:201744
 最重要視	가장 중요시	N110		Hd	GN				jisjk:184367		
 最長	최장	N110			GN				jisjk:36110		
 最長不倒距離	최장불도 거리	N110	VRw		GN				jisjk:232082		
-最頻値	최대 빈수	N110			GN				jisjk:232148		
+最頻値	최빈값	N110			GN				jisjk:232148		
 最首	사이슈	N130	QPN	Wa	GN				jisjk:12847		
 最首良夫	사이슈 요시오	N130	VHn		GN				jisjk:224900		
 最高	최고	N110			GN				jisjk:36095		
@@ -242566,7 +242566,7 @@ ttt	ttt	K110			GN				jisjk:201744
 査丈	사장	N110			GN				jisjk:25123		
 査免国	비자 면제국	N110	VPlULw		GN				jisjk:185448		
 査兔国	사면국	I110	QNN		GN				jisjk:71968		
-査収	사수	N110		Hd	GN				jisjk:185218		
+査収	확인	N110		Hd	GN				jisjk:185218		
 査問	사문	N110			GN				jisjk:25121		
 査問会議	사문회의	N110			BZ				jisjk:354808		
 査定	사정	N110		Hd	GN				jisjk:25124		
@@ -334705,7 +334705,7 @@ ttt	ttt	K110			GN				jisjk:201744
 返上	반납	N110	VMo	Hd	GN				jisjk:22840		
 返上	반납&AV@	M439			GN				jisjk:265461		
 返事	대답	N110	UTs	Hd	GN				jisjk:22839		
-返信	답신	N110		Hd	GN				jisjk:99770		
+返信	답장	N110		Hd	GN				jisjk:99770		
 返信	답장&AV@	M429			GN	3218	||2 &&2 U+0== "ます" Y+0= "1겠습니다" &&2 U+0== "ますよ" Y+0= "1겠어요"	返信이 ます 또는 ますよ로 활용되면 어미를 겠습니다 또는 겠어요로 바꾼다. (미발동: rare-context)	jisjk:342237		
 返信はがき	회답엽서	N110	VSw		GN				jisjk:366752		
 返信料	반신료	I110	VMo		GN				jisjk:69670		
@@ -335290,8 +335290,8 @@ ttt	ttt	K110			GN				jisjk:201744
 送料	우송료	N110	VMo		GN				jisjk:27083		
 送料別	송료 별도	N110			GN				jisjk:200527		
 送本	서책 발송	N110		Hd	GN				jisjk:200467		
-送検	송검	N110			GN				jisjk:27077		
-送検	송검&AV@	M439			GN				jisjk:257429		
+送検	송치	N110			GN				jisjk:27077		
+送検	송치&AV@	M439			GN				jisjk:257429		
 送橋	오쿠리하시	N130	QCTVPl		GN				jisjk:279704		
 送毛山道	오쿠리게산도	I110	QCT		GN				jisjk:75600		
 送気筒	송기통	N110	VPe		GN				jisjk:239959		

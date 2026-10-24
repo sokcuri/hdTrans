@@ -11,8 +11,8 @@ compose:comma-before-symbols	マイン、123	마인, 123	keep	compose
 compose:comma-before-symbols	マイン、「はい」	마인, 「네」	keep	compose
 compose:comma-before-symbols	「これも■■ぎ」	「이것도■■기」	keep	compose
 compose:comma-before-symbols	○○さん	○○씨	keep	compose
-normalize:percent-unit	シンクロ値……３４％……５６％……	싱크로치……34%……56%……	fix	normalize
-normalize:percent-unit	「シンクロ値……３４％……５６％……７２％…………下がっています」	「싱크로치……34%……56%……72%…………내려가고 있습니다」	fix	normalize
+normalize:percent-unit	シンクロ値……３４％……５６％……	싱크로값……34%……56%……	fix	normalize
+normalize:percent-unit	「シンクロ値……３４％……５６％……７２％…………下がっています」	「싱크로값……34%……56%……72%…………내려가고 있습니다」	fix	normalize
 normalize:percent-unit	５０％＋α	50%＋α	fix	normalize
 normalize:percent-unit	支持率は５３％です。	지지율은 53%입니다.	keep	normalize
 normalize:percent-unit	１００％！	100%!	keep	normalize

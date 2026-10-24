@@ -1,0 +1,29 @@
+# 규칙: LEX-25
+rule	input	expected	kind	layer
+lookup:最大値	最大値と最小値を求める。	최댓값과 최솟값을 구한다.	fix	lookup
+lookup:返り値	返り値はnullです。	반환값은 null입니다.	fix	lookup
+lookup:初期値	初期値は0です。	초깃값은 0입니다.	fix	lookup
+lookup:設定値	設定値を変更する。	설정값을 변경한다.	fix	lookup
+lookup:入力値	入力値をチェックする。	입력값을 체크한다.	fix	lookup
+lookup:平均値	平均値を計算する。	평균값을 계산한다.	fix	lookup
+lookup:絶対値	絶対値を返す。	절댓값을 돌려준다.	fix	lookup
+lookup:最大値	ＨＰの最大値が上がった。	HP의 최댓값이 올랐다.	fix	lookup
+lookup:最頻値	最頻値を求める。	최빈값을 구한다.	fix	lookup
+lookup:戻り値	戻り値を確認する。	반환값을 확인한다.	keep	lookup
+lookup:期待値	期待値が高い。	기대치가 높다.	keep	lookup
+lookup:経験値	経験値を獲得した。	경험치를 획득했다.	keep	lookup
+lookup:容疑	殺人の容疑で逮捕された。	살인의 혐의로 체포되었다.	fix	lookup
+lookup:容疑	詐欺の容疑で再逮捕された。	사기의 혐의로 재체포되었다.	fix	lookup
+lookup:容疑	容疑を否認している。	혐의를 부인하고 있다.	fix	lookup
+lookup:容疑	国家反逆罪の容疑で厳重な取り調べを受けている。	국가 반역죄의 혐의로 엄중한 취조를 받고 있다.	fix	lookup
+lookup:容疑者	容疑者は黙秘している。	용의자는 묵비하고 있다.	keep	lookup
+lookup:容疑者	警察は容疑者の身柄を確保した。	경찰은 용의자의 신병을 확보했다.	keep	lookup
+lookup:書類送検	県警は男を書類送検した。	현 경찰은 남자를 서류 송치했다.	fix	lookup
+lookup:送検	容疑者を送検した。	용의자를 송치했다.	fix	lookup
+lookup:大雨警報	気象庁は大雨警報を発表した。	기상청은 호우 경보를 발표했다.	fix	lookup
+lookup:円安	円安の影響で物価が上がった。	엔저의 영향으로 물가가 올랐다.	fix	lookup
+lookup:前の画面	前の画面に戻る	이전 화면으로 돌아간다	fix	lookup
+lookup:査収	資料を添付いたしましたので、ご査収ください。	자료를 첨부했으므로, 확인해 주십시오.	fix	lookup
+lookup:返信	ご返信お待ちしております。	답장 기다리고 있습니다.	fix	lookup
+lookup:何卒	何卒、ご容赦ください。	부디, 용서해 주십시오.	fix	lookup
+lookup:取り急ぎ	取り急ぎ出発した。	서둘러 출발했다.	keep	lookup

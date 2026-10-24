@@ -50,7 +50,7 @@ dict:jisjk:341464	顔なんか見えない。	!rule:dict:jisjk:341464	keep	local
 dict:jisjk:341464	まぁなんか可愛い。	rule:dict:jisjk:341464=왠지	keep	local
 dict:jisjk:359256	三日前も寒かった。	3일 전에도 추웠다.	fix	local
 dict:jisjk:359256	３発も命中させた。	rule:dict:jisjk:359256=(이)나	keep	local
-dict:jisjk:35	いかがあそばしますか。	어떻게 하십니까.	fix	local
+dict:jisjk:35	いかがあそばしますか。	어떻게 하시겠습니까.	fix	local
 dict:jisjk:35	いかがあそばしますか。	rule:dict:jisjk:35=어떻게	keep	local
 dict:jisjk:35	いかがですか。	!rule:dict:jisjk:35	keep	local
 dict:jisjk:388	このままにしておいてください。	이대로 해 두어 주세요.	fix	local
