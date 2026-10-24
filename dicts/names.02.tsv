@@ -16593,7 +16593,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 熊本朝日放送	구마모토 아사히 방송	N110			GN							names.642914
 熊本桜町バスターミナル	구마모토 사쿠라마치 버스터미널	N110			GN							names.642915
 熊本浩武	구마모토 히로무	N130	QPNVHn		GN							names.642916
-熊本県民テレビ	구마모토현민 TV	N130	VGt		GN							names.642917
+熊本県民テレビ	구마모토현민TV	N130	VGt		GN							names.642917
 熊本県知事	구마모토현 지사	N130	VGt		GN							names.642918
 熊本県立大学	구마모토 현립 대학	N130	VGt		GN							names.642919
 熊本県立済々黌高等学校	구마모토 현립 세이세이코 고등학교	N130	VGt		GN							names.642920
@@ -38057,9 +38057,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 石川タイガ	이시카와 타이가	N130	QPNVHn		GN						いしかわ たいが	names.664378
 石川タケヒロ	이시카와 타케히로	N130	QPNVHn		GN						いしかわ たけひろ	names.664379
 石川ダービー	이시카와 더비	N110			GN						いしかわだーびー	names.664380
-石川テレビ	이시카와 TV	N110			GN							names.664381
-石川テレビ放送	이시카와 TV	N130	VGt		GN							names.664382
-石川テレビ杯	이시카와 TV배	N110			GN							names.664383
+石川テレビ	이시카와TV	N110			GN							names.664381
+石川テレビ放送	이시카와TV 방송	N130	VGt		GN							names.664382
+石川テレビ杯	이시카와TV배	N110			GN							names.664383
 石川マサキ	이시카와 마사키	N130	QPNVHn		GN							names.664384
 石川ミユキ	이시카와 미유키	N130	QPNVHn		GN							names.664385
 石川ミリオンスターズ	이시카와 밀리언스타즈	N130	VGt		GN							names.664386
@@ -43220,8 +43220,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 福井さやか	후쿠이 사야카	N130	QPNVHn		GN						ふくい さやか	names.669541
 福井ひより	후쿠이 히요리	N130	QPNVHn		GN						ふくい ひより	names.669542
 福井エフエム放送	후쿠이 FM 방송	N130	VGt		GN							names.669543
-福井テレビ	후쿠이 TV 방송	N110			GN							names.669544
-福井テレビジョン放送	후쿠이 TV 방송	N130	VGt		GN							names.669545
+福井テレビ	후쿠이TV	N110			GN							names.669544
+福井テレビジョン放送	후쿠이TV 방송	N130	VGt		GN							names.669545
 福井ネクサスエレファンツ	후쿠이 넥서스 엘리펀츠	N130	VGt		GN							names.669546
 福井ブローウィンズ	후쿠이 블로윈즈	N110			GN						ふくい ぶろーうぃんず	names.669547
 福井ミカ	후쿠이 미카	N130	QPNVHn		GN							names.669548
@@ -43675,7 +43675,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 福島みずほ	후쿠시마 미즈호	N110			GN						ふくしま みずほ	names.669996
 福島ガイナックス	후쿠시마 가이낙스	N130	VGt		GN							names.669997
 福島サトル	후쿠시마 사토루	N130	QPNVHn		GN							names.669998
-福島テレビ	후쿠시마 TV	N110			GN							names.669999
+福島テレビ	후쿠시마TV	N110			GN							names.669999
 福島ノア	후쿠시마 노아	N110			GN						ふくしま のあ	names.670000
 福島ユナイテッドFC	후쿠시마 유나이티드 FC	N110			GN							names.670001
 福島リラ	후쿠시마 리라	N130	QPNVHn		GN							names.670002
@@ -43683,7 +43683,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 福島・正則	후쿠시마 마사노리	N130	QPNVHn		GN						ふくしま まさのり	names.670004
 福島丈貴	후쿠시마 도모요시	N130	QPNVHn		GN							names.670005
 福島三郎	후쿠시마 사부로	N130	QPNVHn		GN							names.670006
-福島中央テレビ	후쿠시마 중앙 TV	N110			GN							names.670007
+福島中央テレビ	후쿠시마 중앙TV	N110			GN							names.670007
 福島交通	후쿠시마 교통	N110			GN							names.670008
 福島交通 1000系 電車	후쿠시마 교통 1000계 전동차	N110			GN							names.670009
 福島交通株式会社	후쿠시마 교통	N130	VGt		GN						ふくしまこうつう	names.670010
@@ -45627,7 +45627,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 秋田めろ	아키타 메로	N110			GN						あきためろ	names.671948
 秋田オリオンズ	아키타 오리온즈	N130	VGt		GN						あきた おりおんず	names.671949
 秋田キララ	아키타 키라라	N130	QPNVHn		GN						あきた きらら	names.671950
-秋田テレビ	아키타 TV	N110			GN							names.671951
+秋田テレビ	아키타TV	N110			GN							names.671951
 秋田ノーザンハピネッツ	아키타 노던 해피네츠	N130	VGt		GN							names.671952
 秋田三一	아키타 산이치	N130	QPNVHn		GN							names.671953
 秋田伸一	아키타 신이치	N130	QPNVHn		GN							names.671954
@@ -60939,7 +60939,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 群馬クレインサンダーズ	군마 크레인 선더스	N110			GN							names.687260
 群馬サファリパーク	군마 사파리 파크	N110			GN							names.687261
 群馬ダイヤモンドペガサス	군마 다이아몬드 페가수스	N130	VGt		GN							names.687262
-群馬テレビ	군마 TV	N110			GN						ぐんまてれび	names.687263
+群馬テレビ	군마TV	N110			GN						ぐんまてれび	names.687263
 群馬交響楽団	군마 교향악단	N130	VGt		GN							names.687264
 群馬大学	군마 대학	N130	VGt		GN							names.687265
 群馬朝鮮初中級学校	군마조선초중급학교	N130	VGt		GN							names.687266
@@ -85807,8 +85807,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 読売クラブ	요미우리 클럽	N110			GN							names.712128
 読売ジャイアンツ	요미우리 자이언츠	N110			GN						よみうりじゃいあんつ	names.712129
 読売ジャイアンツ球場	요미우리 자이언츠 구장	N130	QCTVPl		GN							names.712130
-読売テレビ	요미우리 TV 방송	N110			GN							names.712131
-読売テレビ放送	요미우리 TV 방송	N130	VGt		GN							names.712132
+読売テレビ	요미우리TV	N110			GN							names.712131
+読売テレビ放送	요미우리TV 방송	N130	VGt		GN							names.712132
 読売レディス杯	요미우리 레이디스 배	N110			GN						よみうりれでぃすはい	names.712133
 読売巨人軍	요미우리 자이언츠	N110			GN							names.712134
 読売広告社	요미우리 광고사	N110			GN							names.712135
@@ -110840,7 +110840,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長崎原爆の日	나가사키 원폭의 날	N110			GN						ながさきげんばくのひ	names.737161
 長崎原爆資料館	나가사키 원폭 자료관	N130	VGt		GN							names.737162
 長崎咲弥	나가사키 사야	N130	QPNVHn		GN							names.737163
-長崎国際テレビ	나가사키 국제 TV	N110			GN							names.737164
+長崎国際テレビ	나가사키 국제TV	N110			GN							names.737164
 長崎夏海	나가사키 나쓰미	N130	QPNVHn		GN							names.737165
 長崎外国語大学	나가사키외국어대학	N130	VGt		GN						ながさきがいこくごだいがく	names.737166
 長崎大学	나가사키 대학	N130	VGt		GN							names.737167
@@ -113421,13 +113421,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 関西サンリオ男子	간사이 산리오 남자	N130	QPNVHn		GN							names.739742
 関西ジュニア	간사이 주니어	N110			GN							names.739743
 関西ダービー	간사이 더비	N110			GN							names.739744
-関西テレビ	간사이 TV 방송	N110			GN							names.739745
-関西テレビ制作・月曜夜10時枠の連続ドラマ	간사이 TV 월요일 밤 10시 드라마	N130	QWK		GN							names.739746
-関西テレビ制作・火曜夜10時枠の連続ドラマ	간사이 TV 화요일 밤 10시 드라마	N130	QWK		GN							names.739747
-関西テレビ制作・火曜夜9時枠の連続ドラマ	간사이 TV 화요일 밤 9시 드라마	N130	QWK		GN							names.739748
-関西テレビ放送	간사이 TV 방송	N130	VGt		GN							names.739749
-関西テレビ放送株式会社	간사이 TV 방송	N130	VGt		GN							names.739750
-関西テレビ放送株式会社	간사이 테레비	N130	VGt		GN							names.739751
+関西テレビ	간사이TV	N110			GN							names.739745
+関西テレビ制作・月曜夜10時枠の連続ドラマ	간사이TV 월요일 밤 10시 드라마	N130	QWK		GN							names.739746
+関西テレビ制作・火曜夜10時枠の連続ドラマ	간사이TV 화요일 밤 10시 드라마	N130	QWK		GN							names.739747
+関西テレビ制作・火曜夜9時枠の連続ドラマ	간사이TV 화요일 밤 9시 드라마	N130	QWK		GN							names.739748
+関西テレビ放送	간사이TV 방송	N130	VGt		GN							names.739749
+関西テレビ放送株式会社	간사이TV 방송	N130	VGt		GN							names.739750
+関西テレビ放送株式会社	간사이TV 방송	N130	VGt		GN							names.739751
 関西パビリオン	간사이 파빌리온	N130	QCTVPl		GN							names.739752
 関西六大学野球連盟	간사이 6대학 야구 연맹	N130	VGt		GN							names.739753
 関西医大	간사이 의대	N130	VGt		GN						かんさいいだい	names.739754
@@ -120911,7 +120911,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 青森	아오모리	N130	QPNVHn	Wa	GN							names.747232
 青森せいらん	아오모리 세이란	N130	QPNVHn		GN						あおもり せいらん	names.747233
 青森りんこ	아오모리 린코	N130	QPNVHn		GN						あおもり りんこ	names.747234
-青森テレビ	아오모리 TV	N110			GN						あおもりてれび	names.747235
+青森テレビ	아오모리TV	N110			GN						あおもりてれび	names.747235
 青森ワッツ	아오모리 왓츠	N110			GN							names.747236
 青森中央学院大学	아오모리주오가쿠인 대학	N130	VGt		GN							names.747237
 青森伸	아오모리 신	N130	QPNVHn		GN							names.747238
@@ -121475,7 +121475,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 静岡大学	시즈오카 대학	N130	VGt		GN							names.747796
 静岡放送	시즈오카 방송	N110			GN							names.747797
 静岡新聞	시즈오카 신문	N110			GN							names.747798
-静岡朝日テレビ	시즈오카 아사히 TV	N110			GN							names.747799
+静岡朝日テレビ	시즈오카 아사히TV	N110			GN							names.747799
 静岡朝鮮初中級学校	시즈오까조선초중급학교	N130	VGt		GN							names.747800
 静岡県内の駅一覧	시즈오카현의 역 목록	N130	QCTVPl		GN							names.747801
 静岡県立大学	시즈오카 현립 대학	N130	VGt		GN							names.747802
@@ -121491,7 +121491,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 静岡県第8区	시즈오카현 제8구	N130	QCTVPl		GN							names.747812
 静岡県第9区	시즈오카현 제9구	N130	QCTVPl		GN							names.747813
 静岡県選挙区	시즈오카현 선거구	N130	QCTVPl		GN							names.747814
-静岡第一テレビ	시즈오카 다이이치 테레비	N110			GN							names.747815
+静岡第一テレビ	시즈오카 다이이치TV	N110			GN							names.747815
 静岡鉄道	시즈오카 철도	N130	VGt		GN							names.747816
 静岡鉄道1000形	시즈오카 철도 1000형	N110			GN							names.747817
 静岡鉄道A3000形	시즈오카 철도 A3000형	N110			GN							names.747818
@@ -130994,7 +130994,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 高看	가오칸	N130	QPNVHn	Wb	GN							names.757315
 高県	가오현	N130	QCTVPl		GN							names.757316
 高真栄	고진영	N130	QPNVHn	Wb	GN							names.757317
-高知さんさんテレビ	고치산산 TV	N110			GN							names.757318
+高知さんさんテレビ	고치 산산TV	N110			GN							names.757318
 高知ユナイテッド	고치 유나이티드	N110			GN							names.757319
 高知ユナイテッドSC	고치 유나이티드 SC	N110			GN							names.757320
 高知優駿	고치 유슌	N110			GN						こうちゆうしゅん	names.757321
@@ -136542,8 +136542,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鹿伝霖	녹전림	N130	QPNVHn	Wb	GN							names.762864
 鹿倉胡桃	가쿠라 쿠루미	N130	QPNVHn		GN						かくらくるみ	names.762865
 鹿児島たん	가고시마 땅	N110			GN						かごしまたん	names.762866
-鹿児島テレビ	가고시마 TV	N110			GN						かごしまてれび	names.762867
-鹿児島テレビ放送	가고시마 TV	N130	VGt		GN							names.762868
+鹿児島テレビ	가고시마TV	N110			GN						かごしまてれび	names.762867
+鹿児島テレビ放送	가고시마TV 방송	N130	VGt		GN							names.762868
 鹿児島ユナイテッドFC	가고시마 유나이티드 FC	N110			GN							names.762869
 鹿児島ラーメン	가고시마 라멘	N110			GN							names.762870
 鹿児島交通	가고시마 교통	N130	VGt		GN						かごしまこうつう	names.762871
@@ -136568,7 +136568,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鹿児島県警	가고시마현 경찰	N130	VGt		GN						かごしまけんけい	names.762890
 鹿児島県選挙区	가고시마현 선거구	N130	QCTVPl		GN							names.762891
 鹿児島神宮	가고시마 신궁	N110			GN							names.762892
-鹿児島讀賣テレビ	가고시마 요미우리 TV	N110			GN							names.762893
+鹿児島讀賣テレビ	가고시마 요미우리TV	N110			GN							names.762893
 鹿児島郡	가고시마군	N130	QCTVPl		GN							names.762894
 鹿児島銀行	가고시마 은행	N130	VGt		GN							names.762895
 鹿内	시카나이	N130	QPNVHn	Wa	GN							names.762896

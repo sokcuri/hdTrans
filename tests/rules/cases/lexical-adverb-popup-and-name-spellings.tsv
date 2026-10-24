@@ -8,21 +8,21 @@ lookup:lexical-cleanup-10	お尻を拭く。	엉덩이를 닦는다.	keep	lookup
 dict:jisjk:54026	ヒトケタ	한 자릿수	fix	lookup
 dict:jisjk:54026	ヒトケタだ。	한 자릿수다.	fix	lookup
 dict:jisjk:54026	「ヒトケタ」	「한 자릿수」	fix	lookup
-dict:jisjk:61727	共同テレビジョン	교도 테레비전	fix	lookup
-dict:jisjk:61727	共同テレビジョンだ。	교도 테레비전이다.	fix	lookup
-dict:jisjk:61727	「共同テレビジョン」	「교도 테레비전」	fix	lookup
+dict:jisjk:61727	共同テレビジョン	교도TV	fix	lookup
+dict:jisjk:61727	共同テレビジョンだ。	교도TV다.	fix	lookup
+dict:jisjk:61727	「共同テレビジョン」	「교도TV」	fix	lookup
 dict:jisjk:359430	売上高利益率	매출액 이익률	fix	lookup
 dict:jisjk:359430	売上高利益率だ。	매출액 이익률이다.	fix	lookup
 dict:jisjk:359430	「売上高利益率」	「매출액 이익률」	fix	lookup
-dict:jisjk:248010	日本テレビ放送綱	닛폰 테레비 방송망	fix	lookup
-dict:jisjk:248010	日本テレビ放送綱だ。	닛폰 테레비 방송망이다.	fix	lookup
-dict:jisjk:248010	「日本テレビ放送綱」	「닛폰 테레비 방송망」	fix	lookup
-dict:jisjk:80951	日本テレビ放送網	닛폰 테레비 방송망	fix	lookup
-dict:jisjk:80951	日本テレビ放送網だ。	닛폰 테레비 방송망이다.	fix	lookup
-dict:jisjk:80951	「日本テレビ放送網」	「닛폰 테레비 방송망」	fix	lookup
-dict:jisjk:187407	静岡第一テレビ	시즈오카 다이이치 테레비	fix	lookup
-dict:jisjk:187407	静岡第一テレビだ。	시즈오카 다이이치 테레비다.	fix	lookup
-dict:jisjk:187407	「静岡第一テレビ」	「시즈오카 다이이치 테레비」	fix	lookup
+dict:jisjk:248010	日本テレビ放送綱	니혼TV 방송망	fix	lookup
+dict:jisjk:248010	日本テレビ放送綱だ。	니혼TV 방송망이다.	fix	lookup
+dict:jisjk:248010	「日本テレビ放送綱」	「니혼TV 방송망」	fix	lookup
+dict:jisjk:80951	日本テレビ放送網	니혼TV 방송망	fix	lookup
+dict:jisjk:80951	日本テレビ放送網だ。	니혼TV 방송망이다.	fix	lookup
+dict:jisjk:80951	「日本テレビ放送網」	「니혼TV 방송망」	fix	lookup
+dict:jisjk:187407	静岡第一テレビ	시즈오카 다이이치TV	fix	lookup
+dict:jisjk:187407	静岡第一テレビだ。	시즈오카 다이이치TV다.	fix	lookup
+dict:jisjk:187407	「静岡第一テレビ」	「시즈오카 다이이치TV」	fix	lookup
 dict:names.507127	大愛電視	다아이 뎬스	fix	lookup
 dict:names.507127	大愛電視だ。	다아이 뎬스다.	fix	lookup
 dict:names.507127	「大愛電視」	「다아이 뎬스」	fix	lookup

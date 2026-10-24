@@ -20052,7 +20052,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さっぷざい	살포제	N110			GN				jisjk:185318		-1
 さっぽろ	삿포로	N120	VPl		GN				jisjk:185319		-1
 さっぽろだいがく	삿포로대학	N120	VPl		GN				jisjk:185321		-1
-さっぽろテレビほうそう	삿포로 TV 방송	N130	VBlVGtVMoVCm		GN				jisjk:185323		
+さっぽろテレビほうそう	삿포로TV 방송	N130	VBlVGtVMoVCm		GN				jisjk:185323		
 さっ布剤	살포제	N110			GN				jisjk:185317		
 さっ水	살수	N110		Hd	GN				jisjk:185304		
 さついれ	지갑	N110			GN				jisjk:185327		-1
@@ -21362,7 +21362,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しずおか	시즈오카	I130	QCT		GN				jisjk:109970		
 しずおかけん	시즈오카현	N120	VPl		GN				jisjk:187400		-1
 しずおかし	시즈오카시	N120	VPl		GN				jisjk:159606		
-しずおかだいいちテレビ	시즈오카 다이이치 테레비	N110	VCmVBl		GN				jisjk:187408		
+しずおかだいいちテレビ	시즈오카 다이이치TV	N110	VCmVBl		GN				jisjk:187408		
 しずか	조용%A1@	G8L0			GN				jisjk:2186		
 しずかにな	조용해&AL@	M428			GN				jisjk:121152		
 しずく	물방울	I110			GN				jisjk:41112		
@@ -58153,12 +58153,12 @@ ttt	ttt	K110			GN				jisjk:201744
 ケーブリングスキーマー	케이블링 스킴	N110			GN				jisjk:46785		
 ケーブル	케이블	N110	VPeVCm		GN				jisjk:46786		
 ケーブル カー	케이블카	N110	VTp		GN				jisjk:46787		
-ケーブル テレビ	케이블 텔레비젼	N110	VEI		GN				jisjk:46788		
+ケーブル テレビ	케이블TV	N110	VEI		GN				jisjk:46788		
 ケーブルTV	케이블TV 	K110			GN				jisjk:260494		
 ケーブルアジャスタ	케이블 어저스터	N110			GN				jisjk:266798		
 ケーブルカ	케이블카	N110			GN				jisjk:46789		
 ケーブルカー	케이블카	N110	VTp		GN				jisjk:46790		
-ケーブルテレビ	케이블 테레비	N110			GN				jisjk:112195		
+ケーブルテレビ	케이블TV	N110			GN				jisjk:112195		
 ケーブルテレビネリマ	케이블TV 네리마	N110	VGt		GN				jisjk:103264		
 ケーブルハンガ	케이블 행어	N110			GN				jisjk:46791		
 ケーブルブラケット	케이블 브래킷	N110			GN				jisjk:46792		
@@ -69561,18 +69561,18 @@ ttt	ttt	K110			GN				jisjk:201744
 テレビ・マルチ	TV 멀티	N130			BZ				jisjk:361338		
 テレビ会議	TV 회의	N110			GN				jisjk:131227		
 テレビ写りの良	텔레비전에 잘 $Kk@	H7N0			GN				jisjk:201465		
-テレビ和歌山	TV 와카야마	N110	VBlVEl		GN				jisjk:131232		
-テレビ大阪	텔레비 오사카	N130	QIDVGt		GN				jisjk:50909		
+テレビ和歌山	TV와카야마	N110	VBlVEl		GN				jisjk:131232		
+テレビ大阪	TV오사카	N130	QIDVGt		GN				jisjk:50909		
 テレビ局	텔레비전국	N110	VPl		GN				jisjk:50908		
-テレビ愛知	텔레비 아이치	N130	QIDVGt		GN				jisjk:50913		
-テレビ新広島	TV 신히로시마	N110	VCmVBl		GN				jisjk:131229		
+テレビ愛知	TV아이치	N130	QIDVGt		GN				jisjk:50913		
+テレビ新広島	TV신히로시마	N110	VCmVBl		GN				jisjk:131229		
 テレビ新聞	텔레비전 신문	N110			BZ				jisjk:359881		
 テレビ映え	텔레비전 영상	N110			GN				jisjk:131231		
-テレビ朝日	텔레비 아사히	N130	VBlVCm		GN				jisjk:131226		
-テレビ東京	텔레비젼 토쿄	N130	VGt		GN				jisjk:50910		
+テレビ朝日	TV아사히	N130	VBlVCm		GN				jisjk:131226		
+テレビ東京	TV도쿄	N130	VGt		GN				jisjk:50910		
 テレビ番組	TV프로	N110			GN				jisjk:354288		
-テレビ神奈川	텔레비 카나가와	N130	QIDVGt		GN				jisjk:50912		
-テレビ西日本	텔레비 니시닛폰	N130	QIDVGt		GN				jisjk:50911		
+テレビ神奈川	TV가나가와	N130	QIDVGt		GN				jisjk:50912		
+テレビ西日本	TV니시닛폰	N130	QIDVGt		GN				jisjk:50911		
 テレビ電話	화상 전화	N110	VPe		GN				jisjk:131230		
 テレファックス	텔레팩스	N110	VCm		GN				jisjk:50914		
 テレフィーチャー	TV용 장편 영화	N110	UAr		GN				jisjk:131237		
@@ -79738,8 +79738,8 @@ ttt	ttt	K110			GN				jisjk:201744
 フジックス建設	후지크건설	N110	VPl		GN				jisjk:55134		
 フジテック	후지텍	N130	QIDVGt		GN				jisjk:55135		
 フジテックエンジニアリング	후지텍 엔지니어링	N130	QIDVGt		GN				jisjk:55136		
-フジテレビ	후지테레비	N130	VBl		GN				jisjk:133418		
-フジテレビジョン	후지테레비전	N130	QIDVGt		GN				jisjk:55137		
+フジテレビ	후지TV	N130	VBl		GN				jisjk:133418		
+フジテレビジョン	후지TV	N130	QIDVGt		GN				jisjk:55137		
 フジデン	후지딘	N110	VPl		GN				jisjk:55138		
 フジパン	후지판	N110	VPl		GN				jisjk:55139		
 フジビル	후지빌딩	N110	VPl		GN				jisjk:55140		
@@ -108256,7 +108256,7 @@ ttt	ttt	K110			GN				jisjk:201744
 中井阪	나카이사카	N130	QCTVPl		GN				jisjk:313060		
 中京	나카교	N130	QCT		GN				jisjk:34249		
 中京アサノコンクリート	츄쿄아사노콘크리트	I110	VGt		GN				jisjk:84388		
-中京テレビ放送	주쿄 테레비 방송	I130	VGt		PN				jisjk:84389		
+中京テレビ放送	주쿄TV 방송	I130	VGt		PN				jisjk:84389		
 中京パイプ工業	쥬쿄파이프공업	I110	VGt		GN				jisjk:84390		
 中京区	나카교구	I130	QCTVPl	Qq	GN				jisjk:218678		
 中京南通	츄우쿄미나미토리	I130	QCTVPl		GN				jisjk:308780		
@@ -131774,7 +131774,7 @@ ttt	ttt	K110			GN				jisjk:201744
 共同で行	공동으로 실시&AV@	M420			GN				jisjk:265584		
 共同オンラインシステム	공동 온라인 시스템	N110	VPe		BZ				jisjk:359143		
 共同コンクリート工業	교도콘크리트공업	I110	VGt		GN				jisjk:61726		
-共同テレビジョン	교도 테레비전	I130	QIDVGt		GN				jisjk:61727		
+共同テレビジョン	교도TV	I130	QIDVGt		GN				jisjk:61727		
 共同フロート	공동 플로트	N110	VMo		GN				jisjk:173871		
 共同プロジェクト	공동 프로젝트	K110			GN				jisjk:103850		
 共同企業体エスエスオーケイ	공동기업체 SSOK	I130	QIDVGt		GN				jisjk:61729		
@@ -223012,8 +223012,8 @@ ttt	ttt	K110			GN				jisjk:201744
 日ソ共同宣言	일소 공동 선언	N110			GN				jisjk:248011		
 日ソ漁業条約	일소 어업 조약	N110			GN				jisjk:248012		
 日ソ貿易	닛소무역	I110	VPl		GN				jisjk:80500		
-日テレ	일본 테레비	N130			GN				jisjk:341040		
-日テレビ	일본텔레비젼	N130			GN				jisjk:103382		
+日テレ	니혼TV	N130			GN				jisjk:341040		
+日テレビ	니혼TV	N130			GN				jisjk:103382		
 日ノ丸産業	히노마루 산업	I130	VGt		PN				jisjk:80504		
 日ノ出	히노데	N130	QCTVPl		GN				jisjk:324604		
 日ノ出岳	히노데다케	N130	VPl		GN				jisjk:220177		
@@ -223850,8 +223850,8 @@ ttt	ttt	K110			GN				jisjk:201744
 日本テトラポッド	일본 테트라폿드	I130	VGt		PN				jisjk:80948		
 日本テラピン	니혼테라핀	I110	VPl		GN				jisjk:80949		
 日本テレコム	일본 텔레콤	I130	VGt		PN				jisjk:80950		
-日本テレビ放送綱	닛폰 테레비 방송망	N110	VBlVCm		GN				jisjk:248010		
-日本テレビ放送網	닛폰 테레비 방송망	I130	VGt		PN				jisjk:80951		
+日本テレビ放送綱	니혼TV 방송망	N110	VBlVCm		GN				jisjk:248010		
+日本テレビ放送網	니혼TV 방송망	I130	VGt		PN				jisjk:80951		
 日本テープ	일본 테입	I130	VGt		PN				jisjk:80940		
 日本ディジタルイクイップメント	니혼디지탈이큅먼트	I110	VPl		GN				jisjk:80953		
 日本ディリークィーン	일본 데일리퀸	I130	VGt		PN				jisjk:80954		
@@ -234091,7 +234091,7 @@ ttt	ttt	K110			GN				jisjk:201744
 札幌	삿포로	N130	QCT	Qq	GN				jisjk:35266		
 札幌そごう	삿포로 소고오	I130	VGt		PN				jisjk:85619		
 札幌スバル自動車	삿포로스바루자동차	I110	VGt		GN				jisjk:85620		
-札幌テレビ放送	삿포로 TV 방송	N130	VBlVGtVMoVCm		GN				jisjk:185322		
+札幌テレビ放送	삿포로TV 방송	N130	VBlVGtVMoVCm		GN				jisjk:185322		
 札幌トヨペット	삿포로 토요 애완	I110			GN				jisjk:109470		
 札幌バンド	삿포르밴드	N110	VBl		GN				jisjk:232562		
 札幌フードセンター	삿포로 푸드센터	I130	VGt		PN				jisjk:85621		
@@ -238445,7 +238445,7 @@ ttt	ttt	K110			GN				jisjk:201744
 東海サーモ	도카이사모	I110	VGt		GN				jisjk:67273		
 東海スピナーズ	도카이스피나즈	I110	VGt		GN				jisjk:67274		
 東海スポーツ用品	도카이 스포츠용품	I130	QIDVGt		GN				jisjk:67275		
-東海テレビ放送	도카이 테레비 방송	I130	QIDVGt		GN				jisjk:67276		
+東海テレビ放送	도카이TV 방송	I130	QIDVGt		GN				jisjk:67276		
 東海トリム	도카이 트림	I130	QIDVGt		GN				jisjk:67277		
 東海バネ工業	도카바네공업	I110	VGt		GN				jisjk:67278		
 東海パルプ	도카이 펄프	I130	QIDVGt		GN				jisjk:67279		
@@ -284794,7 +284794,7 @@ ttt	ttt	K110			GN				jisjk:201744
 石川	이시카와	N130	QCTVPl	Qq	GN				jisjk:118788		
 石川ガスケット	이시카와가스켓	I130	QIDVGt		GN				jisjk:74205		
 石川サンケン	이시카와산켄	I130	QIDVGt		GN				jisjk:74206		
-石川テレビ放送	이시카와 TV 방송	N110	VCmVBl		GN				jisjk:125400		
+石川テレビ放送	이시카와TV 방송	N110	VCmVBl		GN				jisjk:125400		
 石川トヨタ	이시카와토요타	I110			GN				jisjk:110445		
 石川トヨペット	이시카와토요페토	I110	VGt		GN				jisjk:74207		
 石川一郎	이시카와 이치로	N110	VHn		GN				jisjk:210936		
@@ -326293,7 +326293,7 @@ ttt	ttt	K110			GN				jisjk:201744
 読売	요미우리	N130	QID		GN				jisjk:19510		
 読売インフォメーション	요미우리 인포메이션	I130	QIDVGt		GN				jisjk:66243		
 読売エージェンシー	요미우리 에이젼시	I130	QIDVGt		GN				jisjk:66244		
-読売テレビ放送	요미누리 텔레비 방송	I130	QIDVGt		GN				jisjk:67414		
+読売テレビ放送	요미우리TV 방송	I130	QIDVGt		GN				jisjk:67414		
 読売ピーアール	요미우리PR	I130	QIDVGt		GN				jisjk:66245		
 読売広告社	요미우리 광고사	I130	QIDVGt		GN				jisjk:66246		
 読売情報開発センター	요미우리 정보개발 센터	I130	QIDVGt		GN				jisjk:66251		
@@ -347885,8 +347885,8 @@ ttt	ttt	K110			GN				jisjk:201744
 関西セルラー電話	칸사이 셀러 전화	I130	VGt		GN				jisjk:263544		
 関西チューブ	간사이튜브	I110	VGt		GN				jisjk:62198		
 関西テック	칸사이 텍	I130	QIDVGt		GN				jisjk:62199		
-関西テレビ	간사이 테레비	N110	UArVBl		GN				jisjk:229888		
-関西テレビ放送	칸사이 텔레비방송	I130	QIDVGt		GN				jisjk:62200		
+関西テレビ	간사이TV	N110	UArVBl		GN				jisjk:229888		
+関西テレビ放送	간사이TV 방송	I130	QIDVGt		GN				jisjk:62200		
 関西テレメッセージ	칸사이 텔레메시지	I130	QIDVGt		GN				jisjk:62201		
 関西ナショナル電子部品	칸사이 내셔널전자부품	I110			GN				jisjk:109813		
 関西パナソニック自動車機器	칸사이 파나소닉 자동차기기	I110			GN				jisjk:109854		
@@ -353307,7 +353307,7 @@ ttt	ttt	K110			GN				jisjk:201744
 静岡県水産	시즈오카켄수산	I110			GN				jisjk:110413		
 静岡県立	시즈오카켄리쓰	N120	VPl		GN				jisjk:187401		
 静岡県立大学	시즈오카 공립대학	N110	VBl		GN				jisjk:233828		
-静岡第一テレビ	시즈오카 다이이치 테레비	N110	VCmVBl		GN				jisjk:187407		
+静岡第一テレビ	시즈오카 다이이치TV	N110	VCmVBl		GN				jisjk:187407		
 静岡米穀	시즈오카베코쿠우로시	I110	VGt		GN				jisjk:83306		
 静岡精華	시즈오카세이카	N120	VPl		GN				jisjk:187404		
 静岡製機	시즈오카세이키	I130	VGt		GN				jisjk:83314		

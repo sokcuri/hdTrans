@@ -8347,23 +8347,23 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フジツモン	후지츠몬	N110			GN						ふじつもん	names.306099
 フジツー・シーメンス・コンピューターズ	후지쯔 지멘스 컴퓨터스	N130	VGt		GN							names.306100
 フジテック	후지테크	N130	VGt		GN							names.306101
-フジテレビ	후지 TV	N110			GN						ふじてれび	names.306102
-フジテレビONE	후지 TV ONE	N110			GN							names.306103
-フジテレビTWO	후지 TV TWO	N110			GN							names.306104
-フジテレビオンデマンド	후지테레비 온디맨드	N110			GN						ふじてれびおんでまんど	names.306105
-フジテレビジョン	후지 TV	N130	VGt		GN							names.306106
-フジテレビジョン	후지 테레비	N130	VGt		GN						フジテレビジョン	names.306107
-フジテレビ土曜7時30分枠の連続ドラマ	후지 TV 토요일 밤 7시 30분 드라마	N130	QWK		GN							names.306108
-フジテレビ土曜7時枠の連続ドラマ	후지 TV 토요일 밤 7시 드라마	N130	QWK		GN							names.306109
-フジテレビ月曜7時枠の連続ドラマ	후지 TV 월요일 밤 7시 드라마	N130	QWK		GN							names.306110
-フジテレビ月曜9時枠の連続ドラマ	후지 TV 월요일 밤 9시 드라마	N130	QWK		GN							names.306111
-フジテレビ木曜7時枠の連続ドラマ	후지 TV 목요일 밤 7시 드라마	N130	QWK		GN							names.306112
-フジテレビ木曜8時枠の連続ドラマ	후지 TV 목요일 밤 8시 드라마	N130	QWK		GN							names.306113
-フジテレビ水曜10時枠の連続ドラマ	후지 TV 수요일 밤 10시 드라마	N130	QWK		GN							names.306114
-フジテレビ水曜夜8時枠時代劇	후지 TV 수요일 밤 8시 시대극	N130	QWK		GN							names.306115
-フジテレビ火曜9時枠の連続ドラマ	후지 TV 화요일 밤 9시 드라마	N130	QWK		GN							names.306116
-フジテレビ系列日曜夜9時枠の連続ドラマ	후지 TV 일요일 밤 9시 드라마	N130	QWK		GN							names.306117
-フジテレビ金曜8時枠の連続ドラマ	후지 TV 금요일 밤 8시 드라마	N130	QWK		GN							names.306118
+フジテレビ	후지TV	N110			GN						ふじてれび	names.306102
+フジテレビONE	후지TV ONE	N110			GN							names.306103
+フジテレビTWO	후지TV TWO	N110			GN							names.306104
+フジテレビオンデマンド	후지TV 온디맨드	N110			GN						ふじてれびおんでまんど	names.306105
+フジテレビジョン	후지TV	N130	VGt		GN							names.306106
+フジテレビジョン	후지TV	N130	VGt		GN						フジテレビジョン	names.306107
+フジテレビ土曜7時30分枠の連続ドラマ	후지TV 토요일 밤 7시 30분 드라마	N130	QWK		GN							names.306108
+フジテレビ土曜7時枠の連続ドラマ	후지TV 토요일 밤 7시 드라마	N130	QWK		GN							names.306109
+フジテレビ月曜7時枠の連続ドラマ	후지TV 월요일 밤 7시 드라마	N130	QWK		GN							names.306110
+フジテレビ月曜9時枠の連続ドラマ	후지TV 월요일 밤 9시 드라마	N130	QWK		GN							names.306111
+フジテレビ木曜7時枠の連続ドラマ	후지TV 목요일 밤 7시 드라마	N130	QWK		GN							names.306112
+フジテレビ木曜8時枠の連続ドラマ	후지TV 목요일 밤 8시 드라마	N130	QWK		GN							names.306113
+フジテレビ水曜10時枠の連続ドラマ	후지TV 수요일 밤 10시 드라마	N130	QWK		GN							names.306114
+フジテレビ水曜夜8時枠時代劇	후지TV 수요일 밤 8시 시대극	N130	QWK		GN							names.306115
+フジテレビ火曜9時枠の連続ドラマ	후지TV 화요일 밤 9시 드라마	N130	QWK		GN							names.306116
+フジテレビ系列日曜夜9時枠の連続ドラマ	후지TV 일요일 밤 9시 드라마	N130	QWK		GN							names.306117
+フジテレビ金曜8時枠の連続ドラマ	후지TV 금요일 밤 8시 드라마	N130	QWK		GN							names.306118
 フジトミ証券	후지토미 증권	N130	VGt		GN							names.306119
 フジドリームエアラインズ	후지드림 항공	N130	VGt		GN						フジドリームエアラインズ	names.306120
 フジナッツ健	후지나쓰 겐	N130	QPNVHn		GN							names.306121
@@ -64663,7 +64663,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ミヤえもん	사이토 미야코	N130	QPNVHn		GN							names.362417
 ミヤちゃん	미야짱	N130	QCTVPl		GN						みやちゃん	names.362418
 ミヤイリガイ	미야이리가이	N110			GN						みやいりがい	names.362419
-ミヤギテレビ	미야기 TV 방송	N110			GN						みやぎてれび	names.362420
+ミヤギテレビ	미야기TV	N110			GN						みやぎてれび	names.362420
 ミヤギロドリゴ	미야기 로드리고	N110			GN						みやぎろどりご	names.362421
 ミヤグミ	미야구미	N130	QPNVHn	Wb	GN						みやぐみ	names.362422
 ミヤコ	미야코	N130	QPNVHn	Wb	GN						ミヤコ	names.362423
@@ -133565,8 +133565,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三重あい	미에 아이	N130	QPNVHn		GN						みえあい	names.431321
 三重の壁	삼중의 벽	N130	QPNVHn		GN							names.431322
 三重エフエム放送	미에 FM 방송	N130	VGt		GN							names.431323
-三重テレビ	미에 TV 방송	N110			GN							names.431324
-三重テレビ放送	미에 TV 방송	N110			GN							names.431325
+三重テレビ	미에TV	N110			GN							names.431324
+三重テレビ放送	미에TV 방송	N110			GN							names.431325
 三重ノ海	미에노우미	N130	QPNVHn	Wa	GN							names.431326
 三重ノ海剛司	미에노우미 쓰요시	N130	QPNVHn		GN							names.431327
 三重交通	미에 교통	N130	VGt		GN							names.431328
@@ -138100,8 +138100,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中井雅之	나카이 마사유키	N130	QPNVHn		GN							names.435856
 中井麗一	나카이 레이이치	N130	QPNVHn		GN						なかいれいいち	names.435857
 中亥歳男	나카 이사오	N130	QPNVHn		GN							names.435858
-中京テレビ	주쿄 테레비	N110			GN							names.435859
-中京テレビ放送	주쿄 테레비 방송	N130	VGt		GN							names.435860
+中京テレビ	주쿄TV	N110			GN							names.435859
+中京テレビ放送	주쿄TV 방송	N130	VGt		GN							names.435860
 中京圏	주쿄권	N130	QCTVPl		GN							names.435861
 中京大学	주쿄 대학	N130	VGt		GN							names.435862
 中京工業地帯	주쿄 공업지대	N130	QCTVPl		GN							names.435863
@@ -167594,7 +167594,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 共侯	채 공후	N130	QPNVHn		GN						きょうこう	names.465350
 共公	공공	N130	QPNVHn	Wb	GN						きょうこう	names.465351
 共同の機関	공동 기관	N130	VGt		GN							names.465352
-共同テレビジョン	교도 테레비전	N130	VGt		GN							names.465353
+共同テレビジョン	교도TV	N130	VGt		GN							names.465353
 共同リスト	공동 명단	N130	VGt		GN							names.465354
 共同主権	공동통치령	N130	VGt		GN							names.465355
 共同体	공동체	N110			GN							names.465356
@@ -178056,10 +178056,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 北海道サッカーリーグ	홋카이도 사커 리그	N130	VGt		GN							names.475812
 北海道スプリントカップ	홋카이도 스프린트 컵	N110			GN							names.475813
 北海道スペシャル	홋카이도 스페셜	N130	QWK		GN							names.475814
-北海道テレビ	홋카이도 TV 방송	N110			GN							names.475815
-北海道テレビ放送	홋카이도 TV 방송	N110			GN						ほっかいどうてれびほうそう	names.475816
-北海道テレビ放送株式会社	홋카이도 TV 방송	N130	VGt		GN							names.475817
-北海道テレビ放送株式会社	홋카이도 테레비 방송	N130	VGt		GN							names.475818
+北海道テレビ	홋카이도TV	N110			GN							names.475815
+北海道テレビ放送	홋카이도TV 방송	N110			GN						ほっかいどうてれびほうそう	names.475816
+北海道テレビ放送株式会社	홋카이도TV 방송	N130	VGt		GN							names.475817
+北海道テレビ放送株式会社	홋카이도TV 방송	N130	VGt		GN							names.475818
 北海道中央バス	홋카이도 중앙 버스	N110			GN							names.475819
 北海道中央電鉄	홋카이도 중앙전철	N110			GN							names.475820
 北海道公安委員会	홋카이도 공안위원회	N130	VGt		GN							names.475821
@@ -180107,10 +180107,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 千葉ジェッツ	지바 제츠	N130	VGt		GN							names.477863
 千葉セントラルタワー	지바 센트럴 타워	N130	QCTVPl		GN						ちばせんとらるたわー	names.477864
 千葉ダービー	치바 더비	N110			GN						ちばだーびー	names.477865
-千葉テレビ	지바 TV	N110			GN							names.477866
-千葉テレビ放送	지바 TV	N110			GN							names.477867
-千葉テレビ放送株式会社	지바 TV	N130	VGt		GN							names.477868
-千葉テレビ放送株式会社	치바 테레비	N130	VGt		GN							names.477869
+千葉テレビ	지바TV	N110			GN							names.477866
+千葉テレビ放送	지바TV 방송	N110			GN							names.477867
+千葉テレビ放送株式会社	지바TV 방송	N130	VGt		GN							names.477868
+千葉テレビ放送株式会社	지바TV 방송	N130	VGt		GN							names.477869
 千葉トロン	치바 트론	N110			GN						ちば とろん	names.477870
 千葉ニュータウン鉄道	지바 뉴타운 철도	N130	VGt		GN							names.477871
 千葉ニュータウン鉄道 9100形 電車	치바 뉴타운 철도 9100형 전동차	N110			GN							names.477872
@@ -189984,11 +189984,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 名古屋コミティア	나고야 코미티아	N110			GN						なごやこみてぃあ	names.487740
 名古屋コミティア44	나고야 코미티아 44	N110			GN							names.487741
 名古屋コミティア45	나고야 코미티아 45	N110			GN							names.487742
-名古屋テレビ	나고야 TV 방송	N110			GN							names.487743
-名古屋テレビ塔	나고야 테레비 타워	N110			GN							names.487744
-名古屋テレビ放送	나고야 TV 방송	N130	VGt		GN							names.487745
-名古屋テレビ放送株式会社	나고야 TV 방송	N130	VGt		GN							names.487746
-名古屋テレビ放送株式会社	나고야 테레비	N130	VGt		GN							names.487747
+名古屋テレビ	나고야TV	N110			GN							names.487743
+名古屋テレビ塔	나고야TV 타워	N110			GN							names.487744
+名古屋テレビ放送	나고야TV 방송	N130	VGt		GN							names.487745
+名古屋テレビ放送株式会社	나고야TV 방송	N130	VGt		GN							names.487746
+名古屋テレビ放送株式会社	나고야TV 방송	N130	VGt		GN							names.487747
 名古屋ドラゴンズ	나고야 드래건스	N110			GN						なごやどらごんず	names.487748
 名古屋三吉	나고야 산키치	N130	QPNVHn		GN							names.487749
 名古屋南IC	나고야미나미 IC	N110			GN						なごやみなみ	names.487750
@@ -209555,7 +209555,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大星淡	오호시 아와이	N130	QPNVHn		GN						おおほし あわい	names.507312
 大映	다이에이	N130	VGt		GN							names.507313
 大映スターズ	다이에이 유니온스	N130	VGt		GN							names.507314
-大映テレビ	다이에이 텔레비전	N110			GN							names.507315
+大映テレビ	다이에이TV	N110			GN							names.507315
 大映ドラマ	다이에이 드라마	N110			GN							names.507316
 大映ユニオンズ	다이에이 유니온스	N130	VGt		GN							names.507317
 大映怪獣	다이에이 괴수	N110			GN							names.507318
@@ -213052,7 +213052,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大阪ソーダ	오사카 소다	N130	VGt		GN							names.510809
 大阪タコちゃんラブちゃん	오사카 타코짱 러브짱	N110			GN							names.510810
 大阪ダービー	오사카 더비	N110			GN							names.510811
-大阪テレビ放送	오사카 텔레비전 방송	N110			GN							names.510812
+大阪テレビ放送	오사카TV 방송	N110			GN							names.510812
 大阪ドーム	오사카 돔	N110			GN						おおさかどーむ	names.510813
 大阪パフォーマンスドール	오사카 퍼포먼스 돌	N130	VGt		GN							names.510814
 大阪ブルテオン	오사카 블루테온	N130	VGt		GN							names.510815
@@ -217492,8 +217492,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奈良シカダイ	나라 시카다이	N130	QPNVHn		GN						なら しかだい	names.515249
 奈良シカマル	나라 시카마루	N130	QPNVHn		GN							names.515250
 奈良テマリ	테마리	N130	QPNVHn	Wb	GN							names.515251
-奈良テレビ	나라 TV 방송	N110			GN							names.515252
-奈良テレビ放送	나라 TV 방송	N110			GN							names.515253
+奈良テレビ	나라TV	N110			GN							names.515252
+奈良テレビ放送	나라TV 방송	N110			GN							names.515253
 奈良ドリームランド	나라 드림랜드	N110			GN							names.515254
 奈良ホテル	나라 호텔	N130	VGt		GN							names.515255
 奈良ヨシノ	나라 요시노	N130	QPNVHn		GN						なら よしの	names.515256
@@ -227834,7 +227834,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宮城ジョージ	미야기 조지	N130	QPNVHn		GN						みやき じょーじ	names.525591
 宮城ソータ	미야기 소타	N130	QPNVHn		GN						みやき そーた	names.525592
 宮城タマヨ	미야기 타마요	N130	QPNVHn		GN							names.525593
-宮城テレビ放送	미야기 TV 방송	N130	VGt		GN							names.525594
+宮城テレビ放送	미야기TV 방송	N130	VGt		GN							names.525594
 宮城ナナ	미야기 나나	N130	QPNVHn		GN							names.525595
 宮城リク	미야기 리쿠	N130	QPNVHn		GN						みやき りく	names.525596
 宮城リク	미야구스쿠 리쿠	N130	QPNVHn		GN							names.525597
@@ -229776,8 +229776,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 富山	토미야마	N130	QPNVHn	Wa	GN							names.527533
 富山あかり	토미야마 아카리	N130	QPNVHn		GN							names.527534
 富山エフエム放送	도야마 FM 방송	N130	VGt		GN							names.527535
-富山テレビ	도야마 TV 방송	N110			GN							names.527536
-富山テレビ放送	도야마 TV 방송	N110			GN							names.527537
+富山テレビ	도야마TV	N110			GN							names.527536
+富山テレビ放送	도야마TV 방송	N110			GN							names.527537
 富山ブラック	도야마 블랙	N110			GN							names.527538
 富山ライトレール	도야마 라이트 레일	N130	VGt		GN							names.527539
 富山信号場	푸산 신호장	N130	QCTVPl		GN							names.527540
@@ -240835,7 +240835,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山形みらい	야마가타 미라이	N130	QPNVHn		GN						やまかた みらい	names.538592
 山形りんご	야마가타 사과	N130	QCTVPl		GN						やまがたりんご	names.538593
 山形スクリーム	야마가타 스크림	N130	QWK		GN							names.538594
-山形テレビ	야마가타 TV	N110			GN							names.538595
+山形テレビ	야마가타TV	N110			GN							names.538595
 山形ユキオ	야마가타 유키오	N130	QPNVHn		GN							names.538596
 山形亜裕子	야마가타 아유코	N130	QPNVHn		GN							names.538597
 山形健	야마가타 켄	N130	QPNVHn		GN							names.538598
@@ -242976,8 +242976,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山門郁夫	야마카도 이쿠오	N130	QPNVHn		GN						やまかどいくお	names.540733
 山門郡	야마토군	N130	QCTVPl		GN							names.540734
 山陰	산인	N130	QCTVPl		GN							names.540735
-山陰中央テレビ	산인 중앙 TV 방송	N110			GN							names.540736
-山陰中央テレビジョン放送	산인 중앙 TV 방송	N130	VGt		GN							names.540737
+山陰中央テレビ	산인 중앙TV	N110			GN							names.540736
+山陰中央テレビジョン放送	산인 중앙TV 방송	N130	VGt		GN							names.540737
 山陰中央新報	산인 중앙 신보	N110			GN							names.540738
 山陰加春夫	야마카게 가즈오	N130	QPNVHn		GN							names.540739
 山陰地方	산인 지방	N130	QCTVPl		GN							names.540740
@@ -244924,7 +244924,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 岩戸華帆	이와토 가호	N130	QPNVHn		GN						いわとかほ	names.542681
 岩手	이와테	N130	QPNVHn	Wa	GN							names.542682
 岩手さちこ	이와테 사치코	N130	QPNVHn		GN						いわて さちこ	names.542683
-岩手めんこいテレビ	이와테 멘코이 TV	N110			GN							names.542684
+岩手めんこいテレビ	이와테 멘코이TV	N110			GN							names.542684
 岩手・宮城内陸地震	이와테·미야기 내륙지진	N110			GN							names.542685
 岩手・宮城内陸地震	이와테 미야기 내륙 지진	N110			GN							names.542686
 岩手一戸トンネル	이와테이치노헤 터널	N130	QCTVPl		GN							names.542687
@@ -244933,7 +244933,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 岩手大学	이와테 대학	N130	VGt		GN							names.542690
 岩手太郎	이와테 타로	N130	QPNVHn		GN							names.542691
 岩手日報	이와테 일보	N110			GN						いわてにっぽう	names.542692
-岩手朝日テレビ	이와테 아사히 TV	N110			GN							names.542693
+岩手朝日テレビ	이와테 아사히TV	N110			GN							names.542693
 岩手村	이와데촌	N130	QCTVPl		GN							names.542694
 岩手県交通	이와테 현교통	N130	VGt		GN							names.542695
 岩手県交通株式会社	이와테현교통	N130	VGt		GN							names.542696
@@ -254884,13 +254884,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 広島サンダーズ	히로시마 선더스	N130	VGt		GN							names.552641
 広島サンダーズ	히로시마 썬더즈	N130	VGt		GN							names.552642
 広島シティネットワーク	히로시마 시티 네트워크	N130	QCTVPl		GN							names.552643
-広島テレビ	히로시마 TV 방송	N110			GN							names.552644
-広島テレビ放送	히로시마 TV 방송	N130	VGt		GN							names.552645
-広島テレビ放送株式会社	히로시마 텔레비전 방송	N130	VGt		GN							names.552646
-広島テレビ放送株式会社	히로시마 TV 방송	N130	VGt		GN							names.552647
+広島テレビ	히로시마TV	N110			GN							names.552644
+広島テレビ放送	히로시마TV 방송	N130	VGt		GN							names.552645
+広島テレビ放送株式会社	히로시마TV 방송	N130	VGt		GN							names.552646
+広島テレビ放送株式会社	히로시마TV 방송	N130	VGt		GN							names.552647
 広島ドラゴンフライズ	히로시마 드래곤플라이즈	N130	VGt		GN							names.552648
 広島バス	히로시마 버스	N130	VGt		GN							names.552649
-広島ホームテレビ	히로시마 홈 TV	N110			GN						ひろしまほーむてれび	names.552650
+広島ホームテレビ	히로시마 홈TV	N110			GN						ひろしまほーむてれび	names.552650
 広島・長崎原子爆弾投下	히로시마·나가사키 원자폭탄 투하	N110			GN							names.552651
 広島一家失踪事件	히로시마 일가족 실종 사건	N110			GN						ひろしまいっかしっそうじけん	names.552652
 広島世那	히로시마 세나	N130	QPNVHn		GN						ひろしま せな	names.552653
@@ -266167,7 +266167,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 愛媛オレンジバイキングス	에히메 오렌지 바이킹스	N130	VGt		GN							names.563924
 愛媛マンダリンパイレーツ	에히메 만다린 파이리츠	N130	VGt		GN							names.563925
 愛媛マンダリンパイレーツ	에히메 만다린 파이렛츠	N130	VGt		GN							names.563926
-愛媛朝日テレビ	에히메 아사히 TV	N110			GN							names.563927
+愛媛朝日テレビ	에히메 아사히TV	N110			GN							names.563927
 愛媛県がんセンター	에히메현 암센터	N130	VGt		GN							names.563928
 愛媛県第1区	에히메현 제1구	N130	QCTVPl		GN							names.563929
 愛媛県第2区	에히메현 제2구	N130	QCTVPl		GN							names.563930
@@ -275996,7 +275996,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新潟PA	니가타 PA	N110			GN							names.573753
 新潟アルビレックス・ベースボール・クラブ	니가타 알비렉스 베이스볼 클럽	N130	VGt		GN							names.573754
 新潟ジャンプステークス	니가타 점프 스테이크스	N110			GN						にいがたじゃんぷすてーくす	names.573755
-新潟テレビ21	니가타 TV21	N110			GN							names.573756
+新潟テレビ21	니가타TV21	N110			GN							names.573756
 新潟トランシス	니가타 트랜시스	N110			GN						にいがたとらんしす	names.573757
 新潟ニュース610	니가타 뉴스 610	N130	QWK		GN							names.573758
 新潟ニュース845	니가타 뉴스 845	N130	QWK		GN							names.573759
@@ -276025,7 +276025,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 新潟県道565号	니가타현도 제565호선	N130	QCTVPl		GN							names.573782
 新潟県選挙区	니가타현 선거구	N130	QCTVPl		GN							names.573783
 新潟競馬場	니가타 경마장	N110			GN						にいがたけいばじょう	names.573784
-新潟総合テレビ	니가타 종합 TV	N110			GN							names.573785
+新潟総合テレビ	니가타 종합TV	N110			GN							names.573785
 新潟色	니가타색	N110			GN						にいがたいろ	names.573786
 新潟記念	니가타 기념	N110			GN							names.573787
 新潟鐵工所	니가타 철공소	N110			GN						にいがたてっこうしょ	names.573788
@@ -277535,7 +277535,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日堂	니치도	N130	QPNVHn	Wb	GN						にちどう	names.575292
 日報	일간신문	N110			GN							names.575293
 日塩有料道路	니치엔 유료도로	N110			GN						にちえんゆうりょうどうろ	names.575294
-日売テレビ	니치우리 TV	N130	QPNVHn		GN						にちうりてれび	names.575295
+日売テレビ	니치우리TV	N130	QPNVHn		GN						にちうりてれび	names.575295
 日夏	히나츠	N130	QPNVHn	Wa	GN						ひなつ	names.575296
 日夏ともえ	히나츠 토모에	N130	QPNVHn		GN							names.575297
 日夏村	히나쓰촌	N130	QCTVPl		GN							names.575298
@@ -277827,16 +277827,16 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本ダービー記念日	일본 더비 기념일	N110			GN							names.575584
 日本チーム	일본 팀	N130	VGt		GN							names.575585
 日本テレネット	텔레넷 재팬	N130	VGt		GN							names.575586
-日本テレビ	닛폰 TV	N110			GN						にほんてれび	names.575587
-日本テレビ放送網	닛폰 테레비 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
-日本テレビ放送網株式会社	닛폰 TV 방송망	N130	VGt		GN							names.575589
-日本テレビ放送網株式会社	닛폰 테레비	N130	VGt		GN							names.575590
-日本テレビ日曜10時30分枠連続ドラマ	닛폰 TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
-日本テレビ火曜8時枠時代劇	닛폰 TV 화요일 8시 시대극	N130	QWK		GN							names.575592
-日本テレビ盃	니혼테레비배	N110			GN						にほんてれびはい	names.575593
-日本テレビ系列	닛폰 테레비 계열	N130	VGt		GN							names.575594
-日本テレビ系土曜深夜ドラマ	일본 TV 토요 심야 드라마	N130	QWK		GN							names.575595
-日本テレビ金曜8時連続ドラマ	니혼 TV 금요일 8시 연속 드라마	N130	QWK		GN							names.575596
+日本テレビ	니혼TV	N110			GN						にほんてれび	names.575587
+日本テレビ放送網	니혼TV 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
+日本テレビ放送網株式会社	니혼TV 방송망	N130	VGt		GN							names.575589
+日本テレビ放送網株式会社	니혼TV 방송망	N130	VGt		GN							names.575590
+日本テレビ日曜10時30分枠連続ドラマ	니혼TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
+日本テレビ火曜8時枠時代劇	니혼TV 화요일 8시 시대극	N130	QWK		GN							names.575592
+日本テレビ盃	니혼TV배	N110			GN						にほんてれびはい	names.575593
+日本テレビ系列	니혼TV 계열	N130	VGt		GN							names.575594
+日本テレビ系土曜深夜ドラマ	니혼TV 토요 심야 드라마	N130	QWK		GN							names.575595
+日本テレビ金曜8時連続ドラマ	니혼TV 금요일 8시 연속 드라마	N130	QWK		GN							names.575596
 日本デザイナー学院	일본 디자이너 학원	N130	VGt		GN							names.575597
 日本トンデモ本大賞	일본 엉터리 책 대상	N130	QPNVHn		GN						にほんとんでもぼんたいしょう	names.575598
 日本トーター野球場	닛폰토타 야구장	N110			GN							names.575599
@@ -278054,7 +278054,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本放送映画	일본방송영화	N130	VGt		GN							names.575811
 日本政府	일본국 정부	N110			GN							names.575812
 日本教職員組合	일본교직원조합	N110			GN						にほんきょうしょくいんくみあい	names.575813
-日本教育テレビ	TV 아사히	N130	VGt		GN							names.575814
+日本教育テレビ	니혼 교육TV	N130	VGt		GN							names.575814
 日本敬神崇祖自修団	일본경신숭조자수단	N130	VGt		GN							names.575815
 日本数学会	일본수학회	N130	VGt		GN							names.575816
 日本文化	일본의 문화	N110			GN							names.575817
@@ -278113,8 +278113,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本海 ・ 日本海	동해	N130	QCTVPl		GN						にほんかい ・ にっぽんかい	names.575870
 日本海オセアンリーグ	니혼카이 오세안 리그	N110			GN							names.575871
 日本海スプリント	니혼카이 스프린트	N110			GN							names.575872
-日本海テレビ	니혼카이 TV	N110			GN							names.575873
-日本海テレビジョン放送	니혼카이 TV	N130	VGt		GN							names.575874
+日本海テレビ	니혼카이TV	N110			GN							names.575873
+日本海テレビジョン放送	니혼카이TV 방송	N130	VGt		GN							names.575874
 日本海大海戦	일본해 대해전	N130	QWK		GN							names.575875
 日本海山地落葉樹林	니혼카이 산악 낙엽수림	N130	QCTVPl		GN							names.575876
 日本海常緑樹林	니혼카이 상록수림	N130	QCTVPl		GN							names.575877
@@ -288339,9 +288339,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 朝日平吾	아사히 헤이고	N130	QPNVHn		GN							names.586096
 朝日悠俊	아사히 유토시	N130	QPNVHn		GN							names.586097
 朝日放送	아사히 방송	N110			GN						あさひほうそう	names.586098
-朝日放送テレビ	아사히 방송 테레비	N110			GN							names.586099
-朝日放送テレビ株式会社	아사히방송텔레비전	N130	VGt		GN							names.586100
-朝日放送テレビ株式会社	아사히 방송 테레비	N130	VGt		GN							names.586101
+朝日放送テレビ	아사히방송TV	N110			GN							names.586099
+朝日放送テレビ株式会社	아사히방송TV	N130	VGt		GN							names.586100
+朝日放送テレビ株式会社	아사히방송TV	N130	VGt		GN							names.586101
 朝日放送ラジオ	아사히 방송 라디오	N130	VGt		GN							names.586102
 朝日放送ラジオ株式会社	아사히 방송 라디오	N130	VGt		GN							names.586103
 朝日新聞	아사히 신문	N110			GN						あさひしんぶん	names.586104
@@ -291958,8 +291958,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 札幌エクセルホテル東急	삿포로 엑셀 호텔 도큐	N130	VGt		GN							names.589715
 札幌グランドホテル	삿포로 그랜드 호텔	N130	VGt		GN							names.589716
 札幌ステラプレイス	삿포로 스텔라 플레이스	N130	VGt		GN							names.589717
-札幌テレビ	삿포로 TV 방송	N110			GN							names.589718
-札幌テレビ放送	삿포로 TV 방송	N130	VGt		GN							names.589719
+札幌テレビ	삿포로TV	N110			GN							names.589718
+札幌テレビ放送	삿포로TV 방송	N130	VGt		GN							names.589719
 札幌ド	삿포로 돔	N110			GN						さっぽろど	names.589720
 札幌ドーム	삿포로 돔	N110			GN							names.589721
 札幌パークホテル	삿포로 파크 호텔	N130	VGt		GN							names.589722
@@ -299736,7 +299736,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東映ジョイ・エンタテインメント	티조이	N130	VGt		GN							names.597493
 東映スパイダーマン	도에이판 스파이더맨	N130	QWK		GN							names.597494
 東映チャンネル	도에이 채널	N130	VGt		GN							names.597495
-東映テレビ・プロダクション	도에이 TV 프로덕션	N130	VGt		GN							names.597496
+東映テレビ・プロダクション	도에이TV 프로덕션	N130	VGt		GN							names.597496
 東映ビデオ	도에이 비디오	N130	VGt		GN							names.597497
 東映フライヤーズ	도에이 플라이어스	N130	VGt		GN							names.597498
 東映ロボットガールズ	토에이 로봇 걸즈	N130	QWK		GN						とうえいろぼっとがーるず	names.597499
@@ -299999,11 +299999,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東海なな	도카이 나나	N130	QPNVHn		GN						とうかい なな	names.597756
 東海オンエア	도카이 온에아	N130	QPNVHn		GN						とうかい おんえあ	names.597757
 東海サンタ列車	동해산타열차	N130	QCTVPl		GN							names.597758
-東海テレビ	도카이 테레비	N130	QPNVHn		GN						とうかい てれび	names.597759
-東海テレビ制作昼の帯ドラマ	동해 TV 제작 낮의 일일 연속극	N130	QWK		GN							names.597760
-東海テレビ放送	도카이 테레비 방송	N130	VGt		GN							names.597761
-東海テレビ放送株式会社	도카이 TV	N130	VGt		GN						とうかいてれびほうそう	names.597762
-東海テレビ放送株式会社	도카이 테레비	N130	VGt		GN							names.597763
+東海テレビ	도카이TV	N130	QPNVHn		GN						とうかい てれび	names.597759
+東海テレビ制作昼の帯ドラマ	도카이TV 제작 낮의 일일 연속극	N130	QWK		GN							names.597760
+東海テレビ放送	도카이TV 방송	N130	VGt		GN							names.597761
+東海テレビ放送株式会社	도카이TV 방송	N130	VGt		GN						とうかいてれびほうそう	names.597762
+東海テレビ放送株式会社	도카이TV 방송	N130	VGt		GN							names.597763
 東海ラジオ放送	도카이 라디오 방송	N130	VGt		GN							names.597764
 東海ラジオ放送株式会社	도카이 라디오 방송	N130	VGt		GN							names.597765
 東海ラジオ放送株式会社	도카이 라디오	N130	VGt		GN							names.597766
@@ -307659,8 +307659,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社 Art Shell	주식회사 Art Shell	N130	VGt		GN							names.605416
 株式会社 JR東日本ウォータービジネス	주식회사 JR동일본 워터비즈니스	N130	VGt		GN							names.605417
 株式会社 JR東日本ウォータービジネス	JR 동일본 워터 비즈니스	N130	VGt		GN							names.605418
-株式会社 TBS テレビ	주식회사 TBS 텔레비전	N130	VGt		GN							names.605419
-株式会社 TBS テレビ	TBS 테레비	N130	VGt		GN							names.605420
+株式会社 TBS テレビ	TBS	N130	VGt		GN							names.605419
+株式会社 TBS テレビ	TBS	N130	VGt		GN							names.605420
 株式会社 TBS ラジオ	TBS 라디오	N130	VGt		GN							names.605421
 株式会社 アクロス エンタテインメント	아크로스 엔터테인먼트	N130	QPNVHn		GN							names.605422
 株式会社 エイジアプロモーション	에이지아 프로모션	N130	VGt		GN							names.605423
@@ -307788,22 +307788,22 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社タカラトミー	다카라토미	N130	VGt		GN							names.605545
 株式会社タニタ	다니다	N130	VGt		GN							names.605546
 株式会社チーム国光	팀 쿠니미츠	N130	VGt		GN							names.605547
-株式会社テレビBS東京	BS 테레비 도쿄	N130	VGt		GN							names.605548
-株式会社テレビ埼玉	TV 사이타마	N130	VGt		GN							names.605549
-株式会社テレビ埼玉	테레비 사이타마	N130	VGt		GN							names.605550
-株式会社テレビ大分	TV 오이타	N130	VGt		GN							names.605551
-株式会社テレビ大分	테레비 오이타	N130	VGt		GN							names.605552
-株式会社テレビ山梨	테레비 야마나시	N130	VGt		GN							names.605553
-株式会社テレビ新潟放送網	테레비 니가타	N130	VGt		GN							names.605554
-株式会社テレビ朝日	TV 아사히	N130	VGt		GN							names.605555
-株式会社テレビ朝日	테레비 아사히	N130	VGt		GN							names.605556
-株式会社テレビ東京	테레비 도쿄	N130	VGt		GN							names.605557
-株式会社テレビ神奈川	TV 가나가와	N130	VGt		GN							names.605558
-株式会社テレビ神奈川	테레비 가나가와	N130	VGt		GN							names.605559
-株式会社テレビ西日本	TV 니시닛폰	N130	VGt		GN							names.605560
-株式会社テレビ金沢	테레비 가나자와	N130	VGt		GN							names.605561
-株式会社テレビ長崎	TV 나가사키	N130	VGt		GN							names.605562
-株式会社テレビ長崎	테레비 나가사키	N130	VGt		GN							names.605563
+株式会社テレビBS東京	BS TV도쿄	N130	VGt		GN							names.605548
+株式会社テレビ埼玉	TV사이타마	N130	VGt		GN							names.605549
+株式会社テレビ埼玉	TV사이타마	N130	VGt		GN							names.605550
+株式会社テレビ大分	TV오이타	N130	VGt		GN							names.605551
+株式会社テレビ大分	TV오이타	N130	VGt		GN							names.605552
+株式会社テレビ山梨	TV야마나시	N130	VGt		GN							names.605553
+株式会社テレビ新潟放送網	TV니가타 방송망	N130	VGt		GN							names.605554
+株式会社テレビ朝日	TV아사히	N130	VGt		GN							names.605555
+株式会社テレビ朝日	TV아사히	N130	VGt		GN							names.605556
+株式会社テレビ東京	TV도쿄	N130	VGt		GN							names.605557
+株式会社テレビ神奈川	TV가나가와	N130	VGt		GN							names.605558
+株式会社テレビ神奈川	TV가나가와	N130	VGt		GN							names.605559
+株式会社テレビ西日本	TV니시닛폰	N130	VGt		GN							names.605560
+株式会社テレビ金沢	TV가나자와	N130	VGt		GN							names.605561
+株式会社テレビ長崎	TV나가사키	N130	VGt		GN							names.605562
+株式会社テレビ長崎	TV나가사키	N130	VGt		GN							names.605563
 株式会社ディオメディア	디오미디어	N130	VGt		GN							names.605564
 株式会社ディンプス	딤프스	N130	VGt		GN							names.605565
 株式会社デンソー	덴소	N130	VGt		GN							names.605566
@@ -307903,7 +307903,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 株式会社次世代	주식회사 차세대	N130	VGt		GN							names.605660
 株式会社毎日放送	마이니치 방송	N130	VGt		GN							names.605661
 株式会社熊本放送	구마모토 방송	N130	VGt		GN							names.605662
-株式会社熊本県民テレビ	구마모토 현민 TV	N130	VGt		GN						くまもとけんみんテレビ	names.605663
+株式会社熊本県民テレビ	구마모토현민TV	N130	VGt		GN						くまもとけんみんテレビ	names.605663
 株式会社童夢	다우메	N130	VGt		GN							names.605664
 株式会社童夢	도우무	N130	VGt		GN							names.605665
 株式会社総合車両製作所	종합차량제작소	N130	VGt		GN							names.605666
@@ -326234,7 +326234,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 汐理	시오리	N130	QPNVHn	Wb	GN							names.623991
 汐留	시오도메	N130	QPNVHn	Wa	GN							names.623992
 汐留 白亜	시오도메 하쿠아	N130	QPNVHn		GN						しおどめはくあ	names.623993
-汐留ケーブルテレビ	시오도메 케이블 텔레비전	N110			GN							names.623994
+汐留ケーブルテレビ	시오도메 케이블TV	N110			GN							names.623994
 汐留出入口	시오도메 출입구	N130	QCTVPl		GN						しおどめでいりぐち	names.623995
 汐科駅	시커 역	N130	QCTVPl		GN						しおしなえき	names.623996
 汐花	시오카	N130	QPNVHn	Wb	GN						しおか	names.623997
@@ -328487,8 +328487,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 沖縄セルラー電話	오키나와 셀룰러 전화	N130	VGt		GN							names.626244
 沖縄セルラー電話株式会社	오키나와 셀룰러 전화	N130	VGt		GN							names.626245
 沖縄タイムス	오키나와 타임스	N110			GN							names.626246
-沖縄テレビ	오키나와 TV 방송	N110			GN							names.626247
-沖縄テレビ放送	오키나와 TV 방송	N130	VGt		GN							names.626248
+沖縄テレビ	오키나와TV	N110			GN							names.626247
+沖縄テレビ放送	오키나와TV 방송	N130	VGt		GN							names.626248
 沖縄トラフ	오키나와 해곡	N130	QCTVPl		GN							names.626249
 沖縄バス	오키나와 버스	N130	VGt		GN							names.626250
 沖縄バス株式会社	오키나와 버스	N130	VGt		GN						おきなわばす	names.626251

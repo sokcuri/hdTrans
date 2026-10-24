@@ -1,8 +1,8 @@
 # 규칙: LEX-1, LEX-2, LEX-3, LEX-25
 rule	input	expected	kind	layer
-dict:jisjk:84389	中京テレビ放送。	주쿄 테레비 방송.	fix	defaults
-dict:jisjk:84389	中京テレビ放送を見る。	주쿄 테레비 방송을 본다.	fix	defaults
-dict:jisjk:84389	中京テレビ放送の番組。	주쿄 테레비 방송의 프로그램.	fix	defaults
+dict:jisjk:84389	中京テレビ放送。	주쿄TV 방송.	fix	defaults
+dict:jisjk:84389	中京テレビ放送を見る。	주쿄TV 방송을 본다.	fix	defaults
+dict:jisjk:84389	中京テレビ放送の番組。	주쿄TV 방송의 프로그램.	fix	defaults
 dict:jisjk:88537	割れなべ。	깨진 냄비.	fix	defaults
 dict:jisjk:88537	これは割れなべだ。	이것은 깨진 냄비다.	fix	defaults
 dict:jisjk:88537	割れなべを使う。	깨진 냄비를 쓴다.	fix	defaults
