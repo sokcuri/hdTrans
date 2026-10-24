@@ -1,20 +1,21 @@
 # 규칙: SND-1
 rule	input	expected	kind	layer
-sound:drawl-shout	『翻訳機能、仕事しろぉっ』！	『번역 기능, 일해라』!	fix	sound
-sound:drawl-shout	「……この……ッ、馬鹿者がぁッ!!」	「……이……, 바보가!!」	fix	sound
-sound:drawl-shout	「誰が上手い事を言えと願いましたかぁッ!!」	「누가 능숙한 말을 말하라고 바랐습니까!!」	fix	sound
-sound:drawl-shout	許さない…許さないんだからぁっ！	용서하지 않는다…용서하지 않을 거니까!	fix	sound
-sound:drawl-shout	いただきぃっ！	받아!	fix	sound
-sound:drawl-shout	やめてぇっ！	그만두어!	fix	sound
-sound:drawl-shout	完全に夏ね。毎日暑いわ。ばかぁっ！！	완전히 여름이네. 매일 더워. 바보!!	fix	sound
-sound:drawl-shout	「ていとくぅっ！」	「제독!」	fix	sound
-sound:drawl-shout	内容にしとくんだなぁッ！！	내용에 해 두는구나!!	fix	sound
-sound:drawl-shout	入れてぇぇっ！	넣어!	fix	sound
-sound:drawl-shout	「やめてぇ！」	「그만둬!」	keep	sound
-sound:drawl-shout	「いやぁっ、んんんっ……」	「싫엇, 으으읏……」	keep	sound
-sound:drawl-shout	「あぁっ！」	「아앗!」	keep	sound
-sound:drawl-shout	「ねぇっ！」	「저기!」	keep	sound
-sound:drawl-shout	「ふぅっ……」	「후웃……」	keep	sound
-sound:drawl-shout	「うーん……残念だなぁ……」	「으음……유감이구나……」	keep	sound
-sound:drawl-shout	犬ぇぇぇ	개	keep	sound
-sound:drawl-shout	「わぁっ……」	「와앗……」	keep	sound
+sound:shout-tsu	「だ、誰かぁーッ！」	「누, 누군가~!」	fix	sound
+sound:shout-tsu	「騒がしいから来てみれば……これは何ですのーッ？！？！」	「소란스러우니까 와 보면……이건 뭡니다의~?!?!」	fix	sound
+sound:shout-tsu	「ななッ！！！ なぜにメイド服ーーーッ！！！！！」	「없는!!! 왜 메이드복~!!!!!」	fix	sound
+sound:shout-tsu	もちろん母さんには内緒でだーーーーッ！！！	물론 어머니에게는 비밀로다~!!!	fix	sound
+sound:shout-tsu	チャンスなんてそうそうないのだーッ！！！	찬스 같은 건 그렇게 자주 없는 것이다~!!!	fix	sound
+sound:shout-tsu	けぇ、警戒ーッ！！ 転舵ぁ！	케에, 경계~!! 전사!	fix	sound
+sound:shout-tsu	艦隊！総員、起こし！起床ーッ！	함대! 총원, 일으켜! 기상~!	fix	sound
+sound:shout-tsu	……みんな食い殺してやりますですのーッ！！	……모두 물어 죽여 줍니다요~!!	fix	sound
+sound:shout-tsu	「だめーっ！」	「안 돼~!」	keep	sound
+sound:shout-tsu	「いぐぅっ！？」	「이구웃!?」	keep	sound
+sound:shout-tsu	天龍様の攻撃だ！うっしゃぁっ！	텐류님의 공격이다! 웃샤앗!	keep	sound
+sound:shout-tsu	「やめてぇ！」	「그만둬!」	keep	sound
+sound:shout-tsu	「あぁっ！」	「아앗!」	keep	sound
+sound:shout-tsu	「ねぇっ！」	「저기!」	keep	sound
+sound:shout-tsu	「ふぅっ……」	「후웃……」	keep	sound
+sound:shout-tsu	「うーん……残念だなぁ……」	「으음……유감이구나……」	keep	sound
+sound:shout-tsu	犬ぇぇぇ	개	keep	sound
+sound:shout-tsu	「わぁっ……」	「와앗……」	keep	sound
+sound:shout-tsu	「ぎやぁーっ！」	「기야아앗!」	keep	sound

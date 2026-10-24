@@ -640,6 +640,8 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"待って待ってぇぇ", "待って待って\uE00B\uE00B"},
         {"待ってぇぇ", "待って"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B\uE00C？"},
+        // A shout's ッ ends the phrase as っ does.
+        {"まかせてぇぇぇッ！", "まかせて\uE00B\uE00B\uE00B\uE00C！"},
         // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
         // drawl of the particle is ～.
         {"歌うよぉー！", "歌うよ～！"},
