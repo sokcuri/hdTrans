@@ -21632,6 +21632,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 経血	월경혈	N110			GN				xxx llm	1		w:21618
 経験値	경험치	N110			GN				llm		けいけんち	w:21619
 経験豊富	경험 풍부	N110			GN				llm		けいけんほうふ	w:21620
+経験豊富	경험 풍부%A1@	G8U0			GN				llm		けいけんほうふ	w:26817
 結い上げ	묶어 올&AA@	M427			GN				xxx llm	1		w:21621
 結ばれ	맺어&AL@	M427			GN				xxx llm	1		w:21622
 結びつけ	결부시&AQ@	M427			GN				xxx llm	1		w:21623
