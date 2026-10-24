@@ -71,3 +71,32 @@ HD_TEST(word_ruby_base_boundary_after_its_reading) {
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
 }
+
+// A ruby word alone on its line is not alone: its reading stands after it (the Td piece).
+HD_TEST(word_ruby_base_alone_keeps_its_reading_on_the_line) {
+    const std::vector<hdTrans::dict::File> files = {
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n"
+         "犬\t가\tN110\tXXX\t\tGN\t0\t1\t\n"
+         "犬\t나\tN110\t\t\tGN\t2\t2\t||1 G+0== \"Td\"\n"
+         "いぬ\t다\tN110\tXXX\t\tGN\t0\t3\t\n"},
+    };
+    const auto loaded = hdTrans::dict::Load(files);
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    struct Case {
+        const char* in;
+        const char* want;
+    };
+    const Case cases[] = {
+        {"{rb}犬{/rb}{rt}いぬ{/rt}", "{rb}가{/rb}{rt}다{/rt}"},
+        {"犬", "나"},
+    };
+    for (const Case& c : cases) {
+        hdTrans::internal::Memory memory;
+        const std::vector<std::string> lines = {c.in};
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        HD_REQUIRE(out.size() == 1);
+        HD_CHECK_EQ(out[0], std::string(c.want));
+    }
+}

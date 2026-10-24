@@ -338,7 +338,7 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Kh") return KoreanSpan();
         // Hp: a sentence end, an ellipsis or a dash right before the word.
         if (c == "Hp") return AfterPause(true);
-        if (c == "Td" && After() == nullptr && prev == nullptr) return true;
+        if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr && detail->record == 4;
         // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
@@ -530,7 +530,7 @@ bool Item::CheckGobiGAttr(std::string_view s, int di) {
     auto chunkMatches = [&](std::string_view c, std::string_view attrs) {
         if (c == "Ow") return IsRuleRightBoundary();
         if (c == "Hz") return StartsSentence();
-        if (c == "Td" && After() == nullptr && prev == nullptr) return true;
+        if (c == "Td" && next == nullptr && prev == nullptr) return true;
         return Has(attrs, c);
     };
     const int sel = DirectIndex();
