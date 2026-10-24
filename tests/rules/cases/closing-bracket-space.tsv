@@ -11,7 +11,7 @@ restore:closing-space	白木は（勘弁してくれよ～）と苦笑いを浮�
 restore:closing-space	“…それは警告のつもりかい？”	lacks:? ”	fix	restore
 restore:closing-space	“上下１枚ずつ脱衣。”	“상하 1장씩 탈의.”	fix	restore
 restore:closing-space	花子と美咲がにっこり（ニヤリ？）と笑い合う。	has:(씨익?)과	fix	restore
-restore:closing-space	ピッピッピ。（わかればいいのです。）	has:(알면 좋습니다.)	fix	restore
+restore:closing-space	ピッピッピ。（わかればいいのです。）	lacks:. )	fix	restore
 restore:closing-space	『遥かな太古、神代と呼ばれる時代があった。』	lacks:. 』	fix	restore
 restore:closing-space	『申し訳ございません。』	『죄송합니다.』	fix	restore
 restore:closing-space	（準備中です。）	(준비 중입니다.)	fix	restore
