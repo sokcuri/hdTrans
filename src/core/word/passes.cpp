@@ -1,11 +1,15 @@
 // Sentence passes that rewrite the chain before and after the selection: katakana
 // runs and noun phrases are replaced by one longer item, class-3 words take the
 // selection of the word they attach to, and negated plain verbs take their negative.
+#include <algorithm>
+#include <functional>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/dict/classes.h"
 #include "core/word/conjugation.h"
+#include "core/word/constructions.h"
 #include "core/word/flush.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
@@ -26,10 +30,17 @@ bool AllKatakana(std::string_view s) {
     return true;
 }
 
-// A katakana word with katakana neighbours of its token: one word of the run, or
-// nullptr. On the text path a neighbour joins only when all it covers is katakana, so
-// the hiragana ending of a word stays out of the run (リアルなティアーズ).
-Item* BuildNmTail(Flusher& f) {
+struct NmWord {
+    Item* item = nullptr;
+    Record* record = nullptr;
+};
+
+// A katakana word with katakana neighbours of its token: one word of the run and its
+// record, or no item. On the text path a neighbour joins only when all it covers is
+// katakana, so the hiragana ending of a word stays out of the run (リアルなティアーズ).
+// The target is left empty: the run grows by a neighbour per call, and DrainNmTail
+// transliterates only the words that stay in the chain.
+NmWord BuildNmTail(Flusher& f) {
     Worker& w = f.w;
     auto katakana = [&](const Item* x) {
         if (Classify(x->group->surface) != 14) return false;
@@ -52,11 +63,10 @@ Item* BuildNmTail(Flusher& f) {
         }
         if (neighbours < 1) continue;
         const std::string_view raw = it->text.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(length));
-        Record* record = w.CreateSyntheticRecord(it->tokenIndex, raw, false);
-        if (!w.Transliterate(raw, record->target)) w.fault = true;
-        return w.InsertLateCandidate(it->text, start, it->tokenIndex, record);
+        Record* record = w.CreateSyntheticRecord(it->tokenIndex, raw, true);
+        return {w.InsertLateCandidate(it->text, start, it->tokenIndex, record), record};
     }
-    return nullptr;
+    return {};
 }
 
 // phraseFollowsNi: after a word に, the phrase is accepted unless the next
@@ -190,7 +200,13 @@ Phrase FindPhrase(Flusher& f) {
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
                     if (combined != record->source || At(record->partCode, 0) != 'N') continue;
+                    // Copies said straight after it are passed over: the word reads like the last
+                    // copy of the run (好き好き好き, 迷い迷い、).
                     Item* next = it->After();
+                    for (const Item* copy = it; next != nullptr && internal::CopyAfter(copy) == next;) {
+                        copy = next;
+                        next = next->After();
+                    }
                     if (next != nullptr) {
                         const char k = At(next->Code(0), 0);
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
@@ -333,10 +349,24 @@ int InsertionBudget(const Chain& chain) {
 }  // namespace
 
 void DrainNmTail(Flusher& f) {
-    for (int budget = InsertionBudget(f.w.chain); budget > 0; budget--) {
-        Item* it = BuildNmTail(f);
-        if (it == nullptr) return;
-        f.w.chain.Insert(it, true);
+    Worker& w = f.w;
+    std::vector<NmWord> built;
+    for (int budget = InsertionBudget(w.chain); budget > 0; budget--) {
+        const NmWord word = BuildNmTail(f);
+        if (word.item == nullptr) break;
+        w.chain.Insert(word.item, true);
+        built.push_back(word);
+    }
+    if (built.empty()) return;
+    auto byItem = [](const NmWord& a, const NmWord& b) { return std::less<const Item*>()(a.item, b.item); };
+    std::sort(built.begin(), built.end(), byItem);
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        const auto found = std::lower_bound(built.begin(), built.end(), NmWord{it, nullptr}, byItem);
+        if (found == built.end() || found->item != it) continue;
+        Record* record = found->record;
+        if (!w.Transliterate(record->source, record->target)) w.fault = true;
+        // The group of the synthetic record starts with its entry.
+        if (!it->group->entries.empty()) it->group->entries.front()->dst = record->target;
     }
 }
 

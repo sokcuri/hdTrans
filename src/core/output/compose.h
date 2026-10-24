@@ -143,7 +143,9 @@ private:
 
     std::string Build(int i, int action, std::string_view mode);
     void WriteCasual(int first, int last);
-    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr) const;
+    // The mark that ends the sentence of speech after item i, 0 for none; asked tells whether
+    // it asks, clipped whether a drawn end cut with っ comes before it (行くぅぅぅっ).
+    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr, bool* clipped = nullptr) const;
     bool AskConjecture(int i, std::string_view clause, std::string_view own, bool casual);
     bool AskPlain(int i, std::string_view own);
     void AskWord(int i, int last);
@@ -189,8 +191,9 @@ private:
 // are trimmed unless the previous token is a space; a space separates a token from a preceding
 // "</A>", "</a>" or "&#CS". A span token writes its span text as a span piece, then
 // what compose added to its text; a space written before a closing-tag span moves after
-// it. With settings.cleanup a space the engine wrote never forms a run with another
-// space; input whitespace tokens are kept as they are.
+// it. An opening bracket token other than 〔 (【 〈 《 ［ ‘ ｛) after a syllable, a Latin letter, a digit, a
+// word span or a comma takes a space before it. With settings.cleanup a space the engine wrote
+// never forms a run with another space; input whitespace tokens are kept as they are.
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& settings,
                            Pieces& out);
 

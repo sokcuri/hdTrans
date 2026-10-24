@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 phrase:sou-iwareru	小さい頃から、そう言われていた。	어렸을 적부터, 그런 말을 듣고 있었다.	fix	builtin-phrase
 phrase:sou-iwareru	あっさりと、そう言われた。	시원스럽게, 그런 말을 들었다.	fix	builtin-phrase
-phrase:sou-iwareru	そう言われてしまったら、嫌とは言えない。	그런 말을 들어 버리면, 싫다고는 말할 수 없다.	fix	builtin-phrase
+phrase:sou-iwareru	そう言われてしまったら、嫌とは言えない。	그런 말을 들어버리면, 싫다고는 말할 수 없다.	fix	builtin-phrase
 phrase:sou-iwareru	彼女にそう言われちゃ仕方ない。	그녀가 그렇게 말하면 어쩔 수 없다.	keep	builtin-phrase

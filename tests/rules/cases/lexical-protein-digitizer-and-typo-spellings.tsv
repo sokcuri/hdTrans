@@ -1,0 +1,57 @@
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:jisjk:5154	そこきみわるい。	왠지 기분이 나쁘다.	fix	defaults
+dict:jisjk:5154	「そこきみわるいね。」	「왠지 기분이 나쁘네.」	fix	defaults
+dict:jisjk:42371	アクチンを調べる。	액틴을 조사한다.	keep	defaults
+dict:jisjk:42371	アクチンとミオシン。	액틴과 미오신.	keep	defaults
+dict:jisjk:42371	「アクチンの量は多い。」	「액틴의 양은 많다.」	keep	defaults
+dict:jisjk:51239	デジタイザを使う。	디지타이저를 쓴다.	fix	defaults
+dict:jisjk:51239	このデジタイザは新しい。	이 디지타이저는 새롭다.	fix	defaults
+dict:jisjk:51239	「デジタイザを買った。」	「디지타이저를 샀다.」	fix	defaults
+dict:jisjk:55137	フジテレビジョン	후지TV	fix	defaults
+dict:jisjk:55137	フジテレビジョンを見た。	후지TV를 보았다.	fix	defaults
+dict:jisjk:55137	「フジテレビジョン」	「후지TV」	fix	defaults
+dict:jisjk:119273	小首を傾ける。	고개를 갸우뚱한다.	fix	defaults
+dict:jisjk:119273	小首を傾けた。	고개를 갸우뚱했다.	fix	defaults
+dict:jisjk:119273	小首を傾けて聞く。	고개를 갸우뚱해 듣는다.	fix	defaults
+dict:jisjk:119273	「小首を傾けている。」	「고개를 갸우뚱하고 있다.」	fix	defaults
+dict:jisjk:254374	山啄木鳥がいる。	청딱따구리가 있다.	fix	defaults
+dict:jisjk:254374	山啄木鳥を見た。	청딱따구리를 보았다.	fix	defaults
+dict:jisjk:260446	桁あふれが起きた。	자릿수 넘침이 일어났다.	fix	defaults
+dict:jisjk:260446	桁あふれを防ぐ。	자릿수 넘침을 막는다.	fix	defaults
+dict:jisjk:260446	「桁あふれに注意して。」	「자릿수 넘침에 주의해.」	fix	defaults
+dict:jisjk:71565	比誘電率を測る。	비유전율을 측정한다.	keep	defaults
+dict:jisjk:71565	比誘電率が高い。	비유전율이 높다.	keep	defaults
+dict:jisjk:71565	「比誘電率を調べた。」	「비유전율을 조사했다.」	keep	defaults
+dict:jisjk:349951	通貨統合同盟を設ける。	통화 통합 동맹을 마련한다.	fix	defaults
+dict:jisjk:349951	通貨統合同盟に加盟した。	통화 통합 동맹에 가맹했다.	fix	defaults
+dict:jisjk:349951	「通貨統合同盟が必要だ。」	「통화 통합 동맹이 필요하다.」	fix	defaults
+dict:names.307135	フラワー・ドーパント	플라워 도펀트	fix	lookup
+dict:names.307135	フラワー・ドーパントを見た。	플라워 도펀트를 보았다.	fix	lookup
+dict:names.307135	「フラワー・ドーパント」	「플라워 도펀트」	fix	lookup
+dict:names.368469	メタル・ドーパント	메탈 도펀트	fix	lookup
+dict:names.368469	メタル・ドーパントを見た。	메탈 도펀트를 보았다.	fix	lookup
+dict:names.368469	「メタル・ドーパント」	「메탈 도펀트」	fix	lookup
+dict:names.369425	メモリー・ドーパント	메모리 도펀트	fix	lookup
+dict:names.369425	メモリー・ドーパントを見た。	메모리 도펀트를 보았다.	fix	lookup
+dict:names.369425	「メモリー・ドーパント」	「메모리 도펀트」	fix	lookup
+dict:jisjk:67939	流しだいを洗う。	설거지대를 씻는다.	fix	defaults
+dict:jisjk:67939	流しだいが汚れている。	설거지대가 더러워져 있다.	fix	defaults
+dict:jisjk:134050	あの子はベビー・ギャングだ。	그 아이는 개구쟁이다.	keep	defaults
+dict:jisjk:134050	ベビー・ギャングが笑った。	개구쟁이가 웃었다.	keep	defaults
+dict:jisjk:134050	「ベビー・ギャングが来た。」	「개구쟁이가 왔다.」	keep	defaults
+lookup:lexical-cleanup-03	国力が落ちた。	국력이 떨어졌다.	keep	defaults
+lookup:lexical-cleanup-03	啄木鳥が木をつつく。	딱따구리가 나무를 쿡쿡 찌른다.	keep	defaults
+dict:jisjk:82647	台所で跡片付けをする。	부엌에서 뒷정리를 한다.	fix	defaults
+dict:jisjk:82647	食後の跡片付けが終わった。	식후 뒷정리가 끝났다.	fix	defaults
+dict:jisjk:82647	「食後の跡片付けを手伝って。」	「식후 뒷정리를 도와줘.」	fix	defaults
+dict:names.288387	パワースワップ	파워스왑	fix	fixed
+dict:names.288387	パワースワップを使う。	파워스왑을 쓴다.	fix	fixed
+dict:names.288387	「パワースワップ」	「파워스왑」	fix	fixed
+dict:names.9559	Sガンダムを見た。	S건담을 보았다.	keep	fixed
+dict:names.5432	Ex-sガンダム	Ex-S 건담	keep	fixed
+dict:names.288387	パワーを使う。	파워를 쓴다.	keep	defaults
+dict:names.288387	スワップを使う。	스왑을 쓴다.	keep	defaults
+dict:jisjk:55434	フレイヴァー	플레이버	keep	defaults
+dict:jisjk:55434	フレイヴァーを加える。	플레이버를 더한다.	keep	defaults
+dict:jisjk:55434	「フレイヴァーの香りだ。」	「플레이버의 향기다.」	keep	defaults

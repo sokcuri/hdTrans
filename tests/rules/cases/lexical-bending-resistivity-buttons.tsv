@@ -1,0 +1,27 @@
+# 규칙: LEX-1, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:94798	折れ曲がる。	구부러진다.	fix	defaults
+dict:jisjk:94798	折れ曲がった。	구부러졌다.	fix	defaults
+dict:jisjk:94798	折れ曲がっている。	구부러져 있다.	fix	defaults
+dict:jisjk:94798	折れ曲がった枝。	구부러진 가지.	fix	defaults
+dict:jisjk:94798	道が折れ曲がる。	길이 구부러진다.	fix	defaults
+dict:jisjk:94798	針金が折れ曲がっている。	철사가 구부러져 있다.	fix	defaults
+dict:jisjk:94798	折り曲がる。	꺾여 구부러진다.	keep	defaults
+dict:jisjk:94798	曲がる。	구부러진다.	keep	defaults
+dict:jisjk:94798	折れ線	꺾인 선	keep	defaults
+dict:jisjk:82511	抵抗率	저항률	fix	defaults
+dict:jisjk:82511	抵抗率の測定。	저항률의 측정.	fix	defaults
+dict:jisjk:82511	抵抗率が高い。	저항률이 높다.	fix	defaults
+dict:jisjk:82511	抵抗率を調べる。	저항률을 조사한다.	fix	defaults
+dict:jisjk:82511	抵抗率の計算。	저항률의 계산.	fix	defaults
+dict:jisjk:82511	抵抗率を比べる。	저항률을 비교한다.	fix	defaults
+dict:jisjk:82511	抵抗値	저항값	keep	defaults
+dict:jisjk:82511	抵抗力	저항력	keep	defaults
+dict:jisjk:108994	押しボタン	누르는 버튼	fix	defaults
+dict:jisjk:108994	押しボタンを押す。	누르는 버튼을 누른다.	fix	defaults
+dict:jisjk:108994	押しボタンの位置。	누르는 버튼의 위치.	fix	defaults
+dict:jisjk:108994	押しボタンを使う。	누르는 버튼을 쓴다.	fix	defaults
+dict:jisjk:108994	押しボタンの形。	누르는 버튼의 형태.	fix	defaults
+dict:jisjk:108994	ボタン	버튼	keep	defaults
+dict:jisjk:108994	押しピン	압정	keep	defaults
+dict:jisjk:108994	押し入れ	벽장	keep	defaults

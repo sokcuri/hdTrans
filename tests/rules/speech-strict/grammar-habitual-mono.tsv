@@ -1,0 +1,3 @@
+# 규칙: GRM-4, SPC-1
+rule	input	expected	kind	layer
+cx:habitual-mono:14	「昔はよく一緒に遊んだものだ」	「옛날은 자주 함께 놀곤 했다」	keep	rewrites

@@ -1,0 +1,46 @@
+# 규칙: LEX-5
+rule	input	expected	kind	layer
+protect:katakana-native-word	　カブれなければいいが……	 물들지 않으면 좋겠지만……	fix	protect
+protect:katakana-native-word	　カブれなかった。	 물들지 않았다.	fix	protect
+protect:katakana-native-word	　ブチ殺す。	 때려죽인다.	fix	protect
+protect:katakana-native-word	　かなりビビッたが、畑に近付いたので俺の覚悟が決まった。	 꽤 위축되었지만, 밭에 가까워졌으므로 내 각오가 정해졌다.	fix	protect
+protect:katakana-native-word	凄まじい速度で突っ込んでくるトラックにハネられ、	굉장한 속도로 돌진해 오는 트럭에 받혀	fix	protect
+protect:katakana-native-word	ふふっ、いいな、……トボけた男だ……	후훗, 좋다, ……시치미를 뗀 남자다……	fix	protect
+protect:katakana-native-word	「はい、もちろんです！　どうぞコキ使ってください！」	「네, 물론입니다! 어서 혹사해 주세요!」	fix	protect
+protect:katakana-native-word	ベタぼれしている。	홀딱 반하고 있다.	fix	protect
+protect:katakana-native-word	「うわー、ナメてる！」	「우와아, 얕보고 있다!」	fix	protect
+protect:katakana-native-word	　天井をシッカリと覆ってしまうと暗くて困った。	 천장을 제대로 덮어버리니 어두워서 곤란했다.	fix	protect
+protect:katakana-native-word	　なんにせよ、スッパリ諦めることにした。	 어쨌든, 깨끗이 포기하기로 했다.	fix	protect
+protect:katakana-native-word	これらが役人の作文の如くビッシリと書かれている。	이것들이 공무원의 작문처럼 빽빽이 쓰여져 있다.	fix	protect
+protect:katakana-native-word	「さぁて！ ボチボチ始めようかね！」	「자! 슬슬 시작할까!」	fix	protect
+protect:katakana-native-word	目の前に大量の蜘蛛がウヨウヨしてた。	눈앞에 대량의 거미가 우글우글했다.	fix	protect
+protect:katakana-native-word	「ウソウソ！　無味無臭だから！」	「거짓말 거짓말! 무미무취니까!」	keep	protect
+protect:katakana-native-word	マルヨン、マルマルです…提督？	0400입니다…제독?	keep	protect
+protect:katakana-native-word	メキメキという音がした。	메키메키라는 소리가 났다.	keep	protect
+protect:katakana-native-word	何やらカサカサという音が微かに聞こえる。	무엇인가 바스락바스락하는 소리가 희미하게 들린다.	keep	protect
+protect:katakana-native-word	　クロたちがいるとはいえ、森には危険な動物も多い。	 쿠로들이 있다고는 해도, 숲에는 위험한 동물도 많다.	keep	protect
+protect:katakana-native-word	「たしかにサッちゃんやマキナはすごいと思うけど」	「확실히 삿짱이나 마키나는 대단하다고 생각하는데」	keep	protect
+protect:katakana-native-word	　しかも、ナメした毛皮と自分の作った布を	 게다가, 무두질한 모피와 자신이 만든 천을	keep	protect
+protect:katakana-native-word	クラスの皆が集まった。	반의 모두가 모였다.	keep	protect
+protect:katakana-native-word	ん～、1モグり 50Gです。	음~, 1모그 50G입니다.	keep	protect
+protect:katakana-native-word	マキって誰？	마키는 누구?	keep	protect
+protect:katakana-native-word	「ふふ、ナオってば子供みたい」	「후후, 나오는 정말 아이 같다」	keep	protect
+protect:katakana-native-word	「ん？　マキ？　アンタ、マキのダチか？」	「응? 마키? 너, 마키의 친구야?」	keep	protect
+protect:katakana-native-word	ナオすごい！	나오 대단해!	keep	protect
+protect:katakana-native-word	ナオしかいない	나오밖에 없다	keep	protect
+protect:katakana-native-word	ナオ来たよー！	나오 왔어~!	keep	protect
+protect:katakana-native-word	　少しサボったぶん、	 조금 게으름 피운 만큼,	keep	protect
+protect:katakana-native-word	授業をサボって	수업을 빼먹어	keep	protect
+protect:katakana-native-word	「キャラズレくらいでハブられるなら、	「캐릭터 어긋남 정도로 따돌려진다면,	keep	protect
+protect:katakana-native-word	山本は手帳に何か色々とメモっているようだ。	야마모토는 수첩에 뭔가 여러모로 메모하고 있는 것 같다.	keep	protect
+protect:katakana-native-word	　当時の俺は完全に２次元にハマっていた。	 당시의 나는 완전히 2차원에 빠져 있었다.	keep	protect
+protect:katakana-native-word	先生がキレたんだ	선생님이 이성을 잃은 거야	keep	protect
+protect:katakana-native-word	完全にイジってるが。	완전히 놀리고 있지만.	keep	protect
+protect:katakana-native-word	「何かミスしても殺す」	「뭔가 실수해도 죽인다」	keep	protect
+protect:katakana-native-word	なるほど俺がテストしてやるよ！	그렇구나 내가 테스트해 줄게!	keep	protect
+protect:katakana-native-word	マウスを手にとってクリックしてみようかとも思ったが	마우스를 집어 클릭해 볼까 하고도 생각했지만	keep	protect
+protect:katakana-native-word	ゲーム配信会社もヌルゲーにシフトしていった。	게임 서비스 회사도 쉬운 게임에 쉬프트해 나갔다.	keep	protect
+protect:katakana-native-word	妹を姉の婚約者にスライドっていうのも	여동생을 언니의 약혼자에게 슬라이드라는 것도	keep	protect
+protect:katakana-native-word	それぞれ5ポイントかかった。	각각 5포인트 걸렸다.	keep	protect
+protect:katakana-native-word	「今、８レベルだね」	「지금, 8레벨이구나」	keep	protect
+protect:katakana-native-word	パクった	훔쳤다	fix	protect

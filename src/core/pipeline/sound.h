@@ -27,7 +27,8 @@
 //   - sounds in a row are written with a space between those of two or more syllables
 //     (あっあっ 앗앗, うふふふっ 우후후훗, もうやだ 정말 싫어), but not after a cry that ends
 //     in a kana drawing out the vowel before it, before another cry (ひぃやあっ 히이야앗,
-//     ふぁーふぁー 후아아후아아; not やだやだ 싫어 싫어);
+//     ふぁーふぁー 후아아후아아); the last copy of a cry row said again and clipped with ッ closes
+//     its last syllable with ㅅ (やだやだっ 싫어 싫엇);
 //   - katakana that only draw out the vowel of the hiragana before them are no sound of
 //     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
@@ -49,7 +50,10 @@
 //   - a dictionary word longer than the sound with its elongation, or as long when
 //     there is elongation (パターン is not ぱたん lengthened), and a plain-dictionary
 //     entry at least as long as the sound's key (without a final と), win; the ending
-//     of an end row does not win over an intj row before a pause or an ellipsis.
+//     of an end row does not win over an intj row before a pause or an ellipsis, nor over
+//     a sound with no word right before it that ends in its と or comes before no kanji or
+//     katakana (敬礼！ぴょん！ 뿅), and it is no word where kana that are no lengthening or a
+//     kanji go on after it (関連でちょこっと: で + ちょこっと).
 //
 // A katakana word that starts an utterance or follows 、 or an ellipsis, before ！と or
 // ！っと, that an ono row reads alone or with ッ is that sound even where a dictionary word
@@ -86,6 +90,7 @@
 namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedIku, RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
@@ -148,6 +153,11 @@ std::string CompleteCutOffs(std::string_view text, const LineContext& ctx, const
 // The て form is a verb of the dictionary that ends in its て or で.
 std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The potential of the くる after a て form said without its ら (帰ってこれた 帰ってこられた, 逃げてこれる)
+// written in full: before the forms of contraction.ra-less-kuru when the dictionary has the verb
+// of the て form before them.
+std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The の after a noun in kanji or katakana said ん before a member of contraction.n-no
 // (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that
 // spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
@@ -172,6 +182,14 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
 // (届いてぇ; 冷てぇ and いてぇ are adjectives). A kanji that starts a word clipped with っ
 // before a mark is the adjective of that kanji with い (浅っ 浅い).
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
+// katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,
+// アルくぅん; not かみつきさあん) is the honorific with the lengthening mark after it; a longer
+// dictionary word that the honorific starts takes the mark after that word, also with no word
+// before it (ちゃ～んと ちゃんと). A ん said again is dropped (さああんん); ちゃうん, whose う is
+// no vowel of ちゃ, stays.
+std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The emphasis that spoken text writes inside a word dropped when the dictionary then
 // reads the word: a っ before a kana that does not start a て or た form (まっかせて,
@@ -213,7 +231,8 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
 // consonant if it has one (앙 아앙, 꺅 꺄악), and '!' gives it the final ㅅ when it has none
 // (하아 하앗); other words take one ~ instead (정말 정말~), unless 'd' (an interjection drawn
 // out by three or more vowel kana) makes the last syllable carry it (안 돼 + vvvd 안 돼애애애).
-// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end.
+// '~' adds ~, and 't' (a ～ that stood for the key's ー: う～ん) a ~ at the end. 'u' (the ッ
+// closes a drawn う) writes a final 웃 as 읏 (하우 + ! 하읏).
 std::string Lengthen(std::string_view korean, std::string_view units);
 
 // A row of the sound lexicon; key in katakana.
@@ -236,6 +255,9 @@ struct SoundRow {
     // An intj row read only where the utterance ends after it (fourth column final: また明日
     // 내일 보자, not また明日来る).
     bool final = false;
+    // An intj row that is a predicate said as a cry (fourth column cry: やだ 싫어), whose last copy
+    // clipped with ッ closes its last syllable with ㅅ (SND-2: やだやだっ 싫어 싫엇).
+    bool cry = false;
     // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
     // where the quote speaks politely or an honoured person is called right before the row.
     std::string polite;

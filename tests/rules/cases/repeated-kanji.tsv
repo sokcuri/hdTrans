@@ -1,0 +1,21 @@
+# 규칙: LEX-26
+rule	input	expected	kind	layer
+G160	畑畑畑畑	밭밭밭밭	fix	defaults
+G160	□□□□□□□□畑畑畑畑○○○○	□□□□□□□□밭밭밭밭 ○○○○	fix	defaults
+G160	━建設中━池池□畑◇◇畑○犬○○	━건설 중━연못연못□밭◇◇밭○개 ○○	fix	defaults
+G160	畑畑◇◇木◇◇畑畑	밭밭◇◇나무◇◇밭밭	fix	defaults
+G30	ギュッとあつめてひねり出して水水水水…………。	꽉 아 채워 생각해 내 물물물물………….	fix	defaults
+G160	さあ、飯飯ー！	자, 밥밥~!	fix	defaults
+G160	…うそ、嘘嘘！私…沈む…の？	…거짓말, 거짓말거짓말! 나…가라앉는…의?	fix	defaults
+G30	肉肉にっく～肉にっく～	고기고기 고기~고기 고기~	fix	defaults
+G160	艦隊、増速！追撃します！	함대, 증속! 추격합니다!	keep	global-stem
+G160	全高およそ10m、金属の骨格	전고 대략 10m, 금속의 골격	keep	global-stem
+G160	発生した魔素の塊に、リンクした魂。	발생한 마소의 덩어리에, 링크한 영혼.	keep	global-stem
+G160	騎操士学園がある。	기조사 학원이 있다.	keep	global-stem
+G160	東西南北	동서남북	keep	defaults
+G30	水を飲む。	물을 마신다.	keep	defaults
+G30	第三次ソロモン海海戦では	제3차 솔로몬해 해전에서는	keep	global-stem
+G30	業務管理部部長	업무 관리부 부장	keep	global-stem
+G160	中国国内はもとより	중국 국내는 원래	keep	defaults
+lexical:four-kanji-idiom	空空如也	공공여야	keep	lookup
+G170	「紫電一一型」x4	「자전11형」x4	fix	defaults

@@ -13,3 +13,4 @@
 | [words.md](words.md) | 낱말 (`LEX`) |
 | [speech.md](speech.md) | 말투 (`SPC`) |
 | [sounds.md](sounds.md) | 소리 (`SND`) |
+| [grammar.md](grammar.md) | 문법 (`GRM`) |

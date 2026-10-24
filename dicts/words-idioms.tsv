@@ -2605,8 +2605,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 満たない	채 안 되는	A9D0			GN				llm			i:2600
 満たざる	채 안 되는	A9D0			GN				llm			i:2601
 逆鱗に触れ	역린을 건드&AA@	M427			GN				llm			i:2602
-闇から闇に葬	몰래 덮어 버&AA@	M428			GN				llm			i:2603
-やみからやみに葬	몰래 덮어 버&AA@	M428			GN				llm			i:2604
+闇から闇に葬	몰래 덮어버&AA@	M428			GN				llm			i:2603
+やみからやみに葬	몰래 덮어버&AA@	M428			GN				llm			i:2604
 位人臣を極め	최고의 지위에 &E6@	M427		Pn	GN				llm			i:2605
 為にする	속셈이 있는	A9D0			GN				llm			i:2606
 危機を脱する	위기를 벗어나	A9D0			GN				llm			i:2607
@@ -5845,9 +5845,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 成すべきこと	해야 할 일	N110			GN				llm			i:5841
 成すべき事	해야 할 일	N110			GN				llm			i:5842
 地獄で仏に会ったよう	지옥에서 부처를 만난 듯이	E300			GN				llm			i:5843
-長いものには巻かれろ	긴 것에는 감겨라	A9D0			GN				llm			i:5844
-長い物には巻かれろ	긴 것에는 감겨라	A9D0			GN				llm			i:5845
-長い物には巻かれよ	긴 것에는 감겨라	A9D0			GN				llm			i:5846
+長いものには巻かれろ	강자에게는 굽혀라	A9D0			GN				llm			i:5844
+長い物には巻かれろ	강자에게는 굽혀라	A9D0			GN				llm			i:5845
+長い物には巻かれよ	강자에게는 굽혀라	A9D0			GN				llm			i:5846
 ねじを巻	태엽을 &F1@	M421		Pn	GN				llm			i:5847
 ネジを巻	태엽을 &F1@	M421		Pn	GN				llm			i:5848
 お猪口にな	뒤집어&AL@	M428			GN				llm			i:5849
@@ -7148,7 +7148,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベイズの定理	베이즈 정리	N110			GN							i:7145
 やきもち焼	질투&AV@	M421			GN				llm			i:7146
 ちょっかいを掛け	집적거&AA@	M427		Pn	GN				llm			i:7147
-いい塩梅に	다행히	E300			GN				llm			i:7148
+いい塩梅に	알맞게	E300			GN				llm			i:7148
 良い塩梅に	다행히	E300			GN				llm			i:7149
 先見の目	선견지명	N110			GN				llm			i:7150
 先見の眼	선견지명	N110			GN				llm			i:7151
@@ -7786,3 +7786,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 タダじゃお	그냥 &C7@	M431			GN						ただじゃお	i:7783
 ただじゃお	그냥 &C7@	M431			GN						ただじゃお	i:7784
 そうはい	그렇게는 &C6@	M421			GN						そうはい	i:7785
+恐るべし	대단%A1@	G8U0			GN							i:7788

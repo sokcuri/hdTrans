@@ -5,7 +5,9 @@
 // after them (する, の, に) and drop a following と; lead rows are
 // interjections only at the start of an utterance and before a pause
 // (おい、 ちょっと…, but not ちょっと高い); open rows are lead rows that need no pause
-// (ってかなんで 그보다, 왜).
+// (ってかなんで 그보다, 왜). cry in the fourth column marks an intj row that is a predicate said
+// as a cry (やだ 싫어), whose last copy said again and clipped with っ closes its last syllable
+// with ㅅ (やだやだっ 싫어 싫엇).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -106,6 +108,9 @@
 うひひ	우히히	intj
 うひっ	우힛	intj
 うひゃ	우햐	intj
+うひゃひゃ	우햐햐	intj
+ひゃひゃ	햐햐	intj
+ひゃはは	햐하하	intj
 うひょー	우효오	intj
 うひょ	우효	intj
 いっひっひ	이히히	intj
@@ -127,10 +132,8 @@
 あふっ	아훗	intj
 あふぅ	아후우	intj
 あぅ	아우	intj
-あうっ	아웃	intj
 あう	아우	intj
 あくっ	아윽	intj
-あぅっ	아웃	intj
 あひ	아히	intj
 あひっ	아힛	intj
 あひぃ	아히이	intj
@@ -144,26 +147,31 @@
 んん	으응	intj
 んんっ	으읏	intj
 んんん	으으응	intj
+んっんん	흠흠	intj
 んぁ	응아	intj
 んあ	응아	intj
 んあっ	응앗	intj
 んぁっ	응앗	intj
-んく	응쿠	intj
-んくっ	응큿	intj
-んくぅ	응쿠우	intj
-んぐ	응구	intj
-んぐっ	응굿	intj
+んく	으쿠	intj
+んくっ	으큿	intj
+んくぅ	으쿠우	intj
+んぐ	으구	intj
+んぐっ	으긋	intj
 んむ	음	intj
 んむっ	으읍	intj
 んふ	응후	intj
 んふっ	응훗	intj
 んふぅ	응후우	intj
-んぅ	응우	intj
-んう	응우	intj
+んぅ	으응	intj
+んう	으응	intj
+んぅっ	으읏	intj
+んうっ	으읏	intj
 ひく	히윽	intj
 はくっ	하윽	intj
 ふくっ	후윽	intj
 ふぁい	네에	intj
+ふぁーい	네에	intj
+ひゃい	네에	intj
 んひ	응히	intj
 んひっ	응힛	intj
 んひぃ	응히이	intj
@@ -199,8 +207,7 @@
 はふぅ	하후우	intj
 はふはふ	하후하후	ono
 はぅ	하우	intj
-はうっ	하웃	intj
-はぅっ	하웃	intj
+はう	하우	intj
 はぅぅ	하우우	intj
 はわ	하와	intj
 はわわ	하와와	intj
@@ -208,12 +215,11 @@
 はひ	하히	intj
 はひぃ	하히이	intj
 ひぅ	히우	intj
+ひう	히우	intj
 ひあ	히아	intj
 ひぁ	히아	intj
 ひん	히잉	intj
 いぁ	이아	intj
-ひうっ	히웃	intj
-ひぅっ	히웃	intj
 ひぃ	히이	intj
 ひぃっ	히익	intj
 ひいっ	히익	intj
@@ -224,19 +230,18 @@
 ひぎ	히기	intj
 ひぎっ	히긱	intj
 ひぎぃ	히기이	intj
-ひゃ	햐	intj
+ひゃ	히야	intj
 ひゃっ	꺅	intj
-ひゃあ	햐아	intj
-ひゃぁ	햐아	intj
-ひゃあっ	햐앗	intj
-ひゃん	햐앙	intj
-ひゃんっ	햐앙	intj
-ひゃう	햐우	intj
-ひゃうっ	햐웃	intj
-ひゃうん	햐웅	intj
-ひゃぅ	햐우	intj
-ひゃひ	햐히	intj
-ひゃー	햐아	intj
+ひゃあ	히야아	intj
+ひゃぁ	히야아	intj
+ひゃあっ	히야앗	intj
+ひゃん	히양	intj
+ひゃんっ	히양	intj
+ひゃう	히야우	intj
+ひゃうん	히야웅	intj
+ひゃぅ	히야우	intj
+ひゃひ	히야히	intj
+ひゃー	히야아	intj
 ひぇ	히에	intj
 ひぇっ	히엑	intj
 ひえっ	히엑	intj
@@ -251,9 +256,10 @@
 ふぁんっ	후앙	intj
 ふぅ	후우	intj
 ふう	후우	intj
+ふうっ	후우	intj
 ふいー	휴우	intj
 ふぃー	휴우	intj
-ふぅっ	후웃	intj
+ふぅっ	후우	intj
 ふぅん	흐응	intj
 ふうん	흐음	intj
 ふーん	흐응	intj
@@ -288,10 +294,10 @@
 くあっ	크앗	intj
 くぁ	크아	intj
 くぁっ	크앗	intj
-うぅ	우우	intj
-うう	우우	intj
-うぅっ	우웃	intj
-ううっ	우웃	intj
+うぅ	으으	intj
+うう	으으	intj
+うぅっ	으으	intj
+ううっ	으으	intj
 うっ	윽	intj
 うぐ	우그	intj
 うぐっ	윽	intj
@@ -299,6 +305,10 @@
 うくっ	으윽	intj
 うく	으윽	intj
 うぐぅ	우그으	intj
+うぐぐ	우그그	intj
+うぐぐぅ	우그그으	intj
+うぐぐっ	우그끄읏	intj
+うぐぐぐっ	우그그끄읏	intj
 うあ	우아	intj
 うあっ	우앗	intj
 うぁ	우아	intj
@@ -323,10 +333,10 @@
 うみゅ	우뮤	intj
 うむ	음	intj
 うむっ	으음	intj
-うー	우우	intj
+うー	으으	intj
 うーん	으음	intj
 ううん	아니	intj
-うーっ	우웃	intj
+うーっ	으읏	intj
 むー	무우	intj
 むぅ	무우	intj
 むう	무우	intj
@@ -346,7 +356,7 @@
 むにゃむにゃ	냠냠	ono
 ぐっ	윽	intj
 ぐぅ	구우	intj
-ぐぅっ	구웃	intj
+ぐぅっ	크읏	intj
 ぐぬ	끄응	intj
 ぐぬぬ	끄으으	intj
 ふんぬっ	끄응	intj
@@ -597,12 +607,12 @@
 うーむ	으음	intj
 いやぁ	이야	intj
 いやあ	이야	intj
-いやーっ	싫어엇	intj
-いやっ	싫어	intj
-やだぁ	싫어	intj
-やだあ	싫어	intj
-やだっ	싫어	intj
-やだ	싫어	intj
+いやーっ	싫어엇	intj	cry
+いやっ	싫어	intj	cry
+やだぁ	싫어	intj	cry
+やだあ	싫어	intj	cry
+やだっ	싫어	intj	cry
+やだ	싫어	intj	cry
 やーだ	싫어	intj
 やっ	얏	intj
 やぁ	야아	intj
@@ -612,9 +622,9 @@
 やん	앙	intj
 いやん	이양	intj
 いやーん	이야앙	intj
-らめ	안 돼	intj
-らめぇ	안 돼	intj
-だめぇ	안 돼	intj
+らめ	안돼	intj
+らめぇ	안돼	intj
+だめぇ	안돼	intj	cry
 へっくし	에취	intj
 へっくしゅ	에취	intj
 へっくしょん	에취	intj
@@ -1366,6 +1376,7 @@
 がちゃーん	와장창	ono
 がちゃがちゃ	달그락달그락	ono
 がちん	딱	ono
+がちっ	딱	ono
 がちーん	따악	ono
 がちがち	딱딱	ono
 がっちがち	딱딱	ono
@@ -2721,6 +2732,7 @@
 ぽりぽり	긁적긁적	ono
 ばりぼり	와작와작	ono
 かじかじ	아작아작	ono
+がじがじ	아작아작	ono
 がつがつっ	걸신걸신	ono
 ぱくぱくっ	냠냠	ono
 はぐっ	앙	ono
@@ -2948,6 +2960,12 @@
 だーん	콰앙	ono
 ふんだ	흥이다	intj
 ふんだっ	흥이다	intj
+べー	메롱	intj
+べーだ	메롱	intj
+べーっだ	메롱	intj
+あっかんべー	메롱	intj
+あっかんべーだ	메롱	intj
+あっかんべーっだ	메롱	intj
 うふふふ	우후후후	intj
 うふふふっ	우후후훗	intj
 ふふふっ	후후훗	intj
@@ -2988,8 +3006,8 @@
 ほーっほっほ	오호호호	intj
 おーっほっほ	오호호호	intj
 おっほっほ	오호호	intj
-いやぁぁ	싫어어	intj
-いやぁっ	싫엇	intj
+いやぁぁ	싫어어	intj	cry
+いやぁっ	싫엇	intj	cry
 ふきふき	쓱쓱	ono
 さらさら	찰랑찰랑	ono
 びーびー	앙앙	ono
@@ -3037,6 +3055,7 @@
 あら	어머	lead
 まあ	뭐	lead
 ちょっと	잠깐	lead
+ちょ	잠깐	lead
 やあ	야	lead
 うっす	네	lead
 お	오	lead

@@ -1,0 +1,9 @@
+# 규칙: LEX-5
+rule	input	expected	kind	layer
+dict:jisjk:342105	　後は明け方にパラパラと降るような感じだった。	rule:dict:jisjk:342105=후두둑	fix	local
+lexical:mimetic-gloss	パラパラと魔術教本をめくってみた。	훌훌 마술 교본을 넘겨 보았다.	fix	defaults
+lexical:mimetic-gloss	　俺がガジガジとサトウキビに齧り付いた。	 내가 아작아작 사탕수수에 베어 물었다.	fix	sound
+lexical:mimetic-gloss	　その毛皮を持ってスルスルと木の上に戻っていく。	 그 모피를 가져 스르르 나무 위로 돌아간다.	fix	defaults
+dict:jisjk:342105	雨がぱらぱらと降り出した。	rule:dict:jisjk:342105=후두둑	keep	local
+lexical:mimetic-gloss	ページをぱらぱらとめくる。	페이지를 훌훌 넘긴다.	fix	defaults
+lexical:mimetic-gloss	するすると木に登った。	스르르 나무에 올랐다.	keep	sound

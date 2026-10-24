@@ -74,7 +74,7 @@ gh pr merge N --squash --subject 'fix(<scope>): <summary> (#N)' --body '<plain s
   improved, same, worse). Name no data sets or sources.
 - Use `Fixes #N` for the issues the PR resolves.
 - The squash subject becomes the develop commit and its CHANGELOG line. It does not choose the version.
-- Keep the branch's `Surface-Budget:` and `Perf-Budget:` trailers as trailers of the squash body.
+- Keep the branch's `Perf-Budget:` trailers as trailers of the squash body.
 
 After merging a PR that changes translations, run the cycle check: measure the merge commit of
 develop against the run of the last release tag on all four sets, with the runs in
@@ -104,6 +104,8 @@ then judges only what changed since the last check.
 ## 4. What CI does after the merge
 
 1. **Build** on the main push builds and tests every preset.
+   - The random fuzz run of this Build and of the tag Build only warns; the seed and regression
+     replay fails them. Read the `linux-fuzz` summary and handle an input it found as in section 1.
 2. **Release main** commits the version files and CHANGELOG, pushes the `vX.Y.Z` tag and creates a
    draft release. No separate release PR exists, and develop pushes publish nothing.
 3. **Publish npm** on the tag runs the full Build, then publishes the GitHub Release and the npm

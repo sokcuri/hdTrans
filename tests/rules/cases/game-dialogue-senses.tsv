@@ -16,7 +16,7 @@ dict:jisjk:144074	敵を撃った。	적을 쏘았다.	fix	lookup
 dict:jisjk:144074	「撃って」	「쏘아」	fix	lookup
 conj:kuru	「来い」	「와라」	fix	conjugation
 conj:kuru	「早く来い！」	「빨리 와라!」	fix	conjugation
-conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안 된다」	keep	conjugation
+conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안된다」	keep	conjugation
 conj:kuru	来たかった。	오고 싶었다.	keep	conjugation
 conj:kuru	友達が来た。	친구가 왔다.	keep	conjugation
 conj:kuru	誰も来ない。	아무도 오지 않는다.	keep	conjugation

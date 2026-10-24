@@ -21,7 +21,8 @@ the outputs before and after when behaviour is involved. Report findings by sect
   corrects and for its near misses. A finding that sends a line back asks for that line, and the
   others like it, as cases with the correct output.
 - Rule lint: `hdrulec lint build/rules.txt -dicts dicts` adds no new warnings for the changed rules; ctest
-  `rules.lint` holds the count per flag to `tools/lint-budget.tsv`, and a lowered count lowers that line.
+  `rules.lint` fails when a flag's count rises above `tools/lint-budget.tsv`; a lower count passes with a
+  note, and the line may be lowered then.
 
 ## 2. Builds that catch memory and lifetime errors
 

@@ -1,0 +1,22 @@
+# 규칙: LEX-3, LEX-29
+rule	input	expected	kind	layer
+dict:names.604067	柳生比呂士さん	야규 히로시 씨	fix	fixed
+dict:names.604067	「柳生比呂士」	「야규 히로시」	fix	fixed
+dict:names.604067	柳生比呂士が来た。	야규 히로시가 왔다.	fix	fixed
+dict:names.604067	柳生比呂士と話す。	야규 히로시와 이야기한다.	fix	fixed
+dict:names.604067	柳生比呂士の名前。	야규 히로시의 이름.	fix	fixed
+dict:names.604067	柳生比呂士を呼ぶ。	야규 히로시를 부른다.	fix	fixed
+dict:names.604067	柳生比呂士に会う。	야규 히로시를 만난다.	fix	fixed
+dict:names.604067	柳生比呂士です。	야규 히로시입니다.	fix	fixed
+dict:names.604067	柳生比呂士	야규 히로시	keep	fixed
+dict:names.604067	柳生博さん	야규 히로시 씨	keep	fixed
+dict:names.634793	清廉潔白な国防軍	청렴결백한 국방군	fix	fixed
+dict:names.634793	「清廉潔白な国防軍」	「청렴결백한 국방군」	fix	fixed
+dict:names.634793	清廉潔白な国防軍を調べる。	청렴결백한 국방군을 조사한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍について。	청렴결백한 국방군에 대해.	fix	fixed
+dict:names.634793	清廉潔白な国防軍の説明。	청렴결백한 국방군의 설명.	fix	fixed
+dict:names.634793	清廉潔白な国防軍を批判する。	청렴결백한 국방군을 비판한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍を否定する。	청렴결백한 국방군을 부정한다.	fix	fixed
+dict:names.634793	清廉潔白な国防軍の研究。	청렴결백한 국방군의 연구.	fix	fixed
+dict:names.634793	国防軍	국방군	keep	fixed
+dict:names.634793	清廉潔白	청렴결백	keep	fixed

@@ -225,7 +225,7 @@ std::string Composer::ApplyParenthesisTextFilter(std::string text, int i) {
     } else {
         ctx = linked;
     }
-    return Alternate(text, Context(WriteCount(ctx, Build(ctx, 0, {}))), true);
+    return Alternate(text, Context(WriteCount(ctx, Build(ctx, 0, {})) + (*items_)[ctx].appended), true);
 }
 
 std::string Composer::Alternate(std::string_view text, std::string_view context, bool hasContext) const {

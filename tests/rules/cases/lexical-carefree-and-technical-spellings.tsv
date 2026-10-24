@@ -1,0 +1,66 @@
+# 규칙: LEX-1, LEX-3, LEX-13, LEX-25
+rule	input	expected	kind	layer
+dict:jisjk:354151	のんきなことを言う。	팔자 좋은 소리를 한다.	fix	defaults
+dict:jisjk:354151	のんきなことを言っている。	팔자 좋은 소리를 하고 있다.	fix	defaults
+dict:jisjk:354151	のんきなことを言わないで。	팔자 좋은 소리를 하지 마.	fix	defaults
+dict:jisjk:354151	のんきなことを言った。	팔자 좋은 소리를 했다.	fix	defaults
+dict:jisjk:354151	のんきなことを言います。	팔자 좋은 소리를 합니다.	fix	defaults
+dict:jisjk:354151	のんきなことを言わなかった。	팔자 좋은 소리를 하지 않았다.	fix	defaults
+dict:jisjk:354151	のんきなことを言うな。	팔자 좋은 소리를 하지 마.	fix	defaults
+dict:jisjk:354151	彼はのんきなことを言っている。	그는 팔자 좋은 소리를 하고 있다.	fix	defaults
+dict:jisjk:354151	今はのんきなことを言わない。	지금은 팔자 좋은 소리를 하지 않는다.	fix	defaults
+dict:jisjk:354151	「のんきなことを言うな」	「팔자 좋은 소리를 하지 마」	fix	defaults
+dict:jisjk:354151	のんきなことを言っていた。	팔자 좋은 소리를 했다.	fix	defaults
+dict:jisjk:354151	のんきなことを言ってしまった。	팔자 좋은 소리를 해버렸다.	fix	defaults
+dict:jisjk:354151	のんきなことを言ってもいい。	팔자 좋은 소리를 해도 괜찮다.	fix	defaults
+lexical:stored-target-spelling	呑気なことを言う。	팔자 좋은 소리를 한다.	keep	defaults
+lexical:stored-target-spelling	呑気だ。	태평하다.	keep	defaults
+lexical:stored-target-spelling	腕を組んで考えた。	팔짱을 끼고 생각했다.	keep	defaults
+lexical:stored-target-spelling	つらつらと考えた。	곰곰이 생각했다.	keep	defaults
+dict:jisjk:118366	ほおが落ちる。	둘이 먹다가 하나 죽어도 모른다.	fix	defaults
+dict:jisjk:118366	ほおが落ちそうだ。	둘이 먹다가 하나 죽어도 모를 것 같다.	fix	defaults
+dict:jisjk:118366	ほおが落ちた。	둘이 먹다가 하나 죽어도 몰랐다.	fix	defaults
+lexical:stored-target-spelling	ダブルダブル	더블 더블	keep	defaults
+lexical:stored-target-spelling	ダブルダブルを選ぶ。	더블 더블을 선택한다.	keep	defaults
+lexical:stored-target-spelling	トラベラー	트래블러	keep	defaults
+lexical:stored-target-spelling	トラベラーを読んだ。	트래블러를 읽었다.	keep	defaults
+lexical:stored-target-spelling	トラベラーが来た。	트래블러가 왔다.	keep	defaults
+dict:jisjk:234307	資本利益率	자본 이익률	fix	defaults
+dict:jisjk:234307	資本利益率を計算する。	자본 이익률을 계산한다.	fix	defaults
+dict:jisjk:234307	資本利益率が高い。	자본 이익률이 높다.	fix	defaults
+dict:jisjk:234307	資本利益率を調べた。	자본 이익률을 조사했다.	fix	defaults
+dict:jisjk:234307	これは資本利益率です。	이것은 자본 이익률입니다.	fix	defaults
+dict:jisjk:234307	資本利益率の変化。	자본 이익률의 변화.	fix	defaults
+dict:jisjk:234307	資本利益率を比較する。	자본 이익률을 비교한다.	fix	defaults
+dict:jisjk:234307	資本利益率は低い。	자본 이익률은 낮다.	fix	defaults
+dict:jisjk:234307	「資本利益率」と言った。	「자본 이익률」이라고 말했다.	fix	defaults
+dict:jisjk:92588	露命をつなぐ。	근근이 살아간다.	fix	defaults
+dict:jisjk:92588	露命をつないだ。	근근이 살아갔다.	fix	defaults
+dict:jisjk:92588	露命をつなぎながら暮らす。	근근이 살아가면서 산다.	fix	defaults
+dict:jisjk:92588	露命をつなぐために働く。	근근이 살아가기 위해 일한다.	fix	defaults
+dict:jisjk:92588	これで露命をつなぐ。	이것으로 근근이 살아간다.	fix	defaults
+dict:jisjk:92588	露命をつなげない。	근근이 살아갈 수 없다.	fix	defaults
+dict:jisjk:92588	露命をつなぎたい。	근근이 살아가고 싶다.	fix	defaults
+dict:jisjk:92588	露命をつなぎます。	근근이 살아갑니다.	fix	defaults
+dict:jisjk:92588	露命をつなげばいい。	근근이 살아가면 된다.	fix	defaults
+dict:jisjk:92588	露命をつながなかった。	근근이 살아가지 않았다.	fix	defaults
+lexical:stored-target-spelling	数行	몇 줄	keep	defaults
+lexical:stored-target-spelling	数行を読む。	몇 줄을 읽는다.	keep	defaults
+lexical:stored-target-spelling	数行を書いた。	몇 줄을 썼다.	keep	defaults
+lexical:stored-target-spelling	数行の文章。	몇 줄의 문장.	keep	defaults
+lexical:stored-target-spelling	これは数行です。	이것은 몇 줄입니다.	keep	defaults
+lexical:stored-target-spelling	数行だけ書く。	몇 줄만 쓴다.	keep	defaults
+lexical:stored-target-spelling	数行しか読まない。	몇 줄밖에 읽지 않는다.	keep	defaults
+lexical:stored-target-spelling	数行ずつ読む。	몇 줄씩 읽는다.	keep	defaults
+lexical:stored-target-spelling	「数行」と言った。	「몇 줄」이라고 말했다.	keep	defaults
+lexical:stored-target-spelling	命をつなぐ。	목숨을 부지한다.	keep	defaults
+lexical:stored-target-spelling	友達と手をつなぐ。	친구와 손을 잡는다.	keep	defaults
+dict:names.346579	マスカレード・ドーパント	마스커레이드 도펀트	fix	fixed
+dict:names.346579	マスカレード・ドーパントが来た。	마스커레이드 도펀트가 왔다.	fix	fixed
+dict:names.346579	マスカレード・ドーパントを見た。	마스커레이드 도펀트를 보았다.	fix	fixed
+dict:names.346579	マスカレード・ドーパントと戦う。	마스커레이드 도펀트와 싸운다.	fix	fixed
+dict:names.346579	「マスカレード・ドーパント」と書く。	「마스커레이드 도펀트」라고 쓴다.	fix	fixed
+dict:names.346579	マスカレード・ドーパントの姿。	마스커레이드 도펀트의 모습.	fix	fixed
+dict:names.346579	タブー・ドーパント	터부 도펀트	keep	fixed
+dict:names.346579	マスカレード	가면무도회	keep	defaults
+dict:names.346579	マスカレードの衣装。	가면무도회의 의상.	keep	defaults

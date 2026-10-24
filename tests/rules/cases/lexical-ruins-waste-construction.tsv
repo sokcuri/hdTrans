@@ -1,0 +1,21 @@
+# 규칙: LEX-1, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:87929	廃きょ	폐허	fix	defaults
+dict:jisjk:87929	廃きょを歩く。	폐허를 걷는다.	fix	defaults
+dict:jisjk:87929	廃きょの写真。	폐허의 사진.	fix	defaults
+dict:jisjk:87929	廃きょが残る。	폐허가 남는다.	fix	defaults
+dict:jisjk:87929	廃墟	폐허	keep	defaults
+dict:jisjk:87929	廃虚	폐허	keep	defaults
+dict:jisjk:87929	廃屋	폐옥	keep	defaults
+dict:jisjk:354733	廃棄物処理コスト	폐기물 처리 비용	fix	defaults
+dict:jisjk:354733	廃棄物処理コストを削減する。	폐기물 처리 비용을 삭감한다.	fix	defaults
+dict:jisjk:354733	廃棄物処理コストの増加。	폐기물 처리 비용의 증가.	fix	defaults
+dict:jisjk:354733	廃棄物処理コストを計算する。	폐기물 처리 비용을 계산한다.	fix	defaults
+dict:jisjk:354733	廃棄物	폐기물	keep	defaults
+dict:jisjk:354733	処理	처리	keep	defaults
+dict:jisjk:354624	建築着工統計	건축 착공 통계	fix	defaults
+dict:jisjk:354624	建築着工統計を発表する。	건축 착공 통계를 발표한다.	fix	defaults
+dict:jisjk:354624	建築着工統計の結果。	건축 착공 통계의 결과.	fix	defaults
+dict:jisjk:354624	建築着工統計を調べる。	건축 착공 통계를 조사한다.	fix	defaults
+dict:jisjk:354624	建築	건축	keep	defaults
+dict:jisjk:354624	着工統計	착공 통계	keep	defaults

@@ -1,0 +1,71 @@
+# 규칙: SPC-12
+rule	input	expected	kind	layer
+cx:tte-quote:10	「この神戸牛のステーキ、三万円って書いてあるんだけど……」	「이 고베규의 스테이크, 3만엔이라고 써 있는데……」	fix	rewrites
+cx:tte-quote:10	「説明書には６人用って書いてあったけどな。」	「설명서에는 6명용이라고 써 있었지만.」	fix	rewrites
+cx:tte-quote:10	霊能力者じゃないけど便宜上霊能力者って書いてたアレ？	영능력자가 아니지만 편의상 영능력자라고 쓰던 그것?	fix	rewrites
+cx:tte-quote:10	私は最初はイルカって書いたんだけど	나는 처음은 돌고래라고 썼는데	fix	rewrites
+cx:tte-quote:10	「じゃあ、『夢だからなんでもあり』って思われるのは……」	「그럼, 『꿈이니까 뭐든 있어』라고 생각되는 건……」	fix	rewrites
+cx:tte-quote:10	「それもそれでしょうがないね、”読みたい！”って祈るしか？」	「그것도 그래서 어쩔 수 없다, ”읽고 싶다! ”라고 빌 수밖에?」	fix	rewrites
+cx:tte-quote:10	「でも……どうしてハナって名乗ってたんだ……？」	「하지만……왜 하나라고 자칭하고 있었어……?」	fix	rewrites
+cx:tte-quote:5	意地でも謝罪しないようにって教えたでしょ？	무슨 일이 있어도 사죄하지 않도록 가르쳤잖아?	fix	rewrites
+cx:tte-quote:5	早く帰れって教えた	빨리 돌아가라고 가르쳤다	keep	rewrites
+cx:tte-quote:10	答えは42って教えた	대답은 42라고 가르쳤다	fix	rewrites
+cx:tte-quote:10	意地でも謝罪しないようにって教えたでしょ？	!rule:cx:tte-quote:10	keep	rewrites
+cx:tte-quote:10	私だって、恥って言葉くらい知っているのだ。	!rule:cx:tte-quote:10	keep	rewrites
+cx:tte-quote:10	猫って可愛い。	고양이는 귀엽다.	keep	rewrites
+cx:tte-quote:10	「食事中の団欒って考えがそもそも近代に入ってからだからじゃない？」	!rule:cx:tte-quote:10	keep	rewrites
+cx:tte-quote:10	戸締りができているなら寝ちまったって問題ない	!rule:cx:tte-quote:10	keep	rewrites
+cx:tte-quote:20	人の少ない場所って希望したけど	사람이 적은 장소라고 희망했지만	fix	rewrites
+cx:tte-quote:5	あの子に、静かにってお願いしてきましょうか？	그 아이에게, 조용하게 부탁해 올까요?	fix	rewrites
+cx:tte-quote:20	あの子に、静かにってお願いしてきましょうか？	!rule:cx:tte-quote:20	keep	rewrites
+cx:tte-quote:20	「ジョーカーじゃない」って確信できるの？	「조우커가 아니다」라고 확신할 수 있는 거야?	fix	rewrites
+cx:tte-quote:20	そうしたら、「救助訓練実施中」って返事があった。	!rule:cx:tte-quote:20	keep	rewrites
+cx:final-quote-to:20	「曾孫の顔が見たいんだと」	「증손의 얼굴을 보고 싶다고」	fix	rewrites
+cx:final-quote-to:15	何があったんだと心配そうに	무슨 일이 있었냐고 걱정스러운 듯이	fix	rewrites
+cx:final-quote-to:15	どこへ行ったんだと辺りを見回した。	어디에 갔냐고 주위를 둘러보았다.	fix	rewrites
+cx:final-quote-to:15	誰がやったんだと睨んだ。	누가 했냐고 노려보았다.	fix	rewrites
+cx:final-quote-to:15	何を食べたいんだと首を傾げた。	무엇을 먹고 싶냐고 고개를 갸웃했다.	fix	rewrites
+cx:final-quote-to:15	何が起きたんだと。	무슨 일이 일어났냐고.	fix	rewrites
+cx:final-quote-to:20	何もなかったんだと安心した。	아무것도 없었다고 안심했다.	fix	rewrites
+cx:final-quote-to:15	誰かが来たんだと身構えた。	!rule:cx:final-quote-to:15	keep	rewrites
+cx:final-quote-to:15	「曾孫の顔が見たいんだと」	!rule:cx:final-quote-to:15	keep	rewrites
+cx:final-quote-to:15	他のスキルもきっとＬＶ１じゃどうしようもない効果しか出なかったんだと。	!rule:cx:final-quote-to:15	keep	rewrites
+cx:final-quote-to:15	何をやってるんだと不審者を見るような眼差しになった。	무엇을 하고 있냐고 수상한 사람을 보는 것 같은 시선이 되었다.	fix	rewrites
+cx:final-quote-to:20	何があったんだと心配そうに	!rule:cx:final-quote-to:20	keep	rewrites
+cx:final-quote-to:20	彼が来たと同じ	!rule:cx:final-quote-to:20	keep	rewrites
+cx:final-quote-to:20	犬が死んだと同時に流れたアナウンス。	!rule:cx:final-quote-to:20	keep	rewrites
+cx:final-quote-to:20	彼が来たと一緒に帰った	!rule:cx:final-quote-to:20	keep	rewrites
+cx:final-quote-to:20	他のスキルもきっとLV1はしようもない効果しか出なかったんだと。	다른 스킬도 분명 LV1은 어쩔 수 없는 효과밖에 나오지 않았다고.	fix	rewrites
+cx:final-quote-to:20	「従業員は、客と同じ場所で食べちゃいけないんだと」	「종업원은, 손님과 같은 장소에서 먹으면 안된다고」	fix	rewrites
+cx:final-quote-to:20	子になりそうだなぁと、彼はどこかずれた事を考えていた。	아이가 될 것 같다고 그는 어딘가 어긋난 일을 생각하고 있었다.	fix	rewrites
+cx:final-quote-to:20	そうだろうと思った。	그럴 것이라고 생각했다.	keep	rewrites
+cx:final-quote-to:20	これを受け取っていただけますと、幸い…です…。	!rule:cx:final-quote-to:20	keep	rewrites
+cx:final-quote-to:30	サバイバルゲームなんてやってるのかと。	서바이벌게임 같은 건 하고 있는지.	fix	rewrites
+cx:final-quote-to:30	いや……そんなこともあるかも……と。	!rule:cx:final-quote-to:30	keep	rewrites
+cx:final-quote-to:40	熱いんじゃないかなぁと想像して放棄。	뜨겁지 않을까 하고 상상해 포기.	fix	rewrites
+cx:final-quote-to:40	角度に問題はないかなぁと不安になる	각도에 문제는 없을까 하고 불안하게 된다	fix	rewrites
+cx:final-quote-to:40	そういえば確かもう一系統あったなと思い付いて	그러고 보니 분명 벌써 일계통 있었군 하고 생각나	fix	rewrites
+cx:final-quote-to:40	仕方がないわねと、引き続き考察に付き合う。	어쩔 수 없네 하고 계속 고찰에 함께한다.	fix	rewrites
+cx:final-quote-to:40	とても優秀だからと求婚したけど断られた	무척 우수하니까 하고 청혼했지만 거절당했다	fix	rewrites
+cx:final-quote-to:40	将来、支えになればと彼女個人には望んでいた	장래, 버팀목이 되면 하고 그녀 개인에게는 바라고 있었다	fix	rewrites
+cx:final-quote-to:40	行くよと手を振った。	가 하고 손을 흔들었다.	fix	rewrites
+cx:final-quote-to:40	負けないぞと気合を入れた。	지지 않아 하고 기합을 넣었다.	fix	rewrites
+cx:final-quote-to:40	とりあえず滝まで作らないとと頑張る。	!rule:cx:final-quote-to:40	keep	rewrites
+cx:final-quote-to:40	俺がどう使おうと俺の勝手だ	!rule:cx:final-quote-to:40	keep	rewrites
+cx:final-quote-to:40	来るかなと待っていた。	올까 하고 기다리고 있었다.	keep	rewrites
+cx:final-quote-to:40	友達と遊んだ。	친구와 놀았다.	keep	rewrites
+cx:final-quote-to:50	気にするなと声を掛けておいた。	신경 쓰지 마 하고 말을 걸어 두었다.	fix	rewrites
+cx:final-quote-to:50	頑張れと手を振った。	힘내라 하고 손을 흔들었다.	fix	rewrites
+cx:final-quote-to:50	子供の頃から蝶よ花よと育てられた	어릴 적부터 금이야 옥이야 하고 자랐다	fix	rewrites
+cx:final-quote-to:50	まさかと彼女は青ざめる。	설마 하고 그녀는 새파래진다.	fix	rewrites
+cx:final-quote-to:50	僕に追いすがり、許してくださいと詫びる気はないのか？	나에게 바싹 뒤따라, 용서해 주세요 하고 사과할 생각은 없는 건가?	fix	rewrites
+cx:final-quote-to:50	私に気づいて、やあと手を挙げる。	나를 눈치채, 야 하고 손을 든다.	fix	rewrites
+cx:final-quote-to:50	神様ありがとうと素直に思えない	신 고마워 하고 솔직하게 생각되지 않는다	fix	rewrites
+cx:final-quote-to:50	この栄誉を女王陛下と貴方に。	!rule:cx:final-quote-to:50	keep	rewrites
+cx:final-quote-to:50	単なる先輩後輩と恋人同士じゃ関係の格が違う	!rule:cx:final-quote-to:50	keep	rewrites
+cx:final-quote-to:50	試合だろうとなんだろうと、可能性があるならやる	!rule:cx:final-quote-to:50	keep	rewrites
+cx:final-quote-to:30	頂ければと……ありがとう存じます。	주시면……감사합니다.	fix	rewrites
+cx:final-quote-to:45	爆発するような積み荷はどうかと…はい…	폭발하는 것 같은 적하는 어떨까…네…	fix	rewrites
+cx:final-quote-to:45	それを忘れてしまうのはどうかと…	그것을 잊어버리는 것은 어떨까…	fix	rewrites
+cx:final-quote-to:45	頑張れと手を振った。	!rule:cx:final-quote-to:45	keep	rewrites
+cx:final-quote-to:50	お疲れさまでしたとゲームのキャラたちがお別れのしぐさをしている。	수고하셨습니다 하고 게임의 캐릭터들이 작별의 행동을 하고 있다.	fix	rewrites

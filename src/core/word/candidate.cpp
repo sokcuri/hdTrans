@@ -281,6 +281,61 @@ bool NounEnd(std::string_view text) {
     return text::DecodeRune(c).cp != text::kReplacement && Has("にがをはもでとへの、。，．！？」』）…", c);
 }
 
+// Whether before, the word ahead of a suffix, is a name or a noun of the dictionary with a sense
+// of persons among its candidates, those of its group or the other records of its surface
+// (モモ 복숭아 beside the name モモ); not itself a suffix written attached (ら, たち).
+bool SuffixHost(const Item* before) {
+    if (before == nullptr) return false;
+    if (before->IsNameItem()) return true;
+    auto person = [](std::string_view code, std::string_view sem, std::string_view gram) {
+        return code.starts_with('1') && (Has(sem, "VHn") || Has(sem, "QPN")) && !Has(gram, "Tu");
+    };
+    for (const Entry* e : before->group->entries) {
+        if (person(e->code, e->attr, e->gattr)) return true;
+    }
+    for (const Record* r = before->group->records; r != nullptr; r = r->child) {
+        if (r->source == before->group->surface && person(From(r->partCode, 1), r->semantic, r->attr)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
+// Text path: a suffix of honorific.after-person (たん, っち) at full[cursor:] is a word only
+// after a name or a noun of persons (先生たん, 小林っち) and when no longer dictionary word
+// starts at that noun and goes past it (たまご + っち of たまごっち); elsewhere its records
+// leave the candidates, so that the longer word or the kana around it are read instead.
+Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
+    bool suffix = false;
+    for (const Record* r = records; r != nullptr && !suffix; r = r->child) {
+        suffix = dict::InClass("honorific.after-person", r->source);
+    }
+    if (!suffix) return records;
+    const Item* before = WordBefore(cursor, token, parent);
+    bool covered = false;
+    if (before != nullptr && before->tokenIndex == token && before->start < cursor) {
+        for (const dict::Candidate& c : snapshot.GetWordInfo(From(full, before->start), dict::LookupMode::General, {}).list) {
+            covered = covered || static_cast<int>(c.source.size()) > cursor - before->start;
+        }
+    }
+    Record* out = nullptr;
+    Record** tail = &out;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!dict::InClass("honorific.after-person", r->source) || (!covered && SuffixHost(before))) {
+            *tail = r;
+            tail = &r->child;
+        }
+        r = next;
+    }
+    return out;
+}
+
+namespace {
+
 // The lengths in characters of the keys of tag letter tag that start text in mode, as
 // a bit set (lengths of 63 or more share the top bit).
 uint64_t KeyLengths(const dict::Snapshot& snapshot, std::string_view text, dict::LookupMode mode, char tag) {
@@ -430,6 +485,54 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
     return records;
 }
 
+// Text path: the verb records of records move ahead of a longer record that is no verb but
+// spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
+// 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
+// Plain-dictionary records stay in front.
+Record* VerbBeforePolite(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 1) == '4' || !text.starts_with(first->source)) return records;
+    bool polite = false;
+    for (const std::string_view m : dict::ClassMembers("follower.polite-masu")) {
+        polite = polite || text.substr(first->source.size()).starts_with(m);
+    }
+    if (!polite) return records;
+    bool spelled = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > first->source.size()) return records;
+        if (At(r->partCode, 1) != '4' || r->partCode.size() != 4 || !first->source.starts_with(r->source)) continue;
+        const std::string_view form = first->source.substr(r->source.size());
+        const int kind = r->partCode[3] - '0';
+        spelled = spelled || (!form.empty() && (form == Conjugation(kind, 10) || form == Conjugation(kind, 4)));
+    }
+    if (!spelled) return records;
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '4') {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
+    return records;
+}
+
 // Rejects some kind-1 records next to level-2 kanji and the characters after them in
 // the code order (Shift-JIS lead byte 0xE0 or above); kinds 0, 1, 2, 3 and 9 are
 // otherwise valid, others never.
@@ -453,7 +556,7 @@ bool ValidateCandidate(std::string_view source, int start, int token, const Reco
         const text::Rune r = text::DecodeRune(s);
         return r.size == s.size() && tokenizer::IsSjisHighLead(r.cp);
     };
-    if (WidthOf(surface) != 2 || !highLeadPair(surface)) return true;
+    if (!highLeadPair(surface) || WidthOf(surface) != 2) return true;
     const Window l = Right(prefix, 2), r = Left(tail, 2);
     if (prefix.ends_with("□") || tail.starts_with("□")) return false;
     auto hanja = [&](const Window& s) { return !s.broken && WidthOf(s.text) == 2 && highLeadPair(s.text); };
@@ -482,6 +585,30 @@ std::string_view CanonicalPair(char32_t r, std::string& scratch, bool& cut) {
 }
 
 }  // namespace
+
+bool FractionAt(std::string_view text, std::size_t size) {
+    if (size > text.size()) return false;
+    const std::string_view after = text.substr(size);
+    for (const std::string_view of : dict::ClassMembers("fraction.of")) {
+        if (!after.starts_with(of) || after.size() == of.size()) continue;
+        const std::string_view rest = after.substr(of.size());
+        if (IsDigit(rest[0]) || dict::InClass("fraction.numerator-lead", FirstChar(rest))) return true;
+    }
+    return false;
+}
+
+bool NounEndAt(std::string_view text) { return NounEnd(text); }
+
+bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal) {
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.Tag() == 'M' && c.codes->part.ClassDigit() == '4') return true;
+    }
+    const std::string noun = std::string(stem) + std::string(nominal);
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(noun, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.ClassDigit() == '1') return true;
+    }
+    return false;
+}
 
 // Rewrites a synthetic target: kanji become their Hangul reading (hanjaToHangul),
 // hiragana, katakana and 、 are written in their canonical forms or dropped
@@ -875,6 +1002,54 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
     return true;
 }
 
+// Whether the dictionary words at a number of one kanji only spell it with one counter read
+// with its Sino-Korean syllable (四面 사면, 一面 일면) and a follower.count member comes after
+// them or the times sign before them: the words count there (四面×四面 네 면×네 면, 一面ずつ
+// 한 면씩). Elsewhere they keep their reading (四面を囲まれた 사면을 둘러싸인). text is the
+// text the words start in token.
+bool Worker::CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token) {
+    const std::string_view source = number.source;
+    if (!settings.improvements.kanjiNumbers || text::RuneCount(source) != 1 || number.target.empty() ||
+        !IsDigit(number.target[0])) {
+        return false;
+    }
+    const std::string reading = SinoKoreanNumber(number.target);
+    std::size_t length = 0;
+    for (Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() <= source.size()) continue;
+        if (!std::string_view(r->source).starts_with(source)) return false;
+        const std::string_view rest = std::string_view(r->source).substr(source.size());
+        if (FirstChar(rest).size() != rest.size()) return false;
+        // A name spelled with the count (三面 미즈라) is no other reading of it.
+        if (r->partCode.starts_with("N13") || r->semantic.starts_with("QPN") || r->semantic.starts_with("QCT")) continue;
+        bool counter = false;
+        if (const Lookup l = DoLookup(rest, kModeGeneral); l.count != 0) {
+            for (Record* c = l.records; c != nullptr && !counter; c = c->child) counter = c->source == rest && Has(c->attr, "Ct");
+        }
+        const std::optional<char32_t> syllable = dict::Written(text::DecodeRune(rest).cp);
+        if (!counter || reading.empty() || !syllable) return false;
+        std::string unit;
+        text::AppendRune(unit, *syllable);
+        std::string target;
+        for (const char c : std::string_view(r->target)) {
+            if (c != ' ') target += c;
+        }
+        if (target != reading + unit) return false;
+        length = r->source.size();
+    }
+    if (length == 0 || length > text.size()) return false;
+    // The times sign is a token of its own; the count after it counts too (四面×四面).
+    const auto follower = [](std::string_view s) {
+        return std::ranges::any_of(dict::ClassMembers("follower.count"), [&](std::string_view f) { return s.starts_with(f); });
+    };
+    std::string_view after = text.substr(length);
+    if (after.empty() && token + 1 < TokenCount()) after = tokens.Canonical(static_cast<std::size_t>(token + 1));
+    const std::string_view before = token > 0 ? tokens.Canonical(static_cast<std::size_t>(token - 1)) : std::string_view();
+    const bool timesBefore = dict::InClass("mark.times", before) &&
+                             text.size() == tokens.Canonical(static_cast<std::size_t>(token)).size();
+    return follower(after) || timesBefore;
+}
+
 // Whether the counter of a count word that is the longest word at the number (1回 of 1回復した,
 // but not of 一回転 일회전) starts a verbal noun of the dictionary that goes on past it (回復)
 // and is followed by its する, a particle, a mark or nothing: the number counts the action of
@@ -1015,8 +1190,8 @@ struct DepthScope {
 // The end of the first copy of a unit said two or more times at the start of text
 // (CopiesAt), or 0: there each copy is a word or words of its own, so that an ending or
 // a word of one copy does not take the start of the next (いやだ|いやだ, not いや+だい).
-// A dictionary word that spells two copies or more keeps them (いろいろ, はいはい); after
-// one that spells some of three or more copies the next copy starts (はいはい|はい).
+// A dictionary word that spells all the copies keeps them (いろいろ, はいはい); one that
+// spells only some of them does not (はい|はい|はい).
 std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
     const Copies c = CopiesAt(text);
     if (c.count < 2) return 0;
@@ -1062,19 +1237,23 @@ std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
     // form that goes on there (流れ流れて, 照れ照れに), which the copy alone would misread.
     if (bareStem && tokenizer::Class(text::DecodeRune(text.substr(c.end)).cp) == tokenizer::kClassHiragana) return 0;
     if (!word && !inflected) return 0;
+    // A dictionary word that spells fewer copies than are said straight (好き好き of 好き好き好き,
+    // also where a copy stands right before it) is no reading of the run: each copy is read on its own
+    // when the unit is a word; a unit that is only a stem (そろ of そろそろ) leaves the dictionary
+    // word the first copies.
     if (longest >= 2 * c.unit + c.separator) {
-        if (c.separator == 0 && SpellsCopies(text.substr(0, longest), unit) &&
-            longest / c.unit < static_cast<std::size_t>(c.count)) {
-            return longest;
+        const bool fewer = longest / c.unit < static_cast<std::size_t>(c.count);
+        if (c.separator != 0 || !SpellsCopies(text.substr(0, longest), unit) || !(fewer || before.ends_with(unit))) {
+            return 0;
         }
-        return 0;
+        if (!word) return fewer ? longest : 0;
     }
-    // The next copy is no start of a longer word (抜け、抜け際). The separator stays with
-    // the copy before it.
+    // The next copy is no start of a longer word that reaches past the last copy (抜け、抜け際;
+    // not the stem 好き好 of 好き好む inside 好き好き好き). The separator stays with the copy before it.
     const std::size_t next = c.unit + c.separator;
     if (const Lookup l = DoLookup(text.substr(next), kModeGeneral); l.count != 0) {
         for (const Record* r = l.records; r != nullptr; r = r->child) {
-            if (r->source.size() > c.unit && !SpellsCopies(r->source, unit)) return 0;
+            if (r->source.size() > c.unit && next + r->source.size() > c.end && !SpellsCopies(r->source, unit)) return 0;
         }
     }
     return next;
@@ -1150,12 +1329,17 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
         const Lookup dictionary = DoLookup(text, kModeGeneral);
         if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text) ||
-            VerbalNounAtCounter(dictionary.records, *numeric, text)) {
+            VerbalNounAtCounter(dictionary.records, *numeric, text) || FractionAt(text, numeric->source.size()) ||
+            CountBeforeFollower(dictionary.records, *numeric, text, token)) {
             return ProcessCandidateRecord(full, cursor, token, numeric, parent);
         }
         found = dictionary;
     } else {
         found = DoLookup(text, kModeGeneral);
+    }
+    if (found.count != 0 && settings.text) {
+        found.records = DropStraySuffixes(found.records, full, cursor, token, parent);
+        if (found.records == nullptr) found.count = 0;
     }
     if (found.count != 0) return ProcessCandidateRecord(full, cursor, token, found.records, parent);
     std::string_view surface = FirstChar(text);
@@ -1188,7 +1372,8 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     const std::string_view name = word.substr(0, word.size() - last.size);
     const std::string_view after = text.substr(word.size());
     const std::string_view compound = text.substr(name.size(), last.size + text::DecodeRune(after).size);
-    if (!dict::InClass("noun.realm-name", name) || !dict::InClass("noun.realm-compound", compound)) return records;
+    const bool province = !dict::InClass("noun.realm-country", name) && dict::InClass("noun.realm-province-compound", compound);
+    if (!dict::InClass("noun.realm-name", name) || !(province || dict::InClass("noun.realm-compound", compound))) return records;
     for (const Record* r = DoLookup(after, kModeGeneral).records; r != nullptr; r = r->child) {
         if (after.starts_with(r->source) && text::RuneCount(r->source) > 1) return records;
     }
@@ -1239,6 +1424,7 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
+    if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records);
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
@@ -1352,15 +1538,19 @@ bool Worker::StartsWithHonorific(std::string_view text) {
     return std::any_of(std::begin(kHonorifics), std::end(kHonorifics), [&](const Honorific& h) { return text.starts_with(h.jp); });
 }
 
-Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
-    Item* name = parent;
-    if (const Item* tail = chain.tail; name == nullptr && tail != nullptr) {
-        if ((tail->tokenIndex == token && tail->start + tail->length == cursor) ||
-            (cursor == 0 && tail->tokenIndex == token - 1 &&
-             tokens[static_cast<std::size_t>(tail->tokenIndex)].type == tokenizer::kTypeProtected)) {
-            name = chain.tail;
-        }
+Item* Worker::WordBefore(int cursor, int token, Item* parent) const {
+    if (parent != nullptr) return parent;
+    Item* tail = chain.tail;
+    if (tail != nullptr && ((tail->tokenIndex == token && tail->start + tail->length == cursor) ||
+                            (cursor == 0 && tail->tokenIndex == token - 1 &&
+                             tokens[static_cast<std::size_t>(tail->tokenIndex)].type == tokenizer::kTypeProtected))) {
+        return tail;
     }
+    return nullptr;
+}
+
+Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* parent) {
+    Item* name = WordBefore(cursor, token, parent);
     if (name == nullptr) return nullptr;
     const std::string_view text = From(full, cursor);
     // The nickname すけ also follows a person name of the base dictionary (里奈すけ).

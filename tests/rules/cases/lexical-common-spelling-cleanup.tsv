@@ -1,0 +1,30 @@
+# 규칙: LEX-1, LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:375097	めったなことで驚かない。	웬만한 일로 놀라지 않는다.	fix	defaults
+dict:jisjk:375097	めったなことで怒らない。	웬만한 일로 화내지 않는다.	fix	defaults
+dict:jisjk:375097	めったなことで泣かない。	웬만한 일로 울지 않는다.	fix	defaults
+dict:jisjk:375097	めったなことで休まない。	웬만한 일로 쉬지 않는다.	fix	defaults
+dict:jisjk:375097	めったなことで負けない。	웬만한 일로 지지 않는다.	fix	defaults
+dict:jisjk:148419	シートをかける。	시트를 덮는다.	fix	defaults
+dict:jisjk:148419	シートをかけた。	시트를 덮었다.	fix	defaults
+dict:jisjk:148419	シートをかけている。	시트를 덮고 있다.	fix	defaults
+dict:jisjk:148419	シートをかけてください。	시트를 덮어 주세요.	fix	defaults
+dict:jisjk:148419	シートをかけない。	시트를 덮지 않는다.	fix	defaults
+dict:jisjk:202339	盛りつける。	수북이 담는다.	fix	defaults
+dict:jisjk:202339	盛りつけた。	수북이 담았다.	fix	defaults
+dict:jisjk:202339	盛りつけている。	수북이 담고 있다.	fix	defaults
+dict:jisjk:202339	盛りつけてください。	수북이 담아 주세요.	fix	defaults
+dict:jisjk:109841	茨城県厚生農業協同組合連合	이바라키현 후생농업협동조합연합	fix	defaults
+dict:jisjk:109841	茨城県厚生農業協同組合連合に連絡した。	이바라키현 후생농업협동조합연합에 연락했다.	fix	defaults
+dict:jisjk:109841	茨城県厚生農業協同組合連合を調べる。	이바라키현 후생농업협동조합연합을 조사한다.	fix	defaults
+dict:jisjk:375097	めったに驚かない。	좀처럼 놀라지 않는다.	keep	defaults
+dict:jisjk:375097	めったに泣かない。	좀처럼 울지 않는다.	keep	defaults
+dict:jisjk:148419	シートを見る。	시트를 본다.	keep	defaults
+dict:jisjk:148419	シートがある。	시트가 있다.	keep	defaults
+dict:names.760914	鯨木かさね	구지라키 카사네	fix	fixed
+dict:names.760914	鯨木かさねが来た。	구지라키 카사네가 왔다.	fix	fixed
+dict:names.760914	鯨木かさねは学生です。	구지라키 카사네는 학생입니다.	fix	fixed
+dict:names.760914	鯨木かさねを呼ぶ。	구지라키 카사네를 부른다.	fix	fixed
+dict:names.760914	「鯨木かさね」	「구지라키 카사네」	fix	fixed
+dict:names.760914	鯨木 かさね	구지라키 카사네	fix	fixed
+dict:names.760914	かさね	카사네	keep	defaults

@@ -264,12 +264,21 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("\uE00A선배"), std::string("~선배"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("케이짱\uE00A\uE00B!"), std::string("케이짜~앙!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("여러분\uE00A\uE00B"), std::string("여러부~운"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("씨\uE00A\uE00B"), std::string("씨이"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배"), std::string("선배"));
     // A drawn mark draws out the vowel of the syllable before it, the final moved last.
     HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
-    HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼애"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼에"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00B\uE00B\uE00C!"), std::string("안돼에엣!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배님\uE00B\uE00B"), std::string("선배니이임"));
     HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00B선배"), std::string("!선배"));
+    // A clip mark closes the open syllable before it with ㅅ and is dropped elsewhere.
+    HD_CHECK_EQ(pipeline::WriteLengthening("아파아파\uE00C!"), std::string("아파아팟!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00C"), std::string("안됏"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("없\uE00C"), std::string("없"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00C"), std::string("!"));
 }
 
 HD_TEST(pipeline_drop_particle_marks) {
@@ -333,4 +342,29 @@ HD_TEST(pipeline_literal_cleanup) {
     const Pieces translated{{"몇번"}, {"몇번", SpanWord}};
     HD_CHECK_EQ(pipeline::RestoreAll(translated, typed, true, true).line, "몇 번몇번");
     HD_CHECK_EQ(pipeline::RestoreAll(translated, typed, true).line, "몇번몇번");
+}
+
+HD_TEST(pipeline_laughter_letters) {
+    const struct { const char* in; const char* want; } cases[] = {
+        {"그것은 없어 w", "그것은 없어 ㅋ"},
+        {"진짜야www", "진짜야ㅋㅋㅋ"},
+        {"진짜야! ww", "진짜야! ㅋㅋ"},
+        {"ㅋㅋ wwww", "ㅋㅋ ㅋㅋㅋㅋ"},
+        {"www", "ㅋㅋㅋ"},
+        {"송wwww 그런가", "송ㅋㅋㅋㅋ 그런가"},
+        {"www.example.com", "www.example.com"},
+        {"w를 입력", "w를 입력"},
+        {"OK www", "OK www"},
+        {"twwwitter", "twwwitter"},
+        {"게임의 wiki", "게임의 wiki"},
+        {"3w", "3w"},
+        {"\xff 진짜야www", "\xff 진짜야ㅋㅋㅋ"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteLaughter(c.in, ""), std::string(c.want));
+    // With the typed text: a letter used as a word stays, laughter before the next words goes.
+    HD_CHECK_EQ(pipeline::WriteLaughter("변수 w의 값", "変数wの値"), std::string("변수 w의 값"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("www의 의미", "wwwの意味"), std::string("www의 의미"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("키보드의 w키", "キーボードのwキー"), std::string("키보드의 w키"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("있어w미도리 씨w", "あるよなｗミドリさんｗ"), std::string("있어ㅋ미도리 씨ㅋ"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("웃은 wwww미안해", "笑ったｗｗｗｗゴメン"), std::string("웃은 ㅋㅋㅋㅋ미안해"));
 }

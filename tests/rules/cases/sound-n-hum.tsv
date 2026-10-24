@@ -1,0 +1,44 @@
+# 규칙: SND-4
+rule	input	expected	kind	layer
+sound:n-hum	「んっ……はい」	「읏……네」	keep	sound
+sound:n-hum	「え、んんっ……？」	「어, 으읏……?」	keep	sound
+sound:n-hum	「んん……ちゅ……」	「으응……쪽……」	fix	sound
+sound:n-hum	「……んん？」	「……으응?」	fix	sound
+sound:n-hum	「んっ、んん、んっ……」	「읏, 으응, 읏……」	fix	sound
+sound:n-hum	「はあっ……んんんっ……！！」	「하앗……으으읏……!!」	keep	sound
+sound:n-hum	「んんんんんんんんんんん！！！！」	「으으으으으으으으으으응!!!!」	fix	sound
+sound:n-hum	「ん……んうっ、ふ……」	「응……으읏, 후……」	fix	sound
+sound:n-hum	「んぅっ……んっ、ちゅっ……」	「으읏……읏, 쪽……」	fix	sound
+sound:n-hum	「あっ……ん、んぁっ……んうぅっ……」	「앗……응, 응앗……으으읏……」	fix	sound
+sound:n-hum	「んっ、んんんぅっ！？」	「읏, 으으으읏!?」	fix	sound
+sound:n-hum	「ぅぅ…………んぅぅ…………」	「으으…………으으응…………」	fix	sound
+sound:n-hum	「んううう……んっ……」	「으으으응……읏……」	fix	sound
+sound:n-hum	「んっ、あ、あああっ」	「읏, 아, 아아앗」	keep	sound
+sound:n-hum	「んっ……先輩……」	「읏……선배……」	keep	sound
+sound:n-hum	「うんっ、んっ……はあぁっ……」	「응, 읏……하아앗……」	keep	sound
+sound:n-hum	「んむっ、んっ……はっ……あんっ……」	「으읍, 읏……헉……앙……」	keep	sound
+sound:n-hum	「んっ……ぁ……」	「읏……아……」	keep	sound
+sound:n-hum	「ふうっ……あっ、んん……ん」	「후우……앗, 으응……응」	fix	sound
+sound:n-hum	「んんぅ……っ、だめ……」	「으으응……, 안돼……」	fix	sound
+sound:n-hum	「ん、そうだね」	「응, 그러게」	keep	sound
+sound:n-hum	「ん？　どうしたの」	「응? 무슨 일이야」	keep	sound
+sound:n-hum	「うん、行こう」	「응, 가자」	keep	sound
+sound:n-hum	「ううん、違うよ」	「아니, 아니야」	keep	sound
+sound:n-hum	「すみませんっ！」	「죄송합니다!」	keep	sound
+sound:n-hum	「ふぅん、そうなんだ」	「흐응, 그렇구나」	keep	sound
+sound:n-hum	「うーん……どうしよう」	「으음……어떻게 하지」	keep	sound
+sound:n-hum	「なんでだろう」	「어째서일까」	keep	sound
+sound:n-hum	「くぅんっ……」	「끄응……」	keep	sound
+sound:n-hum	「ちゅっ……んくっ、んっ……あふっ……」	「쪽……으큿, 읏……아훗……」	fix	sound
+sound:n-hum	「ふぁっ……はっ、んくっ、あぁっ……」	「후앗……헉, 으큿, 아앗……」	fix	sound
+sound:n-hum	「んく、んく……」	「으쿠, 으쿠……」	fix	sound
+sound:n-hum	「んぐっ……ぷはっ」	「으긋……푸핫」	fix	sound
+sound:n-hum	「んくぅっ……！」	「으쿠읏……!」	fix	sound
+sound:n-hum	「んっんん」	「흠흠」	fix	sound
+sound:n-hum	んっんん。日付が変わって	흠흠. 날짜가 바뀌어	fix	sound
+sound:n-hum	お返しかぁ。Grazie! んん～、美味しい♪	답례인가. Grazie! 으응~, 맛있다♪	fix	sound
+sound:n-hum	「んんー……なるほどなるほど……」	「으응~……그렇구나 그렇구나……」	fix	sound
+sound:n-hum	ん、ん～、んんん～♪	응, 음~, 으으응~♪	fix	sound
+sound:n-hum	「んーー……どうしよう」	「으음……어떻게 하지」	keep	sound
+sound:n-hum	「んんーっ、終わったぁ」	「으으읏, 끝났다」	keep	sound
+sound:n-hum	「んんん～っ！」	「으으으~읏!」	keep	sound

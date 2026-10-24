@@ -11,6 +11,6 @@ ending:書くんだっけか	彼は明日来るんだっけか。	그는 내일 
 phrase:そうだっけか	そうだっけか。	그랬던가.	fix	builtin-pattern
 ending:高いもんでね	朝は弱いもんでね。	아침은 약해서 말이야.	fix	builtin-ending
 pattern:書いたもんで	寝坊したもんで、遅刻した。	늦잠잤기 때문에, 지각했다.	fix	builtin-pattern
-pattern:書いたもんで	昔はよく遊んだもんです。	옛날은 잘 논 것입니다.	keep	builtin-pattern
+pattern:書いたもんで	昔はよく遊んだもんです。	옛날은 자주 놀곤 했습니다.	keep	builtin-pattern
 pattern:書くのもなんだし	立ち話するのもなんだし、中に入ろう。	서서 이야기 하는 것도 좀 그러니, 안에 들어오자.	fix	builtin-pattern
 pattern:学生なもんで	今は仕事中なもんで、電話に出られない。	지금은 업무중이라서, 전화를 받을 수 없다.	fix	builtin-pattern

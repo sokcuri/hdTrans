@@ -1,0 +1,31 @@
+# 규칙: GRM-5
+rule	input	expected	kind	layer
+cx:tokoro-near-miss:10	危うく電車に乗り遅れるところだった。	하마터면 전철을 놓칠 뻔했다.	fix	rewrites
+L177	危うく電車に乗り遅れるところだった。	rule:L177=(을)를	fix	local
+cx:tokoro-near-miss:10	危うく性的嗜好を勘違いされるところだった……。	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
+cx:tokoro-near-miss:10	谷を越えるための橋が壊されていた。危うく気付かず、落ちるところだった。	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
+cx:tokoro-near-miss:10	危なかった……機体の制御システムを乗っ取られるところだった	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
+cx:tokoro-near-miss:20	危うく、野菜ジュースが無駄になるところでした	rule:cx:tokoro-near-miss:20=3 뻔했습니다	fix	rewrites
+cx:tokoro-near-miss:10	騙されるところだった～っ	속을 뻔했다~	fix	rewrites
+cx:tokoro-near-miss:10	もう少しで倒れるところだった。	거의 쓰러질 뻔했다.	fix	rewrites
+cx:tokoro-near-miss:10	筧がいなかったら、失敗するところだった	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
+cx:tokoro-near-miss:20	大事なことを忘れるところでした	소중한 일을 잊을 뻔했습니다	fix	rewrites
+cx:tokoro-near-miss:20	そうでした、そうでした。あやうく忘れてしまうところでした	그랬습니다, 그랬습니다. 하마터면 잊어버릴 뻔했습니다	fix	rewrites
+cx:tokoro-near-miss:10	危うく乗り過ごすところだった。	하마터면 내리지 못할 뻔했다.	fix	rewrites
+cx:tokoro-near-miss:10	一歩間違えば船まで奪われるところだった。	한 걸음 잘못하면 배까지 빼앗길 뻔했다.	fix	rewrites
+cx:tokoro-near-miss:20	はい、もう少しで轟沈するところでした…	rule:cx:tokoro-near-miss:20=3 뻔했습니다	fix	rewrites
+cx:tokoro-near-miss:10	危うく遅刻するところだった。	하마터면 지각할 뻔했다.	fix	rewrites
+cx:tokoro-near-miss:10	もう少しで落ちるとこだった。	거의 떨어질 뻔했다.	fix	rewrites
+cx:tokoro-near-miss:20	危うく騙されるところでした。	하마터면 속을 뻔했습니다.	fix	rewrites
+cx:tokoro-near-miss:10	ちょうど白崎がやってくるところだった。	!rule:cx:tokoro-near-miss:10	keep	rewrites
+cx:tokoro-near-miss:20	はい。買い物も終わったんで、もう帰るところでした	!rule:cx:tokoro-near-miss:20	keep	rewrites
+cx:tokoro-near-miss:10	満足とばかりに席を立つところだった。	!rule:cx:tokoro-near-miss:10	keep	rewrites
+cx:tokoro-near-miss:10	ちょうどお兄様が帰宅したところだった。	!rule:cx:tokoro-near-miss:10	keep	rewrites
+cx:tokoro-near-miss:10	話をしたいと思っていたところだったので	!rule:cx:tokoro-near-miss:10	keep	rewrites
+cx:tokoro-near-miss:10	見上げると、ちょうど雲が日を隠すところだった。	!rule:cx:tokoro-near-miss:10	keep	rewrites
+cx:tokoro-near-miss:10	望むところだ。	바라던 바다.	keep	rewrites
+cx:tokoro-near-miss:20	ちょうど出かけるところでした。	마침 나가려던 참이었습니다.	keep	rewrites
+cx:tokoro-near-miss:10	彼は手紙を書くところだった。	그는 편지를 쓰려던 참이었다.	keep	rewrites
+cx:tokoro-near-miss:10	帰るとこだった。	돌아가려던 참이었다.	keep	rewrites
+cx:tokoro-near-miss:20	ふ～、今のは危なかったですね！振り落とされるところでした。	!rule:cx:tokoro-near-miss:20	keep	rewrites
+cx:tokoro-near-miss:20	危ないところでした。	!rule:cx:tokoro-near-miss:20	keep	rewrites

@@ -167,6 +167,36 @@ HD_TEST(word_count_word_before_verbal_noun) {
     }
 }
 
+// A kanji number before 分の and a number is the denominator of a fraction, also where a word
+// spells it (十分 충분히); a one-kanji count word spelled with its counter (四面 사면) counts
+// before ずつ, 分 and the times sign and right after the times sign, and keeps its reading
+// elsewhere.
+HD_TEST(word_fraction_and_count_follower) {
+    const auto loaded = hdTrans::dict::Load({{0, "base.tsv",
+        "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+        "十分\t충분히\tN300\t\t\tGN\t0\t1\n"
+        "分の\t분의\tE0H0\t\tTu\tGN\t0\t2\n"
+        "分\t분\tN110\t\tCt\tGN\t0\t3\n"
+        "面\t면\tN110\t\tCt\tGN\t0\t4\n"
+        "四面\t사면\tN110\t\t\tGN\t0\t5\n"
+        "ずつ\t씩\tP200\t\t\tGN\t0\t6\n"
+        "を\t(을)를\tP200\t\t\tGN\t0\t7\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"十分の一", "10분의 1"},
+                                          std::pair<std::string, std::string_view>{"十分", "충분히"},
+                                          std::pair<std::string, std::string_view>{"四面ずつ", "네 면씩"},
+                                          std::pair<std::string, std::string_view>{"四面を", "사면을"},
+                                          std::pair<std::string, std::string_view>{"二×四面", "2×네 면"},
+                                          std::pair<std::string, std::string_view>{"二+四面", "2+사면"}}) {
+        hdTrans::internal::TranslationOptions options;
+        hdTrans::internal::Memory memory;
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        HD_REQUIRE(out.size() == 1);
+        HD_CHECK_EQ(out[0], std::string(expected));
+    }
+}
+
 HD_TEST(word_improvements_forward_terminal_order) {
     using namespace hdTrans;
     const auto loaded = dict::Load({{0, "base.tsv",

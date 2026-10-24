@@ -1,0 +1,19 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.571049	文殊師利仏土厳浄経	문수사리불토엄정경	fix	fixed
+dict:names.571049	「文殊師利仏土厳浄経」	「문수사리불토엄정경」	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経を読んだ。	문수사리불토엄정경을 읽었다.	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経の翻訳。	문수사리불토엄정경의 번역.	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経を学ぶ。	문수사리불토엄정경을 배운다.	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経の題名。	문수사리불토엄정경의 제목.	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経の本文。	문수사리불토엄정경의 본문.	fix	fixed
+dict:names.571049	文殊師利仏土厳浄経の解説。	문수사리불토엄정경의 해설.	fix	fixed
+dict:names.571053	文殊般若経	문수반야경	fix	fixed
+dict:names.571053	「文殊般若経」	「문수반야경」	fix	fixed
+dict:names.571053	文殊般若経を読んだ。	문수반야경을 읽었다.	fix	fixed
+dict:names.571053	文殊般若経の翻訳。	문수반야경의 번역.	fix	fixed
+dict:names.571053	文殊般若経を学ぶ。	문수반야경을 배운다.	fix	fixed
+dict:names.571053	文殊般若経の題名。	문수반야경의 제목.	fix	fixed
+dict:names.571053	文殊般若経の本文。	문수반야경의 본문.	fix	fixed
+dict:names.571053	文殊般若経の解説。	문수반야경의 해설.	fix	fixed
+dict:names.571049	文殊師利菩薩及諸仙所説吉凶時日善悪宿曜経	문수사리보살급제선소설길흉시일선악수요경	keep	fixed

@@ -24,7 +24,7 @@ dict:jisjk:340827	話しをしないでください。	이야기를 하지 말�
 dict:jisjk:375160	無理だとは思わない。	무리라고는 생각하지 않는다.	keep	local
 dict:jisjk:268040	お詫びの申し上げもございませんが、失礼します。	뭐라 사과의 말씀을 드려야 할지 모르겠습니다만, 실례합니다.	fix	local
 dict:jisjk:268040	お詫びの申し上げもございませんでした。	!rule:dict:jisjk:268040	keep	local
-dict:jisjk:266529	先生に本を読んでいただいた。	선생님이 책을 읽어 주었다.	fix	local
+dict:jisjk:266529	先生に本を読んでいただいた。	선생님이 책을 읽어 주셨다.	fix	local
 dict:jisjk:362273	いただきます、明日返します。	받습니다, 내일 돌려줍니다.	fix	local
 dict:jisjk:362273	いただきます。	잘 먹겠습니다.	fix	local
 dict:jisjk:362273	「いただきます」と言った。	「잘 먹겠습니다」라고 말했다.	fix	local
@@ -50,7 +50,7 @@ dict:jisjk:341464	顔なんか見えない。	!rule:dict:jisjk:341464	keep	local
 dict:jisjk:341464	まぁなんか可愛い。	rule:dict:jisjk:341464=왠지	keep	local
 dict:jisjk:359256	三日前も寒かった。	3일 전에도 추웠다.	fix	local
 dict:jisjk:359256	３発も命中させた。	rule:dict:jisjk:359256=(이)나	keep	local
-dict:jisjk:35	いかがあそばしますか。	어떻게 하십니까.	fix	local
+dict:jisjk:35	いかがあそばしますか。	어떻게 하시겠습니까.	fix	local
 dict:jisjk:35	いかがあそばしますか。	rule:dict:jisjk:35=어떻게	keep	local
 dict:jisjk:35	いかがですか。	!rule:dict:jisjk:35	keep	local
 dict:jisjk:388	このままにしておいてください。	이대로 해 두어 주세요.	fix	local
@@ -77,7 +77,7 @@ dict:jisjk:818	とても遠くまで泳いだ。	무척 먼 곳까지 헤엄쳤�
 dict:jisjk:818	とても遠くまでは泳げない。	도저히 먼 곳까지는 헤엄칠 수 없다.	fix	local
 dict:jisjk:375205	明日はとても行けない。	내일은 도저히 갈 수 없다.	fix	local
 dict:jisjk:375205	とても寒い。	무척 춥다.	fix	local
-dict:jisjk:374780	もう２個ください。	rule:dict:jisjk:374780=더	keep	local
+dict:jisjk:374780	もう２個ください。	!rule:dict:jisjk:374780	keep	local
 dict:jisjk:374780	もうこうなると困る。	이제 이렇게 되면 곤란하다.	fix	local
 dict:jisjk:267653	私は何かと忙しい。	나는 이래저래 바쁘다.	fix	local
 dict:jisjk:267653	何かと便利だ。	무엇인가 편리하다.	fix	local

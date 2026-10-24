@@ -1,0 +1,20 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+lookup:contracted-iru-potential	……こんな茶番に、これ以上付き合ってられない。	……이런 촌극에, 더 이상 사귈 수 없다.	fix	lookup
+lookup:contracted-iru-potential	もうジッとしてられなかった。	이제 짓으로 할 수 없었다.	fix	lookup
+lookup:contracted-iru-potential	青葉、じっとしてられないな。	아오바, 가만히 할 수 없네.	fix	lookup
+lookup:contracted-iru-potential	「うーん……１時間も待ってられないし……ん、仕方がない」	「으음……1시간도 기다릴 수 없고……응, 어쩔 수 없다」	fix	lookup
+lookup:contracted-iru-potential	「そんなの……見てられないもん……」	「그런 거……볼 수 없는 걸……」	fix	lookup
+lookup:contracted-iru-potential	強い酒でも飲まなきゃやってられんよ	독한 술이라도 마시지 않으면 할 수 없어	fix	lookup
+lookup:contracted-iru-potential	そんなこと言ってられないよ。	그런 말 할 수 없어.	fix	lookup
+lookup:contracted-iru-potential	「そんな痛みになんか負けてられない！って続けてたら」	「그런 아픔에무슨 질 수 없다! 라고 계속하고 있으면」	fix	lookup
+lookup:contracted-iru-potential	オイラ、のんびり遊んでられなかったよ。	나, 한가로이 놀 수 없었어.	fix	lookup
+lookup:contracted-iru-potential	こんな所で寝てられない。	이런 곳에서 잘 수 없다.	fix	lookup
+lookup:contracted-iru-potential	もう待ってられません。	이제 기다릴 수 없습니다.	fix	lookup
+lookup:contracted-iru-potential	見てられない	볼 수 없다	fix	lookup
+lookup:contracted-iru-potential	見られない	볼 수 없다	keep	lookup
+lookup:contracted-iru-potential	待っていられない	기다리고 있을 수 없다	keep	lookup
+lookup:contracted-iru-potential	待てない	기다릴 수 없다	keep	lookup
+lookup:contracted-iru-potential	ここで待ってろ。	여기서 기다려라.	keep	lookup
+lookup:contracted-iru-potential	ずっと待ってるだけだ。	계속 기다리고 있을 뿐이다.	keep	lookup
+lookup:contracted-iru-potential	食べられない	먹을 수 없다	keep	lookup

@@ -103,6 +103,10 @@
 書いてたじゃん	썼잖아(요)	end	prio=-1
 書かないじゃん	쓰지 않잖아(요)	end	prio=-1
 書いちゃうじゃん	써버리잖아(요)	end	prio=-1
+書いたじゃんぞ	썼잖아	end	prio=-1
+書いてたじゃんぞ	썼잖아	end	prio=-1
+書いたじゃんにゃ	썼잖아냥	end	prio=-1
+書いてたじゃんにゃ	썼잖아냥	end	prio=-1
 // っす: polite
 書くっす	써요	end	prio=-1
 書いたっす	썼어요	end	prio=-1
@@ -367,7 +371,7 @@
 学生よね	학생이지	end	prio=-1
 学生ね	학생이네	end	prio=-1
 静かね	조용하네	end	prio=-1
-書いちゃいましたか	써 버렸습니까	end	prio=-1
+書いちゃいましたか	써버렸습니까	end	prio=-1
 学生でございます	학생입니다	end	prio=-1
 静かでございます	조용합니다	end	prio=-1
 静かでござります	조용합니다	end	prio=-1
@@ -424,6 +428,11 @@
 書かなかったんじゃないかな	쓰지 않은 거 아닐까	end	prio=-1
 書かなかったんじゃねえか	쓰지 않은 거 아냐	end	prio=-1
 書かなかったんじゃないですか	쓰지 않은 거 아니에요	end	prio=-1
+書いたんじゃないから	쓴 게 아니니까	end	prio=-1
+書いてたんじゃないから	쓰고 있었던 게 아니니까	end	prio=-1
+書いたんじゃないからね	쓴 게 아니니까	end	prio=-1
+書いてたんじゃないからね	쓰고 있었던 게 아니니까	end	prio=-1
+書いてたんじゃないのか	쓰고 있었던 게 아닌 건가	end	prio=-1
 // んだぞ, のだぞ
 書くんだぞ	쓰는 거야	end	prio=-1
 書いたんだぞ	쓴 거야	end	prio=-1
@@ -529,8 +538,8 @@
 学生かもしれませんわ	학생일지도 몰라요	end	prio=-1
 高いのかもしれませんわ	높은 것일지도 몰라요	end	prio=-1
 書くのかもしれませんわ	쓰는 것일지도 몰라요	end	prio=-1
-書いちゃったか	써 버렸나	end	prio=-1
-書いてしまったか	써 버렸나	end	prio=-1
+書いちゃったか	써버렸나	end	prio=-1
+書いてしまったか	써버렸나	end	prio=-1
 // のか ending a question: 는 건가
 書くのか	쓰는 건가	end	prio=-1
 書いたのか	쓴 건가	end	prio=-1
@@ -568,37 +577,37 @@
 静かじゃないね	조용하지 않네	end	prio=-1
 // てしまっている, ちゃっている: the state after it happened (ひねくれちゃっている
 // 비뚤어져 버렸다), not 버리고 있다.
-書いちゃっている	써 버렸다	end	prio=-1
-書いちゃってる	써 버렸다	end	prio=-1
-書いてしまっている	써 버렸다	end	prio=-1
-書いてしまってる	써 버렸다	end	prio=-1
-書いちゃってるわ	써 버렸어	end	prio=-1
-書いちゃってるわよ	써 버렸어	end	prio=-1
-書いちゃってるよ	써 버렸어	end	prio=-1
-書いちゃってるね	써 버렸네	end	prio=-1
-書いてしまってるわ	써 버렸어	end	prio=-1
-書いてしまってるわよ	써 버렸어	end	prio=-1
+書いちゃっている	써버렸다	end	prio=-1
+書いちゃってる	써버렸다	end	prio=-1
+書いてしまっている	써버렸다	end	prio=-1
+書いてしまってる	써버렸다	end	prio=-1
+書いちゃってるわ	써버렸어	end	prio=-1
+書いちゃってるわよ	써버렸어	end	prio=-1
+書いちゃってるよ	써버렸어	end	prio=-1
+書いちゃってるね	써버렸네	end	prio=-1
+書いてしまってるわ	써버렸어	end	prio=-1
+書いてしまってるわよ	써버렸어	end	prio=-1
 // Sentence-final particles after ちゃう and ちゃった (じゃう, ちまう): よ and ぞ warn or
 // announce (泣いちゃうよ 울어 버릴 거야), ね and な observe (太っちゃうな 살쪄 버리네); ぜ
 // keeps the plain end as after 書く. わね after a plain past.
-書いちゃうわ	써 버려	end	prio=-1
-書いちゃうわよ	써 버릴 거야	end	prio=-1
-書いちゃうよ	써 버릴 거야	end	prio=-1
-書いちゃうね	써 버리네	end	prio=-1
-書いちゃうな	써 버리네	end	prio=-1
-書いちゃうぞ	써 버릴 거야	end	prio=-1
-書いちゃうぜ	써 버린다	end	prio=-1
-書いちゃうさ	써 버려	end	prio=-1
-書いちゃったわ	써 버렸어	end	prio=-1
-書いちゃったわよ	써 버렸어	end	prio=-1
-書いちゃったわね	써 버렸네	end	prio=-1
-書いちゃったよ	써 버렸어	end	prio=-1
-書いちゃったね	써 버렸네	end	prio=-1
-書いちゃったな	써 버렸네	end	prio=-1
-書いちゃったぞ	써 버렸어	end	prio=-1
-書いちゃったぜ	써 버렸다	end	prio=-1
-書いちゃったさ	써 버렸어	end	prio=-1
-書いちゃったよね	써 버렸지	end	prio=-1
+書いちゃうわ	써버려	end	prio=-1
+書いちゃうわよ	써버릴 거야	end	prio=-1
+書いちゃうよ	써버릴 거야	end	prio=-1
+書いちゃうね	써버리네	end	prio=-1
+書いちゃうな	써버리네	end	prio=-1
+書いちゃうぞ	써버릴 거야	end	prio=-1
+書いちゃうぜ	써버린다	end	prio=-1
+書いちゃうさ	써버려	end	prio=-1
+書いちゃったわ	써버렸어	end	prio=-1
+書いちゃったわよ	써버렸어	end	prio=-1
+書いちゃったわね	써버렸네	end	prio=-1
+書いちゃったよ	써버렸어	end	prio=-1
+書いちゃったね	써버렸네	end	prio=-1
+書いちゃったな	써버렸네	end	prio=-1
+書いちゃったぞ	써버렸어	end	prio=-1
+書いちゃったぜ	써버렸다	end	prio=-1
+書いちゃったさ	써버렸어	end	prio=-1
+書いちゃったよね	써버렸지	end	prio=-1
 書いたわね	썼네	end	prio=-1
 
 // ってよ, ってさ: hearsay at the end of an utterance (婚約破棄したってよ！ 파혼했대!).
@@ -632,8 +641,8 @@
 // のよう at the end of a sentence (お姫様のよう 공주님 같다).
 学生のよう	학생 같다	end	prio=-1
 // 〜たばかり at the end of a sentence (なったばかり 된 지 얼마 안 됐다).
-書いたばかり	쓴 지 얼마 안 됐다	end	prio=-1
-書いたばかりだ	쓴 지 얼마 안 됐다	end	prio=-1
+書いたばかり	쓴 지 얼마 안됐다	end	prio=-1
+書いたばかりだ	쓴 지 얼마 안됐다	end	prio=-1
 // っけ: asking what one half remembers, in the spoken forms (言ったっけ 말했나,
 // 行くんだっけ 가는 거였지, 鈴木さんだっけ 스즈키 씨였나).
 書いたっけ	썼나	end	prio=-1

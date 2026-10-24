@@ -681,3 +681,61 @@ test('branch pushes build only main and develop; superseded pull request runs ar
   assert.match(triggers, /  push:\n    branches: \[main, develop\]\n  pull_request:\n/);
   assert.match(build, /concurrency:\n  group: build-\$\{\{ github\.workflow \}\}-\$\{\{ github\.ref \}\}\n  cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/);
 });
+
+const fuzzJob = build.slice(build.indexOf('\n  fuzz:\n'), build.indexOf('\n  release:\n'));
+function fuzzStep(name) {
+  const start = fuzzJob.indexOf(`      - name: ${name}\n`);
+  assert.notEqual(start, -1, name);
+  const end = fuzzJob.indexOf('\n      - name:', start + 1);
+  return fuzzJob.slice(start, end === -1 ? undefined : end);
+}
+const fuzzBlocking = new Function('github', 'startsWith',
+  `return (${fuzzJob.match(/^      FUZZ_BLOCKING: \$\{\{ (.*) \}\}$/m)[1]});`);
+
+test('the random fuzz run fails develop pushes and only warns on pull requests, main pushes and tags', () => {
+  const startsWith = (s, prefix) => s.startsWith(prefix);
+  // Publish npm calls Build on the tag push, so a tag build has the push event and the tag ref.
+  for (const [event_name, ref, blocking] of [
+    ['push', 'refs/heads/develop', true],
+    ['push', 'refs/heads/main', false],
+    ['pull_request', 'refs/pull/7/merge', false],
+    ['push', 'refs/tags/v1.2.3', false],
+  ]) {
+    assert.equal(fuzzBlocking({ event_name, ref }, startsWith), blocking, `${event_name} ${ref}`);
+  }
+  assert.match(fuzzJob, /\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' && \(github\.event_name == 'push' \|\| github\.event_name == 'pull_request'\) \}\}\n/);
+  assert.match(fuzzStep('Fuzz'), /\n        continue-on-error: \$\{\{ env\.FUZZ_BLOCKING != 'true' \}\}\n/);
+  assert.doesNotMatch(fuzzStep('Replay the seeds and regression inputs'), /continue-on-error/);
+  assert.match(fuzzStep('Upload the failing inputs and fuzzer logs'), /steps\.fuzz\.outcome == 'failure'/);
+});
+
+for (const [status, blocking] of [[0, 'true'], [0, 'false'], [1, 'true'], [1, 'false']]) {
+  test(`the fuzz step exits with the run's status and warns only when it does not block: ${status}, ${blocking}`, t => {
+    const dir = mkdtempSync(join(tmpdir(), 'hdtrans-ci-fuzz-'));
+    t.after(() => rmSync(dir, { recursive: true, force: true }));
+    mkdirSync(join(dir, 'tools'));
+    mkdirSync(join(dir, 'bin'));
+    writeFileSync(join(dir, 'bin/timeout'), '#!/bin/sh\nshift\nexec "$@"\n', { mode: 0o700 });
+    writeFileSync(join(dir, 'tools/fuzz.py'), `import os, sys
+assert sys.argv[1:3] == ["build/linux-fuzz/hdtrans_fuzz", os.environ["RUNNER_TEMP"] + "/dicts.hdsnap"]
+assert "--seed" in sys.argv and "--out" in sys.argv
+print("fuzz: fixture")
+sys.exit(int(os.environ["FIXTURE_STATUS"]))
+`);
+    const script = fuzzStep('Fuzz').match(/        run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '');
+    const summary = join(dir, 'summary');
+    const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', script], {
+      cwd: dir,
+      env: {
+        ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: summary,
+        GITHUB_RUN_NUMBER: '5', FUZZ_BLOCKING: blocking, FIXTURE_STATUS: String(status),
+      },
+      encoding: 'utf8',
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status, status, result.stderr);
+    assert.match(readFileSync(summary, 'utf8'), /### Fuzz\n```text\nfuzz: fixture\n```/);
+    const warned = /::warning title=Fuzz::/.test(result.stdout);
+    assert.equal(warned, status !== 0 && blocking !== 'true');
+  });
+}

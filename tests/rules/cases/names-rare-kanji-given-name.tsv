@@ -1,0 +1,18 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:names.572553	新井毫	아라이 고	fix	fixed
+dict:names.572553	 新井毫	 아라이 고	fix	fixed
+dict:names.572553	新井毫 	아라이 고 	fix	fixed
+dict:names.572553	新井 毫	아라이 고	fix	fixed
+dict:names.572553	新井毫さん	아라이 고 씨	keep	fixed
+dict:names.572553	「新井毫」	「아라이 고」	keep	fixed
+dict:names.572553	新井毫の演説。	아라이 고의 연설.	keep	fixed
+dict:names.572553	新井毫について調べた。	아라이 고에 대해 조사했다.	keep	fixed
+dict:names.572553	新井毫の名前。	아라이 고의 이름.	keep	fixed
+dict:names.572553	新井毫と話す。	아라이 고와 이야기한다.	keep	fixed
+dict:names.572553	新井毫が来た。	아라이 고가 왔다.	keep	fixed
+dict:names.572553	新井毫に会う。	아라이 고를 만난다.	keep	fixed
+dict:names.572553	新井白石	아라이 하쿠세키	keep	fixed
+dict:names.572553	新井正人	아라이 마사토	keep	fixed
+dict:names.572553	新井貴浩	아라이 다카히로	keep	fixed
+dict:names.572553	新井理恵	아라이 리에	keep	fixed

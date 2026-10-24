@@ -1,0 +1,24 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:w:28569	朝はありがとな。	아침은 고마워.	fix	defaults
+dict:w:28569	ああ、助かる。ありがとな。	아, 살아난다. 고마워.	fix	defaults
+dict:w:28569	「あの時は、ありがとな」	「그 때는, 고마워」	fix	defaults
+dict:w:28569	「ああ、頑張るよ。署名してくれてありがとな」	「아, 노력해. 서명해 줘서 고마워」	fix	defaults
+dict:w:28569	しかも美味かった、ありがとな！	게다가 맛있었다, 고마워!	fix	defaults
+dict:w:28570	ありがとよ。	고마워.	fix	defaults
+dict:w:28573	あ、これですね！ ありがとです！ 食べます！	아, 이것이군요! 고마워요! 먹습니다!	fix	defaults
+dict:w:28571	これ、チョコのお返し？ ありがとなの！	이것, 초콜릿 답례? 고마워!	fix	defaults
+dict:w:28572	「ありがとさん」	「고마워」	fix	defaults
+dict:w:28574	ごちそうさまでした。ありがとございます！	잘 먹었습니다. 감사합니다!	fix	defaults
+dict:w:28575	ありがとございました	감사했습니다	fix	defaults
+builtin-phrase:thanks	ありがと！	고마워!	keep	sound
+builtin-phrase:thanks	「ありがと」	「고마워」	keep	sound
+builtin-phrase:thanks	ありがとね♪	고마워♪	keep	sound
+builtin-phrase:thanks	ありがとう	고마워	keep	sound
+builtin-phrase:thanks	ありがとうございます	감사합니다	keep	sound
+builtin-phrase:thanks	ありがとうです	고마워요	keep	sound
+dict:w:28590	いつもありがとー！	언제나 고마워~!	fix	defaults
+dict:w:28590	ほんとありがとー	정말 고마워~	fix	defaults
+dict:w:28590	実況良かったよありがとー	실황 좋았어 고마워~	fix	defaults
+dict:w:28590	本当にありがと！	정말 고마워!	fix	defaults
+dict:w:28590	いつもありがとうございます	언제나 감사합니다	keep	defaults

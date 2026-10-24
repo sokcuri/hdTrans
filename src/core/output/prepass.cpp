@@ -131,6 +131,19 @@ bool JoinedCopies(const std::vector<ResolvedItem>& items, int i, int next) {
     return text::RuneCount(EntryText(items[i])) > 1 || JoinedCopies(items, i - 1, i);
 }
 
+// t with the space dropped between a word of ko.joined-before-doe that starts t or follows a
+// space and a form of 되다 after it (안 돼 안돼, 안 된다 안된다; LAY-11).
+void JoinBeforeDoe(std::string& t) {
+    for (const std::string_view w : dict::ClassMembers("ko.joined-before-doe")) {
+        for (std::size_t at = t.find(w); at != std::string::npos; at = t.find(w, at + 1)) {
+            const std::size_t space = at + w.size();
+            if ((at > 0 && t[at - 1] != ' ') || space >= t.size() || t[space] != ' ') continue;
+            const auto doe = text::Split(text::DecodeRune(std::string_view(t).substr(space + 1)).cp);
+            if (doe && doe->initial == 3 && (doe->vowel == 10 || doe->vowel == 11)) t.erase(space, 1);  // ㄷ, ㅙ ㅚ
+        }
+    }
+}
+
 // Whether s is two equal halves of at least min characters each (ふわふわ, 둥실둥실).
 bool Doubled(std::string_view s, size_t min) {
     const size_t half = s.size() / 2;
@@ -201,6 +214,21 @@ int TokenDistance(const std::vector<TokenText>& tokens, int a, int b) {
         if (tokens[i].span != 0 && tokens[i].type == tokenizer::kTypeMarkup) d--;
     }
     return d;
+}
+
+// Whether item i ends its Japanese token and a run of symbols comes next (、 before ％＆＄,
+// ……, ※).
+bool SymbolsFollow(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i) {
+    const int t = items[i].tokenIndex;
+    if (tokens[t].type != tokenizer::kTypeJapanese) return false;
+    if (i + 1 < static_cast<int>(items.size()) && items[i + 1].tokenIndex == t) return false;
+    if (t + 1 >= static_cast<int>(tokens.size())) return false;
+    const TokenText& next = tokens[t + 1];
+    if (next.type != tokenizer::kTypeSymbol || next.span != 0 || next.text.empty()) return false;
+    // Closing brackets and quotes (】 ” ’ » and 〃 written for 〟) stay attached.
+    const char32_t first = text::DecodeRune(next.text).cp;
+    return !text::IsClosePunctuation(first) && first != 0xBB && first != 0x2019 && first != 0x201D &&
+           first != 0x203A && first != 0x3003;
 }
 
 // The token types that are written without a space next to a word span when the input
@@ -734,13 +762,13 @@ std::string FilterKana(std::string_view text, const Settings& s) {
             continue;
         }
         const int type = tokenizer::Class(r);
+        const bool kana = type == tokenizer::kClassHiragana || type == tokenizer::kClassKatakana;
         if (type == tokenizer::kTypeJapanese && s.hanjaToHangul == 1) {
             if (const auto w = dict::Written(r)) r = *w;
             text::AppendRune(out, r);
-        } else if (type == tokenizer::kTypeJapanese ||
-                   (type != tokenizer::kClassHiragana && type != tokenizer::kClassKatakana && r != U'、')) {
+        } else if (type == tokenizer::kTypeJapanese || (!kana && r != U'、')) {
             text::AppendRune(out, r);
-        } else if (s.deleteJapan != 1 || r == U'・' || r == U'、') {
+        } else if (s.deleteJapan != 1 || r == U'・' || !kana) {  // r is kana or 、 here
             // The canonical form cut to two width units; a shorter form ends the text.
             std::string canonical;
             if (const auto f = tokenizer::CanonicalForm(r)) {
@@ -866,7 +894,7 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
             remainder = FilterKana(remainder, settings_);
         }
     }
-    std::string translated = WriteCount(i, ApplyParenthesisTextFilter(Build(i, 0, {}), i));
+    std::string translated = WriteCount(i, ApplyParenthesisTextFilter(Build(i, 0, {}), i)) + item.appended;
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
@@ -1058,6 +1086,18 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         t.insert(0, " ");
     }
     using Result = std::pair<std::string, bool>;
+    JoinBeforeDoe(t);
+    // An auxiliary verb (gram Ds) read as a word of ko-aux.joined after the 아/어 form is
+    // written joined to it (食べてしまった 먹어버렸다); the main verb stays apart (拾って捨てた
+    // 주워 버렸다; LAY-11).
+    if (nextIndex == i + 1 && First(item.ending.text) == '6' && Contains(GAttr(items[nextIndex]), "Ds") &&
+        dict::InClass("ko-aux.joined", EntryText(items[nextIndex]))) {
+        return Result(std::move(t), false);
+    }
+    // A comma keeps its space before a run of symbols as before a word (마인, ％＆＄＃).
+    if (settings_.text && kind == '6' && t == "," && SymbolsFollow(tokens, items, i)) {
+        return Result(std::move(t), true);
+    }
     if (nextIndex < 0 || t.empty() || item.selectionFlag == 1 ||
         TokenDistance(tokens, item.tokenIndex, items[nextIndex].tokenIndex) >= 2) {
         return Result(std::move(t), false);
@@ -1203,6 +1243,12 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
+    // A noun that starts with a kanji and is said again right after itself is a word of its own
+    // (終わり終わり 끝 끝).
+    if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && next.surface == item.surface &&
+        nextEntry == t && text::RuneCount(item.surface) >= 2 && IsKanji(FirstRune(item.surface))) {
+        return Result(std::move(t), true);
+    }
     if (!isLast) {
         // A pronoun written in kanji or two kana or more forms no compound with a noun next
         // to it (誰か僕を 누군가 나를, そもそも俺は 원래 나는), but takes a suffix or a word of one
@@ -1386,6 +1432,20 @@ bool SpacedAfterSyllable(const Pieces& out) {
            text::Final(DecodeLastRune(TextBefore(t.substr(0, end + 1)), end + 1).cp) >= 0;
 }
 
+// Whether out ends in a word or a comma: a syllable, a run of Latin letters and digits that
+// does not follow \ or % (an escape such as \n or %s), the particle mark of a word span, or ",".
+bool EndsInWord(const Pieces& out) {
+    if (out.empty() || (out.back().span != SpanText && out.back().span != SpanWord)) return false;
+    const std::string_view t = out.back().text;
+    if (t.empty()) return false;
+    const char32_t r = DecodeLastRune(TextBefore(t), t.size()).cp;
+    if (text::Final(r) >= 0 || r == U',' || r == kVowelMark || r == kConsonantMark || r == kRieulMark) return true;
+    size_t k = t.size();
+    const auto latin = [](char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); };
+    while (k > 0 && latin(t[k - 1])) k--;
+    return k < t.size() && (k == 0 || (t[k - 1] != '\\' && t[k - 1] != '%'));
+}
+
 }  // namespace
 
 void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int last, const Settings& s, Pieces& out) {
@@ -1406,6 +1466,10 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             default:
                 if (tok.span == 0 && !out.empty() && i - 1 >= 0 && tokens[i - 1].type != tokenizer::kTypeAsciiSpace) {
                     TrimRight(out);
+                    if (const char32_t r = tok.text.empty() ? 0 : text::DecodeRune(tok.text).cp;
+                        tok.type == tokenizer::kTypeBracket && IsOpening(r) && r != U'〔' && EndsInWord(out)) {
+                        Add(out, " ");
+                    }
                 }
         }
         if (const std::string_view t = TextTail(out); t.ends_with("</A>") || t.ends_with("</a>") || t.ends_with("&#CS")) {

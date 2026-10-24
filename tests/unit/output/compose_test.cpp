@@ -18,6 +18,7 @@ struct Word {
     const char* target;
     const char* ending = "";
     const char* firstTarget = nullptr;
+    const char* appended = "";
 };
 
 struct CompositionCase {
@@ -48,6 +49,7 @@ void CheckComposition(const CompositionCase& c, bool literal = false, bool clean
             item.directIndex = 0;
             item.ending = {"500", "", word.ending};
         }
+        item.appended = word.appended;
         tokens[0].text += item.surface;
         items.push_back(std::move(item));
     }
@@ -238,6 +240,10 @@ HD_TEST(compose_native_counts) {
         {{{"1杯", "110", "", "한잔"}, {"目", "110", "Ct", "째"}}, {2}, "1잔째."},
         {{{"年", "110", "Ct", "년"}, {"に", "200", "", "에"}, {"1", "110", "Nd", "1"}, {"度", "110", "Ct", "번"}}, {2, 4}, "년에 한 번."},
         {{{"1", "110", "Nd", "1"}, {"人", "110", "Ct", "명"}}, {2}, "1명."},
+        // Korean written after a count stays after the count as written (もう一匹 한 마리 더).
+        {{{"一匹", "110", "", "한마리", "", nullptr, " 더"}}, {1}, "한 마리 더."},
+        {{{"三", "110", "NjNd", "3"}, {"匹", "110", "Ct", "마리", "", nullptr, " 더"}}, {2}, "세 마리 더."},
+        {{{"1", "110", "Nd", "1"}, {"錠", "110", "Ct", "정", "", nullptr, " 더"}}, {2}, "1정 더."},
     };
     for (const auto& c : cases) CheckComposition(c, true);
 }
@@ -341,6 +347,16 @@ HD_TEST(compose_verbal_noun_passive) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// The auxiliary 버리다 (gram Ds) joins the 아/어 form before it; the main verb stays apart.
+HD_TEST(compose_auxiliary_beorida_join) {
+    const CompositionCase cases[] = {
+        {{{"食べ", "410", "", "&HU@", "6"}, {"しま", "410", "DuDs", "버&AA@", "5다"}}, {1, 2}, "먹어버렸다."},
+        {{{"食べ", "410", "", "&HU@", "6"}, {"捨て", "437", "", "버&AA@", "5다"}}, {1, 2}, "먹어 버렸다."},
+        {{{"捨て", "437", "", "버&AA@", "6"}, {"捨て", "437", "", "버&AA@", "6"}}, {1, 2}, "버려 버려."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // A gloss that ends in a space joins what attaches to its last syllable, and keeps the
 // space before a word.
 HD_TEST(compose_gloss_space_before_attached_word) {
@@ -381,5 +397,99 @@ HD_TEST(compose_emit_closing_symbols) {
         Pieces out;
         EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
         HD_CHECK_EQ(String(out), c.expected);
+    }
+}
+
+// An opening bracket token other than 〔 (【 〈 《 ［ ‘ ｛) stands apart from a word, a word span or
+// a comma before it, as a word does; 〔, ＜ and [, and an opening bracket after punctuation, an
+// escape, a tag or another bracket, stay attached.
+HD_TEST(compose_emit_opening_bracket_apart) {
+    struct Case {
+        std::vector<TokenText> tokens;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{tokenizer::kTypeJapanese, 0, "그는 ", ""}, {tokenizer::kTypeBracket, 0, "【", ""}}, "그는 【"},
+        {{{tokenizer::kTypeJapanese, 0, "대로", ""}, {tokenizer::kTypeBracket, 0, "【", ""}}, "대로 【"},
+        {{{tokenizer::kTypeJapanese, 0, "그는,", ""}, {tokenizer::kTypeBracket, 0, "〈", ""}}, "그는, 〈"},
+        {{{tokenizer::kTypeNumber, 0, "3", ""}, {tokenizer::kTypeBracket, 0, "《", ""}}, "3 《"},
+        {{{tokenizer::kTypeAlpha, 0, "Part1", ""}, {tokenizer::kTypeBracket, 0, "［", ""}}, "Part1 ［"},
+        {{{tokenizer::kTypeJapanese, 0, "그는", ""}, {tokenizer::kTypeAsciiSpace, 0, " ", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "그는 【"},
+        {{{tokenizer::kTypeJapanese, 0, "그는 ", ""}, {tokenizer::kTypeBracket, 0, "〔", ""}}, "그는〔"},
+        {{{tokenizer::kTypeJapanese, 0, "그는 ", ""}, {tokenizer::kTypeBracket, 0, "＜", ""}}, "그는＜"},
+        {{{tokenizer::kTypeJapanese, 0, "그는 ", ""}, {tokenizer::kTypeBracket, 0, "】", ""}}, "그는】"},
+        {{{tokenizer::kTypeJapanese, 0, "그는 ", ""}, {tokenizer::kTypeAsciiOpen, 0, "[", ""}}, "그는["},
+        {{{tokenizer::kTypeJapanese, 0, "음", ""}, {tokenizer::kTypeSymbol, 0, "……", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "음……【"},
+        {{{tokenizer::kTypeJapanese, 0, "「", ""}, {tokenizer::kTypeBracket, 0, "【", ""}}, "「【"},
+        {{{tokenizer::kTypeBracket, 0, "【", ""}, {tokenizer::kTypeJapanese, 0, "감정", ""}, {tokenizer::kTypeBracket, 0, "】", ""},
+          {tokenizer::kTypeBracket, 0, "【", ""}},
+         "【감정】【"},
+        {{{tokenizer::kTypeJapanese, 0, "그의", ""}, {tokenizer::kTypeBracket, 0, "‘", ""}}, "그의 ‘"},
+        {{{tokenizer::kTypeJapanese, 0, "그는", ""}, {tokenizer::kTypeBracket, 0, "｛", ""}}, "그는 ｛"},
+        {{{tokenizer::kTypeProtected, 1, "wiki", "wiki"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "wiki 【"},
+        {{{tokenizer::kTypeProtected, 1, "섹\uE001", "섹\uE001"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "섹\uE001 【"},
+        {{{tokenizer::kTypeMarkup, 3, "</b>", "</b>"}, {tokenizer::kTypeBracket, 0, "【", ""}}, "</b>【"},
+        {{{tokenizer::kTypeJapanese, 0, "왔다.", ""}, {tokenizer::kTypeAsciiSymbol, 0, "\\n", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "왔다.\\n【"},
+        {{{tokenizer::kTypeJapanese, 0, "이름은", ""}, {tokenizer::kTypeAsciiSymbol, 0, "%s", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "이름은%s【"},
+        {{{tokenizer::kTypeJapanese, 0, "그는", ""}, {tokenizer::kTypeNewline, 0, "\n", ""}, {tokenizer::kTypeBracket, 0, "【", ""}},
+         "그는\n【"},
+        {{{tokenizer::kTypeBracket, 0, "【", ""}}, "【"},
+    };
+    for (const bool cleanup : {false, true}) {
+        Settings settings;
+        settings.cleanup = cleanup;
+        for (const Case& c : cases) {
+            Pieces out;
+            EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+            HD_CHECK_EQ(String(out), c.expected);
+        }
+    }
+}
+
+HD_TEST(compose_comma_before_symbol_run) {
+    struct Case {
+        const char* symbols;
+        int type;
+        const char* expected;
+        bool text = true;
+    };
+    const Case cases[] = {
+        {"％＆＄＃", tokenizer::kTypeSymbol, "마인, ％＆＄＃."},
+        {"……", tokenizer::kTypeSymbol, "마인, ……."},
+        {"❩", tokenizer::kTypeSymbol, "마인,❩."},
+        {"”", tokenizer::kTypeSymbol, "마인,”."},
+        {"【", tokenizer::kTypeBracket, "마인, 【."},
+        {"％＆＄＃", tokenizer::kTypeSymbol, "마인,％＆＄＃.", false},
+    };
+    for (const Case& c : cases) {
+        std::vector<TokenText> tokens = {
+            {tokenizer::kTypeJapanese, 0, "マイン、", ""},
+            {c.type, 0, c.symbols, ""},
+            {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+            {tokenizer::kTypeTruncated, 0, "", ""},
+        };
+        std::vector<ResolvedItem> items(2);
+        items[0].surface = "マイン";
+        items[0].entry = items[0].first = {"130", "", "마인"};
+        items[1].surface = "、";
+        items[1].offset = 9;
+        items[1].entry = items[1].first = {"600", "", ","};
+        for (ResolvedItem& item : items) {
+            item.length = static_cast<int>(item.surface.size());
+            item.selected = 0;
+        }
+        Nodes nodes;
+        BuildItems(items, tokens, nodes);
+        Composer composer;
+        Families families;
+        Settings settings;
+        settings.text = c.text;
+        Pieces result;
+        composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
+        HD_CHECK_EQ(String(result), c.expected);
     }
 }

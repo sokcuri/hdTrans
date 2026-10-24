@@ -6,6 +6,7 @@
 #include "core/output/compose.h"
 #include "core/output/inflect.h"
 #include "core/output/particle.h"
+#include "core/output/pieces.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
 #include "core/text/utf8.h"
@@ -231,6 +232,23 @@ std::string_view TextAfter(const std::vector<ResolvedItem>& items, int i) {
     return ".";
 }
 
+// s without a kClipMark at its end (아파아팟 is 아파 with the mark).
+std::string_view Unclipped(std::string_view s) {
+    std::string clip;
+    text::AppendRune(clip, kClipMark);
+    return s.ends_with(clip) ? s.substr(0, s.size() - clip.size()) : s;
+}
+
+// Whether the item right after item i is a copy of it said again: the same text, Korean and
+// ending, clipped or not (だめだだめだ 안돼 안돼), so that it ends its clause as the copy does.
+bool CopyFollows(const std::vector<ResolvedItem>& items, int i) {
+    const auto next = static_cast<std::size_t>(i) + 1;
+    if (next >= items.size()) return false;
+    const ResolvedItem &a = items[static_cast<std::size_t>(i)], &b = items[next];
+    return a.directIndex >= 0 && b.directIndex >= 0 && a.surface == b.surface && EntryText(a) == EntryText(b) &&
+           Unclipped(a.ending.text) == Unclipped(b.ending.text);
+}
+
 // Whether text after a predicate starts with the punctuation that ends a sentence.
 bool SentenceEndAfter(std::string_view after) {
     for (const std::string_view end : {"!", "?", ".", "…", "」", "』", "~", "～"}) {
@@ -242,9 +260,11 @@ bool SentenceEndAfter(std::string_view after) {
 // Whether the form of key with suffix ends a clause in speech: the 아/어 form alone or with
 // 요, or the past stem with 어 or 어요 (갔어), before the punctuation of SentenceEndAfter, or
 // before a comma after a Japanese ending in a terminal form (いい、 됐어,), which a
-// connective form (なり、 되어,) is not; or anywhere when ended (a casual sentence end).
+// connective form (なり、 되어,) is not; or anywhere when ended (a casual sentence end, or a
+// copy said again after it). A kClipMark that ends suffix is not part of it.
 bool SpokenEnd(std::string_view key, std::string_view suffix, std::string_view after, std::string_view ending,
                bool ended) {
+    suffix = Unclipped(suffix);
     const bool infinitive = key.ends_with("6") && (suffix.empty() || suffix == "요");
     const bool past = key.ends_with("5") && (suffix == "어" || suffix == "어요");
     if (!infinitive && !past) return false;
@@ -544,7 +564,7 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 replacement = NormalizeDakeiyoText(i, replacement);
             }
             if (settings_.text && !it.endingSurface.ends_with("て") && !it.endingSurface.ends_with("で") &&
-                SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
+                SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken || CopyFollows(items, i))) {
                 // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
                 replacement = replacement == "아니어" ? (suffix.empty() ? "아니야" : "아니에") : SpokenInfinitive(replacement);
             }
@@ -674,7 +694,7 @@ void Composer::BuildAdjective(int i) {
             suffix.clear();
         }
         // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
-        if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken)) {
+        if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken || CopyFollows(items, i))) {
             if (replacement == "니어" && stem.ends_with("아")) {
                 replacement = suffix.empty() ? "니야" : "니에";
             } else {

@@ -1,0 +1,8 @@
+# 규칙: LEX-1, LEX-3, SPC-1
+rule	input	expected	kind	layer
+dict:jisjk:194155	「若輩者には難しい。」	「풋내기에게는 어려워.」	fix	defaults
+dict:jisjk:50906	「テレヴィジョンで見た。」	「텔레비전으로 봤어.」	fix	defaults
+dict:jisjk:43753	「インフルエンザが流行している。」	「인플루엔자가 유행하고 있어.」	fix	defaults
+dict:jisjk:113772	「モスパワートランジスターが必要だ。」	「MOS 파워 트랜지스터가 필요해.」	fix	defaults
+dict:jisjk:137946	「電灯をつけた。」	「전등을 켰어.」	keep	defaults
+dict:jisjk:121398	「腰弱だった。」	「배짱이 없었어.」	fix	defaults

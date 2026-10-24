@@ -1,6 +1,7 @@
 #include "core/word/kana.h"
 
 #include <deque>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -80,27 +81,39 @@ std::string WithFinal(std::string_view s, int vowel, int final) {
 std::string FinalL(std::string_view s, int vowel) { return WithFinal(s, vowel, 8); }
 
 // A katakana run edited as cells: one katakana, one Hangul syllable or the two spaces
-// of an empty cell of the kana rows.
+// of an empty cell of the kana rows. The cells are kept on both sides of a gap, the
+// cells after it last first. An edit first moves the gap to its position, so edits
+// that follow the cursor move few cells.
 struct Run {
-    std::vector<std::string_view> cells;
+    std::vector<std::string_view> lead;    // the cells before the gap
+    std::vector<std::string_view> trail;   // the cells after the gap, last first
     std::vector<std::string_view> source;  // the katakana of the run before any edit
     std::vector<std::string_view> scratch;
     std::deque<std::string> composed;  // syllables made here, which cells may point to
     bool fault = false;
 
-    long Size() const { return static_cast<long>(cells.size()); }
-    std::string_view At(long i) const {
-        return i < 0 || i >= Size() ? std::string_view() : cells[static_cast<std::size_t>(i)];
+    void Load(std::span<const std::string_view> run) {
+        lead.clear();
+        trail.assign(run.rbegin(), run.rend());
+        source.assign(run.begin(), run.end());
     }
+
+    long Size() const { return static_cast<long>(lead.size() + trail.size()); }
+    // cells[i] for 0 <= i < Size().
+    std::string_view Cell(long i) const {
+        const auto n = static_cast<std::size_t>(i);
+        return n < lead.size() ? lead[n] : trail[trail.size() - 1 - (n - lead.size())];
+    }
+    std::string_view At(long i) const { return i < 0 || i >= Size() ? std::string_view() : Cell(i); }
 
     // Whether the cells of text start at cells[i].
     bool Has(long i, std::string_view text) const {
         if (i < 0) return false;
-        if (text == kEmptyCell) return i < Size() && cells[static_cast<std::size_t>(i)] == text;
+        if (text == kEmptyCell) return i < Size() && Cell(i) == text;
         while (!text.empty()) {
             if (i >= Size()) return false;
             const text::Rune want = text::DecodeRune(text);
-            const std::string_view c = cells[static_cast<std::size_t>(i)];
+            const std::string_view c = Cell(i);
             const text::Rune got = text::DecodeRune(c);
             if (got.cp != want.cp || got.size != c.size()) return false;
             text.remove_prefix(want.size);
@@ -114,20 +127,40 @@ struct Run {
     // s kept for as long as the run, so that cells can point to it.
     std::string_view Keep(std::string s) { return composed.emplace_back(std::move(s)); }
 
+    // Puts the gap before cells[j].
+    void MoveGap(long j) {
+        while (static_cast<long>(lead.size()) > j) {
+            trail.push_back(lead.back());
+            lead.pop_back();
+        }
+        while (static_cast<long>(lead.size()) < j) {
+            lead.push_back(trail.back());
+            trail.pop_back();
+        }
+    }
+
     // Replaces the first occurrence of the cells of search at or after cells[i] with
     // replacement, a cell of the kana rows or a text of single characters.
     void Replace(long i, std::string_view search, std::string_view replacement) {
         if (fault) return;
         for (long j = i < 0 ? 0 : i; j <= Size(); j++) {
             if (!Has(j, search)) continue;
-            scratch.assign(cells.begin(), cells.begin() + j);
+            scratch.clear();
             if (replacement == kEmptyCell) scratch.push_back(replacement);
             else AppendCells(scratch, replacement);
-            scratch.insert(scratch.end(), cells.begin() + j + static_cast<long>(CellCount(search)), cells.end());
-            cells.swap(scratch);
+            MoveGap(j);
+            trail.resize(trail.size() - CellCount(search));
+            trail.insert(trail.end(), scratch.rbegin(), scratch.rend());
             return;
         }
         fault = true;
+    }
+
+    // Appends the cells that are not katakana to out.
+    void AppendTo(std::string& out) const {
+        for (long i = 0; i < Size(); i++) {
+            if (const std::string_view c = Cell(i); !KatakanaCell(c)) out += c;
+        }
     }
 
     // The kana before the last three of the run (the X of Xール), or empty.
@@ -324,25 +357,21 @@ bool TransliterateKatakana(std::string_view s, std::string& out) {
     std::vector<std::string_view> cells;
     AppendCells(cells, s);
     Run run;
+    std::string written;
     for (std::size_t i = 0; i < cells.size();) {
         if (!KatakanaCell(cells[i])) {
-            i++;
+            written += cells[i++];
             continue;
         }
         std::size_t end = i;
         while (end < cells.size() && KatakanaCell(cells[end])) end++;
-        run.cells.assign(cells.begin() + static_cast<long>(i), cells.begin() + static_cast<long>(end));
-        run.source = run.cells;
+        run.Load(std::span<const std::string_view>(cells).subspan(i, end - i));
         run.Transliterate();
         if (run.fault) return false;
-        cells.erase(cells.begin() + static_cast<long>(i), cells.begin() + static_cast<long>(end));
-        cells.insert(cells.begin() + static_cast<long>(i), run.cells.begin(), run.cells.end());
-        i += run.cells.size();
+        run.AppendTo(written);
+        i = end;
     }
-    out.clear();
-    for (const std::string_view c : cells) {
-        if (!KatakanaCell(c)) out += c;
-    }
+    out = std::move(written);
     return true;
 }
 

@@ -3574,7 +3574,7 @@ ABCオーディオ	ABC 오디오	N130	VGt		GN							names.3590
 ABCスタジオ	ABC 스튜디오	N130	VGt		GN							names.3591
 ABCストア	ABC 스토어	N130	VGt		GN							names.3592
 ABCスープ	ABC 수프	N110			GN							names.3593
-ABCテレビ	ABC 테레비	N110			GN							names.3594
+ABCテレビ	ABC TV	N110			GN							names.3594
 ABCトリオ	ABC 트리오	N110			GN							names.3595
 ABCファミリー	ABC 패밀리	N130	VGt		GN							names.3596
 ABCマント	ABC 망토	N110			GN							names.3597
@@ -4214,7 +4214,7 @@ BSよしもと	BS 요시모토	N110			GN						びーえすよしもと	names.423
 BSジャパン	BS 재팬	N110			GN							names.4231
 BSゼブラ	BS 제브라	N130	QPNVHn		GN							names.4232
 BSゼルダの伝説	BS 젤다의 전설	N130	QWK		GN							names.4233
-BSテレビ東京	BS TV 도쿄	N130	VGt		GN							names.4234
+BSテレビ東京	BS TV도쿄	N130	VGt		GN							names.4234
 BSニュースWorld	BS 뉴스 월드	N110			GN							names.4235
 BSニュースWorld	NHK BS 뉴스	N110			GN							names.4236
 BSフジ	BS후지	N110			GN							names.4237
@@ -4388,9 +4388,9 @@ CAリーベル・プレート	CA 리버 플레이트	N130	VGt		GN							names.44
 CAリーベル・プレート・プエルトリコ	CA 리버 플레이트 푸에르토리코	N130	VGt		GN							names.4405
 CAレンティスタス	CA 렌티스타스	N130	VGt		GN							names.4406
 CB-01チーター	CB-01 치타	N110			GN							names.4407
-CBCテレビ	CBC 텔레비전	N130	VGt		GN							names.4408
-CBCテレビ	CBC테레비	N130	VGt		GN							names.4409
-CBCテレビジョン	CBC 텔레비전	N130	VGt		GN							names.4410
+CBCテレビ	CBC TV	N130	VGt		GN							names.4408
+CBCテレビ	CBC TV	N130	VGt		GN							names.4409
+CBCテレビジョン	CBC TV	N130	VGt		GN							names.4410
 CBC賞	CBC상	N110			GN							names.4411
 CBRN防衛センター	국방 CBRN센터	N130	QCTVPl		GN							names.4412
 CBSイブニングニュース	CBS 이브닝뉴스	N130	QWK		GN							names.4413
@@ -5339,7 +5339,7 @@ EPPOコード	EPPO 코드	N130	QWK		GN							names.5355
 ER緊急救命室	ER 응급실	N110			GN							names.5356
 ESEAPハブ	위키미디어 ESEAP 허브	N130	VGt		GN							names.5357
 ESPNカレッジ・フットボール	ESPN 대학 축구	N130	QWK		GN							names.5358
-ESPNワイド・ワールド・オブ・スポーツ・コンプレックス	ESPN 와일드 월드 오브 스포츠 콤플렉스	N130	QCTVPl		GN							names.5359
+ESPNワイド・ワールド・オブ・スポーツ・コンプレックス	ESPN 와이드 월드 오브 스포츠 콤플렉스	N130	QCTVPl		GN							names.5359
 ESPY賞	ESPY 어워드	N130	QWK		GN							names.5360
 ESPディスク・レコード	ESP-디스크	N130	VGt		GN							names.5361
 ESVシールド	ESV 실드	N110			GN							names.5362
@@ -5505,7 +5505,7 @@ F1手榴弾	F1 수류탄	N110			GN							names.5521
 F355チャレンジ	F355 챌린지	N130	QWK		GN							names.5522
 F42断層	F42 단층	N130	QCTVPl		GN							names.5523
 F43断層	F43 단층	N130	QCTVPl		GN							names.5524
-F5ネットワークス	F5 내트워크	N130	VGt		GN							names.5525
+F5ネットワークス	F5 네트워크스	N130	VGt		GN							names.5525
 F5連打	F5 연타	N110			GN							names.5526
 F80ガンレイド	F80 건레이드	N110			GN							names.5527
 F90_1号機	F90 1호기	N110			GN							names.5528
@@ -8236,8 +8236,8 @@ NHK恐竜CG	NHK 공룡 CG	N110			GN							names.8252
 NHK放送センター	NHK 방송 센터	N130	VGt		GN							names.8253
 NHK放送技術研究所	NHK 방송 기술 연구소	N130	VGt		GN							names.8254
 NHK教育	NHK 교육 텔레비전	N110			GN							names.8255
-NHK教育テレビ	NHK 교육 텔레비전	N110			GN							names.8256
-NHK教育テレビジョン	NHK 교육 텔레비전	N110			GN							names.8257
+NHK教育テレビ	NHK 교육TV	N110			GN							names.8256
+NHK教育テレビジョン	NHK 교육TV	N110			GN							names.8257
 NHK新人お笑い大賞	NHK 신인 개그 대상	N110			GN							names.8258
 NHK新人演芸大賞	NHK 신인연예대상	N110			GN							names.8259
 NHK新潟放送局	NHK 니가타 방송국	N130	VGt		GN							names.8260
@@ -8266,7 +8266,7 @@ NHK秋田放送局	NHK 아키타 방송국	N130	VGt		GN							names.8282
 NHK米子支局	NHK 요나고 지국	N130	VGt		GN							names.8283
 NHK紅白歌合戦	NHK 홍백가합전	N130	QWK		GN							names.8284
 NHK総合	NHK 종합 TV	N110			GN							names.8285
-NHK総合テレビジョン	NHK 종합 텔레비전	N130	VGt		GN							names.8286
+NHK総合テレビジョン	NHK 종합TV	N130	VGt		GN							names.8286
 NHK豊橋支局	NHK 도요하시 지국	N130	VGt		GN							names.8287
 NHK郡山支局	NHK 고리야마 지국	N130	VGt		GN							names.8288
 NHK金沢放送局	NHK 가나자와 방송국	N130	VGt		GN							names.8289
@@ -8351,7 +8351,7 @@ NRGスタジアム	NRG 스타디움	N130	QCTVPl		GN							names.8367
 NRJ ミュージック・アワード	NRJ 뮤직 어워드	N130	QWK		GN							names.8368
 NSGグループ	NSG 그룹	N130	VGt		GN							names.8369
 NSOグループ	NSO 그룹	N130	VGt		GN							names.8370
-NST新潟総合テレビ	니가타 종합 TV	N110			GN							names.8371
+NST新潟総合テレビ	NST 니가타 종합TV	N110			GN							names.8371
 NSファーファ・ジャパン	NS 파파 재팬	N110			GN						えぬえすふぁーふぁ・じゃぱん	names.8372
 NSマグネットキャノン	NS 마그넷 캐논	N110			GN							names.8373
 NSマグフォン	NS 매그폰	N110			GN							names.8374
@@ -8547,7 +8547,7 @@ OL百合族19歳	OL백합족 19세	N130	QWK		GN							names.8563
 OL進化論	OL 진화론	N130	QWK		GN							names.8564
 ON 異常犯罪捜査官・藤堂比奈子	ON 이상 범죄 수사관·토도 히나코	N130	QWK		GN							names.8565
 ONE PIECE 3D 麦わらチェイス	원피스-원피스 3D 밀집체이스	N130	QWK		GN							names.8566
-ONE PIECE “3D2Y” エースの死を越えて! ルフィ仲間との誓い	원피스: 3D2Y ~에이스의 죽음를 넘어라! 루피, 동료와의 맹세~	N130	QWK		GN							names.8567
+ONE PIECE “3D2Y” エースの死を越えて! ルフィ仲間との誓い	원피스: 3D2Y ~에이스의 죽음을 넘어라! 루피, 동료와의 맹세~	N130	QWK		GN							names.8567
 ONE PIECE アンリミテッドワールド レッド	원피스 언리미티드 월드 R	N130	QWK		GN							names.8568
 ONE ～輝く季節へ～	One ~빛나는 계절로~	N130	QWK		GN							names.8569
 ONE:ハイスクールヒーローズ	ONE : 하이스쿨 히어로즈	N130	QWK		GN							names.8570
@@ -9539,7 +9539,7 @@ Sっ気	S기질	N110			GN							names.9555
 Sの眷属	S의 권속	N110			GN							names.9556
 Sカップ	S컵	N110			GN							names.9557
 Sガンダム	S건담	N110			GN							names.9558
-Sガンダム	Ex-S 건담	N110			GN							names.9559
+Sガンダム	S건담	N110			GN							names.9559
 Sガンダム ディープ・ストライカー	S건담 딥 스트라이커	N110			GN							names.9560
 Sキラーマシン	S킬러머신	N110			GN							names.9561
 Sクラス	메르세데스-벤츠 S 클래스	N110			GN							names.9562
@@ -9683,7 +9683,7 @@ TBC 8 ニュース	TBC 8 뉴스	N130	QWK		GN							names.9699
 TBCグループ	TBC 그룹	N130	VGt		GN							names.9700
 TBC銀行	TBC 은행	N130	VGt		GN							names.9701
 TBSスパークル	TBS 스파클	N130	VGt		GN							names.9702
-TBSテレビ	TBS 텔레비전	N110			GN							names.9703
+TBSテレビ	TBS	N110			GN							names.9703
 TBSホールディングス	TBS 홀딩스	N130	VGt		GN							names.9704
 TBSラジオ	TBS 라디오	N130	VGt		GN							names.9705
 TBS土曜8時枠の連続ドラマ	TBS 토요일 밤 8시 드라마	N130	QWK		GN							names.9706
@@ -11146,7 +11146,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 あいろん	아이론	N130	QPNVHn	Wb	GN						あいろん	names.11163
 あいん	아인	N110			GN						あいん	names.11164
 あいん・あすとらいあ	아인 아스트리아	N110			GN						あいん・あすとらいあ	names.11165
-あいテレビ	아이 TV	N110			GN						あいてれび	names.11166
+あいテレビ	아이TV	N110			GN						あいてれび	names.11166
 あいミス	아이미스	N130	QWK		GN						あいみす	names.11167
 あい君	아이 군	N130	QPNVHn		GN						あいくん	names.11168
 あい子	아이코	N130	QPNVHn	Wb	GN							names.11169
@@ -15925,7 +15925,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 くが むしき	쿠가 무시키	N130	QPNVHn		GN						くが むしき	names.15942
 くがことみ	쿠가 코토미	N130	QPNVHn		GN						くがことみ	names.15943
 くぎゅ	쿠규	N130	QPNVHn	Wb	GN						くぎゅ	names.15944
-くぎゅロイド	쿠기ュ로이드	N130	QPNVHn	Wb	GN						くぎゅろいど	names.15945
+くぎゅロイド	쿠규로이드	N130	QPNVHn	Wb	GN						くぎゅろいど	names.15945
 くくさま	쿠쿠사마	N110			GN						くくさま	names.15946
 くくり	쿠쿠리	N130	QPNVHn	Wb	GN						くくり	names.15947
 くぐら	쿠구라	N130	QPNVHn	Wb	GN						くぐら	names.15948
@@ -16076,7 +16076,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 くまみこ	쿠마미코	N130	QWK		GN						くまみこ	names.16093
 くまみね	쿠마미네	N130	QPNVHn	Wb	GN						くまみね	names.16094
 くまもっこす	쿠마못코스	N130	QPNVHn	Wb	GN						くまもっこす	names.16095
-くまもと県民テレビ	구마모토현민 TV	N110			GN							names.16096
+くまもと県民テレビ	구마모토현민TV	N110			GN							names.16096
 くまもん	쿠마몬	N130	QCTVPl		GN						くまもん	names.16097
 くまゆる	쿠마유루	N130	QPNVHn	Wb	GN						くまゆる	names.16098
 くまりんこ	쿠마링코	N130	QPNVHn	Wb	GN						くまりんこ	names.16099
@@ -17318,8 +17318,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 さくらわかな	사쿠라 와카나	N130	QPNVHn		GN							names.17335
 さくらんぼの実る頃	체리가 익어갈 무렵	N130	QWK		GN							names.17336
 さくらんぼキッス	체리 키스	N130	QWK		GN						さくらんぼきっす	names.17337
-さくらんぼテレビ	사쿠란보 TV	N110			GN						さくらんぼてれび	names.17338
-さくらんぼテレビジョン	사쿠란보 TV	N130	VGt		GN							names.17339
+さくらんぼテレビ	사쿠란보TV	N110			GN						さくらんぼてれび	names.17338
+さくらんぼテレビジョン	사쿠란보TV	N130	VGt		GN							names.17339
 さくらカード	사쿠라 카드	N130	QPNVHn		GN						さくらかーど	names.17340
 さくらシュトラッセ	사쿠라 슈트랏세	N110			GN						さくらしゅとらっせ	names.17341
 さくらシンデレラ	사쿠라 신데렐라	N110			GN						さくらしんでれら	names.17342
@@ -20587,7 +20587,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 とちおとめ	토치오토메	N110			GN						とちおとめ	names.20604
 とちぎ640	도치기 640	N130	QWK		GN							names.20605
 とちぎん	도치긴	N110			GN						とちぎん	names.20606
-とちぎテレビ	도치기 TV	N110			GN						とちぎてれび	names.20607
+とちぎテレビ	도치기TV	N110			GN						とちぎてれび	names.20607
 とちのきファミリーランド	도치노키 패밀리 랜드	N110			GN						とちのきファミリーランド	names.20608
 とっくり	도쿠리	N110			GN						とっくり	names.20609
 とっちん	토친	N130	QPNVHn	Wb	GN							names.20610
@@ -27519,7 +27519,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 よまわりさん	요마와리 씨	N110			GN						よまわりさん	names.27537
 よみ	요미	N130	QPNVHn	Wb	GN						よみ	names.27538
 よみうり	요미우리	N110			GN						よみうり	names.27539
-よみうりテレビ	요미우리 TV 방송	N110			GN						よみうりてれび	names.27540
+よみうりテレビ	요미우리TV	N110			GN						よみうりてれび	names.27540
 よみうりランド	요미우리랜드	N130	VGt		GN						よみうりランド	names.27541
 よみがえり ～レザレクション～	레저렉션	N130	QWK		GN							names.27542
 よみがえる声	되살아나는 목소리	N130	QWK		GN							names.27543
@@ -29079,7 +29079,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アイス・ラ・フォックス	아이스 라 폭스	N130	QPNVHn		GN							names.29097
 アイス・ロック・ジャイロ	아이스 록 자이로	N130	QPNVHn		GN						あいす・ろっく・じゃいろ	names.29098
 アイス・ロード	아이스 로드	N130	QWK		GN							names.29099
-アイス・ロード:リベンジ	아이스_로드:_벤전스	N130	QWK		GN							names.29100
+アイス・ロード:リベンジ	아이스 로드: 벤전스	N130	QWK		GN							names.29100
 アイス化	아이스화	N110			GN							names.29101
 アイス組	아이스 조	N110			GN						あいすぐみ	names.29102
 アイズ	아이즈	N110			GN						あいず	names.29103
@@ -36714,7 +36714,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アナザービルド	어나더 빌드	N110			GN						アナザービルド	names.36732
 アナザーファイズ	어나더 파이즈	N110			GN						アナザーファイズ	names.36733
 アナザーフォルム	어나더폼	N110			GN						あなざーふぉるむ	names.36734
-アナザーフォーゼ	아나ザ 포제	N110			GN						あなざーふぉーぜ	names.36735
+アナザーフォーゼ	어나더 포제	N110			GN						あなざーふぉーぜ	names.36735
 アナザーフォーゼ	어나더 포제	N110			GN						アナザーフォーゼ	names.36736
 アナザーブレイド	아나자 블레이드	N110			GN						あなざーぶれいど	names.36737
 アナザープラネット	어나더 어스	N130	QWK		GN							names.36738
@@ -37544,7 +37544,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アニメ店長	아니메점장×동방 프로젝트	N110			GN							names.37563
 アニメ提督	애니메이션 제독	N130	QPNVHn		GN							names.37564
 アニメ映画	애니메이션 영화	N130	QWK		GN							names.37565
-アニメ最萌トーナメント	애니메이션 최萌 토너먼트	N110			GN							names.37566
+アニメ最萌トーナメント	애니메이션 사이모에 토너먼트	N110			GN							names.37566
 アニメ業界	애니메이션 업계	N110			GN							names.37567
 アニメ版	애니메이션판	N110			GN							names.37568
 アニメ版デザイン	애니메이션판 디자인	N130	QPNVHn		GN							names.37569
@@ -40123,7 +40123,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アマンダ・ブレイク	어맨다 블레이크	N130	QPNVHn		GN							names.40142
 アマンダ・プラマー	어맨다 플러머	N130	QPNVHn		GN							names.40143
 アマンダ・ヘイル	어맨다 헤일	N130	QPNVHn		GN							names.40144
-アマンダ・ベネット: 死に向かう勇敢な物語	아만다 베넷 (Amanda Bennett): 우리는 죽음에 대해 영웅적인 이야기가 필요합니다.	N130	QWK		GN							names.40145
+アマンダ・ベネット: 死に向かう勇敢な物語	아만다 베넷: 우리는 죽음에 대해 영웅적인 이야기가 필요합니다.	N130	QWK		GN							names.40145
 アマンダ・ペイズ	아만다 페이즈	N130	QPNVHn		GN							names.40146
 アマンダ・ホッキング	어맨다 호킹	N130	QPNVHn		GN							names.40147
 アマンダ・ホップマンス	아만다 호프만스	N130	QPNVHn		GN							names.40148
@@ -41150,7 +41150,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アメリカ国防脅威削減局	국방위기감축국	N130	VGt		GN							names.41169
 アメリカ国防長官府	미국 국방부 장관실	N130	VGt		GN							names.41170
 アメリカ国際貿易委員会	미국 국제무역위원회	N130	VGt		GN							names.41171
-アメリカ地中海	미국 지중해	N130	QCTVPl		GN							names.41172
+アメリカ地中海	아메리카 지중해	N130	QCTVPl		GN							names.41172
 アメリカ地名委員会	미국 지명위원회	N130	VGt		GN							names.41173
 アメリカ地理学会	미국 지리학회	N130	VGt		GN							names.41174
 アメリカ地理学協会	미국 지리학 협회	N130	VGt		GN							names.41175
@@ -41935,7 +41935,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アラバスタ王国	알라바스타 왕국	N130	QPNVHn		GN							names.41954
 アラバスタ王国内戦	알라바스타 왕국 내전	N130	QWK		GN							names.41955
 アラバト・サビエフ	아라바트 자베예프	N130	QPNVHn		GN							names.41956
-アラバト砂州	아라바트 곶	N130	QCTVPl		GN							names.41957
+アラバト砂州	아라바트 사주	N130	QCTVPl		GN							names.41957
 アラバマ	앨라배마	N130	QPNVHn	Wb	GN						あらばま	names.41958
 アラバマA&M大学	앨라배마 A&M 대학교	N130	VGt		GN							names.41959
 アラバマ・クリムゾンタイド	앨라배마 크림슨 타이드	N130	VGt		GN							names.41960
@@ -44206,7 +44206,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アルガス騎士団	알가스 기사단	N110			GN						あるがすきしだん	names.44225
 アルガニル	아르가닐	N130	QCTVPl		GN							names.44226
 アルガリア	알가리아	N130	QPNVHn	Wb	GN						あるがりあ	names.44227
-アルガルド・ボナ・パレッティア	알가르드 보나 팔레티아	N130	QPNVHn		GN						あるがるど・ぼな・ぱれってぃあ	names.44228
+アルガルド・ボナ・パレッティア	아르가르드 보나 팔레티아	N130	QPNVHn		GN						あるがるど・ぼな・ぱれってぃあ	names.44228
 アルガルヴェ地方	알가르브 지방	N130	QCTVPl		GN							names.44229
 アルガロボ	알가로보	N130	QCTVPl		GN							names.44230
 アルガンスエラ	아르간수엘라	N130	QCTVPl		GN							names.44231
@@ -44358,7 +44358,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アルケー	아르케	N130	QPNVHn	Wb	GN						あるけー	names.44377
 アルケーエンジェモン	아르케엔젤몬	N110			GN						あるけーえんじぇもん	names.44378
 アルケーガンダム	아르케 건담	N110			GN						あるけーがんだむ	names.44379
-アルケーガンダムドライ	알케가운담 드라이	N110			GN						あるけーがんだむどらい	names.44380
+アルケーガンダムドライ	아르케 건담 드라이	N110			GN						あるけーがんだむどらい	names.44380
 アルケーガンダムドライ	아르케 건담 드라이	N110			GN						アルケーガンダムドライ	names.44381
 アルケー・アルマ	아르케 아르마	N130	QPNVHn		GN						あるけー・あるま	names.44382
 アルゲアス朝	아르게아스 왕조	N130	VGt		GN							names.44383
@@ -44759,7 +44759,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アルゼンチン海	아르헨티나해	N130	QCTVPl		GN							names.44778
 アルゼンチン海軍	아르헨티나 해군	N130	VGt		GN							names.44779
 アルゼンチン空軍	아르헨티나 공군	N130	VGt		GN							names.44780
-アルゼンチン系カナダ人	라틴아메리카계 캐나다인	N130	VGt		GN							names.44781
+アルゼンチン系カナダ人	아르헨티나계 캐나다인	N130	VGt		GN							names.44781
 アルゼンチン航空	아르헨티나 항공	N130	VGt		GN							names.44782
 アルゼンチン軍	아르헨티나군	N130	VGt		GN							names.44783
 アルゼンチン連合	아르헨티나 연합국	N130	QCTVPl		GN							names.44784
@@ -46406,7 +46406,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アルフレッド・バルネコヴ	알프레드 바르네코우	N130	QPNVHn		GN							names.46425
 アルフレッド・バーク	앨프리드 버크	N130	QPNVHn		GN							names.46426
 アルフレッド・バーンバウム	앨프리드 번바움	N130	QPNVHn		GN							names.46427
-アルフレッド・パッカー事件	앨프리드 패커	N130	QPNVHn		GN							names.46428
+アルフレッド・パッカー事件	앨프리드 패커 사건	N130	QPNVHn		GN							names.46428
 アルフレッド・ヒッチコック	앨프리드 히치콕	N130	QPNVHn		GN						アルフレッド・ヒッチコック	names.46429
 アルフレッド・ビネー	알프레드 비네	N130	QPNVHn		GN							names.46430
 アルフレッド・ファウラー	앨프리드 파울러	N130	QPNVHn		GN							names.46431
@@ -47539,7 +47539,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アル・クウェート・スポーツ・クラブ・スタジアム	알쿠웨이트 SC 경기장	N130	QCTVPl		GN							names.47558
 アル・クウワ・アル・ジャウウィーヤ	알쿠와 알자위야	N130	VGt		GN							names.47559
 アル・クライヴァー	알 클리버	N130	QPNVHn		GN							names.47560
-アル・クリスティ	크리스티 형제	N130	VGt		GN							names.47561
+アル・クリスティ	앨 크리스티	N130	VGt		GN							names.47561
 アル・クリスティー	앨 크리스티	N130	QPNVHn		GN							names.47562
 アル・クルナ	알쿼	N130	QCTVPl		GN							names.47563
 アル・クーパー	앨 쿠퍼	N130	QPNVHn		GN							names.47564
@@ -49124,7 +49124,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アレックス・キャゼルヌ	알렉스 카젤느	N130	QPNVHn		GN						アレックス・キャゼルヌ	names.49143
 アレックス・キングストン	앨릭스 킹스턴	N130	QPNVHn		GN							names.49144
 アレックス・ギブニー	알렉스 기브니	N130	QPNVHn		GN							names.49145
-アレックス・ギルバート	알렉스 길버트는	N130	QPNVHn		GN							names.49146
+アレックス・ギルバート	알렉스 길버트	N130	QPNVHn		GN							names.49146
 アレックス・クラウディオ	알렉스 클라우디오	N130	QPNVHn		GN							names.49147
 アレックス・クラール	알렉스 크랄	N130	QPNVHn		GN							names.49148
 アレックス・グラマン	앨릭스 그레이먼	N130	QPNVHn		GN							names.49149
@@ -49959,7 +49959,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アローラペルシアン	알로라 페르시온	N110			GN						あろーらぺるしあん	names.49978
 アローラマン	알로라맨	N110			GN						あろーらまん	names.49979
 アローラマーク	알로라 마크	N110			GN						あろーらまーく	names.49980
-アローラライチュウ	라이츄	N110			GN						アローラライチュウ	names.49981
+アローラライチュウ	알로라 라이츄	N110			GN						アローラライチュウ	names.49981
 アローララッタ	알로라 래트	N130	QPNVHn		GN						あろーららった	names.49982
 アローラリーグ	알로라 리그	N110			GN						あろーらりーぐ	names.49983
 アローラロコン	알로라 식스테일	N110			GN						あろーらろこん	names.49984
@@ -50069,7 +50069,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アンカラ城	앙카라 성	N130	QCTVPl		GN							names.50088
 アンカラ大学	앙카라 대학교	N130	VGt		GN							names.50089
 アンカラ県	앙카라주	N130	QCTVPl		GN							names.50090
-アンカラ駅	앙카라 중앙역	N130	QCTVPl		GN							names.50091
+アンカラ駅	앙카라역	N130	QCTVPl		GN							names.50091
 アンカルクロナ	안카르크로나	N130	QPNVHn	Wb	GN							names.50092
 アンカルジア	안칼지아	N130	QPNVHn	Wb	GN						あんかるじあ	names.50093
 アンカレッジ	앵커리지	N130	QPNVHn	Wb	GN						あんかれっじ	names.50094
@@ -50272,7 +50272,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アングルドデッキ	앵글드 데크	N110			GN						あんぐるどでっき	names.50291
 アングルフォール	앙젤포르	N130	QCTVPl		GN							names.50292
 アングルボザ	앙그르보다	N130	QPNVHn	Wb	GN						あんぐるぼざ	names.50293
-アングル・レイク駅	앵글 레이크	N130	QCTVPl		GN							names.50294
+アングル・レイク駅	앵글 레이크역	N130	QCTVPl		GN							names.50294
 アングレイ	앵그레이	N110			GN						あんぐれい	names.50295
 アングレット	앙글레트	N130	QCTVPl		GN							names.50296
 アングレン	앙그렌	N130	QCTVPl		GN							names.50297
@@ -52047,14 +52047,14 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アントニア・サン・フアン	안토니아 산후안	N130	QPNVHn		GN							names.52066
 アントニア・ジェントリー	앤터니아 젠트리	N130	QPNVHn		GN							names.52067
 アントニア・セヘルス	안토니아 제거스	N130	QPNVHn		GN							names.52068
-アントニア・トゥルッポ	안토니아 트렁크	N130	QPNVHn		GN							names.52069
+アントニア・トゥルッポ	안토니아 트루포	N130	QPNVHn		GN							names.52069
 アントニア・トーマス	앤토니아 토머스	N130	QPNVHn		GN							names.52070
 アントニア・ド・リュクサンブール	룩셈부르크 공녀 안토니아	N130	QPNVHn		GN							names.52071
 アントニア・バード	안토니아 버드	N130	QPNVHn		GN							names.52072
 アントニア・フレーザー	앤토니아 프레이저	N130	QPNVHn		GN							names.52073
 アントニア・マリア・フォン・ポルトゥガル	포르투갈 공주 안토니아	N130	QPNVHn		GN							names.52074
 アントニア・リスコヴァ	안토니아 리슈코바	N130	QPNVHn		GN							names.52075
-アントニア・レイ	안토리아 레이	N130	QPNVHn		GN							names.52076
+アントニア・レイ	안토니아 레이	N130	QPNVHn		GN							names.52076
 アントニイ・ギルバート	앤서니 길버트	N130	QPNVHn		GN							names.52077
 アントニウス・アスビョルンソン・ネドレ・アイセ	안토뉴스 아스뵈른손 네드레 오세	N130	QPNVHn		GN							names.52078
 アントニウス・グンナルセン・フスヴェグ	안토뉴스 군나르센 후스벡	N130	QPNVHn		GN							names.52079
@@ -52392,7 +52392,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 アントネッラ・パルミサノ	안토넬라 팔미사노	N130	QPNVHn		GN							names.52411
 アントネッロ・クックレドゥ	안토넬로 쿠쿠레두	N130	QPNVHn		GN							names.52412
 アントネッロ・ファサーリ	안토넬로 파사리	N130	QPNVHn		GN							names.52413
-アントネッロ・マナコルダ	안토넬라 마나코르다	N130	QPNVHn		GN							names.52414
+アントネッロ・マナコルダ	안토넬로 마나코르다	N130	QPNVHn		GN							names.52414
 アントネッロ・モロニ	안토넬로 모로니	N130	QPNVHn		GN							names.52415
 アントネッロ・ヴェンディッティ	안토넬로 벤디티	N130	QPNVHn		GN							names.52416
 アントネラ・アティリ	안토넬라 아틸리	N130	QPNVHn		GN							names.52417
@@ -59511,8 +59511,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 イオアンネス・マクレムボリテス	이오아네스 마크렘보리테스	N130	QPNVHn		GN							names.59530
 イオカード	이오 카드	N110			GN						いおかーど	names.59531
 イオク・オジャン	이오크 오잔	N130	QPNVHn		GN						いおく おじゃん	names.59532
-イオク・クジャン	이오크 쿠자ン	N130	QPNVHn		GN						いおく・くじゃん	names.59533
-イオク・クジャン	이오쿠 쿠잔	N130	QPNVHn		GN						イオク・クジャン	names.59534
+イオク・クジャン	이오크 쿠잔	N130	QPNVHn		GN						いおく・くじゃん	names.59533
+イオク・クジャン	이오크 쿠잔	N130	QPNVHn		GN						イオク・クジャン	names.59534
 イオグランデ	이오그란데	N110			GN						いおぐらんで	names.59535
 イオゴン	이오곤	N110			GN						いおごん	names.59536
 イオシス	이오시스	N130	VGt		GN							names.59537
@@ -69692,7 +69692,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ウィリアム・クレイ・フォード・ジュニア	빌 포드	N130	QPNVHn		GN							names.69711
 ウィリアム・クロウ	윌리엄 E. 크로	N130	QPNVHn		GN							names.69712
 ウィリアム・クロウフォード	윌리엄 H. 크로퍼드	N130	QPNVHn		GN							names.69713
-ウィリアム・クロスビー・ドーソン	윌리어 C. 도슨	N130	QPNVHn		GN							names.69714
+ウィリアム・クロスビー・ドーソン	윌리엄 C. 도슨	N130	QPNVHn		GN							names.69714
 ウィリアム・クローシア	윌리엄 H. 클로디어	N130	QPNVHn		GN							names.69715
 ウィリアム・クヴィスト	빌리암 크비스트	N130	QPNVHn		GN							names.69716
 ウィリアム・クーパー	윌리엄 쿠퍼	N130	QPNVHn		GN							names.69717
@@ -71832,7 +71832,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ウェバー	웨버	N130	QPNVHn	Wb	GN							names.71851
 ウェパル	베파르	N130	QPNVHn	Wb	GN						うぇぱる	names.71852
 ウェヒヒヒ	웨히히히	N110			GN						うぇひひひ	names.71853
-ウェビギャザ	웨비기ャ자	N130	QPNVHn	Wb	GN						うぇびぎゃざ	names.71854
+ウェビギャザ	웨비갸자	N130	QPNVHn	Wb	GN						うぇびぎゃざ	names.71854
 ウェビギャザ	웨비갸자	N130	QPNVHn	Wb	GN						ウェビギャザ	names.71855
 ウェビー	웨비	N130	QPNVHn	Wb	GN							names.71856
 ウェブ	웹	N130	QPNVHn	Wb	GN							names.71857
@@ -73648,7 +73648,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ウジダ	우지다	N130	QCTVPl		GN							names.73667
 ウジツェ	우지체	N130	QCTVPl		GN							names.73668
 ウジツェ共和国	우지체 공화국	N130	QCTVPl		GN							names.73669
-ウジテレビ	우지 TV	N110			GN						うじてれび	names.73670
+ウジテレビ	우지TV	N110			GN						うじてれび	names.73670
 ウジャ	우쟈	N130	QPNVHn	Wb	GN						うじゃ	names.73671
 ウジャエ環礁	우자에 환초	N130	QCTVPl		GN							names.73672
 ウジャダニ	우자다니	N110			GN						うじゃだに	names.73673
@@ -77065,7 +77065,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エイダン・ホワイト	에이디 화이트	N130	QPNVHn		GN							names.77084
 エイダン・マカードル	에이든 매카들	N130	QPNVHn		GN							names.77085
 エイダン・マクギーディ	아이던 맥기디	N130	QPNVHn		GN							names.77086
-エイダ・ウォン	에이다 윙	N130	QPNVHn		GN						エイダ・ウォン	names.77087
+エイダ・ウォン	에이다 웡	N130	QPNVHn		GN						エイダ・ウォン	names.77087
 エイダ・ウォン	에이다 웡	N130	QPNVHn		GN						エイダ・ウォン	names.77088
 エイダ・クロムウェル	에이다 크롬웰	N130	QPNVHn		GN						えいだ・くろむうぇる	names.77089
 エイダ・コンディースク	아다 콘데스쿠	N130	QPNVHn		GN							names.77090
@@ -77652,7 +77652,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エイリアンベッカム	에일리언 베컴	N130	QPNVHn		GN						えいりあんべっかむ	names.77671
 エイリアンモンガー	에일리언 몽거	N110			GN						えいりあんもんがー	names.77672
 エイリアンレンジャー	에일리언 레인저	N130	QPNVHn		GN						えいりあんれんじゃー	names.77673
-エイリアン・キング	에イ리언 킹	N130	QPNVHn		GN						えいりあん きんぐ	names.77674
+エイリアン・キング	에이리언 킹	N130	QPNVHn		GN						えいりあん きんぐ	names.77674
 エイリアン・コヴェナント	에이리언: 커버넌트	N110			GN						エイリアン・コヴェナント	names.77675
 エイリアン・ネイション	에이리언 네이션	N130	QWK		GN							names.77676
 エイリアン・ビキニの侵略	에일리언 비키니	N130	QWK		GN							names.77677
@@ -81366,7 +81366,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エドワード・ホッグ	에드워드 호그	N130	QPNVHn		GN							names.81385
 エドワード・ホッパー	에드워드 호퍼	N130	QPNVHn		GN							names.81386
 エドワード・ホルクロフト	에드워드 홀크로프트	N130	QPNVHn		GN							names.81387
-エドワード・ホワイト	Ed White에드 화이트	N130	QPNVHn		GN							names.81388
+エドワード・ホワイト	에드워드 화이트	N130	QPNVHn		GN							names.81388
 エドワード・ホワイト・クラーク	에드워드 화이트 클라크	N130	QPNVHn		GN							names.81389
 エドワード・ホーク	에드워드 호크	N130	QPNVHn		GN							names.81390
 エドワード・ホール	에드워드 홀	N130	QPNVHn		GN							names.81391
@@ -81476,7 +81476,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エド・ガーランド	에드 갈런드	N130	QPNVHn		GN							names.81495
 エド・キャットムル	에드윈 캣멀	N130	QPNVHn		GN							names.81496
 エド・ギニー	에드 가이니	N130	QPNVHn		GN							names.81497
-エド・ギャバガン: 結び目と手術の物語	에드 개바건(Ed Gavagan) : 매듭과 외과의에 대한 이야기	N130	QWK		GN							names.81498
+エド・ギャバガン: 結び目と手術の物語	에드 개바건: 매듭과 외과의에 대한 이야기	N130	QWK		GN							names.81498
 エド・ギルバート	에드 길버트	N130	QPNVHn		GN							names.81499
 エド・クランシー	에드 클랜시	N130	QPNVHn		GN							names.81500
 エド・クレインプール	에드 크레인풀	N130	QPNVHn		GN							names.81501
@@ -85307,7 +85307,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エリ・ダニーデン	에리 더니든	N130	QPNVHn		GN						えり・だにーでん	names.85326
 エリ・ニイロンティテル・バルク	엘리 니이론티테르 바르크	N130	QPNVHn		GN							names.85327
 エリ・ビア	엘리 비어	N130	QPNVHn		GN							names.85328
-エリ・ビア: 最速の救急車はバイク型	엘리 비어(Eli Beer): 가장 빠른 엠뷸런스 - 오토바이	N130	QWK		GN							names.85329
+エリ・ビア: 最速の救急車はバイク型	엘리 비어: 가장 빠른 엠뷸런스 - 오토바이	N130	QWK		GN							names.85329
 エリ・ビアム	엘리 비엄	N130	QPNVHn		GN							names.85330
 エリ・ブロード	엘리 브로드	N130	QPNVHn		GN							names.85331
 エリ・ボー	엘리 보	N130	QPNVHn		GN							names.85332
@@ -93574,7 +93574,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 オラクルエンジン	오라클 엔진	N130	QWK		GN						おらくるえんじん	names.93594
 オラクルシンクタンク	오라클 씽크탱크	N110			GN						おらくるしんくたんく	names.93595
 オラクルスピリット	오라클 스피릿	N110			GN						おらくるすぴりっと	names.93596
-オラクルマスター	오라클_자격증_프로그램	N130	QWK		GN							names.93597
+オラクルマスター	오라클 마스터	N130	QWK		GN							names.93597
 オラクル・アリーナ	오라클 아레나	N130	QCTVPl		GN							names.93598
 オラクル・セレス	오라클 세레스	N110			GN						おらくる・せれす	names.93599
 オラクル・パーク	오라클 파크	N110			GN						おらくる・ぱーく	names.93600
@@ -100968,7 +100968,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カタバミ	카타바미	N130	QPNVHn	Wb	GN						かたばみ	names.100988
 カタパルト	캐터펄트	N130	QPNVHn	Wb	GN						かたぱると	names.100989
 カタパルト・タートル	카타펄트 터틀	N130	QPNVHn		GN						かたぱると・たーとる	names.100990
-カタビロアメンボ	카타비로아메ン보	N110			GN						かたびろあめんぼ	names.100991
+カタビロアメンボ	카타비로아멘보	N110			GN						かたびろあめんぼ	names.100991
 カタフラクト	캐터프랙터	N110			GN						かたふらくと	names.100992
 カタベイ	은카타베이	N130	QCTVPl		GN							names.100993
 カタベイ県	은카타베이현	N130	QCTVPl		GN							names.100994
@@ -103807,7 +103807,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カメレオンゲノミクス	카멜레온 게노믹스	N110			GN						かめれおんげのみくす	names.103827
 カメレオンゲノム	카멜레온 게놈	N110			GN						かめれおんげのむ	names.103828
 カメレオンジェイル	카멜레온 제일	N130	QWK		GN						かめれおんじぇいる	names.103829
-カメレオンジュネ	카멜레온 지ュ네	N130	QPNVHn		GN						かめれおんじゅね	names.103830
+カメレオンジュネ	카멜레온 쥬네	N130	QPNVHn		GN						かめれおんじゅね	names.103830
 カメレオンツイスト	카멜레온 트위스트	N130	QWK		GN						かめれおんついすと	names.103831
 カメレオントーク★	카멜레온 토크★	N130	QWK		GN							names.103832
 カメレオンナ	카멜레온나	N110			GN						かめれおんな	names.103833
@@ -103995,7 +103995,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カラカルパクスタン共和国	카라칼파크스탄 공화국	N130	QCTVPl		GN							names.104015
 カラカルパク自治州	카라칼파크 자치주	N130	QCTVPl		GN							names.104016
 カラカルパク語版ウィキペディア	카라칼파크어 위키백과	N130	QWK		GN							names.104017
-カラカル・ドーパント	카라칼 도퍼트	N110			GN						からかる・どーぱんと	names.104018
+カラカル・ドーパント	카라칼 도펀트	N110			GN						からかる・どーぱんと	names.104018
 カラカル・ドーパント	카라칼 도펀트	N110			GN						カラカル・ドーパント	names.104019
 カラカル大隊	카라칼 대대	N130	VGt		GN							names.104020
 カラガ	카라가	N130	QCTVPl		GN							names.104021
@@ -104485,7 +104485,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カリキリ	짜랑랑	N130	QPNVHn	Wb	GN						かりきり	names.104505
 カリギュラ	칼리굴라	N110			GN						かりぎゅら	names.104506
 カリギュラ 2	카리기라 2	N130	QWK		GN							names.104507
-カリギュラオーバードーズ	카리기ュ라 오버도즈	N130	QWK		GN						かりぎゅらおーばーどーず	names.104508
+カリギュラオーバードーズ	칼리굴라 오버도즈	N130	QWK		GN						かりぎゅらおーばーどーず	names.104508
 カリクス川	칼릭스강	N130	QCTVPl		GN							names.104509
 カリクム・オリハルコン	칼리쿰 오리하르콘	N130	QPNVHn		GN						かりくむ・おりはるこん	names.104510
 カリクラテス	칼리크라테스	N130	QPNVHn	Wb	GN							names.104511
@@ -106924,7 +106924,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カンザス・シティ・サザン・ド・メキシコ	캔자스시티 서던 델 멕시코	N130	VGt		GN							names.106944
 カンザス・シティ・サザン鉄道	캔자스시티 서던 철도	N130	VGt		GN							names.106945
 カンザス・シティ・ジャズ	캔자스시티 재즈	N130	VGt		GN							names.106946
-カンザス・シティ都市圏	캔자스시티	N130	QCTVPl		GN							names.106947
+カンザス・シティ都市圏	캔자스시티 도시권	N130	QCTVPl		GN							names.106947
 カンザス・ジェイホークス	캔자스 제이호크스	N130	VGt		GN							names.106948
 カンザス大学	캔자스 대학교	N130	VGt		GN							names.106949
 カンザス川	캔자스강	N130	QCTVPl		GN							names.106950
@@ -107041,7 +107041,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カンダハール州	칸다하르주	N130	QCTVPl		GN							names.107061
 カンダバ	칸다바	N130	QCTVPl		GN							names.107062
 カンダブ島	칸다부섬	N130	QCTVPl		GN							names.107063
-カンダブ水路	칸다부주	N130	VGt		GN							names.107064
+カンダブ水路	칸다부 수로	N130	VGt		GN							names.107064
 カンダラ	칸달라	N130	QCTVPl		GN							names.107065
 カンダラクシャ	칸달락샤	N130	QCTVPl		GN							names.107066
 カンダリ空港	강다리비행장	N130	QCTVPl		GN							names.107067
@@ -108885,7 +108885,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カール・アレン	칼 앨런	N130	QPNVHn		GN							names.108905
 カール・アンダーソン	칼 앤더슨	N130	QPNVHn		GN							names.108906
 カール・アンデション	칼 안데르손	N130	QPNVHn		GN							names.108907
-カール・アンデションの父	카르르 안데르손의 아버지	N130	QPNVHn		GN							names.108908
+カール・アンデションの父	칼 안데르손의 아버지	N130	QPNVHn		GN							names.108908
 カール・アンデション・エクスネヴァード	칼 안데르손 외크스네바드	N130	QPNVHn		GN							names.108909
 カール・アンデション・プリッス	칼 안데르손 프리스	N130	QPNVHn		GN							names.108910
 カール・アントン・アンデション	칼 안톤 안데르손	N130	QPNVHn		GN							names.108911
@@ -109594,7 +109594,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 カーン	칼른	N130	QPNVHn	Wb	GN						かーん	names.109614
 カーン	칸	N130	QPNVHn	Wb	GN						カーン	names.109615
 カーンの逆襲	스타 트렉 2: 칸의 분노	N110			GN							names.109616
-カーンケール県	간케르 디스트릭	N130	QCTVPl		GN							names.109617
+カーンケール県	칸케르현	N130	QCTVPl		GN							names.109617
 カーンジョルジョ	칸 조르조	N110			GN						かーんじょるじょ	names.109618
 カーンズ	칸즈	N130	QPNVHn	Wb	GN						かーんず	names.109619
 カーンズ郡	칸스군	N130	QCTVPl		GN							names.109620
@@ -110591,7 +110591,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガセム・レザエイ	가셈 레자에이	N130	QPNVHn		GN							names.110611
 ガセ・トルキルドセン・ベルントソン	가세 토르킬드센 베른트손	N130	QPNVHn		GN							names.110612
 ガゼカ	가제카	N110			GN						がぜか	names.110613
-ガゼッタ・デロ・スポルト	라 가제타 델로 소포르트	N130	QWK		GN							names.110614
+ガゼッタ・デロ・スポルト	라 가제타 델로 스포르트	N130	QWK		GN							names.110614
 ガゼット	가제트	N130	VGt		GN						がぜっと	names.110615
 ガゼット・デ・ボザール	가제트 데 보자르	N130	QWK		GN							names.110616
 ガゼット・ド・フランス	라 가제트	N130	QWK		GN							names.110617
@@ -111774,11 +111774,11 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガラル	가라르지방	N110			GN						ガラル	names.111794
 ガラルのすがた	가라르의 모습	N110			GN						がらるのすがた	names.111795
 ガラルカモネギ	가라르파오리	N110			GN						ガラルカモネギ	names.111796
-ガラルギャロップ	가라르 기로프	N110			GN						がらるぎゃろっぷ	names.111797
+ガラルギャロップ	가라르 날쌩마	N110			GN						がらるぎゃろっぷ	names.111797
 ガラルサンダー	가라르 썬더	N110			GN						がらるさんだー	names.111798
 ガラルジグザグマ	가라르 지그제구마	N110			GN						がらるじぐざぐま	names.111799
 ガラルスタートーナメント	가라르 스타 토너먼트	N110			GN						がらるすたーとーなめんと	names.111800
-ガラルダルマッカ	가라르 다루마카	N110			GN						がらるだるまっか	names.111801
+ガラルダルマッカ	가라르 달막화	N110			GN						がらるだるまっか	names.111801
 ガラルデスマス	가라르 데스마스	N110			GN						がらるですます	names.111802
 ガラルドー	가라르도	N130	QPNVHn	Wb	GN						がらるどー	names.111803
 ガラルド州	가라르드주	N130	QCTVPl		GN							names.111804
@@ -111788,7 +111788,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガラルフリーザー	가라르 프리저	N110			GN						ガラルフリーザー	names.111808
 ガラルポニータ	가라르 포니타	N110			GN						がらるぽにーた	names.111809
 ガラルマッギョ	가라르 메더	N110			GN						ガラルマッギョ	names.111810
-ガラルマッスグマ	가라르 직진곰	N110			GN						がらるまっすぐま	names.111811
+ガラルマッスグマ	가라르 직구리	N110			GN						がらるまっすぐま	names.111811
 ガラルヤドキング	가라르야도킹	N130	QPNVHn	Wb	GN						がらるやどきんぐ	names.111812
 ガラルヤドラン	가라르 야도란	N110			GN						がらるやどらん	names.111813
 ガラルヤドン	가라르 야돈	N110			GN						がらるやどん	names.111814
@@ -112180,7 +112180,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガルフォースエターナルストーリー	갤포스 이터널 스토리	N130	QWK		GN						がるふぉーすえたーなるすとーりー	names.112200
 ガルフォード	가르포드	N130	QPNVHn	Wb	GN						がるふぉーど	names.112201
 ガルフコースト	걸프코스트	N130	QCTVPl		GN							names.112202
-ガルフストリーム・エアロスペース	걸프스트림 항공우	N130	VGt		GN							names.112203
+ガルフストリーム・エアロスペース	걸프스트림 항공우주	N130	VGt		GN							names.112203
 ガルフストリーム笹本	걸프스트림 사사모토	N130	QPNVHn		GN						がるふすとりーむささもと	names.112204
 ガルフニュース	걸프 뉴스	N130	QWK		GN							names.112205
 ガルフピッゲン	갈회피겐산	N130	QCTVPl		GN							names.112206
@@ -112492,7 +112492,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガンシューティング	건 슈팅	N110			GN						ガンシューティング	names.112512
 ガンシン ゼ ラン	관심즉란	N130	QPNVHn	Wb	GN							names.112513
 ガンジ	간지	N130	QPNVHn	Wb	GN						がんじ	names.112514
-ガンジスデルタ	갠지스 삼각	N130	QCTVPl		GN							names.112515
+ガンジスデルタ	갠지스 삼각주	N130	QCTVPl		GN							names.112515
 ガンジス川	갠지스강	N130	QCTVPl		GN							names.112516
 ガンジス河でバタフライ	갠지스강에서 버터플라이	N130	QWK		GN							names.112517
 ガンジャ	간자	N110			GN						がんじゃ	names.112518
@@ -112706,7 +112706,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガンダムガミジン	건담 가미진	N110			GN						がんだむがみじん	names.112726
 ガンダムガルヴァリア	건담 갈바리아	N130	QPNVHn		GN						がんだむがるゔぁりあ	names.112727
 ガンダムキマリス	건담 키마리스	N110			GN						がんだむきまりす	names.112728
-ガンダムキュリオス	건담 키ュ리오스	N110			GN						がんだむきゅりおす	names.112729
+ガンダムキュリオス	건담 큐리오스	N110			GN						がんだむきゅりおす	names.112729
 ガンダムキュリオス	건담 큐리오스	N110			GN						ガンダムキュリオス	names.112730
 ガンダムキラー	건담 킬러	N110			GN						がんだむきらー	names.112731
 ガンダムクライシス	건담 크라이시스	N110			GN						がんだむくらいしす	names.112732
@@ -112861,7 +112861,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガンダムリントヴルム	건담 린트부름	N110			GN						がんだむりんとゔるむ	names.112881
 ガンダムリヴランスヘブン	건담 리블랑스 헤븐	N110			GN						がんだむりゔらんすへぶん	names.112882
 ガンダムルシフェル	건담 루시퍼	N110			GN						がんだむるしふぇる	names.112883
-ガンダムルブリスウル	간담 루브리스울	N110			GN						がんだむるぶりすうる	names.112884
+ガンダムルブリスウル	건담 루브리스울	N110			GN						がんだむるぶりすうる	names.112884
 ガンダムルブリスソーン	건담 루브리스 소온	N110			GN						がんだむるぶりすそーん	names.112885
 ガンダムレオパルド	건담 레오파르드	N110			GN						がんだむれおぱるど	names.112886
 ガンダムレオパルド	건담 레오파드	N110			GN						ガンダムレオパルド	names.112887
@@ -113195,7 +113195,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガンマイザー・ウィンド	감마이저 윈드	N110			GN						がんまいざー・うぃんど	names.113215
 ガンマイザー・ウィンド	안마이저 윈드	N110			GN						ガンマイザー・ウィンド	names.113216
 ガンマイザー・エレクトリック	감마이저 일렉트릭	N110			GN						がんまいざー えれくとりっく	names.113217
-ガンマイザー・エレクトリック	안마이저 일렉트릭	N110			GN						ガンマイザー・エレクトリック	names.113218
+ガンマイザー・エレクトリック	감마이저 일렉트릭	N110			GN						ガンマイザー・エレクトリック	names.113218
 ガンマイザー・オシレーション	감마이저 오실레이션	N110			GN						がんまいざー・おしれーしょん	names.113219
 ガンマイザー・オシレーション	안마이저 오실레이션	N110			GN						ガンマイザー・オシレーション	names.113220
 ガンマイザー・クライメット	감마이저 클라이메트	N110			GN						がんまいざー・くらいめっと	names.113221
@@ -113209,9 +113209,9 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガンマイザー・ハンマー	감마이저 해머	N110			GN						がんまいざー・はんまー	names.113229
 ガンマイザー・ハンマー	안마이저 해머	N110			GN						ガンマイザー・ハンマー	names.113230
 ガンマイザー・ファイヤー	감마이저 파이어	N110			GN						がんまいざー・ふぁいやー	names.113231
-ガンマイザー・ファイヤー	안마이저 파이어	N110			GN						ガンマイザー・ファイヤー	names.113232
+ガンマイザー・ファイヤー	감마이저 파이어	N110			GN						ガンマイザー・ファイヤー	names.113232
 ガンマイザー・ブレード	감마이저 블레이드	N110			GN						がんまいざー・ぶれーど	names.113233
-ガンマイザー・ブレード	안마이저 블레이드	N110			GN						ガンマイザー・ブレード	names.113234
+ガンマイザー・ブレード	감마이저 블레이드	N110			GN						ガンマイザー・ブレード	names.113234
 ガンマイザー・プラネット	감마이저 플래닛	N110			GN						がんまいざーぷらねっと	names.113235
 ガンマイザー・プラネット	안마이저 플래닛	N110			GN						ガンマイザー・プラネット	names.113236
 ガンマイザー・マグネティック	감마이저 마그네틱	N110			GN						がんまいざー・まぐねてぃっく	names.113237
@@ -113707,7 +113707,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガーリ・ノルソンの妻	가르드 노르손의 아내	N130	QPNVHn		GN							names.113727
 ガーリー	걸리	N110			GN						がーりー	names.113728
 ガーリー・エアフォース	걸리 에어포스	N110			GN						がーりー・えあふぉーす	names.113729
-ガールとロボット	걸와 로보트	N130	VGt		GN							names.113730
+ガールとロボット	걸과 로봇	N130	VGt		GN							names.113730
 ガールガンファイト	걸 건 파이트	N130	QWK		GN						がーるがんふぁいと	names.113731
 ガールガンレディ	걸 건 레이디	N110			GN						がーるがんれでぃ	names.113732
 ガールクラッシュ	걸크러쉬	N130	QWK		GN						がーるくらっしゅ	names.113733
@@ -114015,7 +114015,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キエントゥオン	끼엔뜨엉	N130	QCTVPl		GN							names.114035
 キエンハイ県	끼엔하이현	N130	QCTVPl		GN							names.114036
 キエンルオン県	끼엔르엉현	N130	QCTVPl		GN							names.114037
-キエン・グエン「色分けされた手術」	쿠엔 누엔(Quyen Nguyen) : 색이 보이는 수술	N130	QWK		GN							names.114038
+キエン・グエン「色分けされた手術」	끼엔 응우옌: 색이 보이는 수술	N130	QWK		GN							names.114038
 キエーイ	키에이	N130	QPNVHn	Wb	GN						きえーい	names.114039
 キエース・ダルパゴ	키에스달파고	N130	QCTVPl		GN							names.114040
 キエーティ	키에티	N130	QCTVPl		GN							names.114041
@@ -114349,7 +114349,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キス・ユア・ハンド	키스 유어 핸드	N110			GN						きす・ゆあ・はんど	names.114369
 キス島撤退作戦	키스섬 철수작전	N110			GN							names.114370
 キス待ち	키스 대기	N110			GN						きすまち	names.114371
-キス濱テレビ	키스하마테레비	N130	QWK		GN							names.114372
+キス濱テレビ	키스하마TV	N130	QWK		GN							names.114372
 キス濱ラーニング	키스하마러닝	N130	QWK		GN							names.114373
 キス直前	키스 직전	N110			GN							names.114374
 キズ	키즈	N130	QPNVHn	Wb	GN						きず	names.114375
@@ -114537,7 +114537,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キッコロ	키코로	N130	QPNVHn	Wb	GN						きっころ	names.114557
 キッコーマン	깃코만	N130	VGt		GN						キッコーマン	names.114558
 キッコーマンの豆乳飲料	깃코만 두유 음료	N110			GN							names.114559
-キッコーマン総合病院	깃코만 총합 병원	N130	VGt		GN							names.114560
+キッコーマン総合病院	깃코만 종합 병원	N130	VGt		GN							names.114560
 キッサキシティ	키잣키시티	N110			GN						きっさきしてぃ	names.114561
 キッサ・シンズ	고양이 죄	N130	QPNVHn		GN							names.114562
 キッザニア	키자니아	N110			GN						きっざにあ	names.114563
@@ -114644,7 +114644,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キッドナップ	키드냅	N130	QWK		GN							names.114664
 キッドピクス	키드 픽스	N110			GN						きっどぴくす	names.114665
 キッドフラッシュ	키드 플래시	N110			GN						きっどふらっしゅ	names.114666
-キッドプール	키드폴	N110			GN						きっどぷーる	names.114667
+キッドプール	키드풀	N110			GN						きっどぷーる	names.114667
 キッドマン	키드먼	N130	QPNVHn	Wb	GN						きっどまん	names.114668
 キッドミリ	키드밀리	N130	QPNVHn	Wb	GN							names.114669
 キッド・インク	키드 잉크	N130	QPNVHn		GN							names.114670
@@ -115222,7 +115222,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キミノトコロヘ	너에게로	N130	QWK		GN						きみのところへ	names.115242
 キミノミヤ	키미노미야	N130	QPNVHn	Wb	GN						きみのみや	names.115243
 キミノメヲ	키미노메오	N110			GN						きみのめを	names.115244
-キミノヨゾラ哨戒班	내일의 밤하늘 초계반	N110			GN							names.115245
+キミノヨゾラ哨戒班	키미노요조라 초계반	N110			GN							names.115245
 キミプリ	너와 아이돌 프리큐어♪	N130	QWK		GN						キミプリ	names.115246
 キミボシ	키미보시	N130	QWK		GN						きみぼし	names.115247
 キミマイ	키미마이	N130	QWK		GN						きみまい	names.115248
@@ -115590,7 +115590,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キム・ギリ	김길리	N130	QPNVHn	Wb	GN							names.115610
 キム・ギリョン	김기룡	N130	QPNVHn	Wb	GN							names.115611
 キム・ギルジャ	김길자	N130	QPNVHn	Wb	GN							names.115612
-キム・ギルテ事件	김길태	N130	QPNVHn	Wb	GN							names.115613
+キム・ギルテ事件	김길태 사건	N130	QPNVHn	Wb	GN							names.115613
 キム・ギルドン	김길동	N130	QPNVHn	Wb	GN							names.115614
 キム・ギロ	김길호	N130	QPNVHn	Wb	GN							names.115615
 キム・ギワン	김기완	N130	QPNVHn	Wb	GN							names.115616
@@ -117278,7 +117278,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キャサリン・マクニール	캐서린 맥닐	N130	QPNVHn		GN							names.117298
 キャサリン・マクフィー	캐서린 맥피	N130	QPNVHn		GN							names.117299
 キャサリン・マクブライド	캐서린 맥브라이드	N130	QPNVHn		GN						きゃさりん・まくぶらいど	names.117300
-キャサリン・マクレナハン	캐서린 맥 클리 나 한	N130	QPNVHn		GN							names.117301
+キャサリン・マクレナハン	캐서린 맥클리나한	N130	QPNVHn		GN							names.117301
 キャサリン・マグレガー	스코티 맥그리거	N130	QPNVHn		GN							names.117302
 キャサリン・マコーマック	캐서린 매코맥	N130	QPNVHn		GN							names.117303
 キャサリン・マチャド	캐서린 마차도	N130	QPNVHn		GN							names.117304
@@ -117335,7 +117335,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キャシィ塚本	캐시 츠카모토	N110			GN						きゃしぃつかもと	names.117355
 キャシディ	캐시디	N130	QPNVHn	Wb	GN							names.117356
 キャシディ・ガード	캐시디 가드	N130	QPNVHn		GN							names.117357
-キャシディ・ギフォード	캐시디기 포드	N130	QPNVHn		GN							names.117358
+キャシディ・ギフォード	캐시디 기포드	N130	QPNVHn		GN							names.117358
 キャシディ・クライン	캐시디 클레인	N130	QPNVHn		GN							names.117359
 キャシディ・バンクス	캐시디 뱅크스	N130	QPNVHn		GN							names.117360
 キャシディ・フリーマン	캐시디 프리먼	N130	QPNVHn		GN							names.117361
@@ -119055,7 +119055,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キュアセレーネ	큐어 셀레네	N110			GN						きゅあせれーね	names.119075
 キュアソウル	큐어 소울	N130	QPNVHn		GN						きゅあそうる	names.119076
 キュアソラ	큐어 소라	N110			GN						きゅあそら	names.119077
-キュアソレイユ	큐어 솔레이ユ	N110			GN						きゅあそれいゆ	names.119078
+キュアソレイユ	큐어 솔레이유	N110			GN						きゅあそれいゆ	names.119078
 キュアソード	큐어 소드	N110			GN						きゅあそーど	names.119079
 キュアタイガー	큐어 타이거	N110			GN						きゅあたいがー	names.119080
 キュアタイバニ	큐어 타이바니	N110			GN						きゅあたいばに	names.119081
@@ -124061,8 +124061,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ギンギン	기잉기잉	N110			GN						ぎんぎん	names.124081
 ギンギーラ	긴기라	N130	QPNVHn	Wb	GN						ぎんぎーら	names.124082
 ギングリフォン	깅그리폰	N110			GN						ぎんぐりふぉん	names.124083
-ギンコ	깅코	N130	QPNVHn	Wb	GN						ぎんこ	names.124084
-ギンコ	핑코	N130	QPNVHn	Wb	GN						ギンコ	names.124085
+ギンコ	긴코	N130	QPNVHn	Wb	GN						ぎんこ	names.124084
+ギンコ	긴코	N130	QPNVHn	Wb	GN						ギンコ	names.124085
 ギンザグリングラス	긴자그린글라스	N110			GN						ぎんざぐりんぐらす	names.124086
 ギンザシックス	긴자 식스	N130	VGt		GN						ぎんざしっくす	names.124087
 ギンザル	긴자루	N130	QPNVHn	Wb	GN						ぎんざる	names.124088
@@ -128676,7 +128676,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 クリスティン・クルック	크리스틴 크룩	N130	QPNVHn		GN							names.128696
 クリスティン・クロアレック	크리스틴 클로아렉	N130	QPNVHn		GN							names.128697
 クリスティン・グリフィス	크리스틴 그리피스	N130	QPNVHn		GN							names.128698
-クリスティン・ケトラ	크리스티ン 케트라	N130	QPNVHn		GN						くりすてぃん・けとら	names.128699
+クリスティン・ケトラ	크리스틴 케트라	N130	QPNVHn		GN						くりすてぃん・けとら	names.128699
 クリスティン・コースガード	크리스틴 코스가드	N130	QPNVHn		GN							names.128700
 クリスティン・サザーランド	크리스틴 서덜랜드	N130	QPNVHn		GN							names.128701
 クリスティン・シグルドスドッテル・スモル	크리스티네 시구르드스도테르 스뫼르	N130	QPNVHn		GN							names.128702
@@ -140810,7 +140810,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ケリー・ジョーンズ	켈리 존스	N130	QPNVHn		GN							names.140830
 ケリー・ジョー・ミンター	켈리 조 민터	N130	QPNVHn		GN							names.140831
 ケリー・ジーン・ヴァン・ダイク	켈리 진 밴다이크	N130	QPNVHn		GN							names.140832
-ケリー・スウェイジー: 死してなお続く人生	켈리 스웨이지 (Kelli Swazey): 죽음으로 끝나지 않은 삶	N130	QWK		GN							names.140833
+ケリー・スウェイジー: 死してなお続く人生	켈리 스웨이지: 죽음으로 끝나지 않은 삶	N130	QWK		GN							names.140833
 ケリー・スカイライン	케리 스카이라인	N130	QPNVHn		GN							names.140834
 ケリー・スチュワート	켈리 스튜어트	N130	QPNVHn		GN							names.140835
 ケリー・ステイブルズ	켈리 스테이블스	N130	QPNVHn		GN							names.140836
@@ -141750,7 +141750,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ケヴィン・フォリー	케빈 폴리	N130	QPNVHn		GN							names.141770
 ケヴィン・ブラウンロー	케빈 브라운로우	N130	QPNVHn		GN							names.141771
 ケヴィン・ブリッグス	케빈 브릭스	N130	QPNVHn		GN							names.141772
-ケヴィン・ブリッグス: 生と自殺の間に架かる橋	케빈 브릭스 (Kevin Briggs): 삶과 죽음 사이의 다리	N130	QWK		GN							names.141773
+ケヴィン・ブリッグス: 生と自殺の間に架かる橋	케빈 브릭스: 삶과 죽음 사이의 다리	N130	QWK		GN							names.141773
 ケヴィン・ブレズナハン	케빈 브레즈나한	N130	QPNVHn		GN							names.141774
 ケヴィン・ブロディ	케빈 브로디	N130	QPNVHn		GN							names.141775
 ケヴィン・ブロフィ	케빈 브로피	N130	QPNVHn		GN							names.141776
@@ -141923,7 +141923,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ケーブル	케이블	N130	QPNVHn	Wb	GN						ケーブル	names.141943
 ケーブルカー	강삭철도	N110			GN						ケーブルカー	names.141944
 ケーブルガイ	케이블 가이	N130	QWK		GN							names.141945
-ケーブルテレビ	케이블 텔레비전	N110			GN						ケーブルテレビ	names.141946
+ケーブルテレビ	케이블TV	N110			GN						ケーブルテレビ	names.141946
 ケーブルニット	케이블 니트	N110			GN						けーぶるにっと	names.141947
 ケーブルフェリー	케이블 페리	N130	QCTVPl		GN							names.141948
 ケーブル・アンド・ワイヤレス	케이블 앤드 와이어리스	N130	VGt		GN							names.141949
@@ -143090,7 +143090,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ゲリー・コンウェイ	게리 콘웨이	N130	QPNVHn		GN							names.143110
 ゲリー・コーツィー	헤리 쿠치에	N130	QPNVHn		GN							names.143111
 ゲリー・ストライダム	게리 스트라이덤	N130	QPNVHn		GN						げりー・すとらいだむ	names.143112
-ゲリー・スラトキン: 暴力を伝染病として捉えよう	개리 슬럿킨 (Gary Slutkin): 폭력을 전염병처럼 치료하자	N130	QWK		GN							names.143113
+ゲリー・スラトキン: 暴力を伝染病として捉えよう	개리 슬럿킨: 폭력을 전염병처럼 치료하자	N130	QWK		GN							names.143113
 ゲリー・デュガン	제리 더건	N130	QPNVHn		GN							names.143114
 ゲル	게르	N130	QPNVHn	Wb	GN						げる	names.143115
 ゲルまゆ	겔 마유	N110			GN						ゲルまゆ	names.143116
@@ -145077,7 +145077,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 コックリさん・少女の呪い	분신사바: 소녀의 저주	N130	QWK		GN							names.145097
 コックリーシュ	콕리시	N110			GN						こっくりーしゅ	names.145098
 コックローチツイン	코크로치 트윈	N110			GN						コックローチツイン	names.145099
-コックローチ・ドーパント	코크로치 도퍼트	N110			GN						こっくろーち・どーぱんと	names.145100
+コックローチ・ドーパント	코크로치 도펀트	N110			GN						こっくろーち・どーぱんと	names.145100
 コックローチ・ドーパント	코크로치 도펀트	N110			GN						コックローチ・ドーパント	names.145101
 コックワドルディ	쿡 와들디	N130	QPNVHn		GN						こっくわどるでぃ	names.145102
 コックン	콕쿤	N130	QPNVHn	Wb	GN						こっくん	names.145103
@@ -146147,7 +146147,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 コミックマーケット87	코믹마켓 87	N110			GN							names.146167
 コミックマーケット88	코미케 88	N110			GN							names.146168
 コミックマーケット90	코믹마켓 90	N110			GN							names.146169
-コミックマーケット91	코ミック마켓 91	N110			GN							names.146170
+コミックマーケット91	코믹마켓 91	N110			GN							names.146170
 コミックマーケット92	코믹마켓 92	N110			GN							names.146171
 コミックマーケット95	코미케 95	N110			GN							names.146172
 コミックマーケット96	코미케96	N110			GN							names.146173
@@ -151011,7 +151011,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ゴルディオンハンマー	골디온 해머	N110			GN						ごるでぃおんはんまー	names.151031
 ゴルディオンハンマー	골디언 해머	N110			GN						ゴルディオンハンマー	names.151032
 ゴルディオンフィンガー	골디온 핑거	N110			GN						ごるでぃおんふぃんがー	names.151033
-ゴルディオンモーター	골디오ン 모터	N110			GN						ごるでぃおんもーたー	names.151034
+ゴルディオンモーター	골디온 모터	N110			GN						ごるでぃおんもーたー	names.151034
 ゴルディコヴァ	골디코바	N110			GN						ごるでぃこゔぁ	names.151035
 ゴルディロックス	골디락스	N130	QPNVHn	Wb	GN						ゴルディロックス	names.151036
 ゴルディロックスゾーン	골디락스 존	N110			GN						ごるでぃろっくすぞーん	names.151037
@@ -153986,7 +153986,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 サガダホク郡	사가다호크군	N130	QCTVPl		GN							names.154007
 サガット	사가트	N130	QPNVHn	Wb	GN						サガット	names.154008
 サガット・チャローユー	상앗 찰로유	N130	QPNVHn		GN							names.154009
-サガテレビ	사가 TV	N110			GN						さがてれび	names.154010
+サガテレビ	사가TV	N110			GN						さがてれび	names.154010
 サガノヘルマー	사가노 헬마	N130	QPNVHn		GN						さがのへるまー	names.154011
 サガフロ	사가 프론티어	N130	QWK		GN						サガフロ	names.154012
 サガフロ1	사가 프론티어	N130	QWK		GN							names.154013
@@ -155762,7 +155762,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 サバーク博士	사바크 박사	N110			GN							names.155783
 サバーク博士	사바쿠 박사	N110			GN							names.155784
 サバーサ	사바사	N130	QPNVHn	Wb	GN						さばーさ	names.155785
-サバーニャ	사바니ャ	N110			GN						さばーにゃ	names.155786
+サバーニャ	사바냐	N110			GN						さばーにゃ	names.155786
 サバーニャ	사바냐	N110			GN							names.155787
 サバーハ・アッ=サーリム・スタジアム	사바 알 살렘 경기장	N130	QCTVPl		GN							names.155788
 サバーハ・アル=アフマド・アル=ジャービル・アッ=サバーハ	사바 알아마드 알자베르 알사바	N130	QPNVHn		GN							names.155789
@@ -159485,8 +159485,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 サンテリーア・フィウメラーピド	산텔리아피우메라피도	N130	QCTVPl		GN							names.159506
 サンテルピーディオ・ア・マーレ	산텔피디오아마레	N130	QCTVPl		GN							names.159507
 サンテルモ	세인트 엘모의	N110			GN							names.159508
-サンテレビ	선 TV	N110			GN						さんてれび	names.159509
-サンテレビジョン	선 TV	N110			GN						さんてれびじょん	names.159510
+サンテレビ	선TV	N110			GN						さんてれび	names.159509
+サンテレビジョン	선TV	N110			GN						さんてれびじょん	names.159510
 サンテ・カトリーヌ	생콩스탕	N130	QCTVPl		GN							names.159511
 サンテ・ガイアルドーニ	산테 가이아르도니	N130	QPNVHn		GN							names.159512
 サンテ・マリーエ	산테마리에	N130	QCTVPl		GN							names.159513
@@ -163961,7 +163961,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シェソン	셰송	N130	QPNVHn	Wb	GN						しぇそん	names.163982
 シェゾ	쉐존	N130	QPNVHn	Wb	GN						しぇぞ	names.163983
 シェゾ	셰죠 위그이	N130	QPNVHn		GN							names.163984
-シェゾ・ウィグィィ	셰존 위그ィ	N130	QPNVHn		GN						しぇぞ・うぃぐぃぃ	names.163985
+シェゾ・ウィグィィ	셰죠 위그이	N130	QPNVHn		GN						しぇぞ・うぃぐぃぃ	names.163985
 シェゾ・ウィグィィ	셰죠 위그이	N130	QPNVHn		GN						シェゾ・ウィグィィ	names.163986
 シェック	셰크	N130	QPNVHn	Wb	GN						しぇっく	names.163987
 シェッセウ	셰세우	N130	QPNVHn	Wb	GN						しぇっせう	names.163988
@@ -164829,7 +164829,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シカンドラバッド	시칸드라바드	N130	QCTVPl		GN							names.164850
 シカンブル	시캉브르	N110			GN						しかんぶる	names.164851
 シカン文化	시칸 문화	N130	QNNVPl		GN							names.164852
-シカ・マドゥ	시카 마드ゥ	N130	QPNVHn		GN						しか・まどぅ	names.164853
+シカ・マドゥ	시카 마두	N130	QPNVHn		GN						しか・まどぅ	names.164853
 シカーダ	시카다	N130	QPNVHn	Wb	GN						しかーだ	names.164854
 シカ娘	사슴 소녀	N110			GN							names.164855
 シカ科	사슴	N110			GN							names.164856
@@ -172790,7 +172790,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シンチ・ロカ	신치 로카	N130	QPNVHn		GN							names.172812
 シンチ校長	신치 교장	N130	QPNVHn		GN						しんち	names.172813
 シンツィア・モンレール	신지아 몬레알레	N130	QPNVHn		GN							names.172814
-シンティア・ディッカー	신티아 작은거래	N130	QPNVHn		GN							names.172815
+シンティア・ディッカー	신티아 디커	N130	QPNVHn		GN							names.172815
 シンティラ	신틸라	N130	QPNVHn	Wb	GN						しんてぃら	names.172816
 シンテイル	신태일	N110			GN						しんている	names.172817
 シンテツ	신테츠	N130	QPNVHn	Wb	GN						しんてつ	names.172818
@@ -173775,7 +173775,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シーズ・ソー・ラヴリー	더 홀	N130	QWK		GN							names.173797
 シーセ・グラウム・ヨルゲンセン	시세 그라움 예르겐센	N130	QPNVHn		GN							names.173798
 シーセ・マリー	시세 마리	N130	QPNVHn		GN							names.173799
-シーゼットニイチニハチ・デルタ	CZ2I28 델타	N130	QPNVHn		GN							names.173800
+シーゼットニイチニハチ・デルタ	CZ2128 델타	N130	QPNVHn		GN							names.173800
 シーゼル	시젤	N130	QPNVHn	Wb	GN						しーぜる	names.173801
 シーソムデット郡	시솜뎃군	N130	QCTVPl		GN							names.173802
 シーソルトアイス	시솔트 아이스	N110			GN						シーソルトアイス	names.173803
@@ -174052,7 +174052,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シーラ・ダニーズ	쉐라 대니즈	N130	QPNVHn		GN							names.174074
 シーラ・チャーフィラス=マコーミック	셰일라 처필러스 맥코믹	N130	QPNVHn		GN							names.174075
 シーラ・テリー	실라 테리	N130	QPNVHn		GN							names.174076
-シーラ・ニーレンバーグ「失明した網膜への新たな補綴治療」	쉴라 니렌버그(Sheila Nirenberg): 실명을 치료하는 의안	N130	QWK		GN							names.174077
+シーラ・ニーレンバーグ「失明した網膜への新たな補綴治療」	쉴라 니렌버그: 실명을 치료하는 의안	N130	QWK		GN							names.174077
 シーラ・ハンコック	쉴라 핸콕	N130	QPNVHn		GN							names.174078
 シーラ・ハース	시라 하스	N130	QPNVHn		GN							names.174079
 シーラ・バーンフォード	쉘리아 번포드	N130	QPNVHn		GN							names.174080
@@ -174128,7 +174128,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 シールドライガー	실드 라이거	N110			GN						しーるどらいがー	names.174150
 シールドルーム	실드 룸	N110			GN						しーるどるーむ	names.174151
 シールドレイズバックル	실드 레이즈 버클	N110			GN						しーるどれいずばっくる	names.174152
-シールドレッシャー	실드 레ッ샤	N110			GN						しーるどれっしゃー	names.174153
+シールドレッシャー	실드 렛샤	N110			GN						しーるどれっしゃー	names.174153
 シールドン	실돈	N110			GN						しーるどん	names.174154
 シールド・ウィング	실드 윙	N130	QPNVHn		GN						しーるど・うぃんぐ	names.174155
 シールド工法	실드 공법	N110			GN							names.174156
@@ -174619,7 +174619,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジェイソン・クロサワ	제이슨 쿠로사와	N130	QPNVHn		GN						じぇいそん くろさわ	names.174641
 ジェイソン・クロッツ	제이슨 클로츠	N130	QPNVHn		GN							names.174642
 ジェイソン・クーチャック	제이스 코샤	N130	QPNVHn		GN							names.174643
-ジェイソン・グッドウィン	굿윈, 제이슨,	N130	QPNVHn		GN							names.174644
+ジェイソン・グッドウィン	제이슨 굿윈	N130	QPNVHn		GN							names.174644
 ジェイソン・グリフィス	제이슨 그리피스	N130	QPNVHn		GN							names.174645
 ジェイソン・グリーリ	제이슨 그릴리	N130	QPNVHn		GN							names.174646
 ジェイソン・グレイ=スタンフォード	제이슨 그레이스탠퍼드	N130	QPNVHn		GN							names.174647
@@ -176455,7 +176455,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジェフ・アレン	제프 앨런	N130	QPNVHn		GN							names.176477
 ジェフ・イェーガー	제프 야거	N130	QPNVHn		GN							names.176478
 ジェフ・イマダ	제프 이마다	N130	QPNVHn		GN							names.176479
-ジェフ・イリフ: よく眠る事が大切なもう一つの理由	제프 리프(Jeff Lliff): 숙면을 해야하는 또 한가지 이유	N130	QWK		GN							names.176480
+ジェフ・イリフ: よく眠る事が大切なもう一つの理由	제프 리프: 숙면을 해야하는 또 한가지 이유	N130	QWK		GN							names.176480
 ジェフ・イースティン	제프 이스틴	N130	QPNVHn		GN							names.176481
 ジェフ・イースト	제프 이스트	N130	QPNVHn		GN							names.176482
 ジェフ・ウィジー	제프 위디	N130	QPNVHn		GN							names.176483
@@ -178019,7 +178019,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジェームズ・スナイダー	제임스 스나이더	N130	QPNVHn		GN							names.178041
 ジェームズ・スプリッグズ・ペイン	제임스 스프릭스 페인	N130	QPNVHn		GN							names.178042
 ジェームズ・スペイダー	제임스 스페이더	N130	QPNVHn		GN						ジェームズ・スペイダー	names.178043
-ジェームズ・スミス・ブッシュ	존 스미스 부시	N130	QPNVHn		GN							names.178044
+ジェームズ・スミス・ブッシュ	제임스 스미스 부시	N130	QPNVHn		GN							names.178044
 ジェームズ・スミソン	제임스 스미스슨	N130	QPNVHn		GN							names.178045
 ジェームズ・スローアン	제임스 슬로이언	N130	QPNVHn		GN							names.178046
 ジェームズ・ソルター	제임스 설터	N130	QPNVHn		GN							names.178047
@@ -178586,7 +178586,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジオン・ズム・ダイクン	지온 즈음 다이쿤	N130	QPNVHn		GN						じおん・ずむ・だいくん	names.178608
 ジオン・ズム・ダイクン	지온 줌 다이쿤	N130	QPNVHn		GN						ジオン・ズム・ダイクン	names.178609
 ジオン公国	지온 공국	N130	QCTVPl		GN							names.178610
-ジオン公国軍	지온 공국	N110			GN							names.178611
+ジオン公国軍	지온 공국군	N110			GN							names.178611
 ジオン共和国	지온 공화국	N110			GN							names.178612
 ジオン兵	지온 병사	N110			GN							names.178613
 ジオン族	지온족	N110			GN							names.178614
@@ -178594,7 +178594,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジオン残党軍	지온 잔당군	N130	VGt		GN							names.178616
 ジオン水泳部	지온 수영부	N110			GN							names.178617
 ジオン訛り	지온 사투리	N110			GN							names.178618
-ジオン軍	지온 공국	N110			GN							names.178619
+ジオン軍	지온군	N110			GN							names.178619
 ジオヴァニ・ロ・チェルソ	조바니 로셀소	N130	QPNVHn		GN							names.178620
 ジオヴァニー・クエンダ	제오바니 켄다	N130	QPNVHn		GN							names.178621
 ジオヴァンニ・コルテス・ゴメス	지우바니 코르테스 고메스	N130	QPNVHn		GN							names.178622
@@ -179301,7 +179301,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジムスナイパー	짐 스나이퍼	N110			GN							names.179323
 ジムスナイパーII	짐 스나이퍼 II	N110			GN							names.179324
 ジムスナイパーK9	짐 스나이퍼 K9	N110			GN							names.179325
-ジムスナイパーカスタム	짐 스나이퍼 II	N110			GN							names.179326
+ジムスナイパーカスタム	짐 스나이퍼 커스텀	N110			GN							names.179326
 ジムチャレンジ	체육관 챌린지	N110			GN						じむちゃれんじ	names.179327
 ジムチャレンジャー	체육관 도전자	N110			GN						じむちゃれんじゃー	names.179328
 ジムトレーナー	체육관 트레이너	N110			GN						じむとれーなー	names.179329
@@ -179480,7 +179480,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジム・パーマー	짐 파머	N130	QPNVHn		GN							names.179502
 ジム・ヒックス	짐 힉스	N130	QPNVHn		GN						じむ・ひっくす	names.179503
 ジム・ビアード	짐 비어드	N130	QPNVHn		GN							names.179504
-ジム・ビーム	진 빔	N130	VGt		GN						ジム・ビーム	names.179505
+ジム・ビーム	짐 빔	N130	VGt		GN						ジム・ビーム	names.179505
 ジム・ビーヴァー	짐 비버	N130	QPNVHn		GN							names.179506
 ジム・ピドック	짐 피덕	N130	QPNVHn		GN							names.179507
 ジム・ピュー	짐 퓨	N130	QPNVHn		GN							names.179508
@@ -179492,7 +179492,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジム・フォックス	짐 폭스	N130	QPNVHn		GN							names.179514
 ジム・フランス	짐 프랜스	N130	QPNVHn		GN							names.179515
 ジム・フレイザー	짐 프레이저	N130	QPNVHn		GN							names.179516
-ジム・フレンチ	짐 프랑스	N130	QPNVHn		GN							names.179517
+ジム・フレンチ	짐 프렌치	N130	QPNVHn		GN							names.179517
 ジム・ブライデンスタイン	짐 브라이든스타인	N130	QPNVHn		GN							names.179518
 ジム・ブラウン	짐 브라운	N130	QPNVHn		GN							names.179519
 ジム・ブラス	짐 브래스	N130	QPNVHn		GN							names.179520
@@ -181086,7 +181086,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジャック・ホッブス	잭 홉스	N130	QPNVHn		GN							names.181108
 ジャック・ホリデイ	잭 홀리데이	N130	QPNVHn		GN							names.181109
 ジャック・ホルト	잭 홀트	N130	QPNVHn		GN							names.181110
-ジャック・ホワイト	메그 화이트	N130	QPNVHn		GN							names.181111
+ジャック・ホワイト	잭 화이트	N130	QPNVHn		GN							names.181111
 ジャック・ホワイトホール	잭 화이트홀	N130	QPNVHn		GN							names.181112
 ジャック・ホーキンス	잭 호킨스	N130	QPNVHn		GN							names.181113
 ジャック・ホーナー	잭 호너	N130	QPNVHn		GN							names.181114
@@ -181297,7 +181297,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジャナ・ミルコビッチ	야나 미르코비치	N130	QPNVHn		GN							names.181319
 ジャナ・レヴィン	제나 레빈	N130	QPNVHn		GN							names.181320
 ジャナ・ヴェルナー	야나 베르너	N130	QPNVHn		GN							names.181321
-ジャニアリー・ヴァン・サント	일월의 반 산트	N130	QPNVHn		GN						ジャニアリー・ヴァン・サント	names.181322
+ジャニアリー・ヴァン・サント	재뉴어리 반 산트	N130	QPNVHn		GN						ジャニアリー・ヴァン・サント	names.181322
 ジャニアン・ターナー	재닌 터너	N130	QPNVHn		GN							names.181323
 ジャニオ・クアドロス	자니오 꽈드로스	N130	QPNVHn		GN							names.181324
 ジャニコロ	자니콜로	N130	QCTVPl		GN							names.181325
@@ -182654,7 +182654,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジャンニ・アレマンノ	잔니 알레만노	N130	QPNVHn		GN							names.182676
 ジャンニ・インファンティーノ	잔니 인판티노	N130	QPNVHn		GN							names.182677
 ジャンニ・エスポジト	지아니 에스포지토	N130	QPNVHn		GN							names.182678
-ジャンニ・カヴィーナ	지아니 바키나	N130	QPNVHn		GN							names.182679
+ジャンニ・カヴィーナ	잔니 카비나	N130	QPNVHn		GN							names.182679
 ジャンニ・ガルコ	지아니 가르코	N130	QPNVHn		GN							names.182680
 ジャンニ・クレリッチ	잔니 클레리치	N130	QPNVHn		GN							names.182681
 ジャンニ・スキッキ	잔니 스키키	N130	QWK		GN							names.182682
@@ -182907,7 +182907,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジャンルイジ・レンティーニ	잔루이지 렌티니	N130	QPNVHn		GN							names.182929
 ジャンルイージ・ボネッリ	잔루이지 보넬리	N130	QPNVHn		GN							names.182930
 ジャンルカ	잔루카	N130	QPNVHn	Wb	GN						じゃんるか	names.182931
-ジャンルカ・イアコノ	지안루카 라코노	N130	QPNVHn		GN							names.182932
+ジャンルカ・イアコノ	잔루카 이아코노	N130	QPNVHn		GN							names.182932
 ジャンルカ・カプラーリ	잔루카 카프라리	N130	QPNVHn		GN							names.182933
 ジャンルカ・ガウディーノ	잔루카 가우디노	N130	QPNVHn		GN							names.182934
 ジャンルカ・クルチ	잔루카 쿠르치	N130	QPNVHn		GN							names.182935
@@ -183173,7 +183173,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジャン・パトリック・レイス	장 패트릭	N130	QPNVHn		GN							names.183195
 ジャン・パニッセ	장 파니스	N130	QPNVHn		GN							names.183196
 ジャン・パンゼール	장 팡제	N130	QPNVHn		GN							names.183197
-ジャン・ヒギンズ	진 히그진스	N130	QPNVHn		GN							names.183198
+ジャン・ヒギンズ	진 히긴스	N130	QPNVHn		GN							names.183198
 ジャン・ヒゴン	장희곤	N130	QPNVHn	Wb	GN							names.183199
 ジャン・ビュリダン	장 뷔리당	N130	QPNVHn		GN							names.183200
 ジャン・ビューロー	장 뷔로	N130	QPNVHn		GN							names.183201
@@ -184381,7 +184381,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジュリアン・ダグラス	줄리안 더글러스	N130	QPNVHn		GN						じゅりあん・だぐらす	names.184403
 ジュリアン・ダヴィニョン	쥘리앵 다비뇽	N130	QPNVHn		GN							names.184404
 ジュリアン・チョン	장지림	N130	QPNVHn	Wb	GN							names.184405
-ジュリアン・テンプル	줄리앙 신전	N130	QPNVHn		GN							names.184406
+ジュリアン・テンプル	줄리언 템플	N130	QPNVHn		GN							names.184406
 ジュリアン・ディーン	줄리언 딘	N130	QPNVHn		GN							names.184407
 ジュリアン・デニソン	줄리언 데니슨	N130	QPNVHn		GN							names.184408
 ジュリアン・デュプレ	쥘리앵 뒤프레	N130	QPNVHn		GN							names.184409
@@ -184813,7 +184813,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジュリー・メレツ	줄리 머레투	N130	QPNVHn		GN							names.184835
 ジュリー・ヨーン	줄리 욘	N130	QPNVHn		GN							names.184836
 ジュリー・ルブレトン	줄리 리브리턴	N130	QPNVHn		GN							names.184837
-ジュリー・レイク	줄리 호수	N130	QPNVHn		GN							names.184838
+ジュリー・レイク	줄리 레이크	N130	QPNVHn		GN							names.184838
 ジュリー・レイジ	줄리 레이지	N130	QPNVHn		GN							names.184839
 ジュリー・ロンドン	줄리 런던	N130	QPNVHn		GN							names.184840
 ジュリー・ワーナー	줄리 워너	N130	QPNVHn		GN							names.184841
@@ -185135,7 +185135,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジューン・ハヴォック	준 해벅	N130	QPNVHn		GN							names.185157
 ジューン・フォーレイ	준 포레이	N130	QPNVHn		GN							names.185158
 ジューン・ブライド	6월의 신부	N110			GN						じゅーん・ぶらいど	names.185159
-ジューン・ブラウン	준 뉴턴	N130	QPNVHn		GN							names.185160
+ジューン・ブラウン	준 브라운	N130	QPNVHn		GN							names.185160
 ジューン・ヘイヴァー	준 헤이버	N130	QPNVHn		GN							names.185161
 ジューン・ポインター	준 포인터	N130	QPNVHn		GN							names.185162
 ジューン・ラブジョイ	준 러브조이	N130	QPNVHn		GN							names.185163
@@ -189676,7 +189676,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ジョージア・サザン大学	조지아 서던 대학교	N130	VGt		GN							names.189698
 ジョージア・スウォーム	조지아 스웜	N130	VGt		GN							names.189699
 ジョージア・スタンウェイ	조지아 스탠웨이	N130	QPNVHn		GN							names.189700
-ジョージア・ダグラス・ジョンソン	조지아 더글라스 Johnson	N130	QPNVHn		GN							names.189701
+ジョージア・ダグラス・ジョンソン	조지아 더글라스 존슨	N130	QPNVHn		GN							names.189701
 ジョージア・テイラー=ブラウン	조지아 테일러브라운	N130	QPNVHn		GN							names.189702
 ジョージア・ドーム	조지아 돔	N130	QCTVPl		GN							names.189703
 ジョージア・ブルドッグス	조지아 불도그스	N130	VGt		GN							names.189704
@@ -194948,7 +194948,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 スタディオ・アルテミオ・フランキ	스타디오 아르테미오 프란키	N130	QCTVPl		GN							names.194970
 スタディオ・アルテミオ・フランキ=モンテパスキ・アレーナ	스타디오 아르테미오 프란키	N130	QCTVPl		GN							names.194971
 スタディオ・アルマンド・ピッキ	스타디오 아르만도 피키	N130	QCTVPl		GN							names.194972
-スタディオ・アレーキ	스튜디오_아레치	N130	QCTVPl		GN							names.194973
+スタディオ・アレーキ	스튜디오 아레치	N130	QCTVPl		GN							names.194973
 スタディオ・アンジェロ・マッシミーノ	스타디오 안젤로 마시미노	N130	QCTVPl		GN							names.194974
 スタディオ・イス・アレナス	스타디오 이스 아레나스	N130	QCTVPl		GN							names.194975
 スタディオ・エウガネオ	스타디오 에우가네오	N130	QCTVPl		GN							names.194976
@@ -199337,7 +199337,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 スパイダー・キングダム	스파이더 웹	N130	QWK		GN							names.199360
 スパイダー・ソサエティ	스파이더 소사이어티	N130	VGt		GN						すぱいだー・そさえてぃ	names.199361
 スパイダー・デッドマン	스파이더 데드맨	N110			GN						すぱいだー・でっどまん	names.199362
-スパイダー・ドーパント	스파이더 도퍼트	N110			GN						すぱいだー・どーぱんと	names.199363
+スパイダー・ドーパント	스파이더 도펀트	N110			GN						すぱいだー・どーぱんと	names.199363
 スパイダー・ドーパント	스파이더 도펀트	N110			GN						スパイダー・ドーパント	names.199364
 スパイダー・ノワール	스파이더 누아르	N130	QWK		GN							names.199365
 スパイダー・パンク	스파이더 펑크	N130	QPNVHn		GN						すぱいだー・ぱんく	names.199366
@@ -204171,7 +204171,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ズ・ガルメ・レ	즈 가루메 레	N110			GN						ず・がるめ・れ	names.204194
 ズ・グジル・ギ	즈 그지르 기	N110			GN						ず・ぐじる・ぎ	names.204195
 ズ・グジル・ギ	즈 구지루 기	N110			GN						ズ・グジル・ギ	names.204196
-ズ・グムン・バ	즈 그무ン 바	N110			GN						ず・ぐむん・ば	names.204197
+ズ・グムン・バ	즈 그문 바	N110			GN						ず・ぐむん・ば	names.204197
 ズ・グムン・バ	즈 그문 바	N110			GN						ズ・グムン・バ	names.204198
 ズ・ゴオマ・グ	즈 고오마 구	N110			GN						ず・ごおま・ぐ	names.204199
 ズ・ザイン・ダ	즈 자인다	N110			GN						ず・ざいん・だ	names.204200
@@ -212451,7 +212451,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ソーシャルVR	소셜 VR	N110			GN							names.212474
 ソーシャルカルチャー	소셜 컬처	N110			GN						そーしゃるかるちゃー	names.212475
 ソーシャルキングダム	소셜 킹덤	N130	QPNVHn		GN						そーしゃるきんぐだむ	names.212476
-ソーシャルゲーム	소셜 네트워크 게임	N130	QWK		GN						ソーシャルゲーム	names.212477
+ソーシャルゲーム	소셜 게임	N130	QWK		GN						ソーシャルゲーム	names.212477
 ソーシャルパラノイア	소셜 파라노이아	N130	QWK		GN						そーしゃるぱらのいあ	names.212478
 ソーシャルファーム	소셜 팜	N110			GN						そーしゃるふぁーむ	names.212479
 ソーシャルフォビア	소셜포비아	N130	QWK		GN							names.212480
@@ -212523,7 +212523,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ソードアート・オンライン アンリーシュ・ブレイディング	소드 아트 온라인 언리시 블레이딩	N130	QWK		GN						ソードアート・オンライン アンリーシュ・ブレイディング	names.212546
 ソードアート・オンライン インテグラル・ファクター	소드 아트 온라인 인테그랄 팩터	N130	QWK		GN						そーどあーと・おんらいん いんてぐらる・ふぁくたー	names.212547
 ソードアート・オンライン オルタナティブ	소드 아트 온라인 얼터너티브	N130	QWK		GN						そーどあーと・おんらいん おるたなてぃぶ	names.212548
-ソードアート・オンライン オルタナティブ ガンゲイル・オンライン	소드 아트 온라인 얼터너터브: 건 게일 온라인	N130	QWK		GN							names.212549
+ソードアート・オンライン オルタナティブ ガンゲイル・オンライン	소드 아트 온라인 얼터너티브: 건 게일 온라인	N130	QWK		GN							names.212549
 ソードアート・オンライン フラクチュアード デイドリーム	소드 아트 온라인 프랙처드 데이드림	N130	QWK		GN						そーどあーと・おんらいん ふらくちゅあーど でいどりーむ	names.212550
 ソードアート・オンライン プログレッシブ	소드 아트 온라인 프로그레시브	N130	QWK		GN						そーどあーと・おんらいん ぷろぐれっしぶ	names.212551
 ソードアート・オンライン ヴァリアント・ショウダウン	소드 아트 온라인 베리언트 쇼다운	N130	QWK		GN						ソードアート・オンライン ヴァリアント・ショウダウン	names.212552
@@ -215744,7 +215744,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 タブーク州	타부크주	N130	QCTVPl		GN							names.215767
 タブーメモリ	타부 메모리	N110			GN						たぶーめもり	names.215768
 タブー・タトゥー	타부 타투	N130	QWK		GN						たぶー・たとぅー	names.215769
-タブー・ドーパント	타부 도펀트	N110			GN						たぶーどーぱんと	names.215770
+タブー・ドーパント	터부 도펀트	N110			GN						たぶーどーぱんと	names.215770
 タブー・ドーパント	터부 도펀트	N110			GN						タブー・ドーパント	names.215771
 タプ	타프	N110			GN						たぷ	names.215772
 タプコル公園	탑골공원	N130	QCTVPl		GN							names.215773
@@ -217565,7 +217565,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ダイアン・クレイグ	다이안 크레이그	N130	QPNVHn		GN							names.217588
 ダイアン・グリーン	다이앤 그린	N130	QPNVHn		GN							names.217589
 ダイアン・ケイ	다이안 케이	N130	QPNVHn		GN							names.217590
-ダイアン・ケリー「知られざるペニスの解剖学」	다이안 켈리(Diane Kelly): 성기 해부학에 대해 우리가 몰랐던 사실.	N130	QWK		GN							names.217591
+ダイアン・ケリー「知られざるペニスの解剖学」	다이안 켈리: 성기 해부학에 대해 우리가 몰랐던 사실.	N130	QWK		GN							names.217591
 ダイアン・ゲレロ	다이앤 게레로	N130	QPNVHn		GN							names.217592
 ダイアン・サリンジャー	다이안 샐린저	N130	QPNVHn		GN							names.217593
 ダイアン・サーストン	다이앤 서스턴	N130	QPNVHn		GN						だいあん・さーすとん	names.217594
@@ -222017,7 +222017,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ダン・ミンツ	댄 민츠	N130	QPNVHn		GN							names.222040
 ダン・ムーディ	댄 무디	N130	QPNVHn		GN							names.222041
 ダン・メイザー	댄 마저	N130	QPNVHn		GN							names.222042
-ダン・メイヤー:「数学クラス改造計画」	댄 메이어(Dan Meyer): 수학 수업의 개혁이 필요합니다.	N130	VGt		GN							names.222043
+ダン・メイヤー:「数学クラス改造計画」	댄 메이어: 수학 수업의 개혁이 필요합니다.	N130	VGt		GN							names.222043
 ダン・モナハン	댄 모나한	N130	QPNVHn		GN							names.222044
 ダン・モロ	댄 모로	N130	QPNVHn		GN						だん・もろ	names.222045
 ダン・ユルゲン	댄 저건스	N130	QPNVHn		GN							names.222046
@@ -222799,7 +222799,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ダーク・ベネディクト	더크 베네딕트	N130	QPNVHn		GN							names.222822
 ダーク・ホルス・ドラゴン	다크 호루스 드래곤	N130	QPNVHn		GN						だーく・ほるす・どらごん	names.222823
 ダーク・ボガード	더크 보가드	N130	QPNVHn		GN							names.222824
-ダーク・ボッド	보드, 더크,	N130	QPNVHn		GN							names.222825
+ダーク・ボッド	더크 보드	N130	QPNVHn		GN							names.222825
 ダーク・ボルテニス	다크 볼테니스	N130	QPNVHn		GN						だーく・ぼるてにす	names.222826
 ダーク・ボーチャート	더크 보차트	N130	QPNVHn		GN							names.222827
 ダーク・マウジー	다크 마우지	N130	QPNVHn		GN						だーく・まうじー	names.222828
@@ -225069,7 +225069,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 チバウ文化センター	티바우 문화센터	N130	QCTVPl		GN							names.225092
 チバエナガ	지바 에나가	N110			GN						ちばえなが	names.225093
 チバテレ	지바 TV	N110			GN						ちばてれ	names.225094
-チバテレビ	지바 TV	N110			GN						ちばてれび	names.225095
+チバテレビ	지바TV	N110			GN						ちばてれび	names.225095
 チバナ	치바나	N130	QPNVHn	Wb	GN						ちばな	names.225096
 チバニアン	지바절	N110			GN						ちばにあん	names.225097
 チバニャン	치바냥	N130	QPNVHn	Wb	GN						ちばにゃん	names.225098
@@ -227863,7 +227863,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 チューリッヒ美術館	취리히 미술관	N130	VGt		GN							names.227886
 チューリップ	튤립	N110			GN						チューリップ	names.227887
 チューリップの形	튤립 모양	N130	QWK		GN							names.227888
-チューリップテレビ	튤립 TV	N110			GN						ちゅーりっぷてれび	names.227889
+チューリップテレビ	튤립TV	N110			GN						ちゅーりっぷてれび	names.227889
 チューリップハット	튤립 햇	N110			GN						ちゅーりっぷはっと	names.227890
 チューリップホッパー	튤립 호퍼	N110			GN						ちゅーりっぷほっぱー	names.227891
 チューリップ・フィーバー	튤립 피버	N130	QWK		GN							names.227892
@@ -230457,7 +230457,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ツェビエ	체비에	N130	QCTVPl		GN							names.230480
 ツェペッシュ・ネル	체페슈 네루	N130	QPNVHn		GN						つぇぺっしゅ・ねる	names.230481
 ツェペッシュ・ビアンキ	체페슈 비앙키	N130	QPNVHn		GN						つぇぺっしゅ・びあんき	names.230482
-ツェペリ	츠ェペリ	N130	QPNVHn	Wb	GN						つぇぺり	names.230483
+ツェペリ	체펠리	N130	QPNVHn	Wb	GN						つぇぺり	names.230483
 ツェペリ	체펠리	N130	QPNVHn	Wb	GN							names.230484
 ツェポ・マシレラ	체포 마실렐라	N130	QPNVHn		GN							names.230485
 ツェポ・モツェペ	체포 모체페	N130	QPNVHn		GN							names.230486
@@ -234672,8 +234672,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレパトリス	텔레파트리스	N110			GN						てれぱとりす	names.234695
 テレビ	텔레비전	N110			GN						テレビ	names.234696
 テレビくん	텔레비 군	N110			GN						てれびくん	names.234697
-テレビせとうち	TV 세토우치	N110			GN						てれびせとうち	names.234698
-テレビせとうち株式会社	테레비 세토우치	N130	VGt		GN							names.234699
+テレビせとうち	TV세토우치	N110			GN						てれびせとうち	names.234698
+テレビせとうち株式会社	TV세토우치	N130	VGt		GN							names.234699
 テレビで中国語	TV로 중국어	N110			GN							names.234700
 テレビとりもち	텔레비전 끈끈이	N130	QPNVHn		GN						てれびとりもち	names.234701
 テレビのジョン	텔레비전의 존	N130	QPNVHn		GN						てれびのじょん	names.234702
@@ -234697,66 +234697,66 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレビパワー	TV 파워	N110			GN						てれびぱわー	names.234720
 テレビマガジン	텔레비매거진	N110			GN						てれびまがじん	names.234721
 テレビマン	TV맨	N130	QPNVHn	Wb	GN						てれびまん	names.234722
-テレビユー	테레비 유	N110			GN						てれびゆー	names.234723
-テレビユー富山	튤립 TV	N110			GN							names.234724
+テレビユー	TV-U	N110			GN						てれびゆー	names.234723
+テレビユー富山	TV-U 도야마	N110			GN							names.234724
 テレビユー山形	TV-U 야마가타	N110			GN							names.234725
 テレビユー福島	TV-U 후쿠시마	N110			GN							names.234726
 テレビランド	텔레비랜드	N110			GN						てれびらんど	names.234727
 テレビ仮面	TV 가면	N110			GN							names.234728
-テレビ信州	TV 신슈	N110			GN							names.234729
-テレビ北海道	TV 홋카이도	N110			GN							names.234730
+テレビ信州	TV신슈	N110			GN							names.234729
+テレビ北海道	TV홋카이도	N110			GN							names.234730
 テレビ千鳥	테레비 지도리	N110			GN						てれびちどり	names.234731
-テレビ和歌山	TV 와카야마	N110			GN						てれびわかやま	names.234732
-テレビ埼玉	TV 사이타마	N110			GN							names.234733
-テレビ大分	TV 오이타	N110			GN						てれびおおいた	names.234734
-テレビ大阪	TV 오사카	N110			GN							names.234735
-テレビ大阪株式会社	테레비 오사카	N130	VGt		GN							names.234736
-テレビ宮崎	TV 미야자키	N110			GN							names.234737
+テレビ和歌山	TV와카야마	N110			GN						てれびわかやま	names.234732
+テレビ埼玉	TV사이타마	N110			GN							names.234733
+テレビ大分	TV오이타	N110			GN						てれびおおいた	names.234734
+テレビ大阪	TV오사카	N110			GN							names.234735
+テレビ大阪株式会社	TV오사카	N130	VGt		GN							names.234736
+テレビ宮崎	TV미야자키	N110			GN							names.234737
 テレビ局	텔레비전 방송국	N130	VGt		GN							names.234738
 テレビ局擬人化	방송국 의인화	N110			GN							names.234739
 テレビ局殺人事件	방송국 살인 사건	N130	QPNVHn		GN							names.234740
-テレビ山口	TV 야마구치	N110			GN							names.234741
-テレビ山梨	TV 야마나시	N110			GN							names.234742
-テレビ岩手	TV 이와테	N110			GN						てれびいわて	names.234743
-テレビ愛媛	TV 에히메	N110			GN							names.234744
-テレビ愛知	TV 아이치	N110			GN							names.234745
-テレビ愛知株式会社	TV 아이치	N130	VGt		GN							names.234746
-テレビ愛知株式会社	테레비 아이치	N130	VGt		GN							names.234747
+テレビ山口	TV야마구치	N110			GN							names.234741
+テレビ山梨	TV야마나시	N110			GN							names.234742
+テレビ岩手	TV이와테	N110			GN						てれびいわて	names.234743
+テレビ愛媛	TV에히메	N110			GN							names.234744
+テレビ愛知	TV아이치	N110			GN							names.234745
+テレビ愛知株式会社	TV아이치	N130	VGt		GN							names.234746
+テレビ愛知株式会社	TV아이치	N130	VGt		GN							names.234747
 テレビ探偵団	텔레비전 탐정단	N110			GN							names.234748
-テレビ新広島	TV 신히로시마	N110			GN						てれびしんひろしま	names.234749
-テレビ新潟	TV 니가타 방송망	N110			GN							names.234750
-テレビ新潟放送網	TV 니가타 방송망	N130	VGt		GN							names.234751
-テレビ朝日	TV 아사히	N110			GN						てれびあさひ	names.234752
-テレビ朝日	테레비 아사히	N110			GN						てれびあさひ	names.234753
-テレビ朝日・ABC金曜9時枠の連続ドラマ	TV 아사히 ABC 금요일 9시  연속 드라마	N130	QWK		GN							names.234754
-テレビ朝日土曜時代劇	TV 아사히 토요일 밤 8시 시대극	N130	QWK		GN							names.234755
-テレビ朝日日曜8時連続ドラマ	TV 아사히 일요일 밤 8시 드라마	N130	QWK		GN							names.234756
-テレビ朝日木曜時代劇	TV 아사히 목요시대극	N130	QWK		GN							names.234757
-テレビ朝日水曜21時枠刑事ドラマ	TV 아사히 수요 21시 형사 드라마	N130	QWK		GN							names.234758
-テレビ朝日火曜9時枠の連続ドラマ	TV 아사히 화요일 9시 드라마	N130	QWK		GN							names.234759
-テレビ朝日火曜時代劇	TV 아사히 화요시대극	N130	QWK		GN							names.234760
-テレビ東京	TV 도쿄	N110			GN						てれびとうきょう	names.234761
-テレビ東京日曜9時連続ドラマ	TV 도쿄 일요일 밤 9시 드라마	N130	QWK		GN							names.234762
-テレビ東京月曜10時枠の連続ドラマ	TV 도쿄 월요일 밤 10시 드라마	N130	QWK		GN							names.234763
-テレビ東京水曜8時枠の連続ドラマ	TV 도쿄 수요일 밤 8시 드라마	N130	QWK		GN							names.234764
-テレビ東京火曜8時枠の連続ドラマ	TV 도쿄 화요일 8시 드라마	N130	QWK		GN							names.234765
-テレビ東京系土曜深夜ドラマ	TV 도쿄 토요일 심야 드라마	N130	QWK		GN							names.234766
-テレビ東京金曜8時枠の連続ドラマ	TV 도쿄 금요일 밤 8시 드라마	N130	QWK		GN							names.234767
-テレビ東京金曜夜8時枠時代劇	TV 도쿄 금요일 밤 8시 시대극	N130	QWK		GN							names.234768
-テレビ東京金曜夜9時枠時代劇	TV 도쿄 금요일 밤 9시 시대극	N130	QWK		GN							names.234769
+テレビ新広島	TV신히로시마	N110			GN						てれびしんひろしま	names.234749
+テレビ新潟	TV니가타	N110			GN							names.234750
+テレビ新潟放送網	TV니가타 방송망	N130	VGt		GN							names.234751
+テレビ朝日	TV아사히	N110			GN						てれびあさひ	names.234752
+テレビ朝日	TV아사히	N110			GN						てれびあさひ	names.234753
+テレビ朝日・ABC金曜9時枠の連続ドラマ	TV아사히 ABC 금요일 9시 연속 드라마	N130	QWK		GN							names.234754
+テレビ朝日土曜時代劇	TV아사히 토요일 밤 8시 시대극	N130	QWK		GN							names.234755
+テレビ朝日日曜8時連続ドラマ	TV아사히 일요일 밤 8시 드라마	N130	QWK		GN							names.234756
+テレビ朝日木曜時代劇	TV아사히 목요시대극	N130	QWK		GN							names.234757
+テレビ朝日水曜21時枠刑事ドラマ	TV아사히 수요 21시 형사 드라마	N130	QWK		GN							names.234758
+テレビ朝日火曜9時枠の連続ドラマ	TV아사히 화요일 9시 드라마	N130	QWK		GN							names.234759
+テレビ朝日火曜時代劇	TV아사히 화요시대극	N130	QWK		GN							names.234760
+テレビ東京	TV도쿄	N110			GN						てれびとうきょう	names.234761
+テレビ東京日曜9時連続ドラマ	TV도쿄 일요일 밤 9시 드라마	N130	QWK		GN							names.234762
+テレビ東京月曜10時枠の連続ドラマ	TV도쿄 월요일 밤 10시 드라마	N130	QWK		GN							names.234763
+テレビ東京水曜8時枠の連続ドラマ	TV도쿄 수요일 밤 8시 드라마	N130	QWK		GN							names.234764
+テレビ東京火曜8時枠の連続ドラマ	TV도쿄 화요일 8시 드라마	N130	QWK		GN							names.234765
+テレビ東京系土曜深夜ドラマ	TV도쿄 토요일 심야 드라마	N130	QWK		GN							names.234766
+テレビ東京金曜8時枠の連続ドラマ	TV도쿄 금요일 밤 8시 드라마	N130	QWK		GN							names.234767
+テレビ東京金曜夜8時枠時代劇	TV도쿄 금요일 밤 8시 시대극	N130	QWK		GN							names.234768
+テレビ東京金曜夜9時枠時代劇	TV도쿄 금요일 밤 9시 시대극	N130	QWK		GN							names.234769
 テレビ東京金曜深夜1時枠の深夜ドラマ	금요 25시	N130	QWK		GN							names.234770
 テレビ欄パロ	TV 편성표 패러디	N110			GN							names.234771
 テレビ演劇サクセス荘	TV 연극 석세스장	N110			GN						てれびえんげきさくせすそう	names.234772
-テレビ熊本	TV 구마모토	N110			GN						てれびくまもと	names.234773
+テレビ熊本	TV구마모토	N110			GN						てれびくまもと	names.234773
 テレビ王子	TV 왕자	N130	QPNVHn		GN						てれびおうじ	names.234774
 テレビ番組	텔레비전 프로그램	N110			GN							names.234775
-テレビ神奈川	TV 가나가와	N110			GN							names.234776
+テレビ神奈川	TV가나가와	N110			GN							names.234776
 テレビ絵本	TV 그림책	N110			GN							names.234777
-テレビ西日本	TV 니시닛폰	N110			GN							names.234778
-テレビ金沢	TV 가나자와	N110			GN						てれびかなざわ	names.234779
-テレビ長崎	TV 나가사키	N110			GN							names.234780
-テレビ静岡	TV 시즈오카	N110			GN							names.234781
-テレビ高知	TV 고치	N110			GN							names.234782
+テレビ西日本	TV니시닛폰	N110			GN							names.234778
+テレビ金沢	TV가나자와	N110			GN						てれびかなざわ	names.234779
+テレビ長崎	TV나가사키	N110			GN							names.234780
+テレビ静岡	TV시즈오카	N110			GN							names.234781
+テレビ高知	TV고치	N110			GN							names.234782
 テレフェ・ノティシアス	텔레페 노티시아스	N130	QWK		GN							names.234783
 テレフォトグラフィー	텔레포토그래피	N110			GN						てれふぉとぐらふぃー	names.234784
 テレフォニカ	텔레포니카	N130	VGt		GN							names.234785
@@ -234888,7 +234888,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 テレーゼ・マルファッティ	테레제 말파티	N130	QPNVHn		GN							names.234911
 テレーロ	테레로	N130	QPNVHn	Wb	GN							names.234912
 テレ朝	TV 아사히	N110			GN						てれあさ	names.234913
-テレ朝	테레비 아사히	N110			GN							names.234914
+テレ朝	TV아사히	N110			GN							names.234914
 テレ朝チャンネル	테레아사 채널	N110			GN							names.234915
 テレ東	TV 도쿄	N110			GN						てれとう	names.234916
 テレ東規制	테레토 규제	N110			GN							names.234917
@@ -239002,7 +239002,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デスクトップアーミー	데스크톱 아미	N110			GN						ですくとっぷあーみー	names.239025
 デスクトップパソコン	데스크톱 컴퓨터	N110			GN						デスクトップパソコン	names.239026
 デスクトップマスコット	데스크톱 마스코트	N130	QPNVHn		GN						ですくとっぷますこっと	names.239027
-デスクトップミュージック	DTM 입문	N110			GN						デスクトップミュージック	names.239028
+デスクトップミュージック	컴퓨터 음악	N110			GN						デスクトップミュージック	names.239028
 デスクリムゾン	데스 크림슨	N130	QWK		GN						ですくりむぞん	names.239029
 デスクリムゾン2	데스 크림존 2	N110			GN							names.239030
 デスクルス	데스크루스	N110			GN						ですくるす	names.239031
@@ -239083,7 +239083,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デスティニープラン	데스티니 플랜	N110			GN						デスティニープラン	names.239106
 デスティニーラバーズ	데스티니 러버즈	N130	QWK		GN						ですてぃにーらばーず	names.239107
 デスティニー・イン・ザ・ウォー	언더 파이어	N130	QWK		GN							names.239108
-デスティニー・ウィットロック	운명 위틀락	N130	QPNVHn		GN							names.239109
+デスティニー・ウィットロック	데스티니 위틀락	N130	QPNVHn		GN							names.239109
 デスティニー・ウドギー	데스티니 우도기	N130	QPNVHn		GN							names.239110
 デスティニー・クルーズ	데스티니 크루즈	N130	QPNVHn		GN							names.239111
 デスティニー・チュクニェレ	데스트니 추쿤예레	N130	QPNVHn		GN							names.239112
@@ -239750,12 +239750,12 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デトロイトディーゼル	디트로이트 디젤	N130	VGt		GN							names.239773
 デトロイト・ウルバリンズ	디트로이트 울버린스	N130	VGt		GN							names.239774
 デトロイト・コップ・シティ	더 맨	N130	QWK		GN							names.239775
-デトロイト・ショック	디토로이트 쇼크	N130	VGt		GN							names.239776
+デトロイト・ショック	디트로이트 쇼크	N130	VGt		GN							names.239776
 デトロイト・スターズ	디트로이트 스타스	N130	VGt		GN							names.239777
 デトロイト・タイガース	디트로이트 타이거스	N130	VGt		GN						デトロイト・タイガース	names.239778
 デトロイト・ピストンズ	디트로이트 피스턴스	N130	VGt		GN						デトロイト・ピストンズ	names.239779
 デトロイト・ファルコンズ	디트로이트 팰컨스	N130	VGt		GN							names.239780
-デトロイト・マーシー大学	디트로이트 자선대학교	N130	VGt		GN							names.239781
+デトロイト・マーシー大学	디트로이트 머시대학교	N130	VGt		GN							names.239781
 デトロイト・メタル・シティ	디트로이트 메탈 시티	N130	QWK		GN						デトロイト・メタル・シティ	names.239782
 デトロイト・メトロポリタン・ウェイン・カウンティ空港	디트로이트 메트로폴리탄 웨인 카운티 공항	N130	QCTVPl		GN							names.239783
 デトロイト・ライオンズ	디트로이트 라이온스	N130	VGt		GN						デトロイト・ライオンズ	names.239784
@@ -239827,7 +239827,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デニス・インキン	데니스 인킨	N130	QPNVHn		GN							names.239850
 デニス・ウィルソン	데니스 윌슨	N130	QPNVHn		GN							names.239851
 デニス・ウィーバー	데니스 위버	N130	QPNVHn		GN							names.239852
-デニス・ウィーラン	로니 웰런	N130	QPNVHn		GN							names.239853
+デニス・ウィーラン	데니스 웰런	N130	QPNVHn		GN							names.239853
 デニス・ウラノフ	데니스 울라노프	N130	QPNVHn		GN							names.239854
 デニス・ウルフ	데니스 볼프	N130	QPNVHn		GN							names.239855
 デニス・エカーズリー	데니스 에커슬리	N130	QPNVHn		GN							names.239856
@@ -240582,7 +240582,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デビン・ブッカー	데빈 부커	N130	QPNVHn		GN							names.240605
 デビン・ブラウン	데빈 브라운	N130	QPNVHn		GN							names.240606
 デビン・ヘスター	데빈 헤스터	N130	QPNVHn		GN							names.240607
-デビン・ホフ	데브라 호프	N130	QPNVHn		GN							names.240608
+デビン・ホフ	데빈 호프	N130	QPNVHn		GN							names.240608
 デビン・メソラコ	데빈 메조라코	N130	QPNVHn		GN							names.240609
 デビン・ロビンソン	데빈 로빈슨	N130	QPNVHn		GN							names.240610
 デビ・デリーベリー	데비 데리베리	N130	QPNVHn		GN							names.240611
@@ -240668,7 +240668,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デブブ地方	남부주	N130	QCTVPl		GN							names.240691
 デブホモ	데부호모	N110			GN						でぶほも	names.240692
 デブラ	데브라	N110			GN						でぶら	names.240693
-デブラリー・スコット	데브발리 스콧	N130	QPNVHn		GN							names.240694
+デブラリー・スコット	데브라리 스콧	N130	QPNVHn		GN							names.240694
 デブラント	데브란트	N130	QPNVHn	Wb	GN						でぶらんと	names.240695
 デブラ・アン・スタンゲラン	데브라 안 스타에란드	N130	QPNVHn		GN							names.240696
 デブラ・ウィルソン	데브라 윌슨	N130	QPNVHn		GN							names.240697
@@ -240701,7 +240701,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デブレツィオン・ゲブレマイケル	데브레치온 게브레마이클	N130	QPNVHn		GN							names.240724
 デブレツェニVSC	데브레체니 VSC	N130	VGt		GN							names.240725
 デブレツェン	데브레첸	N130	QCTVPl		GN						でぶれつぇん	names.240726
-デブレツェン・カルヴァン派神学大学	데브레첸 개혁신학대학학교	N130	VGt		GN							names.240727
+デブレツェン・カルヴァン派神学大学	데브레첸 개혁신학대학교	N130	VGt		GN							names.240727
 デブレツェン大学	데브레첸 대학교	N130	VGt		GN							names.240728
 デブレ・ベルハン	데브레 베르한	N130	QCTVPl		GN							names.240729
 デブレ・マルコス	데브레 마르코스	N130	QCTVPl		GN							names.240730
@@ -240976,7 +240976,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デモンゲイズ	데몬 게이즈	N130	QWK		GN						デモンゲイズ	names.240999
 デモンゴーネ	데몬고네	N110			GN						でもんごーね	names.241000
 デモンスター	데몬스터	N110			GN						でもんすたー	names.241001
-デモンストレーション	데모스트레이션	N110			GN						でもんすとれーしょん	names.241002
+デモンストレーション	데먼스트레이션	N110			GN						でもんすとれーしょん	names.241002
 デモンスミス	데몬스미스	N130	QPNVHn	Wb	GN						でもんすみす	names.241003
 デモンスミス	데먼스미스	N130	QPNVHn	Wb	GN						デモンスミス	names.241004
 デモンズ	데몬스	N110			GN						でもんず	names.241005
@@ -242297,7 +242297,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デヴィッド・イェーツ	데이비드 예이츠	N130	QPNVHn		GN							names.242320
 デヴィッド・イーガン	데이비드 이건	N110			GN						でゔぃっど・いーがん	names.242321
 デヴィッド・ウィアー	데이비드 위어	N130	QPNVHn		GN							names.242322
-デヴィッド・ウィニング	데이비드 우승	N130	QPNVHn		GN							names.242323
+デヴィッド・ウィニング	데이비드 위닝	N130	QPNVHn		GN							names.242323
 デヴィッド・ウィルソン	데이비드 윌슨	N130	QPNVHn		GN							names.242324
 デヴィッド・ウィルモット	데이비드 윌모트	N130	QPNVHn		GN							names.242325
 デヴィッド・ウェイン	데이비드 웨인	N130	QPNVHn		GN						でゔぃっど うぇいん	names.242326
@@ -242374,7 +242374,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 デヴィッド・シルヴァーマン	데이비드 실버먼	N130	QPNVHn		GN							names.242397
 デヴィッド・シルヴィアン	데이빗 실비언	N130	QPNVHn		GN							names.242398
 デヴィッド・シーモア	데이비드 시무어	N130	QPNVHn		GN							names.242399
-デヴィッド・シールズ	데이비드	N130	QPNVHn	Wb	GN							names.242400
+デヴィッド・シールズ	데이비드 실즈	N130	QPNVHn	Wb	GN							names.242400
 デヴィッド・ジェイソン	데이비드 제이슨	N130	QPNVHn		GN							names.242401
 デヴィッド・ジェンキンス	데이비드 젱킨스	N130	QPNVHn		GN						でゔぃっど じぇんきんす	names.242402
 デヴィッド・ジェームズ・エリオット	데이비드 제임스 엘리엇	N130	QPNVHn		GN							names.242403
@@ -242709,7 +242709,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 データウェアハウス	데이터 웨어하우스	N110			GN						データウェアハウス	names.242732
 データウェポン	데이터 웨폰	N110			GN						でーたうぇぽん	names.242733
 データカードダス	데이터카드더스	N130	QWK		GN						でーたかーどだす	names.242734
-データカードダスプリキュアオールスターズ	데이터카드ダス 프리큐어 올스타즈	N130	QWK		GN						でーたかーどだすぷりきゅあおーるすたーず	names.242735
+データカードダスプリキュアオールスターズ	데이터카드더스 프리큐어 올스타즈	N130	QWK		GN						でーたかーどだすぷりきゅあおーるすたーず	names.242735
 データキャラ	데이터 캐릭터	N130	QPNVHn		GN						でーたきゃら	names.242736
 データス	데이터스	N110			GN						でーたす	names.242737
 データスハイパー	데이터스 하이퍼	N110			GN						でーたすはいぱー	names.242738
@@ -244193,14 +244193,14 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トッキュウ7号	토큐 7호	N110			GN						ときゅうななごう	names.244216
 トッキュウオー	톳큐오	N110			GN						とっきゅうおー	names.244217
 トッキュウオー	토큐오	N110			GN						トッキュウオー	names.244218
-トッキュウジャー	토ッ큐저	N130	QPNVHn	Wb	GN						とっきゅうじゃー	names.244219
-トッキュウジャーアルター	톳큐저 알터	N110			GN						とっきゅうじゃーあるたー	names.244220
+トッキュウジャー	토큐저	N130	QPNVHn	Wb	GN						とっきゅうじゃー	names.244219
+トッキュウジャーアルター	토큐저 알터	N110			GN						とっきゅうじゃーあるたー	names.244220
 トッキュウチェンジャー	토큐 체인저	N110			GN						とっきゅうちぇんじゃー	names.244221
-トッキュウバックル	토ッキュウ 버클	N110			GN						とっきゅうばっくる	names.244222
+トッキュウバックル	토큐 버클	N110			GN						とっきゅうばっくる	names.244222
 トッキュウブラスター	토큐 블래스터	N110			GN						とっきゅうぶらすたー	names.244223
 トッキュウレインボー	톳큐 레인보	N110			GN						とっきゅうれいんぼー	names.244224
 トッキュウレインボー	토큐 레인보우	N110			GN						トッキュウレインボー	names.244225
-トッキュウレッシャー	토ッ큐레셔	N110			GN						とっきゅうれっしゃー	names.244226
+トッキュウレッシャー	토큐레셔	N110			GN						とっきゅうれっしゃー	names.244226
 トッキュウレッシャー	토큐 렛샤	N110			GN						トッキュウレッシャー	names.244227
 トッキュー!!	특급!!	N130	QWK		GN							names.244228
 トッキー	토키	N130	QPNVHn	Wb	GN						とっきー	names.244229
@@ -244258,7 +244258,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トッド・ウィリアムズ	토드 윌리엄스	N130	QPNVHn		GN						とっど うぃりあむず	names.244282
 トッド・ウェアリング	토드 바링	N130	QPNVHn		GN							names.244283
 トッド・ウォーカー	토드 워커	N130	QPNVHn		GN							names.244284
-トッド・ウッドブリッジ	토드 울드리지	N130	QPNVHn		GN							names.244285
+トッド・ウッドブリッジ	토드 우드브리지	N130	QPNVHn		GN							names.244285
 トッド・エドワーズ	토드 에드워즈	N130	QPNVHn		GN							names.244286
 トッド・エルドリッジ	토드 엘드레지	N130	QPNVHn		GN							names.244287
 トッド・カーンズ	토드 칸스	N130	QPNVHn		GN							names.244288
@@ -244661,7 +244661,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トニー・エバーズ	토니 에버스	N130	QPNVHn		GN							names.244685
 トニー・オデル	토니 오델	N130	QPNVHn		GN							names.244686
 トニー・オライリー	토니 오라일리	N130	QPNVHn		GN							names.244687
-トニー・オリバ	토니 올리버	N130	QPNVHn		GN							names.244688
+トニー・オリバ	토니 올리바	N130	QPNVHn		GN							names.244688
 トニー・オリバー	토니 올리버	N130	QPNVHn		GN							names.244689
 トニー・オーバン	토니 오뱅	N130	QPNVHn		GN							names.244690
 トニー・オーランド&ドーン	토니 올랜도 앤 돈	N130	VGt		GN							names.244691
@@ -245000,7 +245000,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トビー・ハス	토비 허스	N130	QPNVHn		GN							names.245024
 トビー・パーキンズ	토비 퍼킨스	N130	QPNVHn		GN							names.245025
 トビー・フォックス	토비 폭스	N130	QPNVHn		GN						トビー・フォックス	names.245026
-トビー・フーパー	토브 후퍼	N130	QPNVHn		GN						トビー・フーパー	names.245027
+トビー・フーパー	토비 후퍼	N130	QPNVHn		GN						トビー・フーパー	names.245027
 トビー・ヘインズ	토비 헤인스	N130	QPNVHn		GN							names.245028
 トビー・ヘミングウェイ	토비 헤밍웨이	N130	QPNVHn		GN							names.245029
 トビー・ホール	토비 홀	N130	QPNVHn		GN							names.245030
@@ -245659,7 +245659,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トムリンソン	톰린슨	N130	QPNVHn	Wb	GN						とむりんそん	names.245683
 トム・アスピナル	톰 아스피날	N130	QPNVHn		GN							names.245684
 トム・アッカーリー	톰 애컬리	N130	QPNVHn		GN							names.245685
-トム・アッテンボロー	톤 애튼버러	N130	QPNVHn		GN							names.245686
+トム・アッテンボロー	톰 애튼버러	N130	QPNVHn		GN							names.245686
 トム・アット・ザ・ファーム	탐엣더팜	N130	QWK		GN							names.245687
 トム・アトキンス	톰 앳킨스	N130	QPNVHn		GN							names.245688
 トム・アポストル	톰 어포스톨	N130	QPNVHn		GN							names.245689
@@ -245822,7 +245822,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トム・デンプシー	톰 뎀프시	N130	QPNVHn		GN							names.245846
 トム・デヴリーント	톰 데브린트	N130	QPNVHn		GN							names.245847
 トム・デ・ムル	톰 더뮐	N130	QPNVHn		GN							names.245848
-トム・トゥループ	톰 브러프	N130	QPNVHn		GN							names.245849
+トム・トゥループ	톰 트루프	N130	QPNVHn		GN							names.245849
 トム・トムソン	톰 톰슨	N130	QPNVHn		GN							names.245850
 トム・トライオン	톰 트라이언	N130	QPNVHn		GN							names.245851
 トム・トレッシュ	톰 트레쉬	N130	QPNVHn		GN							names.245852
@@ -246792,7 +246792,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トランスポート・ユナイテッドFC	트랜스포트 유나이티드 FC	N130	VGt		GN							names.246816
 トランスマイル・エア・サービス	트랜스마일 에어 서비스	N130	VGt		GN							names.246817
 トランスミッション	변속기	N110			GN						トランスミッション	names.246818
-トランスミッション・フィルムズ	전송 영화	N130	VGt		GN							names.246819
+トランスミッション・フィルムズ	트랜스미션 필름스	N130	VGt		GN							names.246819
 トランスミッター	트랜스미터	N110			GN						とらんすみったー	names.246820
 トランスミューテイト	트랜스뮤테이트	N130	QPNVHn	Wb	GN						とらんすみゅーていと	names.246821
 トランスメタ	트랜스메타	N130	VGt		GN							names.246822
@@ -247067,7 +247067,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トリグブ・リー	트뤼그베 리	N130	QPNVHn		GN						トリグブ・リー	names.247091
 トリグラウ国立公園	트리글라브 국립공원	N130	QCTVPl		GN							names.247092
 トリグラウ山	트리글라우	N130	QCTVPl		GN							names.247093
-トリグラフ	트리글라브	N110			GN						トリグラフ	names.247094
+トリグラフ	트라이그래프	N110			GN						トリグラフ	names.247094
 トリグリフ	트리글리프	N130	QWK		GN							names.247095
 トリグヴィ・グズムンドソン	트리그비 그뷔드뮌손	N130	QPNVHn		GN							names.247096
 トリグヴェ・グラン	트뤼그베 그란	N130	QPNVHn		GN							names.247097
@@ -247266,7 +247266,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トリッシュ・ジョンソン	트리시 존슨	N130	QPNVHn		GN							names.247290
 トリッシュ・ストラタス	트리시 스트레터스	N130	QPNVHn		GN							names.247291
 トリッシュ・ベネット	트리쉬 베넷	N130	QPNVHn		GN						とりっしゅ・べねっと	names.247292
-トリッシュール	시서	N130	QCTVPl		GN							names.247293
+トリッシュール	트리수르	N130	QCTVPl		GN							names.247293
 トリッジ	토리지	N130	QCTVPl		GN							names.247294
 トリッチ・トラッチ・ポルカ	트리치 트라치 폴카	N130	QPNVHn		GN						とりっち・とらっち・ぽるか	names.247295
 トリッパ	트리파	N110			GN						とりっぱ	names.247296
@@ -247456,7 +247456,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トリプルスリー	트리플 스리	N110			GN						とりぷるすりー	names.247480
 トリプルズ	트리플즈	N110			GN						とりぷるず	names.247481
 トリプルゼッツァー	트리플 젯처	N130	QPNVHn		GN						とりぷるぜっつぁー	names.247482
-トリプルタップ	용의자	N130	QWK		GN							names.247483
+トリプルタップ	트리플 탭	N130	QWK		GN							names.247483
 トリプルダイブ	트리플다이브	N110			GN						とりぷるだいぶ	names.247484
 トリプルダクス	트리플 닥스	N110			GN						とりぷるだくす	names.247485
 トリプルダルマ	트리플 다루마	N110			GN						とりぷるだるま	names.247486
@@ -248411,7 +248411,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トレス・ラゴアス	트레스 라고아스	N130	QCTVPl		GN							names.248435
 トレス・ラスムソン・ボレ	퇴르레스 라스무손 보레	N130	QPNVHn		GN							names.248436
 トレス・ラスムソン・モイェダル	퇴르레스 라스무손 뫼게달	N130	QPNVHn		GN							names.248437
-トレス海峡	토러스 해협	N130	QCTVPl		GN							names.248438
+トレス海峡	토레스 해협	N130	QCTVPl		GN							names.248438
 トレス海峡諸島	토레스 해협 제도	N130	QCTVPl		GN							names.248439
 トレス海峡諸島民の旗	토레스 해협 도서민 기	N130	QWK		GN							names.248440
 トレス諸島	토러스 제도	N130	QCTVPl		GN							names.248441
@@ -248618,7 +248618,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トレヴァー・ニャカニ	트레버 냐카네	N130	QPNVHn		GN							names.248642
 トレヴァー・ハワード	트레버 하워드	N130	QPNVHn		GN							names.248643
 トレヴァー・ピノック	트레버 피넉	N130	QPNVHn		GN							names.248644
-トレヴァー・ピーコック	트레버 공작	N130	QPNVHn		GN							names.248645
+トレヴァー・ピーコック	트레버 피콕	N130	QPNVHn		GN							names.248645
 トレヴァー・フランシス	트레버 프랜시스	N130	QPNVHn		GN							names.248646
 トレヴァー・ブルッキング	트레버 브루킹	N130	QPNVHn		GN							names.248647
 トレヴァー・ホワイト	트레버 화이트	N130	QPNVHn		GN							names.248648
@@ -248701,7 +248701,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トレーナー姉妹	트레이너 자매	N110			GN							names.248725
 トレーニング	훈련	N110			GN						トレーニング	names.248726
 トレーニングジム	트레이닝 짐	N110			GN						とれーにんぐじむ	names.248727
-トレーニングセンター	트레센	N110			GN						とれーにんぐせんたー	names.248728
+トレーニングセンター	트레이닝 센터	N110			GN						とれーにんぐせんたー	names.248728
 トレーニングデイ	트레이닝 데이	N130	QWK		GN							names.248729
 トレーニングトリオ	트레이닝 트리오	N110			GN						とれーにんぐとりお	names.248730
 トレーニングモード	트레이닝 모드	N110			GN						とれーにんぐもーど	names.248731
@@ -249358,7 +249358,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 トーキル・トラバース	토킬 트래버스	N130	QPNVHn		GN						とーきる・とらばーす	names.249382
 トーキングデッド	토킹 데드	N110			GN						とーきんぐでっど	names.249383
 トーキングヘッド	토킹 헤드	N130	QPNVHn		GN						とーきんぐへっど	names.249384
-トーキング・トム・アンド・フレンズ	톰과 친구들 얘기하기	N130	QWK		GN							names.249385
+トーキング・トム・アンド・フレンズ	토킹톰 앤 프렌즈	N130	QWK		GN							names.249385
 トーキング・ブック	말하는 책	N130	QWK		GN							names.249386
 トーキング・ヘッズ	토킹 헤즈	N130	VGt		GN						トーキング・ヘッズ	names.249387
 トーキング・ヘッド	토킹 헤드	N130	QWK		GN						とーきんぐ・へっど	names.249388
@@ -253353,7 +253353,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ドラゴンボールマルチバース	드래곤볼 멀티버스	N130	QWK		GN						どらごんぼーるまるちばーす	names.253377
 ドラゴンボールレジェンズ	드래곤볼 레전즈	N130	QWK		GN						どらごんぼーるれじぇんず	names.253378
 ドラゴンボール大魔	드래곤볼 DAIMA	N130	QWK		GN							names.253379
-ドラゴンボール改	드래곤볼 改	N130	QPNVHn		GN							names.253380
+ドラゴンボール改	드래곤볼 카이	N130	QPNVHn		GN							names.253380
 ドラゴンボール超	드래곤볼 슈퍼	N130	QWK		GN							names.253381
 ドラゴンボール超 スーパーヒーロー	드래곤볼 슈퍼: 슈퍼 히어로	N130	QWK		GN							names.253382
 ドラゴンボール超 ブロリー	드래곤볼 슈퍼: 브로리	N130	QWK		GN							names.253383
@@ -254481,7 +254481,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ドレイマン	드레이만	N130	QPNVHn	Wb	GN						どれいまん	names.254505
 ドレイモンド・グリーン	드레이먼드 그린	N130	QPNVHn		GN							names.254506
 ドレイン	드레인	N110			GN						どれいん	names.254507
-ドレインキッス	드게인키스	N110			GN						ドレインキッス	names.254508
+ドレインキッス	드레인키스	N110			GN						ドレインキッス	names.254508
 ドレインキッス	드레인키스	N110			GN						ドレインキッス	names.254509
 ドレインディモス	드레인디모스	N110			GN						どれいんでぃもす	names.254510
 ドレインパンチ	드레인펀치	N110			GN						ドレインパンチ	names.254511
@@ -262095,7 +262095,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ニュース39	뉴스39	N110			GN						にゅーすさんじゅうきゅう	names.262119
 ニュース5	뉴스5	N130	VGt		GN							names.262120
 ニュース845おおいた	뉴스 845 오오이타	N130	QWK		GN							names.262121
-ニュース845かごしま	뉴스  845 가고시마	N130	QWK		GN							names.262122
+ニュース845かごしま	뉴스 845 가고시마	N130	QWK		GN							names.262122
 ニュース845くまもと	뉴스 845 구마모토	N130	QWK		GN							names.262123
 ニュース845北九州	뉴스 845 기타규슈	N130	QWK		GN							names.262124
 ニュース845沖縄	뉴스 845 오키나와	N130	QWK		GN							names.262125
@@ -267246,7 +267246,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ノワール・ヴェスパー	누아르 베스퍼	N130	QPNVHn		GN						ノワール・ヴェスパー	names.267270
 ノワール伯爵	느와르 백작	N130	QPNVHn		GN							names.267271
 ノワー・ルピア	노와르 루피아	N110			GN						のわー・るぴあ	names.267272
-ノン	노ン	N130	QPNVHn	Wb	GN						のん	names.267273
+ノン	논	N130	QPNVHn	Wb	GN						のん	names.267273
 ノン	논	N130	QPNVHn	Wb	GN						ノン	names.267274
 ノン=バイナリーのプライド・フラッグ	논바이너리기	N130	QWK		GN							names.267275
 ノン、あるいは支配の空しい栄光	아니, 아니, 지휘의 헛된 영광	N130	QWK		GN							names.267276
@@ -276331,7 +276331,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 バイオレンスメモリ	바이올런스 메모리	N110			GN						ばいおれんすめもり	names.276355
 バイオレンスレイク	바이올런스 레이크	N130	QWK		GN						ばいおれんすれいく	names.276356
 バイオレンス・コップ	고요의 땅	N130	QWK		GN							names.276357
-バイオレンス・ドーパント	바이올런스 도퍼트	N110			GN						ばいおれんす・どーぱんと	names.276358
+バイオレンス・ドーパント	바이올런스 도펀트	N110			GN						ばいおれんす・どーぱんと	names.276358
 バイオレンス・ドーパント	바이올렌스 도펀트	N110			GN						バイオレンス・ドーパント	names.276359
 バイオレンス・レイク	이든 레이크	N130	QWK		GN							names.276360
 バイオレントストーム	바이얼런트 스톰	N110			GN						ばいおれんとすとーむ	names.276361
@@ -282570,7 +282570,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 バード・クーパー	버트 쿠퍼	N130	QPNVHn		GN							names.282594
 バード・スウェイル	브래드 스웨일	N130	QPNVHn		GN							names.282595
 バード・ストーリー	잠베지아: 신비한 나무섬의 비밀	N130	QWK		GN							names.282596
-バード・ドーパント	버드 도퍼트	N110			GN						バード・ドーパント	names.282597
+バード・ドーパント	버드 도펀트	N110			GN						バード・ドーパント	names.282597
 バード・ドーパント	버드 도펀트	N110			GN						バード・ドーパント	names.282598
 バード・フェイス	버드 페이스	N130	QPNVHn		GN						ばーど ふぇいす	names.282599
 バード・ボックス	버드 박스	N130	QWK		GN							names.282600
@@ -288360,7 +288360,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 パワースポット	파워 스폿	N110			GN						ぱわーすぽっと	names.288384
 パワースマッシュ	버추어 테니스	N130	QWK		GN							names.288385
 パワースラム	파워슬램	N110			GN						ぱわーすらむ	names.288386
-パワースワップ	파워스웹	N110			GN						パワースワップ	names.288387
+パワースワップ	파워스왑	N110			GN						パワースワップ	names.288387
 パワースワップ	파워스왑	N110			GN						パワースワップ	names.288388
 パワーズ	파워즈	N130	QPNVHn	Wb	GN						ぱわーず	names.288389
 パワーズ・ブース	파워스 부스	N130	QPNVHn		GN							names.288390
@@ -290230,7 +290230,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ヒップアタック	힙 어택	N110			GN						ひっぷあたっく	names.290254
 ヒップアップ	힙업	N110			GN						ヒップアップ	names.290255
 ヒップスウェル	힙스웰	N130	QCTVPl		GN							names.290256
-ヒップタッチの女王	힙(HIP)하게	N130	QWK		GN							names.290257
+ヒップタッチの女王	히프 터치의 여왕	N130	QWK		GN							names.290257
 ヒップドロップ	힙 드롭	N110			GN						ヒップドロップ	names.290258
 ヒッププレス	힙 프레스	N110			GN						ひっぷぷれす	names.290259
 ヒップヘビー	힙 헤비	N110			GN						ひっぷへびー	names.290260
@@ -295081,7 +295081,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ビースト・ストーリー 選ばれし勇者	울브스	N130	QWK		GN							names.295105
 ビースト・ダビディ	비스트 다비디	N130	QPNVHn		GN						びーすと・だびでぃ	names.295106
 ビースト・ダンス	비스트 댄스	N130	QWK		GN						ビースト・ダンス	names.295107
-ビースト・ドーパント	비스트 도퍼트	N110			GN						びーすと・どーぱんと	names.295108
+ビースト・ドーパント	비스트 도펀트	N110			GN						びーすと・どーぱんと	names.295108
 ビースト・ドーパント	비스트 도펀트	N110			GN						ビースト・ドーパント	names.295109
 ビースト・ファイター	비스트 파이터	N130	QPNVHn		GN						びーすと・ふぁいたー	names.295110
 ビースト一覧	비스트	N110			GN							names.295111

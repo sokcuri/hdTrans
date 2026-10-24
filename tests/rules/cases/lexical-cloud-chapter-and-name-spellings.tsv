@@ -1,0 +1,83 @@
+# 규칙: LEX-1, LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:jisjk:173404	きょううん	새벽녘의 구름	fix	defaults
+dict:jisjk:173404	きょううんが見える。	새벽녘의 구름이 보인다.	fix	defaults
+dict:jisjk:173404	きょううんを眺めた。	새벽녘의 구름을 바라보았다.	fix	defaults
+dict:jisjk:173404	美しいきょううんだ。	아름다운 새벽녘의 구름이다.	fix	defaults
+dict:jisjk:50563	チャプター	챕터	keep	defaults
+dict:jisjk:50563	チャプター。	챕터.	keep	defaults
+dict:jisjk:50563	チャプターを見た。	챕터를 보았다.	keep	defaults
+dict:jisjk:50563	「チャプター」	「챕터」	keep	defaults
+dict:jisjk:255615	利益率	이익률	fix	defaults
+dict:jisjk:255615	利益率。	이익률.	fix	defaults
+dict:jisjk:255615	利益率を見た。	이익률을 보았다.	fix	defaults
+dict:jisjk:255615	「利益率」	「이익률」	fix	defaults
+dict:jisjk:109542	埼玉県東部綜合食品卸売市場	사이타마현 동부종합식품도매시장	keep	defaults
+dict:jisjk:109542	埼玉県東部綜合食品卸売市場。	사이타마현 동부종합식품도매시장.	keep	defaults
+dict:jisjk:109542	埼玉県東部綜合食品卸売市場を見た。	사이타마현 동부종합식품도매시장을 보았다.	keep	defaults
+dict:jisjk:109542	「埼玉県東部綜合食品卸売市場」	「사이타마현 동부종합식품도매시장」	keep	defaults
+dict:jisjk:17669	寄鍋	모둠냄비	fix	defaults
+dict:jisjk:17669	寄鍋。	모둠냄비.	fix	defaults
+dict:jisjk:17669	寄鍋を見た。	모둠냄비를 보았다.	fix	defaults
+dict:jisjk:17669	「寄鍋」	「모둠냄비」	fix	defaults
+dict:jisjk:325416	広島町	히로시마초	keep	defaults
+dict:jisjk:325416	広島町。	히로시마초.	keep	defaults
+dict:jisjk:325416	広島町を見た。	히로시마초를 보았다.	keep	defaults
+dict:jisjk:325416	「広島町」	「히로시마초」	keep	defaults
+dict:jisjk:322282	東池袋	히가시이케부쿠로	keep	defaults
+dict:jisjk:322282	東池袋。	히가시이케부쿠로.	keep	defaults
+dict:jisjk:322282	東池袋を見た。	히가시이케부쿠로를 보았다.	keep	defaults
+dict:jisjk:322282	「東池袋」	「히가시이케부쿠로」	keep	defaults
+dict:jisjk:249869	波動関数	파동함수	keep	defaults
+dict:jisjk:249869	波動関数。	파동함수.	keep	defaults
+dict:jisjk:249869	波動関数を見た。	파동함수를 보았다.	keep	defaults
+dict:jisjk:249869	「波動関数」	「파동함수」	keep	defaults
+dict:jisjk:126088	犬遠吠え	겁쟁이의 허세	fix	defaults
+dict:jisjk:126088	犬遠吠え。	겁쟁이의 허세.	fix	defaults
+dict:jisjk:126088	犬遠吠えを見た。	겁쟁이의 허세를 보았다.	fix	defaults
+dict:jisjk:126088	「犬遠吠え」	「겁쟁이의 허세」	fix	defaults
+dict:jisjk:253307	目垢	눈곱	fix	defaults
+dict:jisjk:253307	目垢。	눈곱.	fix	defaults
+dict:jisjk:253307	目垢を見た。	눈곱을 보았다.	fix	defaults
+dict:jisjk:253307	「目垢」	「눈곱」	fix	defaults
+dict:jisjk:256487	連続関数	연속 함수	keep	defaults
+dict:jisjk:256487	連続関数。	연속 함수.	keep	defaults
+dict:jisjk:256487	連続関数を見た。	연속 함수를 보았다.	keep	defaults
+dict:jisjk:256487	「連続関数」	「연속 함수」	keep	defaults
+dict:jisjk:254976	陽関数	양함수	keep	defaults
+dict:jisjk:254976	陽関数。	양함수.	keep	defaults
+dict:jisjk:254976	陽関数を見た。	양함수를 보았다.	keep	defaults
+dict:jisjk:254976	「陽関数」	「양함수」	keep	defaults
+dict:names.15945	くぎゅロイド	쿠규로이드	fix	fixed
+dict:names.15945	くぎゅロイド。	쿠규로이드.	fix	fixed
+dict:names.15945	くぎゅロイドを見た。	쿠규로이드를 보았다.	fix	fixed
+dict:names.15945	「くぎゅロイド」	「쿠규로이드」	fix	fixed
+dict:names.174077	シーラ・ニーレンバーグ「失明した網膜への新たな補綴治療」。	쉴라 니렌버그: 실명을 치료하는 의안.	fix	fixed
+dict:names.174077	「シーラ・ニーレンバーグ「失明した網膜への新たな補綴治療」」	「쉴라 니렌버그: 실명을 치료하는 의안」	fix	fixed
+dict:names.552263	幼なじみが絶対に負けないラブコメ	소꿉친구가 절대로 지지 않는 러브 코미디	fix	fixed
+dict:names.552263	幼なじみが絶対に負けないラブコメ。	소꿉친구가 절대로 지지 않는 러브 코미디.	fix	fixed
+dict:names.552263	「幼なじみが絶対に負けないラブコメ」	「소꿉친구가 절대로 지지 않는 러브 코미디」	fix	fixed
+dict:jisjk:253307	目あか	눈곱	fix	defaults
+dict:jisjk:253307	目あか。	눈곱.	fix	defaults
+dict:jisjk:253307	目あかを見た。	눈곱을 보았다.	fix	defaults
+dict:jisjk:253307	「目あか」	「눈곱」	fix	defaults
+dict:jisjk:253307	目やに。	눈곱.	keep	defaults
+dict:jisjk:253307	目脂。	눈곱.	keep	defaults
+dict:names.199363	スパイダー・ドーパント	스파이더 도펀트	fix	fixed
+dict:names.199363	スパイダー・ドーパント。	스파이더 도펀트.	fix	fixed
+dict:names.199363	「スパイダー・ドーパント」	「스파이더 도펀트」	fix	fixed
+dict:names.199363	スパイダー・ドーパントを見た。	스파이더 도펀트를 보았다.	fix	fixed
+dict:names.199363	スパイダー・ドーパントの名前。	스파이더 도펀트의 이름.	fix	fixed
+dict:names.254508	ドレインキッスを見た。	드레인키스를 보았다.	fix	fixed
+dict:names.254508	ドレインキッスの名前。	드레인키스의 이름.	fix	fixed
+dict:names.346570	マスカレイド・ドーパント	마스커레이드 도펀트	fix	fixed
+dict:names.346570	マスカレイド・ドーパント。	마스커레이드 도펀트.	fix	fixed
+dict:names.346570	「マスカレイド・ドーパント」	「마스커레이드 도펀트」	fix	fixed
+dict:names.346570	マスカレイド・ドーパントを見た。	마스커레이드 도펀트를 보았다.	fix	fixed
+dict:names.346570	マスカレイド・ドーパントの名前。	마스커레이드 도펀트의 이름.	fix	fixed
+dict:names.31761	アクセル・ドーパント	액셀 도펀트	keep	fixed
+dict:names.10050	UFO・ドーパント	UFO 도펀트	keep	fixed
+dict:jisjk:161962	ドレイン	드레인	keep	defaults
+dict:names.122170	ギガドレイン	기가드레인	keep	fixed
+dict:names.254609	ドレミ	도레미	keep	fixed
+dict:names.346569	マスカレイドミラージュ	마스커레이드 미라주	keep	fixed

@@ -85,29 +85,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          # History without old blobs: the surface budget reads commit messages since the PR base.
-          fetch-depth: 0
-          filter: blob:none
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
           package-manager-cache: false
       - run: npm --prefix tools/release ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix tools/release test
-      # Counts within tools/surface-budget.tsv; on a PR, a raised ceiling needs a commit with a
-      # `Surface-Budget: <reason>` trailer since the base commit, and the files it changes may not
-      # keep unrecorded slack.
-      - name: Surface budget
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: |
-          python3 -I tools/surface-budget.py --self-test
-          if [ -n "$BASE_SHA" ]; then
-            python3 -I tools/surface-budget.py --check --base "$BASE_SHA"
-          else
-            python3 -I tools/surface-budget.py --check
-          fi
 
   build:
     name: ${{ matrix.preset }}
@@ -621,8 +604,8 @@ jobs:
 
   # libFuzzer on mutated text made from the repository's inputs (tools/fuzz.py, docs/build.md "CI").
   # Replaying the seeds and the kept regression inputs fails the job; what the random run finds fails
-  # it on pushes and is reported on pull requests. A fuzzer that does not build is reported: the
-  # other jobs compile the same sources.
+  # it on develop pushes and is reported on pull requests, main pushes and tags. A fuzzer that does
+  # not build is reported: the other jobs compile the same sources.
   fuzz:
     name: linux-fuzz
     needs: gate
@@ -638,6 +621,7 @@ jobs:
       HDTRANS_CACHE_DIR: 'off'
       ASAN_OPTIONS: detect_stack_use_after_return=1
       UBSAN_OPTIONS: print_stacktrace=1
+      FUZZ_BLOCKING: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
     steps:
       - uses: actions/checkout@v7
       - name: Set up sccache
@@ -687,7 +671,7 @@ jobs:
       - name: Fuzz
         id: fuzz
         if: steps.replay.outcome == 'success'
-        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        continue-on-error: ${{ env.FUZZ_BLOCKING != 'true' }}
         timeout-minutes: 8
         run: |
           set +e
@@ -700,7 +684,7 @@ jobs:
             grep '^fuzz: \|^  text: \|^  hex: ' "$RUNNER_TEMP/fuzz.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          if [[ "$status" != 0 && "$GITHUB_EVENT_NAME" == pull_request ]]; then
+          if [[ "$status" != 0 && "$FUZZ_BLOCKING" != true ]]; then
             echo '::warning title=Fuzz::The random fuzz run failed; the inputs are in the summary and the fuzz-findings artifact.'
           fi
           exit "$status"

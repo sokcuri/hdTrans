@@ -1,0 +1,31 @@
+# 규칙: SND-4
+rule	input	expected	kind	layer
+normalize:voiced-mark	「う゛ー……」	「으으……」	fix	normalize
+normalize:voiced-mark	「う゛ぅ――――……」	「으으――――……」	fix	normalize
+normalize:voiced-mark	「あ゛っ、やってくれる！」	「앗, 해 준다!」	fix	normalize
+normalize:voiced-mark	「あ゛…そこ…ですか？」	「아…거기…입니까?」	fix	normalize
+normalize:voiced-mark	「え゛っ！？」	「어!?」	fix	normalize
+normalize:voiced-mark	「え゛、私！？」	「어, 나!?」	fix	normalize
+normalize:voiced-mark	「あ゛ぁ～！お疲れさんっ♪」	「아아~! 수고했어♪」	fix	normalize
+normalize:voiced-mark	「あ、あ、ああああああ゛゛゛～～～～～っ！！」	「아, 아, 아아아아아아~앗!!」	fix	normalize
+normalize:voiced-mark	「う゛ん゛！だいじょうぶぅ～」	「응! 괜찮아~」	fix	normalize
+normalize:voiced-mark	「お゛っ♡」	「오♡」	fix	normalize
+normalize:voiced-mark	「んお゛っ♡」	「응옷♡」	fix	normalize
+normalize:voiced-mark	「ん゛ん゛っ……」	「으읏……」	fix	normalize
+normalize:voiced-mark	「イ゛ッ……！」	「잇……!」	fix	normalize
+normalize:voiced-mark	「ア゛ア゛ッ！」	「아앗!」	fix	normalize
+normalize:voiced-mark	「お゛ほぉっ♡」	「오호옷♡」	fix	normalize
+normalize:voiced-mark	「ぉ゛……」	「오……」	fix	normalize
+normalize:voiced-mark	「あ゛～、暑い」	「아~, 덥다」	fix	normalize
+normalize:voiced-mark	「え゛ーーーッッ？！」	「에에에엣?!」	fix	normalize
+normalize:voiced-mark	「ウ゛ァイオリン」	「바이올린」	fix	normalize
+normalize:voiced-mark	「ｳﾞｧｲｵﾘﾝ」	「바이올린」	keep	normalize
+normalize:voiced-mark	「ｶﾞﾝﾊﾞﾚ」	「힘내라」	keep	normalize
+normalize:voiced-mark	「バイオリンを弾く」	「바이올린을 연주한다」	keep	normalize
+normalize:voiced-mark	「ウ゛ー」	「으으」	fix	normalize
+normalize:voiced-mark	「ウ゛ーッ！」	「으읏!」	fix	normalize
+normalize:voiced-mark	「ウ゛ゥ……」	「으으……」	fix	normalize
+normalize:voiced-mark	「ウ゛ァンパイア」	「뱀파이어」	fix	normalize
+normalize:voiced-mark	「ウ゛ウ゛ー」	「으으으」	fix	normalize
+normalize:voiced-mark	「ウ゛ウ゛ッ」	「으으」	fix	normalize
+normalize:voiced-mark	……ウ゛ウ゛ウ゛ッ	……으으으	fix	normalize

@@ -1,0 +1,107 @@
+# 규칙: SND-2, LAY-11
+rule	input	expected	kind	layer
+cx:copies:36	甘い甘い！	달아 달아!	fix	rewrites
+cx:copies:36	こわいこわいこわい	무서워 무서워 무서워	fix	rewrites
+cx:copies:36	いたいいたい	아파 아파	fix	rewrites
+cx:copies:36	痛い痛い	아파 아파	fix	rewrites
+cx:copies:36	「痛い痛い痛い！」	「아파 아파 아파!」	fix	rewrites
+cx:copies:36	(いやだいやだ)	(싫어 싫어)	fix	rewrites
+cx:copies:36	嫌だ嫌だ	싫어 싫어	fix	rewrites
+cx:copies:36	(きらいきらい)	(싫어 싫어)	fix	rewrites
+cx:copies:36	「熱い熱い」	「뜨거워 뜨거워」	fix	rewrites
+cx:copies:36	ふふん、嬉しい嬉しい！	흐흥, 기뻐 기뻐!	fix	rewrites
+cx:copies:36	「わ、悪い悪い！」	「나, 나빠 나빠!」	fix	rewrites
+cx:copies:36	一度火がつくとお説教が長い長い！	한 번 불이 붙으면 설교가 길어 길어!	fix	rewrites
+cx:copies:36	ていうか、嫌い嫌い！！	그보다, 싫어 싫어!!	fix	rewrites
+cx:copies:36	あぁー、忙しい、忙しい！	아아아, 바빠, 바빠!	fix	rewrites
+cx:copies:36	「うまいうまい！」	「맛있어 맛있어!」	fix	rewrites
+cx:copies:36	なんとも楽しい、楽しい！	정말 즐거워, 즐거워!	fix	rewrites
+cx:copies:36	熱い、熱い、熱い。	뜨거워, 뜨거워, 뜨거워.	fix	rewrites
+cx:copies:36	すごいすごい	대단해 대단해	fix	rewrites
+cx:copies:36	えっ怖い怖い	어 무서워 무서워	fix	rewrites
+cx:copies:36	――危ない危ない。	――위험해 위험해.	fix	rewrites
+cx:copies:36	つまんない、つまんない。	재미없어, 재미없어.	fix	rewrites
+cx:copies:36	だめだだめだ！！	안돼 안돼!!	fix	rewrites
+cx:copies:36	長い長い夜だった。	긴 긴 밤이었다.	keep	rewrites
+cx:copies:36	「怖い怖いお化け」	「무서운 무서운 도깨비」	keep	rewrites
+cx:copies:36	固い固い、決意のこもった握手だった。	!rule:cx:copies:36	keep	rewrites
+cx:copies:36	凄い凄いと言って食べさせ	!rule:cx:copies:36	keep	rewrites
+cx:copies:36	「痛かった痛かった」	「아팠다 아팠다」	keep	rewrites
+cx:copies:36	「やばいやばい……」	!rule:cx:copies:36	keep	rewrites
+cx:copies:36	痛い。	아프다.	keep	rewrites
+cx:copies:36	「痛い」	「아프다」	keep	rewrites
+cx:copies:32	「危ない危ないっ！！」	「위험해 위험햇!!」	fix	rewrites
+cx:copies:32	近い近いっ！	가까워 가까웟!	fix	rewrites
+cx:copies:32	「痛い痛いっ」	「아파 아팟」	fix	rewrites
+cx:copies:32	「熱い熱いっ！」	「뜨거워 뜨거웟!」	fix	rewrites
+cx:copies:32	こわいこわいっ	무서워 무서웟	fix	rewrites
+cx:copies:32	「いやだいやだっ」	「싫어 싫엇」	fix	rewrites
+cx:copies:32	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
+cx:copies:32	だめだだめだっ	안돼 안됏	fix	rewrites
+cx:copies:32	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
+cx:copies:32	「痛いっ！」	「아프다!」	keep	rewrites
+cx:copies:32	痛い痛い	!rule:cx:copies:32	keep	rewrites
+cx:copies:33	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
+cx:copies:33	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites
+cx:copies:33	「だめ、だめっ、これ」	「안돼, 안됏, 이거」	fix	rewrites
+cx:copies:33	「だめっ」	「안돼」	keep	rewrites
+cx:copies:33	だめだめ	!rule:cx:copies:33	keep	rewrites
+compose:joined-before-doe	だめだめ	안돼 안돼	fix	compose
+compose:joined-before-doe	「だめだめだめ！」	「안돼 안돼 안돼!」	fix	compose
+compose:joined-before-doe	「だめだめそんな、それは悪いよ……！」	「안돼 안돼 그런, 그건 나빠……!」	fix	compose
+compose:joined-before-doe	「だめ」	「안돼」	keep	compose
+compose:joined-before-doe	「無理無理！」	「무리 무리!」	keep	compose
+cx:copies:34	ねむいねむい	졸리다 졸려	fix	rewrites
+cx:copies:34	さむいさむい	춥다 추워	fix	rewrites
+cx:copies:34	寒い寒い	춥다 추워	fix	rewrites
+cx:copies:34	忙しい忙しい	바쁘다 바빠	fix	rewrites
+cx:copies:34	めんどくさいめんどくさい	귀찮다 귀찮아	fix	rewrites
+cx:copies:34	「寒い、寒い」	「춥다, 추워」	fix	rewrites
+cx:copies:34	ああ、忙しい忙しい。	아, 바쁘다 바빠.	fix	rewrites
+cx:copies:34	痛い痛い	!rule:cx:copies:34	keep	rewrites
+cx:copies:34	寒い寒い！	!rule:cx:copies:34	keep	rewrites
+cx:copies:34	寒い寒い寒い	!rule:cx:copies:34	keep	rewrites
+cx:copies:35	暑い暑い	덥다 더워	fix	rewrites
+cx:copies:35	寒い寒いっ	!rule:cx:copies:35	keep	rewrites
+cx:copies:35	「寒い寒い……」	!rule:cx:copies:35	keep	rewrites
+sound:cry-copies	やだやだやだっ	싫어 싫어 싫엇	fix	sound
+sound:cry-copies	「やだやだっ！」	「싫어 싫엇!」	fix	sound
+sound:cry-copies	「やだ、あ、だめ、だめ、だめ、だめだめだめぇぇぇぇぇぇっ！！」	「싫어, 아, 안돼, 안돼, 안돼, 안돼 안돼 안돼에에에에에엣!!」	fix	sound
+sound:cry-copies	やだっ	싫어	keep	sound
+sound:cry-copies	やだやだやだ！	싫어 싫어 싫어!	keep	sound
+sound:cry-copies	やだやだ	싫어 싫어	keep	sound
+sound:cry-copies	「げほげほっ」	「콜록콜록」	keep	sound
+sound:drawn-clip	だめだめぇぇぇっ	안돼 안돼에에엣	fix	sound
+sound:drawn-clip	痛い痛いいいいっ	아파 아파아아앗	fix	sound
+sound:drawn-clip	「やめてぇぇぇっ」	「그만둬어어엇」	fix	sound
+sound:drawn-clip	「待ったああああっ！」	「기다렸다아아아앗!」	fix	sound
+sound:drawn-clip	痛い痛いいいい	아파 아파아아아	fix	sound
+sound:drawn-clip	こわいこわいいいい	무서워 무서워어어어	fix	sound
+sound:drawn-clip	かわいいかわいいいいい	귀여워 귀여워어어어	fix	sound
+sound:drawn-clip	そこはだめぇぇぇ	거기는 안돼에에에	keep	sound
+sound:drawn-clip	「やめてぇ」	「그만둬」	keep	sound
+compose:copy-contraction	だめだだめだっ	안돼 안됏	fix	compose
+compose:copy-contraction	　だめだ、だめだだめだ……。	 안돼, 안돼 안돼…….	fix	compose
+compose:copy-contraction	だめだ	안된다	keep	compose
+dict:jisjk:124	うそうそ	거짓말 거짓말	fix	lookup
+dict:jisjk:124	「うそうそ！」	「거짓말 거짓말!」	fix	lookup
+dict:jisjk:124	「ウソウソ！」	「거짓말 거짓말!」	keep	lookup
+sound:cry-copies	やだやだやだぁ。	싫어 싫어 싫어.	fix	sound
+cx:copies:36	「うるさいうるさいうるさいうるさいうるさい！！！！！！」	「시끄러워 시끄러워 시끄러워 시끄러워 시끄러워!!!!!!」	fix	rewrites
+dict:jisjk:342476	ダメダメ	안돼 안돼	fix	lookup
+dict:jisjk:342476	「ダメダメ、全然ダメ！」	「안돼 안돼, 전혀 안돼!」	fix	lookup
+dict:jisjk:342476	もうダメ	이제 안돼	fix	lookup
+dict:jisjk:342476	ダメダメダメっ	안돼 안돼 안됏	fix	lookup
+dict:w:27515	ダメ出し	지적	fix	lookup
+dict:w:27515	監督にダメ出しをもらった	감독에게 지적을 받았다	fix	lookup
+dict:jisjk:342476	ダメージ	데미지	keep	lookup
+sound:drawn-clip	いたいいたぁぁぁい	아파 아파아아아	fix	sound
+sound:drawn-clip	いたいいたぁぁぁいっ	아파 아파아아앗	fix	sound
+sound:drawn-clip	さむぅぅぅい	춥다아아아	fix	sound
+sound:drawn-clip	待って待ってぇぇ	기다려 기다려어어	fix	sound
+sound:drawn-clip	「やめてやめてぇぇっ」	「그만둬 그만둬어엇」	fix	sound
+sound:drawn-clip	見て見てぇぇ	봐 봐아아	fix	sound
+sound:drawn-clip	待ってぇぇ	기다려	keep	sound
+sound:drawn-clip	待って待ってぇ	기다려 기다려	keep	sound
+sound:drawn-clip	すごおおおい	대단해~	keep	sound
+dict:w:27518	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	「뭐 일단 응모해 둘까」라고, 밑져야 본전으로 예약해 보았다.	fix	lookup

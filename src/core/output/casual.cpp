@@ -359,8 +359,11 @@ std::string CasualEnding(std::string_view ending, bool planned, bool promised) {
 // Characters that end a sentence of speech after its predicate, and those passed over
 // before them (a stretched or cut-off end).
 constexpr std::u32string_view kEnds = U"」』！？!?‼⁉⁈。．.…‥、，,～~〜∼―─♪☆★♥♡";
-// With the closing marks of the sound stage (kEmphasisClose, kLengthenMark, kDrawnMark).
-constexpr std::u32string_view kSkipped = U"っッーぇぁ\uE009\uE00A\uE00B";
+constexpr std::u32string_view kSkipped = U"っッーぇぁ";
+
+// Whether c is passed over after a predicate: one of kSkipped or a closing mark of the sound
+// stage.
+bool Skipped(char32_t c) { return kSkipped.find(c) != std::u32string_view::npos || IsClosingMark(c); }
 
 // The last character of s that is not a space or an emphasis open mark, 0 for none.
 char32_t LastNonSpace(std::string_view s) {
@@ -429,7 +432,7 @@ bool Asks(char32_t close, std::string_view rest) {
     for (char32_t c = close;;) {
         if (c == U'？' || c == U'?' || c == U'⁉' || c == U'⁈') return true;
         if (std::u32string_view(U"！!‼…‥～~〜♪☆★♥♡").find(c) == std::u32string_view::npos &&
-            kSkipped.find(c) == std::u32string_view::npos && !text::IsSpace(c)) {
+            !Skipped(c) && !text::IsSpace(c)) {
             return false;
         }
         if (rest.empty()) return false;
@@ -466,8 +469,9 @@ void PoliteAgreement(std::string& ending) {
 
 }  // namespace
 
-char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
+char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked, bool* clipped) const {
     if (asked != nullptr) *asked = false;
+    if (clipped != nullptr) *clipped = false;
     const ResolvedItem& it = (*items_)[i];
     const std::string_view own = source_[it.tokenIndex];
     const std::size_t end = static_cast<std::size_t>(it.offset + it.length);
@@ -480,7 +484,10 @@ char32_t Composer::QuotedEnd(int i, int last, bool nested, bool* asked) const {
         const text::Rune r = text::DecodeRune(s);
         if (r.size == 0) return 0;
         s.remove_prefix(r.size);
-        if (kSkipped.find(r.cp) != std::u32string_view::npos || text::IsSpace(r.cp)) continue;
+        if (Skipped(r.cp) || text::IsSpace(r.cp)) {
+            if (r.cp == kClipMark && clipped != nullptr) *clipped = true;
+            continue;
+        }
         if (kEnds.find(r.cp) == std::u32string_view::npos) return 0;
         // A quote inside speech that a noun, a particle or another quote follows (『書いた』もの,
         // 『言わない』『聞かない』) is cited; a report (逃げた……とある) is no speech.
@@ -549,7 +556,8 @@ void Composer::WriteCasual(int first, int last) {
         // Polite or old speech; kCasualSpeech only marks casual speech.
         const bool styled = (style & ~kCasualSpeech) != 0;
         bool asked = false;
-        const char32_t close = QuotedEnd(i, last, quoted && at.depth > 1, &asked);
+        bool clipped = false;
+        const char32_t close = QuotedEnd(i, last, quoted && at.depth > 1, &asked, &clipped);
         if (quoted && !styled) AskWord(i, last);
         if (close != 0 && asked &&
             AskConjecture(i, Clause(before() + std::string(own)), own, quoted && !styled)) {
@@ -570,7 +578,7 @@ void Composer::WriteCasual(int first, int last) {
             for (std::size_t pos = 0; pos < own.size();) {
                 const text::Rune r = text::DecodeRune(own.substr(pos));
                 pos += r.size == 0 ? 1 : r.size;
-                if (kSkipped.find(r.cp) == std::u32string_view::npos) kept = pos;
+                if (!Skipped(r.cp)) kept = pos;
             }
             const std::string_view tail = own.substr(0, kept);
             for (const std::string_view p : {"ぞ", "ぜ", "よ", "わ", "さ", "ね"}) asked = asked && !tail.ends_with(p);
@@ -606,10 +614,16 @@ void Composer::WriteCasual(int first, int last) {
         const char32_t open = LastNonSpace(before());
         const bool alone = open == 0 || std::u32string_view(U"「『。！？!?…‥").find(open) != std::u32string_view::npos;
         const bool exclaimed = close == U'！' || close == U'!';
+        // A drawn end cut with っ is a shout: a noun predicate or a verb keeps -다 (最高だぁぁぁっ
+        // 최고다아아앗, 勝ったぁぁぁっ 이겼다아아앗), an adjective is a cry in 해체 (痛いいいいっ 아파아아앗).
+        const bool shouted = clipped && !asked && it.detailClass != DetailClass::Keiyo && it.detailClass != DetailClass::Dakeiyo;
+        if (shouted) continue;
         if (it.directIndex < 0) {
             // A copula alone in its clause (「だな」, しかし、だ), after a stutter (だだだ) or
-            // after a particle (ユフィリアもだ) is no predicate of a sentence.
-            const std::string_view to = Find(kCopulas, Selected(it).text);
+            // after a particle (ユフィリアもだ) is no predicate of a sentence. A copula that a
+            // construction wrote as a past verb (놀곤 했다) takes the 해체 of the past.
+            std::string to(Find(kCopulas, Selected(it).text));
+            if (to.empty()) to = PastWord(Selected(it).text);
             if (to.empty() || it.selected < 0 || alone || open == U'、' || open == U'だ' ||
                 (i > 0 && First(Selected(items[i - 1]).code) == '2')) {
                 continue;

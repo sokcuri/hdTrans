@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "core/dict/classes.h"
+#include "core/output/markers.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/conjugation.h"
@@ -33,13 +34,73 @@ bool SuruAfterMo(std::string_view s) {
     return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
 }
 
+// Whether a godan continuative (pattern kind not ichidan, する, ずる or くる) is the noun of
+// manner before s: the よう of 疑いようもない, やりようがない, 品のないなさりよう！ (verb.way-of-doing).
+// An ichidan stem keeps its volitional よう.
+bool WayOfDoing(int patternKind, std::string_view s, std::string_view next) {
+    if (patternKind == 7 || patternKind == 9 || patternKind == 10 || patternKind == 11 || patternKind == 13) return false;
+    for (const std::string_view m : dict::ClassMembers("verb.way-of-doing")) {
+        if (s.starts_with(m)) return true;
+        // the mark or particle after the bare form starts the next token
+        if (!s.empty() && m.size() > s.size() && m.starts_with(s) && next.starts_with(m.substr(s.size()))) return true;
+    }
+    return false;
+}
+
 // Whether s is a single hiragana (the stem で of 出る, which でもする is not).
 bool OneKana(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
     return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
 }
 
+// The length of the first of members that starts s, 0 for none.
+std::size_t StartLength(std::string_view s, std::span<const std::string_view> members) {
+    for (const std::string_view m : members) {
+        if (s.starts_with(m)) return m.size();
+    }
+    return 0;
+}
+
+// Whether one of records is longer than n bytes: a word starts at the text they were looked up at.
+bool StartsLongerWord(const Record* records, std::size_t n) {
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (r->source.size() > n) return true;
+    }
+    return false;
+}
+
 }  // namespace
+
+int ContractedIruBranch(std::string_view rest) {
+    int best = -1;
+    std::size_t longest = 0;
+    for (const int branch : {0, 3, 5, 6, 7, 11, 17}) {
+        const std::string_view form = Conjugation(7, branch);
+        if (!form.empty() && rest.starts_with(form) && form.size() > longest) {
+            best = branch;
+            longest = form.size();
+        }
+    }
+    return best;
+}
+
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
+    if (head.size() < 4) return false;
+    const std::string_view prefix = head.substr(0, head.size() - 4), family = head.substr(head.size() - 4);
+    bool any = false;
+    for (std::size_t i = 0; i < g.entries.size(); i++) {
+        if (i < d.enabled.size() && !d.enabled[i]) continue;
+        Entry& e = *g.entries[i];
+        const std::string_view row = e.dst.empty() ? std::string_view() : output::SourceMarkerRow(std::string(family) + e.dst[0]);
+        if (row.empty()) {
+            if (i < d.enabled.size()) d.enabled[i] = false;
+            continue;
+        }
+        e.dst = std::string(prefix) + std::string(row) + e.dst.substr(1);
+        any = true;
+    }
+    return any;
+}
 
 bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* records, Record*& stop) {
     stop = records;
@@ -324,6 +385,21 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
     if (!w->MatchDictionary(tail, surface, '4', 'X')) return false;
+    // A noun of the dictionary that ends with the よう of manner and starts inside the stem
+    // takes the text (ありよう 상태, 救いよう).
+    auto NounOfManner = [&](std::string_view stem) {
+        const std::string_view way = after();
+        const std::size_t first = text::DecodeRune(way).size;
+        const std::string_view rest =
+            tail.substr(0, static_cast<std::size_t>(pattern()) + first + text::DecodeRune(way.substr(first)).size);
+        for (std::size_t i = 0; i < stem.size(); i += text::DecodeRune(stem.substr(i)).size) {
+            const std::string query = std::string(stem.substr(i)) + std::string(rest);
+            for (const Record* r = w->DoLookup(w->arena.Keep(query), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source == query && At(r->partCode, 0) == 'N') return true;
+            }
+        }
+        return false;
+    };
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
@@ -335,7 +411,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
-         (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) || two == kJaYo || four == kJaNado ||
+         (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) ||
+         (two == kJaYo && !(WayOfDoing(base.patternKind, after(), base.nextText) && !NounOfManner(surface))) ||
+         four == kJaNado ||
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
         return false;
     }
@@ -365,7 +443,27 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
         if (branch == kConjugationBranches) return false;
-        if (branch == 8 && (two == kJaComma || two.StartsWith(","))) base.kind = 7;
+        // The empty stem form gives way to the first later form that begins the tail, as after
+        // an ichidan stem (褒められちゃった, 褒められず); not to an imperative (11, 12), which a
+        // passive, potential or causative form does not take before よ (言えよ is 言え and よ), not
+        // to 13 (the にな of a stem, no ending), nor to the start of a longer adverb
+        // (見透かされずいぶん is ずいぶん).
+        auto startsAdverb = [&](std::size_t n) {
+            for (const Record* r = w->DoLookup(tail, kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source.size() > n && At(r->partCode, 0) == 'E' && At(r->partCode, 1) == '3') return true;
+            }
+            return false;
+        };
+        if (branch == 8) {
+            for (int later = 9; later < kConjugationBranches; later++) {
+                const std::string_view e = Conjugation(7, later);
+                if (later != 11 && later != 12 && later != 13 && !e.empty() && tail.starts_with(e) && !startsAdverb(e.size())) {
+                    base.kind = later;
+                    break;
+                }
+            }
+        }
+        if (base.kind == 8 && (two == kJaComma || two.StartsWith(","))) base.kind = 7;
         patternWidth = WidthOf(Conjugation(7, base.kind));
         two = Left(after(), 2);
         four = Left(after(), 4);
@@ -501,6 +599,200 @@ bool Item::AcceptVerbContinuation(Record* following) {
             ending = endingGroup(after());
         }
     }
+    // A て form whose auxiliary いる has lost its い (見てたが, 忘れてたぞ, してたんだろ): when no
+    // ending row of the て form covers it, or only a shorter row of its past does (た of 見てたぞ),
+    // the kana after the て are a form of いる and the ending after them is read on that form,
+    // written for 있 after 고 (5지만 → 1고 있었지만) as the full form reads in its two words.
+    if (base.kind == 7 && w->settings.text && queryAllowed) {
+        const int teWidth = patternWidth, branch = ContractedIruBranch(rest);
+        if (branch >= 0 && (ending == nullptr || (branch == 6 && ending->length < static_cast<int>(rest.size())))) {
+            const std::size_t form = Conjugation(7, branch).size();
+            patternWidth += WidthOf(Conjugation(7, branch));
+            base.kind = branch;
+            Group* g = endingGroup(after());
+            const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-head");
+            if (g != nullptr && (ending == nullptr || static_cast<int>(form) + g->length > ending->length) &&
+                !head.empty() && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = teWidth;
+                base.kind = 7;
+                if (ending != nullptr) ending = endingGroup(rest);
+            }
+        }
+    }
+    // The potential of that いる (待ってられない, やってられません) is the potential of the verb, as
+    // a potential form reads (기다릴 수 없다): the ending after the ichidan form of られ.
+    bool potentialStem = false;
+    if (ending == nullptr && base.kind == 7 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(7, 4))) {
+        const int teWidth = patternWidth;
+        patternWidth += WidthOf(Conjugation(7, 4));
+        const int potentialWidth = patternWidth;
+        const std::string_view potential = after();
+        int branch = 0;
+        while (branch < kConjugationBranches && !potential.starts_with(Conjugation(7, branch))) branch++;
+        for (int later = 9; branch == 8 && later < kConjugationBranches; later++) {
+            const std::string_view e = Conjugation(7, later);
+            if (later != 11 && later != 12 && later != 13 && !e.empty() && potential.starts_with(e)) branch = later;
+        }
+        if (branch < kConjugationBranches) {
+            patternWidth += WidthOf(Conjugation(7, branch));
+            base.patternKind = 7;
+            base.kind = branch;
+            base.record = 4;
+            ending = endingGroup(after());
+            if (ending == nullptr) base.patternKind = oldKind;
+        }
+        if (ending == nullptr && branch < kConjugationBranches && Conjugation(7, branch).empty()) {
+            // Where that form is a bare stem without an ending of its own, the potential takes the
+            // empty ending, the ない after it being a word.
+            patternWidth = potentialWidth;
+            base.kind = 4;
+            base.record = 0;
+            ending = endingGroup(after());
+            potentialStem = ending == nullptr;
+        }
+        if (ending != nullptr || potentialStem) {
+            length = sourceLength + pattern();
+        } else {
+            patternWidth = teWidth;
+            base.patternKind = oldKind;
+            base.kind = 7;
+            base.record = 0;
+        }
+    }
+
+    // The same for いらっしゃる (気に入ってらっしゃる, 溜まってらっしゃった, 見てらっしゃいます), written
+    // for 계시 after 고: its い before ます is the polite form of the stem, as for the verb.
+    if (ending == nullptr && base.kind == 7 && w->settings.text && queryAllowed && !potentialStem) {
+        const std::size_t stem = StartLength(rest, dict::ClassMembers("contraction.te-irassharu"));
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-honorific-head");
+        int branch = -1, n = 0;
+        if (stem > 0 && !head.empty()) {
+            const std::string_view form = rest.substr(stem);
+            if (form.starts_with(Conjugation(0, 10))) {
+                branch = 10;
+                n = static_cast<int>(Conjugation(0, 10).size());
+            } else if (!AnalyseVerbTail(rest.substr(0, stem), '8', form, branch, n)) {
+                branch = -1;
+            }
+        }
+        if (branch >= 0) {
+            const int teWidth = patternWidth;
+            patternWidth += WidthOf(rest.substr(0, stem + static_cast<std::size_t>(n)));
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = teWidth;
+                base.kind = 7;
+            }
+        }
+    }
+
+    // The ちゃ form whose ちゃう is in its て form before いる with its い dropped (寝ちゃってた,
+    // 言いそびれちゃってたんですけど): done and past, as ちゃった; the ending after the た is read on
+    // the past and written for 버리 after the verb (5지만 → 6 버렸지만). Without an ending of its own
+    // the form takes the empty ending below, unless its た starts a longer word (寝ちゃってたまらない:
+    // て and たまらない).
+    std::string_view auxHead;
+    if (base.kind == 17 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(0, 7)) &&
+        rest.substr(Conjugation(0, 7).size()).starts_with(Conjugation(7, 6)) &&
+        (ending == nullptr || ending->length < static_cast<int>(rest.size()))) {
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.completive-head");
+        const int chaWidth = patternWidth;
+        patternWidth += WidthOf(Conjugation(0, 7)) + WidthOf(Conjugation(7, 6));
+        base.kind = 6;
+        Group* g = endingGroup(after());
+        if (g != nullptr && !head.empty() && ProgressiveEndings(*g, base, head.front())) {
+            ending = g;
+            length = sourceLength + pattern();
+        } else if (!head.empty() && !StartsLongerWord(w->DoLookup(rest.substr(Conjugation(0, 7).size()), kModeGeneral).records,
+                                                         Conjugation(7, 6).size())) {
+            ending = nullptr;
+            auxHead = head.front();
+            length = sourceLength + pattern();
+        } else {
+            patternWidth = chaWidth;
+            base.kind = 17;
+            if (ending != nullptr) ending = endingGroup(rest);
+        }
+    }
+
+    // A past form whose た is the て before あげる with its あ dropped (作ったげる, 見せたげよう): the
+    // kana after the た are the ichidan forms of あげる without it, written for 주 after the て
+    // form (6 줄게). Without an ending of its own the form takes the empty ending below.
+    if (ending == nullptr && auxHead.empty() && base.kind == 6 && w->settings.text && queryAllowed &&
+        Conjugation(base.patternKind, 7).size() == Conjugation(base.patternKind, 6).size()) {
+        const std::size_t stem = StartLength(rest, dict::ClassMembers("contraction.te-ageru"));
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.benefactive-head");
+        const std::string_view form = rest.substr(stem);
+        int branch = 0;
+        while (branch < kConjugationBranches && !form.starts_with(Conjugation(7, branch))) branch++;
+        for (int later = 9; branch == 8 && later < kConjugationBranches; later++) {
+            const std::string_view e = Conjugation(7, later);
+            if (later != 11 && later != 12 && later != 13 && !e.empty() && form.starts_with(e)) branch = later;
+        }
+        if (stem > 0 && !head.empty() && branch < kConjugationBranches) {
+            const int pastWidth = patternWidth;
+            patternWidth += WidthOf(rest.substr(0, stem)) + WidthOf(Conjugation(7, branch));
+            base.patternKind = 7;
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else if (after().empty() || Classify(after()) != 0) {
+                auxHead = head.front();
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = pastWidth;
+                base.patternKind = oldKind;
+                base.kind = 6;
+            }
+        }
+    }
+
+    // The same for やる with its や dropped (やったるぜ, 調整したるから, やったりますよ): る before the
+    // end, a mark (no letter: not the attributive 秘めたる力) or a particle of
+    // contraction.te-yaru-after, or り before the polite ます, where
+    // the り of the たり form would leave ます unread. Not the attributive たる (取り出したるは), たり
+    // before anything else, or たら.
+    if (auxHead.empty() && base.kind == 6 && w->settings.text && queryAllowed &&
+        Conjugation(base.patternKind, 7).size() == Conjugation(base.patternKind, 6).size()) {
+        const std::span<const std::string_view> head = dict::ClassMembers("ko.benefactive-head");
+        int branch = -1;
+        if (const std::string_view r = Conjugation(8, 0); rest.starts_with(r)) {
+            const std::string_view afterRu = rest.substr(r.size());
+            if (afterRu.empty() || !text::IsLetter(text::DecodeRune(afterRu).cp) ||
+                StartLength(afterRu, dict::ClassMembers("contraction.te-yaru-after")) > 0) {
+                branch = 0;
+            }
+        } else if (const std::string_view ri = Conjugation(8, 10);
+                   rest.starts_with(ri) && StartLength(rest.substr(ri.size()), dict::ClassMembers("follower.polite-masu")) > 0) {
+            branch = 10;
+        }
+        const bool shorter = ending != nullptr && branch == 10 && ending->length == static_cast<int>(Conjugation(8, 10).size());
+        if (branch >= 0 && !head.empty() && (ending == nullptr || shorter)) {
+            const int pastWidth = patternWidth;
+            patternWidth += WidthOf(Conjugation(8, branch));
+            base.patternKind = 8;
+            base.kind = branch;
+            if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front())) {
+                ending = g;
+                length = sourceLength + pattern();
+            } else if (ending == nullptr && (after().empty() || Classify(after()) != 0)) {
+                auxHead = head.front();
+                length = sourceLength + pattern();
+            } else {
+                patternWidth = pastWidth;
+                base.patternKind = oldKind;
+                base.kind = 6;
+                if (ending != nullptr) ending = endingGroup(rest);
+            }
+        }
+    }
 
     if (ending == nullptr) {
         if (following != nullptr && base.patternKind == 7 && base.kind == 8) {
@@ -539,6 +831,10 @@ bool Item::AcceptVerbContinuation(Record* following) {
         for (int index = 0; index < static_cast<int>(ending->entries.size()); index++) {
             if (applies(*ending->entries[static_cast<std::size_t>(index)])) base.group = ending;
             else base.enabled[index] = false;
+        }
+        if (!auxHead.empty() && !ProgressiveEndings(*ending, base, auxHead)) {
+            base.group = nullptr;
+            return false;
         }
     }
 

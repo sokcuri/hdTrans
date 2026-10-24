@@ -1,0 +1,4 @@
+# 규칙: LEX-1, LEX-3, SPC-1
+rule	input	expected	kind	layer
+dict:names.458948	「修士(神学)だ。」	「신학 석사야.」	fix	lookup
+dict:jisjk:262973	「ポップ・アップだ。」	「팝업이야.」	fix	lookup

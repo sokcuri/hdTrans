@@ -1,0 +1,36 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:193649	慈善鍋	자선 냄비	fix	defaults
+dict:jisjk:193649	慈善鍋の募金。	자선 냄비의 모금.	fix	defaults
+dict:jisjk:193649	慈善鍋に寄付する。	자선 냄비에 기부한다.	fix	defaults
+dict:jisjk:193649	慈善鍋の活動。	자선 냄비의 활동.	fix	defaults
+dict:jisjk:193649	慈善団体	자선단체	keep	defaults
+dict:jisjk:193649	慈善事業	자선사업	keep	defaults
+dict:jisjk:254574	憂鬱質	우울질	fix	defaults
+dict:jisjk:254574	憂鬱質の性格。	우울질의 성격.	fix	defaults
+dict:jisjk:254574	憂鬱質について。	우울질에 대해.	fix	global-stem
+dict:jisjk:254574	憂鬱症	우울증	keep	defaults
+dict:jisjk:254574	憂鬱	우울	keep	defaults
+dict:jisjk:254574	気質	기질	keep	defaults
+dict:jisjk:247371	懶熊	느림보곰	fix	defaults
+dict:jisjk:247371	懶熊の餌。	느림보곰의 먹이.	fix	defaults
+dict:jisjk:247371	懶熊を飼う。	느림보곰을 기른다.	fix	defaults
+dict:jisjk:247371	懶熊の生態。	느림보곰의 생태.	fix	defaults
+dict:jisjk:247371	ナマケモノ	나무늘보	keep	defaults
+dict:jisjk:74490	成文律	성문율	fix	defaults
+dict:jisjk:74490	成文律の規定。	성문율의 규정.	fix	defaults
+dict:jisjk:74490	成文律を守る。	성문율을 지킨다.	fix	defaults
+dict:jisjk:74490	成文律に従う。	성문율에 따른다.	fix	defaults
+dict:jisjk:74490	成文法	성문법	keep	defaults
+dict:jisjk:74490	不文律	불문율	keep	defaults
+dict:jisjk:193649	慈善鍋について。	자선 냄비에 대해.	fix	defaults
+dict:jisjk:193649	慈善鍋の季節。	자선 냄비의 계절.	fix	defaults
+dict:jisjk:193649	慈善鍋を置く。	자선 냄비를 둔다.	fix	defaults
+dict:jisjk:254574	憂鬱質と気質。	우울질과 기질.	fix	defaults
+dict:jisjk:254574	憂鬱質の特徴。	우울질의 특징.	fix	defaults
+dict:jisjk:254574	憂鬱質の傾向。	우울질의 경향.	fix	defaults
+dict:jisjk:247371	懶熊の写真。	느림보곰의 사진.	fix	defaults
+dict:jisjk:247371	懶熊を観察する。	느림보곰을 관찰한다.	fix	defaults
+dict:jisjk:74490	成文律について。	성문율에 대해.	fix	defaults
+dict:jisjk:74490	成文律の解釈。	성문율의 해석.	fix	defaults
+dict:jisjk:74490	成文律の内容。	성문율의 내용.	fix	defaults

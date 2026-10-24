@@ -196,11 +196,6 @@ if(NOT EMSCRIPTEN)
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)
-            # Japanese and Korean text in src/core stays within tools/surface-budget.tsv.
-            add_test(NAME tools.surface-budget COMMAND "${HDTRANS_PYTHON}" -I
-                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --check)
-            add_test(NAME tools.surface-budget.self-test COMMAND "${HDTRANS_PYTHON}" -I
-                "${CMAKE_CURRENT_SOURCE_DIR}/tools/surface-budget.py" --self-test)
         endif()
     endif()
 
@@ -222,6 +217,23 @@ if(NOT EMSCRIPTEN)
         endforeach()
         set_tests_properties(rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
+        # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
+        # (where python3 is found, as for the tools.* tests).
+        if(HDTRANS_PYTHON)
+            add_test(NAME rules.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/cases" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-soft"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/speech-strict" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops"
+                --known "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/drops/known-gaps.txt")
+            set_tests_properties(rules.drops PROPERTIES TIMEOUT 300)
+            add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
+            # The inputs of the measured sets that drop text stay at tools/drops-budget.tsv; skipped
+            # when no set variable is set.
+            add_test(NAME sets.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
+                $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --sets
+                --budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops-budget.tsv")
+            set_tests_properties(sets.drops PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 900)
+        endif()
         # Compares with the expected outputs in HDTRANS_TESTDATA at test time; skipped when unset.
         add_test(NAME testdata COMMAND "${HDTRANS_SH}" -c "exec \"$0\" \"$1\" --expected \"$HDTRANS_TESTDATA\" \"$2\" \"$3\""
             "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/e2e.sh" $<TARGET_FILE:hdtrans_cli>

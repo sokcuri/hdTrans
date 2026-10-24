@@ -1,0 +1,32 @@
+# 규칙: SPC-1, SND-2
+rule	input	expected	kind	layer
+compose:speech-quoted	「嫌だぁぁぁっ」	「싫어어어엇」	fix	compose
+compose:speech-quoted	「嫌だぁぁぁっ！」	「싫어어어엇!」	fix	compose
+compose:speech-quoted	「嫌だぁぁぁっ、もう」	「싫어어어엇, 이제」	fix	compose
+compose:speech-quoted	「好きだぁぁぁっ」	「좋아해애애앳」	fix	compose
+compose:speech-quoted	「好きだぁぁぁっ！」	「좋아해애애앳!」	fix	compose
+compose:speech-quoted	「無理だぁぁぁっ！」	「무리야아아앗!」	fix	compose
+compose:speech-quoted	「静かだぁぁぁっ」	「조용해애애앳」	fix	compose
+compose:speech-quoted	「熱いぃぃぃっ」	「뜨거워어어엇」	fix	compose
+compose:speech-quoted	「熱いぃぃぃっ！」	「뜨거워어어엇!」	fix	compose
+compose:speech-quoted	「怖いぃぃぃっ！」	「무서워어어엇!」	fix	compose
+compose:speech-quoted	「寒いぃぃぃっ」	「추워어어엇」	fix	compose
+compose:speech-quoted	「痛いいいいっ」	「아파아아앗」	fix	compose
+compose:speech-quoted	「痛いいいいっ！」	「아파아아앗!」	fix	compose
+compose:speech-quoted	「もう、遅いぃぃぃっ！」	「이제, 늦어어어엇!」	fix	compose
+compose:speech-quoted	「行くぅぅぅっ」	「간다아아앗」	keep	compose
+compose:speech-quoted	「死ぬぅぅぅっ！」	「죽는다아아앗!」	keep	compose
+compose:speech-quoted	「勝ったぁぁぁっ」	「이겼다아아앗」	keep	compose
+compose:speech-quoted	「勝ったぁぁぁっ！」	「이겼다아아앗!」	keep	compose
+compose:speech-quoted	「ちょっと、待ったああああっ！」	「잠깐, 기다렸다아아아앗!」	keep	compose
+compose:speech-quoted	「最高だぁぁぁっ！」	「최고다아아앗!」	keep	compose
+compose:speech-quoted	「俺の勝ちだぁぁぁっ！」	「내 승리다아아앗!」	keep	compose
+compose:speech-quoted	「俺の勝ちだぁぁぁ！」	「내 승리야아아아!」	keep	compose
+compose:speech-quoted	「行くのぉぉぉっ？」	「가는 거야아아앗?」	keep	compose
+compose:speech-quoted	「嫌だぁぁぁ」	「싫어어어어」	keep	compose
+compose:speech-quoted	「勝ったぁぁぁ！」	「이겼다아아아!」	keep	compose
+compose:speech-quoted	「見ないでぇぇぇっ！」	「보지 마아아앗!」	keep	compose
+compose:speech-quoted	「待っててぇぇぇっ」	「기다리고 있어어어엇」	keep	compose
+compose:speech-quoted	「嫌だっ」	「싫어」	keep	compose
+compose:speech-quoted	「嫌だ……っ」	「싫어……」	keep	compose
+compose:speech-quoted	「っ」	「읏」	keep	compose

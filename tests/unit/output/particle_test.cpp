@@ -50,7 +50,7 @@ HD_TEST(output_latin_word_class) {
         {"comic", 'c'}, {"Mac", 'c'}, {"disc", 'v'}, {"web", 'c'}, {"club", 'c'}, {"pub", 'c'}, {"job", 'c'},
         {"tab", 'c'}, {"lab", 'c'}, {"bomb", 'c'}, {"climb", 'c'}, {"lamb", 'c'}, {"bulb", 'v'}, {"bed", 'v'},
         {"road", 'v'}, {"card", 'v'}, {"kid", 'v'}, {"red", 'v'}, {"bread", 'v'}, {"dog", 'v'}, {"bug", 'v'},
-        {"log", 'v'}, {"frog", 'v'}, {"egg", 'v'}, {"long", 'c'}, {"song", 'c'}, {"thing", 'c'}, {"sign", 'c'},
+        {"log", 'v'}, {"frog", 'v'}, {"egg", 'v'}, {"tag", 'v'}, {"flag", 'v'}, {"bag", 'c'}, {"handbag", 'c'}, {"big", 'c'}, {"long", 'c'}, {"song", 'c'}, {"thing", 'c'}, {"sign", 'c'},
         {"design", 'c'}, {"campaign", 'c'}, {"high", 'v'}, {"night", 'v'}, {"light", 'v'}, {"bus", 'v'},
         {"class", 'v'}, {"gas", 'v'}, {"James", 'v'}, {"games", 'v'}, {"box", 'v'}, {"fox", 'v'}, {"quiz", 'v'},
         {"chef", 'v'}, {"golf", 'v'}, {"cash", 'v'}, {"flash", 'v'}, {"English", 'v'}, {"catch", 'v'},

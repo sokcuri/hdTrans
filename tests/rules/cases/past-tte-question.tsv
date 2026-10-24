@@ -1,0 +1,18 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+dict:drops-conj:12	「誰が泣いてたって？　適当言うんじゃないよ」	「누가 울고 있었다고? 적당 말하지 않아」	fix	local-ending
+dict:drops-conj:12	提督が言ってたって？ ほんと？	제독이 말했다고? 정말?	fix	local-ending
+dict:drops-conj:12	朧が頑張ったって？	농이 노력했다고?	fix	local-ending
+dict:drops-conj:12	いくら言ったって無駄だ。	!rule:dict:drops-conj:12	keep	local-ending
+dict:drops-conj:12	しおいが言ってたって！	!rule:dict:drops-conj:12	keep	local-ending
+dict:drops-conj:12	他の子がどうしたって？	다른 아이가 어떻게 하든?	keep	local-ending
+dict:drops-conj:14	大型犬が3歳児に覆いかぶさって死んでたって文章だけで今日もう仕事できん	대형견이 3세 아이에 덮쳐 죽어 있었다는 문장만으로 오늘 이제 일할 수 없다	fix	local-ending
+dict:drops-conj:14	何て言うか、もっと違う話を期待してたってとこはあるな。	뭐라고 말하는지, 좀 더 다른 이야기를 기대하고 있었다는 곳은 있데.	fix	local-ending
+dict:drops-conj:14	僕がもらったって仕方ない	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:14	いくら言ったって仕方がない	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:14	そんなことしたって意味がない	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:14	それに毛並みも野性味が溢れてるし、どう見たって日本の犬じゃない。	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:14	今俺がここで自己紹介したって明日もその通りの生き方をしてるとは限らねえ。	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:14	「でも、どっちにしたってパンケーキは絶対食べたいっ」	!rule:dict:drops-conj:14	keep	local-ending
+dict:drops-conj:30	単純にもう１本の道を見つけてたってだけだけど。	단순에 또 1개의 길을 찾아내고 있었다는 것만이지만.	fix	local-ending
+dict:drops-conj:30	待ってたって仕方がない	기다리고 있어도 어쩔 수 없다	keep	local-ending

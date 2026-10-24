@@ -3,8 +3,8 @@ cx:positive-ike:10	まだまだいける	아직도 갈 수 있다	fix	rewrites
 cx:positive-ike:10	いつでもいけますよ	언제라도 갈 수 있어요	fix	rewrites
 cx:positive-ike:10	これならいけそうです！	이것이라면 갈 수 있을 것 같습니다!	fix	rewrites
 cx:positive-ike:10	いけるかも…	갈 수 있을지도…	fix	rewrites
-cx:positive-ike:10	ここで遊んではいけない。	여기서 놀아선 안 된다.	keep	rewrites
-cx:positive-ike:10	いけません。	안 됩니다.	keep	rewrites
+cx:positive-ike:10	ここで遊んではいけない。	여기서 놀아선 안된다.	keep	rewrites
+cx:positive-ike:10	いけません。	안됩니다.	keep	rewrites
 cx:positive-ike:10	行かなければいけない。	가야 한다.	keep	rewrites
 cx:go-not-say:10	どこまでいったんですか？	어디까지 갔습니까?	fix	rewrites
 cx:go-not-say:10	学校までいった。	학교까지 갔다.	fix	rewrites
@@ -25,3 +25,8 @@ cx:go-not-say:10	東京からいえば、遠い。	도쿄에서 말하면, 멀�
 cx:go-not-say:10	東京からいえば	!rule:cx:go-not-say:10	fix	defaults
 cx:go-not-say:10	駅にいって	역에 가	keep	local
 cx:go-not-say:10	彼にいうと	그에게 말한다고	keep	rewrites
+cx:go-not-say:20	そもそも人生が上手くいっていないくせに。	원래 인생이 잘 되지 않으면서.	fix	rewrites
+cx:go-not-say:20	上手くいった。	잘 되었다.	fix	rewrites
+cx:go-not-say:20	上手くいって良かった。	잘 되어서 다행이었다.	fix	rewrites
+cx:go-not-say:20	上手くいけばいいけど。	!rule:cx:go-not-say:20	keep	rewrites
+cx:go-not-say:20	上手く言えない。	잘 말할 수 없다.	keep	rewrites

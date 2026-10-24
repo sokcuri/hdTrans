@@ -1,0 +1,38 @@
+# 규칙: LAY-9
+rule	input	expected	kind	layer
+compose:comma-before-symbols	「わかるよー、■■■でしょ？」	「알아~, ■■■겠지?」	fix	compose
+compose:comma-before-symbols	○ボタン、△ボタンによる攻撃	○버튼, △버튼에 의한 공격	fix	compose
+compose:comma-before-symbols	「ねえ、＃＄％＆！」	「있잖아, ＃＄％＆!」	fix	compose
+compose:comma-before-symbols	普通に頼むと、￥１６００という超学食級の価格である。	보통으로 부탁하면, ￥1600이라는 초학생식당급의 가격이다.	fix	compose
+compose:comma-before-symbols	えっ、≫90大丈夫？	어, ≫90괜찮아?	fix	compose
+compose:comma-before-symbols	あっ、……しまった。	앗, ……큰일 났다.	fix	compose
+compose:comma-before-symbols	キングを、……頼む。	킹을, ……부탁한다.	fix	compose
+compose:comma-before-symbols	マイン、123	마인, 123	keep	compose
+compose:comma-before-symbols	マイン、「はい」	마인, 「네」	keep	compose
+compose:comma-before-symbols	「これも■■ぎ」	「이것도■■기」	keep	compose
+compose:comma-before-symbols	○○さん	○○씨	keep	compose
+normalize:percent-unit	シンクロ値……３４％……５６％……	싱크로값……34%……56%……	fix	normalize
+normalize:percent-unit	「シンクロ値……３４％……５６％……７２％…………下がっています」	「싱크로값……34%……56%……72%…………내려가고 있습니다」	fix	normalize
+normalize:percent-unit	５０％＋α	50%＋α	fix	normalize
+normalize:percent-unit	支持率は５３％です。	지지율은 53%입니다.	keep	normalize
+normalize:percent-unit	１００％！	100%!	keep	normalize
+normalize:percent-unit	ゼロ％	제로%	keep	normalize
+normalize:symbol-run	「マイン、％＆＄＃＋＠＊＋＃％？」	「마인, ％＆＄＃＋＠＊＋＃％?」	fix	normalize
+normalize:symbol-run	「％＆＄＃＋＠＊＋＃％？」	「％＆＄＃＋＠＊＋＃％?」	fix	normalize
+normalize:symbol-run	％＆＄＃	％＆＄＃	fix	normalize
+normalize:symbol-run	「かあさん、％％％！」	「어머니, ％％％!」	fix	normalize
+normalize:symbol-run	「％＄＃＠＆」と彼は叫んだ。	「％＄＃＠＆」라고 그는 외쳤다.	fix	normalize
+normalize:symbol-run	／／	／／	fix	normalize
+normalize:symbol-run	「＄＃＠！」	「＄＃＠!」	keep	normalize
+normalize:symbol-run	#$%&	#$%&	keep	normalize
+normalize:symbol-run	え？！	어?!	keep	normalize
+normalize:symbol-run	「？？？」	「???」	keep	normalize
+normalize:symbol-run	〒１２３	(우)123	keep	normalize
+normalize:symbol-run	「ねえ、＠＃％＆＊……」	「있잖아, ＠＃％＆＊……」	fix	normalize
+normalize:symbol-run	「くそっ、＃＄％＆＊＠！」	「젠장, ＃＄％＆＊＠!」	fix	normalize
+normalize:symbol-run	「＊＃％」	「＊＃％」	fix	normalize
+normalize:symbol-run	○×クイズ	○×퀴즈	keep	normalize
+normalize:symbol-run	「あ、＊＊＊＊」	「아, ****」	current	normalize
+normalize:symbol-run	＊＊＊＊株式会社	****주식회사	current	normalize
+normalize:symbol-run	＊＊部　****	**부 ****	keep	normalize
+normalize:symbol-run	∧_∧　／ヽ	∧_∧ ／ヽ	fix	normalize

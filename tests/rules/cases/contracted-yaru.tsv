@@ -1,0 +1,16 @@
+# 규칙: LEX-34
+rule	input	expected	kind	layer
+lookup:contracted-yaru	やったるぜー！そこだ！撃て！	해 준다~! 거기다! 쏘아라!	fix	lookup
+lookup:contracted-yaru	うっし、いける。やったるぜ！	좋았어, 갈 수 있다. 해 준다!	fix	lookup
+lookup:contracted-yaru	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	fix	lookup
+lookup:contracted-yaru	十五駆、秋刀魚漁支援、出撃や！ やったるで。	15구, 꽁치잡이 지원, 출격이야! 해 줄 거야.	fix	lookup
+lookup:contracted-yaru	あたいが、やったるわ！	내가, 해 주어!	fix	lookup
+lookup:contracted-yaru	「使いづらいところがあったらウチが調整したるから」	「사용하기 어려운 곳이 있으면 우리가 조정해 주니까」	fix	lookup
+lookup:contracted-yaru	軽巡鬼怒、提督！いっちょやったりますよ！	경순 키누, 제독! 한번 해 주어요!	fix	lookup
+dict:w:28308	「さて、いっちょやるか」	「자, 한번 할까」	fix	lookup
+lookup:contracted-yaru	取り出したるは	꺼낸 것은	keep	lookup
+lookup:contracted-yaru	やったりする	하거나 한다	keep	lookup
+lookup:contracted-yaru	やったら	하면	keep	lookup
+lookup:contracted-yaru	見たりしました	보거나 했습니다	keep	lookup
+lookup:contracted-yaru	やったり見たり	하거나 보거나	keep	lookup
+lookup:contracted-yaru	言ったろう	말했지	keep	lookup

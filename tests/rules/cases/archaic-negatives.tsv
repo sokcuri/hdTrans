@@ -1,0 +1,35 @@
+# 규칙: SPC-9
+rule	input	expected	kind	layer
+pattern:書いたのかもしれぬ	竹若丸がそれを見て微かに笑った。苦笑したのかもしれぬ。	타케와카환이 그것을 보고 희미하게 웃었다. 쓴웃음을 지은 걸지도 모른다.	fix	builtin-pattern
+pattern:書くかもしれぬ	確かに、十年以上陣代扱いでは長門守が不満に思うかもしれぬ……。	확실히, 10년 이상진대 취급에서는 나가토 마모루가 불만으로 생각할지도 모른다…….	fix	builtin-pattern
+pattern:書くかもしれぬ	旅の準備が万全でなくとも、急いだほうがいいかもしれぬ	여행 준비가 만전이 아니어도, 서두르는 편이 좋을지도 모른다	fix	builtin-pattern
+phrase:そうかもしれぬ	そうかもしれぬ。	그럴지도 모른다.	fix	builtin-pattern
+pattern:書くやもしれぬ	もしかしたら、我が国も生活水準において、３大文明圏を超えるやもしれぬぞ	혹시, 우리 나라도 생활수준에서, 3대문명권을 넘을지도 모른다	fix	builtin-pattern
+pattern:書くとも知れぬ	半べそをかきながら、いつ来るとも知れぬデコピンに耐えるべく	반 울상을 지으면서, 언제 올지 모르는 딱밤에 참을 수 있도록	fix	builtin-pattern
+pattern:書くとも知れぬ	いつ終るとも知れぬ戦争	언제 끝날지 모르는 전쟁	fix	builtin-pattern
+pattern:書くとも知れぬ	底知れぬ恐怖の色だった。	끝을 알 수 없는 공포의 색이었다.	keep	builtin-pattern
+pattern:書くとも知れぬ	そこで初めて、言い知れぬ焦りが出てきた。	거기서 처음으로, 말할 수 없는 초조가 나왔다.	keep	builtin-pattern
+pattern:書くかもしれぬ	雨が降るかもしれない。	비가 올지도 모른다.	keep	builtin-pattern
+ending:書いたかもしれぬな	不幸中の幸いであったかもしれぬな	불행중의 다행이었을지도 모르겠군	fix	builtin-ending
+ending:学生かもしれませぬな	「竹若丸様の仰られる通りかもしれませぬな」	「타케와카환님이 말씀하시시는 대로일지도 모르옵니다」	fix	builtin-ending
+ending:書くやもしれませぬぞ	「しかし将軍家が此処に逃げて来るやもしれませぬぞ」	「하지만 쇼군가가 여기에 도망쳐 올지도 모르옵니다」	fix	builtin-ending
+phrase:申し訳ありませぬ	「申し訳ありませぬ！」	「죄송하옵니다!」	fix	builtin-phrase
+phrase:いけませぬ	「受け取ってほしくても、こちらの思いばかりではいけませぬ」	「받기를 원해도, 이쪽의 생각만으로는 아니 되옵니다」	fix	builtin-phrase
+phrase:なりませぬぞ	“なんと”、“それは”、“なりませぬぞ”と声が上がった。	“무려”, “그것은”, “아니 되옵니다”라고 목소리가 나왔다.	fix	builtin-phrase
+phrase:ございませぬぞ	鼻の中にこの世はございませぬぞ	코 안에 이 세상은 없사옵니다	fix	builtin-phrase
+phrase:ございませぬ	「何でも思いのままにできる御身ではございませぬ」	「뭐든 마음 가는 대로 할 수 있는 몸이 아니옵니다」	keep	builtin-phrase
+phrase:ございませぬ	「父上、失敗を恐れては人に進歩は有り得ませぬ！」	「아버님, 실패를 두려워해 사람에게 진보는 있을 수 없사옵니다!」	keep	builtin-phrase
+ending:書きませぬぞ	「百姓どもにも、いつまでも家を離れておれとは申せませぬぞ」	「백성들에게도, 언제까지나 집을 떠나 있으라고는 말할 수 없사옵니다」	fix	builtin-ending
+ending:書かぬぞ	まだまだ…この程度では沈まぬぞ！	아직도…이 정도로는 가라앉지 않는다!	fix	builtin-ending
+ending:書かぬぞ	「今でも構わぬぞ」	「지금도 상관하지 않는다」	fix	builtin-ending
+ending:書かぬぞ	「愛という概念か。なおさら、理解はできぬ」	「사랑이라는 개념인가. 더욱더, 이해는 할 수 없다」	keep	builtin-ending
+ending:書くべし	「魔王を倒すべし！」	「마왕을 쓰러뜨려야 한다!」	fix	builtin-ending
+ending:書くべし	罪人は罰せられるべし。	죄인은 죄받아야 한다.	fix	builtin-ending
+ending:書くべし	行くべし。	가야 한다.	fix	builtin-ending
+ending:書くべし	戦うべきだ。	싸워야 한다.	keep	builtin-ending
+ending:書くべし	恐るべき力	무서운 힘	keep	builtin-ending
+pattern:学生なれど	弱き者なれど、勇気はある。	약자지만, 용기는 있다.	fix	builtin-pattern
+pattern:学生なれども	本日、天気晴朗なれども波高し。	오늘, 날씨 청랑하지만 파고해.	fix	builtin-pattern
+ending:書くまいぞ	行くまいぞ。	가지 않겠다.	fix	builtin-ending
+ending:書くまいぞ	キジはこうやって焼いてもうまいぞ	꿩은 이렇게 구워도 능숙해	keep	builtin-ending
+pattern:学生なのかもしれぬ	彼が犯人なのかもしれぬ	그가 범인인지도 모른다	fix	builtin-pattern

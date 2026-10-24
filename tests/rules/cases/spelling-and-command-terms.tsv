@@ -1,0 +1,46 @@
+# 규칙: LEX-2, LEX-3
+rule	input	expected	kind	layer
+lexical:spelling-and-command-terms	なんかこわい。	왠지 무섭다.	fix	defaults
+lexical:spelling-and-command-terms	なんかこわかった。	왠지 무서웠다.	fix	defaults
+lexical:spelling-and-command-terms	なんかこわくない。	왠지 무섭지 않다.	fix	defaults
+lexical:spelling-and-command-terms	ほうろく	질냄비	fix	defaults
+lexical:spelling-and-command-terms	ほうろくを買った。	질냄비를 샀다.	fix	defaults
+lexical:spelling-and-command-terms	ほうろくで茶を炒る。	질냄비로 차를 볶는다.	fix	defaults
+lexical:spelling-and-command-terms	数日間	며칠간	keep	defaults
+lexical:spelling-and-command-terms	白白明け	새벽녘	fix	defaults
+lexical:spelling-and-command-terms	白白明けに出発した。	새벽녘에 출발했다.	fix	defaults
+lexical:spelling-and-command-terms	白白明けの空。	새벽녘의 하늘.	fix	defaults
+lexical:spelling-and-command-terms	アンドゥ	실행 취소	fix	defaults
+lexical:spelling-and-command-terms	アンドゥを使った。	실행 취소를 썼다.	fix	defaults
+lexical:spelling-and-command-terms	アンドゥ機能	실행 취소 기능	fix	defaults
+lexical:spelling-and-command-terms	エンドオブジョブ	작업 종료	fix	defaults
+lexical:spelling-and-command-terms	エンドオブジョブを確認した。	작업 종료를 확인했다.	fix	defaults
+lexical:spelling-and-command-terms	シャットダウン	셧다운	fix	defaults
+lexical:spelling-and-command-terms	シャットダウンした。	셧다운했다.	fix	defaults
+lexical:spelling-and-command-terms	シャットダウンする。	셧다운한다.	fix	defaults
+lexical:spelling-and-command-terms	シートを掛ける。	시트를 덮는다.	fix	defaults
+lexical:spelling-and-command-terms	シートを掛けた。	시트를 덮었다.	fix	defaults
+lexical:spelling-and-command-terms	セーフティーベルト	안전벨트	keep	defaults
+lexical:spelling-and-command-terms	御年玉	세뱃돈	fix	defaults
+lexical:spelling-and-command-terms	御年玉をもらった。	세뱃돈을 받았다.	fix	defaults
+lexical:spelling-and-command-terms	御年玉を渡した。	세뱃돈을 건네주었다.	fix	defaults
+lexical:spelling-and-command-terms	焙烙	질냄비	keep	defaults
+lexical:spelling-and-command-terms	シャットアウト	셧아웃	keep	defaults
+lexical:spelling-and-command-terms	リドゥ	다시 실행	fix	defaults
+lexical:spelling-and-command-terms	なんか変だ。	왠지 이상하다.	keep	defaults
+lexical:spelling-and-command-terms	臆病な人。	겁이 많은 사람.	fix	defaults
+lexical:spelling-and-command-terms	臆病だった。	겁이 많았다.	fix	defaults
+lexical:spelling-and-command-terms	英姿	훌륭한 모습	fix	defaults
+lexical:spelling-and-command-terms	英姿を見た。	훌륭한 모습을 보았다.	fix	defaults
+lexical:spelling-and-command-terms	馬鹿を言う。	어리석은 소리를 한다.	fix	defaults
+lexical:spelling-and-command-terms	馬鹿を言った。	어리석은 소리를 했다.	fix	defaults
+lexical:spelling-and-command-terms	馬鹿を言わない。	어리석은 소리를 하지 않는다.	fix	defaults
+lexical:spelling-and-command-terms	怖がり	겁쟁이	keep	defaults
+lexical:spelling-and-command-terms	ラジェーター	라디에이터	keep	defaults
+lexical:spelling-and-command-terms	ラジェーターを交換した。	라디에이터를 교환했다.	keep	defaults
+lexical:spelling-and-command-terms	臀びれ	뒷지느러미	fix	defaults
+lexical:spelling-and-command-terms	魚の臀びれ	물고기의 뒷지느러미	fix	defaults
+lexical:spelling-and-command-terms	臀びれを見た。	뒷지느러미를 보았다.	fix	defaults
+lexical:spelling-and-command-terms	ラジエーター	라디에이터	keep	defaults
+lexical:spelling-and-command-terms	腹びれ	배지느러미	keep	defaults
+lexical:spelling-and-command-terms	背びれ	등지느러미	keep	defaults

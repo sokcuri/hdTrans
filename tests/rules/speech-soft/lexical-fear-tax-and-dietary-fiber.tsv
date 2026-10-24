@@ -1,0 +1,4 @@
+# 규칙: LEX-3, SPC-1
+rule	input	expected	kind	layer
+lexical:cleanup-11	「なんか怖い。」	「왠지 무서워.」	fix	defaults
+lexical:cleanup-11	「何か怖い。」	「왠지 무서워.」	fix	defaults

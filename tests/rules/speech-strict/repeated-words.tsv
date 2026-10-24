@@ -1,4 +1,4 @@
 # 규칙: SND-2, SPC-1
 rule	input	expected	kind	layer
-lookup:copies	「いやだいやだ」	「싫다 싫다」	fix	lookup
+lookup:copies	「いやだいやだ」	「싫어 싫어」	fix	lookup
 lookup:copies	「いやだ」	「싫다」	keep	lookup

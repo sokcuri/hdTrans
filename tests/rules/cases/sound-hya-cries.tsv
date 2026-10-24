@@ -1,0 +1,38 @@
+# 규칙: SND-4
+rule	input	expected	kind	layer
+sound:hya-cry	「ひゃっ！？」	「꺅!?」	keep	sound
+sound:hya-cry	「ひゃっ……あ……」	「꺅……아……」	keep	sound
+sound:hya-cry	「ひゃうっ！」	「히야읏!」	fix	sound
+sound:hya-cry	「ひゃんっ！」	「히양!」	fix	sound
+sound:hya-cry	「……あ、ひゃんっ」	「……아, 히양」	fix	sound
+sound:hya-cry	「ひゃあっ！」	「히야앗!」	fix	sound
+sound:hya-cry	「ひゃあああっっ！？」	「히야아아앗!?」	fix	sound
+sound:hya-cry	「ひゃうううっ！？」	「히야우우읏!?」	fix	sound
+sound:hya-cry	「ひゃうんっ！？」	「히야웅!?」	fix	sound
+sound:hya-cry	「ひゃ……」	「히야……」	fix	sound
+sound:hya-cry	「ひゃー！」	「히야아!」	fix	sound
+sound:hya-cry	「ひゃ、や……っ、だめ……」	「히야, 야……, 안돼……」	fix	sound
+sound:hya-cry	「あっ！　あっ！　ひゃあんっ！」	「앗! 앗! 히야앙!」	fix	sound
+sound:hya-cry	「ひゃあぁ……そんな、待ってよ……」	「히야아아……그런, 기다려……」	fix	sound
+sound:hya-cry	「へ？　ひゃああッ」	「어? 히야아앗」	fix	sound
+sound:hya-cry	「ひゃわっ…！」	「히야왓…!」	fix	sound
+sound:hya-cry	「ひゃっ、ふあ……っ」	「꺅, 후아……」	keep	sound
+sound:hya-cry	「ひゃ、ひゃいっ」	「히야, 네엣」	fix	sound
+sound:hya-cry	「ひゃい、わかりましたっ」	「네에, 알겠습니다」	fix	sound
+sound:hya-cry	「ふぁーい」	「네에」	fix	sound
+sound:hya-cry	「ひゃっほー！」	「야호!」	keep	sound
+sound:hya-cry	「ひゃっほう、最高だ！」	「야호, 최고다!」	keep	sound
+sound:hya-cry	「きゃっ！？」	「꺅!?」	keep	sound
+sound:hya-cry	「きゃあっ！」	「꺄악!」	keep	sound
+sound:hya-cry	「ひぃっ！？」	「히익!?」	keep	sound
+sound:hya-cry	「ひいいいっ！」	「히이이익!」	keep	sound
+sound:hya-cry	「ひっ……」	「힉……」	keep	sound
+sound:hya-cry	「にゃあ」	「냐아」	keep	sound
+sound:hya-cry	「ひゃく円です」	「100엔입니다」	keep	sound
+sound:hya-cry	ひゃわぁ！？	히야와아!?	fix	sound
+sound:hya-cry	うひゃひゃ、マジかよ	우햐햐, 진짜냐	keep	sound
+sound:hya-cry	ひゃひゃひゃ！	햐햐햐!	keep	sound
+sound:hya-cry	「ひゃひゃひゃひゃ」	「햐햐햐햐」	keep	sound
+sound:hya-cry	「うひゃひゃひゃひゃ」	「우햐햐햐햐」	keep	sound
+sound:hya-cry	「うひゃひゃひゃひゃひゃ」	「우햐햐햐햐햐」	keep	sound
+sound:hya-cry	「ひゃはははは」	「햐하하하하」	keep	sound

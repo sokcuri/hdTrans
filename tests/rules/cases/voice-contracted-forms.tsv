@@ -1,0 +1,32 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+conjugation:voice-later-form	「ほめられちゃった！」	「칭찬받아버렸어!」	fix	conjugation
+conjugation:voice-later-form	褒められちゃった♪	칭찬받아버렸다♪	fix	conjugation
+conjugation:voice-later-form	「褒められちゃった♪」	「칭찬받아버렸어♪」	fix	conjugation
+conjugation:voice-later-form	「悪いな、朝食作らせちゃって」	「미안해, 아침 식사 만들게 해서」	fix	conjugation
+conjugation:voice-later-form	潜ります？潜らせちゃいます？	잠수합니까? 잠수하게 해버립니다?	fix	conjugation
+conjugation:voice-later-form	「あ、困らせちゃったね。忘れて忘れて、独り言みたいなもんだし！」	「아, 곤란하게 해버렸네. 잊어 잊어, 혼잣말 같은 것이고!」	fix	conjugation
+conjugation:voice-later-form	「気を遣わせちゃってごめんね」	「신경을 쓰게 해서 미안해」	fix	conjugation
+conjugation:voice-later-form	「ふふっ、また先輩を困らせちゃいました」	「후훗, 또 선배를 곤란하게 해버렸습니다」	fix	conjugation
+conjugation:voice-later-form	「脳だけ取り出されちゃったの？？」	「뇌만 꺼내져버렸어??」	fix	conjugation
+conjugation:voice-later-form	「うぅ……あたし、汚されちゃった……」	「으으……나, 더럽혀져버렸어……」	fix	conjugation
+conjugation:voice-later-form	「あーあ……先輩に濡らされちゃった」	「아~아……선배에게 적셔져버렸어」	fix	conjugation
+conjugation:voice-later-form	たった一言で黙らせちゃったｗｗｗｗｗｗｗ	단 한마디로 입을 다물게 해버렸다 ㅋㅋㅋㅋㅋㅋㅋ	fix	conjugation
+conjugation:voice-later-form	こっちに一言も喋らせず	여기에 한마디도 말하게 하지 않고	fix	conjugation
+conjugation:voice-later-form	「誰かに盗られちゃうわよ？」	「누군가에게 훔쳐져버릴 거야?」	fix	conjugation
+conjugation:voice-later-form	「……私が、抱えさせちゃったんだ……」	「……내가, 안게 해버렸어……」	fix	conjugation
+conjugation:voice-later-form	叱られちゃった	꾸중들어버렸다	keep	conjugation
+conjugation:voice-later-form	先生に褒められた	선생님에게 칭찬받았다	keep	conjugation
+conjugation:voice-later-form	「早く言えよ」	「빨리 말해」	keep	conjugation
+conjugation:voice-later-form	いくらでも食べられちゃう	얼마든지 먹을 수 있게 된다	keep	conjugation
+conjugation:voice-later-form	見透かされずいぶん困った	간파되고 꽤 곤란했다	keep	conjugation
+conjugation:voice-later-form	見られてしまった	들켜버렸다	keep	conjugation
+conjugation:ichidan-rare-chau-passive	すぐに忘れられちゃう	곧바로 잊혀버린다	fix	conjugation
+conjugation:ichidan-rare-chau-passive	忘れられちゃった	잊혀버렸다	fix	conjugation
+conjugation:ichidan-rare-chau-passive	「先生に教えられちゃった」	「선생님에게 가르침을 받아버렸어」	fix	conjugation
+conjugation:ichidan-rare-chau-passive	捨てられちゃった	버려져버렸다	fix	conjugation
+dict:w:27274	「あはは、ヘンなところ見られちゃったわね」	「아하하, 이상한 곳 들켜버렸네」	fix	defaults
+dict:w:27274	「全部、見られちゃった」	「전부, 들켜버렸어」	fix	defaults
+dict:w:27274	舐めてるところを見られちゃったら	핥고 있는 곳을 들켜버리면	fix	defaults
+conjugation:voice-later-form	手紙が書かれた	편지가 쓰여졌다	keep	conjugation
+conjugation:voice-later-form	「また待たされちゃった」	「또 기다리게 돼버렸어」	fix	conjugation

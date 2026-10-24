@@ -126,15 +126,21 @@ private:
     bool TranslateCandidateAt(std::string_view full, int cursor, int token, Item* parent);
     bool SpellsNumber(Record* records, const Record& number, std::string_view text);
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
+    bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
-    // (noun.realm-compound) gives it its 国 (美濃国境 美濃 + 国境, 日本国内 日本 + 国内): the reading of
+    // (noun.realm-compound, and noun.realm-province-compound after a province) gives it its 国 (美濃国境
+    // 美濃 + 国境, 日本国内 日本 + 国内, 出羽国人 出羽 + 国人): the reading of
     // the name that the name with 国 starts with moves to the front, when no longer word starts
     // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
     Record* NounBeforeCompound(Record* records, std::string_view text);
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);
+    // The word that ends where the word at cursor starts: parent, or the last word of the chain
+    // when it ends there in the token or is a protected token right before it; else null.
+    Item* WordBefore(int cursor, int token, Item* parent) const;
+    Record* DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent);
 
     // Lookup filters.
     bool Skip(const dict::UserEntry& u, std::string_view query) const;
@@ -173,6 +179,24 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
 // '0'+branch) and the length of the conjugation pattern; false when no branch matches.
 bool AnalyseVerbTail(std::string_view key, char kind, std::string_view tail, int& branch, int& length);
 
+// Whether text starts with a particle or punctuation after a noun, or is empty.
+bool NounEndAt(std::string_view text);
+
+// Whether the adjective stem with its nominal ending is a word of the dictionary already: stem is
+// also the key of a verb, whose continuative it then spells (楽し of 楽しむ: 楽しみ), or stem and
+// nominal are the key of a noun (高み, 甘み).
+bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal);
+
+// The ichidan branch of いる without its い that starts rest, the text after a て form: the
+// longest of る, れば, よう, た, て, ろ and ちゃ (見てる, 見てた, 見てて, 見てろ); -1 for none.
+int ContractedIruBranch(std::string_view rest);
+
+// The enabled endings of g, read on a form of an auxiliary after a て form, rewritten for the
+// verb before it: head is the Korean of the auxiliary ending in its marker family (1고 &HN@), and
+// the ending's class digit picks the form of that family (5지만 → 1고 있었지만). An ending whose
+// class has no such form is disabled; false when none is left.
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head);
+
 // Whether a verb record of conjugation class sub may join a group whose first record
 // has class first, for conjugation branch mode.
 bool VerbClassJoins(char mode, char first, char sub);
@@ -183,5 +207,10 @@ bool NounBefore(std::string_view text);
 
 // A plain-dictionary ending group.
 bool OwnedGroup(const Group* g);
+
+// Whether the number at the start of text, of size bytes, is the denominator of a fraction:
+// fraction.of and a number or a question word for one follow it (十分の一 10분의 1, 三分の二
+// 3분의 2, 十二分の一 12분의 1), so that a word spelled with the number (十分 충분히) gives way.
+bool FractionAt(std::string_view text, std::size_t size);
 
 }  // namespace hdTrans::word

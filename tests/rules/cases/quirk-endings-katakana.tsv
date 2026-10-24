@@ -1,0 +1,10 @@
+# 규칙: LEX-31
+rule	input	expected	kind	layer
+sound:katakana-word-not-ending	トリッシュ	트리시	keep	sound
+sound:katakana-word-not-ending	ブラッシュ	브러시	keep	sound
+sound:katakana-word-not-ending	ダッシュ	대시	keep	sound
+sound:katakana-word-not-ending	ラッシュ	러쉬	keep	sound
+sound:katakana-word-not-ending	スイッチ	스위치	keep	sound
+sound:katakana-word-not-ending	ボタン	버튼	keep	sound
+sound:katakana-word-not-ending	スタンプ	스탬프	keep	sound
+sound:katakana-word-not-ending	トリッシュが来た	트리시가 왔다	keep	sound

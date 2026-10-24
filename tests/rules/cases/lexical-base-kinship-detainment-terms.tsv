@@ -1,0 +1,101 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:30921	乙巳の年。	을사의 해.	fix	defaults
+dict:jisjk:30921	乙巳生まれ。	을사 태생.	fix	defaults
+dict:jisjk:30921	今年は乙巳だ。	금년은 을사다.	fix	defaults
+dict:jisjk:30921	乙巳から乙未まで。	을사로부터 을미까지.	fix	defaults
+dict:jisjk:30921	乙未の年。	을미의 해.	keep	defaults
+dict:jisjk:15092	乾風が吹く。	건조한 바람이 분다.	fix	defaults
+dict:jisjk:15092	乾風にさらされる。	건조한 바람에 노출된다.	fix	defaults
+dict:jisjk:15092	乾風の吹く季節。	건조한 바람이 부는 계절.	fix	defaults
+dict:jisjk:15092	川風が吹く。	강바람이 분다.	keep	defaults
+dict:jisjk:15092	湿った風が吹く。	축축한 바람이 분다.	keep	defaults
+dict:jisjk:229359	亀の手を食べる。	거북손을 먹는다.	fix	defaults
+dict:jisjk:229359	岩に亀の手が付いている。	바위에 거북손이 붙어 있다.	fix	defaults
+dict:jisjk:229359	亀の手を採った。	거북손을 채집했다.	fix	defaults
+dict:jisjk:229359	亀の手の味。	거북손의 맛.	fix	defaults
+dict:jisjk:229359	亀の足を見た。	거북이의 다리를 보았다.	keep	defaults
+dict:jisjk:229359	カメノテを食べる。	거북손을 먹는다.	keep	defaults
+dict:jisjk:255990	了解度を調べる。	이해도를 조사한다.	fix	defaults
+dict:jisjk:255990	了解度が低い。	이해도가 낮다.	fix	defaults
+dict:jisjk:255990	了解度を測る。	이해도를 측정한다.	fix	defaults
+dict:jisjk:255990	了解度を高める。	이해도를 높인다.	fix	defaults
+dict:jisjk:255990	理解度を調べる。	이해도를 조사한다.	keep	defaults
+dict:jisjk:255990	了承を得る。	승낙을 얻는다.	keep	defaults
+dict:jisjk:255400	予防検束を行う。	예방 검속을 실시한다.	fix	defaults
+dict:jisjk:255400	予防検束の廃止。	예방 검속의 폐지.	fix	defaults
+dict:jisjk:255400	予防検束の対象。	예방 검속의 대상.	fix	defaults
+dict:jisjk:255400	予防検束を受けた。	예방 검속을 받았다.	fix	defaults
+dict:jisjk:255400	予防検束に乗り出した。	예방 검속에 나섰다.	fix	defaults
+dict:jisjk:255400	予防拘禁を行う。	예방구금을 실시한다.	keep	defaults
+dict:jisjk:145427	同じ二の舞を踏む。	같은 전철을 밟는다.	fix	defaults
+dict:jisjk:145427	二の舞を踏んだ。	전철을 밟았다.	fix	defaults
+dict:jisjk:145427	二の舞を踏まない。	전철을 밟지 않는다.	fix	defaults
+dict:jisjk:145427	また二の舞を踏んでいる。	또 전철을 밟고 있다.	fix	defaults
+dict:jisjk:145427	二の足を踏む。	주저한다.	keep	defaults
+dict:jisjk:145427	足を踏んだ。	발을 밟았다.	keep	defaults
+dict:jisjk:247668	二院制を採用する。	양원제를 채용한다.	fix	defaults
+dict:jisjk:247668	二院制の議会。	양원제의 의회.	fix	defaults
+dict:jisjk:247668	二院制の国。	양원제의 나라.	fix	defaults
+dict:jisjk:247668	二院制と一院制。	양원제와 일원제.	fix	defaults
+dict:jisjk:247668	一院制を採用する。	일원제를 채용한다.	keep	defaults
+dict:jisjk:247668	議会の制度。	의회의 제도.	keep	defaults
+dict:jisjk:78545	五体満足で生まれた。	온전한 몸으로 태어났다.	fix	defaults
+dict:jisjk:78545	五体満足で帰った。	온전한 몸으로 돌아갔다.	fix	defaults
+dict:jisjk:78545	五体を動かす。	오체를 움직인다.	keep	defaults
+dict:jisjk:78545	満足の結果。	만족의 결과.	keep	defaults
+dict:jisjk:204508	亜えん素酸の水溶液。	아염소산의 수용액.	fix	defaults
+dict:jisjk:204508	亜えん素酸を加える。	아염소산을 더한다.	fix	defaults
+dict:jisjk:204508	亜えん素酸の性質。	아염소산의 성질.	fix	defaults
+dict:jisjk:204508	亜えん素酸の濃度。	아염소산의 농도.	fix	defaults
+dict:jisjk:204508	亜塩素酸の水溶液。	아염소산의 수용액.	keep	defaults
+dict:jisjk:99421	亡父の写真。	죽은 아버지의 사진.	fix	defaults
+dict:jisjk:99421	亡父の遺言。	죽은 아버지의 유언.	fix	defaults
+dict:jisjk:99421	亡父と亡母の墓。	죽은 아버지와 망모의 무덤.	fix	defaults
+dict:jisjk:99421	亡夫の写真。	망부의 사진.	keep	defaults
+dict:jisjk:99421	亡母の写真。	망모의 사진.	keep	defaults
+dict:jisjk:99421	父の写真。	아버지의 사진.	keep	defaults
+dict:jisjk:251295	亡姉の写真。	죽은 언니의 사진.	fix	defaults
+dict:jisjk:251295	亡姉の遺品。	죽은 언니의 유품.	fix	defaults
+dict:jisjk:251295	亡姉と亡妹の写真。	죽은 언니와 죽은 누이동생의 사진.	fix	defaults
+dict:jisjk:251295	亡妹の写真。	죽은 누이동생의 사진.	keep	defaults
+dict:jisjk:251295	亡弟の写真。	죽은 아우의 사진.	keep	defaults
+dict:jisjk:251295	姉の写真。	언니의 사진.	keep	defaults
+dict:jisjk:107987	交通遺児を支援する。	교통사고 유자녀를 지원한다.	fix	defaults
+dict:jisjk:107987	交通遺児のための募金。	교통사고 유자녀를 위한 모금.	fix	defaults
+dict:jisjk:107987	交通遺児の生活。	교통사고 유자녀의 생활.	fix	defaults
+dict:jisjk:107987	交通遺児を育てる。	교통사고 유자녀를 기른다.	fix	defaults
+dict:jisjk:107987	交通事故の原因。	교통사고의 원인.	keep	defaults
+dict:jisjk:107987	幼児を支援する。	유아를 지원한다.	keep	defaults
+dict:jisjk:29568	害虫の発生を予察する。	해충 발생을 예찰한다.	fix	defaults
+dict:jisjk:29568	予察の結果。	예찰의 결과.	fix	defaults
+dict:jisjk:29568	病害虫を予察する。	병해충을 예찰한다.	fix	defaults
+dict:jisjk:29568	予察の精度。	예찰의 정밀도.	fix	defaults
+dict:jisjk:29568	予測の結果。	예측의 결과.	keep	defaults
+dict:jisjk:29568	予知の能力。	예지의 능력.	keep	defaults
+dict:jisjk:248244	乳糖不耐症の患者。	유당불내증의 환자.	keep	defaults
+dict:jisjk:248244	乳糖不耐症の検査。	유당불내증의 검사.	keep	defaults
+dict:jisjk:248261	乳輪の色。	유륜의 색.	keep	defaults
+dict:jisjk:248261	乳輪の大きさ。	유륜의 크기.	keep	defaults
+dict:jisjk:255400	警察は予防検束をとった。	경찰은 예방 검속을 취했다.	fix	local
+dict:jisjk:255400	予防検束を取らない。	예방 검속을 택하지 않는다.	fix	local
+dict:jisjk:255400	予防検束をとる方針だ。	예방 검속을 취할 방침이다.	fix	local
+dict:jisjk:204508	塩素酸の水溶液。	염소산의 수용액.	keep	defaults
+dict:jisjk:107987	孤児を支援する。	고아를 지원한다.	keep	defaults
+dict:jisjk:78545	五体満足で無事に戻った。	온전한 몸으로 무사히 돌아왔다.	fix	defaults
+lookup:pneumonia	肺炎の治療。	폐렴의 치료.	keep	defaults
+dict:jisjk:248258	乳幼児肺炎の治療。	영유아 폐렴의 치료.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎の症状。	영유아 폐렴의 증상.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎。	영유아 폐렴.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎の予防。	영유아 폐렴의 예방.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎の診断。	영유아 폐렴의 진단.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎の患者。	영유아 폐렴의 환자.	fix	defaults
+dict:jisjk:248258	乳幼児肺炎を治療する。	영유아 폐렴을 치료한다.	fix	defaults
+lookup:medical-compounds	乳幼児の肺炎。	영유아의 폐렴.	keep	defaults
+lookup:medical-compounds	乳幼児の治療。	영유아의 치료.	keep	defaults
+lookup:medical-compounds	幼児の症状。	유아의 증상.	keep	defaults
+lookup:medical-compounds	肺炎の症状。	폐렴의 증상.	keep	defaults
+lookup:medical-compounds	乳幼児健診。	영유아 건강 검진.	keep	defaults
+dict:jisjk:158580	カリニ肺炎の症状。	카리니 폐렴의 증상.	fix	defaults
+dict:jisjk:158581	カリニはいえんの治療。	카리니 폐렴의 치료.	fix	defaults
+dict:jisjk:236144	親生児肺炎の治療。	신생아 폐렴의 치료.	fix	defaults

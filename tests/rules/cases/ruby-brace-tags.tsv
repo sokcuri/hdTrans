@@ -7,8 +7,8 @@ normalize:ruby	そうか……{rb}現実{/rb}{rt}ここ{/rt}に彼女はいな�
 normalize:ruby	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	normalize
 normalize:ruby	カモがネギを{rb}背負{/rb}{rt}しょ{/rt}って……？	카모가 파를 {rb}짊어져{/rb}{rt}짊어져{/rt}……?	fix	normalize
 normalize:ruby	なんとなく俺も{rb}安堵{/rb}{rt}あんど{/rt}する。	왠지 나도 {rb}안도{/rb}{rt}안도{/rt}한다.	keep	normalize
-compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt} 버렸다.	fix	compose
-compose:text-gate	皿を割ってしまった。	접시를 깨어 버렸다.	keep	compose
+compose:text-gate	大事な皿を{rb}割って{/rb}{rt}わって{/rt}しまった。	소중한 접시를 {rb}깨어{/rb}{rt}깨어{/rt}버렸다.	fix	compose
+compose:text-gate	皿を割ってしまった。	접시를 깨어버렸다.	keep	compose
 word:ruby-neighbour	彼は窓の外を{rb}眺めて{/rb}{rt}ながめて{/rt}いる。	그는 창 밖을 {rb}바라보고{/rb}{rt}바라보고{/rt} 있다.	fix	global-ending
 word:ruby-neighbour	{rb}現実{/rb}{rt}ここ{/rt}に彼女はいない。	{rb}현실{/rb}{rt}여기{/rt}에 그녀는 없다.	keep	defaults
 normalize:ruby	先生が俺を{rb}庇{/rb}{rt}かば{/rt}ってくれた。	선생님이 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주었다.	fix	normalize
@@ -20,7 +20,7 @@ normalize:ruby	{rb}寂{/rb}{rt}さみ{/rt}しいけれど、平気。	{rb}외롭
 normalize:ruby	{rb}夢{/rb}{rt}ここ{/rt}で目が覚めた。	{rb}꿈{/rb}{rt}여기{/rt}에서 깨어났다.	keep	normalize
 normalize:ruby	{rb}人気{/rb}{rt}ひとけ{/rt}がない。	{rb}인기척{/rb}{rt}인기척{/rt}이 없다.	keep	normalize
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べてくれた。	{rb}먹어{/rb}{rt}먹어{/rt} 주었다.	fix	rewrites
-word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt} 버렸다.	fix	rewrites
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまった。	{rb}마셔{/rb}{rt}마셔{/rt}버렸다.	fix	rewrites
 word:ruby-neighbour	涙を{rb}拭{/rb}{rt}ぬぐ{/rt}ってくれた。	눈물을 {rb}닦아{/rb}{rt}닦아{/rt} 주었다.	fix	rewrites
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べたい。	{rb}먹고 싶다{/rb}{rt}먹고 싶다{/rt}.	fix	local-ending
 word:ruby-neighbour	パンを{rb}食{/rb}{rt}た{/rt}べて寝た。	빵을 {rb}먹고{/rb}{rt}먹고{/rt} 잤다.	keep	rewrites
@@ -54,10 +54,42 @@ normalize:ruby	サラダ作りに{rb}勤{/rb}{rt}いそ{/rt}しんでくれて�
 word:ruby-neighbour	{rb}食{/rb}{rt}た{/rt}べて、走った。	{rb}먹어{/rb}{rt}먹어{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んで、走った。	{rb}마셔{/rb}{rt}마셔{/rt}, 달렸다.	current	rewrites
 word:ruby-neighbour	{rb}読{/rb}{rt}よ{/rt}んで、走った。	{rb}읽어{/rb}{rt}읽어{/rt}, 달렸다.	current	rewrites
-word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt} 버린다.	fix	rewrites
-G100	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
-G100	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
-G100	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
-G100	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
-G100	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
-G100	夢	몽	keep	global-stem
+word:ruby-neighbour	{rb}飲{/rb}{rt}の{/rt}んでしまう。	{rb}마셔{/rb}{rt}마셔{/rt}버린다.	fix	rewrites
+defaults:lone-kanji	{rb}愛{/rb}{rt}あい{/rt}	{rb}사랑{/rb}{rt}사랑{/rt}	keep	defaults
+defaults:lone-kanji	{rb}心{/rb}{rt}こころ{/rt}	{rb}마음{/rb}{rt}마음{/rt}	keep	defaults
+defaults:lone-kanji	{rb}食{/rb}{rt}しょく{/rt}	{rb}밥{/rb}{rt}식{/rt}	current	defaults
+defaults:lone-kanji	{rb}夢{/rb}{rt}ゆめ{/rt}	{rb}꿈{/rb}{rt}유메{/rt}	current	defaults
+defaults:lone-kanji	{rb}夢{/rb}{rt}ゆめ{/rt}。	{rb}꿈{/rb}{rt}유메{/rt}.	current	defaults
+defaults:lone-kanji	夢	꿈	fix	defaults
+rewrite:ruby-idiom-verb	遠くで{rb}声{/rb}{rt}こえ{/rt}がした	먼 곳에서 {rb}목소리{/rb}{rt}목소리{/rt}가 들렸다	fix	rewrites
+rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}がする	{rb}목소리{/rb}{rt}목소리{/rt}가 들린다	fix	rewrites
+rewrite:ruby-idiom-verb	どこからか母の{rb}声{/rb}{rt}こえ{/rt}がして	어디에선가 어머니의 {rb}목소리{/rb}{rt}목소리{/rt}가 들려	fix	rewrites
+rewrite:ruby-idiom-verb	{rb}味{/rb}{rt}あじ{/rt}がした。	{rb}맛{/rb}{rt}맛{/rt}이 났다.	fix	rewrites
+# 맞는 출력: {rb}손해{/rb}{rt}손해{/rt}를 보았다
+rewrite:ruby-idiom-verb	{rb}損{/rb}{rt}そん{/rt}をした	{rb}손해{/rb}{rt}손{/rt}를 보았다	current	rewrites
+# 맞는 출력: 문이 개폐되는 {rb}소리{/rb}{rt}소리{/rt}가 났다.
+rewrite:ruby-idiom-verb	ドアが開閉される{rb}音{/rb}{rt}おと{/rt}がした。	문이 개폐되는 {rb}소리{/rb}{rt}와{/rt}가 났다.	current	rewrites
+# 맞는 출력: 랜턴을 {rb}손{/rb}{rt}손{/rt}에 넣었다
+rewrite:ruby-idiom-verb	ランタンを{rb}手{/rb}{rt}て{/rt}にした	랜턴을 {rb}손{/rb}{rt}이라고{/rt}에 넣었다	current	rewrites
+# 맞는 출력: 믿을 수 없는 것을 {rb}말했다{/rb}{rt}말했다{/rt}
+normalize:ruby	信じられない事を{rb}口{/rb}{rt}くち{/rt}にした	믿을 수 없는 것을 {rb}말했다{/rb}{rt}썩어로 했다{/rt}	current	normalize
+# 맞는 출력: 뒤에서 빛난 {rb}느낌{/rb}{rt}느낌{/rt}이 들었다
+normalize:ruby	後ろで光った{rb}気{/rb}{rt}き{/rt}がした	뒤에서 빛난 {rb}것 같았다{/rb}{rt}생각이 들었다{/rt}	current	normalize
+# 맞는 출력: {rb}목소리{/rb}{rt}목소리{/rt}가 들리지 않는다
+normalize:ruby	{rb}声{/rb}{rt}こえ{/rt}がしない	{rb}목소리가 들리지 않는다{/rb}{rt}목소리가 하지 않는다{/rt}	current	normalize
+# 맞는 출력: {rb}화가 났다{/rb}{rt}화가 났다{/rt}.
+normalize:ruby	{rb}頭{/rb}{rt}あたま{/rt}にきた。	{rb}화가 났다{/rb}{rt}머리에 왔다{/rt}.	current	normalize
+# 맞는 출력: {rb}신경 쓴다{/rb}{rt}신경 쓴다{/rt}.
+normalize:ruby	{rb}気{/rb}{rt}き{/rt}にする。	{rb}신경 쓴다{/rb}{rt}와로 한다{/rt}.	current	normalize
+# 맞는 출력: {rb}대상으로 한다{/rb}{rt}대상으로 한다{/rt}
+normalize:ruby	{rb}対{/rb}{rt}つい{/rt}にする	{rb}대상으로 한다{/rb}{rt}마침내 한다{/rt}	current	normalize
+normalize:ruby	{rb}酌{/rb}{rt}しゃく{/rt}をした。	{rb}술을 따랐다{/rb}{rt}술을 따랐다{/rt}.	keep	normalize
+normalize:ruby	彼を{rb}袖{/rb}{rt}そで{/rt}にした。	그를 {rb}소홀히 했다{/rb}{rt}거들떠 보지 않았다{/rt}.	keep	normalize
+rewrite:ruby-idiom-verb	{rb}声{/rb}{rt}こえ{/rt}が聞こえた	{rb}목소리{/rb}{rt}목소리{/rt}가 들렸다	keep	rewrites
+rewrite:ruby-idiom-verb	{rb}犬{/rb}{rt}いぬ{/rt}がワンワンと吠えた	{rb}개{/rb}{rt}개{/rt}가 멍멍 짖었다	keep	rewrites
+rewrite:ruby-idiom-verb	{rb}心{/rb}{rt}こころ{/rt}がどきどきした	{rb}마음{/rb}{rt}마음{/rt}이 두근두근했다	keep	rewrites
+sound:ruby-particle	{rb}彼{/rb}{rt}かれ{/rt}がしがしと頭を掻いた。	{rb}그{/rb}{rt}그{/rt}벅벅 머리를 긁적였다.	keep	sound
+normalize:ruby	{rb}上{/rb}{rt}あ{/rt}がった	{rb}올랐다{/rb}{rt}올랐다{/rt}	keep	normalize
+normalize:ruby	頭を{rb}撫{/rb}{rt}な{/rt}でた	머리를 {rb}쓰다듬었다{/rb}{rt}쓰다듬었다{/rt}	keep	normalize
+normalize:ruby	{rb}読{/rb}{rt}よ{/rt}もう	{rb}읽자{/rb}{rt}읽자{/rt}	keep	normalize
+normalize:ruby	{rb}死{/rb}{rt}し{/rt}ね	{rb}죽어라{/rb}{rt}죽어라{/rt}	keep	normalize

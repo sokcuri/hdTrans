@@ -47,10 +47,10 @@ int VowelOf(char32_t r) {
 }
 
 // Whether r lengthens a syllable ending in the stem character last: ー, ～, the small
-// or plain kana of its vowel, or ン after ン.
+// or plain kana of its vowel, or ン or ゥ after ン (んんぅ).
 bool Lengthens(char32_t r, char32_t last) {
     if (r == U'ー' || r == U'～') return true;
-    if (last == U'ン') return r == U'ン';
+    if (last == U'ン') return r == U'ン' || r == U'ゥ';
     const int v = VowelOf(last);
     return v >= 0 && (r == kSmallVowels[v] || r == kPlainVowels[v]);
 }
@@ -76,8 +76,25 @@ char32_t Syllable(int initial, int vowel, int final) {
     return static_cast<char32_t>(0xAC00 + (initial * 21 + vowel) * 28 + final);
 }
 
+constexpr int kInitialNone = 11;  // ㅇ
+constexpr int kVowelA = 0;        // ㅏ
+constexpr int kVowelU = 13;       // ㅜ
+constexpr int kVowelEu = 18;      // ㅡ
+
+// Whether r is a syllable without an initial consonant whose vowel is vowel.
+bool BareVowel(char32_t r, int vowel) {
+    const auto s = text::Split(r);
+    return s && s->initial == kInitialNone && s->vowel == vowel;
+}
+
+// 우 (with any final) as the weak vowel 으 that a cry of う is written with, also where っ closes it
+// (はうっ 하읏, not 하웃); other characters unchanged.
+char32_t WeakU(char32_t r) {
+    return BareVowel(r, kVowelU) ? text::Join(kInitialNone, kVowelEu, text::Final(r)) : r;
+}
+
 // The vowel that lengthens a vowel (ㅑ ㅏ, ㅘ ㅏ, ㅟ ㅣ).
-constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 1, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
 
 // The particles that may stand before an ono row inside a hiragana run.
 constexpr std::u32string_view kParticles = U"がをにはもでとへやのて";
@@ -200,6 +217,7 @@ struct SoundMatch {
     bool spaceAfter = false;  // a word that starts inside the match took its end
     bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
     bool drawn = false;       // the text ends in a kana that draws out the vowel before it (ひぃ, ふぁー)
+    bool cry = false;         // a predicate said as a cry (SoundRow::cry)
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -209,6 +227,13 @@ bool EndsDrawn(std::string_view s) {
     return k.size() > 1 && k.back() >= 0xAC00 && k.back() <= 0xD7A3 && (k.back() - 0xAC00) / 588 == 11 &&
            (k.back() - 0xAC00) % 28 == 0;
 }
+
+// Whether b says the cry a again right after it with the same Korean, as it is or drawn out or
+// clipped (やだ+やだぁ, やだ+やだっ); a clipped copy closes its last syllable with ㅅ.
+bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
+    return a.cry && b.cry && a.end == b.start && a.korean == b.korean && b.key.starts_with(a.key);
+}
+
 
 // Whether two sounds in a row are written apart: both have two or more syllables, b does
 // not continue a by starting with its last kana (うふふ+ふっ), and a is not a cry that ends
@@ -223,6 +248,14 @@ bool OneSyllableRepeated(std::string_view s) {
     return true;
 }
 
+// The syllables of a sound: those of its Korean, but one for a key of one kana and a small ャ, ュ or
+// ョ, however many its Korean has (ひゃ 히야).
+size_t Syllables(const SoundMatch& m) {
+    const std::u32string_view k = m.key;
+    if (k.size() >= 2 && k.size() <= 3 && In(k[1], U"ャュョ") && (k.size() == 2 || k[2] == U'ッ')) return 1;
+    return text::RuneCount(m.korean);
+}
+
 bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.intj && !a.lead && !a.phrase && b.intj && !b.lead && !b.phrase && a.drawn && EndsDrawn(a.korean)) {
         return false;
@@ -232,8 +265,7 @@ bool Separate(const SoundMatch& a, const SoundMatch& b) {
     if (a.end == b.start && a.key == b.key && a.key.size() >= 2 && a.korean == b.korean && OneSyllableRepeated(a.korean)) {
         return false;
     }
-    return text::RuneCount(a.korean) > 1 && text::RuneCount(b.korean) > 1 &&
-           (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
+    return Syllables(a) > 1 && Syllables(b) > 1 && (a.key == b.key || b.key.empty() || b.key[0] != a.key.back());
 }
 
 bool IsAsciiLetter(char c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
@@ -362,7 +394,9 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
-    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false) const;
+    // With ending, the end rows go there instead of into user.
+    void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
+                     size_t* ending = nullptr) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
@@ -391,6 +425,7 @@ private:
     bool Spaced(size_t i) const;
     bool StartsVerb(size_t i) const;
     size_t WordLen(size_t p) const;
+    size_t RunningWordLen(size_t p) const;
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
@@ -422,21 +457,27 @@ bool SoundText::UtteranceStart(size_t p) const {
 }
 
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
-// closing bracket or lengthening mark (not an ellipsis: ちょっと…痛い).
+// closing bracket or drawn end mark (not an ellipsis: ちょっと…痛い).
 bool SoundText::PauseAt(size_t p) const {
-    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || rs_[p] == kLengthenMark || rs_[p] == output::kDrawnMark;
+    return p >= rs_.size() || In(rs_[p], U"、，,！？!?。」』）)\n") || output::IsDrawnEndMark(rs_[p]);
 }
 
 // The length in characters of the longest base key, plain-dictionary key and name-layer
 // key that start at character p; kana spellings do not count, nor with skipEnds the
 // endings of end rows.
-void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds) const {
+void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds, size_t* ending) const {
     base = user = name = 0;
+    if (ending != nullptr) *ending = 0;
     const size_t end = std::min(rs_.size(), p + 24);
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup);
     for (const dict::Candidate& c : rd.list) {
-        if (c.user != nullptr && (c.user->kana || (skipEnds && c.user->end))) continue;
+        if (c.user != nullptr && c.user->kana) continue;
         const size_t n = text::RuneCount(c.source);
+        if (c.user != nullptr && c.user->end && ending != nullptr) {
+            *ending = std::max(*ending, n);
+            continue;
+        }
+        if (c.user != nullptr && skipEnds && c.user->end) continue;
         if (c.user != nullptr && c.user->nameLayer) {
             name = std::max(name, n);
         } else if (c.user != nullptr) {
@@ -636,8 +677,17 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
                 if (IsHiraganaRune(rs_[end])) korean += ',';
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
+            // A small ぅ that opens a cry before 아 is the weak vowel 으 (ぅあ 으아; not ぅお 우오,
+            // ぅぇ 우에 or ぅわぁ 우와아).
+            if (f_[p] == U'ゥ') {
+                std::u32string ko = DecodeText(korean);
+                if (ko.size() > 1 && BareVowel(ko[1], kVowelA) && BareVowel(ko[0], kVowelU)) {
+                    ko[0] = WeakU(ko[0]);
+                    korean = EncodeText(ko);
+                }
+            }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, s.open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2])};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry};
             chosen = &s;
         }
     }
@@ -647,12 +697,19 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain) const {
     if (chosen->phrase && best.end < f_.size() && f_[best.end - 1] == U'ッ' && f_[best.end] == U'テ') return false;
     if (best.lead) return true;  // an utterance-initial interjection before a pause wins over words
     // An interjection before a pause or an ellipsis is not the ending of an end row there
-    // (見て！ぽい～！ 포이~!).
-    const bool beforePause = PauseAt(best.end) || (best.end < rs_.size() && In(rs_[best.end], U"…‥"));
-    size_t base = 0, user = 0, name = 0;
-    LongestKeys(p, base, user, name, best.intj && beforePause);
+    // (見て！ぽい～！ 포이~!), nor is a sound that an ending cannot follow: after another sound
+    // of its chain, at the start of an utterance or after a pause or an ellipsis, when it ends
+    // in its と or comes before no kanji or katakana (ありがとぴょん 고마워뿅, 敬礼！ぴょん！ 뿅,
+    // ぴょんと跳ねた 폴짝; not ぽい捨て, nor やん after another mark: た↓ん↑やん↓).
+    const auto pauseAt = [&](size_t k) { return PauseAt(k) || (k < rs_.size() && In(rs_[k], U"…‥")); };
+    const bool beforePause = pauseAt(best.end);
     size_t keyLen = chosen->key.size();
     if (chosen->key.back() == U'ト') keyLen--;
+    const bool alone = (inChain || UtteranceStart(p) || pauseAt(p - 1)) &&
+                       (keyLen < chosen->key.size() || best.end >= rs_.size() ||
+                        (!IsKanjiRune(rs_[best.end]) && !IsKatakanaRune(rs_[best.end])));
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(p, base, user, name, (best.intj && beforePause) || alone);
     const size_t surface = best.end - p;
     // A name-layer key that runs on from the sound into kanji and ends with the kanji word
     // names a thing (ニコニコ動画 니코니코 동화, ニコニコ大百科).
@@ -856,12 +913,12 @@ std::string SoundText::IyaReading(size_t p, size_t end) const {
 }
 
 // Whether a sound that ends in ッ ends there: what follows is no kana, or ト, テ, ー, ～,
-// or the sound's first kana again (ぶるっぶる); otherwise the ッ belongs to a verb
-// (くらっちゃった).
+// the copula ダ or デ, which no verb ending starts with after ッ (サクッだった), or the
+// sound's first kana again (ぶるっぶる); otherwise the ッ belongs to a verb (くらっちゃった).
 bool SoundText::Stopped(const SoundMatch& m) const {
     if (f_[m.end - 1] != U'ッ' || m.end == f_.size()) return true;
     const char32_t r = f_[m.end];
-    return !IsKana(r) || In(r, U"トテー～") || r == f_[m.start];
+    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start];
 }
 
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
@@ -1053,6 +1110,22 @@ size_t SoundText::WordLen(size_t p) const {
     return std::max({base, user, name, size_t{1}});
 }
 
+// WordLen of the word the text goes on with at character p, where the ending of an end row
+// counts only where the sentence may end after it, not before kana or a kanji that go on
+// (関連でちょこっと: で, not the でち of 朝でち).
+size_t SoundText::RunningWordLen(size_t p) const {
+    size_t base = 0, user = 0, name = 0, ending = 0;
+    LongestKeys(p, base, user, name, false, &ending);
+    const size_t words = std::max({base, user, name, size_t{1}});
+    const size_t all = std::max(words, ending);
+    const size_t e = p + all;
+    if (words < all && e < rs_.size() &&
+        (IsKanjiRune(rs_[e]) || (IsKana(rs_[e]) && VowelOf(f_[e]) >= 0 && !Lengthens(f_[e], f_[e - 1])))) {
+        return words;
+    }
+    return all;
+}
+
 // The length of the と, or the て of って, that makes an ono row ending at character i
 // an adverb, or 0: the particle must not start a longer word (とても) that reaches at
 // least as far as the word after it (とお of とお尻 does not), nor join two sounds
@@ -1136,7 +1209,12 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         return p + n;
     }
     const std::u32string_view x = f.substr(p, n);
-    if (n > 1 && IsSoundKey(x, ctx_.extraBuiltin)) return 0;
+    // A sound of two or more kana says itself (あっ、), but a lead row may start the word it
+    // stutters (ちょ、ちょっと).
+    const auto rows = SoundRows(x[0], ctx_.extraBuiltin);
+    if (n > 1 && std::any_of(rows.begin(), rows.end(), [&](const SoundRow& s) { return s.key == x && !s.phrase && !s.lead; })) {
+        return 0;
+    }
     // A syllable said three or more times straight into the word it starts (つつつついに,
     // どどどどうしよう, ぼぼぼボク) or before a word in kanji (けけけ圭一): a piece without a
     // separator for each repeat, unless a word reads the run or a sound reads it before a
@@ -1388,13 +1466,18 @@ size_t SoundText::Cry(size_t p, std::string& korean) const {
         std::u32string kana(1, r);
         if (k + 1 < e && In(f[k + 1], U"ャュョ")) kana += f[++k];
         if (const char32_t plain = PlainVowel(r); plain != 0) kana = plain;
-        const std::u32string syllable = DecodeText(text::FromKana(EncodeText(kana), text::Preset::Fan));
+        std::u32string syllable = DecodeText(text::FromKana(EncodeText(kana), text::Preset::Fan));
+        // A cry of the one vowel う is the weak vowel 으 (ううう 으으으).
+        if (syllables == 1 && syllable.size() == 1 && BareVowel(syllable[0], kVowelU)) syllable[0] = WeakU(syllable[0]);
         if (syllable.size() != 1 || syllable[0] < 0xAC00 || syllable[0] > 0xD7A3) return 0;
         ko += syllable;
         vowel = static_cast<int>(syllable[0] - 0xAC00) % 588 / 28;
         last = kana.size() == 1 ? kana[0] : kana[1];
     }
-    if (e < closing && (ko.back() - 0xAC00) % 28 == 0) ko.back() += 19;  // ㅅ
+    if (e < closing && (ko.back() - 0xAC00) % 28 == 0) {
+        ko.back() += static_cast<char32_t>(text::kFinalSiot);
+        if (In(f[e - 1], U"ウゥ")) ko.back() = WeakU(ko.back());  // a drawn う closed by っ: はうっ 하읏
+    }
     korean = EncodeText(ko);
     return end;
 }
@@ -1419,7 +1502,7 @@ size_t SoundText::LoneCatch(size_t p) const {
 std::string_view SoundText::LoneVoice(size_t p) const {
     const std::u32string_view rs = rs_;
     constexpr std::u32string_view kVoices = U"ンァィゥェォくぐやはひふつ";
-    constexpr std::string_view kKorean[] = {"응", "아", "이", "우", "에", "오", "크", "그", "야", "하", "히", "후", "읏"};
+    constexpr std::string_view kKorean[] = {"응", "아", "이", "으", "에", "오", "크", "그", "야", "하", "히", "후", "읏"};
     size_t v = kVoices.find(f_[p]);
     if (v == std::u32string_view::npos) v = kVoices.find(rs[p]);  // hiragana only
     if (v == std::u32string_view::npos) return {};
@@ -1580,6 +1663,16 @@ std::string SoundText::Write() {
             while (i < rs.size() && offsets_[i] < end) i++;
             continue;
         }
+        // A particle right after the reading of brace ruby goes with its base (声がした, not the
+        // sound がし), so it starts no sound unless it starts a doubled sound (がしがし).
+        const bool doubled = i + 3 < rs.size() && rs[i] == rs[i + 2] && rs[i + 1] == rs[i + 3];
+        if (!doubled && In(rs[i], kParticles) && text_.substr(0, offsets_[i]).ends_with("{/rt}")) {
+            afterParticle = true;
+            afterWord = false;
+            b += Bytes(i, i + 1);
+            i++;
+            continue;
+        }
         size_t next = i + 1;
         bool particle = false;
         bool word = false;
@@ -1607,6 +1700,9 @@ std::string SoundText::Write() {
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
                 if (k == chain.size() - 1 && doing && !m.root.empty()) {
                     b += m.root;
+                } else if (k > 0 && CryCopies(chain[k - 1], m) &&
+                           dict::InClass("mark.clip", EncodeText(m.key.substr(chain[k - 1].key.size())))) {
+                    b += Lengthen(m.korean, "d!");  // the clipped last copy of a cry closes with ㅅ (싫어 싫엇)
                 } else {
                     b += m.korean;
                 }
@@ -1671,7 +1767,7 @@ std::string SoundText::Write() {
                     continue;
                 }
             } else if (IsHiraganaRune(rs[i]) || IsKanjiRune(rs[i])) {
-                next = std::min(rs.size(), i + WordLen(i));
+                next = std::min(rs.size(), i + RunningWordLen(i));
                 particle = next == i + 1 && In(rs[i], kParticles);
                 word = next > i + 1 && IsHiraganaRune(rs[i]) && IsHiraganaRune(rs[next - 1]) && !StemAt(i, next - i);
                 if (next > i + 1) wordEnd = next;
@@ -1733,8 +1829,9 @@ std::u32string_view RepeatedUnit(const SoundRow& row) {
         const std::u32string_view unit = key.substr(key.size() - n);
         if (key.substr(key.size() - 2 * n, n) != unit) continue;
         size_t syllables = 0;
-        for (const char32_t r : unit) {
-            if (r == U'ッ') continue;
+        for (size_t k = 0; k < unit.size(); k++) {
+            const char32_t r = unit[k];
+            if (r == U'ッ' || (k > 0 && In(r, U"ャュョ"))) continue;  // ヒャ is one syllable
             if (In(r, U"ンーァィゥェォャュョ") || PlainVowel(r) != 0) return {};
             syllables++;
         }
@@ -1762,7 +1859,9 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     const std::u32string_view unit = RepeatedUnit(row);
     std::u32string_view stem = row.key;
     char32_t tail = 0;
-    if (const size_t n = row.key.size(); n >= 2 && (row.key[n - 1] == U'ン' || row.key[n - 1] == U'ッ')) {
+    // A final ン after another ン is part of the stem, which more ン lengthen (んん, んんん).
+    if (const size_t n = row.key.size();
+        n >= 2 && ((row.key[n - 1] == U'ン' && row.key[n - 2] != U'ン') || row.key[n - 1] == U'ッ')) {
         stem = stem.substr(0, n - 1);
         tail = row.key[n - 1];
     }
@@ -1811,7 +1910,9 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     size_t i = q;
     if (tail == 0) i += Repeats(unit, f, i, units);
     for (; i < f.size() && Lengthens(f[i], last); i++) {
-        if (f[i] != U'～') {
+        if (tail == 0 && stem.ends_with(U"ンン") && isMark(f[i])) {
+            tilde = true;  // a hum drawn out with ー or ～ ends in ~ (んんー 으응~)
+        } else if (f[i] != U'～') {
             units += 'v';
         } else if (units.empty() || units.back() != '~') {
             units += '~';
@@ -1831,6 +1932,7 @@ bool MatchSound(const SoundRow& row, std::u32string_view f, size_t p, size_t& en
     while (j < f.size() && f[j] == U'ッ') j++;
     if (j > i && (j == f.size() || !IsKana(f[j]) || In(f[j], U"トテ～ー") || (row.intj && !row.phrase))) {
         units += '!';
+        if (In(f[i - 1], U"ウゥ")) units += 'u';  // the っ closes a drawn う: 읏 (はうっ 하읏)
         for (i = j; i < f.size() && In(f[i], U"～ー"); i++) {
         }
     }
@@ -1863,7 +1965,8 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
         rs.append(n, rs.back());
         std::string rest(units.substr(n));
         if (std::erase(rest, '!') > 0 && rs.back() >= 0xAC00 && rs.back() <= 0xD7A3 && (rs.back() - 0xAC00) % 28 == 0) {
-            rs.back() += static_cast<char32_t>(19);  // ㅅ
+            rs.back() += static_cast<char32_t>(text::kFinalSiot);
+            if (rest.find('u') != std::string::npos) rs.back() = WeakU(rs.back());
         }
         return Lengthen(EncodeText(rs), rest);
     }
@@ -1878,6 +1981,7 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
     }
     rs.back() = Syllable(initial, vowel, 0);
     int added = 0;
+    bool closed = false;  // っ added the ㅅ
     for (const char u : units) {
         if (u == 'v' && added < kMaxLengthening) {
             rs.push_back(Syllable(11, kLongVowel[vowel], 0));
@@ -1885,7 +1989,8 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
         } else if (u == '~') {
             rs.push_back(U'~');
         } else if (u == '!' && final == 0) {
-            final = 19;  // ㅅ
+            final = text::kFinalSiot;
+            closed = true;
         }
     }
     if (final != 0) {
@@ -1895,6 +2000,7 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
             rs.back() += static_cast<char32_t>(final);
         }
     }
+    if (closed && units.find('u') != std::string_view::npos) rs.back() = WeakU(rs.back());  // はうっ 하읏, not 하웃
     return EncodeText(rs);
 }
 
@@ -2091,6 +2197,31 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     return out;
 }
 
+std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!HoldsMember(text, {dict::ClassMembers("contraction.ra-less-kuru")})) return std::string(text);
+    // The ら that the potential られ of an ichidan verb starts with.
+    const std::string_view potential = word::Conjugation(7, 4);
+    const std::string_view ra = potential.substr(0, text::DecodeRune(potential).size);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (StartLength(std::string_view(s).substr(byte[i]), dict::ClassMembers("contraction.ra-less-kuru")) == 0) continue;
+        size_t from = i;
+        while (from > 0 && i - from < kLongestStem && (IsKanjiRune(rs[from - 1]) || IsHiraganaRune(rs[from - 1]))) from--;
+        while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
+        if (from + 1 >= i) continue;
+        out.append(s, byte[done], byte[i + 1] - byte[done]);
+        out += ra;
+        done = i + 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
     constexpr std::string_view kNo = "の";
     if (!HoldsMember(text, {dict::ClassMembers("contraction.n-no")})) return std::string(text);
@@ -2178,13 +2309,14 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 }  // namespace internal
 
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
-    const std::string completed =
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap);
+    const std::string completed = internal::RewriteDrawnHonorifics(
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(normalized, ctx, snap), ctx, snap), ctx, snap),
+        ctx, snap);
     std::string sounded =
         internal::RewriteCasualAdjectives(internal::WriteSounds(
                                               internal::RewriteOnbinU(
                                               internal::RewriteContractedNo(
-                                                  internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), snap),
+                                                  internal::RewriteRaLessKuru(internal::RewriteContractedIku(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), snap),
                                               ctx, snap), ctx, snap),
                                           ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {

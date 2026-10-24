@@ -48,7 +48,7 @@ dict:jisjk:357444	六つの箱	여섯 개의 상자	keep	local
 dict:jisjk:357444	3つのころ	3살 무렵	fix	local
 compose:native-count	やくそうを3個手に入れた！	약초를 3개 손에 넣었다!	keep	compose
 compose:native-count	他の料理より銅貨2枚ほど安い。	다른 요리보다 동화 2장 정도 싸다.	keep	compose
-compose:native-count	今や残り1個となってしまった	지금은 남아 1개가 되어 버렸다	keep	compose
+compose:native-count	今や残り1個となってしまった	지금은 남아 1개가 되어버렸다	keep	compose
 compose:native-count	初期スキルは最大で8個まで取得可能だ。	초기 스킬은 최대로 8개까지 취득 가능하다.	keep	compose
 compose:native-count	パソコンのフォルダー14個	PC의 폴더 14개	keep	compose
 compose:native-count	130箇所を回った。	130군데를 돌았다.	keep	compose
