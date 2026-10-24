@@ -4362,9 +4362,9 @@ bool RuleG260([[maybe_unused]] Item* p) {
 }
 
 // global 4998 stem pos 4 prio 270
-//     sem under sem[-3] and pos[-1] is 3** and pos[-2] is 2** and pos[-3] is 1**
+//     sem under sem[-3] and pos[-1] is 3** and pos[-2] is 2** and src[-2] != "も" and pos[-3] is 1**
 bool RuleG270([[maybe_unused]] Item* p) {
-    return (AttrMinusEqW(p, 0, -3) && PumsaEq(p, -1, "3**"sv) && PumsaEq(p, -2, "2**"sv) && PumsaEq(p, -3, "1**"sv));
+    return (AttrMinusEqW(p, 0, -3) && PumsaEq(p, -1, "3**"sv) && PumsaEq(p, -2, "2**"sv) && SrcNe(p, -2, "も"sv) && PumsaEq(p, -3, "1**"sv));
 }
 
 // global 5200 ending pos 4 prio 280
@@ -4959,7 +4959,7 @@ constexpr CompiledRule kGlobal[] = {
     {RuleG240, 0xa1900d31f3906c8bull},
     {RuleG250, 0x8266a0032983f64eull},
     {RuleG260, 0xec2ce21adb66f2fbull},
-    {RuleG270, 0x45073aa92e59d27eull},
+    {RuleG270, 0x3147cb2fdf9987feull},
     {RuleG280, 0x1be7cef1a4a2ac18ull},
     {RuleG290, 0x4624ab8df25c3998ull},
     {RuleG300, 0xf7e92a66cdf1a698ull},
