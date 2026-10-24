@@ -744,7 +744,18 @@ bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
         const char32_t q = rs[i - 2];
         return q == U'ん' || (q == U'い' && i >= 3 && rs[i - 3] == U'な');
     }
-    return prev == U'ね' && ParticleNe(rs, i - 1);
+    // The particle ね also follows an adjectival noun in kanji (大切ねー; not the casual 出ねー or
+    // 関係ねー, a noun and ねー for ない).
+    // After と or 下さい it is drawn out only right before ！ or the end (しないとねー！), where the
+    // dash would stay as written; elsewhere the dash stays as it does after a noun (朝ねー。).
+    const auto beforeExclaim = [&] {
+        size_t j = i;
+        while (j < rs.size() && IsDash(rs[j])) j++;
+        return j == rs.size() || In(rs[j], U"！!");
+    };
+    const bool toOrKudasai = rs[i - 2] == U'と' || (rs[i - 2] == U'い' && i >= 3 && rs[i - 3] == U'さ');
+    return prev == U'ね' && (ParticleNe(rs, i - 1) || (IsKanjiRune(rs[i - 2]) && e.StemTagged(rs, from, i - 1, "G")) ||
+                             (toOrKudasai && beforeExclaim()));
 }
 
 }  // namespace

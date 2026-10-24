@@ -105,3 +105,14 @@ sound:drawn-clip	待ってぇぇ	기다려	keep	sound
 sound:drawn-clip	待って待ってぇ	기다려 기다려	keep	sound
 sound:drawn-clip	すごおおおい	대단해~	keep	sound
 dict:w:27518	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	「뭐 일단 응모해 둘까」라고, 밑져야 본전으로 예약해 보았다.	fix	lookup
+cx:copies:31	すごいすごーい	대단해 대단해~	fix	rewrites
+cx:copies:31	すごいすごーい！	대단해 대단해~!	fix	rewrites
+cx:copies:31	「すごいすごーい！」	「대단해 대단해~!」	fix	rewrites
+cx:copies:31	ずるいずるーい	치사해 치사해~	fix	rewrites
+cx:copies:31	はやいはやーい	빨라 빨라~	fix	rewrites
+cx:copies:31	すごいすごーい、ほんとに	대단해 대단해~, 정말	fix	rewrites
+cx:clipped-copies:10	すごいすごーいっ！	대단해 대단햇!	fix	rewrites
+cx:copies:31	すごいすごい	!rule:cx:copies:31	keep	rewrites
+cx:copies:31	いたいいたーい	아파 아파~	keep	rewrites
+cx:copies:31	すごーい！	대단해!	keep	rewrites
+cx:copies:31	「長い長ーい夜」	「긴 긴 밤」	keep	rewrites

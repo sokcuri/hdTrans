@@ -233,6 +233,12 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"あれ―は誰？"sv, "あれ―は誰？"sv},
         {"あれ……が欲しい"sv, "あれ……が欲しい"sv},
         {"え――はい"sv, "えっ――はい"sv},
+        // え after a comma or a pause right before a pause hesitates; before a question only
+        // after a pause.
+        {"あっ、え…違う"sv, "あっ、えっ…違う"sv},
+        {"……え……本当"sv, "……えっ……本当"sv},
+        {"そう、え？"sv, "そう、え？"sv},
+        {"考え…"sv, "考え…"sv},
     };
     Check(RewriteInterjections, cases);
 }
@@ -519,6 +525,43 @@ HD_TEST(pipeline_respell_variants) {
         HD_CHECK(eq != std::string_view::npos && eq > 0 && eq + 1 < pair.size() &&
                  pair.find('=', eq + 1) == std::string_view::npos);
     }
+}
+
+HD_TEST(pipeline_respell_katakana_endings) {
+    const Case cases[] = {
+        {"私デース！"sv, "私でーす！"sv},
+        {"楽しいネー"sv, "楽しいねー"sv},
+        {"受信シマシタ…"sv, "受信しました…"sv},
+        {"行きマース！"sv, "行きまーす！"sv},
+        {"justデース"sv, "justでーす"sv},
+        {"一マス進む"sv, "一マス進む"sv},
+        {"あと一マス。"sv, "あと一マス。"sv},
+        {"Decemberネー！"sv, "Decemberネー！"sv},
+        {"言ったデース！"sv, "言ったデース！"sv},
+        {"何してるデース！"sv, "何してるデース！"sv},
+        {"来たデース！"sv, "来たデース！"sv},
+        {"あなたデス！"sv, "あなたです！"sv},
+        {"まだデース！"sv, "まだでーす！"sv},
+        {"行くデース！"sv, "行くでーす！"sv},
+        {"デスゲーム"sv, "デスゲーム"sv},
+        {"サドンデス！"sv, "サドンデス！"sv},
+        {"……デース"sv, "……デース"sv},
+        {"音声ヲ、解析シマス。"sv, "音声ヲ、解析シマス。"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellKatakanaEndings(c.in), std::string(c.want));
+}
+
+HD_TEST(pipeline_respell_kanji_cries) {
+    const Case cases[] = {
+        {"「嫌ぁぁぁ」"sv, "「いやぁぁぁ」"sv},
+        {"嫌っ！"sv, "いやっ！"sv},
+        {"「嫌ぁ！」"sv, "「いやぁ！」"sv},
+        {"「嫌ぁ……」"sv, "「嫌ぁ……」"sv},
+        {"すごく嫌ー"sv, "すごく嫌ー"sv},
+        {"嫌っている"sv, "嫌っている"sv},
+        {"嫌！"sv, "嫌！"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellKanjiCries(c.in), std::string(c.want));
 }
 
 HD_TEST(pipeline_write_kin_terms) {

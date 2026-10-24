@@ -403,7 +403,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `opens-line`(줄에서 단어 앞에 공백뿐이거나 문장 끝 부호가 있음), `after-pause`(단어 바로 앞에 말줄임표나 줄표가 있음), `after-restart`(단어 바로 앞에 `mark.restart`의 부호가 있고 그 앞에 다른 글이 있음: 私が…私が), `number`(숫자와 한자 수사로만 된 단어),
   `quote-verb`(말하기, 생각하기 동사로 시작하거나 聞), `word-span`(앞 단계가 이미 읽은 고정 단어 구간),
   `adjectival`(의미 표가 그 단어를 하다 형용사의 어근으로 읽음), `person`(고른 후보의 의미 코드가 사람, 동물이나
-  신), `causative`(사역으로 분석된 동사), `passive`(수동으로 분석되었고 아직 한국어 수동 낱말로 바뀌지 않은 동사: 撫でられ), `causative-passive`(사역 수동으로 분석된 동사: 読まされ), `respectful`(그 (ら)れ를 높임으로 읽은 동사, spec GRM-10: 確認されますか), `lexical-passive`(사전 동사의 수동형을 한 낱말로 읽은 사전 행: 書かれ, 使われ, 見られ. 목적어가 있어도 수동인 동사의 부류는 빼고), `touches-prev`(앞 단어가 끝난 자리에서 시작함: 같은 토큰이거나, 앞 단어가
+  신), `person-name`(표기에 한자가 있고 이름 층에 사람 이름으로 있음: 기본 사전이 지명으로 읽는 美咲), `causative`(사역으로 분석된 동사), `passive`(수동으로 분석되었고 아직 한국어 수동 낱말로 바뀌지 않은 동사: 撫でられ), `causative-passive`(사역 수동으로 분석된 동사: 読まされ), `respectful`(그 (ら)れ를 높임으로 읽은 동사, spec GRM-10: 確認されますか), `lexical-passive`(사전 동사의 수동형을 한 낱말로 읽은 사전 행: 書かれ, 使われ, 見られ. 목적어가 있어도 수동인 동사의 부류는 빼고), `touches-prev`(앞 단어가 끝난 자리에서 시작함: 같은 토큰이거나, 앞 단어가
   토큰 끝이고 이 단어가 다음 토큰의 처음), `alnum-start`(표기가 글자나 숫자로 시작함), `hiragana`(표기에 히라가나가
   있음), `katakana`(표기가 가타카나 ァ..ヶ와 ー뿐임), `blank`(고른 후보의 번역이 비었거나 공백뿐임),
   `final-consonant`(고른 후보의 사전형 한국어가 받침으로 끝남), `copula-target`(고른 후보의 번역이 이다 활용 표지를 씀,
@@ -415,7 +415,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
   `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
   `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
-  `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),
+  `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `drawn-ending`(어미가 `kana.drawn-out`의 부호로 시작함: すご|ーい), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),
   `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `lengthened`(단어 바로 뒤에 `mark.lengthening`의 늘임 표시가 옴: 思うなぁ, 思うなー), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음),
   `prompt-after`(단어 뒤의 글이 공백 다음에 `mark.prompt-follow`의 말로 시작하거나 `mark.prompt-answer`의 답을 담음: 화면에 띄운 물음 뒤의 と, 》, はい, やめる).
   표에 없는 판정이 필요하면 `constructions.cpp`의 `kFeatures`에 이름과 함께 더합니다.
@@ -451,6 +451,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
 | `set-active` | 수동이나 사역 수동으로 분석된 동사를 능동으로 씀(`어지다`, `게 되다`를 붙이지 않고 그 동사의 번역 그대로 활용함) |
 | `clip-ending` | 어미 뒤(어미가 없으면 번역 뒤)에 끝 음절을 받침 ㅅ으로 닫는 표지를 붙임(아파 아팟) |
 | `set-base-verb` | `lexical-passive`인 단어를 그 수동형을 만든 사전 동사(그 활용 부류의 행 가운데 기본 행)의 번역으로 씀(使われ 사용되다 → 쓰다) |
+| `draw-ending` | 어미 뒤(어미가 없으면 번역 뒤)에 늘임 표지를 붙임. 구 끝에서 `~`로 씀(대단해 대단해~) |
 | `set-sound` | 고른 후보의 번역을 단어의 가나 표기를 소리대로 적은 한글로 씀(ワタシ 와타시) |
 
 ### -why, 사례, 검사

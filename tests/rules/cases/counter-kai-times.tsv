@@ -40,7 +40,7 @@ dict:jisjk:115519	「5回中4回は負けた」	「5회 중 4회는 졌다」	ke
 dict:jisjk:115519	「1回、2回、3回と数えた」	「1회, 2회, 3회로 세었다」	keep	local
 dict:jisjk:344600	「3回のうち1回は負ける」	rule:dict:jisjk:344600=1회	keep	local
 dict:jisjk:344600	「第1回も中止だ」	「제1회도 중지다」	fix	local
-dict:jisjk:344600	「1回でも勝てば」	rule:dict:jisjk:344600=1회	keep	local
+dict:jisjk:344600	「1回でも勝てば」	rule:dict:jisjk:344600=1번	fix	local
 dict:jisjk:115519	「3回攻撃する」	「3회 공격한다」	keep	global-stem
 dict:jisjk:115519	2回まで使用可能。	2회까지 사용 가능.	keep	global-stem
 dict:jisjk:115519	1日3回まで挑戦できる。	1일 3회까지 도전할 수 있다.	keep	global-stem

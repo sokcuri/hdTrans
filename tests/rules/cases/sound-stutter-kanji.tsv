@@ -1,0 +1,70 @@
+# 규칙: SND-1, SND-3, SND-4
+rule	input	expected	kind	layer
+sound:stutter-kanji	「ま、待って」	「기, 기다려」	fix	sound
+sound:stutter-kanji	「ま、待ってください」	「기, 기다려 주세요」	fix	sound
+sound:stutter-kanji	「ま、真面目に答えてください」	「지, 진지하게 대답해 주세요」	fix	sound
+sound:stutter-kanji	「ま、負けられない……」	「지, 질 수 없다……」	fix	sound
+sound:stutter-kanji	「ま――待って」	「기――기다려」	fix	sound
+sound:stutter-kanji	「お、俺たち……」	「우, 우리……」	fix	sound
+sound:stutter-kanji	「お、大きくなった……」	「커, 커졌다……」	fix	sound
+sound:stutter-kanji	「お、終わった……」	「끄, 끝났다……」	fix	sound
+sound:stutter-kanji	「お、落ち着け」	「지, 진정해」	fix	sound
+sound:stutter-kanji	「お、思い出ですか？」	「추, 추억입니까?」	fix	sound
+sound:stutter-kanji	「お、女の子じゃなかった……？」	「여, 여자아이가 아니었어……?」	fix	sound
+sound:stutter-kanji	「お、覚えてたの？」	「기, 기억했어?」	fix	sound
+sound:stutter-kanji	「う、嬉しいの」	「기, 기쁜 거야」	fix	sound
+sound:stutter-kanji	「う、撃たないでください」	「쏘, 쏘지 말아 주세요」	fix	sound
+sound:stutter-kanji	「う、噂はあるけど」	「소, 소문은 있는데」	fix	sound
+sound:stutter-kanji	「う、上だ！」	「위, 위다!」	fix	sound
+sound:stutter-kanji	「よ、夜に電話してごめんなさい」	「바, 밤에 전화해서 미안해요」	fix	sound
+sound:stutter-kanji	「む、無理です」	「무, 무리입니다」	fix	sound
+sound:stutter-kanji	「む、胸が痛い」	「가, 가슴이 아프다」	fix	sound
+sound:stutter-kanji	「む、婿ですか……」	「사, 사위입니까……」	fix	sound
+sound:stutter-kanji	「と、友達から聞いた」	「치, 친구에게서 들었다」	fix	sound
+sound:stutter-kanji	「と、止まった……」	「머, 멈추었다……」	fix	sound
+sound:stutter-kanji	「と、当然でしょ？」	「다, 당연하지?」	fix	sound
+sound:stutter-kanji	「さ、触ってもいいですか？」	「마, 만져도 괜찮습니까?」	fix	sound
+sound:stutter-kanji	「さ、寂しくない？」	「외, 외롭지 않아?」	fix	sound
+sound:stutter-kanji	「さ、悟った？」	「깨, 깨달았어?」	fix	sound
+sound:stutter-kanji	「が、頑張ります！」	「노, 노력하겠습니다!」	fix	sound
+sound:stutter-kanji	「で、出ちゃう……！」	「나, 나와버린다……!」	fix	sound
+sound:stutter-kanji	「あ……先輩……」	「아……선배……」	fix	sound
+sound:stutter-kanji	「あ……嬉しいです」	「아……기쁩니다」	fix	sound
+sound:stutter-kanji	「う、掃除道具がいっぱいで」	「으, 청소 도구가 가득해」	fix	sound
+sound:stutter-kanji	「む、一句浮かんだ」	「음, 한 마디 떠올랐다」	fix	sound
+sound:stutter-kanji	「う……血が止まらない……」	「으……피가 멈추지 않는다……」	fix	sound
+sound:stutter-kanji	「む……反応が速い！」	「음……반응이 빠르다!」	fix	sound
+sound:stutter-kanji	「さ……行こう」	「자……가자」	fix	sound
+sound:stutter-kanji	「お……来たか」	「오……왔나」	fix	sound
+sound:stutter-kanji	「ね……先輩」	「저기……선배」	fix	sound
+sound:stutter-kanji	「ちょ……待って」	「잠깐……기다려」	fix	sound
+sound:stutter-kanji	「あ、悪い」	「아, 미안하다」	keep	sound
+sound:stutter-kanji	「あ、明日行くよ」	「아, 내일 가」	keep	sound
+sound:stutter-kanji	「え、笑える」	「어, 웃을 수 있다」	keep	sound
+sound:stutter-kanji	「ま、仕方ない」	「뭐, 어쩔 수 없다」	keep	sound
+sound:stutter-kanji	「ま、正直に言うと」	「뭐, 솔직히 말하면」	keep	sound
+sound:stutter-kanji	「ま、今日はこのくらいにしよう」	「뭐, 오늘은 이 정도로 하자」	keep	sound
+sound:stutter-kanji	「ま、待機中だ」	「뭐, 대기 중이다」	keep	sound
+sound:stutter-kanji	「さ、行こうか」	「자, 갈까」	keep	sound
+sound:stutter-kanji	「さ、先に行って」	「자, 먼저 가」	keep	sound
+sound:stutter-kanji	「お、来たか」	「오, 왔나」	keep	sound
+sound:stutter-kanji	「お、大丈夫？」	「오, 괜찮아?」	keep	sound
+sound:stutter-kanji	「ね、先輩」	「저기, 선배」	keep	sound
+sound:stutter-kanji	「ま、まだだよ」	「아, 아직이야」	keep	sound
+sound:stutter-kanji	「さ、さ、最低」	「최, 최, 최저」	keep	sound
+sound:stutter-kanji	「ち、違う」	「아, 아니다」	keep	sound
+sound:stutter-kanji	「え……本当？」	「어……정말?」	keep	sound
+sound:stutter-kanji	「お……俺たち……」	「우……우리……」	keep	sound
+sound:stutter-kanji	と、思った。	라고 생각했다.	keep	sound
+sound:stutter-kanji	で、電話をかけた。	그래서, 전화를 걸었다.	keep	sound
+sound:stutter-kanji	そうだ ね……	그렇네……	keep	sound
+sound:stutter-kanji	午前六時、夜通し、さ……作戦を立てていたのよ。	오전 6시, 밤새, 자……작전을 세우고 있었어.	keep	sound
+sound:stutter-kanji	「う…美味いな！」	「마…맛있네!」	fix	sound
+sound:stutter-kanji	「う、上手いね」	「느, 능숙하네」	fix	sound
+sound:stutter-kanji	ちょ…直撃！？	지…직격!?	fix	sound
+sound:stutter-kanji	「ちょ……直してくる」	「잠깐……고쳐 온다」	keep	sound
+sound:stutter-kanji	「む…、むっ 先輩さぁ！」	「무…, 뭇 선배!」	keep	sound
+sound:stutter-kanji	先輩、え…笑って、くれるの？	선배, 어…웃어, 주는 거야?	fix	normalize
+sound:stutter-kanji	「ちょ…直撃！？」	「지…직격!?」	fix	sound
+sound:stutter-kanji	「ちょ――調子に乗るな」	「우――우쭐대지 마」	fix	sound
+sound:stutter-kanji	「ちょ、調子に乗るな」	「잠깐, 우쭐대지 마」	keep	sound

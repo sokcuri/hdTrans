@@ -1171,14 +1171,29 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // 몇 and 여러 stand apart from any counter (몇 체, 몇 층).
     if (settings_.literal && (t == "몇" || t == "여러") && Contains(nextTags, "Ct")) return Result(std::move(t), true);
     // A number word in Hangul, also one that goes on with 만 or 억 (몇십만, 수백억), stands
-    // apart from the counter after it (수십 명, 몇백 년, 몇십만 명) and joins 万 or 億.
+    // apart from the counter after it (수십 명, 몇백 년, 백 번, 천 명) and joins 万 or 億.
     if (settings_.literal && Contains(nextTags, "Ct")) {
         constexpr std::string_view kNumberWords[] = {"수십", "수백", "수천", "수만", "몇십", "몇백", "몇천", "몇만"};
         auto numberWord = [&](std::string_view w) {
             return std::find(std::begin(kNumberWords), std::end(kNumberWords), w) != std::end(kNumberWords);
         };
+        // A number word the dictionary reads from a kanji numeral in Hangul (百 백, 千 천), unless
+        // it goes on from digits (2000만엔, NUM-1).
+        auto hangulNumber = [&](std::string_view w) {
+            if (w.empty() || !(Contains(tags, "Nj") || Contains(tags, "Nd"))) return false;
+            if (previous >= 0) {
+                const std::string_view before = EntryText(items[previous]);
+                if (!before.empty() && IsDigit(before.back())) return false;
+            }
+            for (std::size_t k = 0; k < w.size();) {
+                const text::Rune r = text::DecodeRune(w.substr(k));
+                if (!text::Split(r.cp)) return false;
+                k += r.size;
+            }
+            return true;
+        };
         const bool myriad = next.surface == "万" || next.surface == "億";
-        if (numberWord(t)) return Result(std::move(t), !myriad);
+        if (numberWord(t) || hangulNumber(t)) return Result(std::move(t), !myriad);
         if ((item.surface == "万" || item.surface == "億") && previous >= 0 && numberWord(EntryText(items[previous])) &&
             !myriad) {
             return Result(std::move(t), true);

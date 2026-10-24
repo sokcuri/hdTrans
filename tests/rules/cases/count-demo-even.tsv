@@ -1,0 +1,35 @@
+# 규칙: NUM-11, NUM-7
+rule	input	expected	kind	layer
+dict:jisjk:4344	まあ、婚約の一つでも二つでも勝手にしてくれという感じだった。	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	３は３枚でも革命可能か？	3은 3장이라도 혁명 가능한가?	fix	local
+dict:jisjk:4344	一隻でも一人でも、救えるならば私は、それで満足なの。	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	前みたいに小言の一つでも聞かせてよ！	전같이 잔소리의 하나라도 들려줘!	fix	local
+dict:jisjk:4344	今じゃ一匹でもいないと私がさびしくなるくらいですよ。	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	「ぐぬぅ……写真の１枚でも撮ってくればよかった……」	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	普通の女であれば叫び声の一つでも上げそうなものだが	보통 여자이면 비명의 하나라도 올릴 것 같은 것이지만	fix	local
+dict:jisjk:4344	指一本でもかなりきつかった。	손가락 하나라도 꽤 힘들었다.	fix	local
+dict:jisjk:4344	俺は７００位でも十分だと思う	나는 700위라도 충분하다고 생각한다	fix	local
+dict:jisjk:4344	３位でも４位でも関係ないんじゃ……？	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	「一回でも受け入れると毎日のようにポーカーしようって言ってくるし」	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	一発でも当たれば、人間の身体など細切れのミンチ	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	「１枚でも横領？　わかりました。」	「1장이라도 횡령? 알겠습니다.」	fix	local
+dict:jisjk:4344	「その代わり決められるまで、何回でもスタートラインに立たせてあげます」	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	プロの仕事ぶりから一つでも多くを学んでほしい。	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:4344	二回でも三回でも	두 번이라도 세 번이라도	fix	local
+dict:jisjk:4344	100円でも高い。	rule:dict:jisjk:4344=(이)라도	fix	local
+dict:jisjk:344600	1回でも会いたい。	1번이라도 만나고 싶다.	fix	local
+phrase:一瞬でも	「一瞬でも勝ったなんて思った自分が恥ずかしいです……」	「한순간이라도 이겼다라고 생각한 자신이 부끄럽습니다……」	fix	fixed
+phrase:一瞬でも	「一瞬でも迷えば狙いがずれて相手を殺してしまうかもしれないし」	「한순간이라도 헤매면 목적이 어긋나 상대를 죽여버릴지도 모르고」	fix	fixed
+dict:jisjk:4344	大事なことなので何度でも言おう。	소중한 일이므로 몇 번이라도 말하자.	keep	local
+dict:jisjk:4344	１秒でも早く	1초라도 빨리	keep	local
+dict:jisjk:4344	一度でも夜伽を命じられれば	한 번이라도 밤시중을 명령받으면	keep	local
+dict:jisjk:4344	１日でも早く縁を切りたくて、リハビリに励んでいる	1일이라도 빨리 인연을 끊고 싶어서, 재활에 힘쓰고 있다	keep	local
+dict:jisjk:4344	俺は一分一秒でも早く家に逃げ帰る必要がある。	나는 1분1초라도 빨리 집에 도망쳐 돌아갈 필요가 있다.	keep	local
+dict:jisjk:4344	その間に一階か二階でも下のフロアに行ければ大丈夫だ	!rule:dict:jisjk:4344	keep	local
+dict:jisjk:4344	3階でも売っている。	3층에서도 팔고 있다.	keep	local
+dict:jisjk:4344	何時間でも待つ。	몇 시간이라도 기다린다.	keep	local
+dict:jisjk:4344	これは私達の日々の勤めの一つでもあります。	!rule:dict:jisjk:4344	keep	ending-defaults
+dict:jisjk:4344	学校でも人気だ。	학교에서도 인기다.	keep	local
+dict:jisjk:4344	3回でも足りない。	3번이라도 부족하다.	keep	local
+dict:jisjk:4344	ちなみにEND1と2でも自殺する。	!rule:dict:jisjk:4344	keep	local
+dict:jisjk:4344	二でも三でも構わない	!rule:dict:jisjk:4344	keep	local

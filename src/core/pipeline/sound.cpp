@@ -125,10 +125,40 @@ bool ContainsAny(std::u32string_view s, const std::u32string_view (&subs)[N]) {
     return false;
 }
 
-// The syllables that stand alone before a comma and a kanji word (あ、本当 is "ah,
-// really"; が、 is a particle), so X、<kanji> is a stutter only for others.
-constexpr std::u32string_view kNotStutters[] = {U"ア", U"ウ", U"エ", U"オ", U"ン", U"ネ", U"デ", U"マ", U"サ",
-                                                U"ヤ", U"ヨ", U"ム", U"ガ", U"ヲ", U"ト", U"ジャ", U"チョ"};
+// The first mora, in katakana, of the reading of the word in kanji at rs[i:], from the longest
+// head of sound.stutter-head that starts there (待って マ, 俺は オ, 無理 ム), or of
+// sound.stutter-head-pause after an ellipsis or a dash (pause), or empty. A head of one kanji
+// is that kanji before a character that is no kanji (俺は, 待って; not 待機).
+std::u32string StutterHeadMora(std::u32string_view rs, size_t i, bool pause) {
+    struct Head {
+        std::u32string mora;
+        std::u32string kanji;
+        bool pause;  // of sound.stutter-head-pause
+    };
+    // The builtin classes do not change, so they are decoded once.
+    static const std::vector<Head> heads = [] {
+        std::vector<Head> out;
+        auto add = [&](std::span<const std::string_view> members, bool p) {
+            for (const std::string_view member : members) {
+                const std::u32string m = DecodeText(member);
+                size_t k = 0;
+                while (k < m.size() && IsKatakanaRune(m[k])) k++;
+                out.push_back({m.substr(0, k), m.substr(k), p});
+            }
+        };
+        add(dict::ClassMembers("sound.stutter-head"), false);
+        add(dict::ClassMembers("sound.stutter-head-pause"), true);
+        return out;
+    }();
+    const Head* best = nullptr;
+    for (const Head& h : heads) {
+        if ((h.pause && !pause) || (best != nullptr && h.kanji.size() <= best->kanji.size())) continue;
+        if (rs.substr(i, h.kanji.size()) != h.kanji) continue;
+        if (h.kanji.size() == 1 && i + 1 < rs.size() && IsKanjiRune(rs[i + 1])) continue;
+        best = &h;
+    }
+    return best != nullptr ? best->mora : std::u32string();
+}
 
 // Whether a question mark stands at q of rs or after an ellipsis there (できた？, できた……？).
 bool AskedAt(std::u32string_view rs, size_t q) {
@@ -642,6 +672,24 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             // comma (なんだよ、ったく…).
             bool start = UtteranceStart(from) || (s.key.front() == U'ッ' && from > 0 && In(rs_[from - 1], U"、，,")),
                  pause = PauseAt(end);
+            // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
+            // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
+            // う……多分, ちょ……待って).
+            // Not when the syllable is said again after the marks (む…、むっ).
+            if (start && end == p + s.key.size() && end < rs_.size() && (p == 0 || !text::IsSpace(rs_[p - 1])) &&
+                dict::InClass("mark.pause", Bytes(end, end + 1)) && dict::InClass("sound.stutter-alone", EncodeText(s.key))) {
+                size_t again = end;
+                while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
+                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
+            }
+            // A kana in brackets right after a kanji is its reading (々(う)), and one after a dash
+            // after kana draws out that word (じゅ――う), not an utterance.
+            if (from > 1 && In(rs_[from - 1], U"（(") && IsKanjiRune(rs_[from - 2])) start = false;
+            if (s.key.size() == 1 && from > 0 && In(rs_[from - 1], U"―─—")) {
+                size_t d = from;
+                while (d > 0 && In(rs_[d - 1], U"―─—")) d--;
+                if (d > 0 && IsKana(rs_[d - 1])) start = false;
+            }
             if (s.key == U"ハ" || s.key == U"ヘ") {
                 // A bare は or へ is the particle after a word, a dash or a space ((人形) は、,
                 // 私――は――) and before a closing bracket (「は」); it is a lead only where it
@@ -1231,8 +1279,9 @@ size_t SoundText::PausedTo(size_t i) const {
 // as おっ stutter; a small vowel stutters its plain vowel, ぃ――いや) at the start of a
 // phrase, then a separator, repeated, then longer pieces that each begin the next (see
 // the loops), before a word that starts with the same kana (but not で、 or じゃ、) or with
-// a kanji that is no numeral (after a comma or a dash not for kNotStutters, after a dash
-// not for a sigh, unless the syllable is said twice; with ッ not for kSoundsBeforeKanji:
+// a kanji that is no numeral (not for sound.stutter-alone, see there, unless the word's reading
+// starts with the syllable; after a dash not for a sigh; any of these when the syllable
+// is said twice; with ッ not for kSoundsBeforeKanji:
 // えっ……本当); or a syllable with ッ directly before a kanji, unless kSoundsBeforeKanji
 // holds it, with the separator 、.
 size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
@@ -1360,16 +1409,32 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         j = e + k;
         i = j;
     }
-    const bool comma = In(rs[p + n], U"、，");
     std::u32string_view bare = x;
     if (bare.ends_with(U'ッ')) bare.remove_suffix(1);
-    bool notStutter = false;
-    for (const auto s : kNotStutters) notStutter = notStutter || s == bare;
+    const std::string bareText = EncodeText(bare);
+    bool notStutter = dict::InClass("sound.stutter-alone", bareText);
+    size_t q = p;
+    while (q > 0 && text::IsSpace(rs[q - 1])) q--;
+    const bool conjunction =
+        x == bare && (q == 0 || rs[q - 1] == U'\n') && dict::InClass("sound.stutter-conjunction", bareText);
+    // Before an ellipsis or a dash the syllables stand alone only where they open an utterance
+    // (あ……先輩; but 司令、さ…頑張って), and the particles not even there; the interjections
+    // stand alone anywhere.
+    if (!dict::InClass("mark.comma", Bytes(p + n, p + n + 1)) && !dict::InClass("sound.stutter-interjection", bareText) &&
+        (!UtteranceStart(p) || (dict::InClass("sound.stutter-particle", bareText) && !conjunction))) {
+        notStutter = false;
+    }
     // Before a dash a sigh or groan stands alone too (う――痛い, ふ――危なかった).
     const bool dash = In(rs[p + n], U"―─—");
     if (dash && bare.size() == 1 && In(bare[0], U"ハヒフヘホ")) notStutter = true;
     // A syllable said twice is a stutter whatever it is (さ、さ、最低).
     if (pieces.size() > 1) notStutter = false;
+    // The syllable said once is a stutter of a word whose reading it starts (ま、待って
+    // 기, 기다려; お……俺は), but not as the conjunction.
+    if (notStutter && x == bare && !conjunction && i < rs.size() && IsKanjiRune(rs[i]) &&
+        StutterHeadMora(rs, i, !dict::InClass("mark.comma", Bytes(p + n, p + n + 1))) == x) {
+        notStutter = false;
+    }
     // The restore stage copies the next Korean syllable, which a numeral does not give.
     if (NumeralRune(rs[i])) {
         pieces.clear();
@@ -1384,7 +1449,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // before a word they start again they stutter it (で、でも 그, 그래도).
     if (f[i] == f[p] && ((x != U"デ" && x != U"ジャ") || UtteranceStart(p))) return i;
     const bool sound = x.ends_with(U'ッ') && In(f[p], kSoundsBeforeKanji);
-    if (IsKanjiRune(rs[i]) && !((comma || dash) && notStutter) && !sound) return i;
+    if (IsKanjiRune(rs[i]) && !notStutter && !sound) return i;
     pieces.clear();
     return 0;
 }

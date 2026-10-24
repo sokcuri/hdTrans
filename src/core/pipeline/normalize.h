@@ -55,6 +55,21 @@ using WordKeepsVariant = bool (*)(const void* context, std::string_view line, si
 // keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
 
+// line with each ending of classes.tsv spelling.katakana-ending written in katakana right after a
+// hiragana, kanji, Latin letter or digit and before anything but a kana, kanji, letter or digit
+// written in hiragana, its ー kept (私デース 私でーす, 楽しいネー 楽しいねー, 受信シマシタ 受信しました);
+// spelling.katakana-copula as well, except after spelling.katakana-copula-kept-after or a kanji and
+// spelling.katakana-copula-kept-after-kanji (言ったデース, 来たデース stay; あなたデス does not), spelling.katakana-ending-after-kana only after hiragana (行きマース 行きまーす, not 一マス) and
+// spelling.katakana-particle only after hiragana or kanji (not Decemberネー).
+std::string RespellKatakanaEndings(std::string_view line);
+
+// line with each kanji of classes.tsv spelling.cry-kanji (KANJI=KANA) written in its kana where it
+// starts an utterance, after anything but a letter or digit, and a run of kana.drawn-out or
+// mark.clip follows it before anything but a letter or digit (嫌ぁぁぁ いやぁぁぁ, 嫌っ！ いやっ！;
+// not 嫌っている, すごく嫌ー); a run of one drawn kana only before mark.exclaim or mark.comma
+// (嫌ぁ！, not 嫌ぁ……).
+std::string RespellKanjiCries(std::string_view line);
+
 namespace internal {
 
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced

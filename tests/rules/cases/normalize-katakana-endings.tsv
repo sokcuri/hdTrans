@@ -1,0 +1,61 @@
+# 규칙: LEX-5
+rule	input	expected	kind	layer
+normalize:katakana-endings	「や、大丈夫デス」	「야, 괜찮습니다」	fix	normalize
+normalize:katakana-endings	暗号通信を受信シマシタ…見る？	암호 통신을 수신했습니다…봐?	fix	normalize
+normalize:katakana-endings	やっと本当の私になれた気がシマース。	드디어 진정한 제가 될 수 있던 것 같습니다~.	fix	normalize
+normalize:katakana-endings	無理が祟ったみたいデース…	무리가 탈이 난 것 같습니다~…	fix	normalize
+normalize:katakana-endings	また紅茶が飲みたいネー。	또 홍차를 마시고 싶네~.	fix	normalize
+normalize:katakana-endings	「死人デース」と言いつつ、ホテルのロビーへと向かう。	「죽은 사람입니다~」라고 말하면서, 호텔의 로비로 향한다.	fix	normalize
+normalize:katakana-endings	戦場海域に、到達デース！	전장 해역에, 도달입니다~!	fix	normalize
+normalize:katakana-endings	用意はいいデスカー？	준비는 좋습니까~?	fix	normalize
+normalize:katakana-endings	今年は何やらぁ……変なお祭りデース？	금년은 무엇인가……이상한 축제입니까~?	fix	normalize
+normalize:katakana-endings	皆さん、ついて来て下さいネー！	여러분, 따라 와 주세요~!	fix	normalize
+normalize:katakana-endings	正午十二時をアナウンスするデース！	정오 12시를 안내 방송합니다~!	fix	normalize
+normalize:katakana-endings	秋刀魚デスネー！	꽁치군요~!	fix	normalize
+normalize:katakana-endings	漁場に向かうデース！	어장으로 향합니다~!	fix	normalize
+normalize:katakana-endings	こういうのも、楽しいネー！	이런 것도, 즐겁네~!	fix	normalize
+normalize:katakana-endings	よろしくお願いしマース！！	잘 부탁드립니다~!!	fix	normalize
+normalize:katakana-endings	朝七時デース！	아침 7시입니다~!	fix	normalize
+normalize:katakana-endings	今日のdinnerは英国式のカレーを作ってあげるデース！	오늘의 dinner는 영국식의 카레를 만들어 줍니다~!	fix	normalize
+normalize:katakana-endings	飽きないネー！	질리지 않네~!	fix	normalize
+normalize:katakana-endings	そろそろGood nightの時間デース、明日もよろしくネ！	슬슬 Good night의 시간입니다~, 내일도 잘 부탁해!	fix	normalize
+normalize:katakana-endings	それが欲しいデース！	그것을 갖고 싶습니다~!	fix	normalize
+normalize:katakana-endings	場所をわきまえなヨー！	장소를 분별해~!	fix	normalize
+normalize:katakana-endings	英国式カレーが出来上がったヨー、召し上がれ♪	영국식 카레가 다됐어~, 드세요♪	fix	normalize
+normalize:katakana-endings	Chocolates! 持ってきたヨー！	Chocolates! 가져왔어~!	fix	normalize
+normalize:katakana-endings	なぜ逃げるデース！？	왜 도망칩니다~!?	fix	normalize
+normalize:katakana-endings	お返しは何ですカー？	답례는 무엇입니까~?	fix	normalize
+normalize:katakana-endings	午前九時デース。Japanese breakfast、堪能シマシター	오전 9시입니다~. Japanese breakfast, 만끽했습니다~	fix	normalize
+normalize:katakana-endings	午前零時justデース！	오전 0시 just입니다~!	fix	normalize
+normalize:katakana-endings	New faceが登場したヨー！	New face가 등장했어~!	fix	normalize
+normalize:katakana-endings	早いものデスネー。	빨라요~.	fix	normalize
+normalize:katakana-endings	大掃除デスカー？	대청소입니까~?	fix	normalize
+normalize:katakana-endings	私、苦手デース！	저, 서투릅니다~!	fix	normalize
+normalize:katakana-endings	Supplyは大切ネー！	Supply는 중요하네~!	fix	normalize
+normalize:katakana-endings	朝は納豆ですカー。	아침은 낫토입니까~.	fix	normalize
+normalize:katakana-endings	混ぜたり、乗せたりするやつですネー！	섞거나 싣거나 하는 녀석이군요~!	fix	normalize
+normalize:katakana-endings	あと一マス。	앞으로 1매스.	keep	normalize
+normalize:katakana-endings	一マス進む	1매스 나아간다	keep	normalize
+normalize:katakana-endings	デスゲームの開始だ	데스 게임 개시다	keep	normalize
+normalize:katakana-endings	サドンデス！	서든 데스!	keep	normalize
+normalize:katakana-endings	蚊だ！カ！	모기다! 카!	keep	normalize
+normalize:katakana-endings	新しいマイカー	새로운 마이카	keep	normalize
+normalize:katakana-endings	霧のデスマス	안개의 데스마스	keep	normalize
+normalize:katakana-endings	これがマスです	이것이 매스입니다	keep	normalize
+sound:lengthening	綺麗ねー！	예쁘네~!	fix	sound
+normalize:katakana-endings	Tea timeは大事にしないとネー！	Tea time은 소중히 하지 않으면~!	fix	normalize
+sound:lengthening	大事にしないとねー！	소중히 하지 않으면~!	fix	sound
+normalize:katakana-endings	食らいついたら離さないって、言ったデース！	물면 떼어 놓지 않는다고, 말한 데스!	keep	normalize
+normalize:katakana-endings	何してるデース！	뭐하고 있는 데스!	keep	normalize
+normalize:katakana-endings	あっ、逃げたデース！	앗, 도망친 데스!	keep	normalize
+normalize:katakana-endings	「…プロ……グラム、起動シマス。」	「…프로……그램, 기동합니다.」	fix	normalize
+dict:jisjk:342185	カウン……トプロ……グラム、起動します。	카운……트프로……그램, 기동합니다.	fix	local
+normalize:katakana-endings	MAXCHECK:30カウン……トプロ……グラム、起動シマス。	MAXCHECK:30카운……트프로……그램, 기동합니다.	fix	normalize
+dict:jisjk:342185	見ます人	보는 사람	keep	local
+normalize:katakana-endings	あなたデス！	당신입니다!	fix	normalize
+normalize:katakana-endings	まだデース！	아직입니다~!	fix	normalize
+normalize:katakana-endings	来たデース！	온 데스!	keep	normalize
+normalize:katakana-endings	食べたデース！	먹은 데스!	keep	normalize
+sound:lengthening	関係ねー！	관계네―！	current	sound
+sound:lengthening	意味ねー	의미네―	current	sound
+sound:lengthening	朝ねー。皆を起こしてこないとねー。	아침이네―. 모두를 일으켜 오지 않으면―.	keep	sound

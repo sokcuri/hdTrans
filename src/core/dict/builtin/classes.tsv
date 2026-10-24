@@ -132,6 +132,7 @@
 //= mark.clip	The clipping small tsu after a cry (痛い痛いっ 아파 아파앗).
 //= mark.drawn	Vowel kana that draw out the word before them into an exclamation (燃えるねぇ, 言うねェ).
 //= mark.lengthening	Marks that draw out the word before them: after a final な of 思う they make it the speaker's opinion (思うなぁ, 思うなー).
+//= mark.long-vowel	Long marks that draw out a kana inside a word: a copy of a word drawn out with them is the same word (すごい|すごーい).
 //= mark.pause	Marks of a pause in speech: an ellipsis or a dash (……と、, そう――と).
 //= mark.sentence-end	Marks that end a sentence: a line in て with one of them before is speech, not a verse line (…よ？私に任せて).
 //= mark.supposed	Marks of a main clause that is a supposition, hearsay, a degree or a habit rather than an event that followed (しまいそうだった, 崩すほど重かった, 使えるらしく, という欠点).
@@ -202,6 +203,12 @@
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
+//= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
+//= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
+//= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
+//= sound.stutter-head-pause	Heads of sound.stutter-head that count only before an ellipsis or a dash: ちょ before a comma is the clipped ちょっと 잠깐 whatever follows (ちょ、直撃 잠깐, 직격; ちょ…直撃 지…직격).
+//= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
+//= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
 //= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
 //= speech.male	Speech markers inside an utterance that show the speaker to be a man (俺, だぜ, 兄上).
 //= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
@@ -209,6 +216,13 @@
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-lookalike	Words that hold a mark of speech.polite-grammar and are no polite speech (ますます).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
+//= spelling.cry-kanji	Kanji spellings of a cry, KANJI=KANA, read as the kana where they start an utterance and a drawn-out run follows before a pause (嫌ぁぁぁ いやぁぁぁ, 嫌っ！ いやっ！).
+//= spelling.katakana-copula	The copula です written in katakana, alone or with a final particle, respelled like spelling.katakana-ending (私デース 私でーす, 秋刀魚デスネー).
+//= spelling.katakana-copula-kept-after	Ends of a predicate (a past in た or だ after the kana that a verb conjugates with, a progressive in てる or でる) after which spelling.katakana-copula stays in katakana: the verb and です do not make a sentence (言ったデース, 何してるデース; not あなたデス, まだデス).
+//= spelling.katakana-copula-kept-after-kanji	Ends of spelling.katakana-copula-kept-after that also count right after a kanji, the stem of a verb (来たデース, 見たデース).
+//= spelling.katakana-ending	Polite endings of する written in katakana right after a word, before a pause or the end (受信シマシタ), respelled in hiragana with their ー kept (でーす) before lookup.
+//= spelling.katakana-ending-after-kana	Endings of spelling.katakana-ending that are respelled only after hiragana, the stem of a verb (行きマース; not 一マス).
+//= spelling.katakana-particle	Final particles written in katakana, respelled like spelling.katakana-ending but only after hiragana or kanji (楽しいネー, 天気ネ; not Decemberネー).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
@@ -262,6 +276,7 @@
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
+//= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
@@ -1691,6 +1706,9 @@ mark.drawn	え
 mark.exclaim	！
 mark.exclaim	!
 
+mark.long-vowel	ー
+mark.long-vowel	～
+mark.long-vowel	〜
 mark.pause	…
 mark.pause	‥
 mark.pause	―
@@ -2928,6 +2946,46 @@ speech.polite-grammar	ござい
 speech.polite-grammar	ください
 speech.polite-grammar	下さい
 speech.polite-lookalike	ますます
+spelling.cry-kanji	嫌=いや
+spelling.katakana-copula	デス
+spelling.katakana-copula	デスネ
+spelling.katakana-copula	デスカ
+spelling.katakana-copula	デスヨ
+spelling.katakana-copula	デシタ
+spelling.katakana-copula-kept-after	った
+spelling.katakana-copula-kept-after	んだ
+spelling.katakana-copula-kept-after	いた
+spelling.katakana-copula-kept-after	した
+spelling.katakana-copula-kept-after	きた
+spelling.katakana-copula-kept-after	ぎた
+spelling.katakana-copula-kept-after	ちた
+spelling.katakana-copula-kept-after	にた
+spelling.katakana-copula-kept-after	びた
+spelling.katakana-copula-kept-after	みた
+spelling.katakana-copula-kept-after	りた
+spelling.katakana-copula-kept-after	じた
+spelling.katakana-copula-kept-after	えた
+spelling.katakana-copula-kept-after	けた
+spelling.katakana-copula-kept-after	げた
+spelling.katakana-copula-kept-after	せた
+spelling.katakana-copula-kept-after	てた
+spelling.katakana-copula-kept-after	ねた
+spelling.katakana-copula-kept-after	べた
+spelling.katakana-copula-kept-after	めた
+spelling.katakana-copula-kept-after	れた
+spelling.katakana-copula-kept-after	てる
+spelling.katakana-copula-kept-after	でる
+spelling.katakana-copula-kept-after-kanji	た
+spelling.katakana-ending	シマス
+spelling.katakana-ending	シマシタ
+spelling.katakana-ending-after-kana	マス
+spelling.katakana-ending-after-kana	マスネ
+spelling.katakana-ending-after-kana	マスカ
+spelling.katakana-ending-after-kana	マスヨ
+spelling.katakana-ending-after-kana	マシタ
+spelling.katakana-particle	ネ
+spelling.katakana-particle	カ
+spelling.katakana-particle	ヨ
 spelling.variant	程=ほど
 spelling.variant	位=くらい
 spelling.variant	等=など
@@ -3797,6 +3855,28 @@ verb.state-teiru	見え
 verb.state-teiru	聞こえ
 verb.state-teiru	想
 
+verb.to-person	渡す
+verb.to-person	手渡す
+verb.to-person	あげる
+verb.to-person	上げる
+verb.to-person	やる
+verb.to-person	言う
+verb.to-person	話す
+verb.to-person	頼む
+verb.to-person	教える
+verb.to-person	伝える
+verb.to-person	告げる
+verb.to-person	謝る
+verb.to-person	任せる
+verb.to-person	預ける
+verb.to-person	返す
+verb.to-person	贈る
+verb.to-person	見せる
+verb.to-person	尋ねる
+verb.to-person	訊く
+verb.to-person	聞く
+verb.to-person	打ち明ける
+verb.to-person	差し出す
 verb.teach	教える
 verb.teach	おしえる
 
@@ -4164,6 +4244,327 @@ word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
 sound.quoting	という
+sound.stutter-alone	ア
+sound.stutter-alone	ウ
+sound.stutter-alone	エ
+sound.stutter-alone	オ
+sound.stutter-alone	ン
+sound.stutter-alone	ネ
+sound.stutter-alone	デ
+sound.stutter-alone	マ
+sound.stutter-alone	サ
+sound.stutter-alone	ヤ
+sound.stutter-alone	ヨ
+sound.stutter-alone	ム
+sound.stutter-alone	ガ
+sound.stutter-alone	ヲ
+sound.stutter-alone	ト
+sound.stutter-alone	ジャ
+sound.stutter-alone	チョ
+sound.stutter-conjunction	ト
+sound.stutter-conjunction	デ
+sound.stutter-interjection	ア
+sound.stutter-interjection	エ
+sound.stutter-particle	ト
+sound.stutter-particle	ヨ
+sound.stutter-head-pause	チョ直撃
+sound.stutter-head-pause	チョ直接
+sound.stutter-head-pause	チョ直前
+sound.stutter-head-pause	チョ直後
+sound.stutter-head-pause	チョ調子
+sound.stutter-head-pause	チョ丁度
+sound.stutter-head-pause	チョ挑戦
+sound.stutter-head-pause	チョ調査
+sound.stutter-head-pause	チョ蝶
+sound.stutter-head	マ待
+sound.stutter-head	マ負
+sound.stutter-head	マ真面目
+sound.stutter-head	マ真っ
+sound.stutter-head	マ参
+sound.stutter-head	マ間違
+sound.stutter-head	マ間に合
+sound.stutter-head	マ守
+sound.stutter-head	マ魔法
+sound.stutter-head	マ魔王
+sound.stutter-head	マ魔物
+sound.stutter-head	マ不味
+sound.stutter-head	マ眩し
+sound.stutter-head	マ丸
+sound.stutter-head	マ窓
+sound.stutter-head	マ祭
+sound.stutter-head	マ真似
+sound.stutter-head	マ曲が
+sound.stutter-head	マ混ざ
+sound.stutter-head	マ混ぜ
+sound.stutter-head	マ招
+sound.stutter-head	マ幻
+sound.stutter-head	オ俺
+sound.stutter-head	オ俺達
+sound.stutter-head	オ俺様
+sound.stutter-head	オ大き
+sound.stutter-head	オ大人
+sound.stutter-head	オ大げさ
+sound.stutter-head	オ大袈裟
+sound.stutter-head	オ大声
+sound.stutter-head	オ思
+sound.stutter-head	オ終
+sound.stutter-head	オ落
+sound.stutter-head	オ起
+sound.stutter-head	オ驚
+sound.stutter-head	オ怒っ
+sound.stutter-head	オ怒ら
+sound.stutter-head	オ怒る
+sound.stutter-head	オ怒れ
+sound.stutter-head	オ覚え
+sound.stutter-head	オ憶え
+sound.stutter-head	オ女
+sound.stutter-head	オ男
+sound.stutter-head	オ鬼
+sound.stutter-head	オ面白
+sound.stutter-head	オ重い
+sound.stutter-head	オ重た
+sound.stutter-head	オ同じ
+sound.stutter-head	オ抑え
+sound.stutter-head	オ押
+sound.stutter-head	オ教え
+sound.stutter-head	オ遅
+sound.stutter-head	オ恐ろし
+sound.stutter-head	オ恐れ
+sound.stutter-head	オ送
+sound.stutter-head	オ夫
+sound.stutter-head	オ弟
+sound.stutter-head	オ踊
+sound.stutter-head	オ脅
+sound.stutter-head	オ置
+sound.stutter-head	オ泳
+sound.stutter-head	オ溺
+sound.stutter-head	オ美味し
+sound.stutter-head	オ叔父
+sound.stutter-head	オ伯父
+sound.stutter-head	オ叔母
+sound.stutter-head	オ伯母
+sound.stutter-head	オ収ま
+sound.stutter-head	オ治ま
+sound.stutter-head	オ襲
+sound.stutter-head	オ堕ち
+sound.stutter-head	オ惜
+sound.stutter-head	オ劣
+sound.stutter-head	オ訪れ
+sound.stutter-head	オ衰
+sound.stutter-head	オ怯え
+sound.stutter-head	ウ嬉
+sound.stutter-head	ウ嘘
+sound.stutter-head	ウ撃
+sound.stutter-head	ウ打
+sound.stutter-head	ウ上
+sound.stutter-head	ウ噂
+sound.stutter-head	ウ動
+sound.stutter-head	ウ生ま
+sound.stutter-head	ウ産
+sound.stutter-head	ウ美し
+sound.stutter-head	ウ歌
+sound.stutter-head	ウ疑
+sound.stutter-head	ウ内
+sound.stutter-head	ウ腕
+sound.stutter-head	ウ馬
+sound.stutter-head	ウ海
+sound.stutter-head	ウ恨
+sound.stutter-head	ウ羨
+sound.stutter-head	ウ失
+sound.stutter-head	ウ後ろ
+sound.stutter-head	ウ受
+sound.stutter-head	ウ浮
+sound.stutter-head	ウ浮気
+sound.stutter-head	ウ移
+sound.stutter-head	ウ写
+sound.stutter-head	ウ埋
+sound.stutter-head	ウ煩
+sound.stutter-head	ウ五月蝿
+sound.stutter-head	ウ宇宙
+sound.stutter-head	ウ薄
+sound.stutter-head	ウ裏
+sound.stutter-head	ウ裏切
+sound.stutter-head	ウ運命
+sound.stutter-head	ウ美味い
+sound.stutter-head	ウ美味く
+sound.stutter-head	ウ美味か
+sound.stutter-head	ウ美味け
+sound.stutter-head	ウ旨
+sound.stutter-head	ウ上手い
+sound.stutter-head	ウ上手く
+sound.stutter-head	ウ上手か
+sound.stutter-head	ウ奪
+sound.stutter-head	ウ訴え
+sound.stutter-head	ウ占
+sound.stutter-head	ウ敬
+sound.stutter-head	ウ潤
+sound.stutter-head	ヨ喜
+sound.stutter-head	ヨ余計
+sound.stutter-head	ヨ夜
+sound.stutter-head	ヨ夜中
+sound.stutter-head	ヨ呼
+sound.stutter-head	ヨ読
+sound.stutter-head	ヨ良
+sound.stutter-head	ヨ宜し
+sound.stutter-head	ヨ予定
+sound.stutter-head	ヨ予想
+sound.stutter-head	ヨ弱
+sound.stutter-head	ヨ寄
+sound.stutter-head	ヨ酔
+sound.stutter-head	ヨ汚れ
+sound.stutter-head	ヨ様子
+sound.stutter-head	ヨ用
+sound.stutter-head	ヨ用事
+sound.stutter-head	ヨ用意
+sound.stutter-head	ヨ横
+sound.stutter-head	ヨ世
+sound.stutter-head	ヨ嫁
+sound.stutter-head	ヨ余裕
+sound.stutter-head	ヨ欲張
+sound.stutter-head	ム無理
+sound.stutter-head	ム無駄
+sound.stutter-head	ム無視
+sound.stutter-head	ム無茶
+sound.stutter-head	ム無意識
+sound.stutter-head	ム無責任
+sound.stutter-head	ム無邪気
+sound.stutter-head	ム無口
+sound.stutter-head	ム無言
+sound.stutter-head	ム無謀
+sound.stutter-head	ム無敵
+sound.stutter-head	ム無限
+sound.stutter-head	ム無関係
+sound.stutter-head	ム無能
+sound.stutter-head	ム胸
+sound.stutter-head	ム胸元
+sound.stutter-head	ム向
+sound.stutter-head	ム迎
+sound.stutter-head	ム昔
+sound.stutter-head	ム虫
+sound.stutter-head	ム娘
+sound.stutter-head	ム結
+sound.stutter-head	ム難し
+sound.stutter-head	ム夢中
+sound.stutter-head	ム婿
+sound.stutter-head	ム村
+sound.stutter-head	ム紫
+sound.stutter-head	ム蒸
+sound.stutter-head	ム矛盾
+sound.stutter-head	サ触
+sound.stutter-head	サ寂し
+sound.stutter-head	サ淋し
+sound.stutter-head	サ悟
+sound.stutter-head	サ最低
+sound.stutter-head	サ最悪
+sound.stutter-head	サ最高
+sound.stutter-head	サ最後
+sound.stutter-head	サ最初
+sound.stutter-head	サ最近
+sound.stutter-head	サ最強
+sound.stutter-head	サ流石
+sound.stutter-head	サ探
+sound.stutter-head	サ捜
+sound.stutter-head	サ下が
+sound.stutter-head	サ下げ
+sound.stutter-head	サ刺
+sound.stutter-head	サ叫
+sound.stutter-head	サ寒
+sound.stutter-head	サ覚め
+sound.stutter-head	サ騒
+sound.stutter-head	サ誘
+sound.stutter-head	サ支え
+sound.stutter-head	サ囁
+sound.stutter-head	サ早速
+sound.stutter-head	サ冷め
+sound.stutter-head	サ冷ま
+sound.stutter-head	サ皿
+sound.stutter-head	サ桜
+sound.stutter-head	サ魚
+sound.stutter-head	サ酒
+sound.stutter-head	サ猿
+sound.stutter-head	サ財布
+sound.stutter-head	サ裁
+sound.stutter-head	サ逆ら
+sound.stutter-head	サ去
+sound.stutter-head	サ爽やか
+sound.stutter-head	サ先程
+sound.stutter-head	サ先ほど
+sound.stutter-head	サ晒
+sound.stutter-head	サ攫
+sound.stutter-head	サ作戦
+sound.stutter-head	ヤ優し
+sound.stutter-head	ヤ易し
+sound.stutter-head	ヤ辞め
+sound.stutter-head	ヤ休
+sound.stutter-head	ヤ安
+sound.stutter-head	ヤ約束
+sound.stutter-head	ヤ役
+sound.stutter-head	ヤ焼
+sound.stutter-head	ヤ野郎
+sound.stutter-head	ヤ山
+sound.stutter-head	ヤ柔らか
+sound.stutter-head	ヤ軟らか
+sound.stutter-head	ヤ破
+sound.stutter-head	ヤ痩せ
+sound.stutter-head	ヤ宿
+sound.stutter-head	ヤ雇
+sound.stutter-head	ヤ闇
+sound.stutter-head	ヤ厄介
+sound.stutter-head	ヤ奴
+sound.stutter-head	ヤ野菜
+sound.stutter-head	ト友達
+sound.stutter-head	ト友
+sound.stutter-head	ト止ま
+sound.stutter-head	ト閉じ
+sound.stutter-head	ト取
+sound.stutter-head	ト撮
+sound.stutter-head	ト飛
+sound.stutter-head	ト溶
+sound.stutter-head	ト届
+sound.stutter-head	ト特
+sound.stutter-head	ト特別
+sound.stutter-head	ト時
+sound.stutter-head	ト時々
+sound.stutter-head	ト年
+sound.stutter-head	ト隣
+sound.stutter-head	ト遠
+sound.stutter-head	ト突然
+sound.stutter-head	ト当然
+sound.stutter-head	ト唐突
+sound.stutter-head	ト父さん
+sound.stutter-head	ト戸惑
+sound.stutter-head	ト途中
+sound.stutter-head	ト図書
+sound.stutter-head	ト得意
+sound.stutter-head	ト時計
+sound.stutter-head	ト透明
+sound.stutter-head	ト解
+sound.stutter-head	ト鳥
+sound.stutter-head	ト虎
+sound.stutter-head	ト扉
+sound.stutter-head	ガ頑張
+sound.stutter-head	ガ我慢
+sound.stutter-head	ガ学校
+sound.stutter-head	ガ学生
+sound.stutter-head	ガ学園
+sound.stutter-head	ガ頑固
+sound.stutter-head	ガ画面
+sound.stutter-head	デ出
+sound.stutter-head	デ出来
+sound.stutter-head	デ電話
+sound.stutter-head	デ電車
+sound.stutter-head	デ電気
+sound.stutter-head	デ伝説
+sound.stutter-head	デ弟子
+sound.stutter-head	ア上が
+sound.stutter-head	ア上げ
+sound.stutter-head	ワ煩わ
+sound.stutter-head	フ触れ
+sound.stutter-head	ダ出さ
+sound.stutter-head	ダ出し
+sound.stutter-head	ダ出す
+sound.stutter-head	ダ出せ
+sound.stutter-head	ダ出そ
 word.confirm-action	上書き
 word.confirm-action	保存
 word.confirm-action	セーブ
