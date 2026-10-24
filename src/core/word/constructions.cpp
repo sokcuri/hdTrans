@@ -677,6 +677,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
         {"map-ending-tail", CxVerb::MapEndingTail},
+        {"map-target-tail", CxVerb::MapTargetTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
@@ -713,7 +714,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             break;
         }
         if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap ||
-            a.verb == CxVerb::MapEndingTail) {
+            a.verb == CxVerb::MapEndingTail || a.verb == CxVerb::MapTargetTail) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -1278,6 +1279,18 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             if (best != nullptr) {
                 it->AssignDirectSlot(it->DirectIndex(), e->dst.substr(0, e->dst.size() - best->first.size()) + best->second,
                                      source);
+            }
+            break;
+        }
+        case internal::CxVerb::MapTargetTail: {
+            // The same on the Korean of the selected candidate (돕겠습니다 → 돕겠으니까요).
+            const std::string target(it->EntryText(it->selected));
+            const std::pair<std::string, std::string>* best = nullptr;
+            for (const auto& pair : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (target.ends_with(pair.first) && (best == nullptr || pair.first.size() > best->first.size())) best = &pair;
+            }
+            if (best != nullptr) {
+                it->AssignEntrySurface(it->selected, target.substr(0, target.size() - best->first.size()) + best->second, source);
             }
             break;
         }

@@ -134,10 +134,14 @@ HD_TEST(constructions_parse_prepend_and_verb_from) {
         "//= a\tafter First\tdoc\n",
         "cx:a:10\t\tF+0== \"causative-passive\"\tset-verb-from \"게 &C6@\" \"다\" prepend-target \"억지로 \"\t\n",
         "cx:a:20\t\tS+0== \"くせに\"\tmap-ending-tail@-1 @tails\t\n",
+        "cx:a:30\t\tS+0== \"から\"\tmap-target-tail@-1 @tails\t\n",
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
     HD_CHECK_EQ(Errors(t), std::string());
-    HD_REQUIRE(t.rows.size() == 2);
+    HD_REQUIRE(t.rows.size() == 3);
+    HD_REQUIRE(t.rows[2].actions.size() == 1);
+    HD_CHECK(t.rows[2].actions[0].verb == internal::CxVerb::MapTargetTail);
+    HD_CHECK_EQ(t.rows[2].actions[0].map, 0);
     HD_REQUIRE(t.rows[0].actions.size() == 2);
     HD_CHECK(t.rows[0].actions[0].verb == internal::CxVerb::SetVerbFrom);
     HD_CHECK_EQ(t.rows[0].actions[0].value, std::string("게 &C6@"));
