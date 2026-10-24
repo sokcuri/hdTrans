@@ -78,6 +78,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/dict/snapshot.h"
 #include "core/pipeline/line_context.h"
@@ -235,6 +236,9 @@ struct SoundRow {
     // An intj row read only where the utterance ends after it (fourth column final: また明日
     // 내일 보자, not また明日来る).
     bool final = false;
+    // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
+    // where the quote speaks politely or an honoured person is called right before the row.
+    std::string polite;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys
@@ -249,6 +253,9 @@ constexpr char32_t kInvalidByte = 0x110000;
 std::u32string DecodeText(std::string_view s);
 // The inverse of DecodeText.
 std::string EncodeText(std::u32string_view rs);
+// The byte offset of each character of rs in EncodeText(rs), and its size last: an invalid byte
+// takes one byte.
+std::vector<size_t> EncodedOffsets(std::u32string_view rs);
 // rs with the hiragana ぁ..ゖ in katakana.
 std::u32string ToKatakana(std::u32string_view rs);
 

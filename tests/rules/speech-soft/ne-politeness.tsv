@@ -6,3 +6,5 @@ cx:ne-promise:10	「違いますね」	「다르네요」	keep	rewrites
 cx:ne-promise:10	「ここにありますね」	「여기에 있네요」	keep	rewrites
 cx:ne-promise:40	「そうですね。じゃあ、先に行くね」	「그렇네요. 그럼, 먼저 갈게」	fix	rewrites
 cx:ne-promise:40	「ありがとうございます。頑張るね」	「감사합니다. 노력할게」	fix	rewrites
+phrase:leave-taking	「ありがとうございました。では、また明日」	「감사합니다. 그럼, 내일 봬요」	fix	sound
+phrase:leave-taking	「じゃあ、また明日」	「그럼, 내일 보자」	keep	sound

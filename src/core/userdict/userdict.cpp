@@ -327,6 +327,8 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             // Read by the sound stage (an exclamation is no sound before a question mark).
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
+        } else if (key == "polite" && hasValue && pos == "intj") {
+            // Read by the sound stage (the last word of the Korean in polite speech).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {

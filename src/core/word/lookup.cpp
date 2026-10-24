@@ -97,11 +97,11 @@ bool UtteranceBoundary(std::string_view c) {
 }
 
 // Whether the utterance ends where rest starts, after any spaces: nothing, or punctuation, a
-// bracket or a mark that is no comma.
+// bracket or a mark that is no comma and no question mark.
 bool UtteranceEnds(std::string_view rest) {
     while (!rest.empty() && text::IsSpace(text::DecodeRune(rest).cp)) rest.remove_prefix(text::DecodeRune(rest).size);
     const std::string_view c = FirstChar(rest);
-    return UtteranceBoundary(c) && !dict::InClass("mark.comma", c);
+    return UtteranceBoundary(c) && !dict::InClass("mark.comma", c) && !dict::InClass("mark.question", c);
 }
 
 // The first Hangul syllable of s, "" when it has none.

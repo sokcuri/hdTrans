@@ -219,6 +219,9 @@ HD_TEST(pipeline_sound) {
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
         {"なんだそりゃああぁあッ？", "なんだそりゃ\uE00B\uE00B\uE00B\uE00B？"},
+        // A drawn よ after a て form at the start of the text: no character before the て.
+        {"てよー", "てよ～"},
+        {"でよーーー。聞いてるの？", "でよ～。聞いてるの？"},
         // A lengthening that ends a phrase after a word is written ～; a drawn small vowel
         // after a て form is dropped; the lengthening of the last syllable of a phrase inside
         // a word is marked after it.
@@ -837,6 +840,12 @@ HD_TEST(pipeline_sound_final_phrase) {
         {"また明日来る", "また明日来る"},
         {"また明日 来る", "また明日 来る"},
         {"また明日、学校で", "また明日、学校で"},
+        {"また明日？", "また明日？"},  // a question, not the farewell
+        {"また明日 ?", "また明日 ?"},
+        // In polite speech, or after an honoured person called, the farewell is polite.
+        {"ありがとうございました。また明日", "ありがとうございました。내일 봬요"},
+        {"先生、また明日", "先生、내일 봬요"},
+        {"「行きます」また明日", "「行きます」내일 보자"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
@@ -866,6 +875,14 @@ HD_TEST(pipeline_contracted_iku) {
         {"連れてってば", "連れてってば"},      // not before a mark
         {"置いてったら", "置いてったら"},      // the quoting ったら
         {"どうやってって", "どうやってって"},  // the end of どうやって
+        {"連れてってね", "連れていってね"},
+        {"やめてってね", "やめてってね"},  // the quoted request (contraction.te-iku-quoted)
+        // The text ends right after the contraction; an invalid byte before it takes one byte.
+        {"連れてって", "連れていって"},
+        {"連れて", "連れて"},
+        {"\xcd連れてって", "\xcd連れていって"},
+        {"\xcd\xb3\xb3連れてって。", "\xcd\xb3\xb3連れていって。"},
+        {"\xed\xa0\x80連れてって", "\xed\xa0\x80連れていって"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(internal::RewriteContractedIku(c.in, ctx, *loaded.snapshot), std::string(c.want));
@@ -888,6 +905,8 @@ HD_TEST(pipeline_contracted_no) {
         {"真ん中に", "真ん中に"},
         {"頭ん中断", "頭ん中断"},
         {"走ん中", "走ん中"},  // no noun
+        {"頭ん中", "頭の中"},
+        {"\xcd頭ん中", "\xcd頭の中"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedNo(c.in, *loaded.snapshot), std::string(c.want));
 }
@@ -908,6 +927,8 @@ HD_TEST(pipeline_onbin_u) {
         {"言うてる", "言ってる"},
         {"救うために", "救うために"},
         {"名うての", "名うての"},
+        {"言うた", "言った"},
+        {"\xcd言うた", "\xcd言った"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteOnbinU(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
