@@ -276,6 +276,7 @@
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
+//= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
@@ -3854,6 +3855,28 @@ verb.state-teiru	見え
 verb.state-teiru	聞こえ
 verb.state-teiru	想
 
+verb.to-person	渡す
+verb.to-person	手渡す
+verb.to-person	あげる
+verb.to-person	上げる
+verb.to-person	やる
+verb.to-person	言う
+verb.to-person	話す
+verb.to-person	頼む
+verb.to-person	教える
+verb.to-person	伝える
+verb.to-person	告げる
+verb.to-person	謝る
+verb.to-person	任せる
+verb.to-person	預ける
+verb.to-person	返す
+verb.to-person	贈る
+verb.to-person	見せる
+verb.to-person	尋ねる
+verb.to-person	訊く
+verb.to-person	聞く
+verb.to-person	打ち明ける
+verb.to-person	差し出す
 verb.teach	教える
 verb.teach	おしえる
 

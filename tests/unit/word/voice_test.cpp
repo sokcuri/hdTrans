@@ -57,11 +57,9 @@ HD_TEST(word_voice_agent_makes_the_passive) {
     HD_CHECK_EQ(Translate("彼に食べられた。"), "그에게 먹혔다.");
     HD_CHECK_EQ(Translate("猫に食べられた。"), "고양이에게 먹혔다.");
     // A thing before に is none, and the に of a verb of entrusting names who receives: the
-    // potential stays and the に is left to its rules.
+    // potential stays and the person before に is the one entrusted (GRM-16), not an agent.
     HD_CHECK_EQ(Translate("窓に食べられた。"), "창에 먹을 수 있었다.");
-    const std::string entrusted = Translate("彼に仕事を任せられた。");
-    HD_CHECK(entrusted.find("일을 맡길 수 있었다.") != std::string::npos);
-    HD_CHECK(entrusted.find("그에게") == std::string::npos);
+    HD_CHECK_EQ(Translate("彼に仕事を任せられた。"), "그에게 일을 맡길 수 있었다.");
 }
 
 HD_TEST(word_voice_keeps_the_candidates_of_its_reading) {

@@ -313,6 +313,21 @@ constexpr NamedFeature kFeatures[] = {
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
     {"person", [](Flusher&, const Item* it) { return Person(it->Attr(it->selected)); }},
+    // The surface has a kanji and the name layer has it as a person's name (美咲, read as a town in
+    // the base dictionary).
+    {"person-name",
+     [](Flusher& f, const Item* it) {
+         const std::string_view s = it->group->surface;
+         bool kanji = false;
+         for (std::string_view t = s; !t.empty() && !kanji;) {
+             const text::Rune r = text::DecodeRune(t);
+             kanji = text::IsKanji(r.cp);
+             t.remove_prefix(std::max<std::size_t>(r.size, 1));
+         }
+         if (!kanji) return false;
+         const std::vector<dict::Record> names = f.w.snapshot.NameRecords(s);
+         return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
+     }},
     // The verb was analysed as a causative.
     {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
