@@ -113,6 +113,10 @@ jobs:
     name: ${{ matrix.preset }}
     needs: gate
     if: ${{ !cancelled() && needs.gate.outputs.run != 'false' }}
+    permissions:
+      contents: read
+      # The performance budget downloads the linux build of a pull request's base commit.
+      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -336,6 +340,77 @@ jobs:
             1) echo 'Translations changed; accept them in the test data once this is on main.' >> "$GITHUB_STEP_SUMMARY" ;;
           esac
           [ "$status" -le 1 ]
+      # Instruction counts of fixed inputs under valgrind (tools/perf-budget.py, docs/build.md "CI"). On a
+      # pull request the base commit's linux build is measured in the same run, and a count more than
+      # 1% over it fails unless a commit carries a `Perf-Budget: <reason>` trailer. A measurement that
+      # cannot run, and every result on a push, is reported only.
+      - name: Performance budget
+        if: matrix.preset == 'linux'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          # The base branch commit this pull request build merged with: the first parent of the merge ref.
+          BASE_SHA=
+          if [[ "$GITHUB_EVENT_NAME" == pull_request ]]; then BASE_SHA=$(git rev-parse --verify -q HEAD^1); fi
+          warn() {
+            echo "::warning title=Performance budget::$1"
+            echo "$1" >> "$GITHUB_STEP_SUMMARY"
+          }
+          echo '### Performance budget' >> "$GITHUB_STEP_SUMMARY"
+          if ! command -v valgrind > /dev/null; then
+            sudo apt-get install -y -qq valgrind > /dev/null ||
+              { sudo apt-get update -qq && sudo apt-get install -y -qq valgrind > /dev/null; }
+          fi
+          if ! command -v valgrind > /dev/null; then
+            warn 'valgrind could not be installed; nothing was measured.'
+            exit 0
+          fi
+          args=(--check build/linux/hdtrans build/linux/dicts.hdsnap --out "$RUNNER_TEMP/perf-budget.tsv")
+          if [[ -n "$BASE_SHA" ]]; then
+            args+=(--base "$BASE_SHA")
+            # The linux job uploads its build only after its tests pass, whatever the other jobs did.
+            runs=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/build.yml/runs?head_sha=$BASE_SHA&status=completed&event=push" \
+              --jq '.workflow_runs[].id')
+            for run in $runs; do
+              rm -rf "$RUNNER_TEMP/base"
+              if gh run download "$run" -R "$GITHUB_REPOSITORY" -n hdtrans-linux -D "$RUNNER_TEMP/base" &&
+                  [[ -f "$RUNNER_TEMP/base/hdtrans" && -f "$RUNNER_TEMP/base/dicts.hdsnap" ]]; then
+                chmod +x "$RUNNER_TEMP/base/hdtrans"
+                args+=(--against "$RUNNER_TEMP/base/hdtrans" "$RUNNER_TEMP/base/dicts.hdsnap")
+                break
+              fi
+            done
+            if [[ " ${args[*]} " != *" --against "* ]]; then
+              warn "No linux build of the base commit $BASE_SHA was found; compared with tools/perf-budget.tsv."
+            fi
+          fi
+          python3 -I tools/perf-budget.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/perf-budget.log"
+          status=${PIPESTATUS[0]}
+          {
+            echo '```text'
+            cat "$RUNNER_TEMP/perf-budget.log"
+            echo '```'
+            if [[ -f "$RUNNER_TEMP/perf-budget.tsv" ]]; then
+              echo 'Measured, as tools/perf-budget.tsv:'
+              echo '```text'
+              cat "$RUNNER_TEMP/perf-budget.tsv"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          if grep -q 'the base build could not be measured' "$RUNNER_TEMP/perf-budget.log"; then
+            warn 'The base build could not be measured; compared with tools/perf-budget.tsv.'
+          fi
+          if grep -q 'reported only' "$RUNNER_TEMP/perf-budget.log"; then
+            warn 'No reference with the same toolchain; the counts were only reported.'
+          fi
+          case "$status" in
+            0) ;;
+            1) if [[ -n "$BASE_SHA" ]]; then exit 1; fi
+               warn 'Over the performance budget; pushes only report it.' ;;
+            *) warn "The performance budget could not be measured (exit $status); nothing was compared." ;;
+          esac
+          exit 0
       - name: Report fixture skips and test results
         if: always()
         run: |
@@ -524,6 +599,115 @@ jobs:
           overwrite: true
           if-no-files-found: ignore
           path: build/linux-asan/ctest.log
+
+  # libFuzzer on mutated text made from the repository's inputs (tools/fuzz.py, docs/build.md "CI").
+  # Replaying the seeds and the kept regression inputs fails the job; what the random run finds fails
+  # it on pushes and is reported on pull requests. A fuzzer that does not build is reported: the
+  # other jobs compile the same sources.
+  fuzz:
+    name: linux-fuzz
+    needs: gate
+    if: ${{ !cancelled() && needs.gate.outputs.run != 'false' && (github.event_name == 'push' || github.event_name == 'pull_request') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    env:
+      CC: clang
+      CXX: clang++
+      HDTRANS_CACHE_DIR: 'off'
+      ASAN_OPTIONS: detect_stack_use_after_return=1
+      UBSAN_OPTIONS: print_stacktrace=1
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up sccache
+        uses: mozilla-actions/sccache-action@v0.0.11
+        with:
+          disable_annotations: true
+      - name: Restore fuzzer compiler cache
+        id: fuzz-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: sccache-${{ runner.os }}-${{ runner.arch }}-linux-fuzz-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-${{ github.run_id }}
+          restore-keys: |
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-fuzz-${{ hashFiles('CMakeLists.txt', 'CMakePresets.json') }}-
+            sccache-${{ runner.os }}-${{ runner.arch }}-linux-fuzz-
+      - name: Build the fuzzer
+        id: build
+        continue-on-error: true
+        run: |
+          cmake --preset linux-asan -B build/linux-fuzz -DHDTRANS_FUZZ=ON \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_C_COMPILER_LAUNCHER=sccache
+          cmake --build build/linux-fuzz --target hdtrans_fuzz hdtrans_cli --parallel "$(getconf _NPROCESSORS_ONLN)"
+          home="$(mktemp -d)"
+          HOME="$home" build/linux-fuzz/hdtrans --dicts "$PWD/dicts" --compile-snapshot "$RUNNER_TEMP/dicts.hdsnap"
+          rm -rf "$home"
+      - name: Report a fuzzer that did not build
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo '::warning title=Fuzz::The fuzzer did not build; nothing was fuzzed.'
+          echo 'The fuzzer did not build; nothing was fuzzed.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Replay the seeds and regression inputs
+        id: replay
+        if: steps.build.outcome == 'success'
+        timeout-minutes: 8
+        run: |
+          set +e
+          timeout 7m python3 -I tools/fuzz.py build/linux-fuzz/hdtrans_fuzz "$RUNNER_TEMP/dicts.hdsnap" --replay \
+            --out build/linux-fuzz/replay 2>&1 | tee "$RUNNER_TEMP/replay.txt"
+          status=${PIPESTATUS[0]}
+          {
+            echo '### Replay'
+            echo '```text'
+            grep '^fuzz: \|^  text: \|^  hex: ' "$RUNNER_TEMP/replay.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+      - name: Fuzz
+        id: fuzz
+        if: steps.replay.outcome == 'success'
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        timeout-minutes: 8
+        run: |
+          set +e
+          timeout 7m python3 -I tools/fuzz.py build/linux-fuzz/hdtrans_fuzz "$RUNNER_TEMP/dicts.hdsnap" --seconds 150 \
+            --seed "$GITHUB_RUN_NUMBER" --out build/linux-fuzz/found 2>&1 | tee "$RUNNER_TEMP/fuzz.txt"
+          status=${PIPESTATUS[0]}
+          {
+            echo '### Fuzz'
+            echo '```text'
+            grep '^fuzz: \|^  text: \|^  hex: ' "$RUNNER_TEMP/fuzz.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$status" != 0 && "$GITHUB_EVENT_NAME" == pull_request ]]; then
+            echo '::warning title=Fuzz::The random fuzz run failed; the inputs are in the summary and the fuzz-findings artifact.'
+          fi
+          exit "$status"
+      - name: Report fuzzer compiler cache
+        if: always()
+        run: |
+          sccache --show-stats || true
+          sccache --stop-server || true
+      - name: Save fuzzer compiler cache
+        if: >-
+          !cancelled() && steps.build.outcome == 'success' &&
+          (github.ref == 'refs/heads/develop' || github.event_name == 'pull_request')
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ env.SCCACHE_DIR }}
+          key: ${{ steps.fuzz-cache.outputs.cache-primary-key }}
+      - name: Upload the failing inputs and fuzzer logs
+        if: always() && (steps.replay.outcome == 'failure' || steps.fuzz.outcome == 'failure')
+        uses: actions/upload-artifact@v7
+        with:
+          name: fuzz-findings
+          overwrite: true
+          if-no-files-found: ignore
+          path: |
+            build/linux-fuzz/replay/
+            build/linux-fuzz/found/
 
   release:
     needs: [build, release-tools]
