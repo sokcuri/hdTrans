@@ -89,6 +89,7 @@
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
+//= noun.ni-not-goal	Ends of the nouns before に that tell a point in time or what else, not the place or state one goes back to (三時に戻る 3시에 돌아오다, 一時間後に戻る, それ以外に戻る理由).
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
@@ -99,6 +100,7 @@
 //= noun.realm-name	Names of countries and old provinces that are written with 国 (日本国, 越中国, 美濃国).
 //= noun.realm-province-compound	Nouns in 国 that take the 国 of an old province name before them, not of a modern country (出羽国人 데와 고쿠진).
 //= noun.result-sareru	Verbal nouns whose されている is a state (舗装されている).
+//= noun.return-here	Ends of the nouns of here and of one's home base, to which 戻る comes back: 돌아오다 after (으)로 (こっちに戻る 여기로 돌아오다, 母港に戻る 모항으로 돌아오다).
 //= noun.role	Words of kinship, address, rank and role: a label or name candidate that is one is a role, not a name (父, 店長, 勇者, マスター).
 //= noun.scene	Nouns of position and situation, after which から and the particle of place read 에서 (後ろから, 現場で).
 //= noun.receive-verbal	Verbal nouns whose Korean takes 받다 as one verb (소개받다, 지급받다): right before してもらう they keep 받다 with the giver in 에게 (先生に紹介してもらった 선생님에게 소개받았다).
@@ -1296,6 +1298,38 @@ noun.manner-ni	大まか
 noun.manner-ni	一般的
 noun.manner-ni	有り体
 noun.manner-ni	ありてい
+noun.ni-not-goal	時
+noun.ni-not-goal	時半
+noun.ni-not-goal	分
+noun.ni-not-goal	秒
+noun.ni-not-goal	曜日
+noun.ni-not-goal	朝
+noun.ni-not-goal	昼
+noun.ni-not-goal	夜
+noun.ni-not-goal	晩
+noun.ni-not-goal	夕方
+noun.ni-not-goal	夕刻
+noun.ni-not-goal	明日
+noun.ni-not-goal	明後日
+noun.ni-not-goal	今日
+noun.ni-not-goal	今夜
+noun.ni-not-goal	今晩
+noun.ni-not-goal	正午
+noun.ni-not-goal	深夜
+noun.ni-not-goal	夜中
+noun.ni-not-goal	後
+noun.ni-not-goal	週末
+noun.ni-not-goal	月末
+noun.ni-not-goal	年末
+noun.ni-not-goal	夕暮れ
+noun.ni-not-goal	日暮れ
+noun.ni-not-goal	明け方
+noun.ni-not-goal	夜明け
+noun.ni-not-goal	時頃
+noun.ni-not-goal	時ごろ
+noun.ni-not-goal	以外
+noun.ni-not-goal	他
+noun.ni-not-goal	ほか
 
 noun.not-verbal	全部
 noun.not-verbal	全員
@@ -2553,6 +2587,21 @@ noun.receive-verbal	補償
 noun.receive-verbal	配達
 noun.receive-verbal	送金
 noun.receive-verbal	融資
+noun.return-here	ここ
+noun.return-here	こっち
+noun.return-here	こちら
+noun.return-here	ここら
+noun.return-here	この場
+noun.return-here	此処
+noun.return-here	此方
+noun.return-here	手元
+noun.return-here	手もと
+noun.return-here	母港
+noun.return-here	鎮守府
+noun.return-here	自宅
+noun.return-here	実家
+noun.return-here	故郷
+noun.return-here	地元
 
 verb.naming	呼ぶ
 verb.naming	書く

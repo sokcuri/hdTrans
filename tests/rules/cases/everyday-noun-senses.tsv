@@ -20,7 +20,7 @@ dict:jisjk:242807	果樹園の栗を収穫する。	과수원의 밤을 수확�
 dict:jisjk:115555	大木の幹に穴を空ける。	큰 나무의 줄기에 구멍을 뚫는다.	fix	defaults
 dict:jisjk:115555	幹部が来た。	간부가 왔다.	keep	defaults
 dict:jisjk:185549	沢といった感じの場所だ。	계곡이라는 느낌의 장소다.	fix	defaults
-dict:jisjk:36642	寝床に戻った。	잠자리에 돌아왔다.	fix	defaults
+dict:jisjk:36642	寝床に戻った。	잠자리로 돌아갔다.	fix	defaults
 dict:jisjk:14549	心臓とか肝臓はともかく。	심장이라든지 간은 차치하고.	fix	defaults
 dict:terms:7	ミナだけが気に入り、他はイマイチだったらしい。	미나만이 마음에 들어, 나머지는 별로였던 것 같다.	fix	local
 dict:terms:7	仕事の他に趣味がある。	일 외에 취미가 있다.	keep	local
