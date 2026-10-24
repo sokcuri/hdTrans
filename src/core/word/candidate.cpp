@@ -615,6 +615,20 @@ bool FractionAt(std::string_view text, std::size_t size) {
     return false;
 }
 
+namespace {
+
+// Whether a unit that numbers name (counter.unit-abbrev) follows the number of size bytes at the
+// start of text, after more kanji digits written on without 十 (二水戦 2수전, 三一駆 31구): the
+// number is read as digits then, and those digits read by place value.
+bool UnitAfterNumber(std::string_view text, std::size_t size) {
+    if (size > text.size()) return false;
+    std::string_view rest = text.substr(size);
+    while (IsNumeral(FirstChar(rest))) rest.remove_prefix(FirstChar(rest).size());
+    return std::ranges::any_of(dict::ClassMembers("counter.unit-abbrev"), [&](std::string_view u) { return rest.starts_with(u); });
+}
+
+}  // namespace
+
 bool NounEndAt(std::string_view text) { return NounEnd(text); }
 
 bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::string_view nominal) {
@@ -1345,6 +1359,14 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
         }
     }
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
+        // Before a unit name the kanji number is its digits, not a word that starts with it or
+        // the Sino-Korean reading of 一 (一航戦 1항전, 二水戦 2수전).
+        if (UnitAfterNumber(text, numeric->source.size())) {
+            if (text::RuneCount(numeric->source) == 1 && static_cast<unsigned char>(numeric->source[0]) >= 0x80) {
+                numeric = LookupFallbackRecord(token, numeric->source, 12, 15, true);
+            }
+            return ProcessCandidateRecord(full, cursor, token, numeric, parent);
+        }
         const Lookup dictionary = DoLookup(text, kModeGeneral);
         if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text) ||
             VerbalNounAtCounter(dictionary.records, *numeric, text) || FractionAt(text, numeric->source.size()) ||
