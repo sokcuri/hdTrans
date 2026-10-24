@@ -534,10 +534,8 @@ bool RuleL67([[maybe_unused]] Item* p) {
 
 // local 68
 //     end.src == "に" and pos[-1] is 1** and end.ko := "1이"
-//     pos[-1] is 1**
 bool RuleL68([[maybe_unused]] Item* p) {
-    return (GobiSrcEq(p, 0, "に"sv) && PumsaEq(p, -1, "1**"sv) && GobiDstSet(p, 0, "1이"sv)) ||
-           PumsaEq(p, -1, "1**"sv);
+    return (GobiSrcEq(p, 0, "に"sv) && PumsaEq(p, -1, "1**"sv) && GobiDstSet(p, 0, "1이"sv));
 }
 
 // local 69
@@ -1106,16 +1104,16 @@ bool RuleL125([[maybe_unused]] Item* p) {
 // local 126
 //     pos[-1] is 4**|7**|8**
 //     src[-1] == "できるように" and pos[-1] is 1**
-//     (sem[+1] has UTs or sem[+1] has USe or sem[+1] has UTh)
+//     sem[-1] lacks VHn and (sem[+1] has UTs or sem[+1] has USe or sem[+1] has UTh)
 //     src[+1] == "こと" and (src[+2] starts "です" or src[+2] == "でしたが")
 //     src[-1] == "、" and pos[-2] is 4**|7**|8**
 //     pos[-1] is 1** and sem[-1] has UMe and src[+1] == "こと" and src[+2] == "から"
 bool RuleL126([[maybe_unused]] Item* p) {
     return PumsaEq(p, -1, "4**7**8**"sv) ||
            (SrcEq(p, -1, "できるように"sv) && PumsaEq(p, -1, "1**"sv)) ||
-           (AttrEq(p, 1, "UTs"sv) ||
+           (AttrNe(p, -1, "VHn"sv) && (AttrEq(p, 1, "UTs"sv) ||
            AttrEq(p, 1, "USe"sv) ||
-           AttrEq(p, 1, "UTh"sv)) ||
+           AttrEq(p, 1, "UTh"sv))) ||
            (SrcEq(p, 1, "こと"sv) && (SrcEq(p, 2, "Lです"sv) ||
            SrcEq(p, 2, "でしたが"sv))) ||
            (SrcEq(p, -1, "、"sv) && PumsaEq(p, -2, "4**7**8**"sv)) ||
@@ -1760,14 +1758,13 @@ bool RuleL188([[maybe_unused]] Item* p) {
 
 // local 189
 //     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "があ" and pos[+1] is 4** and end.ko[-1] := "3"
-//     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "が" and (src[+2] ends "な" or src[+2] == "無" or src[+2] == "") and end.ko[-1] := "3"
+//     pos[-1] is 4** and end.pos[-1] is 500 and src[+1] == "が" and (src[+2] ends "な" or src[+2] == "無") and end.ko[-1] := "3"
 //     pos[-1] is 4** and end.pos[-1] is 500 and (src[+1] == "が欲し" or src[+1] == "がほし") and pos[+1] is 7** and end.ko[-1] := "3"
 //     pos[-1] is 4** and sem[-1] has UMv and end.pos[-1] is 50* and end.ko[-1] := "3"
 bool RuleL189([[maybe_unused]] Item* p) {
     return (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && SrcEq(p, 1, "があ"sv) && PumsaEq(p, 1, "4**"sv) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && SrcEq(p, 1, "が"sv) && (SrcEq(p, 2, "Rな"sv) ||
-           SrcEq(p, 2, "無"sv) ||
-           SrcEq(p, 2, ""sv)) && GobiDstSet(p, -1, "3"sv)) ||
+           SrcEq(p, 2, "無"sv)) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && GobiPumsaEq(p, -1, "500"sv) && (SrcEq(p, 1, "が欲し"sv) ||
            SrcEq(p, 1, "がほし"sv)) && PumsaEq(p, 1, "7**"sv) && GobiDstSet(p, -1, "3"sv)) ||
            (PumsaEq(p, -1, "4**"sv) && AttrEq(p, -1, "UMv"sv) && GobiPumsaEq(p, -1, "50*"sv) && GobiDstSet(p, -1, "3"sv));
@@ -2505,10 +2502,8 @@ bool RuleL266([[maybe_unused]] Item* p) {
 
 // local 267
 //     pos[-1] is 2** and sem[-2] has VPt|VFd
-//     sem[-3] under VFd
 bool RuleL267([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VPtVFd"sv)) ||
-           AttrMinusEq(p, -3, "VFd"sv);
+    return (PumsaEq(p, -1, "2**"sv) && AttrEq(p, -2, "VPtVFd"sv));
 }
 
 // local 268
@@ -2750,10 +2745,8 @@ bool RuleL297([[maybe_unused]] Item* p) {
 
 // local 298
 //     pos[-1] is 1** and sem[-1] under VHn and pos[+1] is 4** and sem[+1] has UTs
-//     pos[+1] is 7**|8**
 bool RuleL298([[maybe_unused]] Item* p) {
-    return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UTs"sv)) ||
-           PumsaEq(p, 1, "7**8**"sv);
+    return (PumsaEq(p, -1, "1**"sv) && AttrMinusEq(p, -1, "VHn"sv) && PumsaEq(p, 1, "4**"sv) && AttrEq(p, 1, "UTs"sv));
 }
 
 // local 299
@@ -2914,9 +2907,9 @@ bool RuleL320([[maybe_unused]] Item* p) {
 }
 
 // local 321
-//     gram[-1] has "VHn"
+//     sem[-1] has VHn
 bool RuleL321([[maybe_unused]] Item* p) {
-    return GramEq(p, -1, "VHn"sv);
+    return AttrEq(p, -1, "VHn"sv);
 }
 
 // local 322
@@ -3929,10 +3922,8 @@ bool RuleL463([[maybe_unused]] Item* p) {
 }
 
 // local 464
-//     src == "に" and pos is 2** and pos[-1] is 1** and (sem[-1] has UAq or sem[-1] has UQf) and ko := "(으)로"
 bool RuleL464([[maybe_unused]] Item* p) {
-    return (SrcEq(p, 0, "に"sv) && PumsaEq(p, 0, "2**"sv) && PumsaEq(p, -1, "1**"sv) && (AttrEq(p, -1, "UAq"sv) ||
-           AttrEq(p, -1, "UQf"sv)) && DstSet(p, 0, "(으)로"sv));
+    return false;
 }
 
 // local 465
@@ -4509,7 +4500,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL65, 0x7a8608ebe74be393ull},
     {RuleL66, 0x6fbe657463f4cafcull},
     {RuleL67, 0x22f8ca20895b391dull},
-    {RuleL68, 0xef82ebb6707bde90ull},
+    {RuleL68, 0xfae94020dffc795cull},
     {RuleL69, 0x2f066365431199e0ull},
     {RuleL70, 0x959781bbf950809cull},
     {RuleL71, 0x921504b148faf3e8ull},
@@ -4567,7 +4558,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL123, 0x99e20f43a4f65766ull},
     {RuleL124, 0xbb1e107e37f49179ull},
     {RuleL125, 0x8235363acd731940ull},
-    {RuleL126, 0x470def2162c6893dull},
+    {RuleL126, 0xe17ff12cc8ddc874ull},
     {RuleL127, 0x43dbd03df3b8e3cbull},
     {RuleL128, 0xe073a2c392a97b83ull},
     {RuleL129, 0x33fc731cc8c927adull},
@@ -4630,7 +4621,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL186, 0x6335413206fbdcf8ull},
     {RuleL187, 0x29675fe7eade3335ull},
     {RuleL188, 0xbb6faa8b3061dbbeull},
-    {RuleL189, 0x5db47ae41bcd8b28ull},
+    {RuleL189, 0x0d5204dcb3322d1full},
     {RuleL190, 0x5220ce1b72a4b4d1ull},
     {RuleL191, 0x4ac0f3ed4e6043e4ull},
     {RuleL192, 0xe94592d2a75aaa92ull},
@@ -4708,7 +4699,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL264, 0x53bf954223712ce8ull},
     {RuleL265, 0x1c842c4e602d92c6ull},
     {RuleL266, 0xa891d454df7ed39eull},
-    {RuleL267, 0xcc5a01ebd286a44dull},
+    {RuleL267, 0x3b667792b6ba1b87ull},
     {RuleL268, 0xb86131a1e95df235ull},
     {RuleL269, 0x5a9d2c6301b3344bull},
     {RuleL270, 0xcec846a9eb803db8ull},
@@ -4739,7 +4730,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL295, 0x486c352d7016a6b0ull},
     {RuleL296, 0x32247b3073b6942full},
     {RuleL297, 0xbaec7ae0d6126ed9ull},
-    {RuleL298, 0x3ca4b88394a7f11cull},
+    {RuleL298, 0x1bb47bbac93a48ecull},
     {RuleL299, 0xfd3b38a005cbf43cull},
     {RuleL300, 0x3d9fac7abdf1f608ull},
     {RuleL301, 0x45558a319bc9e9f9ull},
@@ -4762,7 +4753,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL318, 0x872d2f05cbd26e89ull},
     {RuleL319, 0x9b60c74099f030d8ull},
     {RuleL320, 0x76026702cf1fedf5ull},
-    {RuleL321, 0x29966042bffcf281ull},
+    {RuleL321, 0xc5fee671fe3258a7ull},
     {RuleL322, 0x086eb9bbb735a277ull},
     {RuleL323, 0xbab77c26b0e3414cull},
     {RuleL324, 0xb64e47ce2a2bc78aull},
@@ -4905,7 +4896,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL461, 0xe3c93a97d654f9adull},
     {RuleL462, 0x9a5c3caca856c22cull},
     {RuleL463, 0xce506be8b0e6051full},
-    {RuleL464, 0xfa41b3f700de2b64ull},
+    {RuleL464, 0xfbc9691c9a40a7c5ull},
     {RuleL465, 0x4e2019ca1058e999ull},
     {RuleL466, 0x38dfc8adfdbc231cull},
     {RuleL467, 0xba86e2df47057baeull},

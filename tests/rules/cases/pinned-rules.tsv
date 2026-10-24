@@ -7,7 +7,7 @@ dict:jisjk:116539	財布を落としてしまった。	rule:dict:jisjk:116539=�
 dict:jisjk:4403	三十分ばかり待った。	rule:dict:jisjk:4403=만	current	local
 dict:jisjk:4836	彼は行かないという話を聞いた。	rule:dict:jisjk:4836=&AV@	current	local
 dict:jisjk:355685	この市場では新鮮な魚が安く買える。	rule:dict:jisjk:355685=(을)를	current	local
-dict:jisjk:6285	犬などの小さい動物がいる。	rule:dict:jisjk:6285=등이	current	local
+dict:jisjk:6285	犬などの小さい動物がいる。	!rule:dict:jisjk:6285	fix	local
 dict:jisjk:6588	どんな感じの部屋ですか。	rule:dict:jisjk:6588=느낌	current	local
 dict:jisjk:266239	あたしの好きな色は青だよ。	rule:dict:jisjk:266239=(이)가	current	local
 dict:jisjk:115173	バスは学校へ進む。	rule:dict:jisjk:115173=진학&AV@	current	local

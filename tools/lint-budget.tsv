@@ -1,11 +1,11 @@
 # Warnings of hdrulec lint on the shipped rules program, per flag (ctest rules.lint). A change
 # that removes warnings lowers its line; one that adds them fixes them instead. Each left here
 # needs a decision about the translation (docs/rule-compiler.md).
-always-false	1
-empty-pattern	3
-key-mismatch	9
-literal-space	1
-lone-test	201
-never-fires	2
-self-compare	3
-unknown-code	20
+always-false	0
+empty-pattern	1
+key-mismatch	0
+literal-space	0
+lone-test	193
+never-fires	0
+self-compare	0
+unknown-code	5
