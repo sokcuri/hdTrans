@@ -613,8 +613,7 @@ bool GoodAfterWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
 // A character that ends a spoken phrase: punctuation, a closing bracket, a space, a mark
 // of tone, or a line break.
 bool IsPause(char32_t r) {
-    return In(r, U"、。，．,.！？!?…‥」』）)］】♪☆★♥♡❤～~ 　\n") || r == kLengthenMark || r == kDrawnMark ||
-           r == output::kClipMark || r == kEmphasisClose;
+    return In(r, U"、。，．,.！？!?…‥」』）)］】♪☆★♥♡❤～~ 　\n") || output::IsClosingMark(r);
 }
 
 // The drawn marks that stand for the vowel kana of rs[i:end] dropped after a word: one

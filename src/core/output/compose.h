@@ -143,7 +143,9 @@ private:
 
     std::string Build(int i, int action, std::string_view mode);
     void WriteCasual(int first, int last);
-    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr) const;
+    // The mark that ends the sentence of speech after item i, 0 for none; asked tells whether
+    // it asks, clipped whether a drawn end cut with っ comes before it (行くぅぅぅっ).
+    char32_t QuotedEnd(int i, int last, bool nested, bool* asked = nullptr, bool* clipped = nullptr) const;
     bool AskConjecture(int i, std::string_view clause, std::string_view own, bool casual);
     bool AskPlain(int i, std::string_view own);
     void AskWord(int i, int last);
