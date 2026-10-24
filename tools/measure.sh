@@ -69,6 +69,8 @@ stoppable() { # COMMAND [ARG...]
     child=$!
     wait "$child"
 }
+# ${!-} needs the sets to start as compound commands (the case below): under set -u, bash 3.2
+# leaves $! unset in a subshell where no job has started.
 stops() {
     last=${!-}
     trap '[ "${!-}" = "$last" ] || child=${child:-$!}

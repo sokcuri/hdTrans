@@ -9,7 +9,7 @@
 make reads judge pairs (key, ja, before, after; tools/measure.sh, tools/e2e-pairs.py) and writes
 BLIND.tsv with `id ja X Y` rows, where id is the row number and X, Y are before and after in a
 random order per line, and KEY.tsv with `id key flip` (flip 1: X is after). It refuses a KEY.tsv
-that exists, so answers are never read through a new key. A judge sees only BLIND.tsv and answers
+or BLIND.tsv that exists, so answers are never read through a new key. A judge sees only BLIND.tsv and answers
 `id answer [note]` rows with answer X, Y (that one is the better translation) or same. disagree
 writes the blind rows the two answer files answer differently, for a third judge. final writes
 `key verdict judges [note]` rows (verdict improved, same or worse, as tools/verdicts.py reads
@@ -70,7 +70,7 @@ def make(pairs, key_path, blind_path):
     try:
         with f:
             csv.writer(f, delimiter="\t", lineterminator="\n").writerows(key)
-        with open(blind_path, "w", encoding="utf-8", newline="") as b:
+        with open(blind_path, "x", encoding="utf-8", newline="") as b:
             csv.writer(b, delimiter="\t", lineterminator="\n").writerows(blind)
     except OSError as error:
         Path(key_path).unlink()
@@ -143,12 +143,13 @@ def self_test():
         assert "s:1" not in blind.read_text(encoding="utf-8")
         before = blind.read_bytes()
         with contextlib.redirect_stderr(io.StringIO()):
-            for target in (blind, d / "again.tsv"):
+            for k, target in ((key, blind), (key, d / "again.tsv"), (d / "k3.tsv", blind)):
                 try:
-                    make(pairs, key, target)
-                    raise AssertionError("make reused a key")
+                    make(pairs, k, target)
+                    raise AssertionError("make reused a key or blind file")
                 except SystemExit as error:
                     assert error.code == 2
+            assert not (d / "k3.tsv").exists()
             try:
                 make(pairs, d / "k2.tsv", d / "missing" / "blind.tsv")
                 raise AssertionError("make wrote into a missing folder")
