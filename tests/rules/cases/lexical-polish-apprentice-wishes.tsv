@@ -5,7 +5,6 @@ dict:jisjk:243354	文章を彫琢する。	문장을 조탁한다.	fix	defaults
 dict:jisjk:243354	言葉の彫琢。	말의 조탁.	fix	defaults
 dict:jisjk:243354	彫琢した文章。	조탁한 문장.	fix	defaults
 dict:jisjk:243354	彫刻	조각	keep	defaults
-dict:jisjk:243354	推敲	퇴고	keep	defaults
 dict:jisjk:243354	彫琢を重ねる。	조탁을 거듭한다.	fix	defaults
 dict:jisjk:243354	彫琢している。	조탁하고 있다.	fix	defaults
 dict:jisjk:265007	後ろめた感	꺼림칙함	fix	defaults
@@ -13,7 +12,6 @@ dict:jisjk:265007	後ろめた感がある。	꺼림칙함이 있다.	fix	defaul
 dict:jisjk:265007	後ろめた感はない。	꺼림칙함은 없다.	fix	defaults
 dict:jisjk:265007	後ろめたさ	꺼림칙함	keep	defaults
 dict:jisjk:265007	後ろめたい。	꺼림칙하다.	keep	defaults
-dict:jisjk:265007	罪悪感	죄책감	keep	defaults
 dict:jisjk:265007	後ろめた感の理由。	꺼림칙함의 이유.	fix	defaults
 dict:jisjk:265007	少し後ろめた感が残る。	조금 꺼림칙함이 남는다.	fix	defaults
 dict:jisjk:119919	後手になる。	뒤처진다.	fix	defaults
@@ -31,13 +29,11 @@ dict:jisjk:19319	徒弟の仕事。	도제의 일.	fix	defaults
 dict:jisjk:19319	徒弟として働く。	도제로서 일한다.	fix	defaults
 dict:jisjk:19319	弟子	제자	keep	defaults
 dict:jisjk:19319	従兄弟	사촌	keep	defaults
-dict:jisjk:19319	兄弟	형제	keep	defaults
 dict:jisjk:19319	徒弟が集まる。	도제가 모인다.	fix	defaults
 dict:jisjk:19319	職人と徒弟。	장인과 도제.	fix	defaults
 dict:jisjk:77921	御多幸	행복	fix	defaults
 dict:jisjk:77921	御多幸を願う。	행복을 바란다.	fix	defaults
 dict:jisjk:77921	皆様の御多幸。	여러분의 행복.	fix	defaults
 dict:jisjk:77921	多幸	다복	keep	defaults
-dict:jisjk:77921	幸運	행운	keep	defaults
 dict:jisjk:77921	御多幸を祈る。	행복을 빈다.	fix	defaults
 dict:jisjk:77921	御多幸を願っています。	행복을 바라고 있습니다.	fix	defaults

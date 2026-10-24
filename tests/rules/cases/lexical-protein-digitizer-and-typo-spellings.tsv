@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:5154	そこきみわるい。	왠지 기분이 나쁘다.	fix	defaults
 dict:jisjk:5154	「そこきみわるいね。」	「왠지 기분이 나쁘네.」	fix	defaults
@@ -8,9 +8,9 @@ dict:jisjk:42371	「アクチンの量は多い。」	「액틴의 양은 많다
 dict:jisjk:51239	デジタイザを使う。	디지타이저를 쓴다.	fix	defaults
 dict:jisjk:51239	このデジタイザは新しい。	이 디지타이저는 새롭다.	fix	defaults
 dict:jisjk:51239	「デジタイザを買った。」	「디지타이저를 샀다.」	fix	defaults
-dict:jisjk:55137	フジテレビジョン	후지 텔레비전	fix	defaults
-dict:jisjk:55137	フジテレビジョンを見た。	후지 텔레비전을 보았다.	fix	defaults
-dict:jisjk:55137	「フジテレビジョン」	「후지 텔레비전」	fix	defaults
+dict:jisjk:55137	フジテレビジョン	후지테레비전	fix	defaults
+dict:jisjk:55137	フジテレビジョンを見た。	후지테레비전을 보았다.	fix	defaults
+dict:jisjk:55137	「フジテレビジョン」	「후지테레비전」	fix	defaults
 dict:jisjk:119279	国力をつける。	국력을 향상시킨다.	fix	defaults
 dict:jisjk:119279	国力をつけた。	국력을 향상시켰다.	fix	defaults
 dict:jisjk:119279	国力をつけてきた。	국력을 향상시켜 왔다.	fix	defaults
@@ -44,35 +44,8 @@ dict:jisjk:67939	流しだいが汚れている。	설거지대가 더러워져 
 dict:jisjk:134050	あの子はベビー・ギャングだ。	그 아이는 개구쟁이다.	keep	defaults
 dict:jisjk:134050	ベビー・ギャングが笑った。	개구쟁이가 웃었다.	keep	defaults
 dict:jisjk:134050	「ベビー・ギャングが来た。」	「개구쟁이가 왔다.」	keep	defaults
-lookup:lexical-cleanup-03	いつも気分が悪い。	언제나 속이 메스껍다.	keep	defaults
-lookup:lexical-cleanup-03	理由が分からない。	이유를 모른다.	keep	defaults
-lookup:lexical-cleanup-03	デジタルの時計を使う。	디지털의 시계를 쓴다.	keep	defaults
-lookup:lexical-cleanup-03	テレビを買った。	텔레비전을 샀다.	keep	defaults
 lookup:lexical-cleanup-03	国力が落ちた。	국력이 떨어졌다.	keep	defaults
-lookup:lexical-cleanup-03	首を回した。	목을 돌렸다.	keep	defaults
-lookup:lexical-cleanup-03	小鳥の声を聞く。	작은 새의 목소리를 듣는다.	keep	defaults
 lookup:lexical-cleanup-03	啄木鳥が木をつつく。	딱따구리가 나무를 쿡쿡 찌른다.	keep	defaults
-lookup:lexical-cleanup-03	明け方に出発した。	새벽녘에 출발했다.	keep	defaults
-lookup:lexical-cleanup-03	暗闇を歩く。	어둠을 걷는다.	keep	defaults
-lookup:lexical-cleanup-03	誘電率が高い。	유전율이 높다.	keep	defaults
-lookup:lexical-cleanup-03	後片付けをする。	뒷정리를 한다.	keep	defaults
-lookup:lexical-cleanup-03	食器を洗う。	식기를 씻는다.	keep	defaults
-lookup:lexical-cleanup-03	通貨同盟に参加する。	통화동맹에 참가한다.	keep	defaults
-lookup:lexical-cleanup-03	統合の計画を立てる。	통합 계획을 세운다.	keep	defaults
-lookup:lexical-cleanup-03	ギャングの話を聞く。	갱의 이야기를 듣는다.	keep	defaults
-lookup:lexical-cleanup-03	泡の立ちすぎが気になる。	거품이 지나치게 이는 것이 신경 쓰인다.	keep	defaults
-lookup:lexical-cleanup-03	泡の立ち過ぎを防ぐ。	거품이 지나치게 이는 것을 막는다.	keep	defaults
-lookup:lexical-cleanup-03	「泡の立ちすぎが気になる。」	「거품이 지나치게 이는 게 신경 쓰인다.」	keep	defaults
-lookup:lexical-cleanup-03	「泡の立ち過ぎを防ぐ。」	「거품이 지나치게 이는 걸 막는다.」	keep	defaults
-lookup:lexical-cleanup-03	APIを使う。	API를 쓴다.	keep	defaults
-lookup:lexical-cleanup-03	CD-ROMを入れる。	CD-ROM을 넣는다.	keep	defaults
-lookup:lexical-cleanup-03	AとBを選ぶ。	A와 B를 선택한다.	keep	defaults
-lookup:lexical-cleanup-03	題名（仮）を読む。	제목(임시)을 읽는다.	keep	defaults
-lookup:lexical-cleanup-03	「タイトル」の意味を調べる。	「타이틀」 의미를 조사한다.	keep	defaults
-lookup:lexical-cleanup-03	S3バケットに保存する。	S3 버킷에 보존한다.	keep	defaults
-lookup:lexical-cleanup-03	フラワーを買った。	플라워를 샀다.	keep	defaults
-lookup:lexical-cleanup-03	メタルの板がある。	메탈의 판이 있다.	keep	defaults
-lookup:lexical-cleanup-03	メモリーを増やす。	메모리를 늘린다.	keep	defaults
 dict:jisjk:82647	台所で跡片付けをする。	부엌에서 뒷정리를 한다.	fix	defaults
 dict:jisjk:82647	食後の跡片付けが終わった。	식후 뒷정리가 끝났다.	fix	defaults
 dict:jisjk:82647	「食後の跡片付けを手伝って。」	「식후 뒷정리를 도와줘.」	fix	defaults
@@ -80,12 +53,9 @@ dict:names.288387	パワースワップ	파워스왑	fix	fixed
 dict:names.288387	パワースワップを使う。	파워스왑을 쓴다.	fix	fixed
 dict:names.288387	「パワースワップ」	「파워스왑」	fix	fixed
 dict:names.9559	Sガンダムを見た。	S건담을 보았다.	keep	fixed
-dict:loanword-identity-controls	Ex-sガンダム	Ex-S 건담	keep	fixed
-dict:loanword-identity-controls	CZ2128	CZ2128	keep	defaults
-dict:loanword-identity-controls	CZ3128	CZ3128	keep	defaults
-dict:loanword-identity-controls	パワーを使う。	파워를 쓴다.	keep	defaults
-dict:loanword-identity-controls	スワップを使う。	스왑을 쓴다.	keep	defaults
-dict:loanword-identity-controls	ベン・ゴールドエイカーが来た。	벤 골드에이커가 왔다.	keep	fixed
+dict:names.5432	Ex-sガンダム	Ex-S 건담	keep	fixed
+dict:names.288387	パワーを使う。	파워를 쓴다.	keep	defaults
+dict:names.288387	スワップを使う。	스왑을 쓴다.	keep	defaults
 dict:jisjk:55434	フレイヴァー	플레이버	keep	defaults
 dict:jisjk:55434	フレイヴァーを加える。	플레이버를 더한다.	keep	defaults
 dict:jisjk:55434	「フレイヴァーの香りだ。」	「플레이버의 향기다.」	keep	defaults

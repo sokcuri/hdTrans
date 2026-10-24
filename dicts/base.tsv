@@ -616,7 +616,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あかちゃんができ	아기가 생&A2@	M427			GN				jisjk:139834		
 あかちゃんをとりあげ	아기를 &FD@	M447	QHP		GN				jisjk:139838		
 あかつき	새벽	N110	UMe		GN				jisjk:123985		
-あかつきやみ	새벽녘	N110	UMeVSs		GN				jisjk:123989		
+あかつきやみ	새벽 어둠	N110	UMeVSs		GN				jisjk:123989		
 あかつき丸	아카츠키호	N130	VTp		GN				jisjk:347298		
 あかつき台	아카츠키다이	I130	QCTVPl		GN				jisjk:269141		
 あかつら	악역	N110	VHnUArSFl		GN				jisjk:123990		
@@ -1282,7 +1282,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あだ	공격&AV@	M4U9			GN				jisjk:140199		
 あだうち	복수	N110		Hd	GN				jisjk:124513		
 あだけ	소란을 &MA@	M427			GN				jisjk:143565		
-あだざくら	덧없는 것	N110	SFl		GN				jisjk:124515		
+あだざくら	덧없는 벚꽃	N110	SFl		GN				jisjk:124515		
 あだち	아다치	N110	QPN	Wa	GN				jisjk:268276		
 あだな	별명	I110			GN				jisjk:259831		
 あだながた	염문이 퍼&AL@	M424			GN				jisjk:142032		
@@ -6254,7 +6254,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おしろい下	기초화장품	I110	VPa		GN				jisjk:40485		
 おしわけ	밀어 헤&AO@	M447			GN				jisjk:146163		
 おしわりむぎ	납작보리	N110	VFd		GN				jisjk:165399		-1
-おしんこ	야채절이	N110	VFd		GN				jisjk:165401		-1
+おしんこ	채소 절임	N110	VFd		GN				jisjk:165401		-1
 おしボタン	누름단추	N110	VPe		GN				jisjk:165402		
 おし迫	임박&AV@	M428			GN				jisjk:261648		
 おし通	밀고 나&A1@	M443			GN				jisjk:146041		
@@ -17477,8 +17477,8 @@ ttt	ttt	K110			GN				jisjk:201744
 こっち	여기	I110			GN				jisjk:106515		
 こっちょう	최상	N110			GN				jisjk:182543		-1
 こってり	몹시	M300			GN				jisjk:123085		
-こってり	걸죽&AV@	M429			GN				jisjk:266600		
-こってりと	걸쭉&Mf@	M429		Va	GN				jisjk:120031		
+こってり	진&Mf@	M429			GN				jisjk:266600		
+こってりと	진&Mf@	M429		Va	GN				jisjk:120031		
 こってりとしぼられ	몹시 꾸중을 &J6@	M427			GN				jisjk:119568		
 こっとう	골동	N110			GN				jisjk:182544		-1
 こっとう	골동품	N110			GN				jisjk:182546		-1
@@ -21363,7 +21363,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しずおか	시즈오카	I130	QCT		GN				jisjk:109970		
 しずおかけん	시즈오카현	N120	VPl		GN				jisjk:187400		-1
 しずおかし	시즈오카시	N120	VPl		GN				jisjk:159606		
-しずおかだいいちテレビ	시즈오카다이이치 텔레비전	N110	VCmVBl		GN				jisjk:187408		
+しずおかだいいちテレビ	시즈오카 다이이치 테레비	N110	VCmVBl		GN				jisjk:187408		
 しずか	조용%A1@	G8L0			GN				jisjk:2186		
 しずかにな	조용해&AL@	M428			GN				jisjk:121152		
 しずく	물방울	I110			GN				jisjk:41112		
@@ -29760,8 +29760,8 @@ ttt	ttt	K110			GN				jisjk:201744
 そぼう	거칠고 난폭%A1@	G8U0			GN				jisjk:139808		
 そぼく	소박%A1@	G8U0			GN				jisjk:139810		
 そぼそぼ	부슬부슬	E311			GN				jisjk:616		
-そぼぬれ	촉촉이 &HV@	M417		Dx	GN				jisjk:90997		
-そぼぬれ	함빡 &HV@	M427	VSs		GN				jisjk:138788		
+そぼぬれ	흠뻑 &HV@	M417		Dx	GN				jisjk:90997		
+そぼぬれ	흠뻑 &HV@	M427	VSs		GN				jisjk:138788		
 そぼふ	부슬부슬 내&AA@	M428	VSs		GN				jisjk:138791		
 そぼ降	부슬부슬 내&AA@	M427	VSs		GN				jisjk:138790		
 そま	물&L4@	M428	SFlVCp		GN				jisjk:138794		
@@ -46238,7 +46238,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アドレスキー	어드레스 키	N110			GN				jisjk:42706		
 アドレスキー. レジスター	어드레스 키 레지스터	N110			GN				jisjk:42707		
 アドレスキーレジスター	어드레스 키 레지스터	N110			GN				jisjk:42708		
-アドレスバス	어드레스  버스	N110	VCm		IT				jisjk:259924		
+アドレスバス	어드레스 버스	N110	VCm		IT				jisjk:259924		
 アドレスバッファ	어드레스 버퍼	N110			GN				jisjk:42709		
 アドレスフィールド	어드레스 필드	N110			GN				jisjk:42710		
 アドレスマスク	어드레스 마스크	N110			GN				jisjk:42713		
@@ -54321,7 +54321,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カリフ	칼리프	N130	QPN		GN				jisjk:371816		
 カリフォルニア	캘리포니아	N130	QCT	Qq	GN				jisjk:45568		
 カリフォルニア銀行	캘리포니아 은행	N130	QIDVGt		GN				jisjk:45569		
-カリフラワー	코올리플라워	N110	VFd		GN				jisjk:45570		
+カリフラワー	콜리플라워	N110	VFd		GN				jisjk:45570		
 カリブ	카리브	N130	QCT	Qq	GN				jisjk:99163		
 カリブかい	카리브해	N110	VPl		GN				jisjk:158584		
 カリブー	순록	N110	VAm		GN				jisjk:158583		
@@ -57350,7 +57350,7 @@ ttt	ttt	K110			GN				jisjk:201744
 クーイマン	쿠이맨	N130	QPN		GN				jisjk:370955		
 クーキー	쿠키	N110	VFd		GN				jisjk:46200		
 クーキーガール	쿠키걸	N110	VQw		GN				jisjk:46201		
-クークラックスクラン	K.K.K.	N110	VBl		GN				jisjk:158942		
+クークラックスクラン	쿠 클럭스 클랜	N110	VBl		GN				jisjk:158942		
 クーデター	쿠데타	N110			BZ				jisjk:46202		
 クーデター	쿠데타	N110	VRw		GN				jisjk:46203		
 クートス	쿠토스	N130	QPN		GN				jisjk:371950		
@@ -62963,7 +62963,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ジェス	제스	N130			GN				jisjk:101832		
 ジェスイット派	제수이트파	N110	VHnUCl		GN				jisjk:129478		
 ジェスコ	제스코	N110	VPl		GN				jisjk:48370		
-ジェスチャー	제스추어	N110			GN				jisjk:48371		
+ジェスチャー	제스처	N110			GN				jisjk:48371		
 ジェステ	제스테	N130	QPN		GN				jisjk:368186		
 ジェストモンスタ	제스트몬스터	N130			GN				jisjk:101834		
 ジェスマック	졔스막	N130	QIDVGt		GN				jisjk:48372		
@@ -71015,7 +71015,7 @@ ttt	ttt	K110			GN				jisjk:201744
 トクミ電子工業	토크미 전자공업	N130	QIDVGt		GN				jisjk:51638		
 トクル	토쿠르	N130			GN				jisjk:106886		
 トグネリ	토그네리	N130	QPN		GN				jisjk:365963		
-トグル	타글	N110			GN				jisjk:51639		
+トグル	토글	N110			GN				jisjk:51639		
 トグルキー	토글 키	N110			IT				jisjk:260960		
 トグルスイッチ	토글스위치	N110			GN				jisjk:51640		
 トグルフリップフロップ	토글 프립플럽	N110			GN				jisjk:51641		
@@ -76414,7 +76414,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パノラマ	파노라마	N110			GN				jisjk:53795		
 パノラマカメラ	파노라마 카메라	N110	VPe		GN				jisjk:363301		
 パノラミック	파노라믹	N110			GN				jisjk:53796		
-パパ	파파	N110	VHn		GN				jisjk:105356		
+パパ	아빠	N110	VHn		GN				jisjk:105356		
 パパイヤ	파파야	N110	VPt		GN				jisjk:132831		
 パパラッツオ	파파랏츠오	N110			GN				jisjk:114070		
 パパン	파판	N130	QPN		GN				jisjk:366977		
@@ -79740,7 +79740,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フジテック	후지텍	N130	QIDVGt		GN				jisjk:55135		
 フジテックエンジニアリング	후지텍 엔지니어링	N130	QIDVGt		GN				jisjk:55136		
 フジテレビ	후지텔레비	N130	VBl		GN				jisjk:133418		
-フジテレビジョン	후지 텔레비전	N130	QIDVGt		GN				jisjk:55137		
+フジテレビジョン	후지테레비전	N130	QIDVGt		GN				jisjk:55137		
 フジデン	후지딘	N110	VPl		GN				jisjk:55138		
 フジパン	후지판	N110	VPl		GN				jisjk:55139		
 フジビル	후지빌딩	N110	VPl		GN				jisjk:55140		
@@ -82823,7 +82823,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ベビーAT	베이비 AT	N110			IT				jisjk:262804		
 ベビーたんす	소형 옷장	N110	VPe		GN				jisjk:134048		
 ベビーカー	유모차	N110			GN				jisjk:103461		
-ベビーギャング	개구장이	N110	VHn		GN				jisjk:134050		
+ベビーギャング	개구쟁이	N110	VHn		GN				jisjk:134050		
 ベビーサイズ	소형	N110			GN				jisjk:134051		
 ベビーサークル	아기 울타리	N110			GN				jisjk:114279		
 ベビーシグナル	베이비 시그날	N110			GN				jisjk:114276		
@@ -100082,7 +100082,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上今町	카미마마치	N130	QCTVPl		GN				jisjk:283611		
 上今諏訪	카미마스와	I130	QCTVPl		GN				jisjk:283610		
 上付き数字	위 첨자 숫자	N110			BZ				jisjk:348808		
-上付き文字	슈퍼 스크립트	N110			IT				jisjk:262561		
+上付き文字	위 첨자	N110			IT				jisjk:262561		
 上仙美里	카미셈비리	I130	QCTVPl		GN				jisjk:284665		
 上仙道	카미센도우	N130	QCTVPl		GN				jisjk:284662		
 上代	옛날	N110	UMe		GN				jisjk:25686		
@@ -103428,7 +103428,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下し	내림	N110			GN				jisjk:13294		
 下し薬	설사약	I110	VFdVMd		GN				jisjk:88254		
 下じき	깔림	N110		Hd	GN				jisjk:341179		
-下っ端	아랫쪽	N110	VMo		GN				jisjk:187590		
+下っ端	말단	N110	VMo		GN				jisjk:187590		
 下っ腹	아랫배	N110	VBp		GN				jisjk:233954		
 下つ方	서민	N110	VHn		GN				jisjk:188666		
 下ならし	예습	I110			GN				jisjk:88255		
@@ -107909,7 +107909,7 @@ ttt	ttt	K110			GN				jisjk:201744
 両面倍密倍トラック	더블 사이디드 더블 덴시티	I110			IT				jisjk:263316		
 両面刷り	양면쇄	N110			GN				jisjk:267916		
 両面羊歯	양면 양치	N110	VPt		GN				jisjk:256097		
-両面高密度	더블 사이디드 하이 덴시티	I110			IT				jisjk:263317		
+両面高密度	양면 고밀도	I110			IT				jisjk:263317		
 両領	양령	N110	VPl		GN				jisjk:20144		
 両頭	양두	N110			GN				jisjk:20142		
 両高	료타카	N130	QCTVPl		GN				jisjk:338540		
@@ -108257,7 +108257,7 @@ ttt	ttt	K110			GN				jisjk:201744
 中井阪	나카이사카	N130	QCTVPl		GN				jisjk:313060		
 中京	나카교	N130	QCT		GN				jisjk:34249		
 中京アサノコンクリート	츄쿄아사노콘크리트	I110	VGt		GN				jisjk:84388		
-中京テレビ放送	츄우쿄오 텔레비전방송	I130	VGt		PN				jisjk:84389		
+中京テレビ放送	주쿄 테레비 방송	I130	VGt		PN				jisjk:84389		
 中京パイプ工業	쥬쿄파이프공업	I110	VGt		GN				jisjk:84390		
 中京区	나카교구	I130	QCTVPl	Qq	GN				jisjk:218678		
 中京南通	츄우쿄미나미토리	I130	QCTVPl		GN				jisjk:308780		
@@ -113283,8 +113283,8 @@ ttt	ttt	K110			GN				jisjk:201744
 乳呑	치치노미	N130	QCTVPl		GN				jisjk:308568		
 乳安商事	뉴야스상사	I110	VPl		GN				jisjk:79437		
 乳岩峡	치치이와쿄	I110	VPl		GN				jisjk:79438		
-乳幼児	유아	I110	VHn		GN				jisjk:79439		
-乳幼児健診	유아 건강 진단	N110	QHP		GN				jisjk:248257		
+乳幼児	영유아	I110	VHn		GN				jisjk:79439		
+乳幼児健診	영유아 건강 검진	N110	QHP		GN				jisjk:248257		
 乳幼児肺炎	영유아 폐렴	N110	QHP		GN				jisjk:248258		
 乳房	유방	N110	VBp		GN				jisjk:30619		
 乳房温存療法	유방온존 요법	N110	QHP		GN				jisjk:248253		
@@ -116192,7 +116192,7 @@ ttt	ttt	K110			GN				jisjk:201744
 亡失	망실	N110		Hd	GN				jisjk:155064		
 亡妹	죽은 누이동생	N110	VHn		GN				jisjk:251359		
 亡妻	망처	N110	VHn		GN				jisjk:21409		
-亡姉	죽은 손위 누이	N110	VHn		GN				jisjk:251295		
+亡姉	죽은 언니	N110	VHn		GN				jisjk:251295		
 亡弟	죽은 아우	N110	VHn		GN				jisjk:251344		
 亡徳	망덕	N110			GN				jisjk:21404		
 亡所伊	망소이	N130	QPN		GN				jisjk:205503		
@@ -116349,7 +116349,7 @@ ttt	ttt	K110			GN				jisjk:201744
 交通誘発負担金	교통유발부담금	N110	VMoUYp		GN				jisjk:206500		
 交通費	교통비	I110	VMo		GN				jisjk:62552		
 交通違反	교통위반	I110			GN				jisjk:107988		
-交通遺児	교통사고 고아	I110			GN				jisjk:107987		
+交通遺児	교통사고 유자녀	I110			GN				jisjk:107987		
 交通部	교통부	N110	VPl		GN				jisjk:206502		
 交通部水路局	교통부수로국	N110	VPl		GN				jisjk:206501		
 交通都市	교통 도시	N110	VPl		GN				jisjk:180924		
@@ -118298,7 +118298,7 @@ ttt	ttt	K110			GN				jisjk:201744
 介分天	개분천	N130	QPN		GN				jisjk:207142		
 介助	시중&L4@	M439			GN				jisjk:91708		
 介助	시중	N110			GN				jisjk:166808		
-介助犬	시중드는 개	I110			GN				jisjk:96416		
+介助犬	보조견	I110			GN				jisjk:96416		
 介助者	도우미	N110	VHn		GN				jisjk:160652		
 介在	개재	N110		Hd	GN				jisjk:14854		
 介在原因	개재원인	N110			BZ				jisjk:351512		
@@ -118578,7 +118578,7 @@ ttt	ttt	K110			GN				jisjk:201744
 仕入割戻し	매입공제	N110			BZ				jisjk:363528		
 仕入戻り高	매입 반품액	N110			BZ				jisjk:363532		
 仕入書	매입 명세서	N110	VMo		GN				jisjk:186654		
-仕入高	구입고	I110			GN				jisjk:105721		
+仕入高	매입액	I110			GN				jisjk:105721		
 仕出	새로운 고안	N110			GN				jisjk:24984		
 仕出	만들어 &A6@	M433			GN				jisjk:24985		
 仕出	하기 시작&AV@	M443			GN				jisjk:122361		
@@ -118661,7 +118661,7 @@ ttt	ttt	K110			GN				jisjk:201744
 仕掛け品	제작중인 물건	N110			GN				jisjk:233504		
 仕掛け花火	갖가지 모양의 불꽃	N110	VRwVPe		GN				jisjk:186801		
 仕掛り	시작	N110			GN				jisjk:105742		
-仕掛品	제작중인 물건	I110			GN				jisjk:71742		
+仕掛品	재공품	I110			GN				jisjk:71742		
 仕損い	실패	I110			GN				jisjk:105710		
 仕損じ	실수	N110			GN				jisjk:105725		
 仕損じ	실수&AV@	M437			GN				jisjk:122280		
@@ -127404,7 +127404,7 @@ ttt	ttt	K110			GN				jisjk:201744
 元へ	원래로	E300			GN	1961	||1 &&3 ||2 S+1== "もど" S+1== "戻" P+1== "4**" ||2 G+0== "Hz" S-1!= "の"	뒤에 동사 もど·戻(る)가 오고 앞이 の가 아니면 「元へ」를 ‘원래로’로 고른다(彼の元へ戻る는 곁으로).	jisjk:260378		
 元へ	슬하로	E300			GN	3403	||1 &&4 S-1== "の" P-1== "2**" P-2== "1**" A-2-= "VHn"	사람을 나타내는 명사의 の 뒤에 오는 元へ를 슬하로로 고른다. [의심] 사람의 곁으로 간다는 元へ를 모두 양육·보호 관계의 슬하로로 번역한다. 자작문 子供の元へ帰る。 → 아이의 슬하로 돌아간다.; -why: 元へ LocalRule 3403 슬하로. 아이 곁으로 돌아간다는 뜻이지 아이의 보호 아래 들어간다는 뜻이 아니다.	jisjk:343142		
 元ジョンイル	원정일	N130	QPN		GN				jisjk:208783		
-元テレビタレント	이전 텔레비전 탤런트	N110	VHnUAr		GN				jisjk:151864		
+元テレビタレント	전 텔레비전 탤런트	N110	VHnUAr		GN				jisjk:151864		
 元ノ尻瀬戸	간노시리세토	N130	VPl		GN				jisjk:213836		
 元ノ尻瀬戸	간노시리세토	N130	VPl		GN				jisjk:213837		
 元パンナン役員	전직 팬남 임원	N110	VHn		GN				jisjk:151865		
@@ -131779,7 +131779,7 @@ ttt	ttt	K110			GN				jisjk:201744
 共同で行	공동으로 실시&AV@	M420			GN				jisjk:265584		
 共同オンラインシステム	공동 온라인 시스템	N110	VPe		BZ				jisjk:359143		
 共同コンクリート工業	교도콘크리트공업	I110	VGt		GN				jisjk:61726		
-共同テレビジョン	쿄도 텔레비전	I130	QIDVGt		GN				jisjk:61727		
+共同テレビジョン	교도 테레비전	I130	QIDVGt		GN				jisjk:61727		
 共同フロート	공동 플로트	N110	VMo		GN				jisjk:173871		
 共同プロジェクト	공동 프로젝트	K110			GN				jisjk:103850		
 共同企業体エスエスオーケイ	공동기업체 SSOK	I130	QIDVGt		GN				jisjk:61729		
@@ -131817,7 +131817,7 @@ ttt	ttt	K110			GN				jisjk:201744
 共同規制水域	공동규제수역	N110	VPl		GN				jisjk:206659		
 共同謀議	공동 모의	N110	ULw		GN				jisjk:173867		
 共同買入	공동매입	N110			BZ				jisjk:355817		
-共同通信	쿄오도통신	I130	VGt		GN				jisjk:61743		
+共同通信	교도통신	I130	VGt		GN				jisjk:61743		
 共同通信社	쿄도 통신사	I130	QIDQMSVGt		GN				jisjk:61744		
 共同運営	공동운영	N110			GN				jisjk:353977		
 共同運航	공동운항	N110			BZ				jisjk:358135		
@@ -138087,7 +138087,7 @@ ttt	ttt	K110			GN				jisjk:201744
 割り石	깬돌	N110			GN				jisjk:267933		
 割り符	부절	I110			GN				jisjk:88524		
 割り算	나눗셈	I110		Hd	GN				jisjk:88525		
-割り箸	소독저	I110	VCk		GN				jisjk:88528		
+割り箸	나무젓가락	I110	VCk		GN				jisjk:88528		
 割り註	할주	I110			GN				jisjk:88531		
 割り込	끼어&L4@	M425			GN				jisjk:103778		
 割り込	아래로 하락&AV@	M425			BZ	3987	||3 &&2 S-1== "台" ||3 S-2== "ウォン" S-2== "円" S-2== "ドル" S-1== "ドル台" &&4 S-1== "を" S-2== "ポイント" G-3== "NjNd" D-1= ""	앞에 통화 단위와 台 또는 수사ポイントを가 있으면 割り込를 아래로 하락하다로 고르고 필요한 を를 지운다. (미발동: rare-context)	jisjk:354818		-1
@@ -138225,7 +138225,7 @@ ttt	ttt	K110			GN				jisjk:201744
 割符	할부	N110	VMy		GN				jisjk:232151		
 割符	부절	N110			GN				jisjk:257006		
 割算	나눗셈	N110		Hd	GN				jisjk:104555		
-割箸	소독저	N110			GN				jisjk:38514		
+割箸	나무젓가락	N110			GN				jisjk:38514		
 割線	할선	N110	VSw		GN				jisjk:204259		
 割腹	할복	N110		Hd	GN				jisjk:38508		
 割興	할인 흥업 채권	N110	VBlVMo		GN				jisjk:257076		
@@ -149685,7 +149685,7 @@ ttt	ttt	K110			GN				jisjk:201744
 取り組みについて	대전에 관하여	N110			GN				jisjk:151511		
 取り組み姿勢	 대처자세	N110			GN				jisjk:152795		
 取り組み状況	대처 상황	I110			GN				jisjk:86811		
-取り組もうともしな	몰두하려고도 하지 $DH@	H7N0			GN				jisjk:137374		
+取り組もうともしな	착수하려고도 하지 $DH@	H7N0			GN				jisjk:137374		
 取り組んでゆ	몰두해 &A1@	M421			GN				jisjk:143763		
 取り結	&FV@	M436			GN				jisjk:95434		
 取り結	중재&AV@	M446	VHnVHn		GN				jisjk:146458		
@@ -150457,7 +150457,7 @@ ttt	ttt	K110			GN				jisjk:201744
 口を消	다짐을 &CJ@	M413			GN				jisjk:92051		
 口を濡ら	겨우 살아&A1@	M413			GN				jisjk:92053		
 口を糊	겨우 살아&A1@	M419			GN				jisjk:92057		
-口を酸っぱく	입이 닳도록 이야기 &AV@	M469			GN				jisjk:117890		
+口を酸っぱく	입이 닳도록 말&AV@	M469			GN				jisjk:117890		
 口を酸っぱくして言	입이 닳도록 이야기 &AV@	M440			GN				jisjk:118038		
 口を酸っぱして言	입이 닳도록 이야기 &AV@	M420			GN				jisjk:118088		
 口を開きかけ	말을 꺼내기 시작&AV@	M427			GN				jisjk:262102		
@@ -158872,7 +158872,7 @@ ttt	ttt	K110			GN				jisjk:201744
 四季咲岬	시키자키미사키	N130	VPl		GN				jisjk:215692		
 四季咲岬	시키자키미사키	N130	VPl		GN				jisjk:215693		
 四季咲薔薇	장미	N110	VPt		GN				jisjk:233562		
-四季桜	벚꽃의 원예종	N110	VPt		GN				jisjk:233563		
+四季桜	시키자쿠라	N110	VPt		GN				jisjk:233563		
 四季橘	귤과 저목	N110	VPt		GN				jisjk:233552		
 四季美台	시키미다이	I130	QCTVPl		GN				jisjk:297329		
 四宝	네개의 옥	N110	VSn		GN				jisjk:234266		
@@ -165765,7 +165765,7 @@ ttt	ttt	K110			GN				jisjk:201744
 売上債権回転率	매상 채권 회전률	I110			BZ				jisjk:348787		
 売上元帳	매상 원장	N110			BZ				jisjk:349318		
 売上分析	매상 분석	N110			BZ				jisjk:349319		
-売上利益率	매상 이익률	N110			BZ				jisjk:349317		
+売上利益率	매출 이익률	N110			BZ				jisjk:349317		
 売上割戻	매상공제	N110			BZ				jisjk:363686		
 売上割戻し	매상공제	N110			BZ				jisjk:349315		
 売上勘定	매상 계산	N110			BZ				jisjk:348781		
@@ -165785,24 +165785,24 @@ ttt	ttt	K110			GN				jisjk:201744
 売上純利益率	매상 순이익률	I110			BZ				jisjk:348790		
 売上純益	매상 순익	N110			BZ				jisjk:348789		
 売上総利益	매상 총이익	N110			BZ				jisjk:348797		
-売上総利益率	매상 총이익률	N110			BZ				jisjk:348798		
+売上総利益率	매출 총이익률	N110			BZ				jisjk:348798		
 売上総損失	매상 총손실	N110			BZ				jisjk:348796		
 売上計算基準	매상 계산 기준	N110			BZ				jisjk:348783		
 売上計算書	매상 계산서 	N110			BZ				jisjk:348784		
 売上送状	매상 운송장	N110			BZ				jisjk:348779		
 売上金	매상금	N110			GN				jisjk:127165		
 売上額	매상액	N110			BZ				jisjk:348780		
-売上高	매상고	I110		Ct	BZ				jisjk:68553		
+売上高	매출액	I110		Ct	BZ				jisjk:68553		
 売上高予測	매상고 예측	N110			BZ				jisjk:348802		
 売上高予算	매상고 인식	N110			BZ				jisjk:348801		
 売上高付加価値率	매상고 부가가치율	I110			BZ				jisjk:348472		
-売上高利益率	매상고 이익률	I110	UYr		BZ				jisjk:359430		
+売上高利益率	매출액 이익률	I110	UYr		BZ				jisjk:359430		
 売上高売上原価率	매상고 매상원가율	I110	UYr		BZ				jisjk:348435		
 売上高変動費比率	매상고 변동비 비율	I110			BZ				jisjk:348486		
-売上高税引き利益率	매상고 세금공제 이익률	I110	UYr		BZ				jisjk:348464		
-売上高純利益率	매상고 순이익률	I110			BZ				jisjk:348800		
+売上高税引き利益率	매출액 세후 이익률	I110	UYr		BZ				jisjk:348464		
+売上高純利益率	매출액 순이익률	I110			BZ				jisjk:348800		
 売上高経常利益率	매상고 경상 이익률	N110			BZ				jisjk:348455		
-売上高総利益率	매상고 총이익률	I110			BZ				jisjk:348463		
+売上高総利益率	매출 총이익률	I110			BZ				jisjk:348463		
 売上高限界利益率	매상고 한계 이익률	I110			BZ				jisjk:348799		
 売主	판매측	N110	VHn		BZ				jisjk:21517		
 売予約	매예약	N110			BZ				jisjk:349258		
@@ -188598,7 +188598,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小麦	밀	N110	QAOVFd		GN				jisjk:26735		
 小麦原	코무기하루	N130	QCTVPl		GN				jisjk:294119		
 小麦畝	코무기우네	N130	QCTVPl		GN				jisjk:294118		
-小麦粉	소맥분	N110	VFd		GN				jisjk:182983		
+小麦粉	밀가루	N110	VFd		GN				jisjk:182983		
 小麦粉で作った煎餠	밀전병	N110	VFd		GN				jisjk:204536		
 小麦粉の糊	밀가루풀	N110	VPa		GN				jisjk:204535		
 小麦肌	갈색피부	N110			GN				jisjk:364101		
@@ -189019,7 +189019,7 @@ ttt	ttt	K110			GN				jisjk:201744
 尻すぼ	점차 약해 &AL@	M425			GN				jisjk:341048		
 尻っ方	꽁무니	I110	VBp		GN				jisjk:61338		
 尻に火がつ	발등에 불이 떨어&AL@	M421			GN				jisjk:117518		
-尻ぬぐい	뒷처리	I110			GN				jisjk:109648		
+尻ぬぐい	뒤처리	I110			GN				jisjk:109648		
 尻もち	엉덩방아	I110			GN				jisjk:106264		
 尻をぬぐ	뒤치다꺼리&AV@	M420			GN				jisjk:117526		
 尻を叩	격려 &AV@	M421			GN				jisjk:117519		
@@ -200225,7 +200225,7 @@ ttt	ttt	K110			GN				jisjk:201744
 床挿し	꺾꽂이	N110			GN				jisjk:245830		
 床擦れ	욕창	N110			GN				jisjk:245835		
 床敷用	바닥 깔개용	I110			GN				jisjk:73580		
-床暖房	마루 난방법	N110			GN				jisjk:254757		
+床暖房	바닥 난방	N110			GN				jisjk:254757		
 床木	유카기	N130	QCTVPl		GN				jisjk:336908		
 床本	죠루리 대본	N110	VSw		GN				jisjk:8328		
 床材	바닥재	N110			GN				jisjk:100825		
@@ -200859,7 +200859,7 @@ ttt	ttt	K110			GN				jisjk:201744
 廃棄	폐기	N110		Hd	GN				jisjk:37651		
 廃棄処分	폐기처분	N110		Hd	GN				jisjk:363670		
 廃棄物	폐기물	I110			BZ				jisjk:87931		
-廃棄物処理コスト	폐기물 처리 코스트	I110			BZ				jisjk:354733		
+廃棄物処理コスト	폐기물 처리 비용	I110			BZ				jisjk:354733		
 廃棄物処理・清掃法	폐기물 처리청소법	N110	ULw		BZ				jisjk:357056		
 廃棄物処理法	폐기물 처리법	I110	ULw		BZ				jisjk:357070		
 廃業	폐업	N110		Hd	GN				jisjk:37662		
@@ -202516,7 +202516,7 @@ ttt	ttt	K110			GN				jisjk:201744
 弱行	약행	N110			GN				jisjk:194202		
 弱視	약시	N110	UTi		GN				jisjk:28770		
 弱起	못갖춘마디	N110	USoQMU		GN				jisjk:236878	000000000000000000000000000000000000000000000000000000000000000041384f113f38df46253f254f5edf411f4625453145313a32df423c3f244a004e3131300055536f514d55004d5500486e00436c000000000000006400710071006800000000000000000000000000474e000000000000000000000000352c0c3c	
-弱輩	젊은이	N110	VHn		GN				jisjk:28769		
+弱輩	애송이	N110	VHn		GN				jisjk:28769		
 弱輩者	풋내기	N110	VHn		GN				jisjk:194157		
 弱酸	약산	N110			GN				jisjk:194135		
 弱電	약전	N110			GN				jisjk:28774		
@@ -209353,7 +209353,7 @@ ttt	ttt	K110			GN				jisjk:201744
 意志	의지	N110			GN				jisjk:31040		
 意志を貫	의지를 관철&AV@	M441			GN				jisjk:144247		
 意志太牢	이시타로우	N130	QPN	Wb	GN				jisjk:345652		
-意志決定	의지결정	N110			BZ				jisjk:361845		
+意志決定	의사결정	N110			BZ				jisjk:361845		
 意志疎通	의사소통	N110		Hd	GN				jisjk:341846		
 意志薄弱	의지 박약	N110	SFl	Dd	GN				jisjk:125433		
 意思	의사	N110		Mi	GN				jisjk:31033		
@@ -212172,7 +212172,7 @@ ttt	ttt	K110			GN				jisjk:201744
 手を尽	수단을 다&AV@	M443			GN				jisjk:141964		
 手を尽く	온갖 방법을 다 &AF@	M423			GN				jisjk:117792		
 手を差しのべ	손을 내&AB@	M427			GN				jisjk:141942		
-手を広げ	여러 가지 일과 관계를 &FV@	M427			GN				jisjk:118280		
+手を広げ	손을 펼&AO@	M427			GN				jisjk:118280		
 手を広げ	관계하는 범위를 넓&AW@	M427			GN				jisjk:118281		
 手を広げ	규모를 확대&AV@	M447			GN				jisjk:142050		
 手を広げすぎ	지나치게 규모를 확대&AV@	M447			GN				jisjk:148437		
@@ -212521,7 +212521,7 @@ ttt	ttt	K110			GN				jisjk:201744
 手控えられ	유보&C6@	M417			GN				jisjk:93683		
 手揉み洗い	손빨래	N110			GN				jisjk:244594		
 手描き	손그림	N110		Hd	GN				jisjk:244422		
-手描きの	손으로 그리는	E0H0			GN				jisjk:149993		
+手描きの	손으로 그린	E0H0			GN				jisjk:149993		
 手提	손가방	N110	VCp		GN				jisjk:27246		
 手提げ	휴대용	I110			GN				jisjk:75783		
 手提げ袋	손가방	N110			GN				jisjk:160857		
@@ -213776,7 +213776,7 @@ ttt	ttt	K110			GN				jisjk:201744
 投資信託委託会社	투자신탁 위탁회사	N110	VPl		BZ				jisjk:359288		
 投資信託改革	투자신탁 개혁	N110			BZ				jisjk:352484		
 投資分野指導規定	투자 분야 지도 규정	N110			BZ				jisjk:350663		
-投資利益率	투자 이익률	N110	UYr		BZ				jisjk:359429		
+投資利益率	투자 수익률	N110	UYr		BZ				jisjk:359429		
 投資勘定	투자계정	N110			BZ				jisjk:361672		
 投資収益	투자수익	N110			BZ				jisjk:360986		
 投資収益率	투자 수익률	N110	VMo		GN				jisjk:245417		
@@ -223861,8 +223861,8 @@ ttt	ttt	K110			GN				jisjk:201744
 日本テトラポッド	일본 테트라폿드	I130	VGt		PN				jisjk:80948		
 日本テラピン	니혼테라핀	I110	VPl		GN				jisjk:80949		
 日本テレコム	일본 텔레콤	I130	VGt		PN				jisjk:80950		
-日本テレビ放送綱	닛폰 텔레비전 방송망	N110	VBlVCm		GN				jisjk:248010		
-日本テレビ放送網	일본 텔레비전 방송망	I130	VGt		PN				jisjk:80951		
+日本テレビ放送綱	닛폰 테레비 방송망	N110	VBlVCm		GN				jisjk:248010		
+日本テレビ放送網	닛폰 테레비 방송망	I130	VGt		PN				jisjk:80951		
 日本テープ	일본 테입	I130	VGt		PN				jisjk:80940		
 日本ディジタルイクイップメント	니혼디지탈이큅먼트	I110	VPl		GN				jisjk:80953		
 日本ディリークィーン	일본 데일리퀸	I130	VGt		PN				jisjk:80954		
@@ -224823,7 +224823,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日清エフデイ食品	닛신에프디식품	I110	VPl		GN				jisjk:81814		
 日清エンジニアリング	닛세이 엔지니어링	I130	VGt		PN				jisjk:81815		
 日清シスコ	닛신 시스코	I130	VGt		PN				jisjk:81816		
-日清ディーシーエー食品	닛신 D C A식품	I110			GN				jisjk:110107		
+日清ディーシーエー食品	닛신 DCA 식품	I110			GN				jisjk:110107		
 日清ハム	닛신 햄	I130	VGt		PN				jisjk:81817		
 日清ペットフード	닛신 펫푸드	I130	VGt		PN				jisjk:81818		
 日清修好条規	청일 수호 조약	N110			GN				jisjk:247988		
@@ -225116,7 +225116,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日米電気通信摩擦	일.미 전기통신 마찰	N110			BZ				jisjk:362526		
 日米韓	일·미·한	N110			GN				jisjk:257465		
 日精	닛세이	N110	VPl		GN				jisjk:31671		
-日精エー. エス。 ビー機械	닛세이 A S B 기계	I130	VGt		PN				jisjk:81741		
+日精エー. エス。 ビー機械	닛세이 ASB 기계	I130	VGt		PN				jisjk:81741		
 日精エーエスビー機械	닛세에에스비기계	I110	VPl		GN				jisjk:81742		
 日精コンピュータ	닛세이 컴퓨터	I130	VGt		PN				jisjk:81743		
 日精工業	닛세이 공업	I130	VGt		PN				jisjk:81744		
@@ -228979,8 +228979,8 @@ ttt	ttt	K110			GN				jisjk:201744
 暁町	아카츠키마치	N130	QCTVPl		GN				jisjk:269143		
 暁運輸	아카쓰키운수	I110	VGt		GN				jisjk:89915		
 暁鐘	새벽종	N110	UMe		GN				jisjk:175351		
-暁闇	새벽녘	N110	UMeVSs		GN				jisjk:123988		
-暁闇	새벽녘의 어둠	N110	VSsUMe		GN				jisjk:175306		
+暁闇	새벽 어둠	N110	UMeVSs		GN				jisjk:123988		
+暁闇	새벽 어둠	N110	VSsUMe		GN				jisjk:175306		
 暁雲	새벽녘의 구름	N110	VSsUMe		GN				jisjk:173403		
 暁鳥敏	아케가라스 하야	N110	VHn		GN				jisjk:227086		
 暇	3 틈	S500	VPl		GN				jisjk:4498		
@@ -238440,49 +238440,49 @@ ttt	ttt	K110			GN				jisjk:201744
 東浦賀町	히가시우라가쵸	I130	QCTVPl		GN				jisjk:322399		
 東浪見	도라미	I110	QCT		GN				jisjk:66780		
 東浪見	토라미	N130	QCTVPl		GN				jisjk:312482		
-東海	토카이	N130	QCT	Qq	GN				jisjk:19713		
+東海	도카이	N130	QCT	Qq	GN				jisjk:19713		
 東海	히가시우미	N130	QCTVPl		GN				jisjk:322395		
-東海くみあい飼料	토카이 쿠미아이 사료	I130	QIDVGt		GN				jisjk:67262		
-東海アルミ箔	토카이 알루미늄 박	I130	QIDVGt		GN				jisjk:67263		
+東海くみあい飼料	도카이 쿠미아이 사료	I130	QIDVGt		GN				jisjk:67262		
+東海アルミ箔	도카이 알루미늄 박	I130	QIDVGt		GN				jisjk:67263		
 東海イーシー	도카이시	I110	QCT		GN				jisjk:67264		
-東海オデヲン	토카이 오데욘	I130	QIDVGt		GN				jisjk:67265		
-東海カネカ食品販売	토카이 카네카식품판매	I130	QIDVGt		GN				jisjk:67267		
-東海カーボン	토카이  카본	I130	QIDVGt		GN				jisjk:67266		
-東海キヨスク	토카이 키오스크	I130	QIDVGt		GN				jisjk:67268		
+東海オデヲン	도카이 오데욘	I130	QIDVGt		GN				jisjk:67265		
+東海カネカ食品販売	도카이 카네카식품판매	I130	QIDVGt		GN				jisjk:67267		
+東海カーボン	도카이 카본	I130	QIDVGt		GN				jisjk:67266		
+東海キヨスク	도카이 키오스크	I130	QIDVGt		GN				jisjk:67268		
 東海クラリオン	도카이크라리온	I110	VGt		GN				jisjk:67269		
 東海コンクリート	도카이콘크리트	I110	VGt		GN				jisjk:67270		
-東海コンクリート工業	토카이 콘크리트공업	I130	QIDVGt		GN				jisjk:67271		
-東海ゴム工業	토카이 고무공업	I130	QIDVGt		GN				jisjk:67272		
+東海コンクリート工業	도카이 콘크리트공업	I130	QIDVGt		GN				jisjk:67271		
+東海ゴム工業	도카이 고무공업	I130	QIDVGt		GN				jisjk:67272		
 東海サーモ	도카이사모	I110	VGt		GN				jisjk:67273		
 東海スピナーズ	도카이스피나즈	I110	VGt		GN				jisjk:67274		
-東海スポーツ用品	토카이 스포츠용품	I130	QIDVGt		GN				jisjk:67275		
-東海テレビ放送	토카이 텔레비전방송	I130	QIDVGt		GN				jisjk:67276		
-東海トリム	토카이 트림	I130	QIDVGt		GN				jisjk:67277		
+東海スポーツ用品	도카이 스포츠용품	I130	QIDVGt		GN				jisjk:67275		
+東海テレビ放送	도카이 테레비 방송	I130	QIDVGt		GN				jisjk:67276		
+東海トリム	도카이 트림	I130	QIDVGt		GN				jisjk:67277		
 東海バネ工業	도카바네공업	I110	VGt		GN				jisjk:67278		
-東海パルプ	토카이 펄프	I130	QIDVGt		GN				jisjk:67279		
-東海ビクター	토카이 빅터	I130	QIDVGt		GN				jisjk:67280		
-東海ビレッジ	토카이 빌리지	I130	QIDVGt		GN				jisjk:67281		
+東海パルプ	도카이 펄프	I130	QIDVGt		GN				jisjk:67279		
+東海ビクター	도카이 빅터	I130	QIDVGt		GN				jisjk:67280		
+東海ビレッジ	도카이 빌리지	I130	QIDVGt		GN				jisjk:67281		
 東海フォレスト	도카이훠레스트	I110	VGt		GN				jisjk:67282		
 東海ブラザー	도카이브라자	I110	VGt		GN				jisjk:67283		
 東海プラント	도카이프랜트	I110	VGt		GN				jisjk:67284		
 東海マテリアル	도카이마테리아루	I110	VGt		GN				jisjk:67285		
-東海ラジオ放送	토카이 라디오방송	I130	QIDVGt		GN				jisjk:67286		
-東海リース	토카이 리스	I130	QIDVGt		GN				jisjk:67287		
+東海ラジオ放送	도카이 라디오방송	I130	QIDVGt		GN				jisjk:67286		
+東海リース	도카이 리스	I130	QIDVGt		GN				jisjk:67287		
 東海ロール	도카로루	I110	VGt		GN				jisjk:67288		
-東海交通機械	토카이 교통기계	I130	QIDVGt		GN				jisjk:67296		
-東海信用保証	토카이 신용보증	I130	QIDVGt		GN				jisjk:67321		
+東海交通機械	도카이 교통기계	I130	QIDVGt		GN				jisjk:67296		
+東海信用保証	도카이 신용보증	I130	QIDVGt		GN				jisjk:67321		
 東海化学工業	도카이화학공업	I110	VGt		GN				jisjk:67345		
-東海化成工業	토카이 화성공업	I130	QIDVGt		GN				jisjk:67344		
-東海協和	토카이 쿄와	I130	QIDVGt		GN				jisjk:67343		
+東海化成工業	도카이 화성공업	I130	QIDVGt		GN				jisjk:67344		
+東海協和	도카이 쿄와	I130	QIDVGt		GN				jisjk:67343		
 東海合金工業	도카합금공업	I110	VGt		GN				jisjk:67342		
 東海商事	도카이상사	I110	VGt		GN				jisjk:67317		
-東海商船	토카이 상선	I130	QIDVGt		GN				jisjk:67318		
+東海商船	도카이 상선	I130	QIDVGt		GN				jisjk:67318		
 東海土建	도카이토건	I110	VGt		GN				jisjk:67338		
 東海地方	도카이 지방	N110	VPl		GN				jisjk:245272		
 東海塗装	도카이도장	I110	VGt		GN				jisjk:67302		
-東海大	토카이대학	N130	VPlVGt		GN				jisjk:258144		
-東海大学	토카이대학	I130	VPlVGt		GN				jisjk:67301		
-東海大日本印刷	토카이 다이니혼 인쇄	I130	QIDVGt		GN				jisjk:67300		
+東海大	도카이대학	N130	VPlVGt		GN				jisjk:258144		
+東海大学	도카이대학	I130	VPlVGt		GN				jisjk:67301		
+東海大日本印刷	도카이 다이니혼 인쇄	I130	QIDVGt		GN				jisjk:67300		
 東海女子大学	도카이 여자대학	N110	VBl		GN				jisjk:245271		
 東海富士電機	도카이후지전기	I110	VGt		GN				jisjk:67315		
 東海岸	동해안	N120	VPl		GN				jisjk:159706		
@@ -238490,58 +238490,58 @@ ttt	ttt	K110			GN				jisjk:201744
 東海岸北	히가시카이강키타	I130	QCTVPl		GN				jisjk:322554		
 東海岸南	히가시카이감미나미	I130	QCTVPl		GN				jisjk:322556		
 東海岸町	히가시카이간쵸	I130	QCTVPl		GN				jisjk:322555		
-東海工業	토카이 공업	I130	QIDVGt		GN				jisjk:67293		
+東海工業	도카이 공업	I130	QIDVGt		GN				jisjk:67293		
 東海工業ミシン	도카이공업재봉틀	I130	VGt		GN				jisjk:67294		
 東海工業地域	도카이 공업지역	N110	VPl		GN				jisjk:245269		
 東海市	토우카이시	N130	QCTVPl	Qq	GN				jisjk:205640		
 東海市	동해시	N130	QCT		GN				jisjk:310790		
-東海建設	토카이 건설	I130	QIDVGt		GN				jisjk:67291		
+東海建設	도카이 건설	I130	QIDVGt		GN				jisjk:67291		
 東海撚織	도카이넨쇼쿠	I110	VGt		GN				jisjk:67299		
-東海教育産業	토카이 교육산업	I130	QIDVGt		GN				jisjk:67297		
+東海教育産業	도카이 교육산업	I130	QIDVGt		GN				jisjk:67297		
 東海散士	도카이 산시	N130	VHn		GN				jisjk:218195		
-東海旅客鉄道	토카이 여객철도	I130	QIDVGt		GN				jisjk:67305		
-東海木材相互市場	토카이 목재상호시장	I130	QIDVGt		GN				jisjk:67312		
-東海村	토카이무라	N130	QCTVPl		GN				jisjk:310795		
+東海旅客鉄道	도카이 여객철도	I130	QIDVGt		GN				jisjk:67305		
+東海木材相互市場	도카이 목재상호시장	I130	QIDVGt		GN				jisjk:67312		
+東海村	도카이무라	N130	QCTVPl		GN				jisjk:310795		
 東海東	히가시카이토우	N130	QCTVPl		GN				jisjk:322564		
-東海東京	토카이 도쿄	N130	QID		BZ				jisjk:359444		
+東海東京	도카이 도쿄	N130	QID		BZ				jisjk:359444		
 東海林	쇼오지	N130	QPN	Wa	GN				jisjk:340273		
 東海林太郎	쇼지 다로	N130	VHn		GN				jisjk:216094		
 東海林材市場	도카이림재시장	I110	VGt		GN				jisjk:67311		
 東海林武雄	쇼지 다케오	N130	VHn		GN				jisjk:216093		
 東海染工	도카이센코	I130	VGt		GN				jisjk:67323		
-東海汽船	토카이 기선	I130	QIDVGt		GN				jisjk:67298		
-東海溶材	토카이 용재	I130	QIDVGt		GN				jisjk:67324		
+東海汽船	도카이 기선	I130	QIDVGt		GN				jisjk:67298		
+東海溶材	도카이 용재	I130	QIDVGt		GN				jisjk:67324		
 東海漁場	동해어장	N110	VPl		GN				jisjk:205639		
-東海漬物製造	토카이 채소 절임제조	I130	QIDVGt		GN				jisjk:67336		
-東海澱粉	토카이 전분	I130	QIDVGt		GN				jisjk:67327		
+東海漬物製造	도카이 채소 절임제조	I130	QIDVGt		GN				jisjk:67336		
+東海澱粉	도카이 전분	I130	QIDVGt		GN				jisjk:67327		
 東海瀝青工業	도카이레키세이공업	I110	VGt		GN				jisjk:67306		
-東海物産	토카이 물산	I130	QIDVGt		GN				jisjk:67314		
-東海特殊鋼	토카이 특수강	I130	QIDVGt		GN				jisjk:67340		
-東海理化販売	토카이 이화판매	I130	QIDVGt		GN				jisjk:67310		
-東海理化電機製作所	토카이 이화전기제작소	I130	QIDVGt		GN				jisjk:67309		
-東海理機製作所	토카이 리기 제작소	I130	QIDVGt		GN				jisjk:67307		
+東海物産	도카이 물산	I130	QIDVGt		GN				jisjk:67314		
+東海特殊鋼	도카이 특수강	I130	QIDVGt		GN				jisjk:67340		
+東海理化販売	도카이 이화판매	I130	QIDVGt		GN				jisjk:67310		
+東海理化電機製作所	도카이 이화전기제작소	I130	QIDVGt		GN				jisjk:67309		
+東海理機製作所	도카이 리기 제작소	I130	QIDVGt		GN				jisjk:67307		
 東海理研	도카리켄	I110	VGt		GN				jisjk:67308		
-東海産業	토카이 산업	I130	QIDVGt		GN				jisjk:67316		
+東海産業	도카이 산업	I130	QIDVGt		GN				jisjk:67316		
 東海田	히가시카이타	N130	QCTVPl		GN				jisjk:322558		
 東海町	토우카이마치	N130	QCTVPl		GN				jisjk:310794		
 東海町	토우미마치	N130	QCTVPl		GN				jisjk:311095		
 東海神栄電子工業	도카신에전자공업	I110	VGt		GN				jisjk:67322		
-東海積水工業	토카이 세키스이공업	I130	QIDVGt		GN				jisjk:67326		
+東海積水工業	도카이 세키스이공업	I130	QIDVGt		GN				jisjk:67326		
 東海精工	도카정공	I110	VGt		GN				jisjk:67333		
 東海紙器	도카이시키	I110	VGt		GN				jisjk:67337		
 東海老坂	히가시에비사카	I130	QCTVPl		GN				jisjk:322416		
 東海自然歩道	도카이 자연보도	N110	VPl		GN				jisjk:245270		
 東海興商	도카이흥상	I110	VGt		GN				jisjk:67346		
-東海興業	토카이흥업	I130	QIDVGt		GN				jisjk:67347		
+東海興業	도카이흥업	I130	QIDVGt		GN				jisjk:67347		
 東海製紙工業	도카이제지공업	I110	VGt		GN				jisjk:67334		
-東海西濃運輸	토카이 세이노운수	I130	QIDVGt		GN				jisjk:67319		
-東海観光	토카이 관광	I130	QIDVGt		GN				jisjk:67295		
-東海販売	토오카이 판매	I130	QIDVGt		GN				jisjk:67341		
-東海貿易	토카이 무역	I130	QIDVGt		GN				jisjk:67313		
+東海西濃運輸	도카이 세이노운수	I130	QIDVGt		GN				jisjk:67319		
+東海観光	도카이 관광	I130	QIDVGt		GN				jisjk:67295		
+東海販売	도카이 판매	I130	QIDVGt		GN				jisjk:67341		
+東海貿易	도카이 무역	I130	QIDVGt		GN				jisjk:67313		
 東海通	토우카이토리	N130	QCTVPl		GN				jisjk:310793		
 東海通信工業	도카통신공업	I110	VGt		GN				jisjk:67339		
 東海造船運輸	도카조선운수	I110	VGt		GN				jisjk:67335		
-東海道	토오카이도	N110	QCT		GN				jisjk:67303		
+東海道	도카이도	N110	QCT		GN				jisjk:67303		
 東海道五十三次	도카이도 53차	N110	VBl		GN				jisjk:245273		
 東海道名所記	도카이도 명소기	N110	VBkVSw		GN				jisjk:245276		
 東海道四谷怪談	도카이요츠야 괴기담	N110	VBkVSw		GN				jisjk:245277		
@@ -238549,16 +238549,16 @@ ttt	ttt	K110			GN				jisjk:201744
 東海道本線	도카이도 본선	N110	VTp		GN				jisjk:245275		
 東海道立公園	동해도립공원	N130	VPl		GN				jisjk:205641		
 東海道線	동해도선	I110	VGt		GN				jisjk:67304		
-東海銀行	토카이 은행	I130	QIDVGt		GN				jisjk:67325		
-東海鋼材工業	토카이 강재공업	I130	QIDVGt		GN				jisjk:67290		
-東海鋼業	토카이 강업	I130	QIDVGt		GN				jisjk:67289		
-東海電化工業	토카이 전화공업	I130	QIDVGt		GN				jisjk:67332		
-東海電工	토카이 전공	I130	QIDVGt		GN				jisjk:67328		
+東海銀行	도카이 은행	I130	QIDVGt		GN				jisjk:67325		
+東海鋼材工業	도카이 강재공업	I130	QIDVGt		GN				jisjk:67290		
+東海鋼業	도카이 강업	I130	QIDVGt		GN				jisjk:67289		
+東海電化工業	도카이 전화공업	I130	QIDVGt		GN				jisjk:67332		
+東海電工	도카이 전공	I130	QIDVGt		GN				jisjk:67328		
 東海電機	도카이전기	I110	VGt		GN				jisjk:67329		
-東海電気	토카이 전기	I130	QIDVGt		GN				jisjk:67330		
+東海電気	도카이 전기	I130	QIDVGt		GN				jisjk:67330		
 東海電設	도카이덴세쓰	I110	VGt		GN				jisjk:67331		
 東海食糧	도카이식량	I110	VGt		GN				jisjk:67320		
-東海高熱工業	토카이 고열공업	I130	QIDVGt		GN				jisjk:67292		
+東海高熱工業	도카이 고열공업	I130	QIDVGt		GN				jisjk:67292		
 東海高速道路	동해고속도로	N110	VPl		GN				jisjk:205642		
 東淀川	히가시요도가와	N130	QCT	Qq	GN				jisjk:67183		
 東淀川区	히가시요도가와구	I130	QCTVPl	Qq	GN				jisjk:220087		
@@ -243207,7 +243207,7 @@ ttt	ttt	K110			GN				jisjk:201744
 株主議決権	주주 의결권	N110			BZ				jisjk:352680		
 株主資本	주주자본	N110	VMoVMy		BZ				jisjk:349089		
 株主資本コスト	주주자본 코스트	N110	VMy		BZ				jisjk:354559		
-株主資本利益率	주주자본 이익률	N110			BZ				jisjk:352684		
+株主資本利益率	자기자본이익률	N110			BZ				jisjk:352684		
 株主資本回転率	주주 자본회전율	N110			BZ				jisjk:348980		
 株主資本比率	주주자본 비율	N110			BZ				jisjk:352402		
 株主配当金	주주배당금	I110			GN				jisjk:109190		
@@ -249031,7 +249031,7 @@ ttt	ttt	K110			GN				jisjk:201744
 機銃	기관총	N110	VTw		GN				jisjk:17780		
 機長	기장	N110	VMoVHnVTp		GN				jisjk:172448		
 機関	기관	N110	QMS		GN				jisjk:17758		
-機関人形	꼭두각시	N110	VHn		GN				jisjk:169587		
+機関人形	태엽 인형	N110	VHn		GN				jisjk:169587		
 機関仲裁	기관 중재	N110			BZ				jisjk:355286		
 機関化	기관화	N110	 		GN				jisjk:360936		
 機関商業	기관상업	N110	QID		GN				jisjk:206198		
@@ -269886,8 +269886,8 @@ ttt	ttt	K110			GN				jisjk:201744
 爪先	발끝	N110	VPl		GN				jisjk:33628		
 爪冠	손톱조머리	N110			GN				jisjk:244124		
 爪切り	손톱깎이	I110			GN				jisjk:83693		
-爪切りばさみ	손톱깎이	I110			GN				jisjk:83694		
-爪切り鋏	손톱깎기용 가위	N110	VPe		GN				jisjk:244126		
+爪切りばさみ	손톱 가위	I110			GN				jisjk:83694		
+爪切り鋏	손톱 가위	N110	VPe		GN				jisjk:244126		
 爪刷毛	손톱솔	I110			GN				jisjk:105967		
 爪印	손도장	N110	VSw		GN				jisjk:33629		
 爪咬み	손톱 물어뜯기	N110			GN				jisjk:244123		
@@ -270190,7 +270190,7 @@ ttt	ttt	K110			GN				jisjk:201744
 片柳町	카타야나기쵸	N130	QCTVPl		GN				jisjk:282402		
 片柴	카타시바	N130	QCTVPl		GN				jisjk:282302		
 片栗	가타쿠리	N110	VFdVMa		GN				jisjk:203360		
-片栗粉	녹말	I110			GN				jisjk:87778		
+片栗粉	녹말가루	I110			GN				jisjk:87778		
 片桐	가타기리	N110	QCT		GN				jisjk:37510		
 片桐	카타기리	N130	QCTVPl		GN				jisjk:282273		
 片桐且元	가타기리 가쓰모토	N110	VHn		GN				jisjk:228805		
@@ -274927,7 +274927,7 @@ ttt	ttt	K110			GN				jisjk:201744
 生物反応装置	생물반응장치	N110	VPe		BZ				jisjk:358811		
 生物圏	생물권	I110	URt		GN				jisjk:73754		
 生物地理学	생물 지리학	N110	UTh		GN				jisjk:238736		
-生物多様性条約	생물 다양성 조약	N110			BZ				jisjk:358796		
+生物多様性条約	생물다양성 협약	N110			BZ				jisjk:358796		
 生物季節	생물 계절	N110			GN				jisjk:238729		
 生物学	생물학	I110	USu		GN				jisjk:114842		
 生物学的脱窒素法	생물학적 탈질소법	I110	UMn		BZ				jisjk:358771		
@@ -291417,7 +291417,7 @@ ttt	ttt	K110			GN				jisjk:201744
 積重ね	겹쳐 쌓아올&AA@	M447			GN				jisjk:143509		
 積量	적재량	N110			BZ				jisjk:362158		
 積金	적금	N110	VMo		GN				jisjk:32515		
-積集合	적집합	N110			GN				jisjk:238933		
+積集合	교집합	N110			GN				jisjk:238933		
 積雪	적설	N110	VFr		GN				jisjk:32518		
 積雪前	적설전	N110			GN				jisjk:257800		
 積雪量	적설량	I110			GN				jisjk:82552		
@@ -299738,7 +299738,7 @@ ttt	ttt	K110			GN				jisjk:201744
 絡め	연결시&AQ@	M467			GN	4507	||4 &&3 M+0== "59*" ||2 S-2== "R点" S-2== "ゴール" Y+0= "1지 못하고" &&3 M+0== "59*" ||2 S-1== "R点" S-1== "ゴール" Y+0= "1지 못하고" ||2 S-2== "R点" S-2== "ゴール" ||2 S-1== "R点" S-1== "ゴール"	앞 한두 단어 안에 点로 끝나는 말이나 ゴール이 있으면 絡め를 연결시키다로 고르고 부정 연결 어미는 지 못하고로 바꾼다. (미발동: rare-context)	jisjk:365239		
 絡子	낙자	N110	VPe		GN				jisjk:255498		
 絡繰	장치	N110	VPe		GN				jisjk:169586		
-絡繰り人形	꼭두각시	I110			GN				jisjk:67568		
+絡繰り人形	태엽 인형	I110			GN				jisjk:67568		
 絡繰り眼鏡	요지경	I110			GN				jisjk:67567		
 絢一郎	켄이치로우	N130	QPN	Wb	GN				jisjk:356778		
 絢燗	현란	N110			GN				jisjk:38997		
@@ -300422,7 +300422,7 @@ ttt	ttt	K110			GN				jisjk:201744
 網引き	줄다리기	N110	VRw	Hd	GN				jisjk:7513		
 網引町	아비키쵸	N130	QCTVPl		GN				jisjk:270359		
 網引町	아비키마치	N130	QCTVPl		GN				jisjk:270360		
-網戸	망창	N110			GN				jisjk:21435		
+網戸	방충망	N110			GN				jisjk:21435		
 網戸	아지토	N130	QCTVPl		GN				jisjk:269956		
 網戸瀬町	아도세쵸	I130	QCTVPl		GN				jisjk:270273		
 網打ち	투망질	N110		Hd	GN				jisjk:124798		
@@ -300896,7 +300896,7 @@ ttt	ttt	K110			GN				jisjk:201744
 総点	총점	N110		Ct	GN				jisjk:36053		
 総点検	총점검	N110		Hd	GN				jisjk:160667		
 総状	총상	N110			GN				jisjk:240100		
-総状花序	총상화서	N110			GN				jisjk:240103		
+総状花序	총상 꽃차례	N110			GN				jisjk:240103		
 総理	총리	N110	VHnUQf		GN				jisjk:36037		
 総理大臣	총리대신	I110	UAqURt		GN				jisjk:86442		
 総理室	총리실	N110	VBl		GN				jisjk:200511		
@@ -304423,8 +304423,8 @@ ttt	ttt	K110			GN				jisjk:201744
 聞くに忍びな	듣기 거북$AB@	H7N0	SFl		GN				jisjk:120268		
 聞くに耐えな	차마 들을 수 $FA@	H7N0			GN				jisjk:120270		
 聞く程に	들을수록	N110			GN				jisjk:230606		
-聞く耳持たな	들으려고도 하지  $D7@	H8U0			GN				jisjk:260730		
-聞く耳持たな	들으려고도 하지  $D7@	H7U0			GN				jisjk:260731		
+聞く耳持たな	들으려고도 하지 $D7@	H8U0			GN				jisjk:260730		
+聞く耳持たな	들으려고도 하지 $D7@	H7U0			GN				jisjk:260731		
 聞こえ	소문	N110	UTs		GN				jisjk:7565		
 聞こえ	들&AA@	M417	UHr		GN				jisjk:7566		
 聞こえがい	듣기에는 $DE@	H7U0		Pn	GN				jisjk:344502		
@@ -306641,7 +306641,7 @@ ttt	ttt	K110			GN				jisjk:201744
 臆	겁&HU@	M4U9	SFl		GN				jisjk:145631		
 臆測	억측	N110	SFl	Hd	GN				jisjk:165145		
 臆病	겁쟁이	N110	VHn		GN				jisjk:29068		
-臆病	겁쟁이%D4@	G8U0			GN				jisjk:375158		
+臆病	겁이 %DH@	G8U0			GN				jisjk:375158		
 臆病もの	겁쟁이	N110			GN				jisjk:373559		
 臆病者	겁쟁이	N110	VHnSFl		GN				jisjk:165173		
 臆病風	겁	N110			GN				jisjk:78097		
@@ -311272,31 +311272,31 @@ ttt	ttt	K110			GN				jisjk:201744
 茨城	이바라키	N130	QCTVPl	Qq	GN				jisjk:31973		
 茨城カントリークラブ	이바라키 컨츄리클럽	N110	VGt		BZ				jisjk:350708		
 茨城キリスト教	이바라키기독교	N110	VBl		GN				jisjk:126136		
-茨城スバル自動車	이바라기 스바루자동차	I110			GN				jisjk:109725		
+茨城スバル自動車	이바라키 스바루자동차	I110			GN				jisjk:109725		
 茨城セキスイハイム	이바라키 세키수이하임	I130	VGt		PN				jisjk:82135		
-茨城ダイハツ販売	이바라기 다이하쯔판매	I110			GN				jisjk:109752		
-茨城トヨタ自動車	이바라기 토요타자동차	I110			GN				jisjk:109753		
-茨城トヨペット	이바라기 토요 애완	I110			GN				jisjk:109851		
+茨城ダイハツ販売	이바라키 다이하쯔판매	I110			GN				jisjk:109752		
+茨城トヨタ自動車	이바라키 토요타자동차	I110			GN				jisjk:109753		
+茨城トヨペット	이바라키 토요펫	I110			GN				jisjk:109851		
 茨城リズム	이바라리듬	I110	VGt		GN				jisjk:82136		
-茨城三菱ふそう自動車販売	이바라기 미쓰비시후소자동차판매	I110			GN				jisjk:109826		
-茨城化成	이바라기카세	I110	QCT		GN				jisjk:82140		
+茨城三菱ふそう自動車販売	이바라키 미쓰비시후소자동차판매	I110			GN				jisjk:109826		
+茨城化成	이바라키카세	I110	QCT		GN				jisjk:82140		
 茨城塩元売	이바라키시모토리	I110	QCT		GN				jisjk:82138		
 茨城大学	이바라키 대학	N130	VBlVPlVGt		GN				jisjk:361144		
 茨城女子	이바라키여자	N110	VBl		GN				jisjk:126133		
 茨城放送	이바라키 방송	N120	VCmVPl		GN				jisjk:126135		
-茨城日本電気	이바라기 일본전기	I110			GN				jisjk:109842		
-茨城日産自動車	이바라기 닛산자동차	I110			GN				jisjk:109834		
-茨城日野ヂーゼル	이바라기 히노 디젤	I110			GN				jisjk:109832		
-茨城日野自動車	이바라기 히노자동차	I110			GN				jisjk:109830		
+茨城日本電気	이바라키 일본전기	I110			GN				jisjk:109842		
+茨城日産自動車	이바라키 닛산자동차	I110			GN				jisjk:109834		
+茨城日野ヂーゼル	이바라키 히노 디젤	I110			GN				jisjk:109832		
+茨城日野自動車	이바라키 히노자동차	I110			GN				jisjk:109830		
 茨城水産	이바라키 수산	I130	VGt		PN				jisjk:82137		
 茨城町	이바라키마치	N130	QCTVPl		GN				jisjk:273667		
 茨城県	이바라키현	N130	QCTVPl	Qq	GN				jisjk:273666		
-茨城県信用組合	이바라기현 신용조합	I110			GN				jisjk:109837		
-茨城県厚生農業協同組合連合	이바라기현 후생농업협동조합연합	I110			GN				jisjk:109841		
-茨城県大同青果	이바라기현 다이도청과	I110			GN				jisjk:109836		
-茨城県漁業協同組合連合会	이바라기현 어업협동조합연합회	I110			GN				jisjk:109839		
-茨城県経済農業協同組合連合	이바라기현 경제농업협동조합연합	I110			GN				jisjk:109840		
-茨城県食糧販売協同組合	이바라기현 식량판매협동조합	I110			GN				jisjk:109838		
+茨城県信用組合	이바라키현 신용조합	I110			GN				jisjk:109837		
+茨城県厚生農業協同組合連合	이바라키현 후생농업협동조합연합	I110			GN				jisjk:109841		
+茨城県大同青果	이바라키현 다이도청과	I110			GN				jisjk:109836		
+茨城県漁業協同組合連合会	이바라키현 어업협동조합연합회	I110			GN				jisjk:109839		
+茨城県経済農業協同組合連合	이바라키현 경제농업협동조합연합	I110			GN				jisjk:109840		
+茨城県食糧販売協同組合	이바라키현 식량판매협동조합	I110			GN				jisjk:109838		
 茨城通運	이바라키 통운	N120	VMoVPl		GN				jisjk:126134		
 茨城銀行	이바라키 은행	I130	VGt		PN				jisjk:82139		
 茨山	이바라야마	N130	QCTVPl		GN				jisjk:273676		
@@ -311556,7 +311556,7 @@ ttt	ttt	K110			GN				jisjk:201744
 草の根	민중	N110			GN				jisjk:362382		
 草の根BBS	매니어 BBS	N110			IT				jisjk:261165		
 草の根を分けても	무슨 수를 다 써서라도	A9D0			GN				jisjk:117347		
-草の根連携	무명대중 연계	I110			GN				jisjk:110853		
+草の根連携	풀뿌리 연계	I110			GN				jisjk:110853		
 草ぶき	초가 지붕	N110	VBl		GN				jisjk:175867		
 草むら	풀숲	I110			GN				jisjk:86344		
 草もち	쑥떡	N110	VFd		GN				jisjk:175876		
@@ -323849,8 +323849,8 @@ ttt	ttt	K110			GN				jisjk:201744
 角偏	부수의 이름	N110			GN				jisjk:244039		
 角兄麻呂	로쿠노 에마로	N130	VHn		GN				jisjk:223696		
 角切	츠노키리	N130	QCTVPl		GN				jisjk:309793		
-角刈	치켜 깎음	N110			GN				jisjk:14478		
-角刈り	치켜 깎음	I110		Hd	GN				jisjk:60335		
+角刈	스포츠머리	N110			GN				jisjk:14478		
+角刈り	스포츠머리	I110		Hd	GN				jisjk:60335		
 角割町	카쿠와리쵸	N130	QCTVPl		GN				jisjk:281563		
 角力	각력	N110			GN				jisjk:14469		
 角力灘	스모나다	I110	QCT		GN				jisjk:60321		
@@ -330836,7 +330836,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤字転落	적자전락	N110			BZ				jisjk:350147		
 赤字金融	적자금융	N110			BZ				jisjk:348641		
 赤宇木	아코우기	N130	QCTVPl		GN				jisjk:269522		
-赤家蚊	집모기	N110	VAm		GN				jisjk:226865		
+赤家蚊	빨간집모기	N110	VAm		GN				jisjk:226865		
 赤富士	붉은 후지산	N110	VPl		GN				jisjk:226944		
 赤小灰蝶	나비	N110	VAm		GN				jisjk:226906		
 赤小豆	붉은 팥	I110			GN				jisjk:82613		
@@ -343792,7 +343792,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鉄扉	철문	N110	VBl		GN				jisjk:244512		
 鉄拐山	뎃카이잔	I110	QCT		GN				jisjk:86129		
 鉄拳	철권	N110			GN				jisjk:35643		
-鉄拳制裁	철권제재	N110			GN				jisjk:244497		
+鉄拳制裁	철권 제재	N110			GN				jisjk:244497		
 鉄挺	철정	N110			GN				jisjk:35672		
 鉄損	철손	N110			GN				jisjk:244507		
 鉄損値	철손치	I110			GN				jisjk:102920		
@@ -353318,7 +353318,7 @@ ttt	ttt	K110			GN				jisjk:201744
 静岡県水産	시즈오카켄수산	I110			GN				jisjk:110413		
 静岡県立	시즈오카켄리쓰	N120	VPl		GN				jisjk:187401		
 静岡県立大学	시즈오카 공립대학	N110	VBl		GN				jisjk:233828		
-静岡第一テレビ	시즈오카 다이이치 텔레비전	N110	VCmVBl		GN				jisjk:187407		
+静岡第一テレビ	시즈오카 다이이치 테레비	N110	VCmVBl		GN				jisjk:187407		
 静岡米穀	시즈오카베코쿠우로시	I110	VGt		GN				jisjk:83306		
 静岡精華	시즈오카세이카	N120	VPl		GN				jisjk:187404		
 静岡製機	시즈오카세이키	I130	VGt		GN				jisjk:83314		
@@ -362872,40 +362872,40 @@ ttt	ttt	K110			GN				jisjk:201744
 鹿俣町	카나마타쵸	N130	QCTVPl		GN				jisjk:282820		
 鹿倉	시카쿠라	N130	QPN	Wa	GN				jisjk:7348		
 鹿倉	카쿠라	N130	QCTVPl		GN				jisjk:281554		
-鹿児島	카고시마	N130	QCTVPl	Qq	GN				jisjk:64376		
-鹿児島	카고시마	N130	QPN	Wa	GN				jisjk:345556		
-鹿児島いずみ農業協同組合	카고시마 이즈미 농업협동조합	I110			GN				jisjk:109678		
-鹿児島きもつき農業協同組合	카고시마 키모츠키 농업협동조합	I110			GN				jisjk:109679		
-鹿児島くみあいチキンフーズ	카고시마조합 치킨푸드	I110			GN				jisjk:109681		
+鹿児島	가고시마	N130	QCTVPl	Qq	GN				jisjk:64376		
+鹿児島	가고시마	N130	QPN	Wa	GN				jisjk:345556		
+鹿児島いずみ農業協同組合	가고시마 이즈미 농업협동조합	I110			GN				jisjk:109678		
+鹿児島きもつき農業協同組合	가고시마 키모츠키 농업협동조합	I110			GN				jisjk:109679		
+鹿児島くみあいチキンフーズ	가고시마조합 치킨푸드	I110			GN				jisjk:109681		
 鹿児島くみあい米穀	가고시마쿠미아이미곡	I110	VGt		GN				jisjk:64377		
 鹿児島トヨタ	가고시마토요타	I130			GN				jisjk:108912		
 鹿児島トヨペット	가고시마토요페토	I110	VGt		GN				jisjk:64378		
-鹿児島トヨペツト	카고시마 토요 애완	I110			GN				jisjk:109682		
-鹿児島ドック鉄工	카고시마도크철공	I130			GN				jisjk:108930		
-鹿児島リース	카고시마 리스	I130	QIDVGt		GN				jisjk:64379		
-鹿児島三越	카고시마 미츠코시	I130	QIDVGt		GN				jisjk:64380		
-鹿児島信用金庫	카고시마신용금고	I130			GN				jisjk:108888		
-鹿児島大学	카고시마 대학	N130	VBlVPlVGt		GN				jisjk:361151		
+鹿児島トヨペツト	가고시마 토요펫	I110			GN				jisjk:109682		
+鹿児島ドック鉄工	가고시마도크철공	I130			GN				jisjk:108930		
+鹿児島リース	가고시마 리스	I130	QIDVGt		GN				jisjk:64379		
+鹿児島三越	가고시마 미츠코시	I130	QIDVGt		GN				jisjk:64380		
+鹿児島信用金庫	가고시마신용금고	I130			GN				jisjk:108888		
+鹿児島大学	가고시마 대학	N130	VBlVPlVGt		GN				jisjk:361151		
 鹿児島女子	가고시마여자	N110	VBl		GN				jisjk:168034		
 鹿児島寿蔵	가고시마 주조	N110	VHn		GN				jisjk:213123		
-鹿児島市	카고시마시	I130	QCTVPl	Qq	GN				jisjk:281682		
-鹿児島日本ハム	카고시마 일본햄	I110			GN				jisjk:109697		
+鹿児島市	가고시마시	I130	QCTVPl	Qq	GN				jisjk:281682		
+鹿児島日本ハム	가고시마 일본햄	I110			GN				jisjk:109697		
 鹿児島日本電気	가고시마니혼전기	I110	VGt		GN				jisjk:64384		
 鹿児島松下	가고시마마츠시타	I110	VGt		GN				jisjk:64381		
-鹿児島松下電子	카고시마 마츠시타전자	I110			GN				jisjk:109691		
-鹿児島相互信用金庫	카고시마 상호신용금고	I110			GN				jisjk:109693		
-鹿児島県	카고시마현	N130	QCTVPl	Qq	GN				jisjk:281681		
-鹿児島県信用農業協同組合連合	카고시마현 신용농업협동조합연합	I110			GN				jisjk:109689		
-鹿児島県共済農業協同組合連合	카고시마현 공제농업협동조합연합	I110			GN				jisjk:109685		
-鹿児島県漁業協同組合連合会	카고시마현 어업협동조합연합회	I110			GN				jisjk:109684		
-鹿児島県立	카고시마 현립	N130			GN				jisjk:366439		
-鹿児島県経済農業協同組合連合	카고시마현 경제농업협동조합연합	I110			GN				jisjk:109686		
+鹿児島松下電子	가고시마 마츠시타전자	I110			GN				jisjk:109691		
+鹿児島相互信用金庫	가고시마 상호신용금고	I110			GN				jisjk:109693		
+鹿児島県	가고시마현	N130	QCTVPl	Qq	GN				jisjk:281681		
+鹿児島県信用農業協同組合連合	가고시마현 신용농업협동조합연합	I110			GN				jisjk:109689		
+鹿児島県共済農業協同組合連合	가고시마현 공제농업협동조합연합	I110			GN				jisjk:109685		
+鹿児島県漁業協同組合連合会	가고시마현 어업협동조합연합회	I110			GN				jisjk:109684		
+鹿児島県立	가고시마 현립	N130			GN				jisjk:366439		
+鹿児島県経済農業協同組合連合	가고시마현 경제농업협동조합연합	I110			GN				jisjk:109686		
 鹿児島県農協直販	가고시마농협직판	I110	VGt		GN				jisjk:64386		
-鹿児島県開拓畜産農業協同組合	카고시마현 개척축산농업협동조합	I110			GN				jisjk:109683		
+鹿児島県開拓畜産農業協同組合	가고시마현 개척축산농업협동조합	I110			GN				jisjk:109683		
 鹿児島積水	가고시마세키스이	I110	VGt		GN				jisjk:64385		
-鹿児島郡	카고시마군	I130	QCTVPl	Qq	GN				jisjk:281680		
-鹿児島銀行	카고시마 은행	I130	QIDVGt		GN				jisjk:64383		
-鹿児島魚市	카고시마 어시	I130	QIDVGt		GN				jisjk:64382		
+鹿児島郡	가고시마군	I130	QCTVPl	Qq	GN				jisjk:281680		
+鹿児島銀行	가고시마 은행	I130	QIDVGt		GN				jisjk:64383		
+鹿児島魚市	가고시마 어시	I130	QIDVGt		GN				jisjk:64382		
 鹿児嶋	카고시마	N130	QPN	Wa	GN				jisjk:64387		
 鹿内	시카나이	N130	QPN	Wa	GN				jisjk:18316		
 鹿内	시카우치	N130	QPN	Wa	GN				jisjk:297183		

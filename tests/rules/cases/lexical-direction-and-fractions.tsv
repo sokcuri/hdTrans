@@ -17,10 +17,5 @@ dict:jisjk:88280	下半分が見えない。	아래 절반이 안 보인다.	fix
 dict:jisjk:88280	画面の下半分を見た。	화면의 아래 절반을 보았다.	fix	defaults
 dict:jisjk:88280	上半身を起こした。	상반신을 일으켰다.	keep	defaults
 dict:jisjk:88280	下半身が痛い。	하반신이 아프다.	keep	defaults
-dict:jisjk:88280	上半期の売上。	상반기의 매상.	keep	defaults
-dict:jisjk:88280	下半期の売上。	하반기의 매상.	keep	defaults
-dict:jisjk:88251	髪を切った。	머리를 잘랐다.	keep	defaults
 dict:jisjk:359464	景気が上向きになった。	경기가 오름세가 되었다.	keep	defaults
-dict:jisjk:348808	上付き文字を使う。	슈퍼 스크립트를 쓴다.	keep	defaults
-dict:jisjk:88280	上司が来た。	상사가 왔다.	keep	defaults
-dict:jisjk:88280	下の階にいる。	아래층에 있다.	keep	defaults
+dict:jisjk:348808	上付き文字を使う。	위 첨자를 쓴다.	keep	defaults

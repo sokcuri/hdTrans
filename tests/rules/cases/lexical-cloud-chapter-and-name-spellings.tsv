@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:173404	きょううん	새벽녘의 구름	fix	defaults
 dict:jisjk:173404	きょううんが見える。	새벽녘의 구름이 보인다.	fix	defaults
@@ -36,10 +36,6 @@ dict:jisjk:126088	犬遠吠え	겁쟁이의 허세	fix	defaults
 dict:jisjk:126088	犬遠吠え。	겁쟁이의 허세.	fix	defaults
 dict:jisjk:126088	犬遠吠えを見た。	겁쟁이의 허세를 보았다.	fix	defaults
 dict:jisjk:126088	「犬遠吠え」	「겁쟁이의 허세」	fix	defaults
-dict:jisjk:144286	痛い目に遭った。	아픈 변을 당했다.	keep	defaults
-dict:jisjk:144286	痛い目に遭う。	아픈 변을 당한다.	keep	defaults
-dict:jisjk:144286	痛い目に遭わない。	아픈 변을 당하지 않는다.	keep	defaults
-dict:jisjk:144286	痛い目に遭えば分かる。	아픈 변을 당하면 안다.	keep	defaults
 dict:jisjk:253307	目垢	눈곱	fix	defaults
 dict:jisjk:253307	目垢。	눈곱.	fix	defaults
 dict:jisjk:253307	目垢を見た。	눈곱을 보았다.	fix	defaults
@@ -65,24 +61,8 @@ dict:jisjk:253307	目あか	눈곱	fix	defaults
 dict:jisjk:253307	目あか。	눈곱.	fix	defaults
 dict:jisjk:253307	目あかを見た。	눈곱을 보았다.	fix	defaults
 dict:jisjk:253307	「目あか」	「눈곱」	fix	defaults
-dict:jisjk:253307	明け方。	새벽녘.	keep	defaults
-dict:jisjk:253307	夜明けの空。	새벽녘의 하늘.	keep	defaults
 dict:jisjk:253307	目やに。	눈곱.	keep	defaults
 dict:jisjk:253307	目脂。	눈곱.	keep	defaults
-dict:jisjk:253307	鍛冶屋。	대장간.	keep	defaults
-dict:jisjk:253307	大工。	목수.	keep	defaults
-dict:jisjk:253307	くぎゅ。	쿠규.	keep	defaults
-dict:jisjk:253307	ロイド。	로이드.	keep	defaults
-dict:jisjk:253307	合わせ盛り。	모둠.	keep	defaults
-dict:jisjk:253307	利益。	이익.	keep	defaults
-dict:jisjk:253307	利用率。	이용률.	keep	defaults
-dict:jisjk:253307	広島町。	히로시마초.	keep	defaults
-dict:jisjk:253307	東池袋。	히가시이케부쿠로.	keep	defaults
-dict:jisjk:253307	35(t)戦車。	35(t) 전차.	keep	defaults
-dict:jisjk:253307	38(t)戦車。	38(t) 전차.	keep	defaults
-dict:jisjk:253307	chapter 3	chapter 3	keep	defaults
-dict:jisjk:253307	I110	I110	keep	defaults
-dict:jisjk:253307	怖がり。	겁쟁이.	keep	defaults
 dict:names.199363	スパイダー・ドーパント	스파이더 도펀트	fix	fixed
 dict:names.199363	スパイダー・ドーパント。	스파이더 도펀트.	fix	fixed
 dict:names.199363	「スパイダー・ドーパント」	「스파이더 도펀트」	fix	fixed
@@ -96,7 +76,6 @@ dict:names.346570	「マスカレイド・ドーパント」	「마스커레이�
 dict:names.346570	マスカレイド・ドーパントを見た。	마스커레이드 도펀트를 보았다.	fix	fixed
 dict:names.346570	マスカレイド・ドーパントの名前。	마스커레이드 도펀트의 이름.	fix	fixed
 dict:names.31761	アクセル・ドーパント	액셀 도펀트	keep	fixed
-dict:names.349960	マネー・ドーパント	머니 도펀트	keep	fixed
 dict:names.10050	UFO・ドーパント	UFO 도펀트	keep	fixed
 dict:jisjk:161962	ドレイン	드레인	keep	defaults
 dict:names.122170	ギガドレイン	기가드레인	keep	fixed

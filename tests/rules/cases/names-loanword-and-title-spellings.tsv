@@ -46,8 +46,8 @@ lexical:spelling-and-command-terms	DO文	DO문	keep	defaults
 lexical:spelling-and-command-terms	仕事の終わり。	일의 끝.	keep	defaults
 lexical:spelling-and-command-terms	なんか変だ。	왠지 이상하다.	keep	defaults
 lexical:spelling-and-command-terms	怖い。	무섭다.	keep	defaults
-lexical:spelling-and-command-terms	臆病な人。	겁쟁이인 사람.	fix	defaults
-lexical:spelling-and-command-terms	臆病だった。	겁쟁이였다.	fix	defaults
+lexical:spelling-and-command-terms	臆病な人。	겁이 많은 사람.	fix	defaults
+lexical:spelling-and-command-terms	臆病だった。	겁이 많았다.	fix	defaults
 lexical:spelling-and-command-terms	英姿	훌륭한 모습	fix	defaults
 lexical:spelling-and-command-terms	英姿を見た。	훌륭한 모습을 보았다.	fix	defaults
 lexical:spelling-and-command-terms	馬鹿を言う。	어리석은 소리를 한다.	fix	defaults

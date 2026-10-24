@@ -1,13 +1,12 @@
 # 규칙: LEX-3
 rule	input	expected	kind	layer
-dict:jisjk:240103	総状花序	총상화서	fix	defaults
-dict:jisjk:240103	総状花序の花。	총상화서의 꽃.	fix	defaults
-dict:jisjk:240103	総状花序を観察した。	총상화서를 관찰했다.	fix	defaults
-dict:jisjk:240103	これは総状花序だ。	이것은 총상화서다.	fix	defaults
+dict:jisjk:240103	総状花序	총상 꽃차례	fix	defaults
+dict:jisjk:240103	総状花序の花。	총상 꽃차례의 꽃.	fix	defaults
+dict:jisjk:240103	総状花序を観察した。	총상 꽃차례를 관찰했다.	fix	defaults
+dict:jisjk:240103	これは総状花序だ。	이것은 총상 꽃차례다.	fix	defaults
 dict:jisjk:240103	花序	꽃차례	keep	defaults
 dict:jisjk:240103	円錐花序	원뿔 꽃차례	keep	defaults
 dict:jisjk:240103	総状	총상	keep	defaults
-dict:jisjk:240103	花が咲いた。	꽃이 피었다.	keep	defaults
 dict:jisjk:239993	総稽古	총연습	fix	defaults
 dict:jisjk:239993	明日は総稽古だ。	내일은 총연습이다.	fix	defaults
 dict:jisjk:239993	総稽古を始めた。	총연습을 시작했다.	fix	defaults

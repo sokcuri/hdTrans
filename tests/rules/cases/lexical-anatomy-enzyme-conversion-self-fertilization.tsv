@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:234317	脂肪塊	지방 덩어리	fix	defaults
 dict:jisjk:234317	脂肪塊を取り除く。	지방 덩어리를 없앤다.	fix	defaults
@@ -8,17 +8,14 @@ dict:jisjk:234317	脂肪細胞	지방세포	keep	defaults
 dict:jisjk:252666	脈岩	암맥	fix	defaults
 dict:jisjk:252666	脈岩を調べる。	암맥을 조사한다.	fix	defaults
 dict:jisjk:252666	脈岩の構造。	암맥의 구조.	fix	defaults
-dict:jisjk:252666	血管	혈관	keep	defaults
 dict:jisjk:252666	岩脈	암맥	keep	defaults
 dict:jisjk:242338	脱水素酵素	탈수소효소	fix	defaults
 dict:jisjk:242338	脱水素酵素を調べる。	탈수소효소를 조사한다.	fix	defaults
 dict:jisjk:242338	脱水素酵素の構造。	탈수소효소의 구조.	fix	defaults
 dict:jisjk:242338	脱水素反応	탈수소반응	keep	defaults
-dict:jisjk:242338	酸素	산소	keep	defaults
 dict:jisjk:257547	腱鞘	건초	fix	defaults
 dict:jisjk:257547	腱鞘を調べる。	건초를 조사한다.	fix	defaults
 dict:jisjk:257547	腱鞘の構造。	건초의 구조.	fix	defaults
-dict:jisjk:257547	骨髄	골수	keep	defaults
 dict:jisjk:257547	腱	건	keep	defaults
 dict:jisjk:257546	腱鞘炎	건초염	fix	defaults
 dict:jisjk:257546	腱鞘炎を治療する。	건초염을 치료한다.	fix	defaults
@@ -28,7 +25,6 @@ dict:jisjk:257546	関節炎	관절염	keep	defaults
 dict:jisjk:125406	臀	엉덩이	fix	defaults
 dict:jisjk:125406	臀が痛い。	엉덩이가 아프다.	fix	defaults
 dict:jisjk:125406	臀の構造。	엉덩이의 구조.	fix	defaults
-dict:jisjk:125406	座席	좌석	keep	defaults
 dict:jisjk:125406	尻が痛い。	엉덩이가 아프다.	keep	defaults
 dict:jisjk:235823	臀鰭	뒷지느러미	fix	defaults
 dict:jisjk:235823	臀鰭を調べる。	뒷지느러미를 조사한다.	fix	defaults
@@ -39,7 +35,6 @@ dict:jisjk:343524	自動変換	자동변환	fix	defaults
 dict:jisjk:343524	自動変換を使う。	자동변환을 쓴다.	fix	defaults
 dict:jisjk:343524	自動変換の設定。	자동변환의 설정.	fix	defaults
 dict:jisjk:343524	自動翻訳	자동번역	keep	defaults
-dict:jisjk:343524	変換	변환	keep	defaults
 dict:jisjk:236443	自家受粉	자가수분	fix	defaults
 dict:jisjk:236443	自家受粉を行う。	자가수분을 실시한다.	fix	defaults
 dict:jisjk:236443	自家受粉の仕組み。	자가수분의 구조.	fix	defaults

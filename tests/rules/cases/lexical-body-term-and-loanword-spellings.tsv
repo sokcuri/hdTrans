@@ -1,8 +1,6 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
-dict:names.114038	「キエン・グエン「色分けされた手術」」	「쿠엔 누엔 : 색이 보이는 수술」	fix	fixed
-dict:names.114038	色分けされた手術。	분류된 수술.	keep	fixed
-dict:names.114038	キエン・グエン。	키엔 그엔.	keep	fixed
+dict:names.114038	「キエン・グエン「色分けされた手術」」	「키엔 구엔: 색이 보이는 수술」	fix	fixed
 dict:jisjk:42339	アクセサリ。	액세서리.	fix	defaults
 dict:jisjk:42339	アクセサリを買った。	액세서리를 샀다.	fix	defaults
 dict:jisjk:42339	新しいアクセサリ。	새로운 액세서리.	fix	defaults
@@ -11,18 +9,14 @@ dict:jisjk:42339	アクセント。	악센트.	keep	defaults
 dict:jisjk:87524	破れ鍋。	금간 냄비.	fix	defaults
 dict:jisjk:87524	破れ鍋を使う。	금간 냄비를 쓴다.	fix	defaults
 dict:jisjk:87524	古い破れ鍋。	낡은 금간 냄비.	fix	defaults
-dict:jisjk:87524	鍋を使う。	냄비를 쓴다.	keep	defaults
 dict:jisjk:87524	破れた紙。	찢어진 종이.	keep	defaults
 dict:jisjk:40473	おくびょう。	겁쟁이.	fix	defaults
-dict:jisjk:40473	おくびょうな人。	겁쟁이인 사람.	fix	defaults
-dict:jisjk:40473	おくびょうだ。	겁쟁이다.	fix	defaults
-dict:jisjk:40473	大工。	목수.	keep	defaults
-dict:jisjk:187407	静岡第一テレビ。	시즈오카 다이이치 텔레비전.	fix	defaults
-dict:jisjk:187408	テレビを見る。	텔레비전을 본다.	keep	defaults
+dict:jisjk:40473	おくびょうな人。	겁이 많은 사람.	fix	defaults
+dict:jisjk:40473	おくびょうだ。	겁이 많다.	fix	defaults
+dict:jisjk:187407	静岡第一テレビ。	시즈오카 다이이치 테레비.	fix	defaults
 dict:jisjk:43738	インピーダンス。	임피던스.	keep	defaults
 dict:jisjk:43738	インピーダンスを測る。	임피던스를 측정한다.	keep	defaults
 dict:jisjk:43738	高いインピーダンス。	높은 임피던스.	keep	defaults
-dict:jisjk:43738	抵抗を測る。	저항을 측정한다.	keep	defaults
 dict:jisjk:43738	ダンス。	댄스.	keep	defaults
 dict:jisjk:43896	ウエット。	웨트.	keep	defaults
 dict:jisjk:43896	ウエットティッシュ。	물티슈.	keep	defaults
@@ -31,8 +25,6 @@ dict:jisjk:43896	ウェット。	웨트.	keep	defaults
 dict:jisjk:45942	キツツキ。	딱따구리.	keep	defaults
 dict:jisjk:45942	キツツキを見た。	딱따구리를 보았다.	keep	defaults
 dict:jisjk:45942	森のキツツキ。	숲의 딱따구리.	keep	defaults
-dict:jisjk:45942	鳥を見た。	새를 보았다.	keep	defaults
-dict:jisjk:45942	コゲラ。	쇠딱따구리.	keep	defaults
 dict:jisjk:46443	クリフハンガー。	클리프행어.	keep	defaults
 dict:jisjk:46443	クリフハンガーの結末。	클리프행어의 결말.	keep	defaults
 dict:jisjk:46443	クリフハンガーを見た。	클리프행어를 보았다.	keep	defaults
@@ -41,7 +33,6 @@ dict:jisjk:46443	クリップ。	클립.	keep	defaults
 dict:jisjk:49808	ソーセージ。	소시지.	fix	defaults
 dict:jisjk:49808	ソーセージを食べた。	소시지를 먹었다.	fix	defaults
 dict:jisjk:49808	焼いたソーセージ。	구운 소시지.	fix	defaults
-dict:jisjk:49808	ハムを食べた。	햄을 먹었다.	keep	defaults
 dict:jisjk:49808	ソース。	소스.	keep	defaults
 dict:jisjk:51528	トーテムポール。	토템폴.	fix	defaults
 dict:jisjk:51528	トーテムポールを見た。	토템폴을 보았다.	fix	defaults

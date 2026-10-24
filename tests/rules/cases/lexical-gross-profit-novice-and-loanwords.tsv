@@ -1,9 +1,9 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-25
 rule	input	expected	kind	layer
-dict:jisjk:348463	売上高総利益率	매상고 총이익률	fix	defaults
-dict:jisjk:348463	売上高総利益率が上がった。	매상고 총이익률이 올랐다.	fix	defaults
-dict:jisjk:348463	売上高総利益率を調べる。	매상고 총이익률을 조사한다.	fix	defaults
-dict:jisjk:348463	売上高総利益率は低い。	매상고 총이익률은 낮다.	fix	defaults
+dict:jisjk:348463	売上高総利益率	매출 총이익률	fix	defaults
+dict:jisjk:348463	売上高総利益率が上がった。	매출 총이익률이 올랐다.	fix	defaults
+dict:jisjk:348463	売上高総利益率を調べる。	매출 총이익률을 조사한다.	fix	defaults
+dict:jisjk:348463	売上高総利益率は低い。	매출 총이익률은 낮다.	fix	defaults
 dict:jisjk:348463	総利益	총이익	keep	defaults
 dict:jisjk:348463	売上高	매출액	keep	defaults
 dict:jisjk:194155	若輩者	풋내기	fix	defaults
@@ -11,19 +11,14 @@ dict:jisjk:194155	私は若輩者です。	저는 풋내기입니다.	fix	defaul
 dict:jisjk:194155	若輩者ですが、頑張ります。	풋내기입니다만, 노력하겠습니다.	fix	defaults
 dict:jisjk:194155	若輩者には難しい。	풋내기에게는 어렵다.	fix	defaults
 dict:jisjk:194155	若輩	애송이	keep	defaults
-dict:jisjk:194155	新人	신인	keep	defaults
 dict:jisjk:50906	テレヴィジョン	텔레비전	fix	defaults
 dict:jisjk:50906	テレヴィジョンを見る。	텔레비전을 본다.	fix	defaults
 dict:jisjk:50906	新しいテレヴィジョンを買った。	새로운 텔레비전을 샀다.	fix	defaults
 dict:jisjk:50906	テレヴィジョンで見た。	텔레비전으로 보았다.	fix	defaults
 dict:jisjk:50906	テレビジョン	텔레비전	keep	defaults
-dict:jisjk:50906	テレビを見る。	텔레비전을 본다.	keep	defaults
 dict:jisjk:43753	インフルエンザ	인플루엔자	fix	defaults
-dict:jisjk:43753	インフルエンザに感染した。	인플루엔자에 감염했다.	fix	defaults
 dict:jisjk:43753	インフルエンザを予防する。	인플루엔자를 예방한다.	fix	defaults
 dict:jisjk:43753	インフルエンザが流行している。	인플루엔자가 유행하고 있다.	fix	defaults
-dict:jisjk:43753	風邪	감기	keep	defaults
-dict:jisjk:43753	肺炎	폐렴	keep	defaults
 dict:jisjk:113772	モスパワートランジスター	MOS 파워 트랜지스터	fix	defaults
 dict:jisjk:113772	モスパワートランジスターを使う。	MOS 파워 트랜지스터를 쓴다.	fix	defaults
 dict:jisjk:113772	新しいモスパワートランジスターだ。	새로운 MOS 파워 트랜지스터다.	fix	defaults
@@ -34,7 +29,6 @@ dict:jisjk:84484	中林建設	나카바야시 건설	fix	defaults
 dict:jisjk:84484	中林建設に連絡した。	나카바야시 건설에 연락했다.	fix	defaults
 dict:jisjk:84484	中林建設の社員だ。	나카바야시 건설의 사원이다.	fix	defaults
 dict:jisjk:84484	中林建設へ行く。	나카바야시 건설에 간다.	fix	defaults
-dict:jisjk:84484	林	임	keep	defaults
 dict:jisjk:84484	建設会社	건설회사	keep	defaults
 dict:jisjk:137946	前照灯をつけた。	전조등을 켰다.	fix	defaults
 dict:jisjk:137946	前照灯をつける。	전조등을 켠다.	fix	defaults
@@ -42,34 +36,27 @@ dict:jisjk:137946	前照灯をつけて。	전조등을 켜.	fix	defaults
 dict:jisjk:137946	前照灯をつけてください。	전조등을 켜 주세요.	fix	defaults
 dict:jisjk:137946	前照灯	전조등	keep	defaults
 dict:jisjk:137946	電灯をつけた。	전등을 켰다.	keep	defaults
-dict:jisjk:118280	手を広げた。	여러 가지 일과 관계를 맺었다.	fix	defaults
-dict:jisjk:118280	手を広げる。	여러 가지 일과 관계를 맺는다.	fix	defaults
-dict:jisjk:118280	手を広げていた。	여러 가지 일과 관계를 맺고 있었다.	fix	defaults
-dict:jisjk:118280	手を広げてください。	여러 가지 일과 관계를 맺어 주세요.	fix	defaults
-dict:jisjk:118280	関係	관계	keep	defaults
-dict:jisjk:118280	規模を拡大する。	규모를 확대한다.	keep	defaults
+dict:jisjk:118280	手を広げた。	손을 펼쳤다.	fix	defaults
+dict:jisjk:118280	手を広げる。	손을 펼친다.	fix	defaults
+dict:jisjk:118280	手を広げていた。	손을 펼치고 있었다.	fix	defaults
+dict:jisjk:118280	手を広げてください。	손을 펼쳐 주세요.	fix	defaults
 dict:jisjk:121398	腰弱	배짱이 없다	fix	defaults
 dict:jisjk:121398	腰弱な態度だ。	배짱이 없는 태도다.	fix	defaults
 dict:jisjk:121398	腰弱な人だ。	배짱이 없는 사람이다.	fix	defaults
 dict:jisjk:121398	腰弱だった。	배짱이 없었다.	fix	defaults
 dict:jisjk:121398	剛腹	배짱이 두둑하다	keep	defaults
 dict:jisjk:121398	馬追虫	베짱이	keep	defaults
-dict:jisjk:348463	「売上高総利益率は低い。」	「매상고 총이익률은 낮다.」	fix	defaults
+dict:jisjk:348463	「売上高総利益率は低い。」	「매출 총이익률은 낮다.」	fix	defaults
 dict:jisjk:348463	「売上高」	「매출액」	keep	defaults
 dict:jisjk:194155	「若輩者には難しい。」	「풋내기에게는 어렵다.」	fix	defaults
-dict:jisjk:194155	「新人」	「신인」	keep	defaults
 dict:jisjk:50906	「テレヴィジョンで見た。」	「텔레비전으로 보았다.」	fix	defaults
-dict:jisjk:50906	「テレビを見る。」	「텔레비전을 본다.」	keep	defaults
 dict:jisjk:43753	「インフルエンザが流行している。」	「인플루엔자가 유행하고 있다.」	fix	defaults
-dict:jisjk:43753	「肺炎」	「폐렴」	keep	defaults
 dict:jisjk:113772	「モスパワートランジスターが必要だ。」	「MOS 파워 트랜지스터가 필요하다.」	fix	defaults
-dict:jisjk:113772	「MOS」	「MOS」	keep	defaults
 dict:jisjk:84484	「中林建設へ行く。」	「나카바야시 건설에 간다.」	fix	defaults
 dict:jisjk:84484	「建設会社」	「건설회사」	keep	defaults
 dict:jisjk:137946	「前照灯をつけてください。」	「전조등을 켜 주세요.」	fix	defaults
 dict:jisjk:137946	「電灯をつけた。」	「전등을 켰다.」	keep	defaults
-dict:jisjk:118280	「手を広げてください。」	「여러 가지 일과 관계를 맺어 주세요.」	fix	defaults
-dict:jisjk:118280	「規模を拡大する。」	「규모를 확대한다.」	keep	defaults
+dict:jisjk:118280	「手を広げてください。」	「손을 펼쳐 주세요.」	fix	defaults
 dict:jisjk:121398	「腰弱だった。」	「배짱이 없었다.」	fix	defaults
 dict:jisjk:121398	「馬追虫」	「베짱이」	keep	defaults
 dict:names.241002	デモンストレーション。	데먼스트레이션.	keep	defaults
@@ -80,8 +67,6 @@ dict:names.241002	デモンストレーション効果。	데먼스트레이션 
 dict:names.460383	傷薬。	상처약.	keep	defaults
 dict:names.460383	傷薬を使った。	상처약을 썼다.	keep	defaults
 dict:names.460383	傷薬がある。	상처약이 있다.	keep	defaults
-dict:names.460383	傷がある。	상처가 있다.	keep	defaults
-dict:names.460383	薬を買った。	약을 샀다.	keep	defaults
 dict:jisjk:236101	新字體。	신자체.	keep	defaults
 dict:jisjk:236101	新字體を使う。	신자체를 쓴다.	keep	defaults
 dict:jisjk:236101	新字體の文字。	신자체의 문자.	keep	defaults
@@ -90,5 +75,4 @@ dict:jisjk:236101	新字体。	신자체.	keep	defaults
 dict:jisjk:50415	ダブル・ダブル。	더블 더블.	keep	defaults
 dict:jisjk:50415	ダブル・ダブルの記録。	더블 더블의 기록.	keep	defaults
 dict:jisjk:50415	ダブル・ダブルを達成した。	더블 더블을 달성했다.	keep	defaults
-dict:jisjk:50415	ダブル。	더블.	keep	defaults
-dict:jisjk:50415	トリプル・ダブル。	트리플·더블.	keep	defaults
+dict:jisjk:50415	トリプル・ダブル。	트리플 더블.	keep	defaults

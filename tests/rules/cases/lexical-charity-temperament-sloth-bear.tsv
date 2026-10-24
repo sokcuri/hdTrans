@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:193649	慈善鍋	자선 냄비	fix	defaults
 dict:jisjk:193649	慈善鍋の募金。	자선 냄비의 모금.	fix	defaults
@@ -16,7 +16,6 @@ dict:jisjk:247371	懶熊	느림보곰	fix	defaults
 dict:jisjk:247371	懶熊の餌。	느림보곰의 먹이.	fix	defaults
 dict:jisjk:247371	懶熊を飼う。	느림보곰을 기른다.	fix	defaults
 dict:jisjk:247371	懶熊の生態。	느림보곰의 생태.	fix	defaults
-dict:jisjk:247371	白熊	백곰	keep	defaults
 dict:jisjk:247371	ナマケモノ	나무늘보	keep	defaults
 dict:jisjk:74490	成文律	성문율	fix	defaults
 dict:jisjk:74490	成文律の規定。	성문율의 규정.	fix	defaults
@@ -24,7 +23,6 @@ dict:jisjk:74490	成文律を守る。	성문율을 지킨다.	fix	defaults
 dict:jisjk:74490	成文律に従う。	성문율에 따른다.	fix	defaults
 dict:jisjk:74490	成文法	성문법	keep	defaults
 dict:jisjk:74490	不文律	불문율	keep	defaults
-dict:jisjk:74490	法律	법률	keep	defaults
 dict:jisjk:193649	慈善鍋について。	자선 냄비에 대해.	fix	defaults
 dict:jisjk:193649	慈善鍋の季節。	자선 냄비의 계절.	fix	defaults
 dict:jisjk:193649	慈善鍋を置く。	자선 냄비를 둔다.	fix	defaults

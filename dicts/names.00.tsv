@@ -5505,7 +5505,7 @@ F1手榴弾	F1 수류탄	N110			GN							names.5521
 F355チャレンジ	F355 챌린지	N130	QWK		GN							names.5522
 F42断層	F42 단층	N130	QCTVPl		GN							names.5523
 F43断層	F43 단층	N130	QCTVPl		GN							names.5524
-F5ネットワークス	F5 네트워크	N130	VGt		GN							names.5525
+F5ネットワークス	F5 네트워크스	N130	VGt		GN							names.5525
 F5連打	F5 연타	N110			GN							names.5526
 F80ガンレイド	F80 건레이드	N110			GN							names.5527
 F90_1号機	F90 1호기	N110			GN							names.5528
@@ -59511,8 +59511,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 イオアンネス・マクレムボリテス	이오아네스 마크렘보리테스	N130	QPNVHn		GN							names.59530
 イオカード	이오 카드	N110			GN						いおかーど	names.59531
 イオク・オジャン	이오크 오잔	N130	QPNVHn		GN						いおく おじゃん	names.59532
-イオク・クジャン	이오쿠 쿠잔	N130	QPNVHn		GN						いおく・くじゃん	names.59533
-イオク・クジャン	이오쿠 쿠잔	N130	QPNVHn		GN						イオク・クジャン	names.59534
+イオク・クジャン	이오크 쿠잔	N130	QPNVHn		GN						いおく・くじゃん	names.59533
+イオク・クジャン	이오크 쿠잔	N130	QPNVHn		GN						イオク・クジャン	names.59534
 イオグランデ	이오그란데	N110			GN						いおぐらんで	names.59535
 イオゴン	이오곤	N110			GN						いおごん	names.59536
 イオシス	이오시스	N130	VGt		GN							names.59537
@@ -81366,7 +81366,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 エドワード・ホッグ	에드워드 호그	N130	QPNVHn		GN							names.81385
 エドワード・ホッパー	에드워드 호퍼	N130	QPNVHn		GN							names.81386
 エドワード・ホルクロフト	에드워드 홀크로프트	N130	QPNVHn		GN							names.81387
-エドワード・ホワイト	에드 화이트	N130	QPNVHn		GN							names.81388
+エドワード・ホワイト	에드워드 화이트	N130	QPNVHn		GN							names.81388
 エドワード・ホワイト・クラーク	에드워드 화이트 클라크	N130	QPNVHn		GN							names.81389
 エドワード・ホーク	에드워드 호크	N130	QPNVHn		GN							names.81390
 エドワード・ホール	에드워드 홀	N130	QPNVHn		GN							names.81391
@@ -93574,7 +93574,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 オラクルエンジン	오라클 엔진	N130	QWK		GN						おらくるえんじん	names.93594
 オラクルシンクタンク	오라클 씽크탱크	N110			GN						おらくるしんくたんく	names.93595
 オラクルスピリット	오라클 스피릿	N110			GN						おらくるすぴりっと	names.93596
-オラクルマスター	오라클 자격증 프로그램	N130	QWK		GN							names.93597
+オラクルマスター	오라클 마스터	N130	QWK		GN							names.93597
 オラクル・アリーナ	오라클 아레나	N130	QCTVPl		GN							names.93598
 オラクル・セレス	오라클 세레스	N110			GN						おらくる・せれす	names.93599
 オラクル・パーク	오라클 파크	N110			GN						おらくる・ぱーく	names.93600
@@ -113707,7 +113707,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ガーリ・ノルソンの妻	가르드 노르손의 아내	N130	QPNVHn		GN							names.113727
 ガーリー	걸리	N110			GN						がーりー	names.113728
 ガーリー・エアフォース	걸리 에어포스	N110			GN						がーりー・えあふぉーす	names.113729
-ガールとロボット	걸과 로보트	N130	VGt		GN							names.113730
+ガールとロボット	걸과 로봇	N130	VGt		GN							names.113730
 ガールガンファイト	걸 건 파이트	N130	QWK		GN						がーるがんふぁいと	names.113731
 ガールガンレディ	걸 건 레이디	N110			GN						がーるがんれでぃ	names.113732
 ガールクラッシュ	걸크러쉬	N130	QWK		GN						がーるくらっしゅ	names.113733
@@ -114015,7 +114015,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 キエントゥオン	끼엔뜨엉	N130	QCTVPl		GN							names.114035
 キエンハイ県	끼엔하이현	N130	QCTVPl		GN							names.114036
 キエンルオン県	끼엔르엉현	N130	QCTVPl		GN							names.114037
-キエン・グエン「色分けされた手術」	쿠엔 누엔 : 색이 보이는 수술	N130	QWK		GN							names.114038
+キエン・グエン「色分けされた手術」	키엔 구엔: 색이 보이는 수술	N130	QWK		GN							names.114038
 キエーイ	키에이	N130	QPNVHn	Wb	GN						きえーい	names.114039
 キエース・ダルパゴ	키에스달파고	N130	QCTVPl		GN							names.114040
 キエーティ	키에티	N130	QCTVPl		GN							names.114041
@@ -124061,8 +124061,8 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ギンギン	기잉기잉	N110			GN						ぎんぎん	names.124081
 ギンギーラ	긴기라	N130	QPNVHn	Wb	GN						ぎんぎーら	names.124082
 ギングリフォン	깅그리폰	N110			GN						ぎんぐりふぉん	names.124083
-ギンコ	깅코	N130	QPNVHn	Wb	GN						ぎんこ	names.124084
-ギンコ	깅코	N130	QPNVHn	Wb	GN						ギンコ	names.124085
+ギンコ	긴코	N130	QPNVHn	Wb	GN						ぎんこ	names.124084
+ギンコ	긴코	N130	QPNVHn	Wb	GN						ギンコ	names.124085
 ギンザグリングラス	긴자그린글라스	N110			GN						ぎんざぐりんぐらす	names.124086
 ギンザシックス	긴자 식스	N130	VGt		GN						ぎんざしっくす	names.124087
 ギンザル	긴자루	N130	QPNVHn	Wb	GN						ぎんざる	names.124088
@@ -212451,7 +212451,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ソーシャルVR	소셜 VR	N110			GN							names.212474
 ソーシャルカルチャー	소셜 컬처	N110			GN						そーしゃるかるちゃー	names.212475
 ソーシャルキングダム	소셜 킹덤	N130	QPNVHn		GN						そーしゃるきんぐだむ	names.212476
-ソーシャルゲーム	소셜 네트워크 게임	N130	QWK		GN						ソーシャルゲーム	names.212477
+ソーシャルゲーム	소셜 게임	N130	QWK		GN						ソーシャルゲーム	names.212477
 ソーシャルパラノイア	소셜 파라노이아	N130	QWK		GN						そーしゃるぱらのいあ	names.212478
 ソーシャルファーム	소셜 팜	N110			GN						そーしゃるふぁーむ	names.212479
 ソーシャルフォビア	소셜포비아	N130	QWK		GN							names.212480
@@ -215744,7 +215744,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 タブーク州	타부크주	N130	QCTVPl		GN							names.215767
 タブーメモリ	타부 메모리	N110			GN						たぶーめもり	names.215768
 タブー・タトゥー	타부 타투	N130	QWK		GN						たぶー・たとぅー	names.215769
-タブー・ドーパント	타부 도펀트	N110			GN						たぶーどーぱんと	names.215770
+タブー・ドーパント	터부 도펀트	N110			GN						たぶーどーぱんと	names.215770
 タブー・ドーパント	터부 도펀트	N110			GN						タブー・ドーパント	names.215771
 タプ	타프	N110			GN						たぷ	names.215772
 タプコル公園	탑골공원	N130	QCTVPl		GN							names.215773
@@ -290230,7 +290230,7 @@ zh:張亦馳	장이츠	N130	QPNVHn	Wb	GN							names.10813
 ヒップアタック	힙 어택	N110			GN						ひっぷあたっく	names.290254
 ヒップアップ	힙업	N110			GN						ヒップアップ	names.290255
 ヒップスウェル	힙스웰	N130	QCTVPl		GN							names.290256
-ヒップタッチの女王	힙하게	N130	QWK		GN							names.290257
+ヒップタッチの女王	히프 터치의 여왕	N130	QWK		GN							names.290257
 ヒップドロップ	힙 드롭	N110			GN						ヒップドロップ	names.290258
 ヒッププレス	힙 프레스	N110			GN						ひっぷぷれす	names.290259
 ヒップヘビー	힙 헤비	N110			GN						ひっぷへびー	names.290260

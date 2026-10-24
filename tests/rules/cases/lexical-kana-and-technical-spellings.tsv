@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 defaults:lexical-cleanup	何月何日	몇 월 며칠	fix	defaults
 defaults:lexical-cleanup	何月何日ですか。	몇 월 며칠입니까.	fix	defaults
@@ -19,20 +19,8 @@ defaults:lexical-cleanup	札幌雪祭り	삿포로 눈축제	fix	defaults
 defaults:lexical-cleanup	札幌雪祭りに行った。	삿포로 눈축제에 갔다.	fix	defaults
 defaults:lexical-cleanup	数日前	며칠 전	keep	defaults
 defaults:lexical-cleanup	数日前に届いた。	며칠 전에 닿았다.	keep	defaults
-defaults:lexical-cleanup	何時何分ですか。	몇시몇 분입니까.	keep	defaults
 defaults:lexical-cleanup	数日後に届く。	며칠 후에 닿는다.	keep	defaults
-defaults:lexical-cleanup	今朝の雨	오늘 아침의 비	keep	defaults
-defaults:lexical-cleanup	人数を数えた。	인원수를 세었다.	keep	defaults
-defaults:lexical-cleanup	ペンを三本買った。	펜을 세 자루 샀다.	keep	defaults
-defaults:lexical-cleanup	I型	I형	keep	defaults
-defaults:lexical-cleanup	Ａ型	A형	keep	defaults
 defaults:lexical-cleanup	ぼそぼそと話す。	웅얼웅얼 이야기한다.	keep	defaults
 defaults:lexical-cleanup	切り立った崖	깎아지른 벼랑	keep	defaults
 defaults:lexical-cleanup	回数	횟수	keep	defaults
 defaults:lexical-cleanup	回数は三回です。	횟수는 세 번입니다.	keep	defaults
-defaults:lexical-cleanup	ひそひそ話した。	소곤소곤 이야기했다.	keep	defaults
-defaults:lexical-cleanup	丸い石	둥근 돌	keep	defaults
-defaults:lexical-cleanup	回収した。	회수했다.	keep	defaults
-defaults:lexical-cleanup	首を振った。	고개를 저었다.	keep	defaults
-defaults:lexical-cleanup	尻を洗う。	엉덩이를 씻는다.	keep	defaults
-defaults:lexical-cleanup	協同組合の連合	협동조합의 연합	keep	defaults

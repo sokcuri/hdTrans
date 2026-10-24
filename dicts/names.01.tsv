@@ -138101,7 +138101,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中井麗一	나카이 레이이치	N130	QPNVHn		GN						なかいれいいち	names.435857
 中亥歳男	나카 이사오	N130	QPNVHn		GN							names.435858
 中京テレビ	주쿄 TV 방송	N110			GN							names.435859
-中京テレビ放送	주쿄 TV 방송	N130	VGt		GN							names.435860
+中京テレビ放送	주쿄 테레비 방송	N130	VGt		GN							names.435860
 中京圏	주쿄권	N130	QCTVPl		GN							names.435861
 中京大学	주쿄 대학	N130	VGt		GN							names.435862
 中京工業地帯	주쿄 공업지대	N130	QCTVPl		GN							names.435863
@@ -145053,7 +145053,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 乳内監禁	유방 내 감금	N110			GN							names.442809
 乳城鎮	루쳉	N130	QCTVPl		GN							names.442810
 乳山市	루산시	N130	QCTVPl		GN							names.442811
-乳幼児	유아	N110			GN							names.442812
+乳幼児	영유아	N110			GN							names.442812
 乳性飲料	유성 음료	N110			GN							names.442813
 乳房	유방	N110			GN						ちぶさ	names.442814
 乳房切断	유방 절단	N110			GN							names.442815
@@ -167594,7 +167594,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 共侯	채 공후	N130	QPNVHn		GN						きょうこう	names.465350
 共公	공공	N130	QPNVHn	Wb	GN						きょうこう	names.465351
 共同の機関	공동 기관	N130	VGt		GN							names.465352
-共同テレビジョン	쿄도 텔레비전	N130	VGt		GN							names.465353
+共同テレビジョン	교도 테레비전	N130	VGt		GN							names.465353
 共同リスト	공동 명단	N130	VGt		GN							names.465354
 共同主権	공동통치령	N130	VGt		GN							names.465355
 共同体	공동체	N110			GN							names.465356
@@ -195353,7 +195353,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 四季映華	시키 에이카	N130	QPNVHn		GN						しきえいか	names.493109
 四季映華・ヤマザナドゥ	시키에이키 야마자나두	N130	QPNVHn		GN						しきえいき やまざなどゥ	names.493110
 四季春夏	시키 하루카	N130	QPNVHn		GN						しき はるか	names.493111
-四季桜	사계벚나무	N110			GN						しきざくら	names.493112
+四季桜	시키자쿠라	N110			GN						しきざくら	names.493112
 四季桜花	시키 오카	N130	QPNVHn		GN						しきおうか	names.493113
 四季様	시키 님	N110			GN						しきさま	names.493114
 四季礼花	시키 레이카	N130	QPNVHn		GN						しき れいか	names.493115
@@ -209367,7 +209367,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大悪魔召喚士ラピス	대악마 소환사 라피스	N130	QPNVHn		GN							names.507124
 大悲心陀羅尼	신묘장구대다라니	N130	QWK		GN							names.507125
 大悲経	대비경	N130	QWK		GN							names.507126
-大愛電視	다아이 텔레비전	N130	VGt		GN							names.507127
+大愛電視	다아이 뎬스	N130	VGt		GN							names.507127
 大慈弥	오지미	N130	QPNVHn	Wa	GN							names.507128
 大慈弥レイ	오지미 레이	N130	QPNVHn		GN							names.507129
 大慈彌功	오지미 이사오	N130	QPNVHn		GN						おおじみ いさお	names.507130
@@ -277828,7 +277828,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本チーム	일본 팀	N130	VGt		GN							names.575585
 日本テレネット	텔레넷 재팬	N130	VGt		GN							names.575586
 日本テレビ	닛폰 TV	N110			GN						にほんてれび	names.575587
-日本テレビ放送網	닛폰 TV 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
+日本テレビ放送網	닛폰 테레비 방송망	N110			GN						にっぽんてれびほうそうもう	names.575588
 日本テレビ放送網株式会社	닛폰 TV 방송망	N130	VGt		GN							names.575589
 日本テレビ放送網株式会社	닛폰 테레비	N130	VGt		GN							names.575590
 日本テレビ日曜10時30分枠連続ドラマ	닛폰 TV 일요일 밤 10시 30분 드라마	N130	QWK		GN							names.575591
@@ -300001,7 +300001,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東海サンタ列車	동해산타열차	N130	QCTVPl		GN							names.597758
 東海テレビ	도카이 테레비	N130	QPNVHn		GN						とうかい てれび	names.597759
 東海テレビ制作昼の帯ドラマ	동해 TV 제작 낮의 일일 연속극	N130	QWK		GN							names.597760
-東海テレビ放送	도카이 TV	N130	VGt		GN							names.597761
+東海テレビ放送	도카이 테레비 방송	N130	VGt		GN							names.597761
 東海テレビ放送株式会社	도카이 TV	N130	VGt		GN						とうかいてれびほうそう	names.597762
 東海テレビ放送株式会社	도카이 테레비	N130	VGt		GN							names.597763
 東海ラジオ放送	도카이 라디오 방송	N130	VGt		GN							names.597764

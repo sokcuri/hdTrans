@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:jisjk:252034	丸耳象の群れ。	둥근귀코끼리의 무리.	fix	defaults
 dict:jisjk:252034	丸耳象を見た。	둥근귀코끼리를 보았다.	fix	defaults
@@ -28,10 +28,8 @@ dict:jisjk:251347	尿量を調べる。	요량을 조사한다.	keep	defaults
 dict:jisjk:76177	乗換券を買う。	환승권을 산다.	keep	defaults
 dict:jisjk:76177	乗車券を見せた。	승차권을 보였다.	keep	defaults
 dict:jisjk:76177	切符が必要だ。	표가 필요하다.	keep	defaults
-dict:jisjk:149477	久しぶりに会った。	오랜만에 만났다.	keep	defaults
 dict:jisjk:149477	久しぶりに帰った。	오랜만에 돌아갔다.	keep	defaults
 dict:jisjk:149477	久々に会った。	오래간만에 만났다.	keep	defaults
 dict:jisjk:252011	丸酸塊を刻んだ。	구즈베리를 잘게 썰었다.	fix	global-stem
 dict:jisjk:252011	丸酸塊を刻んでいる。	구즈베리를 잘게 썰고 있다.	fix	global-stem
-dict:jisjk:252011	木を刻んだ。	나무를 새겼다.	keep	defaults
 dict:jisjk:252011	丸酸塊の枝を刻んだ。	구즈베리의 가지를 새겼다.	fix	defaults

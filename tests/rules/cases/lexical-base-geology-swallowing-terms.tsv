@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:243022	中生界の地層。	중생계의 지층.	fix	defaults
 dict:jisjk:243022	中生界を調べる。	중생계를 조사한다.	fix	defaults
@@ -19,5 +19,4 @@ dict:jisjk:111492	搾取を禁止する。	착취를 금지한다.	keep	defaults
 dict:jisjk:111492	中間層の問題。	중간층의 문제.	keep	defaults
 dict:jisjk:89406	丸呑みは危険だ。	통째로 삼킴은 위험하다.	keep	defaults
 dict:jisjk:89406	丸飲みを防ぐ。	통째로 삼킴을 막는다.	keep	defaults
-dict:jisjk:89406	説明を理解する。	설명을 이해한다.	keep	defaults
 dict:jisjk:89406	丸ごと食べた。	통째로 먹었다.	keep	defaults

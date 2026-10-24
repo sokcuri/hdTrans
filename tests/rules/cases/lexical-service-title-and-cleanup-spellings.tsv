@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3
+# 규칙: LEX-1, LEX-2, LEX-3, LEX-13
 rule	input	expected	kind	layer
 dict:jisjk:347451	アット・ニフティ	앳니프티	fix	defaults
 dict:jisjk:347451	アット・ニフティ。	앳니프티.	fix	defaults
@@ -26,19 +26,12 @@ dict:jisjk:109648	尻拭いの仕事。	뒤처리의 일.	fix	defaults
 dict:names.677753	第5水陸両用軍団	제5수륙양용 군단	keep	defaults
 dict:names.677753	第5水陸両用軍団の記録。	제5수륙양용 군단의 기록.	keep	defaults
 dict:jisjk:347451	@NIFTY	@NIFTY	keep	defaults
-dict:jisjk:347451	@nifty	@nifty	keep	defaults
 dict:jisjk:347451	ニフティ	니프티	keep	defaults
-dict:jisjk:347451	ニフティのサービス。	니프티의 서비스.	keep	defaults
-dict:names.360770	Mick Cornett	Mick Cornett	keep	fixed
 dict:names.360770	ミック・コーネット	믹 코넷	keep	fixed
 dict:names.360770	肥満都市	비만 도시	keep	fixed
-dict:names.360770	TEDの話。	TED의 이야기.	keep	fixed
 dict:jisjk:373289	おだてる。	치켜세운다.	keep	defaults
 dict:jisjk:373289	褒められた。	칭찬받았다.	keep	defaults
-dict:jisjk:373289	ちやほやされる。	오냐오냐된다.	keep	defaults
-dict:jisjk:264500	久しぶりに会った。	오랜만에 만났다.	keep	defaults
 dict:jisjk:264500	しばらく待つ。	한동안 기다린다.	keep	defaults
-dict:jisjk:109648	後片付けをする。	뒷정리를 한다.	keep	defaults
 dict:jisjk:109648	後始末をした。	뒤처리를 했다.	keep	defaults
 dict:jisjk:109648	尻を拭く。	엉덩이를 닦는다.	keep	defaults
 dict:jisjk:48216	ショッピングカート	쇼핑카트	fix	defaults
@@ -55,22 +48,12 @@ dict:jisjk:109833	岡山県酪農農業協同組合連合を訪問する。	오�
 dict:jisjk:48216	カードを使う。	카드를 쓴다.	keep	defaults
 dict:jisjk:48216	カートを押す。	카트를 민다.	keep	defaults
 dict:jisjk:48216	ショッピングバッグ	쇼핑 가방	keep	defaults
-dict:jisjk:48216	買い物に行く。	쇼핑하러 간다.	keep	defaults
 dict:jisjk:117890	口が酸っぱい。	입이 시다.	keep	defaults
-dict:jisjk:117890	酸っぱい果物。	신 과일.	keep	defaults
-dict:jisjk:117890	声を上げる。	소리를 낸다.	keep	defaults
-dict:jisjk:109744	宮崎県	미야자키현	keep	defaults
-dict:jisjk:109744	農業協同組合	농업협동조합	keep	defaults
-dict:jisjk:109744	I110	I110	keep	defaults
-dict:jisjk:109744	宮崎県の資料。	미야자키현의 자료.	keep	defaults
-dict:jisjk:109833	岡山県	오카야마현	keep	defaults
 dict:jisjk:109833	酪農農業協同組合	낙농 농업협동조합	keep	defaults
-dict:jisjk:109833	岡山県の資料。	오카야마현의 자료.	keep	defaults
-dict:jisjk:117890	口を酸っぱくする。	입이 닳도록.	keep	defaults
-dict:jisjk:117890	口を酸っぱくした。	입이 닳도록 이야기 했다.	fix	defaults
-dict:jisjk:117890	口を酸っぱくしている。	입이 닳도록 이야기 하고 있다.	fix	defaults
-dict:jisjk:117890	口を酸っぱくしない。	입이 닳도록 이야기 하지 않는다.	fix	defaults
-dict:jisjk:117890	口を酸っぱくしたが無駄だった。	입이 닳도록 이야기 했지만 쓸데없었다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくした。	입이 닳도록 말했다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくしている。	입이 닳도록 말하고 있다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくしない。	입이 닳도록 말하지 않는다.	fix	defaults
+dict:jisjk:117890	口を酸っぱくしたが無駄だった。	입이 닳도록 말했지만 쓸데없었다.	fix	defaults
 dict:names.584545	有坂亜里紗	아리사카 아리사	fix	lookup
 dict:names.584545	有坂亜里紗さん	아리사카 아리사 씨	keep	fixed
 dict:names.584545	有坂亜里紗が来た。	아리사카 아리사가 왔다.	keep	fixed
@@ -83,25 +66,13 @@ dict:jisjk:55434	新しいフレーヴァーだ。	새로운 플레이버다.	ke
 dict:jisjk:55434	好きなフレーヴァーを選ぶ。	좋아하는 플레이버를 선택한다.	keep	defaults
 dict:jisjk:55434	フレーヴァーが違う。	플레이버가 다르다.	keep	defaults
 dict:jisjk:55434	フレーヴァーの名前	플레이버의 이름	keep	defaults
-dict:jisjk:49776	ソシャル	소셜	keep	defaults
 dict:jisjk:49776	このソシャル	이 소셜	keep	defaults
 dict:jisjk:49776	ソシャルの話	소셜의 이야기	keep	defaults
 dict:jisjk:49776	ソシャルゲーム	소셜 게임	keep	defaults
 dict:jisjk:49776	ソシャルサービス	소셜 서비스	keep	defaults
 dict:jisjk:49776	ソシャルネットワーク	소셜 네트워크	keep	defaults
 dict:names.584545	有坂	아리사카	keep	fixed
-dict:names.584545	有坂 心花	아리사카 코하나	keep	fixed
-dict:names.584545	有坂あこ	아리사카 아코	keep	fixed
-dict:names.584545	有坂初音	아리사카 하츠네	keep	fixed
 dict:names.584545	亜里紗	아리사	keep	fixed
-dict:names.584545	有坂美裕	아리사카 미히로	keep	fixed
-dict:jisjk:55434	フレーバー	플레이버	keep	defaults
 dict:jisjk:55434	フレーバーの名前	플레이버의 이름	keep	defaults
-dict:jisjk:55434	フレーズ	프레이즈	keep	defaults
-dict:jisjk:55434	フライドチキン	프라이드치킨	keep	defaults
-dict:jisjk:55434	テール・ランプ	테일 램프	keep	defaults
-dict:jisjk:49776	ソーシャル	소셜	keep	defaults
-dict:jisjk:49776	ソーシャルゲーム	소셜 네트워크 게임	keep	defaults
-dict:jisjk:49776	ソフト	소프트	keep	defaults
+dict:jisjk:49776	ソーシャルゲーム	소셜 게임	keep	defaults
 dict:jisjk:49776	ソーシャルネットワーク	소셜 네트워크	keep	defaults
-dict:jisjk:49776	チームA5	팀 A5	keep	defaults

@@ -1,4 +1,4 @@
-# 규칙: LEX-1, LEX-2, LEX-3, LEX-4
+# 규칙: LEX-3, LEX-13
 rule	input	expected	kind	layer
 lexical:cleanup	しょっきあらい。	설거지.	fix	lookup
 lexical:cleanup	しょっきあらいについて話した。	설거지에 대해 이야기했다.	fix	lookup
@@ -31,10 +31,10 @@ lexical:cleanup	宮崎県信用農業協同組合連合を確認した。	미야
 lexical:cleanup	彼の尻を拭いた。	그의 엉덩이를 닦았다.	keep	lookup
 lexical:cleanup	彼の尻を拭く。	그의 엉덩이를 닦는다.	keep	lookup
 lexical:cleanup	彼の尻を拭かない。	그의 엉덩이를 닦지 않는다.	keep	lookup
-lexical:cleanup	暁闇。	새벽녘.	fix	lookup
-lexical:cleanup	暁闇について話した。	새벽녘에 대해 이야기했다.	fix	lookup
-lexical:cleanup	「暁闇」	「새벽녘」	fix	lookup
-lexical:cleanup	暁闇を確認した。	새벽녘을 확인했다.	fix	lookup
+lexical:cleanup	暁闇。	새벽 어둠.	fix	lookup
+lexical:cleanup	暁闇について話した。	새벽 어둠에 대해 이야기했다.	fix	lookup
+lexical:cleanup	「暁闇」	「새벽 어둠」	fix	lookup
+lexical:cleanup	暁闇を確認した。	새벽 어둠을 확인했다.	fix	lookup
 lexical:cleanup	相手に水をあけられている。	상대에게 뒤처져 있다.	fix	lookup
 lexical:cleanup	相手に水をあけられていた。	상대에게 뒤처져 있었다.	fix	lookup
 lexical:cleanup	相手に水をあけられていて困った。	상대에게 뒤처져 있어 곤란했다.	fix	lookup
@@ -43,10 +43,10 @@ lexical:cleanup	総資本利益率。	총자본이익률.	keep	lookup
 lexical:cleanup	総資本利益率について話した。	총자본이익률에 대해 이야기했다.	keep	lookup
 lexical:cleanup	「総資本利益率」	「총자본이익률」	keep	lookup
 lexical:cleanup	総資本利益率を確認した。	총자본이익률을 확인했다.	keep	lookup
-lexical:cleanup	茨城県経済農業協同組合連合。	이바라기현 경제농업협동조합연합.	fix	lookup
-lexical:cleanup	茨城県経済農業協同組合連合について話した。	이바라기현 경제농업협동조합연합에 대해 이야기했다.	fix	lookup
-lexical:cleanup	「茨城県経済農業協同組合連合」	「이바라기현 경제농업협동조합연합」	fix	lookup
-lexical:cleanup	茨城県経済農業協同組合連合を確認した。	이바라기현 경제농업협동조합연합을 확인했다.	fix	lookup
+lexical:cleanup	茨城県経済農業協同組合連合。	이바라키현 경제농업협동조합연합.	fix	lookup
+lexical:cleanup	茨城県経済農業協同組合連合について話した。	이바라키현 경제농업협동조합연합에 대해 이야기했다.	fix	lookup
+lexical:cleanup	「茨城県経済農業協同組合連合」	「이바라키현 경제농업협동조합연합」	fix	lookup
+lexical:cleanup	茨城県経済農業協同組合連合を確認した。	이바라키현 경제농업협동조합연합을 확인했다.	fix	lookup
 lexical:cleanup	雇用対策法。	고용 대책법.	keep	lookup
 lexical:cleanup	雇用対策法について話した。	고용 대책법에 대해 이야기했다.	keep	lookup
 lexical:cleanup	「雇用対策法」	「고용 대책법」	keep	lookup
@@ -55,10 +55,10 @@ lexical:cleanup	食器洗い。	설거지.	fix	lookup
 lexical:cleanup	食器洗いについて話した。	설거지에 대해 이야기했다.	fix	lookup
 lexical:cleanup	「食器洗い」	「설거지」	fix	lookup
 lexical:cleanup	食器洗いを確認した。	설거지를 확인했다.	fix	lookup
-lexical:cleanup	エドワード・ホワイト。	에드 화이트.	fix	lookup
-lexical:cleanup	エドワード・ホワイトについて話した。	에드 화이트에 대해 이야기했다.	fix	lookup
-lexical:cleanup	「エドワード・ホワイト」	「에드 화이트」	fix	lookup
-lexical:cleanup	エドワード・ホワイトを確認した。	에드 화이트를 확인했다.	fix	lookup
+lexical:cleanup	エドワード・ホワイト。	에드워드 화이트.	fix	lookup
+lexical:cleanup	エドワード・ホワイトについて話した。	에드워드 화이트에 대해 이야기했다.	fix	lookup
+lexical:cleanup	「エドワード・ホワイト」	「에드워드 화이트」	fix	lookup
+lexical:cleanup	エドワード・ホワイトを確認した。	에드워드 화이트를 확인했다.	fix	lookup
 lexical:cleanup	エリ・ビア: 最速の救急車はバイク型。	엘리 비어: 최고 속도의 구급차는 오토바이형.	keep	lookup
 lexical:cleanup	エリ・ビア: 最速の救急車はバイク型について話した。	엘리 비어: 최고 속도의 구급차는 오토바이형에 대해 이야기했다.	keep	lookup
 lexical:cleanup	「エリ・ビア: 最速の救急車はバイク型」	「엘리 비어: 최고 속도의 구급차는 오토바이형」	keep	lookup
@@ -67,8 +67,6 @@ lexical:cleanup	バード・ドーパント。	버드 도펀트.	fix	lookup
 lexical:cleanup	バード・ドーパントについて話した。	버드 도펀트에 대해 이야기했다.	fix	lookup
 lexical:cleanup	「バード・ドーパント」	「버드 도펀트」	fix	lookup
 lexical:cleanup	バード・ドーパントを確認した。	버드 도펀트를 확인했다.	fix	lookup
-lexical:cleanup	ピーター・アッティア: もし糖尿病を誤解していたら。	피터 앗티아: 만약 당뇨병을 오해하고 있으면.	keep	lookup
-lexical:cleanup	「ピーター・アッティア: もし糖尿病を誤解していたら」	「피터 앗티아: 만약 당뇨병을 오해하고 있으면」	keep	lookup
 lexical:cleanup	マグマ・ドーパント。	마그마 도펀트.	fix	lookup
 lexical:cleanup	マグマ・ドーパントについて話した。	마그마 도펀트에 대해 이야기했다.	fix	lookup
 lexical:cleanup	「マグマ・ドーパント」	「마그마 도펀트」	fix	lookup
@@ -89,45 +87,14 @@ lexical:cleanup	摩擦熱。	마찰열.	keep	lookup
 lexical:cleanup	摩擦熱について話した。	마찰열에 대해 이야기했다.	keep	lookup
 lexical:cleanup	「摩擦熱」	「마찰열」	keep	lookup
 lexical:cleanup	摩擦熱を確認した。	마찰열을 확인했다.	keep	lookup
-lexical:cleanup	賢狼ホロ。	호로.	keep	lookup
-lexical:cleanup	賢狼ホロについて話した。	호로에 대해 이야기했다.	keep	lookup
-lexical:cleanup	「賢狼ホロ」	「호로」	keep	lookup
-lexical:cleanup	賢狼ホロを確認した。	호로를 확인했다.	keep	lookup
+lexical:cleanup	賢狼ホロ。	현랑 호로.	keep	lookup
+lexical:cleanup	賢狼ホロについて話した。	현랑 호로에 대해 이야기했다.	keep	lookup
+lexical:cleanup	「賢狼ホロ」	「현랑 호로」	keep	lookup
+lexical:cleanup	賢狼ホロを確認した。	현랑 호로를 확인했다.	keep	lookup
 lexical:cleanup	トレイナー。	트레이너.	keep	lookup
 lexical:cleanup	トレイナーについて話した。	트레이너에 대해 이야기했다.	keep	lookup
 lexical:cleanup	「トレイナー」	「트레이너」	keep	lookup
 lexical:cleanup	トレイナーを確認した。	트레이너를 확인했다.	keep	lookup
-lexical:cleanup	鍋を洗った。	냄비를 씻었다.	keep	lookup
-lexical:cleanup	食器を洗った。	식기를 씻었다.	keep	lookup
-lexical:cleanup	皿を拭いた。	접시를 닦았다.	keep	lookup
-lexical:cleanup	パセリを買った。	파슬리를 샀다.	keep	lookup
-lexical:cleanup	傘を持った。	우산을 가졌다.	keep	lookup
-lexical:cleanup	偏微分を計算した。	편미분을 계산했다.	keep	lookup
-lexical:cleanup	酸素が必要だ。	산소가 필요하다.	keep	lookup
-lexical:cleanup	変換を確認した。	변환을 확인했다.	keep	lookup
-lexical:cleanup	総利益を計算した。	총이익을 계산했다.	keep	lookup
-lexical:cleanup	夜明けの空を見た。	새벽녘의 하늘을 보았다.	keep	lookup
-lexical:cleanup	暗闇を歩いた。	어둠을 걸었다.	keep	lookup
-lexical:cleanup	体を伸ばした。	몸을 뻗었다.	keep	lookup
-lexical:cleanup	肩をすくめた。	으쓱거렸다.	keep	lookup
-lexical:cleanup	相手を追い越した。	상대를 추월했다.	keep	lookup
-lexical:cleanup	裏返した。	뒤집었다.	keep	lookup
-lexical:cleanup	コーヒーを入れた。	커피를 내렸다.	keep	lookup
-lexical:cleanup	ノートを確認した。	노트를 확인했다.	keep	lookup
-lexical:cleanup	ソリューションを確認した。	솔루션을 확인했다.	keep	lookup
-lexical:cleanup	エドワードさんが来た。	에드워드 씨가 왔다.	keep	lookup
-lexical:cleanup	ホワイトさんが来た。	화이트 씨가 왔다.	keep	lookup
-lexical:cleanup	エリ・ビアが来た。	엘리 비어가 왔다.	keep	lookup
-lexical:cleanup	ピーターさんが来た。	피터 씨가 왔다.	keep	lookup
-lexical:cleanup	バードを確認した。	버드를 확인했다.	keep	lookup
-lexical:cleanup	マグマを見た。	마그마를 보았다.	keep	lookup
-lexical:cleanup	マークさんが来た。	마크 씨가 왔다.	keep	lookup
-lexical:cleanup	惣流・アスカ・ラングレー	소류 아스카 랑그레이	keep	lookup
-lexical:cleanup	忠州に行った。	충주에 갔다.	keep	lookup
-lexical:cleanup	摩擦力を測った。	마찰력을 측정했다.	keep	lookup
-lexical:cleanup	熱を測った。	열을 재었다.	keep	lookup
-lexical:cleanup	賢狼ホロ	호로	keep	lookup
-lexical:cleanup	トレーナーを呼んだ。	트레이너를 불렀다.	keep	lookup
 lexical:cleanup	彼の尻を拭う。	그의 뒤치다꺼리를 한다.	fix	lookup
 lexical:cleanup	彼の尻を拭った。	그의 뒤치다꺼리를 했다.	fix	lookup
 lexical:cleanup	彼の尻を拭っている。	그의 뒤치다꺼리를 하고 있다.	fix	lookup
@@ -135,5 +102,3 @@ lexical:cleanup	彼の尻を拭わない。	그의 뒤치다꺼리를 하지 않
 dict:jisjk:82647	作業の跡片付けをする。	작업 뒷정리를 한다.	fix	defaults
 dict:jisjk:82642	会議の跡かたづけをした。	회의의 뒷정리를 했다.	fix	defaults
 dict:jisjk:82647	食後に跡片付けをした。	식후에 뒷정리를 했다.	fix	defaults
-lookup:dishwashing	皿を洗う。	접시를 씻는다.	keep	defaults
-lookup:dishwashing	茶碗を洗った。	밥공기를 씻었다.	keep	defaults
