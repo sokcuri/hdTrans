@@ -4,3 +4,9 @@ dict:w:26789	マジかよ笑	진짜냐 ㅋㅋ	fix	local
 dict:w:26789	笑	ㅋㅋ	fix	local
 dict:w:26789	後で笑う。	나중에 웃는다.	keep	local
 dict:w:26789	戴笑盈	대소영	keep	local
+dict:w:26789	マジかよ笑ｗｗｗ	rule:dict:w:26789=ㅋㅋ	fix	local
+dict:w:26789	笑ｗ	rule:dict:w:26789=ㅋㅋ	fix	local
+dict:w:26789	それな笑www	rule:dict:w:26789=ㅋㅋ	fix	local
+dict:w:26789	笑われたｗ	!rule:dict:w:26789	keep	local
+dict:w:26789	笑顔ｗ	!rule:dict:w:26789	keep	local
+dict:w:26789	笑windowsを開く	!rule:dict:w:26789	keep	local

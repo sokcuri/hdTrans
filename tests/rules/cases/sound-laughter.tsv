@@ -39,3 +39,85 @@ restore:laughter	wwwの意味	www의 의미	keep	restore
 restore:laughter	wwwって何	www는 무엇	keep	restore
 restore:laughter	w数を数える	w수를 센다	keep	restore
 restore:laughter	ｗ杯に出る	w배에 나온다	keep	restore
+restore:laughter	大好き。ｗｗｗ	너무 좋아. ㅋㅋㅋ	fix	restore
+restore:laughter	こんなときに早朝からオカスレか・・・ｗ	has:···ㅋ	fix	restore
+restore:laughter	ホントだねーｗｗ	진짜구나―ㅋㅋ	fix	restore
+restore:laughter	あたしも参加したかったーｗｗｗ	나도 참가하고 싶었다―ㅋㅋㅋ	fix	restore
+restore:laughter	よく頑張ったと思う。。。ｗ	has:...ㅋ	fix	restore
+restore:laughter	男のツンデレなんて需要ねーよwww	has:-ㅋㅋㅋ	fix	restore
+restore:laughter	ご飯いいなぁーｗ	밥 좋겠다―ㅋ	fix	restore
+restore:laughter	まぁそのときはすごい鬱々してたよーｗ	has:―ㅋ	fix	restore
+restore:laughter	≫454ｗｗｗ≫456がひでぇｗ	has:≫454ㅋㅋㅋ≫456	fix	restore
+restore:laughter	豚足おいしいよねｗｗby	has:ㅋㅋby	fix	restore
+restore:laughter	ｗｗｗｗｗｗ一乙と言う間もなくｗｗｗｗ	has:ㅋㅋㅋㅋㅋㅋ일	fix	restore
+restore:laughter	なんか良いわーｗｗｗｗ	왠지 좋아―ㅋㅋㅋㅋ	fix	restore
+restore:laughter	マジか...ｗ	진짜야...ㅋ	fix	restore
+restore:laughter	ｗｗｗ、それは笑うしかない。	ㅋㅋㅋ, 그것은 웃을 수밖에 없다.	keep	restore
+restore:laughter	ｗｗｗｗｗｗｗｗ	ㅋㅋㅋㅋㅋㅋㅋㅋ	keep	restore
+restore:laughter	ニコ生配信者てｗ急にヤメロｗ	has: ㅋ 갑자기	keep	restore
+restore:laughter	オレも会いたいわｗｗ	나도 만나고 싶어 ㅋㅋ	keep	restore
+restore:laughter	変態多すぎだろｗｗｗ	변태 너무 많지 ㅋㅋㅋ	keep	restore
+restore:laughter	≫583確かにｗ	≫583 확실히 ㅋ	keep	restore
+restore:laughter	それは草ｗ	그것은 ㅋㅋ	fix	restore
+restore:laughter	ワロタwwwww	ㅋㅋㅋㅋㅋ	fix	restore
+cx:laughing-kusa:20	　草を生やすな未来人草ｗｗｗｗｗ	rule:cx:laughing-kusa:20=ㅋㅋ	fix	rewrites
+restore:laughter	　草を生やすな未来人草ｗｗｗｗｗ	has:미래인ㅋㅋㅋㅋㅋ	fix	restore
+cx:laughing-kusa:20	マジ草ｗｗ	rule:cx:laughing-kusa:20=ㅋㅋ	fix	rewrites
+restore:laughter	マジ草ｗｗ	진짜ㅋㅋ	fix	restore
+cx:laughing-kusa:30	草ｗｗｗ	rule:cx:laughing-kusa:30=ㅋㅋ	keep	rewrites
+restore:laughter	草ｗｗｗ	ㅋㅋㅋ	fix	restore
+cx:laughing-kusa:20	GG 草 www	rule:cx:laughing-kusa:20=ㅋㅋ	fix	rewrites
+restore:laughter	GG 草 www	GG ㅋㅋㅋ	fix	restore
+restore:laughter	ｗｗ（笑）	ㅋㅋ	fix	restore
+restore:laughter	マジかよ笑ｗｗｗ	진짜냐 ㅋㅋㅋ	fix	restore
+restore:laughter	これは草ｗｗｗ	이것은 ㅋㅋㅋ	fix	restore
+restore:laughter	ワロタｗ	ㅋㅋㅋ	fix	restore
+restore:laughter	クソワロタｗｗｗ	개웃겨 ㅋㅋㅋ	keep	restore
+cx:laughing-kusa:20	庭の草ｗ	!rule:cx:laughing-kusa:20	keep	rewrites
+restore:laughter	庭の草ｗ	has:풀ㅋ	keep	restore
+cx:laughing-kusa:30	草wikiを見る	!rule:cx:laughing-kusa:30	fix	rewrites
+restore:laughter	草wikiを見る	has:wiki	fix	restore
+restore:laughter	長すぎワロタ	너무 길고 ㅋㅋㅋ	keep	restore
+restore:laughter	ドンマイｗ私もいっしょだｗｗｗ	걱정마 ㅋ 나도 함께다 ㅋㅋㅋ	keep	restore
+restore:laughter	マジかよ（ｗ）	진짜냐(웃음)	fix	restore
+restore:laughter	それな(w)	그러니까(웃음)	fix	restore
+restore:laughter	マジかよ(www)。	진짜냐(웃음).	fix	restore
+restore:laughter	「消すしかない（ｗ）」	「지울 수밖에 없다(웃음)」	fix	restore
+restore:laughter	言っちゃった(ｗｗ)	말해버렸다(웃음)	fix	restore
+restore:laughter	f(w)を求める	f(w)를 구한다	keep	restore
+restore:laughter	幅(w)、高さ(h)を入力	폭(w), 높이(h)를 입력	keep	restore
+restore:laughter	関数g(w)の値	함수 g(w)의 값	keep	restore
+restore:laughter	(W)は西を示す	(W)는 서쪽을 나타낸다	keep	restore
+restore:laughter	https://www.example.com/watch?v=w_ABCwww	has:v=w_ABCwww	keep	restore
+restore:laughter	https://example.jp/n1234mw/	https://example.jp/n1234mw/	keep	restore
+restore:laughter	⇒https://www.example-comic.jp/	⇒https://www.example-comic.jp/	keep	restore
+restore:laughter	メールはtest@www.example.jpへ	메일은 test@www.example.jp에	keep	restore
+restore:laughter	www.example.comを開く	www.example.com을 연다	keep	restore
+restore:laughter	ｗｗｗ．ｅｘａｍｐｌｅ．ｃｏｍ	lacks:ㅋ	keep	restore
+restore:laughter	一般的日本人@wake_up_88◆	has:@wake_up_88	keep	restore
+restore:laughter	司法ウォッチ@justice_watch▼	has:@justice_watch	keep	restore
+restore:laughter	いぬドッグ@wanwan_365◎	has:@wanwan_365	keep	restore
+restore:laughter	@wwwboyさん	@wwwboy 씨	keep	restore
+restore:laughter	大好き：20XX/10/03 00:43 ID:awSQDPpc5	has:ID:awSQDPpc5	keep	restore
+restore:laughter	こわい名無し：20XX/10/02 23:51 ID:ikriJwww+	has:ID:ikriJwww+	keep	restore
+restore:laughter	20XX/10/02 20:15 ID:duGJ45bwE	20XX/10/02 20:15 ID:duGJ45bwE	keep	restore
+restore:laughter	w=3とする	w=3으로 한다	fix	restore
+restore:laughter	#wwwタグ	#www태그	keep	restore
+restore:laughter	100Wの電球	100W의 전구	keep	restore
+restore:laughter	5Whのバッテリー	5Wh의 배터리	keep	restore
+restore:laughter	60w電球を買った	60w전구를 샀다	keep	restore
+restore:laughter	出力は1.5kWだ	출력은 1.5kW다	keep	restore
+restore:laughter	ＧＷは実家に帰る	GW는 친가에 돌아간다	keep	restore
+restore:laughter	Weigh anchor! 私、先頭でいい？	has:Weigh anchor!	keep	restore
+restore:laughter	New York cheesecake!	New York cheesecake!	keep	restore
+restore:laughter	Wow! パスタの屋台出してる！	has:Wow!	keep	restore
+restore:laughter	sandwichのお味はどう？	sandwich의 맛은 어때?	keep	restore
+restore:laughter	Twitterで見た	Twitter로 보았다	keep	restore
+restore:laughter	No...way...	No...way...	keep	restore
+restore:laughter	OK www	OK www	keep	restore
+restore:laughter	ww2の映画	ww2의 영화	keep	restore
+restore:laughter	くぁwせdrftgy	크아wdrftgy	keep	restore
+restore:laughter	　ＷＷの修正作業をしつつ	has:WW	keep	restore
+restore:laughter	チームＷの勝ち	팀 W의 승리	keep	restore
+restore:laughter	W＝Wagner	W=Wagner	keep	restore
+restore:laughter	いや、wikiで調べた	아니, wiki로 조사했다	keep	restore
