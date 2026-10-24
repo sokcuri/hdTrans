@@ -689,10 +689,11 @@
 | たまごっちを買った | 다마고치를 샀다 | 유지 |
 | 私がちゃーんと手作りした | 내가 제대로~ 직접 만들었다 | 유지 |
 | こどもがちゃーんと見てる | 어린이가 제대로~ 보고 있다 | 유지 |
+| 姫たんと遊ぶ | 공주짱과 논다 | 유지 |
 | 「はいはい、うんたんうんたん」 | 「네네, 운탄운탄」 | 유지 |
 | 見たとたん、走り出した。 | 보자마자, 달리기 시작했다. | 유지 |
 
-사례: `tests/rules/cases/name-suffix-tan-cchi.tsv`, `tests/rules/cases/drawn-honorifics.tsv`
+사례: `tests/rules/cases/name-suffix-tan-cchi.tsv`, `tests/rules/cases/drawn-honorifics.tsv`, `tests/rules/cases/lexical-tanto.tsv`
 
 ## LEX-31 말버릇 어미는 그 소리를 남겨 옮긴다
 

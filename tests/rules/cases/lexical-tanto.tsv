@@ -6,7 +6,9 @@ dict:w:28610	どうぞ、たんと召し上がって。	어서, 듬뿍 드셔.	f
 dict:w:28610	さあ！たんと！	자! 듬뿍!	fix	defaults
 dict:w:28610	たんとう	담당	keep	defaults
 dict:w:28610	ぺたんと座った	털썩 앉았다	keep	sound
-dict:w:28610	あんたんとこ、本場は	너곳, 본고장은	keep	defaults
+dict:w:28610	あんたんとこ、本場は	lacks:듬뿍	keep	defaults
 constraint:tanto-after-tsu	行ったんと違う	간 과 다르다	current	lookup
 constraint:tanto-after-tsu	言ったんと同じ	말한 과 같다	current	lookup
 constraint:tanto-after-tsu	待ったんと	기다린 과	current	lookup
+dict:w:28610	姫たんと遊ぶ	has:짱	keep	lookup
+dict:w:28610	田中たんと話した	has:짱	keep	lookup

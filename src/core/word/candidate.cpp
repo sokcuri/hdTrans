@@ -308,7 +308,8 @@ bool SuffixHost(const Item* before) {
 // starts at that noun and goes past it (たまご + っち of たまごっち), nor a longer noun at the
 // suffix that ends before a particle, a mark or a character other than hiragana (たんこぶ,
 // たんす); elsewhere its records leave the candidates, so that the longer word or the kana
-// around it are read instead.
+// around it are read instead. Where the suffix is a word, a longer word other than a noun that
+// starts with it leaves instead (姫たん + と, not the adverb たんと).
 Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cursor, int token, Item* parent) {
     std::size_t suffix = 0;
     for (const Record* r = records; r != nullptr; r = r->child) {
@@ -329,12 +330,20 @@ Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cu
             covered = covered || static_cast<int>(c.source.size()) > cursor - before->start;
         }
     }
+    const bool hosted = !covered && SuffixHost(before);
+    const auto overSuffix = [&](const Record* r) {
+        if (!hosted || From(r->partCode, 1).starts_with('1')) return false;
+        for (const std::string_view m : dict::ClassMembers("honorific.after-person")) {
+            if (r->source.size() > m.size() && r->source.starts_with(m)) return true;
+        }
+        return false;
+    };
     Record* out = nullptr;
     Record** tail = &out;
     for (Record* r = records; r != nullptr;) {
         Record* next = r->child;
         r->child = nullptr;
-        if (!dict::InClass("honorific.after-person", r->source) || (!covered && SuffixHost(before))) {
+        if ((!dict::InClass("honorific.after-person", r->source) || hosted) && !overSuffix(r)) {
             *tail = r;
             tail = &r->child;
         }
