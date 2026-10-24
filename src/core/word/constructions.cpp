@@ -265,6 +265,8 @@ constexpr NamedFeature kFeatures[] = {
     {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
     {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
+    // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
+    {"respectful", [](Flusher&, const Item* it) { return it->detail->Yougo() && it->detail->voice == Voice::Respectful; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
     // token when the word before ends its token.
     {"touches-prev",

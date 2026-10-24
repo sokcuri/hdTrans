@@ -174,6 +174,8 @@ phrase:leave-taking	ありがとうございました。では、また明日	�
 phrase:leave-taking	「先生、また来週」	「선생님, 다음 주에 봬요」	fix	sound
 phrase:leave-taking	「田中先生、また明日」	「타나카 선생님, 내일 봬요」	fix	sound
 phrase:leave-taking	「先生、また明日ね」	「선생님, 내일 봬요」	fix	sound
+phrase:leave-taking	「部長、また明日」	「부장, 내일 봬요」	fix	sound
+phrase:leave-taking	「社長、また来週」	「사장, 다음 주에 봬요」	fix	sound
 phrase:leave-taking	「そうです。また明日」	「그렇습니다. 내일 봬요」	fix	sound
 phrase:leave-taking	「失礼します。また後で」	「실례합니다. 나중에 봬요」	fix	sound
 phrase:leave-taking	「では、また明日。失礼します」	「그럼, 내일 봬요. 실례합니다」	fix	sound

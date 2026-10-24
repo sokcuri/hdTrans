@@ -157,6 +157,7 @@ Detail* Worker::NewDetail(int cls, int token) {
     d->causativePassive = settings.text && settings.improvements.causativePassive;
     d->kind = -1;
     d->record = 0;
+    d->voice = Voice::None;
     d->punct = 0;
     d->group = nullptr;
     d->ResetDirect(0);

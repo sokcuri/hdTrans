@@ -44770,15 +44770,12 @@ ttt	ttt	K110			GN				jisjk:201744
 を見かけ	(이)가 보&AJ@	M427		Tu	GN				jisjk:201893		
 を観	(을)를 &AY@	M437		Tu	GN				jisjk:369530		
 を託され	(을)를 맡게 &C6@	M427		PjTu	GN				jisjk:266642		
-を読まれ	(을)를 읽으&AE@	M427		TuPj	GN				jisjk:342320		
 を通じ	(을)를 통해	E310		Tu	GN				jisjk:262113		
 を通じて	(을)를 통해서	E310		J1Tu	GN				jisjk:1400		
 を通り抜け	(을)를  빠져 나&A1@	M447		Tu	GN				jisjk:142856		
 を限度と	(을)를 한도로 &AV@	M429		Tu	GN				jisjk:148405		
 を除	(을)를 제외&AV@	M421		Tu	GN				jisjk:259604		
 を頂き	(을)를 받음	I110		Tu	GN				jisjk:264476		
-を食べられ	(을)를 먹을 수 &HN@	M427	XXX	TuPjMa	GN	3788	||1 &&2 U+0== "Lません" D+0= "(을)를 먹을 수 &M9@"	어미가 ません으로 시작하면 を食べられ를 를 먹을 수 없다로 바꾼다. (미발동: rare-context)	jisjk:346618		
-を食べられ	(을)를 받아 &HU@	M427		TuPj	GN	3789	||1 &&6 P-1== "1**" A-1-= "VFd" S-2== "に" P-2== "2**" P-3== "1**" A-3-= "VHn"	사람과 に 및 음식 명사가 앞에 놓인 を食べられ를 '(을)를 받아 먹다'로 고른다. (미발동: rare-context) [의심] 사람に＋음식を食べられる는 피해 수동일 수 있는데 '받아 먹다'로 의미와 음식의 이동 방향을 뒤집는다; 자체 예문 私は彼にご飯を食べられた가 '나는 그에게 밥을 받아 먹었다'가 되었다.	jisjk:346619		
 ん	응	Q110			GN	3059	||1 D+1== "?"	ん은 다음 단어의 번역이 물음표이면 감탄사 ‘응’으로 고른다.	jisjk:341307		
 ん		Q110			GN	3405	||1 P-1== "4**2**"	ん은 앞말이 동사나 조사이면 한국어 번역이 빈 명사 후보를 고른다.	jisjk:343145		
 ん	1지 않아	S580			GN				jisjk:343366		
@@ -258494,7 +258491,7 @@ ttt	ttt	K110			GN				jisjk:201744
 泥捧	도둑	N110	UAqHGu	Hd	GN				jisjk:18431		
 泥板岩	이판암	N110	VSn		GN				jisjk:244946		
 泥染大島細	가고시마현 명주	N110			GN				jisjk:246768		
-泥棒	도둑	N110			GN				jisjk:98127		
+泥棒	도둑	N110	VHn		GN				jisjk:98127		
 泥棒に入られ	도둑이 &L4@	M427		Pn	GN				jisjk:347182		
 泥棒を引き去	도둑을 연행해 &A1@	M448			GN				jisjk:143937		
 泥棒猫	도둑 고양이	N110	VAm		GN				jisjk:246775		
@@ -316524,7 +316521,7 @@ ttt	ttt	K110			GN				jisjk:201744
 虻田町	아부타쵸	N130	QCTVPl		GN				jisjk:270374		
 虻田郡	아부타군	N130	QCTVPl		GN				jisjk:270373		
 虻蜂	말파리와 벌	N110	VAm		GN				jisjk:227498		
-蚊	모기	N110	QAA		GN				jisjk:115511		
+蚊	모기	N110	QAAQAE		GN				jisjk:115511		
 蚊	문	N110		On	GN				jisjk:258400		
 蚊いぶし	모깃불	N110			GN				jisjk:167121		
 蚊の涙	아주 적은 양	I110			GN				jisjk:69280		
@@ -317095,7 +317092,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蟹醢	게장	N110	VPt		GN				jisjk:229080		
 蟹釣草	볏과 다년초	N110	VPt		GN				jisjk:229074		
 蟹食猿	원숭이	N110	VAm		GN				jisjk:229068		
-蟻	개미	N110	QAA		GN				jisjk:115586		
+蟻	개미	N110	QAAQAE		GN				jisjk:115586		
 蟻	의	N110		On	GN				jisjk:258562		
 蟻の塔	의총	N110	VPlVAm		GN				jisjk:124971		
 蟻の塔草	아리노토구사	N110	VPt		GN				jisjk:227755		

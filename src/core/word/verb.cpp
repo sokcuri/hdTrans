@@ -24,6 +24,11 @@ bool Starts(std::string_view s, std::string_view p) { return s.starts_with(p); }
 // (見たくせに, 見たくらい).
 bool Taku(std::string_view s) { return s.starts_with(kJaTaku) && !s.starts_with(kJaTakuseni) && !s.starts_with(kJaTakurai); }
 
+// Whether a form of たい starts s (たい, たかった, たく, たければ, たき).
+bool Desire(std::string_view s) {
+    return Starts(s, kJaTai) || Starts(s, kJaTakatta) || Taku(s) || Starts(s, kJaTakereba) || Starts(s, kJaTaki);
+}
+
 // Whether も at the start of s is followed by a form of する that ends there (立ち上がりもせず,
 // 笑いもしない, 読みもした; not しても, していない): the continuative before it is the verb,
 // emphasised, not a noun.
@@ -200,10 +205,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if ((kind == 7 || kind == 11 || kind == 13) && d.kind == 1) d.kind = 4;  // られ: the potential before the passive
         if (d.patternMatched == 0) {
             if (kind == 7 && d.kind == 6) {
-                if (Starts(tail, kJaTai) || Starts(tail, kJaTakatta) || Taku(tail) || Starts(tail, kJaTakereba) ||
-                    Starts(tail, kJaTaki)) {
-                    d.kind = 10;
-                }
+                if (Desire(tail)) d.kind = 10;
             } else if (kind == 3 && d.kind == 6) {
                 if (Starts(tail, kJaShitai) || Starts(tail, kJaShitakatta) ||
                     (Starts(tail, kJaShitaku) && Taku(tail.substr(std::string_view("し").size()))) ||
@@ -418,7 +420,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         return false;
     }
 
-    bool adjusted = false;
+    bool adjusted = false, desire = false;
     const int oldKind = base.patternKind, oldState = base.kind;
     const bool shortCausativePassive = w->settings.text && w->settings.improvements.causativePassive && !matched &&
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
@@ -464,6 +466,14 @@ bool Item::AcceptVerbContinuation(Record* following) {
             }
         }
         if (base.kind == 8 && (two == kJaComma || two.StartsWith(","))) base.kind = 7;
+        // The たい of wanting after the られ of an ichidan or くる verb goes on the stem form, as after an
+        // ichidan stem (褒められたい), not on the past た, and keeps the られ. A godan potential takes no
+        // たい: the verb is another one (入れたい is 入れる).
+        if (oldState == 4 && base.kind == 6 && Desire(tail)) {
+            if (oldKind != 7 && oldKind != 11 && oldKind != 13) return false;
+            base.kind = 10;
+            desire = true;
+        }
         patternWidth = WidthOf(Conjugation(7, base.kind));
         two = Left(after(), 2);
         four = Left(after(), 4);
@@ -522,7 +532,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     base.punct = 0;
 
     auto restore = [&]() {
-        if (adjusted && patternWidth == 0) {
+        if (adjusted && patternWidth == 0 && !desire) {
             base.patternKind = oldKind;
             base.kind = oldState;
             if (base.record == 4) base.record = 0;

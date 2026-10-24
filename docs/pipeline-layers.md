@@ -24,7 +24,8 @@
 | lookup | 사전 순서로 후보를 모음. 뒤 사전이 같은 키, 품사의 `endings`, `phrases`, `patterns` 행을 바꿈 | 후보 목록 | 이 순서가 뒤 층의 "처음 참" 순서 | `dicts/*.tsv`, 사용자 사전 | `src/core/word/lookup.cpp` `Worker::DoLookup` `snapshot.GetWordInfo(` |
 | constraints | 표 순서로 모두 적용. 후보를 모두 지우지는 않음 | 후보 제거, 이름 항목 추가 | 추가한 이름 항목은 `-why`에 `Fixed`로 보임 | `src/core/word/constraints.cpp`의 `kRules` | `src/core/word/lookup.cpp` `Worker::DoLookup` `ApplyConstraints(found, query)` |
 | lookup-drops | 모두 적용 | 후보 제거, 번역 음역 | 없음 | 코드 | `src/core/word/lookup.cpp` `Worker::DoLookup` `DropBoundUtterances(l, query)` |
-| pre-select | 모두 적용 | 항목 삽입, 문법 코드 Ka→Pi | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `"DrainNmTail"` |
+| pre-select | 모두 적용 | 항목 삽입 | 없음 | 코드 | `src/core/word/flush.cpp` `Flush` `"DrainNmTail"` |
+| voice | 동사마다 (ら)れ의 읽기를 한 번, 신호 순서대로 처음 맞는 것(spec GRM-10) | 수동, 가능, 높임, 자발의 기록(문법 코드 Ka→Pi), 맞지 않는 후보 제거, 바탕 동사로 다시 읽기, 행위자 に의 `에게` | 뒤 층은 그 읽기를 따름(`rewrites`의 `RespectfulPassive`가 높임을 씀) | `classes.tsv`, 코드 | `src/core/word/flush.cpp` `Flush` `"DecideVoice"` |
 | local | 단어마다 후보를 사전 순서로 두고 그 행의 지역 규칙을 실행, 처음 참인 후보 | 후보 선택, `D=`, `Y=` 번역 | 거짓인 규칙의 대입은 되돌림 | 사전 `ctx` 열 | `src/core/word/selectors.cpp` `CleanupSelectors` `RunLocalRule(f, it, source.id)` |
 | global-stem | 후보마다 품사키가 맞는 어간 전역 규칙을 PRIO 순으로, 번호 1001~4999, 처음 참 | 후보 선택, 번역 | 거짓인 규칙의 대입은 되돌림 | `src/core/rules/globals.txt` | `src/core/word/selectors.cpp` `CleanupSelectors` `false, &source.id)` |
 | defaults | 하나뿐 → 첫 `XXX` → `J` 숫자 | 후보 선택 | 없음 | 사전 `sem`, `gram` | `src/core/word/selectors.cpp` `CleanupSelectors` `SelectLastXXX(it)` |
@@ -50,7 +51,7 @@
 ### 스위치
 
 - `-reference`는 `word::Improvements`를 모두 끕니다. 그래도 `constraints`, 텍스트 패스, `senses`는 돕니다.
-- `-raw`(텍스트 경로가 아님)는 `constraints`, `pre-select`의 Ka→Pi, `senses`~`cg-lite`, `restore`를 건너뜁니다.
+- `-raw`(텍스트 경로가 아님)는 `constraints`, `voice`, `senses`~`cg-lite`, `restore`를 건너뜁니다.
 - `-no-cg`는 `cg-lite`의 손 규칙을, `-cg-learned`는 학습 규칙을 켭니다. `-misread`는 `misread`를 켭니다.
 
 ## 파일 위치와 순서
@@ -86,8 +87,8 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  L2
   `protect` 층이 한국어로 바꾼 부분과 `constraints`가 더한 이름 항목이 여기에 듭니다.
 - 구문 표의 행이 정한 번역은 `rewrites`와 그 행의 id(`cx:return-to:10`)로 보입니다
   ([rule-language.md](rule-language.md#구문-표-constructionstsv)).
-- 기록하지 않는 층: `constraints`(추가한 이름 항목은 `fixed`), 찾기의 거르기, `rewrites`의 C++ 패스 이름,
-  `cg-lite`의 행, `compose`와 그 뒤. 이 층들은 출력 텍스트를 바꿔도 `WHY`에 이름이 없습니다.
+- 기록하지 않는 층: `constraints`(추가한 이름 항목은 `fixed`), 찾기의 거르기, `voice`(남긴 후보 가운데 고른 층이
+  보임), `rewrites`의 C++ 패스 이름, `cg-lite`의 행, `compose`와 그 뒤. 이 층들은 출력 텍스트를 바꿔도 `WHY`에 이름이 없습니다.
 - `defaults`로 고른 후보의 번역을 규칙의 대입이 바꿨으면 그 규칙이 보입니다(`CandidateChoice`).
 
 ## 층을 나눌 때의 한계

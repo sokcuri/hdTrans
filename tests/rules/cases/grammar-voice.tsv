@@ -1,0 +1,75 @@
+# 규칙: GRM-10, GRM-2, SPC-2, SPC-10
+rule	input	expected	kind	layer
+voice:agent	そんな攻撃、蚊に刺されたような物だ！	그런 공격, 모기에 물린 것 같은 것이다!	keep	voice
+voice:agent	佐藤に押さえられてしまった。	사토에게 눌려버렸다.	fix	voice
+voice:agent	幽霊に導かれながら情報の断片を手に入れる。	유령에게 이끌리면서 정보의 단편을 손에 넣는다.	fix	voice
+voice:agent	珍しく担任に指名された。	드물게 담임에게 지명되었다.	fix	voice
+voice:agent	鈴木に見つめられ、	스즈키에게 응시당해	fix	voice
+voice:agent	虎に食われる前にひとつ、	범에게 먹히기 전에 하나,	fix	voice
+voice:agent	鬼に触られた者もまた鬼となるのだ。	귀신에게 만져진 사람도 또 귀신이 된다.	fix	voice
+voice:agent	健太に裏切られた絶望の中、	켄타에게 배신당한 절망 속,	fix	voice
+voice:agent	健太が彼女に洗脳されたと言っても過言ではない。	켄타가 그녀에게 세뇌당했다고 해도 과언이 아니다.	keep	voice
+voice:agent	その子はもともと他の3人にいじめられてて、	그 아이는 원래 다른 3명에게 괴롭힘을 당하고 있어,	fix	voice
+voice:agent	かつて、悪魔に憑かれた王子がいた。	일찍이, 악마에게 홀린 왕자가 있었다.	fix	voice
+voice:agent	調子に乗るなって、田中に怒られちゃうから、	우쭐대지 말라고, 타나카에게 혼나버리니까,	fix	voice
+voice:agent	巨大なトカゲ風の生き物に引かれた馬車	거대한 도마뱀풍의 생물에게 끌린 마차	fix	voice
+voice:agent	陸路は敵に破壊され、	육로는 적에게 파괴돼	keep	voice
+voice:agent	仲間は敵にやられ、	동료는 적에게 당해	keep	voice
+voice:agent	猫に引っかかれた。	고양이에게 긁어졌다.	fix	voice
+voice:agent	お母さんにこんなのを見られたら……！	엄마에게 이런 걸 보여지면……!	fix	voice
+voice:agent	国王に問われた少女は臆することなく答えた。	국왕에게 질문받은 소녀는 겁먹는 일 없이 대답했다.	keep	voice
+voice:agent	私に弟を任せられたから、	나에게 남동생을 맡길 수 있었으니까,	keep	voice
+voice:agent	父に車を借りられた。	아버지에게 차를 빌릴 수 있었다.	keep	voice
+voice:agent	雨に降られた。	비를 맞았다.	keep	voice
+voice:agent	動物から得られる食物を食べない。	동물로부터 얻을 수 있는 음식을 먹지 않는다.	keep	voice
+voice:desire	褒められたい。	칭찬받고 싶다.	fix	voice
+voice:desire	先生に褒められたかった。	선생님에게 칭찬받고 싶었다.	fix	voice
+voice:desire	見られたくない。	보이고 싶지 않다.	keep	voice
+voice:desire	食べたい。	먹고 싶다.	keep	voice
+voice:desire	目に入れたいって気持ちもわからなくはない。	눈에 넣고 싶다는 기분도 모르지는 않다.	fix	voice
+voice:ability	価値なんか自分で見つけられる。	가치는 스스로 찾아낼 수 있다.	fix	voice
+voice:ability	誰でも着られる。	누구라도 입을 수 있다.	keep	voice
+voice:ability	いつでも寝られる。	언제라도 잘 수 있다.	keep	voice
+voice:ability	誰だってそんなこと言われたら……	누구라도 그런 말 들으면……	keep	voice
+voice:ability	子どもでも生まれれば実家は左うちわだ。	아이라도 태어나면 친가는 편안한 생활이다.	keep	voice
+voice:adverse	見られたら困る。	보여지면 곤란하다.	fix	voice
+voice:adverse	食べられたら困る。	먹히면 곤란하다.	fix	voice
+voice:adverse	見つめられたら照れる。	응시당하면 쑥스러워한다.	fix	voice
+voice:adverse	こんなところで商売できねえし訴えられたら困る。	이런 곳에서 장사할 수 없고 고소당하면 곤란하다.	keep	voice
+voice:adverse	早く寝られたらいいな。	빨리 잘 수 있으면 좋겠다.	keep	voice
+voice:spontaneous	将来が案じられる。	장래가 염려된다.	fix	voice
+voice:spontaneous	彼の未来が案じられる。	그의 미래가 염려된다.	fix	voice
+voice:spontaneous	春の気配が感じられる。	봄의 기색이 느껴진다.	keep	voice
+voice:spontaneous	刺身は食べられない。	생선회는 먹을 수 없다.	keep	voice
+voice:listener	戦果をご確認されますか？	전과를 확인하시겠습니까?	fix	voice
+voice:listener	艦隊の運営状況を確認されますか？	함대의 운영 상황을 확인하시겠습니까?	fix	voice
+voice:listener	自動サポートをご利用されますか？	자동 서포트를 이용하시겠습니까?	fix	voice
+voice:listener	気付かれましたか？	깨달으셨습니까?	fix	voice
+voice:listener	なにを驚かれているのですか？	무엇을 놀라고 계십니까?	fix	voice
+voice:listener	何を書かれているんですか。	무엇을 쓰고 계십니까.	fix	voice
+voice:listener	どちらへ帰られますか。	어디로 돌아가시겠습니까.	fix	voice
+voice:listener	警察の方々には何も言われませんでしたか？	경찰의 분들에게는 아무것도 듣지 않았습니까?	keep	voice
+voice:listener	と、言われて、信じることができますか？	라고 들어, 믿을 수 있습니까?	keep	voice
+voice:listener	十時までに来られますか。	10시까지 올 수 있습니까.	keep	voice
+voice:listener	可燃物は投棄されましたか？	가연물은 투기되었습니까?	keep	voice
+voice:listener	刺身を食べられますか？	생선회를 먹을 수 있습니까?	keep	voice
+voice:shorter	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하니, 팔을 잡혔다.	fix	voice
+voice:shorter	歩き出したところで腕を掴まれる。	걷기 시작했더니 팔을 잡힌다.	fix	voice
+voice:shorter	男に肩を掴まれた。	남자가 어깨를 잡았다.	fix	voice
+voice:shorter	口を塞がれた。	입을 막혔다.	fix	voice
+voice:shorter	佐藤さんと繋がれたから……	사토 씨와 연결될 수 있었으니까……	keep	voice
+voice:shorter	手すりに掴まれない。	난간에 매달릴 수 없다.	keep	voice
+voice:lexical	女性が数人の男に絡まれている。	여성이 몇 사람의 남자에게 시비를 당하고 있다.	fix	voice
+voice:lexical	もしかして、心を読まれた？！	혹시, 마음을 읽혔어?!	fix	voice
+voice:lexical	先生は何を読まれているんですか？	선생님은 무엇을 읽고 계십니까?	keep	voice
+voice:respectful	社長は明日出張に行かれます。	사장은 내일 출장하러 가십니다.	fix	voice
+voice:respectful	部長は東京へ行かれた。	부장은 도쿄에 가셨다.	fix	voice
+voice:respectful	社長が戻られた。	사장이 돌아오셨다.	fix	voice
+voice:respectful	教授が手紙を書かれた。	교수가 편지를 쓰셨다.	fix	voice
+voice:respectful	陛下が幽閉された。	폐하가 유폐되었다.	keep	voice
+voice:agent	魔法に愛されなかった少女。	마법에 사랑받지 않았던 소녀.	keep	voice
+voice:listener	もう帰られますか？	이제 돌아가시겠습니까?	fix	voice
+voice:adverse	来られたら困る。	올 수 있으면 곤란하다.	keep	voice
+voice:adverse	寝られたら困る。	잘 수 있으면 곤란하다.	keep	voice
+voice:adverse	行かれたら困る。	갈 수 있으면 곤란하다.	keep	voice
+voice:adverse	強くなれたら困る。	강하게 될 수 있으면 곤란하다.	keep	voice

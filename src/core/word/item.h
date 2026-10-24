@@ -65,6 +65,10 @@ struct Group {
     }
 };
 
+// The reading of the (ら)れ of a verb, decided once before selection (DecideVoice, grammar.cpp):
+// none for a verb without one or one no signal decides.
+enum class Voice : uint8_t { None, Passive, Potential, Respectful, Spontaneous };
+
 // Detail classes of an item.
 enum DetailClass : int {
     kDetailInfo = 0,     // no conjugation part (TWordInfo)
@@ -90,6 +94,7 @@ struct Detail {
     // The conjugation branch 0..17 of a verb; '0', 'x' or 'X' for adjectives; -1 unset.
     int kind = -1;
     int record = 0;  // verb: 1 passive, 2 causative, 4 potential, 5 causative-passive
+    Voice voice = Voice::None;
     int punct = 0;   // punctuation class after the ending
     Group* group = nullptr;
     std::vector<uint8_t> classes;  // punctuation class per direct entry
