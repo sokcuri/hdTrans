@@ -130,7 +130,7 @@ bool CriedCopies(const Item* it) {
     const std::string_view rest = TextAfter(LastCopy(it));
     const std::string_view mark = rest.substr(0, text::DecodeRune(rest).size);
     const char32_t cp = text::DecodeRune(rest).cp;
-    return dict::InClass("mark.cry", mark) || cp == output::kLengthenMark || cp == output::kDashMark || cp == output::kDrawnMark;
+    return dict::InClass("mark.cry", mark) || cp == output::kLengthenMark || cp == output::kDrawnMark;
 }
 
 bool Exclaimed(Flusher& f, const Item* it) {

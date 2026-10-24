@@ -1012,8 +1012,9 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"田中さん", "田中さん"},
         {"かみつきさあん", "かみつきさあん"},
         {"みどりさああん", "みどりさん\uE00B\uE00B"},
-        // Drawn out by vowel kana, a drawn mark for each; spelled with ー the lengthening is written -.
-        {"圭ちゃーん！", "圭ちゃん\uE00D\uE00B！"},
+        // Drawn out by vowel kana or by two or more ー, a drawn mark for each.
+        {"圭ちゃーん！", "圭ちゃん\uE00A\uE00B！"},
+        {"あおくーーーん", "あおくん\uE00B\uE00B\uE00B"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

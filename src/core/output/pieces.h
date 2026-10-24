@@ -36,9 +36,6 @@ constexpr char32_t kEmphasisClose = 0xE009;
 // is still the end of the word's sentence.
 constexpr char32_t kLengthenMark = 0xE00A;
 
-// kLengthenMark for a lengthening spelled with ー where the restore stage writes - (みなさーん 여러부-운).
-constexpr char32_t kDashMark = 0xE00D;
-
 // The mark the sound stage writes, once for each kana, after a word drawn out by three or
 // more vowel kana (やめてぇぇぇ, 待ったああああ), a closing span that the restore stage writes
 // as a syllable drawing out the vowel of the Korean syllable before it (그만둬어어어); a
