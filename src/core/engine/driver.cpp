@@ -26,6 +26,7 @@
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/flush.h"
 #include "core/word/util.h"
 
 namespace hdTrans::internal {
@@ -56,16 +57,29 @@ const word::Item* InflectedBase(const word::Analysis& analysis, std::size_t base
     return static_cast<std::size_t>(first->length) > base ? first : nullptr;
 }
 
-// Whether a candidate of the verb stem group conjugates as する, ずる, くる or 来る (kind 9,
-// 10, 11 or 13 of its part code "429") with a Korean of two words or more and no local rule: a
-// noun and its particle before a light verb, which the word stage reads around the ruby tags
-// (word::RubyIdiomVerb: 声が 목소리가 들&AA@). A stem whose Korean rules choose by context
-// (気が) stays whole.
-bool SplitIdiomStem(const word::Group& group) {
-    return std::any_of(group.entries.begin(), group.entries.end(), [](const word::Entry* e) {
-        if (e == nullptr || e->code.size() < 3 || e->dst.find(' ') == std::string::npos || e->ruleId > 0) return false;
+// The Korean of the candidates of class digit cls whose key is text.
+std::vector<std::string_view> Targets(const dict::Snapshot& snap, std::string_view text, char cls) {
+    std::vector<std::string_view> out;
+    for (const dict::Candidate& c : snap.GetWordInfo(text, dict::LookupMode::General, dict::LookupContext{}).list) {
+        if (c.source == text && ClassOf(c) == cls) out.push_back(c.target);
+    }
+    return out;
+}
+
+// Whether the verb stem group of base and the particle that starts kana conjugates as する,
+// ずる, くる or 来る (kind 9, 10, 11 or 13 of its part code "429"), no local rule reads it, and
+// a Korean of it splits into a noun of base, the particle and the verb (word::IdiomNoun): the
+// word stage reads it around the ruby tags (word::RubyIdiomVerb: 声が 목소리가 들&AA@).
+bool SplitIdiomStem(const dict::Snapshot& snap, const word::Group& group, std::string_view base, std::string_view kana) {
+    if (std::any_of(group.entries.begin(), group.entries.end(), [](const word::Entry* e) { return e->ruleId > 0; })) {
+        return false;
+    }
+    const std::vector<std::string_view> nouns = Targets(snap, base, '1');
+    const std::vector<std::string_view> particles = Targets(snap, kana.substr(0, text::DecodeRune(kana).size), '2');
+    return std::any_of(group.entries.begin(), group.entries.end(), [&](const word::Entry* e) {
+        if (e->code.size() < 3) return false;
         const char kind = e->code[2];
-        return kind == '9' || kind == ':' || kind == ';' || kind == '=';
+        return (kind == '9' || kind == ':' || kind == ';' || kind == '=') && word::IdiomNoun(e->dst, nouns, particles) >= 0;
     });
 }
 
@@ -131,7 +145,8 @@ pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::
         // (人気があ), not the base's inflection, and so is a key that takes the first kana
         // as the particle of a noun before する or 来る (声がした, 手にした).
         const std::size_t key = static_cast<std::size_t>(first->group->length);
-        r.inflected = key <= okurigana && !(key > base.size() && SplitIdiomStem(*first->group) && StartsLightVerb(snap, kana));
+        r.inflected = key <= okurigana &&
+                     !(key > base.size() && SplitIdiomStem(snap, *first->group, base, kana) && StartsLightVerb(snap, kana));
         // The end cuts the kana, so it must fall inside them on a character boundary.
         const std::size_t end = BaseWordEnd(snap, text, *first);
         if (end > base.size() && end < text.size() && (static_cast<unsigned char>(text[end]) & 0xC0) != 0x80) {

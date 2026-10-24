@@ -165,5 +165,11 @@ void ChooseSenses(Flusher& f);
 void ChooseInitialConjunctions(Flusher& f);
 void HanBeforeNa(Flusher& f);
 void RubyIdiomVerb(Flusher& f);
+// The index in nouns of the noun that target, the Korean of a verb stem of a noun, a particle
+// and a light verb, starts with: the noun, a form of one of particles (가 of (이)가) and a space
+// before a conjugating verb (声が 목소리가 들&AA@); -1 when it does not split so (口に 말&AV@,
+// 気に 신경 &AF@, 損を 손해를 &AY@ after 손).
+int IdiomNoun(std::string_view target, std::span<const std::string_view> nouns,
+              std::span<const std::string_view> particles);
 
 }  // namespace hdTrans::word

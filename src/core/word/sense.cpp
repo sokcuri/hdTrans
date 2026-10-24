@@ -1,8 +1,11 @@
 // Text-path sense passes: the target of a word from the sense table when a trigger word
 // stands near it, the conjunction readings at the start of a sentence, and the 한 of a
 // な after a noun that is the root of a 하다 adjective.
+#include <algorithm>
+#include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/dict/classes.h"
 #include "core/dict/snapshot.h"
@@ -312,21 +315,6 @@ void HanBeforeNa(Flusher& f) {
 
 namespace {
 
-// The candidate of the noun item whose Korean starts head and is shorter, the selected one first;
-// -1 for none.
-int NounStarting(const Item* it, std::string_view head) {
-    const auto starts = [&](int slot) {
-        const Entry* e = it->group->At(slot);
-        return e != nullptr && At(e->code, 0) == '1' && !e->dst.empty() && head.size() > e->dst.size() &&
-               head.starts_with(e->dst);
-    };
-    if (starts(it->selected)) return it->selected;
-    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
-        if (starts(slot)) return slot;
-    }
-    return -1;
-}
-
 // The alternating pattern of a particle form ((이)가 of 이 and 가); other text as it is.
 std::string_view JosaPattern(std::string_view form) {
     for (const output::JosaForms& row : output::JosaTable()) {
@@ -335,14 +323,38 @@ std::string_view JosaPattern(std::string_view form) {
     return form;
 }
 
+// The Korean of the particle candidates of surface (が (이)가, に 에, 에게, (으)로).
+std::vector<std::string_view> ParticleTargets(Worker& w, std::string_view surface) {
+    std::vector<std::string_view> out;
+    for (const Record* r = w.DoLookup(surface, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (r->source == surface && At(r->partCode, 1) == '2') out.push_back(r->target);
+    }
+    return out;
+}
+
 }  // namespace
+
+int IdiomNoun(std::string_view target, std::span<const std::string_view> nouns,
+              std::span<const std::string_view> particles) {
+    const std::size_t space = target.find(' ');
+    if (space == std::string_view::npos || !target.ends_with("@")) return -1;
+    const std::string_view head = target.substr(0, space);
+    for (std::size_t n = 0; n < nouns.size(); n++) {
+        const std::string_view noun = nouns[n];
+        if (noun.empty() || head.size() <= noun.size() || !head.starts_with(noun)) continue;
+        const std::string_view particle = JosaPattern(head.substr(noun.size()));
+        if (std::find(particles.begin(), particles.end(), particle) != particles.end()) return static_cast<int>(n);
+    }
+    return -1;
+}
 
 // A one-character ruby base noun and the light verb after its reading read the idiom that the
 // base and the particle start, since the ruby tags keep the idiom from being looked up whole: a
 // verb stem of the base and the particle (声が, 手に) that conjugates in the row of the verb after
-// them (する, 来る), with the Korean of the base, its particle, a space and the verb and no local rule (声が 목소리가
-// 들&AA@: {rb}声{/rb}{rt}こえ{/rt}がした 목소리, 가, 들렸다). The particle is its own word before
-// the verb (が した) or the start of a verb stem (にする of 手にした).
+// them (する, 来る), no local rule reads, and whose Korean splits into a noun of the base, its
+// particle and the verb (IdiomNoun: 声が 목소리가 들&AA@ gives {rb}声{/rb}{rt}こえ{/rt}がした 목소리,
+// 가, 들렸다). The particle is its own word before the verb (が した) or the start of a verb stem
+// (にする of 手にした).
 void RubyIdiomVerb(Flusher& f) {
     Worker& w = f.w;
     for (Item* it = w.chain.head; it != nullptr; it = it->next) {
@@ -366,26 +378,43 @@ void RubyIdiomVerb(Flusher& f) {
             (particle != nullptr && verb->tokenIndex != particle->tokenIndex)) {
             continue;
         }
-        const std::string key = std::string(it->group->surface) + (particle != nullptr ? particle : verb)->group->surface;
+        const std::string_view after = (particle != nullptr ? particle : verb)->group->surface;
+        const std::string key = std::string(it->group->surface) + std::string(after);
+        bool ruled = false;
         for (const Record* r = w.DoLookup(key, kModeGeneral).records; r != nullptr; r = r->child) {
-            if (r->source != key || r->ruleNo > 0 || At(r->partCode, 1) != '4' ||
-                At(r->partCode, 3) - '0' != verb->detail->patternKind) {
-                continue;
-            }
-            const std::size_t space = r->target.find(' ');
-            if (space == std::string::npos || !r->target.ends_with("@")) continue;
-            const std::string_view target = r->target;
-            const int noun = NounStarting(it, target.substr(0, space));
-            if (noun < 0) continue;
-            if (noun != it->selected) it->SelectCandidate(noun, {Provenance::Rewrite});
-            const std::size_t nounSize = it->group->At(noun)->dst.size();
-            if (particle != nullptr) {
-                TakeTarget(particle, '2', JosaPattern(target.substr(nounSize, space - nounSize)));
-                TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(space + 1));
-            } else {
-                TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(nounSize));
-            }
-            break;
+            ruled = ruled || (r->source == key && r->ruleNo > 0);
+        }
+        if (ruled) continue;
+        // The base's noun candidates, the selected one first.
+        std::vector<std::string_view> nouns;
+        std::vector<int> slots;
+        for (int slot = -1; slot < static_cast<int>(it->group->entries.size()); slot++) {
+            const int s = slot < 0 ? it->selected : slot;
+            if (slot == it->selected) continue;
+            const Entry* e = it->group->At(s);
+            if (e == nullptr || At(e->code, 0) != '1') continue;
+            nouns.push_back(e->dst);
+            slots.push_back(s);
+        }
+        const std::vector<std::string_view> particles = ParticleTargets(w, after);
+        const Record* idiom = nullptr;
+        int n = -1;
+        for (const Record* r = w.DoLookup(key, kModeGeneral).records; r != nullptr && idiom == nullptr; r = r->child) {
+            if (r->source != key || At(r->partCode, 1) != '4' || At(r->partCode, 3) - '0' != verb->detail->patternKind) continue;
+            n = IdiomNoun(r->target, nouns, particles);
+            if (n >= 0) idiom = r;
+        }
+        if (idiom == nullptr) continue;
+        const int noun = slots[static_cast<std::size_t>(n)];
+        if (noun != it->selected) it->SelectCandidate(noun, {Provenance::Rewrite});
+        const std::string_view target = idiom->target;
+        const std::size_t nounSize = nouns[static_cast<std::size_t>(n)].size();
+        const std::size_t space = target.find(' ');
+        if (particle != nullptr) {
+            TakeTarget(particle, '2', JosaPattern(target.substr(nounSize, space - nounSize)));
+            TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(space + 1));
+        } else {
+            TakeTarget(verb, At(verb->Code(verb->selected), 0), target.substr(nounSize));
         }
     }
 }
