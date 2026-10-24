@@ -13386,7 +13386,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 収載	수록	N110			GN				xxx llm	1		w:13379
 叔母上	숙모님	N110			GN				llm			w:13380
 取っておき	뒀다쓰기	N110			GN						とっておき	w:13381
-取って置き	뒀다쓰기	N110			GN						とっておき	w:13382
+取って置き	아껴 둔 것	N110			GN						とっておき	w:13382
 取っ組み合い	몸싸움	N110			GN				llm		とっくみあい	w:13383
 取りたて	거둠	N110			GN				xxx		とりたて	w:13384
 取りたて	발탁	N110	UAq		GN				llm		とりたて	w:13385
@@ -15027,7 +15027,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宇宙空間	우주공간	N110			GN						うちゅうくうかん	w:15019
 宇宙軍	우주군	N110			GN						うちゅうぐん	w:15020
 宇宙開発	우주 개발	N110			GN				llm		うちゅうかいはつ	w:15021
-宇宙飛行士	우주인	N110	VHn		GN				xxx	1	うちゅうひこうし	w:15022
 宇宙食	우주식	N110			GN						うちゅうしょく	w:15023
 守られ	지켜&AL@	M427			GN				xxx llm	1		w:15024
 守り抜	끝까지 지&AQ@	M421			GN				llm		まもりぬく	w:15025
@@ -26826,3 +26825,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 であ	만&A5@	M420		Pj	GN	6912	||1 &&2 S-1== "Rと" ||2 D-1== "R와" D-1== "R과"	와, 과로 끝나는 말 뒤의 であ는 出会う로 만나다를 고른다.				w:26813
 であ	에서 &HN@	M420		TuPj	GN			장소 뒤에서 명사를 꾸미는 であった는 그곳에서 있었던 일이다.				w:26814
 ロンリー	론리	N110		Dd	GN						ろんりー	w:26815
+ざっくり	대충	E300			GN							w:26816

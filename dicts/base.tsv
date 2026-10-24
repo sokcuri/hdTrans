@@ -4,7 +4,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
 いいえ	아니오	K110			GN				jisjk:114801		
 わりと	비교적	C0H1			GN				jisjk:114797		
 口車にのせ	감언이설로 남을 속&AJ@	M447			GN				jisjk:117356		
-治験	완치 경험	K110			GN				jisjk:115304		
+治験	임상 시험	K110			GN				jisjk:115304		
 (土)	(토)	N110			GN				jisjk:266998		
 (日)	(일)	N110			GN				jisjk:266999		
 (月)	(월)	N110			GN				jisjk:103989		
@@ -6644,7 +6644,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おねえさん	언니	I110	VQwVHnUQf		GN				jisjk:40510		
 おねえちゃん	언니	N110	VHn		GN				jisjk:165823		-1
 おねがい	부탁	I110			GN				jisjk:112384		
-おねがいいたします	부탁드리겠습니다	N110			GN				jisjk:150735		
+おねがいいたします	부탁드리겠습니다	A9D0			GN				jisjk:150735		
 おねしょ	야뇨	I110			GN				jisjk:112385		
 おねだん	가격	N110	VMo		GN				jisjk:150736		
 おねんね	잠	N110			GN				jisjk:98987		
@@ -6776,7 +6776,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おまいり	참배	I110			GN				jisjk:112389		
 おまえ	너	I120	VHn		GN				jisjk:40519		
 おまえ	내	I120	VHn		GN				jisjk:40520		
-おまえら	너희들	N110	VHn		GN				jisjk:165972		-1
+おまえら	너희	N110	VHn		GN				jisjk:165972		-1
 おまかせ	맡&A2@	M4U9			GN				jisjk:146655		
 おまけ	덤	I110			GN				jisjk:106865		
 おまけ	깎아&CJ@	M4U9			GN				jisjk:146661		
@@ -167648,7 +167648,7 @@ ttt	ttt	K110			GN				jisjk:201744
 夜明かし	밤샘	I110		Hd	GN				jisjk:77714		
 夜明け	새벽	I110	UMe		GN				jisjk:77715		
 夜明けの空	새벽녘의 하늘	N110	VSsVPl		GN				jisjk:156089		
-夜明け前	동트기전	N110	VBkVSw		GN				jisjk:254952		
+夜明け前	동트기 전	N110	VBkVSw		GN				jisjk:254952		
 夜明し	철야	N110		Hd	GN				jisjk:156088		
 夜明上町	요아케카미마치	I130	QCTVPl		GN				jisjk:337252		
 夜明中町	요아케나카마치	I130	QCTVPl		GN				jisjk:337254		
@@ -201418,7 +201418,7 @@ ttt	ttt	K110			GN				jisjk:201744
 弁室	밸브실	N110	VPl		GN				jisjk:163729		
 弁座	벨브 착지	N110			GN				jisjk:37406		
 弁当	도시락	K110	VFd		GN				jisjk:345353		
-弁当箱	도시락 그릇	N110	VPe		GN				jisjk:154859		
+弁当箱	도시락통	N110	VPe		GN				jisjk:154859		
 弁慶	강자	N110			GN				jisjk:23486		
 弁慶	벤케이	N110	QPN		GN				jisjk:23487		
 弁慶石町	벵케이시쵸	I130	QCTVPl		GN				jisjk:327545		
@@ -235745,7 +235745,7 @@ ttt	ttt	K110			GN				jisjk:201744
 来観者	내관자	N110	VHn		GN				jisjk:156253		
 来訪	내방	I110		HdHi	GN				jisjk:20053		
 来訪客	내방객	I110	VHn		GN				jisjk:67641		
-来訪者	내방자	K110	VHn		GN				jisjk:156272		
+来訪者	방문자	K110	VHn		GN				jisjk:156272		
 来診	내진	N110	QHP	Hd	GN				jisjk:156259		
 来談	내담	N110		Hd	GN				jisjk:156261		
 来談者	내담자	I110	VHn		GN				jisjk:364269		
@@ -257353,7 +257353,7 @@ ttt	ttt	K110			GN				jisjk:201744
 治長請所	지쵸우케쇼	I130	QCTVPl		GN				jisjk:302288		
 治雄	하루오	N130	QPN	Wb	GN				jisjk:13150		
 治面地	지멘지	N130	QPN	Wa	GN				jisjk:86901		
-治験薬	치험약	N110	QHP		GN				jisjk:242600		
+治験薬	임상 시험약	N110	QHPVMd		GN				jisjk:242600		
 沼	늪	N110	XXXVPl		GN				jisjk:115859		
 沼	누마	N130	QCTVPl		GN				jisjk:258899		
 沼	소	N110		On	GN				jisjk:318899		
@@ -299463,7 +299463,7 @@ ttt	ttt	K110			GN				jisjk:201744
 経験料定法	경험료 정법	N110	ULw		BZ				jisjk:353020		
 経験曲線	경험 곡선	N110			BZ				jisjk:349093		
 経験法学	경험법학	N110	ULw		BZ				jisjk:353021		
-経験済み	경험필	N110			GN				jisjk:151020		
+経験済み	경험 완료	N110			GN				jisjk:151020		
 経験的アプローチ	경험적 어프로치	N110		Hd	BZ				jisjk:353023		
 経験科学	경험 과학	N110	UTh		GN				jisjk:177261		
 経験給	경험급	N110	VMo		GN				jisjk:362866		
@@ -324868,7 +324868,7 @@ ttt	ttt	K110			GN				jisjk:201744
 記入もれ	기입오류	N110			GN				jisjk:342180		
 記入欄	기입란	N110	VCmVBl		GN				jisjk:172588		
 記入済	기입필	I110			GN				jisjk:63879		
-記入済み	기입필	N110			GN				jisjk:172586		
+記入済み	기입 완료	N110			GN				jisjk:172586		
 記史郎	키시로우	N130	QPN	Wb	GN				jisjk:346743		
 記号	기호	N110			GN				jisjk:17873		
 記号体系	기호체계	N110	VSw		GN				jisjk:203013		
