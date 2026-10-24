@@ -18,8 +18,12 @@ import tempfile
 
 
 def read(path):
-    with open(path, encoding="utf-8", newline="") as f:
-        rows = [r for r in csv.reader(f, delimiter="\t") if r]
+    try:
+        with open(path, encoding="utf-8", newline="") as f:
+            rows = [r for r in csv.reader(f, delimiter="\t") if r]
+    except OSError as error:
+        print(error, file=sys.stderr)
+        sys.exit(2)
     if any(len(r) != 4 for r in rows):
         print(f"{path}: rows need four columns: key, ja, before, after", file=sys.stderr)
         sys.exit(2)

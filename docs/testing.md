@@ -292,26 +292,32 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
    - 줄이 많으면 표본을 뽑지 않고 판정 입력을 나눠(`split -l 500 PAIRS.tsv part.`) 조각마다 판정을 동시에 돌리고
      출력을 이어 붙입니다. 직접 판정한 결과도 같은 열(`key verdict judge`, 넷째 열에 메모)로 씁니다.
 
-   **블라인드 판정 (blind.py).** API 없이 판정할 때 씁니다. 바뀐 줄을 만들지 않은 판정자 둘이 따로 `blind.tsv`만 보고
-   답하고, 답이 갈린 줄은 셋째 판정자가 봅니다. 판정자에게는 `key.tsv`, 판정 입력, run 폴더를 주지 않습니다.
+   **블라인드 판정 (blind.py).** API 없이 판정할 때 씁니다. 바뀐 줄을 만들지 않은 판정자 둘이 따로 블라인드 파일만 보고
+   답하고, 답이 갈린 줄은 셋째 판정자가 봅니다. 판정자마다 run 폴더 밖의 새 폴더에 파일을 주고, 열쇠 파일, 판정 입력,
+   run 폴더, 다른 판정자의 답, 저장소를 보거나 엔진을 돌리지 않게 합니다.
 
    ```sh
-   B=$RUN/dev.blind
-   python3 tools/blind.py make "$RUN/dev.pairs.tsv" "$B"   # $B/blind.tsv와 $B/key.tsv
-   # 판정자 1, 2가 각자 $B/blind.tsv를 읽고 $B/answers-1.tsv, $B/answers-2.tsv에 `id 답 [메모]`를 씀
-   python3 tools/blind.py disagree "$B" "$B/answers-1.tsv" "$B/answers-2.tsv" "$B/third.tsv"
-   # 판정자 3이 $B/third.tsv만 읽고 $B/answers-3.tsv를 씀
-   python3 tools/blind.py final "$B" "$B/answers-1.tsv" "$B/answers-2.tsv" "$B/answers-3.tsv" > "$RUN/dev.final.tsv"
+   J1=$(mktemp -d) J2=$(mktemp -d) J3=$(mktemp -d)
+   python3 tools/blind.py make "$RUN/dev.pairs.tsv" "$RUN/dev.key.tsv" "$J1/blind.tsv"
+   cp "$J1/blind.tsv" "$J2/"
+   # 판정자 1은 $J1/blind.tsv를 읽고 $J1/answers.tsv에, 판정자 2는 $J2에서 같은 일을 함
+   python3 tools/blind.py disagree "$J1/blind.tsv" "$J1/answers.tsv" "$J2/answers.tsv" "$J3/blind.tsv"
+   # 판정자 3은 $J3/blind.tsv를 읽고 $J3/answers.tsv를 씀
+   cp "$J1/answers.tsv" "$RUN/dev.answers-1.tsv"; cp "$J2/answers.tsv" "$RUN/dev.answers-2.tsv"
+   cp "$J3/answers.tsv" "$RUN/dev.answers-3.tsv"
+   python3 tools/blind.py final "$RUN/dev.key.tsv" "$RUN"/dev.answers-[123].tsv > "$RUN/dev.final.tsv"
    ```
 
-   - `blind.tsv`는 `id ja X Y`입니다. `id`는 줄 번호일 뿐이고 X, Y는 줄마다 무작위로 바꾼 이전, 이후 출력입니다.
-     답은 더 나은 쪽 `X`, `Y`, 또는 `same`입니다.
+   - 블라인드 파일은 `id ja X Y`입니다. `id`는 줄 번호일 뿐이고 X, Y는 줄마다 무작위로 바꾼 이전, 이후 출력입니다.
+     답은 `id 답 [메모]`이고 답은 더 나은 쪽 `X`, `Y`, 또는 `same`입니다.
+   - `make`는 이미 있는 열쇠 파일을 덮어쓰지 않습니다. 다시 만들면 답도 새로 받습니다.
    - `final`은 두 답이 같으면 그 답, 다르면 셋째가 고른 쪽, 셋 다 다르면 `same`을 `key verdict judges [메모]`로
      씁니다. 그래서 `worse`는 두 판정자가 나빠졌다고 본 줄입니다. 답이 모자란 줄은 빠지고 5에서 판정 안 됨으로 셉니다.
 
 5. 개수를 셉니다: `python3 tools/verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.sonnet.tsv" "$RUN/dev.gpt.tsv"`는 바뀐 줄,
-   나아짐, 같음, 나빠짐과 두 모델이 모두 `worse`로 판정한 키를 출력합니다. 블라인드 판정은
-   `verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.final.tsv"`이고, 그 `worse`가 두 판정자 모두 나빠졌다고 본 줄입니다. 그런 줄이 있으면 원인 변경을 되돌리거나 조건을
+   나아짐, 같음, 나빠짐과 두 모델이 모두 `worse`로 판정한 키를 출력합니다. 블라인드 판정은 최종 파일을 두 번 줍니다:
+   `verdicts.py "$RUN/dev.pairs.tsv" "$RUN/dev.final.tsv" "$RUN/dev.final.tsv"`. 그 `worse`가 모두 두 판정자가
+   나빠졌다고 본 줄이라 `both-worse`로도 나옵니다. 그런 줄이 있으면 원인 변경을 되돌리거나 조건을
    좁힙니다. 의견이 갈린 줄과 정상 줄의 변화도 직접 검토합니다. 나아짐:나빠짐이 2:1 이상이고 한 부류의 줄이 몰려
    나빠지지 않을 때 남깁니다.
 6. held-out에도 3~5를 별도로 실행하고, 개발 세트와 held-out의 변경 줄, 개선, 동률, 악화 및 쌍방 악화 수를 **분리 보고**합니다.
@@ -395,12 +401,23 @@ for s in corpus sample docs examples; do
   python3 tools/new-pairs.py "$C/$H/$s.new.tsv" "$C/$H/$s.pairs.tsv" \
     $(find "$C" -name "$s.pairs.tsv" ! -path "$C/$H/*")
 done
+cat "$C/$H"/*.new.tsv > "$C/$H/new.tsv"
+echo "$H" >> "$C/checks.txt"
 ```
 
 - `new-pairs.py OUT.tsv NEW.tsv [OLD.tsv...]`는 NEW의 행 가운데 키, 이전, 이후 출력이 모두 같은 행이 OLD에 없는 것만
   씁니다. 판정한 뒤 이전이나 이후가 바뀐 줄은 다시 새 줄이 됩니다.
-- `$DEV`는 그 커밋을 고정한 worktree이고 `$TAG`는 태그의 worktree입니다. 새 줄은 위의 변경 판정 3~5로 판정하고
-  판정 결과도 그 run 폴더에 둡니다.
+- `$DEV`는 그 커밋을 고정한 worktree이고 `$TAG`는 태그의 worktree입니다. `$C/$H/new.tsv`를 위의 변경 판정 3~5로
+  판정해 최종 판정을 `$C/$H/final.tsv`에 둡니다.
+- 마지막 릴리스 뒤 누적 개수는 확인한 순서대로 이어 붙인 판정을 마지막 확인의 쌍에 맞춰 셉니다(한 키는 나중 판정이 씀):
+
+  ```sh
+  L=$(tail -n 1 "$C/checks.txt")
+  for H in $(cat "$C/checks.txt"); do cat "$C/$H/final.tsv"; done > "$C/total.tsv"
+  cat "$C/$L"/corpus.pairs.tsv "$C/$L"/sample.pairs.tsv "$C/$L"/docs.pairs.tsv "$C/$L"/examples.pairs.tsv \
+    > "$C/total.pairs.tsv" 2> /dev/null
+  python3 tools/verdicts.py "$C/total.pairs.tsv" "$C/total.tsv"
+  ```
 
 ## 잘못된 출력 찾기 (detect-bad.sh)
 

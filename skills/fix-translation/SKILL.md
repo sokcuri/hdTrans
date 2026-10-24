@@ -134,24 +134,25 @@ hypothesis until `-why` confirms it. `<preset>` is `mac` or `linux`, and `CLI` i
     - With API access to both models, `tools/judge.py MODEL OUT.tsv PAIRS.tsv [--only KEYS]
       [--effort high]` asks blind (X/Y shuffled per line): the first model reads every pair, the
       second re-reads the lines the first called worse or same.
-    - Otherwise judge blind with sub-agents. The second API model is often not reachable, so this
-      is the usual path:
-      1. `tools/blind.py make PAIRS.tsv DIR` writes `DIR/blind.tsv` (`id ja X Y`) and `DIR/key.tsv`.
-      2. Two sub-agents that did not take part in the fix each read only `DIR/blind.tsv` and write
-         `DIR/answers-1.tsv` and `DIR/answers-2.tsv` (`id X|Y|same [note]`). Give them the path
-         and the criteria of `tools/judge.py` (faithful, natural Korean; judge only the differing
-         parts; loanword transliterations are fine). Never give them the key, the pairs, the run
-         folder or the fix.
-      3. `tools/blind.py disagree DIR DIR/answers-1.tsv DIR/answers-2.tsv DIR/third.tsv`, then a
-         third such sub-agent reads only `DIR/third.tsv` and writes `DIR/answers-3.tsv`.
-      4. `tools/blind.py final DIR DIR/answers-1.tsv DIR/answers-2.tsv DIR/answers-3.tsv > FINAL.tsv`;
-         a `worse` there is a line two judges called worse.
+    - Otherwise judge blind with sub-agents (docs/testing.md "블라인드 판정"):
+      1. Give each judge a fresh folder outside the run (`mktemp -d`). `tools/blind.py make PAIRS.tsv
+         KEY.tsv J1/blind.tsv` writes the blind file (`id ja X Y`) there and the key next to the pairs;
+         copy the blind file into J2.
+      2. Two sub-agents that did not take part in the fix each read only their `blind.tsv` and write
+         `answers.tsv` (`id X|Y|same [note]`) in their folder. Give them that path and the criteria
+         of `tools/judge.py` (faithful, natural Korean; judge only the differing parts; loanword
+         transliterations are fine). Tell them not to read the key, the pairs, the run folder, the
+         repository or the other judge's folder, and not to run the engine.
+      3. `tools/blind.py disagree J1/blind.tsv J1/answers.tsv J2/answers.tsv J3/blind.tsv`, then a
+         third such sub-agent reads only `J3/blind.tsv` and writes `J3/answers.tsv`.
+      4. `tools/blind.py final KEY.tsv J1/answers.tsv J2/answers.tsv J3/answers.tsv > FINAL.tsv`;
+         a `worse` there is a line two judges called worse. Keep the answers with the run.
     - For large sets, split the pairs (`split -l 500 PAIRS.tsv part.`) across parallel judges and
       concatenate their outputs.
     - Verdict files have the columns `key verdict judge [note]`, with verdict `improved`, `same` or `worse`.
     - `tools/verdicts.py PAIRS FIRST [SECOND]` prints changed, improved, same, worse and every key
-      both judges call worse; for blind judging it is `tools/verdicts.py PAIRS FINAL.tsv`, and every
-      `worse` counts as both judges.
+      both judges call worse; for blind judging it is `tools/verdicts.py PAIRS FINAL.tsv FINAL.tsv`,
+      and every `worse` is listed as both-worse.
     - A line both judges call worse means reverting or narrowing the change.
     - Keep the change only if improved:worse is at least 2:1, no class of lines gets worse as a
       group, and the sample chrF is not lower than the baseline.

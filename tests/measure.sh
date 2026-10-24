@@ -43,6 +43,28 @@ HDTRANS_TESTDATA=$tmp/sample "$here/tools/measure.sh" -c "$cli" -d "$dicts" thir
     status=$?
 [ "$status" -eq 2 ]
 grep -F 'corpus: 2 lines' "$tmp/third.log" > /dev/null
+# A TERM to the whole process group stops every set and leaves no translation running.
+printf '#!/bin/sh\nexec sleep 30\n' > "$tmp/slow"
+chmod +x "$tmp/slow"
+python3 -I - "$here/tools/measure.sh" "$tmp/slow" "$dicts" <<'PY'
+import os, signal, subprocess, sys, time
+measure, slow, dicts = sys.argv[1:]
+p = subprocess.Popen(["sh", measure, "-c", slow, "-d", dicts, "slow"], start_new_session=True,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+time.sleep(2)
+os.killpg(p.pid, signal.SIGTERM)
+try:
+    status = p.wait(timeout=20)
+except subprocess.TimeoutExpired:
+    os.killpg(p.pid, signal.SIGKILL)
+    sys.exit("measure.sh did not stop")
+time.sleep(1)
+left = subprocess.run(["pgrep", "-g", str(p.pid)], capture_output=True, text=True).stdout.split()
+if left:
+    os.killpg(p.pid, signal.SIGKILL)
+    sys.exit(f"left running: {left}")
+assert status != 0, status
+PY
 # The audit draws the same lines again and rates a grade file.
 python3 -I "$here/tools/audit.py" draw "$tmp/work/second" "$tmp/audit.tsv" --per-set 1
 python3 -I "$here/tools/audit.py" draw "$tmp/work/second" "$tmp/again.tsv" --per-set 1

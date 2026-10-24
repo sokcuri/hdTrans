@@ -45,7 +45,7 @@ work=${HDTRANS_WORK:-$here/build/work}
 out=$work/$name
 if [ -n "$base" ] && [ ! -d "$base" ]; then base=$work/$(printf '%s' "$base" | tr / -); fi
 [ -z "$base" ] || [ -d "$base" ] || { echo "no run at $base" >&2; exit 2; }
-[ -z "$base" ] || [ "$(cd "$base" && pwd)" != "$(mkdir -p "$out" && cd "$out" && pwd)" ] ||
+[ -z "$base" ] || [ "$(cd "$base" && pwd -P)" != "$(mkdir -p "$out" && cd "$out" && pwd -P)" ] ||
     { echo "the base run is the run itself: $base" >&2; exit 2; }
 [ -x "$cli" ] || { echo "no CLI at $cli" >&2; exit 2; }
 [ -n "${HDTRANS_CORPUS-}${HDTRANS_REF_SAMPLE-}${HDTRANS_TESTDATA-}${HDTRANS_EXAMPLES-}" ] ||
@@ -143,6 +143,7 @@ running, lock = set(), threading.Lock()
 
 
 def stop(*_):
+    signal.signal(signal.SIGTERM, signal.SIG_IGN)
     with lock:
         for process in running:
             process.terminate()
