@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:gram:iku:masu	「さ、いきましょ」	「자, 갑시다」	fix	local
-dict:gram:iku:masu	「地道にいきましょ、千里」	「착실하게 갑시다, 천리」	fix	local
+dict:gram:iku:masu	「地道にいきましょ、千里」	「착실하게 갑시다, 치사토」	fix	local
 dict:gram:iku:masu	強くいきる。	강하게 산다.	keep	local
 dict:gram:iku:masu	いきろ！	살아라!	keep	local
 dict:jisjk:363740	「マスターに危害を加える気ですね。そうはいきません！」	「마스터에 해를 끼칠 생각이군요. 그렇게는 되지 않습니다!」	fix	local

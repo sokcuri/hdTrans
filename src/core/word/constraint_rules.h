@@ -19,6 +19,8 @@ enum class ConstraintWord : uint8_t {
                // not the greetings お帰り and お休み
     EndsInKu,  // a word of two or more characters whose source ends in く (したく, きたく)
     IruForm,   // a word of word.iru-form: spelled like a form of いる and more (いろ 色, いよう 異様)
+    Cued,      // a word whose source a cue of the line or its document names (LookupContext::cued)
+    WithKanji, // a word of two or more characters with a kanji
 };
 
 // What must be next to the word.
@@ -65,6 +67,9 @@ enum class ConstraintContext : uint8_t {
     AfterTeBeforeDake,  // right after て or で, with け after the word and then what BeforeCopula
                         // takes (いただ of いただけ〜)
     BeforeDake,         // the same without the て or で (していただ of していただけ。)
+    NotCommonSense,     // no start of name.common-after follows, which keeps the common sense of
+                        // weather, sky and sea words (時雨が降る, 雷が落ちた)
+    BeforeChan,         // the word ends in ち and ゃん follows, the rest of ちゃん (夕立ち before ゃん), not ゃんと
 };
 
 // The senses a rule rejects.
@@ -99,6 +104,11 @@ enum class ConstraintReject : uint8_t {
     // The verb senses (M) of the word and of the shorter words it starts with, when a sense
     // of the word that is no verb remains.
     Verbs,
+    // Every sense, when the word has a name: a person sense among the candidates or in the
+    // name layer (for a kana word one that sounds like the kana) that is no Korean word of
+    // its other senses; that name replaces them. Not when a person noun, a user entry or a
+    // verb or adjective that inflects past the word reads it.
+    NonCuedName,
 };
 
 struct ConstraintRule {

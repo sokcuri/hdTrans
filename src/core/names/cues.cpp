@@ -279,8 +279,6 @@ bool CueLabelChar(char32_t c) {
 }
 
 bool CueAltAt(std::string_view s, std::size_t pos) {
-    static const std::vector<std::string_view> kWords = {"出撃", "出る", "出ます", "行く", "行き", "いく", "参り", "参る", "参ります",
-                                                         "見参", "抜錨", "了解", "推参", "負け", "守り", "突撃", "いざ"};
     const std::string_view rest = s.substr(pos);
     if (rest.starts_with("「") || rest.starts_with("でち") || rest.starts_with("っす")) return true;
     if (rest.starts_with("です")) {
@@ -291,7 +289,7 @@ bool CueAltAt(std::string_view s, std::size_t pos) {
     }
     if (rest.starts_with("、")) {
         const std::string_view tail = rest.substr(std::string_view("、").size());
-        for (const std::string_view w : kWords) {
+        for (const std::string_view w : dict::ClassMembers("name.action-after")) {
             if (tail.starts_with(w)) return true;
         }
     }
