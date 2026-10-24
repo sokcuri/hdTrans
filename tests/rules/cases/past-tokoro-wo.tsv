@@ -6,3 +6,6 @@ dict:drops-conj:11	大ぶりになって体勢が崩れたところを狙った	
 dict:drops-conj:11	そこからお前が住んでたところを割り出して、後は	거기에서 네가 살고 있던 곳을 산출해, 나머지는	fix	ending-defaults
 dict:drops-conj:11	予定してたところを全部回ったと思った	예정하고 있던 곳을 전부 돌았다고 생각했다	fix	ending-defaults
 dict:drops-conj:11	見たところ	보아하니	keep	ending-defaults
+rewrite:simple-aspect	何だっけ、入学式の日に講堂の場所が分からなくて困ってたところを、殿下たちが見つけた	뭐였더라, 입학식의 날에 강당의 장소를 몰라서 곤란했던 곳을, 전하들이 찾아냈다	fix	rewrites
+rewrite:simple-aspect	困ってた人	곤란했던 사람	keep	rewrites
+rewrite:simple-aspect	知ってた人	알고 있었던 사람	keep	rewrites

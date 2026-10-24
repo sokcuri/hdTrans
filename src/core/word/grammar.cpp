@@ -1037,7 +1037,12 @@ void SimpleAspect(Flusher& f) {
                                 (std::string_view(e->dst).starts_with(resultative) && AdjectiveTarget(it->EntryText(it->selected)));
         if (contracted) {
             const std::size_t cut = e->dst.starts_with(progressive) ? progressive.size() : resultative.size();
-            const std::string simple = ExistentialToVerb(f, std::string_view(e->dst).substr(cut));
+            std::string simple = ExistentialToVerb(f, std::string_view(e->dst).substr(cut));
+            // The form 8 of an adjective is no past (곤란한): 있던 there is its past adnominal (곤란했던).
+            if (const std::span<const std::string_view> past = dict::ClassMembers("ko.adjective-past-adnominal");
+                simple.starts_with("8") && !past.empty() && AdjectiveTarget(it->EntryText(it->selected))) {
+                simple = std::string(past.front()) + simple.substr(1);
+            }
             if (!simple.empty() && !KeepsProgressive(aspect, simple)) it->AssignDirectSlot(it->DirectIndex(), simple);
             continue;
         }
