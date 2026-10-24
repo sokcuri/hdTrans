@@ -162,9 +162,9 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
         size_t start = 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
-            size_t end = ColumnGap(t, i, k > 0, k + 1 < pieces.size());
-            if (end == i) end = EscapeGap(t, i, k > 0, k + 1 < pieces.size());
-            if (end != i) {
+            size_t gapEnd = ColumnGap(t, i, k > 0, k + 1 < pieces.size());
+            if (gapEnd == i) gapEnd = EscapeGap(t, i, k > 0, k + 1 < pieces.size());
+            if (gapEnd != i) {
                 output::Add(part, t.substr(start, i - start));
                 if (!part.empty()) {
                     parts.push_back(std::move(part));
@@ -172,8 +172,8 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
                     part.clear();
                     gap.clear();
                 }
-                gap += t.substr(i, end - i);
-                start = i = end;
+                gap += t.substr(i, gapEnd - i);
+                start = i = gapEnd;
                 count = 0;
                 continue;
             }
