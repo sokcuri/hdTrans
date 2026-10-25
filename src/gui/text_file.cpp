@@ -231,4 +231,10 @@ bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8) {
     return static_cast<bool>(file);
 }
 
+std::filesystem::path TranslatedPath(const std::filesystem::path& input, const std::filesystem::path& folder) {
+    std::filesystem::path name = input.stem();
+    name += std::filesystem::path(u8"_번역.txt");
+    return (folder.empty() ? input.parent_path() : folder) / name;
+}
+
 }  // namespace hdTrans::gui
