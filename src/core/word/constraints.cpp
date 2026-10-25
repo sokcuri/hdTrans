@@ -611,9 +611,9 @@ bool Worker::NotAfterNoun(std::string_view head) {
     if (last == "て" || last == "で" || last == "っ" || last == "ッ") return true;
     // The longest dictionary word of up to eight characters with a kanji or a katakana that ends
     // where head ends, by its first sense as the dictionary orders them (嘘 거짓말, 見 보다, バレ 들키다).
-    std::string_view word = head;
-    while (text::RuneCount(word) > 8) word.remove_prefix(FirstChar(word).size());
-    for (; !word.empty(); word.remove_prefix(FirstChar(word).size())) {
+    std::size_t start = head.size();
+    for (int k = 0; k < 8 && start > 0; k++) start -= LastChar(head.substr(0, start)).size();
+    for (std::string_view word = head.substr(start); !word.empty(); word.remove_prefix(FirstChar(word).size())) {
         if (!HasKanji(word) && NameClassOf(FirstChar(word)) != kClassKatakana) continue;
         for (const dict::Candidate& c : snapshot.GetWordInfo(word, dict::LookupMode::General, {}).list) {
             if (c.source == word && c.codes != nullptr) return c.codes->part.TagIn("MHG");
