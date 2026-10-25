@@ -439,9 +439,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     s.texts.clear();
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
     // A word of the dictionary that starts in the text before a space and goes on past it.
-    const tokenizer::SpaceJoins joins = [&](std::string_view before, std::string_view after) {
-        for (std::size_t start = 0; start < before.size();) {
-            const std::string_view left = before.substr(start);
+    const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after) {
+        for (std::size_t start = 0; start < head.size();) {
+            const std::string_view left = head.substr(start);
             // The candidates point into the query, so it lives as long as they do.
             const std::string query = std::string(left) + std::string(after);
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
@@ -583,7 +583,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // polite speech whose Korean ends a sentence politely (그렇습니다, 봐 주세요; not 일어나 of
     // なさい, not a 済ませた or ますます) and whose Japanese has no casual mark (よ, ね).
     if (!options.reference && facts.text.find("でしょ") != std::string_view::npos &&
-        std::ranges::any_of(speech.styles, [](std::uint8_t s) { return (s & output::kPoliteStyle) != 0; })) {
+        std::ranges::any_of(speech.styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; })) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
         const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);

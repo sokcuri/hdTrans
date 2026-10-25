@@ -36,6 +36,14 @@ if(MSVC)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/INCREMENTAL:NO /OPT:REF /OPT:ICF /DEBUG")
 else()
     add_compile_options(-Wall -Wextra -fno-exceptions -fno-rtti)
+    # A local that hides a local or a parameter (MSVC C4456, C4457). GCC's -Wshadow=local counts the
+    # enclosing function's locals inside a lambda too, which Clang reports with -Wshadow-uncaptured-local;
+    # Clang's -Wshadow also reports hidden members and globals (C4458, C4459).
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wshadow> $<$<COMPILE_LANGUAGE:CXX>:-Wshadow-uncaptured-local>)
+    else()
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wshadow=local>)
+    endif()
     if(HDTRANS_WERROR)
         add_compile_options(-Werror)
     endif()
