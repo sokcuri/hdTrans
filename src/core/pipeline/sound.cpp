@@ -896,6 +896,8 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"ハン") {
         if (Scoff(p, end)) return "흥";
     }
+    // The cry やった asked (ヤッタ？) asks about the success (해냈어?).
+    if (key.starts_with(U"ヤッタ") && s.korean == "앗싸" && AskedAt(rs_, end)) return "해냈어";
     if (s.phrase && AskedAt(rs_, end)) return AskedPast(s.korean);
     if (!s.polite.empty() && PoliteAt(p)) {
         const size_t space = s.korean.rfind(' ');

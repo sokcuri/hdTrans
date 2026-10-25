@@ -1,7 +1,7 @@
 # 규칙: GRM-11
 rule	input	expected	kind	layer
 dict:drops-conj:10	「はぁ…\n帰ろうぞ」	「하아…\n돌아가자」	fix	ending-defaults
-dict:drops-conj:10	「やったー！\n遊ぼうぞ」	「해냈다!\n놀자」	fix	ending-defaults
+dict:drops-conj:10	「やったー！\n遊ぼうぞ」	「앗싸!\n놀자」	fix	ending-defaults
 dict:drops-conj:10	さあ、行こうぞ！	자, 가자!	fix	ending-defaults
 dict:drops-conj:10	本年のこの初春を、わらわと祝おうぞ。	올해의 이 초봄을, 이 몸과 축하하자.	fix	ending-defaults
 dict:drops-conj:10	帰ろうよ	돌아가자	keep	ending-defaults

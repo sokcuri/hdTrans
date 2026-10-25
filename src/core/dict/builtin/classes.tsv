@@ -1,6 +1,7 @@
 // Word classes the passes test words against (dict::InClass, dict::ClassMembers):
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
+//= adverb.at-last	Adverbs of something reached at last (ついに, とうとう), after which a やった is a success (ついにやった 드디어 해냈다).
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
@@ -371,6 +372,11 @@ adverb.degree-feeling	凄く
 adverb.degree-feeling	すっごく
 adverb.degree-feeling	めちゃくちゃ
 
+adverb.at-last	ついに
+adverb.at-last	遂に
+adverb.at-last	とうとう
+adverb.at-last	やっと
+adverb.at-last	ようやく
 adverb.forcing	無理やり
 adverb.forcing	無理矢理
 adverb.forcing	むりやり

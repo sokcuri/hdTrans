@@ -1,4 +1,4 @@
-# 규칙: LEX-53, LEX-30
+# 규칙: LEX-55, LEX-30
 rule	input	expected	kind	layer
 lookup:kin-default	お兄ちゃん、大好き！	오빠, 너무 좋아!	fix	lookup
 lookup:kin-default	お兄ちゃん惡い人？	오빠 나쁜 사람?	fix	lookup

@@ -1,0 +1,28 @@
+# 규칙: LEX-56
+rule	input	expected	kind	layer
+sound:yatta	やった！	앗싸!	fix	sound
+sound:yatta	やったー！	앗싸!	fix	sound
+sound:yatta	やったぁ！良い機体です！ねっ！	앗싸! 좋은 기체입니다! 저기!	fix	sound
+sound:yatta	んっふふ～、ありがと。やった！	응후후~, 고마워. 앗싸!	fix	sound
+sound:yatta	南西の風…やった、縁起がいいよ！	남서의 바람…앗싸, 재수가 좋아!	fix	sound
+sound:yatta	「やった、じゃあ今日の放課後ねっ」	「앗싸, 그럼 오늘의 방과 후네」	fix	sound
+sound:yatta	由良が一番なの、本当？やった！	유라가 제일인 것, 정말? 앗싸!	fix	sound
+sound:yatta	やったぁ！これでもっと戦える！	앗싸! 이것에서 좀 더 싸울 수 있어!	fix	sound
+sound:yatta	「きゃ〜〜〜！！ やったやった！！ 生き残ったよ！」	「꺄아~!! 앗싸 앗싸!! 살아남았어!」	fix	sound
+sound:yatta	ヤッタ？	해냈어?	fix	sound
+cx:yatta-achieve:10	やったね！	해냈네!	fix	rewrites
+cx:yatta-achieve:10	カッコよくなった！やったね！	멋져졌어! 해냈네!	fix	rewrites
+cx:yatta-achieve:10	やったわね！私、地味に、許さないから。	해냈네! 나, 수수하게, 용서하지 않으니까.	fix	rewrites
+cx:yatta-achieve:10	へへっ、やったな。	헤헷, 해냈군.	fix	rewrites
+cx:yatta-achieve:10	やったぜ！ 提督、あたいの活躍見てたかい？	해냈어! 제독, 나의 활약 보고 있었어?	fix	rewrites
+cx:yatta-achieve:10	ついにやった！	마침내 해냈어!	fix	rewrites
+cx:yatta-achieve:10	四十年くらいは滞在できるぞ、やったぜ。	40년 정도는 체재할 수 있겠어, 해냈다.	fix	rewrites
+cx:yatta-achieve:20	カケル、よくやった	카케루, 잘했다	fix	rewrites
+cx:yatta-achieve:20	「よくやったな」	「잘했군」	fix	rewrites
+cx:yatta-achieve:10	宿題をやった。	숙제를 했다.	keep	rewrites
+cx:yatta-achieve:10	「お前がやったのか？」	「네가 한 건가?」	keep	rewrites
+cx:yatta-achieve:10	やるだけ…やったよね…？ さよなら…	할 뿐…했지…? 안녕…	keep	rewrites
+cx:yatta-achieve:10	やったよう	한 듯	keep	rewrites
+cx:yatta-achieve:20	宿題はよくやった。	숙제는 잘 했다.	keep	rewrites
+cx:yatta-achieve:10	大学でもバターンやったからね	대학에서도 콰앙했으니까	keep	rewrites
+cx:yatta-achieve:10	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	keep	rewrites
