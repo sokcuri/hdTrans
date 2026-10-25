@@ -292,9 +292,9 @@ try {
         assert.equal(soft.translate('「高い」'), '「높아」', 'a per-call level applies to that call only');
         assert.equal(soft.translate('高い。'), '높다.', 'narration keeps its plain end');
         assert.equal(soft.translate('「高い。'), '「높아.');
-        assert.equal(soft.translate('高い」'), '높다」', 'a quote does not carry to the next call');
+        assert.equal(soft.translate('高い。」'), '높다.」', 'a quote does not carry to the next call');
         soft.reset();
-        assert.equal(soft.translate('高い」'), '높다」', 'reset keeps calls independent');
+        assert.equal(soft.translate('高い。」'), '높다.」', 'reset keeps calls independent');
         soft.setSpeech('strict');
         assert.equal(soft.translate('「高い」'), '「높다」');
         assert.throws(() => soft.setSpeech('always'), /speech takes soft or strict/);

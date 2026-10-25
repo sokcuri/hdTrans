@@ -340,7 +340,8 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: soft\n");
     Check(hdTrans_Reload() == 0, "reload soft speech");
     Check(Translate("「高い」") == "「높아」", "configured soft speech");
-    Check(Translate("「高い。") == "「높아." && Translate("高い」") == "높다」", "a quote does not carry to the next call");
+    Check(Translate("「高い。") == "「높아." && Translate("高い。」") == "높다.」", "a quote does not carry to the next call");
+    Check(Translate("高い") == "높아" && Translate("高い。") == "높다.", "a bare line of speech is soft");
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: strict\n");
     Check(hdTrans_Reload() == 0, "reload strict speech");
     Check(Translate("「高い」") == "「높다」", "configured strict speech");

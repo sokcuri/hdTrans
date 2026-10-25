@@ -179,8 +179,9 @@ bool StiffSpeech(std::string_view text) {
 }
 
 // Whether text, the own text of a quote, is casual speech: a sentence-final particle (よ,
-// ね, わ, じゃん, さ, もん, って, かな, かしら) or a contraction (ちゃう, てる, とく, ねえ).
-bool CasualOf(std::string_view text) {
+// ね, わ, じゃん, さ, もん, って, かな, かしら) or, with contractions, a contraction (ちゃう,
+// てる, とく, ねえ).
+bool CasualOf(std::string_view text, bool contractions = true) {
     if (StiffSpeech(text)) return false;
     // よ: not an old command (せよ, やめよ, 考えよ), ぞよ or a call (部下たちよ); ね: not かね;
     // って: a hearsay or quoting って (行くって, 来たって, そうだって), not a te-form.
@@ -208,6 +209,7 @@ bool CasualOf(std::string_view text) {
             return true;
         }
     }
+    if (!contractions) return false;
     for (const std::string_view c : {"ちゃう", "ちゃった", "ちゃって", "ちゃえ", "ちゃお", "じゃう", "じゃった", "じゃって",
                                      "じゃえ", "じゃお"}) {
         if (text.find(c) != std::string_view::npos) return true;
@@ -308,6 +310,24 @@ std::vector<bool> CasualQuotes(std::string_view line, int depth) {
     std::vector<bool> casual(texts.size(), false);
     for (std::size_t k = 1; k < texts.size(); k++) casual[k] = CasualOf(texts[k]);
     return casual;
+}
+
+Spoken SpokenLine(std::string_view line, int depth) {
+    if (depth > 0 || line.starts_with("　")) return Spoken::No;
+    if (CasualOf(OwnTexts(line, 0)[0], false)) return Spoken::Marked;
+    std::u32string kept;  // the line without spaces
+    int spaces = 0;
+    for (std::string_view t = line; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        t.remove_prefix(r.size == 0 ? 1 : r.size);
+        spaces = text::IsSpace(r.cp) ? spaces + 1 : 0;
+        if (spaces >= 2 || RuneIn(r.cp, U"：∶:")) return Spoken::No;
+        if (!text::IsSpace(r.cp)) kept += r.cp;
+    }
+    while (!kept.empty() && RuneIn(kept.back(), U"☆★♪♡♥❤ー」』）)")) kept.pop_back();
+    // A comma or a dash goes on to the next line.
+    if (kept.empty() || RuneIn(kept.back(), U"。．.！!？?…‥、，,―─—–－")) return Spoken::No;
+    return Spoken::End;
 }
 
 }  // namespace hdTrans::pipeline

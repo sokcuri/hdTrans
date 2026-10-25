@@ -404,6 +404,7 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
 struct LineSpeech {
     bool casual = false;
     bool narrated = false;
+    pipeline::Spoken spoken = pipeline::Spoken::No;
     bool markedOnly = false;
     bool asked = false;
     bool poiTic = false;
@@ -470,6 +471,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     composeSettings.casualMarkedOnly = speech.markedOnly;
     composeSettings.asked = text && speech.asked;
     composeSettings.narrated = speech.narrated;
+    composeSettings.spoken = speech.spoken != pipeline::Spoken::No;
+    composeSettings.spokenByEnd = speech.spoken == pipeline::Spoken::End;
     composeSettings.literal = text && !options.reference && options.wordImprovements.literalCleanup;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
@@ -550,8 +553,10 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
-        casual = pipeline::CasualQuotes(pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell}),
-                                        carry.depth);
+        const std::string collapsed = pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell});
+        casual = pipeline::CasualQuotes(collapsed, carry.depth);
+        // Soft: a line of a document without 「」 that reads as speech (spec SPC-18).
+        if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
             // (知らねえ, 言っとく).
@@ -605,7 +610,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         for (std::uint8_t& style : spoken) {
             if (style == 0) style = output::kCasualSpeech;
         }
-        return output::SpokenWords(compose(speech, observer, options), carry.depth, spoken);
+        return output::SpokenWords(compose(speech, observer, options), carry.depth, spoken,
+                                   speech.spoken != pipeline::Spoken::No);
     }
     // A casual quote whose Korean keeps a polite end (고마워요, 좋네요) keeps its plain ends:
     // 해체 next to 해요체 reads as two speakers. The line is composed again without it, or

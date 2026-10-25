@@ -35,4 +35,12 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth = 0);
 // ended by が).
 std::vector<bool> CasualQuotes(std::string_view line, int depth = 0);
 
+// Whether line, in a document without 「」, is a line of speech (spec SPC-18): Marked when its
+// text outside quotes holds a sentence-final particle of casual speech (CasualQuotes, not its
+// contractions); End when it ends without 。, ！, ？, an ellipsis, a comma or a dash, looking
+// past trailing ☆, ♪, ー and closing brackets, and holds no label colon (名前：説明) or
+// column of spaces. Never a line indented with an ideographic space.
+enum class Spoken : std::uint8_t { No, End, Marked };
+Spoken SpokenLine(std::string_view line, int depth = 0);
+
 }  // namespace hdTrans::pipeline
