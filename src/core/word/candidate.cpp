@@ -576,11 +576,7 @@ Record* VerbBeforePolite(Record* records, std::string_view text) {
         first = first->child;
     }
     if (first == nullptr || At(first->partCode, 1) == '4' || !text.starts_with(first->source)) return records;
-    bool polite = false;
-    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("follower.polite-masu"))) {
-        polite = polite || text.substr(first->source.size()).starts_with(m);
-    }
-    if (!polite) return records;
+    if (dict::StartsWithMember(HDTRANS_CLASS("follower.polite-masu"), text.substr(first->source.size())) == 0) return records;
     bool spelled = false;
     for (const Record* r = first; r != nullptr; r = r->child) {
         if (r->source.size() > first->source.size()) return records;
@@ -685,7 +681,7 @@ bool UnitAfterNumber(std::string_view text, std::size_t size) {
     if (size > text.size()) return false;
     std::string_view rest = text.substr(size);
     while (IsNumeral(FirstChar(rest))) rest.remove_prefix(FirstChar(rest).size());
-    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("counter.unit-abbrev")), [&](std::string_view u) { return rest.starts_with(u); });
+    return dict::StartsWithMember(HDTRANS_CLASS("counter.unit-abbrev"), rest) > 0;
 }
 
 }  // namespace
@@ -1037,8 +1033,7 @@ bool Worker::SpellsNumber(Record* records, const Record& number, std::string_vie
     }
     // A name spelled like the number before an honorific (九十九さん) is the name.
     const std::string_view after = text.substr(std::min(source.size(), text.size()));
-    if (std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("honorific.candidate")),
-                            [&](std::string_view h) { return after.starts_with(h); })) {
+    if (dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0) {
         for (const Record* r = records; r != nullptr; r = r->child) {
             if (r->source == source && (r->partCode.starts_with("N13") || r->semantic.starts_with("QPN"))) return false;
         }
@@ -1133,7 +1128,7 @@ bool Worker::CountBeforeFollower(Record* records, const Record& number, std::str
     if (length == 0 || length > text.size()) return false;
     // The times sign is a token of its own; the count after it counts too (四面×四面).
     const auto follower = [](std::string_view s) {
-        return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("follower.count")), [&](std::string_view f) { return s.starts_with(f); });
+        return dict::StartsWithMember(HDTRANS_CLASS("follower.count"), s) > 0;
     };
     std::string_view after = text.substr(length);
     if (after.empty() && token + 1 < TokenCount()) after = tokens.Canonical(static_cast<std::size_t>(token + 1));
@@ -1173,8 +1168,7 @@ bool Worker::VerbalNounAtCounter(Record* records, const Record& number, std::str
         const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
         const bool mark = next != 0 && !text::IsKanji(next) && (next < U'\u3041' || next > U'\u30FF');
         if (after.empty() || mark ||
-            std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("follower.verbal-noun")),
-                                [&](std::string_view f) { return after.starts_with(f); })) {
+            dict::StartsWithMember(HDTRANS_CLASS("follower.verbal-noun"), after) > 0) {
             return true;
         }
     }
@@ -1187,12 +1181,7 @@ namespace {
 bool UnitRune(char32_t r) { return tokenizer::Class(r) != 0; }
 
 // The length of the mark at the start of s that may stand between two copies (pause.copy), or 0.
-std::size_t CopyPauseAt(std::string_view s) {
-    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("pause.copy"))) {
-        if (s.starts_with(p)) return p.size();
-    }
-    return 0;
-}
+std::size_t CopyPauseAt(std::string_view s) { return dict::StartsWithMember(HDTRANS_CLASS("pause.copy"), s); }
 
 // The copies at the start of text of a unit of two to ten characters said again straight
 // after it or after a pause.copy mark (いやだいやだ, 待って、待って): the bytes of the unit,
@@ -1658,10 +1647,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     // The nickname すけ also follows a person name of the base dictionary (里奈すけ).
     const bool person = !name->group->entries.empty() && std::string_view(name->group->entries[0]->attr).starts_with("QPN");
     if (!name->IsNameItem() && !(person && NicknameSuke(text))) return nullptr;
-    bool titleWord = false;
-    for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("noun.title-word"))) {
-        if (text.starts_with(t)) titleWord = true;
-    }
+    const bool titleWord = dict::StartsWithMember(HDTRANS_CLASS("noun.title-word"), text) > 0;
     std::string_view key, kr;
     bool space = false;
     for (const Honorific& h : kHonorifics) {
@@ -1676,9 +1662,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     }
     if (key.empty()) return nullptr;
     const std::string_view nameText = name->group->entries[0]->dst;
-    for (const std::string_view end : dict::ClassMembers(HDTRANS_CLASS("ko.title-end"))) {
-        if (nameText.ends_with(end)) kr = {};
-    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("ko.title-end"), nameText) > 0) kr = {};
     Entry* e = NewEntry();
     e->dst.assign(kr);
     e->code = "110";

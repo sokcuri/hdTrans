@@ -25,9 +25,7 @@ bool PredicateFollows(const Item* it) {
     for (const std::string_view a : kStops) {
         if (next.starts_with(a)) return false;
     }
-    for (const std::string_view a : dict::ClassMembers(HDTRANS_CLASS("aux.te-start"))) {
-        if (next.starts_with(a)) return false;
-    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("aux.te-start"), next) > 0) return false;
     for (; n != nullptr; n = n->next) {
         if (n->detail->Yougo()) return n->detail->cls == kDetailVerb;
         const std::string_view s = n->group->surface;
@@ -55,9 +53,7 @@ void TeThanks(Flusher& f) {
         if (e == nullptr || e->dst != "6" || it->group->surface.ends_with("借り")) continue;
         const Item* n = it->After();
         if (n != nullptr && n->group->surface == "、") n = n->next;
-        if (n != nullptr && std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("adverb.degree-feeling")), [&](std::string_view d) {
-                return n->group->surface == d;
-            })) {
+        if (n != nullptr && dict::InClass(HDTRANS_CLASS("adverb.degree-feeling"), n->group->surface)) {
             n = n->next;
         }
         if (n == nullptr) continue;
@@ -69,8 +65,7 @@ void TeThanks(Flusher& f) {
                                                      a->group->surface == "に" || a->group->surface == "の")) {
             continue;
         }
-        if (std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("word.thanks")),
-                                [&](std::string_view t) { return next.starts_with(t); })) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("word.thanks"), next) > 0) {
             it->AssignDirectSlot(it->DirectIndex(), "6서");
         }
     }

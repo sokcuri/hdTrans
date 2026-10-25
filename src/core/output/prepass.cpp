@@ -351,8 +351,7 @@ bool HangulWord(std::string_view s) {
 bool PredicateNoun(const std::vector<ResolvedItem>& items, int n) {
     if (!Contains(GAttr(items[n]), "Hd")) return false;
     if (n + 1 >= static_cast<int>(items.size()) || items[n + 1].tokenIndex != items[n].tokenIndex) return true;
-    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("suru.predicate-noun")),
-                               [&](std::string_view p) { return items[n + 1].surface.starts_with(p); });
+    return dict::StartsWithMember(HDTRANS_CLASS("suru.predicate-noun"), items[n + 1].surface) > 0;
 }
 
 // Kanji counters read in Sino-Korean that a number joins (2000년, 14일째, 3회).
@@ -555,9 +554,8 @@ bool HadaNounBeforeSuru(const std::vector<ResolvedItem>& items, int i, std::stri
     }
     const ResolvedItem& next = items[i + 1];
     if (EntryText(next) != "&AV@") return false;
-    const auto starts = dict::ClassMembers(HDTRANS_CLASS("suru.verbal-noun-start"));
     return dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface) ||
-           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+           dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0;
 }
 
 // Whether the next item that writes something, written straight after item i, attaches to
@@ -585,9 +583,8 @@ bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<Tok
         VerbPhraseNoun(word)) {
         return false;
     }
-    const auto starts = dict::ClassMembers(HDTRANS_CLASS("suru.verbal-noun-start"));
     return dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface) ||
-           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+           dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0;
 }
 
 // Whether item k follows item k - 1 with nothing between them: in the same token, or at the
@@ -1337,7 +1334,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && Contains(tags, "Tu") &&
         dict::InClass(HDTRANS_CLASS("honorific.candidate"), item.surface) &&
         !Contains(nextTags, "Tu") && !Contains(nextTags, "Z7") && WidthOf(nextEntry) >= 2 &&
-        std::ranges::none_of(dict::ClassMembers(HDTRANS_CLASS("particle.after-name")), [&](std::string_view p) { return next.surface.starts_with(p); })) {
+        dict::StartsWithMember(HDTRANS_CLASS("particle.after-name"), next.surface) == 0) {
         return Result(std::move(t), true);
     }
     // A noun that starts with a kanji and is said again right after itself is a word of its own
@@ -1434,20 +1431,16 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
                                     tokenizer::Class(FirstRune(item.surface)) == tokenizer::kClassKatakana ||
                                     kanjiCompound(item.surface) ||
                                     (settings_.literal && koreanVerbalNoun && stemOrHonorific(item.surface));
-            auto startsWithAny = [](std::string_view s, std::span<const std::string_view> list) {
-                return std::any_of(list.begin(), list.end(), [&](std::string_view p) { return s.starts_with(p); });
-            };
             if (verbalNoun && nextEntry == "&AV@" &&
                 dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface)) {
                 return Result(std::move(t), false);
             }
             // される is written with the marker of 되다; its written Korean shows whether 되다
             // follows the noun (マージされた 머지되었다, but 温存され過ぎた 온존 너무 되었다).
-            const std::span<const std::string_view> doing = dict::ClassMembers(HDTRANS_CLASS("ko.doing"));
-            const bool passive =
-                next.surface.starts_with("さ") && nextEntry == "&C6@" && startsWithAny(remainder, doing);
-            if (verbalNoun && startsWithAny(next.surface, dict::ClassMembers(HDTRANS_CLASS("suru.verbal-noun-start"))) &&
-                (startsWithAny(nextEntry, doing) || passive)) {
+            const bool passive = next.surface.starts_with("さ") && nextEntry == "&C6@" &&
+                                 dict::StartsWithMember(HDTRANS_CLASS("ko.doing"), remainder) > 0;
+            if (verbalNoun && dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0 &&
+                (dict::StartsWithMember(HDTRANS_CLASS("ko.doing"), nextEntry) > 0 || passive)) {
                 return Result(std::move(t), false);
             }
             if (nextFirst == ")") return Result(std::move(t), false);
@@ -1616,9 +1609,7 @@ void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pie
     }
     if (tokens[next].span == 0) {
         const std::string_view text = tokens[next].text;
-        for (const std::string_view close : dict::ClassMembers(HDTRANS_CLASS("mark.close-after-space"))) {
-            if (text.starts_with(close)) return;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("mark.close-after-space"), text) > 0) return;
     }
     Add(out, " ");
 }

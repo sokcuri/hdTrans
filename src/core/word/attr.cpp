@@ -222,9 +222,7 @@ bool Item::IsQuestionWord() const {
         if (!s.starts_with(wonder)) continue;
         const std::string_view rest = s.substr(wonder.size());
         if (rest.empty() || text::IsKanji(text::DecodeRune(rest).cp)) return true;
-        for (const std::string_view part : dict::ClassMembers(HDTRANS_CLASS("particle.wonder"))) {
-            if (rest.starts_with(part)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("particle.wonder"), rest) > 0) return true;
         if (cls != '0' && cls != '3') return true;
     }
     return false;
@@ -258,8 +256,7 @@ bool Item::AfterQuestionWord(bool clause) const {
             (after == "か" ||
              std::u32string_view(U"がをにでもはのとへか").find(text::DecodeRune(after.substr(std::string_view("か").size())).cp) !=
                  std::u32string_view::npos);
-        const auto indefinite = dict::ClassMembers(HDTRANS_CLASS("question.indefinite-after"));
-        if (indefiniteKa || std::any_of(indefinite.begin(), indefinite.end(), [&](std::string_view m) { return after.starts_with(m); })) {
+        if (indefiniteKa || dict::StartsWithMember(HDTRANS_CLASS("question.indefinite-after"), after) > 0) {
             continue;
         }
         if (x->IsQuestionWord()) return true;
@@ -302,7 +299,7 @@ bool Item::ReadsCount(int i) {
     std::string_view rest = s.substr(k);
     if (rest.empty()) return numeral;
     // A fraction (五分の一) and a count with a half (四畳半, 一時間半) are counts too.
-    if (std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("fraction.of")), [&](std::string_view of) { return rest.starts_with(of); })) {
+    if (dict::StartsWithMember(HDTRANS_CLASS("fraction.of"), rest) > 0) {
         return FractionAt(s, k);
     }
     if (rest.size() > std::string_view("半").size() && rest.ends_with("半")) rest.remove_suffix(std::string_view("半").size());
@@ -423,7 +420,7 @@ bool Item::IsRuleRightBoundary() const {
         const char32_t after = text::DecodeRune(ns.substr(b.size())).cp;
         bound = bound || ns.size() == b.size() || std::u32string_view(U"にがをはもでのだかとなじ").find(after) != std::u32string_view::npos;
     }
-    for (const std::string_view b : dict::ClassMembers(HDTRANS_CLASS("aux.bound-pause"))) bound = bound || ns.starts_with(b);
+    bound = bound || dict::StartsWithMember(HDTRANS_CLASS("aux.bound-pause"), ns) > 0;
     // かな as the particle that asks (楽しい……かな), not かなり or the verb かなう.
     bound = bound || (At(nc, 0) == '2' && ns.starts_with("かな"));
     // Nor does a common noun, which the predicate may still modify (暖かい…居場所), or an

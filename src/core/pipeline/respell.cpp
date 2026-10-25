@@ -56,9 +56,8 @@ std::string RespellKatakanaEndings(std::string_view line) {
         const char32_t prev = internal::LastRune(line.substr(0, pos)).cp;
         if (dict::InClass(HDTRANS_CLASS("spelling.katakana-copula"), core)) {
             const std::string_view before = line.substr(0, pos);
-            const std::span<const std::string_view> kept = dict::ClassMembers(HDTRANS_CLASS("spelling.katakana-copula-kept-after"));
             const std::span<const std::string_view> afterKanji = dict::ClassMembers(HDTRANS_CLASS("spelling.katakana-copula-kept-after-kanji"));
-            return std::none_of(kept.begin(), kept.end(), [&](std::string_view k) { return before.ends_with(k); }) &&
+            return dict::EndsWithMember(HDTRANS_CLASS("spelling.katakana-copula-kept-after"), before) == 0 &&
                    std::none_of(afterKanji.begin(), afterKanji.end(), [&](std::string_view k) {
                        return before.ends_with(k) && text::IsKanji(internal::LastRune(before.substr(0, before.size() - k.size())).cp);
                    });

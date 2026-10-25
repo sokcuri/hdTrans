@@ -289,9 +289,7 @@ bool CueAltAt(std::string_view s, std::size_t pos) {
     }
     if (rest.starts_with("、")) {
         const std::string_view tail = rest.substr(std::string_view("、").size());
-        for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("name.action-after"))) {
-            if (tail.starts_with(w)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("name.action-after"), tail) > 0) return true;
     }
     return false;
 }
@@ -348,9 +346,7 @@ bool PlainLabel(std::string_view p) {
 
 bool LabelRole(std::string_view p) {
     if (dict::InClass(HDTRANS_CLASS("noun.label-role"), p) || LabelRolePattern(p)) return true;
-    for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("suffix.label-role"))) {
-        if (p.ends_with(s)) return true;
-    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("suffix.label-role"), p) > 0) return true;
     for (const char c : p) {
         if (static_cast<unsigned char>(c) < 0x80) return true;
     }
@@ -564,13 +560,7 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     std::string t(run.text);
     std::size_t start = run.start, end = run.end;
     std::string_view rest = line.substr(end);
-    std::string_view h;
-    for (const std::string_view x : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
-        if (rest.starts_with(x)) {
-            h = x;
-            break;
-        }
-    }
+    std::string_view h = rest.substr(0, dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
     if (h.empty()) {
         for (const std::string_view k : dict::ClassMembers(HDTRANS_CLASS("honorific.kanji-name"))) {
             if (t.size() > k.size() && std::string_view(t).ends_with(k)) {

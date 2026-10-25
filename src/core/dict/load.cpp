@@ -322,14 +322,11 @@ std::string NegationEndingError(std::string_view key, std::string_view target, P
     if (spaced) rest.remove_prefix(1);
     if (!rest.starts_with(kNeg)) return {};
     if (key.empty() || static_cast<unsigned char>(key[0]) < 0x80) return {};  // a placeholder key (D, V)
-    const auto starts = [&](std::span<const std::string_view> members) {
-        return std::any_of(members.begin(), members.end(), [&](std::string_view m) { return key.starts_with(m); });
-    };
-    if (starts(ClassMembers(HDTRANS_CLASS("ending.negative-start"))) && !starts(ClassMembers(HDTRANS_CLASS("ending.negative-start-not")))) {
+    if (StartsWithMember(HDTRANS_CLASS("ending.negative-start"), key) > 0 && StartsWithMember(HDTRANS_CLASS("ending.negative-start-not"), key) == 0) {
         if (spaced) return {};
         return "the negation \"" + std::string(target) + "\" needs a space before 않";
     }
-    if (starts(ClassMembers(HDTRANS_CLASS("ending.other-negation")))) return {};
+    if (StartsWithMember(HDTRANS_CLASS("ending.other-negation"), key) > 0) return {};
     return "the ending \"" + std::string(key) + "\" writes a negation (\"" + std::string(target) +
            "\") but starts with no member of ending.negative-start or ending.other-negation";
 }

@@ -28,16 +28,6 @@ constexpr std::string_view kOpens = "「『（(【\n。！？!?…‥―♪」�
 constexpr std::string_view kCloses = "。！？!?…‥、」』）)♪ 　";
 constexpr std::string_view kNumerals = "0123456789０１２３４５６７８９一二三四五六七八九十百";
 
-using Members = std::span<const std::string_view>;
-
-bool StartsWithAny(std::string_view s, Members set) {
-    return std::ranges::any_of(set, [&](std::string_view m) { return s.starts_with(m); });
-}
-
-bool EndsWithAny(std::string_view s, Members set) {
-    return std::ranges::any_of(set, [&](std::string_view m) { return s.ends_with(m); });
-}
-
 std::string_view TrimEndSpaces(std::string_view s) {
     while (s.ends_with(" ") || s.ends_with("　")) s.remove_suffix(s.ends_with(" ") ? 1 : std::string_view("　").size());
     return s;
@@ -65,8 +55,8 @@ bool UtteranceEnd(std::string_view after) { return after.empty() || InRunes(Firs
 bool TitleBefore(std::string_view before, bool katakana) {
     std::string_view b = WithoutEnd(WithoutEnd(before, "「"), "『");
     if (b.size() == before.size()) b = WithoutEnd(b, "、");
-    if (EndsWithAny(b, dict::ClassMembers(HDTRANS_CLASS("name.title-ship")))) return true;
-    if (katakana && b.size() == before.size() && EndsWithAny(b, dict::ClassMembers(HDTRANS_CLASS("name.title-person")))) return true;
+    if (dict::EndsWithMember(HDTRANS_CLASS("name.title-ship"), b) > 0) return true;
+    if (katakana && b.size() == before.size() && dict::EndsWithMember(HDTRANS_CLASS("name.title-person"), b) > 0) return true;
     if (b.size() == before.size()) b = WithoutEnd(b, "の");
     if (!b.ends_with("番艦")) return false;
     b.remove_suffix(std::string_view("番艦").size());
@@ -117,21 +107,21 @@ bool HonorableKey(const dict::Snapshot& snap, std::string_view key) {
 // 霞改二), or a phrase of naming after a word that HonorableKey allows (アヤメと名乗る; not
 // 神と名乗る).
 bool SuffixAfter(const dict::Snapshot& snap, std::string_view after, std::string_view key) {
-    if (StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.suffix-after")))) return true;
-    if (StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.intro-after")))) return HonorableKey(snap, key);
+    if (dict::StartsWithMember(HDTRANS_CLASS("name.suffix-after"), after) > 0) return true;
+    if (dict::StartsWithMember(HDTRANS_CLASS("name.intro-after"), after) > 0) return HonorableKey(snap, key);
     return false;
 }
 
 // A class after a ship's name of two kanji or more, also after a prefix of the class (陽炎型,
 // 改陽炎型, 初期陽炎型).
 bool ClassAfter(std::string_view after, std::string_view key, bool kanji) {
-    return kanji && text::RuneCount(key) >= 2 && StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.class-after")));
+    return kanji && text::RuneCount(key) >= 2 && dict::StartsWithMember(HDTRANS_CLASS("name.class-after"), after) > 0;
 }
 
 // An honorific after a word that HonorableKey allows (筧君): a cue of its line only, since the
 // name registry weighs honorifics across the lines of a document.
 bool HonorificAfter(const dict::Snapshot& snap, std::string_view after, std::string_view key) {
-    return StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("honorific.candidate"))) && !after.starts_with("ちゃんと") &&
+    return dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0 && !after.starts_with("ちゃんと") &&
            !after.starts_with("くんだり") && HonorableKey(snap, key);
 }
 
@@ -163,12 +153,12 @@ bool NameEnd(std::string_view after) {
         after.starts_with("だ") || after.starts_with("改")) {
         return true;
     }
-    return StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("particle.after-name"))) ||
-           StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.introduction-copula"))) ||
-           StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.suffix-after"))) ||
-           StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.class-after"))) ||
-           StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("name.intro-after"))) ||
-           StartsWithAny(after, dict::ClassMembers(HDTRANS_CLASS("honorific.candidate")));
+    return dict::StartsWithMember(HDTRANS_CLASS("particle.after-name"), after) > 0 ||
+           dict::StartsWithMember(HDTRANS_CLASS("name.introduction-copula"), after) > 0 ||
+           dict::StartsWithMember(HDTRANS_CLASS("name.suffix-after"), after) > 0 ||
+           dict::StartsWithMember(HDTRANS_CLASS("name.class-after"), after) > 0 ||
+           dict::StartsWithMember(HDTRANS_CLASS("name.intro-after"), after) > 0 ||
+           dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0;
 }
 
 // A speaker label: the word alone at the start of the line before 「, 『 or a colon.
@@ -192,7 +182,7 @@ bool LabelAt(std::string_view before, std::string_view after) {
 // characters or more only (松、了解 is the tree too).
 bool ActionAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     return UtteranceStart(before) && after.starts_with("、") && !PredicateStem(snap, key) && NounKey(snap, key) &&
-           StartsWithAny(after.substr(std::string_view("、").size()), dict::ClassMembers(HDTRANS_CLASS("name.action-after")));
+           dict::StartsWithMember(HDTRANS_CLASS("name.action-after"), after.substr(std::string_view("、").size())) > 0;
 }
 
 // A self-introduction: the word and a copula or よ make the first sentence of the line (睦月です。,

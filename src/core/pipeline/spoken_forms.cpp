@@ -161,10 +161,7 @@ constexpr std::u32string_view kNegativeEnd = U"！!？?。、…‥」』ぞよ�
 
 // Whether before ends with a member of casual.ikanai-after.
 bool AfterIkanaiWord(std::string_view before) {
-    for (std::string_view w : dict::ClassMembers(HDTRANS_CLASS("casual.ikanai-after"))) {
-        if (before.ends_with(w)) return true;
-    }
-    return false;
+    return dict::EndsWithMember(HDTRANS_CLASS("casual.ikanai-after"), before) > 0;
 }
 
 // ([一-龥々][らわかがまば]|許さ|わから|しら|かまわ|いか)ん([！!？?。、…‥」』ぞよわがしけっ]|$)
@@ -358,9 +355,7 @@ bool ExclamationNa(std::string_view s, size_t pos, Match& m) {
 
 std::string ReplaceExclamationNa(const Match& m) {
     const Match g = Rematch(m, ExclamationNa);
-    for (std::string_view ending : dict::ClassMembers(HDTRANS_CLASS("ending.no-exclamation-na"))) {
-        if (g.group[1].ends_with(ending)) return std::string(m.group[0]);
-    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("ending.no-exclamation-na"), g.group[1]) > 0) return std::string(m.group[0]);
     size_t trim = 0;
     while (OneOf(g.group[2], trim, U"ぁあ")) {}
     return Cat({g.group[1], "なあ", g.group[2].substr(trim), g.group[3]});

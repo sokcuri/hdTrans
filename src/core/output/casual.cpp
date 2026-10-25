@@ -273,9 +273,7 @@ std::string_view Clause(std::string_view before) {
 // an action, without a question word and without a subject other than the speaker
 // (雨が降る 비가 와, 誰が行く 누가 가); the verbs of ko-verb.casual-state state.
 bool Planned(std::string_view word, std::string_view clause) {
-    for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("ko-verb.casual-state"))) {
-        if (word.ends_with(s)) return false;
-    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("ko-verb.casual-state"), word) > 0) return false;
     // A question word, not an indefinite one (誰も, 何か, いつも).
     for (const std::string_view q : {"何", "なに", "なんで", "なぜ", "どうして", "誰", "だれ", "どこ", "いつ", "どれ"}) {
         for (std::size_t at = clause.find(q); at != std::string_view::npos; at = clause.find(q, at + 1)) {
@@ -845,14 +843,8 @@ void Composer::WriteCasual(int first, int last) {
         const std::string present = PresentWord(it.ending.text, stem);
         // 말한다 in 해체 (말해) reads as an order; a name (虹輝と言う) or a promise keeps it.
         if (present.ends_with("말한다")) continue;
-        bool stative = false;
-        for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.casual-state"))) {
-            stative = stative || std::string_view(it.surface).starts_with(v);
-        }
-        bool state = false;
-        for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("ko-verb.casual-state"))) {
-            state = state || present.ends_with(s);
-        }
+        const bool stative = dict::StartsWithMember(HDTRANS_CLASS("verb.casual-state"), it.surface) > 0;
+        const bool state = dict::EndsWithMember(HDTRANS_CLASS("ko-verb.casual-state"), present) > 0;
         // A present action before ！, … or ～, or drawn out, keeps -ㄴ다, an exclamation (行く！ 간다!,
         // 勝つ！ 이긴다!, イくぅぅっ 간다아앗); before ？ it asks in 해체 (行く？ 가?). A verb of 형용동사
         // (好きだ 좋아한다) states.

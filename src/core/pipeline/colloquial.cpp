@@ -863,7 +863,7 @@ size_t TauntTail(std::u32string_view rs, size_t i, size_t end) {
         if (d == 0 || d >= t.size() || i < d + 1) continue;
         const std::u32string_view head = std::u32string_view(t).substr(0, d), tail = std::u32string_view(t).substr(d + 1);
         if (rs.substr(i - d, d) != head || !IsWordRune(rs[i - d - 1]) || rs.substr(end, tail.size()) != tail ||
-            dict::InClass(HDTRANS_CLASS("ending.taunt-not-after"), EncodeText(rs.substr(i - d - 1, 1)))) {
+            dict::InClassRune(HDTRANS_CLASS("ending.taunt-not-after"), rs[i - d - 1])) {
             continue;
         }
         if (end + tail.size() >= rs.size() || IsPause(rs[end + tail.size()])) return tail.size();

@@ -185,15 +185,11 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
         dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), it->group->surface)) {
         return ObjectWithoutRecipient(it);
     }
-    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("ending.rare-potential"))) {
-        if (rest.starts_with(p)) return false;
-    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0) return false;
     const bool listed =
         dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), it->group->surface) || CompoundAction(it->group->surface);
     if (!listed && !Transitive(it)) return false;
-    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("ending.rare-passive"))) {
-        if (rest.starts_with(p)) return true;
-    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0) return true;
     const Item* subject = nullptr;
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
         const std::string_view s = p->group->surface;
@@ -251,18 +247,13 @@ bool ModifiesNoun(const Item* it) {
     const std::string_view own = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
     return n != nullptr && n->tokenIndex == it->tokenIndex && (own.ends_with("る") || own.ends_with("た")) &&
            At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
-           !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("noun.clause")),
-                                [&](std::string_view c) { return n->group->surface.starts_with(c); });
+           dict::StartsWithMember(HDTRANS_CLASS("noun.clause"), n->group->surface) == 0;
 }
 
 // Whether noun item n names someone the speaker honours.
 bool HonouredPerson(const Item* n) {
     if (n == nullptr || n->detail->Yougo() || n->group->entries.empty()) return false;
-    const std::string_view s = n->group->surface;
-    for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("honorific.honoured-person"))) {
-        if (s.ends_with(t)) return true;
-    }
-    return false;
+    return dict::EndsWithMember(HDTRANS_CLASS("honorific.honoured-person"), n->group->surface) > 0;
 }
 
 // The Korean of the quote passive of item it (天才と言われた) that is not before a noun it
@@ -405,9 +396,7 @@ bool Contrast(std::string_view rest) {
         if (!rest.starts_with(form)) continue;
         std::string_view after = rest.substr(form.size());
         if (after.starts_with(kJaComma)) after.remove_prefix(kJaComma.size());
-        for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("particle.contrast"))) {
-            if (after.starts_with(p)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("particle.contrast"), after) > 0) return true;
     }
     return false;
 }
@@ -418,8 +407,7 @@ bool DescribedNoun(const Worker& w, const Item* it) {
     const Item* n = it->After();
     return n != nullptr && n->tokenIndex == it->tokenIndex && At(n->Code(std::max(n->selected, 0)), 0) == '1' &&
            !UtteranceEnd(w, n) && !RuneIn(text::DecodeRune(From(n->text, n->start + n->length)).cp, "、。！？!?…‥」』）)") &&
-           !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("noun.clause")),
-                                [&](std::string_view c) { return n->group->surface.starts_with(c); });
+           dict::StartsWithMember(HDTRANS_CLASS("noun.clause"), n->group->surface) == 0;
 }
 
 // Dictionary attributes of a thing: some, none of them a person, an animal or a god.
@@ -503,15 +491,9 @@ bool AfterRestart(const Worker& w, const Item* it) {
     int token = 0;
     std::string_view before = TextBefore(w, it, token);
     bool mark = false;
-    for (bool cut = true; cut;) {
-        cut = false;
-        for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.restart"))) {
-            if (before.ends_with(m)) {
-                before.remove_suffix(m.size());
-                mark = cut = true;
-                break;
-            }
-        }
+    while (const std::size_t n = dict::EndsWithMember(HDTRANS_CLASS("mark.restart"), before)) {
+        before.remove_suffix(n);
+        mark = true;
     }
     if (!mark) return false;
     if (!TrimSpace(before).empty()) return true;
@@ -836,11 +818,6 @@ VoiceForm VoiceFormOf(Flusher& f, const Item* it, std::string_view& stem, std::s
     return VoiceForm::None;
 }
 
-// Whether s starts with one of the members of a class.
-bool StartsWithMember(std::string_view s, std::span<const std::string_view> members) {
-    return std::ranges::any_of(members, [&](std::string_view m) { return s.starts_with(m); });
-}
-
 // The slot the defaults choose before any rule: the first candidate coded XXX, else the first.
 int DefaultSlot(const Item* it) {
     const int count = static_cast<int>(it->group->entries.size());
@@ -884,7 +861,7 @@ Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
 // person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
 // condition.
 bool AbilityScope(const Item* it, std::string_view rest) {
-    if (StartsWithMember(rest, dict::ClassMembers(HDTRANS_CLASS("ending.voice-condition")))) return false;
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
         const std::string_view s = p->group->surface;
         if (dict::InClass(HDTRANS_CLASS("word.ability-scope"), s)) return true;
@@ -899,9 +876,9 @@ bool AbilityScope(const Item* it, std::string_view rest) {
 // Whether the (ら)れ of item it, followed by rest, is a condition whose main clause right after it
 // is a trouble of stem.adverse-outcome (見られたら困る).
 bool AdverseCondition(const Item* it, std::string_view rest) {
-    if (!StartsWithMember(rest, dict::ClassMembers(HDTRANS_CLASS("ending.voice-condition")))) return false;
+    if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) == 0) return false;
     const Item* n = it->After();
-    return n != nullptr && StartsWithMember(n->group->surface, dict::ClassMembers(HDTRANS_CLASS("stem.adverse-outcome")));
+    return n != nullptr && dict::StartsWithMember(HDTRANS_CLASS("stem.adverse-outcome"), n->group->surface) > 0;
 }
 
 // Whether a noun of noun.suffered-act, or a noun that ends in こと (同じこと), stands right before
@@ -919,7 +896,7 @@ bool SufferedActBefore(const Item* it) {
 bool ConditionWithObject(const Item* it, std::string_view rest) {
     // たらしい is a guess, not a condition (話を振られたらしく), and ては also strings acts one after another
     // (胸を揉まれては、はだけ).
-    return StartsWithMember(rest, dict::ClassMembers(HDTRANS_CLASS("ending.voice-condition"))) && !rest.starts_with("たらし") &&
+    return dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0 && !rest.starts_with("たらし") &&
            !rest.starts_with("ては") && (Has(it->group->surface, "を") || ActedObjectBefore(it));
 }
 
@@ -991,8 +968,7 @@ bool ListenerQuestion(const Item* it, std::string_view rest, bool transitive) {
     std::string_view sentence = rest;
     for (const std::string_view mark : dict::ClassMembers(HDTRANS_CLASS("mark.voice-end"))) sentence = sentence.substr(0, sentence.find(mark));
     const std::string_view after = From(rest, static_cast<long>(sentence.size()));
-    if (!StartsWithMember(after, dict::ClassMembers(HDTRANS_CLASS("mark.voice-question"))) &&
-        !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("mark.voice-question")), [&](std::string_view q) { return sentence.ends_with(q); })) {
+    if (dict::StartsWithMember(HDTRANS_CLASS("mark.voice-question"), after) == 0 && dict::EndsWithMember(HDTRANS_CLASS("mark.voice-question"), sentence) == 0) {
         return false;
     }
     std::size_t polite = std::string_view::npos;
@@ -1081,7 +1057,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
         return Voice::Passive;
     }
-    if (object && StartsWithMember(rest, dict::ClassMembers(HDTRANS_CLASS("ending.voice-desire")))) return Voice::Passive;
+    if (object && dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0) return Voice::Passive;
     if (AbilityScope(it, rest)) return Voice::Potential;
     // A trouble and a verb of feeling tell the passive from the potential, which only the られ of an
     // ichidan or くる verb also reads.
@@ -1373,7 +1349,7 @@ void RespectfulPassive(Flusher& f) {
         }
         // Only a passive or potential Korean (ko-verb.voice-end), not a verb of its own (生まれ 태어나다).
         const std::string chosen = ItemLemma(f, it, it->selected);
-        if (!std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.voice-end")), [&](std::string_view e) { return chosen.ends_with(e); })) {
+        if (dict::EndsWithMember(HDTRANS_CLASS("ko-verb.voice-end"), chosen) == 0) {
             continue;
         }
         const int count = static_cast<int>(it->group->entries.size());
@@ -1449,9 +1425,7 @@ std::string PastOfVerbEnding(std::string_view ending) {
 // Whether an adverb of gradual change stands before it in its sentence.
 bool GradualBefore(const Item* it) {
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
-        for (const std::string_view a : dict::ClassMembers(HDTRANS_CLASS("adverb.gradual"))) {
-            if (p->group->surface.starts_with(a)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("adverb.gradual"), p->group->surface) > 0) return true;
     }
     return false;
 }
@@ -1614,8 +1588,7 @@ bool AdjectiveTarget(std::string_view target, bool* verbFamily = nullptr) {
     if (family == nullptr || family->inflectionClass == output::internal::InflectionClass::Copula) return false;
     if (family->partOfSpeech == output::internal::KoreanPartOfSpeech::Adjective) return true;
     const std::string stem = std::string(target.substr(0, target.size() - 4)) + std::string(family->stem);
-    const bool adjective =
-        std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-adjective.stem-end")), [&](std::string_view e) { return stem.ends_with(e); });
+    const bool adjective = dict::EndsWithMember(HDTRANS_CLASS("ko-adjective.stem-end"), stem) > 0;
     if (verbFamily != nullptr) *verbFamily = adjective;
     return adjective;
 }
@@ -1863,11 +1836,9 @@ void NotYet(Flusher& f) {
         const std::string_view surface = it->group->surface;
         const Entry* after = n->DirectEntry(n->DirectIndex());
         const bool received = after != nullptr && !Has(after->dst, "도") && !Has(after->dst, "면") &&
-                              std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("verb.unattained")),
-                                                  [&](std::string_view v) { return surface.ends_with(v); });
+                              dict::EndsWithMember(HDTRANS_CLASS("verb.unattained"), surface) > 0;
         const bool remember = surface.ends_with("覚え") || surface.ends_with("憶え");
-        if (!potential && !received && !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("verb.notyet")),
-                                                            [&](std::string_view v) { return surface.ends_with(v); })) {
+        if (!potential && !received && dict::EndsWithMember(HDTRANS_CLASS("verb.notyet"), surface) == 0) {
             continue;
         }
         Entry* d = n->DirectEntry(n->DirectIndex());
@@ -2092,10 +2063,7 @@ bool QuoteEnd(const Worker& w, const Item* it) {
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
-    for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.quote-start"))) {
-        if (it->group->surface.starts_with(v)) return true;
-    }
-    return false;
+    return dict::StartsWithMember(HDTRANS_CLASS("verb.quote-start"), it->group->surface) > 0;
 }
 
 namespace {
@@ -2105,9 +2073,7 @@ namespace {
 bool ThinkingVerbAhead(const Item* it) {
     const Item* x = it->After();
     for (int n = 0; n < 5 && x != nullptr && x->selected >= 0; n++, x = x->next) {
-        for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.thinking-start"))) {
-            if (x->group->surface.starts_with(v)) return n > 0;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("verb.thinking-start"), x->group->surface) > 0) return n > 0;
         const char cls = At(x->Code(x->selected), 0);
         if (cls == '4' || cls == '6' || cls == '7') return false;
     }
@@ -2488,14 +2454,8 @@ bool AngleBefore(std::string_view before) {
 }
 
 bool AngleAfter(std::string_view after) {
-    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("particle.do-angle"))) {
-        if (after.starts_with(p)) {
-            after.remove_prefix(p.size());
-            break;
-        }
-    }
-    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("word.do-angle")),
-                               [&](std::string_view w) { return after.starts_with(w); });
+    after.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("particle.do-angle"), after));
+    return dict::StartsWithMember(HDTRANS_CLASS("word.do-angle"), after) > 0;
 }
 
 }  // namespace
@@ -2514,8 +2474,7 @@ void DegreeAfterNumber(Flusher& f) {
         if (!digits || !IsDigit(number[0])) continue;
         if (number.find('.') == std::string_view::npos && (number.size() < 2 || number[0] == '0')) continue;
         const std::string_view after = From(it->text, it->start + it->length);
-        if (std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("word.do-times")),
-                                [&](std::string_view t) { return after.starts_with(t); })) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("word.do-times"), after) > 0) {
             continue;
         }
         // Arabic digits (180度, ４５度) read as the degree; a kanji numeral only before a word
@@ -2822,8 +2781,7 @@ void OfferPromise(Flusher& f) {
         const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
                             ending == "ぞ" ||
                             (gives && (afterTe || ((ending == "る" || ending == "ます") && !NamedDoer(it))) && !OtherGiver(it) &&
-                             std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("mark.spoken-exclamation")),
-                                                 [&](std::string_view m) { return rest.starts_with(m); }));
+                             dict::StartsWithMember(HDTRANS_CLASS("mark.spoken-exclamation"), rest) > 0);
         int open = 0, close = 0;
         if (!polite && !plain) continue;
         if (!QuoteAround(f.w, it->tokenIndex, open, close) && !spoken) continue;
@@ -2862,8 +2820,7 @@ bool StativeNegative(std::string_view lemma) {
 
 bool AdjectiveNegative(std::string_view lemma) {
     const std::string_view stem = lemma.substr(0, lemma.size() - std::string_view("지 않다").size());
-    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-adjective.stem-end")),
-                               [&](std::string_view e) { return stem.ends_with(e); });
+    return dict::EndsWithMember(HDTRANS_CLASS("ko-adjective.stem-end"), stem) > 0;
 }
 
 }  // namespace

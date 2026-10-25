@@ -79,8 +79,7 @@ bool CitedBefore(std::string_view after, bool embedded) {
     // って before a noun (「…」って投稿) names what was said or written.
     if (after.starts_with("って")) {
         const std::string_view rest = after.substr(std::string_view("って").size());
-        bool verb = false;
-        for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.speech"))) verb = verb || rest.starts_with(v);
+        const bool verb = dict::StartsWithMember(HDTRANS_CLASS("verb.speech"), rest) > 0;
         if (!rest.empty() && internal::IsKanjiRune(text::DecodeRune(rest).cp) && !verb) return true;
     }
     if (embedded) {
@@ -93,9 +92,7 @@ bool CitedBefore(std::string_view after, bool embedded) {
             if (!after.starts_with(to)) continue;
             std::string_view verb = after.substr(to.size());
             if (verb.starts_with("、")) verb.remove_prefix(std::string_view("、").size());
-            for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.speech"))) {
-                if (verb.starts_with(v)) return false;
-            }
+            if (dict::StartsWithMember(HDTRANS_CLASS("verb.speech"), verb) > 0) return false;
         }
         return true;
     }
@@ -205,7 +202,7 @@ bool CasualOf(std::string_view text) {
             const std::string_view head = text.substr(0, at);
             if (f.particle == "って" && prev == U'い' && !head.ends_with("ない") && !head.ends_with("いい")) continue;
             // After a polite form the particle is polite speech (そうですよ, いいですね, 行きますよ).
-            if (std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("speech.polite")), [&](std::string_view m) { return head.ends_with(m); })) {
+            if (dict::EndsWithMember(HDTRANS_CLASS("speech.polite"), head) > 0) {
                 continue;
             }
             return true;

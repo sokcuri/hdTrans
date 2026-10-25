@@ -36,9 +36,7 @@ bool Titled(std::string_view text, std::string_view key) {
         if (before.ends_with("、")) before.remove_suffix(std::string_view("、").size());
         const std::string_view after = text.substr(at + key.size());
         if (before.ends_with("艦")) return true;
-        for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("honorific.person-title"))) {
-            if (after.starts_with(t)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("honorific.person-title"), after) > 0) return true;
         i = at + key.size();
     }
 }

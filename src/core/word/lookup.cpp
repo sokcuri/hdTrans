@@ -81,10 +81,7 @@ bool BoundImperative(const dict::UserEntry& u, std::string_view query) {
     if (!u.codes->partText.starts_with("E") || !query.starts_with(u.key)) return false;
     const std::string_view after = query.substr(u.key.size());
     if (u.key.ends_with("て")) {
-        for (const std::string_view f : dict::ClassMembers(HDTRANS_CLASS("follower.te-imperative"))) {
-            if (after.starts_with(f)) return true;
-        }
-        return false;
+        return dict::StartsWithMember(HDTRANS_CLASS("follower.te-imperative"), after) > 0;
     }
     return ERowImperative(u.key) && NameClassOf(FirstChar(after)) == kClassHiragana && !after.starts_with("よ") &&
            !after.starts_with("っ") && !after.starts_with("ぇ");
@@ -188,10 +185,7 @@ bool NounBefore(std::string_view text) {
     const text::Rune last = DecodeLastRune(text);
     const char32_t r = last.cp;
     if (r >= 0x3041 && r <= 0x309F) {
-        for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("pronoun.hiragana-end"))) {
-            if (text.ends_with(p)) return true;
-        }
-        return false;
+        return dict::EndsWithMember(HDTRANS_CLASS("pronoun.hiragana-end"), text) > 0;
     }
     if (r == text::kReplacement) return false;
     return (!text::IsSpace(r) && !text::IsPunct(r)) || r == U'」' || r == U'』' || r == U'）' || r == U')';

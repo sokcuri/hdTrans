@@ -682,7 +682,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             // う……多分, ちょ……待って).
             // Not when the syllable is said again after the marks (む…、むっ).
             if (start && end == p + s.key.size() && end < rs_.size() && (p == 0 || !text::IsSpace(rs_[p - 1])) &&
-                dict::InClass(HDTRANS_CLASS("mark.pause"), Bytes(end, end + 1)) && dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), EncodeText(s.key))) {
+                dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) && dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), EncodeText(s.key))) {
                 size_t again = end;
                 while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
                 pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
@@ -953,12 +953,11 @@ bool SoundText::PoliteAt(size_t p) const {
     if (politeQuote_) return true;
     size_t q = p;
     while (q > politeFrom_ && text::IsSpace(rs_[q - 1])) q--;
-    if (q == politeFrom_ || !dict::InClass(HDTRANS_CLASS("mark.comma"), EncodeText(std::u32string_view(rs_).substr(q - 1, 1)))) return false;
+    if (q == politeFrom_ || !dict::InClassRune(HDTRANS_CLASS("mark.comma"), rs_[q - 1])) return false;
     const size_t from = std::max(politeFrom_, q - 1 > kLongestCall ? q - 1 - kLongestCall : 0);
     const std::string called = EncodeText(std::u32string_view(rs_).substr(from, q - 1 - from));
-    const auto ends = [&](std::string_view m) { return called.ends_with(m); };
-    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("honorific.honoured-person")), ends) &&
-           std::ranges::none_of(dict::ClassMembers(HDTRANS_CLASS("greeting.honorific-end")), ends);
+    return dict::EndsWithMember(HDTRANS_CLASS("honorific.honoured-person"), called) > 0 &&
+           dict::EndsWithMember(HDTRANS_CLASS("greeting.honorific-end"), called) == 0;
 }
 
 // Whether the ただいま that ends at character end means "now": a kanji follows it
@@ -1209,13 +1208,11 @@ size_t SoundText::QuotingAt(size_t i) const {
 size_t SoundText::Quoting(size_t i) const {
     if (i >= rs_.size()) return 0;
     const std::string_view at = text_.substr(offsets_[i]);
-    for (const std::string_view q : dict::ClassMembers(HDTRANS_CLASS("sound.quoting"))) {
-        if (!at.starts_with(q)) continue;
-        size_t end = i;
-        while (end < rs_.size() && offsets_[end] < offsets_[i] + q.size()) end++;
-        return end;
-    }
-    return 0;
+    const size_t n = dict::StartsWithMember(HDTRANS_CLASS("sound.quoting"), at);
+    if (n == 0) return 0;
+    size_t end = i;
+    while (end < rs_.size() && offsets_[end] < offsets_[i] + n) end++;
+    return end;
 }
 
 // Whether a space goes between a sound and rs[i]: a kanji, katakana after hiragana, or
@@ -1817,7 +1814,7 @@ size_t SoundText::HiraganaMimeticTo(size_t p) const {
 bool SoundText::CryCopyBefore(const SoundMatch& before, const SoundMatch& m) const {
     if (!CryCopies(before, m) || before.end > m.start) return false;
     for (size_t k = before.end; k < m.start; k++) {
-        if (!dict::InClass(HDTRANS_CLASS("pause.copy"), EncodeText(std::u32string_view(rs_).substr(k, 1)))) return false;
+        if (!dict::InClassRune(HDTRANS_CLASS("pause.copy"), rs_[k])) return false;
     }
     return true;
 }
@@ -1826,7 +1823,7 @@ bool SoundText::CryCopyBefore(const SoundMatch& before, const SoundMatch& m) con
 // (やだっやだっ, やだっ、やだっ).
 bool SoundText::CryCopyAfter(const SoundMatch& m, SoundMatch& next) const {
     size_t q = m.end;
-    while (q < rs_.size() && dict::InClass(HDTRANS_CLASS("pause.copy"), EncodeText(std::u32string_view(rs_).substr(q, 1)))) q++;
+    while (q < rs_.size() && dict::InClassRune(HDTRANS_CLASS("pause.copy"), rs_[q])) q++;
     if (q >= rs_.size()) return false;
     if (q == m.end) return MatchAt(q, next, true) && CryCopies(m, next);
     const std::vector<SoundMatch> after = Sounds(q, false);
@@ -2355,12 +2352,12 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {
         const std::string_view rest = std::string_view(s).substr(byte[i]);
-        if (StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.te-iku-not"))) > 0) continue;
+        if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-not"), rest) > 0) continue;
         bool compound = false;  // only when the dictionary holds the verb with ていく
-        if (StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.te-iku"))) == 0) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku"), rest) == 0) {
             compound = true;
-            if (StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.te-iku-listed"))) == 0) {
-                const size_t n = StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.te-iku-final")));
+            if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-listed"), rest) == 0) {
+                const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-final"), rest);
                 if (n == 0) continue;
                 const size_t after = byte[i] + n;
                 if (after < s.size()) {
@@ -2379,7 +2376,7 @@ std::string RewriteContractedIku(std::string_view text, const LineContext& ctx, 
         // The ってね after a request to stop or wait quotes it (やめてってね 그만두라고).
         bool quoted = false;
         for (size_t w = from; w < i && !quoted; w++) {
-            quoted = StartLength(std::string_view(s).substr(byte[w]), dict::ClassMembers(HDTRANS_CLASS("contraction.te-iku-quoted"))) > 0;
+            quoted = dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iku-quoted"), std::string_view(s).substr(byte[w])) > 0;
         }
         if (quoted) continue;
         bool inWord = false;
@@ -2471,7 +2468,7 @@ bool WordAfter(std::string_view rest, size_t n, const LineContext& ctx, const di
 
 // Whether the text after a predicate ends the sentence: nothing, or a mark of contraction.sentence-end.
 bool SentenceEnd(std::string_view after) {
-    return after.empty() || StartLength(after, dict::ClassMembers(HDTRANS_CLASS("contraction.sentence-end"))) > 0;
+    return after.empty() || dict::StartsWithMember(HDTRANS_CLASS("contraction.sentence-end"), after) > 0;
 }
 
 // Whether an ending row of branch spells the contracted text rest (見てるの, 見てるん before じゃ):
@@ -2493,7 +2490,7 @@ bool SpelledEnding(std::string_view rest, size_t member, int branch, const LineC
         // An end or pattern row only where the predicate ends the sentence, and none of a register.
         if (c.user != nullptr && (c.user->registerLevel != 0 || !SentenceEnd(rest.substr(c.source.size())))) continue;
         if ((!past && !toEnd) || !IsHiraganaRune(next) ||
-            (past && StartLength(rest.substr(c.source.size()), dict::ClassMembers(HDTRANS_CLASS("contraction.past-end"))) > 0)) {
+            (past && dict::StartsWithMember(HDTRANS_CLASS("contraction.past-end"), rest.substr(c.source.size())) > 0)) {
             return true;
         }
     }
@@ -2572,8 +2569,8 @@ std::string RewriteContractedAuxiliaries(std::string_view text, const LineContex
         while (from + 1 < i && !teForm(from)) from++;
         if (from + 1 >= i) continue;
         // The greeting いってらっしゃい, drawn out too (いってらっしゃーい).
-        if (StartLength(std::string_view(s).substr(byte[from]), dict::ClassMembers(HDTRANS_CLASS("contraction.te-iru-greeting"))) > 0) continue;
-        if (!viaChau && StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.te-iru-past"))) > 0) continue;
+        if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iru-greeting"), std::string_view(s).substr(byte[from])) > 0) continue;
+        if (!viaChau && dict::StartsWithMember(HDTRANS_CLASS("contraction.te-iru-past"), rest) > 0) continue;
         // After ちゃう only its る and た (寝ちゃってる, 寝ちゃってた), which the word stage reads as done.
         if (viaChau && rest.substr(0, n) != word::Conjugation(7, 0) && rest.substr(0, n) != word::Conjugation(7, 6)) continue;
         // A contraction that an ending row spells keeps that row's reading: a row of the て form for
@@ -2633,7 +2630,7 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
     std::string out;
     size_t done = 0;
     for (size_t i = 1; i + 1 < rs.size(); i++) {
-        if (StartLength(std::string_view(s).substr(byte[i]), dict::ClassMembers(HDTRANS_CLASS("contraction.ra-less-kuru"))) == 0) continue;
+        if (dict::StartsWithMember(HDTRANS_CLASS("contraction.ra-less-kuru"), std::string_view(s).substr(byte[i])) == 0) continue;
         size_t from = i;
         while (from > 0 && i - from < kLongestStem && (IsKanjiRune(rs[from - 1]) || IsHiraganaRune(rs[from - 1]))) from--;
         while (from + 1 < i && !TeForm(rs, from, i, ctx, snap)) from++;
@@ -2658,13 +2655,8 @@ std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& sna
     for (size_t i = 1; i < rs.size(); i++) {
         if (!IsKanjiRune(rs[i - 1]) && !IsKatakanaRune(rs[i - 1])) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i]);
-        size_t length = 0;  // characters of the member
-        for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("contraction.n-no"))) {
-            if (rest.starts_with(m)) {
-                length = DecodeText(m).size();
-                break;
-            }
-        }
+        // The characters of the member.
+        const size_t length = DecodeText(rest.substr(0, dict::StartsWithMember(HDTRANS_CLASS("contraction.n-no"), rest))).size();
         // A member that ends in kanji goes on as a word before more kanji (いったん中断).
         if (length == 0 || (IsKanjiRune(rs[i + length - 1]) && i + length < rs.size() && IsKanjiRune(rs[i + length]))) continue;
         size_t start = i;
@@ -2799,14 +2791,7 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
 
 std::string RewriteContractedN(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kN = "ん", kSmallTsu = "っ", kNai = "ない";
-    const std::span<const std::string_view> ru = dict::ClassMembers(HDTRANS_CLASS("contraction.n-ru")),
-                                            ruFinal = dict::ClassMembers(HDTRANS_CLASS("contraction.n-ru-final")),
-                                            nai = dict::ClassMembers(HDTRANS_CLASS("contraction.n-nai")),
-                                            nee = dict::ClassMembers(HDTRANS_CLASS("contraction.n-nee")),
-                                            negative = dict::ClassMembers(HDTRANS_CLASS("contraction.n-negative")),
-                                            negativeNot = dict::ClassMembers(HDTRANS_CLASS("contraction.n-negative-not")),
-                                            kara = dict::ClassMembers(HDTRANS_CLASS("contraction.tsu-ru")),
-                                            kanaStemAfter = dict::ClassMembers(HDTRANS_CLASS("contraction.n-kana-stem-after"));
+    const std::span<const std::string_view> kara = dict::ClassMembers(HDTRANS_CLASS("contraction.tsu-ru"));
     if (text.find(kN) == std::string_view::npos && !HoldsMember(text, {kara}, {kSmallTsu})) return std::string(text);
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
@@ -2825,13 +2810,13 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         const std::string_view rest = std::string_view(s).substr(byte[i + 1]);
         Says says = Says::None;
         if (tsu) {
-            if (StartLength(rest, kara) > 0) says = Says::RuTsu;
-        } else if (StartLength(rest, ru) > 0 ||
-                   (StartLength(rest, ruFinal) > 0 && ends(rest.substr(StartLength(rest, ruFinal))))) {
+            if (dict::StartsWithMember(HDTRANS_CLASS("contraction.tsu-ru"), rest) > 0) says = Says::RuTsu;
+        } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-ru"), rest) > 0 ||
+                   (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-ru-final"), rest) > 0 && ends(rest.substr(dict::StartsWithMember(HDTRANS_CLASS("contraction.n-ru-final"), rest))))) {
             says = Says::Ru;
-        } else if (StartLength(rest, nai) > 0 || StartLength(rest, nee) > 0) {
+        } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) > 0 || dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nee"), rest) > 0) {
             says = Says::Nai;
-        } else if (StartLength(rest, negative) > 0 && StartLength(rest, negativeNot) == 0) {
+        } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
             says = Says::Negative;
         }
         if (says == Says::None) continue;
@@ -2850,7 +2835,7 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             // 俺がやっから), and す of する after a noun (邪魔すんな); a kana after kanji is the end of
             // another word there (怖いんです).
             if (i - from == 1 && !IsKanjiRune(rs[from]) &&
-                !(from > 0 && StartLength(std::string_view(s).substr(byte[from - 1]), kanaStemAfter) > 0) &&
+                !(from > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-kana-stem-after"), std::string_view(s).substr(byte[from - 1])) > 0) &&
                 !(rs[from] == U'す' && from > 0 && (IsKanjiRune(rs[from - 1]) || IsKatakanaRune(rs[from - 1])))) {
                 continue;
             }
@@ -2881,7 +2866,7 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         out += kana;
         done = i + 1;
         // ねえ after the ん is the casual ない, written as such.
-        if (const size_t n = StartLength(rest, nee); says == Says::Nai && n > 0 && StartLength(rest, nai) == 0) {
+        if (const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nee"), rest); says == Says::Nai && n > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) == 0) {
             out += kNai;
             done += DecodeText(rest.substr(0, n)).size();
         }
@@ -2902,7 +2887,7 @@ std::string RewriteContractedOru(std::string_view text, const LineContext& ctx, 
     size_t done = 0;
     for (size_t i = 1; i + 1 < rs.size(); i++) {
         if (rs[i] != U'と' && rs[i] != U'ど') continue;
-        if (StartLength(std::string_view(s).substr(byte[i + 1]), oru) == 0) continue;
+        if (dict::StartsWithMember(HDTRANS_CLASS("contraction.te-oru"), std::string_view(s).substr(byte[i + 1])) == 0) continue;
         // The て form whose て or で the と or ど stands for, with the お of おる after it (聞いとる
         // 聞いておる, 読んどった 読んでおった, 苦労しとる 苦労しておる).
         const std::string_view te = rs[i] == U'と' ? kTe : kDe;
@@ -2960,8 +2945,8 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
     for (size_t i = 1; i < rs.size(); i++) {
         if (!IsKanjiRune(rs[i - 1])) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i]);
-        const size_t n = StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.u-onbin")));
-        if (n == 0 || StartLength(rest, dict::ClassMembers(HDTRANS_CLASS("contraction.u-onbin-not"))) > 0) continue;
+        const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.u-onbin"), rest);
+        if (n == 0 || dict::StartsWithMember(HDTRANS_CLASS("contraction.u-onbin-not"), rest) > 0) continue;
         const size_t end = byte[i] + n;  // the byte after the member
         const char32_t next = end < s.size() ? text::DecodeRune(std::string_view(s).substr(end)).cp : 0;
         const bool goesOn = IsHiraganaRune(next) || IsKanjiRune(next);

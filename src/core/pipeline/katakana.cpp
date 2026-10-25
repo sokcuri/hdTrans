@@ -624,18 +624,6 @@ constexpr KataStem kKataStems[] = {
     {"イコ", "行こ", {"う"}},
 };
 
-// The element of list that starts s.
-bool PrefixIn(std::string_view s, std::span<const std::string_view> list, std::string_view& found) {
-    for (const std::string_view p : list) {
-        if (s.starts_with(p)) {
-            found = p;
-            return true;
-        }
-    }
-    found = {};
-    return false;
-}
-
 // The length of the longest key a lookup of s matches.
 size_t Longest(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
     size_t n = 0;
@@ -716,9 +704,7 @@ int KnownWord(std::string_view word, std::string_view rest, const LineContext& c
             }
             const text::Rune next = text::DecodeRune(tail);
             if (tail.empty() || !IsHiraganaRune(next.cp)) return k + 1;
-            for (const std::string_view n : dict::ClassMembers(HDTRANS_CLASS("follower.kata-noun"))) {
-                if (tail.starts_with(n)) return k + 1;
-            }
+            if (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-noun"), tail) > 0) return k + 1;
         }
     }
     return 0;
@@ -808,29 +794,20 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
     const std::string hira = ToHiragana(word);
     const std::string spelled = hira + std::string(tail);
     const std::u32string next = Runes(tail);
-    const auto drawn = [&](size_t n) { return n < next.size() && dict::InClass(HDTRANS_CLASS("kana.drawn-out"), Utf8(next.substr(n, 1))); };
+    const auto drawn = [&](size_t n) { return n < next.size() && dict::InClassRune(HDTRANS_CLASS("kana.drawn-out"), next[n]); };
     // A person's name before し, さ, す or せ stays the name: they start する or a word of their
     // own (ナオして, ナオすごい), not the conjugation of a stem.
-    std::string_view suru;
-    bool nameThenSuru = PrefixIn(rest, dict::ClassMembers(HDTRANS_CLASS("suru.verbal-noun-start")), suru);
+    bool nameThenSuru = dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), rest) > 0;
     if (nameThenSuru) {
         const std::vector<dict::Record> names = snap.NameRecords(word);
         nameThenSuru = std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes != nullptr && r.codes->sem.HasPrefix("QPN"); });
     }
     // A particle, an honorific or a drawn honorific (くぅん) after the run.
-    bool nounFollows = drawn(1);
-    for (const std::string_view n : dict::ClassMembers(HDTRANS_CLASS("follower.kata-noun"))) {
-        nounFollows = nounFollows || rest.starts_with(n);
-    }
-    for (const std::string_view n : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
-        nounFollows = nounFollows || rest.starts_with(n);
-    }
-    bool quoted = false;
-    for (const std::string_view q : dict::ClassMembers(HDTRANS_CLASS("follower.quoting-to"))) {
-        quoted = quoted || rest.starts_with(q);
-    }
+    const bool nounFollows = drawn(1) || dict::StartsWithMember(HDTRANS_CLASS("follower.kata-noun"), rest) > 0 ||
+                             dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest) > 0;
+    const bool quoted = dict::StartsWithMember(HDTRANS_CLASS("follower.quoting-to"), rest) > 0;
     const bool adverbial = !next.empty() && !quoted && !drawn(0) &&
-                           (IsKanjiRune(next[0]) || dict::InClass(HDTRANS_CLASS("follower.kata-adverb"), Utf8(next.substr(0, 1))) ||
+                           (IsKanjiRune(next[0]) || dict::InClassRune(HDTRANS_CLASS("follower.kata-adverb"), next[0]) ||
                             (IsHiraganaRune(next[0]) && !nounFollows));
     for (const dict::Candidate& c : snap.GetWordInfo(spelled, dict::LookupMode::General, ctx.lookup).list) {
         if (c.codes == nullptr || (c.user != nullptr && c.user->nameLayer) || c.codes->sem.HasPrefix("QPN")) continue;
@@ -844,9 +821,7 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             // An ichidan stem that takes in okurigana after the run may stand bare (カブれない).
             if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
         } else if (part[0] == 'H' && part[1] == '7' && c.source.size() == hira.size() && !tsu && !nounFollows) {
-            for (const std::string_view e : dict::ClassMembers(HDTRANS_CLASS("follower.kata-adjective-stem"))) {
-                if (after.starts_with(e)) return hira;
-            }
+            if (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-stem"), after) > 0) return hira;
         } else if ((part[0] == 'E' || part[0] == 'N') && part[1] == '3' && c.source.size() >= hira.size() &&
                    AdverbShape(k) && !quoted && (!Doubled(k) || adverbial)) {
             const std::string_view more = std::string_view(c.source).substr(hira.size());
@@ -934,16 +909,20 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
             continue;
         }
         std::string_view follower;
+        // Sets follower to the n bytes of rest; whether there are any.
+        const auto follows = [&](std::size_t n) {
+            follower = rest.substr(0, n);
+            return n > 0;
+        };
         bool ok;
         if (kw->adjective) {
-            ok = PrefixIn(rest, dict::ClassMembers(HDTRANS_CLASS("follower.kata-adjective")), follower) ||
-                 ((word.ends_with("イ") || !kw->as.empty()) &&
-                  PrefixIn(rest, dict::ClassMembers(HDTRANS_CLASS("follower.kata-adjective-final")), follower)) ||
-                 (!kw->as.empty() && PrefixIn(rest, dict::ClassMembers(HDTRANS_CLASS("follower.kata-verb")), follower));
+            ok = follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective"), rest)) ||
+                 ((word.ends_with("イ") || !kw->as.empty()) && follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-final"), rest))) ||
+                 (!kw->as.empty() && follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-verb"), rest)));
             ok = ok || (rest.empty() && !spanAfter) || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd) ||
                  (tsu && RuneIn(next, kClippedEnd));
         } else {
-            ok = PrefixIn(rest, dict::ClassMembers(HDTRANS_CLASS("follower.kata-pronoun")), follower);
+            ok = follows(dict::StartsWithMember(HDTRANS_CLASS("follower.kata-pronoun"), rest));
             ok = ok && !(word == "アレ" && RuneIn(next, U"？?"));
         }
         if (!ok || joined || prev == U'の') continue;
