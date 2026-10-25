@@ -2472,6 +2472,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 世の風潮	세상의 풍조	A9D0			GN				llm			i:2467
 訳にはいきません	수는 없어요	A9D0			GN				llm			i:2468
 訳にはいかない	수는 없어	A9D0			GN				llm			i:2469
+わけにはいきません	수는 없어요	A9D0			GN							i:7795
 題名なし	제목 없음	A9D0			GN				llm			i:2470
 題名無し	제목 없음	A9D0			GN				llm			i:2471
 丸裸にする	빈털터리로 만들어	A9D0			GN				llm			i:2472

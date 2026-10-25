@@ -15,6 +15,7 @@
 //= aux.bound-pause	Starts of the auxiliaries of supposition that take the predicate before a pause (行く……かも, 来る……だろう).
 //= aux.te-kana-stem	Kana stems of the auxiliary verbs that follow a て form: いく, みる, くる, しまう.
 //= aux.te-start	Starts of the auxiliaries that follow a て form (ている, てしまう, てほしい, ていただく).
+//= casual.ikanai-after	The particles, phrases and adverbs of going well after which a kana いか with the casual negative ねえ or ん is the negative of いく, it won't do (そうはいかねえ, わけにはいかん, うまくいかねえ), not the かねる of いいかねえ nor the ダメ of それはいかん.
 //= casual.nna-word	Words that end in んな and are no prohibition spelled with ん (ごめんな is no ごめるな).
 //= copula.after-dake	What follows だけ and no verb stem (いただけだ, いただけで, いただけじゃ, いただけに, いただけなんです).
 //= copula.kansai-negative	The dictionary words of the Kansai ちゃう that is じゃない after a noun (マザコンちゃうわ 마더 콤플렉스 아니거든); after a verb the same kana are the contracted てしまう (やっちゃうね), and constraint chau-after-verb drops the word there.
@@ -376,6 +377,7 @@
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
 //= word.clause-start	Demonstrative adverbs and conjunctions that start a clause and that no clause before them describes (そう, でも, しかし): after one a bare attributive before a comma ends its clause (よくわからない、でも行く 잘 모른다, 하지만 간다).
 //= word.clause-pronoun	Demonstrative pronouns that start a clause as its subject, topic or object (それが, これは): after one with が, は, も or を a bare attributive before a comma ends its clause (わからない、それが人生だ 모른다, 그것이 인생이다); one without that particle may be what the attributive describes (作ってあげた、あれ 만들어 준, 그것).
+//= word.mou-scold	Starts of the scolding words a sulky もう goes before, where it is 정말, not 이제 (もう、ばかぁ 정말, 바보).
 //= word.survival	Words of life, wounds, illness, escape and rescue before which 助かる in the same sentence is surviving, 살아나다 (命が助かった 목숨을 건졌다, 患者は助からない), not help or relief.
 
 adverb.degree-feeling	本当に
@@ -538,6 +540,17 @@ aux.te-start	頂
 aux.te-start	差し
 aux.te-start	行
 aux.te-start	ちょうだい
+
+casual.ikanai-after	には
+casual.ikanai-after	にも
+casual.ikanai-after	にゃ
+casual.ikanai-after	そうは
+casual.ikanai-after	そうも
+casual.ikanai-after	こうは
+casual.ikanai-after	こうも
+casual.ikanai-after	ああは
+casual.ikanai-after	うまく
+casual.ikanai-after	上手く
 
 casual.nna-word	ごめんな
 
@@ -6894,3 +6907,11 @@ noun.container	収納
 noun.container	アイテムボックス
 noun.container	インベントリ
 noun.container	ストレージ
+
+word.mou-scold	ばか
+word.mou-scold	バカ
+word.mou-scold	馬鹿
+word.mou-scold	あほ
+word.mou-scold	アホ
+word.mou-scold	いじわる
+word.mou-scold	意地悪

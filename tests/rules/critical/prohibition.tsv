@@ -86,3 +86,5 @@ cx:prohibit-na:10	「逃げるな田中！！」	has:도망치지 마	fix	rewrit
 cx:prohibit-na:10	≪追うなケンタ！≫	has:쫓지 마	fix	rewrites
 cx:prohibit-na:10	うん、結構いけるなこれ。	lacks:지 마	keep	rewrites
 cx:prohibit-na:10	「いいか。わかるな？」	lacks:지 마	keep	rewrites
+cx:prohibit-particle:10	「勘違いしないでよね！」	has:하지 말아	fix	rewrites
+cx:prohibit-particle:20	「心配しないでね」	has:하지 말아	fix	rewrites

@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 sound:spelled-out	あなたなんて、さ・い・て・い！	당신 같은 건, 최·저!	fix	sound
-sound:spelled-out	もう、ば・か！	이제, 바·보!	fix	sound
+sound:spelled-out	もう、ば・か！	정말, 바·보!	fix	sound
 sound:spelled-out	先生のこと、大・好・き。	선생님, 너·무·좋·아.	fix	sound
 sound:spelled-out	それ、ほ・ん・と・う？	그것, 사·실?	fix	sound
 sound:spelled-out	入っちゃ、ダ・メ・よ？	들어가면, 안·돼?	fix	sound
