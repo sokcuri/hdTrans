@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.6](https://github.com/sokcuri/hdTrans/compare/v0.5.5...v0.5.6) (2026-10-25)
+
+
+### Bug Fixes
+
+* **release:** cut hot-path work and let soft speech cover bracketless dialogue ([0d14f69](https://github.com/sokcuri/hdTrans/commit/0d14f69834f92a88fe7932845c1ffe475cabb07b))
+
+
+### Performance Improvements
+
+* cut about 6% of instructions from hot paths with no change in output ([#159](https://github.com/sokcuri/hdTrans/issues/159)) ([2b56a9c](https://github.com/sokcuri/hdTrans/commit/2b56a9ccc4860341a0667c2746c96c4e93f957a4))
+
 ## [0.5.5](https://github.com/sokcuri/hdTrans/compare/v0.5.4...v0.5.5) (2026-10-25)
 
 
