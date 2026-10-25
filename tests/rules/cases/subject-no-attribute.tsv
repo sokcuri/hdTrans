@@ -1,0 +1,25 @@
+# 규칙: GRM-37
+rule	input	expected	kind	layer
+cx:subject-no:20	色素の薄い金髪と茶色い瞳を持つ	has:색소가	fix	rewrites
+cx:subject-no:20	プライドの高い仮面優等生	has:프라이드가 높은	fix	rewrites
+cx:subject-no:20	離職率の高い職場故	has:이 높은 직장	fix	rewrites
+cx:subject-no:20	専門性の高い技術も保持しておらず	has:전문성이 높은 기술도	fix	rewrites
+cx:subject-no:20	ある程度戦闘能力の高い船を手に入れてからは	has:능력이 높은 배를	fix	rewrites
+cx:subject-no:20	非常に治安の悪いスラム街でさえ	has:치안이 나쁜 슬럼가	fix	rewrites
+cx:subject-no:20	生存性の高い設計の本格的駆逐艦	has:생존성이 높은 설계	fix	rewrites
+cx:subject-no:20	その意志の強そうな瞳は時として鋭さを感じる事がある。	has:의지가 강해 보인	fix	rewrites
+cx:subject-no:20	色の綺麗な花	has:색이 예쁜 꽃	fix	rewrites
+cx:subject-no:20	彼女の白い肌	has:그녀의 흰 피부	keep	rewrites
+cx:subject-no:20	女性の美しい声	has:여성의 아름다운 목소리	keep	rewrites
+cx:subject-no:20	部屋の白い壁	has:방의 흰 벽	keep	rewrites
+cx:subject-no:20	ピンク色の瞳は強い意志を秘めている。	lacks:색이 눈동자	keep	rewrites
+cx:subject-no:30	トビアスの用意した家具とかぶったか？	has:토비아스가 준비한 가구	fix	rewrites
+cx:subject-no:30	そして柏木の参加するＳＮＳの定期サバ	has:가 참가하는 SNS	fix	rewrites
+cx:subject-no:30	自分の整備した銃を扱う生徒を	has:자신이 정비한 총을	fix	rewrites
+cx:subject-no:30	私の出演した映画	has:내가 출연한 영화	fix	rewrites
+cx:subject-no:30	午後の出撃するかしら？	lacks:오후가	keep	rewrites
+cx:subject-no:30	料理の邪魔して……	lacks:요리가	keep	rewrites
+cx:subject-no:30	ナノマシン等による身体能力の強化も無い	lacks:능력이 강화	keep	rewrites
+cx:subject-no:20	イヤリングから離れない程度の適切な距離だけ	has:정도의 적절한	keep	rewrites
+cx:subject-no:20	はじめて会った王子様は、金色の髪に青い瞳の美しい天使のような容貌だった。	has:눈동자의 아름다운	keep	rewrites
+cx:subject-no:20	肉厚の白い肉からは、故郷で食べたものより新鮮な肉汁が漏れる。	lacks:두께가	keep	rewrites

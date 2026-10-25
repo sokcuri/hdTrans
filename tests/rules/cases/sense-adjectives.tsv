@@ -31,6 +31,6 @@ dict:お見えですか	お客様がお見えですか。	손님이 오셨습니
 dict:お見えですか	景色が見えますか。	경치가 보입니까.	keep	defaults
 dict:お待たせ致しました	お待たせ致しました。	기다리게 해서 죄송합니다.	fix	defaults
 dict:お待たせ致しました	お待たせしました。	기다리게 해서 죄송합니다.	keep	defaults
-sense:高い	薬効の高い薬草だ。	약효의 높은 약초다.	fix	senses
+sense:高い	薬効の高い薬草だ。	약효가 높은 약초다.	fix	senses
 sense:高い	高い薬を買う。	비싼 약을 산다.	keep	senses
 output:prefix	非現実的な姿だ。	비현실적인 모습이다.	keep	compose
