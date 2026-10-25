@@ -20,7 +20,6 @@ class Filters;
 namespace internal {
 struct Access;
 struct Generated;
-struct SessionState;
 struct StageObserver;
 struct UserWatch;
 }
@@ -115,12 +114,13 @@ private:
     std::vector<std::string> filterErrors_;
 };
 
-// A translation with memory: names and other context found in earlier text of the
-// session shape the translation of later text. Text may hold one or more
-// "\n"-separated lines ("\r" is kept). One session is used from one thread at a time.
-// A session translates with the dictionaries of the engine when it was created or last
-// reset; with UserReload::Auto, a translation that finds new dictionaries in the engine
-// takes them and first forgets what the session learned, as Reset does.
+// A translation of text with the session's options. Each call is translated on its own:
+// nothing from earlier calls shapes it, and a call's lines are read as one document (the
+// names, speech and narration of a document come from the lines of the call). Text may
+// hold one or more "\n"-separated lines ("\r" is kept). One session is used from one
+// thread at a time. A session translates with the dictionaries of the engine when it was
+// created or last reset; with UserReload::Auto, a translation that finds new dictionaries
+// in the engine takes them.
 class Session {
 public:
     explicit Session(const Engine& engine, bool reference = false, bool cg = true, bool misread = false);
@@ -131,8 +131,7 @@ public:
     // Lines over 64 KiB are translated in pieces of at most 16 KiB, split at sentence ends outside brackets where possible.
     std::string Translate(std::string_view text);
 
-    // Forgets everything learned from earlier text and takes the engine's current
-    // dictionaries.
+    // Takes the engine's current dictionaries.
     void Reset();
 
     // The speech level of later translations; Speech::Strict until set. Reference mode
@@ -151,7 +150,6 @@ private:
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;
-    std::unique_ptr<internal::SessionState> state_;
 };
 
 }  // namespace hdTrans

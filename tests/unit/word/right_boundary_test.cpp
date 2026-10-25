@@ -31,9 +31,8 @@ HD_TEST(word_right_boundary_after_tsu) {
         {"犬っ猫", "가이"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
@@ -83,9 +82,8 @@ HD_TEST(word_right_boundary_predicate_before_ellipsis) {
         {"高い……そうか", "높다……그래인가"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }

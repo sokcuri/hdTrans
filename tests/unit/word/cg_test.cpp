@@ -40,9 +40,8 @@ std::vector<std::string> Pick(const dict::Snapshot& snapshot, std::string_view t
     observer.context = &p;
     observer.resolved = OnResolved;
     const auto generated = internal::NewGenerated(snapshot);
-    internal::Memory memory;
     const std::string line(text);
-    internal::TranslateDocument(snapshot, *generated, {&line, 1}, memory, observer, {});
+    internal::TranslateDocument(snapshot, *generated, {&line, 1}, observer, {});
     return p.targets;
 }
 

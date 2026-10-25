@@ -46,8 +46,7 @@ void CheckImprovement(bool hdTrans::word::Improvements::* flag, const std::vecto
         hdTrans::internal::TranslationOptions options;
         options.wordImprovements = hdTrans::word::Improvements::Reference();
         options.wordImprovements.*flag = active;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, options);
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(active ? enabled : disabled));
     }
@@ -136,8 +135,7 @@ HD_TEST(word_improvements_kanji_numbers_myriads_and_words) {
                                           std::pair<std::string, std::string_view>{"十二分に", "십이분에"},
                                           std::pair<std::string, std::string_view>{"十二分で", "12분에"}}) {
         hdTrans::internal::TranslationOptions options;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, options);
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(expected));
     }
@@ -160,8 +158,7 @@ HD_TEST(word_count_word_before_verbal_noun) {
     for (const auto& [input, expected] : {std::pair<std::string, std::string_view>{"1回復した。", "1 회복."},
                                           std::pair<std::string, std::string_view>{"1回復活。", "1회 부활."}}) {
         hdTrans::internal::TranslationOptions options;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, options);
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(expected));
     }
@@ -190,8 +187,7 @@ HD_TEST(word_fraction_and_count_follower) {
                                           std::pair<std::string, std::string_view>{"二×四面", "2×네 면"},
                                           std::pair<std::string, std::string_view>{"二+四面", "2+사면"}}) {
         hdTrans::internal::TranslationOptions options;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, options);
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, options);
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(expected));
     }

@@ -101,16 +101,6 @@ struct SessionCacheVariable {
     }
 };
 
-std::vector<std::string> RebuiltTranslation(const hdTrans::dict::Snapshot& snap,
-                                          hdTrans::internal::Generated& generated,
-                                          const std::vector<std::string>& retained,
-                                          const std::string& line,
-                                          const hdTrans::internal::TranslationOptions& options) {
-    hdTrans::internal::Memory memory;
-    hdTrans::pipeline::RememberDocument(snap, retained, memory.document);
-    return hdTrans::internal::TranslateDocument(snap, generated, {&line, 1}, memory, {}, options);
-}
-
 }  // namespace
 
 HD_TEST(engine_session_threads) {
@@ -197,64 +187,21 @@ HD_TEST(engine_session_threads_stress) {
     HD_CHECK_EQ(differing, 0);
 }
 
+// A call is translated on its own: what an earlier call of the session held (a speech cue,
+// a reading) does not reach it, and the lines of one call are read together.
 HD_TEST(engine_session_call_context) {
     const std::string dicts = LocalDictionary();
     HD_REQUIRE(!dicts.empty());
     hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
     HD_REQUIRE(engine.Open({dicts}));
-    struct Case {
-        std::vector<std::string> lines;
-        const char* firstLinewise;
-        const char* firstDocument;
-        bool equal;
-    };
-    const Case cases[] = {
-        {{"学生", "ASCII"}, "학생님", "학생님", true},
-        {{"お兄様！", "「あたし」"}, "오라버니!", "오빠!", false},
-        {{"お兄様！", "「あたし」", "お兄様！"}, "오라버니!", "오빠!", false},
-        {{"お兄様！", "「あたし」", "「お兄様、俺だ」"}, "오라버니!", "오라버니!", true},
-        {{"|宝生ミナ《ほうしょうみな》", "|宝生《たからお》", "宝生ミナ"},
-         "호우쇼우 미나", "타카라오 미나", false},
-    };
-    for (const Case& c : cases) {
-        hdTrans::Session linewise(engine);
-        std::string input, streamed;
-        for (std::size_t i = 0; i < c.lines.size(); i++) {
-            if (i > 0) {
-                input += '\n';
-                streamed += '\n';
-            }
-            input += c.lines[i];
-            const std::string got = linewise.Translate(c.lines[i]);
-            if (i == 0) HD_CHECK_EQ(got, c.firstLinewise);
-            streamed += got;
-            // Each call sees its retained history and every line of that call.
-            hdTrans::Session replay(engine);
-            const std::string expected = replay.Translate(input);
-            const std::size_t nl = expected.find_last_of('\n');
-            HD_CHECK_EQ(got, nl == std::string::npos ? expected : expected.substr(nl + 1));
-        }
-        hdTrans::Session document(engine);
-        const std::string batch = document.Translate(input);
-        HD_CHECK_EQ(batch.substr(0, batch.find('\n')), c.firstDocument);
-        HD_CHECK_EQ(streamed == batch, c.equal);
-    }
-}
-
-HD_TEST(engine_session_memory_window) {
-    const std::string dicts = LocalDictionary();
-    HD_REQUIRE(!dicts.empty());
-    hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
-    HD_REQUIRE(engine.Open({dicts}));
+    const std::vector<std::string> lines = {"「あたし」", "お兄様！", "|宝生《たからお》", "宝生ミナ"};
     hdTrans::Session session(engine);
-    session.Translate("「あたしが行くわよ」");
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오빠!");
-    session.Translate(std::string(2048, '\n'));
+    for (const std::string& line : lines) {
+        hdTrans::Session fresh(engine);
+        HD_CHECK_EQ(session.Translate(line), fresh.Translate(line));
+    }
     HD_CHECK_EQ(session.Translate("お兄様！"), "오라버니!");
-    session.Translate("「あたしが行くわよ」");
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오빠!");
-    session.Reset();
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오라버니!");
+    HD_CHECK(session.Translate("「あたし」\nお兄様！").ends_with("\n오빠!"));
 }
 
 HD_TEST(engine_reference_mode) {
@@ -280,12 +227,10 @@ HD_TEST(engine_reference_mode) {
     hdTrans::internal::TranslationOptions options;
     options.reference = true;
     options.wordImprovements.extraBuiltin = true;
-    hdTrans::internal::Memory memory;
-    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&text, 1}, memory, {}, options)[0],
+    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&text, 1}, {}, options)[0],
                 "가봇!");
     options.reference = false;
-    hdTrans::internal::Memory enabled;
-    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&text, 1}, enabled, {}, options)[0],
+    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&text, 1}, {}, options)[0],
                 "커헉!");
 }
 
@@ -320,43 +265,6 @@ HD_TEST(engine_reference_session_cleanup_isolation) {
     HD_CHECK_EQ(improved.Translate("何度も"), "몇 번");
 }
 
-HD_TEST(engine_session_incremental_history) {
-    hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
-    HD_REQUIRE(engine.Open({LocalDictionary()}));
-    hdTrans::Session session(engine);
-    session.Translate("「あたし」");
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오빠!");
-    session.Reset();
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오라버니!");
-
-    std::string history = "「あたし」";
-    for (int i = 1; i < 2048; i++) history += "\n学生";
-    session.Reset();
-    session.Translate(history);
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오빠!");
-    HD_CHECK_EQ(session.Translate("お兄様！"), "오라버니!");
-    for (int i = 0; i < 20; i++) HD_CHECK_EQ(session.Translate("学生"), "학생님");
-}
-
-HD_TEST(engine_session_memory_bytes) {
-    const std::string dicts = LocalDictionary();
-    HD_REQUIRE(!dicts.empty());
-    hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
-    HD_REQUIRE(engine.Open({dicts}));
-    const auto snap = engine.Dictionaries();
-    std::shared_ptr<hdTrans::pipeline::DocumentHistory> history;
-    const std::vector<std::string> cue{"「あたしが行くわよ」"};
-    const std::vector<std::string> probe{"お兄様！"};
-    hdTrans::pipeline::RememberDocument(*snap, cue, history);
-    HD_CHECK(hdTrans::pipeline::BuildDocument(*snap, probe, false, &history)->female);
-    const std::vector<std::string> padding(33, std::string(32768, ' '));
-    hdTrans::pipeline::RememberDocument(*snap, padding, history);
-    HD_CHECK(!hdTrans::pipeline::BuildDocument(*snap, probe, false, &history)->female);
-    auto document = padding;
-    document.insert(document.begin(), cue.front());
-    HD_CHECK(hdTrans::pipeline::BuildDocument(*snap, document)->female);
-}
-
 HD_TEST(engine_megabyte_line) {
     const std::string dicts = LocalDictionary();
     HD_REQUIRE(!dicts.empty());
@@ -383,76 +291,6 @@ HD_TEST(engine_megabyte_line) {
     }
 }
 
-HD_TEST(engine_session_history_rebuild) {
-    const std::string dicts = LocalDictionary();
-    HD_REQUIRE(!dicts.empty());
-    const std::vector<std::string> samples = {
-        "学生", "ASCII", "123, 456.", "", "학생", "霧島", "がぼっ！", "学生\r",
-    };
-    hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
-    HD_REQUIRE(engine.Open({dicts}));
-    const auto snap = engine.Dictionaries();
-    const auto generated = hdTrans::internal::NewGenerated(*snap);
-    const std::vector<std::string> prefix = {
-        "竜宮（りゅう）", "竜宮（・・）", "竜宮（たつみや）", "光さん、",
-        "|風音《かざね》", "|風音《かのん》", "「お兄様、俺だ」", "「あたしが行くわよ」",
-        "お兄様！", "空を見上げて", "星を探す", "七里三河守頼周が来た。", "七里頼周が来た。"};
-    for (bool reference : {true, false}) {
-        hdTrans::internal::TranslationOptions options;
-        options.reference = reference;
-        hdTrans::internal::Memory incremental;
-        std::vector<std::string> retained;
-        std::size_t bytes = 0;
-        for (std::size_t call = 0; call < 2160; call++) {
-            std::string line;
-            if (call < prefix.size()) line = prefix[call];
-            else if (call == 2049) line = "竜宮";
-            else if (call % 41 == 0) line = "お兄様！";
-            else if (call % 43 == 0) line = "空を見上げて";
-            else if (call % 47 == 0) line = "七里頼周が来た。";
-            else if (call % 53 == 0) line = "光さん、";
-            else line = samples[(call * 17) % samples.size()];
-            const auto expected = RebuiltTranslation(*snap, *generated, retained, line, options);
-            const auto got = hdTrans::internal::TranslateDocument(*snap, *generated, {&line, 1}, incremental, {}, options);
-            HD_REQUIRE(got.size() == 1 && expected.size() == 1);
-            if (got != expected) {
-                hdtest::Fail(__FILE__, __LINE__, "history call " + std::to_string(call) + ": " + got[0] + " != " + expected[0]);
-                return;
-            }
-            if (call == 2049) HD_CHECK_EQ(got[0], "타츠미야");
-            retained.push_back(line);
-            bytes += line.size();
-            while (retained.size() > 2048 || bytes > 1024 * 1024) {
-                bytes -= retained.front().size();
-                retained.erase(retained.begin());
-            }
-        }
-    }
-}
-
-HD_TEST(engine_session_piece_history) {
-    const std::string dicts = LocalDictionary();
-    HD_REQUIRE(!dicts.empty());
-    hdTrans::Engine engine(true, hdTrans::CacheWrite::Off);
-    HD_REQUIRE(engine.Open({dicts}));
-    const auto snap = engine.Dictionaries();
-    const auto generated = hdTrans::internal::NewGenerated(*snap);
-    hdTrans::internal::TranslationOptions options;
-    options.reference = true;
-    hdTrans::internal::Memory memory;
-    std::vector<std::string> prefix(2047);
-    prefix.front() = "「あたしが行くわよ」";
-    hdTrans::pipeline::RememberDocument(*snap, prefix, memory.document);
-    const std::string line = std::string(16381, 'a') + "て" + std::string(65536, 'a') + "。";
-    HD_REQUIRE(hdTrans::internal::TranslateDocument(*snap, *generated, {&line, 1}, memory, {}, options).size() == 1);
-    const auto document = hdTrans::pipeline::BuildDocument(*snap, {}, false, &memory.document);
-    HD_CHECK(document->female);
-    HD_CHECK(document->verse.empty());
-    const std::string probe = "お兄様！";
-    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&probe, 1}, memory, {}, options)[0], "오빠!");
-    HD_CHECK_EQ(hdTrans::internal::TranslateDocument(*snap, *generated, {&probe, 1}, memory, {}, options)[0], "오라버니!");
-}
-
 HD_TEST(engine_quoted_pieces) {
     const std::string dicts = LocalDictionary();
     HD_REQUIRE(!dicts.empty());
@@ -471,7 +309,7 @@ HD_TEST(engine_quoted_pieces) {
     HD_CHECK_EQ(session.Translate(line), expected);
 }
 
-HD_TEST(engine_session_fallback_history) {
+HD_TEST(engine_session_fallback) {
     namespace fs = std::filesystem;
     std::error_code ec;
     const fs::path temporary = fs::temp_directory_path(ec);
@@ -494,11 +332,9 @@ HD_TEST(engine_session_fallback_history) {
     HD_REQUIRE(textEngine.Open(folders));
     HD_REQUIRE(!textEngine.Dictionaries()->Mapped());
     hdTrans::Session text(textEngine);
-    const std::string cue = std::string(2046, '\n') + "「あたし」";
-    const std::string probe = "学生 お兄様！";
-    text.Translate(cue);
+    const std::string probe = "「あたし」\n学生 お兄様！";
     const std::string expected = text.Translate(probe);
-    HD_CHECK_EQ(expected, "학생님 오빠!");
+    HD_CHECK(expected.ends_with("\n학생님 오빠!"));
 
     hdTrans::Engine engine(true);
     HD_REQUIRE(engine.Open(folders));
@@ -506,7 +342,7 @@ HD_TEST(engine_session_fallback_history) {
     auto snapshot = engine.Dictionaries();
     HD_REQUIRE(snapshot->Mapped());
     hdTrans::Session session(engine);
-    session.Translate(cue);
+    HD_CHECK_EQ(session.Translate(probe), expected);
     HD_REQUIRE(snapshot->Healthy());
 
     const auto index = hdTrans::dict::internal::SnapshotPath(folders, pathText(cleanup.path));

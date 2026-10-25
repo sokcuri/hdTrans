@@ -40,14 +40,12 @@ HD_TEST(engine_reference_disables_selection_options) {
     internal::StageObserver observer;
     observer.context = &shadows;
     observer.resolved = CountShadows;
-    internal::Memory memory;
     const std::string input[] = {"東京、", "東京。"};
     scoreCalls = 0;
-    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, memory, observer, options);
+    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, observer, options);
     HD_REQUIRE(out.size() == 2);
     HD_CHECK_EQ(out[0], std::string("도쿄,"));
     HD_CHECK_EQ(out[1], std::string("동경."));
-    HD_CHECK(memory.senses.choices.empty());
     internal::TranslationOptions plain;
     plain.reference = true;
     const auto expectedRaw = internal::TranslateRawLine(*loaded.snapshot, *generated, input[0], {}, plain);
@@ -58,8 +56,7 @@ HD_TEST(engine_reference_disables_selection_options) {
 
     options.reference = false;
     options.selectShadow = false;
-    internal::Memory active;
-    const auto changed = internal::TranslateDocument(*loaded.snapshot, *generated, input, active, {}, options);
+    const auto changed = internal::TranslateDocument(*loaded.snapshot, *generated, input, {}, options);
     HD_REQUIRE(changed.size() == 2);
     HD_CHECK_EQ(changed[0], std::string("동경,"));
     HD_CHECK(scoreCalls > 0);
@@ -99,8 +96,7 @@ HD_TEST(engine_individual_improvement_outputs) {
             options.wordImprovements = word::Improvements::Reference();
             options.wordImprovements.*(c.flag) = enabled;
             const std::string input[] = {c.input};
-            internal::Memory memory;
-            const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, memory, {}, options);
+            const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, {}, options);
             HD_REQUIRE(out.size() == 1);
             HD_CHECK_EQ(out[0], std::string(enabled ? c.on : c.off));
         }

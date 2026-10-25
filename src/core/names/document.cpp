@@ -3,8 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
-#include <deque>
-#include <limits>
+#include <map>
 #include <set>
 #include <string>
 #include <string_view>
@@ -102,172 +101,32 @@ struct DocumentData {
     std::map<std::string, std::string> wholeLines;
 };
 
-struct DocumentHistory {
-    static constexpr std::size_t kLines = 2048;
-    static constexpr std::size_t kBytes = 1024 * 1024;
-    struct Memo {
-        names::HistoricalLine historical;
-        std::vector<std::string> persons;
-        std::vector<std::string> cued;  // the keys of the line's strong name cues
-        std::vector<std::string> recurring;  // the keys of its cues that hold where two lines give them
-        internal::SpeechCues speech;
-        std::size_t uses = 0;
-    };
-    struct Line {
-        std::string text;
-        names::Registry::Evidence evidence;
-        bool verse = false;
-    };
-    explicit DocumentHistory(const dict::Snapshot& snapshot)
-        : snap(&snapshot), registry(snapshot.DocumentData().registry) {
-        registry.CacheDictionaryFacts();
-    }
-
-    Memo& Facts(std::string_view line) {
-        auto [it, inserted] = memo.try_emplace(std::string(line));
-        if (inserted) {
-            it->second.historical = names::ReadHistoricalLine(*snap, line);
-            it->second.persons = internal::PersonPlaces(*snap, line, nullptr, nullptr);
-            it->second.speech = internal::ReadSpeechCues(line);
-            for (const names::NameCue& c : names::NameCues(*snap, line)) {
-                if (c.strong) it->second.cued.push_back(c.key);
-                if (c.recurring) it->second.recurring.push_back(c.key);
-            }
-        }
-        return it->second;
-    }
-
-    // Longer runs win; among equal runs the earliest retained line wins.
-    using Rank = std::pair<std::size_t, uint64_t>;
-    using Readings = std::map<Rank, std::string, std::greater<Rank>>;
-    void Historical(const Memo& facts, uint64_t id, bool add) {
-        for (const auto& [key, reading] : facts.historical.found) {
-            const Rank rank{reading.run, std::numeric_limits<uint64_t>::max() - id};
-            if (add) historical[key][rank] = reading.text;
-            else {
-                auto it = historical.find(key);
-                it->second.erase(rank);
-                if (it->second.empty()) historical.erase(it);
-            }
-        }
-        for (const auto& surname : facts.historical.surnames) Count(surnames, surname, add);
-        if (!facts.historical.listed.empty()) {
-            if (add) listed[id] = facts.historical.listed;
-            else listed.erase(id);
-        }
-    }
-
-    names::HistoricalLine Historical() const {
-        names::HistoricalLine out;
-        for (const auto& [key, readings] : historical) {
-            const auto& [rank, value] = *readings.begin();
-            out.found[key] = {value, rank.first};
-        }
-        for (const auto& [key, count] : surnames) out.surnames.insert(key);
-        for (const auto& [id, runs] : listed) out.listed.insert(out.listed.end(), runs.begin(), runs.end());
-        return out;
-    }
-
-    static void Count(std::map<std::string, std::size_t>& counts, const std::string& key, bool add) {
-        if (add) counts[key]++;
-        else {
-            auto it = counts.find(key);
-            if (--it->second == 0) counts.erase(it);
-        }
-    }
-    static std::string VerseKey(std::string_view line) {
-        if (line.ends_with('\r')) line.remove_suffix(1);
-        return std::string(line);
-    }
-    // A line in て goes on in the next one when it holds no sentence before (…よ？私に任せて asks) and the
-    // next line is Japanese with hiragana, not a name or title (骨まで愛して before 莫文蔚).
-    static bool Continues(std::string_view line, std::string_view next) {
-        line = names::internal::TrimSpace(line);
-        next = names::internal::TrimSpace(next);
-        if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
-        const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
-        return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
-               !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });
-    }
-    void Remember(std::string_view text) {
-        if (!lines.empty() && Continues(lines.back().text, text)) {
-            lines.back().verse = true;
-            Count(verses, VerseKey(lines.back().text), true);
-        }
-        Line line{std::string(text), {}, false};
-        registry.Add(text, &line.evidence);
-        // Comment-only lines still need a distinct eviction id.
-        const uint64_t id = next++;
-        ids.push_back(id);
-        Memo& facts = Facts(text);
-        facts.uses++;
-        female += facts.speech.female;
-        maleKin += facts.speech.maleKin;
-        quoted += facts.speech.quoted;
-        for (const auto& key : facts.persons) Count(persons, key, true);
-        for (const auto& key : facts.cued) Count(cued, key, true);
-        for (const auto& key : facts.recurring) Count(recurring, key, true);
-        Historical(facts, id, true);
-        bytes += text.size();
-        lines.push_back(std::move(line));
-        while (lines.size() > kLines || bytes > kBytes) {
-            const Line& old = lines.front();
-            auto found = memo.find(old.text);
-            Memo& oldFacts = found->second;
-            registry.Forget(old.evidence);
-            female -= oldFacts.speech.female;
-            maleKin -= oldFacts.speech.maleKin;
-            quoted -= oldFacts.speech.quoted;
-            for (const auto& key : oldFacts.persons) Count(persons, key, false);
-            for (const auto& key : oldFacts.cued) Count(cued, key, false);
-            for (const auto& key : oldFacts.recurring) Count(recurring, key, false);
-            if (old.verse) Count(verses, VerseKey(old.text), false);
-            Historical(oldFacts, ids.front(), false);
-            if (--oldFacts.uses == 0) memo.erase(found);
-            bytes -= old.text.size();
-            lines.pop_front();
-            ids.pop_front();
-        }
-    }
-
-    const dict::Snapshot* snap;
-    names::Registry registry;
-    std::deque<Line> lines;
-    std::deque<uint64_t> ids;
-    std::map<std::string, Memo, std::less<>> memo;
-    std::map<std::string, std::size_t> persons, verses, surnames, cued, recurring;
-    std::map<std::string, Readings> historical;
-    std::map<uint64_t, std::vector<std::vector<char32_t>>> listed;
-    std::size_t bytes = 0, female = 0, maleKin = 0, quoted = 0;
-    uint64_t next = 0;
-};
-
 namespace {
 
-DocumentHistory& HistoryOf(const dict::Snapshot& snap, std::shared_ptr<DocumentHistory>& history) {
-    if (!history) history = std::make_shared<DocumentHistory>(snap);
-    else if (history->snap != &snap) {
-        auto rebuilt = std::make_shared<DocumentHistory>(snap);
-        for (const auto& line : history->lines) rebuilt->Remember(line.text);
-        history = std::move(rebuilt);
-    }
-    return *history;
+std::string VerseKey(std::string_view line) {
+    if (line.ends_with('\r')) line.remove_suffix(1);
+    return std::string(line);
+}
+
+// A line in て goes on in the next one when it holds no sentence before (…よ？私に任せて asks) and the
+// next line is Japanese with hiragana, not a name or title (骨まで愛して before 莫文蔚).
+bool Continues(std::string_view line, std::string_view next) {
+    line = names::internal::TrimSpace(line);
+    next = names::internal::TrimSpace(next);
+    if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
+    const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
+    return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
+           !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });
 }
 
 }  // namespace
-
-void RememberDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
-                      std::shared_ptr<DocumentHistory>& history) {
-    DocumentHistory& retained = HistoryOf(snap, history);
-    for (const std::string& line : lines) retained.Remember(line);
-}
 
 namespace internal {
 
 std::set<std::string> VerseLines(std::span<const std::string> lines) {
     std::set<std::string> verse;
     for (std::size_t i = 0; i + 1 < lines.size(); i++) {
-        if (DocumentHistory::Continues(lines[i], lines[i + 1])) verse.insert(DocumentHistory::VerseKey(lines[i]));
+        if (Continues(lines[i], lines[i + 1])) verse.insert(VerseKey(lines[i]));
     }
     return verse;
 }
@@ -295,38 +154,36 @@ std::vector<std::string> CuedNames(const dict::Snapshot& snap, std::string_view 
 }
 
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
-                                               bool extraBuiltin, std::shared_ptr<DocumentHistory>* history) {
-    std::shared_ptr<DocumentHistory> local;
-    auto& retained = history != nullptr ? *history : local;
-    DocumentHistory& memory = HistoryOf(snap, retained);
+                                               bool extraBuiltin) {
     auto doc = std::make_unique<DocumentContext>();
     doc->snap = &snap;
     doc->extraBuiltin = extraBuiltin;
     doc->data = &snap.DocumentData();
     doc->codes = std::make_unique<dict::CodeTable>();
-    doc->registry = std::make_unique<names::Registry>(memory.registry);
+    doc->registry = std::make_unique<names::Registry>(doc->data->registry);
     names::Registry& r = *doc->registry;
     for (const std::string& line : lines) r.Add(line);
 
     doc->registryKey = r.Key();
-    bool female = memory.female > 0, maleKin = memory.maleKin > 0, quoted = memory.quoted > 0;
-    std::vector<const names::HistoricalLine*> historical;
-    const names::HistoricalLine earlier = memory.Historical();
-    historical.push_back(&earlier);
+    bool female = false, maleKin = false, quoted = false;
+    std::vector<names::HistoricalLine> historicalLines;
+    historicalLines.reserve(lines.size());
     dict::KeySet persons;
-    for (const auto& [key, count] : memory.persons) persons.insert(key);
-    for (const auto& [key, count] : memory.cued) doc->cued.insert(key);
-    std::map<std::string, std::size_t> recurring = memory.recurring;
+    std::map<std::string, std::size_t> recurring;
     for (const std::string& line : lines) {
-        const DocumentHistory::Memo& facts = memory.Facts(line);
-        doc->cued.insert(facts.cued.begin(), facts.cued.end());
-        for (const std::string& key : facts.recurring) recurring[key]++;
-        female = female || facts.speech.female;
-        maleKin = maleKin || facts.speech.maleKin;
-        quoted = quoted || facts.speech.quoted;
-        persons.insert(facts.persons.begin(), facts.persons.end());
-        historical.push_back(&facts.historical);
+        historicalLines.push_back(names::ReadHistoricalLine(snap, line));
+        for (const std::string& key : internal::PersonPlaces(snap, line, nullptr, nullptr)) persons.insert(key);
+        const internal::SpeechCues speech = internal::ReadSpeechCues(line);
+        female = female || speech.female;
+        maleKin = maleKin || speech.maleKin;
+        quoted = quoted || speech.quoted;
+        for (const names::NameCue& c : names::NameCues(snap, line)) {
+            if (c.strong) doc->cued.insert(c.key);
+            if (c.recurring) recurring[c.key]++;
+        }
     }
+    std::vector<const names::HistoricalLine*> historical;
+    for (const names::HistoricalLine& h : historicalLines) historical.push_back(&h);
     for (const auto& [key, count] : recurring) {
         if (count >= 2) doc->cued.insert(key);
     }
@@ -352,10 +209,6 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     }
 
     doc->verseLines = internal::VerseLines(lines);
-    for (const auto& [line, count] : memory.verses) doc->verseLines.insert(line);
-    if (!memory.lines.empty() && !lines.empty() && DocumentHistory::Continues(memory.lines.back().text, lines.front())) {
-        doc->verseLines.insert(DocumentHistory::VerseKey(memory.lines.back().text));
-    }
     doc->verse.assign(doc->verseLines.begin(), doc->verseLines.end());
     for (const std::string& line : doc->verse) doc->key += std::string("\0verse\0", 7) + line;
 

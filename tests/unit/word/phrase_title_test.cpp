@@ -10,8 +10,7 @@ namespace {
 
 std::string Translate(const hdTrans::dict::Snapshot& snap, const std::string& input) {
     const auto generated = hdTrans::internal::NewGenerated(snap);
-    hdTrans::internal::Memory memory;
-    const auto out = hdTrans::internal::TranslateDocument(snap, *generated, {&input, 1}, memory, {}, {});
+    const auto out = hdTrans::internal::TranslateDocument(snap, *generated, {&input, 1}, {}, {});
     return out.size() == 1 ? out[0] : std::string();
 }
 

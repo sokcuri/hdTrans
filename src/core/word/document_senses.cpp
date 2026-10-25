@@ -86,38 +86,14 @@ void SessionSenses::FinishLine() {
     pending.clear();
 }
 
-void SessionSenses::Trim() {
-    constexpr std::size_t kEntries = 4096, kBytes = 1024 * 1024;
-    auto size = [](const auto& entry) {
-        return entry.first.size() + entry.second.target.size() + entry.second.partCode.size();
-    };
-    std::size_t bytes = 0;
-    for (const auto& entry : choices) bytes += size(entry);
-    if (choices.size() > kEntries || bytes > kBytes) {
-        std::vector<decltype(choices)::iterator> oldest;
-        oldest.reserve(choices.size());
-        for (auto it = choices.begin(); it != choices.end(); ++it) oldest.push_back(it);
-        std::stable_sort(oldest.begin(), oldest.end(), [](const auto left, const auto right) {
-            return left->second.insertionAge < right->second.insertionAge;
-        });
-        for (const auto it : oldest) {
-            if (choices.size() <= kEntries && bytes <= kBytes) break;
-            bytes -= size(*it);
-            choices.erase(it);
-        }
-    }
-    pending.clear();
-}
-
 void SessionSenses::Remember(const Item& it) {
     if (!EligibleKey(it, it.selected)) return;
     switch (it.choice.layer) {
         case Provenance::LocalRule:
         case Provenance::Sense:
             if (!choices.contains(it.group->surface)) {
-                const auto [entry, inserted] = pending.try_emplace(
-                    it.group->surface, SessionSense{std::string(it.EntryText(it.selected)), PartCode(it, it.selected)});
-                if (inserted) entry->second.insertionAge = ++lastInsertionAge_;
+                pending.try_emplace(it.group->surface,
+                                    SessionSense{std::string(it.EntryText(it.selected)), PartCode(it, it.selected)});
             }
             break;
         default:

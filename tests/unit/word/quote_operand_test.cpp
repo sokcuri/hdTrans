@@ -33,8 +33,7 @@ HD_TEST(word_quote_operand) {
         {{"「あ」", "彼女が"}, 1, "그녀가"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, c.lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, c.lines, {}, {});
         HD_REQUIRE(out.size() == c.lines.size());
         HD_CHECK_EQ(out[c.at], std::string(c.want));
     }

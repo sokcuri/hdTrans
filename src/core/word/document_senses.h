@@ -13,22 +13,16 @@ namespace hdTrans::word {
 struct SessionSense {
     std::string target;
     std::string partCode;
-    std::uint64_t insertionAge = 0;  // Untracked entries are oldest.
 };
 
-// Only choices from completed lines are visible to the scorer. The first trusted
-// target for a key lasts until reset or a between-call memory trim.
+// The senses of one call's document. Only choices from completed lines are visible to the
+// scorer; the first trusted target for a key lasts to the end of the call.
 struct SessionSenses {
     std::map<std::string, SessionSense, std::less<>> choices;
     std::map<std::string, SessionSense, std::less<>> pending;
 
     void FinishLine();
-    // Evicts oldest insertions to bound cross-call choices; call after the whole document.
-    void Trim();
     void Remember(const Item& it);
-
-private:
-    std::uint64_t lastInsertionAge_ = 0;
 };
 
 // A view into target without its form code, marker suffix, auxiliary prefixes or
