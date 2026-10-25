@@ -3,6 +3,7 @@
 #include <commdlg.h>
 #include <objbase.h>
 #include <shellapi.h>
+#include <shlobj.h>
 #include <shobjidl.h>
 
 #include <atomic>
@@ -531,6 +532,20 @@ void OpenFileDialog(App& app) {
     if (!app.selftest) ShowWindow(app.file, SW_SHOW);
 }
 
+// Regular files among the dropped paths; folders are skipped. Releases drop.
+std::vector<fs::path> DroppedFiles(HDROP drop) {
+    std::vector<fs::path> paths;
+    const UINT count = DragQueryFileW(drop, 0xFFFFFFFF, nullptr, 0);
+    for (UINT index = 0; index < count; ++index) {
+        std::wstring path(static_cast<std::size_t>(DragQueryFileW(drop, index, nullptr, 0)) + 1, L'\0');
+        path.resize(DragQueryFileW(drop, index, path.data(), static_cast<UINT>(path.size())));
+        std::error_code error;
+        if (!path.empty() && fs::is_regular_file(path, error)) paths.emplace_back(path);
+    }
+    DragFinish(drop);
+    return paths;
+}
+
 void StopFile(App& app) {
     app.cancel = true;
     EnableWindow(GetDlgItem(app.progress, IDC_STOP), FALSE);
@@ -549,6 +564,7 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_INITDIALOG:
         app->main = window;
         InitOptions(window);
+        DragAcceptFiles(window, TRUE);
         for (int id : {IDC_SOURCE, IDC_RESULT}) SendDlgItemMessageW(window, id, EM_SETLIMITTEXT, INT_MAX - 1, 0);
         SetFont(window, app->mainFont);
         return TRUE;
@@ -573,6 +589,13 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         case IDCANCEL: SendMessageW(window, WM_CLOSE, 0, 0); return TRUE;
         }
         break;
+    case WM_DROPFILES: {
+        const std::vector<fs::path> paths = DroppedFiles(reinterpret_cast<HDROP>(wParam));
+        if (paths.empty() || app->busy) return TRUE;
+        OpenFileDialog(*app);
+        if (app->file) SetInputFiles(*app, paths);
+        return TRUE;
+    }
     case kDone: FinishShort(*app); return TRUE;
     case WM_CLOSE:
         if (app->file) return TRUE;
@@ -599,6 +622,7 @@ INT_PTR CALLBACK FileProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_INITDIALOG:
         app->file = window;
         InitOptions(window);
+        DragAcceptFiles(window, TRUE);
         SetFont(window, app->fileFont);
         if (app->inputFiles.empty() || !SetInputFiles(*app, app->inputFiles)) ShowOutput(*app);
         return TRUE;
@@ -628,6 +652,11 @@ INT_PTR CALLBACK FileProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         case IDCANCEL: SendMessageW(window, WM_CLOSE, 0, 0); return TRUE;
         }
         break;
+    case WM_DROPFILES: {
+        const std::vector<fs::path> paths = DroppedFiles(reinterpret_cast<HDROP>(wParam));
+        if (!paths.empty() && !app->busy) SetInputFiles(*app, paths);
+        return TRUE;
+    }
     case WM_CLOSE:
         if (!app->busy) {
             DestroyWindow(window);
@@ -704,6 +733,21 @@ bool Check(bool condition, const char* message) {
 void NotifyClick(HWND window, int id) {
     SendMessageW(window, WM_COMMAND, MAKEWPARAM(id, BN_CLICKED),
                  reinterpret_cast<LPARAM>(GetDlgItem(window, id)));
+}
+
+// Sends WM_DROPFILES as Explorer does; the receiver frees the block.
+void DropFiles(HWND window, const std::vector<fs::path>& paths) {
+    std::wstring list;
+    for (const fs::path& path : paths) list += path.native() + L'\0';
+    list += L'\0';
+    const HGLOBAL block = GlobalAlloc(GHND, sizeof(DROPFILES) + list.size() * sizeof(wchar_t));
+    if (!block) return;
+    auto* header = static_cast<DROPFILES*>(GlobalLock(block));
+    header->pFiles = sizeof(DROPFILES);
+    header->fWide = TRUE;
+    std::memcpy(header + 1, list.data(), list.size() * sizeof(wchar_t));
+    GlobalUnlock(block);
+    SendMessageW(window, WM_DROPFILES, reinterpret_cast<WPARAM>(block), 0);
 }
 
 bool WriteFixture(const fs::path& path, std::string_view text) {
@@ -837,7 +881,15 @@ bool SelfTest(App& app) {
     NotifyClick(app.file, IDC_TRANSLATE);
     ok = Check(!app.busy && !app.progress && gui::ReadTextFile(output, text, encoding) && text == "unchanged",
                "batch never overwrites a source file") && ok;
+    DropFiles(app.file, {outputFolder, second, input});
+    ok = Check(app.inputFiles == std::vector<fs::path>{second, input} && ControlText(app.file, IDC_PREVIEW) == L"日本語\r\n",
+               "files dropped on the document window") && ok;
     SendMessageW(app.file, WM_CLOSE, 0, 0);
+    DropFiles(app.main, {outputFolder});
+    ok = Check(!app.file, "a dropped folder alone is ignored") && ok;
+    DropFiles(app.main, {input});
+    ok = Check(app.file && app.inputFiles == std::vector<fs::path>{input}, "files dropped on the main window") && ok;
+    if (app.file) SendMessageW(app.file, WM_CLOSE, 0, 0);
     ok = SelfTestConfig(app, folder) && ok;
     fs::remove_all(folder, error);
     return ok;
