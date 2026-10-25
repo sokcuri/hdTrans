@@ -1,9 +1,11 @@
 #include "core/dict/classes.h"
 
+#include <algorithm>
 #include <mutex>
 #include <unordered_map>
 
 #include "core/dict/builtin.h"
+#include "core/text/utf8.h"
 
 namespace hdTrans::dict {
 
@@ -26,6 +28,56 @@ std::pair<std::string_view, std::string_view> Cut(std::string_view s) {
 // Editors drop a trailing space; a leading one is part of the member.
 bool Trailing(std::string_view s) { return !s.empty() && s.back() == ' '; }
 
+std::string Utf8Of(char32_t cp) {
+    std::string out;
+    text::AppendRune(out, cp);
+    return out;
+}
+
+// Fills the buckets and runes of c from its members.
+void Index(WordClass& c) {
+    bool single = true;
+    for (std::size_t k = 0; k < c.members.size(); k++) {
+        const std::string_view m = c.members[k];
+        auto bucket = std::find_if(c.buckets.begin(), c.buckets.end(), [&](const ClassBucket& b) { return b.size == m.size(); });
+        if (bucket == c.buckets.end()) {
+            c.buckets.push_back({m.size(), {}});
+            bucket = c.buckets.end() - 1;
+        }
+        bucket->members.emplace_back(m, k);
+        const text::Rune r = text::DecodeRune(m);
+        single = single && Utf8Of(r.cp) == m;
+    }
+    std::sort(c.buckets.begin(), c.buckets.end(), [](const ClassBucket& a, const ClassBucket& b) { return a.size < b.size; });
+    for (ClassBucket& b : c.buckets) std::sort(b.members.begin(), b.members.end());
+    if (single) {
+        for (const std::string_view m : c.members) c.runes.push_back(text::DecodeRune(m).cp);
+        std::sort(c.runes.begin(), c.runes.end());
+    }
+}
+
+// The place in table order of the member of bucket b that equals s, none for none.
+std::size_t PlaceIn(const ClassBucket& b, std::string_view s, std::size_t none) {
+    const auto found = std::lower_bound(b.members.begin(), b.members.end(), s,
+                                        [](const std::pair<std::string_view, std::size_t>& m, std::string_view v) { return m.first < v; });
+    return found != b.members.end() && found->first == s ? found->second : none;
+}
+
+// The size of the first member in table order equal to at(size), the piece of s of a member's size.
+template <typename At>
+std::size_t FirstMember(const WordClass& c, std::string_view s, At at) {
+    std::size_t first = c.members.size(), size = 0;
+    for (const ClassBucket& b : c.buckets) {
+        if (b.size > s.size()) break;
+        const std::size_t k = PlaceIn(b, at(b.size), c.members.size());
+        if (k < first) {
+            first = k;
+            size = b.size;
+        }
+    }
+    return size;
+}
+
 }  // namespace
 
 ClassTable ParseClasses(std::span<const std::string_view> lines) {
@@ -46,7 +98,7 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
             } else if (!byName.emplace(set, t.classes.size()).second) {
                 fail(number, "a second doc line for " + std::string(set));
             } else {
-                t.classes.push_back({set, doc, {}, {}});
+                t.classes.push_back({set, doc, {}, {}, {}, {}});
             }
             continue;
         }
@@ -69,8 +121,9 @@ ClassTable ParseClasses(std::span<const std::string_view> lines) {
         }
         c.members.push_back(member);
     }
-    for (const WordClass& c : t.classes) {
+    for (WordClass& c : t.classes) {
         if (c.members.empty()) fail(0, "no rows for the set " + std::string(c.name));
+        Index(c);
     }
     std::size_t size = 8;
     while (size < 2 * t.classes.size()) size *= 2;
@@ -104,6 +157,19 @@ const ClassTable& BuiltinClasses() {
     return table;
 }
 
+std::size_t MemberAtStart(const WordClass& c, std::string_view s) {
+    return FirstMember(c, s, [&](std::size_t n) { return s.substr(0, n); });
+}
+
+std::size_t MemberAtEnd(const WordClass& c, std::string_view s) {
+    return FirstMember(c, s, [&](std::size_t n) { return s.substr(s.size() - n); });
+}
+
+bool RuneMember(const WordClass& c, char32_t cp) {
+    if (!c.runes.empty()) return std::binary_search(c.runes.begin(), c.runes.end(), cp);
+    return c.index.contains(Utf8Of(cp));
+}
+
 }  // namespace internal
 
 ClassId ClassId::Of(std::string_view name) {
@@ -126,6 +192,16 @@ bool InClass(std::string_view set, std::string_view surface) { return InClass(Cl
 std::span<const std::string_view> ClassMembers(ClassId set) {
     if (set.data == nullptr) return {};
     return set.data->members;
+}
+
+bool InClassRune(ClassId set, char32_t cp) { return set.data != nullptr && internal::RuneMember(*set.data, cp); }
+
+std::size_t StartsWithMember(ClassId set, std::string_view s) {
+    return set.data != nullptr ? internal::MemberAtStart(*set.data, s) : 0;
+}
+
+std::size_t EndsWithMember(ClassId set, std::string_view s) {
+    return set.data != nullptr ? internal::MemberAtEnd(*set.data, s) : 0;
 }
 
 }  // namespace hdTrans::dict

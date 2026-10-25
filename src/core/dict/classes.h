@@ -71,16 +71,30 @@ struct ClassId {
 bool InClass(ClassId set, std::string_view surface);
 // InClass for a class named at run time; HDTRANS_CLASS finds a literal name once.
 bool InClass(std::string_view set, std::string_view surface);
+// Whether the one-character text cp is a member of class set.
+bool InClassRune(ClassId set, char32_t cp);
+// The size in bytes of the first member in table order that s starts with, 0 for none.
+std::size_t StartsWithMember(ClassId set, std::string_view s);
+// The size in bytes of the first member in table order that s ends with, 0 for none.
+std::size_t EndsWithMember(ClassId set, std::string_view s);
 // The members of class set in table order.
 std::span<const std::string_view> ClassMembers(ClassId set);
 
 namespace internal {
+
+// The members of a class of one size in bytes, sorted, each with its place in table order.
+struct ClassBucket {
+    std::size_t size = 0;
+    std::vector<std::pair<std::string_view, std::size_t>> members;
+};
 
 struct WordClass {
     std::string_view name;
     std::string_view doc;
     std::vector<std::string_view> members;  // in table order
     std::unordered_set<std::string_view> index;
+    std::vector<ClassBucket> buckets;  // the members by size, smallest first
+    std::u32string runes;              // sorted, when every member is one character; empty otherwise
 };
 
 struct ClassError {
@@ -106,6 +120,10 @@ ClassTable ParseClasses(std::span<const std::string_view> lines);
 const WordClass* FindClass(const ClassTable& t, std::string_view name, std::uint64_t hash);
 // The parsed builtin classes.tsv.
 const ClassTable& BuiltinClasses();
+// StartsWithMember, EndsWithMember and InClassRune on class c.
+std::size_t MemberAtStart(const WordClass& c, std::string_view s);
+std::size_t MemberAtEnd(const WordClass& c, std::string_view s);
+bool RuneMember(const WordClass& c, char32_t cp);
 
 }  // namespace internal
 
