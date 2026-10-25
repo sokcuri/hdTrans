@@ -173,7 +173,7 @@ std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s, std
 
 }  // namespace
 
-std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles) {
+std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles, bool outside) {
     std::string out;
     std::size_t quote = depth > 0 ? 1 : 0;
     std::size_t count = quote;
@@ -184,7 +184,8 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (depth++ == 0) quote = ++count;
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
-        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0) {
+        } else if ((depth == 1 || (depth == 0 && outside)) && quote < styles.size() &&
+                   (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0) {
             if (const auto [spoken, length] = SpokenSyllables(line.substr(at), out); length > 0) {
                 out += spoken;
                 at += length;
@@ -635,10 +636,11 @@ void Composer::WriteCasual(int first, int last) {
         }
         carried = QuotesAfter(carried, src.substr(carriedOffset, start - carriedOffset));
         carriedOffset = start;
-        // Speech: inside a quote at the start and at the end of the item; not polite or old
-        // speech.
+        // Speech: inside a quote at the start and at the end of the item, or outside quotes in a
+        // line of speech; not polite or old speech.
         const QuoteState at = carried;
-        const bool quoted = at.depth > 0 && QuotesAfter(at, own).depth > 0;
+        const bool quoted = at.depth > 0 ? QuotesAfter(at, own).depth > 0
+                                         : settings_.spoken && settings_.casual && QuotesAfter(at, own).depth == 0;
         const std::size_t quote = at.depth > 0 ? static_cast<std::size_t>(at.count) : 0;  // 0: the text outside quotes
         const std::uint8_t style = settings_.quoteStyles != nullptr && quote < settings_.quoteStyles->size()
                                        ? (*settings_.quoteStyles)[quote]
@@ -832,7 +834,10 @@ void Composer::WriteCasual(int first, int last) {
         if (punctuated && !asked && !present.empty() && !state && !stative && !verbal) continue;
         // A present action in 해체 reads as a plan, a promise or an order; only soft speech
         // chooses one.
-        if (settings_.casualMarkedOnly && !asked && !punctuated && !present.empty() && !state) continue;
+        if ((settings_.casualMarkedOnly || (settings_.spokenByEnd && at.depth == 0)) && !asked && !punctuated &&
+            !present.empty() && !state) {
+            continue;
+        }
         const bool planned = !present.empty() && !stative && !asked && close != U'？' && close != U'?' &&
                              Planned(present, Clause(before() + std::string(own)));
         // 주다 in 해체 (줘) reads as a request; its past (줬어) does not.

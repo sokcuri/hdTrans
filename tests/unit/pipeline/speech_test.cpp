@@ -65,3 +65,32 @@ HD_TEST(pipeline_casual_quotes) {
     }
     HD_CHECK_EQ(std::string(CasualQuotes("寒いね」", 1)[1] ? "1" : "0"), "1");
 }
+
+HD_TEST(pipeline_spoken_line) {
+    const struct {
+        const char* line;
+        Spoken want;
+    } cases[] = {
+        {"それは違う", Spoken::End},
+        {"大学生くらいかと思ってた", Spoken::End},
+        {"ありがとー", Spoken::End},
+        {"（これは、困った…）", Spoken::No},
+        {"良いねぇ～。これであたしも強くなる。", Spoken::Marked},
+        {"いいわ。もう帰る。", Spoken::Marked},
+        // The end alone: 。, a mark, a comma or a dash; contractions do not count.
+        {"わかった。", Spoken::No},
+        {"ポーションを手に入れた！", Spoken::No},
+        {"俺は間違ってた。", Spoken::No},
+        {"窓を開けて、", Spoken::No},
+        {"再婚した相手の連れ子――", Spoken::No},
+        {"先輩は秘密が欲しい。☆", Spoken::No},
+        {"高い。」", Spoken::No},
+        // Prose, labels and columns.
+        {"　俺はまだ死にたくない", Spoken::No},
+        {"　寒いね", Spoken::No},
+        {"治癒魔術：相手を癒す", Spoken::No},
+        {"剣客　　朽木家にて剣術を指南する", Spoken::No},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(static_cast<int>(SpokenLine(c.line)), static_cast<int>(c.want));
+    HD_CHECK_EQ(static_cast<int>(SpokenLine("寒い", 1)), static_cast<int>(Spoken::No));
+}
