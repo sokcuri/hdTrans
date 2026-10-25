@@ -51,7 +51,7 @@ dict:dialogue-senses:1	ああもう、じいちゃんやめてくれよ恥ずか
 dict:dialogue-senses:1	「いいです、やめて下さい」	has:그만해 주세요	fix	local
 dict:dialogue-senses:1	「やめて、佳奈」	has:그만해, 카나	fix	local
 dict:dialogue-senses:1	けんかをやめて	싸움을 그만해	fix	local
-dict:dialogue-senses:1	提督、多摩をちゃん付けで呼ぶのはやめてほしいにゃ。	has:그만하기를	fix	local
+dict:dialogue-senses:1	提督、多摩をちゃん付けで呼ぶのはやめてほしいにゃ。	has:그만해 줬으면	fix	local
 dict:dialogue-senses:1	と笑い飛ばそうとしたがやめておくことにした。	has:그만두기로	keep	local
 dict:dialogue-senses:1	出場するべきか……やめておくべきか……	has:그만두어야	keep	local
 dict:dialogue-senses:1	仕事をやめていた	일을 그만두고 있었다	keep	local
