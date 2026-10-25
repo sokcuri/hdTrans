@@ -42,8 +42,9 @@ export interface TranslationResult {
   logs: string[];
 }
 
-/** The speech level of the text inside 「」: 'strict' (the default) keeps its plain sentence
- *  ends (간다), 'soft' writes them in 해체 (갈 거야). */
+/** The speech level: 'strict' (the default) keeps plain sentence ends (간다) but where the
+ *  Japanese marks casual speech; 'soft' writes them in 해체 (갈 거야) inside 「」 and on lines
+ *  without 「」 that read as speech. */
 export type Speech = 'soft' | 'strict';
 
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */

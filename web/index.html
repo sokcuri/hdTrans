@@ -19,12 +19,12 @@
   <div class="controls">
     <fieldset>
       <legend>방식</legend>
-      <label><input type="radio" name="mode" value="document" checked> 문서 (이름 통일)</label>
-      <label><input type="radio" name="mode" value="line"> 줄 단위</label>
+      <label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked> 문서 (이름 통일)</label>
+      <label title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"> 줄 단위</label>
     </fieldset>
-    <label>대사 말투 <select id="speech">
-      <option value="strict" selected>엄격하게</option>
-      <option value="soft">부드럽게</option>
+    <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
+      <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
+      <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
     </select></label>
     <label>예제 <select id="example"><option value="">고르기…</option></select></label>
   </div>
