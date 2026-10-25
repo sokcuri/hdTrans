@@ -37,6 +37,7 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 | `tools/accept-cases.py REPORT FILE...` | Take the actual output of failing whole-translation case rows as expected |
 | `tools/shadow.py [REF \| --all]` | clang `-Wshadow-all` on sources changed since the merge base; fails on new warnings only |
 | `tools/hygiene.py BASE` | Markers, stray paths, absolute paths, instruction wording and private patterns in a change |
+| `tools/ending-audit.py [--base REV]` | Counts of the places that decide a Korean ending on its finished string (ending-rewriting construction rows, `Y=` and `Y==` rules, Hangul literals in output/ and word/); with `--base`, fails when one rose (docs/testing.md) |
 | `tools/surface-budget.py [--report]` | Optional report of the Japanese and Korean text in src/core: totals, the surface:code condition ratio and the files with the most literals; used in release reviews, not a check (docs/testing.md) |
 | `tools/pass-mutation.py [-c CLI] [-d DICTS] [-j JOBS] [-t SECONDS] [PASS...]` | Leaves out each sentence pass in an experiment build and lists the passes no rule case or example catches (docs/testing.md) |
 | `tools/with-timeout.sh SECONDS CMD...` | Time limit with `timeout`, `gtimeout` or a perl alarm |

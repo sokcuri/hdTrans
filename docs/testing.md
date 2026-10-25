@@ -119,6 +119,20 @@ tools/examples.sh build/mac/hdtrans dicts --accept   # 새 출력을 *.ko.txt로
 출력은 `build/examples/`에 생깁니다. 사전 인자가 비어 있으면 77로 끝나며, ctest는 이를 건너뜀으로
 처리합니다.
 
+## 어미 감사 (ending-audit.py)
+
+`tools/ending-audit.py`는 서술어의 한국어 어미를 다 만든 문자열 위에서 다시 정하는 자리를 셉니다: 어미를 고쳐 쓰는
+구문 표 행(`set-ending`, `replace-ending-tail`, `map-ending-tail`, `map-target-tail`), 어미 번역을 대입하는 규칙(`Y+n=`,
+왼쪽 단어의 어미를 바꾸는 `Y-n=`은 따로), 어미 번역을 비교하는 규칙(`Y+n==`), 그리고 `src/core/output/`과
+`src/core/word/`의 한글 문자열 리터럴 수입니다. 어미 결정을 특징 레코드와 활용기로 옮기는 동안 이 수들은 줄기만
+해야 합니다. CI의 `linux` 작업이 풀 리퀘스트마다 기준 커밋과 비교해 하나라도 늘면 실패하고, `tools.ending-audit`는
+도구 자체 시험입니다. 급한 수정도 새 문자열 고쳐쓰기 대신 사전 행이나 부류로 합니다.
+
+```sh
+tools/ending-audit.py                      # 지금 트리의 수
+tools/ending-audit.py --base github/develop   # 기준과 비교, 늘면 종료 코드 1
+```
+
 ## 표면 문자열 보고 (surface-budget.py)
 
 `tools/surface-budget.py`는 `src/core`의 `.cpp`, `.h`마다 엔진 코드에 직접 쓴 일본어와 한국어 문자열,

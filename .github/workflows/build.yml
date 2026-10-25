@@ -297,6 +297,11 @@ jobs:
             ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose \
               2>&1 | tee "build/${{ matrix.preset }}/ctest.log"
           fi
+      # The places that decide a Korean ending on its finished string may not grow (tools/ending-audit.py,
+      # docs/testing.md); the counts are compared with the pull request's base commit.
+      - name: Ending audit
+        if: matrix.preset == 'linux' && github.event_name == 'pull_request'
+        run: python3 -I tools/ending-audit.py --base "${{ github.event.pull_request.base.sha }}"
       - name: Check out the test data
         if: matrix.preset == 'linux' && env.HAS_TESTDATA_KEY == 'true'
         uses: actions/checkout@v7
