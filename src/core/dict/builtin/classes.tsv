@@ -458,6 +458,8 @@ adverb.observation	さすが
 adverb.observation	流石
 adverb.observation	意外と
 adverb.observation	相変わらず
+adverb.observation	なぜか
+adverb.observation	何故か
 verb.polite-remark	食べ
 verb.polite-remark	飲
 verb.polite-remark	召し上が
@@ -2425,6 +2427,12 @@ noun.feeling	すっきり
 noun.feeling	スッキリ
 noun.feeling	ムカムカ
 noun.feeling	むかむか
+noun.feeling	清々
+noun.feeling	せいせい
+noun.feeling	気後れ
+noun.feeling	尊敬
+noun.feeling	同意
+noun.feeling	賛成
 noun.he-sent	手紙
 noun.he-sent	お手紙
 noun.he-sent	便り
@@ -4532,6 +4540,16 @@ verb.happening	ほっと
 verb.happening	凹
 verb.happening	沁み
 verb.happening	失
+verb.happening	焼け
+verb.happening	役立
+verb.happening	ムカつ
+verb.happening	むかつ
+verb.happening	驚
+verb.happening	疲れ
+verb.happening	年老い
+verb.happening	当た
+verb.happening	狂
+verb.happening	負け
 
 verb.stay	待
 verb.stay	見

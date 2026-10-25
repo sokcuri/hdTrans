@@ -130,7 +130,7 @@ dict:dialogue-senses:5	一番いい艦載機を頂戴よ。	has:함재기를 줘
 dict:dialogue-senses:5	バレンタインのお返し頂戴♪	has:답례 줘♪	fix	lookup
 dict:jisjk:140186	有り難く頂戴します。	고맙게 받습니다.	keep	lookup
 dict:jisjk:140186	ありがたく頂戴いたします。	고맙게 받겠습니다.	keep	lookup
-dict:jisjk:140186	ありがたく頂戴するわね。	has:고맙게 받아	keep	lookup
+dict:jisjk:140186	ありがたく頂戴するわね。	has:고맙게 받을게	keep	lookup
 builtin:phrases	提督、午後も頑張ろ！	제독, 오후도 힘내자!	fix	builtin-phrase
 builtin:phrases	サラももっと頑張ろ！	has:좀 더 힘내자!	fix	builtin-phrase
 builtin:phrases	一緒に頑張ろ？	has:힘내자?	fix	builtin-phrase
