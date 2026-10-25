@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.5](https://github.com/sokcuri/hdTrans/compare/v0.5.4...v0.5.5) (2026-10-25)
+
+
+### Bug Fixes
+
+* **dict:** read set phrases of dialogue tone by their use ([#157](https://github.com/sokcuri/hdTrans/issues/157)) ([ed3d893](https://github.com/sokcuri/hdTrans/commit/ed3d8938262558565809fb79336cdcc935453da0))
+* **engine:** keep nothing from one translate call to the next ([#156](https://github.com/sokcuri/hdTrans/issues/156)) ([c4e4ea7](https://github.com/sokcuri/hdTrans/commit/c4e4ea73c04dbe3f0581f584c618e5c4f3907cdf))
+* **release:** keep translate calls independent and read common dialogue phrases naturally ([b0a3dcb](https://github.com/sokcuri/hdTrans/commit/b0a3dcb29056c73a4d95f75ba77b6e053aab21a4))
+
 ## [0.5.4](https://github.com/sokcuri/hdTrans/compare/v0.5.3...v0.5.4) (2026-10-25)
 
 
