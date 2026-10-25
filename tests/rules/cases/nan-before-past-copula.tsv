@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 dict:colloq:nan-datta	あの夢は、なんだったんだろう。	그 꿈은, 뭐였던 걸까.	fix	local
-dict:colloq:nan-datta	さっきのはなんだった……？	조금 전의는 뭐였다……?	fix	local
+dict:colloq:nan-datta	さっきのはなんだった……？	조금 전의는 뭐였어……?	fix	local
 dict:colloq:nan-datta	クイズの答え？なんだっけそれ？	퀴즈의 대답? 뭐던가 그것?	fix	local
 dict:colloq:nan-datta	あれはなんだ	저것은 뭐야	keep	local

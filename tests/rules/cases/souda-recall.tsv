@@ -1,7 +1,7 @@
 # 규칙: LEX-17
 rule	input	expected	kind	layer
 cx:souda-recall:10	「あ、そうだ」	rule:cx:souda-recall:10=%Dn@	fix	rewrites
-cx:souda-recall:10	「あっ、そうだ！」	「앗, 맞다!」	fix	rewrites
+cx:souda-recall:10	「あっ、そうだ！」	「앗, 맞아!」	fix	rewrites
 cx:souda-recall:10	「えっと、そうだ！」	!rule:cx:souda-recall:10	keep	rewrites
 cx:souda-recall:10	「ああ、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
 cx:souda-recall:10	「うん、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
@@ -10,14 +10,14 @@ cx:souda-recall:20	「と、そうだ」	rule:cx:souda-recall:20=%Dn@	fix	rewrit
 cx:souda-recall:20	「っと、そうだ……今、何時ですか？」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
 cx:souda-recall:20	「と、その前に」	!rule:cx:souda-recall:20	keep	rewrites
 cx:souda-recall:20	「是非……と、そうだと言いたい」	!rule:cx:souda-recall:20	keep	rewrites
-cx:souda-recall:10	あ、そうだ！ 訓練しましょう	아, 맞다! 훈련합시다	fix	rewrites
+cx:souda-recall:10	あ、そうだ！ 訓練しましょう	아, 맞아요! 훈련합시다	fix	rewrites
 cx:souda-recall:10	「あ、そうだ！　ちょうどいいところに……」	rule:cx:souda-recall:10=%Dn@	fix	rewrites
 cx:souda-recall:10	「あ、そうだ、その人、出身はどこ？」	「아, 맞다, 그 사람, 출신은 어디?」	fix	rewrites
 cx:souda-recall:10	あの…あ、そうだ！ お茶をお淹れしますね？	rule:cx:souda-recall:10=%Dn@	fix	rewrites
-cx:souda-recall:10	なんで怒ってるの？ あ、そうだ！ 飲みに行かない？	왜 화내? 아, 맞다! 마시러 가지 않아?	fix	rewrites
+cx:souda-recall:10	なんで怒ってるの？ あ、そうだ！ 飲みに行かない？	왜 화내? 아, 맞아! 마시러 가지 않아?	fix	rewrites
 cx:souda-recall:10	護衛？あ、そうだ！まずお茶淹れますね。	rule:cx:souda-recall:10=%Dn@	fix	rewrites
-cx:souda-recall:10	「そうですね……あ、そうだ……」	「그렇네요……아, 맞다……」	fix	rewrites
-cx:souda-recall:10	ああっ……あっ、そうだ！ 私と組もう？	아앗……앗, 맞다! 나와 짜자?	fix	rewrites
+cx:souda-recall:10	「そうですね……あ、そうだ……」	「그렇네요……아, 맞아요……」	fix	rewrites
+cx:souda-recall:10	ああっ……あっ、そうだ！ 私と組もう？	아앗……앗, 맞아! 나와 짜자?	fix	rewrites
 cx:souda-recall:10	「いや……あ、そうだ。シャンプーを変えたか？」	「아니……아, 맞다. 샴푸를 바꾸었나?」	fix	rewrites
 cx:souda-recall:10	ああ、そうだ、あの艦と一緒に航空戦艦になったんだ。	!rule:cx:souda-recall:10	keep	rewrites
 # 맞는 출력: 「아―, 맞다」
@@ -26,12 +26,12 @@ cx:souda-recall:10	「そうそう、そうだ」	!rule:cx:souda-recall:10	keep	
 cx:souda-recall:20	「そう言われても……と、そうだ」	「그런 말을 들어도……아, 맞다」	fix	rewrites
 cx:souda-recall:20	「と、そうだ、おばちゃんは？」	「아, 맞다, 아줌마는?」	fix	rewrites
 cx:souda-recall:20	「いや、謝る必要はないし……と、そうだ、お願いしていい？」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
-cx:souda-recall:20	置いておいてもいいんだけど……と、そうだっ！	놓아두어도 괜찮은데……아, 맞다!	fix	rewrites
+cx:souda-recall:20	置いておいてもいいんだけど……と、そうだっ！	놓아두어도 괜찮은데……아, 맞아!	fix	rewrites
 cx:souda-recall:20	「と、言いますと？」	!rule:cx:souda-recall:20	keep	rewrites
 cx:souda-recall:30	「なるさ……そうだ、ほら、これ」	rule:cx:souda-recall:30=%Dn@	fix	rewrites
-cx:souda-recall:30	うぅーーん……そうだっ！	으으으응……맞다!	fix	rewrites
+cx:souda-recall:30	うぅーーん……そうだっ！	으으으응……맞아!	fix	rewrites
 cx:souda-recall:30	美味しいですよねぇ。…そうだ、今度カレーに入れてみるのはどうでしょう！？	맛있죠. …맞다, 이번에 카레에 넣어 보는 것은 어떨까요!?	fix	rewrites
-cx:souda-recall:30	エェ？コノヒカリハ…アッ…ソウダ！	에? 이 빛은…앗…맞다!	fix	rewrites
+cx:souda-recall:30	エェ？コノヒカリハ…アッ…ソウダ！	에? 이 빛은…앗…맞아!	fix	rewrites
 cx:souda-recall:30	竹の炊き込み飯だ。……そうだ、うまいぞ。	rule:cx:souda-recall:30=%Dn@	fix	rewrites
 # 맞는 출력: 자, 오늘 밤은 어떻게 하지? …그래, 피자는 어떨까?
 cx:souda-recall:30	さ、今晩はどうしようか？…そうだ、pizzaはどうかな？	자, 오늘 밤은 어떻게 하지? …맞다, pizza는 어떨까?	current	rewrites

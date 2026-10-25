@@ -16,7 +16,7 @@ dict:w:26774	一度でも夜伽を命じられれば	한 번이라도 밤시중�
 dict:jisjk:259424	ちょっと藪に入ったところに祠	조금 덤불에 들어온 것에 사당	fix	defaults
 dict:jisjk:259424	藪医者	돌팔이	keep	lookup
 dict:w:26775	二度とネズミ共を城内に立ち入らせるな。	두 번 다시 쥐 모두를 성내에 들어가게 하지 마.	fix	defaults
-dict:w:26776	俺様の出番だ！	이 몸의 차례다!	fix	lookup
+dict:w:26776	俺様の出番だ！	이 몸의 차례야!	fix	lookup
 dict:w:26779	緑金と白月石に飾られた廊下	녹금과 백월석에 장식된 복도	fix	lookup
 dict:w:26780	籠を持つ。	바구니를 가진다.	fix	defaults
 dict:w:26780	部屋に籠っていた。	방에 틀어박히고 있었다.	keep	defaults

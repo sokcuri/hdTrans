@@ -766,6 +766,19 @@ void Composer::BuildAdjective(int i) {
     sc.text = Cat({stem, replacement, suffix});
 }
 
+namespace {
+
+// Whether the copula stem 이 before ending drops after a vowel (무리다, 무리네, 무리지, 무리고,
+// 무리니까, 무리구나, 무리겠지): endings whose (이) the particle stage resolves.
+bool ContractsCopula(std::string_view ending) {
+    for (const std::string_view e : {"다", "네", "지", "고", "니", "구", "군", "며", "겠"}) {
+        if (ending.starts_with(e)) return true;
+    }
+    return false;
+}
+
+}  // namespace
+
 std::pair<std::string, std::string> Composer::CopulaForm(int i, std::string_view key, std::string_view replacement,
                                                          std::string_view suffix) const {
     const std::vector<ResolvedItem>& items = *items_;
@@ -798,12 +811,22 @@ std::pair<std::string, std::string> Composer::CopulaForm(int i, std::string_view
                 return {"(이)라서", std::string(suffix)};
             }
             return {"(이어)여서", std::string(suffix)};
+        case '2':
+            // 으 form: the same drop (무리니까); the condition is (이)라면 (無理なら 무리라면, 本なら 책이라면).
+            if (suffix.starts_with("면")) return {"(이)", Cat({"라", suffix})};
+            if (ContractsCopula(suffix)) return {"(이)", std::string(suffix)};
+            break;
         case '1': {
+            // The adverb of a noun predicate is (으)로 (熱っぽく 열정적으로, 占い的には 점쳐적으로는).
+            if (suffix.starts_with("게")) return {"(으)로", std::string(suffix.substr(std::string_view("게").size()))};
             if (suffix.starts_with("지 않") && aniNoun(i)) {
                 return {"(이)가", Cat({" ", NotForm(Cat({"않", suffix.substr(std::string_view("지 않").size())}))})};
             }
             std::string_view quoted, rest;
             if (CutQuoting(suffix, quoted, rest)) return {"(이)", Cat({"라", quoted, rest})};
+            // The copula stem drops after a vowel before these endings (무리다, 무리네, 무리지), as the
+            // copula word (이)다 does; so does its 으 form (case '2').
+            if (ContractsCopula(suffix)) return {"(이)", std::string(suffix)};
             break;
         }
     }

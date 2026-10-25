@@ -36,7 +36,7 @@ cx:ttae-adnominal:10	カタリナの記憶しかなかった時は、	카타리�
 cx:ttae-adnominal:10	上級職にクラスチェンジした時の感動	!rule:cx:ttae-adnominal:10	keep	rewrites
 cx:ttae-adnominal:10	知っている人がいる。	!rule:cx:ttae-adnominal:10	keep	rewrites
 dict:jisjk:265559	下品にもほどがあるぞ！	천하게도 정도가 있겠어!	fix	local
-dict:jisjk:265559	お人好しにもほどがある！	호인에게도 정도가 있다!	fix	local
+dict:jisjk:265559	お人好しにもほどがある！	호인에게도 정도가 있어!	fix	local
 dict:jisjk:265559	無礼にも程があるな。	무례하게도 정도가 있구나.	keep	local
 dict:jisjk:265559	三日ほど休んだ。	3일 정도 쉬었다.	keep	local
 dict:jisjk:265559	彼ほど強い人はいない。	!rule:dict:jisjk:265559	keep	local
@@ -44,7 +44,7 @@ dict:jisjk:4198	声が出るほど面白い。	목소리가 나올 정도로 재
 dict:jisjk:4198	声が出る程面白い。	목소리가 나올 정도로 재미있다.	keep	local-ending
 cx:hodo-degree:10	痛いほどに赤い。	아플 정도로 붉다.	fix	rewrites
 cx:hodo-degree:10	冗談ではないほどに美しい少女だ。	농담이 아닐 정도로 아름다운 소녀다.	fix	rewrites
-cx:hodo-degree:10	耐えがたいほどに眠い……。	참기 어려울 정도로 졸리다…….	fix	rewrites
+cx:hodo-degree:10	耐えがたいほどに眠い……。	참기 어려울 정도로 졸려…….	fix	rewrites
 cx:hodo-degree:10	恥ずかしいほどに硬直した。	부끄러울 정도로 경직되었다.	fix	rewrites
 cx:hodo-degree:10	勉強すればするほど分かる。	공부하면 할수록 안다.	keep	rewrites
 cx:hodo-degree:15	耳が痛いほどの沈黙が満ちていく。	귀가 따가울 정도의 침묵이 가득 차 간다.	fix	rewrites
@@ -67,7 +67,7 @@ cx:hodo-degree:10	玉石混交という言葉が生ぬるい程に混沌とし�
 cx:hodo-degree:15	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
 cx:hodo-degree:15	並のギアでは倒せない程の怪物なんですよ。	보통의 기어에서는 넘어뜨릴 수 없을 정도의 괴물이랍니다.	fix	rewrites
 normalize:spelling-variant	その数同数な程自衛官とともに存在した。	그 수동수인 정도 자위관과 함께 존재했다.	keep	normalize
-normalize:spelling-variant	そんなことに付き合ってられる程俺は暇じゃない！！	그런 일로 어울릴 수 있다만큼 나는 한가하지 않다!!	current	normalize
+normalize:spelling-variant	そんなことに付き合ってられる程俺は暇じゃない！！	그런 일로 어울릴 수 있다만큼 나는 한가하지 않아!!	current	normalize
 normalize:spelling-variant	子供程の背丈しかない。	아이 정도의 키밖에 없다.	fix	normalize
 normalize:spelling-variant	ある程度は分かる。	어느 정도는 안다.	keep	normalize
 normalize:spelling-variant	為替が動いた。	환율이 움직였다.	keep	normalize

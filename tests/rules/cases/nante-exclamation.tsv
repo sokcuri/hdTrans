@@ -1,8 +1,8 @@
 rule	input	expected	kind	layer
 normalize:what-a-thing	なんてことだ！	이럴 수가!	fix	normalize
 normalize:what-a-thing	あ、なんということ……	아, 이럴 수가……	fix	normalize
-dict:nante-what:1	なんて奴だ！	이 무슨 놈이다!	fix	local
-dict:nante-what:1	くそっ、なんて速さだ！	젠장, 이 무슨 속도다!	fix	local
+dict:nante-what:1	なんて奴だ！	이 무슨 놈이야!	fix	local
+dict:nante-what:1	くそっ、なんて速さだ！	젠장, 이 무슨 속도야!	fix	local
 dict:jisjk:264445	なんて言ったの？	뭐라고 말했어?	keep	local
 dict:jisjk:266724	なんて恐ろしい嵐だ。	정말 무서운 폭풍우다.	keep	local
 dict:nante-what:1	そんなことを言う、なんてことはない。	!rule:dict:nante-what:1	keep	local

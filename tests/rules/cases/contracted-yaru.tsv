@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-sound:contracted-auxiliaries	やったるぜー！そこだ！撃て！	해 준다~! 거기다! 쏘아라!	fix	sound
+sound:contracted-auxiliaries	やったるぜー！そこだ！撃て！	해 준다~! 거기야! 쏘아라!	fix	sound
 sound:contracted-auxiliaries	うっし、いける。やったるぜ！	좋았어, 갈 수 있다. 해 준다!	fix	sound
 sound:contracted-auxiliaries	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	fix	sound
 sound:contracted-auxiliaries	十五駆、秋刀魚漁支援、出撃や！ やったるで。	15구, 꽁치잡이 지원, 출격이야! 해 줄 거야.	fix	sound

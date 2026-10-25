@@ -3,11 +3,11 @@ rule	input	expected	kind	layer
 sound:stutter-kanji	「ま、待って」	「기, 기다려」	fix	sound
 sound:stutter-kanji	「ま、待ってください」	「기, 기다려 주세요」	fix	sound
 sound:stutter-kanji	「ま、真面目に答えてください」	「지, 진지하게 대답해 주세요」	fix	sound
-sound:stutter-kanji	「ま、負けられない……」	「지, 질 수 없다……」	fix	sound
+sound:stutter-kanji	「ま、負けられない……」	「지, 질 수 없어……」	fix	sound
 sound:stutter-kanji	「ま――待って」	「기――기다려」	fix	sound
 sound:stutter-kanji	「お、俺たち……」	「우, 우리……」	fix	sound
-sound:stutter-kanji	「お、大きくなった……」	「커, 커졌다……」	fix	sound
-sound:stutter-kanji	「お、終わった……」	「끄, 끝났다……」	fix	sound
+sound:stutter-kanji	「お、大きくなった……」	「커, 커졌어……」	fix	sound
+sound:stutter-kanji	「お、終わった……」	「끄, 끝났어……」	fix	sound
 sound:stutter-kanji	「お、落ち着け」	「지, 진정해」	fix	sound
 sound:stutter-kanji	「お、思い出ですか？」	「추, 추억입니까?」	fix	sound
 sound:stutter-kanji	「お、女の子じゃなかった……？」	「여, 여자아이가 아니었어……?」	fix	sound
@@ -15,13 +15,13 @@ sound:stutter-kanji	「お、覚えてたの？」	「기, 기억했어?」	fix	
 sound:stutter-kanji	「う、嬉しいの」	「기, 기쁜 거야」	fix	sound
 sound:stutter-kanji	「う、撃たないでください」	「쏘, 쏘지 말아 주세요」	fix	sound
 sound:stutter-kanji	「う、噂はあるけど」	「소, 소문은 있는데」	fix	sound
-sound:stutter-kanji	「う、上だ！」	「위, 위다!」	fix	sound
+sound:stutter-kanji	「う、上だ！」	「위, 위야!」	fix	sound
 sound:stutter-kanji	「よ、夜に電話してごめんなさい」	「바, 밤에 전화해서 미안해요」	fix	sound
 sound:stutter-kanji	「む、無理です」	「무, 무리입니다」	fix	sound
 sound:stutter-kanji	「む、胸が痛い」	「가, 가슴이 아프다」	fix	sound
 sound:stutter-kanji	「む、婿ですか……」	「사, 사위입니까……」	fix	sound
 sound:stutter-kanji	「と、友達から聞いた」	「치, 친구에게서 들었다」	fix	sound
-sound:stutter-kanji	「と、止まった……」	「머, 멈추었다……」	fix	sound
+sound:stutter-kanji	「と、止まった……」	「머, 멈췄어……」	fix	sound
 sound:stutter-kanji	「と、当然でしょ？」	「다, 당연하지?」	fix	sound
 sound:stutter-kanji	「さ、触ってもいいですか？」	「마, 만져도 괜찮습니까?」	fix	sound
 sound:stutter-kanji	「さ、寂しくない？」	「외, 외롭지 않아?」	fix	sound
@@ -32,8 +32,8 @@ sound:stutter-kanji	「あ……先輩……」	「아……선배……」	fix	
 sound:stutter-kanji	「あ……嬉しいです」	「아……기쁩니다」	fix	sound
 sound:stutter-kanji	「う、掃除道具がいっぱいで」	「으, 청소 도구가 가득해」	fix	sound
 sound:stutter-kanji	「む、一句浮かんだ」	「음, 한 마디 떠올랐다」	fix	sound
-sound:stutter-kanji	「う……血が止まらない……」	「으……피가 멈추지 않는다……」	fix	sound
-sound:stutter-kanji	「む……反応が速い！」	「음……반응이 빠르다!」	fix	sound
+sound:stutter-kanji	「う……血が止まらない……」	「으……피가 멈추지 않아……」	fix	sound
+sound:stutter-kanji	「む……反応が速い！」	「음……반응이 빨라!」	fix	sound
 sound:stutter-kanji	「さ……行こう」	「자……가자」	fix	sound
 sound:stutter-kanji	「お……来たか」	「오……왔나」	fix	sound
 sound:stutter-kanji	「ね……先輩」	「저기……선배」	fix	sound

@@ -7,7 +7,7 @@ dict:na-past-cause	安全だったため、帰った。	안전했기 때문에, 
 dict:na-past-cause	静かだったため、集中できた。	조용했기 때문에, 집중할 수 있었다.	fix	lookup
 dict:na-past-cause	急だったため、行かなかった。	갑작스러웠기 때문에, 가지 않았다.	fix	lookup
 dict:na-past-cause	「静かだったため、眠れた。」	「조용했기 때문에, 잘 수 있었다.」	fix	lookup
-dict:na-past-cause	静かだったため、眠れた！	조용했기 때문에, 잘 수 있었다!	fix	lookup
+dict:na-past-cause	静かだったため、眠れた！	조용했기 때문에, 잘 수 있었어!	fix	lookup
 dict:na-past-cause	彼は静かだったため、眠れたと言った。	그는 조용했기 때문에, 잘 수 있었다고 했다.	fix	lookup
 dict:na-past-cause	静かだったため，眠れた。	조용했기 때문에, 잘 수 있었다.	fix	lookup
 dict:na-past-cause	静かだったため,眠れた。	조용했기 때문에, 잘 수 있었다.	fix	lookup

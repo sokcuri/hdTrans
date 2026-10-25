@@ -10,10 +10,10 @@ lookup:suffix-after-person	先輩、モモっち、お茶淹れました！	선�
 lookup:suffix-after-person	先生たん「寝ちゃった」	선생님짱 「자버렸어」	fix	lookup
 lookup:suffix-after-person	姫たん「帰ろう」	공주짱 「돌아가자」	fix	lookup
 lookup:suffix-after-person	アリスたん「尊い！」	앨리스짱 「고귀하다!」	fix	lookup
-lookup:suffix-after-person	「お姉ちゃんたん、宿題を」	「언니짱, 숙제를」	fix	lookup
+lookup:suffix-after-person	「お姉ちゃんたん、宿題を」	「언니, 숙제를」	fix	lookup
 lookup:suffix-after-person	「勇者たん、お弁当は」	「용사짱, 도시락은」	fix	lookup
 lookup:suffix-after-person	「メイドたん、デートに行こう」	「메이드짱, 데이트에 가자」	fix	lookup
-lookup:suffix-after-person	お兄ちゃんたん、魔法って好きなの？	형짱, 마법은 좋아해?	fix	lookup
+lookup:suffix-after-person	お兄ちゃんたん、魔法って好きなの？	오빠, 마법은 좋아해?	fix	lookup
 lookup:suffix-after-person	アリスたんはケーキが欲しい。	앨리스짱은 케이크를 갖고 싶다.	fix	lookup
 lookup:suffix-after-person	魔王たんの夢	마왕짱의 꿈	fix	lookup
 lookup:suffix-after-person	母たんこぶができた	어머니 혹이 생겼다	fix	lookup
@@ -25,7 +25,7 @@ lookup:suffix-after-person	子供たちたんこぶ	아이들 혹	fix	lookup
 lookup:suffix-after-person	僕らたんこぶ	우리 혹	fix	lookup
 dict:w:28404	俺っちは獣人っすよ、兄貴！	나는 수인입니다, 형!	fix	defaults
 dict:w:28404	俺っちに任せてください。	나에게 맡겨 주세요.	fix	defaults
-dict:w:28404	俺っち達は無罪だ！	우리는 무죄다!	fix	defaults
+dict:w:28404	俺っち達は無罪だ！	우리는 무죄야!	fix	defaults
 dict:w:28405	俺っちがやります。	내가 합니다.	fix	local
 lookup:suffix-after-person	たまごっちを買った	다마고치를 샀다	keep	lookup
 lookup:suffix-after-person	「はいはい、うんたんうんたん」	「네네, 운탄운탄」	keep	lookup

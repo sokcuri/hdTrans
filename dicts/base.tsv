@@ -6631,7 +6631,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おなら	방귀	I110			GN				jisjk:106680		
 おに	도깨비	N110			GN				jisjk:165795		
 おにいさん	형님	I110	VHn		GN				jisjk:40508		
-おにいちゃん	형	N110	VHn		GN				jisjk:165799		
+おにいちゃん	오빠	N110	VHn		GN				jisjk:165799		
 おにがでるかじゃがでるか	어떻게 될지	N110			GN				jisjk:150732		
 おにがみ	귀신	N110	VHn		GN				jisjk:165800		-1
 おにがわら	도깨비 얼굴 모양의 기와	N110	VBl		GN				jisjk:165802		-1
@@ -7342,7 +7342,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お元気ですか	안녕하십니까	A9H1			GN				jisjk:90188		
 お元気の由	건강하시다니	I110			GN				jisjk:262584		
 お兄さん	형	I110	VQmUQfVHn		GN				jisjk:40675		
-お兄ちゃん	형	N110	VHn		GN				jisjk:165798		
+お兄ちゃん	오빠	N110	VHn		GN				jisjk:165798		
 お先に	먼저	E300			GN				jisjk:341376		
 お先にどうぞ	먼저 하세요	A9D0			GN				jisjk:373488		
 お先棒を担	앞잡이 노릇을&AV@	M422	VTwVMo		GN				jisjk:145780		
@@ -32778,7 +32778,7 @@ ttt	ttt	K110			GN				jisjk:201744
 つめきり	손톱깎기	N110	VPe		GN				jisjk:153551		
 つめこ	밀어 &H5@	M445			GN				jisjk:143705		
 つめこ	주입시&AQ@	M445			GN				jisjk:143710		
-つめた	$A8@	H7U0			GN				jisjk:5196		
+つめた	차$KB@	H7U0			GN				jisjk:5196		
 つめた	차$KB@	H7N0	SFl		GN				jisjk:121619		
 つめのあか	손톱때	N110	VBp		GN				jisjk:153552		
 つめよ	추궁&AV@	M428			GN				jisjk:143723		
@@ -43559,7 +43559,7 @@ ttt	ttt	K110			GN				jisjk:201744
 よくばり	욕심장이	I110	VHn		GN				jisjk:41817		
 よくみみにするようにな	자주 듣게 &C6@	M428		Dx	GN				jisjk:147460		
 よくもちいられ	자주 이용&C6@	M447			GN				jisjk:147462		
-よくや	잘 &AV@	M428			GN				jisjk:147463		
+よくや	잘&AV@	M428			GN				jisjk:147463		
 よくやってくれ	잘 해 &CJ@	M447			GN				jisjk:148518		
 よくよく	차근차근	E311			GN				jisjk:1368		
 よくわからな	잘 $C4@	H7N0			GN				jisjk:138339		
@@ -156798,7 +156798,7 @@ ttt	ttt	K110			GN				jisjk:201744
 咽頭	인두	N110			GN				jisjk:29371		
 咽頭炎	인두염	I110			GN				jisjk:78273		
 哀	사랑&AV@	M435			GN				jisjk:94003		
-哀し	슬$AA@	H7M0			GN				jisjk:5761		
+哀し	슬$Kt@	H7M0			GN				jisjk:5761		
 哀し	슬퍼&AV@	M435			GN				jisjk:5762		
 哀しさ	애절함	N110			GN				jisjk:169065		
 哀しみ	슬픔	N130			GN				jisjk:202180		

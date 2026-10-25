@@ -20,7 +20,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御客様	손님	I110	VHn		GN							jisjk:40543
 御客さま	손님	I110	VHn		GN							jisjk:40543
 御休みなさい	안녕히 주무세요	A9D0			GN							jisjk:267088
-御兄ちゃん	형	N110	VHn		GN							jisjk:165798
+御兄ちゃん	오빠	N110	VHn		GN							jisjk:165798
 御見えにな	&AH@	M428			GN							jisjk:263730
 御見舞い	병문안	N110			GN							jisjk:260663
 御見舞	병문안	N110			GN							jisjk:260663
@@ -20635,3 +20635,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 このぐらい	이 정도	C0H0			GN						このぐらい	variant:voiced:4
 あのぐらい	그 정도	C0H0			GN						あのぐらい	variant:voiced:5
 推しはか	헤아&AA@	M438			GN						おしはか	variant:kana:oshihaka
+お兄たん	오빠	N110	VHn		GN						おにいたん	variant:babytalk:oniitan
+お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan

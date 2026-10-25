@@ -748,6 +748,17 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 ok = false;
             }
         }
+        // The cry やった before a word in kanji or katakana is the verb that describes it
+        // (ぎゅっとやった瞬間 한 순간), and so is one whose sentence goes on with の or ん after a pause
+        // (ヤッタ…ノ); よかった before a word stays relief (よかった心配した 다행이다).
+        if (ok && s.exclaim && s.key.starts_with(U"ヤッタ") && end == p + s.key.size() && end < rs_.size()) {
+            size_t after = end;
+            while (after < rs_.size() && In(rs_[after], U"…‥")) after++;
+            if ((after == end && (text::IsKanji(rs_[end]) || IsKatakanaRune(rs_[end]))) ||
+                (after > end && after < rs_.size() && In(rs_[after], U"のノんン"))) {
+                ok = false;
+            }
+        }
         // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
         // question mark.
         if (ok && s.final) {
@@ -896,6 +907,8 @@ std::string SoundText::Reading(const SoundRow& s, size_t p, size_t end) const {
     } else if (key == U"ハン") {
         if (Scoff(p, end)) return "흥";
     }
+    // The cry やった asked (ヤッタ？) asks about the success (해냈어?).
+    if (key.starts_with(U"ヤッタ") && s.korean == "앗싸" && AskedAt(rs_, end)) return "해냈어";
     if (s.phrase && AskedAt(rs_, end)) return AskedPast(s.korean);
     if (!s.polite.empty() && PoliteAt(p)) {
         const size_t space = s.korean.rfind(' ');

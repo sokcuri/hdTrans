@@ -1,6 +1,6 @@
 # 규칙: LEX-52
 rule	input	expected	kind	layer
-cx:tasukaru:10	近代化改修、助かるわ。もっと働ける！	근대화 개수, 도움이 돼. 좀 더 일할 수 있다!	fix	rewrites
+cx:tasukaru:10	近代化改修、助かるわ。もっと働ける！	근대화 개수, 도움이 돼. 좀 더 일할 수 있어!	fix	rewrites
 cx:tasukaru:10	強化、助かる。	강화, 도움이 된다.	fix	rewrites
 cx:tasukaru:10	いいじゃない！ 助かるわ	좋잖아! 도움이 돼	fix	rewrites
 cx:tasukaru:10	ありがとうございます、助かります。	감사합니다, 도움이 됩니다.	fix	rewrites
@@ -17,7 +17,7 @@ cx:tasukaru:10	逃げれば助かる。	!rule:cx:tasukaru:10	keep	rewrites
 cx:tasukaru:20	たっぷりと蓄えた脂肪のおかげで助かった……。	듬뿍 비축한 지방 덕분에 살았다…….	fix	rewrites
 cx:tasukaru:20	ミドリさんのお陰で助かったってしっかり感謝して、	미도리 씨 덕분에 살았다고 확실히 감사해,	fix	rewrites
 cx:tasukaru:20	今回も助かった	이번에도 살았다	fix	rewrites
-cx:tasukaru:20	ふ～、助かったぁ～。司令官酷いよぉ	후~, 살았다~. 사령관 심해	fix	rewrites
+cx:tasukaru:20	ふ～、助かったぁ～。司令官酷いよぉ	후~, 살았어~. 사령관 심해	fix	rewrites
 cx:tasukaru:20	明石さんが近くにいてくれて、助かりました。	아카시 씨가 근처에 있어 주어서, 살았습니다.	fix	rewrites
 cx:tasukaru:20	しかし、彼らが平和主義で助かりました。	하지만, 그들이 평화주의로 살아났습니다.	fix	rewrites
 cx:tasukaru:20	命が助かった。	!rule:cx:tasukaru:20	keep	rewrites

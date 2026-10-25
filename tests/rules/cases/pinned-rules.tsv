@@ -41,7 +41,7 @@ dict:jisjk:4154	この問題について皆で話し合った。	rule:dict:jisjk
 dict:jisjk:342062	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
 dict:jisjk:342185	買います品物が決まりました。	사는 물건이 정해졌습니다.	current	local-ending
 dict:jisjk:342197	食べてないと困る。	먹지 않았다고 곤란하다.	current	local-ending
-dict:jisjk:342458	そんな話があるかっ！	그런 이야기가 있다!	current	local-ending
+dict:jisjk:342458	そんな話があるかっ！	그런 이야기가 있어!	current	local-ending
 dict:jisjk:342710	つまらないって人もいるけど私は好きだ。	시시하다는 사람도 있지만 나는 좋아한다.	current	local-ending
 dict:jisjk:343126	お送りしました資料をご確認ください。	보내 드렸던 자료를 확인해 주십시오.	current	local-ending
 dict:jisjk:343569	君もそう思うよねえ。	rule:dict:jisjk:343569=	current	local

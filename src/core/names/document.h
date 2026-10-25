@@ -35,6 +35,8 @@ struct DocumentContext {
     // verse and historical parts appended.
     std::string key;
     bool female = false;
+    // The document writes its speech in 「」: its text outside them is narration.
+    bool narrated = false;
     bool extraBuiltin = false;
     std::vector<std::string> persons;  // sorted person surfaces
     std::vector<std::string> verse;    // sorted verse lines

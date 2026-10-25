@@ -19,6 +19,8 @@ constexpr std::uint8_t kOldSpeech = 2;
 constexpr std::uint8_t kWritten = 4;
 constexpr std::uint8_t kReading = 8;
 constexpr std::uint8_t kCited = 16;
+// です or ます proper, not なさい alone, でしょうがない or ますます (set with kPoliteSpeech).
+constexpr std::uint8_t kPoliteForm = 128;
 
 // The styles of line: element 0 for its text outside 「」 and 『』, element k for its k-th
 // quote (a 「 or 『 outside any quote, with the quotes inside it); 「 and 『 open a quote,

@@ -98,7 +98,7 @@ dict:particle-joins:3	驚くくらいに速い。	놀랄 정도로 빠르다.	fi
 dict:particle-joins:3	驚くくらい速い。	놀랄 정도로 빠르다.	keep	lookup
 sense:だけに	君だけに話す。	너에게만 이야기한다.	fix	senses
 sense:だけに	兄は医者だけに詳しい。	형은 의사인 만큼 자세하다.	keep	senses
-sense:だけに	子供だけに無理だ。	아이인 만큼 무리이다.	keep	senses
+sense:だけに	子供だけに無理だ。	아이인 만큼 무리다.	keep	senses
 sense:いたい	ずっと君と一緒にいたい。	계속 너와 함께 있고 싶다.	fix	senses
 sense:いたい	もっとそばにいたいな。	좀 더 곁에 있고 싶은데.	keep	senses
 sense:いたい	一緒にいかがですか。	함께 어떻습니까.	keep	senses

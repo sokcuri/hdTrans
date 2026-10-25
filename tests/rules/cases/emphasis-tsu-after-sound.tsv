@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 sound:emphasis-tsu	その話、ひっどいね	그 이야기, 심하네	fix	sound
-sound:emphasis-tsu	うわ、はっやい！	우와, 빠르다!	fix	sound
+sound:emphasis-tsu	うわ、はっやい！	우와, 빨라!	fix	sound
 sound:emphasis-tsu	それ、おっかしいよ	그것, 이상해	fix	sound
 sound:emphasis-tsu	さっ、帰ろう	자, 돌아가자	keep	sound

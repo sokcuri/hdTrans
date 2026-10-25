@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸다……	fix	sound
+sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸어……	fix	sound
 sound:contracted-auxiliaries	「寝ちゃってた……」	「자 버렸어……」	fix	sound
 sound:contracted-auxiliaries	……ああごめん、少し見惚れちゃってた。戻りましょう。	……아 미안, 조금 넋을 잃고 봐 버렸다. 돌아옵시다.	fix	sound
 sound:contracted-auxiliaries	寝ちまってたか。	자 버렸나.	fix	sound

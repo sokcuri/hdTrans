@@ -1,0 +1,34 @@
+# 규칙: SPC-16
+rule	input	expected	kind	layer
+compose:formal-question	お祭りを利用する方法は見つかりました？	축제를 이용하는 방법은 발견되었습니까?	fix	compose
+compose:formal-question	あたしの名前、漢字で書けます？	제 이름, 한자로 쓸 수 있습니까?	fix	compose
+compose:formal-question	提督、艦隊の情報。ご覧になります？	제독, 함대의 정보. 보십니까?	fix	compose
+compose:formal-question	そっ……そんなに気になります？	그……그렇게 신경 쓰입니까?	fix	compose
+compose:formal-question	修理、しときます？	수리, 해 둡니까?	fix	compose
+compose:formal-question	提督も修理ですか？どこが壊れてます？	제독도 수리입니까? 어디가 망가져 있습니까?	fix	compose
+compose:formal-question	どうです？井戸の鍵は見つかりました？	어떻습니까? 우물의 열쇠는 발견되었습니까?	fix	compose
+compose:formal-question	そうです、アクィラです。覚えてくれました？	그렇습니다, 아퀼라입니다. 기억해 주었습니까?	fix	compose
+compose:formal-question	…ぁ、御免なさい、呼びました？	…아, 미안해요, 불렀습니까?	fix	compose
+compose:formal-question	作戦完了したわ。レポートを見ます？	작전 완료했어. 리포트를 봅니까?	fix	compose
+compose:formal-question	「その、迷惑でした？」	「그, 성가셨습니까?」	fix	compose
+compose:formal-question	「一応、言いますけど、あくまで見守るだけですよ？」	「일단, 말하는데요, 어디까지나 지켜볼 뿐이에요?」	fix	compose
+compose:formal-question	ほらほら、まだ序盤戦ですよ？	자 자, 아직 초반전이에요?	fix	compose
+compose:formal-question	潜ります？潜らせちゃいます？	잠수합니까? 잠수하게 해버립니까?	fix	compose
+compose:formal-question	提督、お帰りなさい！	제독, 어서 오세요!	keep	compose
+compose:formal-question	勝手は！榛名が！許しません！	멋대로는! 하루나가! 용서하지 않습니다!	keep	compose
+compose:formal-question	本当ですか？	정말입니까?	keep	compose
+compose:formal-question	何ですか？	무엇입니까?	keep	compose
+compose:formal-question	さあ、参りましょう？	자, 갈까요?	keep	compose
+compose:formal-question	提督、私に何かご用ですか！？	제독, 저에게 뭔가 용건입니까!?	keep	compose
+cx:nandesu-what:10	「なんです？」	「뭡니까?」	fix	rewrites
+cx:nandesu-what:10	「…なんです？」	「…뭡니까?」	fix	rewrites
+cx:nandesu-what:10	え？ 髮の色？なんの事です？	어? 머리카락의 색? 무슨 일입니까?	keep	rewrites
+cx:nandesu-what:10	何故なんです？	왜입니까?	keep	rewrites
+cx:nandesu-what:10	好きなんです。	좋아합니다.	keep	rewrites
+cx:nandesu-what:10	そうなんです？	그렇습니까?	keep	rewrites
+cx:nandesu-what:10	……何故なんです？	……왜입니까?	keep	rewrites
+cx:nandesu-what:10	あ、なんです？	아, 뭡니까?	fix	rewrites
+compose:formal-question	「もちろん死んで欲しくないでありますよ？」	「물론 죽기를 원하지 않습니다?」	keep	compose
+compose:formal-question	あの…魚雷撃ちますよ？	그…어뢰 쏴요?	fix	compose
+cx:nandesu-what:10	「えと、どっちも、毒蛾とゴーレムで、毒無効、なんです……」	「음, 어느 쪽도, 독나방과 골렘으로, 독무효, 입니다……」	keep	rewrites
+cx:nandesu-what:10	提督さん。て、手作り、なんです…。	has:수제, 입니다	keep	rewrites

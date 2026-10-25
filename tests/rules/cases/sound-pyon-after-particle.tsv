@@ -16,7 +16,7 @@ sound:end-row-after-particle	カエルがぴょん。	개구리가 뿅.	fix	soun
 sound:end-row-after-particle	読んでぴょん！	읽어 뿅!	fix	sound
 sound:end-row-after-particle	書いてぴょん！	써 뿅!	fix	sound
 sound:end-row-after-particle	食べてぴょん！	먹어 뿅!	fix	sound
-ending:pyon	やったぁ！ でたっぴょん！	해냈다! 나왔다뿅!	keep	builtin-ending
+ending:pyon	やったぁ！ でたっぴょん！	앗싸! 나왔다뿅!	keep	builtin-ending
 ending:pyon	嬉しいぴょん！	기쁘다뿅!	keep	builtin-ending
 ending:pyon	司令官に報告ぴょん！	사령관에 보고다뿅!	keep	builtin-ending
 ending:pyon	攻撃、開始するぴょん！	공격, 개시한다뿅!	keep	builtin-ending

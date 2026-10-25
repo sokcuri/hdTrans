@@ -1,8 +1,8 @@
 # 규칙: LEX-39
 rule	input	expected	kind	layer
 dict:jisjk:266571	無事でよかった	무사해서 다행이다	fix	local
-dict:jisjk:266571	みんな無事でよかった！	모두 무사해서 다행이다!	fix	local
-dict:jisjk:266571	とにかく無事でよかった！！	어쨌든 무사해서 다행이다!!	fix	local
+dict:jisjk:266571	みんな無事でよかった！	모두 무사해서 다행이야!	fix	local
+dict:jisjk:266571	とにかく無事でよかった！！	어쨌든 무사해서 다행이야!!	fix	local
 dict:relief-yokatta:1	そうですか、良かった	그렇습니까, 다행이다	fix	local
 dict:relief-yokatta:1	「良かった～、生きてたぁ～」	has:「다행이다~	fix	local
 dict:relief-yokatta:1	……あの部屋は無事？ 良かった。	has:무사? 다행이다.	fix	local

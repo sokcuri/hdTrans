@@ -201,6 +201,7 @@ struct DocumentHistory {
         facts.uses++;
         female += facts.speech.female;
         maleKin += facts.speech.maleKin;
+        quoted += facts.speech.quoted;
         for (const auto& key : facts.persons) Count(persons, key, true);
         for (const auto& key : facts.cued) Count(cued, key, true);
         Historical(facts, id, true);
@@ -213,6 +214,7 @@ struct DocumentHistory {
             registry.Forget(old.evidence);
             female -= oldFacts.speech.female;
             maleKin -= oldFacts.speech.maleKin;
+            quoted -= oldFacts.speech.quoted;
             for (const auto& key : oldFacts.persons) Count(persons, key, false);
             for (const auto& key : oldFacts.cued) Count(cued, key, false);
             if (old.verse) Count(verses, VerseKey(old.text), false);
@@ -232,7 +234,7 @@ struct DocumentHistory {
     std::map<std::string, std::size_t> persons, verses, surnames, cued;
     std::map<std::string, Readings> historical;
     std::map<uint64_t, std::vector<std::vector<char32_t>>> listed;
-    std::size_t bytes = 0, female = 0, maleKin = 0;
+    std::size_t bytes = 0, female = 0, maleKin = 0, quoted = 0;
     uint64_t next = 0;
 };
 
@@ -303,7 +305,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     for (const std::string& line : lines) r.Add(line);
 
     doc->registryKey = r.Key();
-    bool female = memory.female > 0, maleKin = memory.maleKin > 0;
+    bool female = memory.female > 0, maleKin = memory.maleKin > 0, quoted = memory.quoted > 0;
     std::vector<const names::HistoricalLine*> historical;
     const names::HistoricalLine earlier = memory.Historical();
     historical.push_back(&earlier);
@@ -315,12 +317,15 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         doc->cued.insert(facts.cued.begin(), facts.cued.end());
         female = female || facts.speech.female;
         maleKin = maleKin || facts.speech.maleKin;
+        quoted = quoted || facts.speech.quoted;
         persons.insert(facts.persons.begin(), facts.persons.end());
         historical.push_back(&facts.historical);
     }
     doc->female = female && !maleKin;
     doc->key = doc->registryKey;
     if (doc->female) doc->key += std::string("\0female", 7);
+    doc->narrated = quoted;
+    if (doc->narrated) doc->key += std::string("\0narrated", 9);
 
     doc->persons.assign(persons.begin(), persons.end());
     std::sort(doc->persons.begin(), doc->persons.end());
@@ -512,6 +517,7 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     LineContext ctx;
     ctx.document = true;
     ctx.female = doc.female;
+    ctx.narrated = doc.narrated;
     ctx.extraBuiltin = doc.extraBuiltin;
     ctx.lookup.plain = lookup.plain;
     ctx.lookup.confirmed = lookup.confirmed;

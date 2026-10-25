@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 sound:shout-tsu	「だ、誰かぁーッ！」	「누, 누군가~!」	fix	sound
 sound:shout-tsu	なぜにメイド服ーーーッ！！！！！	왜 메이드복~!!!!!	fix	sound
 sound:shout-tsu	もちろん母さんには内緒でだーーーーッ！！！	물론 어머니에게는 비밀로다~!!!	fix	sound
-sound:shout-tsu	チャンスなんてそうそうないのだーッ！！！	찬스 같은 건 그렇게 자주 없는 것이다~!!!	fix	sound
+sound:shout-tsu	チャンスなんてそうそうないのだーッ！！！	찬스 같은 건 그렇게 자주 없는 거야~!!!	fix	sound
 sound:shout-tsu	警戒ーッ！！	경계~!!	fix	sound
 sound:shout-tsu	総員、起こし！起床ーッ！	총원, 일으켜! 기상~!	fix	sound
 sound:shout-tsu	「だめーっ！」	「안돼~!」	keep	sound

@@ -21,12 +21,12 @@ dict:gram:nakereba:nakya	行かなきゃいけないかもしれない	가야 �
 dict:gram:nakereba:nakya	行かなきゃいけなかった	가야 했다	fix	local-ending
 dict:gram:nakereba:nakya	それでも言わなきゃならない。	그래도 말해야 한다.	fix	local-ending
 dict:gram:nakereba:nakya	行かなきゃならないだろう	가야 할 것이다	fix	local-ending
-dict:gram:nakereba:nakucha	動かなくちゃいけない！	움직여야 한다!	fix	local-ending
+dict:gram:nakereba:nakucha	動かなくちゃいけない！	움직여야 해!	fix	local-ending
 dict:gram:nakereba:nakucha	A区画兵舎で料理長の下で働かなくちゃいけないんだ。	A구획 병사로 주방장 아래에서 일해야 한다.	fix	local-ending
 dict:gram:nakereba:nakucha	戦わなくちゃいけない理由がな。	싸워야 하는 이유가.	fix	local-ending
 dict:gram:nakereba:nakucha	帰らなくちゃいけないだろう	돌아가야 할 것이다	fix	local-ending
 dict:gram:nakereba:nakutewa	食べなくてはいけない	먹어야 한다	fix	local-ending
-dict:gram:nakereba:nakutewa-end	頑張らなくては……	노력해야 한다……	fix	local-ending
+dict:gram:nakereba:nakutewa-end	頑張らなくては……	노력해야 해……	fix	local-ending
 dict:gram:nakereba:nakutewa-end	帰らなくては	돌아가야 한다	fix	local-ending
 dict:gram:nakereba:nakya	行かなきゃ損だ	가지 않으면 손해다	keep	local-ending
 dict:gram:nakereba:nakya	早く行かなきゃ。	빨리 가야 한다.	keep	local-ending

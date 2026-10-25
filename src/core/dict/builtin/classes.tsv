@@ -1,6 +1,7 @@
 // Word classes the passes test words against (dict::InClass, dict::ClassMembers):
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
+//= adverb.at-last	Adverbs of something reached at last (ついに, とうとう), after which a やった is a success (ついにやった 드디어 해냈다).
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
@@ -153,6 +154,7 @@
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
 //= noun.coming-flow	Nouns of what keeps coming, whose 来ている comes on rather than has arrived (いい風きてる 좋은 바람 오고 있어, 波が来ている 파도가 오고 있다).
+//= noun.kin	Kinship words that たん and っち after them belong to, as ちゃん does (お兄ちゃんたん 오빠, 妹たん 여동생).
 //= noun.predicate	Words without conjugation that are a predicate in Korean (だめ 안돼): said again and clipped with っ, the last copy closes with ㅅ like an adjective (だめだめっ 안돼 안됏).
 //= ko.joined-before-doe	Korean words written joined to a form of 되다 right after them (안 돼 안돼, 안 된다 안된다).
 //= ko-aux.joined	Korean auxiliary verbs, by their selected Korean, written joined to the 아/어 form before them when the Japanese entry is an auxiliary (gram Ds) (먹어 버렸다 먹어버렸다).
@@ -370,6 +372,11 @@ adverb.degree-feeling	凄く
 adverb.degree-feeling	すっごく
 adverb.degree-feeling	めちゃくちゃ
 
+adverb.at-last	ついに
+adverb.at-last	遂に
+adverb.at-last	とうとう
+adverb.at-last	やっと
+adverb.at-last	ようやく
 adverb.forcing	無理やり
 adverb.forcing	無理矢理
 adverb.forcing	むりやり
@@ -2035,6 +2042,28 @@ adjective.grumble	眠い
 adjective.grumble	ねむい
 adjective.grumble	面倒くさい
 adjective.grumble	めんどくさい
+noun.kin	兄
+noun.kin	姉
+noun.kin	妹
+noun.kin	弟
+noun.kin	お兄
+noun.kin	お姉
+noun.kin	兄ちゃん
+noun.kin	姉ちゃん
+noun.kin	お兄ちゃん
+noun.kin	お姉ちゃん
+noun.kin	おにいちゃん
+noun.kin	おねえちゃん
+noun.kin	兄さん
+noun.kin	姉さん
+noun.kin	お兄さん
+noun.kin	お姉さん
+noun.kin	兄貴
+noun.kin	姉貴
+noun.kin	母さん
+noun.kin	父さん
+noun.kin	お母さん
+noun.kin	お父さん
 noun.predicate	だめ
 noun.predicate	ダメ
 noun.predicate	駄目

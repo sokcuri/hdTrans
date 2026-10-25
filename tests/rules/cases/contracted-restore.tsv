@@ -33,7 +33,7 @@ sound:contracted-auxiliaries	うーん……１時間も待ってられないし
 sound:contracted-auxiliaries	そこまで思ったら、もうジッとしてられなかった。	거기까지 생각했더니, 벌써 가만히 하고 있을 수 없었다.	fix	sound
 sound:contracted-auxiliaries	でないとやってられない。	그렇지 않으면 할 수 없다.	fix	sound
 sound:contracted-auxiliaries	まあ、あるいはそうでも思わないとやってられなかったのかもしれないが。	뭐, 혹은 그래도 생각하지 않으면 할 수 없었던 걸지도 모르겠지만.	fix	sound
-sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없다!	fix	sound
+sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없어!	fix	sound
 sound:contracted-auxiliaries	そんなこと言ってられないよ。	그런 말 하고 있을 수 없어.	fix	sound
 sound:contracted-auxiliaries	飲まないとやってられないぃ！	마시지 않으면 할 수 없어!	fix	sound
 sound:contracted-auxiliaries	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	keep	sound
@@ -44,7 +44,7 @@ sound:contracted-auxiliaries	一人は泣いちゃってるんでしょ？	한 �
 sound:contracted-auxiliaries	んっ……こんなに、エッチな格好で、下も沢山濡らしちゃってるのに	읏……이렇게, 야한 모습으로, 아래도 많이 적셔 버렸는데	fix	sound
 sound:contracted-auxiliaries	そういえば、気付いたらサッちゃんが掃除を済ませちゃってるなぁ……	그러고 보니, 정신을 차려 보니 삿짱이 청소를 끝마쳤군……	fix	sound
 sound:contracted-auxiliaries	ゾワゾワしちゃってる……	오싹오싹해버렸다……	keep	sound
-sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸다……	keep	sound
+sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸어……	keep	sound
 sound:contracted-auxiliaries	…あ、本当に寝ちゃってる。	…아, 정말 자버렸다.	keep	sound
 sound:contracted-auxiliaries	……オージマに、持ってて、もらいたいの……	……오지마에, 가지고 있어, 받고 싶은 거야……	keep	sound
 sound:contracted-auxiliaries	……言ってて、恥ずかしくなってきた……	……말해, 부끄러워졌다……	keep	sound

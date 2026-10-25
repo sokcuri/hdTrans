@@ -6,7 +6,7 @@ cx:tokoro-near-miss:10	危うく性的嗜好を勘違いされるところだっ
 cx:tokoro-near-miss:10	谷を越えるための橋が壊されていた。危うく気付かず、落ちるところだった。	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
 cx:tokoro-near-miss:10	危なかった……機体の制御システムを乗っ取られるところだった	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
 cx:tokoro-near-miss:20	危うく、野菜ジュースが無駄になるところでした	rule:cx:tokoro-near-miss:20=3 뻔했습니다	fix	rewrites
-cx:tokoro-near-miss:10	騙されるところだった～っ	속을 뻔했다~	fix	rewrites
+cx:tokoro-near-miss:10	騙されるところだった～っ	속을 뻔했어~	fix	rewrites
 cx:tokoro-near-miss:10	もう少しで倒れるところだった。	거의 쓰러질 뻔했다.	fix	rewrites
 cx:tokoro-near-miss:10	筧がいなかったら、失敗するところだった	rule:cx:tokoro-near-miss:10=3 뻔했다	fix	rewrites
 cx:tokoro-near-miss:20	大事なことを忘れるところでした	소중한 일을 잊을 뻔했습니다	fix	rewrites

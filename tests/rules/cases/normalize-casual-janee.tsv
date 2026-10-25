@@ -7,7 +7,7 @@ normalize:casual-janee	ストーカーじゃねえ	스토커가 아니다	fix	no
 normalize:casual-janee	ストーカーじゃねーんだよ	스토커가 아니야	fix	normalize
 normalize:casual-janee	ただのオカスレじゃねーもんな	has:가 아니잖아	fix	normalize
 normalize:casual-janee	「えへへ、じゃねえよ！」	has:아니야!	fix	normalize
-normalize:casual-janee	遊んでるバヤイじゃねぇ！	놀고 있는 경우가 아니다!	fix	normalize
+normalize:casual-janee	遊んでるバヤイじゃねぇ！	놀고 있는 경우가 아니야!	fix	normalize
 normalize:casual-janee	マルフタマルマルじゃねぇ。	0200이 아니다.	fix	normalize
 normalize:casual-janee	とても俺なんかが理解できるシロモノじゃねぇみてぇだ。	has:물건이 아닌	fix	normalize
 normalize:casual-janee	冗談じゃねーよ	농담하지 마	keep	normalize

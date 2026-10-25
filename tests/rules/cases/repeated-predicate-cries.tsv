@@ -39,7 +39,7 @@ cx:clipped-copies:10	「いやだいやだっ」	「싫어 싫엇」	fix	rewrite
 cx:clipped-copies:10	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
 cx:clipped-copies:10	だめだだめだっ	안돼 안됏	fix	rewrites
 cx:clipped-copies:10	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
-cx:clipped-copies:10	「痛いっ！」	「아프다!」	keep	rewrites
+cx:clipped-copies:10	「痛いっ！」	「아파!」	keep	rewrites
 cx:clipped-copies:10	痛い痛い	!rule:cx:clipped-copies:10	keep	rewrites
 cx:clipped-copies:20	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
 cx:clipped-copies:20	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites

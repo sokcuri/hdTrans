@@ -27,7 +27,7 @@ cx:more-count:10	もう二個食べた	이제 두 개 먹었다	keep	rewrites
 dict:jisjk:374780	もう二個食べた	!rule:dict:jisjk:374780	fix	local
 dict:jisjk:374780	もう1本で終わりだ	!rule:dict:jisjk:374780	fix	local
 dict:jisjk:374780	もう１本、もう１本と飲んだ	!rule:dict:jisjk:374780	fix	local
-cx:more-count:20	「もう１皿頼む！」	「1접시 더 부탁한다!」	fix	rewrites
+cx:more-count:20	「もう１皿頼む！」	「1접시 더 부탁해!」	fix	rewrites
 cx:more-count:20	もう２個ください。	2개 더 주세요.	fix	rewrites
 cx:more-count:20	もう１錠飲む……	1정 더 마신다……	fix	rewrites
 cx:more-count:20	スナイパーがもう１人いて、	스나이퍼가 1명 더 있어,	fix	rewrites
