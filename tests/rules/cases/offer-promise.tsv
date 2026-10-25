@@ -51,3 +51,7 @@ rewrite:offer-promise	「見てろ。見せてやるぜッ！！！」	「봐라
 rewrite:offer-promise	やったるぜーぇ！	해 준다!	keep	rewrites
 rewrite:offer-promise	なあ、そこのあんた、ちょっとこっち来てくれよう。	저기, 거기의 너, 조금 여기 와 주자.	keep	rewrites
 rewrite:offer-promise	フタタビ…アノアクムヲ…ミセテヤロウ…イマ…ココデッ！	다시…그 악몽을…보여 주마…지금…여기서!	fix	rewrites
+rewrite:offer-promise	チョコ、あげます！ 買ってきたチョコです！	초콜릿, 드릴게요! 사 온 초콜릿입니다!	fix	rewrites
+rewrite:offer-promise	提督にチョコをあげます！	제독에게 초콜릿을 드릴게요!	fix	rewrites
+rewrite:offer-promise	これ、あげる！	이것, 줄게!	fix	rewrites
+rewrite:offer-promise	田中は花をあげます！	타나카는 꽃을 줍니다!	keep	rewrites
