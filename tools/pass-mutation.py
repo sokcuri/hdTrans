@@ -112,7 +112,7 @@ def self_test():
     src = ('constexpr Pass kTextPasses[] = {\n    {"Select", Select},\n    {"NounTo", NounTo},\n};\n'
            'Run(f, {"DrainNmTail", DrainNmTail});\nRun(f, {"NounTo", NounTo});\nauto x = {"a", b};\n')
     assert pass_names(src) == ["Select", "NounTo", "DrainNmTail"], pass_names(src)
-    table = "// a\n//= de\tafter X\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
+    table = "// a\n//= de\tafter X 10\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
     assert construction_ids(table) == ["cx:de:10", "cx:de:20"], construction_ids(table)
     assert failures("themes", 1, "== layer local: 2 failed\nrule cases: 40 rows, 2 failed (local 2)\n", "") == 2
     assert failures("themes", 2, "", "CLI failed\n") == "crash"

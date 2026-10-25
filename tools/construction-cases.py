@@ -100,7 +100,7 @@ def fires(cli, dicts, inputs):
 
 
 def self_test():
-    table = "// a\n//= de\tafter X\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
+    table = "// a\n//= de\tafter X 10\tdoc\ncx:de:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\ncx:de:20\t\tx\ty\t\n"
     ids = row_ids(table)
     assert ids == ["cx:de:10", "cx:de:20"], ids
     cases = ("# 규칙: x\nrule\tinput\texpected\tkind\tlayer\n"
