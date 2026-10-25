@@ -1,0 +1,54 @@
+# 규칙: LEX-60
+rule	input	expected	kind	layer
+dict:jisjk:201018	というかそもそも、元婚約者である貴方がそれを言う？	그렇다고 할까 애초에, 전 약혼자인 당신이 그것을 말해?	fix	defaults
+dict:jisjk:201018	そもそも俺は女子と話すのが苦手なのだ。	애초에 나는 여자와 이야기하는 것이 서투르다.	fix	defaults
+dict:jisjk:201018	そもそもあの二人は婚約していない。	애초에 그 두 사람은 약혼하고 있지 않다.	fix	defaults
+dict:function-nouns:69	そもそもの話、領地にいなかった。	애초의 이야기, 영지에 없었다.	fix	defaults
+dict:jisjk:115676	元婚約者である王太子だ。	전 약혼자인 왕태자다.	fix	local
+sense:元	元婚約者の王太子だ。	전 약혼자의 왕태자다.	fix	senses
+sense:元	基本は真面目、それが元薬屋の娘である。	기본은 성실함, 그것이 전 약국의 딸이다.	fix	senses
+sense:元	元の場所に戻した。	원래의 장소에 되돌렸다.	keep	senses
+dict:function-nouns:70	魔物を生み出す元となる。	마물을 만들어 내는 근원이 된다.	fix	local
+dict:function-nouns:31	アーリャの方を向いた。	아랴의 쪽을 향했다.	fix	local
+dict:function-nouns:31	改めるべきはお前の方だ。	고쳐야 하는 것은 네 쪽이다.	fix	local
+dict:function-nouns:31	緊張してるのは俺の方だっての！	긴장하고 있는 것은 내 쪽이라니까!	fix	local
+dict:function-nouns:31	ＷＷの方の難易度が初心者には難しい。	WW의 쪽의 난이도가 초심자에게는 어렵다.	fix	local
+dict:function-nouns:65	ハイスペックな方がいらっしゃいましたら、教えてください。	하이스펙인 분이 계시면, 가르쳐 주세요.	fix	local
+dict:function-nouns:31	こっちの方がいい。	여기가 좋다.	keep	defaults
+dict:function-nouns:31	簡単な方がいい。	간단한 편이 좋다.	keep	defaults
+dict:function-nouns:31	あの方は誰ですか。	그 분은 누구입니까.	keep	defaults
+dict:jisjk:115875	パーティの場は瞬く間に祝いの場から弾劾の場へと変貌した。	파티의 자리는 순식간에 축하의 자리에서 탄핵의 자리로 변모했다.	fix	defaults
+dict:jisjk:115875	絢爛豪華な一時を楽しむ場であった。	호화찬란한 한때를 즐기는 자리였다.	fix	defaults
+dict:jisjk:115875	適当に場を誤魔化す。	적당히 자리를 속인다.	fix	defaults
+dict:jisjk:115875	闘技場には行けない。	투기장에는 갈 수 없다.	keep	defaults
+dict:function-nouns:43	そんなところも好きだけど。	그런 점도 좋아하지만.	fix	local
+dict:function-nouns:33	そういうとこが、あんた生意気なのよ！	그런 점이, 너 건방져!	fix	local
+dict:function-nouns:35	こういうところは年相応に子供だな。	이런 점은 나이에 걸맞게 아이네.	fix	local
+dict:function-nouns:46	まあそんなところです。	뭐 그 정도입니다.	fix	local
+dict:function-nouns:49	午前の仕事はこんなとこかな？	오전 일은 이 정도일까?	fix	local
+dict:function-nouns:44	こんなところで寝るな。	이런 곳에서 자지 마.	keep	defaults
+dict:function-nouns:43	そんなところに連れて行かないで。	그런 곳에 데려가지 마.	keep	defaults
+cx:tokoro-kanji:10	見ていた所だった。	보던 참이었다.	fix	rewrites
+cx:tokoro-kanji:10	生まれた所ですか。	태어난 곳입니까.	keep	defaults
+cx:tokoro-kanji:10	家にいた所だった。	집에 있던 곳이었다.	keep	defaults
+dict:jisjk:313018	クラス中の注目を集めた。	반 전체의 주목을 끌었다.	fix	local
+dict:jisjk:313018	屋敷中を探し回った。	저택 전체를 찾아다녔다.	fix	local
+dict:jisjk:313018	右のビルの中に飛び込みなさい。	오른쪽의 빌딩 안에 뛰어들어.	fix	local
+dict:jisjk:313018	この中の誰かがやった。	이 안의 누군가가 했다.	keep	local
+dict:jisjk:313018	雨の中、走った。	빗속, 달렸다.	keep	local
+dict:jisjk:313018	授業中に寝た。	수업 중에 잤다.	keep	local
+dict:function-nouns:32	時の賢者達があらゆる術を検証した。	당대의 현자들이 모든 술법을 검증했다.	fix	local
+dict:function-nouns:32	時の流れは速い。	시간의 흐름은 빠르다.	keep	defaults
+dict:function-nouns:32	その時の顔が忘れられない。	그 때의 얼굴을 잊을 수 없다.	keep	local
+sense:五分	実力は五分だ。	실력은 대등이다.	fix	senses
+sense:五分	五分もしないうちに着いた。	5분도 하지 않는 동안에 도착했다.	fix	senses
+dict:function-nouns:14	例え今この盤面が詰みだとしても、悪手を選ぶつもりはない。	설령 지금 이 반면이 외통수라고 해도, 악수를 선택할 생각은 없다.	fix	defaults
+dict:function-nouns:14	例えの話だ。	비유 이야기다.	keep	defaults
+dict:function-nouns:14	例えば、こういうことだ。	예를 들면, 이런 것이다.	keep	defaults
+dict:function-nouns:72	自由に出入りできる場は限られている。	자유롭게 출입할 수 있는 장소는 한정되어 있다.	keep	local
+dict:function-nouns:72	隠れる場がない。	숨는 장소가 없다.	keep	local
+dict:jisjk:373560	アキラが生還する可能性など皆無だ。	아키라가 생환할 가능성 같은 건 전무하다.	fix	local
+dict:jisjk:373560	本などを読む。	책 등을 읽는다.	keep	defaults
+dict:function-nouns:73	現職の自衛官の方です。	현직의 자위관의 분입니다.	fix	local
+dict:function-nouns:73	出場者の方ですね。	출전자의 분이군요.	fix	local
+dict:function-nouns:73	改めるべきはお前の方だ。	고쳐야 하는 것은 네 쪽이다.	keep	local

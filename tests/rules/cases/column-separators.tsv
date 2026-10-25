@@ -10,7 +10,7 @@ segment:column-gap	　　製薬　　　：Lv.8	  제약　　　：Lv.8	fix	seg
 segment:column-gap	山田花子　　　　 　　　 太郎の妻　鈴木一郎の娘	야마다 하나코　　　　 　　　 타로의 아내 스즈키 이치로의 딸	fix	segment
 segment:name-padding	林  涛	임도	keep	segment
 segment:name-padding	何  静	하정	keep	segment
-segment:single-space	高橋　聖	타카하시 성	keep	segment
+segment:single-space	高橋　聖	타카하시 히지리	keep	segment
 segment:single-space	「な、何よ？　突然」	「뭐, 뭐야? 갑자기」	keep	segment
 segment:single-space	暗示？　カギ？　悪魔の血？	암시? 열쇠? 악마의 피?	keep	segment
 segment:single-space	第一章　完	제1장 완	keep	segment

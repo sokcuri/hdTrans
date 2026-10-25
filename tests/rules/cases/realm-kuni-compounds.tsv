@@ -44,7 +44,7 @@ lookup:realm	甲斐国主の座	가이국주의 자리	keep	lookup
 lookup:realm	美濃国府に	미노노쿠니부에	current	lookup
 lookup:realm	出羽国人	데와 고쿠진	keep	lookup
 # 맞는 출력: 오와리국 전역에
-lookup:realm	尾張国中に	오와리국안에	current	lookup
+lookup:realm	尾張国中に	오와리국 전체에	current	lookup
 lookup:realm	日本国民に	일본 국민에게	keep	lookup
 lookup:realm	越中国人	엣추 고쿠진	keep	lookup
 lookup:realm	日本国人	일본인	fix	lookup

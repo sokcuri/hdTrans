@@ -406,6 +406,7 @@ struct LineSpeech {
     bool narrated = false;
     bool markedOnly = false;
     bool asked = false;
+    bool poiTic = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -459,6 +460,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
     settings.before = before;
     settings.quoteDepth = speech.quotes.depth;
+    settings.poiTic = speech.poiTic;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
 
@@ -542,6 +544,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     std::vector<bool> casual;
     if (!options.reference) {
         speech.asked = true;
+        speech.poiTic = word::PoiTicLine(facts.text);
         speech.narrated = ctx.narrated;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);

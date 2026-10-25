@@ -1,0 +1,9 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:given-from-full-name	藤宮周が彼女と初めて話したのは、雨の日だった。一人暮らしを始めた周が住むマンションの右隣には、天使が住んでいる。	후지미야 아마네가 그녀와 처음으로 이야기한 것은, 비오는 날이었다. 자취를 시작한 아마네가 사는 맨션의 오른쪽 옆에는, 천사가 살고 있다.	fix	lookup
+names:given-from-full-name	椎名真昼は美しい少女だ。椎名真昼と話した。真昼は静かに座っていた。	시이나 마히루는 아름다운 소녀다. 시이나 마히루와 이야기했다. 마히루는 조용하게 앉아 있었다.	fix	lookup
+names:given-from-full-name	椎名真昼が来た。真昼の時間だ。	시이나 마히루가 왔다. 한낮의 시간이다.	keep	lookup
+names:given-from-full-name	真昼の太陽が照りつける。	한낮의 태양이 내리쬔다.	keep	lookup
+names:given-from-full-name	今一瞬、何か見えた。	지금 순간, 뭔가 보였다.	keep	lookup
+names:surname-space-given	小鳥遊　聖　　　Lv.55／聖女	타카나시 히지리　　　Lv.55/성녀	fix	lookup
+names:surname-space-given	聖なる光が満ちる。	성스러운 빛이 가득 찬다.	keep	lookup

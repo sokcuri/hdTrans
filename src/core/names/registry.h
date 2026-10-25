@@ -37,6 +37,9 @@ struct DictFlags {
     int records = 0;
     bool person = false, surname = false, given = false, city = false;
     bool common = false;  // a record that is neither a name nor a place
+    // A common record that is a word of its own: no reading of the kanji standing alone (gram
+    // On: 牧 목, 周 주) and no verb or adjective stem, which a name never conjugates as.
+    bool word = false;
     bool role = false;    // a person, profession or animal noun with no name record
     // A base record of a creature, fruit or food noun or of an adverb: what speech addresses
     // with an honorific (ひよこさん, いちごちゃん) or what stands before ちゃんと (いつか).

@@ -1,0 +1,19 @@
+# 규칙: LEX-59, LEX-31
+rule	input	expected	kind	layer
+cx:poi-tic:10	提督さん、情報見るっぽい？了解っぽい。はい、どうぞ！ぽい～！	제독님, 정보 본다 뽀이? 알았다 뽀이. 네, 그러세요! 뽀이~!	fix	rewrites
+cx:poi-tic:6	夕立、了解ぽい。任せるぽーい！	유다치, 알았다 뽀이. 맡긴다 뽀이~!	fix	rewrites
+cx:poi-tic:20	マルヒトマルマル。夜中っぽい！ぽーい！…え、少しうるさいっぽい？わ、わかったっぽい。	0100. 한밤중 같아! 뽀이! …어, 조금 시끄러운 것 같아? 아, 알았다 뽀이.	fix	rewrites
+cx:poi-tic:20	提督が鎮守府に着任したっぽい。これより艦隊の指揮に入るっぽい！	제독이 진수부에 착임했다 뽀이. 지금부터 함대의 지휘에 들어간다 뽀이!	fix	rewrites
+cx:poi-tic:10	マルキュウマルマル。あ、春雨っぽい。ぽーい！今日も頑張るっぽい！	0900. 아, 봄비 같다. 뽀이! 오늘도 노력한다 뽀이!	fix	rewrites
+cx:poi-tic:20	今日も一日走り回ったっぽい。提督さん、明日も一緒に、頑張るっぽい。ぽーい！	오늘도 하루 뛰어다녔다 뽀이. 제독님, 내일도 함께, 노력한다 뽀이. 뽀이!	fix	rewrites
+cx:poi-tic:5	了解っぽい。	알았다 뽀이.	fix	rewrites
+sound:poi	ぽいぽい。	뽀이뽀이.	fix	sound
+cx:poi-tic:10	どうやら私は植物人間になってしまったっぽい。	아무래도 나는 식물인간이 되어버린 것 같아.	keep	builtin-ending
+cx:poi-tic:20	麻袋じゃなかったっぽい。	마대가 아니었던 것 같아.	keep	builtin-ending
+cx:poi-tic:10	服装もなんだか民族衣装っぽい。	복장도 왠지 민족 의상 같다.	keep	builtin-ending
+cx:poi-tic:10	他の人には見えてないっぽい	다른 사람에게는 보이지 않은 것 같아	keep	builtin-ending
+cx:poi-tic:10	悪戯っぽい笑みを浮かべた。	못된 장난 같은 미소를 지었다.	keep	defaults
+cx:poi-tic:10	夕立、突撃するっぽい	유다치, 돌격하는 것 같아	keep	builtin-ending
+cx:poi-tic:10	あ、違うっぽい？…ぽい。	아, 아닌 것 같아? …뽀이.	keep	rewrites
+cx:poi-tic:5	了解した。	이해했다.	keep	defaults
+cx:poi-tic:6	了解です。	알겠습니다.	keep	defaults

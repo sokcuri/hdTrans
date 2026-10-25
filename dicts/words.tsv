@@ -11523,9 +11523,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二食	두 끼	N110			GN				xxx llm	1		w:11516
 互いに素	서로소	N110			GN						たがいにそ	w:11517
 五位鷺	해오라기	N110			GN						ごいさぎ	w:11518
-五分	절반	N110			GN				xxx llm		ごぶ	w:11519
-五分	오 퍼센트	N110			GN				llm		ごぶ	w:11520
-五分	대등	N110			GN				llm		ごぶ	w:11521
 五刑	오형	N110			GN						ごけい	w:11522
 五十肩	오십견	N110			GN				xxx	1	ごじゅうかた	w:11523
 五十路	오십 대	N110	UMe	Tm	GN				llm		いそじ	w:11524

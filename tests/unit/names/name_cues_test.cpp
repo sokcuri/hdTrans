@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "core/dict/snapshot.h"
+#include "core/names/document.h"
 #include "core/names/name_cues.h"
 #include "core/text/hangul.h"
 #include "hdtest.h"
@@ -64,35 +65,37 @@ const dict::Snapshot* Dictionary() {
 HD_TEST(names_name_cues) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
-    using Cues = std::vector<std::pair<std::string, bool>>;
+    // + strong, ~ recurring (strong where two lines of the document give it), - weak.
+    using Cues = std::vector<std::pair<std::string, char>>;
     const std::vector<std::pair<std::string, Cues>> cases = {
-        // Weather words and words of time hold in their line only.
-        {"駆逐艦村雨、出撃", {{"村雨", false}}},
-        {"白露型駆逐艦「村雨」だよ", {{"村雨", false}}},
-        {"二番艦の時雨だよ", {{"時雨", false}}},
-        {"村雨姉さん！", {{"村雨", false}}},
-        {"睦月型も頑張る", {{"睦月", false}}},
-        {"時雨「行くよ」", {{"時雨", false}}},
-        {"時雨、出撃するよ。", {{"時雨", false}}},
-        {"夕立ちゃん、遅いよ", {{"夕立", false}}},
+        // Weather words and words of time hold in their line, and in the document where two lines
+        // give them such a cue.
+        {"駆逐艦村雨、出撃", {{"村雨", '~'}}},
+        {"白露型駆逐艦「村雨」だよ", {{"村雨", '~'}}},
+        {"二番艦の時雨だよ", {{"時雨", '~'}}},
+        {"村雨姉さん！", {{"村雨", '~'}}},
+        {"睦月型も頑張る", {{"睦月", '~'}}},
+        {"時雨「行くよ」", {{"時雨", '~'}}},
+        {"時雨、出撃するよ。", {{"時雨", '~'}}},
+        {"夕立ちゃん、遅いよ", {{"夕立", '-'}}},
         // Strong cues of a plain noun hold through the document.
-        {"高峰「行くよ」", {{"高峰", true}}},
+        {"高峰「行くよ」", {{"高峰", '+'}}},
         // An honorific holds in its line; the name registry weighs honorifics across lines.
-        {"高峰君、待って", {{"高峰", false}}},
-        {"戦艦高峰です", {{"高峰", true}}},
-        {"アヤメと名乗った", {{"アヤメ", true}}},
-        {"聖女アヤメの旅", {{"アヤメ", true}}},
+        {"高峰君、待って", {{"高峰", '-'}}},
+        {"戦艦高峰です", {{"高峰", '+'}}},
+        {"アヤメと名乗った", {{"アヤメ", '+'}}},
+        {"聖女アヤメの旅", {{"アヤメ", '+'}}},
         {"元気、出撃！", {}},
         // Weak cues.
-        {"睦月です。", {{"睦月", false}}},
-        {"だから…まるゆです。", {{"まるゆ", false}}},
-        {"潮です。", {{"潮", false}}},
+        {"睦月です。", {{"睦月", '-'}}},
+        {"だから…まるゆです。", {{"まるゆ", '-'}}},
+        {"潮です。", {{"潮", '-'}}},
         {"雷よ！", {}},
         {"「アヤメ、来て」", {}},
-        {"「大丈夫か、アヤメ」", {{"アヤメ", false}}},
-        {"「ありがとう、高峰」", {{"高峰", false}}},
+        {"「大丈夫か、アヤメ」", {{"アヤメ", '-'}}},
+        {"「ありがとう、高峰」", {{"高峰", '-'}}},
         {"「高峰、テントは？」", {}},
-        {"「鈴谷」「村雨」「夕立」の旗艦", {{"鈴谷", false}, {"村雨", false}, {"夕立", false}}},
+        {"「鈴谷」「村雨」「夕立」の旗艦", {{"鈴谷", '-'}, {"村雨", '-'}, {"夕立", '-'}}},
         // Not cued: a time word called at the start, a number after a ship type, a longer
         // word, a weak shape inside a sentence, a single kanji called.
         {"明日、行こう", {}},
@@ -108,8 +111,8 @@ HD_TEST(names_name_cues) {
         // A hiragana name that starts a verb is cued only by a call at the start of an utterance
         // or a self-introduction, also after a comma; not a word of the dictionary or a word or
         // predicate closed by a final particle.
-        {"つむぎ、来て", {{"つむぎ", false}}},
-        {"「わたし、つむぎです」", {{"つむぎ", false}}},
+        {"つむぎ、来て", {{"つむぎ", '-'}}},
+        {"「わたし、つむぎです」", {{"つむぎ", '-'}}},
         {"糸をつむぎ、織る", {}},
         {"「ここね、待って」", {}},
         {"「いくよ、待って」", {}},
@@ -119,10 +122,12 @@ HD_TEST(names_name_cues) {
     };
     for (const auto& [text, want] : cases) {
         Cues got;
-        for (const names::NameCue& c : names::NameCues(*snap, text)) got.emplace_back(c.key, c.strong);
+        for (const names::NameCue& c : names::NameCues(*snap, text)) {
+            got.emplace_back(c.key, c.strong ? '+' : c.recurring ? '~' : '-');
+        }
         auto show = [&](const Cues& cues) {
             std::string out = text + " ->";
-            for (const auto& [k, strong] : cues) out += " " + k + (strong ? "+" : "-");
+            for (const auto& [k, kind] : cues) out += " " + k + kind;
             return out;
         };
         HD_CHECK_EQ(show(got), show(want));
@@ -132,4 +137,18 @@ HD_TEST(names_name_cues) {
 HD_TEST(text_japanese_spelling) {
     for (const char* s : {"무라사메", "신지", "핫토리", "유우키", "와카바"}) HD_CHECK(text::JapaneseSpelling(s));
     for (const char* s : {"펑", "러", "김", "샹", "", "abc"}) HD_CHECK(!text::JapaneseSpelling(s));
+}
+
+// A cue that would hold for the document but names a weather word holds there when two lines give it.
+HD_TEST(names_recurring_cues) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    const std::vector<std::string> twice = {"駆逐艦夕立、出撃", "夕立、出撃するよ", "夕立がね"};
+    const auto doc = pipeline::BuildDocument(*snap, twice);
+    HD_REQUIRE(doc != nullptr);
+    HD_CHECK(doc->cued.count("夕立") == 1);
+    const std::vector<std::string> once = {"駆逐艦夕立、出撃", "夕立がね"};
+    const auto single = pipeline::BuildDocument(*snap, once);
+    HD_REQUIRE(single != nullptr);
+    HD_CHECK(single->cued.count("夕立") == 0);
 }

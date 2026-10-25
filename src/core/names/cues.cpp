@@ -512,8 +512,9 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
-                f.place = f.place || Has(sem, "VPl");
                 const std::string_view part = rec.codes->partText;
+                f.word = f.word || (!Has(attr, "On") && !part.starts_with("M4") && !part.starts_with("H7"));
+                f.place = f.place || Has(sem, "VPl");
                 if (part.starts_with("N12") || part.starts_with("I12")) {
                     f.pronoun = true;
                 } else if (Has(sem, "VHn")) {
@@ -542,6 +543,8 @@ DictFlags Registry::Flags(std::string_view s) {
                 f.city = true;
             } else {
                 f.common = true;
+                f.word = f.word || (!e->codes->gram.Contains("On") && !e->codes->partText.starts_with("M4") &&
+                                    !e->codes->partText.starts_with("H7"));
                 if (e->codes->partText.starts_with("N12")) roleSem = true;
             }
         }

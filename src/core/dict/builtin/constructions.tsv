@@ -503,3 +503,12 @@ cx:yatta-achieve:10	LEX-56	&&5 S+0== "や" !1 I+0== "Lやったよう" :yatta-st
 cx:yatta-achieve:20	LEX-56	&&5 S+0== "や" ||2 S-1== "よく" S-1== "良く" ||2 F-1== "opens-line" S-2== "00「『（(“、，," ||3 F+0== "sentence-end" F+0== "quote-end" S+1== "00、，,…‥" I+0== "Lやった"	set-target "잘&AV@" set-target@-1 ""	よくやった 잘했다
 //= nandesu-what	after OfferPromise 390	A なんです that opens an utterance (a line, a quote, or after a comma) and asks, right before ？, has no noun before it: its なん is 何, 뭡니다 (なんです？ 뭡니까?).
 cx:nandesu-what:10	SPC-16	&&4 S+0== "なんです" D+0== "입니다" ||2 F+0== "opens-line" S-1== "00「『（(“、，," S+1== "00？?"	set-target "뭡니다"	なんです？ 뭡니까?
+//= nante-said	after OfferPromise 400	A なんて right after 今, いま or さっき and before 言 asks what was said: 뭐라고 (今なんて言った？ 지금 뭐라고 했어?).
+cx:nante-said:10	LEX-58	&&3 S+0== "なんて" ||3 S-1== "今" S-1== "いま" S-1== "さっき" S+1== "L言"	set-target " 뭐라고"	今なんて言った？ 지금 뭐라고 했어?
+//= tokoro-kanji	after OfferPromise 410	The 所 after a past progressive verb before だった or でした is the moment, like the formal noun ところ: 참 (見ていた所だった 보고 있던 참이었다).
+cx:tokoro-kanji:10	LEX-60	&&5 S+0== "所" S-1== "い" ||2 I-1== "Rた" U-1== "Rた" ||2 I-2== "Rて" I-2== "Rで" ||2 S+1== "Lだった" S+1== "Lでした"	set-target "참"	見ていた所だった 보고 있던 참이었다
+//= poi-tic	after OfferPromise 420	The tic っぽい (ぽい, っぽーい) after a verb at the end of a sentence, in a line that uses the tic (poi-line: ぽい standing alone, or two sentence-final っぽい), is the speaker's sound, not a guess: the plain ending and 뽀이 (突撃するっぽい 돌격한다 뽀이, わかったっぽい 알았다 뽀이).
+cx:poi-tic:5	LEX-59	&&2 S+0== "了解" I+0== "~ぽ"	set-ending "5다 뽀이"	了解っぽい 알았다 뽀이
+cx:poi-tic:6	LEX-59	&&2 ||3 S+0== "ぽい" S+0== "っぽい" S+0== "ぽーい" S-1== "了解"	set-target " 뽀이" set-target@-1 "알았다"	了解ぽい 알았다 뽀이
+cx:poi-tic:10	LEX-59	&&6 F+0== "conjugating" I+0== "~ぽ" Y+0== "0 것 같아" F+0== "poi-line" !1 F+0== "ko-state" !1 L+0== "L아니"	set-ending "4다 뽀이"	突撃するっぽい 돌격한다 뽀이
+cx:poi-tic:20	LEX-59	&&6 F+0== "conjugating" I+0== "~ぽ" Y+0== "8 것 같아" F+0== "poi-line" !1 F+0== "ko-state" !1 L+0== "L아니"	set-ending "5다 뽀이"	わかったっぽい 알았다 뽀이

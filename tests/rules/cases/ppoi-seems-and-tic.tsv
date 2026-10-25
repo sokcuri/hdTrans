@@ -4,21 +4,21 @@ dict:word:ppoi:predicate	手紙を書いたっぽい。	편지를 쓴 것 같아
 dict:word:ppoi:predicate	弟はまだ勉強してるっぽい？	남동생은 아직 공부하고 있는 것 같아?	fix	local
 dict:word:ppoi:predicate	彼は子供っぽい。	그는 아이 같다.	keep	local
 dict:word:ppoi:predicate	明日は雨っぽい。	내일은 비 같다.	keep	local
-ending:ppoi	一緒に遊ぼうっぽい！	함께 놀자 포이!	fix	builtin-ending
-ending:ppoi	そこで待っててっぽい。	거기서 기다리고 있어 포이.	fix	builtin-ending
+ending:ppoi	一緒に遊ぼうっぽい！	함께 놀자 뽀이!	fix	builtin-ending
+ending:ppoi	そこで待っててっぽい。	거기서 기다리고 있어 뽀이.	fix	builtin-ending
 ending:ppoi	もう寝ちゃったっぽい。	이제 자버린 것 같아.	fix	builtin-ending
 ending:ppoi	山の上は寒いっぽい。	산 위는 추운 것 같아.	fix	builtin-ending
 ending:ppoi	準備完了ぽい。	준비 완료 같아.	fix	builtin-ending
 ending:ppoi	すぐ行くぽーい！	바로 가는 것 같아~!	fix	builtin-ending
-sound:poi	ぽーい！	포이!	fix	sound
-sound:poi	ほら、見て！ぽい～！	자, 봐! 포이~!	fix	sound
-sound:poi	えっと…ぽい。	음…포이.	fix	sound
-sound:poi	ぽいぽい！	포이포이!	fix	sound
+sound:poi	ぽーい！	뽀이!	fix	sound
+sound:poi	ほら、見て！ぽい～！	자, 봐! 뽀이~!	fix	sound
+sound:poi	えっと…ぽい。	음…뽀이.	fix	sound
+sound:poi	ぽいぽい！	뽀이뽀이!	fix	sound
 sound:poi	ぽい捨て禁止	함부로 버리기 금지	keep	sound
 sound:poi	紙をぽいっと捨てた。	종이를 휙 버렸다.	keep	sound
 sound:ppoi-drawn	お腹空いちゃったっぽーい。	배고파버린 것 같아~.	fix	sound
 sound:ppoi-drawn	明日も晴れるっぽーい！	내일도 개이는 것 같아~!	fix	sound
-ending:ppoi	置いていかないでっぽい！	두고 가지 마 포이!	fix	builtin-ending
+ending:ppoi	置いていかないでっぽい！	두고 가지 마 뽀이!	fix	builtin-ending
 ending:ppoi	あの子は甘いものが好きだっぽい。	그 아이는 단 것을 좋아하는 것 같아.	fix	builtin-ending
 ending:ppoi	それは嫌いなのっぽい。	그것은 싫은 것 같아.	fix	builtin-ending
 ending:ppoi	彼は子供っぽい。	그는 아이 같다.	keep	builtin-ending

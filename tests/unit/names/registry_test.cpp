@@ -26,6 +26,8 @@ const dict::Snapshot* Dictionary() {
          "乾\t마르&AA@\tM428\t\t\tGN\t6\n"
          "乾\t이누이\tN130\tQPN\tWa\tGN\t7\n"
          "高森\t타카모리\tN130\tQPN\tWa\tGN\t8\n"
+         "真昼\t한낮\tN110\tUMe\t\tGN\t9001\n"
+         "真昼\t마히루\tN130\tQPN\tWb\tGN\t9002\n"
          "恭平\t쿄헤이\tN130\tQPN\tWb\tGN\t9\n"
          "ソード\t소드\tN110\t\t\tGN\t10\n"
          "ワールド\t월드\tN110\t\t\tGN\t11\n"
@@ -344,6 +346,11 @@ HD_TEST(names_labels) {
     // person elsewhere (高森光: 光 stays the word).
     const std::vector<std::string> hikaru = Scan(snap, Repeat("高森光は来た。", 3)).Names();
     HD_CHECK(std::find(hikaru.begin(), hikaru.end(), "光") == hikaru.end());
+    // One of two kanji or more does where the full name is written more than once (高森真昼 twice).
+    const std::vector<std::string> mahiru = Scan(snap, Repeat("高森真昼は来た。", 2)).Names();
+    HD_CHECK(std::find(mahiru.begin(), mahiru.end(), "真昼") != mahiru.end());
+    const std::vector<std::string> noon = Scan(snap, "高森真昼は来た。").Names();
+    HD_CHECK(std::find(noon.begin(), noon.end(), "真昼") == noon.end());
     // A surname of a full name that is a common word does not stand for the person
     // elsewhere (桃花, a word in the fixture: 桃花恭平 keeps 桃花 the word).
     const std::vector<std::string> rika = Scan(snap, Repeat("恭平さん、おはよう。", 3) + Repeat("桃花恭平が来た。", 3)).Names();
