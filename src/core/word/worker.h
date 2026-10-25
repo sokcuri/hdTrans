@@ -27,6 +27,17 @@ struct Lookup {
     int count = 0;  // the candidate count of the lookup, which the checks test
 };
 
+// The marks open around a place: thought marks (mark.thought-open, closed by
+// mark.thought-close) and the marks of a word spelled out (output::kEmphasisOpen, closed by
+// output::kEmphasisClose).
+struct OpenMarks {
+    int thought = 0;
+    int spelled = 0;
+};
+
+// The marks open after s when open were open before it.
+OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open);
+
 class Worker {
 public:
     Worker(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, const dict::LookupContext& lookup,
@@ -73,6 +84,9 @@ public:
     // Where token j stands in brace ruby markup: 1 between {rb} and {/rb} (the base), 2
     // between {rt} and {/rt} (the reading), 0 elsewhere; computed once for all tokens.
     int RubyPart(int j);
+    // The marks open at the start of token j, from the raw text of the tokens before it;
+    // computed once for all tokens.
+    OpenMarks OpenMarksAt(int j);
 
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
@@ -111,6 +125,7 @@ public:
 private:
     std::vector<int> quoteDepths_;  // QuoteDepth by token, empty until first asked
     std::vector<uint8_t> rubyParts_;  // RubyPart by token, empty until first asked
+    std::vector<OpenMarks> openMarks_;  // OpenMarksAt by token and after the last, empty until first asked
 
     void Insert(Item* it);
     void BuildTokenTransformText(int i);

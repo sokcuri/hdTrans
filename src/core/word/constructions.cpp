@@ -210,35 +210,13 @@ bool CriedCopies(const Item* it) {
     return dict::InClass("mark.cry", mark) || output::IsDrawnEndMark(cp);
 }
 
-// Whether it stands inside a mark that open takes, which no mark that close takes has closed, in
-// the text of its line before it.
-template <typename Open, typename Close>
-bool Enclosed(const Item* it, Open open, Close close) {
-    int depth = 0;
-    const auto count = [&](std::string_view t) {
-        for (std::string_view r = t; !r.empty();) {
-            const text::Rune c = text::DecodeRune(r);
-            const std::string_view mark = r.substr(0, std::max<std::size_t>(c.size, 1));
-            if (open(c.cp, mark)) depth++;
-            if (close(c.cp, mark) && depth > 0) depth--;
-            r.remove_prefix(mark.size());
-        }
-    };
-    if (it->w != nullptr) {
-        for (int k = 0; k < it->tokenIndex; k++) count(it->w->tokens.Raw(static_cast<std::size_t>(k)));
-    }
-    count(Slice(it->text, 0, it->start));
-    return depth > 0;
-}
-
 // Whether it stands in a thought between the marks of mark.thought-open and mark.thought-close
 // （ああ、難しい〜）, or in a word spelled out (逃・が・さ・な・い), which the sound stage puts between
-// output::kEmphasisOpen and output::kEmphasisClose.
+// output::kEmphasisOpen and output::kEmphasisClose, in the text of its line before it.
 bool ThoughtOrSpelled(const Item* it) {
-    return Enclosed(it, [](char32_t, std::string_view m) { return dict::InClass("mark.thought-open", m); },
-                    [](char32_t, std::string_view m) { return dict::InClass("mark.thought-close", m); }) ||
-           Enclosed(it, [](char32_t c, std::string_view) { return c == output::kEmphasisOpen; },
-                    [](char32_t c, std::string_view) { return c == output::kEmphasisClose; });
+    const OpenMarks before = it->w != nullptr ? it->w->OpenMarksAt(it->tokenIndex) : OpenMarks{};
+    const OpenMarks open = OpenMarksAfter(Slice(it->text, 0, it->start), before);
+    return open.spelled > 0 || open.thought > 0;
 }
 
 // Whether it is an い-adjective ending bare in い, read 1다 or the exclamative 6, with a drawn end
@@ -247,7 +225,7 @@ bool ThoughtOrSpelled(const Item* it) {
 // copula drawn out after an adjectival noun (無事だああああ), nor in a thought or a word spelled
 // out (ThoughtOrSpelled), which no one cries.
 bool DrawnPredicate(const Item* it) {
-    if (it->detail->cls != kDetailKeiyo || ThoughtOrSpelled(it)) return false;
+    if (it->detail->cls != kDetailKeiyo) return false;
     const int from = it->DirectIndex();
     if (from < 0 || !dict::InClass("ending.copies-bare", it->DirectSurface()) ||
         !dict::InClass("ending.copies-plain", it->DirectText(from))) {
@@ -272,7 +250,8 @@ bool DrawnPredicate(const Item* it) {
         after = it->w->tokens.Raw(static_cast<std::size_t>(tok));
     }
     const text::Rune next = text::DecodeRune(after);
-    return drawn && !text::IsLetter(next.cp) && !dict::InClass("mark.comma", after.substr(0, next.size));
+    return drawn && !text::IsLetter(next.cp) && !dict::InClass("mark.comma", after.substr(0, next.size)) &&
+           !ThoughtOrSpelled(it);
 }
 
 bool Exclaimed(Flusher& f, const Item* it) {
