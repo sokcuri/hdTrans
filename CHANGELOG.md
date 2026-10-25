@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.8](https://github.com/sokcuri/hdTrans/compare/v0.5.7...v0.5.8) (2026-10-25)
+
+
+### Bug Fixes
+
+* **release:** make snapshot lookups as fast as loaded dictionaries ([7a11b8f](https://github.com/sokcuri/hdTrans/commit/7a11b8f3eb3fce060cd59783e891f24aaa3e8a78))
+
+
+### Performance Improvements
+
+* **dict:** check the record bytes of a key group once per lookup ([#163](https://github.com/sokcuri/hdTrans/issues/163)) ([8a7fdbf](https://github.com/sokcuri/hdTrans/commit/8a7fdbf1575c5cfe30a12b1538f83276b968326e))
+
 ## [0.5.7](https://github.com/sokcuri/hdTrans/compare/v0.5.6...v0.5.7) (2026-10-25)
 
 
