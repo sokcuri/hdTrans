@@ -3,29 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>일한번역기 hdTrans 웹 데모 페이지</title>
+<title>일한 기계번역 hdTrans</title>
 <meta name="description" content="규칙 기반 일본어→한국어 번역 엔진 hdtrans. 번역은 브라우저 안에서 실행됩니다.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-  <h1>일한번역기 hdTrans 웹 데모 페이지</h1>
-  <p class="sub" lang="en">Rule-based Japanese → Korean translation, running in your browser</p>
+  <h1>일한 기계번역 hdTrans <small id="hver">dev</small></h1>
 </header>
 
 <main>
   <div class="status"><span id="status">불러오는 중…</span> <progress id="bar"></progress></div>
 
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tab-text" aria-controls="text" aria-selected="true">텍스트 번역</button>
+    <button type="button" role="tab" id="tab-docs" aria-controls="docs" aria-selected="false">문서 번역</button>
+    <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
+      <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
+      <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
+    </select></label>
+  </div>
+
+  <section id="text" role="tabpanel" aria-labelledby="tab-text">
   <div class="controls">
     <fieldset>
       <legend>방식</legend>
       <label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked> 문서 (이름 통일)</label>
       <label title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"> 줄 단위</label>
     </fieldset>
-    <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
-      <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
-      <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
-    </select></label>
     <label>예제 <select id="example"><option value="">고르기…</option></select></label>
   </div>
 
@@ -40,9 +45,32 @@
     <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
     <div class="pane"><span>이름 표</span><div id="names"></div></div>
   </div>
+  </section>
+
+  <section id="docs" role="tabpanel" aria-labelledby="tab-docs" hidden>
+    <label class="drop" id="drop">텍스트 파일(.txt)을 여기에 끌어 놓거나 눌러서 고르세요. 여러 개를 함께 고를 수 있습니다.
+      <input type="file" id="files" multiple accept=".txt,text/plain"></label>
+    <p class="help">파일은 이 브라우저 안에서 번역하고 어디에도 올리지 않습니다. Shift-JIS, UTF-8, UTF-16LE(BOM)를 읽고,
+      파일마다 문서 전체를 한 번에 번역해 <code>이름_번역.txt</code>(UTF-8 BOM)로 만듭니다.
+      사용자 사전과 이름 표는 텍스트 번역 탭의 것을 씁니다.</p>
+    <div class="controls">
+      <fieldset>
+        <legend>출력</legend>
+        <label><input type="radio" name="output" value="translation" checked> 번역문만</label>
+        <label><input type="radio" name="output" value="interleaved"> 원문/번역문</label>
+        <label><input type="radio" name="output" value="spaced"> 원문/번역문 + 개행</label>
+      </fieldset>
+      <button type="button" id="run" disabled>모두 번역</button>
+      <button type="button" id="zip" disabled>ZIP으로 받기</button>
+    </div>
+    <table class="files" id="filelist" hidden>
+      <thead><tr><th>파일</th><th>인코딩</th><th>상태</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
 </main>
 
-<p class="contact">피드백을 꼭 남겨주시면 도움이 많이 됩니다.<br>개발 및 문의사항 : 소쿠릿 (<a href="https://x.com/sokcuri" target="_blank" rel="noopener">https://x.com/sokcuri</a>)</p>
+<p class="contact">hdTrans by 소쿠릿 (<a href="https://github.com/sokcuri" target="_blank" rel="noopener">@sokcuri</a>), <a href="https://github.com/sokcuri/hdTrans" target="_blank" rel="noopener">GitHub</a></p>
 <p class="contact" id="version">dev</p>
 <script type="module" src="js/app.js"></script>
 </body>

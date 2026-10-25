@@ -246,11 +246,12 @@ jobs:
         env:
           EM_COMPILER_WRAPPER: ${{ matrix.preset == 'wasm' && 'ccache' || '' }}
         run: cmake --build --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS"
-      - name: Build TypeScript API and check types
+      - name: Build TypeScript API and check types and page code
         if: matrix.preset == 'wasm'
         run: |
           npm --prefix web run compile
           npm --prefix web run test:types
+          npm --prefix web test
           cp build/web/translator.js build/web/translator.d.ts build/wasm/
       - name: Stage data, examples and licences
         run: |
