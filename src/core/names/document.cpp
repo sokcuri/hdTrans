@@ -36,9 +36,7 @@ bool Titled(std::string_view text, std::string_view key) {
         if (before.ends_with("、")) before.remove_suffix(std::string_view("、").size());
         const std::string_view after = text.substr(at + key.size());
         if (before.ends_with("艦")) return true;
-        for (const std::string_view t : dict::ClassMembers("honorific.person-title")) {
-            if (after.starts_with(t)) return true;
-        }
+        if (dict::StartsWithMember(HDTRANS_CLASS("honorific.person-title"), after) > 0) return true;
         i = at + key.size();
     }
 }
@@ -115,7 +113,7 @@ bool Continues(std::string_view line, std::string_view next) {
     next = names::internal::TrimSpace(next);
     if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
     const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
-    return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
+    return !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("mark.sentence-end")), in) &&
            !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });
 }
 
@@ -153,6 +151,16 @@ std::vector<std::string> CuedNames(const dict::Snapshot& snap, std::string_view 
     return keys;
 }
 
+namespace {
+
+const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view text) {
+    auto found = doc.nameCues.find(text);
+    if (found == doc.nameCues.end()) found = doc.nameCues.emplace(text, names::NameCues(*doc.snap, text)).first;
+    return found->second;
+}
+
+}  // namespace
+
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
                                                bool extraBuiltin) {
     auto doc = std::make_unique<DocumentContext>();
@@ -177,7 +185,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         female = female || speech.female;
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
-        for (const names::NameCue& c : names::NameCues(snap, line)) {
+        for (const names::NameCue& c : CuesOf(*doc, line)) {
             if (c.strong) doc->cued.insert(c.key);
             if (c.recurring) recurring[c.key]++;
         }
@@ -337,7 +345,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
-    for (const names::NameCue& c : names::NameCues(*doc.snap, facts.text)) facts.cued.push_back(c.key);
+    for (const names::NameCue& c : CuesOf(doc, facts.text)) facts.cued.push_back(c.key);
     std::sort(facts.cued.begin(), facts.cued.end());
     return facts;
 }

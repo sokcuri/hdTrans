@@ -78,8 +78,8 @@ SpeechCues ReadSpeechCues(std::string_view line) {
     cues.quoted = Contains(line, "「");
     const auto utterances = Utterances(line);
     for (std::string_view u : utterances) {
-        if (HasAny(u, dict::ClassMembers("speech.female"))) cues.female = true;
-        if (!HasAny(u, dict::ClassMembers("speech.male"))) continue;
+        if (HasAny(u, dict::ClassMembers(HDTRANS_CLASS("speech.female")))) cues.female = true;
+        if (!HasAny(u, dict::ClassMembers(HDTRANS_CLASS("speech.male")))) continue;
         for (const KinTerm& k : kKinTerms) {
             if (Contains(u, k.ja)) cues.maleKin = true;
         }
@@ -98,8 +98,8 @@ bool FemaleSpeech(std::span<const std::string> lines) {
 }
 
 std::string WriteKinTerms(std::string_view line, bool female) {
-    const bool male = HasAny(line, dict::ClassMembers("speech.male"));
-    const bool woman = HasAny(line, dict::ClassMembers("speech.female"));
+    const bool male = HasAny(line, dict::ClassMembers(HDTRANS_CLASS("speech.male")));
+    const bool woman = HasAny(line, dict::ClassMembers(HDTRANS_CLASS("speech.female")));
     std::string out(line);
     if ((female && !male) || woman) {
         for (const KinTerm& k : kKinTerms) out = ReplaceString(out, k.ja, k.ko);

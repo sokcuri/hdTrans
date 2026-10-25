@@ -86,10 +86,7 @@ bool NameEnd(std::string_view text) {
     if (text.empty()) return true;
     const char32_t c = RuneAt(text, 0).cp;
     if (!IsHiragana(c) || InRunes(c, "はがをのにへともやでかだ")) return true;
-    for (const std::string_view h : dict::ClassMembers("honorific.name")) {
-        if (text.starts_with(h)) return true;
-    }
-    return false;
+    return dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), text) > 0;
 }
 
 // The non-empty fields of s separated by ・ or ＝.
@@ -840,7 +837,7 @@ std::pair<std::string, std::string> Registry::GivenSplit(std::string_view t) {
         const DictFlags fx = Flags(x), fy = Flags(y);
         if (!(fx.surname || fx.layerSurname) || fx.common || fx.role) continue;
         if (!(fy.given || fy.layerGiven) || fy.role) continue;
-        if (dict::InClass("suffix.person-after-surname", y) || dict::InClass("honorific.name", y) || Crossed(t, i)) {
+        if (dict::InClass(HDTRANS_CLASS("suffix.person-after-surname"), y) || dict::InClass(HDTRANS_CLASS("honorific.name"), y) || Crossed(t, i)) {
             continue;
         }
         return {std::string(x), std::string(y)};
@@ -983,7 +980,7 @@ void Registry::FindSiblingNames() {
     for (const auto& [t, c] : kana_) {
         (void)c;
         std::string_view head;
-        for (const std::string_view h : dict::ClassMembers("honorific.katakana-name")) {
+        for (const std::string_view h : dict::ClassMembers(HDTRANS_CLASS("honorific.katakana-name"))) {
             if (t.size() > h.size() && std::string_view(t).ends_with(h)) head = std::string_view(t).substr(0, t.size() - h.size());
         }
         if (RuneCount(head) < 2) continue;
@@ -991,11 +988,7 @@ void Registry::FindSiblingNames() {
         for (auto it = kana_.lower_bound(std::string(head)); it != kana_.end() && it->first.starts_with(head); ++it) {
             const std::string_view tail = std::string_view(it->first).substr(head.size());
             if (tail.empty() || it->first == t || tail.starts_with("ー") || prose_.count(it->first) == 0) continue;
-            bool honorific = false;
-            for (const std::string_view h : dict::ClassMembers("honorific.katakana-name")) {
-                honorific = honorific || tail.starts_with(h);
-            }
-            if (!honorific) siblings++;
+            if (dict::StartsWithMember(HDTRANS_CLASS("honorific.katakana-name"), tail) == 0) siblings++;
         }
         if (siblings >= 2) siblings_.insert(t);
     }
@@ -1097,7 +1090,7 @@ std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
     const std::vector<Run> runs = RunsOf(line);
     auto okRight = [&](std::string_view p) {
         if (p.empty() || acc.count(std::string(p)) > 0) return true;
-        for (const std::string_view k : dict::ClassMembers("suffix.title-in-name")) {
+        for (const std::string_view k : dict::ClassMembers(HDTRANS_CLASS("suffix.title-in-name"))) {
             if (!p.starts_with(k)) continue;
             const std::string_view rest = p.substr(k.size());
             if (rest.empty() || acc.count(std::string(rest)) > 0) return true;

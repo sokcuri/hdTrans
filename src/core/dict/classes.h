@@ -2,6 +2,7 @@
 // Word classes: named sets of surfaces that the passes test words against, read from the
 // builtin table classes.tsv (docs/dictionary-files.md). The table is parsed once, on first
 // use, into an immutable structure shared by every thread.
+#include <cstddef>
 #include <cstdint>
 #include <span>
 #include <string>
@@ -34,30 +35,66 @@ constexpr bool KnownClass(std::string_view s) {
 // fails the compilation.
 void UnknownClassName();
 
+struct WordClass;
+
 }  // namespace internal
 
-// The name of a word class: a string literal of a set of classes.tsv, hashed when the program is
-// compiled. The constructor is implicit so that a literal names the class.
+// The name of a word class: a string literal of a set of classes.tsv, checked when the program is
+// compiled.
 struct ClassName {
     std::string_view name;
-    std::uint64_t hash;
-    consteval ClassName(const char* s) : name(s), hash(internal::ClassHash(s)) {
+    consteval ClassName(const char* s) : name(s) {
         if (!internal::KnownClass(name)) internal::UnknownClassName();
     }
 };
 
-// Whether surface is a member of the class named set.
-bool InClass(ClassName set, std::string_view surface);
-// The members of the class named set in table order.
-std::span<const std::string_view> ClassMembers(ClassName set);
+// A word class as the code names it: an id the process gives a name on its first use, in the order
+// of first use and never reused, with the class of the builtin table of that name (null for none,
+// which has no members).
+struct ClassId {
+    std::uint32_t id = 0;
+    const internal::WordClass* data = nullptr;
+    // Thread-safe.
+    static ClassId Of(std::string_view name);
+};
+
+// The ClassId of the set of classes.tsv that the string literal names, found once for the call
+// site.
+#define HDTRANS_CLASS(literal)                                                                        \
+    ([]() -> ::hdTrans::dict::ClassId {                                                               \
+        static const ::hdTrans::dict::ClassId id =                                                    \
+            ::hdTrans::dict::ClassId::Of(::hdTrans::dict::ClassName(literal).name);                   \
+        return id;                                                                                    \
+    }())
+
+// Whether surface is a member of class set.
+bool InClass(ClassId set, std::string_view surface);
+// InClass for a class named at run time; HDTRANS_CLASS finds a literal name once.
+bool InClass(std::string_view set, std::string_view surface);
+// Whether the one-character text cp is a member of class set.
+bool InClassRune(ClassId set, char32_t cp);
+// The size in bytes of the first member in table order that s starts with, 0 for none.
+std::size_t StartsWithMember(ClassId set, std::string_view s);
+// The size in bytes of the first member in table order that s ends with, 0 for none.
+std::size_t EndsWithMember(ClassId set, std::string_view s);
+// The members of class set in table order.
+std::span<const std::string_view> ClassMembers(ClassId set);
 
 namespace internal {
+
+// The members of a class of one size in bytes, sorted, each with its place in table order.
+struct ClassBucket {
+    std::size_t size = 0;
+    std::vector<std::pair<std::string_view, std::size_t>> members;
+};
 
 struct WordClass {
     std::string_view name;
     std::string_view doc;
     std::vector<std::string_view> members;  // in table order
     std::unordered_set<std::string_view> index;
+    std::vector<ClassBucket> buckets;  // the members by size, smallest first
+    std::u32string runes;              // sorted, when every member is one character; empty otherwise
 };
 
 struct ClassError {
@@ -83,6 +120,10 @@ ClassTable ParseClasses(std::span<const std::string_view> lines);
 const WordClass* FindClass(const ClassTable& t, std::string_view name, std::uint64_t hash);
 // The parsed builtin classes.tsv.
 const ClassTable& BuiltinClasses();
+// StartsWithMember, EndsWithMember and InClassRune on class c.
+std::size_t MemberAtStart(const WordClass& c, std::string_view s);
+std::size_t MemberAtEnd(const WordClass& c, std::string_view s);
+bool RuneMember(const WordClass& c, char32_t cp);
 
 }  // namespace internal
 

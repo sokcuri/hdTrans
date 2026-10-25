@@ -168,7 +168,7 @@ bool AnalyseVerbTail(std::string_view key, char kindByte, std::string_view tail,
         if (WidthOf(tail) >= 6) middle = Window(tail, 2, 4);
         return starts(tail, "い") && (middle == "ます" || middle == "ませ" || middle == "まし");
     };
-    for (const std::string_view stem : dict::ClassMembers("stem.request")) {
+    for (const std::string_view stem : dict::ClassMembers(HDTRANS_CLASS("stem.request"))) {
         const std::size_t i = key.find(stem);
         if (i != std::string_view::npos && i == key.size() - stem.size() && politeRequest()) {
             patternKind = kKindGodanRu;

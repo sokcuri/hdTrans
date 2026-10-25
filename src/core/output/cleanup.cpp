@@ -355,7 +355,7 @@ void DropSpaceBeforeClose(std::string& text) {
                 const std::string_view rest = std::string_view(text).substr(e);
                 std::string_view tail;
                 if (mark) {
-                    for (const auto c : dict::ClassMembers("mark.close-after-space")) {
+                    for (const auto c : dict::ClassMembers(HDTRANS_CLASS("mark.close-after-space"))) {
                         if (StartsWith(rest, c)) tail = c;
                     }
                 } else if (StartsWith(rest, kDashes)) {

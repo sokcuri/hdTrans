@@ -33,7 +33,7 @@ bool CopyPause(const Item* it) {
     const std::string_view text = Slice(it->text, it->start, it->length);
     for (std::string_view t = text; !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
-        if (!dict::InClass("pause.copy", t.substr(0, r.size))) return false;
+        if (!dict::InClassRune(HDTRANS_CLASS("pause.copy"), r.cp)) return false;
         t.remove_prefix(r.size);
     }
     return !text.empty();
@@ -44,7 +44,7 @@ bool ClipWord(const Item* it) {
     const std::string_view text = Slice(it->text, it->start, it->length);
     for (std::string_view t = text; !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
-        if (!dict::InClass("mark.clip", t.substr(0, r.size))) return false;
+        if (!dict::InClassRune(HDTRANS_CLASS("mark.clip"), r.cp)) return false;
         t.remove_prefix(r.size);
     }
     return !text.empty();
@@ -54,9 +54,8 @@ bool ClipWord(const Item* it) {
 bool LongMarked(std::string_view text) {
     for (std::string_view t = text.substr(text::DecodeRune(text).size); !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
-        const std::string_view c = t.substr(0, std::max<std::size_t>(r.size, 1));
-        if (dict::InClass("mark.long-vowel", c)) return true;
-        t.remove_prefix(c.size());
+        if (dict::InClassRune(HDTRANS_CLASS("mark.long-vowel"), r.cp)) return true;
+        t.remove_prefix(std::max<std::size_t>(r.size, 1));
     }
     return false;
 }
@@ -67,7 +66,7 @@ std::string Unlengthened(std::string_view text) {
     for (std::string_view t = text; !t.empty();) {
         const text::Rune r = text::DecodeRune(t);
         const std::string_view c = t.substr(0, std::max<std::size_t>(r.size, 1));
-        if (out.empty() || !dict::InClass("mark.long-vowel", c)) out.append(c);
+        if (out.empty() || !dict::InClassRune(HDTRANS_CLASS("mark.long-vowel"), r.cp)) out.append(c);
         t.remove_prefix(c.size());
     }
     return out;
@@ -82,7 +81,7 @@ bool MarksBetween(const Item* a, const Item* b) {
     if (t.empty()) return false;
     for (std::string_view r = t; !r.empty();) {
         const text::Rune c = text::DecodeRune(r);
-        if (!output::IsClosingMark(c.cp) && !dict::InClass("mark.stretch", r.substr(0, c.size))) return false;
+        if (!output::IsClosingMark(c.cp) && !dict::InClassRune(HDTRANS_CLASS("mark.stretch"), c.cp)) return false;
         r.remove_prefix(std::max<std::size_t>(c.size, 1));
     }
     return true;
@@ -179,9 +178,9 @@ bool PredicateCopies(const Item* it) {
     if (from < 0) return false;
     // A drawn-out ending is the bare one (すごーい).
     const std::string_view ending = last->DirectSurface();
-    const bool drawn = !ending.empty() && dict::InClass("kana.drawn-out", ending.substr(0, text::DecodeRune(ending).size));
+    const bool drawn = !ending.empty() && dict::InClassRune(HDTRANS_CLASS("kana.drawn-out"), text::DecodeRune(ending).cp);
     const std::string_view plain = drawn ? ending.substr(text::DecodeRune(ending).size) : ending;
-    return dict::InClass("ending.copies-bare", plain) && dict::InClass("ending.copies-plain", last->DirectText(from));
+    return dict::InClass(HDTRANS_CLASS("ending.copies-bare"), plain) && dict::InClass(HDTRANS_CLASS("ending.copies-plain"), last->DirectText(from));
 }
 
 // The text right after the word: the rest of its token, or the text after the token.
@@ -194,7 +193,7 @@ std::string_view TextAfter(const Item* it) {
 // one, follows the word right after it (痛いっ, 熱いぃっ).
 bool Clipped(const Item* it) {
     const std::string_view rest = TextAfter(it);
-    return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size)) ||
+    return dict::InClassRune(HDTRANS_CLASS("mark.clip"), text::DecodeRune(rest).cp) ||
            text::DecodeRune(rest).cp == output::kClippedCryMark;
 }
 
@@ -207,38 +206,16 @@ bool CriedCopies(const Item* it) {
     const std::string_view rest = TextAfter(LastCopy(it));
     const std::string_view mark = rest.substr(0, text::DecodeRune(rest).size);
     const char32_t cp = text::DecodeRune(rest).cp;
-    return dict::InClass("mark.cry", mark) || output::IsDrawnEndMark(cp);
-}
-
-// Whether it stands inside a mark that open takes, which no mark that close takes has closed, in
-// the text of its line before it.
-template <typename Open, typename Close>
-bool Enclosed(const Item* it, Open open, Close close) {
-    int depth = 0;
-    const auto count = [&](std::string_view t) {
-        for (std::string_view r = t; !r.empty();) {
-            const text::Rune c = text::DecodeRune(r);
-            const std::string_view mark = r.substr(0, std::max<std::size_t>(c.size, 1));
-            if (open(c.cp, mark)) depth++;
-            if (close(c.cp, mark) && depth > 0) depth--;
-            r.remove_prefix(mark.size());
-        }
-    };
-    if (it->w != nullptr) {
-        for (int k = 0; k < it->tokenIndex; k++) count(it->w->tokens.Raw(static_cast<std::size_t>(k)));
-    }
-    count(Slice(it->text, 0, it->start));
-    return depth > 0;
+    return dict::InClass(HDTRANS_CLASS("mark.cry"), mark) || output::IsDrawnEndMark(cp);
 }
 
 // Whether it stands in a thought between the marks of mark.thought-open and mark.thought-close
 // （ああ、難しい〜）, or in a word spelled out (逃・が・さ・な・い), which the sound stage puts between
-// output::kEmphasisOpen and output::kEmphasisClose.
+// output::kEmphasisOpen and output::kEmphasisClose, in the text of its line before it.
 bool ThoughtOrSpelled(const Item* it) {
-    return Enclosed(it, [](char32_t, std::string_view m) { return dict::InClass("mark.thought-open", m); },
-                    [](char32_t, std::string_view m) { return dict::InClass("mark.thought-close", m); }) ||
-           Enclosed(it, [](char32_t c, std::string_view) { return c == output::kEmphasisOpen; },
-                    [](char32_t c, std::string_view) { return c == output::kEmphasisClose; });
+    const OpenMarks before = it->w != nullptr ? it->w->OpenMarksAt(it->tokenIndex) : OpenMarks{};
+    const OpenMarks open = OpenMarksAfter(Slice(it->text, 0, it->start), before);
+    return open.spelled > 0 || open.thought > 0;
 }
 
 // Whether it is an い-adjective ending bare in い, read 1다 or the exclamative 6, with a drawn end
@@ -247,10 +224,10 @@ bool ThoughtOrSpelled(const Item* it) {
 // copula drawn out after an adjectival noun (無事だああああ), nor in a thought or a word spelled
 // out (ThoughtOrSpelled), which no one cries.
 bool DrawnPredicate(const Item* it) {
-    if (it->detail->cls != kDetailKeiyo || ThoughtOrSpelled(it)) return false;
+    if (it->detail->cls != kDetailKeiyo) return false;
     const int from = it->DirectIndex();
-    if (from < 0 || !dict::InClass("ending.copies-bare", it->DirectSurface()) ||
-        !dict::InClass("ending.copies-plain", it->DirectText(from))) {
+    if (from < 0 || !dict::InClass(HDTRANS_CLASS("ending.copies-bare"), it->DirectSurface()) ||
+        !dict::InClass(HDTRANS_CLASS("ending.copies-plain"), it->DirectText(from))) {
         return false;
     }
     // The drawn end marks and mark.stretch after the word, in its token and the next ones, and
@@ -258,7 +235,7 @@ bool DrawnPredicate(const Item* it) {
     // ずるいー、早く).
     const auto marked = [](std::string_view t) {
         const text::Rune r = text::DecodeRune(t);
-        return output::IsDrawnEndMark(r.cp) || dict::InClass("mark.stretch", t.substr(0, r.size));
+        return output::IsDrawnEndMark(r.cp) || dict::InClassRune(HDTRANS_CLASS("mark.stretch"), r.cp);
     };
     std::string_view after = TextAfter(it);
     bool drawn = false;
@@ -272,7 +249,8 @@ bool DrawnPredicate(const Item* it) {
         after = it->w->tokens.Raw(static_cast<std::size_t>(tok));
     }
     const text::Rune next = text::DecodeRune(after);
-    return drawn && !text::IsLetter(next.cp) && !dict::InClass("mark.comma", after.substr(0, next.size));
+    return drawn && !text::IsLetter(next.cp) && !dict::InClassRune(HDTRANS_CLASS("mark.comma"), next.cp) &&
+           !ThoughtOrSpelled(it);
 }
 
 bool Exclaimed(Flusher& f, const Item* it) {
@@ -287,18 +265,10 @@ bool Exclaimed(Flusher& f, const Item* it) {
     return false;
 }
 
-// The size of the mark of marks that starts s, 0 for none.
-std::size_t MarkAt(std::string_view s, std::span<const std::string_view> marks) {
-    for (const std::string_view m : marks) {
-        if (s.starts_with(m)) return m.size();
-    }
-    return 0;
-}
-
 // Whether s holds only marks of a pause and spaces.
 bool OnlyPauses(std::string_view s) {
     while (!s.empty()) {
-        std::size_t n = MarkAt(s, dict::ClassMembers("mark.pause"));
+        std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("mark.pause"), s);
         if (n == 0 && text::IsSpace(text::DecodeRune(s).cp)) n = text::DecodeRune(s).size;
         if (n == 0) return false;
         s.remove_prefix(n);
@@ -312,7 +282,7 @@ bool OnlyPauses(std::string_view s) {
 // ……そうだ！ 間違いない outside quotes, 「……そうだ」 or an unclosed 「……そうだ at the end of the text).
 bool SpeechGoesOn(Worker& w, const Item* it) {
     const std::string_view rest = From(it->text, it->start + it->length);
-    if (!rest.empty() && !OnlyPauses(rest)) return MarkAt(rest, dict::ClassMembers("mark.close-after-space")) == 0;
+    if (!rest.empty() && !OnlyPauses(rest)) return dict::StartsWithMember(HDTRANS_CLASS("mark.close-after-space"), rest) == 0;
     bool exclaimed = false;
     for (int j = it->tokenIndex + 1; j < w.TokenCount(); j++) {
         const int type = w.Tok(j).type;
@@ -326,7 +296,7 @@ bool SpeechGoesOn(Worker& w, const Item* it) {
         }
         const std::string_view raw = w.tokens.Raw(static_cast<std::size_t>(j));
         if (!OnlyPauses(raw)) {
-            return (!exclaimed || w.QuoteDepth(j) > 0) && MarkAt(raw, dict::ClassMembers("mark.close-after-space")) == 0;
+            return (!exclaimed || w.QuoteDepth(j) > 0) && dict::StartsWithMember(HDTRANS_CLASS("mark.close-after-space"), raw) == 0;
         }
     }
     return false;
@@ -393,7 +363,7 @@ constexpr NamedFeature kFeatures[] = {
      [](Flusher&, const Item* it) {
          const int at = it->DirectIndex();
          const std::string_view ending = at >= 0 ? it->DirectSurface() : std::string_view();
-         return !ending.empty() && dict::InClass("kana.drawn-out", ending.substr(0, text::DecodeRune(ending).size));
+         return !ending.empty() && dict::InClassRune(HDTRANS_CLASS("kana.drawn-out"), text::DecodeRune(ending).cp);
      }},
     // An い-adjective in 1다 or 6 drawn out right after it (DrawnPredicate).
     {"drawn-predicate", [](Flusher&, const Item* it) { return DrawnPredicate(it); }},
@@ -487,7 +457,7 @@ constexpr NamedFeature kFeatures[] = {
     {"holding-verb",
      [](Flusher& f, const Item* it) {
          const std::string lemma = ItemLemma(f, it, it->selected);
-         return std::ranges::any_of(dict::ClassMembers("ko-verb.holding"), [&](std::string_view v) {
+         return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.holding")), [&](std::string_view v) {
              return lemma == v || (lemma.ends_with(v) && std::string_view(lemma).substr(0, lemma.size() - v.size()).ends_with(" "));
          });
      }},
@@ -518,10 +488,7 @@ constexpr NamedFeature kFeatures[] = {
              return true;
          }
          const std::string stem = std::string(t.substr(0, t.size() - 4)) + std::string(k->stem);
-         for (const std::string_view end : dict::ClassMembers("ko-adjective.stem-end")) {
-             if (stem.ends_with(end)) return true;
-         }
-         return false;
+         return dict::EndsWithMember(HDTRANS_CLASS("ko-adjective.stem-end"), stem) > 0;
      }},
     // A mark of mark.lengthening, or the lengthen or drawn mark that stands for one, is right after the
     // word (思うなぁ, 思うなー).
@@ -530,14 +497,14 @@ constexpr NamedFeature kFeatures[] = {
          const std::string_view rest = TextAfter(it);
          const text::Rune r = text::DecodeRune(rest);
          return r.cp == output::kLengthenMark || r.cp == output::kDrawnMark ||
-                dict::InClass("mark.lengthening", rest.substr(0, r.size));
+                dict::InClassRune(HDTRANS_CLASS("mark.lengthening"), r.cp);
      }},
     // A vowel kana of mark.drawn follows the word (燃えるねぇ, 言うねェ).
     {"drawn",
      [](Flusher&, const Item* it) {
          std::string_view rest = From(it->text, it->start + it->length);
          if (rest.empty()) rest = it->detail->nextText;
-         return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
+         return dict::InClassRune(HDTRANS_CLASS("mark.drawn"), text::DecodeRune(rest).cp);
      }},
     // The text ends after the word, or a closing bracket or an exclamation mark follows it: a line
     // of speech ends there (授けよう」, 渡そう！), not a sentence of narration in 。.
@@ -555,7 +522,7 @@ constexpr NamedFeature kFeatures[] = {
          for (int n = 0; n < 2 && !rest.empty(); n++) {
              const std::size_t size = text::DecodeRune(rest).size;
              if (size == 0) break;
-             if (dict::InClass("mark.exclaim", rest.substr(0, size))) return true;
+             if (dict::InClass(HDTRANS_CLASS("mark.exclaim"), rest.substr(0, size))) return true;
              rest.remove_prefix(size);
          }
          return false;
@@ -568,9 +535,8 @@ constexpr NamedFeature kFeatures[] = {
          std::string_view rest = From(it->text, it->start + it->length);
          if (rest.empty()) rest = it->detail->nextText;
          rest = TrimSpace(rest);
-         return std::ranges::any_of(dict::ClassMembers("mark.prompt-follow"),
-                                    [&](std::string_view m) { return rest.starts_with(m); }) ||
-                std::ranges::any_of(dict::ClassMembers("mark.prompt-answer"),
+         return dict::StartsWithMember(HDTRANS_CLASS("mark.prompt-follow"), rest) > 0 ||
+                std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("mark.prompt-answer")),
                                     [&](std::string_view m) { return rest.find(m) != std::string_view::npos; });
      }},
 };
