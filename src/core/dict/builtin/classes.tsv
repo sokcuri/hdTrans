@@ -335,6 +335,8 @@
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
+//= verb.youni-seem	Verbs of seeming after ように, with or without は, も or しか between, before which ように is a likeness, 것처럼 (泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えない 속이려 하고 있는 것처럼은 보이지 않는다).
+//= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
@@ -5324,6 +5326,52 @@ verb.vehicle-travel	帰郷
 verb.vehicle-travel	ドライブ
 verb.vehicle-travel	かか
 verb.vehicle-travel	掛か
+verb.youni-seem	見え
+verb.youni-seem	見せ
+verb.youni-seem	見せかけ
+verb.youni-seem	見せ掛け
+verb.youni-seem	みえ
+verb.youni-seem	みせ
+verb.youni-seem	思え
+verb.youni-seem	思われ
+verb.youni-seem	感じ
+verb.youni-seem	感じられ
+verb.youni-seem	聞こえ
+verb.youni-purpose	する
+verb.youni-purpose	なる
+verb.youni-purpose	言う
+verb.youni-purpose	言われる
+verb.youni-purpose	頼む
+verb.youni-purpose	頼まれる
+verb.youni-purpose	祈る
+verb.youni-purpose	願う
+verb.youni-purpose	命じる
+verb.youni-purpose	命じられる
+verb.youni-purpose	命令
+verb.youni-purpose	指示
+verb.youni-purpose	伝える
+verb.youni-purpose	求める
+verb.youni-purpose	促す
+verb.youni-purpose	勧める
+verb.youni-purpose	努める
+verb.youni-purpose	心がける
+verb.youni-purpose	心掛ける
+verb.youni-purpose	気をつける
+verb.youni-purpose	気を付ける
+verb.youni-purpose	注意
+verb.youni-purpose	仕向ける
+verb.youni-purpose	言い聞かせる
+verb.youni-purpose	練習
+verb.youni-purpose	工夫
+verb.youni-purpose	準備
+verb.youni-purpose	頑張る
+verb.youni-purpose	努力
+verb.youni-purpose	説明
+verb.youni-purpose	指導
+verb.youni-purpose	教える
+verb.youni-purpose	願い
+verb.youni-purpose	お願い
+verb.youni-purpose	祈り
 verb.transfer	あげ
 verb.transfer	差し上げ
 verb.transfer	さしあげ

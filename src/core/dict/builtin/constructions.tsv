@@ -542,3 +542,13 @@ cx:noda-narration:40	GRM-31	&&4 F+0== "conjugating" I+0== "Rなのだ" Y+0== "1�
 cx:comma-terminal:10	GRM-32	&&8 !1 :comma-hesitation S+0== "00、，," F-1== "conjugating" P-1== "4" Y-1== "0" ||9 I-1== "Rう" I-1== "Rく" I-1== "Rぐ" I-1== "Rす" I-1== "Rつ" I-1== "Rぬ" I-1== "Rぶ" I-1== "Rむ" I-1== "Rる" :comma-clause !1 I-1== "Rという"	set-ending@-1 "4다"	後宮の弊害ともいえる、量は 할 수 있다, 양은
 cx:comma-terminal:20	GRM-32	&&8 !1 :comma-hesitation S+0== "00、，," F-1== "conjugating" P-1== "4" Y-1== "8" ||2 I-1== "Rた" I-1== "Rだ" :comma-clause !1 I-1== "Rという"	set-ending@-1 "5다"	見た、それが 보았다, 그것이
 cx:comma-terminal:30	GRM-32	&&8 !1 :comma-hesitation S+0== "00、，," F-1== "conjugating" P-1== "7" Y-1== "4" I-1== "Rい" :comma-clause !1 I-1== "Rという"	set-ending@-1 "1다"	わからない、それが 모른다, 그것이
+//: youni-ending	&&3 F+0== "conjugating" P+0== "4" ||3 Y+0== "1도록(듯이)" Y+0== "1도록" Y+0== "1게"	A verb read with the ように of aim, 도록 or 게.
+//: youni-seem-after	||3 B+1== @verb.youni-seem S+1== @Lverb.youni-seem &&2 ||3 S+1== "は" S+1== "も" S+1== "しか" ||2 B+2== @verb.youni-seem S+2== @Lverb.youni-seem	A verb of seeming follows the ように, with or without は, も or しか between (ように見える, ようには見えない).
+//: youni-te-iru	||3 I+0== "Rているように" I+0== "Rでいるように" &&2 ||2 I+0== "Lいるように" I+0== "Lるように" ||2 I-1== "Rて" I-1== "Rで"	The ように follows the ている of a verb (殴られているように, 泣いてるように).
+//: youni-aim-follows	>0 ||2 B+0== @verb.youni-purpose S+0== @verb.youni-purpose ||2 F+0== "conjugating" S+0== "00。！？!?"	The first predicate after the word in its sentence asks, tells, wishes, tries or makes (verb.youni-purpose): the ように says what is aimed at.
+//= youni-simile	after OfferPromise 470	A ように of a verb read 도록 or 게 is a likeness, not an aim: 것처럼 before a verb of seeming (verb.youni-seem: 泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えなかった 속이려 하고 있는 것처럼은 보이지 않았다), 것처럼 after ている when the first predicate after it does not ask, tell, wish, try or make (殴られているように頭が痛む 맞고 있는 것처럼 머리가 아프다; 待っているように言った keeps 도록), and 듯이 after まるで or あたかも in its sentence (まるで許しを請い跪くように 마치 용서를 빌며 무릎 꿇듯이). After a noun, かのように and かのような are 인 것처럼 and 인 것 같은 (子供かのように 아이인 것처럼).
+cx:youni-simile:10	GRM-33	&&2 :youni-ending :youni-seem-after	set-ending "0 것처럼"	泣いているように見えた 울고 있는 것처럼 보였다
+cx:youni-simile:20	GRM-33	&&3 :youni-ending :youni-te-iru !1 :youni-aim-follows	set-ending "0 것처럼"	殴られているように頭が痛む 맞고 있는 것처럼
+cx:youni-simile:30	GRM-33	&&2 :youni-ending <0 ||2 S+0== "まるで" S+0== "あたかも" S+0== "00。！？!?「」『』"	set-ending "1듯이"	まるで跪くように 마치 무릎 꿇듯이
+cx:youni-simile:40	GRM-33	&&4 S+0== "のように" S-1== "か" F-1== "selected" P-2== "1"	set-target@-1 "" set-target "인 것처럼"	子供かのように 아이인 것처럼
+cx:youni-simile:45	GRM-33	&&4 S+0== "のような" S-1== "か" F-1== "selected" P-2== "1"	set-target@-1 "" set-target "인 것 같은"	夢かのような 꿈인 것 같은
