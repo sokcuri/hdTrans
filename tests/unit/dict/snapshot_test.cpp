@@ -828,7 +828,10 @@ HD_TEST(DictBoundedRecords) {
     const Dict d = Dict::FromView(view);
     HD_CHECK(d.Validate());
     HD_CHECK(d.View().guard.context == &state);
+    state.reads = 0;
     const auto records = d.Records("学");
+    // The two start offsets and the record bytes of the key group, each read once.
+    HD_CHECK_EQ(state.reads, 3);
     HD_REQUIRE(records.size() == 1);
     HD_CHECK(records[0].target == "x");
     HD_CHECK_EQ(records[0].id, -1);
