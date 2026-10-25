@@ -70,6 +70,10 @@ HD_TEST(output_spoken_words) {
     // 4: a quote in the written style.
     HD_CHECK_EQ(SpokenWords("「그것은」", 0, {0, 4}), std::string("「그것은」"));
     HD_CHECK_EQ(SpokenWords("그것은 몰라」", 1, casual), std::string("그건 몰라」"));
+    // The text outside quotes only in a line of speech.
+    HD_CHECK_EQ(SpokenWords("그것은 몰라", 0, {0}), std::string("그것은 몰라"));
+    HD_CHECK_EQ(SpokenWords("그것은 몰라", 0, {0}, true), std::string("그건 몰라"));
+    HD_CHECK_EQ(SpokenWords("그것은 압니다", 0, {2 /* old speech */}, true), std::string("그것은 압니다"));
 }
 
 HD_TEST(output_closing_marks) {

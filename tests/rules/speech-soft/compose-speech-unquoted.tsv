@@ -1,0 +1,29 @@
+# 규칙: SPC-18
+rule	input	expected	kind	layer
+compose:speech-unquoted	それは怖い	그건 무서워	fix	compose
+compose:speech-unquoted	大学生くらいかと思ってた	대학생 정도라고 생각했어	fix	compose
+compose:speech-unquoted	あのバカ落ちやがった	그 바보 떨어졌어	fix	compose
+compose:speech-unquoted	おかしい	이상해	fix	compose
+compose:speech-unquoted	つたえたい	전하고 싶어	fix	compose
+compose:speech-unquoted	可愛くなりたい	귀여워지고 싶어	fix	compose
+compose:speech-unquoted	ストーカーじゃねえ	스토커가 아니야	fix	compose
+compose:speech-unquoted	決して犠牲者を愚弄したいわけじゃない	결코 희생자를 우롱하고 싶은 게 아니야	fix	compose
+compose:speech-unquoted	いや、寺ではなく神社だ	아니, 절이 아니고 신사야	fix	compose
+compose:speech-unquoted	良かった、スピード解決だったみたいだな	다행이야, 스피드 해결이었던 것 같네	fix	compose
+compose:speech-unquoted	なんかタクシー来た	뭔가 택시 왔어	fix	compose
+compose:speech-unquoted	あまり怖いと思うようなら、迷わずスレを閉じて欲しい	너무 무섭다고 생각하는 것 같으면, 망설이지 않고 스레를 닫았으면 좋겠어	fix	compose
+compose:speech-unquoted	ほんとは得意だし…こういうの	사실은 자신있고…이런 거	fix	compose
+compose:speech-unquoted	途中からだけどね。聞いていたんだ、二人の話。	도중부터지만. 들어 있었어, 두 사람의 이야기.	fix	compose
+compose:speech-unquoted	早く使いなよ。こっちは遊びでやってるんじゃないんだから。	빨리 써. 여기는 놀이로 하고 있는 게 아니니까.	fix	compose
+compose:speech-unquoted	カッコよくなった！やったね！	멋져졌어! 해냈네!	fix	compose
+compose:speech-unquoted	いいわね、こういうのを待っていたのよ。やれば出来るじゃない！	좋네, 이런 걸 기다리고 있었어. 하면 할 수 있잖아!	fix	compose
+compose:speech-unquoted	わかった。	알았다.	keep	compose
+compose:speech-unquoted	俺は間違ってた。	나는 틀렸다.	keep	compose
+compose:speech-unquoted	変な声が出た。	이상한 목소리가 나왔다.	keep	compose
+compose:speech-unquoted	100Gを手渡した。	100G를 건네주었다.	keep	compose
+compose:speech-unquoted	嬉しい……貴方に会えて、良かった。	기쁘다……당신을 만날 수 있어, 다행이다.	keep	compose
+compose:speech-unquoted	スーツの胸ポケットをまさぐってスマートフォンを取り出し、画面を見てギョっとした……	슈트의 가슴 포켓을 더듬어 스마트폰을 꺼내고, 화면을 보고 흠칫했다……	keep	compose
+compose:speech-unquoted	もう帰る	이제 돌아간다	keep	compose
+compose:speech-unquoted	花は咲く	꽃은 핀다	keep	compose
+compose:speech-unquoted	攻撃魔術：相手を攻撃する	공격 마술：상대를 공격한다	keep	compose
+compose:speech-unquoted	連絡があるみたいだぞ。	연락이 있는 것 같다.	keep	compose

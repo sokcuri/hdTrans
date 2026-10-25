@@ -96,6 +96,7 @@ HD_TEST(engine_speech_session) {
     HD_REQUIRE(engine.Open({folder.string()}));
     Session session(engine);
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");  // strict by default
+    HD_CHECK_EQ(session.Translate("高い"), "높다");
     session.SetSpeech(Speech::Soft);
     HD_CHECK_EQ(session.Translate("「高い」"), "「높아」");
     session.Reset();
@@ -105,7 +106,11 @@ HD_TEST(engine_speech_session) {
     session.SetSpeech(Speech::Soft);
     // A quote left open by one call does not reach the next.
     HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
-    HD_CHECK_EQ(session.Translate("高い」"), "높다」");
+    HD_CHECK_EQ(session.Translate("高い。」"), "높다.」");
+    // A bare line is speech; in a text that writes speech in 「」 it is narration (spec SPC-18).
+    HD_CHECK_EQ(session.Translate("高い"), "높아");
+    HD_CHECK_EQ(session.Translate("高い。"), "높다.");
+    HD_CHECK_EQ(session.Translate("「高い」\n高い"), "「높아」\n높다");
     Session reference(engine, true);
     HD_CHECK_EQ(reference.Translate("「高い」"), "「높다」");
     std::error_code ec;

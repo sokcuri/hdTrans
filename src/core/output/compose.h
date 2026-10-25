@@ -53,6 +53,10 @@ struct Settings {
     // The text outside 「」 and 『』 is narration (pipeline::LineContext::narrated): an end before
     // a mark stays plain there.
     bool narrated = false;
+    // With casual: the text outside 「」 and 『』 is speech too (pipeline::SpokenLine); with
+    // spokenByEnd only the end of the line says so, and a present action keeps -ㄴ다.
+    bool spoken = false;
+    bool spokenByEnd = false;
     // Text path outside the reference mode: counts in native Korean (두 마리, 세 번) and the
     // spacing of particle and free nouns (바위뿐, 키 정도, 작업 중).
     bool literal = false;
@@ -68,7 +72,7 @@ std::vector<bool> PoliteQuotes(std::string_view line, int depth);
 // line with the written words of its quotes in their spoken form, in every plain or polite
 // quote: 무엇 (무엇을 뭘, 무엇입니까 뭡니까), 것 (것은 건, 그것을 그걸; 것 같다 stays) and 주어,
 // 두어, 되어 (줘, 둬, 돼); quotes and depth as for PoliteQuotes.
-std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles);
+std::string SpokenWords(std::string_view line, int depth, const std::vector<std::uint8_t>& styles, bool outside = false);
 
 // The state of state after text: 「 and 『 open a quote, 」 and 』 close one (a closing
 // bracket outside a quote is ignored), and count counts the quotes opened outside any.
