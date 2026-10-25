@@ -6,3 +6,19 @@ rewrite:past-sequence	長期的に見れば、マイナスだった。	장기적
 rewrite:past-sequence	やってみれば分かる。	해 보면 안다.	keep	rewrites
 dict:gram:iuto:正直言うと	「……正直言うと、心配した」	「……솔직히 말하면, 걱정했다」	keep	defaults
 rewrite:past-sequence	そう言うと、友人は言った。	그렇게 말하니, 친구는 말했다.	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。籠を置くと、そばの建物の中にある並べられた籠を見る。	has:바구니를 두니,	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。足早に洗濯籠を届けると、中央に位置する赤塗の建物を見る。	has:전달하니,	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。西方の血を色濃く継ぐ玉葉妃は顔を上げると医者の顔を見る。	has:고개를 들자	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。ダリヤはオレンジジュースを飲み干すと、昼食を食べ終えたマルチェラにきりだす。	has:마시니,	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。玄関を出ると中学から愛用するチャリに飛び乗り、ペダルを全力で回す。	has:나오니	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。春になると花が咲く。	has:봄이 되면	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。ボタンを押すと扉が開く。	has:누르면	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。この薬を飲むと眠くなる。	has:먹으면	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。彼は毎朝起きると顔を洗う。	has:일어나면	keep	rewrites
+rewrite:past-sequence	籠を置くと、そばの建物の中にある籠を見る。	has:두면,	keep	rewrites
+rewrite:past-sequence	「籠を置くと、籠を見る」	has:두면,	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。コテは書き込むときに名前とパスワード入れると自動的につく。	has:넣으면	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。ここで嘘をつくと、後で必ず綻ぶ。	has:거짓말하면,	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。だが余りにも気に入られてしまうと今度は配下の人たちから不興を買う。	has:들어버리면	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。一番下の選択肢だと思っていた魔王を選ぼうとすると、さらなる職業の選択肢があることに気付く。	has:선택하려고 하면,	keep	rewrites
+rewrite:past-sequence	「行こう」と言った。コゼットは真顔でゴホンと咳払いをすると、大事なお菓子の残りに齧りつく。	has:헛기침을 하면,	keep	rewrites

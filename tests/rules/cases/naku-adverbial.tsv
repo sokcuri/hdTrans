@@ -1,0 +1,23 @@
+# 규칙: GRM-34
+rule	input	expected	kind	layer
+cx:naku-adverbial:10	それにしても資料もなく作業して炎上しない訳が無い。	has:자료도 없이 작업	fix	rewrites
+cx:naku-adverbial:10	それからは、特にお互い会話もなく授業を受けた。	has:대화도 없이 수업을	fix	rewrites
+cx:naku-adverbial:10	ぽつりと漏らした言葉は、誰に届くこともなく消えた。	has:것도 없이 사라졌다.	fix	rewrites
+cx:naku-adverbial:10	ＯＪＴする暇も無く実戦に投入された。	has:틈도 없이 실전에	fix	rewrites
+cx:naku-adverbial:10	ドアを背に気配もなく立っていたのは一人の少女だった。	has:기색도 없이 서	fix	rewrites
+cx:naku-adverbial:10	でもね、断りもなく人を呼び付けておいて。	has:없이	fix	rewrites
+cx:naku-adverbial:10	意味もなく人を殺そうとした。	has:의미도 없이	fix	rewrites
+cx:naku-adverbial:10	今日も何事もなく終了ですねぇ。	has:아무 일도 없이	fix	rewrites
+cx:naku-adverbial:10	理由もなく笑う。	has:이유도 없이 웃는다.	fix	rewrites
+cx:naku-adverbial:10	お金がなくなった。	has:없어졌다.	keep	rewrites
+cx:naku-adverbial:10	迷いをなくす。	has:없앤다.	keep	rewrites
+cx:naku-adverbial:10	彼は優しくなく、冷たい。	has:다정하지 않고,	keep	rewrites
+cx:naku-adverbial:10	汚れ物ではなく、洗濯済みのものだ。	lacks:없이	keep	rewrites
+cx:naku-adverbial:10	何も言わずに去った。	has:말하지 않고 떠났다.	keep	rewrites
+cx:ni-after-adverb:35	だからこそ、尚更に理解出来ない。	has:더욱더 이해	fix	rewrites
+cx:ni-after-adverb:35	それどころか、手応えは変わらずにサクッだった。	has:변함없이 싹	fix	rewrites
+cx:ni-after-adverb:35	【万能農具】は、農具の名前に拘らずに何にでも変形する。	has:관계없이 무엇	fix	rewrites
+cx:ni-after-adverb:35	約束の時間ちょうどに、インターホンが鳴った。	lacks:에,	fix	rewrites
+cx:ni-after-adverb:35	その間に次の方針を考える。	has:그 사이에	keep	rewrites
+cx:ni-after-adverb:35	すぐに行く。	곧바로 간다.	keep	rewrites
+cx:naku-adverbial:10	調子の戻ったアールは、興味もないテレビを観るでもなく観ていた。	has:보는 것도 아니게	keep	rewrites

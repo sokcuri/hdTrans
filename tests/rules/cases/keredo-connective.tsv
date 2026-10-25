@@ -1,0 +1,24 @@
+# 규칙: GRM-29
+rule	input	expected	kind	layer
+cx:keredo-connective:30	８歳だったけれども、生まれ変わりだと思った。	8세였지만, 환생이라고 생각했다.	fix	rewrites
+cx:keredo-connective:10	いきなりと思うだろうけれども、聴こえない。	갑자기라고 생각할 테지만, 들리지 않는다.	fix	rewrites
+cx:keredo-connective:10	私と比較すればお姉様は地味だろうけれど、	나와 비교하면 누님은 수수할 테지만,	fix	rewrites
+cx:keredo-connective:10	間違いなく、字は読めないだろうけれど、	has:읽을 수 없을 테지만,	fix	rewrites
+cx:keredo-connective:30	本望だったけれど、	숙원이었지만,	fix	rewrites
+cx:keredo-connective:30	先ほど仰ったことですけれど」	방금 전 말씀하신 것입니다만」	fix	rewrites
+cx:keredo-connective:30	西洋のお祭りですけれど、	서양의 축제입니다만,	fix	rewrites
+cx:keredo-connective:20	ちょっと重い感じもしますけれど、	has:합니다만,	fix	rewrites
+cx:keredo-connective:40	バッドエンディングなのだけれども。	배드 엔딩인데.	fix	rewrites
+cx:keredo-connective:40	もう少し早く覚醒したかったけれども。	좀 더 빨리 각성하고 싶었지만.	fix	rewrites
+cx:keredo-connective:40	甘い夢を見れるのだけれども、いかんせん今は違う。	has:꿈을 볼 수 있는데,	fix	rewrites
+cx:keredo-connective:30	仕事一筋というワタシだったけれども、それでも乙女心。	has:나였지만,	fix	rewrites
+cx:keredo-connective:30	変なところで弟を信用しての行動だったけれども、予想通りだった。	이상한 곳에서 남동생을 신용한 행동이었지만, 예상대로였다.	fix	rewrites
+cx:keredo-connective:20	確証はなかったけれど、	확증은 없었지만,	keep	rewrites
+cx:keredo-connective:20	してやりこんでいたわけだけれども。	해 주고 있던 것이지만.	keep	rewrites
+cx:keredo-connective:20	癖はあるけれど、	버릇은 있지만,	keep	rewrites
+cx:keredo-connective:20	少し期待していたけれど、	조금 기대하고 있었지만,	keep	rewrites
+cx:keredo-connective:10	けれども、彼は来なかった。	그러나, 그는 오지 않았다.	keep	rewrites
+cx:keredo-connective:20	けれど、それは違う。	하지만, 그것은 다르다.	keep	rewrites
+cx:keredo-connective:30	先生だった――けれども。	선생님이었다――그러나.	keep	rewrites
+cx:keredo-connective:20	悪い話ではない。ないけれども、突然すぎる。	나쁜 이야기가 아니다. 없지만, 너무 갑작스럽다.	keep	rewrites
+cx:keredo-connective:40	足をジタバタさせてみたけれども、所詮は子供の力だ。	다리를 버둥버둥시켜 보았지만, 결국은 아이 힘이다.	keep	rewrites

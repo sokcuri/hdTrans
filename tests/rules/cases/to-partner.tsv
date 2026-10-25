@@ -1,0 +1,14 @@
+# 규칙: GRM-39
+rule	input	expected	kind	layer
+cx:to-partner:10	話すのと読むのはそこまででもないし、書く方はさっぱりだ。	has:이야기하는 것과 읽는 것은	fix	rewrites
+cx:to-partner:10	あるとないのとでは大違いである。	has:것과는	keep	rewrites
+cx:to-partner:10	石ころのものすごく大きいものと考えるのが普通なのですが	has:것이라고 생각하는	keep	rewrites
+cx:to-partner:20	あの頃が俺たちの最高だというならば、それを共にしたお前と酌み交わすのが道理だと思ったからだ。	has:너와 술잔을	fix	rewrites
+cx:to-partner:20	ジャンヌとはね、昔一緒に遊んだんだ。	lacks:라고는	fix	rewrites
+cx:to-partner:20	彼女と結婚した。	has:그녀와 결혼했다.	keep	rewrites
+cx:to-partner:20	彼女は田中と言った。	has:라고 말했다.	keep	rewrites
+cx:to-partner:25	それも、割と流暢な。しかも気のせいでなければ、相手の女性とも普通に会話が成立していたような……。	has:여성과도 보통으로 대화가	fix	rewrites
+cx:to-partner:25	彼女とも言った。	lacks:과도	keep	rewrites
+cx:to-partner:30	姉に向けるとは思えない冷めた視線と、皮肉げな口元は本当に私をイライラさせる。	has:시선과	fix	rewrites
+cx:to-partner:30	ドン！っと、俺は田村を突き飛ばし、	lacks:와 나는	keep	rewrites
+cx:to-partner:30	「黙れ」と、彼は言った。	has:라고	keep	rewrites

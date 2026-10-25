@@ -406,6 +406,8 @@ constexpr NamedFeature kFeatures[] = {
     // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis
     // (a て form that ends a sentence with a period is a request: え、待って待って。).
     {"narrated", [](Flusher& f, const Item* it) { return Narrated(f, it); }},
+    // The word stands outside quotes in a document that writes its speech in 「」: narration.
+    {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).

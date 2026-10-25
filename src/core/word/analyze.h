@@ -80,6 +80,8 @@ struct Settings {
     int quoteDepth = 0;
     // Text path: the line uses the tic ぽい (PoiTicLine).
     bool poiTic = false;
+    // Text path: the document writes its speech in 「」, so its text outside them is narration.
+    bool narrated = false;
     // Empty by default; the list and its names outlive the analysis.
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set

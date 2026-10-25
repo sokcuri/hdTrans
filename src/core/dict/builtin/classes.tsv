@@ -172,6 +172,7 @@
 //= mark.voice-end	Marks that end the sentence a (ら)れ verb asks in (何を読まれているんですか？).
 //= mark.voice-question	Ends of a question after a (ら)れ verb, the last kana of its sentence or the mark after it (確認されますか, 読まれているんですか？).
 //= noun.attribute	Nouns that name a quality: the の before an adjective after them is the subject (香りの良い, 面倒見のいい).
+//= noun.attribute-end	Ends of nouns that name a measure or a quality (離職率, 将来性, 戦闘能力): the の before an adjective after them is the subject (離職率の高い職場 이직률이 높은 직장).
 //= noun.arena	Ends of the nouns of a realm, a setting, a group or an event in which something holds or is done: でも after one is 에서도, in it too (王都でも指折り 왕도에서도 손꼽히는, 作戦でも働いた 작전에서도 일했다), not before する, a verb of verb.example-object, どう or a word of permission.
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
@@ -181,6 +182,10 @@
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
+//= noun.he-sent	Nouns of something sent or said to someone (手紙, 報告, 電話): the への before them is 에게 보내는 after a person (彼への手紙 그에게 보내는 편지), (으)로 보내는 after anything else.
+//= noun.he-gift	Nouns of something given to someone (贈り物, ご褒美): the への before them is 에게 주는 after a person (自分へのご褒美 자신에게 주는 상), 에 주는 after anything else.
+//= noun.he-path	Ends of nouns of a way, a move or a change toward a place or a state (道, 入学, 輸送, 変化): the への before them is (으)로의 (王都への道 왕도로의 길, 大学への進学 대학으로의 진학).
+//= noun.noda-plain	Formal nouns whose Korean already explains, before which a のだ of narration stays the bare copula (はずなのだ 것이다, だけなのだ 뿐이다).
 //= noun.honored-person	Nouns of the people a shop or a host speaks to or of: after ご, a verbal noun and の they are the ones who did it (ご予約のお客様 예약하신 손님, ご参加の皆様 참가하신 여러분).
 //= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
@@ -312,6 +317,7 @@
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.ni-partner	Verbs whose own argument is a person in に, the one met, beaten, followed or leaned on (勝つ, 会う, 頼る, 逆らう): their potential does not make that person the one who can (私に勝てる 나를 이길 수 있다, not 내가).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
+//= verb.unattained	Stems of the passives of something one wishes for and does not get (愛され, 報われ, 褒められ), whose negative takes 못하다 (愛されなかった 사랑받지 못했다), not a concession or a condition (愛されなくても 사랑받지 않아도); not a permission refused (許されない 허락되지 않는다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
@@ -331,6 +337,8 @@
 //= verb.thinking-start	Surfaces that start a verb of thinking ahead in the clause.
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
+//= verb.youni-seem	Verbs of seeming after ように, with or without は, も or しか between, before which ように is a likeness, 것처럼 (泣いているように見えた 울고 있는 것처럼 보였다, 騙そうとしているようには見えない 속이려 하고 있는 것처럼은 보이지 않는다).
+//= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
@@ -366,6 +374,8 @@
 //= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
 //= word.soreni-follow	Starts of the words after which それに is the thing taken up, 거기에, not the conjunction 게다가 (それによって, それに伴って, それに比例して).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
+//= word.clause-start	Demonstrative adverbs and conjunctions that start a clause and that no clause before them describes (そう, でも, しかし): after one a bare attributive before a comma ends its clause (よくわからない、でも行く 잘 모른다, 하지만 간다).
+//= word.clause-pronoun	Demonstrative pronouns that start a clause as its subject, topic or object (それが, これは): after one with が, は, も or を a bare attributive before a comma ends its clause (わからない、それが人生だ 모른다, 그것이 인생이다); one without that particle may be what the attributive describes (作ってあげた、あれ 만들어 준, 그것).
 //= word.survival	Words of life, wounds, illness, escape and rescue before which 助かる in the same sentence is surviving, 살아나다 (命が助かった 목숨을 건졌다, 患者は助からない), not help or relief.
 
 adverb.degree-feeling	本当に
@@ -449,6 +459,8 @@ adverb.observation	さすが
 adverb.observation	流石
 adverb.observation	意外と
 adverb.observation	相変わらず
+adverb.observation	なぜか
+adverb.observation	何故か
 verb.polite-remark	食べ
 verb.polite-remark	飲
 verb.polite-remark	召し上が
@@ -2186,6 +2198,126 @@ noun.attribute	態度
 noun.attribute	機嫌
 noun.attribute	具合
 noun.attribute	調子
+noun.attribute	色素
+noun.attribute	プライド
+noun.attribute	意志
+noun.attribute	治安
+noun.attribute	刺激
+noun.attribute	中身
+noun.attribute	根拠
+noun.attribute	血縁
+noun.attribute	後味
+noun.attribute	ガタイ
+noun.attribute	出来
+noun.attribute	屈託
+noun.attribute	都合
+noun.attribute	要素
+noun.attribute	意気地
+noun.attribute	季候
+noun.attribute	気候
+noun.attribute	薬効
+noun.attribute	相性
+noun.attribute	身分
+noun.attribute	足場
+noun.attribute	気
+noun.attribute	魔力
+noun.attribute	容赦
+noun.attribute	癖
+noun.attribute	威力
+noun.attribute	景気
+noun.attribute	人数
+noun.attribute	目力
+noun.attribute	居心地
+noun.attribute	威勢
+noun.attribute	性能
+noun.attribute	目
+noun.attribute	鼻
+noun.attribute	耳
+noun.attribute	髪
+noun.attribute	肌
+noun.attribute	声
+noun.attribute	天気
+noun.attribute	距離
+noun.attribute	価値
+noun.attribute	値段
+noun.attribute	価格
+noun.attribute	割合
+noun.attribute	度胸
+noun.attribute	根性
+noun.attribute	体力
+noun.attribute	能力
+noun.attribute	知能
+noun.attribute	人望
+noun.attribute	口数
+noun.attribute	寿命
+noun.attribute	品質
+noun.attribute	手触り
+noun.attribute	肌触り
+noun.attribute	切れ味
+noun.attribute	足
+noun.attribute	指
+noun.attribute	首
+noun.attribute	背丈
+noun.attribute	身長
+noun.attribute	体重
+noun.attribute	年齢
+noun.attribute	視力
+noun.attribute	知名度
+noun.attribute	自由度
+noun.attribute	難易度
+noun.attribute	純度
+noun.attribute	確度
+noun.attribute	練度
+noun.attribute	濃度
+noun.attribute	密度
+noun.attribute	精度
+noun.attribute	温度
+noun.attribute	湿度
+noun.attribute	速度
+noun.attribute	強度
+noun.attribute	硬度
+noun.attribute	頻度
+noun.attribute	好感度
+noun.attribute	満足度
+noun.attribute	完成度
+noun.attribute	重要度
+noun.attribute	危険度
+noun.attribute	信頼度
+noun.attribute	露出度
+noun.attribute	透明度
+noun.attribute	経験値
+noun.attribute	攻撃力
+noun.attribute	防御力
+noun.attribute	戦闘力
+noun.attribute	集中力
+noun.attribute	想像力
+noun.attribute	影響力
+noun.attribute	生命力
+noun.attribute	魅力
+noun.attribute	視野
+noun.attribute	器
+noun.attribute	腰
+noun.attribute	胸
+noun.attribute	歯
+noun.attribute	爪
+noun.attribute	眉
+noun.attribute	瞳
+noun.attribute	毛
+noun.attribute	尻尾
+noun.attribute	羽
+noun.attribute	背中
+noun.attribute	腹
+noun.attribute	声量
+noun.attribute	口調
+noun.attribute	頭脳
+noun.attribute	記憶力
+noun.attribute	判断力
+noun.attribute	実力
+noun.attribute	腕前
+noun.attribute	技量
+noun.attribute-end	率
+noun.attribute-end	性
+noun.attribute-end	力
 noun.arena	街
 noun.arena	表
 noun.arena	外
@@ -2416,6 +2548,199 @@ noun.feeling	すっきり
 noun.feeling	スッキリ
 noun.feeling	ムカムカ
 noun.feeling	むかむか
+noun.feeling	清々
+noun.feeling	せいせい
+noun.feeling	気後れ
+noun.feeling	尊敬
+noun.feeling	同意
+noun.feeling	賛成
+noun.he-sent	手紙
+noun.he-sent	お手紙
+noun.he-sent	便り
+noun.he-sent	電話
+noun.he-sent	メール
+noun.he-sent	報告
+noun.he-sent	報告書
+noun.he-sent	伝言
+noun.he-sent	返事
+noun.he-sent	お返事
+noun.he-sent	返信
+noun.he-sent	連絡
+noun.he-sent	メッセージ
+noun.he-sent	招待状
+noun.he-sent	ラブレター
+noun.he-sent	書状
+noun.he-sent	親書
+noun.he-sent	手紙類
+noun.he-sent	年賀状
+noun.he-sent	遺書
+noun.he-sent	置き手紙
+noun.he-sent	伝令
+noun.he-sent	通信
+noun.he-sent	通報
+noun.he-sent	依頼状
+noun.he-sent	嘆願書
+noun.he-sent	請願
+noun.he-gift	贈り物
+noun.he-gift	プレゼント
+noun.he-gift	ご褒美
+noun.he-gift	褒美
+noun.he-gift	お土産
+noun.he-gift	土産
+noun.he-gift	手土産
+noun.he-gift	お礼
+noun.he-gift	差し入れ
+noun.he-gift	捧げ物
+noun.he-gift	供え物
+noun.he-gift	お供え
+noun.he-gift	贈答品
+noun.he-gift	ギフト
+noun.he-gift	祝い
+noun.he-gift	お祝い
+noun.he-gift	餞別
+noun.he-gift	お返し
+noun.he-path	道
+noun.he-path	道のり
+noun.he-path	近道
+noun.he-path	帰り道
+noun.he-path	通路
+noun.he-path	入口
+noun.he-path	入り口
+noun.he-path	扉
+noun.he-path	門
+noun.he-path	階段
+noun.he-path	航路
+noun.he-path	経路
+noun.he-path	ルート
+noun.he-path	架け橋
+noun.he-path	切符
+noun.he-path	一歩
+noun.he-path	輸送
+noun.he-path	移動
+noun.he-path	移送
+noun.he-path	搬送
+noun.he-path	転送
+noun.he-path	送還
+noun.he-path	入学
+noun.he-path	進学
+noun.he-path	編入
+noun.he-path	転校
+noun.he-path	通学
+noun.he-path	通勤
+noun.he-path	就職
+noun.he-path	入社
+noun.he-path	入部
+noun.he-path	入団
+noun.he-path	入隊
+noun.he-path	留学
+noun.he-path	遠征
+noun.he-path	旅
+noun.he-path	旅行
+noun.he-path	出張
+noun.he-path	帰還
+noun.he-path	帰国
+noun.he-path	帰郷
+noun.he-path	入国
+noun.he-path	移住
+noun.he-path	移籍
+noun.he-path	異動
+noun.he-path	転属
+noun.he-path	配属
+noun.he-path	転移
+noun.he-path	引っ越し
+noun.he-path	輿入れ
+noun.he-path	嫁入り
+noun.he-path	婿入り
+noun.he-path	移行
+noun.he-path	到着
+noun.he-path	到達
+noun.he-path	接近
+noun.he-path	突入
+noun.he-path	上陸
+noun.he-path	潜入
+noun.he-path	侵入
+noun.he-path	進入
+noun.he-path	乗り換え
+noun.he-path	直行
+noun.he-path	避難
+noun.he-path	誘導
+noun.he-path	案内
+noun.he-path	招待
+noun.he-path	復帰
+noun.he-path	回帰
+noun.he-path	変化
+noun.he-path	変身
+noun.he-path	変更
+noun.he-path	転換
+noun.he-path	進化
+noun.he-path	昇格
+noun.he-path	昇進
+noun.he-path	降格
+noun.he-path	出発
+noun.he-path	出航
+noun.he-path	出撃
+noun.he-path	派遣
+noun.he-path	帰路
+noun.he-path	家路
+noun.he-path	片道
+noun.he-path	乗り降り
+noun.he-path	乗車
+noun.he-path	降車
+noun.he-path	搭乗
+noun.he-path	乗船
+noun.he-path	モデルチェンジ
+noun.he-path	改装
+noun.he-path	転向
+noun.he-path	転身
+noun.he-path	鞍替え
+noun.he-path	延焼
+noun.he-path	波及
+noun.he-path	伝播
+noun.he-path	ドッキング
+noun.he-path	接続
+noun.he-path	改修
+noun.he-path	改造
+noun.he-path	持ち込み
+noun.he-path	持込み
+noun.he-path	搬入
+noun.he-path	流入
+noun.he-path	進出
+noun.he-path	参入
+noun.he-path	出入り
+noun.he-path	立ち入り
+noun.he-path	アクセス
+noun.he-path	リンク
+noun.he-path	導き
+noun.he-path	お導き
+noun.he-path	誘い
+noun.he-path	マーチ
+noun.he-path	行進
+noun.he-path	旅立ち
+noun.he-path	激突
+noun.he-path	衝突
+noun.he-path	突撃
+noun.he-path	体当たり
+noun.noda-plain	はず
+noun.noda-plain	筈
+noun.noda-plain	わけ
+noun.noda-plain	訳
+noun.noda-plain	もの
+noun.noda-plain	物
+noun.noda-plain	もん
+noun.noda-plain	こと
+noun.noda-plain	事
+noun.noda-plain	だけ
+noun.noda-plain	ばかり
+noun.noda-plain	のみ
+noun.noda-plain	ところ
+noun.noda-plain	所
+noun.noda-plain	つもり
+noun.noda-plain	よう
+noun.noda-plain	様
+noun.noda-plain	通り
+noun.noda-plain	せい
+noun.noda-plain	次第
+noun.noda-plain	まま
 noun.honored-person	お客様
 noun.honored-person	お客さま
 noun.honored-person	お客さん
@@ -4336,6 +4661,16 @@ verb.happening	ほっと
 verb.happening	凹
 verb.happening	沁み
 verb.happening	失
+verb.happening	焼け
+verb.happening	役立
+verb.happening	ムカつ
+verb.happening	むかつ
+verb.happening	驚
+verb.happening	疲れ
+verb.happening	年老い
+verb.happening	当た
+verb.happening	狂
+verb.happening	負け
 
 verb.stay	待
 verb.stay	見
@@ -4645,6 +4980,22 @@ verb.notyet	気がつ
 verb.notyet	気が付
 verb.notyet	覚え
 verb.notyet	憶え
+verb.unattained	愛され
+verb.unattained	報われ
+verb.unattained	褒められ
+verb.unattained	祝福され
+verb.unattained	歓迎され
+verb.unattained	尊敬され
+verb.unattained	理解され
+verb.unattained	信用され
+verb.unattained	信頼され
+verb.unattained	評価され
+verb.unattained	選ばれ
+verb.unattained	救われ
+verb.unattained	必要とされ
+verb.unattained	好かれ
+verb.unattained	慕われ
+verb.unattained	恵まれ
 
 verb.passive-after-object	命じ
 verb.passive-after-object	禁じ
@@ -5131,6 +5482,52 @@ verb.vehicle-travel	帰郷
 verb.vehicle-travel	ドライブ
 verb.vehicle-travel	かか
 verb.vehicle-travel	掛か
+verb.youni-seem	見え
+verb.youni-seem	見せ
+verb.youni-seem	見せかけ
+verb.youni-seem	見せ掛け
+verb.youni-seem	みえ
+verb.youni-seem	みせ
+verb.youni-seem	思え
+verb.youni-seem	思われ
+verb.youni-seem	感じ
+verb.youni-seem	感じられ
+verb.youni-seem	聞こえ
+verb.youni-purpose	する
+verb.youni-purpose	なる
+verb.youni-purpose	言う
+verb.youni-purpose	言われる
+verb.youni-purpose	頼む
+verb.youni-purpose	頼まれる
+verb.youni-purpose	祈る
+verb.youni-purpose	願う
+verb.youni-purpose	命じる
+verb.youni-purpose	命じられる
+verb.youni-purpose	命令
+verb.youni-purpose	指示
+verb.youni-purpose	伝える
+verb.youni-purpose	求める
+verb.youni-purpose	促す
+verb.youni-purpose	勧める
+verb.youni-purpose	努める
+verb.youni-purpose	心がける
+verb.youni-purpose	心掛ける
+verb.youni-purpose	気をつける
+verb.youni-purpose	気を付ける
+verb.youni-purpose	注意
+verb.youni-purpose	仕向ける
+verb.youni-purpose	言い聞かせる
+verb.youni-purpose	練習
+verb.youni-purpose	工夫
+verb.youni-purpose	準備
+verb.youni-purpose	頑張る
+verb.youni-purpose	努力
+verb.youni-purpose	説明
+verb.youni-purpose	指導
+verb.youni-purpose	教える
+verb.youni-purpose	願い
+verb.youni-purpose	お願い
+verb.youni-purpose	祈り
 verb.transfer	あげ
 verb.transfer	差し上げ
 verb.transfer	さしあげ
@@ -5331,6 +5728,13 @@ word.comitative	同じ
 word.comitative	同様
 word.comitative	一緒
 word.comitative	共
+word.comitative	酌み交わす
+word.comitative	語らう
+word.comitative	談笑
+word.comitative	雑談
+word.comitative	お喋り
+word.comitative	おしゃべり
+word.comitative	乾杯
 
 word.do-angle	変
 word.do-angle	曲
@@ -5538,6 +5942,26 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+word.clause-start	そう
+word.clause-start	こう
+word.clause-start	ああ
+word.clause-start	でも
+word.clause-start	だが
+word.clause-start	だけど
+word.clause-start	けど
+word.clause-start	しかし
+word.clause-start	だから
+word.clause-start	それでも
+word.clause-start	なのに
+word.clause-pronoun	それ
+word.clause-pronoun	これ
+word.clause-pronoun	あれ
+word.clause-pronoun	そこ
+word.clause-pronoun	ここ
+word.clause-pronoun	あそこ
+word.clause-pronoun	そっち
+word.clause-pronoun	こっち
+word.clause-pronoun	あっち
 
 word.survival	命
 word.survival	いのち
