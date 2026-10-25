@@ -316,6 +316,7 @@
 //= verb.naming	Verbs that take what they write or call something with と (呼ぶ, 名乗る).
 //= verb.ni-partner	Verbs whose own argument is a person in に, the one met, beaten, followed or leaned on (勝つ, 会う, 頼る, 逆らう): their potential does not make that person the one who can (私に勝てる 나를 이길 수 있다, not 내가).
 //= verb.notyet	Stems of the verbs of noticing or remembering whose negative takes 못하다 (気づかない 눈치채지 못하다).
+//= verb.unattained	Stems of the passives of something one wishes for and does not get (愛され, 報われ, 褒められ), whose negative takes 못하다 (愛されなかった 사랑받지 못했다), not a concession or a condition (愛されなくても 사랑받지 않아도); not a permission refused (許されない 허락되지 않는다).
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
@@ -4840,6 +4841,22 @@ verb.notyet	気がつ
 verb.notyet	気が付
 verb.notyet	覚え
 verb.notyet	憶え
+verb.unattained	愛され
+verb.unattained	報われ
+verb.unattained	褒められ
+verb.unattained	祝福され
+verb.unattained	歓迎され
+verb.unattained	尊敬され
+verb.unattained	理解され
+verb.unattained	信用され
+verb.unattained	信頼され
+verb.unattained	評価され
+verb.unattained	選ばれ
+verb.unattained	救われ
+verb.unattained	必要とされ
+verb.unattained	好かれ
+verb.unattained	慕われ
+verb.unattained	恵まれ
 
 verb.passive-after-object	命じ
 verb.passive-after-object	禁じ

@@ -1858,13 +1858,21 @@ void NotYet(Flusher& f) {
         const std::string_view te = it->DirectSurface();
         const bool potential = (te.ends_with("て") || te.ends_with("で")) &&
                                (it->detail->record == 4 || it->EntryText(it->selected) == "할 수 &HN@");
-        if (!potential && !std::ranges::any_of(dict::ClassMembers("verb.notyet"),
-                                               [&](std::string_view v) { return it->group->surface.ends_with(v); })) {
+        // A passive of something wished for (verb.unattained) that does not come is not attained, not
+        // refused: 愛されなかった 사랑받지 못했다; not a concession or a condition (認められなくても).
+        const std::string_view surface = it->group->surface;
+        const Entry* after = n->DirectEntry(n->DirectIndex());
+        const bool received = after != nullptr && !Has(after->dst, "도") && !Has(after->dst, "면") &&
+                              std::ranges::any_of(dict::ClassMembers("verb.unattained"),
+                                                  [&](std::string_view v) { return surface.ends_with(v); });
+        const bool remember = surface.ends_with("覚え") || surface.ends_with("憶え");
+        if (!potential && !received && !std::ranges::any_of(dict::ClassMembers("verb.notyet"),
+                                                            [&](std::string_view v) { return surface.ends_with(v); })) {
             continue;
         }
         Entry* d = n->DirectEntry(n->DirectIndex());
-        // A plain ない (気付かない) changes only before a terminal ending; its attributive keeps 않다.
-        if (!potential && n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
+        // A plain ない of 覚える (覚えない) is not learning, which keeps 않다 before an attributive.
+        if (remember && n->group->surface == "な" && (d == nullptr || d->dst.starts_with("4"))) continue;
         if (potential) {
             if (it->detail->record == 4) {
                 it->detail->record = 0;
@@ -1878,7 +1886,6 @@ void NotYet(Flusher& f) {
         // 覚えていない says the memory is not there now (기억하지 못한다), but read as learning
         // or feeling it is an action not done, past like other verbs (単語をまだ覚えていない
         // 아직 배우지 못했다).
-        const bool remember = it->group->surface.ends_with("覚え") || it->group->surface.ends_with("憶え");
         if (remember && !ItemLemma(f, it, it->selected).starts_with("기억") && (d->dst == "1는다" || d->dst == "1다")) {
             n->AssignDirectSlot(n->DirectIndex(), "5다");
             continue;
@@ -1888,6 +1895,24 @@ void NotYet(Flusher& f) {
                 n->AssignDirectSlot(n->DirectIndex(), "4다" + d->dst.substr(form.size()));
                 break;
             }
+        }
+        // The attributive 4 of a plain ない (않는) is 하는 on 못하다 (気付かない隣 눈치채지 못하는);
+        // after ている it stays 한, what has not happened (気付いてないようで 깨닫지 못한 것 같아서).
+        const bool perfect = te.ends_with("て") || te.ends_with("で");
+        // Pretending not to notice (気付かない振り 깨닫지 않는 척) is done on purpose.
+        const Item* noun = n->After();
+        const bool pretend = noun != nullptr && (noun->group->surface.starts_with("振り") ||
+                                                 noun->group->surface.starts_with("ふり") ||
+                                                 noun->group->surface.starts_with("フリ"));
+        if (pretend && d->dst.starts_with("4")) {
+            n->AssignEntrySurface(n->selected, "$DH@");
+            continue;
+        }
+        if (d->dst.starts_with("4") && !d->dst.starts_with("4다") && !perfect) {
+            n->AssignDirectSlot(n->DirectIndex(), "1는" + d->dst.substr(1));
+        } else if (perfect && d->dst.starts_with("4데")) {
+            // ていないけど is 못했는데, not 못한데.
+            n->AssignDirectSlot(n->DirectIndex(), "5는" + d->dst.substr(1));
         }
     }
 }
