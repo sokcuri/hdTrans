@@ -19,9 +19,8 @@ HD_TEST(word_unplaced_kana) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        internal::Memory memory;
         const std::string line(text);
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     auto has = [](const std::string& s, std::string_view part) { return s.find(part) != std::string::npos; };

@@ -58,10 +58,6 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir) {
 
 namespace internal {
 
-struct SessionState {
-    Memory memory;
-};
-
 // Copies the marker families the dictionaries made at load into out, under the ids they have
 // there; the dictionaries' targets refer to these ids.
 void CopyGenerated(const userdict::Families& from, output::Families& out) {
@@ -245,15 +241,13 @@ struct Access {
 
     // Takes the engine's current dictionaries into a session that holds others.
     static void Refresh(const Engine& e, std::shared_ptr<const dict::Snapshot>& snap,
-                        std::shared_ptr<Generated>& generated, std::shared_ptr<const filter::Filters>& filters,
-                        std::unique_ptr<SessionState>& state) {
+                        std::shared_ptr<Generated>& generated, std::shared_ptr<const filter::Filters>& filters) {
         std::lock_guard<std::mutex> lock(e.mu_);
         StartReload(e, std::chrono::steady_clock::now(), kCheckInterval);
         if (snap == e.snapshot_ && filters == e.filters_) return;
         snap = e.snapshot_;
         generated = e.generated_;
         filters = e.filters_;
-        state = std::make_unique<SessionState>();
     }
 
     static bool CheckNow(const Engine& e, bool wait) {
@@ -408,8 +402,7 @@ std::shared_ptr<const dict::Snapshot> Engine::Dictionaries() const {
 }
 
 Session::Session(const Engine& engine, bool reference, bool cg, bool misread)
-    : engine_(engine), reference_(engine.reference_ || reference), cg_(cg), misread_(misread),
-      state_(std::make_unique<internal::SessionState>()) {
+    : engine_(engine), reference_(engine.reference_ || reference), cg_(cg), misread_(misread) {
     std::lock_guard<std::mutex> lock(engine.mu_);
     snapshot_ = engine.snapshot_;
     generated_ = engine.generated_;
@@ -421,7 +414,7 @@ Session::~Session() = default;
 std::string Session::Translate(std::string_view text) { return TranslateObserved(text, {}); }
 
 std::string Session::TranslateObserved(std::string_view text, const internal::StageObserver& observer) {
-    if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_, state_);
+    if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_);
     if (!snapshot_) return {};
     std::vector<std::string> lines;
     for (const std::string_view line : text::Lines(text)) lines.emplace_back(line);
@@ -432,7 +425,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.speech = speech_;
     options.filters = filters_.get();
     const std::vector<std::string> translated =
-        internal::TranslateDocument(*snapshot_, *generated_, lines, state_->memory, observer, options);
+        internal::TranslateDocument(*snapshot_, *generated_, lines, observer, options);
     std::string out;
     for (std::size_t i = 0; i < translated.size(); i++) {
         if (i > 0) out += '\n';
@@ -443,7 +436,6 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
 
 void Session::Reset() {
     std::lock_guard<std::mutex> lock(engine_.mu_);
-    state_ = std::make_unique<internal::SessionState>();
     snapshot_ = engine_.snapshot_;
     generated_ = engine_.generated_;
     filters_ = engine_.filters_;

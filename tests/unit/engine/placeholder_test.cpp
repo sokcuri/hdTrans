@@ -26,9 +26,8 @@ const std::string kRows =
 
 std::string Translate(const dict::Snapshot& snap, const std::string& line) {
     const auto generated = internal::NewGenerated(snap);
-    internal::Memory memory;
     const std::string lines[] = {line};
-    return internal::TranslateDocument(snap, *generated, lines, memory, {})[0];
+    return internal::TranslateDocument(snap, *generated, lines, {})[0];
 }
 
 }  // namespace

@@ -19,9 +19,8 @@ HD_TEST(word_finished_predicate) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        internal::Memory memory;
         const std::string line(text);
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     HD_CHECK_EQ(translate("名刺まで渡してるんですからね。"), "명함까지 건네주고 있으니까요.");

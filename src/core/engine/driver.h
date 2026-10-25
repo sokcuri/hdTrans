@@ -87,12 +87,6 @@ struct QuoteCarry {
     int lines = 0;
 };
 
-struct Memory {
-    std::shared_ptr<pipeline::DocumentHistory> document;
-    word::SessionSenses senses;
-    QuoteCarry quotes;
-};
-
 struct TranslationOptions {
     bool reference = false;
     word::Improvements wordImprovements;
@@ -110,11 +104,11 @@ struct TranslationOptions {
     Speech speech = Speech::Strict;
 };
 
-// Translates the lines of one call as one document: the registry and the document context
-// merge retained evidence with this call. Returns the lines translated (each keeps its
-// "\r"). Only the new lines update memory.
+// Translates the lines of one call as one document. Nothing is kept from one call to the
+// next: the names, speech and senses of a call come from its own lines. Returns the lines
+// translated (each keeps its "\r").
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
-                                           std::span<const std::string> lines, Memory& memory,
+                                           std::span<const std::string> lines,
                                            const StageObserver& observer, const TranslationOptions& options = {});
 
 // Translates line (without "\n") as one piece with the word pipeline only.

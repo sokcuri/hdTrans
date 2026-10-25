@@ -626,13 +626,13 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
 }
 
 std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Generated& generated,
-                                                 std::span<const std::string> lines, Memory& memory,
+                                                 std::span<const std::string> lines,
                                                  const StageObserver& observer, const TranslationOptions& options,
                                                  std::span<const std::string> sourceLines) {
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
-        return TranslateDocumentPieces(*fallback, *replacement, lines, memory, observer, options, sourceLines);
+        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines);
     }
     if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
             return line.size() > text::kMaxLineBytes;
@@ -643,7 +643,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             for (std::string_view piece : text::TranslationPieces(line)) bounded.emplace_back(piece);
             ends.push_back(bounded.size());
         }
-        const auto translated = TranslateDocumentPieces(snap, generated, bounded, memory, observer, options, sourceLines);
+        const auto translated = TranslateDocumentPieces(snap, generated, bounded, observer, options, sourceLines);
         if (translated.size() != bounded.size()) return std::vector<std::string>(lines.begin(), lines.end());
         std::vector<std::string> joined(lines.size());
         for (std::size_t i = 0, piece = 0; i < ends.size(); i++) {
@@ -652,17 +652,14 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         return joined;
     }
     const std::unique_ptr<pipeline::DocumentContext> doc = pipeline::BuildDocument(
-        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin, &memory.document);
+        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin);
 
     Scratch s;
-    word::SessionSenses pending;
-    if (!options.reference && (options.wordImprovements.documentSenses || options.selectShadow)) {
-        if (snap.Mapped()) { pending = memory.senses; s.sessionSenses = &pending; }
-        else s.sessionSenses = &memory.senses;
-    }
+    word::SessionSenses senses;
+    if (!options.reference && (options.wordImprovements.documentSenses || options.selectShadow)) s.sessionSenses = &senses;
     std::vector<std::string> out;
     out.reserve(lines.size());
-    QuoteCarry carry = memory.quotes;
+    QuoteCarry carry;
     const std::vector<bool> closed = ClosedCarries(lines, carry);
     for (std::size_t i = 0; i < lines.size(); i++) {
         if (observer.line) observer.line(observer.context, static_cast<int>(i));
@@ -680,12 +677,8 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
-        return TranslateDocumentPieces(*fallback, *replacement, lines, memory, observer, options, sourceLines);
+        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines);
     }
-    if (s.sessionSenses == &pending) memory.senses = std::move(pending);
-    memory.senses.Trim();
-    memory.quotes = carry;
-    pipeline::RememberDocument(snap, sourceLines, memory.document);
     return out;
 }
 
@@ -762,7 +755,7 @@ void Filter(const filter::Filters& f, filter::Stage stage, std::string& line, fi
 }  // namespace
 
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
-                                           std::span<const std::string> lines, Memory& memory,
+                                           std::span<const std::string> lines,
                                            const StageObserver& observer, const TranslationOptions& options) {
     if (!options.filters) {
         if (observer.filterLog) {
@@ -772,7 +765,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
                 FilterSnapshot(observer, "PRE", line);
             }
         }
-        auto out = TranslateDocumentPieces(snap, generated, lines, memory, observer, options, lines);
+        auto out = TranslateDocumentPieces(snap, generated, lines, observer, options, lines);
         if (observer.filterLog) {
             for (std::size_t i = 0; i < out.size() && i < lines.size(); ++i) {
                 if (lines[i].empty() || lines[i] == "\r") continue;
@@ -791,7 +784,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
         filter::KeepSpacesAfterNumbers(lines[i], filtered[i]);
         if (!lines[i].empty() && lines[i] != "\r") FilterSnapshot(observer, "PRE", filtered[i]);
     }
-    std::vector<std::string> out = TranslateDocumentPieces(snap, generated, filtered, memory, observer, options, filtered);
+    std::vector<std::string> out = TranslateDocumentPieces(snap, generated, filtered, observer, options, filtered);
     // An empty input line is not post-filtered either.
     for (std::size_t i = 0; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {

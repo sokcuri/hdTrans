@@ -45,18 +45,16 @@ HD_TEST(word_copies_read_one_by_one) {
         {"海辺、海辺町", "해변, 바닷가 마을"},  // the next copy starts a longer word
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
     // Past the depth limit of the word search every copy is still read (no kana left).
     std::string many;
     for (int i = 0; i < 301; i++) many += "かお";
-    hdTrans::internal::Memory memory;
     const std::vector<std::string> lines = {many};
-    const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+    const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
     HD_REQUIRE(out.size() == 1);
     HD_CHECK(out[0].find("か") == std::string::npos && out[0].find("お") == std::string::npos);
 }
@@ -72,9 +70,8 @@ HD_TEST(word_copies_adjective_cries) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        hdTrans::internal::Memory memory;
         const std::string line(text);
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     HD_CHECK_EQ(translate("痛い痛い"), "아파 아파");
@@ -115,9 +112,8 @@ HD_TEST(word_copies_cried_nouns) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        hdTrans::internal::Memory memory;
         const std::string line(text);
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     HD_CHECK_EQ(translate("好き好き好き、大好き"), "좋아 좋아 좋아, 너무 좋아");  // before a comma

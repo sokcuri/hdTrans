@@ -37,9 +37,8 @@ HD_TEST(word_question_word_fragment) {
         {"どこ行くか犬", "어디 가는지 가"},  // the か after the verb's own kana closes a question
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }

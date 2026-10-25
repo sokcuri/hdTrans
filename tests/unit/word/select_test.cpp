@@ -171,7 +171,7 @@ HD_TEST(word_select_senses_run_first) {
                     : line.Add("声", {{"소리"}, {"음"}}, {word::Provenance::LocalRule, 2});
                 word::Select(line.flusher);
                 const word::Provenance layer = triggered ? word::Provenance::Sense : word::Provenance::SenseDefault;
-                const int row = triggered ? 107 : 922;
+                const int row = triggered ? 107 : 923;
                 HD_CHECK_EQ(it.selected, matching ? 1 : 0);
                 CheckChoice(it.choice, layer, row);
                 if (matching) CheckTargets(it, {"소리", "목소리", "음"});

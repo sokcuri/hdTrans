@@ -1,0 +1,41 @@
+# 규칙: LEX-61
+rule	input	expected	kind	layer
+normalize:ikanai	「そうはいかねえんだよ」	「그렇게는 되지 않아」	fix	normalize
+normalize:ikanai	「そういうわけにはいかねえんだよ！」	「그럴 수는 없어!」	fix	normalize
+normalize:ikanai	「ここで死ぬわけにはいかん」	「여기서 죽을 수는 없다」	fix	normalize
+normalize:ikanai	「いいかねえ」	「좋은가 응」	keep	normalize
+normalize:ikanai	「それはいかん！」	「그건 안돼!」	keep	normalize
+dict:ikanai	そういうわけにはいかない。	그럴 수는 없다.	fix	lookup
+dict:ikanai	そういうわけにはいきません。	그런 수는 없어요.	fix	lookup
+cx:betsuni-not:10	「べ、別にあんたのためじゃないんだからね！」	「따, 딱히 너를 위해서가 아니니까!」	fix	rewrites
+cx:betsuni-not:10	別に用事があるわけじゃない。	딱히 용무가 있는 건 아니다.	fix	rewrites
+cx:betsuni-not:10	別に怒ってない。	별로 화내지 않다.	keep	rewrites
+cx:prohibit-particle:10	「勘違いしないでよね！」	「착각하지 말아!」	fix	rewrites
+cx:prohibit-particle:20	「勘違いしないでね」	「착각하지 말아」	fix	rewrites
+cx:prohibit-particle:10	勘違いしないでよね、と言った。	착각하지 않고지, 라고 말했다.	keep	rewrites
+cx:suki-de:10	「好きでやってるわけじゃないわよ」	「좋아서 하고 있는 게 아니야」	fix	rewrites
+cx:suki-de:10	「好きでこうなったんじゃない」	「좋아서 이렇게 된 거 아니야」	fix	rewrites
+cx:suki-de:10	「好きでいたい」	「좋아하고 있고 싶다」	keep	rewrites
+dict:passive-rows	古くからそう伝えられている。	예로부터 그렇게 전해지고 있다.	fix	lookup
+dict:passive-rows	伝説が伝えられている。	전설이 전해지고 있다.	fix	lookup
+cx:mou-scold:10	「もう、ばかぁ……」	「정말, 바보……」	fix	rewrites
+cx:mou-scold:10	「もうバカ！」	「정말 바보!」	fix	rewrites
+cx:mou-scold:10	もうバカはやめた。	이제 바보는 그만두었다.	keep	rewrites
+cx:gentle-request:10	「優しくしてね」	「부드럽게 해 줘」	fix	rewrites
+cx:gentle-request:20	「優しく、してね」	「부드럽게, 해 줘」	fix	rewrites
+cx:gentle-request:10	「みんなに優しくしてね」	「모두에게 다정하게 해」	keep	rewrites
+cx:voice-out:10	「声出ちゃう」	「소리 나와버린다」	fix	rewrites
+sense:koe-sound	「声が漏れる」	「소리가 샌다」	fix	senses
+cx:voice-out:10	「彼の声が聞こえる」	!rule:cx:voice-out:10	keep	rewrites
+dict:jisjk:374181	「悪いんだけど」	「미안한데」	fix	local
+dict:jisjk:374181	あいつが悪いんだけど、許してやれ。	저 녀석이 나쁜데, 용서해 주어라.	keep	local
+dict:jisjk:346797	そんなわけにはいかん。	그런 수는 없다.	fix	local
+dict:jisjk:346797	そんな怒るなよ。	rule:dict:jisjk:346797=그렇게	keep	local
+cx:gentle-request:20	「みんなに、優しく、してね」	!rule:cx:gentle-request:20	keep	rewrites
+cx:prohibit-particle:20	「無理しないでね、お願い」	!rule:cx:prohibit-particle:20	keep	rewrites
+cx:suki-de:10	僕は皆さんの穏やかなレスが好きでずっと見ていた。	!rule:cx:suki-de:10	keep	rewrites
+cx:suki-de:10	実は無類の日本料理好きで通っており、	!rule:cx:suki-de:10	keep	rewrites
+cx:betsuni-not:10	別に好きで乗っている訳じゃない。	딱히 좋아서 타고 있는 것이 아니다.	fix	rewrites
+cx:mou-scold:10	あーもう、バカばっかり！	아-정말, 바보뿐!	fix	rewrites
+cx:voice-out:10	つい熱くなって、声に出してしまった。	!rule:cx:voice-out:10	keep	rewrites
+cx:voice-out:10	「声が出ない」	!rule:cx:voice-out:10	keep	rewrites

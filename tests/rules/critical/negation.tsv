@@ -49,3 +49,5 @@ cx:trailing-ja:10	「べ、別にそんなたいした理由じゃ……」	lack
 cx:trailing-ja:10	「あ、まさか、あの人からの電話じゃ……」	lacks:전화다	fix	rewrites
 cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ……」	has:작정은	fix	rewrites
 cx:trailing-ja:10	「……それで、アルファさんは、幽霊じゃ……ないんだよな？」	has:아닌	keep	rewrites
+normalize:ikanai	「そういうわけにはいかねえんだよ！」	has:없어	fix	normalize
+normalize:ikanai	「そうはいかねえんだよ」	has:되지 않아	fix	normalize

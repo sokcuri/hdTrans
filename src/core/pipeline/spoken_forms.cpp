@@ -159,7 +159,15 @@ bool ClippedAdjective(std::string_view s, size_t pos, Match& m) {
 
 constexpr std::u32string_view kNegativeEnd = U"！!？?。、…‥」』ぞよわがしけっ";
 
-// ([一-龥々][らわかがまば]|許さ|わから|しら|かまわ)ん([！!？?。、…‥」』ぞよわがしけっ]|$)
+// Whether before ends with a member of casual.ikanai-after.
+bool AfterIkanaiWord(std::string_view before) {
+    for (std::string_view w : dict::ClassMembers("casual.ikanai-after")) {
+        if (before.ends_with(w)) return true;
+    }
+    return false;
+}
+
+// ([一-龥々][らわかがまば]|許さ|わから|しら|かまわ|いか)ん([！!？?。、…‥」』ぞよわがしけっ]|$)
 bool NegativeN(std::string_view s, size_t pos, Match& m) {
     auto rest = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -171,6 +179,9 @@ bool NegativeN(std::string_view s, size_t pos, Match& m) {
         p = pos;
         if (Lit(s, p, w) && rest(p)) return true;
     }
+    // A kana いか after casual.ikanai-after is いく (わけにはいかん), not the いかん of それはいかん.
+    p = pos;
+    if (Lit(s, p, "いか") && AfterIkanaiWord(s.substr(0, pos)) && rest(p)) return true;
     return false;
 }
 
@@ -212,6 +223,14 @@ bool NegativeNee(std::string_view s, size_t pos, Match& m) {
     for (std::string_view stem : kNegativeNeeTa) {
         p = pos;
         if (Lit(s, p, stem) && Lit(s, p, "た") && rest(p)) return true;
+    }
+    // A kana いか at the start, after an opening quote or after casual.ikanai-after is いく (そうはいかねえ,
+    // 「いかねえよ), not いいかねえ.
+    p = pos;
+    if (Lit(s, p, "いか")) {
+        const std::string_view before = s.substr(0, pos);
+        if ((before.empty() || before.ends_with("「") || before.ends_with("『") || AfterIkanaiWord(before)) && rest(p))
+            return true;
     }
     for (std::string_view stem : kNegativeNeeStems) {
         p = pos;

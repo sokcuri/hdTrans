@@ -35,12 +35,11 @@ HD_TEST(engine_shadow_preserves_active_document_senses) {
         internal::TranslationOptions options;
         options.wordImprovements.documentSenses = true;
         options.selectShadow = shadow;
-        internal::Memory memory;
         Observed observed;
         internal::StageObserver observer;
         observer.context = &observed;
         observer.resolved = Observe;
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, memory, observer, options);
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, observer, options);
         HD_REQUIRE(out.size() == 2);
         HD_CHECK_EQ(out[0], std::string("도쿄,"));
         HD_CHECK_EQ(out[1], std::string("도쿄."));
@@ -69,12 +68,11 @@ HD_TEST(engine_shadow_preserves_active_scorer_ids) {
         options.scorers = active;
         options.selectRules = true;
         options.selectShadow = shadow;
-        internal::Memory memory;
         Observed observed;
         internal::StageObserver observer;
         observer.context = &observed;
         observer.resolved = Observe;
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, memory, observer, options);
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, observer, options);
         HD_REQUIRE(out.size() == 2);
         HD_CHECK_EQ(out[0], std::string("동경,"));
         HD_CHECK_EQ(out[1], std::string("동경."));

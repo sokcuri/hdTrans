@@ -494,9 +494,8 @@ std::string Registry::Label(std::string_view line, bool& script) {
 }
 
 DictFlags Registry::Flags(std::string_view s) {
-    auto& flags = sharedFlags_ ? sharedFlags_->values : flags_;
-    const auto cached = flags.find(std::string(s));
-    if (cached != flags.end()) return cached->second;
+    const auto cached = flags_.find(std::string(s));
+    if (cached != flags_.end()) return cached->second;
     DictFlags f;
     if (snap_ != nullptr && !s.empty()) {
         bool roleSem = false;
@@ -557,14 +556,7 @@ DictFlags Registry::Flags(std::string_view s) {
             if (f.layerName.empty() && IsHangulText(rec.target)) f.layerName = std::string(rec.target);
         }
     }
-    if (sharedFlags_) {
-        if (flags.size() >= 8192 || sharedFlags_->bytes + s.size() > 1024 * 1024) {
-            flags.clear();
-            sharedFlags_->bytes = 0;
-        }
-        sharedFlags_->bytes += s.size();
-    }
-    flags[std::string(s)] = f;
+    flags_[std::string(s)] = f;
     return f;
 }
 
