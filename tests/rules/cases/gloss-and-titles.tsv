@@ -24,7 +24,7 @@ dict:jisjk:101466	新編「第二航空戦隊」出撃せよ！	신편 「제2�
 normalize:military-time	ヒトニーマルマル。	1200.	fix	normalize
 normalize:military-time	ヒトマルーマルマル！	1000!	fix	normalize
 normalize:military-time	フタマルマルマル。	2000.	keep	normalize
-dict:jisjk:40280	あたしの勝手でしょ	내 제멋대로이지	fix	local
+dict:jisjk:40280	あたしの勝手でしょ	내 제멋대로지	fix	local
 dict:jisjk:40280	あたしの作ったケーキ	내가 만든 케이크	keep	local
 grammar:subject-pronoun	あたしが好き	나를 좋아해	fix	rewrites
 dict:jisjk:355685	あんたが沢山仕事できる	네가 많이 일할 수 있다	fix	local

@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:359210	無理だろうなぁ。	무리이겠지.	fix	local
+dict:jisjk:359210	無理だろうなぁ。	무리겠지.	fix	local
 dict:jisjk:359210	まあ、そうだろうな。	뭐, 그렇겠지.	fix	local
 dict:jisjk:359210	情報収集、忘れてないだろうな？	정보수집, 잊지 않겠지?	fix	local
 dict:jisjk:359210	読んだだろうな。	읽었겠지.	fix	local
