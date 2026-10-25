@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
-# Checks that the word classes src/core names (dict::InClass, dict::ClassMembers, always with a
-# literal set name; comments do not count) are the sets of classes.tsv: each named set has a doc
-# line and rows, and each set of the table is named somewhere, in the sources, by an @SET of the
-# construction table or by a class:SET trigger of senses.tsv (the engine checks those names when it
-# reads the tables).
+# Checks that the word classes src/core names (HDTRANS_CLASS, always with a literal set name;
+# comments do not count) are the sets of classes.tsv: each named set has a doc line and rows, and
+# each set of the table is named somewhere, in the sources, by an @SET of the construction table or
+# by a class:SET trigger of senses.tsv (the engine checks those names when it reads the tables). A
+# literal passed to a class function itself, which finds the class on every call, fails too.
 #   cmake -DSOURCE=<repository> -P word_classes.cmake
 if(NOT DEFINED SOURCE)
     message(FATAL_ERROR "SOURCE is required")
@@ -65,14 +65,19 @@ set(failures "")
 foreach(path IN LISTS sources)
     file(READ "${path}" code)
     strip_comments(code)
-    # The declarations take a ClassName.
-    string(REGEX MATCHALL "(InClass|ClassMembers)\\([ \t\r\n]*[^ \t\r\n]" calls "${code}")
+    # A literal passed to a class function finds its class on every call; HDTRANS_CLASS finds it
+    # once for the call site.
+    string(REGEX MATCHALL "(InClass|InClassRune|StartsWithMember|EndsWithMember|ClassMembers)\\([ \t\r\n]*\"[^\"]*\"" calls "${code}")
     foreach(call IN LISTS calls)
-        if(NOT call MATCHES "\"$" AND NOT call MATCHES "C$")
+        string(APPEND failures "${path}: a class named by a literal without HDTRANS_CLASS: ${call}\n")
+    endforeach()
+    string(REGEX MATCHALL "HDTRANS_CLASS\\([ \t\r\n]*[^ \t\r\n]" calls "${code}")
+    foreach(call IN LISTS calls)
+        if(NOT call MATCHES "\"$" AND NOT path MATCHES "/dict/classes\\.h$")
             string(APPEND failures "${path}: a class named without a literal: ${call}\n")
         endif()
     endforeach()
-    string(REGEX MATCHALL "(InClass|ClassMembers)\\([ \t\r\n]*\"[^\"]*\"" calls "${code}")
+    string(REGEX MATCHALL "HDTRANS_CLASS\\([ \t\r\n]*\"[^\"]*\"" calls "${code}")
     foreach(call IN LISTS calls)
         string(REGEX REPLACE ".*\"([^\"]*)\"$" "\\1" set "${call}")
         list(APPEND named "${set}")

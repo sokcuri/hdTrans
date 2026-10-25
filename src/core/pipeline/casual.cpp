@@ -188,9 +188,7 @@ bool Nna(std::string_view s, size_t pos, Match& m) {
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "んな")) return false;
-    for (const std::string_view w : dict::ClassMembers("casual.nna-word")) {
-        if (p >= w.size() && s.substr(p - w.size(), w.size()) == w) return false;
-    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("casual.nna-word"), s.substr(0, p)) > 0) return false;
     size_t q = p;
     if (OneOf(s, q, U"よぁー")) return Done(s, m, p, q, 2);
     const bool ok = Repeat(s, p, InSet(U"っッ"), 0, 1, [&](size_t r) {
@@ -528,17 +526,16 @@ bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!ClauseStart(s, start) || !Lit(s, p, "そ")) return false;
     const std::string_view rest = s.substr(p);
-    auto starts = [&](std::span<const std::string_view> forms, bool end) {
-        for (const std::string_view f : forms) {
-            if (!rest.starts_with(f)) continue;
-            if (!end || f.size() == rest.size()) return true;
-            const char32_t next = text::DecodeRune(rest.substr(f.size())).cp;
-            return !IsHiraganaRune(next) && !IsKanji(next);
-        }
-        return false;
+    // Whether a form of n bytes starts rest, with end before no kana or kanji.
+    auto starts = [&](std::size_t n, bool end) {
+        if (n == 0) return false;
+        if (!end || n == rest.size()) return true;
+        const char32_t next = text::DecodeRune(rest.substr(n)).cp;
+        return !IsHiraganaRune(next) && !IsKanji(next);
     };
-    if (!starts(dict::ClassMembers("copula.short-so"), false) && !starts(dict::ClassMembers("copula.short-so-final"), true) &&
-        (AfterComma(s, start) || !starts(dict::ClassMembers("copula.short-so-sentence"), true))) {
+    if (!starts(dict::StartsWithMember(HDTRANS_CLASS("copula.short-so"), rest), false) &&
+        !starts(dict::StartsWithMember(HDTRANS_CLASS("copula.short-so-final"), rest), true) &&
+        (AfterComma(s, start) || !starts(dict::StartsWithMember(HDTRANS_CLASS("copula.short-so-sentence"), rest), true))) {
         return false;
     }
     m.end = p;

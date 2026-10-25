@@ -44,7 +44,7 @@ bool SuruAfterMo(std::string_view s) {
 // An ichidan stem keeps its volitional よう.
 bool WayOfDoing(int patternKind, std::string_view s, std::string_view next) {
     if (patternKind == 7 || patternKind == 9 || patternKind == 10 || patternKind == 11 || patternKind == 13) return false;
-    for (const std::string_view m : dict::ClassMembers("verb.way-of-doing")) {
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("verb.way-of-doing"))) {
         if (s.starts_with(m)) return true;
         // the mark or particle after the bare form starts the next token
         if (!s.empty() && m.size() > s.size() && m.starts_with(s) && next.starts_with(m.substr(s.size()))) return true;
@@ -258,7 +258,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if (WidthOf(tail) >= 6) middle = Cut(tail, 2, 4);
         return Starts(tail, kJaI) && (middle == kJaMasu || middle == kJaMase || middle == kJaMashi);
     };
-    for (const std::string_view stem : dict::ClassMembers("stem.request")) {
+    for (const std::string_view stem : dict::ClassMembers(HDTRANS_CLASS("stem.request"))) {
         if (const std::size_t i = record.source.find(stem);
             i != std::string_view::npos && i == record.source.size() - stem.size() && politeRequest()) {
             d.patternKind = 8;
@@ -604,7 +604,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         patternWidth += WidthOf(Conjugation(7, 6));
         base.kind = 6;
         Group* g = endingGroup(after());
-        const std::span<const std::string_view> head = dict::ClassMembers("ko.progressive-head");
+        const std::span<const std::string_view> head = dict::ClassMembers(HDTRANS_CLASS("ko.progressive-head"));
         if (g != nullptr && (ending == nullptr || static_cast<int>(form) + g->length > ending->length) && !head.empty() &&
             ProgressiveEndings(*g, base, head.front())) {
             ending = g;
@@ -622,7 +622,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     std::string_view auxHead;
     if (base.kind == 17 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(0, 7))) {
         const std::string_view iru = rest.substr(Conjugation(0, 7).size());
-        const std::span<const std::string_view> head = dict::ClassMembers("ko.completive-head");
+        const std::span<const std::string_view> head = dict::ClassMembers(HDTRANS_CLASS("ko.completive-head"));
         std::size_t n = 0;  // bytes of the form of いる
         for (const int branch : {0, 6}) {
             const std::string form = std::string(kJaI) + std::string(Conjugation(7, branch));

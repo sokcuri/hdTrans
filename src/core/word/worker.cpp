@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/word/strings.h"
 #include "core/tokenizer/tokenize.h"
 
@@ -54,6 +56,32 @@ int Worker::QuoteDepth(int j) {
     }
     if (j < 0) return settings.quoteDepth;
     return quoteDepths_[std::min(static_cast<std::size_t>(j), quoteDepths_.size() - 1)];
+}
+
+OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open) {
+    while (!s.empty()) {
+        const text::Rune c = text::DecodeRune(s);
+        const std::string_view mark = s.substr(0, std::max<std::size_t>(c.size, 1));
+        if (c.cp == output::kEmphasisOpen) open.spelled++;
+        if (c.cp == output::kEmphasisClose && open.spelled > 0) open.spelled--;
+        if (dict::InClass(HDTRANS_CLASS("mark.thought-open"), mark)) open.thought++;
+        if (dict::InClass(HDTRANS_CLASS("mark.thought-close"), mark) && open.thought > 0) open.thought--;
+        s.remove_prefix(mark.size());
+    }
+    return open;
+}
+
+OpenMarks Worker::OpenMarksAt(int j) {
+    if (openMarks_.empty()) {
+        openMarks_.reserve(tokens.size() + 1);
+        OpenMarks open;
+        for (std::size_t i = 0; i < tokens.size(); i++) {
+            openMarks_.push_back(open);
+            open = OpenMarksAfter(tokens.Raw(i), open);
+        }
+        openMarks_.push_back(open);
+    }
+    return openMarks_[std::min(static_cast<std::size_t>(std::max(j, 0)), openMarks_.size() - 1)];
 }
 
 std::string_view Worker::NextText(int j) const {

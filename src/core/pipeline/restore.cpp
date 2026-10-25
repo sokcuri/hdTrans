@@ -1,6 +1,7 @@
 #include "core/pipeline/restore.h"
 
 #include <algorithm>
+#include <array>
 #include <map>
 #include <string>
 #include <string_view>
@@ -367,14 +368,16 @@ std::string KoreanCleanup(std::string_view s) {
     struct Row {
         std::string from, to, after;
     };
+    // The rows by the first byte of from, in table order.
     static const auto rows = [] {
-        std::vector<Row> parsed;
+        std::array<std::vector<Row>, 256> parsed;
         const std::string table = dict::ExtraBuiltinText("cleanup.tsv");
         dict::TsvReader reader(table, "//");
         while (reader.Next()) {
             const auto& f = reader.Fields();
             if (f.size() < 2 || f[0].empty()) continue;
-            parsed.push_back({std::string(f[0]), std::string(f[1]), f.size() >= 3 ? std::string(f[2]) : std::string()});
+            parsed[static_cast<unsigned char>(f[0][0])].push_back(
+                {std::string(f[0]), std::string(f[1]), f.size() >= 3 ? std::string(f[2]) : std::string()});
         }
         return parsed;
     }();
@@ -382,7 +385,7 @@ std::string KoreanCleanup(std::string_view s) {
     out.reserve(s.size());
     while (!s.empty()) {
         bool matched = false;
-        for (const auto& [from, to, after] : rows) {
+        for (const auto& [from, to, after] : rows[static_cast<unsigned char>(s.front())]) {
             if (!s.starts_with(from) || (after == "final" && !AfterFinalConsonant(out)) ||
                 (after == "attributive" && !AfterAttributive(out))) {
                 continue;
@@ -755,7 +758,7 @@ std::vector<Laugh> TypedLaughs(const std::vector<RuneAt>& src, const std::vector
     auto particle = [](char32_t r) {
         std::string one;
         text::AppendRune(one, r);
-        return dict::InClass("particle.after-letter", one);
+        return dict::InClass(HDTRANS_CLASS("particle.after-letter"), one);
     };
     // Whether the rune at i, on the side step of a run of width wide, joins the run into a word
     // or an address: a Latin letter or digit of the same width, a mark of kAddressMarks, or dots
@@ -823,14 +826,14 @@ std::vector<Laugh> OutputLaughs(const std::vector<RuneAt>& rs, const std::vector
 
 std::string WriteLaughter(std::string_view line, std::string_view source) {
     bool any = false;
-    for (const std::string_view m : dict::ClassMembers("mark.laughter")) any = any || line.find(m) != std::string_view::npos;
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.laughter"))) any = any || line.find(m) != std::string_view::npos;
     if (!any) return std::string(line);
     std::u32string laughs, before;
-    for (const std::string_view m : dict::ClassMembers("mark.laughter")) laughs += text::DecodeRune(m).cp;
-    for (const std::string_view m : dict::ClassMembers("mark.before-laughter")) before += text::DecodeRune(m).cp;
-    const std::string_view korean = dict::ClassMembers("ko.laughter").front();
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.laughter"))) laughs += text::DecodeRune(m).cp;
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.before-laughter"))) before += text::DecodeRune(m).cp;
+    const std::string_view korean = dict::ClassMembers(HDTRANS_CLASS("ko.laughter")).front();
     const char32_t koreanRune = text::DecodeRune(korean).cp;
-    const std::string bracketed = "(" + std::string(dict::ClassMembers("ko.bracketed-laughter").front()) + ")";
+    const std::string bracketed = "(" + std::string(dict::ClassMembers(HDTRANS_CLASS("ko.bracketed-laughter")).front()) + ")";
     const std::vector<RuneAt> rs = RunesAt(line);
     const std::vector<LaughRun> runs = LaughRuns(rs, laughs);
     const std::vector<RuneAt> src = RunesAt(source);

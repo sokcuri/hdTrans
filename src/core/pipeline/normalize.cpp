@@ -359,13 +359,13 @@ bool PauseEe(std::string_view s, size_t pos, Match& m) {
     const auto rune = [&] { return p < s.size() ? s.substr(p, At(s, p).size) : std::string_view(); };
     bool comma = false;
     if (!OneOf(s, p, U"…‥―─—")) {
-        if (!dict::InClass("mark.comma", rune())) return false;
+        if (!dict::InClass(HDTRANS_CLASS("mark.comma"), rune())) return false;
         p += At(s, p).size;
         comma = true;
     }
     const size_t at = p;
     if (!Lit(s, p, "え")) return false;
-    if (dict::InClass("mark.pause", rune())) {
+    if (dict::InClass(HDTRANS_CLASS("mark.pause"), rune())) {
         m.group[1] = Span(s, pos, at);
         m.group[2] = {};
         m.end = p;

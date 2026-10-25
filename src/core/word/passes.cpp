@@ -225,7 +225,7 @@ Phrase FindPhrase(Flusher& f) {
                 if (const Item* prev = it->prev;
                     prev != nullptr && prev->detail->Yougo() && At(prev->Code(0), 0) == '4' &&
                     (prev->DirectSurface().ends_with(kJaTe) || prev->DirectSurface().ends_with(kJaDe)) &&
-                    dict::InClass("aux.te-kana-stem", it->group->surface)) {
+                    dict::InClass(HDTRANS_CLASS("aux.te-kana-stem"), it->group->surface)) {
                     break;
                 }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
