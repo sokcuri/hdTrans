@@ -15,7 +15,7 @@ rewrite:offer-promise	ジャーヴィスが、紅茶いれてあげる！	자비
 rewrite:offer-promise	今ここでケリ付けてやる！	지금 여기서 끝장 내 준다!	keep	rewrites
 rewrite:offer-promise	この那智の本当の戦、見せてやる！	이 나치의 진정한 싸움, 보여 준다!	keep	rewrites
 rewrite:offer-promise	あそこに隱れてやる！	저기에 숨어 준다!	keep	rewrites
-rewrite:offer-promise	いっちばんいい改二になってやる！	일치 번 좋은 개2가 되어 준다!	keep	rewrites
+rewrite:offer-promise	いっちばんいい改二になってやる！	제일 좋은 개2가 되어 준다!	keep	rewrites
 rewrite:offer-promise	やったげる！	해 줄게!	keep	rewrites
 rewrite:offer-promise	だから私が今度はお前から全てを奪ってやる！	그러니까 내가 이번에는 너에게서 모든 것을 빼앗아 준다!	keep	rewrites
 rewrite:offer-promise	乗ってやる！	타 준다!	keep	rewrites

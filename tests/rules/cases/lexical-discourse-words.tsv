@@ -1,0 +1,22 @@
+# 규칙: LEX-58
+rule	input	expected	kind	layer
+dict:function-nouns:56	さすがは夢の世界だ。	역시 꿈의 세계다.	fix	defaults
+dict:function-nouns:56	さすがは公爵家の令嬢ね。	역시 공작가의 영애네.	fix	defaults
+dict:function-nouns:56	さすがだ。	역시다.	keep	defaults
+dict:function-nouns:58	だがしかし、二十二歳だった私の手は大人の手だった。	하지만, 22세였던 내 손은 어른의 손이었다.	fix	defaults
+dict:function-nouns:58	だが、しかし。	하지만, 하지만.	current	defaults
+dict:function-nouns:59	「ちょっとアルくん、別の女性を侍らせてるの？」	「잠깐 알 군, 다른 여성을 곁에 둬?」	fix	local
+dict:function-nouns:59	「ちょっと！」	「잠깐!」	keep	local
+dict:function-nouns:59	ちょっと待って。	잠깐 기다려.	keep	local
+dict:function-nouns:59	ちょっと疲れた。	조금 지쳤다.	keep	defaults
+cx:nante-said:10	いまなんて言ったの？	지금 뭐라고 말했어?	fix	rewrites
+cx:nante-said:10	今なんて言った？	지금 뭐라고 말했어?	fix	rewrites
+cx:nante-said:10	さっきなんて言ったの？	조금 전 뭐라고 말했어?	fix	rewrites
+cx:nante-said:10	なんて言ったの？	뭐라고 말했어?	keep	local
+cx:nante-said:10	婚約破棄なんて言われても困る。	파혼 같은 건 해도 곤란하다.	current	local
+dict:function-nouns:60	そう今、俺は落ちている。	그래, 지금, 나는 떨어져 있다.	fix	local
+dict:function-nouns:60	そう荒野だ。	그래, 황야다.	fix	local
+dict:function-nouns:60	そうそれ、と桜庭が扇子を閉じる。	그래, 그것, 이라고 사쿠라바가 부채를 접는다.	fix	local
+dict:function-nouns:60	そう言えば、今日は休みだ。	그러고 보니, 오늘은 휴일이다.	keep	defaults
+dict:function-nouns:60	そう思った。	그렇게 생각했다.	keep	defaults
+dict:function-nouns:60	そう簡単にはいかない。	그렇게 간단하지는 않다.	keep	defaults

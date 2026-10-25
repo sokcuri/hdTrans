@@ -503,3 +503,7 @@ cx:yatta-achieve:10	LEX-56	&&5 S+0== "や" !1 I+0== "Lやったよう" :yatta-st
 cx:yatta-achieve:20	LEX-56	&&5 S+0== "や" ||2 S-1== "よく" S-1== "良く" ||2 F-1== "opens-line" S-2== "00「『（(“、，," ||3 F+0== "sentence-end" F+0== "quote-end" S+1== "00、，,…‥" I+0== "Lやった"	set-target "잘&AV@" set-target@-1 ""	よくやった 잘했다
 //= nandesu-what	after OfferPromise 390	A なんです that opens an utterance (a line, a quote, or after a comma) and asks, right before ？, has no noun before it: its なん is 何, 뭡니다 (なんです？ 뭡니까?).
 cx:nandesu-what:10	SPC-16	&&4 S+0== "なんです" D+0== "입니다" ||2 F+0== "opens-line" S-1== "00「『（(“、，," S+1== "00？?"	set-target "뭡니다"	なんです？ 뭡니까?
+//= nante-said	after OfferPromise 400	A なんて right after 今, いま or さっき and before 言 asks what was said: 뭐라고 (今なんて言った？ 지금 뭐라고 했어?).
+cx:nante-said:10	LEX-58	&&3 S+0== "なんて" ||3 S-1== "今" S-1== "いま" S-1== "さっき" S+1== "L言"	set-target " 뭐라고"	今なんて言った？ 지금 뭐라고 했어?
+//= tokoro-kanji	after OfferPromise 410	The 所 after a past progressive verb before だった or でした is the moment, like the formal noun ところ: 참 (見ていた所だった 보고 있던 참이었다).
+cx:tokoro-kanji:10	LEX-60	&&5 S+0== "所" S-1== "い" ||2 I-1== "Rた" U-1== "Rた" ||2 I-2== "Rて" I-2== "Rで" ||2 S+1== "Lだった" S+1== "Lでした"	set-target "참"	見ていた所だった 보고 있던 참이었다
