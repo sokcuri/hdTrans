@@ -128,8 +128,7 @@ std::size_t CodeTable::MemoryBytes() const {
 
 bool Dict::ReadUvarint(std::size_t& i, std::size_t end, uint64_t& value) const {
     value = 0;
-    if (i >= end || end > blob_.size() ||
-        !guard_.Check(blob_.data() + i, std::min<std::size_t>(10, end - i))) return guard_.Fail();
+    if (i >= end || end > blob_.size()) return guard_.Fail();
     for (unsigned byte = 0; byte < 10; byte++) {
         if (i >= end) return guard_.Fail();
         const auto b = static_cast<unsigned char>(blob_[i++]);
@@ -159,7 +158,7 @@ bool Dict::RecordsStart(int k, std::size_t& i, std::size_t& end) const {
     if (!ReadStart(group, i)) return false;
     end = blob_.size();
     if (group + 1 < starts_.size() && !ReadStart(group + 1, end)) return false;
-    if (i >= end) return guard_.Fail();
+    if (i >= end || end > blob_.size() || !guard_.Check(blob_.data() + i, end - i)) return guard_.Fail();
     if (group > 0) {
         std::size_t previous;
         if (!ReadStart(group - 1, previous)) return false;
@@ -181,7 +180,6 @@ bool Dict::Decode(std::size_t& i, std::size_t end, Record& r, bool& more) const 
     const uint64_t length = h >> 2;
     if (i > end || end > blob_.size() || length > end - i) return guard_.Fail();
     const auto n = static_cast<std::size_t>(length);
-    if (!guard_.Check(blob_.data() + i, n)) return guard_.Fail();
     const std::string_view target(blob_.data() + i, n);
     i += n;
     uint64_t code, rule = 0, id;
@@ -202,6 +200,7 @@ bool Dict::Validate() const {
     const std::size_t keys = Len();
     if (starts_.size() != keys / kKeysPerStart + (keys % kKeysPerStart != 0)) return guard_.Fail();
     if (keys == 0) return blob_.empty() && codes_.empty() ? true : guard_.Fail();
+    if (!guard_.Check(blob_.data(), blob_.size())) return guard_.Fail();
     for (const Codes* codes : codes_) {
         if (codes == nullptr) return guard_.Fail();
     }
