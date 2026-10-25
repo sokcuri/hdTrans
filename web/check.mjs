@@ -15,11 +15,21 @@
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
-// line (업데이트 yyyy-MM-dd HH:mm:ss · commit). With SHOT set it saves a screenshot there. Exits 1 on a failed
-// check or a load failure.
+// line (hdTrans VERSION, 사전 VERSION, 업데이트 yyyy-MM-dd HH:mm:ss, commit). Then it checks the
+// dictionaries: that the user dictionary and names table kept in localStorage
+// move into 기본 사용자 사전 on the first run with IndexedDB, and, at a desktop
+// and a mobile viewport, the 사전 tab's layout (list beside or above the
+// grids, grids that scroll sideways on a phone, 44 px touch targets), adding a
+// dictionary and an entry, turning it off and on, priority by list order, a
+// load error naming the dictionary and row, export and import of the
+// desktop files (userdict*.txt and Ehnd UserDict*.txt) byte for byte, renaming,
+// deleting, and that the list survives a reload. With SHOT set it saves
+// screenshots there (text tab) and next to it (-dictionaries, -mobile). Exits 1
+// on a failed check or a load failure.
 import { spawn } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { inflateRawSync } from 'node:zlib';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
@@ -48,6 +58,7 @@ await new Promise((r) => ws.addEventListener('open', r));
 
 let id = 0;
 const waiting = new Map();
+let promptText = ''; // the answer to the page's next prompt; confirms are accepted
 let bytes = 0;
 let requests = 0;
 ws.addEventListener('message', (ev) => {
@@ -55,6 +66,8 @@ ws.addEventListener('message', (ev) => {
   if (m.id && waiting.has(m.id)) {
     waiting.get(m.id)(m);
     waiting.delete(m.id);
+  } else if (m.method === 'Page.javascriptDialogOpening') {
+    ws.send(JSON.stringify({ id: ++id, method: 'Page.handleJavaScriptDialog', params: { accept: true, promptText } }));
   } else if (m.method === 'Network.loadingFinished') {
     bytes += m.params.encodedDataLength;
     requests++;
@@ -235,6 +248,209 @@ async function speechCheck() {
   console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
 }
 
+// The 사전 tab. Files go through folders of a temporary directory: in/
+// for imports, dl/ for downloads.
+const files = mkdtempSync(join(tmpdir(), 'hdtrans-check-files-'));
+mkdirSync(join(files, 'in'));
+const desktop = { width: 1200, height: 1300, deviceScaleFactor: 1, mobile: false };
+const phone = { width: 390, height: 844, deviceScaleFactor: 2, mobile: true };
+const say = (area) => (cond, what) => {
+  console.log(`${area}: ${cond ? 'ok    ' : 'FAILED'} ${what}`);
+  failed ||= !cond;
+};
+async function shot(suffix, metrics = desktop) {
+  if (!process.env.SHOT) return;
+  await send('Emulation.setDeviceMetricsOverride', metrics);
+  writeFileSync(process.env.SHOT.replace(/(\.png)?$/, `${suffix}.png`), Buffer.from((await send('Page.captureScreenshot')).data, 'base64'));
+}
+const click = (selector) => evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);
+const row = (name) => `[...document.querySelectorAll('#dictlist li')].find((li) => li.querySelector('.name').textContent === ${JSON.stringify(name)})`;
+const clickRow = (name, selector) => evaluate(`${row(name)}.querySelector(${JSON.stringify(selector)}).click()`);
+const dictRows = () =>
+  evaluate(`[...document.querySelectorAll('#dictlist li')].map((li) => [li.querySelector('.name').textContent,
+    li.querySelector('input').checked ? 'on' : 'off', li.querySelector('.count').textContent,
+    li.querySelector('.fmt') ? 'Ehnd' : '', li.classList.contains('sel') ? 'selected' : ''].filter((s) => s).join(' '))`);
+const dictsReady = () => until(`document.body.dataset.engine === 'ready' && document.body.dataset.dicts === 'ready'`);
+const probe = async (text) => (await translate(text)).out;
+
+/** The files of a ZIP archive by name, as text. */
+function unzip(b) {
+  const files = {};
+  const end = b.lastIndexOf(Buffer.from([0x50, 0x4b, 0x05, 0x06]));
+  for (let p = b.readUInt32LE(end + 16), n = b.readUInt16LE(end + 10); n > 0; n--) {
+    const method = b.readUInt16LE(p + 10), size = b.readUInt32LE(p + 20), nameLength = b.readUInt16LE(p + 28);
+    const local = b.readUInt32LE(p + 42);
+    const name = b.subarray(p + 46, p + 46 + nameLength).toString('utf8');
+    const start = local + 30 + b.readUInt16LE(local + 26) + b.readUInt16LE(local + 28);
+    const data = b.subarray(start, start + size);
+    files[name] = (method === 8 ? inflateRawSync(data) : data).toString('utf8');
+    p += 46 + nameLength + b.readUInt16LE(p + 30) + b.readUInt16LE(p + 32);
+  }
+  return files;
+}
+
+/** Downloads by clicking selector (in the row of name, if given) and returns the files' texts by name. */
+async function download(selector, name) {
+  const dir = mkdtempSync(join(files, 'dl-'));
+  await send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: dir });
+  await (name ? clickRow(name, selector) : click(selector));
+  const got = {};
+  for (const end = Date.now() + 10000; Date.now() < end && Object.keys(got).length === 0; await sleep(50)) {
+    for (const f of readdirSync(dir)) {
+      if (f.endsWith('.crdownload')) continue;
+      const b = readFileSync(join(dir, f));
+      got[f] = f.endsWith('.zip') ? unzip(b) : b.toString('utf8');
+    }
+  }
+  return got;
+}
+
+/** Imports the files (name → text) through the 가져오기 file input. */
+async function upload(texts) {
+  const paths = Object.entries(texts).map(([n, t]) => (writeFileSync(join(files, 'in', n), t), join(files, 'in', n)));
+  const { root } = await send('DOM.getDocument');
+  const { nodeId } = await send('DOM.querySelector', { nodeId: root.nodeId, selector: '#dict-file' });
+  await send('DOM.setFileInputFiles', { nodeId, files: paths });
+}
+
+// migrationCheck stores a user dictionary and names table as the page kept
+// them before IndexedDB, removes the database and opens the page.
+async function migrationCheck() {
+  const ok = say('migration');
+  await send('Page.navigate', { url: new URL('manifest.json', url).href });
+  await until(`document.readyState === 'complete'`);
+  await evaluate(`new Promise((resolve, reject) => { const r = indexedDB.deleteDatabase('hdtrans');
+    r.onsuccess = resolve; r.onerror = () => reject(r.error); r.onblocked = () => reject(new Error('blocked')); })`);
+  await evaluate(`localStorage.setItem('hdtrans.userdict', '猫\\t고양이님'); localStorage.setItem('hdtrans.names', 'ユフィリア\\t유피');
+    localStorage.removeItem('hdtrans.edit'); localStorage.setItem('hdtrans.tab', 'text')`);
+  await send('Page.navigate', { url });
+  await dictsReady();
+  const rows = await dictRows();
+  ok(rows.join() === '기본 사용자 사전 on 2개 selected', `one dictionary from localStorage: ${rows.join(' / ')}`);
+  ok((await gridText('userdict')) === '猫\t고양이님' && (await gridText('names')) === 'ユフィリア\t유피', 'its grids hold the old entries');
+  const out = await probe('猫とユフィリアが来た。');
+  ok(out.includes('고양이님') && out.includes('유피'), `the entries apply: ${out}`);
+}
+
+// libraryCheck drives the 사전 tab at a desktop viewport.
+async function libraryCheck() {
+  const ok = say('dictionaries');
+  await send('Emulation.setDeviceMetricsOverride', desktop);
+  await click('#tab-dictionaries');
+  const layout = await evaluate(`(() => { const l = document.getElementById('dictlist').getBoundingClientRect();
+    const e = document.getElementById('dictedit').getBoundingClientRect();
+    return { side: e.left >= l.right && Math.abs(e.top - l.top) < 80, inside: document.getElementById('dictedit').contains(document.getElementById('userdict')),
+      hidden: document.getElementById('text').hidden }; })()`);
+  ok(layout.side && layout.inside && layout.hidden, 'the tab shows the list beside the grids of the selected dictionary');
+
+  await click('#dict-new');
+  await until(`document.querySelectorAll('#dictlist li').length === 2`);
+  ok((await dictRows()).join() === '기본 사용자 사전 on 2개,새 사전 on 0개 selected', '+ 새 사전 adds an empty applied dictionary and selects it');
+  await focusCell('userdict', 0, 0);
+  await type('猫');
+  await press('Tab');
+  await type('냥이');
+  ok((await dictRows())[1] === '새 사전 on 1개 selected', 'an entry typed in its grid counts');
+  let out = await probe('猫が来た。');
+  ok(out.includes('고양이님'), `the first dictionary wins a shared key: ${out}`);
+  await clickRow('새 사전', 'button[title="위로"]');
+  ok((await dictRows()).join() === '새 사전 on 1개 selected,기본 사용자 사전 on 2개', '↑ moves it first');
+  out = (await settled()).out;
+  ok(out.includes('냥이'), `then its entry wins: ${out}`);
+  await clickRow('새 사전', 'input');
+  out = (await settled()).out;
+  ok(out.includes('고양이님') && (await dictRows())[0] === '새 사전 off 1개 selected', `unchecked, it no longer applies: ${out}`);
+  await clickRow('새 사전', 'input');
+  out = (await settled()).out;
+  ok(out.includes('냥이'), `checked again, it applies: ${out}`);
+
+  await focusCell('userdict', 0, 3);
+  await press('Enter');
+  await type('犬');
+  await press('Tab');
+  await type('개');
+  await press('Tab');
+  await type('xx');
+  const bad = (await settled()).info;
+  ok(bad.includes('새 사전 사용자 사전 2행'), `a load error names the dictionary and row: ${bad}`);
+  await evaluate(`document.querySelectorAll('#userdict tbody tr')[1].querySelector('button.del').click()`);
+  ok(!(await settled()).info.includes('오류'), 'deleting the row clears it');
+
+  const exported = await download('button[title="내보내기"]', '새 사전');
+  ok(exported['userdict-새 사전.txt'] === '猫\t냥이\n', `a dictionary exports as userdict-새 사전.txt: ${JSON.stringify(exported)}`);
+  await upload({ 'userdict-새 사전.txt': exported['userdict-새 사전.txt'] });
+  await until(`document.querySelectorAll('#dictlist li').length === 3`);
+  ok((await dictRows())[2] === '새 사전 on 1개 selected', 'importing it adds an applied, selected dictionary');
+  promptText = '가져온 사전';
+  await evaluate(`document.querySelectorAll('#dictlist li')[2].querySelector('button[title="이름 변경"]').click()`);
+  ok((await dictRows())[2] === '가져온 사전 on 1개 selected', 'renamed');
+  const again = await download('button[title="내보내기"]', '가져온 사전');
+  ok(again['userdict-가져온 사전.txt'] === exported['userdict-새 사전.txt'], 'and exports the same bytes');
+
+  const ehnd = 'クロムウェル\t크롬웰경\t1\tVHn\n// 주석\n門前\t문 앞\t0\n';
+  await upload({ 'UserDict_test.txt': ehnd });
+  await until(`document.querySelectorAll('#dictlist li').length === 4`);
+  ok((await dictRows())[3] === 'test on 2개 Ehnd selected', 'an Ehnd UserDict file imports as an Ehnd dictionary');
+  ok(await evaluate(`document.getElementById('namespane').hidden && document.querySelector('#userdict th:nth-child(4)').textContent === '의미 코드'`),
+    'with Ehnd columns and no names table');
+  out = await probe('クロムウェルが来た。');
+  ok(out.includes('크롬웰경'), `its entries apply: ${out}`);
+  const back = await download('button[title="내보내기"]', 'test');
+  ok(back['UserDict_test.txt'] === ehnd, `it exports as UserDict_test.txt with the same bytes`);
+
+  const all = (await download('#dict-export'))['hdtrans-사전.zip'] ?? {};
+  ok(all['userdict.txt'] === '猫\t냥이\n猫\t고양이님\n猫\t냥이\nユフィリア\t유피\tname\n' && all['UserDict.txt'] === ehnd,
+    `내보내기 writes the applied dictionaries in order, in a ZIP with the Ehnd file: ${JSON.stringify(all)}`);
+  await clickRow('test', 'input');
+  const one = await download('#dict-export');
+  ok(Object.keys(one).join() === 'userdict.txt' && one['userdict.txt'] === all['userdict.txt'], 'and only userdict.txt without an applied Ehnd dictionary');
+  await clickRow('test', 'input');
+
+  await clickRow('가져온 사전', 'button[title="삭제"]');
+  await until(`document.querySelectorAll('#dictlist li').length === 3`);
+  const before = (await dictRows()).join();
+  await send('Page.reload');
+  await dictsReady();
+  ok((await evaluate(`document.getElementById('dictionaries').hidden`)) === false && (await dictRows()).join() === before,
+    `deleted, and the list and selection survive a reload: ${before}`);
+  await shot('-dictionaries');
+}
+
+// mobileCheck repeats the layout checks and an edit at a phone's viewport.
+async function mobileCheck() {
+  const ok = say('mobile');
+  await send('Emulation.setDeviceMetricsOverride', phone);
+  await send('Emulation.setTouchEmulationEnabled', { enabled: true });
+  await clickRow('기본 사용자 사전', '.name');
+  const m = await evaluate(`(() => { const l = document.getElementById('dictlist').getBoundingClientRect();
+    const e = document.getElementById('dictedit').getBoundingClientRect();
+    const s = document.querySelector('#userdict .gridscroll');
+    const small = [...document.querySelectorAll('#dictionaries button, .tabs button')].filter((b) => b.offsetParent && b.getBoundingClientRect().height < 44)
+      .map((b) => b.textContent);
+    const box = document.querySelector('#dictlist input').getBoundingClientRect();
+    return { stacked: e.top >= l.bottom, page: document.documentElement.scrollWidth <= innerWidth,
+      scroll: s.scrollWidth > s.clientWidth && getComputedStyle(s).overflowX === 'auto', small, box: box.width >= 24 && box.height >= 24 }; })()`);
+  ok(m.stacked, 'the grids sit below the list');
+  ok(m.page, 'the page does not scroll sideways');
+  ok(m.scroll, 'the grid scrolls sideways in its box');
+  ok(m.small.length === 0 && m.box, `buttons are at least 44 px high, checkboxes 24 px${m.small.length ? ': ' + m.small.join(' ') : ''}`);
+  await click('#dict-new');
+  await until(`document.querySelectorAll('#dictlist li').length === 4`);
+  await focusCell('userdict', 0, 0);
+  await type('魔物');
+  await press('Tab');
+  await type('몬스터군');
+  let out = await probe('魔物が来た。');
+  ok(out.includes('몬스터군'), `a new dictionary's entry applies: ${out}`);
+  await clickRow('새 사전 2', 'input');
+  out = (await settled()).out;
+  ok(!out.includes('몬스터군'), `and stops when unchecked: ${out}`);
+  await shot('-mobile', phone);
+  await send('Emulation.setTouchEmulationEnabled', { enabled: false });
+  await send('Emulation.clearDeviceMetricsOverride');
+  await click('#tab-text');
+}
+
 let failed = false;
 try {
   let wasReady;
@@ -252,14 +468,14 @@ try {
   await progressCheck();
   await speechCheck();
   const version = await evaluate(`document.getElementById('version').textContent`);
-  const versionOk = /^업데이트 \d{4}-\d\d-\d\d \d\d:\d\d:\d\d · [0-9a-f]{7,}$/.test(version);
+  const versionOk = /^hdTrans \S+, 사전 \S+, 업데이트 \d{4}-\d\d-\d\d \d\d:\d\d:\d\d, [0-9a-f]{7,}$/.test(version);
   failed ||= !versionOk;
   console.log(`version: ${versionOk ? 'ok    ' : 'FAILED'} ${version}`);
   await gridCheck();
-  if (process.env.SHOT) {
-    await send('Emulation.setDeviceMetricsOverride', { width: 1200, height: 1300, deviceScaleFactor: 1, mobile: false });
-    writeFileSync(process.env.SHOT, Buffer.from((await send('Page.captureScreenshot')).data, 'base64'));
-  }
+  await shot('');
+  await migrationCheck();
+  await libraryCheck();
+  await mobileCheck();
   const typed = '猫が好きです。\n「おはよう、レナ」';
   await visit(2, async (ready) => {
     wasReady = ready;

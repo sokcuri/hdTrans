@@ -2,8 +2,8 @@
 // their content hashes are cached), hands them to the worker and translates
 // there as the input changes.
 import { decodeText, encodeOutput, formatDocument, outputName, zip, type OutputMode } from './documents.js';
+import { count, firstName, fromFile, newId, openStore, overlay, toFile, type Dictionary, type Store } from './dictionaries.js';
 import { grid } from './grid.js';
-import { namesDict } from './names.js';
 
 interface Asset {
   name: string;
@@ -39,17 +39,6 @@ src.addEventListener('input', () => {
   localStorage.setItem('hdtrans.src', src.value);
   schedule();
 });
-const editor = (key: string, placeholders: string[]) => {
-  const g = grid($(key), ['일본어', '한국어', '품사', '옵션'], placeholders, key + '.tsv', (text) => {
-    localStorage.setItem('hdtrans.' + key, text);
-    schedule();
-    staleDocs();
-  });
-  g.text = localStorage.getItem('hdtrans.' + key) ?? '';
-  return g;
-};
-const userdict = editor('userdict', ['手伝う', '돕다', 'v:ㅂ', '']);
-const names = editor('names', ['春香', '하루카', 'name', '']);
 const savedMode = localStorage.getItem('hdtrans.mode');
 if (savedMode) (document.querySelector(`input[name=mode][value=${savedMode}]`) as HTMLInputElement).checked = true;
 document.querySelectorAll('input[name=mode]').forEach((el) =>
@@ -66,6 +55,242 @@ speech.addEventListener('change', () => {
   schedule();
   staleDocs();
 });
+
+// Tabs: the dictionary editor (the selected dictionary's grids) sits below
+// the text tab's panes and beside the list in the dictionary tab.
+const tabs: [HTMLElement, HTMLElement][] = [
+  [$('tab-text'), $('text')],
+  [$('tab-docs'), $('docs')],
+  [$('tab-dictionaries'), $('dictionaries')],
+];
+const editorBox = $('editor');
+function showTab(panel: string) {
+  for (const [button, p] of tabs) {
+    button.setAttribute('aria-selected', String(p.id === panel));
+    p.hidden = p.id !== panel;
+  }
+  (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
+  localStorage.setItem('hdtrans.tab', panel);
+}
+for (const [button, p] of tabs) button.addEventListener('click', () => showTab(p.id));
+showTab(tabs.some(([, p]) => p.id === localStorage.getItem('hdtrans.tab')) ? localStorage.getItem('hdtrans.tab')! : 'text');
+
+// The dictionaries: dicts is the list in priority order, editing the one the
+// grids show. Every edit is stored at once.
+let store: Store | undefined;
+let dictsLoaded = false;
+let dicts: Dictionary[] = [];
+let editing: Dictionary | undefined;
+const list = $<HTMLOListElement>('dictlist');
+const editSelect = $<HTMLSelectElement>('editdict');
+const namesPane = $('namespane');
+const heads = {
+  hdtrans: [['일본어', '한국어', '품사', '옵션'], ['手伝う', '돕다', 'v:ㅂ', '']],
+  ehnd: [['일본어', '한국어', '종류', '의미 코드'], ['クロムウェル', '크롬웰', '1', 'VHn']],
+};
+
+/** Translates again with the applied dictionaries, and drops document results made without them. */
+function dictsChanged() {
+  schedule();
+  staleDocs();
+}
+
+function edited(d: Dictionary) {
+  store?.put(d).catch(() => {});
+  const item = list.querySelector(`li[data-id="${d.id}"] .count`);
+  if (item) item.textContent = `${count(d)}개`;
+  if (d.on) dictsChanged();
+}
+const userdict = grid($('userdict'), heads.hdtrans[0], heads.hdtrans[1], 'userdict.txt', (text) => {
+  if (!editing) return;
+  editing.entries = text;
+  edited(editing);
+});
+const names = grid($('names'), ['일본어', '한국어', '품사', '옵션'], ['春香', '하루카', 'name', ''], 'names.tsv', (text) => {
+  if (!editing) return;
+  editing.names = text;
+  edited(editing);
+});
+
+function select(d: Dictionary) {
+  editing = d;
+  localStorage.setItem('hdtrans.edit', d.id);
+  const [columns, placeholders] = heads[d.format];
+  userdict.heads(columns, placeholders, toFile(d).name);
+  userdict.text = d.entries;
+  names.text = d.format === 'hdtrans' ? d.names : '';
+  namesPane.hidden = d.format !== 'hdtrans';
+  render();
+}
+
+/** Stores the list order after a move. */
+function reorder(next: Dictionary[]) {
+  dicts = next;
+  dicts.forEach((d, i) => {
+    if (d.order === i) return;
+    d.order = i;
+    store?.put(d).catch(() => {});
+  });
+  render();
+  dictsChanged();
+}
+
+function move(d: Dictionary, to: number) {
+  const next = dicts.filter((x) => x !== d);
+  next.splice(Math.max(0, Math.min(to, next.length)), 0, d);
+  reorder(next);
+}
+
+const utf8 = (text: string) => new TextEncoder().encode(text);
+const textType = 'text/plain;charset=utf-8';
+let dragged: Dictionary | undefined;
+
+function render() {
+  list.replaceChildren();
+  editSelect.replaceChildren();
+  dicts.forEach((d, i) => {
+    editSelect.add(new Option(d.name, d.id, false, d === editing));
+    const li = list.appendChild(document.createElement('li'));
+    li.dataset.id = d.id;
+    li.draggable = true;
+    li.classList.toggle('sel', d === editing);
+    const on = li.appendChild(document.createElement('input'));
+    on.type = 'checkbox';
+    on.checked = d.on;
+    on.title = '적용';
+    on.addEventListener('change', () => {
+      d.on = on.checked;
+      store?.put(d).catch(() => {});
+      dictsChanged();
+    });
+    const name = li.appendChild(document.createElement('button'));
+    name.type = 'button';
+    name.className = 'name';
+    name.textContent = d.name;
+    name.addEventListener('click', () => {
+      select(d);
+      if (matchMedia('(max-width: 48rem)').matches) editorBox.scrollIntoView({ block: 'start' });
+    });
+    const info = li.appendChild(document.createElement('span'));
+    info.className = 'count';
+    info.textContent = `${count(d)}개`;
+    if (d.format === 'ehnd') info.insertAdjacentHTML('afterend', '<span class="fmt">Ehnd</span>');
+    const acts = li.appendChild(document.createElement('span'));
+    acts.className = 'acts';
+    const act = (label: string, title: string, fn: () => void, disabled = false) => {
+      const b = acts.appendChild(document.createElement('button'));
+      b.type = 'button';
+      b.textContent = label;
+      b.title = title;
+      b.disabled = disabled;
+      b.addEventListener('click', fn);
+    };
+    act('↑', '위로', () => move(d, i - 1), i === 0);
+    act('↓', '아래로', () => move(d, i + 1), i === dicts.length - 1);
+    act('이름 변경', '이름 변경', () => {
+      const n = prompt('사전 이름', d.name)?.trim();
+      if (!n) return;
+      d.name = n;
+      store?.put(d).catch(() => {});
+      if (d === editing) select(d);
+      else render();
+    });
+    act('내보내기', '내보내기', () => {
+      const f = toFile(d);
+      save(f.name, utf8(f.text), textType);
+    });
+    act('삭제', '삭제', () => remove(d), dicts.length === 1);
+    li.addEventListener('dragstart', (ev) => {
+      dragged = d;
+      ev.dataTransfer?.setData('text/plain', d.name);
+    });
+    li.addEventListener('dragover', (ev) => {
+      if (!dragged || dragged === d) return;
+      ev.preventDefault();
+    });
+    li.addEventListener('drop', (ev) => {
+      ev.preventDefault();
+      if (!dragged || dragged === d) return;
+      const box = li.getBoundingClientRect();
+      const after = ev.clientY > box.top + box.height / 2;
+      const next = dicts.filter((x) => x !== dragged);
+      next.splice(next.indexOf(d) + (after ? 1 : 0), 0, dragged);
+      dragged = undefined;
+      reorder(next);
+    });
+    li.addEventListener('dragend', () => (dragged = undefined));
+  });
+}
+
+async function add(d: Omit<Dictionary, 'id' | 'order'>): Promise<Dictionary> {
+  const full: Dictionary = { ...d, id: newId(), order: dicts.length };
+  dicts.push(full);
+  await store?.put(full).catch(() => {});
+  return full;
+}
+
+async function remove(d: Dictionary) {
+  if (dicts.length === 1 || !confirm(`'${d.name}' 사전을 지울까요?`)) return;
+  dicts = dicts.filter((x) => x !== d);
+  await store?.remove(d.id).catch(() => {});
+  reorder(dicts);
+  if (d === editing) select(dicts[0]);
+}
+
+$('dict-new').addEventListener('click', async () => {
+  const taken = new Set(dicts.map((d) => d.name));
+  let name = '새 사전';
+  for (let k = 2; taken.has(name); k++) name = `새 사전 ${k}`;
+  select(await add({ name, format: 'hdtrans', on: true, entries: '', names: '' }));
+  dictsChanged();
+});
+const fileInput = $<HTMLInputElement>('dict-file');
+$('dict-import').addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', async () => {
+  let last: Dictionary | undefined;
+  const failed: string[] = [];
+  for (const f of Array.from(fileInput.files ?? [])) {
+    const d = fromFile(f.name, new Uint8Array(await f.arrayBuffer()));
+    if (d) last = await add(d);
+    else failed.push(f.name);
+  }
+  fileInput.value = '';
+  if (failed.length > 0) alert('읽지 못함: ' + failed.join(', '));
+  if (last) select(last);
+  dictsChanged();
+});
+// The applied dictionaries as the desktop reads them: userdict.txt,
+// UserDict.txt for Ehnd ones, or both in a ZIP.
+$('dict-export').addEventListener('click', async () => {
+  const d = overlay(dicts);
+  const out = [
+    { name: 'userdict.txt', text: d.userdict },
+    { name: 'UserDict.txt', text: d.ehnd },
+  ].filter((f) => f.text !== '');
+  if (out.length === 1) save(out[0].name, utf8(out[0].text + '\n'), textType);
+  else if (out.length === 2) {
+    save('hdtrans-사전.zip', await zip(out.map((f) => ({ name: f.name, data: utf8(f.text + '\n') }))), 'application/zip');
+  }
+});
+editSelect.addEventListener('change', () => {
+  const d = dicts.find((x) => x.id === editSelect.value);
+  if (d) select(d);
+});
+
+openStore()
+  .then(async (s) => {
+    dicts = await s.all();
+    store = s;
+    navigator.storage?.persist?.().catch(() => {});
+  })
+  .catch((err) => (info.textContent = '사전을 열지 못했습니다: ' + String(err)))
+  .finally(async () => {
+    if (dicts.length === 0) await add({ name: firstName, format: 'hdtrans', on: true, entries: '', names: '' });
+    select(dicts.find((d) => d.id === localStorage.getItem('hdtrans.edit')) ?? dicts[0]);
+    dictsLoaded = true;
+    document.body.dataset.dicts = 'ready';
+    dictsChanged();
+  });
 
 /** Returns the text of the example file. */
 async function exampleText(file: string): Promise<string> {
@@ -100,14 +325,14 @@ example.addEventListener('change', async () => {
 
 const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
 let seq = 0;
-type Reply = { lines?: string[]; message?: string; warning?: string; ms: number; memory: number };
+type Reply = { lines?: string[]; message?: string; warning?: string; ehndWarning?: string[]; ms: number; memory: number };
 const pending = new Map<number, (m: Reply) => void>();
 
-function request(mode: string, lines: string[], userdict: string): Promise<Reply> {
+function request(mode: string, lines: string[], d: { userdict: string; ehnd: string }): Promise<Reply> {
   const id = ++seq;
   return new Promise<Reply>((resolve) => {
     pending.set(id, resolve);
-    worker.postMessage({ type: 'translate', id, mode, speech: speech.value, lines, userdict });
+    worker.postMessage({ type: 'translate', id, mode, speech: speech.value, lines, userdict: d.userdict, ehnd: d.ehnd });
   });
 }
 worker.onmessage = (ev) => {
@@ -130,26 +355,11 @@ worker.onmessage = (ev) => {
   }
 };
 
-/**
- * The user dictionary of the engine: the user dictionary grid, then the
- * names table as name entries. userLines is the number of lines of the first.
- */
-function dictText(): { text: string; userLines: number } {
-  const u = userdict.text.trim() === '' ? '' : userdict.text;
-  const n = names.text.trim() === '' ? '' : namesDict(names.text);
-  return { text: [u, n].filter((t) => t !== '').join('\n'), userLines: u === '' ? 0 : u.split('\n').length };
-}
-
-/** The engine's load errors ("LINE: message") with the table and row of each line. */
-function warningText(warning: string, userLines: number): string {
-  return warning
-    .split('\n')
-    .map((w) =>
-      w.replace(/^(\d+): /, (_, n) =>
-        Number(n) <= userLines ? `사용자 사전 ${n}행: ` : `이름 표 ${Number(n) - userLines}행: `,
-      ),
-    )
-    .join(' / ');
+/** The engine's load errors ("LINE: message", Ehnd "UserDict.txt:LINE: message") with the dictionary and row of each line. */
+function warningText(warning: string, ehnd: string[], where: (ehnd: boolean, line: number) => string): string {
+  const user = warning === '' ? [] : warning.split('\n').map((w) => w.replace(/^(\d+): /, (_, n) => where(false, Number(n)) + ': '));
+  const e = ehnd.map((w) => w.replace(/^(?:.*\/)?UserDict\.txt:(\d+): /, (_, n) => where(true, Number(n)) + ': '));
+  return [...user, ...e].join(' / ');
 }
 
 // The input is translated a moment after it last changed. Every change
@@ -169,20 +379,21 @@ function schedule() {
 }
 
 async function translate() {
-  if (!ready || running || shown === generation) return;
+  if (!ready || !dictsLoaded || running || shown === generation) return;
   running = true;
   const g = generation;
   const lines = src.value.replace(/\r/g, '').split('\n');
-  const d = dictText();
+  const d = overlay(dicts);
   const t0 = performance.now();
   const slow = setTimeout(() => (tbar.hidden = false), 300);
   let text: string;
   try {
-    const m = await request(mode(), lines, d.text);
+    const m = await request(mode(), lines, d);
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
     text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
-    if (m.warning) text += ' / 사전 오류: ' + warningText(m.warning, d.userLines);
+    const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
+    if (warning) text += ' / 사전 오류: ' + warning;
     if (g === generation) out.value = m.lines.join('\n');
   } catch (err) {
     text = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
@@ -202,19 +413,6 @@ async function translate() {
 // The document tab: files are read and translated here, one after another,
 // each as one document. Results are kept as text; the output mode applies
 // when a file is saved.
-const tabs: [HTMLElement, HTMLElement][] = [
-  [$('tab-text'), $('text')],
-  [$('tab-docs'), $('docs')],
-];
-function showTab(index: number) {
-  tabs.forEach(([button, panel], i) => {
-    button.setAttribute('aria-selected', String(i === index));
-    panel.hidden = i !== index;
-  });
-  localStorage.setItem('hdtrans.tab', index === 1 ? 'docs' : 'text');
-}
-tabs.forEach(([button], i) => button.addEventListener('click', () => showTab(i)));
-if (localStorage.getItem('hdtrans.tab') === 'docs') showTab(1);
 
 interface Doc {
   out: string; // output file name
@@ -311,7 +509,7 @@ async function runDocs() {
     showDocs();
     const t0 = performance.now();
     try {
-      const m = await request('document', d.source!.split('\n'), dictText().text);
+      const m = await request('document', d.source!.split('\n'), overlay(dicts));
       if (m.lines === undefined) throw new Error(m.message);
       if (docsCancel) break;
       d.translated = m.lines.join('\n');
