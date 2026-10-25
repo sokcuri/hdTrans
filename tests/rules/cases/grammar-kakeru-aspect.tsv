@@ -1,0 +1,53 @@
+# 규칙: GRM-27
+rule	input	expected	kind	layer
+cx:kakeru-aspect:5	ウエストから尻山にかけて急カーブをなぞる。	has:에 걸쳐 급커브를	fix	rewrites
+cx:kakeru-aspect:5	小柄な下女で鼻から頬にかけてそばかすが密集している。	몸집이 작은 하녀로 코로부터 뺨에 걸쳐 주근깨가 밀집하고 있다.	fix	rewrites
+cx:kakeru-aspect:5	顔から首にかけて真っ白にはたかれる。	has:얼굴에서 목에 걸쳐	fix	rewrites
+cx:kakeru-aspect:5	侑李は社員証を首にかけ、歩き出した。	!rule:cx:kakeru-aspect:5	keep	rewrites
+cx:kakeru-aspect:10	再びパニックになりかけたが、頭上から聞こえた声で我に返る。	다시 패닉이 될 뻔했지만, 머리 위로부터 들린 목소리로 제 정신을 차린다.	fix	rewrites
+cx:kakeru-aspect:10	危うく本気で喧嘩になりかけたこともあった。	하마터면 진심으로 싸움이 될 뻔한 적도 있었다.	fix	rewrites
+cx:kakeru-aspect:10	千里のおかしな理論に流されかけたところで、ツッコミが入った。	천리의 이상한 이론에 떠밀릴 뻔했더니, 태클이 들어갔다.	fix	rewrites
+cx:kakeru-aspect:10	ある時なんか、外交問題にもなりかけたんだお。	has:외교 문제로도 될 뻔했다	fix	rewrites
+cx:kakeru-aspect:10	なりかけた。	될 뻔했다.	fix	rewrites
+cx:kakeru-aspect:10	転びかけた。	구를 뻔했다.	fix	rewrites
+cx:kakeru-aspect:20	食堂前の廊下でぶつかりかけたことだ。	식당 앞의 복도에서 부딪칠 뻔한 것이다.	fix	rewrites
+cx:kakeru-aspect:30	険悪な空気になりかけた2人の間に入った。	험악한 공기가 되어 가던 2명 사이에 접어들었다.	fix	rewrites
+cx:kakeru-aspect:30	沈みかけた夕日。	가라앉아 가던 석양.	fix	rewrites
+cx:kakeru-aspect:40	日本人が忘れかけてる感覚だと思うな	일본인이 잊어 가고 있는 감각이라고 생각해	fix	rewrites
+cx:kakeru-aspect:40	真昼は力が抜けかけている周の体を支えた。	한낮은 힘이 빠져 가고 있는 주의 몸을 지탱했다.	fix	rewrites
+cx:kakeru-aspect:40	沈みかける夕日がホテルを照らし、	가라앉아 가는 석양이 호텔을 비추고,	fix	rewrites
+cx:kakeru-aspect:40	状況を理解できずにパニックになりかけるが、次第に暗闇に目が慣れてきた。	상황을 이해하지 못하고 패닉이 되어 가지만, 점차 어둠에 눈이 익숙해져 왔다.	fix	rewrites
+cx:kakeru-aspect:40	腕の傷が化膿してて破傷風になりかけてたんだ	팔의 상처가 화농하고 있어 파상풍에 걸려 가고 있었어	fix	rewrites
+cx:kakeru-aspect:40	ネット掲示板はすたれかけてるからねぇ…	넷 게시판은 소용없게 되어 가고 있으니까…	fix	rewrites
+cx:kakeru-aspect:40	急激にかかるＧで視界が暗くなりかける。	급격하게 걸리는 G로 시야가 어두워져 간다.	fix	rewrites
+cx:kakeru-aspect:50	少し歩きかけて、不意に富竹さんが呼びとめてきた。	has:조금 걷다 말고,	fix	rewrites
+cx:kakeru-aspect:60	何を言いかけた!	무슨 말을 하려고 했다!	fix	rewrites
+cx:kakeru-aspect:60	そう思っていたので立ち上がりかけながら言う。	그렇게 생각했으므로 일어서려고 하면서 말한다.	fix	rewrites
+cx:kakeru-aspect:60	立ち上がりかけて彼女は、振り返った。	일어서려고 해 그녀는, 돌아보았다.	fix	rewrites
+cx:kakeru-aspect:60	すごい勢いで追いかけてきた。	!rule:cx:kakeru-aspect:60	keep	rewrites
+cx:kakeru-aspect:60	今は話しかけないでくれ。	!rule:cx:kakeru-aspect:60	keep	rewrites
+cx:kakeru-aspect:60	すると今度はグランツ公が静かに問いかけてくる。	!rule:cx:kakeru-aspect:60	keep	rewrites
+cx:kakeru-aspect:10	何かに追いかけられてるんだ	!rule:cx:kakeru-aspect:10	keep	rewrites
+cx:kakeru-aspect:40	魅音が、眠くするような声で話しかけてきた。	!rule:cx:kakeru-aspect:40	keep	rewrites
+cx:kakeru-aspect:30	微笑みかけているのだけど何か憂いに満ちた表情をしている。	!rule:cx:kakeru-aspect:30	keep	rewrites
+cx:kakeru-aspect:20	お疲れみたい…毛布をかけて差し上げよう。	!rule:cx:kakeru-aspect:20	keep	rewrites
+cx:kakeru-aspect:50	扉の前に立ち、ドアノブに手を掛けて、ひねる。	!rule:cx:kakeru-aspect:50	keep	rewrites
+dict:w:28615	グランツが微笑みかけた。	그란츠가 미소 지어 보였다.	fix	lookup
+dict:w:28615	微笑みかけているのだけど何か憂いに満ちた表情をしている。	미소 지어 보이고 있는데 뭔가 우수로 가득 찬 표정을 하고 있다.	fix	lookup
+dict:jisjk:116667	これ以上みんなに心配はかけないからね。	더 이상 모두에게 걱정은 끼치지 않으니까.	fix	local
+dict:jisjk:116667	天龍ちゃんがご迷惑かけてないかなあ～。	텐류짱이 폐 끼치지 않을까~.	fix	local
+dict:jisjk:116667	ご心配をおかけして…もう大丈夫です。	걱정을 끼쳐…이제 괜찮습니다.	keep	local
+dict:jisjk:116667	心配かけてすみません。	걱정 끼쳐서 미안합니다.	keep	local
+dict:jisjk:90581	お前、電話かけたか？	너, 전화 걸었나?	fix	defaults
+dict:jisjk:90581	トラックが急ブレーキをかけて横滑りして止まっていました	트럭이 급브레이크를 걸어 옆으로 미끄러짐해 멈추어 있었습니다	fix	defaults
+dict:jisjk:90581	柏木は上着をハンガーにかけ、ネクタイを無造作に外した。	카시와기는 윗도리를 행거에 걸어 넥타이를 무심하게 풀었다.	fix	defaults
+dict:jisjk:90581	つまり村人を犠牲にして集中砲火をかけ、ベビーヘキサを破壊した。	즉 마을사람을 희생시켜 집중포화를 걸어 베이비 헥사를 파괴했다.	fix	defaults
+dict:jisjk:90581	クラス委員長の魅音が号令をかけた。	반장의 미온이 호령을 내렸다.	keep	defaults
+dict:jisjk:90581	左肩に毛皮のショールをかけてバランスを取る。	왼쪽 어깨에 모피의 숄을 걸쳐 균형을 잡는다.	keep	global-stem
+cx:kakeru-aspect:70	持ち手にかけられた木札を見る。	손잡이에 걸린 목찰을 본다.	fix	rewrites
+cx:kakeru-aspect:70	俺にはスパイ容疑がかけられている。	!rule:cx:kakeru-aspect:70	keep	rewrites
+cx:kakeru-aspect:70	そして、やはり同じように声をかけられる。	!rule:cx:kakeru-aspect:70	keep	rewrites
+cx:kakeru-aspect:3	メガネ…メガネ…あ、私かけてた…。	안경…안경…아, 나 썼다….	fix	rewrites
+cx:kakeru-aspect:3	お前、電話かけたか？	!rule:cx:kakeru-aspect:3	keep	rewrites
+cx:kakeru-aspect:65	テーブルクロスをかけられた机やイスが並べられている。	has:테이블크로스가 걸쳐진	fix	rewrites
+cx:kakeru-aspect:65	持ち手にかけられた木札を見る。	!rule:cx:kakeru-aspect:65	keep	rewrites

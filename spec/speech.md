@@ -339,7 +339,9 @@
 | 今すぐ死のう、 | 바로 지금 죽자, | 유지 |
 | 学生じゃな | 학생이군 | 유지 |
 
-사례: `tests/rules/cases/archaic-speech.tsv`
+명사 뒤에서 문장을 맺는 なんじゃ는 설명의 `(이)지`다(これが初めてなんじゃ。 이것이 처음이지.). 조건의 なら로 읽지 않는다.
+
+사례: `tests/rules/cases/archaic-speech.tsv`, `tests/rules/cases/lexical-kana-homographs.tsv`
 
 ## SPC-14 아가씨 말투의 동사 뒤 ですわ, ですの는 -요다
 

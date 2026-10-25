@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:jisjk:341889	郵便局の前で待っている。	우체국 앞에서 기다리고 있다.	fix	local
 dict:jisjk:341889	本棚の隣に机を置いた。	책장 옆에 책상을 두었다.	fix	local
 dict:jisjk:341889	倉庫の奥に箱がある。	창고 안쪽에 상자가 있다.	fix	local
-dict:jisjk:341889	母のおかげで助かった。	어머니 덕분에 살아났다.	fix	local
+dict:jisjk:341889	母のおかげで助かった。	어머니 덕분에 살았다.	fix	local
 dict:jisjk:341889	寝不足のせいで頭が痛い。	수면 부족 탓으로 머리가 아프다.	fix	local
 dict:jisjk:341889	来週の金曜日に会おう。	다음주 금요일에 만나자.	fix	local
 dict:jisjk:341889	冬の朝は寒い。	겨울 아침은 춥다.	fix	local

@@ -2290,6 +2290,7 @@ bool RuleL240([[maybe_unused]] Item* p) {
 
 // local 241
 //     (gram has Ow or pos[+1] is not 1** or sem[+1] under VFd) and (sem[+1] under VFd|VFd or sem[-1] under VFd|VFd or sem[-2] under VFd|VFd or src[-1] == "すご" and pos[-1] is 7** or sem[+3] has VFd or sem[+2] has VFd)
+//     gram has Hz and end.src starts "かった" and gram has Ow
 bool RuleL241([[maybe_unused]] Item* p) {
     return ((GramEq(p, 0, "Ow"sv) ||
            PumsaNe(p, 1, "1**"sv) ||
@@ -2298,7 +2299,8 @@ bool RuleL241([[maybe_unused]] Item* p) {
            AttrMinusEq(p, -2, "VFdVFd"sv) ||
            (SrcEq(p, -1, "すご"sv) && PumsaEq(p, -1, "7**"sv)) ||
            AttrEq(p, 3, "VFd"sv) ||
-           AttrEq(p, 2, "VFd"sv)));
+           AttrEq(p, 2, "VFd"sv))) ||
+           (GramEq(p, 0, "Hz"sv) && GobiSrcEq(p, 0, "Lかった"sv) && GramEq(p, 0, "Ow"sv));
 }
 
 // local 242
@@ -4696,7 +4698,7 @@ constexpr CompiledRule kLocal[] = {
     {RuleL238, 0x7c5278cb66e93b31ull},
     {RuleL239, 0x14f3c032c3dd9147ull},
     {RuleL240, 0x474a0936ea7e0dc7ull},
-    {RuleL241, 0xb7a5a876d6329180ull},
+    {RuleL241, 0xb65a96feed1689c3ull},
     {RuleL242, 0x47760793ce6608e0ull},
     {RuleL243, 0xe5789b304721da2eull},
     {RuleL244, 0x3e7704b3e9a8ce97ull},

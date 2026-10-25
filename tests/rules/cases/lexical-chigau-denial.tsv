@@ -1,0 +1,28 @@
+# 규칙: LEX-53
+rule	input	expected	kind	layer
+cx:chigau-denial:10	「は？　違うってば！」	「뭐? 아니라니까!」	fix	rewrites
+cx:chigau-denial:10	「はぁ？　違うって」	「하아? 아니라니까」	fix	rewrites
+cx:chigau-denial:10	へ？何ですか？Catwalk? 違いますってぇ！	어? 무엇입니까? Catwalk? 아니라고요!	fix	rewrites
+cx:chigau-denial:10	「全然違うって言ってるだろ」	!rule:cx:chigau-denial:10	keep	rewrites
+cx:chigau-denial:15	「ち、違うわよ、これは京太郎がムードを壊すから」	「아, 아니야, 이건 교타로가 무드를 부수니까」	fix	rewrites
+cx:chigau-denial:15	「ち、ちがうよぉ……素直な気持ちだもん」	「아, 아니야……솔직한 기분인걸」	fix	rewrites
+cx:chigau-denial:15	「色が違う、これは別物だ」	!rule:cx:chigau-denial:15	keep	rewrites
+cx:chigau-denial:20	「……違うわ」	「……아니야」	fix	rewrites
+cx:chigau-denial:20	……違うのかい？	……아닌 거야?	fix	rewrites
+cx:chigau-denial:20	いや、違うんだ。	아니, 아닌 거야.	fix	rewrites
+cx:chigau-denial:20	「いや……違うわけじゃ、ないけど……」	has:아닌 건	fix	rewrites
+cx:chigau-denial:20	衝突？違うわよ！戦闘の損傷よ！	충돌? 아니야! 전투 손상이야!	fix	rewrites
+cx:chigau-denial:20	この私がNumber One? 違うわ。	이 내가 Number One? 아니야.	fix	rewrites
+cx:chigau-denial:20	な、なによ、馬鹿にしないで！えっ、違うの…かな？	뭐, 뭐야, 무시하지 마! 어, 아닌 것…일까?	fix	rewrites
+cx:chigau-denial:20	これが奇跡の作戦、キスカ…だな？なに？違うのか…。	이것이 기적의 작전, 키스카…다? 뭐? 아닌 건가….	fix	rewrites
+cx:chigau-denial:20	敵潜？……あ……違うみたい……。	적잠? ……아……아닌 것 같다…….	fix	rewrites
+cx:chigau-denial:20	Acht acht！…あ、違った	Acht acht! …아, 아니었다	fix	rewrites
+cx:chigau-denial:20	不幸？ 私が？ち、違いますから。	불행? 내가? 아, 아닐 테니까요.	fix	rewrites
+cx:chigau-denial:20	この季節は、少し落ち着きますね……え、違いますか！？	이 계절은, 조금 침착하네요……네, 아닙니까!?	fix	rewrites
+cx:chigau-denial:20	何か違う。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	それは違う。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	私とは違う。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	色が違う。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	全然違うじゃない。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	違う道を選んだ。	!rule:cx:chigau-denial:20	keep	rewrites
+cx:chigau-denial:20	それも違うんだ。	!rule:cx:chigau-denial:20	keep	rewrites

@@ -1,3 +1,3 @@
 rule	input	expected	kind	layer
 dict:jisjk:15768	股間を押さえてうずくまった。	가랑이를 눌러 웅크리고 앉았다.	fix	lookup
-phrase:サンキュー	サンキュー、助かったよ。	고마워, 살아났어.	fix	builtin-phrase
+phrase:サンキュー	サンキュー、助かったよ。	고마워, 살았어.	fix	builtin-phrase

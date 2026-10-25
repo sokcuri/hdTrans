@@ -4,7 +4,7 @@ dict:jisjk:114687	近所の店で本を買う。	이웃의 가게에서 책을 �
 dict:jisjk:341464	なんか飲みたい。	뭔가 마시고 싶다.	fix	local
 dict:jisjk:341464	なんか静かだ。	왠지 조용하다.	keep	local
 dict:jisjk:6169	明日だと困る。	내일이라면 곤란하다.	fix	local
-dict:jisjk:6169	休日だと助かる。	휴일이라면 살아난다.	fix	local
+dict:jisjk:6169	休日だと助かる。	휴일이라면 도움이 된다.	fix	local
 dict:jisjk:6169	本当だとしたら驚く。	사실이라고 하면 놀란다.	keep	local
 dict:jisjk:6169	嘘だと分かった。	거짓말이라고 알았다.	keep	local
 dict:jisjk:259946	古い魔法に驚く。	낡은 마법에 놀란다.	fix	local
