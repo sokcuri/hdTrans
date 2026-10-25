@@ -17,7 +17,7 @@
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
-| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
+| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`를 넘지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
@@ -138,8 +138,8 @@ ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 �
   한 글자씩 만들어 비운 가나 항목으로, 홀로 소리가 없는 가나(spec MNG-5)는 빼고, 뒤 단계가 들리는 대로 쓴 것도
   셉니다(`--trace`로 찾음).
   문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
-  ctest `sets.drops`는 두 수가 `tools/drops-budget.tsv`의 행(`drops`, `unplaced`)과 같아야 통과합니다. 수를 줄인
-  변경은 `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
+  ctest `sets.drops`는 두 수가 `tools/drops-budget.tsv`의 행(`drops`, `unplaced`)을 넘지 않으면 통과합니다. 수를
+  늘린 변경은 고칩니다. 줄인 변경은 통과하고 행을 낮출 수 있다는 경고를 남기며, 행은 릴리스 때 `--update`로 낮춥니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
   경고만 남깁니다(GitHub Actions에서는 주석). 데이터가 바뀐 것이므로 그 데이터로 `--update`해 행을 다시 씁니다. CI의 `linux` 작업은 테스트 데이터를 받은 뒤 문서 세트만
   이 검사로 봅니다(웹 예제는 테스트 데이터에 없습니다).
 
@@ -267,7 +267,7 @@ Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `
 matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
 로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다. 이어서 같은 데이터의
-문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 빠지는 입력 수가 예산과 다르면 실패합니다. 문서가 늘거나 줄어 입력 수가
+문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 빠지는 입력 수가 예산보다 많으면 실패합니다. 문서가 늘거나 줄어 입력 수가
 행과 다르면 경고만 남깁니다. ctest
 `sets.drops`는 테스트 데이터를 받기 전에 돌아 CI에서는 건너뜁니다.
 
