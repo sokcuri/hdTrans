@@ -24,8 +24,8 @@ namespace hdTrans::word {
 struct Flusher;
 class Item;
 
-// Runs the family anchored after the text pass at index pass of TextPassNames, then the family
-// anchored after it, and so on. skip, when given, leaves out the families and rows it names.
+// Runs the families declared after the text pass at index pass of TextPassNames, by stage. skip,
+// when given, leaves out the families and rows it names.
 void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_view name) = nullptr);
 // The id of row index of the builtin table ("cx:return-to:10"); empty for none.
 std::string_view ConstructionId(int index);
@@ -94,9 +94,9 @@ struct CxSurfaceHash {
 
 struct CxFamily {
     std::string name;
-    std::string after;
+    std::string after;      // the text pass it runs after
+    int stage = 0;          // its order among the families after that pass
     std::vector<int> rows;  // into rows, by PRIO
-    int next = -1;          // the family anchored after this one
     int line = 0;           // of its //= line
     // The rows worth trying on a word, by PRIO. A row whose condition needs the word to be one of a
     // few surfaces (S+0== "で", S+0== @set) is listed under each of them; the other rows (open) are
@@ -117,7 +117,7 @@ struct ConstructionTable {
     std::vector<CxNode> nodes;
     std::vector<CxAtom> atoms;
     std::vector<CxMap> maps;
-    std::vector<int> afterPass;  // the family anchored after each pass, -1 for none
+    std::vector<std::vector<int>> afterPass;  // the families after each pass, by stage
     std::vector<CxError> errors;
 };
 

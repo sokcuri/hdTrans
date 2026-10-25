@@ -25,8 +25,8 @@ constexpr std::string_view kPasses[] = {"First", "Second"};
 HD_TEST(constructions_parse) {
     const std::vector<std::string_view> lines = {
         "// a comment\n",
-        "//= de-scene\tafter First\tthe place of an action\n",
-        "//= later\tafter de-scene\truns after de-scene\r\n",
+        "//= de-scene\tafter First 20\tthe place of an action\n",
+        "//= later\tafter First 30\truns after de-scene\r\n",
         "cx:de-scene:20\tLEX-9\t&&2 S+0== \"で\" S-1== @noun.scene\tselect-lemma \"에서\"\tnote\n",
         "cx:de-scene:10\t\t&&2 S+0== \"で\" ||2 S-1== \"一瞬\" S-1== \"瞬時\"\tselect-lemma \"에\"\t\n",
         "cx:later:10\t\t&&2 !1 <0 U+0== \"Rば\" ||0 F+1== \"selected\"\tset-ending \"3 정도\" select-lemma@+1 \"(으)로\"\t\n",
@@ -37,8 +37,7 @@ HD_TEST(constructions_parse) {
     // Rows run by PRIO, not by table order.
     HD_CHECK(t.families[0].rows == (std::vector<int>{1, 0}));
     HD_CHECK_EQ(t.rows[0].spec, std::string("LEX-9"));
-    HD_CHECK(t.afterPass == (std::vector<int>{0, -1}));
-    HD_CHECK_EQ(t.families[0].next, 1);
+    HD_CHECK(t.afterPass == (std::vector<std::vector<int>>{{0, 1}, {}}));
     HD_REQUIRE(t.rows[2].actions.size() == 2);
     HD_CHECK(t.rows[2].actions[0].verb == internal::CxVerb::SetEnding);
     HD_CHECK_EQ(t.rows[2].actions[0].value, std::string("3 정도"));
@@ -57,7 +56,7 @@ HD_TEST(constructions_parse) {
 HD_TEST(constructions_parse_maps) {
     const std::vector<std::string_view> lines = {
         "//~ subject\t나=내 저=제\tthe subject form\n",
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\t&&4 C+0== \"가다\" G+0== \"HdCt\" O+1== \"R는\" F-1== \"person\"\tmap-lemma@-1 @subject set-verb \"가다\"\t\n",
         "cx:a:20\t\tO+0== @Rnoun.event\tmap-target @subject\t\n",
         "cx:a:30\t\tF+0== \"selected\"\tselect-map@-1 @subject\t\n",
@@ -78,7 +77,7 @@ HD_TEST(constructions_parse_maps) {
 
 HD_TEST(constructions_parse_select_and_tail) {
     const std::vector<std::string_view> lines = {
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\t&&2 T+0== \"L、\" F+0== \"final-consonant\"\tselect-lemma \"L(이)가 아니\" select-target@-1 \"L갈 수\"\t\n",
         "cx:a:20\t\tT+0== @Lparticle.contrast\treplace-ending-tail \" 것이다\" \" 것이\"\t\n",
         "cx:a:30\t\tF+0== \"selected\"\treplace-ending-tail \"던\"\t\n",
@@ -100,7 +99,7 @@ HD_TEST(constructions_parse_select_and_tail) {
 
 HD_TEST(constructions_parse_set_sound) {
     const std::vector<std::string_view> lines = {
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\tF+0== \"katakana\"\tset-sound select-lemma@+1 \"(와)과\"\t\n",
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
@@ -115,7 +114,7 @@ HD_TEST(constructions_parse_set_sound) {
 
 HD_TEST(constructions_parse_append_target) {
     const std::vector<std::string_view> lines = {
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\tS+0== \"もう\"\tset-target \"\" append-target@+1 \" 더\"\t\n",
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
@@ -131,7 +130,7 @@ HD_TEST(constructions_parse_append_target) {
 HD_TEST(constructions_parse_prepend_and_verb_from) {
     const std::vector<std::string_view> lines = {
         "//~ tails\t있는=있으면서 버리는=버리면서\tdoc\n",
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\tF+0== \"causative-passive\"\tset-verb-from \"게 &C6@\" \"다\" prepend-target \"억지로 \"\t\n",
         "cx:a:20\t\tS+0== \"くせに\"\tmap-ending-tail@-1 @tails\t\n",
         "cx:a:30\t\tS+0== \"から\"\tmap-target-tail@-1 @tails\t\n",
@@ -153,7 +152,7 @@ HD_TEST(constructions_parse_prepend_and_verb_from) {
     HD_CHECK_EQ(t.rows[1].actions[0].map, 0);
     HD_CHECK_EQ(static_cast<int>(t.rows[1].actions[0].delta), -1);
     const std::vector<std::string_view> bad = {
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\tF+0== \"causative-passive\"\tset-verb-from \"게 &C6@\"\t\n",
     };
     HD_CHECK(!internal::ParseConstructions(bad, kPasses).errors.empty());
@@ -163,7 +162,7 @@ HD_TEST(constructions_parse_named_conditions) {
     const std::vector<std::string_view> lines = {
         "//: particle\t||2 S+0== \"に\" S+0== \"へ\"\ta goal particle\n",
         "//: goal-before\t&&2 :particle F-1== \"selected\"\tone after a word\n",
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\t&&2 :goal-before S+1== \":particle\"\tselect-lemma \"에\"\t\n",
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
@@ -182,7 +181,7 @@ HD_TEST(constructions_parse_named_conditions) {
         "//: two\tS+0== \"に\" S+0== \"へ\"\ttwo expressions\n",
         "//: twice\tS+0== \"に\"\tdoc\n",
         "//: twice\tS+0== \"へ\"\tdoc\n",
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\t:missing\tselect-lemma \"에\"\t\n",
     };
     const std::string errors = Errors(internal::ParseConstructions(bad, kPasses));
@@ -193,7 +192,7 @@ HD_TEST(constructions_parse_named_conditions) {
 
 HD_TEST(constructions_surface_index) {
     const std::vector<std::string_view> lines = {
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\t&&2 F+0== \"selected\" ||2 S+0== \"に\" S+0== \"99には\"\tselect-lemma \"에\"\t\n",
         "cx:a:20\t\t&&2 S+0== \"Lから\" F+0== \"selected\"\tselect-lemma \"에서\"\t\n",
         "cx:a:30\t\t&&3 S+0== \"に\" S+0!= \"で\" S+1== \"の\"\tselect-lemma \"의\"\t\n",
@@ -222,7 +221,7 @@ HD_TEST(constructions_parse_map_errors) {
         "//~ bad\t나=내  저=제\ttwo spaces\n",
         "//~ Bad\t나=내\tname\n",
         "//~ bad\t나=내\n",
-        "//= a\tafter First\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
         "cx:a:10\t\tS+0== \"で\"\tmap-lemma @none\t\n",
         "cx:a:20\t\tS+0== \"で\"\tmap-lemma \"나\"\t\n",
         "cx:a:30\t\tG+0== \"Hdc\"\tselect-lemma \"에\"\t\n",
@@ -241,13 +240,13 @@ HD_TEST(constructions_parse_map_errors) {
 
 HD_TEST(constructions_parse_errors) {
     const std::vector<std::string_view> lines = {
-        "//= a\tafter First\tdoc\n",
-        "//= a\tafter Second\tagain\n",
-        "//= b\tafter Nowhere\tdoc\n",
-        "//= c\tafter First\ttwo after one name\n",
-        "//= d\tafter e\ta cycle\n",
-        "//= e\tafter d\ta cycle\n",
-        "//= empty\tafter Second\tno rows\n",
+        "//= a\tafter First 10\tdoc\n",
+        "//= a\tafter Second 10\tagain\n",
+        "//= b\tafter Nowhere 10\tdoc\n",
+        "//= c\tafter First 10\tone stage twice\n",
+        "//= d\tafter e 10\tafter a family\n",
+        "//= e\tafter First\tno stage\n",
+        "//= empty\tafter Second 10\tno rows\n",
         "cx:a:10\t\tS+0== \"で\"\tselect-lemma \"에\"\n",
         "cx:a\t\tS+0== \"で\"\tselect-lemma \"에\"\t\n",
         "cx:z:10\t\tS+0== \"で\"\tselect-lemma \"에\"\t\n",
@@ -269,6 +268,7 @@ HD_TEST(constructions_parse_errors) {
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
     HD_CHECK_EQ(Errors(t), std::string("2: a second line for the family a\n"
+                                       "6: a family line is //= FAMILY <TAB> after PASS STAGE <TAB> what it is for\n"
                                        "8: a row is ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS <TAB> NOTE\n"
                                        "9: an id is cx:FAMILY:PRIO\n"
                                        "10: no family line for cx:z:10\n"
@@ -281,12 +281,12 @@ HD_TEST(constructions_parse_errors) {
                                        "17: condition: ! takes one operand: !1\n"
                                        "18: a row is ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS <TAB> NOTE\n"
                                        "21: a second row cx:a:90\n"
+                                       "25: no family line for cx:e:10\n"
                                        "20: two rows of a share a PRIO\n"
-                                       "3: the family b runs after Nowhere, which is no pass or family\n"
-                                       "4: two families run after First; order them with after\n"
+                                       "3: the family b runs after Nowhere, which is no pass\n"
+                                       "5: the family d runs after e, which is no pass\n"
                                        "7: no rows for the family empty\n"
-                                       "5: the family d is not reached from a pass\n"
-                                       "6: the family e is not reached from a pass\n"));
+                                       "4: two families run after First at stage 10; give one another stage\n"));
 }
 
 HD_TEST(constructions_builtin_table) {

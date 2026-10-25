@@ -349,12 +349,13 @@ dict:jisjk:6506  店員さんを呼ぶ。             !rule:dict:jisjk:6506     
 코드는 `src/core/word/constructions.cpp`입니다.
 
 ```
-//= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
+//= return-to	after LongVowelAfterKatakana 10	The に of a purpose read 하러 before 戻る is the place one goes back to.
 cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다
 ```
 
-- `//= 가족<TAB>after 이름<TAB>설명`: 가족(family) 하나를 선언합니다. 가족은 `kTextPasses`의 패스나 다른 가족 `이름`
-  바로 뒤에 돕니다. 한 이름 뒤에는 가족 하나만 둘 수 있어서, 가족 사이의 순서는 `after`로만 정합니다.
+- `//= 가족<TAB>after 패스 단계<TAB>설명`: 가족(family) 하나를 선언합니다. 가족은 `kTextPasses`의 `패스` 뒤에 돌고,
+  같은 패스 뒤의 가족들은 `단계`(양의 정수) 오름차순으로 돕니다. 같은 패스 뒤에 같은 단계는 둘 수 없습니다. 단계는
+  10씩 띄어 새 가족이 사이에 들어갈 자리를 둡니다.
 - 행은 `id<TAB>spec<TAB>조건<TAB>동작<TAB>메모`입니다. `id`는 `cx:가족:PRIO`이고, 가족 안에서는 PRIO 오름차순으로
   봅니다. `spec`은 그 행이 따르는 spec/ 규칙 id(없으면 빈칸)입니다. 그 밖의 `//` 줄은 주석입니다.
 - 가족은 사슬의 단어를 왼쪽부터 하나씩 두고, 조건이 처음 참인 행의 동작을 하고 다음 단어로 갑니다.
