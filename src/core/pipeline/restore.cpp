@@ -1,6 +1,7 @@
 #include "core/pipeline/restore.h"
 
 #include <algorithm>
+#include <array>
 #include <map>
 #include <string>
 #include <string_view>
@@ -367,14 +368,16 @@ std::string KoreanCleanup(std::string_view s) {
     struct Row {
         std::string from, to, after;
     };
+    // The rows by the first byte of from, in table order.
     static const auto rows = [] {
-        std::vector<Row> parsed;
+        std::array<std::vector<Row>, 256> parsed;
         const std::string table = dict::ExtraBuiltinText("cleanup.tsv");
         dict::TsvReader reader(table, "//");
         while (reader.Next()) {
             const auto& f = reader.Fields();
             if (f.size() < 2 || f[0].empty()) continue;
-            parsed.push_back({std::string(f[0]), std::string(f[1]), f.size() >= 3 ? std::string(f[2]) : std::string()});
+            parsed[static_cast<unsigned char>(f[0][0])].push_back(
+                {std::string(f[0]), std::string(f[1]), f.size() >= 3 ? std::string(f[2]) : std::string()});
         }
         return parsed;
     }();
@@ -382,7 +385,7 @@ std::string KoreanCleanup(std::string_view s) {
     out.reserve(s.size());
     while (!s.empty()) {
         bool matched = false;
-        for (const auto& [from, to, after] : rows) {
+        for (const auto& [from, to, after] : rows[static_cast<unsigned char>(s.front())]) {
             if (!s.starts_with(from) || (after == "final" && !AfterFinalConsonant(out)) ||
                 (after == "attributive" && !AfterAttributive(out))) {
                 continue;
