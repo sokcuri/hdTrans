@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.4](https://github.com/sokcuri/hdTrans/compare/v0.5.3...v0.5.4) (2026-10-25)
+
+
+### Bug Fixes
+
+* **dict:** read 第一子, 第一歩 and 第一声 as 첫째 아이, 첫걸음 and 첫마디 ([#153](https://github.com/sokcuri/hdTrans/issues/153)) ([b62f24f](https://github.com/sokcuri/hdTrans/commit/b62f24f9ff849f3dd8766dd511867e73d5800a73))
+* **grammar:** read particles, endings and quotes of the web-example review classes ([#152](https://github.com/sokcuri/hdTrans/issues/152)) ([d853a81](https://github.com/sokcuri/hdTrans/commit/d853a81f8ba7059d0b9e40a0c99a3836b50aa862))
+* **grammar:** read ほしい after a て form as -아 줬으면 좋겠다 ([#154](https://github.com/sokcuri/hdTrans/issues/154)) ([d948478](https://github.com/sokcuri/hdTrans/commit/d9484784702214f1174dfe779361a45b791d66b6))
+* **release:** read function nouns, discourse words and particles by use and stop the merge conflicts of generated files ([6f63e90](https://github.com/sokcuri/hdTrans/commit/6f63e9016de7b811e1dce8b72cd2883963b6d7b1))
+* **translation:** read function nouns, discourse words, names and the ぽい tic by use ([#151](https://github.com/sokcuri/hdTrans/issues/151)) ([d389075](https://github.com/sokcuri/hdTrans/commit/d389075db2181351850c1ac79a870a37f3ae8139))
+
 ## [0.5.3](https://github.com/sokcuri/hdTrans/compare/v0.5.2...v0.5.3) (2026-10-25)
 
 
