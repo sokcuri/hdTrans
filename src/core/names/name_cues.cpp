@@ -347,10 +347,15 @@ std::vector<std::string_view> ListedNames(const dict::Snapshot& snap, std::strin
 std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text) {
     std::vector<NameCue> out;
     auto add = [&](std::string_view key, bool strong) {
-        strong = strong && Memorable(snap, key);
+        const bool recurring = strong && text::RuneCount(key) >= 2 && !Memorable(snap, key);
+        strong = strong && !recurring && Memorable(snap, key);
         const auto found = std::find_if(out.begin(), out.end(), [&](const NameCue& c) { return c.key == key; });
-        if (found == out.end()) out.push_back({std::string(key), strong});
-        else found->strong = found->strong || strong;
+        if (found == out.end()) {
+            out.push_back({std::string(key), strong, recurring});
+        } else {
+            found->strong = found->strong || strong;
+            found->recurring = (found->recurring || recurring) && !found->strong;
+        }
     };
     for (const std::string_view w : ListedNames(snap, text)) {
         const std::vector<std::size_t> keys = snap.PersonKeysAt(w);

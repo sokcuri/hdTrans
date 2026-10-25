@@ -17,6 +17,10 @@ struct NameCue {
     // Any other cue (a self-introduction in です or よ, a call, a list of names, or a cue of a
     // word a later line may mean in its common sense) holds in its line only.
     bool strong = false;
+    // A cue that would be strong but names a word of time, weather, the sky or a place, or one a
+    // later line may mean in its common sense: it holds for the document only where two lines of
+    // the document cue it so (駆逐艦夕立 and 夕立、突撃する).
+    bool recurring = false;
 };
 
 // The name-layer keys with a person sense that text cues as names, in order of first
