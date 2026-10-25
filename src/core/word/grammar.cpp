@@ -2654,6 +2654,19 @@ bool OtherGiver(const Item* it) {
     return false;
 }
 
+// Whether the sentence before it names a doer other than the speaker in が, は or も (彼が, 田中は):
+// the plain verb あげる then tells what that doer gives.
+bool NamedDoer(const Item* it) {
+    for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (s == "。" || s == "！" || s == "？" || s == "!" || s == "?" || s == "「" || s == "『") break;
+        if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr && !dict::InClass("pronoun.speaker", x->prev->group->surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 }  // namespace
 
 void OfferPromise(Flusher& f) {
@@ -2713,7 +2726,9 @@ void OfferPromise(Flusher& f) {
         }
         // A final particle marks speech outside brackets too (a line of dialogue), and so does an
         // exclamation mark after the あげる of a て form with no other doer or habit before it
-        // (見せてあげる！; not 母が作ってあげる！ nor the shouted 見せてやる！).
+        // (見せてあげる！; not 母が作ってあげる！ nor the shouted 見せてやる！), or after the plain
+        // verb あげる in る or ます with no doer named at all (チョコ、あげます！; not 彼が花をあげます！; a
+        // volitional is cx:grant-will's).
         // The て form may be the item before or the start of the item itself (してあげ).
         const std::string_view lead = gives ? surface.substr(0, surface.size() - std::string_view("あげ").size()) : "";
         const bool afterTe = lead.ends_with("て") || lead.ends_with("で") ||
@@ -2721,7 +2736,7 @@ void OfferPromise(Flusher& f) {
                               (it->prev->DirectSurface().ends_with("て") || it->prev->DirectSurface().ends_with("で")));
         const bool spoken = ending == "よ" || ending == "ね" || ending == "わ" || ending == "さ" || ending == "ぜ" ||
                             ending == "ぞ" ||
-                            (gives && afterTe && !OtherGiver(it) &&
+                            (gives && (afterTe || ((ending == "る" || ending == "ます") && !NamedDoer(it))) && !OtherGiver(it) &&
                              std::ranges::any_of(dict::ClassMembers("mark.spoken-exclamation"),
                                                  [&](std::string_view m) { return rest.starts_with(m); }));
         int open = 0, close = 0;
