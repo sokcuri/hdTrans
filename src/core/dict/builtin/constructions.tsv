@@ -530,3 +530,9 @@ cx:he-no:20	GRM-30	&&3 :he-no S+1== @noun.he-gift F-1== "person"	set-target "에
 cx:he-no:25	GRM-30	&&2 :he-no S+1== @noun.he-gift	set-target "에 주는"	社会への贈り物 사회에 주는 선물
 cx:he-no:30	GRM-30	&&2 :he-no ||3 S+1== @Rnoun.he-path &&2 P+2== "1" S+2== @Rnoun.he-path &&3 S+2== "の" P+3== "1" S+3== @Rnoun.he-path	set-target "(으)로의"	王都への道 왕도로의 길
 cx:he-no:40	GRM-30	:he-no	set-target "에 대한"	王家への忠誠 왕가에 대한 충성
+//: noda-end	&&3 F+0== "narration" F+0== "quote-end" !1 S+1== "00？?"	The word ends a sentence of narration.
+//= noda-narration	after OfferPromise 450	A のだ or なのだ that ends a sentence of narration explains: the predicate before it is the adnominal with 것이다 (彼は行くのだ 그는 가는 것이다, 死んだのだ 죽었던 것이다, 質素なのだ 검소한 것이다, 場なのだ 자리인 것이다), not the bare -다. Not after a formal noun whose own Korean already says it (はずなのだ 것이다, わけなのだ, ものなのだ, だけなのだ 뿐이다), nor in quotes, where speech keeps the plain end (spec SPC-1).
+cx:noda-narration:10	GRM-31	&&5 S+0== "なのだ" D+0== "(이)다" :noda-end ||2 P-1== "1" S-1== "00”」』）)" !1 S-1== @noun.noda-plain	set-target "인 것이다"	場なのだ 자리인 것이다
+cx:noda-narration:20	GRM-31	&&4 F+0== "conjugating" I+0== "Rのだ" Y+0== "4다" :noda-end	set-ending "0 것이다"	行くのだ 가는 것이다
+cx:noda-narration:30	GRM-31	&&4 F+0== "conjugating" I+0== "Rのだ" Y+0== "5다" :noda-end	set-ending "5던 것이다"	死んだのだ 죽었던 것이다
+cx:noda-narration:40	GRM-31	&&4 F+0== "conjugating" I+0== "Rなのだ" Y+0== "1다" :noda-end	set-ending "4 것이다"	質素なのだ 검소한 것이다

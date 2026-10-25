@@ -1,0 +1,25 @@
+# 규칙: GRM-31
+rule	input	expected	kind	layer
+cx:noda-narration:20	「フヒッ」とも「オホッ」の中間ぐらいの奇妙な声で笑うのだ。	has:웃는 것이다.	fix	rewrites
+cx:noda-narration:20	人間は相手を見て「それは人間だ」と認識して初めて行動に移れるのだ。	has:있는 것이다.	fix	rewrites
+cx:noda-narration:20	そうして「じっっ」とクロードを見つめるのだ。	has:바라보는 것이다.	fix	rewrites
+cx:noda-narration:20	「行こう」と彼は言った。彼は行くのだ。	「가자」라고 그는 말했다. 그는 가는 것이다.	fix	rewrites
+cx:noda-narration:20	「戦時とはいえ男爵家の一人娘を軍事徴用するのだ。特別扱いは当然である」と言った。	lacks:징용하는 것이다	keep	rewrites
+cx:noda-narration:20	彼は行くのだ。	그는 간다.	keep	rewrites
+cx:noda-narration:30	「では次は第三王子にお相手を」と急にまわりの貴族たちが騒ぎ出したのだ。	has:떠들기 시작했던 것이다.	fix	rewrites
+cx:noda-narration:30	実際は、「まあ、そんなところも好きだけど」と言ったのだ。	has:말했던 것이다.	fix	rewrites
+cx:noda-narration:30	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	has:보았던 것이다.	fix	rewrites
+cx:noda-narration:30	さらにはその誘拐犯に「聖女なのだから世界を救え」と重荷を背負わされたのだ。	has:것이다.	fix	rewrites
+cx:noda-narration:30	「行こう」と言った。だから……付けたのだ。	has:붙였던 것이다.	fix	rewrites
+cx:noda-narration:30	「行こう」と言った。彼女は死んだはずなのだ。	has:죽었을 것이다.	keep	rewrites
+cx:noda-narration:40	「行こう」と言った。王宮は意外に質素なのだ。	has:검소한 것이다.	fix	rewrites
+cx:noda-narration:40	「行こう」と言った。卑怯な手は嫌いなのだ。	has:싫은 것이다.	fix	rewrites
+cx:noda-narration:40	「卑怯な手は嫌いなのだ」	lacks:싫은 것이다	keep	rewrites
+cx:noda-narration:10	瑞鸞の制服は「着てみたい制服ランキング」で常に１位を独占している、女の子の憧れの制服なのだ。	has:제복인 것이다.	fix	rewrites
+cx:noda-narration:10	だから理解する。ここでの悪ふざけは、日中の魅音とは別の出来事なのだ。だから…「詩音」なんだと。	has:사건인 것이다.	fix	rewrites
+cx:noda-narration:10	「行こう」と言った。いかんせん今この場は“私を断罪する場”なのだ。	has:”인 것이다.	fix	rewrites
+cx:noda-narration:10	「行こう」と言った。怒られるのは25日後なのだ。	has:후인 것이다.	fix	rewrites
+cx:noda-narration:10	「行こう」と言った。それは嘘なのだ。	「가자」라고 말했다. 그것은 거짓말인 것이다.	fix	rewrites
+cx:noda-narration:10	「それは嘘なのだ」	「그건 거짓말이다」	keep	rewrites
+cx:noda-narration:10	「行こう」と言った。（なんなのだ？この小屋は…）	lacks:것이다	keep	rewrites
+cx:noda-narration:10	「行こう」と言った。草を育てるだけなのだ。	lacks:것이다	keep	rewrites

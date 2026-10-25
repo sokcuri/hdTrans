@@ -184,6 +184,7 @@
 //= noun.he-sent	Nouns of something sent or said to someone (手紙, 報告, 電話): the への before them is 에게 보내는 after a person (彼への手紙 그에게 보내는 편지), (으)로 보내는 after anything else.
 //= noun.he-gift	Nouns of something given to someone (贈り物, ご褒美): the への before them is 에게 주는 after a person (自分へのご褒美 자신에게 주는 상), 에 주는 after anything else.
 //= noun.he-path	Ends of nouns of a way, a move or a change toward a place or a state (道, 入学, 輸送, 変化): the への before them is (으)로의 (王都への道 왕도로의 길, 大学への進学 대학으로의 진학).
+//= noun.noda-plain	Formal nouns whose Korean already explains, before which a のだ of narration stays the bare copula (はずなのだ 것이다, だけなのだ 뿐이다).
 //= noun.honored-person	Nouns of the people a shop or a host speaks to or of: after ご, a verbal noun and の they are the ones who did it (ご予約のお客様 예약하신 손님, ご参加の皆様 참가하신 여러분).
 //= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
@@ -2585,6 +2586,27 @@ noun.he-path	激突
 noun.he-path	衝突
 noun.he-path	突撃
 noun.he-path	体当たり
+noun.noda-plain	はず
+noun.noda-plain	筈
+noun.noda-plain	わけ
+noun.noda-plain	訳
+noun.noda-plain	もの
+noun.noda-plain	物
+noun.noda-plain	もん
+noun.noda-plain	こと
+noun.noda-plain	事
+noun.noda-plain	だけ
+noun.noda-plain	ばかり
+noun.noda-plain	のみ
+noun.noda-plain	ところ
+noun.noda-plain	所
+noun.noda-plain	つもり
+noun.noda-plain	よう
+noun.noda-plain	様
+noun.noda-plain	通り
+noun.noda-plain	せい
+noun.noda-plain	次第
+noun.noda-plain	まま
 noun.honored-person	お客様
 noun.honored-person	お客さま
 noun.honored-person	お客さん
