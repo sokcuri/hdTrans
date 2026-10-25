@@ -1,29 +1,43 @@
 # 규칙: GRM-35
 rule	input	expected	kind	layer
-cx:te-hoshii:10	ぜひまた来てほしい。	has:와 줬으면 한다.	fix	rewrites
-cx:te-hoshii:10	「すまない、ダリヤ。婚約を破棄させてほしい」	has:줬으면 한다」	fix	rewrites
-cx:te-hoshii:10	ややこしいから、どちらか一人にしてほしい。	has:줬으면 한다.	fix	rewrites
-cx:te-hoshii:10	誰かほめてほしい。	has:줬으면 한다.	fix	rewrites
+cx:te-hoshii:10	ぜひまた来てほしい。	has:와 줬으면 좋겠다.	fix	rewrites
+cx:te-hoshii:10	「すまない、ダリヤ。婚約を破棄させてほしい」	has:줬으면 좋겠다」	fix	rewrites
+cx:te-hoshii:10	ややこしいから、どちらか一人にしてほしい。	has:줬으면 좋겠다.	fix	rewrites
+cx:te-hoshii:10	誰かほめてほしい。	has:줬으면 좋겠다.	fix	rewrites
 cx:te-hoshii:10	何もないけど、洗濯物干すの手伝ってほしいの	lacks:기를 원	keep	rewrites
-cx:te-hoshii:12	道具屋の主人から、やくそうを5個集めてほしいと頼まれた。	has:모아 줬으면 한다고	fix	rewrites
-cx:te-hoshii:12	早く来てほしいと思う。	lacks:좋겠다고	keep	rewrites
-cx:te-hoshii:20	「理由を教えてほしいのだけれど？」	has:가르쳐 줬으면 하는데?	fix	rewrites
+cx:te-hoshii:12	道具屋の主人から、やくそうを5個集めてほしいと頼まれた。	has:모아 줬으면 좋겠다고	fix	rewrites
+cx:te-hoshii:12	早く来てほしいと思う。	has:와 줬으면 좋겠다고	fix	rewrites
+cx:te-hoshii:20	「理由を教えてほしいのだけれど？」	has:가르쳐 줬으면 좋겠는데?	fix	rewrites
 cx:te-hoshii:20	「えーミドリまじもんなら俺も見てほしい」	has:봐 줬으면	fix	rewrites
 cx:te-hoshii:20	またコンビで実況やってほしいくらいｗｗ	has:해 줬으면 할 정도	fix	rewrites
 cx:te-hoshii:20	できればその幸運を、結婚運にも入れてほしかったところ。	has:넣어 줬으면 했던	fix	rewrites
 cx:te-hoshii:20	ミーナには、城で皆の帰りを待っていてほしいの。	lacks:기를 원	fix	rewrites
 cx:te-hoshii:20	そうであってほしいけど……。	lacks:줬으면	keep	rewrites
 cx:te-hoshii:20	おもちゃがほしい。	장난감을 갖고 싶다.	keep	rewrites
-cx:te-hoshii:5	それだけは分かってくれてほしい。	has:알아 주었으면 한다.	fix	rewrites
-cx:te-hoshii:5	ボス討伐に手伝ってくれてほしい。	has:도와 주었으면 한다.	fix	rewrites
-cx:te-hoshii:5	早く来てほしい。	has:와 줬으면 한다.	keep	rewrites
-cx:te-hoshii:30	私を見てほしくない。	has:보지 않았으면 한다.	fix	rewrites
-cx:te-hoshii:30	お腹のすいた生活を、もう誰にも味わってほしくない。	has:맛보지 않았으면 한다.	fix	rewrites
+cx:te-hoshii:5	それだけは分かってくれてほしい。	has:알아 주었으면 좋겠다.	fix	rewrites
+cx:te-hoshii:5	ボス討伐に手伝ってくれてほしい。	has:도와 주었으면 좋겠다.	fix	rewrites
+cx:te-hoshii:4	早く来てほしい。	has:와 줬으면 좋겠다.	keep	rewrites
+cx:te-hoshii:30	私を見てほしくない。	has:보지 말았으면 좋겠다.	fix	rewrites
+cx:te-hoshii:30	お腹のすいた生活を、もう誰にも味わってほしくない。	has:맛보지 말았으면 좋겠다.	fix	rewrites
 cx:te-hoshii:30	早く来てほしい。	lacks:않았으면	keep	rewrites
-cx:te-hoshii:35	なにお腹のすいた生活を、もう誰にも味わってほしくなかった。	has:맛보지 않았으면 했다.	fix	rewrites
-cx:te-hoshii:35	見てほしくなかった。	has:보지 않았으면 했다.	fix	rewrites
-cx:te-hoshii:35	私を見てほしくない。	has:보지 않았으면 한다.	keep	rewrites
-cx:te-hoshii:30	行かないでほしい。	has:가지 말아 주었으면 한다.	keep	rewrites
-cx:te-hoshii:30	「…レナは弱いから…いじめないでほしいな」	has:괴롭히지 말아 줬으면	keep	rewrites
+cx:te-hoshii:35	なにお腹のすいた生活を、もう誰にも味わってほしくなかった。	has:맛보지 말았으면 했다.	fix	rewrites
+cx:te-hoshii:35	見てほしくなかった。	has:보지 말았으면 했다.	fix	rewrites
+cx:te-hoshii:35	私を見てほしくない。	has:보지 말았으면 좋겠다.	keep	rewrites
+cx:te-hoshii:40	行かないでほしい。	has:가지 말았으면 좋겠다.	fix	rewrites
+cx:te-hoshii:40	「…レナは弱いから…いじめないでほしいな」	has:괴롭히지 말았으면	fix	rewrites
 cx:te-hoshii:30	そんな顔をしないでくれ。	그런 얼굴을 하지 말아 줘.	keep	rewrites
 cx:te-hoshii:20	　未来にこうあってほしいと思っている、俺の勝手な欲望。	lacks:줬으면	keep	rewrites
+cx:te-hoshii:4	それだけは分かってくれてほしい。	has:알아 주었으면 좋겠다.	fix	rewrites
+cx:te-hoshii:5	君に分かってくれてほしかった。	lacks:좋겠다	keep	rewrites
+cx:te-hoshii:15	手伝ってほしいんだ。	has:도와 줬으면 좋겠다.	fix	rewrites
+cx:te-hoshii:15	見てほしいものがある。	has:봐 줬으면 하는 것이	keep	rewrites
+cx:te-hoshii:12	早く来てほしい。	has:와 줬으면 좋겠다.	keep	rewrites
+cx:te-hoshii:16	「早く来てほしいよ」	has:와 줬으면 좋겠어」	fix	rewrites
+cx:te-hoshii:16	「早く来てほしいです」	lacks:좋겠어」	keep	rewrites
+cx:te-hoshii:17	「理由を教えてほしいのだけれど？」	has:가르쳐 줬으면 좋겠는데?	fix	rewrites
+cx:te-hoshii:17	見てほしいものがある。	has:봐 줬으면 하는 것이	keep	rewrites
+cx:te-hoshii:18	「早く来てほしいです」	has:와 줬으면 좋겠습니다」	fix	rewrites
+cx:te-hoshii:18	「早く来てほしいよ」	lacks:좋겠습니다	keep	rewrites
+cx:te-hoshii:19	「早く来てほしいですよ」	has:와 줬으면 좋겠어요」	fix	rewrites
+cx:te-hoshii:19	「早く来てほしいです」	lacks:좋겠어요	keep	rewrites
+cx:te-hoshii:40	そんな顔をしないでくれ。	has:하지 말아 줘.	keep	rewrites

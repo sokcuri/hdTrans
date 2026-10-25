@@ -44,7 +44,7 @@ normalize:ruby	まさか先生が{rb}庇{/rb}{rt}かば{/rt}ってくれると�
 normalize:ruby	{rb}庇{/rb}{rt}かば{/rt}ってくれたんだよ……	{rb}감싸{/rb}{rt}감싸{/rt} 줬어……	fix	normalize
 normalize:ruby	先生も俺を{rb}庇{/rb}{rt}かば{/rt}ってくれて、	선생님도 나를 {rb}감싸{/rb}{rt}감싸{/rt} 주어,	fix	normalize
 normalize:ruby	そこに頭を{rb}委{/rb}{rt}ゆだ{/rt}ねてみる。	거기에 머리를 {rb}맡겨{/rb}{rt}맡겨{/rt} 본다.	fix	normalize
-word:ruby-neighbour	そして正しく{rb}裁{/rb}{rt}さば{/rt}いてほしい。	그리고 올바르게 {rb}재판해 줬으면 한다{/rb}{rt}처리해 줬으면 한다{/rt}.	fix	local-ending
+word:ruby-neighbour	そして正しく{rb}裁{/rb}{rt}さば{/rt}いてほしい。	그리고 올바르게 {rb}재판해 줬으면 좋겠다{/rb}{rt}처리해 줬으면 좋겠다{/rt}.	fix	local-ending
 word:ruby-neighbour	希望が{rb}溢{/rb}{rt}あふ{/rt}れてる。	희망이 {rb}흘러넘치고 있다{/rb}{rt}넘치고 있다{/rt}.	fix	local-ending
 word:ruby-neighbour	どうしてこうも無責任に{rb}裁{/rb}{rt}さば{/rt}くのか。	왜 이렇게도 무책임하게 {rb}재판하는 건가{/rb}{rt}처리하는 건가{/rt}.	keep	local-ending
 normalize:ruby	ずっと、{rb}囚{/rb}{rt}とら{/rt}われているんだな……	계속, {rb}붙잡히고{/rb}{rt}얽매이고{/rt} 있는구나……	current	normalize

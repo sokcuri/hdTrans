@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 dict:gram:indakedo:いんだけど	ちょっと眠いんだけど、大丈夫。	조금 졸린데, 괜찮아.	fix	lookup
-dict:gram:indakedo:いんだけど	手伝ってほしいんだけど。	도와 줬으면 하는데.	fix	lookup
+dict:gram:indakedo:いんだけど	手伝ってほしいんだけど。	도와 줬으면 좋겠는데.	fix	lookup
 dict:jisjk:343437	静かなんだけど、寂しい。	조용한데, 외롭다.	fix	lookup
 dict:jisjk:264706	昨日会ったんだけど、元気だった。	어제 만났는데, 건강했다.	fix	lookup
