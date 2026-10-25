@@ -365,6 +365,8 @@ constexpr NamedFeature kFeatures[] = {
          return !lemma.empty() && n != nullptr && ItemLemma(f, n, n->selected).starts_with(lemma + " ");
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
+    // The line uses the tic ぽい (PoiLine).
+    {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
