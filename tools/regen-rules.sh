@@ -23,5 +23,5 @@ case $lint in
     *) echo "lint: $lint (hdrulec lint build/rules.txt -dicts dicts)" >&2; exit 1 ;;
 esac
 "$bin/hdrulec" dump build/rules.txt -hash > src/core/rules/program.hash
-"$bin/hdrulec" cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+"$bin/hdrulec" cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp
 build

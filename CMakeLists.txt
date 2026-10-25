@@ -326,7 +326,7 @@ if(NOT EMSCRIPTEN)
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_lint_checks.cmake")
         add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
-        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals
+        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -globals
             -check "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules/compiled_gen.cpp")
         set_tests_properties(rules.lint rules.verify rules.identity rules.generated PROPERTIES
             FIXTURES_REQUIRED ruledump)

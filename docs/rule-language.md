@@ -312,7 +312,7 @@ TSV로 씁니다. 지역 규칙은 `L 번호`, 전역 규칙은 `G PRIO`와 품�
    build/mac/hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in
    build/mac/hdrulec lint build/rules.txt -dicts dicts 2>&1 | tail -1
    build/mac/hdrulec dump build/rules.txt -hash > src/core/rules/program.hash
-   build/mac/hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+   build/mac/hdrulec cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp
    ```
 
 4. `HDTRANS_DICTS`를 주고 전체 `ctest`를 돌립니다. `rules.cases.themes`에서 내가 고친 규칙이 아닌 행이 깨지면

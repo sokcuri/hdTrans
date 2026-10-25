@@ -56,7 +56,7 @@ HD_TEST(rules_compiled_attached) {
     // Every compiled rule matches its record; an edited record would fall back to its nodes.
     HD_CHECK_EQ(local, tableLocal);
     HD_CHECK_EQ(global, tableGlobal);
-    HD_CHECK(local > 0);
+    HD_CHECK(global > 0);
 }
 
 HD_TEST(rules_compiled_same_calls) {
@@ -82,7 +82,7 @@ HD_TEST(rules_compiled_same_calls) {
 // An edited record keeps its index but loses its code.
 HD_TEST(rules_compiled_hash) {
     HD_CHECK(rules::compiled::RecordHash("L 1 ||0") != rules::compiled::RecordHash("L 1 ||0 "));
-    const auto local = rules::compiled::LocalRules();
-    HD_REQUIRE(local.size() > 3 && local[3].code != nullptr);
-    HD_CHECK_EQ(local[3].hash, rules::compiled::RecordHash("L 3 ||1 &&3 S+1== \"あそば\" D+1== \"하&AE@\" P+1== \"4**\""));
+    const auto global = rules::compiled::GlobalRules();
+    HD_REQUIRE(!global.empty() && global[0].code != nullptr);
+    HD_CHECK_EQ(global[0].hash, rules::compiled::RecordHash("G 1 1 997 1 ||1 &&4 S+0== \"屋\" S-1== \"各部\" D-1= \"\" D+0= \"각 방\""));
 }
