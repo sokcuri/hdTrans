@@ -106,7 +106,7 @@ bool NegatesVerb(const std::vector<ResolvedItem>& items, int i) {
     const auto starts = [&](std::span<const std::string_view> members) {
         return std::any_of(members.begin(), members.end(), [&](std::string_view m) { return source.starts_with(m); });
     };
-    return starts(dict::ClassMembers("ending.negative-start")) && !starts(dict::ClassMembers("ending.negative-start-not"));
+    return starts(dict::ClassMembers(HDTRANS_CLASS("ending.negative-start"))) && !starts(dict::ClassMembers(HDTRANS_CLASS("ending.negative-start-not")));
 }
 
 // The negation of the 있다 of a potential (할 수 있지 않습니다 → 할 수 없습니다): suffix, the Korean

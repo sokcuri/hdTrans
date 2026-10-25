@@ -37,7 +37,7 @@ bool AnyRuneOf(std::string_view s, bool (*pred)(char32_t)) {
 }
 
 bool IsParticleRune(char32_t c) {
-    for (const std::string_view p : dict::ClassMembers("particle.after-name")) {
+    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("particle.after-name"))) {
         if (FirstRune(p).cp == c) return true;
     }
     return false;
@@ -289,7 +289,7 @@ bool CueAltAt(std::string_view s, std::size_t pos) {
     }
     if (rest.starts_with("、")) {
         const std::string_view tail = rest.substr(std::string_view("、").size());
-        for (const std::string_view w : dict::ClassMembers("name.action-after")) {
+        for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("name.action-after"))) {
             if (tail.starts_with(w)) return true;
         }
     }
@@ -347,8 +347,8 @@ bool PlainLabel(std::string_view p) {
 }
 
 bool LabelRole(std::string_view p) {
-    if (dict::InClass("noun.label-role", p) || LabelRolePattern(p)) return true;
-    for (const std::string_view s : dict::ClassMembers("suffix.label-role")) {
+    if (dict::InClass(HDTRANS_CLASS("noun.label-role"), p) || LabelRolePattern(p)) return true;
+    for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("suffix.label-role"))) {
         if (p.ends_with(s)) return true;
     }
     for (const char c : p) {
@@ -358,11 +358,11 @@ bool LabelRole(std::string_view p) {
 }
 
 bool RoleLike(std::string_view t) {
-    return dict::InClass("noun.role", t) || (Has(t, "の") && !AllRunes(t, IsHiragana));  // の of a hiragana name (のぞみ)
+    return dict::InClass(HDTRANS_CLASS("noun.role"), t) || (Has(t, "の") && !AllRunes(t, IsHiragana));  // の of a hiragana name (のぞみ)
 }
 
 bool ParentLabel(std::string_view p, std::string& x) {
-    for (const std::string_view s : dict::ClassMembers("suffix.label-parent")) {
+    for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("suffix.label-parent"))) {
         if (p.size() > s.size() && p.ends_with(s)) {
             const std::string_view head = p.substr(0, p.size() - s.size());
             if (AllRunes(head, IsNameRune)) {
@@ -392,7 +392,7 @@ std::vector<std::string> LabelParts(std::string_view k) {
     }
     for (std::string& p : parts) {
         std::string_view t = TrimSpace(p);
-        for (const std::string_view h : dict::ClassMembers("honorific.name")) {
+        for (const std::string_view h : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
             if (t.size() > h.size() && t.ends_with(h)) {
                 t.remove_suffix(h.size());
                 break;
@@ -565,14 +565,14 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     std::size_t start = run.start, end = run.end;
     std::string_view rest = line.substr(end);
     std::string_view h;
-    for (const std::string_view x : dict::ClassMembers("honorific.name")) {
+    for (const std::string_view x : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
         if (rest.starts_with(x)) {
             h = x;
             break;
         }
     }
     if (h.empty()) {
-        for (const std::string_view k : dict::ClassMembers("honorific.kanji-name")) {
+        for (const std::string_view k : dict::ClassMembers(HDTRANS_CLASS("honorific.kanji-name"))) {
             if (t.size() > k.size() && std::string_view(t).ends_with(k)) {
                 h = k;
                 break;
@@ -634,7 +634,7 @@ bool Registry::PredicateForm(std::string_view run) {
 // さよりちゃんと初めて, ちゃんと話を).
 std::string_view Registry::KanaHonorificAt(std::string_view s) {
     std::string_view h;
-    for (const std::string_view x : dict::ClassMembers("honorific.kana-name")) {
+    for (const std::string_view x : dict::ClassMembers(HDTRANS_CLASS("honorific.kana-name"))) {
         if (s.starts_with(x) && x.size() > h.size()) h = x;
     }
     constexpr std::string_view kChanto = "ちゃんと";
@@ -709,7 +709,7 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
 }
 
 bool Registry::Addressed(std::string_view line, std::string_view t) {
-    for (const std::string_view h : dict::ClassMembers("honorific.name")) {
+    for (const std::string_view h : dict::ClassMembers(HDTRANS_CLASS("honorific.name"))) {
         if (line.find(std::string(t) + std::string(h)) != std::string_view::npos) return true;
     }
     bool script = false;

@@ -36,7 +36,7 @@ bool Titled(std::string_view text, std::string_view key) {
         if (before.ends_with("、")) before.remove_suffix(std::string_view("、").size());
         const std::string_view after = text.substr(at + key.size());
         if (before.ends_with("艦")) return true;
-        for (const std::string_view t : dict::ClassMembers("honorific.person-title")) {
+        for (const std::string_view t : dict::ClassMembers(HDTRANS_CLASS("honorific.person-title"))) {
             if (after.starts_with(t)) return true;
         }
         i = at + key.size();
@@ -115,7 +115,7 @@ bool Continues(std::string_view line, std::string_view next) {
     next = names::internal::TrimSpace(next);
     if ((!line.ends_with("て") && !line.ends_with("で")) || next.empty()) return false;
     const auto in = [&](std::string_view mark) { return line.find(mark) != std::string_view::npos; };
-    return !std::ranges::any_of(dict::ClassMembers("mark.sentence-end"), in) &&
+    return !std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("mark.sentence-end")), in) &&
            !names::internal::AllRunes(next, [](char32_t c) { return !names::internal::IsHiragana(c); });
 }
 

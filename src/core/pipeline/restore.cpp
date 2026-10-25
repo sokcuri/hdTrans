@@ -758,7 +758,7 @@ std::vector<Laugh> TypedLaughs(const std::vector<RuneAt>& src, const std::vector
     auto particle = [](char32_t r) {
         std::string one;
         text::AppendRune(one, r);
-        return dict::InClass("particle.after-letter", one);
+        return dict::InClass(HDTRANS_CLASS("particle.after-letter"), one);
     };
     // Whether the rune at i, on the side step of a run of width wide, joins the run into a word
     // or an address: a Latin letter or digit of the same width, a mark of kAddressMarks, or dots
@@ -826,14 +826,14 @@ std::vector<Laugh> OutputLaughs(const std::vector<RuneAt>& rs, const std::vector
 
 std::string WriteLaughter(std::string_view line, std::string_view source) {
     bool any = false;
-    for (const std::string_view m : dict::ClassMembers("mark.laughter")) any = any || line.find(m) != std::string_view::npos;
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.laughter"))) any = any || line.find(m) != std::string_view::npos;
     if (!any) return std::string(line);
     std::u32string laughs, before;
-    for (const std::string_view m : dict::ClassMembers("mark.laughter")) laughs += text::DecodeRune(m).cp;
-    for (const std::string_view m : dict::ClassMembers("mark.before-laughter")) before += text::DecodeRune(m).cp;
-    const std::string_view korean = dict::ClassMembers("ko.laughter").front();
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.laughter"))) laughs += text::DecodeRune(m).cp;
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.before-laughter"))) before += text::DecodeRune(m).cp;
+    const std::string_view korean = dict::ClassMembers(HDTRANS_CLASS("ko.laughter")).front();
     const char32_t koreanRune = text::DecodeRune(korean).cp;
-    const std::string bracketed = "(" + std::string(dict::ClassMembers("ko.bracketed-laughter").front()) + ")";
+    const std::string bracketed = "(" + std::string(dict::ClassMembers(HDTRANS_CLASS("ko.bracketed-laughter")).front()) + ")";
     const std::vector<RuneAt> rs = RunesAt(line);
     const std::vector<LaughRun> runs = LaughRuns(rs, laughs);
     const std::vector<RuneAt> src = RunesAt(source);

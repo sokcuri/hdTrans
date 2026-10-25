@@ -325,11 +325,11 @@ std::string NegationEndingError(std::string_view key, std::string_view target, P
     const auto starts = [&](std::span<const std::string_view> members) {
         return std::any_of(members.begin(), members.end(), [&](std::string_view m) { return key.starts_with(m); });
     };
-    if (starts(ClassMembers("ending.negative-start")) && !starts(ClassMembers("ending.negative-start-not"))) {
+    if (starts(ClassMembers(HDTRANS_CLASS("ending.negative-start"))) && !starts(ClassMembers(HDTRANS_CLASS("ending.negative-start-not")))) {
         if (spaced) return {};
         return "the negation \"" + std::string(target) + "\" needs a space before 않";
     }
-    if (starts(ClassMembers("ending.other-negation"))) return {};
+    if (starts(ClassMembers(HDTRANS_CLASS("ending.other-negation")))) return {};
     return "the ending \"" + std::string(key) + "\" writes a negation (\"" + std::string(target) +
            "\") but starts with no member of ending.negative-start or ending.other-negation";
 }

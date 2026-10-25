@@ -16,7 +16,7 @@ bool KanjiOrKatakana(char32_t r) { return text::IsKanji(r) || internal::IsKataka
 
 // Whether the text around line[pos, pos + variant.size()) lets the variant be the grammatical word.
 bool StandsAsWord(std::string_view line, size_t pos, std::string_view variant, std::string_view spelling) {
-    for (const std::string_view kept : dict::ClassMembers("spelling.variant-kept")) {
+    for (const std::string_view kept : dict::ClassMembers(HDTRANS_CLASS("spelling.variant-kept"))) {
         const size_t k = kept.find(variant);
         if (k != std::string_view::npos && k <= pos && line.substr(pos - k).starts_with(kept)) return false;
     }
@@ -24,9 +24,9 @@ bool StandsAsWord(std::string_view line, size_t pos, std::string_view variant, s
     const std::string_view before = line.substr(pos - last.size, last.size);
     const char32_t prev = last.cp;
     if (!text::IsKanji(text::DecodeRune(variant).cp)) {
-        return !text::IsKanji(text::DecodeRune(spelling).cp) || dict::InClass("spelling.variant-kana-after", before);
+        return !text::IsKanji(text::DecodeRune(spelling).cp) || dict::InClass(HDTRANS_CLASS("spelling.variant-kana-after"), before);
     }
-    return internal::IsHiraganaRune(prev) || (KanjiOrKatakana(prev) && dict::InClass("spelling.variant-after-word", variant));
+    return internal::IsHiraganaRune(prev) || (KanjiOrKatakana(prev) && dict::InClass(HDTRANS_CLASS("spelling.variant-after-word"), variant));
 }
 
 // Whether r writes a word: a kana, a kanji, another letter or a digit.
@@ -54,18 +54,18 @@ std::string RespellKatakanaEndings(std::string_view line) {
     };
     auto ending = [&](std::string_view core, size_t pos) {
         const char32_t prev = internal::LastRune(line.substr(0, pos)).cp;
-        if (dict::InClass("spelling.katakana-copula", core)) {
+        if (dict::InClass(HDTRANS_CLASS("spelling.katakana-copula"), core)) {
             const std::string_view before = line.substr(0, pos);
-            const std::span<const std::string_view> kept = dict::ClassMembers("spelling.katakana-copula-kept-after");
-            const std::span<const std::string_view> afterKanji = dict::ClassMembers("spelling.katakana-copula-kept-after-kanji");
+            const std::span<const std::string_view> kept = dict::ClassMembers(HDTRANS_CLASS("spelling.katakana-copula-kept-after"));
+            const std::span<const std::string_view> afterKanji = dict::ClassMembers(HDTRANS_CLASS("spelling.katakana-copula-kept-after-kanji"));
             return std::none_of(kept.begin(), kept.end(), [&](std::string_view k) { return before.ends_with(k); }) &&
                    std::none_of(afterKanji.begin(), afterKanji.end(), [&](std::string_view k) {
                        return before.ends_with(k) && text::IsKanji(internal::LastRune(before.substr(0, before.size() - k.size())).cp);
                    });
         }
-        return dict::InClass("spelling.katakana-ending", core) ||
-               (internal::IsHiraganaRune(prev) && dict::InClass("spelling.katakana-ending-after-kana", core)) ||
-               ((internal::IsHiraganaRune(prev) || text::IsKanji(prev)) && dict::InClass("spelling.katakana-particle", core));
+        return dict::InClass(HDTRANS_CLASS("spelling.katakana-ending"), core) ||
+               (internal::IsHiraganaRune(prev) && dict::InClass(HDTRANS_CLASS("spelling.katakana-ending-after-kana"), core)) ||
+               ((internal::IsHiraganaRune(prev) || text::IsKanji(prev)) && dict::InClass(HDTRANS_CLASS("spelling.katakana-particle"), core));
     };
     // A line without hiragana that writes other okurigana or particles in katakana after a
     // kanji (解析シマス。原因ハ) is left whole to the reading of katakana speech.
@@ -119,11 +119,11 @@ std::string RespellKanjiCries(std::string_view line) {
     std::string out;
     size_t copied = 0, pos = 0;
     char32_t prev = 0;
-    const std::span<const std::string_view> pairs = dict::ClassMembers("spelling.cry-kanji");
+    const std::span<const std::string_view> pairs = dict::ClassMembers(HDTRANS_CLASS("spelling.cry-kanji"));
     auto drawn = [&](size_t at) {
         const text::Rune r = text::DecodeRune(line.substr(at));
         const std::string_view c = line.substr(at, r.size);
-        return r.size > 0 && (dict::InClass("kana.drawn-out", c) || dict::InClass("mark.clip", c));
+        return r.size > 0 && (dict::InClass(HDTRANS_CLASS("kana.drawn-out"), c) || dict::InClass(HDTRANS_CLASS("mark.clip"), c));
     };
     while (pos < line.size()) {
         const text::Rune r = text::DecodeRune(line.substr(pos));
@@ -137,7 +137,7 @@ std::string RespellKanjiCries(std::string_view line) {
             bool clipped = false;
             while (end < line.size() && drawn(end)) {
                 const size_t n = text::DecodeRune(line.substr(end)).size;
-                clipped = clipped || dict::InClass("mark.clip", line.substr(end, n));
+                clipped = clipped || dict::InClass(HDTRANS_CLASS("mark.clip"), line.substr(end, n));
                 end += n;
                 run++;
             }
@@ -145,7 +145,7 @@ std::string RespellKanjiCries(std::string_view line) {
             if (run == 0 || (!after.empty() && WordRune(text::DecodeRune(after).cp))) continue;
             // One drawn kana before a pause other than an exclamation or a comma reads as the
             // interjection いやぁ (이야), which the kanji is not.
-            if (run == 1 && !clipped && !dict::InClass("mark.exclaim", after) && !dict::InClass("mark.comma", after)) {
+            if (run == 1 && !clipped && !dict::InClass(HDTRANS_CLASS("mark.exclaim"), after) && !dict::InClass(HDTRANS_CLASS("mark.comma"), after)) {
                 continue;
             }
             out.append(line.substr(copied, pos - copied));
@@ -165,7 +165,7 @@ std::string RespellKanjiCries(std::string_view line) {
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context) {
     std::string out;
     size_t copied = 0, pos = 0;
-    const std::span<const std::string_view> pairs = dict::ClassMembers("spelling.variant");
+    const std::span<const std::string_view> pairs = dict::ClassMembers(HDTRANS_CLASS("spelling.variant"));
     while (pos < line.size()) {
         size_t taken = 0;
         for (const std::string_view pair : pairs) {
@@ -191,7 +191,7 @@ std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const
 std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context) {
     static const auto forms = [] {
         std::unordered_map<char32_t, std::string_view> m;
-        for (const std::string_view pair : dict::ClassMembers("spelling.old-form")) {
+        for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
             const size_t eq = pair.find('=');
             m.emplace(text::DecodeRune(pair).cp, pair.substr(eq + 1));
         }

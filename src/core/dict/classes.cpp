@@ -1,5 +1,6 @@
 #include "core/dict/classes.h"
 
+#include <mutex>
 #include <unordered_map>
 
 #include "core/dict/builtin.h"
@@ -105,15 +106,26 @@ const ClassTable& BuiltinClasses() {
 
 }  // namespace internal
 
-bool InClass(ClassName set, std::string_view surface) {
-    const internal::WordClass* c = internal::FindClass(internal::BuiltinClasses(), set.name, set.hash);
-    return c != nullptr && c->index.contains(surface);
+ClassId ClassId::Of(std::string_view name) {
+    struct Registry {
+        std::mutex mutex;
+        std::unordered_map<std::string, std::uint32_t> ids;
+    };
+    static Registry registry;
+    const internal::WordClass* data =
+        internal::FindClass(internal::BuiltinClasses(), name, internal::ClassHash(name));
+    const std::lock_guard<std::mutex> lock(registry.mutex);
+    const auto found = registry.ids.try_emplace(std::string(name), static_cast<std::uint32_t>(registry.ids.size())).first;
+    return {found->second, data};
 }
 
-std::span<const std::string_view> ClassMembers(ClassName set) {
-    const internal::WordClass* c = internal::FindClass(internal::BuiltinClasses(), set.name, set.hash);
-    if (c == nullptr) return {};
-    return c->members;
+bool InClass(ClassId set, std::string_view surface) { return set.data != nullptr && set.data->index.contains(surface); }
+
+bool InClass(std::string_view set, std::string_view surface) { return InClass(ClassId::Of(set), surface); }
+
+std::span<const std::string_view> ClassMembers(ClassId set) {
+    if (set.data == nullptr) return {};
+    return set.data->members;
 }
 
 }  // namespace hdTrans::dict

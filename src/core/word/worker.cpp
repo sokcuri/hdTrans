@@ -64,8 +64,8 @@ OpenMarks OpenMarksAfter(std::string_view s, OpenMarks open) {
         const std::string_view mark = s.substr(0, std::max<std::size_t>(c.size, 1));
         if (c.cp == output::kEmphasisOpen) open.spelled++;
         if (c.cp == output::kEmphasisClose && open.spelled > 0) open.spelled--;
-        if (dict::InClass("mark.thought-open", mark)) open.thought++;
-        if (dict::InClass("mark.thought-close", mark) && open.thought > 0) open.thought--;
+        if (dict::InClass(HDTRANS_CLASS("mark.thought-open"), mark)) open.thought++;
+        if (dict::InClass(HDTRANS_CLASS("mark.thought-close"), mark) && open.thought > 0) open.thought--;
         s.remove_prefix(mark.size());
     }
     return open;

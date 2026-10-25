@@ -168,7 +168,7 @@ public:
             if (at - j < 2 && !IsKanjiRune(rs[j])) continue;
             const std::string tags = Tags(rs.substr(j, at - j));
             const bool contracted = tags.find_first_not_of('S') == std::string::npos && EncodeText(rs.substr(j, 1)) == shimauEnd;
-            word = word || (!tags.empty() && (!contracted || (j >= 2 && dict::InClass("stem.contracted-shimau", EncodeText(rs.substr(j - 2, 2))))));
+            word = word || (!tags.empty() && (!contracted || (j >= 2 && dict::InClass(HDTRANS_CLASS("stem.contracted-shimau"), EncodeText(rs.substr(j - 2, 2))))));
         }
         return word;
     }
@@ -857,13 +857,13 @@ bool ShoutEnd(std::u32string_view rs, size_t i) {
 // starts at i and ends at end, after a word and before a pause or the end; 0 when there is none.
 // After a kana of ending.taunt-not-after the tag is ようだ spelled long (夢のよーだ).
 size_t TauntTail(std::u32string_view rs, size_t i, size_t end) {
-    for (const std::string_view member : dict::ClassMembers("ending.taunt")) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("ending.taunt"))) {
         const std::u32string t = DecodeText(member);
         const size_t d = static_cast<size_t>(std::find_if(t.begin(), t.end(), IsDash) - t.begin());
         if (d == 0 || d >= t.size() || i < d + 1) continue;
         const std::u32string_view head = std::u32string_view(t).substr(0, d), tail = std::u32string_view(t).substr(d + 1);
         if (rs.substr(i - d, d) != head || !IsWordRune(rs[i - d - 1]) || rs.substr(end, tail.size()) != tail ||
-            dict::InClass("ending.taunt-not-after", EncodeText(rs.substr(i - d - 1, 1)))) {
+            dict::InClass(HDTRANS_CLASS("ending.taunt-not-after"), EncodeText(rs.substr(i - d - 1, 1)))) {
             continue;
         }
         if (end + tail.size() >= rs.size() || IsPause(rs[end + tail.size()])) return tail.size();
@@ -1033,7 +1033,7 @@ namespace {
 // Whether text has the stem of a member of honorific.drawn-out (the member without its last
 // character) followed by ー, ～ or a vowel kana: the only places RewriteDrawnHonorifics changes.
 bool HasDrawnStem(std::string_view text) {
-    for (const std::string_view member : dict::ClassMembers("honorific.drawn-out")) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-out"))) {
         const std::u32string h = DecodeText(member);
         if (h.size() < 2) continue;
         const std::string stem = EncodeText(std::u32string_view(h).substr(0, h.size() - 1));
@@ -1047,7 +1047,7 @@ bool HasDrawnStem(std::string_view text) {
 
 // Whether text has a member of honorific.drawn-after followed by ー, ～ or a vowel kana.
 bool HasDrawnAfter(std::string_view text) {
-    for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-after"))) {
         for (size_t at = text.find(member); at != std::string_view::npos; at = text.find(member, at + 1)) {
             const std::u32string next = DecodeText(text.substr(at + member.size(), 4));
             if (!next.empty() && (IsDash(next[0]) || IsSmallVowel(next[0]) || IsSmallVowel(next[0] - 1))) return true;
@@ -1099,7 +1099,7 @@ bool EndsInWordOf(std::span<const std::string_view> words, std::u32string_view p
 // The vowel the speaker draws an honorific of honorific.drawn-after out with: that of its last
 // kana, or of its reading in honorific.kanji-reading (様=さま).
 int DrawnVowel(std::u32string_view h) {
-    for (const std::string_view pair : dict::ClassMembers("honorific.kanji-reading")) {
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("honorific.kanji-reading"))) {
         const std::u32string p = DecodeText(pair);
         const size_t eq = p.find(U'=');
         if (eq != std::u32string::npos && eq + 1 < p.size() && std::u32string_view(p).substr(0, eq) == h) {
@@ -1125,7 +1125,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
         rs = std::move(next);
         changed = true;
     };
-    for (const std::string_view member : dict::ClassMembers("honorific.drawn-out")) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-out"))) {
         const std::u32string h = DecodeText(member);
         if (h.size() < 2) continue;
         const std::u32string_view stem = std::u32string_view(h).substr(0, h.size() - 1);
@@ -1154,7 +1154,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             while (last < rs.size() && rs[last] == h.back()) last++;  // the ん drawn too (さああんん)
             // After a greeting or an interjection that starts a word, a familiar tag: the phrase with
             // the lengthening (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
-            if (dict::InClass("honorific.phrase-tag", EncodeText(h))) {
+            if (dict::InClass(HDTRANS_CLASS("honorific.phrase-tag"), EncodeText(h))) {
                 bool phrase = false;
                 size_t start = i;
                 std::u32string casual;  // the spelling of honorific.phrase-tag-word the tag gives the phrase
@@ -1165,7 +1165,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                     const std::u32string key = ToKatakana(p);
                     for (const SoundRow& s : SoundRows(key[0], ctx.extraBuiltin)) phrase = phrase || (s.phrase && s.intj && s.key == key);
                     phrase = phrase || e.Tags(p).find('A') != std::string::npos;
-                    for (const std::string_view tag : dict::ClassMembers("honorific.phrase-tag-word")) {
+                    for (const std::string_view tag : dict::ClassMembers(HDTRANS_CLASS("honorific.phrase-tag-word"))) {
                         const std::u32string m = DecodeText(tag);
                         const size_t eq = m.find(U'=');
                         if (std::u32string_view(m).substr(0, eq) != p) continue;
@@ -1183,7 +1183,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             }
             // The honorific spelled plainly, and the longest dictionary word it starts there.
             std::u32string plain = Spliced(rs, i, h, last);
-            if (EndsInWordOf(dict::ClassMembers("honorific.drawn-out-word"), plain, i, h.size())) continue;
+            if (EndsInWordOf(dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-out-word")), plain, i, h.size())) continue;
             const size_t word = e.LongestKey(std::u32string_view(plain).substr(i));
             if (word <= h.size() && !NameBefore(e, rs, plain, i, h.size())) continue;
             // A longer word takes the lengthening after the shortest key that goes on past the
@@ -1220,7 +1220,7 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
     }
     // An honorific of honorific.drawn-after drawn out after itself and a name before a pause or the
     // end (姫さまぁ 공주님~, 様ーっ), with the marks of the drawn honorifics above.
-    for (const std::string_view member : dict::ClassMembers("honorific.drawn-after")) {
+    for (const std::string_view member : dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-after"))) {
         const std::u32string h = DecodeText(member);
         const int v = DrawnVowel(h);
         for (size_t i = 0; i + h.size() < rs.size(); i++) {
@@ -1230,8 +1230,8 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
             // (貴様ぁ, 俺様ぁ).
             size_t name = i;
             while (name > 1 && IsSmallVowel(rs[name - 1]) && !IsHiraganaRune(rs[name - 2])) name--;
-            if (EndsInWordOf(dict::ClassMembers("honorific.drawn-out-word"), rs, i, h.size()) ||
-                !(NameBefore(e, rs, rs, name, h.size()) || EndsInWordOf(dict::ClassMembers("greeting.honorific-end"), rs, i, h.size()))) {
+            if (EndsInWordOf(dict::ClassMembers(HDTRANS_CLASS("honorific.drawn-out-word")), rs, i, h.size()) ||
+                !(NameBefore(e, rs, rs, name, h.size()) || EndsInWordOf(dict::ClassMembers(HDTRANS_CLASS("greeting.honorific-end")), rs, i, h.size()))) {
                 continue;
             }
             size_t end = i + h.size();

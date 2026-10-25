@@ -74,7 +74,7 @@ bool KanaSpace(std::string_view s, size_t i) {
 }
 
 bool Conjunctive(std::string_view s) {
-    for (const std::string_view e : dict::ClassMembers("ending.conjunctive")) {
+    for (const std::string_view e : dict::ClassMembers(HDTRANS_CLASS("ending.conjunctive"))) {
         if (s.ends_with(e)) return true;
     }
     for (const ConjunctiveAfter& p : kConjunctiveAfter) {

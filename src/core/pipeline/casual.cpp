@@ -188,7 +188,7 @@ bool Nna(std::string_view s, size_t pos, Match& m) {
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "んな")) return false;
-    for (const std::string_view w : dict::ClassMembers("casual.nna-word")) {
+    for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("casual.nna-word"))) {
         if (p >= w.size() && s.substr(p - w.size(), w.size()) == w) return false;
     }
     size_t q = p;
@@ -537,8 +537,8 @@ bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
         }
         return false;
     };
-    if (!starts(dict::ClassMembers("copula.short-so"), false) && !starts(dict::ClassMembers("copula.short-so-final"), true) &&
-        (AfterComma(s, start) || !starts(dict::ClassMembers("copula.short-so-sentence"), true))) {
+    if (!starts(dict::ClassMembers(HDTRANS_CLASS("copula.short-so")), false) && !starts(dict::ClassMembers(HDTRANS_CLASS("copula.short-so-final")), true) &&
+        (AfterComma(s, start) || !starts(dict::ClassMembers(HDTRANS_CLASS("copula.short-so-sentence")), true))) {
         return false;
     }
     m.end = p;

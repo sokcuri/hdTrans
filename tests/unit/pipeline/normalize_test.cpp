@@ -545,7 +545,7 @@ HD_TEST(pipeline_respell_variants) {
     };
     for (const Case& c : cases) HD_CHECK_EQ(RespellVariants(c.in, words, nullptr), std::string(c.want));
     // Every member is VARIANT=SPELLING with both sides written.
-    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.variant")) {
+    for (const std::string_view pair : hdTrans::dict::ClassMembers(HDTRANS_CLASS("spelling.variant"))) {
         const size_t eq = pair.find('=');
         HD_CHECK(eq != std::string_view::npos && eq > 0 && eq + 1 < pair.size() &&
                  pair.find('=', eq + 1) == std::string_view::npos);
@@ -605,7 +605,7 @@ HD_TEST(pipeline_respell_old_forms) {
     for (const Case& c : cases) HD_CHECK_EQ(RespellOldForms(c.in, words, nullptr), std::string(c.want));
     // Every member is OLD=NEW, one kanji on each side, each old form once.
     std::set<std::string_view> olds;
-    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.old-form")) {
+    for (const std::string_view pair : hdTrans::dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
         const size_t eq = pair.find('=');
         HD_CHECK(eq != std::string_view::npos && hdTrans::text::RuneCount(pair.substr(0, eq)) == 1 &&
                  hdTrans::text::RuneCount(pair.substr(eq + 1)) == 1);

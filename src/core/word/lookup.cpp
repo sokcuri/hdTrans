@@ -36,7 +36,7 @@ bool PhraseKey(std::string_view key) {
     for (std::string_view rest = key; !rest.empty();) {
         const std::string_view c = FirstChar(rest);
         rest.remove_prefix(c.size());
-        if (content(prev) && dict::InClass("particle.title-phrase", c) && content(NameClassOf(FirstChar(rest)))) return true;
+        if (content(prev) && dict::InClass(HDTRANS_CLASS("particle.title-phrase"), c) && content(NameClassOf(FirstChar(rest)))) return true;
         prev = NameClassOf(c);
     }
     return false;
@@ -81,7 +81,7 @@ bool BoundImperative(const dict::UserEntry& u, std::string_view query) {
     if (!u.codes->partText.starts_with("E") || !query.starts_with(u.key)) return false;
     const std::string_view after = query.substr(u.key.size());
     if (u.key.ends_with("て")) {
-        for (const std::string_view f : dict::ClassMembers("follower.te-imperative")) {
+        for (const std::string_view f : dict::ClassMembers(HDTRANS_CLASS("follower.te-imperative"))) {
             if (after.starts_with(f)) return true;
         }
         return false;
@@ -101,7 +101,7 @@ bool UtteranceBoundary(std::string_view c) {
 bool UtteranceEnds(std::string_view rest) {
     while (!rest.empty() && text::IsSpace(text::DecodeRune(rest).cp)) rest.remove_prefix(text::DecodeRune(rest).size);
     const std::string_view c = FirstChar(rest);
-    return UtteranceBoundary(c) && !dict::InClass("mark.comma", c) && !dict::InClass("mark.question", c);
+    return UtteranceBoundary(c) && !dict::InClass(HDTRANS_CLASS("mark.comma"), c) && !dict::InClass(HDTRANS_CLASS("mark.question"), c);
 }
 
 // The first Hangul syllable of s, "" when it has none.
@@ -188,7 +188,7 @@ bool NounBefore(std::string_view text) {
     const text::Rune last = DecodeLastRune(text);
     const char32_t r = last.cp;
     if (r >= 0x3041 && r <= 0x309F) {
-        for (const std::string_view p : dict::ClassMembers("pronoun.hiragana-end")) {
+        for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("pronoun.hiragana-end"))) {
             if (text.ends_with(p)) return true;
         }
         return false;
@@ -537,11 +537,11 @@ void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     } else if (current > 0) {
         before = LastChar(Tok(current - 1).text);
     }
-    const bool predicate = dict::InClass("particle.before-predicate", before);
+    const bool predicate = dict::InClass(HDTRANS_CLASS("particle.before-predicate"), before);
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (r->source.size() <= query.size() && dict::InClass("word.closing-utterance", r->source) &&
+        if (r->source.size() <= query.size() && dict::InClass(HDTRANS_CLASS("word.closing-utterance"), r->source) &&
             (predicate || !SentenceFinal(query.substr(r->source.size()), current, true))) {
             l.count--;
             continue;

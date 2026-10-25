@@ -30,13 +30,13 @@ bool IsPredicate(const Item* it) {
     while (!entry.empty() && entry.front() == ' ') entry.remove_prefix(1);
     if (entry.starts_with(kKoGeot)) return false;
     const std::string_view s = it->group->surface;
-    for (const std::string_view p : dict::ClassMembers("follower.not-predicate-start")) {
+    for (const std::string_view p : dict::ClassMembers(HDTRANS_CLASS("follower.not-predicate-start"))) {
         if (s.starts_with(p)) return false;
     }
     // A particle after the first character makes a phrase that starts with a noun.
     for (std::size_t i = FirstChar(s).size(); i < s.size();) {
         const std::string_view r = FirstChar(s.substr(i));
-        if (dict::InClass("particle.phrase", r)) return false;
+        if (dict::InClass(HDTRANS_CLASS("particle.phrase"), r)) return false;
         i += r.size();
     }
     return true;
@@ -96,7 +96,7 @@ bool PausedClause(const Flusher& f, const Item* it) {
     if (next->choice.layer == Provenance::Initial) return true;
     const char cls = At(next->Code(next->selected), 0);
     if (cls != '1' && cls != '3' && cls != '4' && cls != '7') return false;
-    for (const std::string_view n : dict::ClassMembers("noun.dependent-ellipsis")) {
+    for (const std::string_view n : dict::ClassMembers(HDTRANS_CLASS("noun.dependent-ellipsis"))) {
         if (next->group->surface.starts_with(n)) return false;
     }
     if (cls != '1') return true;

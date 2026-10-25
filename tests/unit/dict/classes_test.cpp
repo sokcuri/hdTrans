@@ -79,11 +79,16 @@ HD_TEST(classes_builtin) {
     for (const std::string_view n : internal::kClassNames) HD_CHECK(Find(t, n) != nullptr);
     HD_CHECK(InClass("particle.case-before-stem", "を"));
     HD_CHECK(!InClass("particle.case-before-stem", "が"));
+    HD_CHECK(InClass(HDTRANS_CLASS("particle.case-before-stem"), "を"));
+    const ClassId id = ClassId::Of("particle.case-before-stem");
+    HD_CHECK(id.data != nullptr && ClassId::Of("particle.case-before-stem").id == id.id);
+    const ClassId none = ClassId::Of("none");
+    HD_CHECK(none.data == nullptr && none.id != id.id && !InClass(none, "を") && ClassMembers(none).empty());
 }
 
 // The sets that the passes read as a part of another set.
 HD_TEST(classes_builtin_subsets) {
-    for (const std::string_view m : ClassMembers("honorific.constraint-familiar")) {
+    for (const std::string_view m : ClassMembers(HDTRANS_CLASS("honorific.constraint-familiar"))) {
         HD_CHECK(InClass("honorific.constraint", m));
     }
 }

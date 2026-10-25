@@ -273,7 +273,7 @@ std::string_view Clause(std::string_view before) {
 // an action, without a question word and without a subject other than the speaker
 // (雨が降る 비가 와, 誰が行く 누가 가); the verbs of ko-verb.casual-state state.
 bool Planned(std::string_view word, std::string_view clause) {
-    for (const std::string_view s : dict::ClassMembers("ko-verb.casual-state")) {
+    for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("ko-verb.casual-state"))) {
         if (word.ends_with(s)) return false;
     }
     // A question word, not an indefinite one (誰も, 何か, いつも).
@@ -768,7 +768,7 @@ void Composer::WriteCasual(int first, int last) {
         }
         // 白紙撤回とする, 王太子妃とする: a declaration.
         bool declared = own.starts_with("する") && before().ends_with("と");
-        for (const std::string_view d : dict::ClassMembers("noun.casual-declaration")) {
+        for (const std::string_view d : dict::ClassMembers(HDTRANS_CLASS("noun.casual-declaration"))) {
             declared = declared || own.starts_with(d) || before().ends_with(d) ||
                        before().ends_with(std::string(d) + "と") || before().ends_with(std::string(d) + "を");
         }
@@ -846,11 +846,11 @@ void Composer::WriteCasual(int first, int last) {
         // 말한다 in 해체 (말해) reads as an order; a name (虹輝と言う) or a promise keeps it.
         if (present.ends_with("말한다")) continue;
         bool stative = false;
-        for (const std::string_view v : dict::ClassMembers("verb.casual-state")) {
+        for (const std::string_view v : dict::ClassMembers(HDTRANS_CLASS("verb.casual-state"))) {
             stative = stative || std::string_view(it.surface).starts_with(v);
         }
         bool state = false;
-        for (const std::string_view s : dict::ClassMembers("ko-verb.casual-state")) {
+        for (const std::string_view s : dict::ClassMembers(HDTRANS_CLASS("ko-verb.casual-state"))) {
             state = state || present.ends_with(s);
         }
         // A present action before ！, … or ～, or drawn out, keeps -ㄴ다, an exclamation (行く！ 간다!,
