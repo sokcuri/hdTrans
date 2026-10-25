@@ -9,15 +9,18 @@ namespace hdTrans::pipeline::internal {
 namespace {
 
 // The words for an elder sibling whose Korean depends on the speaker: a woman says 오빠
-// and 언니, a man 형님 and 누님 (the dictionary's reading).
+// and 언니, a man 형님 and 누님 (the dictionary's reading). お兄ちゃん is 오빠 in the dictionary
+// and 형 in a line of a man's speech (kMaleKinTerms).
 struct KinTerm {
     std::string_view ja;
-    std::string_view female;
+    std::string_view ko;
 };
 constexpr KinTerm kKinTerms[] = {
     {"お兄様", "오빠"}, {"お兄さま", "오빠"}, {"兄様", "오빠"}, {"兄さま", "오빠"}, {"お兄ちゃん", "오빠"},
     {"お姉様", "언니"}, {"お姉さま", "언니"}, {"姉様", "언니"}, {"姉さま", "언니"}, {"お姉ちゃん", "언니"},
 };
+
+constexpr KinTerm kMaleKinTerms[] = {{"お兄ちゃん", "형"}, {"おにいちゃん", "형"}};
 
 bool HasAny(std::string_view s, std::span<const std::string_view> list) {
     for (std::string_view m : list) {
@@ -93,11 +96,14 @@ bool FemaleSpeech(std::span<const std::string> lines) {
 }
 
 std::string WriteKinTerms(std::string_view line, bool female) {
-    if (!((female && !HasAny(line, dict::ClassMembers("speech.male"))) || HasAny(line, dict::ClassMembers("speech.female")))) {
-        return std::string(line);
-    }
+    const bool male = HasAny(line, dict::ClassMembers("speech.male"));
+    const bool woman = HasAny(line, dict::ClassMembers("speech.female"));
     std::string out(line);
-    for (const KinTerm& k : kKinTerms) out = ReplaceString(out, k.ja, k.female);
+    if ((female && !male) || woman) {
+        for (const KinTerm& k : kKinTerms) out = ReplaceString(out, k.ja, k.ko);
+    } else if (male) {
+        for (const KinTerm& k : kMaleKinTerms) out = ReplaceString(out, k.ja, k.ko);
+    }
     return out;
 }
 

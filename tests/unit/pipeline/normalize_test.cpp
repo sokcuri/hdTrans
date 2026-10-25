@@ -623,6 +623,8 @@ HD_TEST(pipeline_write_kin_terms) {
     const Case male[] = {
         {"お姉ちゃん、わたくしは"sv, "언니、わたくしは"sv},
         {"お兄様！"sv, "お兄様！"sv},
+        {"お兄ちゃん、僕も行く"sv, "형、僕も行く"sv},  // a man's お兄ちゃん
+        {"お兄ちゃん、早く"sv, "お兄ちゃん、早く"sv},   // no cue: the dictionary's 오빠
     };
     for (const Case& c : male) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
 }
