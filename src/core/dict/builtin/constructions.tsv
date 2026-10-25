@@ -522,3 +522,11 @@ cx:keredo-connective:10	GRM-29	&&3 :keredo-word F-1== "conjugating" :guess-endin
 cx:keredo-connective:20	GRM-29	&&3 :keredo-word F-1== "conjugating" :keredo-ending-final	map-ending-tail@-1 @keredo-end set-target ""	来たけれども 왔지만
 cx:keredo-connective:30	GRM-29	&&3 :keredo-word :predicate-row :keredo-target-final	map-target-tail@-1 @keredo-end set-target ""	８歳だったけれども 8세였지만
 cx:keredo-connective:40	GRM-29	&&4 S+0== "も" F+0== "selected" F+0== "touches-prev" I-1== "Rけれど"	set-target ""	なのだけれども 인데
+//: he-no	&&5 S+0== "への" F+0== "selected" P+1== "1" !1 F+1== "after-pause" !1 ||12 S+1== "~a" S+1== "~e" S+1== "~i" S+1== "~o" S+1== "~u" S+1== "~y" S+1== "~A" S+1== "~E" S+1== "~I" S+1== "~O" S+1== "~U" S+1== "~Y"	A への right before a noun, with no pause between and not before a word in Latin letters.
+//= he-no	after OfferPromise 440	The への before a noun is what the noun is for or toward, never 에의: before something sent or said (noun.he-sent) 에게 보내는 after a person and (으)로 보내는 after anything else (彼への手紙 그에게 보내는 편지), before a gift (noun.he-gift) 에게 주는 after a person and 에 주는 after anything else (自分へのご褒美 자신에게 주는 상), before a way, a move or a change toward a place or a state (noun.he-path), also as the head after another noun with の (水路への秘密の入口 수로로의 비밀 입구), (으)로의 (王都への道 왕도로의 길), and before any other noun, a feeling, an attitude or an act aimed at something, 에 대한 (王家への忠誠 왕가에 대한 충성, 足への負担 다리에 대한 부담).
+cx:he-no:10	GRM-30	&&3 :he-no S+1== @noun.he-sent F-1== "person"	set-target "에게 보내는"	彼への手紙 그에게 보내는 편지
+cx:he-no:15	GRM-30	&&2 :he-no S+1== @noun.he-sent	set-target "(으)로 보내는"	本部への報告 본부로 보내는 보고
+cx:he-no:20	GRM-30	&&3 :he-no S+1== @noun.he-gift F-1== "person"	set-target "에게 주는"	自分へのご褒美 자신에게 주는 상
+cx:he-no:25	GRM-30	&&2 :he-no S+1== @noun.he-gift	set-target "에 주는"	社会への贈り物 사회에 주는 선물
+cx:he-no:30	GRM-30	&&2 :he-no ||3 S+1== @Rnoun.he-path &&2 P+2== "1" S+2== @Rnoun.he-path &&3 S+2== "の" P+3== "1" S+3== @Rnoun.he-path	set-target "(으)로의"	王都への道 왕도로의 길
+cx:he-no:40	GRM-30	:he-no	set-target "에 대한"	王家への忠誠 왕가에 대한 충성

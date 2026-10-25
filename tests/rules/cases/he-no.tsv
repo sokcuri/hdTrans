@@ -1,0 +1,40 @@
+# 규칙: GRM-30
+rule	input	expected	kind	layer
+cx:he-no:10	提督へのお手紙です。	has:제독에게 보내는 편지	fix	rewrites
+cx:he-no:10	提督への報告ね。	has:제독에게 보내는 보고	fix	rewrites
+cx:he-no:10	友達への報告	친구에게 보내는 보고	fix	rewrites
+cx:he-no:10	本部への報告	본부로 보내는 보고	keep	rewrites
+cx:he-no:15	本部への報告	본부로 보내는 보고	fix	rewrites
+cx:he-no:15	彼への手紙。	그에게 보내는 편지.	keep	rewrites
+cx:he-no:20	自分へのご褒美として新作を買う。	has:자신에게 주는 상	fix	rewrites
+cx:he-no:20	女性への贈り物を購入する。	has:여성에게 주는 선물	fix	rewrites
+cx:he-no:20	社会への贈り物	사회에 주는 선물	keep	rewrites
+cx:he-no:25	社会への贈り物	사회에 주는 선물	fix	rewrites
+cx:he-no:25	女性への贈り物を購入する。	has:여성에게 주는 선물	keep	rewrites
+cx:he-no:30	白伯爵領から王都への道の途中には、	has:왕도로의 길	fix	rewrites
+cx:he-no:30	死の国への道も暗くはない。	has:국으로의 길도	fix	rewrites
+cx:he-no:30	屋根裏部屋への階段を駆け上がる。	has:다락방으로의 계단을	fix	rewrites
+cx:he-no:30	地下水路への入口だ。	has:지하수로로의 입구다	fix	rewrites
+cx:he-no:30	硫黄島への強行輸送ですか？	has:이오섬으로의 강행 수송	fix	rewrites
+cx:he-no:30	南方への輸送任務	has:남방으로의 수송 임무	fix	rewrites
+cx:he-no:30	大学図書館への就職が決まった。	has:대학 도서관으로의 취직이	fix	rewrites
+cx:he-no:30	城への侵入方法は	has:성으로의 침입 방법은	fix	rewrites
+cx:he-no:30	王家への忠誠を示す。	왕가에 대한 충성을 나타낸다.	keep	rewrites
+cx:he-no:40	王家への忠誠を示す。	왕가에 대한 충성을 나타낸다.	fix	rewrites
+cx:he-no:40	足への負担が大きすぎる。	has:다리에 대한 부담이	fix	rewrites
+cx:he-no:40	他者への配慮が足りなかった。	has:다른 사람에 대한 배려가	fix	rewrites
+cx:he-no:40	敵への警戒を怠るな。	has:적에 대한 경계를	fix	rewrites
+cx:he-no:40	取引先への影響は？	has:거래처에 대한 영향은?	fix	rewrites
+cx:he-no:40	ペットへの愛情を否定するわけではない。	has:애완동물에 대한 애정을	fix	rewrites
+cx:he-no:40	民生産業への協力を続ける。	has:산업에 대한 협력을	fix	rewrites
+cx:he-no:40	空への警戒、忘れないで。	has:하늘에 대한 경계	fix	rewrites
+cx:he-no:40	王都へ向かう。	왕도로 향한다.	keep	rewrites
+cx:he-no:40	彼へ届ける。	그에게 전달한다.	keep	rewrites
+cx:he-no:30	【工廠任務】試製震電の艦戦型改二への改修	has:로의 개수	fix	rewrites
+cx:he-no:30	地下水道にね、あの水そうへの秘密の入口があるんだって！	has:로의 비밀의 입구	fix	rewrites
+cx:he-no:30	出町柳駅へのアクセス	has:역으로의 액세스	fix	rewrites
+cx:he-no:30	もうひとつは本文へのリンクがついていた。	has:본문으로의 링크	fix	rewrites
+cx:he-no:30	悲惨な結末へのお導きじゃないだろう。	has:결말로의	fix	rewrites
+cx:he-no:30	車両内への危険物持ち込み禁止について	has:로의 위험물 반입	fix	rewrites
+cx:he-no:30	明日へのマーチ	has:내일로의	fix	rewrites
+cx:he-no:30	２台はギリギリフェンスへの激突を避けて右側のルートへ抜けていった。	has:펜스로의 격돌을	fix	rewrites
