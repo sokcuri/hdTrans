@@ -2,4 +2,4 @@ rule	input	expected	kind	layer
 sense:付き合う	レオの考察に付き合う。	레오의 고찰에 함께한다.	fix	senses
 sense:付き合う	危険な任務に付き合ってもらって、すまない。	위험한 임무에 함께해 주어, 미안하다.	fix	senses
 sense:付き合う	ユウキと付き合ってる。	유우키와 사귀고 있다.	keep	senses
-sense:付き合う	なんで俺とユウキに付き合ってほしいんだよ	왜 나와 유우키가 사귀어 줬으면 해	keep	senses
+sense:付き合う	なんで俺とユウキに付き合ってほしいんだよ	왜 나와 유우키가 사귀어 줬으면 좋겠어	keep	senses
