@@ -9,7 +9,7 @@ normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나�
 normalize:casual-negative-nee	何やらねぇ、変な音がする	무엇인가, 이상한 소리가 난다	keep	normalize
 normalize:casual-negative-nee	これじゃよくならねぇ。	이래서야 좋게 안된다.	fix	normalize
 normalize:casual-negative-nee	しなきゃならねぇ、	해야 한다,	fix	normalize
-normalize:casual-negative-nee	やらなきゃならねぇ…	해야 한다…	fix	normalize
+normalize:casual-negative-nee	やらなきゃならねぇ…	해야 해…	fix	normalize
 normalize:casual-negative-nee	話にならねぇ、帰れ	이야기가 되지 않는다, 돌아가라	fix	normalize
 normalize:casual-negative-nee	よくならねぇ、全然	좋게 안되는, 전혀	fix	normalize
 normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
@@ -22,7 +22,7 @@ normalize:casual-negative-nee	山田さんにならねぇ、話せる	야마다 
 normalize:casual-negative-nee	お前らにならねぇ、話せる	너희들에게라면, 이야기할 수 있다	keep	normalize
 normalize:casual-negative-nee	僕たちにならねぇ、話せる	우리에게라면, 이야기할 수 있다	keep	normalize
 normalize:casual-negative-nee	ここにならねぇ、住める	여기에라면, 살 수 있다	keep	normalize
-normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않는다…	fix	normalize
+normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않아…	fix	normalize
 normalize:casual-negative-nee	気にならねぇ、そんなの	신경 쓰이지 않는, 그런 것	fix	normalize
 normalize:casual-negative-nee	「見てねーわ」	「보지 않아」	fix	normalize
 normalize:casual-negative-nee	誰も気にしてねーよ	아무도 신경 쓰지 않아	fix	normalize

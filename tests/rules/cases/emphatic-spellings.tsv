@@ -2,9 +2,9 @@
 rule	input	expected	kind	layer
 normalize:emphatic-spelling	「さっすが、話がわかるぜ親友！」	「역시, 이해한다 친구!」	fix	normalize
 normalize:emphatic-spelling	さっすがですねぇ！	역시 대단하네요!	fix	normalize
-normalize:emphatic-spelling	しっかたないなぁ…。	어쩔 수 없다….	fix	normalize
+normalize:emphatic-spelling	しっかたないなぁ…。	어쩔 수 없어….	fix	normalize
 normalize:emphatic-spelling	もうすんごい泣くんだ。	이제 대단히 우는 거야.	fix	normalize
-normalize:emphatic-spelling	すんごく……痛い！	정말……아프다!	fix	normalize
+normalize:emphatic-spelling	すんごく……痛い！	정말……아파!	fix	normalize
 normalize:emphatic-spelling	「あったりまえでしょ」	「당연하지」	fix	normalize
 normalize:emphatic-spelling	「あったりまえでしょう？」	「당연하겠죠?」	fix	normalize
 normalize:emphatic-spelling	「あ……あったり前よ、あたしが作ったクッキー」	has:당연해	fix	normalize
@@ -19,7 +19,7 @@ normalize:emphatic-spelling	「冗談に決まってるでしょ、ばっかじ�
 normalize:emphatic-spelling	「ばっかじゃないの！　ばっかじゃないの！」	「바보가 아닌 거야! 바보가 아닌 거야!」	fix	normalize
 normalize:emphatic-spelling	「みんなでとか……ばっかみたい」	has:바보같다	fix	normalize
 normalize:emphatic-spelling	「うわ……今日もあっついねー」	「우와……오늘도 덥네~」	fix	normalize
-normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 덥다……」	fix	normalize
+normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 더워……」	fix	normalize
 normalize:emphatic-spelling	「ちぇっ……きっついなぁ。優しくしてよね」	「쳇……힘들어. 다정하게 해」	fix	normalize
 normalize:emphatic-spelling	「うっせ」	「시끄러」	fix	normalize
 normalize:emphatic-spelling	さすがですね。	역시 대단하네요.	keep	normalize
@@ -30,5 +30,5 @@ normalize:emphatic-spelling	バッカスの神殿	바커스의 신전	keep	norma
 normalize:emphatic-spelling	「……いつにも増して、ひっどい成績やなぁ」	has:심한 성적	keep	normalize
 normalize:emphatic-spelling	「学食ばっかじゃ飽きる」	「학생식당뿐은 질린다」	keep	normalize
 normalize:emphatic-spelling	夏本番だー！ くぅ～、あっついねー！！	has:덥네~!!	fix	normalize
-normalize:emphatic-spelling	あっついなぁぁぁ……もー夏かぁ	has:덥다	fix	normalize
+normalize:emphatic-spelling	あっついなぁぁぁ……もー夏かぁ	has:더워	fix	normalize
 normalize:emphatic-spelling	アホくっさ…クソして寝るわ	has:바보스럽다…	fix	normalize

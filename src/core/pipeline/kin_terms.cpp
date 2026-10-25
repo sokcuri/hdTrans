@@ -74,6 +74,7 @@ std::string ReplaceString(std::string_view s, std::string_view from, std::string
 
 SpeechCues ReadSpeechCues(std::string_view line) {
     SpeechCues cues;
+    cues.quoted = Contains(line, "「");
     const auto utterances = Utterances(line);
     for (std::string_view u : utterances) {
         if (HasAny(u, dict::ClassMembers("speech.female"))) cues.female = true;

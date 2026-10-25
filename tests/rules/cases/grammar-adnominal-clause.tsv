@@ -4,7 +4,7 @@ cx:adnominal-clause:10	帰っちゃったみたいだなぁ……	돌아가버�
 cx:adnominal-clause:10	させちゃったみたいで……	시켜버린 것 같아……	fix	rewrites
 cx:adnominal-clause:10	家に置いてきちゃったみたいでさ	집에 두고 와버린 것 같아	fix	rewrites
 cx:adnominal-clause:10	逆に霊感があったりすると、次元を越えちゃうみたいだけどね	has:넘어버리는 것 같지만	fix	rewrites
-cx:adnominal-clause:10	ガスが薄まっちゃったみたい！	가스가 엷어져버린 것 같다!	fix	rewrites
+cx:adnominal-clause:10	ガスが薄まっちゃったみたい！	가스가 엷어져버린 것 같아!	fix	rewrites
 cx:adnominal-clause:10	告白は死んじゃうっぽい	!rule:cx:adnominal-clause:10	keep	rewrites
 cx:adnominal-clause:10	お金がないみたい	!rule:cx:adnominal-clause:10	keep	rewrites
 cx:adnominal-clause:20	もう遅かったみたいね	이미 늦었던 것 같네	fix	rewrites

@@ -1,6 +1,6 @@
 # 규칙: GRM-10, GRM-2, SPC-2, SPC-10
 rule	input	expected	kind	layer
-voice:agent	そんな攻撃、蚊に刺されたような物だ！	그런 공격, 모기에 물린 것 같은 것이다!	keep	voice
+voice:agent	そんな攻撃、蚊に刺されたような物だ！	그런 공격, 모기에 물린 것 같은 거야!	keep	voice
 voice:agent	佐藤に押さえられてしまった。	사토에게 눌려버렸다.	fix	voice
 voice:agent	幽霊に導かれながら情報の断片を手に入れる。	유령에게 이끌리면서 정보의 단편을 손에 넣는다.	fix	voice
 voice:agent	珍しく担任に指名された。	드물게 담임에게 지명되었다.	fix	voice

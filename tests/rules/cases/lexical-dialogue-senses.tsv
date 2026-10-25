@@ -33,7 +33,7 @@ dict:jisjk:2673	三日月大変そうだなぁ。	has:힘들 것 같구나	fix	l
 dict:jisjk:2673	秋刀魚漁は、今年は大変そうだ。	has:힘들 것 같다	fix	lookup
 dict:jisjk:2673	お父さん、大変そうだからそっとしてあげてね。	has:힘들 것 같으니까	fix	lookup
 dict:jisjk:2673	とても忙しくて、大変そうな気がする	has:힘들 것 같은	fix	lookup
-dict:jisjk:2673	大変だ！	힘들다!	keep	lookup
+dict:jisjk:2673	大変だ！	힘들어!	keep	lookup
 dict:jisjk:342588	王子は、婚約者のクラリス様に言った。	has:클라리스님에게 말했다	fix	local
 dict:jisjk:342588	帝国の王妃様は、クラリス様に深く頭を下げた。	has:클라리스님에게	fix	local
 dict:jisjk:342588	まるでシンシア様に見せ付けるような	has:신시아님에게	fix	local

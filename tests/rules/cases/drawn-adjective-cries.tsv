@@ -14,20 +14,20 @@ cx:drawn-cry:10	「痛いいいいっ！」	「아파아아앗!」	fix	rewrites
 cx:drawn-cry:10	「熱いいいっ！」	「뜨거워!」	fix	rewrites
 cx:drawn-cry:10	「うるさいいい!」	「시끄러워!」	fix	rewrites
 cx:drawn-cry:10	「冷たいいいっ！」	「차가워!」	fix	rewrites
-cx:drawn-cry:10	「いやだぁぁぁっ！」	「싫다아아앗!」	keep	rewrites
-cx:drawn-cry:10	「タロウさん無事だああああ！！」	「타로 씨 무사하다아아아아!!」	keep	rewrites
-cx:drawn-cry:10	「無事だああああ！」	「무사하다아아아아!」	keep	rewrites
+cx:drawn-cry:10	「いやだぁぁぁっ！」	「싫어어어엇!」	keep	rewrites
+cx:drawn-cry:10	「タロウさん無事だああああ！！」	「타로 씨 무사해애애애애!!」	keep	rewrites
+cx:drawn-cry:10	「無事だああああ！」	「무사해애애애애!」	keep	rewrites
 cx:drawn-cry:10	「痛ーい！」	「아파~!」	fix	rewrites
 cx:drawn-cry:10	「かゆいぃぃ」	「가려워」	fix	rewrites
 cx:drawn-cry:10	「くさいいいい！」	「냄새가 나아아아!」	fix	rewrites
 cx:drawn-cry:10	「つらいぃ……」	「괴로워……」	fix	rewrites
 cx:drawn-cry:10	痛いいいいっ！	아파아아앗!	fix	rewrites
 cx:drawn-cry:10	「痛い。」	「아프다.」	keep	rewrites
-cx:drawn-cry:10	「痛いっ！」	「아프다!」	keep	rewrites
+cx:drawn-cry:10	「痛いっ！」	「아파!」	keep	rewrites
 cx:drawn-cry:10	「長ーい話だった」	「긴 이야기였다」	keep	rewrites
 cx:drawn-cry:10	「痛いぃ、やめて」	「아프다, 그만해」	keep	rewrites
-cx:drawn-cry:10	「最高だあああっ！」	「최고다아아앗!」	keep	rewrites
-cx:drawn-cry:10	「勝ったあああっ！」	「이겼다아아앗!」	keep	rewrites
+cx:drawn-cry:10	「最高だあああっ！」	「최고야아아앗!」	keep	rewrites
+cx:drawn-cry:10	「勝ったあああっ！」	「이겼어어어엇!」	keep	rewrites
 cx:drawn-cry:10	「怖いよおおお」	「무서워어어어」	keep	rewrites
 cx:drawn-cry:10	「すごおおおい！」	「대단해~!」	keep	rewrites
 cx:drawn-cry:10	「痛い痛いいいいっ！」	「아파 아파아아앗!」	keep	rewrites
@@ -76,10 +76,10 @@ cx:drawn-cry:10	「怖い……夢」	「무서운……꿈」	keep	local
 cx:drawn-cry:10	「痛いぃ……でも、まだ！」	「아파……하지만, 아직!」	fix	local
 cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹는다」	fix	local
 cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 잔다」	fix	local
-cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어렵다~~~~~~~~~~!!)	keep	rewrites
+cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~~~~~~~~!!)	keep	rewrites
 cx:drawn-cry:10	（痛いー）	(아프다~)	keep	rewrites
 cx:drawn-cry:10	逃・が・さ・な・いー！	has:다―!	keep	rewrites
-cx:drawn-cry:10	う・れ・し・いー！	has:다~!	keep	rewrites
+cx:drawn-cry:10	う・れ・し・いー！	has:뻐~!	keep	rewrites
 cx:copies:36	「痛いー、痛いー」	「아파~, 아파~」	fix	sound
 cx:copies:36	「怖いーっ、怖いーっ」	「무서워~, 무서워~」	fix	sound
 cx:copies:36	「痛い～、痛い～」	「아파~, 아파~」	fix	sound

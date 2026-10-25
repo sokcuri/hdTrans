@@ -403,6 +403,7 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
 // and the styles of its quotes.
 struct LineSpeech {
     bool casual = false;
+    bool narrated = false;
     bool markedOnly = false;
     bool asked = false;
     output::QuoteState quotes;
@@ -465,6 +466,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     composeSettings.casual = text && speech.casual;
     composeSettings.casualMarkedOnly = speech.markedOnly;
     composeSettings.asked = text && speech.asked;
+    composeSettings.narrated = speech.narrated;
     composeSettings.literal = text && !options.reference && options.wordImprovements.literalCleanup;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
@@ -540,6 +542,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     std::vector<bool> casual;
     if (!options.reference) {
         speech.asked = true;
+        speech.narrated = ctx.narrated;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;

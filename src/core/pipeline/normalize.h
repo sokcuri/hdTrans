@@ -162,6 +162,7 @@ std::string WriteKinTerms(std::string_view line, bool female);
 struct SpeechCues {
     bool female = false;
     bool maleKin = false;
+    bool quoted = false;  // the line holds an utterance in 「」
 };
 SpeechCues ReadSpeechCues(std::string_view line);
 bool FemaleSpeech(std::span<const std::string> lines);

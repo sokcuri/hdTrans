@@ -23,7 +23,7 @@ dict:gram:de-ii:1	メールで済ませば良いではないか	메일로 끝내
 dict:gram:de-ii:1	行ったらいいよ	가면 돼	fix	local
 dict:gram:de-ii:1	このまま何事もなければいいけれど」	이대로 아무 일도 없으면 좋지만」	keep	local
 dict:gram:de-ii:1	そんな人がいればいいんですけど」	그런 사람이 있으면 좋은데요」	keep	local
-dict:gram:de-ii:1	何をすればいい？	무엇을 하면 돼?	keep	local
+dict:gram:de-ii:1	何をすればいい？	뭘 하면 돼?	keep	local
 dict:gram:de-ii:1	どうすればいいのかしら」	!rule:dict:gram:de-ii:1	keep	local
 dict:gram:de-ii:1	行けばいいのに	가면 좋을 텐데	keep	local
 dict:gram:de-ii:1	晴れればいいな	has:좋겠다	keep	local

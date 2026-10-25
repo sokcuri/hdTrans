@@ -23,4 +23,4 @@ normalize:shaanai	ならしゃーない	라면 어쩔 수 없다	keep	normalize
 normalize:shaanai	だってしゃーねーだろ	왜냐하면 어쩔 수 없지	keep	normalize
 normalize:toku	「やっといたよ」	「해 뒀어」	fix	normalize
 normalize:toku	「宿題？やっといたよ」	「숙제? 해 뒀어」	fix	normalize
-normalize:toku	やっといた！見つかった	드디어 있었다! 발견되었다	fix	normalize
+normalize:toku	やっといた！見つかった	드디어 있었어! 발견되었다	fix	normalize

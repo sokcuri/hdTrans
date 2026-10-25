@@ -21,7 +21,7 @@ cx:kakeru-aspect:40	腕の傷が化膿してて破傷風になりかけてたん
 cx:kakeru-aspect:40	ネット掲示板はすたれかけてるからねぇ…	넷 게시판은 소용없게 되어 가고 있으니까…	fix	rewrites
 cx:kakeru-aspect:40	急激にかかるＧで視界が暗くなりかける。	급격하게 걸리는 G로 시야가 어두워져 간다.	fix	rewrites
 cx:kakeru-aspect:50	少し歩きかけて、不意に富竹さんが呼びとめてきた。	has:조금 걷다 말고,	fix	rewrites
-cx:kakeru-aspect:60	何を言いかけた!	무슨 말을 하려고 했다!	fix	rewrites
+cx:kakeru-aspect:60	何を言いかけた!	무슨 말을 하려고 했어!	fix	rewrites
 cx:kakeru-aspect:60	そう思っていたので立ち上がりかけながら言う。	그렇게 생각했으므로 일어서려고 하면서 말한다.	fix	rewrites
 cx:kakeru-aspect:60	立ち上がりかけて彼女は、振り返った。	일어서려고 해 그녀는, 돌아보았다.	fix	rewrites
 cx:kakeru-aspect:60	すごい勢いで追いかけてきた。	!rule:cx:kakeru-aspect:60	keep	rewrites
@@ -47,7 +47,7 @@ dict:jisjk:90581	左肩に毛皮のショールをかけてバランスを取る
 cx:kakeru-aspect:70	持ち手にかけられた木札を見る。	손잡이에 걸린 목찰을 본다.	fix	rewrites
 cx:kakeru-aspect:70	俺にはスパイ容疑がかけられている。	!rule:cx:kakeru-aspect:70	keep	rewrites
 cx:kakeru-aspect:70	そして、やはり同じように声をかけられる。	!rule:cx:kakeru-aspect:70	keep	rewrites
-cx:kakeru-aspect:3	メガネ…メガネ…あ、私かけてた…。	안경…안경…아, 나 썼다….	fix	rewrites
+cx:kakeru-aspect:3	メガネ…メガネ…あ、私かけてた…。	안경…안경…아, 나 썼어….	fix	rewrites
 cx:kakeru-aspect:3	お前、電話かけたか？	!rule:cx:kakeru-aspect:3	keep	rewrites
 cx:kakeru-aspect:65	テーブルクロスをかけられた机やイスが並べられている。	has:테이블크로스가 걸쳐진	fix	rewrites
 cx:kakeru-aspect:65	持ち手にかけられた木札を見る。	!rule:cx:kakeru-aspect:65	keep	rewrites

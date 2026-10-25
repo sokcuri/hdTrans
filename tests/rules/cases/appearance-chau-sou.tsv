@@ -4,19 +4,19 @@ dict:jisjk:342479	疲れちゃいそう	지쳐버릴 것 같다	fix	local
 dict:jisjk:342479	泣いちゃいそう	울어버릴 것 같다	fix	local
 dict:jisjk:342479	死んじゃいそう	죽어버릴 것 같다	fix	local
 dict:jisjk:342479	「眠っちゃいそう」	「자버릴 것 같다」	fix	local
-dict:jisjk:342479	「負けちゃいそう！」	「져버릴 것 같다!」	fix	local
-dict:jisjk:342479	「笑っちゃいそう……」	「웃어버릴 것 같다……」	fix	local
-dict:jisjk:342479	「飛んじゃいそう？」	「날아버릴 것 같다?」	fix	local
+dict:jisjk:342479	「負けちゃいそう！」	「져버릴 것 같아!」	fix	local
+dict:jisjk:342479	「笑っちゃいそう……」	「웃어버릴 것 같아……」	fix	local
+dict:jisjk:342479	「飛んじゃいそう？」	「날아버릴 것 같아?」	fix	local
 dict:jisjk:342479	転んじゃいそう。	굴러버릴 것 같다.	fix	local
 dict:jisjk:342479	「何でもできちゃいそう」	「뭐든 할 수 있어버릴 것 같다」	fix	local
 dict:jisjk:342479	「その内胃炎になっちゃいそう…」	rule:dict:jisjk:342479=것 같다	keep	local
-dict:jisjk:342479	ボロボロになっちゃいそう…	너덜너덜하게 되어버릴 것 같다…	fix	local
-dict:jisjk:342479	いっちゃいそう…	가버릴 것 같다…	keep	local
+dict:jisjk:342479	ボロボロになっちゃいそう…	너덜너덜하게 되어버릴 것 같아…	fix	local
+dict:jisjk:342479	いっちゃいそう…	가버릴 것 같아…	keep	local
 dict:jisjk:342479	帰ったら直ぐに寝ちゃいそうだ。	돌아가면 곧바로 자버릴 것 같다.	keep	local
 dict:jisjk:342479	泣いちゃいそうな顔	울어버릴 것 같은 얼굴	keep	local
 dict:jisjk:342479	泣いちゃいそうになった	울어버릴 것 같게 되었다	keep	local
 dict:jisjk:342479	落ちちゃいそうで怖い	떨어져버릴 것 같고 무섭다	keep	local
 dict:jisjk:342479	「溶けちゃいそうです」	「녹아버릴 것 같습니다」	keep	local
 dict:jisjk:342479	言っちゃいそうだもんな」	말해버릴 것 같잖아」	keep	local
-dict:jisjk:342479	泣きそう…	울 것 같다…	keep	local
+dict:jisjk:342479	泣きそう…	울 것 같아…	keep	local
 dict:jisjk:342479	「そう、ちゃんと言っちゃった」	「그래, 제대로 말해버렸어」	keep	local

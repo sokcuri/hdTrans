@@ -102,7 +102,7 @@ HD_TEST(word_copies_adjective_cries) {
     HD_CHECK_EQ(translate("痛いっ、痛いっ……"), "아팟, 아팟……");
     HD_CHECK_EQ(translate("待って待ってっ"), "기다려 기다렷");
     HD_CHECK_EQ(translate("先輩っ先輩っ"), "선배 선배");  // a noun keeps its Korean
-    HD_CHECK_EQ(translate("痛いっ！"), "아프다!");  // said once
+    HD_CHECK_EQ(translate("痛いっ！"), "아파!");  // said once, spoken before ！ (SPC-1)
 }
 
 // Three or more copies of a verb stem and ending that also spell a noun are a cry, each copy read

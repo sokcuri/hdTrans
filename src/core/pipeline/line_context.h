@@ -17,6 +17,8 @@ struct LineContext {
     bool document = true;
     // The document shows a woman's speech.
     bool female = false;
+    // The document writes its speech in 「」, so its text outside them is narration.
+    bool narrated = false;
     bool extraBuiltin = false;
     bool exclamationNa = false;
     bool dialectForms = false;

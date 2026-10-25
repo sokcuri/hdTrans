@@ -6,12 +6,12 @@ normalize:tsu-run	ちょっっっと待って	자아암깐 기다려	fix	normali
 normalize:tsu-run	「行っっっくぞ！」	「가겠어!」	fix	normalize
 normalize:tsu-run	「とっってもいい天気だね」	「매우 좋은 날씨구나」	fix	normalize
 normalize:tsu-run	「いっっぱい食べた」	「많이 먹었다」	fix	normalize
-normalize:tsu-run	すっっっごい！	대애애단하다!	fix	normalize
+normalize:tsu-run	すっっっごい！	대애애단해!	fix	normalize
 normalize:tsu-run	ほんっっとうに、何故こんな男を一時でも好きだと思ったのかしら？	has:저어엉말로, 왜	fix	normalize
 normalize:tsu-run	あたし的には、とっってもOKです！	has:매우 OK입니다!	keep	normalize
 normalize:tsu-run	ポーラ、とってもとっっても楽しみにしてるんです～。	has:매우 매우 기대	keep	normalize
 normalize:tsu-run	あたし、ゼッッタイ沈まないからね！	나, 저어얼대 가라앉지 않으니까!	fix	normalize
-normalize:tsu-run	「あっっぶなかったぁ……橋が壊されてる」	has:「위이이험했다……	fix	normalize
+normalize:tsu-run	「あっっぶなかったぁ……橋が壊されてる」	has:「위이이험했어……	fix	normalize
 normalize:tsu-run	「ハッ、バッッカじゃないの？」	「헉, 바아아보가 아닌 거야?」	fix	normalize
 normalize:tsu-run	あっったりまえでしょ	다아앙연하지	fix	normalize
 normalize:tsu-run	しっっかり獲ってみせるから！	has:확실히	keep	normalize
@@ -22,5 +22,5 @@ normalize:tsu-run	「おっっっはよ～！」	「좋은 아침~!」	keep	norm
 normalize:tsu-run	「あっっ！」	「앗!」	keep	normalize
 normalize:tsu-run	「ああッッッ！！」	「아앗!!」	keep	normalize
 normalize:tsu-run	「っっ……」	「읏……」	keep	normalize
-normalize:tsu-run	すっごい！	대단하다!	keep	normalize
+normalize:tsu-run	すっごい！	대단해!	keep	normalize
 normalize:tsu-run	ほんっとうに	정말로	keep	normalize

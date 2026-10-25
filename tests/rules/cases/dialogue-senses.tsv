@@ -64,14 +64,14 @@ dict:jisjk:94308	いや、違うよ。	아니, 아니야.	fix	local
 dict:jisjk:94308	え、違うの？	어, 아니야?	fix	local
 dict:jisjk:94308	あっ、え…違う。	앗, 어…아니다.	fix	local
 dict:jisjk:94308	今日は火曜…違う、水曜だ	오늘은 화요일…아니다, 수요일이다	fix	local
-dict:jisjk:94308	なにか…違う…。	뭔가…다르다….	keep	local
+dict:jisjk:94308	なにか…違う…。	뭔가…달라….	keep	local
 dict:jisjk:94308	それは…違う。	그것은…다르다.	keep	local
-dict:jisjk:94308	いつもと……違う……	평상시와……다르다……	keep	local
+dict:jisjk:94308	いつもと……違う……	평상시와……달라……	keep	local
 dict:jisjk:94308	「……普通の、女の子と……違う？」	「……보통, 여자아이와……달라?」	keep	local
 dict:jisjk:94308	違います。	아닙니다.	fix	local
 dict:jisjk:94308	「違う違う、逆だよ」	「아니야 아니야, 반대야」	fix	local
 dict:jisjk:94308	答えが違う。	!rule:dict:jisjk:94308	keep	local
 dict:jisjk:94308	全然違う。	!rule:dict:jisjk:94308	keep	local
 dict:jisjk:94308	違う人が来た。	!rule:dict:jisjk:94308	keep	local
-dict:jisjk:114502	ちがう！	아니다!	fix	local
+dict:jisjk:114502	ちがう！	아니야!	fix	local
 compose:aniya-casual	「勝つことだけが目的ではありませんよ」	「이기는 것만이 목적이 아니에요」	fix	compose

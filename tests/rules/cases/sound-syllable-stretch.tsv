@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 sound:stretched-word	「うは～っ、か～わ～い～い～」	「는~, 귀여워~」	fix	sound
 sound:stretched-word	か～わ～い～い～！	귀여워~!	fix	sound
 sound:stretched-word	す～ご～い～！	대단해~!	fix	sound
-sound:stretched-word	「つーかーれーたー」	「지쳤다~」	fix	sound
+sound:stretched-word	「つーかーれーたー」	「지쳤어~」	fix	sound
 sound:stretched-word	ご～ぜ～ん～ 3時でーす(小声)	오전~ 3시입니다(작은 소리)	fix	sound
 sound:stretched-word	「…お〜り〜て〜こ〜い〜…」	「…내리고 와~…」	fix	sound
 sound:stretched-word	やーめーてーよー！	그만해~!	fix	sound

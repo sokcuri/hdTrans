@@ -1,0 +1,36 @@
+# 규칙: SPC-1
+rule	input	expected	kind	layer
+compose:speech-mark	私、負けない！	나, 지지 않아!	fix	compose
+compose:speech-mark	ここは譲れない！	여기는 양보할 수 없어!	fix	compose
+compose:speech-mark	Shit! でも、問題ない！	Shit! 하지만, 문제없어!	fix	compose
+compose:speech-mark	最後まで見届けたい！	끝까지 지켜보고 싶어!	fix	compose
+compose:speech-mark	俺も行きたい！！	나도 가고 싶어!!	fix	compose
+compose:speech-mark	……素晴らしい！	……훌륭해!	fix	compose
+compose:speech-mark	大丈夫だ！	괜찮아!	fix	compose
+compose:speech-mark	奇跡だ！	기적이야!	fix	compose
+compose:speech-mark	熊野丸は、ここに健在だ！	쿠마노마루는, 여기에 건재해!	fix	compose
+compose:speech-mark	いい匂いだった！	좋은 냄새였어!	fix	compose
+compose:speech-mark	なーんとかなった！	어떻게든 됐어!	fix	compose
+compose:speech-mark	ちいぃっ……！いやいや、まだ行ける！	체에엣……! 아니아니, 아직 갈 수 있어!	fix	compose
+compose:speech-mark	ちょっと…恥ずかしい…	조금…부끄러워…	fix	compose
+compose:speech-mark	俺もつい探してしまった……	나도 무심코 찾아버렸어……	fix	compose
+compose:speech-mark	開いたー！	열었어~!	fix	compose
+compose:speech-mark	今度は間に合った～	이번에는 늦지 않았어~	fix	compose
+compose:speech-mark	うそ！気づかれた！？	거짓말! 눈치채졌어!?	fix	compose
+compose:speech-mark	「違う！」	「아니야!」	fix	compose
+compose:speech-mark	「寒い！」	「추워!」	fix	compose
+compose:speech-mark	ミドリからその後レスあったー？	미도리에서 그 후 댓글 있었어~?	fix	compose
+compose:speech-mark	もしかして……刺されちゃった？	혹시……찔려버렸어?	fix	compose
+compose:speech-mark	ところで、今度の休みっていつぐらいに取れそう？	그런데, 이번 휴일은 언제 정도로 잡힐 것 같아?	fix	compose
+compose:speech-mark	「好きだぁぁぁっ！」	「좋아해애애앳!」	fix	compose
+compose:speech-mark	特型駆逐艦天霧、突撃する！	특형 구축함 아마기리, 돌격한다!	keep	compose
+compose:speech-mark	第一戦隊、旗艦長門、出る！	제1전대, 기함 나가토, 나간다!	keep	compose
+compose:speech-mark	僕が、守る！	내가, 지킨다!	keep	compose
+compose:speech-mark	旗艦大和、出撃します！	기함 야마토, 출격합니다!	keep	compose
+compose:speech-mark	艦隊が帰投いたしました！	함대가 귀환했습니다!	keep	compose
+compose:speech-mark	ありがたい…これでまた戦える。	고맙다…이것으로 또 싸울 수 있다.	keep	compose
+compose:speech-mark	調べた結果、扉には罠は無い…鍵すらかかっていないことは確認済みだ。	조사한 결과, 문에는 함정은 없다…열쇠조차 잠기지 않은 것은 확인이 끝난 상태다.	keep	compose
+compose:speech-mark	どこを見ている？私はここだぞ？	어디를 보고 있어? 나는 여기다?	keep	compose
+compose:speech-mark	「明日、海に行く」	「내일, 바다에 간다」	keep	compose
+compose:speech-mark	痛いいいい、やめて	아프다아아아, 그만해	keep	compose
+compose:speech-mark	「ならぬ！これは私なりの誠意なのだ！」	「되지 않는다! 이것은 나나름의 성의다!」	keep	compose

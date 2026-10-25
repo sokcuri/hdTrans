@@ -4,7 +4,7 @@ lookup:copies	いやだいやだ	싫어 싫어	fix	lookup
 lookup:copies	いやだいやだいやだー	싫어 싫어 싫어~	fix	lookup
 lookup:copies	だめだめ！	안돼 안돼!	fix	lookup
 lookup:copies	さむいさむい	춥다 추워	fix	lookup
-lookup:copies	いたいた！	있었다 있었다!	fix	lookup
+lookup:copies	いたいた！	있었어 있었어!	fix	lookup
 lookup:copies	いろいろ	여러 가지	keep	lookup
 lookup:copies	時々	가끔	keep	lookup
 lookup:copies	それぞれ	각각	keep	lookup
@@ -53,7 +53,7 @@ dict:jisjk:342186	静かで穏やかだ	조용하고 온화하다	keep	local-end
 cx:copies:40	「待って待って、途中が抜けてない？」	「기다려 기다려, 도중이 빠지지 않아?」	fix	rewrites
 sound:doubled-call	ねえねえねえ、提督？	있잖아 있잖아 있잖아, 제독?	fix	sound
 cx:copies:30	寝ろ寝ろうるさい	!rule:cx:copies:30	keep	rewrites
-cx:copies:30	願って願って、ようやく手に入れた……	바라고 또 바라, 드디어 손에 넣었다……	fix	rewrites
+cx:copies:30	願って願って、ようやく手に入れた……	바라고 또 바라, 드디어 손에 넣었어……	fix	rewrites
 cx:copies:30	「いいよいいよ、半分食べるの？」	!rule:cx:copies:30	keep	rewrites
 cx:copies:40	「さ、入って入って」	「자, 들어가 들어가」	fix	rewrites
 cx:copies:40	「わっ、見せて見せてっ」	「왓, 보여 줘 보여 줘」	fix	rewrites

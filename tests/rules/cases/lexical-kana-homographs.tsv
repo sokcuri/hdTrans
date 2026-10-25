@@ -8,7 +8,7 @@ lookup:kana-homograph	まだあるくんだ。	아직 걷는 거야.	keep	lookup
 lookup:kana-homograph	一緒にあるこう。	함께 걷자.	keep	lookup
 lookup:kana-homograph	あるいは、内部を確認したかもしれない。	혹은, 내부를 확인했을지도 모른다.	keep	lookup
 lookup:kana-homograph	「三角テントだったら２人じゃきつかったかもしれない」	「삼각 텐트라면 2명은 힘들었던 걸지도 모른다」	fix	lookup
-lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이다!	fix	lookup
+lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이야!	fix	lookup
 lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
 lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup
 lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨, 그렇지 않아……저, 마신 라페르이죠?」	keep	lookup
@@ -63,7 +63,7 @@ dict:w:28623	誰も彼もが何かを話しだした。	has:이야기하기 시�
 dict:w:28622	それは怒りだ。	그것은 분노다.	keep	lookup
 dict:w:28621	走りだけは得意だ。	달리기만은 자신있다.	keep	lookup
 dict:jisjk:4904	「うまかった。」	「맛있었다.」	fix	local
-dict:jisjk:4904	うまかった！	맛있었다!	fix	local
+dict:jisjk:4904	うまかった！	맛있었어!	fix	local
 dict:jisjk:4904	彼は歌がうまかった。	그는 노래가 능숙했다.	keep	local
 dict:jisjk:342448	じゃあなんで地中に……	has:왜 지중에	fix	local
 dict:jisjk:342448	「え！じゃあなんでこの大会に出ろなんて言ったの」	has:왜 이 대회에	fix	local

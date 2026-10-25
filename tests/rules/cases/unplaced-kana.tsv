@@ -21,7 +21,7 @@ compose:sound-before-comma	す、と俺の頭を小さな手が撫でた。	has:
 compose:sound-before-comma	「…ぷ、あーっはっはっはっはっは！！！」	has:「…푸, 	fix	compose
 compose:sound-before-comma	っと！………お、誰かが下に来るぞ。	has:………오, 누군가가	fix	compose
 compose:sound-before-comma	「あ、と……お、起きた？」	has:……이, 일어났어	fix	compose
-compose:sound-before-comma	≪び、びっくりしたー。≫	has:≪비, 놀랐다	fix	compose
+compose:sound-before-comma	≪び、びっくりしたー。≫	has:≪비, 놀랐어	fix	compose
 compose:sound-before-comma	そう言って、ぽ、と頬を紅潮させる。	has:, 포, 	fix	compose
 compose:sound-before-comma	がばり、と御園が身体を起こした。	lacks:리,	keep	compose
 compose:sound-before-comma	がばり、起き上がった。	벌떡, 일어났다.	keep	compose
@@ -45,7 +45,7 @@ lexical:spoken-words	抵抗する引っかかりに、一気に力を入れる�
 lexical:spoken-words	何かが引っかかる	뭔가가 걸린다	keep	lookup
 lexical:spoken-words	状況が飲みこめずわたわたするレナ。	has:허둥지둥	fix	lookup
 lexical:spoken-words	わたわたと興奮する	허둥지둥 흥분한다	keep	lookup
-lexical:spoken-words	フフッ…ヤッテシマエ…。カエリウチダ！	has:반격이다	fix	lookup
+lexical:spoken-words	フフッ…ヤッテシマエ…。カエリウチダ！	has:반격이야	fix	lookup
 lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
 lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
 lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup

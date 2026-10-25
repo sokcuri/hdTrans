@@ -5,7 +5,7 @@ cx:grant-ii:10	いいだろう。	좋다.	fix	rewrites
 cx:grant-ii:10	まぁ、いいだろう。	뭐, 좋다.	fix	rewrites
 cx:grant-ii:10	作戦上の機密と言いたい所だが、いいだろう、教えてやる。	작전상의 기밀이라고 말하고 싶은 곳이지만, 좋다, 가르쳐 준다.	fix	rewrites
 cx:grant-ii:10	良いだろう、もらっておこう。	좋다, 받아 두자.	fix	rewrites
-cx:grant-ii:10	…ハ…ハハッ…いいだろう！	…하…하핫…좋다!	fix	rewrites
+cx:grant-ii:10	…ハ…ハハッ…いいだろう！	…하…하핫…좋아!	fix	rewrites
 cx:grant-ii:10	「いいだろう、教えてやろう……」	「좋다, 가르쳐 주마……」	fix	rewrites
 cx:grant-ii:10	私が出るのか、いいだろう。	내가 나오는지, 좋다.	fix	rewrites
 cx:grant-ii:10	行ってもいいだろう。	!rule:cx:grant-ii:10	keep	rewrites

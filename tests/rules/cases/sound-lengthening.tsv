@@ -17,7 +17,7 @@ sound:lengthening	知らねー。	모른다.	keep	sound
 sound:lengthening	すげー！	대박!	keep	sound
 sound:lengthening	やりてー。	해라고―.	keep	sound
 sound:lengthening	食べたいなぁ。	먹고 싶다.	keep	sound
-sound:lengthening	もっと食べたいなぁー。	좀 더 먹고 싶다~.	fix	sound
+sound:lengthening	もっと食べたいなぁー。	좀 더 먹고 싶어~.	fix	sound
 sound:lengthening	へーそうなんだ。	에-그렇구나.	keep	sound
 sound:lengthening	せんぱーい、待って！	선배~, 기다려!	fix	sound
 sound:lengthening	「きゃあああああああああ！」	「꺄아아아아아아아아아!」	fix	sound
@@ -37,7 +37,7 @@ sound:lengthening	ふいいー！	후이이이!	keep	sound
 sound:lengthening	ういいー！	우이이이!	keep	sound
 sound:lengthening	きいいー！	키이이이!	keep	sound
 sound:lengthening	これいいー！	이것 좋아~!	fix	sound
-sound:lengthening	もういいー！	이제 되었다~!	fix	sound
+sound:lengthening	もういいー！	이제 됐어~!	fix	sound
 sound:lengthening	かわいいーよ！	귀여워~!	fix	sound
 sound:lengthening	おいしいーね！	맛있네~!	fix	sound
 sound:lengthening	かわいーよ！	귀여워!	keep	sound
