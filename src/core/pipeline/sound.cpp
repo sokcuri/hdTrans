@@ -425,6 +425,8 @@ public:
             off += r >= kInvalidByte ? 1 : text::DecodeRune(text.substr(off)).size;
         }
         offsets_.push_back(off);
+        nextDrawl_.assign(rs_.size() + 1, rs_.size());
+        for (size_t k = rs_.size(); k-- > 0;) nextDrawl_[k] = In(rs_[k], U"ー～") ? k : nextDrawl_[k + 1];
     }
 
     std::string Write();
@@ -443,6 +445,11 @@ private:
                      size_t* ending = nullptr) const;
     bool LongerWordAt(size_t p, size_t n) const;
     bool DrawnInWord(size_t p, size_t end) const;
+    // The first ー or ～ at or after each character; and the run start (0 for none) and sound end
+    // DrawnInWord read last, and whether that run draws out a word.
+    std::vector<size_t> nextDrawl_;
+    mutable size_t drawnFrom_ = 0, drawnEnd_ = 0;
+    mutable bool drawn_ = false;
     bool WordAt(size_t p, size_t n) const;
     bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
@@ -581,12 +588,17 @@ bool SoundText::LongerWordAt(size_t p, size_t n) const {
 // べつに, ざーんねん ざんねん; not へーそうなんだ, えーっと or どーんと).
 bool SoundText::DrawnInWord(size_t p, size_t end) const {
     if (!IsHiraganaRune(rs_[p])) return false;
-    size_t i = p + 1;
-    while (i < end && !In(rs_[i], U"ー～")) i++;
-    size_t j = i;
-    while (j < rs_.size() && In(rs_[j], U"ー～")) j++;
-    if (i >= end || j == i) return false;
-    return internal::DrawnInWord(rs_, i, j, end + Adverbial(end), ctx_, snap_);  // どーんと: as far as どんと
+    const size_t i = nextDrawl_[p + 1];
+    if (i >= end) return false;
+    const size_t soundEnd = end + Adverbial(end);  // どーんと: as far as どんと
+    if (i != drawnFrom_ || soundEnd != drawnEnd_) {
+        size_t j = i;
+        while (j < rs_.size() && In(rs_[j], U"ー～")) j++;
+        drawnFrom_ = i;
+        drawnEnd_ = soundEnd;
+        drawn_ = internal::DrawnInWord(rs_, i, j, soundEnd, ctx_, snap_);
+    }
+    return drawn_;
 }
 
 // The sound at character p: the longest key, then the longest match. A dictionary word
