@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.7](https://github.com/sokcuri/hdTrans/compare/v0.5.6...v0.5.7) (2026-10-25)
+
+
+### Features
+
+* **speech:** read bare lines of speech in soft as quoted speech ([#160](https://github.com/sokcuri/hdTrans/issues/160)) ([095ae97](https://github.com/sokcuri/hdTrans/commit/095ae97a76d1b92cb2169b47b72c7e6d3319789d))
+
+
+### Bug Fixes
+
+* **release:** let soft speech cover bracketless dialogue and explain speech and translation modes ([6889a47](https://github.com/sokcuri/hdTrans/commit/6889a47aa3e64e49dddbc7f48085978b314a4170))
+
 ## [0.5.6](https://github.com/sokcuri/hdTrans/compare/v0.5.5...v0.5.6) (2026-10-25)
 
 
