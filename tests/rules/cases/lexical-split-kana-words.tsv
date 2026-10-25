@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:function-nouns:1	いかんせん今この場は“私を断罪する場”なのだ。	아무래도 지금 이 자리는 “나를 단죄하는 자리”다.	fix	defaults
 dict:function-nouns:1	いかんせん数が多すぎる。	아무래도 수가 너무 많다.	fix	defaults
-dict:function-nouns:3	などと、内心でボヤく俺。	등과 내심으로 투덜대는 나.	fix	defaults
+dict:function-nouns:3	などと、内心でボヤく俺。	하고, 내심으로 투덜대는 나.	fix	defaults
 dict:function-nouns:3	彼は小さくボヤいた。	그는 작게 투덜대었다.	fix	defaults
 dict:function-nouns:7	すぐにわかるぱさつき具合。	곧바로 아는 푸석함 상태.	fix	defaults
 dict:function-nouns:6	髪がパサついている。	머리카락이 푸석거리고 있다.	fix	defaults

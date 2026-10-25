@@ -1962,6 +1962,59 @@ bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
     return true;
 }
 
+// Whether the sentence ending at last, in narration, ends in a plain present verb of an act
+// (籠を見る, 歩く), not a state, a change or a potential (眠くなる, 花が咲いている, 書ける), and
+// holds no adverb of habit (毎朝起きると顔を洗う).
+bool NarratedPresentAct(Flusher& f, const Item* last, std::string_view end) {
+    if (!f.w.settings.narrated || last->InQuote() || last->detail->cls != kDetailVerb || last->DirectIndex() < 0 ||
+        last->selected < 0 || last->DetailRecord() == 4) {
+        return false;
+    }
+    const Entry* e = last->DirectEntry(last->DirectIndex());
+    if (e == nullptr || e->dst != "4다") return false;
+    const char32_t c = DecodeLastRune(end).cp;
+    if (std::u32string_view(U"うくぐすつぬぶむる").find(c) == std::u32string_view::npos) return false;
+    const std::string lemma = output::Lemma(last->EntryText(last->selected), f.families);
+    // A change (졸려지다, 되다), a state, a word with its own subject (花が咲く 꽃이 피다), or the bare
+    // する of a habit (話をすると嬉しそうな顔をする).
+    if (lemma.ends_with("되다") || lemma.ends_with("지다") || lemma.ends_with("있다") || lemma.ends_with("없다") ||
+        Has(lemma, "이 ") || Has(lemma, "가 ") || last->group->surface.starts_with("な") || lemma == "하다") {
+        return false;
+    }
+    for (const Item* x = f.w.chain.head; x != nullptr; x = x->next) {
+        if (dict::InClass("adverb.habit", x->group->surface) || dict::InClass("adverb.habitual", x->group->surface) ||
+            x->group->surface == "必ず") {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Whether the clause of the と at item it acts on an object: a を before it, after the last comma
+// or sentence mark (籠を置くと), not a happening (名前を入れると, 気に入られてしまうと) or a する.
+bool ActsOnObject(Flusher& f, const Item* it) {
+    if (it->group->surface.starts_with("しま") || it->group->surface.starts_with("ちゃ")) return false;
+    // An attempt (選ぼうとすると) or the bare する of a noun (咳払いをすると) is no step of its own.
+    if (output::Lemma(it->EntryText(it->selected), f.families) == "하다") return false;
+    for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (s == "を") return true;
+        if (s == "、" || s == "。" || s == "！" || s == "？" || s == "「" || s == "」" || s == "『" || s == "』") return false;
+    }
+    return false;
+}
+
+// Whether no subject or topic (が, は, も) stands between item it and last: the same subject
+// goes on (籠を置くと、籠を見る), not a new one (春になると花が咲く).
+bool SameSubjectAfter(const Item* it, const Item* last) {
+    for (const Item* x = it->After(); x != nullptr; x = x->next) {
+        const std::string_view s = x->group->surface;
+        if (s == "が" || s == "は" || s == "も") return false;
+        if (x == last) break;
+    }
+    return true;
+}
+
 }  // namespace
 
 void PastSequence(Flusher& f) {
@@ -1977,11 +2030,18 @@ void PastSequence(Flusher& f) {
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
     // A verb whose past た is in its conjugation, not in its ending (噴火した: する + た).
     const bool pastForm = last->detail->cls == kDetailVerb && last->detail->kind == 6 && last->DirectSurface().empty();
-    if ((!end.ends_with("た") && !pastForm) || end.ends_with("よかった") || end.ends_with("良かった")) return;
+    // Narration in the present tells its steps as the past does (籠を置くと、籠を見る 바구니를 두니, 바구니를
+    // 본다), a と only, of an act on an object by the subject that goes on.
+    const bool present = (!end.ends_with("た") && !pastForm) && NarratedPresentAct(f, last, end);
+    if (!present && ((!end.ends_with("た") && !pastForm) || end.ends_with("よかった") || end.ends_with("良かった"))) return;
     for (Item* it = f.w.chain.head; it != nullptr && it != last; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
+        if (present && (it->DirectSurface() != "と" || e->dst != "2면(자)" || !SameSubjectAfter(it, last) ||
+                        !ActsOnObject(f, it))) {
+            continue;
+        }
         const std::string_view d = it->DirectSurface();
         const bool seeing = e->dst == "2면" && d.ends_with("ば") &&
                             output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다");
