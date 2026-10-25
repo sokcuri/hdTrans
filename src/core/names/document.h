@@ -15,6 +15,7 @@
 #include "core/dict/codes.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/user_text.h"
+#include "core/names/name_cues.h"
 #include "core/names/registry.h"
 #include "core/pipeline/line_context.h"
 #include "core/userdict/conjugating.h"
@@ -58,6 +59,8 @@ struct DocumentContext {
     };
     // The lookups' plain lists and confirmed names by their skip key, built on first use.
     std::map<std::string, CachedLookup> plainByKey;
+    // names::NameCues by text, read once for the lines and the line facts.
+    std::map<std::string, std::vector<names::NameCue>, std::less<>> nameCues;
 };
 
 // The facts of one line of a document.

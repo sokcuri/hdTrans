@@ -153,6 +153,16 @@ std::vector<std::string> CuedNames(const dict::Snapshot& snap, std::string_view 
     return keys;
 }
 
+namespace {
+
+const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view text) {
+    auto found = doc.nameCues.find(text);
+    if (found == doc.nameCues.end()) found = doc.nameCues.emplace(text, names::NameCues(*doc.snap, text)).first;
+    return found->second;
+}
+
+}  // namespace
+
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
                                                bool extraBuiltin) {
     auto doc = std::make_unique<DocumentContext>();
@@ -177,7 +187,7 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         female = female || speech.female;
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
-        for (const names::NameCue& c : names::NameCues(snap, line)) {
+        for (const names::NameCue& c : CuesOf(*doc, line)) {
             if (c.strong) doc->cued.insert(c.key);
             if (c.recurring) recurring[c.key]++;
         }
@@ -337,7 +347,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
-    for (const names::NameCue& c : names::NameCues(*doc.snap, facts.text)) facts.cued.push_back(c.key);
+    for (const names::NameCue& c : CuesOf(doc, facts.text)) facts.cued.push_back(c.key);
     std::sort(facts.cued.begin(), facts.cued.end());
     return facts;
 }
