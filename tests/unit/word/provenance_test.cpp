@@ -173,9 +173,9 @@ HD_TEST(word_provenance_senses_override_rule) {
         {"彼女の声。", "소리", false, word::Provenance::Sense, 107},
         {"彼女の声。", "목소리", false, word::Provenance::Sense, 107},
         {"彼女の声。", "소리", true, word::Provenance::Sense, 107},
-        {"声。", "소리", false, word::Provenance::SenseDefault, 922},
-        {"声。", "목소리", false, word::Provenance::SenseDefault, 922},
-        {"声。", "소리", true, word::Provenance::SenseDefault, 922},
+        {"声。", "소리", false, word::Provenance::SenseDefault, 923},
+        {"声。", "목소리", false, word::Provenance::SenseDefault, 923},
+        {"声。", "소리", true, word::Provenance::SenseDefault, 923},
     };
     HD_REQUIRE(internal::RulesLoaded());
     for (const Case& c : cases) {
@@ -306,8 +306,8 @@ HD_TEST(word_provenance_pool_reuse) {
     word::Entry* firstEntry = first->group->At(0);
     word::Flusher f{*line.analysis.worker, Rules(*snapshot), snapshot->OutputFamilies()};
     word::Flush(f);
-    CheckSelection(first->choice, word::Provenance::SenseDefault, 922);
-    CheckSelection(firstEntry->targetChoice, word::Provenance::SenseDefault, 922);
+    CheckSelection(first->choice, word::Provenance::SenseDefault, 923);
+    CheckSelection(firstEntry->targetChoice, word::Provenance::SenseDefault, 923);
 
     HD_REQUIRE(line.Analyze("人気。", *snapshot));
     word::Item* noun = line.Find("人気");
