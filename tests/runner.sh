@@ -5,7 +5,9 @@ here=$(cd "$(dirname "$0")/.." && pwd)
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-runner.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 trap 'exit 1' HUP INT TERM
-cat > "$tmp/probe.cpp" <<'CPP'
+mkdir -p "$tmp/tests/unit/probe"
+probe=$tmp/tests/unit/probe/probe_test.cpp
+cat > "$probe" <<'CPP'
 #include "hdtest.h"
 #include <chrono>
 #include <filesystem>
@@ -58,7 +60,7 @@ HD_TEST(environment) {
 }
 CPP
 "${CXX:-c++}" -std=c++20 -Wall -Wextra -Werror -fno-exceptions -fno-rtti \
-    -I "$here/tests/unit" "$here/tests/unit/main.cpp" "$tmp/probe.cpp" -o "$tmp/runner"
+    -I "$here/tests/unit" "$here/tests/unit/main.cpp" "$probe" -o "$tmp/runner"
 mkdir -p "$tmp/home/Library/Caches/hdtrans" "$tmp/xdg/hdtrans" "$tmp/local"
 case $(uname -s) in
     Darwin) real=$tmp/home/Library/Caches/hdtrans ;;
@@ -106,4 +108,20 @@ for cache in '' off "$tmp/supplied"; do
 done
 export HDTEST_FAIL_ENVIRONMENT=1
 environment_check 1 '1 run, 1 failed, 0 skipped'
+unset HDTEST_FAIL_ENVIRONMENT
+printf '# shards\none probe/probe_test.cpp:pass\ntwo probe/probe_test.cpp:skip probe/probe_test.cpp:fail\nrest probe/\n' > "$tmp/shards"
+"$tmp/runner" --check-shards "$tmp/shards" > "$tmp/log" 2>&1 || { cat "$tmp/log"; exit 1; }
+grep -Fx '7 tests in 3 shards, 0 in no shard, 0 entries without a test' "$tmp/log" > /dev/null || { cat "$tmp/log"; exit 1; }
+"$tmp/runner" --shard "$tmp/shards" one > "$tmp/log" 2>&1 || { cat "$tmp/log"; exit 1; }
+grep -E '^ok   pass ' "$tmp/log" > /dev/null && grep -Fx '1 run, 0 failed, 0 skipped' "$tmp/log" > /dev/null || { cat "$tmp/log"; exit 1; }
+status=0; "$tmp/runner" --shard "$tmp/shards" two > "$tmp/log" 2>&1 || status=$?
+[ "$status" = 1 ] && grep -Fx '2 run, 1 failed, 1 skipped' "$tmp/log" > /dev/null ||
+    { cat "$tmp/log"; exit 1; }
+printf 'one probe/probe_test.cpp:pass\nnone probe/missing_test.cpp\n' > "$tmp/shards"
+status=0; "$tmp/runner" --check-shards "$tmp/shards" > "$tmp/log" 2>&1 || status=$?
+[ "$status" = 1 ] && grep -Fx 'no shard: probe/probe_test.cpp:skip' "$tmp/log" > /dev/null &&
+    grep -Fx 'no test: shard none entry probe/missing_test.cpp' "$tmp/log" > /dev/null || { cat "$tmp/log"; exit 1; }
+printf 'one probe/\ntwo probe/\n' > "$tmp/shards"
+! "$tmp/runner" --check-shards "$tmp/shards" > "$tmp/log" 2>&1 && grep -Fx 'entry probe/ is in shards one and two' "$tmp/log" > /dev/null ||
+    { cat "$tmp/log"; exit 1; }
 echo 'runner semantics: PASS'
