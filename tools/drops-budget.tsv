@@ -1,6 +1,6 @@
 # Inputs of the measured sets (tools/measure.sh) that drop text, per set (tools/drops.py --sets; ctest
-# sets.drops). A change that makes fewer inputs drop text lowers its row (--update); one that makes more
-# fixes them instead. A set whose number of inputs differs from its row is not compared and gets a
+# sets.drops). A change that makes more inputs drop text fixes them; one that makes fewer passes and may
+# lower its row (--update), which a release does. A set whose number of inputs differs from its row is not compared and gets a
 # warning: the data changed, and --update with that data writes its row again.
 set	inputs	drops	unplaced
 corpus	64615	1052	2018

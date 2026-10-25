@@ -187,11 +187,19 @@ if(NOT EMSCRIPTEN)
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
     add_test(NAME version COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -DWORK=${CMAKE_CURRENT_BINARY_DIR}/version-test -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/version.cmake")
-    add_test(NAME unit COMMAND hdtrans_tests)
+    # One ctest entry per line of tests/unit/shards.txt, and a check that every test has a shard.
+    set(unitShards "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/shards.txt")
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${unitShards}")
+    file(STRINGS "${unitShards}" unitShardLines REGEX "^[^#]")
+    add_test(NAME unit.shards COMMAND hdtrans_tests --check-shards "${unitShards}")
+    foreach(line IN LISTS unitShardLines)
+        string(REGEX MATCH "^[^ \t]+" shard "${line}")
+        add_test(NAME unit.${shard} COMMAND hdtrans_tests --shard "${unitShards}" ${shard})
+        set_tests_properties(unit.${shard} PROPERTIES ENVIRONMENT
+            "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache/${shard}")
+    endforeach()
     add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
-    set_tests_properties(unit PROPERTIES ENVIRONMENT
-        "HDTRANS_DICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts;HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/unit-cache")
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
@@ -252,7 +260,7 @@ if(NOT EMSCRIPTEN)
                 $<TARGET_FILE:hdtrans_cli> -d "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --check)
             set_tests_properties(rules.variants PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
-            # The inputs of the measured sets that drop text or keep unplaced kana stay at
+            # The inputs of the measured sets that drop text or keep unplaced kana stay within
             # tools/drops-budget.tsv; skipped when no set variable is set.
             add_test(NAME sets.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --sets
@@ -318,7 +326,7 @@ if(NOT EMSCRIPTEN)
             -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules_lint_checks.cmake")
         add_test(NAME rules.verify COMMAND hdrulec verify "${HDTRANS_RULE_DUMP}" -paths 4096)
         add_test(NAME rules.identity COMMAND hdrulec dump "${HDTRANS_RULE_DUMP}" -check "${HDTRANS_RULE_DIR}/program.hash")
-        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -local 0-499 -globals
+        add_test(NAME rules.generated COMMAND hdrulec cpp "${HDTRANS_RULE_DUMP}" -globals
             -check "${CMAKE_CURRENT_SOURCE_DIR}/src/core/rules/compiled_gen.cpp")
         set_tests_properties(rules.lint rules.verify rules.identity rules.generated PROPERTIES
             FIXTURES_REQUIRED ruledump)

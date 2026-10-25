@@ -12,7 +12,7 @@ hdrulec convert build/rules.txt -o build/rules.hdr # 읽기 쉬운 문법으로 
 hdrulec flat build/rules.hdr -o build/rules.txt    # 되돌리기
 hdrulec verify build/rules.txt [-paths N]          # 앞단과 변환을 rules::Load, 인터프리터에 대어 봄
 hdrulec dump build/rules.txt [-hash]               # 불러온 프로그램을 실행 순서로 (rules.identity)
-hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+hdrulec cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp   # 전역 규칙의 생성 코드 (rules.generated)
 ```
 
 ## 사용법
@@ -24,7 +24,7 @@ hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen
 |---|---|---|
 | 고친 직후 | `hdrulec lint build/rules.txt -dicts dicts 2>&1 \| tail -1` | `rules.lint` |
 | 동작을 바꿨을 때 | `hdrulec dump build/rules.txt -hash > src/core/rules/program.hash` | `rules.identity` |
-| 늘 | `hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
+| 전역 규칙(`globals.txt`)을 고쳤을 때 | `hdrulec cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp` | `rules.generated` |
 | 큰 변환 뒤 | `hdrulec verify build/rules.txt -paths 4096` | `rules.verify` |
 
 `rules.lint`는 플래그마다 경고 수가 `tools/lint-budget.tsv`에 적힌 수보다 많으면 실패합니다(`-budget`). 경고가
@@ -169,8 +169,10 @@ local 3
   `GetObject`, `Check…`가 순수하다는 증명이 필요합니다. `GetObject`는 이웃의 후보 표시를 지우고, 이웃 찾기는 `D=`가
   바꾼 번역(`(`, `)`)을 읽으므로 대입이 없는 구간에서만 가능합니다. 얻을 수 있는 시간이 위와 같이 작아 하지 않습니다.
 
-결정: **데이터와 인터프리터가 기준**입니다. 생성 코드는 속도가 아니라 *규칙마다 이름 있는 함수*(`RuleL3`,
-`RuleG210`)가 필요해서 둡니다. 디버거에서 규칙 하나에 중단점을 걸 수 있고, 손으로 쓴 C++ 조건(아래)을 같은 자리에
+결정: **데이터와 인터프리터가 기준**입니다. 생성 코드는 속도가 아니라 *규칙마다 이름 있는 함수*(`RuleG210`)가
+필요해서 두며, 전역 규칙만 만듭니다(`-globals`). 지역 규칙은 사전 행마다 번호가 붙은 레코드라 사전을 고치는 변경마다
+생성 파일이 함께 바뀌었고, 그 속도 이득은 위 표대로 측정 오차 안입니다. `-local FIRST-LAST`로 지역 규칙도 만들 수
+있습니다. 디버거에서 규칙 하나에 중단점을 걸 수 있고, 손으로 쓴 C++ 조건(아래)을 같은 자리에
 넣을 수 있습니다. 생성 코드는 그 레코드 줄의 해시가 맞을 때만 쓰이므로(`compiled.h`의 `RecordHash`), 규칙을
 고치고 다시 생성하지 않아도 그 규칙만 인터프리터로 돌고 결과는 같습니다. 크기가 중요한 빌드(WebAssembly)는
 `HDTRANS_INTERPRET_RULES=ON`으로 끌 수 있습니다.
@@ -178,10 +180,10 @@ local 3
 생성 코드의 모양(규칙 하나):
 
 ```cpp
-// local 3
-//     src[+1] == "あそば" and ko[+1] == "하&AE@" and pos[+1] is 4**
-bool RuleL3([[maybe_unused]] Item* p) {
-    return (SrcEq(p, 1, "あそば"sv) && DstEq(p, 1, "하&AE@"sv) && PumsaEq(p, 1, "4**"sv));
+// global 997 stem pos 1 prio 1
+//     src == "屋" and src[-1] == "各部" and ko[-1] := "" and ko := "각 방"
+bool RuleG1([[maybe_unused]] Item* p) {
+    return (SrcEq(p, 0, "屋"sv) && SrcEq(p, -1, "各部"sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "각 방"sv));
 }
 ```
 
@@ -224,7 +226,7 @@ bool RuleL3([[maybe_unused]] Item* p) {
 - **테스트**: `tests/rules/cases/`의 행이 규칙 하나를 이름합니다. `rule` 열에 그 규칙을 이름한 사전 행의 id를 적고,
   번역 전체는 `expected`에, 그 규칙이 고른 번역은 `rule:dict:<id>=<번역>`에, 규칙이 손대지 않아야 하는 줄은
   `!rule:dict:<id>`에 적습니다. 실패는 케이스 행과 기대값, 실제값을 보입니다([rule-language.md](rule-language.md#규칙-테스트)).
-- **디버깅**: 생성 코드의 함수 `RuleL3`에 중단점을 겁니다. `-why`는 결정한 층과 규칙(`L3`, `globals.txt:G10`)을 적습니다([pipeline-layers.md](pipeline-layers.md)).
+- **디버깅**: 생성 코드의 함수 `RuleG10`에 중단점을 겁니다(지역 규칙은 `-local`로 만든 뒤). `-why`는 결정한 층과 규칙(`L3`, `globals.txt:G10`)을 적습니다([pipeline-layers.md](pipeline-layers.md)).
 - **손으로 쓴 조건(설계만)**: 문법으로 쓰기 어려운 드문 경우를 위해 원자 `call 이름[위치]`를 둡니다(옛 형식
   `N+1== "이름"`). 이름은 `src/core/word/` 안의 표(`이름 → bool (*)(const Item&)`)에서 찾고, 없는 이름은 `hdrulec`와
   `rules::Load`가 모두 오류로 냅니다. 인터프리터는 표로, 생성 코드는 그 함수를 바로 부릅니다. 순수 함수(검사만)여야

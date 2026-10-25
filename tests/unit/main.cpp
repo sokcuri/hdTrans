@@ -1,10 +1,16 @@
-// Unit test runner. Usage: hdtrans_tests [name-substring-filter]
+// Unit test runner. Usage:
+//   hdtrans_tests [name-substring-filter]
+//   hdtrans_tests --shard SHARDS NAME     runs the tests of one shard of the table SHARDS
+//   hdtrans_tests --check-shards SHARDS   fails when a test belongs to no shard or an entry to no test
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
 #include <map>
+#include <sstream>
+#include <string_view>
 #include <vector>
 
 #ifdef _WIN32
@@ -194,6 +200,107 @@ struct CacheGuard {
 CacheGuard* cacheGuard = nullptr;
 void CleanupCache() { delete cacheGuard; }
 
+// A line of the shard table is a shard name and its entries. An entry is a folder under
+// tests/unit/ ending in '/', a source file, or file:test; a test belongs to the shard of its
+// longest matching entry.
+struct Shard {
+    std::string name;
+    std::vector<std::string> entries;
+};
+
+bool ReadShards(const char* path, std::vector<Shard>& shards) {
+    std::ifstream in{fs::path(path)};
+    if (!in) {
+        std::fprintf(stderr, "cannot read shard table %s\n", path);
+        return false;
+    }
+    std::map<std::string, std::string> owner;
+    std::string line;
+    while (std::getline(in, line)) {
+        if (!line.empty() && line.back() == '\r') line.pop_back();
+        if (line.empty() || line[0] == '#') continue;
+        std::istringstream words(line);
+        Shard shard;
+        words >> shard.name;
+        for (std::string entry; words >> entry;) shard.entries.push_back(entry);
+        if (shard.entries.empty()) {
+            std::fprintf(stderr, "shard %s has no entries\n", shard.name.c_str());
+            return false;
+        }
+        for (const auto& other : shards) {
+            if (other.name == shard.name) {
+                std::fprintf(stderr, "shard %s is listed twice\n", shard.name.c_str());
+                return false;
+            }
+        }
+        for (const auto& entry : shard.entries) {
+            if (!owner.emplace(entry, shard.name).second) {
+                std::fprintf(stderr, "entry %s is in shards %s and %s\n", entry.c_str(), owner[entry].c_str(),
+                             shard.name.c_str());
+                return false;
+            }
+        }
+        shards.push_back(std::move(shard));
+    }
+    return true;
+}
+
+// The source file of a test relative to tests/unit/.
+std::string TestFile(const hdtest::Test& t) {
+    std::string file = t.file;
+    for (char& c : file) {
+        if (c == '\\') c = '/';
+    }
+    const auto at = file.rfind("tests/unit/");
+    return at == std::string::npos ? file : file.substr(at + std::strlen("tests/unit/"));
+}
+
+struct Placement {
+    int shard = -1;
+    const std::string* entry = nullptr;
+};
+
+Placement Place(const hdtest::Test& t, const std::vector<Shard>& shards) {
+    const std::string file = TestFile(t);
+    const std::string key = file + ":" + t.name;
+    Placement best;
+    for (size_t i = 0; i < shards.size(); ++i) {
+        for (const auto& entry : shards[i].entries) {
+            const bool matches = entry.back() == '/' ? file.starts_with(entry) : entry == file || entry == key;
+            if (matches && (best.entry == nullptr || entry.size() > best.entry->size())) {
+                best = {static_cast<int>(i), &entry};
+            }
+        }
+    }
+    return best;
+}
+
+int CheckShards(const std::vector<Shard>& shards) {
+    std::map<const std::string*, int> used;
+    int unplaced = 0;
+    for (const auto& t : hdtest::Registry()) {
+        const auto placement = Place(t, shards);
+        if (placement.entry == nullptr) {
+            unplaced++;
+            std::fprintf(stderr, "no shard: %s:%s\n", TestFile(t).c_str(), t.name);
+        } else {
+            used[placement.entry]++;
+        }
+    }
+    int unused = 0;
+    for (const auto& shard : shards) {
+        for (const auto& entry : shard.entries) {
+            if (!used.contains(&entry)) {
+                unused++;
+                std::fprintf(stderr, "no test: shard %s entry %s\n", shard.name.c_str(), entry.c_str());
+            }
+        }
+    }
+    std::printf("%zu tests in %zu shards, %d in no shard, %d entries without a test\n", hdtest::Registry().size(),
+                shards.size(), unplaced, unused);
+    return unplaced || unused ? 1 : 0;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -203,13 +310,33 @@ int main(int argc, char** argv) {
         std::fprintf(stderr, "FAIL runner cache initialization\n");
         return 1;
     }
-    const char* filter = argc > 1 ? argv[1] : nullptr;
+    const bool shardMode = argc == 4 && std::string_view(argv[1]) == "--shard";
+    const bool checkMode = argc == 3 && std::string_view(argv[1]) == "--check-shards";
+    if (argc > 1 && std::string_view(argv[1]).starts_with("--") && !shardMode && !checkMode) {
+        std::fprintf(stderr, "usage: hdtrans_tests [filter] | --shard SHARDS NAME | --check-shards SHARDS\n");
+        return 2;
+    }
+    std::vector<Shard> shards;
+    if ((shardMode || checkMode) && !ReadShards(argv[2], shards)) return 1;
+    if (checkMode) return CheckShards(shards);
+    int shard = -1;
+    if (shardMode) {
+        for (size_t i = 0; i < shards.size(); ++i) {
+            if (shards[i].name == argv[3]) shard = static_cast<int>(i);
+        }
+        if (shard < 0) {
+            std::fprintf(stderr, "no shard %s in %s\n", argv[3], argv[2]);
+            return 1;
+        }
+    }
+    const char* filter = argc > 1 && !shardMode ? argv[1] : nullptr;
     const bool requireAll = hdtest::RequireAll();
     const char* exclude = std::getenv("HDTRANS_TEST_EXCLUDE");
     const std::string excluded = "," + std::string(exclude ? exclude : "") + ",";
     int run = 0, failed = 0, skipped = 0;
     for (const auto& t : hdtest::Registry()) {
         if (filter && !std::strstr(t.name, filter)) continue;
+        if (shardMode && Place(t, shards).shard != shard) continue;
         hdtest::Cur() = {};
         const auto started = std::chrono::steady_clock::now();
         if (excluded.find("," + std::string(t.name) + ",") != std::string::npos)

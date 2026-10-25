@@ -40,3 +40,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 魔法袋	마법 주머니	N110			GN				replace			genre-terms:38
 アイテム袋	아이템 주머니	N110			GN				replace			genre-terms:39
 冒険者たち	모험가들	N110	VHn		GN				replace			genre-terms:40
+第一子	첫째 아이	N110	VHn		GN				replace			genre-terms:41
+第一歩	첫걸음	N110			GN				replace			genre-terms:42
+第一声	첫마디	N110			GN				replace			genre-terms:43

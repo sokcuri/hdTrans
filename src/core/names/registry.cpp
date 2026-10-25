@@ -521,8 +521,13 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         bool linked = false;
         if (i + 1 < runs.size()) {
             const Run& next = runs[i + 1];
+            const std::string_view gap = std::string_view(line).substr(run.end, next.start - run.end);
             if (run.kanji && !next.kanji && next.start == run.end) {
                 const std::array<std::string, 3> key = {std::string(run.text), "", std::string(next.text)};
+                joined_[key]++;
+                if (recording_ != nullptr) recording_->joined.push_back(key);
+            } else if (run.kanji && next.kanji && (gap == "　" || gap == " ")) {
+                const std::array<std::string, 3> key = {std::string(run.text), " ", std::string(next.text)};
                 joined_[key]++;
                 if (recording_ != nullptr) recording_->joined.push_back(key);
             } else if (!run.kanji && !next.kanji && next.start == run.end + std::string_view("・").size()) {
@@ -713,8 +718,9 @@ const std::map<std::string, Name>& Registry::Accepted() {
         const DictFlags fj = Flags(joined);
         if (fj.common && !fj.person) return;
         // The surname stands for the person alone too, but a common word (北, 上) reads as
-        // that word wherever the full name is not written.
-        if (!Flags(x).common) {
+        // that word wherever the full name is not written; a kanji whose only common reading is
+        // the kanji's own (牧 목) is no such word.
+        if (!Flags(x).word) {
             Name& s = all[x];
             s.score += c;
             s.person = true;
@@ -737,15 +743,35 @@ const std::map<std::string, Name>& Registry::Accepted() {
     for (const auto& [k, c] : joined_) {
         const std::string& x = k[0];
         const std::string& y = k[2];
-        if (att.count(y) && surnameLike(x)) full(x, y, x + y, c);
+        if (k[1].empty()) {
+            if (att.count(y) && surnameLike(x)) full(x, y, x + y, c);
+            continue;
+        }
+        // A surname of two kanji or more, a space and a given name of up to three kanji that is no
+        // word (小鳥遊　聖): the given name names the person.
+        const DictFlags fx = Flags(x), fy = Flags(y);
+        if (RuneCount(x) < 2 || RuneCount(y) > 3 || !(fx.surname || fx.layerSurname) || fx.word || fx.role ||
+            !(fy.given || fy.layerGiven) || fy.word || fy.role) {
+            continue;
+        }
+        Name& g = all[y];
+        g.score = std::max(g.score, kSingleThreshold);
+        g.person = true;
+        g.given = true;
     }
     for (const auto& [t, c] : ended_) {
         const auto [x, y] = GivenSplit(t);
         if (y.empty()) continue;
         full(x, y, t, c);
         // The given name stands for the person alone too, but a common word (大森海: 海)
-        // reads as that word wherever the full name is not written.
-        if (Flags(y).common) continue;
+        // reads as that word wherever the full name is not written, unless it has two kanji or
+        // more and the document writes the full name more than once (椎名真昼 twice: 真昼 is the
+        // person).
+        if (Flags(y).word && (c < 2 || RuneCount(y) < 2)) continue;
+        // Nor the end of a word that starts in the surname (今一瞬: 一瞬).
+        bool tail = false;
+        for (const std::size_t j : RuneStarts(x)) tail = tail || (j > 0 && Flags(t.substr(j)).common);
+        if (tail) continue;
         Name& g = all[y];
         g.score = std::max(g.score, kSingleThreshold);
         g.person = true;

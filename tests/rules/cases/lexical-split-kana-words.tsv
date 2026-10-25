@@ -1,0 +1,26 @@
+# 규칙: LEX-54
+rule	input	expected	kind	layer
+dict:function-nouns:1	いかんせん今この場は“私を断罪する場”なのだ。	아무래도 지금 이 자리는 “나를 단죄하는 자리”다.	fix	defaults
+dict:function-nouns:1	いかんせん数が多すぎる。	아무래도 수가 너무 많다.	fix	defaults
+dict:function-nouns:3	などと、内心でボヤく俺。	하고, 내심으로 투덜대는 나.	fix	defaults
+dict:function-nouns:3	彼は小さくボヤいた。	그는 작게 투덜대었다.	fix	defaults
+dict:function-nouns:7	すぐにわかるぱさつき具合。	곧바로 아는 푸석함 상태.	fix	defaults
+dict:function-nouns:6	髪がパサついている。	머리카락이 푸석거리고 있다.	fix	defaults
+dict:function-nouns:66	何本ものポーションを試作する。	여러 개의 포션을 시험 제작한다.	fix	defaults
+dict:function-nouns:67	剣を何本も用意した。	검을 몇 개나 준비했다.	fix	defaults
+lookup:cut-deshou	アイリスがしたことなんて可愛いものでしょ。	아이리스가 한 것은 귀여운 것이지.	fix	lookup
+lookup:cut-deshou	安いものでしょう？	싼 것이죠?	fix	lookup
+lookup:cut-deshou	忙しいもので、すみません。	바쁜 것으로, 죄송합니다.	keep	lookup
+lookup:cut-deshou	嫌なんでしょ？	싫은 이지?	keep	lookup
+dict:function-nouns:10	それまで微睡みの中にいたのが、	그때까지 선잠 안에 있었던 것이,	fix	defaults
+dict:function-nouns:12	はい。いっちばん美味しいチョコ、あげるね♪	네. 제일 맛있는 초콜릿, 줄게♪	fix	defaults
+dict:function-nouns:17	隠しボス以外なら一撃で倒せる。	숨겨진 보스 이외라면 일격으로 넘어뜨릴 수 있다.	fix	defaults
+dict:function-nouns:18	隠し部屋を見つけた。	숨겨진 방을 찾아냈다.	fix	defaults
+dict:function-nouns:16	卵と刻み野菜をたっぷり入れたマヨネーズ	계란과 다진 채소를 듬뿍 넣은 마요네즈	fix	defaults
+dict:function-nouns:21	断罪の場へと引きずり降ろされてしまっている。	단죄의 자리로 끌어내려져버렸다.	fix	defaults
+dict:function-nouns:25	斜め前に座っている下女が噂話を続ける。	비스듬히 앞에 앉아 있는 하녀가 소문을 계속한다.	fix	defaults
+dict:function-nouns:29	苛つきに任せてわざと悪手を選ぶつもりはない。	짜증에 맡겨 일부러 악수를 선택할 생각은 없다.	fix	defaults
+dict:function-nouns:30	態々このような場を作った。	일부러 이러한 자리를 만들었다.	fix	defaults
+dict:jisjk:170509	感染が広がっている。	감염이 퍼져 있다.	keep	defaults
+dict:jisjk:40359	いかんいかん。	안돼 안돼.	keep	defaults
+dict:jisjk:27834	ポーションを試作する。	포션을 시험 제작한다.	fix	defaults

@@ -182,7 +182,7 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in   # 엔진이 조립한 규칙 프로그램
 hdrulec lint build/rules.txt -dicts dicts                     # 마지막 줄이 0 error(s)
 hdrulec dump build/rules.txt -hash > src/core/rules/program.hash
-hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+hdrulec cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp
 ```
 
 빌드하고 전체 테스트를 돌립니다. 사전을 쓰는 테스트는 `HDTRANS_DICTS`가 있어야 돕니다.
@@ -217,7 +217,7 @@ ctest --preset <preset>
 
 - 번역이 바뀌는 수정은 따로 커밋하고, 무엇을 왜 바꿨는지와 판정 숫자(바뀐 줄, 나아짐, 같음, 나빠짐)를 적습니다. 판정에 쓴
   문서나 세트의 이름, 출처는 적지 않습니다.
-- 규칙을 고친 커밋에는 `program.hash`와 `compiled_gen.cpp`가 함께 들어갑니다.
+- 규칙을 고친 커밋에는 `program.hash`가, 전역 규칙을 고친 커밋에는 `compiled_gen.cpp`도 함께 들어갑니다.
 - 풀 리퀘스트는 `develop` 브랜치로 보냅니다. 커밋과 PR 제목은 `fix(rules): 조건 뒤 인용 수정`처럼 씁니다([제목 규칙](contributing.md#커밋과-pr-제목)).
 
 ## 여러 줄을 한꺼번에 고칠 때

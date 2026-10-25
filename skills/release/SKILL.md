@@ -23,6 +23,9 @@ Branch and title rules: AGENTS.md "Branches" and docs/contributing.md. CI: docs/
   and covered by a rule case, or filed as an issue when it is an older bug.
 - Translation changes were measured and every changed line was judged blind by judges that did not
   write the change (fix-translation steps 11–12). Keep the numbers for the PR body.
+- For a develop → main promotion, lower `tools/drops-budget.tsv` to the develop head's counts
+  (`tools/drops.py build/mac/hdtrans dicts --sets --budget tools/drops-budget.tsv --update` with the
+  four set variables); the budget only fails on more drops, so pull requests leave the rows alone.
 - For a develop → main promotion, run the cycle check (section 2) on the develop head and judge
   its new lines; the lines of earlier checks are already judged. Report the cycle totals since
   the last release (changed, improved, same, worse; docs/testing.md "주기 누적 확인").

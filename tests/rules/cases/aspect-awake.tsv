@@ -12,6 +12,6 @@ dict:result-awake:1	「……なんだ、起きてるじゃない」	「……�
 dict:result-awake:1	何が起きてる？！	무슨 일이 일어나고 있어?!	keep	local
 dict:result-awake:1	こんな事態は起きていないだろう。	이런 사태는 일어나지 않을 것이다.	keep	local
 dict:result-awake:1	きっと何か起きてる！	분명 뭔가 일어나고 있어!	keep	local
-dict:result-awake:1	そもそもタイムスリップ自体、どうして起きてるのかすら分からなかった。	원래 타임 슬립 자체, 왜 일어나고 있는지조차 몰랐다.	keep	local
+dict:result-awake:1	そもそもタイムスリップ自体、どうして起きてるのかすら分からなかった。	애초에 타임 슬립 자체, 왜 일어나고 있는지조차 몰랐다.	keep	local
 dict:result-awake:1	身近に起きているだけに、恐ろしい。	가까이에 일어나고 있는 만큼, 무섭다.	keep	local
 dict:result-awake:1	もっと早く起きていれば、間に合ったのに。	좀 더 일찍 일어났더라면, 늦지 않았는데.	keep	local

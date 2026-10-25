@@ -1,0 +1,28 @@
+# 규칙: GRM-33
+rule	input	expected	kind	layer
+cx:youni-simile:10	レナひとりじゃあ、とても発掘できるようには見えない。	has:있는 것처럼은	fix	rewrites
+cx:youni-simile:10	演技をしているようには見えないし、	has:있는 것처럼은	fix	rewrites
+cx:youni-simile:10	「含みがあるように聞こえるのですが」	has:있는 것처럼 들립니다	fix	rewrites
+cx:youni-simile:10	とてもそんなことが出来るようには思えない。	has:것처럼은	fix	rewrites
+cx:youni-simile:10	作戦に異議を唱えているようにしか見えない。	has:있는 것처럼밖에	fix	rewrites
+cx:youni-simile:10	むくれて、少し泣いているようにも見えた。	has:울고 있는 것처럼도 보였다.	fix	rewrites
+cx:youni-simile:10	たどたどしい字は、筆跡をごまかすようにも見える。	has:속이는 것처럼도 보인다.	fix	rewrites
+cx:youni-simile:10	私の為に怒っているようにみせてるけど、	has:화나 있는 것처럼	fix	rewrites
+cx:youni-simile:10	相手を心配しているように見せかけて、	has:걱정하고 있는 것처럼 가장해,	fix	rewrites
+cx:youni-simile:10	後ろからもよく見えるように話す。	has:잘 보이도록 이야기한다.	keep	rewrites
+cx:youni-simile:20	振動するたびに、まるで頭を殴られているように頭が痛み、	has:맞고 있는 것처럼 머리가	fix	rewrites
+cx:youni-simile:20	何かに耐えているように押し黙る。	has:참고 있는 것처럼 침묵을	fix	rewrites
+cx:youni-simile:20	なるべく冷静でいるように努めている。	has:있도록 노력하고	keep	rewrites
+cx:youni-simile:20	ここで待っているように言った。	has:기다리고 있도록 말했다.	keep	rewrites
+cx:youni-simile:20	少しでも役に立てるように、いろいろ教えて	has:도움이 될 수 있도록,	keep	rewrites
+cx:youni-simile:30	そう、まるで許しを求めて跪くように。	has:무릎 꿇듯이.	fix	rewrites
+cx:youni-simile:30	青年は厳かに頷いた。まるで誓いをたてるように。	has:듯이.	fix	rewrites
+cx:youni-simile:30	まるで、子犬がじゃれてボールを弄るように。	has:듯이.	fix	rewrites
+cx:youni-simile:30	まるで遊びに行くように楽しそうな雰囲気だ。	has:가듯이	fix	rewrites
+cx:youni-simile:30	まるで写真を裏からつまみ、ねじり込むように渦巻き状に歪んでいく。	has:듯이	fix	rewrites
+cx:youni-simile:30	忘れないように書く。	잊지 않도록 쓴다.	keep	rewrites
+cx:youni-simile:30	遅れないように急いだ。そしてまるで夢のようだった。	has:늦지 않도록	keep	rewrites
+cx:youni-simile:40	まるで子供かのように泣いた。	마치 아이인 것처럼 울었다.	fix	rewrites
+cx:youni-simile:40	まるで夢のように美しい。	마치 꿈처럼 아름답다.	keep	rewrites
+cx:youni-simile:45	夢かのような光景だった。	꿈인 것 같은 광경이었다.	fix	rewrites
+cx:youni-simile:45	夢のような光景だった。	꿈과 같은 광경이었다.	keep	rewrites

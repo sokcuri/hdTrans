@@ -859,11 +859,13 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 // An ending in です also gives its す to an adverb or interjection that starts with it
 // (寝込んだのですっかり: ので + すっかり, 遅れたのですみません: ので + すみません).
 // An ending in か before ら gives its か to the particle から (疲れただろうから: だろう + から,
-// いいでしょうから, 渡してるんですから).
+// いいでしょうから, 渡してるんですから), and one in もので before しょ its で to でしょう (可愛いものでしょ:
+// もの + でしょ, not もので + しょ).
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
     if (ending.ends_with("か") && after.starts_with("ら")) return true;
+    if (ending.ends_with("もので") && after.starts_with("しょ")) return true;
     if (ending.ends_with("です") && !after.empty()) {
         std::string query = "す";
         query += after.substr(0, std::min<std::size_t>(after.size(), 24));

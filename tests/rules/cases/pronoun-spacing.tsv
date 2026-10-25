@@ -1,7 +1,7 @@
 # 규칙: LAY-5
 rule	input	expected	kind	layer
 compose:pronoun-space	誰か僕を見つけて	누군가 나를 찾아내	fix	compose
-compose:pronoun-space	そもそも俺は女子と話すのが苦手だ。	원래 나는 여자와 이야기하는 것이 서투르다.	fix	compose
+compose:pronoun-space	そもそも俺は女子と話すのが苦手だ。	애초에 나는 여자와 이야기하는 것이 서투르다.	fix	compose
 compose:pronoun-space	今日僕は行く。	오늘 나는 간다.	fix	compose
 dict:jisjk:364685	君と僕と	너와 나와	fix	compose
 compose:pronoun-space	僕らの夢	우리의 꿈	keep	compose

@@ -67,7 +67,7 @@ voice:respectful	部長は東京へ行かれた。	부장은 도쿄에 가셨다
 voice:respectful	社長が戻られた。	사장이 돌아오셨다.	fix	voice
 voice:respectful	教授が手紙を書かれた。	교수가 편지를 쓰셨다.	fix	voice
 voice:respectful	陛下が幽閉された。	폐하가 유폐되었다.	keep	voice
-voice:agent	魔法に愛されなかった少女。	마법에 사랑받지 않았던 소녀.	keep	voice
+voice:agent	魔法に愛されなかった少女。	마법에 사랑받지 못했던 소녀.	keep	voice
 voice:listener	もう帰られますか？	이제 돌아가시겠습니까?	fix	voice
 voice:adverse	来られたら困る。	올 수 있으면 곤란하다.	keep	voice
 voice:adverse	寝られたら困る。	잘 수 있으면 곤란하다.	keep	voice

@@ -1,0 +1,12 @@
+# 규칙: GRM-38
+rule	input	expected	kind	layer
+cx:nado-quote:20	「嘘だ」などと叫んだ。	has:등이라고	keep	rewrites
+cx:nado-quote:20	「ファッションに興味がないなんて！」などと言われるので口にはしない。	has:등이라는	keep	rewrites
+cx:nado-quote:20	　などと考えながらジュースを飲む。	has:등이라고	keep	rewrites
+cx:nado-quote:20	　などと思っていたのだが。	has:등이라고	keep	rewrites
+cx:nado-quote:20	りんごやみかんなどと言った。	has:등	keep	rewrites
+cx:nado-quote:20	若ければーっ！　などと何度も言われた。	has:하고 몇 번이나	fix	rewrites
+cx:nado-quote:20	　などと戸惑っているうちに	lacks:등과	fix	rewrites
+cx:nado-quote:20	りんごやみかんなどと一緒に	has:등과 함께	keep	rewrites
+cx:nado-quote:25	緊張しているのは俺の方だっての！そもそも俺は女子と話すのが苦手なのだ。察しろっての！などと、内心でボヤく俺。	has:하고,	fix	rewrites
+cx:nado-quote:25	りんごなどと、みかん	lacks:하고,	keep	rewrites

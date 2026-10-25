@@ -104,7 +104,7 @@ sound:drawn-clip	見て見てぇぇ	봐 봐아아	fix	sound
 sound:drawn-clip	待ってぇぇ	기다려	keep	sound
 sound:drawn-clip	待って待ってぇ	기다려 기다려	keep	sound
 sound:drawn-clip	すごおおおい	대단해~	keep	sound
-dict:w:27518	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	「뭐 일단 응모해 둘까」라고, 밑져야 본전으로 예약해 보았다.	fix	lookup
+dict:w:27518	「まあ一応応募しておくか」と、ダメもとで予約してみたのだ。	「뭐 일단 응모해 둘까」라고, 밑져야 본전으로 예약해 보았던 것이다.	fix	lookup
 cx:copies:31	すごいすごーい	대단해 대단해~	fix	rewrites
 cx:copies:31	すごいすごーい！	대단해 대단해~!	fix	rewrites
 cx:copies:31	「すごいすごーい！」	「대단해 대단해~!」	fix	rewrites

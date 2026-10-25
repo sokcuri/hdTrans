@@ -78,6 +78,10 @@ struct Settings {
     std::string_view before;
     // Text path: the depth of 「」 and 『』 open at the start of the chunk.
     int quoteDepth = 0;
+    // Text path: the line uses the tic ぽい (PoiTicLine).
+    bool poiTic = false;
+    // Text path: the document writes its speech in 「」, so its text outside them is narration.
+    bool narrated = false;
     // Empty by default; the list and its names outlive the analysis.
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set
@@ -139,5 +143,9 @@ struct Analysis {
 // by the word stage's own filter). The items live in arena, which is reset first.
 void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, const dict::LookupContext& lookup,
              const Settings& settings, Arena& arena, Analysis& out, LookupObserver observer = {});
+
+// Whether line uses the tic ぽい: ぽい (ぽーい, ぽいぽい) stands alone between marks, or two
+// sentences end in っぽい or ぽい (提督さん、情報見るっぽい？了解っぽい。) (constructions.cpp).
+bool PoiTicLine(std::string_view line);
 
 }  // namespace hdTrans::word

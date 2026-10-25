@@ -312,7 +312,7 @@ TSV로 씁니다. 지역 규칙은 `L 번호`, 전역 규칙은 `G PRIO`와 품�
    build/mac/hdtrans -dicts dicts --dump-rules build/rules.txt -in tests/empty.in
    build/mac/hdrulec lint build/rules.txt -dicts dicts 2>&1 | tail -1
    build/mac/hdrulec dump build/rules.txt -hash > src/core/rules/program.hash
-   build/mac/hdrulec cpp build/rules.txt -local 0-499 -globals -o src/core/rules/compiled_gen.cpp
+   build/mac/hdrulec cpp build/rules.txt -globals -o src/core/rules/compiled_gen.cpp
    ```
 
 4. `HDTRANS_DICTS`를 주고 전체 `ctest`를 돌립니다. `rules.cases.themes`에서 내가 고친 규칙이 아닌 행이 깨지면
@@ -349,12 +349,13 @@ dict:jisjk:6506  店員さんを呼ぶ。             !rule:dict:jisjk:6506     
 코드는 `src/core/word/constructions.cpp`입니다.
 
 ```
-//= return-to	after LongVowelAfterKatakana	The に of a purpose read 하러 before 戻る is the place one goes back to.
+//= return-to	after LongVowelAfterKatakana 10	The に of a purpose read 하러 before 戻る is the place one goes back to.
 cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	select-lemma "(으)로"	仕事に戻った 일로 돌아왔다
 ```
 
-- `//= 가족<TAB>after 이름<TAB>설명`: 가족(family) 하나를 선언합니다. 가족은 `kTextPasses`의 패스나 다른 가족 `이름`
-  바로 뒤에 돕니다. 한 이름 뒤에는 가족 하나만 둘 수 있어서, 가족 사이의 순서는 `after`로만 정합니다.
+- `//= 가족<TAB>after 패스 단계<TAB>설명`: 가족(family) 하나를 선언합니다. 가족은 `kTextPasses`의 `패스` 뒤에 돌고,
+  같은 패스 뒤의 가족들은 `단계`(양의 정수) 오름차순으로 돕니다. 같은 패스 뒤에 같은 단계는 둘 수 없습니다. 단계는
+  10씩 띄어 새 가족이 사이에 들어갈 자리를 둡니다.
 - 행은 `id<TAB>spec<TAB>조건<TAB>동작<TAB>메모`입니다. `id`는 `cx:가족:PRIO`이고, 가족 안에서는 PRIO 오름차순으로
   봅니다. `spec`은 그 행이 따르는 spec/ 규칙 id(없으면 빈칸)입니다. 그 밖의 `//` 줄은 주석입니다.
 - 가족은 사슬의 단어를 왼쪽부터 하나씩 두고, 조건이 처음 참인 행의 동작을 하고 다음 단어로 갑니다.
@@ -409,7 +410,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   있음), `katakana`(표기가 가타카나 ァ..ヶ와 ー뿐임), `blank`(고른 후보의 번역이 비었거나 공백뿐임),
   `final-consonant`(고른 후보의 사전형 한국어가 받침으로 끝남), `copula-target`(고른 후보의 번역이 이다 활용 표지를 씀,
   `큰일$AH@`), `mitai-like`(절 뒤에 올 수 있는 みたい), `contrast`(어간 뒤가 い나 かった, 쉼표, 대조의 조사
-  `particle.contrast`: ではないが), `quote-end`(뒤가 글 끝, 닫는 부호 ！？。」』）나 구간 경계), `utterance-end`(뒤가 글 끝이거나
+  `particle.contrast`: ではないが), `quote-end`(뒤가 글 끝, 닫는 부호 ！？。」』）나 구간 경계), `narration`(대사를 「」로 쓰는 문서에서 따옴표 밖에 있음: 지문), `utterance-end`(뒤가 글 끝이거나
   말줄임, 닫는 따옴표, 쉼표, ー, っ 같은 것뿐임),
   `sentence-end`(`utterance-end`이거나 뒤에 ！？!?가 옴), `speech-goes-on`(말줄임과 공백을 건너 같은 문장에, 또는 대사 안의 ！？ 뒤 다음 문장에 닫는 부호가 아닌 글이 더 옴: ……そうだ、ほら, 「……そうだ！　ねえ」), `predicate-follows`(문장에서 뒤에 동사가 옴, て형의 보조 동사는 아님),
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),

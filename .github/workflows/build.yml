@@ -323,7 +323,7 @@ jobs:
             1) echo 'Translations changed; accept them in the test data once this is on main.' >> "$GITHUB_STEP_SUMMARY" ;;
           esac
           [ "$status" -le 1 ]
-      # The test-data documents drop text in as many inputs as their row of tools/drops-budget.tsv says
+      # The test-data documents drop text in no more inputs than their row of tools/drops-budget.tsv allows
       # (docs/testing.md, drops.py). ctest sets.drops skips above, before the data is checked out; the
       # web examples are not in the test data, so the documents are the only set here.
       - name: Drops budget of the test data
@@ -578,7 +578,7 @@ jobs:
         run: |
           unset HDTRANS_REQUIRE_ALL HDTRANS_GOLDEN HDTRANS_TEST_EXCLUDE
           export HDTRANS_DICTS="$RUNNER_TEMP/dicts.hdsnap"
-          ctest --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)" -R '^(unit|rules\.critical|rules\.cases.*|examples)$' \
+          ctest --preset linux-asan --parallel "$(getconf _NPROCESSORS_ONLN)" -R '^(unit(\..+)?|rules\.critical|rules\.cases.*|examples)$' \
             2>&1 | tee build/linux-asan/ctest.log
       - name: Report sanitizer compiler cache
         if: always()

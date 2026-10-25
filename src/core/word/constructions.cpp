@@ -365,6 +365,8 @@ constexpr NamedFeature kFeatures[] = {
          return !lemma.empty() && n != nullptr && ItemLemma(f, n, n->selected).starts_with(lemma + " ");
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
+    // The line uses the tic ぽい (PoiLine).
+    {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
@@ -404,6 +406,8 @@ constexpr NamedFeature kFeatures[] = {
     // The sentence of the word trails off in narration: outside quotes, it ends in an ellipsis
     // (a て form that ends a sentence with a period is a request: え、待って待って。).
     {"narrated", [](Flusher& f, const Item* it) { return Narrated(f, it); }},
+    // The word stands outside quotes in a document that writes its speech in 「」: narration.
+    {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
@@ -870,12 +874,15 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             std::string_view head = line.substr(3);
             while (head.starts_with(' ')) head.remove_prefix(1);
             const std::vector<std::string_view> f = SplitTabs(head);
-            if (f.size() != 3 || !FamilyName(f[0]) || !f[1].starts_with("after ") || f[1].size() == 6 || f[2].empty()) {
-                fail(number, "a family line is //= FAMILY <TAB> after NAME <TAB> what it is for");
+            const std::size_t space = f.size() == 3 ? f[1].rfind(' ') : std::string_view::npos;
+            int stage = 0;
+            if (f.size() != 3 || !FamilyName(f[0]) || !f[1].starts_with("after ") || space < 6 ||
+                !rules::ParseInt(f[1].substr(space + 1), 1, 1 << 20, stage) || f[2].empty()) {
+                fail(number, "a family line is //= FAMILY <TAB> after PASS STAGE <TAB> what it is for");
             } else if (!families.emplace(f[0], t.families.size()).second) {
                 fail(number, "a second line for the family " + std::string(f[0]));
             } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6)), {}, -1, number, {}, {}, false});
+                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6, space - 6)), stage, {}, number, {}, {}, false});
             }
             continue;
         }
@@ -974,8 +981,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
         t.families[family->second].rows.push_back(static_cast<int>(t.rows.size()));
         t.rows.push_back(std::move(row));
     }
-    t.afterPass.assign(passes.size(), -1);
-    std::vector<bool> placed(t.families.size());
+    t.afterPass.assign(passes.size(), {});
     for (std::size_t k = 0; k < t.families.size(); k++) {
         CxFamily& c = t.families[k];
         if (c.rows.empty()) fail(c.line, "no rows for the family " + c.name);
@@ -987,31 +993,22 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
         IndexFamily(t, c);
-        int* slot = nullptr;
-        if (const auto pass = std::ranges::find(passes, c.after); pass != passes.end()) {
-            slot = &t.afterPass[static_cast<std::size_t>(pass - passes.begin())];
-        } else if (const auto anchor = families.find(c.after); anchor != families.end()) {
-            slot = &t.families[anchor->second].next;
-        } else {
-            fail(c.line, "the family " + c.name + " runs after " + c.after + ", which is no pass or family");
+        const auto pass = std::ranges::find(passes, c.after);
+        if (pass == passes.end()) {
+            fail(c.line, "the family " + c.name + " runs after " + c.after + ", which is no pass");
             continue;
         }
-        if (*slot >= 0) {
-            fail(c.line, "two families run after " + c.after + "; order them with after");
-            continue;
-        }
-        *slot = static_cast<int>(k);
-        placed[k] = true;
+        t.afterPass[static_cast<std::size_t>(pass - passes.begin())].push_back(static_cast<int>(k));
     }
-    // Every placed family is reached from a pass, not from a cycle of families.
-    std::vector<bool> reached(t.families.size());
-    for (const int first : t.afterPass) {
-        for (int k = first; k >= 0 && !reached[static_cast<std::size_t>(k)]; k = t.families[static_cast<std::size_t>(k)].next) {
-            reached[static_cast<std::size_t>(k)] = true;
+    // The families after a pass run by stage, each stage once.
+    for (std::vector<int>& after : t.afterPass) {
+        std::ranges::stable_sort(after, {}, [&](int k) { return t.families[static_cast<std::size_t>(k)].stage; });
+        for (std::size_t i = 1; i < after.size(); i++) {
+            const CxFamily& c = t.families[static_cast<std::size_t>(after[i])];
+            if (c.stage == t.families[static_cast<std::size_t>(after[i - 1])].stage) {
+                fail(c.line, "two families run after " + c.after + " at stage " + std::to_string(c.stage) + "; give one another stage");
+            }
         }
-    }
-    for (std::size_t k = 0; k < t.families.size(); k++) {
-        if (placed[k] && !reached[k]) fail(t.families[k].line, "the family " + t.families[k].name + " is not reached from a pass");
     }
     return t;
 }
@@ -1375,7 +1372,7 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
         tally->constructionRuns.resize(t.rows.size());
         tally->constructionFires.resize(t.rows.size());
     }
-    for (int k = t.afterPass[pass]; k >= 0; k = t.families[static_cast<std::size_t>(k)].next) {
+    for (const int k : t.afterPass[pass]) {
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
         for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {

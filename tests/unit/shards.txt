@@ -1,0 +1,11 @@
+# Shards of the unit tests: ctest runs each line as the entry unit.<name>, in parallel. An entry is
+# a folder under tests/unit/ ending in '/', a source file, or file:test; a test belongs to the shard
+# of its longest matching entry. unit.shards fails when a test belongs to no shard.
+# Listed by sanitizer run time, longest first: ctest starts them in this order without cost data.
+engine.megabyte  engine/session_thread_test.cpp:engine_megabyte_line
+dict.suites      dict/snapshot_file_test.cpp:SnapshotSuiteDoesNotWriteDefaultCache dict/snapshot_file_test.cpp:SnapshotTestsRestoreInheritedCacheEnvironment
+word             word/
+engine.history   engine/session_thread_test.cpp:engine_session_history_rebuild
+dict             dict/
+engine           engine/
+stages           config/ filter/ gui/ names/ output/ pipeline/ rules/ text/ tokenizer/ userdict/

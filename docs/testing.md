@@ -6,7 +6,8 @@
 
 | 이름 | 내용 |
 |---|---|
-| `unit` | 단위 테스트 `hdtrans_tests` |
+| `unit.<묶음>` | 단위 테스트 `hdtrans_tests`를 `tests/unit/shards.txt`의 묶음별로 나눠 병렬 실행 ([아래](#단위-테스트)) |
+| `unit.shards` | 모든 단위 테스트가 한 묶음에 들고, 묶음의 항목마다 테스트가 있는지 확인 |
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
@@ -16,7 +17,7 @@
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
-| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`와 같은지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
+| `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`를 넘지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
 | `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
@@ -35,7 +36,14 @@ HDTRANS_DICTS=$PWD/dicts ctest --preset mac
 ```sh
 build/mac/hdtrans_tests            # 전체
 build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트만
+build/mac/hdtrans_tests --shard tests/unit/shards.txt word    # 묶음 word만
+build/mac/hdtrans_tests --check-shards tests/unit/shards.txt  # 묶음이 없는 테스트를 보고
 ```
+
+ctest는 단위 테스트를 `tests/unit/shards.txt`의 줄마다 `unit.<이름>`으로 따로 실행합니다. 한 줄은 묶음
+이름과 항목들이고, 항목은 `/`로 끝나는 폴더, 소스 파일, `파일:테스트` 중 하나입니다. 테스트는 가장 길게
+맞는 항목의 묶음에 듭니다. 새 폴더를 만들면 그 폴더를 한 줄에 넣어야 `unit.shards`가 통과합니다. 이름으로
+고를 때는 `ctest -R '^unit(\..+)?$'`로 묶음 전체를 고릅니다.
 
 러너는 `HOME`, `LOCALAPPDATA`, `XDG_CACHE_HOME`을 임시 폴더로 바꾸고, `HDTRANS_CACHE_DIR`가 없으면 임시
 캐시 폴더를 지정합니다. 실행 중 사용자 캐시 폴더가 바뀌면 실패합니다. `tests/runner.sh`는 이 러너
@@ -130,8 +138,8 @@ ctest는 돌리지 않고, 릴리스 검토에서 구조를 바꾼 뒤 수가 �
   한 글자씩 만들어 비운 가나 항목으로, 홀로 소리가 없는 가나(spec MNG-5)는 빼고, 뒤 단계가 들리는 대로 쓴 것도
   셉니다(`--trace`로 찾음).
   문서도 `measure.sh`와 달리 줄마다 따로(`-each`) 번역합니다.
-  ctest `sets.drops`는 두 수가 `tools/drops-budget.tsv`의 행(`drops`, `unplaced`)과 같아야 통과합니다. 수를 줄인
-  변경은 `--update`로 행을 낮추고, 늘린 변경은 고칩니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
+  ctest `sets.drops`는 두 수가 `tools/drops-budget.tsv`의 행(`drops`, `unplaced`)을 넘지 않으면 통과합니다. 수를
+  늘린 변경은 고칩니다. 줄인 변경은 통과하고 행을 낮출 수 있다는 경고를 남기며, 행은 릴리스 때 `--update`로 낮춥니다. 입력 수가 행과 다르거나 행이 없는 세트는 비교하지 않고
   경고만 남깁니다(GitHub Actions에서는 주석). 데이터가 바뀐 것이므로 그 데이터로 `--update`해 행을 다시 씁니다. CI의 `linux` 작업은 테스트 데이터를 받은 뒤 문서 세트만
   이 검사로 봅니다(웹 예제는 테스트 데이터에 없습니다).
 
@@ -259,7 +267,7 @@ Build(`.github/workflows/build.yml`)의 `linux` job이 방금 빌드한 CLI로 `
 matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이 비교도 없습니다([build.md](build.md#ci)). 테스트 데이터는 Actions 비밀 `HDTRANS_TESTDATA_KEY`(테스트 데이터 저장소의 읽기 전용 배포 키)로
 받습니다. 비밀을 쓸 수 없는 실행(포크의 풀 리퀘스트)은 알림만 남기고 건너뜁니다. 작업 요약에는 개수만,
 로그에는 보고의 처음 몇 줄만 남깁니다. 종료 코드 1(바뀜)은 실패가 아니고 2만 실패입니다. 이어서 같은 데이터의
-문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 빠지는 입력 수가 예산과 다르면 실패합니다. 문서가 늘거나 줄어 입력 수가
+문서 세트로 [낱말 빠짐](#낱말-빠짐-dropspy) 예산(`drops.py --sets --budget`)을 보고, 빠지는 입력 수가 예산보다 많으면 실패합니다. 문서가 늘거나 줄어 입력 수가
 행과 다르면 경고만 남깁니다. ctest
 `sets.drops`는 테스트 데이터를 받기 전에 돌아 CI에서는 건너뜁니다.
 

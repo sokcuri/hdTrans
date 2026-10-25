@@ -1,0 +1,23 @@
+# 규칙: GRM-32
+rule	input	expected	kind	layer
+cx:comma-terminal:30	何が起こるかわからない、それが人生というものだ。	무슨 일이 일어날지 모른다, 그것이 인생이라는 것이다.	fix	rewrites
+cx:comma-terminal:30	よくわからない、でも行く。	잘 모른다, 하지만 간다.	fix	rewrites
+cx:comma-terminal:30	帝国の姫に相応しくない、少し品のない悲鳴だった。	제국의 공주에게 걸맞지 않은, 조금 품위 없는 비명이었다.	keep	rewrites
+cx:comma-terminal:30	汚い、弱いからだと言われた。	has:더럽다,	fix	rewrites
+cx:comma-terminal:30	うう……やばい、私も痛みと焦りで意識が混乱しているようだ。	has:큰일이다, 나도	fix	rewrites
+cx:comma-terminal:30	嬉しい、です。	기쁜, 입니다.	keep	rewrites
+cx:comma-terminal:30	可愛い、みたいな？	귀엽다, 같은?	keep	rewrites
+cx:comma-terminal:10	後宮の弊害ともいえる、量は増えたが質が悪い。	has:할 수 있는, 양은	current	rewrites
+cx:comma-terminal:10	ベッドの上を転がる、転がる。	has:구른다, 구른다.	fix	rewrites
+cx:comma-terminal:10	仕方ないから働ける、今年もご主人様に	has:있는, 금년도	current	rewrites
+cx:comma-terminal:10	戦う方法がある、そう教えてくれた。	has:방법이 있다,	fix	rewrites
+cx:comma-terminal:10	時折過ぎる、揺らめく何かの影。	has:지나는, 흔들거리는	keep	rewrites
+cx:comma-terminal:10	陽が眩しく降り注ぐ、サンルームで。	has:쏟아지는, 썬룸	keep	rewrites
+cx:comma-terminal:20	塩と胡椒が入った、しかし辛すぎる。	has:들어갔다, 하지만	fix	rewrites
+cx:comma-terminal:20	うん、決めた、お昼はハンバーグにしよう。	has:결정한, 점심은	current	rewrites
+cx:comma-terminal:20	小さな器に盛られた、緑のものが目に入る。	lacks:담아졌다,	keep	rewrites
+cx:comma-terminal:20	ドアの内側に設置された、鈴の音が響く。	lacks:설치되었다,	keep	rewrites
+cx:comma-terminal:20	教室内にいた、総員二十六名の生徒。	lacks:있었다,	keep	rewrites
+cx:comma-terminal:20	映画館の中で食べた、ポップコーンはおいしかった	has:먹은, 팝콘은	keep	rewrites
+cx:comma-terminal:20	あなたのために作ってあげた、あれ、ちゃんと食べたの？	has:만들어 준, 저것,	keep	rewrites
+cx:comma-terminal:20	あらゆる種族に絶賛された、肉も魚も使わない料理。	has:절찬된, 고기도	keep	rewrites

@@ -1,0 +1,33 @@
+# 규칙: SPC-17
+rule	input	expected	kind	layer
+cx:wa-promise:10	『契約成立ね。では、早速前払分のサポートを始めるわ』	has:서포트를 시작할게』	fix	rewrites
+cx:wa-promise:10	『報酬として私がアキラをいろいろサポートしてあげるわ。』	has:서포트해 줄게	fix	rewrites
+cx:wa-promise:10	『更に成功報酬として、遺跡の攻略後に貴重な旧世界の遺物を進呈するわ』	has:유물을 증정할게』	fix	rewrites
+cx:wa-promise:10	「場所変えて飯でも食いながら話聞くわ。」	has:이야기 들을게.」	fix	rewrites
+cx:wa-promise:10	「すぐに出て行くわ」	has:나갈게」	fix	rewrites
+cx:wa-promise:10	「うん、待ってるわね」	has:기다려」	keep	rewrites
+cx:wa-promise:10	「私が行くわ」	has:내가 갈게」	fix	rewrites
+cx:wa-promise:10	「私、帰るわ」	has:돌아갈게」	fix	rewrites
+cx:wa-promise:10	「先に行くわね」	has:먼저 갈게」	fix	rewrites
+cx:wa-promise:10	「少し後方に下がるわね」	has:물러날게」	fix	rewrites
+cx:wa-promise:10	「花が咲いているわ」	has:피고 있어」	keep	rewrites
+cx:wa-promise:10	「そう思うわ」	has:생각해」	keep	rewrites
+cx:wa-promise:10	「よくわかるわ」	has:알아」	keep	rewrites
+cx:wa-promise:10	「雨が降るわ」	has:비가 와」	keep	rewrites
+cx:wa-promise:10	「そろそろ日が落ちるわね」	lacks:질게	keep	rewrites
+cx:wa-promise:10	「気になるわ」	lacks:쓰일게	keep	rewrites
+cx:wa-promise:10	「ドキッとするわ」	lacks:할게	keep	rewrites
+cx:wa-promise:10	「アキラって呼ぶわね？」	lacks:부를게	keep	rewrites
+cx:wa-promise:10	「すごいわ」	has:대단해」	keep	rewrites
+cx:wa-promise:10	「面白いように当たるわね」	lacks:맞을게	keep	rewrites
+cx:wa-promise:10	「マイン、市場に行きましょう。いいものがなくなってしまうわ」	lacks:버릴게	keep	rewrites
+cx:wa-promise:10	「ジャ、よろしく頼むわ！」	lacks:부탁할게	keep	rewrites
+cx:wa-promise:10	「お、おかしなことを言うわね。」	lacks:말할게	keep	rewrites
+cx:wa-promise:10	「本当、尊敬するわ」	lacks:존경할게	keep	rewrites
+cx:wa-promise:10	「そうね……木場さんは、きっと、戻ってくるわ」	lacks:돌아올게	keep	rewrites
+cx:wa-promise:10	任務もいい感じで進捗してるわね。	lacks:진척할게	keep	rewrites
+cx:wa-promise:10	「全員、それを付けられるわ……」	lacks:질게	keep	rewrites
+cx:wa-promise:10	「……ったく、何笑ってんだよ。調子狂うわ」	lacks:미칠게	keep	rewrites
+cx:wa-promise:10	「年季だけはこいつらに負けるわ」	lacks:질게	keep	rewrites
+cx:wa-promise:10	「急いでとってくるわ」	has:올게」	fix	rewrites
+cx:wa-promise:10	「何か微妙にテンション下がるわ」	lacks:내려갈게	keep	rewrites

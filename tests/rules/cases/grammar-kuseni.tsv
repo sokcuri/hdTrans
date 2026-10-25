@@ -1,7 +1,7 @@
 # 규칙: GRM-6
 rule	input	expected	kind	layer
 lookup:kuseni	知っているくせに教えてくれない。	알고 있으면서 가르쳐 주지 않는다.	fix	ending-defaults
-lookup:kuseni	カフェもタコライスも知らなかったくせに、そういうとこだけ大人の対応……	카페도 타코라이스도 몰랐으면서, 그런 곳만 어른스러운 대응……	fix	ending-defaults
+lookup:kuseni	カフェもタコライスも知らなかったくせに、そういうとこだけ大人の対応……	카페도 타코라이스도 몰랐으면서, 그런 점만 어른스러운 대응……	fix	ending-defaults
 lookup:kuseni	裏切ったくせに。拒絶したくせに。	배반했으면서. 거절했으면서.	fix	ending-defaults
 lookup:kuseni	何も知らないくせに！	아무것도 모르면서!	fix	ending-defaults
 lookup:kuseni	いつもは研究室に引きこもっているくせして	언제나 연구실에 틀어박혀 있으면서	fix	ending-defaults

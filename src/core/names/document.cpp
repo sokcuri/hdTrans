@@ -109,6 +109,7 @@ struct DocumentHistory {
         names::HistoricalLine historical;
         std::vector<std::string> persons;
         std::vector<std::string> cued;  // the keys of the line's strong name cues
+        std::vector<std::string> recurring;  // the keys of its cues that hold where two lines give them
         internal::SpeechCues speech;
         std::size_t uses = 0;
     };
@@ -130,6 +131,7 @@ struct DocumentHistory {
             it->second.speech = internal::ReadSpeechCues(line);
             for (const names::NameCue& c : names::NameCues(*snap, line)) {
                 if (c.strong) it->second.cued.push_back(c.key);
+                if (c.recurring) it->second.recurring.push_back(c.key);
             }
         }
         return it->second;
@@ -204,6 +206,7 @@ struct DocumentHistory {
         quoted += facts.speech.quoted;
         for (const auto& key : facts.persons) Count(persons, key, true);
         for (const auto& key : facts.cued) Count(cued, key, true);
+        for (const auto& key : facts.recurring) Count(recurring, key, true);
         Historical(facts, id, true);
         bytes += text.size();
         lines.push_back(std::move(line));
@@ -217,6 +220,7 @@ struct DocumentHistory {
             quoted -= oldFacts.speech.quoted;
             for (const auto& key : oldFacts.persons) Count(persons, key, false);
             for (const auto& key : oldFacts.cued) Count(cued, key, false);
+            for (const auto& key : oldFacts.recurring) Count(recurring, key, false);
             if (old.verse) Count(verses, VerseKey(old.text), false);
             Historical(oldFacts, ids.front(), false);
             if (--oldFacts.uses == 0) memo.erase(found);
@@ -231,7 +235,7 @@ struct DocumentHistory {
     std::deque<Line> lines;
     std::deque<uint64_t> ids;
     std::map<std::string, Memo, std::less<>> memo;
-    std::map<std::string, std::size_t> persons, verses, surnames, cued;
+    std::map<std::string, std::size_t> persons, verses, surnames, cued, recurring;
     std::map<std::string, Readings> historical;
     std::map<uint64_t, std::vector<std::vector<char32_t>>> listed;
     std::size_t bytes = 0, female = 0, maleKin = 0, quoted = 0;
@@ -312,14 +316,19 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     dict::KeySet persons;
     for (const auto& [key, count] : memory.persons) persons.insert(key);
     for (const auto& [key, count] : memory.cued) doc->cued.insert(key);
+    std::map<std::string, std::size_t> recurring = memory.recurring;
     for (const std::string& line : lines) {
         const DocumentHistory::Memo& facts = memory.Facts(line);
         doc->cued.insert(facts.cued.begin(), facts.cued.end());
+        for (const std::string& key : facts.recurring) recurring[key]++;
         female = female || facts.speech.female;
         maleKin = maleKin || facts.speech.maleKin;
         quoted = quoted || facts.speech.quoted;
         persons.insert(facts.persons.begin(), facts.persons.end());
         historical.push_back(&facts.historical);
+    }
+    for (const auto& [key, count] : recurring) {
+        if (count >= 2) doc->cued.insert(key);
     }
     doc->female = female && !maleKin;
     doc->key = doc->registryKey;

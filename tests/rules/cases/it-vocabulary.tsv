@@ -24,7 +24,7 @@ lexical:it-loanword	コピペした。	복붙했다.	fix	defaults
 lexical:it-loanword	この改造、仕様書はどこだ？	이 개조, 사양서는 어디야?	fix	defaults
 lexical:it-loanword	あとは本格的なバグの洗い出しだな	나머지는 본격적인 버그의 찾아내기네	fix	defaults
 lexical:it-loanword	後輩氏の炎上プロジェクトの後始末	후배 씨 불붙은 프로젝트의 뒤처리	fix	defaults
-lexical:it-loanword	資料もなく作業して炎上しない訳が無い。	자료도 없게 작업해 불타오르지 않을 리가 없다.	fix	defaults
+lexical:it-loanword	資料もなく作業して炎上しない訳が無い。	자료도 없이 작업해 불타오르지 않을 리가 없다.	fix	defaults
 lexical:it-loanword	ファイルをダウンロードした。	파일을 다운로드했다.	keep	defaults
 lexical:it-loanword	ソフトをインストールした。	소프트를 설치했다.	keep	defaults
 sense:保存	データベースに保存する。	데이터베이스에 저장한다.	fix	senses

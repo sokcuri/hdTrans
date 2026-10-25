@@ -1,0 +1,22 @@
+# 규칙: GRM-36
+rule	input	expected	kind	layer
+rewrite:not-yet	『ロシア語でデレてるけど全然気付かない隣の氷室君』を投稿しました。	has:깨닫지 못하는 옆의	fix	rewrites
+rewrite:not-yet	素知らぬ顔で気付かない振りをする俺。	has:깨닫지 않는 모습	keep	rewrites
+rewrite:not-yet	気付かないうちに眠っていた。	has:깨닫지 못하는 사이에	keep	rewrites
+rewrite:not-yet	本人は全く気付いてないけど。	has:깨닫지 못했는데.	fix	rewrites
+rewrite:not-yet	半開きにされたのには気付いてないようで、	has:깨닫지 못한 것 같아서,	fix	rewrites
+rewrite:not-yet	幸せはそこにある。気づいてない人たちもいるけど、	has:눈치채지 못한 사람들도	fix	rewrites
+rewrite:not-yet	「読まずに喋ってるだろ。気づいてないのか？」	has:눈치채지 못한 건가?	fix	rewrites
+rewrite:not-yet	彼は全然気付かない。	has:깨닫지 못한다.	keep	rewrites
+rewrite:not-yet	これに気付かないでいると危ない。	has:알아차리지 않고	keep	rewrites
+rewrite:not-yet	全然覚えない子	has:기억하지 않는	keep	rewrites
+rewrite:not-yet	〝誰よりも魔法を愛し、魔法に愛されなかった天才〟。	has:사랑받지 못했던 천재	fix	rewrites
+rewrite:not-yet	〝魔法に愛されなかった王女〟。	has:사랑받지 못했던 왕녀	fix	rewrites
+rewrite:not-yet	誰にも愛されなかった。	has:사랑받지 못했다.	fix	rewrites
+rewrite:not-yet	報われない努力	has:보답받지 못하는 노력	fix	rewrites
+rewrite:not-yet	愛されていない子供	has:사랑받지 못한 아이	fix	rewrites
+rewrite:not-yet	選ばれなかった者	has:선택되지 못했던	fix	rewrites
+rewrite:not-yet	無数の本に、誰にも邪魔されない一人の空間。	has:방해받지 않는	keep	rewrites
+rewrite:not-yet	それは許されないことだ。	has:허락되지 않는	keep	rewrites
+rewrite:not-yet	有名だから、紹介されなくても知っています。	has:않아도	keep	rewrites
+rewrite:not-yet	愛されなくても構わない。	lacks:못해도	keep	rewrites

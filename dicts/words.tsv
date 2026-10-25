@@ -11523,9 +11523,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二食	두 끼	N110			GN				xxx llm	1		w:11516
 互いに素	서로소	N110			GN						たがいにそ	w:11517
 五位鷺	해오라기	N110			GN						ごいさぎ	w:11518
-五分	절반	N110			GN				xxx llm		ごぶ	w:11519
-五分	오 퍼센트	N110			GN				llm		ごぶ	w:11520
-五分	대등	N110			GN				llm		ごぶ	w:11521
 五刑	오형	N110			GN						ごけい	w:11522
 五十肩	오십견	N110			GN				xxx	1	ごじゅうかた	w:11523
 五十路	오십 대	N110	UMe	Tm	GN				llm		いそじ	w:11524
@@ -12955,7 +12952,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 割り安	값이 쌈	N110			GN						わりやす	w:12915
 割り安	저렴%A1@	G8U0			GN				llm		わりやす	w:12916
 割れ	깨&AL@	M427			GN				xxx llm	1		w:12917
-割れ目	틈	I110			GN				xxx	1	われめ	w:12918
+割れ目	갈라진 틈	I110			GN				xxx	1	われめ	w:12918
 割下	스키야키 양념장	N110	VFd		GN				llm		わりした	w:12919
 割切	딱 잘라 생각&AV@	M428			GN				xxx llm		わりきる	w:12920
 割切	나누어떨어&AL@	M428			GN				llm		わりきる	w:12921
@@ -16506,7 +16503,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 恒真式	항진식	N110			GN						こうしんしき	w:16465
 恙虫	털진드기과	N110			GN						つつがむし	w:16466
 恥ずか死	부끄러워 &HT@	M42<			GN				llm			w:16467
-恥丘	씹두덩	N110	VBp		GN				xxx	1	ちきゅう	w:16468
+恥丘	불두덩	N110	VBp		GN				xxx	1	ちきゅう	w:16468
 恥晒し	망신	N110			GN						はじさらし	w:16469
 恥晒し	수치%A2@	G8U0			GN				llm		はじさらし	w:16470
 恨み辛み	원한	N110	UFl		GN				llm		うらみつらみ	w:16471
@@ -19212,7 +19209,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 淦	빨강	N110			GN				xxx	1	あか	w:19168
 淫夢	음몽	N110			GN						いんむ	w:19169
 淫猥	음란	N110			GN				xxx llm	1		w:19170
-淫靡	음미%A1@	G8U0			GN						いんび	w:19171
+淫靡	음탕%A1@	G8U0			GN						いんび	w:19171
 深々と	깊이	E300			GN				xxx llm	1		w:19172
 深め	깊게 &AV@	H427			GN				xxx llm	1		w:19173
 深セン	선전	I110			GN				xxx	1	しんせん	w:19174
@@ -25211,7 +25208,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 陰乾	그늘에 말&AA@	M429			GN				llm		かげぼし	w:25162
 陰乾し	그늘말림	N110		Hd	GN				llm		かげぼし	w:25163
 陰干	그늘에 말&AA@	M429			GN				llm		かげぼし	w:25164
-陰核	공알	N110	VBp		GN				xxx	1	いんかく	w:25165
+陰核	음핵	N110	VBp		GN				xxx	1	いんかく	w:25165
 陰線処理	은선 처리	I110			GN				xxx llm	1		w:25166
 陰茎亀頭	귀두	N110	VBp		GN						いんけいきとう	w:25167
 陰茎骨	음경골	N110	VBp		GN						いんけいこつ	w:25168
@@ -27096,3 +27093,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 担ぎ込まれ	실려 &A1@	M427			GN							w:28634
 脱がせ	벗&A2@	M427			GN							w:28635
 占い的	점술적%D4@	G8U0			GN							w:28702
+秘部	은밀한 곳	N110			GN							w:28703
+初体験	첫경험	N110			GN							w:28704
+秘裂	갈라진 틈	N110			GN							w:28705
+淫汁	음액	N110			GN							w:28706
+雌穴	암컷 구멍	N110			GN							w:28707
+ちんぽ	자지	N110			GN							w:28708
+ちんこ	자지	N110			GN							w:28709

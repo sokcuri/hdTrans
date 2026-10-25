@@ -6,7 +6,7 @@ names:nickname-prefix	エミリア様とエミリア様。結局エミちゃん�
 names:nickname-prefix	レオンハルト様とレオンハルト様。「私もレオ君って呼んでも良い？」	레온하르트님과 레온하르트님. 「나도 레오 군이라고 불러도 좋아?」	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。私はレオくんに疎まれてますから。	레온하르트님과 레온하르트님. 저는 레오 군에게 소외당하고 있으니까요.	fix	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。「どうしよう、レオくん。このままじゃ俺達」	레온하르트님과 레온하르트님. 「어떻게 하지, 레오 군. 이대로는 우리」	fix	lookup
-names:nickname-prefix	ベルンハルト様とベルンハルト様。「ちょっとベルくん、他の女性を侍らせてるの？」	베른할트님과 베른할트님. 「조금 베르 군, 다른 여성을 곁에 둬?」	fix	lookup
+names:nickname-prefix	ベルンハルト様とベルンハルト様。「ちょっとベルくん、他の女性を侍らせてるの？」	베른할트님과 베른할트님. 「잠깐 베르 군, 다른 여성을 곁에 둬?」	fix	lookup
 names:nickname-prefix	ベルンハルト様とベルンハルト様。ベル様は何だか不満げな表情のままだ。	베른할트님과 베른할트님. 베르님은 왠지 불만인 표정인 채다.	fix	lookup
 names:nickname-prefix	エルンスト様とエルンスト様。「エルくん、おはよう」	에른스트님과 에른스트님. 「에르 군, 좋은 아침」	fix	lookup
 names:nickname-prefix	エルンスト様とエルンスト様。エル君が手を振った。	에른스트님과 에른스트님. 에르 군이 손을 흔들었다.	fix	lookup
@@ -19,7 +19,7 @@ names:nickname-prefix	ベルンハルト様とベルンハルト様。「ベル�
 names:nickname-prefix	クリスティーナ様とクリスティーナ様。「クリスちゃん、おいで」	크리스티나님과 크리스티나님. 「크리스짱, 와」	keep	lookup
 names:nickname-prefix	レオンハルト様とレオンハルト様。「レオンくん、おいで」	레온하르트님과 레온하르트님. 「레온 군, 와」	keep	lookup
 names:nickname-prefix	「あれ、アルくん！　お邪魔しちゃった？」	「어라, 알 군! 실례해버렸어?」	keep	lookup
-names:nickname-prefix	「ちょっとベルくん、遅いよ」	「조금 벨 군, 늦어」	keep	lookup
+names:nickname-prefix	「ちょっとベルくん、遅いよ」	「잠깐 벨 군, 늦어」	keep	lookup
 names:nickname-prefix	「エルくん、おはよう」	「엘 군, 좋은 아침」	keep	lookup
 names:nickname-prefix	パンドラ様とパンドラ様。パンを食べた。	판도라님과 판도라님. 빵을 먹었다.	keep	lookup
 names:nickname-prefix	スキルヴィア様とスキルヴィア様。スキルを覚えた。	스키르비아님과 스키르비아님. 스킬을 배웠다.	keep	lookup
