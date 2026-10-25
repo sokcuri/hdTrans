@@ -105,6 +105,8 @@ private:
     static constexpr int kKeysPerStart = 8;
 
     // On success, advances i and sets more when another record of the key follows.
+    // Decode and ReadUvarint read [i, end) of blob_, which the caller has checked
+    // with guard_.
     bool Decode(std::size_t& i, std::size_t end, Record& r, bool& more) const;
     bool ReadUvarint(std::size_t& i, std::size_t end, uint64_t& value) const;
     bool ReadStart(std::size_t group, std::size_t& offset) const;
