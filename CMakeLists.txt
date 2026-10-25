@@ -36,6 +36,14 @@ if(MSVC)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/INCREMENTAL:NO /OPT:REF /OPT:ICF /DEBUG")
 else()
     add_compile_options(-Wall -Wextra -fno-exceptions -fno-rtti)
+    # A local that hides a local or a parameter (MSVC C4456, C4457). GCC's -Wshadow=local counts the
+    # enclosing function's locals inside a lambda too, which Clang reports with -Wshadow-uncaptured-local;
+    # Clang's -Wshadow also reports hidden members and globals (C4458, C4459).
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wshadow> $<$<COMPILE_LANGUAGE:CXX>:-Wshadow-uncaptured-local>)
+    else()
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wshadow=local>)
+    endif()
     if(HDTRANS_WERROR)
         add_compile_options(-Werror)
     endif()
@@ -244,8 +252,8 @@ if(NOT EMSCRIPTEN)
                 $<TARGET_FILE:hdtrans_cli> -d "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --check)
             set_tests_properties(rules.variants PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
-            # The inputs of the measured sets that drop text stay at tools/drops-budget.tsv; skipped
-            # when no set variable is set.
+            # The inputs of the measured sets that drop text or keep unplaced kana stay at
+            # tools/drops-budget.tsv; skipped when no set variable is set.
             add_test(NAME sets.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --sets
                 --budget "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops-budget.tsv")

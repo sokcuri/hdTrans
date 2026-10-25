@@ -60,6 +60,9 @@
 書いちゃった	써버렸습니다	end	register=formal prio=-1
 書いちゃった	써버렸소	end	register=archaic prio=-1
 書いちゃうの	써버리는 거야	end	prio=-1
+書いちゃおうか	써버릴까	end	prio=-1
+書いちゃおうかな	써버릴까	end	prio=-1
+書いちゃおうかなぁ	써버릴까	end	prio=-1
 書きます	쓴다	end	register=plain prio=-1
 書きます	써	end	register=casual prio=-1
 書きます	써요	end	register=polite prio=-1
@@ -141,6 +144,20 @@
 // もん
 書くもん	쓰는걸	end	prio=-1
 書いたもん	썼는걸	end	prio=-1
+// もんな: a reason the listener shares, 〜잖아
+書くもんな	쓰잖아	end	prio=-1
+書いたもんな	썼잖아	end	prio=-1
+書いてるもんな	쓰고 있잖아	end	prio=-1
+書いてたもんな	쓰고 있었잖아	end	prio=-1
+書かないもんな	쓰지 않잖아	end	prio=-1
+書かなかったもんな	쓰지 않았잖아	end	prio=-1
+高いもんな	높잖아	end	prio=-1
+高かったもんな	높았잖아	end	prio=-1
+静かだもんな	조용하잖아	end	prio=-1
+学生だもんな	학생이잖아	end	prio=-1
+書くんだもんな	쓰는 거잖아	end	prio=-1
+書いたんだもんな	쓴 거잖아	end	prio=-1
+高いんだもんな	높은 거잖아	end	prio=-1
 // わよ, わ. わよ after an action verb announces (갈 거야); after a state
 // or 頼む it asserts (달라, 있어, 부탁해).
 書くわよ	써	end	stative prio=-1
@@ -407,6 +424,21 @@
 学生じゃないですか	학생이잖아요	end	prio=-1
 静かじゃないですか	조용하잖아요	end	prio=-1
 書いてたじゃない	쓰고 있었잖아	end	prio=-1
+// ではないか and じゃないの after a predicate: 〜잖아 as well
+書くではないか	쓰잖아	end	prio=-1
+書いたではないか	썼잖아	end	prio=-1
+書いてるではないか	쓰고 있잖아	end	prio=-1
+書いているではないか	쓰고 있잖아	end	prio=-1
+書いてたではないか	쓰고 있었잖아	end	prio=-1
+書いていたではないか	쓰고 있었잖아	end	prio=-1
+高いではないか	높잖아	end	prio=-1
+高かったではないか	높았잖아	end	prio=-1
+書くじゃないの	쓰잖아	end	prio=-1
+書いたじゃないの	썼잖아	end	prio=-1
+書いてるじゃないの	쓰고 있잖아	end	prio=-1
+書いてたじゃないの	쓰고 있었잖아	end	prio=-1
+高いじゃないの	높잖아	end	prio=-1
+高かったじゃないの	높았잖아	end	prio=-1
 // んじゃない after the past or a negative: 〜ㄴ 거 아니야, not 〜지 않아
 書いたんじゃない	쓴 거 아니야	end	prio=-1
 書いたんじゃないか	쓴 거 아닌가	end	prio=-1
@@ -457,6 +489,17 @@
 学生ですのよ	학생이에요	end	prio=-1
 高いですのよ	높아요	end	prio=-1
 静かですのよ	조용해요	end	prio=-1
+静かですの	조용해요	end	prio=-1
+書くですわ	써요	end	prio=-1
+書くですの	써요	end	prio=-1
+書くですわよ	써요	end	prio=-1
+書くですのよ	써요	end	prio=-1
+書いたですわ	썼어요	end	prio=-1
+書いたですの	썼어요	end	prio=-1
+書いてるですわ	쓰고 있어요	end	prio=-1
+書いてるですの	쓰고 있어요	end	prio=-1
+書いてたですわ	쓰고 있었어요	end	prio=-1
+書かないですの	쓰지 않아요	end	prio=-1
 学生でしてよ	학생이에요	end	prio=-1
 静かでしてよ	조용해요	end	prio=-1
 高くってよ	높아요	end	prio=-1
@@ -472,6 +515,21 @@
 静かなんだな	조용하구나	end	prio=-1
 学生なんだな	학생이구나	end	prio=-1
 学生だったんだな	학생이었구나	end	prio=-1
+書くのだな	쓰는구나	end	prio=-1
+書いたのだな	썼구나	end	prio=-1
+書いてるのだな	쓰고 있구나	end	prio=-1
+書いているのだな	쓰고 있구나	end	prio=-1
+書いてたのだな	쓰고 있었구나	end	prio=-1
+書いていたのだな	쓰고 있었구나	end	prio=-1
+書かないのだな	쓰지 않는구나	end	prio=-1
+書かなかったのだな	쓰지 않았구나	end	prio=-1
+高いのだな	높구나	end	prio=-1
+高かったのだな	높았구나	end	prio=-1
+静かなのだな	조용하구나	end	prio=-1
+学生なのだな	학생이구나	end	prio=-1
+学生だったのだな	학생이었구나	end	prio=-1
+書いているんだな	쓰고 있구나	end	prio=-1
+書いていたんだな	쓰고 있었구나	end	prio=-1
 // のね ending a sentence: 구나
 書くのね	쓰는구나	end	prio=-1
 書いたのね	썼구나	end	prio=-1

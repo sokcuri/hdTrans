@@ -1,0 +1,25 @@
+# 규칙: GRM-21
+rule	input	expected	kind	layer
+rewrite:simple-aspect	「飯を作ってたとこなんだ。腹減ってるだろうと思ってな」	「밥을 만들고 있던 참이야. 배고플 것이라고 생각해서 말이야」	fix	rewrites
+rewrite:simple-aspect	「アラタもお腹が空いているのか？」	「아라타도 배가 고픈 건가?」	fix	rewrites
+rewrite:simple-aspect	腹が減ってたところだ。	배가 고팠던 참이다.	fix	rewrites
+rewrite:simple-aspect	ちょうど腹が減ってたところなんだ。	마침 배가 고팠던 참이다.	fix	rewrites
+rewrite:simple-aspect	腹が減っている。	배가 고프다.	fix	rewrites
+rewrite:simple-aspect	腹が減っている人	배가 고픈 사람	fix	rewrites
+rewrite:simple-aspect	危うく殺されそうになってたところを助けられた。	하마터면 아웃당할 뻔했던 곳을 도움을 받았다.	fix	rewrites
+rewrite:simple-aspect	殺されそうになっていた。	아웃당할 뻔했다.	fix	rewrites
+rewrite:simple-aspect	空気がこんなにも澄んでいたこと	공기가 이렇게도 맑은 것	keep	rewrites
+rewrite:result-state	父上は非常に疲れ切っていた。	아버님은 매우 녹초가 되어 있었다.	fix	rewrites
+rewrite:result-state	体が冷え切っている。	몸이 차가워져 있다.	fix	rewrites
+rewrite:result-state	部屋は静まり返っていた。	방은 아주 조용해져 있었다.	fix	rewrites
+rewrite:result-state	未だ蒼ざめているテレジアが首を振る。	아직도 창백해져 있는 테레시아가 고개를 젓는다.	fix	rewrites
+rewrite:result-state	年相応の少女のように弱り切っていた。	나이에 걸맞은 소녀처럼 완전히 약해져 있었다.	fix	rewrites
+dict:jisjk:144917	笑っているように見えた。	웃고 있는 것처럼 보였다.	fix	global-ending
+dict:jisjk:144917	寝ているように見えた。	자고 있는 것처럼 보였다.	fix	global-ending
+dict:jisjk:144917	座っているように見えた。	앉아 있는 것처럼 보였다.	fix	global-ending
+dict:jisjk:138851	知っているにすぎない。	has:알고 있는	fix	global-ending
+dict:jisjk:142154	待っていたようである。	has:기다리고 있던	fix	global-ending
+dict:jisjk:264549	寝ていたり起きていたりする。	자고 있거나 깨어 있거나 한다.	fix	rewrites
+dict:jisjk:264549	座っていたりする。	앉아 있거나 한다.	fix	rewrites
+rewrite:simple-aspect	…ふん。腹が減っておる。冗談は後にせよ！	…흥. 배가 고프다. 농담은 뒤로 해라!	fix	rewrites
+rewrite:simple-aspect	腹が減ってる人	배가 고픈 사람	fix	rewrites

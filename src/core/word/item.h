@@ -237,7 +237,7 @@ public:
     bool AfterPause(bool sentenceEnd) const;
     // Whether a question word (何, 誰, どこ, どう...) is the word or comes before it in its
     // sentence, so that a guess there asks (何をしてるんだろうな 하는 걸까).
-    bool AfterQuestionWord() const;
+    bool AfterQuestionWord(bool clause = false) const;
     // Whether the conjugation ending closes with the question particle か (行くか, どうなるか), not
     // with the kana of a verb form that ends in か (行かない).
     bool EndingAsks() const;

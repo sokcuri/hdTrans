@@ -110,7 +110,13 @@ const dict::Snapshot* Dictionary() {
          "した\t아래\tN110\t\t\tGN\t112\n"
          "くらい\t정도\tP200\t\t\tGN\t113\n"
          "たんと\t듬뿍\tE300\t\t\tGN\t114\n"
-         "た\t밭\tN110\t\t\tGN\t115\n"},
+         "た\t밭\tN110\t\t\tGN\t115\n"
+         "ち\t피\tN110\t\t\tGN\t121\n"
+         "ちゃう\t아니야\tN110\t\t\tGN\t116\n"
+         "ちゃうわ\t아니거든\tN110\t\t\tGN\t117\n"
+         "嘘\t거짓말\tN110\t\t\tGN\t118\n"
+         "見\t&AY@\tM417\t\t\tGN\t119\n"
+         "バレ\t들&AA@\tM417\t\t\tGN\t120\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -165,7 +171,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{43});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{47});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -242,6 +248,23 @@ HD_TEST(constraint_honorific_kanji) {
 }
 
 // 君 right after katakana is the suffix, not the pronoun; 君 elsewhere keeps both.
+// The Kansai ちゃう of a negative copula stays after a noun, a katakana word the dictionary
+// lacks and the nominalizer ん, and before a mark; after a verb stem, a て or っ, a word in
+// hiragana or before more hiragana it is the contracted てしまう and leaves the lookup.
+HD_TEST(constraint_chau_after_verb) {
+    CheckCases({
+        {"嘘ちゃうわ", "ちゃうわ", "ちゃうわ", "아니거든"},
+        {"マザコンちゃうわ", "ちゃうわ", "ちゃうわ", "아니거든"},
+        {"行くんちゃうわ", "ちゃうわ", "ちゃうわ", "아니거든"},
+        {"嘘ちゃう？", "ちゃう？", "ちゃう", "아니야"},
+        {"見ちゃうわ", "ちゃうわ", "ちゃうわ", ""},
+        {"バレちゃうわ", "ちゃうわ", "ちゃうわ", ""},
+        {"やっちゃうわ", "ちゃうわ", "ちゃうわ", ""},
+        {"荒れちゃうわ", "ちゃうわ", "ちゃうわ", ""},
+        {"嘘ちゃうね", "ちゃうね", "ちゃう", ""},
+    });
+}
+
 HD_TEST(constraint_kimi_after_katakana) {
     CheckCases({
         {"バカ君が", "君が", "君", "군"},

@@ -1,0 +1,58 @@
+# 규칙: GRM-23
+rule	input	expected	kind	layer
+dict:kara-cause:5	「疲れただろうから、今日はゆっくり寝ろよ」	「지쳤을 테니까, 오늘은 천천히 자라」	fix	lookup
+dict:kara-cause:7	これ以上はさすがにここの管理人にもお前らにも迷惑だろうから落ちる	더 이상은 아무래도 여기의 관리인에게도 너희들에게도 성가실 테니까 떨어진다	fix	lookup
+cx:kara-cause:5	「いやぁ、いくらみんなによかったって言われても、身びいき入ってるだろうから、額面通りにはなかなか……」	「이야, 아무리 모두에게 좋았다라고 말을 들어도, 치우침 들어가 있을 테니까, 액면대로는 꽤……」	fix	rewrites
+cx:kara-cause:5	絶対、自分のせいで、私が入院したと思ってるだろうから……	절대, 자신의 탓으로, 내가 입원했다고 생각할 테니까……	fix	rewrites
+dict:kara-cause:1	もっとも、みいちゃんは付き合ってるだけだろうから……	다만, 미이짱은 사귈 뿐일 테니까……	fix	lookup
+dict:kara-cause:1	でもあのいかがわしい知識は間違いなく下町経由だろうから、そっちは慎んだ方が良い	하지만 그 의심스러운 지식은 틀림없이 서민 동네 경유일 테니까, 그쪽은 조심하는 것이 좋다	fix	lookup
+dict:kara-cause:2	こんなＩＳＳなんか竹細工のオモチャみたいなもんでしょうから	이런 ISS는 죽세공의 장난감 같은 것일 테니까요	fix	lookup
+dict:jisjk:344602	「結構です。仕込みは早いほうがいいでしょうから、さっそく今夜にも始めます」	「좋습니다. 준비는 빠른 편이 좋을 테니까요, 바로 오늘 밤에도 시작합니다」	fix	lookup
+dict:kara-cause:3	近隣恒星系で俺の船が活動した痕跡すら無いだろうからな。	인근 항성계로 내 배가 활동한 흔적조차 없을 테니까.	fix	lookup
+dict:kara-cause:3	警察にある情報じゃ、事件かどうかすら分かんないだろうからな	경찰에 있는 정보는, 사건인가 어떤가조차 모를 테니까	fix	lookup
+dict:kara-cause:9	提督、元気ないからさ。これ食って、元気回復、ってさ！	제독, 기운이 없으니까. 이것 먹어, 건강 회복, 은!	fix	lookup
+cx:kara-cause:10	「しかも……ククッ……名刺まで相手に渡してるんですからね。すごいことですよ……」	「게다가……크큭……명함까지 상대에게 건네주고 있으니까요. 대단한 일이에요……」	fix	rewrites
+cx:kara-cause:10	提督、話しかけないで、私寝てるんですからぁ	제독, 말을 걸지 말고, 저 자고 있으니까요	fix	rewrites
+cx:kara-cause:20	（まだ競技は終わっていませんし、明日の競技に疲れを残すのはよくありませんからね……）	(아직 경기는 끝나 있지 않고, 내일 경기에 피로를 남기는 것은 좋지 않으니까요……)	fix	rewrites
+cx:kara-cause:10	ここのみんなが心配そうだったからねー	여기 모두가 걱정인 것 같았으니까―	fix	rewrites
+cx:kara-cause:10	しかもそのほとんどがバトリング開始から30秒以内にカタがついてるんすから。	게다가 그 대부분이 배틀링 개시부터 30초 이내에 어깨가 붙어 있으니까요.	fix	rewrites
+cx:kara-cause:20	「まあまあ、埋めるときはお手伝いしますから」	「자자, 묻을 때는 돕겠으니까요」	fix	rewrites
+cx:kara-cause:20	田舎ではみんな十五歳とかで結婚してるから、完全に行き遅れの部類なんだよね	시골에서는 모두 15살등으로 결혼 했으니까, 완전히 노처녀의 부류야	fix	rewrites
+cx:kara-cause:20	タクとサキで相性が良かったとしてもお互い他に恋人いたんだから	타크와 사키로 궁합이 좋았다고 해도 서로 그 밖에 애인 있었으니까	fix	rewrites
+cx:kara-cause:20	うぃっす！ほんのちょっちっすから。	안녕! 그저 조금이니까요.	fix	rewrites
+cx:kara-cause:10	また犠牲者を探して徘徊しているだけですから。	또 희생자를 찾아 배회하고 있을 뿐이니까요.	fix	rewrites
+cx:kara-cause:10	佐藤さん鈴木さんが手伝ってくださいましたから…。	사토 씨 스즈키 씨가 도와주셨으니까요….	fix	rewrites
+cx:kara-cause:20	学校から帰った。	!rule:cx:kara-cause:20	keep	rewrites
+cx:kara-cause:10	朝から晩まで働いた。	!rule:cx:kara-cause:10	keep	rewrites
+cx:kara-cause:10	クワトイネからの輸入が途絶えたら、	!rule:cx:kara-cause:10	keep	rewrites
+cx:kara-cause:10	衝突の瞬間、体の芯から嫌な音がする。	!rule:cx:kara-cause:10	keep	rewrites
+cx:kara-cause:10	亭主を軍隊に取られてからこっち	!rule:cx:kara-cause:10	keep	rewrites
+cx:kara-cause:10	「お前は頭がいいから要注意だぜ」	!rule:cx:kara-cause:20	keep	rewrites
+cx:kara-cause:10	「じゃあ仕事行ってくるから、遅刻しないように行きなさいよ」	!rule:cx:kara-cause:20	keep	rewrites
+cx:kara-cause:5	疲れただろう。	!rule:cx:kara-cause:5	keep	rewrites
+cx:shi-list:10	「念のためセキュリティを解除してみましたが、当然開きませんでしたし」	「만약을 위해 보안을 해제해 보았습니다만, 당연히 열지 않았고요」	fix	rewrites
+cx:shi-list:10	「では1番も棄権しますわ。私も慰謝料をいただく気はありませんでしたし」	「그럼 1번이나 기권해요. 나도 위자료를 받을 생각은 없었고요」	fix	rewrites
+cx:shi-list:10	「大丈夫です。店長も、わたしの事情はわかってくれてますし……」	「괜찮습니다. 점장도, 내 사정은 알아 주고 있고요……」	fix	rewrites
+cx:shi-list:10	まわりのブースにご迷惑かけちゃいましたし。	주위의 부스에 폐 끼쳐버렸고요.	fix	rewrites
+cx:shi-list:10	「はい。佐藤先輩もその様子を見て、ニコニコされてますし」	「네. 사토 선배도 그 상태를 보고, 싱글벙글되고 있고요」	fix	rewrites
+cx:shi-list:10	「ゆうちゃんも今言ってましたし……」	「유짱도 지금 말했고요……」	fix	rewrites
+cx:shi-list:10	「いいんですよ。俺は食事に来ただけですし」	「좋아요. 나는 식사하러 왔을 뿐이고요」	fix	rewrites
+cx:shi-list:20	元々僕の年齢も足りてないのですし、そもそも方法だってそれしかないと	원래 내 연령도 충분하지 않고, 원래 방법도 그것밖에 없으면	fix	rewrites
+cx:shi-list:20	倍率400倍を超えているのだし「まあ一応応募しておくか」と	배율 400배를 넘고 있고 「뭐 일단 응모해 둘까」라고	fix	rewrites
+cx:shi-list:20	それはあくまでも陰でこっそりと行うことであるし、もちろん	그것은 어디까지나 그늘에서 몰래 실시하는 것이고, 물론	fix	rewrites
+cx:shi-list:7	コロニーだから空気にもコストがかかっているのだろうし、水だって本来貴重なはずだ。	콜로니니까 공기에도 코스트가 걸려 있을 테고, 물도 본래 귀중할 것이다.	fix	rewrites
+cx:shi-list:40	「生徒主導なんですし、もう少しフランクで楽しいイメージにした方がいいです」	「학생 주도이고, 좀 더 프랭크로 즐거운 이미지로 하는 게 좋습니다」	fix	rewrites
+dict:shi-list:1	「そうね、水中での爆弾解除なんて初めてでしょうし、任せた方がよさそうね」	「그래, 수중에서의 폭탄 해제 같은 건 처음일 테고, 맡기는 게 좋은 것 같네」	fix	lookup
+dict:shi-list:2	「このハーモニカは、田中さんにとって大事なものだろうし……それはやめておきましょう」	「이 하모니카는, 타나카 씨에게 소중한 것일 테고……그건 그만둡시다」	fix	lookup
+lookup:deshou-after-de	初めてでしょう。	처음이죠.	fix	lookup
+lookup:deshou-after-de	「それもそれでしょうがないね」	「그것도 그래서 어쩔 수 없네」	keep	lookup
+lookup:deshou-after-de	屋上に嫌いなのでしょ☆	옥상에 싫은 것이지☆	keep	lookup
+cx:shi-list:20	料理もするし、掃除もする。	!rule:cx:shi-list:20	keep	rewrites
+cx:shi-list:10	良太彼女だって証明できないし	!rule:cx:shi-list:10	keep	rewrites
+cx:shi-list:20	雨ですし、帰ります。	!rule:cx:shi-list:20	keep	rewrites
+cx:shi-list:20	後頭部からいったしな、アホになったかもしれん。	!rule:cx:shi-list:20	keep	rewrites
+cx:shi-list:20	勉強もしたし、	!rule:cx:shi-list:20	keep	rewrites
+cx:shi-list:7	コストがかかっているのだろう。	!rule:cx:shi-list:7	keep	rewrites
+cx:shi-list:30	「生徒主導なんですし」	「학생 주도이고요」	fix	rewrites
+cx:shi-list:30	「生徒主導なんです」	!rule:cx:shi-list:30	keep	rewrites
+cx:shi-list:40	「生徒主導なんですが、もう少し」	!rule:cx:shi-list:40	keep	rewrites

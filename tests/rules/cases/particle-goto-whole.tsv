@@ -1,0 +1,16 @@
+# 규칙: LEX-46
+rule	input	expected	kind	layer
+cx:goto-whole:10	俺は抱えていた男ごと倒れる。	has:남자째 쓰러진다	fix	rewrites
+cx:goto-whole:10	固まった修正液は、その下の紙ごと破れている。	has:종이째 찢어져	fix	rewrites
+cx:goto-whole:10	だったら椅子ごと持っていくしかないよね	has:의자째 가져갈	fix	rewrites
+cx:goto-whole:10	アキラは反射的に自身の拳銃をその口に腕ごと肘まで突っ込んで引き金を引いた。	has:팔째 팔꿈치까지	fix	rewrites
+cx:goto-whole:10	あの後、僕さ、ラナンキュラスを花ごと食べてしまったんだよ。	has:꽃째 먹어버렸어	fix	rewrites
+cx:goto-whole:10	エルはもうアールの手を拳銃ごと握り、手首を捻り上げていた。	has:권총째 잡아	fix	rewrites
+cx:goto-whole:10	俺は刺さらないように気をつけながらガムテープごと引き剥がした。	has:테이프째 당겨	fix	rewrites
+cx:goto-whole:10	未散が小さく頷いたのを見て、俺は、下着ごとズボンをズリ下ろした。	has:속옷째 바지를	fix	rewrites
+cx:goto-whole:10	国ごとに違う。	has:나라마다	keep	rewrites
+cx:goto-whole:10	週ごとの予定	has:주마다	keep	rewrites
+cx:goto-whole:10	保守…数時間ごとでドキドキするが…	lacks:째	keep	rewrites
+cx:goto-whole:10	私はそんな彼らにたくさんのお願いごとをする。	lacks:째	keep	rewrites
+cx:goto-whole:10	確かに面倒ごとで、本来なら逃げ出したいところではあるが	lacks:째	keep	rewrites
+cx:goto-whole:10	オマエラゴトキニッ…	lacks:째	keep	rewrites

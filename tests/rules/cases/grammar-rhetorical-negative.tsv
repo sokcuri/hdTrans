@@ -1,0 +1,41 @@
+# 규칙: GRM-17
+rule	input	expected	kind	layer
+ending:rhetorical-ja-nai	可愛いじゃないの	귀엽잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	や、やるじゃないの…！	하, 하잖아…!	fix	builtin-ending
+ending:rhetorical-ja-nai	痛いじゃないの！	아프잖아!	fix	builtin-ending
+ending:rhetorical-ja-nai	ちっ…痛いじゃない！やめてよね！	쳇…아프잖아! 그만해!	keep	builtin-ending
+ending:rhetorical-ja-nai	し、仕方ないではないか！	어, 어쩔 수 없잖아!	fix	builtin-ending
+ending:rhetorical-ja-nai	「庭？　何も無いではないか！」	「뜰? 아무것도 없잖아!」	fix	builtin-ending
+ending:rhetorical-ja-nai	遅いではないか！	늦잖아!	fix	builtin-ending
+ending:rhetorical-ja-nai	わたしだって妹を気づかっていたではないか！	has:있었잖아!	fix	builtin-ending
+ending:rhetorical-ja-nai	敵を追い込むどころか遊ばれてるではないか！	has:당하고 있잖아!	fix	builtin-ending
+ending:rhetorical-ja-nai	貴様もやればできるではないか。	네놈도 하면 할 수 있잖아.	fix	builtin-ending
+ending:rhetorical-ja-nai	知らないじゃないの	모르잖아	fix	builtin-ending
+ending:rhetorical-ja-nai	嫌いじゃない	싫지 않다	keep	builtin-ending
+ending:rhetorical-ja-nai	嫌いじゃないの？	싫지 않아?	keep	builtin-ending
+ending:rhetorical-ja-nai	あれは彼ではないか？	저것은 그가 아닌가?	keep	builtin-ending
+ending:rhetorical-ja-nai	来るのではないか	lacks:잖아	keep	builtin-ending
+ending:rhetorical-ja-nai	いいじゃないか！	좋잖아!	keep	builtin-ending
+dict:gram:beki-rhetorical:1	謝るべきではないか	사과해야 하지 않나	fix	local
+dict:gram:beki-rhetorical:1	むしろもっと自分に好かれるように気を使うべきではないか、と増長したのだ。	has:신경을 써야 하지 않나, 라고	fix	local
+dict:gram:beki-rhetorical:2	行くべきではないのか	가야 하지 않나	fix	local
+dict:gram:beki-rhetorical:5	行くべきではありませんか	가야 하지 않습니까	fix	local
+dict:gram:beki-rhetorical:7	ここに住む者として祝福すべきではないでしょうか。	여기에 사는 사람으로서 축복해야 하지 않을까요.	fix	local
+dict:gram:beki-rhetorical:7	そうすべきではないかと思う	그렇게 해야 하지 않을까 생각한다	fix	local
+dict:gram:beki-rhetorical:7	すべきではない。	해서는 안된다.	keep	local
+dict:gram:beki-rhetorical:7	そんなことはすべきではないと思う	그런 일은 해서는 안된다고 생각한다	keep	local
+dict:gram:beki-rhetorical:8	「そう思うのであれば自重されるべきでは!?」	has:자중돼야 하지 않나!?	fix	local
+dict:gram:beki-rhetorical:8	田中や鈴木さんには謝るべきでは・・・	has:사과해야 하지 않나···	fix	local
+dict:gram:beki-rhetorical:8	謝るべきでは？	사과해야 하지 않나?	fix	local
+dict:gram:beki-rhetorical:8	学ぶべきことは山ほどあるのだ。	has:배워야 할 것은	keep	local
+dict:gram:beki-rhetorical:8	行くべきではない	가서는 안된다	keep	local
+dict:gram:beki-rhetorical:8	謝るべきでは、ある	lacks:하지 않나	keep	local
+ending:monna	妨害してなかったもんな	방해하고 있지 않았잖아	fix	builtin-ending
+ending:monna	あの子だって、恥ずかしがったりだってするもんな。	has:하잖아.	fix	builtin-ending
+ending:monna	「自分たちの土地がダム湖に沈むんだもんなぁ。」	「자신들의 토지가 댐 호수에 가라앉는 거잖아.」	fix	builtin-ending
+ending:monna	お前は強いもんな	너는 강하잖아	fix	builtin-ending
+ending:monna	そうだもんな	그렇잖아	fix	builtin-ending
+ending:monna	お前は強いもんな、だから	lacks:잖아	keep	builtin-ending
+ending:monna	知ってるもん	lacks:잖아	keep	builtin-ending
+dict:gram:beki-rhetorical:1	むしろもっと自分に好かれるように気を使うべきではないか、と増長したのだ。	오히려 좀 더 자신에게 사랑받도록 신경을 써야 하지 않나, 라고 증대했다.	current	local
+ending:monna	男の重婚はＯＫだけど女は駄目だもんな。	남자의 중혼은 OK이지만 여자는 안되잖아.	current	builtin-ending

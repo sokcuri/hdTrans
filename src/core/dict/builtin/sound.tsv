@@ -532,15 +532,16 @@
 やっほー	야호	intj
 やっほ	야호	intj
 いぇーい	예이	intj
+いぇい	예이	intj
 いえーい	예이	intj
 いやっほう	야호	intj
 いやっほー	야호	intj
 よっしゃ	앗싸	intj
 よっしゃあ	앗싸	intj
 よっしゃー	앗싸	intj
-やったぁ	해냈다	intj
-やったー	해냈다	intj
-やったあ	해냈다	intj
+やったぁ	앗싸	intj
+やったー	앗싸	intj
+やったあ	앗싸	intj
 ばんざーい	만세	intj
 ちっ	쳇	intj
 ちぇっ	쳇	intj
@@ -3021,6 +3022,7 @@
 ちっくしょお	젠장	intj
 ちっくしょう	젠장	intj
 いっけ	가라	intj
+かかれ	덤벼라	lead
 ねむ	졸려	intj
 おい	어이	lead
 おいこら	야 이놈아	lead
@@ -3062,7 +3064,7 @@
 う	으	lead
 む	음	lead
 ね	저기	lead
-ね？	그치?	lead
+ね？	그렇지?	lead
 さ	자	lead
 で	그래서	lead
 まぁ	뭐	lead
@@ -3125,7 +3127,8 @@
 はっくしゅん	에취	intj
 はっくしょん	에취	intj
 はっくしゅっ	에취	intj
-てか	그보다	lead
+てか	그보다	open
+てかさ	그보다	lead
 ってか	그보다	open
 っていうか	그보다	open
 ていうか	그보다	open

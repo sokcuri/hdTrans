@@ -58,4 +58,18 @@ std::string SoundKey(std::string_view s) {
 
 bool SameSound(std::string_view a, std::string_view b) { return SoundKey(a) == SoundKey(b); }
 
+bool JapaneseSpelling(std::string_view s) {
+    if (s.empty()) return false;
+    while (!s.empty()) {
+        const Rune r = DecodeRune(s);
+        const int f = Final(r.cp);
+        if (f != kFinalNone && f != kFinalNieun && f != kFinalSiot) return false;
+        // The vowels of Japanese kana: 아 야 에 오 와 요 우 유 으 이.
+        const int v = (static_cast<int>(r.cp - kBase) / kFinalsCount) % 21;
+        if (v != 0 && v != 2 && v != 5 && v != 8 && v != 9 && v != 12 && v != 13 && v != 17 && v != 18 && v != 20) return false;
+        s.remove_prefix(r.size == 0 ? 1 : r.size);
+    }
+    return true;
+}
+
 }  // namespace hdTrans::text

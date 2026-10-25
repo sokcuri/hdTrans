@@ -5,7 +5,7 @@ cx:yabai-exclaim:10	やばい、送らなきゃよかったかも……。	큰�
 cx:yabai-exclaim:10	やばい。少し手が震えた。	큰일이다. 조금 손이 떨렸다.	fix	rewrites
 cx:yabai-exclaim:10	「……やばい」	「……큰일이다」	fix	rewrites
 cx:yabai-exclaim:10	「やばい、遅刻するぞっ」	「큰일이다, 지각한다」	fix	rewrites
-cx:yabai-exclaim:10	やばい……。	큰일이다…….	fix	rewrites
+cx:yabai-exclaim:10	やばい……。	큰일이야…….	fix	rewrites
 cx:yabai-exclaim:10	（やばい、このままじゃ……！！）	(큰일이다, 이대로는……!!)	fix	rewrites
 cx:yabai-exclaim:10	ヤバい、死ぬ。これは死ぬ。	큰일이다, 죽는다. 이것은 죽는다.	fix	rewrites
 cx:yabai-exclaim:10	やばい	큰일이다	fix	rewrites
@@ -16,16 +16,16 @@ cx:yabai-exclaim:10	「そんなにやばいのか？」	「그렇게 위험한 
 cx:yabai-exclaim:10	これはやばい。	이것은 위험하다.	keep	rewrites
 cx:yabai-exclaim:10	もっとやばい場所へ足を踏み入れているかもしれない	좀 더 위험한 장소에 발을 디디고 있을지도 모른다	keep	rewrites
 cx:yabai-exclaim:10	「やばいよっ、またさっきのが来る！？」	「위험해, 또 조금 전의가 와!?」	keep	rewrites
-cx:yabai-exclaim:20	（ヤバイ、カツアゲされる！）	(큰일이다, 삥뜯기된다!)	fix	rewrites
+cx:yabai-exclaim:20	（ヤバイ、カツアゲされる！）	(큰일이다, 삥 뜯긴다!)	fix	rewrites
 cx:yabai-exclaim:20	「ヤバイ……ウチらの戦闘力の低さがばれてるっ」	「큰일이다……우리의 전투력의 낮음이 발각되고 있다」	fix	rewrites
 cx:yabai-exclaim:20	「あの刀持ったヤツ、マジでヤバイ」	「그 칼 든 녀석, 진짜로 위험하다」	keep	rewrites
-cx:yabai-exclaim:5	「やばいわ、めっちゃ嬉しい！」	「대박이야, 굉장히 기쁘다!」	fix	rewrites
+cx:yabai-exclaim:5	「やばいわ、めっちゃ嬉しい！」	「대박이야, 굉장히 기뻐!」	fix	rewrites
 cx:yabai-exclaim:7	格好良すぎてやばいですね	너무 근사해 대박이네요	fix	rewrites
 cx:yabai-exclaim:5	やばい、可愛い	대박이다, 귀엽다	fix	rewrites
 cx:yabai-exclaim:7	かわいすぎてやばい	너무 귀여워 대박이다	fix	rewrites
 cx:yabai-exclaim:7	強すぎてやばい奴	!rule:cx:yabai-exclaim:7	keep	rewrites
 cx:yabai-exclaim:7	やばい薬だろう	!rule:cx:yabai-exclaim:7	keep	rewrites
-dict:i:7790	「ここで会ったが百年目だ！」	「여기서 만난 이상 끝장이다!」	fix	lookup
+dict:i:7790	「ここで会ったが百年目だ！」	「여기서 만난 이상 끝장이야!」	fix	lookup
 cx:hyakunen-me:10	お前の悪運も今日で百年目だ	네 악운도 오늘로 끝장이다	fix	rewrites
 cx:hyakunen-me:10	貴様の命も百年目だ！	네놈의 생명도 끝장이다!	fix	rewrites
 cx:hyakunen-me:10	創業百年目の老舗	!rule:cx:hyakunen-me:10	keep	rewrites

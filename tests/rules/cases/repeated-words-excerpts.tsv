@@ -57,9 +57,9 @@ lookup:copies-conjunction	あ、でもでも、相乗効果で意外に楽	아, 
 lookup:copies-conjunction	ううん、でも、でも	아니, 하지만, 하지만	keep	lookup
 lookup:copies-conjunction	でもでも！	하지만 하지만!	fix	rewrites
 lookup:copies-conjunction	でもでも、目立つのはいいこと	하지만 하지만, 눈에 띄는 것은 좋은 일	fix	rewrites
-lookup:copies-conjunction	でも……でも……私……うれしい…	하지만……하지만……나……기쁘다…	keep	lookup
+lookup:copies-conjunction	でも……でも……私……うれしい…	하지만……하지만……나……기뻐…	keep	lookup
 lookup:copies-conjunction	でも、でもぉ……っ	하지만, 하지만……	keep	lookup
-lookup:copies-conjunction	でもでも、良かった	하지만 하지만, 좋았다	fix	rewrites
+lookup:copies-conjunction	でもでも、良かった	하지만 하지만, 다행이다	fix	rewrites
 lookup:copies-conjunction	でも……でも……うっ……お姉ちゃ	하지만……하지만……윽……언니	keep	lookup
 lookup:copies-conjunction	でもでも、格闘だと互角っぽい	하지만 하지만, 격투라면 호각 같다	fix	rewrites
 lookup:copies-conjunction	でも……でも……あたしだって……	하지만……하지만……나도……	keep	lookup
@@ -77,9 +77,9 @@ lookup:copies-predicate	でも、まだまだやれるよ！	하지만, 아직�
 lookup:copies-predicate	違う違う。	아니다 아니다.	keep	lookup
 lookup:copies-predicate	まだまだ！	아직도!	keep	lookup
 lookup:copies-predicate	えぇ、やだやだぁ！	네, 싫어 싫어!	keep	lookup
-lookup:copies-predicate	楽しい……楽しい！	즐겁다……즐겁다!	keep	lookup
+lookup:copies-predicate	楽しい……楽しい！	즐거워……즐거워!	keep	lookup
 lookup:copies-predicate	聞いてる聞いてる	듣고 있다 듣고 있다	fix	rewrites
-lookup:copies-predicate	すまない……すまない……	미안하다……미안하다……	keep	lookup
+lookup:copies-predicate	すまない……すまない……	미안해……미안해……	keep	lookup
 lookup:copies-predicate	違いない違いない！	틀림없어 틀림없어!	keep	lookup
 lookup:copies-predicate	ちっ…まだまだいける、嘗めるな。	쳇…아직도 갈 수 있다, 얕보지 마.	keep	lookup
 lookup:copies-predicate	そんなことない……そんなことないよ……	그렇지 않다……그렇지 않아……	keep	lookup

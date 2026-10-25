@@ -1,0 +1,32 @@
+# 규칙: LEX-38
+rule	input	expected	kind	layer
+normalize:old-form	なんで弟はあんな惡ガキなのかしら。	왜 남동생은 저런 개구쟁이인 걸까.	fix	normalize
+normalize:old-form	こんな粗惡なパーツ、使うかなあ！？	이런 투박한 파츠, 쓸까!?	fix	normalize
+normalize:old-form	惡く思わないでね。	나쁘다고 생각하지 마.	fix	normalize
+normalize:old-form	惡いな。俺も出口を探してる口なんだ。	미안하네. 나도 출구를 찾고 있는 입이야.	fix	normalize
+normalize:old-form	俺は惡くない。	나는 나쁘지 않다.	fix	normalize
+normalize:old-form	足の調子が惡そうだな。	다리의 상태가 안 좋은 것 같네.	fix	normalize
+normalize:old-form	さ、さっきはオ、オレが惡かった……、	has:내가 나빴다	fix	normalize
+normalize:old-form	格好惡いだろ！	추하지!	fix	normalize
+normalize:old-form	今より最惡だわ。	지금보다 최악이야.	fix	normalize
+normalize:old-form	惡いけど、西側のドアを利用してくれないかな。	미안하지만, 서쪽의 문을 이용해 주지 않을까.	fix	normalize
+normalize:old-form	母が隱したかったのなら、	어머니가 숨기고 싶었던 것이라면,	fix	normalize
+normalize:old-form	姿を隱した？	모습을 감췄어?	fix	normalize
+normalize:old-form	中心に隱された巨大な謎……	중심으로 숨겨진 거대한 수수께끼……	fix	normalize
+normalize:old-form	選擧ってなんなんだ？	선거는 뭐야?	fix	normalize
+normalize:old-form	地下水道の化け物は倒しちまうし擧句に、	has:끝에	fix	normalize
+normalize:old-form	裏の醫療流通ルートを確立して	뒤의 의료 유통 루트를 확립해	fix	normalize
+normalize:old-form	真岡鐵道 車両修理完了のお知らせ	has:철도 차량	fix	normalize
+normalize:old-form	他鄕暮し	타향 살림	fix	normalize
+normalize:old-form	夏の王樣	여름의 임금님	fix	normalize
+normalize:old-form	天氣になれ	날씨가 되어라	fix	normalize
+normalize:old-form	告白の噴水廣場	고백의 분수 광장	fix	normalize
+normalize:old-form	都會のメロディー	도시의 멜로디	fix	normalize
+normalize:old-form	中澤加繪	나카자와 카에	fix	normalize
+dict:jisjk:168905	髮の色こそ違うものの	머리카락의 색이야말로 다르지만	fix	lookup
+normalize:old-form	悪友である赤澤健に指摘され	has:아카자와 켄	keep	normalize
+normalize:old-form	神龍とか召喚出来たらカッコいいだろうな	has:신룡	keep	normalize
+normalize:old-form	曾孫の顔が見たいんだと	증손의 얼굴을 보고 싶다고	keep	normalize
+normalize:old-form	曾祖母のもとに帰ってきたのは	has:증조모	keep	normalize
+normalize:old-form	越前敦賀郡、氣比神宮の大宮司	has:기비신궁	keep	normalize
+normalize:old-form	澤ひろしとTOKYO 99	has:택히로시	current	normalize

@@ -1,0 +1,29 @@
+# 규칙: GRM-22
+rule	input	expected	kind	layer
+cx:pause-start:10	「そうか……って、ごまかされないぞっ」	「그런가……라니, 속여지지 않아」	fix	rewrites
+cx:pause-start:10	「拉致ですか……って、大変なのですよーっ！？」	「납치입니까……라니, 힘듭니다~!?」	fix	rewrites
+cx:pause-start:10	「徹夜……って、ずいぶん無茶するな」	「철야……라니, 꽤 터무니없음하지 마」	fix	rewrites
+cx:pause-start:10	「ロールケーキ……って、鈴木先輩が作られるんですか？」	「롤케이크……라니, 스즈키 선배가 만들어집니까?」	fix	rewrites
+cx:pause-start:10	おい、ちょっと……って！？	어이, 조금……이라니!?	fix	rewrites
+cx:pause-start:10	ハワイ……って、ごめんなさい！	하와이……라니, 미안해요!	fix	rewrites
+cx:pause-start:10	作戦完了…って、あの、報告が…	작전 완료…라니, 저, 보고가…	fix	rewrites
+cx:pause-start:10	クリスマスケーキ持ってきた…って、私そんなに甘いものは…。	크리스마스 케이크 가져왔다…라니, 나 그렇게 단 것은….	fix	rewrites
+cx:pause-start:10	「お、俺に聞かれても……って、ほら、あれじゃないか？」	「내, 내가 물어도……라니, 자, 저게 아니야?」	fix	rewrites
+cx:pause-start:10	「ユウぃーっ、調子はどう……って、あら？」	「유우-, 상태는 어떻게……라니, 어머나?」	fix	rewrites
+cx:pause-start:10	へっ？ああっ、あの会場内からの……って、兄貴、まさか！？	헷? 아앗, 그 회장내에서의……라니, 형, 설마!?	fix	rewrites
+cx:pause-start:10	ハーモニカ……って何?	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:10	「自分で乗り越える必要……って……なくないですか？」	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:10	特型駆逐艦曙、来たわよ！…って、何？	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:10	「…ってことはあとはリコか。」	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:10	……っていうか、そんな現実逃避に走る自分が	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:10	「ズンズンガンガン……って感じ？」	!rule:cx:pause-start:10	keep	rewrites
+cx:pause-start:20	「そ、そっか……じゃ、今から行くね」	「그, 그렇구나……그러면, 지금부터 갈게」	fix	rewrites
+cx:pause-start:20	あら、そう……じゃ、いいんだけどね	어머, 그렇게……그러면, 좋은데	fix	rewrites
+cx:pause-start:20	提督のそういうとこ、キライ…じゃ、ないです。	!rule:cx:pause-start:20	keep	rewrites
+cx:pause-start:20	「あ、……お、俺のは大した答えじゃ……。」	!rule:cx:pause-start:20	keep	rewrites
+dict:jisjk:365553	「ミサ……好きだよ」	「미사……좋아해」	fix	local
+dict:jisjk:365553	割と…好きかな、なんか楽しいし。	꽤…좋아하는가, 왠지 즐겁고.	fix	local
+dict:jisjk:365553	「そうよ……好きな人に、好きと言ってもらえたのですから……」	「그래……좋아하는 사람에게, 좋아라고 말해 줄 수 있었으니까요……」	fix	local
+dict:jisjk:365553	猫が好きだ。	고양이를 좋아한다.	keep	local
+dict:jisjk:365553	私は本が好きだ。	나는 책을 좋아한다.	keep	local
+cx:pause-start:10	節分ね。このお豆を、鬼役に…って、あら、おいし！	절분이네. 이 콩을, 오니역에…라니, 어머나, 맛있어!	fix	rewrites

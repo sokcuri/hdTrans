@@ -1,0 +1,41 @@
+# 규칙: LEX-50
+rule	input	expected	kind	layer
+dict:jisjk:362273	「では、いただきます」	「그럼, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「んじゃ、いただきます」	「그럼, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「じゃ、いただきます」	「그러면, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「わーい、いただきます」	「와아, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「やっほー、いただきますっ！」	「야호, 잘 먹겠습니다!」	fix	local
+dict:jisjk:362273	「ああ……いただきます」	「아……잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「あ、ありがとう……いただきます」	「고, 고마워……잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「じゃあ……いただきます」	「그럼……잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「みんな揃ったね。じゃあ、いただきます」	「모두 모였네. 그럼, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	「ええ。では、いただきます」	「네. 그럼, 잘 먹겠습니다」	fix	local
+dict:jisjk:362273	はい、いただきます。	네, 잘 먹겠습니다.	fix	local
+dict:jisjk:362273	「それじゃ一緒に、いただきます」	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	「いただきます」	「잘 먹겠습니다」	keep	local
+dict:jisjk:362273	「これをいただきます」	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	30Gいただきます。	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	こちら、いただきますね	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	ありがたく、いただきますね。	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	「では、改めて自己紹介させていただきますね」	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	「わかりました。ご説明させていただきます」	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:362273	大事にいただきます！	!rule:dict:jisjk:362273	keep	local
+dict:jisjk:266922	「美味しくいただきました」	「맛있게 먹었습니다」	fix	local
+dict:jisjk:266922	おいしくいただきました。	맛있게 먹었습니다.	keep	local
+phrase:ご馳走様	司令官、ご馳走様です！	사령관, 잘 먹었습니다!	fix	builtin-phrase
+phrase:ご馳走様	「ども、ご馳走様です！」	「안녕, 잘 먹었습니다!」	fix	builtin-phrase
+phrase:ご馳走様	「サンドイッチ、ご馳走様。どれも美味しかったわ」	「샌드위치, 잘 먹었어. 모두 맛있었어」	fix	builtin-phrase
+phrase:ご馳走様	「ご馳走様、美味しかったよ」	「잘 먹었어, 맛있었어」	fix	builtin-phrase
+phrase:ご馳走様	「ご……ご馳走様でした……」	「자……잘 먹었습니다……」	fix	builtin-phrase
+phrase:ご馳走様	「あのさ、俺だけご馳走になって気まずいんだけど」	「그런데 말이야, 나만 대접받아 거북한데」	keep	builtin-phrase
+phrase:ご馳走様	しばらくして、ご馳走を食べ終えた。	잠시 후, 맛있는 음식을 다 먹었다.	keep	builtin-phrase
+phrase:ごもっとも	「……ごもっとも」	「……지당하신 말씀」	fix	builtin-phrase
+phrase:ごもっとも	「まぁ確かにな。ごもっともで」	「뭐 확실히. 지당하신 말씀」	fix	builtin-phrase
+phrase:ごもっとも	「はい……ごもっともです……」	「네……지당하십니다……」	keep	builtin-phrase
+phrase:ごもっとも	今日ばっかりはごもっともな怒りだ。	오늘뿐은 지당한 분노다.	keep	builtin-phrase
+phrase:それはどうも	「あはは、それはどうも」	「아하하, 그거 고마워」	fix	builtin-phrase
+phrase:それはどうも	「それはどうも」	「그거 고마워」	fix	builtin-phrase
+phrase:それはどうも	「先生、それはどうも」	「선생님, 그거 고맙습니다」	fix	builtin-phrase
+phrase:それはどうも	それはどうもおかしい。	그것은 아무래도 이상하다.	keep	builtin-phrase
+phrase:それはどうも	「それはどうも、ご丁寧に」	「그건 아무래도, 정중하게」	keep	builtin-phrase
+dict:jisjk:362273	た、大切に…いただきます！	!rule:dict:jisjk:362273	keep	local

@@ -1,0 +1,24 @@
+# 규칙: SPC-15
+rule	input	expected	kind	layer
+cx:promise-go-out:30	支援任務、了解。田中、出る。	지원 임무, 알았어. 타나카, 나간다.	fix	rewrites
+cx:promise-go-out:30	一番艦、出る！	1번함, 나간다!	fix	rewrites
+cx:promise-go-out:30	駆逐艦、佐藤、出ます！	구축함, 사토, 나갑니다!	fix	rewrites
+cx:promise-go-out:30	艦隊旗艦マリア、出ます！いいですか？	함대 기함 마리아, 나갑니다! 좋습니까?	fix	rewrites
+cx:promise-go-out:30	出るぞ！各艦、遅れるな！	나가겠어! 각 함, 늦지 마!	fix	rewrites
+cx:promise-go-out:30	艦隊、出るぞ。集結だ！	함대, 나가겠어. 집결이야!	fix	rewrites
+cx:promise-go-out:30	出る。	나간다.	fix	rewrites
+cx:promise-go-out:30	「私が出る！」	「내가 나간다!」	fix	rewrites
+cx:promise-go-out:30	第五駆逐隊、山田、出る。君たちも付いておいで。	제5구축대, 야마다, 나간다. 자네들도 뒤따라 둬.	fix	rewrites
+cx:promise-go-out:30	戦艦部隊、出るぞ！皆、遅れを取るな。	전함 부대, 나가겠어! 모두, 뒤처지지 마.	fix	rewrites
+cx:promise-go-out:20	第九駆逐隊、出るわ。いい？	제9구축대, 나갈게. 좋아?	fix	rewrites
+cx:promise-go-out:20	出るわ！足手まといは置いてくわよ！	나갈게! 거치적거림은 두고 갈 거야!	fix	rewrites
+cx:promise-go-out:10	「それでは、私は一足先に出ますね」	「그러면, 저는 한발 앞서 나갈게요」	fix	rewrites
+cx:promise-go-out:30	お化けが出る。	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	結果が出ます。	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	出ます？	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	「もうすぐ、出るっ……」	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	涙が出る。	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:20	「汗が出るわ」	!rule:cx:promise-go-out:20	keep	rewrites
+cx:promise-go-out:30	明日から出る予定だ。	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	田中、出た。	!rule:cx:promise-go-out:30	keep	rewrites
+cx:promise-go-out:30	私が出なきゃ話にならないじゃない！	!rule:cx:promise-go-out:30	keep	rewrites

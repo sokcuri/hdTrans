@@ -1,9 +1,9 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-constraint:iru-form-after-te	うふふっ♪ 司令の寝顔、可愛い♪ ずっと見ていようかな…あ、そうだ。	우후훗♪ 사령의 잠자는 얼굴, 귀여운♪ 계속 보고 있을까…, 맞다.	fix	lookup
+constraint:iru-form-after-te	うふふっ♪ 司令の寝顔、可愛い♪ ずっと見ていようかな…あ、そうだ。	우후훗♪ 사령의 잠자는 얼굴, 귀여운♪ 계속 보고 있을까…아, 맞다.	fix	lookup
 constraint:iru-form-after-te	貴様は黙っていろ	네놈은 입을 다물고 있어라	fix	lookup
 constraint:iru-form-after-te	聞いていらっしゃいます？	듣고 계십니까?	fix	lookup
-constraint:iru-form-after-te	ミドリさんの服装や見た目を書き込むんだと思われていたみたいです	미도리 씨의 복장이나 외형을 기입한다고 생각되고 있던 것 같습니다	fix	lookup
+constraint:iru-form-after-te	ミドリさんの服装や見た目を書き込むんだと思われていたみたいです	미도리 씨의 복장이나 외형을 적는다고 생각되고 있던 것 같습니다	fix	lookup
 constraint:iru-form-after-te	……黙っていろ。	……입을 다물고 있어라.	fix	lookup
 constraint:iru-form-after-te	ということは、もともと修正液で直されていたってことにすれば……	그 말은, 원래 수정액으로 고쳐지고 있었다는 것으로 하면……	fix	lookup
 constraint:iru-form-after-te	どれだけ不実な行いをしてようが瑕疵があろうが、一切の責任を負わずに解消を認められるのだ。	얼마나 부실한 행동을 하고 있든 하자가 있든지, 일절의 책임지지 않고 해소를 인정받는다.	keep	lookup
@@ -12,7 +12,7 @@ constraint:iru-form-after-te	って続けてたら、無意識にその足をか
 constraint:iru-form-after-te	そしたらそのお礼が届いてたみたい	그랬더니 그 감사 인사가 닿고 있었던 것 같다	keep	lookup
 constraint:iru-form-after-te	そして、蒼真くんのお父さんとも、一緒に調べていたみたい。	그리고, 소마 군의 아버지와도, 함께 조사하고 있었던 것 같다.	keep	lookup
 constraint:iru-form-after-te	知ってます、クロード様は結婚相手に家柄の良さなど求めていらっしゃいません。	알고 있습니다, 클로드님은 결혼상대에 집안의 좋은 점 등 구하고 계시지 않습니다.	keep	lookup
-constraint:iru-form-after-te	3日くらい前にもうこっちの世界に戻って来てたってこと？	3일 정도 전에 이제 여기의 세계로 돌아오고 있었다는 것?	keep	lookup
+constraint:iru-form-after-te	3日くらい前にもうこっちの世界に戻って来てたってこと？	3일 정도 전에 이제 여기의 세계로 돌아와 있었다는 것?	keep	lookup
 constraint:iru-form-after-te	でも、一番大きいのは、作者が御園さんの歌をイメージしていたってことです	하지만, 제일 큰 것은, 작가가 미소노 씨의 노래를 이미지하고 있었다는 것입니다	keep	lookup
 constraint:iru-past-after-te	化け物が持っていたっていうあの鈴、なにか哀しい音色だった。	괴물이 가지고 있었다고 하는 그 방울, 뭔가 슬픈 음색이었다.	keep	local-ending
 constraint:iru-past-after-te	じゃあ、マキナはいつの間にか有名人になってたってこと？	그럼, 마키나는 어느새인가 유명인이 되어 있었다는 것?	keep	local-ending

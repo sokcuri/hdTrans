@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
-dict:jisjk:266571	無事でよかった	무사해서 잘되었다	fix	local
-dict:jisjk:266571	みんな無事でよかった！	모두 무사해서 잘되었다!	fix	local
-dict:jisjk:266571	元気そうでよかった。	건강해 보여서 잘되었다.	fix	local
+dict:jisjk:266571	無事でよかった	무사해서 다행이다	fix	local
+dict:jisjk:266571	みんな無事でよかった！	모두 무사해서 다행이야!	fix	local
+dict:jisjk:266571	元気そうでよかった。	건강해 보여서 다행이다.	fix	local
 dict:jisjk:266571	静かでよかったのに	!rule:dict:jisjk:266571	keep	local
-dict:jisjk:266571	本当によかった	정말 잘되었다	keep	local
+dict:jisjk:266571	本当によかった	정말 다행이다	keep	local

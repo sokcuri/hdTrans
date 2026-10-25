@@ -47,9 +47,26 @@ constexpr char32_t kDrawnMark = 0xE00B;
 // (아파아팟).
 constexpr char32_t kClipMark = 0xE00C;
 
+// The mark normalize writes before a word said with a run of っ inside (すっっっごい), an opening
+// span that the restore stage writes as the first syllable of the Korean after it drawn out by
+// two syllables of its vowel (대애애단해, WriteStress).
+constexpr char32_t kStressMark = 0xE00D;
+
+// The mark the sound stage writes after an adjective drawn out at the end of a phrase by one or
+// two vowel kana (痛いぃ, 熱いいいっ), whose drawl is not written: a closing span that the restore
+// stage drops. Like kDrawnMark, it makes the adjective a cry.
+constexpr char32_t kCryMark = 0xE00E;
+// The cry mark of such an adjective that took a shout's っ after it (熱いいいっ): dropped too, but
+// copies said again take the clip on their last syllable (熱いぃっ、熱いぃっ 뜨거웟, 뜨거웟).
+constexpr char32_t kClippedCryMark = 0xE00F;
+
+constexpr bool IsCryMark(char32_t c) { return c == kCryMark || c == kClippedCryMark; }
+
 // Whether c is a mark the sound stage writes at the drawn-out end of a word (kLengthenMark,
-// kDrawnMark, kClipMark).
-constexpr bool IsDrawnEndMark(char32_t c) { return c == kLengthenMark || c == kDrawnMark || c == kClipMark; }
+// kDrawnMark, kClipMark, kCryMark, kClippedCryMark).
+constexpr bool IsDrawnEndMark(char32_t c) {
+    return c == kLengthenMark || c == kDrawnMark || c == kClipMark || IsCryMark(c);
+}
 
 // Whether c is a closing mark of the sound stage: kEmphasisClose or a drawn end mark. A
 // sentence end after the marks is still the end of the word's sentence.

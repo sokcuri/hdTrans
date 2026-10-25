@@ -1,0 +1,53 @@
+# 규칙: SPC-7, SPC-1
+rule	input	expected	kind	layer
+dict:jisjk:342458	「な、なにするのよっ！」	「뭐, 뭐 하는 거야!」	fix	local
+dict:jisjk:342458	「あ、こらっ、私になにするのよっ」	has:뭐 하는 거야	fix	local
+dict:w:28450	「何するのよ」	「뭐하는 거야」	fix	local-ending
+dict:w:28450	「何するのよ！」	「뭐하는 거야!」	fix	local-ending
+dict:w:28450	「何すんのよ！」	「뭐하는 거야!」	fix	local-ending
+dict:w:28450	「何をするのよ！」	「뭘 하는 거야!」	fix	local-ending
+dict:jisjk:342458	「どうして今更そんなこと言い出すのよっ！」	has:하는 거야!	fix	local
+dict:jisjk:342458	「イラつくのよっ！」	!rule:dict:jisjk:342458	fix	local
+dict:jisjk:342458	「好きなのよっ！」	!rule:dict:jisjk:342458	keep	local
+dict:w:28450	「なんで駅前が出てくるのよ！」	「왜 역 앞이 나오는 거야!」	fix	local-ending
+dict:w:28450	「いつくるのよ！」	「언제 오는 거야!」	fix	local-ending
+dict:w:28450	「どうしてあの人が来るのよ」	「왜 그 사람이 오는 거야」	fix	local-ending
+dict:w:28450	「どうなってるのよっ！？」	!rule:dict:w:28450	current	local-ending
+dict:w:28450	「いつまで掴んでるのよ！」	!rule:dict:w:28450	current	local-ending
+dict:w:28450	「じゃあどんな人だっていうのよっ？」	「그럼, 어떤 사람이라고 말하는 거야?」	fix	local-ending
+dict:w:28450	「どうして私がこんな目に遭うのよ！」	「왜 내가 이런 변을 당하는 거야!」	fix	local-ending
+dict:jisjk:342458	「とにかく、今は一刻を争うのっ！！」	rule:dict:jisjk:342458=	current	local
+dict:jisjk:342458	「放してっ、クスリがいるのっ」	rule:dict:jisjk:342458=	current	local
+dict:jisjk:342458	「行くよっ！」	「간다!」	keep	local
+dict:jisjk:342458	「始めるよっ！」	「시작한다!」	keep	local
+dict:jisjk:342458	「よろしくねっ！」	「잘 부탁해!」	keep	local
+dict:jisjk:342458	「行くっ！」	「간다!」	keep	local
+dict:jisjk:342458	「違うっ！」	「아니야!」	keep	local
+dict:w:28450	「何するの？」	「뭐하는 거야?」	keep	local-ending
+dict:w:28450	「何する？」	「뭐해?」	keep	local-ending
+dict:w:28450	「なにするんだ」	「뭐 하는 거야」	keep	local-ending
+dict:w:28450	「何をするの」	「뭘 해」	keep	local-ending
+dict:w:28450	「早く行くのよ」	「빨리 가」	keep	local-ending
+dict:jisjk:342458	「行くのよっ！」	「가!」	fix	local
+dict:w:28450	「何もしないのよ」	「아무것도 하지 않아」	keep	local-ending
+dict:w:28450	「どうするのよ！？」	「어떻게 해!?」	keep	local-ending
+dict:w:28450	「どうすんのよこれ！」	「어떻게 해 이거!」	keep	local-ending
+dict:w:28450	「なんで一番肝心なとこ忘れるのよ」	「왜 제일 중요한 곳 잊는 거야」	fix	local-ending
+dict:w:28450	「たとえばどんなのがヤバイっていうのよ？」	「예를 들어 어떤 게 위험하다고 말하는 거야?」	fix	local-ending
+dict:jisjk:342458	「次は私が払うからねっ」	「다음은 내가 지불하니까」	fix	local
+dict:jisjk:342458	「みんな！　いーい、やるよっ！」	「모두! 좋아, 한다!」	keep	local
+dict:jisjk:342458	じゃあいくよっ！	그럼, 간다!	keep	local
+dict:jisjk:342458	あたしも行くよっ！	나도 간다!	keep	local
+dict:jisjk:342458	伸していくよっ！	때려눕혀 간다!	keep	local
+dict:jisjk:342458	シテアゲルヨッ！	해 줄게!	keep	local
+dict:jisjk:342458	「気をつけるよっ！」	rule:dict:jisjk:342458=	keep	local
+dict:jisjk:342458	「嫌われるよっ……！」	rule:dict:jisjk:342458=	keep	local
+dict:jisjk:342458	ココデッ…シズムノッ……！	rule:dict:jisjk:342458=	current	local
+dict:jisjk:342458	「行くねっ！」	「갈게!」	fix	local
+dict:w:28450	「何よ、早く行くのよ」	!rule:dict:w:28450	keep	local-ending
+dict:w:28450	「誰であれ、行くのよ」	!rule:dict:w:28450	keep	local-ending
+dict:w:28450	誰であれ消去せよと命令されているのよ。	!rule:dict:w:28450	keep	local-ending
+dict:w:28450	「誰が行くのよ」	「누가 가는 거야」	fix	local-ending
+dict:w:28450	「何してるのよ」	!rule:dict:w:28450	current	local-ending
+dict:w:28450	「なんで知ってるのよ」	!rule:dict:w:28450	current	local-ending
+dict:w:28450	「何がしたいのよ」	!rule:dict:w:28450	current	local-ending

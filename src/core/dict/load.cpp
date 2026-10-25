@@ -7,6 +7,7 @@
 #include <unordered_set>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/dict/builtin.h"
 #include "core/dict/integrity.h"
 #include "core/dict/layer.h"
@@ -302,6 +303,37 @@ struct RuleBodyTable {
     }
 };
 
+// Why an ending row whose target writes a negation with 지 않 (1지 않습니다, 1지는 않고) would be read
+// wrongly after a potential: its key must start with a member of ending.negative-start (not one of
+// ending.negative-start-not), then with 지, 지는 or 지도 and a space before 않, which the composer
+// turns into 수 없 (書けません 쓸 수 없습니다), or with a member of ending.other-negation, which
+// negates no verb before it (じゃないか, くありません). Empty for any other row and for a match.
+std::string NegationEndingError(std::string_view key, std::string_view target, PartCode part) {
+    if (part.ClassDigit() != '5' || (part.Tag() != 'S' && part.Tag() != 'T' && part.Tag() != 'U')) return {};
+    if (target.empty() || target[0] < '0' || target[0] > '9') return {};
+    const std::string_view ko = target.substr(1);
+    constexpr std::string_view kJi = "지", kNeg = "않";
+    if (!ko.starts_with(kJi)) return {};
+    std::string_view rest = ko.substr(kJi.size());
+    for (const std::string_view particle : {"는", "도"}) {
+        if (rest.starts_with(particle)) rest.remove_prefix(particle.size());
+    }
+    const bool spaced = rest.starts_with(" ");
+    if (spaced) rest.remove_prefix(1);
+    if (!rest.starts_with(kNeg)) return {};
+    if (key.empty() || static_cast<unsigned char>(key[0]) < 0x80) return {};  // a placeholder key (D, V)
+    const auto starts = [&](std::span<const std::string_view> members) {
+        return std::any_of(members.begin(), members.end(), [&](std::string_view m) { return key.starts_with(m); });
+    };
+    if (starts(ClassMembers("ending.negative-start")) && !starts(ClassMembers("ending.negative-start-not"))) {
+        if (spaced) return {};
+        return "the negation \"" + std::string(target) + "\" needs a space before 않";
+    }
+    if (starts(ClassMembers("ending.other-negation"))) return {};
+    return "the ending \"" + std::string(key) + "\" writes a negation (\"" + std::string(target) +
+           "\") but starts with no member of ending.negative-start or ending.other-negation";
+}
+
 // Parses the column file f into layer, interning its codes in codes; adds the indexes
 // of its rows with the flag replace to replacing. false on an error that FailsLoad: a
 // file with malformed lines fails the load, and its unknown pos and marker class lines
@@ -323,6 +355,14 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
         }
         if (std::string why = MarkerClassError(s.ko, codes.At(code)->part); !why.empty()) {
             notices.push_back({f.name, LoadErrorKind::MarkerClass, rows.Line(), TsvErrorKind::Read, std::move(why)});
+        }
+        if (std::string why = NegationEndingError(s.key, s.ko, codes.At(code)->part); !why.empty()) {
+            notices.push_back({f.name, LoadErrorKind::NegationEnding, rows.Line(), TsvErrorKind::Read, std::move(why)});
+        }
+        if (f.layer == FileLayer::Base || f.layer == FileLayer::Words) {
+            if (std::string why = VerbNounError(s.key, s.ko, codes.At(code)->part, s.sem); !why.empty()) {
+                notices.push_back({f.name, LoadErrorKind::VerbNoun, rows.Line(), TsvErrorKind::Read, std::move(why)});
+            }
         }
 
         if (s.rule > 0) bodies.named++;

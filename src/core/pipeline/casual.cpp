@@ -2,6 +2,7 @@
 #include <span>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/runes.h"
@@ -25,8 +26,15 @@ bool CharOrEnd(std::string_view s, size_t p, std::u32string_view set, Match& m, 
     return false;
 }
 
-// The character before byte pos of s; 0 at the start.
-char32_t Before(std::string_view s, size_t pos) { return pos == 0 ? 0 : LastRune(s.substr(0, pos)).cp; }
+// The character before byte pos of s, past a stress mark (CollapseTsuRuns); 0 at the start.
+char32_t Before(std::string_view s, size_t pos) {
+    while (pos > 0) {
+        const text::Rune r = LastRune(s.substr(0, pos));
+        if (r.cp != output::kStressMark) return r.cp;
+        pos -= r.size;
+    }
+    return 0;
+}
 
 // かも(しれ|知れ)(?:ん|ね[ぇえー]+)
 bool Shiren(std::string_view s, size_t pos, Match& m) {
@@ -291,11 +299,6 @@ constexpr char kSsuKatakana[] = "っス";
 constexpr char kNaiNsuKatakana[] = "ないんス";
 constexpr char kMokkai[] = "もっかい";
 constexpr char kSoyuKoto[] = "そゆこと";
-// Words said with an emphatic っ or ん inside: さっすが さすが, しっかた しかた (しっかたないなぁ),
-// すんご すご (すんごい, すんごく).
-constexpr char kSassuga[] = "さっすが";
-constexpr char kShikkata[] = "しっかた";
-constexpr char kSungo[] = "すんご";
 
 // ([いきぎしじちにひびみりえけげせぜねへべめれ])てぇか
 bool Teeka(std::string_view s, size_t pos, Match& m) {
@@ -303,6 +306,32 @@ bool Teeka(std::string_view s, size_t pos, Match& m) {
     if (!OneOf(s, p, U"いきぎしじちにひびみりえけげせぜねへべめれ")) return false;
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "てぇか")) return false;
+    m.end = p;
+    return true;
+}
+
+// すかい before [？?、。！!」』…‥ー～] or the end, and るかい before 、: a question in かい after
+// です, ます or a dictionary form, its い a softening particle (お仲間ですかい, 元気してるかい、).
+// Not after a noun (佐藤くんかい) nor のかい, which the end rows read.
+bool QuestionKai(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const bool su = Lit(s, p, "す");
+    if (!su && !Lit(s, p, "る")) return false;
+    if (!Lit(s, p, "か")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "い")) return false;
+    return CharOrEnd(s, p, su ? U"？?、。！!」』…‥ー～" : U"、", m, 2);
+}
+
+// ([こそあど]んな)ん(?=[でじだがはもをに]): the の after こんな, そんな, あんな, どんな said ん
+// (こんなんで 이런 것으로, そんなんじゃ).
+bool KonnaN(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"こそあど") || !Lit(s, p, "んな")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ん")) return false;
+    size_t q = p;
+    if (!OneOf(s, q, U"でじだがはもをに")) return false;
     m.end = p;
     return true;
 }
@@ -354,13 +383,34 @@ bool Teku(std::string_view s, size_t pos, Match& m) {
     return CharOrEnd(s, p, U"。！？…‥、!?よねぞわかの」", m, 2);
 }
 
-// ([ん一-龥々])じゃね[ぇえー]+
+// Whether s ends a sentence with the copula じゃ (どうじゃ？, 退屈じゃのぅ): the speaker's じゃねえ is
+// then the copula with ね, written だね.
+bool CopulaJa(std::string_view s) {
+    for (size_t at = s.find("じゃ"); at != std::string_view::npos; at = s.find("じゃ", at + 1)) {
+        const std::string_view rest = s.substr(at + std::string_view("じゃ").size());
+        if (rest.empty() || In(At(rest, 0).cp, U"！？!?。…‥」") || rest.starts_with("のう") || rest.starts_with("のぅ") ||
+            rest.starts_with("わい")) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// ([ん一-龥々ァ-ヶー])じゃね[ぇえー]+, or じゃね[ぇえー]+ before わ, よ, し, ぞ, ぜ or か where a
+// clause starts (じゃねーわ！, 」じゃねえよ; not the parting じゃねー！): じゃない, or だね where the line
+// ends a sentence with the copula じゃ (CopulaJa).
 bool Janee(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (!Take(s, p, [](char32_t c) { return c == U'ん' || IsKanjiClass(c); })) return false;
+    const char32_t before = Before(s, pos);
+    const bool start = before == 0 || In(before, U"「『（(」』）)、。，！？!?…‥　 \n");
+    if (!start || IsKanjiClass(At(s, p).cp) || IsKatakanaRune(At(s, p).cp) || At(s, p).cp == U'ん') {
+        if (!Take(s, p, [](char32_t c) { return c == U'ん' || IsKanjiClass(c) || IsKatakanaRune(c); })) return false;
+    }
     m.group[1] = Span(s, pos, p);
+    const bool bare = p == pos;
     if (!Lit(s, p, "じゃね")) return false;
     return Repeat(s, p, InSet(U"ぇえー"), 1, kUnbounded, [&](size_t q) {
+        if (bare && !(q < s.size() && In(At(s, q).cp, U"わよしぞぜか"))) return false;
         m.end = q;
         return true;
     });
@@ -388,18 +438,60 @@ bool JanKa(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// ([ぁ-ゖ一-龥々])([こごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
-// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな). Not そっか: after kana
-// (そっか, あそっか) it is そうか read as an answer, and after kanji the sound stage asks the
-// dictionary (RewriteVolitionalSo).
+// The casual negative ねえ, ねー after a word that takes ない: after わけ or 訳 (わけがない), しか or たくも
+// (わけねーだろ, しかねーし, したくもねーわ), and after a noun in kanji or katakana before よ, だろ, じゃ, し, けど or ぞ,
+// which follow no particle ね (需要ねーよ, 関係ねーじゃん, 魚雷ねえけど; not 綺麗ねー。, 長波ねぇ！).
+bool NounNee(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    bool noun = false;
+    bool word = false;
+    for (const std::string_view w : {"わけ", "訳", "しか", "たくも"}) {
+        if (s.substr(p).starts_with(w)) {
+            p += w.size();
+            word = true;
+            break;
+        }
+    }
+    if (!word) {
+        if (Before(s, pos) != 0 && (IsKanjiClass(Before(s, pos)) || IsKatakanaRune(Before(s, pos)))) return false;
+        const auto nounRune = [](char32_t c) { return IsKanjiClass(c) || IsKatakanaRune(c); };
+        if (!Take(s, p, nounRune)) return false;
+        while (Take(s, p, nounRune)) {
+        }
+        noun = true;
+    }
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ね")) return false;
+    const size_t run = p;
+    while (p < s.size() && In(At(s, p).cp, U"ぇえー")) p += At(s, p).size;
+    if (p == run) return false;
+    if (noun) {
+        bool tail = false;
+        for (const std::string_view t : {"よ", "だろ", "じゃ", "し", "けど", "ぞ"}) tail = tail || s.substr(p).starts_with(t);
+        if (!tail) return false;
+    }
+    m.end = p;
+    return true;
+}
+
+// ([ぁ-ゖ一-龥々])([おこごそとのぼもろよ])っか(?=[なねぁあー～？?！!。、…‥」』）)]|$): the
+// volitional with か cut short (行こっか, 帰ろっか, 食べよっか, しよっかな, しちゃおっかな). Not
+// そっか: after kana (そっか, あそっか) it is そうか read as an answer, and after kanji the sound
+// stage asks the dictionary (RewriteVolitionalSo). Not おっかない, おっかなびっくり, おっかねぇ (scary).
 bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!Take(s, p, [](char32_t c) { return IsHiraganaClass(c) || IsKanjiClass(c); })) return false;
     const size_t kana = p;
-    if (!OneOf(s, p, U"こごそとのぼもろよ")) return false;
+    if (!OneOf(s, p, U"おこごそとのぼもろよ")) return false;
     if (Span(s, kana, p) == "そ") return false;
+    const bool o = Span(s, kana, p) == "お";
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "っか")) return false;
+    if (o) {
+        for (const std::string_view w : {"ない", "なく", "なび", "ね"}) {
+            if (s.substr(p).starts_with(w)) return false;
+        }
+    }
     size_t q = p;
     if (q < s.size() && !OneOf(s, q, U"なねぁあー～？?！!。、…‥」』）)")) return false;
     m.end = p;
@@ -409,10 +501,8 @@ bool VolitionalKa(std::string_view s, size_t pos, Match& m) {
 // Whether pos starts a sentence or a clause: the start of s, or after 「『（。！？!?…‥、
 // or a space.
 bool ClauseStart(std::string_view s, size_t pos) {
-    if (pos == 0) return true;
-    size_t p = pos - 1;
-    while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) p--;
-    return In(At(s, p).cp, U"「『（。！？!?…‥、 　");
+    const char32_t c = Before(s, pos);
+    return c == 0 || In(c, U"「『（。！？!?…‥、 　");
 }
 
 // んで at the start of a clause before 、，？?！!…‥」: それで (んで、どうする).
@@ -453,6 +543,25 @@ bool SoCopulaStart(std::string_view s, size_t pos, Match& m) {
     }
     m.end = p;
     return true;
+}
+
+// そ alone where a clause starts, before 、。！？!?…‥」』） or the end: そう said short as an answer
+// (そ、あたしのことよ, そ。). Not a stutter before a word that starts with そ or ソ, or before a kanji,
+// which the sound stage reads (そ、それは, そ、空), nor a word spelled out kana by kana (そ、れ、よ、り).
+bool LoneSo(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!ClauseStart(s, pos) || !Lit(s, p, "そ")) return false;
+    m.end = p;
+    if (p == s.size()) return true;
+    if (!In(At(s, p).cp, U"、。！？!?…‥」』）")) return false;
+    size_t q = p;
+    while (q < s.size() && In(At(s, q).cp, U"、…‥ 　")) q += At(s, q).size;
+    if (q == s.size()) return true;
+    const char32_t next = At(s, q).cp;
+    if (next == U'そ' || next == U'ソ' || IsKanjiClass(next)) return false;
+    // A word spelled out kana by kana (そ、れ、よ、り).
+    const size_t after = q + At(s, q).size;
+    return !(after < s.size() && At(s, after).cp == U'、');
 }
 
 // でなければ, でないと, でなきゃ at the start of a sentence: the conditional of the copula
@@ -690,12 +799,49 @@ bool EndsWithStemKanji(std::string_view s) {
     return last.size == 3 && IsKanji(last.cp) && !In(last.cp, U"見来寝着出居");
 }
 
+bool AdjectiveEnd(char32_t c) { return In(c, U"いくかけそ"); }
+bool NoKana(char32_t c) { return !IsHiraganaRune(c) && !IsKatakanaRune(c); }
+bool NoKatakana(char32_t c) { return !IsKatakanaRune(c); }
+
+// A word said with an emphatic っ or ん inside and its plain spelling, where next holds for
+// the rune after it (0 at the end) and, with clause, where a clause starts before it.
+struct EmphaticSpelling {
+    std::string_view written, plain;
+    bool (*next)(char32_t) = nullptr;
+    bool clause = false;
+};
+constexpr EmphaticSpelling kEmphaticSpellings[] = {
+    {"さっすが", "さすが"},
+    {"しっかた", "しかた"},  // しっかたないなぁ
+    {"すんご", "すご"},      // すんごい, すんごく
+    {"あったりまえ", "あたりまえ"},
+    {"あったり前", "あたり前"},
+    {"くっさ", "くさ", AdjectiveEnd},  // くっさい
+    {"くっさ", "臭っ", NoKana},        // うわ、くっさ。
+    {"あっつ", "暑", AdjectiveEnd},  // あっついねー
+    {"きっつ", "きつ", AdjectiveEnd},
+    {"うっせ", "うるせえ", NoKana},
+    {"バッカ", "バカ", NoKatakana},          // not バッカス
+    {"ばっかじゃ", "バカじゃ", nullptr, true},  // not the ばかり of 学食ばっかじゃ
+    {"ばっかみたい", "バカみたい", nullptr, true},
+};
+
+bool EmphaticAt(std::string_view s, size_t pos, Match& m) {
+    for (const EmphaticSpelling& e : kEmphaticSpellings) {
+        size_t p = pos;
+        if (!Lit(s, p, e.written) || (e.clause && !ClauseStart(s, pos))) continue;
+        if (e.next != nullptr && !e.next(p < s.size() ? At(s, p).cp : 0)) continue;
+        m.group[1] = e.plain;
+        m.end = p;
+        return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string RewriteEmphaticSpellings(std::string_view in) {
-    std::string text = ReplaceAll(in, Literal<kSassuga>, [](const Match&) { return std::string("さすが"); });
-    text = ReplaceAll(text, Literal<kShikkata>, [](const Match&) { return std::string("しかた"); });
-    return ReplaceAll(text, Literal<kSungo>, [](const Match&) { return std::string("すご"); });
+    return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
 std::string RewriteCasual(std::string_view in) {
@@ -711,6 +857,10 @@ std::string RewriteCasual(std::string_view in) {
             stem += "ら";
         }
         return Cat({stem, "ない", g.group[2]});
+    });
+    text = ReplaceAll(text, NounNee, [](const Match& m) {
+        const bool wake = m.group[1] == "わけ" || m.group[1] == "訳";  // わけがない, not 訳ない (easy)
+        return Cat({m.group[1], wake ? "がない" : "ない"});
     });
     text = ReplaceAll(text, Chimau, [](const Match& m) {
         const Match g = Rematch(m, Chimau);
@@ -736,17 +886,21 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
     text = ReplaceAll(text, Nsu, [](const Match& m) { return Cat({m.group[1], "んです", m.group[2]}); });
+    text = ReplaceAll(text, KonnaN, [](const Match& m) { return Cat({m.group[1], "の"}); });
+    text = ReplaceAll(text, QuestionKai, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     text = ReplaceAll(text, Ikka, [](const Match& m) { return Cat({"いいか", m.group[1]}); });
     text = ReplaceAll(text, Tondemo, [](const Match&) { return std::string("とんでもない"); });
     text = ReplaceAll(text, Mashou, [](const Match& m) { return Cat({m.group[1], "しょう"}); });
     text = ReplaceAll(text, UtoShite, [](const Match& m) { return Cat({"うとしてい", m.group[1]}); });
     text = ReplaceAll(text, Teku, [](const Match& m) { return Cat({m.group[1], "いく", m.group[2]}); });
-    text = ReplaceAll(text, Janee, [](const Match& m) { return Cat({m.group[1], "じゃない"}); });
+    const bool copulaJa = CopulaJa(text);
+    text = ReplaceAll(text, Janee, [&](const Match& m) { return Cat({m.group[1], copulaJa ? "だね" : "じゃない"}); });
     text = ReplaceAll(text, VolitionalKa, [](const Match& m) { return Cat({m.group[1], "うか"}); });
     text = ReplaceAll(text, NdeStart, [](const Match&) { return std::string("それで"); });
     text = ReplaceAll(text, Rya, [](const Match& m) { return std::string(m.group[1]); });
     text = ReplaceAll(text, DenakerebaStart, [](const Match&) { return std::string("そうで"); });
     text = ReplaceAll(text, SoCopulaStart, [](const Match&) { return std::string("そう"); });
+    text = ReplaceAll(text, LoneSo, [](const Match&) { return std::string("そう"); });
     text = ReplaceAll(text, Shaanai, [](const Match&) { return std::string("しょうがない"); });
     text = ReplaceAll(text, Saate, [](const Match&) { return std::string("さて"); });
     text = ReplaceAll(text, Hidee, [](const Match&) { return std::string("ひどい"); });

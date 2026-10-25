@@ -1,0 +1,17 @@
+# 규칙: LEX-57
+rule	input	expected	kind	layer
+cx:take-out:10	俺は言われた通りに【万能農具】を自分の身体に収納し、出してみる。	나는 들은 대로 【만능 농기구】를 자신의 몸에 수납했다가 꺼내 본다.	fix	rewrites
+cx:take-out:30	男は胸ポケットから警察バッジを出すと、	남자는 가슴 포켓으로부터 경찰 배지를 꺼내면,	fix	rewrites
+cx:take-out:30	イキナリカバンから包丁出して叫びながらトラックに突っ込んでった	이키나리카반으로부터 부엌칼 꺼내 외치면서 트럭에 돌진해 갔다	fix	rewrites
+cx:take-out:30	「リュックから勉強道具を出して、考え事をしながら」	「배낭으로부터 공부 도구를 꺼내고, 생각을 하면서」	fix	rewrites
+cx:take-out:10	剣を隠して、出した。	검을 숨겼다가 꺼냈다.	fix	rewrites
+cx:take-out:20	剣を収納して、また出した	검을 수납하고, 또 꺼냈다	fix	rewrites
+cx:take-out:30	箱から人形を出した。	상자에서 인형을 꺼냈다.	keep	rewrites
+cx:take-out:30	袋から飴を出す。	봉투에서 엿을 꺼낸다.	keep	rewrites
+cx:take-out:30	声を出す	소리를 낸다	keep	rewrites
+cx:take-out:10	大きな声を出して笑った	큰 소리를 내 웃었다	keep	rewrites
+cx:take-out:30	手を出すな	손을 대지 마	keep	rewrites
+cx:take-out:10	元気を出して	힘내	keep	rewrites
+cx:take-out:10	勇気を出して告白した	용기를 내 고백했다	keep	rewrites
+cx:take-out:20	本をしまって、手紙を出した	책을 치우고, 편지를 보냈다	keep	rewrites
+cx:take-out:30	答えを出した。	답을 냈다.	keep	rewrites

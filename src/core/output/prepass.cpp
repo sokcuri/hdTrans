@@ -541,6 +541,25 @@ bool CompoundAfter(const std::vector<ResolvedItem>& items, int k, const NativeCo
 // words or more ending in 기 (대강 읽기, 함부로 버리기).
 bool VerbPhraseNoun(std::string_view t) { return t.find(' ') != std::string_view::npos && t.ends_with("기"); }
 
+constexpr std::string_view kHagi = "하기";
+
+// Whether item i is a noun whose Korean t is a 하다 verb made a noun (출항하기, 직장 구하기)
+// written straight before a する read 하다: the noun is then that verb, written without
+// 하기 and joined to the する (출항합니다, 직장 구한다). 하기 itself, a proper noun and a noun
+// ending in 期 (夏期 하기, 氷河期 빙하기) are Sino-Korean nouns.
+bool HadaNounBeforeSuru(const std::vector<ResolvedItem>& items, int i, std::string_view t) {
+    const ResolvedItem& noun = items[i];
+    if (First(Code(noun)) != '1' || At(Code(noun), 1) == '3' || !t.ends_with(kHagi) || t == kHagi ||
+        noun.surface.ends_with("期") || i + 1 >= static_cast<int>(items.size()) || !Adjoins(items, i + 1)) {
+        return false;
+    }
+    const ResolvedItem& next = items[i + 1];
+    if (EntryText(next) != "&AV@") return false;
+    const auto starts = dict::ClassMembers("suru.verbal-noun-start");
+    return dict::InClass("suru.verbal-noun-whole", next.surface) ||
+           std::any_of(starts.begin(), starts.end(), [&](std::string_view s) { return next.surface.starts_with(s); });
+}
+
 // Whether the next item that writes something, written straight after item i, attaches to
 // the last syllable of i: a particle or the copula (not one written as a space), a word
 // written attached (Tu) that starts with a syllable and is no counter (들, 에 대한), or the
@@ -877,6 +896,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
                                   const Settings& settings, const Families& generated) {
     Start(items, settings, generated);
     tokens_ = &tokens;
+    first_ = first;
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
@@ -935,10 +955,13 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
+    const bool hadaNoun = HadaNounBeforeSuru(items, i, translated);
+    if (hadaNoun) translated.resize(translated.size() - kHagi.size());
     std::string composed;
     if (record) composed = translated;
-    auto [spaced, space] = Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
-    if (!space && AttachesAfter(items, tokens, i)) {
+    auto [spaced, space] = hadaNoun ? std::pair{std::move(translated), false}
+                                    : Spacing(i, std::move(translated), tags, nextTags, kind, nextKind, isLast, converted, remainder);
+    if (!space && !hadaNoun && AttachesAfter(items, tokens, i)) {
         const size_t end = spaced.find_last_not_of(' ');
         if (end != std::string::npos) spaced.erase(end + 1);
     }
@@ -1040,8 +1063,19 @@ std::string Composer::KeepDropped(int i, std::string translated, std::string_vie
         const std::string_view head = src.substr(0, start - beforeRune.size);
         kanjiBefore = IsKanji(DecodeLastRune(TextBefore(head), head.size()).cp);
     }
+    // A sound said on its own before a comma (む、無理 무, 무리): the token of the sentence before it, if
+    // any, ends in a space, an opening or other mark, not in a word or a closing mark (がば|り、 벌떡|り、,
+    // [・]ば、).
+    bool opens = true;
+    for (int t = token - 1; start == 0 && t >= first_; t--) {
+        if (source_[t].empty()) continue;
+        const char32_t last = DecodeLastRune(TextBefore(source_[t]), source_[t].size()).cp;
+        opens = Opens(last) || (text::IsSymbol(last) && !Closes(last));
+        break;
+    }
     const bool alone = settings_.text && pos == runEnd &&
-                       (pos == static_cast<int>(src.size()) || Closes(after) || HasRune(U"…‥！？!?", after)) &&
+                       (pos == static_cast<int>(src.size()) || Closes(after) || HasRune(U"…‥！？!?", after) ||
+                        (HasRune(U"、，,", after) && opens)) &&
                        kFinalParticles.find(run) == std::string_view::npos;
     bool onlySmall = true;  // run is only っ, ッ and ー
     for (size_t k = 0; k < run.size();) {
@@ -1297,6 +1331,15 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         if (Contains(tags, "Bh")) return Result(std::move(t), true);
     }
     if (kind == '1' && nextKind == '1' && Contains(tags, "Tm")) return Result(std::move(t), true);
+    // A name suffix written onto the name (짱, 군) ends it: a noun after it in the same token
+    // that is no suffix and starts with no particle stands apart (田中ちゃんお仕事 타나카짱 일,
+    // 魅ぃちゃんごめんね 매짱 미안해; not 圭一さんにしては 케이이치 씨치고는).
+    if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && Contains(tags, "Tu") &&
+        dict::InClass("honorific.candidate", item.surface) &&
+        !Contains(nextTags, "Tu") && !Contains(nextTags, "Z7") && WidthOf(nextEntry) >= 2 &&
+        std::ranges::none_of(dict::ClassMembers("particle.after-name"), [&](std::string_view p) { return next.surface.starts_with(p); })) {
+        return Result(std::move(t), true);
+    }
     // A noun that starts with a kanji and is said again right after itself is a word of its own
     // (終わり終わり 끝 끝).
     if (kind == '1' && nextKind == '1' && next.tokenIndex == item.tokenIndex && next.surface == item.surface &&
@@ -1571,7 +1614,13 @@ void ApplyOutputPostSpacing(const std::vector<TokenText>& tokens, int index, Pie
         case tokenizer::kTypeSentenceEnd: case tokenizer::kTypeTruncated: case tokenizer::kTypeWideSpace: case 78:
             return;
     }
-    if (tokens[next].span != 0 || !std::string_view(tokens[next].text).starts_with("」")) Add(out, " ");
+    if (tokens[next].span == 0) {
+        const std::string_view text = tokens[next].text;
+        for (const std::string_view close : dict::ClassMembers("mark.close-after-space")) {
+            if (text.starts_with(close)) return;
+        }
+    }
+    Add(out, " ");
 }
 
 }  // namespace hdTrans::output

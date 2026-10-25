@@ -1,0 +1,9 @@
+# 규칙: GRM-26
+rule	input	expected	kind	layer
+cx:na-tte:10	仲がいいんだなって思うくらい	사이가 좋다고 생각할 정도	fix	rewrites
+cx:na-tte:10	「…冗談だよ。リコがひとりで困ってるだろうなって思ってさ、手伝いに来てやったんだよ。」	「…농담이야. 리코가 혼자서 곤란할 것이라고 생각해, 도우러 와 줬어.」	fix	rewrites
+cx:na-tte:10	すごいんだなって感じた。	대단하다고 느꼈다.	fix	rewrites
+cx:na-tte:10	これでいいのかなって思うんですよ。	!rule:cx:na-tte:10	keep	rewrites
+cx:na-tte:10	好きになって思った	!rule:cx:na-tte:10	keep	rewrites
+cx:na-tte:10	大人になって考えた	!rule:cx:na-tte:10	keep	rewrites
+cx:na-tte:10	「むしろ、さすがだなって思ってました」	!rule:cx:na-tte:10	keep	rewrites

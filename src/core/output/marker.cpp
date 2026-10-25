@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include "core/dict/classes.h"
 #include "core/output/compose.h"
 #include "core/output/inflect.h"
 #include "core/output/particle.h"
@@ -91,13 +92,54 @@ std::string ReplaceAll(std::string_view s, std::string_view from, std::string_vi
     }
 }
 
+// Whether the source after the verb of items[i], its ending's text and the next word's (いえねぇ, できん
+// じゃん), starts with a member of ending.negative-start and not with one of ending.negative-start-not
+// (書けませんか, 有り得ぬ; not できんじゃん).
+bool NegatesVerb(const std::vector<ResolvedItem>& items, int i) {
+    std::string source = items[static_cast<size_t>(i)].endingSurface;
+    if (static_cast<size_t>(i) + 1 < items.size()) {
+        const ResolvedItem& next = items[static_cast<size_t>(i) + 1];
+        // A bare ん before a verb ends no negated clause: the kana belong to other words (しえんいる 支援いる).
+        if (source == "ん" && First(Selected(next).code) == '4') return false;
+        source += next.surface;
+    }
+    const auto starts = [&](std::span<const std::string_view> members) {
+        return std::any_of(members.begin(), members.end(), [&](std::string_view m) { return source.starts_with(m); });
+    };
+    return starts(dict::ClassMembers("ending.negative-start")) && !starts(dict::ClassMembers("ending.negative-start-not"));
+}
+
+// The negation of the 있다 of a potential (할 수 있지 않습니다 → 할 수 없습니다): suffix, the Korean
+// ending after its class digit, as 지, 지는 or 지도 and 않 with the rest, gives the particle after
+// 수 and the rest written for 없.
+bool PotentialNegation(std::string_view suffix, std::string& particle, std::string& rest) {
+    static constexpr std::pair<std::string_view, std::string_view> kForms[] = {
+        {"지 않", ""}, {"지는 않", "는"}, {"지도 않", "도"}};
+    for (const auto& [form, p] : kForms) {
+        if (!suffix.starts_with(form)) continue;
+        particle = p;
+        const std::string_view r = suffix.substr(form.size());
+        // 없 takes 어 where 않 takes 아, the plain present 다 where 않 takes 는다, and 는 for 은.
+        static constexpr std::pair<std::string_view, std::string_view> kVowels[] = {
+            {"았", "었"}, {"아", "어"}, {"는다", "다"}, {"은가", "는가"}};
+        rest = r;
+        for (const auto& [from, to] : kVowels) {
+            if (r.starts_with(from)) {
+                rest = Cat({to, r.substr(from.size())});
+                break;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
 std::string_view EntryText(const ResolvedItem& it) { return Selected(it).text; }
 std::string_view Code(const ResolvedItem& it) { return Selected(it).code; }
 std::string_view GAttr(const ResolvedItem& it) { return Selected(it).gattr; }
 
 std::string_view DirectText(const ResolvedItem& it) { return it.directIndex < 0 ? std::string_view() : it.ending.text; }
 std::string_view DirectCode(const ResolvedItem& it) { return it.directIndex < 0 ? std::string_view() : it.ending.code; }
-std::string_view DirectGAttr(const ResolvedItem& it) { return it.directIndex < 0 ? std::string_view() : it.ending.gattr; }
 
 bool KeiyoX(const ResolvedItem& it) { return it.detailClass == DetailClass::Keiyo && it.detailKind == 'x'; }
 bool DakeiyoX(const ResolvedItem& it) { return it.detailClass == DetailClass::Dakeiyo && it.detailKind == 'X'; }
@@ -505,11 +547,12 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             classText = c.head;
             suffix = std::string(c.tail);
             key = Cat({"&HN@", classText});
-            if (Contains(DirectGAttr(it), "Yn")) {
-                key = ReplaceAll(key, "&HN@", "&M9@");
-                suffix = std::string(internal::SkipWidth(suffix, At(DirectCode(it), 1) == '7' ? 7 : 5));
-                if (std::string_view(suffix).starts_with("았")) suffix = ReplaceAll(suffix, "았", "었");
-                if (std::string_view(suffix).starts_with("아")) suffix = ReplaceAll(suffix, "아", "어");
+            if (std::string particle, rest; NegatesVerb(items, i) && PotentialNegation(suffix, particle, rest)) {
+                replacement.pop_back();  // the space after 수
+                replacement += particle;
+                replacement += ' ';
+                key = Cat({"&M9@", classText});
+                suffix = std::move(rest);
             }
             replacement += LookupSource(key, *generated_);
             break;
@@ -551,6 +594,18 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
                 const auto c = FirstByte(suffix);
                 key += c.head;
                 suffix = std::string(c.tail);
+                // A stem that the dictionary writes as a potential (있을 수 &HN@), or 있다 after an ending
+                // in 수 (覚えることは出来ん: 기억할 수, 있지 않아), negated as one.
+                const bool afterSu = stem.empty() && linked >= 0 && DirectText(items[linked]).ends_with("수");
+                if (std::string particle, rest; (stem.ends_with("수 ") || afterSu) && key.starts_with("&HN@") &&
+                                                key.size() == std::string_view("&HN@").size() + 1 &&
+                                                NegatesVerb(items, i) && PotentialNegation(suffix, particle, rest)) {
+                    if (!afterSu) stem.pop_back();
+                    stem += particle;
+                    if (!afterSu) stem += ' ';
+                    key.replace(0, std::string_view("&M9@").size(), "&M9@");
+                    suffix = std::move(rest);
+                }
             }
             ExclamationForm(key, suffix);
             if (!Contains(key, "&CJ@") || !Contains(suffix, kKoJuseyo)) {
@@ -703,8 +758,26 @@ void Composer::BuildAdjective(int i) {
         }
     }
     if (key.ends_with('1') || key.ends_with('2')) replacement = DropRieulBefore(std::move(replacement), suffix);
+    // 아니다 takes 라 before the quoting endings, as the copula does (아니라고, 아니라는, 아니라면).
+    std::string_view quoted, after;
+    if (key.ends_with('1') && Cat({stem, replacement}).ends_with("아니") && CutQuoting(suffix, quoted, after)) {
+        suffix = Cat({"라", quoted, after});
+    }
     sc.text = Cat({stem, replacement, suffix});
 }
+
+namespace {
+
+// Whether the copula stem 이 before ending drops after a vowel (무리다, 무리네, 무리지, 무리고,
+// 무리니까, 무리구나, 무리겠지): endings whose (이) the particle stage resolves.
+bool ContractsCopula(std::string_view ending) {
+    for (const std::string_view e : {"다", "네", "지", "고", "니", "구", "군", "며", "겠"}) {
+        if (ending.starts_with(e)) return true;
+    }
+    return false;
+}
+
+}  // namespace
 
 std::pair<std::string, std::string> Composer::CopulaForm(int i, std::string_view key, std::string_view replacement,
                                                          std::string_view suffix) const {
@@ -738,12 +811,22 @@ std::pair<std::string, std::string> Composer::CopulaForm(int i, std::string_view
                 return {"(이)라서", std::string(suffix)};
             }
             return {"(이어)여서", std::string(suffix)};
+        case '2':
+            // 으 form: the same drop (무리니까); the condition is (이)라면 (無理なら 무리라면, 本なら 책이라면).
+            if (suffix.starts_with("면")) return {"(이)", Cat({"라", suffix})};
+            if (ContractsCopula(suffix)) return {"(이)", std::string(suffix)};
+            break;
         case '1': {
+            // The adverb of a noun predicate is (으)로 (熱っぽく 열정적으로, 占い的には 점쳐적으로는).
+            if (suffix.starts_with("게")) return {"(으)로", std::string(suffix.substr(std::string_view("게").size()))};
             if (suffix.starts_with("지 않") && aniNoun(i)) {
                 return {"(이)가", Cat({" ", NotForm(Cat({"않", suffix.substr(std::string_view("지 않").size())}))})};
             }
             std::string_view quoted, rest;
             if (CutQuoting(suffix, quoted, rest)) return {"(이)", Cat({"라", quoted, rest})};
+            // The copula stem drops after a vowel before these endings (무리다, 무리네, 무리지), as the
+            // copula word (이)다 does; so does its 으 form (case '2').
+            if (ContractsCopula(suffix)) return {"(이)", std::string(suffix)};
             break;
         }
     }
@@ -822,6 +905,8 @@ bool Composer::TextGate(int i, std::string_view key) {
         }
         // A continuative with も before する keeps its ending (疑いもした 의심하기도 했다).
         if (it.endingSurface == "も") return false;
+        // An ending of intent makes the 하다 after it a verb of its own (言いかけた 말하려고 했다).
+        if (DirectText(it).ends_with("려고")) return false;
         // A connective said again (泣いて泣いて 울어 울어) is written each time.
         if (cls == '7') return WidthOf(DirectText(it)) <= 1 && (it.surface != next.surface || it.endingSurface != next.endingSurface);
         return true;

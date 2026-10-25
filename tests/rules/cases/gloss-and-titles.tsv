@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-names:gloss-word	違うわよ！提督(あなた)、何いってんの！	달라! 제독(당신), 의향은!	fix	normalize
+names:gloss-word	違うわよ！提督(あなた)、何いってんの！	아니야! 제독(당신), 의향은!	fix	normalize
 names:gloss-word	12時。私(わたくし)、ランチにはサンドイッチを所望しますわ	12시. 저, 런치에는 샌드위치를 소망해요	fix	normalize
 names:gloss-name	三日(みか)が来た。三日は優しい。	미카가 왔다. 미카는 다정하다.	fix	normalize
 global:on-joined	ような事…私…えっ	같은 일…나…어	fix	global-stem
@@ -24,7 +24,7 @@ dict:jisjk:101466	新編「第二航空戦隊」出撃せよ！	신편 「제2�
 normalize:military-time	ヒトニーマルマル。	1200.	fix	normalize
 normalize:military-time	ヒトマルーマルマル！	1000!	fix	normalize
 normalize:military-time	フタマルマルマル。	2000.	keep	normalize
-dict:jisjk:40280	あたしの勝手でしょ	내 제멋대로이지	fix	local
+dict:jisjk:40280	あたしの勝手でしょ	내 제멋대로지	fix	local
 dict:jisjk:40280	あたしの作ったケーキ	내가 만든 케이크	keep	local
 grammar:subject-pronoun	あたしが好き	나를 좋아해	fix	rewrites
 dict:jisjk:355685	あんたが沢山仕事できる	네가 많이 일할 수 있다	fix	local
@@ -38,7 +38,7 @@ dict:jisjk:845	「どうして？」	「왜?」	fix	defaults
 dict:doushite:copula	「どうしてなの？」	「어째서야?」	keep	local
 compose:spoken-what	「皆さん、何がいいですか？」	「여러분, 뭐가 좋습니까?」	fix	compose
 compose:spoken-what	「何を食べたいですか？」	「뭘 먹고 싶습니까?」	fix	compose
-compose:spoken-what	何をしている？	무엇을 하고 있어?	keep	compose
+compose:spoken-what	何をしている？	뭘 하고 있어?	keep	compose
 compose:spoken-what	「なによりおかしいのは」	「무엇보다도 이상한 건」	keep	compose
 dict:nanika:atta	「何かあったの？」	「무슨 일 있었어?」	fix	local
 dict:naniga:atta	「何があったんですか？」	「무슨 일이 있었습니까?」	fix	local

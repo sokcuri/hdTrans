@@ -35,3 +35,8 @@ cx:te-request:15	「出して、それから」	!rule:cx:te-request:15	keep	rewr
 cx:te-request:15	「出して？」	!rule:cx:te-request:15	keep	rewrites
 cx:te-request:15	「心配ないから、元気出して」	!rule:cx:te-request:15	keep	rewrites
 cx:te-request:15	良太が車出して、5人で出かけた	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「お金を出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「宿題を出して」	!rule:cx:te-request:15	keep	rewrites
+cx:te-request:15	「先生、出して」	「선생님, 내 줘」	keep	rewrites
+cx:te-request:15	田中、出して	타나카, 내 줘	keep	rewrites
+cx:te-request:15	ねえ、出して	있잖아, 내 줘	keep	rewrites

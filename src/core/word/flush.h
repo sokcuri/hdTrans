@@ -38,6 +38,7 @@ void PreferTerminal(Flusher& f);
 
 // Passes (passes.cpp).
 void DrainNmTail(Flusher& f);
+void ReadUnplacedParticles(Flusher& f);
 void ReinsertPhrases(Flusher& f);
 void CleanupClass3(Flusher& f);
 void ApplyNegatives(Flusher& f);

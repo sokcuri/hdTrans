@@ -154,6 +154,13 @@ if(status EQUAL 0 OR NOT error MATCHES "base.tsv:7: the marker family &AV@ conju
    OR NOT error MATCHES "3 dictionary lines fail verification")
     message(FATAL_ERROR "verification must fail on marker families that do not fit the part code (${status}): ${error}")
 endif()
+set(negationDicts "${CMAKE_CURRENT_LIST_DIR}/unit/dict/testdata/negation_ending")
+run_cli(--dicts "${negationDicts}" --verify-dicts "書けません")
+if(status EQUAL 0 OR NOT error MATCHES "base.tsv:7: the negation \"1지않고\" needs a space before 않\n"
+   OR NOT error MATCHES "base.tsv:8: the ending \"っすか\" writes a negation"
+   OR NOT error MATCHES "2 dictionary lines fail verification")
+    message(FATAL_ERROR "verification must fail on negations in 지 않 that the class of their key does not account for (${status}): ${error}")
+endif()
 file(MAKE_DIRECTORY "${root}/unrelated-cwd/dicts")
 file(WRITE "${root}/unrelated-cwd/dicts/base.tsv" "key\tko\tpos\tid\n猫\t작업경로\tN110\t1\n")
 get_filename_component(cliName "${CLI}" NAME)

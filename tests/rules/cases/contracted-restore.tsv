@@ -28,14 +28,14 @@ sound:contracted-auxiliaries	テレビのニュースによくお顔出てらっ
 sound:contracted-auxiliaries	あの頃はみんなが聞きたがってさあ、オイラ、のんびり遊んでられなかったよ。	그 무렵은 모두가 듣고 싶어해 자, 나, 한가로이 놀고 있을 수 없었어.	fix	sound
 sound:contracted-auxiliaries	青葉、じっとしてられないな。	has:가만히	fix	sound
 sound:contracted-auxiliaries	付き合ってられませんわ	사귀고 있을 수 없어요	fix	sound
-sound:contracted-auxiliaries	咬みつきさん色白なまめかしい御手をしてらっしゃるようなので…	물어씨흰 피부 요염한 손을 하고 계시는 것 같아서…	fix	sound
+sound:contracted-auxiliaries	咬みつきさん色白なまめかしい御手をしてらっしゃるようなので…	물어씨 흰 피부 요염한 손을 하고 계시는 것 같아서…	fix	sound
 sound:contracted-auxiliaries	うーん……１時間も待ってられないし……ん、仕方がない	으음……1시간이나 기다리고 있을 수 없고……응, 어쩔 수 없다	fix	sound
 sound:contracted-auxiliaries	そこまで思ったら、もうジッとしてられなかった。	거기까지 생각했더니, 벌써 가만히 하고 있을 수 없었다.	fix	sound
 sound:contracted-auxiliaries	でないとやってられない。	그렇지 않으면 할 수 없다.	fix	sound
 sound:contracted-auxiliaries	まあ、あるいはそうでも思わないとやってられなかったのかもしれないが。	뭐, 혹은 그래도 생각하지 않으면 할 수 없었던 걸지도 모르겠지만.	fix	sound
-sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없다!	fix	sound
+sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없어!	fix	sound
 sound:contracted-auxiliaries	そんなこと言ってられないよ。	그런 말 하고 있을 수 없어.	fix	sound
-sound:contracted-auxiliaries	飲まないとやってられないぃ！	마시지 않으면 할 수 없다!	fix	sound
+sound:contracted-auxiliaries	飲まないとやってられないぃ！	마시지 않으면 할 수 없어!	fix	sound
 sound:contracted-auxiliaries	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	keep	sound
 sound:contracted-auxiliaries	みんな、ついてらっしゃい！	모두, 따라와!	keep	sound
 sound:contracted-auxiliaries	難しい顔をしてらっしゃる	심각한 표정을 하고 계신다	keep	sound
@@ -44,7 +44,7 @@ sound:contracted-auxiliaries	一人は泣いちゃってるんでしょ？	한 �
 sound:contracted-auxiliaries	んっ……こんなに、エッチな格好で、下も沢山濡らしちゃってるのに	읏……이렇게, 야한 모습으로, 아래도 많이 적셔 버렸는데	fix	sound
 sound:contracted-auxiliaries	そういえば、気付いたらサッちゃんが掃除を済ませちゃってるなぁ……	그러고 보니, 정신을 차려 보니 삿짱이 청소를 끝마쳤군……	fix	sound
 sound:contracted-auxiliaries	ゾワゾワしちゃってる……	오싹오싹해버렸다……	keep	sound
-sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸다……	keep	sound
+sound:contracted-auxiliaries	昨日返せなくてごめん　寝ちゃってた……	어제 돌려줄 수 없어 미안 자 버렸어……	keep	sound
 sound:contracted-auxiliaries	…あ、本当に寝ちゃってる。	…아, 정말 자버렸다.	keep	sound
 sound:contracted-auxiliaries	……オージマに、持ってて、もらいたいの……	……오지마에, 가지고 있어, 받고 싶은 거야……	keep	sound
 sound:contracted-auxiliaries	……言ってて、恥ずかしくなってきた……	……말해, 부끄러워졌다……	keep	sound
@@ -78,7 +78,7 @@ sound:contracted-auxiliaries	割ってちゃわんを	나누어 공기 그릇을
 sound:contracted-auxiliaries	見てちゃんと	봐 제대로	keep	sound
 sound:contracted-auxiliaries	見てようやく	봐 드디어	keep	sound
 sound:contracted-auxiliaries	神聖かまってちゃん	신성한가 기다려	keep	sound
-sound:contracted-auxiliaries	先生、ケーキは忘れてたですわ	선생님, 케이크는 잊고 있었던이에요	current	sound
+sound:contracted-auxiliaries	先生、ケーキは忘れてたですわ	선생님, 케이크는 잊고 있었어요	current	sound
 sound:contracted-auxiliaries	待ってたあああ！！	기다리고 있었던 아 아!!	current	sound
 dict:s:9453	かまってちゃんが来た	관심병 환자가 왔다	fix	defaults
 dict:s:9453	かまってちゃんなの？	관심병 환자야?	fix	defaults

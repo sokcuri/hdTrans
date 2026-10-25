@@ -33,10 +33,10 @@ conj:imperative	「書け」の一点張り	「써라」의 시종일관	fix	con
 conj:imperative	「本が読める」	「책을 읽을 수 있다」	keep	conjugation
 conj:imperative	撃てない。	쏠 수 없다.	keep	conjugation
 conj:imperative	「立て」	「서라」	fix	conjugation
-conj:imperative	「遠慮なく申せ」	「거리낌 없이 말씀드려라」	fix	conjugation
+conj:imperative	「遠慮なく申せ」	「거리낌 없이 말해라」	fix	conjugation
 cut:noun-head	揺れるしっぽを見た。	흔들리는 꼬리를 보았다.	fix	lookup
 cut:noun-head	行くし、食べるし。	가고, 먹고.	keep	lookup
-cut:noun-head	どこかにないかなって	어디엔가 없을까는	keep	lookup
+cut:noun-head	どこかにないかなって	어디엔가 없을까 하고	keep	lookup
 dict:jisjk:340957	「伏せろ！」	「엎드려라!」	fix	local
 dict:jisjk:340957	みんな、伏せて！	모두, 엎드려!	fix	local
 dict:jisjk:340957	地面に伏せた	땅에 엎드렸다	fix	local

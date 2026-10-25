@@ -15,3 +15,11 @@ lookup:suffix-after-person	子供たちたん	has:아이들짱	keep	lookup
 dict:w:28610	麦飯たーんと炊いておいたわ。	has:듬뿍	fix	defaults
 dict:w:28610	どうぞ、たんと召し上がって。	has:듬뿍	fix	defaults
 constraint:tanto-after-tsu	行ったんと違う	lacks:듬뿍	keep	lookup
+pre-select:unplaced-particle	おいっ！その変態を黙らせろ！	has:변태를	fix	pre-select
+compose:sound-before-comma	「む、無理です」	has:무, 무리	fix	compose
+compose:sound-before-comma	がばり、と御園が身体を起こした。	lacks:리,	keep	compose
+lexical:spoken-words	ネジの鼻がもげるまで～	has:떨어질 때까지	fix	lookup
+lexical:spoken-words	嫌な音がして、腕がもげた。	has:팔이 떨어졌다	fix	lookup
+lexical:spoken-words	ガラスがわれた	has:깨졌다	keep	lookup
+constraint:cued-name	「わたし、つむぎです」	has:츠무기	fix	lookup
+constraint:cued-name	「わたし、みちるです」	has:미치루	fix	lookup

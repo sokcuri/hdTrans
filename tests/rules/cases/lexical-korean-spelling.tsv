@@ -19,4 +19,4 @@ dict:jisjk:115993	腿に傷がある。	넓적다리에 상처가 있다.	fix	lo
 dict:jisjk:28917	陽炎が揺れる。	아지랑이가 흔들린다.	fix	lookup
 dict:jisjk:115755	匙を投げた。	포기했다.	keep	lookup
 dict:jisjk:67939	流し台っぽいものはある。	설거지대 같은 것은 있다.	fix	lookup
-dict:jisjk:1801	要するに、無理だ。	요컨대, 무리이다.	keep	lookup
+dict:jisjk:1801	要するに、無理だ。	요컨대, 무리다.	keep	lookup

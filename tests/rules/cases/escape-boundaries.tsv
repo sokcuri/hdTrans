@@ -1,0 +1,31 @@
+# 규칙: LAY-13
+rule	input	expected	kind	layer
+segment:escape-gap	「……\n好きだもん」	「……\n좋아하는걸」	fix	segment
+segment:escape-gap	「……\n寝ちゃったの」	「……\n자버렸어」	fix	segment
+segment:escape-gap	「……\n行くぞ」	「……\n가겠어」	fix	segment
+segment:escape-gap	「あ、あの…\n知らないわよ」	has:…\n몰라	fix	segment
+segment:escape-gap	「うぅ…\n寝ちゃったな」	「으으…\n자버렸네」	fix	segment
+segment:escape-gap	「うそっ\n好きだわよ」	has:\n좋아해	fix	segment
+segment:escape-gap	「うそっ\n待っててね」	「거짓말\n기다리고 있어」	fix	segment
+segment:escape-gap	「ええーーっ！\n分かってるな」	「에에에엣!\n알고 있구나」	fix	segment
+segment:escape-gap	「ええーーっ！\n好きだっぽい」	has:!\n좋아하는 것 같아	fix	segment
+segment:escape-gap	「えっ！？\n分かってるね」	「어!?\n알고 있네」	fix	segment
+segment:escape-gap	「えっ！？\n行くじゃん」	「어!?\n가잖아」	fix	segment
+segment:escape-gap	「きゃー♪\n帰ろうぜ」	「꺄아♪\n돌아가자구」	fix	segment
+segment:escape-gap	「ちょ、ちょっと！\n帰ろうよ」	「자, 잠깐!\n돌아가자」	fix	segment
+segment:escape-gap	「な、何よ\nやめてね」	「뭐, 뭐야\n그만해」	fix	segment
+segment:escape-gap	「はぁ…\n行っちゃうね」	「하아…\n가버리네」	fix	segment
+segment:escape-gap	「はわわ\n忘れてたぞ」	「하와와\n잊고 있었어」	fix	segment
+segment:escape-gap	「ひゃっ！\n好きだじゃん」	lacks:\n을	fix	segment
+segment:escape-gap	「ふぇ？\n知らないでしょ」	「후에?\n모르지」	fix	segment
+segment:escape-gap	「べ、別に\n知らないじゃん」	「벼, 별로\n모르잖아」	fix	segment
+segment:escape-gap	「むー\n食べてるですわ」	has:무우\n먹고	fix	segment
+segment:escape-gap	「（に、にこ……）」\n「（ふ、ふふっ……）」	has:」\n「(	fix	segment
+segment:escape-gap	「あ\r\nいい」	has:아\r\n좋	fix	segment
+segment:escape-gap	彼は来た。\n【鑑定】を使った。	그는 왔다.\n【감정】을 썼다.	fix	segment
+segment:escape-gap	好き \n だよ	has: \n 	fix	segment
+segment:escape-gap	C:\temp\nに保存	has:C:\temp\n	keep	segment
+segment:escape-gap	本当\\nだよ	has:\\n	keep	segment
+segment:escape-gap	名前は%s【鑑定】	이름은 %s【감정】	keep	segment
+segment:escape-gap	\nこんにちは	\n 안녕하세요	current	segment
+segment:escape-gap	こんにちは\n	안녕하세요 \n	current	segment

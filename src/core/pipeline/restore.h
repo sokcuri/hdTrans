@@ -26,9 +26,11 @@ RestoreSteps RestoreAll(const output::Pieces& cleaned, const output::Pieces& typ
 // The output line: RestoreAll(...).line.
 std::string Restore(const output::Pieces& cleaned, const output::Pieces& typed, bool keepBrackets);
 
-// out without the ASCII spaces the engine writes at the start of a line or after an
-// opening bracket (「 나는 -> 「나는) where the matching line of typed has none there;
-// out as it is when the line counts differ. Spans are left as they are.
+// out without the ASCII spaces the engine writes at the start of a line, after an opening
+// bracket (「 나는 -> 「나는) or before a closing bracket (없습니다. 』 -> 없습니다.』, 말이야 ) ->
+// 말이야)) where the matching line of typed has no white space there; out as it is when the
+// line counts differ. A ” or ’ closes only a quote opened before it, a > or ＞ only after a <
+// or ＜. Spans are left as they are.
 output::Pieces DropAddedSpaces(const output::Pieces& typed, const output::Pieces& out);
 
 // The brackets of typed written over the forms the engine writes for them, line by line
@@ -82,13 +84,21 @@ std::string UnescapePrivateUse(std::string_view s);
 // syllables and the spaces between them dropped (최악이야 최·악·이·야); the marks dropped.
 std::string WriteEmphasis(std::string_view s);
 
-// Each kLengthenMark written as ~, or dropped after a ~ (선배\uE00A! 선배~!); each
+// Each kStressMark before a Hangul syllable written as that syllable drawn out by two syllables
+// of its vowel, the final consonant moved to the last one (대단해 대애애단해, 정말로 저어엉말로); a
+// syllable that ends in a consonant other than ㄴ ㄹ ㅁ ㅇ stays (확실히, 많이), so does one without a
+// final before a syllable that starts with ㅇ (매우), and so do the kana the composer shifted for WriteDropped; the
+// mark is dropped.
+std::string WriteStress(std::string_view s);
+
+// Each kLengthenMark written as ~, or dropped after a ~ (선배~\uE00A! 선배~!) unless it is the second of
+// two in a row (군\uE00A\uE00A 군~~); each
 // kDrawnMark after a Hangul syllable written as a syllable of its vowel, the final
 // consonant moved to the last one (그만둬\uE00B\uE00B 그만둬어어, 님\uE00B 니임), or after the ~ that
 // follows such a syllable, kept between the two when it has a final consonant (짱\uE00A\uE00B 짜~앙,
 // 씨\uE00A\uE00B 씨이), and
 // dropped elsewhere; each output::kClipMark dropped, closing an open Hangul syllable before it
-// with ㅅ (아파\uE00C 아팟, 돼\uE00B\uE00B\uE00C 돼에엣).
+// with ㅅ (아파\uE00C 아팟, 돼\uE00B\uE00B\uE00C 돼에엣); each cry mark (output::IsCryMark) dropped.
 std::string WriteLengthening(std::string_view s);
 
 // s without the particle marks of word spans (output::kVowelMark ...).
@@ -131,6 +141,8 @@ using output::kEmphasisOpen;
 // The lengthening mark of the sound stage (WriteLengthening).
 using output::kDrawnMark;
 using output::kLengthenMark;
+// The mark before a word said with a run of っ inside (WriteStress).
+using output::kStressMark;
 
 namespace internal {
 

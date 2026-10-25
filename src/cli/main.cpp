@@ -478,12 +478,16 @@ int RunMain(int argc, char** argv) {
     }
     const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
     if (verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1")) {
-        // Verification also fails on loaded lines whose marker family does not fit their part code.
+        // Verification also fails on loaded lines whose marker family does not fit their part code
+        // and on negations in 지 않 that the class of their key does not account for, and on noun lines
+        // whose target is a verb made a noun.
         const auto checked = hdTrans::dict::LoadFolders(folders, {}, true, false, hdTrans::dict::UserFiles(userPaths));
         std::size_t failed = 0;
         for (const hdTrans::dict::LoadError& e : checked.errors) {
             if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass &&
-                e.kind != hdTrans::dict::LoadErrorKind::MissingRuleBodies)
+                e.kind != hdTrans::dict::LoadErrorKind::MissingRuleBodies &&
+                e.kind != hdTrans::dict::LoadErrorKind::NegationEnding &&
+                e.kind != hdTrans::dict::LoadErrorKind::VerbNoun)
                 continue;
             std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
             failed++;

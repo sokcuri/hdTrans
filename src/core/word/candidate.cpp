@@ -180,7 +180,17 @@ std::string SinoKoreanNumber(std::string_view digits) {
 
 // After a noun parent, the particle records (kind 2) that follow the first verb or
 // adjective record move to the front (behind the leading plain-dictionary records).
-Record* ReorderAfterNoun(const Item& parent, Record* records) {
+bool AllHiragana(std::string_view s);
+
+// Whether every particle among records is a single character.
+bool OneKanaParticles(const Record* records) {
+    for (const Record* r = records; r != nullptr; r = r->child) {
+        if (At(r->partCode, 1) == '2' && text::RuneCount(r->source) > 1) return false;
+    }
+    return true;
+}
+
+Record* ReorderAfterNoun(const Item& parent, Record* records, const dict::Snapshot& snapshot, std::string_view text) {
     if (parent.EntryText(0) == kKoCloseQuote || parent.EntryText(0) == ")" || At(parent.Code(0), 0) != '1') {
         return records;
     }
@@ -213,6 +223,13 @@ Record* ReorderAfterNoun(const Item& parent, Record* records) {
             }
         } else if (k > '6' && k <= '8') {
             if (Has(p->attr, "Pj")) break;
+            // An adjective stem of three or more kana keeps its place before particles of one kana
+            // after which no word of two characters or more starts: the particle would leave a piece
+            // of the adjective as a word (水着かわいい, not か + わ + いい; but それはかなわない).
+            if (k == '7' && text::RuneCount(p->source) >= 3 && AllHiragana(p->source) && OneKanaParticles(first)) {
+                const std::string_view rest = text.substr(text::DecodeRune(text).size);
+                if (text::RuneCount(rest.substr(0, snapshot.WordAt(rest))) < 2) break;
+            }
             reorder = true;
         }
         if (!reorder) continue;
@@ -404,6 +421,50 @@ bool ReadsWhole(const dict::Snapshot& snapshot, const Record& r, std::string_vie
 //   (あの人, この世) and adverbs keep their order: their compound rows read worse than
 //   the parts.
 // Plain-dictionary records stay in front.
+// Whether s starts with a form of the copula (not the で of できる), the な of an adnominal or
+// of なの, なんだ (not しっかりなさい), or a question か that ends a clause or goes on to a final
+// particle (アリか？, ばっちりかな; not しっかりかけて).
+bool CopulaFollows(std::string_view s) {
+    for (const std::string_view c : {"だ", "です", "でし", "じゃ", "なの", "なん", "かな", "かよ", "かも", "かしら"}) {
+        if (s.starts_with(c)) return true;
+    }
+    for (const std::string_view c : {"な", "か"}) {
+        if (!s.starts_with(c)) continue;
+        const text::Rune next = text::DecodeRune(s.substr(c.size()));
+        return next.size == 0 || !(next.cp >= U'ぁ' && next.cp <= U'ゖ');
+    }
+    return false;
+}
+
+// An adverb or a noun of word.copula-predicate is its adjectival noun before a copula, an adnominal
+// な or a question か (ばっちりだ 완벽하다, アリなのか 괜찮은 건가): the adjectival noun records of the
+// key go first, and the others stay behind them for an ending they do not take.
+Record* CopulaPredicateFirst(Record* records, std::string_view text) {
+    if (records == nullptr || !dict::InClass("word.copula-predicate", records->source) ||
+        !CopulaFollows(text.substr(std::min(text.size(), records->source.size())))) {
+        return records;
+    }
+    const std::string_view key = records->source;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (r->source == key && At(r->partCode, 1) == '8') {
+            *frontTail = r;
+            frontTail = &r->child;
+        } else {
+            *backTail = r;
+            backTail = &r->child;
+        }
+        r = next;
+    }
+    *frontTail = back;
+    return front != nullptr ? front : back;
+}
+
 Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -614,6 +675,20 @@ bool FractionAt(std::string_view text, std::size_t size) {
     }
     return false;
 }
+
+namespace {
+
+// Whether a unit that numbers name (counter.unit-abbrev) follows the number of size bytes at the
+// start of text, after more kanji digits written on without 十 (二水戦 2수전, 三一駆 31구): the
+// number is read as digits then, and those digits read by place value.
+bool UnitAfterNumber(std::string_view text, std::size_t size) {
+    if (size > text.size()) return false;
+    std::string_view rest = text.substr(size);
+    while (IsNumeral(FirstChar(rest))) rest.remove_prefix(FirstChar(rest).size());
+    return std::ranges::any_of(dict::ClassMembers("counter.unit-abbrev"), [&](std::string_view u) { return rest.starts_with(u); });
+}
+
+}  // namespace
 
 bool NounEndAt(std::string_view text) { return NounEnd(text); }
 
@@ -1345,6 +1420,14 @@ bool Worker::TranslateCandidateAt(std::string_view full, int cursor, int token, 
         }
     }
     if (Record* numeric = ProbeNumericPrefix(token, text, AfterMyriad(full, cursor))) {
+        // Before a unit name the kanji number is its digits, not a word that starts with it or
+        // the Sino-Korean reading of 一 (一航戦 1항전, 二水戦 2수전).
+        if (UnitAfterNumber(text, numeric->source.size())) {
+            if (text::RuneCount(numeric->source) == 1 && static_cast<unsigned char>(numeric->source[0]) >= 0x80) {
+                numeric = LookupFallbackRecord(token, numeric->source, 12, 15, true);
+            }
+            return ProcessCandidateRecord(full, cursor, token, numeric, parent);
+        }
         const Lookup dictionary = DoLookup(text, kModeGeneral);
         if (dictionary.count == 0 || SpellsNumber(dictionary.records, *numeric, text) ||
             VerbalNounAtCounter(dictionary.records, *numeric, text) || FractionAt(text, numeric->source.size()) ||
@@ -1441,10 +1524,11 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
+    if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (parent != nullptr) {
-        records = ReorderAfterNoun(*parent, records);
+        records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
     }

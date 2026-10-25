@@ -6,16 +6,16 @@ normalize:kanji-cry	「嫌ぁ！」	「싫어!」	fix	normalize
 normalize:kanji-cry	「嫌ぁぁぁっ！」	「싫어어엇!」	fix	normalize
 normalize:kanji-cry	「嫌っ」	「싫어」	fix	normalize
 normalize:kanji-cry	「嫌ーっ！」	「싫어엇!」	fix	normalize
-normalize:kanji-cry	「嫌ぁ、やめて！」	「싫어, 그만둬!」	fix	normalize
+normalize:kanji-cry	「嫌ぁ、やめて！」	「싫어, 그만해!」	fix	normalize
 normalize:kanji-cry	「嫌ー！」	「싫어!」	fix	normalize
 normalize:kanji-cry	「嫌～！」	「싫어~!」	fix	normalize
 normalize:kanji-cry	嫌っ、そんな目で見ないで	싫어, 그런 눈으로 보지 마	fix	normalize
 normalize:kanji-cry	きゃっ！ 嫌っ！	꺅! 싫어!	fix	normalize
-normalize:kanji-cry	「嫌ぁぁ、やめて！」	「싫어어, 그만둬!」	fix	normalize
-normalize:kanji-cry	「嫌ぁ……」	「싫다……」	keep	normalize
-normalize:kanji-cry	「嫌！」	「싫다!」	keep	normalize
-normalize:kanji-cry	嫌なものは嫌っ！	싫은 것은 싫다!	keep	normalize
-normalize:kanji-cry	だー、すごく嫌ー	다―, 정말 싫다-	keep	normalize
+normalize:kanji-cry	「嫌ぁぁ、やめて！」	「싫어어, 그만해!」	fix	normalize
+normalize:kanji-cry	「嫌ぁ……」	「싫어……」	keep	normalize
+normalize:kanji-cry	「嫌！」	「싫어!」	keep	normalize
+normalize:kanji-cry	嫌なものは嫌っ！	싫은 것은 싫어!	keep	normalize
+normalize:kanji-cry	だー、すごく嫌ー	다―, 정말 싫어-	keep	normalize
 normalize:kanji-cry	「嫌っているかはわからない	「싫어하고 있을까는 모른다	keep	normalize
 normalize:kanji-cry	彼を嫌っていた。	그를 싫어하고 있었다.	keep	normalize
 normalize:kanji-cry	嫌ぁな予感	불길한 예감	keep	normalize

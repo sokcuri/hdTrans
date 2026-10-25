@@ -54,6 +54,15 @@ HD_TEST(pipeline_drop_added_spaces) {
          {{"「"}, {"우와", SpanWord}, {"…부드럽다」"}}},
         {{{"<b>", SpanOpen}, {"「あ」"}}, {{"<b>", SpanOpen}, {" 「 아」"}}, {{"<b>", SpanOpen}, {" 「아」"}}},
         {{{"딸랑", SpanWord}}, {{"( 딸랑", SpanWord}, {" ( 소리"}}, {{"( 딸랑", SpanWord}, {" (소리"}}},
+        // Spaces before a closing bracket go unless the line typed white space before one.
+        {{{"『ございません。』"}}, {{"「없습니다. 」"}}, {{"「없습니다.」"}}},
+        {{{"（呪いはねえ）"}}, {{"(저주는 말이야 )"}}, {{"(저주는 말이야)"}}},
+        {{{"《お待たせしました！》"}}, {{"《기다렸습니다! 》"}}, {{"《기다렸습니다!》"}}},
+        {{{"＜準備中です。＞"}}, {{"<준비 중입니다. >"}}, {{"<준비 중입니다.>"}}},
+        {{{"「 Hello 」鬼"}}, {{"「 Hello 」귀신 )"}}, {{"「 Hello 」귀신 )"}}},
+        // A ” opens the quote it does not close, and a > closes only after a <.
+        {{{"、”プロの人”と"}}, {{", ”프로의 사람 ”과"}}, {{", ”프로의 사람”과"}}},
+        {{{"します。＞＞"}}, {{"합니다. >>"}}, {{"합니다. >>"}}},
     };
     for (const auto& c : cases) {
         const Pieces got = pipeline::DropAddedSpaces(c.typed, c.out);
@@ -260,6 +269,22 @@ HD_TEST(pipeline_write_emphasis) {
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteEmphasis(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_write_stress) {
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D대단해!"), std::string("대애애단해!"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D정말로"), std::string("저어엉말로"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D절대"), std::string("저어얼대"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D위험했다"), std::string("위이이험했다"));
+    // A final that is not held (ㄱ, ㅎ, two consonants), no final before a syllable with ㅇ, or
+    // no syllable after the mark: the mark is dropped.
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D확실히"), std::string("확실히"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D매우"), std::string("매우"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D당연하지"), std::string("다아앙연하지"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D많이"), std::string("많이"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00D좋은"), std::string("좋은"));
+    HD_CHECK_EQ(pipeline::WriteStress("\uE00DOK"), std::string("OK"));
+    HD_CHECK_EQ(pipeline::WriteStress("대단해"), std::string("대단해"));
+}
+
 HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("선배\uE00A!"), std::string("선배~!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배~\uE00A!"), std::string("선배~!"));
@@ -275,6 +300,8 @@ HD_TEST(pipeline_write_lengthening) {
     HD_CHECK_EQ(pipeline::WriteLengthening("그만둬\uE00B\uE00B!"), std::string("그만둬어어!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("안 돼\uE00B"), std::string("안 돼에"));
     HD_CHECK_EQ(pipeline::WriteLengthening("안돼\uE00B\uE00B\uE00C!"), std::string("안돼에엣!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("뜨거워\uE00E!"), std::string("뜨거워!"));
+    HD_CHECK_EQ(pipeline::WriteLengthening("뜨거워\uE00F!"), std::string("뜨거워!"));
     HD_CHECK_EQ(pipeline::WriteLengthening("선배님\uE00B\uE00B"), std::string("선배니이임"));
     HD_CHECK_EQ(pipeline::WriteLengthening("!\uE00B선배"), std::string("!선배"));
     // A clip mark closes the open syllable before it with ㅅ and is dropped elsewhere.

@@ -1,0 +1,44 @@
+# 규칙: LEX-12, LEX-29
+rule	input	expected	kind	layer
+dict:missing-compounds	提督、艦隊帰投しました。	제독, 함대 귀환했습니다.	fix	lookup
+dict:missing-compounds	艦隊は、無事帰投。	has:귀환.	fix	lookup
+dict:missing-compounds	三水戦、帰投したよ！	has:귀환했어!	fix	lookup
+dict:missing-compounds	艦隊が無事母港に帰投しました。	has:모항에 귀환했습니다	fix	lookup
+dict:missing-compounds	司令官、艦隊帰投よ。	has:함대 귀환이야	fix	lookup
+dict:missing-compounds	艦隊、帰投したようです。	has:귀환한 것 같습니다	fix	lookup
+dict:missing-compounds	明日の午後までに帰投しろ。	has:귀환해라	fix	lookup
+dict:missing-compounds	航空隊の練度もバッチリよ！	has:항공대의 숙련도도	fix	lookup
+dict:missing-compounds	照月も練度、上がってます。	has:숙련도, 오르고	fix	lookup
+dict:missing-compounds	艦隊の練度向上に努めよ！	has:숙련도 향상	fix	lookup
+dict:missing-compounds	はいはい、練度は大事だよねー。	has:숙련도는	fix	lookup
+dict:missing-compounds	練度を上げる。	숙련도를 올린다.	fix	lookup
+dict:missing-compounds	逆に、熟練度が上がると消費MPが減るんだろうか。	has:숙련도가 오르면	keep	lookup
+dict:missing-compounds	全艦、増速！	전 함선, 증속!	fix	lookup
+dict:missing-compounds	全艦、戦闘用意！	전 함선, 전투 준비!	fix	lookup
+dict:missing-compounds	全艦集結せよ！	has:전 함선 집결하라	fix	lookup
+dict:missing-compounds	第七駆逐隊、全艦集合済みです。	has:전 함선 집합	fix	lookup
+dict:missing-compounds	旗艦より全艦へ	has:전 함선에	fix	lookup
+dict:missing-compounds	全艦隊に告ぐ	has:전 함대에	fix	lookup
+dict:missing-compounds	稼働全艦載機、発艦はじめ！	has:전 함재기	fix	lookup
+dict:missing-compounds	戦艦が三隻いる。	has:전함이	keep	lookup
+dict:missing-compounds	13号対空電探改	has:대공 전탐	keep	lookup
+dict:missing-compounds	でんたーん（電探）って言うの？	has:(전탐)	keep	lookup
+dict:missing-compounds	敵の電探…脅威ですね。	has:적의 전탐…	keep	lookup
+dict:missing-compounds	いかん、昼餉を取らねば。	has:점심을	fix	lookup
+dict:missing-compounds	さあ昼餉は何を出してくれるの？	has:점심은	fix	lookup
+dict:missing-compounds	そろそろ昼餉の準備をいたしますね？	has:점심 준비를	fix	lookup
+dict:missing-compounds	第一潜水隊旗艦、伊14、出撃するから！	has:잠수대 기함	fix	lookup
+dict:missing-compounds	第二駆逐隊旗艦、秋霜、抜錨！	has:제2구축대 기함	fix	lookup
+dict:missing-compounds	第24駆逐隊旗艦海風、出撃します！	has:구축대 기함	fix	lookup
+dict:missing-compounds	潜水艦隊旗艦、大鯨、出撃します！	has:잠수함대 기함,	fix	lookup
+dict:missing-compounds	第一艦隊旗艦	has:함대 기함	keep	lookup
+dict:missing-compounds	隊旗を掲げる	has:대기를	keep	lookup
+dict:missing-compounds	叔母の死の原因となった女の子供なのだから当たり前だ。	has:여자아이니까	fix	lookup
+dict:missing-compounds	女の子が来た。	has:여자아이가	keep	lookup
+dict:missing-compounds	「中口径主砲」系装備x10を廃棄	has:중구경 주포	fix	lookup
+dict:missing-compounds	「小口径主砲」系装備x16を廃棄	has:소구경 주포	fix	lookup
+dict:missing-compounds	大口径主砲	has:대구경 주포	keep	lookup
+dict:jisjk:345089	水上機母艦、秋津洲よ！	has:아키츠시마야	fix	lookup
+dict:jisjk:79960	伊良湖ちゃん大丈夫？	has:이라코	fix	lookup
+dict:jisjk:95696	艦隊が帰投した	lacks:던	fix	lookup
+dict:jisjk:95696	身を投じた	has:던	keep	lookup

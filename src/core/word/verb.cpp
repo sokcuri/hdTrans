@@ -379,6 +379,17 @@ bool Item::AcceptVerbContinuation(Record* following) {
     if (const std::string_view r = after(); WidthOf(r) >= 6) six = Left(r, 6);
 
     if (!matched && base.kind == 10 && base.patternKind == 0 && w->TeAfterWaStem(surface, after())) return false;
+    // A bare stem in kanji that the dictionary also has as a noun, right after an adjective in
+    // its attributive い or な and before a comma, is the noun the adjective describes (いい感じ、
+    // 좋은 느낌), not a verb's continuative; a phrase verb stays (長い列ができ、).
+    if (!matched && Starts(tail, kJaComma) && start > 0 && text::IsKanji(text::DecodeRune(surface).cp)) {
+        const std::string_view before = LastChar(std::string_view(text).substr(0, static_cast<std::size_t>(start)));
+        if (before == "い" || before == "な") {
+            for (const Record* r = w->DoLookup(w->arena.Keep(surface), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source == surface && At(r->partCode, 0) == 'N') return false;
+            }
+        }
+    }
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
          (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
@@ -396,6 +407,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     const bool shortCausativePassive = w->settings.text && w->settings.improvements.causativePassive && !matched &&
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
+    if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
     if (!matched && (oldState == 1 || oldState == 2 || oldState == 4 || shortCausativePassive)) {
         base.record = oldState;
         adjusted = true;

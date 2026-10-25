@@ -91,10 +91,10 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// The normalized line after the sound stage: JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteContractedIku, RewriteContractedAuxiliaries, RewriteRaLessKuru,
-// RewriteContractedNo,
+// RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
+// RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
 // RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
@@ -119,6 +119,13 @@ namespace internal {
 // kana piece is written piece by piece as heard, ・ between the pieces and a lone ー kept
 // (아・이・우, あ・ー 아・ー).
 std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Each word spaced out character by character (お　と　な　の, こ ろ し て や る) joined: three or
+// more pieces of JoinSpelledOut with one space or ideographic space between them, not next to
+// other kana or kanji but for a copula or particle after it, when the dictionary or the sound
+// lexicon reads them as words as JoinSpelledOut does. A run of kanji only stays for the
+// tokenizer (通 知 表), and a run that is no word stays as written (し　ら　さ　き, あ い う).
+std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
@@ -183,6 +190,27 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
 // spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap);
 
+// The kana of a verb form said ん or っ in casual speech written back where a verb of the
+// dictionary has the form: the る of an ichidan verb, する or くる before the な of a prohibition
+// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability (想像できんな);
+// the られ of a potential, the ら of a godan verb in る or the れ ending an ichidan stem before
+// contraction.n-nai (信じらんない 信じられない, 分かんない 分からない, してくんない してくれない), with
+// contraction.n-nee written as ない (変わんねえ 変わらない); the negative ない after an ichidan or
+// potential stem before contraction.n-negative, not contraction.n-negative-not (負けんぞ 負けないぞ,
+// 許せんから 許せないから); and the る said っ before contraction.tsu-ru (やっから やるから). The stem
+// has kanji, or is one kana after a member of contraction.n-kana-stem-after or the す of する after
+// a noun; a stem of more kana is read only as a て form before らん (やってらんねえ). Not after a
+// dictionary form (書くんなら, the の), a godan negative stem (知らんな, already the negative), nor
+// in or at the end of a word of the dictionary (こんな, 天下).
+std::string RewriteContractedN(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The おる after a て form contracted with its て or で (聞いとる 聞いておる, 読んどった 読んでおった,
+// 苦労しとる 苦労しておる) written in full: a と or ど before a member of contraction.te-oru
+// where the text before it with て or で is the て form of a verb of the dictionary, する or 来る, the
+// stem has kanji and is no noun of the dictionary (天下), and no word of the dictionary spans the と
+// (見とれる).
+std::string RewriteContractedOru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The past and the て form of a godan verb in う said with う for っ (言うた 言った, 思うて 思って,
 // 問うて), when the dictionary has the kanji stem as such a verb and no word that spans the
 // form (名うて): before a member of contraction.u-onbin and not one of contraction.u-onbin-not
@@ -241,6 +269,23 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
 // lone kana, a sound, the casual negative ね (知らねー), the casual たい (やりてー) or な
 // after る or て. Returns text itself when nothing changes.
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Whether the run of ー, ～ or small vowels at [i, j) of rs draws out a kana of a word (SND-1), the
+// one decision of the sound stage and RewriteEmphasis. The run follows a hiragana other than っ, a
+// small vowel or ね (the casual negative and the particle keep their mark: 知らねー, だよねー) and
+// comes before a hiragana other than a small kana. A word starts in the run of kana and kanji
+// before the mark: at its start, after a kanji, or after keys of two or more characters or with a
+// kanji and the kana of particles. With the run dropped, a key other than a name, kana spellings
+// included, reads from there two or more characters past the mark (three after a small vowel) and
+// as far as the key right after it (かーしこまりました, べーつに; not へーそうなんだ); or, where no
+// sound holds the run and its last syllable い, う or ん ends the phrase, a key or a verb or
+// adjective stem with its ending rows reads up to that syllable (寒くなーい？, せんぱーい！). It
+// reads further than any key, also in katakana, or sound (soundEnd, 0 for none) that holds the run
+// as written (すごーく, つーか). Not a run after vowel kana alone, an interjection
+// (あーそう, えーまさか, おお～), nor a drawn honorific (くーん, ちゃーん) or a nickname before one
+// (うーちゃん).
+bool DrawnInWord(std::u32string_view rs, size_t i, size_t j, size_t soundEnd, const LineContext& ctx,
+                 const dict::Snapshot& snap);
 
 // korean with the elongation units of a sound match: 'r' for each repeat of the
 // syllable the key ends with, which writes the last syllable again (아하하 아하하하) and

@@ -1,0 +1,11 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+sound:kamoshin	「ホントの名前はわからないかもしんないね」	「진짜이름은 모를지도 모르네」	fix	sound
+sound:kamoshin	お花見、どうすんの？……あ、それ行きたいかもしんない。	꽃놀이, 어떻게 하는 거야? ……아, 그것 가고 싶을지도 모른다.	fix	sound
+sound:kamoshin	夜…朝かもしんない…	밤…아침일지도 몰라…	fix	sound
+sound:kamoshin	……そうかもしんねえな。	……그럴지도 모르네.	fix	sound
+sound:kamoshin	違った色に育つかもしんねーって話なのよさ	다른 색으로 자랄지도 모른다는 이야기야	fix	sound
+sound:kamoshin	雨かもしんなかった	비일지도 몰랐다	fix	sound
+sound:kamoshin	してくんない	해 주지 않는다	keep	sound
+sound:kamoshin	分かんない	모른다	keep	sound
+sound:kamoshin	それ知んない	그것 모른다	keep	sound

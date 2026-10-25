@@ -1,0 +1,30 @@
+# 규칙: LEX-52
+rule	input	expected	kind	layer
+cx:tasukaru:10	近代化改修、助かるわ。もっと働ける！	근대화 개수, 도움이 돼. 좀 더 일할 수 있어!	fix	rewrites
+cx:tasukaru:10	強化、助かる。	강화, 도움이 된다.	fix	rewrites
+cx:tasukaru:10	いいじゃない！ 助かるわ	좋잖아! 도움이 돼	fix	rewrites
+cx:tasukaru:10	ありがとうございます、助かります。	감사합니다, 도움이 됩니다.	fix	rewrites
+cx:tasukaru:10	補給助かります、感謝致します	보급 도움이 됩니다, 감사 합니다	fix	rewrites
+cx:tasukaru:10	よっしゃ、助かるわぁ～。	앗싸, 도움이 돼~.	fix	rewrites
+cx:tasukaru:10	悪くないな。うん、助かる。	나쁘지 않네. 응, 도움이 된다.	fix	rewrites
+cx:tasukaru:10	色々この艦隊のことも教えてもらっている。助かってる。	여러 가지 이 함대도 가르쳐 주고 있다. 도움이 되고 있다.	fix	rewrites
+cx:tasukaru:10	涼は、意外とこの手の仕事も速い。助かるな。	양은, 의외로 이런 종류의 일도 빠르다. 도움이 되는구나.	fix	rewrites
+cx:tasukaru:10	住吉さんは我々の意図を的確に汲んでくれるので、助かります	has:도움이 됩니다	fix	rewrites
+cx:tasukaru:10	直す奴？ いれば助かるよな。	고치는 놈? 있으면 도움이 되지.	fix	rewrites
+cx:tasukaru:10	命が助かる。	!rule:cx:tasukaru:10	keep	rewrites
+cx:tasukaru:10	到底助からない傷ならば、二人で守ることを決めた。	!rule:cx:tasukaru:10	keep	rewrites
+cx:tasukaru:10	逃げれば助かる。	!rule:cx:tasukaru:10	keep	rewrites
+cx:tasukaru:20	たっぷりと蓄えた脂肪のおかげで助かった……。	듬뿍 비축한 지방 덕분에 살았다…….	fix	rewrites
+cx:tasukaru:20	ミドリさんのお陰で助かったってしっかり感謝して、	미도리 씨 덕분에 살았다고 확실히 감사해,	fix	rewrites
+cx:tasukaru:20	今回も助かった	이번에도 살았다	fix	rewrites
+cx:tasukaru:20	ふ～、助かったぁ～。司令官酷いよぉ	후~, 살았어~. 사령관 심해	fix	rewrites
+cx:tasukaru:20	明石さんが近くにいてくれて、助かりました。	아카시 씨가 근처에 있어 주어서, 살았습니다.	fix	rewrites
+cx:tasukaru:20	しかし、彼らが平和主義で助かりました。	하지만, 그들이 평화주의로 살아났습니다.	fix	rewrites
+cx:tasukaru:20	命が助かった。	!rule:cx:tasukaru:20	keep	rewrites
+cx:tasukaru:20	少しでも人々が助かったのなら、それは意味がある。	!rule:cx:tasukaru:20	keep	rewrites
+cx:tasukaru:20	刺された透子が助かり病室で目を覚ました。	!rule:cx:tasukaru:20	keep	rewrites
+cx:tasukaru:20	手伝ってくれて助かった。	!rule:cx:tasukaru:20	keep	rewrites
+cx:tasukaru:20	俺の後輩がモグラ族で助かったぜ。	!rule:cx:tasukaru:20	keep	rewrites
+cx:tasukaru:10	「映画の主役だったら助かるかもしれないけど」	!rule:cx:tasukaru:10	keep	rewrites
+cx:tasukaru:10	ミドリさんを頼りに来る依頼人がまた助かるかも！	!rule:cx:tasukaru:10	keep	rewrites
+cx:tasukaru:10	自分も助かりたい。	!rule:cx:tasukaru:10	keep	rewrites

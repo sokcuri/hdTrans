@@ -53,7 +53,7 @@ sound:short-answer	「だよな」	「그렇지」	fix	sound
 sound:short-answer	今日は……ですね、雨です	오늘은……이군요, 비입니다	keep	sound
 builtin-phrase:short-answer	「俺もだ」	「나도 그래」	fix	builtin-phrase
 sound:short-answer	「ううううぅぅぅんっ……！」	「으으으으으으응……!」	keep	sound
-sound:short-answer	「さぁどっちだ！うぅん？！」	「어느 쪽이다! 으응?!」	keep	sound
+sound:short-answer	「さぁどっちだ！うぅん？！」	「어느 쪽이야! 으응?!」	keep	sound
 sound:short-answer	「あの……」	「저기……」	fix	sound
 sound:short-answer	「あの人は誰？」	「그 사람은 누구?」	keep	sound
 sound:short-answer	「さあ？」	「글쎄?」	fix	sound

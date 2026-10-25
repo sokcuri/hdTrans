@@ -1,6 +1,6 @@
 # 규칙: SPC-5
 rule	input	expected	kind	layer
-cx:ne-promise:10	「違うね」	「다르네」	fix	rewrites
+cx:ne-promise:10	「違うね」	「아니네」	fix	rewrites
 cx:ne-promise:10	「静かだね」	!rule:cx:ne-promise:10	keep	rewrites
 cx:ne-promise:20	「感じるね」	「느끼네」	fix	rewrites
 cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites
@@ -229,7 +229,7 @@ cx:ne-polite:10	「ちょっと休みますね」	「조금 쉴게요」	fix	rew
 cx:ne-polite:10	「お茶、淹れますね」	「차, 끓일게요」	fix	rewrites
 cx:ne-polite:10	夕食の準備をしますね。	저녁식사 준비를 할게요.	fix	rewrites
 cx:ne-polite:10	提督、ちょっと席を外しますね。	제독, 조금 자리를 비울게요.	fix	rewrites
-cx:ne-polite:10	牛乳をお持ちしますね。	우유를 가져올게요.	fix	rewrites
+cx:ne-polite:10	牛乳をお持ちしますね。	우유를 가져다 드릴게요.	fix	rewrites
 cx:ne-polite:10	お部屋に戻りますね。	방으로 돌아갈게요.	fix	rewrites
 cx:ne-polite:10	お水、ここに置きますね。	물, 여기에 둘게요.	fix	rewrites
 cx:ne-polite:10	お弁当作りますね。	도시락 만들게요.	fix	rewrites
@@ -249,7 +249,7 @@ cx:ne-polite:20	秋は、落ち着きますね。	!rule:cx:ne-polite:10	fix	rewr
 cx:ne-promise:20	ほっとしますね。	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「ありがたいことに、そう言われますね」	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「無茶苦茶言いますね」	!rule:cx:ne-polite:10	fix	rewrites
-cx:ne-promise:22	「まぁ、田中さん。お野菜もしっかり食べますね」	「뭐, 타나카 씨. 야채도 확실히 먹네요」	fix	rewrites
+cx:ne-promise:22	「まぁ、田中さん。お野菜もしっかり食べますね」	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:22	「佐藤さん、今日はたくさん食べますね」	「사토 씨, 오늘은 많이 먹네요」	fix	rewrites
 cx:ne-promise:20	提督、日が、落ちますね。夜…か…	!rule:cx:ne-polite:10	fix	rewrites
 cx:ne-promise:20	「こうも外すと自信を失いますね」	!rule:cx:ne-polite:10	fix	rewrites

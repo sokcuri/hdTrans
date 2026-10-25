@@ -1,0 +1,20 @@
+# 규칙: GRM-20
+rule	input	expected	kind	layer
+ending:noda-na	「お前の心は成長を止めてしまっていたのだな。」	「네 마음은 성장을 멈추어버리고 있었구나.」	fix	builtin-ending
+ending:noda-na	また…夏が来るのだな…	또…여름이 오는구나…	fix	builtin-ending
+ending:noda-na	隊長よ、貴様も苦労しているのだな。	대장이야, 네놈도 고생하고 있구나.	fix	builtin-ending
+ending:noda-na	これを佐藤にぶつけるのだな。	has:부딪치는구나.	fix	builtin-ending
+ending:noda-na	「わたしは死んだのだな……」	「나는 죽었구나……」	fix	builtin-ending
+ending:noda-na	この艦隊もクリスマスは祝うのだな。	이 함대도 크리스마스는 축하하는구나.	fix	builtin-ending
+ending:noda-na	こっちに逃げたんだな？	여기에 도망쳤구나?	keep	builtin-ending
+ending:noda-na	夏が来るのだ。	여름이 온다.	keep	builtin-ending
+dict:gram:noda-aru:1	自らの身を守ることが必要だったのである。	스스로의 몸을 지키는 것이 필요했던 것이다.	fix	local
+dict:gram:noda-aru:1	静かだったのである。	조용했던 것이다.	fix	local
+dict:gram:noda-aru:1	必要だったので買った	필요했기 때문에 샀다	keep	local
+dict:gram:noda-aru:1	暇だったので、ある日	한가했기 때문에, 어느 날	keep	local
+dict:gram:dearou-noun:1	彼を魅了したはずであろうその料理	!rule:dict:gram:dearou-noun:1	keep	local
+dict:gram:dearou-noun:1	疑いようがない事実であろう。	의심할 수가 없는 사실일 것이다.	keep	local
+dict:gram:dearou-noun:2	必要であろう道具	필요할 도구	fix	local
+dict:gram:dearou-noun:2	必要であろう。	필요할 것이다.	keep	local
+dict:gram:dearou-noun:1	待ちくたびれたのであろう王子が来た	!rule:dict:gram:dearou-noun:1	keep	local
+dict:gram:dearou-noun:1	彼であろう人物	그일 인물	fix	local

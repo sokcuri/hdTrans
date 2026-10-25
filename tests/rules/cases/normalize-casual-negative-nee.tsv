@@ -8,8 +8,8 @@ normalize:casual-negative-nee	君ならねぇ、できるよ。	너라면, 할 �
 normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
 normalize:casual-negative-nee	何やらねぇ、変な音がする	무엇인가, 이상한 소리가 난다	keep	normalize
 normalize:casual-negative-nee	これじゃよくならねぇ。	이래서야 좋게 안된다.	fix	normalize
-normalize:casual-negative-nee	しなきゃならねぇ、	하지 않으면 안된다,	fix	normalize
-normalize:casual-negative-nee	やらなきゃならねぇ…	해야 한다…	fix	normalize
+normalize:casual-negative-nee	しなきゃならねぇ、	해야 한다,	fix	normalize
+normalize:casual-negative-nee	やらなきゃならねぇ…	해야 해…	fix	normalize
 normalize:casual-negative-nee	話にならねぇ、帰れ	이야기가 되지 않는다, 돌아가라	fix	normalize
 normalize:casual-negative-nee	よくならねぇ、全然	좋게 안되는, 전혀	fix	normalize
 normalize:casual-negative-nee	行くならねぇ、俺も行く	간다면, 나도 간다	keep	normalize
@@ -22,7 +22,7 @@ normalize:casual-negative-nee	山田さんにならねぇ、話せる	야마다 
 normalize:casual-negative-nee	お前らにならねぇ、話せる	너희들에게라면, 이야기할 수 있다	keep	normalize
 normalize:casual-negative-nee	僕たちにならねぇ、話せる	우리에게라면, 이야기할 수 있다	keep	normalize
 normalize:casual-negative-nee	ここにならねぇ、住める	여기에라면, 살 수 있다	keep	normalize
-normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않는다…	fix	normalize
+normalize:casual-negative-nee	話にならねぇ…	이야기가 되지 않아…	fix	normalize
 normalize:casual-negative-nee	気にならねぇ、そんなの	신경 쓰이지 않는, 그런 것	fix	normalize
 normalize:casual-negative-nee	「見てねーわ」	「보지 않아」	fix	normalize
 normalize:casual-negative-nee	誰も気にしてねーよ	아무도 신경 쓰지 않아	fix	normalize
@@ -31,3 +31,18 @@ normalize:casual-negative-nee	そうとしか思えねえだろ	그렇다고밖�
 normalize:casual-negative-nee	何かこえーしトイレいけねーよ	왠지 무섭고 화장실 안돼	fix	normalize
 normalize:casual-negative-nee	「見てねー！」	「봐―！」	keep	normalize
 normalize:casual-negative-nee	もうすぐ夜明けねー。	이제 곧 새벽이네―.	keep	normalize
+normalize:casual-negative-nee	男のツンデレなんて需要ねーよwww	남자의 츤데레 같은 건 수요 없어 ㅋㅋㅋ	fix	normalize
+normalize:casual-negative-nee	そんなことあるわけねーだろ	그런 일이 있을 리가 없잖아	fix	normalize
+normalize:casual-negative-nee	乗っかるしかねーだろ	올라탈 수밖에 없지	fix	normalize
+normalize:casual-negative-nee	犯人探しなんてしたくもねーわ	범인 찾아는 하고 싶은 것도 아니야	fix	normalize
+normalize:casual-negative-nee	お前は関係ねーじゃん	너는 관계없잖아	fix	normalize
+normalize:casual-negative-nee	全然、心配ねぇよ	전혀, 걱정없어	fix	normalize
+normalize:casual-negative-nee	魚雷ねえけど	어뢰 없는데	fix	normalize
+normalize:casual-negative-nee	これは、ここしかねーし！	이것은, 여기밖에 없고!	fix	normalize
+normalize:casual-negative-nee	こうなったら飲むしかねえ。	이렇게 되면 마실 수밖에 없다.	fix	normalize
+normalize:casual-negative-nee	負ける訳ねえよ	질 리가 없어	fix	normalize
+normalize:casual-negative-nee	今日も綺麗ねー。	오늘도 예쁘네~.	keep	normalize
+normalize:casual-negative-nee	季節は秋ねー。	계절은 가을이네―.	keep	normalize
+normalize:casual-negative-nee	ねぇ、長波ねぇ！	저기, 장파네!	keep	normalize
+normalize:casual-negative-nee	仕方ねぇな	어쩔 수 없네	keep	normalize
+normalize:casual-negative-nee	でもねー、それは	그런데―, 그것은	keep	normalize

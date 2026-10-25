@@ -237,8 +237,8 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
 // Keys holding a run are looked for from up to this many runes before it (a long name).
 constexpr int kRunLookBackRunes = 32;
 
-// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns): a key that starts at
-// or up to kRunLookBackRunes letters before it and goes on past it.
+// Whether a dictionary word holds line[at, end) (pipeline::CollapseTsuRuns, pipeline::RespellOldForms):
+// a key that starts at or up to kRunLookBackRunes letters before it and reaches its end.
 bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t end) {
     const auto& d = *static_cast<const RespellLookup*>(context);
     size_t start = at;
@@ -252,6 +252,28 @@ bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t 
         start -= last.size;
     }
     return false;
+}
+
+// The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
+// past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
+// to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
+size_t StressedWordStart(const void* context, std::string_view line, size_t at) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const size_t past = at + text::DecodeRune(line.substr(at)).size;
+    size_t found = std::string::npos;
+    size_t start = at;
+    for (int back = 0; back < kRunLookBackRunes && start > 0; back++) {
+        const text::Rune last = pipeline::internal::LastRune(line.substr(0, start));
+        if (!pipeline::internal::IsJapaneseRune(last.cp)) break;
+        start -= last.size;
+        bool holds = false;
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) holds = holds || (!Grammar(c) && start + c.source.size() > past);
+        std::string dropped(line.substr(start, at - start));
+        dropped += line.substr(past, kLookAheadBytes);
+        for (const dict::Candidate& c : Find(d, dropped).list) holds = holds || (!Grammar(c) && start + c.source.size() > at);
+        if (holds) found = start;
+    }
+    return found;
 }
 
 auto FallbackOf(const dict::Snapshot& snap) {
@@ -381,6 +403,7 @@ std::vector<bool> ClosedCarries(std::span<const std::string> lines, QuoteCarry c
 // and the styles of its quotes.
 struct LineSpeech {
     bool casual = false;
+    bool narrated = false;
     bool markedOnly = false;
     bool asked = false;
     output::QuoteState quotes;
@@ -416,9 +439,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     s.texts.clear();
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
     // A word of the dictionary that starts in the text before a space and goes on past it.
-    const tokenizer::SpaceJoins joins = [&](std::string_view before, std::string_view after) {
-        for (std::size_t start = 0; start < before.size();) {
-            const std::string_view left = before.substr(start);
+    const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after) {
+        for (std::size_t start = 0; start < head.size();) {
+            const std::string_view left = head.substr(start);
             // The candidates point into the query, so it lives as long as they do.
             const std::string query = std::string(left) + std::string(after);
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
@@ -443,6 +466,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     composeSettings.casual = text && speech.casual;
     composeSettings.casualMarkedOnly = speech.markedOnly;
     composeSettings.asked = text && speech.asked;
+    composeSettings.narrated = speech.narrated;
     composeSettings.literal = text && !options.reference && options.wordImprovements.literalCleanup;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
@@ -496,11 +520,13 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
 
     const RespellLookup respell{snap, ctx.lookup};
     std::string normalized =
-        pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx, WordHoldsRun, &respell), ReadBase, &snap);
+        pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
+                                ReadBase, &snap);
     if (!options.reference) {
         normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
         normalized = pipeline::RespellKatakanaEndings(normalized);
         normalized = pipeline::RespellKanjiCries(normalized);
+        normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
     const std::string sounded = pipeline::Sound(normalized, ctx, snap);
@@ -516,10 +542,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     std::vector<bool> casual;
     if (!options.reference) {
         speech.asked = true;
+        speech.narrated = ctx.narrated;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
-        casual = pipeline::CasualQuotes(pipeline::internal::CollapseTsuRuns(facts.text, WordHoldsRun, &respell),
+        casual = pipeline::CasualQuotes(pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell}),
                                         carry.depth);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
@@ -556,7 +583,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // polite speech whose Korean ends a sentence politely (그렇습니다, 봐 주세요; not 일어나 of
     // なさい, not a 済ませた or ますます) and whose Japanese has no casual mark (よ, ね).
     if (!options.reference && facts.text.find("でしょ") != std::string_view::npos &&
-        std::ranges::any_of(speech.styles, [](std::uint8_t s) { return (s & output::kPoliteStyle) != 0; })) {
+        std::ranges::any_of(speech.styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; })) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
         const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);
@@ -658,13 +685,15 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     return out;
 }
 
-// The columns of s, each with the column separator after it ("" after the last), as
-// pipeline::Segment cuts a line of the text path.
+// The columns of s, each with the column separator or escape after it ("" after the last),
+// as pipeline::Segment cuts a line of the text path.
 std::vector<std::pair<std::string_view, std::string_view>> Columns(std::string_view s) {
     std::vector<std::pair<std::string_view, std::string_view>> out;
     std::size_t from = 0;
     for (std::size_t i = 0; i < s.size();) {
-        if (const std::size_t end = pipeline::internal::ColumnGap(s, i, false, false); end != i) {
+        std::size_t end = pipeline::internal::ColumnGap(s, i, false, false);
+        if (end == i) end = pipeline::internal::EscapeGap(s, i, false, false);
+        if (end != i) {
             out.emplace_back(s.substr(from, i - from), s.substr(i, end - i));
             from = i = end;
             continue;

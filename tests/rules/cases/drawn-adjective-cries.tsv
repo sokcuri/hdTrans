@@ -1,0 +1,89 @@
+# 규칙: SND-2, SPC-1
+rule	input	expected	kind	layer
+cx:drawn-cry:10	「この人、怖いぃぃっ！」	「이 사람, 무서워!」	fix	rewrites
+cx:drawn-cry:10	「あ、熱いぃっ……！」	「아, 뜨거워……!」	fix	rewrites
+cx:drawn-cry:10	「ああ、すごいいいっ……」	「아, 대단해……」	fix	rewrites
+cx:drawn-cry:10	「おいしいいいいい！」	「맛있어어어어어!」	fix	rewrites
+cx:drawn-cry:10	「ふぇぇ～、忙しいぃ！」	「후에에~, 바빠!」	fix	rewrites
+cx:drawn-cry:10	「すごいぃ……っ」	「대단해……」	fix	rewrites
+cx:drawn-cry:10	「恥ずかしいぃ……」	「부끄러워……」	fix	rewrites
+cx:drawn-cry:10	「ねむいぃ…」	「졸려…」	fix	rewrites
+cx:drawn-cry:10	味は美味しいぃ♪	맛은 맛있어♪	fix	rewrites
+cx:drawn-cry:10	もっと神様になってほしいいい！	좀 더 신이 되었으면 해!	fix	rewrites
+cx:drawn-cry:10	「痛いいいいっ！」	「아파아아앗!」	fix	rewrites
+cx:drawn-cry:10	「熱いいいっ！」	「뜨거워!」	fix	rewrites
+cx:drawn-cry:10	「うるさいいい!」	「시끄러워!」	fix	rewrites
+cx:drawn-cry:10	「冷たいいいっ！」	「차가워!」	fix	rewrites
+cx:drawn-cry:10	「いやだぁぁぁっ！」	「싫어어어엇!」	keep	rewrites
+cx:drawn-cry:10	「タロウさん無事だああああ！！」	「타로 씨 무사해애애애애!!」	keep	rewrites
+cx:drawn-cry:10	「無事だああああ！」	「무사해애애애애!」	keep	rewrites
+cx:drawn-cry:10	「痛ーい！」	「아파~!」	fix	rewrites
+cx:drawn-cry:10	「かゆいぃぃ」	「가려워」	fix	rewrites
+cx:drawn-cry:10	「くさいいいい！」	「냄새가 나아아아!」	fix	rewrites
+cx:drawn-cry:10	「つらいぃ……」	「괴로워……」	fix	rewrites
+cx:drawn-cry:10	痛いいいいっ！	아파아아앗!	fix	rewrites
+cx:drawn-cry:10	「痛い。」	「아프다.」	keep	rewrites
+cx:drawn-cry:10	「痛いっ！」	「아파!」	keep	rewrites
+cx:drawn-cry:10	「長ーい話だった」	「긴 이야기였다」	keep	rewrites
+cx:drawn-cry:10	「痛いぃ、やめて」	「아프다, 그만해」	keep	rewrites
+cx:drawn-cry:10	「最高だあああっ！」	「최고야아아앗!」	keep	rewrites
+cx:drawn-cry:10	「勝ったあああっ！」	「이겼어어어엇!」	keep	rewrites
+cx:drawn-cry:10	「怖いよおおお」	「무서워어어어」	keep	rewrites
+cx:drawn-cry:10	「すごおおおい！」	「대단해~!」	keep	rewrites
+cx:drawn-cry:10	「痛い痛いいいいっ！」	「아파 아파아아앗!」	keep	rewrites
+cx:drawn-cry:10	「見てみたいいいいい」	「보고 싶어어어어어」	fix	rewrites
+cx:copies:36	「痛いぃ、痛いぃ」	「아파, 아파」	fix	rewrites
+cx:copies:36	「熱いぃ、熱いぃ！」	「뜨거워, 뜨거워!」	fix	rewrites
+cx:copies:36	「痛いぃ、痛いぃ、痛いぃ」	「아파, 아파, 아파」	fix	rewrites
+cx:clipped-copies:10	「怖いいいっ、怖いいいっ！」	「무서웟, 무서웟!」	fix	rewrites
+cx:copies:36	「痛いいいい、痛いいいい」	「아파아아아, 아파아아아」	fix	rewrites
+cx:drawn-cry:10	「痛いぃ……でも我慢する」	「아파……하지만 참는다」	fix	rewrites
+cx:drawn-cry:10	「怖いぃ……でも行く」	「무서워……하지만 간다」	fix	rewrites
+cx:drawn-cry:10	「暑いー！」	「더워~!」	fix	rewrites
+cx:drawn-cry:10	「痛い～」	「아파~」	fix	rewrites
+cx:drawn-cry:10	寒い～。	추워~.	fix	rewrites
+cx:drawn-cry:10	ずるいー、早く	치사하다~, 빨리	keep	rewrites
+cx:drawn-cry:10	「痛い～ね」	「아프네~」	keep	rewrites
+cx:drawn-cry:10	「長～い話」	「긴 이야기」	keep	rewrites
+cx:drawn-cry:10	「痛いいいい、やめて」	「아프다아아아, 그만해」	keep	rewrites
+cx:drawn-cry:10	「痛ーいっ！」	「아파~!」	fix	sound
+cx:drawn-cry:10	「いたーいっ！」	「아파~!」	fix	sound
+cx:drawn-cry:10	「ずるーいっ！」	「치사해~!」	fix	sound
+cx:drawn-cry:10	「ひどーいっ！」	「심해~!」	fix	sound
+cx:drawn-cry:10	「おそーいっ！」	「늦어~!」	fix	sound
+cx:drawn-cry:10	「さむーいっ！」	「추워~!」	fix	sound
+cx:drawn-cry:10	「こわーいっ！」	「무서워~!」	fix	sound
+cx:drawn-cry:10	「かわいーいっ！」	「귀여워~!」	fix	sound
+cx:drawn-cry:10	「うるさーいっ！」	「시끄러워~!」	fix	sound
+cx:drawn-cry:10	「長ーいっ！」	「길어~!」	fix	sound
+cx:drawn-cry:10	「はやーいっ！」	「빨라~!」	fix	sound
+cx:drawn-cry:10	「おいしーいっ！」	「맛있어~!」	fix	sound
+cx:drawn-cry:10	うるさ～いっ！	시끄러워~!	fix	sound
+cx:drawn-cry:10	あま～いっ！	달아~!	fix	sound
+cx:drawn-cry:10	「痛ーいっ……」	「아파~……」	fix	sound
+cx:drawn-cry:10	「痛ーいっ、やめて」	「아프다~, 그만해」	fix	sound
+cx:drawn-cry:10	「深～い、訳」	lacks:~	keep	sound
+cx:drawn-cry:10	「うまーい、うまいよ」	「맛있어, 맛있어」	keep	sound
+cx:drawn-cry:10	「つっよーい、これぞ」	「강하다, 이거야」	keep	sound
+cx:drawn-cry:10	「はーいっ！」	「네엣!」	keep	sound
+cx:drawn-cry:10	「せんぱーいっ！」	「선배!」	keep	sound
+cx:drawn-cry:10	「かんぱーいっ！！」	「건배!!」	keep	sound
+cx:drawn-cry:10	「痛いぃ……いや」	「아파……아니」	fix	local
+cx:drawn-cry:10	「ねむいぃ…はにゃはにゃぁ…」	「졸려…하냐 하냐~…」	fix	local
+cx:drawn-cry:10	「口ほどにも無いぃ…Zzz」	has:없어…Zzz	fix	local
+cx:drawn-cry:10	「痛い……いや」	!rule:cx:drawn-cry:10	keep	local
+cx:drawn-cry:10	「怖い……夢」	「무서운……꿈」	keep	local
+cx:drawn-cry:10	「痛いぃ……でも、まだ！」	「아파……하지만, 아직!」	fix	local
+cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹는다」	fix	local
+cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 잔다」	fix	local
+cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~~~~~~~~!!)	keep	rewrites
+cx:drawn-cry:10	（痛いー）	(아프다~)	keep	rewrites
+cx:drawn-cry:10	逃・が・さ・な・いー！	has:다―!	keep	rewrites
+cx:drawn-cry:10	う・れ・し・いー！	has:뻐~!	keep	rewrites
+cx:copies:36	「痛いー、痛いー」	「아파~, 아파~」	fix	sound
+cx:copies:36	「怖いーっ、怖いーっ」	「무서워~, 무서워~」	fix	sound
+cx:copies:36	「痛い～、痛い～」	「아파~, 아파~」	fix	sound
+cx:copies:36	「痛いー、痛いー、痛いー」	「아파~, 아파~, 아파~」	fix	sound
+cx:drawn-cry:10	「暑い～っ！」	「더워~!」	fix	sound
+cx:drawn-cry:10	「痛い～～～！」	「아파~~~!」	fix	sound
+cx:drawn-cry:10	「痛いー、やめて」	「아프다~, 그만해」	keep	sound

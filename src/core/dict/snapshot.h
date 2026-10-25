@@ -104,13 +104,16 @@ enum class LoadErrorKind : uint8_t {
     Plain,       // a line of a plain dictionary or sense table that does not compile
     Header,      // a "#!" first line that is not a header or a layer the file cannot have
     MissingRuleBodies,  // rows name local rules and no row carries a body (an older dictionary)
+    NegationEnding,     // a line loaded whose 지 않 negation fits no class of its key (NegationEndingError)
+    VerbNoun,    // a line loaded whose noun target is a 하다 verb made a noun (VerbNounError)
 };
 
 // Whether an error of kind fails the load of its file; the other kinds list lines of a
 // load that takes place.
 constexpr bool FailsLoad(LoadErrorKind kind) {
     return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass &&
-           kind != LoadErrorKind::MissingRuleBodies;
+           kind != LoadErrorKind::MissingRuleBodies && kind != LoadErrorKind::NegationEnding &&
+           kind != LoadErrorKind::VerbNoun;
 }
 
 struct LoadError {
@@ -143,6 +146,10 @@ struct LookupContext {
     // Respelled place keys that the text shows to be persons: their senses of the
     // person spelling's sound take it.
     const KeySet* persons = nullptr;
+    // Name-layer keys a cue in the line or its document shows to be persons' names
+    // (names::NameCues): the constraint rules read them as the name, and the person senses
+    // of a hiragana key take part where no dictionary word has the key.
+    const KeySet* cued = nullptr;
     SkipFunc skip;
 };
 
@@ -279,6 +286,14 @@ public:
     // Whether a cue in the text may confirm key as a person's name and the name layer
     // has a person sense of it.
     bool PersonCueKey(std::string_view key) const;
+    // The byte lengths of the name-layer keys that start text and have a person sense, shortest
+    // first: one that sounds like the kana of a kana key, or one spelled as a Japanese reading
+    // (text::JapaneseSpelling: one name, no space) of another key.
+    std::vector<std::size_t> PersonKeysAt(std::string_view text) const;
+    // The byte length of the longest base or user dictionary key that starts text, 0 for none.
+    std::size_t WordAt(std::string_view text) const;
+    // Whether key is a key of the base or user dictionary.
+    bool DictionaryWord(std::string_view key) const { return BaseWord(key); }
 
     // Bytes held by the snapshot, the texts of the plain files included.
     std::size_t MemoryBytes() const;

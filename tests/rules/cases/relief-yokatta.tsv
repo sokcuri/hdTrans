@@ -1,0 +1,40 @@
+# 규칙: LEX-39
+rule	input	expected	kind	layer
+dict:jisjk:266571	無事でよかった	무사해서 다행이다	fix	local
+dict:jisjk:266571	みんな無事でよかった！	모두 무사해서 다행이야!	fix	local
+dict:jisjk:266571	とにかく無事でよかった！！	어쨌든 무사해서 다행이야!!	fix	local
+dict:relief-yokatta:1	そうですか、良かった	그렇습니까, 다행이다	fix	local
+dict:relief-yokatta:1	「良かった～、生きてたぁ～」	has:「다행이다~	fix	local
+dict:relief-yokatta:1	……あの部屋は無事？ 良かった。	has:무사? 다행이다.	fix	local
+dict:jisjk:266571	艦隊が、無事港につきました。よかったです。	has:다행입니다.	fix	local
+dict:jisjk:266571	艦隊が無事に戻りました。本当によかったです！	has:정말 다행입니다!	fix	local
+dict:relief-yokatta:1	チョコシュトーレン、好評で良かったです。	has:호평이라서 다행입니다.	fix	local
+dict:relief-yokatta:1	あなたが明るい良い人で良かったｗ	has:사람이라서 다행이다	fix	local
+dict:relief-yokatta:1	本当に良かった	정말 다행이다	fix	local
+dict:jisjk:266571	「ハァ、ハァ……知り合いに会えてよかった……」	has:만날 수 있어서 좋았다	current	defaults
+dict:jisjk:266571	（やっぱりこいつ、かわいいな。結婚してよかった）	lacks:다행	keep	defaults
+pattern:書いて良かった	ミドリさん重症化する前ギリ間に合って良かった・・・	has:늦지 않아서 다행이다	fix	builtin-pattern
+dict:relief-yokatta:1	味が良かった	맛이 좋았다	keep	defaults
+dict:jisjk:266571	景色はよかった	경치는 좋았다	keep	defaults
+dict:jisjk:266571	あの頃は、よかった	has:좋았다	keep	defaults
+dict:jisjk:266571	行けばよかった	has:좋았을 텐데	keep	local-ending
+dict:jisjk:266571	早く言ってくれたらよかったのに	has:좋았을텐데	keep	local-ending
+dict:relief-yokatta:1	良かったら食べて	괜찮다면 먹어	keep	local
+dict:jisjk:266571	お味噌汁はお麩でよかったかしら？	lacks:다행	keep	defaults
+dict:relief-yokatta:1	こんな形で良かったかしら？	lacks:다행	keep	defaults
+dict:relief-yokatta:1	良かった？	좋았어?	keep	defaults
+dict:jisjk:266571	頭がよかった	머리가 좋았다	keep	defaults
+dict:jisjk:266571	「よかった。ちょっと高かったけど、買ってよかった」	lacks:사서 다행	keep	defaults
+dict:relief-yokatta:1	It's 4 o'clock now. 良かったでしょ、earl gray?	lacks:다행	keep	defaults
+dict:jisjk:266571	「ほんとか！　よかったじゃないか！」	has:좋았잖아	keep	defaults
+dict:relief-yokatta:1	「リシュランガイドのこと、あれで良かったのかな？」	lacks:다행	keep	defaults
+dict:jisjk:266571	　これで、よかったんだ。	lacks:다행	keep	defaults
+dict:relief-yokatta:1	「人間を捨てなくても、良かったんですよ」	lacks:다행	keep	defaults
+dict:jisjk:266571	「みいちゃん……すごく、よかったよ」	lacks:다행	keep	defaults
+dict:relief-yokatta:1	「良かったな、得意分野じゃないか」	lacks:다행	keep	defaults
+dict:relief-yokatta:1	今年の提督も、良かったよ！	lacks:다행	keep	defaults
+dict:relief-yokatta:1	うんうん。良かったかも！	lacks:다행	keep	defaults
+dict:relief-yokatta:1	「良かった……もっと動くね」	「다행이야……좀 더 움직일게」	current	local
+dict:jisjk:266571	「テレジアちゃんの大切な人たちを守れてよかったよ」	has:지킬 수 있어서 좋았어	current	defaults
+dict:jisjk:266571	イクの大好きな時間、一緒に過ごせてよかったの！	lacks:다행	keep	defaults
+dict:jisjk:266571	瑞穂も、ご一緒できて…よかったです。	lacks:다행	keep	defaults

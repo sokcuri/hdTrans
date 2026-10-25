@@ -1,0 +1,7 @@
+#! layer=words
+# 계사, な, か 앞에서 형용동사로 쓰이는 부사와 명사(word.copula-predicate)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ばっちり	완벽%A1@	G8U0			GN						ばっちり	copula-predicates:1
+バッチリ	완벽%A1@	G8U0			GN						ばっちり	copula-predicates:2
+しっかり	확실%A1@	G8U0			GN						しっかり	copula-predicates:3
+アリ	괜%C4@	G8U0			GN						あり	copula-predicates:4

@@ -52,7 +52,8 @@ const dict::LoadResult& SoundDictionary() {
         "べつに\t딱히\tE300\t34\n"
         "ざんねん\t유감\tN110\t35\n"
         "へそ\t배꼽\tN110\t36\n"
-        "そう\t그렇게\tE300\t37\n",
+        "そう\t그렇게\tE300\t37\n"
+        "なんでも\t뭐든\tE300\t38\n",
     }});
     return result;
 }
@@ -270,7 +271,7 @@ HD_TEST(pipeline_sound) {
         {"うるさああい！", "うるさい\uE00A！"},
         {"すごおい！", "すごおい！"},
         // A ー after the い that ends an adjective before a pause is written ～.
-        {"すごいー！", "すごい～！"},
+        {"すごいー！", "すごい\uE00A！"},
         // Unchanged: the casual negative ね, a lone kana, a sound.
         {"知らねー", "知らねー"},
         {"よー！", "よー！"},
@@ -353,6 +354,18 @@ HD_TEST(pipeline_sound) {
         {"「おいこら！」", "「야 이놈아！」"},
         {"ここにおいて", "ここにおいて"},
         {"ほら、見て！", "자、見て！"},
+        // A lead that asks ends in its own pause, also before kana (ね？はい), and after an
+        // ellipsis that opens the utterance; after words the ellipsis only pauses them.
+        {"ね？はい", "그렇지?はい"},
+        {"待って！…そう？", "待って！…그래？"},
+        {"したい…ね？", "したい…ね？"},
+        // いえ that opens an utterance before a word is the answer; 言え takes an ending.
+        {"いえなんでも", "아뇨, なんでも"},
+        {"いえない", "いえない"},
+        // かかれ that opens an utterance is the order to attack.
+        {"これより突入。かかれっ！", "これより突入。덤벼라！"},
+        {"準備、かかれ", "準備、かかれ"},
+        {"いぇい！", "예이！"},
         {"ちょっと高い", "ちょっと高い"},
         {"これでよし。", "これでよし。"},
         {"<b>きゃあ</b>ぎゅっと", "<b>꺄아</b>꽉"},
@@ -610,6 +623,14 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"やーめーてよ！", "やめてよ！"},
         {"見ぃつけたぁ！", "見つけたぁ！"},
         {"うるさ～い！", "うるさい\uE00A！"},
+        // An adjective lengthened before its い takes a shout's っ into the lengthening, not before a comma.
+        {"うるさ～いっ！", "うるさい\uE00A！"},
+        {"うるさ～い、それ", "うるさい、それ"},
+        // An adjective drawn out after its い with ー or ～ before a pause takes one lengthening mark,
+        // with a shout's っ; two or more ～ stay written before it.
+        {"うるさいー！", "うるさい\uE00A！"},
+        {"うるさい～っ！", "うるさい\uE00A！"},
+        {"うるさい～～～！", "うるさい～～～\uE00A！"},
         {"ちょーっと待って", "ちょっと待って"},
         {"どーだ！", "どうだ！"},
         {"いこー！", "いこう！"},
@@ -652,10 +673,14 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // A sound key that starts inside the stem before the mark does not hold it (ゴォ of
         // すご), one that starts a word does (おーい).
         {"すごぉぉい！", "すごい！"},
-        // The い and ぃ that draw out an adjective at the end of a phrase go; い alone stays.
-        {"うるさいぃ！", "うるさい！"},
-        {"すごいいいっ！", "すごいっ！"},
-        {"冷たいぃぃ", "冷たい"},
+        // The い and ぃ that draw out an adjective at the end of a phrase go, one or two of them
+        // with a shout's っ after them leaving the cry mark, three or more drawn marks; い alone
+        // stays. A ー or ～ after them lengthens the adjective instead.
+        {"うるさいぃ！", "うるさい\uE00E！"},
+        {"すごいいいっ！", "すごい\uE00F！"},  // the clipped cry mark
+        {"冷たいぃぃ", "冷たい\uE00E"},
+        {"すごいいいいっ！", "すごい\uE00B\uE00B\uE00B\uE00C！"},
+        {"冷たいぃ～", "冷たい\uE00A"},
         {"いいいい！", "いいいい！"},
         {"うるさいいね", "うるさいいね"},
         // Before a sentence particle and a pause the mark of an adjective's い goes after the
@@ -749,6 +774,38 @@ HD_TEST(pipeline_join_spelled_out) {
         {"っ・ば", "っ・ば"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpelledOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+HD_TEST(pipeline_join_spaced_out) {
+    const auto loaded = dict::Load({{
+        0, "base.tsv",
+        "key\tko\tpos\tid\n"
+        "おとな\t어른\tN110\t1\n"
+        "トイレ\t화장실\tN110\t2\n"
+        "それとも\t아니면\tE300\t3\n"
+        "し\t하\tM100\t4\n"
+        "しら\t모르\tM100\t5\n"
+        "さき\t앞\tN110\t6\n"
+        "あい\t사랑\tN110\t7\n"
+        "通知表\t성적표\tN110\t8\n",
+    }});
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"だよ、お　と　な　の", "だよ、おとなの"},
+        {"『ト　イ　レ』と", "『トイレ』と"},
+        {"「そ れ と も」", "「それとも」"},
+        {"し　て　ま　し　た", "してました"},
+        // Keys one after the other, a list in the order of the kana table, two pieces, a run of
+        // kanji and pieces next to other kana stay.
+        {"「し　ら　さ　き」", "「し　ら　さ　き」"},
+        {"あ　い　う", "あ　い　う"},
+        {"お　と", "お　と"},
+        {"通 知 表", "通 知 表"},
+        {"おと な の", "おと な の"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpacedOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
 HD_TEST(pipeline_rewrite_casual_adjectives) {
@@ -1056,6 +1113,87 @@ HD_TEST(pipeline_contracted_no) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedNo(c.in, *loaded.snapshot), std::string(c.want));
 }
 
+// A ん or っ said for a kana of a verb form takes it back: る before the な of a prohibition, ら, れ
+// or られ before ない (and ねえ, written ない), the negative ない after an ichidan or potential stem
+// before ぞ, から or か, る before から, the れ of しれない after かも; not after a verb of ability, a
+// godan negative stem or a dictionary form, in a word, nor after a lone kana elsewhere or kana alone.
+HD_TEST(pipeline_contracted_n) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tgram\tid\n"
+                                     "見\t&AY@\tM437\t\t1\n"
+                                     "帰\t돌아&A1@\tM428\t\t2\n"
+                                     "許\t용서&AV@\tM433\t\t3\n"
+                                     "くれ\t&CJ@\tM457\t\t4\n"
+                                     "信じ\t믿&AA@\tM437\t\t5\n"
+                                     "や\t&AV@\tM438\t\t6\n"
+                                     "知\t알&AA@\tM428\t\t7\n"
+                                     "負け\t지&AA@\tM437\t\t8\n"
+                                     "でき\t할 수 &HN@\tM417\tKe\t9\n"
+                                     "書\t쓰&AA@\tM421\t\t10\n"
+                                     "こんな\t이런\tE0H0\t\t11\n"
+                                     "ごめん\t미안\tK110\t\t12\n"
+                                     "最初\t처음\tN110\t\t13\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"見んな", "見るな"},
+        {"見んなよ", "見るなよ"},
+        {"帰んなよ", "帰んなよ"},  // a godan verb in る: as often the imperative 帰りな
+        {"邪魔すんな", "邪魔するな"},  // する by its forms after a noun
+        {"想像できんな", "想像できんな"},  // できる: a verb of ability takes no prohibition
+        {"帰んない", "帰らない"},
+        {"帰んねえ", "帰らない"},
+        {"信じらんない", "信じられない"},
+        {"してくんない", "してくれない"},
+        {"かもしんない", "かもしれない"},  // after かも the し of しれない, not 知らない
+        {"かもしんねえ", "かもしれない"},
+        {"負けんぞ", "負けないぞ"},
+        {"許せんから", "許せないから"},
+        {"負けん。", "負けん。"},  // the word stage reads the negative ん before a mark
+        {"見んかった", "見んかった"},  // the past said with ん
+        {"知らんぞ", "知らんぞ"},      // already the negative of a godan verb
+        {"書くんなら", "書くんなら"},  // the の after a dictionary form
+        {"こんな", "こんな"},
+        {"ごめんな", "ごめんな"},
+        {"俺がやっから", "俺がやるから"},
+        {"最初っから", "最初っから"},
+        {"怖いんです", "怖いんです"},  // い after kanji ends another word
+        {"もがみんねえ", "もがみんねえ"},  // kana alone
+        {"\xcd見んな", "\xcd見るな"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// The と or ど that a て form says for its て or で and the お of おる takes them back after the て
+// form of a verb of the dictionary or する; not after a lone kana (でとれた is で and とれた), nor in a
+// word that spans the と.
+HD_TEST(pipeline_contracted_oru) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "聞\t듣&A1@\tM421\t1\n"
+                                     "読\t읽&AA@\tM425\t2\n"
+                                     "見\t&AY@\tM437\t3\n"
+                                     "出\t나&A1@\tM437\t4\n"
+                                     "とれ\t잡&AA@\tM437\t5\n"
+                                     "見とれ\t넋을 잃고 보&AA@\tM437\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"聞いとる", "聞いておる"},
+        {"聞いとらんかった", "聞いておらんかった"},
+        {"読んどった", "読んでおった"},
+        {"見とった", "見ておった"},
+        {"見とれていた", "見とれていた"},  // 見とれる, a word that spans the と
+        {"苦労しとる", "苦労しておる"},
+        {"海でとれた", "海でとれた"},
+        {"聞いと", "聞いと"},
+        {"\xcd聞いとる", "\xcd聞いておる"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedOru(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The う of the past and the て form of a godan verb in う is っ; not before ため, nor in a noun.
 HD_TEST(pipeline_onbin_u) {
     const auto loaded = dict::Load({{0, "base.tsv",
@@ -1134,6 +1272,17 @@ HD_TEST(pipeline_drawn_honorifics) {
         {"姫さまぁ！", "姫さま\uE00A！"},
         {"お嬢様ーっ！", "お嬢様\uE00A！"},
         {"さまざま", "さまざま"},
+        {"姫さまあああ！", "姫さま\uE00A\uE00A！"},
+        {"お嬢様ぁ！", "お嬢様\uE00A！"},
+        {"太郎くぅぅん～", "太郎くん\uE00A\uE00A"},
+        // さま after a name drawn out with small vowels, or ending a greeting; not after no name or in a
+        // word that holds none.
+        {"姉ぇさまぁ、", "姉ぇさま\uE00A、"},
+        {"お疲れさまぁ！", "お疲れさま\uE00A！"},
+        {"おつかれさまー。", "おつかれさま\uE00A。"},
+        {"貴様ぁ！", "貴様ぁ！"},
+        {"俺様ぁ", "俺様ぁ"},
+        {"「様ぁ」", "「様ぁ」"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteDrawnHonorifics(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

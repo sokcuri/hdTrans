@@ -39,7 +39,7 @@ cx:clipped-copies:10	「いやだいやだっ」	「싫어 싫엇」	fix	rewrite
 cx:clipped-copies:10	「痛い、痛いっ！」	「아파, 아팟!」	fix	rewrites
 cx:clipped-copies:10	だめだだめだっ	안돼 안됏	fix	rewrites
 cx:clipped-copies:10	気持ちいい気持ちいいっ	기분 좋아 기분 좋앗	fix	rewrites
-cx:clipped-copies:10	「痛いっ！」	「아프다!」	keep	rewrites
+cx:clipped-copies:10	「痛いっ！」	「아파!」	keep	rewrites
 cx:clipped-copies:10	痛い痛い	!rule:cx:clipped-copies:10	keep	rewrites
 cx:clipped-copies:20	「だめ……だめだめっ、こんなの……！」	「안돼……안돼 안됏, 이런 건……!」	fix	rewrites
 cx:clipped-copies:20	「きゃー、だめだめっ」	「꺄아, 안돼 안됏」	fix	rewrites
@@ -73,13 +73,13 @@ sound:cry-copies	やだやだ	싫어 싫어	keep	sound
 sound:cry-copies	「げほげほっ」	「콜록콜록」	keep	sound
 sound:drawn-clip	だめだめぇぇぇっ	안돼 안돼에에엣	fix	sound
 sound:drawn-clip	痛い痛いいいいっ	아파 아파아아앗	fix	sound
-sound:drawn-clip	「やめてぇぇぇっ」	「그만둬어어엇」	fix	sound
+sound:drawn-clip	「やめてぇぇぇっ」	「그만해애애앳」	fix	sound
 sound:drawn-clip	「待ったああああっ！」	「기다렸다아아아앗!」	fix	sound
 sound:drawn-clip	痛い痛いいいい	아파 아파아아아	fix	sound
 sound:drawn-clip	こわいこわいいいい	무서워 무서워어어어	fix	sound
 sound:drawn-clip	かわいいかわいいいいい	귀여워 귀여워어어어	fix	sound
 sound:drawn-clip	そこはだめぇぇぇ	거기는 안돼에에에	keep	sound
-sound:drawn-clip	「やめてぇ」	「그만둬」	keep	sound
+sound:drawn-clip	「やめてぇ」	「그만해」	keep	sound
 compose:copy-contraction	だめだだめだっ	안돼 안됏	fix	compose
 compose:copy-contraction	　だめだ、だめだだめだ……。	 안돼, 안돼 안돼…….	fix	compose
 compose:copy-contraction	だめだ	안된다	keep	compose
@@ -97,9 +97,9 @@ dict:w:27515	監督にダメ出しをもらった	감독에게 지적을 받았�
 dict:jisjk:342476	ダメージ	데미지	keep	lookup
 sound:drawn-clip	いたいいたぁぁぁい	아파 아파아아아	fix	sound
 sound:drawn-clip	いたいいたぁぁぁいっ	아파 아파아아앗	fix	sound
-sound:drawn-clip	さむぅぅぅい	춥다아아아	fix	sound
+sound:drawn-clip	さむぅぅぅい	추워어어어	fix	sound
 sound:drawn-clip	待って待ってぇぇ	기다려 기다려어어	fix	sound
-sound:drawn-clip	「やめてやめてぇぇっ」	「그만둬 그만둬어엇」	fix	sound
+sound:drawn-clip	「やめてやめてぇぇっ」	「그만해 그만해애앳」	fix	sound
 sound:drawn-clip	見て見てぇぇ	봐 봐아아	fix	sound
 sound:drawn-clip	待ってぇぇ	기다려	keep	sound
 sound:drawn-clip	待って待ってぇ	기다려 기다려	keep	sound

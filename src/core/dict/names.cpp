@@ -271,6 +271,32 @@ std::string Snapshot::PersonName(std::string_view key) const {
     return {};
 }
 
+std::vector<std::size_t> Snapshot::PersonKeysAt(std::string_view text) const {
+    std::vector<std::size_t> out;
+    if (names_.Len() == 0) return out;
+    names_.Prefixes(text, [&](int k, std::size_t n) {
+        const std::string_view key = text.substr(0, n);
+        const bool kana = !AnyRune(key, [](char32_t r) { return !IsHiragana(r) && !IsKatakana(r); });
+        const std::string reading = kana ? text::FromKana(key, text::Preset::Fan) : std::string();
+        if (kana && reading.empty()) return;
+        bool person = false;
+        names_.EachRecord(k, [&](const Record& r) {
+            person = r.codes->sem.HasPrefix("QPN") && (kana ? text::SameSound(r.target, reading)
+                                                            : text::JapaneseSpelling(r.target));
+            return !person;
+        });
+        if (person) out.push_back(n);
+    });
+    return out;
+}
+
+std::size_t Snapshot::WordAt(std::string_view text) const {
+    std::size_t longest = 0;
+    base_.Prefixes(text, [&](int, std::size_t n) { longest = std::max(longest, n); });
+    user_.Prefixes(text, [&](int, std::size_t n) { longest = std::max(longest, n); });
+    return longest;
+}
+
 bool Snapshot::PersonCueKey(std::string_view key) const {
     if (!CuedKey(key)) return false;
     for (const Record& r : NameRecords(key)) {
@@ -420,7 +446,11 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
         if (!StrongName(text, m->n) && !AddressedName(text, m->n)) {
             person = true;
             if (!ctx.confirmed || ctx.confirmed->find(key) == ctx.confirmed->end()) {
-                cued = PersonCue(key, text.substr(m->n)) && CuedKey(key);
+                // A cued hiragana name no dictionary word spells takes part (まるゆです); other cued
+                // keys have their dictionary senses, which the constraint rules replace.
+                cued = (PersonCue(key, text.substr(m->n)) && CuedKey(key)) ||
+                       (ctx.cued && ctx.cued->find(key) != ctx.cued->end() && !BaseWord(key) &&
+                        !AnyRune(key, [](char32_t r) { return !IsHiragana(r); }));
                 if (!cued) continue;
             }
         }

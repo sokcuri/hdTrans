@@ -1,0 +1,27 @@
+# 규칙: LEX-47
+rule	input	expected	kind	layer
+cx:soreni-object:10	それにもほとんど関心を示さず、時折窓の外をつまらなそうに見ている。	has:거기에도 거의	fix	rewrites
+cx:soreni-object:10	それに伴って消費する魔力が爆発的に増えていったそうだ。	has:거기에 따라	fix	rewrites
+cx:soreni-object:10	それに混じって迷彩服を着た自衛官の姿が異常に多い。	has:거기에 섞여	fix	rewrites
+cx:soreni-object:10	それに加えて、日本語堪能となると、確かに難しいな。	has:거기에 더해	fix	rewrites
+cx:soreni-object:10	それに応えるように白崎が微笑み、もう一度息を吸った。	has:거기에 응하도록	fix	rewrites
+cx:soreni-object:10	それに関しては申し訳ない気もしなくもない。	has:거기에 관계해	fix	rewrites
+cx:soreni-object:10	それに、彼は来ない。	has:게다가,	keep	rewrites
+cx:soreni-object:10	それに今の声。	has:게다가	keep	rewrites
+cx:soreni-object:10	それに忘れたか？村を滅ぼしたのはお前自身ではないか。	has:게다가	keep	rewrites
+cx:soreni-object:10	それに死ぬ前になんて言わないで。	has:게다가	keep	rewrites
+cx:soreni-object:10	「それにしてもさっぶ……」	lacks:거기에	keep	rewrites
+cx:nanito-partner:10	「私は何と戦っていたの？」	has:무엇과 싸우고	fix	rewrites
+cx:nanito-partner:10	何と戦ってんのこの人	has:무엇과 싸우고	fix	rewrites
+cx:nanito-partner:10	何と比べるの？	has:무엇과 비교하는	fix	rewrites
+cx:nanito-partner:10	何と言った？	has:뭐라고	keep	rewrites
+cx:nanito-partner:10	何と！	has:뭐라고	keep	rewrites
+dict:jisjk:342448	俺が、なんで、とも思った。	has:왜	fix	local
+dict:jisjk:342448	提督、なんで、そんなに真面目な顔をしてるの？	has:왜	fix	local
+dict:jisjk:342448	なのになんで、首席で卒業した僕が、働かなくちゃいけないんだ。	has:그런데 왜	fix	local
+dict:jisjk:342448	って、なんで、千里の行動をもやもや考えたりしてるんだ？	has:왜	fix	local
+dict:jisjk:342448	ウチの社員は全員技術屋ばっかりなんで、こういう対外交渉はホンマ苦手でしてな	has:이니까	keep	local
+dict:jisjk:342448	後処理はこれからなんで、全然風化してないけどな	has:이니까	keep	local
+dict:jisjk:342448	こっちも今からミーティングなんでな	has:이니까	keep	local
+dict:jisjk:342448	……つー訳なんで、この俺っちに任しといて下さいっす！	has:이니까	keep	local
+dict:jisjk:342448	なんで？	has:왜	keep	local

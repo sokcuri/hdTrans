@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 compose:repeated-marks	「行くよ！！」	「가!!」	fix	compose
 compose:repeated-marks	「本当！？」	「정말!?」	fix	compose
 compose:repeated-marks	「誰？？」	「누구??」	fix	compose
-compose:repeated-marks	「やった！！！」	「해냈다!!!」	fix	compose
+compose:repeated-marks	「やった！！！」	「앗싸!!!」	fix	compose
 compose:repeated-marks	「嘘でしょ！？！？」	「거짓말이지!?!?」	fix	compose
 compose:repeated-marks	「すごい～！！」	「대단해~!!」	fix	compose
 compose:repeated-marks	「待って‼」	「기다려!!」	fix	compose

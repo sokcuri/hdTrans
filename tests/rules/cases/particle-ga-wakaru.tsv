@@ -1,0 +1,9 @@
+# 규칙: LEX-48
+rule	input	expected	kind	layer
+cx:ga-wakaru:10	体から血液が抜けていくのがわかる。	has:것을 알	fix	rewrites
+cx:ga-wakaru:10	膝から、力が抜けていくのが分かった。	has:것을 알았다	fix	rewrites
+cx:ga-wakaru:10	遠くから沙都子が駆けて来るのがわかる。	has:것을 알	fix	rewrites
+cx:ga-wakaru:10	ガチッと音がして鍵が閉まっているのがわかる。	has:것을 알	fix	rewrites
+cx:ga-wakaru:10	いつも話し掛けられる内容から、彼の新しい名前は“エルネスティ”である事がわかった。	has:것을 알았다	fix	rewrites
+cx:ga-wakaru:10	遠くない将来、また転校するのがわかっていたから。	has:것을 알	fix	rewrites
+cx:ga-wakaru:10	彼が来るのが嬉しい。	lacks:것을	keep	rewrites

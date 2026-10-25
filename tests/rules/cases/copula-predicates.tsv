@@ -1,0 +1,28 @@
+# 규칙: LEX-51
+rule	input	expected	kind	layer
+dict:copula-predicates:1	「ばっちりですよ」	「완벽해요」	fix	lookup
+dict:copula-predicates:1	「ああ、覚えてますよ。もちろん覚えてます、ばっちりです」	「아, 기억하고 있어요. 물론 기억하고 있습니다, 완벽합니다」	fix	lookup
+dict:copula-predicates:1	「ああ、ばっちりだった」	「아, 완벽했다」	fix	lookup
+dict:copula-predicates:1	「ばっちりだ」	「완벽하다」	fix	lookup
+dict:copula-predicates:1	大丈夫だ、来年…来年はばっちりだから！	괜찮다, 내년…내년은 완벽하니까!	fix	lookup
+dict:copula-predicates:1	ばっちり決まった。	완벽하게 정해졌다.	keep	lookup
+dict:copula-predicates:2	これなら夜戦もバッチリです。	이것이라면 야전도 완벽합니다.	fix	lookup
+dict:copula-predicates:2	「バッチリですー、ありがとうございますー」	「완벽합니다~, 감사합니다~」	fix	lookup
+dict:copula-predicates:2	「はい、今日はバッチリですよ。ほらこれ、見て下さい」	「네, 오늘은 완벽해요. 자 이거, 봐 주세요」	fix	lookup
+dict:copula-predicates:2	艦載機の練度もバッチリです。戦果を期待してください！	함재기의 숙련도도 완벽합니다. 전과를 기대해 주세요!	fix	lookup
+dict:copula-predicates:2	「もちろんバッチリだったのよ？」	「물론 완벽했어?」	fix	lookup
+dict:copula-predicates:3	「しっかりですね」	「확실하네요」	fix	lookup
+dict:copula-predicates:3	司令、仕事はしっかりなのに、お部屋が……	사령, 일은 확실한데, 방이……	fix	lookup
+dict:copula-predicates:3	あとは、頭にある演説をしっかりできるかどうか……	나머지는, 머리에 있는 연설을 제대로 할 수 있을지 어떨지……	keep	lookup
+dict:copula-predicates:3	しっかりなさい！	확실히 해!	keep	lookup
+dict:copula-predicates:3	しっかりした人だ。	견실한 사람이다.	keep	lookup
+dict:copula-predicates:3	「同棲もいいけど、テストもしっかりな」	「동거도 좋지만, 테스트도 확실한」	keep	lookup
+dict:copula-predicates:4	こんな流れはアリなのか？	이런 흐름은 괜찮은가?	fix	lookup
+dict:copula-predicates:4	「練習するのはアリなんじゃない？」	「연습하는 건 괜찮은 게 아니야?」	fix	lookup
+dict:copula-predicates:4	「わたしは全然アリですっ……！！」	「저는 전혀 괜찮습니다……!!」	fix	lookup
+dict:copula-predicates:4	「んー……そうね、付加価値を付けるのはたしかにアリよねぇ……」	「음……그래, 부가가치를 매기는 건 확실히 괜찮지……」	fix	lookup
+dict:copula-predicates:4	「……いや、それはそれでアリか」	「……아니, 그건 그것대로 괜찮은가」	fix	lookup
+dict:copula-predicates:4	音楽でもマジックでも落語でも学術発表でも、何でもアリだ。	음악이라도 매직이라도 만담이라도 학술 발표에서도, 뭐든 괜찮다.	fix	lookup
+dict:copula-predicates:4	「（この凪はアリだな）」	「(이 지는 괜찮네)」	keep	lookup
+dict:copula-predicates:4	アリが行列を作っている。	개미가 행렬을 만들고 있다.	keep	lookup
+dict:copula-predicates:4	アリの巣を見つけた。	개미의 둥지를 찾아냈다.	keep	lookup

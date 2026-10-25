@@ -13,6 +13,7 @@
 #include "core/names/chars.h"
 #include "core/names/historical.h"
 #include "core/names/labels.h"
+#include "core/names/name_cues.h"
 #include "core/names/readings.h"
 #include "core/names/registry.h"
 #include "core/pipeline/normalize.h"
@@ -107,6 +108,7 @@ struct DocumentHistory {
     struct Memo {
         names::HistoricalLine historical;
         std::vector<std::string> persons;
+        std::vector<std::string> cued;  // the keys of the line's strong name cues
         internal::SpeechCues speech;
         std::size_t uses = 0;
     };
@@ -126,6 +128,9 @@ struct DocumentHistory {
             it->second.historical = names::ReadHistoricalLine(*snap, line);
             it->second.persons = internal::PersonPlaces(*snap, line, nullptr, nullptr);
             it->second.speech = internal::ReadSpeechCues(line);
+            for (const names::NameCue& c : names::NameCues(*snap, line)) {
+                if (c.strong) it->second.cued.push_back(c.key);
+            }
         }
         return it->second;
     }
@@ -196,7 +201,9 @@ struct DocumentHistory {
         facts.uses++;
         female += facts.speech.female;
         maleKin += facts.speech.maleKin;
+        quoted += facts.speech.quoted;
         for (const auto& key : facts.persons) Count(persons, key, true);
+        for (const auto& key : facts.cued) Count(cued, key, true);
         Historical(facts, id, true);
         bytes += text.size();
         lines.push_back(std::move(line));
@@ -207,7 +214,9 @@ struct DocumentHistory {
             registry.Forget(old.evidence);
             female -= oldFacts.speech.female;
             maleKin -= oldFacts.speech.maleKin;
+            quoted -= oldFacts.speech.quoted;
             for (const auto& key : oldFacts.persons) Count(persons, key, false);
+            for (const auto& key : oldFacts.cued) Count(cued, key, false);
             if (old.verse) Count(verses, VerseKey(old.text), false);
             Historical(oldFacts, ids.front(), false);
             if (--oldFacts.uses == 0) memo.erase(found);
@@ -222,10 +231,10 @@ struct DocumentHistory {
     std::deque<Line> lines;
     std::deque<uint64_t> ids;
     std::map<std::string, Memo, std::less<>> memo;
-    std::map<std::string, std::size_t> persons, verses, surnames;
+    std::map<std::string, std::size_t> persons, verses, surnames, cued;
     std::map<std::string, Readings> historical;
     std::map<uint64_t, std::vector<std::vector<char32_t>>> listed;
-    std::size_t bytes = 0, female = 0, maleKin = 0;
+    std::size_t bytes = 0, female = 0, maleKin = 0, quoted = 0;
     uint64_t next = 0;
 };
 
@@ -296,22 +305,27 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     for (const std::string& line : lines) r.Add(line);
 
     doc->registryKey = r.Key();
-    bool female = memory.female > 0, maleKin = memory.maleKin > 0;
+    bool female = memory.female > 0, maleKin = memory.maleKin > 0, quoted = memory.quoted > 0;
     std::vector<const names::HistoricalLine*> historical;
     const names::HistoricalLine earlier = memory.Historical();
     historical.push_back(&earlier);
     dict::KeySet persons;
     for (const auto& [key, count] : memory.persons) persons.insert(key);
+    for (const auto& [key, count] : memory.cued) doc->cued.insert(key);
     for (const std::string& line : lines) {
         const DocumentHistory::Memo& facts = memory.Facts(line);
+        doc->cued.insert(facts.cued.begin(), facts.cued.end());
         female = female || facts.speech.female;
         maleKin = maleKin || facts.speech.maleKin;
+        quoted = quoted || facts.speech.quoted;
         persons.insert(facts.persons.begin(), facts.persons.end());
         historical.push_back(&facts.historical);
     }
     doc->female = female && !maleKin;
     doc->key = doc->registryKey;
     if (doc->female) doc->key += std::string("\0female", 7);
+    doc->narrated = quoted;
+    if (doc->narrated) doc->key += std::string("\0narrated", 9);
 
     doc->persons.assign(persons.begin(), persons.end());
     std::sort(doc->persons.begin(), doc->persons.end());
@@ -323,6 +337,10 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         }
     }
     doc->persons_ = persons;
+    if (!doc->cued.empty()) {
+        doc->key += std::string("\0cued", 5);
+        for (const std::string& k : std::set<std::string>(doc->cued.begin(), doc->cued.end())) doc->key += "\t" + k;
+    }
 
     doc->verseLines = internal::VerseLines(lines);
     for (const auto& [line, count] : memory.verses) doc->verseLines.insert(line);
@@ -457,6 +475,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
+    for (const names::NameCue& c : names::NameCues(*doc.snap, facts.text)) facts.cued.push_back(c.key);
+    std::sort(facts.cued.begin(), facts.cued.end());
     return facts;
 }
 
@@ -487,6 +507,8 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     out.plain = found->second.plain.get();
     out.confirmed = facts.skip.empty() ? &doc.accepted : &found->second.confirmed;
     out.persons.insert(facts.persons.begin(), facts.persons.end());
+    out.cued = doc.cued;
+    out.cued.insert(facts.cued.begin(), facts.cued.end());
     out.prose = facts.prose;
     return out;
 }
@@ -495,10 +517,12 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     LineContext ctx;
     ctx.document = true;
     ctx.female = doc.female;
+    ctx.narrated = doc.narrated;
     ctx.extraBuiltin = doc.extraBuiltin;
     ctx.lookup.plain = lookup.plain;
     ctx.lookup.confirmed = lookup.confirmed;
     ctx.lookup.persons = &lookup.persons;
+    ctx.lookup.cued = &lookup.cued;
     ctx.named = &doc.named;
     ctx.prose = &doc.prose;
     ctx.lineProse = &lookup.prose;

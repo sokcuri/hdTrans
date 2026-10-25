@@ -2,11 +2,11 @@
 rule	input	expected	kind	layer
 sound:vowel-run	すごおおおい	대단해~	fix	sound
 sound:vowel-run	すごおおおい！	대단해~!	fix	sound
-sound:vowel-run	ながあああい	길다~	fix	sound
+sound:vowel-run	ながあああい	길어~	fix	sound
 sound:vowel-run	おねがあああい	부탁~	fix	sound
 sound:vowel-run	せんぱあああい！	선배~!	fix	sound
 sound:vowel-run	おばあああちゃん	할머니	fix	sound
-sound:vowel-run	さむううい	춥다~	fix	sound
+sound:vowel-run	さむううい	추워~	fix	sound
 sound:vowel-run	別にいいよ	별로 좋아	keep	sound
 sound:vowel-run	気持ちいいよ	기분 좋아	keep	sound
 sound:vowel-run	じゃああした	그럼, 내일	keep	sound

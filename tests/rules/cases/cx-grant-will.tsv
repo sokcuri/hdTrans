@@ -1,0 +1,31 @@
+# 규칙: SPC-15
+rule	input	expected	kind	layer
+cx:grant-will:10	では、病気にならない身体……【健康な肉体】を授けよう」	그럼, 병이 들지 않는 신체……【건강한 육체】를 내려 주마」	fix	rewrites
+cx:grant-will:10	同志адмирал, こ、これをあげよう！	동지адмирал, 이, 이것을 주마!	fix	rewrites
+cx:grant-will:10	「すまぬが、金が無い！代わりにこれを渡そう！	「미안하지만, 돈이 없어! 대신에 이걸 건네주마!	fix	rewrites
+cx:grant-will:20	……もう良い、お前が自分を許せぬというのなら私が許そう。	……이제 됐다, 네가 자신을 용서할 수 없다면 내가 용서해 주마.	fix	rewrites
+cx:grant-will:10	我の力も貴公らに貸そう。	나의 힘도 귀공등에 빌려 주마.	fix	rewrites
+cx:grant-will:10	力を授けよう	힘을 내려 주마	fix	rewrites
+cx:grant-will:10	お前に力を与えよう。	너에게 힘을 주마.	fix	rewrites
+cx:grant-will:20	いいことを教えよう」	좋은 것을 가르쳐 주마」	fix	rewrites
+cx:grant-will:20	本当の力を見せよう！	진정한 힘을 보여 주마!	fix	rewrites
+cx:grant-will:15	お前らに見せよう	너희들에게 보여 주마	fix	rewrites
+cx:grant-will:10	特別に褒美を与えよう！	특별히 포상을 주마!	fix	rewrites
+cx:grant-will:20	では、お前の願いを叶えよう」	그럼, 네 소원을 실현해 주마」	fix	rewrites
+cx:grant-will:20	私が教えよう。	내가 가르쳐 주마.	fix	rewrites
+cx:grant-will:10	君にこれを返そう。	너에게 이것을 돌려주마.	fix	rewrites
+cx:grant-will:10	そなたにこの剣を授けよう」	그대에 이 검을 내려 주마」	fix	rewrites
+cx:grant-will:10	一つだけ昔話を聞かせよう」	하나만 옛날이야기를 들려주마」	fix	rewrites
+cx:grant-will:15	われらの本当の力を見せよう。抜錨する！	우리들의 진정한 힘을 보이자. 출항한다!	keep	rewrites
+cx:grant-will:15	私達の力を見せよう！	저희들의 힘을 보이자!	keep	rewrites
+cx:grant-will:15	みんなに見せよう！	모두에게 보이게 하자!	keep	rewrites
+cx:grant-will:20	一緒に教えよう！	함께 가르치자!	keep	rewrites
+cx:grant-will:20	「くぅ〜…やっぱりあの子はいい子だなぁ…！！ 座りなそこ！ 一緒に食べよう！」	「크으~…역시 그 아이는 좋은 아이야…!! 안정도인 거기! 함께 먹자!」	keep	rewrites
+cx:grant-will:10	「それならボクが使ってた目覚まし、あげようか？」	「그렇다면 내가 쓰고 있었던 자명종, 줄까?」	keep	rewrites
+cx:grant-will:10	「あの子にあげようかと思ったけど…ちょっと違うよな！」	「그 아이에게 줄까 하고 생각했지만…조금 다르지!」	keep	rewrites
+cx:grant-will:10	明日この本を返そう。	내일 이 책을 돌려주자.	keep	rewrites
+cx:grant-will:15	母にこの写真を見せよう。	어머니에게 이 사진을 보이자.	keep	rewrites
+cx:grant-will:10	彼女に花をあげよう！	그녀에게 꽃을 주자!	keep	rewrites
+cx:grant-will:20	これを食べよう！	이것을 먹자!	keep	rewrites
+cx:grant-will:20	「ん……わかった、今日も、俺と一緒に寝よう」	「응……알았다, 오늘도, 나와 함께 자자」	keep	rewrites
+cx:grant-will:10	力を授けようとした。	힘을 내려 주려고 했다.	keep	rewrites

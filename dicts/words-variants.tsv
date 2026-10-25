@@ -20,7 +20,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御客様	손님	I110	VHn		GN							jisjk:40543
 御客さま	손님	I110	VHn		GN							jisjk:40543
 御休みなさい	안녕히 주무세요	A9D0			GN							jisjk:267088
-御兄ちゃん	형	N110	VHn		GN							jisjk:165798
+御兄ちゃん	오빠	N110	VHn		GN							jisjk:165798
 御見えにな	&AH@	M428			GN							jisjk:263730
 御見舞い	병문안	N110			GN							jisjk:260663
 御見舞	병문안	N110			GN							jisjk:260663
@@ -84,8 +84,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御喋り	수다	N110			GN							jisjk:165385
 御得	이득%D4@	G8U0			GN							jisjk:119541
 御得	이득	N110			GN							jisjk:341940
-おつかれ様	수고 하셨습니다	A9D0			GN							jisjk:349343
-御疲れ様	수고 하셨습니다	A9D0			GN							jisjk:349343
+おつかれ様	수고하셨습니다	A9D0			GN							jisjk:349343
+御疲れ様	수고하셨습니다	A9D0			GN							jisjk:349343
 御付き	수행원	I110	UAq		GN							jisjk:40587
 御付き	시중	I110	VHn		GN							jisjk:40588
 御父さん	아버지	K110	VQmUQfVHn		GN							jisjk:40589
@@ -20605,6 +20605,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ワタシタチ	우리	I120	VHn		GN						わたしたち	variant:watashitachi:2
 アタシ達	우리	I120	VHn		GN						あたしたち	variant:atashitachi:4
 ついて	따라 &AH@	M41;			GN	5105	||1 &&4 S-1== "に" P-2== "1**" A-2== "VHn" D-1= "(을)를"	사람 뒤의 に에 이어진 ついて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:1
+付いて	따라 &AH@	M41;			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:2
+付いて	따라 &AH@	M41=			GN	7706	||1 &&2 S-1== "に" D-1= "(을)를"	に 뒤의 付いて(来る)는 그 に를 ‘(을)를’로 바꿔 ‘…를 따라오다’로 잇는다.				variant:tsuitekuru:3
 ヒゲ	수염	N110	VBp		GN							variant:katakana:1
 バッチリ	딱	E300			GN							variant:katakana:2
 ダチ	친구	N110	VHn		GN							variant:katakana:3
@@ -20633,3 +20635,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 このぐらい	이 정도	C0H0			GN						このぐらい	variant:voiced:4
 あのぐらい	그 정도	C0H0			GN						あのぐらい	variant:voiced:5
 推しはか	헤아&AA@	M438			GN						おしはか	variant:kana:oshihaka
+お兄たん	오빠	N110	VHn		GN						おにいたん	variant:babytalk:oniitan
+お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan

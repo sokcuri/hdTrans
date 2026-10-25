@@ -1,7 +1,34 @@
+# 규칙: LEX-5
 rule	input	expected	kind	layer
 normalize:military-time	マルロクマルマルです、起きてください。	0600입니다, 일어나 주세요.	fix	normalize
-normalize:military-time	ヒトサンマルマルっぽい！	1300 같다!	fix	normalize
+normalize:military-time	ヒトサンマルマルっぽい！	1300 같아!	fix	normalize
 normalize:military-time	ヒトヨン、マルマルっぽい。	1400 같다.	fix	normalize
 normalize:military-time	フタサンマルマルー！もう寝よう。	2300! 이제 자자.	fix	normalize
 normalize:military-time	マルマルマルマルだよ。	마르마르마르말이야.	keep	normalize
 normalize:military-time	ゴーゴーマルマルだって。	고고마르말이래.	keep	normalize
+normalize:military-time	ヒトハチ～マルマル！ もう～夜だよ！	1800! 정말~ 밤이야!	fix	normalize
+normalize:military-time	提督！ ヒトロク～マルマル！	제독! 1600!	fix	normalize
+normalize:military-time	フタマル～マルマル！	2000!	fix	normalize
+normalize:military-time	フタフタ～マルマル！ 三水戦も帰ってきた！	has:2200!	fix	normalize
+normalize:military-time	フタヒト～マルマルです！	2100입니다!	fix	normalize
+normalize:military-time	マルサン～マルマルぅ～。	0300~.	fix	normalize
+normalize:military-time	お昼、食べ過ぎた…ふぁ…ヒトサン…マルマル～	has:1300	fix	normalize
+normalize:military-time	マルサン…マルマル！ふぅ、どんなもんよ！	has:0300!	fix	normalize
+normalize:military-time	フタフタ…マルマル！今日はいろいろあって疲れちゃったね。	has:2200!	fix	normalize
+normalize:military-time	フタサン……マルマル……。	2300…….	fix	normalize
+normalize:military-time	マルフタ……マルマルです。	0200입니다.	fix	normalize
+normalize:military-time	マルヨン……マルマルです……んあっ……！？	has:0400입니다……	fix	normalize
+normalize:military-time	マルヒト…マルマル。どう？	0100. 어때?	fix	normalize
+normalize:military-time	マルサン…マル…マル………。	0300……….	fix	normalize
+normalize:military-time	ヒトナナ…マルマル！夕陽が…	1700! 석양이…	fix	normalize
+normalize:military-time	ヒトサンマルマル～フタマルマルマル	1300~2000	fix	normalize
+normalize:military-time	ヒトハチ～マルマルの集合	1800의 집합	fix	normalize
+normalize:military-time	ヒトハチーマルマル。夜ご飯は	has:1800.	keep	normalize
+normalize:military-time	ヒトヨン、マル…ああ、ビスマルクか。	has:비스마르크	keep	normalize
+normalize:military-time	ヒトゴーマルマ…あ、照月さん？	lacks:1500	keep	normalize
+normalize:military-time	あ、ゴメン。日本現在時間はねぇ、フタヒト…マルマル！	has:2100!	fix	normalize
+normalize:military-time	提督さん、マルフタ…マルマルです。	제독님, 0200입니다.	fix	normalize
+normalize:military-time	マルヒト……マルマル。なっ、提督！	has:0100.	fix	normalize
+normalize:military-time	あぁ、そうだ、現在時刻ヒトキュマルマル。食べて～	has:현재 시각 1900.	fix	normalize
+normalize:military-time	マルサン・・マルマル！	0300!	fix	normalize
+normalize:military-time	キュウリとマルマル	lacks:9	keep	normalize

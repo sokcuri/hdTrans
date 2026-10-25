@@ -60,7 +60,7 @@ ending:chau-particles	「幸せでふわふわしてきちゃうな」	「행복
 ending:chau-particles	何とかしてくれるって思っちゃうな	어떻게든 해 준다고 생각해버리네	fix	builtin-ending
 ending:chau-particles	ちょっと期待しちゃうなー♪	조금 기대해버리네~♪	fix	builtin-ending
 # 맞는 출력: 나도! 살쪄 버리겠네~, 뭐 어때!
-ending:chau-particles	あたしも！ 太っちゃうなー、まあいいか！	나도! 살쪄버리네~, 뭐 좋은가!	current	builtin-ending
+ending:chau-particles	あたしも！ 太っちゃうなー、まあいいか！	나도! 살쪄버리네~, 뭐 됐나!	current	builtin-ending
 ending:chau-particles	「死んじゃうな」	「죽어버리네」	fix	builtin-ending
 ending:chau-particles	忘れちゃうね…	잊어버리네…	fix	builtin-ending
 ending:chau-particles	「ケーキって死んじゃうぜ」	「케이크는 죽어버린다」	keep	builtin-ending

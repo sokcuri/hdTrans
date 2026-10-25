@@ -73,15 +73,41 @@ std::string Unlengthened(std::string_view text) {
     return out;
 }
 
+// Whether a ends its token and the one token between it and the token of b is a run of the
+// closing marks of the sound stage (output::IsClosingMark) or of mark.stretch, as after a drawn
+// copy (痛いぃ、痛いぃ, 痛いー、痛いー).
+bool MarksBetween(const Item* a, const Item* b) {
+    if (a->tokenIndex + 2 != b->tokenIndex || !From(a->text, a->start + a->length).empty()) return false;
+    const std::string_view t = a->detail->nextText;
+    if (t.empty()) return false;
+    for (std::string_view r = t; !r.empty();) {
+        const text::Rune c = text::DecodeRune(r);
+        if (!output::IsClosingMark(c.cp) && !dict::InClass("mark.stretch", r.substr(0, c.size))) return false;
+        r.remove_prefix(std::max<std::size_t>(c.size, 1));
+    }
+    return true;
+}
+
+// Whether b goes on the token of a, or comes right after the closing marks after a.
+bool SameOrMarked(const Item* a, const Item* b) { return a->tokenIndex == b->tokenIndex || MarksBetween(a, b); }
+
 // The word before it that it repeats: the same text with the same ending, of two
 // characters or more, in the same token with nothing, a CopyPause word, or the ClipWord of
 // the copy before it and maybe a CopyPause word after that between (いや|いや, 待って、待って,
-// だめっ、だめっ); a copy drawn out with long marks of mark.long-vowel is the same (すごい|すごーい).
+// だめっ、だめっ); a copy drawn out with long marks of mark.long-vowel is the same (すごい|すごーい),
+// and the closing marks after a drawn copy may stand between (痛いぃ、痛いぃ).
 const Item* CopyBefore(const Item* it) {
     const Item* p = it->prev;
-    if (p != nullptr && p->tokenIndex == it->tokenIndex && CopyPause(p)) p = p->prev;
-    if (p != nullptr && p->tokenIndex == it->tokenIndex && ClipWord(p)) p = p->prev;
-    if (p == nullptr || p->tokenIndex != it->tokenIndex) return nullptr;
+    const Item* at = it;
+    if (p != nullptr && p->tokenIndex == it->tokenIndex && CopyPause(p)) {
+        at = p;
+        p = p->prev;
+    }
+    if (p != nullptr && SameOrMarked(p, at) && ClipWord(p)) {
+        at = p;
+        p = p->prev;
+    }
+    if (p == nullptr || !SameOrMarked(p, at)) return nullptr;
     const std::string_view text = Slice(it->text, it->start, it->length), before = Slice(p->text, p->start, p->length);
     if (text::RuneCount(text) < 2) return nullptr;
     if (before != text && (!(LongMarked(text) || LongMarked(before)) || Unlengthened(before) != Unlengthened(text))) return nullptr;
@@ -93,8 +119,8 @@ const Item* CopyBefore(const Item* it) {
 // The word after it that repeats it.
 const Item* CopyAfter(const Item* it) {
     const Item* n = it->next;
-    if (n != nullptr && n->tokenIndex == it->tokenIndex && ClipWord(n)) n = n->next;
-    if (n != nullptr && n->tokenIndex == it->tokenIndex && CopyPause(n)) n = n->next;
+    if (n != nullptr && SameOrMarked(it, n) && ClipWord(n)) n = n->next;
+    if (n != nullptr && SameOrMarked(it, n) && CopyPause(n)) n = n->next;
     return n != nullptr && CopyBefore(n) != nullptr ? n : nullptr;
 }
 
@@ -164,10 +190,12 @@ std::string_view TextAfter(const Item* it) {
     return rest.empty() ? it->detail->nextText : rest;
 }
 
-// Whether a clipping っ or ッ of mark.clip follows the word right after it (痛いっ).
+// Whether a clipping っ or ッ of mark.clip, or the clipped cry mark of a drawn word that took
+// one, follows the word right after it (痛いっ, 熱いぃっ).
 bool Clipped(const Item* it) {
     const std::string_view rest = TextAfter(it);
-    return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size));
+    return dict::InClass("mark.clip", rest.substr(0, text::DecodeRune(rest).size)) ||
+           text::DecodeRune(rest).cp == output::kClippedCryMark;
 }
 
 // Whether its run of copies is a cry whatever the words: three copies or more, or a mark of
@@ -180,6 +208,71 @@ bool CriedCopies(const Item* it) {
     const std::string_view mark = rest.substr(0, text::DecodeRune(rest).size);
     const char32_t cp = text::DecodeRune(rest).cp;
     return dict::InClass("mark.cry", mark) || output::IsDrawnEndMark(cp);
+}
+
+// Whether it stands inside a mark that open takes, which no mark that close takes has closed, in
+// the text of its line before it.
+template <typename Open, typename Close>
+bool Enclosed(const Item* it, Open open, Close close) {
+    int depth = 0;
+    const auto count = [&](std::string_view t) {
+        for (std::string_view r = t; !r.empty();) {
+            const text::Rune c = text::DecodeRune(r);
+            const std::string_view mark = r.substr(0, std::max<std::size_t>(c.size, 1));
+            if (open(c.cp, mark)) depth++;
+            if (close(c.cp, mark) && depth > 0) depth--;
+            r.remove_prefix(mark.size());
+        }
+    };
+    if (it->w != nullptr) {
+        for (int k = 0; k < it->tokenIndex; k++) count(it->w->tokens.Raw(static_cast<std::size_t>(k)));
+    }
+    count(Slice(it->text, 0, it->start));
+    return depth > 0;
+}
+
+// Whether it stands in a thought between the marks of mark.thought-open and mark.thought-close
+// （ああ、難しい〜）, or in a word spelled out (逃・が・さ・な・い), which the sound stage puts between
+// output::kEmphasisOpen and output::kEmphasisClose.
+bool ThoughtOrSpelled(const Item* it) {
+    return Enclosed(it, [](char32_t, std::string_view m) { return dict::InClass("mark.thought-open", m); },
+                    [](char32_t, std::string_view m) { return dict::InClass("mark.thought-close", m); }) ||
+           Enclosed(it, [](char32_t c, std::string_view) { return c == output::kEmphasisOpen; },
+                    [](char32_t c, std::string_view) { return c == output::kEmphasisClose; });
+}
+
+// Whether it is an い-adjective ending bare in い, read 1다 or the exclamative 6, with a drawn end
+// mark of the sound stage right after it (痛いいいいっ, 痛ーい, 熱いいいっ) or a run of mark.stretch
+// that ends its utterance, no word or comma after it (暑いー！, 痛い～; not ずるいー、早く); not a
+// copula drawn out after an adjectival noun (無事だああああ), nor in a thought or a word spelled
+// out (ThoughtOrSpelled), which no one cries.
+bool DrawnPredicate(const Item* it) {
+    if (it->detail->cls != kDetailKeiyo || ThoughtOrSpelled(it)) return false;
+    const int from = it->DirectIndex();
+    if (from < 0 || !dict::InClass("ending.copies-bare", it->DirectSurface()) ||
+        !dict::InClass("ending.copies-plain", it->DirectText(from))) {
+        return false;
+    }
+    // The drawn end marks and mark.stretch after the word, in its token and the next ones, and
+    // the text after them: no word, and no comma, before which the phrase goes on (痛いぃ、やめて,
+    // ずるいー、早く).
+    const auto marked = [](std::string_view t) {
+        const text::Rune r = text::DecodeRune(t);
+        return output::IsDrawnEndMark(r.cp) || dict::InClass("mark.stretch", t.substr(0, r.size));
+    };
+    std::string_view after = TextAfter(it);
+    bool drawn = false;
+    int tok = it->tokenIndex + (From(it->text, it->start + it->length).empty() ? 1 : 0);
+    for (int k = 0; k < 3; k++) {
+        while (!after.empty() && marked(after)) {
+            after.remove_prefix(text::DecodeRune(after).size);
+            drawn = true;
+        }
+        if (!after.empty() || it->w == nullptr || ++tok >= it->w->TokenCount()) break;
+        after = it->w->tokens.Raw(static_cast<std::size_t>(tok));
+    }
+    const text::Rune next = text::DecodeRune(after);
+    return drawn && !text::IsLetter(next.cp) && !dict::InClass("mark.comma", after.substr(0, next.size));
 }
 
 bool Exclaimed(Flusher& f, const Item* it) {
@@ -300,6 +393,8 @@ constexpr NamedFeature kFeatures[] = {
          const std::string_view ending = at >= 0 ? it->DirectSurface() : std::string_view();
          return !ending.empty() && dict::InClass("kana.drawn-out", ending.substr(0, text::DecodeRune(ending).size));
      }},
+    // An い-adjective in 1다 or 6 drawn out right after it (DrawnPredicate).
+    {"drawn-predicate", [](Flusher&, const Item* it) { return DrawnPredicate(it); }},
     // A clipping っ or ッ (mark.clip) follows the word right after it (痛いっ).
     {"clipped", [](Flusher&, const Item* it) { return Clipped(it); }},
     // The last copy of its run is Clipped (だめっ、だめっ; not ないっ、ない、ない).
@@ -439,6 +534,13 @@ constexpr NamedFeature kFeatures[] = {
          std::string_view rest = From(it->text, it->start + it->length);
          if (rest.empty()) rest = it->detail->nextText;
          return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
+     }},
+    // The text ends after the word, or a closing bracket or an exclamation mark follows it: a line
+    // of speech ends there (授けよう」, 渡そう！), not a sentence of narration in 。.
+    {"speech-close",
+     [](Flusher&, const Item* it) {
+         const std::string_view rest = TextAfter(it);
+         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)");
      }},
     // An exclamation mark of mark.exclaim is one of the two characters after the word
     // (待ち伏せますか！, ますか？！, ますかっ！).
@@ -582,6 +684,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
         {"map-ending-tail", CxVerb::MapEndingTail},
+        {"map-target-tail", CxVerb::MapTargetTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
@@ -618,7 +721,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             break;
         }
         if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap ||
-            a.verb == CxVerb::MapEndingTail) {
+            a.verb == CxVerb::MapEndingTail || a.verb == CxVerb::MapTargetTail) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -1055,6 +1158,10 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
+// The marker a verb written into the word takes: '$' on an i-adjective, whose families conjugate
+// with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
+char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
+
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
     Item* it = Neighbour(origin, a.delta);
     if (it == nullptr) return;
@@ -1182,6 +1289,18 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             }
             break;
         }
+        case internal::CxVerb::MapTargetTail: {
+            // The same on the Korean of the selected candidate (돕겠습니다 → 돕겠으니까요).
+            const std::string target(it->EntryText(it->selected));
+            const std::pair<std::string, std::string>* best = nullptr;
+            for (const auto& pair : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (target.ends_with(pair.first) && (best == nullptr || pair.first.size() > best->first.size())) best = &pair;
+            }
+            if (best != nullptr) {
+                it->AssignEntrySurface(it->selected, target.substr(0, target.size() - best->first.size()) + best->second, source);
+            }
+            break;
+        }
         case internal::CxVerb::MapLemma:
         case internal::CxVerb::MapTarget: {
             const std::string key =
@@ -1210,7 +1329,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             break;
         }
         case internal::CxVerb::SetVerb:
-            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, VerbSigil(it), "", f.families).target, source);
             break;
         case internal::CxVerb::SetVerbFrom: {
             // A translation that ends in the old tail is the verb whose dictionary form is its head
@@ -1218,7 +1337,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const std::string_view target = it->EntryText(it->selected);
             if (target.size() > a.value.size() && target.ends_with(a.value)) {
                 const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
-                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, '&', "", f.families).target, source);
+                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, VerbSigil(it), "", f.families).target, source);
             }
             break;
         }

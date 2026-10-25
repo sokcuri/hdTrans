@@ -1,0 +1,20 @@
+# 규칙: LEX-51
+rule	input	expected	kind	layer
+dict:dou-copula	「どうなの？」	「어때?」	fix	lookup
+dict:dou-copula	「そういうみちるはどうなのよ？」	「그렇게 말하는 흩어지고는 어떤데?」	fix	lookup
+dict:dou-copula	提督、どうなの！？	제독, 어때!?	fix	lookup
+dict:dou-copula	「……で、どうなのよ」	「……그리고, 어떤데」	fix	lookup
+dict:dou-copula	「で、筧的にはどうなのよ？」	「그래서, 견적으로는 어떤데?」	fix	lookup
+dict:dou-copula	「佳奈はどうなの？」	「카나는 어때?」	fix	lookup
+dict:dou-copula	「どうなの、ギザ様？」	「어때, 기자님?」	fix	lookup
+dict:dou-copula	「筧の方はどうなん？」	「견은 어때?」	fix	lookup
+dict:dou-copula	外に出るのは、どうなんだろう？	밖에 나오는 것은, 어떨까?	fix	lookup
+dict:dou-copula	しかし、キッドとアディはどうなのだろうか。	하지만, 키드와 아디는 어떨까.	fix	lookup
+dict:dou-copula	今の容体はどうなんだろうか？	지금의 용태는 어떨까?	fix	lookup
+dict:dou-copula	うーん…どうなんだろ	으음…어떨까	fix	lookup
+dict:dou-copula	「で、筧先輩はどうなんです？」	「그래서, 카케이 선배는 어떤가요?」	fix	lookup
+dict:dou-copula	「どうなんだ？」	「어때?」	keep	lookup
+dict:dou-copula	「皆さんはどうなんですか？」	「여러분은 어떻습니까?」	keep	lookup
+dict:dou-copula	「ああいうのはただの飾りだったりするけどね。玉藻ちゃんのはどうなのかな」	「저런의는 그냥 장식이기도 하지만. 타마모짱의 건 어떤가」	keep	lookup
+dict:dou-copula	「さあ、どうなんでしょうね」	「자, 어떨까요」	keep	lookup
+dict:dou-copula	これからどうなるの？	지금부터 어떻게 되는 거야?	keep	lookup

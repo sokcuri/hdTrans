@@ -1,0 +1,22 @@
+# 규칙: GRM-28
+rule	input	expected	kind	layer
+compose:copula-after-vowel	「いや、無理だ。流石に死ぬ」	「아니, 무리다. 역시 죽는다」	fix	compose
+compose:copula-after-vowel	だが、――実家の事となれば話は別だ。	하지만, ――친가의 일이 되면 이야기는 별도다.	fix	compose
+compose:copula-after-vowel	信じる信じないはお前らの自由だ	믿는 믿지 않는은 너희들의 자유다	fix	compose
+compose:copula-after-vowel	それは無理だろ…ｗ	그것은 무리지…ㅋ	fix	compose
+compose:copula-after-vowel	こんな姿じゃ…レイテ突入は無理ね…	이런 모습은…레이테 돌입은 무리네…	fix	compose
+compose:copula-after-vowel	「無理なら、無理で良いんだぞ？　俺は困らないし」	「무리라면, 무리고 좋은 거야? 나는 곤란하지 않고」	fix	compose
+compose:copula-after-vowel	人間じゃないから、時と場所と方法を選べって言っても無理だから、	인간이 아니니까, 때와 장소와 방법을 선택하라고 해도 무리니까,	fix	compose
+compose:copula-after-vowel	基本的に、ものには文句しか付けない親父が褒めるとは…意外だ。	기본적으로, 것에는 불평밖에 하지 않는 아버지가 칭찬하다니…의외다.	fix	compose
+compose:copula-after-vowel	「それとこれとは話が別だなぁ」	「그것과 이것과는 이야기가 별도구나」	fix	compose
+compose:copula-after-vowel	「ううん、私のわがままだから」	「아니, 내 멋대로니까」	fix	compose
+compose:copula-after-vowel	「じゃあ、通りがかりも無理ですね」	「그럼, 지나는 길도 무리네요」	fix	compose
+compose:copula-after-vowel	無理だわ。あんな重い物を……	무리구나. 저런 무거운 것을……	fix	compose
+compose:copula-after-vowel	ヒトゴーマルマル…あの子たちでは無理でしょう…私達が出ないと。	1500…그 아이들에서는 무리겠죠…저희들이 나오지 않으면.	fix	compose
+compose:copula-after-vowel	「のれん分けでもしたなら別だけど」	「포렴 나누기라도 했다면 별개지만」	fix	compose
+compose:copula-after-vowel	望月さんの任期は、おおむね９月一杯だ。	모치즈키 씨의 임기는, 대개 9월까지다.	fix	compose
+compose:copula-after-vowel	白崎が熱っぽく抗議する。	시라사키가 열정적으로 항의한다.	fix	compose
+compose:copula-after-vowel	これは私の剣である	이것은 내 검이다	keep	compose
+compose:copula-after-vowel	静かだ。	조용하다.	keep	compose
+compose:copula-after-vowel	無理です。	무리입니다.	keep	compose
+compose:copula-after-vowel	「細かいヤツだな。占い的には同じことじゃないか」	「세세한 녀석이네. 점술적으로는 같은 것이잖아」	fix	compose

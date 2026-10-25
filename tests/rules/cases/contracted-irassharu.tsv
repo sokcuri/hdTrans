@@ -1,8 +1,8 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
 sound:contracted-auxiliaries	霞よ。ガンガン行くわよ。ついてらっしゃい。	안개야. 마구 갈 거야. 따라와.	fix	sound
-sound:contracted-auxiliaries	二水戦所属は伊達じゃないわ。雪風、ついてらっしゃいな！	이수변전 소속은 다테가 아니야. 유키카제, 따라와!	fix	sound
-sound:contracted-auxiliaries	第五駆逐隊、抜錨！いい？みんな、ついてらっしゃい！	제5구축대, 출항하기! 좋아? 모두, 따라와!	fix	sound
+sound:contracted-auxiliaries	二水戦所属は伊達じゃないわ。雪風、ついてらっしゃいな！	2수전 소속은 다테가 아니야. 유키카제, 따라와!	fix	sound
+sound:contracted-auxiliaries	第五駆逐隊、抜錨！いい？みんな、ついてらっしゃい！	제5구축대, 출항! 좋아? 모두, 따라와!	fix	sound
 sound:contracted-auxiliaries	あなたも、付いてらっしゃい。	당신도, 따라와.	fix	sound
 sound:contracted-auxiliaries	お気に入りの制服が台無しよ。覚えてらっしゃい。	마음에 드는 제복이 엉망이야. 두고 봐.	fix	sound
 sound:contracted-auxiliaries	「さあさ、まずは手を洗ってらっしゃい」	「자, 우선은 손을 씻고 와」	fix	sound

@@ -1,0 +1,17 @@
+# 규칙: GRM-21
+rule	input	expected	kind	layer
+dict:result-awake:1	「マイン、起きてる？」	「마인, 깨어 있어?」	fix	local
+dict:result-awake:1	提督、まだ起きてる？	제독, 아직 깨어 있어?	fix	local
+dict:result-awake:1	あ、まだ起きてるよ。	아, 아직 깨어 있어.	fix	local
+dict:result-awake:1	隊長が起きてるなら、まるゆもご一緒します。	대장이 깨어 있다면, 마루유도 함께 합니다.	fix	local
+dict:result-awake:1	照月が起きてるので、大丈夫です	테루즈키가 깨어 있기 때문에, 괜찮습니다	fix	local
+dict:result-awake:1	……いたっ！もー起きてるよぉ！	……아얏! 정말 깨어 있어!	fix	local
+dict:result-awake:1	まだ、起きているだろうか。	아직, 깨어 있을까.	fix	local
+dict:result-awake:1	でも、佳奈はもう起きていた。	하지만, 카나는 이미 깨어 있었다.	fix	local
+dict:result-awake:1	「……なんだ、起きてるじゃない」	「……뭐야, 깨어 있잖아」	fix	local
+dict:result-awake:1	何が起きてる？！	무슨 일이 일어나고 있어?!	keep	local
+dict:result-awake:1	こんな事態は起きていないだろう。	이런 사태는 일어나지 않을 것이다.	keep	local
+dict:result-awake:1	きっと何か起きてる！	분명 뭔가 일어나고 있어!	keep	local
+dict:result-awake:1	そもそもタイムスリップ自体、どうして起きてるのかすら分からなかった。	원래 타임 슬립 자체, 왜 일어나고 있는지조차 몰랐다.	keep	local
+dict:result-awake:1	身近に起きているだけに、恐ろしい。	가까이에 일어나고 있는 만큼, 무섭다.	keep	local
+dict:result-awake:1	もっと早く起きていれば、間に合ったのに。	좀 더 일찍 일어났더라면, 늦지 않았는데.	keep	local

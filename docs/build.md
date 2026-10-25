@@ -120,6 +120,10 @@ cmake --build --preset wasm --parallel
 `cmake --preset linux -DHDTRANS_WERROR=OFF`처럼 끌 수 있지만, 저장소의 코드는 경고 없이 빌드되어야
 합니다. 경고는 플래그가 아니라 코드를 고쳐서 없앱니다.
 
+clang과 gcc 빌드는 지역 변수가 다른 지역 변수나 매개변수를 가리는 것(MSVC `/W4`의 C4456, C4457)도 경고합니다.
+gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, clang의 `-Wshadow`는 멤버와 전역을
+가리는 것(C4458, C4459)도 잡습니다.
+
 컴파일 플래그: C++20, 라이브러리와 DLL은 예외와 RTTI 없이 빌드합니다. MSVC 빌드는 CRT를 정적으로
 링크하므로 각 DLL은 단일 파일로 배포됩니다.
 

@@ -38,7 +38,7 @@ normalize:katakana-endings	あと一マス。	앞으로 1매스.	keep	normalize
 normalize:katakana-endings	一マス進む	1매스 나아간다	keep	normalize
 normalize:katakana-endings	デスゲームの開始だ	데스 게임 개시다	keep	normalize
 normalize:katakana-endings	サドンデス！	서든 데스!	keep	normalize
-normalize:katakana-endings	蚊だ！カ！	모기다! 카!	keep	normalize
+normalize:katakana-endings	蚊だ！カ！	모기야! 카!	keep	normalize
 normalize:katakana-endings	新しいマイカー	새로운 마이카	keep	normalize
 normalize:katakana-endings	霧のデスマス	안개의 데스마스	keep	normalize
 normalize:katakana-endings	これがマスです	이것이 매스입니다	keep	normalize

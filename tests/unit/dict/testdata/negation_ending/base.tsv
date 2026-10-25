@@ -1,0 +1,8 @@
+# Negations in 지 않 against the key: the first four lines fit, the last two do not.
+key	ko	pos	sem	gram	dict	id
+ません	1지 않습니다	S5:0			GN	1
+じゃないか	1지 않겠니	S550			GN	2
+ても	6도	S500			GN	3
+D	1지 않습니다	U5i0			GN	4
+ませんし	1지않고	S5:0			GN	5
+っすか	1지 않아요	S500			GN	6

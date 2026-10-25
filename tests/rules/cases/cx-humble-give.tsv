@@ -1,0 +1,48 @@
+# 규칙: SPC-15
+rule	input	expected	kind	layer
+cx:humble-give:10	わたくしがお持ちしますね	제가 가져다 드릴게요	fix	rewrites
+cx:humble-give:10	甘いものをお持ちしますね。	단 것을 가져다 드릴게요.	fix	rewrites
+cx:humble-give:10	資料はわたしがお持ちしましょう。	자료는 내가 가져다 드릴게요.	fix	rewrites
+cx:humble-give:10	お持ちしました。	!rule:cx:humble-give:10	keep	rewrites
+cx:humble-give:12	お持ちしましょうか？	가져다 드릴까요?	fix	rewrites
+cx:humble-give:12	お茶、新しい物をお持ちしましょうか。	차, 새로운 것을 가져다 드릴까요.	fix	rewrites
+cx:humble-give:12	お持ちですか？	!rule:cx:humble-give:12	keep	rewrites
+cx:humble-give:14	私、お持ちします。	저, 가져다 드리겠습니다.	fix	rewrites
+cx:humble-give:14	コーヒー、新しいカップでお持ちします。	커피, 새로운 컵에서 가져다 드리겠습니다.	fix	rewrites
+cx:humble-give:14	お持ちください。	!rule:cx:humble-give:14	keep	rewrites
+cx:humble-give:20	お届けしますね。	전달해 드릴게요.	fix	rewrites
+cx:humble-give:20	お届けしましょう。	전달해 드릴게요.	fix	rewrites
+cx:humble-give:20	少しお休みしますね。	!rule:cx:humble-give:20	keep	rewrites
+cx:humble-give:22	お届けしましょうか？	전달해 드릴까요?	fix	rewrites
+cx:humble-give:22	お持ちになりますか？	!rule:cx:humble-give:22	keep	rewrites
+cx:humble-give:24	お届けします。	전달해 드리겠습니다.	fix	rewrites
+cx:humble-give:24	岸本がご報告します。	기시모토가 보고해 드리겠습니다.	fix	rewrites
+cx:humble-give:24	お手伝い致します。	도와 드리겠습니다.	fix	rewrites
+cx:humble-give:24	来週の水曜日までにはお送りいたします。	다음주 수요일까지는 보내 드리겠습니다.	fix	rewrites
+cx:humble-give:24	お任せします。	!rule:cx:humble-give:24	keep	rewrites
+cx:humble-give:24	お台所お借りします。	!rule:cx:humble-give:24	keep	rewrites
+cx:humble-give:24	お昼にしましょう。	!rule:cx:humble-give:24	keep	rewrites
+cx:humble-give:26	お見せしましょう。	보여드릴게요.	fix	rewrites
+cx:humble-give:26	膝枕をお貸ししましょう！	무릎 베개를 빌려 드릴게요!	fix	rewrites
+cx:humble-give:26	お見せしましょうか？	!rule:cx:humble-give:26	keep	rewrites
+cx:humble-give:30	今度ご紹介いたしますね。	이번 소개해 드릴게요.	fix	rewrites
+cx:humble-give:30	今度ご案内しますね！	이번에 안내해 드릴게요!	fix	rewrites
+cx:humble-give:30	ご一緒しますね。	!rule:cx:humble-give:30	keep	rewrites
+cx:humble-give:32	ご用意しましょうか？	준비해 드릴까요?	fix	rewrites
+cx:humble-give:32	お話しましょうか。	!rule:cx:humble-give:32	keep	rewrites
+cx:humble-give:34	ご説明します。	설명해 드리겠습니다.	fix	rewrites
+cx:humble-give:34	お部屋をお掃除します。	방을 청소해 드리겠습니다.	fix	rewrites
+cx:humble-give:34	もうすぐこの会場にご到着します。	!rule:cx:humble-give:34	keep	rewrites
+cx:humble-give:34	ご用意しました。	!rule:cx:humble-give:34	keep	rewrites
+cx:humble-give:40	お作りいたします。	만들어 드리겠습니다.	fix	rewrites
+cx:humble-give:40	おいしい物をお作りいたしますね。	맛있는 것을 만들어 드릴게요.	fix	rewrites
+cx:humble-give:40	お休みいたします。	!rule:cx:humble-give:40	keep	rewrites
+cx:humble-give:50	濃いお茶をお淹れしますね。	진한 차를 끓여 드릴게요.	fix	rewrites
+cx:humble-give:50	お茶をいれますね。	!rule:cx:humble-give:50	keep	rewrites
+cx:humble-give:52	お茶でもお淹れしましょうか？	차라도 끓여 드릴까요?	fix	rewrites
+cx:humble-give:52	何かお夜食でもお作りしましょうか？	뭔가 야식에서도 만들어 드릴까요?	fix	rewrites
+cx:humble-give:52	艦隊を港にお戻しましょう。	!rule:cx:humble-give:52	keep	rewrites
+cx:humble-give:54	お茶をお淹れします。	차를 끓여 드리겠습니다.	fix	rewrites
+cx:humble-give:54	お伝えします。	전해 드리겠습니다.	fix	rewrites
+cx:humble-give:54	お手数をおかけします。	!rule:cx:humble-give:54	keep	rewrites
+cx:humble-give:52	皆さんもお呼びしましょう。	!rule:cx:humble-give:52	keep	rewrites

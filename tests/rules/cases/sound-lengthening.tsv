@@ -3,7 +3,7 @@ sound:lengthening	ていとくぅー、こっち来て！	제독~, 여기 와!	f
 sound:lengthening	ていとくー、待ってよ！	제독~, 기다려!	fix	sound
 sound:lengthening	提督ー！	제독~!	fix	sound
 sound:lengthening	せんぱーい！	선배~!	fix	sound
-sound:lengthening	おにいちゃーん！	형~!	fix	sound
+sound:lengthening	おにいちゃーん！	오빠~!	fix	sound
 sound:lengthening	てーとく、おはよう。	제독, 좋은 아침.	fix	sound
 sound:lengthening	おねーさん、待って。	언니, 기다려.	fix	sound
 sound:lengthening	行かないでぇ！	가지 마!	fix	sound
@@ -11,13 +11,13 @@ sound:lengthening	そうなのぉ？	그래?	fix	sound
 sound:lengthening	置いていかないでー！	두고 가지 마~!	fix	sound
 sound:lengthening	今日も暑いねー。	오늘도 덥네~.	fix	sound
 sound:lengthening	すみませーん、お願いしまーす！	죄송합니다~, 부탁드립니다~!	fix	sound
-sound:lengthening	やーめーて！	그만두어~!	fix	sound
+sound:lengthening	やーめーて！	그만해~!	fix	sound
 sound:lengthening	誰もいねぇ。	아무도 벼.	keep	sound
 sound:lengthening	知らねー。	모른다.	keep	sound
 sound:lengthening	すげー！	대박!	keep	sound
 sound:lengthening	やりてー。	해라고―.	keep	sound
 sound:lengthening	食べたいなぁ。	먹고 싶다.	keep	sound
-sound:lengthening	もっと食べたいなぁー。	좀 더 먹고 싶다~.	fix	sound
+sound:lengthening	もっと食べたいなぁー。	좀 더 먹고 싶어~.	fix	sound
 sound:lengthening	へーそうなんだ。	에-그렇구나.	keep	sound
 sound:lengthening	せんぱーい、待って！	선배~, 기다려!	fix	sound
 sound:lengthening	「きゃあああああああああ！」	「꺄아아아아아아아아아!」	fix	sound
@@ -26,18 +26,18 @@ sound:lengthening	「きゃああああ！」	「꺄아아아아!」	keep	sound
 sound:lengthening	「あひぃぃぃっ！」	「아히이이잇!」	fix	sound
 sound:lengthening	「んくうぅっ……」	「으쿠우읏……」	fix	sound
 sound:lengthening	「ひぎっ！」	「히긱!」	keep	sound
-sound:lengthening	かわいいー！	귀엽다~!	fix	sound
-sound:lengthening	足りないー……	부족하다~……	fix	sound
+sound:lengthening	かわいいー！	귀여워~!	fix	sound
+sound:lengthening	足りないー……	부족해~……	fix	sound
 sound:lengthening	ずるいー、早く	치사하다~, 빨리	fix	sound
 sound:lengthening	いいー！	이이이!	keep	sound
-sound:lengthening	うるさいーー！	시끄럽다~!	fix	sound
-sound:lengthening	気持ちいいー！	기분 좋다~!	fix	sound
-sound:lengthening	お酒もおいしいー！	술도 맛있다~!	fix	sound
+sound:lengthening	うるさいーー！	시끄러워~!	fix	sound
+sound:lengthening	気持ちいいー！	기분 좋아~!	fix	sound
+sound:lengthening	お酒もおいしいー！	술도 맛있어~!	fix	sound
 sound:lengthening	ふいいー！	후이이이!	keep	sound
 sound:lengthening	ういいー！	우이이이!	keep	sound
 sound:lengthening	きいいー！	키이이이!	keep	sound
-sound:lengthening	これいいー！	이것 좋다~!	fix	sound
-sound:lengthening	もういいー！	이제 되었다~!	fix	sound
+sound:lengthening	これいいー！	이것 좋아~!	fix	sound
+sound:lengthening	もういいー！	이제 됐어~!	fix	sound
 sound:lengthening	かわいいーよ！	귀여워~!	fix	sound
 sound:lengthening	おいしいーね！	맛있네~!	fix	sound
 sound:lengthening	かわいーよ！	귀여워!	keep	sound

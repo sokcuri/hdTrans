@@ -35,11 +35,14 @@ struct DocumentContext {
     // verse and historical parts appended.
     std::string key;
     bool female = false;
+    // The document writes its speech in 「」: its text outside them is narration.
+    bool narrated = false;
     bool extraBuiltin = false;
     std::vector<std::string> persons;  // sorted person surfaces
     std::vector<std::string> verse;    // sorted verse lines
     std::string historical;            // JP KR POS rows
     dict::KeySet persons_;             // the persons of the document, for the person places
+    dict::KeySet cued;                 // the keys a strong cue of the document names (names::NameCues)
     dict::KeySet accepted;             // the accepted names of the registry
     dict::KeySet named;                // the accepted names and the surfaces shown to be names
     std::map<std::string, int, std::less<>> prose;  // Registry::ProseKatakana
@@ -66,6 +69,7 @@ struct LineFacts {
     std::optional<std::string> wholeLine;  // the line's KR row of lines.tsv, when it is one
     bool verse = false;                    // the line runs on into the next line
     std::vector<std::string> prose;        // names::ProseRuns of the line
+    std::vector<std::string> cued;         // the keys a cue of the line names, sorted
 };
 
 // The lookups of a line: its plain entries, the names it confirms and its person places.
@@ -74,6 +78,7 @@ struct LineLookup {
     const dict::UserText* plain = nullptr;
     const dict::KeySet* confirmed = nullptr;
     dict::KeySet persons;
+    dict::KeySet cued;               // the keys the line or a strong cue of the document names
     std::vector<std::string> prose;  // LineFacts::prose
 };
 

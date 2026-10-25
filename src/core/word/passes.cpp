@@ -2,6 +2,7 @@
 // runs and noun phrases are replaced by one longer item, class-3 words take the
 // selection of the word they attach to, and negated plain verbs take their negative.
 #include <algorithm>
+#include <iterator>
 #include <functional>
 #include <string>
 #include <string_view>
@@ -81,6 +82,36 @@ bool PhraseFollowsNi(Item* ni) {
     return true;
 }
 
+// Whether it is one of three or more copies of a word said again (internal::CopyAfter: 好き of
+// 好き好き好き, 好き、好き、好き) that the dictionary also reads as an adjectival noun. Such a run
+// is a cry whatever the words (SND-2): each copy reads as the word said alone, whatever stands
+// before or after the run, the last copy before a comma and another word too (好き、好き、好き、大好き).
+bool CriedCopy(const Item* it) {
+    // The copy right before c: a word up to three words back whose copy after it is c
+    // (好き|、|好き, 痛い|っ|、|痛い).
+    auto before = [](const Item* c) -> const Item* {
+        const Item* p = c->prev;
+        for (int k = 0; k < 3 && p != nullptr; k++, p = p->prev) {
+            if (internal::CopyAfter(p) == c && Slice(p->text, p->start, p->length) == Slice(c->text, c->start, c->length)) {
+                return p;
+            }
+        }
+        return nullptr;
+    };
+    // Two other copies on either side are enough to see three.
+    int others = 0;
+    for (const Item* c = it; others < 2 && (c = before(c)) != nullptr;) others++;
+    for (const Item* c = it; others < 2 && (c = internal::CopyAfter(c)) != nullptr;) others++;
+    if (others < 2 || it->w == nullptr) return false;
+    // Only a word the dictionary also reads as an adjectival noun says a feeling (好き, 嫌い); a
+    // verb stem that is also a noun stays the verb (迷い迷い迷い 헤매어, 休み休み休み).
+    const std::string combined = it->group->surface + std::string(it->DirectSurface());
+    for (const Record* r = it->w->DoLookup(combined, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (r->source == combined && At(r->partCode, 0) == 'G') return true;
+    }
+    return false;
+}
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -97,7 +128,9 @@ Phrase FindPhrase(Flusher& f) {
     for (Item* it = chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo()) continue;
         int mode = 1;
-        if (it->DirectCount() >= 20) {
+        if (it->DirectCount() >= 20 && CriedCopy(it)) {
+            mode = 3;
+        } else if (it->DirectCount() >= 20) {
             for (int slot = 0; slot < it->DirectCount(); slot++) {
                 if (!it->detail->enabled[slot]) continue;
                 const char sub = At(it->DirectCode(slot), 1);
@@ -196,6 +229,7 @@ Phrase FindPhrase(Flusher& f) {
                     break;
                 }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
+                const bool cry = CriedCopy(it);
                 Record* record = it->group->records;
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
@@ -207,7 +241,7 @@ Phrase FindPhrase(Flusher& f) {
                         copy = next;
                         next = next->After();
                     }
-                    if (next != nullptr) {
+                    if (next != nullptr && !cry) {
                         const char k = At(next->Code(0), 0);
                         if (!(k == '2' || k == '1' || Has(next->GAttr(0), "Pj") || (k == '6' && next->EntryText(0) != ","))) {
                             continue;
@@ -346,7 +380,55 @@ int InsertionBudget(const Chain& chain) {
     return 2 * count + 2;
 }
 
+// An item of kana the analysis could not place: a synthetic hiragana word, made for a
+// character no dictionary word covers, whose target the lookup left empty.
+bool UnplacedKana(const Item* it) {
+    if (it == nullptr || it->group == nullptr || it->group->entries.size() != 1) return false;
+    const Entry* e = it->group->entries.front();
+    return e->dst.empty() && e->field.empty() && Has(e->gattr, "Nm") && Classify(it->group->surface) == 13;
+}
+
+constexpr std::string_view kCaseParticles[] = {"が", "を", "に", "は", "も", "で", "と", "へ", "や", "の"};
+
+// Whether b starts where a ends in the same token.
+bool Adjacent(const Item* a, const Item* b) {
+    return a != nullptr && b != nullptr && a->tokenIndex == b->tokenIndex && a->text.data() == b->text.data() &&
+           a->start + a->length == b->start;
+}
+
 }  // namespace
+
+// A case particle the analysis could not place between a noun and a placed word is read as the
+// particle (鼻がもげる with もげる unknown leaves が alone; MNG-5).
+void ReadUnplacedParticles(Flusher& f) {
+    Worker& w = f.w;
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        if (!UnplacedKana(it) || std::find(std::begin(kCaseParticles), std::end(kCaseParticles), it->group->surface) ==
+                                     std::end(kCaseParticles)) {
+            continue;
+        }
+        Item* prev = it->prev;
+        Item* next = it->next;
+        if (!Adjacent(prev, it) || !Adjacent(it, next) || UnplacedKana(prev) || UnplacedKana(next) ||
+            At(prev->Code(0), 0) != '1' || prev->EntryText(0).empty()) {
+            continue;
+        }
+        const std::string_view particle = it->group->surface;
+        Record* records = nullptr;
+        Record** tail = &records;
+        for (Record* r = w.DoLookup(particle, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (r->source != particle || At(r->partCode, 1) != '2') continue;
+            *tail = r;
+            tail = &r->child;
+        }
+        *tail = nullptr;
+        if (records == nullptr) continue;
+        Item* read = w.InsertLateCandidate(it->text, it->start, it->tokenIndex, records);
+        if (read == nullptr || read->length != it->length) continue;
+        w.chain.Insert(read, true);
+        it = read;
+    }
+}
 
 void DrainNmTail(Flusher& f) {
     Worker& w = f.w;

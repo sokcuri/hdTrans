@@ -1,0 +1,35 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:volitional-ka	私も薄着しちゃおっかな	has:해버릴까	fix	normalize
+normalize:volitional-ka	もう寝ちゃおっかー……	이제 자버릴까~……	fix	normalize
+normalize:volitional-ka	今日は飲んじゃおっか！	오늘은 마셔버릴까!	fix	normalize
+normalize:volitional-ka	やっちゃおっか！	해 치울까!	fix	normalize
+normalize:volitional-ka	そろそろトドメを刺しちゃおっかな！	has:찔러버릴까!	fix	normalize
+normalize:volitional-ka	明日言いつけちゃおっかなー？	내일 명령해버릴까~?	fix	normalize
+normalize:volitional-ka	でもらおっかなぁ	has:받을까	fix	normalize
+normalize:volitional-ka	一番おっかない	제일 무섭다	keep	normalize
+normalize:volitional-ka	んー、おっかしい	음, 이상하다	keep	normalize
+normalize:question-kai	後ろの方々はお仲間ですかい？	뒤의 분들은 동료입니까?	fix	normalize
+normalize:question-kai	ちゃんとやってるかい？	제대로 하고 있어?	keep	normalize
+normalize:question-kai	強さの秘密を知ってるかい？	강함의 비밀을 알고 있어?	keep	normalize
+normalize:question-kai	ウィスキーで一杯やるかい？	위스키로 한잔 할까?	keep	normalize
+normalize:question-kai	よお！ 元気してるかい、先生？	요오! 건강하고 있어, 선생님?	fix	normalize
+normalize:question-kai	お元気でやってますかい？	건강해 합니까?	fix	normalize
+normalize:question-kai	先生も食べるかい？	선생님도 먹을까?	keep	normalize
+normalize:question-kai	「佐藤くんかい？」	「사토 군이야?」	keep	normalize
+normalize:question-kai	元気かい？	건강해?	keep	normalize
+normalize:question-kai	そうかい	그래	keep	normalize
+normalize:konna-n	そんなんでいいの？	그런 것으로 좋은 거야?	fix	normalize
+normalize:konna-n	こんなんで	이런 것으로	fix	normalize
+normalize:konna-n	こんなんじゃ	has:이런 것	fix	normalize
+normalize:konna-n	あんなんで	저런 것으로	fix	normalize
+normalize:konna-n	どんなんがいい？	어떤 것이 좋아?	fix	normalize
+ending:chaou-ka	さあ片付けて寝ちゃおうか？	자 정리해 자버릴까?	fix	builtin-ending
+ending:chaou-ka	ここで寝ちゃおうかぁ？	여기서 자버릴까?	fix	builtin-ending
+ending:chaou-ka	飲んじゃおうかな	마셔버릴까	fix	builtin-ending
+ending:chaou-ka	今日は飲んじゃおう！	오늘은 마셔버리자!	keep	builtin-ending
+dict:gram:konnano:1	こんなので	이런 것으로	fix	local
+dict:gram:konnano:1	こんなのは	이런 것은	fix	local
+dict:gram:konnano:1	こんなの、嫌だ	이런 건, 싫다	keep	local
+dict:gram:konnano:1	こんなの嫌	이런 건 싫다	keep	local
+normalize:question-kai	ボクの出番まだぁ？聞いているかい？	has:듣고 있어?	keep	normalize

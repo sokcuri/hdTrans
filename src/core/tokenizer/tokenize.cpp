@@ -133,6 +133,24 @@ private:
         return !(*joins_)(before, after);
     }
 
+    // Whether the letter at i after kana goes on with the Japanese token: a word of the dictionary
+    // spans the kana before it and the letter (うp, おk; SpaceJoins on the text before and the
+    // letters, folded, with the Japanese text after them).
+    bool KeptLetter(size_t i) const {
+        if (joins_ == nullptr || (prev_ != kClassHiragana && prev_ != kClassKatakana)) return false;
+        constexpr size_t kBefore = 10, kAfter = 10;
+        size_t from = i;
+        while (from > 0 && i - from < kBefore && Class(s_[from - 1]) != 0) from--;
+        std::string before, after;
+        for (size_t k = from; k < i; k++) text::AppendRune(before, s_[k]);
+        size_t to = i;
+        while (to < s_.size() && IsAlphaRune(s_[to])) text::AppendRune(after, Fold(s_[to++]));
+        for (const size_t end = to + kAfter; to < s_.size() && to < end && Class(s_[to]) != 0; to++) {
+            text::AppendRune(after, s_[to]);
+        }
+        return (*joins_)(before, after);
+    }
+
     size_t BufSize() const { return out_.text.size() - bufStart_; }
 
     void Emit(int type) {
@@ -206,6 +224,10 @@ private:
             Add(c);
         } else if (cur_ == kTypeJapanese && type == kTypeAsciiSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A space between Japanese text is dropped.
+        } else if (cur_ == kTypeJapanese && type == kTypeAlpha && KeptLetter(p_)) {
+            Add(c);
+            p_++;  // prev_ stays the class of the kana, for the letters after it
+            return;
         } else {
             AsciiBoundary(type);
         }
@@ -389,6 +411,11 @@ private:
             Add(c);
         } else if (cur_ == kTypeJapanese && type == kTypeNumber) {
             Add(Fold(c));
+        } else if (cur_ == kTypeJapanese && type == kTypeAlpha && KeptLetter(p_)) {
+            Add(Fold(c));
+            maskAt_ = kNoMask;
+            p_++;  // prev_ stays the class of the kana, for the letters after it
+            return;
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A full-width space between Japanese text is dropped.
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && KeptSpace(p_)) {

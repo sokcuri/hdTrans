@@ -1,6 +1,7 @@
 // Table tests of the normalising rewrites, one table per rewrite, and of the whole
 // sequence of Normalize.
 #include <cstdlib>
+#include <set>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -10,6 +11,7 @@
 #include "core/pipeline/normalize.h"
 #include "core/pipeline/spoken_forms_gen.h"
 #include "core/pipeline/stage_text.h"
+#include "core/text/utf8.h"
 #include "hdtest.h"
 
 using namespace std::literals;
@@ -341,6 +343,20 @@ HD_TEST(pipeline_rewrite_casual) {
         {"漢字そっか"sv, "漢字そっか"sv},
         {"お風呂で汗を流そっか？"sv, "お風呂で汗を流そっか？"sv},  // the sound stage reads it
         {"自分なんて、みそっかすの底辺"sv, "自分なんて、みそっかすの底辺"sv},
+        {"自分のも、編んじゃおっかな…"sv, "自分のも、編んじゃおうかな…"sv},
+        {"寝ちゃおっか？"sv, "寝ちゃおうか？"sv},
+        {"で一番おっかない"sv, "で一番おっかない"sv},
+        {"て……おっかねぇ"sv, "て……おっかねぇ"sv},
+        {"全部手作りなのかい？"sv, "全部手作りなのかい？"sv},
+        {"元気してるかい、提督？"sv, "元気してるか、提督？"sv},
+        {"お元気でやってますかい？"sv, "お元気でやってますか？"sv},
+        {"どうすんだい？"sv, "どうするんだい？"sv},
+        {"聞いているかい？"sv, "聞いているかい？"sv},
+        {"このかいは"sv, "このかいは"sv},
+        {"こんなんで"sv, "こんなので"sv},
+        {"そんなんじゃ"sv, "そんなのじゃ"sv},
+        {"こんなんだ"sv, "こんなのだ"sv},
+        {"こんなん。"sv, "こんなん。"sv},
         {"こっからは教師の領分じゃない"sv, "ここからは教師の領分じゃない"sv},
         {"もっかい撮るから笑って"sv, "もう一回撮るから笑って"sv},
         {"「んで、どうやって相談を集める？」"sv, "「それで、どうやって相談を集める？」"sv},
@@ -433,6 +449,15 @@ HD_TEST(pipeline_rewrite_military_time) {
         {"ヒトフタマルマルッ昼"sv, "ヒトフタマルマルッ昼"sv},
         {"ヒトゴーマルマルスタート"sv, "ヒトゴーマルマルスタート"sv},
         {"ゴーゴーマルマルだ"sv, "ゴーゴーマルマルだ"sv},
+        {"ヒトハチ～マルマル！"sv, "1800！"sv},
+        {"フタヒト～マルマルです！"sv, "2100です！"sv},
+        {"マルサン…マルマル！"sv, "0300！"sv},
+        {"フタサン……マルマル……。"sv, "2300……。"sv},
+        {"ヒトサンマルマル～フタマルマルマル"sv, "1300～2000"sv},
+        {"ヒトヨン、マル…ああ"sv, "ヒトヨン、マル…ああ"sv},
+        {"現在時刻ヒトキュマルマル。"sv, "現在時刻1900。"sv},
+        {"マルサン・・マルマル！"sv, "0300！"sv},
+        {"ヒトフタマルマルゥ！"sv, "1200！"sv},
     };
     Check(RewriteMilitaryTime, cases);
 }
@@ -564,6 +589,30 @@ HD_TEST(pipeline_respell_kanji_cries) {
     for (const Case& c : cases) HD_CHECK_EQ(RespellKanjiCries(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_respell_old_forms) {
+    // A stand-in for the dictionary: 赤澤 and 龍 are words that hold an old form.
+    const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
+        return line.substr(at).starts_with("龍") ||
+               (at >= "赤"sv.size() && line.substr(at - "赤"sv.size()).starts_with("赤澤"));
+    };
+    const Case cases[] = {
+        {"格好惡いだろ"sv, "格好悪いだろ"sv},
+        {"隱れた樣子"sv, "隠れた様子"sv},
+        {"赤澤さんと澤田さん"sv, "赤澤さんと沢田さん"sv},
+        {"悪い"sv, "悪い"sv},
+        {"神龍"sv, "神龍"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellOldForms(c.in, words, nullptr), std::string(c.want));
+    // Every member is OLD=NEW, one kanji on each side, each old form once.
+    std::set<std::string_view> olds;
+    for (const std::string_view pair : hdTrans::dict::ClassMembers("spelling.old-form")) {
+        const size_t eq = pair.find('=');
+        HD_CHECK(eq != std::string_view::npos && hdTrans::text::RuneCount(pair.substr(0, eq)) == 1 &&
+                 hdTrans::text::RuneCount(pair.substr(eq + 1)) == 1);
+        HD_CHECK(olds.insert(pair.substr(0, eq)).second);
+    }
+}
+
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},
@@ -574,6 +623,8 @@ HD_TEST(pipeline_write_kin_terms) {
     const Case male[] = {
         {"お姉ちゃん、わたくしは"sv, "언니、わたくしは"sv},
         {"お兄様！"sv, "お兄様！"sv},
+        {"お兄ちゃん、僕も行く"sv, "兄ちゃん、僕も行く"sv},  // a man's お兄ちゃん, read 형
+        {"お兄ちゃん、早く"sv, "お兄ちゃん、早く"sv},   // no cue: the dictionary's 오빠
     };
     for (const Case& c : male) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
 }
@@ -619,6 +670,16 @@ HD_TEST(pipeline_emphatic_spellings) {
         {"しっかたねえ、やるぞ"sv, "しかたねえ、やるぞ"sv},
         {"すんごく痛い"sv, "すごく痛い"sv},
         {"すんなり進んだ"sv, "すんなり進んだ"sv},
+        {"あったりまえでしょ"sv, "あたりまえでしょ"sv},
+        {"どこかにあったりして"sv, "どこかにあったりして"sv},
+        {"くっさいのよ"sv, "くさいのよ"sv},
+        {"うわ、くっさ。"sv, "うわ、臭っ。"sv},
+        {"うっせーな"sv, "うっせーな"sv},
+        {"うっせ"sv, "うるせえ"sv},
+        {"バッカじゃないの"sv, "バカじゃないの"sv},
+        {"バッカスの神"sv, "バッカスの神"sv},
+        {"でしょ、ばっかじゃないの"sv, "でしょ、バカじゃないの"sv},
+        {"学食ばっかじゃ飽きる"sv, "学食ばっかじゃ飽きる"sv},
     };
     Check(RewriteEmphaticSpellings, cases);
 }
@@ -750,7 +811,17 @@ HD_TEST(pipeline_normalize_tsu_runs) {
     };
     Check([](std::string_view text) { return CollapseTsuRuns(text); }, cases);
     const auto holdsAll = [](const void*, std::string_view, size_t, size_t) { return true; };
-    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", holdsAll, nullptr), "じっっくり");
+    HD_CHECK_EQ(CollapseTsuRuns("じっっくり", {.holds = holdsAll}), "じっっくり");
+    // The stress mark goes before the word the lookup finds, once for each word.
+    const auto lineStart = [](const void*, std::string_view line, size_t at) {
+        return line.substr(0, at).ends_with("と") ? std::string::npos : size_t{0};
+    };
+    HD_CHECK_EQ(CollapseTsuRuns("すっっっごい", {.start = lineStart}), "\uE00Dすっごい");
+    HD_CHECK_EQ(CollapseTsuRuns("すっっごっっい", {.start = lineStart}), "\uE00Dすっごっい");
+    HD_CHECK_EQ(CollapseTsuRuns("とっっても", {.start = lineStart}), "とっても");
+    // A later run whose word starts before the word of an earlier one.
+    const auto back = [](const void*, std::string_view, size_t at) { return at > 6 ? size_t{0} : size_t{3}; };
+    HD_CHECK_EQ(CollapseTsuRuns("あいっっうえっっお", {.start = back}), "\uE00Dあ\uE00Dいっうえっお");
 }
 
 // Every hiragana stem the katakana stems are rewritten to is a stem of an adjective or a

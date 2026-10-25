@@ -99,6 +99,7 @@ public:
     Item* QueryPrefixTable(std::string_view text, int offset, int token);
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
+    bool GodanCausative(std::string_view stem) const;
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
     bool CutsWord(std::string_view before, std::string_view ending, std::string_view after) const;
@@ -153,6 +154,9 @@ private:
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
+    // Whether the text head that a word follows in its token ends in something other than a noun
+    // (ConstraintContext::NotAfterNoun).
+    bool NotAfterNoun(std::string_view head);
     void DropBoundUtterances(Lookup& l, std::string_view query);
     void DropNegatedAdverbs(Lookup& l, std::string_view query);
     void DropFinalAdnominals(Lookup& l, std::string_view query);
@@ -160,6 +164,7 @@ private:
     void DropModalSplits(Lookup& l, std::string_view query);
     bool SplitsModal(const Record& r, std::string_view query, bool afterKa) const;
     bool SplitsKashira(const Record& r, std::string_view query) const;
+    bool SplitsDeshou(const Record& r, std::string_view query) const;
     bool SplitsVerb(const Record& r, std::string_view query) const;
     bool PersonSuffixAt(std::string_view s) const;
     // Whether text starts with an honorific that HonorificItem reads after a name.

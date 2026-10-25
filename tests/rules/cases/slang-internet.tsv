@@ -55,7 +55,7 @@ dict:s:9450	荷物を箱に詰めた	!rule:dict:s:9450	keep	local
 dict:s:9450	息が詰まる	!rule:dict:s:9450	keep	local
 phrase:それな	それな！	그러니까!	fix	builtin-phrase
 phrase:それな	「それな」	「그러니까」	fix	builtin-phrase
-phrase:それな	それな、今回はマジで、飛ばされた方が4人で良かったよな	그러니까, 이번에는 진짜로, 날아간 편이 4명이 좋았지	fix	builtin-phrase
+phrase:それな	それな、今回はマジで、飛ばされた方が4人で良かったよな	그러니까, 이번에는 진짜로, 날아간 편이 4명이라서 다행이었지	fix	builtin-phrase
 phrase:それな	それなら行く。	그렇다면 간다.	keep	builtin-phrase
 phrase:それな	それなりに多彩な異国風料理	그 나름대로 다채로운 이국풍 요리	keep	builtin-phrase
 phrase:ぴえん	ぴえん。	힝.	fix	builtin-phrase
@@ -69,10 +69,23 @@ phrase:おけ	時報も任せておけ。	시보도 맡겨 두어라.	keep	built
 phrase:ワロタ	ワロタ	ㅋㅋㅋ	fix	builtin-phrase
 phrase:てぇてぇ	てぇてぇ	존귀해	fix	builtin-phrase
 phrase:ウケる	「無理に決まってるじゃん。ウケる」	「무리일 게 뻔하잖아. 웃겨」	fix	builtin-phrase
-phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 다르고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
+phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 아니고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
 dict:i:7788	幼なじみの観察眼、恐るべし。	소꿉친구 관찰안, 대단하다.	fix	lookup
 dict:i:7788	王子様恐るべし……	왕자님 대단하다……	fix	lookup
 dict:i:7788	恐るべき力	무서운 힘	keep	lookup
 dict:s:1500	ググる	구글링	keep	lookup
 dict:s:9451	「ワンチャンスだと？ ルールを説明しろ。」	「원 찬스라고? 룰을 설명해라.」	keep	lookup
 dict:variant:kana:oshihaka	気持ちを推しはかる	기분을 헤아린다	keep	lookup
+dict:s:9453	写真うｐ！	사진 업!	fix	lookup
+dict:s:9453	これは是非とも写真うｐ	이것은 부디 사진 업	fix	lookup
+dict:s:9453	写真うｐはうやむやになっちゃったけどｗ	사진 업은 애매하게 되어버렸지만 ㅋ	fix	lookup
+dict:s:9453	おいらは咬みつきが写真うｐしてくれたら信じる！	has:사진 업해 주면	fix	lookup
+dict:s:9453	だからうｐ！顔写真うｐ！	그러니까 업! 얼굴 사진 업!	fix	lookup
+dict:s:9453	＞写真うｐ	>사진 업	fix	lookup
+dict:s:9454	ここ実話オンリーの怖い話掲示板だけどおｋ？	has:게시판이지만 오케이?	fix	lookup
+dict:s:9454	おｋおｋ	오케이 오케이	fix	lookup
+dict:s:9454	【雑談おｋ】	【잡담 오케이】	fix	lookup
+dict:s:9454	おｋ。すぐ確認の電話	오케이. 바로 확인의 전화	fix	lookup
+dict:s:9454	これはOKです	이것은 OK입니다	keep	lookup
+dict:s:9453	あれをupした	저것을 up 했다	keep	lookup
+dict:s:9453	そうかなｗ	그럴까 ㅋ	keep	lookup

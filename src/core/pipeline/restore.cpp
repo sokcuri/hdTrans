@@ -84,6 +84,61 @@ std::string DropOpeningSpaces(std::string_view text) {
     return out;
 }
 
+// The closing brackets, as typed and in the forms the engine writes for them. A ” or ’ closes
+// only a quote opened before it (“ or ” before ”, ‘ or ’ before ’), a > or ＞ only after a < or ＜.
+constexpr std::u32string_view kClosings = U"」』）)】〕］]〉》｝}”’>＞";
+
+// The closing brackets of text (kClosings), each as the index of its rune in Runes(text).
+std::vector<size_t> Closings(const std::u32string& rs) {
+    std::vector<size_t> out;
+    bool quoted = false, singleQuoted = false;
+    int angle = 0;
+    for (size_t i = 0; i < rs.size(); i++) {
+        const char32_t r = rs[i];
+        if (r == U'“') quoted = true;
+        if (r == U'‘') singleQuoted = true;
+        if (r == U'<' || r == U'＜') angle++;
+        if (!Contains(kClosings, r)) continue;
+        if (r == U'”' || r == U'’') {
+            bool& open = r == U'”' ? quoted : singleQuoted;
+            open = !open;
+            if (open) continue;
+        }
+        if (r == U'>' || r == U'＞') {
+            if (angle == 0) continue;
+            angle--;
+        }
+        out.push_back(i);
+    }
+    return out;
+}
+
+// Whether text holds white space before a closing bracket.
+bool HasClosingSpace(std::string_view text) {
+    const std::u32string rs = Runes(text);
+    for (const size_t i : Closings(rs)) {
+        if (i > 0 && (rs[i - 1] == U' ' || rs[i - 1] == U'　' || rs[i - 1] == U'\t')) return true;
+    }
+    return false;
+}
+
+// text without the ASCII spaces before its closing brackets.
+std::string DropClosingSpaces(std::string_view text) {
+    const std::u32string rs = Runes(text);
+    const std::vector<size_t> closings = Closings(rs);
+    if (closings.empty()) return std::string(text);
+    std::u32string out;
+    size_t from = 0;
+    for (const size_t i : closings) {
+        size_t start = i;
+        while (start > from && rs[start - 1] == U' ') start--;
+        out.append(rs, from, start - from);
+        from = i;
+    }
+    out.append(rs, from);
+    return Utf8(out);
+}
+
 // The forms the engine writes for the brackets it does not write as typed.
 char32_t BracketForm(char32_t r) {
     switch (r) {
@@ -261,6 +316,9 @@ Pieces DropAddedSpaces(const Pieces& typed, const Pieces& out) {
         bool opening = false;
         for (const auto& p : inLines[i]) opening = opening || HasOpeningSpace(TextOf(p));
         if (!opening) line = MapText(line, DropOpeningSpaces);
+        bool closing = false;
+        for (const auto& p : inLines[i]) closing = closing || HasClosingSpace(TextOf(p));
+        if (!closing) line = MapText(line, DropClosingSpaces);
     }
     return output::JoinLines(outLines);
 }
@@ -500,11 +558,46 @@ std::string WriteEmphasis(std::string_view s) {
     return Utf8(out);
 }
 
+namespace {
+
+// The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
+constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+
+// Whether a syllable with the final f is drawn out by WriteStress: none or one that can be held
+// (ㄴ ㄹ ㅁ ㅇ).
+bool StressFinal(int f) { return f == 0 || f == 4 || f == 8 || f == 16 || f == 21; }
+
+}  // namespace
+
+std::string WriteStress(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, kStressMark)) return std::string(s);
+    std::u32string out;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != kStressMark) {
+            out.push_back(rs[i]);
+            continue;
+        }
+        const auto first = i + 1 < rs.size() ? text::Split(rs[i + 1]) : std::nullopt;
+        // The drawn syllables are vowels; without a final, a syllable that starts with ㅇ after them
+        // would run into them (매우).
+        const auto second = i + 2 < rs.size() ? text::Split(rs[i + 2]) : std::nullopt;
+        if (!first || !StressFinal(first->final) || (first->final == 0 && second && second->initial == 11)) continue;
+        const int vowel = kLongVowel[first->vowel];
+        out.push_back(text::Join(first->initial, first->vowel, 0));
+        out.push_back(text::Join(11, vowel, 0));
+        out.push_back(text::Join(11, vowel, first->final));
+        i++;
+    }
+    return Utf8(out);
+}
+
 std::string WriteLengthening(std::string_view s) {
     const std::u32string rs = Runes(s);
-    if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark) && !Contains(rs, output::kClipMark)) return std::string(s);
-    // The vowel that draws out a vowel (ㅑ ㅏ, ㅙ ㅔ, ㅝ ㅓ), by jamo index.
-    static constexpr int kLongVowel[21] = {0, 1, 0, 1, 4, 5, 4, 5, 8, 0, 5, 5, 8, 13, 4, 5, 20, 13, 18, 20, 20};
+    if (!Contains(rs, kLengthenMark) && !Contains(rs, kDrawnMark) && !Contains(rs, output::kClipMark) &&
+        !Contains(rs, output::kCryMark) && !Contains(rs, output::kClippedCryMark)) {
+        return std::string(s);
+    }
     std::u32string out;
     int lengthenings = 0;  // the lengthenings right before r
     for (const char32_t r : rs) {
@@ -523,6 +616,8 @@ std::string WriteLengthening(std::string_view s) {
             out.push_back(static_cast<char32_t>(0xAC00 + (11 * 21 + kLongVowel[syllable % 588 / 28]) * 28 + final));
         } else if (r == output::kClipMark) {
             if (!out.empty() && text::Final(out.back()) == 0) out.back() += static_cast<char32_t>(text::kFinalSiot);
+        } else if (output::IsCryMark(r)) {
+            continue;
         } else if (r != kLengthenMark) {
             out.push_back(r);
         } else if (out.empty() || (out.back() != U'~' && out.back() != U'～')) {
@@ -815,7 +910,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
     });
     st.line = UnescapePrivateUse(WriteLaughter(
         DropEchoedGlosses(DropParticleMarks(
-            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(output::String(st.korean)))))))),
+            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(WriteStress(output::String(st.korean))))))))),
         output::String(typed)));
     if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;

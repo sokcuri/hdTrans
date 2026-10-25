@@ -1,0 +1,30 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+sound:contracted-n	「腐れ上司も去年同じことやってたし、文句は言わせんぞ」	has:말하게 하지 않아	fix	sound
+sound:contracted-n	こっち見んな！この糞提督！	여기 보지 마! 이 대변 제독!	fix	sound
+sound:contracted-n	次から次へと…、こっち来んな！	잇달아…, 여기 오지 마!	fix	sound
+sound:contracted-n	だから、ジロジロ見んなって、このクソ提督！	그러니까, 빤히 보지 말라고, 이 빌어먹을 제독!	fix	sound
+sound:contracted-n	よクソエセ霊能力者さん笑わせんな	has:웃기지 마	fix	sound
+sound:contracted-n	スカート引っ張んないで！	스커트 잡아당기지 마!	fix	sound
+sound:contracted-n	ちょっと信じらんないね。	조금 믿을 수 없네.	fix	sound
+sound:contracted-n	悪いんだけど机くっつけさせてくんない？	has:붙이게 해 주지 않겠어?	fix	sound
+sound:contracted-n	運営さん許可してくんねえかな・・・	has:주지 않을까	fix	sound
+sound:contracted-n	法的には居候と変わんねえぜ？	has:식객과 변함없지?	fix	sound
+sound:contracted-n	まぁそう焦んないでよ、夜は長い	has:초조해하지 말아	fix	sound
+sound:contracted-n	確かにお金でも貰わないとやってらんないね	has:할 수 없네	fix	sound
+sound:contracted-n	あいつには負けんぞ！	저 녀석에게는 지지 않아!	fix	sound
+sound:contracted-oru	人の話聞いとらんかったのか！	has:듣고 있지 않았	fix	sound
+sound:contracted-oru	「なーにを言っとるか柏木君」	has:말을 하고 있을까	fix	sound
+sound:contracted-oru	一日中頑張っとる提督を見てると	has:노력하고 있는 제독	fix	sound
+sound:contracted-n	ミドリさんの食生活とか想像できんなそういえばｗ	lacks:상상할 수 있군	keep	sound
+sound:contracted-n	秋雲のヤツも誘ってやんなよぉ	lacks:지 마	keep	sound
+sound:contracted-n	ま沖ちんも頑張んなよ。大丈夫だって。	lacks:노력하지 마	keep	sound
+sound:contracted-n	……いかんな、休みや早く帰れ	lacks:화내지	keep	sound
+sound:contracted-n	食べんかった	먹지 않았다	keep	sound
+sound:contracted-n	すまんな、お前を大人にしてやれなくて	has:미안,	keep	sound
+sound:contracted-n	すごく怖いんです	정말 무섭습니다	keep	sound
+sound:contracted-n	ご、ごめんなさい。	미, 미안해요.	keep	sound
+sound:contracted-n	みんな、あたしに続け！	모두, 나를 따라라!	keep	sound
+sound:contracted-oru	北海道でとれた野菜のお味噌汁	lacks:있어	keep	sound
+sound:contracted-oru	こいつらに邪魔されて身動きとれなかったんだよ！	lacks:있지	keep	sound
+sound:contracted-oru	戦国時代に飛ばされてたら、俺は信長に天下とらしてたぜ	lacks:강림	keep	sound

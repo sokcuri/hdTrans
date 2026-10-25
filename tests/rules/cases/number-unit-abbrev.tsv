@@ -1,0 +1,28 @@
+# 규칙: NUM-1
+rule	input	expected	kind	layer
+lookup:unit-number	二水戦の鬼は神通なんだ。	2수전의 귀신은 신통이야.	fix	lookup
+lookup:unit-number	三水戦、出撃します！	3수전, 출격합니다!	fix	lookup
+lookup:unit-number	一水戦旗艦の経験と自負は伊達じゃないんです！	1수전 기함 경험과 자부는 다테가 아닙니다!	fix	lookup
+lookup:unit-number	一航戦の誇り…こんなところで失うわけには…	1항전의 자랑…이런 곳에서 잃을 수는…	fix	lookup
+lookup:unit-number	一航戦、出撃します。	1항전, 출격합니다.	fix	lookup
+lookup:unit-number	三航戦旗艦瑞鳳、抜錨しちゃいます！	3항전 기함 즈이호우, 출항해버립니다!	fix	lookup
+lookup:unit-number	三一駆、沖波。きっと…守ります！	31구, 오키나미. 분명…지킵니다!	fix	lookup
+lookup:unit-number	二一駆、やっと揃ったかや？	21구, 드디어 갖추어졌는지야?	fix	lookup
+lookup:unit-number	十八駆の五周年よ。	18구의 5주년이야.	fix	lookup
+lookup:unit-number	いよいよ決戦…十八駆、全力で事に当たります。	드디어 결전…18구, 전력으로 그 일에 종사합니다.	fix	lookup
+lookup:unit-number	四戦隊、出撃！	4전대, 출격!	fix	lookup
+lookup:unit-number	第四戦隊、必ず戦場で輝いて見せる！	제4전대, 반드시 전장에서 빛나 보여!	fix	lookup
+lookup:unit-number	四駆！八駆！みんな集合よ！	4구! 8구! 모두 집합이야!	fix	lookup
+lookup:unit-number	四駆逐隊	4구축대	fix	lookup
+lookup:unit-number	二水雷戦隊	2수뢰전대	fix	lookup
+lookup:unit-number	一水雷戦隊	1수뢰전대	fix	lookup
+lookup:unit-number	第百四戦隊、旗艦八丈、出撃です。	제104전대, 기함 하치조, 출격입니다.	keep	lookup
+lookup:unit-number	第三十一駆逐隊	제31구축대	keep	lookup
+lookup:unit-number	精鋭「二七駆」第一小隊、出撃せよ！	정예 「27구」제1소대, 출격하라!	keep	lookup
+lookup:unit-number	十六駆でお花見だって！	16구로 꽃놀이래!	keep	lookup
+lookup:unit-number	七駆の行くところ、作戦成功間違いなし	7구가 가는 곳, 작전 성공 틀림없음	keep	lookup
+lookup:unit-number	三十二駆、皆を助けに来たよ。	32구, 모두를 도우러 왔어.	keep	lookup
+lookup:unit-number	二航戦、蒼龍！参ります！	2항전, 창룡! 가겠습니다!	keep	lookup
+lookup:unit-number	第七駆逐隊	제7구축대	keep	lookup
+lookup:unit-number	私達二水戦も全艦待機しています。	has:2수전도	fix	lookup
+dict:jisjk:267832	精鋭四水戦(4Sd)より4隻の精鋭艦隊を南方海域に展開。	has:(4Sd)부터	keep	local

@@ -32,3 +32,7 @@ aspect:te-kuru	弁当を買ってきた	has:사 왔다	keep	ending-defaults
 aspect:te-kuru	雨が降ってきた	has:왔다	keep	ending-defaults
 aspect:te-kuru	ずっと頑張ってきた	has:노력해 왔다	keep	ending-defaults
 ending:past	もう行った	has:갔다	keep	ending-defaults
+cx:fused-obligation:5	ユイちゃんと一緒に、大掃除しなきゃ。	has:대청소해야 한다	fix	rewrites
+cx:obligation-alone:30	助けなきゃ、と思った。	has:도와야 한다고	fix	rewrites
+cx:obligation-alone:70	行かなきゃ損だ	has:가지 않으면	keep	rewrites
+cx:obligation-alone:70	行かなきゃ、間に合わない	has:가지 않으면	keep	rewrites
