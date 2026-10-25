@@ -26,3 +26,6 @@ cx:yatta-achieve:10	やったよう	한 듯	keep	rewrites
 cx:yatta-achieve:20	宿題はよくやった。	숙제는 잘 했다.	keep	rewrites
 cx:yatta-achieve:10	大学でもバターンやったからね	대학에서도 콰앙했으니까	keep	rewrites
 cx:yatta-achieve:10	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	keep	rewrites
+sound:yatta	ぎゅっとやった瞬間、悲鳴があがる。	lacks:앗싸	keep	sound
+sound:yatta	イッショウケンメイ…ヤッタ…ノ。	lacks:앗싸	keep	sound
+sound:yatta	やった……よし！	has:앗싸	fix	sound

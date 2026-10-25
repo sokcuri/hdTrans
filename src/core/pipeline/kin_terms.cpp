@@ -20,7 +20,8 @@ constexpr KinTerm kKinTerms[] = {
     {"お姉様", "언니"}, {"お姉さま", "언니"}, {"姉様", "언니"}, {"姉さま", "언니"}, {"お姉ちゃん", "언니"},
 };
 
-constexpr KinTerm kMaleKinTerms[] = {{"お兄ちゃん", "형"}, {"おにいちゃん", "형"}};
+// Written as the word the dictionary reads 형, so that the line is still segmented as Japanese.
+constexpr KinTerm kMaleKinTerms[] = {{"お兄ちゃん", "兄ちゃん"}, {"おにいちゃん", "にいちゃん"}};
 
 bool HasAny(std::string_view s, std::span<const std::string_view> list) {
     for (std::string_view m : list) {

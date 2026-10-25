@@ -30,3 +30,5 @@ cx:nandesu-what:10	……何故なんです？	……왜입니까?	keep	rewrites
 cx:nandesu-what:10	あ、なんです？	아, 뭡니까?	fix	rewrites
 compose:formal-question	「もちろん死んで欲しくないでありますよ？」	「물론 죽기를 원하지 않습니다?」	keep	compose
 compose:formal-question	あの…魚雷撃ちますよ？	그…어뢰 쏴요?	fix	compose
+cx:nandesu-what:10	「えと、どっちも、毒蛾とゴーレムで、毒無効、なんです……」	「음, 어느 쪽도, 독나방과 골렘으로, 독무효, 입니다……」	keep	rewrites
+cx:nandesu-what:10	提督さん。て、手作り、なんです…。	has:수제, 입니다	keep	rewrites

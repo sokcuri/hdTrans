@@ -463,7 +463,7 @@ bool Asks(char32_t close, std::string_view rest, bool* exclaimed) {
             return true;
         }
         if (c == U'！' || c == U'!' || c == U'‼') *exclaimed = true;
-        if (std::u32string_view(U"！!‼…‥～~〜♪☆★♥♡").find(c) == std::u32string_view::npos &&
+        if (std::u32string_view(U"！!‼…‥～~〜∼♪☆★♥♡").find(c) == std::u32string_view::npos &&
             !Skipped(c) && !text::IsSpace(c)) {
             return false;
         }
