@@ -24,10 +24,11 @@ first line and, when HDTRANS_EXAMPLES is set, of the web examples web/examples.t
 web/examples/, else from HDTRANS_EXAMPLES). It prints the inputs (lines), the distinct inputs that drop
 text and the distinct inputs with unplaced kana of each set; every line is translated on its own (-each),
 the documents too. With --budget (rows `set inputs drops unplaced`) a set fails when one of its counts
-differs from its row (more is a regression, fewer is a fix that lowers the row). A set whose input count
-differs from its row (the data changed: --update with that data writes the row again) or that has no row
-is not compared and gets a warning on stderr (a ::warning:: annotation under GitHub Actions). --update
-writes the counts of the sets into the file and keeps the other rows.
+is above its row (a regression); a count below its row passes with a warning that the row can be
+lowered (--update). A set whose input count differs from its row (the data changed: --update with that
+data writes the row again) or that has no row is not compared and gets a warning too. Warnings go to
+stderr (a ::warning:: annotation under GitHub Actions). --update writes the counts of the sets into the
+file and keeps the other rows.
 Exit: 0 nothing new, 1 an input drops text, a known gap is fixed or a set is off its budget, 2 invalid
 arguments, no set or a failed CLI; with --sets and no set variable, 77.
 """
@@ -300,7 +301,8 @@ def check_sets(argv, options):
 
 def compare(counts, budget):
     """The report lines of counts ({set: (inputs, drops, unplaced)}) against budget (the same shape, None
-    for no budget), the warnings about sets that are not compared and the number of counts off the budget."""
+    for no budget), the warnings about sets that are not compared or under their rows and the number of
+    counts above the budget."""
     lines, warnings, bad = [], [], 0
     for name, (inputs, count, kana) in counts.items():
         line = f"drops: {name} {inputs} inputs, {count} drop text, {kana} with unplaced kana"
@@ -316,9 +318,12 @@ def compare(counts, budget):
                             "--update with this data writes the row again")
         else:
             for what, got, want in (("drops", count, row[1]), ("unplaced", kana, row[2])):
-                if got != want:
-                    line += f", FAIL: {what} budget {want}, " + ("more than the budget" if got > want else "lower the budget (--update)")
+                if got > want:
+                    line += f", FAIL: {what} budget {want}, more than the budget"
                     bad += 1
+                elif got < want:
+                    warnings.append(f"{name} has {got} inputs with {what} but its budget row allows {want}; "
+                                    "--update lowers the row")
         lines.append(line)
     return lines, warnings, bad
 
@@ -434,7 +439,7 @@ def self_test():
         lines, warnings, bad = compare({"corpus": (3, 2, 2)}, rows)
         assert bad == 1 and not warnings and "more than the budget" in lines[0], lines
         lines, warnings, bad = compare({"corpus": (3, 1, 1)}, rows)
-        assert bad == 1 and not warnings and "unplaced budget 2" in lines[0] and "lower the budget" in lines[0], lines
+        assert bad == 0 and len(warnings) == 1 and "allows 2" in warnings[0] and "FAIL" not in lines[0], (lines, warnings)
         lines, warnings, bad = compare({"corpus": (4, 9, 9)}, rows)
         assert bad == 0 and "not compared" in lines[0] and len(warnings) == 1 and "for 3" in warnings[0], (lines, warnings)
         lines, warnings, bad = compare({"docs": (2, 0, 0)}, rows)

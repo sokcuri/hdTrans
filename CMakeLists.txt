@@ -260,7 +260,7 @@ if(NOT EMSCRIPTEN)
                 $<TARGET_FILE:hdtrans_cli> -d "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --check)
             set_tests_properties(rules.variants PROPERTIES TIMEOUT 300)
             add_test(NAME tools.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py" --self-test)
-            # The inputs of the measured sets that drop text or keep unplaced kana stay at
+            # The inputs of the measured sets that drop text or keep unplaced kana stay within
             # tools/drops-budget.tsv; skipped when no set variable is set.
             add_test(NAME sets.drops COMMAND "${HDTRANS_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/drops.py"
                 $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --sets
