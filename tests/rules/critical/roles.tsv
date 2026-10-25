@@ -50,3 +50,6 @@ conjugation:godan-causative	その瞬間を逃さずに、舌を滑り込ませ�
 conjugation:godan-causative	「あと何日か通わせてもらえると嬉しい」	has:다니게 해	fix	lookup
 conjugation:godan-causative	よし。左肩は痛むけど、何とか動かせる。	has:움직일 수 있다	keep	lookup
 conjugation:godan-causative	≪いいから、飛ばせるだけ飛ばして≫	has:날릴 수 있을	keep	lookup
+cx:receive-potential:10	「そう言ってもらえてよかったです」	lacks:말해 줄 수 있어서	fix	rewrites
+cx:receive-potential:10	教えてもらえたら嬉しい	lacks:가르쳐 줄 수 있으면	fix	rewrites
+cx:receive-potential:10	良い家族がいて、こういう人に出会えて、助けてもらえたってことが僕の幸運だった。	lacks:도와 줄 수 있었다	fix	rewrites
