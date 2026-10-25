@@ -1,7 +1,9 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <commdlg.h>
+#include <objbase.h>
 #include <shellapi.h>
+#include <shobjidl.h>
 
 #include <atomic>
 #include <climits>
@@ -38,6 +40,11 @@ constexpr UINT kPhase = WM_APP + 2;
 constexpr UINT kFont = WM_APP + 3;
 constexpr UINT kStart = WM_APP + 4;
 
+struct FileJob {
+    fs::path input;
+    fs::path output;
+};
+
 struct App {
     HINSTANCE instance = nullptr;
     HWND main = nullptr;
@@ -57,8 +64,14 @@ struct App {
     std::string result;
     std::wstring error;
     bool wasCancelled = false;
-    fs::path inputFile;
-    fs::path outputFile;
+    std::vector<fs::path> inputFiles;
+    fs::path outputFolder;
+    bool sameFolder = true;
+    std::vector<FileJob> jobs;
+    std::size_t savedCount = 0;
+    std::size_t skippedCount = 0;
+    std::vector<std::wstring> failed;
+    int overwriteAnswer = IDYES;
 
     ~App() {
         cancel = true;
@@ -273,34 +286,79 @@ void CopyResult(App& app) {
     }
 }
 
-bool PickFile(HWND owner, bool save, fs::path& path) {
-    std::wstring buffer(32768, L'\0');
-    if (path.native().size() < buffer.size()) buffer.replace(0, path.native().size(), path.native());
+bool PickInputs(HWND owner, std::vector<fs::path>& paths) {
+    std::wstring buffer(1 << 18, L'\0');
+    if (!paths.empty() && paths[0].native().size() < 32768) buffer.replace(0, paths[0].native().size(), paths[0].native());
     OPENFILENAMEW dialog{};
     dialog.lStructSize = sizeof(dialog);
     dialog.hwndOwner = owner;
     dialog.lpstrFilter = L"텍스트 파일 (*.txt)\0*.txt\0모든 파일 (*.*)\0*.*\0\0";
     dialog.lpstrFile = buffer.data();
     dialog.nMaxFile = static_cast<DWORD>(buffer.size());
-    dialog.lpstrDefExt = L"txt";
-    dialog.Flags = OFN_EXPLORER | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY;
-    dialog.Flags |= save ? OFN_OVERWRITEPROMPT : OFN_FILEMUSTEXIST;
-    const BOOL selected = save ? GetSaveFileNameW(&dialog) : GetOpenFileNameW(&dialog);
-    if (!selected) return false;
-    path = fs::path(buffer.c_str());
-    return true;
+    dialog.Flags = OFN_EXPLORER | OFN_ALLOWMULTISELECT | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    if (!GetOpenFileNameW(&dialog)) return false;
+    // One file: the full path. Several: "folder\0name\0name\0\0", with nFileOffset past the folder's NUL.
+    const fs::path first(buffer.c_str());
+    paths.clear();
+    if (dialog.nFileOffset == 0 || buffer[dialog.nFileOffset - 1] != L'\0') {
+        paths.push_back(first);
+        return true;
+    }
+    for (const wchar_t* name = buffer.c_str() + dialog.nFileOffset; *name; name += std::wcslen(name) + 1) paths.push_back(first / name);
+    return !paths.empty();
 }
 
-bool SetInputFile(App& app, const fs::path& path) {
+bool PickFolder(HWND owner, fs::path& folder) {
+    IFileOpenDialog* dialog = nullptr;
+    if (FAILED(CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&dialog)))) return false;
+    bool picked = false;
+    FILEOPENDIALOGOPTIONS options = 0;
+    if (SUCCEEDED(dialog->GetOptions(&options)) &&
+        SUCCEEDED(dialog->SetOptions(options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_NOCHANGEDIR))) {
+        IShellItem* start = nullptr;
+        if (!folder.empty() && SUCCEEDED(SHCreateItemFromParsingName(folder.c_str(), nullptr, IID_PPV_ARGS(&start)))) {
+            dialog->SetFolder(start);
+            start->Release();
+        }
+        IShellItem* item = nullptr;
+        if (SUCCEEDED(dialog->Show(owner)) && SUCCEEDED(dialog->GetResult(&item))) {
+            PWSTR path = nullptr;
+            if (SUCCEEDED(item->GetDisplayName(SIGDN_FILESYSPATH, &path))) {
+                folder = path;
+                picked = true;
+                CoTaskMemFree(path);
+            }
+            item->Release();
+        }
+    }
+    dialog->Release();
+    return picked;
+}
+
+fs::path OutputFolder(const App& app) {
+    return app.sameFolder ? fs::path() : app.outputFolder;
+}
+
+void ShowOutput(App& app) {
+    CheckDlgButton(app.file, IDC_SAME_FOLDER, app.sameFolder ? BST_CHECKED : BST_UNCHECKED);
+    EnableWindow(GetDlgItem(app.file, IDC_BROWSE_OUTPUT), app.sameFolder ? FALSE : TRUE);
+    const fs::path folder = app.sameFolder ? (app.inputFiles.empty() ? fs::path() : app.inputFiles[0].parent_path()) : app.outputFolder;
+    SetDlgItemTextW(app.file, IDC_OUTPUT_PATH, folder.c_str());
+}
+
+bool SetInputFiles(App& app, const std::vector<fs::path>& paths) {
     std::string text;
     gui::TextEncoding encoding{};
-    if (!gui::ReadTextFile(path, text, encoding)) {
+    if (paths.empty() || !gui::ReadTextFile(paths[0], text, encoding)) {
         ReportError(app, app.file, L"파일을 읽지 못했습니다. Shift-JIS, UTF-8 또는 UTF-16LE 텍스트 파일을 골라 주세요.");
         return false;
     }
-    app.inputFile = path;
-    SetDlgItemTextW(app.file, IDC_INPUT_PATH, path.c_str());
-    // The preview is bounded; translation reads the complete file again.
+    app.inputFiles = paths;
+    std::wstring shown = paths[0].native();
+    if (paths.size() > 1) shown += L" 외 " + std::to_wstring(paths.size() - 1) + L"개";
+    SetDlgItemTextW(app.file, IDC_INPUT_PATH, shown.c_str());
+    ShowOutput(app);
+    // The preview shows the first file and is bounded; translation reads each file again.
     constexpr std::size_t previewLimit = 16000;
     std::wstring preview = Wide(text);
     if (preview.size() > previewLimit) {
@@ -310,7 +368,9 @@ bool SetInputFile(App& app, const fs::path& path) {
     }
     const std::string previewUtf8 = Utf8(preview);
     SetDlgItemTextW(app.file, IDC_PREVIEW, EditText(previewUtf8).c_str());
-    SetDlgItemTextW(app.file, IDC_STATUS, L"문서 전체를 묶어서 번역하고 UTF-8 BOM으로 저장합니다.");
+    SetDlgItemTextW(app.file, IDC_STATUS, paths.size() > 1
+        ? (L"파일 " + std::to_wstring(paths.size()) + L"개를 차례로 번역해 이름_번역.txt로 저장합니다. 미리보기는 첫 파일입니다.").c_str()
+        : L"문서 전체를 묶어서 번역하고 이름_번역.txt에 UTF-8 BOM으로 저장합니다.");
     return true;
 }
 
@@ -329,42 +389,92 @@ bool SaveResult(App& app, const fs::path& output) {
 }
 
 void StartFileWorker(App& app) {
-    const fs::path input = app.inputFile;
-    const fs::path output = app.outputFile;
     const gui::TranslationOptions options = Options(app.file, true);
-    app.worker = std::thread([&app, input, output, options] {
-        std::string text;
-        gui::TextEncoding encoding{};
-        bool saved = false;
-        if (!app.cancel) {
-            if (!gui::ReadTextFile(input, text, encoding)) app.error = L"입력 파일을 읽지 못했습니다.";
-            else if (LoadEngine(app) && !app.cancel) {
-                PostMessageW(app.progress, kPhase, 1, 0);
-                app.result = gui::TranslateText(*app.engine, text, ConfiguredOptions(app, options), app.cancel);
-                if (!app.cancel) {
-                    PostMessageW(app.progress, kPhase, 2, 0);
-                    saved = SaveResult(app, output);
-                    if (!saved && !app.cancel) app.error = L"출력 파일을 저장하지 못했습니다.";
-                }
+    app.worker = std::thread([&app, options] {
+        for (std::size_t index = 0; index < app.jobs.size() && !app.cancel; ++index) {
+            const FileJob& job = app.jobs[index];
+            std::string text;
+            gui::TextEncoding encoding{};
+            if (!gui::ReadTextFile(job.input, text, encoding)) {
+                app.failed.push_back(job.input.filename().native() + L" (읽기)");
+                continue;
             }
+            if (!LoadEngine(app)) break;
+            if (app.cancel) break;
+            PostMessageW(app.progress, kPhase, 1, static_cast<LPARAM>(index));
+            app.result = gui::TranslateText(*app.engine, text, ConfiguredOptions(app, options), app.cancel);
+            if (app.cancel) break;
+            PostMessageW(app.progress, kPhase, 2, static_cast<LPARAM>(index));
+            if (SaveResult(app, job.output)) ++app.savedCount;
+            else if (!app.cancel) app.failed.push_back(job.output.filename().native() + L" (저장)");
         }
-        app.wasCancelled = app.cancel.load() && !saved;
+        app.wasCancelled = app.cancel.load() && app.savedCount + app.failed.size() < app.jobs.size();
         PostMessageW(app.progress, kDone, 0, 0);
     });
 }
 
-void StartFile(App& app) {
-    if (app.busy) return;
-    if (app.inputFile.empty() || app.outputFile.empty()) {
-        ReportError(app, app.file, L"번역할 파일과 저장할 파일을 골라 주세요.");
-        return;
+int AskOverwrite(App& app, const std::vector<fs::path>& existing) {
+    if (app.selftest) return app.overwriteAnswer;
+    std::wstring message = L"이미 있는 번역 파일 " + std::to_wstring(existing.size()) + L"개를 덮어쓸까요?\n";
+    for (std::size_t index = 0; index < existing.size() && index < 10; ++index) message += L"\n" + existing[index].filename().native();
+    if (existing.size() > 10) message += L"\n...";
+    message += L"\n\n예: 모두 덮어쓰기, 아니요: 있는 파일은 건너뛰기, 취소: 번역하지 않기";
+    return MessageBoxW(app.file, message.c_str(), L"hdTrans", MB_YESNOCANCEL | MB_ICONQUESTION | MB_DEFBUTTON2);
+}
+
+bool PlanJobs(App& app) {
+    app.jobs.clear();
+    app.skippedCount = 0;
+    if (app.inputFiles.empty()) {
+        ReportError(app, app.file, L"번역할 파일을 골라 주세요.");
+        return false;
+    }
+    if (!app.sameFolder && app.outputFolder.empty()) {
+        ReportError(app, app.file, L"저장할 폴더를 골라 주세요.");
+        return false;
     }
     std::error_code error;
-    if (fs::equivalent(app.inputFile, app.outputFile, error)) {
-        ReportError(app, app.file, L"원문을 보호하려면 다른 이름으로 저장해 주세요.");
-        return;
+    std::vector<fs::path> existing;
+    for (const fs::path& input : app.inputFiles) {
+        const fs::path output = gui::TranslatedPath(input, OutputFolder(app));
+        for (const fs::path& other : app.inputFiles) {
+            if (fs::equivalent(other, output, error) || _wcsicmp(other.c_str(), output.c_str()) == 0) {
+                ReportError(app, app.file, (L"원문을 덮어쓰게 됩니다. 저장할 폴더를 바꿔 주세요.\n\n" + output.native()).c_str());
+                return false;
+            }
+        }
+        for (const FileJob& job : app.jobs) {
+            if (_wcsicmp(job.output.c_str(), output.c_str()) == 0) {
+                ReportError(app, app.file, (L"같은 이름으로 저장되는 파일이 있습니다.\n\n" + output.native()).c_str());
+                return false;
+            }
+        }
+        if (fs::exists(output, error)) existing.push_back(output);
+        app.jobs.push_back({input, output});
     }
+    if (existing.empty()) return true;
+    const int answer = AskOverwrite(app, existing);
+    if (answer == IDCANCEL) return false;
+    if (answer == IDNO) {
+        std::vector<FileJob> kept;
+        for (FileJob& job : app.jobs) {
+            if (fs::exists(job.output, error)) ++app.skippedCount;
+            else kept.push_back(std::move(job));
+        }
+        app.jobs = std::move(kept);
+        if (app.jobs.empty()) {
+            SetDlgItemTextW(app.file, IDC_STATUS, L"모든 번역 파일이 이미 있어서 건너뛰었습니다.");
+            return false;
+        }
+    }
+    return true;
+}
+
+void StartFile(App& app) {
+    if (app.busy || !PlanJobs(app)) return;
     ResetJob(app);
+    app.savedCount = 0;
+    app.failed.clear();
     app.progress = CreateDialogParamW(app.instance, MAKEINTRESOURCEW(IDD_FILE_TRANSWIN_PROG), app.file,
                                      ProgressProc, reinterpret_cast<LPARAM>(&app));
     if (!app.progress) {
@@ -377,6 +487,14 @@ void StartFile(App& app) {
     if (!app.selftest) ShowWindow(app.progress, SW_SHOW);
 }
 
+void ShowPhase(App& app, WPARAM phase, LPARAM index) {
+    if (app.cancel || index < 0 || static_cast<std::size_t>(index) >= app.jobs.size()) return;
+    const std::wstring text = L"[" + std::to_wstring(index + 1) + L"/" + std::to_wstring(app.jobs.size()) + L"] " +
+                              app.jobs[static_cast<std::size_t>(index)].input.filename().native() + L"\n" +
+                              (phase == 1 ? L"문서 전체를 번역하고 있습니다." : L"UTF-8 BOM으로 저장하고 있습니다.");
+    SetDlgItemTextW(app.progress, IDC_STATUS, text.c_str());
+}
+
 void FinishFile(App& app) {
     if (app.worker.joinable()) app.worker.join();
     app.busy = false;
@@ -384,11 +502,21 @@ void FinishFile(App& app) {
     app.progress = nullptr;
     EnableWindow(app.file, TRUE);
     if (!app.selftest) SetForegroundWindow(app.file);
-    if (app.wasCancelled) SetDlgItemTextW(app.file, IDC_STATUS, L"중단했습니다. 번역 결과를 저장하지 않았습니다.");
-    else if (!app.error.empty()) {
+    std::wstring status = L"파일 " + std::to_wstring(app.savedCount) + L"개를 UTF-8 BOM으로 저장했습니다.";
+    if (app.skippedCount) status += L" 이미 있는 " + std::to_wstring(app.skippedCount) + L"개는 건너뛰었습니다.";
+    if (!app.error.empty()) {
         SetDlgItemTextW(app.file, IDC_STATUS, L"번역하지 못했습니다.");
         ReportError(app, app.file, app.error.c_str());
-    } else SetDlgItemTextW(app.file, IDC_STATUS, L"번역이 끝났습니다. UTF-8 BOM으로 저장했습니다.");
+    } else if (app.wasCancelled) {
+        SetDlgItemTextW(app.file, IDC_STATUS, (L"중단했습니다. " + status + L" 나머지는 저장하지 않았습니다.").c_str());
+    } else if (!app.failed.empty()) {
+        SetDlgItemTextW(app.file, IDC_STATUS, status.c_str());
+        std::wstring message = L"처리하지 못한 파일이 있습니다.\n";
+        for (const std::wstring& name : app.failed) message += L"\n" + name;
+        ReportError(app, app.file, message.c_str());
+    } else {
+        SetDlgItemTextW(app.file, IDC_STATUS, (L"번역이 끝났습니다. " + status).c_str());
+    }
 }
 
 void OpenFileDialog(App& app) {
@@ -472,26 +600,30 @@ INT_PTR CALLBACK FileProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         app->file = window;
         InitOptions(window);
         SetFont(window, app->fileFont);
-        if (!app->inputFile.empty()) SetInputFile(*app, app->inputFile);
-        if (!app->outputFile.empty()) SetDlgItemTextW(window, IDC_OUTPUT_PATH, app->outputFile.c_str());
+        if (app->inputFiles.empty() || !SetInputFiles(*app, app->inputFiles)) ShowOutput(*app);
         return TRUE;
     case WM_DPICHANGED: PostMessageW(window, kFont, 0, 0); return FALSE;
     case kFont: SetFont(window, app->fileFont); return TRUE;
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
         case IDC_BROWSE_INPUT: {
-            fs::path path = app->inputFile;
-            if (PickFile(window, false, path)) SetInputFile(*app, path);
+            std::vector<fs::path> paths = app->inputFiles;
+            if (PickInputs(window, paths)) SetInputFiles(*app, paths);
             return TRUE;
         }
         case IDC_BROWSE_OUTPUT: {
-            fs::path path = app->outputFile;
-            if (PickFile(window, true, path)) {
-                app->outputFile = path;
-                SetDlgItemTextW(window, IDC_OUTPUT_PATH, path.c_str());
+            fs::path folder = app->outputFolder;
+            if (folder.empty() && !app->inputFiles.empty()) folder = app->inputFiles[0].parent_path();
+            if (PickFolder(window, folder)) {
+                app->outputFolder = folder;
+                ShowOutput(*app);
             }
             return TRUE;
         }
+        case IDC_SAME_FOLDER:
+            app->sameFolder = IsDlgButtonChecked(window, IDC_SAME_FOLDER) == BST_CHECKED;
+            ShowOutput(*app);
+            return TRUE;
         case IDC_TRANSLATE: StartFile(*app); return TRUE;
         case IDCANCEL: SendMessageW(window, WM_CLOSE, 0, 0); return TRUE;
         }
@@ -525,9 +657,7 @@ INT_PTR CALLBACK ProgressProc(HWND window, UINT message, WPARAM wParam, LPARAM l
     case WM_DPICHANGED: PostMessageW(window, kFont, 0, 0); return FALSE;
     case kFont: SetFont(window, app->progressFont); return TRUE;
     case kStart: StartFileWorker(*app); return TRUE;
-    case kPhase:
-        if (!app->cancel) SetDlgItemTextW(window, IDC_STATUS, wParam == 1 ? L"문서 전체를 번역하고 있습니다." : L"UTF-8 BOM으로 저장하고 있습니다.");
-        return TRUE;
+    case kPhase: ShowPhase(*app, wParam, lParam); return TRUE;
     case kDone: FinishFile(*app); return TRUE;
     case WM_COMMAND:
         if (LOWORD(wParam) == IDC_STOP || LOWORD(wParam) == IDCANCEL) {
@@ -650,31 +780,63 @@ bool SelfTest(App& app) {
     if (!Check(!error, "temporary folder")) return false;
     const fs::path folder = base / (L"hdtrans-gui-" + std::to_wstring(GetCurrentProcessId()) + L"-" + std::to_wstring(GetTickCount64()));
     if (!Check(fs::create_directory(folder, error), "create test folder")) return false;
-    app.inputFile = folder / L"원문.txt";
-    app.outputFile = folder / L"번역문.txt";
-    ok = Check(gui::WriteTextFile(app.inputFile, "日本語\n\n日本語\n"), "create input file") && ok;
+    const fs::path input = folder / L"원문.txt";
+    const fs::path output = folder / L"원문_번역.txt";
+    app.inputFiles = {input};
+    ok = Check(gui::WriteTextFile(input, "日本語\n\n日本語\n"), "create input file") && ok;
     NotifyClick(app.main, IDC_FILE);
     if (!Check(app.file != nullptr, "create file dialog")) {
         fs::remove_all(folder, error);
         return false;
     }
     ok = Check(!IsWindowVisible(app.file) && ControlText(app.file, IDC_PREVIEW) == L"日本語\r\n\r\n日本語\r\n", "hidden file dialog and preview") && ok;
+    ok = Check(IsDlgButtonChecked(app.file, IDC_SAME_FOLDER) == BST_CHECKED && ControlText(app.file, IDC_OUTPUT_PATH) == folder.native() &&
+               !IsWindowEnabled(GetDlgItem(app.file, IDC_BROWSE_OUTPUT)), "same folder is the default output") && ok;
     NotifyClick(app.file, IDC_TRANSLATE);
     ok = Check(app.progress && !IsWindowVisible(app.progress), "hidden progress dialog") && ok;
     if (!WaitForJob(app)) return false;
-    std::string output;
+    std::string text;
     gui::TextEncoding encoding{};
-    ok = Check(app.error.empty() && gui::ReadTextFile(app.outputFile, output, encoding) &&
-               encoding == gui::TextEncoding::Utf8Bom && output == "일본어\n\n일본어\n", "file translation and BOM output") && ok;
+    ok = Check(app.error.empty() && gui::ReadTextFile(output, text, encoding) &&
+               encoding == gui::TextEncoding::Utf8Bom && text == "일본어\n\n일본어\n", "file translation and BOM output") && ok;
 
     ok = Check(IsWindowEnabled(app.file) && IsWindowEnabled(GetDlgItem(app.file, IDC_TRANSLATE)),
                "file dialog reenabled after completion") && ok;
-    ok = Check(gui::WriteTextFile(app.outputFile, "unchanged"), "prepare cancellation output") && ok;
+    ok = Check(gui::WriteTextFile(output, "unchanged"), "prepare existing output") && ok;
+    app.overwriteAnswer = IDNO;
+    NotifyClick(app.file, IDC_TRANSLATE);
+    ok = Check(!app.busy && !app.progress && gui::ReadTextFile(output, text, encoding) && text == "unchanged",
+               "declining overwrite skips existing output") && ok;
+    app.overwriteAnswer = IDYES;
     NotifyClick(app.file, IDC_TRANSLATE);
     if (!Check(app.progress != nullptr, "create cancellation dialog")) return false;
     NotifyClick(app.progress, IDC_STOP);
     if (!WaitForJob(app)) return false;
-    ok = Check(app.wasCancelled && gui::ReadTextFile(app.outputFile, output, encoding) && output == "unchanged", "stop preserves existing output") && ok;
+    ok = Check(app.wasCancelled && gui::ReadTextFile(output, text, encoding) && text == "unchanged", "stop preserves existing output") && ok;
+
+    const fs::path second = folder / L"둘째.txt";
+    const fs::path outputFolder = folder / L"출력";
+    ok = Check(gui::WriteTextFile(second, "日本語\n") && fs::create_directory(outputFolder, error), "create batch fixtures") && ok;
+    ok = Check(SetInputFiles(app, {input, second}), "select several files") && ok;
+    app.outputFolder = outputFolder;
+    CheckDlgButton(app.file, IDC_SAME_FOLDER, BST_UNCHECKED);
+    NotifyClick(app.file, IDC_SAME_FOLDER);
+    ok = Check(!app.sameFolder && ControlText(app.file, IDC_OUTPUT_PATH) == outputFolder.native() &&
+               IsWindowEnabled(GetDlgItem(app.file, IDC_BROWSE_OUTPUT)), "chosen output folder") && ok;
+    NotifyClick(app.file, IDC_TRANSLATE);
+    if (!WaitForJob(app)) return false;
+    std::string secondText;
+    ok = Check(app.error.empty() && app.failed.empty() && app.savedCount == 2 &&
+               gui::ReadTextFile(outputFolder / L"원문_번역.txt", text, encoding) && text == "일본어\n\n일본어\n" &&
+               gui::ReadTextFile(outputFolder / L"둘째_번역.txt", secondText, encoding) && secondText == "일본어\n",
+               "batch translation into a folder") && ok;
+
+    CheckDlgButton(app.file, IDC_SAME_FOLDER, BST_CHECKED);
+    NotifyClick(app.file, IDC_SAME_FOLDER);
+    ok = Check(SetInputFiles(app, {input, output}), "select a source and its output name") && ok;
+    NotifyClick(app.file, IDC_TRANSLATE);
+    ok = Check(!app.busy && !app.progress && gui::ReadTextFile(output, text, encoding) && text == "unchanged",
+               "batch never overwrites a source file") && ok;
     SendMessageW(app.file, WM_CLOSE, 0, 0);
     ok = SelfTestConfig(app, folder) && ok;
     fs::remove_all(folder, error);
@@ -686,6 +848,7 @@ bool SelfTest(App& app) {
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int show) {
     INITCOMMONCONTROLSEX controls{sizeof(INITCOMMONCONTROLSEX), ICC_PROGRESS_CLASS | ICC_STANDARD_CLASSES};
     if (!InitCommonControlsEx(&controls)) return 1;
+    if (FAILED(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE))) return 1;
     App app;
     app.instance = instance;
     int count = 0;
