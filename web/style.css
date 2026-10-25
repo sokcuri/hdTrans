@@ -2,7 +2,7 @@
 * { box-sizing: border-box; }
 body { margin: 0 auto; max-width: 72rem; padding: 1rem; font: 15px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
 h1 { font-size: 1.4rem; margin: 0; }
-.sub { margin: 0; opacity: .7; font-size: .9rem; }
+h1 small { font-size: .8rem; font-weight: normal; opacity: .6; margin-left: .3rem; }
 .note { font-size: .9rem; margin: .5rem 0 0; }
 .status { margin: 1rem 0 .5rem; font-size: .9rem; display: flex; gap: .5rem; align-items: center; }
 progress { flex: 1; max-width: 20rem; }
@@ -32,3 +32,15 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .contact { margin: 2rem 0 0; font-size: .8rem; opacity: .7; text-align: center; }
 #version { margin-top: .2rem; font-size: .75rem; }
 #tbar { width: 8rem; height: .6rem; vertical-align: middle; }
+.tabs { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; border-bottom: 1px solid var(--line); margin-bottom: .7rem; }
+.tabs button { font: inherit; padding: .3rem .9rem; border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0; background: transparent; color: inherit; cursor: pointer; opacity: .7; }
+.tabs button[aria-selected=true] { opacity: 1; border-color: var(--accent); font-weight: 600; }
+.tabs label { margin-left: auto; }
+.drop { display: block; padding: 2rem 1rem; border: 2px dashed var(--line); border-radius: 8px; text-align: center; cursor: pointer; }
+.drop.over { border-color: var(--accent); }
+.drop input { display: none; }
+#docs .controls button { font: inherit; padding: .2rem .8rem; }
+table.files { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: .5rem; }
+.files th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; }
+.files td, .files th { padding: .25rem .4rem; border-bottom: 1px solid var(--line); }
+.files button { font: inherit; font-size: .8rem; }

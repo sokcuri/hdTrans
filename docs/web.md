@@ -9,6 +9,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 |---|---|
 | `web/index.html`, `web/style.css` | 페이지 |
 | `web/src/app.ts` | 엔진과 사전을 받아(Cache Storage에 보관) 워커에 넘기고, 입력이 바뀌면 번역을 요청 |
+| `web/src/documents.ts` | 문서 번역 탭의 파일 읽기(인코딩 판별), 출력 방식, 결과 이름, ZIP 만들기 |
 | `web/src/worker.ts` | 워커. WASM과 사전 파일을 준비하고 `HdTrans` 인스턴스로 번역 |
 | `web/src/translator.ts` | 공용 [TypeScript API](typescript-api.md). 문자열 번역, 사용자 사전과 Ehnd 설정, JSON 선택 기록 |
 | `web/src/grid.ts` | 사용자 사전, 이름 표 편집기 (탭 구분 표, 붙여 넣기, 파일 열기, 저장) |
@@ -21,6 +22,11 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 - 사용자 사전 표와 이름 표를 합쳐 `setUserDictRaw()`로 넣습니다. 잘못된 내용은 오류를 보여 주고 이전에 적용한 사전을 유지합니다.
 - 문서 방식은 입력 전체를 한 세션으로(`hdtrans`와 같음), 줄 단위는 줄마다 새 세션으로(`hdtrans -each`와
   같음) 번역합니다. 번역 전에 `reset()`으로 세션을 비웁니다.
+- **텍스트 번역**과 **문서 번역** 탭이 있고 대사 말투는 두 탭이 함께 씁니다. 문서 번역은 고르거나 끌어 놓은 텍스트 파일을
+  브라우저에서 읽어 파일마다 문서 방식으로 번역합니다. 인코딩 판별, 출력 방식, `이름_번역.txt`(UTF-8 BOM) 이름은 Windows 번역 창과
+  같습니다. 사용자 사전과 이름 표를 함께 쓰고, 말투나 사전이 바뀌면 이미 만든 결과를 버립니다. **중단**은 지금 파일을 마친 뒤 멈추고
+  그 결과를 버립니다. **ZIP으로 받기**는 끝난 파일을 한 ZIP(UTF-8 이름, 줄일 수 있으면 deflate)으로 묶습니다.
+- 제목 옆에는 엔진 버전과 빌드한 커밋의 짧은 해시, 날짜를 적습니다.
 - 페이지 아래 버전 줄은 엔진 버전(`release-version.txt`), 사전 버전(엔진 버전과 사전 TSV의 sha256 앞 12자), 빌드한 커밋의 날짜(Asia/Seoul, `yyyy-MM-dd HH:mm:ss`)와 짧은 해시입니다.
 
 ## 빌드
@@ -49,6 +55,8 @@ node web/build.mjs
 파일마다 `.br`, `.gz` 압축본이 붙습니다. 서버는 브라우저가 받는 인코딩의 압축본을 보내고, `assets/`는 오래 캐시하게 합니다.
 
 ## 확인
+
+`npm --prefix web run compile` 뒤 `npm --prefix web test`가 문서 번역의 인코딩 판별, 출력 방식, ZIP을 확인합니다(CI의 wasm 작업).
 
 ```sh
 python3 -m http.server -d build/web/dist 8000 &   # 압축본을 쓰지 않는 정적 서버도 됨

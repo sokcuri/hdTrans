@@ -1,6 +1,7 @@
 // The page: loads the engine and the dictionaries (from Cache Storage when
 // their content hashes are cached), hands them to the worker and translates
 // there as the input changes.
+import { decodeText, encodeOutput, formatDocument, outputName, zip, type OutputMode } from './documents.js';
 import { grid } from './grid.js';
 import { namesDict } from './names.js';
 
@@ -42,6 +43,7 @@ const editor = (key: string, placeholders: string[]) => {
   const g = grid($(key), ['일본어', '한국어', '품사', '옵션'], placeholders, key + '.tsv', (text) => {
     localStorage.setItem('hdtrans.' + key, text);
     schedule();
+    staleDocs();
   });
   g.text = localStorage.getItem('hdtrans.' + key) ?? '';
   return g;
@@ -62,6 +64,7 @@ if (savedSpeech === 'soft' || savedSpeech === 'strict') speech.value = savedSpee
 speech.addEventListener('change', () => {
   localStorage.setItem('hdtrans.speech', speech.value);
   schedule();
+  staleDocs();
 });
 
 /** Returns the text of the example file. */
@@ -99,6 +102,14 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'modu
 let seq = 0;
 type Reply = { lines?: string[]; message?: string; warning?: string; ms: number; memory: number };
 const pending = new Map<number, (m: Reply) => void>();
+
+function request(mode: string, lines: string[], userdict: string): Promise<Reply> {
+  const id = ++seq;
+  return new Promise<Reply>((resolve) => {
+    pending.set(id, resolve);
+    worker.postMessage({ type: 'translate', id, mode, speech: speech.value, lines, userdict });
+  });
+}
 worker.onmessage = (ev) => {
   const m = ev.data;
   if (m.type === 'ready') {
@@ -109,6 +120,7 @@ worker.onmessage = (ev) => {
     status.textContent = `준비 완료 · ${(total / 1000).toFixed(1)}초 (엔진 사전 적재 ${(m.ms / 1000).toFixed(1)}초, 메모리 ${Math.round(m.memory / 1e6)} MB)`;
     bar.hidden = true;
     schedule();
+    showDocs();
   } else if (m.type === 'fatal') {
     document.body.dataset.engine = 'error';
     status.textContent = '엔진을 불러오지 못했습니다: ' + m.message;
@@ -166,11 +178,7 @@ async function translate() {
   const slow = setTimeout(() => (tbar.hidden = false), 300);
   let text: string;
   try {
-    const id = ++seq;
-    const m = await new Promise<Reply>((resolve) => {
-      pending.set(id, resolve);
-      worker.postMessage({ type: 'translate', id, mode: mode(), speech: speech.value, lines, userdict: d.text });
-    });
+    const m = await request(mode(), lines, d.text);
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
     text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
@@ -190,6 +198,159 @@ async function translate() {
   info.textContent = text;
   out.dataset.done = '1';
 }
+
+// The document tab: files are read and translated here, one after another,
+// each as one document. Results are kept as text; the output mode applies
+// when a file is saved.
+const tabs: [HTMLElement, HTMLElement][] = [
+  [$('tab-text'), $('text')],
+  [$('tab-docs'), $('docs')],
+];
+function showTab(index: number) {
+  tabs.forEach(([button, panel], i) => {
+    button.setAttribute('aria-selected', String(i === index));
+    panel.hidden = i !== index;
+  });
+  localStorage.setItem('hdtrans.tab', index === 1 ? 'docs' : 'text');
+}
+tabs.forEach(([button], i) => button.addEventListener('click', () => showTab(i)));
+if (localStorage.getItem('hdtrans.tab') === 'docs') showTab(1);
+
+interface Doc {
+  out: string; // output file name
+  source?: string; // undefined if the file could not be read
+  translated?: string;
+  row: HTMLTableRowElement;
+  save: HTMLButtonElement;
+}
+const drop = $<HTMLLabelElement>('drop');
+const files = $<HTMLInputElement>('files');
+const fileList = $<HTMLTableElement>('filelist');
+const run = $<HTMLButtonElement>('run');
+const zipButton = $<HTMLButtonElement>('zip');
+let docs: Doc[] = [];
+let docsRunning = false;
+let docsCancel = false;
+let docsAt = 0;
+
+const outputMode = () => (document.querySelector('input[name=output]:checked') as HTMLInputElement).value as OutputMode;
+const outputBytes = (d: Doc) => encodeOutput(formatDocument(d.source!, d.translated!, outputMode()));
+const setState = (d: Doc, text: string) => (d.row.cells[2].textContent = text);
+
+function showDocs() {
+  const todo = docs.filter((d) => d.source !== undefined).length;
+  run.disabled = !ready || docsCancel || (!docsRunning && todo === 0);
+  run.textContent = docsCancel ? '중단 중…' : docsRunning ? `중단 (${docsAt}/${todo})` : '모두 번역';
+  zipButton.disabled = docsRunning || !docs.some((d) => d.translated !== undefined);
+  for (const d of docs) d.save.disabled = d.translated === undefined;
+  fileList.hidden = docs.length === 0;
+}
+
+/** Drops the results made with other settings. */
+function staleDocs() {
+  if (docsRunning) return;
+  for (const d of docs) {
+    if (d.translated === undefined) continue;
+    d.translated = undefined;
+    setState(d, '대기');
+  }
+  showDocs();
+}
+
+function save(name: string, bytes: Uint8Array, type: string) {
+  const url = URL.createObjectURL(new Blob([bytes as BlobPart], { type }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}
+
+async function addFiles(list: FileList | null) {
+  if (docsRunning || !list) return;
+  const body = fileList.tBodies[0];
+  body.replaceChildren();
+  docs = [];
+  const used = new Set<string>();
+  for (const f of Array.from(list)) {
+    let out = outputName(f.name);
+    for (let k = 2; used.has(out); k++) out = outputName(f.name).replace(/\.txt$/, ` (${k}).txt`);
+    used.add(out);
+    const decoded = decodeText(new Uint8Array(await f.arrayBuffer()));
+    const row = body.insertRow();
+    for (const text of [f.name, decoded?.encoding ?? '-', decoded ? '대기' : '읽지 못함 (Shift-JIS, UTF-8, UTF-16LE만)']) {
+      row.insertCell().textContent = text;
+    }
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = '받기';
+    button.title = out;
+    row.insertCell().append(button);
+    const d: Doc = { out, source: decoded?.text, row, save: button };
+    button.addEventListener('click', () => save(d.out, outputBytes(d), 'text/plain;charset=utf-8'));
+    docs.push(d);
+  }
+  showDocs();
+}
+
+async function runDocs() {
+  docsRunning = true;
+  docsCancel = false;
+  docsAt = 0;
+  const todo = docs.filter((d) => d.source !== undefined);
+  for (const d of todo) {
+    d.translated = undefined;
+    setState(d, '대기');
+  }
+  for (const d of todo) {
+    if (docsCancel) break;
+    docsAt++;
+    setState(d, '번역 중');
+    showDocs();
+    const t0 = performance.now();
+    try {
+      const m = await request('document', d.source!.split('\n'), dictText().text);
+      if (m.lines === undefined) throw new Error(m.message);
+      if (docsCancel) break;
+      d.translated = m.lines.join('\n');
+      setState(d, `완료 · ${Math.round(performance.now() - t0)} ms`);
+    } catch (err) {
+      setState(d, '번역 실패: ' + (err instanceof Error ? err.message : String(err)));
+    }
+  }
+  for (const d of todo) if (d.translated === undefined && docsCancel) setState(d, '중단');
+  docsRunning = false;
+  docsCancel = false;
+  showDocs();
+}
+
+files.addEventListener('change', () => {
+  addFiles(files.files).finally(() => (files.value = ''));
+});
+drop.addEventListener('dragover', (ev) => {
+  ev.preventDefault();
+  drop.classList.add('over');
+});
+drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+drop.addEventListener('drop', (ev) => {
+  ev.preventDefault();
+  drop.classList.remove('over');
+  addFiles(ev.dataTransfer?.files ?? null);
+});
+run.addEventListener('click', () => {
+  if (!docsRunning) runDocs();
+  else {
+    docsCancel = true;
+    showDocs();
+  }
+});
+zipButton.addEventListener('click', async () => {
+  const done = docs.filter((d) => d.translated !== undefined);
+  save('hdtrans-번역.zip', await zip(done.map((d) => ({ name: d.out, data: outputBytes(d) }))), 'application/zip');
+});
+showDocs();
 
 /** Hex SHA-256 of b. */
 async function sha256(b: Uint8Array): Promise<string> {
