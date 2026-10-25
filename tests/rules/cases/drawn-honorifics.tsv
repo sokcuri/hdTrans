@@ -76,11 +76,18 @@ sound:drawn-honorific	あにがちゃーんと言った	has:제대로~	keep	soun
 sound:drawn-honorific	ともがちゃーんと来た	has:제대로~	keep	sound
 sound:drawn-honorific	おはようちゃーん	좋은 아침~	fix	sound
 sound:drawn-honorific	ありがとちゃーん！	고마워~!	fix	sound
-sound:drawn-honorific	よろしくちゃーん	잘 부탁드립니다~	fix	sound
+sound:drawn-honorific	よろしくちゃーん	잘 부탁해~	fix	sound
 sound:drawn-honorific	おやすみちゃーん	잘 자~	fix	sound
 sound:drawn-honorific	ただいまちゃーん	다녀왔어~	fix	sound
 sound:drawn-honorific	おつかれちゃーん	수고했어~	fix	sound
-sound:drawn-honorific	ごめんちゃーん	미안짱~	current	sound
+sound:drawn-honorific	ごめんちゃーん	미안~	fix	sound
+sound:drawn-honorific	なるほどちゃーん	그렇구나~	fix	sound
+sound:drawn-honorific	おかえりちゃーん	어서 와~	fix	sound
+sound:drawn-honorific	りょうかいちゃーん！	알았어~!	fix	sound
+sound:drawn-honorific	すまんちゃーん	미안~	fix	sound
+sound:drawn-honorific	「ごめんちゃーん、遅れた」	has:「미안~,	fix	sound
+sound:drawn-honorific	「よろしくちゃーん♪」	「잘 부탁해~♪」	fix	sound
+sound:drawn-honorific	みどりちゃーん	미도리짱~	keep	sound
 sound:drawn-honorific	「お疲れちゃーんっ！」	「수고했어~!」	fix	sound
 phrases:greeting	作戦完了だよ！おつかれ！	작전 완료야! 수고했어!	fix	phrases
 phrases:greeting	おつかれぴょん！	수고했어뿅!	fix	phrases

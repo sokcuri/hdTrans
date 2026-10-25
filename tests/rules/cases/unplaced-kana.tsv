@@ -16,7 +16,7 @@ compose:sound-before-comma	「む、無理です」	「무, 무리입니다」	f
 compose:sound-before-comma	「う、撃たないでください」	「쏘, 쏘지 말아 주세요」	fix	compose
 compose:sound-before-comma	「ち、千里……」	has:치, 	fix	compose
 compose:sound-before-comma	む、道理だな。	음, 당연하네.	fix	compose
-compose:sound-before-comma	「そ、アプリオのコックさんに教えてもらったの」	has:「소, 	fix	compose
+compose:sound-before-comma	「そ、アプリオのコックさんに教えてもらったの」	has:「그래, 	fix	compose
 compose:sound-before-comma	す、と俺の頭を小さな手が撫でた。	has:스, 	fix	compose
 compose:sound-before-comma	「…ぷ、あーっはっはっはっはっは！！！」	has:「…푸, 	fix	compose
 compose:sound-before-comma	っと！………お、誰かが下に来るぞ。	has:………오, 누군가가	fix	compose
