@@ -249,16 +249,24 @@ constexpr Rewrite kPlannedWords[] = {
     {"간다", "갈 거야"}, {"온다", "올 거야"}, {"준다", "줄 거야"}, {"드린다", "드릴 거야"},
 };
 
+// Where the last bracket, sentence end or comma of s starts, npos for none. Each mark starts with
+// one of the bytes below, which start a rune wherever they stand, so s is read from its end.
+std::size_t LastClauseMark(std::string_view s) {
+    for (std::size_t at = s.size(); at-- > 0;) {
+        const unsigned char b = static_cast<unsigned char>(s[at]);
+        if (b != '!' && b != '?' && b != ',' && b != 0xE2 && b != 0xE3 && b != 0xEF) continue;
+        if (std::u32string_view(U"「『」』。！？!?、,…‥").find(text::DecodeRune(s.substr(at)).cp) != std::u32string_view::npos) {
+            return at;
+        }
+    }
+    return std::string_view::npos;
+}
+
 // The clause of speech before an item: the text after the last bracket, sentence end or
 // comma.
 std::string_view Clause(std::string_view before) {
-    std::size_t start = 0;
-    for (std::size_t at = 0; at < before.size();) {
-        const text::Rune r = text::DecodeRune(before.substr(at));
-        at += r.size == 0 ? 1 : r.size;
-        if (std::u32string_view(U"「『」』。！？!?、,…‥").find(r.cp) != std::u32string_view::npos) start = at;
-    }
-    return before.substr(start);
+    const std::size_t mark = LastClauseMark(before);
+    return mark == std::string_view::npos ? before : before.substr(mark + text::DecodeRune(before.substr(mark)).size);
 }
 
 // Whether a present verb (word, its Korean) said after clause, its Japanese, states a plan:
@@ -365,18 +373,6 @@ constexpr std::u32string_view kSkipped = U"っッーぇぁ";
 // Whether c is passed over after a predicate: one of kSkipped or a closing mark of the sound
 // stage.
 bool Skipped(char32_t c) { return kSkipped.find(c) != std::u32string_view::npos || IsClosingMark(c); }
-
-// The last character of s that is not a space or an emphasis open mark, 0 for none.
-char32_t LastNonSpace(std::string_view s) {
-    char32_t last = 0;
-    while (!s.empty()) {
-        const text::Rune r = text::DecodeRune(s);
-        if (r.size == 0) return last;
-        if (!text::IsSpace(r.cp) && r.cp != kEmphasisOpen) last = r.cp;
-        s.remove_prefix(r.size);
-    }
-    return last;
-}
 
 bool Hiragana(char32_t c) { return c >= U'ぁ' && c <= U'ゖ'; }
 
@@ -583,21 +579,42 @@ bool Composer::GoesOn(int i, int last) const {
     const ResolvedItem& it = (*items_)[i];
     const std::string_view own = source_[it.tokenIndex];
     const std::size_t end = static_cast<std::size_t>(it.offset + it.length);
-    std::string after(end < own.size() ? own.substr(end) : std::string_view());
-    for (int t = it.tokenIndex + 1; t <= last; t++) after += source_[t];
-    for (std::size_t following = static_cast<std::size_t>(last) + 1; following < tokens_->size(); following++) {
-        after += (*tokens_)[following].text;
+    // The text after the item, read as one string from its pieces: the rest of its token, the
+    // source of the tokens after it up to last, then the texts of the tokens after last.
+    const std::size_t sourced = last > it.tokenIndex ? static_cast<std::size_t>(last - it.tokenIndex) : 0;
+    const std::size_t following = static_cast<std::size_t>(last) + 1;
+    const std::size_t pieces = 1 + sourced + (following < tokens_->size() ? tokens_->size() - following : 0);
+    const auto piece = [&](std::size_t k) -> std::string_view {
+        if (k == 0) return end < own.size() ? own.substr(end) : std::string_view();
+        if (k <= sourced) return source_[static_cast<std::size_t>(it.tokenIndex) + k];
+        return (*tokens_)[following + k - 1 - sourced].text;
+    };
+    std::size_t k = 0;
+    std::string_view s = piece(0);
+    std::string head;  // the first bytes of the text when s ends inside a rune
+    while (true) {
+        while (s.empty() && k + 1 < pieces) s = piece(++k);
+        if (s.empty()) return false;
+        // The bytes of a rune by its first byte; a rune split between pieces is read from head.
+        const unsigned char lead = static_cast<unsigned char>(s[0]);
+        const std::size_t size = lead < 0xC0 ? 1 : lead < 0xE0 ? 2 : lead < 0xF0 ? 3 : 4;
+        std::string_view at = s;
+        if (s.size() < size) {
+            head = s;
+            for (std::size_t q = k + 1; head.size() < 4 && q < pieces; q++) head += piece(q).substr(0, 4 - head.size());
+            at = head;
+        }
+        const text::Rune r = text::DecodeRune(at);
+        if (!Skipped(r.cp) && std::u32string_view(U"…‥～~〜∼").find(r.cp) == std::u32string_view::npos) {
+            return std::u32string_view(U"」』）)｣。．.！!？?‼⁉⁈\n").find(r.cp) == std::u32string_view::npos;
+        }
+        for (std::size_t n = r.size; n > 0;) {
+            if (s.empty()) s = piece(++k);
+            const std::size_t taken = std::min(n, s.size());
+            s.remove_prefix(taken);
+            n -= taken;
+        }
     }
-    std::string_view s = after;
-    while (!s.empty()) {
-        const text::Rune r = text::DecodeRune(s);
-        if (r.size == 0) return false;
-        if (!Skipped(r.cp) && std::u32string_view(U"…‥～~〜∼").find(r.cp) == std::u32string_view::npos) break;
-        s.remove_prefix(r.size);
-    }
-    if (s.empty()) return false;
-    const char32_t next = text::DecodeRune(s).cp;
-    return std::u32string_view(U"」』）)｣。．.！!？?‼⁉⁈\n").find(next) == std::u32string_view::npos;
 }
 
 void Composer::WriteCasual(int first, int last) {
@@ -607,6 +624,17 @@ void Composer::WriteCasual(int first, int last) {
     QuoteState carried = settings_.quotes;
     int carriedToken = first;
     std::size_t carriedOffset = 0;
+    // The source text of the tokens from first on, built up to the token a rule reads, and where
+    // each of them starts in it. A view stays valid while the rules read one item.
+    std::string sentence;
+    std::vector<std::size_t> tokenStarts;
+    const auto sourceUpTo = [&](int token, std::size_t offset) {
+        for (int t = first + static_cast<int>(tokenStarts.size()); t <= token; t++) {
+            tokenStarts.push_back(sentence.size());
+            sentence += source_[t];
+        }
+        return std::string_view(sentence).substr(0, tokenStarts[static_cast<std::size_t>(token - first)] + offset);
+    };
     for (int i = 0; i < static_cast<int>(items.size()); i++) {
         ResolvedItem& it = items[i];
         if (it.tokenIndex < first || it.tokenIndex > last) continue;
@@ -614,17 +642,16 @@ void Composer::WriteCasual(int first, int last) {
         const std::size_t start = std::min<std::size_t>(static_cast<std::size_t>(it.offset), src.size());
         const std::size_t end = std::min<std::size_t>(static_cast<std::size_t>(it.offset + it.length), src.size());
         const std::string_view own = src.substr(start, end - start);
-        // The source text from the first token up to the item, built when a rule reads it.
-        std::string beforeText;
-        bool beforeBuilt = false;
-        auto before = [&]() -> const std::string& {
-            if (!beforeBuilt) {
-                for (int t = first; t < it.tokenIndex; t++) beforeText += source_[t];
-                beforeText += src.substr(0, start);
-                beforeBuilt = true;
-            }
+        // The source text from the first token up to the item, read when a rule needs it, and the
+        // clause of speech up to its end.
+        std::string_view beforeText;
+        bool beforeRead = false;
+        auto before = [&]() {
+            if (!beforeRead) beforeText = sourceUpTo(it.tokenIndex, start);
+            beforeRead = true;
             return beforeText;
         };
+        auto clause = [&]() { return Clause(sourceUpTo(it.tokenIndex, start + own.size())); };
         if (it.tokenIndex < carriedToken || (it.tokenIndex == carriedToken && start < carriedOffset)) {
             carried = settings_.quotes;
             carriedToken = first;
@@ -664,13 +691,13 @@ void Composer::WriteCasual(int first, int last) {
                                     std::u32string_view(U"、，,").find(close) == std::u32string_view::npos);
         if ((quoted || !settings_.narrated) && !styled) AskWord(i, last);
         if (close != 0 && asked &&
-            AskConjecture(i, Clause(before() + std::string(own)), own, quoted && !styled)) {
+            AskConjecture(i, clause(), own, quoted && !styled)) {
             continue;
         }
         // っけ after a question word recalls with 더라 (どこに置いたっけ 어디에 두었더라), in
         // polite or old speech with 던가 (どこでしたっけ 어디서 했던가).
         if (close != 0 && own.ends_with("っけ") && it.directIndex >= 0 && it.ending.text.ends_with("나") &&
-            QuestionWord(Clause(before() + std::string(own)))) {
+            QuestionWord(clause())) {
             it.ending.text.replace(it.ending.text.size() - std::string_view("나").size(), std::string_view("나").size(),
                                    styled ? "던가" : "더라");
             continue;
@@ -746,19 +773,22 @@ void Composer::WriteCasual(int first, int last) {
                        before().ends_with(std::string(d) + "と") || before().ends_with(std::string(d) + "を");
         }
         if (declared) continue;
-        const char32_t open = LastNonSpace(before());
+        // The last character before the item but spaces and the opening emphasis mark (open), and
+        // but spaces and the marks of the sound stage (lead: すっっごい), read from the last mark of
+        // a clause on.
+        const std::size_t mark = LastClauseMark(before());
+        char32_t open = 0, lead = 0;
+        for (std::string_view b = before().substr(mark == std::string_view::npos ? 0 : mark); !b.empty();) {
+            const text::Rune r = text::DecodeRune(b);
+            if (!text::IsSpace(r.cp) && r.cp != kEmphasisOpen) open = r.cp;
+            if (!text::IsSpace(r.cp) && (r.cp < 0xE000 || r.cp > 0xF8FF)) lead = r.cp;
+            b.remove_prefix(r.size);
+        }
         const bool alone = open == 0 || std::u32string_view(U"「『。！？!?…‥").find(open) != std::u32string_view::npos;
         const bool strict = !settings_.casual || settings_.casualMarkedOnly;
         // An end only a mark makes spoken: a past there keeps -다 (手に入れた！ 손에 넣었다!,
         // へたり込んでしまった…… 주저앉아버렸다……) unless it is the whole clause (わかった！ 알았어!).
         const bool markOnly = !asked && (!quoted || politeLine || (strict && ((style & kCasualSpeech) == 0 || at.depth > 1)));
-        char32_t lead = 0;  // the character before the item, past the marks of the sound stage (すっっごい)
-        for (std::string_view b = before(); !b.empty();) {
-            const text::Rune r = text::DecodeRune(b);
-            if (r.size == 0) break;
-            if (!text::IsSpace(r.cp) && (r.cp < 0xE000 || r.cp > 0xF8FF)) lead = r.cp;
-            b.remove_prefix(r.size);
-        }
         const bool bare = lead == 0 || std::u32string_view(U"「『。！？!?…‥、，,").find(lead) != std::u32string_view::npos;
         const bool keepPast = markOnly && !bare;
         if (it.directIndex < 0) {
@@ -834,12 +864,12 @@ void Composer::WriteCasual(int first, int last) {
         // chooses one.
         if (settings_.casualMarkedOnly && !asked && !punctuated && !present.empty() && !state) continue;
         const bool planned = !present.empty() && !stative && !asked && close != U'？' && close != U'?' &&
-                             Planned(present, Clause(before() + std::string(own)));
+                             Planned(present, clause());
         // 주다 in 해체 (줘) reads as a request; its past (줬어) does not.
         if (!planned && !asked && marker == "&CJ@" && First(it.ending.text) != '5') continue;
         const std::string original = it.ending.text;
         if (keepPast && PastText(original)) continue;
-        std::string soft = CasualEnding(original, planned, planned && Promised(Clause(before() + std::string(own))));
+        std::string soft = CasualEnding(original, planned, planned && Promised(clause()));
         if (politeLine && !soft.empty()) soft = PoliteOf(soft);
         if (soft.empty()) continue;
         // A repeated predicate (終わった終わった) takes the same end.
