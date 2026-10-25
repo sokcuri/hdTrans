@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.5.3](https://github.com/sokcuri/hdTrans/compare/v0.5.2...v0.5.3) (2026-10-25)
+
+
+### Features
+
+* **speech:** speak plain ends before marks, ask politely before ？, read lone やった as 앗싸 and お兄ちゃん as 오빠 ([#138](https://github.com/sokcuri/hdTrans/issues/138)) ([49c4885](https://github.com/sokcuri/hdTrans/commit/49c4885d35d9f4c81899f1ab94f5a96d659969ae))
+
+
+### Bug Fixes
+
+* **dict:** dialogue senses, missing naval compounds and 하기 nouns before する ([#118](https://github.com/sokcuri/hdTrans/issues/118)) ([4c62425](https://github.com/sokcuri/hdTrans/commit/4c62425284fe1e89d3bd9abd19f9f22be1265481))
+* **grammar:** read retorts after a pause, lone なきゃ, から and し after a finished predicate, and かと思った ([#136](https://github.com/sokcuri/hdTrans/issues/136)) ([93fba6d](https://github.com/sokcuri/hdTrans/commit/93fba6dd341a92be8d1ed2cec8a2cc3d062fb196))
+* **layout:** close brackets without a space, read typed escapes as boundaries and fold old kanji forms ([#116](https://github.com/sokcuri/hdTrans/issues/116)) ([e1b91c7](https://github.com/sokcuri/hdTrans/commit/e1b91c75b833ddb5c815eb54a65698a38757df08))
+* **names:** read names that a cue in the line or document names, and ちゃん as 짱 ([#126](https://github.com/sokcuri/hdTrans/issues/126)) ([5831ca5](https://github.com/sokcuri/hdTrans/commit/5831ca5f0464fad36a8947a178746988d438a1e1))
+* **particles:** read って, でも, とは, より, で, ごと, それに and なんで by the words around them ([#121](https://github.com/sokcuri/hdTrans/issues/121)) ([ef6e1a3](https://github.com/sokcuri/hdTrans/commit/ef6e1a3503d4b802532484682430c877330cdd5e))
+* release review clean-ups for 0.5.3 ([#143](https://github.com/sokcuri/hdTrans/issues/143)) ([2191b80](https://github.com/sokcuri/hdTrans/commit/2191b80c09ba89fe63562d447a0e3fb53eda8217))
+* **release:** read names by their cues, particles by their neighbours and spoken ends by their marks ([89bf344](https://github.com/sokcuri/hdTrans/commit/89bf34466d69bfb741e22c55ad570c77bd1db40a))
+* **sound:** decide a drawn run inside a word once for every sound start before it ([#141](https://github.com/sokcuri/hdTrans/issues/141)) ([62366f2](https://github.com/sokcuri/hdTrans/commit/62366f24bfca84c54a4db9b2b4515fd789b99209))
+* **sound:** read emphasized, stretched and spaced-out input as its words ([#115](https://github.com/sokcuri/hdTrans/issues/115)) ([be7fc38](https://github.com/sokcuri/hdTrans/commit/be7fc38bd66a1e24449b76dde322f3e79fcf870d))
+* **translation:** keep the kana the analysis cannot place, and ratchet the inputs that keep them ([#122](https://github.com/sokcuri/hdTrans/issues/122)) ([3309283](https://github.com/sokcuri/hdTrans/commit/3309283211d644cb29fe8d2d6c60fa73c2d0dab7))
+* **translation:** read ー inside hiragana words through one drawn-word decision, じゃねえ, lone そ and drawn ちゃーん tags ([#133](https://github.com/sokcuri/hdTrans/issues/133)) ([989e97f](https://github.com/sokcuri/hdTrans/commit/989e97fc7a329fa20677fe1631ad6240612531d9))
+* **translation:** read acceptable いい, rhetorical ではないか and the adnominal before の, and conjugate old and polite sentence ends ([#123](https://github.com/sokcuri/hdTrans/issues/123)) ([dfd23c2](https://github.com/sokcuri/hdTrans/commit/dfd23c288c0036a3cd7a4f6618922e1514255c82))
+* **translation:** read drawn cry adjectives, のよ questions, 申せ, 好き runs and drawn 様 by use ([#130](https://github.com/sokcuri/hdTrans/issues/130)) ([c810b19](https://github.com/sokcuri/hdTrans/commit/c810b199af68a90618324c829add0c06e6a3c6b3))
+* **translation:** read giving volitionals as 주마, the benefactive potential もらえ as 주다 and stored 出す as 꺼내다 ([#139](https://github.com/sokcuri/hdTrans/issues/139)) ([d1eb6c3](https://github.com/sokcuri/hdTrans/commit/d1eb6c346d28e09def8836b64df447c170ebfd7b))
+* **translation:** read greetings, causative せ, predicates before a copula, であります and hiragana name calls by use ([#135](https://github.com/sokcuri/hdTrans/issues/135)) ([d70dbd5](https://github.com/sokcuri/hdTrans/commit/d70dbd5ecadbf438daabe8cf30393690551eead3))
+* **translation:** read potential negations, verb forms said with ん, っ or と, and the よかった of relief ([#120](https://github.com/sokcuri/hdTrans/issues/120)) ([0dc0c80](https://github.com/sokcuri/hdTrans/commit/0dc0c80fca0d7acdb8d9b332fd0762faa00c4cb2))
+* **translation:** read the speaker's offers, humble acts, sorties, orders and short answers in dialogue ([#124](https://github.com/sokcuri/hdTrans/issues/124)) ([9321cc9](https://github.com/sokcuri/hdTrans/commit/9321cc9133404a96529fda7099cb5183dd25fd1a))
+* **translation:** read unit numbers, 第一 ordinals, ている result states, the Kansai ちゃう and いい感じ by use ([#132](https://github.com/sokcuri/hdTrans/issues/132)) ([eb3e2dd](https://github.com/sokcuri/hdTrans/commit/eb3e2dd43e32ed0199099bd2836c69835fcc6757))
+* **translation:** read かける aspect, 助かる, lone 違う and kana homographs in dialogue ([#137](https://github.com/sokcuri/hdTrans/issues/137)) ([fd87014](https://github.com/sokcuri/hdTrans/commit/fd870143639a9c1900bbe5b7f2fcc493b64efd41))
+
 ## [0.5.2](https://github.com/sokcuri/hdTrans/compare/v0.5.1...v0.5.2) (2026-10-24)
 
 
