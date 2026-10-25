@@ -801,6 +801,19 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
   });
 }
 
+test('the sanitizer job runs every unit test shard and keeps the stack checks', () => {
+  const job = build.slice(build.indexOf('\n  sanitize:\n'), build.indexOf('\n  fuzz:\n'));
+  assert.match(job, /^      ASAN_OPTIONS: detect_stack_use_after_return=1$/m);
+  const selected = new RegExp(job.match(/ctest --preset linux-asan --parallel "\$\(getconf _NPROCESSORS_ONLN\)" -R '([^']+)'/)[1]);
+  const shards = readFileSync(join(root, 'tests/unit/shards.txt'), 'utf8').split('\n')
+    .filter(line => line.trim() && !line.startsWith('#')).map(line => `unit.${line.split(/\s+/)[0]}`);
+  assert.ok(shards.length > 1);
+  for (const name of ['unit.shards', ...shards, 'rules.critical', 'rules.cases.themes', 'examples']) {
+    assert.match(name, selected, name);
+  }
+  assert.doesNotMatch('units', selected);
+});
+
 const ciOkJob = build.slice(build.indexOf('\n  ci-ok:\n'));
 // Jobs of Build that test nothing: the tested-tree record and the packaging of pushes.
 const notTestJobs = ['tested', 'release'];

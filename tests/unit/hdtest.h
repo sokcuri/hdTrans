@@ -12,6 +12,7 @@ namespace hdtest {
 struct Test {
     const char* name;
     void (*fn)();
+    const char* file;
 };
 
 inline std::vector<Test>& Registry() {
@@ -46,14 +47,14 @@ inline void Skip(const std::string& reason) {
 }
 
 struct Register {
-    Register(const char* name, void (*fn)()) { Registry().push_back({name, fn}); }
+    Register(const char* name, void (*fn)(), const char* file) { Registry().push_back({name, fn, file}); }
 };
 
 }  // namespace hdtest
 
 #define HD_TEST(name)                                        \
     static void hdtest_##name();                             \
-    static hdtest::Register hdtest_reg_##name(#name, hdtest_##name); \
+    static hdtest::Register hdtest_reg_##name(#name, hdtest_##name, __FILE__); \
     static void hdtest_##name()
 
 #define HD_CHECK(cond) \

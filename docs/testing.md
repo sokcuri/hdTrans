@@ -6,7 +6,8 @@
 
 | 이름 | 내용 |
 |---|---|
-| `unit` | 단위 테스트 `hdtrans_tests` |
+| `unit.<묶음>` | 단위 테스트 `hdtrans_tests`를 `tests/unit/shards.txt`의 묶음별로 나눠 병렬 실행 ([아래](#단위-테스트)) |
+| `unit.shards` | 모든 단위 테스트가 한 묶음에 들고, 묶음의 항목마다 테스트가 있는지 확인 |
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
@@ -35,7 +36,14 @@ HDTRANS_DICTS=$PWD/dicts ctest --preset mac
 ```sh
 build/mac/hdtrans_tests            # 전체
 build/mac/hdtrans_tests userdict   # 이름에 userdict가 들어간 테스트만
+build/mac/hdtrans_tests --shard tests/unit/shards.txt word    # 묶음 word만
+build/mac/hdtrans_tests --check-shards tests/unit/shards.txt  # 묶음이 없는 테스트를 보고
 ```
+
+ctest는 단위 테스트를 `tests/unit/shards.txt`의 줄마다 `unit.<이름>`으로 따로 실행합니다. 한 줄은 묶음
+이름과 항목들이고, 항목은 `/`로 끝나는 폴더, 소스 파일, `파일:테스트` 중 하나입니다. 테스트는 가장 길게
+맞는 항목의 묶음에 듭니다. 새 폴더를 만들면 그 폴더를 한 줄에 넣어야 `unit.shards`가 통과합니다. 이름으로
+고를 때는 `ctest -R '^unit(\..+)?$'`로 묶음 전체를 고릅니다.
 
 러너는 `HOME`, `LOCALAPPDATA`, `XDG_CACHE_HOME`을 임시 폴더로 바꾸고, `HDTRANS_CACHE_DIR`가 없으면 임시
 캐시 폴더를 지정합니다. 실행 중 사용자 캐시 폴더가 바뀌면 실패합니다. `tests/runner.sh`는 이 러너
