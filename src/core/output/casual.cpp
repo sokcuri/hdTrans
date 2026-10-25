@@ -184,7 +184,7 @@ std::string SpokenWords(std::string_view line, int depth, const std::vector<std:
             if (depth++ == 0) quote = ++count;
         } else if ((r.cp == U'」' || r.cp == U'』' || r.cp == U'｣') && depth > 0) {
             if (--depth == 0) quote = 0;
-        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle)) == 0) {
+        } else if (depth == 1 && quote < styles.size() && (styles[quote] & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0) {
             if (const auto [spoken, length] = SpokenSyllables(line.substr(at), out); length > 0) {
                 out += spoken;
                 at += length;
@@ -453,6 +453,23 @@ std::string PressedPolite(std::string_view text) {
     return {};
 }
 
+// The 해요체 of a 해체 end, for a line that speaks politely elsewhere (무서워 무서워요, (이)야
+// (이에)예요, 거야 거예요); "" where it has none.
+std::string PoliteOf(std::string soft) {
+    if (soft.ends_with("(이)야")) return soft.substr(0, soft.size() - std::string_view("(이)야").size()) + "(이에)예요";
+    if (soft.ends_with("거야")) return soft.substr(0, soft.size() - std::string_view("야").size()) + "예요";
+    if (soft.ends_with("야")) return {};
+    return soft + "요";
+}
+
+// Whether a 해체 end text states a past (5어, 했어, 버렸어).
+bool PastText(std::string_view text) {
+    if (First(text) == '5') return true;
+    const std::size_t space = text.rfind(' ');
+    const std::string_view word = text.substr(space == std::string_view::npos ? 0 : space + 1);
+    return (word != "있다" && !PastWord(word).empty()) || text.ends_with("었다") || text.ends_with("였다");
+}
+
 // Whether the run of end marks that starts with close and goes on with rest (？, ！？, …？)
 // asks; exclaimed tells whether the run also holds an exclamation mark (！？, ？！).
 bool Asks(char32_t close, std::string_view rest, bool* exclaimed) {
@@ -689,7 +706,11 @@ void Composer::WriteCasual(int first, int last) {
             Spoken(items, i) != i && AskFormal(Spoken(items, i), own.starts_with("よ"))) {
             continue;
         }
-        if ((!quoted && !punctuated) || styled || (!settings_.casual && !asked && !punctuated)) continue;
+        // A line that speaks politely elsewhere takes 해요체 where a mark makes a plain end spoken
+        // (やめてください！怖い！ 그만해 주세요! 무서워요!).
+        const bool politeLine = punctuated && (style & kPoliteFormStyle) != 0 &&
+                                (style & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0;
+        if ((!quoted && !punctuated) || (styled && !politeLine) || (!settings_.casual && !asked && !punctuated)) continue;
         // Marked casual quotes: their own text only, not a quote inside them (『書いた』って);
         // a question or an end before a mark is spoken in any plain quote.
         if (settings_.casualMarkedOnly && !asked && !punctuated && ((style & kCasualSpeech) == 0 || at.depth > 1)) continue;
@@ -713,6 +734,18 @@ void Composer::WriteCasual(int first, int last) {
         const char32_t open = LastNonSpace(before());
         const bool alone = open == 0 || std::u32string_view(U"「『。！？!?…‥").find(open) != std::u32string_view::npos;
         const bool strict = !settings_.casual || settings_.casualMarkedOnly;
+        // An end only a mark makes spoken: a past there keeps -다 (手に入れた！ 손에 넣었다!,
+        // へたり込んでしまった…… 주저앉아버렸다……) unless it is the whole clause (わかった！ 알았어!).
+        const bool markOnly = !asked && (!quoted || politeLine || (strict && ((style & kCasualSpeech) == 0 || at.depth > 1)));
+        char32_t lead = 0;  // the character before the item, past the marks of the sound stage (すっっごい)
+        for (std::string_view b = before(); !b.empty();) {
+            const text::Rune r = text::DecodeRune(b);
+            if (r.size == 0) break;
+            if (!text::IsSpace(r.cp) && (r.cp < 0xE000 || r.cp > 0xF8FF)) lead = r.cp;
+            b.remove_prefix(r.size);
+        }
+        const bool bare = lead == 0 || std::u32string_view(U"「『。！？!?…‥、，,").find(lead) != std::u32string_view::npos;
+        const bool keepPast = markOnly && !bare;
         if (it.directIndex < 0) {
             // A copula alone in its clause (「だな」, しかし、だ), after a stutter (だだだ) or
             // after a particle (ユフィリアもだ) is no predicate of a sentence. A copula that a
@@ -727,12 +760,15 @@ void Composer::WriteCasual(int first, int last) {
                 continue;
             }
             const std::size_t space = text.rfind(' ');
-            const std::size_t at = space == std::string_view::npos ? 0 : space + 1;
+            const std::size_t wordAt = space == std::string_view::npos ? 0 : space + 1;
             if (to.empty() && (space != std::string_view::npos || !alone)) {
-                std::string soft(Find(kWords, text.substr(at)));
-                if (soft.empty()) soft = PastWord(text.substr(at));
-                if (!soft.empty()) to = std::string(text.substr(0, at)) + soft;
+                std::string soft(Find(kWords, text.substr(wordAt)));
+                if (soft.empty()) soft = PastWord(text.substr(wordAt));
+                if (!soft.empty()) to = std::string(text.substr(0, wordAt)) + soft;
             }
+            if (to.empty()) continue;
+            if (keepPast && (text == "(이었)였다" || !PastWord(text.substr(wordAt)).empty())) continue;
+            if (politeLine) to = PoliteOf(to);
             if (to.empty()) continue;
             it.entry.text = to;
             if (it.selected == 0) it.first.text = to;
@@ -787,7 +823,9 @@ void Composer::WriteCasual(int first, int last) {
         // 주다 in 해체 (줘) reads as a request; its past (줬어) does not.
         if (!planned && !asked && marker == "&CJ@" && First(it.ending.text) != '5') continue;
         const std::string original = it.ending.text;
+        if (keepPast && PastText(original)) continue;
         std::string soft = CasualEnding(original, planned, planned && Promised(Clause(before() + std::string(own))));
+        if (politeLine && !soft.empty()) soft = PoliteOf(soft);
         if (soft.empty()) continue;
         // A repeated predicate (終わった終わった) takes the same end.
         for (int j = i - 1;

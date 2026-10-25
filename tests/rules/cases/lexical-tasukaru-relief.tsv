@@ -14,7 +14,7 @@ cx:tasukaru:10	直す奴？ いれば助かるよな。	고치는 놈? 있으면
 cx:tasukaru:10	命が助かる。	!rule:cx:tasukaru:10	keep	rewrites
 cx:tasukaru:10	到底助からない傷ならば、二人で守ることを決めた。	!rule:cx:tasukaru:10	keep	rewrites
 cx:tasukaru:10	逃げれば助かる。	!rule:cx:tasukaru:10	keep	rewrites
-cx:tasukaru:20	たっぷりと蓄えた脂肪のおかげで助かった……。	듬뿍 비축한 지방 덕분에 살았어…….	fix	rewrites
+cx:tasukaru:20	たっぷりと蓄えた脂肪のおかげで助かった……。	듬뿍 비축한 지방 덕분에 살았다…….	fix	rewrites
 cx:tasukaru:20	ミドリさんのお陰で助かったってしっかり感謝して、	미도리 씨 덕분에 살았다고 확실히 감사해,	fix	rewrites
 cx:tasukaru:20	今回も助かった	이번에도 살았다	fix	rewrites
 cx:tasukaru:20	ふ～、助かったぁ～。司令官酷いよぉ	후~, 살았어~. 사령관 심해	fix	rewrites

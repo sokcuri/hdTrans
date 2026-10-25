@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 sound:ra-less-kuru	港に無事戻ってこれました。皆さん、お疲れ様です。	항구에 무사히 돌아올 수 있었습니다. 여러분, 수고하셨습니다.	fix	sound
 sound:ra-less-kuru	ふーっ、無事に帰ってこれた。よかったよー。	후웃, 무사히 돌아올 수 있었다. 좋았어~.	fix	sound
-sound:ra-less-kuru	「やっと……ここまで出てこれた……！」	「드디어……여기까지 나올 수 있었어……!」	fix	sound
+sound:ra-less-kuru	「やっと……ここまで出てこれた……！」	「드디어……여기까지 나올 수 있었다……!」	fix	sound
 sound:ra-less-kuru	はあ、やっと逃げてこれた。	하아, 드디어 도망쳐 올 수 있었다.	fix	sound
 sound:ra-less-kuru	長良の足についてこれる？	나가라의 다리에 따라 올 수 있어?	fix	sound
 sound:ra-less-kuru	いわゆるそんな趣味についてこれる友人がいなかった	이른바 그런 취미에 따라 올 수 있는 친구가 없었다	fix	sound

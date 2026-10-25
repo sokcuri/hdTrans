@@ -86,7 +86,7 @@ lookup:copies-predicate	そんなことない……そんなことないよ…�
 lookup:copies-predicate	ああ～食べた食べた。	아~먹었다 먹었다.	keep	lookup
 lookup:copies-predicate	ことを考えると、まだまだですよ	일을 생각하면, 아직 멀었습니다	keep	lookup
 lookup:copies-predicate	俺も、まだまだ修行が足りない。	나도, 아직도 수행이 부족하다.	keep	lookup
-lookup:copies-predicate	は～食った食ったー！	는~먹었어 먹었어~!	keep	lookup
+lookup:copies-predicate	は～食った食ったー！	는~먹었다 먹었다~!	keep	lookup
 lookup:copies-predicate	まだまだだよ	아직도야	keep	lookup
 lookup:copies-noun	うん……大丈夫……大丈夫、だから……	응……괜찮아……괜찮아, 그러니까……	keep	lookup
 lookup:copies-noun	無理無理	무리 무리	keep	lookup

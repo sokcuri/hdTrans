@@ -30,6 +30,7 @@ constexpr std::uint8_t kPoliteStyle = 1;  // pipeline::kPoliteSpeech, a quote in
 // A quote of polite speech whose Korean ends a sentence politely and whose Japanese has no casual
 // mark (the engine sets it for でしょ).
 constexpr std::uint8_t kPoliteTalkStyle = 64;
+constexpr std::uint8_t kPoliteFormStyle = 128;  // pipeline::kPoliteForm
 
 // The switches of the stage.
 struct Settings {

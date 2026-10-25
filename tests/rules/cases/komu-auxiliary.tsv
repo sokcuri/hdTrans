@@ -9,4 +9,4 @@ dict:komu-kana	床に倒れこんだ。	바닥에 쓰러졌다.	fix	lookup
 dict:komu-kana	その場にへたりこんでいた。	그 자리에 주저앉아 있었다.	fix	lookup
 dict:komu-kana	周囲に溶け込む。	주위에 녹아든다.	fix	lookup
 rewrite:result-state	バス停のベンチに座り込んでたらさ。	버스정류장의 벤치에 주저앉아 있으면.	fix	rewrites
-rewrite:result-state	その場にへたり込んでしまった……	그 자리에 주저앉아버렸어……	keep	rewrites
+rewrite:result-state	その場にへたり込んでしまった……	그 자리에 주저앉아버렸다……	keep	rewrites

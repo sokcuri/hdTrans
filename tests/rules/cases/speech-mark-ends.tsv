@@ -10,12 +10,12 @@ compose:speech-mark	大丈夫だ！	괜찮아!	fix	compose
 compose:speech-mark	奇跡だ！	기적이야!	fix	compose
 compose:speech-mark	熊野丸は、ここに健在だ！	쿠마노마루는, 여기에 건재해!	fix	compose
 compose:speech-mark	いい匂いだった！	좋은 냄새였어!	fix	compose
-compose:speech-mark	なーんとかなった！	어떻게든 됐어!	fix	compose
+compose:speech-mark	なーんとかなった！	어떻게든 되었다!	keep	compose
 compose:speech-mark	ちいぃっ……！いやいや、まだ行ける！	체에엣……! 아니아니, 아직 갈 수 있어!	fix	compose
 compose:speech-mark	ちょっと…恥ずかしい…	조금…부끄러워…	fix	compose
-compose:speech-mark	俺もつい探してしまった……	나도 무심코 찾아버렸어……	fix	compose
+compose:speech-mark	俺もつい探してしまった……	나도 무심코 찾아버렸다……	keep	compose
 compose:speech-mark	開いたー！	열었어~!	fix	compose
-compose:speech-mark	今度は間に合った～	이번에는 늦지 않았어~	fix	compose
+compose:speech-mark	今度は間に合った～	이번에는 늦지 않았다~	keep	compose
 compose:speech-mark	うそ！気づかれた！？	거짓말! 눈치채졌어!?	fix	compose
 compose:speech-mark	「違う！」	「아니야!」	fix	compose
 compose:speech-mark	「寒い！」	「추워!」	fix	compose
@@ -39,3 +39,12 @@ compose:speech-mark	あっ、香取～！ また一緒に踊る～？	앗, 카�
 compose:speech-mark	なにかを思い出すかのようにとても哀しい……	뭔가를 생각해 내는 것처럼 무척 슬퍼……	fix	compose
 compose:speech-mark	サムイ……ツメタイ……。	has:차가워……	fix	compose
 compose:speech-mark	わしじゃ……	나다……	keep	compose
+compose:speech-mark	ポーションを手に入れた！	포션을 손에 넣었다!	keep	compose
+compose:speech-mark	その場にへたり込んでしまった……	그 자리에 주저앉아버렸다……	keep	compose
+compose:speech-mark	わかった！	알았어!	fix	compose
+compose:speech-mark	助かった……	살았어……	fix	compose
+compose:speech-mark	やめてください！怖い！	그만해 주세요! 무서워요!	fix	compose
+compose:speech-mark	提督、ご安心くださいませ。え？違う？	제독, 안심해 주십시오. 어? 아니에요?	fix	compose
+compose:speech-mark	午後一時です。うふっ、気持ちいい！	오후 1시입니다. 우훗, 기분 좋아요!	fix	compose
+compose:speech-mark	「そうですね……あ、そうだ……」	「그렇네요……아, 맞아요……」	fix	compose
+compose:speech-mark	早く来なさい！遅い！	빨리 와! 늦다!	keep	compose

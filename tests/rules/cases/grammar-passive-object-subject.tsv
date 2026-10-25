@@ -12,7 +12,7 @@ voice:object-subject	要約すればこんなことを書かれていた。	has:
 voice:object-subject	今回なんか4人も命を救われてるんだぜ？	has:목숨이 구해지고	fix	voice
 voice:object-subject	繋がりを断たれるともう捜しようがねーんだ	has:연결이 끊기면	fix	voice
 voice:object-subject	それは望みを絶たれた悲しさの裏返しでもあった。	has:소망이 끊긴	fix	voice
-voice:object-subject	突然、よく知った声に視界を遮られた！	has:시야가 가로막아졌어	fix	voice
+voice:object-subject	突然、よく知った声に視界を遮られた！	has:시야가 가로막아졌다	fix	voice
 voice:object-subject	コゼットの居室は中庭に面した陽当たりの良い部屋を割り当てられており、	has:방이 할당되고	fix	voice
 voice:object-subject	頭からレモネードを浴びせられていた。	has:레모네이드가 퍼부어지고	fix	voice
 voice:object-subject	まず正しい姿勢を徹底的に叩き込まれた。	has:자세가 철저하게 주입되었다	fix	voice
