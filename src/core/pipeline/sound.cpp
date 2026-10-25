@@ -2546,12 +2546,12 @@ std::string RewriteContractedAuxiliaries(std::string_view text, const LineContex
             const std::string form = EncodeText(std::u32string_view(spoken).substr(f, i - f));
             // ちゃう first, a verb of the dictionary too (になっちゃって of になっちゃう).
             for (const std::string_view chau : dict::ClassMembers("contraction.chau-te")) {
-                const size_t n = DecodeText(chau).size();
-                if (i - f <= n || !std::string_view(form).ends_with(chau)) continue;
+                const size_t len = DecodeText(chau).size();
+                if (i - f <= len || !std::string_view(form).ends_with(chau)) continue;
                 // ちゃって after the stem of a て form, じゃって after that of a で form.
-                std::u32string te(std::u32string_view(spoken).substr(0, i - n));
-                te += DecodeText(chau.starts_with(kJi) ? kDe : kTe);
-                if (TeForm(te, f, i - n + 1, ctx, snap)) return viaChau = true;
+                std::u32string stemTe(std::u32string_view(spoken).substr(0, i - len));
+                stemTe += DecodeText(chau.starts_with(kJi) ? kDe : kTe);
+                if (TeForm(stemTe, f, i - len + 1, ctx, snap)) return viaChau = true;
             }
             if (TeForm(spoken, f, i, ctx, snap)) return true;
             return form == word::PrefixForm(kPrefixSuru + 7) || form == word::PrefixForm(kPrefixKuru + 7);
