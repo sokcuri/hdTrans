@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <memory>
@@ -39,12 +40,6 @@ internal::TranslationOptions Soft() {
     return options;
 }
 
-std::vector<std::string> Translate(const std::vector<std::string>& lines, internal::Memory& memory,
-                                   const internal::TranslationOptions& options = Soft()) {
-    const Fixture& f = Dictionary();
-    return internal::TranslateDocument(*f.snapshot, *f.generated, lines, memory, {}, options);
-}
-
 std::string Joined(const std::vector<std::string>& lines) {
     std::string s;
     for (const std::string& line : lines) s += (s.empty() ? "" : "|") + line;
@@ -52,8 +47,8 @@ std::string Joined(const std::vector<std::string>& lines) {
 }
 
 std::string Translate(const std::vector<std::string>& lines, const internal::TranslationOptions& options = Soft()) {
-    internal::Memory memory;
-    return Joined(Translate(lines, memory, options));
+    const Fixture& f = Dictionary();
+    return Joined(internal::TranslateDocument(*f.snapshot, *f.generated, lines, {}, options));
 }
 
 }  // namespace
@@ -91,11 +86,6 @@ HD_TEST(engine_speech_quote_across_lines) {
     // A quote runs for at most five lines.
     HD_CHECK_EQ(Translate({"「高い。", "高い。", "高い。", "高い。", "高い。", "高い。", "高い」"}),
                 "「높아.|높다.|높다.|높다.|높다.|높다.|높다」");
-    // The quote carries from one call to the next of the same memory.
-    internal::Memory memory;
-    HD_CHECK_EQ(Joined(Translate({"「高い。"}, memory)), "「높아.");
-    HD_CHECK_EQ(Joined(Translate({"高い」"}, memory)), "높아」");
-    HD_CHECK_EQ(Joined(Translate({"高い。"}, memory)), "높다.");
 }
 
 HD_TEST(engine_speech_session) {
@@ -113,13 +103,27 @@ HD_TEST(engine_speech_session) {
     session.SetSpeech(Speech::Strict);
     HD_CHECK_EQ(session.Translate("「高い」"), "「높다」");
     session.SetSpeech(Speech::Soft);
+    // A quote left open by one call does not reach the next.
     HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
-    HD_CHECK_EQ(session.Translate("高い」"), "높아」");
-    HD_CHECK_EQ(session.Translate("「高い。"), "「높아.");
-    session.Reset();
     HD_CHECK_EQ(session.Translate("高い」"), "높다」");
     Session reference(engine, true);
     HD_CHECK_EQ(reference.Translate("「高い」"), "「높다」");
     std::error_code ec;
     std::filesystem::remove_all(folder, ec);
+}
+
+// A call is translated as if the session were new: a document of 「」 dialogue in one call
+// does not make the unquoted line of the next call narration. Needs HDTRANS_DICTS.
+HD_TEST(engine_speech_calls_independent) {
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.Open({dicts}));
+    const std::string first = "「ふーん、そういうこと言うんだ」と彼女は…", second = "あ、あなたの手……あったかい……";
+    Session session(engine), fresh(engine);
+    session.Translate(first);
+    HD_CHECK_EQ(session.Translate(second), fresh.Translate(second));
+    HD_CHECK_EQ(fresh.Translate(second), "다, 당신의 손……따뜻해……");
+    // The lines of one call are one document: there the unquoted line is narration.
+    HD_CHECK(fresh.Translate(first + "\n" + second).ends_with("\n다, 당신의 손……따뜻하다……"));
 }

@@ -31,9 +31,8 @@ HD_TEST(word_ruby_base_reads_the_word_after_its_reading) {
         {"いぬ猫", "다바"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
@@ -64,9 +63,8 @@ HD_TEST(word_ruby_base_boundary_after_its_reading) {
         {"犬いぬ", "가라"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
@@ -93,9 +91,8 @@ HD_TEST(word_ruby_base_alone_keeps_its_reading_on_the_line) {
         {"犬", "나"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }

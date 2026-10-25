@@ -19,9 +19,8 @@ HD_TEST(word_emphatic_mo) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        internal::Memory memory;
         const std::string line(text);
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     HD_CHECK_EQ(translate("彼は立ち上がりもせず、"), "그는 일어서지도 않고,");

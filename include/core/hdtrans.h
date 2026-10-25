@@ -1,6 +1,6 @@
 /* C API of the hdtrans engine. Strings are UTF-8. Buffers returned through an out
- * parameter are released with hdTrans_FreeMem. One engine and one session per process:
- * names and context found in earlier calls shape later translations.
+ * parameter are released with hdTrans_FreeMem. One engine and one session per process.
+ * Each call is translated on its own: nothing from earlier calls shapes it.
  * Calls are thread-safe, not reentrant; finish all calls before unloading the library. */
 #ifndef HDTRANS_H
 #define HDTRANS_H
@@ -37,8 +37,9 @@ HDTRANS_API void hdTrans_Terminate(void);
  * *outn. Returns 0, or -1 when uninitialized or terminated. */
 HDTRANS_API int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn);
 
-/* Forgets the names and context the session learned from earlier text, so that the next
- * translation starts like the first. Returns 0, or -1 when uninitialized or terminated. */
+/* Takes the engine's current dictionaries into the session. A session keeps nothing from
+ * earlier calls, so translations are unchanged otherwise. Returns 0, or -1 when
+ * uninitialized or terminated. */
 HDTRANS_API int hdTrans_Reset(void);
 
 /* Rereads config, dictionary folders and the user dictionary. Returns 0, or -1 when

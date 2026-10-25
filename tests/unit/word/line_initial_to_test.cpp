@@ -38,8 +38,7 @@ HD_TEST(word_line_initial_to_quotes) {
     };
     for (const Case& c : cases) {
         const std::string input = c.input;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }

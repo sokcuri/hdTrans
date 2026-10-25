@@ -28,9 +28,8 @@ HD_TEST(word_name_keeps_verb_stem_before_person_suffix) {
         {"里見さん", "사토미"},
     };
     for (const Case& c : cases) {
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> lines = {c.in};
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, lines, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0].substr(0, std::string(c.head).size()), std::string(c.head));
     }

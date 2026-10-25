@@ -254,7 +254,7 @@ Ehnd 설정 메서드를 씁니다. C API 포인터나 `ccall`, `FreeMem`을 직
 ```cpp
 hdTrans::Engine engine;                      // 사전
 engine.Open({"dicts"});                      // 사용자 사전은 OpenUserDicts로
-hdTrans::Session session(engine);            // 문맥을 기억하는 번역
+hdTrans::Session session(engine);            // 호출마다 독립인 번역
 std::string ko = session.Translate("今日はいい天気ですね。");
 ```
 
@@ -288,9 +288,9 @@ std::string ko = session.Translate("今日はいい天気ですね。");
 
 | 함수 | 하는 일 |
 |---|---|
-| `Translate(text)` | `\n`으로 나눈 줄을 번역(`\r`은 유지). 앞에서 번역한 문맥을 기억함. 64 KiB가 넘는 줄은 16 KiB 이하로 나눠 번역 |
-| `Reset()` | 기억을 지우고 엔진의 지금 사전을 가져옴 |
+| `Translate(text)` | `\n`으로 나눈 줄을 한 문서로 번역(`\r`은 유지). 앞선 호출의 영향을 받지 않음. 64 KiB가 넘는 줄은 16 KiB 이하로 나눠 번역 |
+| `Reset()` | 엔진의 지금 사전을 가져옴 |
 | `SetSpeech(Speech)` | 다음 번역부터 대사의 말투(`Soft`(기본), `Strict`, `--speech`와 같음). 기준 모드에서는 효과 없음 |
 
-`UserReload::Auto` 엔진의 세션은 엔진에 새 사전이 생기면 다음 번역에서 기억을 지우고 그 사전으로 바꿉니다.
+`UserReload::Auto` 엔진의 세션은 엔진에 새 사전이 생기면 다음 번역에서 그 사전으로 바꿉니다.
 필터와 Ehnd 형식은 [ehnd-compat.md](ehnd-compat.md)에 있습니다.

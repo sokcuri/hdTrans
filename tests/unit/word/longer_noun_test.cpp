@@ -40,8 +40,7 @@ HD_TEST(word_longer_noun_after_adnominal_no) {
     };
     for (const Case& c : cases) {
         const std::string input = c.input;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
@@ -93,14 +92,12 @@ HD_TEST(word_longer_noun_after_noun_of_another_letter) {
     };
     for (const Case& c : cases) {
         const std::string input = c.input;
-        hdTrans::internal::Memory memory;
-        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, memory, {}, {});
+        const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, {});
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0].find(c.word) != std::string::npos, c.whole);
     }
     const std::string shorter = "治験を";
-    hdTrans::internal::Memory memory;
-    const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&shorter, 1}, memory, {}, {});
+    const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&shorter, 1}, {}, {});
     HD_REQUIRE(out.size() == 1);
     HD_CHECK_EQ(out[0], std::string("임상 시험을"));
 }

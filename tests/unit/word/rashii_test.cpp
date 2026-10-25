@@ -24,9 +24,8 @@ std::string Translate(std::string_view text) {
     HD_CHECK(loaded.errors.empty());
     if (loaded.snapshot == nullptr) return {};
     const auto generated = internal::NewGenerated(*loaded.snapshot);
-    internal::Memory memory;
     const std::string line(text);
-    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
     return out.empty() ? std::string() : out[0];
 }
 

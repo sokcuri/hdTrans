@@ -19,9 +19,8 @@ HD_TEST(word_voice_actions) {
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
     auto translate = [&](std::string_view text) {
-        internal::Memory memory;
         const std::string line(text);
-        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, memory, {}, {});
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
         return out.empty() ? std::string() : out[0];
     };
     HD_CHECK_EQ(translate("母に本を読まされた。"), "어머니 때문에 억지로 책을 읽었다.");

@@ -31,9 +31,8 @@ std::string Translate(const dict::Snapshot& snapshot, std::string_view text, con
     internal::TranslationOptions options;
     options.wordImprovements.misreadFilter = model != nullptr;
     options.misreadModel = model;
-    internal::Memory memory;
     const std::string line(text);
-    const auto out = internal::TranslateDocument(snapshot, *generated, {&line, 1}, memory, {}, options);
+    const auto out = internal::TranslateDocument(snapshot, *generated, {&line, 1}, {}, options);
     return out.empty() ? std::string() : out[0];
 }
 
@@ -57,9 +56,8 @@ Collected Decisions(const dict::Snapshot& snapshot, std::string_view text) {
     observer.context = &c;
     observer.resolved = OnResolved;
     const auto generated = internal::NewGenerated(snapshot);
-    internal::Memory memory;
     const std::string line(text);
-    internal::TranslateDocument(snapshot, *generated, {&line, 1}, memory, observer, {});
+    internal::TranslateDocument(snapshot, *generated, {&line, 1}, observer, {});
     return c;
 }
 

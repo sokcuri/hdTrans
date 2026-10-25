@@ -124,62 +124,13 @@ void Registry::SetName(std::string_view t, std::string_view kr) {
     }
 }
 
-void Registry::CacheDictionaryFacts() {
-    sharedFlags_ = std::make_shared<FlagCache>();
-}
-
 void Registry::SetReading(const std::string& key, const std::string& value) {
     if (value.empty()) return;
     if (reading_[key].empty()) reading_[key] = value;
-    if (recording_ != nullptr) {
-        sources_->readings[key].emplace_back(recording_->id, value);
-        recording_->readings.push_back(key);
-    }
 }
 
 void Registry::SetActor(const std::string& key, const std::string& value) {
     actors_[key] = value;
-    if (recording_ != nullptr) {
-        sources_->actors[key].emplace_back(recording_->id, value);
-        recording_->actors.push_back(key);
-    }
-}
-
-void Registry::Forget(const Evidence& evidence) {
-    std::map<std::string, int>* counts[] = {&labels_, &prefixes_, &hon_,     &gloss_, &runs_,  &ended_,
-                                            &kana_,   &chains_,   &kanaHon_, &prose_, &agents_};
-    for (std::size_t i = 0; i < evidence.counts.size(); i++) {
-        for (const std::string& key : evidence.counts[i]) {
-            auto it = counts[i]->find(key);
-            if (it != counts[i]->end() && --it->second == 0) counts[i]->erase(it);
-        }
-    }
-    for (const auto& key : evidence.joined) {
-        auto it = joined_.find(key);
-        if (it != joined_.end() && --it->second == 0) joined_.erase(it);
-    }
-    auto forget = [&](Sources::Values& values, const std::vector<std::string>& keys,
-                      std::map<std::string, std::string>& destination, bool first) {
-        for (const std::string& key : keys) {
-            auto it = values.find(key);
-            if (it == values.end()) continue;
-            auto& queue = it->second;
-            while (!queue.empty() && queue.front().first <= evidence.id) queue.pop_front();
-            if (queue.empty()) {
-                values.erase(it);
-                destination.erase(key);
-            } else {
-                destination[key] = first ? queue.front().second : queue.back().second;
-            }
-        }
-    };
-    if (sources_) {
-        forget(sources_->readings, evidence.readings, reading_, true);
-        forget(sources_->actors, evidence.actors, actors_, false);
-    }
-    scores_.clear();
-    flags_.clear();
-    scoresValid_ = false;
 }
 
 // Whether a gloss or ruby reading marks a word's reading, not a name: the base is a common
@@ -448,26 +399,18 @@ std::string Registry::DropReadings(std::string_view line) {
     return out;
 }
 
-void Registry::Add(std::string_view rawLine, Evidence* evidence) {
+void Registry::Add(std::string_view rawLine) {
     const std::string_view line0 = TrimCR(rawLine);
     if (TrimSpace(line0).starts_with("//")) return;
     scoresValid_ = false;
-    recording_ = evidence;
-    if (evidence != nullptr) {
-        if (!sources_) sources_ = std::make_shared<Sources>();
-        evidence->id = sources_->next++;
-    }
-    auto count = [&](std::map<std::string, int>& values, const std::string& key, std::size_t kind) {
-        values[key]++;
-        if (recording_ != nullptr) recording_->counts[kind].push_back(key);
-    };
+    auto count = [&](std::map<std::string, int>& values, const std::string& key) { values[key]++; };
     std::string line(line0);
     for (std::size_t from = 0; from <= line.size();) {
         RubyMatch m;
         if (!FindRuby(line, from, m)) break;
         const std::string base(m.base), kana(m.reading);
         if (IsKanaText(kana) && !Gikun(base, kana)) {
-            count(gloss_, base, 3);
+            count(gloss_, base);
             SetReading(base, kana);
         }
         from = m.end;
@@ -486,37 +429,37 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
                                (WordClasses(m.reading) & kNounClass) == 0;
         if (!layerName && (ReadingMorae(m.reading) < 3 || f.records > 0 || f.layerSurname || f.layerGiven)) continue;
         if (BaseReading(m.base, m.reading, std::string_view(line).substr(m.end), false, false)) continue;
-        count(gloss_, std::string(m.reading), 3);
+        count(gloss_, std::string(m.reading));
     }
     bool script = false;
     if (const std::string label = Label(line, script); !label.empty()) {
         if (script) {
-            count(labels_, label, 0);
+            count(labels_, label);
         } else {
-            count(prefixes_, label, 1);
+            count(prefixes_, label);
         }
     }
-    for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t, 8);
+    for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
     // A line that is a name alone, a speaker line before a quote, names the speaker of the
     // quote.
     const std::string_view body = TrimSpace(line);
     if (!nameLine_.empty() && (body.starts_with("「") || body.starts_with("『") || body.starts_with("（"))) {
-        count(prefixes_, nameLine_, 1);
+        count(prefixes_, nameLine_);
     }
     nameLine_.clear();
     if (const std::size_t n = RuneCount(body); n >= 1 && n <= 8 && PlainLabel(body) && !LabelRole(body)) {
         nameLine_ = std::string(body);
     }
     const std::vector<Run> runs = RunsOf(line);
-    for (const std::string& t : ProseRuns(line)) count(prose_, t, 9);
+    for (const std::string& t : ProseRuns(line)) count(prose_, t);
     std::size_t chain = 0;  // first run of the current katakana chain
     for (std::size_t i = 0; i < runs.size(); i++) {
         const Run& run = runs[i];
         if (run.kanji) {
-            count(runs_, std::string(run.text), 4);
-            if (NameEnd(line.substr(run.end))) count(ended_, std::string(run.text), 5);
+            count(runs_, std::string(run.text));
+            if (NameEnd(line.substr(run.end))) count(ended_, std::string(run.text));
         } else {
-            count(kana_, std::string(run.text), 6);
+            count(kana_, std::string(run.text));
         }
         bool linked = false;
         if (i + 1 < runs.size()) {
@@ -525,27 +468,25 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             if (run.kanji && !next.kanji && next.start == run.end) {
                 const std::array<std::string, 3> key = {std::string(run.text), "", std::string(next.text)};
                 joined_[key]++;
-                if (recording_ != nullptr) recording_->joined.push_back(key);
             } else if (run.kanji && next.kanji && (gap == "　" || gap == " ")) {
                 const std::array<std::string, 3> key = {std::string(run.text), " ", std::string(next.text)};
                 joined_[key]++;
-                if (recording_ != nullptr) recording_->joined.push_back(key);
             } else if (!run.kanji && !next.kanji && next.start == run.end + std::string_view("・").size()) {
                 const std::string_view sep = std::string_view(line).substr(run.end, next.start - run.end);
                 linked = sep == "・" || sep == "＝";
             }
         }
         if (!linked) {
-            if (chain < i) count(chains_, std::string(line.substr(runs[chain].start, run.end - runs[chain].start)), 7);
+            if (chain < i) count(chains_, std::string(line.substr(runs[chain].start, run.end - runs[chain].start)));
             chain = i + 1;
         }
-        if (const std::string t = HonorificRun(line, run); !t.empty()) count(hon_, t, 2);
+        if (const std::string t = HonorificRun(line, run); !t.empty()) count(hon_, t);
         if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
-            count(agents_, std::string(run.text), 10);
+            count(agents_, std::string(run.text));
         }
         if (!run.kanji && RuneCount(run.text) >= 2 && NamingCue(std::string_view(line).substr(run.end)) &&
             !RoleLike(run.text) && !Flags(run.text).role) {
-            count(gloss_, std::string(run.text), 3);
+            count(gloss_, std::string(run.text));
         }
     }
     for (std::size_t from = 0; from <= line.size();) {
@@ -556,8 +497,8 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
             from = m.end;
             continue;
         }
-        count(gloss_, base, 3);
-        if (recording_ != nullptr || reading_[base].empty()) {
+        count(gloss_, base);
+        if (reading_[base].empty()) {
             std::string r;
             for (std::size_t i = 0; i < m.reading.size();) {
                 const std::string_view rest = m.reading.substr(i);
@@ -574,7 +515,6 @@ void Registry::Add(std::string_view rawLine, Evidence* evidence) {
         }
         from = m.end;
     }
-    recording_ = nullptr;
 }
 
 std::vector<std::string> Registry::Names() {

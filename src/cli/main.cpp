@@ -628,9 +628,8 @@ int RunMain(int argc, char** argv) {
             if (end == std::string::npos) break;
             start = end + 1;
         }
-        hdTrans::internal::Memory memory;
         const std::vector<std::string> translated =
-            hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, memory, observer, options);
+            hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -648,8 +647,7 @@ int RunMain(int argc, char** argv) {
             out = hdTrans::internal::TranslateRawLine(*snapshot, *generated, line, observer, options);
         } else {
             const std::string lines[] = {std::string(line)};
-            hdTrans::internal::Memory memory;
-            out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, memory, observer, options).front();
+            out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);

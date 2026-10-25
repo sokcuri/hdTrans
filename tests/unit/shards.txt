@@ -5,7 +5,6 @@
 engine.megabyte  engine/session_thread_test.cpp:engine_megabyte_line
 dict.suites      dict/snapshot_file_test.cpp:SnapshotSuiteDoesNotWriteDefaultCache dict/snapshot_file_test.cpp:SnapshotTestsRestoreInheritedCacheEnvironment
 word             word/
-engine.history   engine/session_thread_test.cpp:engine_session_history_rebuild
 dict             dict/
 engine           engine/
 stages           config/ filter/ gui/ names/ output/ pipeline/ rules/ text/ tokenizer/ userdict/

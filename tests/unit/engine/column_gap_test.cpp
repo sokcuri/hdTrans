@@ -14,9 +14,8 @@ HD_TEST(engine_column_gaps) {
         "職業\t직업\tN110\t\t\tGN\t0\t2\n")}});
     HD_REQUIRE(loaded.snapshot != nullptr);
     const auto generated = internal::NewGenerated(*loaded.snapshot);
-    internal::Memory memory;
     const std::string input[] = {"名前　　 職業", "名前\t職業", "名前　職業"};
-    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, memory, {}, {});
+    const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, input, {}, {});
     HD_REQUIRE(out.size() == 3);
     HD_CHECK_EQ(out[0], std::string("이름　　 직업"));
     HD_CHECK_EQ(out[1], std::string("이름\t직업"));
