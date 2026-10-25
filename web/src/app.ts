@@ -320,7 +320,10 @@ async function runDocs() {
       setState(d, '번역 실패: ' + (err instanceof Error ? err.message : String(err)));
     }
   }
-  for (const d of todo) if (d.translated === undefined && docsCancel) setState(d, '중단');
+  for (const d of todo) {
+    const state = d.row.cells[2].textContent;
+    if (docsCancel && d.translated === undefined && (state === '대기' || state === '번역 중')) setState(d, '중단');
+  }
   docsRunning = false;
   docsCancel = false;
   showDocs();
