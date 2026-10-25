@@ -535,7 +535,7 @@
 사례: `tests/rules/cases/aspect-awake.tsv`, `tests/rules/cases/aspect-arrival.tsv`,
 `tests/rules/cases/aspect-adjective-and-compounds.tsv`
 
-## GRM-22 동사 연용형 뒤 かける는 하다 만 일이다
+## GRM-27 동사 연용형 뒤 かける는 하다 만 일이다
 
 동사 연용형 바로 뒤의 かける는 시작했으나 끝나지 않은 일이다. 앞 동사가 저절로 일어나는 변화(なる, 忘れる, 落ちる, 転ぶ:
 `verb.kakeru-unwilled`)나 수동이면 과거로 끝나거나 こと, ところ, の, せい가 받을 때는 `-(으)ㄹ 뻔하다`, 명사를 꾸미거나 ている와

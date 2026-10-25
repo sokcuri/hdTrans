@@ -1,4 +1,4 @@
-# 규칙: LEX-50
+# 규칙: LEX-52
 rule	input	expected	kind	layer
 cx:tasukaru:10	近代化改修、助かるわ。もっと働ける！	근대화 개수, 도움이 돼. 좀 더 일할 수 있다!	fix	rewrites
 cx:tasukaru:10	強化、助かる。	강화, 도움이 된다.	fix	rewrites

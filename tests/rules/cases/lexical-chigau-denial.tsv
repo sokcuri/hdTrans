@@ -1,4 +1,4 @@
-# 규칙: LEX-51
+# 규칙: LEX-53
 rule	input	expected	kind	layer
 cx:chigau-denial:10	「は？　違うってば！」	「뭐? 아니라니까!」	fix	rewrites
 cx:chigau-denial:10	「はぁ？　違うって」	「하아? 아니라니까」	fix	rewrites

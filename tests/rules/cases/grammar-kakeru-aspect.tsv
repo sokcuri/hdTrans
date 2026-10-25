@@ -1,4 +1,4 @@
-# 규칙: GRM-22
+# 규칙: GRM-27
 rule	input	expected	kind	layer
 cx:kakeru-aspect:5	ウエストから尻山にかけて急カーブをなぞる。	has:에 걸쳐 급커브를	fix	rewrites
 cx:kakeru-aspect:5	小柄な下女で鼻から頬にかけてそばかすが密集している。	몸집이 작은 하녀로 코로부터 뺨에 걸쳐 주근깨가 밀집하고 있다.	fix	rewrites

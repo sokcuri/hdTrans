@@ -1,4 +1,4 @@
-# 규칙: LEX-52, SPC-13
+# 규칙: LEX-54, SPC-13
 rule	input	expected	kind	layer
 lookup:kana-homograph	マルハチマルマル。暇つぶしになんかないの？ あるでしょ？	0800. 시간때우기에 왠지 없는 거야? 있겠지?	keep	lookup
 lookup:kana-homograph	そんなことって、あるかな～？	그런 일은, 있을까~?	fix	lookup
