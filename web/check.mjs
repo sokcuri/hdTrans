@@ -15,7 +15,7 @@
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
-// line (hdTrans VERSION, 사전 VERSION, 업데이트 yyyy-MM-dd HH:mm:ss, commit). Then it checks the
+// next to the title (vVERSION (commit, yyyy-MM-dd)). Then it checks the
 // dictionaries: that the user dictionary and names table kept in localStorage
 // move into 기본 사용자 사전 on the first run with IndexedDB, and, at a desktop
 // and a mobile viewport, the 사전 tab's layout (list beside or above the
@@ -467,8 +467,8 @@ try {
   }
   await progressCheck();
   await speechCheck();
-  const version = await evaluate(`document.getElementById('version').textContent`);
-  const versionOk = /^hdTrans \S+, 사전 \S+, 업데이트 \d{4}-\d\d-\d\d \d\d:\d\d:\d\d, [0-9a-f]{7,}$/.test(version);
+  const version = await evaluate(`document.getElementById('hver').textContent`);
+  const versionOk = /^v\S+ \([0-9a-f]{7,}, \d{4}-\d\d-\d\d\)$/.test(version);
   failed ||= !versionOk;
   console.log(`version: ${versionOk ? 'ok    ' : 'FAILED'} ${version}`);
   await gridCheck();

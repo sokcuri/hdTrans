@@ -17,7 +17,6 @@ select { font: inherit; }
 .pane small { opacity: .7; margin-left: .5rem; }
 textarea { width: 100%; min-height: 22rem; font: inherit; line-height: 1.6; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; background: transparent; color: inherit; }
 .dicts { margin-top: 1rem; align-items: start; }
-.help { font-size: .85rem; opacity: .85; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .grid th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; padding: 0 .3rem; }
 .grid td { border: 1px solid var(--line); padding: 0; }
@@ -30,7 +29,6 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .gridbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
 .gridbar button { padding: .15rem .6rem; font-size: .8rem; border: 1px solid var(--line); }
 .contact { margin: 2rem 0 0; font-size: .8rem; opacity: .7; text-align: center; }
-#version { margin-top: .2rem; font-size: .75rem; }
 #tbar { width: 8rem; height: .6rem; vertical-align: middle; }
 .tabs { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; border-bottom: 1px solid var(--line); margin-bottom: .7rem; }
 .tabs button { font: inherit; padding: .3rem .9rem; border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0; background: transparent; color: inherit; cursor: pointer; opacity: .7; }
