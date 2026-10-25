@@ -708,8 +708,23 @@ void Composer::WriteCasual(int first, int last) {
         }
         // A line that speaks politely elsewhere takes 해요체 where a mark makes a plain end spoken
         // (やめてください！怖い！ 그만해 주세요! 무서워요!).
-        const bool politeLine = punctuated && (style & kPoliteFormStyle) != 0 &&
-                                (style & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0;
+        // Not an utterance that と or って quotes after its mark (豊作だー！とか言ってました).
+        bool politeLine = punctuated && (style & kPoliteFormStyle) != 0 &&
+                          (style & ~(kCasualSpeech | kPoliteStyle | kPoliteTalkStyle | kPoliteFormStyle)) == 0;
+        if (politeLine) {
+            const std::string_view whole = source_[it.tokenIndex];
+            std::string rest(static_cast<std::size_t>(it.offset + it.length) < whole.size()
+                                 ? whole.substr(static_cast<std::size_t>(it.offset + it.length))
+                                 : std::string_view());
+            for (int t = it.tokenIndex + 1; t < static_cast<int>(tokens_->size()) && rest.size() < 64; t++) rest += (*tokens_)[t].text;
+            std::string_view r = rest;
+            while (!r.empty()) {
+                const text::Rune c = text::DecodeRune(r);
+                if (c.size == 0 || (kEnds.find(c.cp) == std::u32string_view::npos && !Skipped(c.cp) && !text::IsSpace(c.cp))) break;
+                r.remove_prefix(c.size);
+            }
+            politeLine = !r.starts_with("と") && !r.starts_with("って");
+        }
         if ((!quoted && !punctuated) || (styled && !politeLine) || (!settings_.casual && !asked && !punctuated)) continue;
         // Marked casual quotes: their own text only, not a quote inside them (『書いた』って);
         // a question or an end before a mark is spoken in any plain quote.

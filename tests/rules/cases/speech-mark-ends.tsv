@@ -48,3 +48,5 @@ compose:speech-mark	提督、ご安心くださいませ。え？違う？	제�
 compose:speech-mark	午後一時です。うふっ、気持ちいい！	오후 1시입니다. 우훗, 기분 좋아요!	fix	compose
 compose:speech-mark	「そうですね……あ、そうだ……」	「그렇네요……아, 맞아요……」	fix	compose
 compose:speech-mark	早く来なさい！遅い！	빨리 와! 늦다!	keep	compose
+compose:speech-mark	「はい毎度ー、ゲームの前はトイレを済ませてしっかり栄養補給だぞー。」	has:영양 보급이다~.	keep	compose
+compose:speech-mark	「確か今年は豊作だー！とか言ってましたけど。」	has:풍작이다~!	keep	compose

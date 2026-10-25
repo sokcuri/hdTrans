@@ -14,13 +14,18 @@ namespace {
 
 using internal::RuneIn;
 
-// Whether text speaks politely with です or ます (not なさい alone, でしょうがない or ますます).
+// Whether text speaks politely with です or ます: one of them that ends a word (before a mark, a
+// final particle or the end), or ください; not なさい alone, でしょうがない, ますます or 済ませて.
 bool SpeaksPolitely(std::string_view text) {
-    for (const std::string_view m : {"です", "ます", "ました", "ません", "でした", "ましょう", "ください", "下さい", "ませ"}) {
+    if (text.find("ください") != std::string_view::npos || text.find("下さい") != std::string_view::npos) return true;
+    for (const std::string_view m : {"です", "ます", "ました", "ません", "でした", "ましょう"}) {
         for (std::size_t at = text.find(m); at != std::string_view::npos; at = text.find(m, at + 1)) {
             const std::string_view after = text.substr(at + m.size());
-            if (m == "ます" && (after.starts_with("ます") || (at >= 6 && text.substr(at - 6, 6) == "ます"))) continue;
-            return true;
+            if (after.empty()) return true;
+            for (const std::string_view end : {"。", "！", "？", "!", "?", "、", "…", "‥", "」", "』", "～", "ー", "♪", "よ", "ね", "わ",
+                                               "か", "が", "けど", "し", "から", "の", "な", "ぞ", "っ", " ", "　"}) {
+                if (after.starts_with(end) && !(m == "ます" && after.starts_with("ます"))) return true;
+            }
         }
     }
     return false;
