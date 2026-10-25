@@ -535,6 +535,13 @@ constexpr NamedFeature kFeatures[] = {
          if (rest.empty()) rest = it->detail->nextText;
          return dict::InClass("mark.drawn", rest.substr(0, text::DecodeRune(rest).size));
      }},
+    // The text ends after the word, or a closing bracket or an exclamation mark follows it: a line
+    // of speech ends there (授けよう」, 渡そう！), not a sentence of narration in 。.
+    {"speech-close",
+     [](Flusher&, const Item* it) {
+         const std::string_view rest = TextAfter(it);
+         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)");
+     }},
     // An exclamation mark of mark.exclaim is one of the two characters after the word
     // (待ち伏せますか！, ますか？！, ますかっ！).
     {"exclaim-after",

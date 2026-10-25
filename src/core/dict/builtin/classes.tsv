@@ -237,6 +237,7 @@
 //= pronoun.rough-second-person	Second-person pronouns of rough or scornful speech, alone and plural (お前, 貴様, てめえ, あんた): the subject of a quotation before a sentence-final 思うな, which then forbids (お前が勝てると思うな 네가 이길 수 있다고 생각하지 마).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
+//= pronoun.listener	Second-person pronouns, alone and plural, by which the speaker names the listener (あなた, 君, お前, 貴公ら, そなた): a recipient in に of one of them is the one spoken to.
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
@@ -329,6 +330,7 @@
 //= verb.way-of-doing	The よう of manner after a godan continuative with what follows it: a particle, the copula or a mark (疑いようもない 의심할 수도 없다, やりようがある, 品のないなさりよう！). The volitional of an ichidan verb is not read so.
 //= verb.vehicle-travel	Starts of the verbs and verbal nouns of going, coming, moving and carrying, before which the で of a vehicle (noun.vehicle) is the means (車で行く, 車で迎えに来る, 車で移動, 車で三十分).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
+//= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
@@ -351,6 +353,7 @@
 //= word.meet-partner	The words after which であ is 出会う (と出会う, ここで会う), not the copula である.
 //= word.near-miss	What a word reads with its ending (I) before a dictionary form with ところだった that makes it a narrow miss, 뻔했다: adverbs of a near miss, a slip (一歩間違えば) and relief (危なかった) (危うく落ちるところだった 하마터면 떨어질 뻔했다), not the moment before an act (ちょうど出かけるところだった).
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
+//= word.inclusive	Words that put the speaker together with others (一緒に, みんなで, 私たち, 我ら): a volitional in their sentence invites, 자 (われらの力を見せよう 우리들의 힘을 보여 주자).
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
@@ -6352,3 +6355,87 @@ mark.lengthening	ー
 mark.lengthening	～
 mark.lengthening	〜
 mark.lengthening	~
+pronoun.listener	あなた
+pronoun.listener	貴方
+pronoun.listener	貴女
+pronoun.listener	あんた
+pronoun.listener	アンタ
+pronoun.listener	君
+pronoun.listener	きみ
+pronoun.listener	キミ
+pronoun.listener	お前
+pronoun.listener	おまえ
+pronoun.listener	オマエ
+pronoun.listener	貴様
+pronoun.listener	きさま
+pronoun.listener	キサマ
+pronoun.listener	汝
+pronoun.listener	なんじ
+pronoun.listener	そなた
+pronoun.listener	お主
+pronoun.listener	おぬし
+pronoun.listener	貴公
+pronoun.listener	貴殿
+pronoun.listener	てめえ
+pronoun.listener	てめぇ
+pronoun.listener	テメエ
+pronoun.listener	あなたたち
+pronoun.listener	あなた達
+pronoun.listener	あなたがた
+pronoun.listener	貴方たち
+pronoun.listener	貴方達
+pronoun.listener	あんたら
+pronoun.listener	君たち
+pronoun.listener	君達
+pronoun.listener	きみたち
+pronoun.listener	お前ら
+pronoun.listener	おまえら
+pronoun.listener	お前たち
+pronoun.listener	お前達
+pronoun.listener	貴様ら
+pronoun.listener	貴公ら
+pronoun.listener	貴殿ら
+pronoun.listener	そなたら
+pronoun.listener	汝ら
+pronoun.listener	お主ら
+verb.grant	授ける
+verb.grant	与える
+verb.grant	教える
+verb.grant	見せる
+verb.grant	聞かせる
+verb.grant	許す
+verb.grant	叶える
+verb.grant	渡す
+verb.grant	貸す
+verb.grant	返す
+verb.grant	譲る
+verb.grant	恵む
+verb.grant	分け与える
+verb.grant	贈る
+word.inclusive	一緒に
+word.inclusive	いっしょに
+word.inclusive	共に
+word.inclusive	ともに
+word.inclusive	みんなで
+word.inclusive	皆で
+word.inclusive	みなで
+word.inclusive	皆さんで
+word.inclusive	二人で
+word.inclusive	ふたりで
+word.inclusive	私たち
+word.inclusive	私達
+word.inclusive	わたしたち
+word.inclusive	あたしたち
+word.inclusive	僕たち
+word.inclusive	僕達
+word.inclusive	僕ら
+word.inclusive	俺たち
+word.inclusive	俺達
+word.inclusive	俺ら
+word.inclusive	我々
+word.inclusive	われわれ
+word.inclusive	我ら
+word.inclusive	われら
+word.inclusive	我等
+word.inclusive	うちら
+word.inclusive	ウチら
