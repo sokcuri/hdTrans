@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:trailing-ja:10	「べ、別にそんなたいした理由じゃ……」	「벼, 별로 그런 굉장한 이유는……」	fix	rewrites
 cx:trailing-ja:10	「あ、まさか、あの人からの電話じゃ……」	「아, 설마, 그 사람으로부터의 전화는……」	fix	rewrites
-cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니다! 별로 그런 작정은……」	fix	rewrites
+cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ……」	「아, 아니야! 별로 그런 작정은……」	fix	rewrites
 cx:trailing-ja:10	かみつき、それ虐待じゃ…	물어, 그것 학대는…	fix	rewrites
 cx:trailing-ja:10	「こんなレベルじゃ…。」	「이런 레벨은….」	fix	rewrites
 cx:trailing-ja:10	ええ？そんな…アイドルは沈まない設定じゃ…	어? 그런…아이돌은 가라앉지 않는 설정은…	fix	rewrites

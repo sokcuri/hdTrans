@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:kato-belief:10	「死ぬかと思ったわ……」	「죽을 줄 알았어……」	fix	rewrites
 cx:kato-belief:10	「私、びっくりして、心臓が止まるかと思ったわ……」	「나, 놀라, 심장이 멈출 줄 알았어……」	fix	rewrites
 cx:kato-belief:10	「出たら自分のしでかしたことを少しは自覚するかと思ったからよ」	「나오면 자신이 저지른 걸 조금은 자각할 줄 알았거든」	fix	rewrites
-pattern:書くかと思った	ふぁぁー、ボク、マジで死ぬかと思ったぁー…	후아아아, 나, 진짜로 죽을 줄 알았다~…	fix	builtin-pattern
+pattern:書くかと思った	ふぁぁー、ボク、マジで死ぬかと思ったぁー…	후아아아, 나, 진짜로 죽을 줄 알았어~…	fix	builtin-pattern
 cx:kato-belief:10	死ぬかと思ってた。	죽을 줄 알았다.	fix	rewrites
 cx:kato-belief:30	コーヒーの香りかと思っていたが、部屋にはもう一つの香りがあった。	커피의 향기인 줄 알았지만, 방에는 또 하나의 향기가 있었다.	fix	rewrites
 cx:kato-belief:30	最初見たとき呪いかと思ったわ	처음 보았을 때 저주인 줄 알았어	fix	rewrites

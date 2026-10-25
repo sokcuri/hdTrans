@@ -1,12 +1,12 @@
 # 규칙: GRM-12
 rule	input	expected	kind	layer
 cx:fused-obligation:5	早いにゃあ…もう師走にゃしぃ…。ユイちゃんと一緒に、大掃除しなきゃ。	빠르다냥…이제 12월이다냥…. 유이짱과 함께, 대청소해야 한다.	fix	rewrites
-cx:fused-obligation:5	やられちゃった…？修理しなくちゃ。	당해버렸다…? 수리해야 한다.	fix	rewrites
+cx:fused-obligation:5	やられちゃった…？修理しなくちゃ。	당해버렸어…? 수리해야 한다.	fix	rewrites
 cx:fused-obligation:5	もう年末…年越しの準備をしなくちゃ。ハナ、手伝って。	has:준비를 해야 한다	fix	rewrites
 cx:fused-obligation:5	はぁ……提督の机も綺麗にしなきゃ。	하아……제독의 책상도 깨끗이 해야 한다.	fix	rewrites
-cx:fused-obligation:5	大掃除！ お部屋の整理もしなくちゃ！	대청소! 방 정리도 해야 한다!	fix	rewrites
+cx:fused-obligation:5	大掃除！ お部屋の整理もしなくちゃ！	대청소! 방 정리도 해야 해!	fix	rewrites
 cx:fused-obligation:5	やだ、お洋服が……んもう、クリーニングしなきゃ……覚えてなさいよっ！	싫어, 옷이……이제, 클리닝해야 한다……기억해!	fix	rewrites
-cx:fused-obligation:5	敵艦を捕捉しなくては…。	적함을 포착해야 한다….	fix	rewrites
+cx:fused-obligation:5	敵艦を捕捉しなくては…。	적함을 포착해야 해….	fix	rewrites
 cx:fused-obligation:5	「帰って試験勉強をしなくてはならないんだ」	「돌아가 시험 공부를 해야 한다」	fix	rewrites
 cx:fused-obligation:5	足止めしなくてはならない。	저지해야 한다.	fix	rewrites
 cx:fused-obligation:5	「では、俺はそこで何かしなければいけないのですか？」	「그럼, 나는 거기서 뭔가 해야 합니까?」	fix	rewrites
@@ -38,9 +38,9 @@ cx:obligation-alone:50	早く行かなきゃって思った。	!rule:cx:obligati
 cx:obligation-alone:60	「皆さんの期待に応えなきゃって気持ちの方が強くて」	!rule:cx:obligation-alone:60	keep	rewrites
 cx:fused-obligation:10	今買わなきゃ損だ	!rule:cx:fused-obligation:10	keep	rewrites
 cx:fused-obligation:20	強くならなきゃ、意味がない	!rule:cx:fused-obligation:20	keep	rewrites
-cx:fused-obligation:5	「ダメじゃないフリーか確認しなきゃ！」	「안되지 않는 프리나 확인해야 한다!」	fix	rewrites
-cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなければ……。	슬슬 목욕하고 잘 준비를 해야 한다…….	fix	rewrites
+cx:fused-obligation:5	「ダメじゃないフリーか確認しなきゃ！」	「안되지 않는 프리나 확인해야 해!」	fix	rewrites
+cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなければ……。	슬슬 목욕하고 잘 준비를 해야 해…….	fix	rewrites
 cx:fused-obligation:5	後で姉にもお礼をしなくちゃ。	나중에 언니에게도 감사 인사를 해야 한다.	fix	rewrites
 cx:obligation-alone:10	むしろ、そうしなきゃいけなかったような……	오히려, 그렇게 해야 했던 것 같은……	fix	rewrites
 cx:obligation-alone:70	でも、言わなきゃ……言わなきゃいけない。	하지만, 말해야 한다……말해야 한다.	fix	rewrites
-dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨 곳에 가야 한다!!	fix	local-ending
+dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨 곳에 가야 해!!	fix	local-ending

@@ -719,6 +719,8 @@ void Composer::WriteCasual(int first, int last) {
             // construction wrote as a past verb (놀곤 했다) takes the 해체 of the past, and so does a
             // phrase a rule wrote that ends in a predicate word (そう 것 같다 것 같아, いたんだ 있었어).
             if (it.selected < 0) continue;
+            // The old copula じゃ keeps -다 where only a mark would make it spoken (わしじゃ…… 나다……).
+            if (it.surface == "じゃ" && strict && !asked && (!quoted || (style & kCasualSpeech) == 0)) continue;
             const std::string_view text = Selected(it).text;
             std::string to(Find(kCopulas, text));
             if (!to.empty() && (alone || open == U'、' || open == U'だ' || (i > 0 && First(Selected(items[i - 1]).code) == '2'))) {
