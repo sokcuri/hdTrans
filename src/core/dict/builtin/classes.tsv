@@ -370,6 +370,8 @@
 //= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
 //= word.soreni-follow	Starts of the words after which それに is the thing taken up, 거기에, not the conjunction 게다가 (それによって, それに伴って, それに比例して).
 //= word.thanks	Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서: 와 줘서 기뻐, 도와줘서 살았다).
+//= word.clause-start	Demonstrative adverbs and conjunctions that start a clause and that no clause before them describes (そう, でも, しかし): after one a bare attributive before a comma ends its clause (よくわからない、でも行く 잘 모른다, 하지만 간다).
+//= word.clause-pronoun	Demonstrative pronouns that start a clause as its subject, topic or object (それが, これは): after one with が, は, も or を a bare attributive before a comma ends its clause (わからない、それが人生だ 모른다, 그것이 인생이다); one without that particle may be what the attributive describes (作ってあげた、あれ 만들어 준, 그것).
 //= word.survival	Words of life, wounds, illness, escape and rescue before which 助かる in the same sentence is surviving, 살아나다 (命が助かった 목숨을 건졌다, 患者は助からない), not help or relief.
 
 adverb.degree-feeling	本当に
@@ -5729,6 +5731,26 @@ word.thanks	さみし
 word.thanks	さびし
 word.thanks	安心
 word.thanks	ほっと
+word.clause-start	そう
+word.clause-start	こう
+word.clause-start	ああ
+word.clause-start	でも
+word.clause-start	だが
+word.clause-start	だけど
+word.clause-start	けど
+word.clause-start	しかし
+word.clause-start	だから
+word.clause-start	それでも
+word.clause-start	なのに
+word.clause-pronoun	それ
+word.clause-pronoun	これ
+word.clause-pronoun	あれ
+word.clause-pronoun	そこ
+word.clause-pronoun	ここ
+word.clause-pronoun	あそこ
+word.clause-pronoun	そっち
+word.clause-pronoun	こっち
+word.clause-pronoun	あっち
 
 word.survival	命
 word.survival	いのち
