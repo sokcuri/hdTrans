@@ -677,6 +677,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"replace-head", CxVerb::ReplaceHead},
         {"replace-ending-tail", CxVerb::ReplaceEndingTail},
         {"map-ending-tail", CxVerb::MapEndingTail},
+        {"map-target-tail", CxVerb::MapTargetTail},
         {"map-lemma", CxVerb::MapLemma},
         {"map-target", CxVerb::MapTarget},
         {"select-map", CxVerb::SelectMap},
@@ -713,7 +714,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
             break;
         }
         if (a.verb == CxVerb::MapLemma || a.verb == CxVerb::MapTarget || a.verb == CxVerb::SelectMap ||
-            a.verb == CxVerb::MapEndingTail) {
+            a.verb == CxVerb::MapEndingTail || a.verb == CxVerb::MapTargetTail) {
             if (!tokens.Next(literal) || !literal.starts_with('@')) {
                 tokens.Fail("a map action takes @MAP");
                 break;
@@ -1150,6 +1151,10 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
+// The marker a verb written into the word takes: '$' on an i-adjective, whose families conjugate
+// with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
+char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
+
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
     Item* it = Neighbour(origin, a.delta);
     if (it == nullptr) return;
@@ -1277,6 +1282,18 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             }
             break;
         }
+        case internal::CxVerb::MapTargetTail: {
+            // The same on the Korean of the selected candidate (돕겠습니다 → 돕겠으니까요).
+            const std::string target(it->EntryText(it->selected));
+            const std::pair<std::string, std::string>* best = nullptr;
+            for (const auto& pair : t.maps[static_cast<std::size_t>(a.map)].pairs) {
+                if (target.ends_with(pair.first) && (best == nullptr || pair.first.size() > best->first.size())) best = &pair;
+            }
+            if (best != nullptr) {
+                it->AssignEntrySurface(it->selected, target.substr(0, target.size() - best->first.size()) + best->second, source);
+            }
+            break;
+        }
         case internal::CxVerb::MapLemma:
         case internal::CxVerb::MapTarget: {
             const std::string key =
@@ -1305,7 +1322,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             break;
         }
         case internal::CxVerb::SetVerb:
-            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, '&', "", f.families).target, source);
+            it->AssignEntrySurface(it->selected, output::Conjugating(a.value, VerbSigil(it), "", f.families).target, source);
             break;
         case internal::CxVerb::SetVerbFrom: {
             // A translation that ends in the old tail is the verb whose dictionary form is its head
@@ -1313,7 +1330,7 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             const std::string_view target = it->EntryText(it->selected);
             if (target.size() > a.value.size() && target.ends_with(a.value)) {
                 const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
-                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, '&', "", f.families).target, source);
+                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, VerbSigil(it), "", f.families).target, source);
             }
             break;
         }

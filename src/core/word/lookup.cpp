@@ -630,7 +630,7 @@ void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsVerb(*r, query)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsDeshou(*r, query) || SplitsVerb(*r, query)) {
             l.count--;
             continue;
         }
@@ -666,6 +666,19 @@ bool Worker::SplitsKashira(const Record& r, std::string_view query) const {
     const std::string_view rest = query.substr(r.source.size());
     if (!rest.starts_with("しら")) return false;
     return SentenceFinal(TrimLeftChars(rest.substr(std::string_view("しら").size()), "ねよぁっー"), current, true);
+}
+
+// A word that ends in で and is no particle or ending, before しょ: the で belongs to the copula
+// でしょう (初めてでしょう 처음이죠), not to the word (初めてで 처음으로). Not before しょうがない
+// (それでしょうがない).
+bool Worker::SplitsDeshou(const Record& r, std::string_view query) const {
+    if (r.source.size() <= std::string_view("で").size() || !r.source.ends_with("で") || !query.starts_with(r.source) ||
+        AnyOf("PSTU", At(r.partCode, 0))) {
+        return false;
+    }
+    const std::string_view rest = query.substr(r.source.size());
+    return rest.starts_with("しょ") && !rest.starts_with("しょうがな") && !rest.starts_with("しょうがね") &&
+           !rest.starts_with("しょうが無");
 }
 
 // A person name of two kanji or more whose last kanji is the stem of an ichidan verb that
@@ -845,9 +858,12 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 //   - that kana and the text after it are a dictionary noun of three or more characters.
 // An ending in です also gives its す to an adverb or interjection that starts with it
 // (寝込んだのですっかり: ので + すっかり, 遅れたのですみません: ので + すみません).
+// An ending in か before ら gives its か to the particle から (疲れただろうから: だろう + から,
+// いいでしょうから, 渡してるんですから).
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
+    if (ending.ends_with("か") && after.starts_with("ら")) return true;
     if (ending.ends_with("です") && !after.empty()) {
         std::string query = "す";
         query += after.substr(0, std::min<std::size_t>(after.size(), 24));

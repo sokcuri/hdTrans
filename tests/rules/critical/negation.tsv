@@ -45,3 +45,7 @@ constraint:chau-after-verb	やっちゃうね。	lacks:아니	keep	lookup
 constraint:chau-after-verb	夜更かしはお肌荒れちゃうね。	lacks:아니	keep	lookup
 constraint:chau-after-verb	食べ過ぎたらバルジっちゃうかな……	lacks:아니	keep	lookup
 constraint:chau-after-verb	いつでも、旗艦やっちゃいますよ、はいっ！	lacks:아닙	keep	lookup
+cx:trailing-ja:10	「べ、別にそんなたいした理由じゃ……」	lacks:이유다	fix	rewrites
+cx:trailing-ja:10	「あ、まさか、あの人からの電話じゃ……」	lacks:전화다	fix	rewrites
+cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ……」	has:작정은	fix	rewrites
+cx:trailing-ja:10	「……それで、アルファさんは、幽霊じゃ……ないんだよな？」	has:아닌	keep	rewrites

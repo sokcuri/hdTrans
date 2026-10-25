@@ -1,0 +1,29 @@
+# 규칙: GRM-24
+rule	input	expected	kind	layer
+cx:kato-belief:10	「死ぬかと思ったわ……」	「죽을 줄 알았어……」	fix	rewrites
+cx:kato-belief:10	「私、びっくりして、心臓が止まるかと思ったわ……」	「나, 놀라, 심장이 멈출 줄 알았어……」	fix	rewrites
+cx:kato-belief:10	「出たら自分のしでかしたことを少しは自覚するかと思ったからよ」	「나오면 자신이 저지른 걸 조금은 자각할 줄 알았거든」	fix	rewrites
+pattern:書くかと思った	ふぁぁー、ボク、マジで死ぬかと思ったぁー…	후아아아, 나, 진짜로 죽을 줄 알았다~…	fix	builtin-pattern
+cx:kato-belief:10	死ぬかと思ってた。	죽을 줄 알았다.	fix	rewrites
+cx:kato-belief:30	コーヒーの香りかと思っていたが、部屋にはもう一つの香りがあった。	커피의 향기인 줄 알았지만, 방에는 또 하나의 향기가 있었다.	fix	rewrites
+cx:kato-belief:30	最初見たとき呪いかと思ったわ	처음 보았을 때 저주인 줄 알았어	fix	rewrites
+cx:kato-belief:30	「一瞬、仏教説話かと思ったけど、よく聞いたら」	「순간, 불교 설화인 줄 알았지만, 잘 들으면」	fix	rewrites
+cx:kato-belief:30	最初はモデルかと思いました	처음은 모델인 줄 알았습니다	fix	rewrites
+cx:kato-belief:10	一瞬、追及しようかと思ったが、やめた。	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:10	「墓場まで持って行こうかと思ったけど」	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:10	「料理をしようかと思って買って来たの。」	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:10	洗い物が終わってテレビでも見ようかと思ったが、全然集中できない。	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:10	アヤに渡そうかと思ったが、ちょっと考えてからリコに渡すことにした。	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:30	午前五時。誰かと思ったらマキさぁん。	!rule:cx:kato-belief:30	keep	rewrites
+cx:kato-belief:10	隠れた名店はどこにあるのかと思ったら……。	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:10	早朝だし過疎ってるかと思ったら皆待ってたんだね	!rule:cx:kato-belief:10	keep	rewrites
+cx:kato-belief:20	「同級生だから仲いい方がいいかと思って」	!rule:cx:kato-belief:20	keep	rewrites
+cx:kato-belief:30	提督、あの……どうかと思ったのですが	!rule:cx:kato-belief:30	keep	rewrites
+cx:kato-belief:20	最初は難しいかと思ったけど、すぐ慣れた。	처음은 어려운 줄 알았지만, 바로 익숙해졌다.	fix	rewrites
+cx:kato-belief:20	楽しいかと思って誘った。	!rule:cx:kato-belief:20	keep	rewrites
+cx:kato-belief:15	最初は植物状態にでもなって夢でも見ているのかと思っていたが	처음은 식물상태라도 되어 꿈이라도 보고 있는 줄 알았지만	fix	rewrites
+cx:kato-belief:15	……なんじゃ……息子が帰って来たのかと思ったよ。	……뭐냐……아들이 돌아온 줄 알았어.	fix	rewrites
+cx:kato-belief:15	隠れた名店はどこにあるのかと思ったら……。	!rule:cx:kato-belief:15	keep	rewrites
+cx:kato-belief:20	よほど優秀なのではないかと思った。	!rule:cx:kato-belief:20	keep	rewrites
+cx:kato-belief:20	私、みなさんの事を後世に伝えるべきじゃないかと思ったんです。	!rule:cx:kato-belief:20	keep	rewrites
+cx:kato-belief:15	最初は小麦粉を水で溶いた衣をつけたのかと思ったが、それにしては表面がざらついている。	처음은 밀가루를 물로 푼 옷을 입은 줄 알았지만, 그런 것치고는 표면이 껄끔거리고 있다.	fix	rewrites
