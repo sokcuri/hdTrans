@@ -1165,8 +1165,8 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
                     const std::u32string key = ToKatakana(p);
                     for (const SoundRow& s : SoundRows(key[0], ctx.extraBuiltin)) phrase = phrase || (s.phrase && s.intj && s.key == key);
                     phrase = phrase || e.Tags(p).find('A') != std::string::npos;
-                    for (const std::string_view member : dict::ClassMembers("honorific.phrase-tag-word")) {
-                        const std::u32string m = DecodeText(member);
+                    for (const std::string_view tag : dict::ClassMembers("honorific.phrase-tag-word")) {
+                        const std::u32string m = DecodeText(tag);
                         const size_t eq = m.find(U'=');
                         if (std::u32string_view(m).substr(0, eq) != p) continue;
                         phrase = true;
