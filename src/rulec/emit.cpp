@@ -36,7 +36,8 @@ std::string CppString(std::string_view s) {
 
 std::string Name(const Rule& r) { return std::string("Rule") + r.kind + std::to_string(r.index); }
 
-void Expression(std::string& out, const Expr& e, NodeKind parent) {
+// depth: the number of all(...) around e; their values are a<i>, then a1_<i>, a2_<i> inside.
+void Expression(std::string& out, const Expr& e, NodeKind parent, int depth = 0) {
     if (e.kind == NodeKind::Atom) {
         const OpInfo& o = Info(e.op);
         static const char* const kNames[] = {
@@ -55,14 +56,15 @@ void Expression(std::string& out, const Expr& e, NodeKind parent) {
         return;
     }
     if (e.kind == NodeKind::AndAll) {
+        const std::string a = depth == 0 ? "a" : "a" + std::to_string(depth) + "_";
         out += "[&] {";
         for (std::size_t i = 0; i < e.children.size(); i++) {
-            out += " const bool a" + std::to_string(i) + " = ";
-            Expression(out, e.children[i], NodeKind::AndAll);
+            out += " const bool " + a + std::to_string(i) + " = ";
+            Expression(out, e.children[i], NodeKind::AndAll, depth + 1);
             out += ';';
         }
         out += " return ";
-        for (std::size_t i = 0; i < e.children.size(); i++) out += (i ? " && a" : "a") + std::to_string(i);
+        for (std::size_t i = 0; i < e.children.size(); i++) out += (i ? " && " : "") + a + std::to_string(i);
         out += "; }()";
         return;
     }
@@ -70,7 +72,7 @@ void Expression(std::string& out, const Expr& e, NodeKind parent) {
     if (parens) out += '(';
     for (std::size_t i = 0; i < e.children.size(); i++) {
         if (i > 0) out += e.kind == NodeKind::Or ? " ||\n           " : " && ";
-        Expression(out, e.children[i], e.kind);
+        Expression(out, e.children[i], e.kind, depth);
     }
     if (parens) out += ')';
 }
