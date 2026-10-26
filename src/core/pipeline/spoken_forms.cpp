@@ -116,12 +116,46 @@ bool EndGroup(std::string_view s, size_t p, std::u32string_view set, Match& m) {
     return true;
 }
 
-// ([うくぐすつぬぶむる])んじゃない([！!」』]|$)
+// ([うくぐすつぬぶむる])んじゃ(ない|ね[えぇー])よ?([！!」』]|$): the prohibition said as a rebuke
+// (泣くんじゃない！, 来るんじゃねぇ！, 泣くんじゃないよ). After the てる of a て form ない without ！ tells what
+// is not so (一般論を言ってるんじゃない, 言ってるんじゃないよ) and stays. Not the honorific くん
+// after katakana, two kanji, う, ん, ー or a small kana (田中くんじゃない！), nor a てく or でく.
 bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"うくぐすつぬぶむる")) return false;
     m.group[1] = Span(s, pos, p);
-    return Lit(s, p, "んじゃない") && EndGroup(s, p, U"！!」』", m);
+    if (m.group[1] == "く") {
+        const text::Rune b = LastRune(s.substr(0, pos));
+        // てく, でく are ていく or てくる said short (出てくんじゃねえ), no dictionary form of their own.
+        if (pos == 0 || IsKatakanaRune(b.cp) || In(b.cp, U"うんーぁぃぅぇぉゃゅょゎてで") ||
+            (IsKanjiClass(b.cp) && pos > b.size && IsKanjiClass(LastRune(s.substr(0, pos - b.size)).cp))) {
+            return false;
+        }
+    }
+    const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
+    // うん is the answer (うんうんじゃねえよ), not a verb in う.
+    if (m.group[1] == "う" && !IsKanjiClass(b) && (!IsHiraganaRune(b) || In(b, U"うん"))) return false;
+    // す after two kanji, katakana or a particle is する said す (信用すんじゃねえ, 気にすんじゃねえ); after
+    // one kanji it ends a verb (出すんじゃない); after other kana it may be either (落とす, 扱いする).
+    const bool suru = m.group[1] == "す" && pos > 0 &&
+                      (IsKatakanaRune(b) || In(b, U"にをとも") ||
+                       (IsKanjiClass(b) && pos > 3 && IsKanjiClass(LastRune(s.substr(0, pos - 3)).cp)));
+    if (m.group[1] == "す" && !suru && !IsKanjiClass(b)) return false;
+    if (!Lit(s, p, "んじゃ")) return false;
+    if (suru) m.group[1] = "する";
+    bool nee = false;
+    if (!Lit(s, p, "ない")) {
+        if (!Lit(s, p, "ね") || !OneOf(s, p, U"えぇー")) return false;
+        nee = true;
+    }
+    const bool teru = m.group[1] == "る" && pos >= 3 && In(LastRune(s.substr(0, pos)).cp, U"てで");
+    size_t q = p;
+    Lit(s, q, "よ");
+    if (teru && !nee) {
+        size_t r = q;
+        if (!OneOf(s, r, U"！!")) return false;
+    }
+    return EndGroup(s, q, U"！!」』", m);
 }
 
 // (..[いたる])じゃない([！!。、…‥」』]|$)
@@ -141,7 +175,7 @@ bool NotAppeal(std::string_view stem) {
     return false;
 }
 
-// (怖|寒|…|こわ)っ+([！!？?。、…‥」』]|$); a stem of kClippedCries only after a particle
+// (怖|寒|…|こわ)っ+([！!？?。、…‥」』　]|$); a stem of kClippedCries only after a particle
 // (足が痛っ), the cry of the dictionary elsewhere (痛っ！ 아얏).
 bool ClippedAdjective(std::string_view s, size_t pos, Match& m) {
     const bool afterParticle = pos > 0 && In(LastRune(s.substr(0, pos)).cp, U"がはもにをでとへの");
@@ -151,7 +185,7 @@ bool ClippedAdjective(std::string_view s, size_t pos, Match& m) {
         if (!afterParticle && std::ranges::find(kClippedCries, w) != std::end(kClippedCries)) continue;
         m.group[1] = Span(s, pos, p);
         const bool ok = Repeat(s, p, InSet(U"っ"), 1, kUnbounded,
-                               [&](size_t q) { return EndGroup(s, q, U"！!？?。、…‥」』", m); });
+                               [&](size_t q) { return EndGroup(s, q, U"！!？?。、…‥」』　", m); });
         if (ok) return true;
     }
     return false;
@@ -596,7 +630,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
             return Cat({g.group[1], "いるん", g.group[2]});
         });
     }
-    if (Contains(text, "じゃない")) {
+    if (Contains(text, "じゃない") || Contains(text, "じゃね")) {
         text = ReplaceAll(text, ProhibitionJanai, [](const Match& m) { return Group1Plus(m, "なよ"); });
         text = ReplaceAll(text, AppealJanai, [](const Match& m) {
             const Match g = Rematch(m, AppealJanai);
