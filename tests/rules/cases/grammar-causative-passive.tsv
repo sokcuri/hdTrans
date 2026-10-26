@@ -24,7 +24,7 @@ cx:causer-ni:10	ですが、やはり今のままでは実戦投入はさせら�
 cx:causer-ni:10	母に野菜を食べさせられたくない。	!rule:cx:causer-ni:10	keep	rewrites
 cx:causer-ni:10	先生に掃除をさせられた。	선생님에게 청소를 하도록 강요받았다.	keep	rewrites
 cx:causer-ni:10	こんな汚れ仕事、あの子にはやらせられないもの。	이런 더러운 일, 그 아이에게는 시킬 수 없는 것.	keep	rewrites
-cx:causer-ni:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
+cx:causer-ni:10	野菜を食べさせられた。	야채를 먹게 되었다.	keep	rewrites
 cx:causer-ni:10	母が子供に野菜を食べさせた。	어머니가 아이에게 야채를 먹였다.	keep	rewrites
 cx:causer-ni:20	彼に一時間も待たされた。	그 때문에 1시간이나 기다리게 되었다.	fix	rewrites
 cx:causer-ni:20	彼に待たされたか？	그 때문에 기다리게 되었나?	fix	rewrites
@@ -58,7 +58,7 @@ cx:forced-act:10	ご令嬢によっては背筋が凍る目に遭わされる可
 cx:forced-act:10	母に本を読まされた。	어머니 때문에 억지로 책을 읽었다.	fix	rewrites
 cx:forced-act:10	彼女に重い荷物を持たされた。	그녀 때문에 억지로 무거운 짐을 들었다.	fix	rewrites
 cx:forced-act:10	父に謝らされた。	아버지 때문에 억지로 사과했다.	fix	rewrites
-cx:forced-act:10	野菜を食べさせられた。	야채를 먹었다.	keep	rewrites
+cx:forced-act:10	野菜を食べさせられた。	야채를 먹게 되었다.	keep	rewrites
 cx:forced-act:10	薬を飲まされた。	약을 먹게 되었다.	keep	rewrites
 cx:forced-act:10	重荷を背負わされたのだ。	무거운 짐을 짊어지게 되었다.	keep	rewrites
 cx:forced-act:20	父に勉強させられた。	아버지 때문에 억지로 공부했다.	fix	rewrites

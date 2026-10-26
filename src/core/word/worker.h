@@ -114,6 +114,7 @@ public:
     bool MatchDictionary(std::string_view following, std::string_view source, char first, char second);
     bool GodanImperative(std::string_view form) const;
     bool GodanCausative(std::string_view stem) const;
+    bool CausativeOfShorter(std::string_view stem) const;
     bool SentenceFinal(std::string_view rest, int token, bool comma) const;
     bool EndingApplies(const Entry& e, std::string_view rest, int token) const;
     bool CutsWord(std::string_view before, std::string_view ending, std::string_view after) const;
