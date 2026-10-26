@@ -1,5 +1,6 @@
 #include "gui/text_file.h"
 
+#include <climits>
 #include <cstdint>
 #include <fstream>
 
@@ -235,6 +236,24 @@ std::filesystem::path TranslatedPath(const std::filesystem::path& input, const s
     std::filesystem::path name = input.stem();
     name += std::filesystem::path(u8"_번역.txt");
     return (folder.empty() ? input.parent_path() : folder) / name;
+}
+
+void AppendFiles(std::vector<std::filesystem::path>& list, const std::vector<std::filesystem::path>& added) {
+    auto same = [](const std::filesystem::path& left, const std::filesystem::path& right) {
+        const auto a = left.lexically_normal().native();
+        const auto b = right.lexically_normal().native();
+#ifdef _WIN32
+        return a.size() <= INT_MAX && b.size() <= INT_MAX &&
+               CompareStringOrdinal(a.c_str(), static_cast<int>(a.size()), b.c_str(), static_cast<int>(b.size()), TRUE) == CSTR_EQUAL;
+#else
+        return a == b;
+#endif
+    };
+    for (const auto& path : added) {
+        bool found = false;
+        for (const auto& old : list) found = found || same(old, path);
+        if (!found) list.push_back(path);
+    }
 }
 
 }  // namespace hdTrans::gui
