@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/engine/glue.h"
 #include "core/engine/resolve.h"
 #include "core/engine/rules.h"
@@ -236,6 +237,24 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
     return false;
 }
 
+// The lookups of a FusedTest (pipeline::CasualQuotes, pipeline::SpokenLine).
+struct FusedLookup {
+    const pipeline::LineContext& ctx;
+    const dict::Snapshot& snap;
+};
+
+bool HoldsFusedAdjective(const void* context, std::string_view text) {
+    const auto& f = *static_cast<const FusedLookup*>(context);
+    return pipeline::internal::HoldsCasualAdjective(text, f.ctx, f.snap);
+}
+
+// Whether a line asks which of its polite quotes seek agreement politely with でしょ: it has
+// でしょ and a quote of polite speech (TranslateBody).
+bool PoliteTalkAsked(std::string_view text, const std::vector<std::uint8_t>& styles) {
+    return text.find("でしょ") != std::string_view::npos &&
+           std::ranges::any_of(styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; });
+}
+
 // Keys holding a run are looked for from up to this many runes before it (a long name).
 constexpr int kRunLookBackRunes = 32;
 
@@ -300,6 +319,65 @@ std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
     out.reserve(pieces.size());
     for (const output::Piece& p : pieces) out.push_back({p.text, static_cast<int>(p.span)});
     return out;
+}
+
+// Each Japanese token of the sentence first..last that goes on after a space parting two words
+// (Token::afterSpace) joined back to the Japanese token before it, so that the compose stage
+// writes them as the one token they were typed as: its text, items and markers move into that
+// token, it leaves texts, and the indices after it and last count one less. texts is BuildTexts
+// of the sentence. Returns whether a token was joined, after which texts no longer lines up with
+// tokens.
+bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::vector<output::TokenText>& texts,
+                    std::vector<output::ResolvedItem>& items, std::vector<tokenizer::ControlMarker>& markers) {
+    const int n = static_cast<int>(std::min(texts.size(), tokens.size()));
+    // The first and last place of the items of each token in items: a token joins only when its
+    // items come after those of the token before it.
+    std::vector<int> from(static_cast<std::size_t>(n), -1), to(static_cast<std::size_t>(n), -1);
+    for (int k = 0; k < static_cast<int>(items.size()); k++) {
+        const int t = items[static_cast<std::size_t>(k)].tokenIndex;
+        if (t < 0 || t >= n) continue;
+        if (from[static_cast<std::size_t>(t)] < 0) from[static_cast<std::size_t>(t)] = k;
+        to[static_cast<std::size_t>(t)] = k;
+    }
+    std::vector<int> index(static_cast<std::size_t>(n));
+    std::vector<int> shift(static_cast<std::size_t>(n), 0);
+    std::vector<output::TokenText> joined;
+    int into = -1;     // the token before, in joined
+    int intoLast = -1; // the last place of the items joined into it
+    for (int j = 0; j < n; j++) {
+        output::TokenText& t = texts[static_cast<std::size_t>(j)];
+        const int head = from[static_cast<std::size_t>(j)];
+        if (j > first && j <= last && tokens[static_cast<std::size_t>(j)].afterSpace && into >= 0 &&
+            t.type == tokenizer::kTypeJapanese && joined[static_cast<std::size_t>(into)].type == tokenizer::kTypeJapanese &&
+            (head < 0 || head > intoLast)) {
+            intoLast = std::max(intoLast, to[static_cast<std::size_t>(j)]);
+            index[static_cast<std::size_t>(j)] = into;
+            shift[static_cast<std::size_t>(j)] = static_cast<int>(joined[static_cast<std::size_t>(into)].text.size());
+            joined[static_cast<std::size_t>(into)].text += t.text;
+            continue;
+        }
+        into = static_cast<int>(joined.size());
+        intoLast = to[static_cast<std::size_t>(j)];
+        index[static_cast<std::size_t>(j)] = into;
+        joined.push_back(std::move(t));
+    }
+    if (static_cast<int>(joined.size()) == n) {
+        for (int j = 0; j < n; j++) texts[static_cast<std::size_t>(j)] = std::move(joined[static_cast<std::size_t>(j)]);
+        return false;
+    }
+    texts = std::move(joined);
+    for (output::ResolvedItem& it : items) {
+        if (it.tokenIndex < 0 || it.tokenIndex >= n) continue;
+        it.offset += shift[static_cast<std::size_t>(it.tokenIndex)];
+        it.tokenIndex = index[static_cast<std::size_t>(it.tokenIndex)];
+    }
+    for (tokenizer::ControlMarker& m : markers) {
+        if (m.tokenIndex < 0 || m.tokenIndex >= n) continue;
+        m.textLength += shift[static_cast<std::size_t>(m.tokenIndex)];
+        m.tokenIndex = index[static_cast<std::size_t>(m.tokenIndex)];
+    }
+    last = index[static_cast<std::size_t>(last)];
+    return true;
 }
 
 // The token texts the compose stage reads for the sentence first..last. Tokens after the
@@ -546,14 +624,32 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     }
     const std::vector<tokenizer::Piece> pieces = TokenizerPieces(options.joinedLines ? unbroken : chunk);
     // A word of the dictionary that starts in the text before a space and goes on past it.
-    const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after) {
+    const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
+        using tokenizer::SpaceWord;
+        if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
         for (std::size_t start = 0; start < head.size();) {
             const std::string_view left = head.substr(start);
+            if (word == SpaceWord::Name && text::RuneCount(left) < 2 &&
+                !(start == 0 && text::IsKanji(text::DecodeRune(left).cp))) {
+                break;
+            }
+            if (word == SpaceWord::Phrase && (start > 0 || text::RuneCount(left) < 2)) break;
             // The candidates point into the query, so it lives as long as they do.
             const std::string query = std::string(left) + std::string(after);
+            if (!snap.KeyPast(query, left.size(), lookup)) {
+                start += std::max<std::size_t>(1, text::DecodeRune(left).size);
+                continue;
+            }
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
             for (const dict::Candidate& c : words.list) {
-                if (c.source.size() > left.size()) return true;
+                if (c.source.size() <= left.size()) continue;
+                // A name: a person or a work, or a row of the name layer other than a place.
+                const bool place = c.codes != nullptr && c.codes->sem.HasPrefix("QCT");
+                const bool name = (c.codes != nullptr && (c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QWK"))) ||
+                                  (c.user != nullptr && c.user->nameLayer && !place);
+                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Name && name) ||
+                                  (word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2);
+                if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);
         }
@@ -603,8 +699,11 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
             s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
                              s.tokens.markers.begin() + sentence.markerEnd);
-            s.composer.Compose(s.items, s.texts, sentence.first, sentence.last, s.markers, composeSettings,
+            int last = sentence.last;
+            const bool joined = JoinAfterSpace(s.tokens, sentence.first, last, s.texts, s.items, s.markers);
+            s.composer.Compose(s.items, s.texts, sentence.first, last, s.markers, composeSettings,
                                generated.families, done.pieces);
+            if (joined) s.texts.clear();
         }
         if (observer.composed) observer.composed(observer.context, index, static_cast<int>(k), done.pieces);
         out.push_back(std::move(done));
@@ -702,9 +801,12 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
         const std::string collapsed = pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell});
-        casual = pipeline::CasualQuotes(collapsed, carry.depth);
+        const FusedLookup fusedLookup{ctx, snap};
+        const pipeline::FusedTest fused{HoldsFusedAdjective, &fusedLookup};
+        // Soft reads the casual quotes only to tell polite talk in a line with でしょ (below).
+        if (!speech.casual || PoliteTalkAsked(facts.text, speech.styles)) casual = pipeline::CasualQuotes(collapsed, carry.depth, fused);
         // Soft: a line of a document without 「」 that reads as speech (spec SPC-18).
-        if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth);
+        if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth, fused);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
             // (知らねえ, 言っとく).
@@ -740,8 +842,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // でしょ in a quote of polite talk seeks agreement politely (知らなかったでしょ 몰랐죠): a quote of
     // polite speech whose Korean ends a sentence politely (그렇습니다, 봐 주세요; not 일어나 of
     // なさい, not a 済ませた or ますます) and whose Japanese has no casual mark (よ, ね).
-    if (!options.reference && facts.text.find("でしょ") != std::string_view::npos &&
-        std::ranges::any_of(speech.styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; })) {
+    if (!options.reference && PoliteTalkAsked(facts.text, speech.styles)) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
         const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);
@@ -840,7 +941,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                                           Scratch& s, Generated& generated, const StageObserver& observer,
                                           const TranslationOptions& options, std::size_t context) {
     const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
-    // The lines are translated without the arrows they end with, which their translations keep.
+    // The lines are translated as AloneText; their translations keep the arrows they end with.
     std::vector<std::string> bare(lines.size()), alone(lines.size());
     std::vector<std::string_view> arrows(lines.size());
     std::vector<WrapEdges> edges(lines.size());
@@ -856,7 +957,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
-        alone[i] = TranslateBody(snap, doc, bare[i], used[i], s, generated, edgeObserver, options,
+        alone[i] = TranslateBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
@@ -900,9 +1001,22 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
-                TranslateBody(snap, doc, bare[k], used[k], s, generated, observer, options, narratedOf(lines[k]));
+                TranslateBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
+                              narratedOf(lines[k]));
             }
-            out[k] = arrows[k].empty() ? alone[k] : WithArrow(alone[k], arrows[k]);
+            if (arrows[k].empty()) {
+                out[k] = alone[k];
+            } else if (ArrowOf(alone[k]) == kGoesOn) {
+                out[k] = WithArrow(WithoutArrow(alone[k]), arrows[k]);
+            } else if (AloneText(lines[k]) == bare[k]) {
+                out[k] = WithArrow(alone[k], arrows[k]);
+            } else {
+                // The stages did not keep kGoesOn at the end: the line without it.
+                out[k] = WithArrow(
+                    TranslateBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
+                    arrows[k]);
+                if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
+            }
             if (lines[k].ends_with('\r')) out[k] += '\r';
         }
         i = j + 1;

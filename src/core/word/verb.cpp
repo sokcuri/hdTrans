@@ -29,6 +29,12 @@ bool Desire(std::string_view s) {
     return Starts(s, kJaTai) || Starts(s, kJaTakatta) || Taku(s) || Starts(s, kJaTakereba) || Starts(s, kJaTaki);
 }
 
+// Whether the text s after a られ is a narrative past or て form (られた, られて, られちゃう), where
+// it reads as the passive rather than the potential.
+bool NarrativeAfterRare(std::string_view s) {
+    return (Starts(s, "た") && !Desire(s)) || Starts(s, "て") || Starts(s, "ちゃ") || Starts(s, "ちま");
+}
+
 // Whether も at the start of s is followed by a form of する that ends there (立ち上がりもせず,
 // 笑いもしない, 読みもした; not しても, していない): the continuative before it is the verb,
 // emphasised, not a noun.
@@ -408,6 +414,13 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // The られ of a dictionary causative of a shorter word in a narrative form (食べさせられた) is
+    // that word's causative-passive, analysed on the shorter word; its other forms read the
+    // potential (食べさせられない 먹일 수 없다).
+    if (!matched && oldState == 4 && oldKind == 7 && w->settings.text && w->settings.improvements.causativePassive &&
+        NarrativeAfterRare(after()) && w->CausativeOfShorter(surface)) {
+        return false;
+    }
     if (!matched && (oldState == 1 || oldState == 2 || oldState == 4 || shortCausativePassive)) {
         base.record = oldState;
         adjusted = true;

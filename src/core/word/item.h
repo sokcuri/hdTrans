@@ -301,7 +301,8 @@ struct Chain {
     // With overlapping it replaces the items of the same token whose end lies inside
     // the new item (start < end <= its end), otherwise those of the same token at the
     // same start. The item goes before the first item that ends at or after its end
-    // (or, of a later token, whose predecessor's CrossEnd is before it).
+    // (or, of a later token, whose predecessor has its CrossEnd before it or, on the text
+    // path, is of an earlier token).
     int Insert(Item* item, bool overlapping);
 };
 

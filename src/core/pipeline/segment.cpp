@@ -1,6 +1,7 @@
 #include "core/pipeline/segment.h"
 
 #include "core/dict/classes.h"
+#include "core/names/labels.h"
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -158,8 +159,19 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
         }
         const std::string_view t = p.text;
         size_t start = 0;
+        // A speaker label or an aside in round brackets that opens the line ends a chunk.
+        const size_t labelEnd = k == 0 ? names::internal::CaptionLabelEnd(t) : 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
+            if (i == labelEnd && i > start) {
+                output::Add(part, t.substr(start, i - start));
+                parts.push_back(std::move(part));
+                gapsBefore.push_back(std::move(gap));
+                part.clear();
+                gap.clear();
+                start = i;
+                count = 0;
+            }
             size_t gapEnd = ColumnGap(t, i, k > 0, k + 1 < pieces.size());
             if (gapEnd == i) gapEnd = EscapeGap(t, i, k > 0, k + 1 < pieces.size());
             if (gapEnd != i) {

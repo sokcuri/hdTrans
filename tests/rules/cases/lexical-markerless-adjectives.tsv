@@ -1,0 +1,32 @@
+# 규칙: LEX-6, GRM-11, MNG-1, MNG-2
+rule	input	expected	kind	layer
+dict:jisjk:121099	高圧的だ。	고압적이다.	fix	lookup
+dict:jisjk:121099	高圧的な言葉。	고압적인 말.	fix	lookup
+dict:jisjk:121099	高圧的ではない。	고압적이지 않다.	fix	lookup
+dict:jisjk:121099	高圧的だった。	고압적이었다.	fix	lookup
+dict:jisjk:121099	高圧的で怖い。	고압적이고 무섭다.	fix	lookup
+dict:jisjk:121099	高圧的です。	고압적입니다.	fix	lookup
+dict:jisjk:136663	深大な影響。	심대한 영향.	fix	lookup
+dict:jisjk:136663	深大ではない。	심대하지 않다.	fix	lookup
+dict:jisjk:136663	深大だった。	심대했다.	fix	lookup
+dict:jisjk:117158	十人並みだ。	평범하다.	fix	lookup
+dict:jisjk:117158	十人並みだった。	평범했다.	fix	lookup
+dict:jisjk:117158	十人並みです。	평범합니다.	fix	lookup
+dict:jisjk:121099	もっと高圧的に。	좀 더 고압적으로.	keep	lookup
+lexical:markerless-adjectives	ごく一般的な家庭に生まれた。	매우 일반적인 가정에서 태어났다.	keep	lookup
+lexical:markerless-adjectives	少なくとも一般的なご令嬢の想像を絶していた。	적어도 일반적인 영애의 상상을 초월하고 있었다.	keep	lookup
+lexical:markerless-adjectives	具体的に言えば、	구체적으로 말하면,	keep	lookup
+lexical:markerless-adjectives	何の瑕疵もないご令嬢を一方的に捨てて	아무 하자도 없는 영애를 일방적으로 버려	keep	lookup
+lexical:markerless-adjectives	具体的にどうなるかはわからないが、	구체적으로 어떻게 될까는 모르지만,	keep	lookup
+lexical:markerless-adjectives	圧倒的な芳香を放ち、	압도적인 향기를 풍겨,	keep	lookup
+lexical:markerless-adjectives	一般的な4歳児とは大きく違う部分があった。	일반적인 4세아와는 크게 다른 부분이 있었다.	keep	lookup
+lexical:markerless-adjectives	最終的には死ぬしかない悪役のはずなのだ。	최종적으로는 죽을 수밖에 없는 악역일 것이다.	keep	lookup
+lexical:markerless-adjectives	正式な婚約者を差し置いて、	정식인 약혼자를 그대로 두고,	keep	lookup
+lexical:markerless-adjectives	正式なパーティー	정식인 파티	keep	lookup
+dict:jisjk:117158	十人並みの容姿。	평범한 용모.	keep	lookup
+dict:jisjk:136663	深大なる影響。	심대한 영향.	keep	lookup
+lexical:markerless-adjectives	基本的な人間との会話はできるようになっている。	기본적인 인간과의 대화는 할 수 있게 되어 있다.	keep	lookup
+lexical:markerless-adjectives	正式に働きたい	정식으로 일하고 싶다	keep	lookup
+lexical:markerless-adjectives	その後正式な営業として鍛えたんだ。	그 후 정식인 영업으로서 단련한 거야.	keep	lookup
+lexical:markerless-adjectives	ゲームの正式サービス開始が、	게임의 정식 서비스 개시가,	keep	lookup
+lexical:markerless-adjectives	正式名称は	정식명칭은	keep	lookup

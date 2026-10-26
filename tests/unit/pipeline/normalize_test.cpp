@@ -179,6 +179,16 @@ HD_TEST(pipeline_spoken_forms) {
         {"仕方ないじゃない！"sv, "仕方ないじゃん！"sv},
         {"嫌いじゃない。"sv, "嫌いじゃない。"sv},
         {"義姉を困らせるんじゃない」"sv, "義姉を困らせるなよ」"sv},
+        {"来るんじゃねぇ！"sv, "来るなよ！"sv},
+        {"泣くんじゃないよ"sv, "泣くなよ"sv},
+        {"見てんじゃねぇよ！"sv, "見てるなよ！"sv},
+        {"邪魔すんじゃねえ！"sv, "邪魔するなよ！"sv},
+        {"言ってるんじゃない"sv, "言ってるんじゃない"sv},  // what is not so
+        {"言ってるんじゃないよ"sv, "言ってるんじゃないよ"sv},
+        {"田中くんじゃない！"sv, "田中くんじゃない！"sv},
+        {"ノコノコ出てくんじゃねえ！"sv, "ノコノコ出てくんじゃねえ！"sv},  // 出てくる said short
+        {"うんうんじゃねえよ"sv, "うんうんじゃないよ"sv},  // the answer うん
+        {"冷たっ　怖い"sv, "冷たい　怖い"sv},
         {"行くんじゃない？"sv, "行くんじゃない？"sv},
         {"いいじゃない？"sv, "いいじゃない？"sv},
         {"何それ怖っ！"sv, "何それ怖い！"sv},
@@ -425,8 +435,36 @@ HD_TEST(pipeline_rewrite_casual) {
         {"そりゃそうだ"sv, "そりゃそうだ"sv},
         {"うりゃっ！"sv, "うりゃっ！"sv},
         {"見てりゃ分かる"sv, "見てりゃ分かる"sv},
+        {"言われてみりゃ　そうだ"sv, "言われてみれば　そうだ"sv},
+        {"呼んどいたから"sv, "呼んでおいたから"sv},
+        {"持っといで"sv, "持っておいで"sv},
+        {"主砲も持っときたい"sv, "主砲も持っておきたい"sv},
+        {"諦めも悪いときた"sv, "諦めも悪いときた"sv},  // と来た
+        {"言っときます"sv, "言っておきます"sv},
+        {"撮っときゃよかった"sv, "撮っておけばよかった"sv},
+        {"こうしといたら"sv, "こうしておいたら"sv},
+        {"ずっといたでしょ？"sv, "ずっといたでしょ？"sv},
+        {"やめろっつった"sv, "やめろって言った"sv},
+        {"なんつった？"sv, "なんて言った？"sv},
+        {"なんつって。"sv, "なんつって。"sv},  // the joke, a phrase
+        {"何か文句あんの？"sv, "何か文句あるの？"sv},
+        {"夢があんだよ"sv, "夢があるんだよ"sv},
+        {"あんだけ言った"sv, "あんだけ言った"sv},
+        {"とぼけんな　この野郎"sv, "とぼけるな　この野郎"sv},
+        {"決めてんな　お前"sv, "決めてんな　お前"sv},
     };
-    Check(RewriteCasual, cases);
+    Check([](std::string_view text) { return RewriteCasual(text); }, cases);
+}
+
+// A contracted ておく that a dictionary word holds stays as written.
+HD_TEST(pipeline_rewrite_casual_held_toku) {
+    const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
+        return line.substr(at).starts_with("言っとくけど") && end <= at + std::string_view("言っとく").size();
+    };
+    const RunLookup runs{holds, nullptr, nullptr};
+    HD_CHECK_EQ(RewriteCasual("言っとくけど、嫌よ", runs), std::string("言っとくけど、嫌よ"));
+    HD_CHECK_EQ(RewriteCasual("書いとく。", runs), std::string("書いておく。"));
+    HD_CHECK_EQ(RewriteCasual("言っとくが", runs), std::string("言っておくが"));
 }
 
 HD_TEST(pipeline_rewrite_military_time) {
@@ -680,6 +718,9 @@ HD_TEST(pipeline_emphatic_spellings) {
         {"バッカスの神"sv, "バッカスの神"sv},
         {"でしょ、ばっかじゃないの"sv, "でしょ、バカじゃないの"sv},
         {"学食ばっかじゃ飽きる"sv, "学食ばっかじゃ飽きる"sv},
+        {"長くてキッツい"sv, "長くてきつい"sv},
+        {"年寄りばっかしで"sv, "年寄りばかりで"sv},
+        {"勉強ばっかしてる"sv, "勉強ばっかしてる"sv},  // ばっか with する
     };
     Check(RewriteEmphaticSpellings, cases);
 }

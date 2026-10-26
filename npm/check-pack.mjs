@@ -11,7 +11,7 @@ const expected = [
 const entries = await readdir(dist, { withFileTypes: true });
 assert(entries.every((entry) => entry.isFile()), 'dist must not contain directories or links');
 assert.deepEqual(entries.map((entry) => entry.name).sort(), expected, 'unexpected package files');
-for (const name of ['LICENSE', 'THIRD-PARTY-NOTICES.txt', 'README.md']) {
+for (const name of ['LICENSE', 'NOTICE', 'THIRD-PARTY-NOTICES.txt', 'README.md']) {
   await access(new URL(name, import.meta.url));
 }
 const manifest = JSON.parse(await readFile(new URL('dictionary.json', dist), 'utf8'));

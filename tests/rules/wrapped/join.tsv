@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 wrapped:join	明日までに行かなければ\nならない。	내일까지 가야\n한다.	fix	driver
 wrapped:join	彼が昨日買ってきた本を読んで\nいるところです。	그가 어제 사 온 책을 읽고\n있는 중입니다.	fix	driver
 wrapped:join	もしよかったら一緒に\n行きませんか？	만약 괜찮다면 함께\n가지 않겠습니까?	fix	driver
-wrapped:join	無理やり食べ\nさせられた。	억지로\n먹었다.	fix	driver
+wrapped:join	無理やり食べ\nさせられた。	억지로\n먹게 되었다.	fix	driver
 wrapped:join	火災が……火を\n消して、反撃しないと！	화재가……불을\n끄고, 반격하지 않으면!	fix	driver
 wrapped:join	まぁ、土曜でなくて\nもいいか。	뭐, 토요일이 아니어도\n괜찮은가.	fix	driver
 wrapped:join	この時間はとて\nも静かですね。	이 시간은 무척\n조용하네요.	fix	driver
@@ -33,7 +33,7 @@ wrapped:join	それに１０年も\n親子でいたのだ。	게다가 10년이�
 wrapped:join	いいですね\n行きます	좋네요\n갑니다	keep	driver
 wrapped:join	待って\n何してるの	기다려\n뭐해	keep	driver
 wrapped:join	少しだけ、休ませてください\nうんうん、いいもんだ。	약간, 쉬게 해 주세요\n응응, 좋은 걸이다.	keep	driver
-wrapped:join	彼女が作った\nケーキを食べた	그녀가 만들었다\n케이크를 먹었다	keep	driver
+wrapped:join	彼女が作った\nケーキを食べた	그녀가 만든\n케이크를 먹었다	fix	driver
 wrapped:join	明日までに行かなければ\n\nならない。	내일까지 가야 한다\n\n안된다.	keep	driver
 wrapped:join	目次は\n１．プロローグ	목차는\n1. 프롤로그	keep	driver
 wrapped:join	つまり、\n結論：異次元こわい	즉,\n결론：이차원 무섭다	keep	driver

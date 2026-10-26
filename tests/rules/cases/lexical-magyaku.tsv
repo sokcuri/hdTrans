@@ -1,0 +1,24 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:1985	セオリーの真逆だが、	시어리의 정반대이지만,	fix	lookup
+dict:jisjk:1985	真逆なタイプか。	정반대인 타입인가.	fix	lookup
+dict:jisjk:1985	全くの真逆。	완전한 정반대.	fix	lookup
+dict:jisjk:1985	真逆で、実に静かな時間であった。	정반대로, 실로 조용한 시간이었다.	fix	lookup
+dict:jisjk:1985	いつもとは真逆のやり取りに、	평상시와는 정반대 주고받음에,	fix	lookup
+dict:jisjk:1985	というよりむしろ真逆である。	그렇다고 하는 것보다 오히려 정반대이다.	fix	lookup
+dict:jisjk:1985	不真面目な俺は真逆を目指す。	불성실한 나는 정반대를 목표로 한다.	fix	lookup
+dict:jisjk:1985	現実は真逆だった	현실은 정반대였다	fix	lookup
+dict:jisjk:1985	色は真逆がいい。	색은 정반대가 좋다.	fix	lookup
+dict:jisjk:1985	幸運と真逆じゃん。	행운과 정반대잖아.	fix	lookup
+dict:jisjk:1985	状況としては真逆ではあるが、	상황으로서는 정반대이지만,	fix	lookup
+dict:jisjk:1985	やってることは真逆じゃないか……。	하고 있는 것은 정반대가 아닌가…….	fix	lookup
+dict:jisjk:1985	彼が行こうとする道は真逆ではないが、	그가 가려고 하는 길은 정반대는 아니지만,	fix	lookup
+dict:jisjk:1985	家の真逆の方向にあるお店だし。	집의 정반대의 방향에 있는 가게이고.	fix	lookup
+dict:jisjk:1985	真逆の意見ね……	정반대 의견이네……	fix	lookup
+dict:jisjk:1249	まさか大好物の…？	설마 매우 좋아하는…?	keep	lookup
+dict:jisjk:1249	まさか俺に	설마 나에게	keep	lookup
+dict:jisjk:1249	まさか、そんなことはあるまい。	설마, 그런 일은 있을 리 없다.	keep	lookup
+dict:jisjk:346800	まさかの展開だ。	뜻밖의 전개다.	keep	local
+dict:jisjk:1249	まさか彼が来るとは。	설마 그가 오다니.	keep	lookup
+dict:w:24388	逆の方向だ。	반대의 방향이다.	keep	lookup
+dict:jisjk:83216	正反対の意見だ。	정반대 의견이다.	keep	lookup

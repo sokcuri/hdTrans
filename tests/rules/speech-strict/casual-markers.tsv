@@ -1,4 +1,4 @@
-# 규칙: SPC-1
+# 규칙: SPC-1, SPC-19
 rule	input	expected	kind	layer
 compose:speech-casual-marked	「違う。そうじゃないよ」	「아니야. 그렇지 않아」	fix	compose
 compose:speech-casual-marked	「もう全部食べちゃった。おいしかった」	「벌써 전부 먹어버렸어. 맛있었어」	fix	compose
@@ -18,3 +18,11 @@ compose:speech-casual-marked	「『もう遅い』って書いてあったよ」
 compose:speech-casual-marked	「彼は来ない、と言ってたよ」	「그는 오지 않는다, 라고 말했어」	keep	compose
 compose:speech-casual-marked	「この問題が何かが分からないよ」	「이 문제가 뭔가를 몰라」	keep	compose
 compose:speech-casual-marked	「ちょっと待った！　話を聞いてるの？」	「잠깐만! 이야기를 들어?」	keep	compose
+compose:speech-casual-marked	「でけぇ」	「커」	fix	compose
+compose:speech-casual-marked	「痛え」	「아파」	fix	compose
+compose:speech-casual-marked	「うめえ」	「맛있어」	fix	compose
+compose:speech-casual-marked	「ハードル高えな、完全無茶ぶりだ」	「허들 높아, 완전 무리한 요구야」	fix	compose
+compose:speech-casual-marked	「キャリア浅っ」	「캐리어 얕아」	fix	compose
+compose:speech-casual-marked	「冷てえ！」	「차가워!」	fix	compose
+compose:speech-casual-marked	「考えがある」	「생각이 있다」	keep	compose
+compose:speech-casual-marked	「答えだ」	「대답이다」	keep	compose

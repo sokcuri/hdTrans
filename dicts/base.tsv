@@ -5003,7 +5003,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うぶすみ	출생지	I110	VPl		GN				jisjk:40432		
 うべな	승낙&AV@	M440			GN				jisjk:144426		
 うほう	오른쪽	I110			GN				jisjk:97790		
-うま	맛$FB@	H7U0	VFd		GN	241	||2 &&2 ||3 G+0== "Ow" P+1!= "1**" A+1-= "VFd" ||6 A+1-= "VFdVFd" A-1-= "VFdVFd" A-2-= "VFdVFd" &&2 S-1== "すご" P-1== "7**" A+3== "VFd" A+2== "VFd" &&3 G+0== "Hz" U+0== "Lかった" G+0== "Ow"	うま는 음식 문맥에서 ‘맛있다’를 고르되, 뒤의 비음식 명사를 꾸미는 경우는 제외한다. 홀로 말한 うまかった도 ‘맛있었다’다.	jisjk:4904		
+うま	맛$FB@	H7U0	VFd		GN	241	||2 &&2 ||3 G+0== "Ow" P+1!= "1**" A+1-= "VFd" ||6 A+1-= "VFdVFd" A-1-= "VFdVFd" A-2-= "VFdVFd" &&2 S-1== "すご" P-1== "7**" A+3== "VFd" A+2== "VFd" &&3 G+0== "Hz" ||2 U+0== "Lかった" U+0== "い" G+0== "Ow"	うま는 음식 문맥에서 ‘맛있다’를 고르되, 뒤의 비음식 명사를 꾸미는 경우는 제외한다. 홀로 말한 うまい, うまかった도 ‘맛있다’, ‘맛있었다’다.	jisjk:4904		
 うま	능숙$AB@	H7U0	XXX		GN				jisjk:4905		
 うま	파묻&AW@	M428		Dx	GN				jisjk:144432		
 うま	말	N130	QAAVAm		GN				jisjk:340999		
@@ -5661,7 +5661,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おいてきぼり	따돌림	N110			GN				jisjk:127839		
 おいてください	6 둬 주세요	S570			GN				jisjk:342172		
 おいてくださいね	6 둬 주세요	S570			GN				jisjk:342171		
-おいで	6 둬	S570			GN				jisjk:265455		
+おいで	1고 와	S570			GN				jisjk:265455		
 おいで	와요	N110			GN				jisjk:267418		
 おいでくださ	와 주&AE@	M438	UMv		GN				jisjk:114526		
 おいでくださいました	와 주셨습니다	K110			GN				jisjk:265460		
@@ -19980,7 +19980,7 @@ ttt	ttt	K110			GN				jisjk:201744
 させようと	시키려고 &AV@	M449			GN				jisjk:120500		
 させられ	하게 &AV@	M427		Tu	GN				jisjk:120502		
 させられ	하게 &AV@	M427		Tu	GN				jisjk:120549		
-させられ	하게 &AV@	M447			GN	4480	||1 &&2 P-1== "2**" D+0= "하도록 강요&FD@"	조사 뒤의 させられ는 사역수동 ‘하도록 강요받다’로 고르고, 사역자를 나타내는 に는 바꾸지 않는다.	jisjk:364866		
+させられ	하게 &AV@	M447			GN	4480	||3 &&3 P-1== "2**" U+0== "Lません" D+0= "시킬 수 &M9@" &&3 P-1== "2**" U+0== "Lます" D+0= "시킬 수 &HN@" &&2 P-1== "2**" D+0= "하도록 강요&FD@"	조사 뒤의 させられ는 사역수동 ‘하도록 강요받다’로 고르고, 사역자를 나타내는 に는 바꾸지 않는다. ません, ます 앞에서는 사역의 가능 ‘시킬 수 있다’다(お酌はさせられません 술 시중은 시킬 수 없습니다).	jisjk:364866		
 させられ	당&AV@	M447		Tu	GN				jisjk:365602		
 させられ	하게 &C6@	M447		Tu	GN	4554	||1 P-1== "1**"	명사 바로 뒤의 させられ를 사역수동 '하게 되다'로 고른다(勉強させられた 공부하게 되었다). 시켜서 억지로 한 일과 '당하다'로 읽는 명사는 구문 표 forced-act가 고른다.	jisjk:365603		
 させられ	하게 &C6@	M447		Tu	GN	4555	||1 &&2 P-1== "1**" G-1== "Hd"	する가 붙는 동작 명사 바로 뒤에서 させられ를 사역수동 '하게 되다'로 고른다. (미발동: rare-context)	jisjk:365604		
@@ -143541,7 +143541,7 @@ ttt	ttt	K110			GN				jisjk:201744
 十人	열 명	N110	VHn		GN				jisjk:194504		
 十人	쥬우닌	N130	QCTVPl		GN				jisjk:302449		
 十人並	평범	N110		Dd	GN				jisjk:194507		
-十人並み	평범한	G8U0			GN				jisjk:117158		
+十人並み	평범%A1@	G8U0			GN				jisjk:117158		
 十人並みの	평범한	E0H0			GN				jisjk:149912		
 十人十色	가지각색	I110			GN				jisjk:77133		
 十人牧場	쥬우님보쿠죠	I130	QCTVPl		GN				jisjk:302450		
@@ -262186,7 +262186,7 @@ ttt	ttt	K110			GN				jisjk:201744
 深夜叢書	심야총서	N110	VBkVSw		GN				jisjk:236347		
 深夜業	심야업	N110			GN				jisjk:236344		
 深夜電力料金制度	심야 전력 요금 제도	N110			BZ				jisjk:352542		
-深大	심대하다	G8U0			GN				jisjk:136663		
+深大	심대%A1@	G8U0			GN				jisjk:136663		
 深大なる	심대한	E0H0	SFl		GN				jisjk:123503		
 深大寺	진다이지	I110	QCT		GN				jisjk:77080		
 深大寺元町	진다이지모토마치	I130	QCTVPl		GN				jisjk:302871		
@@ -283169,7 +283169,7 @@ ttt	ttt	K110			GN				jisjk:201744
 真輝	마키	N130	QPN	Wb	GN				jisjk:268480		
 真辺	마나베	N130	QPN	Wa	GN				jisjk:12124		
 真辺	사나베	N130	QPN	Wa	GN				jisjk:352214		
-真逆	설마	E311			GN				jisjk:1985		
+真逆	정반대	N110			GN				jisjk:1985
 真通	마사미치	N130	QPN	Wb	GN				jisjk:12183		
 真造	신조	N130	QPN	WaWb	GN				jisjk:12168		
 真道	신도우	N130	QPN	WaWb	GN				jisjk:34938		
@@ -317269,7 +317269,7 @@ ttt	ttt	K110			GN				jisjk:201744
 血尿	혈뇨	N110			GN				jisjk:39046		
 血属	혈속	N110			GN				jisjk:39061		
 血戦	혈전	N110		Hd	GN				jisjk:39071		
-血抜き	노린내 없애기	N110	VFd	Hd	GN				jisjk:242749		
+血抜き	핏물 제거	N110	VFd	Hd	GN				jisjk:242749		
 血族	혈족	N110	VHn		BZ				jisjk:39074		
 血族結婚	혈족 결혼	N110	ULw		GN				jisjk:178035		
 血日曜日	피의 일요일	N110			GN				jisjk:242753		
@@ -356207,7 +356207,6 @@ ttt	ttt	K110			GN				jisjk:201744
 食べごろ	제철	I110	UMe		GN				jisjk:76421		
 食べさせ	먹&AJ@	M447			GN				jisjk:262018		
 食べさせていただ	&HU@	M461			GN				jisjk:350714		
-食べさせられ	&HU@	M447			GN				jisjk:265397		
 食べすぎ	과식	Q110			GN				jisjk:109495		
 食べすぎ	과식&AV@	M447			GN				jisjk:140718		
 食べず嫌い	먹어 보지도 않고 싫어함	N110	SFlVFd		GN				jisjk:153158		
@@ -359133,7 +359132,7 @@ ttt	ttt	K110			GN				jisjk:201744
 高圧帯	고압대	N110	VPlVSs		GN				jisjk:179658		
 高圧手段	고압수단	I110			GN				jisjk:109309		
 高圧法ポリエチレン	고압법 폴리에틸렌	N110			BZ				jisjk:360164		
-高圧的	고압적이다	G8U0			GN				jisjk:121099		
+高圧的	고압적%D4@	G8U0			GN				jisjk:121099		
 高圧線	고압선	N110	VPe		GN				jisjk:203490		
 高圧縮	고압축	I110			GN				jisjk:61500		
 高圧酸素法	고압산소요법	N110	UMn		GN				jisjk:206707		

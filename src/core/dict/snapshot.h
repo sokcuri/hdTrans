@@ -292,6 +292,9 @@ public:
     std::vector<std::size_t> PersonKeysAt(std::string_view text) const;
     // The byte length of the longest base or user dictionary key that starts text, 0 for none.
     std::size_t WordAt(std::string_view text) const;
+    // Whether GetWordInfo of text may give a candidate whose source is longer than past bytes: a
+    // key of the base, user or name dictionaries or of the plain entries of ctx that starts text is.
+    bool KeyPast(std::string_view text, std::size_t past, const LookupContext& ctx) const;
     // Whether key is a key of the base or user dictionary.
     bool DictionaryWord(std::string_view key) const { return BaseWord(key); }
 

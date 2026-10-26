@@ -433,6 +433,7 @@ public:
     std::string WriteCries();
     // The spans [from, to) in characters that the last Write read as sound lexicon keys.
     const std::vector<std::pair<size_t, size_t>>& Spans() const { return spans_; }
+    const std::vector<std::pair<size_t, size_t>>& KeySpans() const { return keySpans_; }
 
 private:
     std::string_view Bytes(size_t from, size_t to) const {
@@ -457,6 +458,7 @@ private:
     bool PoliteAt(size_t p) const;
     // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
     std::vector<std::pair<size_t, size_t>> spans_;
+    std::vector<std::pair<size_t, size_t>> keySpans_;  // each key of the spans
     mutable size_t politeFrom_ = 1, politeTo_ = 0;
     mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
@@ -1890,6 +1892,7 @@ std::string SoundText::Write() {
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
             spans_.emplace_back(i, next);
+            for (const SoundMatch& m : chain) keySpans_.emplace_back(m.start, m.end);
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
             // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
@@ -2213,6 +2216,12 @@ std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const L
     SoundText t(text, ctx, snap);
     t.Write();
     return t.Spans();
+}
+
+std::vector<std::pair<size_t, size_t>> SoundKeySpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    SoundText t(text, ctx, snap);
+    t.Write();
+    return t.KeySpans();
 }
 
 std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -2820,6 +2829,7 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::Negative;
         }
         if (says == Says::None) continue;
+        const bool nai = says == Says::Nai && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) > 0;
         size_t start = i;
         while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsHiraganaRune(rs[start - 1]))) start--;
         if (start == i) continue;
@@ -2827,8 +2837,10 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         for (size_t from = start; from < i && kana.empty(); from++) {
             const std::string_view stem = std::string_view(s).substr(byte[from], byte[i] - byte[from]);
             // The ん after a dictionary form is the の said ん (書くんなら); the ん after the negative
-            // stem of a godan verb is its negative (いかんな, 知らんぞ), read as such.
-            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) || VerbFormIs(stem, kNegativeStem, Godan, ctx, snap))) {
+            // stem of a godan verb is its negative (いかんな, 知らんぞ), read as such, but for one
+            // before a written ない, which no negative takes (止まんない is 止まらない, not 止む).
+            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) ||
+                         (!nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap)))) {
                 break;
             }
             // A stem of one kana only after a particle or the て of a て form (気にすんな, してくんない,
@@ -2844,19 +2856,25 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             // No word of the dictionary that starts with the stem and spans the ん (こんな, みんな,
             // ごめんな, すんなり); after the て of a て form a lone kana starts the auxiliary (してくんない
             // is no くん), and after かも the し is that of しれない (かもしんない, かもしんねえ).
-            bool spanned = false;
+            bool spanned = false, spannedPast = false;
             const bool afterTe = i - from == 1 && from > 0 &&
                                  (rs[from - 1] == U'て' || (rs[from] == U'し' && from > 1 && rs[from - 2] == U'か' && rs[from - 1] == U'も'));
             const dict::Candidates rd = snap.GetWordInfo(std::string_view(s).substr(byte[from]), dict::LookupMode::General, ctx.lookup);
             for (const dict::Candidate& c : rd.list) {
-                spanned = spanned || (c.codes != nullptr && byte[from] + c.source.size() > byte[i] &&
-                                      std::string_view(s).substr(byte[from]).starts_with(c.source));
+                if (c.codes == nullptr || !std::string_view(s).substr(byte[from]).starts_with(c.source)) continue;
+                spanned = spanned || byte[from] + c.source.size() > byte[i];
+                spannedPast = spannedPast || byte[from] + c.source.size() > byte[i + 1];
             }
-            if (spanned && !afterTe) continue;
+            // Before a written ない a lone kana after a particle is a stem too where the word ends with the
+            // ん (練習になんない is no なん; かかるとみんないい人 is みんな).
+            if (spanned && !afterTe && !(nai && i - from == 1 && !spannedPast)) continue;
             kana = ContractedKana(says, stem, rs, from, i, ctx, snap);
             // A verb's stem that takes none of these readings ends the search: the kana inside it
-            // start no stem (でき of 想像できんな is no き).
-            if (kana.empty() && (VerbFormIs(std::string(stem) + "る", kDictionaryForm, AnyKind, ctx, snap) ||
+            // start no stem (でき of 想像できんな is no き). A stem of kana only, which is read only as a
+            // て form, does not (になる of 練習になんない leaves the な after に).
+            const bool kanaOnly = i - from > 1 && std::none_of(rs.begin() + static_cast<std::ptrdiff_t>(from),
+                                                               rs.begin() + static_cast<std::ptrdiff_t>(i), IsKanjiRune);
+            if (kana.empty() && !kanaOnly && (VerbFormIs(std::string(stem) + "る", kDictionaryForm, AnyKind, ctx, snap) ||
                                  VerbFormIs(stem, kNegativeStem, AnyKind, ctx, snap))) {
                 break;
             }
@@ -2983,13 +3001,14 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
     const std::string completed = internal::RewriteDrawnHonorifics(
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
-    std::string sounded =
-        internal::RewriteCasualAdjectives(internal::WriteSounds(
-                                              internal::RewriteOnbinU(
-                                              internal::RewriteContractedNo(
-                                                  internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
-                                              ctx, snap), ctx, snap),
-                                          ctx, snap);
+    std::string sounded = internal::WriteSounds(
+        internal::RewriteCasualAdjectives(
+            internal::RewriteOnbinU(
+                internal::RewriteContractedNo(
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                ctx, snap),
+            ctx, snap),
+        ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }

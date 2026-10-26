@@ -485,7 +485,7 @@ HD_TEST(tokenizer_mark_run) {
 // them; two lone pieces of a name stay one token.
 HD_TEST(tokenize_kept_kanji_space) {
     // The words 未来 and 通知表, starting anywhere in the text before the space.
-    const SpaceJoins joins = [](std::string_view before, std::string_view after) {
+    const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord) {
         for (const std::string_view word : {"未来"sv, "通知表"sv}) {
             for (std::size_t start = 0; start < before.size(); start++) {
                 const std::string text = std::string(before.substr(start)) + std::string(after);
@@ -506,15 +506,63 @@ HD_TEST(tokenize_kept_kanji_space) {
     HD_CHECK_EQ(scan("未 来"), std::string("24/0:未来 9/0:"));
     HD_CHECK_EQ(scan("通 知 表"), std::string("24/0:通知表 9/0:"));
     HD_CHECK_EQ(scan("林　涛"), std::string("24/0:林涛 9/0:"));
-    HD_CHECK_EQ(scan("君の 夢"), std::string("24/0:君の夢 9/0:"));
+    HD_CHECK_EQ(scan("君の 夢"), std::string("24/0:君の 24/0:夢 9/0:"));
     HD_CHECK_EQ(scan("ジモ得 週"), std::string("24/0:ジモ得週 9/0:"));  // a word of kana and kanji before it
     // Without joins every such space is dropped.
     HD_CHECK_EQ(ScanText("光 影", true), std::string("24/0:光影 9/0:"));
 }
 
+// With SpaceJoins, any other single space between Japanese characters ends the Japanese token, and
+// the next one is afterSpace (marked +), unless the text is spaced out character by character, a
+// piece is said again, or joins finds a name, a phrase or an ending across it.
+HD_TEST(tokenize_space_parts_words) {
+    const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord word) {
+        const std::string text = std::string(before) + std::string(after);
+        switch (word) {
+        case SpaceWord::Any:
+            for (const std::string_view w : {"あご"sv, "山田太郎"sv, "展開"sv}) {
+                if (text.find(w) != std::string::npos) return true;
+            }
+            return false;
+        case SpaceWord::Name: return text.starts_with("山田太郎");
+        case SpaceWord::Phrase: return before == "何だ" && after.starts_with("あれ");
+        case SpaceWord::Ending: return after == "ね";
+        }
+        return false;
+    };
+    const auto scan = [&](std::string_view input) {
+        const std::vector<Piece> pieces = {{std::string(input), 0}};
+        Tokens t;
+        TokenizeSpans(pieces, true, t, &joins);
+        std::string s;
+        for (size_t i = 0; i < t.size(); i++) {
+            if (i > 0) s += ' ';
+            s += (t[i].afterSpace ? "+" : "") + std::to_string(t[i].type) + ":" + std::string(t.Raw(i));
+        }
+        return s;
+    };
+    HD_CHECK_EQ(scan("あ ごめんね"), std::string("24:あ +24:ごめんね 9:"));
+    HD_CHECK_EQ(scan("いや　そうじゃない"), std::string("24:いや +24:そうじゃない 9:"));
+    HD_CHECK_EQ(scan("あ ごめん いいよ。"), std::string("24:あ +24:ごめん +24:いいよ 17:。 9:"));
+    HD_CHECK_EQ(scan("山田 太郎が来た"), std::string("24:山田太郎が来た 9:"));
+    HD_CHECK_EQ(scan("何だ あれ"), std::string("24:何だあれ 9:"));
+    HD_CHECK_EQ(scan("そうだ ね……"), std::string("24:そうだね 22:…… 9:"));
+    HD_CHECK_EQ(scan("そうだ ねえ"), std::string("24:そうだ +24:ねえ 9:"));
+    HD_CHECK_EQ(scan("やめて やめて"), std::string("24:やめてやめて 9:"));
+    HD_CHECK_EQ(scan("消す っていう"), std::string("24:消すっていう 9:"));
+    HD_CHECK_EQ(scan("こ の 展 開 は"), std::string("24:この展開は 9:"));
+    HD_CHECK_EQ(scan("ね え さ ん"), std::string("24:ねえさん 9:"));
+    HD_CHECK_EQ(scan("あ い"), std::string("24:あ +24:い 9:"));
+    // Not between Japanese characters: digits, letters and marks keep their own rules.
+    HD_CHECK_EQ(scan("2 人"), std::string("1:2 7:  24:人 9:"));
+    HD_CHECK_EQ(scan("え、 そう"), std::string("24:え、そう 9:"));
+    // Without joins every such space is dropped.
+    HD_CHECK_EQ(ScanText("あ ごめんね", true), std::string("24/0:あごめんね 9/0:"));
+}
+
 // With SpaceJoins, a letter after kana goes on with the Japanese token when a word spans both.
 HD_TEST(tokenize_kept_letter_after_kana) {
-    const SpaceJoins joins = [](std::string_view before, std::string_view after) {
+    const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord) {
         for (const std::string_view word : {"うp"sv, "おk"sv}) {
             for (std::size_t start = 0; start < before.size(); start++) {
                 const std::string text = std::string(before.substr(start)) + std::string(after);

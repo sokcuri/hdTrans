@@ -1,0 +1,21 @@
+# 규칙: GRM-41
+rule	input	expected	kind	layer
+constraint:adverb-copula	相変わらずだな。	변함없네.	fix	lookup
+constraint:adverb-copula	ﾏｼﾞか｡相変わらずだな｡	진짜야. 변함없네.	fix	lookup
+constraint:adverb-copula	相変わらずだよ	변함없어	fix	lookup
+constraint:adverb-copula	相変わらずだね 君は	변함없네 너는	fix	lookup
+constraint:adverb-copula	素っ気なさは相変わらずだ。	쌀쌀맞음은 변함없다.	fix	lookup
+constraint:adverb-copula	「相変わらずだな」	「변함없네」	fix	lookup
+constraint:adverb-copula	「相変わらずだよ」	「변함없어」	fix	lookup
+constraint:adverb-copula	相変わらずな人だった。	변함없는 사람이었다.	fix	lookup
+constraint:adverb-copula	相変わらずだった	변함없었다	fix	lookup
+constraint:adverb-copula	「相変わらずですね」	「변함없네요」	keep	lookup
+constraint:adverb-copula	相変わらず元気だな	변함없이 건강하네	keep	lookup
+constraint:adverb-copula	少しだけ	약간	keep	lookup
+constraint:adverb-copula	一緒だよ	함께야	keep	lookup
+constraint:adverb-copula	あいつだって 迷惑だよ	저 녀석도 성가셔	keep	lookup
+constraint:adverb-copula	ああ、それだけでも、充分だ。	아, 그것만으로도, 충분하다.	keep	lookup
+constraint:adverb-copula	残念だな	유감이네	keep	lookup
+constraint:adverb-copula	当然だな	당연하네	keep	lookup
+constraint:adverb-copula	じゃあ　早速ね　君に名曲を。	lacks:조속	keep	lookup
+constraint:adverb-copula	この工房も、発掘作業用のギアを修理できるだけで十分だったのです。	lacks:10분	keep	lookup

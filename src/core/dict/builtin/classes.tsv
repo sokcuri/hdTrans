@@ -191,6 +191,7 @@
 //= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.container	Ends of the nouns of pockets, bags, boxes and other things one keeps things in (ポケット, 鞄, 袋, 箱, 引き出し): a 出す after one in から takes something out of it, 꺼내다 (ポケットから財布を出した).
+//= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
@@ -223,6 +224,7 @@
 //= numeral.lead	Numerals that start a number with its counter in one word (一匹, 二人, 数本, 1回).
 //= numeral.many	Numerals of numeral.lead that start a count of more than one (10 to 19 start the numbers of two or more digits that begin with 1), after which もう before a past verb is the count reached (もう二人来た 벌써 두 사람 왔다).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
+//= particle.after-space	Sentence-final particles that a single space may set apart from the predicate they end, before a mark or the end of the line (そうだ ね……, いい ね――): that space parts no words.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
@@ -293,7 +295,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
-//= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 食べさせられる 먹다); a person before に is who made it happen.
+//= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
 //= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
@@ -383,6 +385,10 @@
 //= wrap.bound-start	Starts of the nouns and particles that need the predicate before them (こと, ところ, はず, だけ), which a line broken after a predicate starts with (行かない / ことにした); not そう, みたい or らしい, which a line of its own says.
 //= wrap.open-word	Words that a line read alone takes for a greeting but that start a sentence as a time with は when a line broken after them goes on (今日は / 特別な日だ 오늘은 특별한 날이다).
 //= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
+//= wrap.open-ending	Endings of a verb or adjective that join it to what follows, which a line broken in the middle of a sentence ends with: connective particles (多いんですが / 差してない人も, 分かるので / 聞いてください) and a predicate made a noun before a case or binding particle (横断するのが / 最後の夢なんだ, 守るために / 今できることは).
+//= wrap.quote-start	Quotative particles that a line broken before them starts with, closing what the line before said (なってくる / と思います, 遅い / って言いたい).
+//= wrap.negative-start	Starts of the negative of the copula, which a line broken after じゃ or では starts with (いいんじゃ / ないかな, 嫌では / ないですけど).
+//= wrap.sentence-start	Interjections the dictionary has as nouns, which start a sentence of their own: a bare verb or adjective at the end of the line before one ends its sentence (分かった / はい).
 
 adverb.degree-feeling	本当に
 adverb.degree-feeling	ほんとに
@@ -658,6 +664,7 @@ contraction.te-iku	ってやっ
 contraction.te-iku	ってやろ
 contraction.te-iku	ってほし
 contraction.te-iku	ってちょうだい
+contraction.te-iku	っておくれ
 contraction.te-iku	ってね
 contraction.te-iku	ってる
 contraction.te-iku	けよ
@@ -2827,6 +2834,34 @@ noun.inside-medium	時代
 noun.inside-medium	歴史
 noun.inside-medium	物語
 
+noun.bracket-note	続
+noun.bracket-note	仮
+noun.bracket-note	旧
+noun.bracket-note	株
+noun.bracket-note	有
+noun.bracket-note	財
+noun.bracket-note	社
+noun.bracket-note	注
+noun.bracket-note	笑
+noun.bracket-note	泣
+noun.bracket-note	汗
+noun.bracket-note	怒
+noun.bracket-note	爆
+noun.bracket-note	謎
+noun.bracket-note	祝
+noun.bracket-note	済
+noun.bracket-note	完
+noun.bracket-note	再
+noun.bracket-note	改
+noun.bracket-note	訂
+noun.bracket-note	略
+noun.bracket-note	例
+noun.bracket-note	図
+noun.bracket-note	表
+noun.bracket-note	号
+noun.bracket-note	副
+noun.bracket-note	特
+noun.bracket-note	独
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同
@@ -2837,6 +2872,8 @@ noun.label-role	3人
 noun.label-role	３人
 noun.label-role	声
 noun.label-role	電話
+noun.label-role	通信
+noun.label-role	無線
 noun.label-role	アナウンス
 noun.label-role	ナレーション
 noun.label-role	司会
@@ -3415,6 +3452,23 @@ particle.after-name	で
 particle.after-name	よ
 particle.after-name	ね
 particle.after-name	さ
+
+particle.after-space	ね
+particle.after-space	よ
+particle.after-space	な
+particle.after-space	わ
+particle.after-space	ぞ
+particle.after-space	ぜ
+particle.after-space	さ
+particle.after-space	か
+particle.after-space	の
+particle.after-space	ねえ
+particle.after-space	なあ
+particle.after-space	よね
+particle.after-space	かな
+particle.after-space	かしら
+particle.after-space	わよ
+particle.after-space	のよ
 
 particle.before-predicate	の
 particle.before-predicate	は
@@ -4566,7 +4620,6 @@ verb.causative-passive	謝らされ
 verb.causative-passive	闘わされ
 verb.causative-passive	飲まされ
 verb.causative-passive	働かされ
-verb.causative-passive	食べさせられ
 verb.condition	疲れ
 verb.condition	つかれ
 verb.condition	困
@@ -6976,3 +7029,59 @@ wrap.te-word	下さい
 wrap.te-word	くれ
 wrap.te-word	ちょうだい
 wrap.te-word	頂戴
+wrap.open-ending	が
+wrap.open-ending	けど
+wrap.open-ending	けれど
+wrap.open-ending	けども
+wrap.open-ending	けれども
+wrap.open-ending	のに
+wrap.open-ending	ので
+wrap.open-ending	から
+wrap.open-ending	のは
+wrap.open-ending	のが
+wrap.open-ending	のを
+wrap.open-ending	のも
+wrap.open-ending	ことは
+wrap.open-ending	ことが
+wrap.open-ending	ことを
+wrap.open-ending	ことも
+wrap.open-ending	事は
+wrap.open-ending	事が
+wrap.open-ending	事を
+wrap.open-ending	ために
+wrap.open-ending	為に
+wrap.open-ending	ように
+wrap.quote-start	と
+wrap.quote-start	って
+wrap.quote-start	とか
+wrap.negative-start	ない
+wrap.negative-start	なく
+wrap.negative-start	なかっ
+wrap.negative-start	なけれ
+wrap.negative-start	ありま
+wrap.negative-start	ござい
+wrap.negative-start	ねえ
+wrap.negative-start	ねぇ
+wrap.negative-start	ねー
+wrap.sentence-start	はい
+wrap.sentence-start	え
+wrap.sentence-start	えっ
+wrap.sentence-start	ええ
+wrap.sentence-start	うん
+wrap.sentence-start	ああ
+wrap.sentence-start	あ
+wrap.sentence-start	あっ
+wrap.sentence-start	ん
+wrap.sentence-start	うーん
+wrap.sentence-start	いや
+wrap.sentence-start	いえ
+wrap.sentence-start	おい
+wrap.sentence-start	ほら
+wrap.sentence-start	まあ
+wrap.sentence-start	さあ
+wrap.sentence-start	ねえ
+wrap.sentence-start	へえ
+wrap.sentence-start	うわ
+wrap.sentence-start	よし
+wrap.sentence-start	じゃあ
+wrap.sentence-start	ところが

@@ -1,0 +1,40 @@
+# 규칙: SPC-19, SPC-4
+rule	input	expected	kind	layer
+sound:fused-adjective	考えがある	생각이 있다	keep	sound
+sound:fused-adjective	答えろ！	대답해라!	keep	sound
+sound:fused-adjective	支えになる	버팀목이 된다	keep	sound
+sound:fused-adjective	手前の部屋	앞의 방	keep	sound
+sound:fused-adjective	お前！	너!	keep	sound
+sound:fused-adjective	そしたら　おめえ誰だ？	그랬더니 당신 누구야?	keep	sound
+sound:fused-adjective	てめえ	너	keep	sound
+sound:fused-adjective	甘えるな	응석부리지 마	keep	sound
+sound:fused-adjective	彼には甘えさせてもらってるよ｡	그는 응석부리게 해 주고 있어.	keep	sound
+sound:fused-adjective	最近は夜が冷え込むから	최근에는 밤이 차가워지니까	keep	sound
+sound:fused-adjective	カレー 作ってくれたんでしょ？	카레 만들어 준 거지?	keep	sound
+sound:fused-adjective	ゴリラがフリー？	고릴라가 프리?	keep	sound
+sound:fused-adjective	ヘイ サミー	헤이 사미	keep	sound
+sound:fused-adjective	よかったねえ お兄ちゃん	잘됐네~ 오빠	keep	sound
+sound:fused-adjective	いいねえ	좋구나	keep	sound
+sound:fused-adjective	お姉ちゃん	언니	keep	sound
+sound:fused-adjective	沙漠を歩いて回るのは厳しい！	사막을 걷고 다니는 것은 어려워!	keep	sound
+sound:fused-adjective	手紙が届いてぇ！	편지가 도착해!	keep	sound
+sound:fused-adjective	当たってぇ！	맞아!	keep	sound
+sound:fused-adjective	歌おうぜぇ～。	노래하자구~.	keep	sound
+sound:fused-adjective	探照灯で照らしちゃうぜぇ～	탐조등으로 비추어버린다~	keep	sound
+sound:fused-adjective	金くれー	금줘~	keep	sound
+sound:fused-adjective	勘弁してくれぇ！	봐줘!	keep	sound
+sound:fused-adjective	すげぇ	대박	keep	sound
+sound:fused-adjective	やべえ	큰일 났다	keep	sound
+sound:fused-adjective	うるせえ	시끄러	keep	sound
+sound:fused-adjective	わりい	미안	keep	sound
+sound:fused-adjective	しれー、見なかったー？	사령관님, 보지 않았어~?	keep	sound
+sound:fused-adjective	おえ～！	우웩~!	keep	sound
+sound:fused-adjective	やだ、まじー？	싫어, 진심~?	keep	sound
+sound:fused-adjective	君ならねぇ、できるよ。	너라면, 할 수 있어.	keep	sound
+sound:fused-adjective	いくで、準備はええか	lacks:빠르	keep	sound
+sound:fused-adjective	何にでも効くのにねえ。	lacks:않	keep	sound
+sound:fused-adjective	分かってきたねー！！	lacks:더러	keep	sound
+sound:fused-adjective	いっぱいの女の子うっとうしい？	lacks:얇	keep	sound
+sound:fused-adjective	あれぇ？	lacks:거칠	keep	sound
+sound:fused-adjective	きれー	lacks:싫	keep	sound
+sound:fused-adjective	一流のレーサーになるのが夢だった	lacks:느린	keep	sound

@@ -119,7 +119,7 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
   const [dry] = JSON.parse(npm(['pack', '--dry-run', '--json'], { cwd: packageDir }));
   const dictionary = JSON.parse(await readFile(join(packageDir, 'dist/dictionary.json'), 'utf8'));
   const expected = [
-    'package.json', 'README.md', 'LICENSE', 'THIRD-PARTY-NOTICES.txt',
+    'package.json', 'README.md', 'LICENSE', 'NOTICE', 'THIRD-PARTY-NOTICES.txt',
     'dist/index.js', 'dist/index.d.ts', 'dist/cli.js', 'dist/cli.d.ts',
     'dist/runtime.js', 'dist/runtime.d.ts', 'dist/dictionary.json',
     'dist/hdtrans_engine.js', 'dist/hdtrans_engine.wasm', 'dist/dicts.hdsnap', 'dist/dicts.txt',
@@ -159,7 +159,7 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     assert.equal(manifest.main, './dist/index.js');
     assert.equal(manifest.types, './dist/index.d.ts');
     assert.match(await readFile(join(installed, 'dist/cli.js'), 'utf8'), /^#!\/usr\/bin\/env node\n/);
-    for (const file of ['LICENSE', 'THIRD-PARTY-NOTICES.txt']) {
+    for (const file of ['LICENSE', 'NOTICE', 'THIRD-PARTY-NOTICES.txt']) {
       assert.deepEqual(await readFile(join(installed, file)), await readFile(join(root, file)));
     }
     assert.deepEqual(JSON.parse(await readFile(join(installed, 'dist/dictionary.json'), 'utf8')), dictionary);

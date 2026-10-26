@@ -288,6 +288,8 @@
 書いてるっての	쓰고 있다니까	end	prio=-1
 高いっての	높다니까	end	prio=-1
 書くかっての	쓰겠냐고	end	prio=-1
+// てるなよ: a rebuke of what the listener is doing (泣かしてんじゃねえよ, spoken forms)
+書いてるなよ	쓰지 마	end	prio=-1
 // だっけか, もんでね
 学生だっけか	학생이었던가	end	prio=-1
 書くんだっけか	쓰는 거였던가	end	prio=-1

@@ -1,0 +1,57 @@
+# 규칙: SPC-4, MNG-3
+rule	input	expected	kind	layer
+normalize:prohibition-janai	来るんじゃねぇ！	오지 마!	fix	normalize
+normalize:prohibition-janai	調子に乗るんじゃねえ！	우쭐대지 마!	fix	normalize
+normalize:prohibition-janai	さあ　泣くんじゃないよ	자 울지 마	fix	normalize
+normalize:prohibition-janai	忙しいんだ！ジャマすんじゃねえ！	바빠! 방해하지 마!	fix	normalize
+normalize:prohibition-janai	見てんじゃねぇよ！	보지 마!	fix	builtin-ending
+normalize:prohibition-janai	無視してんじゃねえよ！	무시하지 마!	fix	builtin-ending
+normalize:prohibition-janai	田中くんじゃない！	타나카 군이 아니야!	fix	normalize
+normalize:prohibition-janai	そういう一般論を言ってるんじゃない	그런 일반론을 말하는 것이 아니다	keep	normalize
+normalize:prohibition-janai	怒ってんじゃねえよ、心配してんだ	화내고 있는 것이 아니야, 걱정하는 거야	keep	normalize
+normalize:prohibition-janai	うんうんじゃねえよ	응응이 아니야	keep	normalize
+normalize:prohibition-janai	来るんじゃねえか	오지 않겠는가	keep	normalize
+normalize:toku	新しいマネージャー呼んどいたから	새로운 매니저 불러 두었으니까	fix	normalize
+normalize:toku	請求書　送っときましたから	청구서 보내 두었으니까요	fix	normalize
+normalize:toku	エレベーターぐらい造っときゃよかったのに	엘리베이터 정도 만들어 두었더라면 좋았을텐데	fix	normalize
+normalize:toku	住所は　あとでメール送っとくから	주소는 나중에 메일 보내 두니까	fix	normalize
+normalize:toku	こうしといたら	이렇게 해 두면	fix	normalize
+normalize:toku	ずっといたでしょ？	계속 있었잖아?	keep	normalize
+normalize:toku	彼といた	그와 있었다	keep	normalize
+normalize:toku	言っとくけど一晩だけよ	말해두는데 하룻밤만	fix	normalize
+normalize:toku	書いとくけど	적어 두는데	keep	normalize
+normalize:toku	言っときますけど	말해 두는데요	keep	normalize
+dict:jisjk:265455	これも持っといで	이것도 가지고 와	fix	ending-defaults
+dict:jisjk:265455	見ておいで	보고 와	fix	ending-defaults
+sound:contracted-n	止まんないんだよ	멈추지 않아	fix	sound
+sound:contracted-n	練習になんない	연습이 되지 않는다	fix	sound
+sound:contracted-n	シャレになんないからね	장난이 아니니까	fix	sound
+sound:contracted-n	みんないい人なんだよ	모두 좋은 사람이야	keep	sound
+sound:contracted-n	知らんぞ	몰라	keep	sound
+normalize:tsutte	おい　やめろっつったよな	이봐 그만두라고 했지	fix	normalize
+normalize:tsutte	来るっつってたな	온다고 했네	fix	normalize
+normalize:tsutte	金払えっつってんだろ	돈 지불하라는 거지	fix	normalize
+normalize:tsutte	なんつった？	뭐라고 말했어?	fix	normalize
+normalize:tsutte	なんつって。	농담이야.	fix	phrases
+normalize:tsutte	いっつも勉強してる	언제나 공부하고 있다	keep	normalize
+normalize:aru-n	何か文句あんの？	뭔가 불만 있는 거야?	fix	normalize
+normalize:aru-n	大切なもんがあんだろ！	중요한 것이 있는 거지!	fix	normalize
+normalize:aru-n	聞いたことあんのか？	들은 적 있는 건가?	fix	normalize
+normalize:aru-n	夢が　あんだよ！	꿈이 있어!	fix	normalize
+normalize:aru-n	あんだけ言ったのに	그만큼 말했는데	keep	normalize
+normalize:aru-n	あんたのせいだ	너의 탓이다	keep	normalize
+normalize:rya	言われてみりゃ　そうだ。	듣고 보니 그래.	fix	normalize
+normalize:rya	金がありゃ　何でも買える。	돈이 있으면 뭐든 살 수 있다.	fix	normalize
+normalize:rya	おりゃ　行くぞ	lacks:있으면	keep	normalize
+normalize:emphatic	長くてキッツい坂	길고 힘든 비탈	fix	normalize
+normalize:emphatic	年寄りばっかしで	노인만으로	fix	normalize
+normalize:clipped-adjective	冷たっ　怖い。	차갑다 무섭다.	fix	normalize
+sound:contracted-iku	連れてっておくれよ	데려가 다오	fix	sound
+normalize:toku	主砲も魚雷も持っときたいかな	has:가지고	fix	normalize
+normalize:toku	その上、諦めも悪いときた。	lacks:두었다	keep	normalize
+normalize:prohibition-janai	今頃　ノコノコ出てくんじゃねえ！	lacks:출인	keep	normalize
+cx:oide-come:10	「出ておいで」	「나와」	fix	rewrites
+cx:oide-come:10	お金が足りないようだね。出直しておいで。	has:다시 와.	fix	rewrites
+cx:oide-come:10	戻っておいで	돌아와	fix	rewrites
+cx:oide-come:10	適当に　遊んどいで	적당히 놀고 와	keep	rewrites
+cx:oide-come:10	見ておいで	보고 와	keep	rewrites

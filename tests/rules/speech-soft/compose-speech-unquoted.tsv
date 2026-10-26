@@ -1,4 +1,4 @@
-# 규칙: SPC-18
+# 규칙: SPC-18, SPC-19
 rule	input	expected	kind	layer
 compose:speech-unquoted	それは怖い	그건 무서워	fix	compose
 compose:speech-unquoted	大学生くらいかと思ってた	대학생 정도라고 생각했어	fix	compose
@@ -27,3 +27,11 @@ compose:speech-unquoted	もう帰る	이제 돌아간다	keep	compose
 compose:speech-unquoted	花は咲く	꽃은 핀다	keep	compose
 compose:speech-unquoted	攻撃魔術：相手を攻撃する	공격 마술：상대를 공격한다	keep	compose
 compose:speech-unquoted	連絡があるみたいだぞ。	연락이 있는 것 같다.	keep	compose
+compose:speech-unquoted	痛え。	아파.	fix	compose
+compose:speech-unquoted	おもしれえ。	재미있어.	fix	compose
+compose:speech-unquoted	うぜえ。	시끄러워.	fix	compose
+compose:speech-unquoted	分かんねえんだ。	몰라.	fix	compose
+compose:speech-unquoted	冷てえ。	차가워.	fix	compose
+compose:speech-unquoted	知らねえ。	몰라.	fix	compose
+compose:speech-unquoted	考えがある。	생각이 있다.	keep	compose
+compose:speech-unquoted	答えは明日だ。	대답은 내일이다.	keep	compose

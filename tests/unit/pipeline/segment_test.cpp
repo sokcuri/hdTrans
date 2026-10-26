@@ -50,6 +50,33 @@ HD_TEST(pipeline_segment_spaces) {
     for (const auto& c : cases) HD_CHECK_EQ(Cut(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_segment_caption_labels) {
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        // A speaker label or an aside in round brackets that opens the line, after caption marks only.
+        {"（島田）では皆さん", "（島田）|では皆さん"},
+        {"(男性) はい", "(男性)|はい"},
+        {"⚟（明）さい～！", "⚟（明）|さい～！"},
+        {"[無線](武)了解", "[無線](武)|了解"},
+        {"(会場内 笑い)(青木)では", "(会場内 笑い)(青木)|では"},
+        {"（大柳　えつ子）できましたよ", "（大柳|えつ子）|できましたよ"},
+        // Not a label: alone, quoted with と or って, with a sentence mark, or not at the start.
+        {"（桂）", "（桂）"},
+        {"（まさか）と思った", "（まさか）と思った"},
+        {"(上田)っていうのは", "(上田)っていうのは"},
+        {"（どうしよう……）彼女は思った", "（どうしよう……）彼女は思った"},
+        {"漢字(かんじ)を書く", "漢字(かんじ)を書く"},
+        {"(1)では次に進みます。", "(1)では次に進みます。"},
+        {"（２）でも同じだ", "（２）でも同じだ"},
+        {"（人形）は、きれい", "（人形）は、きれい"},
+        {"(W)は西を示す", "(W)は西を示す"},
+        {"(上田)はい", "(上田)|はい"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Cut(c.in), std::string(c.want));
+}
+
 HD_TEST(pipeline_segment_clauses) {
     // At least 40 Japanese characters before the 、 and 10 characters after it before
     // the sentence ends.

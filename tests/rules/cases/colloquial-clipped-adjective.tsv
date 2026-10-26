@@ -1,4 +1,22 @@
+# 규칙: SPC-19
 rule	input	expected	kind	layer
-sound:clipped-adjective	「キャリア浅っ」	「캐리어 얕다」	fix	sound
+sound:clipped-adjective	「キャリア浅っ」	「캐리어 얕아」	fix	sound
 sound:clipped-adjective	嫌っ、そんな目で見ないで下さい！	싫어, 그런 눈으로 보지 말아 주세요!	fix	sound
 sound:clipped-adjective	「蒼っ！」	「창!」	keep	sound
+sound:clipped-adjective	えっ　何これ？　くさっ！	어 이게 뭐야? 냄새가 나!	fix	sound
+sound:clipped-adjective	「はやっ！？」	「빨라!?」	fix	sound
+sound:clipped-adjective	かみ　みじかっ！	머리카락 짧아!	fix	sound
+sound:clipped-adjective	ひゃっ　つめたっ！	꺅 차가워!	fix	sound
+sound:clipped-adjective	「……たかっ！」	「……높아!」	fix	sound
+sound:clipped-adjective	≪うるさっ！≫	≪시끄러워! ≫	fix	sound
+sound:clipped-adjective	「ふうっ、おいしっ！」	「후우, 맛있어!」	fix	sound
+sound:clipped-adjective	やすっ！	싸!	fix	sound
+sound:clipped-adjective	「こわっ！」	「무서워!」	fix	sound
+sound:clipped-adjective	くそっ、大人しく、しろっ	젠장, 얌전히, 해라	keep	sound
+sound:clipped-adjective	そうなのよっ！	그래!	keep	sound
+sound:clipped-adjective	絶対伝わるっ	절대 전해진다	keep	sound
+sound:clipped-adjective	私もきたっ！	나도 왔다!	keep	sound
+sound:clipped-adjective	おおっ！	오옷!	keep	sound
+sound:clipped-adjective	あらっ	어머	keep	sound
+sound:clipped-adjective	おもっ！	도!	keep	sound
+sound:clipped-adjective	罵倒最高っ！	lacks:높	keep	sound

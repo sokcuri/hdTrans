@@ -110,16 +110,24 @@ private:
         size_t kanji = i;
         while (kanji > start && text::IsKanji(s_[kanji - 1])) kanji--;
         if (kanji > start && Class(s_[kanji - 1]) == kClassKatakana) return false;
-        // The text on each side reaches over single spaces, so that a word of text spaced out
-        // character by character is seen whole (通 知 表).
-        constexpr size_t kBefore = 10, kAfter = 10;
+        return !Joins(i, SpaceWord::Any);
+    }
+
+    // SpaceJoins on the Japanese text before the space at i and after it. The text on each side
+    // reaches over single spaces, so that a word of text spaced out character by character is seen
+    // whole (通 知 表), and further for the names and titles (錆びついたマシンガンで 今を撃ち抜こう);
+    // for a phrase the text before starts after the last space.
+    bool Joins(size_t i, SpaceWord word) const {
+        const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
+        const size_t reach = word == SpaceWord::Any ? 10 : 24;
         size_t from = i;
-        while (from > 0 && i - from < kBefore &&
-               (Class(s_[from - 1]) != 0 || (blank(s_[from - 1]) && from > 1 && Class(s_[from - 2]) != 0))) {
+        while (from > 0 && i - from < reach &&
+               (Class(s_[from - 1]) != 0 ||
+                (word != SpaceWord::Phrase && blank(s_[from - 1]) && from > 1 && Class(s_[from - 2]) != 0))) {
             from--;
         }
         size_t to = i + 1;
-        while (to < s_.size() && to < i + 1 + kAfter &&
+        while (to < s_.size() && to < i + 1 + reach &&
                (Class(s_[to]) != 0 || (blank(s_[to]) && to + 1 < s_.size() && Class(s_[to + 1]) != 0))) {
             to++;
         }
@@ -130,7 +138,62 @@ private:
         for (size_t k = i + 1; k < to; k++) {
             if (!blank(s_[k])) text::AppendRune(after, s_[k]);
         }
-        return !(*joins_)(before, after);
+        return (*joins_)(before, after, word);
+    }
+
+    // Whether the space at i, left out of the Japanese token being built, parts two words
+    // (TokenizeSpans): a single space between two Japanese characters, unless the pieces on its
+    // sides are spaced out character by character or a name.
+    bool Parts(size_t i) const {
+        const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
+        if (joins_ == nullptr || BufSize() == 0 || Class(Before(i)) == 0 || Class(At(i + 1)) == 0) return false;
+        size_t start = i, end = i + 1;
+        while (start > 0 && Class(s_[start - 1]) != 0) start--;
+        while (end < s_.size() && Class(s_[end]) != 0) end++;
+        const bool kanji = text::IsKanji(Before(i)) && text::IsKanji(At(i + 1));
+        if (kanji) {
+            // The two exceptions of KeptSpace.
+            const bool alone = (start == 0 || !blank(s_[start - 1])) && (end == s_.size() || !blank(s_[end]));
+            if (alone && i - start == 1 && end - i - 1 <= 2 && text::IsKanji(At(end - 1))) return false;
+            size_t k = i;
+            while (k > start && text::IsKanji(s_[k - 1])) k--;
+            if (k > start && Class(s_[k - 1]) == kClassKatakana) return false;
+        }
+        // A piece that starts with a small kana or a long mark goes on with the word before it
+        // (消す っていう).
+        if (OneOf(At(i + 1), U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮーヽヾゝゞ")) return false;
+        // A piece said again after the space is a copy, which the word stage reads on its own
+        // (やめて やめて).
+        if (i - start == end - i - 1 && std::equal(s_.begin() + start, s_.begin() + i, s_.begin() + i + 1)) return false;
+        // The last piece before a mark or the end may end the one before (そうだ ね……).
+        if (end == s_.size() || !blank(s_[end])) {
+            std::string before, after;
+            for (size_t k = start; k < i; k++) text::AppendRune(before, s_[k]);
+            for (size_t k = i + 1; k < end; k++) text::AppendRune(after, s_[k]);
+            if ((*joins_)(before, after, SpaceWord::Ending)) return false;
+        }
+        // Pieces of one character in a row up to the space and on after it.
+        size_t run = 0;
+        for (size_t from = start, to = i; to - from == 1;) {
+            run++;
+            if (from < 2 || !blank(s_[from - 1]) || Class(s_[from - 2]) == 0) break;
+            to = from - 1;
+            for (from = to; from > 0 && Class(s_[from - 1]) != 0;) from--;
+        }
+        for (size_t from = i + 1, to = end; run > 0 && to - from == 1;) {
+            run++;
+            if (to + 1 >= s_.size() || !blank(s_[to]) || Class(s_[to + 1]) == 0) break;
+            from = to + 1;
+            for (to = from; to < s_.size() && Class(s_[to]) != 0;) to++;
+        }
+        return run < (kanji ? 2u : 3u) && !Joins(i, SpaceWord::Name) && !Joins(i, SpaceWord::Phrase);
+    }
+
+    // Ends the Japanese token being built at a space that parts two words; the next one goes on
+    // after it.
+    void PartAtSpace() {
+        Emit(cur_);
+        afterSpace_ = true;
     }
 
     // Whether the letter at i after kana goes on with the Japanese token: a word of the dictionary
@@ -148,7 +211,7 @@ private:
         for (const size_t end = to + kAfter; to < s_.size() && to < end && Class(s_[to]) != 0; to++) {
             text::AppendRune(after, s_[to]);
         }
-        return (*joins_)(before, after);
+        return (*joins_)(before, after, SpaceWord::Any);
     }
 
     size_t BufSize() const { return out_.text.size() - bufStart_; }
@@ -156,6 +219,9 @@ private:
     void Emit(int type) {
         Token t;
         t.type = type;
+        t.afterSpace = afterSpace_ && type == kTypeJapanese && !out_.tokens.empty() &&
+                       out_.tokens.back().type == kTypeJapanese && BufSize() > 0;
+        if (BufSize() > 0) afterSpace_ = false;
         t.raw = {static_cast<uint32_t>(bufStart_), static_cast<uint32_t>(BufSize())};
         if (BufSize() > 0) {
             t.sourceBegin = srcBegin_;
@@ -224,6 +290,7 @@ private:
             Add(c);
         } else if (cur_ == kTypeJapanese && type == kTypeAsciiSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A space between Japanese text is dropped.
+            if (Parts(p_)) PartAtSpace();
         } else if (cur_ == kTypeJapanese && type == kTypeAlpha && KeptLetter(p_)) {
             Add(c);
             p_++;  // prev_ stays the class of the kana, for the letters after it
@@ -418,6 +485,7 @@ private:
             return;
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A full-width space between Japanese text is dropped.
+            if (Parts(p_)) PartAtSpace();
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && KeptSpace(p_)) {
             // A kept space between two words (KeptSpace) is a space, not a break of the sentence.
             if (BufSize() > 0) Emit(cur_);
@@ -477,6 +545,7 @@ private:
     bool inTag_ = false;   // after '<' + letter, '!' or '/', until '>'
     bool inCS_ = false;    // after "&#CS" starts, until its 'S'
     int prev_ = 0;         // Class of the previous character (0 after ASCII)
+    bool afterSpace_ = false;  // the token being built starts after a space that parts two words
     // Where the mask characters (○ ＊) that end the Japanese token being built start in its
     // text, and in the input; kNoMask when it does not end in one.
     static constexpr size_t kNoMask = static_cast<size_t>(-1);

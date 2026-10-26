@@ -1,0 +1,24 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	若え！	젊어!	fix	sound
+sound:fused-adjective	痛えよ！ もう放してくれよ！	아파! 이제 놓아 줘!	fix	sound
+sound:fused-adjective	１分　１，０００円？　高え。	1분 1,000엔? 비싸다.	fix	sound
+sound:fused-adjective	他人は　冷てえよ　怖えよ～。	타인은 차가워 무서워~.	fix	sound
+sound:fused-adjective	多いほうが面白えからよ	많은 편이 재미있거든	fix	sound
+sound:fused-adjective	汚え手で殴りやがって…。	더러운 손으로 때려 가지고….	fix	sound
+sound:fused-adjective	金も無えか	돈도 없는가	fix	sound
+sound:fused-adjective	おう 早えな	어 빠르네	fix	sound
+sound:fused-adjective	強えな　あいつら。	강하네 저 녀석들.	fix	sound
+sound:fused-adjective	遅ぇよ｡	늦어.	fix	sound
+sound:fused-adjective	これには 深ぇ訳が｡	이것에는 깊은 것이.	fix	sound
+sound:fused-adjective	薄汚ぇ善人面しやがって	추레한 선인면 하다니	fix	sound
+sound:fused-adjective	青臭え学問なんか身に付けたって	미숙한 학문은 걸쳤대	fix	sound
+sound:fused-adjective	速ぇ！	빨라!	fix	sound
+sound:fused-adjective	太ぇ野郎ですよ	굵은 놈이에요	fix	sound
+sound:fused-adjective	盗人の罪は重えぞ。	도둑의 죄는 무거워.	fix	sound
+sound:fused-adjective	清え心？	맑은 마음?	fix	sound
+sound:fused-adjective	臭えんだよ あいつら	구려 저 녀석들	fix	sound
+sound:fused-adjective	まだ若えのに	아직 젊은데	fix	sound
+sound:fused-adjective	ダンプは朝 早えんだよ	덤프는 아침 빨라	fix	sound
+sound:fused-adjective	ハードル高えな	허들 높네	fix	sound
+sound:fused-adjective	大っ嫌えな侍に借り作りたくねえ。	has:싫은 사무라이	fix	sound
