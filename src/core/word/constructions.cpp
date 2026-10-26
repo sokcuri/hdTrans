@@ -340,6 +340,15 @@ constexpr NamedFeature kFeatures[] = {
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
+    {"after-space", [](Flusher& f, const Item* it) {
+         return it->start == 0 && it->tokenIndex >= 0 &&
+                f.w.tokens[static_cast<std::size_t>(it->tokenIndex)].afterSpace;
+     }},
+    {"filler", [](Flusher&, const Item* it) {
+         return (it->Code(it->selected).starts_with("32") ||
+                 (it->detail->cls == kDetailInfo &&
+                  dict::InClass(HDTRANS_CLASS("word.pause-filler"), it->group->surface)));
+     }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).

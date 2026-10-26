@@ -30,15 +30,16 @@ namespace hdTrans::tokenizer {
 // 表が) and three or more otherwise (こ の 展 開); the two-piece names and the kanji after
 // katakana above (林 涛, ジモ得 週); a piece said again (やめて やめて) or starting with a small
 // kana or a long mark (消す っていう); and the words joins finds across the space as
-// SpaceWord::Name (山田 太郎, 荒川アンダー ザ ブリッジ) or as SpaceWord::Phrase with the text
+// SpaceWord::Binding (山田 太郎, 荒川アンダー ザ ブリッジ) or as SpaceWord::Phrase with the text
 // before the space from its last space on (何だ あれ, ようこそ いらっしゃいました), and a last
 // piece that joins finds as SpaceWord::Ending (そうだ ね……).
 enum class SpaceWord {
     Any,     // a word that starts in the text before and goes on past it
-    Name,    // a name other than a place's, its part before the space two characters or more, or the
-             // whole text before when that is one kanji (泊 明日菜)
+    Binding, // a name other than a place's, or a predicate marked as a compound particle (gram Pj);
+             // two characters or more before the space, or a name starting with one kanji (泊 明日菜)
     Phrase,  // a word that starts at the start of the text before, two characters or more on each side
     Ending,  // after is the text after the space up to a mark or the end, which ends what is before
+    Filler,  // the whole piece before is an interjection, which must stay a separate word
 };
 using SpaceJoins = std::function<bool(std::string_view before, std::string_view after, SpaceWord word)>;
 void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins = nullptr);

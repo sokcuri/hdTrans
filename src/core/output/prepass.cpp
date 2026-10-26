@@ -1203,6 +1203,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         return Result(std::move(t), false);
     }
     const ResolvedItem& next = items[nextIndex];
+    if (item.spaceAfter && (nextKind != '2' || Contains(nextTags, "Z0"))) return Result(std::move(t), true);
     if (const int a = tokens[item.tokenIndex].type, b = tokens[next.tokenIndex].type;
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
         return Result(std::move(t), false);

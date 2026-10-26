@@ -15,3 +15,5 @@ sound:spaced-word	「あなたのためにこんなに頑張ってきたのに�
 sound:spaced-word	「そ れ じ ゃ あ ど う や っ て 生 き て い く っ て 言 う の ？」	has:살아간다고 하는	keep	sound
 sound:spaced-word	「 ま さ か 、 通 知 表 の こ と じ ゃ な い わ よ ね ？ 」	「설마, 성적표가 아니야 ?」	keep	sound
 sound:spaced-word	↑そ れ だ！	↑그거야!	keep	sound
+lookup:space-spelling	「 あ れ が 嘘 だ っ た ん じ ゃ な い わ よ ね ！ ？」	「저게 거짓말이었던 게 아니야 ! ?」	fix	lookup
+lookup:space-spelling	「それなのにそこまでする？　あ な た 一 体 な に を し た の ？ 」	「그런데도 거기까지 해? 당신 도대체 뭘 했어 ?」	fix	lookup
