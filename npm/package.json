@@ -1,6 +1,6 @@
 {
   "name": "hdtrans",
-  "version": "0.2.0",
+  "version": "0.5.9",
   "description": "Japanese to Korean translation with a bundled WebAssembly engine and dictionary",
   "type": "module",
   "main": "./dist/index.js",
