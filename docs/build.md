@@ -35,7 +35,7 @@ hdTrans는 CMake 프리셋(`CMakePresets.json`)으로 빌드합니다. 외부 �
 | C API 라이브러리 | `hdTransEngine.dll` | `libhdTransEngine.so` | `libhdTransEngine.dylib` |
 | 이지트랜스 호환 DLL | `J2KEngine.dll`(배포본은 x86만) | - | - |
 | CLI | `hdtrans.exe` | `hdtrans` | `hdtrans` |
-| 단문, 문서 번역 GUI | `hdTransGUI.exe` | - | - |
+| 단문, 문서 번역과 사전 GUI | `hdTransGUI.exe` | - | - |
 
 ## macOS, Linux
 

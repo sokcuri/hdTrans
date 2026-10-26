@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace hdTrans::gui {
 
@@ -15,5 +16,7 @@ bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEnco
 bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8);
 // <stem>_번역.txt in folder, or next to the input when folder is empty.
 std::filesystem::path TranslatedPath(const std::filesystem::path& input, const std::filesystem::path& folder);
+// Appends the paths not yet in list; on Windows paths compare without case.
+void AppendFiles(std::vector<std::filesystem::path>& list, const std::vector<std::filesystem::path>& added);
 
 }  // namespace hdTrans::gui
