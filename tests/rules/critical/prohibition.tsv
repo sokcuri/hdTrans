@@ -80,14 +80,14 @@ ending:te-mo-ii	泣いてもいいんだよ	has:울어도	keep	ending-defaults
 ending:te-wa-ikenai	見てはいけない	has:봐선 안	keep	local-ending
 ending:te-wa-ikenai	入ってはだめだ	has:들어가서는 안	keep	local-ending
 ending:naide	行かないで	has:가지 마	keep	local-ending
-ending:naide	触らないでください	has:만지지 말아	keep	local-ending
+cx:prohibit-request:10	触らないでください	has:만지지 마세요	fix	rewrites
 cx:prohibit-na:10	うわァッ！なめるなァ！	has:얕보지 마	fix	rewrites
 cx:prohibit-na:10	「逃げるな田中！！」	has:도망치지 마	fix	rewrites
 cx:prohibit-na:10	≪追うなケンタ！≫	has:쫓지 마	fix	rewrites
 cx:prohibit-na:10	うん、結構いけるなこれ。	lacks:지 마	keep	rewrites
 cx:prohibit-na:10	「いいか。わかるな？」	lacks:지 마	keep	rewrites
-cx:prohibit-particle:10	「勘違いしないでよね！」	has:하지 말아	fix	rewrites
-cx:prohibit-particle:20	「心配しないでね」	has:하지 말아	fix	rewrites
+cx:prohibit-particle:10	「勘違いしないでよね！」	has:하지 마	fix	rewrites
+cx:prohibit-particle:20	「心配しないでね」	has:하지 마	fix	rewrites
 normalize:prohibition-janai	来るんじゃねぇ！	has:오지 마	fix	normalize
 normalize:prohibition-janai	調子に乗るんじゃねえ！	has:지 마	fix	normalize
 normalize:prohibition-janai	泣かしてんじゃねえよ！	has:울리지 마	fix	builtin-ending

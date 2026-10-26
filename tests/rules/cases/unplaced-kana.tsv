@@ -13,7 +13,7 @@ pre-select:unplaced-particle	鼻がぽぺるまで	lacks:코가 까지	keep	pre-
 pre-select:unplaced-particle	助けてもらおうってのにちょっと違うくね？	lacks:와 위	keep	pre-select
 pre-select:unplaced-particle	ガラスがわれた	유리가 깨졌다	keep	pre-select
 compose:sound-before-comma	「む、無理です」	「무, 무리입니다」	fix	compose
-compose:sound-before-comma	「う、撃たないでください」	「쏘, 쏘지 말아 주세요」	fix	compose
+compose:sound-before-comma	「う、撃たないでください」	「쏘, 쏘지 마세요」	fix	compose
 compose:sound-before-comma	「ち、千里……」	has:치, 	fix	compose
 compose:sound-before-comma	む、道理だな。	음, 당연하네.	fix	compose
 compose:sound-before-comma	「そ、アプリオのコックさんに教えてもらったの」	has:「그래, 	fix	compose
