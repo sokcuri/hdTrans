@@ -132,14 +132,15 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
             return false;
         }
     }
-    const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
+    const text::Rune last = pos > 0 ? LastRune(s.substr(0, pos)) : text::Rune{};
+    const char32_t b = last.cp;
     // うん is the answer (うんうんじゃねえよ), not a verb in う.
     if (m.group[1] == "う" && !IsKanjiClass(b) && (!IsHiraganaRune(b) || In(b, U"うん"))) return false;
     // す after two kanji, katakana or a particle is する said す (信用すんじゃねえ, 気にすんじゃねえ); after
     // one kanji it ends a verb (出すんじゃない); after other kana it may be either (落とす, 扱いする).
     const bool suru = m.group[1] == "す" && pos > 0 &&
                       (IsKatakanaRune(b) || In(b, U"にをとも") ||
-                       (IsKanjiClass(b) && pos > 3 && IsKanjiClass(LastRune(s.substr(0, pos - 3)).cp)));
+                       (IsKanjiClass(b) && pos > last.size && IsKanjiClass(LastRune(s.substr(0, pos - last.size)).cp)));
     if (m.group[1] == "す" && !suru && !IsKanjiClass(b)) return false;
     if (!Lit(s, p, "んじゃ")) return false;
     if (suru) m.group[1] = "する";
