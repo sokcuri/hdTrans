@@ -20,6 +20,7 @@ hdTrans 엔진은 게임, 후킹 도구, 웹 페이지처럼 다른 프로그램
 
 ## 대상
 
+- 번역할 입력 텍스트
 - 번역 엔진과 그 C API, `J2K_*` 내보내기 함수
 - CLI, Windows 번역 창, WebAssembly 빌드와 npm 패키지
 - 사전, 사용자 사전, 설정 파일, 스냅샷(`.hdsnap`)을 읽는 코드
@@ -32,7 +33,7 @@ hdTrans 엔진은 게임, 후킹 도구, 웹 페이지처럼 다른 프로그램
 
 ## 처리
 
-7일 안에 접수 여부를 답합니다. 확인된 문제는 수정 릴리스와 함께 GitHub 보안 권고로 공개하고, 원하시면 신고자를 권고에 표기합니다.
+14일 안에 접수 여부를 답합니다. 확인된 문제는 수정 릴리스와 함께 GitHub 보안 권고로 공개하고, 원하시면 신고자를 권고에 표기합니다.
 
 ## 담당
 
@@ -40,4 +41,4 @@ hdTrans 엔진은 게임, 후킹 도구, 웹 페이지처럼 다른 프로그램
 
 ## English
 
-Report vulnerabilities privately through [GitHub private vulnerability reporting](https://github.com/sokcuri/hdTrans/security/advisories/new), not public issues. Only the latest release receives fixes. Reports are acknowledged within 7 days, and confirmed issues are published as GitHub security advisories with the fix release, crediting the reporter on request. Security reports are handled by the maintainer, sokcuri ([@sokcuri](https://github.com/sokcuri)).
+Report vulnerabilities privately through [GitHub private vulnerability reporting](https://github.com/sokcuri/hdTrans/security/advisories/new), not public issues. Only the latest release receives fixes. Reports are acknowledged within 14 days, and confirmed issues are published as GitHub security advisories with the fix release, crediting the reporter on request. Security reports are handled by the maintainer, sokcuri ([@sokcuri](https://github.com/sokcuri)).
