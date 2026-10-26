@@ -314,6 +314,10 @@
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
 //= verb.store	Verbs and verbal nouns of storing, putting away or hiding a thing (収納, しまう, 隠す, 収める): a 出す after one in its sentence takes the thing out again, 꺼내다 (収納し、出してみる 수납했다가 꺼내 본다).
 //= verb.stay	Stems of the verbs of staying, waiting and watching, whose て form with a final な tells the listener to keep doing it, ていな (待ってな 기다리고 있어, 見てな 보고 있어), not a reason (思ってな).
+//= ko-verb.oide-return	Verbs of returning whose おいで command comes back to the speaker.
+//= verb.oide-accompany	Stems of the k-row verb of accompanying someone in an おいで command.
+//= ko-verb.oide-stay	Verbs of waiting, silence and posture whose おいで command maintains the state, not an errand.
+//= ko.oide-copula	Korean copula forms that close the respectful progressive おいで.
 //= verb.errand	Stems of the verbs of an errand one goes to do and comes back from, and the verbal nouns of upkeep before する, whose てまいる is going to do it and coming back (お茶を淹れてまいります 차를 끓여 오겠습니다, 整備してまいります 정비해 오겠습니다); other てまいる go on doing it.
 //= verb.means	Ends of the verbs whose て form with an object gives the means or manner (道具を使って 도구를 써서); they keep 어.
 //= verb.means-de	Ends of the verbs of filling, covering, deceiving and ending that take what they do it with in で (夢で満たす 꿈으로 채우다).
@@ -4760,6 +4764,27 @@ verb.stay	引っ込
 verb.stay	ひっこ
 verb.stay	控え
 verb.stay	じっと
+ko-verb.oide-return	돌아가다
+ko-verb.oide-return	되돌아가다
+verb.oide-accompany	付
+verb.oide-accompany	つ
+ko-verb.oide-stay	기다리다
+ko-verb.oide-stay	입다물다
+ko-verb.oide-stay	입을 다물다
+ko-verb.oide-stay	가만히 있다
+ko-verb.oide-stay	앉다
+ko-verb.oide-stay	서다
+ko-verb.oide-stay	숨다
+ko.oide-copula	(이)다
+ko.oide-copula	입니다
+ko.oide-copula	(이었)였다
+ko.oide-copula	(이었)였습니다
+ko.oide-copula	(이었)였으니까
+ko.oide-copula	(이었)였으니까요
+ko.oide-copula	(이었)였어요
+ko.oide-copula	이지만
+ko.oide-copula	(이)지요
+ko.oide-copula	(이)군요
 verb.errand	淹れ
 verb.errand	いれ
 verb.errand	煎れ

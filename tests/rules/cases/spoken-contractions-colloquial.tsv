@@ -55,3 +55,33 @@ cx:oide-come:10	お金が足りないようだね。出直しておいで。	has
 cx:oide-come:10	戻っておいで	돌아와	fix	rewrites
 cx:oide-come:10	適当に　遊んどいで	적당히 놀고 와	keep	rewrites
 cx:oide-come:10	見ておいで	보고 와	keep	rewrites
+cx:oide-come:20	帰っておいで	돌아와	fix	rewrites
+cx:oide-come:30	キミたちも付いておいで！	너희도 따라와!	fix	rewrites
+cx:oide-come:30	君たちも付いておいで。	자네들도 따라와.	fix	rewrites
+cx:oide-come:50	お前は黙っといで	너는 입을 다물고 있어	fix	rewrites
+cx:oide-come:5	ご著作には記しておいででしたよね。	has:적고 계셨어요	fix	rewrites
+cx:oide-come:5	おかみさんを捜しておいでです	has:찾고 계십니다	fix	rewrites
+cx:oide-come:5	称賛しておいででした｡	칭찬하고 계셨습니다.	fix	rewrites
+cx:oide-come:5	姉上も それは それは 嘆いておいででした	has:한탄하고 계셨습니다	fix	rewrites
+cx:oide-come:5	熱をあげておいででしたから	has:계셨으니까요	fix	rewrites
+cx:oide-come:3	おいしいラーメン食べておいで～。	맛있는 라면 먹고 와~.	keep	rewrites
+cx:oide-come:20	お金が足りないようだね。出直しておいで。	has:다시 와.	keep	rewrites
+cx:oide-come:30	今度はサイフを持っておいで。	이번에는 지갑을 가지고 와.	keep	rewrites
+cx:oide-come:35	今は遊んでおいでってやさしいのよ。	has:놀고 와	keep	rewrites
+cx:oide-come:40	先　荷物　置いておいでや。	has:두고 와	keep	rewrites
+cx:oide-come:50	まとめておいでよと言ったんです	has:정리하고 와	keep	rewrites
+cx:oide-come:20	行っといでよ	가고 와	keep	rewrites
+cx:oide-come:3	出ておいで！	나와!	keep	rewrites
+cx:oide-come:5	おいで。	와.	keep	rewrites
+cx:oide-come:30	ここにおいでください。	여기에 와 주세요.	keep	rewrites
+cx:oide-come:40	さっきおいでになったんすよー。	has:오신 거예요	keep	rewrites
+cx:oide-come:50	ここで待っておいで。	여기서 기다리고 있어.	fix	rewrites
+cx:oide-come:40	そばに座っておいで。	곁에 앉아 있어.	fix	rewrites
+cx:oide-come:35	だまっておいで。	가만히 있어.	fix	rewrites
+cx:oide-come:3	先生は座っておいでだ。	선생님은 앉아 계신다.	fix	rewrites
+cx:oide-come:3	先生は座っておいででした。	선생님은 앉아 계셨습니다.	fix	rewrites
+cx:oide-come:5	先生は本を読んでおいでだ。	선생님은 책을 읽고 계신다.	fix	rewrites
+cx:oide-come:30	杖をついておいで。	지팡이를 짚고 와.	keep	rewrites
+cx:oide-come:35	だましておいで。	속이고 와.	keep	rewrites
+cx:oide-come:50	ここで待たせておいで。	여기서 기다리게 하고 와.	keep	rewrites
+cx:oide-come:20	「帰っておいで」だと彼は言った。	「돌아와」라고 그는 말했다.	fix	rewrites
