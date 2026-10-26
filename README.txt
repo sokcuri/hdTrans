@@ -45,5 +45,5 @@ Ehnd 사전은 기본으로 꺼져 있으며 필요할 때 설정에서 켭니�
 
 다운로드와 안내: https://github.com/sokcuri/hdTrans
 오류, 오역 신고: https://github.com/sokcuri/hdTrans/issues/new/choose
-라이선스: AGPL-3.0-or-later (LICENSE)
+라이선스: MPL-2.0 (LICENSE), Copyright (c) Sokcuri (소쿠릿, https://github.com/sokcuri)
 외부 라이브러리 라이선스: THIRD-PARTY-NOTICES.txt
