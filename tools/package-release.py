@@ -20,7 +20,7 @@ def copy_file(source, destination):
 
 
 def common_files(source, destination):
-    for name in ("README.txt", "LICENSE"):
+    for name in ("README.txt", "LICENSE", "NOTICE"):
         copy_file(source / name, destination / name)
     notices = (source / "THIRD-PARTY-NOTICES.txt").read_text(encoding="utf-8")
     for name in (

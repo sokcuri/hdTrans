@@ -40,7 +40,7 @@ class PackageReleaseTest(unittest.TestCase):
         self.write(self.source / "dicts/ignored.txt", b"not dictionary data\n")
         self.write(self.source / "npm/package.json", b'{"version":"0.1.0"}\n')
         for name in (
-            "README.txt", "LICENSE", "THIRD-PARTY-NOTICES.txt",
+            "README.txt", "LICENSE", "NOTICE", "THIRD-PARTY-NOTICES.txt",
             "third_party/pcre2/LICENCE.md", "third_party/pcre2/deps/sljit/LICENSE",
             "third_party/libyaml/License",
         ):
@@ -95,7 +95,7 @@ class PackageReleaseTest(unittest.TestCase):
         )
         self.assertEqual((self.output / "SHA256SUMS.txt").read_text(), sums)
         shared_snapshot = expected_snapshot
-        common = {"README.txt", "LICENSE", "THIRD-PARTY-NOTICES.txt"}
+        common = {"README.txt", "LICENSE", "NOTICE", "THIRD-PARTY-NOTICES.txt"}
         for name in sorted(names):
             with self.subTest(archive=name):
                 path = self.output / name

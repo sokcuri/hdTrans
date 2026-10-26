@@ -93,7 +93,7 @@ try {
   } finally {
     translator.close();
   }
-  for (const name of ['LICENSE', 'THIRD-PARTY-NOTICES.txt']) {
+  for (const name of ['LICENSE', 'NOTICE', 'THIRD-PARTY-NOTICES.txt']) {
     await copyFile(join(root, name), join(packageDir, name));
   }
   await rm(join(packageDir, 'dist'), { recursive: true, force: true });
