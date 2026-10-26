@@ -385,6 +385,10 @@
 //= wrap.bound-start	Starts of the nouns and particles that need the predicate before them (こと, ところ, はず, だけ), which a line broken after a predicate starts with (行かない / ことにした); not そう, みたい or らしい, which a line of its own says.
 //= wrap.open-word	Words that a line read alone takes for a greeting but that start a sentence as a time with は when a line broken after them goes on (今日は / 特別な日だ 오늘은 특별한 날이다).
 //= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
+//= wrap.open-ending	Endings of a verb or adjective that join it to what follows, which a line broken in the middle of a sentence ends with: connective particles (多いんですが / 差してない人も, 分かるので / 聞いてください) and a predicate made a noun before a case or binding particle (横断するのが / 最後の夢なんだ, 守るために / 今できることは).
+//= wrap.quote-start	Quotative particles that a line broken before them starts with, closing what the line before said (なってくる / と思います, 遅い / って言いたい).
+//= wrap.negative-start	Starts of the negative of the copula, which a line broken after じゃ or では starts with (いいんじゃ / ないかな, 嫌では / ないですけど).
+//= wrap.sentence-start	Interjections the dictionary has as nouns, which start a sentence of their own: a bare verb or adjective at the end of the line before one ends its sentence (分かった / はい).
 
 adverb.degree-feeling	本当に
 adverb.degree-feeling	ほんとに
@@ -7025,3 +7029,59 @@ wrap.te-word	下さい
 wrap.te-word	くれ
 wrap.te-word	ちょうだい
 wrap.te-word	頂戴
+wrap.open-ending	が
+wrap.open-ending	けど
+wrap.open-ending	けれど
+wrap.open-ending	けども
+wrap.open-ending	けれども
+wrap.open-ending	のに
+wrap.open-ending	ので
+wrap.open-ending	から
+wrap.open-ending	のは
+wrap.open-ending	のが
+wrap.open-ending	のを
+wrap.open-ending	のも
+wrap.open-ending	ことは
+wrap.open-ending	ことが
+wrap.open-ending	ことを
+wrap.open-ending	ことも
+wrap.open-ending	事は
+wrap.open-ending	事が
+wrap.open-ending	事を
+wrap.open-ending	ために
+wrap.open-ending	為に
+wrap.open-ending	ように
+wrap.quote-start	と
+wrap.quote-start	って
+wrap.quote-start	とか
+wrap.negative-start	ない
+wrap.negative-start	なく
+wrap.negative-start	なかっ
+wrap.negative-start	なけれ
+wrap.negative-start	ありま
+wrap.negative-start	ござい
+wrap.negative-start	ねえ
+wrap.negative-start	ねぇ
+wrap.negative-start	ねー
+wrap.sentence-start	はい
+wrap.sentence-start	え
+wrap.sentence-start	えっ
+wrap.sentence-start	ええ
+wrap.sentence-start	うん
+wrap.sentence-start	ああ
+wrap.sentence-start	あ
+wrap.sentence-start	あっ
+wrap.sentence-start	ん
+wrap.sentence-start	うーん
+wrap.sentence-start	いや
+wrap.sentence-start	いえ
+wrap.sentence-start	おい
+wrap.sentence-start	ほら
+wrap.sentence-start	まあ
+wrap.sentence-start	さあ
+wrap.sentence-start	ねえ
+wrap.sentence-start	へえ
+wrap.sentence-start	うわ
+wrap.sentence-start	よし
+wrap.sentence-start	じゃあ
+wrap.sentence-start	ところが

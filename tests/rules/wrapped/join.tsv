@@ -33,7 +33,7 @@ wrapped:join	それに１０年も\n親子でいたのだ。	게다가 10년이�
 wrapped:join	いいですね\n行きます	좋네요\n갑니다	keep	driver
 wrapped:join	待って\n何してるの	기다려\n뭐해	keep	driver
 wrapped:join	少しだけ、休ませてください\nうんうん、いいもんだ。	약간, 쉬게 해 주세요\n응응, 좋은 걸이다.	keep	driver
-wrapped:join	彼女が作った\nケーキを食べた	그녀가 만들었다\n케이크를 먹었다	keep	driver
+wrapped:join	彼女が作った\nケーキを食べた	그녀가 만든\n케이크를 먹었다	fix	driver
 wrapped:join	明日までに行かなければ\n\nならない。	내일까지 가야 한다\n\n안된다.	keep	driver
 wrapped:join	目次は\n１．プロローグ	목차는\n1. 프롤로그	keep	driver
 wrapped:join	つまり、\n結論：異次元こわい	즉,\n결론：이차원 무섭다	keep	driver

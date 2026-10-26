@@ -5,6 +5,7 @@
 #include "core/dict/classes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/terminal.h"
 
 namespace hdTrans::internal {
 
@@ -117,6 +118,7 @@ bool OpenEnd(const WrapWord& w, const WrapEdges& edges) {
     for (const std::string_view s : {"ば", "たら", "だら", "ながら", "つつ", "ずに", "と", "とは"}) {
         if (e.ends_with(s)) return true;
     }
+    if (dict::EndsWithMember(HDTRANS_CLASS("wrap.open-ending"), e) > 0) return true;
     if (w.detail == output::DetailClass::Dakeiyo && (e == "な" || e == "で")) return true;
     if (w.detail == output::DetailClass::Yougo && w.kind == 10 && text::RuneCount(e) == 1) return true;
     // The Korean the engine chose is a connective ending (읽고, 즐거워서, 하면서, 먹어도).
@@ -147,6 +149,52 @@ bool BoundStart(const WrapWord& w, bool te, const WrapWord& n) {
         if (rest.empty() || In(FirstRune(rest), U"にがをはもでのだかとなじ")) return true;
     }
     return false;
+}
+
+// Whether w, the last word of a line read alone, is a bare verb or adjective that the line made
+// terminal (与える 준다, 作った 만들었다, 高い 높다), the same in Japanese as the attributive before a
+// noun (与える印象); not a polite form, an explanation, hearsay, a guess or a command (行くんだ,
+// 行くそうだ, 行くだろう, 行こう, 見なさい).
+bool BareEnd(const WrapWord& w) {
+    const char cls = w.detail == output::DetailClass::Yougo   ? '4'
+                     : w.detail == output::DetailClass::Keiyo ? '7'
+                                                              : '\0';
+    const std::string_view e = w.ending;
+    if (cls == '\0' || Polite(e) || !KoreanEnding(w.koEnding).ends_with("다")) return false;
+    if (e.ends_with("だ") && e != "んだ" && e != "いだ") return false;
+    if (e.ends_with("さい")) return false;
+    if (e.size() > std::string_view("う").size() && e.ends_with("う") &&
+        In(LastRune(e.substr(0, e.size() - std::string_view("う").size())), U"おこごそぞとどのほぼぽもよょろ")) {
+        return false;
+    }
+    const std::string full = w.surface + w.ending;
+    for (const word::TerminalForm& f : word::kTerminalForms) {
+        if (f.cls != cls) continue;
+        for (int i = 0; i < f.lastCount; i++) {
+            if (std::string_view(full).ends_with(f.last[i])) return true;
+        }
+    }
+    return false;
+}
+
+// Whether n, the first word of a line, is a noun that a bare attributive at the end of the line
+// before can describe: not a pronoun, which mostly opens a sentence of its own (おいしい / これ何？),
+// an interjection the dictionary has as a noun (はい, えっ) or a sound that the sound stage wrote in
+// Korean.
+bool Head(const WrapWord& n) {
+    if (n.detail != output::DetailClass::None || !n.code.starts_with('1') || n.code.starts_with("12")) return false;
+    const char32_t r = FirstRune(n.surface);
+    if (r >= U'가' && r <= U'힣') return false;
+    return !dict::InClass(HDTRANS_CLASS("wrap.sentence-start"), n.surface);
+}
+
+// Whether next starts with a quotative particle, not one before a comma (と、その時), that closes
+// what the line before said (なってくる / と思います).
+bool QuoteStart(std::string_view next, const WrapWord& n) {
+    if (!n.code.starts_with('2') || !dict::InClass(HDTRANS_CLASS("wrap.quote-start"), n.surface)) return false;
+    if (!next.starts_with(n.surface)) return false;
+    const char32_t after = FirstRune(next.substr(n.surface.size()));
+    return !In(after, kCommas) && !In(after, U"…‥。｡！？!?");
 }
 
 WrapWord WordOf(const output::ResolvedItem& it) {
@@ -208,6 +256,15 @@ std::string WithoutArrow(std::string_view line) {
     return std::string(line.substr(0, start)) + std::string(line.substr(end));
 }
 
+std::string AloneText(std::string_view line) {
+    const std::string_view arrow = ArrowOf(line);
+    if (arrow.empty()) return std::string(line);
+    const std::size_t end = ContentEnd(line);
+    const std::size_t start = ContentEnd(line.substr(0, end - arrow.size()));
+    const std::string_view goesOn = text::IsLetter(LastRune(line.substr(0, start))) ? kGoesOn : std::string_view();
+    return std::string(line.substr(0, start)) + std::string(goesOn) + std::string(line.substr(end));
+}
+
 std::string WithArrow(std::string_view translated, std::string_view arrow) {
     const std::size_t end = ContentEnd(translated);
     std::string out(translated.substr(0, end));
@@ -228,9 +285,18 @@ bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next
     const char32_t end = LastRune(line);
     if (In(end, kCommas)) return true;
     if (!text::IsLetter(end) || !edges.last) return false;
+    // The negative of the copula broken before its ない (いいんじゃ / ないかな).
+    if ((line.ends_with("じゃ") || line.ends_with("では")) &&
+        dict::StartsWithMember(HDTRANS_CLASS("wrap.negative-start"), next) > 0) {
+        return true;
+    }
     if (OpenEnd(*edges.last, edges)) return true;
+    if (!nextEdges.first) return false;
+    if (QuoteStart(next, *nextEdges.first)) return true;
     const bool te = line.ends_with("て") || line.ends_with("で");
-    return nextEdges.first && BoundStart(*edges.last, te, *nextEdges.first);
+    if (BoundStart(*edges.last, te, *nextEdges.first)) return true;
+    // A line of the predicate alone is mostly said on its own (分かった / じゃあ行こう).
+    return edges.words > 1 && BareEnd(*edges.last) && Head(*nextEdges.first);
 }
 
 std::vector<std::string> SplitAtBreaks(std::string_view translated, std::size_t count) {

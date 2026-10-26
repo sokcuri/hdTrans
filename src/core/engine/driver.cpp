@@ -917,7 +917,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                                           Scratch& s, Generated& generated, const StageObserver& observer,
                                           const TranslationOptions& options, std::size_t context) {
     const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
-    // The lines are translated without the arrows they end with, which their translations keep.
+    // The lines are translated as AloneText; their translations keep the arrows they end with.
     std::vector<std::string> bare(lines.size()), alone(lines.size());
     std::vector<std::string_view> arrows(lines.size());
     std::vector<WrapEdges> edges(lines.size());
@@ -933,7 +933,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
-        alone[i] = TranslateBody(snap, doc, bare[i], used[i], s, generated, edgeObserver, options,
+        alone[i] = TranslateBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
@@ -977,9 +977,22 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
-                TranslateBody(snap, doc, bare[k], used[k], s, generated, observer, options, narratedOf(lines[k]));
+                TranslateBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
+                              narratedOf(lines[k]));
             }
-            out[k] = arrows[k].empty() ? alone[k] : WithArrow(alone[k], arrows[k]);
+            if (arrows[k].empty()) {
+                out[k] = alone[k];
+            } else if (ArrowOf(alone[k]) == kGoesOn) {
+                out[k] = WithArrow(WithoutArrow(alone[k]), arrows[k]);
+            } else if (AloneText(lines[k]) == bare[k]) {
+                out[k] = WithArrow(alone[k], arrows[k]);
+            } else {
+                // The stages did not keep kGoesOn at the end: the line without it.
+                out[k] = WithArrow(
+                    TranslateBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
+                    arrows[k]);
+                if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
+            }
             if (lines[k].ends_with('\r')) out[k] += '\r';
         }
         i = j + 1;
