@@ -424,6 +424,8 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     if (!snapshot_) return {};
     std::vector<std::string> lines;
     std::size_t contextLines = 0;
+    // One "\n" that ends the context ends its last line.
+    if (context.ends_with('\n')) context.remove_suffix(1);
     if (!context.empty()) {
         for (const std::string_view line : text::Lines(context)) lines.emplace_back(line);
         contextLines = lines.size();

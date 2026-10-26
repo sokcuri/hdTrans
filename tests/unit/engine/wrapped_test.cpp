@@ -116,6 +116,48 @@ HD_TEST(engine_wrapped_context) {
     HD_CHECK_EQ(session.Translate("高い", "「高い」"), "높아");
     HD_CHECK_EQ(session.Translate("「高い」\n高い"), "「높아」\n높아");
     HD_CHECK_EQ(session.Translate("高い。」", "「高い。"), "높아.」");
+    // An arrow stays at the end of its line, after one space, and the line after it goes on (高い高い,
+    // said twice, is a cry); a context line that ends in one is not returned.
+    session.SetSpeech(Speech::Strict);
+    HD_CHECK_EQ(session.Translate("高い。"), "높다.");
+    HD_CHECK_EQ(session.Translate("高い→\n高い。"), "높아 →\n높아.");
+    HD_CHECK_EQ(session.Translate("高い。", "高い➡"), "높아.");
+    HD_CHECK_EQ(session.Translate("高い。", "高い"), "높다.");
     std::error_code ec;
     std::filesystem::remove_all(folder, ec);
+}
+
+HD_TEST(engine_wrapped_captions) {
+    using internal::GoesOn;
+    const WrapEdges verb = Edges({Verb("揚げ", "た", "5다", 6)});
+    // An arrow goes on whatever the grammar says, but not into a speaker mark or past a blank line.
+    HD_CHECK(GoesOn("カラっと揚げた→", verb, "超濃厚…", verb));
+    HD_CHECK(GoesOn("揚げた➡ ", verb, "超濃厚", verb));
+    HD_CHECK(GoesOn("揚げた￫", verb, "超濃厚", verb));
+    HD_CHECK(!GoesOn("揚げた→", verb, "", verb));
+    HD_CHECK(!GoesOn("揚げた→", verb, "》こちらです", verb));
+    HD_CHECK(!GoesOn("揚げた", verb, "超濃厚", verb));
+    HD_CHECK(!GoesOn("東京→大阪", verb, "超濃厚", verb));
+    const WrapEdges particle = Edges({Word("影響", "110"), Word("で", "221")});
+    for (const char* next : {"≫北九州市で", "記者≫北九州市で", "(依頼者)私の車が", "吉澤(俳優)そうです", "⚟待って",
+                             "＜いろんな食感", "⟨そんな中⟩", "｢１枚だけ｣"}) {
+        HD_CHECK(!GoesOn("雨の影響で", particle, next, verb));
+    }
+    // A reading in brackets is no speaker label; a half-width comma goes on, a half-width full stop ends.
+    HD_CHECK(GoesOn("雨の影響で", particle, "今日(きょう)は", verb));
+    HD_CHECK(GoesOn("それで､", Edges({Word("それで", "331")}), "会った", verb));
+    HD_CHECK(!GoesOn("駅で｡", particle, "会った", verb));
+}
+
+HD_TEST(engine_wrapped_arrows) {
+    using internal::ArrowOf;
+    using internal::WithArrow;
+    using internal::WithoutArrow;
+    HD_CHECK_EQ(std::string(ArrowOf("揚げた→")), "→");
+    HD_CHECK_EQ(std::string(ArrowOf("揚げた➡ \r")), "➡");
+    HD_CHECK(ArrowOf("東京→大阪").empty());
+    HD_CHECK_EQ(WithoutArrow("揚げた →\r"), "揚げた\r");
+    HD_CHECK_EQ(WithoutArrow("揚げた"), "揚げた");
+    HD_CHECK_EQ(WithArrow("튀긴", "→"), "튀긴 →");
+    HD_CHECK_EQ(WithArrow("튀긴  ", "￫"), "튀긴 ￫  ");
 }

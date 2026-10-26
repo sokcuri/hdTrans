@@ -30,15 +30,28 @@ struct WrapEdges {
     bool predicate = false;
 };
 
+// The arrows a caption ends with when its sentence goes on in the next caption: ➡, ￫, → and ⇒.
+inline constexpr std::string_view kArrows[] = {"➡", "￫", "→", "⇒"};
+
+// The arrow line ends with, white space aside; empty when it ends in none.
+std::string_view ArrowOf(std::string_view line);
+
+// line without the arrow it ends with and the white space before the arrow.
+std::string WithoutArrow(std::string_view line);
+
+// translated with arrow written after its last character other than white space, after one space.
+std::string WithArrow(std::string_view translated, std::string_view arrow);
+
 // The edges of a word chain resolved for line, added to edges (the chains of a line come in order).
 void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edges);
 
-// Whether the sentence that line ends with cannot end there and goes on in next: line ends in a
-// comma, a case particle, an attributive, a conditional or connective form, an adverb with no
-// predicate before it (もしよかったら一緒に), or a て form before an auxiliary or a predicate before
-// a word that needs one (こと, はず) at the start of next. A blank line, a line that ends in a mark
-// or a bracket, a line that holds kBreakMark, and a next line that starts an item of its own (a
-// bracket, a list or heading mark, a speaker label) never go on.
+// Whether the sentence that line ends with cannot end there and goes on in next: line ends in an
+// arrow (ArrowOf), a comma, a case particle, an attributive, a conditional or connective form, an
+// adverb with no predicate before it (もしよかったら一緒に), or a て form before an auxiliary or a
+// predicate before a word that needs one (こと, はず) at the start of next. edges are those of line
+// without its arrow. A blank line, a line that ends in another mark or a bracket, a line that holds
+// kBreakMark, and a next line that starts an item of its own (a bracket, a list or heading mark, a
+// speaker, turn or voice mark, a speaker label) never go on.
 bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next, const WrapEdges& nextEdges);
 
 // The span piece (U+E010) put between joined lines before the chunks are cut, and the control

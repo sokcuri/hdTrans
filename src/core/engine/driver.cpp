@@ -793,7 +793,7 @@ void WatchEdges(void* context, int, int, const word::Chain& chain) {
 }
 
 // The most lines one sentence is joined from.
-constexpr std::size_t kMaxJoined = 6;
+constexpr std::size_t kMaxJoined = 12;
 
 // The text of a line without its "\r" and the blanks around it, and those blanks.
 struct LineParts {
@@ -840,11 +840,15 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                                           Scratch& s, Generated& generated, const StageObserver& observer,
                                           const TranslationOptions& options, std::size_t context) {
     const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
-    std::vector<std::string> alone(lines.size());
+    // The lines are translated without the arrows they end with, which their translations keep.
+    std::vector<std::string> bare(lines.size()), alone(lines.size());
+    std::vector<std::string_view> arrows(lines.size());
     std::vector<WrapEdges> edges(lines.size());
     std::vector<QuoteCarry> used(lines.size());
     QuoteCarry carry;
     for (std::size_t i = 0; i < lines.size(); i++) {
+        arrows[i] = ArrowOf(lines[i]);
+        bare[i] = WithoutArrow(lines[i]);
         const LineQuotes quotes = QuotesOf(lines[i], carry);
         used[i] = closed[i] ? quotes.start : QuoteCarry{};
         carry = quotes.end;
@@ -852,7 +856,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
-        alone[i] = TranslateBody(snap, doc, lines[i], used[i], s, generated, edgeObserver, options,
+        alone[i] = TranslateBody(snap, doc, bare[i], used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
@@ -868,7 +872,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             std::vector<std::string> texts;
             bool narrated = false;
             for (std::size_t k = i; k <= j; k++) {
-                parts.push_back(PartsOf(lines[k]));
+                parts.push_back(PartsOf(bare[k]));
                 texts.emplace_back(k == i ? parts.back().lead : std::string_view());
                 texts.back() += parts.back().body;
                 joined += texts.back();
@@ -886,16 +890,19 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             if (k < context) continue;
             if (!pieces.empty()) {
                 const LineParts& p = parts[k - i];
-                out[k] = std::string(k == i ? std::string_view() : p.lead) + pieces[k - i] + std::string(p.trail);
+                std::string piece = pieces[k - i];
+                if (!arrows[k].empty()) piece = WithArrow(piece, arrows[k]);
+                out[k] = std::string(k == i ? std::string_view() : p.lead) + piece + std::string(p.trail);
                 if (p.cr) out[k] += '\r';
                 continue;
             }
-            out[k] = alone[k];
             if (Observes(observer)) {
-                // The stages of a line on its own, for the observer.
+                // The stages of the line on its own, for the observer; the translation stays the one made
+                // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
-                out[k] = TranslateBody(snap, doc, lines[k], used[k], s, generated, observer, options, narratedOf(lines[k]));
+                TranslateBody(snap, doc, bare[k], used[k], s, generated, observer, options, narratedOf(lines[k]));
             }
+            out[k] = arrows[k].empty() ? alone[k] : WithArrow(alone[k], arrows[k]);
             if (lines[k].ends_with('\r')) out[k] += '\r';
         }
         i = j + 1;
@@ -915,7 +922,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
             return line.size() > text::kMaxLineBytes;
         })) {
-        // The pieces of a long line are not joined as wrapped lines.
+        // A call with a long line is not read as wrapped lines.
         std::vector<std::string> bounded;
         std::vector<std::size_t> ends;
         for (const std::string& line : lines) {
