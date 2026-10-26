@@ -16,7 +16,7 @@ BEGIN
             VALUE "FileDescription", "hdTrans\0"
             VALUE "FileVersion", "@HDTRANS_VERSION_TEXT@\0"
             VALUE "InternalName", "@HDTRANS_RESOURCE_FILENAME@\0"
-            VALUE "LegalCopyright", "Copyright (c) 2026 sokcuri. MPL-2.0\0"
+            VALUE "LegalCopyright", "Copyright (c) Sokcuri (https://github.com/sokcuri). MPL-2.0\0"
             VALUE "OriginalFilename", "@HDTRANS_RESOURCE_FILENAME@\0"
             VALUE "ProductName", "hdTrans\0"
             VALUE "ProductVersion", "@HDTRANS_VERSION_TEXT@\0"
