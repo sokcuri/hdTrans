@@ -20,6 +20,7 @@ struct Config {
     bool misread = false;
     bool reference = false;
     Speech speech = Speech::Strict;
+    bool wrapped = false;
 };
 
 struct ConfigDiagnostic {

@@ -127,6 +127,7 @@ int hdTrans_Initialize(const char* dirs) {
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
     g_session->SetSpeech(settings.speech);
+    g_session->SetWrapped(settings.wrapped);
     g_dirs = requestedPaths;
     g_ehnd.reset();
     g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
@@ -150,6 +151,14 @@ int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn) {
     g_adminsDone.wait(lock, [] { return g_waitingAdmins == 0; });
     if (!g_session) return -1;
     return Copy(g_session->Translate(std::string_view(text, n)), out, outn);
+}
+
+int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n, char** out, size_t* outn) {
+    std::unique_lock<std::mutex> lock(g_mutex);
+    g_adminsDone.wait(lock, [] { return g_waitingAdmins == 0; });
+    if (!g_session) return -1;
+    const std::string_view lines = context ? std::string_view(context, cn) : std::string_view();
+    return Copy(g_session->Translate(std::string_view(text, n), lines), out, outn);
 }
 
 int hdTrans_Reset(void) {
@@ -196,6 +205,7 @@ int hdTrans_Reload(void) {
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
     g_session->SetSpeech(settings.speech);
+    g_session->SetWrapped(settings.wrapped);
     g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
     ++g_generation;
     return 0;

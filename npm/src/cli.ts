@@ -16,6 +16,8 @@ Translate Japanese to Korean. Without text, read UTF-8 stdin.
       --why             Write execution logs and WHY choice records to stderr
       --userdict PATH   Read one UTF-8 native user dictionary file
       --ehnd DIR        Read UTF-8 Ehnd .txt files from a directory
+      --wrapped         Input lines break mid-sentence (captions, hooked text); the line count is kept
+      --context PATH    Read UTF-8 lines before the input as context, not output
   -h, --help            Show help
   -v, --version         Load and show engine and dictionary versions
 `;
@@ -31,6 +33,8 @@ async function main() {
       why: { type: 'boolean' },
       userdict: { type: 'string', multiple: true },
       ehnd: { type: 'string' },
+      wrapped: { type: 'boolean' },
+      context: { type: 'string' },
       help: { type: 'boolean', short: 'h' },
       version: { type: 'boolean', short: 'v' },
     },
@@ -60,7 +64,7 @@ async function main() {
     }
   }
   const { HdTrans } = await import('./index.js');
-  const translator = await HdTrans.init({ ehnd });
+  const translator = await HdTrans.init({ ehnd, wrapped: values.wrapped ?? false });
   try {
     if (values.version) {
       process.stdout.write(`hdTrans v${translator.version.replace(/^v/, '')} (${translator.runtime}) / dict ${translator.dictionaryVersion}\n`);
@@ -76,14 +80,17 @@ async function main() {
       : file && file !== '-'
         ? await readFile(file, 'utf8')
         : await readStdin();
-    const result = values.json || values.why ? translator.translate(input, { json: true }) : undefined;
+    const context = values.context === undefined
+      ? []
+      : (await readFile(values.context, 'utf8')).replace(/\n$/, '').split('\n');
+    const result = values.json || values.why ? translator.translate(input, { json: true, context }) : undefined;
     if (values.why && result) {
       for (const message of result.logs) process.stderr.write(message);
       for (const choice of result.choices) process.stderr.write(`WHY\t${JSON.stringify(choice)}\n`);
     }
     const document = values.json && result
       ? `${JSON.stringify(result)}\n`
-      : result?.text ?? translator.translate(input);
+      : result?.text ?? translator.translate(input, { context });
     if (values.out && values.out !== '-') await writeFile(values.out, document, 'utf8');
     else process.stdout.write(document);
   } finally {

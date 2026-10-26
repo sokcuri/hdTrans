@@ -379,6 +379,10 @@
 //= word.clause-pronoun	Demonstrative pronouns that start a clause as its subject, topic or object (それが, これは): after one with が, は, も or を a bare attributive before a comma ends its clause (わからない、それが人生だ 모른다, 그것이 인생이다); one without that particle may be what the attributive describes (作ってあげた、あれ 만들어 준, 그것).
 //= word.mou-scold	Starts of the scolding words a sulky もう goes before, where it is 정말, not 이제 (もう、ばかぁ 정말, 바보).
 //= word.survival	Words of life, wounds, illness, escape and rescue before which 助かる in the same sentence is surviving, 살아나다 (命が助かった 목숨을 건졌다, 患者は助からない), not help or relief.
+//= wrap.open-particle	Case and binding particles after a word that a line broken in the middle of a sentence ends with, where the sentence goes on in the next line (明日、駅の前で / 友達に会った).
+//= wrap.bound-start	Starts of the nouns and particles that need the predicate before them (こと, ところ, はず, だけ), which a line broken after a predicate starts with (行かない / ことにした); not そう, みたい or らしい, which a line of its own says.
+//= wrap.open-word	Words that a line read alone takes for a greeting but that start a sentence as a time with は when a line broken after them goes on (今日は / 特別な日だ 오늘은 특별한 날이다).
+//= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
 
 adverb.degree-feeling	本当に
 adverb.degree-feeling	ほんとに
@@ -6915,3 +6919,60 @@ word.mou-scold	あほ
 word.mou-scold	アホ
 word.mou-scold	いじわる
 word.mou-scold	意地悪
+wrap.open-particle	が
+wrap.open-particle	を
+wrap.open-particle	に
+wrap.open-particle	で
+wrap.open-particle	と
+wrap.open-particle	へ
+wrap.open-particle	から
+wrap.open-particle	まで
+wrap.open-particle	より
+wrap.open-particle	は
+wrap.open-particle	も
+wrap.open-particle	には
+wrap.open-particle	では
+wrap.open-particle	とは
+wrap.open-particle	にも
+wrap.open-particle	でも
+wrap.open-particle	へと
+wrap.open-particle	からは
+wrap.open-particle	までは
+wrap.open-particle	までに
+wrap.open-particle	とも
+wrap.open-particle	へは
+wrap.open-particle	をも
+wrap.open-particle	よりも
+wrap.bound-start	こと
+wrap.bound-start	事
+wrap.bound-start	もの
+wrap.bound-start	物
+wrap.bound-start	ところ
+wrap.bound-start	所
+wrap.bound-start	とこ
+wrap.bound-start	わけ
+wrap.bound-start	訳
+wrap.bound-start	はず
+wrap.bound-start	筈
+wrap.bound-start	つもり
+wrap.bound-start	ため
+wrap.bound-start	為
+wrap.bound-start	まま
+wrap.bound-start	ほう
+wrap.bound-start	方
+wrap.bound-start	とき
+wrap.bound-start	時
+wrap.bound-start	ころ
+wrap.bound-start	頃
+wrap.bound-start	くらい
+wrap.bound-start	ぐらい
+wrap.bound-start	ほど
+wrap.bound-start	だけ
+wrap.bound-start	ばかり
+wrap.open-word	今日は
+wrap.open-word	今晩は
+wrap.te-word	ください
+wrap.te-word	下さい
+wrap.te-word	くれ
+wrap.te-word	ちょうだい
+wrap.te-word	頂戴

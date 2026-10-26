@@ -155,6 +155,9 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로
   이후 번역에, `translate(text, { speech })`로 그 호출에만 정하고, C++은 `Session::SetSpeech`, CLI는 `--speech`입니다.
   말투마다 무엇이 달라지는지는 [README](../README.md#말투-strict와-soft)에 있습니다.
+- **문장 중간에서 잘린 줄:** 설정 파일의 `wrapped: true`(CLI `--wrapped`, TypeScript `wrapped`): 입력이 문장 중간에서
+  잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계입니다. 앞 호출의 줄은 남지 않으므로 이어지는 문장의
+  앞부분은 문맥(C API `hdTrans_TranslateContext`, TypeScript `context`, CLI `--context`)으로 함께 넘깁니다.
 - **도구가 보낼 것:**
   - 한 줄씩 보냅니다. 여러 줄을 묶으면 위처럼 「」 밖 줄이 지문이 될 수 있습니다.
   - 화자 이름은 떼어 보냅니다. 붙여 보내면 이름이 문장의 일부로 번역되고, `アリス：それは違う`처럼 쌍점이 있는 줄은 `soft`에서도

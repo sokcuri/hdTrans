@@ -11,3 +11,4 @@ cg: true
 misread: false
 reference: false
 speech: strict  # 번역의 -다를 그대로. soft: 「」 안 대사의 딱딱한 -다를 해체로 부드럽게
+wrapped: false  # true: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.

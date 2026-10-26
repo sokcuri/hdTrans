@@ -1,0 +1,15 @@
+# 규칙: LAY-14
+rule	input	expected	kind	layer
+wrapped:caption	魔力量を増やすため\n寝るとき以外は➡\nエンチャントを維持しているし➡\n走り込みや模擬戦では\n限界まで 魔力を消費している｡	마력량을 늘리기 때문에\n잘 때 이외는 ➡\n인챈트를 유지하고 있고 ➡\n달리기 포함이나 모의전에서는\n한계까지 마력을 소비하고 있다.	keep	driver
+wrapped:caption	カマンベールチーズを→\n生ハムとバジルで包み→\nカラっと揚げた→\n超濃厚…⟩	카망베르를 →\n날 햄과 바질로 감싸 →\n바삭 튀긴 →\n초농후…⟩	fix	driver
+wrapped:caption	たとえ 俺に\n刀の才能がなくても➡\nこの技だけは\nものにしてみせるさ！》	비록 나에게\n칼의 재능이 없어도 ➡\n이 기술만은\n물건으로 해 보이고 말이야!》	keep	driver
+wrapped:caption	６００人以上が\nけがをしているということです。	600명 이상이\n상처를 입고 있다는 것입니다.	keep	driver
+wrapped:caption	≫週末には、台風として\n沖縄県などに接近し\n豪雨をもたらしました。	≫주말에는, 태풍으로서\n오키나와현 등에 접근해\n폭우를 가져왔습니다.	keep	driver
+wrapped:caption	特製 油みそをたっぷり塗り→\n大量のチーズをトッピングして\n焼き上げた→\n油みそピザが 丸ごと１枚⟩	특제유 된장을 듬뿍 발라 →\n대량의 치즈를 토핑해\n구운 →\n기름 된장 피자가 통째로 1장 ⟩	fix	driver
+wrapped:caption	規制線が張られたところも\nありました。	규제선이 쳐진 곳\n도 있었습니다.	fix	driver
+wrapped:caption	断続的に降り続く雨の影響で\n≫北九州市で午前１０時半ごろに	단속적으로 계속 내리는 비의 영향으로\n≫기타큐슈시에서 오전 10시 반경에	keep	driver
+wrapped:caption	可能性が増えると\n(依頼者)私の車が止まった時に	가능성이 늘어난다고\n(의뢰자) 내 차가 멈추었을 때	keep	driver
+wrapped:caption	（桂）\n結構 星ついてますね	(침나무)\n상당히 별 붙으네요	keep	driver
+wrapped:caption	さえちゃんの分だけでも\n(斉藤)｢１枚だけでもいいんで｣	사에짱의 몫만으로도\n(사이토) ｢1장만으로도 좋아서｣	keep	driver
+wrapped:caption	ここがですね￫\n》こちらです	여기가군요 ￫\n》이쪽입니다	keep	driver
+wrapped:caption	見た目が ゲｰムと違うんだが	외형이 게임과 다른데	keep	driver
