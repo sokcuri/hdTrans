@@ -42,3 +42,11 @@ dict:jisjk:345089	水上機母艦、秋津洲よ！	has:아키츠시마야	fix	l
 dict:jisjk:79960	伊良湖ちゃん大丈夫？	has:이라코	fix	lookup
 dict:jisjk:95696	艦隊が帰投した	lacks:던	fix	lookup
 dict:jisjk:95696	身を投じた	has:던	keep	lookup
+dict:w:28800	夜の催し事。	밤의 행사.	fix	lookup
+dict:w:28800	催し事を一緒に楽しんでいる。	행사를 함께 즐기고 있다.	fix	lookup
+dict:w:28801	鯉こくを食べた。	잉어 된장국을 먹었다.	fix	lookup
+dict:w:28800	不快感を催している。	불쾌감을 불러일으키고 있다.	keep	lookup
+dict:w:28800	どんな催しがあるんですか？	어떤 행사가 있습니까?	keep	lookup
+dict:w:28801	まな板の鯉じゃ	도마 위의 잉어야	keep	lookup
+dict:w:28801	鯉濃を食べた。	잉어 된장국을 먹었다.	keep	lookup
+dict:w:28801	屁をこく。	방귀를 뀐다.	keep	lookup
