@@ -313,7 +313,11 @@ int Chain::Insert(Item* item, bool overlapping) {
     Item* scan = head;
     for (; scan != nullptr; scan = scan->next) {
         if (scan->tokenIndex > item->tokenIndex) {
-            if (Item* p = scan->prev; p == nullptr || p->CrossEnd() < end) break;
+            // On the text path the items of the earlier tokens stay before it.
+            const bool text = item->w != nullptr && item->w->settings.text;
+            if (Item* p = scan->prev; p == nullptr || (text && p->tokenIndex < item->tokenIndex) || p->CrossEnd() < end) {
+                break;
+            }
         } else if (scan->tokenIndex == item->tokenIndex && scan->start + scan->length >= end) {
             break;
         }
