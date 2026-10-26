@@ -65,6 +65,10 @@ dict:w:28621	走りだけは得意だ。	달리기만은 자신있다.	keep	look
 dict:jisjk:4904	「うまかった。」	「맛있었다.」	fix	local
 dict:jisjk:4904	うまかった！	맛있었어!	fix	local
 dict:jisjk:4904	彼は歌がうまかった。	그는 노래가 능숙했다.	keep	local
+dict:jisjk:4904	うまい！	맛있어!	fix	local
+dict:jisjk:4904	「うまい」	「맛있다」	fix	local
+dict:jisjk:4904	彼は歌がうまい。	그는 노래가 능숙하다.	keep	local
+dict:jisjk:4904	うまいこと言うね	능숙한 말 하네	keep	local
 dict:jisjk:342448	じゃあなんで地中に……	has:왜 지중에	fix	local
 dict:jisjk:342448	「え！じゃあなんでこの大会に出ろなんて言ったの」	has:왜 이 대회에	fix	local
 dict:jisjk:342448	訳なんで、	것이니까,	keep	local
