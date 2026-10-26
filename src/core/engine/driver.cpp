@@ -237,6 +237,17 @@ bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std
     return false;
 }
 
+// The lookups of a FusedTest (pipeline::CasualQuotes, pipeline::SpokenLine).
+struct FusedLookup {
+    const pipeline::LineContext& ctx;
+    const dict::Snapshot& snap;
+};
+
+bool HoldsFusedAdjective(const void* context, std::string_view text) {
+    const auto& f = *static_cast<const FusedLookup*>(context);
+    return pipeline::internal::RewriteCasualAdjectives(text, f.ctx, f.snap) != text;
+}
+
 // Keys holding a run are looked for from up to this many runes before it (a long name).
 constexpr int kRunLookBackRunes = 32;
 
@@ -779,9 +790,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
         speech.casual = options.speech == Speech::Soft;
         const std::string collapsed = pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell});
-        casual = pipeline::CasualQuotes(collapsed, carry.depth);
+        const FusedLookup fusedLookup{ctx, snap};
+        const pipeline::FusedTest fused{HoldsFusedAdjective, &fusedLookup};
+        casual = pipeline::CasualQuotes(collapsed, carry.depth, fused);
         // Soft: a line of a document without 「」 that reads as speech (spec SPC-18).
-        if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth);
+        if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth, fused);
         if (!speech.casual) {
             // Strict: the quotes whose Japanese is casual speech, read before normalizing
             // (知らねえ, 言っとく).

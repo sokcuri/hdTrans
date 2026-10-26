@@ -1,0 +1,23 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	何が聞きてぇんだよ？	뭘 듣고 싶어?	fix	sound
+sound:fused-adjective	何が言いてえんだ	무엇을 말하고 싶다	fix	sound
+sound:fused-adjective	なんか ちょっと飲みてえな	왠지 조금 마시고 싶은데	fix	sound
+sound:fused-adjective	もろ Q が食いてぇ…	모로 Q를 먹고 싶어…	fix	sound
+sound:fused-adjective	行きてぇんだと	가고 싶다고	fix	sound
+sound:fused-adjective	江戸の蕎麦が食いてえ。	에도의 소바를 먹고 싶어.	fix	sound
+sound:fused-adjective	今夜あたりが山と言いてえんだろ？	오늘 밤 쯤이 산이라고 말하고 싶은 거지?	fix	sound
+sound:fused-adjective	殺してやりてえよ	죽여주고 싶어	fix	sound
+sound:fused-adjective	帰りてえ	돌아가고 싶어	fix	sound
+sound:fused-adjective	寝てえ	자	keep	sound
+sound:fused-adjective	遊びてーな	놀고 싶은데	fix	sound
+sound:fused-adjective	会いてえよ	만나고 싶어	fix	sound
+sound:fused-adjective	早く飲みてぇ！	빨리 마시고 싶어!	fix	sound
+sound:fused-adjective	そいつは ありがてえな	그 녀석은 고맙네	fix	sound
+sound:fused-adjective	待ってー！	기다려~!	keep	sound
+sound:fused-adjective	どいてー！	물러나―！	keep	sound
+sound:fused-adjective	起きてー	일어나―	keep	sound
+sound:fused-adjective	もっとしてぇ	좀 더 해	keep	sound
+sound:fused-adjective	見てぇ！	봐!	keep	sound
+sound:fused-adjective	お母さん 来てー	엄마 와~	keep	sound
+sound:fused-adjective	書いてー	써―	keep	sound

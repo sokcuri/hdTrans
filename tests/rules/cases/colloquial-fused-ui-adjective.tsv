@@ -1,0 +1,15 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	気持ちわりい	기분 나쁘다	fix	sound
+sound:fused-adjective	アッ… だりい	앗… 나른하다	fix	sound
+sound:fused-adjective	だりぃんだよ	나른해	fix	sound
+sound:fused-adjective	ちょっと邪魔するわ、わりいな	조금 방해해, 미안하네	fix	sound
+sound:fused-adjective	他の仲間にはわりぃけど	다른 동료에게는 나쁜데	fix	sound
+sound:fused-adjective	まじい！！ こんど負けたら	큰일이야!! 이번 지면	fix	sound
+sound:fused-adjective	さみい	춥다	fix	sound
+sound:fused-adjective	さみぃな	춥네	fix	sound
+sound:fused-adjective	ねみい	졸리다	fix	sound
+sound:fused-adjective	ゆりいな	느슨하네	fix	sound
+sound:fused-adjective	かりいな	가볍네	fix	sound
+sound:fused-adjective	わりいけど	미안한데	fix	sound
+sound:fused-adjective	さみーよ	추워	fix	sound
