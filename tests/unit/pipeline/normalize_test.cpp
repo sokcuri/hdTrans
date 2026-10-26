@@ -453,7 +453,18 @@ HD_TEST(pipeline_rewrite_casual) {
         {"とぼけんな　この野郎"sv, "とぼけるな　この野郎"sv},
         {"決めてんな　お前"sv, "決めてんな　お前"sv},
     };
-    Check(RewriteCasual, cases);
+    Check([](std::string_view text) { return RewriteCasual(text); }, cases);
+}
+
+// A contracted ておく that a dictionary word holds stays as written.
+HD_TEST(pipeline_rewrite_casual_held_toku) {
+    const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
+        return line.substr(at).starts_with("言っとくけど") && end <= at + std::string_view("言っとく").size();
+    };
+    const RunLookup runs{holds, nullptr, nullptr};
+    HD_CHECK_EQ(RewriteCasual("言っとくけど、嫌よ", runs), std::string("言っとくけど、嫌よ"));
+    HD_CHECK_EQ(RewriteCasual("書いとく。", runs), std::string("書いておく。"));
+    HD_CHECK_EQ(RewriteCasual("言っとくが", runs), std::string("言っておくが"));
 }
 
 HD_TEST(pipeline_rewrite_military_time) {

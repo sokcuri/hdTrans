@@ -18,6 +18,9 @@ normalize:toku	住所は　あとでメール送っとくから	주소는 나중
 normalize:toku	こうしといたら	이렇게 해 두면	fix	normalize
 normalize:toku	ずっといたでしょ？	계속 있었잖아?	keep	normalize
 normalize:toku	彼といた	그와 있었다	keep	normalize
+normalize:toku	言っとくけど一晩だけよ	말해두는데 하룻밤만	fix	normalize
+normalize:toku	書いとくけど	적어 두는데	keep	normalize
+normalize:toku	言っときますけど	말해 두는데요	keep	normalize
 dict:jisjk:265455	これも持っといで	이것도 가지고 와	fix	ending-defaults
 dict:jisjk:265455	見ておいで	보고 와	fix	ending-defaults
 sound:contracted-n	止まんないんだよ	멈추지 않아	fix	sound
