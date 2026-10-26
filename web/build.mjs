@@ -4,8 +4,8 @@
 // build/wasm (emcmake cmake --preset wasm && cmake --build --preset wasm)
 // and the dictionary folder dicts/, which the native CLI of the same sources
 // compiles into dicts.hdsnap (hdtrans --compile-snapshot):
-//   index.html   its version line filled with the date and short hash of the
-//                commit the tree is at (Asia/Seoul)
+//   index.html   the engine version with the short hash and date of the
+//                commit the tree is at (Asia/Seoul) next to the title
 //   js/<hash>/   the page scripts (tsc), in a folder named by their content hash
 //                so a cached page never pairs old scripts with a new engine
 //   examples/    the example texts listed in examples.tsv, read from
@@ -69,20 +69,11 @@ const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8'
 const commit = git('rev-parse', '--short', 'HEAD');
 const date = new Date(Number(git('log', '-1', '--format=%ct')) * 1000).toLocaleString('sv-SE', { timeZone: 'Asia/Seoul' });
 const page = readFileSync(join(here, 'index.html'), 'utf8');
-// The engine version and the dictionary version, as the release package states them:
-// the dictionary version is the engine version and the hash of the dictionary files.
 const engineVersion = readFileSync(join(root, 'release-version.txt'), 'utf8').trim();
-const dicts = readdirSync(dictDir)
-  .filter((n) => n.endsWith('.tsv'))
-  .sort((a, b) => Buffer.compare(Buffer.from(a), Buffer.from(b)));
-const dictHash = createHash('sha256');
-for (const n of dicts) dictHash.update(n, 'utf8').update('\0').update(readFileSync(join(dictDir, n))).update('\0');
-const dictVersion = `${engineVersion}+${dictHash.digest('hex').slice(0, 12)}`;
-const stamp = `<p class="contact" id="version">hdTrans ${engineVersion}, 사전 ${dictVersion}, 업데이트 ${date}, ${commit}</p>`;
-if (!page.includes('<p class="contact" id="version">dev</p>')) throw new Error('index.html has no version line');
+if (!page.includes('<small id="hver">dev</small>')) throw new Error('index.html has no title version');
 if (!page.includes('src="js/app.js"') || !page.includes('href="style.css"')) throw new Error('index.html script or style link moved');
 writeFileSync(join(dist, 'index.html'), page
-  .replace('<p class="contact" id="version">dev</p>', stamp)
+  .replace('<small id="hver">dev</small>', `<small id="hver">v${engineVersion} (${commit}, ${date.slice(0, 10)})</small>`)
   .replace('src="js/app.js"', `src="${jsDir}/app.js"`)
   .replace('href="style.css"', `href="style.css?${jsDir.slice(3)}"`));
 
@@ -159,4 +150,4 @@ for (const a of [manifest.engine, manifest.wasm, manifest.dict.snapshot]) {
   brotli += c;
   console.log(`${a.path}\t${(a.size / 1e6).toFixed(1)} MB\tbr ${(c / 1e6).toFixed(1)} MB`);
 }
-console.log(`assets: ${(raw / 1e6).toFixed(1)} MB, ${(brotli / 1e6).toFixed(1)} MB brotli; examples: ${list.length}; ${stamp}`);
+console.log(`assets: ${(raw / 1e6).toFixed(1)} MB, ${(brotli / 1e6).toFixed(1)} MB brotli; examples: ${list.length}; v${engineVersion} (${commit}, ${date})`);

@@ -1,5 +1,6 @@
 #include "gui/text_file.h"
 
+#include <climits>
 #include <cstdint>
 #include <fstream>
 
@@ -163,6 +164,12 @@ bool DecodeShiftJis(std::string_view bytes, std::string& out) {
 #endif
 }
 
+std::string_view FirstLineBreak(std::string_view text) {
+    const auto at = text.find_first_of("\r\n");
+    if (at == std::string_view::npos || text[at] == '\n') return "\n";
+    return text.substr(at + 1).starts_with('\n') ? "\r\n" : "\r";
+}
+
 void NormalizeNewlines(std::string& text) {
     size_t output = 0;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -178,7 +185,7 @@ void NormalizeNewlines(std::string& text) {
 
 }  // namespace
 
-bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encoding) {
+bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encoding, std::string_view* lineBreak) {
     std::string decoded;
     TextEncoding detected;
     if (bytes.starts_with(kUtf8Bom)) {
@@ -199,13 +206,15 @@ bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encodin
         if (!DecodeShiftJis(bytes, decoded) || !ValidUtf8(decoded)) return false;
         detected = TextEncoding::ShiftJis;
     }
+    if (lineBreak != nullptr) *lineBreak = FirstLineBreak(decoded);
     NormalizeNewlines(decoded);
     utf8.swap(decoded);
     encoding = detected;
     return true;
 }
 
-bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEncoding& encoding) {
+bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEncoding& encoding,
+                  std::string_view* lineBreak) {
     std::ifstream file(path, std::ios::binary);
     if (!file) return false;
     std::string bytes;
@@ -214,11 +223,19 @@ bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEnco
         bytes.append(buffer, static_cast<size_t>(file.gcount()));
     }
     if (file.bad() || !file.eof()) return false;
-    return DecodeText(bytes, utf8, encoding);
+    return DecodeText(bytes, utf8, encoding, lineBreak);
 }
 
-bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8) {
+bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8, std::string_view lineBreak) {
     if (!ValidUtf8(utf8)) return false;
+    std::string converted;
+    if (lineBreak != "\n") {
+        for (const char ch : utf8) {
+            if (ch == '\n') converted += lineBreak;
+            else converted += ch;
+        }
+        utf8 = converted;
+    }
     std::ofstream file(path, std::ios::binary | std::ios::trunc);
     if (!file) return false;
     file.write(kUtf8Bom.data(), static_cast<std::streamsize>(kUtf8Bom.size()));
@@ -229,6 +246,30 @@ bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8) {
     }
     file.close();
     return static_cast<bool>(file);
+}
+
+std::filesystem::path TranslatedPath(const std::filesystem::path& input, const std::filesystem::path& folder) {
+    std::filesystem::path name = input.stem();
+    name += std::filesystem::path(u8"_번역.txt");
+    return (folder.empty() ? input.parent_path() : folder) / name;
+}
+
+void AppendFiles(std::vector<std::filesystem::path>& list, const std::vector<std::filesystem::path>& added) {
+    auto same = [](const std::filesystem::path& left, const std::filesystem::path& right) {
+        const auto a = left.lexically_normal().native();
+        const auto b = right.lexically_normal().native();
+#ifdef _WIN32
+        return a.size() <= INT_MAX && b.size() <= INT_MAX &&
+               CompareStringOrdinal(a.c_str(), static_cast<int>(a.size()), b.c_str(), static_cast<int>(b.size()), TRUE) == CSTR_EQUAL;
+#else
+        return a == b;
+#endif
+    };
+    for (const auto& path : added) {
+        bool found = false;
+        for (const auto& old : list) found = found || same(old, path);
+        if (!found) list.push_back(path);
+    }
 }
 
 }  // namespace hdTrans::gui

@@ -15,6 +15,7 @@ namespace {
 using hdTrans::gui::DecodeText;
 using hdTrans::gui::ReadTextFile;
 using hdTrans::gui::TextEncoding;
+using hdTrans::gui::TranslatedPath;
 using hdTrans::gui::WriteTextFile;
 using namespace std::string_view_literals;
 
@@ -155,6 +156,32 @@ HD_TEST(GuiTextFileNormalizeNewlines) {
     HD_CHECK(encoding == TextEncoding::ShiftJis);
 }
 
+HD_TEST(GuiTextFileKeepLineBreak) {
+    struct Case {
+        std::string_view bytes;
+        std::string_view lineBreak;
+        std::string_view written;
+    };
+    const Case cases[] = {
+        {"a\r\nb\nc\r", "\r\n", "\xEF\xBB\xBF" "a\r\nb\r\nc\r\n"},
+        {"a\nb\r\n", "\n", "\xEF\xBB\xBF" "a\nb\n"},
+        {"a\rb\r\n", "\r", "\xEF\xBB\xBF" "a\rb\r"},
+        {"a", "\n", "\xEF\xBB\xBF" "a"},
+    };
+    TempFolder temporary;
+    HD_REQUIRE(!temporary.path.empty());
+    const auto path = temporary.path / "output.txt";
+    for (const auto& test : cases) {
+        std::string text;
+        std::string_view lineBreak;
+        auto encoding = TextEncoding::Utf8;
+        HD_REQUIRE(DecodeText(test.bytes, text, encoding, &lineBreak));
+        HD_CHECK(lineBreak == test.lineBreak);
+        HD_REQUIRE(WriteTextFile(path, text, lineBreak));
+        HD_CHECK_EQ(ReadBytes(path), std::string(test.written));
+    }
+}
+
 HD_TEST(GuiTextFileLongShiftJis) {
     std::string bytes = "a";
     std::string expected = "a";
@@ -238,4 +265,15 @@ HD_TEST(GuiTextFileIoFailures) {
     HD_CHECK(!WriteTextFile(path, "\xC0\xAF"));
     HD_CHECK(!WriteTextFile(path, "a\0b"sv));
     HD_CHECK_EQ(ReadBytes(path), "\xEF\xBB\xBFkeep");
+}
+
+HD_TEST(GuiTextFileTranslatedPath) {
+    namespace fs = std::filesystem;
+    const fs::path folder = fs::path(u8"문서");
+    const fs::path other = fs::path(u8"출력");
+    HD_CHECK(TranslatedPath(folder / u8"원문.txt", {}) == folder / u8"원문_번역.txt");
+    HD_CHECK(TranslatedPath(folder / u8"원문.txt", other) == other / u8"원문_번역.txt");
+    HD_CHECK(TranslatedPath(folder / "a.b.TXT", {}) == folder / u8"a.b_번역.txt");
+    HD_CHECK(TranslatedPath(folder / "notes", {}) == folder / u8"notes_번역.txt");
+    HD_CHECK(TranslatedPath(folder / u8"원문_번역.txt", {}) == folder / u8"원문_번역_번역.txt");
 }

@@ -245,10 +245,11 @@ jobs:
             if [[ "$attempt" == 6 ]]; then echo "::error::The live page is not the page just built." >&2; exit 1; fi
             sleep 10
           done
-          version="$(grep -o '<p class="contact" id="version">[^<]*</p>' "$live/index.html" | sed 's/<[^>]*>//g')"
-          short="${version##*, }"
-          if [[ "$version" != "hdTrans ${TAG#v}, "* || ${#short} -lt 7 || "$SHA" != "$short"* ]]; then
-            echo "::error::The live version line ($version) is not $TAG at $SHA." >&2
+          version="$(grep -o '<small id="hver">[^<]*</small>' "$live/index.html" | sed 's/<[^>]*>//g')"
+          short="${version#*(}"
+          short="${short%%,*}"
+          if [[ "$version" != "v${TAG#v} ("* || ${#short} -lt 7 || "$SHA" != "$short"* ]]; then
+            echo "::error::The live title version ($version) is not $TAG at $SHA." >&2
             exit 1
           fi
           get manifest.json "$live/manifest.json"
