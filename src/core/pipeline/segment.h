@@ -22,6 +22,8 @@ using Chunk = output::Pieces;
 //     and at an ASCII space that ends a phrase (internal::KanaSpace), unless the words
 //     on both sides stand alone between spaces as in text spaced out character by
 //     character (こ　の　展　開).
+//   - after a speaker label or an aside in round brackets that opens the line
+//     (names::internal::CaptionLabelEnd: （島田）では皆さん);
 //   - at a column separator (internal::ColumnGap) and at an escape \n, \r or \t typed as two
 //     characters (internal::EscapeGap); gaps, when given, receives for each chunk the
 //     separator or escape before it as typed, "" after the other cuts and for the first.

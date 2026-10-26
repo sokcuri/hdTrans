@@ -508,7 +508,7 @@ struct CuedReading {
 };
 
 // The name a cue gives the word source (ConstraintReject::NonCuedName); none when a person
-// noun, a user entry or a verb or adjective that inflects past the word reads it.
+// noun that is no name, a user entry or a verb or adjective that inflects past the word reads it.
 CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Candidate>& list,
                      const std::vector<std::size_t>& same, std::string_view source, std::string_view after,
                      std::vector<dict::Record>& records) {
@@ -519,22 +519,25 @@ CuedReading CuedName(const dict::Snapshot& snapshot, const std::vector<dict::Can
                     (c.source.size() == source.size() && InflectsAfter(after, c.codes->part.ClassDigit() == '8')));
         }) ||
         std::any_of(same.begin(), same.end(), [&](std::size_t k) {
-            return PersonNoun(*list[k].codes) || (list[k].user != nullptr && !list[k].user->nameLayer);
+            return (PersonNoun(*list[k].codes) && !NameSense(*list[k].codes)) || (list[k].user != nullptr && !list[k].user->nameLayer);
         });
     if (blocked) return {};
     const bool kana = AllOfClass(source, kClassKatakana) || AllOfClass(source, kClassHiragana);
     const std::string reading = kana ? text::FromKana(source, text::Preset::Fan) : std::string();
     records = snapshot.NameRecords(source);
     // A kana word the dictionary already reads as a person, as one of the name's own spellings
-    // or by its sound (エル 엘, フラン 프랑), is read that way; the cue replaces only words of
-    // another meaning (アヤメ 붓꽃).
-    if (kana && (same.empty() || std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+    // or by its sound (エル 엘, フラン 프랑), is read that way, also where another meaning comes
+    // first (さくら 벚꽃, 사쿠라); the cue replaces only words of another meaning (アヤメ 붓꽃).
+    if (kana) {
+        if (same.empty()) return {};
+        const auto own = std::find_if(same.begin(), same.end(), [&](std::size_t k) {
             return (PersonSense(*list[k].codes) && list[k].user == nullptr) || text::SameSound(list[k].target, reading) ||
                    std::any_of(records.begin(), records.end(), [&](const dict::Record& r) {
                        return r.codes != nullptr && r.codes->sem.HasPrefix("QPN") && r.target == list[k].target;
                    });
-        }))) {
-        return {};
+        });
+        if (own == same.begin()) return {};
+        if (own != same.end()) return {list[*own].codes->asPlain, list[*own].target, list[*own].id};
     }
     const auto fits = [&](const dict::Codes* codes, std::string_view target) {
         return codes != nullptr && codes->sem.HasPrefix("QPN") && !TranslatedName(list, same, source, target) &&

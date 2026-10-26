@@ -33,7 +33,8 @@ const dict::Snapshot* Dictionary() {
          "元気\t건강%A1@\tG8L0\t\t\tGN\t23\n"
          "つむ\t뽑&AW@\tM425\t\t\tGN\t30\n"
          "ここ\t여기\tN120\t\t\tGN\t31\n"
-         "いつか\t언젠가\tE300\t\t\tGN\t32\n"},
+         "いつか\t언젠가\tE300\t\t\tGN\t32\n"
+         "続\t계속&C6@\tM411\t\t\tGN\t38\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -55,7 +56,8 @@ const dict::Snapshot* Dictionary() {
          "つむぎ\t츠무기\tN130\tQPNVHn\tWb\tGN\t33\n"
          "ここね\t코코네\tN130\tQPNVHn\tWb\tGN\t34\n"
          "いつか\t이츠카\tN130\tQPNVHn\tWb\tGN\t35\n"
-         "いくよ\t이쿠요\tN130\tQPNVHn\tWb\tGN\t36\n"},
+         "いくよ\t이쿠요\tN130\tQPNVHn\tWb\tGN\t36\n"
+         "続\t츠즈키\tN130\tQPNVHn\tWa\tGN\t37\n"},
     });
     return loaded.snapshot.get();
 }
@@ -117,6 +119,25 @@ HD_TEST(names_name_cues) {
         {"「ここね、待って」", {}},
         {"「いくよ、待って」", {}},
         {"いつか、行こう", {}},
+        // Caption labels: a part of a label in round brackets before speech, a label that ≫ closes,
+        // and the label shapes after caption marks. A word in brackets alone, inside a sentence or
+        // with more than a name and an honorific in its brackets is none.
+        {"（アヤメ）待って", {{"アヤメ", '+'}}},
+        {"⚟（アヤメ）待って", {{"アヤメ", '+'}}},
+        {"[無線](高峰)了解", {{"高峰", '+'}}},
+        {"(高峰／アヤメ)はい", {{"高峰", '+'}, {"アヤメ", '+'}}},
+        {"(高峰さん)はい", {{"高峰", '+'}}},
+        {"アヤメ≫待って", {{"アヤメ", '+'}}},
+        {"≫アヤメ：待って", {{"アヤメ", '+'}}},
+        {"》高峰：はい", {{"高峰", '+'}}},
+        {"(潮)はい", {{"潮", '-'}}},
+        {"(つむぎ)はい", {{"つむぎ", '~'}}},
+        {"（アヤメ）", {}},
+        {"（アヤメ）と呼ばれた", {}},
+        {"（アヤメ）は、きれい", {}},
+        {"(続)航空火力艦の運用", {}},
+        {"花の(アヤメ)だ", {}},
+        {"(高峰の母)はい", {}},
         // A person sense that is no Japanese reading cues nothing.
         {"駆逐艦風", {}},
     };

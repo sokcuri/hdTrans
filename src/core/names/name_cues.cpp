@@ -9,6 +9,8 @@
 
 #include "core/dict/classes.h"
 #include "core/names/chars.h"
+#include "core/names/labels.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::names {
@@ -161,10 +163,75 @@ bool NameEnd(std::string_view after) {
            dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0;
 }
 
-// A speaker label: the word alone at the start of the line before 「, 『 or a colon.
-bool LabelAt(std::string_view before, std::string_view after) {
-    if (!LineStart(before)) return false;
-    if (after.starts_with(":") || after.starts_with("：")) return true;
+// What separates the parts of a speaker label in round brackets (X／Y, X・Y, ラジオ:X).
+constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
+
+// Whether the word between before and after is a part of a speaker label in round brackets that
+// opens a caption before speech ((X)はい, （X／Y）はい, ⚟（X）はい, [無線](X)了解): the brackets hold
+// nothing but parts and an honorific after the word ((剛さん)), and no mark of a sentence.
+bool BracketLabelAt(std::string_view before, std::string_view after) {
+    static constexpr std::string_view kStops = "()（）\n「」『』、。！？!?…‥";
+    std::size_t open = before.size();
+    for (int n = 0; open > 0; n++) {
+        const text::Rune r = RuneBefore(before, open);
+        if (r.cp == U'(' || r.cp == U'（') break;
+        if (InRunes(r.cp, kStops) || n >= internal::kMaxCaptionGroup) return false;
+        open -= r.size;
+    }
+    if (open == 0) return false;
+    const char32_t bracket = RuneBefore(before, open).cp;
+    const std::string_view parts = before.substr(open);
+    if (!parts.empty() && !InRunes(RuneBefore(parts, parts.size()).cp, kLabelSeparators)) return false;
+    if (!internal::CaptionLead(before.substr(0, open - RuneBefore(before, open).size))) return false;
+    std::string_view rest = after;
+    rest.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
+    if (!rest.empty() && !InRunes(FirstRune(rest).cp, kLabelSeparators) && FirstRune(rest).cp != (bracket == U'(' ? U')' : U'）')) {
+        return false;
+    }
+    for (std::size_t i = 0, n = 0; i < rest.size() && n <= static_cast<std::size_t>(internal::kMaxCaptionGroup); n++) {
+        const text::Rune r = text::DecodeRune(rest.substr(i));
+        if (r.cp == (bracket == U'(' ? U')' : U'）')) {
+            // Speech follows a label; a word in brackets alone is a heading or an aside ((春)), and
+            // one that a particle takes is a word of the sentence (（アヤメ）と呼ばれた).
+            return internal::SpeechAfterLabel(rest.substr(i + r.size));
+        }
+        if (InRunes(r.cp, kStops)) return false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
+// Whether a role in round brackets follows the word, which opens a caption: a role of noun.role,
+// noun.label-role or suffix.label-role or a noun of a person (大泉(俳優)).
+bool RoleAfterLabel(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
+    if (!internal::CaptionLead(before) || !(after.starts_with("(") || after.starts_with("（"))) return false;
+    std::string_view inner = after.substr(after.starts_with("(") ? 1 : std::string_view("（").size());
+    inner = inner.substr(0, 4 * static_cast<std::size_t>(internal::kMaxCaptionGroup));
+    const std::size_t close = inner.find(after.starts_with("(") ? ")" : "）");
+    if (close == std::string_view::npos) return false;
+    const std::string_view role = inner.substr(0, close);
+    if (dict::InClass(HDTRANS_CLASS("noun.role"), role) || dict::InClass(HDTRANS_CLASS("noun.label-role"), role) ||
+        dict::EndsWithMember(HDTRANS_CLASS("suffix.label-role"), role) > 0) {
+        return true;
+    }
+    for (const dict::Candidate& c : snap.RetrieveRecords(role, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == role && c.codes->sem.HasCode("VHn")) return true;
+    }
+    return false;
+}
+
+// Whether the word is a speaker label that a colon or ≫ closes, after caption marks only
+// (アヤメ：, ⚟アヤメ：, ≫アヤメ：, アヤメ≫).
+bool ClosedLabelAt(std::string_view before, std::string_view after) {
+    return internal::CaptionLead(before) && (after.starts_with(":") || after.starts_with("：") || after.starts_with("≫"));
+}
+
+// A speaker label: the word alone at the start of the line before 「, 『, a colon, ≫ or a role in
+// round brackets, after caption marks only (⚟アヤメ：, ≫アヤメ：, 》アヤメ：), or a part of a label in
+// round brackets there ((アヤメ), ⚟（アヤメ）).
+bool LabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
+    if (BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
+    if (!internal::CaptionLead(before)) return false;
     // A quote ends the line; text after its closing bracket makes the bracket a reading or a
     // title (光「ひかり」散「ち」らす, 新「三川艦隊」を編成せよ).
     for (const auto& [open, close] : {std::pair<std::string_view, std::string_view>{"「", "」"}, {"『", "』"}}) {
@@ -390,16 +457,21 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             i += step;
             continue;
         }
+        // A label in round brackets, or one that a colon or ≫ closes, is a whole word: it neither
+        // inflects (さくら：, (わかば)) nor stands for a verb or a prefix of one character ((恋)); a
+        // character of noun.bracket-note in brackets annotates the line ((続)).
+        const bool bracketLabel = BracketLabelAt(before, after);
+        const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
-        // called at the start of an utterance (つむぎ、こっちに来て). Only these cues make a name of
-        // one that starts a verb or an adjective (つむぎ, つぐみ).
+        // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed
+        // label make a name of one that starts a verb or an adjective (つむぎ, つぐみ).
         if (hiragana) {
             if (HiraganaCall(snap, key) &&
                 (IntroductionAt(TrimEndSpaces(before).ends_with("、") ? std::string_view() : before, after, true) ||
                  (UtteranceStart(before) && after.starts_with("、")))) {
                 add(key, false);
             }
-            if (HiraganaPredicate(snap, key)) {
+            if (!closedLabel && HiraganaPredicate(snap, key)) {
                 i += step;
                 continue;
             }
@@ -416,7 +488,8 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         const bool alone = UtteranceEnd(after) || after.starts_with("「") || after.starts_with("」") || after.starts_with("』");
         if ((TitleBefore(before, katakana) && NameEnd(after) && CallableKey(snap, key, false) && (!single || alone)) ||
             (runStart && SuffixAfter(snap, after, key) && CallableKey(snap, key, false)) || ClassAfter(after, key, kanji) ||
-            (LabelAt(before, after) && (!single || LabelNoun(snap, key))) || (!single && ActionAt(snap, key, before, after))) {
+            (LabelAt(snap, before, after) &&
+             (!single || (bracketLabel && !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), key)) || LabelNoun(snap, key))) || (!single && ActionAt(snap, key, before, after))) {
             add(key, true);
         } else if ((runStart && HonorificAfter(snap, after, key)) ||
                    (WeakKey(snap, key) && (IntroductionAt(before, after, hiragana) ||

@@ -1,0 +1,46 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+constraint:cued-name	（アヤメ）待って	(아야메) 기다려	fix	lookup
+constraint:cued-name	(金子)おぉ～！	(카네코) 오오~!	fix	lookup
+constraint:cued-name	（青木）これから訪ねるのは	(아오키) 지금부터 방문하는 것은	fix	lookup
+constraint:cued-name	(武)はい｡	(타케시) 네.	fix	lookup
+constraint:cued-name	(恋)大丈夫 大丈夫｡	(렌) 괜찮아 괜찮아.	fix	lookup
+constraint:cued-name	（桂）はい	(카츠라) 네	fix	lookup
+constraint:cued-name	-（桂）はい	-(카츠라) 네	fix	lookup
+constraint:cued-name	（凜）うん。	(린) 응.	fix	lookup
+constraint:cued-name	(舞の海)へぇ～！	(마이노우미) 헤에~!	fix	lookup
+constraint:cued-name	（さくら） 高校の恩師なんですって？	(사쿠라) 고등학교의 은사라고?	fix	lookup
+constraint:cued-name	(しずか)へえ～！	(시즈카) 헤에~!	fix	lookup
+constraint:cued-name	(こころ)は〜い	(코코로) 네에~	fix	lookup
+constraint:cued-name	（わかば）怖いって	(와카바) 무섭다고	fix	lookup
+constraint:cued-name	⚟（大志）大丈夫ですか？	⚟(타이시) 괜찮습니까?	fix	lookup
+constraint:cued-name	[無線](武)06 了解｡	[무선](타케시) 06 알았어.	fix	lookup
+constraint:cued-name	(ｽﾀｼﾞｵ:山内) 何だ？ これ｡	(스튜디오:야마노우치) 뭐야? 이것.	fix	lookup
+constraint:cued-name	（大柳　えつ子）できましたよ	(오오야나기 에츠코) 할 수 있었어요	keep	lookup
+constraint:cued-name	（瑠璃　紫苑）おかえり。	(루리 시온) 어서 와.	fix	lookup
+constraint:cued-name	(しずか･高峰)ん？	(시즈카·타카미네) 응?	fix	lookup
+constraint:cued-name	大吉≫そういう	다이키치≫그런	fix	lookup
+constraint:cued-name	ななみ≫私、生まれも育ちも	나나미≫나, 태생도 출신도	fix	lookup
+constraint:cued-name	≫アヤメ：待って	≫아야메：기다려	fix	lookup
+constraint:cued-name	（島田）では皆さん	(시마다) 그럼 여러분	fix	lookup
+constraint:cued-name	(イチロー)じゃ 飲もっか	(이치로) 그러면 마실까	fix	lookup
+constraint:cued-name	（上戸）では 順位のほうは？	(우에토) 그럼 순위 쪽은?	fix	lookup
+constraint:cued-name	（奥山）君はエンジンのパワー	(오쿠야마) 너는 엔진의 파워	keep	lookup
+constraint:cued-name	（ゆりやん）うん	(유리얀) 응	keep	lookup
+constraint:cued-name	(拍手)	(박수)	keep	lookup
+constraint:cued-name	(ため息)	(한숨)	keep	lookup
+constraint:cued-name	(笑)そうですね	(웃음) 그렇네요	keep	lookup
+constraint:cued-name	(会場内 笑い)月１？	(회장내 웃음) 월 1?	keep	lookup
+constraint:cued-name	(医師)はい	(의사) 네	keep	lookup
+constraint:cued-name	(一同)はい	(일동) 네	keep	lookup
+constraint:cued-name	(子供)はい	(아이) 네	keep	lookup
+constraint:cued-name	(男性)はい そうです	(남성) 네 그렇습니다	keep	lookup
+constraint:cued-name	(通信)はい	(통신) 네	keep	lookup
+constraint:cued-name	(春)	(봄)	keep	lookup
+constraint:cued-name	（アヤメ）	(붓꽃)	keep	lookup
+constraint:cued-name	（まさか）と思った	(설마)라고 생각했다	keep	lookup
+constraint:cued-name	漢字(かんじ)を書く	lacks:칸지	keep	lookup
+constraint:cued-name	花の(アヤメ)だ	lacks:아야메	keep	lookup
+constraint:cued-name	さくらが咲いた	벚꽃이 피었다	keep	lookup
+constraint:cued-name	(続)運用を強化せよ！	(속) 운용을 강화하라!	keep	lookup
+constraint:cued-name	（人形）は、きれい	(인형)은, 예쁘다	keep	lookup
