@@ -70,7 +70,6 @@ cx:oide-come:30	今度はサイフを持っておいで。	이번에는 지갑�
 cx:oide-come:35	今は遊んでおいでってやさしいのよ。	has:놀고 와	keep	rewrites
 cx:oide-come:40	先　荷物　置いておいでや。	has:두고 와	keep	rewrites
 cx:oide-come:50	まとめておいでよと言ったんです	has:정리하고 와	keep	rewrites
-cx:oide-come:20	行っといでよ	가고 와	keep	rewrites
 cx:oide-come:3	出ておいで！	나와!	keep	rewrites
 cx:oide-come:5	おいで。	와.	keep	rewrites
 cx:oide-come:30	ここにおいでください。	여기에 와 주세요.	keep	rewrites
