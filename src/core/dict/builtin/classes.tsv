@@ -295,7 +295,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
-//= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 食べさせられる 먹다); a person before に is who made it happen.
+//= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
 //= verb.elapse	Verbs of time going by (経つ, 過ぎる, する), whose ば or たら after a count with も says once that much has passed (半年も経てば 반년도 지나면).
@@ -660,6 +660,7 @@ contraction.te-iku	ってやっ
 contraction.te-iku	ってやろ
 contraction.te-iku	ってほし
 contraction.te-iku	ってちょうだい
+contraction.te-iku	っておくれ
 contraction.te-iku	ってね
 contraction.te-iku	ってる
 contraction.te-iku	けよ
@@ -4615,7 +4616,6 @@ verb.causative-passive	謝らされ
 verb.causative-passive	闘わされ
 verb.causative-passive	飲まされ
 verb.causative-passive	働かされ
-verb.causative-passive	食べさせられ
 verb.condition	疲れ
 verb.condition	つかれ
 verb.condition	困

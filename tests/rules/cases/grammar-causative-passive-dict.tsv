@@ -1,0 +1,35 @@
+# 규칙: GRM-1, GRM-10
+rule	input	expected	kind	layer
+verb:causative-of-shorter	無理やり食べさせられた	억지로 먹게 되었다	fix	conjugation
+verb:causative-of-shorter	無理やり野菜を食べさせられた。	억지로 야채를 먹게 되었다.	fix	conjugation
+verb:causative-of-shorter	私は苦い野菜を食べさせられた。	나는 쓴 야채를 먹게 되었다.	fix	conjugation
+verb:causative-of-shorter	牢屋の中で食べさせられた物を思い出した。	has:먹게 된 것을	fix	conjugation
+verb:causative-of-shorter	偽りを…　信じさせられて…。	거짓을… 믿게 되어….	fix	conjugation
+verb:causative-of-shorter	嫌って言うほど信じさせられたよ	has:믿게 되었어	fix	conjugation
+verb:causative-of-shorter	刑事 辞めさせられちゃうかも｡	has:그만두게 되어버릴	fix	conjugation
+verb:causative-of-shorter	嫌いな物を食べさせられちゃった。	싫은 것을 먹게 되어버렸다.	fix	conjugation
+verb:causative-of-shorter	食べさせられない	먹일 수 없다	fix	conjugation
+verb:causative-of-shorter	野菜を食べさせられますか	야채를 먹일 수 있습니까	fix	conjugation
+verb:causative-of-shorter	子供に野菜を食べさせられない。	아이에게 야채를 먹일 수 없다.	fix	conjugation
+verb:causative-of-shorter	これなら子供にも食べさせられる。	이것이라면 아이에게도 먹일 수 있다.	fix	conjugation
+verb:causative-of-shorter	母に野菜を食べさせられた。	어머니 때문에 억지로 야채를 먹었다.	keep	conjugation
+verb:causative-of-shorter	子供に野菜を食べさせた。	아이에게 야채를 먹였다.	keep	conjugation
+verb:causative-of-shorter	弟に食べさせてやった。	남동생에게 먹여 주었다.	keep	conjugation
+verb:causative-of-shorter	食べられる	먹을 수 있다	keep	conjugation
+verb:causative-of-shorter	刺身は食べられない。	생선회는 먹을 수 없다.	keep	conjugation
+verb:causative-of-shorter	彼に殴られた。	그에게 맞았다.	keep	conjugation
+verb:causative-of-shorter	先生が来られた。	선생님이 오셨다.	keep	conjugation
+verb:causative-of-shorter	部長は東京へ行かれた。	부장은 도쿄에 가셨다.	keep	conjugation
+verb:causative-of-shorter	一時間も待たされた。	1시간이나 기다리게 되었다.	keep	conjugation
+verb:causative-of-shorter	グラウンドを走らされた。	그라운드를 달리게 되었다.	keep	conjugation
+verb:causative-of-shorter	入院させられた。	입원하게 되었다.	keep	conjugation
+verb:causative-of-shorter	確実に驚かせられる。	확실히 놀라게 할 수 있다.	keep	conjugation
+verb:causative-of-shorter	泣かせられる用意をしてきた	울릴 수 있을 준비를 해 왔다	keep	conjugation
+verb:causative-of-shorter	スケジュール合わせられる	스케줄 맞출 수 있다	keep	conjugation
+verb:causative-of-shorter	考えさせられました。	생각하게 되었습니다.	keep	conjugation
+dict:jisjk:364866	実戦投入はさせられません。	실전 투입은 시킬 수 없습니다.	fix	local
+dict:jisjk:364866	今のままでは実戦投入はさせられません。	has:시킬 수 없습니다	fix	local
+dict:jisjk:364866	掃除をさせられますか。	청소를 시킬 수 있습니까.	fix	local
+dict:jisjk:364866	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	local
+dict:jisjk:364866	掃除はさせられました。	청소는 하도록 강요받았습니다.	keep	local
+dict:jisjk:364866	駄目よ！　そんなことさせられない。	has:시킬 수 없	keep	local

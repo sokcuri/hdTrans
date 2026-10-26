@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 wrapped:join	明日までに行かなければ\nならない。	내일까지 가야\n한다.	fix	driver
 wrapped:join	彼が昨日買ってきた本を読んで\nいるところです。	그가 어제 사 온 책을 읽고\n있는 중입니다.	fix	driver
 wrapped:join	もしよかったら一緒に\n行きませんか？	만약 괜찮다면 함께\n가지 않겠습니까?	fix	driver
-wrapped:join	無理やり食べ\nさせられた。	억지로\n먹었다.	fix	driver
+wrapped:join	無理やり食べ\nさせられた。	억지로\n먹게 되었다.	fix	driver
 wrapped:join	火災が……火を\n消して、反撃しないと！	화재가……불을\n끄고, 반격하지 않으면!	fix	driver
 wrapped:join	まぁ、土曜でなくて\nもいいか。	뭐, 토요일이 아니어도\n괜찮은가.	fix	driver
 wrapped:join	この時間はとて\nも静かですね。	이 시간은 무척\n조용하네요.	fix	driver

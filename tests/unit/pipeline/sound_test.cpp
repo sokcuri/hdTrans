@@ -1132,7 +1132,12 @@ HD_TEST(pipeline_contracted_n) {
                                      "書\t쓰&AA@\tM421\t\t10\n"
                                      "こんな\t이런\tE0H0\t\t11\n"
                                      "ごめん\t미안\tK110\t\t12\n"
-                                     "最初\t처음\tN110\t\t13\n"}});
+                                     "最初\t처음\tN110\t\t13\n"
+                                     "止\t그&AO@\tM415\t\t14\n"
+                                     "止ま\t멈&CL@\tM428\t\t15\n"
+                                     "な\t&C6@\tM418\t\t16\n"
+                                     "なん\t무엇\tN110\t\t17\n"
+                                     "みんな\t모두\tE100\t\t18\n"}});
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
@@ -1161,6 +1166,10 @@ HD_TEST(pipeline_contracted_n) {
         {"怖いんです", "怖いんです"},  // い after kanji ends another word
         {"もがみんねえ", "もがみんねえ"},  // kana alone
         {"\xcd見んな", "\xcd見るな"},
+        {"止まんない", "止まらない"},  // before ない not the negative stem of 止む
+        {"止まんぞ", "止まんぞ"},
+        {"練習になんない", "練習にならない"},  // なん is no word before ない
+        {"みんないい", "みんないい"},          // a word past the ん
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

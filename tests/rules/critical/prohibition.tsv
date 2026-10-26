@@ -88,3 +88,9 @@ cx:prohibit-na:10	うん、結構いけるなこれ。	lacks:지 마	keep	rewrit
 cx:prohibit-na:10	「いいか。わかるな？」	lacks:지 마	keep	rewrites
 cx:prohibit-particle:10	「勘違いしないでよね！」	has:하지 말아	fix	rewrites
 cx:prohibit-particle:20	「心配しないでね」	has:하지 말아	fix	rewrites
+normalize:prohibition-janai	来るんじゃねぇ！	has:오지 마	fix	normalize
+normalize:prohibition-janai	調子に乗るんじゃねえ！	has:지 마	fix	normalize
+normalize:prohibition-janai	泣かしてんじゃねえよ！	has:울리지 마	fix	builtin-ending
+normalize:prohibition-janai	さあ　泣くんじゃないよ	has:울지 마	fix	normalize
+normalize:prohibition-janai	そういう一般論を言ってるんじゃない	lacks:지 마	keep	normalize
+normalize:prohibition-janai	怒ってんじゃねえよ、心配してんだ	lacks:지 마	keep	normalize

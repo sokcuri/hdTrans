@@ -735,6 +735,21 @@ bool Worker::GodanImperative(std::string_view form) const {
     return false;
 }
 
+// Whether stem is a dictionary verb in させ that is the causative of a shorter word the dictionary
+// has, an ichidan verb or a verbal noun (食べさせ of 食べる, 入院させ). Verbs in せ of a godan verb
+// (合わせる, 驚かせる) are words of their own.
+bool Worker::CausativeOfShorter(std::string_view stem) const {
+    constexpr std::string_view kSase = "させ";
+    if (!stem.ends_with(kSase) || stem.size() == kSase.size()) return false;
+    const std::string_view shorter = stem.substr(0, stem.size() - kSase.size());
+    for (const dict::Candidate& rec : snapshot.RetrieveRecords(shorter, dict::LookupMode::General)) {
+        const std::string_view pc = rec.codes->partText;
+        if (rec.source != shorter || pc.size() != 4) continue;
+        if ((pc.starts_with("M4") && pc[3] == '7') || (pc[0] == 'N' && rec.codes->gram.HasCode("Hd"))) return true;
+    }
+    return false;
+}
+
 // Whether stem is a す-verb stem all of whose Korean is a causative in 게 (引か 끌게 하다; not 動か
 // 움직이다, whose せ is the potential 動かせる) and that ends in the negative stem of a godan verb
 // (引く): its せ is that verb's causative (引かせる), not the potential of the す-verb.
