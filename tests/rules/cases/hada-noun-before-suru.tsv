@@ -1,4 +1,4 @@
-# 규칙: LEX-40
+# 규칙: LEX-3, LEX-40
 rule	input	expected	kind	layer
 dict:jisjk:250384	第十一水雷戦隊、松、抜錨します！	has:출항합니다	fix	lookup
 dict:jisjk:250384	改装Nevada、抜錨する！	has:출항한다	fix	lookup
@@ -26,3 +26,27 @@ compose:hada-noun-before-suru	職探しをする。	직장 구하기를 한다.	
 compose:hada-noun-before-suru	職探しは大変だ。	has:직장 구하기는	keep	compose
 compose:hada-noun-before-suru	夏期する	has:하기	keep	compose
 compose:hada-noun-before-suru	使用する	사용한다	keep	compose
+dict:lexical-word-senses	陰干しするかしないかの違いだ	has:그늘 건조	fix	lookup
+dict:lexical-everyday-terms	死んですぐに血抜きしてるから	has:핏물 제거하고 있으니까	fix	lookup
+dict:lexical-everyday-terms	血抜きをした肉	has:핏물 제거를 한 고기	fix	lookup
+dict:lexical-word-senses	陰干し。	그늘 건조.	fix	lookup
+dict:lexical-word-senses	陰干しした布。	그늘 건조한 천.	fix	lookup
+dict:lexical-word-senses	陰干ししない。	그늘 건조하지 않는다.	fix	lookup
+dict:lexical-everyday-terms	血抜き。	핏물 제거.	fix	lookup
+dict:lexical-everyday-terms	血抜きしない。	핏물 제거하지 않는다.	fix	lookup
+dict:lexical-everyday-terms	血が出てるじゃないですか！	has:피가	keep	lookup
+dict:lexical-everyday-terms	血は止まってますし。	피는 멈추어 있고요.	keep	lookup
+dict:lexical-everyday-terms	血を流していた	피를 흘리고 있었다	keep	lookup
+dict:lexical-word-senses	光と陰のコントラスト	has:빛과 그늘	keep	lookup
+dict:lexical-everyday-terms	手抜きになっちゃうので	has:부실	keep	lookup
+dict:lexical-everyday-terms	息抜きがしたかったら	has:기분 전환	keep	lookup
+dict:lexical-everyday-terms	報告書の手抜きは調査の手抜きと同じよ｡	보고서의 부실은 조사의 부실과 같아.	keep	lookup
+dict:lexical-everyday-terms	栓抜きがないね	병따개가 없네	keep	lookup
+dict:lexical-everyday-terms	息抜きなんてできねえ	has:기분 전환	keep	lookup
+dict:lexical-word-senses	乾燥機の中	건조기 안	keep	lookup
+dict:lexical-word-senses	乾燥しちゃってさ。	건조해서.	keep	lookup
+dict:lexical-word-senses	自然乾燥	자연 건조	keep	lookup
+compose:hada-noun-before-suru	雨やどりしよう	비 피하자	keep	compose
+dict:missing-compounds	意外と長風呂で	has:장시간 목욕	keep	lookup
+dict:lexical-word-senses	陰。	그늘.	keep	lookup
+dict:lexical-everyday-terms	血。	피.	keep	lookup
