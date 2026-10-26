@@ -234,6 +234,9 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
 // sound lexicon reads the whole form (すげぇ 대박), the sound stage reads it.
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// Whether RewriteCasualAdjectives rewrites text, found at its first match.
+bool HoldsCasualAdjective(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
 // katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,
 // アルくぅん; not かみつきさあん) is the honorific with the lengthening mark after it; a longer

@@ -245,7 +245,14 @@ struct FusedLookup {
 
 bool HoldsFusedAdjective(const void* context, std::string_view text) {
     const auto& f = *static_cast<const FusedLookup*>(context);
-    return pipeline::internal::RewriteCasualAdjectives(text, f.ctx, f.snap) != text;
+    return pipeline::internal::HoldsCasualAdjective(text, f.ctx, f.snap);
+}
+
+// Whether a line asks which of its polite quotes seek agreement politely with でしょ: it has
+// でしょ and a quote of polite speech (TranslateBody).
+bool PoliteTalkAsked(std::string_view text, const std::vector<std::uint8_t>& styles) {
+    return text.find("でしょ") != std::string_view::npos &&
+           std::ranges::any_of(styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; });
 }
 
 // Keys holding a run are looked for from up to this many runes before it (a long name).
@@ -629,6 +636,10 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             if (word == SpaceWord::Phrase && (start > 0 || text::RuneCount(left) < 2)) break;
             // The candidates point into the query, so it lives as long as they do.
             const std::string query = std::string(left) + std::string(after);
+            if (!snap.KeyPast(query, left.size(), lookup)) {
+                start += std::max<std::size_t>(1, text::DecodeRune(left).size);
+                continue;
+            }
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
             for (const dict::Candidate& c : words.list) {
                 if (c.source.size() <= left.size()) continue;
@@ -792,7 +803,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         const std::string collapsed = pipeline::internal::CollapseTsuRuns(facts.text, {WordHoldsRun, nullptr, &respell});
         const FusedLookup fusedLookup{ctx, snap};
         const pipeline::FusedTest fused{HoldsFusedAdjective, &fusedLookup};
-        casual = pipeline::CasualQuotes(collapsed, carry.depth, fused);
+        // Soft reads the casual quotes only to tell polite talk in a line with でしょ (below).
+        if (!speech.casual || PoliteTalkAsked(facts.text, speech.styles)) casual = pipeline::CasualQuotes(collapsed, carry.depth, fused);
         // Soft: a line of a document without 「」 that reads as speech (spec SPC-18).
         if (speech.casual && !speech.narrated) speech.spoken = pipeline::SpokenLine(collapsed, carry.depth, fused);
         if (!speech.casual) {
@@ -830,8 +842,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // でしょ in a quote of polite talk seeks agreement politely (知らなかったでしょ 몰랐죠): a quote of
     // polite speech whose Korean ends a sentence politely (그렇습니다, 봐 주세요; not 일어나 of
     // なさい, not a 済ませた or ますます) and whose Japanese has no casual mark (よ, ね).
-    if (!options.reference && facts.text.find("でしょ") != std::string_view::npos &&
-        std::ranges::any_of(speech.styles, [](std::uint8_t style) { return (style & output::kPoliteStyle) != 0; })) {
+    if (!options.reference && PoliteTalkAsked(facts.text, speech.styles)) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
         const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);

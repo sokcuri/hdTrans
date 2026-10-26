@@ -124,4 +124,15 @@ std::vector<const UserEntry*> UserText::Search(std::string_view text, LookupMode
     return out;
 }
 
+bool UserText::KeyPast(std::string_view text, std::size_t past) const {
+    if (byKey_.empty()) return base_ != nullptr && base_->KeyPast(text, past);
+    for (std::size_t i = 0; i < text.size() && i < maxKey_;) {
+        i += text::DecodeRune(text.substr(i)).size;
+        if (i <= past) continue;
+        const std::string_view key = text.substr(0, i);
+        if (byKey_.find(key) != byKey_.end() || (base_ != nullptr && base_->byKey_.find(key) != base_->byKey_.end())) return true;
+    }
+    return false;
+}
+
 }  // namespace hdTrans::dict

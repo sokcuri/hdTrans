@@ -111,6 +111,8 @@ public:
     // tag mode accepts: longer keys first, then descending prio, later source, then
     // line and order. Entries with an empty key match only empty text.
     std::vector<const UserEntry*> Search(std::string_view text, LookupMode mode) const;
+    // Whether an entry of any mode whose key prefixes text (Search) is longer than past bytes.
+    bool KeyPast(std::string_view text, std::size_t past) const;
 
 private:
     const UserText* base_ = nullptr;

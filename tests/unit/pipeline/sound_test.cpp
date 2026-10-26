@@ -124,6 +124,7 @@ HD_TEST(pipeline_casual_danger_boundaries) {
         LineContext ctx;
         ctx.lookup.plain = &loaded.snapshot->TextPlain();
         HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *loaded.snapshot), std::string(c.want));
+        HD_CHECK_EQ(internal::HoldsCasualAdjective(c.in, ctx, *loaded.snapshot), std::string(c.in) != c.want);
     }
 }
 
@@ -826,7 +827,10 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"もっと浅っす", "もっと浅っす"},
         {"おめぇ、何してんだ", "おめぇ、何してんだ"},  // a word spelled with the small vowel
     };
-    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
+        HD_CHECK_EQ(internal::HoldsCasualAdjective(c.in, ctx, *snap), std::string(c.in) != c.want);
+    }
 }
 
 // そっか after the kanji stem of a verb in す is its volitional; after a noun the answer.
