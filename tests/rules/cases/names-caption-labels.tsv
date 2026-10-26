@@ -44,3 +44,5 @@ constraint:cued-name	花の(アヤメ)だ	lacks:아야메	keep	lookup
 constraint:cued-name	さくらが咲いた	벚꽃이 피었다	keep	lookup
 constraint:cued-name	(続)運用を強化せよ！	(속) 운용을 강화하라!	keep	lookup
 constraint:cued-name	（人形）は、きれい	(인형)은, 예쁘다	keep	lookup
+constraint:cued-name	(1)では次に進みます。	(1)에서는 다음에 나아갑니다.	fix	lookup
+constraint:cued-name	（２）でも同じだ	(2)라도 같다	keep	lookup

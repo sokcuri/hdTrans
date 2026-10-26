@@ -26,7 +26,7 @@ bool CaptionLead(std::string_view s);
 
 // The end of the group in round brackets that a caption line opens with after caption marks
 // (（島田）では, ⚟（明）さい～！, (会場内 笑い)(せいや)世界), when an utterance follows it
-// (SpeechAfterLabel): a speaker label or an aside; 0 for none.
+// (SpeechAfterLabel): a speaker label or an aside, not a number ((1)では); 0 for none.
 std::size_t CaptionLabelEnd(std::string_view line);
 
 // Whether rest, the text after a speaker label in brackets, starts an utterance: there is text
