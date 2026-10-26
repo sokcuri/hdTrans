@@ -20805,7 +20805,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 瞬膜	순막	N110	VAm		GN						しゅんまく	w:20763
 瞬間移動	순간이동	N110		Hd	GN						しゅんかんいどう	w:20764
 瞬間移動	순간이동&AV@	M429			GN						しゅんかんいどう	w:20765
-瞼	눈꺼풀	N110			GN				xxx llm	1		w:20766
+瞼	눈꺼풀	N110	VBp		GN				xxx llm	1		w:20766
 瞿麦	패랭이속	N110			GN						なでしこ	w:20767
 矛盾	모순&AV@	M429			GN				xxx	1	むじゅん	w:20768
 矛盾性	모순성	N110			GN						むじゅんせい	w:20769
