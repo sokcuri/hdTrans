@@ -19,7 +19,7 @@ lookup:space-boundary	２つ ついてんの？	2개 붙어 있어?	fix	lookup
 lookup:space-boundary	あっ ４番 いいね｡	앗 4번 좋네.	fix	lookup
 lookup:space-boundary	いい体 してるな	좋은 몸 하고 있구나	fix	lookup
 lookup:space-boundary	青い空 白い雲	푸른 하늘 흰 구름	fix	lookup
-lookup:space-boundary	あ ごめんね	lacks:턱	fix	lookup
+lookup:space-boundary	あ ごめんね	아 미안해	fix	lookup
 lookup:space-boundary	何だ あれ？	뭐야 저게?	keep	lookup
 lookup:space-boundary	ようこそ いらっしゃいました｡	잘 오셨습니다.	keep	lookup
 lookup:space-boundary	そういうわけには いかないんですよ！	그럴 수는 없어요!	keep	lookup
@@ -36,3 +36,57 @@ lookup:space-boundary	こ れ は も し やｗ	이것은 어쩌면 ㅋ	keep	lo
 lookup:space-boundary	ver 1.2 を入れた	ver 1.2를 넣었다	keep	lookup
 lookup:space-boundary	姿を消す っていうぜ	자취를 감춘다고 한다	keep	lookup
 lookup:space-boundary	時間が もっと欲しい ってこと！	시간이 좀 더 갖고 싶다는 것!	keep	lookup
+lookup:space-boundary	あ　ごめんね	아 미안해	fix	lookup
+lookup:space-boundary	あ みんな主張するんだ	아 모두 주장하는 거야	fix	lookup
+lookup:space-boundary	あ いや なんでもないんです	아 아니 아무것도 아닙니다	fix	lookup
+lookup:space-boundary	ええ 私だ	has:네 	fix	lookup
+lookup:space-boundary	いや　かわいくないよ。	has:아니 	keep	lookup
+lookup:space-boundary	おい　また来たのか	has:이봐 	keep	lookup
+lookup:space-boundary	ああ 口座のバイトの子か	has:아 	keep	lookup
+lookup:space-boundary	うん 悪くない	has:응 	keep	lookup
+lookup:space-boundary	いや 俺にも	has:아니 	keep	lookup
+lookup:space-boundary	ほら 新しいマネージャー呼んどいたから	has:자 	keep	lookup
+lookup:space-boundary	ねえ 急いで！	has:저기 	keep	lookup
+lookup:space-boundary	まあ　ごく一部しか行けないゾーンですよね。	has:뭐 	keep	lookup
+lookup:space-boundary	うん イケるね	has:응 	keep	lookup
+lookup:space-boundary	ああ あれは	has:아 	keep	lookup
+lookup:space-boundary	いや しかし…	has:아니 	keep	lookup
+lookup:space-boundary	ああ ごめんね	아 미안해	keep	lookup
+lookup:space-boundary	え ごめんね	네 미안해	fix	lookup
+lookup:space-boundary	ええ ごめんね	네 미안해	fix	lookup
+lookup:space-boundary	はい ごめんね	네 미안해	fix	lookup
+lookup:space-boundary	よし 行こう	좋아 가자	keep	lookup
+lookup:space-boundary	まあ いい	뭐 됐다	keep	lookup
+lookup:space-boundary	いや そうじゃない	has:아니 그렇지	keep	lookup
+cx:even-before-passive:60	うん で それは	has:응 그리고	fix	rewrites
+cx:even-before-passive:60	学生です	!rule:cx:even-before-passive:60	keep	rewrites
+lookup:space-boundary	いや でも楽しんで？	has:아니 하지만	fix	lookup
+lookup:space-boundary	うん でも…	has:응 하지만	fix	lookup
+lookup:space-boundary	金 貸して	돈 빌려 줘	keep	lookup
+lookup:space-boundary	本 当 に	정말	keep	lookup
+lookup:space-boundary	あの人	그 사람	keep	lookup
+lookup:space-boundary	あれを見る	저것을 본다	keep	lookup
+lookup:space-boundary	ええと ごめん	음 미안	keep	lookup
+lookup:space-boundary	あ、あの	저, 저기	keep	lookup
+lookup:space-boundary	「あ」という文字	「아」라는 문자	keep	lookup
+lookup:space-boundary	学生では ありません	학생이 아닙니다	fix	lookup
+lookup:space-boundary	わざとでは ありません	has:아닙니다	fix	lookup
+lookup:space-boundary	では あなたから	그럼 당신으로부터	keep	lookup
+lookup:space-boundary	では あの人に	그럼 그 사람에게	keep	lookup
+lookup:space-boundary	では ありがとう	그럼 고마워	keep	lookup
+lookup:space-boundary	では 明日	그럼 내일	keep	lookup
+cx:spaced-retort:10	何 言ってるのよ。	무슨 소리야.	fix	rewrites
+lookup:space-boundary	何 言ってるんだい	무슨 소리야	fix	lookup
+cx:spaced-retort:10	何 言ってるんだろう	!rule:cx:spaced-retort:10	keep	rewrites
+lookup:space-boundary	何 言ってるか分からない	lacks:소리야	keep	lookup
+lookup:space-boundary	何 する？	has:뭐 해?	keep	lookup
+lookup:space-boundary	どう する	has:어떻게	keep	lookup
+lookup:space-boundary	もう かれこれ１年近く	has:이럭저럭	keep	lookup
+lookup:space-boundary	母に ものすごく反対されて	has:대단히	keep	lookup
+lookup:space-boundary	私も あんたもとても	has:너도	keep	lookup
+lookup:space-boundary	はい いらっしゃいませ	has:네 어서 오세요	keep	lookup
+lookup:space-boundary	となると これしかあるまい	has:그렇게 되면	keep	lookup
+lookup:space-boundary	あと50円 安いやつ。	has:앞으로 50엔	keep	lookup
+lookup:space-boundary	あら ヤダ…	has:어머나 싫어	keep	lookup
+lookup:space-boundary	えっ	lacks:네	keep	lookup
+lookup:space-boundary	あったな あのくだらん話	has:있었군	keep	lookup

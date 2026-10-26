@@ -40,6 +40,7 @@ struct ResolvedItem {
     ResolvedEntry first;     // entry 0 (equal to entry when selected is 0; empty without entries)
     ResolvedEntry ending;    // the selected ending (empty when directIndex is -1)
 
+    bool spaceAfter = false;     // a source space after an isolated interjection stays a word boundary
     bool fixed = false;          // entry 0 comes from a plain dictionary: its targets are not reassigned
     std::string endingSurface;   // source text of the ending group, "" without one
     int endingLength = 0;        // bytes of the ending group's source key, 0 without one

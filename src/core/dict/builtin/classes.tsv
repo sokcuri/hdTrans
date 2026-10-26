@@ -372,6 +372,7 @@
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.inclusive	Words that put the speaker together with others (一緒に, みんなで, 私たち, 我ら): a volitional in their sentence invites, 자 (われらの力を見せよう 우리들의 힘을 보여 주자).
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
+//= word.pause-filler	Fillers read apart before a source space; a longer word containing them is not a member.
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
@@ -5980,6 +5981,15 @@ word.partner-to	同時
 word.partner-to	どうじ
 word.partner-to	同様
 word.partner-to	等し
+word.pause-filler	あ
+word.pause-filler	え
+word.pause-filler	ええ
+word.pause-filler	ええと
+word.pause-filler	はい
+word.pause-filler	いや
+word.pause-filler	まあ
+word.pause-filler	まぁ
+
 word.recall-interjection	あ
 word.recall-interjection	あっ
 word.recall-interjection	あー

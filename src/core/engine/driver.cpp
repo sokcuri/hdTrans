@@ -29,6 +29,7 @@
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
 
@@ -350,6 +351,15 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
         if (j > first && j <= last && tokens[static_cast<std::size_t>(j)].afterSpace && into >= 0 &&
             t.type == tokenizer::kTypeJapanese && joined[static_cast<std::size_t>(into)].type == tokenizer::kTypeJapanese &&
             (head < 0 || head > intoLast)) {
+            const int tail = to[static_cast<std::size_t>(j - 1)];
+            if (tail >= 0) {
+                output::ResolvedItem& previous = items[static_cast<std::size_t>(tail)];
+                if (previous.entry.code.starts_with("32") ||
+                    (previous.detailClass == output::DetailClass::None &&
+                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1))))) {
+                    previous.spaceAfter = true;
+                }
+            }
             intoLast = std::max(intoLast, to[static_cast<std::size_t>(j)]);
             index[static_cast<std::size_t>(j)] = into;
             shift[static_cast<std::size_t>(j)] = static_cast<int>(joined[static_cast<std::size_t>(into)].text.size());
@@ -627,9 +637,17 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
         using tokenizer::SpaceWord;
         if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
+        if (word == SpaceWord::Filler) {
+            if (dict::InClass(HDTRANS_CLASS("word.pause-filler"), head)) return true;
+            const dict::Candidates found = snap.GetWordInfo(head, dict::LookupMode::General, lookup);
+            return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) {
+                return c.source == head && c.codes != nullptr && c.codes->part.ClassDigit() == '3' &&
+                       c.codes->part.Sub() == '2';
+            });
+        }
         for (std::size_t start = 0; start < head.size();) {
             const std::string_view left = head.substr(start);
-            if (word == SpaceWord::Name && text::RuneCount(left) < 2 &&
+            if (word == SpaceWord::Binding && text::RuneCount(left) < 2 &&
                 !(start == 0 && text::IsKanji(text::DecodeRune(left).cp))) {
                 break;
             }
@@ -647,8 +665,26 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                 const bool place = c.codes != nullptr && c.codes->sem.HasPrefix("QCT");
                 const bool name = (c.codes != nullptr && (c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QWK"))) ||
                                   (c.user != nullptr && c.user->nameLayer && !place);
-                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Name && name) ||
-                                  (word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2);
+                bool bound = false;
+                if (word == SpaceWord::Binding && ClassOf(c) == '4' && c.codes->gram.HasCode("Pj") && c.codes->gram.HasCode("Tu") &&
+                    c.codes->gram.HasCode("Ma")) {
+                    const std::string_view rest = std::string_view(query).substr(c.source.size());
+                    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                        const std::string_view form = word::Conjugation(c.codes->part.VerbKind(), branch);
+                        if (!form.empty() && rest.starts_with(form)) bound = true;
+                    }
+                    if (bound) {
+                        const dict::Candidates right = snap.GetWordInfo(after, dict::LookupMode::General, lookup);
+                        for (const dict::Candidate& r : right.list) {
+                            if (r.source.size() > c.source.size() - left.size() && r.codes != nullptr &&
+                                std::string_view("0134789").find(ClassOf(r)) != std::string_view::npos) {
+                                bound = false;
+                            }
+                        }
+                    }
+                }
+                const bool phrase = word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2;
+                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Binding && (name || bound)) || phrase;
                 if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);
