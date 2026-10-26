@@ -150,7 +150,7 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     const installed = join(project, 'node_modules/hdtrans');
     const manifest = JSON.parse(await readFile(join(installed, 'package.json'), 'utf8'));
     assert.equal(manifest.name, 'hdtrans');
-    assert.equal(manifest.license, 'AGPL-3.0-or-later');
+    assert.equal(manifest.license, 'MPL-2.0');
     assert.equal(manifest.engines.node, '>=22');
     assert.equal(manifest.bin.hdtrans, './dist/cli.js');
     assert.deepEqual(manifest.exports['.'], {
