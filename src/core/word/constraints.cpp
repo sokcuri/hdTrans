@@ -97,6 +97,9 @@ constexpr ConstraintRule kRules[] = {
      "する의 활용이 이어지는 ことし는 今年이 아니라 こと + する (エッチなことしないで 야한 금년 없고 → 야한 짓 하지 마)", {}},
     {"o-stem-nasai", ConstraintWord::OStem, "", ConstraintContext::BeforeNasai, ConstraintReject::Word,
      "なさい 앞의 お와 동사 연용형은 명사가 아니라 お + 동사의 명령 (お待ちなさい 대기 없음 있고 → 기다려)", {}},
+    {"adverb-copula", ConstraintWord::WithKanji, "", ConstraintContext::BeforeCopulaPredicate,
+     ConstraintReject::AdverbBesideAdjectivalNoun,
+     "계사가 뒤따르는 낱말에 형용동사 뜻이 있으면 부사 뜻을 버림: 부사는 계사로 서술하지 않음 (相変わらずだな 변함없이네 → 변함없네)", {}},
     {"itadake-dake", ConstraintWord::EndsInSource, "いただけ", ConstraintContext::BeforeCopula, ConstraintReject::Word,
      "だ, で, じゃ, に, の, か 앞에서 いただけ로 끝나는 말은 いただける가 아니라 いた + だけ (待っていただけだ 기다려 받을 수 있고 → 기다렸을 뿐이다, 油断していただけだから 방심해 주실 수 있고니까 → 방심하고 있었을 뿐이니까)", {}},
     {"itadaku-ke-after-te", ConstraintWord::Source, "いただ", ConstraintContext::AfterTeBeforeDake, ConstraintReject::Word,
@@ -337,6 +340,19 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
         return DakeEnds(after);
+    case ConstraintContext::BeforeCopulaPredicate: {
+        if (after.starts_with("だけ")) return false;
+        for (const std::string_view c : {"だ", "です", "でし", "じゃ", "でしょ"}) {
+            if (after.starts_with(c)) return true;
+        }
+        // な before the noun it describes (相変わらずな人). A ね or よ right after the adverb may only mark a
+        // pause (早速ね　君に), and the chunk ends before the mark that would tell.
+        if (after.starts_with("な")) {
+            const std::string_view rest = after.substr(std::string_view("な").size());
+            return !rest.empty() && (NameClassOf(FirstChar(rest)) == kClassKanji || NameClassOf(FirstChar(rest)) == kClassKatakana);
+        }
+        return false;
+    }
     case ConstraintContext::NotCommonSense:
         return dict::StartsWithMember(HDTRANS_CLASS("name.common-after"), after) == 0 && !HonorificAt(after, false);
     case ConstraintContext::NotAfterNoun:  // Worker::NotAfterNoun, which looks the word before up
@@ -749,6 +765,28 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 }
                 if (rejected.size() == same.size()) rejected.clear();
                 break;
+            case ConstraintReject::AdverbBesideAdjectivalNoun: {
+                // Every adverb sense goes when one of them is the adverbial form in 이 or 히 of the
+                // adjectival noun's Korean (변함없이 of 변함%B4@; 충분히 of 충분%A1@, and 十分's 10분 with it;
+                // not 처음 beside 처음%..@, which takes the copula as a noun).
+                bool derivedAdverb = false;
+                for (const std::size_t k : same) {
+                    if (list[k].codes->part.ClassDigit() != '3') continue;
+                    const bool derived = std::any_of(same.begin(), same.end(), [&](std::size_t j) {
+                        if (list[j].codes->part.ClassDigit() != '8') return false;
+                        const std::string_view stem = std::string_view(list[j].target).substr(0, list[j].target.find_first_of("%$&"));
+                        const std::string_view adverb = list[k].target;
+                        return !stem.empty() && adverb.size() > stem.size() && adverb.starts_with(stem) &&
+                               (adverb.ends_with("이") || adverb.ends_with("히"));
+                    });
+                    derivedAdverb = derivedAdverb || derived;
+                }
+                for (const std::size_t k : same) {
+                    if (derivedAdverb && list[k].codes->part.ClassDigit() == '3') rejected.push_back(k);
+                }
+                if (rejected.size() == same.size()) rejected.clear();
+                break;
+            }
             case ConstraintReject::OtherTargets:
                 for (const std::size_t k : same) {
                     if (list[k].target != rule.target) rejected.push_back(k);

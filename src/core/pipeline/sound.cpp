@@ -433,6 +433,7 @@ public:
     std::string WriteCries();
     // The spans [from, to) in characters that the last Write read as sound lexicon keys.
     const std::vector<std::pair<size_t, size_t>>& Spans() const { return spans_; }
+    const std::vector<std::pair<size_t, size_t>>& KeySpans() const { return keySpans_; }
 
 private:
     std::string_view Bytes(size_t from, size_t to) const {
@@ -457,6 +458,7 @@ private:
     bool PoliteAt(size_t p) const;
     // The quote PoliteAt read last, [politeFrom_, politeTo_], and whether it speaks politely.
     std::vector<std::pair<size_t, size_t>> spans_;
+    std::vector<std::pair<size_t, size_t>> keySpans_;  // each key of the spans
     mutable size_t politeFrom_ = 1, politeTo_ = 0;
     mutable bool politeQuote_ = false;
     bool PresentTime(size_t end) const;
@@ -1890,6 +1892,7 @@ std::string SoundText::Write() {
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
             spans_.emplace_back(i, next);
+            for (const SoundMatch& m : chain) keySpans_.emplace_back(m.start, m.end);
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
             // where the form describes no word, the と goes back to it (ドンという。 쾅이라고 한다).
             const size_t quoted = chain.back().intj ? 0 : std::max(QuotingAt(next - 1), QuotingAt(next));
@@ -2213,6 +2216,12 @@ std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const L
     SoundText t(text, ctx, snap);
     t.Write();
     return t.Spans();
+}
+
+std::vector<std::pair<size_t, size_t>> SoundKeySpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    SoundText t(text, ctx, snap);
+    t.Write();
+    return t.KeySpans();
 }
 
 std::string WriteCries(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -2992,13 +3001,14 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
     const std::string completed = internal::RewriteDrawnHonorifics(
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
-    std::string sounded =
-        internal::RewriteCasualAdjectives(internal::WriteSounds(
-                                              internal::RewriteOnbinU(
-                                              internal::RewriteContractedNo(
-                                                  internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
-                                              ctx, snap), ctx, snap),
-                                          ctx, snap);
+    std::string sounded = internal::WriteSounds(
+        internal::RewriteCasualAdjectives(
+            internal::RewriteOnbinU(
+                internal::RewriteContractedNo(
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                ctx, snap),
+            ctx, snap),
+        ctx, snap);
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }

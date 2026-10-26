@@ -1,0 +1,25 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	うるせぇんだよ	시끄러워	fix	sound
+sound:fused-adjective	面倒くせえな おい	귀찮다 어이	fix	sound
+sound:fused-adjective	うわっ 酒くせぇ｡	우왓 술 냄새가 나다.	fix	sound
+sound:fused-adjective	マジか ヤベェな	진짜야 위험하네	fix	sound
+sound:fused-adjective	バレたら受験ヤベえぞ	들키면 수험 위험해	fix	sound
+sound:fused-adjective	重てえな… 持てよ	무겁다… 가져	fix	sound
+sound:fused-adjective	昔の人はうめえ物 食ってたんだな	옛날 사람은 맛있는 것 먹고 있었구나	fix	sound
+sound:fused-adjective	なんで笑ってんだよ… 声でけえし	왜 웃는 거야… 목소리 크고	fix	sound
+sound:fused-adjective	指が でっけえなあ	손가락이 아주 크구나	fix	sound
+sound:fused-adjective	棟梁 水くせえぞ！	동량 싱거워!	fix	sound
+sound:fused-adjective	冷てえ！	차가워!	fix	sound
+sound:fused-adjective	あったけえ風が吹くか	따뜻한 바람이 불까	fix	sound
+sound:fused-adjective	しゃらくせえ！	건방져!	fix	sound
+sound:fused-adjective	液体かなって思うほど柔らけぇし	액체일까라고 생각하는 만큼 부드럽고	fix	sound
+sound:fused-adjective	なげえな｡	기네.	fix	sound
+sound:fused-adjective	もう おもしれえよそれ	이제 재미있어 그것	fix	sound
+sound:fused-adjective	何か説教くせえな	뭔가 설교 냄새가 나네	fix	sound
+sound:fused-adjective	おめでてえな…。	경사스럽네….	fix	sound
+sound:fused-adjective	ちっちぇえ	작다	fix	sound
+sound:fused-adjective	器がちっちぇえな	그릇이 작네	fix	sound
+sound:fused-adjective	ウゼぇんだよ！	시끄러워!	fix	sound
+sound:fused-adjective	ツメテェー！	차가워!	fix	sound
+sound:fused-adjective	えれえ目に遭わしやがって	has:엄청난 일에	fix	sound

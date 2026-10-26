@@ -305,16 +305,19 @@ std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth) {
     return styles;
 }
 
-std::vector<bool> CasualQuotes(std::string_view line, int depth) {
+std::vector<bool> CasualQuotes(std::string_view line, int depth, const FusedTest& fused) {
     const std::vector<std::string> texts = OwnTexts(line, depth);
     std::vector<bool> casual(texts.size(), false);
-    for (std::size_t k = 1; k < texts.size(); k++) casual[k] = CasualOf(texts[k]);
+    for (std::size_t k = 1; k < texts.size(); k++) {
+        casual[k] = CasualOf(texts[k]) || (fused.holds != nullptr && !StiffSpeech(texts[k]) && fused.holds(fused.context, texts[k]));
+    }
     return casual;
 }
 
-Spoken SpokenLine(std::string_view line, int depth) {
+Spoken SpokenLine(std::string_view line, int depth, const FusedTest& fused) {
     if (depth > 0 || line.starts_with("　")) return Spoken::No;
-    if (CasualOf(OwnTexts(line, 0)[0], false)) return Spoken::Marked;
+    const std::string own = OwnTexts(line, 0)[0];
+    if (CasualOf(own, false) || (fused.holds != nullptr && !StiffSpeech(own) && fused.holds(fused.context, own))) return Spoken::Marked;
     std::u32string kept;  // the line without spaces
     int spaces = 0;
     for (std::string_view t = line; !t.empty();) {

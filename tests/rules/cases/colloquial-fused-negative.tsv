@@ -1,0 +1,22 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	分からねえ。　忘れちまった。	모른다. 잊어버렸다.	fix	sound
+sound:fused-adjective	俺が言うんだから間違いねえよ	내가 말하니까 틀림없어	fix	sound
+sound:fused-adjective	しかし もったいねえよな｡	하지만 아깝지.	fix	sound
+sound:fused-adjective	情けねえ話だよなあ	한심한 이야기야	fix	sound
+sound:fused-adjective	誰もいねえ部屋で足音が聞こえたり	아무도 없는 방에서 발소리가 들리거나	fix	sound
+sound:fused-adjective	全然 足りねえ	전혀 부족하다	fix	sound
+sound:fused-adjective	ならねえよ！	안돼!	fix	sound
+sound:fused-adjective	密告してるに違いねえって思ったんだ	밀고하고 있는 것이 틀림없다고 생각한 거야	fix	sound
+sound:fused-adjective	グニャグニャで読めねえ	흐물흐물로 읽을 수 없다	fix	sound
+sound:fused-adjective	「えげつねぇ……」	「지독해……」	fix	sound
+sound:fused-adjective	おっかねえ神様みたいに思ってたんだ	무서운 신같이 생각했어	fix	sound
+sound:fused-adjective	しのびねえな	참을 수 없네	fix	sound
+sound:fused-adjective	何だよ つれねえな｡	무엇이야 무정하네.	fix	sound
+sound:fused-adjective	問題ねえ	문제없다	fix	sound
+sound:fused-adjective	あんなタイプの選手は今まで見たことがねえ	저런 타입의 선수는 지금까지 본 적이 없다	fix	sound
+sound:fused-adjective	後ろのことは関係ねぇ｡	뒤는 관계없다.	fix	sound
+sound:fused-adjective	いちばん げせねえのは	가장 알 수 없는 것은	fix	sound
+sound:fused-adjective	この先 もたねえぞ？	이 앞 갖지 않아?	fix	sound
+sound:fused-adjective	道端で飯を喰うこともならねえ	길가에서 밥을 먹는 일도 안된다	fix	sound
+sound:fused-adjective	あぶね～｡	위험하다.	fix	sound

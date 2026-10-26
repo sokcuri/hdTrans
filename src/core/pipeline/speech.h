@@ -28,19 +28,26 @@ constexpr std::uint8_t kPoliteForm = 128;
 // line starts inside a quote an earlier line opened, which is its first quote.
 std::vector<std::uint8_t> QuoteStyles(std::string_view line, int depth = 0);
 
+// Whether text holds a fused or clipped adjective that the dictionary tells (すげえ, 痛え, さみい,
+// 寒っ), forms of speech only; holds is null where nothing is looked up.
+struct FusedTest {
+    bool (*holds)(const void* context, std::string_view text) = nullptr;
+    const void* context = nullptr;
+};
+
 // For each quote of line (indexed as QuoteStyles), whether its own text, without the quotes
 // inside it, is casual speech: a sentence-final よ, ね, わ, じゃん, さ, もん, って, かな or
 // かしら not after a polite form (そうですよ), or a contraction (食べちゃう, 見てる, やっとく,
-// 知らねえ); not a quote with stiff or lordly marks (のだ, である, たまえ, かね, 我々, a sentence
-// ended by が).
-std::vector<bool> CasualQuotes(std::string_view line, int depth = 0);
+// 知らねえ, and what fused holds: でけぇ, 痛え); not a quote with stiff or lordly marks (のだ,
+// である, たまえ, かね, 我々, a sentence ended by が).
+std::vector<bool> CasualQuotes(std::string_view line, int depth = 0, const FusedTest& fused = {});
 
 // Whether line, in a document without 「」, is a line of speech (spec SPC-18): Marked when its
 // text outside quotes holds a sentence-final particle of casual speech (CasualQuotes, not its
-// contractions); End when it ends without 。, ！, ？, an ellipsis, a comma or a dash, looking
+// contractions) or what fused holds; End when it ends without 。, ！, ？, an ellipsis, a comma or a dash, looking
 // past trailing ☆, ♪, ー and closing brackets, and holds no label colon (名前：説明) or
 // column of spaces. Never a line indented with an ideographic space.
 enum class Spoken : std::uint8_t { No, End, Marked };
-Spoken SpokenLine(std::string_view line, int depth = 0);
+Spoken SpokenLine(std::string_view line, int depth = 0, const FusedTest& fused = {});
 
 }  // namespace hdTrans::pipeline

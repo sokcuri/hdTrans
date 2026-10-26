@@ -95,7 +95,7 @@ namespace hdTrans::pipeline {
 // RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
 // RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
-// RewriteOnbinU, WriteSounds, then RewriteCasualAdjectives;
+// RewriteOnbinU, RewriteCasualAdjectives, then WriteSounds;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
 // WriteCries.
 // Markup tags, BBCode tags, entities and ctx.markers are left as they are. The lookups
@@ -137,6 +137,9 @@ std::string WriteSounds(std::string_view text, const LineContext& ctx, const dic
 
 // The spans [from, to) in characters of text that WriteSounds reads as keys of the sound lexicon.
 std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The spans of SoundSpans key by key (ちっ and ちぇえ of ちっちぇえ).
+std::vector<std::pair<size_t, size_t>> SoundKeySpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The cries of text that the lexicon lacks written in Korean as heard: a run of kana
 // that starts with hiragana (katakana speech and names are left to later stages) where an
@@ -223,12 +226,12 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 // closing bracket, な, ね or a drawn vowel.
 std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap);
 
-// The casual adjective endings -ee and -ii of -ai, -oi, -ui (うるせぇ, すげー, わりぃ,
-// 冷て～) written in full (うるさい, すごい, わるい, 冷たい) before the end of a clause or a
-// sentence particle, when the dictionary has the stem, starting a word, as an
-// adjective. Not after っ or ん, not the particle ぜ (歌おうぜぇ), not a て form
-// (届いてぇ; 冷てぇ and いてぇ are adjectives). A kanji that starts a word clipped with っ
-// before a mark is the adjective of that kanji with い (浅っ 浅い).
+// The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
+// dictionary said with its last syllable and い fused (うるせぇ うるさい, すげーな すごいな, 若え！ 若い！,
+// 汚ねえ 汚い, さみい さむい, 分からねえ 分からない) before the end of a clause, a sentence particle or the
+// noun it describes, or clipped with っ before a mark (浅っ 浅い, where a clause starts くさっ！ くさい！);
+// see FusedAdjectiveAt and ClippedAdjectiveAt in colloquial.cpp for what stays. Where one key of the
+// sound lexicon reads the whole form (すげぇ 대박), the sound stage reads it.
 std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
