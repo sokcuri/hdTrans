@@ -423,6 +423,7 @@ gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOption
     options.cg = app.settings.cg;
     options.misread = app.settings.misread;
     options.speech = app.settings.speech;
+    options.wrapped = app.settings.wrapped;
     return options;
 }
 

@@ -47,15 +47,26 @@ export interface TranslationResult {
  *  without 「」 that read as speech. */
 export type Speech = 'soft' | 'strict';
 
+/** Options of one translate() call; speech and wrapped apply to this call only. */
+export interface TranslateOptions {
+  json?: boolean;
+  speech?: Speech;
+  wrapped?: boolean;
+  /** Lines that come before text in the same document, read only for their cues and, when
+   *  wrapped, for the start of a sentence text goes on with; they are not returned. */
+  context?: readonly string[];
+}
+
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
 export type EhndFiles = Readonly<Record<string, string>>;
 
 interface Binding {
   open(directories: readonly string[]): boolean;
-  translate(text: string): string;
-  translateJson(text: string): TranslationResult;
+  translate(text: string, context: string): string;
+  translateJson(text: string, context: string): TranslationResult;
   reset(): boolean;
   setSpeech(speech: Speech): boolean;
+  setWrapped(wrapped: boolean): void;
   setUserDictRaw(text: string): boolean;
   getUserDict(): UserDictEntry[];
   setEhnd(files: EhndFiles): boolean;
@@ -86,6 +97,7 @@ export interface InitOptions {
   directories?: readonly string[];
   ehnd?: EhndFiles;
   speech?: Speech;
+  wrapped?: boolean;
 }
 
 export class HdTrans {
@@ -95,6 +107,7 @@ export class HdTrans {
   private dictionaryVersion_ = '';
   private userDictRaw_ = '';
   private speech_: Speech = 'strict';
+  private wrapped_ = false;
 
   private constructor(binding: Binding, version: string) {
     this.binding_ = binding;
@@ -120,6 +133,7 @@ export class HdTrans {
       translator.dictionaryVersion_ = binding.dictionaryVersion;
       if (options.ehnd) translator.setEhnd(options.ehnd);
       if (options.speech) translator.setSpeech(options.speech);
+      if (options.wrapped !== undefined) translator.setWrapped(options.wrapped);
       return translator;
     } catch (error) {
       translator.close();
@@ -146,21 +160,29 @@ export class HdTrans {
     };
   }
 
-  /** options.speech applies to this call only; setSpeech() sets it for later calls. */
+  /** options.speech and options.wrapped apply to this call only; setSpeech() and setWrapped()
+   *  set them for later calls. Nothing is kept from one call to the next. */
   translate(text: string): string;
-  translate(text: string, options: { json: true; speech?: Speech }): TranslationResult;
-  translate(text: string, options: { json?: false; speech?: Speech }): string;
-  translate(text: string, options: { json?: boolean; speech?: Speech }): string | TranslationResult;
-  translate(text: string, options: { json?: boolean; speech?: Speech } = {}): string | TranslationResult {
+  translate(text: string, options: TranslateOptions & { json: true }): TranslationResult;
+  translate(text: string, options: TranslateOptions & { json?: false }): string;
+  translate(text: string, options: TranslateOptions): string | TranslationResult;
+  translate(text: string, options: TranslateOptions = {}): string | TranslationResult {
     const binding = this.binding();
     if (typeof text !== 'string') throw new TypeError('hdtrans: text must be a string');
-    if (options.speech === undefined) return options.json ? binding.translateJson(text) : binding.translate(text);
-    const previous = this.speech_;
-    this.setSpeech(options.speech);
+    const lines = options.context ?? [];
+    if (!Array.isArray(lines) || lines.some((line) => typeof line !== 'string')) {
+      throw new TypeError('hdtrans: context must be an array of strings');
+    }
+    const context = lines.join('\n');
+    const speech = this.speech_;
+    const wrapped = this.wrapped_;
     try {
-      return options.json ? binding.translateJson(text) : binding.translate(text);
+      if (options.speech !== undefined) this.setSpeech(options.speech);
+      if (options.wrapped !== undefined) this.setWrapped(options.wrapped);
+      return options.json ? binding.translateJson(text, context) : binding.translate(text, context);
     } finally {
-      this.setSpeech(previous);
+      if (options.speech !== undefined) this.setSpeech(speech);
+      if (options.wrapped !== undefined) this.setWrapped(wrapped);
     }
   }
 
@@ -169,6 +191,15 @@ export class HdTrans {
     const binding = this.binding();
     if (!binding.setSpeech(speech)) throw new Error(binding.error);
     this.speech_ = speech;
+  }
+
+  /** Whether the lines of later translations may break mid-sentence (captions, hooked text);
+   *  the line count is kept. false until set. */
+  setWrapped(wrapped: boolean): void {
+    const binding = this.binding();
+    if (typeof wrapped !== 'boolean') throw new TypeError('hdtrans: wrapped must be a boolean');
+    binding.setWrapped(wrapped);
+    this.wrapped_ = wrapped;
   }
 
   reset(): void {

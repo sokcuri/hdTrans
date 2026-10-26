@@ -97,6 +97,8 @@ void Usage(std::FILE* file) {
                "  --each, --raw          each line on its own (as text hooks send it), or word-pipeline-only lines\n"
                "  --speech LEVEL         strict (default): keep -다 but where the Japanese marks casual speech;\n"
                "                         soft: 해체 in 「」 and on bare lines that read as speech\n"
+               "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
+               "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -292,6 +294,8 @@ int RunMain(int argc, char** argv) {
     bool selectShadow = false;
     bool misread = false;
     std::optional<std::string> speechArg;
+    bool wrapped = false;
+    std::string contextPath;
     bool noCg = false;
     bool cgLearned = false;
     bool reference = false;
@@ -326,7 +330,7 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-speech";
+            || option == "-dump-rules" || option == "-speech" || option == "-context";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -364,6 +368,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-speech") speechArg = *value;
+        else if (option == "-wrapped") wrapped = true;
+        else if (option == "-context") contextPath = *value;
         else if (option == "-no-cg") noCg = true;
         else if (option == "-cg-learned") cgLearned = true;
         else {
@@ -374,6 +380,10 @@ int RunMain(int argc, char** argv) {
     }
     if (hasText && !inPath.empty()) {
         std::fputs("hdtrans: text arguments and --in cannot be combined\n", stderr);
+        return 2;
+    }
+    if ((wrapped || !contextPath.empty()) && (each || raw)) {
+        std::fputs("hdtrans: --wrapped and --context cannot be combined with --each or --raw\n", stderr);
         return 2;
     }
 
@@ -391,6 +401,7 @@ int RunMain(int argc, char** argv) {
     if (!ehndArg && config.settings.ehnd) ehndArg = config.settings.ehnd;
     reference = reference || config.settings.reference;
     misread = misread || config.settings.misread;
+    wrapped = wrapped || config.settings.wrapped;
     hdTrans::Speech speech = config.settings.speech;
     if (speechArg && !hdTrans::internal::SpeechOf(*speechArg, speech)) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
@@ -526,6 +537,18 @@ int RunMain(int argc, char** argv) {
         }
     }
 
+    std::string context;
+    if (!contextPath.empty()) {
+        std::FILE* f = OpenFile(contextPath, false);
+        const bool read = f && ReadAll(f, context);
+        if (f) std::fclose(f);
+        if (!read) {
+            std::fprintf(stderr, "hdtrans: cannot read %s\n", contextPath.c_str());
+            return 1;
+        }
+        if (context.ends_with('\n')) context.pop_back();
+    }
+
     const auto snapshot = engine.Dictionaries();
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};
@@ -535,6 +558,7 @@ int RunMain(int argc, char** argv) {
     options.filters = filters.get();
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
+    options.wrapped = wrapped;
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
@@ -622,15 +646,20 @@ int RunMain(int argc, char** argv) {
 
     if (!raw && !each) {
         std::vector<std::string> lines;
-        size_t start = 0;
-        for (;;) {
-            const size_t end = input.find('\n', start);
-            lines.push_back(input.substr(start, end == std::string::npos ? std::string::npos : end - start));
-            if (end == std::string::npos) break;
-            start = end + 1;
-        }
+        const auto addLines = [&lines](const std::string& text) {
+            size_t start = 0;
+            for (;;) {
+                const size_t end = text.find('\n', start);
+                lines.push_back(text.substr(start, end == std::string::npos ? std::string::npos : end - start));
+                if (end == std::string::npos) break;
+                start = end + 1;
+            }
+        };
+        if (!context.empty()) addLines(context);
+        const size_t contextLines = lines.size();
+        addLines(input);
         const std::vector<std::string> translated =
-            hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options);
+            hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");

@@ -2,6 +2,7 @@ EXPORTS
     hdTrans_Initialize
     hdTrans_Terminate
     hdTrans_Translate
+    hdTrans_TranslateContext
     hdTrans_Reset
     hdTrans_Reload
     hdTrans_UserDictError

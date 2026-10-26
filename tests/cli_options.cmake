@@ -29,7 +29,8 @@ endfunction()
 
 run_cli(--help)
 require_success()
-if(NOT output MATCHES "^hdTrans v[^\n]+\nAuthor: Sokcuri" OR NOT output MATCHES "--out")
+if(NOT output MATCHES "^hdTrans v[^\n]+\nAuthor: Sokcuri" OR NOT output MATCHES "--out"
+   OR NOT output MATCHES "--wrapped" OR NOT output MATCHES "--context FILE")
     message(FATAL_ERROR "help header or options missing: ${output}")
 endif()
 run_cli(--version)

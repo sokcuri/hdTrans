@@ -10,9 +10,11 @@ export type {
   TranslationResult,
   EhndFiles,
   HdTransInfo,
+  Speech,
+  TranslateOptions,
 } from './runtime.js';
 
-export type InitOptions = Pick<RuntimeInitOptions, 'ehnd'>;
+export type InitOptions = Pick<RuntimeInitOptions, 'ehnd' | 'speech' | 'wrapped'>;
 export type HdTrans = RuntimeHdTrans;
 
 let modulePromise: Promise<EngineModule> | undefined;
@@ -47,6 +49,8 @@ export const HdTrans = Object.freeze({
       module: await modulePromise,
       directories: ['/dicts.hdsnap'],
       ehnd: options.ehnd,
+      speech: options.speech,
+      wrapped: options.wrapped,
     });
   },
 });

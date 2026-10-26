@@ -78,21 +78,23 @@ public:
         }
         session_ = std::make_unique<hdTrans::Session>(*engine_);
         session_->SetSpeech(speech_);
+        session_->SetWrapped(wrapped_);
         dictionaryVersion_ = hdTrans::frontend::DictionaryVersion(directories_);
         error_.clear();
         return true;
     }
 
-    std::string Translate(const std::string& text) {
+    // context: "\n"-separated lines read before text (Session::Translate); "" for none.
+    std::string Translate(const std::string& text, const std::string& context) {
         if (!Ready()) return {};
-        return session_->Translate(text);
+        return session_->Translate(text, context);
     }
 
-    val TranslateJson(const std::string& text) {
+    val TranslateJson(const std::string& text, const std::string& context) {
         if (!Ready()) return val::null();
         hdTrans::internal::TraceCollector collector;
         collector.result.text = hdTrans::internal::TranslateObserved(*session_, text,
-            hdTrans::internal::TraceObserver(collector));
+            hdTrans::internal::TraceObserver(collector), context);
         return Result(collector.result);
     }
 
@@ -110,6 +112,11 @@ public:
         }
         if (session_) session_->SetSpeech(speech_);
         return true;
+    }
+
+    void SetWrapped(bool wrapped) {
+        wrapped_ = wrapped;
+        if (session_) session_->SetWrapped(wrapped_);
     }
 
     bool SetUserDictRaw(const std::string& text) {
@@ -259,6 +266,7 @@ private:
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
     hdTrans::Speech speech_ = hdTrans::Speech::Strict;
+    bool wrapped_ = false;
     std::string error_;
     std::string dictionaryVersion_;
 };
@@ -275,6 +283,7 @@ EMSCRIPTEN_BINDINGS(hdtrans) {
         .function("translateJson", &Translator::TranslateJson)
         .function("reset", &Translator::Reset)
         .function("setSpeech", &Translator::SetSpeech)
+        .function("setWrapped", &Translator::SetWrapped)
         .function("setUserDictRaw", &Translator::SetUserDictRaw)
         .function("getUserDict", &Translator::GetUserDict)
         .function("setEhnd", &Translator::SetEhnd)

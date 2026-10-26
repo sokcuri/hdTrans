@@ -1,6 +1,7 @@
 #include "core/hdtrans.h"
 #include "core/dict/snapshot.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -50,6 +51,15 @@ std::string Translate(const std::string& text) {
     char* output = nullptr;
     std::size_t size = 0;
     Check(hdTrans_Translate(text.data(), text.size(), &output, &size) == 0, "translate");
+    const std::string result = output ? std::string(output, size) : std::string();
+    hdTrans_FreeMem(output);
+    return result;
+}
+
+std::string TranslateContext(const char* context, std::size_t cn, const std::string& text) {
+    char* output = nullptr;
+    std::size_t size = 0;
+    Check(hdTrans_TranslateContext(context, cn, text.data(), text.size(), &output, &size) == 0, "translate with context");
     const std::string result = output ? std::string(output, size) : std::string();
     hdTrans_FreeMem(output);
     return result;
@@ -345,7 +355,24 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: strict\n");
     Check(hdTrans_Reload() == 0, "reload strict speech");
     Check(Translate("「高い」") == "「높다」", "configured strict speech");
+    Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\nspeech: soft\nwrapped: true\n");
+    Check(hdTrans_Reload() == 0, "reload wrapped");
+    Check(Errors().empty(), "wrapped config diagnostics");
+    const std::string opening = "「高い。";
+    Check(TranslateContext(opening.data(), opening.size(), "高い。」") == "높아.」", "context lines give their quote");
+    Check(TranslateContext(nullptr, 0, "高い。」") == "높다.」" && Translate("高い。」") == "높다.」",
+          "no context is a plain call");
+    Check(TranslateContext(opening.data(), 0, "高い。」") == "높다.」", "an empty context is none");
+    const std::string lines = "高い\n高い\n";
+    const std::string two = TranslateContext(lines.data(), lines.size(), "高い\n高い");
+    Check(std::count(two.begin(), two.end(), '\n') == 1, "context keeps the line count");
     hdTrans_Terminate();
+    {
+        char* output = nullptr;
+        std::size_t size = 0;
+        Check(hdTrans_TranslateContext(nullptr, 0, "x", 1, &output, &size) == -1 && !output,
+              "context translation fails when terminated");
+    }
 
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: cache\n");
     std::string explicitDirs = Utf8(fixtures / "first");

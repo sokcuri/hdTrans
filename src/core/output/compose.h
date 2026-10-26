@@ -62,6 +62,9 @@ struct Settings {
     bool literal = false;
     QuoteState quotes;
     const std::vector<std::uint8_t>* quoteStyles = nullptr;
+    // A control marker inside a word goes before the word when more of the word follows it (the
+    // break between joined wrapped lines: 食べ / させられた 먹었다 on the second line).
+    bool markerBeforeWord = false;
 };
 
 // For each quote of the Korean line (indexed as pipeline::QuoteStyles, depth the quote

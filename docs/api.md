@@ -54,7 +54,7 @@ hdtrans --json --file input.txt --out result.json
 hdtrans --why --userdict userdict.txt "蒼月は学生です。"
 ```
 
-지원 옵션은 `--in`(`--file`), `--out`, `--json`, `--why`, `--userdict`, `--ehnd`, `--version`, `--help`입니다.
+지원 옵션은 `--in`(`--file`), `--out`, `--json`, `--why`, `--userdict`, `--ehnd`, `--wrapped`, `--context`, `--version`, `--help`입니다.
 입력은 UTF-8 파일, 문장 인자나 표준 입력입니다. `--json`은 `{ text, choices, logs }` 객체를 출력하고,
 `--out`과 함께 쓰면 JSON을 파일에 저장합니다. 로그와 오류는 표준 오류로 보냅니다.
 `--in`과 직접 문장을 함께 지정할 수 없으며 `--` 뒤의 인자는 옵션으로 해석하지 않습니다.
@@ -74,7 +74,7 @@ npm CLI의 `--userdict`는 파일 하나를 받으며 중복 지정은 오류입
 각 줄 뒤에 `\n`을 붙입니다.
 
 ```
-hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--speech LEVEL] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
+hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--speech LEVEL] [--wrapped] [--context FILE] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
 ```
 
 | 옵션 | 설명 |
@@ -90,6 +90,8 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 | `--ehnd DIR` | Ehnd 폴더 DIR의 필터, SkipLayer, 사용자 사전을 씀. 기본으로 쓰지 않으며 설정 파일로도 켤 수 있음. 건너뛴 줄은 표준 오류에 씀 ([ehnd-compat.md](ehnd-compat.md)) |
 | `--each` | 줄마다 따로 번역. 앞 줄이 다음 줄 결과를 바꾸지 않음 |
 | `--raw` | 줄마다 단어 파이프라인만으로 번역 |
+| `--wrapped` | 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계. `--each`, `--raw`와 함께 쓸 수 없고, 설정 파일의 `wrapped`는 그 둘에서 쓰지 않음 |
+| `--context FILE` | FILE의 UTF-8 줄을 입력 앞에 오는 같은 문서로 읽음. 이름, 「」 대사, 가족 호칭, 뜻 같은 단서로만 번역하고 출력하지 않음. `--wrapped`이면 입력이 이어 가는 문장의 앞부분. 끝의 줄바꿈 하나는 줄로 세지 않음. `--each`, `--raw`와 함께 쓸 수 없음 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
 | `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사. 표지 문자가 품사 코드의 부류와 맞지 않는 사전 줄([rule-language.md](rule-language.md#번역-안의-표지-d-y))이나 기본, 어휘 계층의 명사 줄 중 번역이 `하기`로 끝나는 한 낱말(출항하기, [dictionary-files.md](dictionary-files.md#열-파일))이 있으면 나열하고 실패 |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
@@ -145,6 +147,7 @@ CLI 플래그가 파일보다 우선합니다.
 | `misread` | bool, 기본 `false`. `true`는 `--misread` |
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
 | `speech` | `strict`(기본) 또는 `soft`, `--speech`와 같음 |
+| `wrapped` | bool, 기본 `false`. 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. `true`는 `--wrapped` |
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
 알 수 없는 키와 잘못된 값은 건너뛰고, 문법 오류 앞의 정상 항목은 유지합니다. 진단은 CLI의 표준 오류,
@@ -175,6 +178,8 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 - 프로세스에 엔진 하나, 세션 하나입니다. 호출마다 따로 번역하므로 앞에서 번역한 텍스트가 다음 결과를 바꾸지 않습니다.
   한 호출에 여러 줄(`\n`)을 넣으면 그 안에서만 앞뒤 줄을 참고합니다.
 - 말투는 설정 파일의 `speech`(`strict` 기본, `soft`)로 정하며 `hdTrans_Reload`에서 다시 읽습니다. 호출마다 바꾸는 함수는 없습니다.
+- 잘린 입력은 설정 파일의 `wrapped`로 알리며 `hdTrans_Reload`에서 다시 읽습니다. `wrapped: true`: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.
+- 앞 호출의 줄을 참고하려면 `hdTrans_TranslateContext`에 그 줄을 함께 넘깁니다.
 - 호출은 스레드 안전하지만 재진입은 안 됩니다. 라이브러리를 내리기 전에 모든 호출을 끝내야 합니다.
 - 초기화, 다시 읽기, 종료는 대기 중인 번역보다 먼저 처리됩니다.
 - 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`를 사전 폴더 다음에 읽고, 추가, 변경, 삭제를 자동 반영합니다
@@ -189,6 +194,7 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 | `int hdTrans_Initialize(const char* dirs)` | 사전 목록을 불러옴. `dirs`는 NUL로 구분하고 NUL 두 개로 끝나며 뒤 폴더가 앞을 덮어씀. `.hdsnap` 하나만 넘겨도 됨. NULL이나 빈 목록이면 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾음. 0 성공, -1은 불러오기 실패 또는 동시에 진행된 Terminate, Initialize, Reload가 이 불러오기를 취소함 |
 | `void hdTrans_Terminate(void)` | 세션과 사전 해제. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
 | `int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn)` | `text[0..n)`(`\n`으로 구분한 한 줄 이상)을 프로세스 세션에서 번역. `*out`에 NUL로 끝나는 버퍼, `*outn`에 길이(NUL 제외). 0 성공, -1 초기화 전, 종료 후 |
+| `int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n, char** out, size_t* outn)` | `context[0..cn)`의 줄을 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 `hdTrans_Translate`처럼 돌려줌. 문맥 줄은 단서와, `wrapped`이면 `text`가 이어 가는 문장의 앞부분으로만 쓰고 호출 뒤에 남기지 않음. NULL이나 `cn` 0은 문맥 없음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reset(void)` | 엔진의 지금 사전을 세션에 가져옴. 번역은 원래 호출마다 따로라서 결과는 바뀌지 않음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reload(void)` | 설정 파일과 사전 폴더, 사용자 사전, 켜 둔 Ehnd 폴더를 다시 불러옴. 0 성공, -1 초기화 전, 종료 후, 실패(이전 사전 유지, 여러 사용자 파일 중 오류 파일은 빼고 나머지를 읽음) |
 | `int hdTrans_UserDictError(char** out, size_t* outn)` | 설정 파일 진단과 마지막 사용자 사전 읽기 오류(오류마다 한 줄, 없으면 빈 문자열)를 `hdTrans_Translate`처럼 버퍼로 돌려줌. 0 성공, -1 초기화 전, 종료 후 |
@@ -300,8 +306,10 @@ std::string ko = session.Translate("今日はいい天気ですね。");
 | 함수 | 하는 일 |
 |---|---|
 | `Translate(text)` | `\n`으로 나눈 줄을 한 문서로 번역(`\r`은 유지). 앞선 호출의 영향을 받지 않음. 64 KiB가 넘는 줄은 16 KiB 이하로 나눠 번역 |
+| `Translate(text, context)` | `context`(`\n`으로 나눈 줄)를 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 돌려줌. 문맥 줄은 단서와, `SetWrapped(true)`이면 `text`가 이어 가는 문장의 앞부분으로만 씀. 빈 `context`는 `Translate(text)`와 같음 |
 | `Reset()` | 엔진의 지금 사전을 가져옴. 번역 결과는 바꾸지 않음 |
 | `SetSpeech(Speech)` | 다음 번역부터 대사의 말투(`Strict`(기본), `Soft`, `--speech`와 같음). 기준 모드에서는 효과 없음 |
+| `SetWrapped(bool)` | 다음 번역부터: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 기본 `false`, `--wrapped`와 같음. 빈 줄은 늘 문장 경계 |
 
 `UserReload::Auto` 엔진의 세션은 엔진에 새 사전이 생기면 다음 번역에서 그 사전으로 바꿉니다.
 필터와 Ehnd 형식은 [ehnd-compat.md](ehnd-compat.md)에 있습니다.

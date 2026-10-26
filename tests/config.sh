@@ -142,4 +142,35 @@ printf 'dicts: speech\nuserdict: ""\ncache: off\nspeech: always\n' > "$tmp/setti
 "$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/quoted" > "$tmp/out" 2> "$tmp/errors"
 [ "$(cat "$tmp/out")" = 「높다」 ]
 grep -F 'custom.yaml:4: speech: expected soft or strict' "$tmp/errors" > /dev/null
+printf '「高い。\n' > "$tmp/context"
+printf '高い。」' > "$tmp/closing"
+printf 'dicts: speech\nuserdict: ""\ncache: off\nspeech: soft\n' > "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/closing" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 높다.」 ]
+"$cli" -config "$tmp/settings/custom.yaml" --context "$tmp/context" -in "$tmp/closing" > "$tmp/out"
+[ "$(cat "$tmp/out")" = 높아.」 ]
+"$cli" -config "$tmp/settings/custom.yaml" -context "$tmp/context" --json -in "$tmp/closing" > "$tmp/out"
+grep -F '"text":"높아.」"' "$tmp/out" > /dev/null
+printf '高い\n高い\n' > "$tmp/two"
+printf 'wrapped: true\n' >> "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" --context "$tmp/context" -in "$tmp/two" > "$tmp/out" 2> "$tmp/errors"
+[ "$(wc -l < "$tmp/out")" -eq 2 ]
+[ ! -s "$tmp/errors" ]
+"$cli" -config "$tmp/settings/custom.yaml" -each -in "$tmp/two" > "$tmp/out"
+[ "$(wc -l < "$tmp/out")" -eq 2 ]
+document_only() {
+    status=0
+    "$cli" -config "$tmp/settings/custom.yaml" "$@" -in "$tmp/two" > /dev/null 2> "$tmp/errors" || status=$?
+    [ "$status" -eq 2 ]
+    grep -F -- '--wrapped and --context cannot be combined with --each or --raw' "$tmp/errors" > /dev/null
+}
+document_only --wrapped -each
+document_only -wrapped --raw
+document_only --context "$tmp/context" -each
+status=0
+"$cli" -config "$tmp/settings/custom.yaml" --context "$tmp/missing" -in "$tmp/two" > /dev/null 2> "$tmp/errors" || status=$?
+[ "$status" -eq 1 ]
+printf 'dicts: speech\nuserdict: ""\ncache: off\nwrapped: yes\n' > "$tmp/settings/custom.yaml"
+"$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/two" > "$tmp/out" 2> "$tmp/errors"
+grep -F 'custom.yaml:4: wrapped: expected a boolean (true or false)' "$tmp/errors" > /dev/null
 echo 'CLI config: PASS'
