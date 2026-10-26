@@ -297,6 +297,17 @@ std::size_t Snapshot::WordAt(std::string_view text) const {
     return longest;
 }
 
+bool Snapshot::KeyPast(std::string_view text, std::size_t past, const LookupContext& ctx) const {
+    if (!Healthy()) return true;
+    bool found = false;
+    const auto longer = [&](int, std::size_t n) { found = found || n > past; };
+    base_.Prefixes(text, longer);
+    user_.Prefixes(text, longer);
+    if (ctx.user != nullptr) ctx.user->Prefixes(text, longer);
+    names_.Prefixes(text, longer);
+    return found || (ctx.plain != nullptr && ctx.plain->KeyPast(text, past));
+}
+
 bool Snapshot::PersonCueKey(std::string_view key) const {
     if (!CuedKey(key)) return false;
     for (const Record& r : NameRecords(key)) {

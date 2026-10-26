@@ -905,7 +905,7 @@ std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
-std::string RewriteCasual(std::string_view in) {
+std::string RewriteCasual(std::string_view in, const RunLookup& runs) {
     std::string text = ReplaceAll(in, Shiren, [](const Match& m) { return Cat({"かも", m.group[1], "ない"}); });
     text = ReplaceAll(text, Nee, [](const Match& m) {
         const Match g = Rematch(m, Nee);
@@ -976,8 +976,10 @@ std::string RewriteCasual(std::string_view in) {
     text = ReplaceAll(text, AruN, [](const Match& m) { return ContractedRu("あ", m.group[2]); });
     text = ReplaceAll(text, Literal<kMokkai>, [](const Match&) { return std::string("もう一回"); });
     text = ReplaceAll(text, JanKa, [](const Match&) { return std::string("じゃん"); });
-    text = ReplaceAll(text, TokuInText, [](const Match& m) {
+    text = ReplaceAll(text, TokuInText, [&](const Match& m) {
         const Match g = Rematch(m, Toku);
+        const size_t formEnd = static_cast<size_t>(g.group[3].data() + g.group[3].size() - text.data());
+        if (runs.holds != nullptr && runs.holds(runs.context, text, m.begin, formEnd)) return std::string(m.group[0]);
         const std::string_view stem = g.group[1];
         std::string_view te = "て";
         if (g.group[2] == "ど") {
