@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.9](https://github.com/sokcuri/hdTrans/compare/v0.5.8...v0.5.9) (2026-10-26)
+
+
+### Features
+
+* **gui:** merge the windows into tabs and add a dictionary tab ([#170](https://github.com/sokcuri/hdTrans/issues/170)) ([2ad8e7c](https://github.com/sokcuri/hdTrans/commit/2ad8e7ce5c7e96efda1dc8eaefc8b8977f2b09b0))
+* **gui:** take dropped files in the main and document windows ([#168](https://github.com/sokcuri/hdTrans/issues/168)) ([640792d](https://github.com/sokcuri/hdTrans/commit/640792de02e6c3524907223d81210df29a04d07d)), refs [#165](https://github.com/sokcuri/hdTrans/issues/165)
+* **gui:** translate several documents into the source or a chosen folder ([#166](https://github.com/sokcuri/hdTrans/issues/166)) ([d324609](https://github.com/sokcuri/hdTrans/commit/d324609b50a20e41d6f870299e42eddff2c4d31e)), refs [#165](https://github.com/sokcuri/hdTrans/issues/165)
+* **web:** add a dictionary tab with several user dictionaries ([#169](https://github.com/sokcuri/hdTrans/issues/169)) ([fa190f8](https://github.com/sokcuri/hdTrans/commit/fa190f871dbfb56096d5b2b2cd53db3f09f833c7))
+* **web:** add a document tab that translates several text files ([#167](https://github.com/sokcuri/hdTrans/issues/167)) ([e4e2cda](https://github.com/sokcuri/hdTrans/commit/e4e2cda015117646a0323ef870fb6c37c26498f9))
+
+
+### Bug Fixes
+
+* **gui:** keep the window and the translate row inside the screen ([#171](https://github.com/sokcuri/hdTrans/issues/171)) ([f6ae136](https://github.com/sokcuri/hdTrans/commit/f6ae136dc8dc89d54b31122c0e7ca3bdd2f5eed7))
+* keep the source's line endings in translated documents ([#173](https://github.com/sokcuri/hdTrans/issues/173)) ([7b61b86](https://github.com/sokcuri/hdTrans/commit/7b61b86b5037edea96f0807068622ef3247f6549))
+* **release:** translate documents and manage user dictionaries on the web and in the Windows app ([870abec](https://github.com/sokcuri/hdTrans/commit/870abec7df42025be52a44fa7ba292aebbef04c9))
+
 ## [0.5.8](https://github.com/sokcuri/hdTrans/compare/v0.5.7...v0.5.8) (2026-10-25)
 
 
