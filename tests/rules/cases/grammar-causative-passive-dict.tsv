@@ -27,3 +27,9 @@ verb:causative-of-shorter	確実に驚かせられる。	확실히 놀라게 할
 verb:causative-of-shorter	泣かせられる用意をしてきた	울릴 수 있을 준비를 해 왔다	keep	conjugation
 verb:causative-of-shorter	スケジュール合わせられる	스케줄 맞출 수 있다	keep	conjugation
 verb:causative-of-shorter	考えさせられました。	생각하게 되었습니다.	keep	conjugation
+dict:jisjk:364866	実戦投入はさせられません。	실전 투입은 시킬 수 없습니다.	fix	local
+dict:jisjk:364866	今のままでは実戦投入はさせられません。	has:시킬 수 없습니다	fix	local
+dict:jisjk:364866	掃除をさせられますか。	청소를 시킬 수 있습니까.	fix	local
+dict:jisjk:364866	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	local
+dict:jisjk:364866	掃除はさせられました。	청소는 하도록 강요받았습니다.	keep	local
+dict:jisjk:364866	駄目よ！　そんなことさせられない。	has:시킬 수 없	keep	local
