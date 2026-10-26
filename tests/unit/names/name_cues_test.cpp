@@ -1,11 +1,15 @@
 // The name cues of a line (names::NameCues) and the cued-name constraint rule.
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
 #include "core/dict/snapshot.h"
 #include "core/names/document.h"
 #include "core/names/name_cues.h"
+#include "core/names/ruby.h"
+#include "core/pipeline/protect.h"
+#include "core/pipeline/segment.h"
 #include "core/text/hangul.h"
 #include "hdtest.h"
 
@@ -153,6 +157,88 @@ HD_TEST(names_name_cues) {
         };
         HD_CHECK_EQ(show(got), show(want));
     }
+}
+
+HD_TEST(names_caption_reading_cue_passage) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    const std::vector<std::string> lines = {"[無線]（高峰(たかみね)）では皆さん", "（恭(きょう)）はい"};
+    const auto doc = pipeline::BuildDocument(*snap, lines);
+    HD_REQUIRE(doc != nullptr);
+    HD_CHECK(doc->cued.empty());
+    names::internal::RubyMatch reading;
+    HD_REQUIRE(names::internal::FindReading(lines[0], 0, reading));
+    HD_CHECK_EQ(reading.begin, std::string("[無線]（").size());
+    HD_CHECK_EQ(reading.end, std::string("[無線]（高峰(たかみね)").size());
+    HD_CHECK(reading.base == "高峰" && reading.reading == "たかみね");
+
+    const auto facts = pipeline::ReadLine(*doc, lines[0]);
+    HD_CHECK_EQ(facts.text, "[無線]（타카미네）では皆さん");
+    HD_CHECK(facts.cued == std::vector<std::string>{"高峰"});
+    const auto lookup = pipeline::LookupOf(*doc, facts);
+    HD_CHECK(lookup.cued.contains("高峰"));
+    const auto ctx = pipeline::ContextOf(*doc, lookup);
+    HD_REQUIRE(ctx.lookup.cued != nullptr);
+    HD_CHECK(ctx.lookup.cued->contains("高峰"));
+    const auto chunks = pipeline::Segment({{facts.text, output::SpanText}});
+    HD_REQUIRE(chunks.size() == 2);
+    HD_REQUIRE(chunks[0].size() == 1 && chunks[1].size() == 1);
+    HD_CHECK_EQ(chunks[0][0].text, "[無線]（타카미네）");
+    HD_CHECK_EQ(chunks[1][0].text, "では皆さん");
+    const auto protectedChunks = pipeline::Segment(pipeline::Protect(facts.text, ctx, *snap));
+    HD_REQUIRE(protectedChunks.size() == 2);
+    HD_CHECK_EQ(protectedChunks[1][0].text, "では皆さん");
+    const auto asideFacts = pipeline::ReadLine(*doc, "（拍手と歓声）（高峰(たかみね)）では皆さん");
+    const auto asideLookup = pipeline::LookupOf(*doc, asideFacts);
+    const auto asideContext = pipeline::ContextOf(*doc, asideLookup);
+    const auto asideChunks = pipeline::Segment(pipeline::Protect(asideFacts.text, asideContext, *snap));
+    HD_REQUIRE(asideChunks.size() == 2);
+    std::string asideHead;
+    for (const auto& piece : asideChunks[0]) asideHead += piece.text;
+    HD_CHECK_EQ(asideHead, "（拍手と歓声）（타카미네）");
+    HD_CHECK_EQ(asideChunks[1][0].text, "では皆さん");
+
+    const auto explicitOnly = pipeline::ReadLine(*doc, lines[1]);
+    HD_CHECK_EQ(explicitOnly.text, "（쿄）はい");
+    HD_CHECK(names::NameCues(*snap, "（恭）はい").empty());
+    HD_CHECK(explicitOnly.cued == std::vector<std::string>{"恭"});
+    const auto explicitLookup = pipeline::LookupOf(*doc, explicitOnly);
+    HD_CHECK(!explicitLookup.cued.contains("恭"));
+    const auto explicitContext = pipeline::ContextOf(*doc, explicitLookup);
+    HD_REQUIRE(explicitContext.lookup.cued != nullptr);
+    HD_CHECK(!explicitContext.lookup.cued->contains("恭"));
+    for (const std::string_view raw : {"（恭(きょう)）はい。恭", "（恭(きょう)／恭）はい"}) {
+        const auto repeated = pipeline::ReadLine(*doc, raw);
+        HD_CHECK(repeated.cued == std::vector<std::string>{"恭"});
+        const auto repeatedLookup = pipeline::LookupOf(*doc, repeated);
+        HD_CHECK(!repeatedLookup.cued.contains("恭"));
+    }
+    const auto bare = pipeline::ReadLine(*doc, "恭");
+    HD_CHECK_EQ(bare.text, "恭");
+    HD_CHECK(bare.cued.empty());
+
+    const auto standalone = pipeline::ReadLine(*doc, "（恭(きょう)）");
+    HD_CHECK_EQ(standalone.text, "（恭）");
+    HD_CHECK(standalone.cued.empty());
+    HD_CHECK(doc->cued.empty());
+
+    const auto prefixKeys = snap->PersonKeysAt("高峰の母");
+    HD_REQUIRE(!prefixKeys.empty());
+    HD_CHECK(prefixKeys.back() < std::string("高峰の母").size());
+    pipeline::LineFacts prefixOnly;
+    prefixOnly.cued = {"高峰の母"};
+    HD_CHECK(!pipeline::LookupOf(*doc, prefixOnly).cued.contains("高峰の母"));
+
+    const std::vector<std::string> lexicalLines = {"（高峰）はい"};
+    const auto lexicalDoc = pipeline::BuildDocument(*snap, lexicalLines);
+    HD_REQUIRE(lexicalDoc != nullptr);
+    HD_CHECK(lexicalDoc->cued.contains("高峰"));
+    const auto added = pipeline::ReadLine(*lexicalDoc, lines[1]);
+    const auto addedLookup = pipeline::LookupOf(*lexicalDoc, added);
+    HD_CHECK(addedLookup.cued.contains("高峰"));
+    HD_CHECK(!addedLookup.cued.contains("恭"));
+    HD_CHECK(lexicalDoc->cued.contains("高峰"));
+    HD_CHECK(!lexicalDoc->cued.contains("恭"));
 }
 
 HD_TEST(text_japanese_spelling) {

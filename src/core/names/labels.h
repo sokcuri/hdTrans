@@ -29,6 +29,10 @@ bool CaptionLead(std::string_view s);
 // (SpeechAfterLabel): a speaker label or an aside, not a number ((1)では); 0 for none.
 std::size_t CaptionLabelEnd(std::string_view line);
 
+// Whether the word between before and after is a part of a closed round-bracket speaker
+// label at the start of a caption, followed by speech.
+bool BracketLabelAt(std::string_view before, std::string_view after);
+
 // Whether rest, the text after a speaker label in brackets, starts an utterance: there is text
 // before the line ends, and it neither quotes the brackets with と or って nor starts with a
 // particle of one kana that attaches to them ((人形)は、, (W)は西; not はい, では).

@@ -18,7 +18,8 @@ enum class Preset {
 };
 
 // The kana reading of one word (hiragana or katakana) in Hangul under p; "" when
-// reading is empty or holds anything other than kana.
-std::string FromKana(std::string_view reading, Preset p);
+// reading is empty or holds anything other than kana. singleLongPair limits FanShort
+// shortening to non-overlapping vowel pairs.
+std::string FromKana(std::string_view reading, Preset p, bool singleLongPair = false);
 
 }  // namespace hdTrans::text

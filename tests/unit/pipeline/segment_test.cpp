@@ -77,6 +77,28 @@ HD_TEST(pipeline_segment_caption_labels) {
     for (const auto& c : cases) HD_CHECK_EQ(Cut(c.in), std::string(c.want));
 }
 
+HD_TEST(pipeline_segment_caption_protected_names) {
+    HD_CHECK_EQ(Show(Segment({{"（拍手と歓声）（", output::SpanText}, {"히로나리", output::SpanWord},
+                             {"）どうも～！", output::SpanText}})), "（拍手と歓声）（〖1히로나리〗）|どうも～！");
+    HD_CHECK_EQ(Show(Segment({{"（拍手と歓声）", output::SpanText}, {"고마워", output::SpanWord}})),
+                "（拍手と歓声）|〖1고마워〗");
+    HD_CHECK_EQ(Cut("（拍手と歓声）"), "（拍手と歓声）");
+    HD_CHECK_EQ(Show(Segment({{"（拍手と歓声）（", output::SpanText}, {"히로나리", output::SpanWord},
+                             {"）", output::SpanText}})), "（拍手と歓声）（〖1히로나리〗）");
+    HD_CHECK_EQ(Show(Segment({{"（", output::SpanText}, {"히카리", output::SpanWord},
+                             {"）では皆さん", output::SpanText}})), "（〖1히카리〗）|では皆さん");
+    HD_CHECK_EQ(Show(Segment({{"[無線]（", output::SpanText}, {"쿄", output::SpanWord},
+                             {"）今日は", output::SpanText}})), "[無線]（〖1쿄〗）|今日は");
+    HD_CHECK_EQ(Show(Segment({{"（", output::SpanText}, {"쿄", output::SpanWord},
+                             {"）", output::SpanText}, {"네", output::SpanWord}})), "（〖1쿄〗）|〖1네〗");
+    HD_CHECK_EQ(Show(Segment({{"前（", output::SpanText}, {"쿄", output::SpanWord},
+                             {"）では皆さん", output::SpanText}})), "前（〖1쿄〗）では皆さん");
+    HD_CHECK_EQ(Show(Segment({{"（", output::SpanText}, {"쿄", output::SpanWord},
+                             {"）と思った", output::SpanText}})), "（〖1쿄〗）と思った");
+    HD_CHECK_EQ(Show(Segment({{"（", output::SpanText}, {"쿄", output::SpanWord},
+                             {"）", output::SpanText}})), "（〖1쿄〗）");
+}
+
 HD_TEST(pipeline_segment_clauses) {
     // At least 40 Japanese characters before the 、 and 10 characters after it before
     // the sentence ends.

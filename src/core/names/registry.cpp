@@ -359,7 +359,42 @@ bool Registry::BaseReading(std::string_view base, std::string_view reading, std:
     return person || ReadingMorae(reading) >= RuneCount(base);
 }
 
-std::string Registry::DropReadings(std::string_view line) {
+std::string Registry::CaptionNameReading(std::string_view base, std::string_view reading) {
+    const std::string written = text::FromKana(reading, text::Preset::FanShort, true);
+    if (written.empty() || RuneCount(base) == 1) return written;
+    const auto& names = Accepted();
+    const auto found = names.find(std::string(base));
+    if (found == names.end() || !found->second.hasParts) {
+        return NamedWithSound(base, reading) ? written : std::string();
+    }
+    const std::vector<std::string>& parts = found->second.parts;
+    if (parts.size() != 2 || parts[0] + parts[1] != base) return {};
+    const std::string first = RenderPart(parts[0]), second = RenderPart(parts[1]);
+    if (first.empty() || second.empty()) return {};
+    std::string out;
+    if (NamedWithSound(parts[0], reading)) out = written + " " + second;
+    if (NamedWithSound(parts[1], reading)) {
+        if (!out.empty()) return {};
+        out = first + " " + written;
+    }
+    // Align only whole established parts; more than one matching span or kana cut abstains.
+    for (const std::size_t at : RuneStarts(reading)) {
+        if (at == 0) continue;
+        const std::string_view left = reading.substr(0, at), right = reading.substr(at);
+        // A known part anchors the cut; the other established part gets the supplied remainder.
+        if (!NamedWithSound(parts[0], left) && !NamedWithSound(parts[1], right)) continue;
+        const std::string leftWritten = text::FromKana(left, text::Preset::FanShort, true);
+        const std::string rightWritten = text::FromKana(right, text::Preset::FanShort, true);
+        if (leftWritten.empty() || rightWritten.empty()) continue;
+        if (!out.empty()) return {};
+        out = leftWritten + " " + rightWritten;
+    }
+    return out;
+}
+
+std::string Registry::DropReadings(std::string_view line, std::string* cueText, std::vector<std::string>* captionNames) {
+    if (cueText != nullptr) cueText->clear();
+    if (captionNames != nullptr) captionNames->clear();
     if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos &&
         line.find("「") == std::string_view::npos) {
         return std::string(line);
@@ -367,32 +402,64 @@ std::string Registry::DropReadings(std::string_view line) {
     struct Found {
         RubyMatch m;
         std::string hiragana;
+        std::size_t bareBegin;
         bool bracket;
     };
     std::vector<Found> found;
     const bool styled = Styled(line);
+    std::string bare;
+    std::size_t at = 0;
     RubyMatch m;
     for (std::size_t from = 0; FindReading(line, from, m); from = m.end) {
-        Found x{m, ToHiragana(m.reading), line.substr(m.begin + m.base.size()).starts_with("「")};
-        const DictFlags f = Flags(x.hiragana);
-        if (IsKatakana(FirstRune(m.reading).cp) && (!f.common || f.person)) continue;
-        if (f.pronoun && Flags(m.base).human) continue;
-        found.push_back(std::move(x));
+        bare.append(line.substr(at, m.begin - at));
+        found.push_back({m, ToHiragana(m.reading), bare.size(), line.substr(m.begin + m.base.size()).starts_with("「")});
+        bare.append(m.base);
+        at = m.end;
     }
+    if (found.empty()) return std::string(line);
+    bare.append(line.substr(at));
     std::string out;
-    std::size_t at = 0;
+    bool captionText = false;
+    at = 0;
     for (const Found& x : found) {
-        // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
-        // not 条件 (つよい) or 選択肢 (はい・いいえ)).
-        if (x.m.spaced ? !(SameWord(x.m.base, x.hiragana, line.substr(x.m.end)) || NamedWithSound(x.m.base, x.hiragana))
-                       : !BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) {
-            continue;
+        const DictFlags b = Flags(x.m.base);
+        const char32_t open = RuneAt(line, x.m.begin + x.m.base.size()).cp;
+        const char32_t close = RuneBefore(line, x.m.end).cp;
+        const bool paired = (open == U'(' && close == U')') || (open == U'（' && close == U'）');
+        const bool person = b.person || !b.layerName.empty() || (b.records == 0 && !b.city);
+        const bool captionAt = !x.m.spaced && paired && person && !RoleLike(x.m.base) && !LabelRole(x.m.base) &&
+                               !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), x.m.base) &&
+                               BracketLabelAt(std::string_view(bare).substr(0, x.bareBegin),
+                                              std::string_view(bare).substr(x.bareBegin + x.m.base.size()));
+        const std::string captionReading = captionAt ? CaptionNameReading(x.m.base, x.m.reading) : std::string();
+        const bool caption = !captionReading.empty();
+        if (!caption) {
+            const DictFlags f = Flags(x.hiragana);
+            if (IsKatakana(FirstRune(x.m.reading).cp) && (!f.common || f.person)) continue;
+            if (f.pronoun && b.human) continue;
+            // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
+            // not 条件 (つよい) or 選択肢 (はい・いいえ)).
+            if (x.m.spaced ? !(SameWord(x.m.base, x.hiragana, line.substr(x.m.end)) || NamedWithSound(x.m.base, x.hiragana))
+                           : !BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) {
+                continue;
+            }
+        }
+        if (caption && captionNames != nullptr) captionNames->emplace_back(x.m.base);
+        if (caption && cueText != nullptr && !captionText) {
+            *cueText = out;
+            captionText = true;
+        }
+        if (captionText) {
+            cueText->append(line.substr(at, x.m.begin - at));
+            cueText->append(x.m.base);
         }
         out.append(line.substr(at, x.m.begin - at));
-        out.append(x.m.base);
+        // Resolve the written reading here, only in this label occurrence; it is not a document alias.
+        out.append(caption ? captionReading : std::string(x.m.base));
         at = x.m.end;
     }
     out.append(line.substr(at));
+    if (captionText) cueText->append(line.substr(at));
     return out;
 }
 

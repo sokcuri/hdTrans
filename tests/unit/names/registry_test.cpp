@@ -95,7 +95,15 @@ const dict::Snapshot* Dictionary() {
          "ベルンハルト\t베른할트\tN130\tQPN\t\tGN\t93\n"
          "シャルロッテ\t샬롯테\tN130\tQPN\t\tGN\t94\n"
          "ミリアム\t밀리암\tN130\tQPN\t\tGN\t95\n"
-         "アレクシス\t알렉시스\tN130\tQPN\t\tGN\t96\n"},
+         "アレクシス\t알렉시스\tN130\tQPN\t\tGN\t96\n"
+         "恭\t야스시\tN130\tQPN\tWb\tGN\t97\n"
+         "恭\t공\tN110\tXXX\tOn\tGN\t98\n"
+         "きょう\t오늘\tN110\tUMe\t\tGN\t99\n"
+         "拍手\t박수\tN110\t\t\tGN\t100\n"
+         "佐藤\t사토우\tN130\tQPN\tWa\tGN\t101\n"
+         "大野\t오오노\tN130\tQPN\tWa\tGN\t102\n"
+         "結城\t유우키\tN130\tQPN\tWa\tGN\t103\n"
+         "大上\t오우에\tN130\tQCTVPl\t\tGN\t104\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -118,7 +126,8 @@ const dict::Snapshot* Dictionary() {
          "ぽち\t포치\tN130\tQPNVHn\tWb\tGN\t87\n"
          "セリーヌ・アルドルフェン\t셀린 알돌펜\tN130\tQPNVHn\t\tGN\t89\n"
          "ミレイユ・ベルクロア\t미레유 베르크로아\tN130\tQPNVHn\t\tGN\t90\n"
-         "ニーナ・ルーナ\t니나루나\tN130\tQPNVHn\t\tGN\t91\n"},
+         "ニーナ・ルーナ\t니나루나\tN130\tQPNVHn\t\tGN\t91\n"
+         "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"},
     });
     return loaded.snapshot.get();
 }
@@ -228,6 +237,121 @@ HD_TEST(names_drop_readings) {
         {"梁（ ）", "梁（ ）"},
     };
     for (const auto& [in, want] : cases) HD_CHECK_EQ(r.DropReadings(in), want);
+}
+
+HD_TEST(names_caption_inline_readings) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    names::Registry r(snap);
+    const std::string key = r.Key();
+    const std::vector<std::pair<std::string, std::string>> cases = {
+        {"（恭(きょう)）今日は", "（쿄）今日は"},
+        {"(恭（きょう）)はい", "(쿄)はい"},
+        {"（恭(キョウ)）はい", "（쿄）はい"},
+        {"⚟（恭(きょう)）はい", "⚟（쿄）はい"},
+        {"[無線]（恭(きょう)）はい", "[無線]（쿄）はい"},
+        {"（光(ひかり)）はい", "（히카리）はい"},
+        {"（椎名(しいな)）はい", "（시이나）はい"},
+        {"（佐藤(さとう)）はい", "（사토）はい"},
+        {"（大野(おおの)）はい", "（오노）はい"},
+        {"（結城(ゆうき)）はい", "（유키）はい"},
+        {"（大上(おおうえ)）はい", "（오우에）はい"},
+        {"大上(おおうえ)に行く", "大上に行く"},
+        {"（恭(きょう)／光(ひかり)）はい", "（쿄／히카리）はい"},
+        {"（恭(きょう)さん）はい", "（쿄さん）はい"},
+        {"（恭(きょう)）はい。恭は光を見る", "（쿄）はい。恭は光を見る"},
+        {"（恭(きょう)）", "（恭）"},
+        {"（恭(きょう)）\nはい", "（恭）\nはい"},
+        {"恭(きょう)と光(ひかり)", "恭と光"},
+        {"（恭(きょう)）と思った", "（恭）と思った"},
+        {"前の文（恭(きょう)）はい", "前の文（恭）はい"},
+        {"（恭 (きょう)）はい", "（恭 (きょう)）はい"},
+        {"（恭(きょう))はい", "（恭)はい"},
+        {"（恭(きょう）)はい", "（恭)はい"},
+        {"（恭(俳優)）はい", "（恭(俳優)）はい"},
+        {"（恭(声・きょう)）はい", "（恭(声・きょう)）はい"},
+        {"（恭(きょう・な)）はい", "（恭）はい"},
+        {"（恭(きょう な)）はい", "（恭）はい"},
+        {"（恭(笑)）はい", "（恭(笑)）はい"},
+        {"（医師(いし)）はい", "（医師）はい"},
+        {"（母(はは)）はい", "（母）はい"},
+        {"（注(ちゅう)）はい", "（注）はい"},
+        {"（拍手(はくしゅ)）はい", "（拍手）はい"},
+        {"天井の梁（はり）から", "天井の梁から"},
+        {"結果（まあまあ）だった", "結果（まあまあ）だった"},
+    };
+    for (const auto& [in, want] : cases) HD_CHECK_EQ(r.DropReadings(in), want);
+    std::string cues = "stale";
+    HD_CHECK_EQ(r.DropReadings("（光(ひかり)）はい", &cues), "（히카리）はい");
+    HD_CHECK_EQ(cues, "（光）はい");
+    HD_CHECK_EQ(r.DropReadings("（光）はい", &cues), "（光）はい");
+    HD_CHECK(cues.empty());
+    HD_CHECK_EQ(r.DropReadings("光", &cues), "光");
+    HD_CHECK(cues.empty());
+    std::vector<std::string> labels;
+    HD_CHECK_EQ(r.DropReadings("（恭(きょう・な)）はい", &cues, &labels), "（恭）はい");
+    HD_CHECK(cues.empty() && labels.empty());
+    HD_CHECK_EQ(r.Key(), key);
+    HD_CHECK_EQ(r.DropReadings("（光(ひかる)）はい"), "（히카루）はい");
+    HD_CHECK_EQ(r.DropReadings("（光(ひかり)）はい"), "（히카리）はい");
+}
+
+HD_TEST(names_caption_existing_part_readings) {
+    const auto loaded = dict::Load({
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\tid\n"
+         "安田\t야스다\tN130\tQPN\tWa\tGN\t1\n"
+         "美沙子\t미사코\tI130\tQPN\t\tGN\t2\n"
+         "丸山\t마루야마\tN130\tQPN\tWa\tGN\t3\n"
+         "和也\t카즈야\tN130\tQPN\tWb\tGN\t4\n"
+         "木村\t키무라\tN130\tQPN\tWa\tGN\t5\n"
+         "祐一\t유이치\tN130\tQPN\tWb\tGN\t6\n"
+         "小杉\t코스기\tN130\tQPN\tWa\tGN\t7\n"
+         "竜一\t류이치\tN130\tQPN\tWb\tGN\t8\n"
+         "岩井\t이와이\tN130\tQPN\tWa\tGN\t9\n"
+         "元気\t겐키\tN130\tQPN\tWb\tGN\t10\n"
+         "小宮\t코미야\tN130\tQPN\tWa\tGN\t11\n"
+         "浩信\t히로노부\tN130\tQPN\tWb\tGN\t12\n"
+         "相田\t아이다\tN130\tQPN\tWa\tGN\t13\n"
+         "周二\t슈우지\tN130\tQPN\tWa\tGN\t14\n"
+         "山崎\t야마자키\tN130\tQPN\tWa\tGN\t17\n"
+         "弘也\t히로야\tN130\tQPN\tWb\tGN\t18\n"},
+        {0, "names.tsv",
+         "#! layer=names\n"
+         "key\tko\tpos\tsem\tgram\tdict\tid\n"
+         "美沙子\t미사코\tN130\tQPN\tWb\tGN\t15\n"
+         "周二\t슈지\tN130\tQPN\tWb\tGN\t16\n"},
+    });
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    const std::vector<std::pair<std::string, std::string>> cases = {
+        {"（安田美沙子(みさこ)）毎年 見てます", "（야스다 미사코）毎年 見てます"},
+        {"（丸山和也(かずや)）これは…", "（마루야마 카즈야）これは…"},
+        {"（木村祐一(ゆういち)）盛り上がっておりますが", "（키무라 유이치）盛り上がっておりますが"},
+        {"（小杉竜一(りゅういち)）はい どうも", "（코스기 류이치）はい どうも"},
+        {"（岩井元気(げんき)）いや もう", "（이와이 겐키）いや もう"},
+        {"（小宮浩信(ひろのぶ)）絶対 受かってね", "（코미야 히로노부）絶対 受かってね"},
+        {"（相田周二(しゅうじ):小宮のモノマネで）絶対受かって", "（아이다 슈지:小宮のモノマネで）絶対受かって"},
+        {"（安田美沙子(やすだみさこ)）毎年", "（야스다 미사코）毎年"},
+        {"（山崎弘也(やまざきひろなり)）しかし？", "（야마자키 히로나리）しかし？"},
+        {"（安田美沙子(ひかり)）毎年", "（安田美沙子）毎年"},
+    };
+    for (const auto& [input, want] : cases) {
+        names::Registry r = Scan(loaded.snapshot.get(), input);
+        const std::string key = r.Key();
+        HD_CHECK_EQ(r.DropReadings(input), want);
+        HD_CHECK_EQ(r.Key(), key);
+    }
+    const auto ambiguous = dict::Load({
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\tid\n"
+         "安田\t미사코\tN130\tQPN\tWa\tGN\t1\n"
+         "美沙子\t미사코\tN130\tQPN\tWb\tGN\t2\n"},
+    });
+    HD_REQUIRE(ambiguous.snapshot != nullptr);
+    names::Registry r = Scan(ambiguous.snapshot.get(), "（安田美沙子(みさこ)）毎年");
+    std::vector<std::string> names;
+    HD_CHECK_EQ(r.DropReadings("（安田美沙子(みさこ)）毎年", nullptr, &names), "（安田美沙子）毎年");
+    HD_CHECK(names.empty());
 }
 
 // A hiragana run in parentheses that is no reading of the kanji before it and no word

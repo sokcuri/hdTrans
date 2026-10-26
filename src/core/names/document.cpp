@@ -322,7 +322,9 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
     names::Registry& r = *doc.registry;
-    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)));
+    std::string cueText;
+    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)), &cueText, &facts.cued);
+    const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
         if (o.noun) {
@@ -339,14 +341,15 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         if (plain.count(t) == 0) facts.skip.push_back(t);
     }
     std::sort(facts.skip.begin(), facts.skip.end());
-    facts.persons = internal::PersonPlaces(*doc.snap, facts.text, doc.registry.get(), &doc.persons_);
+    facts.persons = internal::PersonPlaces(*doc.snap, cues, doc.registry.get(), &doc.persons_);
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
-    for (const names::NameCue& c : CuesOf(doc, facts.text)) facts.cued.push_back(c.key);
+    for (const names::NameCue& c : CuesOf(doc, cues)) facts.cued.push_back(c.key);
     std::sort(facts.cued.begin(), facts.cued.end());
+    facts.cued.erase(std::unique(facts.cued.begin(), facts.cued.end()), facts.cued.end());
     return facts;
 }
 
@@ -378,7 +381,10 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     out.confirmed = facts.skip.empty() ? &doc.accepted : &found->second.confirmed;
     out.persons.insert(facts.persons.begin(), facts.persons.end());
     out.cued = doc.cued;
-    out.cued.insert(facts.cued.begin(), facts.cued.end());
+    for (const std::string& t : facts.cued) {
+        const std::vector<std::size_t> keys = doc.snap->PersonKeysAt(t);
+        if (!keys.empty() && keys.back() == t.size()) out.cued.insert(t);
+    }
     out.prose = facts.prose;
     return out;
 }

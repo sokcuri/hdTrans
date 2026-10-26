@@ -1,5 +1,7 @@
 #include "core/pipeline/segment.h"
 
+#include <algorithm>
+
 #include "core/dict/classes.h"
 #include "core/names/labels.h"
 #include "core/pipeline/runes.h"
@@ -150,9 +152,26 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
     std::vector<std::string> gapsBefore;
     Chunk part;
     std::string gap;  // the column separator before part
+    size_t captionEnd = 0, offset = 0;
+    if (!pieces.empty() && pieces[0].span == output::SpanText) {
+        const std::string& first = pieces[0].text;
+        std::string head;
+        if (pieces.size() > 1 && pieces[1].span == output::SpanWord) {
+            const size_t open = std::min(first.find('('), first.find("（"));
+            if (open != std::string::npos && names::internal::CaptionLead(std::string_view(first).substr(0, open))) {
+                for (const output::Piece& p : pieces) {
+                    if (p.span != output::SpanText && p.span != output::SpanWord) break;
+                    head += p.text;
+                }
+            }
+        }
+        captionEnd = names::internal::CaptionLabelEnd(head.empty() ? std::string_view(first) : std::string_view(head));
+    }
     int count = 0;
     for (size_t k = 0; k < pieces.size(); k++) {
         const output::Piece& p = pieces[k];
+        const size_t pieceStart = offset;
+        offset += p.text.size();
         if (p.span != output::SpanText) {
             part.push_back(p);
             continue;
@@ -160,7 +179,7 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
         const std::string_view t = p.text;
         size_t start = 0;
         // A speaker label or an aside in round brackets that opens the line ends a chunk.
-        const size_t labelEnd = k == 0 ? names::internal::CaptionLabelEnd(t) : 0;
+        const size_t labelEnd = captionEnd > pieceStart && captionEnd <= offset ? captionEnd - pieceStart : 0;
         for (size_t i = 0; i < t.size();) {
             const text::Rune r = text::DecodeRune(t.substr(i));
             if (i == labelEnd && i > start) {
@@ -214,6 +233,13 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
             i += r.size;
         }
         output::Add(part, t.substr(start));
+        if (captionEnd != 0 && captionEnd == offset) {
+            parts.push_back(std::move(part));
+            gapsBefore.push_back(std::move(gap));
+            part.clear();
+            gap.clear();
+            count = 0;
+        }
     }
     parts.push_back(std::move(part));
     gapsBefore.push_back(std::move(gap));
