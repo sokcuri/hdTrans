@@ -392,6 +392,8 @@ std::size_t CaptionLabelEnd(std::string_view line) {
     if (end == 0) return 0;
     const std::string_view inner = line.substr(open, end - open);
     if (AnyRuneOf(inner, [](char32_t c) { return InRunes(c, "「」『』、。！？!?…‥"); })) return 0;
+    // A number in brackets numbers an item ((1)では, （２）が).
+    if (AllRunes(inner, [](char32_t c) { return text::IsDigit(c) || InRunes(c, "()（）"); })) return 0;
     return SpeechAfterLabel(line.substr(end)) ? end : 0;
 }
 
