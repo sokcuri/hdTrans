@@ -23,3 +23,9 @@ lexical:spoken-words	嫌な音がして、腕がもげた。	has:팔이 떨어�
 lexical:spoken-words	ガラスがわれた	has:깨졌다	keep	lookup
 constraint:cued-name	「わたし、つむぎです」	has:츠무기	fix	lookup
 constraint:cued-name	「わたし、みちるです」	has:미치루	fix	lookup
+pre-select:unplaced-head	まりやん！	has:마리잖아	fix	pre-select
+pre-select:unplaced-head	まりです。	has:마리입니다	fix	pre-select
+pre-select:unplaced-head	私はまりです。	has:마리입니다	fix	pre-select
+pre-select:unplaced-head	(まりやん)	has:마리얀	keep	pre-select
+pre-select:unplaced-head	まりやん≫	has:마리얀	keep	pre-select
+pre-select:unplaced-head	学生やん	has:학생이잖아	keep	pre-select

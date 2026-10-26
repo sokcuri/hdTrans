@@ -71,7 +71,7 @@ constexpr auto kTextPassNames = [] {
 
 // The passes Flush runs outside kTextPasses.
 constexpr std::string_view kOuterPasses[] = {
-    "DrainNmTail",      "ReadUnplacedParticles", "ReinsertPhrases", "DecideVoice",    "CleanupSelectors",
+    "DrainNmTail",      "ReadUnplacedHeads", "ReadUnplacedParticles", "ReinsertPhrases", "DecideVoice",    "CleanupSelectors",
     "CleanupClass3",    "ApplyNegatives",        "PreferTerminal",  "ExclaimedAdjective", "VerbNegative",
     "FilterMisreads",   "FilterCg"};
 
@@ -178,6 +178,7 @@ std::span<const std::string_view> TextPassNames() { return kTextPassNames; }
 // The sentence passes in order. The text-path passes run only when settings.text is set.
 void Flush(Flusher& f) {
     Run(f, {"DrainNmTail", DrainNmTail});
+    if (f.w.settings.text) Run(f, {"ReadUnplacedHeads", ReadUnplacedHeads});
     if (f.w.settings.text) Run(f, {"ReadUnplacedParticles", ReadUnplacedParticles});
     Run(f, {"ReinsertPhrases", ReinsertPhrases});
     if (f.w.settings.text) Run(f, {"DecideVoice", DecideVoice});
