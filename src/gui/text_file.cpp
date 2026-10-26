@@ -164,6 +164,12 @@ bool DecodeShiftJis(std::string_view bytes, std::string& out) {
 #endif
 }
 
+std::string_view FirstLineBreak(std::string_view text) {
+    const auto at = text.find_first_of("\r\n");
+    if (at == std::string_view::npos || text[at] == '\n') return "\n";
+    return text.substr(at + 1).starts_with('\n') ? "\r\n" : "\r";
+}
+
 void NormalizeNewlines(std::string& text) {
     size_t output = 0;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -179,7 +185,7 @@ void NormalizeNewlines(std::string& text) {
 
 }  // namespace
 
-bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encoding) {
+bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encoding, std::string_view* lineBreak) {
     std::string decoded;
     TextEncoding detected;
     if (bytes.starts_with(kUtf8Bom)) {
@@ -200,13 +206,15 @@ bool DecodeText(std::string_view bytes, std::string& utf8, TextEncoding& encodin
         if (!DecodeShiftJis(bytes, decoded) || !ValidUtf8(decoded)) return false;
         detected = TextEncoding::ShiftJis;
     }
+    if (lineBreak != nullptr) *lineBreak = FirstLineBreak(decoded);
     NormalizeNewlines(decoded);
     utf8.swap(decoded);
     encoding = detected;
     return true;
 }
 
-bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEncoding& encoding) {
+bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEncoding& encoding,
+                  std::string_view* lineBreak) {
     std::ifstream file(path, std::ios::binary);
     if (!file) return false;
     std::string bytes;
@@ -215,11 +223,19 @@ bool ReadTextFile(const std::filesystem::path& path, std::string& utf8, TextEnco
         bytes.append(buffer, static_cast<size_t>(file.gcount()));
     }
     if (file.bad() || !file.eof()) return false;
-    return DecodeText(bytes, utf8, encoding);
+    return DecodeText(bytes, utf8, encoding, lineBreak);
 }
 
-bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8) {
+bool WriteTextFile(const std::filesystem::path& path, std::string_view utf8, std::string_view lineBreak) {
     if (!ValidUtf8(utf8)) return false;
+    std::string converted;
+    if (lineBreak != "\n") {
+        for (const char ch : utf8) {
+            if (ch == '\n') converted += lineBreak;
+            else converted += ch;
+        }
+        utf8 = converted;
+    }
     std::ofstream file(path, std::ios::binary | std::ios::trunc);
     if (!file) return false;
     file.write(kUtf8Bom.data(), static_cast<std::streamsize>(kUtf8Bom.size()));

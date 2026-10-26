@@ -156,6 +156,32 @@ HD_TEST(GuiTextFileNormalizeNewlines) {
     HD_CHECK(encoding == TextEncoding::ShiftJis);
 }
 
+HD_TEST(GuiTextFileKeepLineBreak) {
+    struct Case {
+        std::string_view bytes;
+        std::string_view lineBreak;
+        std::string_view written;
+    };
+    const Case cases[] = {
+        {"a\r\nb\nc\r", "\r\n", "\xEF\xBB\xBF" "a\r\nb\r\nc\r\n"},
+        {"a\nb\r\n", "\n", "\xEF\xBB\xBF" "a\nb\n"},
+        {"a\rb\r\n", "\r", "\xEF\xBB\xBF" "a\rb\r"},
+        {"a", "\n", "\xEF\xBB\xBF" "a"},
+    };
+    TempFolder temporary;
+    HD_REQUIRE(!temporary.path.empty());
+    const auto path = temporary.path / "output.txt";
+    for (const auto& test : cases) {
+        std::string text;
+        std::string_view lineBreak;
+        auto encoding = TextEncoding::Utf8;
+        HD_REQUIRE(DecodeText(test.bytes, text, encoding, &lineBreak));
+        HD_CHECK(lineBreak == test.lineBreak);
+        HD_REQUIRE(WriteTextFile(path, text, lineBreak));
+        HD_CHECK_EQ(ReadBytes(path), std::string(test.written));
+    }
+}
+
 HD_TEST(GuiTextFileLongShiftJis) {
     std::string bytes = "a";
     std::string expected = "a";

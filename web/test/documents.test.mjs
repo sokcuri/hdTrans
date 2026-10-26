@@ -12,13 +12,15 @@ const utf8 = (s) => new TextEncoder().encode(s);
 
 test('decodeText detects encodings like the Windows window', () => {
   const cases = [
-    [utf8('日本語\r\n二行目\r三行目\n'), '日本語\n二行目\n三行目\n', 'UTF-8'],
-    [bytes(0xef, 0xbb, 0xbf, ...utf8('日本語')), '日本語', 'UTF-8 BOM'],
-    [bytes(0xff, 0xfe, 0xe5, 0x65, 0x2c, 0x67, 0x9e, 0x8a, 0x0d, 0x00, 0x0a, 0x00), '日本語\n', 'UTF-16LE'],
-    [bytes(0x93, 0xfa, 0x96, 0x7b, 0x8c, 0xea, 0x0d, 0x0a, 0xb1), '日本語\nｱ', 'Shift-JIS'],
-    [bytes(), '', 'UTF-8'],
+    [utf8('日本語\r\n二行目\r三行目\n'), '日本語\n二行目\n三行目\n', 'UTF-8', '\r\n'],
+    [utf8('日本語\n二行目\r\n'), '日本語\n二行目\n', 'UTF-8', '\n'],
+    [utf8('日本語\r二行目\r\n'), '日本語\n二行目\n', 'UTF-8', '\r'],
+    [bytes(0xef, 0xbb, 0xbf, ...utf8('日本語')), '日本語', 'UTF-8 BOM', '\n'],
+    [bytes(0xff, 0xfe, 0xe5, 0x65, 0x2c, 0x67, 0x9e, 0x8a, 0x0d, 0x00, 0x0a, 0x00), '日本語\n', 'UTF-16LE', '\r\n'],
+    [bytes(0x93, 0xfa, 0x96, 0x7b, 0x8c, 0xea, 0x0d, 0x0a, 0xb1), '日本語\nｱ', 'Shift-JIS', '\r\n'],
+    [bytes(), '', 'UTF-8', '\n'],
   ];
-  for (const [input, text, encoding] of cases) assert.deepEqual(decodeText(input), { text, encoding });
+  for (const [input, text, encoding, lineBreak] of cases) assert.deepEqual(decodeText(input), { text, encoding, lineBreak });
 });
 
 test('decodeText refuses what the Windows window refuses', () => {
@@ -61,6 +63,8 @@ test('outputName adds _번역.txt to the stem', () => {
 
 test('encodeOutput writes UTF-8 with a BOM', () => {
   assert.deepEqual(Array.from(encodeOutput('가')), [0xef, 0xbb, 0xbf, 0xea, 0xb0, 0x80]);
+  assert.deepEqual(Array.from(encodeOutput('a\nb\n')), [0xef, 0xbb, 0xbf, 0x61, 0x0a, 0x62, 0x0a]);
+  assert.deepEqual(Array.from(encodeOutput('a\nb\n', '\r\n')), [0xef, 0xbb, 0xbf, 0x61, 0x0d, 0x0a, 0x62, 0x0d, 0x0a]);
 });
 
 /** The entries of a ZIP archive, read through its central directory. */

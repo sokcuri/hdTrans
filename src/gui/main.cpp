@@ -660,13 +660,13 @@ void RemoveFiles(App& app) {
     if (first >= 0) ShowFiles(app, std::min(first, static_cast<int>(app.inputFiles.size()) - 1));
 }
 
-bool SaveResult(App& app, const fs::path& output) {
+bool SaveResult(App& app, const fs::path& output, std::string_view lineBreak) {
     fs::path temporary = output;
     temporary += L".hdtrans-" + std::to_wstring(GetCurrentProcessId()) + L"-" + std::to_wstring(GetTickCount64()) + L".tmp";
     const HANDLE handle = CreateFileW(temporary.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (handle == INVALID_HANDLE_VALUE) return false;
     CloseHandle(handle);
-    bool saved = gui::WriteTextFile(temporary, app.result);
+    bool saved = gui::WriteTextFile(temporary, app.result, lineBreak);
     if (app.cancel) saved = false;
     if (saved) saved = MoveFileExW(temporary.c_str(), output.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH) != FALSE;
     std::error_code ignored;
@@ -682,7 +682,8 @@ void StartFileWorker(App& app) {
             const auto position = static_cast<LPARAM>(index);
             std::string text;
             gui::TextEncoding encoding{};
-            if (!gui::ReadTextFile(job.input, text, encoding)) {
+            std::string_view lineBreak;
+            if (!gui::ReadTextFile(job.input, text, encoding, &lineBreak)) {
                 app.failed.push_back(job.input.filename().native() + L" (읽기)");
                 PostMessageW(app.docs, kPhase, kFailed, position);
                 continue;
@@ -693,7 +694,7 @@ void StartFileWorker(App& app) {
             app.result = gui::TranslateText(*app.engine, text, ConfiguredOptions(app, options), app.cancel);
             if (app.cancel) break;
             PostMessageW(app.docs, kPhase, kSaving, position);
-            if (SaveResult(app, job.output)) {
+            if (SaveResult(app, job.output, lineBreak)) {
                 ++app.savedCount;
                 PostMessageW(app.docs, kPhase, kSaved, position);
             } else if (!app.cancel) {
@@ -1528,7 +1529,7 @@ bool SelfTest(App& app) {
 
     const fs::path second = folder / L"둘째.txt";
     const fs::path outputFolder = folder / L"출력";
-    ok = Check(gui::WriteTextFile(second, "日本語\n") && fs::create_directory(outputFolder, error), "create batch fixtures") && ok;
+    ok = Check(gui::WriteTextFile(second, "日本語\n", "\r\n") && fs::create_directory(outputFolder, error), "create batch fixtures") && ok;
     ok = Check(AddInputFiles(app, {second, input}) && app.inputFiles == std::vector<fs::path>{input, second}, "add files without duplicates") && ok;
     app.outputFolder = outputFolder;
     CheckDlgButton(app.docs, IDC_SAME_FOLDER, BST_UNCHECKED);
@@ -1538,10 +1539,13 @@ bool SelfTest(App& app) {
     NotifyClick(app.docs, IDC_TRANSLATE);
     if (!WaitForJob(app)) return false;
     std::string secondText;
+    std::string_view firstBreak;
+    std::string_view secondBreak;
     ok = Check(app.error.empty() && app.failed.empty() && app.savedCount == 2 &&
-               gui::ReadTextFile(outputFolder / L"원문_번역.txt", text, encoding) && text == "일본어\n\n일본어\n" &&
-               gui::ReadTextFile(outputFolder / L"둘째_번역.txt", secondText, encoding) && secondText == "일본어\n",
-               "batch translation into a folder") && ok;
+               gui::ReadTextFile(outputFolder / L"원문_번역.txt", text, encoding, &firstBreak) && text == "일본어\n\n일본어\n" &&
+               gui::ReadTextFile(outputFolder / L"둘째_번역.txt", secondText, encoding, &secondBreak) && secondText == "일본어\n" &&
+               firstBreak == "\n" && secondBreak == "\r\n",
+               "batch translation into a folder keeps each source's line breaks") && ok;
 
     CheckDlgButton(app.docs, IDC_SAME_FOLDER, BST_CHECKED);
     NotifyClick(app.docs, IDC_SAME_FOLDER);

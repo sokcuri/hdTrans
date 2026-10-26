@@ -417,6 +417,7 @@ async function translate() {
 interface Doc {
   out: string; // output file name
   source?: string; // undefined if the file could not be read
+  lineBreak: string; // the source's first line break, used in the output
   translated?: string;
   row: HTMLTableRowElement;
   save: HTMLButtonElement;
@@ -432,7 +433,7 @@ let docsCancel = false;
 let docsAt = 0;
 
 const outputMode = () => (document.querySelector('input[name=output]:checked') as HTMLInputElement).value as OutputMode;
-const outputBytes = (d: Doc) => encodeOutput(formatDocument(d.source!, d.translated!, outputMode()));
+const outputBytes = (d: Doc) => encodeOutput(formatDocument(d.source!, d.translated!, outputMode()), d.lineBreak);
 const setState = (d: Doc, text: string) => (d.row.cells[2].textContent = text);
 
 function showDocs() {
@@ -486,7 +487,7 @@ async function addFiles(list: FileList | null) {
     button.textContent = '받기';
     button.title = out;
     row.insertCell().append(button);
-    const d: Doc = { out, source: decoded?.text, row, save: button };
+    const d: Doc = { out, source: decoded?.text, lineBreak: decoded?.lineBreak ?? '\n', row, save: button };
     button.addEventListener('click', () => save(d.out, outputBytes(d), 'text/plain;charset=utf-8'));
     docs.push(d);
   }
