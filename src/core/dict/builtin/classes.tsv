@@ -224,6 +224,7 @@
 //= numeral.lead	Numerals that start a number with its counter in one word (一匹, 二人, 数本, 1回).
 //= numeral.many	Numerals of numeral.lead that start a count of more than one (10 to 19 start the numbers of two or more digits that begin with 1), after which もう before a past verb is the count reached (もう二人来た 벌써 두 사람 왔다).
 //= particle.after-name	Particles that may follow a name where a verb or adjective stem would take its inflection.
+//= particle.after-space	Sentence-final particles that a single space may set apart from the predicate they end, before a mark or the end of the line (そうだ ね……, いい ね――): that space parts no words.
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
@@ -3446,6 +3447,23 @@ particle.after-name	で
 particle.after-name	よ
 particle.after-name	ね
 particle.after-name	さ
+
+particle.after-space	ね
+particle.after-space	よ
+particle.after-space	な
+particle.after-space	わ
+particle.after-space	ぞ
+particle.after-space	ぜ
+particle.after-space	さ
+particle.after-space	か
+particle.after-space	の
+particle.after-space	ねえ
+particle.after-space	なあ
+particle.after-space	よね
+particle.after-space	かな
+particle.after-space	かしら
+particle.after-space	わよ
+particle.after-space	のよ
 
 particle.before-predicate	の
 particle.before-predicate	は

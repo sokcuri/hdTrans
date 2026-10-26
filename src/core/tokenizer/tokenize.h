@@ -17,13 +17,30 @@ namespace hdTrans::tokenizer {
 // ロンド－( 론도－(, but シャ－カ－ン 샤칸), and a 」 that closes the line's utterance
 // is a token of its own.
 // With joins, a space or an ideographic space between two kanji stays a space token of its own,
-// so that the words
-// on its sides are read apart (光 影, 副総理 兼 外務大臣), unless joins says that a word of
-// the dictionary spans it (未 来, text spaced out character by character), and a letter after
-// kana goes on with the Japanese text when a word spans both (うｐ, おｋ). joins gets the
-// Japanese text before the space or letter and the text after it, the space left out and the
-// letters folded to ASCII.
-using SpaceJoins = std::function<bool(std::string_view before, std::string_view after)>;
+// so that the words on its sides are read apart (光 影, 副総理 兼 外務大臣), unless joins says
+// that a word of the dictionary spans it (未 来, text spaced out character by character), and a
+// letter after kana goes on with the Japanese text when a word spans both (うｐ, おｋ). joins gets
+// the Japanese text before the space or letter and the text after it, the space left out and the
+// letters folded to ASCII. word says which words count (SpaceWord).
+// With joins, any other single space or ideographic space between two Japanese characters that
+// the text leaves out still parts two words: the Japanese token ends there and the next one is
+// afterSpace, so that no word of the dictionary spans it (あ ごめんね, いや そうじゃない). Not
+// parted are text spaced out character by character, two or more pieces of one character in a
+// row up to the space and on after it when kanji stand on both sides of the space (未 来, 通 知
+// 表が) and three or more otherwise (こ の 展 開); the two-piece names and the kanji after
+// katakana above (林 涛, ジモ得 週); a piece said again (やめて やめて) or starting with a small
+// kana or a long mark (消す っていう); and the words joins finds across the space as
+// SpaceWord::Name (山田 太郎, 荒川アンダー ザ ブリッジ) or as SpaceWord::Phrase with the text
+// before the space from its last space on (何だ あれ, ようこそ いらっしゃいました), and a last
+// piece that joins finds as SpaceWord::Ending (そうだ ね……).
+enum class SpaceWord {
+    Any,     // a word that starts in the text before and goes on past it
+    Name,    // a name other than a place's, its part before the space two characters or more, or the
+             // whole text before when that is one kanji (泊 明日菜)
+    Phrase,  // a word that starts at the start of the text before, two characters or more on each side
+    Ending,  // after is the text after the space up to a mark or the end, which ends what is before
+};
+using SpaceJoins = std::function<bool(std::string_view before, std::string_view after, SpaceWord word)>;
 void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins = nullptr);
 
 // TokenizeSpans of input as one text piece, without dashes.

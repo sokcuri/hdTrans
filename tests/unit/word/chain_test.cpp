@@ -20,7 +20,7 @@ struct Step {
 
 // Inserts the steps into a chain over tokens with the given spans. The result is the
 // removed length of each insert ("r<n>"), then the chain as "token:start+length".
-std::string RunChain(const std::vector<int>& spans, std::initializer_list<Step> steps) {
+std::string RunChain(const std::vector<int>& spans, std::initializer_list<Step> steps, bool text = false) {
     dict::File base;
     base.name = "base.tsv";
     base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n";
@@ -29,7 +29,9 @@ std::string RunChain(const std::vector<int>& spans, std::initializer_list<Step> 
     tokens.tokens.resize(spans.size());
     for (std::size_t i = 0; i < spans.size(); i++) tokens.tokens[i].span = spans[i];
     word::Arena arena;
-    word::Worker worker(tokens, *snapshot, dict::LookupContext{}, word::Settings::Reference(), arena, word::LookupObserver{});
+    word::Settings settings = word::Settings::Reference();
+    settings.text = text;
+    word::Worker worker(tokens, *snapshot, dict::LookupContext{}, settings, arena, word::LookupObserver{});
     std::deque<word::Item> items;
     word::Chain chain;
     std::string out;
@@ -75,4 +77,7 @@ HD_TEST(chain_insert_across_tokens) {
                 std::string("r5 r1 r2 | 0:0+5 1:0+2 2:0+1"));
     HD_CHECK_EQ(RunChain({0, 0, 0}, {{0, 0, 1, false}, {2, 0, 1, false}, {1, 0, 3, false}}),
                 std::string("r1 r1 r3 | 0:0+1 1:0+3 2:0+1"));
+    // On the text path the item goes before the later token after all.
+    HD_CHECK_EQ(RunChain({0, 0, 0}, {{0, 0, 5, false}, {2, 0, 1, false}, {1, 0, 2, false}}, true),
+                std::string("r5 r1 r2 | 0:0+5 1:0+2 2:0+1"));
 }
