@@ -11,13 +11,12 @@ fieldset { border: 1px solid var(--line); border-radius: 6px; padding: .2rem .7r
 legend { font-size: .8rem; opacity: .7; }
 select { font: inherit; }
 #example { width: 16rem; max-width: 100%; text-overflow: ellipsis; }
-.panes { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-@media (max-width: 48rem) { .panes { grid-template-columns: 1fr; } }
+.panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .8rem; }
+@media (max-width: 48rem) { .panes { grid-template-columns: minmax(0, 1fr); } }
 .pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; }
 .pane small { opacity: .7; margin-left: .5rem; }
 textarea { width: 100%; min-height: 22rem; font: inherit; line-height: 1.6; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; background: transparent; color: inherit; }
 .dicts { margin-top: 1rem; align-items: start; }
-.help { font-size: .85rem; opacity: .85; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .grid th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; padding: 0 .3rem; }
 .grid td { border: 1px solid var(--line); padding: 0; }
@@ -30,7 +29,6 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .gridbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
 .gridbar button { padding: .15rem .6rem; font-size: .8rem; border: 1px solid var(--line); }
 .contact { margin: 2rem 0 0; font-size: .8rem; opacity: .7; text-align: center; }
-#version { margin-top: .2rem; font-size: .75rem; }
 #tbar { width: 8rem; height: .6rem; vertical-align: middle; }
 .tabs { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; border-bottom: 1px solid var(--line); margin-bottom: .7rem; }
 .tabs button { font: inherit; padding: .3rem .9rem; border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0; background: transparent; color: inherit; cursor: pointer; opacity: .7; }
@@ -44,3 +42,37 @@ table.files { width: 100%; border-collapse: collapse; font-size: .9rem; margin-t
 .files th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; }
 .files td, .files th { padding: .25rem .4rem; border-bottom: 1px solid var(--line); }
 .files button { font: inherit; font-size: .8rem; }
+.editing { display: flex; gap: .4rem; align-items: center; margin: 1rem 0 .3rem; font-size: .9rem; }
+.editing select { min-width: 0; max-width: 100%; }
+.gridscroll { overflow-x: auto; }
+table.grid { min-width: 26rem; }
+.library { display: grid; grid-template-columns: minmax(18rem, 30rem) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+#dictedit .editing { display: none; }
+.pane[hidden] { display: none; }
+#dictedit .dicts { grid-template-columns: minmax(0, 1fr); margin-top: 0; }
+.dicts .pane { min-width: 0; }
+.dictbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .5rem; }
+.dictbar button, .dictlist button { font: inherit; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
+.dictbar button { padding: .25rem .8rem; }
+.dictlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.dictlist li { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; padding: .35rem .3rem; border-bottom: 1px solid var(--line); }
+.dictlist li.sel { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.dictlist input[type=checkbox] { width: 1.1rem; height: 1.1rem; margin: 0; }
+.dictlist .name { flex: 1; min-width: 6rem; border: 0; padding: .2rem 0; text-align: left; overflow-wrap: anywhere; }
+.dictlist li.sel .name { font-weight: 600; }
+.dictlist .count, .dictlist .fmt { font-size: .8rem; opacity: .7; }
+.dictlist .fmt { border: 1px solid var(--line); border-radius: 3px; padding: 0 .3rem; }
+.dictlist .acts { display: flex; flex-wrap: wrap; gap: .25rem; margin-left: auto; }
+.dictlist .acts button { font-size: .8rem; padding: .05rem .5rem; }
+.dictlist button:disabled { opacity: .35; cursor: default; }
+@media (min-width: 48.01rem) { .dictlist li { cursor: grab; } }
+@media (max-width: 48rem) {
+  .library { grid-template-columns: minmax(0, 1fr); }
+  .dictlist .acts { width: 100%; justify-content: flex-end; }
+  .tabs button, .dictbar button, .gridbar button, .dictlist .acts button, .editing select { min-height: 2.75rem; padding-inline: .9rem; }
+  .dictlist .name { min-height: 2.75rem; }
+  .dictlist input[type=checkbox] { width: 1.5rem; height: 1.5rem; }
+  .grid input { padding: .55rem .4rem; font-size: 16px; }
+  .grid button.del { min-height: 2.75rem; padding: 0 .8rem; }
+  .grid td:last-child { width: 2.6rem; }
+}

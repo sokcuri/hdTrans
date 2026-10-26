@@ -18,6 +18,7 @@
   <div class="tabs" role="tablist">
     <button type="button" role="tab" id="tab-text" aria-controls="text" aria-selected="true">텍스트 번역</button>
     <button type="button" role="tab" id="tab-docs" aria-controls="docs" aria-selected="false">문서 번역</button>
+    <button type="button" role="tab" id="tab-dictionaries" aria-controls="dictionaries" aria-selected="false">사전</button>
     <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
       <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
       <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
@@ -41,18 +42,18 @@
       <textarea id="out" readonly></textarea></label>
   </div>
 
-  <div class="panes dicts">
-    <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
-    <div class="pane"><span>이름 표</span><div id="names"></div></div>
+  <div id="editor">
+    <label class="editing">사전 <select id="editdict"></select></label>
+    <div class="panes dicts">
+      <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
+      <div class="pane" id="namespane"><span>이름 표</span><div id="names"></div></div>
+    </div>
   </div>
   </section>
 
   <section id="docs" role="tabpanel" aria-labelledby="tab-docs" hidden>
-    <label class="drop" id="drop">텍스트 파일(.txt)을 여기에 끌어 놓거나 눌러서 고르세요. 여러 개를 함께 고를 수 있습니다.
+    <label class="drop" id="drop">파일을 끌어다 놓거나 클릭해서 고르기
       <input type="file" id="files" multiple accept=".txt,text/plain"></label>
-    <p class="help">파일은 이 브라우저 안에서 번역하고 어디에도 올리지 않습니다. Shift-JIS, UTF-8, UTF-16LE(BOM)를 읽고,
-      파일마다 문서 전체를 한 번에 번역해 <code>이름_번역.txt</code>(UTF-8 BOM)로 만듭니다.
-      사용자 사전과 이름 표는 텍스트 번역 탭의 것을 씁니다.</p>
     <div class="controls">
       <fieldset>
         <legend>출력</legend>
@@ -68,10 +69,24 @@
       <tbody></tbody>
     </table>
   </section>
+
+  <section id="dictionaries" role="tabpanel" aria-labelledby="tab-dictionaries" hidden>
+    <div class="library">
+      <div class="shelf">
+        <div class="dictbar">
+          <button type="button" id="dict-new">+ 새 사전</button>
+          <button type="button" id="dict-import" title="userdict*.txt, UserDict*.txt">가져오기</button>
+          <button type="button" id="dict-export">내보내기</button>
+          <input type="file" id="dict-file" multiple accept=".txt,.tsv,text/plain" hidden>
+        </div>
+        <ol id="dictlist" class="dictlist"></ol>
+      </div>
+      <div id="dictedit"></div>
+    </div>
+  </section>
 </main>
 
 <p class="contact">hdTrans by 소쿠릿 (<a href="https://github.com/sokcuri" target="_blank" rel="noopener">@sokcuri</a>), <a href="https://github.com/sokcuri/hdTrans" target="_blank" rel="noopener">GitHub</a></p>
-<p class="contact" id="version">dev</p>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>

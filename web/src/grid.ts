@@ -9,6 +9,8 @@
 
 export interface Grid {
   text: string;
+  /** Sets the column headers, the placeholders of the first row and the download name. */
+  heads(columns: string[], placeholders: string[], name: string): void;
 }
 
 /** Splits TSV text into rows of fields; quoted fields (Excel, Sheets) are unquoted. */
@@ -30,10 +32,12 @@ export function grid(
   onChange: (text: string) => void,
 ): Grid {
   const n = columns.length;
+  const scroll = document.createElement('div');
+  scroll.className = 'gridscroll';
   const table = document.createElement('table');
   table.className = 'grid';
   const head = table.createTHead().insertRow();
-  for (const c of [...columns, '']) head.appendChild(document.createElement('th')).textContent = c;
+  for (let c = 0; c <= n; c++) head.appendChild(document.createElement('th'));
   const body = table.createTBody();
 
   const bar = document.createElement('div');
@@ -72,7 +76,8 @@ export function grid(
     changed();
   });
   bar.appendChild(file);
-  box.append(table, bar);
+  scroll.append(table);
+  box.append(scroll, bar);
 
   const changed = () => onChange(text());
   const cell = (r: number, c: number) => body.rows[r]?.cells[c]?.firstElementChild as HTMLInputElement | undefined;
@@ -194,8 +199,17 @@ export function grid(
     ev.clipboardData?.setData('text/plain', row(where(el)[0]));
   });
 
+  function heads(cols: string[], holders: string[], file: string) {
+    cols.forEach((c, i) => (head.cells[i].textContent = c));
+    placeholders = holders;
+    name = file;
+    for (let c = 0; c < n; c++) cell(0, c)!.placeholder = placeholders[c] ?? '';
+  }
+
   setText('');
+  heads(columns, placeholders, name);
   return {
+    heads,
     get text() {
       return text();
     },

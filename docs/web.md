@@ -12,6 +12,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 | `web/src/documents.ts` | 문서 번역 탭의 파일 읽기(인코딩 판별), 출력 방식, 결과 이름, ZIP 만들기 |
 | `web/src/worker.ts` | 워커. WASM과 사전 파일을 준비하고 `HdTrans` 인스턴스로 번역 |
 | `web/src/translator.ts` | 공용 [TypeScript API](typescript-api.md). 문자열 번역, 사용자 사전과 Ehnd 설정, JSON 선택 기록 |
+| `web/src/dictionaries.ts` | 사전 목록(IndexedDB), 데스크톱 파일 가져오기와 내보내기, 적용할 사전 합치기 |
 | `web/src/grid.ts` | 사용자 사전, 이름 표 편집기 (탭 구분 표, 붙여 넣기, 파일 열기, 저장) |
 | `web/src/names.ts` | 이름 표를 사용자 사전 줄로 바꿈 (품사가 없으면 `name`) |
 | `web/examples/`, `web/examples.tsv` | 예제 텍스트와 메뉴 이름 |
@@ -19,15 +20,24 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 | `web/check.mjs` | 헤드리스 Chrome으로 사이트를 확인 |
 | `web/deploy.sh` | 서버에 올림, 되돌림 |
 
-- 사용자 사전 표와 이름 표를 합쳐 `setUserDictRaw()`로 넣습니다. 잘못된 내용은 오류를 보여 주고 이전에 적용한 사전을 유지합니다.
+- **사전** 탭은 사용자 사전 목록입니다. 사전마다 사용자 사전 표와 이름 표(Ehnd 사전은 표 하나)가 있고, 체크한 사전만 씁니다.
+  목록 순서가 우선순위입니다(위가 먼저, 끌어 놓기나 ↑↓로 바꿈). 체크한 hdTrans 사전의 표를 순서대로, 이어서 그 이름 표를
+  합쳐 `setUserDictRaw()`로, Ehnd 사전은 합쳐 `UserDict.txt` 하나로 `setEhnd()`에 넣습니다. 한 텍스트 안에서는 같은 키의 앞 줄이
+  먼저입니다. 텍스트 번역과 문서 번역이 같은 사전을 쓰고, 텍스트 번역 탭 아래 표는 고른 사전을 바로 고칩니다.
+  잘못된 줄은 사전 이름과 행으로 알리고, 잘못된 판이면 이전에 적용한 사전을 유지합니다.
+- 사전은 IndexedDB(`hdtrans` 데이터베이스)에 둡니다. 처음 열 때 이전 판이 localStorage에 둔 사용자 사전과 이름 표를
+  **기본 사용자 사전**으로 옮깁니다(localStorage 값은 지우지 않음).
+- 가져오기와 내보내기는 데스크톱 파일 형식입니다. hdTrans 사전은 `userdict-이름.txt`(이름 표는 `name` 줄로 붙임)로 `user/`에,
+  Ehnd 사전은 `UserDict_이름.txt`로 Ehnd 폴더에 둡니다. 가져올 때는 셋째 열(Ehnd는 숫자, hdTrans는 품사)로, 정하지 못하면 파일 이름
+  (`UserDict…`)으로 형식을 정합니다. 위 **내보내기**는 체크한 사전을 우선순위대로 합친 `userdict.txt`(Ehnd 사전이 있으면
+  `UserDict.txt`와 함께 ZIP)입니다.
 - 문서 방식은 입력 전체를 한 세션으로(`hdtrans`와 같음), 줄 단위는 줄마다 새 세션으로(`hdtrans -each`와
   같음) 번역합니다. 번역 전에 `reset()`으로 세션을 비웁니다.
 - **텍스트 번역**과 **문서 번역** 탭이 있고 대사 말투는 두 탭이 함께 씁니다. 문서 번역은 고르거나 끌어 놓은 텍스트 파일을
   브라우저에서 읽어 파일마다 문서 방식으로 번역합니다. 인코딩 판별, 출력 방식, `이름_번역.txt`(UTF-8 BOM) 이름은 Windows 번역 창과
-  같습니다. 사용자 사전과 이름 표를 함께 쓰고, 말투나 사전이 바뀌면 이미 만든 결과를 버립니다. **중단**은 지금 파일을 마친 뒤 멈추고
+  같습니다. 사전 탭에서 체크한 사전을 쓰고, 말투나 사전이 바뀌면 이미 만든 결과를 버립니다. **중단**은 지금 파일을 마친 뒤 멈추고
   그 결과를 버립니다. **ZIP으로 받기**는 끝난 파일을 한 ZIP(UTF-8 이름, 줄일 수 있으면 deflate)으로 묶습니다.
 - 제목 옆에는 엔진 버전과 빌드한 커밋의 짧은 해시, 날짜를 적습니다.
-- 페이지 아래 버전 줄은 엔진 버전(`release-version.txt`), 사전 버전(엔진 버전과 사전 TSV의 sha256 앞 12자), 빌드한 커밋의 날짜(Asia/Seoul, `yyyy-MM-dd HH:mm:ss`)와 짧은 해시입니다.
 
 ## 빌드
 
@@ -56,7 +66,8 @@ node web/build.mjs
 
 ## 확인
 
-`npm --prefix web run compile` 뒤 `npm --prefix web test`가 문서 번역의 인코딩 판별, 출력 방식, ZIP을 확인합니다(CI의 wasm 작업).
+`npm --prefix web run compile` 뒤 `npm --prefix web test`가 문서 번역의 인코딩 판별, 출력 방식, ZIP과 사전 파일 형식 판별,
+가져오기와 내보내기, 사전 합치기를 확인합니다(CI의 wasm 작업).
 
 ```sh
 python3 -m http.server -d build/web/dist 8000 &   # 압축본을 쓰지 않는 정적 서버도 됨
@@ -66,9 +77,13 @@ node web/check.mjs http://127.0.0.1:8000/ INPUT want.txt 20
 ```
 
 `check.mjs`는 두 번 방문해 준비 시간, 받은 바이트, 엔진 메모리를 적고, 입력 앞 20줄의 번역이 CLI 출력과
-같은지, 긴 입력의 진행 막대, 사용자 사전, 이름 표 편집과 붙여 넣기가 번역을 바꾸는지, 버전 줄을
+같은지, 긴 입력의 진행 막대, 사용자 사전, 이름 표 편집과 붙여 넣기가 번역을 바꾸는지, 제목 옆 버전을
 확인하고, 번역 API가 없는지(`POST /api/translate`가 404) 봅니다(`http.server`는 501로 답해 이 항목만
-실패합니다). `CHROME`으로 Chrome 경로를, `SHOT`으로 화면 저장 경로를 줍니다.
+실패합니다). 이어서 localStorage의 사용자 사전과 이름 표가 기본 사용자 사전으로 옮겨지는지, PC(1200×1300)와 휴대폰(390×844)
+화면에서 사전 탭의 배치(목록과 표가 나란히, 또는 위아래로, 휴대폰에서 표만 가로로 밀리는지, 누를 곳이 44px 이상인지), 사전과 항목
+추가, 체크 해제, 순서에 따른 우선순위, 오류 줄 위치, 데스크톱 파일 내보내기와 가져오기의 바이트 일치, 이름 변경, 삭제, 다시 열었을 때
+목록이 남는지 봅니다. `CHROME`으로 Chrome 경로를, `SHOT`으로 화면 저장 경로를 줍니다(사전 탭은 `-dictionaries`, `-mobile`을
+붙인 이름).
 
 ## 배포
 
@@ -96,7 +111,7 @@ HDTRANS_WEB_HOST=user@host HDTRANS_WEB_SSH='ssh -i KEY' web/deploy.sh rollback <
 `hdtrans-<버전>.tgz`)를 받아 같은 릴리스의 `SHA256SUMS.txt`로 확인하고, 그 버전이 npm에 있으면 패키지를 npm의
 `dist.integrity`와도 비교합니다. 다시 빌드하지 않습니다. CLI(`--version`)와 패키지의 엔진이 릴리스 버전을 보고하는지
 확인하고, 태그 커밋의 소스와 예제 텍스트(서버에서 받음)로 사이트를 만든 뒤(CLI는 사전
-스냅샷만 컴파일) `web/deploy.sh`로 올립니다. 이어서 공개 페이지가 방금 만든 `index.html`과 같은지(버전 줄의 엔진
+스냅샷만 컴파일) `web/deploy.sh`로 올립니다. 이어서 공개 페이지가 방금 만든 `index.html`과 같은지(제목 옆 버전의 엔진
 버전과 커밋), `manifest.json`, 예제 목록을 확인하고, 공개된 엔진 파일을 릴리스 엔진과 바이트 단위로 비교합니다. 서버에도 없는 예제가 있으면 실패하고, 받은
 예제 텍스트는 아티팩트로 올리지 않습니다.
 
