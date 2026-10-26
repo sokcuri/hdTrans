@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.1](https://github.com/sokcuri/hdTrans/compare/v0.6.0...v0.6.1) (2026-10-26)
+
+
+### Features
+
+* join lines broken mid-sentence when asked ([#179](https://github.com/sokcuri/hdTrans/issues/179)) ([2fdb13f](https://github.com/sokcuri/hdTrans/commit/2fdb13f43d541bf6290a92fa429e068d93f5a9a6))
+
+
+### Bug Fixes
+
+* **release:** translate lines broken mid-sentence and take earlier lines as context ([2f792e7](https://github.com/sokcuri/hdTrans/commit/2f792e70b64604160273cc943bdea119233e9627))
+
 ## [0.6.0](https://github.com/sokcuri/hdTrans/compare/v0.5.9...v0.6.0) (2026-10-26)
 
 
