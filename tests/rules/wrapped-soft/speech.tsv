@@ -1,3 +1,7 @@
 # 규칙: LAY-14, SPC-18
 rule	input	expected	kind	layer
 wrapped:speech	「今日は行かない\n彼は家に帰った。\n暑いね\n\nそれは違う	「오늘은 가지 않아\n그는 집에 돌아갔다.\n덥네\n\n그건 달라	fix	driver
+wrapped:speech	世界遺産に登録された\nヤマト王権のお墓。	세계 유산에 등록된\n야마토 왕권의 묘.	fix	driver
+wrapped:speech	非常に使い勝手のよい➡	매우 사용하기에 편리한 ➡	fix	driver
+wrapped:speech	経営者の意思決定になってくる\nと思います。	경영자의 의사결정이 되어 진다고\n생각합니다.	fix	driver
+wrapped:speech	面白かった\nはい	재미있었어\n네	keep	driver

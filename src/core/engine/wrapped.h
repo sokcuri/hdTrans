@@ -39,6 +39,15 @@ std::string_view ArrowOf(std::string_view line);
 // line without the arrow it ends with and the white space before the arrow.
 std::string WithoutArrow(std::string_view line);
 
+// The symbol after which the stages read the last word of a line as going on (与える➡ 주는); →, ⇒
+// and the other marks that the tokenizer takes as Shift-JIS symbols end it (与える→ 준다→).
+inline constexpr std::string_view kGoesOn = "➡";
+
+// The text that line is translated as on its own: without the arrow it ends with and the white
+// space before the arrow, and with kGoesOn in their place when a letter stands before them, where the
+// sentence goes on (与える➡), not a mark that closes it (らしい。➡).
+std::string AloneText(std::string_view line);
+
 // translated with arrow written after its last character other than white space, after one space.
 std::string WithArrow(std::string_view translated, std::string_view arrow);
 
@@ -47,8 +56,10 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
 
 // Whether the sentence that line ends with cannot end there and goes on in next: line ends in an
 // arrow (ArrowOf), a comma, a case particle, an attributive, a conditional or connective form, an
-// adverb with no predicate before it (もしよかったら一緒に), or a て form before an auxiliary or a
-// predicate before a word that needs one (こと, はず) at the start of next. edges are those of line
+// adverb with no predicate before it (もしよかったら一緒に), or じゃ or では before the ない of next, a
+// word before a quotative particle at the start of next, a て form before an auxiliary, a predicate
+// before a word that needs one (こと, はず), or a bare verb or adjective before a noun at the start of
+// next (与える / 赤紫と青紫色のオッドアイ). edges are those of line
 // without its arrow. A blank line, a line that ends in another mark or a bracket, a line that holds
 // kBreakMark, and a next line that starts an item of its own (a bracket, a list or heading mark, a
 // speaker, turn or voice mark, a speaker label) never go on.

@@ -82,6 +82,42 @@ HD_TEST(engine_wrapped_goes_on) {
     HD_CHECK(!GoesOn("駅で&#CS", particle, "会った。", verb));
     // A complete line.
     HD_CHECK(!GoesOn("行きます", Edges({Verb("行", "きます", "7니다", 10)}), "会った。", verb));
+    // A bare verb or adjective before a noun describes it; a polite form, an explanation or a
+    // guess ends its sentence, and so does any form before an interjection.
+    const WrapEdges noun = Edges({Word("赤紫", "110"), Word("と", "200")});
+    HD_CHECK(GoesOn("印象を与える", Edges({Word("印象", "110"), Verb("を与え", "る", "4다")}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("与える", Edges({Verb("与え", "る", "4다")}), "赤紫と", noun));
+    HD_CHECK(GoesOn("キャンセルになった", Edges({Word("キャンセル", "110"), Verb("にな", "った", "5다", 6)}), "赤紫と", noun));
+    WrapWord cold = Word("冷た", "7M0");
+    cold.detail = output::DetailClass::Keiyo;
+    cold.ending = "い";
+    cold.koEnding = "1다";
+    const WrapWord book = Word("本", "110");
+    HD_CHECK(GoesOn("とても冷たい", Edges({Word("とても", "311"), cold}), "赤紫と", noun));
+    HD_CHECK(GoesOn("本を読んだ", Edges({book, Verb("を読", "んだ", "5다", 6)}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("活躍しております", Edges({book, Verb("活躍してお", "ります", "1고 있습니다", 10)}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("行くんだ", Edges({book, Verb("行", "くんだ", "5다")}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("行くそうだ", Edges({book, Verb("行", "くそうだ", "1다고 한다")}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("行くだろう", Edges({book, Verb("行", "くだろう", "5을 것이다")}), "赤紫と", noun));
+    HD_CHECK(!GoesOn("与えるよ", Edges({book, Verb("与え", "るよ", "5어")}), "赤紫と", noun));
+    const WrapEdges saw = Edges({book, Verb("を見", "た", "5다", 6)});
+    HD_CHECK(!GoesOn("本を見た", saw, "はい、行きます", Edges({Word("はい", "110")})));
+    HD_CHECK(!GoesOn("本を見た", saw, "これ何？", Edges({Word("これ", "120")})));
+    HD_CHECK(!GoesOn("本を見た", saw, "あっ そう", Edges({Word("앗", "110")})));
+    // A quotative particle at the start of the next line, not the conjunction before a comma.
+    const WrapEdges comes = Edges({Verb("くる", "", "4다")});
+    HD_CHECK(GoesOn("なってくる", comes, "と思います。", Edges({Word("と", "200")})));
+    HD_CHECK(GoesOn("遅い", Edges({cold}), "って言いたい", Edges({Word("って", "200")})));
+    HD_CHECK(!GoesOn("なってくる", comes, "と、その時", Edges({Word("と", "200")})));
+    HD_CHECK(!GoesOn("なってくる", comes, "で 決まったの？", Edges({Word("で", "221")})));
+    // The negative of the copula broken before its ない.
+    const WrapEdges jya = Edges({Verb("い", "るんじゃ", "1지")});
+    HD_CHECK(GoesOn("きているんじゃ", jya, "ないかなと思います", Edges({cold})));
+    HD_CHECK(GoesOn("嫌では", Edges({Word("嫌", "8U0"), Word("では", "200")}), "ないですけど", Edges({cold})));
+    HD_CHECK(!GoesOn("きているんじゃ", jya, "なにか", Edges({Word("なにか", "120")})));
+    // Connective particles and a predicate made a noun before a case particle.
+    HD_CHECK(GoesOn("多いんですが", Edges({Verb("多", "いんですが", "7니다만")}), "会った。", verb));
+    HD_CHECK(GoesOn("横断するのが", Edges({Verb("横断す", "るのが", "0 것이")}), "最後の夢なんだ", noun));
 }
 
 HD_TEST(engine_wrapped_split) {
@@ -137,6 +173,10 @@ HD_TEST(engine_wrapped_captions) {
     HD_CHECK(!GoesOn("揚げた→", verb, "", verb));
     HD_CHECK(!GoesOn("揚げた→", verb, "》こちらです", verb));
     HD_CHECK(!GoesOn("揚げた", verb, "超濃厚", verb));
+    // Without an arrow, a bare verb after the words of its clause describes a noun on the next line.
+    const WrapEdges fried = Edges({Word("カラっと", "311"), Verb("揚げ", "た", "5다", 6)});
+    HD_CHECK(GoesOn("カラっと揚げた", fried, "超濃厚", Edges({Word("超濃厚", "110")})));
+    HD_CHECK(!GoesOn("揚げた", verb, "超濃厚", Edges({Word("超濃厚", "110")})));
     HD_CHECK(!GoesOn("東京→大阪", verb, "超濃厚", verb));
     const WrapEdges particle = Edges({Word("影響", "110"), Word("で", "221")});
     for (const char* next : {"≫北九州市で", "記者≫北九州市で", "(依頼者)私の車が", "吉澤(俳優)そうです", "⚟待って",
@@ -160,4 +200,10 @@ HD_TEST(engine_wrapped_arrows) {
     HD_CHECK_EQ(WithoutArrow("揚げた"), "揚げた");
     HD_CHECK_EQ(WithArrow("튀긴", "→"), "튀긴 →");
     HD_CHECK_EQ(WithArrow("튀긴  ", "￫"), "튀긴 ￫  ");
+    // On its own, an arrow line after a letter is read before ➡, which keeps its sentence open.
+    using internal::AloneText;
+    HD_CHECK_EQ(AloneText("揚げた →\r"), "揚げた➡\r");
+    HD_CHECK_EQ(AloneText("揚げた￫"), "揚げた➡");
+    HD_CHECK_EQ(AloneText("揚げた。➡"), "揚げた。");
+    HD_CHECK_EQ(AloneText("揚げた"), "揚げた");
 }
