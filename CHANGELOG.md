@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/sokcuri/hdTrans/compare/v0.5.9...v0.6.0) (2026-10-26)
+
+
+### Features
+
+* **release:** license hdTrans under MPL-2.0 and add a security policy ([ae21362](https://github.com/sokcuri/hdTrans/commit/ae21362a7081b2ebbc18228293112639c7d8aff4))
+
 ## [0.5.9](https://github.com/sokcuri/hdTrans/compare/v0.5.8...v0.5.9) (2026-10-26)
 
 
