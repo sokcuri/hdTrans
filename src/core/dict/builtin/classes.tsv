@@ -191,6 +191,7 @@
 //= noun.honorific-ongoing	Ends of verbal nouns of what the honored person goes on doing, read in 하시는 rather than 하신 before noun.honored-person (ご利用のお客様 이용하시는 손님, ご希望の方 희망하시는 분).
 //= noun.inside-medium	Nouns whose inside is filled, or that one is in as a medium, a time or a state, not a container: 中 after them and の is 속 (물속, 기억 속, 밤 속, 정적 속).
 //= noun.container	Ends of the nouns of pockets, bags, boxes and other things one keeps things in (ポケット, 鞄, 袋, 箱, 引き出し): a 出す after one in から takes something out of it, 꺼내다 (ポケットから財布を出した).
+//= noun.bracket-note	Characters that, alone in round brackets before a line, annotate it rather than name its speaker ((続), (株), (注), (笑)).
 //= noun.label-role	Speaker labels that name a group, a voice or a role, not a person (みんな, 声, アナウンス, 店員).
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
@@ -2827,6 +2828,34 @@ noun.inside-medium	時代
 noun.inside-medium	歴史
 noun.inside-medium	物語
 
+noun.bracket-note	続
+noun.bracket-note	仮
+noun.bracket-note	旧
+noun.bracket-note	株
+noun.bracket-note	有
+noun.bracket-note	財
+noun.bracket-note	社
+noun.bracket-note	注
+noun.bracket-note	笑
+noun.bracket-note	泣
+noun.bracket-note	汗
+noun.bracket-note	怒
+noun.bracket-note	爆
+noun.bracket-note	謎
+noun.bracket-note	祝
+noun.bracket-note	済
+noun.bracket-note	完
+noun.bracket-note	再
+noun.bracket-note	改
+noun.bracket-note	訂
+noun.bracket-note	略
+noun.bracket-note	例
+noun.bracket-note	図
+noun.bracket-note	表
+noun.bracket-note	号
+noun.bracket-note	副
+noun.bracket-note	特
+noun.bracket-note	独
 noun.label-role	みんな
 noun.label-role	皆
 noun.label-role	一同
@@ -2837,6 +2866,8 @@ noun.label-role	3人
 noun.label-role	３人
 noun.label-role	声
 noun.label-role	電話
+noun.label-role	通信
+noun.label-role	無線
 noun.label-role	アナウンス
 noun.label-role	ナレーション
 noun.label-role	司会

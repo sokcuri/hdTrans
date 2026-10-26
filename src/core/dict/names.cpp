@@ -446,11 +446,10 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
         if (!StrongName(text, m->n) && !AddressedName(text, m->n)) {
             person = true;
             if (!ctx.confirmed || ctx.confirmed->find(key) == ctx.confirmed->end()) {
-                // A cued hiragana name no dictionary word spells takes part (まるゆです); other cued
-                // keys have their dictionary senses, which the constraint rules replace.
+                // A cued name no dictionary word spells takes part (まるゆです, 凛); other cued keys
+                // have their dictionary senses, which the constraint rules replace.
                 cued = (PersonCue(key, text.substr(m->n)) && CuedKey(key)) ||
-                       (ctx.cued && ctx.cued->find(key) != ctx.cued->end() && !BaseWord(key) &&
-                        !AnyRune(key, [](char32_t r) { return !IsHiragana(r); }));
+                       (ctx.cued && ctx.cued->find(key) != ctx.cued->end() && !BaseWord(key));
                 if (!cued) continue;
             }
         }

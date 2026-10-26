@@ -15361,7 +15361,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 小皇帝	소황제	N110			GN						しょうこうてい	w:15323
 小目	소목	N110			GN						こもく	w:15324
 小確幸	소확행	N110			GN						しょうかっこう	w:15325
-小竹	코타케	N110			GN				xxx llm	1		w:15326
+小竹	코타케	N130	QPN	Wa	GN				xxx llm	1		w:15326
 小笠原大蝙蝠	보닌날여우박쥐	N110			GN						おがさわらおおこうもり	w:15327
 小筥	갑	N110			GN						こばこ	w:15328
 小米蚊帳吊	참방동사니	N110			GN						こごめかやつり	w:15329

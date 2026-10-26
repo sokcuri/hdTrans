@@ -339,6 +339,73 @@ Run MakeRun(std::string_view s, std::size_t start, std::size_t end, bool kanji) 
 
 namespace internal {
 
+bool CaptionLead(std::string_view s) {
+    // Read backwards from the end, so a line of words fails at its last character; a bracketed
+    // group is skipped over at most kMaxCaptionGroup characters.
+    char32_t open = 0;
+    int inside = 0;
+    for (std::size_t i = s.size(); i > 0;) {
+        const text::Rune r = RuneBefore(s, i);
+        i -= r.size;
+        if (r.cp == U'\n') return open == 0;
+        if (open != 0) {
+            if (r.cp == open) open = 0;
+            if (++inside > kMaxCaptionGroup) return false;
+            continue;
+        }
+        inside = 0;
+        if (r.cp == U')' || r.cp == U'）' || r.cp == U']' || r.cp == U'］') {
+            open = r.cp == U')' ? U'(' : r.cp == U'）' ? U'（' : r.cp == U']' ? U'[' : U'［';
+        } else if (text::IsLetter(r.cp) || text::IsDigit(r.cp) || InRunes(r.cp, "「」『』【】〈〉《｢｣(（[［、。，,")) {
+            return false;
+        }
+    }
+    return open == 0;
+}
+
+std::size_t CaptionLabelEnd(std::string_view line) {
+    // The lead of caption marks and closed groups, read forwards; it must end in a group in round
+    // brackets that holds no mark of a sentence.
+    std::size_t end = 0, open = 0;
+    for (std::size_t i = 0; i < line.size();) {
+        const text::Rune r = RuneAt(line, i);
+        const bool round = r.cp == U'(' || r.cp == U'（';
+        if (round || r.cp == U'[' || r.cp == U'［') {
+            const char32_t close = r.cp == U'(' ? U')' : r.cp == U'（' ? U'）' : r.cp == U'[' ? U']' : U'］';
+            std::size_t at = i + r.size;
+            int n = 0;
+            while (at < line.size() && n <= kMaxCaptionGroup) {
+                const text::Rune c = RuneAt(line, at);
+                if (c.cp == close || c.cp == U'\n') break;
+                at += c.size == 0 ? 1 : c.size;
+                n++;
+            }
+            if (at >= line.size() || n > kMaxCaptionGroup || RuneAt(line, at).cp != close) break;
+            if (round) open = i;
+            i = at + RuneAt(line, at).size;
+            if (round) end = i;
+            continue;
+        }
+        if (r.cp == U'\n' || text::IsLetter(r.cp) || text::IsDigit(r.cp) || InRunes(r.cp, "「」『』【】〈〉《｢｣)）]］、。，,")) break;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    if (end == 0) return 0;
+    const std::string_view inner = line.substr(open, end - open);
+    if (AnyRuneOf(inner, [](char32_t c) { return InRunes(c, "「」『』、。！？!?…‥"); })) return 0;
+    return SpeechAfterLabel(line.substr(end)) ? end : 0;
+}
+
+bool SpeechAfterLabel(std::string_view rest) {
+    while (rest.starts_with(" ") || rest.starts_with("　")) rest.remove_prefix(rest.starts_with(" ") ? 1 : std::string_view("　").size());
+    if (rest.empty() || rest.starts_with("\n") || rest.starts_with("\r") || rest.starts_with("と") || rest.starts_with("って")) return false;
+    // A particle of one kana that ends there attaches to the brackets ((人形)は、, (W)は西); one
+    // that goes on in kana starts a word (はい, はっ, でも, では).
+    const text::Rune first = RuneAt(rest, 0);
+    if (!InRunes(first.cp, "はがをにのでもへや")) return true;
+    const char32_t next = RuneAt(rest, first.size).cp;
+    return IsHiragana(next) || InRunes(next, "ーｰ～〜");
+}
+
 bool PlainLabel(std::string_view p) {
     if (AllRunes(p, [](char32_t c) { return (IsNameRune(c) && !IsHiragana(c)) || InRunes(c, "・＆&？?"); })) return true;
     return AllRunes(p, IsHiragana) && RuneCount(p) <= 6;
