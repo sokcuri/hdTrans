@@ -1,5 +1,12 @@
 # 규칙: MNG-2
 rule	input	expected	kind	layer
+dict:jisjk:121099	高圧的だった。	고압적이었다.	fix	lookup
+dict:jisjk:121099	高圧的でした。	고압적이었습니다.	fix	lookup
+dict:jisjk:121099	高圧的だ。	고압적이다.	keep	lookup
+dict:jisjk:136663	深大だった。	심대했다.	fix	lookup
+dict:jisjk:136663	深大だ。	심대하다.	keep	lookup
+dict:jisjk:117158	十人並みだった。	평범했다.	fix	lookup
+dict:jisjk:117158	十人並みだ。	평범하다.	keep	lookup
 lookup:itte-ki	ライブに行ってきた	has:왔다	fix	lookup
 lookup:itte-ki	ライブに行ってきた	lacks:다녀올게	fix	lookup
 lookup:itte-ki	さっき、買い物行ってきたの	has:왔어	fix	lookup
