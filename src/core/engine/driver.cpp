@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -11,6 +12,7 @@
 #include "core/engine/glue.h"
 #include "core/engine/resolve.h"
 #include "core/engine/rules.h"
+#include "core/engine/wrapped.h"
 #include "core/filter/filter.h"
 #include "core/names/document.h"
 #include "core/output/cleanup.h"
@@ -431,6 +433,91 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
     return s;
 }
 
+// Adds a "&#CS" control marker to tokens for each byte offset of breaks in the text they were
+// scanned from: inside the token that holds the offset, else after the last word before it, else
+// before the first word after it.
+void AddBreakMarkers(tokenizer::Tokens& tokens, std::span<const std::size_t> breaks) {
+    const auto word = [&](std::size_t t) {
+        const int type = tokens.TypeAfter(t);
+        return type != tokenizer::kTypeEnd && type != tokenizer::kTypeMarkup && type != tokenizer::kTypeAsciiSpace &&
+               type != tokenizer::kTypeWideSpace && !tokens.Merged(t).empty();
+    };
+    for (const std::size_t at : breaks) {
+        int index = -1, length = 0;
+        for (std::size_t t = 0; t < tokens.size() && index < 0; t++) {
+            const tokenizer::Token& token = tokens[t];
+            if (word(t) && token.sourceBegin < at && at < token.sourceEnd) {
+                // Counted in characters, as the token's text folds some (１ as 1) and may drop the
+                // spaces between Japanese words: the spaces count when the token kept them.
+                std::size_t all = 0, head = 0, headSpaces = 0;
+                for (std::size_t c = 0; c < tokens.chars.size() && c < tokens.offsets.size(); c++) {
+                    if (tokens.offsets[c] < token.sourceBegin || tokens.offsets[c] >= token.sourceEnd) continue;
+                    all++;
+                    if (tokens.offsets[c] >= at) continue;
+                    head++;
+                    if (tokens.chars[c] == U' ') headSpaces++;
+                }
+                const std::string_view merged = tokens.Merged(t);
+                std::size_t runes = all == text::RuneCount(merged) ? head : head - headSpaces;
+                std::size_t bytes = 0;
+                for (; runes > 0 && bytes < merged.size(); runes--) bytes += std::max<std::size_t>(1, text::DecodeRune(merged.substr(bytes)).size);
+                index = static_cast<int>(t);
+                length = static_cast<int>(std::min(bytes, merged.size()));
+            }
+        }
+        for (std::size_t t = tokens.size(); t-- > 0 && index < 0;) {
+            if (word(t) && tokens[t].sourceEnd <= at) {
+                index = static_cast<int>(t);
+                length = static_cast<int>(tokens.Merged(t).size());
+            }
+        }
+        for (std::size_t t = 0; t < tokens.size() && index < 0; t++) {
+            if (word(t)) index = static_cast<int>(t);
+        }
+        if (index >= 0) tokens.markers.push_back({index, length, 1});
+    }
+    std::stable_sort(tokens.markers.begin(), tokens.markers.end(),
+                     [](const tokenizer::ControlMarker& a, const tokenizer::ControlMarker& b) {
+                         return a.tokenIndex < b.tokenIndex;
+                     });
+}
+
+// marked with a kBreakSpan piece where each line of lines (the marked texts of joined lines through
+// the stages one by one) ends: after the lines up to it when they start marked, else before the
+// lines after it when they end it. None when a break falls in neither way or inside a span.
+std::optional<output::Pieces> BreakAt(const output::Pieces& marked, std::span<const std::string> lines) {
+    const std::string whole = output::String(marked);
+    std::vector<std::size_t> breaks;
+    for (std::size_t k = 0; k + 1 < lines.size(); k++) {
+        std::string before, after;
+        for (std::size_t i = 0; i <= k; i++) before += lines[i];
+        for (std::size_t i = k + 1; i < lines.size(); i++) after += lines[i];
+        std::size_t at = std::string::npos;
+        if (whole.starts_with(before)) {
+            at = before.size();
+        } else if (whole.ends_with(after)) {
+            at = whole.size() - after.size();
+        }
+        if (at == std::string::npos || (!breaks.empty() && at <= breaks.back())) return std::nullopt;
+        breaks.push_back(at);
+    }
+    output::Pieces out;
+    std::size_t pos = 0, next = 0;
+    for (const output::Piece& p : marked) {
+        std::size_t from = 0;
+        for (; next < breaks.size() && breaks[next] <= pos + p.text.size(); next++) {
+            const std::size_t cut = breaks[next] - pos;
+            if (p.span != output::SpanText && cut > 0 && cut < p.text.size()) return std::nullopt;
+            if (cut > from) out.push_back({p.text.substr(from, cut - from), p.span});
+            out.push_back({std::string(kBreakSpan), output::SpanOpen});
+            from = cut;
+        }
+        if (from < p.text.size() || (from == 0 && p.text.empty())) out.push_back({p.text.substr(from), p.span});
+        pos += p.text.size();
+    }
+    return out;
+}
+
 // Translates one chunk: its tokens, the word analysis, then per sentence the resolve stage
 // and the compose stage. The sentences are appended to out with the chunk index.
 // speech is read from the start of the chunk.
@@ -439,7 +526,25 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     Generated& generated, const StageObserver& observer, const TranslationOptions& options,
                     std::vector<output::Sentence>& out) {
     s.texts.clear();
-    const std::vector<tokenizer::Piece> pieces = TokenizerPieces(chunk);
+    // Joined wrapped lines: the break spans become break markers at their places in the tokens.
+    std::vector<std::size_t> breaks;
+    output::Pieces unbroken;
+    if (options.joinedLines) {
+        std::size_t at = 0;
+        for (const output::Piece& p : chunk) {
+            if (p.span == output::SpanOpen && p.text == kBreakSpan) {
+                breaks.push_back(at);
+                continue;
+            }
+            if (p.span == output::SpanText) {
+                output::Add(unbroken, p.text);
+            } else {
+                unbroken.push_back(p);
+            }
+            at += p.text.size();
+        }
+    }
+    const std::vector<tokenizer::Piece> pieces = TokenizerPieces(options.joinedLines ? unbroken : chunk);
     // A word of the dictionary that starts in the text before a space and goes on past it.
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after) {
         for (std::size_t start = 0; start < head.size();) {
@@ -455,6 +560,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         return false;
     };
     tokenizer::TokenizeSpans(pieces, text, s.tokens, text && !options.reference ? &joins : nullptr);
+    if (!breaks.empty()) AddBreakMarkers(s.tokens, breaks);
     if (observer.tokens) observer.tokens(observer.context, index, s.tokens);
 
     word::Analysis analysis;
@@ -476,6 +582,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     composeSettings.literal = text && !options.reference && options.wordImprovements.literalCleanup;
     composeSettings.quotes = speech.quotes;
     composeSettings.quoteStyles = &speech.styles;
+    composeSettings.markerBeforeWord = options.joinedLines;
     std::size_t counted = 0;  // tokens read into composeSettings.quotes
     for (std::size_t k = 0; k < analysis.sentences.size(); k++) {
         const word::Sentence& sentence = analysis.sentences[k];
@@ -513,33 +620,74 @@ bool Observes(const StageObserver& o) {
 // One line through every stage of the text path; the line's trailing "\r" is written
 // back by the caller.
 // carry is the quote an earlier line left open for this one.
+// narrated, when set, replaces the document's narration (wrapped lines read it from their own text).
+// parts, when given, are the lines that body joins: each is normalized, sounded and protected on its
+// own, with a kBreakSpan between them that the chunks turn into break markers.
 std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
                           QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
-                          const TranslationOptions& options) {
+                          const TranslationOptions& options, std::optional<bool> narrated = std::nullopt,
+                          std::span<const std::string> parts = {}) {
     const pipeline::LineFacts facts = pipeline::ReadLine(doc, body);
-    if (facts.wholeLine) return *facts.wholeLine;
+    if (facts.wholeLine && parts.empty()) return *facts.wholeLine;
     const pipeline::LineLookup lookup = pipeline::LookupOf(doc, facts);
     pipeline::LineContext ctx = pipeline::ContextOf(doc, lookup);
+    if (narrated) ctx.narrated = *narrated;
     if (options.filters) ctx.lookup.user = options.filters->User();
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
     const RespellLookup respell{snap, ctx.lookup};
-    std::string normalized =
-        pipeline::JoinBraceRuby(pipeline::Normalize(facts.text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
-                                ReadBase, &snap);
-    if (!options.reference) {
-        normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
-        normalized = pipeline::RespellKatakanaEndings(normalized);
-        normalized = pipeline::RespellKanjiCries(normalized);
-        normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
+    const auto normalize = [&](std::string_view text) {
+        std::string normalized = pipeline::JoinBraceRuby(
+            pipeline::Normalize(text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
+            ReadBase, &snap);
+        if (!options.reference) {
+            normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
+            normalized = pipeline::RespellKatakanaEndings(normalized);
+            normalized = pipeline::RespellKanjiCries(normalized);
+            normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
+        }
+        return normalized;
+    };
+    const auto front = [&](std::string_view text, output::Pieces& typedOut, output::Pieces& markedOut,
+                           std::string& normalized, std::string& sounded) {
+        normalized = normalize(text);
+        sounded = pipeline::Sound(normalized, ctx, snap);
+        typedOut = pipeline::ProtectTyped(sounded, ctx, snap);
+        markedOut = pipeline::MarkCornerBrackets(typedOut);
+    };
+    output::Pieces typed, marked;
+    std::string normalized, sounded;
+    front(facts.text, typed, marked, normalized, sounded);
+    if (!parts.empty()) {
+        // The breaks fall where the lines through the stages one by one meet in the joined text;
+        // where a stage changed the text across a break, the lines keep their own stages.
+        std::vector<std::string> partMarked;
+        output::Pieces partsTyped, partsMarked;
+        std::string partsNormalized, partsSounded;
+        for (std::size_t k = 0; k < parts.size(); k++) {
+            output::Pieces partTyped, partMarkedPieces;
+            std::string partNormalized, partSounded;
+            front(pipeline::ReadLine(doc, parts[k]).text, partTyped, partMarkedPieces, partNormalized, partSounded);
+            partMarked.push_back(output::String(partMarkedPieces));
+            if (k > 0) partsMarked.push_back({std::string(kBreakSpan), output::SpanOpen});
+            output::Append(partsMarked, std::move(partMarkedPieces));
+            output::Append(partsTyped, std::move(partTyped));
+            partsNormalized += partNormalized;
+            partsSounded += partSounded;
+        }
+        std::optional<output::Pieces> broken = BreakAt(marked, partMarked);
+        if (broken) {
+            marked = std::move(*broken);
+        } else {
+            typed = std::move(partsTyped);
+            marked = std::move(partsMarked);
+            normalized = std::move(partsNormalized);
+            sounded = std::move(partsSounded);
+        }
     }
     if (observer.text) observer.text(observer.context, "N", normalized);
-    const std::string sounded = pipeline::Sound(normalized, ctx, snap);
     if (observer.text) observer.text(observer.context, "SN", sounded);
-
-    const output::Pieces typed = pipeline::ProtectTyped(sounded, ctx, snap);
-    const output::Pieces marked = pipeline::MarkCornerBrackets(typed);
     if (observer.pieces) observer.pieces(observer.context, "P", -1, marked);
 
     std::vector<std::string> gaps;
@@ -577,7 +725,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             if (!gaps[i].empty()) before.clear();  // a column starts as a line does
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
-            const std::string chunkText = output::String(chunks[i]);
+            std::string chunkText = output::String(chunks[i]);
+            for (std::size_t at; (at = chunkText.find(kBreakSpan)) != std::string::npos;) chunkText.erase(at, kBreakSpan.size());
             pass.quotes = output::QuotesAfter(pass.quotes, chunkText);
             if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
         }
@@ -631,25 +780,160 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     return output::SpokenWords(again ? compose(speech, observer, options) : first, carry.depth, speech.styles);
 }
 
+// Watches the resolved chains of a line for its first and last words.
+struct EdgeWatch {
+    std::vector<output::ResolvedItem> items;
+    WrapEdges edges;
+};
+
+void WatchEdges(void* context, int, int, const word::Chain& chain) {
+    auto* watch = static_cast<EdgeWatch*>(context);
+    ResolvedItems(chain, watch->items);
+    AddWrapEdges(watch->items, watch->edges);
+}
+
+// The most lines one sentence is joined from.
+constexpr std::size_t kMaxJoined = 12;
+
+// The text of a line without its "\r" and the blanks around it, and those blanks.
+struct LineParts {
+    std::string_view lead, body, trail;
+    bool cr = false;
+};
+
+LineParts PartsOf(std::string_view line) {
+    LineParts p;
+    p.cr = line.ends_with('\r');
+    if (p.cr) line.remove_suffix(1);
+    std::size_t from = 0, to = line.size();
+    while (from < to) {
+        if (line[from] == ' ' || line[from] == '\t') {
+            from++;
+        } else if (line.substr(from).starts_with("　")) {
+            from += std::string_view("　").size();
+        } else {
+            break;
+        }
+    }
+    while (to > from) {
+        if (line[to - 1] == ' ' || line[to - 1] == '\t') {
+            to--;
+        } else if (line.substr(from, to - from).ends_with("　")) {
+            to -= std::string_view("　").size();
+        } else {
+            break;
+        }
+    }
+    p.lead = line.substr(0, from);
+    p.body = line.substr(from, to - from);
+    p.trail = line.substr(to);
+    return p;
+}
+
+// The text path over wrapped lines (TranslationOptions::wrapped). Each line is translated on its
+// own first, its narration read from its own text; a run of lines that go on in the next
+// (GoesOn) is then translated as one line, its breaks carried to the translation as kBreakMark,
+// and split back there. When the marks do not come back one for each break, with text between
+// each two, the lines keep their own translations. The lines before context are read only.
+std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::DocumentContext& doc,
+                                          std::span<const std::string> lines, const std::vector<bool>& closed,
+                                          Scratch& s, Generated& generated, const StageObserver& observer,
+                                          const TranslationOptions& options, std::size_t context) {
+    const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
+    // The lines are translated without the arrows they end with, which their translations keep.
+    std::vector<std::string> bare(lines.size()), alone(lines.size());
+    std::vector<std::string_view> arrows(lines.size());
+    std::vector<WrapEdges> edges(lines.size());
+    std::vector<QuoteCarry> used(lines.size());
+    QuoteCarry carry;
+    for (std::size_t i = 0; i < lines.size(); i++) {
+        arrows[i] = ArrowOf(lines[i]);
+        bare[i] = WithoutArrow(lines[i]);
+        const LineQuotes quotes = QuotesOf(lines[i], carry);
+        used[i] = closed[i] ? quotes.start : QuoteCarry{};
+        carry = quotes.end;
+        EdgeWatch watch;
+        StageObserver edgeObserver;
+        edgeObserver.context = &watch;
+        edgeObserver.resolved = WatchEdges;
+        alone[i] = TranslateBody(snap, doc, bare[i], used[i], s, generated, edgeObserver, options,
+                                 narratedOf(lines[i]));
+        if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
+        edges[i] = std::move(watch.edges);
+    }
+    std::vector<std::string> out(lines.size());
+    for (std::size_t i = 0; i < lines.size();) {
+        std::size_t j = i;
+        while (j + 1 < lines.size() && j + 1 - i < kMaxJoined && GoesOn(lines[j], edges[j], lines[j + 1], edges[j + 1])) j++;
+        std::vector<std::string> pieces;
+        std::vector<LineParts> parts;
+        if (j > i && j >= context) {
+            std::string joined;
+            std::vector<std::string> texts;
+            bool narrated = false;
+            for (std::size_t k = i; k <= j; k++) {
+                parts.push_back(PartsOf(bare[k]));
+                texts.emplace_back(k == i ? parts.back().lead : std::string_view());
+                texts.back() += parts.back().body;
+                joined += texts.back();
+                narrated = narrated || narratedOf(lines[k]);
+            }
+            TranslationOptions joinedOptions = options;
+            joinedOptions.joinedLines = true;
+            if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
+            pieces = SplitAtBreaks(
+                TranslateBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
+                j - i + 1);
+            if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
+        }
+        for (std::size_t k = i; k <= j; k++) {
+            if (k < context) continue;
+            if (!pieces.empty()) {
+                const LineParts& p = parts[k - i];
+                std::string piece = pieces[k - i];
+                if (!arrows[k].empty()) piece = WithArrow(piece, arrows[k]);
+                out[k] = std::string(k == i ? std::string_view() : p.lead) + piece + std::string(p.trail);
+                if (p.cr) out[k] += '\r';
+                continue;
+            }
+            if (Observes(observer)) {
+                // The stages of the line on its own, for the observer; the translation stays the one made
+                // before the joined lines.
+                if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
+                TranslateBody(snap, doc, bare[k], used[k], s, generated, observer, options, narratedOf(lines[k]));
+            }
+            out[k] = arrows[k].empty() ? alone[k] : WithArrow(alone[k], arrows[k]);
+            if (lines[k].ends_with('\r')) out[k] += '\r';
+        }
+        i = j + 1;
+    }
+    return out;
+}
+
 std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Generated& generated,
                                                  std::span<const std::string> lines,
                                                  const StageObserver& observer, const TranslationOptions& options,
-                                                 std::span<const std::string> sourceLines) {
+                                                 std::span<const std::string> sourceLines, std::size_t context) {
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
-        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines);
+        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines, context);
     }
     if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
             return line.size() > text::kMaxLineBytes;
         })) {
+        // A call with a long line is not read as wrapped lines.
         std::vector<std::string> bounded;
         std::vector<std::size_t> ends;
         for (const std::string& line : lines) {
             for (std::string_view piece : text::TranslationPieces(line)) bounded.emplace_back(piece);
             ends.push_back(bounded.size());
         }
-        const auto translated = TranslateDocumentPieces(snap, generated, bounded, observer, options, sourceLines);
+        TranslationOptions unwrapped = options;
+        unwrapped.wrapped = false;
+        const std::size_t boundedContext = context > 0 ? ends[context - 1] : 0;
+        const auto translated =
+            TranslateDocumentPieces(snap, generated, bounded, observer, unwrapped, sourceLines, boundedContext);
         if (translated.size() != bounded.size()) return std::vector<std::string>(lines.begin(), lines.end());
         std::vector<std::string> joined(lines.size());
         for (std::size_t i = 0, piece = 0; i < ends.size(); i++) {
@@ -667,23 +951,28 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     out.reserve(lines.size());
     QuoteCarry carry;
     const std::vector<bool> closed = ClosedCarries(lines, carry);
-    for (std::size_t i = 0; i < lines.size(); i++) {
-        if (observer.line) observer.line(observer.context, static_cast<int>(i));
-        // ReadLine takes the line without its one trailing "\r"; the "\r" is written back.
-        const bool cr = !lines[i].empty() && lines[i].back() == '\r';
-        // A quote left open counts on a line only when the line or a later one closes it.
-        const LineQuotes quotes = QuotesOf(lines[i], carry);
-        const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
-        std::string translated = TranslateBody(snap, *doc, lines[i], used, s, generated, observer, options);
-        carry = quotes.end;
-        if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
-        if (cr) translated += '\r';
-        out.push_back(std::move(translated));
+    if (options.wrapped) {
+        out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, options, context);
+    } else {
+        for (std::size_t i = 0; i < lines.size(); i++) {
+            const StageObserver& watch = i < context ? StageObserver{} : observer;
+            if (watch.line) watch.line(watch.context, static_cast<int>(i - context));
+            // ReadLine takes the line without its one trailing "\r"; the "\r" is written back.
+            const bool cr = !lines[i].empty() && lines[i].back() == '\r';
+            // A quote left open counts on a line only when the line or a later one closes it.
+            const LineQuotes quotes = QuotesOf(lines[i], carry);
+            const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
+            std::string translated = TranslateBody(snap, *doc, lines[i], used, s, generated, watch, options);
+            carry = quotes.end;
+            if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
+            if (cr) translated += '\r';
+            out.push_back(std::move(translated));
+        }
     }
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
-        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines);
+        return TranslateDocumentPieces(*fallback, *replacement, lines, observer, options, sourceLines, context);
     }
     return out;
 }
@@ -762,43 +1051,50 @@ void Filter(const filter::Filters& f, filter::Stage stage, std::string& line, fi
 
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
                                            std::span<const std::string> lines,
-                                           const StageObserver& observer, const TranslationOptions& options) {
+                                           const StageObserver& observer, const TranslationOptions& options,
+                                           std::size_t context) {
+    context = std::min(context, lines.size());
+    // The filter log of the lines translated: the context lines are read only.
+    const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };
     if (!options.filters) {
         if (observer.filterLog) {
-            for (const auto& line : lines) {
-                if (line.empty() || line == "\r") continue;
-                FilterSnapshot(observer, "REQUEST", line);
-                FilterSnapshot(observer, "PRE", line);
+            for (std::size_t i = 0; i < lines.size(); ++i) {
+                if (!logged(i)) continue;
+                FilterSnapshot(observer, "REQUEST", lines[i]);
+                FilterSnapshot(observer, "PRE", lines[i]);
             }
         }
-        auto out = TranslateDocumentPieces(snap, generated, lines, observer, options, lines);
+        auto out = TranslateDocumentPieces(snap, generated, lines, observer, options, lines, context);
         if (observer.filterLog) {
-            for (std::size_t i = 0; i < out.size() && i < lines.size(); ++i) {
-                if (lines[i].empty() || lines[i] == "\r") continue;
+            for (std::size_t i = context; i < out.size() && i < lines.size(); ++i) {
+                if (!logged(i)) continue;
                 FilterSnapshot(observer, "TRANS", out[i]);
                 FilterSnapshot(observer, "POST", out[i]);
             }
         }
+        out.erase(out.begin(), out.begin() + static_cast<std::ptrdiff_t>(std::min(context, out.size())));
         return out;
     }
     const filter::Filters& f = *options.filters;
     std::vector<std::string> filtered(lines.begin(), lines.end());
     std::vector<filter::Filters::Toggles> toggles(filtered.size(), f.Start());
     for (std::size_t i = 0; i < filtered.size(); i++) {
-        if (!lines[i].empty() && lines[i] != "\r") FilterSnapshot(observer, "REQUEST", lines[i]);
-        Filter(f, filter::Stage::Pre, filtered[i], toggles[i], observer);
+        if (logged(i)) FilterSnapshot(observer, "REQUEST", lines[i]);
+        Filter(f, filter::Stage::Pre, filtered[i], toggles[i], i < context ? StageObserver{} : observer);
         filter::KeepSpacesAfterNumbers(lines[i], filtered[i]);
-        if (!lines[i].empty() && lines[i] != "\r") FilterSnapshot(observer, "PRE", filtered[i]);
+        if (logged(i)) FilterSnapshot(observer, "PRE", filtered[i]);
     }
-    std::vector<std::string> out = TranslateDocumentPieces(snap, generated, filtered, observer, options, filtered);
+    std::vector<std::string> out =
+        TranslateDocumentPieces(snap, generated, filtered, observer, options, filtered, context);
     // An empty input line is not post-filtered either.
-    for (std::size_t i = 0; i < out.size() && i < lines.size(); i++) {
+    for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {
             FilterSnapshot(observer, "TRANS", out[i]);
             Filter(f, filter::Stage::Post, out[i], toggles[i], observer);
             FilterSnapshot(observer, "POST", out[i]);
         }
     }
+    out.erase(out.begin(), out.begin() + static_cast<std::ptrdiff_t>(std::min(context, out.size())));
     return out;
 }
 

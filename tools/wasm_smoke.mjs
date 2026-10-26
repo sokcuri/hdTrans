@@ -300,11 +300,27 @@ try {
         assert.throws(() => soft.setSpeech('always'), /speech takes soft or strict/);
         assert.equal(soft.translate('「高い」'), '「높다」', 'a rejected level keeps the current one');
         assert.equal(strict.translate('「高い」'), '「높다」');
+        soft.setSpeech('soft');
+        assert.equal(soft.translate('高い。」', { context: ['「高い。'] }), '높아.」', 'context lines give their quote');
+        assert.equal(soft.translate('高い。」'), '높다.」', 'context is not kept after the call');
+        assert.equal(soft.translate('高い。」', { json: true, context: ['「高い。'] }).text, '높아.」');
+        assert.equal(soft.translate('高い\n高い', { context: ['高い', '高い', ''] }).split('\n').length, 2);
+        assert.throws(() => soft.translate('高い', { context: '高い' }), /context must be an array of strings/);
+        soft.setWrapped(true);
+        assert.equal(soft.translate('高い\n高い', { wrapped: false }).split('\n').length, 2);
+        assert.equal(soft.translate('高い\n高い').split('\n').length, 2, 'wrapped keeps the line count');
+        assert.throws(() => soft.setWrapped('yes'), /wrapped must be a boolean/);
+        const wrapped = await HdTrans.init({ module: engine, directories: ['/speech'], wrapped: true });
+        try {
+            assert.equal(wrapped.translate('高い\n高い').split('\n').length, 2);
+        } finally {
+            wrapped.close();
+        }
     } finally {
         soft.close();
         strict.close();
     }
-    console.log('PASS wasm smoke: speech levels, per-call option, quote carry');
+    console.log('PASS wasm smoke: speech levels, per-call options, quote carry, context, wrapped');
 }
 translator.close();
 assert.deepEqual(translator.getInfo(), info);

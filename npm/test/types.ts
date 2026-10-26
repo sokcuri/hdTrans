@@ -8,6 +8,8 @@ import {
   type TranslationResult,
   type EhndFiles,
   type HdTransInfo,
+  type Speech,
+  type TranslateOptions,
 } from 'hdtrans';
 
 async function check() {
@@ -28,6 +30,11 @@ async function check() {
   const explained: TranslationResult = translator.translate('学生', { json: true });
   const explicitPlain: string = translator.translate('学生', { json: false });
   const dynamic: string | TranslationResult = translator.translate('学生', { json: Math.random() > 0.5 });
+  const speech: Speech = 'soft';
+  const callOptions: TranslateOptions = { speech, wrapped: true, context: ['明日までに行かなければ'] };
+  const continued: string | TranslationResult = translator.translate('ならない。', callOptions);
+  translator.setWrapped(false);
+  const wrappedInit: Promise<HdTrans> = HdTrans.init({ speech, wrapped: true });
   const pos: UserDictPos = 'v:ㄷ';
   const rows: UserDictEntry[] = [{ ja: '聞く', ko: '듣다', pos }];
   translator.setUserDict(rows);
@@ -48,7 +55,7 @@ async function check() {
   const selection: ChoiceSelection | undefined = choice?.choice;
   const logs: string[] = explained.logs;
   void [inspected, info, version, infoDictionary, infoRuntime, native,
-    plain, explicitPlain, dynamic, active, raw, dictionaryVersion, runtime, error, errors, selection, logs];
+    plain, explicitPlain, dynamic, continued, wrappedInit, active, raw, dictionaryVersion, runtime, error, errors, selection, logs];
 
   // @ts-expect-error Engine implementation switches are not public npm options.
   await HdTrans.init({ reference: true });

@@ -1,4 +1,4 @@
-import { HdTrans, type EhndFiles, type HdTransInfo, type InitOptions, type Speech, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
+import { HdTrans, type EhndFiles, type HdTransInfo, type InitOptions, type Speech, type TranslateOptions, type TranslationResult, type UserDictEntry } from '../web/src/translator.js';
 
 declare const translator: HdTrans;
 declare const enabled: boolean;
@@ -22,6 +22,17 @@ const strictJson: TranslationResult = translator.translate('「学生だ」', { 
 const softInit: Promise<HdTrans> = HdTrans.init({ speech: 'soft' });
 // @ts-expect-error Only the named levels exist.
 translator.setSpeech('casual');
+
+translator.setWrapped(true);
+const wrappedInit: Promise<HdTrans> = HdTrans.init({ wrapped: true });
+const continued: string = translator.translate('ならない。', { wrapped: true, context: ['明日までに行かなければ'] });
+const continuedJson: TranslationResult = translator.translate('ならない。', { json: true, context: [] });
+const callOptions: TranslateOptions = { speech: 'soft', wrapped: false, context: ['「高い。'] };
+const withOptions: string | TranslationResult = translator.translate('高い。」', callOptions);
+// @ts-expect-error Context is a list of lines.
+translator.translate('ならない。', { context: '明日までに行かなければ' });
+// @ts-expect-error wrapped is a boolean.
+translator.setWrapped('yes');
 
 const entries: readonly UserDictEntry[] = [
   { ja: '蒼月', ko: '아오츠키', pos: 'surname' },

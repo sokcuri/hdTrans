@@ -108,8 +108,9 @@ std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
 
 struct Access {
     static bool Reference(const Engine& e) { return e.reference_; }
-    static std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer) {
-        return session.TranslateObserved(text, observer);
+    static std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
+                                         std::string_view context) {
+        return session.TranslateObserved(text, observer, context);
     }
 
     // e.mu_ is held. A later successful load supersedes this ticket.
@@ -413,19 +414,32 @@ Session::~Session() = default;
 
 std::string Session::Translate(std::string_view text) { return TranslateObserved(text, {}); }
 
-std::string Session::TranslateObserved(std::string_view text, const internal::StageObserver& observer) {
+std::string Session::Translate(std::string_view text, std::string_view context) {
+    return TranslateObserved(text, {}, context);
+}
+
+std::string Session::TranslateObserved(std::string_view text, const internal::StageObserver& observer,
+                                       std::string_view context) {
     if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_);
     if (!snapshot_) return {};
     std::vector<std::string> lines;
+    std::size_t contextLines = 0;
+    // One "\n" that ends the context ends its last line.
+    if (context.ends_with('\n')) context.remove_suffix(1);
+    if (!context.empty()) {
+        for (const std::string_view line : text::Lines(context)) lines.emplace_back(line);
+        contextLines = lines.size();
+    }
     for (const std::string_view line : text::Lines(text)) lines.emplace_back(line);
     internal::TranslationOptions options;
     options.reference = reference_;
     options.wordImprovements.cgRules = cg_;
     options.wordImprovements.misreadFilter = misread_;
     options.speech = speech_;
+    options.wrapped = wrapped_;
     options.filters = filters_.get();
     const std::vector<std::string> translated =
-        internal::TranslateDocument(*snapshot_, *generated_, lines, observer, options);
+        internal::TranslateDocument(*snapshot_, *generated_, lines, observer, options, contextLines);
     std::string out;
     for (std::size_t i = 0; i < translated.size(); i++) {
         if (i > 0) out += '\n';
@@ -443,8 +457,9 @@ void Session::Reset() {
 
 namespace internal {
 
-std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer) {
-    return Access::TranslateObserved(session, text, observer);
+std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
+                              std::string_view context) {
+    return Access::TranslateObserved(session, text, observer, context);
 }
 
 std::string TranslateRaw(const Engine& e, std::string_view line) {

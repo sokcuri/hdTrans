@@ -1,0 +1,42 @@
+# 규칙: LAY-14
+rule	input	expected	kind	layer
+wrapped:join	明日までに行かなければ\nならない。	내일까지 가야\n한다.	fix	driver
+wrapped:join	彼が昨日買ってきた本を読んで\nいるところです。	그가 어제 사 온 책을 읽고\n있는 중입니다.	fix	driver
+wrapped:join	もしよかったら一緒に\n行きませんか？	만약 괜찮다면 함께\n가지 않겠습니까?	fix	driver
+wrapped:join	無理やり食べ\nさせられた。	억지로\n먹었다.	fix	driver
+wrapped:join	火災が……火を\n消して、反撃しないと！	화재가……불을\n끄고, 반격하지 않으면!	fix	driver
+wrapped:join	まぁ、土曜でなくて\nもいいか。	뭐, 토요일이 아니어도\n괜찮은가.	fix	driver
+wrapped:join	この時間はとて\nも静かですね。	이 시간은 무척\n조용하네요.	fix	driver
+wrapped:join	変な噂が立って\nしまうかもしれない。	이상한 소문이 나\n버릴지도 모른다.	fix	driver
+wrapped:join	やはりちょっと\n違うんですね～。	역시 조금\n다르군요~.	fix	driver
+wrapped:join	午後2時、がんばって\nいきましょ～。	오후 2시, 열심히 해\n갑시다.	fix	driver
+wrapped:join	会長が部室を\n後にして、数十分。	회장이 동아리방을\n뒤로 하고, 수십 분.	fix	driver
+wrapped:join	外から見ると、その姿は\n道化師そのものだった。	밖에서 보니, 그 모습은\n어릿광대 그 자체였다.	fix	driver
+wrapped:join	洗い物手早く済ませて\nしまいますね。	빨랫감 재빠르게 끝마쳐\n버리네요.	fix	driver
+wrapped:join	お腹いっぱいになると\n眠くなるよねー。	배부르게 되면\n졸려지지~.	fix	driver
+wrapped:join	うぅ、少し汚れて\nしまいました。	으으, 조금 더러워져\n버렸습니다.	fix	driver
+wrapped:join	そろそろ失礼させて\nもらっていいかしら？	슬슬 실례시켜\n주어도 좋을까?	fix	driver
+wrapped:join	私達の力を見せて\nあげましょう。	저희들의 힘을 보여\n줍시다.	fix	driver
+wrapped:join	お正月を\n無事迎えられたわね。	설날을\n무사히 맞이할 수 있었네.	fix	driver
+wrapped:join	これはかなり難易度が\n高いぞ……！	이것은 꽤 난이도가\n높아……!	fix	driver
+wrapped:join	良かったらご一緒に\n行きませんか？	괜찮다면 함께\n가지 않겠습니까?	fix	driver
+wrapped:join	一体何を慌てて\nいるのかしら。	도대체 무엇을\n당황하고 있는 걸까.	fix	driver
+wrapped:join	またの御利用お待ちして\nおります。	다음 이용 기다리고\n있습니다.	fix	driver
+wrapped:join	そうじゃなくて\nもそそっかしいんだから！	그렇지 않아도\n경솔하니까!	fix	driver
+wrapped:join	視線を正面に戻すと、男が\n銃口をこちらに向けていた。	시선을 정면으로 되돌리니, 남자가\n총구를 이쪽으로 향하고 있었다.	fix	driver
+wrapped:join	もちろんただとは\n言わないっす！	물론 다만이라고는\n말하지 않아요!	fix	driver
+wrapped:join	今日は\n楽しいクリスマスだよぉ～。	오늘은\n즐거운 크리스마스야~.	fix	driver
+wrapped:join	豪華で\n優秀な貨客船…だったの。	호화롭고\n우수한 화객선…이었어.	fix	driver
+wrapped:join	顔をあげると彼女の服が透けて\nいて、すぐに目をそらした。	얼굴을 들자 그녀의 옷이 비쳐 있어,\n곧바로 시선을 피했다.	fix	driver
+wrapped:join	たった５冊とはいえ、\n文字を読めるように\nなるのには十分だった。	단 5권이라고는 해도,\n문자를 읽을 수 있게\n되는데는 충분했다.	fix	driver
+wrapped:join	それに１０年も\n親子でいたのだ。	게다가 10년이나\n부모와 자식으로 있었다.	keep	driver
+wrapped:join	いいですね\n行きます	좋네요\n갑니다	keep	driver
+wrapped:join	待って\n何してるの	기다려\n뭐해	keep	driver
+wrapped:join	少しだけ、休ませてください\nうんうん、いいもんだ。	약간, 쉬게 해 주세요\n응응, 좋은 걸이다.	keep	driver
+wrapped:join	彼女が作った\nケーキを食べた	그녀가 만들었다\n케이크를 먹었다	keep	driver
+wrapped:join	明日までに行かなければ\n\nならない。	내일까지 가야 한다\n\n안된다.	keep	driver
+wrapped:join	目次は\n１．プロローグ	목차는\n1. 프롤로그	keep	driver
+wrapped:join	つまり、\n結論：異次元こわい	즉,\n결론：이차원 무섭다	keep	driver
+wrapped:join	そう言って、\n「…何でお前ら、そんなにやる気満々なんだよ…。」	그렇게 말해,\n「…왜 너희들, 그렇게 의욕만만이야….」	keep	driver
+wrapped:join	提督\n共に護ろう。	제독\n모두 지키자.	keep	driver
+wrapped:join	保存\nキャンセル	보존\n캔슬	keep	driver

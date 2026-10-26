@@ -150,7 +150,7 @@ public:
                 Error("speech: expected soft or strict");
                 return Skip();
             }
-        } else if (key == "cg" || key == "misread" || key == "reference") {
+        } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
                 Error(key + ": expected a boolean (true or false)");
@@ -159,6 +159,7 @@ public:
             const bool value = Lower(Scalar(event_)) == "true";
             if (key == "cg") result_.settings.cg = value;
             else if (key == "misread") result_.settings.misread = value;
+            else if (key == "wrapped") result_.settings.wrapped = value;
             else result_.settings.reference = value;
         } else {
             Error("unknown key: " + key);

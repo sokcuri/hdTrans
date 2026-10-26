@@ -50,7 +50,7 @@ try {
 }
 ```
 
-These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
+`init()` also takes `speech` (`'strict'` or `'soft'`) and `wrapped`; `translate(text, { speech, wrapped, context })` applies them to one call, where `context` lists the lines before `text` in the same document, read only for their cues and not returned. Nothing is kept from one call to the next. These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
 
 ## User dictionary
 
@@ -91,9 +91,10 @@ npx hdtrans --version
 npx hdtrans --why '学生です。'
 npx hdtrans --userdict userdict.tsv '学生'
 npx hdtrans --ehnd ./Ehnd '学生'
+npx hdtrans --wrapped --context previous.txt 'ならない。'
 ```
 
-Files and stdin are UTF-8. `--file` is an alias of `--in`. `--out` writes the result to a file instead of stdout. `--json` writes one JSON document, including when used with `--out`. `--why` writes execution logs verbatim and `WHY` choice records to stderr, leaving the translation on stdout. `--version` loads the bundled dictionary and prints one line: `hdTrans v<engine> (wasm) / dict <dictionary>`. The versions are also available as `translator.version` and `translator.dictionaryVersion`; `translator.runtime` is `'wasm'`. User dictionary and Ehnd changes do not change the base dictionary version. The CLI accepts one `--userdict` file. It does not discover dictionaries or configuration from the current directory. Run `hdtrans --help` for options.
+Files and stdin are UTF-8. `--file` is an alias of `--in`. `--out` writes the result to a file instead of stdout. `--json` writes one JSON document, including when used with `--out`. `--why` writes execution logs verbatim and `WHY` choice records to stderr, leaving the translation on stdout. `--version` loads the bundled dictionary and prints one line: `hdTrans v<engine> (wasm) / dict <dictionary>`. The versions are also available as `translator.version` and `translator.dictionaryVersion`; `translator.runtime` is `'wasm'`. User dictionary and Ehnd changes do not change the base dictionary version. `--wrapped` reads input whose lines break mid-sentence (captions, hooked text) and keeps the line count; a blank line always ends a sentence. `--context PATH` reads UTF-8 lines that come before the input in the same document: they are translated only for their cues (names, quotes, speech) and are not written. The CLI accepts one `--userdict` file. It does not discover dictionaries or configuration from the current directory. Run `hdtrans --help` for options.
 
 ## License
 

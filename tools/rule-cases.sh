@@ -21,7 +21,9 @@
 # Failing rows are reported grouped by layer, each with its rule, input, expected and actual
 # value, so that a change in one layer that breaks another layer's rows shows as such.
 # --accept rewrites the expected value of every full-output row whose kind is current. --no-current
-# fails every row whose kind is current (tests/rules/critical/ takes fix and keep only). The words
+# fails every row whose kind is current (tests/rules/critical/ takes fix and keep only).
+# --documents translates each input as a document of its own, its lines written \n in the input and
+# in the expected output (tests/rules/wrapped/); its rows check the whole output only. The words
 # after -- are passed to the CLI (--speech strict).
 # Exit: 0 all rows pass, 1 a row fails, 2 invalid arguments or failed CLI.
 set -eu
@@ -29,11 +31,12 @@ LC_ALL=C; export LC_ALL
 [ $# -ge 2 ] || { echo "usage: tools/rule-cases.sh CLI DICTS [CASES] [--accept] [--no-current]" >&2; exit 2; }
 cli=$1 dicts=$2; shift 2
 here=$(cd "$(dirname "$0")/.." && pwd)
-cases=$here/tests/rules/cases accept= nocurrent=
+cases=$here/tests/rules/cases accept= nocurrent= documents=
 while [ $# -gt 0 ]; do
     case $1 in
         --accept) accept=1 ;;
         --no-current) nocurrent=1 ;;
+        --documents) documents=1 ;;
         --) shift; break ;;
         *) cases=$1 ;;
     esac
@@ -63,8 +66,18 @@ else
 fi
 head -n 1 "$cases" | grep -q '^rule	input	expected	kind	layer$' || { echo "bad header in $cases" >&2; exit 2; }
 tail -n +2 "$cases" | cut -f 2 > "$tmp/in.txt"
-"$cli" -dicts "$dicts" -each -why "$@" -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
-    { echo "CLI failed" >&2; exit 2; }
+if [ -n "$documents" ]; then
+    : > "$tmp/out.txt"
+    : > "$tmp/why.txt"
+    while IFS= read -r row; do
+        printf '%s\n' "$row" | awk '{ gsub(/\\n/, "\n"); printf "%s", $0 }' > "$tmp/doc.txt"
+        "$cli" -dicts "$dicts" "$@" -in "$tmp/doc.txt" > "$tmp/doc.out" || { echo "CLI failed" >&2; exit 2; }
+        awk 'NR > 1 { printf "\\n" } { printf "%s", $0 } END { print "" }' "$tmp/doc.out" >> "$tmp/out.txt"
+    done < "$tmp/in.txt"
+else
+    "$cli" -dicts "$dicts" -each -why "$@" -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
+        { echo "CLI failed" >&2; exit 2; }
+fi
 # The dictionary row id names the rule a row carries; a case may use either.
 awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"
 awk -F '\t' -v OFS='\t' -v accept="$accept" -v nocurrent="$nocurrent" -v fixed="$tmp/fixed.tsv" \

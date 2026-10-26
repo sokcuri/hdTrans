@@ -54,8 +54,10 @@ struct StageObserver {
     void (*filterLog)(void* context, std::string_view message) = nullptr;
 };
 
-// Uses the session's dictionaries and context without retaining the observer.
-std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer);
+// Uses the session's dictionaries and options without retaining the observer; context as
+// for Session::Translate.
+std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
+                              std::string_view context = {});
 
 // The marker families of one loaded dictionary, made by the translations of all sessions.
 // The families synchronise themselves and the rules are not changed after the load, so
@@ -102,14 +104,20 @@ struct TranslationOptions {
     const filter::Filters* filters = nullptr;
     // The speech level of the text inside 「」; Strict with reference.
     Speech speech = Speech::Strict;
+    // Lines may break in the middle of a sentence (Session::SetWrapped).
+    bool wrapped = false;
+    // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).
+    bool joinedLines = false;
 };
 
 // Translates the lines of one call as one document. Nothing is kept from one call to the
-// next: the names, speech and senses of a call come from its own lines. Returns the lines
-// translated (each keeps its "\r").
+// next: the names, speech and senses of a call come from its own lines. The first context
+// lines are read for their cues only. Returns the lines after them translated (each keeps
+// its "\r").
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
                                            std::span<const std::string> lines,
-                                           const StageObserver& observer, const TranslationOptions& options = {});
+                                           const StageObserver& observer, const TranslationOptions& options = {},
+                                           std::size_t context = 0);
 
 // Translates line (without "\n") as one piece with the word pipeline only.
 std::string TranslateRawLine(const dict::Snapshot& snap, Generated& generated, std::string_view line,

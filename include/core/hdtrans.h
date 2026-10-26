@@ -37,6 +37,14 @@ HDTRANS_API void hdTrans_Terminate(void);
  * *outn. Returns 0, or -1 when uninitialized or terminated. */
 HDTRANS_API int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn);
 
+/* Translates text[0..n) as the lines that follow context[0..cn), "\n"-separated lines of
+ * the same document: the context gives its cues (names, speech, quotes, senses) and, with
+ * wrapped set in the config, the start of a sentence text goes on with. Only the lines of
+ * text are written, as by hdTrans_Translate. NULL or cn 0 is no context. Returns 0, or -1
+ * when uninitialized or terminated. */
+HDTRANS_API int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n,
+                                         char** out, size_t* outn);
+
 /* Takes the engine's current dictionaries into the session. A session keeps nothing from
  * earlier calls, so translations are unchanged otherwise. Returns 0, or -1 when
  * uninitialized or terminated. */

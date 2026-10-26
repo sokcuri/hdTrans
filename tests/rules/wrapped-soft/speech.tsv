@@ -1,0 +1,3 @@
+# 규칙: LAY-14, SPC-18
+rule	input	expected	kind	layer
+wrapped:speech	「今日は行かない\n彼は家に帰った。\n暑いね\n\nそれは違う	「오늘은 가지 않아\n그는 집에 돌아갔다.\n덥네\n\n그건 달라	fix	driver

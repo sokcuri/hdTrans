@@ -130,6 +130,10 @@ public:
 
     // Lines over 64 KiB are translated in pieces of at most 16 KiB, split at sentence ends outside brackets where possible.
     std::string Translate(std::string_view text);
+    // Translates text as the lines that follow the lines of context in one document: the
+    // context gives its cues (names, speech, quotes, senses) and, wrapped, the start of a
+    // sentence that text goes on with, but only the lines of text are returned.
+    std::string Translate(std::string_view text, std::string_view context);
 
     // Takes the engine's current dictionaries.
     void Reset();
@@ -138,15 +142,23 @@ public:
     // writes Speech::Strict.
     void SetSpeech(Speech speech) { speech_ = speech; }
 
+    // Whether the lines of later translations may break in the middle of a sentence
+    // (captions, hooked text); false until set. Wrapped, a line that ends where a sentence
+    // cannot end is translated as one sentence with the lines after it, and the translation
+    // is split back at the breaks, one line out for each line in.
+    void SetWrapped(bool wrapped) { wrapped_ = wrapped; }
+
 private:
     friend struct internal::Access;
-    std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer);
+    std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer,
+                                  std::string_view context = {});
 
     const Engine& engine_;
     const bool reference_;
     const bool cg_;
     const bool misread_;
     Speech speech_ = Speech::Strict;
+    bool wrapped_ = false;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

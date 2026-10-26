@@ -923,6 +923,27 @@ void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector
     }
 }
 
+namespace {
+
+// Whether a marker at byte at of the token text, inside item, goes before the word rather than after
+// it: when more of the word's Japanese follows the marker than precedes it, unless what precedes it
+// is one particle the word took in (に揺れる) and more words follow (last is false).
+bool WritesMarkerBefore(const ResolvedItem& item, std::string_view tokenText, int at, bool last) {
+    const int end = item.offset + item.length;
+    if (at <= item.offset || at >= end || static_cast<std::size_t>(end) > tokenText.size()) return false;
+    const std::string_view head = tokenText.substr(static_cast<std::size_t>(item.offset),
+                                                   static_cast<std::size_t>(at - item.offset));
+    const std::string_view tail = tokenText.substr(static_cast<std::size_t>(at), static_cast<std::size_t>(end - at));
+    const std::size_t headRunes = text::RuneCount(head);
+    if (!last && headRunes == 1 &&
+        std::u32string_view(U"にをがでとはもへの").find(text::DecodeRune(head).cp) != std::u32string_view::npos) {
+        return false;
+    }
+    return headRunes < text::RuneCount(tail);
+}
+
+}  // namespace
+
 void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker> markers) {
     std::vector<ResolvedItem>& items = *items_;
     std::vector<TokenText>& tokens = *tokens_;
@@ -973,12 +994,21 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
         if (m.markerKind == 0 || item.tokenIndex != m.tokenIndex) continue;
         const std::string_view marker = m.markerKind == 1 ? "&#CS" : "</a>";
         if (item.offset != m.textLength) {
-            if (item.offset <= m.textLength) {
+            bool last = true;
+            for (int k = i + 1; k < static_cast<int>(items.size()) && last; k++) {
+                last = items[k].tokenIndex != item.tokenIndex || First(Code(items[k])) == '6';
+            }
+            const bool before = settings_.markerBeforeWord && WritesMarkerBefore(item, tokenText, m.textLength, last);
+            if (item.offset <= m.textLength && !before) {
                 spaced += marker;
                 m.markerKind = 0;
                 continue;
             }
-            if (previous < 0 || items[previous].offset >= m.textLength) continue;
+            // The word before, when it holds the marker, writes it.
+            const bool held = settings_.markerBeforeWord && previous >= 0 && items[previous].tokenIndex == m.tokenIndex &&
+                              items[previous].offset < m.textLength &&
+                              m.textLength < items[previous].offset + items[previous].length;
+            if (!before && (previous < 0 || items[previous].offset >= m.textLength || held)) continue;
         }
         spaced.insert(0, marker);
         m.markerKind = 0;
