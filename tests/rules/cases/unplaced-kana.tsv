@@ -50,3 +50,32 @@ lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
 lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
 lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup
 lexical:spoken-words	皿がわれる	접시가 깨진다	keep	lookup
+pre-select:unplaced-head	まりやん！	마리잖아!	fix	pre-select
+pre-select:unplaced-head	まりです。	마리입니다.	fix	pre-select
+pre-select:unplaced-head	ぬぺです。	누페입니다.	fix	pre-select
+pre-select:unplaced-head	ぽぺやん！	포페잖아!	fix	pre-select
+pre-select:unplaced-head	私はまりです。	has:마리입니다	fix	pre-select
+pre-select:unplaced-head	まりまで？	마리까지?	fix	pre-select
+pre-select:unplaced-head	(まりやん)	(마리얀)	keep	pre-select
+pre-select:unplaced-head	まりやん≫	마리얀≫	keep	pre-select
+pre-select:unplaced-head	（ゆりやん）うん	has:유리얀	keep	pre-select
+pre-select:unplaced-head	そうやん	그렇잖아	keep	pre-select
+pre-select:unplaced-head	行くやん	가잖아	keep	pre-select
+pre-select:unplaced-head	学生やん	학생이잖아	keep	pre-select
+pre-select:unplaced-head	静かやん	조용하잖아	keep	pre-select
+pre-select:unplaced-head	書いたやん	썼잖아	keep	pre-select
+pre-select:unplaced-head	職質されとるやん	has:잖아	keep	pre-select
+pre-select:unplaced-head	持ってきてやんよ	has:가져와	keep	pre-select
+pre-select:unplaced-head	誘ってやんなよぉ	has:권해	keep	pre-select
+pre-select:unplaced-head	秘書艦を務めてやんよ。	has:비서함을 맡아	keep	pre-select
+pre-select:unplaced-head	やってやんよ！	lacks:잖아	keep	pre-select
+pre-select:unplaced-head	元気づけてやんよ。	has:기운을 북돋워	keep	pre-select
+pre-select:unplaced-head	許してやんよ！	has:용서해	keep	pre-select
+pre-select:unplaced-head	とってやんよ♪	has:취해	keep	pre-select
+pre-select:unplaced-head	マジでやってやんよ！	has:진짜로 해	keep	pre-select
+pre-select:unplaced-head	お前らもやんねぇか？	lacks:잖아	keep	pre-select
+pre-select:unplaced-head	仲間に会わせてやんないとな。	has:주지 않으면	keep	pre-select
+pre-select:unplaced-head	殺しはやんねぇ。	lacks:잖아	keep	pre-select
+pre-select:unplaced-head	やんちゃな子供だった。	has:장난스러운 아이였다	keep	pre-select
+pre-select:unplaced-head	相変わらずやんちゃ	has:변함없이	keep	pre-select
+pre-select:unplaced-head	鼻がぽぺるまで	lacks:코가 까지	keep	pre-select

@@ -398,6 +398,56 @@ bool Adjacent(const Item* a, const Item* b) {
 
 }  // namespace
 
+// An unread kana head before a placed particle or ending is still the noun that grammar
+// attaches to. Read its sound without changing the grammar or a dictionary word's reading.
+void ReadUnplacedHeads(Flusher& f) {
+    Worker& w = f.w;
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        if (!UnplacedKana(it)) continue;
+        const Item* prev = it->prev;
+        bool boundary = !Adjacent(prev, it) || At(prev->Code(0), 0) == '2' || At(prev->Code(0), 0) == '6';
+        if (!boundary && UnplacedKana(prev) &&
+            std::find(std::begin(kCaseParticles), std::end(kCaseParticles), prev->group->surface) != std::end(kCaseParticles) &&
+            Adjacent(prev->prev, prev) && At(prev->prev->Code(0), 0) == '1' && !prev->prev->EntryText(0).empty()) {
+            boundary = true;
+        }
+        if (!boundary) continue;
+        Item* last = it;
+        while (Adjacent(last, last->next) && UnplacedKana(last->next)) last = last->next;
+        Item* next = last->next;
+        if (!Adjacent(last, next) || next->group == nullptr) continue;
+        bool bound = false;
+        for (int slot = 0; slot < static_cast<int>(next->group->entries.size()); slot++) {
+            const char part = At(next->Code(slot), 0);
+            if ((part == '2' || part == '5') && !next->EntryText(slot).empty()) bound = true;
+        }
+        if (!bound) continue;
+        const int length = last->start + last->length - it->start;
+        const std::string_view raw = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(length));
+        bool word = false;
+        for (const dict::Candidate& c : w.snapshot.RetrieveRecords(raw, dict::LookupMode::General)) {
+            if (c.source != raw || c.codes == nullptr || c.target.empty() ||
+                (c.user != nullptr && c.user->nameLayer) || c.codes->sem.Text().starts_with("QPN")) continue;
+            const char part = c.codes->part.ClassDigit();
+            if (part == '1' || part == '3' || part == '4' || part == '7' || part == '8' || part == '9') word = true;
+        }
+        if (word) continue;
+        bool voiced = false;
+        for (std::string_view rest = raw; !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) {
+            if (!Has("ぁぃぅぇぉゃゅょゎっゕゖ", FirstChar(rest))) voiced = true;
+        }
+        if (!voiced) continue;
+        const std::string target = TransliterateHiragana(raw);
+        if (target.empty()) continue;
+        Record* record = w.CreateSyntheticRecord(it->tokenIndex, raw, true);
+        record->target = target;
+        Item* read = w.NewItem(w.NewDetail(kDetailInfo, it->tokenIndex), w.NewGroup(record, ' '), it->text, it->start,
+                              it->tokenIndex);
+        w.chain.Insert(read, true);
+        it = read;
+    }
+}
+
 // A case particle the analysis could not place between a noun and a placed word is read as the
 // particle (鼻がもげる with もげる unknown leaves が alone; MNG-5).
 void ReadUnplacedParticles(Flusher& f) {
