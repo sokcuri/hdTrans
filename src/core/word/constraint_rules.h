@@ -72,6 +72,8 @@ enum class ConstraintContext : uint8_t {
                         // weather, sky and sea words (時雨が降る, 雷が落ちた)
     BeforeChan,         // the word ends in ち and ゃん follows, the rest of ちゃん (夕立ち before ゃん), not ゃんと
     BeforeHiragana,     // a hiragana right after the word (ちゃうね; not ちゃう？)
+    BeforeCopulaPredicate,  // the copula follows as the predicate (だ, です, でし, じゃ, だろ, でしょ; not だけ:
+                            // 相変わらずだな), or な before a kanji or katakana (相変わらずな人)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word
                         // with a kanji or katakana that ends there and reads first as a verb or an
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a
@@ -102,6 +104,9 @@ enum class ConstraintReject : uint8_t {
     NonAdverb,
     // The adverb senses (E), when another sense remains.
     Adverb,
+    // The adverb senses (class 3), when one of them is the adverbial form in 이 or 히 of an adjectival-noun
+    // sense (class 8) of the word (변함없이 beside 변함%B4@) and another sense remains.
+    AdverbBesideAdjectivalNoun,
     // The senses whose Korean is not the rule's target, when one is.
     OtherTargets,
     // The senses whose Korean is the rule's target, when another sense remains.
