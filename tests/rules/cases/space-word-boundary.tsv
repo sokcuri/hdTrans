@@ -1,0 +1,38 @@
+# 규칙: LAY-2
+rule	input	expected	kind	layer
+lookup:space-boundary	おい 行こう	이봐 가자	fix	lookup
+lookup:space-boundary	おい 何で直すんだよ	이봐 왜 고쳐	fix	lookup
+lookup:space-boundary	あら いいわねえ	어머나 좋네	fix	lookup
+lookup:space-boundary	あら すてきな駅じゃないの｡	어머나 멋진 역이 아닌 거야.	fix	lookup
+lookup:space-boundary	どうも すみません｡あら すいません｡	has:어머나 미안해요	fix	lookup
+lookup:space-boundary	はい いただきましょう｡	네 받읍시다.	fix	lookup
+lookup:space-boundary	はい かしこまりました｡	has:알겠습니다	fix	lookup
+lookup:space-boundary	クリスマス はい	크리스마스 네	fix	lookup
+lookup:space-boundary	はいはいはい いいですよ	네네네 좋아요	fix	lookup
+lookup:space-boundary	今 時間は４時だ	지금 시간은 4시다	fix	lookup
+lookup:space-boundary	今 別なの	지금 별도야	fix	lookup
+lookup:space-boundary	でも 今 人生で一番楽しいよ｡	has:지금 인생	fix	lookup
+lookup:space-boundary	いや そうじゃない	아니 그렇지 않다	fix	lookup
+lookup:space-boundary	いや なんでもないんだ	아니 아무것도 아니다	fix	lookup
+lookup:space-boundary	あ いらっしゃい	아 어서 오세요	fix	lookup
+lookup:space-boundary	２つ ついてんの？	2개 붙어 있어?	fix	lookup
+lookup:space-boundary	あっ ４番 いいね｡	앗 4번 좋네.	fix	lookup
+lookup:space-boundary	いい体 してるな	좋은 몸 하고 있구나	fix	lookup
+lookup:space-boundary	青い空 白い雲	푸른 하늘 흰 구름	fix	lookup
+lookup:space-boundary	あ ごめんね	lacks:턱	fix	lookup
+lookup:space-boundary	何だ あれ？	뭐야 저게?	keep	lookup
+lookup:space-boundary	ようこそ いらっしゃいました｡	잘 오셨습니다.	keep	lookup
+lookup:space-boundary	そういうわけには いかないんですよ！	그럴 수는 없어요!	keep	lookup
+lookup:space-boundary	こちらこそ よろしく お願いします。	이쪽이야말로 잘 부탁드립니다.	keep	lookup
+lookup:space-boundary	やめて やめて	그만해 그만해	keep	lookup
+lookup:space-boundary	すごい すごい｡	대단해 대단해.	keep	lookup
+lookup:space-boundary	いい ね――	좋네――	keep	lookup
+lookup:space-boundary	山田 太郎が来た。	야마다 타로가 왔다.	keep	lookup
+lookup:space-boundary	美しい 花	아름다운 꽃	keep	lookup
+lookup:space-boundary	食べて いる	먹고 있다	keep	lookup
+lookup:space-boundary	学生 です	학생입니다	keep	lookup
+lookup:space-boundary	かがやく おでこ	빛나는 이마	keep	lookup
+lookup:space-boundary	こ れ は も し やｗ	이것은 어쩌면 ㅋ	keep	lookup
+lookup:space-boundary	ver 1.2 を入れた	ver 1.2를 넣었다	keep	lookup
+lookup:space-boundary	姿を消す っていうぜ	자취를 감춘다고 한다	keep	lookup
+lookup:space-boundary	時間が もっと欲しい ってこと！	시간이 좀 더 갖고 싶다는 것!	keep	lookup

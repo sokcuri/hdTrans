@@ -81,6 +81,9 @@ struct Token {
     // at the position of an empty token.
     uint32_t sourceBegin = 0;
     uint32_t sourceEnd = 0;
+    // A type-24 token that goes on from the type-24 token before it across a space the
+    // text leaves out, a word boundary (TokenizeSpans).
+    bool afterSpace = false;
 };
 
 // A token as an observer sees it: type and text.
