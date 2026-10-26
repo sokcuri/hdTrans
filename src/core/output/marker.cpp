@@ -529,18 +529,23 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             break;
         }
         case 5: {
-            cutStem();
-            replacement = Cat({LookupSource(Cat({key, "1"}), *generated_), "게 "});
-            const auto c = FirstByte(suffix);
-            classText = c.head;
-            suffix = std::string(c.tail);
-            key = Cat({"&C6@", classText});
-            replacement += LookupSource(key, *generated_);
-            break;
+            if (!it.causativePotential) {
+                cutStem();
+                replacement = Cat({LookupSource(Cat({key, "1"}), *generated_), "게 "});
+                const auto c = FirstByte(suffix);
+                classText = c.head;
+                suffix = std::string(c.tail);
+                key = Cat({"&C6@", classText});
+                replacement += LookupSource(key, *generated_);
+                break;
+            }
+            [[fallthrough]];
         }
         case 4: {
             cutStem();
-            replacement = Cat({LookupSource(Cat({key, "3"}), *generated_), " 수 "});
+            const bool causative = it.causativePotential;
+            replacement = Cat({LookupSource(Cat({key, causative ? "1" : "3"}), *generated_),
+                               causative ? "게 할 수 " : " 수 "});
             const auto c = FirstByte(suffix);
             classText = c.head;
             suffix = std::string(c.tail);

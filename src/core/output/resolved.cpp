@@ -41,6 +41,8 @@ output::ResolvedItem ItemOf(const word::Item& it) {
     r.detailClass = static_cast<output::DetailClass>(it.detail->cls);
     r.detailKind = it.DetailKind();
     r.detailRecord = it.DetailRecord();
+    r.causativePotential = r.detailRecord == 5 && it.detail->syntheticCausative &&
+                           it.detail->voice == word::Voice::Potential;
     r.directIndex = it.DirectIndex();
     r.entry = EntryOf(it, it.selected);
     const int entries = it.group == nullptr ? 0 : static_cast<int>(it.group->entries.size());

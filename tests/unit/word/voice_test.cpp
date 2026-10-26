@@ -81,3 +81,26 @@ HD_TEST(word_voice_ability_and_feeling) {
     HD_CHECK_EQ(Translate("将来が案じられる。"), "장래가 염려된다.");
     HD_CHECK_EQ(Translate("食べられる。"), "먹을 수 있다.");
 }
+
+HD_TEST(word_synthetic_causative_candidate_classifications) {
+    auto translate = [](std::string_view rows, std::string_view input) {
+        const auto loaded = dict::Load({{0, "base.tsv", std::string(kRows) + std::string(rows)}});
+        HD_CHECK(loaded.errors.empty());
+        if (loaded.snapshot == nullptr) return std::string();
+        const auto generated = internal::NewGenerated(*loaded.snapshot);
+        const std::string line(input);
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
+        return out.empty() ? std::string() : out[0];
+    };
+    const std::string stem = "続け\t계속&AV@\tM437\tXXX\t\tGN\t0\t100\n";
+    HD_CHECK(translate(stem, "仕事を続けさせられる。").find("할 수") != std::string::npos);
+    // A later selection may replace the default: mixed copula or particle-predicate candidates abstain.
+    HD_CHECK(translate(stem + "続け\t&Ac@\tM437\t\t\tGN\t0\t101\n", "仕事を続けさせられる。")
+                 .find("할 수") == std::string::npos);
+    HD_CHECK(translate(stem + "続け\t계속&AV@\tM437\t\tPj\tGN\t0\t101\n", "仕事を続けさせられる。")
+                 .find("할 수") == std::string::npos);
+    // Dictionary-form classes use the same candidate even before a slot has been selected.
+    const std::string experience = "考え\t생각&AV@\tM437\tXXX\t\tGN\t0\t100\n"
+                                   "あること\t어떤 것\tN110\t\t\tGN\t0\t101\n";
+    HD_CHECK(translate(experience, "あることを考えさせられる").find("생각하게 된다") != std::string::npos);
+}

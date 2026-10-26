@@ -37,4 +37,16 @@ HD_TEST(word_voice_actions) {
     HD_CHECK_EQ(translate("食べちゃったくせに！"), "먹어버렸으면서!");
     // A potential with no agent keeps its reading.
     HD_CHECK_EQ(translate("富士山を見られた。"), "후지산을 볼 수 있었다.");
+    HD_CHECK_EQ(translate("続けさせられない。"), "계속하게 할 수 없다.");
+    HD_CHECK_EQ(translate("続けさせられません。"), "계속하게 할 수 없습니다.");
+    HD_CHECK_EQ(translate("これなら練習を続けさせられる。"), "이것이라면 연습을 계속하게 할 수 있다.");
+    HD_CHECK_EQ(translate("私は先生に練習を続けさせられた。"), "나는 선생님 때문에 억지로 연습을 계속했다.");
+    HD_CHECK(translate("私は先生に練習を続けさせられない。").find("할 수") == std::string::npos);
+    HD_CHECK(translate("毎日無理やり練習を続けさせられなかった。").find("할 수") == std::string::npos);
+    HD_CHECK(translate("弟君であらせられる。").find("할 수") == std::string::npos);
+    HD_CHECK(translate("貴様の仕事の遅さにはへきえきさせられる｡").find("게 할 수") == std::string::npos);
+    HD_CHECK(translate("殿下にあらせられるぞ！").find("있게 할 수") == std::string::npos);
+    HD_CHECK(translate("かしこくも天皇陛下におかせられましては").find("두게 할 수") == std::string::npos);
+    HD_CHECK(translate("続けられない。").find("하게") == std::string::npos);
+    HD_CHECK(translate("今なら続けられる。").find("하게") == std::string::npos);
 }

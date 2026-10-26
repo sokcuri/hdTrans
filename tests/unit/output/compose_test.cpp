@@ -70,6 +70,41 @@ void CheckComposition(const CompositionCase& c, bool literal = false, bool clean
 
 }  // namespace
 
+HD_TEST(compose_synthetic_causative_potential) {
+    for (const bool potential : {false, true}) {
+        for (const bool negative : {false, true}) {
+            std::vector<TokenText> tokens = {
+                {tokenizer::kTypeJapanese, 0, "続けさせられる", ""},
+                {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+                {tokenizer::kTypeTruncated, 0, "", ""},
+            };
+            ResolvedItem item;
+            item.surface = "続け";
+            item.length = static_cast<int>(tokens[0].text.size());
+            item.selected = 0;
+            item.first = item.entry = {"437", "", "계속&AV@"};
+            item.detailClass = DetailClass::Yougo;
+            item.detailRecord = 5;
+            item.causativePotential = potential;
+            item.directIndex = 0;
+            item.ending = {"500", "", negative ? "1지 않는다" : "4다"};
+            item.endingSurface = negative ? "ない" : "V";
+            std::vector<ResolvedItem> items = {item};
+            Nodes nodes;
+            BuildItems(items, tokens, nodes);
+            Composer composer;
+            Families families;
+            Settings settings;
+            settings.text = true;
+            Pieces result;
+            composer.Compose(items, tokens, 0, 1, {}, settings, families, result);
+            const char* expected = potential ? (negative ? "계속하게 할 수 없다." : "계속하게 할 수 있다.")
+                                             : (negative ? "계속하게 되지 않는다." : "계속하게 된다.");
+            HD_CHECK_EQ(String(result), expected);
+        }
+    }
+}
+
 HD_TEST(compose_prefix_run_boundaries) {
     const CompositionCase cases[] = {
         {{{"金", "110", "Z6Z7J5Mo", "금", "", "김"}, {"と", "201", "J1", "(와)과"},

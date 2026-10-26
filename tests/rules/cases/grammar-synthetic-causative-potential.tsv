@@ -1,0 +1,104 @@
+# 규칙: GRM-1, GRM-10, MNG-1, MNG-4
+rule	input	expected	kind	layer
+verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	笑わせられないやろ！	has:웃길 수 없	keep	analysis
+verb:synthetic-causative-potential	もう あんな思いは させられない｡	has:시킬 수 없	keep	analysis
+verb:synthetic-causative-potential	気の毒で聞かせられない｡	has:들려줄 수 없	keep	analysis
+verb:synthetic-causative-potential	お酌はさせられません｡	has:시킬 수 없	keep	analysis
+verb:synthetic-causative-potential	出発は遅らせられない	has:늦출 수 없	keep	analysis
+verb:synthetic-causative-potential	駄目よ！　そんなことさせられない。	has:시킬 수 없	keep	analysis
+verb:synthetic-causative-potential	誤差で済ませられないレベルだから！	has:끝마칠 수 없	keep	analysis
+verb:synthetic-causative-potential	弟君であらせられる。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	貴様の仕事の遅さにはへきえきさせられる｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-potential	殿下にあらせられるぞ！	lacks:있게 할 수	keep	analysis
+verb:synthetic-causative-potential	かしこくも天皇陛下におかせられましては	lacks:두게 할 수	keep	analysis
+verb:synthetic-causative-potential	表使であらせられる	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	イ亭止させられなし丶	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	信じさせられたよ	has:믿게 되었어	keep	analysis
+verb:synthetic-causative-potential	泣かせられる用意をしてきたので	has:울릴 수	keep	analysis
+verb:synthetic-causative-potential	スケジュール合わせられるものですから	has:스케줄 맞출 수	keep	analysis
+verb:synthetic-causative-potential	単調な計算を繰り返させられた。	has:반복하게 되었다	keep	analysis
+verb:synthetic-causative-potential	続けさせられない。	계속하게 할 수 없다.	fix	analysis
+verb:synthetic-causative-potential	続けさせられません。	계속하게 할 수 없습니다.	fix	analysis
+verb:synthetic-causative-potential	続けさせられますか。	계속하게 할 수 있습니까.	fix	analysis
+verb:synthetic-causative-potential	これなら練習を続けさせられる。	이것이라면 연습을 계속하게 할 수 있다.	fix	analysis
+verb:synthetic-causative-potential	最後まで続けさせられればいい。	끝까지 계속하게 할 수 있으면 된다.	fix	analysis
+verb:synthetic-causative-potential	続けさせられなかった。	계속하게 할 수 없었다.	fix	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられている。	has:계속하고 있다	keep	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられる。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられない。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	私は先生に無理やり練習を続けさせられない。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	毎日無理やり練習を続けさせられなかった。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	練習を続けさせられたら困る。	has:계속하게 되면	keep	analysis
+verb:synthetic-causative-potential	先生に書かされる。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-roles	本人が望んでいない命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
+verb:synthetic-causative-roles	極限状態の中で　単調な計算を繰り返させられた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	何の落ち度もないのに辞めさせられております。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	はあ　このような格好をさせられるとは…。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	消費者金融で 借金までさせられて	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	バリカンで坊主にさせられるっていうのがもう…｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	デビューさせられてますね｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	そのときもワンモアさせられるので。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	神官の前で結婚宣誓書にサインさせられるはめになるかも	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	雑用や誰にでもできる仕事ばかり毎日休みなくさせられていたこと。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	敵兵だらけの戦場に孤立させられたのだ。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	椅子へと移動させられ、どっかりと背中を預けた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	生地は厚めの服を何枚か重ね着させられる。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	負けさせられたッ！！！	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	表を歩かせられたんですよね〜！	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	立派なバースデーケーキの前に座らせられた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	どうせサマコンには参加させられてましたし	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	無理やり競争させられることもない。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	強制的に回れ右させられた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	俺たちの部隊が壊滅させられた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	俺は正座をさせられ、事情聴取を受けていた。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	地下帝国に送られて、強制労働させられるんだっけ？	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-roles	店長に、配置換えさせられたってわけか	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	いやっ 考えさせられました｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	この会でお前らのバカ面を前にする度にあることを考えさせられる	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	驚かされます。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	今回の受賞には大変 驚かされています	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	安堂君さ　君の言動には常に驚かされるよ。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	本当にお母様には驚かされてばかりね｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	出ていないことに驚かされます！	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	私も あらためて 気付かされました。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	あの時　気づかされちゃったんだ	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	つくづく思わされた	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	嫌というほど思い知らされるわ	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	我々は思い知らされている｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	何も知らなかったんだなぁって思い知らされたよ…｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	ところで社長ね僕 まだ聞かされてないんだけど・	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	俺は何も聞かされていない	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	何も聞かされてないんだけど｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	知らされておりません	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	どういうものか知らされないまま	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	何も知らされず	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	誰にも はっきりと知らされてないようだな	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	主人から　いろいろ聞かされてはいましたけど。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	小さいころから 母に 言い聞かされてたわ。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-experience	待たされました。	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-honorific	ご婚約者であらせられる	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	陛下もご多忙の身であらせられます。	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	御当主であらせられる	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	初代大教母であらせられます。	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	御中臈(おちゅうろう)のボタン様であらせられますよ！	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	表使であらせられる淡島様の下働きです	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	表使であらせられる淡島様の	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	至宝の守護者であらせられるあなた様にお会いできて	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	我が猫ｴﾐﾘ様にあらせられます｡	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	かつ 堅実なこと さすがは国家の重鎮であらせられます｡	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	圧倒的大勝利でいらっしゃいます	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	奥さんでいらっしゃる？	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	テレビ女優　第１号でいらっしゃる	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	きれいな先生でいらっしゃいますわね	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	皆さん 養子でいらっしゃいますね	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	店長さん有名大企業の御曹司でいらっしゃるとか？	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	お元気でいらっしゃいますか？	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	奥様でいらっしゃいますか？	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	独り身でいらっしゃいますの？	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	お二人共　ご無事でいらっしゃいます	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	皆様ご無事でいらっしゃいました	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	殿下にあらせられません。	lacks:할 수	keep	analysis
+verb:synthetic-causative-honorific	殿下であらせられなかった。	lacks:할 수	keep	analysis
