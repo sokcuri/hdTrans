@@ -221,6 +221,6 @@ Windows는 `hdTrans\user\hdtrans.config.example.yaml`, Linux와 macOS는 `user/h
 
 Copyright (c) Sokcuri (소쿠릿, https://github.com/sokcuri)
 
-[MPL-2.0](LICENSE)으로 배포합니다. 0.5.9까지의 릴리스는 AGPL-3.0-or-later입니다.
+[MPL-2.0](LICENSE)
 
 외부 라이브러리의 라이선스는 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)에 있습니다.
