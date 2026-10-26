@@ -163,44 +163,6 @@ bool NameEnd(std::string_view after) {
            dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), after) > 0;
 }
 
-// What separates the parts of a speaker label in round brackets (X／Y, X・Y, ラジオ:X).
-constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
-
-// Whether the word between before and after is a part of a speaker label in round brackets that
-// opens a caption before speech ((X)はい, （X／Y）はい, ⚟（X）はい, [無線](X)了解): the brackets hold
-// nothing but parts and an honorific after the word ((剛さん)), and no mark of a sentence.
-bool BracketLabelAt(std::string_view before, std::string_view after) {
-    static constexpr std::string_view kStops = "()（）\n「」『』、。！？!?…‥";
-    std::size_t open = before.size();
-    for (int n = 0; open > 0; n++) {
-        const text::Rune r = RuneBefore(before, open);
-        if (r.cp == U'(' || r.cp == U'（') break;
-        if (InRunes(r.cp, kStops) || n >= internal::kMaxCaptionGroup) return false;
-        open -= r.size;
-    }
-    if (open == 0) return false;
-    const char32_t bracket = RuneBefore(before, open).cp;
-    const std::string_view parts = before.substr(open);
-    if (!parts.empty() && !InRunes(RuneBefore(parts, parts.size()).cp, kLabelSeparators)) return false;
-    if (!internal::CaptionLead(before.substr(0, open - RuneBefore(before, open).size))) return false;
-    std::string_view rest = after;
-    rest.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
-    if (!rest.empty() && !InRunes(FirstRune(rest).cp, kLabelSeparators) && FirstRune(rest).cp != (bracket == U'(' ? U')' : U'）')) {
-        return false;
-    }
-    for (std::size_t i = 0, n = 0; i < rest.size() && n <= static_cast<std::size_t>(internal::kMaxCaptionGroup); n++) {
-        const text::Rune r = text::DecodeRune(rest.substr(i));
-        if (r.cp == (bracket == U'(' ? U')' : U'）')) {
-            // Speech follows a label; a word in brackets alone is a heading or an aside ((春)), and
-            // one that a particle takes is a word of the sentence (（アヤメ）と呼ばれた).
-            return internal::SpeechAfterLabel(rest.substr(i + r.size));
-        }
-        if (InRunes(r.cp, kStops)) return false;
-        i += r.size == 0 ? 1 : r.size;
-    }
-    return false;
-}
-
 // Whether a role in round brackets follows the word, which opens a caption: a role of noun.role,
 // noun.label-role or suffix.label-role or a noun of a person (大泉(俳優)).
 bool RoleAfterLabel(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
@@ -230,7 +192,7 @@ bool ClosedLabelAt(std::string_view before, std::string_view after) {
 // round brackets, after caption marks only (⚟アヤメ：, ≫アヤメ：, 》アヤメ：), or a part of a label in
 // round brackets there ((アヤメ), ⚟（アヤメ）).
 bool LabelAt(const dict::Snapshot& snap, std::string_view before, std::string_view after) {
-    if (BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
+    if (internal::BracketLabelAt(before, after) || ClosedLabelAt(before, after) || RoleAfterLabel(snap, before, after)) return true;
     if (!internal::CaptionLead(before)) return false;
     // A quote ends the line; text after its closing bracket makes the bracket a reading or a
     // title (光「ひかり」散「ち」らす, 新「三川艦隊」を編成せよ).
@@ -460,7 +422,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         // A label in round brackets, or one that a colon or ≫ closes, is a whole word: it neither
         // inflects (さくら：, (わかば)) nor stands for a verb or a prefix of one character ((恋)); a
         // character of noun.bracket-note in brackets annotates the line ((続)).
-        const bool bracketLabel = BracketLabelAt(before, after);
+        const bool bracketLabel = internal::BracketLabelAt(before, after);
         const bool closedLabel = bracketLabel || ClosedLabelAt(before, after);
         // A hiragana name introduces the speaker, also after a comma (わたし、つむぎです), or is
         // called at the start of an utterance (つむぎ、こっちに来て). Only these cues and a closed

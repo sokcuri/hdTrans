@@ -108,8 +108,12 @@ public:
     // line without the readings after kanji (FindReading) that are the kanji's reading
     // (BaseReading): a hiragana one, and a katakana one whose hiragana spelling is a word
     // (生（ナマ）). A katakana word written over the kanji (炎（ブレス）) and a pronoun over a
-    // person noun (提督(あなた)) stay as glosses.
-    std::string DropReadings(std::string_view line);
+    // person noun (提督(あなた)) stay as glosses. A name's immediate kana reading inside a
+    // closed caption label reads that occurrence. cueText receives the kanji-preserving
+    // text for name cues in that case; otherwise it is cleared. captionNames receives
+    // the explicitly read label names, without adding them to the registry.
+    std::string DropReadings(std::string_view line, std::string* cueText = nullptr,
+                             std::vector<std::string>* captionNames = nullptr);
 
     text::Preset preset = text::Preset::Fan;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
@@ -125,6 +129,7 @@ private:
     bool SameWord(std::string_view base, std::string_view reading, std::string_view after);
     bool SameKind(std::string_view s, std::string_view t);
     bool NamedWithSound(std::string_view base, std::string_view reading);
+    std::string CaptionNameReading(std::string_view base, std::string_view reading);
     bool BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket, bool styled);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     std::vector<std::string> KanaHonorificNames(std::string_view line);

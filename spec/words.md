@@ -633,6 +633,13 @@
   새로 시작한다(（島田）では皆さん `(시마다) 그럼 여러분`). 이런 단서가 붙은 두 글자 이상의 명사는
   같은 문서의 다른 줄에서도 이름으로 읽고, 날씨, 하늘, 장소, 때를 뜻하는 말과 히라가나나 가타카나로 쓴 고유어는 그
   줄에서만 읽는다.
+- 대사와 같은 줄의 닫힌 둥근 괄호 화자 표시에서 한자 이름 바로 뒤에 괄호로 적은 가나 독음은 그 이름의 사전
+  읽기보다 먼저 쓴다(（恭(きょう)） `쿄`). 이 명시 독음은 화자 표시의 그 이름에만 적용한다. 연속한자 뒤의 괄호가
+  그 한자 전체의 독음을 뜻한다고 가정하지 않는다. 이미 분석된 이름 성분 경계와 기존 읽기에 비모호하게 대응하는
+  부분만 바꾸고 나머지 성분의 읽기와 구분을 보존한다(安田美沙子(みさこ) `야스다 미사코`). 대응 범위를 확정할 수
+  없으면 기존 처리를 유지한다. 이 경로의 인명은 おう, おお, うう의 장음을 겹치지 않는 모음 한 쌍씩 줄인다(さとう `사토`,
+  おおの `오노`, きょう `쿄`, ゆうき `유키`). 바로 뒤의 독립 모음까지 함께 삼키지 않는다(大上(おおうえ) `오우에`).
+  역할, 지시문과 문장 속 괄호는 이 규칙으로 이름이 되지 않으며, 본문의 독음과 다른 이름 표기 규칙은 바꾸지 않는다.
 - 줄의 첫 문장이 이름과 です, よ뿐인 자기소개(睦月です。, 満潮よ。), 발화 끝의 부름(大丈夫か、エナ), 「」에 나란히 든
   이름 목록, 경칭 앞은 그 줄에서만 이름의 단서다. 줄 가운데의 です, よ(……季節です)와 발화 첫머리의 말(宇宙、, チョコ、)은
   단서가 아니고, 날씨,
@@ -705,7 +712,8 @@
 `tests/rules/cases/lexical-protein-digitizer-and-typo-spellings.tsv`, `tests/rules/cases/names-broadcaster-tv.tsv`,
 `tests/rules/cases/names-nickname-prefix.tsv`,
 `tests/rules/cases/names-cued.tsv`, `tests/rules/cases/names-class.tsv`, `tests/rules/cases/names-hiragana-calls.tsv`,
-`tests/rules/cases/names-given-from-full-name.tsv`, `tests/rules/cases/names-caption-labels.tsv`
+`tests/rules/cases/names-given-from-full-name.tsv`, `tests/rules/cases/names-caption-labels.tsv`,
+`tests/rules/cases/names-caption-inline-reading.tsv`, `tests/rules/cases/names-caption-reading-parts.tsv`
 
 
 ## LEX-30 이름 뒤의 애칭 ちゃん, たん, っち는 붙여 쓴 짱, 치다

@@ -1,0 +1,30 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+normalize:caption-inline-reading	（恭(きょう)）今日は青の日だよな！	has:(쿄)	fix	normalize
+normalize:caption-inline-reading	（誠(まこと)）みんな　オキテばっちり！	has:(마코토)	keep	normalize
+normalize:caption-inline-reading	（孝(たかし)）よ～し　いくぞ！	has:(타카시)	keep	normalize
+normalize:caption-inline-reading	（フィルムが回る音）	(필름이 도는 소리)	keep	normalize
+normalize:caption-inline-reading	（子どもたちの話し声）	(아이들의 말소리)	keep	normalize
+normalize:caption-inline-reading	（恭）今日は青の日だよな！	has:(공)	keep	normalize
+normalize:caption-inline-reading	（誠）みんな　オキテばっちり！	has:(마코토)	keep	normalize
+normalize:caption-inline-reading	（孝）よ～し　いくぞ！	has:(타카시)	keep	normalize
+normalize:caption-inline-reading	漢字(かんじ)を書く	lacks:칸지	keep	normalize
+normalize:caption-inline-reading	天井の梁（はり）から	천장의 대들보로부터	keep	normalize
+normalize:caption-inline-reading	（医師）はい	(의사) 네	keep	normalize
+normalize:caption-inline-reading	（通信）はい	(통신) 네	keep	normalize
+# 괄호 경계의 대조
+normalize:caption-inline-reading	（注）ここを見て	(주) 여기를 봐	keep	normalize
+normalize:caption-inline-reading	（恭(俳優)）今日は青の日だよな！	has:(배우)	keep	normalize
+normalize:caption-inline-reading	（恭(声・きょう)）今日は青の日だよな！	has:목소리	keep	normalize
+normalize:caption-inline-reading	（恭(きょう・な)）はい	(공) 네	keep	normalize
+normalize:caption-inline-reading	（恭(きょう な)）はい	(공) 네	keep	normalize
+normalize:caption-inline-reading	前の文（恭(きょう)）はい	전의 문장(공) 네	keep	normalize
+normalize:caption-inline-reading	（恭(きょう)）と思った	has:(공)	keep	normalize
+normalize:caption-inline-reading	（恭(きょう)）	(공)	keep	normalize
+normalize:caption-inline-reading	（恭(キョウ)）はい	(쿄) 네	fix	normalize
+normalize:caption-inline-reading	(恭（きょう）)はい	(쿄) 네	fix	normalize
+normalize:caption-inline-reading	⚟（恭(きょう)）はい	⚟(쿄) 네	fix	normalize
+normalize:caption-inline-reading	[無線]（恭(きょう)）はい	[무선](쿄) 네	fix	normalize
+normalize:caption-inline-reading	（光(ひかり)）では皆さん	(히카리) 그럼 여러분	fix	normalize
+normalize:caption-inline-reading	（恭(きょう)）はい。恭	(쿄) 네. 공	keep	normalize
+normalize:caption-inline-reading	（恭(きょう)／恭）はい	(쿄/공) 네	keep	normalize
