@@ -1,4 +1,4 @@
-# 규칙: LEX-6
+# 규칙: LEX-6, MNG-1
 rule	input	expected	kind	layer
 analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	has:하는 것 같은	fix	analysis
 analysis:adnominal-na-word	女子学生がトイレでするようなクサい相談ができる相手	lacks:없고	fix	analysis
@@ -26,3 +26,12 @@ analysis:adnominal-na-word	駄目なくせに、練習もできないなんて	h
 analysis:adnominal-na-word	よし、異常なしだ。	has:없음	keep	analysis
 analysis:adnominal-na-word	力を入れすぎないように注意しながら	has:않도록	keep	analysis
 analysis:adnominal-na-word	頑張り過ぎないように気をつけろよ	너무 노력하지 않도록 조심해라	keep	analysis
+analysis:degree-negative	多過ぎない？	너무 많지 않아?	fix	analysis
+analysis:degree-negative	馬鹿すぎない？	너무 바보같지 않아?	fix	analysis
+analysis:degree-negative	情けなさすぎない？	너무 한심하지 않아?	fix	analysis
+analysis:degree-negative	ペース上げすぎないで。	페이스 너무 올리지 마.	fix	analysis
+analysis:degree-negative	派手すぎないかしら	너무 화려하지 않을까	keep	analysis
+analysis:degree-negative	露骨すぎだ。	너무 노골적이다.	keep	analysis
+analysis:degree-negative	食べすぎないでね？	과식하지 마?	keep	analysis
+analysis:degree-negative	変な話	이상한 이야기	keep	analysis
+analysis:degree-negative	少なすぎないかとお伝えして。	너무 적지 않는가 하고 전해.	keep	analysis

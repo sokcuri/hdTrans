@@ -608,6 +608,34 @@ Record* VerbBeforePolite(Record* records, std::string_view text) {
     return records;
 }
 
+// A degree suffix after an adjective stem or a verb's continuative cannot take
+// adnominal な from the verb's ない or なければ. Complete finite endings stay available.
+bool DegreeNegativeAdnominal(const Item& parent, const Item& candidate, std::string_view source) {
+    const Detail& detail = *parent.detail;
+    const bool degreeStem = (detail.cls == kDetailKeiyo && detail.kind == 'x') ||
+                            (detail.cls == kDetailDakeiyo && detail.kind == 'X') ||
+                            (detail.cls == kDetailVerb && detail.kind == 10 && parent.DirectLength() == 0);
+    if (!degreeStem || candidate.detail->cls != kDetailDakeiyo || candidate.group->entries.front()->user != nullptr ||
+        candidate.DirectSurface() != "な" ||
+        !dict::InClass(HDTRANS_CLASS("suffix.continuative"), candidate.group->surface)) {
+        return false;
+    }
+    const std::string_view ending = source.substr(candidate.group->surface.size());
+    if (!ending.starts_with("ない") && !ending.starts_with("なければ")) return false;
+    bool adnominal = false;
+    for (int i = 0; i < candidate.DirectCount(); i++) {
+        if (!candidate.DirectEnabled(i)) continue;
+        const std::string_view target = candidate.DirectText(i);
+        if (target != "4" && !target.starts_with("4 ")) return false;
+        adnominal = true;
+    }
+    if (!adnominal) return false;
+    for (const Record* other = candidate.group->records; other != nullptr; other = other->child) {
+        if (other->source == candidate.group->surface && At(other->partCode, 1) == '4') return true;
+    }
+    return false;
+}
+
 // Rejects some kind-1 records next to level-2 kanji and the characters after them in
 // the code order (Shift-JIS lead byte 0xE0 or above); kinds 0, 1, 2, 3 and 9 are
 // otherwise valid, others never.
@@ -1523,6 +1551,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
+    while (settings.text && parent != nullptr && candidate != nullptr && DegreeNegativeAdnominal(*parent, *candidate, text)) {
+        Record* remaining = candidate->group->records;
+        candidate->group->records = nullptr;
+        candidate = InsertLateCandidate(full, cursor, token, remaining);
+    }
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
         if (FindHonorificPrefix(pair) != -1) {
