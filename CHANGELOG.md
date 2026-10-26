@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.6.2](https://github.com/sokcuri/hdTrans/compare/v0.6.1...v0.6.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* **dict:** keep compound event and dish nouns together ([#188](https://github.com/sokcuri/hdTrans/issues/188)) ([b7b9984](https://github.com/sokcuri/hdTrans/commit/b7b9984ad35bb8d69289e59404216170c890e015))
+* **dict:** read 真逆 as the noun 정반대 ([#189](https://github.com/sokcuri/hdTrans/issues/189)) ([7871883](https://github.com/sokcuri/hdTrans/commit/7871883b4e5cb0eca5e7bb1bf71a391fa25be8f4))
+* **dict:** restore predicate markers and action noun glosses ([#190](https://github.com/sokcuri/hdTrans/issues/190)) ([f1eeacc](https://github.com/sokcuri/hdTrans/commit/f1eeacce964d3241eccc3299e8289d2569a04f92))
+* **names:** read caption speaker labels as names and start the speech after them ([#183](https://github.com/sokcuri/hdTrans/issues/183)) ([d6dd31e](https://github.com/sokcuri/hdTrans/commit/d6dd31e95d8ec9554c57bc4deba49bca87bc1530))
+* read spoken contractions and causative passives in captions ([#185](https://github.com/sokcuri/hdTrans/issues/185)) ([967cac1](https://github.com/sokcuri/hdTrans/commit/967cac197f42dff4f01839af8a5a266aff8f438c))
+* **release:** read TV captions, spoken contractions and caption names better ([94a178a](https://github.com/sokcuri/hdTrans/commit/94a178a57988be9a4752438d4e4dbf04f71b6352))
+* **segment:** read a number in round brackets at a line start as an item number ([#193](https://github.com/sokcuri/hdTrans/issues/193)) ([30eff5a](https://github.com/sokcuri/hdTrans/commit/30eff5a318a5d3c34cd0cb2ef7dc51e79992de79))
+* **sound:** read fused and clipped adjective endings as the adjective ([#192](https://github.com/sokcuri/hdTrans/issues/192)) ([8da4892](https://github.com/sokcuri/hdTrans/commit/8da4892f30dc8d156b7eb19bf75519fb5e3ded65))
+* **tokenizer:** read a space between Japanese words as a word boundary ([#184](https://github.com/sokcuri/hdTrans/issues/184)) ([8e4466a](https://github.com/sokcuri/hdTrans/commit/8e4466a78eb81c351f7043dcd4bb27e56ff3e4e1))
+* **wrapped:** join a bare predicate with the noun it describes on the next line ([#187](https://github.com/sokcuri/hdTrans/issues/187)) ([0602f09](https://github.com/sokcuri/hdTrans/commit/0602f097da89719de07a19c873716c8fb471de8f))
+
+
+### Performance Improvements
+
+* skip dictionary lookups that cannot match, and keep 言っとくけど ([#194](https://github.com/sokcuri/hdTrans/issues/194)) ([d203112](https://github.com/sokcuri/hdTrans/commit/d2031122b8306f982b084fabd8f0844fc3d52aee))
+
 ## [0.6.1](https://github.com/sokcuri/hdTrans/compare/v0.6.0...v0.6.1) (2026-10-26)
 
 
