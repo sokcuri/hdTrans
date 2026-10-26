@@ -249,8 +249,12 @@ void LayoutDocs(HWND page) {
     const Placer p(page);
     const int m = p(10), bh = p(26), bw = p(90), gap = p(8), full = p.width - 2 * m, label = p(84);
     const int fixed = m + gap + bh + p(4) + p(22) + gap + gap + p(68) + gap + p(26) + bh + m;
-    const int list = std::max((p.height - fixed) / 2, p(60));
-    const int preview = std::max(p.height - fixed - list, p(60));
+    // On a short screen the preview is hidden so the translate row stays in view; the list keeps
+    // room for its two buttons.
+    int list = std::max((p.height - fixed) / 2, 2 * bh + p(6));
+    const int preview = p.height - fixed - list;
+    const bool showPreview = preview >= p(60);
+    if (!showPreview) list = std::max(p.height - fixed + gap, list);
     p.Put(IDC_FILES, m, m, full - bw - gap, list);
     p.Column(IDC_FILES, 0, full - bw - gap - p(84) - p.Scrollbar() - p(4));
     p.Column(IDC_FILES, 1, p(80));
@@ -263,9 +267,12 @@ void LayoutDocs(HWND page) {
     y += bh + p(4);
     p.Put(IDC_SAME_FOLDER, m + label, y, full - label, p(22));
     y += p(22) + gap;
-    p.Put(IDC_PREVIEW_GROUP, m, y, full, preview);
-    p.Put(IDC_PREVIEW, m + p(10), y + p(22), full - p(20), preview - p(32));
-    y += preview + gap;
+    for (int id : {IDC_PREVIEW_GROUP, IDC_PREVIEW}) ShowWindow(GetDlgItem(page, id), showPreview ? SW_SHOWNA : SW_HIDE);
+    if (showPreview) {
+        p.Put(IDC_PREVIEW_GROUP, m, y, full, preview);
+        p.Put(IDC_PREVIEW, m + p(10), y + p(22), full - p(20), preview - p(32));
+        y += preview + gap;
+    }
     y += PlaceOptions(p, m, y, full) + gap;
     p.Put(IDC_STATUS, m, y, full, p(20));
     y += p(26);
@@ -301,6 +308,21 @@ void LayoutDicts(HWND page) {
     p.Put(IDC_ENTRY_ADD, p.width - m - 3 * bw - 2 * gap, bottom, bw, bh);
     p.Put(IDC_ENTRY_EDIT, p.width - m - 2 * bw - gap, bottom, bw, bh);
     p.Put(IDC_ENTRY_DELETE, p.width - m - bw, bottom, bw, bh);
+}
+
+// The work area of the monitor that holds most of the window.
+RECT WorkArea(HWND window) {
+    MONITORINFO info{};
+    info.cbSize = sizeof(info);
+    GetMonitorInfoW(MonitorFromWindow(window, MONITOR_DEFAULTTONEAREST), &info);
+    return info.rcWork;
+}
+
+// A window of at most size, centred in work and no larger than it.
+RECT FitInside(SIZE size, const RECT& work) {
+    const LONG w = std::min(size.cx, work.right - work.left), h = std::min(size.cy, work.bottom - work.top);
+    const LONG x = work.left + (work.right - work.left - w) / 2, y = work.top + (work.bottom - work.top - h) / 2;
+    return {x, y, x + w, y + h};
 }
 
 void LayoutMain(App& app) {
@@ -1248,7 +1270,9 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         DragAcceptFiles(window, TRUE);
         SetFont(window, app->font);
         const Placer p(window);
-        SetWindowPos(window, nullptr, 0, 0, p(640), p(680), SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+        const RECT frame = FitInside({p(640), p(680)}, WorkArea(window));
+        SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
+                     SWP_NOZORDER | SWP_NOACTIVATE);
         LayoutAll(*app);
         ShowPage(*app, kTextPage);
         SetFocus(GetDlgItem(app->text, IDC_SOURCE));
@@ -1258,7 +1282,8 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_GETMINMAXINFO: {
         const Placer p(window);
         auto* limits = reinterpret_cast<MINMAXINFO*>(lParam);
-        limits->ptMinTrackSize = {p(560), p(560)};
+        const RECT fit = FitInside({p(560), p(560)}, WorkArea(window));
+        limits->ptMinTrackSize = {fit.right - fit.left, fit.bottom - fit.top};
         return TRUE;
     }
     case WM_DPICHANGED: {
@@ -1456,6 +1481,8 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
 
 bool SelfTest(App& app) {
     bool ok = Check(!IsWindowVisible(app.main), "hidden window");
+    const RECT fit = FitInside({640, 680}, {0, 0, 800, 552});
+    ok = Check(fit.left == 80 && fit.top == 0 && fit.right == 720 && fit.bottom == 552, "window fits the work area") && ok;
     ok = Check(WindowText(app.main) == Title(kTextPage) && Title(kTextPage).starts_with(L"hdTrans v"), "window title") && ok;
     ok = Check(TranslateShort(app, L"日本語") == L"일본어", "short translation through dialog messages") && ok;
     CheckRadioButton(app.text, IDC_OUTPUT_TRANSLATION, IDC_OUTPUT_SPACED, IDC_OUTPUT_INTERLEAVED);
