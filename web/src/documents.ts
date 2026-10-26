@@ -4,11 +4,12 @@
 export type OutputMode = 'translation' | 'interleaved' | 'spaced';
 
 /**
- * The text of b with LF newlines and the name of its encoding, or undefined.
+ * The text of b with LF newlines, the name of its encoding and its first line
+ * break ('\n' when it has none), or undefined.
  * BOMs take precedence, then strict UTF-8, then Shift-JIS (CP932).
  * UTF-16BE and text with NUL are refused.
  */
-export function decodeText(b: Uint8Array): { text: string; encoding: string } | undefined {
+export function decodeText(b: Uint8Array): { text: string; encoding: string; lineBreak: string } | undefined {
   const decode = (label: string, bytes: Uint8Array) => {
     try {
       return new TextDecoder(label, { fatal: true, ignoreBOM: true }).decode(bytes);
@@ -35,7 +36,8 @@ export function decodeText(b: Uint8Array): { text: string; encoding: string } | 
     }
   }
   if (text === undefined || text.includes('\0')) return undefined;
-  return { text: text.replace(/\r\n?/g, '\n'), encoding };
+  const lineBreak = /\r\n|\r|\n/.exec(text)?.[0] ?? '\n';
+  return { text: text.replace(/\r\n?/g, '\n'), encoding, lineBreak };
 }
 
 /** The lines of v; a final LF ends a line rather than starting one. */
@@ -77,9 +79,9 @@ export function outputName(name: string): string {
   return (dot > 0 ? name.slice(0, dot) : name) + '_번역.txt';
 }
 
-/** UTF-8 with a BOM, as the Windows window writes. */
-export function encodeOutput(text: string): Uint8Array {
-  const body = new TextEncoder().encode(text);
+/** UTF-8 with a BOM and each LF written as lineBreak, as the Windows window writes. */
+export function encodeOutput(text: string, lineBreak = '\n'): Uint8Array {
+  const body = new TextEncoder().encode(lineBreak === '\n' ? text : text.replaceAll('\n', lineBreak));
   const b = new Uint8Array(body.length + 3);
   b.set([0xef, 0xbb, 0xbf]);
   b.set(body, 3);
