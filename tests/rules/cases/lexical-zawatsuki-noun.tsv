@@ -1,0 +1,23 @@
+rule	input	expected	kind	layer
+dict:w:28860	この学校のざわつきは転校生が来るからだ。	has:술렁임	fix	lookup
+dict:w:28860	少しざわつきがあった。	has:술렁임	fix	lookup
+dict:w:28860	ざわついてますけどどうなってるんですか？	lacks:술렁임	keep	lookup
+dict:w:28860	作業してるとざわついてるものが	lacks:술렁임	keep	lookup
+dict:w:28860	ちょっとなんかざわついてんなみたいな雰囲気	lacks:술렁임	keep	lookup
+dict:w:28860	最近、世間をざわつかせているのが	lacks:술렁임	keep	lookup
+dict:w:28860	みんなが ざわつくんですよね	lacks:술렁임	keep	lookup
+dict:w:28860	ざわつく刑事達	lacks:술렁임	keep	lookup
+dict:w:28860	あいつとの試合を思い出すと胸がざわつく	has:술렁인다	keep	lookup
+dict:w:28860	あの試合のあとずっと 心がざわついてる	has:술렁이고	keep	lookup
+dict:w:28860	空気が　ざわついている…	lacks:술렁임	keep	lookup
+dict:w:28860	気持ちが　ざわつくぜ	lacks:술렁임	keep	lookup
+dict:w:28860	気持ちが　ざわつくんだ	lacks:술렁임	keep	lookup
+dict:w:28860	ざわついています	lacks:술렁임	keep	lookup
+dict:w:28860	ファンが　今　ざわついてますよ	lacks:술렁임	keep	lookup
+dict:w:28860	生徒たちのざわめき	has:웅성거림	keep	defaults
+dict:w:28860	胸のざわめきを抑えることができなかった	has:웅성거림	keep	defaults
+dict:w:28860	ざわざわざわざわして	lacks:술렁임	keep	lookup
+dict:w:28860	周囲がざわつき、落ち着かなかった。	has:웅성거려	keep	lookup
+dict:w:28860	ざわつきながら話した。	has:웅성거리면서	keep	lookup
+dict:w:28860	ざわつき始めた。	has:웅성거리기	keep	lookup
+dict:w:28860	ざわつきそうだ。	has:웅성거릴	keep	lookup
