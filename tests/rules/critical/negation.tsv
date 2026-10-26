@@ -57,3 +57,5 @@ cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ…�
 cx:trailing-ja:10	「……それで、アルファさんは、幽霊じゃ……ないんだよな？」	has:아닌	keep	rewrites
 normalize:ikanai	「そういうわけにはいかねえんだよ！」	has:없어	fix	normalize
 normalize:ikanai	「そうはいかねえんだよ」	has:되지 않아	fix	normalize
+analysis:degree-negative	多過ぎない？	has:많지 않아	fix	analysis
+analysis:degree-negative	記憶が多すぎる。	has:많다	keep	analysis
