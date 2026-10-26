@@ -1,0 +1,26 @@
+rule	input	expected	kind	layer
+dict:jisjk:20393	「先輩方から連綿と受け継いだ錬金術の実験をするのです」	「선배님에게서 연면하게 계승한 연금술 실험을 합니다」	fix	local
+dict:jisjk:20393	両者の戦いは、代を超え、連綿と続いている。	양자의 싸움은, 대를 넘어 연면하게 계속되고 있다.	fix	local
+dict:jisjk:20393	連綿。	연면.	keep	lookup
+dict:jisjk:20393	連綿たる歴史。	연면한 역사.	fix	local
+dict:jisjk:20393	連綿とした歴史。	연면한 역사.	fix	local
+dict:jisjk:20393	連綿として続く。	연면하게 계속된다.	fix	local
+dict:gram:to:tari	「連綿」と言う。	「연면」이라고 말한다.	keep	local
+dict:gram:to:tari	連綿と言う。	연면이라고 말한다.	keep	local
+dict:jisjk:20393	連綿と、受け継いだ。	연면하게, 계승했다.	fix	local
+dict:gram:to:tari	悠然と歩いた。	유연하게 걸었다.	keep	local
+dict:jisjk:149013	社交界で延々と馬鹿にされる。	사교계에서 끝없이 바보 취급 당한다.	keep	lookup
+dict:jisjk:149013	延々と聞かされ、	끝없이 들어	keep	lookup
+dict:jisjk:149013	廃鉱を延々と歩いてきた	폐광을 끝없이 걸어 왔다	keep	lookup
+dict:jisjk:341810	黙々と真剣に	묵묵히 진지하게	keep	lookup
+dict:jisjk:341810	言葉も忘れて黙々と食べる。	말도 잊어 묵묵히 먹는다.	keep	lookup
+dict:jisjk:341810	黙々とノートに	묵묵히 노트에	keep	lookup
+dict:jisjk:341810	黙々とバイクを押して裏門へと移動していった。	묵묵히 오토바이를 밀어 뒷문으로 이동해 나갔다.	keep	lookup
+dict:jisjk:341810	黙々と食事する	묵묵히 식사한다	keep	lookup
+dict:jisjk:341810	俺たちは残りの作業を黙々とこなしていた。	우리는 나머지 작업을 묵묵히 해내고 있었다.	keep	lookup
+dict:jisjk:149013	延々と続く悪意と暴力	끝없이 계속되는 악의와 폭력	keep	lookup
+dict:jisjk:341810	黙々とメンテナンスしてたことになる。	묵묵히 유지보수하고 있던 것이 된다.	keep	lookup
+dict:gram:to:tari	「連綿」とする。	「연면」이라고 한다.	keep	compose
+dict:gram:to:tari	これを「連綿」とする。	이것을 「연면」이라고 한다.	keep	compose
+dict:gram:to:tari	「連綿」とした。	「연면」이라고 했다.	keep	compose
+dict:gram:to:tari	「連綿」として扱う。	「연면」으로서 취급한다.	keep	compose

@@ -336545,8 +336545,8 @@ ttt	ttt	K110			GN				jisjk:201744
 連続鋳造	연속 주조	N110			GN				jisjk:256489		
 連続長	연속 길이	N110			GN				jisjk:163418		
 連続関数	연속 함수	N110			GN				jisjk:256487		
-連綿	연면	N110			GN				jisjk:20393		
-連綿	길게 연속	N110			GN				jisjk:20394		
+連綿	연면	N110		Tr	GN				jisjk:20393
+連綿	길게 연속	N110		Tr	GN				jisjk:20394
 連綿体	연면체	N110			GN				jisjk:256512		
 連繋	연계	N110		Hd	GN				jisjk:20390		
 連署人	연서인	I110	VHn		GN				jisjk:67761		
