@@ -27,3 +27,5 @@ lookup:査収	資料を添付いたしましたので、ご査収ください。
 lookup:返信	ご返信お待ちしております。	답장 기다리고 있습니다.	fix	lookup
 lookup:何卒	何卒、ご容赦ください。	부디, 용서해 주십시오.	fix	lookup
 lookup:取り急ぎ	取り急ぎ出発した。	서둘러 출발했다.	keep	lookup
+lookup:初回特典限定	初回特典限定のキャラクターである。	초회특전한정의 캐릭터이다.	fix	lookup
+lookup:初回特典	初回特典はポスターです。	초회특전은 포스터입니다.	fix	lookup
