@@ -15,6 +15,7 @@ mkdir -p .claude && ln -s ../skills .claude/skills
 | [integrate-branches](integrate-branches/SKILL.md) | Cherry-pick parallel fix branches into one, resolve tables and rule numbers, judge the combination |
 | [release](release/SKILL.md) | Review gate, develop and main PRs, CI release steps, goldens, milestone |
 | [probe-variations](probe-variations/SKILL.md) | Variation and near-miss sets for a fix, classified against the baseline |
+| [check-shadow-rows](check-shadow-rows/SKILL.md) | Dictionary rows that hide the reading of the words they are made of, judged and dropped |
 | [review-code](review-code/SKILL.md) | Sanitizers, lifetimes, `-Wshadow-all`, threads and hygiene before a PR |
 
 ## Tools
